@@ -1,7 +1,7 @@
 /* eslint-env node */
 module.exports = {
   root: true,
-  ignorePatterns: ['**/**/*.generated.ts'],
+  ignorePatterns: ['**/**/*.generated.ts', '*.js'],
   extends: [
     'next',
     'next/core-web-vitals',
@@ -25,5 +25,5 @@ module.exports = {
     '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/no-unused-vars': 'off',
     '@typescript-eslint/no-namespace': 'off',
-  }
+  },
 }
