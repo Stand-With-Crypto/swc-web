@@ -1,0 +1,36 @@
+/* spell-checker: disable */
+{
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "editor.scrollBeyondLastLine": true,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "files.exclude": {
+    "**/node_modules": true
+  },
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "tailwindCSS.experimental.classRegex": [
+    "classNames\\(([^)]*)\\)",
+    "'([^']*)'",
+    "twFormat\\(([^)]*)\\)",
+    "'([^']*)'"
+  ],
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "search.exclude": {
+    ".next": true
+  },
+  "files.watcherExclude": {},
+  "[html]": {
+    "editor.formatOnSave": false
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "cSpell.ignorePaths": ["**/*.json"],
+  "cSpell.words": ["cryptocurrency", "datetime", "dotheysupportit"],
+  "typescript.tsdk": "node_modules/typescript/lib"
+}
