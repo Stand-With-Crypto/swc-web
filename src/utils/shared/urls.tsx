@@ -5,3 +5,7 @@ export const getIntlUrls = (locale: SUPPORTED_LOCALE) => {
     home: () => `/${locale}`,
   }
 }
+
+export const apiUrls = {
+  leaderboard: (offset: number) => `/api/leaderboard/${offset}`,
+}

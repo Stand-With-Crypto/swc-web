@@ -4,12 +4,20 @@ import { getIntlMessages } from '../../utils/server/intlMessages'
 import { SUPPORTED_LOCALES } from '@/utils/shared/locales'
 import { CTAJoinTheFight } from './ctaJoinTheFight'
 import { getIntlUrls } from '../../utils/shared/urls'
+import { Leaderboard } from '../../components/app/leaderboard'
+import { getLeaderboard } from '../../data/leaderboard'
+
+export const revalidate = 3600
+export const dynamic = 'error'
 
 // TODO metadata
 
 export default async function Home(props: PageProps) {
-  const messages = await getIntlMessages(props.params.lang)
-  const urls = getIntlUrls(props.params.lang)
+  const [messages, leaderboardEntities] = await Promise.all([
+    getIntlMessages(props.params.lang),
+    getLeaderboard({ offset: 0 }),
+  ])
+
   return (
     // TODO remove prose class and actually start styling things!
     <main className="prose-sm mx-auto mt-10 w-full max-w-xl">
@@ -28,13 +36,15 @@ export default async function Home(props: PageProps) {
           ))}
         </div>
       </div>
-      <h2>Sample of loading a modal</h2>
-      <p>
-        <a href="https://nextjs.org/docs/app/building-your-application/routing/parallel-routes#modals">
-          based of next.js docs
-        </a>
-      </p>
+      <h2>Sample modal</h2>
       <CTAJoinTheFight />
+      <h2>Sample Leaderboard</h2>
+      <p>
+        This example shows how we can use server side data to bootstrap a dynamic component that can
+        then leverage APIs as needed. The server side render will include the first 10 leaderboard,
+        and then additional items can be appended client side as needed
+      </p>
+      <Leaderboard initialEntities={leaderboardEntities} />
     </main>
   )
 }

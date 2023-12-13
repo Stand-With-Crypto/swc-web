@@ -31,6 +31,6 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "cSpell.ignorePaths": ["**/*.json"],
-  "cSpell.words": ["clsx", "cryptocurrency", "datetime", "dotheysupportit"],
+  "cSpell.words": ["clsx", "cryptocurrency", "datetime", "dotheysupportit", "Leaderboard"],
   "typescript.tsdk": "node_modules/typescript/lib"
 }
