@@ -10,19 +10,24 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "@formatjs/intl-localematcher": "^0.5.2",
     "@radix-ui/react-dialog": "^1.0.5",
     "@radix-ui/react-slot": "^1.0.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "lucide-react": "^0.294.0",
+    "negotiator": "^0.6.3",
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18",
+    "server-only": "^0.0.1",
     "tailwind-merge": "^2.1.0",
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.10",
     "@total-typescript/ts-reset": "^0.5.1",
+    "@types/negotiator": "^0.6.3",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
