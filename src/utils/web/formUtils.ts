@@ -11,7 +11,7 @@ export async function triggerServerActionForForm<
 >(form: F, fn: Fn) {
   const response = await fn().catch(e => ({ error: e.message }))
   if ('error' in response) {
-    form.setError('FORM_ERROR', { message: response.error })
+    form.setError(GENERIC_FORM_ERROR_KEY, { message: response.error })
   }
   if ('errors' in response && response.errors) {
     Object.entries(response.errors).forEach(([key, val]) => {
