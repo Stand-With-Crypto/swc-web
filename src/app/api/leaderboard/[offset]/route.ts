@@ -7,7 +7,7 @@ export const dynamic = 'error'
 // This endpoint will be fully cached for 1 hour (3600 seconds) by default. If we want less aggressive caching, we can update the revalidate property. No need to deal with backend teams that may be managed separate cache layers
 export const revalidate = 3600
 
-export const zodParams = z.object({
+const zodParams = z.object({
   offset: z.string().pipe(z.coerce.number().int().gte(0).lt(9999)),
 })
 
