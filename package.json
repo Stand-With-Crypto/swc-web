@@ -11,7 +11,9 @@
   },
   "dependencies": {
     "@formatjs/intl-localematcher": "^0.5.2",
+    "@hookform/resolvers": "^3.3.2",
     "@radix-ui/react-dialog": "^1.0.5",
+    "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-slot": "^1.0.2",
     "@types/lodash": "^4.14.202",
     "class-variance-authority": "^0.7.0",
@@ -22,6 +24,7 @@
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18",
+    "react-hook-form": "^7.49.2",
     "server-only": "^0.0.1",
     "swr": "^2.2.4",
     "tailwind-merge": "^2.1.0",

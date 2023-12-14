@@ -6,8 +6,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogDescription,
-} from '../../components/ui/dialog'
-import { Button } from '../../components/ui/button'
+} from '../ui/dialog'
+import { Button } from '../ui/button'
 
 export const CTAJoinTheFight = () => {
   return (

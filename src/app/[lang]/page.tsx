@@ -2,10 +2,11 @@ import Link from 'next/link'
 import { PageProps } from '../../types'
 import { getIntlMessages } from '../../utils/server/intlMessages'
 import { SUPPORTED_LOCALES } from '@/utils/shared/locales'
-import { CTAJoinTheFight } from './ctaJoinTheFight'
+import { CTAJoinTheFight } from '../../components/app/ctaJoinTheFight'
 import { getIntlUrls } from '../../utils/shared/urls'
 import { Leaderboard } from '../../components/app/leaderboard'
 import { getLeaderboard } from '../../data/leaderboard'
+import { CTAEmailYourCongressperson } from '../../components/app/ctaEmailYourCongressperson/ctaEmailYourCongressperson'
 
 export const revalidate = 3600
 export const dynamic = 'error'
@@ -20,7 +21,7 @@ export default async function Home(props: PageProps) {
 
   return (
     // TODO remove prose class and actually start styling things!
-    <main className="prose-sm mx-auto mt-10 w-full max-w-xl">
+    <main className="prose-sm mx-auto mt-10 w-full max-w-xl p-4">
       <h1>Sample Architecture Patterns</h1>
       <h2>Sample Intl Messages</h2>
       <p>
@@ -45,6 +46,8 @@ export default async function Home(props: PageProps) {
         and then additional items can be appended client side as needed
       </p>
       <Leaderboard initialEntities={leaderboardEntities} />
+      <h2>Sample complex form</h2>
+      <CTAEmailYourCongressperson />
     </main>
   )
 }

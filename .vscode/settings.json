@@ -12,8 +12,8 @@
   "tailwindCSS.experimental.classRegex": [
     "cn\\(([^)]*)\\)",
     "'([^']*)'",
-    "twFormat\\(([^)]*)\\)",
-    "'([^']*)'"
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
   ],
   "editor.quickSuggestions": {
     "strings": true
