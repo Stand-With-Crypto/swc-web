@@ -15,7 +15,7 @@ import {
 
 import { cn } from '@/utils/web/cn'
 import { Label } from '@/components/ui/label'
-import { GENERIC_FORM_ERROR_KEY } from '../../utils/web/formUtils'
+import { GENERIC_FORM_ERROR_KEY } from '@/utils/web/formUtils'
 
 const Form = FormProvider
 

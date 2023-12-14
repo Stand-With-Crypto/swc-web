@@ -13,13 +13,13 @@ import {
   FormErrorMessage,
   FormGeneralErrorMessage,
   FormSuccessMessage,
-} from '../../ui/form'
-import { Input } from '../../ui/input'
-import { Button } from '../../ui/button'
-import { Textarea } from '../../ui/textarea'
-import { zodEmailYourCongressperson } from '../../../validation/zodEmailYourCongressperson'
-import { triggerEmailYourCongressPerson } from '../../../actions/triggerEmailYourCongressPerson'
-import { GenericErrorFormValues, triggerServerActionForForm } from '../../../utils/web/formUtils'
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
+import { Textarea } from '@/components/ui/textarea'
+import { zodEmailYourCongressperson } from '@/validation/zodEmailYourCongressperson'
+import { triggerEmailYourCongressPerson } from '@/actions/triggerEmailYourCongressPerson'
+import { GenericErrorFormValues, triggerServerActionForForm } from '@/utils/web/formUtils'
 
 const DEFAULT_MESSAGE = `The House Financial Services Committee and the House Agriculture Committee in the U.S. House of Representatives passed historic, bipartisan legislation in July. I am asking you to support the bill when it comes to the floor for a full House vote.
 

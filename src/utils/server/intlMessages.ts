@@ -1,5 +1,5 @@
 import 'server-only'
-import { SUPPORTED_LOCALE } from '../shared/locales'
+import { SUPPORTED_LOCALE } from '@/utils/shared/locales'
 
 // TODO
 const mockIntlMessages = async (locale: SUPPORTED_LOCALE) => {

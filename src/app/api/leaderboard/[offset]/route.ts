@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getLeaderboard } from '../../../../data/leaderboard'
+import { getLeaderboard } from '@/data/leaderboard'
 import { z } from 'zod'
 
 export const dynamic = 'error'

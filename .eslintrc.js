@@ -8,6 +8,7 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
   ],
+  plugins: ['no-relative-import-paths'],
   parserOptions: {
     project: './tsconfig.json',
     tsconfigRootDir: __dirname,
@@ -25,5 +26,6 @@ module.exports = {
     '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/no-unused-vars': 'off',
     '@typescript-eslint/no-namespace': 'off',
+    'no-relative-import-paths/no-relative-import-paths': ['error', { allowSameFolder: true }],
   },
 }

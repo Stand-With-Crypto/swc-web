@@ -1,6 +1,6 @@
 /* spell-checker: disable */
 {
-  "typescript.preferences.importModuleSpecifier": "relative",
+  "typescript.preferences.importModuleSpecifier": "non-relative",
   "editor.scrollBeyondLastLine": true,
   "diffEditor.ignoreTrimWhitespace": false,
   "files.exclude": {

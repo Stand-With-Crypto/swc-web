@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import { PageProps } from '../../types'
-import { SUPPORTED_LOCALES } from '../../utils/shared/locales'
+import { PageProps } from '@/types'
+import { SUPPORTED_LOCALES } from '@/utils/shared/locales'
 
 export const dynamicParams = false
 export async function generateStaticParams() {

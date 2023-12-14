@@ -4,7 +4,7 @@ import _ from 'lodash'
 import useSWRInfinite from 'swr/infinite'
 import { LeaderboardEntity } from '@/data/leaderboard'
 import { apiUrls } from '@/utils/shared/urls'
-import { Table, TableBody, TableCell, TableRow } from '../ui/table'
+import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table'
 
 const useGetEntities = ({ limit }: { limit: number }) => {
   return useSWRInfinite(

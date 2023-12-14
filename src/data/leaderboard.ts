@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker'
 import _ from 'lodash'
 import 'server-only'
-import { sleep } from '../utils/shared/sleep'
+import { sleep } from '@/utils/shared/sleep'
 
 export type LeaderboardConfig = {
   offset: number

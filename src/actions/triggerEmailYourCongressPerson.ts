@@ -1,7 +1,7 @@
 'use server'
 import 'server-only'
 import { z } from 'zod'
-import { zodEmailYourCongressperson } from '../validation/zodEmailYourCongressperson'
+import { zodEmailYourCongressperson } from '@/validation/zodEmailYourCongressperson'
 
 // TODO error logging software
 
