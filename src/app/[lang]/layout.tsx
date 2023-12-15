@@ -4,6 +4,7 @@ import '@/globals.css'
 import { PageProps } from '@/types'
 import { SUPPORTED_LOCALES } from '@/utils/shared/locales'
 import { AuthProviders } from '@/components/app/authProviders'
+import { Toaster } from '@/components/ui/toaster'
 
 export const dynamicParams = false
 export const dynamic = 'error'
@@ -28,7 +29,10 @@ export default function RootLayout({
   return (
     <html lang={params.lang}>
       <body className={inter.className}>
-        <AuthProviders>{children}</AuthProviders>
+        <main>
+          <AuthProviders>{children}</AuthProviders>
+        </main>
+        <Toaster />
       </body>
     </html>
   )

@@ -2,6 +2,8 @@
 import { CTAEmailYourCongressperson } from '@/components/app/ctaEmailYourCongressperson/ctaEmailYourCongressperson'
 import { Leaderboard } from '@/components/app/leaderboard'
 import { NavbarSessionButton } from '@/components/app/navbarSessionButton'
+import { SampleAuthenticatedRequest } from '@/components/app/sampleAuthenticatedRequest'
+import { Button } from '@/components/ui/button'
 import { getLeaderboard } from '@/data/leaderboard'
 import { PageProps } from '@/types'
 import { getIntlMessages } from '@/utils/server/intlMessages'
@@ -22,7 +24,7 @@ export default async function Home(props: PageProps) {
 
   return (
     // TODO remove prose class and actually start styling things!
-    <main className="prose-sm mx-auto mb-24 mt-10 w-full max-w-2xl p-4">
+    <div className="prose-sm mx-auto mb-24 mt-10 w-full max-w-2xl p-4">
       <h1>Sample Architecture Patterns</h1>
       <h2>
         This page contains a sample of architecture patterns that can be used as blueprints for
@@ -67,6 +69,13 @@ export default async function Home(props: PageProps) {
         <NavbarSessionButton />
       </div>
       <hr />
+      <h3>Sample Authenticated Endpoint</h3>
+      <p>
+        Pressing the button below will trigger an API request to increment a sample value in the
+        database for this user. This endpoint will throw an error if there is no authenticated user.
+      </p>
+      <SampleAuthenticatedRequest />
+      <hr />
       <h3>Sample Intl Messages</h3>
       <p>
         One of the other cool things about RSC is that because all our static content is rendered on
@@ -104,6 +113,6 @@ export default async function Home(props: PageProps) {
         component)
       </p>
       <CTAEmailYourCongressperson />
-    </main>
+    </div>
   )
 }
