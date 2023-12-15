@@ -9,9 +9,9 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { cn } from '@/utils/web/cn'
+import { Skeleton } from '@/components/ui/skeleton'
+import { useAddress, useAuth, useMetamask } from '@thirdweb-dev/react'
 import { signIn, signOut, useSession } from 'next-auth/react'
-import { useAuth, useAddress, useMetamask } from '@thirdweb-dev/react'
 
 function _NavbarSessionButtonClient() {
   const address = useAddress()
@@ -19,35 +19,39 @@ function _NavbarSessionButtonClient() {
   const auth = useAuth()
   const { data: session, status } = useSession()
   if (status === 'loading') {
-    return null
+    return (
+      <Button>
+        <Skeleton className="h-[24px] w-[56px]" />
+      </Button>
+    )
   }
   async function loginWithWallet() {
-    // Prompt the user to sign a login with wallet message
     const payload = await auth?.login()
-
-    // Then send the payload to next auth as login credentials
-    // using the "credentials" provider method
     await signIn('credentials', {
       payload: JSON.stringify(payload),
       redirect: false,
-    })
+    }).then(x => console.log(x))
   }
 
   if (session?.user) {
     return (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <button className="text-link inline-flex w-full justify-center gap-x-1.5 rounded-md bg-transparent py-2 pl-3 pr-0 text-sm font-semibold ring-inset ring-gray-300 hover:ring-1">
-            {session.user.name}
-          </button>
+          <Button>
+            User:{' '}
+            {`${(session.user.username || session.user.email || session.user.address || '').slice(
+              0,
+              10,
+            )}...`}
+          </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56">
           <DropdownMenuGroup>
             <DropdownMenuItem>
               <a
                 href="#"
-                onClick={() => signOut()}
-                className={cn('text-gray-700', 'block px-4 py-2 text-sm')}
+                onClick={() => signOut({ redirect: true })}
+                className={'block w-full px-4 py-2 text-sm text-gray-700'}
               >
                 Log Out
               </a>
@@ -59,18 +63,10 @@ function _NavbarSessionButtonClient() {
   }
 
   if (address) {
-    return (
-      <Button className="pr-0" size="sm" variant="link" onClick={() => loginWithWallet()}>
-        Login
-      </Button>
-    )
+    return <Button onClick={() => loginWithWallet()}>Login</Button>
   }
-
-  return (
-    <Button className="pr-0" size="sm" variant="link" onClick={() => connect()}>
-      Connect
-    </Button>
-  )
+  // TODO don't offer to connect if the user doesn't have a wallet to connect
+  return <Button onClick={() => connect()}>Connect</Button>
 }
 
 export function NavbarSessionButtonClient() {

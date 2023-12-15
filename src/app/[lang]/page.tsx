@@ -25,9 +25,9 @@ export default async function Home(props: PageProps) {
     <main className="prose-sm mx-auto mt-10 w-full max-w-xl p-4">
       <h1>Sample Architecture Patterns</h1>
       <h2>Sample Auth</h2>
-      <p>
+      <div>
         <NavbarSessionButton />
-      </p>
+      </div>
       <h2>Sample Intl Messages</h2>
       <p>
         {messages.hello} - {messages.world}

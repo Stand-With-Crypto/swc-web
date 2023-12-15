@@ -7,17 +7,29 @@ import { requiredEnv } from '@/utils/shared/requiredEnv'
 export const nextAuthConfig: AuthOptions = {
   adapter: PrismaAdapter(prismaClient),
   providers: [
-    // Add the thirdweb auth provider to the providers configuration
     ThirdwebAuthProvider({
       domain: requiredEnv(
         process.env.NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN,
         'process.env.NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN',
       ),
     }),
-    // other providers...
   ],
   callbacks: {
-    // Add the authSession callback to the callbacks configuration
     session: authSession,
+  },
+  session: {
+    // TODO determine how we can ensure we persist users to the prisma table while leveraging a jwt strategy
+    strategy: 'jwt',
+  },
+  logger: {
+    error(...args) {
+      console.log('nextAuth error', ...args)
+    },
+    warn(...args) {
+      console.log('nextAuth error', ...args)
+    },
+    debug(...args) {
+      console.log('nextAuth error', ...args)
+    },
   },
 }
