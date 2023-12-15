@@ -1,14 +1,13 @@
 // TODO delete before v2 go-live
-import Link from 'next/link'
+import { CTAEmailYourCongressperson } from '@/components/app/ctaEmailYourCongressperson/ctaEmailYourCongressperson'
+import { Leaderboard } from '@/components/app/leaderboard'
+import { NavbarSessionButton } from '@/components/app/navbarSessionButton'
+import { getLeaderboard } from '@/data/leaderboard'
 import { PageProps } from '@/types'
 import { getIntlMessages } from '@/utils/server/intlMessages'
 import { SUPPORTED_LOCALES } from '@/utils/shared/locales'
-import { CTAJoinTheFight } from '@/components/app/ctaJoinTheFight'
 import { getIntlUrls } from '@/utils/shared/urls'
-import { Leaderboard } from '@/components/app/leaderboard'
-import { getLeaderboard } from '@/data/leaderboard'
-import { CTAEmailYourCongressperson } from '@/components/app/ctaEmailYourCongressperson/ctaEmailYourCongressperson'
-import { NavbarSessionButton } from '@/components/app/navbarSessionButton'
+import Link from 'next/link'
 
 export const revalidate = 3600
 export const dynamic = 'error'
