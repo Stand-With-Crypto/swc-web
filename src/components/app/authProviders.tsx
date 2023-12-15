@@ -1,6 +1,5 @@
 'use client'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
-// Because most pages that require authentication will mainly be composed of static content, we want to avoid returning session info from the server, and instead fetching/wrapping it on the client
 import { ChainId, ThirdwebProvider } from '@thirdweb-dev/react'
 import { SessionProvider } from 'next-auth/react'
 

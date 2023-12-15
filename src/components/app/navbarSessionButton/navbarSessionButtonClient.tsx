@@ -13,7 +13,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { useAddress, useAuth, useMetamask } from '@thirdweb-dev/react'
 import { signIn, signOut, useSession } from 'next-auth/react'
 
-function _NavbarSessionButtonClient() {
+export function NavbarSessionButtonClient() {
   const address = useAddress()
   const connect = useMetamask()
   const auth = useAuth()
@@ -67,12 +67,4 @@ function _NavbarSessionButtonClient() {
   }
   // TODO don't offer to connect if the user doesn't have a wallet to connect
   return <Button onClick={() => connect()}>Connect</Button>
-}
-
-export function NavbarSessionButtonClient() {
-  return (
-    <AuthProviders>
-      <_NavbarSessionButtonClient />
-    </AuthProviders>
-  )
 }

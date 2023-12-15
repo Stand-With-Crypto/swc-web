@@ -14,7 +14,6 @@ export interface LeaderboardEntity {
 }
 
 const mockLeaderboard = async (config: LeaderboardConfig) => {
-  await sleep(2000)
   return _.times(2).map(i => {
     const entity: LeaderboardEntity = {
       fiatDonationValue: 3.14 * (1000 - config.offset - i),
