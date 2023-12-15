@@ -7,6 +7,7 @@ import { getIntlUrls } from '@/utils/shared/urls'
 import { Leaderboard } from '@/components/app/leaderboard'
 import { getLeaderboard } from '@/data/leaderboard'
 import { CTAEmailYourCongressperson } from '@/components/app/ctaEmailYourCongressperson/ctaEmailYourCongressperson'
+import { NavbarSessionButton } from '@/components/app/navbarSessionButton'
 
 export const revalidate = 3600
 export const dynamic = 'error'
@@ -23,6 +24,10 @@ export default async function Home(props: PageProps) {
     // TODO remove prose class and actually start styling things!
     <main className="prose-sm mx-auto mt-10 w-full max-w-xl p-4">
       <h1>Sample Architecture Patterns</h1>
+      <h2>Sample Auth</h2>
+      <div>
+        <NavbarSessionButton />
+      </div>
       <h2>Sample Intl Messages</h2>
       <p>
         {messages.hello} - {messages.world}

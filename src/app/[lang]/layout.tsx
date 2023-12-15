@@ -3,8 +3,10 @@ import { Inter } from 'next/font/google'
 import '@/globals.css'
 import { PageProps } from '@/types'
 import { SUPPORTED_LOCALES } from '@/utils/shared/locales'
+import { AuthProviders } from '@/components/app/authProviders'
 
 export const dynamicParams = false
+export const dynamic = 'error'
 export async function generateStaticParams() {
   return SUPPORTED_LOCALES.map(lang => ({ lang }))
 }
@@ -25,7 +27,9 @@ export default function RootLayout({
 }: PageProps & { children: React.ReactNode }) {
   return (
     <html lang={params.lang}>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <AuthProviders>{children}</AuthProviders>
+      </body>
     </html>
   )
 }
