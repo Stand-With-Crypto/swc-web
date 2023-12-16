@@ -9,12 +9,15 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:storybook/recommended',
   ],
-  plugins: ['no-relative-import-paths'],
+  plugins: ['no-relative-import-paths', 'formatjs'],
   parserOptions: {
     project: './tsconfig.json',
     tsconfigRootDir: __dirname,
   },
   rules: {
+    'formatjs/enforce-description': ['error', 'literal'],
+    'formatjs/no-offset': 'error',
+    'formatjs/enforce-default-message': ['error', 'literal'],
     '@typescript-eslint/no-shadow': ['error', { ignoreOnInitialization: true }],
     '@typescript-eslint/restrict-template-expressions': [
       'error',

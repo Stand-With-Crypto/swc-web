@@ -3,13 +3,16 @@ import { CTAEmailYourCongressperson } from '@/components/app/ctaEmailYourCongres
 import { Leaderboard } from '@/components/app/leaderboard'
 import { NavbarSessionButton } from '@/components/app/navbarSessionButton'
 import { SampleAuthenticatedRequest } from '@/components/app/sampleAuthenticatedRequest'
-import { Button } from '@/components/ui/button'
 import { getLeaderboard } from '@/data/leaderboard'
+import getIntl from '@/intl/intlMessages'
+import { generateClientComponentMessages } from '@/intl/intlServerUtils'
+import { SUPPORTED_LOCALES } from '@/intl/locales'
 import { PageProps } from '@/types'
-import { getIntlMessages } from '@/utils/server/intlMessages'
-import { SUPPORTED_LOCALES } from '@/utils/shared/locales'
 import { getIntlUrls } from '@/utils/shared/urls'
 import Link from 'next/link'
+import { SampleTranslationClientComponent } from './sampleTranslationClientComponent'
+import { sampleTranslationClientComponentMessages } from './sampleTranslationClientComponent.messages'
+import { cn } from '@/utils/web/cn'
 
 export const revalidate = 3600
 export const dynamic = 'error'
@@ -17,11 +20,10 @@ export const dynamic = 'error'
 // TODO metadata
 
 export default async function Home(props: PageProps) {
-  const [messages, leaderboardEntities] = await Promise.all([
-    getIntlMessages(props.params.lang),
+  const [intl, leaderboardEntities] = await Promise.all([
+    getIntl(props.params.lang),
     getLeaderboard({ offset: 0 }),
   ])
-
   return (
     // TODO remove prose class and actually start styling things!
     <div className="prose-sm mx-auto mb-24 mt-10 w-full max-w-2xl p-4">
@@ -80,21 +82,37 @@ export default async function Home(props: PageProps) {
       <p>
         One of the other cool things about RSC is that because all our static content is rendered on
         the server, we can fully internationalize the website without shipping any additional
-        client-side javascript to manage i18n. See{' '}
-        <a href="https://nextjs.org/docs/app/building-your-application/routing/internationalization">
-          this post
-        </a>
-        . Toggle back and forth between the two locale urls to see the language of the page shift
-        for this section:
+        client-side javascript to manage i18n. Toggle back and forth between the two locale urls to
+        see the language of the page shift for this section:
       </p>
       <p>
-        <strong>Translated text:</strong> {messages.hello} {messages.world}
+        <strong>Translated text in a React Server Component:</strong>{' '}
+        {intl.formatMessage({
+          id: 'sampleArchitecturePatterns.translatedText',
+          defaultMessage: 'This server text is translated!',
+          description: 'Sample translated text',
+        })}
       </p>
+      <p>
+        <strong>Translated text in a React Server Component with no spanish translation:</strong>{' '}
+        {intl.formatMessage({
+          id: `sampleArchitecturePatterns.notTranslated`,
+          description: 'A sample intl message with no es translation',
+          defaultMessage: 'This server message will always be english!',
+        })}
+      </p>
+      <SampleTranslationClientComponent
+        messages={generateClientComponentMessages(intl, sampleTranslationClientComponentMessages)}
+      />
       <div>
         <p>Locale Links</p>
         <div className="space-x-4">
           {SUPPORTED_LOCALES.map(locale => (
-            <Link href={getIntlUrls(locale).sampleArchitecturePatterns()} key={locale}>
+            <Link
+              className={cn(locale === props.params.lang && 'text-blue-500')}
+              href={getIntlUrls(locale).sampleArchitecturePatterns()}
+              key={locale}
+            >
               {locale}
             </Link>
           ))}

@@ -6,6 +6,7 @@
 - Run `npm install`
 - Run `cp .env.example .env && cp .env.local.example .env.local`. Open the newly generated files and update the environment variables based off the comment instructions
 - Run `npx prisma migrate dev` - syncs your local database with the latest migrations in the `prisma/` folder
+- Run `npm run intl:extract-compile` - generates initial translation files
 - Run `npm run codegen:schemas` - pulls in the latest graphql schemas of our 3rd party API partners (like dotheysupportit.com)
 - Run `npm run codegen` - generates typescript definitions for any graphql operations we have defined in our codebase
 - Run `npm run dev` - runs dev server

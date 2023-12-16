@@ -38,7 +38,7 @@ export const thirdWebAuth = ThirdwebAuth({
     onUser: async (user, req) => {
       // TODO analytics
       // TODO append metadata to the user session object
-      console.log('onUser', { user, req: !!req })
+      // console.log('onUser', { user, req: !!req })
     },
     onLogin: async address => {
       // TODO figure out how to get the users email address to persist to the db

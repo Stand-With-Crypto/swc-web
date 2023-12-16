@@ -1,10 +1,10 @@
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import '@/globals.css'
-import { PageProps } from '@/types'
-import { SUPPORTED_LOCALES } from '@/utils/shared/locales'
 import { AuthProviders } from '@/components/app/authProviders'
 import { Toaster } from '@/components/ui/toaster'
+import '@/globals.css'
+import { SUPPORTED_LOCALES } from '@/intl/locales'
+import { PageProps } from '@/types'
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
 
 export const dynamicParams = false
 export const dynamic = 'error'
