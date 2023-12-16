@@ -1,9 +1,9 @@
-import { SUPPORTED_LOCALE } from '@/intl/locales'
+import { SupportedLocale } from '@/intl/locales'
 import { MessageDescriptor } from 'react-intl'
 
 export type PageProps<Params = object> = {
   params: Params & {
-    lang: SUPPORTED_LOCALE
+    locale: SupportedLocale
   }
 }
 

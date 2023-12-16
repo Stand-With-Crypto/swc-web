@@ -1,11 +1,11 @@
 import 'server-only'
-import { SUPPORTED_LOCALE } from '@/intl/locales'
+import { SupportedLocale } from '@/intl/locales'
 import { createIntl } from '@formatjs/intl'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { MissingTranslationError } from 'react-intl'
 
 // TODO figure out the translation workflow with a 3rd party provider
-const mockGetIntlMessages = async (locale: SUPPORTED_LOCALE) => {
+const mockGetIntlMessages = async (locale: SupportedLocale) => {
   // We never want to use any compiled translations in local development for english because we always want the latest changes to the defaultMessage to be displayed
   const enUSTranslations =
     NEXT_PUBLIC_ENVIRONMENT === 'local'
@@ -19,11 +19,11 @@ const mockGetIntlMessages = async (locale: SUPPORTED_LOCALE) => {
       'sampleArchitecturePatterns.translatedText':
         'Este texto del lado del cliente está traducido!',
     },
-  } satisfies Partial<Record<SUPPORTED_LOCALE, Record<string, string>>>
+  } satisfies Partial<Record<SupportedLocale, Record<string, string>>>
   return locale in options ? options[locale] : {}
 }
 
-export default async function getIntl(locale: SUPPORTED_LOCALE) {
+export default async function getIntl(locale: SupportedLocale) {
   return createIntl({
     locale,
     messages: await mockGetIntlMessages(locale),

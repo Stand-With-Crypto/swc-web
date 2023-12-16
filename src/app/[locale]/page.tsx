@@ -8,7 +8,7 @@ export const dynamic = 'error'
 // TODO metadata
 
 export default async function Home(props: PageProps) {
-  const urls = getIntlUrls(props.params.lang)
+  const urls = getIntlUrls(props.params.locale)
   return (
     <div className="prose-sm mx-auto mt-10 w-full max-w-xl p-4">
       <div>

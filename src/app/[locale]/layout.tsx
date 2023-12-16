@@ -9,7 +9,7 @@ import { Inter } from 'next/font/google'
 export const dynamicParams = false
 export const dynamic = 'error'
 export async function generateStaticParams() {
-  return SUPPORTED_LOCALES.map(lang => ({ lang }))
+  return SUPPORTED_LOCALES.map(locale => ({ locale }))
 }
 
 // TODO replace with font we want
@@ -27,7 +27,7 @@ export default function RootLayout({
   params,
 }: PageProps & { children: React.ReactNode }) {
   return (
-    <html lang={params.lang}>
+    <html lang={params.locale}>
       <body className={inter.className}>
         <main>
           <AuthProviders>{children}</AuthProviders>

@@ -19,7 +19,7 @@ export default async function PoliticiansHomepage(props: PageProps) {
       queryDoTheySupportItPresidentialCandidates,
     ),
   ])
-  const urls = getIntlUrls(props.params.lang)
+  const urls = getIntlUrls(props.params.locale)
   return (
     <div className="mx-auto mt-10 w-full max-w-xl space-y-5 p-4">
       <h1>National political figures</h1>

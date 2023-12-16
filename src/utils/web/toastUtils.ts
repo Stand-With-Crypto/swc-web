@@ -1,4 +1,4 @@
-import { useToast } from '@/components/ui/use-toast'
+import { useToast } from '@/components/ui/useToast'
 import { FetchReqError } from '@/utils/shared/fetchReq'
 import _ from 'lodash'
 

@@ -1,6 +1,6 @@
-import { DEFAULT_LOCALE, SUPPORTED_LOCALE } from '@/intl/locales'
+import { DEFAULT_LOCALE, SupportedLocale } from '@/intl/locales'
 
-export const getIntlUrls = (locale: SUPPORTED_LOCALE) => {
+export const getIntlUrls = (locale: SupportedLocale) => {
   const localePrefix = locale === DEFAULT_LOCALE ? '' : `/${locale}`
   return {
     home: () => `${locale === DEFAULT_LOCALE ? '/' : localePrefix}`,
@@ -12,4 +12,5 @@ export const getIntlUrls = (locale: SUPPORTED_LOCALE) => {
 
 export const apiUrls = {
   leaderboard: (offset: number) => `/api/leaderboard/${offset}`,
+  totalDonations: (locale: SupportedLocale) => `/api/total-donations/${locale}`,
 }

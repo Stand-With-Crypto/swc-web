@@ -13,6 +13,8 @@ import Link from 'next/link'
 import { SampleTranslationClientComponent } from './sampleTranslationClientComponent'
 import { sampleTranslationClientComponentMessages } from './sampleTranslationClientComponent.messages'
 import { cn } from '@/utils/web/cn'
+import { getTotalDonations } from '@/data/donations/getTotalDonations'
+import { LiveUpdatingTotalDonations } from '@/app/[locale]/sample-architecture-patterns/liveUpdatingTotalDonations'
 
 export const revalidate = 3600
 export const dynamic = 'error'
@@ -20,9 +22,11 @@ export const dynamic = 'error'
 // TODO metadata
 
 export default async function Home(props: PageProps) {
-  const [intl, leaderboardEntities] = await Promise.all([
-    getIntl(props.params.lang),
+  const { locale } = props.params
+  const [intl, leaderboardEntities, totalDonations] = await Promise.all([
+    getIntl(locale),
     getLeaderboard({ offset: 0 }),
+    getTotalDonations({ locale: locale }),
   ])
   return (
     // TODO remove prose class and actually start styling things!
@@ -55,7 +59,7 @@ export default async function Home(props: PageProps) {
           content until the expiry we set.
         </li>
       </ul>
-      <Leaderboard initialEntities={leaderboardEntities} />
+      <Leaderboard initialEntities={leaderboardEntities} locale={locale} />
       <hr />
       <h3>Sample Auth</h3>
       <p>
@@ -107,13 +111,13 @@ export default async function Home(props: PageProps) {
       <div>
         <p>Locale Links</p>
         <div className="space-x-4">
-          {SUPPORTED_LOCALES.map(locale => (
+          {SUPPORTED_LOCALES.map(supportedLocale => (
             <Link
-              className={cn(locale === props.params.lang && 'text-blue-500')}
-              href={getIntlUrls(locale).sampleArchitecturePatterns()}
-              key={locale}
+              className={cn(supportedLocale === locale && 'text-blue-500')}
+              href={getIntlUrls(supportedLocale).sampleArchitecturePatterns()}
+              key={supportedLocale}
             >
-              {locale}
+              {supportedLocale}
             </Link>
           ))}
         </div>
@@ -131,6 +135,24 @@ export default async function Home(props: PageProps) {
         component)
       </p>
       <CTAEmailYourCongressperson />
+      <hr />
+      <h2>Live updating value</h2>
+      <p>
+        We can leverage the RSC data to statically generate an initial number for a dynamically
+        updating component so that it bootstraps with a value, and then dynamically update that
+        value after the client bootstraps. Below is an example of a "total donations" demo that will
+        poll the server every few seconds for a new value.
+      </p>
+      <p>
+        Because the <code>/api/total-donations/[locale]</code> endpoint is cached for 1 second,
+        we'll end up recomputing the actual number at most once every two seconds. This means that
+        even if we had 1,000,000 users hit the site all at once, we wouldn't hit the dataset that
+        stores/computes this value more than once.
+      </p>
+      <p>
+        <strong>Live updating number: </strong>
+        <LiveUpdatingTotalDonations totalDonations={totalDonations} locale={locale} />
+      </p>
     </div>
   )
 }

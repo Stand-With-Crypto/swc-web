@@ -1,7 +1,7 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { useToast } from '@/components/ui/use-toast'
+import { useToast } from '@/components/ui/useToast'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
 import { useUser } from '@thirdweb-dev/react'

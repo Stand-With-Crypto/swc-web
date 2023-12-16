@@ -5,6 +5,9 @@ import useSWRInfinite from 'swr/infinite'
 import { LeaderboardEntity } from '@/data/leaderboard'
 import { apiUrls } from '@/utils/shared/urls'
 import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table'
+import { FormattedCurrency } from '@/components/ui/formattedCurrency'
+import { SupportedLocale } from '@/intl/locales'
+import { SupportedCurrencyCodes } from '@/utils/shared/currency'
 
 const useGetEntities = ({ limit }: { limit: number }) => {
   return useSWRInfinite(
@@ -23,7 +26,13 @@ const useGetEntities = ({ limit }: { limit: number }) => {
   )
 }
 
-export function Leaderboard({ initialEntities }: { initialEntities: LeaderboardEntity[] }) {
+export function Leaderboard({
+  initialEntities,
+  locale,
+}: {
+  initialEntities: LeaderboardEntity[]
+  locale: SupportedLocale
+}) {
   const fetchLeaderboard = useGetEntities({ limit: initialEntities.length })
   const flattenedData = [...initialEntities, ..._.flatten(fetchLeaderboard.data)]
   return (
@@ -34,7 +43,13 @@ export function Leaderboard({ initialEntities }: { initialEntities: LeaderboardE
           {flattenedData.map(entity => (
             <TableRow key={entity.ownerAddress}>
               <TableCell>{entity.ownerEnsName || entity.ownerAddress}</TableCell>
-              <TableCell className="text-right">{entity.fiatDonationValue}</TableCell>
+              <TableCell className="text-right">
+                <FormattedCurrency
+                  locale={locale}
+                  currencyCode={SupportedCurrencyCodes.USD}
+                  amount={entity.fiatDonationValueUsd}
+                />
+              </TableCell>
             </TableRow>
           ))}
           <TableRow>

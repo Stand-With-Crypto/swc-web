@@ -1,3 +1,9 @@
-export const DEFAULT_LOCALE = 'en-US'
-export type SUPPORTED_LOCALE = 'en-US' | 'es'
-export const SUPPORTED_LOCALES: readonly SUPPORTED_LOCALE[] = [DEFAULT_LOCALE, 'es']
+export enum SupportedLocale {
+  EN_US = 'en-US',
+  ES = 'es',
+}
+export const DEFAULT_LOCALE = SupportedLocale.EN_US
+export const SUPPORTED_LOCALES: readonly SupportedLocale[] = [
+  SupportedLocale.EN_US,
+  SupportedLocale.ES,
+]
