@@ -33,12 +33,15 @@
   "cSpell.ignorePaths": ["**/*.json"],
   "cSpell.words": [
     "clsx",
+    "codegen",
     "cryptocurrency",
     "datetime",
     "dotheysupportit",
     "DTSI",
     "Leaderboard",
+    "pscale",
     "thirdweb",
+    "undici",
     "unoptimized"
   ],
   "typescript.tsdk": "node_modules/typescript/lib"

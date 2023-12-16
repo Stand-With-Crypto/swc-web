@@ -8,6 +8,7 @@ import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
 import { SupportedLocale } from '@/intl/locales'
 import { SupportedCurrencyCodes } from '@/utils/shared/currency'
+import { fetchReq } from '@/utils/shared/fetchReq'
 
 const useGetEntities = ({ limit }: { limit: number }) => {
   return useSWRInfinite(
@@ -19,7 +20,7 @@ const useGetEntities = ({ limit }: { limit: number }) => {
       initialSize: 0,
       revalidateFirstPage: false,
       fetcher: url =>
-        fetch(url)
+        fetchReq(url)
           .then(res => res.json())
           .then(data => data as LeaderboardEntity[]),
     },

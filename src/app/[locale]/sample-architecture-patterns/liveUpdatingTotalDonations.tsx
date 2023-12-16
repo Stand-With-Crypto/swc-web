@@ -8,12 +8,13 @@ import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table'
 import { TotalDonations } from '@/data/donations/getTotalDonations'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
 import { SupportedLocale } from '@/intl/locales'
+import { fetchReq } from '@/utils/shared/fetchReq'
 
 const useGetTotalDonations = (locale: SupportedLocale) => {
   return useSWR(
     apiUrls.totalDonations(locale),
     url =>
-      fetch(url)
+      fetchReq(url)
         .then(res => res.json())
         .then(data => data as TotalDonations),
     {
