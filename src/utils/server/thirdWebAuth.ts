@@ -32,11 +32,18 @@ export const thirdWebAuth = ThirdwebAuth({
     },
   },
   callbacks: {
+    onLogout: user => {
+      // TODO analytics
+    },
     onUser: async (user, req) => {
+      // TODO analytics
       // TODO append metadata to the user session object
       console.log('onUser', { user, req: !!req })
     },
     onLogin: async address => {
+      // TODO figure out how to get the users email address to persist to the db
+      console.log('onLogin', { address })
+      // TODO analytics
       const existingUser = await prismaClient.user.findUnique({ where: { address } })
       if (!existingUser) {
         await prismaClient.user.create({ data: { address } })
