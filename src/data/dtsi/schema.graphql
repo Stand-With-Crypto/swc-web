@@ -1,0 +1,450 @@
+"""
+The `BigInt` scalar type represents non-fractional signed whole numeric values.
+@see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt
+"""
+scalar BigInt
+
+type Bill {
+  analysis: [BillAnalysis!]!
+  computedStanceScore: Float
+  congressDotGovUrl: String!
+  createdByPersonRoleGroup: PersonRoleGroup!
+  createdByPersonRoleGroupId: String!
+  dateIntroduced: String!
+  datetimeCreated: DateTime!
+  datetimeTweetedByDoTheySupportIt: DateTime
+  datetimeUpdated: DateTime!
+  formattedSlug: String!
+  govTrackUrl: String!
+  id: ID!
+  pdfUrl: String!
+  receivedPersonRoleGroup: PersonRoleGroup!
+  receivedPersonRoleGroupId: String!
+  relationships: [BillPersonRelationship!]!
+  shortTitle: String!
+  slug: String!
+  stanceScoreWeight: Int
+  status: BillStatus!
+  summary: String!
+  title: String!
+}
+
+type BillAnalysis {
+  billId: String!
+  datetimeCreated: DateTime!
+  datetimeUpdated: DateTime!
+  id: ID!
+  internalNotes: String
+  isPrimaryAnalysis: Boolean!
+  richTextCommentary: Json
+  stanceScore: Float!
+  user: User!
+  userId: String!
+  verificationStatus: BillAnalysisVerificationStatus!
+}
+
+enum BillAnalysisVerificationStatus {
+  APPROVED
+  PENDING
+  REJECTED_NOT_RELEVANT
+  REJECTED_SPAM
+}
+
+type BillPersonRelationship {
+  billId: String!
+  dateRelationOccurred: DateTime!
+  datetimeCreated: DateTime!
+  datetimeUpdated: DateTime!
+  id: ID!
+  person: Person!
+  personId: String!
+  personStance: PersonStance
+  personStanceId: String
+  relationshipType: BillPersonRelationshipType!
+}
+
+enum BillPersonRelationshipType {
+  COSPONSOR
+  SPONSOR
+}
+
+enum BillStatus {
+  ENACTED
+  SPONSORED
+}
+
+"""
+The `Byte` scalar type represents byte value as a Buffer
+"""
+scalar Bytes
+
+"""
+Valid Chambers Of Congress
+"""
+enum CongressionalChamber {
+  HOUSE_OF_REPRESENTATIVES
+  SENATE
+}
+
+"""
+Valid Sessions Of Congress
+"""
+enum CongressionalSession {
+  SESSION_116
+  SESSION_117
+  SESSION_118
+}
+
+"""
+A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar DateTime
+
+"""
+An arbitrary-precision Decimal type
+"""
+scalar Decimal
+
+enum Gender {
+  FEMALE
+  MALE
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar Json
+
+type Person {
+  billRelationships: [BillPersonRelationship!]!
+  computedStanceScore: Float
+  contactFormUrl: String!
+  crpId: String!
+  cspanId: String!
+  dateOfBirth: DateTime
+  datetimeCreated: DateTime!
+  datetimeUpdated: DateTime!
+  description: String!
+  facebookAccountUsername: String!
+  faxNumber: String!
+  fecCandidateId: String!
+  firstName: String!
+  firstNickname: String!
+  gender: Gender
+  googleEntityId: String!
+  govtrackId: String!
+  icpsrId: String!
+  id: ID!
+  isPubliclyVisible: Boolean!
+  lastName: String!
+  middleName: String!
+  nameSuffix: String!
+  nameUniquenessModifier: String!
+  officeAddress: String!
+  officialUrl: String!
+  phoneNumber: String!
+  politicalAffiliation: String!
+  politicalAffiliationCategory: PersonPoliticalAffiliationCategory
+  proPublicaId: String
+  profilePictureUrl: String!
+  profilePictureUrlDimensions: Json
+  promotedPositioning: Int
+  roles: [PersonRole!]!
+  slug: String!
+  stances(
+    promotedPositioningOption: PersonStanceHasPromotedPositioning
+    verificationStatusIn: [PersonStanceVerificationStatus!]
+  ): [PersonStance!]!
+  suffixName: String!
+  twitterAccounts: [TwitterAccount!]!
+  votesmartId: String!
+  wikipediaUrl: String!
+  youtubeAccountUsername: String!
+}
+
+"""
+Common groupings of people to query for
+"""
+enum PersonGrouping {
+  RUNNING_FOR_PRESIDENT
+}
+
+enum PersonPoliticalAffiliationCategory {
+  DEMOCRAT
+  INDEPENDENT
+  REPUBLICAN
+}
+
+type PersonRole {
+  dateEnd: DateTime
+  dateStart: DateTime!
+  datetimeCreated: DateTime!
+  datetimeUpdated: DateTime!
+  group: PersonRoleGroup
+  groupId: String
+  id: ID!
+  isPubliclyVisible: Boolean!
+  person: Person!
+  personId: String!
+  primaryCity: String!
+  primaryCountryCode: String!
+  primaryDistrict: String!
+  primaryState: String!
+  roleCategory: PersonRoleCategory
+  status: PersonRoleStatus!
+  title: String!
+}
+
+enum PersonRoleCategory {
+  COMMITTEE_CHAIR
+  COMMITTEE_MEMBER
+  CONGRESS
+  GOVERNOR
+  MAYOR
+  PRESIDENT
+  SENATE
+  STATE_CONGRESS
+  STATE_SENATE
+  VICE_PRESIDENT
+}
+
+type PersonRoleGroup {
+  category: PersonRoleGroupCategory
+  childGroups: [PersonRoleGroup!]!
+  dateEnd: DateTime
+  dateStart: DateTime!
+  datetimeCreated: DateTime!
+  datetimeUpdated: DateTime!
+  displayName: String!
+  groupInstance: String!
+  id: ID!
+  officialUrl: String!
+  parentGroup: PersonRoleGroup
+  parentGroupId: String
+  primaryCity: String!
+  primaryCountryCode: String!
+  primaryDistrict: String!
+  primaryState: String!
+  proPublicaId: String
+}
+
+enum PersonRoleGroupCategory {
+  CONGRESS
+  CONGRESS_HOUSE_COMMITTEE
+  CONGRESS_HOUSE_SUBCOMMITTEE
+  CONGRESS_JOINT_COMMITTEE
+  CONGRESS_JOINT_SUBCOMMITTEE
+  CONGRESS_SENATE_COMMITTEE
+  CONGRESS_SENATE_SUBCOMMITTEE
+}
+
+enum PersonRoleStatus {
+  DROPPED_OUT
+  HELD
+  LOST
+  RUNNING_FOR
+}
+
+type PersonStance {
+  analysis: [PersonStanceAnalysis!]!
+  billRelationship: BillPersonRelationship
+  computedStanceScore: Float
+  dateStanceMade: DateTime!
+  datetimeCreated: DateTime!
+  datetimeUpdated: DateTime!
+  id: ID!
+  personId: String!
+  quote: PersonStanceQuote
+  stanceScoreWeight: Int
+  stanceType: PersonStanceType!
+  tweet: Tweet
+  userCreatedBy: User
+  verificationStatus: PersonStanceVerificationStatus!
+}
+
+type PersonStanceAnalysis {
+  datetimeCreated: DateTime!
+  datetimeUpdated: DateTime!
+  id: ID!
+  richTextCommentary: Json
+  stanceScore: Float
+  user: User!
+  verificationStatus: PersonStanceAnalysisVerificationStatus!
+}
+
+enum PersonStanceAnalysisVerificationStatus {
+  APPROVED
+  PENDING
+  REJECTED_NOT_RELEVANT
+  REJECTED_SPAM
+}
+
+enum PersonStanceFlagType {
+  FAKE
+  MISCATEGORIZED
+}
+
+"""
+A ranking of where a stance lies from pro-topic to anti-topic
+"""
+enum PersonStanceHasPromotedPositioning {
+  """
+  Only return stances without a set promoted positioning
+  """
+  DOES_NOT_HAVE_PROMOTED_POSITION
+
+  """
+  Only return stances with a set promoted positioning
+  """
+  HAS_PROMOTED_POSITION
+
+  """
+  Only return stances with a set promoted positioning, unless there are none, then return all stances
+  """
+  HAS_PROMOTED_POSITION_WITH_FALLBACK
+}
+
+type PersonStanceQuote {
+  datetimeCreated: DateTime!
+  datetimeUpdated: DateTime!
+  richTextDescription: Json
+  sourceUrl: String!
+}
+
+enum PersonStanceType {
+  BILL_RELATIONSHIP
+  QUOTE
+  TWEET
+}
+
+enum PersonStanceVerificationStatus {
+  APPROVED
+  PENDING
+  REJECTED_DUPLICATE
+  REJECTED_FAKE
+  REJECTED_NOT_RELEVANT
+  REJECTED_SPAM
+}
+
+type Query {
+  congressPeople(chamber: CongressionalChamber!, session: CongressionalSession!): [Person!]!
+    @deprecated(reason: "Use people instead")
+  nonCongressPeople: [Person!]! @deprecated(reason: "Use people instead")
+  people(
+    grouping: PersonGrouping
+    hasPromotedPositioning: Boolean
+    limit: Int!
+    offset: Int!
+    slugIn: [String!]
+  ): [Person!]!
+
+  """
+  Returns all objects that have been updated since the given date
+  """
+  recentlyUpdated(datetimeUpdateGte: String!): [UpdatableUnion!]!
+}
+
+"""
+A ranking of where a stance lies from pro-topic to anti-topic
+"""
+enum StanceScore {
+  NEUTRAL
+  SOMEWHAT_AGAINST
+  SOMEWHAT_FOR
+  VERY_AGAINST
+  VERY_FOR
+}
+
+type Tweet {
+  datetimeCreated: DateTime!
+  datetimeCreatedOnTwitter: DateTime!
+  datetimeUpdated: DateTime!
+  entities: Json!
+  id: ID!
+  isActive: Boolean!
+  text: String!
+  tweetMedia: [TweetMedia!]!
+  twitterAccount: TwitterAccount!
+  twitterAccountId: String!
+}
+
+type TweetMedia {
+  datetimeCreated: DateTime!
+  datetimeUpdated: DateTime!
+  height: Int
+  id: ID!
+  originalUrl: String!
+  type: TweetMediaType!
+  url: String!
+  width: Int
+}
+
+enum TweetMediaType {
+  animated_gif
+  photo
+  video
+}
+
+type TwitterAccount {
+  accountType: TwitterAccountType
+  apiId: String!
+  datetimeCreated: DateTime!
+  datetimeNewestTweetQueried: DateTime
+  datetimeOldestTweetQueried: DateTime
+  datetimeUpdated: DateTime!
+  id: ID!
+  personId: String
+  state: TwitterAccountState!
+  username: String!
+}
+
+enum TwitterAccountState {
+  INACTIVE
+  VISIBLE
+  VISIBLE_DONT_QUERY
+}
+
+enum TwitterAccountType {
+  PROFESSIONAL
+}
+
+"""
+Any Object Type with a datetimeUpdated
+"""
+union UpdatableUnion =
+    Bill
+  | BillAnalysis
+  | BillPersonRelationship
+  | Person
+  | PersonRole
+  | PersonRoleGroup
+  | PersonStance
+  | PersonStanceAnalysis
+  | PersonStanceQuote
+  | Tweet
+  | TweetMedia
+  | TwitterAccount
+  | User
+
+type User {
+  bio: String!
+  datetimeCreated: DateTime!
+  datetimeUpdated: DateTime!
+  id: ID!
+  image: String
+  importanceScore: Int
+  internalUserId: String
+  name: String
+  shouldHaveAnalysisSuperseded: Boolean!
+  status: UserStatus!
+  twitterFollowerCount: Int
+  twitterUsername: String
+  twitterVerified: Boolean
+}
+
+enum UserStatus {
+  ACTIVE
+  ADMIN_HIDE_CONTENT
+  BANNED
+  SELF_HIDE_CONTENT
+}

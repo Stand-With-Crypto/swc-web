@@ -36,8 +36,10 @@
     "cryptocurrency",
     "datetime",
     "dotheysupportit",
+    "DTSI",
     "Leaderboard",
-    "thirdweb"
+    "thirdweb",
+    "unoptimized"
   ],
   "typescript.tsdk": "node_modules/typescript/lib"
 }

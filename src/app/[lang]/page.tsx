@@ -10,8 +10,13 @@ export const dynamic = 'error'
 export default async function Home(props: PageProps) {
   const urls = getIntlUrls(props.params.lang)
   return (
-    <main className="prose-sm mx-auto mt-10 w-full max-w-xl p-4">
-      <Link href={urls.sampleArchitecturePatterns()}>View Sample Architecture Patterns</Link>
-    </main>
+    <div className="prose-sm mx-auto mt-10 w-full max-w-xl p-4">
+      <div>
+        <Link href={urls.sampleArchitecturePatterns()}>View Sample Architecture Patterns</Link>
+      </div>
+      <div>
+        <Link href={urls.politiciansHomepage()}>Politicians Homepage</Link>
+      </div>
+    </div>
   )
 }

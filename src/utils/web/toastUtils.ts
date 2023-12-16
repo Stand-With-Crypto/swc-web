@@ -1,5 +1,5 @@
 import { useToast } from '@/components/ui/use-toast'
-import { FetchReqError } from '@/utils/web/fetchReq'
+import { FetchReqError } from '@/utils/shared/fetchReq'
 import _ from 'lodash'
 
 const GENERIC_TITLE = 'Uh oh! Something went wrong.'
