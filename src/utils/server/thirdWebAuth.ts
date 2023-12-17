@@ -44,9 +44,12 @@ export const thirdWebAuth = ThirdwebAuth({
       // TODO figure out how to get the users email address to persist to the db
       console.log('onLogin', { address })
       // TODO analytics
-      const existingUser = await prismaClient.user.findUnique({ where: { address } })
+      const existingUser = await prismaClient.cryptoAddressUser.findUnique({ where: { address } })
       if (!existingUser) {
-        await prismaClient.user.create({ data: { address } })
+        await prismaClient.cryptoAddressUser.create({
+          // TODO try to match this with an existing user
+          data: { address, inferredUser: { create: {} } },
+        })
       }
     },
   },

@@ -4,7 +4,7 @@ Below is a non-exhaustive list of coding conventions that we try to follow. This
 
 ## General
 
-- If a convention can be programmatically audited/enforced with a tool like eslint and prettier, we should leverage them
+- If a convention can be programmatically audited/enforced with a tool like eslint and prettier, we should leverage that tool.
 
 ## TypeScript
 
@@ -35,11 +35,13 @@ Below is a non-exhaustive list of coding conventions that we try to follow. This
 
 ## Database
 
+- Because of [weird quirks with db column name case sensitivity](https://stackoverflow.com/questions/2009005/are-column-and-table-name-case-sensitive-in-mysql) all database column names should be `snake_case`. See our `prisma/prisma.schema` file for how we map from snake_case to camelCase for TypeScript using `@map`.
 - Column names for datetime types should be prefixed with `datetime`
 - Column names for date types should be prefixed with `date`
 - Column names for monetary (and crypto) amounts should be prefixed with the currency, unless there is a separate column on the table that includes the monetary type. Examples include `usdAmount`, `btcValue`, etc
 - Column names for datetime types should be prefixed with `datetime`
 - Column names for boolean types should be prefixed with a descriptor that implies a yes or no answer. Examples of prefixes include `has`, `is`, `should`, `can`, etc
+- String columns that can possibly be submitted with an empty string (form inputs, etc) should be set to default to "" and should not be nullable. This ensures that there can't be two "falsy" states (null, and empty string). For string columns that can not ever be submitted with an empty string (a string id column for example), use nullable instead of empty string.
 
 ## Next.js
 

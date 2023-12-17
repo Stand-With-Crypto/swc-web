@@ -10,12 +10,12 @@ export default async function handler(request: NextApiRequest, res: NextApiRespo
   if (!sessionUser) {
     return res.status(401).json({ message: 'Unauthorized' })
   }
-  let user = await prismaClient.user.findUniqueOrThrow({
+  let user = await prismaClient.cryptoAddressUser.findUniqueOrThrow({
     where: {
       address: sessionUser.address,
     },
   })
-  user = await prismaClient.user.update({
+  user = await prismaClient.cryptoAddressUser.update({
     where: {
       address: sessionUser.address,
     },

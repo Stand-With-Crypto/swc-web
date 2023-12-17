@@ -1,5 +1,5 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["driverAdapters"]
 }
 
@@ -13,10 +13,178 @@ model AuthenticationNonce {
   id String @id
 }
 
-model User {
+// A user can interact with our platform multiple ways. 
+// Sometimes that user will be signing up via coinbase, 
+// sometimes a user will be signing up via a wallet on the website, 
+// sometimes they won't be logged in at all but we'll need to cache a session id for them so that if they log in with a eth address later we can associate their actions with the new address. 
+// We'll need to track these different "users" with their own respective metadata, and try to join these related models with a InferredUser table
+model InferredUser {
   id                      String   @id @default(uuid())
-  address                 String   @unique
-  datetimeCreated         DateTime @updatedAt
-  datetimeUpdated         DateTime @default(now())
+  datetimeUpdated         DateTime @updatedAt @map("datetime_updated")
+  datetimeCreated         DateTime @default(now()) @map("datetime_created")
+
+  sessionUsers       SessionUser[]
+  cryptoAddressUsers CryptoAddressUser[]
+  userActions        UserAction[]
+}
+
+// TODO, figure out how Coinbase auth handoff fits in to the equation here
+
+// A "user" that is performing actions on our platform but has not logged in to any system yet.
+// A session user will only be created/associated with events if a different authenticatd user type is not also associated with the event
+model SessionUser {
+  id              String        @id @default(uuid())
+  inferredUserId  String?       @map("inferred_user_id")
+  inferredUser    InferredUser? @relation(fields: [inferredUserId], references: [id])
+  datetimeUpdated DateTime      @updatedAt @map("datetime_updated")
+  datetimeCreated DateTime      @default(now()) @map("datetime_created")
+
+  userActions UserAction[]
+
+  @@index([inferredUserId])
+}
+
+// enum Web3AddressCustodian {
+//   SELF_CUSTODY
+//   THIRDWEB
+// }
+
+// Using ThirdWeb a user can create multiple "accounts", one per wallet. They can also have some that are self-custodied, and some that are being custodied by ThirdWeb (email, google login, etc)
+model CryptoAddressUser {
+  id               String               @id @default(uuid())
+  address          String               @unique
+  // TODO figure out how to identify this
+  // initialCustodian Web3AddressCustodian
+  inferredUserId   String               @map("inferred_user_id")
+  inferredUser     InferredUser         @relation(fields: [inferredUserId], references: [id])
+  datetimeUpdated  DateTime             @updatedAt @map("datetime_updated")
+  datetimeCreated  DateTime             @default(now()) @map("datetime_created")
   sampleDatabaseIncrement Int      @default(0)
+
+  userActions UserAction[]
+
+  // TODO determine if we need a network (ETH, SOL, etc) enum here. Can always add later
+  @@index([inferredUserId])
+}
+
+model UserAction {
+  id                  String             @id @default(uuid())
+  // Because a user could be in a number of different states (logged in, not logged in, etc) we want to track the different types of users that could be performing an action
+  // We will retroactively foreign key to the appropriate InferredUser if one is not attached on create but later added
+  inferredUserId      String?            @map("inferred_user_id")
+  inferredUser        InferredUser?      @relation(fields: [inferredUserId], references: [id])
+  cryptoAddressUserId String?            @map("crypto_address_user_id")
+  cryptoAddressUser   CryptoAddressUser? @relation(fields: [cryptoAddressUserId], references: [id])
+  sessionUserId       String?            @map("session_user_id")
+  sessionUser         SessionUser?       @relation(fields: [sessionUserId], references: [id])
+  // because some of these will be backfilled from other data sources, we want to differentiate between the datetime the action was performed and the datetime we recorded it in this db
+  datetimeOccurred    DateTime           @map("datetime_occurred")
+  datetimeUpdated     DateTime           @updatedAt @map("datetime_updated")
+  datetimeCreated     DateTime           @default(now()) @map("datetime_created")
+
+  // We'll need logic to validate and verify only one action type is every associated with a UserAction
+  email    UserActionEmail?
+  call     UserActionCall?
+  donation UserActionDonation?
+  nftMint  UserActionNFTMint?
+  tweet    UserActionTweet?
+
+  @@index([inferredUserId])
+  @@index([cryptoAddressUserId])
+  @@index([sessionUserId])
+}
+
+// TODO determine how google places constructs addresses and map this field to that structure to ensure we're internationalizing the way we persist addresses
+model Address {
+  id             String  @id @default(uuid())
+  googlePlacesId String? @map("google_places_id")
+  streetAddress1 String  @map("street_address_1")
+  streetAddress2 String  @default("") @map("street_address_2")
+  city           String
+  state          String
+  zipCode        String  @map("zip_code")
+  country        String
+
+  userActionEmails UserActionEmail[]
+}
+
+model UserActionEmail {
+  id                        String                     @id @default(uuid())
+  userAction                UserAction                 @relation(fields: [id], references: [id])
+  // TODO determine if these need to be nullable in the future
+  zipCode                   String                     @map("zip_code")
+  email                     String
+  fullName                  String                     @map("full_name")
+  phoneNumber               String                     @map("phone_number")
+  address                   Address                    @relation(fields: [addressId], references: [id])
+  addressId                 String                     @map("address_id")
+  userActionEmailRecipients UserActionEmailRecipient[]
+
+  @@index([id])
+  @@index([addressId])
+}
+
+model UserActionEmailRecipient {
+  id                String          @id @default(uuid())
+  userActionEmailId String          @map("user_action_email_id")
+  userActionEmail   UserActionEmail @relation(fields: [userActionEmailId], references: [id])
+  email             String
+  dtsiSlug          String          @map("dtsi_slug")
+
+  @@index([userActionEmailId])
+}
+
+model UserActionCall {
+  id                   String     @id @default(uuid())
+  userAction           UserAction @relation(fields: [id], references: [id])
+  // TODO determine if these need to be nullable in the future
+  recipientDtsiSlug    String     @map("recipient_dtsi_slug")
+  recipientPhoneNumber String     @map("recipient_phone_number")
+
+  @@index([id])
+}
+
+model UserActionDonation {
+  id           String     @id @default(uuid())
+  userAction   UserAction @relation(fields: [id], references: [id])
+  // TODO determine if these need to be nullable in the future
+  amount       String     @map("amount")
+  currencyCode String     @map("currency_code")
+  amountUsd    String     @map("amount_usd")
+
+  @@index([id])
+}
+
+// TODO determine if this actually should be a model or just an enum
+// my gut is that we want to be able to spin up new mints in the future without having to migrate the db
+// if that's the case then we want a freestanding model
+model MintableNFT {
+  id                String              @id @default(uuid())
+  name              String
+  UserActionNFTMint UserActionNFTMint[]
+
+  // TODO Web3 info about address/contract/cost/etc (img)
+  @@index([id])
+}
+
+model UserActionNFTMint {
+  id            String      @id @default(uuid())
+  userAction    UserAction  @relation(fields: [id], references: [id])
+  // TODO determine if these need to be nullable in the future
+  mintableNFTId String      @map("mintable_nft_id")
+  mintableNFT   MintableNFT @relation(fields: [mintableNFTId], references: [id])
+  amount        String      @map("amount")
+  currencyCode  String      @map("currency_code")
+  amountUsd     String      @map("amount_usd")
+
+  @@index([id])
+  @@index([mintableNFTId])
+}
+
+model UserActionTweet {
+  id         String     @id @default(uuid())
+  userAction UserAction @relation(fields: [id], references: [id])
+
+  // TODO determine if we can get additional metadata from the tweet (what was tweeted, by whom, etc)
+  @@index([id])
 }
