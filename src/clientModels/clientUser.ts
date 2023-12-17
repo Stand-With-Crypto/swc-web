@@ -1,11 +1,11 @@
-import { User } from '@prisma/client'
+import { CryptoAddressUser } from '@prisma/client'
 
-export type ClientUser = Pick<
-  User,
+export type ClientCryptoAddressUser = Pick<
+  CryptoAddressUser,
   'address' | 'id' | 'sampleDatabaseIncrement' | 'datetimeCreated' | 'datetimeUpdated'
 >
 
-export const getClientUser = (user: User): ClientUser => {
+export const getClientCryptoAddressUser = (user: CryptoAddressUser): ClientCryptoAddressUser => {
   const { address, id, sampleDatabaseIncrement, datetimeCreated, datetimeUpdated } = user
   return {
     address,

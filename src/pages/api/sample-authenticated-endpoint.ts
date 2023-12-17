@@ -1,6 +1,6 @@
 // TODO migrate to app router once thirdweb supports it
 
-import { getClientUser } from '@/clientModels/clientUser'
+import { getClientCryptoAddressUser } from '@/clientModels/clientUser'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { thirdWebAuth } from '@/utils/server/thirdWebAuth'
 import { NextApiRequest, NextApiResponse } from 'next'
@@ -23,5 +23,5 @@ export default async function handler(request: NextApiRequest, res: NextApiRespo
       sampleDatabaseIncrement: user.sampleDatabaseIncrement + 1,
     },
   })
-  return res.json(getClientUser(user))
+  return res.json(getClientCryptoAddressUser(user))
 }
