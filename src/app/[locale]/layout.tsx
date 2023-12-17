@@ -1,4 +1,5 @@
-import { AuthProviders } from '@/components/app/authProviders'
+import { AuthProviders } from '@/app/[locale]/authProviders'
+import { TopLevelClientLogic } from '@/app/[locale]/topLevelClientLogic'
 import { Toaster } from '@/components/ui/toaster'
 import '@/globals.css'
 import { ORDERED_SUPPORTED_LOCALES } from '@/intl/locales'
@@ -30,6 +31,7 @@ export default function RootLayout({
     <html lang={params.locale}>
       <body className={inter.className}>
         <main>
+          <TopLevelClientLogic />
           <AuthProviders>{children}</AuthProviders>
         </main>
         <Toaster />

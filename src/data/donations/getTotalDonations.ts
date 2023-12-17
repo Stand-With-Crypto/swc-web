@@ -1,6 +1,9 @@
 import { SupportedLocale } from '@/intl/locales'
 import { SupportedCurrencyCodes } from '@/utils/shared/currency'
+import { getLogger } from '@/utils/shared/logger'
 import 'server-only'
+
+const logger = getLogger('getTotalDonations')
 
 export type TotalDonations = {
   amountUsd: number

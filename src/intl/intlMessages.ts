@@ -3,6 +3,10 @@ import { SupportedLocale } from '@/intl/locales'
 import { createIntl } from '@formatjs/intl'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { MissingTranslationError } from 'react-intl'
+import { REPLACE_ME__captureException } from '@/utils/shared/captureException'
+import { getLogger } from '@/utils/shared/logger'
+
+const logger = getLogger('intlMessages')
 
 // TODO figure out the translation workflow with a 3rd party provider
 const mockGetIntlMessages = async (locale: SupportedLocale) => {
@@ -32,10 +36,10 @@ export default async function getIntl(locale: SupportedLocale) {
       if ('code' in err && err.code === 'MISSING_TRANSLATION') {
         return
       }
-      console.error(err)
+      REPLACE_ME__captureException(err)
     },
     onWarn: warning => {
-      console.warn(warning)
+      logger.warn(warning)
     },
   })
 }

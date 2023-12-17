@@ -11,6 +11,11 @@ import { DEFAULT_LOCALE, ORDERED_SUPPORTED_LOCALES, SupportedLocale } from '@/in
 import { usePathname, useRouter } from 'next/navigation'
 import { addDays } from 'date-fns'
 import { setCookie } from '@/actions/setCookie'
+import {
+  ClientAnalyticActionType,
+  ClientAnalyticComponentType,
+  trackClientAnalytic,
+} from '@/utils/web/clientAnalytics'
 
 export function LocaleDropdown({ locale }: { locale: SupportedLocale }) {
   const router = useRouter()
@@ -18,6 +23,11 @@ export function LocaleDropdown({ locale }: { locale: SupportedLocale }) {
 
   const handleChange = (newLocale: SupportedLocale) => async () => {
     if (newLocale === locale || !currentPathname) return
+    trackClientAnalytic('New Locale Selected', {
+      newLocale,
+      component: ClientAnalyticComponentType.dropdown,
+      action: ClientAnalyticActionType.select,
+    })
     // set cookie for next-i18n-router
     const expiresDate = addDays(new Date(), 30)
     await setCookie('NEXT_LOCALE', newLocale, { expires: expiresDate })

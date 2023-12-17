@@ -9,6 +9,11 @@ import { FormattedCurrency } from '@/components/ui/formattedCurrency'
 import { SupportedLocale } from '@/intl/locales'
 import { SupportedCurrencyCodes } from '@/utils/shared/currency'
 import { fetchReq } from '@/utils/shared/fetchReq'
+import {
+  ClientAnalyticActionType,
+  ClientAnalyticComponentType,
+  trackClientAnalytic,
+} from '@/utils/web/clientAnalytics'
 
 const useGetEntities = ({ limit }: { limit: number }) => {
   return useSWRInfinite(
@@ -59,7 +64,15 @@ export function Leaderboard({
               <button
                 disabled={fetchLeaderboard.isValidating}
                 className="w-full p-4"
-                onClick={() => fetchLeaderboard.setSize(fetchLeaderboard.size + 1)}
+                onClick={() => {
+                  const size = fetchLeaderboard.size + 1
+                  trackClientAnalytic('Leaderboard Load More Pressed', {
+                    size,
+                    component: ClientAnalyticComponentType.button,
+                    action: ClientAnalyticActionType.click,
+                  })
+                  return fetchLeaderboard.setSize(size)
+                }}
               >
                 Load More
               </button>

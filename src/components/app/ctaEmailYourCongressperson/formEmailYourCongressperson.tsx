@@ -27,6 +27,7 @@ The Financial Innovation and Technology for the 21st Century Act ("FIT21") addre
 
 As your constituent, I am asking you to vote for FIT21 to safeguard consumers and promote responsible innovation. Thank you.`
 
+const FORM_NAME = 'Email Your Congressperson'
 type FormValues = z.infer<typeof zodEmailYourCongressperson> & GenericErrorFormValues
 
 export function FormEmailYourCongressperson() {
@@ -46,7 +47,9 @@ export function FormEmailYourCongressperson() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(values =>
-          triggerServerActionForForm(form, () => triggerEmailYourCongressPerson(values)),
+          triggerServerActionForForm({ form, formName: FORM_NAME }, () =>
+            triggerEmailYourCongressPerson(values),
+          ),
         )}
         className="space-y-8"
       >

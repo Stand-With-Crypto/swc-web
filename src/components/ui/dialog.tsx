@@ -1,12 +1,29 @@
 'use client'
 
-import * as React from 'react'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { X } from 'lucide-react'
+import * as React from 'react'
 
 import { cn } from '@/utils/web/cn'
+import {
+  ClientAnalyticActionType,
+  ClientAnalyticComponentType,
+  trackClientAnalytic,
+} from '@/utils/web/clientAnalytics'
 
-const Dialog = DialogPrimitive.Root
+function Dialog({ onOpenChange, ...props }: DialogPrimitive.DialogProps) {
+  const wrappedOnChangeOpen = React.useCallback(
+    (open: boolean) => {
+      trackClientAnalytic(`Dialog ${open ? 'Opened' : 'Closed'}`, {
+        component: ClientAnalyticComponentType.modal,
+        action: ClientAnalyticActionType.view,
+      })
+      onOpenChange?.(open)
+    },
+    [onOpenChange],
+  )
+  return <DialogPrimitive.Root onOpenChange={wrappedOnChangeOpen} {...props} />
+}
 
 const DialogTrigger = DialogPrimitive.Trigger
 
@@ -92,13 +109,13 @@ DialogDescription.displayName = DialogPrimitive.Description.displayName
 
 export {
   Dialog,
-  DialogPortal,
-  DialogOverlay,
   DialogClose,
-  DialogTrigger,
   DialogContent,
-  DialogHeader,
-  DialogFooter,
-  DialogTitle,
   DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogOverlay,
+  DialogPortal,
+  DialogTitle,
+  DialogTrigger,
 }

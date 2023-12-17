@@ -39,6 +39,7 @@
     "formatjs": "^0.1.1",
     "graphql": "^16.8.1",
     "install": "^0.13.0",
+    "js-cookie": "^3.0.5",
     "lodash": "^4.17.21",
     "lucide-react": "^0.294.0",
     "next": "14.0.4",
@@ -54,6 +55,8 @@
     "tailwind-merge": "^2.1.0",
     "tailwindcss-animate": "^1.0.7",
     "undici": "^6.0.1",
+    "uuid": "^9.0.1",
+    "winston": "^3.11.0",
     "zod": "^3.22.4"
   },
   "devDependencies": {
@@ -79,6 +82,7 @@
     "@testing-library/react": "^14.1.2",
     "@total-typescript/ts-reset": "^0.5.1",
     "@types/jest": "^29.5.11",
+    "@types/js-cookie": "^3.0.6",
     "@types/negotiator": "^0.6.3",
     "@types/node": "^20",
     "@types/react": "^18",
