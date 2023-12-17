@@ -33,6 +33,7 @@
     "@types/lodash": "^4.14.202",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
+    "date-fns": "^2.30.0",
     "dotenv": "^16.3.1",
     "ethers": "^5.7.2",
     "formatjs": "^0.1.1",

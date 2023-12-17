@@ -4,14 +4,15 @@ Below is a non-exhaustive list of coding conventions that we try to follow. This
 
 ## General
 
-- Whenever possible, favor rules that can be programmatically audited/enforced. Tools like eslint and prettier help enforce convention with minimal friction
+- If a convention can be programmatically audited/enforced with a tool like eslint and prettier, we should leverage them
 
 ## TypeScript
 
-- Avoid using `any`. if it's needed, add a comment explaining why
+- Avoid using `any`. if it's needed, add a comment explaining why if it's not self-evident
 - Code should be camelCase by default
-- Constants should be ALL_UPPER_CASE_SNAKE_CASE
-- When defining a constant that can be mutated (like arrays or objects), add `readonly` to prevent unexpected mutations
+- Constants should be ALL_UPPER_SNAKE_CASE
+  - When defining a constant array, add `readonly` to prevent unexpected mutations
+- variables that are booleans should be prefixed with a descriptor that implies a yes or no answer. Examples of prefixes include `has`, `is`, `should`, `can`, etc
 
 ## Validation
 
@@ -22,10 +23,28 @@ Below is a non-exhaustive list of coding conventions that we try to follow. This
 
 ## UI Development
 
-- When tasked with building out a new base-level UI primitive (a checkbox component for example), consider checking [shadcn](https://ui.shadcn.com/docs/components/) to see if there's any prebuilt examples that we can use as a starting point. Because shadcn [is not a component library](https://ui.shadcn.com/docs), we get all the benefits of bootstrapping the UI with some best practices, and none of the downsides of getting locked in to opinionated component libraries that are hard to customize.
-- Utilize tailwind (the the `cn` tailwind utility function) to style components.
+- Whenever possible, try and use TailwindCSS and Radix UI as the core primitives for building UI
+- When tasked with building out a new base-level UI primitive (a checkbox component for example), consider checking [shadcn](https://ui.shadcn.com/docs/components/), a CLI tool that aides in the rapid development of TailwindCSS/Radix UI components, to see if there's any prebuilt examples that we can use as a starting point. Because shadcn [is not a component library](https://ui.shadcn.com/docs), we get all the benefits of bootstrapping the UI with some best practices, and none of the downsides of getting locked in to opinionated component libraries that are hard to customize.
+- When building forms that require best-in-class UX practices (field-level error validation for example), consider leveraging `react-hook-form` and the corresponding pre-built components in `src/components/ui/form`.
 
 ## Security
 
-- Follow [Next.js best practices](https://nextjs.org/blog/security-nextjs-server-components-actions)
-- When returning database models to the client, make sure to run them through the respective "client" parser to ensure we strip out any sensitive data
+- Follow [Next.js security best practices](https://nextjs.org/blog/security-nextjs-server-components-actions)
+  - From the blog post but calling out here for good measure: always include `import 'server-only'` in files that you never want to be exposed to the client to prevent unexpected bugs
+- When returning database models to the client, make sure to run them through the respective "client" parser found in the `/src/clientModels` folder to ensure we strip out any sensitive data
+
+## Database
+
+- Column names for datetime types should be prefixed with `datetime`
+- Column names for date types should be prefixed with `date`
+- Column names for monetary (and crypto) amounts should be prefixed with the currency, unless there is a separate column on the table that includes the monetary type. Examples include `usdAmount`, `btcValue`, etc
+- Column names for datetime types should be prefixed with `datetime`
+- Column names for boolean types should be prefixed with a descriptor that implies a yes or no answer. Examples of prefixes include `has`, `is`, `should`, `can`, etc
+
+## Next.js
+
+- Prefer static/cached pages and API endpoints, unless there are product requirements that necessitate otherwise
+- For static/cached pages, always explicitly set `export const dynamic = 'error'` (see [docs](https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#dynamic)) to prevent future code changes that accidentally make the page dynamic/slow
+- Use the App Router API directory over Page Router API directory whenever possible
+  - Examples of when to use the Page Router include when dealing with libraries that have not been upgraded to fully support the App Router yet (routes that need to leverage ThirdWeb libraries for example)
+- Don't use Client Components unless you need client-side interactivity. When developing larger Client Components, consider if some of the logic could be decoupled in to a Server Component for the non-dynamic portions. Server Components have a much smaller bundle size footprint.

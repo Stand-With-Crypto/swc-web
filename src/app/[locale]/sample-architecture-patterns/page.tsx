@@ -1,20 +1,17 @@
 // TODO delete before v2 go-live
+import { LiveUpdatingTotalDonations } from '@/app/[locale]/sample-architecture-patterns/liveUpdatingTotalDonations'
 import { CTAEmailYourCongressperson } from '@/components/app/ctaEmailYourCongressperson/ctaEmailYourCongressperson'
 import { Leaderboard } from '@/components/app/leaderboard'
+import { LocaleDropdown } from '@/components/app/localeDropdown'
 import { NavbarSessionButton } from '@/components/app/navbarSessionButton'
 import { SampleAuthenticatedRequest } from '@/components/app/sampleAuthenticatedRequest'
+import { getTotalDonations } from '@/data/donations/getTotalDonations'
 import { getLeaderboard } from '@/data/leaderboard'
 import getIntl from '@/intl/intlMessages'
 import { generateClientComponentMessages } from '@/intl/intlServerUtils'
-import { SUPPORTED_LOCALES } from '@/intl/locales'
 import { PageProps } from '@/types'
-import { getIntlUrls } from '@/utils/shared/urls'
-import Link from 'next/link'
 import { SampleTranslationClientComponent } from './sampleTranslationClientComponent'
 import { sampleTranslationClientComponentMessages } from './sampleTranslationClientComponent.messages'
-import { cn } from '@/utils/web/cn'
-import { getTotalDonations } from '@/data/donations/getTotalDonations'
-import { LiveUpdatingTotalDonations } from '@/app/[locale]/sample-architecture-patterns/liveUpdatingTotalDonations'
 
 export const revalidate = 3600
 export const dynamic = 'error'
@@ -86,8 +83,8 @@ export default async function Home(props: PageProps) {
       <p>
         One of the other cool things about RSC is that because all our static content is rendered on
         the server, we can fully internationalize the website without shipping any additional
-        client-side javascript to manage i18n. Toggle back and forth between the two locale urls to
-        see the language of the page shift for this section:
+        client-side javascript to manage i18n. Toggle back and forth between the different locales
+        using the dropdown below to see the language of the page shift for this section:
       </p>
       <p>
         <strong>Translated text in a React Server Component:</strong>{' '}
@@ -109,18 +106,8 @@ export default async function Home(props: PageProps) {
         messages={generateClientComponentMessages(intl, sampleTranslationClientComponentMessages)}
       />
       <div>
-        <p>Locale Links</p>
-        <div className="space-x-4">
-          {SUPPORTED_LOCALES.map(supportedLocale => (
-            <Link
-              className={cn(supportedLocale === locale && 'text-blue-500')}
-              href={getIntlUrls(supportedLocale).sampleArchitecturePatterns()}
-              key={supportedLocale}
-            >
-              {supportedLocale}
-            </Link>
-          ))}
-        </div>
+        <p>Toggle Current Locale</p>
+        <LocaleDropdown locale={locale} />
       </div>
       <hr />
       <h2>Sample complex form</h2>

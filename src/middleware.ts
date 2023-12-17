@@ -1,4 +1,4 @@
-import { DEFAULT_LOCALE, SUPPORTED_LOCALES } from '@/intl/locales'
+import { DEFAULT_LOCALE, ORDERED_SUPPORTED_LOCALES } from '@/intl/locales'
 import { i18nRouter } from 'next-i18n-router'
 import { NextRequest } from 'next/server'
 
@@ -6,7 +6,7 @@ import { NextRequest } from 'next/server'
 
 export function middleware(request: NextRequest) {
   return i18nRouter(request, {
-    locales: SUPPORTED_LOCALES as string[],
+    locales: ORDERED_SUPPORTED_LOCALES as string[],
     defaultLocale: DEFAULT_LOCALE,
   })
 }

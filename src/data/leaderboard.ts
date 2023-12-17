@@ -8,7 +8,7 @@ export type LeaderboardConfig = {
 }
 
 export interface LeaderboardEntity {
-  fiatDonationValueUsd: number
+  usdDonationValue: number
   ownerAddress: string
   ownerEnsName?: string
 }
@@ -16,7 +16,7 @@ export interface LeaderboardEntity {
 const mockLeaderboard = async (config: LeaderboardConfig) => {
   return _.times(2).map(i => {
     const entity: LeaderboardEntity = {
-      fiatDonationValueUsd: 3.14 * (1000 - config.offset - i),
+      usdDonationValue: 3.14 * (1000 - config.offset - i),
       ownerAddress: faker.internet.ipv6(),
       ownerEnsName: `${faker.internet.domainWord()}.eth`,
     }

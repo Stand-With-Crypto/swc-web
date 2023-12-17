@@ -47,8 +47,9 @@ export function Leaderboard({
               <TableCell className="text-right">
                 <FormattedCurrency
                   locale={locale}
+                  maximumFractionDigits={0}
                   currencyCode={SupportedCurrencyCodes.USD}
-                  amount={entity.fiatDonationValueUsd}
+                  amount={entity.usdDonationValue}
                 />
               </TableCell>
             </TableRow>

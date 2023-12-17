@@ -1,5 +1,5 @@
 import { getTotalDonations } from '@/data/donations/getTotalDonations'
-import { SUPPORTED_LOCALES, SupportedLocale } from '@/intl/locales'
+import { ORDERED_SUPPORTED_LOCALES, SupportedLocale } from '@/intl/locales'
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 

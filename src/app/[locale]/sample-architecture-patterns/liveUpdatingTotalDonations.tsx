@@ -36,6 +36,7 @@ export function LiveUpdatingTotalDonations({
     <>
       <FormattedCurrency
         locale={locale}
+        maximumFractionDigits={0}
         amount={usedTotalDonations.amountLocal}
         currencyCode={usedTotalDonations.currencyCode}
       />
