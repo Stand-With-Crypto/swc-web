@@ -1,6 +1,6 @@
 // TODO delete before v2 go-live
 import { LiveUpdatingTotalDonations } from '@/app/[locale]/sample-architecture-patterns/liveUpdatingTotalDonations'
-import { CTAEmailYourCongressperson } from '@/components/app/ctaEmailYourCongressperson/ctaEmailYourCongressperson'
+import { CTAEmailYourCongressperson } from '@/components/app/ctaEmailYourCongressperson'
 import { Leaderboard } from '@/components/app/leaderboard'
 import { LocaleDropdown } from '@/components/app/localeDropdown'
 import { NavbarSessionButton } from '@/components/app/navbarSessionButton'
@@ -12,6 +12,7 @@ import { generateClientComponentMessages } from '@/intl/intlServerUtils'
 import { PageProps } from '@/types'
 import { SampleTranslationClientComponent } from './sampleTranslationClientComponent'
 import { sampleTranslationClientComponentMessages } from './sampleTranslationClientComponent.messages'
+import { navbarSessionButtonMessages } from '@/components/app/navbarSessionButton/navbarSessionButtonClient.messages'
 
 export const revalidate = 3600
 export const dynamic = 'error'
@@ -69,7 +70,9 @@ export default async function Home(props: PageProps) {
         bootstraps after the client-side javascript loads.
       </p>
       <div>
-        <NavbarSessionButton />
+        <NavbarSessionButton
+          messages={generateClientComponentMessages(intl, navbarSessionButtonMessages)}
+        />
       </div>
       <hr />
       <h3>Sample Authenticated Endpoint</h3>

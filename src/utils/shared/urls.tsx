@@ -4,10 +4,24 @@ export const getIntlUrls = (locale: SupportedLocale) => {
   const localePrefix = locale === DEFAULT_LOCALE ? '' : `/${locale}`
   return {
     home: () => `${locale === DEFAULT_LOCALE ? '/' : localePrefix}`,
+    termsOfService: () => `${localePrefix}/terms-of-service`,
+    privacyPolicy: () => `${localePrefix}/privacy`,
+    about: () => `${localePrefix}/about`,
+    leaderboard: () => `${localePrefix}/leaderboard`,
     politiciansHomepage: () => `${localePrefix}/politicians`,
     // TODO delete before v2 go-live
     sampleArchitecturePatterns: () => `${localePrefix}/sample-architecture-patterns`,
   }
+}
+
+export const externalUrls = {
+  emailFeedback: () => 'mailto:info@standwithcrypto.org',
+  twitter: () => 'https://twitter.com/standwithcrypto',
+  youtube: () => 'https://www.youtube.com/@StandWithCryptoAlliance/featured',
+  instagram: () => 'https://www.instagram.com/standwithcrypto',
+  facebook: () => 'https://www.facebook.com/standwithcrypto',
+  linkedin: () => 'https://www.linkedin.com/company/standwithcrypto/',
+  discord: () => 'https://discord.com/invite/standwithcrypto',
 }
 
 export const apiUrls = {

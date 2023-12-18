@@ -1,4 +1,4 @@
-import { REPLACE_ME__captureException } from '@/utils/shared/captureException'
+import { REPLACE_ME__captureException } from './captureException'
 
 export class FetchReqError extends Error {
   response: Response

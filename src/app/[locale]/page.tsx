@@ -1,3 +1,4 @@
+import { InternalLink } from '@/components/ui/link'
 import { PageProps } from '@/types'
 import { getIntlUrls } from '@/utils/shared/urls'
 import Link from 'next/link'
@@ -9,14 +10,5 @@ export const dynamic = 'error'
 
 export default async function Home(props: PageProps) {
   const urls = getIntlUrls(props.params.locale)
-  return (
-    <div className="prose-sm mx-auto mt-10 w-full max-w-xl p-4">
-      <div>
-        <Link href={urls.sampleArchitecturePatterns()}>View Sample Architecture Patterns</Link>
-      </div>
-      <div>
-        <Link href={urls.politiciansHomepage()}>Politicians Homepage</Link>
-      </div>
-    </div>
-  )
+  return <div className="prose-sm mx-auto mt-10 w-full max-w-xl p-4"></div>
 }

@@ -8,7 +8,10 @@ const DATABASE_URL = requiredEnv(process.env.DATABASE_URL, 'process.env.DATABASE
 
 const client = new Client({ url: DATABASE_URL, fetch: undiciFetch })
 const adapter = new PrismaPlanetScale(client)
-const prisma = new PrismaClient({ adapter, log: ['query', 'info', 'warn', 'error'] })
+const prisma = new PrismaClient({
+  adapter,
+  log: process.env.LOG_DATABASE ? ['query', 'info', 'warn', 'error'] : ['warn', 'error'],
+})
 
 // PrismaClient is attached to the `global` object in development to prevent
 // exhausting your database connection limit.

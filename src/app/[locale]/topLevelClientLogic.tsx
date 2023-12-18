@@ -13,7 +13,7 @@ import { useEffect } from 'react'
 // This component includes all top level client-side logic
 export function TopLevelClientLogic() {
   const pathname = usePathname()
-  // TODO determine why this component double renders ever page load/transition
+  // Not, in local dev this component will double render. It doesn't do this after it is built (verify in testing)
   useEffect(() => {
     const sessionId = maybeSetSessionIdOnClient()
     initAnalytics(sessionId)

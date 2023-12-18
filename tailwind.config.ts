@@ -6,13 +6,15 @@ const config: Config = {
   theme: {
     container: {
       center: true,
-      padding: '2rem',
+      padding: { DEFAULT: '1rem', md: '2rem' },
       screens: {
-        '2xl': '1400px',
+        '2xl': '1086px',
       },
     },
     extend: {
+      // https://tailwindcss.com/docs/customizing-colors default colors
       colors: {
+        // shadcn-added variables
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
@@ -46,6 +48,11 @@ const config: Config = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
+        fontcolor: {
+          DEFAULT: 'hsl(var(--foreground))',
+          muted: 'hsl(var(--muted-foreground))', // gray-400
+        },
+        // swc-added variables
       },
       borderRadius: {
         lg: 'var(--radius)',

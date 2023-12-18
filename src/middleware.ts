@@ -1,5 +1,9 @@
 import { DEFAULT_LOCALE, ORDERED_SUPPORTED_LOCALES } from '@/intl/locales'
 import { getLogger } from '@/utils/shared/logger'
+import {
+  UNAUTHENTICATED_SESSION_ID_NAME,
+  generateUnauthenticatedSessionId,
+} from '@/utils/shared/unauthenticatedSessionId'
 import { i18nRouter } from 'next-i18n-router'
 import { NextRequest } from 'next/server'
 

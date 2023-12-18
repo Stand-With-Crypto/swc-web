@@ -1,4 +1,7 @@
 /** @type {import('next').NextConfig} */
+
+// TODO bring over old configs
+
 const nextConfig = {
   images: {
     remotePatterns: [
