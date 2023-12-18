@@ -87,7 +87,7 @@ export async function Footer(props: PageProps) {
           </ExternalLink>
         </div>
       </div>
-      <div className="text-fontcolor-muted mt-10 text-sm">
+      <div className="mt-10 text-sm text-fontcolor-muted">
         {intl.formatMessage({
           id: `${i18nKey}.copyright`,
           defaultMessage: 'Stand with Crypto ©️ All rights reserved 2023',
