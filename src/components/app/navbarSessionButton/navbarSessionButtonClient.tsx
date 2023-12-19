@@ -31,7 +31,6 @@ export function NavbarSessionButtonClient(props: {
           '!h-10 !px-4 !py-2',
         )
       }
-      style={{}}
       theme={'dark'}
       auth={{ loginOptional: false }}
       modalSize={'compact'}

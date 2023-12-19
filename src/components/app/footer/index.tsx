@@ -15,7 +15,7 @@ export async function Footer(props: PageProps) {
   const urls = getIntlUrls(locale)
 
   return (
-    <footer className="container mx-auto mb-20">
+    <footer className="container mx-auto my-20">
       <div className="grids-col-1 grid gap-4 sm:grid-cols-3">
         <div className="space-y-3 sm:space-y-9">
           <InternalLink className={footerLinkStyles} href={urls.termsOfService()}>

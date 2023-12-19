@@ -1,5 +1,5 @@
 import { SupportedLocale } from '@/intl/locales'
-import { SupportedCurrencyCodes } from '@/utils/shared/currency'
+import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 
 export function FormattedCurrency({
   amount,
@@ -8,7 +8,7 @@ export function FormattedCurrency({
   ...otherProps
 }: {
   amount: number
-  currencyCode: SupportedCurrencyCodes
+  currencyCode: SupportedFiatCurrencyCodes
   locale: SupportedLocale
 } & {
   currencySign?: string | undefined
