@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "ts": "TZ=UTC tsx",
     "dev": "next dev",
     "build": "next build",
     "postbuild": "next-sitemap",
@@ -16,10 +17,11 @@
     "codegen": "graphql-codegen --config codegen.ts",
     "codegen:schemas": "graphql-codegen --config codegen-schemas.ts",
     "intl:extract": "formatjs extract 'src/**/*.{ts,tsx}' '!src/**/*.d.ts' --out-file src/intl/generated/extract.json",
-    "intl:extract-compile": "formatjs extract 'src/**/*.ts*' '!src/**/*.d.ts' --out-file temp.json --flatten --id-interpolation-pattern '[sha512:contenthash:base64:6]' && formatjs compile 'temp.json' --out-file src/intl/generated/compile/en-US.json && rm temp.json"
+    "intl:extract-compile": "formatjs extract 'src/**/*.ts*' '!src/**/*.d.ts' --out-file temp.json --flatten --id-interpolation-pattern '[sha512:contenthash:base64:6]' && formatjs compile 'temp.json' --out-file src/intl/generated/compile/en-US.json && rm temp.json",
+    "db:seed": "prisma db push --force-reset && prisma db seed"
   },
   "prisma": {
-    "seed": "ts-node --transpile-only prisma/seed.ts"
+    "seed": "npm run ts --transpile-only src/bin/seedLocalDb.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.2",
@@ -112,7 +114,8 @@
     "prisma": "^5.7.0",
     "storybook": "^7.6.4",
     "tailwindcss": "^3.3.0",
-    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "tsx": "^4.7.0",
     "typescript": "^5",
     "yargs": "^17.7.2"
   }

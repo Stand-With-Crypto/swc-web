@@ -1,5 +1,7 @@
+import './binEnv'
 import { runBin } from '@/bin/binUtils'
 import { mockAddress } from '@/mocks/models/mockAddress'
+import { mockAuthenticationNonce } from '@/mocks/models/mockAuthenticationNonce'
 import { mockCryptoAddressUser } from '@/mocks/models/mockCryptoAddressUser'
 import { mockInferredUser } from '@/mocks/models/mockInferredUser'
 import { mockNonFungibleToken } from '@/mocks/models/mockNonFungibleToken'
@@ -34,7 +36,7 @@ const argv = yargs(hideBin(process.argv)).option('size', {
   type: 'string',
   describe: 'The timestamp of the last updated record',
   choices: Object.values(SeedSize),
-  default: SeedSize.LG,
+  default: SeedSize.SM,
 }).argv
 
 const logger = getLogger('seedLocalDb')
@@ -60,7 +62,7 @@ async function seed() {
   authenticationNonce
   */
   await batchAsyncAndLog(
-    _.times(seedSizes([10, 100, 1000])).map(() => mockInferredUser()),
+    _.times(seedSizes([10, 100, 1000])).map(() => mockAuthenticationNonce()),
     data =>
       prismaClient.authenticationNonce.createMany({
         data,
