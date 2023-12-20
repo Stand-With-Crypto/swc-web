@@ -13,6 +13,8 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    // This may cause your IDE to slow down. If it does let me know and we can consider swapping it back to false.
+    "noErrorTruncation": true,
     "plugins": [
       {
         "name": "next"

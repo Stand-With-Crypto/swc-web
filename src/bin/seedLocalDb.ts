@@ -1,10 +1,10 @@
-import './binEnv'
+import 'dotenv/config'
 import { runBin } from '@/bin/binUtils'
 import { mockAddress } from '@/mocks/models/mockAddress'
 import { mockAuthenticationNonce } from '@/mocks/models/mockAuthenticationNonce'
 import { mockCryptoAddressUser } from '@/mocks/models/mockCryptoAddressUser'
 import { mockInferredUser } from '@/mocks/models/mockInferredUser'
-import { mockNonFungibleToken } from '@/mocks/models/mockNonFungibleToken'
+import { mockNFT } from '@/mocks/models/mockNFT'
 import { mockSessionUser } from '@/mocks/models/mockSessionUser'
 import { mockUserAction } from '@/mocks/models/mockUserAction'
 import { mockUserActionCall } from '@/mocks/models/mockUserActionCall'
@@ -21,6 +21,8 @@ import { faker } from '@faker-js/faker'
 import _ from 'lodash'
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
+import { UserActionType } from '@prisma/client'
+import { mockUserActionOptIn } from '@/mocks/models/mockUserActionOptIn'
 
 const LOCAL_USER_CRYPTO_ADDRESS = requiredEnv(
   process.env.LOCAL_USER_CRYPTO_ADDRESS,
@@ -103,7 +105,7 @@ async function seed() {
   await batchAsyncAndLog(
     _.times(seedSizes([100, 1000, 10000])).map(index => ({
       ...mockCryptoAddressUser(),
-      address: index === 0 ? LOCAL_USER_CRYPTO_ADDRESS : faker.finance.ethereumAddress(),
+      cryptoAddress: index === 0 ? LOCAL_USER_CRYPTO_ADDRESS : faker.finance.ethereumAddress(),
       inferredUserId: faker.helpers.arrayElement(inferredUser).id,
     })),
     data =>
@@ -112,21 +114,40 @@ async function seed() {
       }),
   )
   const cryptoAddressUser = await prismaClient.cryptoAddressUser.findMany()
+  const cryptoAddressLocalUser = cryptoAddressUser.find(
+    x => x.cryptoAddress === LOCAL_USER_CRYPTO_ADDRESS,
+  )!
   logEntity({ cryptoAddressUser })
+  /*
+  nft
+  */
+  await batchAsyncAndLog(
+    _.times(seedSizes([5, 10, 15])).map(() => mockNFT()),
+    data =>
+      prismaClient.nFT.createMany({
+        data,
+      }),
+  )
+  const nft = await prismaClient.nFT.findMany()
+  logEntity({ nft })
   /*
   userAction
   */
+  const userActionTypes = Object.values(UserActionType)
   await batchAsyncAndLog(
     _.times(seedSizes([400, 4000, 40000])).map(index => {
       const user =
-        index % 2
-          ? faker.helpers.arrayElement(cryptoAddressUser)
-          : faker.helpers.arrayElement(sessionUser)
+        index < 10
+          ? cryptoAddressLocalUser
+          : index % 2
+            ? faker.helpers.arrayElement(cryptoAddressUser)
+            : faker.helpers.arrayElement(sessionUser)
 
       return {
         ...mockUserAction(),
-        cryptoAddressUserId: 'address' in user ? user.id : null,
-        sessionUserId: 'address' in user ? null : user.id,
+        actionType: userActionTypes[index % userActionTypes.length],
+        cryptoAddressUserId: 'cryptoAddress' in user ? user.id : null,
+        sessionUserId: 'cryptoAddress' in user ? null : user.id,
         inferredUserId: user.inferredUserId,
       }
     }),
@@ -138,18 +159,51 @@ async function seed() {
   const userAction = await prismaClient.userAction.findMany()
   logEntity({ userAction })
 
-  const [
-    userActionEmailInput,
-    userActionCallInput,
-    userActionDonationInput,
-    userActionNFTMintInput,
-    userActionTweetInput,
-  ] = splitArray(userAction, 5)
+  const userActionsByType = _.groupBy(userAction, x => x.actionType) as Record<
+    UserActionType,
+    typeof userAction
+  >
+  /*
+  NFTMint
+  */
+  await batchAsyncAndLog(
+    userActionsByType[UserActionType.NFT_MINT].map((action, index) => {
+      const selectedNFT = faker.helpers.arrayElement(nft)
+      return {
+        id: action.id,
+        nftId: selectedNFT.id,
+        costAtMint: selectedNFT.cost,
+        costAtMintCurrencyCode: selectedNFT.costCurrencyCode,
+        constAtMintUsd: selectedNFT.cost.times(MOCK_CURRENT_ETH_USD_EXCHANGE_RATE),
+      }
+    }),
+    data =>
+      prismaClient.nFTMint.createMany({
+        data,
+      }),
+  )
+  const nftMint = await prismaClient.nFTMint.findMany()
+  logEntity({ nftMint })
+
+  // add these nft mints to the nft userAction NFT mints
+  for (let i = 0; i < nftMint.length; i++) {
+    const nftMintRecord = nftMint[i]
+    const userActionRecord = userActionsByType[UserActionType.NFT_MINT][i]
+    await prismaClient.userAction.update({
+      where: { id: userActionRecord.id },
+      data: {
+        nftMintId: nftMintRecord.id,
+      },
+    })
+    // update in memory as well
+    userActionRecord.nftMintId = nftMintRecord.id
+  }
+
   /*
   address
   */
   await batchAsyncAndLog(
-    userActionEmailInput.map(() => mockAddress()),
+    userActionsByType[UserActionType.EMAIL].map(() => mockAddress()),
     data =>
       prismaClient.address.createMany({
         data,
@@ -162,7 +216,7 @@ async function seed() {
   userActionEmail
   */
   await batchAsyncAndLog(
-    userActionEmailInput.map((action, index) => ({
+    userActionsByType[UserActionType.EMAIL].map((action, index) => ({
       ...mockUserActionEmail(),
       id: action.id,
       addressId: address[index].id,
@@ -179,7 +233,7 @@ async function seed() {
   */
   await batchAsyncAndLog(
     _.flatten(
-      userActionEmailInput.map((actionEmail, index) =>
+      userActionsByType[UserActionType.EMAIL].map((actionEmail, index) =>
         _.times(faker.helpers.arrayElement([1, 3, 5])).map(() => ({
           ...mockUserActionEmailRecipient(),
           userActionEmailId: actionEmail.id,
@@ -197,7 +251,7 @@ async function seed() {
   userActionCall
   */
   await batchAsyncAndLog(
-    userActionCallInput.map((action, index) => ({
+    userActionsByType[UserActionType.CALL].map((action, index) => ({
       ...mockUserActionCall(),
       id: action.id,
     })),
@@ -208,62 +262,12 @@ async function seed() {
   )
   const userActionCall = await prismaClient.userActionCall.findMany()
   logEntity({ userActionCall })
-  /*
-  nonFungibleToken
-  */
-  await batchAsyncAndLog(
-    _.times(seedSizes([5, 10, 15])).map(() => mockNonFungibleToken()),
-    data =>
-      prismaClient.nonFungibleToken.createMany({
-        data,
-      }),
-  )
-  const nonFungibleToken = await prismaClient.nonFungibleToken.findMany()
-  logEntity({ nonFungibleToken })
-  /*
-  userActionNFTMint
-  */
-  await batchAsyncAndLog(
-    userActionNFTMintInput.map((action, index) => {
-      const nft = faker.helpers.arrayElement(nonFungibleToken)
-      return {
-        id: action.id,
-        nftId: nft.id,
-        costAtMint: nft.cost,
-        costAtMintCurrencyCode: nft.costCurrencyCode,
-        constAtMintUsd: nft.cost.times(MOCK_CURRENT_ETH_USD_EXCHANGE_RATE),
-      }
-    }),
-    data =>
-      prismaClient.userActionNFTMint.createMany({
-        data,
-      }),
-  )
-  const userActionNFTMint = await prismaClient.userActionNFTMint.findMany()
-  logEntity({ userActionNFTMint })
-
-  /*
-  userActionTweet
-  */
-  await batchAsyncAndLog(
-    userActionTweetInput.map((action, index) => {
-      return {
-        id: action.id,
-      }
-    }),
-    data =>
-      prismaClient.userActionTweet.createMany({
-        data,
-      }),
-  )
-  const userActionTweet = await prismaClient.userActionTweet.findMany()
-  logEntity({ userActionTweet })
 
   /*
   userActionDonation
   */
   await batchAsyncAndLog(
-    userActionDonationInput.map((action, index) => {
+    userActionsByType[UserActionType.DONATION].map((action, index) => {
       return {
         ...mockUserActionDonation(),
         id: action.id,
@@ -276,6 +280,24 @@ async function seed() {
   )
   const userActionDonation = await prismaClient.userActionDonation.findMany()
   logEntity({ userActionDonation })
+
+  /*
+  userActionOptIn
+  */
+  await batchAsyncAndLog(
+    userActionsByType[UserActionType.OPT_IN].map((action, index) => {
+      return {
+        ...mockUserActionOptIn(),
+        id: action.id,
+      }
+    }),
+    data =>
+      prismaClient.userActionOptIn.createMany({
+        data,
+      }),
+  )
+  const userActionOptIn = await prismaClient.userActionOptIn.findMany()
+  logEntity({ userActionOptIn })
 }
 
 runBin(seed)

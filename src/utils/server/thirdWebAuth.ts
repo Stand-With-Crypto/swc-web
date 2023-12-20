@@ -1,4 +1,4 @@
-import { ThirdwebAuth } from '@thirdweb-dev/auth/next'
+import { ThirdwebAuth, ThirdwebAuthConfig } from '@thirdweb-dev/auth/next'
 import { PrivateKeyWallet } from '@thirdweb-dev/auth/evm'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN } from '@/utils/shared/sharedEnv'
@@ -11,7 +11,7 @@ const THIRDWEB_AUTH_PRIVATE_KEY = requiredEnv(
   'THIRDWEB_AUTH_PRIVATE_KEY',
 )
 
-export const thirdWebAuth = ThirdwebAuth({
+export const thirdWebAuthConfig: ThirdwebAuthConfig = {
   domain: NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN,
   // TODO determine if we have requirements for the wallet private key that necessitate a more secure storage mechanism
   wallet: new PrivateKeyWallet(THIRDWEB_AUTH_PRIVATE_KEY),
@@ -34,22 +34,22 @@ export const thirdWebAuth = ThirdwebAuth({
     onLogout: user => {
       // TODO analytics
     },
-    onUser: async (user, req) => {
-      // TODO analytics
-      // TODO append metadata to the user session object
-      // console.log('onUser', { user, req: !!req })
-    },
-    onLogin: async address => {
+    // look for the comment in appRouterGetAuthUser for why we don't use this fn
+    onUser: async (user, req) => {},
+    onLogin: async cryptoAddress => {
       // TODO figure out how to get the users email address to persist to the db
-      console.log('onLogin', { address })
+      console.log('onLogin', { address: cryptoAddress })
       // TODO analytics
-      const existingUser = await prismaClient.cryptoAddressUser.findUnique({ where: { address } })
+      const existingUser = await prismaClient.cryptoAddressUser.findUnique({
+        where: { cryptoAddress },
+      })
       if (!existingUser) {
         await prismaClient.cryptoAddressUser.create({
           // TODO try to match this with an existing user
-          data: { address, inferredUser: { create: {} } },
+          data: { cryptoAddress, inferredUser: { create: {} }, isPubliclyVisible: true },
         })
       }
     },
   },
-})
+}
+export const thirdWebAuth = ThirdwebAuth(thirdWebAuthConfig)

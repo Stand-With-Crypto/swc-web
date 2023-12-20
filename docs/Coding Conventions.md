@@ -48,5 +48,5 @@ Below is a non-exhaustive list of coding conventions that we try to follow. This
 - Prefer static/cached pages and API endpoints, unless there are product requirements that necessitate otherwise
 - For static/cached pages, always explicitly set `export const dynamic = 'error'` (see [docs](https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#dynamic)) to prevent future code changes that accidentally make the page dynamic/slow
 - Use the App Router API directory over Page Router API directory whenever possible
-  - Examples of when to use the Page Router include when dealing with libraries that have not been upgraded to fully support the App Router yet (routes that need to leverage ThirdWeb libraries for example)
+  - Examples of when to use the Page Router include when dealing with libraries that have not been upgraded to fully support the App Router yet
 - Don't use Client Components unless you need client-side interactivity. When developing larger Client Components, consider if some of the logic could be decoupled in to a Server Component for the non-dynamic portions. Server Components have a much smaller bundle size footprint.
