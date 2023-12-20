@@ -7,7 +7,7 @@ import { apiUrls } from '@/utils/shared/urls'
 import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
 import { SupportedLocale } from '@/intl/locales'
-import { SupportedCurrencyCodes } from '@/utils/shared/currency'
+import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import {
   ClientAnalyticActionType,
@@ -53,7 +53,7 @@ export function Leaderboard({
                 <FormattedCurrency
                   locale={locale}
                   maximumFractionDigits={0}
-                  currencyCode={SupportedCurrencyCodes.USD}
+                  currencyCode={SupportedFiatCurrencyCodes.USD}
                   amount={entity.usdDonationValue}
                 />
               </TableCell>

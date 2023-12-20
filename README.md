@@ -15,7 +15,7 @@
   - Not a core contributor? Not worries! You can [create your own free account](https://auth.planetscale.com/sign-up).
 - Run `pscale connect NAME_OF_DATABASE NAME_OF_BRANCH` - this will create a secure connection to PlanetScale. Keep this process running as you move on to the next steps
   - For core StandWithCrypto contributors, this will be `pscale connect swc-web testing --org stand-with-crypto`
-- Run `npx prisma migrate dev` - syncs your local database with the latest migrations in the `prisma/` folder
+- Run `npm run db:seed` - Resets your database and populates it with seed data
 - Run `npm run dev` - runs dev server
 - Open [http://localhost:3000](http://localhost:3000) with your browser to see the result
 

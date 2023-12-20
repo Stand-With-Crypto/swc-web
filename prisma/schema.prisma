@@ -19,9 +19,9 @@ model AuthenticationNonce {
 // sometimes they won't be logged in at all but we'll need to cache a session id for them so that if they log in with a eth address later we can associate their actions with the new address. 
 // We'll need to track these different "users" with their own respective metadata, and try to join these related models with a InferredUser table
 model InferredUser {
-  id                      String   @id @default(uuid())
-  datetimeUpdated         DateTime @updatedAt @map("datetime_updated")
-  datetimeCreated         DateTime @default(now()) @map("datetime_created")
+  id              String   @id @default(uuid())
+  datetimeUpdated DateTime @updatedAt @map("datetime_updated")
+  datetimeCreated DateTime @default(now()) @map("datetime_created")
 
   sessionUsers       SessionUser[]
   cryptoAddressUsers CryptoAddressUser[]
@@ -51,15 +51,15 @@ model SessionUser {
 
 // Using ThirdWeb a user can create multiple "accounts", one per wallet. They can also have some that are self-custodied, and some that are being custodied by ThirdWeb (email, google login, etc)
 model CryptoAddressUser {
-  id               String               @id @default(uuid())
-  address          String               @unique
+  id                      String       @id @default(uuid())
+  address                 String       @unique
   // TODO figure out how to identify this
   // initialCustodian Web3AddressCustodian
-  inferredUserId   String               @map("inferred_user_id")
-  inferredUser     InferredUser         @relation(fields: [inferredUserId], references: [id])
-  datetimeUpdated  DateTime             @updatedAt @map("datetime_updated")
-  datetimeCreated  DateTime             @default(now()) @map("datetime_created")
-  sampleDatabaseIncrement Int      @default(0)
+  inferredUserId          String       @map("inferred_user_id")
+  inferredUser            InferredUser @relation(fields: [inferredUserId], references: [id])
+  datetimeUpdated         DateTime     @updatedAt @map("datetime_updated")
+  datetimeCreated         DateTime     @default(now()) @map("datetime_created")
+  sampleDatabaseIncrement Int          @default(0)
 
   userActions UserAction[]
 
@@ -103,7 +103,9 @@ model Address {
   city           String
   state          String
   zipCode        String  @map("zip_code")
-  country        String
+  countryCode    String
+  datetimeUpdated     DateTime           @updatedAt @map("datetime_updated")
+  datetimeCreated     DateTime           @default(now()) @map("datetime_created")
 
   userActionEmails UserActionEmail[]
 }
@@ -113,7 +115,7 @@ model UserActionEmail {
   userAction                UserAction                 @relation(fields: [id], references: [id])
   // TODO determine if these need to be nullable in the future
   zipCode                   String                     @map("zip_code")
-  email                     String
+  senderEmail               String
   fullName                  String                     @map("full_name")
   phoneNumber               String                     @map("phone_number")
   address                   Address                    @relation(fields: [addressId], references: [id])
@@ -148,37 +150,45 @@ model UserActionDonation {
   id           String     @id @default(uuid())
   userAction   UserAction @relation(fields: [id], references: [id])
   // TODO determine if these need to be nullable in the future
-  amount       String     @map("amount")
-  currencyCode String     @map("currency_code")
-  amountUsd    String     @map("amount_usd")
+  amount       Decimal     @map("amount")
+  amountCurrencyCode String     @map("amount_currency_code")
+  amountUsd    Decimal     @map("amount_usd")
 
   @@index([id])
+}
+
+enum NonFungibleTokenCurrency {
+  ETH
 }
 
 // TODO determine if this actually should be a model or just an enum
 // my gut is that we want to be able to spin up new mints in the future without having to migrate the db
 // if that's the case then we want a freestanding model
-model MintableNFT {
-  id                String              @id @default(uuid())
-  name              String
-  UserActionNFTMint UserActionNFTMint[]
+model NonFungibleToken {
+  id                 String              @id @default(uuid())
+  name               String
+  cost             Decimal              @map("cost")
+  costCurrencyCode NonFungibleTokenCurrency              @map("cost_currency_code")
+  datetimeUpdated     DateTime           @updatedAt @map("datetime_updated")
+  datetimeCreated     DateTime           @default(now()) @map("datetime_created")
 
-  // TODO Web3 info about address/contract/cost/etc (img)
+  UserActionNFTMint  UserActionNFTMint[]
+  // TODO Web3 info about address/contract/etc/price (img)
+  
   @@index([id])
 }
 
 model UserActionNFTMint {
-  id            String      @id @default(uuid())
-  userAction    UserAction  @relation(fields: [id], references: [id])
-  // TODO determine if these need to be nullable in the future
-  mintableNFTId String      @map("mintable_nft_id")
-  mintableNFT   MintableNFT @relation(fields: [mintableNFTId], references: [id])
-  amount        String      @map("amount")
-  currencyCode  String      @map("currency_code")
-  amountUsd     String      @map("amount_usd")
+  id                       String           @id @default(uuid())
+  userAction               UserAction       @relation(fields: [id], references: [id])
+  nftId       String           @map("nft_id")
+  nft         NonFungibleToken @relation(fields: [nftId], references: [id])
+  costAtMint             Decimal              @map("cost_at_mint")
+  costAtMintCurrencyCode NonFungibleTokenCurrency              @map("cost_at_mint_currency_code")
+  constAtMintUsd          Decimal              @map("cost_at_mint_usd")
 
   @@index([id])
-  @@index([mintableNFTId])
+  @@index([nftId])
 }
 
 model UserActionTweet {

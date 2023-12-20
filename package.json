@@ -3,11 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "ts": "TZ=UTC tsx",
     "dev": "next dev",
     "build": "next build",
     "postbuild": "next-sitemap",
     "start": "next start",
-    "lint": "concurrently \"next lint\" \"prettier --check .\"",
+    "lint": "concurrently \"next lint\"  \"prettier --check .\"",
     "typecheck": "tsc --noEmit --incremental",
     "format": "prettier --write .",
     "test": "jest",
@@ -15,8 +16,12 @@
     "build-storybook": "storybook build",
     "codegen": "graphql-codegen --config codegen.ts",
     "codegen:schemas": "graphql-codegen --config codegen-schemas.ts",
-    "intl:extract": "formatjs extract 'src/app/**/*.{ts,tsx}' --out-file src/intl/generated/extract.json",
-    "intl:extract-compile": "formatjs extract 'src/app/**/*.ts*' --out-file temp.json --flatten --id-interpolation-pattern '[sha512:contenthash:base64:6]' && formatjs compile 'temp.json' --out-file src/intl/generated/compile/en-US.json && rm temp.json"
+    "intl:extract": "formatjs extract 'src/**/*.{ts,tsx}' '!src/**/*.d.ts' --out-file src/intl/generated/extract.json",
+    "intl:extract-compile": "formatjs extract 'src/**/*.ts*' '!src/**/*.d.ts' --out-file temp.json --flatten --id-interpolation-pattern '[sha512:contenthash:base64:6]' && formatjs compile 'temp.json' --out-file src/intl/generated/compile/en-US.json && rm temp.json",
+    "db:seed": "prisma db push --force-reset && prisma db seed"
+  },
+  "prisma": {
+    "seed": "npm run ts --transpile-only src/bin/seedLocalDb.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.2",
@@ -34,6 +39,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "date-fns": "^2.30.0",
+    "decimal.js": "^10.4.3",
     "dotenv": "^16.3.1",
     "ethers": "^5.7.2",
     "formatjs": "^0.1.1",
@@ -46,6 +52,7 @@
     "next-i18n-router": "^5.0.2",
     "next-sitemap": "^4.2.3",
     "nextjs-toploader": "^1.6.4",
+    "p-limit": "^5.0.0",
     "pino-pretty": "^10.3.0",
     "react": "^18",
     "react-dom": "^18",
@@ -89,6 +96,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/yargs": "^17.0.32",
     "@typescript-eslint/eslint-plugin": "^6.14.0",
     "@typescript-eslint/parser": "^6.14.0",
     "autoprefixer": "^10.0.1",
@@ -106,7 +114,9 @@
     "prisma": "^5.7.0",
     "storybook": "^7.6.4",
     "tailwindcss": "^3.3.0",
-    "ts-node": "^10.9.2",
-    "typescript": "^5"
+    "tsconfig-paths": "^4.2.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5",
+    "yargs": "^17.7.2"
   }
 }
