@@ -1,4 +1,4 @@
-import './binEnv'
+import 'dotenv/config'
 import { runBin } from '@/bin/binUtils'
 import { mockAddress } from '@/mocks/models/mockAddress'
 import { mockAuthenticationNonce } from '@/mocks/models/mockAuthenticationNonce'
@@ -21,6 +21,7 @@ import { faker } from '@faker-js/faker'
 import _ from 'lodash'
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
+import { ClientUserActionType } from '@/clientModels/clientUserAction/clientUserActionEnums'
 
 const LOCAL_USER_CRYPTO_ADDRESS = requiredEnv(
   process.env.LOCAL_USER_CRYPTO_ADDRESS,
@@ -103,7 +104,7 @@ async function seed() {
   await batchAsyncAndLog(
     _.times(seedSizes([100, 1000, 10000])).map(index => ({
       ...mockCryptoAddressUser(),
-      address: index === 0 ? LOCAL_USER_CRYPTO_ADDRESS : faker.finance.ethereumAddress(),
+      cryptoAddress: index === 0 ? LOCAL_USER_CRYPTO_ADDRESS : faker.finance.ethereumAddress(),
       inferredUserId: faker.helpers.arrayElement(inferredUser).id,
     })),
     data =>
@@ -112,6 +113,9 @@ async function seed() {
       }),
   )
   const cryptoAddressUser = await prismaClient.cryptoAddressUser.findMany()
+  const cryptoAddressLocalUser = cryptoAddressUser.find(
+    x => x.cryptoAddress === LOCAL_USER_CRYPTO_ADDRESS,
+  )!
   logEntity({ cryptoAddressUser })
   /*
   userAction
@@ -119,14 +123,16 @@ async function seed() {
   await batchAsyncAndLog(
     _.times(seedSizes([400, 4000, 40000])).map(index => {
       const user =
-        index % 2
-          ? faker.helpers.arrayElement(cryptoAddressUser)
-          : faker.helpers.arrayElement(sessionUser)
+        index < 10
+          ? cryptoAddressLocalUser
+          : index % 2
+            ? faker.helpers.arrayElement(cryptoAddressUser)
+            : faker.helpers.arrayElement(sessionUser)
 
       return {
         ...mockUserAction(),
-        cryptoAddressUserId: 'address' in user ? user.id : null,
-        sessionUserId: 'address' in user ? null : user.id,
+        cryptoAddressUserId: 'cryptoAddress' in user ? user.id : null,
+        sessionUserId: 'cryptoAddress' in user ? null : user.id,
         inferredUserId: user.inferredUserId,
       }
     }),

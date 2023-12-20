@@ -11,7 +11,6 @@ import { Inter } from 'next/font/google'
 import NextTopLoader from 'nextjs-toploader'
 
 export const dynamicParams = false
-export const dynamic = 'error'
 export async function generateStaticParams() {
   return ORDERED_SUPPORTED_LOCALES.map(locale => ({ locale }))
 }

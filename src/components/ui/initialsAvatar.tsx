@@ -1,16 +1,12 @@
 import { MaybeNextImgProps, NextImage } from '@/components/ui/image'
 import { cn } from '@/utils/web/cn'
 
-export type AvatarBaseProps = {
+export type InitialsAvatarProps = {
   size: number
   className?: string
+  firstInitial: string
+  lastInitial?: string
 }
-
-export type AvatarProps = (
-  | Omit<MaybeNextImgProps, 'width' | 'height'>
-  | { firstInitial: string; lastInitial?: string }
-) &
-  AvatarBaseProps
 
 const getFontSize = (size: number) => {
   if (size < 20) {
@@ -22,20 +18,7 @@ const getFontSize = (size: number) => {
   return cn('text-lg')
 }
 
-export const Avatar: React.FC<AvatarProps> = ({ size, className, ...props }) => {
-  if ('src' in props) {
-    return (
-      <span className="relative inline-block" style={{ width: size, height: size }}>
-        <NextImage
-          fill
-          style={{ objectFit: 'cover' }}
-          className={cn('inline-block rounded-full', className)}
-          sizes={`${size}px`}
-          {...props}
-        />
-      </span>
-    )
-  }
+export const InitialsAvatar: React.FC<InitialsAvatarProps> = ({ size, className, ...props }) => {
   return (
     <span
       className={cn('inline-flex items-center justify-center rounded-full bg-gray-800', className)}
@@ -48,4 +31,4 @@ export const Avatar: React.FC<AvatarProps> = ({ size, className, ...props }) => 
     </span>
   )
 }
-Avatar.displayName = 'Avatar'
+InitialsAvatar.displayName = 'InitialsAvatar'

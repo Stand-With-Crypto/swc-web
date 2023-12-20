@@ -5,7 +5,7 @@
 - Install node v20.10.0 ([nvm](https://github.com/nvm-sh/nvm) is recommended)
 - Install the [pscale cli](https://github.com/planetscale/cli#installation)
 - Run `npm install`
-- Run `cp .env.example .env && cp .env.local.example .env.local`. Open the newly generated files and update the environment variables based off the comment instructions
+- Run `cp .env.example .env`. Open the newly generated files and update the environment variables based off the comment instructions
 - Run `npx prisma generate` - Generates [Prisma ORM](https://www.prisma.io/) typescript definitions from `prisma/prisma.schema`
 - Run `npm run intl:extract-compile` - generates initial translation files
 - Run `npm run codegen:schemas` - pulls in the latest graphql schemas of our 3rd party API partners (like dotheysupportit.com)
@@ -26,4 +26,5 @@
 ## Learn More
 
 - Read `docs/Leveraging Modern NextJS Features.md` for an overview on the new Next.js features, React Server Components and Server Actions, being leveraged in this repo
+- Read `docs/Coding Conventions.md` for an overview of coding conventions encouraged for this project
 - After getting the app running, visit [http://localhost:3000/en-US/sample-architecture-patterns](http://localhost:3000/en-US/sample-architecture-patterns)

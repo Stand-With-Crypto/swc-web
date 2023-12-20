@@ -4,7 +4,7 @@ import { InitialsAvatar } from '@/components/ui/initialsAvatar'
 import { DTSI_Person } from '@/data/dtsi/generated'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 
-export const DTSIAvatar: React.FC<
+export const UserAvatar: React.FC<
   {
     person: Pick<
       DTSI_Person,

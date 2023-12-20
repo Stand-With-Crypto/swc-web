@@ -6,15 +6,24 @@ import { NextImage } from '@/components/ui/image'
 import { GetDefineMessageResults } from '@/types'
 import { cn } from '@/utils/web/cn'
 import { maybeEllipsisText } from '@/utils/web/maybeEllipsisText'
-import { ConnectWallet, useAddress } from '@thirdweb-dev/react'
+import { ConnectWallet, useAddress, useUser } from '@thirdweb-dev/react'
+import { useRouter } from 'next/navigation'
 
 export function NavbarSessionButtonClient(props: {
   messages: GetDefineMessageResults<typeof navbarSessionButtonMessages>
 }) {
   // TODO match figma mockups
   const address = useAddress()
+  const router = useRouter()
   return (
     <ConnectWallet
+      auth={{
+        loginOptional: false,
+        onLogin() {
+          // ensure that any server components on the page that's being used are refreshed with the context the user is now logged in
+          router.refresh()
+        },
+      }}
       className={
         /* 
         This is a super hacky way of ensuring our button styles override the default styles of the ConnectWallet. 
@@ -32,7 +41,6 @@ export function NavbarSessionButtonClient(props: {
         )
       }
       theme={'dark'}
-      auth={{ loginOptional: false }}
       modalSize={'compact'}
       btnTitle={'Log in'}
       detailsBtn={() => (

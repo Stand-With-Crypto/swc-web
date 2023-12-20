@@ -44,6 +44,23 @@ model SessionUser {
   @@index([inferredUserId])
 }
 
+// TODO determine how google places constructs addresses and map this field to that structure to ensure we're internationalizing the way we persist addresses
+model Address {
+  id              String   @id @default(uuid())
+  googlePlacesId  String?  @map("google_places_id")
+  streetAddress1  String   @map("street_address_1")
+  streetAddress2  String   @default("") @map("street_address_2")
+  city            String
+  state           String
+  zipCode         String   @map("zip_code")
+  countryCode     String
+  datetimeUpdated DateTime @updatedAt @map("datetime_updated")
+  datetimeCreated DateTime @default(now()) @map("datetime_created")
+
+  userActionEmails UserActionEmail[]
+  cryptoAddressUser CryptoAddressUser[]
+}
+
 // enum Web3AddressCustodian {
 //   SELF_CUSTODY
 //   THIRDWEB
@@ -52,19 +69,26 @@ model SessionUser {
 // Using ThirdWeb a user can create multiple "accounts", one per wallet. They can also have some that are self-custodied, and some that are being custodied by ThirdWeb (email, google login, etc)
 model CryptoAddressUser {
   id                      String       @id @default(uuid())
-  address                 String       @unique
+  cryptoAddress                 String       @unique
+  name                    String       @map("name") @default("")
+  email                   String       @map("email") @default("")
+  phoneNumber             String       @map("phone_number") @default("")
+  address                 Address?      @relation(fields: [addressId], references: [id])
+  addressId               String?       @map("address_id")
   // TODO figure out how to identify this
   // initialCustodian Web3AddressCustodian
   inferredUserId          String       @map("inferred_user_id")
   inferredUser            InferredUser @relation(fields: [inferredUserId], references: [id])
   datetimeUpdated         DateTime     @updatedAt @map("datetime_updated")
   datetimeCreated         DateTime     @default(now()) @map("datetime_created")
-  sampleDatabaseIncrement Int          @default(0)
+  sampleDatabaseIncrement Int          @default(0) // TODO delete
+  isPubliclyVisible Boolean @map("is_publicly_visible")
 
   userActions UserAction[]
 
   // TODO determine if we need a network (ETH, SOL, etc) enum here. Can always add later
   @@index([inferredUserId])
+  @@index([addressId])
 }
 
 model UserAction {
@@ -83,31 +107,15 @@ model UserAction {
   datetimeCreated     DateTime           @default(now()) @map("datetime_created")
 
   // We'll need logic to validate and verify only one action type is every associated with a UserAction
-  email    UserActionEmail?
-  call     UserActionCall?
-  donation UserActionDonation?
-  nftMint  UserActionNFTMint?
-  tweet    UserActionTweet?
+  userActionEmail    UserActionEmail?
+  userActionCall     UserActionCall?
+  userActionDonation UserActionDonation?
+  userActionNFTMint  UserActionNFTMint?
+  userActionTweet    UserActionTweet?
 
   @@index([inferredUserId])
   @@index([cryptoAddressUserId])
   @@index([sessionUserId])
-}
-
-// TODO determine how google places constructs addresses and map this field to that structure to ensure we're internationalizing the way we persist addresses
-model Address {
-  id             String  @id @default(uuid())
-  googlePlacesId String? @map("google_places_id")
-  streetAddress1 String  @map("street_address_1")
-  streetAddress2 String  @default("") @map("street_address_2")
-  city           String
-  state          String
-  zipCode        String  @map("zip_code")
-  countryCode    String
-  datetimeUpdated     DateTime           @updatedAt @map("datetime_updated")
-  datetimeCreated     DateTime           @default(now()) @map("datetime_created")
-
-  userActionEmails UserActionEmail[]
 }
 
 model UserActionEmail {
@@ -147,12 +155,12 @@ model UserActionCall {
 }
 
 model UserActionDonation {
-  id           String     @id @default(uuid())
-  userAction   UserAction @relation(fields: [id], references: [id])
+  id                 String     @id @default(uuid())
+  userAction         UserAction @relation(fields: [id], references: [id])
   // TODO determine if these need to be nullable in the future
-  amount       Decimal     @map("amount")
+  amount             Decimal    @map("amount")
   amountCurrencyCode String     @map("amount_currency_code")
-  amountUsd    Decimal     @map("amount_usd")
+  amountUsd          Decimal    @map("amount_usd")
 
   @@index([id])
 }
@@ -165,27 +173,27 @@ enum NonFungibleTokenCurrency {
 // my gut is that we want to be able to spin up new mints in the future without having to migrate the db
 // if that's the case then we want a freestanding model
 model NonFungibleToken {
-  id                 String              @id @default(uuid())
-  name               String
-  cost             Decimal              @map("cost")
-  costCurrencyCode NonFungibleTokenCurrency              @map("cost_currency_code")
-  datetimeUpdated     DateTime           @updatedAt @map("datetime_updated")
-  datetimeCreated     DateTime           @default(now()) @map("datetime_created")
+  id               String                   @id @default(uuid())
+  name             String
+  cost             Decimal                  @map("cost")
+  costCurrencyCode NonFungibleTokenCurrency @map("cost_currency_code")
+  datetimeUpdated  DateTime                 @updatedAt @map("datetime_updated")
+  datetimeCreated  DateTime                 @default(now()) @map("datetime_created")
 
-  UserActionNFTMint  UserActionNFTMint[]
+  UserActionNFTMint UserActionNFTMint[]
   // TODO Web3 info about address/contract/etc/price (img)
-  
+
   @@index([id])
 }
 
 model UserActionNFTMint {
-  id                       String           @id @default(uuid())
-  userAction               UserAction       @relation(fields: [id], references: [id])
-  nftId       String           @map("nft_id")
-  nft         NonFungibleToken @relation(fields: [nftId], references: [id])
-  costAtMint             Decimal              @map("cost_at_mint")
-  costAtMintCurrencyCode NonFungibleTokenCurrency              @map("cost_at_mint_currency_code")
-  constAtMintUsd          Decimal              @map("cost_at_mint_usd")
+  id                     String                   @id @default(uuid())
+  userAction             UserAction               @relation(fields: [id], references: [id])
+  nftId                  String                   @map("nft_id")
+  nft                    NonFungibleToken         @relation(fields: [nftId], references: [id])
+  costAtMint             Decimal                  @map("cost_at_mint")
+  costAtMintCurrencyCode NonFungibleTokenCurrency @map("cost_at_mint_currency_code")
+  constAtMintUsd         Decimal                  @map("cost_at_mint_usd")
 
   @@index([id])
   @@index([nftId])
