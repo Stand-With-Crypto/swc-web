@@ -91,6 +91,15 @@ model CryptoAddressUser {
   @@index([addressId])
 }
 
+enum UserActionType {
+  EMAIL
+  CALL
+  DONATION
+  OPT_IN
+  TWEET
+  NFT_MINT
+}
+
 model UserAction {
   id                  String             @id @default(uuid())
   // Because a user could be in a number of different states (logged in, not logged in, etc) we want to track the different types of users that could be performing an action
@@ -105,17 +114,32 @@ model UserAction {
   datetimeOccurred    DateTime           @map("datetime_occurred")
   datetimeUpdated     DateTime           @updatedAt @map("datetime_updated")
   datetimeCreated     DateTime           @default(now()) @map("datetime_created")
+  nftMintId           String?            @map("nft_mint_id")
+  nftMint             NFTMint?           @relation(fields: [nftMintId], references: [id])
+  actionType                UserActionType     @map("action_type")
 
   // We'll need logic to validate and verify only one action type is every associated with a UserAction
   userActionEmail    UserActionEmail?
   userActionCall     UserActionCall?
   userActionDonation UserActionDonation?
-  userActionNFTMint  UserActionNFTMint?
-  userActionTweet    UserActionTweet?
+  userActionOptIn    UserActionOptIn?
 
   @@index([inferredUserId])
   @@index([cryptoAddressUserId])
   @@index([sessionUserId])
+  @@index([nftMintId])
+}
+
+enum UserActionOptInType {
+ SWC_SIGN_UP
+}
+
+// TODO i assume this is where we'll store their email if they opt in via Coinbase app
+model UserActionOptIn {
+  id                        String                     @id @default(uuid())
+  userAction                UserAction                 @relation(fields: [id], references: [id])
+  optInType                 UserActionOptInType        @map("opt_in_type")
+  @@index([id])
 }
 
 model UserActionEmail {
@@ -165,44 +189,40 @@ model UserActionDonation {
   @@index([id])
 }
 
-enum NonFungibleTokenCurrency {
+enum NFTCurrency {
   ETH
 }
 
 // TODO determine if this actually should be a model or just an enum
 // my gut is that we want to be able to spin up new mints in the future without having to migrate the db
 // if that's the case then we want a freestanding model
-model NonFungibleToken {
+model NFT {
   id               String                   @id @default(uuid())
   name             String
   cost             Decimal                  @map("cost")
-  costCurrencyCode NonFungibleTokenCurrency @map("cost_currency_code")
+  costCurrencyCode NFTCurrency @map("cost_currency_code")
   datetimeUpdated  DateTime                 @updatedAt @map("datetime_updated")
   datetimeCreated  DateTime                 @default(now()) @map("datetime_created")
 
-  UserActionNFTMint UserActionNFTMint[]
+  nftMint NFTMint[]
   // TODO Web3 info about address/contract/etc/price (img)
 
   @@index([id])
 }
 
-model UserActionNFTMint {
-  id                     String                   @id @default(uuid())
-  userAction             UserAction               @relation(fields: [id], references: [id])
-  nftId                  String                   @map("nft_id")
-  nft                    NonFungibleToken         @relation(fields: [nftId], references: [id])
+model NFTMint {
+  id               String                   @id @default(uuid())
+  nftId            String                   @map("nft_id")
+  nft              NFT         @relation(fields: [nftId], references: [id])
+  datetimeUpdated  DateTime                 @updatedAt @map("datetime_updated")
+  datetimeCreated  DateTime                 @default(now()) @map("datetime_created")
   costAtMint             Decimal                  @map("cost_at_mint")
-  costAtMintCurrencyCode NonFungibleTokenCurrency @map("cost_at_mint_currency_code")
+  costAtMintCurrencyCode NFTCurrency @map("cost_at_mint_currency_code")
   constAtMintUsd         Decimal                  @map("cost_at_mint_usd")
+
+  userActions UserAction[]
 
   @@index([id])
   @@index([nftId])
 }
 
-model UserActionTweet {
-  id         String     @id @default(uuid())
-  userAction UserAction @relation(fields: [id], references: [id])
-
-  // TODO determine if we can get additional metadata from the tweet (what was tweeted, by whom, etc)
-  @@index([id])
-}

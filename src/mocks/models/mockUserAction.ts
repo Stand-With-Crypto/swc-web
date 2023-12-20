@@ -1,7 +1,7 @@
 import { fakerFields } from '@/mocks/fakerUtils'
 import { mockCommonDatetimes } from '@/mocks/mockCommonDatetimes'
 import { faker } from '@faker-js/faker'
-import { UserAction } from '@prisma/client'
+import { UserAction, UserActionType } from '@prisma/client'
 
 export function mockUserAction(): UserAction {
   const user = faker.helpers.arrayElement([
@@ -11,8 +11,10 @@ export function mockUserAction(): UserAction {
 
   return {
     ...mockCommonDatetimes(),
-    id: fakerFields.id(),
     ...user,
+    actionType: faker.helpers.arrayElement(Object.values(UserActionType)),
+    nftMintId: null,
+    id: fakerFields.id(),
     inferredUserId: fakerFields.id(),
     datetimeOccurred: faker.date.past(),
   }

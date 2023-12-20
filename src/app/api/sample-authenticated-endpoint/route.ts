@@ -7,6 +7,7 @@ import { thirdWebAuth } from '@/utils/server/thirdWebAuth'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { NextRequest, NextResponse } from 'next/server'
 
+// TODO move to server action
 export async function POST(_request: NextRequest) {
   const authUser = await appRouterGetAuthUser()
   if (!authUser) {
