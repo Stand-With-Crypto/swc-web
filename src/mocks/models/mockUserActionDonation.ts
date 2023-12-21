@@ -2,7 +2,7 @@ import { fakerFields } from '@/mocks/fakerUtils'
 import { mockCommonDatetimes } from '@/mocks/mockCommonDatetimes'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { faker } from '@faker-js/faker'
-import { UserActionDonation } from '@prisma/client'
+import { DonationOrganization, UserActionDonation } from '@prisma/client'
 import { Decimal } from '@prisma/client/runtime/library'
 
 export function mockUserActionDonation(): UserActionDonation {
@@ -13,5 +13,6 @@ export function mockUserActionDonation(): UserActionDonation {
     amount,
     amountCurrencyCode,
     amountUsd: amount,
+    recipient: faker.helpers.arrayElement(Object.values(DonationOrganization)),
   }
 }

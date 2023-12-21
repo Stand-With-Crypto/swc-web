@@ -13,6 +13,6 @@ export function mockNFTMint(): NFTMint {
     nftId: fakerFields.id(),
     costAtMint,
     costAtMintCurrencyCode: NFTCurrency.ETH,
-    constAtMintUsd: costAtMint.times(MOCK_CURRENT_ETH_USD_EXCHANGE_RATE),
+    costAtMintUsd: costAtMint.times(MOCK_CURRENT_ETH_USD_EXCHANGE_RATE),
   }
 }

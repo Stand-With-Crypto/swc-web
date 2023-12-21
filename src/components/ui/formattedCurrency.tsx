@@ -8,7 +8,7 @@ export function FormattedCurrency({
   ...otherProps
 }: {
   amount: number
-  currencyCode: SupportedFiatCurrencyCodes
+  currencyCode: string
   locale: SupportedLocale
 } & {
   currencySign?: string | undefined

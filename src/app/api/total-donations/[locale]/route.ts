@@ -1,4 +1,4 @@
-import { getTotalDonations } from '@/data/donations/getTotalDonations'
+import { getAggregateDonations } from '@/data/donations/getAggregateDonations'
 import { SupportedLocale } from '@/intl/locales'
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
@@ -12,6 +12,6 @@ const zodParams = z.object({
 
 export async function GET(_request: NextRequest, { params }: { params: { locale: string } }) {
   const { locale } = zodParams.parse(params)
-  const data = await getTotalDonations({ locale })
+  const data = await getAggregateDonations()
   return NextResponse.json(data)
 }

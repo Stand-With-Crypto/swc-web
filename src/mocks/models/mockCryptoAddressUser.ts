@@ -5,16 +5,17 @@ import { faker } from '@faker-js/faker'
 import { CryptoAddressUser } from '@prisma/client'
 
 export function mockCryptoAddressUser(): CryptoAddressUser {
+  const withData = faker.helpers.maybe(() => true, { probability: 0.7 })
   return {
     ...mockCommonDatetimes(),
     id: fakerFields.id(),
     cryptoAddress: faker.finance.ethereumAddress(),
     inferredUserId: fakerFields.id(),
     sampleDatabaseIncrement: 0,
-    name: faker.person.fullName(),
-    email: faker.internet.email(),
-    isPubliclyVisible: faker.helpers.maybe(() => true, { probability: 0.8 }) || false,
-    phoneNumber: normalizePhoneNumber(faker.phone.number()),
-    addressId: fakerFields.id(),
+    name: withData ? faker.person.fullName() : '',
+    email: withData ? faker.internet.email() : '',
+    isPubliclyVisible: faker.helpers.maybe(() => true, { probability: 0.9 }) || false,
+    phoneNumber: withData ? normalizePhoneNumber(faker.phone.number()) : '',
+    addressId: withData ? fakerFields.id() : null,
   }
 }

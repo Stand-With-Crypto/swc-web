@@ -10,6 +10,8 @@ datasource db {
 }
 
 model AuthenticationNonce {
+  @@map("authentication_nonce")
+
   id String @id
 }
 
@@ -19,6 +21,8 @@ model AuthenticationNonce {
 // sometimes they won't be logged in at all but we'll need to cache a session id for them so that if they log in with a eth address later we can associate their actions with the new address. 
 // We'll need to track these different "users" with their own respective metadata, and try to join these related models with a InferredUser table
 model InferredUser {
+  @@map("inferred_user")
+
   id              String   @id @default(uuid())
   datetimeUpdated DateTime @updatedAt @map("datetime_updated")
   datetimeCreated DateTime @default(now()) @map("datetime_created")
@@ -33,6 +37,8 @@ model InferredUser {
 // A "user" that is performing actions on our platform but has not logged in to any system yet.
 // A session user will only be created/associated with events if a different authenticatd user type is not also associated with the event
 model SessionUser {
+  @@map("session_user")
+
   id              String        @id @default(uuid())
   inferredUserId  String?       @map("inferred_user_id")
   inferredUser    InferredUser? @relation(fields: [inferredUserId], references: [id])
@@ -46,6 +52,8 @@ model SessionUser {
 
 // TODO determine how google places constructs addresses and map this field to that structure to ensure we're internationalizing the way we persist addresses
 model Address {
+  @@map("address")
+
   id              String   @id @default(uuid())
   googlePlacesId  String?  @map("google_places_id")
   streetAddress1  String   @map("street_address_1")
@@ -68,6 +76,8 @@ model Address {
 
 // Using ThirdWeb a user can create multiple "accounts", one per wallet. They can also have some that are self-custodied, and some that are being custodied by ThirdWeb (email, google login, etc)
 model CryptoAddressUser {
+  @@map("crypto_address_user")
+
   id                      String       @id @default(uuid())
   cryptoAddress                 String       @unique
   name                    String       @map("name") @default("")
@@ -101,6 +111,8 @@ enum UserActionType {
 }
 
 model UserAction {
+  @@map("user_action")
+
   id                  String             @id @default(uuid())
   // Because a user could be in a number of different states (logged in, not logged in, etc) we want to track the different types of users that could be performing an action
   // We will retroactively foreign key to the appropriate InferredUser if one is not attached on create but later added
@@ -124,6 +136,7 @@ model UserAction {
   userActionDonation UserActionDonation?
   userActionOptIn    UserActionOptIn?
 
+  @@index([datetimeOccurred])
   @@index([inferredUserId])
   @@index([cryptoAddressUserId])
   @@index([sessionUserId])
@@ -136,6 +149,8 @@ enum UserActionOptInType {
 
 // TODO i assume this is where we'll store their email if they opt in via Coinbase app
 model UserActionOptIn {
+  @@map("user_action_opt_in")
+
   id                        String                     @id @default(uuid())
   userAction                UserAction                 @relation(fields: [id], references: [id])
   optInType                 UserActionOptInType        @map("opt_in_type")
@@ -143,6 +158,8 @@ model UserActionOptIn {
 }
 
 model UserActionEmail {
+  @@map("user_action_email")
+
   id                        String                     @id @default(uuid())
   userAction                UserAction                 @relation(fields: [id], references: [id])
   // TODO determine if these need to be nullable in the future
@@ -159,6 +176,8 @@ model UserActionEmail {
 }
 
 model UserActionEmailRecipient {
+  @@map("user_action_email_recipient")
+
   id                String          @id @default(uuid())
   userActionEmailId String          @map("user_action_email_id")
   userActionEmail   UserActionEmail @relation(fields: [userActionEmailId], references: [id])
@@ -169,6 +188,8 @@ model UserActionEmailRecipient {
 }
 
 model UserActionCall {
+  @@map("user_action_call")
+
   id                   String     @id @default(uuid())
   userAction           UserAction @relation(fields: [id], references: [id])
   // TODO determine if these need to be nullable in the future
@@ -178,13 +199,21 @@ model UserActionCall {
   @@index([id])
 }
 
+enum DonationOrganization {
+  STAND_WITH_CRYPTO
+  FAIRSHAKE
+}
+
 model UserActionDonation {
+  @@map("user_action_donation")
+
   id                 String     @id @default(uuid())
   userAction         UserAction @relation(fields: [id], references: [id])
   // TODO determine if these need to be nullable in the future
   amount             Decimal    @map("amount")
   amountCurrencyCode String     @map("amount_currency_code")
   amountUsd          Decimal    @map("amount_usd")
+  recipient          DonationOrganization
 
   @@index([id])
 }
@@ -197,6 +226,8 @@ enum NFTCurrency {
 // my gut is that we want to be able to spin up new mints in the future without having to migrate the db
 // if that's the case then we want a freestanding model
 model NFT {
+  @@map("nft")
+
   id               String                   @id @default(uuid())
   name             String
   cost             Decimal                  @map("cost")
@@ -211,6 +242,8 @@ model NFT {
 }
 
 model NFTMint {
+  @@map("nft_mint")
+
   id               String                   @id @default(uuid())
   nftId            String                   @map("nft_id")
   nft              NFT         @relation(fields: [nftId], references: [id])
@@ -218,11 +251,19 @@ model NFTMint {
   datetimeCreated  DateTime                 @default(now()) @map("datetime_created")
   costAtMint             Decimal                  @map("cost_at_mint")
   costAtMintCurrencyCode NFTCurrency @map("cost_at_mint_currency_code")
-  constAtMintUsd         Decimal                  @map("cost_at_mint_usd")
+  costAtMintUsd         Decimal                  @map("cost_at_mint_usd")
 
   userActions UserAction[]
 
   @@index([id])
   @@index([nftId])
 }
+
+
+
+
+
+
+
+
 

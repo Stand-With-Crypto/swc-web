@@ -19,12 +19,13 @@ import _ from 'lodash'
 
 /*
 Assumption: we will always want to interact with the user actions and their related type joins together
-If this ever changes, we may need to export the ClientUserActionEmail, ClientUserActionCall, etc fns
+If this ever changes, we may need to export the SensitiveDataClientUserActionEmail, SensitiveDataClientUserActionCall, etc fns
 */
 
-type ClientUserActionDatabaseQuery = UserAction & {
+type SensitiveDataClientUserActionDatabaseQuery = UserAction & {
   userActionEmail:
     | (UserActionEmail & {
+        address: Address
         userActionEmailRecipients: UserActionEmailRecipient[]
       })
     | null
@@ -34,49 +35,57 @@ type ClientUserActionDatabaseQuery = UserAction & {
   userActionOptIn: UserActionOptIn | null
 }
 
-type ClientUserActionEmailRecipient = Pick<UserActionEmailRecipient, 'id' | 'email'> & {
+type SensitiveDataClientUserActionEmailRecipient = Pick<
+  UserActionEmailRecipient,
+  'id' | 'email'
+> & {
   person: DTSIPersonForUserActions
 }
-type ClientUserActionEmail = {
-  userActionEmailRecipients: ClientUserActionEmailRecipient[]
+type SensitiveDataClientUserActionEmail = Pick<
+  UserActionEmail,
+  'zipCode' | 'senderEmail' | 'fullName' | 'phoneNumber'
+> & {
+  address: ClientAddress
+  userActionEmailRecipients: SensitiveDataClientUserActionEmailRecipient[]
   actionType: typeof UserActionType.EMAIL
 }
-type ClientUserActionCall = Pick<UserActionCall, 'recipientPhoneNumber'> & {
+type SensitiveDataClientUserActionCall = Pick<UserActionCall, 'recipientPhoneNumber'> & {
   person: DTSIPersonForUserActions
   actionType: typeof UserActionType.CALL
 }
-type ClientUserActionDonation = Pick<UserActionDonation, 'amountCurrencyCode' | 'recipient'> & {
+type SensitiveDataClientUserActionDonation = Pick<
+  UserActionDonation,
+  'amount' | 'amountCurrencyCode' | 'amountUsd' | 'recipient'
+> & {
   actionType: typeof UserActionType.DONATION
-  amount: number
-  amountUsd: number
 }
-type ClientUserActionNFTMint = {
+type SensitiveDataClientUserActionNFTMint = {
   nftMint: ClientNFTMint & { nft: ClientNFT }
   actionType: typeof UserActionType.NFT_MINT
 }
-type ClientUserActionOptIn = Pick<UserActionOptIn, 'optInType'> & {
+type SensitiveDataClientUserActionOptIn = Pick<UserActionOptIn, 'optInType'> & {
   actionType: typeof UserActionType.OPT_IN
 }
 // Added here as a placeholder for type inference until we have some tweet-specific fields
-type ClientUserActionTweet = { actionType: typeof UserActionType.TWEET }
+type SensitiveDataClientUserActionTweet = { actionType: typeof UserActionType.TWEET }
 
 /*
 At the database schema level we can't enforce that a single action only has one "type" FK, but at the client level we can and should
 */
-export type ClientUserAction = ClientModel<
+export type SensitiveDataClientUserAction = ClientModel<
   Pick<UserAction, 'id' | 'datetimeOccurred' | 'actionType'> &
     (
-      | ClientUserActionTweet
-      | ClientUserActionOptIn
-      | ClientUserActionEmail
-      | ClientUserActionCall
-      | ClientUserActionDonation
-      | ClientUserActionNFTMint // TODO determine if we want to support NFTMints being offered alongside other actions (so you could have this type alongside others)
+      | SensitiveDataClientUserActionTweet
+      | SensitiveDataClientUserActionOptIn
+      | SensitiveDataClientUserActionEmail
+      | SensitiveDataClientUserActionCall
+      | SensitiveDataClientUserActionDonation
+      | SensitiveDataClientUserActionNFTMint // TODO determine if we want to support NFTMints being offered alongside other actions (so you could have this type alongside others)
     )
 >
 
-const getRelatedModel = <K extends keyof ClientUserActionDatabaseQuery>(
-  record: ClientUserActionDatabaseQuery,
+const getRelatedModel = <K extends keyof SensitiveDataClientUserActionDatabaseQuery>(
+  record: SensitiveDataClientUserActionDatabaseQuery,
   key: K,
 ) => {
   const val = record[key]
@@ -88,13 +97,13 @@ const getRelatedModel = <K extends keyof ClientUserActionDatabaseQuery>(
   return val
 }
 
-export const getClientUserAction = ({
+export const getSensitiveDataClientUserAction = ({
   record,
   dtsiPeople,
 }: {
-  record: ClientUserActionDatabaseQuery
+  record: SensitiveDataClientUserActionDatabaseQuery
   dtsiPeople: DTSIPersonForUserActions[]
-}): ClientUserAction => {
+}): SensitiveDataClientUserAction => {
   // TODO determine how we want to "gracefully fail" if a DTSI slug doesn't exist
   const peopleBySlug = _.keyBy(dtsiPeople, x => x.slug)
   const { id, datetimeOccurred, actionType } = record
@@ -102,12 +111,12 @@ export const getClientUserAction = ({
   switch (actionType) {
     case UserActionType.OPT_IN: {
       const { optInType } = getRelatedModel(record, 'userActionOptIn')
-      const callFields: ClientUserActionOptIn = { optInType, actionType }
+      const callFields: SensitiveDataClientUserActionOptIn = { optInType, actionType }
       return getClientModel({ ...sharedProps, ...callFields })
     }
     case UserActionType.CALL: {
       const { recipientPhoneNumber, recipientDtsiSlug } = getRelatedModel(record, 'userActionCall')
-      const callFields: ClientUserActionCall = {
+      const callFields: SensitiveDataClientUserActionCall = {
         recipientPhoneNumber,
         person: peopleBySlug[recipientDtsiSlug],
         actionType,
@@ -119,19 +128,25 @@ export const getClientUserAction = ({
         record,
         'userActionDonation',
       )
-      const donationFields: ClientUserActionDonation = {
-        amount: amount.toNumber(),
+      const donationFields: SensitiveDataClientUserActionDonation = {
+        amount,
         amountCurrencyCode,
-        amountUsd: amountUsd.toNumber(),
-        recipient,
+        amountUsd,
         actionType,
+        recipient,
       }
       return getClientModel({ ...sharedProps, ...donationFields })
     }
     case UserActionType.EMAIL: {
-      const { userActionEmailRecipients } = getRelatedModel(record, 'userActionEmail')
-      const emailFields: ClientUserActionEmail = {
+      const { zipCode, senderEmail, fullName, phoneNumber, address, userActionEmailRecipients } =
+        getRelatedModel(record, 'userActionEmail')
+      const emailFields: SensitiveDataClientUserActionEmail = {
         actionType,
+        zipCode,
+        senderEmail,
+        fullName,
+        phoneNumber,
+        address: getClientAddress(address),
         userActionEmailRecipients: userActionEmailRecipients.map(x => ({
           id: x.id,
           email: x.email,
@@ -142,7 +157,7 @@ export const getClientUserAction = ({
     }
     case UserActionType.NFT_MINT: {
       const nftMint = getRelatedModel(record, 'nftMint')
-      const mintFields: ClientUserActionNFTMint = {
+      const mintFields: SensitiveDataClientUserActionNFTMint = {
         actionType,
         nftMint: {
           ...getClientNFTMint(nftMint),
@@ -155,5 +170,6 @@ export const getClientUserAction = ({
       return getClientModel({ ...sharedProps, actionType })
     }
   }
-  throw new Error(`getClientUserAction: no user action fk found for id ${id}`)
+
+  throw new Error(`getSensitiveDataClientUserAction: no user action fk found for id ${id}`)
 }

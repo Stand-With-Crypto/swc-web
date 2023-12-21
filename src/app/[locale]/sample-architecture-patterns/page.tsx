@@ -5,7 +5,7 @@ import { Leaderboard } from '@/components/app/leaderboard'
 import { LocaleDropdown } from '@/components/app/localeDropdown'
 import { NavbarSessionButton } from '@/components/app/navbarSessionButton'
 import { SampleAuthenticatedRequest } from '@/components/app/sampleAuthenticatedRequest'
-import { getTotalDonations } from '@/data/donations/getTotalDonations'
+import { getAggregateDonations } from '@/data/donations/getAggregateDonations'
 import { getLeaderboard } from '@/data/leaderboard'
 import getIntl from '@/intl/intlMessages'
 import { generateClientComponentMessages } from '@/intl/intlServerUtils'
@@ -24,7 +24,7 @@ export default async function Home(props: PageProps) {
   const [intl, leaderboardEntities, totalDonations] = await Promise.all([
     getIntl(locale),
     getLeaderboard({ offset: 0 }),
-    getTotalDonations({ locale: locale }),
+    getAggregateDonations({ locale: locale }),
   ])
   return (
     // TODO remove prose class and actually start styling things!

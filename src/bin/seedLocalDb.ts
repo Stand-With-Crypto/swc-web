@@ -88,7 +88,7 @@ async function seed() {
   sessionUser
   */
   await batchAsyncAndLog(
-    _.times(seedSizes([100, 1000, 10000])).map(() => ({
+    _.times(seedSizes([50, 500, 5000])).map(() => ({
       ...mockSessionUser(),
       inferredUserId: faker.helpers.maybe(() => faker.helpers.arrayElement(inferredUser).id),
     })),
@@ -139,9 +139,9 @@ async function seed() {
       const user =
         index < 10
           ? cryptoAddressLocalUser
-          : index % 2
-            ? faker.helpers.arrayElement(cryptoAddressUser)
-            : faker.helpers.arrayElement(sessionUser)
+          : index % 4 === 1
+            ? faker.helpers.arrayElement(sessionUser)
+            : faker.helpers.arrayElement(cryptoAddressUser)
 
       return {
         ...mockUserAction(),
@@ -174,7 +174,7 @@ async function seed() {
         nftId: selectedNFT.id,
         costAtMint: selectedNFT.cost,
         costAtMintCurrencyCode: selectedNFT.costCurrencyCode,
-        constAtMintUsd: selectedNFT.cost.times(MOCK_CURRENT_ETH_USD_EXCHANGE_RATE),
+        costAtMintUsd: selectedNFT.cost.times(MOCK_CURRENT_ETH_USD_EXCHANGE_RATE),
       }
     }),
     data =>
@@ -234,7 +234,8 @@ async function seed() {
   await batchAsyncAndLog(
     _.flatten(
       userActionsByType[UserActionType.EMAIL].map((actionEmail, index) =>
-        _.times(faker.helpers.arrayElement([1, 3, 5])).map(() => ({
+        // TODO expand this to be more than 1 recipient once we have UX
+        _.times(faker.helpers.arrayElement([1])).map(() => ({
           ...mockUserActionEmailRecipient(),
           userActionEmailId: actionEmail.id,
         })),

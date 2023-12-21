@@ -1,14 +1,12 @@
 'use client'
 
-import _ from 'lodash'
-import useSWR from 'swr'
-import { LeaderboardEntity } from '@/data/leaderboard'
-import { apiUrls } from '@/utils/shared/urls'
-import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table'
-import { TotalDonations } from '@/data/donations/getTotalDonations'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
+import { AggregateDonations } from '@/data/donations/getAggregateDonations'
 import { SupportedLocale } from '@/intl/locales'
+import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { fetchReq } from '@/utils/shared/fetchReq'
+import { apiUrls } from '@/utils/shared/urls'
+import useSWR from 'swr'
 
 const useGetTotalDonations = (locale: SupportedLocale) => {
   return useSWR(
@@ -16,7 +14,7 @@ const useGetTotalDonations = (locale: SupportedLocale) => {
     url =>
       fetchReq(url)
         .then(res => res.json())
-        .then(data => data as TotalDonations),
+        .then(data => data as AggregateDonations),
     {
       refreshInterval: 1000,
     },
@@ -27,18 +25,22 @@ export function LiveUpdatingTotalDonations({
   totalDonations,
   locale,
 }: {
-  totalDonations: TotalDonations
+  totalDonations: AggregateDonations
   locale: SupportedLocale
 }) {
   const dynamicTotalDonations = useGetTotalDonations(locale)
-  const usedTotalDonations = dynamicTotalDonations.data ?? totalDonations
+  // There's an edge case where the page version is a more recent cache that the API, and so the number could go down, which we don't want obviously
+  const usedTotalDonations =
+    dynamicTotalDonations.data && dynamicTotalDonations.data > totalDonations
+      ? dynamicTotalDonations.data
+      : totalDonations
   return (
     <>
       <FormattedCurrency
         locale={locale}
         maximumFractionDigits={0}
-        amount={usedTotalDonations.amountLocal}
-        currencyCode={usedTotalDonations.currencyCode}
+        amount={usedTotalDonations.amountUsd}
+        currencyCode={SupportedFiatCurrencyCodes.USD}
       />
     </>
   )

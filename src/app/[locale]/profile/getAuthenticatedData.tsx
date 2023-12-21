@@ -1,6 +1,6 @@
 import { getClientAddress } from '@/clientModels/clientAddress'
-import { getClientCryptoAddressUser } from '@/clientModels/clientCryptoAddressUser'
-import { getClientUserAction } from '@/clientModels/clientUserAction/clientUserAction'
+import { getSensitiveDataClientCryptoAddressUser } from '@/clientModels/clientCryptoAddress/sensitiveDataClientCryptoAddressUser'
+import { getSensitiveDataClientUserAction } from '@/clientModels/clientUserAction/sensitiveDataClientUserAction'
 import { queryDTSIPeopleBySlugForUserActions } from '@/data/dtsi/queries/queryDTSIPeopleBySlugForUserActions'
 import { appRouterGetAuthUser } from '@/utils/server/appRouterGetAuthUser'
 import { prismaClient } from '@/utils/server/prismaClient'
@@ -48,8 +48,10 @@ export async function getAuthenticatedData() {
   )
   const { userActions, address, ...rest } = cryptoAddressUser
   return {
-    ...getClientCryptoAddressUser(rest),
+    ...getSensitiveDataClientCryptoAddressUser(rest),
     address: address && getClientAddress(address),
-    userActions: userActions.map(record => getClientUserAction({ record, dtsiPeople })),
+    userActions: userActions.map(record =>
+      getSensitiveDataClientUserAction({ record, dtsiPeople }),
+    ),
   }
 }

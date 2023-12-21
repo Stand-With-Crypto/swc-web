@@ -1,6 +1,6 @@
 // TODO migrate to app router once thirdweb supports it
 
-import { getClientCryptoAddressUser } from '@/clientModels/clientCryptoAddressUser'
+import { getClientCryptoAddressUser } from '@/clientModels/clientCryptoAddress/clientCryptoAddressUser'
 import { appRouterGetAuthUser } from '@/utils/server/appRouterGetAuthUser'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { thirdWebAuth } from '@/utils/server/thirdWebAuth'
