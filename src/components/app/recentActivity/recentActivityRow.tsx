@@ -65,10 +65,6 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
             case UserActionOptInType.SWC_SIGN_UP:
               return 'joined Stand With Crypto'
           }
-          return gracefullyError({
-            msg: `Unknown opt-in type in RecentActivityRow: ${action.optInType}`,
-            fallback: 'helped crypto',
-          })
         }
         return (
           <>

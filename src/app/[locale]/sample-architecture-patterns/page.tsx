@@ -24,7 +24,7 @@ export default async function Home(props: PageProps) {
   const [intl, leaderboardEntities, totalDonations] = await Promise.all([
     getIntl(locale),
     getLeaderboard({ offset: 0 }),
-    getAggregateDonations({ locale: locale }),
+    getAggregateDonations(),
   ])
   return (
     // TODO remove prose class and actually start styling things!
