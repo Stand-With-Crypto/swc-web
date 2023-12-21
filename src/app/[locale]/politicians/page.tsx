@@ -8,9 +8,9 @@ export const dynamic = 'error'
 
 // TODO metadata
 
-export default async function PoliticiansHomepage(props: PageProps) {
+export default async function PoliticiansHomepage({ params }: PageProps) {
   const [{ people }] = await Promise.all([queryDTSIPresidentialCandidates()])
-  const urls = getIntlUrls(props.params.locale)
+  const urls = getIntlUrls(params.locale)
   return (
     <div className="mx-auto mt-10 w-full max-w-xl space-y-5 p-4">
       <h1>National political figures</h1>

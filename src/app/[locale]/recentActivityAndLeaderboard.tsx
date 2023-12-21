@@ -5,19 +5,20 @@ import { RecentActivityRow } from '@/components/app/recentActivity/recentActivit
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { AggregateDonationsByUser } from '@/data/donations/getAggregateDonationsByUser'
 import { getPublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
+import { SupportedLocale } from '@/intl/locales'
 import { PageProps } from '@/types'
 
 // TODO metadata
 
 export function RecentActivityAndLeaderboard({
-  params,
+  locale,
   actions,
   topDonors,
-}: PageProps & {
+}: {
+  locale: SupportedLocale
   actions: Awaited<ReturnType<typeof getPublicRecentActivity>>
   topDonors: AggregateDonationsByUser
 }) {
-  const { locale } = params
   return (
     <Tabs defaultValue="recentActivity" className="mx-auto w-full max-w-2xl">
       <div className="text-center">

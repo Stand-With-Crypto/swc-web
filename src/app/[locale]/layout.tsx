@@ -26,18 +26,19 @@ export const metadata: Metadata = {
 }
 
 export default function Layout({ children, params }: PageProps & { children: React.ReactNode }) {
+  const { locale } = params
   return (
-    <html lang={params.locale}>
+    <html lang={locale}>
       <body className={inter.className}>
         <NextTopLoader />
         <TopLevelClientLogic />
         <AuthProviders>
           <FullHeight.Container>
             <FullHeight.Content>
-              <Navbar {...{ params }} />
+              <Navbar {...{ locale }} />
               <main>{children}</main>
             </FullHeight.Content>
-            <Footer {...{ params }} />
+            <Footer {...{ locale }} />
           </FullHeight.Container>
         </AuthProviders>
         <Toaster />

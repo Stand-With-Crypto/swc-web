@@ -9,8 +9,8 @@ export const dynamic = 'error'
 
 // TODO metadata
 
-export default async function Home(props: PageProps) {
-  const { locale } = props.params
+export default async function Home({ params }: PageProps) {
+  const { locale } = params
   const urls = getIntlUrls(locale)
   const [actions, topDonors] = await Promise.all([
     getPublicRecentActivity({ limit: 50 }),
@@ -18,7 +18,7 @@ export default async function Home(props: PageProps) {
   ])
   return (
     <div className="container">
-      <RecentActivityAndLeaderboard {...{ ...props, actions, topDonors }} />
+      <RecentActivityAndLeaderboard {...{ locale, actions, topDonors }} />
     </div>
   )
 }

@@ -5,14 +5,15 @@ import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
 import getIntl from '@/intl/intlMessages'
 import { generateClientComponentMessages } from '@/intl/intlServerUtils'
+import { SupportedLocale } from '@/intl/locales'
 import { PageProps } from '@/types'
 import { getIntlUrls } from '@/utils/shared/urls'
 
 const INTL_PREFIX = 'Navbar'
 
-export async function Navbar(props: PageProps) {
-  const intl = await getIntl(props.params.locale)
-  const urls = getIntlUrls(props.params.locale)
+export async function Navbar({ locale }: { locale: SupportedLocale }) {
+  const intl = await getIntl(locale)
+  const urls = getIntlUrls(locale)
   return (
     <>
       {/* TODO Delete */}

@@ -6,8 +6,8 @@ export const dynamic = 'force-dynamic'
 
 // TODO metadata
 
-export default async function Profile(props: PageProps) {
-  const urls = getIntlUrls(props.params.locale)
+export default async function Profile({ params }: PageProps) {
+  const urls = getIntlUrls(params.locale)
   const data = await getAuthenticatedData()
 
   return (

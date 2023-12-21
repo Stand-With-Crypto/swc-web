@@ -1,5 +1,6 @@
 import { ExternalLink, InternalLink } from '@/components/ui/link'
 import getIntl from '@/intl/intlMessages'
+import { SupportedLocale } from '@/intl/locales'
 import { PageProps } from '@/types'
 import { externalUrls, getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
@@ -9,8 +10,7 @@ const i18nKey = 'FooterLinks'
 
 const footerLinkStyles = cn('hover:underline font-bold block')
 
-export async function Footer(props: PageProps) {
-  const { locale } = props.params
+export async function Footer({ locale }: { locale: SupportedLocale }) {
   const intl = await getIntl(locale)
   const urls = getIntlUrls(locale)
 

@@ -27,7 +27,7 @@ export const fetchDTSI = async <R, V = object>(query: string, variables?: V) => 
       variables,
     }),
   })
-  logger.info(`fetchDTSI returned with status ${response.status}`)
+  logger.debug(`fetchDTSI returned with status ${response.status}`)
   const json = (await response.json()) as { data: R } | { errors: any[] }
   if ('errors' in json) {
     throw new Error(`fetchDTSI threw with ${JSON.stringify(json.errors)}`)

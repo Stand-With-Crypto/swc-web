@@ -19,8 +19,8 @@ export const dynamic = 'error'
 
 // TODO metadata
 
-export default async function Home(props: PageProps) {
-  const { locale } = props.params
+export default async function Home({ params }: PageProps) {
+  const { locale } = params
   const [intl, leaderboardEntities, totalDonations] = await Promise.all([
     getIntl(locale),
     getLeaderboard({ offset: 0 }),
