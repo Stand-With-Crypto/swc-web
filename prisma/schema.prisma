@@ -47,7 +47,7 @@ model Address {
 // A key assumption we're making about how this model will be used:
 
 // A user has a one-to-one relationship with a crypto address. We could model it so a user has a one-to-many relationship with adddresses, and try to deduplicate/merge actions a user takes across multiple wallets.
-// given the introduced complexity, and the fact we're not confident that's the desired user behavior (maybe someone wants to represent themselves as two addresses/ENS like if they have a personal wallet and corporation wallet)
+// given the introduced complexity, and the fact we're not confident that's the desired user behavior (maybe someone wants to represent themselves as two addresses/ENS like if they have a personal wallet and corporation wallet), we opt instead for one-to-one
 
 // A user has a many-to-many relationship with an email.
 // Example where a user will have multiple emails: They opt in on the coinbase app, and we associate that email with them, and then later on they go to their profile page and set a different email address as their "primary" email address. We don't want to loose the association to the coinbase opt in
@@ -55,7 +55,7 @@ model Address {
 // The user will need a "primary" email address so we are only sending marketing messages to one email address. We can make this togglable in their profile page
 
 // A user has a one-to-many relationship with a session. A session will only be persisted if a user is not logged in and performs an action on the site. If they are logged in, we will associate the action with thier crypto address.
-// Once we identify a session is associated with a crypto address (the user logs in to the app in the same session after performing an action), we'll want to retroactively associate any actions related to the session with the crypto address. We will maintain the session fk as wellto keep the context that the action was originally linked to a session instead
+// Once we identify a session is associated with a crypto address (the user logs in to the app in the same session after performing an action), we'll want to merge the session and crypto address under the same user. We will maintain the session fk on the action keep the context that the action was originally linked to a session instead
 model User {
   id                        String            @id @default(uuid())
   datetimeUpdated           DateTime          @updatedAt @map("datetime_updated")
