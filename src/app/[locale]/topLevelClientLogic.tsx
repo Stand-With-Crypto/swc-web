@@ -1,12 +1,12 @@
 'use client'
 
-import { maybeSetSessionIdOnClient } from '@/utils/shared/unauthenticatedSessionId'
 import {
   ClientAnalyticActionType,
   ClientAnalyticComponentType,
   initAnalytics,
   trackClientAnalytic,
 } from '@/utils/web/clientAnalytics'
+import { maybeSetUserSessionIdOnClient } from '@/utils/web/clientUserSessionId'
 import { usePathname } from 'next/navigation'
 import { useEffect } from 'react'
 
@@ -15,7 +15,7 @@ export function TopLevelClientLogic() {
   const pathname = usePathname()
   // Not, in local dev this component will double render. It doesn't do this after it is built (verify in testing)
   useEffect(() => {
-    const sessionId = maybeSetSessionIdOnClient()
+    const sessionId = maybeSetUserSessionIdOnClient()
     initAnalytics(sessionId)
   }, [])
   useEffect(() => {

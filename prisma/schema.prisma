@@ -3,10 +3,10 @@ generator client {
   previewFeatures = ["driverAdapters"]
 }
 
-generator erd {
-  provider  = "prisma-erd-generator"
-  tableOnly = true
-}
+// generator erd {
+//   provider  = "prisma-erd-generator"
+//   tableOnly = true
+// }
 
 datasource db {
   provider     = "mysql"
@@ -68,9 +68,8 @@ model User {
   sampleDatabaseIncrement   Int               @default(0) // TODO delete
   primaryUserEmailAddress   UserEmailAddress? @relation("asPrimaryUserEmailAddress", fields: [primaryUserEmailAddressId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   primaryUserEmailAddressId String?           @unique @map("primary_user_email_address_id")
-  cryptoAddressId           String?           @unique @map("cryptoAddress_id")
-  cryptoAddress             CryptoAddress?    @relation(fields: [cryptoAddressId], references: [id])
 
+  userCryptoAddress  UserCryptoAddress?
   userSessions       UserSession[]
   userEmailAddresses UserEmailAddress[] @relation("userEmailAddresses")
   userActions        UserAction[]
@@ -83,8 +82,8 @@ model User {
 // A user session will only be linked to user actions on creation if a different authenticated user type (email or wallet) is not already associated with the action
 model UserSession {
   id              String   @id @default(uuid())
-  userId          String?  @map("user_id")
-  user            User?    @relation(fields: [userId], references: [id])
+  userId          String  @map("user_id")
+  user            User    @relation(fields: [userId], references: [id])
   datetimeUpdated DateTime @updatedAt @map("datetime_updated")
   datetimeCreated DateTime @default(now()) @map("datetime_created")
 
@@ -126,19 +125,20 @@ enum SupportedUserCryptoNetwork {
 }
 
 // Using ThirdWeb a user can create multiple "accounts", one per wallet. They can also have some that are self-custodied, and some that are being custodied by ThirdWeb (email, google login, etc)
-model CryptoAddress {
+model UserCryptoAddress {
   id              String                     @id @default(uuid())
   cryptoNetwork   SupportedUserCryptoNetwork @default(ETH) @map("crypto_network")
-  cryptoAddress   String                     @unique @map("crypto_address")
+  address         String                     @map("address")
   // TODO figure out how to detect this via thirdweb sdk and then add it to the model
   // initialCustodian Web3AddressCustodian
   datetimeUpdated DateTime                   @updatedAt @map("datetime_updated")
   datetimeCreated DateTime                   @default(now()) @map("datetime_created")
+  userId          String                     @unique @map("user_id")
+  user            User                       @relation(fields: [userId], references: [id])
 
   userActions UserAction[]
-  user        User?
 
-  @@unique([cryptoAddress, cryptoNetwork])
+  @@unique([address, cryptoNetwork])
 }
 
 enum UserActionType {
@@ -151,25 +151,25 @@ enum UserActionType {
 }
 
 model UserAction {
-  id                 String            @id @default(uuid())
-  userId             String?           @map("user_id")
-  user               User?             @relation(fields: [userId], references: [id])
+  id                  String             @id @default(uuid())
+  userId              String             @map("user_id")
+  user                User               @relation(fields: [userId], references: [id])
   // Because a user could be in a number of different states (logged in, not logged in, etc) we want to track the different types of users that could be performing an action
   // an action will only ever be associated with one of these types of users
-  cryptoAddressId    String?           @map("crypto_address_id")
-  cryptoAddress      CryptoAddress?    @relation(fields: [cryptoAddressId], references: [id])
-  userSessionId      String?           @map("user_session_id")
-  userSession        UserSession?      @relation(fields: [userSessionId], references: [id])
-  userEmailAddressId String?           @map("user_email_address_id")
-  userEmailAddress   UserEmailAddress? @relation(fields: [userEmailAddressId], references: [id])
+  userCryptoAddressId String?            @map("crypto_address_id")
+  userCryptoAddress   UserCryptoAddress? @relation(fields: [userCryptoAddressId], references: [id])
+  userSessionId       String?            @map("user_session_id")
+  userSession         UserSession?       @relation(fields: [userSessionId], references: [id])
+  userEmailAddressId  String?            @map("user_email_address_id")
+  userEmailAddress    UserEmailAddress?  @relation(fields: [userEmailAddressId], references: [id])
   // because some of these will be backfilled from other data sources, we want to differentiate between the datetime the action was performed and the datetime we recorded it in this db
-  datetimeOccurred   DateTime          @map("datetime_occurred")
-  datetimeUpdated    DateTime          @updatedAt @map("datetime_updated")
-  datetimeCreated    DateTime          @default(now()) @map("datetime_created")
+  datetimeOccurred    DateTime           @map("datetime_occurred")
+  datetimeUpdated     DateTime           @updatedAt @map("datetime_updated")
+  datetimeCreated     DateTime           @default(now()) @map("datetime_created")
   // Because some actions that are not NFT_MINT can still have an nft associated with them, we want to have an option fk constrain on all actions
-  nftMintId          String?           @map("nft_mint_id")
-  nftMint            NFTMint?          @relation(fields: [nftMintId], references: [id])
-  actionType         UserActionType    @map("action_type")
+  nftMintId           String?            @map("nft_mint_id")
+  nftMint             NFTMint?           @relation(fields: [nftMintId], references: [id])
+  actionType          UserActionType     @map("action_type")
 
   // We'll need logic to validate and verify only one action type is every associated with a UserAction
   userActionEmail    UserActionEmail?
@@ -179,9 +179,10 @@ model UserAction {
 
   @@index([datetimeOccurred])
   @@index([userId])
-  @@index([cryptoAddressId])
+  @@index([userCryptoAddressId])
   @@index([userSessionId])
   @@index([nftMintId])
+  @@index([userEmailAddressId])
   @@map("user_action")
 }
 

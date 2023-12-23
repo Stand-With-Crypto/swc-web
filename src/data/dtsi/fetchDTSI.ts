@@ -15,7 +15,7 @@ const DO_THEY_SUPPORT_IT_API_KEY = requiredEnv(
 )
 
 export const fetchDTSI = async <R, V = object>(query: string, variables?: V) => {
-  logger.info(`fetchDTSI called`)
+  logger.debug(`fetchDTSI called`)
   const response = await fetchReq('https://www.dotheysupportit.com/api/graphql', {
     method: 'POST',
     headers: {

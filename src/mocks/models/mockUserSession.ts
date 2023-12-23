@@ -1,11 +1,11 @@
 import { fakerFields } from '@/mocks/fakerUtils'
 import { mockCommonDatetimes } from '@/mocks/mockCommonDatetimes'
-import { SessionUser } from '@prisma/client'
+import { UserSession } from '@prisma/client'
 
-export function mockSessionUser(): SessionUser {
+export function mockUserSession(): UserSession {
   return {
     ...mockCommonDatetimes(),
     id: fakerFields.id(),
-    inferredUserId: fakerFields.id(),
+    userId: fakerFields.id(),
   }
 }

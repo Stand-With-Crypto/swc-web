@@ -1,9 +1,7 @@
-import { ClientCryptoAddressUser } from '@/clientModels/clientCryptoAddress/clientCryptoAddressUser'
+import { ClientUser } from '@/clientModels/clientUser/clientUser'
 import { NextImage } from '@/components/ui/image'
-import { ImageAvatar, ImageAvatarProps } from '@/components/ui/imageAvatar'
-import { InitialsAvatar } from '@/components/ui/initialsAvatar'
+import { ImageAvatarProps } from '@/components/ui/imageAvatar'
 
-import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { deterministicArraySelection } from '@/utils/shared/deterministicArraySelection'
 
 const genericImages = [
@@ -16,12 +14,12 @@ const genericImages = [
 ]
 
 // TODO support ENS images
-export const CryptoAddressUserAvatar: React.FC<
+export const UserAvatar: React.FC<
   {
-    cryptoAddressUser: Pick<ClientCryptoAddressUser, 'cryptoAddress'> | null
+    user: ClientUser
   } & Pick<ImageAvatarProps, 'size' | 'className'>
-> = ({ cryptoAddressUser, size, ...props }) => {
-  if (!cryptoAddressUser?.cryptoAddress) {
+> = ({ user, size, ...props }) => {
+  if (!user.isPubliclyVisible || !user.cryptoAddress) {
     return (
       <NextImage
         {...props}
@@ -35,7 +33,7 @@ export const CryptoAddressUserAvatar: React.FC<
   return (
     <NextImage
       {...props}
-      src={deterministicArraySelection(genericImages, cryptoAddressUser.cryptoAddress)}
+      src={deterministicArraySelection(genericImages, user.cryptoAddress.address)}
       alt="Generic profile picture for anonymous user"
       width={size}
       height={size}

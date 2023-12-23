@@ -2,7 +2,7 @@ import 'server-only'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getClientUserAction } from '@/clientModels/clientUserAction/clientUserAction'
 import { queryDTSIPeopleBySlugForUserActions } from '@/data/dtsi/queries/queryDTSIPeopleBySlugForUserActions'
-import { getClientCryptoAddressUser } from '@/clientModels/clientCryptoAddress/clientCryptoAddressUser'
+import { getClientUser } from '@/clientModels/clientUser/clientUser'
 
 interface RecentActivityConfig {
   limit: number
@@ -15,7 +15,9 @@ const fetchFromPrisma = async (config: RecentActivityConfig) => {
     },
     take: config.limit,
     include: {
-      cryptoAddressUser: true,
+      user: {
+        include: { userCryptoAddress: true },
+      },
       userActionEmail: {
         include: {
           userActionEmailRecipients: true,
@@ -46,8 +48,8 @@ export const getPublicRecentActivity = async (config: RecentActivityConfig) => {
   const dtsiPeople = await queryDTSIPeopleBySlugForUserActions(Array.from(dtsiSlugs)).then(
     x => x.people,
   )
-  return data.map(({ cryptoAddressUser, ...record }) => ({
+  return data.map(({ user, ...record }) => ({
     ...getClientUserAction({ record, dtsiPeople }),
-    cryptoAddressUser: cryptoAddressUser && getClientCryptoAddressUser(cryptoAddressUser),
+    user: user && getClientUser(user),
   }))
 }

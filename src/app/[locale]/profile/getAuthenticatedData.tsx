@@ -1,5 +1,5 @@
 import { getClientAddress } from '@/clientModels/clientAddress'
-import { getSensitiveDataClientCryptoAddressUser } from '@/clientModels/clientCryptoAddress/sensitiveDataClientCryptoAddressUser'
+import { getSensitiveDataClientUser } from '@/clientModels/clientUser/sensitiveDataClientUser'
 import { getSensitiveDataClientUserAction } from '@/clientModels/clientUserAction/sensitiveDataClientUserAction'
 import { queryDTSIPeopleBySlugForUserActions } from '@/data/dtsi/queries/queryDTSIPeopleBySlugForUserActions'
 import { appRouterGetAuthUser } from '@/utils/server/appRouterGetAuthUser'
@@ -11,11 +11,12 @@ export async function getAuthenticatedData() {
   if (!authUser) {
     return null
   }
-  const cryptoAddressUser = await prismaClient.cryptoAddressUser.findUniqueOrThrow({
+  const user = await prismaClient.user.findFirstOrThrow({
     where: {
-      cryptoAddress: authUser.address,
+      userCryptoAddress: { address: authUser.address },
     },
     include: {
+      userCryptoAddress: true,
       address: true,
       userActions: {
         include: {
@@ -34,7 +35,7 @@ export async function getAuthenticatedData() {
     },
   })
   const dtsiSlugs = new Set<string>()
-  cryptoAddressUser.userActions.forEach(userAction => {
+  user.userActions.forEach(userAction => {
     if (userAction.userActionCall) {
       dtsiSlugs.add(userAction.userActionCall.recipientDtsiSlug)
     } else if (userAction.userActionEmail) {
@@ -46,9 +47,9 @@ export async function getAuthenticatedData() {
   const dtsiPeople = await queryDTSIPeopleBySlugForUserActions(Array.from(dtsiSlugs)).then(
     x => x.people,
   )
-  const { userActions, address, ...rest } = cryptoAddressUser
+  const { userActions, address, ...rest } = user
   return {
-    ...getSensitiveDataClientCryptoAddressUser(rest),
+    ...getSensitiveDataClientUser(rest),
     address: address && getClientAddress(address),
     userActions: userActions.map(record =>
       getSensitiveDataClientUserAction({ record, dtsiPeople }),
