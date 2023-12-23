@@ -1,21 +1,21 @@
-import { ClientCryptoAddressUser } from '@/clientModels/clientCryptoAddress/clientCryptoAddressUser'
+import { ClientUser } from '@/clientModels/clientUser/clientUser'
 import { ClientUserAction } from '@/clientModels/clientUserAction/clientUserAction'
+import { UserAvatar } from '@/components/app/userAvatar'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
 import { FormattedRelativeDatetime } from '@/components/ui/formattedRelativeDatetime'
 import { DTSIPersonForUserActions } from '@/data/dtsi/queries/queryDTSIPeopleBySlugForUserActions'
 import { SupportedLocale } from '@/intl/locales'
-import { formatDonationOrganization } from '@/utils/web/donationUtils'
-import { gracefullyError } from '@/utils/shared/gracefullyError'
-import { UserActionOptInType, UserActionType } from '@prisma/client'
 import {
   dtsiPersonFullName,
   dtsiPersonPoliticalAffiliationCategoryAbbreviation,
 } from '@/utils/dtsi/dtsiPersonUtils'
-import { CryptoAddressUserAvatar } from '@/components/app/cryptoAddressUserAvatar'
-import { getCryptoAddressUserDisplayName } from '@/utils/web/cryptoAddressUserUtils'
+import { gracefullyError } from '@/utils/shared/gracefullyError'
+import { formatDonationOrganization } from '@/utils/web/donationUtils'
+import { getUserDisplayName } from '@/utils/web/userUtils'
+import { UserActionOptInType, UserActionType } from '@prisma/client'
 
 interface RecentActivityRowProps {
-  action: ClientUserAction & { cryptoAddressUser: ClientCryptoAddressUser | null }
+  action: ClientUserAction & { user: ClientUser }
   locale: SupportedLocale
 }
 
@@ -28,7 +28,7 @@ function RecentActivityRowBase({
     <div className="flex justify-between gap-5">
       <div className="flex items-center gap-2">
         <div>
-          <CryptoAddressUserAvatar size={30} cryptoAddressUser={action.cryptoAddressUser} />
+          <UserAvatar size={30} user={action.user} />
         </div>
         <div>{children}</div>
       </div>
@@ -56,7 +56,7 @@ const formatDTSIPerson = (person: DTSIPersonForUserActions) => {
 
 export function RecentActivityRow(props: RecentActivityRowProps) {
   const { action, locale } = props
-  const userDisplayName = getCryptoAddressUserDisplayName(props.action.cryptoAddressUser)
+  const userDisplayName = getUserDisplayName(props.action.user)
   const getChild = () => {
     switch (action.actionType) {
       case UserActionType.OPT_IN: {

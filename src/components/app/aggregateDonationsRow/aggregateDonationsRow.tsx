@@ -1,10 +1,10 @@
-import { CryptoAddressUserAvatar } from '@/components/app/cryptoAddressUserAvatar'
+import { UserAvatar } from '@/components/app/userAvatar'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
 import { NextImage } from '@/components/ui/image'
 import { AggregateDonationsByUser } from '@/data/donations/getAggregateDonationsByUser'
 import { SupportedLocale } from '@/intl/locales'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
-import { getCryptoAddressUserDisplayName } from '@/utils/web/cryptoAddressUserUtils'
+import { getUserDisplayName } from '@/utils/web/userUtils'
 
 interface AggregateDonationsRowProps {
   aggregateDonations: AggregateDonationsByUser[0]
@@ -35,13 +35,10 @@ export function AggregateDonationsRow({
           )}
         </div>
         <div>
-          <CryptoAddressUserAvatar
-            size={30}
-            cryptoAddressUser={aggregateDonations.cryptoAddressUser}
-          />
+          <UserAvatar size={30} user={aggregateDonations.user} />
         </div>
         <div>
-          <div>{getCryptoAddressUserDisplayName(aggregateDonations.cryptoAddressUser)}</div>
+          <div>{getUserDisplayName(aggregateDonations.user)}</div>
           <div className="text-xs text-gray-500">Stand With Crypto</div>
         </div>
       </div>

@@ -2,10 +2,10 @@ import 'dotenv/config'
 import { runBin } from '@/bin/binUtils'
 import { mockAddress } from '@/mocks/models/mockAddress'
 import { mockAuthenticationNonce } from '@/mocks/models/mockAuthenticationNonce'
-import { mockCryptoAddressUser } from '@/mocks/models/mockCryptoAddressUser'
-import { mockInferredUser } from '@/mocks/models/mockInferredUser'
+import { mockUserCryptoAddress } from '@/mocks/models/mockUserCryptoAddress'
+import { mockUser } from '@/mocks/models/mockUser'
 import { mockNFT } from '@/mocks/models/mockNFT'
-import { mockSessionUser } from '@/mocks/models/mockSessionUser'
+import { mockUserSession } from '@/mocks/models/mockUserSession'
 import { mockUserAction } from '@/mocks/models/mockUserAction'
 import { mockUserActionCall } from '@/mocks/models/mockUserActionCall'
 import { mockUserActionDonation } from '@/mocks/models/mockUserActionDonation'
@@ -23,6 +23,7 @@ import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
 import { UserActionType } from '@prisma/client'
 import { mockUserActionOptIn } from '@/mocks/models/mockUserActionOptIn'
+import { mockUserEmailAddress } from '@/mocks/models/mockUserEmailAddress'
 
 const LOCAL_USER_CRYPTO_ADDRESS = requiredEnv(
   process.env.LOCAL_USER_CRYPTO_ADDRESS,
@@ -38,7 +39,7 @@ const argv = yargs(hideBin(process.argv)).option('size', {
   type: 'string',
   describe: 'The timestamp of the last updated record',
   choices: Object.values(SeedSize),
-  default: SeedSize.SM,
+  default: SeedSize.MD,
 }).argv
 
 const logger = getLogger('seedLocalDb')
@@ -73,51 +74,75 @@ async function seed() {
   const authenticationNonce = await prismaClient.authenticationNonce.findMany()
   logEntity({ authenticationNonce })
   /*
-  inferredUser
+  user
   */
   await batchAsyncAndLog(
-    _.times(seedSizes([10, 100, 1000])).map(() => mockInferredUser()),
+    _.times(seedSizes([10, 100, 1000])).map(() => mockUser()),
     data =>
-      prismaClient.inferredUser.createMany({
+      prismaClient.user.createMany({
         data,
       }),
   )
-  const inferredUser = await prismaClient.inferredUser.findMany()
-  logEntity({ inferredUser })
+  const user = await prismaClient.user.findMany()
+  logEntity({ user })
   /*
-  sessionUser
+  userSession
   */
   await batchAsyncAndLog(
-    _.times(seedSizes([50, 500, 5000])).map(() => ({
-      ...mockSessionUser(),
-      inferredUserId: faker.helpers.maybe(() => faker.helpers.arrayElement(inferredUser).id),
+    _.times(user.length * 2).map(() => ({
+      ...mockUserSession(),
+      userId: faker.helpers.arrayElement(user).id,
     })),
     data =>
-      prismaClient.sessionUser.createMany({
+      prismaClient.userSession.createMany({
         data,
       }),
   )
-  const sessionUser = await prismaClient.sessionUser.findMany()
-  logEntity({ sessionUser })
+  const userSession = await prismaClient.userSession.findMany()
+  logEntity({ userSession })
+  const usersUnusedOnCryptoAddress = [...user]
   /*
-  cryptoAddressUser
+  userCryptoAddress
   */
   await batchAsyncAndLog(
-    _.times(seedSizes([100, 1000, 10000])).map(index => ({
-      ...mockCryptoAddressUser(),
-      cryptoAddress: index === 0 ? LOCAL_USER_CRYPTO_ADDRESS : faker.finance.ethereumAddress(),
-      inferredUserId: faker.helpers.arrayElement(inferredUser).id,
+    _.times(user.length / 2).map(index => ({
+      ...mockUserCryptoAddress(),
+      address: index === 0 ? LOCAL_USER_CRYPTO_ADDRESS : faker.finance.ethereumAddress(),
+      // a crypto user address must only ever be associated with one user so we use splice here to ensure we can randomly assign these models to users without any duplicates
+      userId: usersUnusedOnCryptoAddress.splice(
+        faker.number.int({ min: 0, max: usersUnusedOnCryptoAddress.length - 1 }),
+        1,
+      )[0].id,
     })),
     data =>
-      prismaClient.cryptoAddressUser.createMany({
+      prismaClient.userCryptoAddress.createMany({
         data,
       }),
   )
-  const cryptoAddressUser = await prismaClient.cryptoAddressUser.findMany()
-  const cryptoAddressLocalUser = cryptoAddressUser.find(
-    x => x.cryptoAddress === LOCAL_USER_CRYPTO_ADDRESS,
+  const userCryptoAddress = await prismaClient.userCryptoAddress.findMany()
+  const localUserCryptoAddress = userCryptoAddress.find(
+    x => x.address === LOCAL_USER_CRYPTO_ADDRESS,
   )!
-  logEntity({ cryptoAddressUser })
+  logEntity({ userCryptoAddress })
+
+  /*
+  userEmailAddress
+  */
+  await batchAsyncAndLog(
+    _.times(user.length / 2).map(index => ({
+      ...mockUserEmailAddress(),
+      userId: faker.helpers.arrayElement(user).id,
+    })),
+    data =>
+      prismaClient.userEmailAddress.createMany({
+        data,
+      }),
+  )
+  const userEmailAddress = await prismaClient.userEmailAddress.findMany()
+  const localUserEmailAddresses = userEmailAddress.filter(
+    x => x.userId === localUserCryptoAddress.userId,
+  )
+  logEntity({ userEmailAddress })
   /*
   nft
   */
@@ -136,19 +161,34 @@ async function seed() {
   const userActionTypes = Object.values(UserActionType)
   await batchAsyncAndLog(
     _.times(seedSizes([400, 4000, 40000])).map(index => {
-      const user =
-        index < 10
-          ? cryptoAddressLocalUser
-          : index % 4 === 1
-            ? faker.helpers.arrayElement(sessionUser)
-            : faker.helpers.arrayElement(cryptoAddressUser)
+      const actionType = userActionTypes[index % userActionTypes.length]
+      const relatedItem =
+        actionType === UserActionType.OPT_IN
+          ? faker.helpers.arrayElement(userEmailAddress)
+          : index < 10
+            ? localUserCryptoAddress
+            : index % 4 === 1
+              ? faker.helpers.arrayElement(userSession)
+              : faker.helpers.arrayElement(userCryptoAddress)
 
       return {
-        ...mockUserAction(),
-        actionType: userActionTypes[index % userActionTypes.length],
-        cryptoAddressUserId: 'cryptoAddress' in user ? user.id : null,
-        sessionUserId: 'cryptoAddress' in user ? null : user.id,
-        inferredUserId: user.inferredUserId,
+        ...mockUserAction({
+          actionType,
+          userCryptoAddressId:
+            actionType === UserActionType.OPT_IN
+              ? null
+              : 'cryptoAddress' in relatedItem
+                ? relatedItem.id
+                : null,
+          userSessionId:
+            actionType === UserActionType.OPT_IN
+              ? null
+              : 'cryptoAddress' in relatedItem
+                ? null
+                : relatedItem.id,
+          userEmailAddressId: actionType === UserActionType.OPT_IN ? relatedItem.id : null,
+        }),
+        userId: relatedItem.userId,
       }
     }),
     data =>

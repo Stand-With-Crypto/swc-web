@@ -26,12 +26,14 @@ Below is a non-exhaustive list of coding conventions that we try to follow. This
 - Whenever possible, try and use TailwindCSS and Radix UI as the core primitives for building UI
 - When tasked with building out a new base-level UI primitive (a checkbox component for example), consider checking [shadcn](https://ui.shadcn.com/docs/components/), a CLI tool that aides in the rapid development of TailwindCSS/Radix UI components, to see if there's any prebuilt examples that we can use as a starting point. Because shadcn [is not a component library](https://ui.shadcn.com/docs), we get all the benefits of bootstrapping the UI with some best practices, and none of the downsides of getting locked in to opinionated component libraries that are hard to customize.
 - When building forms that require best-in-class UX practices (field-level error validation for example), consider leveraging `react-hook-form` and the corresponding pre-built components in `src/components/ui/form`.
+- If your form submission results in server-side zod errors that should be mapped to specific form fields, make sure to return them in an object structure as `{ errors: validatedFields.error.flatten().fieldErrors }` so they can successfully be used by client side functions like `triggerServerActionForForm`
 
 ## Security
 
 - Follow [Next.js security best practices](https://nextjs.org/blog/security-nextjs-server-components-actions)
   - From the blog post but calling out here for good measure: always include `import 'server-only'` in files that you never want to be exposed to the client to prevent unexpected bugs
 - When returning database models to the client, make sure to run them through the respective "client" parser found in the `/src/clientModels` folder to ensure we strip out any sensitive data
+- Never have react components accept database models directly. They should always accept the `Client` variant of the model
 
 ## Database
 
@@ -43,10 +45,11 @@ Below is a non-exhaustive list of coding conventions that we try to follow. This
 - Column names for boolean types should be prefixed with a descriptor that implies a yes or no answer. Examples of prefixes include `has`, `is`, `should`, `can`, etc
 - String columns that can possibly be submitted with an empty string (form inputs, etc) should be set to default to "" and should not be nullable. This ensures that there can't be two "falsy" states (null, and empty string). For string columns that can not ever be submitted with an empty string (a string id column for example), use nullable instead of empty string.
 
-## Next.js
+## Data Fetching/Rendering
 
 - Prefer static/cached pages and API endpoints, unless there are product requirements that necessitate otherwise
 - For static/cached pages, always explicitly set `export const dynamic = 'error'` (see [docs](https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#dynamic)) to prevent future code changes that accidentally make the page dynamic/slow
 - Use the App Router API directory over Page Router API directory whenever possible
   - Examples of when to use the Page Router include when dealing with libraries that have not been upgraded to fully support the App Router yet
 - Don't use Client Components unless you need client-side interactivity. When developing larger Client Components, consider if some of the logic could be decoupled in to a Server Component for the non-dynamic portions. Server Components have a much smaller bundle size footprint.
+- If you need client-side data fetching in addition to or instead of rendering via RSCs ("Load More" actions, realtime updating data, etc), use the [swr](https://swr.vercel.app/) library from Vercel unless product requirements demand something more custom
