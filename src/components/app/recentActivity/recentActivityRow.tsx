@@ -33,7 +33,7 @@ function RecentActivityRowBase({
         <div>{children}</div>
       </div>
       <div className="shrink-0 text-xs text-gray-500">
-        <FormattedRelativeDatetime date={action.datetimeOccurred} locale={locale} />
+        <FormattedRelativeDatetime date={action.datetimeCreated} locale={locale} />
       </div>
     </div>
   )

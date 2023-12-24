@@ -27,4 +27,6 @@ export const externalUrls = {
 export const apiUrls = {
   leaderboard: (offset: number) => `/api/leaderboard/${offset}`,
   totalDonations: (locale: SupportedLocale) => `/api/total-donations/${locale}`,
+  mockTotalDonations: (locale: SupportedLocale) => `/api/mock-total-donations/${locale}`,
+  performedUserActionTypes: () => `/api/authenticated/performed-user-action-types`,
 }

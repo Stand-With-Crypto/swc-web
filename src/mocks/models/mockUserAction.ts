@@ -21,6 +21,5 @@ export function mockUserAction({
     nftMintId: null,
     id: fakerFields.id(),
     userId: fakerFields.id(),
-    datetimeOccurred: faker.date.past(),
   }
 }

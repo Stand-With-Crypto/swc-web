@@ -13,6 +13,10 @@ const genericImages = [
   '/userAvatars/yellow.svg',
 ]
 
+const Container = ({ children }: { children: React.ReactNode }) => (
+  <div className="overflow-hidden rounded-full">{children}</div>
+)
+
 // TODO support ENS images
 export const UserAvatar: React.FC<
   {
@@ -21,22 +25,26 @@ export const UserAvatar: React.FC<
 > = ({ user, size, ...props }) => {
   if (!user.isPubliclyVisible || !user.cryptoAddress) {
     return (
+      <Container>
+        <NextImage
+          {...props}
+          src={'/userAvatars/grey.svg'}
+          alt="Generic profile picture for anonymous user"
+          width={size}
+          height={size}
+        />
+      </Container>
+    )
+  }
+  return (
+    <Container>
       <NextImage
         {...props}
-        src={'/userAvatars/grey.svg'}
+        src={deterministicArraySelection(genericImages, user.cryptoAddress.address)}
         alt="Generic profile picture for anonymous user"
         width={size}
         height={size}
       />
-    )
-  }
-  return (
-    <NextImage
-      {...props}
-      src={deterministicArraySelection(genericImages, user.cryptoAddress.address)}
-      alt="Generic profile picture for anonymous user"
-      width={size}
-      height={size}
-    />
+    </Container>
   )
 }

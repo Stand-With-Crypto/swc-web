@@ -139,9 +139,6 @@ async function seed() {
       }),
   )
   const userEmailAddress = await prismaClient.userEmailAddress.findMany()
-  const localUserEmailAddresses = userEmailAddress.filter(
-    x => x.userId === localUserCryptoAddress.userId,
-  )
   logEntity({ userEmailAddress })
   /*
   nft
@@ -159,9 +156,37 @@ async function seed() {
   userAction
   */
   const userActionTypes = Object.values(UserActionType)
+  const userActionTypesToPersist = _.times(seedSizes([400, 4000, 40000])).map(index => {
+    return userActionTypes[index % userActionTypes.length]
+  })
+  /*
+  NFTMint
+  */
   await batchAsyncAndLog(
-    _.times(seedSizes([400, 4000, 40000])).map(index => {
-      const actionType = userActionTypes[index % userActionTypes.length]
+    userActionTypesToPersist
+      .filter(x => x === UserActionType.NFT_MINT)
+      .map(index => {
+        const selectedNFT = faker.helpers.arrayElement(nft)
+        return {
+          nftId: selectedNFT.id,
+          costAtMint: selectedNFT.cost,
+          costAtMintCurrencyCode: selectedNFT.costCurrencyCode,
+          costAtMintUsd: selectedNFT.cost.times(MOCK_CURRENT_ETH_USD_EXCHANGE_RATE),
+        }
+      }),
+    data =>
+      prismaClient.nFTMint.createMany({
+        data,
+      }),
+  )
+  const nftMint = await prismaClient.nFTMint.findMany()
+  logEntity({ nftMint })
+
+  const usedNftMints = [...nftMint]
+  console.log('start', usedNftMints.length)
+
+  await batchAsyncAndLog(
+    userActionTypesToPersist.map((actionType, index) => {
       const relatedItem =
         actionType === UserActionType.OPT_IN
           ? faker.helpers.arrayElement(userEmailAddress)
@@ -170,7 +195,7 @@ async function seed() {
             : index % 4 === 1
               ? faker.helpers.arrayElement(userSession)
               : faker.helpers.arrayElement(userCryptoAddress)
-
+      console.log(usedNftMints.length)
       return {
         ...mockUserAction({
           actionType,
@@ -189,6 +214,12 @@ async function seed() {
           userEmailAddressId: actionType === UserActionType.OPT_IN ? relatedItem.id : null,
         }),
         userId: relatedItem.userId,
+        // a nft mint must only ever be associated with one action so we use splice here to ensure we can randomly assign these models to users without any duplicates
+        nftMintId:
+          actionType === UserActionType.NFT_MINT
+            ? usedNftMints.splice(faker.number.int({ min: 0, max: usedNftMints.length - 1 }), 1)[0]
+                .id
+            : null,
       }
     }),
     data =>
@@ -203,42 +234,6 @@ async function seed() {
     UserActionType,
     typeof userAction
   >
-  /*
-  NFTMint
-  */
-  await batchAsyncAndLog(
-    userActionsByType[UserActionType.NFT_MINT].map((action, index) => {
-      const selectedNFT = faker.helpers.arrayElement(nft)
-      return {
-        id: action.id,
-        nftId: selectedNFT.id,
-        costAtMint: selectedNFT.cost,
-        costAtMintCurrencyCode: selectedNFT.costCurrencyCode,
-        costAtMintUsd: selectedNFT.cost.times(MOCK_CURRENT_ETH_USD_EXCHANGE_RATE),
-      }
-    }),
-    data =>
-      prismaClient.nFTMint.createMany({
-        data,
-      }),
-  )
-  const nftMint = await prismaClient.nFTMint.findMany()
-  logEntity({ nftMint })
-
-  // add these nft mints to the nft userAction NFT mints
-  for (let i = 0; i < nftMint.length; i++) {
-    const nftMintRecord = nftMint[i]
-    const userActionRecord = userActionsByType[UserActionType.NFT_MINT][i]
-    await prismaClient.userAction.update({
-      where: { id: userActionRecord.id },
-      data: {
-        nftMintId: nftMintRecord.id,
-      },
-    })
-    // update in memory as well
-    userActionRecord.nftMintId = nftMintRecord.id
-  }
-
   /*
   address
   */

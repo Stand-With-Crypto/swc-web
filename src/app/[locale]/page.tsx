@@ -1,4 +1,5 @@
 import { RecentActivityAndLeaderboard } from '@/app/[locale]/recentActivityAndLeaderboard'
+import { ClientAuthUserActionRowCTAs } from '@/components/app/userActionRowCTA/clientAuthUserActionRowCTAs'
 import { getAggregateDonationsByUser } from '@/data/donations/getAggregateDonationsByUser'
 import { getPublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 import { PageProps } from '@/types'
@@ -13,12 +14,13 @@ export default async function Home({ params }: PageProps) {
   const { locale } = params
   const urls = getIntlUrls(locale)
   const [actions, topDonors] = await Promise.all([
-    getPublicRecentActivity({ limit: 50 }),
-    getAggregateDonationsByUser({ limit: 50 }),
+    getPublicRecentActivity({ limit: 10 }),
+    getAggregateDonationsByUser({ limit: 10 }),
   ])
   return (
     <div className="container">
       <RecentActivityAndLeaderboard {...{ locale, actions, topDonors }} />
+      <ClientAuthUserActionRowCTAs />
     </div>
   )
 }
