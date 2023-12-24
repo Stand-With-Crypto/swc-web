@@ -28,6 +28,7 @@ const UserActionRowCTAButton = React.forwardRef<
       canBeTriggeredMultipleTimes,
       lazyRenderedForm,
       className,
+      actionType,
       ...props
     },
     ref,

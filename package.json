@@ -55,6 +55,7 @@
     "next-sitemap": "^4.2.3",
     "nextjs-toploader": "^1.6.4",
     "p-limit": "^5.0.0",
+    "p-retry": "^6.2.0",
     "pino-pretty": "^10.3.0",
     "react": "^18",
     "react-dom": "^18",
