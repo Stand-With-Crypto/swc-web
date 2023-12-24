@@ -56,8 +56,6 @@ export async function appRouterGetAuthUser(): Promise<ThirdwebAuthUser | null> {
   } catch (err) {
     return null
   }
-  console.log('authUser finished', authUser)
-
   /*
   Normally thirdWebAuthContext.callbacks.onUser(authUser) would be called here, but the type signature expects
   a request object which we don't have in the app router. So we run the logic we want to run "onUser" directly here instead

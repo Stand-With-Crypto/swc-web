@@ -1,0 +1,24 @@
+.overlay {
+  position: static;
+}
+
+.overlay::before {
+  content: '';
+  cursor: inherit;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.base {
+  position: relative;
+}
+.base a[href]:not(.overlay),
+.base abbr[title] {
+  position: relative;
+  z-index: 1;
+}

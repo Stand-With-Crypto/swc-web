@@ -73,8 +73,9 @@ type SensitiveDataClientUserActionTweet = { actionType: typeof UserActionType.TW
 At the database schema level we can't enforce that a single action only has one "type" FK, but at the client level we can and should
 */
 export type SensitiveDataClientUserAction = ClientModel<
-  Pick<UserAction, 'id' | 'datetimeOccurred' | 'actionType'> &
-    (
+  Pick<UserAction, 'id' | 'datetimeCreated' | 'actionType'> & {
+    nftMint: (ClientNFTMint & { nft: ClientNFT }) | null
+  } & (
       | SensitiveDataClientUserActionTweet
       | SensitiveDataClientUserActionOptIn
       | SensitiveDataClientUserActionEmail
@@ -106,8 +107,18 @@ export const getSensitiveDataClientUserAction = ({
 }): SensitiveDataClientUserAction => {
   // TODO determine how we want to "gracefully fail" if a DTSI slug doesn't exist
   const peopleBySlug = _.keyBy(dtsiPeople, x => x.slug)
-  const { id, datetimeOccurred, actionType } = record
-  const sharedProps = { id, datetimeOccurred, actionType }
+  const { id, datetimeCreated, actionType, nftMint } = record
+  const sharedProps = {
+    id,
+    datetimeCreated,
+    actionType,
+    nftMint: nftMint
+      ? {
+          ...getClientNFTMint(nftMint),
+          nft: getClientNFT(nftMint.nft),
+        }
+      : null,
+  }
   switch (actionType) {
     case UserActionType.OPT_IN: {
       const { optInType } = getRelatedModel(record, 'userActionOptIn')
@@ -156,13 +167,9 @@ export const getSensitiveDataClientUserAction = ({
       return getClientModel({ ...sharedProps, ...emailFields })
     }
     case UserActionType.NFT_MINT: {
-      const nftMint = getRelatedModel(record, 'nftMint')
       const mintFields: SensitiveDataClientUserActionNFTMint = {
         actionType,
-        nftMint: {
-          ...getClientNFTMint(nftMint),
-          nft: getClientNFT(nftMint.nft),
-        },
+        nftMint: sharedProps.nftMint!,
       }
       return getClientModel({ ...sharedProps, ...mintFields })
     }

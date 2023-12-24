@@ -138,6 +138,7 @@ model UserCryptoAddress {
 
   userActions UserAction[]
 
+  @@index([address])
   @@unique([address, cryptoNetwork])
 }
 
@@ -162,12 +163,10 @@ model UserAction {
   userSession         UserSession?       @relation(fields: [userSessionId], references: [id])
   userEmailAddressId  String?            @map("user_email_address_id")
   userEmailAddress    UserEmailAddress?  @relation(fields: [userEmailAddressId], references: [id])
-  // because some of these will be backfilled from other data sources, we want to differentiate between the datetime the action was performed and the datetime we recorded it in this db
-  datetimeOccurred    DateTime           @map("datetime_occurred")
   datetimeUpdated     DateTime           @updatedAt @map("datetime_updated")
   datetimeCreated     DateTime           @default(now()) @map("datetime_created")
   // Because some actions that are not NFT_MINT can still have an nft associated with them, we want to have an option fk constrain on all actions
-  nftMintId           String?            @map("nft_mint_id")
+  nftMintId           String?            @map("nft_mint_id") @unique
   nftMint             NFTMint?           @relation(fields: [nftMintId], references: [id])
   actionType          UserActionType     @map("action_type")
 
@@ -177,7 +176,7 @@ model UserAction {
   userActionDonation UserActionDonation?
   userActionOptIn    UserActionOptIn?
 
-  @@index([datetimeOccurred])
+  @@index([datetimeCreated])
   @@index([userId])
   @@index([userCryptoAddressId])
   @@index([userSessionId])

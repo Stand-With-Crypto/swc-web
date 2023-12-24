@@ -6,6 +6,7 @@ import { prismaClient } from '@/utils/server/prismaClient'
 import { thirdWebAuth } from '@/utils/server/thirdWebAuth'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { NextRequest, NextResponse } from 'next/server'
+import 'server-only'
 
 // TODO move to server action
 export async function POST(_request: NextRequest) {

@@ -1,10 +1,11 @@
 // TODO delete before v2 go-live
 import { LiveUpdatingTotalDonations } from '@/app/[locale]/sample-architecture-patterns/liveUpdatingTotalDonations'
-import { CTAEmailYourCongressperson } from '@/components/app/ctaEmailYourCongressperson'
 import { Leaderboard } from '@/components/app/leaderboard'
 import { LocaleDropdown } from '@/components/app/localeDropdown'
 import { NavbarSessionButton } from '@/components/app/navbarSessionButton'
+import { navbarSessionButtonMessages } from '@/components/app/navbarSessionButton/navbarSessionButtonClient.messages'
 import { SampleAuthenticatedRequest } from '@/components/app/sampleAuthenticatedRequest'
+import { Button } from '@/components/ui/button'
 import { getAggregateDonations } from '@/data/donations/getAggregateDonations'
 import { getLeaderboard } from '@/data/leaderboard'
 import getIntl from '@/intl/intlMessages'
@@ -12,10 +13,16 @@ import { generateClientComponentMessages } from '@/intl/intlServerUtils'
 import { PageProps } from '@/types'
 import { SampleTranslationClientComponent } from './sampleTranslationClientComponent'
 import { sampleTranslationClientComponentMessages } from './sampleTranslationClientComponent.messages'
-import { navbarSessionButtonMessages } from '@/components/app/navbarSessionButton/navbarSessionButtonClient.messages'
+import { Suspense, lazy } from 'react'
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
+import { getMockAggregateDonations } from '@/data/donations/getMockAggregateDonations'
 
 export const revalidate = 3600
 export const dynamic = 'error'
+
+export const LazyFormEmailYourCongressperson = lazy(
+  () => import('@/components/app/formEmailYourCongressperson'),
+)
 
 // TODO metadata
 
@@ -24,7 +31,7 @@ export default async function Home({ params }: PageProps) {
   const [intl, leaderboardEntities, totalDonations] = await Promise.all([
     getIntl(locale),
     getLeaderboard({ offset: 0 }),
-    getAggregateDonations(),
+    getMockAggregateDonations(),
   ])
   return (
     // TODO remove prose class and actually start styling things!
@@ -124,7 +131,17 @@ export default async function Home({ params }: PageProps) {
         <code>src/actions/triggerEmailYourCongressPerson.ts</code> directly into the client side
         component)
       </p>
-      <CTAEmailYourCongressperson />
+      <Dialog>
+        <DialogTrigger asChild>
+          <Button>Email your congressperson</Button>
+        </DialogTrigger>
+        <DialogContent>
+          <Suspense>
+            <LazyFormEmailYourCongressperson />
+          </Suspense>
+        </DialogContent>
+      </Dialog>
+
       <hr />
       <h2>Live updating value</h2>
       <p>

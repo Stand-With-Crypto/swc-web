@@ -16,3 +16,7 @@ export type GetDefineMessageResults<T extends Record<string, MessageDescriptor>>
 export type CommonProperties<A, B> = {
   [P in keyof A & keyof B]: A[P] | B[P]
 }
+
+export type MaybeAuthenticatedApiResponse<T extends (...args: any[]) => Promise<any>> =
+  | Awaited<ReturnType<T>>
+  | { authenticated: false }

@@ -11,7 +11,7 @@ interface RecentActivityConfig {
 const fetchFromPrisma = async (config: RecentActivityConfig) => {
   return prismaClient.userAction.findMany({
     orderBy: {
-      datetimeOccurred: 'desc',
+      datetimeCreated: 'desc',
     },
     take: config.limit,
     include: {
