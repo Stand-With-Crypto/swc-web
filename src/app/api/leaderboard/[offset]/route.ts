@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getLeaderboard } from '@/data/leaderboard'
 import { z } from 'zod'
+import 'server-only'
 
 // something to think through: the offsets could be cached for different intervals based off when they're requested, resulting in weird data. Easy workaround is shorten to revalidate to something like 10-20 seconds
 

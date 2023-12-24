@@ -10,15 +10,10 @@ import { useAuth } from '@thirdweb-dev/react'
 import useSWR from 'swr'
 
 function usePerformedUserActionTypes() {
-  const props = useSWR(
-    apiUrls.performedUserActionTypes(),
-    url =>
-      fetchReq(url)
-        .then(res => res.json())
-        .then(data => data as MaybeAuthenticatedApiResponse<typeof getPerformedUserActionTypes>),
-    {
-      refreshInterval: 1000,
-    },
+  const props = useSWR(apiUrls.performedUserActionTypes(), url =>
+    fetchReq(url)
+      .then(res => res.json())
+      .then(data => data as MaybeAuthenticatedApiResponse<typeof getPerformedUserActionTypes>),
   )
   return {
     ...props,

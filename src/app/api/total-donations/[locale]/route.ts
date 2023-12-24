@@ -2,6 +2,7 @@ import { getAggregateDonations } from '@/data/donations/getAggregateDonations'
 import { SupportedLocale } from '@/intl/locales'
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
+import 'server-only'
 
 export const dynamic = 'error'
 export const revalidate = 1

@@ -195,7 +195,7 @@ async function seed() {
             : index % 4 === 1
               ? faker.helpers.arrayElement(userSession)
               : faker.helpers.arrayElement(userCryptoAddress)
-      console.log(usedNftMints.length)
+
       return {
         ...mockUserAction({
           actionType,

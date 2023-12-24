@@ -1,9 +1,9 @@
 import { appRouterGetAuthUser } from '@/utils/server/appRouterGetAuthUser'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { REPLACE_ME__captureException } from '@/utils/shared/captureException'
 import { ThirdwebAuthUser } from '@thirdweb-dev/auth/next'
 import _ from 'lodash'
 import { NextResponse } from 'next/server'
+import 'server-only'
 
 export const dynamic = 'force-dynamic'
 

@@ -20,7 +20,9 @@ export default async function Home({ params }: PageProps) {
   return (
     <div className="container">
       <RecentActivityAndLeaderboard {...{ locale, actions, topDonors }} />
-      <ClientAuthUserActionRowCTAs />
+      <div className="mt-16">
+        <ClientAuthUserActionRowCTAs />
+      </div>
     </div>
   )
 }
