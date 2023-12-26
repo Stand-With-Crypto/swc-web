@@ -1,4 +1,5 @@
 import { DTSI_Person, DTSI_PersonPoliticalAffiliationCategory } from '@/data/dtsi/generated'
+import _ from 'lodash'
 
 export const dtsiPersonFullName = (
   person: Pick<DTSI_Person, 'firstName' | 'lastName' | 'firstNickname' | 'nameSuffix'>,
@@ -18,5 +19,36 @@ export const dtsiPersonPoliticalAffiliationCategoryAbbreviation = (
       return 'R'
     case DTSI_PersonPoliticalAffiliationCategory.INDEPENDENT:
       return 'I'
+  }
+}
+
+type WithComputedStanceScore<P extends Pick<DTSI_Person, 'id' | 'computedStanceScore'>> = Omit<
+  P,
+  'computedStanceScore'
+> & { computedStanceScore: number }
+
+export const groupAndSortDTSIPeopleByCryptoStance = <
+  P extends Pick<DTSI_Person, 'id' | 'computedStanceScore'>,
+>(
+  people: P[],
+) => {
+  console.log(people)
+  const proCrypto: WithComputedStanceScore<P>[] = []
+  const antiCrypto: WithComputedStanceScore<P>[] = []
+  const neutralCrypto: P[] = []
+  people.forEach(person => {
+    const { computedStanceScore } = person
+    if (_.isNil(computedStanceScore) || computedStanceScore === 50) {
+      neutralCrypto.push(person)
+    } else if (computedStanceScore > 50) {
+      proCrypto.push({ ...person, computedStanceScore })
+    } else {
+      proCrypto.push({ ...person, computedStanceScore })
+    }
+  })
+  return {
+    proCrypto: _.sortBy(proCrypto, x => x.computedStanceScore),
+    antiCrypto: _.sortBy(antiCrypto, x => -1 * x.computedStanceScore),
+    neutralCrypto: neutralCrypto,
   }
 }

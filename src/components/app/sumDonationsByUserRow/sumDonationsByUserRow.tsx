@@ -1,24 +1,20 @@
 import { UserAvatar } from '@/components/app/userAvatar'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
 import { NextImage } from '@/components/ui/image'
-import { AggregateDonationsByUser } from '@/data/donations/getAggregateDonationsByUser'
+import { SumDonationsByUser } from '@/data/aggregations/getSumDonationsByUser'
 import { SupportedLocale } from '@/intl/locales'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { getUserDisplayName } from '@/utils/web/userUtils'
 
-interface AggregateDonationsRowProps {
-  aggregateDonations: AggregateDonationsByUser[0]
+interface SumDonationsRowProps {
+  sumDonations: SumDonationsByUser[0]
   locale: SupportedLocale
   index: number
 }
 
 const INDEX_SHIELD_IMAGE_MAP = ['/shields/gold.svg', '/shields/silver.svg', '/shields/bronze.svg']
 
-export function AggregateDonationsRow({
-  locale,
-  aggregateDonations,
-  index,
-}: AggregateDonationsRowProps) {
+export function SumDonationsByUserRow({ locale, sumDonations, index }: SumDonationsRowProps) {
   return (
     <div className="flex items-center justify-between gap-5">
       <div className="flex items-center gap-2">
@@ -35,16 +31,16 @@ export function AggregateDonationsRow({
           )}
         </div>
         <div>
-          <UserAvatar size={30} user={aggregateDonations.user} />
+          <UserAvatar size={30} user={sumDonations.user} />
         </div>
         <div>
-          <div>{getUserDisplayName(aggregateDonations.user)}</div>
+          <div>{getUserDisplayName(sumDonations.user)}</div>
           <div className="text-xs text-gray-500">Stand With Crypto</div>
         </div>
       </div>
       <div className="shrink-0 text-sm">
         <FormattedCurrency
-          amount={aggregateDonations.totalAmountUsd}
+          amount={sumDonations.totalAmountUsd}
           locale={locale}
           maximumFractionDigits={0}
           currencyCode={SupportedFiatCurrencyCodes.USD}

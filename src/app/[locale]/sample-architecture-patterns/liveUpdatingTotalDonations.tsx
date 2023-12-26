@@ -1,7 +1,7 @@
 'use client'
 
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
-import { AggregateDonations } from '@/data/donations/getAggregateDonations'
+import { SumDonations } from '@/data/aggregations/getSumDonations'
 import { SupportedLocale } from '@/intl/locales'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { fetchReq } from '@/utils/shared/fetchReq'
@@ -14,7 +14,7 @@ const useGetTotalDonations = (locale: SupportedLocale) => {
     url =>
       fetchReq(url)
         .then(res => res.json())
-        .then(data => data as AggregateDonations),
+        .then(data => data as SumDonations),
     {
       refreshInterval: 1000,
     },
@@ -25,7 +25,7 @@ export function LiveUpdatingTotalDonations({
   totalDonations,
   locale,
 }: {
-  totalDonations: AggregateDonations
+  totalDonations: SumDonations
   locale: SupportedLocale
 }) {
   const dynamicTotalDonations = useGetTotalDonations(locale)

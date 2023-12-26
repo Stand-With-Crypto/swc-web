@@ -7,8 +7,8 @@ import { Button } from '@/components/ui/button'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
 import { FormattedDatetime } from '@/components/ui/formattedDatetime'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
-import { PageH1 } from '@/components/ui/pageH1'
-import { PageH2 } from '@/components/ui/pageH2'
+import { PageTitle } from '@/components/ui/pageTitleText'
+import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { Progress } from '@/components/ui/progress'
 import { PageProps } from '@/types'
 import { SupportedCryptoCurrencyCodes, SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
@@ -92,11 +92,11 @@ export default async function Profile({ params }: PageProps) {
           </div>
         ))}
       </div>
-      <PageH1 className="mb-4">Your advocacy progress</PageH1>
-      <PageH2 className="mb-5">
+      <PageTitle className="mb-4">Your advocacy progress</PageTitle>
+      <PageSubTitle className="mb-5">
         You've completed {Object.keys(userActionsByType).length} out of{' '}
         {Object.values(UserActionType).length} actions. Keep going!
-      </PageH2>
+      </PageSubTitle>
       <div className="mx-auto mb-5 max-w-xl">
         <Progress
           value={

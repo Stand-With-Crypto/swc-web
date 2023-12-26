@@ -1,9 +1,9 @@
 'use client'
 
-import { AggregateDonationsRow } from '@/components/app/aggregateDonationsRow/aggregateDonationsRow'
+import { SumDonationsByUserRow } from '@/components/app/sumDonationsByUserRow/sumDonationsByUserRow'
 import { RecentActivityRow } from '@/components/app/recentActivity/recentActivityRow'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { AggregateDonationsByUser } from '@/data/donations/getAggregateDonationsByUser'
+import { SumDonationsByUser } from '@/data/aggregations/getSumDonationsByUser'
 import { getPublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 import { SupportedLocale } from '@/intl/locales'
 import { PageProps } from '@/types'
@@ -13,11 +13,11 @@ import { PageProps } from '@/types'
 export function RecentActivityAndLeaderboard({
   locale,
   actions,
-  topDonors,
+  sumDonationsByUser,
 }: {
   locale: SupportedLocale
   actions: Awaited<ReturnType<typeof getPublicRecentActivity>>
-  topDonors: AggregateDonationsByUser
+  sumDonationsByUser: SumDonationsByUser
 }) {
   return (
     <Tabs defaultValue="recentActivity" className="mx-auto w-full max-w-2xl">
@@ -38,13 +38,8 @@ export function RecentActivityAndLeaderboard({
         <p className="mt-2 h-7 text-center text-xs text-gray-500">
           Donations are from FairShake and Stand With Crypto
         </p>
-        {topDonors.map((donor, index) => (
-          <AggregateDonationsRow
-            key={index}
-            index={index}
-            aggregateDonations={donor}
-            locale={locale}
-          />
+        {sumDonationsByUser.map((donor, index) => (
+          <SumDonationsByUserRow key={index} index={index} sumDonations={donor} locale={locale} />
         ))}
       </TabsContent>
     </Tabs>

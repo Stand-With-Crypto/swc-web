@@ -16,7 +16,7 @@ export async function Footer({ locale }: { locale: SupportedLocale }) {
 
   return (
     <footer className="container mx-auto my-20">
-      <div className="grids-col-1 grid gap-4 sm:grid-cols-3">
+      <div className="grids-col-1 mb-10 grid gap-4 sm:grid-cols-3">
         <div className="space-y-3 sm:space-y-9">
           <InternalLink className={footerLinkStyles} href={urls.termsOfService()}>
             {intl.formatMessage({
@@ -87,7 +87,13 @@ export async function Footer({ locale }: { locale: SupportedLocale }) {
           </ExternalLink>
         </div>
       </div>
-      <div className="mt-10 text-sm text-fontcolor-muted">
+      <div className="mb-2 text-xs text-fontcolor-muted">
+        Information about politicians stances on crypto sourced from{' '}
+        <a target="_blank" href="https://www.dotheysupportit.com/" className={'hover:underline'}>
+          DoTheySupportIt.com
+        </a>
+      </div>
+      <div className="text-sm text-fontcolor-muted">
         {intl.formatMessage({
           id: `${i18nKey}.copyright`,
           defaultMessage: 'Stand with Crypto ©️ All rights reserved 2023',

@@ -33,6 +33,8 @@ const UserActionRowCTAButton = React.forwardRef<
     },
     ref,
   ) => {
+    const canBeActionedOn =
+      canBeTriggeredMultipleTimes || (!canBeTriggeredMultipleTimes && state !== 'complete')
     const getStateUI = () => {
       switch (state) {
         case 'unknown':
@@ -62,6 +64,7 @@ const UserActionRowCTAButton = React.forwardRef<
       <button
         {...props}
         ref={ref}
+        disabled={!canBeActionedOn}
         className={cn(
           'flex w-full items-center justify-between gap-4 rounded-xl bg-gray-100 p-4 text-left',
           className,
@@ -78,7 +81,7 @@ const UserActionRowCTAButton = React.forwardRef<
             <div className="text-sm text-gray-500">{subtext}</div>
           </div>
         </div>
-        {canBeTriggeredMultipleTimes || (!canBeTriggeredMultipleTimes && state !== 'complete') ? (
+        {canBeActionedOn ? (
           <div>
             <NextImage
               width={20}

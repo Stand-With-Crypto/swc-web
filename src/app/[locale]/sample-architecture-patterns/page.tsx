@@ -6,7 +6,7 @@ import { NavbarSessionButton } from '@/components/app/navbarSessionButton'
 import { navbarSessionButtonMessages } from '@/components/app/navbarSessionButton/navbarSessionButtonClient.messages'
 import { SampleAuthenticatedRequest } from '@/components/app/sampleAuthenticatedRequest'
 import { Button } from '@/components/ui/button'
-import { getAggregateDonations } from '@/data/donations/getAggregateDonations'
+import { getSumDonations } from '@/data/aggregations/getSumDonations'
 import { getLeaderboard } from '@/data/leaderboard'
 import getIntl from '@/intl/intlMessages'
 import { generateClientComponentMessages } from '@/intl/intlServerUtils'
@@ -15,7 +15,7 @@ import { SampleTranslationClientComponent } from './sampleTranslationClientCompo
 import { sampleTranslationClientComponentMessages } from './sampleTranslationClientComponent.messages'
 import { Suspense, lazy } from 'react'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
-import { getMockAggregateDonations } from '@/data/donations/getMockAggregateDonations'
+import { getMockSumDonations } from '@/data/aggregations/getMockSumDonations'
 
 export const revalidate = 3600
 export const dynamic = 'error'
@@ -31,7 +31,7 @@ export default async function Home({ params }: PageProps) {
   const [intl, leaderboardEntities, totalDonations] = await Promise.all([
     getIntl(locale),
     getLeaderboard({ offset: 0 }),
-    getMockAggregateDonations(),
+    getMockSumDonations(),
   ])
   return (
     // TODO remove prose class and actually start styling things!

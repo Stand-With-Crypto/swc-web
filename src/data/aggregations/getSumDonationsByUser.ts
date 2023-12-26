@@ -5,11 +5,11 @@ import { Decimal } from '@prisma/client/runtime/library'
 import _ from 'lodash'
 import 'server-only'
 
-export type AggregateDonationsByUserConfig = {
+export type SumDonationsByUserConfig = {
   limit: number
 }
 
-export const getAggregateDonationsByUser = async ({ limit }: AggregateDonationsByUserConfig) => {
+export const getSumDonationsByUser = async ({ limit }: SumDonationsByUserConfig) => {
   // there might be a way of doing this better with https://www.prisma.io/docs/orm/prisma-client/queries/aggregation-grouping-summarizing
   // but nothing wrong with some raw sql for custom aggregations
   const total: {
@@ -46,4 +46,4 @@ export const getAggregateDonationsByUser = async ({ limit }: AggregateDonationsB
   }))
 }
 
-export type AggregateDonationsByUser = Awaited<ReturnType<typeof getAggregateDonationsByUser>>
+export type SumDonationsByUser = Awaited<ReturnType<typeof getSumDonationsByUser>>

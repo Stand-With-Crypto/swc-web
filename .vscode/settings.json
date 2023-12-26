@@ -32,6 +32,7 @@
   "editor.formatOnSave": true,
   "cSpell.ignorePaths": ["**/*.json"],
   "cSpell.words": [
+    "Actioned",
     "clsx",
     "codegen",
     "cryptocurrency",

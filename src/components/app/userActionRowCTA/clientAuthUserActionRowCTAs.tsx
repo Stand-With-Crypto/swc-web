@@ -15,6 +15,7 @@ function usePerformedUserActionTypes() {
       .then(res => res.json())
       .then(data => data as MaybeAuthenticatedApiResponse<typeof getPerformedUserActionTypes>),
   )
+
   return {
     ...props,
     data: props.data
