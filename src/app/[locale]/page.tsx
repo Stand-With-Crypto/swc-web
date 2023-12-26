@@ -151,7 +151,7 @@ export default async function Home({ params }: PageProps) {
             <h5 className="mb-4 text-center text-xl font-bold text-green-600">Pro-crypto</h5>
             <div className="space-y-3">
               {groupedDTSIHomepagePeople.proCrypto.map(person => (
-                <DTSIPersonCard key={person.id} person={person} />
+                <DTSIPersonCard locale={locale} key={person.id} person={person} />
               ))}
             </div>
           </div>
@@ -159,8 +159,8 @@ export default async function Home({ params }: PageProps) {
             <h5 className="mb-4 text-center text-xl font-bold text-red-600">Anti-crypto</h5>
             <div className="space-y-3">
               {/* TODO replace with anti-crypto once we get the gql endpoint working as expected */}
-              {groupedDTSIHomepagePeople.proCrypto.map(person => (
-                <DTSIPersonCard key={person.id} person={person} />
+              {groupedDTSIHomepagePeople.antiCrypto.map(person => (
+                <DTSIPersonCard locale={locale} key={person.id} person={person} />
               ))}
             </div>
           </div>

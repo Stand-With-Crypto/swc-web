@@ -1,4 +1,12 @@
-import { DTSI_Person, DTSI_PersonPoliticalAffiliationCategory } from '@/data/dtsi/generated'
+import {
+  DTSI_Person,
+  DTSI_PersonPoliticalAffiliationCategory,
+  DTSI_PersonRole,
+  DTSI_PersonRoleCategory,
+  DTSI_PersonRoleStatus,
+} from '@/data/dtsi/generated'
+import { gracefullyError } from '@/utils/shared/gracefullyError'
+import { getUSStateNameFromStateCode } from '@/utils/shared/usStateUtils'
 import _ from 'lodash'
 
 export const dtsiPersonFullName = (
@@ -32,7 +40,6 @@ export const groupAndSortDTSIPeopleByCryptoStance = <
 >(
   people: P[],
 ) => {
-  console.log(people)
   const proCrypto: WithComputedStanceScore<P>[] = []
   const antiCrypto: WithComputedStanceScore<P>[] = []
   const neutralCrypto: P[] = []
@@ -43,7 +50,7 @@ export const groupAndSortDTSIPeopleByCryptoStance = <
     } else if (computedStanceScore > 50) {
       proCrypto.push({ ...person, computedStanceScore })
     } else {
-      proCrypto.push({ ...person, computedStanceScore })
+      antiCrypto.push({ ...person, computedStanceScore })
     }
   })
   return {
@@ -51,4 +58,50 @@ export const groupAndSortDTSIPeopleByCryptoStance = <
     antiCrypto: _.sortBy(antiCrypto, x => -1 * x.computedStanceScore),
     neutralCrypto: neutralCrypto,
   }
+}
+
+export enum DTSILetterGrade {
+  A = 'A',
+  B = 'B',
+  C = 'C',
+  D = 'D',
+  F = 'F',
+}
+
+export const convertDTSIStanceScoreToLetterGrade = (score: number) => {
+  if (score >= 90) {
+    return DTSILetterGrade.A
+  }
+  if (score >= 70) {
+    return DTSILetterGrade.B
+  }
+  if (score >= 50) {
+    return DTSILetterGrade.C
+  }
+  if (score >= 30) {
+    return DTSILetterGrade.D
+  }
+  return DTSILetterGrade.F
+}
+
+export const getDTSIFormattedShortPersonRole = (
+  role: Pick<
+    DTSI_PersonRole,
+    'status' | 'primaryState' | 'primaryCountryCode' | 'title' | 'roleCategory'
+  >,
+) => {
+  // TODO verify we only need to be vague when referring to roles someone currently does not hold
+  if (role.status === DTSI_PersonRoleStatus.RUNNING_FOR) {
+    return 'National Political Figure'
+  }
+  if (role.primaryState && role.primaryCountryCode === 'US') {
+    return getUSStateNameFromStateCode(role.primaryState)
+  }
+  if (role.title && role.roleCategory === DTSI_PersonRoleCategory.PRESIDENT) {
+    return role.title
+  }
+  return gracefullyError({
+    msg: `getDTSIFormattedPersonRole returned no role for ${JSON.stringify(role)}`,
+    fallback: role.title,
+  })
 }

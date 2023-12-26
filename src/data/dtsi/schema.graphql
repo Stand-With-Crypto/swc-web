@@ -137,6 +137,7 @@ type Person {
   id: ID!
   isPubliclyVisible: Boolean!
   lastName: String!
+  manuallyOverriddenStanceScore: Int
   middleName: String!
   nameSuffix: String!
   nameUniquenessModifier: String!
@@ -145,6 +146,7 @@ type Person {
   phoneNumber: String!
   politicalAffiliation: String!
   politicalAffiliationCategory: PersonPoliticalAffiliationCategory
+  primaryRole: PersonRole
   proPublicaId: String
   profilePictureUrl: String!
   profilePictureUrlDimensions: Json

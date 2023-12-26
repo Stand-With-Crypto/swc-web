@@ -5,7 +5,7 @@ import { DTSI_HomepagePeopleQuery, DTSI_HomepagePeopleQueryVariables } from '@/d
 // TODO add people filter for promoted
 export const query = /* GraphQL */ `
   query HomepagePeople {
-    people(limit: 10, offset: 0) {
+    people(limit: 100, offset: 0, hasPromotedPositioning: true) {
       ...PersonCard
     }
   }

@@ -8,6 +8,19 @@ export const fragmentDTSIPersonCard = /* GraphQL */ `
     nameSuffix
     politicalAffiliationCategory
     computedStanceScore
+    manuallyOverriddenStanceScore
     profilePictureUrl
+    primaryRole {
+      dateEnd
+      dateStart
+      id
+      primaryCity
+      primaryCountryCode
+      primaryDistrict
+      primaryState
+      roleCategory
+      status
+      title
+    }
   }
 `

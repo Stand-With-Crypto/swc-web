@@ -9,6 +9,7 @@ export const getIntlUrls = (locale: SupportedLocale) => {
     about: () => `${localePrefix}/about`,
     leaderboard: () => `${localePrefix}/leaderboard`,
     politiciansHomepage: () => `${localePrefix}/politicians`,
+    politicianDetails: (dtsiSlug: string) => `${localePrefix}/politicians/person/${dtsiSlug}`,
     // TODO delete before v2 go-live
     sampleArchitecturePatterns: () => `${localePrefix}/sample-architecture-patterns`,
   }

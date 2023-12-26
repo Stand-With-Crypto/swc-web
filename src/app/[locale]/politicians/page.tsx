@@ -9,13 +9,14 @@ export const dynamic = 'error'
 // TODO metadata
 
 export default async function PoliticiansHomepage({ params }: PageProps) {
+  const { locale } = params
   const [{ people }] = await Promise.all([queryDTSIPresidentialCandidates()])
   const urls = getIntlUrls(params.locale)
   return (
     <div className="mx-auto mt-10 w-full max-w-xl space-y-5 p-4">
       <h1>National political figures</h1>
       {people.map(person => (
-        <DTSIPersonCard person={person} key={person.id} />
+        <DTSIPersonCard locale={locale} person={person} key={person.id} />
       ))}
     </div>
   )
