@@ -60,8 +60,10 @@ export const getUSStateNameFromStateCode = (stateCode: string) => {
   if (name) {
     return name
   }
-  return gracefullyError({
-    msg: `getUSStateNameFromStateCode returned no state for ${stateCode}`,
-    fallback: stateCode,
-  })
+  return stateCode
+  // TODO audit dtsi to ensure every state is in fact a state code
+  // return gracefullyError({
+  //   msg: `getUSStateNameFromStateCode returned no state for ${stateCode}`,
+  //   fallback: stateCode,
+  // })
 }

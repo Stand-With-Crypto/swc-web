@@ -72,7 +72,7 @@ const UserActionRowCTAButton = React.forwardRef<
       >
         <div className="flex items-center gap-4">
           <div>{getStateUI()}</div>
-          <div>
+          <div className="hidden md:block">
             {/* TODO alt */}
             <NextImage width={100} height={100} src={image} alt={''} />
           </div>

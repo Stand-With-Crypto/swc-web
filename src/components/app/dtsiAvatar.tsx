@@ -20,6 +20,7 @@ export const DTSIAvatar: React.FC<
   if (person.profilePictureUrl) {
     return (
       <ImageAvatar
+        className="rounded-md"
         alt={`Profile picture of ${dtsiPersonFullName(person)}`}
         src={person.profilePictureUrl}
         {...props}
@@ -28,6 +29,7 @@ export const DTSIAvatar: React.FC<
   }
   return (
     <InitialsAvatar
+      className="rounded-md"
       firstInitial={person.firstName.slice(0, 1)}
       lastInitial={person.lastName.slice(0, 1)}
       {...props}

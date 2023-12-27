@@ -30,6 +30,19 @@ export const dtsiPersonPoliticalAffiliationCategoryAbbreviation = (
   }
 }
 
+export const dtsiPersonPoliticalAffiliationCategoryDisplayName = (
+  category: DTSI_PersonPoliticalAffiliationCategory,
+) => {
+  switch (category) {
+    case DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT:
+      return 'Democrat'
+    case DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN:
+      return 'Republican'
+    case DTSI_PersonPoliticalAffiliationCategory.INDEPENDENT:
+      return 'Independent'
+  }
+}
+
 type WithComputedStanceScore<P extends Pick<DTSI_Person, 'id' | 'computedStanceScore'>> = Omit<
   P,
   'computedStanceScore'
@@ -102,6 +115,29 @@ export const getDTSIFormattedShortPersonRole = (
   }
   return gracefullyError({
     msg: `getDTSIFormattedPersonRole returned no role for ${JSON.stringify(role)}`,
+    fallback: role.title,
+  })
+}
+
+export const getDTSIPersonRoleCategoryDisplayName = (
+  role: Pick<DTSI_PersonRole, 'roleCategory' | 'title'>,
+) => {
+  switch (role.roleCategory) {
+    case DTSI_PersonRoleCategory.CONGRESS:
+      return 'Congress'
+    case DTSI_PersonRoleCategory.GOVERNOR:
+      return 'Governor'
+    case DTSI_PersonRoleCategory.MAYOR:
+      return 'Mayor'
+    case DTSI_PersonRoleCategory.PRESIDENT:
+      return 'President'
+    case DTSI_PersonRoleCategory.SENATE:
+      return 'Senate'
+    case DTSI_PersonRoleCategory.VICE_PRESIDENT:
+      return 'Vice President'
+  }
+  return gracefullyError({
+    msg: `getDTSIPersonRoleCategoryDisplayName returned no role for ${JSON.stringify(role)}`,
     fallback: role.title,
   })
 }

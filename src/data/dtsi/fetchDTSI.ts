@@ -1,6 +1,8 @@
+import { toBool } from '@/utils/server/toBool'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { getLogger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
+import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import pRetry from 'p-retry'
 import 'server-only'
 
@@ -15,11 +17,17 @@ const DO_THEY_SUPPORT_IT_API_KEY = requiredEnv(
   'DO_THEY_SUPPORT_IT_API_KEY',
 )
 
+const USE_DTSI_PRODUCTION_API_ON_LOCAL = toBool(process.env.USE_DTSI_PRODUCTION_API_ON_LOCAL)
+const API_ENDPOINT =
+  USE_DTSI_PRODUCTION_API_ON_LOCAL || NEXT_PUBLIC_ENVIRONMENT !== 'local'
+    ? 'https://www.dotheysupportit.com/api/graphql'
+    : 'https://testing.dotheysupportit.com/api/graphql'
+
 export const fetchDTSI = async <R, V = object>(query: string, variables?: V) => {
   logger.debug(`fetchDTSI called`)
   const response = await pRetry(
     () =>
-      fetchReq('https://www.dotheysupportit.com/api/graphql', {
+      fetchReq(API_ENDPOINT, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

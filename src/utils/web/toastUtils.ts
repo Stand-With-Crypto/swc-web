@@ -15,21 +15,23 @@ export const catchUnexpectedServerErrorAndTriggerToast =
       REPLACE_ME__captureException(
         new Error('Unexpected error type passed to catchUnexpectedServerErrorAndTriggerToast'),
       )
-      return toast({
+      toast({
         variant: 'destructive',
         title: GENERIC_ERROR_TITLE,
         description: GENERIC_ERROR_DESCRIPTION,
       })
+      return
     }
     if (error instanceof FetchReqError) {
       const formattedErrorStatus = formatErrorStatus(error.response.status)
-      return toast({
+      toast({
         variant: 'destructive',
         title: GENERIC_ERROR_TITLE,
         description: formattedErrorStatus,
       })
+      return
     }
-    return toast({
+    toast({
       variant: 'destructive',
       title: GENERIC_ERROR_TITLE,
       description: GENERIC_ERROR_DESCRIPTION,

@@ -8,4 +8,4 @@ export const NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN = requiredEnv(
 export const NEXT_PUBLIC_ENVIRONMENT = requiredEnv(
   process.env.NEXT_PUBLIC_ENVIRONMENT,
   'process.env.NEXT_PUBLIC_ENVIRONMENT',
-)
+) as 'local' | 'testing' | 'production'

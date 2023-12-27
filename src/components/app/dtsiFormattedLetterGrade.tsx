@@ -28,9 +28,9 @@ export const DTSIFormattedLetterGrade: React.FC<{
   const letterGrade = _.isNil(score) ? null : convertDTSIStanceScoreToLetterGrade(score)
 
   return (
-    <div className="relative">
+    <div className="relative inline-block">
       <div className="absolute left-0 right-0 text-center text-xl font-extrabold text-white">
-        {letterGrade}
+        {letterGrade || '?'}
       </div>
       <NextImage
         alt={`Crypto letter grade of ${letterGrade || 'N/A'}`}

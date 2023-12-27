@@ -43,7 +43,7 @@ export async function Navbar({ locale }: { locale: SupportedLocale }) {
               href: urls.about(),
               text: intl.formatMessage({
                 id: `${INTL_PREFIX}.about`,
-                defaultMessage: 'About',
+                defaultMessage: 'About (TODO)',
                 description: 'Link to the about page',
               }),
             },
@@ -51,7 +51,7 @@ export async function Navbar({ locale }: { locale: SupportedLocale }) {
               href: urls.leaderboard(),
               text: intl.formatMessage({
                 id: `${INTL_PREFIX}.leaderboard`,
-                defaultMessage: 'Leaderboard',
+                defaultMessage: 'Leaderboard (TODO)',
                 description: 'Link to the leaderboard page',
               }),
             },
@@ -67,7 +67,7 @@ export async function Navbar({ locale }: { locale: SupportedLocale }) {
               href: urls.home(),
               text: intl.formatMessage({
                 id: `${INTL_PREFIX}.resources`,
-                defaultMessage: 'Resources',
+                defaultMessage: 'Resources (TODO)',
                 description: 'Link to the resources page',
               }),
             },
@@ -81,7 +81,7 @@ export async function Navbar({ locale }: { locale: SupportedLocale }) {
         </div>
         <div className="flex">
           {/* TODO actually implement donate button */}
-          <Button className="mr-3">Donate</Button>
+          <Button className="mr-3">Donate (TODO)</Button>
           <NavbarSessionButton
             messages={generateClientComponentMessages(intl, navbarSessionButtonMessages)}
           />

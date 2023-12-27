@@ -1,6 +1,7 @@
 import { fetchDTSI } from '@/data/dtsi/fetchDTSI'
 import { fragmentDTSIPersonCard } from '@/data/dtsi/fragments/fragmentDTSIPersonCard'
 import { DTSI_PeopleBySlugQuery, DTSI_PeopleBySlugQueryVariables } from '@/data/dtsi/generated'
+import { REPLACE_ME__captureException } from '@/utils/shared/captureException'
 
 const query = /* GraphQL */ `
   query PeopleBySlug($slugs: [String!]!) {
@@ -12,7 +13,17 @@ const query = /* GraphQL */ `
 `
 export type DTSIPersonForUserActions = DTSI_PeopleBySlugQuery['people'][0]
 
-export const queryDTSIPeopleBySlugForUserActions = (slugs: string[]) => {
+export const queryDTSIPeopleBySlugForUserActions = async (slugs: string[]) => {
   // TODO figure out why codegen generates a type that suggest a string not in an array is valid
-  return fetchDTSI<DTSI_PeopleBySlugQuery, DTSI_PeopleBySlugQueryVariables>(query, { slugs })
+  const data = await fetchDTSI<DTSI_PeopleBySlugQuery, DTSI_PeopleBySlugQueryVariables>(query, {
+    slugs,
+  })
+  if (slugs.length !== data.people.length) {
+    throw new Error(
+      `queryDTSIPeopleBySlugForUserActions expected ${slugs.length} people from slugs, but got ${
+        data.people.length
+      }.\nSlugs: ${slugs.join(', ')}`,
+    )
+  }
+  return data
 }

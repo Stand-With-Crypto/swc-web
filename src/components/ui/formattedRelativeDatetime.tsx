@@ -5,12 +5,14 @@ import { differenceInMinutes } from 'date-fns'
 export function FormattedRelativeDatetime({
   date,
   locale,
+  timeFormatStyle = 'short',
 }: {
   date: Date
   locale: SupportedLocale
+  timeFormatStyle?: Intl.RelativeTimeFormatStyle
 }) {
   const minutesAgo = differenceInMinutes(new Date(), date)
-  const intlRelative = new Intl.RelativeTimeFormat(locale, { style: 'short' })
+  const intlRelative = new Intl.RelativeTimeFormat(locale, { style: timeFormatStyle })
   if (minutesAgo < 60) {
     return intlRelative.format(-1 * minutesAgo, 'minutes')
   }

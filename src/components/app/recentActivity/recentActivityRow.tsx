@@ -33,7 +33,16 @@ function RecentActivityRowBase({
         <div>{children}</div>
       </div>
       <div className="shrink-0 text-xs text-gray-500">
-        <FormattedRelativeDatetime date={action.datetimeCreated} locale={locale} />
+        <span className="hidden md:inline">
+          <FormattedRelativeDatetime date={action.datetimeCreated} locale={locale} />
+        </span>
+        <span className="inline md:hidden">
+          <FormattedRelativeDatetime
+            timeFormatStyle="narrow"
+            date={action.datetimeCreated}
+            locale={locale}
+          />
+        </span>
       </div>
     </div>
   )
@@ -43,7 +52,7 @@ const MainText = ({ children }: { children: React.ReactNode }) => (
   <div className="text-sm font-bold text-gray-900">{children}</div>
 )
 const SubText = ({ children }: { children: React.ReactNode }) => (
-  <div className="text-xs text-gray-500">{children}</div>
+  <div className="hidden text-xs text-gray-500 md:block">{children}</div>
 )
 
 const formatDTSIPerson = (person: DTSIPersonForUserActions) => {

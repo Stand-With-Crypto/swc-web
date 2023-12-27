@@ -7,6 +7,13 @@ const config: CodegenConfig = {
       documents: 'src/data/dtsi/**/*.ts',
       plugins: ['typescript', 'typescript-operations'],
       config: {
+        scalars: {
+          DateTime: 'string',
+          BigInt: 'number',
+          Bytes: 'unknown',
+          Decimal: 'number',
+          Json: 'unknown',
+        },
         typesPrefix: 'DTSI_',
         namingConvention: {
           enumValues: 'change-case-all#upperCase',
