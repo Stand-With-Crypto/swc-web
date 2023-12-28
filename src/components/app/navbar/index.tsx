@@ -51,7 +51,7 @@ export async function Navbar({ locale }: { locale: SupportedLocale }) {
               href: urls.leaderboard(),
               text: intl.formatMessage({
                 id: `${INTL_PREFIX}.leaderboard`,
-                defaultMessage: 'Leaderboard (TODO)',
+                defaultMessage: 'Our Community',
                 description: 'Link to the leaderboard page',
               }),
             },

@@ -6,6 +6,7 @@ import { getClientUser } from '@/clientModels/clientUser/clientUser'
 
 interface RecentActivityConfig {
   limit: number
+  offset?: number
 }
 
 const fetchFromPrisma = async (config: RecentActivityConfig) => {
@@ -14,6 +15,7 @@ const fetchFromPrisma = async (config: RecentActivityConfig) => {
       datetimeCreated: 'desc',
     },
     take: config.limit,
+    skip: config.offset,
     include: {
       user: {
         include: { userCryptoAddress: true },

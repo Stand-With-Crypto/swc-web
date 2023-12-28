@@ -1,3 +1,4 @@
+import { RecentActivityAndLeaderboardTabs } from '@/components/app/recentActivityAndLeaderboard/recentActivityAndLeaderboardTabs'
 import { DEFAULT_LOCALE, SupportedLocale } from '@/intl/locales'
 
 export const getIntlUrls = (locale: SupportedLocale) => {
@@ -7,7 +8,16 @@ export const getIntlUrls = (locale: SupportedLocale) => {
     termsOfService: () => `${localePrefix}/terms-of-service`,
     privacyPolicy: () => `${localePrefix}/privacy`,
     about: () => `${localePrefix}/about`,
-    leaderboard: () => `${localePrefix}/leaderboard`,
+    leaderboard: (params?: { pageNum: number; tab: RecentActivityAndLeaderboardTabs }) => {
+      if (!params) {
+        return `${localePrefix}/leaderboard`
+      }
+      const tabPath =
+        params.tab === RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY ? '' : `/${params.tab}`
+      return `${localePrefix}/leaderboard${
+        params.pageNum !== 1 || tabPath ? `/${params.pageNum}${tabPath}` : ''
+      }`
+    },
     politiciansHomepage: () => `${localePrefix}/politicians`,
     politicianDetails: (dtsiSlug: string) => `${localePrefix}/politicians/person/${dtsiSlug}`,
     // TODO delete before v2 go-live

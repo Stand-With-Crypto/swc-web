@@ -7,9 +7,10 @@ import 'server-only'
 
 export type SumDonationsByUserConfig = {
   limit: number
+  offset?: number
 }
 
-export const getSumDonationsByUser = async ({ limit }: SumDonationsByUserConfig) => {
+export const getSumDonationsByUser = async ({ limit, offset }: SumDonationsByUserConfig) => {
   // there might be a way of doing this better with https://www.prisma.io/docs/orm/prisma-client/queries/aggregation-grouping-summarizing
   // but nothing wrong with some raw sql for custom aggregations
   const total: {
@@ -25,6 +26,7 @@ export const getSumDonationsByUser = async ({ limit }: SumDonationsByUserConfig)
     ORDER BY totalAmountUsd DESC
     -- don't worry, prisma $queryRaw sanitizes the input
     LIMIT ${limit}
+    OFFSET ${offset || 0}
   `
 
   const users = await prismaClient.user.findMany({

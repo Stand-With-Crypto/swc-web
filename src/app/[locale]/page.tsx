@@ -1,4 +1,4 @@
-import { RecentActivityAndLeaderboard } from '@/app/[locale]/recentActivityAndLeaderboard'
+import { RecentActivityAndLeaderboard } from '@/components/app/recentActivityAndLeaderboard/recentActivityAndLeaderboard'
 import { ClientAuthUserActionRowCTAs } from '@/components/app/userActionRowCTA/clientAuthUserActionRowCTAs'
 import { Button } from '@/components/ui/button'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
@@ -131,9 +131,9 @@ export default async function Home({ params }: PageProps) {
           </PageTitle>
           <PageSubTitle as="h4" className="mb-7">
             Stand With Crypto, a 501(c)(4) nonprofit, champions for clear, common-sense regulations
-            for the crypto industry. We’re mobilizing the 52 million crypto owners in the US – a
+            for the crypto industry. We're mobilizing the 52 million crypto owners in the US - a
             demographic that is younger (60% Gen-Z and Millennials) and more diverse (41% identify
-            as racial minorities) than the general US population – to unlock crypto’s innovation
+            as racial minorities) than the general US population - to unlock crypto's innovation
             potential and foster greater economic freedom.
           </PageSubTitle>
           <div>
@@ -148,14 +148,16 @@ export default async function Home({ params }: PageProps) {
           <RecentActivityAndLeaderboard {...{ locale, actions, sumDonationsByUser }} />
           <div className="space-x-4 text-center">
             <Button>Donate (TODO)</Button>
-            <Button variant="secondary">View All (TODO)</Button>
+            <Button variant="secondary" asChild>
+              <InternalLink href={urls.leaderboard()}>View All</InternalLink>
+            </Button>
           </div>
           <div></div>
         </section>
         <section className="mb-24 space-y-7">
           <PageTitle as="h3">Get involved</PageTitle>
           <PageSubTitle as="h4">
-            The future of crypto is in your hands. Here’s how you can help.
+            The future of crypto is in your hands. Here's how you can help.
           </PageSubTitle>
           <ClientAuthUserActionRowCTAs />
         </section>
