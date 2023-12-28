@@ -1,4 +1,4 @@
-import { RecentActivityRow } from '@/components/app/recentActivity/recentActivityRow'
+import { RecentActivityRow } from '@/components/app/recentActivityRow/recentActivityRow'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/recentActivityAndLeaderboard/recentActivityAndLeaderboardTabs'
 import { SumDonationsByUserRow } from '@/components/app/sumDonationsByUserRow/sumDonationsByUserRow'
 import { InternalLink } from '@/components/ui/link'

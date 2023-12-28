@@ -1,6 +1,6 @@
 'use client'
 
-import { navbarSessionButtonMessages } from '@/components/app/navbarSessionButton/navbarSessionButtonClient.messages'
+import { navbarSessionButtonMessages } from '@/components/app/navbar/navbarSessionButton/navbarSessionButtonClient.messages'
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { GetDefineMessageResults } from '@/types'

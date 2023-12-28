@@ -1,8 +1,7 @@
-import { v4 as uuidv4 } from 'uuid'
-import cookie from 'js-cookie'
 import { REPLACE_ME__captureException } from '@/utils/shared/captureException'
 import { logger } from '@/utils/shared/logger'
 import { USER_SESSION_ID_COOKIE_NAME, generateUserSessionId } from '@/utils/shared/userSessionId'
+import cookie from 'js-cookie'
 
 export function maybeSetUserSessionIdOnClient() {
   const value = cookie.get(USER_SESSION_ID_COOKIE_NAME)

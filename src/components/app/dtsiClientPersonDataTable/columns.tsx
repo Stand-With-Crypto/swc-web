@@ -3,26 +3,39 @@
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
 import { SortableHeader } from '@/components/app/dtsiClientPersonDataTable/dataTable'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
+import { InternalLink } from '@/components/ui/link'
+import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
 import { queryDTSIAllPeople } from '@/data/dtsi/queries/queryDTSIAllPeople'
+import { SupportedLocale } from '@/intl/locales'
 import {
   dtsiPersonFullName,
   dtsiPersonPoliticalAffiliationCategoryDisplayName,
   getDTSIPersonRoleCategoryDisplayName,
 } from '@/utils/dtsi/dtsiPersonUtils'
+import { getIntlUrls } from '@/utils/shared/urls'
 import { getUSStateNameFromStateCode } from '@/utils/shared/usStateUtils'
 import { ColumnDef } from '@tanstack/react-table'
 
 export type Person = Awaited<ReturnType<typeof queryDTSIAllPeople>>['people'][0]
 
-export const dtsiClientPersonDataTableColumns: ColumnDef<Person>[] = [
+export const getDTSIClientPersonDataTableColumns = ({
+  locale,
+}: {
+  locale: SupportedLocale
+}): ColumnDef<Person>[] => [
   {
     accessorKey: 'fullName',
     accessorFn: row => dtsiPersonFullName(row),
     cell: ({ row }) => (
-      <div className="flex items-center gap-3">
+      <LinkBox className="flex items-center gap-3">
         <DTSIAvatar person={row.original} size={40} />
-        <div>{dtsiPersonFullName(row.original)}</div>
-      </div>
+        <InternalLink
+          href={getIntlUrls(locale).politicianDetails(row.original.slug)}
+          className={linkBoxLinkClassName}
+        >
+          {dtsiPersonFullName(row.original)}
+        </InternalLink>
+      </LinkBox>
     ),
     header: ({ column }) => {
       return <SortableHeader column={column}>Name</SortableHeader>

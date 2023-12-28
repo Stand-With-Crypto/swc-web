@@ -2,6 +2,6 @@
 import 'server-only'
 import { cookies } from 'next/headers'
 
-export async function setCookie(...args: Parameters<ReturnType<typeof cookies>['set']>) {
+export async function setServerOnlyCookie(...args: Parameters<ReturnType<typeof cookies>['set']>) {
   cookies().set(...args)
 }

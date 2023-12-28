@@ -1,4 +1,4 @@
-import { navbarSessionButtonMessages } from '@/components/app/navbarSessionButton/navbarSessionButtonClient.messages'
+import { navbarSessionButtonMessages } from '@/components/app/navbar/navbarSessionButton/navbarSessionButtonClient.messages'
 import { NavbarSessionButtonClient } from './navbarSessionButtonClient'
 import { GetDefineMessageResults } from '@/types'
 

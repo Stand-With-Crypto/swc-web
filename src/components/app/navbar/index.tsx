@@ -1,5 +1,5 @@
-import { NavbarSessionButton } from '@/components/app/navbarSessionButton'
-import { navbarSessionButtonMessages } from '@/components/app/navbarSessionButton/navbarSessionButtonClient.messages'
+import { NavbarSessionButton } from '@/components/app/navbar/navbarSessionButton'
+import { navbarSessionButtonMessages } from '@/components/app/navbar/navbarSessionButton/navbarSessionButtonClient.messages'
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'

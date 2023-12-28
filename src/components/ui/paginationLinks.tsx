@@ -49,6 +49,7 @@ export function PaginationLinks({
           key={pageNumber}
           variant={pageNumber === currentPageNumber ? 'default' : 'outline'}
           className="hidden h-8 w-8 p-0 lg:flex"
+          asChild
         >
           <InternalLink href={getPageUrl(pageNumber)}>
             <span className="sr-only">Go to page {pageNumber}</span>
@@ -64,6 +65,7 @@ export function PaginationLinks({
           <Button
             variant={totalPages === currentPageNumber ? 'default' : 'outline'}
             className="hidden h-8 w-8 p-0 lg:flex"
+            asChild
           >
             <InternalLink href={getPageUrl(totalPages) || '#'}>
               <span className="sr-only">Go to page {totalPages}</span>

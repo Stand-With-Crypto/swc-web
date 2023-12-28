@@ -1,5 +1,5 @@
 import { SumDonationsByUserRow } from '@/components/app/sumDonationsByUserRow/sumDonationsByUserRow'
-import { RecentActivityRow } from '@/components/app/recentActivity/recentActivityRow'
+import { RecentActivityRow } from '@/components/app/recentActivityRow/recentActivityRow'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { SumDonationsByUser } from '@/data/aggregations/getSumDonationsByUser'
 import { getPublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'

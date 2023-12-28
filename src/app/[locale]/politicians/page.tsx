@@ -50,7 +50,7 @@ export default async function PoliticiansHomepage({ params }: PageProps) {
       </section>
       <section>
         <h3 className="mb-4 text-center text-xl font-bold">Politicians</h3>
-        <DTSIClientPersonDataTable />
+        <DTSIClientPersonDataTable locale={locale} />
       </section>
     </div>
   )

@@ -1,5 +1,5 @@
 'use client'
-import { dtsiClientPersonDataTableColumns } from '@/components/app/dtsiClientPersonDataTable/columns'
+import { getDTSIClientPersonDataTableColumns } from '@/components/app/dtsiClientPersonDataTable/columns'
 import { DataTable } from '@/components/app/dtsiClientPersonDataTable/dataTable'
 import { Skeleton } from '@/components/ui/skeleton'
 import {
@@ -12,10 +12,12 @@ import {
 } from '@/components/ui/table'
 import { useToast } from '@/components/ui/useToast'
 import { queryDTSIAllPeople } from '@/data/dtsi/queries/queryDTSIAllPeople'
+import { SupportedLocale } from '@/intl/locales'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { apiUrls } from '@/utils/shared/urls'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
 import _ from 'lodash'
+import { useMemo } from 'react'
 import useSWR from 'swr'
 
 export function useGetAllPeople(toast: ReturnType<typeof useToast>['toast']) {
@@ -27,13 +29,14 @@ export function useGetAllPeople(toast: ReturnType<typeof useToast>['toast']) {
   )
 }
 // TODO figure out what we want this to look like on mobile
-export function DTSIClientPersonDataTable() {
+export function DTSIClientPersonDataTable({ locale }: { locale: SupportedLocale }) {
   const { toast } = useToast()
   const { data, error } = useGetAllPeople(toast)
+  const memoizedColumns = useMemo(() => getDTSIClientPersonDataTableColumns({ locale }), [locale])
   return (
     <div className="container mx-auto py-10">
       {data ? (
-        <DataTable columns={dtsiClientPersonDataTableColumns} data={data.people} />
+        <DataTable columns={memoizedColumns} data={data.people} />
       ) : (
         <div className="min-h-[578px] rounded-md border">
           <Table>

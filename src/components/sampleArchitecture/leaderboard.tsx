@@ -2,7 +2,7 @@
 
 import _ from 'lodash'
 import useSWRInfinite from 'swr/infinite'
-import { LeaderboardEntity } from '@/data/leaderboard'
+import { LeaderboardEntity } from '@/data/sampleArchitecture/leaderboard'
 import { apiUrls } from '@/utils/shared/urls'
 import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'

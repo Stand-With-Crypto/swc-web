@@ -1,13 +1,13 @@
 // TODO delete before v2 go-live
 import { LiveUpdatingTotalDonations } from '@/app/[locale]/sample-architecture-patterns/liveUpdatingTotalDonations'
-import { Leaderboard } from '@/components/app/leaderboard'
-import { LocaleDropdown } from '@/components/app/localeDropdown'
-import { NavbarSessionButton } from '@/components/app/navbarSessionButton'
-import { navbarSessionButtonMessages } from '@/components/app/navbarSessionButton/navbarSessionButtonClient.messages'
-import { SampleAuthenticatedRequest } from '@/components/app/sampleAuthenticatedRequest'
+import { Leaderboard } from '@/components/sampleArchitecture/leaderboard'
+import { LocaleDropdown } from '@/components/sampleArchitecture/localeDropdown'
+import { NavbarSessionButton } from '@/components/app/navbar/navbarSessionButton'
+import { navbarSessionButtonMessages } from '@/components/app/navbar/navbarSessionButton/navbarSessionButtonClient.messages'
+import { SampleAuthenticatedRequest } from '@/components/sampleArchitecture/sampleAuthenticatedRequest'
 import { Button } from '@/components/ui/button'
 import { getSumDonations } from '@/data/aggregations/getSumDonations'
-import { getLeaderboard } from '@/data/leaderboard'
+import { getLeaderboard } from '@/data/sampleArchitecture/leaderboard'
 import getIntl from '@/intl/intlMessages'
 import { generateClientComponentMessages } from '@/intl/intlServerUtils'
 import { PageProps } from '@/types'
@@ -21,7 +21,7 @@ export const revalidate = 3600
 export const dynamic = 'error'
 
 export const LazyFormEmailYourCongressperson = lazy(
-  () => import('@/components/app/formEmailYourCongressperson'),
+  () => import('@/components/sampleArchitecture/formEmailYourCongressperson'),
 )
 
 // TODO metadata
