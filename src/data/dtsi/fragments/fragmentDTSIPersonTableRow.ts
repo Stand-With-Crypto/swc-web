@@ -10,6 +10,7 @@ export const fragmentDTSIPersonTableRow = /* GraphQL */ `
     computedStanceScore
     manuallyOverriddenStanceScore
     profilePictureUrl
+    profilePictureUrlDimensions
     primaryRole {
       dateEnd
       dateStart

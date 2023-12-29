@@ -1,0 +1,55 @@
+import {
+  DTSI_Bill,
+  DTSI_BillPersonRelationship,
+  DTSI_Person,
+  DTSI_PersonStance,
+  DTSI_PersonStanceQuote,
+  DTSI_PersonStanceType,
+  DTSI_Tweet,
+  DTSI_TweetMedia,
+  DTSI_TwitterAccount,
+} from '@/data/dtsi/generated'
+
+export type DTSIStanceDetailsQuoteProp = {
+  stanceType: DTSI_PersonStanceType.QUOTE
+  quote: Pick<DTSI_PersonStanceQuote, 'richTextDescription' | 'sourceUrl'>
+}
+
+export type DTSIStanceDetailsTweetProp = {
+  stanceType: DTSI_PersonStanceType.TWEET
+  tweet: Pick<
+    DTSI_Tweet,
+    'datetimeCreatedOnTwitter' | 'entities' | 'id' | 'isActive' | 'text' | 'tweetMedia'
+  > & {
+    twitterAccount: Pick<DTSI_TwitterAccount, 'id' | 'username' | 'personId'>
+    tweetMedia: Pick<DTSI_TweetMedia, 'url'>[]
+  }
+}
+
+export type DTSIStanceDetailsBillRelationshipProp = {
+  stanceType: DTSI_PersonStanceType.BILL_RELATIONSHIP
+  billRelationship: Pick<
+    DTSI_BillPersonRelationship,
+    'dateRelationOccurred' | 'id' | 'relationshipType'
+  > & {
+    bill: Pick<DTSI_Bill, 'id' | 'summary' | 'title' | 'shortTitle'>
+  }
+}
+
+export type DTSIStanceDetailsStanceProp<
+  D =
+    | DTSIStanceDetailsQuoteProp
+    | DTSIStanceDetailsTweetProp
+    | DTSIStanceDetailsBillRelationshipProp,
+> = Pick<DTSI_PersonStance, 'id' | 'dateStanceMade'> & D
+
+export type DTSIStanceDetailsPersonProp = Pick<
+  DTSI_Person,
+  | 'profilePictureUrlDimensions'
+  | 'firstName'
+  | 'firstNickname'
+  | 'lastName'
+  | 'nameSuffix'
+  | 'profilePictureUrl'
+  | 'id'
+>

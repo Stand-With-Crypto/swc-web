@@ -74,3 +74,41 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  img.emoji {
+    display: inline;
+    height: 1em;
+    width: 1em;
+    margin: 0 0.05em 0 0.1em;
+    vertical-align: -0.1em;
+  }
+
+  .AnimateCollapsibleContent {
+    overflow: hidden;
+  }
+  .AnimateCollapsibleContent[data-state='open'] {
+    animation: slideDown 300ms ease-out;
+  }
+  .AnimateCollapsibleContent[data-state='closed'] {
+    animation: slideUp 300ms ease-out;
+  }
+
+  @keyframes slideDown {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-collapsible-content-height);
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      height: var(--radix-collapsible-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+}

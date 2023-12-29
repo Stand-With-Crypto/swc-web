@@ -3,7 +3,10 @@ import { ImageAvatar, ImageAvatarProps } from '@/components/ui/imageAvatar'
 import { InitialsAvatar } from '@/components/ui/initialsAvatar'
 
 import { DTSI_Person } from '@/data/dtsi/generated'
-import { convertDTSIStanceScoreToLetterGrade, DTSILetterGrade } from '@/utils/dtsi/dtsiPersonUtils'
+import {
+  convertDTSIStanceScoreToLetterGrade,
+  DTSILetterGrade,
+} from '@/utils/dtsi/dtsiStanceScoreUtils'
 import _ from 'lodash'
 
 const getImage = (letterGrade: DTSILetterGrade | null) => {
@@ -23,19 +26,22 @@ const getImage = (letterGrade: DTSILetterGrade | null) => {
 
 export const DTSIFormattedLetterGrade: React.FC<{
   person: Pick<DTSI_Person, 'computedStanceScore' | 'manuallyOverriddenStanceScore'>
-}> = ({ person, ...props }) => {
-  const score = person.manuallyOverriddenStanceScore ?? person.computedStanceScore
-  const letterGrade = _.isNil(score) ? null : convertDTSIStanceScoreToLetterGrade(score)
+  size: number
+}> = ({ person, size, ...props }) => {
+  const letterGrade = convertDTSIStanceScoreToLetterGrade(person)
 
   return (
     <div className="relative inline-block">
-      <div className="absolute left-0 right-0 text-center text-xl font-extrabold text-white">
-        {letterGrade || '?'}
+      <div
+        className="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center text-center font-extrabold leading-none text-white"
+        style={{ fontSize: size * 0.66, paddingBottom: size * 0.1 }}
+      >
+        <div>{letterGrade || '?'}</div>
       </div>
       <NextImage
         alt={`Crypto letter grade of ${letterGrade || 'N/A'}`}
-        width={30}
-        height={30}
+        width={size}
+        height={size}
         src={getImage(letterGrade)}
       />
     </div>

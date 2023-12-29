@@ -33,6 +33,9 @@ export const externalUrls = {
   facebook: () => 'https://www.facebook.com/standwithcrypto',
   linkedin: () => 'https://www.linkedin.com/company/standwithcrypto/',
   discord: () => 'https://discord.com/invite/standwithcrypto',
+  dtsi: () => 'https://www.dotheysupportit.com',
+  dtsiCreateStance: (slug: string) =>
+    `https://www.dotheysupportit.com/people/${slug}/create-stance`,
 }
 
 export const apiUrls = {

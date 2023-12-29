@@ -14,6 +14,8 @@ const config: CodegenConfig = {
           Decimal: 'number',
           Json: 'unknown',
         },
+        maybeValue: 'T | null | undefined',
+        avoidOptionals: true,
         typesPrefix: 'DTSI_',
         namingConvention: {
           enumValues: 'change-case-all#upperCase',
