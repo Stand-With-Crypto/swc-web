@@ -5,7 +5,9 @@ import { FullHeight } from '@/components/ui/fullHeight'
 import { Toaster } from '@/components/ui/toaster'
 import { ORDERED_SUPPORTED_LOCALES } from '@/intl/locales'
 import { PageProps } from '@/types'
-import type { Metadata } from 'next'
+import { getOpenGraphImageUrl } from '@/utils/server/generateOpenGraphImageUrl'
+import { generateMetadataDetails } from '@/utils/server/metadataUtils'
+import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import { notFound } from 'next/navigation'
 import NextTopLoader from 'nextjs-toploader'
@@ -20,11 +22,36 @@ export async function generateStaticParams() {
 // TODO replace with font we want
 const inter = Inter({ subsets: ['latin'] })
 
-// TODO expand this metadata
+const title = `Stand With Crypto`
+const description = `Stand with Crypto Alliance is a non-profit organization dedicated to uniting global crypto advocates.`
+const ogImage = getOpenGraphImageUrl({ title: description })
+
+export const viewport: Viewport = {
+  viewportFit: 'cover',
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  themeColor: '#272d3f',
+}
+
 export const metadata: Metadata = {
-  title: 'Stand With Crypto Alliance',
-  description:
-    'Stand with Crypto Alliance is a non-profit organization dedicated to uniting global crypto advocates',
+  ...generateMetadataDetails({ description, title, ogImage }),
+  title: {
+    default: title,
+    template: '%s | Stand With Crypto',
+  },
+  metadataBase: new URL('https://www.standwithcrypto.org'),
+  applicationName: 'Stand With Crypto',
+  icons: [
+    { url: '/logo/favicon-16x16.png', sizes: '16x16' },
+    { url: '/logo/favicon-32x32.png', sizes: '32x32' },
+  ],
+  manifest: '/logo/site.webmanifest',
+  appleWebApp: {
+    title: 'Stand With Crypto',
+    statusBarStyle: 'black-translucent',
+    startupImage: ['/logo/apple-touch-icon.png'],
+  },
 }
 
 export default function Layout({ children, params }: PageProps & { children: React.ReactNode }) {

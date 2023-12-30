@@ -4,15 +4,24 @@ import { Button } from '@/components/ui/button'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { queryDTSIHomepagePeople } from '@/data/dtsi/queries/queryDTSIHomepagePeople'
-import { queryDTSIPresidentialCandidates } from '@/data/dtsi/queries/queryDTSIPresidentialCandidates'
 import { PageProps } from '@/types'
 import { groupAndSortDTSIPeopleByCryptoStance } from '@/utils/dtsi/dtsiPersonUtils'
-import { getIntlUrls } from '@/utils/shared/urls'
+import { generateMetadataDetails } from '@/utils/server/metadataUtils'
+import { Metadata } from 'next'
 
 export const revalidate = 3600
 export const dynamic = 'error'
 
-// TODO metadata
+type Props = PageProps
+
+const title = 'Where politicians stand on crypto'
+const description = `Ask your politician to be pro-crypto. Here's where they stand now.`
+export async function generateMetadata(_props: Props): Promise<Metadata> {
+  return generateMetadataDetails({
+    title,
+    description,
+  })
+}
 
 export default async function PoliticiansHomepage({ params }: PageProps) {
   const { locale } = params
@@ -21,10 +30,8 @@ export default async function PoliticiansHomepage({ params }: PageProps) {
   return (
     <div className="container">
       <section className="mb-24 space-y-7 text-center">
-        <PageTitle>Where politicians stand on crypto</PageTitle>
-        <PageSubTitle>
-          Ask your politician to be pro-crypto. Here's where they stand now.
-        </PageSubTitle>
+        <PageTitle>{title}</PageTitle>
+        <PageSubTitle>{description}</PageSubTitle>
         <div>
           <Button>Find your representative (TODO)</Button>
         </div>

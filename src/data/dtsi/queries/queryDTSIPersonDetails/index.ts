@@ -2,6 +2,8 @@ import { fetchDTSI } from '@/data/dtsi/fetchDTSI'
 import { DTSI_PersonDetailsQuery, DTSI_PersonDetailsQueryVariables } from '@/data/dtsi/generated'
 import { dtsiPersonDetailsQueryString } from './dtsiPersonDetailsQueryString'
 
+export type DTSIPersonDetails = DTSI_PersonDetailsQuery['people'][0]
+
 export const queryDTSIPersonDetails = async (slug: string) => {
   const results = await fetchDTSI<DTSI_PersonDetailsQuery, DTSI_PersonDetailsQueryVariables>(
     dtsiPersonDetailsQueryString,
@@ -12,5 +14,3 @@ export const queryDTSIPersonDetails = async (slug: string) => {
   }
   return results.people[0]
 }
-
-export type DTSIPersonDetails = DTSI_PersonDetailsQuery['people'][0]

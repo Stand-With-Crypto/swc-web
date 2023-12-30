@@ -16,12 +16,23 @@ import { getIntlUrls } from '@/utils/shared/urls'
 import { getUserDisplayName } from '@/utils/web/userUtils'
 import { UserAction, UserActionType } from '@prisma/client'
 import _ from 'lodash'
+import { Metadata } from 'next'
+import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 
 export const dynamic = 'force-dynamic'
 
-// TODO metadata
+type Props = PageProps
 
-export default async function Profile({ params }: PageProps) {
+const title = 'Your Stand With Crypto profile'
+const description = `See what actions you can take to help promote innovation.`
+export async function generateMetadata(_props: Props): Promise<Metadata> {
+  return generateMetadataDetails({
+    title,
+    description,
+  })
+}
+
+export default async function Profile({ params }: Props) {
   const { locale } = params
   const urls = getIntlUrls(locale)
   const user = await getAuthenticatedData()

@@ -1,5 +1,6 @@
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/recentActivityAndLeaderboard/recentActivityAndLeaderboardTabs'
 import { DEFAULT_LOCALE, SupportedLocale } from '@/intl/locales'
+import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
 export const getIntlUrls = (locale: SupportedLocale) => {
   const localePrefix = locale === DEFAULT_LOCALE ? '' : `/${locale}`
@@ -44,4 +45,15 @@ export const apiUrls = {
   mockTotalDonations: (locale: SupportedLocale) => `/api/mock-total-donations/${locale}`,
   performedUserActionTypes: () => `/api/authenticated/performed-user-action-types`,
   dtsiAllPeople: () => `/api/dtsi/all-people`,
+}
+
+export const fullUrl = (path: string) => {
+  switch (NEXT_PUBLIC_ENVIRONMENT) {
+    case 'local':
+      return `http://localhost:3000${path}`
+    case 'testing':
+      return `https://swc-web-testing.vercel.app${path}`
+    case 'production':
+      return `https://www.standwithcrypto.org${path}`
+  }
 }

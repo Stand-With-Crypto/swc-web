@@ -14,12 +14,24 @@ import { cn } from '@/utils/web/cn'
 import _ from 'lodash'
 import { notFound } from 'next/navigation'
 import { z } from 'zod'
+import { Metadata } from 'next'
+import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 
 export const revalidate = 3600
 export const dynamic = 'error'
 export const dynamicParams = true
 
-// TODO metadata
+type Props = PageProps<{ page: string[] }>
+
+const title = 'Our community'
+const description =
+  'See how our community is taking a stand to safeguard the future of crypto in America.'
+export async function generateMetadata(_props: Props): Promise<Metadata> {
+  return generateMetadataDetails({
+    title,
+    description,
+  })
+}
 
 const pageValidator = z.string().pipe(z.coerce.number().int().gte(1).lte(50))
 const validatePageNum = ([page]: (string | undefined)[]) => {
@@ -60,7 +72,7 @@ export async function generateStaticParams() {
   )
 }
 
-export default async function Leaderboard({ params }: PageProps<{ page: string[] }>) {
+export default async function Leaderboard({ params }: Props) {
   const { locale, page } = params
   const urls = getIntlUrls(locale)
   const pageNum = validatePageNum(page || [])
@@ -75,10 +87,8 @@ export default async function Leaderboard({ params }: PageProps<{ page: string[]
   ])
   return (
     <div className="container space-y-7">
-      <PageTitle as="h3">Our community</PageTitle>
-      <PageSubTitle as="h4">
-        See how our community is taking a stand to safeguard the future of crypto in America.
-      </PageSubTitle>
+      <PageTitle as="h3">{title}</PageTitle>
+      <PageSubTitle as="h4">{description}</PageSubTitle>
       <div className="text-center">
         <div className={cn(tabListStyles, 'mx-auto')}>
           <InternalLink
