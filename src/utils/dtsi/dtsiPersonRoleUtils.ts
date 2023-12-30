@@ -83,7 +83,6 @@ export const getDTSIPersonRoleLocation = (
     'primaryCity' | 'primaryCountryCode' | 'primaryDistrict' | 'primaryState'
   >,
 ) => {
-  console.log(role)
   return _.compact([
     role.primaryCity,
     role.primaryState && getUSStateNameFromStateCode(role.primaryState),
