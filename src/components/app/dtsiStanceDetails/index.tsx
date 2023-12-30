@@ -3,6 +3,7 @@ import { DTSIStanceDetailsQuote } from '@/components/app/dtsiStanceDetails/dtsiS
 import { DTSIStanceDetailsTweet } from '@/components/app/dtsiStanceDetails/dtsiStanceDetailsTweet'
 import {
   DTSIStanceDetailsPersonProp,
+  DTSIStanceDetailsStancePassedProp,
   DTSIStanceDetailsStanceProp,
 } from '@/components/app/dtsiStanceDetails/types'
 import { DTSI_PersonStanceType } from '@/data/dtsi/generated'
@@ -10,10 +11,7 @@ import React from 'react'
 
 export type IStanceDetailsProps = {
   person: DTSIStanceDetailsPersonProp
-  stance: Omit<DTSIStanceDetailsStanceProp, 'stanceType'> & {
-    // TODO figure out why types break without this
-    stanceType: DTSI_PersonStanceType
-  }
+  stance: DTSIStanceDetailsStancePassedProp
   className?: string
 }
 

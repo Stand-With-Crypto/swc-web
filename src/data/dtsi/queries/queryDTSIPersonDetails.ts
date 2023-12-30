@@ -110,6 +110,7 @@ export const query = /* GraphQL */ `
             id
             username
             state
+            personId
           }
           tweetMedia {
             height

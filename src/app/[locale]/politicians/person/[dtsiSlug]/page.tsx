@@ -43,12 +43,15 @@ export default async function PoliticianDetails({ params }: PageProps<{ dtsiSlug
   const primaryRole = orderedRoles.byImportance[0]
   const rolesWithDomains = groupDTSIPersonRolesByDomain(orderedRoles.byDateStart)
   return (
-    <div className="container grid grid-cols-1 space-y-6 md:grid-cols-4 md:space-y-0 lg:grid-cols-3">
+    <div className="container grid grid-cols-1 space-y-6 md:grid-cols-3 md:space-y-0">
       <aside className="md:col-span-1">
-        <div className="sticky top-0 md:mr-6 md:max-h-screen md:overflow-y-auto md:border-r md:pr-6">
+        <div className="sticky top-0 text-center md:mr-6 md:max-h-screen md:overflow-y-auto md:border-r md:pr-6 md:text-left">
           <article className="mt-5">
             {person.profilePictureUrl && (
-              <div className="mb-6 overflow-hidden rounded-lg" style={{ maxWidth: 200 }}>
+              <div
+                className="mx-auto mb-6 overflow-hidden rounded-lg md:mx-0"
+                style={{ maxWidth: 200 }}
+              >
                 <MaybeNextImg
                   sizes="200px"
                   alt={`profile picture of ${dtsiPersonFullName(person)}`}
@@ -153,19 +156,17 @@ export default async function PoliticianDetails({ params }: PageProps<{ dtsiSlug
               </CollapsibleContent>
             </Collapsible>
           )}
-          <article className="mt-4 border-t pt-4 lg:mt-6 lg:pt-6">
+          <article className="mx-auto mt-4 max-w-xs border-t pt-4 md:mx-0 lg:mt-6 lg:pt-6">
             <h2 className="text-xl font-semibold">Crypto position</h2>
-            <div className="my-4 flex gap-4">
+            <div className="mx-auto my-4 flex max-w-[200px] gap-4 md:mx-0">
               <div className="flex-shrink-0">
                 <DTSIFormattedLetterGrade size={60} person={person} />
               </div>
               <div
                 className={cn(
                   convertDTSIStanceScoreToTextColorClass(person),
-                  'text-xl font-semibold ',
+                  'text-left text-xl font-semibold',
                 )}
-                // https://stackoverflow.com/a/23889196
-                style={{ wordSpacing: 200 }}
               >
                 {convertDTSIStanceScoreToCryptoSupportLanguage(person)}
               </div>
@@ -196,13 +197,13 @@ export default async function PoliticianDetails({ params }: PageProps<{ dtsiSlug
                 <ExternalLink href={person.officialUrl}>{person.officialUrl}</ExternalLink>
               </div>
             )}
-            <Button variant={'outline'} className="mt-3 block">
+            <Button variant={'outline'} className="mt-3">
               DONATE (TODO)
             </Button>
           </article>
         </div>
       </aside>
-      <section className="md:col-span-3 lg:col-span-2">
+      <section className="md:col-span-2">
         <div className="flex flex-col space-y-6">
           {!person.stances.length && <div className="text-center">No recent comments.</div>}
           {person.stances.map(stance => {
@@ -217,3 +218,10 @@ export default async function PoliticianDetails({ params }: PageProps<{ dtsiSlug
     </div>
   )
 }
+
+export type Maybe<T> = T | null | undefined
+type Foo = { foo: Maybe<string> }
+
+const bar = (foo: Pick<Foo, 'foo'>) => null
+
+bar({})

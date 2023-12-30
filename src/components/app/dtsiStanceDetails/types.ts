@@ -9,6 +9,7 @@ import {
   DTSI_TweetMedia,
   DTSI_TwitterAccount,
 } from '@/data/dtsi/generated'
+import { PartialButDefined } from '@/types'
 
 export type DTSIStanceDetailsQuoteProp = {
   stanceType: DTSI_PersonStanceType.QUOTE
@@ -17,10 +18,7 @@ export type DTSIStanceDetailsQuoteProp = {
 
 export type DTSIStanceDetailsTweetProp = {
   stanceType: DTSI_PersonStanceType.TWEET
-  tweet: Pick<
-    DTSI_Tweet,
-    'datetimeCreatedOnTwitter' | 'entities' | 'id' | 'isActive' | 'text' | 'tweetMedia'
-  > & {
+  tweet: Pick<DTSI_Tweet, 'datetimeCreatedOnTwitter' | 'entities' | 'id' | 'text'> & {
     twitterAccount: Pick<DTSI_TwitterAccount, 'id' | 'username' | 'personId'>
     tweetMedia: Pick<DTSI_TweetMedia, 'url'>[]
   }
@@ -28,10 +26,7 @@ export type DTSIStanceDetailsTweetProp = {
 
 export type DTSIStanceDetailsBillRelationshipProp = {
   stanceType: DTSI_PersonStanceType.BILL_RELATIONSHIP
-  billRelationship: Pick<
-    DTSI_BillPersonRelationship,
-    'dateRelationOccurred' | 'id' | 'relationshipType'
-  > & {
+  billRelationship: Pick<DTSI_BillPersonRelationship, 'id' | 'relationshipType'> & {
     bill: Pick<DTSI_Bill, 'id' | 'summary' | 'title' | 'shortTitle'>
   }
 }
@@ -42,6 +37,14 @@ export type DTSIStanceDetailsStanceProp<
     | DTSIStanceDetailsTweetProp
     | DTSIStanceDetailsBillRelationshipProp,
 > = Pick<DTSI_PersonStance, 'id' | 'dateStanceMade'> & D
+
+export type DTSIStanceDetailsStancePassedProp = Pick<
+  DTSI_PersonStance,
+  'id' | 'dateStanceMade' | 'stanceType'
+> &
+  Omit<PartialButDefined<DTSIStanceDetailsQuoteProp>, 'stanceType'> &
+  Omit<PartialButDefined<DTSIStanceDetailsTweetProp>, 'stanceType'> &
+  Omit<PartialButDefined<DTSIStanceDetailsBillRelationshipProp>, 'stanceType'>
 
 export type DTSIStanceDetailsPersonProp = Pick<
   DTSI_Person,
