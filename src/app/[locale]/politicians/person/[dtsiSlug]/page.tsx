@@ -8,6 +8,7 @@ import { ExternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
+import { queryDTSIAllPeopleSlugs } from '@/data/dtsi/queries/queryDTSIAllPeopleSlugs'
 import { queryDTSIPersonDetails } from '@/data/dtsi/queries/queryDTSIPersonDetails'
 import { PageProps } from '@/types'
 import {
@@ -37,6 +38,10 @@ export const dynamic = 'error'
 export const dynamicParams = true
 
 // TODO metadata
+
+export async function generateStaticParams() {
+  return queryDTSIAllPeopleSlugs().then(x => x.people.map(({ slug: dtsiSlug }) => ({ dtsiSlug })))
+}
 
 export default async function PoliticianDetails({ params }: PageProps<{ dtsiSlug: string }>) {
   const { locale } = params
