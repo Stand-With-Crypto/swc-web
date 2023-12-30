@@ -9,6 +9,7 @@ import {
   DTSI_TweetMedia,
   DTSI_TwitterAccount,
 } from '@/data/dtsi/generated'
+import { SupportedLocale } from '@/intl/locales'
 import { PartialButDefined } from '@/types'
 
 export type DTSIStanceDetailsQuoteProp = {
@@ -20,7 +21,7 @@ export type DTSIStanceDetailsTweetProp = {
   stanceType: DTSI_PersonStanceType.TWEET
   tweet: Pick<DTSI_Tweet, 'datetimeCreatedOnTwitter' | 'entities' | 'id' | 'text'> & {
     twitterAccount: Pick<DTSI_TwitterAccount, 'id' | 'username' | 'personId'>
-    tweetMedia: Pick<DTSI_TweetMedia, 'url'>[]
+    tweetMedia: Pick<DTSI_TweetMedia, 'url' | 'id' | 'width' | 'height'>[]
   }
 }
 
@@ -56,3 +57,10 @@ export type DTSIStanceDetailsPersonProp = Pick<
   | 'profilePictureUrl'
   | 'id'
 >
+
+export type IStanceDetailsProps = {
+  locale: SupportedLocale
+  person: DTSIStanceDetailsPersonProp
+  stance: DTSIStanceDetailsStancePassedProp
+  className?: string
+}

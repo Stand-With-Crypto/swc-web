@@ -121,5 +121,5 @@ export type MyRootBlock =
 
 export type RichTextEditorRootBlock = MyRootBlock
 
-export type MyValue = MyRootBlock[]
+export type MyValue = readonly MyRootBlock[]
 export type RichTextEditorValue = MyValue

@@ -26,6 +26,7 @@
   - `npm run lint` - audits code against eslint and prettier
   - `npm run typecheck` - audits code against typescript
   - `npm run test` - execute jest tests
+  - `npm run storybook` - run and view isolated [storybook stories](https://storybook.js.org/)
 
 ## Learn More
 

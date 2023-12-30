@@ -5,15 +5,10 @@ import {
   DTSIStanceDetailsPersonProp,
   DTSIStanceDetailsStancePassedProp,
   DTSIStanceDetailsStanceProp,
+  IStanceDetailsProps,
 } from '@/components/app/dtsiStanceDetails/types'
 import { DTSI_PersonStanceType } from '@/data/dtsi/generated'
 import React from 'react'
-
-export type IStanceDetailsProps = {
-  person: DTSIStanceDetailsPersonProp
-  stance: DTSIStanceDetailsStancePassedProp
-  className?: string
-}
 
 export const DTSIStanceDetails: React.FC<IStanceDetailsProps> = ({
   stance: passedStance,

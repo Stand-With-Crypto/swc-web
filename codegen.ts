@@ -3,9 +3,16 @@ import type { CodegenConfig } from '@graphql-codegen/cli'
 const config: CodegenConfig = {
   overwrite: true,
   generates: {
+    'src/data/dtsi/introspection.json': {
+      plugins: ['introspection'],
+      config: {
+        minify: true,
+      },
+      schema: 'src/data/dtsi/schema.graphql',
+    },
     'src/data/dtsi/generated.ts': {
       documents: 'src/data/dtsi/**/*.ts',
-      plugins: ['typescript', 'typescript-operations'],
+      plugins: ['typescript', 'typescript-operations', 'typescript-resolvers'],
       config: {
         scalars: {
           DateTime: 'string',

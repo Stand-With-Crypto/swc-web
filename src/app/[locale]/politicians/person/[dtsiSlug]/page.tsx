@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 import { MaybeNextImg } from '@/components/ui/image'
 import { ExternalLink } from '@/components/ui/link'
+import { PageTitle } from '@/components/ui/pageTitleText'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
 import { queryDTSIPersonDetails } from '@/data/dtsi/queries/queryDTSIPersonDetails'
@@ -38,6 +39,7 @@ export const dynamicParams = true
 // TODO metadata
 
 export default async function PoliticianDetails({ params }: PageProps<{ dtsiSlug: string }>) {
+  const { locale } = params
   const person = await queryDTSIPersonDetails(params.dtsiSlug)
   const orderedRoles = orderDTSIPersonRolesByImportance(person.roles)
   const primaryRole = orderedRoles.byImportance[0]
@@ -45,7 +47,7 @@ export default async function PoliticianDetails({ params }: PageProps<{ dtsiSlug
   return (
     <div className="container grid grid-cols-1 space-y-6 md:grid-cols-3 md:space-y-0">
       <aside className="md:col-span-1">
-        <div className="sticky top-0 text-center md:mr-6 md:max-h-screen md:overflow-y-auto md:border-r md:pr-6 md:text-left">
+        <div className="sticky top-0 text-center md:mr-6 md:max-h-screen md:min-h-screen md:overflow-y-auto md:border-r md:pr-6 md:text-left">
           <article className="mt-5">
             {person.profilePictureUrl && (
               <div
@@ -204,12 +206,13 @@ export default async function PoliticianDetails({ params }: PageProps<{ dtsiSlug
         </div>
       </aside>
       <section className="md:col-span-2">
+        <h2 className="mb-6 text-2xl font-extrabold">{person.stances.length} notable statements</h2>
         <div className="flex flex-col space-y-6">
-          {!person.stances.length && <div className="text-center">No recent comments.</div>}
-          {person.stances.map(stance => {
+          {!person.stances.length && <div className="text-center">No recent statements.</div>}
+          {person.stances.map((stance, index) => {
             return (
-              <article key={stance.id}>
-                <DTSIStanceDetails stance={stance} person={person} />
+              <article key={stance.id} className={cn(!!index && 'border-t pt-6')}>
+                <DTSIStanceDetails locale={locale} stance={stance} person={person} />
               </article>
             )
           })}
@@ -218,10 +221,3 @@ export default async function PoliticianDetails({ params }: PageProps<{ dtsiSlug
     </div>
   )
 }
-
-export type Maybe<T> = T | null | undefined
-type Foo = { foo: Maybe<string> }
-
-const bar = (foo: Pick<Foo, 'foo'>) => null
-
-bar({})

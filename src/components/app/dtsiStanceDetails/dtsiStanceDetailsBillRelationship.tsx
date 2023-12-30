@@ -1,6 +1,7 @@
 import {
   DTSIStanceDetailsBillRelationshipProp,
   DTSIStanceDetailsStanceProp,
+  IStanceDetailsProps,
 } from '@/components/app/dtsiStanceDetails/types'
 import { dtsiPersonBillRelationshipTypeAsVerb } from '@/utils/dtsi/dtsiPersonBillRelationshipUtils'
 import { cn } from '@/utils/web/cn'
@@ -9,16 +10,15 @@ import _ from 'lodash'
 import { Gavel } from 'lucide-react'
 import React from 'react'
 
-export interface IStanceDetailsBillRelationshipProps {
+type IStanceDetailsBillRelationshipProps = Omit<IStanceDetailsProps, 'stance'> & {
   stance: DTSIStanceDetailsStanceProp<DTSIStanceDetailsBillRelationshipProp>
-  className?: string
 }
 
 const StanceDetailsBillRelationshipShared: React.FC<
   IStanceDetailsBillRelationshipProps & { children: React.ReactNode }
 > = ({ children, stance, className }) => {
   return (
-    <div className={cn('rounded-lg bg-white p-4 text-gray-800 lg:text-xl', className)}>
+    <div className={cn('rounded-lg text-gray-800 lg:text-xl', className)}>
       <div className="mb-5">{children}</div>
       {[
         { label: 'Bill Name', details: stance.billRelationship.bill.shortTitle },
@@ -28,7 +28,7 @@ const StanceDetailsBillRelationshipShared: React.FC<
         },
       ].map((x, i) => (
         <React.Fragment key={i}>
-          {!!i && <hr className="mx-auto my-4 w-[50%] border border-gray-100" />}
+          {!!i && <hr className="mx-auto my-1 w-[50%] border border-gray-100" />}
           <div className={cn('flex flex-col items-center md:flex-row')}>
             <div className="w-full flex-none font-bold md:w-[120px]">{x.label}</div>
             <div className="text-sm">{x.details}</div>

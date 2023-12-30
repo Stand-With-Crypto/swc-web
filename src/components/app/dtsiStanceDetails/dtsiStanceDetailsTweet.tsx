@@ -1,21 +1,20 @@
 import { FormattedUserTweet, TweetEntityOptionsWithType } from '@/types/twitter'
 import twemoji from 'twemoji'
-// @ts-ignore
-import { parse as twemojiParser } from 'twemoji-parser'
-import { ExternalLink } from '@/components/ui/link'
 import {
-  DTSIStanceDetailsPersonProp,
   DTSIStanceDetailsStanceProp,
   DTSIStanceDetailsTweetProp,
+  IStanceDetailsProps,
 } from '@/components/app/dtsiStanceDetails/types'
-import { DTSI_Person } from '@/data/dtsi/generated'
-import { DTSIAvatar } from '@/components/app/dtsiAvatar'
-import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
-import { Quote, Twitter } from 'lucide-react'
-import { cn } from '@/utils/web/cn'
+import { FormattedDatetime } from '@/components/ui/formattedDatetime'
 import { NextImage } from '@/components/ui/image'
-import { format } from 'date-fns'
+import { ExternalLink } from '@/components/ui/link'
+import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { dtsiTweetUrl } from '@/utils/dtsi/dtsiTweetUtils'
+import { cn } from '@/utils/web/cn'
+import { format } from 'date-fns'
+import { Quote } from 'lucide-react'
+// @ts-ignore
+import { parse as twemojiParser } from 'twemoji-parser'
 
 export const getEmojiIndexes = (tweet: DTSIStanceDetailsTweetProp['tweet']) => {
   // define a regular expression to match all Unicode emoji characters
@@ -164,51 +163,26 @@ const TweetBody: React.FC<{ tweet: DTSIStanceDetailsTweetProp['tweet'] }> = ({ t
   )
 }
 
-export interface StanceDetailsTweetProps {
-  person: DTSIStanceDetailsPersonProp
-  stance: DTSIStanceDetailsStanceProp<DTSIStanceDetailsTweetProp>
-}
-
-export const DTSIStanceDetailsTweet: React.FC<StanceDetailsTweetProps> = ({ stance, person }) => {
-  console.log(stance.tweet.twitterAccount.personId, person.id)
+export const DTSIStanceDetailsTweet: React.FC<
+  Omit<IStanceDetailsProps, 'stance'> & {
+    stance: DTSIStanceDetailsStanceProp<DTSIStanceDetailsTweetProp>
+  }
+> = ({ stance, person, locale }) => {
   return (
-    <article className="rounded-lg bg-white p-4 text-gray-800 lg:text-xl">
-      {stance.tweet.twitterAccount.personId === person.id ? (
-        <div className="flex justify-between">
-          <div className="flex flex-1 items-center">
-            <div className="mr-2" style={{ flex: '0 0 50px' }}>
-              <DTSIAvatar person={person} size={50} />
-            </div>
-            <div className="flex-1 leading-tight" style={{ fontSize: '15px' }}>
-              <div className="font-bold">{dtsiPersonFullName(person)}</div>
-              <div style={{ color: 'rgb(83, 100, 113)' }}>
-                @{stance.tweet.twitterAccount.username}
-              </div>
-            </div>
-          </div>
+    <article className="rounded-lg text-gray-800 lg:text-xl">
+      {stance.tweet.twitterAccount.personId !== person.id && (
+        <div className="mb-3 flex items-center border-b pb-3 italic text-gray-700">
           <div>
-            <Twitter className="h-6 w-6" />
-          </div>
-        </div>
-      ) : (
-        <div className="mb-3 flex items-center border-b pb-3">
-          <div className="mr-3 w-10 shrink-0">
-            <Quote size={40} />
-          </div>
-          <div>
-            A tweet from{' '}
-            <span className="font-semibold text-blue-400">
-              @{stance.tweet.twitterAccount.username}
-            </span>{' '}
-            referenced {dtsiPersonFullName(person)}
+            A tweet from @{stance.tweet.twitterAccount.username} referenced{' '}
+            {dtsiPersonFullName(person)}
           </div>
         </div>
       )}
-      <div className="my-4 whitespace-pre-line " style={{ lineHeight: 1.2 }}>
+      <div className="mb-3 whitespace-pre-line " style={{ lineHeight: 1.2 }}>
         <TweetBody tweet={stance.tweet} />
       </div>
       {stance.tweet.tweetMedia.length ? (
-        <div className="mx-auto my-4 flex justify-center" style={{ maxWidth: '500px' }}>
+        <div className="mx-auto my-3 flex justify-center" style={{ maxWidth: '500px' }}>
           {stance.tweet.tweetMedia.map(media => (
             <div
               className={cn(
@@ -230,15 +204,17 @@ export const DTSIStanceDetailsTweet: React.FC<StanceDetailsTweetProps> = ({ stan
         </div>
       ) : null}
       <div>
-        {format(new Date(stance.tweet.datetimeCreatedOnTwitter), 'h:mm a · MMM d, yyyy')}
-        {' · '}via Twitter
-      </div>
-      <div>
         <ExternalLink
-          className="text-sm text-blue-400"
+          className="text-sm underline"
           href={dtsiTweetUrl(stance.tweet, stance.tweet.twitterAccount)}
         >
-          View original tweet
+          @{stance.tweet.twitterAccount.username}{' '}
+          <FormattedDatetime
+            dateStyle="medium"
+            date={new Date(stance.tweet.datetimeCreatedOnTwitter)}
+            locale={locale}
+          />{' '}
+          on X
         </ExternalLink>
       </div>
     </article>

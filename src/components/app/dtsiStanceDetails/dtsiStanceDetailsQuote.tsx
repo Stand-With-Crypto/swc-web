@@ -2,6 +2,7 @@ import { RichTextFormatter } from '@/components/app/dtsiRichText/dtsiRichTextFor
 import {
   DTSIStanceDetailsQuoteProp,
   DTSIStanceDetailsStanceProp,
+  IStanceDetailsProps,
 } from '@/components/app/dtsiStanceDetails/types'
 import { ExternalLink } from '@/components/ui/link'
 import { cn } from '@/utils/web/cn'
@@ -9,16 +10,15 @@ import { format, parseISO } from 'date-fns'
 import { Quote } from 'lucide-react'
 import React from 'react'
 
-export interface IDTSIStanceDetailsQuoteProps {
+type IDTSIStanceDetailsQuoteProps = Omit<IStanceDetailsProps, 'stance'> & {
   stance: DTSIStanceDetailsStanceProp<DTSIStanceDetailsQuoteProp>
-  className?: string
 }
 
 export const DTSIStanceDetailsQuoteShared: React.FC<
   IDTSIStanceDetailsQuoteProps & { children: React.ReactNode }
 > = ({ children, stance, className }) => {
   return (
-    <div className={cn('rounded-lg bg-white p-4 text-gray-800 lg:text-xl', className)}>
+    <div className={cn('rounded-lg text-gray-800 lg:text-xl', className)}>
       {children}
       <hr className="my-4 border" style={{ width: '120px' }} />
       {stance.quote.richTextDescription ? (

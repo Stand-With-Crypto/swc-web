@@ -30,7 +30,8 @@ Below is a non-exhaustive list of coding conventions that we try to follow. This
 - Use the `container` class to define standard page breakpoints, unless UX calls for something else.
   - An example of when not to use `container` - you have a sideways scrolling list that extends beyond the viewport and want to make sure elements go "off the edge of the screen" to the user
 - Avoid using javascript-defined styles over CSS-defined styles (like change UX based off screen size) unless it's not possible to achieve the desired effect with CSS. Defining responsive design in css is more SEO/user friendly. It prevents unwanted flickers and reduces the need for client components.
-- If you are building a UI element with a lot of different possible UI permutations, consider creating a [storybook](https://storybook.js.org/) file (`.stories.tsx`) to help other developers view all the possible UI states
+- If you are building a UI element with a lot of different possible UI permutations, consider creating a [storybook](https://storybook.js.org/) file (`.stories.tsx`) to help other developers view all the possible UI states.
+  - A good example of when it makes sense is `src/components/app/dtsiStanceDetails/dtsiStanceDetails.stories.tsx`
 
 ## Security
 
