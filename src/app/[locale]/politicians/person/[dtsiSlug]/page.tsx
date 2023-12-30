@@ -31,6 +31,7 @@ import {
 import { dtsiTwitterAccountUrl } from '@/utils/dtsi/dtsiTwitterAccountUtils'
 import { externalUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
+import _ from 'lodash'
 import { Info, MoveUpRight } from 'lucide-react'
 
 export const revalidate = 60 * 24 * 7
@@ -49,10 +50,11 @@ export default async function PoliticianDetails({ params }: PageProps<{ dtsiSlug
   const orderedRoles = orderDTSIPersonRolesByImportance(person.roles)
   const primaryRole = orderedRoles.byImportance[0]
   const rolesWithDomains = groupDTSIPersonRolesByDomain(orderedRoles.byDateStart)
+  const stances = _.orderBy(person.stances, x => -1 * new Date(x.dateStanceMade).getTime())
   return (
     <div className="container grid grid-cols-1 space-y-6 md:grid-cols-3 md:space-y-0">
       <aside className="md:col-span-1">
-        <div className="sticky top-0 text-center md:mr-6 md:max-h-screen md:min-h-screen md:overflow-y-auto md:border-r md:pr-6 md:text-left">
+        <div className="sticky top-0 text-center md:mr-6 md:max-h-screen md:min-h-screen md:overflow-y-auto md:border-r md:pb-12 md:pr-6 md:text-left">
           <article className="mt-5">
             {person.profilePictureUrl && (
               <div
@@ -211,12 +213,15 @@ export default async function PoliticianDetails({ params }: PageProps<{ dtsiSlug
         </div>
       </aside>
       <section className="md:col-span-2">
-        <h2 className="mb-6 text-2xl font-extrabold">{person.stances.length} notable statements</h2>
-        <div className="flex flex-col space-y-6">
-          {!person.stances.length && <div className="text-center">No recent statements.</div>}
-          {person.stances.map((stance, index) => {
+        <h2 className="mb-6 text-2xl font-extrabold">{stances.length} notable statements</h2>
+        <div className="flex flex-col space-y-10">
+          {!stances.length && <div className="text-center">No recent statements.</div>}
+          {stances.map((stance, index) => {
             return (
-              <article key={stance.id} className={cn(!!index && 'border-t pt-6')}>
+              <article
+                key={stance.id}
+                className={cn('rounded-lg border border-gray-400 p-4 md:p-6')}
+              >
                 <DTSIStanceDetails locale={locale} stance={stance} person={person} />
               </article>
             )
