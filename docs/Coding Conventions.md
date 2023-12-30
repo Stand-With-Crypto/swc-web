@@ -19,23 +19,23 @@ Below is a non-exhaustive list of coding conventions that we try to follow. This
 - Always validate/sanitize server-side input
 - For client-side and server-side input validation, leverage [zod](https://github.com/colinhacks/zod)
 - When using zod for client-side validation, do not import `z` from the library as this prevents tree-shaking from removing unused portions of the library. Instead import the individual methods (`object`, `string`, etc) from the package.
-- when you need field-level errors to be returned to the client (for example if you'd like to map server-level validation errors to specific form inputs), use `safeParse` and return `{ errors: safeParseResult.error.flatten().fieldErrors }` if there are errors
+- when you need field-level errors to be returned to the client, make sure to return them in an object structure as `{ errors: validatedFields.error.flatten().fieldErrors }` so they can successfully be used by client side functions like `triggerServerActionForForm`
 
 ## UI Development
 
 - Whenever possible, try and use TailwindCSS and Radix UI as the core primitives for building UI
 - When tasked with building out a new base-level UI primitive (a checkbox component for example), consider checking [shadcn](https://ui.shadcn.com/docs/components/), a CLI tool that aides in the rapid development of TailwindCSS/Radix UI components, to see if there's any prebuilt examples that we can use as a starting point. Because shadcn [is not a component library](https://ui.shadcn.com/docs), we get all the benefits of bootstrapping the UI with some best practices, and none of the downsides of getting locked in to opinionated component libraries that are hard to customize.
 - When building forms that require best-in-class UX practices (field-level error validation for example), consider leveraging `react-hook-form` and the corresponding pre-built components in `src/components/ui/form`.
-- If your form submission results in server-side zod errors that should be mapped to specific form fields, make sure to return them in an object structure as `{ errors: validatedFields.error.flatten().fieldErrors }` so they can successfully be used by client side functions like `triggerServerActionForForm`
 - For standalone header text, consider using [react-wrap-balancer](https://react-wrap-balancer.vercel.app/) to aide it's responsiveness. See our `PageH1` and `PageH2` components
 - Use the `container` class to define standard page breakpoints, unless UX calls for something else.
   - An example of when not to use `container` - you have a sideways scrolling list that extends beyond the viewport and want to make sure elements go "off the edge of the screen" to the user
 - Avoid using javascript-defined styles over CSS-defined styles (like change UX based off screen size) unless it's not possible to achieve the desired effect with CSS. Defining responsive design in css is more SEO/user friendly. It prevents unwanted flickers and reduces the need for client components.
+- If you are building a UI element with a lot of different possible UI permutations, consider creating a [storybook](https://storybook.js.org/) file (`.stories.tsx`) to help other developers view all the possible UI states.
+  - A good example of when it makes sense is `src/components/app/dtsiStanceDetails/dtsiStanceDetails.stories.tsx`
 
 ## Security
 
 - Follow [Next.js security best practices](https://nextjs.org/blog/security-nextjs-server-components-actions)
-  - From the blog post but calling out here for good measure: always include `import 'server-only'` in files that you never want to be exposed to the client to prevent unexpected bugs
 - When returning database models to the client, make sure to run them through the respective "client" parser found in the `/src/clientModels` folder to ensure we strip out any sensitive data
 - Never have react components accept database models directly. They should always accept the `Client` variant of the model
 
@@ -45,7 +45,6 @@ Below is a non-exhaustive list of coding conventions that we try to follow. This
 - Column names for datetime types should be prefixed with `datetime`
 - Column names for date types should be prefixed with `date`
 - Column names for monetary (and crypto) amounts should be prefixed with the currency, unless there is a separate column on the table that includes the monetary type. Examples include `usdAmount`, `btcValue`, etc
-- Column names for datetime types should be prefixed with `datetime`
 - Column names for boolean types should be prefixed with a descriptor that implies a yes or no answer. Examples of prefixes include `has`, `is`, `should`, `can`, etc
 - String columns that can possibly be submitted with an empty string (form inputs, etc) should be set to default to "" and should not be nullable. This ensures that there can't be two "falsy" states (null, and empty string). For string columns that can not ever be submitted with an empty string (a string id column for example), use nullable instead of empty string.
 

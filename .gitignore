@@ -39,4 +39,5 @@ next-env.d.ts
 prisma/local-db/*
 
 src/data/dtsi/generated.ts
+src/data/dtsi/introspection.json
 src/intl/generated/*

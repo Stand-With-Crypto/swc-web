@@ -5,7 +5,6 @@ import { DTSI_AllPeopleQuery, DTSI_AllPeopleQueryVariables } from '@/data/dtsi/g
 import { REPLACE_ME__captureException } from '@/utils/shared/captureException'
 import _ from 'lodash'
 
-// TODO add people filter for promoted
 export const query = /* GraphQL */ `
   query AllPeople {
     people(limit: 1500, offset: 0) {

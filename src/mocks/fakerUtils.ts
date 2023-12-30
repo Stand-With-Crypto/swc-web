@@ -4,6 +4,7 @@ import dtsiSlugs from '@/staticContent/mocks/dtsiSlugs.json'
 
 export const fakerFields = {
   id: () => faker.string.uuid(),
+  dtsiStanceScore: () => faker.number.int({ min: 0, max: 100 }),
   dtsiSlug: () => faker.helpers.arrayElement(dtsiSlugs),
   supportedFiatCurrencyCode: () =>
     faker.helpers.arrayElement(Object.values(SupportedFiatCurrencyCodes)),

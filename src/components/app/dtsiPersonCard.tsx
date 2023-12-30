@@ -5,10 +5,10 @@ import { InternalLink } from '@/components/ui/link'
 import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
 import { DTSI_Person, DTSI_PersonCardFragment } from '@/data/dtsi/generated'
 import { SupportedLocale } from '@/intl/locales'
+import { getDTSIFormattedShortPersonRole } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import {
   dtsiPersonFullName,
   dtsiPersonPoliticalAffiliationCategoryAbbreviation,
-  getDTSIFormattedShortPersonRole,
 } from '@/utils/dtsi/dtsiPersonUtils'
 import { getIntlUrls } from '@/utils/shared/urls'
 
@@ -41,7 +41,7 @@ export function DTSIPersonCard({
         </div>
       </div>
       <div>
-        <DTSIFormattedLetterGrade person={person} />
+        <DTSIFormattedLetterGrade size={30} person={person} />
       </div>
     </LinkBox>
   )

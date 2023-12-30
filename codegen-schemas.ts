@@ -19,7 +19,9 @@ const config: CodegenConfig = {
     'src/data/dtsi/schema.graphql': {
       plugins: ['schema-ast'],
       schema: {
-        'https://www.dotheysupportit.com/api/graphql': {
+        [process.env.USE_DTSI_PRODUCTION_API_ON_LOCAL === 'true'
+          ? 'https://www.dotheysupportit.com/api/graphql'
+          : 'https://testing.dotheysupportit.com/api/graphql']: {
           headers: {
             Authorization: DO_THEY_SUPPORT_IT_API_KEY,
           },

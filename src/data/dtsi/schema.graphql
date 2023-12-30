@@ -51,6 +51,7 @@ enum BillAnalysisVerificationStatus {
 }
 
 type BillPersonRelationship {
+  bill: Bill!
   billId: String!
   dateRelationOccurred: DateTime!
   datetimeCreated: DateTime!
@@ -153,6 +154,10 @@ type Person {
   promotedPositioning: Int
   roles: [PersonRole!]!
   slug: String!
+  stanceCount(
+    promotedPositioningOption: PersonStanceHasPromotedPositioning
+    verificationStatusIn: [PersonStanceVerificationStatus!]
+  ): Int
   stances(
     promotedPositioningOption: PersonStanceHasPromotedPositioning
     verificationStatusIn: [PersonStanceVerificationStatus!]
@@ -168,6 +173,8 @@ type Person {
 Common groupings of people to query for
 """
 enum PersonGrouping {
+  CURRENT_US_HOUSE_OF_REPS
+  CURRENT_US_SENATE
   RUNNING_FOR_PRESIDENT
 }
 

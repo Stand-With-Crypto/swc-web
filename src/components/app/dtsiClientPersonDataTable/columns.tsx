@@ -7,10 +7,10 @@ import { InternalLink } from '@/components/ui/link'
 import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
 import { queryDTSIAllPeople } from '@/data/dtsi/queries/queryDTSIAllPeople'
 import { SupportedLocale } from '@/intl/locales'
+import { getDTSIPersonRoleCategoryDisplayName } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import {
   dtsiPersonFullName,
   dtsiPersonPoliticalAffiliationCategoryDisplayName,
-  getDTSIPersonRoleCategoryDisplayName,
 } from '@/utils/dtsi/dtsiPersonUtils'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { getUSStateNameFromStateCode } from '@/utils/shared/usStateUtils'
@@ -78,7 +78,7 @@ export const getDTSIClientPersonDataTableColumns = ({
     header: ({ column }) => {
       return <SortableHeader column={column}>Stance on crypto</SortableHeader>
     },
-    cell: ({ row }) => <DTSIFormattedLetterGrade person={row.original} />,
+    cell: ({ row }) => <DTSIFormattedLetterGrade size={30} person={row.original} />,
   },
   {
     accessorKey: 'primaryStateCodeWithDisplayName',

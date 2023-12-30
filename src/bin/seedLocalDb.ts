@@ -183,7 +183,6 @@ async function seed() {
   logEntity({ nftMint })
 
   const usedNftMints = [...nftMint]
-  console.log('start', usedNftMints.length)
 
   await batchAsyncAndLog(
     userActionTypesToPersist.map((actionType, index) => {
