@@ -44,7 +44,6 @@ export const queryDTSIMockSchema = <R>(query: string, variables?: any) => {
     source: query,
     variableValues: variables,
   }).then(result => {
-    console.log('Got result', result)
     if (result.errors) {
       throw new Error(`queryDTSIMockSchema threw with \n${JSON.stringify(result.errors, null, 4)}`)
     }

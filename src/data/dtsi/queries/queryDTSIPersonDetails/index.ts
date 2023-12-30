@@ -2,9 +2,6 @@ import { fetchDTSI } from '@/data/dtsi/fetchDTSI'
 import { DTSI_PersonDetailsQuery, DTSI_PersonDetailsQueryVariables } from '@/data/dtsi/generated'
 import { dtsiPersonDetailsQueryString } from './dtsiPersonDetailsQueryString'
 
-/*
-Because this request returns so many results, we should ensure we're only triggering this logic in cached endpoints/routes
-*/
 export const queryDTSIPersonDetails = async (slug: string) => {
   const results = await fetchDTSI<DTSI_PersonDetailsQuery, DTSI_PersonDetailsQueryVariables>(
     dtsiPersonDetailsQueryString,
