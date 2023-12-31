@@ -3,6 +3,9 @@
 // TODO bring over old configs
 
 const nextConfig = {
+  experimental: {
+    serverComponentsExternalPackages: ['@sentry/profiling-node'], // https://github.com/getsentry/profiling-node/issues/170
+  },
   images: {
     remotePatterns: [
       // dotheysupportit image cdn
