@@ -1,7 +1,7 @@
 // TODO align on the naming conventions for all these analytics
 // There are internal best practices, but depending on the tool we end up leveraging, we might need to change the naming conventions
 
-import { logger } from '@/utils/shared/logger'
+import { customLogger, logger } from '@/utils/shared/logger'
 
 // TODO expand this list as needed
 export enum ClientAnalyticComponentType {
@@ -48,10 +48,13 @@ export function initAnalytics(sessionId: string) {
 }
 
 export function trackClientAnalytic(eventName: string, eventProperties: ClientAnalyticProperties) {
-  logger.custom(
-    `%canalytics - %c ${eventName}`,
-    'color: #00aaff',
-    'color: #FCFDFB',
+  customLogger(
+    {
+      category: 'analytics',
+      formattedMessage: `%canalytics - %c ${eventName}`,
+      originalMessage: eventName,
+    },
+    ['color: #00aaff', 'color: #FCFDFB'],
     eventProperties,
   )
   // TODO replace with actual analytics solution

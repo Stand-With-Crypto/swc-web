@@ -19,7 +19,7 @@ export default function DebugClientSentry() {
   }, [])
   useInterval(() => setVal(() => ({ foo: 'bar' })), 2000)
   if (NEXT_PUBLIC_ENVIRONMENT === 'production') {
-    return <div>not enabled in production</div>
+    return <div className="container max-w-lg">not enabled in production</div>
   }
   // eslint-disable-next-line
   return <div>foobar{`${val && val.foo.bar.baz}`}</div>

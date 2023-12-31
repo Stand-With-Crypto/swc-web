@@ -12,7 +12,7 @@ const mockError = () =>
 
 export default async function DebugServerSentry() {
   if (NEXT_PUBLIC_ENVIRONMENT === 'production') {
-    return <div>not enabled in production</div>
+    return <div className="container max-w-lg">not enabled in production</div>
   }
   console.log('page debug-sentry-dynamic-server log')
   const randomDatabaseQuery = await prismaClient.authenticationNonce.findFirst()

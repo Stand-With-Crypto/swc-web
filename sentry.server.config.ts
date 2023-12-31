@@ -7,7 +7,6 @@ import { ExtraErrorData } from '@sentry/integrations'
 import { prismaClient } from '@/utils/server/prismaClient'
 
 const environment = process.env.NEXT_PUBLIC_ENVIRONMENT!
-
 Sentry.init({
   environment,
   dsn: 'https://dff9eff805af3477fcfcfb5e088bc7dd@o4506490716422144.ingest.sentry.io/4506490717470720',
@@ -22,17 +21,8 @@ Sentry.init({
   beforeSend: (event, hint) => {
     if (environment === 'local' && process.env.SUPPRESS_SENTRY_ERRORS_ON_LOCAL) {
       console.error(`Sentry Error:`, hint?.originalException || hint?.syntheticException)
-      // comment out this line to see local errors in sentry
       return null
     }
     return event
-  },
-  beforeBreadcrumb(breadcrumb) {
-    switch (breadcrumb.category) {
-      case 'console':
-        return null
-      default:
-        return breadcrumb
-    }
   },
 })

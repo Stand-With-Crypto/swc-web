@@ -13,11 +13,11 @@ const mockError = () =>
 
 export default async function DebugServerSentry() {
   if (NEXT_PUBLIC_ENVIRONMENT === 'production') {
-    return <div>not enabled in production</div>
+    return <div className="container max-w-lg">not enabled in production</div>
   }
-  if (process.env.CI) {
+  if (process.env.CI_OVERRIDES) {
     return (
-      <div>
+      <div className="container max-w-lg">
         Because we pre-built a static version that doesn't error, you won't see any errors as an end
         user, but the revalidation attempt should still trigger an error in Sentry.
       </div>

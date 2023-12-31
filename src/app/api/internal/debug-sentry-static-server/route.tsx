@@ -8,7 +8,7 @@ export const revalidate = 1
 
 // A faulty API route to test Sentry's error monitoring
 export async function GET() {
-  if (process.env.CI) {
+  if (process.env.CI_OVERRIDES) {
     return NextResponse.json({
       message: `Because we pre-built a static version that doesn't error, you won't see any errors as an end user, but the revalidation attempt should still trigger an error in Sentry.`,
     })

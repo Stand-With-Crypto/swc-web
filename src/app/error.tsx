@@ -4,11 +4,11 @@ import { useEffect } from 'react'
 import NextError from 'next/error'
 import { logger } from '@/utils/shared/logger'
 
-export default function GlobalErrorPage({ error }: { error: Error & { digest?: string } }) {
+export default function RootErrorPage({ error }: { error: Error & { digest?: string } }) {
   useEffect(() => {
-    logger.info('GlobalErrorPage rendered with:', error)
+    logger.info('RootErrorPage rendered with:', error)
     Sentry.captureException(error)
-    Sentry.captureException(new Error('Global Error Page Displayed'))
+    Sentry.captureException(new Error('Root Error Page Displayed'))
   }, [])
   return (
     <html lang="en">

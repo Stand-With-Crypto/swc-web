@@ -19,7 +19,6 @@ Sentry.init({
   beforeSend: (event, hint) => {
     if (environment === 'local' && process.env.SUPPRESS_SENTRY_ERRORS_ON_LOCAL) {
       console.error(`Sentry Error:`, hint?.originalException || hint?.syntheticException)
-      // comment out this line to see local errors in sentry
       return null
     }
     return event
