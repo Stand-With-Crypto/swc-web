@@ -36,6 +36,7 @@ import {
 import { dtsiTwitterAccountUrl } from '@/utils/dtsi/dtsiTwitterAccountUtils'
 import { getOpenGraphImageUrl } from '@/utils/server/generateOpenGraphImageUrl'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
+import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { externalUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 import _ from 'lodash'
@@ -89,7 +90,13 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   })
 }
 export async function generateStaticParams() {
-  return queryDTSIAllPeopleSlugs().then(x => x.people.map(({ slug: dtsiSlug }) => ({ dtsiSlug })))
+  const slugs = await queryDTSIAllPeopleSlugs().then(x =>
+    x.people.map(({ slug: dtsiSlug }) => ({ dtsiSlug })),
+  )
+  if (NEXT_PUBLIC_ENVIRONMENT === 'local' && process.env.SPEED_UP_LOCAL_BUILDS) {
+    return slugs.slice(0, 2)
+  }
+  return slugs
 }
 
 export default async function PoliticianDetails({ params }: Props) {

@@ -20,7 +20,8 @@
     "strings": true
   },
   "search.exclude": {
-    ".next": true
+    ".next": true,
+    "**/**.svg": true
   },
   "files.watcherExclude": {},
   "[html]": {

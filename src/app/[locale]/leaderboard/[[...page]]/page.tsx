@@ -55,7 +55,7 @@ const validateTab = ([_page, tab]: (string | undefined)[]) => {
 }
 
 // TODO determine if we need to dynamically generate this or if we're comfortable just supporting a hardcoded amount
-const TOTAL_PAGES = 10
+const TOTAL_PAGES = process.env.SPEED_UP_LOCAL_BUILDS ? 1 : 10
 
 // // pre-generate the first 10 pages. If people want to go further, we'll generate them on the fly
 export async function generateStaticParams() {
