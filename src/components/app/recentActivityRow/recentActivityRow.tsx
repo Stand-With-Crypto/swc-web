@@ -38,7 +38,7 @@ function RecentActivityRowBase({
   onFocusContent,
 }: RecentActivityRowProps & { children: React.ReactNode; onFocusContent?: () => React.ReactNode }) {
   const [hasFocus, setHasFocus] = React.useState(false)
-  const isMobile = useIsMobile()
+  const isMobile = useIsMobile({ defaultState: true })
   return (
     <div
       // added min height to prevent height shifting on hover

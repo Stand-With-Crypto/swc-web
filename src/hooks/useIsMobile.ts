@@ -1,3 +1,4 @@
 import { useMedia } from 'react-use'
 
-export const useIsMobile = () => useMedia('(max-width: 767px)')
+export const useIsMobile = ({ defaultState }: { defaultState: boolean }) =>
+  useMedia('(max-width: 767px)', defaultState)
