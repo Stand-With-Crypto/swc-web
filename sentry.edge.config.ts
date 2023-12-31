@@ -7,10 +7,12 @@ import * as Sentry from '@sentry/nextjs'
 import { ExtraErrorData } from '@sentry/integrations'
 
 const environment = process.env.NEXT_PUBLIC_ENVIRONMENT!
+const dsn = process.env.NEXT_PUBLIC_SENTRY_DSN
 
 Sentry.init({
   environment,
-  dsn: 'https://dff9eff805af3477fcfcfb5e088bc7dd@o4506490716422144.ingest.sentry.io/4506490717470720',
+  dsn,
+  enabled: !!dsn,
   integrations: [new ExtraErrorData({ depth: 10 })],
   tracesSampleRate: environment === 'production' ? 0.001 : 1.0,
 
