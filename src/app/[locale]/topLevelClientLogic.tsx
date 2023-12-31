@@ -1,4 +1,5 @@
 'use client'
+import * as Sentry from '@sentry/nextjs'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN } from '@/utils/shared/sharedEnv'
 import {
@@ -8,6 +9,7 @@ import {
   en,
   metamaskWallet,
   rainbowWallet,
+  useAddress,
   walletConnect,
 } from '@thirdweb-dev/react'
 
@@ -29,11 +31,18 @@ const NEXT_PUBLIC_THIRDWEB_CLIENT_ID = requiredEnv(
 // This component includes all top level client-side logic
 export function TopLevelClientLogic({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
+  const address = useAddress()
   // Not, in local dev this component will double render. It doesn't do this after it is built (verify in testing)
   useEffect(() => {
     const sessionId = maybeSetUserSessionIdOnClient()
     initAnalytics(sessionId)
+    Sentry.setUser({ id: sessionId, idType: 'session' })
   }, [])
+  useEffect(() => {
+    if (address) {
+      Sentry.setUser({ id: address, idType: 'cryptoAddress' })
+    }
+  }, [address])
   useEffect(() => {
     if (!pathname) {
       return
