@@ -5,7 +5,6 @@
 import * as Sentry from '@sentry/nextjs'
 import { ExtraErrorData } from '@sentry/integrations'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { ProfilingIntegration } from '@sentry/profiling-node'
 
 const environment = process.env.NEXT_PUBLIC_ENVIRONMENT!
 const dsn = process.env.NEXT_PUBLIC_SENTRY_DSN
@@ -17,7 +16,6 @@ Sentry.init({
   integrations: [
     new ExtraErrorData({ depth: 10 }),
     new Sentry.Integrations.Prisma({ client: prismaClient }),
-    new ProfilingIntegration(),
   ],
   tracesSampleRate: environment === 'production' ? 0.001 : 1.0,
   // Set profilesSampleRate to 1.0 to profile every transaction.
