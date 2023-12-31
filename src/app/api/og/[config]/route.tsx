@@ -8,7 +8,6 @@ import { NextRequest } from 'next/server'
 
 export const dynamic = 'error'
 export const revalidate = 60 * 60 * 24 * 7 // 1 week
-export const runtime = 'edge'
 
 export async function GET(_request: NextRequest, { params }: { params: { config: string } }) {
   const config = decodeObjectForUrl<OpenGraphImageOptions>(params.config)

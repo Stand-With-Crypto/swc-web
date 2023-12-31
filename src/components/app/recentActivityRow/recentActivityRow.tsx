@@ -24,6 +24,7 @@ import { LazyUserActionFormDonate } from '@/components/app/userActionFormDonate/
 import { LazyUserActionFormEmailCongressperson } from '@/components/app/userActionFormEmailCongressperson/lazyLoad'
 import { LazyUserActionFormNFTMint } from '@/components/app/userActionFormNFTMint/lazyLoad'
 import { LazyUserActionFormTweet } from '@/components/app/userActionFormTweet/lazyLoad'
+import { useIsMobile } from '@/hooks/useIsMobile'
 
 interface RecentActivityRowProps {
   action: ClientUserAction & { user: ClientUser }
@@ -37,12 +38,13 @@ function RecentActivityRowBase({
   onFocusContent,
 }: RecentActivityRowProps & { children: React.ReactNode; onFocusContent?: () => React.ReactNode }) {
   const [hasFocus, setHasFocus] = React.useState(false)
+  const isMobile = useIsMobile()
   return (
     <div
       // added min height to prevent height shifting on hover
       className="flex min-h-[41px] items-center justify-between gap-5"
-      onMouseEnter={() => setHasFocus(true)}
-      onMouseLeave={() => setHasFocus(false)}
+      onMouseEnter={() => isMobile || setHasFocus(true)}
+      onMouseLeave={() => isMobile || setHasFocus(false)}
     >
       <div className="flex items-center gap-2">
         <div>

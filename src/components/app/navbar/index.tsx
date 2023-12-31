@@ -59,7 +59,7 @@ export async function Navbar({ locale }: { locale: SupportedLocale }) {
         </InternalLink>
       </div>
       {/* TODO mobile once they have mockups */}
-      <nav className="container flex justify-between py-8">
+      <nav className="container flex justify-between py-3 md:py-8">
         <div className="flex items-center gap-8">
           <InternalLink className="flex-shrink-0" href={urls.home()}>
             <NextImage
@@ -92,7 +92,7 @@ export async function Navbar({ locale }: { locale: SupportedLocale }) {
             </button>
           </DrawerTrigger>
           <DrawerContent>
-            <div className="space-y-8 p-6 text-center">
+            <div className="space-y-6 px-6 pb-6 pt-3 text-center md:space-y-8">
               <p className="text-xs">
                 Eng note: I know this is suppose to open from the top. There's an open PR for the
                 lib we're using that should enable this
