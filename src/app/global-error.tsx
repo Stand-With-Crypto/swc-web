@@ -1,5 +1,5 @@
 'use client'
-import { REPLACE_ME__captureException } from '@/utils/shared/captureException'
+import * as Sentry from '@sentry/nextjs'
 import { useEffect } from 'react'
 
 export default function GlobalError({
@@ -10,8 +10,8 @@ export default function GlobalError({
   reset: () => void
 }) {
   useEffect(() => {
-    REPLACE_ME__captureException(error)
-    REPLACE_ME__captureException(new Error('Global Error Page Displayed'))
+    Sentry.captureException(error)
+    Sentry.captureException(new Error('Global Error Page Displayed'))
   }, [])
   return (
     <html lang="en">

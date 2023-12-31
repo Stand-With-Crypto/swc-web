@@ -1,5 +1,5 @@
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
-import { REPLACE_ME__captureException } from './captureException'
+import * as Sentry from '@sentry/nextjs'
 
 export class FetchReqError extends Error {
   constructor(
@@ -32,6 +32,10 @@ export const fetchReq = async (url: string, options?: RequestInit) => {
     return response
   }
   const error = new FetchReqError(response, await maybeParseBody(response))
-  REPLACE_ME__captureException(error)
+  Sentry.captureException(error, {
+    tags: { domain: 'fetchReq' },
+    fingerprint: [url],
+    extra: { options, url },
+  })
   throw error
 }

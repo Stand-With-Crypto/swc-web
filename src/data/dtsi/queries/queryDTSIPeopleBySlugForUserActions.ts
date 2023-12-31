@@ -1,7 +1,7 @@
 import { fetchDTSI } from '@/data/dtsi/fetchDTSI'
 import { fragmentDTSIPersonCard } from '@/data/dtsi/fragments/fragmentDTSIPersonCard'
 import { DTSI_PeopleBySlugQuery, DTSI_PeopleBySlugQueryVariables } from '@/data/dtsi/generated'
-import { REPLACE_ME__captureException } from '@/utils/shared/captureException'
+import * as Sentry from '@sentry/nextjs'
 
 const query = /* GraphQL */ `
   query PeopleBySlug($slugs: [String!]!) {

@@ -1,4 +1,4 @@
-import { REPLACE_ME__captureException } from '@/utils/shared/captureException'
+import * as Sentry from '@sentry/nextjs'
 import { FetchReqError } from '@/utils/shared/fetchReq'
 import {
   ClientAnalyticProperties,
@@ -25,7 +25,10 @@ export async function triggerServerActionForForm<
     if (!_.isError(error)) {
       trackFormSubmitErrored(formName, { 'Error Type': 'Unknown' })
       form.setError(GENERIC_FORM_ERROR_KEY, { message: error })
-      REPLACE_ME__captureException(new Error(`Unexpected form response returned from ${formName}`))
+      Sentry.captureMessage(`triggerServerActionForForm returned unexpected form response`, {
+        tags: { domain: 'triggerServerActionForForm' },
+        extra: { error, formName },
+      })
     } else if (error instanceof FetchReqError) {
       const formattedErrorStatus = formatErrorStatus(error.response.status)
       trackFormSubmitErrored(formName, { 'Error Type': error.response.status })

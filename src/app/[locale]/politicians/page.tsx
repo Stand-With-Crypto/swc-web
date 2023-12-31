@@ -29,14 +29,14 @@ export default async function PoliticiansHomepage({ params }: PageProps) {
   const groupedDTSIHomepagePeople = groupAndSortDTSIPeopleByCryptoStance(dtsiHomepagePeople.people)
   return (
     <div className="container">
-      <section className="mb-24 space-y-7 text-center">
+      <section className="mb-16 space-y-7 text-center md:mb-24">
         <PageTitle>{title}</PageTitle>
         <PageSubTitle>{description}</PageSubTitle>
         <div>
           <Button>Find your representative (TODO)</Button>
         </div>
       </section>
-      <section className="mb-24 grid grid-cols-1 gap-4 md:grid-cols-2">
+      <section className="mb-16 grid grid-cols-1 gap-4 md:mb-24 md:grid-cols-2">
         <div>
           <h3 className="mb-4 text-center text-xl font-bold text-green-600">Pro-crypto</h3>
           <div className="space-y-3">

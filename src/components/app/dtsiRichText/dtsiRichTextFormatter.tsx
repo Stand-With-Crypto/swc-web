@@ -7,7 +7,7 @@ import {
   RichTextEditorValue,
 } from './types'
 import { ExternalLink } from '@/components/ui/link'
-import { REPLACE_ME__captureException } from '@/utils/shared/captureException'
+import * as Sentry from '@sentry/nextjs'
 import { cn } from '@/utils/web/cn'
 
 const getRichTextComponent = (node: RichText) => {
@@ -110,7 +110,7 @@ const getRootBlockComponent = (node: RichTextEditorRootBlock) => {
         )
     }
   }
-  REPLACE_ME__captureException(new Error('Unknown root block type'))
+  Sentry.captureMessage('RichTextFormatter: Unknown root block type', { extra: { node } })
   return null
 }
 

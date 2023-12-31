@@ -1,6 +1,6 @@
 import { fetchDTSI } from '@/data/dtsi/fetchDTSI'
 import { DTSI_AllPeopleSlugsQuery, DTSI_AllPeopleSlugsQueryVariables } from '@/data/dtsi/generated'
-import { REPLACE_ME__captureException } from '@/utils/shared/captureException'
+import * as Sentry from '@sentry/nextjs'
 
 export const query = /* GraphQL */ `
   query AllPeopleSlugs {
@@ -17,10 +17,9 @@ export const queryDTSIAllPeopleSlugs = async () => {
     query,
   )
   if (results.people.length === 1500) {
-    REPLACE_ME__captureException(
-      new Error(
-        'Previous limit set in queryDTSIAllPeopleSlugs has been reached, we should consider re-evaluating our architecture',
-      ),
+    Sentry.captureMessage(
+      'Previous limit set in queryDTSIAllPeopleSlugs has been reached, we should consider re-evaluating our architecture',
+      { extra: { resultsLength: results.people.length } },
     )
   }
   return results

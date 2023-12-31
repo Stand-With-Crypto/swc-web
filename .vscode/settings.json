@@ -34,6 +34,7 @@
   "cSpell.ignorePaths": ["**/*.json"],
   "cSpell.words": [
     "Actioned",
+    "changefreq",
     "clsx",
     "codegen",
     "cryptocurrency",

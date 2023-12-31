@@ -1,4 +1,4 @@
-import { REPLACE_ME__captureException } from '@/utils/shared/captureException'
+import * as Sentry from '@sentry/nextjs'
 import { logger } from '@/utils/shared/logger'
 import { USER_SESSION_ID_COOKIE_NAME, generateUserSessionId } from '@/utils/shared/userSessionId'
 import cookie from 'js-cookie'
@@ -24,7 +24,7 @@ export function getUserSessionIdOnClient() {
   const value = cookie.get(USER_SESSION_ID_COOKIE_NAME)
   if (!value) {
     // this should be getting set in middleware so we want to trigger some analytics errors if its not set
-    REPLACE_ME__captureException(new Error(`getSessionIdOnClient: cookie not set`))
+    Sentry.captureMessage(`getSessionIdOnClient: cookie not set`, { extra: { value } })
   }
   return value!
 }

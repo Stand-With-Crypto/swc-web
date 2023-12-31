@@ -2,7 +2,7 @@ import prettier from 'prettier'
 import path from 'path'
 import fs from 'fs-extra'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { REPLACE_ME__captureException } from '@/utils/shared/captureException'
+import * as Sentry from '@sentry/nextjs'
 
 export const runBin = async (fn: (...args: any[]) => Promise<any>) => {
   return fn()
@@ -10,7 +10,7 @@ export const runBin = async (fn: (...args: any[]) => Promise<any>) => {
       await prismaClient.$disconnect()
     })
     .catch(async (e: any) => {
-      REPLACE_ME__captureException(e)
+      Sentry.captureException(e, { tags: { domain: 'runBin' } })
       await prismaClient.$disconnect()
       process.exit(1)
     })

@@ -2,7 +2,7 @@ import { fetchDTSI } from '@/data/dtsi/fetchDTSI'
 import { fragmentDTSIPersonCard } from '@/data/dtsi/fragments/fragmentDTSIPersonCard'
 import { fragmentDTSIPersonTableRow } from '@/data/dtsi/fragments/fragmentDTSIPersonTableRow'
 import { DTSI_AllPeopleQuery, DTSI_AllPeopleQueryVariables } from '@/data/dtsi/generated'
-import { REPLACE_ME__captureException } from '@/utils/shared/captureException'
+import * as Sentry from '@sentry/nextjs'
 import _ from 'lodash'
 
 export const query = /* GraphQL */ `
@@ -19,10 +19,9 @@ Because this request returns so many results, we should ensure we're only trigge
 export const queryDTSIAllPeople = async () => {
   const results = await fetchDTSI<DTSI_AllPeopleQuery, DTSI_AllPeopleQueryVariables>(query)
   if (results.people.length === 1500) {
-    REPLACE_ME__captureException(
-      new Error(
-        'Previous limit set in queryDTSIAllPeople has been reached, we should consider re-evaluating our architecture',
-      ),
+    Sentry.captureMessage(
+      'Previous limit set in queryDTSIAllPeople has been reached, we should consider re-evaluating our architecture',
+      { extra: { resultsLength: results.people.length } },
     )
   }
   return results
