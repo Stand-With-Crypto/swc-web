@@ -1,6 +1,11 @@
+import { LazyUserActionFormCallCongressperson } from '@/components/app/userActionFormCallCongressperson/lazyLoad'
+import { LazyUserActionFormDonate } from '@/components/app/userActionFormDonate/lazyLoad'
+import { LazyUserActionFormEmailCongressperson } from '@/components/app/userActionFormEmailCongressperson/lazyLoad'
+import { LazyUserActionFormNFTMint } from '@/components/app/userActionFormNFTMint/lazyLoad'
+import { LazyUserActionFormOptInSWC } from '@/components/app/userActionFormOptInSWC/lazyLoad'
+import { LazyUserActionFormTweet } from '@/components/app/userActionFormTweet/lazyLoad'
 import { UserActionRowCTAProps } from '@/components/app/userActionRowCTA'
 import { UserActionType } from '@prisma/client'
-import { lazy } from 'react'
 
 export const USER_ACTION_ROW_CTA_INFO: ReadonlyArray<Omit<UserActionRowCTAProps, 'state'>> = [
   {
@@ -9,7 +14,7 @@ export const USER_ACTION_ROW_CTA_INFO: ReadonlyArray<Omit<UserActionRowCTAProps,
     text: 'Join Stand With Crypto',
     subtext: 'Join over 100,000 advocates fighting to keep crypto in America.',
     canBeTriggeredMultipleTimes: false,
-    lazyRenderedForm: lazy(() => Promise.resolve({ default: () => <div>TODO</div> })),
+    lazyRenderedForm: LazyUserActionFormOptInSWC,
   },
   {
     actionType: UserActionType.CALL,
@@ -17,7 +22,7 @@ export const USER_ACTION_ROW_CTA_INFO: ReadonlyArray<Omit<UserActionRowCTAProps,
     text: 'Call your Congressperson',
     subtext: 'The most effective way to make your voice heard.',
     canBeTriggeredMultipleTimes: true,
-    lazyRenderedForm: lazy(() => Promise.resolve({ default: () => <div>TODO</div> })),
+    lazyRenderedForm: LazyUserActionFormCallCongressperson,
   },
   {
     actionType: UserActionType.EMAIL,
@@ -25,7 +30,7 @@ export const USER_ACTION_ROW_CTA_INFO: ReadonlyArray<Omit<UserActionRowCTAProps,
     text: 'Email your Congressperson',
     subtext: 'We drafted an email for you. All you have to do is hit send.',
     canBeTriggeredMultipleTimes: true,
-    lazyRenderedForm: lazy(() => Promise.resolve({ default: () => <div>TODO</div> })),
+    lazyRenderedForm: LazyUserActionFormEmailCongressperson,
   },
   {
     actionType: UserActionType.DONATION,
@@ -33,7 +38,7 @@ export const USER_ACTION_ROW_CTA_INFO: ReadonlyArray<Omit<UserActionRowCTAProps,
     text: 'Donate to Stand With Crypto',
     subtext: 'Support our aim to mobilize 52 million crypto advocates in the U.S.',
     canBeTriggeredMultipleTimes: true,
-    lazyRenderedForm: lazy(() => Promise.resolve({ default: () => <div>TODO</div> })),
+    lazyRenderedForm: LazyUserActionFormDonate,
   },
   {
     actionType: UserActionType.TWEET,
@@ -41,7 +46,7 @@ export const USER_ACTION_ROW_CTA_INFO: ReadonlyArray<Omit<UserActionRowCTAProps,
     text: 'Share on Twitter/X',
     subtext: 'Bring more people to the movement.',
     canBeTriggeredMultipleTimes: true,
-    lazyRenderedForm: lazy(() => Promise.resolve({ default: () => <div>TODO</div> })),
+    lazyRenderedForm: LazyUserActionFormTweet,
   },
   {
     actionType: UserActionType.NFT_MINT,
@@ -49,6 +54,6 @@ export const USER_ACTION_ROW_CTA_INFO: ReadonlyArray<Omit<UserActionRowCTAProps,
     text: 'Mint your Supporter NFT',
     subtext: 'All mint proceeds are donated to the movement.',
     canBeTriggeredMultipleTimes: true,
-    lazyRenderedForm: lazy(() => Promise.resolve({ default: () => <div>TODO</div> })),
+    lazyRenderedForm: LazyUserActionFormNFTMint,
   },
 ]

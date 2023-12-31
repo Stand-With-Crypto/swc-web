@@ -5,6 +5,7 @@ Below is a non-exhaustive list of coding conventions that we try to follow. This
 ## General
 
 - If a convention can be programmatically audited/enforced with a tool like eslint and prettier, we should leverage that tool.
+- Avoid export default unless required by the framework (for example Next.js App Router pages). Named exports make auto-importing in IDEs like VSCode easier.
 
 ## TypeScript
 

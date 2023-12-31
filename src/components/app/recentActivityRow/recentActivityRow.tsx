@@ -1,6 +1,9 @@
+'use client'
 import { ClientUser } from '@/clientModels/clientUser/clientUser'
 import { ClientUserAction } from '@/clientModels/clientUserAction/clientUserAction'
+import { LazyUserActionFormOptInSWC } from '@/components/app/userActionFormOptInSWC/lazyLoad'
 import { UserAvatar } from '@/components/app/userAvatar'
+import { Button } from '@/components/ui/button'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
 import { FormattedRelativeDatetime } from '@/components/ui/formattedRelativeDatetime'
 import { DTSIPersonForUserActions } from '@/data/dtsi/queries/queryDTSIPeopleBySlugForUserActions'
@@ -13,6 +16,14 @@ import { gracefullyError } from '@/utils/shared/gracefullyError'
 import { formatDonationOrganization } from '@/utils/web/donationUtils'
 import { getUserDisplayName } from '@/utils/web/userUtils'
 import { UserActionOptInType, UserActionType } from '@prisma/client'
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
+import React, { Suspense } from 'react'
+import { usePerformedUserActionTypes } from '@/hooks/usePerformedUserActionTypes'
+import { LazyUserActionFormCallCongressperson } from '@/components/app/userActionFormCallCongressperson/lazyLoad'
+import { LazyUserActionFormDonate } from '@/components/app/userActionFormDonate/lazyLoad'
+import { LazyUserActionFormEmailCongressperson } from '@/components/app/userActionFormEmailCongressperson/lazyLoad'
+import { LazyUserActionFormNFTMint } from '@/components/app/userActionFormNFTMint/lazyLoad'
+import { LazyUserActionFormTweet } from '@/components/app/userActionFormTweet/lazyLoad'
 
 interface RecentActivityRowProps {
   action: ClientUserAction & { user: ClientUser }
@@ -23,9 +34,16 @@ function RecentActivityRowBase({
   locale,
   action,
   children,
-}: RecentActivityRowProps & { children: React.ReactNode }) {
+  onFocusContent,
+}: RecentActivityRowProps & { children: React.ReactNode; onFocusContent?: () => React.ReactNode }) {
+  const [hasFocus, setHasFocus] = React.useState(false)
   return (
-    <div className="flex justify-between gap-5">
+    <div
+      // added min height to prevent height shifting on hover
+      className="flex min-h-[41px] items-center justify-between gap-5"
+      onMouseEnter={() => setHasFocus(true)}
+      onMouseLeave={() => setHasFocus(false)}
+    >
       <div className="flex items-center gap-2">
         <div>
           <UserAvatar size={30} user={action.user} />
@@ -33,16 +51,23 @@ function RecentActivityRowBase({
         <div>{children}</div>
       </div>
       <div className="shrink-0 text-xs text-gray-500">
-        <span className="hidden md:inline">
-          <FormattedRelativeDatetime date={action.datetimeCreated} locale={locale} />
-        </span>
-        <span className="inline md:hidden">
-          <FormattedRelativeDatetime
-            timeFormatStyle="narrow"
-            date={action.datetimeCreated}
-            locale={locale}
-          />
-        </span>
+        {/* TODO add animation */}
+        {hasFocus && onFocusContent ? (
+          onFocusContent?.()
+        ) : (
+          <>
+            <span className="hidden md:inline">
+              <FormattedRelativeDatetime date={action.datetimeCreated} locale={locale} />
+            </span>
+            <span className="inline md:hidden">
+              <FormattedRelativeDatetime
+                timeFormatStyle="narrow"
+                date={action.datetimeCreated}
+                locale={locale}
+              />
+            </span>
+          </>
+        )}
       </div>
     </div>
   )
@@ -66,7 +91,9 @@ const formatDTSIPerson = (person: DTSIPersonForUserActions) => {
 export function RecentActivityRow(props: RecentActivityRowProps) {
   const { action, locale } = props
   const userDisplayName = getUserDisplayName(props.action.user)
-  const getChild = () => {
+  const { data } = usePerformedUserActionTypes()
+  const hasSignedUp = data?.performedUserActionTypes.includes(UserActionType.OPT_IN)
+  const getActionSpecificProps = () => {
     switch (action.actionType) {
       case UserActionType.OPT_IN: {
         const getTypeDisplayText = () => {
@@ -75,52 +102,138 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
               return 'joined Stand With Crypto'
           }
         }
-        return (
-          <>
-            <MainText>
-              {userDisplayName} {getTypeDisplayText()}
-            </MainText>
-          </>
-        )
+        return {
+          onFocusContent: hasSignedUp
+            ? undefined
+            : () => (
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button>Join</Button>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <Suspense>
+                      <LazyUserActionFormOptInSWC />
+                    </Suspense>
+                  </DialogContent>
+                </Dialog>
+              ),
+          children: (
+            <>
+              <MainText>
+                {userDisplayName} {getTypeDisplayText()}
+              </MainText>
+            </>
+          ),
+        }
       }
       case UserActionType.CALL:
-        return (
-          <>
-            <MainText>{userDisplayName} called their representative</MainText>
-            <SubText>{formatDTSIPerson(action.person)}</SubText>
-          </>
-        )
+        return {
+          onFocusContent: () => (
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button>Call yours</Button>
+              </DialogTrigger>
+              <DialogContent>
+                <Suspense>
+                  <LazyUserActionFormCallCongressperson />
+                </Suspense>
+              </DialogContent>
+            </Dialog>
+          ),
+          children: (
+            <>
+              <MainText>{userDisplayName} called their representative</MainText>
+              <SubText>{formatDTSIPerson(action.person)}</SubText>
+            </>
+          ),
+        }
       case UserActionType.DONATION:
-        return (
-          <>
-            <MainText>{userDisplayName} donated</MainText>
-            <SubText>
-              <FormattedCurrency
-                amount={action.amount}
-                currencyCode={action.amountCurrencyCode}
-                locale={locale}
-              />{' '}
-              to {formatDonationOrganization(action.recipient)}
-            </SubText>
-          </>
-        )
+        return {
+          onFocusContent: () => (
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button>Donate</Button>
+              </DialogTrigger>
+              <DialogContent>
+                <Suspense>
+                  <LazyUserActionFormDonate />
+                </Suspense>
+              </DialogContent>
+            </Dialog>
+          ),
+          children: (
+            <>
+              <MainText>{userDisplayName} donated</MainText>
+              <SubText>
+                <FormattedCurrency
+                  amount={action.amount}
+                  currencyCode={action.amountCurrencyCode}
+                  locale={locale}
+                />{' '}
+                to {formatDonationOrganization(action.recipient)}
+              </SubText>
+            </>
+          ),
+        }
       case UserActionType.EMAIL:
-        return (
-          <>
-            <MainText>
-              {userDisplayName} emailed their representative
-              {action.userActionEmailRecipients.length > 1 ? 's' : ''}
-            </MainText>
-            <SubText>
-              {action.userActionEmailRecipients.map(x => formatDTSIPerson(x.person)).join(', ')}
-            </SubText>
-          </>
-        )
+        return {
+          onFocusContent: () => (
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button>Email yours</Button>
+              </DialogTrigger>
+              <DialogContent>
+                <Suspense>
+                  <LazyUserActionFormEmailCongressperson />
+                </Suspense>
+              </DialogContent>
+            </Dialog>
+          ),
+          children: (
+            <>
+              <MainText>
+                {userDisplayName} emailed their representative
+                {action.userActionEmailRecipients.length > 1 ? 's' : ''}
+              </MainText>
+              <SubText>
+                {action.userActionEmailRecipients.map(x => formatDTSIPerson(x.person)).join(', ')}
+              </SubText>
+            </>
+          ),
+        }
       case UserActionType.NFT_MINT: {
-        return <MainText>{userDisplayName} donated by minting an NFT</MainText>
+        return {
+          onFocusContent: () => (
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button>Mint yours</Button>
+              </DialogTrigger>
+              <DialogContent>
+                <Suspense>
+                  <LazyUserActionFormNFTMint />
+                </Suspense>
+              </DialogContent>
+            </Dialog>
+          ),
+          children: <MainText>{userDisplayName} donated by minting an NFT</MainText>,
+        }
       }
       case UserActionType.TWEET: {
-        return <MainText>{userDisplayName} tweeted in support of crypto</MainText>
+        return {
+          onFocusContent: () => (
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button>Tweet</Button>
+              </DialogTrigger>
+              <DialogContent>
+                <Suspense>
+                  <LazyUserActionFormTweet />
+                </Suspense>
+              </DialogContent>
+            </Dialog>
+          ),
+          children: <MainText>{userDisplayName} tweeted in support of crypto</MainText>,
+        }
       }
     }
     return gracefullyError({
@@ -129,9 +242,5 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
       fallback: 'helped crypto',
     })
   }
-  return (
-    <RecentActivityRowBase action={action} locale={locale}>
-      {getChild()}
-    </RecentActivityRowBase>
-  )
+  return <RecentActivityRowBase action={action} locale={locale} {...getActionSpecificProps()} />
 }
