@@ -43,3 +43,7 @@ src/data/dtsi/introspection.json
 src/intl/generated/*
 # Sentry Config File
 .sentryclirc
+
+public/robots.txt
+public/sitemap.xml
+public/sitemap-0.xml

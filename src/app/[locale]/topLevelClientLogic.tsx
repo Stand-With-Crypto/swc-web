@@ -28,8 +28,7 @@ const NEXT_PUBLIC_THIRDWEB_CLIENT_ID = requiredEnv(
   'process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID',
 )
 
-// This component includes all top level client-side logic
-export function TopLevelClientLogic({ children }: { children: React.ReactNode }) {
+const InitialOrchestration = () => {
   const pathname = usePathname()
   const address = useAddress()
   // Not, in local dev this component will double render. It doesn't do this after it is built (verify in testing)
@@ -53,6 +52,11 @@ export function TopLevelClientLogic({ children }: { children: React.ReactNode })
       action: ClientAnalyticActionType.view,
     })
   }, [pathname])
+  return null
+}
+
+// This component includes all top level client-side logic
+export function TopLevelClientLogic({ children }: { children: React.ReactNode }) {
   return (
     <ThirdwebProvider
       locale={en()}
@@ -73,6 +77,7 @@ export function TopLevelClientLogic({ children }: { children: React.ReactNode })
         authUrl: '/api/auth',
       }}
     >
+      <InitialOrchestration />
       {children}
     </ThirdwebProvider>
   )
