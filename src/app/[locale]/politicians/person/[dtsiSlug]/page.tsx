@@ -266,7 +266,7 @@ export default async function PoliticianDetails({ params }: Props) {
       <section className="md:col-span-2">
         <h2 className="mb-6 text-2xl font-extrabold">{stances.length} notable statements</h2>
         <div className="flex flex-col space-y-10">
-          {!stances.length && <div className="text-center">No recent statements.</div>}
+          {!stances.length && <div>No recent statements.</div>}
           {stances.map((stance, index) => {
             return (
               <article

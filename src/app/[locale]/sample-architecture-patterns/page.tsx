@@ -33,7 +33,7 @@ export default async function Home({ params }: PageProps) {
   ])
   return (
     // TODO remove prose class and actually start styling things!
-    <div className="prose-sm mx-auto mb-24 mt-10 w-full max-w-2xl p-4">
+    <div className="container prose-sm max-w-2xl">
       <h1>Sample Architecture Patterns</h1>
       <h2>
         This page contains a sample of architecture patterns that can be used as blueprints for
