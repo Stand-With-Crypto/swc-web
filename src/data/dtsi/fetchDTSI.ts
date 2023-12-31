@@ -26,18 +26,30 @@ const API_ENDPOINT =
 export const fetchDTSI = async <R, V = object>(query: string, variables?: V) => {
   logger.debug(`fetchDTSI called`)
   const response = await pRetry(
-    () =>
-      fetchReq(API_ENDPOINT, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: DO_THEY_SUPPORT_IT_API_KEY,
+    attemptCount =>
+      fetchReq(
+        API_ENDPOINT,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: DO_THEY_SUPPORT_IT_API_KEY,
+          },
+          body: JSON.stringify({
+            query,
+            variables,
+          }),
         },
-        body: JSON.stringify({
-          query,
-          variables,
-        }),
-      }),
+        {
+          withScope: scope => {
+            const name = `fetchDTSI attempt #${attemptCount}`
+            scope.setFingerprint([name])
+            scope.setTags({ domain: 'fetchDTSI' })
+            scope.setTag('attemptCount', attemptCount)
+            scope.setTransactionName(name)
+          },
+        },
+      ),
     { retries: 2, minTimeout: 4000 },
   )
   logger.debug(`fetchDTSI returned with status ${response.status}`)

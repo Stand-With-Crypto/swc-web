@@ -26,16 +26,24 @@ const maybeParseBody = async (response: Response) =>
     })
     .catch(x => undefined)
 
-export const fetchReq = async (url: string, options?: RequestInit) => {
+export const fetchReq = async (
+  url: string,
+  options?: RequestInit,
+  config?: { withScope?: (scope: Sentry.Scope) => void },
+) => {
   const response = await fetch(url, options)
   if (response.status >= 200 && response.status < 300) {
     return response
   }
   const error = new FetchReqError(response, await maybeParseBody(response))
-  Sentry.captureException(error, {
-    tags: { domain: 'fetchReq' },
-    fingerprint: [url],
-    extra: { options, url },
+
+  Sentry.withScope(scope => {
+    scope.setTransactionName(`${response.status} from ${options?.method || 'GET'} ${url}`)
+    scope.setFingerprint([url])
+    scope.setTags({ domain: 'fetchReq' })
+    scope.setExtras({ options, url })
+    config?.withScope?.(scope)
+    Sentry.captureException(error)
   })
   throw error
 }

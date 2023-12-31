@@ -13,6 +13,7 @@
     "format": "prettier --write .",
     "test": "jest",
     "storybook": "storybook dev -p 6006",
+    "precheck": "concurrently \"next lint\"  \"prettier --check .\" \"npm run typecheck\" \"npm run test\"",
     "build-storybook": "storybook build",
     "codegen": "graphql-codegen --config codegen.ts",
     "codegen:schemas": "graphql-codegen --config codegen-schemas.ts",
