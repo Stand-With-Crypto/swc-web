@@ -118,7 +118,7 @@ export default async function Home({ params }: PageProps) {
         </div>
       </section>
       <div className="container">
-        <section className="mb-24 flex flex-col gap-3 rounded-lg text-center sm:flex-row sm:gap-0">
+        <section className="mb-16 flex flex-col gap-3 rounded-lg text-center sm:flex-row sm:gap-0 md:mb-24">
           {[
             {
               label: 'Donated by crypto advocates',
@@ -175,7 +175,7 @@ export default async function Home({ params }: PageProps) {
             </div>
           ))}
         </section>
-        <section className="mb-24 text-center">
+        <section className="mb-16 text-center md:mb-24">
           <PageTitle as="h3" className="mb-7">
             Our mission
           </PageTitle>
@@ -187,31 +187,35 @@ export default async function Home({ params }: PageProps) {
             potential and foster greater economic freedom.
           </PageSubTitle>
           <div>
-            <Button variant="secondary">Learn more (TODO)</Button>
+            <Button variant="secondary" asChild>
+              <InternalLink href={urls.about()}>Learn more</InternalLink>
+            </Button>
           </div>
         </section>
-        <section className="mb-24 space-y-7">
+        <section className="mb-16 space-y-7 md:mb-24">
           <PageTitle as="h3">Our community</PageTitle>
           <PageSubTitle as="h4">
             See how our community is taking a stand to safeguard the future of crypto in America.
           </PageSubTitle>
           <RecentActivityAndLeaderboard {...{ locale, actions, sumDonationsByUser }} />
           <div className="space-x-4 text-center">
-            <Button>Donate (TODO)</Button>
+            <Button asChild>
+              <InternalLink href={urls.donate()}>Donate</InternalLink>
+            </Button>
             <Button variant="secondary" asChild>
               <InternalLink href={urls.leaderboard()}>View all</InternalLink>
             </Button>
           </div>
           <div></div>
         </section>
-        <section className="mb-24 space-y-7">
+        <section className="mb-16 space-y-7 md:mb-24">
           <PageTitle as="h3">Get involved</PageTitle>
           <PageSubTitle as="h4">
             The future of crypto is in your hands. Here's how you can help.
           </PageSubTitle>
           <ClientAuthUserActionRowCTAs />
         </section>
-        <section className="mb-24 space-y-7">
+        <section className="mb-16 space-y-7 md:mb-24">
           <PageTitle as="h3">Where politicians stand on crypto</PageTitle>
           <PageSubTitle as="h4">
             Ask your politician to be pro-crypto. Here's where they stand now.

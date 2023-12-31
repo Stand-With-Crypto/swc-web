@@ -21,7 +21,7 @@ export async function Navbar({ locale }: { locale: SupportedLocale }) {
       href: urls.about(),
       text: intl.formatMessage({
         id: `${INTL_PREFIX}.about`,
-        defaultMessage: 'Mission (TODO)',
+        defaultMessage: 'Mission',
         description: 'Link to the about page',
       }),
     },
@@ -42,10 +42,10 @@ export async function Navbar({ locale }: { locale: SupportedLocale }) {
       }),
     },
     {
-      href: urls.home(),
+      href: urls.resources(),
       text: intl.formatMessage({
         id: `${INTL_PREFIX}.resources`,
-        defaultMessage: 'Resources (TODO)',
+        defaultMessage: 'Resources',
         description: 'Link to the resources page',
       }),
     },
@@ -104,7 +104,9 @@ export async function Navbar({ locale }: { locale: SupportedLocale }) {
                   </InternalLink>
                 )
               })}
-              <Button className="mr-3">Donate (TODO)</Button>
+              <Button className="mr-3" asChild>
+                <InternalLink href={urls.donate()}>Donate</InternalLink>
+              </Button>
               <NavbarSessionButton
                 messages={generateClientComponentMessages(intl, navbarSessionButtonMessages)}
               />
@@ -114,7 +116,9 @@ export async function Navbar({ locale }: { locale: SupportedLocale }) {
 
         <div className="hidden md:flex">
           {/* TODO actually implement donate button */}
-          <Button className="mr-3">Donate (TODO)</Button>
+          <Button className="mr-3" asChild>
+            <InternalLink href={urls.donate()}>Donate</InternalLink>
+          </Button>
           <NavbarSessionButton
             messages={generateClientComponentMessages(intl, navbarSessionButtonMessages)}
           />

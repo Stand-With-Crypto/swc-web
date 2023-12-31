@@ -9,6 +9,8 @@ export const getIntlUrls = (locale: SupportedLocale) => {
     termsOfService: () => `${localePrefix}/terms-of-service`,
     privacyPolicy: () => `${localePrefix}/privacy`,
     about: () => `${localePrefix}/about`,
+    resources: () => `${localePrefix}/resources`,
+    donate: () => `${localePrefix}/donate`,
     leaderboard: (params?: { pageNum: number; tab: RecentActivityAndLeaderboardTabs }) => {
       if (!params) {
         return `${localePrefix}/leaderboard`
