@@ -88,7 +88,7 @@ export async function Footer({ locale }: { locale: SupportedLocale }) {
         </div>
       </div>
       <div className="mb-2 text-xs text-fontcolor-muted">
-        Information about politicians stances on crypto sourced from{' '}
+        Information about people's stances on crypto sourced from{' '}
         <a target="_blank" href="https://www.dotheysupportit.com/" className={'hover:underline'}>
           DoTheySupportIt.com
         </a>

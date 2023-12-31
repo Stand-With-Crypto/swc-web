@@ -40,6 +40,7 @@ export function RecentActivityAndLeaderboard({
       </TabsContent>
       <TabsContent value={RecentActivityAndLeaderboardTabs.LEADERBOARD} className="space-y-7">
         {/* TODO tooltip for Fairshake */}
+        {/* TODO hardcode brian's donations are from fairshake*/}
         <p className="mt-2 h-7 text-center text-xs text-gray-500">
           Donations are from FairShake and Stand With Crypto
         </p>

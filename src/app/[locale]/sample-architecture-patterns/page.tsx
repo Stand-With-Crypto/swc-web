@@ -24,8 +24,6 @@ export const LazyFormEmailYourCongressperson = lazy(
   () => import('@/components/sampleArchitecture/formEmailYourCongressperson'),
 )
 
-// TODO metadata
-
 export default async function Home({ params }: PageProps) {
   const { locale } = params
   const [intl, leaderboardEntities, totalDonations] = await Promise.all([

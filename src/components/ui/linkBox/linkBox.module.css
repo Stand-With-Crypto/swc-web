@@ -17,8 +17,16 @@
 .base {
   position: relative;
 }
+
 .base a[href]:not(.overlay),
+.base div[data-link-box-subject],
 .base abbr[title] {
   position: relative;
   z-index: 1;
+}
+
+.base:hover a[href]:not(.overlay),
+.base:hover abbr[data-link-box-subject],
+.base:hover button[data-link-box-subject] {
+  text-decoration: underline;
 }
