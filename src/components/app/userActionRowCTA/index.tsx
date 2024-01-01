@@ -2,15 +2,17 @@ import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { NextImage } from '@/components/ui/image'
 import { cn } from '@/utils/web/cn'
 import { UserActionType } from '@prisma/client'
+import { ChevronRight } from 'lucide-react'
 import React from 'react'
 import { LazyExoticComponent } from 'react'
+import NextImageComponent, { ImageProps as NextImageProps } from 'next/image'
 
 export interface UserActionRowCTAProps {
   actionType: UserActionType
   state: 'unknown' | 'complete' | 'incomplete'
   image: string
-  text: React.ReactNode
-  subtext: React.ReactNode
+  text: string
+  subtext: string
   canBeTriggeredMultipleTimes: boolean
   lazyRenderedForm: LazyExoticComponent<() => JSX.Element>
 }
@@ -74,7 +76,7 @@ const UserActionRowCTAButton = React.forwardRef<
           <div>{getStateUI()}</div>
           <div className="hidden md:block">
             {/* TODO alt */}
-            <NextImage width={100} height={100} src={image} alt={''} />
+            <NextImage width={100} height={100} src={image} alt={text} />
           </div>
           <div>
             <div className="mb-1 text-xl font-bold">{text}</div>
@@ -83,12 +85,7 @@ const UserActionRowCTAButton = React.forwardRef<
         </div>
         {canBeActionedOn ? (
           <div>
-            <NextImage
-              width={20}
-              height={20}
-              src={'misc/chevronRight.svg'}
-              alt={'Click to start action'}
-            />
+            <ChevronRight />
           </div>
         ) : null}
       </button>

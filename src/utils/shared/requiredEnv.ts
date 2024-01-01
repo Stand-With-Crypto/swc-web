@@ -1,3 +1,4 @@
+import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import * as Sentry from '@sentry/nextjs'
 
 export function requiredEnv(value: string | undefined, name: string) {
@@ -11,4 +12,11 @@ export function requiredEnv(value: string | undefined, name: string) {
     Sentry.captureMessage(message, { extra: { value, name } })
   }
   return value!
+}
+
+export function requiredOutsideLocalEnv(value: string | undefined, name: string) {
+  if (NEXT_PUBLIC_ENVIRONMENT === 'local') {
+    return value
+  }
+  return requiredEnv(value, name)
 }
