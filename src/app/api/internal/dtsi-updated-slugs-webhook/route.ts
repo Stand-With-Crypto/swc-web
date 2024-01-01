@@ -19,9 +19,15 @@ const DTSI_WEBHOOK_SECRET = requiredOutsideLocalEnv(
 // TODO debounce this endpoint with inngest
 
 export async function POST(request: NextRequest) {
-  if (request.headers.get('authorization') !== DTSI_WEBHOOK_SECRET) {
+  if (!request.headers.get('authorization')) {
     return NextResponse.json(
       { error: 'Must include authorization header with webhook secret' },
+      { status: 401 },
+    )
+  }
+  if (request.headers.get('authorization') !== DTSI_WEBHOOK_SECRET) {
+    return NextResponse.json(
+      { error: 'Must include the right authorization header with webhook secret' },
       { status: 401 },
     )
   }
@@ -37,5 +43,5 @@ export async function POST(request: NextRequest) {
     }),
   )
   pathsToUpdate.forEach(page => revalidatePath(page))
-  return { pathsToUpdate }
+  return NextResponse.json({ pathsToUpdate })
 }
