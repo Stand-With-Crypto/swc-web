@@ -1,10 +1,13 @@
 import { ORDERED_SUPPORTED_LOCALES, SupportedLocale } from '@/intl/locales'
+import { getLogger } from '@/utils/shared/logger'
 import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
 import { getIntlUrls } from '@/utils/shared/urls'
 import _ from 'lodash'
 import { revalidatePath } from 'next/cache'
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
+
+const logger = getLogger('/api/internal/dtsi-updated-slugs-webhook')
 
 const zodPayload = z.object({
   type: z.literal('people-with-updates'),
@@ -32,6 +35,7 @@ export async function POST(request: NextRequest) {
     )
   }
   const validatedFields = zodPayload.parse(await request.json())
+  logger.info('Received webhook with updated slugs', validatedFields)
   const pathsToUpdate = _.flatten(
     ORDERED_SUPPORTED_LOCALES.map(locale => {
       const urls = getIntlUrls(locale)
@@ -43,5 +47,6 @@ export async function POST(request: NextRequest) {
     }),
   )
   pathsToUpdate.forEach(page => revalidatePath(page))
+  logger.info('updated pages', pathsToUpdate)
   return NextResponse.json({ pathsToUpdate })
 }
