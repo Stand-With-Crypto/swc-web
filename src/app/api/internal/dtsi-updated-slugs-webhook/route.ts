@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
   logger.info('Received webhook with updated slugs', validatedFields)
   const pathsToUpdate = _.flatten(
     ORDERED_SUPPORTED_LOCALES.map(locale => {
-      const urls = getIntlUrls(locale)
+      const urls = getIntlUrls(locale, { actualPaths: true })
       return [
         urls.home(),
         urls.politiciansHomepage(),
