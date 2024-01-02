@@ -26,7 +26,7 @@ export function SumDonationsByUserRow({
 }: SumDonationsRowProps) {
   return (
     <div
-      className={cn('flex items-center justify-between gap-5', {
+      className={cn('relative flex items-center justify-between gap-5', {
         'rounded-lg': highlight,
         'border-2': highlight,
         'border-blue-500': highlight,
@@ -36,6 +36,12 @@ export function SumDonationsByUserRow({
         'font-semibold': highlight,
       })}
     >
+      {highlight && (
+        <div className="absolute left-0 top-0 rounded-br-[2px] rounded-tl-sm bg-blue-500  px-1 text-xs text-white">
+          You
+        </div>
+      )}
+
       <div className="flex items-center gap-2">
         <div className="w-5">
           {INDEX_SHIELD_IMAGE_MAP[index] ? (
