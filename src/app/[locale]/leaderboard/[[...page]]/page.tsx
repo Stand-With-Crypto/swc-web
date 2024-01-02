@@ -86,7 +86,7 @@ export default async function Leaderboard({ params }: Props) {
     notFound()
   }
   const { user } = await getExistingUserAndMethodOfMatch()
-  const clientUser = !!user ? getClientUser(user) : undefined
+  const clientUser = user ? getClientUser(user) : undefined
 
   const offset = (pageNum - 1) * 20
   const [actions, sumDonationsByUser, currentUserRank] = await Promise.all([
@@ -94,7 +94,6 @@ export default async function Leaderboard({ params }: Props) {
     getSumDonationsByUser({ limit: 20, offset }),
     !!user && getSumDonationsRankForUser({ userId: user.id, limit: 20 }),
   ])
-  const isCurrentUserInTop20 = currentUserRank && currentUserRank.rank <= 20
   const shouldShowCurrentUserRow = pageNum === 1 && currentUserRank && currentUserRank.rank > 20
 
   return (
