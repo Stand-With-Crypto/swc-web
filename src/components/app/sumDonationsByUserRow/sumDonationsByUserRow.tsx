@@ -12,7 +12,7 @@ interface SumDonationsRowProps {
   locale: SupportedLocale
   index: number
   overrideDonationRecipient?: string
-  highlight: boolean
+  highlight?: boolean
 }
 
 const INDEX_SHIELD_IMAGE_MAP = ['/shields/gold.svg', '/shields/silver.svg', '/shields/bronze.svg']
