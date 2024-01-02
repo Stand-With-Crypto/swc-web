@@ -7,6 +7,7 @@ import { PageTitle } from '@/components/ui/pageTitleText'
 import { PaginationLinks } from '@/components/ui/paginationLinks'
 import { tabListStyles, tabTriggerStyles } from '@/components/ui/tabs/styles'
 import { getSumDonationsByUser } from '@/data/aggregations/getSumDonationsByUser'
+import { getSumDonationsRankForUser } from '@/data/aggregations/getSumDonationsRankForUser'
 import { getPublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 import { PageProps } from '@/types'
 import { getIntlUrls } from '@/utils/shared/urls'
@@ -16,9 +17,11 @@ import { notFound } from 'next/navigation'
 import { z } from 'zod'
 import { Metadata } from 'next'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
+import { getUserSessionIdOnAppRouter } from '@/utils/server/serverUserSessionId'
+import { getExistingUserAndMethodOfMatch } from '@/utils/server/getExistingUserAndMethodOfMatch'
 
-export const revalidate = 3600
-export const dynamic = 'error'
+export const revalidate = 0
+export const dynamic = 'auto'
 export const dynamicParams = true
 
 type Props = PageProps<{ page: string[] }>
@@ -80,11 +83,17 @@ export default async function Leaderboard({ params }: Props) {
   if (!pageNum || !tab) {
     notFound()
   }
+  const { user } = await getExistingUserAndMethodOfMatch()
+
   const offset = (pageNum - 1) * 20
-  const [actions, sumDonationsByUser] = await Promise.all([
+  const [actions, sumDonationsByUser, currentUserRank] = await Promise.all([
     getPublicRecentActivity({ limit: 20, offset }),
     getSumDonationsByUser({ limit: 20, offset }),
+    !!user && getSumDonationsRankForUser({ userId: user.id, limit: 20 }),
   ])
+  const isCurrentUserInTop20 = currentUserRank && currentUserRank.rank <= 20
+  const shouldShowCurrentUserRow = pageNum === 1 && currentUserRank && currentUserRank.rank > 20
+
   return (
     <div className="container space-y-7">
       <PageTitle as="h3">{title}</PageTitle>
@@ -132,8 +141,23 @@ export default async function Leaderboard({ params }: Props) {
                 index={offset + index}
                 sumDonations={donor}
                 locale={locale}
+                highlight={!!user && donor.user.id === user.id} // Highlight if it's the logged-in user
               />
             ))}
+            {shouldShowCurrentUserRow && (
+              <>
+                <div className="align-center flex justify-center text-sm opacity-50">{`${
+                  Number(currentUserRank.rank) - 1
+                } donors ahead of you`}</div>
+                <SumDonationsByUserRow
+                  key="currentUser"
+                  index={Number(currentUserRank.rank) - 1}
+                  sumDonations={{ totalAmountUsd: currentUserRank.totalAmountUsd, user }}
+                  locale={locale}
+                  highlight={true}
+                />
+              </>
+            )}
           </>
         )}
       </div>
