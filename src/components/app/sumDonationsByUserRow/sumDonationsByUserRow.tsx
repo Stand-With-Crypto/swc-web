@@ -4,6 +4,7 @@ import { NextImage } from '@/components/ui/image'
 import { SumDonationsByUser } from '@/data/aggregations/getSumDonationsByUser'
 import { SupportedLocale } from '@/intl/locales'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
+import { cn } from '@/utils/web/cn'
 import { getUserDisplayName } from '@/utils/web/userUtils'
 
 interface SumDonationsRowProps {
@@ -11,6 +12,7 @@ interface SumDonationsRowProps {
   locale: SupportedLocale
   index: number
   overrideDonationRecipient?: string
+  highlight: boolean
 }
 
 const INDEX_SHIELD_IMAGE_MAP = ['/shields/gold.svg', '/shields/silver.svg', '/shields/bronze.svg']
@@ -20,9 +22,20 @@ export function SumDonationsByUserRow({
   sumDonations,
   index,
   overrideDonationRecipient,
+  highlight,
 }: SumDonationsRowProps) {
   return (
-    <div className="flex items-center justify-between gap-5">
+    <div
+      className={cn('flex items-center justify-between gap-5', {
+        'rounded-lg': highlight,
+        'border-2': highlight,
+        'border-blue-500': highlight,
+        'bg-blue-50': highlight,
+        'p-4': highlight,
+        '-m-4': highlight,
+        'font-semibold': highlight,
+      })}
+    >
       <div className="flex items-center gap-2">
         <div className="w-5">
           {INDEX_SHIELD_IMAGE_MAP[index] ? (
