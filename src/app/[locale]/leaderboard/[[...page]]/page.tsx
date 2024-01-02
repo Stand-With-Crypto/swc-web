@@ -19,6 +19,8 @@ import { Metadata } from 'next'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { getUserSessionIdOnAppRouter } from '@/utils/server/serverUserSessionId'
 import { getExistingUserAndMethodOfMatch } from '@/utils/server/getExistingUserAndMethodOfMatch'
+import { getClientModel } from '@/clientModels/utils'
+import { getClientUser } from '@/clientModels/clientUser/clientUser'
 
 export const revalidate = 0
 export const dynamic = 'auto'
@@ -84,6 +86,7 @@ export default async function Leaderboard({ params }: Props) {
     notFound()
   }
   const { user } = await getExistingUserAndMethodOfMatch()
+  const clientUser = !!user ? getClientUser(user) : undefined
 
   const offset = (pageNum - 1) * 20
   const [actions, sumDonationsByUser, currentUserRank] = await Promise.all([
@@ -144,7 +147,7 @@ export default async function Leaderboard({ params }: Props) {
                 highlight={!!user && donor.user.id === user.id} // Highlight if it's the logged-in user
               />
             ))}
-            {shouldShowCurrentUserRow && (
+            {clientUser && shouldShowCurrentUserRow && (
               <>
                 <div className="align-center flex justify-center text-sm opacity-50">{`${
                   Number(currentUserRank.rank) - 1
@@ -152,7 +155,10 @@ export default async function Leaderboard({ params }: Props) {
                 <SumDonationsByUserRow
                   key="currentUser"
                   index={Number(currentUserRank.rank) - 1}
-                  sumDonations={{ totalAmountUsd: currentUserRank.totalAmountUsd, user }}
+                  sumDonations={{
+                    totalAmountUsd: currentUserRank.totalAmountUsd,
+                    user: clientUser,
+                  }}
                   locale={locale}
                   highlight={true}
                 />
