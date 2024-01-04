@@ -1,14 +1,19 @@
-import { PageTitle } from '@/components/ui/pageTitleText'
-import { PageProps } from '@/types'
+import { About } from '@/components/app/pageAbout'
+import { generateMetadataDetails } from '@/utils/server/metadataUtils'
+import { Metadata } from 'next'
 
 export const dynamic = 'error'
 
-type Props = PageProps
+const title = 'Join the fight'
+const description =
+  'The goal of the Stand With Crypto Alliance is to mobilize the 52 million American crypto owners into a powerful force.'
+export const metadata: Metadata = {
+  ...generateMetadataDetails({
+    description,
+    title,
+  }),
+}
 
-export default async function AboutPage({ params }: Props) {
-  return (
-    <div className="container">
-      <PageTitle>TODO</PageTitle>
-    </div>
-  )
+export default async function AboutPage() {
+  return <About title={title} description={description} />
 }

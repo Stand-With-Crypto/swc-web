@@ -7,7 +7,6 @@ import { InternalLink } from '@/components/ui/link'
 import getIntl from '@/intl/intlMessages'
 import { generateClientComponentMessages } from '@/intl/intlServerUtils'
 import { SupportedLocale } from '@/intl/locales'
-import { PageProps } from '@/types'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { Menu } from 'lucide-react'
 
