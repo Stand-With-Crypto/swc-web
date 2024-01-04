@@ -33,6 +33,10 @@ Below is a non-exhaustive list of coding conventions that we try to follow. This
 - Avoid using javascript-defined styles over CSS-defined styles (like change UX based off screen size) unless it's not possible to achieve the desired effect with CSS. Defining responsive design in css is more SEO/user friendly. It prevents unwanted flickers and reduces the need for client components.
 - If you are building a UI element with a lot of different possible UI permutations, consider creating a [storybook](https://storybook.js.org/) file (`.stories.tsx`) to help other developers view all the possible UI states.
   - A good example of when it makes sense is `src/components/app/dtsiStanceDetails/dtsiStanceDetails.stories.tsx`
+- Consider whether `flex` or `grid` styles make the most sense for positioning the UI you're building. For example, if you need a 3, even width, columns layout that collapses down to one on mobile, this is a perfect candidate for a grid (`grid grid-cols-1 md:grid-cols-3`). If you need a layout where theres two pieces of content in a row that should be set as far apart as possible, this is a perfect use case for flex (`flex justify-between`).
+- Unless there's a specific reason not to (like you're sharing a large complex string of classes between multiple UI elements), prefer to write your tailwind classes inline, rather than defining them elsewhere and referencing via variable.
+  - if you are defining tailwind classes outside a className prop, make sure you wrap them in `cn()` or `twNoop()` to ensure our linters and IDE plugins know the string is composed of tailwind classes
+- when developing new pages, add a new folder to `src/components/app/pageNameOfYourPage` that contains all page-specific UI files. For example, the "About" page components would be in `src/components/app/pageAbout`
 
 ## Security
 
