@@ -39,7 +39,7 @@ function getGoogleCivicDataFromAddress(address: string) {
   const url = `${CIVIC_BY_ADDRESS_ENDPOINT}?address=${encodeURIComponent(
     address.trim(),
   )}&key=${NEXT_PUBLIC_GOOGLE_CIVIC_API_KEY}&levels=country&includeOffices=false`
-  return fetchReq(url, { headers: { referer: 'localhost:3000' } })
+  return fetchReq(url, { headers: { referer: window.location.origin } })
     .then(res => res.json())
     .then(res => res as GoogleCivicDataResponse)
 }
