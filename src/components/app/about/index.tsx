@@ -1,22 +1,15 @@
 import { ClientAuthUserActionRowCTAs } from '@/components/app/userActionRowCTA/clientAuthUserActionRowCTAs'
-import { NextImage } from '@/components/ui/image'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { cn } from '@/utils/web/cn'
-import { ReactNode } from 'react'
 
-export const dynamic = 'error'
+import { CardGroup } from '@/components/app/about/cardGroup'
+import * as styles from '@/components/app/about/styles'
 
-const cardStyles = cn('bg-muted px-4 py-6 rounded-xl')
-const sectionStyles = cn('mb-16 space-y-7 md:mb-24')
-const americaNeedsCryptoCardStyles = cn('space-y-4 text-gray-500 text-start', cardStyles)
-const americaNeedsCryptoCardTitleStyles = cn('text-start text-foreground')
-const americaNeedsCryptoCardListStyles = cn('list-disc mt-4 ml-4')
-
-export default async function AboutPage() {
+export function About() {
   return (
     <div className="container space-y-16">
-      <section className={sectionStyles}>
+      <section className={styles.sectionClassNames}>
         <PageTitle>Join the fight</PageTitle>
         <PageSubTitle>
           The goal of the Stand With Crypto Alliance is to mobilize the 52 million American crypto
@@ -50,7 +43,7 @@ export default async function AboutPage() {
         </p>
       </section>
 
-      <section className={sectionStyles}>
+      <section className={styles.sectionClassNames}>
         <PageTitle as="h2" size="md">
           America needs crypto
         </PageTitle>
@@ -63,12 +56,12 @@ export default async function AboutPage() {
         </p>
 
         <div className="flex flex-col gap-4">
-          <div className={americaNeedsCryptoCardStyles}>
-            <PageTitle as="h3" size="sm" className={americaNeedsCryptoCardTitleStyles}>
+          <div className={styles.americaNeedsCryptoCardClassNames}>
+            <PageTitle as="h3" size="sm" className={styles.americaNeedsCryptoCardTitleClassNames}>
               Crypto creates jobs
             </PageTitle>
             <p>Keeping crypto innovation in America will:</p>
-            <ul className={americaNeedsCryptoCardListStyles}>
+            <ul className={styles.americaNeedsCryptoCardListClassNames}>
               <li>
                 Secure 4 million jobs over the next 7 years, by preventing the shift of web3
                 development overseas.
@@ -79,23 +72,23 @@ export default async function AboutPage() {
               </li>
             </ul>
           </div>
-          <div className={americaNeedsCryptoCardStyles}>
-            <PageTitle as="h3" size="sm" className={americaNeedsCryptoCardTitleStyles}>
+          <div className={styles.americaNeedsCryptoCardClassNames}>
+            <PageTitle as="h3" size="sm" className={styles.americaNeedsCryptoCardTitleClassNames}>
               Crypto drives American innovation
             </PageTitle>
             <p>
               While 130 countries (98% of the global economy) are exploring digital currencies, the
               US is falling behind. Yet, the desire for American leadership is clear:
             </p>
-            <ul className={americaNeedsCryptoCardListStyles}>
+            <ul className={styles.americaNeedsCryptoCardListClassNames}>
               <li>53% of Americans want crypto companies to be US-based.</li>
               <li>
                 73% of Fortune 500 execs prefer US-based partners for crypto and web3 initiatives.
               </li>
             </ul>
           </div>
-          <div className={americaNeedsCryptoCardStyles}>
-            <PageTitle as="h3" size="sm" className={americaNeedsCryptoCardTitleStyles}>
+          <div className={styles.americaNeedsCryptoCardClassNames}>
+            <PageTitle as="h3" size="sm" className={styles.americaNeedsCryptoCardTitleClassNames}>
               Crypto is a national priority
             </PageTitle>
             <p>
@@ -107,7 +100,7 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      <section className={sectionStyles}>
+      <section className={styles.sectionClassNames}>
         <PageTitle as="h2" size="md">
           What it means to stand with crypto
         </PageTitle>
@@ -117,7 +110,7 @@ export default async function AboutPage() {
           officials that will:
         </p>
 
-        <ul className={cn('mt-2', americaNeedsCryptoCardListStyles)}>
+        <ul className={cn('mt-2', styles.americaNeedsCryptoCardListClassNames)}>
           <li>Protect the right of Americans to choose to use crypto</li>
           <li>
             Support common-sense legislation that fosters innovation and creates jobs while
@@ -131,7 +124,7 @@ export default async function AboutPage() {
         </ul>
       </section>
 
-      <section className={sectionStyles}>
+      <section className={styles.sectionClassNames}>
         <PageTitle as="h2" size="md">
           Raise your voice: crypto can't wait
         </PageTitle>
@@ -177,38 +170,6 @@ export default async function AboutPage() {
       <PageTitle as="p" size="sm" className="text-start">
         Join the fight today!
       </PageTitle>
-    </div>
-  )
-}
-
-interface CardGroupProps {
-  sections: {
-    label: string
-    value: ReactNode
-    imageSrc?: string
-    imageAlt?: string
-  }[]
-}
-
-function CardGroup({ sections }: CardGroupProps) {
-  return (
-    <div className="flex flex-wrap gap-4">
-      {sections.map(section => (
-        <div
-          key={section.label}
-          className={cn('flex min-w-[148px] flex-1 flex-col gap-4', cardStyles)}
-        >
-          <div className="flex justify-between gap-4">
-            <PageTitle as="p">{section.value}</PageTitle>
-            {section.imageSrc && section.imageAlt && (
-              <div className="relative h-10 w-10 md:h-12 md:w-12 lg:h-16 lg:w-16">
-                <NextImage alt={section.imageAlt} src={section.imageSrc} fill />
-              </div>
-            )}
-          </div>
-          <p className="text-sm text-gray-500 lg:text-base">{section.label}</p>
-        </div>
-      ))}
     </div>
   )
 }

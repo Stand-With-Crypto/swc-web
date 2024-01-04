@@ -18,6 +18,14 @@ export async function Navbar({ locale }: { locale: SupportedLocale }) {
   const urls = getIntlUrls(locale)
   const leftLinks = [
     {
+      href: urls.home(),
+      text: intl.formatMessage({
+        id: `${INTL_PREFIX}.home`,
+        defaultMessage: 'Home',
+        description: 'Link to the home page',
+      }),
+    },
+    {
       href: urls.about(),
       text: intl.formatMessage({
         id: `${INTL_PREFIX}.about`,

@@ -1,19 +1,36 @@
 import { cn } from '@/utils/web/cn'
+import { type VariantProps, cva } from 'class-variance-authority'
 import React from 'react'
 import Balancer from 'react-wrap-balancer'
 
-export const PageTitle = React.forwardRef<
-  HTMLHeadingElement,
-  React.HTMLAttributes<HTMLHeadingElement> & { as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' }
->(({ className, children, as: Comp = 'h1', ...props }, ref) => {
-  return (
-    <Comp
-      ref={ref}
-      className={cn('text-center text-3xl font-bold  md:text-4xl lg:text-5xl', className)}
-      {...props}
-    >
-      <Balancer>{children}</Balancer>
-    </Comp>
-  )
+const titleVariantsConfig = {
+  size: {
+    lg: 'text-3xl md:text-4xl lg:text-5xl',
+    md: 'text-2xl md:text-3xl lg:text-4xl',
+    sm: 'text-lg md:text-xl lg:text-2xl',
+  },
+}
+
+const pageTitleVariants = cva('text-center text-3xl font-bold md:text-4xl lg:text-5xl', {
+  variants: titleVariantsConfig,
+  defaultVariants: {
+    size: 'lg',
+  },
 })
+
+interface PageTitleProps
+  extends React.HTMLAttributes<HTMLHeadingElement>,
+    VariantProps<typeof pageTitleVariants> {
+  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p'
+}
+
+export const PageTitle = React.forwardRef<HTMLHeadingElement, PageTitleProps>(
+  ({ className, children, as: Comp = 'h1', size, ...props }, ref) => {
+    return (
+      <Comp ref={ref} className={cn(pageTitleVariants({ className, size }))} {...props}>
+        <Balancer>{children}</Balancer>
+      </Comp>
+    )
+  },
+)
 PageTitle.displayName = 'PageTitle'
