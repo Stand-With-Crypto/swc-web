@@ -1,13 +1,13 @@
-import { cn } from '@/utils/web/cn'
+import { cn, twNoop } from '@/utils/web/cn'
 import { type VariantProps, cva } from 'class-variance-authority'
 import React from 'react'
 import Balancer from 'react-wrap-balancer'
 
 const titleVariantsConfig = {
   size: {
-    lg: 'text-3xl md:text-4xl lg:text-5xl',
-    md: 'text-2xl md:text-3xl lg:text-4xl',
-    sm: 'text-lg md:text-xl lg:text-2xl',
+    lg: twNoop('text-3xl md:text-4xl lg:text-5xl'),
+    md: twNoop('text-2xl md:text-3xl lg:text-4xl'),
+    sm: twNoop('text-lg md:text-xl lg:text-2xl'),
   },
 }
 

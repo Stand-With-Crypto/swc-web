@@ -1,28 +1,31 @@
 import { ClientAuthUserActionRowCTAs } from '@/components/app/userActionRowCTA/clientAuthUserActionRowCTAs'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { cn } from '@/utils/web/cn'
 
-import { CardGroup } from '@/components/app/about/cardGroup'
-import * as styles from '@/components/app/about/styles'
+import { Card } from '@/components/app/pageAbout/card'
+import { NextImage } from '@/components/ui/image'
 
-export function About() {
+export function About({ title, description }: { title: string; description: string }) {
   return (
     <div className="container space-y-16">
-      <section className={styles.sectionClassNames}>
-        <PageTitle>Join the fight</PageTitle>
-        <PageSubTitle>
-          The goal of the Stand With Crypto Alliance is to mobilize the 52 million American crypto
-          owners into a powerful force.
-        </PageSubTitle>
+      <section className="mb-16 space-y-7 md:mb-24">
+        <PageTitle>{title}</PageTitle>
+        <PageSubTitle>{description}</PageSubTitle>
 
-        <CardGroup
-          sections={[
+        <Card.Group>
+          {[
             { value: '52M', label: 'Americans own crypto' },
             { value: '87%', label: 'Believe the financial system needs updating' },
             { value: '45%', label: 'Will not back anti-crypto candidates' },
-          ]}
-        />
+          ].map(({ value, label }) => (
+            <Card key={label}>
+              <Card.Heading>
+                <PageTitle as="p">{value}</PageTitle>
+              </Card.Heading>
+              <Card.Description>{label}</Card.Description>
+            </Card>
+          ))}
+        </Card.Group>
 
         <p>
           Nearly nine in ten Americans believe the financial system is overdue for an update. Yet,
@@ -43,7 +46,7 @@ export function About() {
         </p>
       </section>
 
-      <section className={styles.sectionClassNames}>
+      <section className="mb-16 space-y-7 md:mb-24">
         <PageTitle as="h2" size="md">
           America needs crypto
         </PageTitle>
@@ -56,12 +59,12 @@ export function About() {
         </p>
 
         <div className="flex flex-col gap-4">
-          <div className={styles.americaNeedsCryptoCardClassNames}>
-            <PageTitle as="h3" size="sm" className={styles.americaNeedsCryptoCardTitleClassNames}>
+          <Card className="space-y-4 text-start text-gray-500">
+            <PageTitle as="h3" size="sm" className="text-start text-foreground">
               Crypto creates jobs
             </PageTitle>
             <p>Keeping crypto innovation in America will:</p>
-            <ul className={styles.americaNeedsCryptoCardListClassNames}>
+            <ul className="ml-4 mt-4 list-disc">
               <li>
                 Secure 4 million jobs over the next 7 years, by preventing the shift of web3
                 development overseas.
@@ -71,24 +74,24 @@ export function About() {
                 reverse the current decline and surpass our previous 40% mark.
               </li>
             </ul>
-          </div>
-          <div className={styles.americaNeedsCryptoCardClassNames}>
-            <PageTitle as="h3" size="sm" className={styles.americaNeedsCryptoCardTitleClassNames}>
+          </Card>
+          <Card className="space-y-4 text-gray-500">
+            <PageTitle as="h3" size="sm" className="text-start text-foreground">
               Crypto drives American innovation
             </PageTitle>
             <p>
               While 130 countries (98% of the global economy) are exploring digital currencies, the
               US is falling behind. Yet, the desire for American leadership is clear:
             </p>
-            <ul className={styles.americaNeedsCryptoCardListClassNames}>
+            <ul className="ml-4 mt-4 list-disc">
               <li>53% of Americans want crypto companies to be US-based.</li>
               <li>
                 73% of Fortune 500 execs prefer US-based partners for crypto and web3 initiatives.
               </li>
             </ul>
-          </div>
-          <div className={styles.americaNeedsCryptoCardClassNames}>
-            <PageTitle as="h3" size="sm" className={styles.americaNeedsCryptoCardTitleClassNames}>
+          </Card>
+          <Card className="space-y-4 text-gray-500">
+            <PageTitle as="h3" size="sm" className="text-start text-foreground">
               Crypto is a national priority
             </PageTitle>
             <p>
@@ -96,11 +99,11 @@ export function About() {
               production is located in Taiwan and South Korea. We can't let history repeat itself,
               and must ensure the US isn't sidelined from the future financial system.
             </p>
-          </div>
+          </Card>
         </div>
       </section>
 
-      <section className={styles.sectionClassNames}>
+      <section className="mb-16 space-y-7 md:mb-24">
         <PageTitle as="h2" size="md">
           What it means to stand with crypto
         </PageTitle>
@@ -110,7 +113,7 @@ export function About() {
           officials that will:
         </p>
 
-        <ul className={cn('mt-2', styles.americaNeedsCryptoCardListClassNames)}>
+        <ul className="ml-4 mt-2 list-disc text-start text-gray-500">
           <li>Protect the right of Americans to choose to use crypto</li>
           <li>
             Support common-sense legislation that fosters innovation and creates jobs while
@@ -124,7 +127,7 @@ export function About() {
         </ul>
       </section>
 
-      <section className={styles.sectionClassNames}>
+      <section className="mb-16 space-y-7 md:mb-24">
         <PageTitle as="h2" size="md">
           Raise your voice: crypto can't wait
         </PageTitle>
@@ -136,26 +139,48 @@ export function About() {
           crypto voter is powerful and bipartisan force:
         </p>
 
-        <CardGroup
-          sections={[
+        <Card.Group>
+          {[
             {
               value: '18%',
               label: 'Republicans hold crypto',
-              imageSrc: '/parties/republicanFlag.svg',
-              imageAlt: 'Republican logo',
+              image: {
+                src: '/parties/republicanFlag.svg',
+                alt: 'Republican logo',
+              },
             },
             {
               value: '22%',
               label: 'Democrats hold crypto',
-              imageSrc: '/parties/democratFlag.svg',
-              imageAlt: 'Democrat logo',
+              image: {
+                src: '/parties/democratFlag.svg',
+                alt: 'Democrat logo',
+              },
             },
             {
               value: '22%',
               label: 'Independents hold crypto',
             },
-          ]}
-        />
+          ].map(({ value, label, image }) => (
+            <Card key={label}>
+              <Card.Heading>
+                <PageTitle as="p">{value}</PageTitle>
+                {image && (
+                  <NextImage
+                    // This is necessary because the image is an svg with a "padding",
+                    // so we need to offset the padding here
+                    className="mt-[-5px]"
+                    alt={image.alt}
+                    src={image.src}
+                    width={50}
+                    height={50}
+                  />
+                )}
+              </Card.Heading>
+              <Card.Description>{label}</Card.Description>
+            </Card>
+          ))}
+        </Card.Group>
 
         <p>
           But your voice is crucial. It's not about sending tweets; it's about driving real change.

@@ -7,7 +7,6 @@ import { InternalLink } from '@/components/ui/link'
 import getIntl from '@/intl/intlMessages'
 import { generateClientComponentMessages } from '@/intl/intlServerUtils'
 import { SupportedLocale } from '@/intl/locales'
-import { PageProps } from '@/types'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { Menu } from 'lucide-react'
 
@@ -17,14 +16,6 @@ export async function Navbar({ locale }: { locale: SupportedLocale }) {
   const intl = await getIntl(locale)
   const urls = getIntlUrls(locale)
   const leftLinks = [
-    {
-      href: urls.home(),
-      text: intl.formatMessage({
-        id: `${INTL_PREFIX}.home`,
-        defaultMessage: 'Home',
-        description: 'Link to the home page',
-      }),
-    },
     {
       href: urls.about(),
       text: intl.formatMessage({
