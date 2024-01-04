@@ -1,7 +1,4 @@
-import {
-  ClientCurrentUserDTSIPersonCard,
-  ClientCurrentUserDTSIPersonCardOrCTA,
-} from '@/components/app/clientCurrentUserDTSIPersonCardOrCTA'
+import { ClientCurrentUserDTSIPersonCardOrCTA } from '@/components/app/clientCurrentUserDTSIPersonCardOrCTA'
 import { DTSIClientPersonDataTable } from '@/components/app/dtsiClientPersonDataTable'
 import { DTSIPersonCard } from '@/components/app/dtsiPersonCard'
 import { Button } from '@/components/ui/button'

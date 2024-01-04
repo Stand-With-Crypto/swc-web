@@ -6,8 +6,8 @@ import { apiUrls } from '@/utils/shared/urls'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
 import useSWR from 'swr'
 
-export function useGetCivicDataFromAddress(address: string) {
-  return useSWR(address ? `useGetCivicDataFromAddress-${address}` : null, async () => {
+export function useGetDTSIPeopleFromAddress(address: string) {
+  return useSWR(address ? `useGetDTSIPeopleFromAddress-${address}` : null, async () => {
     const result = await getCongressionalDistrictFromAddress(address)
     if ('notFoundReason' in result) {
       return result

@@ -24,7 +24,6 @@ export const queryDTSIPeopleByCongressionalDistrict = async (config: {
   stateCode: string
   districtNumber: number
 }) => {
-  // TODO figure out why codegen generates a type that suggest a string not in an array is valid
   const data = await fetchDTSI<
     DTSI_PeopleByUsCongressionalDistrictQuery,
     DTSI_PeopleByUsCongressionalDistrictQueryVariables

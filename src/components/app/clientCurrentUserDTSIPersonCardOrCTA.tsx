@@ -6,7 +6,7 @@ import { LazyUserActionFormCallCongressperson } from '@/components/app/userActio
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
 import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
-import { useGetCivicDataFromAddress } from '@/hooks/useGetCivicDataFromAddress'
+import { useGetDTSIPeopleFromAddress } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { SupportedLocale } from '@/intl/locales'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { possessive } from '@/utils/shared/possessive'
@@ -16,7 +16,7 @@ import { Suspense, useState } from 'react'
 
 export function ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: SupportedLocale }) {
   const [mockAddress, setMockAddress] = useState('')
-  const res = useGetCivicDataFromAddress(mockAddress)
+  const res = useGetDTSIPeopleFromAddress(mockAddress)
   if (!res.data) {
     return (
       <Button
