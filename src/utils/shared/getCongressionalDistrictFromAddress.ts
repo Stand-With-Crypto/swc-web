@@ -39,7 +39,8 @@ function getGoogleCivicDataFromAddress(address: string) {
   const url = `${CIVIC_BY_ADDRESS_ENDPOINT}?address=${encodeURIComponent(
     address.trim(),
   )}&key=${NEXT_PUBLIC_GOOGLE_CIVIC_API_KEY}&levels=country&includeOffices=false`
-  return fetchReq(url, { headers: { referer: window.location.origin } })
+  // TODO get a new access token that doesn't have referer requirement
+  return fetchReq(url, { headers: { referer: 'localhost:300' } })
     .then(res => res.json())
     .then(res => res as GoogleCivicDataResponse)
 }
