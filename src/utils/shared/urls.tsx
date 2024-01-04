@@ -19,15 +19,14 @@ export const getIntlUrls = (
     about: () => `${localePrefix}/about`,
     resources: () => `${localePrefix}/resources`,
     donate: () => `${localePrefix}/donate`,
-    leaderboard: (params?: { pageNum: number; tab: RecentActivityAndLeaderboardTabs }) => {
+    leaderboard: (params?: { pageNum?: number; tab: RecentActivityAndLeaderboardTabs }) => {
       if (!params) {
         return `${localePrefix}/leaderboard`
       }
+      const pageNum = params.pageNum ?? 1
       const tabPath =
         params.tab === RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY ? '' : `/${params.tab}`
-      return `${localePrefix}/leaderboard${
-        params.pageNum !== 1 || tabPath ? `/${params.pageNum}${tabPath}` : ''
-      }`
+      return `${localePrefix}/leaderboard${pageNum !== 1 || tabPath ? `/${pageNum}${tabPath}` : ''}`
     },
     politiciansHomepage: () => `${localePrefix}/politicians`,
     politicianDetails: (dtsiSlug: string) => `${localePrefix}/politicians/person/${dtsiSlug}`,

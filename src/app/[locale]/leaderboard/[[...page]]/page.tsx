@@ -97,7 +97,6 @@ export default async function Leaderboard({ params }: Props) {
               tab === RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY ? 'active' : undefined
             }
             href={urls.leaderboard({
-              pageNum: 1,
               tab: RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
             })}
           >
@@ -107,7 +106,6 @@ export default async function Leaderboard({ params }: Props) {
             className={tabTriggerStyles}
             data-state={tab === RecentActivityAndLeaderboardTabs.LEADERBOARD ? 'active' : undefined}
             href={urls.leaderboard({
-              pageNum: 1,
               tab: RecentActivityAndLeaderboardTabs.LEADERBOARD,
             })}
           >
