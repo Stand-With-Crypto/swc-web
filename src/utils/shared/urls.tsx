@@ -51,6 +51,13 @@ export const externalUrls = {
 
 export const apiUrls = {
   leaderboard: (offset: number) => `/api/leaderboard/${offset}`,
+  dtsiPeopleByCongressionalDistrict: ({
+    stateCode,
+    districtNumber,
+  }: {
+    stateCode: string
+    districtNumber: number
+  }) => `/api/dtsi/by-geography/usa/${stateCode}/${districtNumber}`,
   totalDonations: (locale: SupportedLocale) => `/api/total-donations/${locale}`,
   mockTotalDonations: (locale: SupportedLocale) => `/api/mock-total-donations/${locale}`,
   performedUserActionTypes: () => `/api/authenticated/performed-user-action-types`,

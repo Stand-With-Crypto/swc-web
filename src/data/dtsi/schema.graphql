@@ -126,6 +126,7 @@ type Person {
   datetimeCreated: DateTime!
   datetimeUpdated: DateTime!
   description: String!
+  donationUrl: String!
   facebookAccountUsername: String!
   faxNumber: String!
   fecCandidateId: String!
@@ -346,6 +347,7 @@ type Query {
     offset: Int!
     slugIn: [String!]
   ): [Person!]!
+  peopleByUSCongressionalDistrict(congressionalDistrict: Int!, stateCode: String!): [Person!]!
 
   """
   Returns all objects that have been updated since the given date

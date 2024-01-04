@@ -10,7 +10,6 @@ const dsn = process.env.NEXT_PUBLIC_SENTRY_DSN
 Sentry.init({
   environment,
   dsn,
-  enabled: !!dsn,
   tracesSampleRate: environment === 'production' ? 0.001 : 1.0,
   // Setting this option to true will print useful information to the console while you're setting up Sentry.
   debug: false,
@@ -38,9 +37,11 @@ Sentry.init({
     /^chrome:\/\//i,
   ],
   beforeSend: (event, hint) => {
-    if (environment === 'local' && process.env.SUPPRESS_SENTRY_ERRORS_ON_LOCAL) {
+    if (environment === 'local') {
       console.error(`Sentry Error:`, hint?.originalException || hint?.syntheticException)
-      return null
+      if (process.env.SUPPRESS_SENTRY_ERRORS_ON_LOCAL || !dsn) {
+        return null
+      }
     }
     return event
   },

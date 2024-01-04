@@ -21,9 +21,11 @@ Sentry.init({
   // Setting this option to true will print useful information to the console while you're setting up Sentry.
   debug: false,
   beforeSend: (event, hint) => {
-    if (environment === 'local' && process.env.SUPPRESS_SENTRY_ERRORS_ON_LOCAL) {
+    if (environment === 'local') {
       console.error(`Sentry Error:`, hint?.originalException || hint?.syntheticException)
-      return null
+      if (process.env.SUPPRESS_SENTRY_ERRORS_ON_LOCAL || !dsn) {
+        return null
+      }
     }
     return event
   },
