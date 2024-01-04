@@ -15,7 +15,10 @@ const getFontSize = (size: number) => {
   if (size < 30) {
     return cn('text-base')
   }
-  return cn('text-lg')
+  if (size < 100) {
+    return cn('text-lg')
+  }
+  return cn('text-4xl')
 }
 
 export const InitialsAvatar: React.FC<InitialsAvatarProps> = ({ size, className, ...props }) => {

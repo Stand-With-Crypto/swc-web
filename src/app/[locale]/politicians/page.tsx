@@ -1,3 +1,7 @@
+import {
+  ClientCurrentUserDTSIPersonCard,
+  ClientCurrentUserDTSIPersonCardOrCTA,
+} from '@/components/app/clientCurrentUserDTSIPersonCardOrCTA'
 import { DTSIClientPersonDataTable } from '@/components/app/dtsiClientPersonDataTable'
 import { DTSIPersonCard } from '@/components/app/dtsiPersonCard'
 import { Button } from '@/components/ui/button'
@@ -32,9 +36,7 @@ export default async function PoliticiansHomepage({ params }: PageProps) {
       <section className="mb-16 space-y-7 text-center md:mb-24">
         <PageTitle>{title}</PageTitle>
         <PageSubTitle>{description}</PageSubTitle>
-        <div>
-          <Button>Find your representative (TODO)</Button>
-        </div>
+        <ClientCurrentUserDTSIPersonCardOrCTA locale={locale} />
       </section>
       <section className="mb-16 grid grid-cols-1 gap-4 md:mb-24 md:grid-cols-2">
         <div>

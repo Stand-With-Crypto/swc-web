@@ -4,6 +4,7 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 import { MaybeNextImg } from '@/components/ui/image'
+import { InitialsAvatar } from '@/components/ui/initialsAvatar'
 import { ExternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
@@ -114,7 +115,7 @@ export default async function PoliticianDetails({ params }: Props) {
       <aside className="md:col-span-1">
         <div className="sticky top-0 text-center md:mr-6 md:max-h-screen md:min-h-screen md:overflow-y-auto md:border-r md:pb-12 md:pr-6 md:text-left">
           <article className="md:mt-5">
-            {person.profilePictureUrl && (
+            {person.profilePictureUrl ? (
               <div
                 className="mx-auto mb-6 overflow-hidden rounded-lg md:mx-0"
                 style={{ maxWidth: 200 }}
@@ -124,6 +125,14 @@ export default async function PoliticianDetails({ params }: Props) {
                   alt={`profile picture of ${dtsiPersonFullName(person)}`}
                   {...(getDTSIPersonProfilePictureUrlDimensions(person) || {})}
                   src={person.profilePictureUrl}
+                />
+              </div>
+            ) : (
+              <div className="mx-auto mb-6 md:mx-0">
+                <InitialsAvatar
+                  size={100}
+                  firstInitial={(person.firstNickname || person.firstName).slice(0, 1)}
+                  lastInitial={person.lastName.slice(0, 1)}
                 />
               </div>
             )}

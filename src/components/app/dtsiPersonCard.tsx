@@ -22,7 +22,7 @@ export function DTSIPersonCard({
   return (
     <LinkBox className="flex items-center justify-between rounded-md border bg-gray-100 p-5">
       <div className="flex flex-row items-center gap-3">
-        <DTSIAvatar person={person} size={40} />
+        <DTSIAvatar person={person} size={60} />
         <div>
           <div className="font-bold">
             <InternalLink
