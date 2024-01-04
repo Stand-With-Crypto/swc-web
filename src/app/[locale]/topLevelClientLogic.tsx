@@ -1,5 +1,6 @@
 'use client'
 import * as Sentry from '@sentry/nextjs'
+import { Base } from '@thirdweb-dev/chains'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN } from '@/utils/shared/sharedEnv'
 import {
@@ -60,6 +61,7 @@ export function TopLevelClientLogic({ children }: { children: React.ReactNode })
   return (
     <ThirdwebProvider
       locale={en()}
+      activeChain={Base}
       supportedWallets={[
         metamaskWallet(),
         coinbaseWallet({ recommended: true }),
@@ -69,7 +71,6 @@ export function TopLevelClientLogic({ children }: { children: React.ReactNode })
             options: ['google', 'email'],
           },
         }),
-        rainbowWallet(),
       ]}
       clientId={NEXT_PUBLIC_THIRDWEB_CLIENT_ID}
       authConfig={{
