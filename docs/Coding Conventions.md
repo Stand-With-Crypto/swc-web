@@ -38,6 +38,10 @@ Below is a non-exhaustive list of coding conventions that we try to follow. This
   - if you are defining tailwind classes outside a className prop, make sure you wrap them in `cn()` or `twNoop()` to ensure our linters and IDE plugins know the string is composed of tailwind classes
 - when developing new pages, add a new folder to `src/components/app/pageNameOfYourPage` that contains all page-specific UI files. For example, the "About" page components would be in `src/components/app/pageAbout`
 
+## Backend Development
+
+- Leverage our [Inngest](https://www.inngest.com) integration when dealing with business logic that needs resilient workflow functionality. See [here](https://www.inngest.com/patterns) for some examples. Avoid using Inngest for basic backend logic that doesn't require this additional complexity/functionality
+
 ## Security
 
 - Follow [Next.js security best practices](https://nextjs.org/blog/security-nextjs-server-components-actions)
