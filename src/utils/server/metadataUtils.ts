@@ -20,7 +20,7 @@ export const generateMetadataDetails = ({
   ogImage,
 }: {
   title: string
-  description: string
+  description?: string
   ogImage?: {
     url: string | URL
     secureUrl?: string | URL
