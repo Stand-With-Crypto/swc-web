@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/ui/button'
 
-export function TermsOfServiceFooter() {
+export function StaticPagesCTA() {
   return (
     <div className="prose w-full max-w-full">
       <div className="flex items-center justify-between gap-32">
