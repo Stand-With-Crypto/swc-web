@@ -12,7 +12,7 @@ function CardHeading({ children }: PropsWithChildren) {
 }
 
 function CardDescription({ children }: PropsWithChildren) {
-  return <p className="text-sm text-gray-500 lg:text-base">{children}</p>
+  return <p className="text-sm text-muted-foreground lg:text-base">{children}</p>
 }
 
 export function Card({ children, className }: PropsWithChildren<{ className?: string }>) {
