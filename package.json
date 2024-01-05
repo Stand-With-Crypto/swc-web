@@ -70,6 +70,7 @@
     "next-sitemap": "^4.2.3",
     "next-themes": "^0.2.1",
     "nextjs-toploader": "^1.6.4",
+    "odometer": "^0.4.8",
     "p-limit": "^5.0.0",
     "p-retry": "^6.2.0",
     "pino-pretty": "^10.3.0",
