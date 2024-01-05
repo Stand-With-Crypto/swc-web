@@ -19,7 +19,7 @@ Sentry.init({
   debug: false,
   beforeSend: (event, hint) => {
     if (environment === 'local') {
-      console.error(`Sentry Error:`, hint?.originalException || hint?.syntheticException)
+      console.error(`Sentry`, hint?.originalException || hint?.syntheticException)
       if (process.env.SUPPRESS_SENTRY_ERRORS_ON_LOCAL || !dsn) {
         return null
       }

@@ -32,7 +32,6 @@ export default async function Home({ params }: PageProps) {
     getMockSumDonations(),
   ])
   return (
-    // TODO remove prose class and actually start styling things!
     <div className="container prose-sm max-w-2xl">
       <h1>Sample Architecture Patterns</h1>
       <h2>

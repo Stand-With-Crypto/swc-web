@@ -47,7 +47,6 @@ export default async function PoliticiansHomepage({ params }: PageProps) {
         <div>
           <h3 className="mb-4 text-center text-xl font-bold text-red-600">Anti-crypto</h3>
           <div className="space-y-3">
-            {/* TODO replace with anti-crypto once we get the gql endpoint working as expected */}
             {groupedDTSIHomepagePeople.antiCrypto.map(person => (
               <DTSIPersonCard locale={locale} key={person.id} person={person} />
             ))}
