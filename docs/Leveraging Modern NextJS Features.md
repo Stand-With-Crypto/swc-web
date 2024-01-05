@@ -26,6 +26,6 @@ There are many instances where building out exposed HTTP API endpoints still mak
 
 - If the Next.js app domain logic will be used to power other clients like iOS/Android apps
 
-- If the product requirements for the client include dynamically fetching additional information after page load based off user interactions, like infinite scroll lists (although you can also [leverage Server Actions to implement this design pattern natively in Next.js](https://www.youtube.com/watch?app=desktop&v=IFYFezylQlI))
+- If the product requirements for the client include dynamically fetching additional information after page load based off user interactions, like infinite scroll lists or fetching dynamic user-specific data on a cached static page
 
 Oftentimes what teams end up doing is leveraging Next.js’ native React Server Component tooling when possible, and exposing API endpoints as needed for instances where the product requirements demand it (The Next.js team has an [excellent blog post](https://nextjs.org/blog/security-nextjs-server-components-actions) on security best practices for data handling).
