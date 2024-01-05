@@ -19,7 +19,8 @@
     "codegen:schemas": "graphql-codegen --config codegen-schemas.ts",
     "intl:extract": "formatjs extract 'src/**/*.{ts,tsx}' '!src/**/*.d.ts' --out-file src/intl/generated/extract.json",
     "intl:extract-compile": "formatjs extract 'src/**/*.ts*' '!src/**/*.d.ts' --out-file temp.json --flatten --id-interpolation-pattern '[sha512:contenthash:base64:6]' && formatjs compile 'temp.json' --out-file src/intl/generated/compile/en-US.json && rm temp.json",
-    "db:seed": "prisma db push --force-reset && prisma db seed"
+    "db:seed": "prisma db push --force-reset && prisma db seed",
+    "inngest": "npx inngest-cli@latest dev --no-discovery -u http://localhost:3000/api/inngest"
   },
   "prisma": {
     "seed": "npm run ts --transpile-only src/bin/seedLocalDb.ts"
@@ -59,6 +60,7 @@
     "formatjs": "^0.1.1",
     "fs-extra": "^11.2.0",
     "graphql": "^16.8.1",
+    "inngest": "^3.8.0",
     "install": "^0.13.0",
     "js-cookie": "^3.0.5",
     "lodash": "^4.17.21",
