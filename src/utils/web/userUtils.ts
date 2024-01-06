@@ -1,6 +1,7 @@
 import { ClientUser } from '@/clientModels/clientUser/clientUser'
 
 export const getUserDisplayName = (userCryptoAddress: ClientUser | null) => {
+  // TODO prioritize ENS first
   if (userCryptoAddress?.name) {
     return userCryptoAddress.name
   }

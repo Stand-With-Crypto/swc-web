@@ -18,6 +18,9 @@ import { UserAction, UserActionType } from '@prisma/client'
 import _ from 'lodash'
 import { Metadata } from 'next'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
+import { Suspense } from 'react'
+import { LazyUpdateUserProfileForm } from '@/components/app/updateUserProfileForm/lazyLoad'
 
 export const dynamic = 'force-dynamic'
 
@@ -59,7 +62,19 @@ export default async function Profile({ params }: Props) {
           </div>
         </div>
         <div>
-          <Button>TODO</Button>
+          <Dialog>
+            <DialogTrigger asChild>
+              {/*  TODO conditional text */}
+              <Button>Finish profile</Button>
+            </DialogTrigger>
+            <DialogContent className="max-w-3xl">
+              <Suspense>
+                <LazyUpdateUserProfileForm
+                  defaultValues={{ fullName: '', address: undefined, phoneNumber: '', email: '' }}
+                />
+              </Suspense>
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
       <div className="mb-14 grid grid-cols-4 rounded-lg bg-blue-50 p-6 text-center">

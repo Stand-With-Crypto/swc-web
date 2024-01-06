@@ -46,9 +46,11 @@
     "FAIRSHAKE",
     "inngest",
     "Leaderboard",
+    "precheck",
     "pscale",
     "sonner",
     "thirdweb",
+    "typecheck",
     "undici",
     "unoptimized"
   ],
