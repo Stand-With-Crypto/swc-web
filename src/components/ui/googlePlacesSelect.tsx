@@ -2,6 +2,7 @@ import { Combobox } from '@/components/ui/combobox'
 import { Input } from '@/components/ui/input'
 import { useScript } from '@/hooks/useScript'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
+import { cn } from '@/utils/web/cn'
 import { useEffect } from 'react'
 import usePlacesAutocomplete from 'use-places-autocomplete'
 
@@ -12,10 +13,15 @@ const NEXT_PUBLIC_GOOGLE_PLACES_API_KEY = requiredEnv(
   'NEXT_PUBLIC_GOOGLE_PLACES_API_KEY',
 )
 
+type AutocompletePrediction = Pick<
+  google.maps.places.AutocompletePrediction,
+  'description' | 'place_id'
+>
+
 export function PlacesAutocomplete(
   props: {
-    value: google.maps.places.AutocompletePrediction
-    onChange: (val: google.maps.places.AutocompletePrediction | null) => void
+    value: AutocompletePrediction | null
+    onChange: (val: AutocompletePrediction | null) => void
   } & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange' | 'type'>,
 ) {
   const { value: propsValue, onChange: propsOnChange, ...inputProps } = props
@@ -36,15 +42,19 @@ export function PlacesAutocomplete(
       init()
     }
   }, [scriptStatus])
-  console.log({ scriptStatus, ready, value, data })
   return (
     <Combobox
+      isLoading={!ready}
       inputValue={value}
       onChangeInputValue={setValue}
       value={props.value}
       onChange={props.onChange}
       formatPopoverTrigger={val => (
-        <Input value={val?.description || ''} placeholder="select a location" />
+        <Input
+          className={cn(val || 'text-gray-500')}
+          value={val?.description || 'select a location'}
+          placeholder="select a location"
+        />
       )}
       options={data}
       getOptionLabel={val => val.description}

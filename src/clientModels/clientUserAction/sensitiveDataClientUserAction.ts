@@ -55,8 +55,10 @@ type SensitiveDataClientUserActionCall = Pick<UserActionCall, 'recipientPhoneNum
 }
 type SensitiveDataClientUserActionDonation = Pick<
   UserActionDonation,
-  'amount' | 'amountCurrencyCode' | 'amountUsd' | 'recipient'
+  'amountCurrencyCode' | 'recipient'
 > & {
+  amount: number
+  amountUsd: number
   actionType: typeof UserActionType.DONATION
 }
 type SensitiveDataClientUserActionNFTMint = {
@@ -140,9 +142,9 @@ export const getSensitiveDataClientUserAction = ({
         'userActionDonation',
       )
       const donationFields: SensitiveDataClientUserActionDonation = {
-        amount,
+        amount: amount.toNumber(),
+        amountUsd: amountUsd.toNumber(),
         amountCurrencyCode,
-        amountUsd,
         actionType,
         recipient,
       }

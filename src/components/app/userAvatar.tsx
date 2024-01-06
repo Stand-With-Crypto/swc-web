@@ -1,4 +1,5 @@
 import { ClientUser } from '@/clientModels/clientUser/clientUser'
+import { ClientUserCryptoAddress } from '@/clientModels/clientUser/clientUserCryptoAddress'
 import { NextImage } from '@/components/ui/image'
 import { ImageAvatarProps } from '@/components/ui/imageAvatar'
 
@@ -17,10 +18,10 @@ const Container = ({ children }: { children: React.ReactNode }) => (
   <div className="overflow-hidden rounded-full">{children}</div>
 )
 
-// TODO support ENS images
+// TODO support ENS images and person name
 export const UserAvatar: React.FC<
   {
-    user: ClientUser
+    user: Pick<ClientUser, 'isPubliclyVisible' | 'cryptoAddress'>
   } & Pick<ImageAvatarProps, 'size' | 'className'>
 > = ({ user, size, ...props }) => {
   if (!user.isPubliclyVisible || !user.cryptoAddress) {

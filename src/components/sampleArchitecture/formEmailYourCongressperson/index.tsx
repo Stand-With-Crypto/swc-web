@@ -18,7 +18,7 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
 import { zodEmailYourCongressperson } from '@/validation/zodEmailYourCongressperson'
-import { triggerEmailYourCongressPerson } from '@/actions/sampleArchitecture/triggerEmailYourCongressPerson'
+import { actionEmailYourCongressPerson } from '@/actions/sampleArchitecture/actionEmailYourCongressPerson'
 import { GenericErrorFormValues, triggerServerActionForForm } from '@/utils/web/formUtils'
 
 const DEFAULT_MESSAGE = `The House Financial Services Committee and the House Agriculture Committee in the U.S. House of Representatives passed historic, bipartisan legislation in July. I am asking you to support the bill when it comes to the floor for a full House vote.
@@ -48,7 +48,7 @@ export default function FormEmailYourCongressperson() {
       <form
         onSubmit={form.handleSubmit(values =>
           triggerServerActionForForm({ form, formName: FORM_NAME }, () =>
-            triggerEmailYourCongressPerson(values),
+            actionEmailYourCongressPerson(values),
           ),
         )}
         className="space-y-8"

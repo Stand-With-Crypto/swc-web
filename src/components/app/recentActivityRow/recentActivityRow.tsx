@@ -29,6 +29,7 @@ import { useIsMobile } from '@/hooks/useIsMobile'
 interface RecentActivityRowProps {
   action: ClientUserAction & { user: ClientUser }
   locale: SupportedLocale
+  disableHover?: boolean
 }
 
 function RecentActivityRowBase({
@@ -36,6 +37,7 @@ function RecentActivityRowBase({
   action,
   children,
   onFocusContent,
+  disableHover,
 }: RecentActivityRowProps & { children: React.ReactNode; onFocusContent?: () => React.ReactNode }) {
   const [hasFocus, setHasFocus] = React.useState(false)
   const isMobile = useIsMobile({ defaultState: true })
@@ -43,8 +45,8 @@ function RecentActivityRowBase({
     <div
       // added min height to prevent height shifting on hover
       className="flex min-h-[41px] items-center justify-between gap-5"
-      onMouseEnter={() => isMobile || setHasFocus(true)}
-      onMouseLeave={() => isMobile || setHasFocus(false)}
+      onMouseEnter={() => disableHover || isMobile || setHasFocus(true)}
+      onMouseLeave={() => disableHover || isMobile || setHasFocus(false)}
     >
       <div className="flex items-center gap-2">
         <div>
@@ -101,7 +103,12 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
         const getTypeDisplayText = () => {
           switch (action.optInType) {
             case UserActionOptInType.SWC_SIGN_UP:
-              return 'joined Stand With Crypto'
+              return (
+                <>
+                  joined <span className="hidden sm:inline">Stand With Crypto</span>
+                  <span className="sm:hidden">SWC</span>
+                </>
+              )
           }
         }
         return {
@@ -244,5 +251,12 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
       fallback: 'helped crypto',
     })
   }
-  return <RecentActivityRowBase action={action} locale={locale} {...getActionSpecificProps()} />
+  return (
+    <RecentActivityRowBase
+      disableHover={props.disableHover}
+      action={action}
+      locale={locale}
+      {...getActionSpecificProps()}
+    />
+  )
 }

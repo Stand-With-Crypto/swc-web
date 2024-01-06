@@ -21,6 +21,8 @@ import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { Suspense } from 'react'
 import { LazyUpdateUserProfileForm } from '@/components/app/updateUserProfileForm/lazyLoad'
+import { UpdateUserProfileFormDialog } from '@/components/app/updateUserProfileForm/dialog'
+import { hasAllFormFieldsOnUserForUpdateUserProfileForm } from '@/components/app/updateUserProfileForm/hasAllFormFieldsOnUser'
 
 export const dynamic = 'force-dynamic'
 
@@ -62,22 +64,14 @@ export default async function Profile({ params }: Props) {
           </div>
         </div>
         <div>
-          <Dialog>
-            <DialogTrigger asChild>
-              {/*  TODO conditional text */}
-              <Button>Finish profile</Button>
-            </DialogTrigger>
-            <DialogContent className="max-w-3xl">
-              <Suspense>
-                <LazyUpdateUserProfileForm
-                  defaultValues={{ fullName: '', address: undefined, phoneNumber: '', email: '' }}
-                />
-              </Suspense>
-            </DialogContent>
-          </Dialog>
+          <UpdateUserProfileFormDialog user={user} locale={locale}>
+            <Button>
+              {hasAllFormFieldsOnUserForUpdateUserProfileForm(user) ? 'Edit' : 'Finish'} profile
+            </Button>
+          </UpdateUserProfileFormDialog>
         </div>
       </div>
-      <div className="mb-14 grid grid-cols-4 rounded-lg bg-blue-50 p-6 text-center">
+      <div className="mb-14 grid grid-cols-4 rounded-lg bg-blue-50 p-3 text-center sm:p-6">
         {[
           {
             label: 'Actions',
@@ -91,7 +85,7 @@ export default async function Profile({ params }: Props) {
                 currencyCode={SupportedFiatCurrencyCodes.USD}
                 amount={_.sumBy(userActions, x => {
                   if (x.actionType === UserActionType.DONATION) {
-                    return x.amountUsd.toNumber()
+                    return x.amountUsd
                   }
                   return 0
                 })}
@@ -113,8 +107,8 @@ export default async function Profile({ params }: Props) {
           },
         ].map(({ label, value }) => (
           <div key={label}>
-            <div className="text-gray-700">{label}</div>
-            <div className="text-xl font-bold">{value}</div>
+            <div className="text-xs text-gray-700 sm:text-sm md:text-base">{label}</div>
+            <div className="text-sm font-bold sm:text-base md:text-xl">{value}</div>
           </div>
         ))}
       </div>

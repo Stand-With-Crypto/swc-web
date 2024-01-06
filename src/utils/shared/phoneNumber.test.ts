@@ -1,4 +1,4 @@
-import { normalizePhoneNumber } from '@/utils/shared/normalizePhoneNumber'
+import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
 import _ from 'lodash'
 
 it('Correctly parses phone number strings', () => {
@@ -15,4 +15,8 @@ it('Correctly parses phone number strings', () => {
       ].map(normalizePhoneNumber),
     ),
   ).toEqual(['+12228883333'])
+
+  expect(_.uniq(['222 888 3333 x61835', '222 888 3333x61835'].map(normalizePhoneNumber))).toEqual([
+    '+12228883333x61835',
+  ])
 })

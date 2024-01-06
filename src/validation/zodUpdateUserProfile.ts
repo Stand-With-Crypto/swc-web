@@ -1,17 +1,24 @@
+import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
 import { zodOptionalEmptyString } from '@/validation/utils'
-import { string, object, union, any } from 'zod'
+import { zodAddress } from '@/validation/zodAddress'
+import { zodGooglePlacesAutocompletePrediction } from '@/validation/zodGooglePlacesAutocompletePrediction'
+import { string, object, union, any, boolean } from 'zod'
 
-// you don't want to use z. syntax in client-side components because it messes with tree shaking
-export const zodUpdateUserProfile = object({
+const base = object({
   fullName: zodOptionalEmptyString(
-    string().min(1, 'Please enter your full name').max(100, 'Please enter your full name'),
+    string().trim().min(1, 'Please enter your full name').max(100, 'Please enter your full name'),
   ),
-  email: zodOptionalEmptyString(string().email('Please enter a valid email address')),
-  phoneNumber: zodOptionalEmptyString(
-    string()
-      .min(10, 'Please enter a valid phone number')
-      .max(10, 'Please enter a valid phone number'),
+  email: zodOptionalEmptyString(
+    string().trim().email('Please enter a valid email address').toLowerCase(),
   ),
-  // TODO - replace with google places structure
-  address: any(),
+  phoneNumber: zodOptionalEmptyString(string()).transform(str => str && normalizePhoneNumber(str)),
+  isPubliclyVisible: boolean(),
+})
+
+export const zodUpdateUserProfileFormFields = base.extend({
+  address: zodGooglePlacesAutocompletePrediction.nullable(),
+})
+
+export const zodUpdateUserProfileFormAction = base.extend({
+  address: zodAddress.nullable(),
 })

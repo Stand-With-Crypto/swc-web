@@ -3,9 +3,7 @@ import 'server-only'
 import { z } from 'zod'
 import { zodEmailYourCongressperson } from '@/validation/zodEmailYourCongressperson'
 
-// TODO error logging software
-
-export async function triggerEmailYourCongressPerson(
+export async function actionEmailYourCongressPerson(
   data: z.infer<typeof zodEmailYourCongressperson>,
 ) {
   const validatedFields = zodEmailYourCongressperson

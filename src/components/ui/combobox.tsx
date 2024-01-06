@@ -27,6 +27,7 @@ export interface ComboBoxProps<T>
   getOptionLabel: (val: T) => string
   getOptionKey: (val: T) => string
   popoverContentClassName?: string
+  isLoading: boolean
 }
 
 export function Combobox<T>({
@@ -37,6 +38,7 @@ export function Combobox<T>({
   getOptionLabel,
   getOptionKey,
   popoverContentClassName,
+  isLoading,
   ...inputProps
 }: ComboBoxProps<T>) {
   const [open, setOpen] = React.useState(false)
@@ -46,10 +48,18 @@ export function Combobox<T>({
       <Drawer open={open} onOpenChange={setOpen}>
         <DrawerTrigger asChild>{formatPopoverTrigger(value)}</DrawerTrigger>
         <DrawerContent>
-          <div className="mt-4 border-t">
+          <div className="mt-4 min-h-[260px] border-t">
             <StatusList
               setOpen={setOpen}
-              {...{ value, onChange, options, getOptionLabel, getOptionKey, ...inputProps }}
+              {...{
+                value,
+                isLoading,
+                onChange,
+                options,
+                getOptionLabel,
+                getOptionKey,
+                ...inputProps,
+              }}
             />
           </div>
         </DrawerContent>
@@ -67,7 +77,7 @@ export function Combobox<T>({
       >
         <StatusList
           setOpen={setOpen}
-          {...{ value, onChange, options, getOptionLabel, getOptionKey, ...inputProps }}
+          {...{ value, isLoading, onChange, options, getOptionLabel, getOptionKey, ...inputProps }}
         />
       </PopoverContent>
     </Popover>
@@ -83,6 +93,7 @@ function StatusList<T>({
   value,
   inputValue,
   onChangeInputValue,
+  isLoading,
   ...inputProps
 }: {
   setOpen: (open: boolean) => void
@@ -95,6 +106,7 @@ function StatusList<T>({
   | 'onChange'
   | 'getOptionLabel'
   | 'getOptionKey'
+  | 'isLoading'
 >) {
   return (
     <Command shouldFilter={false}>
@@ -105,18 +117,18 @@ function StatusList<T>({
         {...inputProps}
       />
       <CommandList>
-        <CommandEmpty>No results found.</CommandEmpty>
+        {!options.length && (
+          <p className={cn('py-6 text-center text-sm', isLoading && 'invisible')}>
+            {inputValue ? 'No results found.' : 'Enter address to see results'}
+          </p>
+        )}
         <CommandGroup>
           {options.map(option => {
             const key = getOptionKey(option)
-            console.log({
-              key,
-              value,
-              getOptionKey: value && getOptionKey(value),
-              foo: value && getOptionKey(value) === key,
-            })
+            const isSelected = value && getOptionKey(value) === key
             return (
               <CommandItem
+                className={cn(isSelected && 'border border-blue-500')}
                 key={key}
                 value={key}
                 onSelect={() => {
