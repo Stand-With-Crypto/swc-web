@@ -2,10 +2,10 @@
 
 import { UserActionRowCTA } from '@/components/app/userActionRowCTA'
 import { USER_ACTION_ROW_CTA_INFO } from '@/components/app/userActionRowCTA/userActionRowCTAConstants'
-import { usePerformedUserActionTypes } from '@/hooks/usePerformedUserActionTypes'
+import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
 
 export function ClientAuthUserActionRowCTAs() {
-  const { data } = usePerformedUserActionTypes()
+  const { data } = useApiResponseForUserPerformedUserActionTypes()
   return (
     <div className="space-y-4">
       {USER_ACTION_ROW_CTA_INFO.map(({ actionType, ...rest }) => (

@@ -23,6 +23,8 @@ import {
 import { maybeSetUserSessionIdOnClient } from '@/utils/web/clientUserSessionId'
 import { usePathname } from 'next/navigation'
 import { useEffect } from 'react'
+import { LocaleContext } from '@/hooks/useLocale'
+import { SupportedLocale } from '@/intl/locales'
 
 const NEXT_PUBLIC_THIRDWEB_CLIENT_ID = requiredEnv(
   process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID,
@@ -57,29 +59,37 @@ const InitialOrchestration = () => {
 }
 
 // This component includes all top level client-side logic
-export function TopLevelClientLogic({ children }: { children: React.ReactNode }) {
+export function TopLevelClientLogic({
+  children,
+  locale,
+}: {
+  children: React.ReactNode
+  locale: SupportedLocale
+}) {
   return (
-    <ThirdwebProvider
-      locale={en()}
-      activeChain={Base}
-      supportedWallets={[
-        metamaskWallet(),
-        coinbaseWallet({ recommended: true }),
-        walletConnect(),
-        embeddedWallet({
-          auth: {
-            options: ['google', 'email'],
-          },
-        }),
-      ]}
-      clientId={NEXT_PUBLIC_THIRDWEB_CLIENT_ID}
-      authConfig={{
-        domain: NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN,
-        authUrl: '/api/auth',
-      }}
-    >
-      <InitialOrchestration />
-      {children}
-    </ThirdwebProvider>
+    <LocaleContext.Provider value={locale}>
+      <ThirdwebProvider
+        locale={en()}
+        activeChain={Base}
+        supportedWallets={[
+          metamaskWallet(),
+          coinbaseWallet({ recommended: true }),
+          walletConnect(),
+          embeddedWallet({
+            auth: {
+              options: ['google', 'email'],
+            },
+          }),
+        ]}
+        clientId={NEXT_PUBLIC_THIRDWEB_CLIENT_ID}
+        authConfig={{
+          domain: NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN,
+          authUrl: '/api/auth',
+        }}
+      >
+        <InitialOrchestration />
+        {children}
+      </ThirdwebProvider>
+    </LocaleContext.Provider>
   )
 }

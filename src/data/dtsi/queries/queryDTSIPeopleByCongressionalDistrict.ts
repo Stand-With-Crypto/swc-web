@@ -3,6 +3,7 @@ import { fragmentDTSIPersonCard } from '@/data/dtsi/fragments/fragmentDTSIPerson
 import {
   DTSI_PeopleByUsCongressionalDistrictQuery,
   DTSI_PeopleByUsCongressionalDistrictQueryVariables,
+  DTSI_PersonRoleCategory,
 } from '@/data/dtsi/generated'
 import * as Sentry from '@sentry/nextjs'
 
@@ -31,5 +32,10 @@ export const queryDTSIPeopleByCongressionalDistrict = async (config: {
     stateCode: config.stateCode,
     congressionalDistrict: config.districtNumber,
   })
-  return data.peopleByUSCongressionalDistrict
+  // TODO now that we can support multiple reps being returned, we should build the UX for it
+  const person = data.peopleByUSCongressionalDistrict.find(
+    x => x.primaryRole?.roleCategory === DTSI_PersonRoleCategory.CONGRESS,
+  )
+
+  return person
 }

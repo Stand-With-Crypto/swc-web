@@ -59,7 +59,7 @@ export default async function Profile({ params }: Props) {
           </div>
         </div>
         <div>
-          <UpdateUserProfileFormDialog user={user} locale={locale}>
+          <UpdateUserProfileFormDialog user={user}>
             {hasAllFormFieldsOnUserForUpdateUserProfileForm(user) ? (
               <Button variant="secondary">Edit your profile</Button>
             ) : (

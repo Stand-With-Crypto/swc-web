@@ -57,6 +57,28 @@ export const convertDTSIStanceScoreToCryptoSupportLanguage = (entity: EntityWith
   return 'Strongly against'
 }
 
+export const convertDTSIStanceScoreToCryptoSupportLanguageSentence = (
+  entity: EntityWithStanceScore,
+) => {
+  const score = getScore(entity)
+  if (!score) {
+    return 'Pending stance on crypto'
+  }
+  if (score >= 90) {
+    return 'Strongly supportive of crypto'
+  }
+  if (score >= 70) {
+    return 'Supportive of crypto'
+  }
+  if (score >= 50) {
+    return 'Neutral on crypto'
+  }
+  if (score >= 30) {
+    return 'Against crypto'
+  }
+  return 'Strongly against crypto'
+}
+
 export const convertDTSIStanceScoreToTextColorClass = (entity: EntityWithStanceScore) => {
   const score = getScore(entity)
   if (!score) {

@@ -1,12 +1,21 @@
 'use client'
 import { ClientUser } from '@/clientModels/clientUser/clientUser'
 import { ClientUserAction } from '@/clientModels/clientUserAction/clientUserAction'
+import { LazyUserActionFormCallCongressperson } from '@/components/app/userActionFormCallCongressperson/lazyLoad'
+import { LazyUserActionFormDonate } from '@/components/app/userActionFormDonate/lazyLoad'
+import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
+import { LazyUserActionFormEmailCongressperson } from '@/components/app/userActionFormEmailCongressperson/lazyLoad'
+import { LazyUserActionFormNFTMint } from '@/components/app/userActionFormNFTMint/lazyLoad'
 import { LazyUserActionFormOptInSWC } from '@/components/app/userActionFormOptInSWC/lazyLoad'
+import { LazyUserActionFormTweet } from '@/components/app/userActionFormTweet/lazyLoad'
 import { UserAvatar } from '@/components/app/userAvatar'
 import { Button } from '@/components/ui/button'
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
 import { FormattedRelativeDatetime } from '@/components/ui/formattedRelativeDatetime'
 import { DTSIPersonForUserActions } from '@/data/dtsi/queries/queryDTSIPeopleBySlugForUserActions'
+import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
+import { useIsMobile } from '@/hooks/useIsMobile'
 import { SupportedLocale } from '@/intl/locales'
 import {
   dtsiPersonFullName,
@@ -16,15 +25,7 @@ import { gracefullyError } from '@/utils/shared/gracefullyError'
 import { formatDonationOrganization } from '@/utils/web/donationUtils'
 import { getUserDisplayName } from '@/utils/web/userUtils'
 import { UserActionOptInType, UserActionType } from '@prisma/client'
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import React, { Suspense } from 'react'
-import { usePerformedUserActionTypes } from '@/hooks/usePerformedUserActionTypes'
-import { LazyUserActionFormCallCongressperson } from '@/components/app/userActionFormCallCongressperson/lazyLoad'
-import { LazyUserActionFormDonate } from '@/components/app/userActionFormDonate/lazyLoad'
-import { LazyUserActionFormEmailCongressperson } from '@/components/app/userActionFormEmailCongressperson/lazyLoad'
-import { LazyUserActionFormNFTMint } from '@/components/app/userActionFormNFTMint/lazyLoad'
-import { LazyUserActionFormTweet } from '@/components/app/userActionFormTweet/lazyLoad'
-import { useIsMobile } from '@/hooks/useIsMobile'
 
 interface RecentActivityRowProps {
   action: ClientUserAction & { user: ClientUser }
@@ -95,7 +96,7 @@ const formatDTSIPerson = (person: DTSIPersonForUserActions) => {
 export function RecentActivityRow(props: RecentActivityRowProps) {
   const { action, locale } = props
   const userDisplayName = getUserDisplayName(props.action.user)
-  const { data } = usePerformedUserActionTypes()
+  const { data } = useApiResponseForUserPerformedUserActionTypes()
   const hasSignedUp = data?.performedUserActionTypes.includes(UserActionType.OPT_IN)
   const getActionSpecificProps = () => {
     switch (action.actionType) {
@@ -187,16 +188,9 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
       case UserActionType.EMAIL:
         return {
           onFocusContent: () => (
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button>Email yours</Button>
-              </DialogTrigger>
-              <DialogContent>
-                <Suspense>
-                  <LazyUserActionFormEmailCongressperson />
-                </Suspense>
-              </DialogContent>
-            </Dialog>
+            <UserActionFormEmailCongresspersonDialog>
+              <Button>Email yours</Button>
+            </UserActionFormEmailCongresspersonDialog>
           ),
           children: (
             <>

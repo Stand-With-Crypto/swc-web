@@ -1,29 +1,24 @@
-import { appRouterGetAuthUser } from '@/utils/server/appRouterGetAuthUser'
-import { prismaClient } from '@/utils/server/prismaClient'
-import { ThirdwebAuthUser } from '@thirdweb-dev/auth/next'
+import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
 import _ from 'lodash'
 import { NextResponse } from 'next/server'
 import 'server-only'
 
 export const dynamic = 'force-dynamic'
 
-export async function getPerformedUserActionTypes(authUser: ThirdwebAuthUser) {
-  const userActions = await prismaClient.userAction.findMany({
-    where: { user: { userCryptoAddress: { address: authUser.address } } },
-    select: { id: true, actionType: true },
+export async function apiResponseForUserPerformedUserActionTypes() {
+  const { user } = await getMaybeUserAndMethodOfMatch({
+    include: {
+      userActions: {
+        select: { id: true, actionType: true },
+      },
+    },
   })
 
-  const performedUserActionTypes = _.uniq(userActions.map(({ actionType }) => actionType))
+  const performedUserActionTypes = _.uniq(user?.userActions.map(({ actionType }) => actionType))
   return { performedUserActionTypes }
 }
 
 export async function GET() {
-  const authUser = await appRouterGetAuthUser()
-
-  if (!authUser) {
-    return NextResponse.json({ authenticated: false })
-  }
-
-  const response = await getPerformedUserActionTypes(authUser)
+  const response = await apiResponseForUserPerformedUserActionTypes()
   return NextResponse.json(response)
 }

@@ -20,6 +20,7 @@ import { PlacesAutocomplete } from '@/components/ui/googlePlacesSelect'
 import { Input } from '@/components/ui/input'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
+import { useLocale } from '@/hooks/useLocale'
 import { SupportedLocale } from '@/intl/locales'
 import { GenericErrorFormValues, triggerServerActionForForm } from '@/utils/web/formUtils'
 import { formatGooglePlacesResultToAddress } from '@/utils/web/formatGooglePlacesResultToAddress'
@@ -39,21 +40,20 @@ type FormValues = z.infer<typeof zodUpdateUserProfileFormFields> & GenericErrorF
 
 export function UpdateUserProfileForm({
   user,
-  locale,
   onCancel,
   onSuccess,
 }: {
   user: SensitiveDataClientUser & { address: ClientAddress | null }
-  locale: SupportedLocale
   onCancel: () => void
   onSuccess: () => void
 }) {
+  const locale = useLocale()
   const router = useRouter()
   const form = useForm<FormValues>({
     resolver: zodResolver(zodUpdateUserProfileFormFields),
     defaultValues: {
       fullName: user.fullName,
-      email: user.primaryEmailAddress?.address || '',
+      email: user.primaryUserEmailAddress?.address || '',
       phoneNumber: user.phoneNumber,
       isPubliclyVisible: user.isPubliclyVisible,
       address: user.address
@@ -105,6 +105,7 @@ export function UpdateUserProfileForm({
             if (result.status === 'success') {
               router.refresh()
               toast.success('Profile updated', { duration: 5000 })
+              onSuccess()
             }
           })}
           className="space-y-8"

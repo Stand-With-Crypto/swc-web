@@ -1,11 +1,14 @@
+'use client'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { NextImage } from '@/components/ui/image'
+import { Skeleton } from '@/components/ui/skeleton'
+import { useDialog } from '@/hooks/useDialog'
+import { SupportedLocale } from '@/intl/locales'
 import { cn } from '@/utils/web/cn'
 import { UserActionType } from '@prisma/client'
 import { ChevronRight } from 'lucide-react'
-import React from 'react'
+import React, { ComponentType, Suspense } from 'react'
 import { LazyExoticComponent } from 'react'
-import NextImageComponent, { ImageProps as NextImageProps } from 'next/image'
 
 export interface UserActionRowCTAProps {
   actionType: UserActionType
@@ -14,7 +17,9 @@ export interface UserActionRowCTAProps {
   text: string
   subtext: string
   canBeTriggeredMultipleTimes: boolean
-  lazyRenderedForm: LazyExoticComponent<() => JSX.Element>
+  lazyRenderedForm: LazyExoticComponent<
+    ComponentType<{ onCancel: () => void; onSuccess: () => void }>
+  >
 }
 
 const UserActionRowCTAButton = React.forwardRef<
@@ -95,13 +100,19 @@ const UserActionRowCTAButton = React.forwardRef<
 UserActionRowCTAButton.displayName = 'UserActionRowCTAButton'
 
 export function UserActionRowCTA(props: UserActionRowCTAProps) {
+  const dialogProps = useDialog(false)
   return (
     <Dialog>
       <DialogTrigger asChild>
         <UserActionRowCTAButton {...props} />
       </DialogTrigger>
-      <DialogContent>
-        <props.lazyRenderedForm />
+      <DialogContent className="max-w-3xl md:px-12 md:py-16">
+        <Suspense fallback={<Skeleton className="h-80 w-full" />}>
+          <props.lazyRenderedForm
+            onCancel={() => dialogProps.onOpenChange(false)}
+            onSuccess={() => dialogProps.onOpenChange(false)}
+          />
+        </Suspense>
       </DialogContent>
     </Dialog>
   )

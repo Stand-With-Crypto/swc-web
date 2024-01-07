@@ -1,4 +1,4 @@
-import { zodAddress } from '@/validation/zodAddress'
+import { zodAddress } from '@/validation/fields/zodAddress'
 import { infer, z } from 'zod'
 
 export const formatGooglePlacesResultToAddress = (

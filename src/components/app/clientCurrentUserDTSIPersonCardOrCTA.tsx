@@ -29,13 +29,10 @@ export function ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: Suppo
       </Button>
     )
   }
-  if ('notFoundReason' in res.data || !res.data[0]) {
+  if ('notFoundReason' in res.data) {
     return null
   }
-  // TODO now that we can support multiple reps being returned, we should build the UX for it
-  const person =
-    res.data.find(x => x.primaryRole?.roleCategory === DTSI_PersonRoleCategory.CONGRESS) ||
-    res.data[0]
+  const person = res.data
   return (
     <div className="flex flex-col items-center justify-between gap-4 rounded-md border bg-blue-50 p-5 text-left md:flex-row md:gap-10">
       <div className="flex flex-row items-center gap-4 text-sm md:text-base">
