@@ -37,6 +37,8 @@ Below is a non-exhaustive list of coding conventions that we try to follow. This
 - Unless there's a specific reason not to (like you're sharing a large complex string of classes between multiple UI elements), prefer to write your tailwind classes inline, rather than defining them elsewhere and referencing via variable.
   - if you are defining tailwind classes outside a className prop, make sure you wrap them in `cn()` or `twNoop()` to ensure our linters and IDE plugins know the string is composed of tailwind classes
 - when developing new pages, add a new folder to `src/components/app/pageNameOfYourPage` that contains all page-specific UI files. For example, the "About" page components would be in `src/components/app/pageAbout`
+- When working on a page that dynamically fetches data before rendering, make sure to add a [loading.tsx page](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming) to optimistically show users a skeleton of the data they're fetching
+  - to rapidly build a skeleton, copy paste the main, above the fold, UX of the dynamic page and wrap the core component text with `<Skeleton />` components
 
 ## Backend Development
 

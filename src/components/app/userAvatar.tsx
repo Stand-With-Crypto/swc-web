@@ -1,5 +1,4 @@
 import { ClientUser } from '@/clientModels/clientUser/clientUser'
-import { ClientUserCryptoAddress } from '@/clientModels/clientUser/clientUserCryptoAddress'
 import { SensitiveDataClientUser } from '@/clientModels/clientUser/sensitiveDataClientUser'
 import { NextImage } from '@/components/ui/image'
 import { ImageAvatarProps } from '@/components/ui/imageAvatar'
