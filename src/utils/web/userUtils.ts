@@ -1,14 +1,26 @@
 import { ClientUser } from '@/clientModels/clientUser/clientUser'
+import { SensitiveDataClientUser } from '@/clientModels/clientUser/sensitiveDataClientUser'
 
-export const getUserDisplayName = (userCryptoAddress: ClientUser | null) => {
-  if (userCryptoAddress?.name) {
-    return userCryptoAddress.name
+export const getUserDisplayName = (user: ClientUser | null) => {
+  // TODO prioritize ENS first
+  if (user?.isPubliclyVisible === false) {
+    return 'Anonymous'
   }
-  if (userCryptoAddress?.cryptoAddress) {
-    return `${userCryptoAddress.cryptoAddress.address.slice(
-      0,
-      2,
-    )}...${userCryptoAddress.cryptoAddress.address.slice(-5)}`
+  if (user?.fullName) {
+    return user.fullName
+  }
+  if (user?.cryptoAddress) {
+    return `${user.cryptoAddress.address.slice(0, 2)}...${user.cryptoAddress.address.slice(-5)}`
+  }
+  return 'Anonymous'
+}
+
+export const getSensitiveDataUserDisplayName = (user: SensitiveDataClientUser | null) => {
+  if (user?.fullName) {
+    return user.fullName
+  }
+  if (user?.cryptoAddress) {
+    return `${user.cryptoAddress.address.slice(0, 2)}...${user.cryptoAddress.address.slice(-5)}`
   }
   return 'Anonymous'
 }

@@ -26,17 +26,28 @@ export async function triggerServerActionForForm<
       trackFormSubmitErrored(formName, { 'Error Type': 'Unknown' })
       form.setError(GENERIC_FORM_ERROR_KEY, { message: error })
       Sentry.captureMessage(`triggerServerActionForForm returned unexpected form response`, {
-        tags: { domain: 'triggerServerActionForForm' },
+        tags: { formName, domain: 'triggerServerActionForForm', path: 'Unexpected' },
         extra: { error, formName },
       })
     } else if (error instanceof FetchReqError) {
       const formattedErrorStatus = formatErrorStatus(error.response.status)
       trackFormSubmitErrored(formName, { 'Error Type': error.response.status })
       form.setError(GENERIC_FORM_ERROR_KEY, { message: formattedErrorStatus })
+      Sentry.captureException(error, {
+        fingerprint: [formName, 'FetchReqError', `${error.response.status}`],
+        tags: { formName, domain: 'triggerServerActionForForm', path: 'FetchReqError' },
+        extra: { error, formName },
+      })
     } else {
       trackFormSubmitErrored(formName, { 'Error Type': 'Unexpected' })
       form.setError(GENERIC_FORM_ERROR_KEY, { message: error.message })
+      Sentry.captureException(error, {
+        fingerprint: [formName, 'Error', error.message],
+        tags: { formName, domain: 'triggerServerActionForForm', path: 'Error' },
+        extra: { error, formName },
+      })
     }
+    return { status: 'error' as const }
   })
   if (response && 'errors' in response && response.errors) {
     trackFormSubmitErrored(formName, { 'Error Type': 'Validation' })
@@ -46,7 +57,13 @@ export async function triggerServerActionForForm<
         message: val.join('. '),
       })
     })
+    Sentry.captureMessage('Field errors returned from action', {
+      tags: { formName, domain: 'triggerServerActionForForm', path: 'Error' },
+      extra: { response, formName },
+    })
+    return { status: 'error' as const }
   } else {
     trackFormSubmitSucceeded(formName)
+    return { status: 'success' as const, response }
   }
 }

@@ -22,7 +22,7 @@ export const dtsiPersonMockResolver = (): Partial<DTSI_PersonResolvers> => {
     nameSuffix: () => faker.person.suffix(),
     nameUniquenessModifier: () => '',
     officialUrl: () => faker.internet.url(),
-    phoneNumber: () => faker.phone.number(),
+    phoneNumber: () => fakerFields.phoneNumber(),
     politicalAffiliation: () => '',
     politicalAffiliationCategory: () =>
       faker.helpers.arrayElement(Object.values(DTSI_PersonPoliticalAffiliationCategory)),

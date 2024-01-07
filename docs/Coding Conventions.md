@@ -37,6 +37,8 @@ Below is a non-exhaustive list of coding conventions that we try to follow. This
 - Unless there's a specific reason not to (like you're sharing a large complex string of classes between multiple UI elements), prefer to write your tailwind classes inline, rather than defining them elsewhere and referencing via variable.
   - if you are defining tailwind classes outside a className prop, make sure you wrap them in `cn()` or `twNoop()` to ensure our linters and IDE plugins know the string is composed of tailwind classes
 - when developing new pages, add a new folder to `src/components/app/pageNameOfYourPage` that contains all page-specific UI files. For example, the "About" page components would be in `src/components/app/pageAbout`
+- When working on a page that dynamically fetches data before rendering, make sure to add a [loading.tsx page](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming) to optimistically show users a skeleton of the data they're fetching
+  - to rapidly build a skeleton, copy paste the main, above the fold, UX of the dynamic page and wrap the core component text with `<Skeleton />` components
 
 ## Backend Development
 
@@ -65,3 +67,4 @@ Below is a non-exhaustive list of coding conventions that we try to follow. This
   - Examples of when to use the Page Router include when dealing with libraries that have not been upgraded to fully support the App Router yet
 - Don't use Client Components unless you need client-side interactivity. When developing larger Client Components, consider if some of the logic could be decoupled in to a Server Component for the non-dynamic portions. Server Components have a much smaller bundle size footprint.
 - If you need client-side data fetching in addition to or instead of rendering via RSCs ("Load More" actions, realtime updating data, user-specific data being fetch on a page you'd like to be largely cached, etc), use the [swr](https://swr.vercel.app/) library from Vercel unless product requirements demand something more custom
+- Use [server actions](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations) for mutations unless product requirements prohibit it. Place all actions in the `src/actions` folder and prefix their function names with "action".

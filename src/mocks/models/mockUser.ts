@@ -1,6 +1,6 @@
 import { fakerFields } from '@/mocks/fakerUtils'
 import { mockCommonDatetimes } from '@/mocks/mockCommonDatetimes'
-import { normalizePhoneNumber } from '@/utils/shared/normalizePhoneNumber'
+import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
 import { faker } from '@faker-js/faker'
 import { User } from '@prisma/client'
 
@@ -11,9 +11,9 @@ export function mockUser(): User {
     id: fakerFields.id(),
     primaryUserEmailAddressId: fakerFields.id(),
     sampleDatabaseIncrement: 0,
-    name: withData ? faker.person.fullName() : '',
+    fullName: withData ? faker.person.fullName() : '',
     isPubliclyVisible: faker.helpers.maybe(() => true, { probability: 0.9 }) || false,
-    phoneNumber: withData ? normalizePhoneNumber(faker.phone.number()) : '',
+    phoneNumber: withData ? fakerFields.phoneNumber() : '',
     addressId: withData ? fakerFields.id() : null,
   }
 }

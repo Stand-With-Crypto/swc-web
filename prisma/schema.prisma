@@ -20,18 +20,26 @@ model AuthenticationNonce {
   @@map("authentication_nonce")
 }
 
-// TODO determine how google places constructs addresses and map this field to that structure to ensure we're internationalizing the way we persist addresses
+// In the interest of preparing the site for internationalization
+// we'll want to store all addresses in a normalized format that applies globally
+// this is why we don't use more US-centric names like "state", "addressLine1", etc
+// these names are based on the google places api
 model Address {
-  id              String   @id @default(uuid())
-  googlePlacesId  String?  @map("google_places_id")
-  streetAddress1  String   @map("street_address_1")
-  streetAddress2  String   @default("") @map("street_address_2")
-  city            String
-  state           String
-  zipCode         String   @map("zip_code")
-  countryCode     String   @map("country_code")
-  datetimeUpdated DateTime @updatedAt @map("datetime_updated")
-  datetimeCreated DateTime @default(now()) @map("datetime_created")
+  id                       String   @id @default(uuid())
+  // For now all our addresses will be persisted via google place so this is required. This may change in the future
+  googlePlaceId           String   @map("google_place_id") @unique
+  formattedDescription     String   @map("formatted_description") // We could compute this from the fields, but in the interest of matching the user selection exactly let's persist for now. ex: 123 East 86th St, Apt 13a, New York, NY 06890
+  streetNumber             String   @map("street_number") // ex: 123
+  route                    String   @map("route") // ex: East 86th St
+  subpremise               String   @map("subpremise") // ex: Apt 13a
+  locality                 String   @map("locality") // ex: Boston
+  administrativeAreaLevel1 String   @map("administrative_area_level_1") // ex: NY
+  administrativeAreaLevel2 String   @map("administrative_area_level_2") // ex: New York County (not used in US)
+  postalCode               String   @map("postal_code") // ex: 06890
+  postalCodeSuffix         String   @map("postal_code_suffix") // ex 7620
+  countryCode              String   @map("country_code")
+  datetimeUpdated          DateTime @updatedAt @map("datetime_updated")
+  datetimeCreated          DateTime @default(now()) @map("datetime_created")
 
   userActionEmails UserActionEmail[]
   users            User[]
@@ -60,7 +68,7 @@ model User {
   id                        String            @id @default(uuid())
   datetimeUpdated           DateTime          @updatedAt @map("datetime_updated")
   datetimeCreated           DateTime          @default(now()) @map("datetime_created")
-  name                      String            @default("") @map("name")
+  fullName                  String            @default("") @map("name")
   phoneNumber               String            @default("") @map("phone_number")
   address                   Address?          @relation(fields: [addressId], references: [id])
   addressId                 String?           @map("address_id")
@@ -82,8 +90,8 @@ model User {
 // A user session will only be linked to user actions on creation if a different authenticated user type (email or wallet) is not already associated with the action
 model UserSession {
   id              String   @id @default(uuid())
-  userId          String  @map("user_id")
-  user            User    @relation(fields: [userId], references: [id])
+  userId          String   @map("user_id")
+  user            User     @relation(fields: [userId], references: [id])
   datetimeUpdated DateTime @updatedAt @map("datetime_updated")
   datetimeCreated DateTime @default(now()) @map("datetime_created")
 
@@ -96,8 +104,9 @@ model UserSession {
 enum UserEmailAddressSource {
   COINBASE_AUTH
   THIRDWEB_EMBEDDED_AUTH
+  USER_ENTERED_UNVERIFIED
+  USER_ENTERED_VERIFIED
 }
-
 
 model UserEmailAddress {
   id              String                 @id @default(uuid())
@@ -139,8 +148,8 @@ model UserCryptoAddress {
 
   userActions UserAction[]
 
-  @@index([address])
   @@unique([address, cryptoNetwork])
+  @@index([address])
 }
 
 enum UserActionType {
@@ -167,7 +176,7 @@ model UserAction {
   datetimeUpdated     DateTime           @updatedAt @map("datetime_updated")
   datetimeCreated     DateTime           @default(now()) @map("datetime_created")
   // Because some actions that are not NFT_MINT can still have an nft associated with them, we want to have an optional fk constrain on all actions
-  nftMintId           String?            @map("nft_mint_id") @unique
+  nftMintId           String?            @unique @map("nft_mint_id")
   nftMint             NFTMint?           @relation(fields: [nftMintId], references: [id])
   actionType          UserActionType     @map("action_type")
 

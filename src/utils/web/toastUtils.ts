@@ -19,6 +19,7 @@ export const catchUnexpectedServerErrorAndTriggerToast = (error: unknown) => {
     )
     toast.error(GENERIC_ERROR_TITLE, {
       description: GENERIC_ERROR_DESCRIPTION,
+      duration: 5000,
     })
     return
   }
@@ -26,10 +27,12 @@ export const catchUnexpectedServerErrorAndTriggerToast = (error: unknown) => {
     const formattedErrorStatus = formatErrorStatus(error.response.status)
     toast.error(GENERIC_ERROR_TITLE, {
       description: formattedErrorStatus,
+      duration: 5000,
     })
     return
   }
   toast.error(GENERIC_ERROR_TITLE, {
     description: GENERIC_ERROR_DESCRIPTION,
+    duration: 5000,
   })
 }

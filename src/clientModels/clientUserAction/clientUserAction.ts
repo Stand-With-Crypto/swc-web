@@ -132,8 +132,8 @@ export const getClientUserAction = ({
       )
       const donationFields: ClientUserActionDonation = {
         amount: amount.toNumber(),
-        amountCurrencyCode,
         amountUsd: amountUsd.toNumber(),
+        amountCurrencyCode,
         recipient,
         actionType,
       }

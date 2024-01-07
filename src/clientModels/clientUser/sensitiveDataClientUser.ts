@@ -3,26 +3,48 @@ import {
   getClientUserCryptoAddress,
 } from '@/clientModels/clientUser/clientUserCryptoAddress'
 import { ClientModel, getClientModel } from '@/clientModels/utils'
-import { User, UserCryptoAddress } from '@prisma/client'
+import { formatPhoneNumber } from '@/utils/shared/phoneNumber'
+import { User, UserCryptoAddress, UserEmailAddress } from '@prisma/client'
 
 export type SensitiveDataClientUser = ClientModel<
-  Pick<User, 'id' | 'datetimeCreated' | 'datetimeUpdated' | 'isPubliclyVisible'> & {
-    name: string | null
+  Pick<
+    User,
+    'id' | 'datetimeCreated' | 'datetimeUpdated' | 'isPubliclyVisible' | 'fullName' | 'phoneNumber'
+  > & {
     cryptoAddress: ClientUserCryptoAddress | null
+    primaryEmailAddress: { address: string } | null
   }
 >
 
 export const getSensitiveDataClientUser = (
-  record: User & { userCryptoAddress: null | UserCryptoAddress },
+  record: User & {
+    userCryptoAddress: null | UserCryptoAddress
+    primaryUserEmailAddress: UserEmailAddress | null
+  },
 ): SensitiveDataClientUser => {
-  const { name, userCryptoAddress, id, datetimeCreated, datetimeUpdated, isPubliclyVisible } =
-    record
+  const {
+    fullName,
+    userCryptoAddress,
+    id,
+    datetimeCreated,
+    datetimeUpdated,
+    isPubliclyVisible,
+    primaryUserEmailAddress,
+    phoneNumber,
+  } = record
+
   return getClientModel({
-    name,
+    fullName,
+    primaryEmailAddress: primaryUserEmailAddress
+      ? {
+          address: primaryUserEmailAddress.address,
+        }
+      : null,
     cryptoAddress: userCryptoAddress ? getClientUserCryptoAddress(userCryptoAddress) : null,
     id,
     datetimeCreated,
     datetimeUpdated,
     isPubliclyVisible,
+    phoneNumber: phoneNumber ? formatPhoneNumber(phoneNumber) : '',
   })
 }
