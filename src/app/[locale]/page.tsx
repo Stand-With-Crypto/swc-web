@@ -1,5 +1,5 @@
 import { RecentActivityAndLeaderboard } from '@/components/app/recentActivityAndLeaderboard/recentActivityAndLeaderboard'
-import { ClientAuthUserActionRowCTAs } from '@/components/app/userActionRowCTA/clientAuthUserActionRowCTAs'
+import { UserActionRowCTAsListWithApi } from '@/components/app/userActionRowCTA/userActionRowCTAsListWithApi'
 import { Button } from '@/components/ui/button'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
@@ -212,7 +212,7 @@ export default async function Home({ params }: PageProps) {
           <PageSubTitle as="h4">
             The future of crypto is in your hands. Here's how you can help.
           </PageSubTitle>
-          <ClientAuthUserActionRowCTAs />
+          <UserActionRowCTAsListWithApi />
         </section>
         <section className="mb-16 space-y-7 md:mb-24">
           <PageTitle as="h3">Where politicians stand on crypto</PageTitle>

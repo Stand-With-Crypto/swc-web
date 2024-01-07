@@ -1,3 +1,8 @@
+'use client'
+
+import { UserActionRowCTA } from '@/components/app/userActionRowCTA'
+import { UserActionType } from '@prisma/client'
+
 import { LazyUserActionFormCallCongressperson } from '@/components/app/userActionFormCallCongressperson/lazyLoad'
 import { LazyUserActionFormDonate } from '@/components/app/userActionFormDonate/lazyLoad'
 import { LazyUserActionFormEmailCongressperson } from '@/components/app/userActionFormEmailCongressperson/lazyLoad'
@@ -5,9 +10,9 @@ import { LazyUserActionFormNFTMint } from '@/components/app/userActionFormNFTMin
 import { LazyUserActionFormOptInSWC } from '@/components/app/userActionFormOptInSWC/lazyLoad'
 import { LazyUserActionFormTweet } from '@/components/app/userActionFormTweet/lazyLoad'
 import { UserActionRowCTAProps } from '@/components/app/userActionRowCTA'
-import { UserActionType } from '@prisma/client'
+import { cn } from '@/utils/web/cn'
 
-export const USER_ACTION_ROW_CTA_INFO: ReadonlyArray<Omit<UserActionRowCTAProps, 'state'>> = [
+const USER_ACTION_ROW_CTA_INFO: ReadonlyArray<Omit<UserActionRowCTAProps, 'state'>> = [
   {
     actionType: UserActionType.OPT_IN,
     image: '/actionTypeIcons/optIn.svg',
@@ -57,3 +62,23 @@ export const USER_ACTION_ROW_CTA_INFO: ReadonlyArray<Omit<UserActionRowCTAProps,
     lazyRenderedForm: LazyUserActionFormNFTMint,
   },
 ]
+
+export function UserActionRowCTAsList({
+  performedUserActionTypes,
+  className,
+}: {
+  className?: string
+  performedUserActionTypes: UserActionType[]
+}) {
+  return (
+    <div className={cn('space-y-4', className)}>
+      {USER_ACTION_ROW_CTA_INFO.map(({ actionType, ...rest }) => (
+        <UserActionRowCTA
+          key={actionType}
+          state={!performedUserActionTypes.includes(actionType) ? 'complete' : 'incomplete'}
+          {...{ actionType, ...rest }}
+        />
+      ))}
+    </div>
+  )
+}

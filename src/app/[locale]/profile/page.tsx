@@ -1,8 +1,7 @@
 import { getAuthenticatedData } from '@/app/[locale]/profile/getAuthenticatedData'
 import { UpdateUserProfileFormDialog } from '@/components/app/updateUserProfileForm/dialog'
 import { hasAllFormFieldsOnUserForUpdateUserProfileForm } from '@/components/app/updateUserProfileForm/hasAllFormFieldsOnUser'
-import { UserActionRowCTA } from '@/components/app/userActionRowCTA'
-import { USER_ACTION_ROW_CTA_INFO } from '@/components/app/userActionRowCTA/userActionRowCTAConstants'
+import { UserActionRowCTAsList } from '@/components/app/userActionRowCTA/userActionRowCTAsList'
 import { SensitiveDataUserAvatar } from '@/components/app/userAvatar'
 import { Button } from '@/components/ui/button'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
@@ -41,10 +40,7 @@ export default async function Profile({ params }: Props) {
     return <div>Not logged in</div>
   }
   const { userActions } = user
-  const userActionsByType: Partial<Record<UserActionType, typeof userActions>> = _.groupBy(
-    userActions,
-    x => x.actionType,
-  )
+  const performedUserActionTypes = _.uniq(userActions.map(x => x.actionType))
   return (
     <div className="container">
       <div className="mb-6 flex items-center justify-between md:mx-4">
@@ -111,24 +107,19 @@ export default async function Profile({ params }: Props) {
       </div>
       <PageTitle className="mb-4">Your advocacy progress</PageTitle>
       <PageSubTitle className="mb-5">
-        You've completed {Object.keys(userActionsByType).length} out of{' '}
+        You've completed {performedUserActionTypes.length} out of{' '}
         {Object.values(UserActionType).length} actions. Keep going!
       </PageSubTitle>
       <div className="mx-auto mb-5 max-w-xl">
         <Progress
-          value={
-            (Object.keys(userActionsByType).length / Object.values(UserActionType).length) * 100
-          }
+          value={(performedUserActionTypes.length / Object.values(UserActionType).length) * 100}
         />
       </div>
       <div className="mb-14 space-y-4">
-        {USER_ACTION_ROW_CTA_INFO.map(({ actionType, ...rest }) => (
-          <UserActionRowCTA
-            key={actionType}
-            state={userActionsByType[actionType]?.length ? 'complete' : 'incomplete'}
-            {...{ actionType, ...rest }}
-          />
-        ))}
+        <UserActionRowCTAsList
+          performedUserActionTypes={performedUserActionTypes}
+          className="mb-14"
+        />
       </div>
       <PageTitle className="mb-4">Your NFTs</PageTitle>
       <PageSubTitle className="mb-5">

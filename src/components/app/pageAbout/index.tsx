@@ -1,4 +1,4 @@
-import { ClientAuthUserActionRowCTAs } from '@/components/app/userActionRowCTA/clientAuthUserActionRowCTAs'
+import { UserActionRowCTAsListWithApi } from '@/components/app/userActionRowCTA/userActionRowCTAsListWithApi'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 
@@ -189,7 +189,7 @@ export function About({ title, description }: { title: string; description: stri
           ensuring our calls for change are heard and enacted.
         </p>
 
-        <ClientAuthUserActionRowCTAs />
+        <UserActionRowCTAsListWithApi />
       </section>
 
       <PageTitle as="p" size="sm" className="text-start">
