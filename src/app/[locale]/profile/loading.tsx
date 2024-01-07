@@ -73,10 +73,10 @@ export default function Profile({ params }: Props) {
           </div>
         ))}
       </div>
-      <PageTitle className="mb-4">
+      <PageTitle withoutBalancer className="mb-4">
         <Skeleton>Your advocacy progress</Skeleton>
       </PageTitle>
-      <PageSubTitle className="mb-5">
+      <PageSubTitle withoutBalancer className="mb-5">
         <Skeleton>
           You've completed {0} out of {6} actions. Keep going!
         </Skeleton>
