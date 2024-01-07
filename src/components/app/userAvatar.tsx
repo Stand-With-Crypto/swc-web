@@ -1,5 +1,6 @@
 import { ClientUser } from '@/clientModels/clientUser/clientUser'
 import { ClientUserCryptoAddress } from '@/clientModels/clientUser/clientUserCryptoAddress'
+import { SensitiveDataClientUser } from '@/clientModels/clientUser/sensitiveDataClientUser'
 import { NextImage } from '@/components/ui/image'
 import { ImageAvatarProps } from '@/components/ui/imageAvatar'
 
@@ -22,6 +23,37 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 export const UserAvatar: React.FC<
   {
     user: Pick<ClientUser, 'isPubliclyVisible' | 'cryptoAddress'>
+  } & Pick<ImageAvatarProps, 'size' | 'className'>
+> = ({ user, size, ...props }) => {
+  if (!user.isPubliclyVisible || !user.cryptoAddress) {
+    return (
+      <Container>
+        <NextImage
+          {...props}
+          src={'/userAvatars/grey.svg'}
+          alt="Generic profile picture for anonymous user"
+          width={size}
+          height={size}
+        />
+      </Container>
+    )
+  }
+  return (
+    <Container>
+      <NextImage
+        {...props}
+        src={deterministicArraySelection(genericImages, user.cryptoAddress.address)}
+        alt="Generic profile picture for anonymous user"
+        width={size}
+        height={size}
+      />
+    </Container>
+  )
+}
+
+export const SensitiveDataUserAvatar: React.FC<
+  {
+    user: Pick<SensitiveDataClientUser, 'fullName' | 'isPubliclyVisible' | 'cryptoAddress'>
   } & Pick<ImageAvatarProps, 'size' | 'className'>
 > = ({ user, size, ...props }) => {
   if (!user.isPubliclyVisible || !user.cryptoAddress) {

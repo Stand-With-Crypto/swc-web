@@ -47,6 +47,7 @@ export async function triggerServerActionForForm<
         extra: { error, formName },
       })
     }
+    return { status: 'error' as const }
   })
   if (response && 'errors' in response && response.errors) {
     trackFormSubmitErrored(formName, { 'Error Type': 'Validation' })
@@ -60,7 +61,9 @@ export async function triggerServerActionForForm<
       tags: { formName, domain: 'triggerServerActionForForm', path: 'Error' },
       extra: { response, formName },
     })
+    return { status: 'error' as const }
   } else {
     trackFormSubmitSucceeded(formName)
+    return { status: 'success' as const, response }
   }
 }

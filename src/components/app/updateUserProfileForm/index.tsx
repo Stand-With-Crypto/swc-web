@@ -1,41 +1,38 @@
 'use client'
-import * as Sentry from '@sentry/nextjs'
-import { z } from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
+import { actionUpdateUserProfile } from '@/actions/actionUpdateUserProfile'
+import { ClientAddress } from '@/clientModels/clientAddress'
+import { SensitiveDataClientUser } from '@/clientModels/clientUser/sensitiveDataClientUser'
+import { RecentActivityRow } from '@/components/app/recentActivityRow/recentActivityRow'
+import { hasAllFormFieldsOnUserForUpdateUserProfileForm } from '@/components/app/updateUserProfileForm/hasAllFormFieldsOnUser'
+import { Button } from '@/components/ui/button'
+import { Checkbox } from '@/components/ui/checkbox'
 import {
   Form,
   FormControl,
-  FormDescription,
+  FormErrorMessage,
   FormField,
+  FormGeneralErrorMessage,
   FormItem,
   FormLabel,
-  FormErrorMessage,
-  FormGeneralErrorMessage,
   FormSuccessMessage,
 } from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
-import { Textarea } from '@/components/ui/textarea'
-import { zodUpdateUserProfileFormFields } from '@/validation/zodUpdateUserProfile'
-import { actionEmailYourCongressPerson } from '@/actions/sampleArchitecture/actionEmailYourCongressPerson'
-import { GenericErrorFormValues, triggerServerActionForForm } from '@/utils/web/formUtils'
-import { PageTitle } from '@/components/ui/pageTitleText'
-import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PlacesAutocomplete } from '@/components/ui/googlePlacesSelect'
-import { getDetails } from 'use-places-autocomplete'
-import { formatGooglePlacesResultToAddress } from '@/utils/web/formatGooglePlacesResultToAddress'
-import { UserAvatar } from '@/components/app/userAvatar'
-import { RecentActivityRow } from '@/components/app/recentActivityRow/recentActivityRow'
-import { ClientUser } from '@/clientModels/clientUser/clientUser'
+import { Input } from '@/components/ui/input'
+import { PageSubTitle } from '@/components/ui/pageSubTitle'
+import { PageTitle } from '@/components/ui/pageTitleText'
 import { SupportedLocale } from '@/intl/locales'
-import { UserActionOptInType, UserActionType } from '@prisma/client'
-import { SensitiveDataClientUser } from '@/clientModels/clientUser/sensitiveDataClientUser'
-import { ClientAddress } from '@/clientModels/clientAddress'
-import { Checkbox } from '@/components/ui/checkbox'
-import { hasAllFormFieldsOnUserForUpdateUserProfileForm } from '@/components/app/updateUserProfileForm/hasAllFormFieldsOnUser'
+import { GenericErrorFormValues, triggerServerActionForForm } from '@/utils/web/formUtils'
+import { formatGooglePlacesResultToAddress } from '@/utils/web/formatGooglePlacesResultToAddress'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
-import { actionUpdateUserProfile } from '@/actions/actionUpdateUserProfile'
+import { zodUpdateUserProfileFormFields } from '@/validation/zodUpdateUserProfile'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { UserActionOptInType, UserActionType } from '@prisma/client'
+import * as Sentry from '@sentry/nextjs'
+import { useRouter } from 'next/navigation'
+import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
+import { getDetails } from 'use-places-autocomplete'
+import { z } from 'zod'
 
 const FORM_NAME = 'User Profile'
 type FormValues = z.infer<typeof zodUpdateUserProfileFormFields> & GenericErrorFormValues
@@ -51,6 +48,7 @@ export function UpdateUserProfileForm({
   onCancel: () => void
   onSuccess: () => void
 }) {
+  const router = useRouter()
   const form = useForm<FormValues>({
     resolver: zodResolver(zodUpdateUserProfileFormFields),
     defaultValues: {
@@ -101,9 +99,13 @@ export function UpdateUserProfileForm({
                   })
               : null
 
-            return triggerServerActionForForm({ form, formName: FORM_NAME }, () =>
+            const result = await triggerServerActionForForm({ form, formName: FORM_NAME }, () =>
               actionUpdateUserProfile({ ...values, address }),
             )
+            if (result.status === 'success') {
+              router.refresh()
+              toast.success('Profile updated', { duration: 5000 })
+            }
           })}
           className="space-y-8"
         >
@@ -210,9 +212,6 @@ export function UpdateUserProfileForm({
             </div>
           </div>
           <FormGeneralErrorMessage control={form.control} />
-          {form.formState.isSubmitSuccessful && (
-            <FormSuccessMessage>Great work!</FormSuccessMessage>
-          )}
           <div className="flex justify-end gap-4">
             <Button
               onClick={onCancel}

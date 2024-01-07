@@ -9,15 +9,15 @@ import { z } from 'zod'
 export async function actionUpdateUserProfile(
   data: z.infer<typeof zodUpdateUserProfileFormAction>,
 ) {
+  const authUser = await appRouterGetAuthUser()
+  if (!authUser) {
+    throw new Error('Unauthenticated')
+  }
   const validatedFields = zodUpdateUserProfileFormAction.safeParse(data)
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
     }
-  }
-  const authUser = await appRouterGetAuthUser()
-  if (!authUser) {
-    throw new Error('Unauthenticated')
   }
   const user = await prismaClient.user.findFirstOrThrow({
     where: {
@@ -69,6 +69,6 @@ export async function actionUpdateUserProfile(
   })
 
   return {
-    data: validatedFields.data,
+    user: updatedUser,
   }
 }

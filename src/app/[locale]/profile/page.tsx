@@ -1,29 +1,24 @@
 import { getAuthenticatedData } from '@/app/[locale]/profile/getAuthenticatedData'
-import { SensitiveDataClientUserAction } from '@/clientModels/clientUserAction/sensitiveDataClientUserAction'
+import { UpdateUserProfileFormDialog } from '@/components/app/updateUserProfileForm/dialog'
+import { hasAllFormFieldsOnUserForUpdateUserProfileForm } from '@/components/app/updateUserProfileForm/hasAllFormFieldsOnUser'
 import { UserActionRowCTA } from '@/components/app/userActionRowCTA'
 import { USER_ACTION_ROW_CTA_INFO } from '@/components/app/userActionRowCTA/userActionRowCTAConstants'
-import { UserAvatar } from '@/components/app/userAvatar'
+import { SensitiveDataUserAvatar } from '@/components/app/userAvatar'
 import { Button } from '@/components/ui/button'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
 import { FormattedDatetime } from '@/components/ui/formattedDatetime'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
-import { PageTitle } from '@/components/ui/pageTitleText'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
+import { PageTitle } from '@/components/ui/pageTitleText'
 import { Progress } from '@/components/ui/progress'
 import { PageProps } from '@/types'
-import { SupportedCryptoCurrencyCodes, SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
+import { generateMetadataDetails } from '@/utils/server/metadataUtils'
+import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { getIntlUrls } from '@/utils/shared/urls'
-import { getUserDisplayName } from '@/utils/web/userUtils'
-import { UserAction, UserActionType } from '@prisma/client'
+import { getSensitiveDataUserName } from '@/utils/web/userUtils'
+import { UserActionType } from '@prisma/client'
 import _ from 'lodash'
 import { Metadata } from 'next'
-import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
-import { Suspense } from 'react'
-import { LazyUpdateUserProfileForm } from '@/components/app/updateUserProfileForm/lazyLoad'
-import { UpdateUserProfileFormDialog } from '@/components/app/updateUserProfileForm/dialog'
-import { hasAllFormFieldsOnUserForUpdateUserProfileForm } from '@/components/app/updateUserProfileForm/hasAllFormFieldsOnUser'
-
 export const dynamic = 'force-dynamic'
 
 type Props = PageProps
@@ -54,9 +49,9 @@ export default async function Profile({ params }: Props) {
     <div className="container">
       <div className="mb-6 flex items-center justify-between md:mx-4">
         <div className="flex items-center gap-2">
-          <UserAvatar size={60} user={user} />
+          <SensitiveDataUserAvatar size={60} user={user} />
           <div>
-            <div className="text-lg font-bold">{getUserDisplayName(user)}</div>
+            <div className="text-lg font-bold">{getSensitiveDataUserName(user)}</div>
             <div className="text-sm text-gray-500">
               Joined{' '}
               <FormattedDatetime date={user.datetimeCreated} dateStyle="medium" locale={locale} />
@@ -65,9 +60,11 @@ export default async function Profile({ params }: Props) {
         </div>
         <div>
           <UpdateUserProfileFormDialog user={user} locale={locale}>
-            <Button>
-              {hasAllFormFieldsOnUserForUpdateUserProfileForm(user) ? 'Edit' : 'Finish'} profile
-            </Button>
+            {hasAllFormFieldsOnUserForUpdateUserProfileForm(user) ? (
+              <Button variant="secondary">Edit your profile</Button>
+            ) : (
+              <Button>Finish your profile</Button>
+            )}
           </UpdateUserProfileFormDialog>
         </div>
       </div>
@@ -124,7 +121,7 @@ export default async function Profile({ params }: Props) {
           }
         />
       </div>
-      <div className="space-y-4">
+      <div className="mb-14 space-y-4">
         {USER_ACTION_ROW_CTA_INFO.map(({ actionType, ...rest }) => (
           <UserActionRowCTA
             key={actionType}
@@ -133,6 +130,11 @@ export default async function Profile({ params }: Props) {
           />
         ))}
       </div>
+      <PageTitle className="mb-4">Your NFTs</PageTitle>
+      <PageSubTitle className="mb-5">
+        You will receive free NFTs for completing advocacy-related actions.
+      </PageSubTitle>
+      <p className="text-center">TODO</p>
     </div>
   )
 }
