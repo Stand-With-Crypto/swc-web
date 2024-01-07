@@ -15,7 +15,7 @@ export const getUserDisplayName = (user: ClientUser | null) => {
   return 'Anonymous'
 }
 
-export const getSensitiveDataUserName = (user: SensitiveDataClientUser | null) => {
+export const getSensitiveDataUserDisplayName = (user: SensitiveDataClientUser | null) => {
   if (user?.fullName) {
     return user.fullName
   }

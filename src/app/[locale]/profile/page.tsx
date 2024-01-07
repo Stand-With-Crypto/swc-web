@@ -15,7 +15,7 @@ import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { getIntlUrls } from '@/utils/shared/urls'
-import { getSensitiveDataUserName } from '@/utils/web/userUtils'
+import { getSensitiveDataUserDisplayName } from '@/utils/web/userUtils'
 import { UserActionType } from '@prisma/client'
 import _ from 'lodash'
 import { Metadata } from 'next'
@@ -51,7 +51,7 @@ export default async function Profile({ params }: Props) {
         <div className="flex items-center gap-2">
           <SensitiveDataUserAvatar size={60} user={user} />
           <div>
-            <div className="text-lg font-bold">{getSensitiveDataUserName(user)}</div>
+            <div className="text-lg font-bold">{getSensitiveDataUserDisplayName(user)}</div>
             <div className="text-sm text-gray-500">
               Joined{' '}
               <FormattedDatetime date={user.datetimeCreated} dateStyle="medium" locale={locale} />
