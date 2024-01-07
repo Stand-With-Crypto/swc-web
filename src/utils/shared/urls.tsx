@@ -49,18 +49,18 @@ export const externalUrls = {
 }
 
 export const apiUrls = {
-  leaderboard: (offset: number) => `/api/leaderboard/${offset}`,
+  mockLeaderboard: (offset: number) => `/api/mock/leaderboard/${offset}`,
   dtsiPeopleByCongressionalDistrict: ({
     stateCode,
     districtNumber,
   }: {
     stateCode: string
     districtNumber: number
-  }) => `/api/dtsi/by-geography/usa/${stateCode}/${districtNumber}`,
-  totalDonations: (locale: SupportedLocale) => `/api/total-donations/${locale}`,
-  mockTotalDonations: (locale: SupportedLocale) => `/api/mock-total-donations/${locale}`,
-  performedUserActionTypes: () => `/api/authenticated/performed-user-action-types`,
-  dtsiAllPeople: () => `/api/dtsi/all-people`,
+  }) => `/api/public/dtsi/by-geography/usa/${stateCode}/${districtNumber}`,
+  totalDonations: (locale: SupportedLocale) => `/api/public/total-donations/${locale}`,
+  mockTotalDonations: (locale: SupportedLocale) => `/api/mock/total-donations/${locale}`,
+  performedUserActionTypes: () => `/api/identified-user/performed-user-action-types`,
+  dtsiAllPeople: () => `/api/public/dtsi/all-people`,
 }
 
 export const fullUrl = (path: string) => {
