@@ -5,5 +5,5 @@ import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiRes
 
 export function UserActionRowCTAsListWithApi() {
   const { data } = useApiResponseForUserPerformedUserActionTypes()
-  return <UserActionRowCTAsList performedUserActionTypes={data?.performedUserActionTypes || []} />
+  return <UserActionRowCTAsList performedUserActionTypes={data?.performedUserActionTypes} />
 }

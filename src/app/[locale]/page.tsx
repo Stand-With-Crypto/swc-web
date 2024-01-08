@@ -27,6 +27,7 @@ import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
 import { ResponsiveYoutube } from '@/components/ui/responsiveYoutube'
 import { LazyResponsiveYoutube } from '@/components/ui/responsiveYoutube/lazyLoad'
 import { Skeleton } from '@/components/ui/skeleton'
+import { UserActionFormOptInSWCDialog } from '@/components/app/userActionFormOptInSWC/dialog'
 
 export const revalidate = 3600
 export const dynamic = 'error'
@@ -62,16 +63,9 @@ export default async function Home({ params }: PageProps) {
             Congress is writing the rules as we speak - but they won't vote YES until they've heard
             from you.
           </h2>
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button size="lg">Join the fight</Button>
-            </DialogTrigger>
-            <DialogContent>
-              <Suspense>
-                <LazyUserActionFormOptInSWC />
-              </Suspense>
-            </DialogContent>
-          </Dialog>
+          <UserActionFormOptInSWCDialog>
+            <Button size="lg">Join the fight</Button>
+          </UserActionFormOptInSWCDialog>
         </div>
         <div className="order-0 md:container lg:order-1 lg:px-0">
           <Dialog>

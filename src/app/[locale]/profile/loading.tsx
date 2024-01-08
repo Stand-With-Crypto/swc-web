@@ -82,7 +82,7 @@ export default function Profile({ params }: Props) {
       <div className="mx-auto mb-5 max-w-xl">
         <Progress value={0} />
       </div>
-      <UserActionRowCTAsList performedUserActionTypes={[]} className="mb-14" />
+      <UserActionRowCTAsList className="mb-14" />
     </div>
   )
 }

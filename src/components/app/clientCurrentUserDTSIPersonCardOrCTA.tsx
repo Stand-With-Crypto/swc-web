@@ -2,6 +2,7 @@
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { DTSIPersonCard } from '@/components/app/dtsiPersonCard'
+import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
 import { LazyUserActionFormCallCongressperson } from '@/components/app/userActionFormCallCongressperson/lazyLoad'
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
@@ -52,16 +53,9 @@ export function ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: Suppo
         </div>
       </div>
       <div className="flex gap-5 md:gap-2">
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button size="lg">Call</Button>
-          </DialogTrigger>
-          <DialogContent>
-            <Suspense>
-              <LazyUserActionFormCallCongressperson />
-            </Suspense>
-          </DialogContent>
-        </Dialog>
+        <UserActionFormCallCongresspersonDialog>
+          <Button size="lg">Call</Button>
+        </UserActionFormCallCongresspersonDialog>
         <Button variant="secondary" asChild>
           <InternalLink href={getIntlUrls(locale).politicianDetails(person.slug)}>
             View profile

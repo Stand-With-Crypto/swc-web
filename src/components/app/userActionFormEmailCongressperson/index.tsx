@@ -48,9 +48,13 @@ const DEFAULT_MESSAGE = `The House Financial Services Committee and the House Ag
   
   As your constituent, I am asking you to vote for FIT21 to safeguard consumers and promote responsible innovation. Thank you.`
 
-const getDefaultValues = (
-  user: Awaited<ReturnType<typeof apiResponseForUserFullProfileInfo>>['user'],
-) => {
+const getDefaultValues = ({
+  user,
+  dtsiSlug,
+}: {
+  user: Awaited<ReturnType<typeof apiResponseForUserFullProfileInfo>>['user']
+  dtsiSlug: string | undefined
+}) => {
   if (user) {
     return {
       fullName: user.fullName,
@@ -71,30 +75,26 @@ const getDefaultValues = (
     phoneNumber: '',
     message: DEFAULT_MESSAGE,
     address: undefined,
+    dtsiSlug,
   }
 }
 
 export function UserActionFormEmailCongressperson({
   onCancel,
   onSuccess,
+  user,
 }: {
+  user: Awaited<ReturnType<typeof apiResponseForUserFullProfileInfo>>['user']
   onCancel: () => void
   onSuccess: () => void
 }) {
   const router = useRouter()
   const locale = useLocale()
   const urls = getIntlUrls(locale)
-  const fetchUser = useApiResponseForUserFullProfileInfo()
-  const { user } = fetchUser.data || { user: null }
   const form = useForm<FormValues>({
     resolver: zodResolver(zodUserActionFormEmailCongresspersonFields),
-    defaultValues: getDefaultValues(user),
+    defaultValues: getDefaultValues({ user, dtsiSlug: undefined }),
   })
-  useEffect(() => {
-    if (user) {
-      form.reset(getDefaultValues(user))
-    }
-  }, [user])
   return (
     <Form {...form}>
       <form

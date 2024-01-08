@@ -12,11 +12,7 @@ export interface UserActionRowCTAProps {
   text: string
   subtext: string
   canBeTriggeredMultipleTimes: boolean
-  DialogComponent: (args: {
-    children: React.ReactNode
-    onCancel: () => void
-    onSuccess: () => void
-  }) => React.ReactNode
+  DialogComponent: (args: { children: React.ReactNode }) => React.ReactNode
 }
 
 const UserActionRowCTAButton = React.forwardRef<
