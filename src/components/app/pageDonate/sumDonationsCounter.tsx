@@ -12,12 +12,10 @@ interface SumDonationsCounterProps {
   locale: SupportedLocale
 }
 
-const FALLBACK_DONATION_VALUE = 2_399_800
-
 export function SumDonationsCounter(props: SumDonationsCounterProps) {
   const { data } = useLiveSumDonations(props)
 
-  return <AnimatedCurrencyOdometer value={data?.amountUsd ?? FALLBACK_DONATION_VALUE} />
+  return <AnimatedCurrencyOdometer value={data?.amountUsd} />
 }
 
 function useLiveSumDonations({ locale, initialData }: SumDonationsCounterProps) {

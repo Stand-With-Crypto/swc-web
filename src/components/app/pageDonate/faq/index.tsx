@@ -24,7 +24,7 @@ function FAQListItem({ entry: { title, content: Content } }: { entry: FAQEntry }
   return (
     <Card className="p-0">
       <FAQItemCollapsible title={title}>
-        <div className="prose px-4 pb-6 text-muted-foreground">
+        <div className="prose max-w-none px-4 pb-6 text-muted-foreground">
           <Content />
         </div>
       </FAQItemCollapsible>

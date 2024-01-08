@@ -23,7 +23,7 @@ export function FAQItemCollapsible({
           variant="secondary"
           className="flex h-auto w-full items-center justify-between px-4 py-6 text-start font-bold"
         >
-          {title}
+          <span className="whitespace-normal">{title}</span>
 
           {isExpanded ? <Minus /> : <Plus />}
         </Button>

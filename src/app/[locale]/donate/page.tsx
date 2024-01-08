@@ -6,7 +6,7 @@ import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 
 export const dynamic = 'error'
 
-const title = 'Protect the future of crypto'
+const title = 'Donate'
 const description =
   'Contributing to the Stand With Crypto Alliance will help shape policy & support policymakers who will champion clear, common-sense legislation that protects consumers and fosters innovation'
 
@@ -19,7 +19,7 @@ export default async function DonatePage({ params: { locale } }: PageProps) {
 
   return (
     <DonatePageContent
-      title={title}
+      title="Protect the future of crypto"
       description={description}
       sumDonations={sumDonations}
       locale={locale}

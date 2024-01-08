@@ -1,6 +1,6 @@
 'use client'
 
-import { memo, Suspense, useEffect, useMemo, useRef } from 'react'
+import { useEffect, useMemo, useRef } from 'react'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
 import { SupportedLocale } from '@/intl/locales'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
@@ -9,21 +9,19 @@ import styles from './odometer.module.css'
 
 const regexPattern = /(\D+)?(\d+)(\D+)?(\d+)?(\D+)?(\d+)?(\D+)?/
 const time = 600
-const DEFAULT_DONATION_VALUE = 2395061
+const DEFAULT_DONATION_VALUE = 2_399_800
 
 export interface AnimatedCurrencyOdometerProps {
-  value: number
+  value?: number
 }
 
-function AnimatedCurrencyOdometerClientSide({ value }: AnimatedCurrencyOdometerProps) {
+function AnimatedCurrencyOdometerClientSide({
+  value = DEFAULT_DONATION_VALUE,
+}: AnimatedCurrencyOdometerProps) {
   const spanArray = useRef<(HTMLSpanElement | null)[]>([])
 
   const formattedValue = useMemo(() => {
-    if (value) {
-      return formatCurrency(value)
-    }
-
-    return formatCurrency(DEFAULT_DONATION_VALUE)
+    return formatCurrency(value)
   }, [value])
 
   const valueNumericalLength = useMemo(() => {
@@ -124,12 +122,8 @@ function FallbackDonationValue() {
   )
 }
 
-export const AnimatedCurrencyOdometer = memo(function AnimatedDonationValue(
+export const AnimatedCurrencyOdometer = function AnimatedDonationValue(
   props: AnimatedCurrencyOdometerProps,
 ) {
-  return (
-    <Suspense fallback={<FallbackDonationValue />}>
-      <AnimatedCurrencyOdometerClientSide {...props} />
-    </Suspense>
-  )
-})
+  return <AnimatedCurrencyOdometerClientSide {...props} />
+}
