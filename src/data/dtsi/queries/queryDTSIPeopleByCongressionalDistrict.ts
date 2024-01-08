@@ -36,6 +36,6 @@ export const queryDTSIPeopleByCongressionalDistrict = async (config: {
   const person = data.peopleByUSCongressionalDistrict.find(
     x => x.primaryRole?.roleCategory === DTSI_PersonRoleCategory.CONGRESS,
   )
-
-  return person
+  console.log(data)
+  return person || null
 }
