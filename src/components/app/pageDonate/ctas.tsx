@@ -1,4 +1,4 @@
-import { ClientAuthUserActionRowCTAs } from '@/components/app/userActionRowCTA/clientAuthUserActionRowCTAs'
+import { UserActionRowCTAsListWithApi } from '@/components/app/userActionRowCTA/userActionRowCTAsListWithApi'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 
@@ -12,7 +12,7 @@ export function CTAs() {
         Do your part to help protect crypto without opening your wallet.
       </PageSubTitle>
 
-      <ClientAuthUserActionRowCTAs />
+      <UserActionRowCTAsListWithApi />
     </section>
   )
 }

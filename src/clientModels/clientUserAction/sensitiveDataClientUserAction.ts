@@ -35,15 +35,12 @@ type SensitiveDataClientUserActionDatabaseQuery = UserAction & {
   userActionOptIn: UserActionOptIn | null
 }
 
-type SensitiveDataClientUserActionEmailRecipient = Pick<
-  UserActionEmailRecipient,
-  'id' | 'email'
-> & {
+type SensitiveDataClientUserActionEmailRecipient = Pick<UserActionEmailRecipient, 'id'> & {
   person: DTSIPersonForUserActions
 }
 type SensitiveDataClientUserActionEmail = Pick<
   UserActionEmail,
-  'zipCode' | 'senderEmail' | 'fullName' | 'phoneNumber'
+  'senderEmail' | 'fullName' | 'phoneNumber'
 > & {
   address: ClientAddress
   userActionEmailRecipients: SensitiveDataClientUserActionEmailRecipient[]
@@ -151,18 +148,16 @@ export const getSensitiveDataClientUserAction = ({
       return getClientModel({ ...sharedProps, ...donationFields })
     }
     case UserActionType.EMAIL: {
-      const { zipCode, senderEmail, fullName, phoneNumber, address, userActionEmailRecipients } =
+      const { senderEmail, fullName, phoneNumber, address, userActionEmailRecipients } =
         getRelatedModel(record, 'userActionEmail')
       const emailFields: SensitiveDataClientUserActionEmail = {
         actionType,
-        zipCode,
         senderEmail,
         fullName,
         phoneNumber,
         address: getClientAddress(address),
         userActionEmailRecipients: userActionEmailRecipients.map(x => ({
           id: x.id,
-          email: x.email,
           person: peopleBySlug[x.dtsiSlug],
         })),
       }
