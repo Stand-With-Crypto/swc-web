@@ -36,16 +36,17 @@ export const getIntlUrls = (
 }
 
 export const externalUrls = {
-  emailFeedback: () => 'mailto:info@standwithcrypto.org',
-  twitter: () => 'https://twitter.com/standwithcrypto',
-  youtube: () => 'https://www.youtube.com/@StandWithCryptoAlliance/featured',
-  instagram: () => 'https://www.instagram.com/standwithcrypto',
-  facebook: () => 'https://www.facebook.com/standwithcrypto',
-  linkedin: () => 'https://www.linkedin.com/company/standwithcrypto/',
   discord: () => 'https://discord.com/invite/standwithcrypto',
+  donate: () => 'https://commerce.coinbase.com/checkout/396fc233-3d1f-4dd3-8e82-6efdf78432ad',
   dtsi: () => 'https://www.dotheysupportit.com',
   dtsiCreateStance: (slug: string) =>
     `https://www.dotheysupportit.com/people/${slug}/create-stance`,
+  emailFeedback: () => 'mailto:info@standwithcrypto.org',
+  facebook: () => 'https://www.facebook.com/standwithcrypto',
+  instagram: () => 'https://www.instagram.com/standwithcrypto',
+  linkedin: () => 'https://www.linkedin.com/company/standwithcrypto/',
+  twitter: () => 'https://twitter.com/standwithcrypto',
+  youtube: () => 'https://www.youtube.com/@StandWithCryptoAlliance/featured',
 }
 
 export const apiUrls = {
