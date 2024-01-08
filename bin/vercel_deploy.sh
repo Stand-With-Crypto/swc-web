@@ -9,7 +9,7 @@ npm run codegen
 # The cons: it takes a while to run and can slow down the deployment process, especially if we need to urgently make changes
 # Proposal: once we have a team working on this codebase, protect the main branch so people can't merge directly, and run lint/test on PRs, but not on master and production deployments
 npm run lint
-npm run test
+NODE_ENV=test npm run test
 npm run build
 wait
 echo "frontend assets built"
