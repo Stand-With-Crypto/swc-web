@@ -2,8 +2,8 @@ import { ClientAuthUserActionRowCTAs } from '@/components/app/userActionRowCTA/c
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 
-import { Card } from '@/components/app/pageAbout/card'
 import { NextImage } from '@/components/ui/image'
+import { Card } from '@/components/ui/card'
 
 export function About({ title, description }: { title: string; description: string }) {
   return (

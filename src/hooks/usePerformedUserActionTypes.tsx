@@ -1,5 +1,5 @@
 'use client'
-import { getPerformedUserActionTypes } from '@/app/api/authenticated/performed-user-action-types/route'
+import { getPerformedUserActionTypes } from '@/app/api/identified-user/performed-user-action-types/route'
 import { MaybeAuthenticatedApiResponse } from '@/types'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { apiUrls } from '@/utils/shared/urls'
