@@ -1,16 +1,18 @@
-import { TopLevelClientLogic } from '@/app/[locale]/topLevelClientLogic'
-import { Footer } from '@/components/app/footer'
-import { Navbar } from '@/components/app/navbar'
-import { FullHeight } from '@/components/ui/fullHeight'
-import { ORDERED_SUPPORTED_LOCALES } from '@/intl/locales'
-import { PageProps } from '@/types'
-import { getOpenGraphImageUrl } from '@/utils/server/generateOpenGraphImageUrl'
-import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import { notFound } from 'next/navigation'
 import NextTopLoader from 'nextjs-toploader'
+
+import { Footer } from '@/components/app/footer'
+import { FullHeight } from '@/components/ui/fullHeight'
+import { generateMetadataDetails } from '@/utils/server/metadataUtils'
+import { getOpenGraphImageUrl } from '@/utils/server/generateOpenGraphImageUrl'
+import { Navbar } from '@/components/app/navbar'
+import { ORDERED_SUPPORTED_LOCALES } from '@/intl/locales'
+import { PageProps } from '@/types'
 import { Toaster } from '@/components/ui/sonner'
+import { TopLevelClientLogic } from '@/app/[locale]/topLevelClientLogic'
+import { CookieConsent } from '@/components/app/cookieConsent'
 
 // we want dynamicParams to be false for this top level layout, but we also want to ensure that subpages can have dynamic params
 // Next.js doesn't allow this so we allow dynamic params in the config here, and then trigger a notFound in the layout if one is passed
@@ -73,6 +75,7 @@ export default function Layout({ children, params }: PageProps & { children: Rea
           </FullHeight.Container>
         </TopLevelClientLogic>
         <Toaster />
+        <CookieConsent locale={locale} />
       </body>
     </html>
   )
