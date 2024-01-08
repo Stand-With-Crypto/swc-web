@@ -22,7 +22,7 @@ export function UserActionFormEmailCongresspersonDialog({
   return (
     <Dialog {...dialogProps}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="max-w-3xl md:px-12 md:py-16">
+      <DialogContent className="max-w-3xl py-0 md:px-12">
         <Suspense fallback={<Skeleton className="h-80 w-full" />}>
           <LazyUserActionFormEmailCongressperson
             {...formProps}

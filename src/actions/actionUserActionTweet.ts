@@ -27,7 +27,7 @@ export async function actionUserActionTweet() {
       userSession: 'sessionId' in userMatch ? { connect: { id: userMatch.sessionId } } : undefined,
       userCryptoAddress:
         'userCryptoAddress' in userMatch
-          ? { connect: { id: userMatch.user.userCryptoAddress!.id } }
+          ? { connect: { id: userMatch.userCryptoAddress.id } }
           : undefined,
       user:
         'userCryptoAddress' in userMatch

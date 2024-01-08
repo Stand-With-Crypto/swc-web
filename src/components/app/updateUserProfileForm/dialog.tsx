@@ -19,7 +19,7 @@ export function UpdateUserProfileFormDialog({
   return (
     <Dialog {...dialogProps}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="max-w-3xl md:px-12 md:py-16">
+      <DialogContent className="max-w-3xl p-0">
         <Suspense fallback={<Skeleton className="h-80 w-full" />}>
           <LazyUpdateUserProfileForm
             {...formProps}

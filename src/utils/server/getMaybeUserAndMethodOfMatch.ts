@@ -14,10 +14,11 @@ export async function getMaybeUserAndMethodOfMatch<
   I extends Omit<Prisma.UserFindFirstArgs, 'where'>,
 >({
   include,
+  ...other
 }: Prisma.SelectSubset<I, Prisma.UserFindFirstArgs>): Promise<
   | {
       user: GetFindResult<Prisma.$UserPayload, I>
-      userCryptoAddress: string
+      userCryptoAddress: UserCryptoAddress
     }
   | {
       user: GetFindResult<Prisma.$UserPayload, I> | null
@@ -26,20 +27,29 @@ export async function getMaybeUserAndMethodOfMatch<
 > {
   const authUser = await appRouterGetAuthUser()
   const sessionId = getUserSessionIdOnAppRouter()
-  const user = (await prismaClient.user.findFirst({
+  const userWithoutReturnTypes = await prismaClient.user.findFirst({
     where: {
       OR: _.compact([
         authUser && { userCryptoAddress: { address: authUser.address } },
         { userSessions: { some: { id: sessionId } } },
       ]),
     },
-    include,
-  })) as GetFindResult<Prisma.$UserPayload, I> | null
-
+    include: {
+      ...((include || {}) as object),
+      userCryptoAddress: true,
+    },
+    ...other,
+  })
+  const user = userWithoutReturnTypes as GetFindResult<Prisma.$UserPayload, I> | null
   if (authUser) {
+    if (!user) {
+      throw new Error(
+        `unexpectedly didn't return a user for an authenticated address ${authUser.address}}`,
+      )
+    }
     return {
-      user: user!,
-      userCryptoAddress: authUser.address,
+      user,
+      userCryptoAddress: userWithoutReturnTypes!.userCryptoAddress!,
     }
   }
   return {

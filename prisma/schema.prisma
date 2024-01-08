@@ -211,8 +211,6 @@ model UserActionOptIn {
 model UserActionEmail {
   id                        String                     @id @default(uuid())
   userAction                UserAction                 @relation(fields: [id], references: [id])
-  // TODO determine if these need to be nullable in the future
-  zipCode                   String                     @map("zip_code")
   senderEmail               String                     @map("sender_email")
   fullName                  String                     @map("full_name")
   phoneNumber               String                     @map("phone_number")
@@ -229,7 +227,6 @@ model UserActionEmailRecipient {
   id                String          @id @default(uuid())
   userActionEmailId String          @map("user_action_email_id")
   userActionEmail   UserActionEmail @relation(fields: [userActionEmailId], references: [id])
-  email             String
   dtsiSlug          String          @map("dtsi_slug")
 
   @@index([userActionEmailId])
