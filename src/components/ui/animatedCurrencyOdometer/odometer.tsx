@@ -109,8 +109,6 @@ function formatCurrency(value: number) {
   return response
 }
 
-export const AnimatedCurrencyOdometer = function AnimatedDonationValue(
-  props: AnimatedCurrencyOdometerProps,
-) {
+export function AnimatedCurrencyOdometer(props: AnimatedCurrencyOdometerProps) {
   return <AnimatedCurrencyOdometerClientSide {...props} />
 }
