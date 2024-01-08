@@ -4,11 +4,12 @@ import { ORDERED_USER_ACTION_ROW_CTA_INFO } from '@/components/app/userActionRow
 import { Button } from '@/components/ui/button'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
+import { Skeleton } from '@/components/ui/skeleton'
 import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
 import { useUser } from '@thirdweb-dev/react'
 import { useMemo } from 'react'
 
-export function UserActionFormSuccessScreen() {
+export function UserActionFormSuccessScreen({ onClose }: { onClose: () => void }) {
   const authUser = useUser()
   const { data } = useApiResponseForUserPerformedUserActionTypes()
   const nextAction = useMemo(() => {
@@ -17,11 +18,33 @@ export function UserActionFormSuccessScreen() {
     )
   }, [data])
   if ((!authUser.user && authUser.isLoading) || !data?.performedUserActionTypes) {
-    return <div>TODO</div>
+    return (
+      <div className="p-6">
+        <div className="space-y-2 py-24 text-center">
+          <PageTitle size="sm">
+            <Skeleton>Nice work!</Skeleton>
+          </PageTitle>
+          <PageSubTitle>
+            <Skeleton>
+              Join to unlock rewards, see your activities and get personalized contents.
+            </Skeleton>
+          </PageSubTitle>
+          <Button variant="secondary">
+            <Skeleton>Join Stand with Crypto</Skeleton>
+          </Button>
+        </div>
+        <div>
+          <div className="font-bold">
+            <Skeleton>Up next</Skeleton>
+          </div>
+          <Skeleton className="h-24 w-full" />
+        </div>
+      </div>
+    )
   }
   return (
     <div className="p-6">
-      <div className="space-y-2  py-24 text-center">
+      <div className="space-y-2 py-24 text-center">
         <PageTitle size="sm">Nice work!</PageTitle>
         {authUser.isLoggedIn ? (
           <>
@@ -40,7 +63,8 @@ export function UserActionFormSuccessScreen() {
         )}
       </div>
       <div>
-        <p className="font-bold">Up next</p>
+        <div className="font-bold">Up next</div>
+        {/* TODO fix modals opening, nested under each other */}
         {nextAction && <UserActionRowCTA {...nextAction} state="unknown" />}
       </div>
     </div>

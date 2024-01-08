@@ -13,9 +13,10 @@ export interface UserActionRowCTAProps {
   subtext: string
   canBeTriggeredMultipleTimes: boolean
   DialogComponent: (args: { children: React.ReactNode }) => React.ReactNode
+  onClick?: () => void
 }
 
-const UserActionRowCTAButton = React.forwardRef<
+export const UserActionRowCTAButton = React.forwardRef<
   React.ElementRef<'button'>,
   Omit<UserActionRowCTAProps, 'DialogComponent'> & React.ButtonHTMLAttributes<HTMLButtonElement>
 >(

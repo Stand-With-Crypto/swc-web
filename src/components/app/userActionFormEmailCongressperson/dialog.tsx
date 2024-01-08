@@ -34,7 +34,7 @@ export function UserActionFormEmailCongresspersonDialog({
               onSuccess={() => setState('success')}
             />
           ) : (
-            <UserActionFormSuccessScreen />
+            <UserActionFormSuccessScreen onClose={() => dialogProps.onOpenChange(false)} />
           )}
         </Suspense>
       </DialogContent>
