@@ -22,7 +22,6 @@ export function ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: Suppo
       <Button
         className="m-auto block"
         onClick={() => {
-          console.log('click')
           mockAddress ? setMockAddress('') : setMockAddress('15 E 7th St, New York NY, 10003')
         }}
       >

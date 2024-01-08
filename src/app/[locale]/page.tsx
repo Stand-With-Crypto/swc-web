@@ -77,7 +77,6 @@ export default async function Home({ params }: PageProps) {
           <Dialog>
             <DialogTrigger asChild>
               <LinkBox className="relative h-[320px] cursor-pointer overflow-hidden md:rounded-xl lg:h-[400px]">
-                {/* TODO make actual video */}
                 <NextImage
                   priority
                   alt="First in the Nation Crypto Presidential Forum December 11th 2023 St. Anselm College"
@@ -232,7 +231,6 @@ export default async function Home({ params }: PageProps) {
             <div>
               <h5 className="mb-4 text-center text-xl font-bold text-red-600">Anti-crypto</h5>
               <div className="space-y-3">
-                {/* TODO replace with anti-crypto once we get the gql endpoint working as expected */}
                 {groupedDTSIHomepagePeople.antiCrypto.map(person => (
                   <DTSIPersonCard locale={locale} key={person.id} person={person} />
                 ))}

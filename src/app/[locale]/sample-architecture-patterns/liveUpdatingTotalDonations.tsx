@@ -10,7 +10,7 @@ import useSWR from 'swr'
 
 const useGetTotalDonations = (locale: SupportedLocale) => {
   return useSWR(
-    apiUrls.totalDonations(locale),
+    apiUrls.mockTotalDonations(locale),
     url =>
       fetchReq(url)
         .then(res => res.json())
@@ -29,17 +29,12 @@ export function LiveUpdatingTotalDonations({
   locale: SupportedLocale
 }) {
   const dynamicTotalDonations = useGetTotalDonations(locale)
-  // There's an edge case where the page version is a more recent cache that the API, and so the number could go down, which we don't want obviously
-  const usedTotalDonations =
-    dynamicTotalDonations.data && dynamicTotalDonations.data > totalDonations
-      ? dynamicTotalDonations.data
-      : totalDonations
   return (
     <>
       <FormattedCurrency
         locale={locale}
         maximumFractionDigits={0}
-        amount={usedTotalDonations.amountUsd}
+        amount={dynamicTotalDonations.data?.amountUsd ?? totalDonations.amountUsd}
         currencyCode={SupportedFiatCurrencyCodes.USD}
       />
     </>

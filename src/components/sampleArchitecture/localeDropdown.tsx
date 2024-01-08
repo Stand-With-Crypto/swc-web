@@ -10,7 +10,7 @@ import { getLocaleFlagEmoji } from '@/intl/localeFlagEmojis'
 import { DEFAULT_LOCALE, ORDERED_SUPPORTED_LOCALES, SupportedLocale } from '@/intl/locales'
 import { usePathname, useRouter } from 'next/navigation'
 import { addDays } from 'date-fns'
-import { setServerOnlyCookie } from '@/actions/setServerOnlyCookie'
+import { actionServerOnlyCookie } from '@/actions/actionServerOnlyCookie'
 import {
   ClientAnalyticActionType,
   ClientAnalyticComponentType,
@@ -30,7 +30,7 @@ export function LocaleDropdown({ locale }: { locale: SupportedLocale }) {
     })
     // set cookie for next-i18n-router
     const expiresDate = addDays(new Date(), 30)
-    await setServerOnlyCookie('NEXT_LOCALE', newLocale, { expires: expiresDate })
+    await actionServerOnlyCookie('NEXT_LOCALE', newLocale, { expires: expiresDate })
     if (locale === DEFAULT_LOCALE) {
       router.push(`/${newLocale}${currentPathname}`)
     } else {

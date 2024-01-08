@@ -1,6 +1,6 @@
 import { fakerFields } from '@/mocks/fakerUtils'
 import { mockCommonDatetimes } from '@/mocks/mockCommonDatetimes'
-import { normalizePhoneNumber } from '@/utils/shared/normalizePhoneNumber'
+import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
 import { faker } from '@faker-js/faker'
 import { UserActionEmail } from '@prisma/client'
 
@@ -10,7 +10,7 @@ export function mockUserActionEmail(): UserActionEmail {
     senderEmail: faker.internet.email(),
     zipCode: faker.location.zipCode(),
     fullName: faker.person.fullName(),
-    phoneNumber: normalizePhoneNumber(faker.phone.number()),
+    phoneNumber: fakerFields.phoneNumber(),
     addressId: fakerFields.id(),
   }
 }

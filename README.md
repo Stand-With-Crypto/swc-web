@@ -28,8 +28,9 @@
 
 - Run `npx prisma studio` to get a full database UI
 - If any of the graphql schemas change for our 3rd party API partners (like dotheysupportit.com), run `npm run codegen:schemas` to pull in the latest
+- Run `npm run storybook` to view isolated [storybook stories](https://storybook.js.org/)
 - To audit your code before committing changes:
   - `npm run lint` - audits code against eslint and prettier
   - `npm run typecheck` - audits code against typescript
   - `npm run test` - execute jest tests
-  - `npm run storybook` - run and view isolated [storybook stories](https://storybook.js.org/)
+  - `npm run precheck` - executes all 3 commands above concurrently

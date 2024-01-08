@@ -4,9 +4,10 @@ import * as Sentry from '@sentry/nextjs'
 export class FetchReqError extends Error {
   constructor(
     public response: Response,
+    errorName: string,
     public body?: unknown,
   ) {
-    super(response.statusText)
+    super(errorName)
   }
 }
 
@@ -26,6 +27,15 @@ const maybeParseBody = async (response: Response) =>
     })
     .catch(x => undefined)
 
+const maybeWithoutQueryParams = (url: string) => {
+  try {
+    const urlParts = new URL(url)
+    return `${urlParts.origin}${urlParts.pathname}`
+  } catch (e) {
+    return url
+  }
+}
+
 export const fetchReq = async (
   url: string,
   options?: RequestInit,
@@ -35,10 +45,12 @@ export const fetchReq = async (
   if (response.status >= 200 && response.status < 300) {
     return response
   }
-  const error = new FetchReqError(response, await maybeParseBody(response))
-
+  const errorName = `${response.status} from ${options?.method || 'GET'} ${maybeWithoutQueryParams(
+    url,
+  )}`
+  const error = new FetchReqError(response, errorName, await maybeParseBody(response))
   Sentry.withScope(scope => {
-    scope.setTransactionName(`${response.status} from ${options?.method || 'GET'} ${url}`)
+    scope.setTransactionName(errorName)
     scope.setFingerprint([url])
     scope.setTags({ domain: 'fetchReq' })
     scope.setExtras({ options, url })

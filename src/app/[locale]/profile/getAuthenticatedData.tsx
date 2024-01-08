@@ -18,6 +18,7 @@ export async function getAuthenticatedData() {
     include: {
       userCryptoAddress: true,
       address: true,
+      primaryUserEmailAddress: true,
       userActions: {
         include: {
           userActionDonation: true,

@@ -9,7 +9,7 @@ export function SampleAuthenticatedRequest() {
     <div>
       <Button
         onClick={() =>
-          fetchReq('/api/sample-authenticated-endpoint', { method: 'POST' })
+          fetchReq('/api/mock/sample-authenticated-endpoint', { method: 'POST' })
             .then(() =>
               toast.success('Success!', {
                 description: 'Successfully returned because you are authenticated',

@@ -1,24 +1,24 @@
 import { getAuthenticatedData } from '@/app/[locale]/profile/getAuthenticatedData'
-import { SensitiveDataClientUserAction } from '@/clientModels/clientUserAction/sensitiveDataClientUserAction'
+import { UpdateUserProfileFormDialog } from '@/components/app/updateUserProfileForm/dialog'
+import { hasAllFormFieldsOnUserForUpdateUserProfileForm } from '@/components/app/updateUserProfileForm/hasAllFormFieldsOnUser'
 import { UserActionRowCTA } from '@/components/app/userActionRowCTA'
 import { USER_ACTION_ROW_CTA_INFO } from '@/components/app/userActionRowCTA/userActionRowCTAConstants'
-import { UserAvatar } from '@/components/app/userAvatar'
+import { SensitiveDataUserAvatar } from '@/components/app/userAvatar'
 import { Button } from '@/components/ui/button'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
 import { FormattedDatetime } from '@/components/ui/formattedDatetime'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
-import { PageTitle } from '@/components/ui/pageTitleText'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
+import { PageTitle } from '@/components/ui/pageTitleText'
 import { Progress } from '@/components/ui/progress'
 import { PageProps } from '@/types'
-import { SupportedCryptoCurrencyCodes, SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
+import { generateMetadataDetails } from '@/utils/server/metadataUtils'
+import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { getIntlUrls } from '@/utils/shared/urls'
-import { getUserDisplayName } from '@/utils/web/userUtils'
-import { UserAction, UserActionType } from '@prisma/client'
+import { getSensitiveDataUserDisplayName } from '@/utils/web/userUtils'
+import { UserActionType } from '@prisma/client'
 import _ from 'lodash'
 import { Metadata } from 'next'
-import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-
 export const dynamic = 'force-dynamic'
 
 type Props = PageProps
@@ -49,9 +49,9 @@ export default async function Profile({ params }: Props) {
     <div className="container">
       <div className="mb-6 flex items-center justify-between md:mx-4">
         <div className="flex items-center gap-2">
-          <UserAvatar size={60} user={user} />
+          <SensitiveDataUserAvatar size={60} user={user} />
           <div>
-            <div className="text-lg font-bold">{getUserDisplayName(user)}</div>
+            <div className="text-lg font-bold">{getSensitiveDataUserDisplayName(user)}</div>
             <div className="text-sm text-gray-500">
               Joined{' '}
               <FormattedDatetime date={user.datetimeCreated} dateStyle="medium" locale={locale} />
@@ -59,10 +59,16 @@ export default async function Profile({ params }: Props) {
           </div>
         </div>
         <div>
-          <Button>TODO</Button>
+          <UpdateUserProfileFormDialog user={user} locale={locale}>
+            {hasAllFormFieldsOnUserForUpdateUserProfileForm(user) ? (
+              <Button variant="secondary">Edit your profile</Button>
+            ) : (
+              <Button>Finish your profile</Button>
+            )}
+          </UpdateUserProfileFormDialog>
         </div>
       </div>
-      <div className="mb-14 grid grid-cols-4 rounded-lg bg-blue-50 p-6 text-center">
+      <div className="mb-14 grid grid-cols-4 rounded-lg bg-blue-50 p-3 text-center sm:p-6">
         {[
           {
             label: 'Actions',
@@ -76,7 +82,7 @@ export default async function Profile({ params }: Props) {
                 currencyCode={SupportedFiatCurrencyCodes.USD}
                 amount={_.sumBy(userActions, x => {
                   if (x.actionType === UserActionType.DONATION) {
-                    return x.amountUsd.toNumber()
+                    return x.amountUsd
                   }
                   return 0
                 })}
@@ -98,8 +104,8 @@ export default async function Profile({ params }: Props) {
           },
         ].map(({ label, value }) => (
           <div key={label}>
-            <div className="text-gray-700">{label}</div>
-            <div className="text-xl font-bold">{value}</div>
+            <div className="text-xs text-gray-700 sm:text-sm md:text-base">{label}</div>
+            <div className="text-sm font-bold sm:text-base md:text-xl">{value}</div>
           </div>
         ))}
       </div>
@@ -115,7 +121,7 @@ export default async function Profile({ params }: Props) {
           }
         />
       </div>
-      <div className="space-y-4">
+      <div className="mb-14 space-y-4">
         {USER_ACTION_ROW_CTA_INFO.map(({ actionType, ...rest }) => (
           <UserActionRowCTA
             key={actionType}
@@ -124,6 +130,11 @@ export default async function Profile({ params }: Props) {
           />
         ))}
       </div>
+      <PageTitle className="mb-4">Your NFTs</PageTitle>
+      <PageSubTitle className="mb-5">
+        You will receive free NFTs for completing advocacy-related actions.
+      </PageSubTitle>
+      <p className="text-center">TODO</p>
     </div>
   )
 }

@@ -13,6 +13,9 @@ export function FormattedRelativeDatetime({
 }) {
   const minutesAgo = differenceInMinutes(new Date(), date)
   const intlRelative = new Intl.RelativeTimeFormat(locale, { style: timeFormatStyle })
+  if (minutesAgo < 1) {
+    return 'Just now'
+  }
   if (minutesAgo < 60) {
     return intlRelative.format(-1 * minutesAgo, 'minutes')
   }

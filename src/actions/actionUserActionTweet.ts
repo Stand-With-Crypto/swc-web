@@ -5,9 +5,9 @@ import { getLogger } from '@/utils/shared/logger'
 import { UserActionType } from '@prisma/client'
 import 'server-only'
 
-const logger = getLogger(`createUserActionTweet`)
+const logger = getLogger(`actionUserActionTweet`)
 
-export async function createUserActionTweet() {
+export async function actionUserActionTweet() {
   const userMatch = await getExistingUserAndMethodOfMatch()
   const existingUserActionTweet = userMatch.user
     ? await prismaClient.userAction.findFirst({

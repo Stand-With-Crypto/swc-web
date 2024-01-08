@@ -32,7 +32,6 @@ export default async function Home({ params }: PageProps) {
     getMockSumDonations(),
   ])
   return (
-    // TODO remove prose class and actually start styling things!
     <div className="container prose-sm max-w-2xl">
       <h1>Sample Architecture Patterns</h1>
       <h2>
@@ -57,7 +56,7 @@ export default async function Home({ params }: PageProps) {
           at build time, and then additional items can be appended client side as needed.
         </li>
         <li>
-          See <code>src/app/api/leaderboard/[offset]/route</code> for an example of building
+          See <code>src/app/api/mock/leaderboard/[offset]/route</code> for an example of building
           cacheable API routes. Leverage "revalidate" from next.js, that endpoint will server cached
           content until the expiry we set.
         </li>
@@ -149,7 +148,7 @@ export default async function Home({ params }: PageProps) {
         poll the server every few seconds for a new value.
       </p>
       <p>
-        Because the <code>/api/total-donations/[locale]</code> endpoint is cached for 1 second,
+        Because the <code>/api/mock/total-donations/[locale]</code> endpoint is cached for 1 second,
         we'll end up recomputing the actual number at most once every two seconds. This means that
         even if we had 1,000,000 users hit the site all at once, we wouldn't hit the dataset that
         stores/computes this value more than once.

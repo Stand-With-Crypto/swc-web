@@ -19,7 +19,7 @@ const useGetEntities = ({ limit }: { limit: number }) => {
   return useSWRInfinite(
     (pageIndex, previousPageData) => {
       if (previousPageData && !previousPageData.length) return null // reached the end
-      return apiUrls.leaderboard((pageIndex + 1) * limit)
+      return apiUrls.mockLeaderboard((pageIndex + 1) * limit)
     },
     {
       initialSize: 0,
