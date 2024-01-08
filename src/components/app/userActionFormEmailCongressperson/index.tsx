@@ -90,7 +90,6 @@ export function UserActionFormEmailCongressperson({
     resolver: zodResolver(zodUserActionFormEmailCongresspersonFields),
     defaultValues: getDefaultValues(user),
   })
-  console.log(user)
   useEffect(() => {
     if (user) {
       form.reset(getDefaultValues(user))
@@ -120,7 +119,6 @@ export function UserActionFormEmailCongressperson({
               catchUnexpectedServerErrorAndTriggerToast(e)
               return null
             })
-          console.log(address)
           if (!address) {
             return
           }
@@ -135,7 +133,7 @@ export function UserActionFormEmailCongressperson({
         className="flex max-h-screen flex-col"
       >
         <ScrollArea>
-          <div className="space-y-4 p-6 md:space-y-8">
+          <div className="space-y-4 p-6 md:space-y-8 md:px-12">
             <PageTitle size="sm" className="mb-3">
               Email your congressperson
             </PageTitle>
@@ -236,7 +234,7 @@ export function UserActionFormEmailCongressperson({
         </ScrollArea>
         <div
           style={{ boxShadow: 'rgba(0, 0, 0, 0.2) 0px 1px 6px 0px' }}
-          className="z-10 flex flex-1 flex-col items-center justify-between gap-4 border border-t p-6 sm:flex-row"
+          className="z-10 flex flex-1 flex-col items-center justify-between gap-4 border border-t p-6 sm:flex-row md:px-12"
         >
           <FormField
             control={form.control}

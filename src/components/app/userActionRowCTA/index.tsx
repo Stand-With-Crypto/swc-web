@@ -1,14 +1,9 @@
 'use client'
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { NextImage } from '@/components/ui/image'
-import { Skeleton } from '@/components/ui/skeleton'
-import { useDialog } from '@/hooks/useDialog'
-import { SupportedLocale } from '@/intl/locales'
 import { cn } from '@/utils/web/cn'
 import { UserActionType } from '@prisma/client'
 import { ChevronRight } from 'lucide-react'
-import React, { ComponentType, Suspense } from 'react'
-import { LazyExoticComponent } from 'react'
+import React from 'react'
 
 export interface UserActionRowCTAProps {
   actionType: UserActionType
@@ -17,27 +12,19 @@ export interface UserActionRowCTAProps {
   text: string
   subtext: string
   canBeTriggeredMultipleTimes: boolean
-  lazyRenderedForm: LazyExoticComponent<
-    ComponentType<{ onCancel: () => void; onSuccess: () => void }>
-  >
+  DialogComponent: (args: {
+    children: React.ReactNode
+    onCancel: () => void
+    onSuccess: () => void
+  }) => React.ReactNode
 }
 
 const UserActionRowCTAButton = React.forwardRef<
   React.ElementRef<'button'>,
-  UserActionRowCTAProps & React.ButtonHTMLAttributes<HTMLButtonElement>
+  Omit<UserActionRowCTAProps, 'DialogComponent'> & React.ButtonHTMLAttributes<HTMLButtonElement>
 >(
   (
-    {
-      state,
-      image,
-      text,
-      subtext,
-      canBeTriggeredMultipleTimes,
-      lazyRenderedForm,
-      className,
-      actionType,
-      ...props
-    },
+    { state, image, text, subtext, canBeTriggeredMultipleTimes, className, actionType, ...props },
     ref,
   ) => {
     const canBeActionedOn =
@@ -99,21 +86,10 @@ const UserActionRowCTAButton = React.forwardRef<
 )
 UserActionRowCTAButton.displayName = 'UserActionRowCTAButton'
 
-export function UserActionRowCTA(props: UserActionRowCTAProps) {
-  const dialogProps = useDialog(false)
+export function UserActionRowCTA({ DialogComponent, ...props }: UserActionRowCTAProps) {
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <UserActionRowCTAButton {...props} />
-      </DialogTrigger>
-      <DialogContent className="max-w-3xl p-0">
-        <Suspense fallback={<Skeleton className="h-80 w-full" />}>
-          <props.lazyRenderedForm
-            onCancel={() => dialogProps.onOpenChange(false)}
-            onSuccess={() => dialogProps.onOpenChange(false)}
-          />
-        </Suspense>
-      </DialogContent>
-    </Dialog>
+    <DialogComponent>
+      <UserActionRowCTAButton {...props} />
+    </DialogComponent>
   )
 }
