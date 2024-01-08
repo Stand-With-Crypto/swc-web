@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useMemo, useRef } from 'react'
-import { FormattedCurrency } from '@/components/ui/formattedCurrency'
 import { SupportedLocale } from '@/intl/locales'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 
@@ -108,18 +107,6 @@ function formatCurrency(value: number) {
     maximumFractionDigits: 0,
   }).format(value)
   return response
-}
-
-function FallbackDonationValue() {
-  return (
-    <h1 className="odometer">
-      <FormattedCurrency
-        locale={SupportedLocale.EN_US}
-        amount={DEFAULT_DONATION_VALUE}
-        currencyCode={SupportedFiatCurrencyCodes.USD}
-      />
-    </h1>
-  )
 }
 
 export const AnimatedCurrencyOdometer = function AnimatedDonationValue(
