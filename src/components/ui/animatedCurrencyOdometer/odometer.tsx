@@ -2,47 +2,29 @@
 
 import { useEffect, useMemo, useRef } from 'react'
 import { SupportedLocale } from '@/intl/locales'
-import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 
+import { useCurrencyNumeralArray } from './useCurrencyNumericalArray'
 import styles from './odometer.module.css'
 
-const regexPattern = /(\D+)?(\d+)(\D+)?(\d+)?(\D+)?(\d+)?(\D+)?/
 const time = 600
 const DEFAULT_DONATION_VALUE = 2_399_800
 
 export interface AnimatedCurrencyOdometerProps {
   value?: number
+  locale?: SupportedLocale
 }
 
-function AnimatedCurrencyOdometerClientSide({
+export function AnimatedCurrencyOdometer({
   value = DEFAULT_DONATION_VALUE,
+  locale,
 }: AnimatedCurrencyOdometerProps) {
   const spanArray = useRef<(HTMLSpanElement | null)[]>([])
 
-  const formattedValue = useMemo(() => {
-    return formatCurrency(value)
+  const valueNumericalLength = useMemo(() => {
+    return String(value).length
   }, [value])
 
-  const valueNumericalLength = useMemo(() => {
-    return formattedValue.replace(/\D/g, '').length
-  }, [formattedValue])
-
-  /**
-   * @description numeralArray uses regex to split the donation value into an array of strings.
-   * @example // $2,395,081 => ["$", "2", ",", "395", ",", "081"]
-   */
-  const numeralArray = useMemo(() => {
-    const rgxExecArray = regexPattern.exec(formattedValue)
-
-    if (rgxExecArray) {
-      const arrayValue = [...rgxExecArray]
-      arrayValue.shift()
-
-      return arrayValue.filter(val => val)
-    }
-
-    return []
-  }, [formattedValue])
+  const numeralArray = useCurrencyNumeralArray(value, locale)
 
   useEffect(() => {
     const activate = () => {
@@ -98,17 +80,4 @@ function AnimatedCurrencyOdometerClientSide({
       })}
     </h1>
   )
-}
-
-function formatCurrency(value: number) {
-  const response = new Intl.NumberFormat(SupportedLocale.EN_US, {
-    style: 'currency',
-    currency: SupportedFiatCurrencyCodes.USD,
-    maximumFractionDigits: 0,
-  }).format(value)
-  return response
-}
-
-export function AnimatedCurrencyOdometer(props: AnimatedCurrencyOdometerProps) {
-  return <AnimatedCurrencyOdometerClientSide {...props} />
 }

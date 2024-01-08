@@ -15,7 +15,7 @@ interface SumDonationsCounterProps {
 export function SumDonationsCounter(props: SumDonationsCounterProps) {
   const { data } = useLiveSumDonations(props)
 
-  return <AnimatedCurrencyOdometer value={data?.amountUsd} />
+  return <AnimatedCurrencyOdometer value={data?.amountUsd} locale={props.locale} />
 }
 
 function useLiveSumDonations({ locale, initialData }: SumDonationsCounterProps) {
