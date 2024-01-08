@@ -12,7 +12,7 @@ export function FAQ() {
   return (
     <section className="space-y-7">
       <PageTitle size="sm" as="h2">
-        Frequently asked questionsaaaa
+        Frequently asked questions
       </PageTitle>
       <Accordion type="single" collapsible>
         {FAQ_DATA.map(({ title, content: Content }) => (
