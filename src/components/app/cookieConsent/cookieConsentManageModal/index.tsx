@@ -46,7 +46,7 @@ export default function ManageCookiesModal({ onSubmit }: ManageCookiesModalProps
   return (
     <Container {...dialogProps}>
       <ContainerTrigger asChild>
-        <Button variant="link" className="p-2 font-bold">
+        <Button variant="link" className="p-0 font-bold">
           Manage cookies
         </Button>
       </ContainerTrigger>

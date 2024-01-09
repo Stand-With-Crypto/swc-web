@@ -30,7 +30,10 @@ export function CookieConsentBanner({
 
   return (
     <div
-      className={cn('max-w-screen fixed bottom-0 left-0 w-full bg-secondary p-6', styles.banner)}
+      className={cn(
+        'max-w-screen fixed bottom-0 left-0 w-full bg-secondary p-4 pb-2 md:p-6',
+        styles.banner,
+      )}
     >
       <p className={cn('text-xs text-muted-foreground md:max-w-4xl', styles.description)}>
         We use our own and third-party cookies on our website to enhance your experience, analyze
@@ -44,18 +47,18 @@ export function CookieConsentBanner({
         .
       </p>
 
-      <div className={cn('flex items-center md:justify-end', styles.actions)}>
+      <div className={cn('flex items-center gap-4 md:justify-end', styles.actions)}>
         <ManageCookiesModal onSubmit={onAcceptSpecificCookies} />
-        <Button variant="link" className="p-2 font-bold" onClick={onRejectAll}>
+        <Button variant="link" className="p-0 font-bold" onClick={onRejectAll}>
           Reject all
         </Button>
         {/* TODO: Change this to primary color once tailwind is configured properly */}
-        <Button variant="link" className="p-2 font-bold text-blue-500" onClick={onAcceptAll}>
+        <Button variant="link" className="p-0 font-bold text-blue-500" onClick={onAcceptAll}>
           Accept all
         </Button>
       </div>
 
-      <div className={cn('flex items-center justify-end', styles.close)}>
+      <div className={cn('flex items-start justify-end md:items-center', styles.close)}>
         <button
           onClick={onRejectAll}
           className="h-auto rounded-full bg-gray-300 p-1 text-white transition-all hover:bg-gray-400"

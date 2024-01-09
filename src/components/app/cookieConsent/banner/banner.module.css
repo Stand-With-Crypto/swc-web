@@ -1,11 +1,11 @@
 .banner {
   display: grid;
-  gap: 1rem;
   grid-template-areas: 'close' 'description' 'actions';
 }
 
 @media (min-width: 768px) {
   .banner {
+    gap: 1rem;
     grid-template-areas: 'description actions close';
     grid-template-columns: auto min-content min-content;
   }
