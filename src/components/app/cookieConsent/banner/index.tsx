@@ -1,5 +1,6 @@
 'use client'
 
+import { useMemo } from 'react'
 import { X } from 'lucide-react'
 
 import { cn } from '@/utils/web/cn'
@@ -9,18 +10,19 @@ import { getIntlUrls } from '@/utils/shared/urls'
 import { SupportedLocale } from '@/intl/locales'
 
 import styles from './banner.module.css'
-import { useMemo } from 'react'
+import ManageCookiesModal from '@/components/app/cookieConsent/cookieConsentManageModal'
+import { CookieConsentPermissions } from '@/components/app/cookieConsent/cookieConsent.constants'
 
 interface CookieConsentBannerProps {
   locale: SupportedLocale
-  onManageCookies: () => void
+  onAcceptSpecificCookies: (accepted: CookieConsentPermissions) => void
   onRejectAll: () => void
   onAcceptAll: () => void
 }
 
 export function CookieConsentBanner({
   locale,
-  onManageCookies,
+  onAcceptSpecificCookies,
   onAcceptAll,
   onRejectAll,
 }: CookieConsentBannerProps) {
@@ -30,7 +32,7 @@ export function CookieConsentBanner({
     <div
       className={cn('max-w-screen fixed bottom-0 left-0 w-full bg-secondary p-6', styles.banner)}
     >
-      <p className={cn('text-xs text-muted-foreground md:max-w-lg', styles.description)}>
+      <p className={cn('text-xs text-muted-foreground md:max-w-4xl', styles.description)}>
         We use our own and third-party cookies on our website to enhance your experience, analyze
         traffic, and for security. Cookies may collect your personal information, such as IP
         addresses or device identifiers, which we may disclose to our third-party partners. You may
@@ -42,10 +44,8 @@ export function CookieConsentBanner({
         .
       </p>
 
-      <div className={cn('flex items-center gap-4 md:justify-end', styles.actions)}>
-        <Button variant="link" className="p-2 font-bold" onClick={() => alert('todo')}>
-          Manage cookies
-        </Button>
+      <div className={cn('flex items-center md:justify-end', styles.actions)}>
+        <ManageCookiesModal onSubmit={onAcceptSpecificCookies} />
         <Button variant="link" className="p-2 font-bold" onClick={onRejectAll}>
           Reject all
         </Button>

@@ -1,9 +1,11 @@
 'use client'
 
-import { SupportedLocale } from '@/intl/locales'
-import { useCookieConsent } from './useCookieConsent'
-import { CookieConsentBanner } from '@/components/app/cookieConsent/banner'
 import React from 'react'
+
+import { SupportedLocale } from '@/intl/locales'
+
+import { useCookieConsent } from './useCookieConsent'
+import { CookieConsentBanner } from './banner'
 
 interface CookieConsentProps {
   locale: SupportedLocale
@@ -31,13 +33,11 @@ export default function CookieConsent({
   }
 
   return (
-    <>
-      <CookieConsentBanner
-        locale={locale}
-        onAcceptAll={handleActionThenClose(acceptAllCookies)}
-        onRejectAll={handleActionThenClose(rejectAllOptionalCookies)}
-        onManageCookies={() => alert('hello world')}
-      />
-    </>
+    <CookieConsentBanner
+      locale={locale}
+      onAcceptAll={handleActionThenClose(acceptAllCookies)}
+      onRejectAll={handleActionThenClose(rejectAllOptionalCookies)}
+      onAcceptSpecificCookies={() => alert('hello world')}
+    />
   )
 }

@@ -1,9 +1,7 @@
 import Cookies from 'js-cookie'
 
-import { OptionalCookieConsentTypes, COOKIE_CONSENT_COOKIE_NAME } from './cookieConsent.constants'
+import { COOKIE_CONSENT_COOKIE_NAME, CookieConsentPermissions } from './cookieConsent.constants'
 import React from 'react'
-
-type CookieConsentPermissions = Record<OptionalCookieConsentTypes, boolean>
 
 export function useCookieConsent() {
   const [cookieConsentCookie, setCookieConsentCookie] = useCookieState(COOKIE_CONSENT_COOKIE_NAME)
