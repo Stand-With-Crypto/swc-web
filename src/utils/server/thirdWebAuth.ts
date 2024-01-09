@@ -5,6 +5,7 @@ import { NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN } from '@/utils/shared/sharedEnv'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getUserSessionIdOnPageRouter } from '@/utils/server/serverUserSessionId'
 import { SupportedUserCryptoNetwork } from '@prisma/client'
+import { getServerAnalytics } from '@/utils/server/severAnalytics'
 
 // TODO migrate this logic from page router to app router once thirdweb supports it
 
@@ -34,17 +35,17 @@ export const thirdWebAuthConfig: ThirdwebAuthConfig = {
   },
   callbacks: {
     onLogout: user => {
+      getServerAnalytics({ address: user.address }).track('User Logged Out')
       // TODO analytics
     },
     // look for the comment in appRouterGetAuthUser for why we don't use this fn
     onUser: async (user, req) => {},
     onLogin: async (address, req) => {
       // TODO figure out how to get the users email address to persist to the db
-      console.log('onLogin', { address: address })
-      // TODO analytics
       let existingUser = await prismaClient.user.findFirst({
         where: { userCryptoAddress: { address, cryptoNetwork: SupportedUserCryptoNetwork.ETH } },
       })
+      getServerAnalytics({ address }).track('User Logged In', { 'Is First Time': !existingUser })
       if (!existingUser) {
         const userSessionId = getUserSessionIdOnPageRouter(req)
         existingUser = await prismaClient.user.findFirst({
