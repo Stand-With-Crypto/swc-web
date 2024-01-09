@@ -1,8 +1,6 @@
 import { fakerFields } from '@/mocks/fakerUtils'
 import { mockCommonDatetimes } from '@/mocks/mockCommonDatetimes'
-import {
-  USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP
-} from '@/utils/shared/userActionCampaigns'
+import { USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns'
 import { UserAction } from '@prisma/client'
 
 export function mockUserAction({
