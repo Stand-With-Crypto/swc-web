@@ -2,6 +2,9 @@ import { RecentActivityAndLeaderboardTabs } from '@/components/app/recentActivit
 import { DEFAULT_LOCALE, SupportedLocale } from '@/intl/locales'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
+export const getIntlPrefix = (locale: SupportedLocale) =>
+  locale === DEFAULT_LOCALE ? '' : `/${locale}`
+
 export const getIntlUrls = (
   locale: SupportedLocale,
   {
@@ -32,6 +35,9 @@ export const getIntlUrls = (
     politicianDetails: (dtsiSlug: string) => `${localePrefix}/politicians/person/${dtsiSlug}`,
     // TODO delete before v2 go-live
     sampleArchitecturePatterns: () => `${localePrefix}/sample-architecture-patterns`,
+    deepLinkModal: {
+      emailCongressperson: () => `${localePrefix}/action/email-congressperson`,
+    },
   }
 }
 

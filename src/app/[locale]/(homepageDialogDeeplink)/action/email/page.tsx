@@ -1,5 +1,5 @@
 import { UserActionFormEmailCongresspersonDeeplinkWrapper } from '@/components/app/userActionFormEmailCongressperson/homepageDialogDeeplinkWrapper'
 
-export default function EmailCongressPerson() {
+export default function UserActionEmailCongresspersonDeepLink() {
   return <UserActionFormEmailCongresspersonDeeplinkWrapper />
 }

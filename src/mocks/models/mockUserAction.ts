@@ -1,6 +1,9 @@
 import { fakerFields } from '@/mocks/fakerUtils'
 import { mockCommonDatetimes } from '@/mocks/mockCommonDatetimes'
-import { getDefaultEnumFromUserActionByActionType } from '@/utils/shared/userActionCampaigns'
+import {
+  USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
+  getDefaultEnumFromUserActionByActionType,
+} from '@/utils/shared/userActionCampaigns'
 import { faker } from '@faker-js/faker'
 import { UserAction, UserActionType } from '@prisma/client'
 
@@ -16,7 +19,7 @@ export function mockUserAction({
   return {
     ...mockCommonDatetimes(),
     actionType,
-    campaignName: getDefaultEnumFromUserActionByActionType(actionType),
+    campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[actionType],
     userCryptoAddressId,
     userSessionId,
     userEmailAddressId,
