@@ -21,7 +21,10 @@ const query = /* GraphQL */ `
 export type DTSIPersonForUserActions =
   DTSI_PeopleByUsCongressionalDistrictQuery['peopleByUSCongressionalDistrict'][0]
 
-export const queryDTSIPeopleByCongressionalDistrict = async (config: {
+export const queryDTSIPeopleByCongressionalDistrict = async ({
+  stateCode,
+  districtNumber,
+}: {
   stateCode: string
   districtNumber: number
 }) => {
@@ -29,12 +32,18 @@ export const queryDTSIPeopleByCongressionalDistrict = async (config: {
     DTSI_PeopleByUsCongressionalDistrictQuery,
     DTSI_PeopleByUsCongressionalDistrictQueryVariables
   >(query, {
-    stateCode: config.stateCode,
-    congressionalDistrict: config.districtNumber,
+    stateCode,
+    congressionalDistrict: districtNumber,
   })
   // TODO now that we can support multiple reps being returned, we should build the UX for it
   const person = data.peopleByUSCongressionalDistrict.find(
     x => x.primaryRole?.roleCategory === DTSI_PersonRoleCategory.CONGRESS,
   )
+  if (!person) {
+    Sentry.captureMessage(
+      'Unexpectedly got back no valid congressperson from queryDTSIPeopleByCongressionalDistrict',
+      { tags: { stateCode, districtNumber }, extra: { data } },
+    )
+  }
   return person || null
 }

@@ -9,7 +9,7 @@ import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiRes
 import { useUser } from '@thirdweb-dev/react'
 import { useMemo } from 'react'
 
-export function UserActionFormSuccessScreen({ onClose }: { onClose: () => void }) {
+export function UserActionFormSuccessScreen() {
   const authUser = useUser()
   const { data } = useApiResponseForUserPerformedUserActionTypes()
   const nextAction = useMemo(() => {

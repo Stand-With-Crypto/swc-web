@@ -9,7 +9,7 @@ import { zodGooglePlacesAutocompletePrediction } from '@/validation/fields/zodGo
 import { useEffect } from 'react'
 import { z } from 'zod'
 
-export function DTSICongresspersonAssociatedWithAddress({
+export function DTSICongresspersonAssociatedWithFormAddress({
   address,
   onChangeDTSISlug,
   currentDTSISlugValue,
@@ -49,7 +49,7 @@ export function DTSICongresspersonAssociatedWithAddress({
     )
   }
   if (!res.data || 'notFoundReason' in res.data) {
-    return <div>No available Congressperson</div>
+    return <div>No available representative</div>
   }
   const person = res.data
   return (

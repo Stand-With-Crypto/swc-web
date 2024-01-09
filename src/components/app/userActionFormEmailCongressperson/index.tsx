@@ -3,7 +3,7 @@ import { actionCreateUserActionEmailCongressperson } from '@/actions/actionCreat
 import { apiResponseForUserFullProfileInfo } from '@/app/api/identified-user/full-profile-info/route'
 import { ClientAddress } from '@/clientModels/clientAddress'
 import { SensitiveDataClientUser } from '@/clientModels/clientUser/sensitiveDataClientUser'
-import { DTSICongresspersonAssociatedWithAddress } from '@/components/app/userActionFormEmailCongressperson/DTSICongresspersonAssociatedWithAddress'
+import { DTSICongresspersonAssociatedWithFormAddress } from '@/components/app/dtsiCongresspersonAssociatedWithFormAddress'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -245,7 +245,7 @@ export function UserActionFormEmailCongressperson({
                 name="dtsiSlug"
                 render={dtsiSlugProps => (
                   <div className="w-full">
-                    <DTSICongresspersonAssociatedWithAddress
+                    <DTSICongresspersonAssociatedWithFormAddress
                       onChangeDTSISlug={dtsiSlugProps.field.onChange}
                       currentDTSISlugValue={dtsiSlugProps.field.value}
                       address={addressProps.field.value}
