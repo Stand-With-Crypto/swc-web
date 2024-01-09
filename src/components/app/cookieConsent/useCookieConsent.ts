@@ -4,7 +4,9 @@ import { COOKIE_CONSENT_COOKIE_NAME, CookieConsentPermissions } from './cookieCo
 import React from 'react'
 
 export function useCookieConsent() {
-  const [cookieConsentCookie, setCookieConsentCookie] = useCookieState(COOKIE_CONSENT_COOKIE_NAME)
+  const [cookieConsentCookie, setCookieConsentCookie, removeCookieConsentCookie] = useCookieState(
+    COOKIE_CONSENT_COOKIE_NAME,
+  )
 
   const serializeConsentCookie = React.useCallback(
     (permissions: CookieConsentPermissions): string => {
@@ -54,6 +56,7 @@ export function useCookieConsent() {
     acceptSpecificCookies,
     rejectAllOptionalCookies,
     acceptAllCookies,
+    resetCookieConsent: removeCookieConsentCookie,
     rejectAllCookieValue,
     acceptAllCookieValue,
     acceptedCookies: !!cookieConsentCookie,
@@ -68,7 +71,7 @@ const DEFAULT_COOKIE_OPTIONS: Cookies.CookieAttributes = {
 function useCookieState(
   name: string,
   options: Cookies.CookieAttributes = DEFAULT_COOKIE_OPTIONS,
-): [string, (value: string) => void] {
+): [string, (value: string) => void, () => void] {
   const [value, setValue] = React.useState(() => Cookies.get(name) ?? '')
 
   React.useEffect(() => {
@@ -77,5 +80,9 @@ function useCookieState(
     }
   }, [value, name])
 
-  return [value, setValue]
+  const removeCookie = React.useCallback(() => {
+    Cookies.remove(name)
+  }, [name])
+
+  return [value, setValue, removeCookie]
 }

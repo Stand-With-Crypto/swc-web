@@ -52,9 +52,13 @@ export async function Navbar({ locale }: { locale: SupportedLocale }) {
   return (
     <>
       {/* TODO Delete */}
-      <div className="bg-yellow-300 p-3 text-center text-xs md:text-base">
+      <div className="flex flex-col bg-yellow-300 p-3 text-center text-xs md:text-base">
         <InternalLink className="w-full underline" href={urls.sampleArchitecturePatterns()}>
           Click To View SWC v2 Sample Architecture Patterns
+        </InternalLink>
+
+        <InternalLink className="w-full underline" href={urls.userSettings()}>
+          User Settings
         </InternalLink>
       </div>
       {/* TODO mobile once they have mockups */}
