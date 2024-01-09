@@ -2,6 +2,7 @@
 import { actionCreateUserActionEmailCongressperson } from '@/actions/actionCreateUserActionEmailCongressperson'
 import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
 import { DTSICongresspersonAssociatedWithFormAddress } from '@/components/app/dtsiCongresspersonAssociatedWithFormAddress'
+import { getDefaultText } from '@/components/app/userActionFormEmailCongressperson/getDefaultText'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -41,12 +42,6 @@ const FORM_NAME = 'User Action Form Email Congressperson'
 type FormValues = z.infer<typeof zodUserActionFormEmailCongresspersonFields> &
   GenericErrorFormValues
 
-const DEFAULT_MESSAGE = `The House Financial Services Committee and the House Agriculture Committee in the U.S. House of Representatives passed historic, bipartisan legislation in July. I am asking you to support the bill when it comes to the floor for a full House vote.
-
-  The Financial Innovation and Technology for the 21st Century Act ("FIT21") addresses a pressing need for regulatory clarity in the United States for crypto. A vote for this bill is a vote to protect customers, promote job opportunities, and bolster national security.
-  
-  As your constituent, I am asking you to vote for FIT21 to safeguard consumers and promote responsible innovation. Thank you.`
-
 const getDefaultValues = ({
   user,
   dtsiSlug,
@@ -60,7 +55,7 @@ const getDefaultValues = ({
       fullName: user.fullName,
       email: user.primaryUserEmailAddress?.address || '',
       phoneNumber: user.phoneNumber,
-      message: DEFAULT_MESSAGE,
+      message: getDefaultText(),
       address: user.address
         ? {
             description: user.address.formattedDescription,
@@ -74,7 +69,7 @@ const getDefaultValues = ({
     fullName: '',
     email: '',
     phoneNumber: '',
-    message: DEFAULT_MESSAGE,
+    message: getDefaultText(),
     address: undefined,
     dtsiSlug,
   }

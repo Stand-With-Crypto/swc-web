@@ -45,7 +45,7 @@ export const UserActionRowCTAButton = React.forwardRef<
             <NextImage
               width={20}
               height={20}
-              src={'misc/uncheckedCircle.svg'}
+              src={'/misc/uncheckedCircle.svg'}
               alt={'Action not complete'}
             />
           )

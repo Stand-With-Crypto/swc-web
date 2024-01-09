@@ -2,6 +2,9 @@ import { RecentActivityAndLeaderboardTabs } from '@/components/app/recentActivit
 import { DEFAULT_LOCALE, SupportedLocale } from '@/intl/locales'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
+export const getIntlPrefix = (locale: SupportedLocale) =>
+  locale === DEFAULT_LOCALE ? '' : `/${locale}`
+
 export const getIntlUrls = (
   locale: SupportedLocale,
   {

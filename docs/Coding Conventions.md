@@ -69,6 +69,7 @@ Below is a non-exhaustive list of coding conventions that we try to follow. This
 - If you need client-side data fetching in addition to or instead of rendering via RSCs ("Load More" actions, realtime updating data, user-specific data being fetch on a page you'd like to be largely cached, etc), use the [swr](https://swr.vercel.app/) library from Vercel unless product requirements demand something more custom
 - Use [server actions](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations) for mutations unless product requirements prohibit it. Place all actions in the `src/actions` folder and prefix their function names with "action".
 - If you need to add an API endpoint that gets fetched on the frontend client, export a type from the file that defines the JSON response of the API. This allows client side logic to define the response of the API endpoint in a typesafe manner. See `src/app/api/identified-user/full-profile-info/route.ts` and then the corresponding frontend hook `src/hooks/useApiResponseForUserFullProfileInfo.tsx`
+- Tip: If you need to build a "skeleton" for a page or component, you can do this fast and accurately by copy-pasting the code you need a skeleton of and wrapping the various elements in `<Skeleton>` tags
 
 # Analytics
 

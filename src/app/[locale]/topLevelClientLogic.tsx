@@ -30,7 +30,7 @@ const NEXT_PUBLIC_THIRDWEB_CLIENT_ID = requiredEnv(
 const InitialOrchestration = () => {
   const pathname = usePathname()
   const address = useAddress()
-  // Not, in local dev this component will double render. It doesn't do this after it is built (verify in testing)
+  // Note, in local dev this component will double render. It doesn't do this after it is built (verify in testing)
   useEffect(() => {
     const sessionId = maybeSetUserSessionIdOnClient()
     initClientAnalytics(sessionId)
