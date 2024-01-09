@@ -10,7 +10,7 @@ import { UserActionFormTweetDialog } from '@/components/app/userActionFormTweet/
 import { UserAvatar } from '@/components/app/userAvatar'
 import { Button } from '@/components/ui/button'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
-import { FormattedRelativeDatetime } from '@/components/ui/formattedRelativeDatetime'
+import { FormattedRelativeDatetimeWithClientHydration } from '@/components/ui/formattedRelativeDatetimeWithClientHydration'
 import { DTSIPersonForUserActions } from '@/data/dtsi/queries/queryDTSIPeopleBySlugForUserActions'
 import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
 import { useIsMobile } from '@/hooks/useIsMobile'
@@ -60,10 +60,13 @@ function RecentActivityRowBase({
         ) : (
           <>
             <span className="hidden md:inline">
-              <FormattedRelativeDatetime date={action.datetimeCreated} locale={locale} />
+              <FormattedRelativeDatetimeWithClientHydration
+                date={action.datetimeCreated}
+                locale={locale}
+              />
             </span>
             <span className="inline md:hidden">
-              <FormattedRelativeDatetime
+              <FormattedRelativeDatetimeWithClientHydration
                 timeFormatStyle="narrow"
                 date={action.datetimeCreated}
                 locale={locale}
