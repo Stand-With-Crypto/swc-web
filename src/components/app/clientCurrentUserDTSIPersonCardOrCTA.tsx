@@ -2,6 +2,7 @@
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { DTSIPersonCard } from '@/components/app/dtsiPersonCard'
+import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
 import { LazyUserActionFormCallCongressperson } from '@/components/app/userActionFormCallCongressperson/lazyLoad'
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
@@ -29,13 +30,10 @@ export function ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: Suppo
       </Button>
     )
   }
-  if ('notFoundReason' in res.data || !res.data[0]) {
+  if ('notFoundReason' in res.data) {
     return null
   }
-  // TODO now that we can support multiple reps being returned, we should build the UX for it
-  const person =
-    res.data.find(x => x.primaryRole?.roleCategory === DTSI_PersonRoleCategory.CONGRESS) ||
-    res.data[0]
+  const person = res.data
   return (
     <div className="flex flex-col items-center justify-between gap-4 rounded-md border bg-blue-50 p-5 text-left md:flex-row md:gap-10">
       <div className="flex flex-row items-center gap-4 text-sm md:text-base">
@@ -55,16 +53,9 @@ export function ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: Suppo
         </div>
       </div>
       <div className="flex gap-5 md:gap-2">
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button size="lg">Call</Button>
-          </DialogTrigger>
-          <DialogContent>
-            <Suspense>
-              <LazyUserActionFormCallCongressperson />
-            </Suspense>
-          </DialogContent>
-        </Dialog>
+        <UserActionFormCallCongresspersonDialog>
+          <Button size="lg">Call</Button>
+        </UserActionFormCallCongresspersonDialog>
         <Button variant="secondary" asChild>
           <InternalLink href={getIntlUrls(locale).politicianDetails(person.slug)}>
             View profile

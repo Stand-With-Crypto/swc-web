@@ -60,7 +60,8 @@ export const apiUrls = {
   }) => `/api/public/dtsi/by-geography/usa/${stateCode}/${districtNumber}`,
   totalDonations: (locale: SupportedLocale) => `/api/public/total-donations/${locale}`,
   mockTotalDonations: (locale: SupportedLocale) => `/api/mock/total-donations/${locale}`,
-  performedUserActionTypes: () => `/api/identified-user/performed-user-action-types`,
+  userPerformedUserActionTypes: () => `/api/identified-user/performed-user-action-types`,
+  userFullProfileInfo: () => `/api/identified-user/full-profile-info`,
   dtsiAllPeople: () => `/api/public/dtsi/all-people`,
 }
 

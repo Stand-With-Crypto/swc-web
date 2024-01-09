@@ -14,15 +14,13 @@ import {
   walletConnect,
 } from '@thirdweb-dev/react'
 
-import {
-  ClientAnalyticActionType,
-  ClientAnalyticComponentType,
-  initAnalytics,
-  trackClientAnalytic,
-} from '@/utils/web/clientAnalytics'
+import { initClientAnalytics, trackClientAnalytic } from '@/utils/web/clientAnalytics'
 import { maybeSetUserSessionIdOnClient } from '@/utils/web/clientUserSessionId'
 import { usePathname } from 'next/navigation'
 import { useEffect } from 'react'
+import { LocaleContext } from '@/hooks/useLocale'
+import { SupportedLocale } from '@/intl/locales'
+import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
 
 const NEXT_PUBLIC_THIRDWEB_CLIENT_ID = requiredEnv(
   process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID,
@@ -35,7 +33,7 @@ const InitialOrchestration = () => {
   // Not, in local dev this component will double render. It doesn't do this after it is built (verify in testing)
   useEffect(() => {
     const sessionId = maybeSetUserSessionIdOnClient()
-    initAnalytics(sessionId)
+    initClientAnalytics(sessionId)
     Sentry.setUser({ id: sessionId, idType: 'session' })
   }, [])
   useEffect(() => {
@@ -49,37 +47,45 @@ const InitialOrchestration = () => {
     }
     trackClientAnalytic('Page Visited', {
       pathname,
-      component: ClientAnalyticComponentType.page,
-      action: ClientAnalyticActionType.view,
+      component: AnalyticComponentType.page,
+      action: AnalyticActionType.view,
     })
   }, [pathname])
   return null
 }
 
 // This component includes all top level client-side logic
-export function TopLevelClientLogic({ children }: { children: React.ReactNode }) {
+export function TopLevelClientLogic({
+  children,
+  locale,
+}: {
+  children: React.ReactNode
+  locale: SupportedLocale
+}) {
   return (
-    <ThirdwebProvider
-      locale={en()}
-      activeChain={Base}
-      supportedWallets={[
-        metamaskWallet(),
-        coinbaseWallet({ recommended: true }),
-        walletConnect(),
-        embeddedWallet({
-          auth: {
-            options: ['google', 'email'],
-          },
-        }),
-      ]}
-      clientId={NEXT_PUBLIC_THIRDWEB_CLIENT_ID}
-      authConfig={{
-        domain: NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN,
-        authUrl: '/api/auth',
-      }}
-    >
-      <InitialOrchestration />
-      {children}
-    </ThirdwebProvider>
+    <LocaleContext.Provider value={locale}>
+      <ThirdwebProvider
+        locale={en()}
+        activeChain={Base}
+        supportedWallets={[
+          metamaskWallet(),
+          coinbaseWallet({ recommended: true }),
+          walletConnect(),
+          embeddedWallet({
+            auth: {
+              options: ['google', 'email'],
+            },
+          }),
+        ]}
+        clientId={NEXT_PUBLIC_THIRDWEB_CLIENT_ID}
+        authConfig={{
+          domain: NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN,
+          authUrl: '/api/auth',
+        }}
+      >
+        <InitialOrchestration />
+        {children}
+      </ThirdwebProvider>
+    </LocaleContext.Provider>
   )
 }

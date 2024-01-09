@@ -1,5 +1,5 @@
 import { RecentActivityAndLeaderboard } from '@/components/app/recentActivityAndLeaderboard/recentActivityAndLeaderboard'
-import { ClientAuthUserActionRowCTAs } from '@/components/app/userActionRowCTA/clientAuthUserActionRowCTAs'
+import { UserActionRowCTAsListWithApi } from '@/components/app/userActionRowCTA/userActionRowCTAsListWithApi'
 import { Button } from '@/components/ui/button'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
@@ -27,6 +27,7 @@ import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
 import { ResponsiveYoutube } from '@/components/ui/responsiveYoutube'
 import { LazyResponsiveYoutube } from '@/components/ui/responsiveYoutube/lazyLoad'
 import { Skeleton } from '@/components/ui/skeleton'
+import { UserActionFormOptInSWCDialog } from '@/components/app/userActionFormOptInSWC/dialog'
 
 export const revalidate = 3600
 export const dynamic = 'error'
@@ -62,16 +63,9 @@ export default async function Home({ params }: PageProps) {
             Congress is writing the rules as we speak - but they won't vote YES until they've heard
             from you.
           </h2>
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button size="lg">Join the fight</Button>
-            </DialogTrigger>
-            <DialogContent>
-              <Suspense>
-                <LazyUserActionFormOptInSWC />
-              </Suspense>
-            </DialogContent>
-          </Dialog>
+          <UserActionFormOptInSWCDialog>
+            <Button size="lg">Join the fight</Button>
+          </UserActionFormOptInSWCDialog>
         </div>
         <div className="order-0 md:container lg:order-1 lg:px-0">
           <Dialog>
@@ -212,7 +206,7 @@ export default async function Home({ params }: PageProps) {
           <PageSubTitle as="h4">
             The future of crypto is in your hands. Here's how you can help.
           </PageSubTitle>
-          <ClientAuthUserActionRowCTAs />
+          <UserActionRowCTAsListWithApi />
         </section>
         <section className="mb-16 space-y-7 md:mb-24">
           <PageTitle as="h3">Where politicians stand on crypto</PageTitle>

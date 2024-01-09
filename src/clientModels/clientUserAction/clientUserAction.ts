@@ -34,7 +34,7 @@ type ClientUserActionDatabaseQuery = UserAction & {
   userActionOptIn: UserActionOptIn | null
 }
 
-type ClientUserActionEmailRecipient = Pick<UserActionEmailRecipient, 'id' | 'email'> & {
+type ClientUserActionEmailRecipient = Pick<UserActionEmailRecipient, 'id'> & {
   person: DTSIPersonForUserActions
 }
 type ClientUserActionEmail = {
@@ -145,7 +145,6 @@ export const getClientUserAction = ({
         actionType,
         userActionEmailRecipients: userActionEmailRecipients.map(x => ({
           id: x.id,
-          email: x.email,
           person: peopleBySlug[x.dtsiSlug],
         })),
       }

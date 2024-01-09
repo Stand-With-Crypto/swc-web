@@ -1,11 +1,9 @@
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
+'use client'
 import { NextImage } from '@/components/ui/image'
 import { cn } from '@/utils/web/cn'
 import { UserActionType } from '@prisma/client'
 import { ChevronRight } from 'lucide-react'
 import React from 'react'
-import { LazyExoticComponent } from 'react'
-import NextImageComponent, { ImageProps as NextImageProps } from 'next/image'
 
 export interface UserActionRowCTAProps {
   actionType: UserActionType
@@ -14,25 +12,16 @@ export interface UserActionRowCTAProps {
   text: string
   subtext: string
   canBeTriggeredMultipleTimes: boolean
-  lazyRenderedForm: LazyExoticComponent<() => JSX.Element>
+  DialogComponent: (args: { children: React.ReactNode }) => React.ReactNode
+  onClick?: () => void
 }
 
-const UserActionRowCTAButton = React.forwardRef<
+export const UserActionRowCTAButton = React.forwardRef<
   React.ElementRef<'button'>,
-  UserActionRowCTAProps & React.ButtonHTMLAttributes<HTMLButtonElement>
+  Omit<UserActionRowCTAProps, 'DialogComponent'> & React.ButtonHTMLAttributes<HTMLButtonElement>
 >(
   (
-    {
-      state,
-      image,
-      text,
-      subtext,
-      canBeTriggeredMultipleTimes,
-      lazyRenderedForm,
-      className,
-      actionType,
-      ...props
-    },
+    { state, image, text, subtext, canBeTriggeredMultipleTimes, className, actionType, ...props },
     ref,
   ) => {
     const canBeActionedOn =
@@ -94,15 +83,10 @@ const UserActionRowCTAButton = React.forwardRef<
 )
 UserActionRowCTAButton.displayName = 'UserActionRowCTAButton'
 
-export function UserActionRowCTA(props: UserActionRowCTAProps) {
+export function UserActionRowCTA({ DialogComponent, ...props }: UserActionRowCTAProps) {
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <UserActionRowCTAButton {...props} />
-      </DialogTrigger>
-      <DialogContent>
-        <props.lazyRenderedForm />
-      </DialogContent>
-    </Dialog>
+    <DialogComponent>
+      <UserActionRowCTAButton {...props} />
+    </DialogComponent>
   )
 }

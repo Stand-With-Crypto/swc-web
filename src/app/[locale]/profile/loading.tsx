@@ -1,5 +1,4 @@
-import { UserActionRowCTA } from '@/components/app/userActionRowCTA'
-import { USER_ACTION_ROW_CTA_INFO } from '@/components/app/userActionRowCTA/userActionRowCTAConstants'
+import { UserActionRowCTAsList } from '@/components/app/userActionRowCTA/userActionRowCTAsList'
 import { Button } from '@/components/ui/button'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
@@ -7,7 +6,6 @@ import { Progress } from '@/components/ui/progress'
 import { Skeleton } from '@/components/ui/skeleton'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import _ from 'lodash'
 import { Metadata } from 'next'
 
 export const dynamic = 'error'
@@ -84,11 +82,7 @@ export default function Profile({ params }: Props) {
       <div className="mx-auto mb-5 max-w-xl">
         <Progress value={0} />
       </div>
-      <div className="mb-14 space-y-4">
-        {USER_ACTION_ROW_CTA_INFO.map(({ actionType, ...rest }) => (
-          <UserActionRowCTA key={actionType} state={'incomplete'} {...{ actionType, ...rest }} />
-        ))}
-      </div>
+      <UserActionRowCTAsList className="mb-14" />
     </div>
   )
 }

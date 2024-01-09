@@ -1,12 +1,19 @@
 'use client'
 import { ClientUser } from '@/clientModels/clientUser/clientUser'
 import { ClientUserAction } from '@/clientModels/clientUserAction/clientUserAction'
-import { LazyUserActionFormOptInSWC } from '@/components/app/userActionFormOptInSWC/lazyLoad'
+import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
+import { UserActionFormDonateDialog } from '@/components/app/userActionFormDonate/dialog'
+import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
+import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
+import { UserActionFormOptInSWCDialog } from '@/components/app/userActionFormOptInSWC/dialog'
+import { UserActionFormTweetDialog } from '@/components/app/userActionFormTweet/dialog'
 import { UserAvatar } from '@/components/app/userAvatar'
 import { Button } from '@/components/ui/button'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
 import { FormattedRelativeDatetime } from '@/components/ui/formattedRelativeDatetime'
 import { DTSIPersonForUserActions } from '@/data/dtsi/queries/queryDTSIPeopleBySlugForUserActions'
+import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
+import { useIsMobile } from '@/hooks/useIsMobile'
 import { SupportedLocale } from '@/intl/locales'
 import {
   dtsiPersonFullName,
@@ -16,15 +23,7 @@ import { gracefullyError } from '@/utils/shared/gracefullyError'
 import { formatDonationOrganization } from '@/utils/web/donationUtils'
 import { getUserDisplayName } from '@/utils/web/userUtils'
 import { UserActionOptInType, UserActionType } from '@prisma/client'
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
-import React, { Suspense } from 'react'
-import { usePerformedUserActionTypes } from '@/hooks/usePerformedUserActionTypes'
-import { LazyUserActionFormCallCongressperson } from '@/components/app/userActionFormCallCongressperson/lazyLoad'
-import { LazyUserActionFormDonate } from '@/components/app/userActionFormDonate/lazyLoad'
-import { LazyUserActionFormEmailCongressperson } from '@/components/app/userActionFormEmailCongressperson/lazyLoad'
-import { LazyUserActionFormNFTMint } from '@/components/app/userActionFormNFTMint/lazyLoad'
-import { LazyUserActionFormTweet } from '@/components/app/userActionFormTweet/lazyLoad'
-import { useIsMobile } from '@/hooks/useIsMobile'
+import React from 'react'
 
 interface RecentActivityRowProps {
   action: ClientUserAction & { user: ClientUser }
@@ -95,7 +94,7 @@ const formatDTSIPerson = (person: DTSIPersonForUserActions) => {
 export function RecentActivityRow(props: RecentActivityRowProps) {
   const { action, locale } = props
   const userDisplayName = getUserDisplayName(props.action.user)
-  const { data } = usePerformedUserActionTypes()
+  const { data } = useApiResponseForUserPerformedUserActionTypes()
   const hasSignedUp = data?.performedUserActionTypes.includes(UserActionType.OPT_IN)
   const getActionSpecificProps = () => {
     switch (action.actionType) {
@@ -115,16 +114,9 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
           onFocusContent: hasSignedUp
             ? undefined
             : () => (
-                <Dialog>
-                  <DialogTrigger asChild>
-                    <Button>Join</Button>
-                  </DialogTrigger>
-                  <DialogContent>
-                    <Suspense>
-                      <LazyUserActionFormOptInSWC />
-                    </Suspense>
-                  </DialogContent>
-                </Dialog>
+                <UserActionFormOptInSWCDialog>
+                  <Button>Join</Button>
+                </UserActionFormOptInSWCDialog>
               ),
           children: (
             <>
@@ -138,16 +130,9 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
       case UserActionType.CALL:
         return {
           onFocusContent: () => (
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button>Call yours</Button>
-              </DialogTrigger>
-              <DialogContent>
-                <Suspense>
-                  <LazyUserActionFormCallCongressperson />
-                </Suspense>
-              </DialogContent>
-            </Dialog>
+            <UserActionFormCallCongresspersonDialog>
+              <Button>Call yours</Button>
+            </UserActionFormCallCongresspersonDialog>
           ),
           children: (
             <>
@@ -159,16 +144,9 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
       case UserActionType.DONATION:
         return {
           onFocusContent: () => (
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button>Donate</Button>
-              </DialogTrigger>
-              <DialogContent>
-                <Suspense>
-                  <LazyUserActionFormDonate />
-                </Suspense>
-              </DialogContent>
-            </Dialog>
+            <UserActionFormDonateDialog>
+              <Button>Donate</Button>
+            </UserActionFormDonateDialog>
           ),
           children: (
             <>
@@ -187,16 +165,9 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
       case UserActionType.EMAIL:
         return {
           onFocusContent: () => (
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button>Email yours</Button>
-              </DialogTrigger>
-              <DialogContent>
-                <Suspense>
-                  <LazyUserActionFormEmailCongressperson />
-                </Suspense>
-              </DialogContent>
-            </Dialog>
+            <UserActionFormEmailCongresspersonDialog>
+              <Button>Email yours</Button>
+            </UserActionFormEmailCongresspersonDialog>
           ),
           children: (
             <>
@@ -213,16 +184,9 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
       case UserActionType.NFT_MINT: {
         return {
           onFocusContent: () => (
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button>Mint yours</Button>
-              </DialogTrigger>
-              <DialogContent>
-                <Suspense>
-                  <LazyUserActionFormNFTMint />
-                </Suspense>
-              </DialogContent>
-            </Dialog>
+            <UserActionFormNFTMintDialog>
+              <Button>Mint yours</Button>
+            </UserActionFormNFTMintDialog>
           ),
           children: <MainText>{userDisplayName} donated by minting an NFT</MainText>,
         }
@@ -230,16 +194,9 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
       case UserActionType.TWEET: {
         return {
           onFocusContent: () => (
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button>Tweet</Button>
-              </DialogTrigger>
-              <DialogContent>
-                <Suspense>
-                  <LazyUserActionFormTweet />
-                </Suspense>
-              </DialogContent>
-            </Dialog>
+            <UserActionFormTweetDialog>
+              <Button>Tweet</Button>
+            </UserActionFormTweetDialog>
           ),
           children: <MainText>{userDisplayName} tweeted in support of crypto</MainText>,
         }

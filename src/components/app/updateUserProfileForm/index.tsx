@@ -14,24 +14,26 @@ import {
   FormGeneralErrorMessage,
   FormItem,
   FormLabel,
-  FormSuccessMessage,
 } from '@/components/ui/form'
 import { PlacesAutocomplete } from '@/components/ui/googlePlacesSelect'
 import { Input } from '@/components/ui/input'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { SupportedLocale } from '@/intl/locales'
-import { GenericErrorFormValues, triggerServerActionForForm } from '@/utils/web/formUtils'
-import { formatGooglePlacesResultToAddress } from '@/utils/web/formatGooglePlacesResultToAddress'
+import { useLocale } from '@/hooks/useLocale'
+import {
+  GenericErrorFormValues,
+  trackFormSubmissionSyncErrors,
+  triggerServerActionForForm,
+} from '@/utils/web/formUtils'
+import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
-import { zodUpdateUserProfileFormFields } from '@/validation/zodUpdateUserProfile'
+import { zodUpdateUserProfileFormFields } from '@/validation/forms/zodUpdateUserProfile'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { UserActionOptInType, UserActionType } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
-import { getDetails } from 'use-places-autocomplete'
 import { z } from 'zod'
 
 const FORM_NAME = 'User Profile'
@@ -39,21 +41,20 @@ type FormValues = z.infer<typeof zodUpdateUserProfileFormFields> & GenericErrorF
 
 export function UpdateUserProfileForm({
   user,
-  locale,
   onCancel,
   onSuccess,
 }: {
   user: SensitiveDataClientUser & { address: ClientAddress | null }
-  locale: SupportedLocale
   onCancel: () => void
   onSuccess: () => void
 }) {
+  const locale = useLocale()
   const router = useRouter()
   const form = useForm<FormValues>({
     resolver: zodResolver(zodUpdateUserProfileFormFields),
     defaultValues: {
       fullName: user.fullName,
-      email: user.primaryEmailAddress?.address || '',
+      email: user.primaryUserEmailAddress?.address || '',
       phoneNumber: user.phoneNumber,
       isPubliclyVisible: user.isPubliclyVisible,
       address: user.address
@@ -77,36 +78,32 @@ export function UpdateUserProfileForm({
         <form
           onSubmit={form.handleSubmit(async values => {
             const address = values.address
-              ? await getDetails({
-                  placeId: values.address.place_id,
-                  fields: ['address_components'],
+              ? await convertGooglePlaceAutoPredictionToAddressSchema(values.address).catch(e => {
+                  Sentry.captureException(e)
+                  catchUnexpectedServerErrorAndTriggerToast(e)
+                  return null
                 })
-                  .then(_details => {
-                    const address = values.address!
-                    const details = _details as Required<
-                      Pick<google.maps.places.PlaceResult, 'address_components'>
-                    >
-                    return formatGooglePlacesResultToAddress({
-                      ...details,
-                      formattedDescription: address.description,
-                      placeId: address.place_id,
-                    })
-                  })
-                  .catch(e => {
-                    Sentry.captureException(e)
-                    catchUnexpectedServerErrorAndTriggerToast(e)
-                    return null
-                  })
               : null
 
-            const result = await triggerServerActionForForm({ form, formName: FORM_NAME }, () =>
-              actionUpdateUserProfile({ ...values, address }),
+            const result = await triggerServerActionForForm(
+              {
+                form,
+                formName: FORM_NAME,
+                analyticsProps: {
+                  'Address Administrative Area Level 1': address?.administrativeAreaLevel1,
+                  'Address Country Code': address?.countryCode,
+                  'Address Locality': address?.locality,
+                  'Is Publicly Visible': values.isPubliclyVisible,
+                },
+              },
+              () => actionUpdateUserProfile({ ...values, address }),
             )
             if (result.status === 'success') {
               router.refresh()
               toast.success('Profile updated', { duration: 5000 })
+              onSuccess()
             }
-          })}
+          }, trackFormSubmissionSyncErrors(FORM_NAME))}
           className="space-y-8"
         >
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">

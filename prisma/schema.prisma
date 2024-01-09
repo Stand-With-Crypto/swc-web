@@ -27,7 +27,7 @@ model AuthenticationNonce {
 model Address {
   id                       String   @id @default(uuid())
   // For now all our addresses will be persisted via google place so this is required. This may change in the future
-  googlePlaceId           String   @map("google_place_id") @unique
+  googlePlaceId            String   @unique @map("google_place_id")
   formattedDescription     String   @map("formatted_description") // We could compute this from the fields, but in the interest of matching the user selection exactly let's persist for now. ex: 123 East 86th St, Apt 13a, New York, NY 06890
   streetNumber             String   @map("street_number") // ex: 123
   route                    String   @map("route") // ex: East 86th St
@@ -165,6 +165,7 @@ model UserAction {
   id                  String             @id @default(uuid())
   userId              String             @map("user_id")
   user                User               @relation(fields: [userId], references: [id])
+  campaignName        String             @map("campaign_name")
   // Because a user could be in a number of different states (logged in, not logged in, etc) we want to track the different types of users that could be performing an action
   // an action will only ever be associated with one of these types of users
   userCryptoAddressId String?            @map("crypto_address_id")
@@ -187,7 +188,7 @@ model UserAction {
   userActionOptIn    UserActionOptIn?
 
   @@index([datetimeCreated])
-  @@index([userId])
+  @@index([userId, campaignName])
   @@index([userCryptoAddressId])
   @@index([userSessionId])
   @@index([nftMintId])
@@ -211,8 +212,6 @@ model UserActionOptIn {
 model UserActionEmail {
   id                        String                     @id @default(uuid())
   userAction                UserAction                 @relation(fields: [id], references: [id])
-  // TODO determine if these need to be nullable in the future
-  zipCode                   String                     @map("zip_code")
   senderEmail               String                     @map("sender_email")
   fullName                  String                     @map("full_name")
   phoneNumber               String                     @map("phone_number")
@@ -229,7 +228,6 @@ model UserActionEmailRecipient {
   id                String          @id @default(uuid())
   userActionEmailId String          @map("user_action_email_id")
   userActionEmail   UserActionEmail @relation(fields: [userActionEmailId], references: [id])
-  email             String
   dtsiSlug          String          @map("dtsi_slug")
 
   @@index([userActionEmailId])
