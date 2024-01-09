@@ -111,4 +111,14 @@
       height: 0;
     }
   }
+
+  .animate-stroke {
+    animation: stroke 1s infinite linear;
+  }
+
+  @keyframes stroke {
+    100% {
+      stroke-dashoffset: 0;
+    }
+  }
 }

@@ -70,13 +70,19 @@ type FormItemContextValue = {
 
 const FormItemContext = React.createContext<FormItemContextValue>({} as FormItemContextValue)
 
+const FormItemSkeleton = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => {
+    return <div ref={ref} className={cn('space-y-2', className)} {...props} />
+  },
+)
+FormItemSkeleton.displayName = 'FormItemSkeleton'
 const FormItem = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => {
     const id = React.useId()
 
     return (
       <FormItemContext.Provider value={{ id }}>
-        <div ref={ref} className={cn('space-y-2', className)} {...props} />
+        <FormItemSkeleton ref={ref} className={className} {...props} />
       </FormItemContext.Provider>
     )
   },
@@ -187,6 +193,7 @@ export {
   useFormField,
   Form,
   FormItem,
+  FormItemSkeleton,
   FormLabel,
   FormControl,
   FormDescription,
