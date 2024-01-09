@@ -1,7 +1,8 @@
 import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
 import { zodOptionalEmptyString } from '@/validation/utils'
-import { zodAddress } from '@/validation/zodAddress'
-import { zodGooglePlacesAutocompletePrediction } from '@/validation/zodGooglePlacesAutocompletePrediction'
+import { zodAddress } from '@/validation/fields/zodAddress'
+import { zodGooglePlacesAutocompletePrediction } from '@/validation/fields/zodGooglePlacesAutocompletePrediction'
+import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
 import { string, object, union, any, boolean } from 'zod'
 
 const base = object({
@@ -11,7 +12,9 @@ const base = object({
   email: zodOptionalEmptyString(
     string().trim().email('Please enter a valid email address').toLowerCase(),
   ),
-  phoneNumber: zodOptionalEmptyString(string()).transform(str => str && normalizePhoneNumber(str)),
+  phoneNumber: zodOptionalEmptyString(zodPhoneNumber).transform(
+    str => str && normalizePhoneNumber(str),
+  ),
   isPubliclyVisible: boolean(),
 })
 

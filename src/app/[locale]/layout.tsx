@@ -63,13 +63,13 @@ export default function Layout({ children, params }: PageProps & { children: Rea
     <html lang={locale}>
       <body className={inter.className}>
         <NextTopLoader />
-        <TopLevelClientLogic>
+        <TopLevelClientLogic locale={locale}>
           <FullHeight.Container>
             <FullHeight.Content>
-              <Navbar {...{ locale }} />
+              <Navbar locale={locale} />
               <main>{children}</main>
             </FullHeight.Content>
-            <Footer {...{ locale }} />
+            <Footer locale={locale} />
           </FullHeight.Container>
         </TopLevelClientLogic>
         <Toaster />

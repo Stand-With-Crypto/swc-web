@@ -1,3 +1,4 @@
+import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
 import { queryDTSIAllPeople } from '@/data/dtsi/queries/queryDTSIAllPeople'
 import { queryDTSIPeopleByCongressionalDistrict } from '@/data/dtsi/queries/queryDTSIPeopleByCongressionalDistrict'
 import { NextRequest, NextResponse } from 'next/server'

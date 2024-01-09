@@ -1,7 +1,7 @@
 'use server'
 import { appRouterGetAuthUser } from '@/utils/server/appRouterGetAuthUser'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { zodUpdateUserProfileFormAction } from '@/validation/zodUpdateUserProfile'
+import { zodUpdateUserProfileFormAction } from '@/validation/forms/zodUpdateUserProfile'
 import { UserEmailAddressSource } from '@prisma/client'
 import 'server-only'
 import { z } from 'zod'

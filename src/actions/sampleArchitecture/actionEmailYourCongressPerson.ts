@@ -1,7 +1,7 @@
 'use server'
 import 'server-only'
 import { z } from 'zod'
-import { zodEmailYourCongressperson } from '@/validation/zodEmailYourCongressperson'
+import { zodEmailYourCongressperson } from '@/validation/forms/zodEmailYourCongressperson'
 
 export async function actionEmailYourCongressPerson(
   data: z.infer<typeof zodEmailYourCongressperson>,
