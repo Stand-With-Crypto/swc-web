@@ -26,7 +26,7 @@ export function DTSICongresspersonAssociatedWithFormAddress({
       onChangeDTSISlug('')
     }
   }, [res.data])
-  if (!address || !res.isLoading) {
+  if (!address || res.isLoading) {
     return (
       <div className="flex gap-4">
         <Skeleton className="h-10 w-10" />

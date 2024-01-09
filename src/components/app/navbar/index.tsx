@@ -7,6 +7,7 @@ import { InternalLink } from '@/components/ui/link'
 import getIntl from '@/intl/intlMessages'
 import { generateClientComponentMessages } from '@/intl/intlServerUtils'
 import { SupportedLocale } from '@/intl/locales'
+import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { Menu } from 'lucide-react'
 
@@ -51,16 +52,24 @@ export async function Navbar({ locale }: { locale: SupportedLocale }) {
   ]
   return (
     <>
-      {/* TODO Delete */}
-      <div className="flex gap-4 bg-yellow-300 p-3 text-center text-xs md:text-base">
-        <InternalLink className="underline" href={urls.sampleArchitecturePatterns()}>
-          Click To View SWC v2 Sample Architecture Patterns
-        </InternalLink>
-
-        <InternalLink className="underline" href={urls.userSettings()}>
-          User Settings
-        </InternalLink>
-      </div>
+      {NEXT_PUBLIC_ENVIRONMENT !== 'production' && (
+        <div className="bg-yellow-300 py-3 text-center">
+          <div className="container flex justify-between">
+            <p className="flex-shrink-0 font-bold">Testing Environment</p>
+            <div className="xs:text-xs space-x-3 text-sm">
+              <InternalLink className="underline" href={urls.internalHomepage()}>
+                Internal Pages
+              </InternalLink>
+              <InternalLink
+                className="hidden underline sm:inline-block"
+                href={urls.sampleArchitecturePatterns()}
+              >
+                v2 Architecture Samples
+              </InternalLink>
+            </div>
+          </div>
+        </div>
+      )}
       {/* TODO mobile once they have mockups */}
       <nav className="container flex justify-between py-3 md:py-8">
         <div className="flex items-center gap-8">
