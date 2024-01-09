@@ -16,7 +16,6 @@ export default function UserActionDeepLinks() {
         {ORDERED_USER_ACTION_ROW_CTA_INFO.map(props => {
           const { DialogComponent, ...userAction } = props
           const url = USER_ACTION_DEEPLINK_MAP[userAction.actionType].getDeeplinkUrl({ locale })
-          console.log({ url })
           return (
             <div key={userAction.actionType}>
               <p>Goes to {url}</p>
