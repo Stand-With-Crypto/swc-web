@@ -28,6 +28,7 @@ import { formatGooglePlacesResultToAddress } from '@/utils/web/formatGooglePlace
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
 import { zodUserActionFormEmailCongresspersonFields } from '@/validation/forms/zodUserActionFormEmailCongressperson'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { UserActionType } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
@@ -121,8 +122,20 @@ export function UserActionFormEmailCongressperson({
           if (!address) {
             return
           }
-          const result = await triggerServerActionForForm({ form, formName: FORM_NAME }, () =>
-            actionCreateUserActionEmailCongressperson({ ...values, address }),
+          const result = await triggerServerActionForForm(
+            {
+              form,
+              formName: FORM_NAME,
+              analyticsProps: {
+                'Campaign Name': values.campaignName,
+                'User Action Type': UserActionType.EMAIL,
+                'DTSI Slug': values.dtsiSlug,
+                'Address Administrative Area Level 1': address.administrativeAreaLevel1,
+                'Address Country Code': address.countryCode,
+                'Address Locality': address.locality,
+              },
+            },
+            () => actionCreateUserActionEmailCongressperson({ ...values, address }),
           )
           if (result.status === 'success') {
             router.refresh()

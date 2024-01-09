@@ -5,18 +5,15 @@ import { X } from 'lucide-react'
 import * as React from 'react'
 
 import { cn } from '@/utils/web/cn'
-import {
-  ClientAnalyticActionType,
-  ClientAnalyticComponentType,
-  trackClientAnalytic,
-} from '@/utils/web/clientAnalytics'
+import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
+import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
 
 function Dialog({ onOpenChange, ...props }: DialogPrimitive.DialogProps) {
   const wrappedOnChangeOpen = React.useCallback(
     (open: boolean) => {
       trackClientAnalytic(`Dialog ${open ? 'Opened' : 'Closed'}`, {
-        component: ClientAnalyticComponentType.modal,
-        action: ClientAnalyticActionType.view,
+        component: AnalyticComponentType.modal,
+        action: AnalyticActionType.view,
       })
       onOpenChange?.(open)
     },

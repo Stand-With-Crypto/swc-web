@@ -7,7 +7,7 @@ import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useDialog } from '@/hooks/useDialog'
-import { Suspense, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 
 export function UserActionFormEmailCongresspersonDialog({
   children,
@@ -20,6 +20,11 @@ export function UserActionFormEmailCongresspersonDialog({
   const fetchUser = useApiResponseForUserFullProfileInfo()
   const [state, setState] = useState<'form' | 'success'>('form')
   const { user } = fetchUser.data || { user: null }
+  useEffect(() => {
+    if (!dialogProps.open && state !== 'form') {
+      setState('form')
+    }
+  }, [dialogProps.open])
   return (
     <Dialog {...dialogProps}>
       <DialogTrigger asChild>{children}</DialogTrigger>

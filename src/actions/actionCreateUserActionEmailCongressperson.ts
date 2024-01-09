@@ -9,6 +9,7 @@ import { UserActionType, UserEmailAddressSource } from '@prisma/client'
 import { subDays } from 'date-fns'
 import 'server-only'
 import { z } from 'zod'
+import { getServerAnalytics } from '@/utils/server/severAnalytics'
 
 const logger = getLogger(`actionCreateUserActionEmailCongressperson`)
 
@@ -26,6 +27,7 @@ export async function actionCreateUserActionEmailCongressperson(
     }
   }
   logger.info('validated fields')
+  const analytics = getServerAnalytics(userMatch)
   let user =
     userMatch.user ||
     (await prismaClient.user.create({
@@ -52,7 +54,14 @@ export async function actionCreateUserActionEmailCongressperson(
     },
   })
   if (userAction) {
-    logger.info('fetched existing action, exiting early without persisting')
+    analytics.trackUserActionCreatedIgnored({
+      actionType,
+      campaignName,
+      reason: 'Too Many Recent',
+      'Address Administrative Area Level 1': validatedFields.data.address.administrativeAreaLevel1,
+      'Address Country Code': validatedFields.data.address.countryCode,
+      'Address Locality': validatedFields.data.address.locality,
+    })
     Sentry.captureMessage(
       `duplicate ${actionType} user action for campaign ${campaignName} submitted`,
       { extra: { validatedFields, userAction }, user: { id: user.id } },
@@ -97,7 +106,13 @@ export async function actionCreateUserActionEmailCongressperson(
       userActionEmail: true,
     },
   })
-  logger.info('created action')
+  analytics.trackUserActionCreated({
+    actionType,
+    campaignName,
+    'Address Administrative Area Level 1': validatedFields.data.address.administrativeAreaLevel1,
+    'Address Country Code': validatedFields.data.address.countryCode,
+    'Address Locality': validatedFields.data.address.locality,
+  })
   /*
   We assume any updates the user makes to this action should propagate to the user's profile
   */

@@ -69,3 +69,9 @@ Below is a non-exhaustive list of coding conventions that we try to follow. This
 - If you need client-side data fetching in addition to or instead of rendering via RSCs ("Load More" actions, realtime updating data, user-specific data being fetch on a page you'd like to be largely cached, etc), use the [swr](https://swr.vercel.app/) library from Vercel unless product requirements demand something more custom
 - Use [server actions](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations) for mutations unless product requirements prohibit it. Place all actions in the `src/actions` folder and prefix their function names with "action".
 - If you need to add an API endpoint that get's fetched on the frontend client, export a function prefixed with `apiResponseFor` that includes that json that will get returned. This allows client side logic to define the response of the API endpoint in a typesafe manner. See `src/app/api/identified-user/full-profile-info/route.ts` and then the corresponding frontend hook `src/hooks/useApiResponseForUserFullProfileInfo.tsx`
+
+# Analytics
+
+- Analytic event names and properties should always "Title Sentence Cased". For example, if you a have a property "isPubliclyVisible" you'd like to pass to analytics, the property name should be "Is Publicly Visible". This ensures non-technical users can clearly read and understand events in our analytics platforms.
+- Try and standardize naming for properties across events. If we refer to a property in two different events, the name should be the same
+- For server actions core to our workflow, try and trigger server-side events as well. This reduces the chance we won't account for client analytics that might be dropped due to network connectivity/blockers.

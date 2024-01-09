@@ -99,8 +99,18 @@ export function UpdateUserProfileForm({
                   })
               : null
 
-            const result = await triggerServerActionForForm({ form, formName: FORM_NAME }, () =>
-              actionUpdateUserProfile({ ...values, address }),
+            const result = await triggerServerActionForForm(
+              {
+                form,
+                formName: FORM_NAME,
+                analyticsProps: {
+                  'Address Administrative Area Level 1': address?.administrativeAreaLevel1,
+                  'Address Country Code': address?.countryCode,
+                  'Address Locality': address?.locality,
+                  'Is Publicly Visible': values.isPubliclyVisible,
+                },
+              },
+              () => actionUpdateUserProfile({ ...values, address }),
             )
             if (result.status === 'success') {
               router.refresh()

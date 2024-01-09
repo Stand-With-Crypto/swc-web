@@ -9,11 +9,8 @@ import { FormattedCurrency } from '@/components/ui/formattedCurrency'
 import { SupportedLocale } from '@/intl/locales'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { fetchReq } from '@/utils/shared/fetchReq'
-import {
-  ClientAnalyticActionType,
-  ClientAnalyticComponentType,
-  trackClientAnalytic,
-} from '@/utils/web/clientAnalytics'
+import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
+import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
 
 const useGetEntities = ({ limit }: { limit: number }) => {
   return useSWRInfinite(
@@ -68,8 +65,8 @@ export function Leaderboard({
                   const size = fetchLeaderboard.size + 1
                   trackClientAnalytic('Leaderboard Load More Pressed', {
                     size,
-                    component: ClientAnalyticComponentType.button,
-                    action: ClientAnalyticActionType.click,
+                    component: AnalyticComponentType.button,
+                    action: AnalyticActionType.click,
                   })
                   return fetchLeaderboard.setSize(size)
                 }}

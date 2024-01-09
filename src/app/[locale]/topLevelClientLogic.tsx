@@ -14,17 +14,13 @@ import {
   walletConnect,
 } from '@thirdweb-dev/react'
 
-import {
-  ClientAnalyticActionType,
-  ClientAnalyticComponentType,
-  initAnalytics,
-  trackClientAnalytic,
-} from '@/utils/web/clientAnalytics'
+import { initClientAnalytics, trackClientAnalytic } from '@/utils/web/clientAnalytics'
 import { maybeSetUserSessionIdOnClient } from '@/utils/web/clientUserSessionId'
 import { usePathname } from 'next/navigation'
 import { useEffect } from 'react'
 import { LocaleContext } from '@/hooks/useLocale'
 import { SupportedLocale } from '@/intl/locales'
+import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
 
 const NEXT_PUBLIC_THIRDWEB_CLIENT_ID = requiredEnv(
   process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID,
@@ -37,7 +33,7 @@ const InitialOrchestration = () => {
   // Not, in local dev this component will double render. It doesn't do this after it is built (verify in testing)
   useEffect(() => {
     const sessionId = maybeSetUserSessionIdOnClient()
-    initAnalytics(sessionId)
+    initClientAnalytics(sessionId)
     Sentry.setUser({ id: sessionId, idType: 'session' })
   }, [])
   useEffect(() => {
@@ -51,8 +47,8 @@ const InitialOrchestration = () => {
     }
     trackClientAnalytic('Page Visited', {
       pathname,
-      component: ClientAnalyticComponentType.page,
-      action: ClientAnalyticActionType.view,
+      component: AnalyticComponentType.page,
+      action: AnalyticActionType.view,
     })
   }, [pathname])
   return null
