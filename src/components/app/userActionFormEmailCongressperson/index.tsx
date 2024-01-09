@@ -1,8 +1,6 @@
 'use client'
 import { actionCreateUserActionEmailCongressperson } from '@/actions/actionCreateUserActionEmailCongressperson'
 import { apiResponseForUserFullProfileInfo } from '@/app/api/identified-user/full-profile-info/route'
-import { ClientAddress } from '@/clientModels/clientAddress'
-import { SensitiveDataClientUser } from '@/clientModels/clientUser/sensitiveDataClientUser'
 import { DTSICongresspersonAssociatedWithFormAddress } from '@/components/app/dtsiCongresspersonAssociatedWithFormAddress'
 import { Button } from '@/components/ui/button'
 import {
@@ -21,19 +19,17 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Textarea } from '@/components/ui/textarea'
-import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useLocale } from '@/hooks/useLocale'
-import getIntl from '@/intl/intlMessages'
-import { SupportedLocale } from '@/intl/locales'
-import { externalUrls, getIntlUrls } from '@/utils/shared/urls'
+import { useTrackSubmissionErrors } from '@/hooks/useTrackSubmissionErrors'
+import { getIntlUrls } from '@/utils/shared/urls'
+import { UserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns'
 import { GenericErrorFormValues, triggerServerActionForForm } from '@/utils/web/formUtils'
 import { formatGooglePlacesResultToAddress } from '@/utils/web/formatGooglePlacesResultToAddress'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
-import { zodUserActionFormEmailCongresspersonFields } from '@/validation/zodUserActionFormEmailCongressperson'
+import { zodUserActionFormEmailCongresspersonFields } from '@/validation/forms/zodUserActionFormEmailCongressperson'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as Sentry from '@sentry/nextjs'
 import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { getDetails } from 'use-places-autocomplete'
 import { z } from 'zod'
@@ -57,6 +53,7 @@ const getDefaultValues = ({
 }) => {
   if (user) {
     return {
+      campaignName: UserActionEmailCampaignName.DEFAULT,
       fullName: user.fullName,
       email: user.primaryUserEmailAddress?.address || '',
       phoneNumber: user.phoneNumber,
@@ -70,6 +67,7 @@ const getDefaultValues = ({
     }
   }
   return {
+    campaignName: UserActionEmailCampaignName.DEFAULT,
     fullName: '',
     email: '',
     phoneNumber: '',
@@ -95,6 +93,7 @@ export function UserActionFormEmailCongressperson({
     resolver: zodResolver(zodUserActionFormEmailCongresspersonFields),
     defaultValues: getDefaultValues({ user, dtsiSlug: undefined }),
   })
+  useTrackSubmissionErrors(form.formState, FORM_NAME)
   return (
     <Form {...form}>
       <form

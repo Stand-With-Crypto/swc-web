@@ -1,11 +1,12 @@
 'use server'
-import { appRouterGetAuthUser } from '@/utils/server/appRouterGetAuthUser'
+import * as Sentry from '@sentry/nextjs'
 import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getUserSessionIdOnAppRouter } from '@/utils/server/serverUserSessionId'
 import { getLogger } from '@/utils/shared/logger'
-import { zodUserActionFormEmailCongresspersonAction } from '@/validation/zodUserActionFormEmailCongressperson'
+import { zodUserActionFormEmailCongresspersonAction } from '@/validation/forms/zodUserActionFormEmailCongressperson'
 import { UserActionType, UserEmailAddressSource } from '@prisma/client'
+import { subDays } from 'date-fns'
 import 'server-only'
 import { z } from 'zod'
 
@@ -35,10 +36,35 @@ export async function actionCreateUserActionEmailCongressperson(
       include: { userCryptoAddress: true },
     }))
   logger.info('fetched/created user')
-  const userAction = await prismaClient.userAction.create({
+  const campaignName = validatedFields.data.campaignName
+  const actionType = UserActionType.EMAIL
+  let userAction = await prismaClient.userAction.findFirst({
+    where: {
+      datetimeCreated: {
+        lte: subDays(new Date(), 1),
+      },
+      actionType,
+      campaignName,
+      userId: user.id,
+    },
+    include: {
+      userActionEmail: true,
+    },
+  })
+  if (userAction) {
+    logger.info('fetched existing action, exiting early without persisting')
+    Sentry.captureMessage(
+      `duplicate ${actionType} user action for campaign ${campaignName} submitted`,
+      { extra: { validatedFields, userAction }, user: { id: user.id } },
+    )
+    return { user, userAction }
+  }
+
+  userAction = await prismaClient.userAction.create({
     data: {
       user: { connect: { id: user.id } },
       actionType: UserActionType.EMAIL,
+      campaignName: validatedFields.data.campaignName,
       ...('userCryptoAddress' in userMatch
         ? {
             userCryptoAddress: { connect: { id: userMatch.userCryptoAddress.id } },

@@ -14,18 +14,17 @@ import {
   FormGeneralErrorMessage,
   FormItem,
   FormLabel,
-  FormSuccessMessage,
 } from '@/components/ui/form'
 import { PlacesAutocomplete } from '@/components/ui/googlePlacesSelect'
 import { Input } from '@/components/ui/input'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { useLocale } from '@/hooks/useLocale'
-import { SupportedLocale } from '@/intl/locales'
+import { useTrackSubmissionErrors } from '@/hooks/useTrackSubmissionErrors'
 import { GenericErrorFormValues, triggerServerActionForForm } from '@/utils/web/formUtils'
 import { formatGooglePlacesResultToAddress } from '@/utils/web/formatGooglePlacesResultToAddress'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
-import { zodUpdateUserProfileFormFields } from '@/validation/zodUpdateUserProfile'
+import { zodUpdateUserProfileFormFields } from '@/validation/forms/zodUpdateUserProfile'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { UserActionOptInType, UserActionType } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
@@ -64,6 +63,7 @@ export function UpdateUserProfileForm({
         : null,
     },
   })
+  useTrackSubmissionErrors(form.formState, FORM_NAME)
   return (
     <div>
       <PageTitle size="sm" className="mb-3">

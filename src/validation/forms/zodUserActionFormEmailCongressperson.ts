@@ -1,10 +1,10 @@
 import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
-import { zodOptionalEmptyString } from '@/validation/utils'
+import { UserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns'
 import { zodAddress } from '@/validation/fields/zodAddress'
+import { zodDTSISlug } from '@/validation/fields/zodDTSISlug'
 import { zodGooglePlacesAutocompletePrediction } from '@/validation/fields/zodGooglePlacesAutocompletePrediction'
 import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
-import { string, object, union, any, boolean } from 'zod'
-import { zodDTSISlug } from '@/validation/fields/zodDTSISlug'
+import { nativeEnum, object, string } from 'zod'
 
 const base = object({
   fullName: string()
@@ -15,6 +15,7 @@ const base = object({
   phoneNumber: zodPhoneNumber.transform(str => str && normalizePhoneNumber(str)),
   message: string().min(1, 'Please enter a message').max(1000, 'Please enter a message'),
   dtsiSlug: zodDTSISlug,
+  campaignName: nativeEnum(UserActionEmailCampaignName),
 })
 
 export const zodUserActionFormEmailCongresspersonFields = base.extend({

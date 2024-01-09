@@ -1,13 +1,11 @@
-import * as Sentry from '@sentry/nextjs'
 import { FetchReqError } from '@/utils/shared/fetchReq'
 import {
-  ClientAnalyticProperties,
-  trackClientAnalytic,
   trackFormSubmitErrored,
   trackFormSubmitSucceeded,
   trackFormSubmitted,
 } from '@/utils/web/clientAnalytics'
 import { formatErrorStatus } from '@/utils/web/errorUtils'
+import * as Sentry from '@sentry/nextjs'
 import _ from 'lodash'
 import { UseFormReturn } from 'react-hook-form'
 
@@ -49,7 +47,9 @@ export async function triggerServerActionForForm<
     }
     return { status: 'error' as const }
   })
-  if (response && 'errors' in response && response.errors) {
+  if ('status' in response) {
+    return { status: response.status }
+  } else if (response && 'errors' in response && response.errors) {
     trackFormSubmitErrored(formName, { 'Error Type': 'Validation' })
     Object.entries(response.errors).forEach(([key, val]) => {
       form.setError(key, {
