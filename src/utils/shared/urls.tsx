@@ -35,9 +35,6 @@ export const getIntlUrls = (
     politicianDetails: (dtsiSlug: string) => `${localePrefix}/politicians/person/${dtsiSlug}`,
     // TODO delete before v2 go-live
     sampleArchitecturePatterns: () => `${localePrefix}/sample-architecture-patterns`,
-    deepLinkModal: {
-      emailCongressperson: () => `${localePrefix}/action/email-congressperson`,
-    },
   }
 }
 

@@ -7,7 +7,6 @@ import { useRouter } from 'next/navigation'
 
 export const dynamic = 'error'
 
-// consolidated links for all our sentry error endpoints
 export default function UserActionDeepLinks() {
   const locale = useLocale()
   const router = useRouter()
@@ -19,12 +18,14 @@ export default function UserActionDeepLinks() {
           const url = USER_ACTION_DEEPLINK_MAP[userAction.actionType].getDeeplinkUrl({ locale })
           console.log({ url })
           return (
-            <UserActionRowCTAButton
-              key={userAction.actionType}
-              {...userAction}
-              onClick={() => router.push(url)}
-              state="unknown"
-            />
+            <div key={userAction.actionType}>
+              <p>Goes to {url}</p>
+              <UserActionRowCTAButton
+                {...userAction}
+                onClick={() => router.push(url)}
+                state="unknown"
+              />
+            </div>
           )
         })}
       </div>
