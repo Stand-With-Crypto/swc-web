@@ -26,24 +26,15 @@ export function DTSICongresspersonAssociatedWithFormAddress({
       onChangeDTSISlug('')
     }
   }, [res.data])
-  if (!address) {
+  if (!address || !res.isLoading) {
     return (
       <div className="flex gap-4">
         <Skeleton className="h-10 w-10" />
         <div className="text-sm md:text-base">
           <p className="bold">Your representative</p>
-          <p className="text-fontcolor-muted">This will show up after you enter your address</p>
-        </div>
-      </div>
-    )
-  }
-  if (res.isLoading) {
-    return (
-      <div className="flex gap-4">
-        <Skeleton className="h-10 w-10" />
-        <div className="text-sm md:text-base">
-          <p className="bold">Your representative</p>
-          <p className="text-fontcolor-muted">Loading...</p>
+          <p className="text-fontcolor-muted">
+            {res.isLoading ? 'Loading...' : 'This will show up after you enter your address'}
+          </p>
         </div>
       </div>
     )

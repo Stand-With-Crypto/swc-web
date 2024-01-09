@@ -1,4 +1,5 @@
 import { FetchReqError } from '@/utils/shared/fetchReq'
+import { logger } from '@/utils/shared/logger'
 import {
   trackFormSubmitSucceeded,
   trackFormSubmitted,
@@ -70,3 +71,10 @@ export async function triggerServerActionForForm<
   trackFormSubmitSucceeded(formName, analyticsProps)
   return { status: 'success' as const, response }
 }
+
+export const trackFormSubmissionSyncErrors =
+  (formName: string) =>
+  <T extends object>(errors: T) => {
+    trackFormSubmitErrored(formName, { errorKeys: Object.keys(errors) })
+    logger.warn('Form submission errored', formName, errors)
+  }

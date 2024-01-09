@@ -5,7 +5,7 @@ import 'server-only'
 
 export const dynamic = 'force-dynamic'
 
-export async function apiResponseForUserPerformedUserActionTypes() {
+async function apiResponseForUserPerformedUserActionTypes() {
   const { user } = await getMaybeUserAndMethodOfMatch({
     include: {
       userActions: {
@@ -17,6 +17,10 @@ export async function apiResponseForUserPerformedUserActionTypes() {
   const performedUserActionTypes = _.uniq(user?.userActions.map(({ actionType }) => actionType))
   return { performedUserActionTypes }
 }
+
+export type GetUserPerformedUserActionTypesResponse = Awaited<
+  ReturnType<typeof apiResponseForUserPerformedUserActionTypes>
+>
 
 export async function GET() {
   const response = await apiResponseForUserPerformedUserActionTypes()

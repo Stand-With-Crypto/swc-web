@@ -1,6 +1,6 @@
 'use client'
 import { actionCreateUserActionEmailCongressperson } from '@/actions/actionCreateUserActionEmailCongressperson'
-import { apiResponseForUserFullProfileInfo } from '@/app/api/identified-user/full-profile-info/route'
+import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
 import { DTSICongresspersonAssociatedWithFormAddress } from '@/components/app/dtsiCongresspersonAssociatedWithFormAddress'
 import { Button } from '@/components/ui/button'
 import {
@@ -20,11 +20,14 @@ import { PageTitle } from '@/components/ui/pageTitleText'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Textarea } from '@/components/ui/textarea'
 import { useLocale } from '@/hooks/useLocale'
-import { useTrackSubmissionErrors } from '@/hooks/useTrackSubmissionErrors'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { UserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns'
-import { GenericErrorFormValues, triggerServerActionForForm } from '@/utils/web/formUtils'
-import { formatGooglePlacesResultToAddress } from '@/utils/web/formatGooglePlacesResultToAddress'
+import {
+  GenericErrorFormValues,
+  trackFormSubmissionSyncErrors,
+  triggerServerActionForForm,
+} from '@/utils/web/formUtils'
+import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
 import { zodUserActionFormEmailCongresspersonFields } from '@/validation/forms/zodUserActionFormEmailCongressperson'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -32,7 +35,6 @@ import { UserActionType } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
-import { getDetails } from 'use-places-autocomplete'
 import { z } from 'zod'
 
 const FORM_NAME = 'User Action Form Email Congressperson'
@@ -49,7 +51,7 @@ const getDefaultValues = ({
   user,
   dtsiSlug,
 }: {
-  user: Awaited<ReturnType<typeof apiResponseForUserFullProfileInfo>>['user']
+  user: GetUserFullProfileInfoResponse['user']
   dtsiSlug: string | undefined
 }) => {
   if (user) {
@@ -83,7 +85,7 @@ export function UserActionFormEmailCongressperson({
   onSuccess,
   user,
 }: {
-  user: Awaited<ReturnType<typeof apiResponseForUserFullProfileInfo>>['user']
+  user: GetUserFullProfileInfoResponse['user']
   onCancel: () => void
   onSuccess: () => void
 }) {
@@ -94,31 +96,17 @@ export function UserActionFormEmailCongressperson({
     resolver: zodResolver(zodUserActionFormEmailCongresspersonFields),
     defaultValues: getDefaultValues({ user, dtsiSlug: undefined }),
   })
-  useTrackSubmissionErrors(form.formState, FORM_NAME)
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(async values => {
-          const address = await getDetails({
-            placeId: values.address.place_id,
-            fields: ['address_components'],
+          const address = await convertGooglePlaceAutoPredictionToAddressSchema(
+            values.address,
+          ).catch(e => {
+            Sentry.captureException(e)
+            catchUnexpectedServerErrorAndTriggerToast(e)
+            return null
           })
-            .then(_details => {
-              const address = values.address!
-              const details = _details as Required<
-                Pick<google.maps.places.PlaceResult, 'address_components'>
-              >
-              return formatGooglePlacesResultToAddress({
-                ...details,
-                formattedDescription: address.description,
-                placeId: address.place_id,
-              })
-            })
-            .catch(e => {
-              Sentry.captureException(e)
-              catchUnexpectedServerErrorAndTriggerToast(e)
-              return null
-            })
           if (!address) {
             return
           }
@@ -141,7 +129,7 @@ export function UserActionFormEmailCongressperson({
             router.refresh()
             onSuccess()
           }
-        })}
+        }, trackFormSubmissionSyncErrors(FORM_NAME))}
         className="flex max-h-screen flex-col"
       >
         <ScrollArea>

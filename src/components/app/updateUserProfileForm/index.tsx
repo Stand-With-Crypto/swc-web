@@ -20,9 +20,12 @@ import { Input } from '@/components/ui/input'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { useLocale } from '@/hooks/useLocale'
-import { useTrackSubmissionErrors } from '@/hooks/useTrackSubmissionErrors'
-import { GenericErrorFormValues, triggerServerActionForForm } from '@/utils/web/formUtils'
-import { formatGooglePlacesResultToAddress } from '@/utils/web/formatGooglePlacesResultToAddress'
+import {
+  GenericErrorFormValues,
+  trackFormSubmissionSyncErrors,
+  triggerServerActionForForm,
+} from '@/utils/web/formUtils'
+import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
 import { zodUpdateUserProfileFormFields } from '@/validation/forms/zodUpdateUserProfile'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -31,7 +34,6 @@ import * as Sentry from '@sentry/nextjs'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
-import { getDetails } from 'use-places-autocomplete'
 import { z } from 'zod'
 
 const FORM_NAME = 'User Profile'
@@ -63,7 +65,6 @@ export function UpdateUserProfileForm({
         : null,
     },
   })
-  useTrackSubmissionErrors(form.formState, FORM_NAME)
   return (
     <div>
       <PageTitle size="sm" className="mb-3">
@@ -77,26 +78,11 @@ export function UpdateUserProfileForm({
         <form
           onSubmit={form.handleSubmit(async values => {
             const address = values.address
-              ? await getDetails({
-                  placeId: values.address.place_id,
-                  fields: ['address_components'],
+              ? await convertGooglePlaceAutoPredictionToAddressSchema(values.address).catch(e => {
+                  Sentry.captureException(e)
+                  catchUnexpectedServerErrorAndTriggerToast(e)
+                  return null
                 })
-                  .then(_details => {
-                    const address = values.address!
-                    const details = _details as Required<
-                      Pick<google.maps.places.PlaceResult, 'address_components'>
-                    >
-                    return formatGooglePlacesResultToAddress({
-                      ...details,
-                      formattedDescription: address.description,
-                      placeId: address.place_id,
-                    })
-                  })
-                  .catch(e => {
-                    Sentry.captureException(e)
-                    catchUnexpectedServerErrorAndTriggerToast(e)
-                    return null
-                  })
               : null
 
             const result = await triggerServerActionForForm(
@@ -117,7 +103,7 @@ export function UpdateUserProfileForm({
               toast.success('Profile updated', { duration: 5000 })
               onSuccess()
             }
-          })}
+          }, trackFormSubmissionSyncErrors(FORM_NAME))}
           className="space-y-8"
         >
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">

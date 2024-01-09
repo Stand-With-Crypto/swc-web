@@ -1,26 +1,28 @@
 'use client'
 
-import { z } from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
+import { actionEmailYourCongressPerson } from '@/actions/sampleArchitecture/actionEmailYourCongressPerson'
+import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
-  FormDescription,
+  FormErrorMessage,
   FormField,
+  FormGeneralErrorMessage,
   FormItem,
   FormLabel,
-  FormErrorMessage,
-  FormGeneralErrorMessage,
   FormSuccessMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
+import {
+  GenericErrorFormValues,
+  trackFormSubmissionSyncErrors,
+  triggerServerActionForForm,
+} from '@/utils/web/formUtils'
 import { zodEmailYourCongressperson } from '@/validation/forms/zodEmailYourCongressperson'
-import { actionEmailYourCongressPerson } from '@/actions/sampleArchitecture/actionEmailYourCongressPerson'
-import { GenericErrorFormValues, triggerServerActionForForm } from '@/utils/web/formUtils'
-import { useTrackSubmissionErrors } from '@/hooks/useTrackSubmissionErrors'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
 
 const DEFAULT_MESSAGE = `The House Financial Services Committee and the House Agriculture Committee in the U.S. House of Representatives passed historic, bipartisan legislation in July. I am asking you to support the bill when it comes to the floor for a full House vote.
 
@@ -44,14 +46,15 @@ export default function FormEmailYourCongressperson() {
       message: DEFAULT_MESSAGE,
     },
   })
-  useTrackSubmissionErrors(form.formState, FORM_NAME)
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(values =>
-          triggerServerActionForForm({ form, formName: FORM_NAME }, () =>
-            actionEmailYourCongressPerson(values),
-          ),
+        onSubmit={form.handleSubmit(
+          values =>
+            triggerServerActionForForm({ form, formName: FORM_NAME }, () =>
+              actionEmailYourCongressPerson(values),
+            ),
+          trackFormSubmissionSyncErrors(FORM_NAME),
         )}
         className="space-y-8"
       >

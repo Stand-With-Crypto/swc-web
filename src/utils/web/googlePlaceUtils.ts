@@ -1,10 +1,16 @@
 import { getLogger } from '@/utils/shared/logger'
 import { zodAddress } from '@/validation/fields/zodAddress'
+import { getDetails } from 'use-places-autocomplete'
 import { infer, z } from 'zod'
 
 const logger = getLogger('formatGooglePlacesResultToAddress')
 
-export const formatGooglePlacesResultToAddress = (
+export type GooglePlaceAutocompletePrediction = Pick<
+  google.maps.places.AutocompletePrediction,
+  'description' | 'place_id'
+>
+
+const formatGooglePlacesResultToAddress = (
   result: Required<Pick<google.maps.places.PlaceResult, 'address_components'>> & {
     placeId: string
     formattedDescription: string
@@ -29,4 +35,21 @@ export const formatGooglePlacesResultToAddress = (
       addressComponents.find(x => x.types.includes('postal_code_suffix'))?.long_name || '',
     countryCode: addressComponents.find(x => x.types.includes('country'))!.short_name,
   }
+}
+
+export async function convertGooglePlaceAutoPredictionToAddressSchema(
+  prediction: GooglePlaceAutocompletePrediction,
+) {
+  const unCastResult = await getDetails({
+    placeId: prediction.place_id,
+    fields: ['address_components'],
+  })
+  const result = unCastResult as Required<
+    Pick<google.maps.places.PlaceResult, 'address_components'>
+  >
+  return formatGooglePlacesResultToAddress({
+    ...result,
+    formattedDescription: prediction.description,
+    placeId: prediction.place_id,
+  })
 }

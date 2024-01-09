@@ -3,6 +3,7 @@ import { Input } from '@/components/ui/input'
 import { useScript } from '@/hooks/useScript'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { cn } from '@/utils/web/cn'
+import { GooglePlaceAutocompletePrediction } from '@/utils/web/googlePlaceUtils'
 import { useEffect } from 'react'
 import usePlacesAutocomplete from 'use-places-autocomplete'
 
@@ -13,15 +14,10 @@ const NEXT_PUBLIC_GOOGLE_PLACES_API_KEY = requiredEnv(
   'NEXT_PUBLIC_GOOGLE_PLACES_API_KEY',
 )
 
-type AutocompletePrediction = Pick<
-  google.maps.places.AutocompletePrediction,
-  'description' | 'place_id'
->
-
 export function PlacesAutocomplete(
   props: {
-    value: AutocompletePrediction | null
-    onChange: (val: AutocompletePrediction | null) => void
+    value: GooglePlaceAutocompletePrediction | null
+    onChange: (val: GooglePlaceAutocompletePrediction | null) => void
   } & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange' | 'type'>,
 ) {
   const { value: propsValue, onChange: propsOnChange, ...inputProps } = props
