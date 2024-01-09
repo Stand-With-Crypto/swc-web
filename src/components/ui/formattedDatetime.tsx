@@ -1,5 +1,4 @@
 import { SupportedLocale } from '@/intl/locales'
-import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 
 export function FormattedDatetime({
   date,
