@@ -49,7 +49,8 @@ export function CookieConsentBanner({
         <Button variant="link" className="p-2 font-bold" onClick={onRejectAll}>
           Reject all
         </Button>
-        <Button variant="link" className="p-2 font-bold" onClick={onAcceptAll}>
+        {/* TODO: Change this to primary color once tailwind is configured properly */}
+        <Button variant="link" className="p-2 font-bold text-blue-500" onClick={onAcceptAll}>
           Accept all
         </Button>
       </div>

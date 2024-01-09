@@ -21,6 +21,7 @@ import { cn } from '@/utils/web/cn'
 import { useDialog } from '@/hooks/useDialog'
 
 import { CookiePreferencesForm } from './cookiePreferencesForm'
+import { DialogProps } from '@radix-ui/react-dialog'
 
 export interface ManageCookiesModalProps {
   onSubmit: (accepted: CookieConsentPermissions) => void
@@ -83,7 +84,9 @@ function useParentComponent() {
       isMobile,
       Container: isMobile ? Drawer : Dialog,
       ContainerTrigger: isMobile ? DrawerTrigger : DialogTrigger,
-      ContainerContent: isMobile ? DrawerContent : DialogContent,
+      ContainerContent: isMobile
+        ? DrawerContent
+        : (props: DialogProps) => <DialogContent {...props} className="max-w-lg" />,
       ContainerHeader: isMobile ? DrawerHeader : DialogHeader,
       ContainerTitle: isMobile ? DrawerTitle : DialogTitle,
     }),
