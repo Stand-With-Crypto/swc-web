@@ -6,11 +6,14 @@ import { SupportedLocale } from '@/intl/locales'
 
 import { useCookieConsent } from './useCookieConsent'
 import { CookieConsentBanner } from './banner'
+import { CookieConsentPermissions } from '@/components/app/cookieConsent/cookieConsent.constants'
 
 interface CookieConsentProps {
   locale: SupportedLocale
   debug?: boolean
 }
+
+type CookieConsentAction = ((permissions: CookieConsentPermissions) => void) | (() => void)
 
 export default function CookieConsent({
   locale,
@@ -21,10 +24,11 @@ export default function CookieConsent({
   const [shouldShowBanner, setShouldShowBanner] = React.useState(() => debug || !acceptedCookies)
 
   const handleActionThenClose = React.useCallback(
-    (action: () => void) => () => {
-      action()
-      setShouldShowBanner(false)
-    },
+    <T extends CookieConsentAction>(action: T) =>
+      (param?: CookieConsentPermissions) => {
+        action(param as CookieConsentPermissions)
+        setShouldShowBanner(false)
+      },
     [setShouldShowBanner],
   )
 
@@ -37,7 +41,7 @@ export default function CookieConsent({
       locale={locale}
       onAcceptAll={handleActionThenClose(acceptAllCookies)}
       onRejectAll={handleActionThenClose(rejectAllOptionalCookies)}
-      onAcceptSpecificCookies={() => alert('hello world')}
+      onAcceptSpecificCookies={handleActionThenClose(acceptSpecificCookies)}
     />
   )
 }
