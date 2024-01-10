@@ -5,7 +5,7 @@ const Container = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement> & { asChild?: boolean }
 >(({ className, asChild = false, ...props }, ref) => {
-  return <div className={cn('min-h-dvh flex flex-col', className)} ref={ref} {...props} />
+  return <div className={cn('flex min-h-dvh flex-col', className)} ref={ref} {...props} />
 })
 Container.displayName = 'FullPageHeightContainer'
 
