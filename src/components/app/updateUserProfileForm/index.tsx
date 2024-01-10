@@ -1,7 +1,10 @@
 'use client'
 import { actionUpdateUserProfile } from '@/actions/actionUpdateUserProfile'
 import { ClientAddress } from '@/clientModels/clientAddress'
-import { SensitiveDataClientUser } from '@/clientModels/clientUser/sensitiveDataClientUser'
+import {
+  SensitiveDataClientUser,
+  SensitiveDataClientUserWithENSData,
+} from '@/clientModels/clientUser/sensitiveDataClientUser'
 import { RecentActivityRow } from '@/components/app/recentActivityRow/recentActivityRow'
 import { hasAllFormFieldsOnUserForUpdateUserProfileForm } from '@/components/app/updateUserProfileForm/hasAllFormFieldsOnUser'
 import { Button } from '@/components/ui/button'
@@ -44,7 +47,7 @@ export function UpdateUserProfileForm({
   onCancel,
   onSuccess,
 }: {
-  user: SensitiveDataClientUser & { address: ClientAddress | null }
+  user: SensitiveDataClientUserWithENSData & { address: ClientAddress | null }
   onCancel: () => void
   onSuccess: () => void
 }) {

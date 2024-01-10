@@ -2,7 +2,9 @@ import 'server-only'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getClientUserAction } from '@/clientModels/clientUserAction/clientUserAction'
 import { queryDTSIPeopleBySlugForUserActions } from '@/data/dtsi/queries/queryDTSIPeopleBySlugForUserActions'
-import { getClientUser } from '@/clientModels/clientUser/clientUser'
+import { getClientUser, getClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
+import { getENSDataMapFromCryptoAddressesAndFailGracefully } from '@/data/web3/getENSDataFromCryptoAddress'
+import _ from 'lodash'
 
 interface RecentActivityConfig {
   limit: number
@@ -50,8 +52,16 @@ export const getPublicRecentActivity = async (config: RecentActivityConfig) => {
   const dtsiPeople = await queryDTSIPeopleBySlugForUserActions(Array.from(dtsiSlugs)).then(
     x => x.people,
   )
+  const ensDataMap = await getENSDataMapFromCryptoAddressesAndFailGracefully(
+    _.compact(data.map(({ user }) => user.userCryptoAddress?.address)),
+  )
   return data.map(({ user, ...record }) => ({
     ...getClientUserAction({ record, dtsiPeople }),
-    user: user && getClientUser(user),
+    user: {
+      ...getClientUserWithENSData(
+        user,
+        user.userCryptoAddress?.address ? ensDataMap[user.userCryptoAddress?.address] : null,
+      ),
+    },
   }))
 }

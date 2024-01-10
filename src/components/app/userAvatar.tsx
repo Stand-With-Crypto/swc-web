@@ -1,7 +1,8 @@
-import { ClientUser } from '@/clientModels/clientUser/clientUser'
+import { ClientUser, ClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
 import { SensitiveDataClientUser } from '@/clientModels/clientUser/sensitiveDataClientUser'
 import { NextImage } from '@/components/ui/image'
 import { ImageAvatarProps } from '@/components/ui/imageAvatar'
+import { UserENSData } from '@/data/web3/types'
 
 import { deterministicArraySelection } from '@/utils/shared/deterministicArraySelection'
 
@@ -21,7 +22,7 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 // TODO support ENS images and person name
 export const UserAvatar: React.FC<
   {
-    user: Pick<ClientUser, 'isPubliclyVisible' | 'cryptoAddress'>
+    user: Pick<ClientUserWithENSData, 'isPubliclyVisible' | 'cryptoAddress'>
   } & Pick<ImageAvatarProps, 'size' | 'className'>
 > = ({ user, size, ...props }) => {
   if (!user.isPubliclyVisible || !user.cryptoAddress) {
@@ -33,6 +34,22 @@ export const UserAvatar: React.FC<
           alt="Generic profile picture for anonymous user"
           width={size}
           height={size}
+        />
+      </Container>
+    )
+  }
+  if (user.cryptoAddress.ensAvatarUrl) {
+    return (
+      <Container>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          {...props}
+          src={user.cryptoAddress.ensAvatarUrl}
+          alt={`ENS avatar for ${user.cryptoAddress.ensName || user.cryptoAddress.address}`}
+          style={{
+            width: size,
+            height: size,
+          }}
         />
       </Container>
     )

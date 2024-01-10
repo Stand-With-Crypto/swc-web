@@ -1,5 +1,5 @@
 'use client'
-import { ClientUser } from '@/clientModels/clientUser/clientUser'
+import { ClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
 import { ClientUserAction } from '@/clientModels/clientUserAction/clientUserAction'
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
 import { UserActionFormDonateDialog } from '@/components/app/userActionFormDonate/dialog'
@@ -26,7 +26,7 @@ import { UserActionOptInType, UserActionType } from '@prisma/client'
 import React from 'react'
 
 interface RecentActivityRowProps {
-  action: ClientUserAction & { user: ClientUser }
+  action: ClientUserAction & { user: ClientUserWithENSData }
   locale: SupportedLocale
   disableHover?: boolean
 }

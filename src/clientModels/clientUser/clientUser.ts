@@ -1,8 +1,11 @@
 import {
   ClientUserCryptoAddress,
+  ClientUserCryptoAddressWithENSData,
   getClientUserCryptoAddress,
+  getClientUserCryptoAddressWithENSData,
 } from '@/clientModels/clientUser/clientUserCryptoAddress'
 import { ClientModel, getClientModel } from '@/clientModels/utils'
+import { UserENSData } from '@/data/web3/types'
 import { User, UserCryptoAddress } from '@prisma/client'
 
 export type ClientUser = ClientModel<
@@ -26,4 +29,21 @@ export const getClientUser = (
     datetimeUpdated,
     isPubliclyVisible,
   })
+}
+
+export type ClientUserWithENSData = Omit<ClientUser, 'cryptoAddress'> & {
+  cryptoAddress: ClientUserCryptoAddressWithENSData | null
+}
+
+export const getClientUserWithENSData = (
+  record: User & { userCryptoAddress: null | UserCryptoAddress },
+  ensData: UserENSData | null | undefined,
+): ClientUserWithENSData => {
+  const initial = getClientUser(record)
+  return {
+    ...initial,
+    cryptoAddress: record.userCryptoAddress
+      ? getClientUserCryptoAddressWithENSData(record.userCryptoAddress, ensData)
+      : null,
+  }
 }

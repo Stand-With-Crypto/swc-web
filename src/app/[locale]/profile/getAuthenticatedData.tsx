@@ -1,7 +1,8 @@
 import { getClientAddress } from '@/clientModels/clientAddress'
-import { getSensitiveDataClientUser } from '@/clientModels/clientUser/sensitiveDataClientUser'
+import { getSensitiveDataClientUserWithENSData } from '@/clientModels/clientUser/sensitiveDataClientUser'
 import { getSensitiveDataClientUserAction } from '@/clientModels/clientUserAction/sensitiveDataClientUserAction'
 import { queryDTSIPeopleBySlugForUserActions } from '@/data/dtsi/queries/queryDTSIPeopleBySlugForUserActions'
+import { getENSDataFromCryptoAddressAndFailGracefully } from '@/data/web3/getENSDataFromCryptoAddress'
 import { appRouterGetAuthUser } from '@/utils/server/appRouterGetAuthUser'
 import { prismaClient } from '@/utils/server/prismaClient'
 import 'server-only'
@@ -45,12 +46,13 @@ export async function getAuthenticatedData() {
       })
     }
   })
-  const dtsiPeople = await queryDTSIPeopleBySlugForUserActions(Array.from(dtsiSlugs)).then(
-    x => x.people,
-  )
+  const [dtsiPeople, ensData] = await Promise.all([
+    queryDTSIPeopleBySlugForUserActions(Array.from(dtsiSlugs)).then(x => x.people),
+    getENSDataFromCryptoAddressAndFailGracefully(user.userCryptoAddress!.address),
+  ])
   const { userActions, address, ...rest } = user
   return {
-    ...getSensitiveDataClientUser(rest),
+    ...getSensitiveDataClientUserWithENSData(rest, ensData),
     address: address && getClientAddress(address),
     userActions: userActions.map(record =>
       getSensitiveDataClientUserAction({ record, dtsiPeople }),

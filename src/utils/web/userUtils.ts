@@ -1,7 +1,11 @@
-import { ClientUser } from '@/clientModels/clientUser/clientUser'
-import { SensitiveDataClientUser } from '@/clientModels/clientUser/sensitiveDataClientUser'
+import { ClientUser, ClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
+import {
+  SensitiveDataClientUser,
+  SensitiveDataClientUserWithENSData,
+} from '@/clientModels/clientUser/sensitiveDataClientUser'
+import { UserENSData } from '@/data/web3/types'
 
-export const getUserDisplayName = (user: ClientUser | null) => {
+export const getUserDisplayName = (user: ClientUserWithENSData | null) => {
   // TODO prioritize ENS first
   if (user?.isPubliclyVisible === false) {
     return 'Anonymous'
@@ -10,17 +14,25 @@ export const getUserDisplayName = (user: ClientUser | null) => {
     return user.fullName
   }
   if (user?.cryptoAddress) {
-    return `${user.cryptoAddress.address.slice(0, 2)}...${user.cryptoAddress.address.slice(-5)}`
+    return (
+      user.cryptoAddress.ensName ||
+      `${user.cryptoAddress.address.slice(0, 2)}...${user.cryptoAddress.address.slice(-5)}`
+    )
   }
   return 'Anonymous'
 }
 
-export const getSensitiveDataUserDisplayName = (user: SensitiveDataClientUser | null) => {
+export const getSensitiveDataUserDisplayName = (
+  user: SensitiveDataClientUserWithENSData | null,
+) => {
   if (user?.fullName) {
     return user.fullName
   }
   if (user?.cryptoAddress) {
-    return `${user.cryptoAddress.address.slice(0, 2)}...${user.cryptoAddress.address.slice(-5)}`
+    return (
+      user.cryptoAddress.ensName ||
+      `${user.cryptoAddress.address.slice(0, 2)}...${user.cryptoAddress.address.slice(-5)}`
+    )
   }
   return 'Anonymous'
 }
