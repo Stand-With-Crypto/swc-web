@@ -113,7 +113,7 @@ export default async function PoliticianDetails({ params }: Props) {
   return (
     <div className="container grid grid-cols-1 space-y-6 md:grid-cols-3 md:space-y-0">
       <aside className="md:col-span-1">
-        <div className="sticky top-0 text-center md:mr-6 md:max-h-screen md:min-h-screen md:overflow-y-auto md:border-r md:pb-12 md:pr-6 md:text-left">
+        <div className="md:max-h-dvh md:min-h-dvh sticky top-0 text-center md:mr-6 md:overflow-y-auto md:border-r md:pb-12 md:pr-6 md:text-left">
           <article className="md:mt-5">
             {person.profilePictureUrl ? (
               <div

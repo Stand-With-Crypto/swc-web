@@ -1,3 +1,4 @@
+import { InternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 
@@ -12,6 +13,7 @@ export default async function InternalHomepage() {
           {
             sectionTitle: 'General',
             links: [
+              { children: 'User Settings', href: '/internal/user-settings' },
               { children: 'User Action Deeplinks', href: '/internal/user-action-deeplinks' },
               {
                 children: 'v2 Sample Architecture Patterns',
@@ -23,20 +25,31 @@ export default async function InternalHomepage() {
             sectionTitle: 'Sentry Debugging',
             subSectionTitle: 'Note: only available in testing/local environments',
             links: [
-              { children: 'Page - Client Component Error', href: '/internal/debug-sentry-client' },
+              {
+                children: 'Page - Client Component Error',
+                href: '/internal/debug-sentry-client',
+                target: '_blank',
+              },
               {
                 children: 'Page - Server Component Dynamic Error',
                 href: '/internal/debug-sentry-dynamic-server',
+                target: '_blank',
               },
               {
                 children: 'Page - Server Component ISR Error',
                 href: '/internal/debug-sentry-static-server',
+                target: '_blank',
               },
               {
                 children: 'API - Dynamic Error',
                 href: '/api/internal/debug-sentry-dynamic-server',
+                target: '_blank',
               },
-              { children: 'API - ISR Error', href: '/api/internal/debug-sentry-static-server' },
+              {
+                children: 'API - ISR Error',
+                href: '/api/internal/debug-sentry-static-server',
+                target: '_blank',
+              },
             ],
           },
         ].map(({ sectionTitle, subSectionTitle, links }) => (
@@ -44,7 +57,7 @@ export default async function InternalHomepage() {
             <PageTitle size="sm">{sectionTitle}</PageTitle>
             {subSectionTitle && <PageSubTitle>{subSectionTitle}</PageSubTitle>}
             {links.map(props => (
-              <a className="block text-lg underline" key={props.href} {...props} target="_blank" />
+              <InternalLink className="block text-lg underline" key={props.href} {...props} />
             ))}
           </div>
         ))}

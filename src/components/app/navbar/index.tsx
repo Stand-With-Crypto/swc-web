@@ -105,10 +105,6 @@ export async function Navbar({ locale }: { locale: SupportedLocale }) {
           </DrawerTrigger>
           <DrawerContent>
             <div className="space-y-6 px-6 pb-6 pt-3 text-center md:space-y-8">
-              <p className="text-xs">
-                Eng note: I know this is suppose to open from the top. There's an open PR for the
-                lib we're using that should enable this
-              </p>
               {leftLinks.map(({ href, text }) => {
                 return (
                   <InternalLink className="block font-bold text-gray-800" href={href} key={href}>
@@ -116,12 +112,16 @@ export async function Navbar({ locale }: { locale: SupportedLocale }) {
                   </InternalLink>
                 )
               })}
-              <Button className="mr-3" asChild>
-                <InternalLink href={urls.donate()}>Donate</InternalLink>
-              </Button>
-              <NavbarSessionButton
-                messages={generateClientComponentMessages(intl, navbarSessionButtonMessages)}
-              />
+              <div>
+                <Button className="mr-3" asChild>
+                  <InternalLink href={urls.donate()}>Donate</InternalLink>
+                </Button>
+              </div>
+              <div>
+                <NavbarSessionButton
+                  messages={generateClientComponentMessages(intl, navbarSessionButtonMessages)}
+                />
+              </div>
             </div>
           </DrawerContent>
         </Drawer>
