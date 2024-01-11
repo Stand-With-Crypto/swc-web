@@ -21,6 +21,7 @@ Below is a non-exhaustive list of coding conventions that we try to follow. This
 - For client-side and server-side input validation, leverage [zod](https://github.com/colinhacks/zod)
 - When using zod for client-side validation, do not import `z` from the library as this prevents tree-shaking from removing unused portions of the library. Instead import the individual methods (`object`, `string`, etc) from the package.
 - when you need field-level errors to be returned to the client, make sure to return them in an object structure as `{ errors: validatedFields.error.flatten().fieldErrors }` so they can successfully be used by client side functions like `triggerServerActionForForm`
+- make sure we normalize values in our validators before persisting. For example, all emails should be `.toLowerCase()` before persisting
 
 ## UI Development
 
@@ -39,6 +40,7 @@ Below is a non-exhaustive list of coding conventions that we try to follow. This
 - when developing new pages, add a new folder to `src/components/app/pageNameOfYourPage` that contains all page-specific UI files. For example, the "About" page components would be in `src/components/app/pageAbout`
 - When working on a page that dynamically fetches data before rendering, make sure to add a [loading.tsx page](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming) to optimistically show users a skeleton of the data they're fetching
 - to rapidly build a skeleton, copy paste the main, above the fold, UX of the dynamic page and wrap the core component text with `<Skeleton />` components
+- When developing full-height design elements (for example, scrollable modals with a lot of content), make sure to QA your UI on an actual iOS simulator in addition to a responsive desktop web browser. There are nuances with the way iOS deals with css styles like `max-height: 100vh` that generally make `max-height: 100dvh` better suited for styling.
 
 ## Backend Development
 
