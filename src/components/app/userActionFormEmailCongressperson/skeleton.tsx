@@ -18,7 +18,7 @@ import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 export function UserActionFormEmailCongresspersonSkeleton({ locale }: { locale: SupportedLocale }) {
   const urls = getIntlUrls(locale)
   return (
-    <form className="max-h-dvh flex flex-col">
+    <form className="flex max-h-dvh flex-col">
       <LoadingOverlay />
       <ScrollArea>
         <div className="space-y-4 p-6 md:space-y-8 md:px-12">
