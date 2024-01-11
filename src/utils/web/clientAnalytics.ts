@@ -1,3 +1,4 @@
+import { isBrowser } from '@/utils/shared/executionEnvironment'
 import { customLogger, logger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { AnalyticProperties } from '@/utils/shared/sharedAnalytics'
@@ -9,6 +10,9 @@ const NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN = requiredEnv(
 )
 
 export function initClientAnalytics() {
+  if (!isBrowser) {
+    return
+  }
   mixpanel.init(NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN, {
     track_pageview: false,
     persistence: 'localStorage',
