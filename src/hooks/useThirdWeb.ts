@@ -2,11 +2,15 @@ import React from 'react'
 import {
   useDisconnect,
   useUser,
+  useAddress,
   useChain,
   useLogout,
   useBalance,
   useWallet,
 } from '@thirdweb-dev/react'
+import { useEnsAvatar, useEnsName } from 'wagmi'
+import { normalize } from 'viem/ens'
+import { parseIpfsImageUrl } from '@/utils/shared/ipfs'
 
 export function useThirdWeb() {
   const disconnect = useDisconnect()
@@ -51,4 +55,26 @@ export function useThirdWeb() {
     },
     getParsedAddress,
   }
+}
+
+type ENSProfile = { name?: string; avatar?: string }
+export function useEnsProfile(): { name?: string; avatar?: string } {
+  const address = useAddress()
+
+  const { data: name } = useEnsName(address ? { address: address as `0x${string}` } : undefined)
+  const { data: avatar } = useEnsAvatar(name ? { name: normalize(name) } : undefined)
+
+  return React.useMemo(() => {
+    const profile: ENSProfile = {}
+
+    if (name) {
+      profile.name = name
+    }
+
+    if (avatar) {
+      profile.avatar = parseIpfsImageUrl(avatar)
+    }
+
+    return profile
+  }, [name, avatar])
 }

@@ -1,15 +1,12 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { ConnectWallet, useAddress, useUser } from '@thirdweb-dev/react'
+import { ConnectWallet } from '@thirdweb-dev/react'
 
 import { GetDefineMessageResults } from '@/types'
 
 import { NavbarLoggedInSessionButton } from './navbarLoggedInSessionButton'
 import { navbarSessionButtonMessages } from './navbarSessionButtonClient.messages'
-import { Button } from '@/components/ui/button'
-import { NextImage } from '@/components/ui/image'
-import { maybeEllipsisText } from '@/utils/web/maybeEllipsisText'
 import { cn } from '@/utils/web/cn'
 import { useThirdWeb } from '@/hooks/useThirdWeb'
 
@@ -17,14 +14,13 @@ interface NavbarSessionButtonProps {
   messages: GetDefineMessageResults<typeof navbarSessionButtonMessages>
 }
 
-export function NavbarSessionButtonClient(props: NavbarSessionButtonProps) {
-  // TODO match figma mockups
+export function NavbarSessionButtonClient(_props: NavbarSessionButtonProps) {
   const { session } = useThirdWeb()
 
   const router = useRouter()
 
   if (session.isLoggedIn) {
-    return <NavbarLoggedInSessionButton {...props} />
+    return <NavbarLoggedInSessionButton />
   }
 
   return (

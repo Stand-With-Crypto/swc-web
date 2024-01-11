@@ -21,6 +21,9 @@ import { useEffect } from 'react'
 import { LocaleContext } from '@/hooks/useLocale'
 import { SupportedLocale } from '@/intl/locales'
 import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
+import { WagmiProvider } from 'wagmi'
+import { wagmiClientConfig } from '@/data/web3/wagmiClientConfig'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 const NEXT_PUBLIC_THIRDWEB_CLIENT_ID = requiredEnv(
   process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID,
@@ -54,6 +57,8 @@ const InitialOrchestration = () => {
   return null
 }
 
+const queryClient = new QueryClient()
+
 // This component includes all top level client-side logic
 export function TopLevelClientLogic({
   children,
@@ -83,8 +88,12 @@ export function TopLevelClientLogic({
           authUrl: '/api/auth',
         }}
       >
-        <InitialOrchestration />
-        {children}
+        <WagmiProvider config={wagmiClientConfig}>
+          <QueryClientProvider client={queryClient}>
+            <InitialOrchestration />
+            {children}
+          </QueryClientProvider>
+        </WagmiProvider>
       </ThirdwebProvider>
     </LocaleContext.Provider>
   )

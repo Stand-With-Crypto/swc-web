@@ -1,22 +1,17 @@
 'use client'
 
-import { Wallet } from 'lucide-react'
 import React from 'react'
 
-import { navbarSessionButtonMessages } from '@/components/app/navbar/navbarSessionButton/navbarSessionButtonClient.messages'
 import { Button } from '@/components/ui/button'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-import { GetDefineMessageResults } from '@/types'
 import { useThirdWeb } from '@/hooks/useThirdWeb'
 
 import { NavbarLoggedInSessionPopoverContent } from './navbarLoggedInSessionPopoverContent'
+import { useResponsivePopover } from '@/components/ui/responsivePopover'
 
-interface NavbarSessionButtonProps {
-  messages: GetDefineMessageResults<typeof navbarSessionButtonMessages>
-}
+export function NavbarLoggedInSessionButton() {
+  const { getParsedAddress } = useThirdWeb()
 
-export function NavbarLoggedInSessionButton({ messages }: NavbarSessionButtonProps) {
-  const { session, getParsedAddress } = useThirdWeb()
+  const { Popover, PopoverContent, PopoverTrigger } = useResponsivePopover()
 
   return (
     <Popover>
