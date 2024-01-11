@@ -1,8 +1,21 @@
 import { customLogger, logger } from '@/utils/shared/logger'
+import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { AnalyticProperties } from '@/utils/shared/sharedAnalytics'
+import mixpanel from 'mixpanel-browser'
 
-export function initClientAnalytics(sessionId: string) {
-  // TODO replace with actual analytics solution
+const NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN = requiredEnv(
+  process.env.NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN,
+  'process.env.NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN',
+)
+
+export function initClientAnalytics() {
+  mixpanel.init(NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN, {
+    track_pageview: false,
+    persistence: 'localStorage',
+  })
+}
+export function identifyClientAnalyticsUser(sessionIdOrCryptoWalletAddress: string) {
+  mixpanel.identify(sessionIdOrCryptoWalletAddress)
 }
 
 export function trackClientAnalytic(eventName: string, eventProperties: AnalyticProperties) {
@@ -15,7 +28,9 @@ export function trackClientAnalytic(eventName: string, eventProperties: Analytic
     ['color: #00aaff', 'color: #FCFDFB'],
     eventProperties,
   )
-  // TODO replace with actual analytics solution
+  mixpanel.track(eventName, {
+    eventProperties,
+  })
 }
 
 export function trackFormSubmitted(formName: string, other?: AnalyticProperties) {
