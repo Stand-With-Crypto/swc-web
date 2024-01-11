@@ -13,7 +13,7 @@ import {
   FormItem,
   FormLabel,
 } from '@/components/ui/form'
-import { PlacesAutocomplete } from '@/components/ui/googlePlacesSelect'
+import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { Input } from '@/components/ui/input'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
@@ -183,7 +183,7 @@ export function UserActionFormEmailCongressperson({
                   <FormItem>
                     <FormLabel>Address</FormLabel>
                     <FormControl>
-                      <PlacesAutocomplete
+                      <GooglePlacesSelect
                         {...field}
                         value={field.value}
                         onChange={field.onChange}
