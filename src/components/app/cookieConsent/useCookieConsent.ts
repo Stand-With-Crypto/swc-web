@@ -17,12 +17,12 @@ export function useCookieConsent() {
       they don't want targeting either
       */
       if (isBrowser) {
-        if (!permissions.functional || !permissions.performance || !permissions.targeting) {
-          mixpanel.opt_out_tracking()
-        }
-        if (permissions.functional && permissions.performance && permissions.targeting) {
-          mixpanel.opt_in_tracking()
-        }
+        // if (!permissions.functional || !permissions.performance || !permissions.targeting) {
+        //   mixpanel.opt_out_tracking()
+        // }
+        // if (permissions.functional && permissions.performance && permissions.targeting) {
+        //   mixpanel.opt_in_tracking()
+        // }
       }
       return Object.entries({ required: true, ...permissions })
         .map(([key, value]) => `${key}:${String(value)}`)
