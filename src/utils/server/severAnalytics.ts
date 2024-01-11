@@ -59,7 +59,7 @@ export function getServerAnalytics(config: ServerAnalyticsClientIdentifier) {
     actionType: UserActionType
     campaignName: string
   } & AnalyticProperties) {
-    return trackAnalytic(config, 'User Action Created', {
+    trackAnalytic(config, 'User Action Created', {
       'User Action Type': actionType,
       'Campaign Name': campaignName,
       ...other,
@@ -75,7 +75,7 @@ export function getServerAnalytics(config: ServerAnalyticsClientIdentifier) {
     campaignName: string
     reason: 'Too Many Recent'
   } & AnalyticProperties) {
-    return trackAnalytic(config, ' Type Creation Ignored', {
+    trackAnalytic(config, ' Type Creation Ignored', {
       'User Action Type': actionType,
       'Campaign Name': campaignName,
       Reason: reason,
@@ -84,7 +84,7 @@ export function getServerAnalytics(config: ServerAnalyticsClientIdentifier) {
   }
 
   function track(eventName: string, eventProperties?: AnalyticProperties) {
-    return trackAnalytic(config, eventName, eventProperties)
+    trackAnalytic(config, eventName, eventProperties)
   }
 
   return { trackUserActionCreated, trackUserActionCreatedIgnored, track }
