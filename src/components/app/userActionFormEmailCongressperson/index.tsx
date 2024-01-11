@@ -125,7 +125,7 @@ export function UserActionFormEmailCongressperson({
             onSuccess()
           }
         }, trackFormSubmissionSyncErrors(FORM_NAME))}
-        className="flex max-h-dvh flex-col"
+        className="max-h-dvh flex flex-col"
       >
         <ScrollArea>
           <div className="space-y-4 p-6 md:space-y-8 md:px-12">

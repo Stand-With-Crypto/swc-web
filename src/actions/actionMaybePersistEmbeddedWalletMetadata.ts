@@ -63,6 +63,7 @@ export async function actionMaybePersistEmbeddedWalletMetadata(data: z.infer<typ
     data: {
       address: validatedFields.data.email,
       userId: user.id,
+      isVerified: false,
       source: UserEmailAddressSource.THIRDWEB_EMBEDDED_AUTH,
     },
   })
