@@ -3,6 +3,7 @@
 import { navbarSessionButtonMessages } from '@/components/app/navbar/navbarSessionButton/navbarSessionButtonClient.messages'
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
+import { useMaybeUpdateUserEmailAfterLoggingInToEmbedWallet } from '@/hooks/useMaybeUpdateUserEmailAfterLoggingInToEmbedWallet'
 import { GetDefineMessageResults } from '@/types'
 import { forceSetUserSessionIdOnClient } from '@/utils/web/clientUserSessionId'
 import { cn } from '@/utils/web/cn'
@@ -16,6 +17,7 @@ export function NavbarSessionButtonClient(props: {
   // TODO match figma mockups
   const address = useAddress()
   const router = useRouter()
+  useMaybeUpdateUserEmailAfterLoggingInToEmbedWallet()
   return (
     <ConnectWallet
       auth={{

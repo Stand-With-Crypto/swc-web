@@ -1,3 +1,4 @@
+import { CookieConsentFooterButton } from '@/components/app/cookieConsent/cookieConsentFooterButton'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
 import getIntl from '@/intl/intlMessages'
 import { SupportedLocale } from '@/intl/locales'
@@ -39,6 +40,10 @@ export async function Footer({ locale }: { locale: SupportedLocale }) {
               description: 'Label for send feedback footer item',
             })}
           </ExternalLink>
+          <CookieConsentFooterButton
+            variant={'link'}
+            className={cn(footerLinkStyles, 'h-auto p-0 text-base')}
+          />
         </div>
         <div className="space-y-3 sm:space-y-9">
           <ExternalLink className={footerLinkStyles} href={externalUrls.twitter()}>

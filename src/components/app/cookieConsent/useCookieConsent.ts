@@ -2,6 +2,8 @@ import Cookies from 'js-cookie'
 
 import { COOKIE_CONSENT_COOKIE_NAME, CookieConsentPermissions } from './cookieConsent.constants'
 import React from 'react'
+import mixpanel from 'mixpanel-browser'
+import { isBrowser } from '@/utils/shared/executionEnvironment'
 
 export function useCookieConsent() {
   const [cookieConsentCookie, setCookieConsentCookie, removeCookieConsentCookie] = useCookieState(
@@ -10,6 +12,18 @@ export function useCookieConsent() {
 
   const serializeConsentCookie = React.useCallback(
     (permissions: CookieConsentPermissions): string => {
+      /*
+      to be conservative, if someone opts out of functional or performance, we should assume
+      they don't want targeting either
+      */
+      if (isBrowser) {
+        if (!permissions.functional || !permissions.performance || !permissions.targeting) {
+          mixpanel.opt_out_tracking()
+        }
+        if (permissions.functional && permissions.performance && permissions.targeting) {
+          mixpanel.opt_in_tracking()
+        }
+      }
       return Object.entries({ required: true, ...permissions })
         .map(([key, value]) => `${key}:${String(value)}`)
         .join(',')
