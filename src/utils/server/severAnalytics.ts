@@ -3,6 +3,7 @@ import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { AnalyticProperties } from '@/utils/shared/sharedAnalytics'
 import { UserActionType, UserCryptoAddress } from '@prisma/client'
 import mixpanelLib from 'mixpanel'
+import * as Sentry from '@sentry/nextjs'
 
 const NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN = requiredEnv(
   process.env.NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN,
@@ -20,22 +21,33 @@ type ServerAnalyticsClientIdentifier =
       sessionId: string
     }
 
+const getDistinctId = (clientIdentifier: ServerAnalyticsClientIdentifier) => {
+  if ('sessionId' in clientIdentifier) {
+    return clientIdentifier.sessionId
+  }
+  if ('userCryptoAddress' in clientIdentifier) {
+    return clientIdentifier.userCryptoAddress.address
+  }
+  return clientIdentifier.address
+}
+
 function trackAnalytic(
   clientIdentifier: ServerAnalyticsClientIdentifier,
   eventName: string,
   eventProperties?: AnalyticProperties,
 ) {
   logger.info(`Event Name: "${eventName}"`, eventProperties)
-  const distinctId =
-    'sessionId' in clientIdentifier
-      ? clientIdentifier.sessionId
-      : 'userCryptoAddress' in clientIdentifier
-        ? clientIdentifier.userCryptoAddress.address
-        : clientIdentifier.address
-  mixpanel.track(eventName, {
-    ...eventProperties,
-    distinct_id: distinctId,
-  })
+  // we could wrap this in a promise and await it, but we don't want to block the request
+  mixpanel.track(
+    eventName,
+    {
+      ...eventProperties,
+      distinct_id: getDistinctId(clientIdentifier),
+    },
+    err => {
+      Sentry.captureException(err, { tags: { domain: 'trackAnalytic' } })
+    },
+  )
 }
 // TODO determine if we need to be awaiting this
 export function getServerAnalytics(config: ServerAnalyticsClientIdentifier) {
