@@ -9,11 +9,13 @@ import {
 } from '@prisma/client'
 
 export function mockUserEmailAddress(): UserEmailAddress {
+  const source = faker.helpers.arrayElement(Object.values(UserEmailAddressSource))
   return {
     ...mockCommonDatetimes(),
     id: fakerFields.id(),
     address: faker.internet.email(),
-    source: faker.helpers.arrayElement(Object.values(UserEmailAddressSource)),
+    source,
+    isVerified: source === UserEmailAddressSource.COINBASE_AUTH ? true : false,
     userId: fakerFields.id(),
   }
 }

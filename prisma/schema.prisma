@@ -104,12 +104,12 @@ model UserSession {
 enum UserEmailAddressSource {
   COINBASE_AUTH
   THIRDWEB_EMBEDDED_AUTH
-  USER_ENTERED_UNVERIFIED
-  USER_ENTERED_VERIFIED
+  USER_ENTERED
 }
 
 model UserEmailAddress {
   id              String                 @id @default(uuid())
+  isVerified      Boolean                @map("is_verified")
   address         String
   userId          String                 @map("user_id")
   user            User                   @relation("userEmailAddresses", map: "userEmailAddresses", fields: [userId], references: [id])
