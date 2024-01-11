@@ -35,7 +35,8 @@ export async function actionUpdateUserProfile(
       ? await prismaClient.userEmailAddress.create({
           data: {
             address: validatedFields.data.email,
-            source: UserEmailAddressSource.USER_ENTERED_UNVERIFIED,
+            source: UserEmailAddressSource.USER_ENTERED,
+            isVerified: false,
             user: {
               connect: {
                 id: user.id,
