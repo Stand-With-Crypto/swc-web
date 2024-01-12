@@ -29,12 +29,14 @@ import {
   triggerServerActionForForm,
 } from '@/utils/web/formUtils'
 import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
+import { getLocalUser } from '@/utils/web/localUser'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
 import { zodUserActionFormEmailCongresspersonFields } from '@/validation/forms/zodUserActionFormEmailCongressperson'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { UserActionType } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { useRouter } from 'next/navigation'
+import { useMemo } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
@@ -51,6 +53,7 @@ const getDefaultValues = ({
 }) => {
   if (user) {
     return {
+      localUser: getLocalUser(),
       campaignName: UserActionEmailCampaignName.DEFAULT,
       fullName: user.fullName,
       email: user.primaryUserEmailAddress?.address || '',
@@ -65,6 +68,7 @@ const getDefaultValues = ({
     }
   }
   return {
+    localUser: getLocalUser(),
     campaignName: UserActionEmailCampaignName.DEFAULT,
     fullName: '',
     email: '',
@@ -87,9 +91,10 @@ export function UserActionFormEmailCongressperson({
   const router = useRouter()
   const locale = useLocale()
   const urls = getIntlUrls(locale)
+  const defaultValues = useMemo(() => getDefaultValues({ user, dtsiSlug: undefined }), [user])
   const form = useForm<FormValues>({
     resolver: zodResolver(zodUserActionFormEmailCongresspersonFields),
-    defaultValues: getDefaultValues({ user, dtsiSlug: undefined }),
+    defaultValues,
   })
   return (
     <Form {...form}>

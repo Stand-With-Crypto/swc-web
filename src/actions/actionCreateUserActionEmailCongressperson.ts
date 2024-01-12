@@ -10,6 +10,7 @@ import { subDays } from 'date-fns'
 import 'server-only'
 import { z } from 'zod'
 import { getServerAnalytics } from '@/utils/server/severAnalytics'
+import { mapLocalUserToUserDatabaseFields } from '@/utils/server/mapLocalUserToUserDatabaseFields'
 
 const logger = getLogger(`actionCreateUserActionEmailCongressperson`)
 
@@ -34,6 +35,7 @@ export async function actionCreateUserActionEmailCongressperson(
       data: {
         isPubliclyVisible: false,
         userSessions: { create: { id: sessionId } },
+        ...mapLocalUserToUserDatabaseFields(validatedFields.data.localUser),
       },
       include: { userCryptoAddress: true },
     }))

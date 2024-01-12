@@ -33,6 +33,10 @@ export function trackClientAnalytic(eventName: string, eventProperties: Analytic
   })
 }
 
+export function setClientAnalyticsUserProperties(userProperties: object) {
+  mixpanel.people.set(userProperties)
+}
+
 export function trackFormSubmitted(formName: string, other?: AnalyticProperties) {
   trackClientAnalytic('Form Submitted', { 'Form Name': formName, ...other })
 }

@@ -76,6 +76,13 @@ model User {
   sampleDatabaseIncrement   Int               @default(0) // TODO delete
   primaryUserEmailAddress   UserEmailAddress? @relation("asPrimaryUserEmailAddress", fields: [primaryUserEmailAddressId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   primaryUserEmailAddressId String?           @unique @map("primary_user_email_address_id")
+  // We'll collect and capture this information in our product analytics tools, but we'll also want to be able to 
+  // use this metadata to query our relationship database. This information will only be populated if users
+  // opt in to our cookies
+  acquisitionReferer     String @map("acquisition_referer") 
+  acquisitionSource     String @map("acquisition_source") 
+  acquisitionMedium     String @map("acquisition_medium") 
+  acquisitionCampaign     String @map("acquisition_campaign") 
 
   userCryptoAddress  UserCryptoAddress?
   userSessions       UserSession[]

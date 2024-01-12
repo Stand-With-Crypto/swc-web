@@ -1,22 +1,17 @@
 import Cookies from 'js-cookie'
 
-import { COOKIE_CONSENT_COOKIE_NAME, CookieConsentPermissions } from './cookieConsent.constants'
 import React from 'react'
 import mixpanel from 'mixpanel-browser'
 import { isBrowser } from '@/utils/shared/executionEnvironment'
+import {
+  COOKIE_CONSENT_COOKIE_NAME,
+  CookieConsentPermissions,
+  serializeCookieConsent,
+} from '@/utils/web/cookieConsent'
 
 export function useCookieConsent() {
   const [cookieConsentCookie, setCookieConsentCookie, removeCookieConsentCookie] = useCookieState(
     COOKIE_CONSENT_COOKIE_NAME,
-  )
-
-  const serializeConsentCookie = React.useCallback(
-    (permissions: CookieConsentPermissions): string => {
-      return Object.entries({ required: true, ...permissions })
-        .map(([key, value]) => `${key}:${String(value)}`)
-        .join(',')
-    },
-    [],
   )
 
   const toggleProviders = React.useCallback((permissions: CookieConsentPermissions) => {
@@ -34,30 +29,30 @@ export function useCookieConsent() {
 
   const acceptSpecificCookies = React.useCallback(
     (consentCookie: CookieConsentPermissions): void => {
-      setCookieConsentCookie(serializeConsentCookie(consentCookie))
+      setCookieConsentCookie(serializeCookieConsent(consentCookie))
       toggleProviders(consentCookie)
     },
-    [serializeConsentCookie, setCookieConsentCookie],
+    [setCookieConsentCookie],
   )
 
   const acceptAllCookieValue = React.useMemo(
     () =>
-      serializeConsentCookie({
+      serializeCookieConsent({
         functional: true,
         performance: true,
         targeting: true,
       }),
-    [serializeConsentCookie],
+    [],
   )
 
   const rejectAllCookieValue = React.useMemo(
     () =>
-      serializeConsentCookie({
+      serializeCookieConsent({
         functional: false,
         performance: false,
         targeting: false,
       }),
-    [serializeConsentCookie],
+    [],
   )
 
   const rejectAllOptionalCookies = React.useCallback((): void => {
