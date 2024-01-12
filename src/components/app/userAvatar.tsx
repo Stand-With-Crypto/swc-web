@@ -14,13 +14,6 @@ const genericImages = [
   '/userAvatars/yellow.svg',
 ]
 
-type SensitiveDataClientUserWithENSData = Omit<SensitiveDataClientUser, 'cryptoAdress'> & {
-  cryptoAddress: SensitiveDataClientUser['cryptoAddress'] & {
-    ensAvatarUrl?: string
-    ensName?: string
-  }
-}
-
 const Container = ({ children }: { children: React.ReactNode }) => (
   <div className="overflow-hidden rounded-full">{children}</div>
 )
@@ -85,10 +78,7 @@ export const UserAvatar: React.FC<
 
 export const SensitiveDataUserAvatar: React.FC<
   {
-    user: Pick<
-      SensitiveDataClientUserWithENSData,
-      'fullName' | 'isPubliclyVisible' | 'cryptoAddress'
-    >
+    user: Pick<SensitiveDataClientUser, 'fullName' | 'isPubliclyVisible' | 'cryptoAddress'>
   } & Pick<ImageAvatarProps, 'size' | 'className'>
 > = ({ user, size, ...props }) => {
   if (!user.cryptoAddress) {
