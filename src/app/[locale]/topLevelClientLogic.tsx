@@ -14,7 +14,11 @@ import {
   walletConnect,
 } from '@thirdweb-dev/react'
 
-import { initClientAnalytics, trackClientAnalytic } from '@/utils/web/clientAnalytics'
+import {
+  identifyClientAnalyticsUser,
+  initClientAnalytics,
+  trackClientAnalytic,
+} from '@/utils/web/clientAnalytics'
 import { maybeSetUserSessionIdOnClient } from '@/utils/web/clientUserSessionId'
 import { usePathname } from 'next/navigation'
 import { useEffect } from 'react'
@@ -33,12 +37,14 @@ const InitialOrchestration = () => {
   // Note, in local dev this component will double render. It doesn't do this after it is built (verify in testing)
   useEffect(() => {
     const sessionId = maybeSetUserSessionIdOnClient()
-    initClientAnalytics(sessionId)
+    initClientAnalytics()
+    identifyClientAnalyticsUser(sessionId)
     Sentry.setUser({ id: sessionId, idType: 'session' })
   }, [])
   useEffect(() => {
     if (address) {
       Sentry.setUser({ id: address, idType: 'cryptoAddress' })
+      identifyClientAnalyticsUser(address)
     }
   }, [address])
   useEffect(() => {

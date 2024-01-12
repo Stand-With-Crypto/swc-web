@@ -56,10 +56,11 @@ export default function ManageCookiesModal({ onSubmit }: ManageCookiesModalProps
         </ContainerHeader>
         <div
           className={cn('space-y-6', {
-            'p-8': isMobile,
+            'px-8': isMobile,
+            'pb-8': isMobile,
           })}
         >
-          <p>
+          <p className="text-xs sm:text-sm">
             When you visit our website, we may store cookies on your browser to ensure the basic
             functionalities of the website, ensure your security, and to enhance your online
             experience, by helping us better understand user behavior and inform us about which

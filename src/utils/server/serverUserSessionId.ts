@@ -13,10 +13,13 @@ export function getUserSessionIdOnPageRouter(req: NextApiRequest) {
 }
 
 export function getUserSessionIdOnAppRouter() {
-  const userHeaders = cookies()
-  const sessionId = userHeaders.get(USER_SESSION_ID_COOKIE_NAME)
+  const userCookies = cookies()
+  const sessionId = userCookies.get(USER_SESSION_ID_COOKIE_NAME)
   if (!sessionId) {
-    Sentry.captureMessage(`getUserSessionIdOnAppRouter: cookie not set`)
+    Sentry.captureMessage(`getUserSessionIdOnAppRouter: cookie not set`, {
+      extra: { headers: headers(), cookies: userCookies.getAll() },
+    })
+    throw new Error('user session cookie not set')
   }
-  return sessionId!.value
+  return sessionId.value
 }

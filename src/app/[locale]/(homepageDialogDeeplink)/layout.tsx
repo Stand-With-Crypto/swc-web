@@ -23,7 +23,11 @@ export default async function Layout({
   const urls = getIntlUrls(locale)
   return (
     <>
-      <div className={dialogOverlayStyles} />
+      <InternalLink
+        replace
+        href={urls.home()}
+        className={cn(dialogOverlayStyles, 'cursor-default')}
+      />
       <div className={cn(dialogContentStyles, 'max-w-3xl p-0')}>
         {children}
         <InternalLink className={dialogCloseStyles} replace href={urls.home()}>

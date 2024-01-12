@@ -36,7 +36,7 @@ export const getIntlUrls = (
     profile: () => `${localePrefix}/profile`,
     // TODO delete before v2 go-live
     sampleArchitecturePatterns: () => `${localePrefix}/sample-architecture-patterns`,
-    userSettings: () => `${localePrefix}/internal/user-settings`,
+    internalHomepage: () => `${localePrefix}/internal`,
   }
 }
 
