@@ -27,6 +27,7 @@ export function NavbarSessionButtonClient(_props: NavbarSessionButtonProps) {
     <ConnectWallet
       theme="light"
       modalSize="compact"
+      btnTitle="Log in"
       auth={{
         loginOptional: false,
         onLogin() {
@@ -50,6 +51,8 @@ export function NavbarSessionButtonClient(_props: NavbarSessionButtonProps) {
           '!h-10 !px-4 !py-2',
         )
       }
+      // the library puts a inline min-width: 140px on the button, so this is the only way to take priority over that
+      style={{ minWidth: '96px' }}
     />
   )
 }

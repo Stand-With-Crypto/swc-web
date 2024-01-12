@@ -7,8 +7,6 @@ const nextConfig = {
     remotePatterns: [
       // dotheysupportit image cdn
       { protocol: 'https', hostname: 'db0prh5pvbqwd.cloudfront.net' },
-
-      { protocol: 'https', hostname: 'ipfs.io' },
     ],
   },
 }

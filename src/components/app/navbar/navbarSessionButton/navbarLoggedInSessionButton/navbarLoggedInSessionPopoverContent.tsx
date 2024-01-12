@@ -1,103 +1,108 @@
 'use client'
 
-import { Wallet } from 'lucide-react'
-import { useMemo } from 'react'
+import React from 'react'
+import { toast } from 'sonner'
+import { Copy } from 'lucide-react'
 
-import { UserActionFormOptInSWCDialog } from '@/components/app/userActionFormOptInSWC/dialog'
 import { Button } from '@/components/ui/button'
-import { NextImage } from '@/components/ui/image'
-import { useThirdWeb, useEnsProfile } from '@/hooks/useThirdWeb'
-import { parseIpfsImageUrl } from '@/utils/shared/ipfs'
+import { useThirdWeb } from '@/hooks/useThirdWeb'
+import { InternalLink } from '@/components/ui/link'
+import { useInternalUrls } from '@/hooks/useInternalUrls'
+import { UserAvatar } from '@/components/app/userAvatar'
+import {
+  getFullSensitiveDataUserDisplayName,
+  getSensitiveDataUserDisplayName,
+} from '@/utils/web/userUtils'
+import { Skeleton } from '@/components/ui/skeleton'
+import { maybeEllipsisText } from '@/utils/web/maybeEllipsisText'
+import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
 
-import { InfoLine } from './infoLine'
-import { getCurrencyIcon } from './getCurrencyIcon'
+interface NavbarLoggedInSessionPopoverContentProps {
+  onClose: () => void
+  user?: GetUserFullProfileInfoResponse['user']
+}
 
-export function NavbarLoggedInSessionPopoverContent() {
-  const { getParsedAddress, logoutAndDisconnect, formattedBalance, wallet, chain, balance } =
-    useThirdWeb()
-
-  const ensProfile = useEnsProfile()
-
-  const currencyIconUrl = useMemo(
-    () => (balance ? getCurrencyIcon(balance?.symbol) : null),
-    [balance],
-  )
-
-  const walletIconUrl = useMemo(() => {
-    if (!wallet) {
-      return ''
-    }
-
-    return parseIpfsImageUrl(wallet.getMeta().iconURL)
-  }, [wallet])
-
-  const walletName = useMemo(() => {
-    return ensProfile.name ?? getParsedAddress({ numStartingChars: 6 })
-  }, [ensProfile, getParsedAddress])
+export function NavbarLoggedInSessionPopoverContent({
+  onClose,
+  user,
+}: NavbarLoggedInSessionPopoverContentProps) {
+  const urls = useInternalUrls()
+  const { logoutAndDisconnect } = useThirdWeb()
 
   return (
     <div className="space-y-2">
       <div className="flex flex-col gap-6 p-4">
         <div className="flex items-center gap-4">
-          <WalletIcon walletIconUrl={walletIconUrl} ensProfileAvatar={ensProfile.avatar} />
-
-          <span>{walletName}</span>
+          {user ? <UserHeading user={user} /> : <UserHeadingSkeleton />}
         </div>
 
-        <UserActionFormOptInSWCDialog>
-          <Button className="w-full">JOIN THE FIGHT</Button>
-        </UserActionFormOptInSWCDialog>
+        <div className="space-y-1">
+          <Button className="w-full" asChild>
+            <InternalLink href={urls.profile()} onClick={onClose}>
+              View profile
+            </InternalLink>
+          </Button>
+          <p className="text-sm text-muted-foreground">
+            Unlock rewards, track activities, and access exclusive membership tiers.
+          </p>
+        </div>
       </div>
+
       <hr />
-      <div className="flex flex-col gap-6 p-4">
-        {balance && (
-          <InfoLine
-            label="Balance"
-            value={<span className="md:text-sm">{formattedBalance}</span>}
-            image={{
-              alt: balance.name,
-              src: currencyIconUrl ?? '',
-            }}
-          />
-        )}
-
-        {chain && (
-          <InfoLine
-            label="Current network"
-            value={chain.name}
-            image={{
-              alt: chain.name,
-              src: parseIpfsImageUrl(chain.icon?.url ?? ''),
-            }}
-          />
-        )}
-
-        <Button variant="outline" className="w-full" onClick={logoutAndDisconnect}>
-          Logout
-        </Button>
-      </div>
+      <Button variant="link" onClick={logoutAndDisconnect}>
+        Log out
+      </Button>
     </div>
   )
 }
 
-function WalletIcon({
-  walletIconUrl,
-  ensProfileAvatar,
-}: {
-  walletIconUrl?: string
-  ensProfileAvatar?: string
-}) {
-  if (ensProfileAvatar) {
-    return <NextImage src={ensProfileAvatar} alt="ENS Profile Avatar" width={36} height={36} />
-  }
+function UserHeading({ user }: { user: GetUserFullProfileInfoResponse['user'] }) {
+  const handleCopyNameToClipboard = React.useCallback(() => {
+    if (!user) {
+      return
+    }
 
-  if (walletIconUrl) {
-    return <NextImage src={walletIconUrl} alt="Wallet Icon" width={36} height={36} />
+    const dataToWrite = getFullSensitiveDataUserDisplayName(user)
+    if (!dataToWrite || !navigator.clipboard) {
+      return toast.error('Failed to copy to clipboard, try again later.')
+    }
+
+    navigator.clipboard.writeText(dataToWrite)
+    toast.success('Copied to clipboard')
+  }, [user])
+
+  if (!user) {
+    return null
   }
 
   return (
-    <div className="w-fit rounded-full bg-secondary p-3">
-      <Wallet width={20} height={20} />
-    </div>
+    <>
+      <div className="min-w-[36px]">
+        <UserAvatar user={user} size={36} />
+      </div>
+      <div className="flex-1">
+        <div className="flex w-full items-center justify-between">
+          <p>{getSensitiveDataUserDisplayName(user)}</p>
+          <Button className="h-auto p-1" variant="ghost" onClick={handleCopyNameToClipboard}>
+            <Copy width={16} height={16} />
+          </Button>
+        </div>
+        {user.primaryUserEmailAddress?.address && (
+          <p className="text-ellipsis text-xs text-muted-foreground">
+            {maybeEllipsisText(user.primaryUserEmailAddress?.address, 30)}
+          </p>
+        )}
+      </div>
+    </>
+  )
+}
+
+function UserHeadingSkeleton() {
+  return (
+    <>
+      <Skeleton className="h-9 w-9 rounded-full" />
+
+      <Skeleton className="h-6 flex-1" />
+    </>
   )
 }
