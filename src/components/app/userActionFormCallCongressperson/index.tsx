@@ -2,8 +2,9 @@ import { Button } from '@/components/ui/button'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Tab, useTabs } from '@/hooks/useTabs'
 
-import { Intro } from './tabs/intro'
 import { TabNames } from './userActionFormCallCongressperson.types'
+import { Intro } from './tabs/intro'
+import { Address } from './tabs/address'
 
 const TABS: Tab[] = [
   {
@@ -12,7 +13,7 @@ const TABS: Tab[] = [
   },
   {
     id: TabNames.ADDRESS,
-    component: () => <h1>Address Tab</h1>,
+    component: Address,
   },
   {
     id: TabNames.SUGGESTED_SCRIPT,
@@ -37,13 +38,13 @@ export function UserActionFormCallCongressperson({
   })
 
   return (
-    <ScrollArea>
+    <>
       {/* <Button onClick={() => gotoTab(TabNames.INTRO)}>INTRO</Button>
       <Button onClick={() => gotoTab(TabNames.ADDRESS)}>ADDRESS</Button>
       <Button onClick={() => gotoTab(TabNames.SUGGESTED_SCRIPT)}>SUGGESTED_SCRIPT</Button>
       <Button onClick={() => gotoTab(TabNames.SUCCESS_MESSAGE)}>SUCCESS_MESSAGE</Button> */}
 
       {component}
-    </ScrollArea>
+    </>
   )
 }

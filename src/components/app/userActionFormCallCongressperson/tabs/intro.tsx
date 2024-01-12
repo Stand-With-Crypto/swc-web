@@ -2,26 +2,20 @@ import { Check } from 'lucide-react'
 import React from 'react'
 
 import { Button } from '@/components/ui/button'
-import { PageSubTitle } from '@/components/ui/pageSubTitle'
-import { PageTitle } from '@/components/ui/pageTitleText'
 import { useTabsContext } from '@/hooks/useTabs'
 
 import { TabNames } from '@/components/app/userActionFormCallCongressperson/userActionFormCallCongressperson.types'
 
+import { UserActionFormCallCongresspersonLayout } from './layout'
+
 export function Intro() {
-  const { gotoTab, currentTab } = useTabsContext()
+  const { gotoTab } = useTabsContext()
 
   return (
-    <div className="space-y-4 p-6 md:space-y-8 md:px-12">
-      <div className="space-y-2">
-        <PageTitle size="sm">It's time to fight to keep crypto in America</PageTitle>
-
-        <PageSubTitle>
-          Call your Congressperson and tell them to vote YES on the FIT21 bill. Calling your
-          representative is the most effective way to influence legislation.
-        </PageSubTitle>
-      </div>
-
+    <UserActionFormCallCongresspersonLayout
+      title="It's time to fight to keep crypto in America"
+      subtitle="Call your Congressperson and tell them to vote YES on the FIT21 bill. Calling your representative is the most effective way to influence legislation."
+    >
       <div className="space-y-2">
         <h2 className="text-base font-semibold">Here's what you need to know:</h2>
         <ul>
@@ -36,10 +30,10 @@ export function Intro() {
         </ul>
       </div>
 
-      <div className="flex w-full justify-end">
+      <UserActionFormCallCongresspersonLayout.Footer>
         <Button onClick={() => gotoTab(TabNames.ADDRESS)}>Continue</Button>
-      </div>
-    </div>
+      </UserActionFormCallCongresspersonLayout.Footer>
+    </UserActionFormCallCongresspersonLayout>
   )
 }
 
