@@ -1,6 +1,5 @@
 import * as Sentry from '@sentry/nextjs'
 
-// TODO expand this as we learn about additional formats
 const RESOLVERS = [
   {
     match: (url: string) => url.startsWith('https://'),

@@ -9,7 +9,7 @@ import * as Sentry from '@sentry/nextjs'
 import { Button } from '@/components/ui/button'
 import { useThirdWeb } from '@/hooks/useThirdWeb'
 import { InternalLink } from '@/components/ui/link'
-import { useInternalUrls } from '@/hooks/useInternalUrls'
+import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { UserAvatar } from '@/components/app/userAvatar'
 import {
   getFullSensitiveDataUserDisplayName,
@@ -28,7 +28,7 @@ export function NavbarLoggedInSessionPopoverContent({
   onClose,
   user,
 }: NavbarLoggedInSessionPopoverContentProps) {
-  const urls = useInternalUrls()
+  const urls = useIntlUrls()
   const { logoutAndDisconnect } = useThirdWeb()
 
   return (

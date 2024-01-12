@@ -1,7 +1,7 @@
 import { useDisconnect, useUser, useLogout } from '@thirdweb-dev/react'
 import { usePathname, useRouter } from 'next/navigation'
 
-import { useInternalUrls } from '@/hooks/useInternalUrls'
+import { useIntlUrls } from '@/hooks/useIntlUrls'
 
 export function useThirdWeb() {
   const session = useUser()
@@ -10,10 +10,9 @@ export function useThirdWeb() {
 
   const router = useRouter()
   const pathname = usePathname()
-  const internalUrls = useInternalUrls()
+  const internalUrls = useIntlUrls()
 
   const handleLogoutSuccess = () => {
-    // TODO: Change this logic to some that covers all private pages
     if (pathname === internalUrls.profile()) {
       router.push(internalUrls.home())
     } else {
