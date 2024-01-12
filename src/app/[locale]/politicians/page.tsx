@@ -15,8 +15,8 @@ export const dynamic = 'error'
 
 type Props = PageProps
 
-const title = 'Where politicians stand on crypto'
-const description = `Ask your politician to be pro-crypto. Here's where they stand now.`
+const title = 'Find out where politicians stand on crypto'
+const description = `Crypto drives American innovation. Keeping crypto in America means securing 4 million jobs over the next 7 years to increase economic mobility. Discover the politicians fighting to keep crypto in America.`
 export async function generateMetadata(_props: Props): Promise<Metadata> {
   return generateMetadataDetails({
     title,
