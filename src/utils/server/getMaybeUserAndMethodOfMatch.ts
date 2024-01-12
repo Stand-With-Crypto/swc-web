@@ -1,6 +1,6 @@
 'use server'
 import { appRouterGetAuthUser } from '@/utils/server/appRouterGetAuthUser'
-import { getUserSessionIdOnAppRouter } from '@/utils/server/serverUserSessionId'
+import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { Prisma, User, UserCryptoAddress } from '@prisma/client'
 import _ from 'lodash'
@@ -26,7 +26,7 @@ export async function getMaybeUserAndMethodOfMatch<
     }
 > {
   const authUser = await appRouterGetAuthUser()
-  const sessionId = getUserSessionIdOnAppRouter()
+  const sessionId = getUserSessionId()
   const userWithoutReturnTypes = await prismaClient.user.findFirst({
     where: {
       OR: _.compact([
