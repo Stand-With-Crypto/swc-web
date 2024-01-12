@@ -58,7 +58,8 @@ export function NavbarLoggedInSessionPopoverContent({
   )
 }
 
-function UserHeading({ user }: { user: GetUserFullProfileInfoResponse['user'] }) {
+function UserHeading(props: { user: GetUserFullProfileInfoResponse['user'] }) {
+  const user = props.user!
   const [{ error, value }, copyToClipboard] = useCopyToClipboard()
 
   const handleClipboardError = React.useCallback(() => {
@@ -76,10 +77,6 @@ function UserHeading({ user }: { user: GetUserFullProfileInfoResponse['user'] })
   }, [error, value, handleClipboardError])
 
   const handleCopyNameToClipboard = React.useCallback(() => {
-    if (!user) {
-      return
-    }
-
     const dataToWrite = getFullSensitiveDataUserDisplayName(user)
     if (!dataToWrite) {
       Sentry.captureMessage('Failed to copy to clipboard, no data to write', {
@@ -90,10 +87,6 @@ function UserHeading({ user }: { user: GetUserFullProfileInfoResponse['user'] })
 
     copyToClipboard(dataToWrite)
   }, [user, handleClipboardError, copyToClipboard])
-
-  if (!user) {
-    return null
-  }
 
   return (
     <>
