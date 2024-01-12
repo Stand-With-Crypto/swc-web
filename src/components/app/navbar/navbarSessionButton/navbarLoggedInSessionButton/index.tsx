@@ -14,7 +14,7 @@ export function NavbarLoggedInSessionButton() {
   const dialogProps = useDialog(false)
 
   const { data } = useApiResponseForUserFullProfileInfo()
-  const user = useMemo(() => data?.user, [data])
+  const user = data?.user
 
   return (
     <Popover {...dialogProps}>

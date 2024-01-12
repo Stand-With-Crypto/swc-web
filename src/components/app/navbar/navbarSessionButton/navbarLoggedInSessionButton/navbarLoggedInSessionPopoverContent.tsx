@@ -3,6 +3,8 @@
 import React from 'react'
 import { toast } from 'sonner'
 import { Copy } from 'lucide-react'
+import { useCopyToClipboard } from 'react-use'
+import * as Sentry from '@sentry/nextjs'
 
 import { Button } from '@/components/ui/button'
 import { useThirdWeb } from '@/hooks/useThirdWeb'
@@ -57,19 +59,37 @@ export function NavbarLoggedInSessionPopoverContent({
 }
 
 function UserHeading({ user }: { user: GetUserFullProfileInfoResponse['user'] }) {
+  const [{ error, value }, copyToClipboard] = useCopyToClipboard()
+
+  const handleClipboardError = React.useCallback(() => {
+    toast.error('Failed to copy to clipboard, try again later.')
+  }, [])
+
+  React.useEffect(() => {
+    if (error) {
+      Sentry.captureException(error)
+      handleClipboardError()
+    }
+    if (value) {
+      toast.success('Copied to clipboard')
+    }
+  }, [error, value, handleClipboardError])
+
   const handleCopyNameToClipboard = React.useCallback(() => {
     if (!user) {
       return
     }
 
     const dataToWrite = getFullSensitiveDataUserDisplayName(user)
-    if (!dataToWrite || !navigator.clipboard) {
-      return toast.error('Failed to copy to clipboard, try again later.')
+    if (!dataToWrite) {
+      Sentry.captureMessage('Failed to copy to clipboard, no data to write', {
+        user: { id: user.id },
+      })
+      return handleClipboardError()
     }
 
-    navigator.clipboard.writeText(dataToWrite)
-    toast.success('Copied to clipboard')
-  }, [user])
+    copyToClipboard(dataToWrite)
+  }, [user, handleClipboardError, copyToClipboard])
 
   if (!user) {
     return null
