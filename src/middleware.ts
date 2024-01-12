@@ -12,6 +12,25 @@ export function middleware(request: NextRequest) {
     locales: ORDERED_SUPPORTED_LOCALES as string[],
     defaultLocale: DEFAULT_LOCALE,
   })
+  const urlSessionId = request.nextUrl.searchParams.get('sessionId')
+  const existingSessionId = request.cookies.get(USER_SESSION_ID_COOKIE_NAME)?.value
+  if (urlSessionId && urlSessionId !== existingSessionId) {
+    logger.info(`session id being set via url: ${urlSessionId}`)
+    i18nParsedResponse.cookies.set({
+      name: USER_SESSION_ID_COOKIE_NAME,
+      value: urlSessionId,
+      httpOnly: false,
+    })
+  }
+  if (!existingSessionId) {
+    const sessionId = generateUserSessionId()
+    logger.info(`setting initial session id: ${sessionId}`)
+    i18nParsedResponse.cookies.set({
+      name: USER_SESSION_ID_COOKIE_NAME,
+      value: sessionId,
+      httpOnly: false,
+    })
+  }
   return i18nParsedResponse
 }
 

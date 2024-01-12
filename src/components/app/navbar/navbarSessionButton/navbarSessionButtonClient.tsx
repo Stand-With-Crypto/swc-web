@@ -5,10 +5,9 @@ import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { useMaybeUpdateUserEmailAfterLoggingInToEmbedWallet } from '@/hooks/useMaybeUpdateUserEmailAfterLoggingInToEmbedWallet'
 import { GetDefineMessageResults } from '@/types'
-import { forceSetUserSessionIdOnClient } from '@/utils/web/clientUserSessionId'
 import { cn } from '@/utils/web/cn'
 import { maybeEllipsisText } from '@/utils/web/maybeEllipsisText'
-import { ConnectWallet, useAddress, useUser } from '@thirdweb-dev/react'
+import { ConnectWallet, useAddress } from '@thirdweb-dev/react'
 import { useRouter } from 'next/navigation'
 
 export function NavbarSessionButtonClient(props: {
