@@ -1,4 +1,4 @@
-import { OptionalCookieConsentTypes } from '@/utils/web/cookieConsent'
+import { OptionalCookieConsentTypes } from '@/utils/shared/cookieConsent'
 import { boolean, object } from 'zod'
 
 export const zodManageCookieConsent = object({

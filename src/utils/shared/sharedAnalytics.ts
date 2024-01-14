@@ -39,6 +39,14 @@ export enum AnalyticActionType {
 export type AnalyticProperties = {
   action?: AnalyticActionType
   component?: AnalyticComponentType
-  // TODO determine what property types the analytics library we end up using will support
-  [key: string]: any
+  [key: string]: string | number | boolean | undefined | null | Date | string[] | number[]
+}
+
+export type AnalyticsPeopleProperties = {
+  // https://docs.mixpanel.com/docs/data-structure/user-profiles#reserved-user-properties
+  // if we end up using other tools, we might need to map these reserved names to other values
+  $email?: string
+  $phone?: string
+  $name?: string
+  [key: string]: string | number | boolean | undefined | null | Date | string[] | number[]
 }

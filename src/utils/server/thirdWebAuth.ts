@@ -5,7 +5,15 @@ import { NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN } from '@/utils/shared/sharedEnv'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getUserSessionIdOnPageRouter } from '@/utils/server/serverUserSessionId'
 import { SupportedUserCryptoNetwork } from '@prisma/client'
-import { getServerAnalytics } from '@/utils/server/severAnalytics'
+import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/severAnalytics'
+import {
+  mapLocalUserToUserDatabaseFields,
+  parseLocalUserFromCookiesForPageRouter,
+} from '@/utils/server/serverLocalUser'
+import {
+  mapCurrentSessionLocalUserToAnalyticsProperties,
+  mapPersistedLocalUserToAnalyticsProperties,
+} from '@/utils/shared/localUser'
 
 // TODO migrate this logic from page router to app router once thirdweb supports it
 
@@ -34,23 +42,32 @@ export const thirdWebAuthConfig: ThirdwebAuthConfig = {
     },
   },
   callbacks: {
-    onLogout: user => {
-      getServerAnalytics({ address: user.address }).track('User Logged Out')
+    onLogout: (user, req) => {
+      const localUser = parseLocalUserFromCookiesForPageRouter(req)
+      getServerAnalytics({ address: user.address, localUser }).track('User Logged Out')
       // TODO analytics
     },
     // look for the comment in appRouterGetAuthUser for why we don't use this fn
     onUser: async (user, req) => {},
     onLogin: async (address, req) => {
+      const localUser = parseLocalUserFromCookiesForPageRouter(req)
       // TODO figure out how to get the users email address to persist to the db
       let existingUser = await prismaClient.user.findFirst({
         where: { userCryptoAddress: { address, cryptoNetwork: SupportedUserCryptoNetwork.ETH } },
       })
-      getServerAnalytics({ address }).track('User Logged In', { 'Is First Time': !existingUser })
+      getServerAnalytics({ address, localUser }).track('User Logged In', {
+        'Is First Time': !existingUser,
+      })
+      const peopleAnalytics = getServerPeopleAnalytics({ address, localUser })
+      peopleAnalytics.set({ 'Datetime of Last Login': new Date() })
       if (!existingUser) {
         const userSessionId = getUserSessionIdOnPageRouter(req)
         existingUser = await prismaClient.user.findFirst({
           where: { userSessions: { some: { id: userSessionId } } },
         })
+        if (localUser) {
+          peopleAnalytics.setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
+        }
         await prismaClient.userCryptoAddress.create({
           data: {
             address,
@@ -59,6 +76,7 @@ export const thirdWebAuthConfig: ThirdwebAuthConfig = {
               : {
                   create: {
                     isPubliclyVisible: false,
+                    ...mapLocalUserToUserDatabaseFields(localUser),
                   },
                 },
           },

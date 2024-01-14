@@ -1,6 +1,8 @@
 'use server'
 import { appRouterGetAuthUser } from '@/utils/server/appRouterGetAuthUser'
 import { prismaClient } from '@/utils/server/prismaClient'
+import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
+import { getServerPeopleAnalytics } from '@/utils/server/severAnalytics'
 import { zodUpdateUserProfileFormAction } from '@/validation/forms/zodUpdateUserProfile'
 import { UserEmailAddressSource } from '@prisma/client'
 import 'server-only'
@@ -56,6 +58,23 @@ export async function actionUpdateUserProfile(
         update: {},
       })
     : null
+  const localUser = parseLocalUserFromCookies()
+  const peopleAnalytics = getServerPeopleAnalytics({ address: authUser.address, localUser })
+  peopleAnalytics.set({
+    ...(validatedFields.data.address
+      ? {
+          'Address Administrative Area Level 1':
+            validatedFields.data.address.administrativeAreaLevel1,
+          'Address Country Code': validatedFields.data.address.countryCode,
+          'Address Locality': validatedFields.data.address.locality,
+        }
+      : {}),
+    // https://docs.mixpanel.com/docs/data-structure/user-profiles#reserved-user-properties
+    $email: validatedFields.data.email,
+    $phone: validatedFields.data.phoneNumber,
+    $name: validatedFields.data.fullName,
+  })
+
   const updatedUser = await prismaClient.user.update({
     where: {
       id: user.id,

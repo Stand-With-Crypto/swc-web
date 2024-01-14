@@ -29,7 +29,6 @@ import {
   triggerServerActionForForm,
 } from '@/utils/web/formUtils'
 import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
-import { getLocalUser } from '@/utils/web/localUser'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
 import { zodUserActionFormEmailCongresspersonFields } from '@/validation/forms/zodUserActionFormEmailCongressperson'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -53,7 +52,6 @@ const getDefaultValues = ({
 }) => {
   if (user) {
     return {
-      localUser: getLocalUser(),
       campaignName: UserActionEmailCampaignName.DEFAULT,
       fullName: user.fullName,
       email: user.primaryUserEmailAddress?.address || '',
@@ -68,7 +66,6 @@ const getDefaultValues = ({
     }
   }
   return {
-    localUser: getLocalUser(),
     campaignName: UserActionEmailCampaignName.DEFAULT,
     fullName: '',
     email: '',

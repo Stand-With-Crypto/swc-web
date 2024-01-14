@@ -7,7 +7,7 @@ import {
   COOKIE_CONSENT_COOKIE_NAME,
   CookieConsentPermissions,
   serializeCookieConsent,
-} from '@/utils/web/cookieConsent'
+} from '@/utils/shared/cookieConsent'
 
 export function useCookieConsent() {
   const [cookieConsentCookie, setCookieConsentCookie, removeCookieConsentCookie] = useCookieState(

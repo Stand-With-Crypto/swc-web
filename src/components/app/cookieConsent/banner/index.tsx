@@ -11,7 +11,7 @@ import { SupportedLocale } from '@/intl/locales'
 
 import styles from './banner.module.css'
 import ManageCookiesModal from '@/components/app/cookieConsent/cookieConsentManageModal'
-import { CookieConsentPermissions } from '@/utils/web/cookieConsent'
+import { CookieConsentPermissions } from '@/utils/shared/cookieConsent'
 
 interface CookieConsentBannerProps {
   locale: SupportedLocale

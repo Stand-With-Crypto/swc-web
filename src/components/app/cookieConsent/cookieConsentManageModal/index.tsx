@@ -21,7 +21,7 @@ import { useDialog } from '@/hooks/useDialog'
 
 import { CookiePreferencesForm } from './cookiePreferencesForm'
 import { DialogProps } from '@radix-ui/react-dialog'
-import { CookieConsentPermissions } from '@/utils/web/cookieConsent'
+import { CookieConsentPermissions } from '@/utils/shared/cookieConsent'
 
 export interface ManageCookiesModalProps {
   onSubmit: (accepted: CookieConsentPermissions) => void

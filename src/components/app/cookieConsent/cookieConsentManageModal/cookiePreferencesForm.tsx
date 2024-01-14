@@ -16,7 +16,7 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { CheckboxProps } from '@radix-ui/react-checkbox'
 import InfoBadge from '@/components/ui/infoBadge'
 import { Button } from '@/components/ui/button'
-import { CookieConsentPermissions, OptionalCookieConsentTypes } from '@/utils/web/cookieConsent'
+import { CookieConsentPermissions, OptionalCookieConsentTypes } from '@/utils/shared/cookieConsent'
 
 export interface CookiePreferencesFormProps {
   onSubmit: (accepted: CookieConsentPermissions) => void

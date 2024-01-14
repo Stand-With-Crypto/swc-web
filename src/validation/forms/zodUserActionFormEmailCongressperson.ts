@@ -3,7 +3,6 @@ import { UserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns'
 import { zodAddress } from '@/validation/fields/zodAddress'
 import { zodDTSISlug } from '@/validation/fields/zodDTSISlug'
 import { zodGooglePlacesAutocompletePrediction } from '@/validation/fields/zodGooglePlacesAutocompletePrediction'
-import { zodLocalUser } from '@/validation/fields/zodLocalUser'
 import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
 import { nativeEnum, object, string } from 'zod'
 
@@ -16,7 +15,6 @@ const base = object({
   phoneNumber: zodPhoneNumber.transform(str => str && normalizePhoneNumber(str)),
   message: string().min(1, 'Please enter a message').max(1000, 'Please enter a message'),
   dtsiSlug: zodDTSISlug,
-  localUser: zodLocalUser,
   campaignName: nativeEnum(UserActionEmailCampaignName),
 })
 

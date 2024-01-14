@@ -19,16 +19,16 @@ import {
   initClientAnalytics,
   trackClientAnalytic,
 } from '@/utils/web/clientAnalytics'
-import { maybeSetUserSessionIdOnClient } from '@/utils/web/clientUserSessionId'
+import {
+  getUserSessionIdOnClient,
+  maybeSetUserSessionIdOnClient,
+} from '@/utils/web/clientUserSessionId'
 import { usePathname } from 'next/navigation'
 import { useEffect } from 'react'
-<<<<<<< Updated upstream
 import { LocaleContext } from '@/hooks/useLocale'
 import { SupportedLocale } from '@/intl/locales'
 import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
-=======
-import { bootstrapLocalUser } from '@/utils/web/localUser'
->>>>>>> Stashed changes
+import { bootstrapLocalUser } from '@/utils/web/clientLocalUser'
 
 const NEXT_PUBLIC_THIRDWEB_CLIENT_ID = requiredEnv(
   process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID,
@@ -40,12 +40,8 @@ const InitialOrchestration = () => {
   const address = useAddress()
   // Note, in local dev this component will double render. It doesn't do this after it is built (verify in testing)
   useEffect(() => {
-<<<<<<< Updated upstream
-    const sessionId = maybeSetUserSessionIdOnClient()
-=======
     bootstrapLocalUser()
     const sessionId = getUserSessionIdOnClient()
->>>>>>> Stashed changes
     initClientAnalytics()
     identifyClientAnalyticsUser(sessionId)
     Sentry.setUser({ id: sessionId, idType: 'session' })

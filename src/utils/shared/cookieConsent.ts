@@ -1,5 +1,3 @@
-import Cookies from 'js-cookie'
-
 export const COOKIE_CONSENT_COOKIE_NAME = 'SWC_COOKIE_CONSENT'
 
 export enum OptionalCookieConsentTypes {
@@ -27,16 +25,4 @@ export function deserializeCookieConsent(cookieValue: string): CookieConsentPerm
     permissions[key as OptionalCookieConsentTypes] = value === 'true'
   })
   return permissions
-}
-
-export function getCookieConsent(): CookieConsentPermissions {
-  const cookieValue = Cookies.get(COOKIE_CONSENT_COOKIE_NAME)
-  if (!cookieValue) {
-    return {
-      functional: true,
-      performance: true,
-      targeting: true,
-    }
-  }
-  return deserializeCookieConsent(cookieValue)
 }
