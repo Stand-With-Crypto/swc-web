@@ -124,7 +124,19 @@ async function seed() {
     x => x.address === LOCAL_USER_CRYPTO_ADDRESS,
   )!
   logEntity({ userCryptoAddress })
-
+  batchAsyncAndLog(userCryptoAddress, addresses =>
+    Promise.all(
+      addresses.map(x =>
+        prismaClient.user.update({
+          where: { id: x.userId },
+          data: { primaryUserCryptoAddressId: x.id },
+        }),
+      ),
+    ),
+  )
+  logger.info(
+    `backfilled newly created userCryptoAddress in to users with primaryUserCryptoAddressId`,
+  )
   /*
   userEmailAddress
   */

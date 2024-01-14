@@ -43,7 +43,7 @@ export const thirdWebAuthConfig: ThirdwebAuthConfig = {
     onLogin: async (address, req) => {
       // TODO figure out how to get the users email address to persist to the db
       let existingUser = await prismaClient.user.findFirst({
-        where: { userCryptoAddress: { address, cryptoNetwork: SupportedUserCryptoNetwork.ETH } },
+        where: { userCryptoAddresses: { some: { address } } },
       })
       getServerAnalytics({ address }).track('User Logged In', { 'Is First Time': !existingUser })
       if (!existingUser) {
@@ -51,7 +51,7 @@ export const thirdWebAuthConfig: ThirdwebAuthConfig = {
         existingUser = await prismaClient.user.findFirst({
           where: { userSessions: { some: { id: userSessionId } } },
         })
-        await prismaClient.userCryptoAddress.create({
+        const userCryptoAddress = await prismaClient.userCryptoAddress.create({
           data: {
             address,
             user: existingUser
@@ -62,6 +62,10 @@ export const thirdWebAuthConfig: ThirdwebAuthConfig = {
                   },
                 },
           },
+        })
+        await prismaClient.user.update({
+          where: { id: userCryptoAddress.userId },
+          data: { primaryUserCryptoAddressId: userCryptoAddress.id },
         })
       }
     },

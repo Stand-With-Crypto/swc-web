@@ -21,7 +21,7 @@ export async function actionUpdateUserProfile(
   }
   const user = await prismaClient.user.findFirstOrThrow({
     where: {
-      userCryptoAddress: { address: authUser.address },
+      userCryptoAddresses: { some: { address: authUser.address } },
     },
     include: {
       userEmailAddresses: true,

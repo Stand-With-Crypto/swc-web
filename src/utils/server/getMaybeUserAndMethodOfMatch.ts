@@ -1,4 +1,5 @@
 'use server'
+import * as Sentry from '@sentry/nextjs'
 import { appRouterGetAuthUser } from '@/utils/server/appRouterGetAuthUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { prismaClient } from '@/utils/server/prismaClient'
@@ -30,13 +31,13 @@ export async function getMaybeUserAndMethodOfMatch<
   const userWithoutReturnTypes = await prismaClient.user.findFirst({
     where: {
       OR: _.compact([
-        authUser && { userCryptoAddress: { address: authUser.address } },
+        authUser && { userCryptoAddresses: { some: { address: authUser.address } } },
         { userSessions: { some: { id: sessionId } } },
       ]),
     },
     include: {
       ...((include || {}) as object),
-      userCryptoAddress: true,
+      userCryptoAddresses: true,
     },
     ...other,
   })
@@ -47,9 +48,19 @@ export async function getMaybeUserAndMethodOfMatch<
         `unexpectedly didn't return a user for an authenticated address ${authUser.address}}`,
       )
     }
+    const authedCryptoAddress = userWithoutReturnTypes!.userCryptoAddresses.find(
+      x => x.address === authUser.address,
+    )!
+    if (authedCryptoAddress.id !== user.primaryUserCryptoAddressId) {
+      // This will happen, but should be relatively infrequent
+      Sentry.captureMessage(
+        'User logged in with a crypto address that is not their primary address',
+        { extra: { user, address: authUser.address } },
+      )
+    }
     return {
       user,
-      userCryptoAddress: userWithoutReturnTypes!.userCryptoAddress!,
+      userCryptoAddress: authedCryptoAddress,
     }
   }
   return {
