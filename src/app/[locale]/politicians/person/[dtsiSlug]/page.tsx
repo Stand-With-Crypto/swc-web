@@ -6,7 +6,6 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/component
 import { MaybeNextImg } from '@/components/ui/image'
 import { InitialsAvatar } from '@/components/ui/initialsAvatar'
 import { ExternalLink } from '@/components/ui/link'
-import { PageTitle } from '@/components/ui/pageTitleText'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
 import { queryDTSIAllPeopleSlugs } from '@/data/dtsi/queries/queryDTSIAllPeopleSlugs'
@@ -35,7 +34,6 @@ import {
   convertDTSIStanceScoreToTextColorClass,
 } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { dtsiTwitterAccountUrl } from '@/utils/dtsi/dtsiTwitterAccountUtils'
-import { getOpenGraphImageUrl } from '@/utils/server/generateOpenGraphImageUrl'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { externalUrls } from '@/utils/shared/urls'

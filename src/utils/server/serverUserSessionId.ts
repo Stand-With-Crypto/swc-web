@@ -1,5 +1,5 @@
 import * as Sentry from '@sentry/nextjs'
-import { USER_SESSION_ID_COOKIE_NAME } from '@/utils/shared/userSessionId'
+import { USER_SESSION_ID_COOKIE_NAME, generateUserSessionId } from '@/utils/shared/userSessionId'
 import { NextApiRequest } from 'next'
 import { cookies, headers } from 'next/headers'
 
@@ -12,7 +12,13 @@ export function getUserSessionIdOnPageRouter(req: NextApiRequest) {
   return value!
 }
 
-export function getUserSessionIdOnAppRouter() {
+export function getUserSessionIdThatMightNotExist() {
+  const userCookies = cookies()
+  const sessionId = userCookies.get(USER_SESSION_ID_COOKIE_NAME)
+  return sessionId?.value
+}
+
+export function getUserSessionId() {
   const userCookies = cookies()
   const sessionId = userCookies.get(USER_SESSION_ID_COOKIE_NAME)
   if (!sessionId) {

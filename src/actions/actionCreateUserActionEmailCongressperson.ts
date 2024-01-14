@@ -2,7 +2,7 @@
 import * as Sentry from '@sentry/nextjs'
 import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { getUserSessionIdOnAppRouter } from '@/utils/server/serverUserSessionId'
+import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { getLogger } from '@/utils/shared/logger'
 import { zodUserActionFormEmailCongresspersonAction } from '@/validation/forms/zodUserActionFormEmailCongressperson'
 import { UserActionType, UserEmailAddressSource } from '@prisma/client'
@@ -23,7 +23,7 @@ export async function actionCreateUserActionEmailCongressperson(
   logger.info('triggered')
   const userMatch = await getMaybeUserAndMethodOfMatch({ include: { userCryptoAddress: true } })
   logger.info(userMatch.user ? 'found user' : 'no user found')
-  const sessionId = getUserSessionIdOnAppRouter()
+  const sessionId = getUserSessionId()
   const validatedFields = zodUserActionFormEmailCongresspersonAction.safeParse(data)
   if (!validatedFields.success) {
     return {
