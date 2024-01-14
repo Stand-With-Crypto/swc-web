@@ -1,4 +1,5 @@
 import { getClientAddress } from '@/clientModels/clientAddress'
+import { getClientUser } from '@/clientModels/clientUser/clientUser'
 import { getClientUserCryptoAddress } from '@/clientModels/clientUser/clientUserCryptoAddress'
 import { getSensitiveDataClientUser } from '@/clientModels/clientUser/sensitiveDataClientUser'
 import { getSensitiveDataClientUserAction } from '@/clientModels/clientUserAction/sensitiveDataClientUserAction'
@@ -17,6 +18,8 @@ export async function getAuthenticatedData() {
       userCryptoAddresses: { some: { address: authUser.address } },
     },
     include: {
+      userMergeAlertUserA: { include: { userB: { include: { primaryUserCryptoAddress: true } } } },
+      userMergeAlertUserB: { include: { userA: { include: { primaryUserCryptoAddress: true } } } },
       primaryUserCryptoAddress: true,
       userCryptoAddresses: true,
       address: true,
@@ -67,5 +70,15 @@ export async function getAuthenticatedData() {
     userActions: userActions.map(record =>
       getSensitiveDataClientUserAction({ record, dtsiPeople }),
     ),
+    mergeAlerts: [
+      ...user.userMergeAlertUserA.map(({ userB, ...mergeAlert }) => ({
+        ...mergeAlert,
+        otherUser: getClientUser({ ...userB, isPubliclyVisible: true }),
+      })),
+      ...user.userMergeAlertUserB.map(({ userA, ...mergeAlert }) => ({
+        ...mergeAlert,
+        otherUser: getClientUser({ ...userA, isPubliclyVisible: true }),
+      })),
+    ],
   }
 }

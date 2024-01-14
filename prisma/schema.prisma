@@ -66,27 +66,58 @@ model Address {
 // A user has a one-to-many relationship with a session. A session will only be persisted if a user is not logged in and performs an action on the site. If they are logged in, we will associate the action with thier crypto address.
 // Once we identify a session is associated with a crypto address (the user logs in to the app in the same session after performing an action), we'll want to merge the session and crypto address under the same user. We will maintain the session fk on the action to keep the context that the action was originally linked to a session instead
 model User {
-  id                        String            @id @default(uuid())
-  datetimeUpdated           DateTime          @updatedAt @map("datetime_updated")
-  datetimeCreated           DateTime          @default(now()) @map("datetime_created")
-  fullName                  String            @default("") @map("name")
-  phoneNumber               String            @default("") @map("phone_number")
-  address                   Address?          @relation(fields: [addressId], references: [id])
-  addressId                 String?           @map("address_id")
-  isPubliclyVisible         Boolean           @map("is_publicly_visible")
-  sampleDatabaseIncrement   Int               @default(0) // TODO delete
-  primaryUserEmailAddress   UserEmailAddress? @relation("asPrimaryUserEmailAddress", fields: [primaryUserEmailAddressId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  primaryUserEmailAddressId String?           @unique @map("primary_user_email_address_id")
+  id                         String             @id @default(uuid())
+  datetimeUpdated            DateTime           @updatedAt @map("datetime_updated")
+  datetimeCreated            DateTime           @default(now()) @map("datetime_created")
+  fullName                   String             @default("") @map("name")
+  phoneNumber                String             @default("") @map("phone_number")
+  address                    Address?           @relation(fields: [addressId], references: [id])
+  addressId                  String?            @map("address_id")
+  isPubliclyVisible          Boolean            @map("is_publicly_visible")
+  sampleDatabaseIncrement    Int                @default(0) // TODO delete
+  primaryUserEmailAddress    UserEmailAddress?  @relation("asPrimaryUserEmailAddress", fields: [primaryUserEmailAddressId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  primaryUserEmailAddressId  String?            @unique @map("primary_user_email_address_id")
   primaryUserCryptoAddress   UserCryptoAddress? @relation("asPrimaryUserCryptoAddress", fields: [primaryUserCryptoAddressId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  primaryUserCryptoAddressId String?           @unique @map("primary_user_crypto_address_id")
+  primaryUserCryptoAddressId String?            @unique @map("primary_user_crypto_address_id")
 
-  userCryptoAddresses  UserCryptoAddress[] @relation("userCryptoAddresses")
-  userSessions       UserSession[]
-  userEmailAddresses UserEmailAddress[] @relation("userEmailAddresses")
-  userActions        UserAction[]
+  // REMINDER: as we add additional foreign keys to users, we'll want to make sure we account for them in our mergeUsers logic
+  userCryptoAddresses UserCryptoAddress[] @relation("userCryptoAddresses")
+  userSessions        UserSession[]
+  userEmailAddresses  UserEmailAddress[]  @relation("userEmailAddresses")
+  userActions         UserAction[]
+
+  userMergeAlertUserB        UserMergeAlert[] @relation("userBMergeAttempt")
+  userMergeAlertUserA        UserMergeAlert[] @relation("userAMergeAttempt")
+  userMergeEvents UserMergeEvent[]
 
   @@index([addressId])
   @@map("user")
+}
+
+
+// because we delete one of the users after this merge completes, this model will also be deleted
+model UserMergeAlert {
+    id              String   @id @default(uuid())
+  userAId String @map("user_a_id")
+  userA   User   @relation("userAMergeAttempt", fields: [userAId], references: [id])
+  userBId String @map("user_b_id")
+  userB   User   @relation("userBMergeAttempt", fields: [userBId], references: [id])
+
+  hasBeenConfirmedByUserA Boolean @map("has_been_confirmed_by_user_a") @default(false)
+  hasBeenConfirmedByUserB Boolean @map("has_been_confirmed_by_user_b") @default(false)
+
+  @@unique([userAId, userBId])
+  @@index([userBId])
+  @@index([userAId])
+}
+
+model UserMergeEvent {
+  id              String   @id @default(uuid())
+  userId          String   @map("user_id")
+  user            User     @relation(fields: [userId], references: [id])
+  datetimeCreated DateTime @default(now()) @map("datetime_created")
+  datetimeUpdated DateTime @updatedAt @map("datetime_updated")
+  @@index([userId])
 }
 
 // A "user" that is performing actions on our platform but has not logged in to any system yet will have that action associated with a user session
@@ -149,7 +180,7 @@ model UserCryptoAddress {
   userId          String                     @unique @map("user_id")
   user            User                       @relation("userCryptoAddresses", map: "userCryptoAddresses", fields: [userId], references: [id])
 
-  userActions UserAction[]
+  userActions                UserAction[]
   asPrimaryUserCryptoAddress User?        @relation("asPrimaryUserCryptoAddress")
 
   @@unique([address, cryptoNetwork])
