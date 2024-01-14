@@ -55,7 +55,9 @@ function trackAnalytic(
       distinct_id: getDistinctId(config),
     },
     err => {
-      Sentry.captureException(err, { tags: { domain: 'trackAnalytic' } })
+      if (err) {
+        Sentry.captureException(err, { tags: { domain: 'trackAnalytic' } })
+      }
     },
   )
 }
@@ -115,7 +117,9 @@ export function getServerPeopleAnalytics(config: ServerAnalyticsConfig) {
     logger.info(`People Properties Set Once`, peopleProperties)
     // we could wrap this in a promise and await it, but we don't want to block the request
     mixpanel.people.set_once(getDistinctId(config), peopleProperties, err => {
-      Sentry.captureException(err, { tags: { domain: 'trackPeopleAnalyticOnce' } })
+      if (err) {
+        Sentry.captureException(err, { tags: { domain: 'trackPeopleAnalyticOnce' } })
+      }
     })
   }
 
@@ -127,7 +131,9 @@ export function getServerPeopleAnalytics(config: ServerAnalyticsConfig) {
     logger.info(`People Properties Set`, peopleProperties)
     // we could wrap this in a promise and await it, but we don't want to block the request
     mixpanel.people.set(getDistinctId(config), peopleProperties, err => {
-      Sentry.captureException(err, { tags: { domain: 'trackPeopleAnalytic' } })
+      if (err) {
+        Sentry.captureException(err, { tags: { domain: 'trackPeopleAnalytic' } })
+      }
     })
   }
 
