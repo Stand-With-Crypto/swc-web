@@ -1,4 +1,4 @@
-import { About } from '@/components/app/pageAbout'
+import { PageAbout } from '@/components/app/pageAbout'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { Metadata } from 'next'
 
@@ -15,5 +15,5 @@ export const metadata: Metadata = {
 }
 
 export default async function AboutPage() {
-  return <About title={title} description={description} />
+  return <PageAbout title={title} description={description} />
 }

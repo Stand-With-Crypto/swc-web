@@ -5,7 +5,7 @@ import { PageTitle } from '@/components/ui/pageTitleText'
 import { NextImage } from '@/components/ui/image'
 import { Card } from '@/components/ui/card'
 
-export function About({ title, description }: { title: string; description: string }) {
+export function PageAbout({ title, description }: { title: string; description: string }) {
   return (
     <div className="container space-y-16">
       <section className="mb-16 space-y-7 md:mb-24">

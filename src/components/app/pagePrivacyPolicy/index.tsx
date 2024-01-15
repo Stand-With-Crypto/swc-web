@@ -1,4 +1,4 @@
-export function PrivacyPolicy() {
+export function PagePrivacyPolicy() {
   return (
     <article className="prose max-w-full">
       <h1>Stand With Crypto Alliance, Inc.: Privacy Policy</h1>
