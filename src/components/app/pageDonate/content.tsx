@@ -3,7 +3,7 @@ import { FAQ } from './faq'
 import { CTAs } from './ctas'
 import { PageDonateProps } from './pageDonate.types'
 
-export function DonatePageContent(props: PageDonateProps) {
+export function PageDonate(props: PageDonateProps) {
   return (
     <div className="container space-y-24">
       <Heading {...props} />
