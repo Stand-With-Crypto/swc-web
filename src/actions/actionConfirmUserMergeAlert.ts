@@ -1,10 +1,8 @@
 'use server'
 import { appRouterGetAuthUser } from '@/utils/server/appRouterGetAuthUser'
-import { mergeUsers } from '@/utils/server/mergeUsers'
+import { mergeUsers } from '@/utils/server/mergeUsers/mergeUsers'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getLogger } from '@/utils/shared/logger'
-import { zodUpdateUserProfileFormAction } from '@/validation/forms/zodUpdateUserProfile'
-import { UserEmailAddressSource } from '@prisma/client'
 import 'server-only'
 import { z } from 'zod'
 
@@ -15,20 +13,13 @@ const schema = z.object({
 
 const logger = getLogger(`actionConfirmUserMergeAlert`)
 
-export async function actionConfirmUserMergeAlert(
-  data: z.infer<typeof zodUpdateUserProfileFormAction>,
-) {
+export async function actionConfirmUserMergeAlert(data: z.infer<typeof schema>) {
   const authUser = await appRouterGetAuthUser()
   if (!authUser) {
     throw new Error('Unauthenticated')
   }
-  const validatedFields = schema.safeParse(data)
-  if (!validatedFields.success) {
-    return {
-      errors: validatedFields.error.flatten().fieldErrors,
-    }
-  }
-  const { userMergeAlertId, userToDeleteId } = validatedFields.data
+  const validatedFields = schema.parse(data)
+  const { userMergeAlertId, userToDeleteId } = validatedFields
   const user = await prismaClient.user.findFirstOrThrow({
     where: {
       userCryptoAddresses: {
@@ -55,20 +46,16 @@ export async function actionConfirmUserMergeAlert(
     userMergeAlert.userAId === user.id
       ? ('hasBeenConfirmedByUserA' as const)
       : ('hasBeenConfirmedByUserB' as const)
-
-  if (userMergeAlert[fieldToUpdate]) {
-    throw new Error('User already confirmed merge')
-  }
   const otherFieldToUpdate =
     userMergeAlert.userAId === user.id
       ? ('hasBeenConfirmedByUserB' as const)
       : ('hasBeenConfirmedByUserA' as const)
 
-  if (userToDeleteId === user.id && !userMergeAlert[otherFieldToUpdate]) {
-    throw new Error(
-      'must confirm merge on the account that will be deleted first so the final confirmation occurs on the account that wont be deleted',
-    )
+  if (userMergeAlert[fieldToUpdate] && !userMergeAlert[otherFieldToUpdate]) {
+    throw new Error('User already confirmed merge and is waiting other confirmation')
   }
+
+  // TODO add analytics
 
   userMergeAlert = await prismaClient.userMergeAlert.update({
     where: { id: userMergeAlertId },
@@ -76,10 +63,16 @@ export async function actionConfirmUserMergeAlert(
       [fieldToUpdate]: true,
     },
   })
+
   if (!userMergeAlert.hasBeenConfirmedByUserA || !userMergeAlert.hasBeenConfirmedByUserB) {
     logger.info('current user confirmed merge alert, waiting for other user to confirm')
-    return { status: 'pending' as const }
+    return { status: 'pending-confirmation' as const }
   }
+  if (userToDeleteId === user.id) {
+    logger.info('All users have confirmed merge, but current user is logged in and being deleted')
+    return { status: 'pending-login-other-user' as const }
+  }
+
   logger.info('Both users have confirmed merge, starting merge process')
   // as we add additional foreign keys to users, we'll want to make sure we account for them in this merge logic
   await mergeUsers({

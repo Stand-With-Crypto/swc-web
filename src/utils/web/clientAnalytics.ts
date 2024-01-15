@@ -18,7 +18,7 @@ export function identifyClientAnalyticsUser(sessionIdOrCryptoWalletAddress: stri
   mixpanel.identify(sessionIdOrCryptoWalletAddress)
 }
 
-export function trackClientAnalytic(eventName: string, eventProperties: AnalyticProperties) {
+export function trackClientAnalytic(eventName: string, eventProperties?: AnalyticProperties) {
   customLogger(
     {
       category: 'analytics',

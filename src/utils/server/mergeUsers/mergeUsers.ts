@@ -1,12 +1,7 @@
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getLogger } from '@/utils/shared/logger'
-import { Prisma, UserEmailAddressSource } from '@prisma/client'
-
-export const MERGE_EMAIL_SOURCE_PRIORITY = [
-  UserEmailAddressSource.COINBASE_AUTH,
-  UserEmailAddressSource.THIRDWEB_EMBEDDED_AUTH,
-  UserEmailAddressSource.USER_ENTERED,
-]
+import { Prisma } from '@prisma/client'
+import { MERGE_EMAIL_SOURCE_PRIORITY } from './constants'
 
 const logger = getLogger(`mergeUsers`)
 
@@ -51,8 +46,8 @@ export async function mergeUsers({
     return userToDeleteEmailSourceIndex < correspondingEmailSourceIndex
   })
   const emailsToDelete = [
-    ...userToDelete.userEmailAddresses.filter(
-      x => !emailsToTransfer.every(transferEmail => transferEmail.id !== x.id),
+    ...userToDelete.userEmailAddresses.filter(x =>
+      emailsToTransfer.every(transferEmail => transferEmail.id !== x.id),
     ),
     ...userToKeep.userEmailAddresses.filter(x =>
       emailsToTransfer.find(transfer => transfer.address === x.address),
@@ -67,16 +62,14 @@ export async function mergeUsers({
         },
       }
     })
-  const userSessionsUpdatePayloads: Prisma.UserSessionUpdateArgs[] = userToDelete.userSessions.map(
-    session => {
-      return {
-        where: { id: session.id },
-        data: {
-          userId: userToKeep.id,
-        },
-      }
-    },
-  )
+  const userSessionsUpdatePayloads = userToDelete.userSessions.map(session => {
+    return {
+      where: { id: session.id },
+      data: {
+        userId: userToKeep.id,
+      },
+    }
+  }) satisfies Prisma.UserSessionUpdateArgs[]
   const userActionUpdatePayloads: Prisma.UserActionUpdateArgs[] = userToDelete.userActions.map(
     action => {
       if (action.userEmailAddressId) {
@@ -107,7 +100,12 @@ export async function mergeUsers({
   logger.info(`Deleting ${emailsToDelete.length} emails`)
   logger.info(`Transferring ${userCryptoAddressesUpdatePayloads.length} crypto addresses`)
   logger.info(`Transferring ${userSessionsUpdatePayloads.length} sessions`)
-  logger.info(`Transferring ${userActionUpdatePayloads.length} actions`)
+  logger.info(`Transferring ${userActionUpdatePayloads.length} actions to new user`)
+  logger.info(
+    `${
+      userActionUpdatePayloads.filter(x => x.data.userEmailAddressId).length
+    } of those actions have swapped new user email addresses`,
+  )
   if (!persist) {
     logger.info(`Not persisting changes`)
     return
@@ -151,4 +149,5 @@ export async function mergeUsers({
       userId: userToKeep.id,
     },
   })
+  logger.info(`merge of user ${userToDelete.id} into user ${userToKeep.id} complete`)
 }

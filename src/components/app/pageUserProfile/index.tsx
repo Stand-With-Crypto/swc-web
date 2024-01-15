@@ -1,9 +1,11 @@
-import { getAuthenticatedData } from '@/components/app/pageUserProfile/getAuthenticatedData'
+import {
+  PageUserProfileUser,
+  getAuthenticatedData,
+} from '@/components/app/pageUserProfile/getAuthenticatedData'
 import { UpdateUserProfileFormDialog } from '@/components/app/updateUserProfileForm/dialog'
 import { hasAllFormFieldsOnUserForUpdateUserProfileForm } from '@/components/app/updateUserProfileForm/hasAllFormFieldsOnUser'
 import { UserActionRowCTAsList } from '@/components/app/userActionRowCTA/userActionRowCTAsList'
 import { SensitiveDataUserAvatar } from '@/components/app/userAvatar'
-import { Alert, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
 import { FormattedDatetime } from '@/components/ui/formattedDatetime'
@@ -17,12 +19,12 @@ import { getIntlUrls } from '@/utils/shared/urls'
 import { getSensitiveDataUserDisplayName } from '@/utils/web/userUtils'
 import { UserActionType } from '@prisma/client'
 import _ from 'lodash'
-import { AlertCircle } from 'lucide-react'
+import { MergeAlertCTA } from './mergeAlertCTA'
 
 export function PageUserProfile({
   params,
   user,
-}: PageProps & { user: Awaited<ReturnType<typeof getAuthenticatedData>> }) {
+}: PageProps & { user: PageUserProfileUser | null }) {
   const { locale } = params
   const urls = getIntlUrls(locale)
   if (!user) {
@@ -33,13 +35,10 @@ export function PageUserProfile({
   const performedUserActionTypes = _.uniq(userActions.map(x => x.actionType))
   return (
     <div className="container">
-      {user.mergeAlerts.length && (
+      {!!user.mergeAlerts.length && (
         <div className="mb-6 space-y-2">
           {user.mergeAlerts.map(mergeAlert => (
-            <Alert key={mergeAlert.id}>
-              <AlertCircle />
-              <AlertTitle>Looks like you have multiple users!</AlertTitle>
-            </Alert>
+            <MergeAlertCTA key={mergeAlert.id} user={user} mergeAlert={mergeAlert} />
           ))}
         </div>
       )}

@@ -71,14 +71,24 @@ export async function getAuthenticatedData() {
       getSensitiveDataClientUserAction({ record, dtsiPeople }),
     ),
     mergeAlerts: [
-      ...user.userMergeAlertUserA.map(({ userB, ...mergeAlert }) => ({
-        ...mergeAlert,
-        otherUser: getClientUser({ ...userB, isPubliclyVisible: true }),
-      })),
-      ...user.userMergeAlertUserB.map(({ userA, ...mergeAlert }) => ({
-        ...mergeAlert,
-        otherUser: getClientUser({ ...userA, isPubliclyVisible: true }),
-      })),
+      ...user.userMergeAlertUserA.map(
+        ({ userB, hasBeenConfirmedByUserA, hasBeenConfirmedByUserB, userBId, ...mergeAlert }) => ({
+          ...mergeAlert,
+          hasBeenConfirmedByOtherUser: hasBeenConfirmedByUserB,
+          hasBeenConfirmedByCurrentUser: hasBeenConfirmedByUserA,
+          otherUser: getClientUser({ ...userB, isPubliclyVisible: true }),
+        }),
+      ),
+      ...user.userMergeAlertUserB.map(
+        ({ userA, hasBeenConfirmedByUserA, hasBeenConfirmedByUserB, userBId, ...mergeAlert }) => ({
+          ...mergeAlert,
+          hasBeenConfirmedByCurrentUser: hasBeenConfirmedByUserB,
+          hasBeenConfirmedByOtherUser: hasBeenConfirmedByUserA,
+          otherUser: getClientUser({ ...userA, isPubliclyVisible: true }),
+        }),
+      ),
     ],
   }
 }
+
+export type PageUserProfileUser = NonNullable<Awaited<ReturnType<typeof getAuthenticatedData>>>
