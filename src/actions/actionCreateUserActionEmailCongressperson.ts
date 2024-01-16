@@ -147,7 +147,7 @@ export async function actionCreateUserActionEmailCongressperson(
             },
           },
           create: {
-            address: validatedFields.data.email,
+            emailAddress: validatedFields.data.email,
             isVerified: false,
             source: UserEmailAddressSource.USER_ENTERED,
             userId: user.id,

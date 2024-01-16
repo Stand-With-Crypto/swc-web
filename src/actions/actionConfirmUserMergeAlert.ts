@@ -24,7 +24,7 @@ export async function actionConfirmUserMergeAlert(data: z.infer<typeof schema>) 
     where: {
       userCryptoAddresses: {
         some: {
-          address: authUser.address,
+          cryptoAddress: authUser.address,
         },
       },
     },
