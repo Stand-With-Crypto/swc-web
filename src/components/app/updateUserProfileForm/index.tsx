@@ -20,6 +20,7 @@ import { Input } from '@/components/ui/input'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { useLocale } from '@/hooks/useLocale'
+import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import {
   GenericErrorFormValues,
   trackFormSubmissionSyncErrors,
@@ -90,9 +91,7 @@ export function UpdateUserProfileForm({
                 form,
                 formName: FORM_NAME,
                 analyticsProps: {
-                  'Address Administrative Area Level 1': address?.administrativeAreaLevel1,
-                  'Address Country Code': address?.countryCode,
-                  'Address Locality': address?.locality,
+                  ...(address ? convertAddressToAnalyticsProperties(address) : {}),
                   'Is Publicly Visible': values.isPubliclyVisible,
                 },
               },

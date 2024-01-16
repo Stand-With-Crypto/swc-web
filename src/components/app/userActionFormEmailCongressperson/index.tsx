@@ -21,6 +21,7 @@ import { PageTitle } from '@/components/ui/pageTitleText'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Textarea } from '@/components/ui/textarea'
 import { useLocale } from '@/hooks/useLocale'
+import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { UserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns'
 import {
@@ -112,12 +113,10 @@ export function UserActionFormEmailCongressperson({
               form,
               formName: FORM_NAME,
               analyticsProps: {
+                ...(address ? convertAddressToAnalyticsProperties(address) : {}),
                 'Campaign Name': values.campaignName,
                 'User Action Type': UserActionType.EMAIL,
                 'DTSI Slug': values.dtsiSlug,
-                'Address Administrative Area Level 1': address.administrativeAreaLevel1,
-                'Address Country Code': address.countryCode,
-                'Address Locality': address.locality,
               },
             },
             () => actionCreateUserActionEmailCongressperson({ ...values, address }),

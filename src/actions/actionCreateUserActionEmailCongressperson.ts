@@ -14,6 +14,7 @@ import {
   mapLocalUserToUserDatabaseFields,
   parseLocalUserFromCookies,
 } from '@/utils/server/serverLocalUser'
+import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 
 const logger = getLogger(`actionCreateUserActionEmailCongressperson`)
 
@@ -64,9 +65,7 @@ export async function actionCreateUserActionEmailCongressperson(
       actionType,
       campaignName,
       reason: 'Too Many Recent',
-      'Address Administrative Area Level 1': validatedFields.data.address.administrativeAreaLevel1,
-      'Address Country Code': validatedFields.data.address.countryCode,
-      'Address Locality': validatedFields.data.address.locality,
+      ...convertAddressToAnalyticsProperties(validatedFields.data.address),
     })
     Sentry.captureMessage(
       `duplicate ${actionType} user action for campaign ${campaignName} submitted`,
@@ -115,15 +114,11 @@ export async function actionCreateUserActionEmailCongressperson(
   analytics.trackUserActionCreated({
     actionType,
     campaignName,
-    'Address Administrative Area Level 1': validatedFields.data.address.administrativeAreaLevel1,
-    'Address Country Code': validatedFields.data.address.countryCode,
-    'Address Locality': validatedFields.data.address.locality,
+    ...convertAddressToAnalyticsProperties(validatedFields.data.address),
   })
   const peopleAnalytics = getServerPeopleAnalytics({ ...userMatch, localUser })
   peopleAnalytics.set({
-    'Address Administrative Area Level 1': validatedFields.data.address.administrativeAreaLevel1,
-    'Address Country Code': validatedFields.data.address.countryCode,
-    'Address Locality': validatedFields.data.address.locality,
+    ...convertAddressToAnalyticsProperties(validatedFields.data.address),
     // https://docs.mixpanel.com/docs/data-structure/user-profiles#reserved-user-properties
     $email: validatedFields.data.email,
     $phone: validatedFields.data.phoneNumber,

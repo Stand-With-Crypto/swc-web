@@ -3,6 +3,7 @@ import { appRouterGetAuthUser } from '@/utils/server/appRouterGetAuthUser'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { getServerPeopleAnalytics } from '@/utils/server/severAnalytics'
+import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { zodUpdateUserProfileFormAction } from '@/validation/forms/zodUpdateUserProfile'
 import { UserEmailAddressSource } from '@prisma/client'
 import 'server-only'
@@ -62,12 +63,7 @@ export async function actionUpdateUserProfile(
   const peopleAnalytics = getServerPeopleAnalytics({ address: authUser.address, localUser })
   peopleAnalytics.set({
     ...(validatedFields.data.address
-      ? {
-          'Address Administrative Area Level 1':
-            validatedFields.data.address.administrativeAreaLevel1,
-          'Address Country Code': validatedFields.data.address.countryCode,
-          'Address Locality': validatedFields.data.address.locality,
-        }
+      ? convertAddressToAnalyticsProperties(validatedFields.data.address)
       : {}),
     // https://docs.mixpanel.com/docs/data-structure/user-profiles#reserved-user-properties
     $email: validatedFields.data.email,

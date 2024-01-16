@@ -2,6 +2,7 @@
 // There are internal best practices, but depending on the tool we end up leveraging, we might need to change the naming conventions
 
 import { customLogger, logger } from '@/utils/shared/logger'
+import { Address } from '@prisma/client'
 
 // TODO expand this list as needed
 export enum AnalyticComponentType {
@@ -49,4 +50,18 @@ export type AnalyticsPeopleProperties = {
   $phone?: string
   $name?: string
   [key: string]: string | number | boolean | undefined | null | Date | string[] | number[]
+}
+
+export function convertAddressToAnalyticsProperties(
+  address: Pick<
+    Address,
+    'administrativeAreaLevel1' | 'administrativeAreaLevel2' | 'countryCode' | 'locality'
+  >,
+) {
+  return {
+    'Address Administrative Area Level 1': address.administrativeAreaLevel1,
+    'Address Administrative Area Level 2': address.administrativeAreaLevel2,
+    'Address Country Code': address.countryCode,
+    'Address Locality': address.locality,
+  }
 }

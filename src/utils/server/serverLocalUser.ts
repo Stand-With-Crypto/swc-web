@@ -10,6 +10,7 @@ import { User } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { NextApiRequest } from 'next'
 import { cookies } from 'next/headers'
+import { object, record, string } from 'zod'
 
 const logger = getLogger(`serverLocalUser`)
 
@@ -17,8 +18,6 @@ type ServerLocalUser = {
   persisted: PersistedLocalUser
   currentSession: CurrentSessionLocalUser
 }
-
-import { object, record, string } from 'zod'
 
 const zodServerLocalUser = object({
   persisted: object({
