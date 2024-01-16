@@ -128,8 +128,6 @@ export async function mergeUsers({
     ...userActionUpdatePayloads.map(x => {
       return prismaClient.userAction.update(x)
     }),
-  ])
-  await prismaClient.$transaction([
     ...emailsToDelete.map(email => {
       return prismaClient.userEmailAddress.delete({
         where: { id: email.id },
@@ -140,14 +138,14 @@ export async function mergeUsers({
         OR: [{ userBId: userToDelete.id }, { userAId: userToDelete.id }],
       },
     }),
+    prismaClient.user.delete({
+      where: { id: userToDelete.id },
+    }),
+    prismaClient.userMergeEvent.create({
+      data: {
+        userId: userToKeep.id,
+      },
+    }),
   ])
-  await prismaClient.user.delete({
-    where: { id: userToDelete.id },
-  })
-  await prismaClient.userMergeEvent.create({
-    data: {
-      userId: userToKeep.id,
-    },
-  })
   logger.info(`merge of user ${userToDelete.id} into user ${userToKeep.id} complete`)
 }

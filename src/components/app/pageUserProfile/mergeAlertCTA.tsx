@@ -90,14 +90,13 @@ export function MergeAlertCTA({
                   Approve merging this account into other account
                 </Button>
               )
-            } else {
-              return (
-                <div>
-                  <span className="font-bold">Next Steps: </span>Login to your other account to
-                  finalize this merge.
-                </div>
-              )
             }
+            return (
+              <div>
+                <span className="font-bold">Next Steps: </span>Login to your other account to
+                finalize this merge.
+              </div>
+            )
           }
           if (mergeAlert.hasBeenConfirmedByOtherUser) {
             return (
