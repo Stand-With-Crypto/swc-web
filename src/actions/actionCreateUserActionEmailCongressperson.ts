@@ -9,7 +9,12 @@ import { UserActionType, UserEmailAddressSource } from '@prisma/client'
 import { subDays } from 'date-fns'
 import 'server-only'
 import { z } from 'zod'
-import { getServerAnalytics } from '@/utils/server/severAnalytics'
+import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/severAnalytics'
+import {
+  mapLocalUserToUserDatabaseFields,
+  parseLocalUserFromCookies,
+} from '@/utils/server/serverLocalUser'
+import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 
 const logger = getLogger(`actionCreateUserActionEmailCongressperson`)
 
@@ -29,13 +34,15 @@ export async function actionCreateUserActionEmailCongressperson(
     }
   }
   logger.info('validated fields')
-  const analytics = getServerAnalytics(userMatch)
+  const localUser = parseLocalUserFromCookies()
+  const analytics = getServerAnalytics({ ...userMatch, localUser })
   const user =
     userMatch.user ||
     (await prismaClient.user.create({
       data: {
         isPubliclyVisible: false,
         userSessions: { create: { id: sessionId } },
+        ...mapLocalUserToUserDatabaseFields(localUser),
       },
     }))
   logger.info('fetched/created user')
@@ -59,9 +66,7 @@ export async function actionCreateUserActionEmailCongressperson(
       actionType,
       campaignName,
       reason: 'Too Many Recent',
-      'Address Administrative Area Level 1': validatedFields.data.address.administrativeAreaLevel1,
-      'Address Country Code': validatedFields.data.address.countryCode,
-      'Address Locality': validatedFields.data.address.locality,
+      ...convertAddressToAnalyticsProperties(validatedFields.data.address),
     })
     Sentry.captureMessage(
       `duplicate ${actionType} user action for campaign ${campaignName} submitted`,
@@ -110,9 +115,15 @@ export async function actionCreateUserActionEmailCongressperson(
   analytics.trackUserActionCreated({
     actionType,
     campaignName,
-    'Address Administrative Area Level 1': validatedFields.data.address.administrativeAreaLevel1,
-    'Address Country Code': validatedFields.data.address.countryCode,
-    'Address Locality': validatedFields.data.address.locality,
+    ...convertAddressToAnalyticsProperties(validatedFields.data.address),
+  })
+  const peopleAnalytics = getServerPeopleAnalytics({ ...userMatch, localUser })
+  peopleAnalytics.set({
+    ...convertAddressToAnalyticsProperties(validatedFields.data.address),
+    // https://docs.mixpanel.com/docs/data-structure/user-profiles#reserved-user-properties
+    $email: validatedFields.data.email,
+    $phone: validatedFields.data.phoneNumber,
+    $name: validatedFields.data.fullName,
   })
   /*
   We assume any updates the user makes to this action should propagate to the user's profile

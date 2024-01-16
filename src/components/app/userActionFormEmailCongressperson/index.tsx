@@ -21,6 +21,7 @@ import { PageTitle } from '@/components/ui/pageTitleText'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Textarea } from '@/components/ui/textarea'
 import { useLocale } from '@/hooks/useLocale'
+import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { UserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns'
 import {
@@ -35,6 +36,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { UserActionType } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { useRouter } from 'next/navigation'
+import { useMemo } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
@@ -87,9 +89,10 @@ export function UserActionFormEmailCongressperson({
   const router = useRouter()
   const locale = useLocale()
   const urls = getIntlUrls(locale)
+  const defaultValues = useMemo(() => getDefaultValues({ user, dtsiSlug: undefined }), [user])
   const form = useForm<FormValues>({
     resolver: zodResolver(zodUserActionFormEmailCongresspersonFields),
-    defaultValues: getDefaultValues({ user, dtsiSlug: undefined }),
+    defaultValues,
   })
   return (
     <Form {...form}>
@@ -110,12 +113,10 @@ export function UserActionFormEmailCongressperson({
               form,
               formName: FORM_NAME,
               analyticsProps: {
+                ...(address ? convertAddressToAnalyticsProperties(address) : {}),
                 'Campaign Name': values.campaignName,
                 'User Action Type': UserActionType.EMAIL,
                 'DTSI Slug': values.dtsiSlug,
-                'Address Administrative Area Level 1': address.administrativeAreaLevel1,
-                'Address Country Code': address.countryCode,
-                'Address Locality': address.locality,
               },
             },
             () => actionCreateUserActionEmailCongressperson({ ...values, address }),

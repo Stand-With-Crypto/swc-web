@@ -1,4 +1,4 @@
-import { toBool } from '@/utils/server/toBool'
+import { toBool } from '@/utils/shared/toBool'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { getLogger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'

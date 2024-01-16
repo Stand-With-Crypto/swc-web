@@ -8,7 +8,6 @@ import {
   DialogTitle,
   DialogHeader,
 } from '@/components/ui/dialog'
-import { CookieConsentPermissions } from '@/components/app/cookieConsent/cookieConsent.constants'
 import {
   Drawer,
   DrawerContent,
@@ -22,6 +21,7 @@ import { useDialog } from '@/hooks/useDialog'
 
 import { CookiePreferencesForm } from './cookiePreferencesForm'
 import { DialogProps } from '@radix-ui/react-dialog'
+import { CookieConsentPermissions } from '@/utils/shared/cookieConsent'
 
 export interface ManageCookiesModalProps {
   onSubmit: (accepted: CookieConsentPermissions) => void

@@ -79,6 +79,13 @@ model User {
   primaryUserEmailAddressId  String?            @unique @map("primary_user_email_address_id")
   primaryUserCryptoAddress   UserCryptoAddress? @relation("asPrimaryUserCryptoAddress", fields: [primaryUserCryptoAddressId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   primaryUserCryptoAddressId String?            @unique @map("primary_user_crypto_address_id")
+  // We'll collect and capture this information in our product analytics tools, but we'll also want to be able to 
+  // use this metadata to query our relationship database. This information will only be populated if users
+  // opt in to our cookies
+  acquisitionReferer     String @map("acquisition_referer") 
+  acquisitionSource     String @map("acquisition_source") 
+  acquisitionMedium     String @map("acquisition_medium") 
+  acquisitionCampaign     String @map("acquisition_campaign") 
 
   // REMINDER: as we add additional foreign keys to users, we'll want to make sure we account for them in our mergeUsers logic
   userCryptoAddresses UserCryptoAddress[] @relation("userCryptoAddresses")

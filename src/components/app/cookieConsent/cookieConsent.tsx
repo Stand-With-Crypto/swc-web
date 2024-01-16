@@ -6,7 +6,7 @@ import { SupportedLocale } from '@/intl/locales'
 
 import { useCookieConsent } from './useCookieConsent'
 import { CookieConsentBanner } from './banner'
-import { CookieConsentPermissions } from '@/components/app/cookieConsent/cookieConsent.constants'
+import { CookieConsentPermissions } from '@/utils/shared/cookieConsent'
 
 interface CookieConsentProps {
   locale: SupportedLocale

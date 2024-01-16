@@ -5,6 +5,7 @@
 import * as Sentry from '@sentry/nextjs'
 import { ExtraErrorData } from '@sentry/integrations'
 import { prismaClient } from '@/utils/server/prismaClient'
+import { toBool } from '@/utils/shared/toBool'
 
 const environment = process.env.NEXT_PUBLIC_ENVIRONMENT!
 const dsn = process.env.NEXT_PUBLIC_SENTRY_DSN
@@ -23,7 +24,7 @@ Sentry.init({
   beforeSend: (event, hint) => {
     if (environment === 'local') {
       console.error(`Sentry`, hint?.originalException || hint?.syntheticException)
-      if (process.env.SUPPRESS_SENTRY_ERRORS_ON_LOCAL || !dsn) {
+      if (toBool(process.env.SUPPRESS_SENTRY_ERRORS_ON_LOCAL) || !dsn) {
         return null
       }
     }
