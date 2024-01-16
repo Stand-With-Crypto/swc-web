@@ -13,7 +13,7 @@ export function mockUserEmailAddress(): UserEmailAddress {
   return {
     ...mockCommonDatetimes(),
     id: fakerFields.id(),
-    address: faker.internet.email(),
+    emailAddress: faker.internet.email(),
     source,
     isVerified: source === UserEmailAddressSource.COINBASE_AUTH,
     userId: fakerFields.id(),

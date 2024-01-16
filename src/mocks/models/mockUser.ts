@@ -8,8 +8,13 @@ export function mockUser(): User {
   const withData = faker.helpers.maybe(() => true, { probability: 0.7 })
   return {
     ...mockCommonDatetimes(),
+    acquisitionCampaign: '',
+    acquisitionMedium: '',
+    acquisitionSource: '',
+    acquisitionReferer: '',
     id: fakerFields.id(),
     primaryUserEmailAddressId: fakerFields.id(),
+    primaryUserCryptoAddressId: fakerFields.id(),
     sampleDatabaseIncrement: 0,
     fullName: withData ? faker.person.fullName() : '',
     isPubliclyVisible: faker.helpers.maybe(() => true, { probability: 0.9 }) || false,

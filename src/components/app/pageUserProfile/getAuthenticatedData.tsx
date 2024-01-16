@@ -1,4 +1,6 @@
 import { getClientAddress } from '@/clientModels/clientAddress'
+import { getClientUser } from '@/clientModels/clientUser/clientUser'
+import { getClientUserCryptoAddress } from '@/clientModels/clientUser/clientUserCryptoAddress'
 import { getSensitiveDataClientUser } from '@/clientModels/clientUser/sensitiveDataClientUser'
 import { getSensitiveDataClientUserAction } from '@/clientModels/clientUserAction/sensitiveDataClientUserAction'
 import { queryDTSIPeopleBySlugForUserActions } from '@/data/dtsi/queries/queryDTSIPeopleBySlugForUserActions'
@@ -13,10 +15,13 @@ export async function getAuthenticatedData() {
   }
   const user = await prismaClient.user.findFirstOrThrow({
     where: {
-      userCryptoAddress: { address: authUser.address },
+      userCryptoAddresses: { some: { cryptoAddress: authUser.address } },
     },
     include: {
-      userCryptoAddress: true,
+      userMergeAlertUserA: { include: { userB: { include: { primaryUserCryptoAddress: true } } } },
+      userMergeAlertUserB: { include: { userA: { include: { primaryUserCryptoAddress: true } } } },
+      primaryUserCryptoAddress: true,
+      userCryptoAddresses: true,
       address: true,
       primaryUserEmailAddress: true,
       userActions: {
@@ -49,11 +54,41 @@ export async function getAuthenticatedData() {
     x => x.people,
   )
   const { userActions, address, ...rest } = user
+  const currentlyAuthenticatedUserCryptoAddress = user.userCryptoAddresses.find(
+    x => x.cryptoAddress === authUser.address,
+  )
+  if (!currentlyAuthenticatedUserCryptoAddress) {
+    throw new Error('Primary user crypto address not found')
+  }
   return {
     ...getSensitiveDataClientUser(rest),
+    // TODO show UX if this address is not the primary address
+    currentlyAuthenticatedUserCryptoAddress: getClientUserCryptoAddress(
+      currentlyAuthenticatedUserCryptoAddress,
+    ),
     address: address && getClientAddress(address),
     userActions: userActions.map(record =>
       getSensitiveDataClientUserAction({ record, dtsiPeople }),
     ),
+    mergeAlerts: [
+      ...user.userMergeAlertUserA.map(
+        ({ userB, hasBeenConfirmedByUserA, hasBeenConfirmedByUserB, userBId, ...mergeAlert }) => ({
+          ...mergeAlert,
+          hasBeenConfirmedByOtherUser: hasBeenConfirmedByUserB,
+          hasBeenConfirmedByCurrentUser: hasBeenConfirmedByUserA,
+          otherUser: getClientUser({ ...userB, isPubliclyVisible: true }),
+        }),
+      ),
+      ...user.userMergeAlertUserB.map(
+        ({ userA, hasBeenConfirmedByUserA, hasBeenConfirmedByUserB, userBId, ...mergeAlert }) => ({
+          ...mergeAlert,
+          hasBeenConfirmedByCurrentUser: hasBeenConfirmedByUserB,
+          hasBeenConfirmedByOtherUser: hasBeenConfirmedByUserA,
+          otherUser: getClientUser({ ...userA, isPubliclyVisible: true }),
+        }),
+      ),
+    ],
   }
 }
+
+export type PageUserProfileUser = NonNullable<Awaited<ReturnType<typeof getAuthenticatedData>>>

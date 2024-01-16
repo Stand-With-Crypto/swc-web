@@ -8,7 +8,7 @@ export function mockUserCryptoAddress(): UserCryptoAddress {
   return {
     ...mockCommonDatetimes(),
     id: fakerFields.id(),
-    address: faker.finance.ethereumAddress(),
+    cryptoAddress: faker.finance.ethereumAddress(),
     cryptoNetwork: faker.helpers.arrayElement(Object.values(SupportedUserCryptoNetwork)),
     userId: fakerFields.id(),
   }

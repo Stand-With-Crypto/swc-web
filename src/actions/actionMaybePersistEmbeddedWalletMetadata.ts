@@ -28,9 +28,9 @@ export async function actionMaybePersistEmbeddedWalletMetadata(data: z.infer<typ
   const existingEmail = await prismaClient.userEmailAddress.findFirst({
     select: { id: true },
     where: {
-      address: validatedFields.data.email,
+      emailAddress: validatedFields.data.email,
       user: {
-        userCryptoAddress: { address: authUser.address },
+        userCryptoAddresses: { some: { cryptoAddress: authUser.address } },
       },
     },
   })
@@ -42,16 +42,16 @@ export async function actionMaybePersistEmbeddedWalletMetadata(data: z.infer<typ
   logger.info('creating new email for user based off embedded wallet')
   const user = await prismaClient.user.findFirstOrThrow({
     where: {
-      userCryptoAddress: { address: authUser.address },
+      userCryptoAddresses: { some: { cryptoAddress: authUser.address } },
     },
-    include: { userCryptoAddress: true },
+    include: { userCryptoAddresses: true },
   })
   /*
   This endpoint could be used to maliciously associate email addresses with users who are not actually authenticated with them
   So we'll need to to treat this email address as unverified until the user actually verifies it
   As a small mitigation, we'll only allow this endpoint to be called if the wallet address was recently created
   */
-  if (differenceInMinutes(new Date(), user.userCryptoAddress!.datetimeCreated) > 1) {
+  if (user.userCryptoAddresses.every(x => differenceInMinutes(new Date(), x.datetimeCreated) > 1)) {
     Sentry.captureMessage('Suspicious embedded wallet email creation attempt', {
       extra: { user, email: validatedFields.data.email },
     })
@@ -61,7 +61,7 @@ export async function actionMaybePersistEmbeddedWalletMetadata(data: z.infer<typ
   return prismaClient.userEmailAddress.create({
     select: { id: true },
     data: {
-      address: validatedFields.data.email,
+      emailAddress: validatedFields.data.email,
       userId: user.id,
       isVerified: false,
       source: UserEmailAddressSource.THIRDWEB_EMBEDDED_AUTH,

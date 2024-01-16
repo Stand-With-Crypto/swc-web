@@ -35,25 +35,27 @@ function DefaultUserAvatar({ size, ...props }: Pick<ImageAvatarProps, 'size' | '
 // TODO support ENS images and person name
 export const UserAvatar: React.FC<
   {
-    user: Pick<ClientUser, 'isPubliclyVisible' | 'cryptoAddress'>
+    user: Pick<ClientUser, 'isPubliclyVisible' | 'primaryUserCryptoAddress'>
   } & Pick<ImageAvatarProps, 'size' | 'className'>
 > = ({ user, size, ...props }) => {
-  if (!user.isPubliclyVisible || !user.cryptoAddress) {
+  if (!user.isPubliclyVisible || !user.primaryUserCryptoAddress) {
     return <DefaultUserAvatar {...props} size={size} />
   }
 
   // TODO: Remove this type cast once we have ENS data in the client
   // This was made to avoid stepping on the toes of the PR that adds ENS data to the client
   // see https://github.com/Stand-With-Crypto/swc-web/pull/80
-  const cryptoAddress = user.cryptoAddress as any
-  if (cryptoAddress.ensAvatarUrl) {
+  const primaryUserCryptoAddress = user.primaryUserCryptoAddress as any
+  if (primaryUserCryptoAddress.ensAvatarUrl) {
     return (
       <Container>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           {...props}
-          src={cryptoAddress.ensAvatarUrl}
-          alt={`ENS avatar for ${cryptoAddress.ensName || cryptoAddress.address}`}
+          src={primaryUserCryptoAddress.ensAvatarUrl}
+          alt={`ENS avatar for ${
+            primaryUserCryptoAddress.ensName || primaryUserCryptoAddress.address
+          }`}
           style={{
             width: size,
             height: size,
@@ -67,7 +69,10 @@ export const UserAvatar: React.FC<
     <Container>
       <NextImage
         {...props}
-        src={deterministicArraySelection(genericImages, user.cryptoAddress.address)}
+        src={deterministicArraySelection(
+          genericImages,
+          user.primaryUserCryptoAddress.cryptoAddress,
+        )}
         alt="Generic profile picture for anonymous user"
         width={size}
         height={size}
@@ -78,25 +83,30 @@ export const UserAvatar: React.FC<
 
 export const SensitiveDataUserAvatar: React.FC<
   {
-    user: Pick<SensitiveDataClientUser, 'fullName' | 'isPubliclyVisible' | 'cryptoAddress'>
+    user: Pick<
+      SensitiveDataClientUser,
+      'fullName' | 'isPubliclyVisible' | 'primaryUserCryptoAddress'
+    >
   } & Pick<ImageAvatarProps, 'size' | 'className'>
 > = ({ user, size, ...props }) => {
-  if (!user.cryptoAddress) {
+  if (!user.primaryUserCryptoAddress) {
     return <DefaultUserAvatar {...props} size={size} />
   }
 
   // TODO: Remove this type cast once we have ENS data in the client
   // This was made to avoid stepping on the toes of the PR that adds ENS data to the client
   // see https://github.com/Stand-With-Crypto/swc-web/pull/80
-  const cryptoAddress = user.cryptoAddress as any
-  if (cryptoAddress.ensAvatarUrl) {
+  const primaryUserCryptoAddress = user.primaryUserCryptoAddress as any
+  if (primaryUserCryptoAddress.ensAvatarUrl) {
     return (
       <Container>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           {...props}
-          src={cryptoAddress.ensAvatarUrl}
-          alt={`ENS avatar for ${cryptoAddress.ensName || cryptoAddress.address}`}
+          src={primaryUserCryptoAddress.ensAvatarUrl}
+          alt={`ENS avatar for ${
+            primaryUserCryptoAddress.ensName || primaryUserCryptoAddress.address
+          }`}
           style={{
             width: size,
             height: size,
@@ -110,7 +120,10 @@ export const SensitiveDataUserAvatar: React.FC<
     <Container>
       <NextImage
         {...props}
-        src={deterministicArraySelection(genericImages, user.cryptoAddress.address)}
+        src={deterministicArraySelection(
+          genericImages,
+          user.primaryUserCryptoAddress.cryptoAddress,
+        )}
         alt="Generic profile picture for anonymous user"
         width={size}
         height={size}

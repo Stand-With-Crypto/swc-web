@@ -18,7 +18,7 @@ const fetchFromPrisma = async (config: RecentActivityConfig) => {
     skip: config.offset,
     include: {
       user: {
-        include: { userCryptoAddress: true },
+        include: { primaryUserCryptoAddress: true },
       },
       userActionEmail: {
         include: {

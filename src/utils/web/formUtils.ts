@@ -1,5 +1,6 @@
 import { FetchReqError } from '@/utils/shared/fetchReq'
 import { logger } from '@/utils/shared/logger'
+import { AnalyticProperties } from '@/utils/shared/sharedAnalytics'
 import {
   trackFormSubmitSucceeded,
   trackFormSubmitted,
@@ -22,7 +23,11 @@ export async function triggerServerActionForForm<
   F extends UseFormReturn<any, any, undefined>,
   Fn extends () => Promise<{ errors: Record<string, string[]> } | object>,
 >(
-  { form, formName, analyticsProps }: { form: F; formName: string; analyticsProps?: object },
+  {
+    form,
+    formName,
+    analyticsProps,
+  }: { form: F; formName: string; analyticsProps?: AnalyticProperties },
   fn: Fn,
 ) {
   trackFormSubmitted(formName, analyticsProps)

@@ -18,7 +18,7 @@ export function identifyClientAnalyticsUser(sessionIdOrCryptoWalletAddress: stri
   mixpanel.identify(sessionIdOrCryptoWalletAddress)
 }
 
-export function trackClientAnalytic(eventName: string, eventProperties: AnalyticProperties) {
+export function trackClientAnalytic(eventName: string, eventProperties?: AnalyticProperties) {
   customLogger(
     {
       category: 'analytics',
@@ -31,6 +31,10 @@ export function trackClientAnalytic(eventName: string, eventProperties: Analytic
   mixpanel.track(eventName, {
     eventProperties,
   })
+}
+
+export function setClientAnalyticsUserProperties(userProperties: object) {
+  mixpanel.people.set(userProperties)
 }
 
 export function trackFormSubmitted(formName: string, other?: AnalyticProperties) {
