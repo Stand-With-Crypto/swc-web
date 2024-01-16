@@ -36,3 +36,12 @@ export const getSensitiveDataUserDisplayName = (
   }
   return 'Anonymous'
 }
+
+export const getFullSensitiveDataUserDisplayName = (user: SensitiveDataClientUser | null) => {
+  if (user?.fullName) {
+    return user.fullName
+  }
+  if (user?.cryptoAddress) {
+    return user.cryptoAddress.address
+  }
+}

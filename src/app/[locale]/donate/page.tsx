@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import { getSumDonations } from '@/data/aggregations/getSumDonations'
-import { DonatePageContent } from '@/components/app/pageDonate'
+import { PageDonate } from '@/components/app/pageDonate'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 
@@ -18,7 +18,7 @@ export default async function DonatePage({ params: { locale } }: PageProps) {
   const sumDonations = await getSumDonations()
 
   return (
-    <DonatePageContent
+    <PageDonate
       title="Protect the future of crypto"
       description={description}
       sumDonations={sumDonations}

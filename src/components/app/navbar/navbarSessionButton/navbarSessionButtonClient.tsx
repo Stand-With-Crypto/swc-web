@@ -1,23 +1,35 @@
 'use client'
 
-import { navbarSessionButtonMessages } from '@/components/app/navbar/navbarSessionButton/navbarSessionButtonClient.messages'
-import { Button } from '@/components/ui/button'
-import { NextImage } from '@/components/ui/image'
-import { GetDefineMessageResults } from '@/types'
-import { forceSetUserSessionIdOnClient } from '@/utils/web/clientUserSessionId'
-import { cn } from '@/utils/web/cn'
-import { maybeEllipsisText } from '@/utils/web/maybeEllipsisText'
-import { ConnectWallet, useAddress, useUser } from '@thirdweb-dev/react'
 import { useRouter } from 'next/navigation'
+import { ConnectWallet } from '@thirdweb-dev/react'
 
-export function NavbarSessionButtonClient(props: {
+import { GetDefineMessageResults } from '@/types'
+import { cn } from '@/utils/web/cn'
+import { useThirdWeb } from '@/hooks/useThirdWeb'
+import { useMaybeUpdateUserEmailAfterLoggingInToEmbedWallet } from '@/hooks/useMaybeUpdateUserEmailAfterLoggingInToEmbedWallet'
+
+import { NavbarLoggedInSessionButton } from './navbarLoggedInSessionButton'
+import { navbarSessionButtonMessages } from './navbarSessionButtonClient.messages'
+
+interface NavbarSessionButtonProps {
   messages: GetDefineMessageResults<typeof navbarSessionButtonMessages>
-}) {
-  // TODO match figma mockups
-  const address = useAddress()
+}
+
+export function NavbarSessionButtonClient(_props: NavbarSessionButtonProps) {
+  const { session } = useThirdWeb()
+
   const router = useRouter()
+  useMaybeUpdateUserEmailAfterLoggingInToEmbedWallet()
+
+  if (session.isLoggedIn) {
+    return <NavbarLoggedInSessionButton />
+  }
+
   return (
     <ConnectWallet
+      theme="light"
+      modalSize="compact"
+      btnTitle="Log in"
       auth={{
         loginOptional: false,
         onLogin() {
@@ -36,25 +48,13 @@ export function NavbarSessionButtonClient(props: {
           // copy pasted main button code
           '!inline-flex !items-center !justify-center !whitespace-nowrap !rounded-full !text-sm !font-medium !ring-offset-background !transition-colors focus-visible:!outline-none focus-visible:!ring-2 focus-visible:!ring-ring focus-visible:!ring-offset-2 disabled:!pointer-events-none disabled:!opacity-50',
           // copy pasted secondary variant code
-          'bg-secondary text-secondary-foreground hover:bg-secondary/80',
+          '!bg-secondary !text-secondary-foreground hover:!bg-secondary/80',
           // copy pasted default size code
           '!h-10 !px-4 !py-2',
         )
       }
-      theme={'dark'}
-      modalSize={'compact'}
-      btnTitle={'Log in'}
-      detailsBtn={() => (
-        <Button variant="secondary">
-          <NextImage
-            alt={props.messages.defaultUserLogoAlt}
-            src={'/defaultUserLogo.svg'}
-            width={20}
-            height={20}
-          />
-          <div className="ml-2 min-w-[70px]">{address && maybeEllipsisText(address, 10)}</div>
-        </Button>
-      )}
+      // the library puts a inline min-width: 140px on the button, so this is the only way to take priority over that
+      style={{ minWidth: '96px' }}
     />
   )
 }

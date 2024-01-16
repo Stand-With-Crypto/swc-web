@@ -18,7 +18,7 @@ import {
   FormItem,
   FormLabel,
 } from '@/components/ui/form'
-import { PlacesAutocomplete } from '@/components/ui/googlePlacesSelect'
+import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { Input } from '@/components/ui/input'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
@@ -156,7 +156,7 @@ export function UpdateUserProfileForm({
                 <FormItem>
                   <FormLabel>Address</FormLabel>
                   <FormControl>
-                    <PlacesAutocomplete
+                    <GooglePlacesSelect
                       {...field}
                       value={field.value}
                       onChange={field.onChange}

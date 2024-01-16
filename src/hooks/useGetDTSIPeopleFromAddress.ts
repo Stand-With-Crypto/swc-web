@@ -14,7 +14,17 @@ export function useGetDTSIPeopleFromAddress(address: string) {
     }
     return fetchReq(apiUrls.dtsiPeopleByCongressionalDistrict(result))
       .then(res => res.json())
-      .then(data => data as Awaited<ReturnType<typeof queryDTSIPeopleByCongressionalDistrict>>)
-      .catch(catchUnexpectedServerErrorAndTriggerToast)
+      .then(data => {
+        if (!data) {
+          return { notFoundReason: 'MISSING_FROM_DTSI' as const }
+        }
+        return data as NonNullable<
+          Awaited<ReturnType<typeof queryDTSIPeopleByCongressionalDistrict>>
+        >
+      })
+      .catch(e => {
+        catchUnexpectedServerErrorAndTriggerToast(e)
+        return { notFoundReason: 'UNEXPECTED_ERROR' as const }
+      })
   })
 }

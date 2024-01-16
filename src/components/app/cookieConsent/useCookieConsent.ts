@@ -2,6 +2,8 @@ import Cookies from 'js-cookie'
 
 import { COOKIE_CONSENT_COOKIE_NAME, CookieConsentPermissions } from './cookieConsent.constants'
 import React from 'react'
+import mixpanel from 'mixpanel-browser'
+import { isBrowser } from '@/utils/shared/executionEnvironment'
 
 export function useCookieConsent() {
   const [cookieConsentCookie, setCookieConsentCookie, removeCookieConsentCookie] = useCookieState(
@@ -17,9 +19,23 @@ export function useCookieConsent() {
     [],
   )
 
+  const toggleProviders = React.useCallback((permissions: CookieConsentPermissions) => {
+    /*
+      to be conservative, if someone opts out of functional or performance, we should assume
+      they don't want targeting either
+      */
+    if (!permissions.functional || !permissions.performance || !permissions.targeting) {
+      mixpanel.opt_out_tracking()
+    }
+    if (permissions.functional && permissions.performance && permissions.targeting) {
+      mixpanel.opt_in_tracking()
+    }
+  }, [])
+
   const acceptSpecificCookies = React.useCallback(
     (consentCookie: CookieConsentPermissions): void => {
       setCookieConsentCookie(serializeConsentCookie(consentCookie))
+      toggleProviders(consentCookie)
     },
     [serializeConsentCookie, setCookieConsentCookie],
   )
@@ -46,10 +62,20 @@ export function useCookieConsent() {
 
   const rejectAllOptionalCookies = React.useCallback((): void => {
     setCookieConsentCookie(rejectAllCookieValue)
+    toggleProviders({
+      functional: false,
+      performance: false,
+      targeting: false,
+    })
   }, [setCookieConsentCookie, rejectAllCookieValue])
 
   const acceptAllCookies = React.useCallback((): void => {
     setCookieConsentCookie(acceptAllCookieValue)
+    toggleProviders({
+      functional: true,
+      performance: true,
+      targeting: true,
+    })
   }, [setCookieConsentCookie, acceptAllCookieValue])
 
   return {
@@ -57,8 +83,6 @@ export function useCookieConsent() {
     rejectAllOptionalCookies,
     acceptAllCookies,
     resetCookieConsent: removeCookieConsentCookie,
-    rejectAllCookieValue,
-    acceptAllCookieValue,
     acceptedCookies: !!cookieConsentCookie,
   }
 }
