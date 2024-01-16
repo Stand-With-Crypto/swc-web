@@ -27,15 +27,19 @@ export async function maybeCreateMergeAlertAfterEmailVerification(userEmailAddre
   const maybeMatchUsers = await prismaClient.user.findMany({
     where: {
       id: { not: user.id },
-      userEmailAddresses: { some: { address: userEmailAddress.address, isVerified: true } },
+      userEmailAddresses: {
+        some: { emailAddress: userEmailAddress.emailAddress, isVerified: true },
+      },
     },
   })
   if (!maybeMatchUsers.length) {
-    logger.info(`no additional users found with verified email address ${userEmailAddress.address}`)
+    logger.info(
+      `no additional users found with verified email address ${userEmailAddress.emailAddress}`,
+    )
     return
   }
   logger.info(
-    `found ${maybeMatchUsers.length} users with verified email address ${userEmailAddress.address}`,
+    `found ${maybeMatchUsers.length} users with verified email address ${userEmailAddress.emailAddress}`,
   )
   const existingMatchUserIds = _.uniq([
     ...user.userMergeAlertUserA.map(x => x.userBId),

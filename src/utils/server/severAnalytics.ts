@@ -31,7 +31,7 @@ const getDistinctId = (clientIdentifier: ServerAnalyticsConfig) => {
     return clientIdentifier.sessionId
   }
   if ('userCryptoAddress' in clientIdentifier) {
-    return clientIdentifier.userCryptoAddress.address
+    return clientIdentifier.userCryptoAddress.cryptoAddress
   }
   return clientIdentifier.address
 }

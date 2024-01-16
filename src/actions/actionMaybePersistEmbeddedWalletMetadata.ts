@@ -28,9 +28,9 @@ export async function actionMaybePersistEmbeddedWalletMetadata(data: z.infer<typ
   const existingEmail = await prismaClient.userEmailAddress.findFirst({
     select: { id: true },
     where: {
-      address: validatedFields.data.email,
+      emailAddress: validatedFields.data.email,
       user: {
-        userCryptoAddresses: { some: { address: authUser.address } },
+        userCryptoAddresses: { some: { cryptoAddress: authUser.address } },
       },
     },
   })
@@ -42,7 +42,7 @@ export async function actionMaybePersistEmbeddedWalletMetadata(data: z.infer<typ
   logger.info('creating new email for user based off embedded wallet')
   const user = await prismaClient.user.findFirstOrThrow({
     where: {
-      userCryptoAddresses: { some: { address: authUser.address } },
+      userCryptoAddresses: { some: { cryptoAddress: authUser.address } },
     },
     include: { userCryptoAddresses: true },
   })
@@ -61,7 +61,7 @@ export async function actionMaybePersistEmbeddedWalletMetadata(data: z.infer<typ
   return prismaClient.userEmailAddress.create({
     select: { id: true },
     data: {
-      address: validatedFields.data.email,
+      emailAddress: validatedFields.data.email,
       userId: user.id,
       isVerified: false,
       source: UserEmailAddressSource.THIRDWEB_EMBEDDED_AUTH,

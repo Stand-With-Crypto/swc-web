@@ -107,7 +107,7 @@ async function seed() {
   await batchAsyncAndLog(
     _.times(user.length / 2).map(index => ({
       ...mockUserCryptoAddress(),
-      address: index === 0 ? LOCAL_USER_CRYPTO_ADDRESS : faker.finance.ethereumAddress(),
+      cryptoAddress: index === 0 ? LOCAL_USER_CRYPTO_ADDRESS : faker.finance.ethereumAddress(),
       // a crypto user address must only ever be associated with one user so we use splice here to ensure we can randomly assign these models to users without any duplicates
       userId: usersUnusedOnCryptoAddress.splice(
         faker.number.int({ min: 0, max: usersUnusedOnCryptoAddress.length - 1 }),
@@ -121,7 +121,7 @@ async function seed() {
   )
   const userCryptoAddress = await prismaClient.userCryptoAddress.findMany()
   const localUserCryptoAddress = userCryptoAddress.find(
-    x => x.address === LOCAL_USER_CRYPTO_ADDRESS,
+    x => x.cryptoAddress === LOCAL_USER_CRYPTO_ADDRESS,
   )!
   logEntity({ userCryptoAddress })
   batchAsyncAndLog(userCryptoAddress, addresses =>
@@ -163,7 +163,7 @@ async function seed() {
   await prismaClient.userEmailAddress.createMany({
     data: [otherUserToMerge.id, localUserCryptoAddress.userId].map(userId => ({
       userId,
-      address: emailAddress,
+      emailAddress: emailAddress,
       isVerified: true,
       source: UserEmailAddressSource.USER_ENTERED,
     })),
