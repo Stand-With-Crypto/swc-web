@@ -29,8 +29,13 @@
 - Run `npx prisma studio` to get a full database UI
 - If any of the graphql schemas change for our 3rd party API partners (like dotheysupportit.com), run `npm run codegen:schemas` to pull in the latest
 - Run `npm run storybook` to view isolated [storybook stories](https://storybook.js.org/)
+- When updating your database schema (or pulling changes from `main` that includes schema changes):
+  - `npx prisma generate` - updates your prisma typescript definitions
+  - `npx prisma db push` - pushes schema updates to the database instance your connected to
+  - `npm run db:seed` - force pushes schema updates to the database instance your connected to, wiping all existing information and resetting it with seed data.
 - To audit your code before committing changes:
   - `npm run lint` - audits code against eslint and prettier
   - `npm run typecheck` - audits code against typescript
   - `npm run test` - execute jest tests
   - `npm run precheck` - executes all 3 commands above concurrently
+- When checking out someone else's branch with changes, if you encounter typescript errors, run `npm run newbranch` to execute common commands that may fix these errors.
