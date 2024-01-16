@@ -21,7 +21,7 @@ import { faker } from '@faker-js/faker'
 import _ from 'lodash'
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
-import { UserActionType } from '@prisma/client'
+import { UserActionType, UserEmailAddressSource } from '@prisma/client'
 import { mockUserActionOptIn } from '@/mocks/models/mockUserActionOptIn'
 import { mockUserEmailAddress } from '@/mocks/models/mockUserEmailAddress'
 
@@ -124,7 +124,19 @@ async function seed() {
     x => x.address === LOCAL_USER_CRYPTO_ADDRESS,
   )!
   logEntity({ userCryptoAddress })
-
+  batchAsyncAndLog(userCryptoAddress, addresses =>
+    Promise.all(
+      addresses.map(x =>
+        prismaClient.user.update({
+          where: { id: x.userId },
+          data: { primaryUserCryptoAddressId: x.id },
+        }),
+      ),
+    ),
+  )
+  logger.info(
+    `backfilled newly created userCryptoAddress in to users with primaryUserCryptoAddressId`,
+  )
   /*
   userEmailAddress
   */
@@ -140,6 +152,30 @@ async function seed() {
   )
   const userEmailAddress = await prismaClient.userEmailAddress.findMany()
   logEntity({ userEmailAddress })
+
+  /*
+      Create a situation where the LOCAL_USER_CRYPTO_ADDRESS has a UserMergeAlert
+  */
+  const otherUserToMerge = faker.helpers.arrayElement(
+    user.filter(x => x.id !== localUserCryptoAddress.userId),
+  )
+  const emailAddress = faker.internet.email()
+  await prismaClient.userEmailAddress.createMany({
+    data: [otherUserToMerge.id, localUserCryptoAddress.userId].map(userId => ({
+      userId,
+      address: emailAddress,
+      isVerified: true,
+      source: UserEmailAddressSource.USER_ENTERED,
+    })),
+  })
+  await prismaClient.userMergeAlert.create({
+    data: {
+      userAId: otherUserToMerge.id,
+      userBId: localUserCryptoAddress.userId,
+      hasBeenConfirmedByUserA: true,
+    },
+  })
+
   /*
   nft
   */

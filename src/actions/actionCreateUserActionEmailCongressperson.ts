@@ -22,7 +22,9 @@ export async function actionCreateUserActionEmailCongressperson(
   data: z.infer<typeof zodUserActionFormEmailCongresspersonAction>,
 ) {
   logger.info('triggered')
-  const userMatch = await getMaybeUserAndMethodOfMatch({ include: { userCryptoAddress: true } })
+  const userMatch = await getMaybeUserAndMethodOfMatch({
+    include: { primaryUserCryptoAddress: true },
+  })
   logger.info(userMatch.user ? 'found user' : 'no user found')
   const sessionId = getUserSessionId()
   const validatedFields = zodUserActionFormEmailCongresspersonAction.safeParse(data)
@@ -34,7 +36,7 @@ export async function actionCreateUserActionEmailCongressperson(
   logger.info('validated fields')
   const localUser = parseLocalUserFromCookies()
   const analytics = getServerAnalytics({ ...userMatch, localUser })
-  let user =
+  const user =
     userMatch.user ||
     (await prismaClient.user.create({
       data: {
@@ -42,7 +44,6 @@ export async function actionCreateUserActionEmailCongressperson(
         userSessions: { create: { id: sessionId } },
         ...mapLocalUserToUserDatabaseFields(localUser),
       },
-      include: { userCryptoAddress: true },
     }))
   logger.info('fetched/created user')
   const campaignName = validatedFields.data.campaignName
@@ -127,9 +128,8 @@ export async function actionCreateUserActionEmailCongressperson(
   /*
   We assume any updates the user makes to this action should propagate to the user's profile
   */
-  user = await prismaClient.user.update({
+  const returnedUser = await prismaClient.user.update({
     where: { id: user.id },
-    include: { userCryptoAddress: true },
     data: {
       fullName: validatedFields.data.fullName,
       phoneNumber: validatedFields.data.phoneNumber,
@@ -159,5 +159,5 @@ export async function actionCreateUserActionEmailCongressperson(
   // TODO actually trigger the logic to send the email to capital canary. We should be calling some Inngest function here
 
   logger.info('updated user')
-  return { user, userAction }
+  return { user: returnedUser, userAction }
 }

@@ -11,20 +11,20 @@ export type SensitiveDataClientUser = ClientModel<
     User,
     'id' | 'datetimeCreated' | 'datetimeUpdated' | 'isPubliclyVisible' | 'fullName' | 'phoneNumber'
   > & {
-    cryptoAddress: ClientUserCryptoAddress | null
+    primaryUserCryptoAddress: ClientUserCryptoAddress | null
     primaryUserEmailAddress: { address: string } | null
   }
 >
 
 export const getSensitiveDataClientUser = (
   record: User & {
-    userCryptoAddress: null | UserCryptoAddress
+    primaryUserCryptoAddress: null | UserCryptoAddress
     primaryUserEmailAddress: UserEmailAddress | null
   },
 ): SensitiveDataClientUser => {
   const {
     fullName,
-    userCryptoAddress,
+    primaryUserCryptoAddress,
     id,
     datetimeCreated,
     datetimeUpdated,
@@ -40,7 +40,9 @@ export const getSensitiveDataClientUser = (
           address: primaryUserEmailAddress.address,
         }
       : null,
-    cryptoAddress: userCryptoAddress ? getClientUserCryptoAddress(userCryptoAddress) : null,
+    primaryUserCryptoAddress: primaryUserCryptoAddress
+      ? getClientUserCryptoAddress(primaryUserCryptoAddress)
+      : null,
     id,
     datetimeCreated,
     datetimeUpdated,

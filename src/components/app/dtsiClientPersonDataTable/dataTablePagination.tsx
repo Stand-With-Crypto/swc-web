@@ -1,14 +1,7 @@
-import { DotsHorizontalIcon, ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons'
+import { ChevronLeftIcon, ChevronRightIcon, DotsHorizontalIcon } from '@radix-ui/react-icons'
 import { Table } from '@tanstack/react-table'
 
 import { Button } from '@/components/ui/button'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
 import _ from 'lodash'
 
 interface DataTablePaginationProps<TData> {

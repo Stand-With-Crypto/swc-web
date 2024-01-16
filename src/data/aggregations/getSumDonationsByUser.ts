@@ -36,7 +36,7 @@ export const getSumDonationsByUser = async ({ limit, offset }: SumDonationsByUse
       },
     },
     include: {
-      userCryptoAddress: true,
+      primaryUserCryptoAddress: true,
     },
   })
 

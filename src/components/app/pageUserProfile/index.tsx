@@ -1,4 +1,7 @@
-import { getAuthenticatedData } from '@/components/app/pageUserProfile/getAuthenticatedData'
+import {
+  PageUserProfileUser,
+  getAuthenticatedData,
+} from '@/components/app/pageUserProfile/getAuthenticatedData'
 import { UpdateUserProfileFormDialog } from '@/components/app/updateUserProfileForm/dialog'
 import { hasAllFormFieldsOnUserForUpdateUserProfileForm } from '@/components/app/updateUserProfileForm/hasAllFormFieldsOnUser'
 import { UserActionRowCTAsList } from '@/components/app/userActionRowCTA/userActionRowCTAsList'
@@ -16,11 +19,12 @@ import { getIntlUrls } from '@/utils/shared/urls'
 import { getSensitiveDataUserDisplayName } from '@/utils/web/userUtils'
 import { UserActionType } from '@prisma/client'
 import _ from 'lodash'
+import { MergeAlertCTA } from './mergeAlertCTA'
 
 export function PageUserProfile({
   params,
   user,
-}: PageProps & { user: Awaited<ReturnType<typeof getAuthenticatedData>> }) {
+}: PageProps & { user: PageUserProfileUser | null }) {
   const { locale } = params
   const urls = getIntlUrls(locale)
   if (!user) {
@@ -31,6 +35,14 @@ export function PageUserProfile({
   const performedUserActionTypes = _.uniq(userActions.map(x => x.actionType))
   return (
     <div className="container">
+      {!!user.mergeAlerts.length && (
+        <div className="mb-6 space-y-2">
+          {user.mergeAlerts.map(mergeAlert => (
+            <MergeAlertCTA key={mergeAlert.id} user={user} mergeAlert={mergeAlert} />
+          ))}
+        </div>
+      )}
+
       <div className="mb-6 flex items-center justify-between md:mx-4">
         <div className="flex items-center gap-2">
           <SensitiveDataUserAvatar size={60} user={user} />

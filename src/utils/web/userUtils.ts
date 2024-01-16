@@ -9,8 +9,11 @@ export const getUserDisplayName = (user: ClientUser | null) => {
   if (user?.fullName) {
     return user.fullName
   }
-  if (user?.cryptoAddress) {
-    return `${user.cryptoAddress.address.slice(0, 2)}...${user.cryptoAddress.address.slice(-5)}`
+  if (user?.primaryUserCryptoAddress) {
+    return `${user.primaryUserCryptoAddress.address.slice(
+      0,
+      2,
+    )}...${user.primaryUserCryptoAddress.address.slice(-5)}`
   }
   return 'Anonymous'
 }
@@ -19,8 +22,11 @@ export const getSensitiveDataUserDisplayName = (user: SensitiveDataClientUser | 
   if (user?.fullName) {
     return user.fullName
   }
-  if (user?.cryptoAddress) {
-    return `${user.cryptoAddress.address.slice(0, 2)}...${user.cryptoAddress.address.slice(-5)}`
+  if (user?.primaryUserCryptoAddress) {
+    return `${user.primaryUserCryptoAddress.address.slice(
+      0,
+      2,
+    )}...${user.primaryUserCryptoAddress.address.slice(-5)}`
   }
   return 'Anonymous'
 }
@@ -29,7 +35,7 @@ export const getFullSensitiveDataUserDisplayName = (user: SensitiveDataClientUse
   if (user?.fullName) {
     return user.fullName
   }
-  if (user?.cryptoAddress) {
-    return user.cryptoAddress.address
+  if (user?.primaryUserCryptoAddress) {
+    return user.primaryUserCryptoAddress.address
   }
 }
