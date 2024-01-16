@@ -21,6 +21,7 @@ import {
   initClientAnalytics,
   trackClientAnalytic,
 } from '@/utils/web/clientAnalytics'
+import { bootstrapLocalUser } from '@/utils/web/clientLocalUser'
 import { getUserSessionIdOnClient } from '@/utils/web/clientUserSessionId'
 import { usePathname } from 'next/navigation'
 import { useEffect } from 'react'
@@ -35,6 +36,7 @@ const InitialOrchestration = () => {
   const address = useAddress()
   // Note, in local dev this component will double render. It doesn't do this after it is built (verify in testing)
   useEffect(() => {
+    bootstrapLocalUser()
     const sessionId = getUserSessionIdOnClient()
     initClientAnalytics()
     identifyClientAnalyticsUser(sessionId)

@@ -57,7 +57,12 @@ export default async function InternalHomepage() {
             <PageTitle size="sm">{sectionTitle}</PageTitle>
             {subSectionTitle && <PageSubTitle>{subSectionTitle}</PageSubTitle>}
             {links.map(props => (
-              <InternalLink className="block text-lg underline" key={props.href} {...props} />
+              <InternalLink
+                prefetch={false}
+                className="block text-lg underline"
+                key={props.href}
+                {...props}
+              />
             ))}
           </div>
         ))}
