@@ -20,6 +20,9 @@ import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { trackFormSubmissionSyncErrors } from '@/utils/web/formUtils'
 import { getDTSIPeopleFromAddress } from '@/hooks/useGetDTSIPeopleFromAddress'
 import type { UserActionFormCallCongresspersonTabsContext } from '@/components/app/userActionFormCallCongressperson'
+import { InternalLink } from '@/components/ui/link'
+import { useIntlUrls } from '@/hooks/useIntlUrls'
+import { getGoogleCivicDataFromAddress } from '@/utils/shared/googleCivicInfo'
 
 import {
   findRepresentativeCallFormValidationSchema,
@@ -27,8 +30,6 @@ import {
   getDefaultValues,
   FORM_NAME,
 } from './formConfig'
-import { InternalLink } from '@/components/ui/link'
-import { useIntlUrls } from '@/hooks/useIntlUrls'
 
 export function Address() {
   const urls = useIntlUrls()
@@ -55,17 +56,20 @@ export function Address() {
 
   const handleValidSubmission: SubmitHandler<FindRepresentativeCallFormValues> = React.useCallback(
     async ({ address }) => {
-      const data = await getDTSIPeopleFromAddress(address.description)
+      // Don't use Promise.all here, the first function caches a request for the second one
+      // So if we use Promise.all we'll make two requests instead of one
+      const dtsiPerson = await getDTSIPeopleFromAddress(address.description)
+      const civicData = await getGoogleCivicDataFromAddress(address.description)
 
-      if ('notFoundReason' in data) {
-        const { notFoundReason } = data as { notFoundReason: string }
+      if ('notFoundReason' in dtsiPerson) {
+        const { notFoundReason } = dtsiPerson as { notFoundReason: string }
         handleNotFoundCongressperson(notFoundReason)
       }
 
-      tabAdditionalContext?.onFindCongressperson(data)
+      tabAdditionalContext?.onFindCongressperson({ dtsiPerson, civicData })
       gotoTab(TabNames.SUGGESTED_SCRIPT)
     },
-    [handleNotFoundCongressperson, gotoTab, tabAdditionalContext?.onFindCongressperson],
+    [handleNotFoundCongressperson, gotoTab, tabAdditionalContext],
   )
 
   return (

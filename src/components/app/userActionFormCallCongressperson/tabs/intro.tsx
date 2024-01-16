@@ -12,6 +12,14 @@ export function Intro() {
   const { gotoTab } = useTabsContext()
 
   return (
+    <IntroStaticContent>
+      <Button onClick={() => gotoTab(TabNames.ADDRESS)}>Continue</Button>
+    </IntroStaticContent>
+  )
+}
+
+export function IntroStaticContent({ children }: React.PropsWithChildren) {
+  return (
     <UserActionFormCallCongresspersonLayout>
       <UserActionFormCallCongresspersonLayout.Container>
         <UserActionFormCallCongresspersonLayout.Heading
@@ -31,9 +39,8 @@ export function Intro() {
             </ChecklistItem>
           </ul>
         </div>
-
         <UserActionFormCallCongresspersonLayout.Footer>
-          <Button onClick={() => gotoTab(TabNames.ADDRESS)}>Continue</Button>
+          {children}
         </UserActionFormCallCongresspersonLayout.Footer>
       </UserActionFormCallCongresspersonLayout.Container>
     </UserActionFormCallCongresspersonLayout>

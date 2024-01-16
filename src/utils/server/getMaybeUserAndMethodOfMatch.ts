@@ -6,6 +6,18 @@ import { Prisma, User, UserCryptoAddress } from '@prisma/client'
 import _ from 'lodash'
 import { GetFindResult } from '@prisma/client/runtime/library'
 
+export type UserAndMethodOfMatch<
+  I extends Omit<Prisma.UserFindFirstArgs, 'where'> = Omit<Prisma.UserFindFirstArgs, 'where'>,
+> =
+  | {
+      user: GetFindResult<Prisma.$UserPayload, I>
+      userCryptoAddress: UserCryptoAddress
+    }
+  | {
+      user: GetFindResult<Prisma.$UserPayload, I> | null
+      sessionId: string
+    }
+
 /*
 If you're wondering what all the prisma type signatures are for, this allows people to pass additional prismaClient.user.findFirst arguments in
 These arguments change the actual shape of the returned result (select and include for example) so we need to use generics to ensure we get the full type-safe result back 
@@ -15,16 +27,7 @@ export async function getMaybeUserAndMethodOfMatch<
 >({
   include,
   ...other
-}: Prisma.SelectSubset<I, Prisma.UserFindFirstArgs>): Promise<
-  | {
-      user: GetFindResult<Prisma.$UserPayload, I>
-      userCryptoAddress: UserCryptoAddress
-    }
-  | {
-      user: GetFindResult<Prisma.$UserPayload, I> | null
-      sessionId: string
-    }
-> {
+}: Prisma.SelectSubset<I, Prisma.UserFindFirstArgs>): Promise<UserAndMethodOfMatch<I>> {
   const authUser = await appRouterGetAuthUser()
   const sessionId = getUserSessionId()
   const userWithoutReturnTypes = await prismaClient.user.findFirst({

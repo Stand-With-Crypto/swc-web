@@ -3,6 +3,7 @@ import React from 'react'
 import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
 import { Tab, useTabs } from '@/hooks/useTabs'
 import { UseGetDTSIPeopleFromAddressResponse } from '@/hooks/useGetDTSIPeopleFromAddress'
+import { GoogleCivicInfoResponse } from '@/utils/shared/googleCivicInfo'
 
 import { TabNames } from './userActionFormCallCongressperson.types'
 import { Intro } from './tabs/intro'
@@ -29,31 +30,33 @@ const TABS: Tab[] = [
   },
 ]
 
+interface OnFindCongressPersonPayload {
+  dtsiPerson: UseGetDTSIPeopleFromAddressResponse
+  civicData: GoogleCivicInfoResponse
+}
+
 export interface UserActionFormCallCongresspersonTabsContext {
   user: GetUserFullProfileInfoResponse['user']
-  onFindCongressperson: (congressperson: any) => void
-  selectedCongressperson?: UseGetDTSIPeopleFromAddressResponse
+  onFindCongressperson: (payload: OnFindCongressPersonPayload) => void
+  onCompleted: () => void
+  congressPersonData?: OnFindCongressPersonPayload
 }
 
 export function UserActionFormCallCongressperson({
-  onCancel,
-  onSuccess,
   user,
 }: {
-  onCancel: () => void
-  onSuccess: () => void
   user: GetUserFullProfileInfoResponse['user']
 }) {
-  const [selectedCongressperson, setSelectedCongressperson] = React.useState(null)
-  // console.log(selectedCongressperson)
+  const [congressPersonData, setCongresspersonData] =
+    React.useState<OnFindCongressPersonPayload | null>(null)
 
-  const { component, gotoTab } = useTabs({
+  const { component } = useTabs({
     tabs: TABS,
     initialTabId: TabNames.INTRO,
     tabAdditionalContext: {
       user,
-      onFindCongressperson: setSelectedCongressperson,
-      selectedCongressperson,
+      onFindCongressperson: setCongresspersonData,
+      congressPersonData,
     },
   })
 

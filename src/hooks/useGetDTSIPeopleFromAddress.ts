@@ -9,8 +9,9 @@ export type UseGetDTSIPeopleFromAddressResponse =
   | DTSIPeopleByCongressionalDistrictQueryResult
   | { notFoundReason: string }
 
-export async function getDTSIPeopleFromAddress(address: string) {
-  const result = await getCongressionalDistrictFromAddress(address)
+async function getDTSIPeopleFromCongressionalDistrict(
+  result: Awaited<ReturnType<typeof getCongressionalDistrictFromAddress>>,
+) {
   if ('notFoundReason' in result) {
     return result
   }
@@ -27,6 +28,12 @@ export async function getDTSIPeopleFromAddress(address: string) {
   }
 
   return data as DTSIPeopleByCongressionalDistrictQueryResult
+}
+
+export async function getDTSIPeopleFromAddress(address: string) {
+  const result = await getCongressionalDistrictFromAddress(address)
+
+  return getDTSIPeopleFromCongressionalDistrict(result)
 }
 
 export function useGetDTSIPeopleFromAddress(address: string) {
