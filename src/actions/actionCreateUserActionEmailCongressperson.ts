@@ -15,6 +15,7 @@ import {
   parseLocalUserFromCookies,
 } from '@/utils/server/serverLocalUser'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
+import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 
 const logger = getLogger(`actionCreateUserActionEmailCongressperson`)
 
@@ -45,6 +46,10 @@ export async function actionCreateUserActionEmailCongressperson(
         ...mapLocalUserToUserDatabaseFields(localUser),
       },
     }))
+  const peopleAnalytics = getServerPeopleAnalytics({ ...userMatch, localUser })
+  if (localUser) {
+    peopleAnalytics.setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
+  }
   logger.info('fetched/created user')
   const campaignName = validatedFields.data.campaignName
   const actionType = UserActionType.EMAIL
@@ -66,6 +71,7 @@ export async function actionCreateUserActionEmailCongressperson(
       actionType,
       campaignName,
       reason: 'Too Many Recent',
+      creationMethod: 'On Site',
       ...convertAddressToAnalyticsProperties(validatedFields.data.address),
     })
     Sentry.captureMessage(
@@ -115,9 +121,9 @@ export async function actionCreateUserActionEmailCongressperson(
   analytics.trackUserActionCreated({
     actionType,
     campaignName,
+    creationMethod: 'On Site',
     ...convertAddressToAnalyticsProperties(validatedFields.data.address),
   })
-  const peopleAnalytics = getServerPeopleAnalytics({ ...userMatch, localUser })
   peopleAnalytics.set({
     ...convertAddressToAnalyticsProperties(validatedFields.data.address),
     // https://docs.mixpanel.com/docs/data-structure/user-profiles#reserved-user-properties

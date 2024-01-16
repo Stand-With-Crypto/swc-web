@@ -61,6 +61,8 @@ function trackAnalytic(
     },
   )
 }
+
+type CreationMethod = 'On Site' | 'Verified SWC Partner'
 // TODO determine if we need to be awaiting this
 export function getServerAnalytics(config: ServerAnalyticsConfig) {
   const currentSessionAnalytics =
@@ -69,15 +71,18 @@ export function getServerAnalytics(config: ServerAnalyticsConfig) {
   function trackUserActionCreated({
     actionType,
     campaignName,
+    creationMethod = 'On Site',
     ...other
   }: {
     actionType: UserActionType
+    creationMethod?: CreationMethod
     campaignName: string
   } & AnalyticProperties) {
     trackAnalytic(config, 'User Action Created', {
       ...currentSessionAnalytics,
       'User Action Type': actionType,
       'Campaign Name': campaignName,
+      'Creation Method': creationMethod,
       ...other,
     })
   }
@@ -85,23 +90,36 @@ export function getServerAnalytics(config: ServerAnalyticsConfig) {
     actionType,
     campaignName,
     reason,
+    creationMethod = 'On Site',
     ...other
   }: {
     actionType: UserActionType
     campaignName: string
-    reason: 'Too Many Recent'
+    creationMethod?: CreationMethod
+    reason: 'Too Many Recent' | 'Already Exists'
   } & AnalyticProperties) {
     trackAnalytic(config, ' Type Creation Ignored', {
       ...currentSessionAnalytics,
       'User Action Type': actionType,
       'Campaign Name': campaignName,
+      'Creation Method': creationMethod,
       Reason: reason,
       ...other,
     })
   }
 
-  function track(eventName: string, eventProperties?: AnalyticProperties) {
-    trackAnalytic(config, eventName, { ...currentSessionAnalytics, ...eventProperties })
+  function track(
+    eventName: string,
+    {
+      creationMethod = 'On Site',
+      ...eventProperties
+    }: AnalyticProperties & { creationMethod?: CreationMethod } = {},
+  ) {
+    trackAnalytic(config, eventName, {
+      'Creation Method': creationMethod,
+      ...currentSessionAnalytics,
+      ...eventProperties,
+    })
   }
 
   return { trackUserActionCreated, trackUserActionCreatedIgnored, track }
