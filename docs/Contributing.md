@@ -28,9 +28,18 @@ Outside the obvious bits (you need to include the actual code changes), the main
 Once you've gone through the PR, adding any comments/questions you might have, you can "Submit Review" with one of the following values:
 
 - "Request Changes" - Use this when you have comments that need to be addressed before the code can be merged
-- "Comment" - Use this when there are things you'd change or things that could be improved, but you defer to the author on whether those are worth tackling at this point in time. The PR can be merged as is.
-- "Approve" - Ship it.
+- "Approve" - Ship it. If there are minor edits you'd suggest making, but you don't believe those necessitate another round of review, you can approve the PR with your comments.
 
 ## My code has been approved, what now?
 
 The author of the PR can merge (squashing if appropriate), close the PR, and delete the branch after they have approvals from reviewers.
+
+## I need to make database migrations as part of my PR, what now?
+
+We use PlanetScale as our database host provider. They have a number of [github actions](https://planetscale.com/blog/announcing-the-planetscale-github-actions) that should simplify our CI process for database migrations, but until they're fully implemented in our codebase, below are some process steps when updating our database schema. NOTE: these steps will only work for core contributors currently:
+
+- If you have migrations to make, your vercel preview branch will fail by default because it's pointing to the testing db, and testing doesn't have the schema changes from your branch. You can change the database URL your preview branch is pointing to by logging in to Vercel and updating the DATABASE_URL environment variable for the "Preview" environment of your branch. Make sure you press "Select custom branch" and only update the Preview env var for your specific vercel branch.
+- Once your change has been merged to testing, run one of the following against the testing database (you can get credentials in the PlanetScale admin panel):
+  - If your changes do not break any existing schema rules: `npx prisma db push` will update testing db with your schema changes
+  - If your changes break existing schema rules: `npm run db:seed` will wipe and reset testing database with your schema changes. NOTE: This should only be done while we're pre-go-live. After we start deploying to production, we'll need to ensure all changes don't break the schema and leverage one-off bin scripts to migrate data as needed
+- For now, we aren't deploying any changes to production in PlanetScale so you can stop here
