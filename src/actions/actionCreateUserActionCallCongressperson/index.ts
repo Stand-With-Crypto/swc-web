@@ -40,15 +40,15 @@ export async function actionCreateUserActionCallCongressperson(
     throw new Error("Couldn't create user")
   }
 
-  // const recentUserAction = await getRecentUserActionByUserId(user.id)
-  // if (recentUserAction) {
-  //   logSpamActionSubmissions(userMatch, {
-  //     validatedInput,
-  //     userAction: recentUserAction,
-  //     userId: user.id,
-  //   })
-  //   return { user, userAction: recentUserAction }
-  // }
+  const recentUserAction = await getRecentUserActionByUserId(user.id)
+  if (recentUserAction) {
+    logSpamActionSubmissions(userMatch, {
+      validatedInput,
+      userAction: recentUserAction,
+      userId: user.id,
+    })
+    return { user, userAction: recentUserAction }
+  }
 
   const userAction = await createAction({ user, validatedInput: validatedInput.data, userMatch })
 
