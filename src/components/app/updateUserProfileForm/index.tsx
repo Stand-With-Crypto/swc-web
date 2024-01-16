@@ -194,7 +194,7 @@ export function UpdateUserProfileForm({
                 disableHover
                 action={{
                   __client: true,
-                  optInType: UserActionOptInType.SWC_SIGN_UP,
+                  optInType: UserActionOptInType.SWC_SIGN_UP_AS_MEMBER,
                   actionType: UserActionType.OPT_IN,
                   datetimeCreated: new Date(),
                   nftMint: null,

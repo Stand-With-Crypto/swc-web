@@ -19,6 +19,7 @@ export const ORDERED_USER_ACTION_ROW_CTA_INFO: ReadonlyArray<Omit<UserActionRowC
       image: '/actionTypeIcons/optIn.svg',
       text: 'Join Stand With Crypto',
       subtext: 'Join over 100,000 advocates fighting to keep crypto in America.',
+      // TODO we need to modify this so that it can still be actioned on until the user opts in to both subscriber AND member
       canBeTriggeredMultipleTimes: false,
       DialogComponent: UserActionFormOptInSWCDialog,
     },
