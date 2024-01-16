@@ -15,7 +15,7 @@ export async function getAuthenticatedData() {
   }
   const user = await prismaClient.user.findFirstOrThrow({
     where: {
-      userCryptoAddresses: { some: { address: authUser.address } },
+      userCryptoAddresses: { some: { cryptoAddress: authUser.address } },
     },
     include: {
       userMergeAlertUserA: { include: { userB: { include: { primaryUserCryptoAddress: true } } } },
@@ -55,7 +55,7 @@ export async function getAuthenticatedData() {
   )
   const { userActions, address, ...rest } = user
   const currentlyAuthenticatedUserCryptoAddress = user.userCryptoAddresses.find(
-    x => x.address === authUser.address,
+    x => x.cryptoAddress === authUser.address,
   )
   if (!currentlyAuthenticatedUserCryptoAddress) {
     throw new Error('Primary user crypto address not found')

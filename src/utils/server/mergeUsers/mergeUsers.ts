@@ -29,7 +29,7 @@ export async function mergeUsers({
 
   const emailsToTransfer = userToDelete.userEmailAddresses.filter(userToDeleteEmail => {
     const correspondingEmail = userToKeep.userEmailAddresses.find(
-      y => y.address === userToDeleteEmail.address,
+      y => y.emailAddress === userToDeleteEmail.emailAddress,
     )
     if (!correspondingEmail) {
       return true
@@ -50,7 +50,7 @@ export async function mergeUsers({
       emailsToTransfer.every(transferEmail => transferEmail.id !== x.id),
     ),
     ...userToKeep.userEmailAddresses.filter(x =>
-      emailsToTransfer.find(transfer => transfer.address === x.address),
+      emailsToTransfer.find(transfer => transfer.emailAddress === x.emailAddress),
     ),
   ]
   const userCryptoAddressesUpdatePayloads: Prisma.UserCryptoAddressUpdateArgs[] =
@@ -76,7 +76,7 @@ export async function mergeUsers({
         const deletedEmail = emailsToDelete.find(x => x.id === action.userEmailAddressId)
         if (deletedEmail) {
           const replacementEmail = userToKeep.userEmailAddresses.find(
-            x => x.address === deletedEmail.address,
+            x => x.emailAddress === deletedEmail.emailAddress,
           )!
           return {
             where: { id: action.id },

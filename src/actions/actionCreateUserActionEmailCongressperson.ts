@@ -141,8 +141,8 @@ export async function actionCreateUserActionEmailCongressperson(
       primaryUserEmailAddress: {
         connectOrCreate: {
           where: {
-            address_userId: {
-              address: validatedFields.data.email,
+            emailAddress_userId: {
+              emailAddress: validatedFields.data.email,
               userId: user.id,
             },
           },

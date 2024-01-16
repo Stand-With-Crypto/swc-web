@@ -37,7 +37,7 @@ export const getSensitiveDataClientUser = (
     fullName,
     primaryUserEmailAddress: primaryUserEmailAddress
       ? {
-          address: primaryUserEmailAddress.address,
+          address: primaryUserEmailAddress.emailAddress,
         }
       : null,
     primaryUserCryptoAddress: primaryUserCryptoAddress

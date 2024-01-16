@@ -69,7 +69,10 @@ export const UserAvatar: React.FC<
     <Container>
       <NextImage
         {...props}
-        src={deterministicArraySelection(genericImages, user.primaryUserCryptoAddress.address)}
+        src={deterministicArraySelection(
+          genericImages,
+          user.primaryUserCryptoAddress.cryptoAddress,
+        )}
         alt="Generic profile picture for anonymous user"
         width={size}
         height={size}
@@ -117,7 +120,10 @@ export const SensitiveDataUserAvatar: React.FC<
     <Container>
       <NextImage
         {...props}
-        src={deterministicArraySelection(genericImages, user.primaryUserCryptoAddress.address)}
+        src={deterministicArraySelection(
+          genericImages,
+          user.primaryUserCryptoAddress.cryptoAddress,
+        )}
         alt="Generic profile picture for anonymous user"
         width={size}
         height={size}
