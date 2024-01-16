@@ -12,7 +12,10 @@ export function UserActionFormCallCongresspersonDialog({
   children,
   defaultOpen = false,
   ...formProps
-}: Omit<React.ComponentProps<typeof UserActionFormCallCongressperson>, 'onCancel' | 'onSuccess'> & {
+}: Omit<
+  React.ComponentProps<typeof UserActionFormCallCongressperson>,
+  'user' | 'onCancel' | 'onSuccess'
+> & {
   children: React.ReactNode
   defaultOpen?: boolean
 }) {
