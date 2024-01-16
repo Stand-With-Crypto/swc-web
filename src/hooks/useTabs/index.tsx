@@ -1,25 +1,30 @@
 import React from 'react'
 import * as Sentry from '@sentry/nextjs'
+import { once } from 'lodash'
 
 export interface Tab {
   id: string
   component: React.ComponentType
 }
 
-export interface UseTabsProps {
+export interface UseTabsProps<T = any> {
   tabs: Tab[]
   initialTabId?: string | (() => string)
+  tabAdditionalContext?: T
 }
 
-interface UseTabsContextValue {
+interface UseTabsContextValue<T = any> {
   currentTab: string
   gotoTab: (tabId: string) => void
+  tabAdditionalContext?: T
 }
 
-const UseTabsContext = React.createContext<UseTabsContextValue | null>(null)
+const createUseTabsContext = once(<T,>() =>
+  React.createContext<UseTabsContextValue<T> | null>(null),
+)
 
-export function useTabsContext() {
-  const context = React.useContext(UseTabsContext)
+export function useTabsContext<T = any>() {
+  const context = React.useContext(createUseTabsContext<T>())
   if (!context) {
     const err = new Error('useTabsContext must be used within a useTabs component')
     Sentry.captureException(err)
@@ -28,7 +33,7 @@ export function useTabsContext() {
   return context
 }
 
-export function useTabs({ tabs, initialTabId }: UseTabsProps) {
+export function useTabs<T = any>({ tabs, initialTabId, tabAdditionalContext }: UseTabsProps<T>) {
   if (!tabs.length) {
     const err = new Error('useTabs: tabs must not be empty')
     Sentry.captureException(err)
@@ -55,6 +60,7 @@ export function useTabs({ tabs, initialTabId }: UseTabsProps) {
     throw err
   }
 
+  const UseTabsContext = createUseTabsContext<T>()
   return {
     currentTab,
     gotoTab,
@@ -63,6 +69,7 @@ export function useTabs({ tabs, initialTabId }: UseTabsProps) {
         value={{
           currentTab,
           gotoTab,
+          tabAdditionalContext,
         }}
       >
         <CurrentComponent />

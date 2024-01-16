@@ -47,3 +47,7 @@ export const queryDTSIPeopleByCongressionalDistrict = async ({
   }
   return person || null
 }
+
+export type DTSIPeopleByCongressionalDistrictQueryResult = NonNullable<
+  Awaited<ReturnType<typeof queryDTSIPeopleByCongressionalDistrict>>
+>

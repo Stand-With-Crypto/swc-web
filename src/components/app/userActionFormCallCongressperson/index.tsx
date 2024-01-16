@@ -1,10 +1,14 @@
-import { Button } from '@/components/ui/button'
-import { ScrollArea } from '@/components/ui/scroll-area'
+import React from 'react'
+
+import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
 import { Tab, useTabs } from '@/hooks/useTabs'
+import { UseGetDTSIPeopleFromAddressResponse } from '@/hooks/useGetDTSIPeopleFromAddress'
 
 import { TabNames } from './userActionFormCallCongressperson.types'
 import { Intro } from './tabs/intro'
 import { Address } from './tabs/address'
+import { SuggestedScript } from './tabs/suggestedScript'
+import { SuccessMessage } from './tabs/successMessage'
 
 const TABS: Tab[] = [
   {
@@ -17,34 +21,41 @@ const TABS: Tab[] = [
   },
   {
     id: TabNames.SUGGESTED_SCRIPT,
-    component: () => <h1>Suggested Script Tab</h1>,
+    component: SuggestedScript,
   },
   {
     id: TabNames.SUCCESS_MESSAGE,
-    component: () => <h1>Success Message Tab</h1>,
+    component: SuccessMessage,
   },
 ]
+
+export interface UserActionFormCallCongresspersonTabsContext {
+  user: GetUserFullProfileInfoResponse['user']
+  onFindCongressperson: (congressperson: any) => void
+  selectedCongressperson?: UseGetDTSIPeopleFromAddressResponse
+}
 
 export function UserActionFormCallCongressperson({
   onCancel,
   onSuccess,
+  user,
 }: {
   onCancel: () => void
   onSuccess: () => void
+  user: GetUserFullProfileInfoResponse['user']
 }) {
+  const [selectedCongressperson, setSelectedCongressperson] = React.useState(null)
+  // console.log(selectedCongressperson)
+
   const { component, gotoTab } = useTabs({
     tabs: TABS,
     initialTabId: TabNames.INTRO,
+    tabAdditionalContext: {
+      user,
+      onFindCongressperson: setSelectedCongressperson,
+      selectedCongressperson,
+    },
   })
 
-  return (
-    <>
-      {/* <Button onClick={() => gotoTab(TabNames.INTRO)}>INTRO</Button>
-      <Button onClick={() => gotoTab(TabNames.ADDRESS)}>ADDRESS</Button>
-      <Button onClick={() => gotoTab(TabNames.SUGGESTED_SCRIPT)}>SUGGESTED_SCRIPT</Button>
-      <Button onClick={() => gotoTab(TabNames.SUCCESS_MESSAGE)}>SUCCESS_MESSAGE</Button> */}
-
-      {component}
-    </>
-  )
+  return <>{component}</>
 }

@@ -4,6 +4,7 @@ import { UserActionFormCallCongressperson } from '@/components/app/userActionFor
 import { LazyUserActionFormCallCongressperson } from '@/components/app/userActionFormCallCongressperson/lazyLoad'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { Skeleton } from '@/components/ui/skeleton'
+import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useDialog } from '@/hooks/useDialog'
 import { Suspense } from 'react'
 
@@ -16,6 +17,9 @@ export function UserActionFormCallCongresspersonDialog({
   defaultOpen?: boolean
 }) {
   const dialogProps = useDialog(defaultOpen)
+  const fetchUser = useApiResponseForUserFullProfileInfo()
+  const { user } = fetchUser.data || { user: null }
+
   return (
     <Dialog {...dialogProps}>
       <DialogTrigger asChild>{children}</DialogTrigger>
@@ -23,6 +27,7 @@ export function UserActionFormCallCongresspersonDialog({
         <Suspense fallback={<Skeleton className="h-80 w-full" />}>
           <LazyUserActionFormCallCongressperson
             {...formProps}
+            user={user}
             onCancel={() => dialogProps.onOpenChange(false)}
             onSuccess={() => dialogProps.onOpenChange(false)}
           />

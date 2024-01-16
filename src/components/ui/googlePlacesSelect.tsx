@@ -59,7 +59,6 @@ export function GooglePlacesSelect(
       options={data}
       getOptionLabel={val => val.description}
       getOptionKey={val => val.place_id}
-      popoverContentClassName="w-[400px]"
     />
   )
 }
