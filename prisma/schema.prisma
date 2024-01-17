@@ -238,7 +238,6 @@ model UserAction {
   @@index([userSessionId])
   @@index([nftMintId])
   @@index([userEmailAddressId])
-  
   @@map("user_action")
 }
 
