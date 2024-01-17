@@ -9,7 +9,7 @@ import { VerifiedSWCPartner } from '@/utils/server/verifiedSWCPartner/constants'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
 import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
 import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
-import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/severAnalytics'
+import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 

@@ -9,7 +9,7 @@ import { UserActionType, UserEmailAddressSource } from '@prisma/client'
 import { subDays } from 'date-fns'
 import 'server-only'
 import { z } from 'zod'
-import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/severAnalytics'
+import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import {
   mapLocalUserToUserDatabaseFields,
   parseLocalUserFromCookies,

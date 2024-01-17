@@ -1,17 +1,7 @@
 import { decodeBasicAuthHeader } from '@/utils/server/basicAuth'
-import { VerifiedSWCPartner } from '@/utils/server/verifiedSWCPartner/constants'
-import { requiredEnv } from '@/utils/shared/requiredEnv'
+import { VERIFIED_SWC_PARTNER_SECRET_MAP } from '@/utils/server/verifiedSWCPartner/constants'
 import * as Sentry from '@sentry/nextjs'
 import { headers } from 'next/headers'
-
-const VERIFIED_SWC_PARTNER_SECRET_COINBASE = requiredEnv(
-  process.env.VERIFIED_SWC_PARTNER_SECRET_COINBASE,
-  'process.env.VERIFIED_SWC_PARTNER_SECRET_COINBASE',
-)
-
-export const VERIFIED_SWC_PARTNER_SECRET_MAP: Record<string, VerifiedSWCPartner> = {
-  [VERIFIED_SWC_PARTNER_SECRET_COINBASE]: VerifiedSWCPartner.COINBASE,
-}
 
 export const authenticateAndGetVerifiedSWCPartnerFromHeader = () => {
   const authHeader = headers().get('authorization')
