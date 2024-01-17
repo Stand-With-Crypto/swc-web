@@ -22,6 +22,8 @@ if git diff --name-only HEAD^ | grep -q 'prisma/schema.prisma'; then
     else
         echo "Skipping deploy because this preview branch is pointing at the testing db which does not have the schema changes. The failure below is expected and is not an issue."
         exit 0;
+        exit 1;
+        echo "should not get called";
     fi
 else  
     echo "No schema changes, building app"
