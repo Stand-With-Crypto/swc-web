@@ -36,10 +36,13 @@ The author of the PR can merge (squashing if appropriate), close the PR, and del
 
 ## I need to make database migrations as part of my PR, what now?
 
-We use PlanetScale as our database host provider. They have a number of [github actions](https://planetscale.com/blog/announcing-the-planetscale-github-actions) that should simplify our CI process for database migrations, but until they're fully implemented in our codebase, below are some process steps when updating our database schema. NOTE: these steps will only work for core contributors currently:
+We use PlanetScale as our database host provider. They have a number of [github actions](https://planetscale.com/blog/announcing-the-planetscale-github-actions) that should simplify our CI process for database migrations, but until they're fully implemented in our codebase, below are some process steps to follow when updating our database schema. NOTE: these steps will only work for core contributors with access to our vercel account:
 
-- If you have migrations to make, your vercel preview branch will not fully deploy a testing environment (see `bin/deploy_vercel.sh` for details). We do this because all preview environments are pointed at testing db, which won't have the schema updates that your local db has until the PR is merged.
-- The process for merging schema changes to testing will vary based off whether you have breaking changes for our schema in your PR. If you're unsure if your changes are breaking, run npx prisma db push against your local db with the schema changes. If it updates without prompting you with conflicts, there are no issues:
+- If you have migrations to make, your vercel preview branch will need to be pointing to the planetscale developer database branch your using for local development (that you've run `npx prisma db push` on). To get this environment variable synced:
+  - This step only needs to be done once: Install the [vercel CLI](https://vercel.com/docs/cli) locally and run `vercel login --github` to login to our instance
+  - Run `vercel env add DATABASE_URL preview *name of your branch*`
+  - Once your branch has been merged to testing, please clean up your branch-specific env var by running `vercel env rm DATABASE_URL preview *name of your branch*`
+- The process for merging schema changes to testing will vary based off whether you have breaking changes for our schema in your PR. If you're unsure if your changes are breaking, run `npx prisma db push` against your planetscale developer database branch db with the schema changes. If it updates without prompting you with conflicts, there are no issues:
   - If your schema updates do not have any breaking changes, vercel will automatically run `npx prisma db push` on deploy to testing
   - If your changes break existing schema rules: you'll need to run `npm run db:seed` against the testing database with your changes when you merge, before vercel tries to build the application. NOTE: This should only be done while we're pre-go-live. After we start deploying to production, we'll need to ensure all changes don't break the schema and leverage one-off bin scripts to migrate data as needed
 - For now, we aren't deploying any changes to production in PlanetScale so you can stop here
