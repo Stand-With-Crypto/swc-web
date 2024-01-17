@@ -23,7 +23,7 @@ if [[ $VERCEL_GIT_COMMIT_REF == "main" || $VERCEL_GIT_COMMIT_REF == "deploy-web-
     wait
     echo "frontend assets built"
 else
-    if git diff --name-only main | grep -q 'prisma/schema.prisma'; then
+    if git diff --name-only "origin/main" | grep -q 'prisma/schema.prisma'; then
         echo "Schema changes detected on a preview branch, skipping deploy because this branch is pointing at the testing db which does not have the schema changes. The failure below is expected and is not an issue."
         exit 0;
         exit 1;
