@@ -9,6 +9,6 @@ const VERIFIED_SWC_PARTNER_SECRET_COINBASE = requiredEnv(
   'process.env.VERIFIED_SWC_PARTNER_SECRET_COINBASE',
 )
 
-export const VERIFIED_SWC_PARTNER_SECRET_MAP: Record<string, VerifiedSWCPartner> = {
-  [VERIFIED_SWC_PARTNER_SECRET_COINBASE]: VerifiedSWCPartner.COINBASE,
+export const VERIFIED_SWC_PARTNER_SECRET_MAP: Record<VerifiedSWCPartner, string> = {
+  [VerifiedSWCPartner.COINBASE]: VERIFIED_SWC_PARTNER_SECRET_COINBASE,
 }
