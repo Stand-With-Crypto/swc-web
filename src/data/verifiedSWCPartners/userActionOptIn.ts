@@ -52,7 +52,7 @@ export async function verifiedSWCPartnersUserActionOptIn({
       },
       user: {
         userEmailAddresses: {
-          some: { address: emailAddress },
+          some: { emailAddress: emailAddress },
         },
       },
     },
@@ -83,7 +83,7 @@ export async function verifiedSWCPartnersUserActionOptIn({
   if (!existingAction?.user) {
     peopleAnalytics.setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
   }
-  const existingEmail = user.userEmailAddresses.find(email => email.address === emailAddress)
+  const existingEmail = user.userEmailAddresses.find(email => email.emailAddress === emailAddress)
   if (existingEmail && !existingEmail.isVerified && isVerifiedEmailAddress) {
     logger.info(`verifying previously unverified email`)
     analytics.track('Email Verified', { creationMethod: 'Verified SWC Partner' })
