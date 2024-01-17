@@ -24,20 +24,22 @@ export async function actionUpdateUserProfile(
   }
   const user = await prismaClient.user.findFirstOrThrow({
     where: {
-      userCryptoAddresses: { some: { address: authUser.address } },
+      userCryptoAddresses: { some: { cryptoAddress: authUser.address } },
     },
     include: {
       userEmailAddresses: true,
     },
   })
   const existingUserEmailAddress = validatedFields.data.email
-    ? user.userEmailAddresses.find(({ address }) => address === validatedFields.data.email)
+    ? user.userEmailAddresses.find(
+        ({ emailAddress }) => emailAddress === validatedFields.data.email,
+      )
     : null
   const primaryUserEmailAddress =
     validatedFields.data.email && !existingUserEmailAddress
       ? await prismaClient.userEmailAddress.create({
           data: {
-            address: validatedFields.data.email,
+            emailAddress: validatedFields.data.email,
             source: UserEmailAddressSource.USER_ENTERED,
             isVerified: false,
             user: {

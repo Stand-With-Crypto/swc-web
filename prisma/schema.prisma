@@ -82,10 +82,10 @@ model User {
   // We'll collect and capture this information in our product analytics tools, but we'll also want to be able to 
   // use this metadata to query our relationship database. This information will only be populated if users
   // opt in to our cookies
-  acquisitionReferer     String @map("acquisition_referer") 
-  acquisitionSource     String @map("acquisition_source") 
-  acquisitionMedium     String @map("acquisition_medium") 
-  acquisitionCampaign     String @map("acquisition_campaign") 
+  acquisitionReferer         String             @map("acquisition_referer")
+  acquisitionSource          String             @map("acquisition_source")
+  acquisitionMedium          String             @map("acquisition_medium")
+  acquisitionCampaign        String             @map("acquisition_campaign")
 
   // REMINDER: as we add additional foreign keys to users, we'll want to make sure we account for them in our mergeUsers logic
   userCryptoAddresses UserCryptoAddress[] @relation("userCryptoAddresses")
@@ -93,29 +93,29 @@ model User {
   userEmailAddresses  UserEmailAddress[]  @relation("userEmailAddresses")
   userActions         UserAction[]
 
-  userMergeAlertUserB        UserMergeAlert[] @relation("userBMergeAttempt")
-  userMergeAlertUserA        UserMergeAlert[] @relation("userAMergeAttempt")
-  userMergeEvents UserMergeEvent[]
+  userMergeAlertUserB UserMergeAlert[] @relation("userBMergeAttempt")
+  userMergeAlertUserA UserMergeAlert[] @relation("userAMergeAttempt")
+  userMergeEvents     UserMergeEvent[]
 
   @@index([addressId])
   @@map("user")
 }
 
-
 // because we delete one of the users after this merge completes, this model will also be deleted
 model UserMergeAlert {
-    id              String   @id @default(uuid())
+  id      String @id @default(uuid())
   userAId String @map("user_a_id")
   userA   User   @relation("userAMergeAttempt", fields: [userAId], references: [id])
   userBId String @map("user_b_id")
   userB   User   @relation("userBMergeAttempt", fields: [userBId], references: [id])
 
-  hasBeenConfirmedByUserA Boolean @map("has_been_confirmed_by_user_a") @default(false)
-  hasBeenConfirmedByUserB Boolean @map("has_been_confirmed_by_user_b") @default(false)
+  hasBeenConfirmedByUserA Boolean @default(false) @map("has_been_confirmed_by_user_a")
+  hasBeenConfirmedByUserB Boolean @default(false) @map("has_been_confirmed_by_user_b")
 
   @@unique([userAId, userBId])
   @@index([userBId])
   @@index([userAId])
+  @@map("user_merge_alert")
 }
 
 model UserMergeEvent {
@@ -124,7 +124,9 @@ model UserMergeEvent {
   user            User     @relation(fields: [userId], references: [id])
   datetimeCreated DateTime @default(now()) @map("datetime_created")
   datetimeUpdated DateTime @updatedAt @map("datetime_updated")
+
   @@index([userId])
+  @@map("user_merge_event")
 }
 
 // A "user" that is performing actions on our platform but has not logged in to any system yet will have that action associated with a user session
@@ -151,7 +153,7 @@ enum UserEmailAddressSource {
 model UserEmailAddress {
   id              String                 @id @default(uuid())
   isVerified      Boolean                @map("is_verified")
-  address         String
+  emailAddress    String                 @map("email_address")
   userId          String                 @map("user_id")
   user            User                   @relation("userEmailAddresses", map: "userEmailAddresses", fields: [userId], references: [id])
   source          UserEmailAddressSource
@@ -161,7 +163,7 @@ model UserEmailAddress {
   userActions               UserAction[]
   asPrimaryUserEmailAddress User?        @relation("asPrimaryUserEmailAddress")
 
-  @@unique(map: "user_email_address_unique_constraint", [address, userId])
+  @@unique(map: "user_email_address_unique_constraint", [emailAddress, userId])
   @@index([userId])
   @@map("user_email_address")
 }
@@ -179,7 +181,7 @@ enum SupportedUserCryptoNetwork {
 model UserCryptoAddress {
   id              String                     @id @default(uuid())
   cryptoNetwork   SupportedUserCryptoNetwork @default(ETH) @map("crypto_network")
-  address         String                     @map("address")
+  cryptoAddress   String                     @map("crypto_address")
   // TODO figure out how to detect this via thirdweb sdk and then add it to the model
   // initialCustodian Web3AddressCustodian
   datetimeUpdated DateTime                   @updatedAt @map("datetime_updated")
@@ -190,8 +192,9 @@ model UserCryptoAddress {
   userActions                UserAction[]
   asPrimaryUserCryptoAddress User?        @relation("asPrimaryUserCryptoAddress")
 
-  @@unique([address, cryptoNetwork])
-  @@index([address])
+  @@unique([cryptoAddress, cryptoNetwork])
+  @@index([cryptoAddress])
+  @@map("user_crypto_address")
 }
 
 enum UserActionType {

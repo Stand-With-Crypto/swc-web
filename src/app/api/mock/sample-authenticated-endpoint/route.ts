@@ -16,7 +16,7 @@ export async function POST(_request: NextRequest) {
   }
   let user = await prismaClient.user.findFirstOrThrow({
     where: {
-      userCryptoAddresses: { some: { address: authUser.address } },
+      userCryptoAddresses: { some: { cryptoAddress: authUser.address } },
     },
     include: { primaryUserCryptoAddress: true },
   })

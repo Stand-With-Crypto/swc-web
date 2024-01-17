@@ -53,7 +53,7 @@ export const thirdWebAuthConfig: ThirdwebAuthConfig = {
       const localUser = parseLocalUserFromCookiesForPageRouter(req)
       // TODO figure out how to get the users email address to persist to the db
       let existingUser = await prismaClient.user.findFirst({
-        where: { userCryptoAddresses: { some: { address } } },
+        where: { userCryptoAddresses: { some: { cryptoAddress: address } } },
       })
       getServerAnalytics({ address, localUser }).track('User Logged In', {
         'Is First Time': !existingUser,
@@ -70,7 +70,7 @@ export const thirdWebAuthConfig: ThirdwebAuthConfig = {
         }
         const userCryptoAddress = await prismaClient.userCryptoAddress.create({
           data: {
-            address,
+            cryptoAddress: address,
             user: existingUser
               ? { connect: { id: existingUser.id } }
               : {

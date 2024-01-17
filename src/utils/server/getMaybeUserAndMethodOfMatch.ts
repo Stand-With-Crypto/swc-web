@@ -31,7 +31,7 @@ export async function getMaybeUserAndMethodOfMatch<
   const userWithoutReturnTypes = await prismaClient.user.findFirst({
     where: {
       OR: _.compact([
-        authUser && { userCryptoAddresses: { some: { address: authUser.address } } },
+        authUser && { userCryptoAddresses: { some: { cryptoAddress: authUser.address } } },
         { userSessions: { some: { id: sessionId } } },
       ]),
     },
@@ -49,7 +49,7 @@ export async function getMaybeUserAndMethodOfMatch<
       )
     }
     const authedCryptoAddress = userWithoutReturnTypes!.userCryptoAddresses.find(
-      x => x.address === authUser.address,
+      x => x.cryptoAddress === authUser.address,
     )!
     if (authedCryptoAddress.id !== user.primaryUserCryptoAddressId) {
       // This will happen, but should be relatively infrequent
