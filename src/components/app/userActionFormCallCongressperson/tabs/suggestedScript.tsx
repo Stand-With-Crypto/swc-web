@@ -19,6 +19,7 @@ import { UserActionFormCallCongresspersonLayout } from './layout'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { UserActionType } from '@prisma/client'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
+import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 
 export function SuggestedScript({
   user,
@@ -28,12 +29,12 @@ export function SuggestedScript({
   const router = useRouter()
 
   const congresspersonFullName = React.useMemo(() => {
-    return `${dtsiPerson.firstName} ${dtsiPerson.lastName}`
-  }, [])
+    return dtsiPersonFullName(dtsiPerson)
+  }, [dtsiPerson])
 
   const parsedAddress = React.useMemo(() => {
     return `${addressSchema.locality}, ${addressSchema.administrativeAreaLevel1}`
-  }, [civicData])
+  }, [addressSchema])
 
   const phoneNumber = React.useMemo(() => {
     const official = getGoogleCivicOfficialByDTSIName(
@@ -49,7 +50,7 @@ export function SuggestedScript({
     }
 
     return official.phones[0]
-  }, [])
+  }, [dtsiPerson, civicData])
 
   const handleCallAction = React.useCallback(async () => {
     const input: z.infer<typeof createActionCallCongresspersonInputValidationSchema> = {
@@ -91,7 +92,7 @@ export function SuggestedScript({
       router.refresh()
       gotoTab(TabNames.SUCCESS_MESSAGE)
     }
-  }, [phoneNumber, user, dtsiPerson])
+  }, [phoneNumber, dtsiPerson, addressSchema, user])
 
   return (
     <>
