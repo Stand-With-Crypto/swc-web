@@ -2,7 +2,7 @@ import React from 'react'
 import * as Sentry from '@sentry/nextjs'
 
 import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
-import { useTabs, useTabsContext } from '@/hooks/useTabs'
+import { UseTabsReturn, useTabs } from '@/hooks/useTabs'
 import { GoogleCivicInfoResponse } from '@/utils/shared/googleCivicInfo'
 import { DTSIPeopleByCongressionalDistrictQueryResult } from '@/data/dtsi/queries/queryDTSIPeopleByCongressionalDistrict'
 
@@ -20,7 +20,7 @@ interface OnFindCongressPersonPayload {
   addressSchema: z.infer<typeof zodAddress>
 }
 
-export interface UserActionFormCallCongresspersonProps {
+export interface UserActionFormCallCongresspersonProps extends UseTabsReturn<TabNames> {
   user: GetUserFullProfileInfoResponse['user']
   onFindCongressperson: (payload: OnFindCongressPersonPayload) => void
   congressPersonData: OnFindCongressPersonPayload
@@ -31,7 +31,7 @@ export function UserActionFormCallCongressperson({
 }: {
   user: GetUserFullProfileInfoResponse['user']
 }) {
-  const { TabsProvider } = useTabs<TabNames>({
+  const useTabsProps = useTabs<TabNames>({
     tabs: Object.values(TabNames),
     initialTabId: TabNames.INTRO,
   })
@@ -39,35 +39,40 @@ export function UserActionFormCallCongressperson({
   const [congressPersonData, setCongresspersonData] = React.useState<OnFindCongressPersonPayload>()
 
   return (
-    <TabsProvider>
-      <TabContent
-        user={user}
-        onFindCongressperson={setCongresspersonData}
-        congressPersonData={congressPersonData}
-      />
-    </TabsProvider>
+    <TabContent
+      user={user}
+      onFindCongressperson={setCongresspersonData}
+      congressPersonData={congressPersonData}
+      {...useTabsProps}
+    />
   )
 }
 
 type TabContentProps = Pick<
   UserActionFormCallCongresspersonProps,
-  'user' | 'onFindCongressperson'
+  'user' | 'onFindCongressperson' | keyof UseTabsReturn<TabNames>
 > & {
   congressPersonData?: UserActionFormCallCongresspersonProps['congressPersonData']
 }
 
-function TabContent({ user, congressPersonData, onFindCongressperson }: TabContentProps) {
-  const { currentTab, onTabNotFound } = useTabsContext<TabNames>()
+function TabContent({
+  user,
+  congressPersonData,
+  onFindCongressperson,
+  ...tabProps
+}: TabContentProps) {
+  const { currentTab, onTabNotFound } = tabProps
 
   switch (currentTab) {
     case TabNames.INTRO:
-      return <Intro />
+      return <Intro {...tabProps} />
     case TabNames.ADDRESS:
       return (
         <Address
           user={user}
           onFindCongressperson={onFindCongressperson}
           congressPersonData={congressPersonData}
+          {...tabProps}
         />
       )
     case TabNames.SUGGESTED_SCRIPT:
@@ -80,7 +85,7 @@ function TabContent({ user, congressPersonData, onFindCongressperson }: TabConte
         throw err
       }
 
-      return <SuggestedScript user={user} congressPersonData={congressPersonData} />
+      return <SuggestedScript user={user} congressPersonData={congressPersonData} {...tabProps} />
     case TabNames.SUCCESS_MESSAGE:
       return <SuccessMessage />
     default:

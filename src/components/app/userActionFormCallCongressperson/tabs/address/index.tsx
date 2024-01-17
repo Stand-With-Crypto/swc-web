@@ -3,11 +3,9 @@
 import React from 'react'
 import { SubmitHandler, useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import * as Sentry from '@sentry/nextjs'
 import useSWR from 'swr'
 
 import { Button } from '@/components/ui/button'
-import { useTabsContext } from '@/hooks/useTabs'
 import { TabNames } from '@/components/app/userActionFormCallCongressperson/userActionFormCallCongressperson.types'
 import { UserActionFormCallCongresspersonLayout } from '@/components/app/userActionFormCallCongressperson/tabs/layout'
 import {
@@ -25,6 +23,8 @@ import type { UserActionFormCallCongresspersonProps } from '@/components/app/use
 import { InternalLink } from '@/components/ui/link'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { getGoogleCivicDataFromAddress } from '@/utils/shared/googleCivicInfo'
+import { GENERIC_ERROR_TITLE } from '@/utils/web/errorUtils'
+import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
 
 import {
   findRepresentativeCallFormValidationSchema,
@@ -32,21 +32,14 @@ import {
   getDefaultValues,
   FORM_NAME,
 } from './formConfig'
-import { GENERIC_ERROR_TITLE } from '@/utils/web/errorUtils'
-import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
-import {
-  catchUnexpectedServerErrorAndTriggerToast,
-  toastGenericError,
-} from '@/utils/web/toastUtils'
 
 interface AddressProps
-  extends Pick<UserActionFormCallCongresspersonProps, 'user' | 'onFindCongressperson'> {
+  extends Pick<UserActionFormCallCongresspersonProps, 'user' | 'onFindCongressperson' | 'gotoTab'> {
   congressPersonData?: UserActionFormCallCongresspersonProps['congressPersonData']
 }
 
-export function Address({ user, onFindCongressperson, congressPersonData }: AddressProps) {
+export function Address({ user, onFindCongressperson, congressPersonData, gotoTab }: AddressProps) {
   const urls = useIntlUrls()
-  const { gotoTab } = useTabsContext<TabNames>()
 
   const form = useForm<FindRepresentativeCallFormValues>({
     defaultValues: getDefaultValues({ user }),

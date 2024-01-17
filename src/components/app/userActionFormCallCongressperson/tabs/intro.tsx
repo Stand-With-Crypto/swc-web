@@ -2,15 +2,13 @@ import { Check } from 'lucide-react'
 import React from 'react'
 
 import { Button } from '@/components/ui/button'
-import { useTabsContext } from '@/hooks/useTabs'
+import { UseTabsReturn } from '@/hooks/useTabs'
 
 import { TabNames } from '@/components/app/userActionFormCallCongressperson/userActionFormCallCongressperson.types'
 
 import { UserActionFormCallCongresspersonLayout } from './layout'
 
-export function Intro() {
-  const { gotoTab } = useTabsContext<TabNames>()
-
+export function Intro({ gotoTab }: UseTabsReturn<TabNames>) {
   return (
     <IntroStaticContent>
       <Button onClick={() => gotoTab(TabNames.ADDRESS)}>Continue</Button>

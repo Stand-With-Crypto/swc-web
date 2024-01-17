@@ -2,7 +2,6 @@ import React from 'react'
 import * as Sentry from '@sentry/nextjs'
 
 import { UseTabsProps, UseTabsReturn } from './useTabs.types'
-import { createUseTabsContext } from './useTabsContext'
 
 export function useTabs<TabKey extends string>({
   tabs,
@@ -29,25 +28,14 @@ export function useTabs<TabKey extends string>({
     throw err
   }, [currentTab])
 
-  const UseTabsContext = createUseTabsContext<TabKey>()
   return React.useMemo<UseTabsReturn<TabKey>>(
     () => ({
       currentTab,
       gotoTab,
       onTabNotFound: handleTabNotFound,
-      TabsProvider: (props: React.PropsWithChildren) => (
-        <UseTabsContext.Provider
-          value={{
-            gotoTab,
-            currentTab,
-            onTabNotFound: handleTabNotFound,
-          }}
-          {...props}
-        />
-      ),
     }),
-    [currentTab, gotoTab, UseTabsContext],
+    [currentTab, gotoTab],
   )
 }
 
-export { useTabsContext } from './useTabsContext'
+export * from './useTabs.types'

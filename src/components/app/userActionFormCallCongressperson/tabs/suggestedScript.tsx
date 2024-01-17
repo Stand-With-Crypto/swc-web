@@ -5,7 +5,6 @@ import { z } from 'zod'
 import { useRouter } from 'next/navigation'
 
 import { Button } from '@/components/ui/button'
-import { useTabsContext } from '@/hooks/useTabs'
 import { TabNames } from '@/components/app/userActionFormCallCongressperson/userActionFormCallCongressperson.types'
 import { UserActionFormCallCongresspersonProps } from '@/components/app/userActionFormCallCongressperson'
 import { getGoogleCivicOfficialByDTSIName } from '@/utils/shared/googleCivicInfo'
@@ -20,12 +19,16 @@ import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { UserActionType } from '@prisma/client'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
+import { UseTabsReturn } from '@/hooks/useTabs'
 
 export function SuggestedScript({
   user,
   congressPersonData: { dtsiPerson, civicData, addressSchema },
-}: Pick<UserActionFormCallCongresspersonProps, 'user' | 'congressPersonData'>) {
-  const { gotoTab } = useTabsContext<TabNames>()
+  gotoTab,
+}: Pick<
+  UserActionFormCallCongresspersonProps,
+  'user' | 'congressPersonData' | keyof UseTabsReturn<TabNames>
+>) {
   const router = useRouter()
 
   const congresspersonFullName = React.useMemo(() => {
