@@ -48,7 +48,7 @@ export async function maybeCreateMergeAlertAfterEmailVerification(userEmailAddre
   logger.info(
     `found ${
       existingMatchUserIds.length
-    } other users with existing matches: ${existingMatchUserIds.join(`, `)}}`,
+    } other users with existing matches: ${existingMatchUserIds.join(`, `)}`,
   )
   const mayBeMatchUsersWithoutExistingMatch = maybeMatchUsers.filter(
     x => !existingMatchUserIds.includes(x.id),
