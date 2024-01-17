@@ -76,6 +76,7 @@ export function SuggestedScript({
     const result = await triggerServerActionForForm(
       {
         formName: 'User Action Form Call Congressperson',
+        onError: toastGenericError,
         analyticsProps: {
           ...convertAddressToAnalyticsProperties(data.address),
           'Campaign Name': data.campaignName,

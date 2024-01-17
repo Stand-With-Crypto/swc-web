@@ -59,8 +59,6 @@ type TabContentProps = Pick<
 function TabContent({ user, congressPersonData, onFindCongressperson }: TabContentProps) {
   const { currentTab, onTabNotFound } = useTabsContext<TabNames>()
 
-  // console.log({ congressPersonData })
-
   switch (currentTab) {
     case TabNames.INTRO:
       return <Intro />
