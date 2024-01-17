@@ -2,7 +2,7 @@
 import { appRouterGetAuthUser } from '@/utils/server/appRouterGetAuthUser'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
-import { getServerPeopleAnalytics } from '@/utils/server/severAnalytics'
+import { getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { zodUpdateUserProfileFormAction } from '@/validation/forms/zodUpdateUserProfile'
 import { UserEmailAddressSource } from '@prisma/client'

@@ -9,7 +9,7 @@ import { UserActionType, UserEmailAddressSource } from '@prisma/client'
 import { subDays } from 'date-fns'
 import 'server-only'
 import { z } from 'zod'
-import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/severAnalytics'
+import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import {
   mapLocalUserToUserDatabaseFields,
   parseLocalUserFromCookies,
@@ -47,12 +47,10 @@ export async function actionCreateUserActionEmailCongressperson(
         ...mapLocalUserToUserDatabaseFields(localUser),
       },
     }))
-
-  if (!userMatch.user && localUser?.persisted) {
-    const peopleAnalytics = getServerPeopleAnalytics({ localUser: localUser, sessionId: sessionId })
+  const peopleAnalytics = getServerPeopleAnalytics({ ...userMatch, localUser })
+  if (localUser) {
     peopleAnalytics.setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
   }
-
   logger.info('fetched/created user')
   const campaignName = validatedFields.data.campaignName
   const actionType = UserActionType.EMAIL
@@ -74,6 +72,7 @@ export async function actionCreateUserActionEmailCongressperson(
       actionType,
       campaignName,
       reason: 'Too Many Recent',
+      creationMethod: 'On Site',
       ...convertAddressToAnalyticsProperties(validatedFields.data.address),
     })
     Sentry.captureMessage(
@@ -123,9 +122,9 @@ export async function actionCreateUserActionEmailCongressperson(
   analytics.trackUserActionCreated({
     actionType,
     campaignName,
+    creationMethod: 'On Site',
     ...convertAddressToAnalyticsProperties(validatedFields.data.address),
   })
-  const peopleAnalytics = getServerPeopleAnalytics({ ...userMatch, localUser })
   peopleAnalytics.set({
     ...convertAddressToAnalyticsProperties(validatedFields.data.address),
     // https://docs.mixpanel.com/docs/data-structure/user-profiles#reserved-user-properties

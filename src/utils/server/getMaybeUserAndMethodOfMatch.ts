@@ -48,7 +48,7 @@ export async function getMaybeUserAndMethodOfMatch<
   if (authUser) {
     if (!user) {
       throw new Error(
-        `unexpectedly didn't return a user for an authenticated address ${authUser.address}}`,
+        `unexpectedly didn't return a user for an authenticated address ${authUser.address}`,
       )
     }
     const authedCryptoAddress = userWithoutReturnTypes!.userCryptoAddresses.find(

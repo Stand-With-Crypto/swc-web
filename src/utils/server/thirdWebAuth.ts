@@ -5,7 +5,7 @@ import { NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN } from '@/utils/shared/sharedEnv'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getUserSessionIdOnPageRouter } from '@/utils/server/serverUserSessionId'
 import { SupportedUserCryptoNetwork } from '@prisma/client'
-import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/severAnalytics'
+import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import {
   mapLocalUserToUserDatabaseFields,
   parseLocalUserFromCookiesForPageRouter,

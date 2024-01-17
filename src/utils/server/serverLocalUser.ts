@@ -32,6 +32,26 @@ const zodServerLocalUser = object({
   }),
 })
 
+// needed to reuse logic from our analytics library when we're interacting with third party webhooks/api endpoints that wont have the site headers
+export function getLocalUserFromUser(user: User): ServerLocalUser {
+  return {
+    persisted: {
+      initialSearchParams: {
+        utm_source: user.acquisitionSource,
+        utm_medium: user.acquisitionMedium,
+        utm_campaign: user.acquisitionCampaign,
+      },
+      initialReferer: '',
+      datetimeFirstSeen: user.datetimeCreated.toISOString(),
+    },
+    currentSession: {
+      datetimeOnLoad: user.datetimeCreated.toISOString(),
+      refererOnLoad: '',
+      searchParamsOnLoad: {},
+    },
+  }
+}
+
 export function mapLocalUserToUserDatabaseFields(
   localUser: ServerLocalUser | null,
 ): Pick<
