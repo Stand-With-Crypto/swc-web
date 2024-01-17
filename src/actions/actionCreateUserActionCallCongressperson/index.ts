@@ -25,6 +25,12 @@ export type CreateActionCallCongresspersonInput = z.infer<
   typeof createActionCallCongresspersonInputValidationSchema
 >
 
+interface SharedDependencies {
+  localUser: ReturnType<typeof parseLocalUserFromCookies>
+  sessionId: ReturnType<typeof getUserSessionId>
+  analytics?: ReturnType<typeof getServerAnalytics>
+}
+
 const logger = getLogger(`actionCreateUserActionCallCongressperson`)
 export async function actionCreateUserActionCallCongressperson(
   input: CreateActionCallCongresspersonInput,
@@ -38,25 +44,40 @@ export async function actionCreateUserActionCallCongressperson(
     }
   }
 
+  const sharedDependencies: SharedDependencies = {
+    localUser: parseLocalUserFromCookies(),
+    sessionId: getUserSessionId(),
+  }
+
   const userMatch = await getMaybeUserAndMethodOfMatch({
     include: { primaryUserCryptoAddress: true },
   })
   const user = await getOrCreateUser(userMatch)
-  if (!user && !userMatch?.user) {
+  if (!user) {
     throw new Error("Couldn't create user")
   }
+  sharedDependencies.analytics = getServerAnalytics({
+    ...userMatch,
+    localUser: sharedDependencies.localUser,
+  })
 
   const recentUserAction = await getRecentUserActionByUserId(user.id)
   if (recentUserAction) {
-    logSpamActionSubmissions(userMatch, {
+    logSpamActionSubmissions({
       validatedInput,
       userAction: recentUserAction,
       userId: user.id,
+      sharedDependencies,
     })
     return { user, userAction: recentUserAction }
   }
 
-  const userAction = await createAction({ user, validatedInput: validatedInput.data, userMatch })
+  const userAction = await createAction({
+    user,
+    validatedInput: validatedInput.data,
+    userMatch,
+    sharedDependencies,
+  })
 
   // TODO: Mint "Call" NFT
 
@@ -82,7 +103,7 @@ async function getOrCreateUser(userMatch: UserAndMethodOfMatch) {
   return createdUser
 }
 
-async function getRecentUserActionByUserId(userId: User['id']): Promise<UserAction | null> {
+async function getRecentUserActionByUserId(userId: User['id']) {
   return prismaClient.userAction.findFirst({
     where: {
       datetimeCreated: {
@@ -98,24 +119,20 @@ async function getRecentUserActionByUserId(userId: User['id']): Promise<UserActi
   })
 }
 
-function logSpamActionSubmissions(
-  userMatch: UserAndMethodOfMatch,
-  {
-    validatedInput,
-    userAction,
-    userId,
-  }: {
-    validatedInput: z.SafeParseSuccess<
-      z.infer<typeof createActionCallCongresspersonInputValidationSchema>
-    >
-    userAction: UserAction
-    userId: User['id']
-  },
-) {
-  const localUser = parseLocalUserFromCookies()
-  const analytics = getServerAnalytics({ ...userMatch, localUser })
-
-  analytics.trackUserActionCreatedIgnored({
+function logSpamActionSubmissions({
+  validatedInput,
+  userAction,
+  userId,
+  sharedDependencies,
+}: {
+  validatedInput: z.SafeParseSuccess<
+    z.infer<typeof createActionCallCongresspersonInputValidationSchema>
+  >
+  userAction: UserAction
+  userId: User['id']
+  sharedDependencies: SharedDependencies
+}) {
+  sharedDependencies.analytics?.trackUserActionCreatedIgnored({
     actionType: UserActionType.CALL,
     campaignName: UserActionCallCampaignName.DEFAULT,
     reason: 'Too Many Recent',
@@ -133,21 +150,19 @@ async function createAction({
   user,
   validatedInput,
   userMatch,
+  sharedDependencies,
 }: {
   user: User
   validatedInput: z.infer<typeof createActionCallCongresspersonInputValidationSchema>
   userMatch: UserAndMethodOfMatch
+  sharedDependencies: SharedDependencies
 }) {
-  const sessionId = getUserSessionId()
-  const localUser = parseLocalUserFromCookies()
-  const analytics = getServerAnalytics({ ...userMatch, localUser })
-
   const userMatcher =
     'userCryptoAddress' in userMatch
       ? {
           userCryptoAddress: { connect: { id: userMatch.userCryptoAddress.id } },
         }
-      : { userSession: { connect: { id: sessionId } } }
+      : { userSession: { connect: { id: sharedDependencies.sessionId } } }
 
   const userAction = await prismaClient.userAction.create({
     data: {
@@ -168,7 +183,7 @@ async function createAction({
   })
 
   logger.info('created user action')
-  analytics.trackUserActionCreated({
+  sharedDependencies.analytics?.trackUserActionCreated({
     actionType: UserActionType.CALL,
     campaignName: validatedInput.campaignName,
   })
