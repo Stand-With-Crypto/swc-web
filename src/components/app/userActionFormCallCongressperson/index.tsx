@@ -11,7 +11,7 @@ import { Address } from './tabs/address'
 import { SuggestedScript } from './tabs/suggestedScript'
 import { SuccessMessage } from './tabs/successMessage'
 
-const TABS: Tab[] = [
+const TABS: Tab<UserActionFormCallCongresspersonTabsContext>[] = [
   {
     id: TabNames.INTRO,
     component: Intro,
@@ -38,7 +38,6 @@ interface OnFindCongressPersonPayload {
 export interface UserActionFormCallCongresspersonTabsContext {
   user: GetUserFullProfileInfoResponse['user']
   onFindCongressperson: (payload: OnFindCongressPersonPayload) => void
-  onCompleted: () => void
   congressPersonData?: OnFindCongressPersonPayload
 }
 
@@ -47,10 +46,9 @@ export function UserActionFormCallCongressperson({
 }: {
   user: GetUserFullProfileInfoResponse['user']
 }) {
-  const [congressPersonData, setCongresspersonData] =
-    React.useState<OnFindCongressPersonPayload | null>(null)
+  const [congressPersonData, setCongresspersonData] = React.useState<OnFindCongressPersonPayload>()
 
-  const { component } = useTabs({
+  const { component } = useTabs<UserActionFormCallCongresspersonTabsContext>({
     tabs: TABS,
     initialTabId: TabNames.INTRO,
     tabAdditionalContext: {

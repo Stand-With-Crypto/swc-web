@@ -31,13 +31,15 @@ import {
   FORM_NAME,
 } from './formConfig'
 
-export function Address() {
+export function Address({
+  user,
+  onFindCongressperson,
+}: UserActionFormCallCongresspersonTabsContext) {
   const urls = useIntlUrls()
-  const { gotoTab, tabAdditionalContext } =
-    useTabsContext<UserActionFormCallCongresspersonTabsContext>()
+  const { gotoTab } = useTabsContext()
 
   const form = useForm<FindRepresentativeCallFormValues>({
-    defaultValues: getDefaultValues({ user: tabAdditionalContext?.user }),
+    defaultValues: getDefaultValues({ user }),
     resolver: zodResolver(findRepresentativeCallFormValidationSchema),
   })
 
@@ -66,10 +68,10 @@ export function Address() {
         handleNotFoundCongressperson(notFoundReason)
       }
 
-      tabAdditionalContext?.onFindCongressperson({ dtsiPerson, civicData })
+      onFindCongressperson({ dtsiPerson, civicData })
       gotoTab(TabNames.SUGGESTED_SCRIPT)
     },
-    [handleNotFoundCongressperson, gotoTab, tabAdditionalContext],
+    [handleNotFoundCongressperson, gotoTab, onFindCongressperson],
   )
 
   return (

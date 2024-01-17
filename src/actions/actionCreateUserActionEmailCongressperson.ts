@@ -15,6 +15,7 @@ import {
   parseLocalUserFromCookies,
 } from '@/utils/server/serverLocalUser'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
+import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 
 const logger = getLogger(`actionCreateUserActionEmailCongressperson`)
 
@@ -34,6 +35,7 @@ export async function actionCreateUserActionEmailCongressperson(
     }
   }
   logger.info('validated fields')
+
   const localUser = parseLocalUserFromCookies()
   const analytics = getServerAnalytics({ ...userMatch, localUser })
   const user =
@@ -45,6 +47,12 @@ export async function actionCreateUserActionEmailCongressperson(
         ...mapLocalUserToUserDatabaseFields(localUser),
       },
     }))
+
+  if (!userMatch.user && localUser?.persisted) {
+    const peopleAnalytics = getServerPeopleAnalytics({ localUser: localUser, sessionId: sessionId })
+    peopleAnalytics.setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
+  }
+
   logger.info('fetched/created user')
   const campaignName = validatedFields.data.campaignName
   const actionType = UserActionType.EMAIL

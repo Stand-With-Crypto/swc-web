@@ -20,15 +20,19 @@ export function UserActionFormCallCongresspersonDialog({
   defaultOpen?: boolean
 }) {
   const dialogProps = useDialog(defaultOpen)
-  const fetchUser = useApiResponseForUserFullProfileInfo()
-  const { user } = fetchUser.data || { user: null }
+  const { data, isLoading } = useApiResponseForUserFullProfileInfo()
+  const { user } = data ?? { user: null }
 
   return (
     <Dialog {...dialogProps}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="max-w-3xl p-0">
         <Suspense fallback={<UserActionFormCallCongresspersonSkeleton />}>
-          <LazyUserActionFormCallCongressperson {...formProps} user={user} />
+          {isLoading ? (
+            <UserActionFormCallCongresspersonSkeleton />
+          ) : (
+            <LazyUserActionFormCallCongressperson {...formProps} user={user} />
+          )}
         </Suspense>
       </DialogContent>
     </Dialog>

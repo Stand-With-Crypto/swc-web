@@ -1,30 +1,26 @@
 import React from 'react'
 import * as Sentry from '@sentry/nextjs'
-import { once } from 'lodash'
 
-export interface Tab {
+export interface Tab<TabProps = object> {
   id: string
-  component: React.ComponentType
+  component: React.ComponentType<TabProps>
 }
 
-export interface UseTabsProps<T = any> {
-  tabs: Tab[]
+export interface UseTabsProps<TabProps = object> {
+  tabs: Tab<TabProps>[]
   initialTabId?: string | (() => string)
-  tabAdditionalContext?: T
+  tabAdditionalContext?: TabProps
 }
 
-interface UseTabsContextValue<T = any> {
+interface UseTabsContextValue {
   currentTab: string
   gotoTab: (tabId: string) => void
-  tabAdditionalContext?: T
 }
 
-const createUseTabsContext = once(<T,>() =>
-  React.createContext<UseTabsContextValue<T> | null>(null),
-)
+const UseTabsContext = React.createContext<UseTabsContextValue | null>(null)
 
-export function useTabsContext<T = any>() {
-  const context = React.useContext(createUseTabsContext<T>())
+export function useTabsContext() {
+  const context = React.useContext(UseTabsContext)
   if (!context) {
     const err = new Error('useTabsContext must be used within a useTabs component')
     Sentry.captureException(err)
@@ -33,7 +29,11 @@ export function useTabsContext<T = any>() {
   return context
 }
 
-export function useTabs<T = any>({ tabs, initialTabId, tabAdditionalContext }: UseTabsProps<T>) {
+export function useTabs<TabProps = object>({
+  tabs,
+  initialTabId,
+  tabAdditionalContext = {} as TabProps,
+}: UseTabsProps<TabProps>) {
   if (!tabs.length) {
     const err = new Error('useTabs: tabs must not be empty')
     Sentry.captureException(err)
@@ -60,20 +60,20 @@ export function useTabs<T = any>({ tabs, initialTabId, tabAdditionalContext }: U
     throw err
   }
 
-  const UseTabsContext = createUseTabsContext<T>()
   return {
     currentTab,
     gotoTab,
     component: (
-      <UseTabsContext.Provider
-        value={{
-          currentTab,
-          gotoTab,
-          tabAdditionalContext,
-        }}
-      >
-        <CurrentComponent />
-      </UseTabsContext.Provider>
+      <>
+        <UseTabsContext.Provider
+          value={{
+            currentTab,
+            gotoTab,
+          }}
+        >
+          <CurrentComponent {...(tabAdditionalContext as TabProps & JSX.IntrinsicAttributes)} />
+        </UseTabsContext.Provider>
+      </>
     ),
   }
 }

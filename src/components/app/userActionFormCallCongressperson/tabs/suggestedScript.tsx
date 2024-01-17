@@ -14,11 +14,12 @@ import { actionCreateUserActionCallCongressperson } from '@/actions/actionCreate
 import { UserActionCallCampaignName } from '@/utils/shared/userActionCampaigns'
 import { createActionCallCongresspersonInputValidationSchema } from '@/actions/actionCreateUserActionCallCongressperson/inputValidationSchema'
 
-export function SuggestedScript() {
-  const { gotoTab, tabAdditionalContext } =
-    useTabsContext<UserActionFormCallCongresspersonTabsContext>()
+export function SuggestedScript({
+  user,
+  congressPersonData,
+}: UserActionFormCallCongresspersonTabsContext) {
+  const { gotoTab } = useTabsContext()
 
-  const { user, congressPersonData } = tabAdditionalContext ?? {}
   const { dtsiPerson, civicData } = congressPersonData ?? {}
 
   const congresspersonFullName = React.useMemo(() => {

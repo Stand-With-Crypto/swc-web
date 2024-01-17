@@ -12,7 +12,7 @@ import { getLogger } from '@/utils/shared/logger'
 import { User, UserAction, UserActionType } from '@prisma/client'
 import { subDays } from 'date-fns'
 import { z } from 'zod'
-import { getServerAnalytics } from '@/utils/server/severAnalytics'
+import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/severAnalytics'
 import { UserActionCallCampaignName } from '@/utils/shared/userActionCampaigns'
 
 import { createActionCallCongresspersonInputValidationSchema } from './inputValidationSchema'
@@ -20,6 +20,7 @@ import {
   mapLocalUserToUserDatabaseFields,
   parseLocalUserFromCookies,
 } from '@/utils/server/serverLocalUser'
+import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 
 export type CreateActionCallCongresspersonInput = z.infer<
   typeof createActionCallCongresspersonInputValidationSchema
@@ -52,7 +53,7 @@ export async function actionCreateUserActionCallCongressperson(
   const userMatch = await getMaybeUserAndMethodOfMatch({
     include: { primaryUserCryptoAddress: true },
   })
-  const user = await getOrCreateUser(userMatch)
+  const user = await getOrCreateUser(userMatch, sharedDependencies)
   if (!user) {
     throw new Error("Couldn't create user")
   }
@@ -84,14 +85,16 @@ export async function actionCreateUserActionCallCongressperson(
   return { user, userAction }
 }
 
-async function getOrCreateUser(userMatch: UserAndMethodOfMatch) {
+async function getOrCreateUser(
+  userMatch: UserAndMethodOfMatch,
+  sharedDependencies: SharedDependencies,
+) {
   if (userMatch?.user) {
     logger.info('fetched user')
     return userMatch.user
   }
 
-  const localUser = parseLocalUserFromCookies()
-  const sessionId = getUserSessionId()
+  const { localUser, sessionId } = sharedDependencies
   const createdUser = await prismaClient.user.create({
     data: {
       isPubliclyVisible: false,
@@ -100,6 +103,12 @@ async function getOrCreateUser(userMatch: UserAndMethodOfMatch) {
     },
   })
   logger.info('created user')
+
+  if (localUser?.persisted) {
+    const peopleAnalytics = getServerPeopleAnalytics({ localUser: localUser, sessionId: sessionId })
+    peopleAnalytics.setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
+  }
+
   return createdUser
 }
 
@@ -157,19 +166,16 @@ async function createAction({
   userMatch: UserAndMethodOfMatch
   sharedDependencies: SharedDependencies
 }) {
-  const userMatcher =
-    'userCryptoAddress' in userMatch
-      ? {
-          userCryptoAddress: { connect: { id: userMatch.userCryptoAddress.id } },
-        }
-      : { userSession: { connect: { id: sharedDependencies.sessionId } } }
-
   const userAction = await prismaClient.userAction.create({
     data: {
       user: { connect: { id: user.id } },
       actionType: UserActionType.CALL,
       campaignName: validatedInput.campaignName,
-      ...userMatcher,
+      ...('userCryptoAddress' in userMatch
+        ? {
+            userCryptoAddress: { connect: { id: userMatch.userCryptoAddress.id } },
+          }
+        : { userSession: { connect: { id: sharedDependencies.sessionId } } }),
       userActionCall: {
         create: {
           recipientDtsiSlug: validatedInput.dtsiSlug,
