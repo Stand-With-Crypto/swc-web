@@ -20,7 +20,8 @@ if git diff --name-only HEAD^ | grep -q 'prisma/schema.prisma'; then
         wait
         echo "frontend assets built"
     else
-        echo "Skipping deploy because this preview branch is pointing at the testing db which does not have the schema changes."
+        echo "Skipping deploy because this preview branch is pointing at the testing db which does not have the schema changes. The failure below is expected and is not an issue."
+        exit 0;
     fi
 else  
     echo "No schema changes, building app"
