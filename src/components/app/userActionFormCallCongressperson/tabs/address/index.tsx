@@ -3,6 +3,8 @@
 import React from 'react'
 import { SubmitHandler, useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import * as Sentry from '@sentry/nextjs'
+import useSWR from 'swr'
 
 import { Button } from '@/components/ui/button'
 import { useTabsContext } from '@/hooks/useTabs'
@@ -23,7 +25,6 @@ import type { UserActionFormCallCongresspersonProps } from '@/components/app/use
 import { InternalLink } from '@/components/ui/link'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { getGoogleCivicDataFromAddress } from '@/utils/shared/googleCivicInfo'
-import useSWR from 'swr'
 
 import {
   findRepresentativeCallFormValidationSchema,
@@ -32,6 +33,11 @@ import {
   FORM_NAME,
 } from './formConfig'
 import { GENERIC_ERROR_TITLE } from '@/utils/web/errorUtils'
+import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
+import {
+  catchUnexpectedServerErrorAndTriggerToast,
+  toastGenericError,
+} from '@/utils/web/toastUtils'
 
 interface AddressProps
   extends Pick<UserActionFormCallCongresspersonProps, 'user' | 'onFindCongressperson'> {
@@ -58,13 +64,13 @@ export function Address({ user, onFindCongressperson, congressPersonData }: Addr
       return
     }
 
-    const { dtsiPerson, civicData } = liveCongressPersonData
+    const { dtsiPerson } = liveCongressPersonData
     if (!dtsiPerson || 'notFoundReason' in dtsiPerson) {
       const { notFoundReason } = dtsiPerson
       return handleNotFoundCongressperson(notFoundReason)
     }
 
-    onFindCongressperson({ dtsiPerson, civicData })
+    onFindCongressperson({ ...liveCongressPersonData, dtsiPerson })
   }, [liveCongressPersonData, onFindCongressperson])
 
   const handleNotFoundCongressperson = React.useCallback(
@@ -159,7 +165,8 @@ function useCongresspersonData({ address }: FindRepresentativeCallFormValues) {
   return useSWR(address ? `useGetDTSIPeopleFromAddress-${address.description}` : null, async () => {
     const dtsiPerson = await getDTSIPeopleFromAddress(address.description)
     const civicData = await getGoogleCivicDataFromAddress(address.description)
+    const addressSchema = await convertGooglePlaceAutoPredictionToAddressSchema(address)
 
-    return { dtsiPerson, civicData }
+    return { dtsiPerson, civicData, addressSchema }
   })
 }

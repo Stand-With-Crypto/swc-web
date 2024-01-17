@@ -11,10 +11,13 @@ import { Intro } from './tabs/intro'
 import { Address } from './tabs/address'
 import { SuggestedScript } from './tabs/suggestedScript'
 import { SuccessMessage } from './tabs/successMessage'
+import { z } from 'zod'
+import { zodAddress } from '@/validation/fields/zodAddress'
 
 interface OnFindCongressPersonPayload {
   dtsiPerson: DTSIPeopleByCongressionalDistrictQueryResult
   civicData: GoogleCivicInfoResponse
+  addressSchema: z.infer<typeof zodAddress>
 }
 
 export interface UserActionFormCallCongresspersonProps {
@@ -55,6 +58,8 @@ type TabContentProps = Pick<
 
 function TabContent({ user, congressPersonData, onFindCongressperson }: TabContentProps) {
   const { currentTab, onTabNotFound } = useTabsContext<TabNames>()
+
+  // console.log({ congressPersonData })
 
   switch (currentTab) {
     case TabNames.INTRO:

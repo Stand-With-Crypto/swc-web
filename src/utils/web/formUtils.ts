@@ -27,14 +27,14 @@ export async function triggerServerActionForForm<
     form,
     formName,
     analyticsProps,
-  }: { form: F; formName: string; analyticsProps?: AnalyticProperties },
+  }: { form?: F; formName: string; analyticsProps?: AnalyticProperties },
   fn: Fn,
 ) {
   trackFormSubmitted(formName, analyticsProps)
   const response = await fn().catch(error => {
     if (!_.isError(error)) {
       trackFormSubmitErrored(formName, { 'Error Type': 'Unknown', ...analyticsProps })
-      form.setError(GENERIC_FORM_ERROR_KEY, { message: error })
+      form?.setError(GENERIC_FORM_ERROR_KEY, { message: error })
       Sentry.captureMessage(`triggerServerActionForForm returned unexpected form response`, {
         tags: { formName, domain: 'triggerServerActionForForm', path: 'Unexpected' },
         extra: { analyticsProps, error, formName },
@@ -42,7 +42,7 @@ export async function triggerServerActionForForm<
     } else if (error instanceof FetchReqError) {
       const formattedErrorStatus = formatErrorStatus(error.response.status)
       trackFormSubmitErrored(formName, { 'Error Type': error.response.status, ...analyticsProps })
-      form.setError(GENERIC_FORM_ERROR_KEY, { message: formattedErrorStatus })
+      form?.setError(GENERIC_FORM_ERROR_KEY, { message: formattedErrorStatus })
       Sentry.captureException(error, {
         fingerprint: [formName, 'FetchReqError', `${error.response.status}`],
         tags: { formName, domain: 'triggerServerActionForForm', path: 'FetchReqError' },
@@ -50,7 +50,7 @@ export async function triggerServerActionForForm<
       })
     } else {
       trackFormSubmitErrored(formName, { 'Error Type': 'Unexpected', ...analyticsProps })
-      form.setError(GENERIC_FORM_ERROR_KEY, { message: error.message })
+      form?.setError(GENERIC_FORM_ERROR_KEY, { message: error.message })
       Sentry.captureException(error, {
         fingerprint: [formName, 'Error', error.message],
         tags: { formName, domain: 'triggerServerActionForForm', path: 'Error' },
@@ -65,7 +65,7 @@ export async function triggerServerActionForForm<
   if ('errors' in response) {
     trackFormSubmitErrored(formName, { 'Error Type': 'Validation', ...analyticsProps })
     Object.entries(response.errors).forEach(([key, val]) => {
-      form.setError(key, {
+      form?.setError(key, {
         // TODO the right way of formatting multiple errors that return
         message: val.join('. '),
       })

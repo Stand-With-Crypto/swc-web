@@ -1,6 +1,8 @@
 import React from 'react'
 import * as Sentry from '@sentry/nextjs'
 import _ from 'lodash'
+import { z } from 'zod'
+import { useRouter } from 'next/navigation'
 
 import { Button } from '@/components/ui/button'
 import { useTabsContext } from '@/hooks/useTabs'
@@ -14,22 +16,24 @@ import { createActionCallCongresspersonInputValidationSchema } from '@/actions/a
 import { toastGenericError } from '@/utils/web/toastUtils'
 
 import { UserActionFormCallCongresspersonLayout } from './layout'
+import { triggerServerActionForForm } from '@/utils/web/formUtils'
+import { UserActionType } from '@prisma/client'
+import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 
 export function SuggestedScript({
   user,
-  congressPersonData: { dtsiPerson, civicData },
+  congressPersonData: { dtsiPerson, civicData, addressSchema },
 }: Pick<UserActionFormCallCongresspersonProps, 'user' | 'congressPersonData'>) {
   const { gotoTab } = useTabsContext<TabNames>()
+  const router = useRouter()
 
   const congresspersonFullName = React.useMemo(() => {
     return `${dtsiPerson.firstName} ${dtsiPerson.lastName}`
   }, [])
 
   const parsedAddress = React.useMemo(() => {
-    const { normalizedInput } = civicData
-
-    return `${normalizedInput.city}, ${normalizedInput.state}`
-  }, [])
+    return `${addressSchema.locality}, ${addressSchema.administrativeAreaLevel1}`
+  }, [civicData])
 
   const phoneNumber = React.useMemo(() => {
     const official = getGoogleCivicOfficialByDTSIName(
@@ -48,10 +52,11 @@ export function SuggestedScript({
   }, [])
 
   const handleCallAction = React.useCallback(async () => {
-    const input = {
+    const input: z.infer<typeof createActionCallCongresspersonInputValidationSchema> = {
       campaignName: UserActionCallCampaignName.DEFAULT,
       dtsiSlug: dtsiPerson.slug,
-      phoneNumber,
+      phoneNumber: phoneNumber!,
+      address: addressSchema,
     }
     const validatedInput = createActionCallCongresspersonInputValidationSchema.safeParse(input)
 
@@ -67,16 +72,24 @@ export function SuggestedScript({
       return
     }
 
-    await actionCreateUserActionCallCongressperson(validatedInput.data).catch(e => {
-      Sentry.captureException(e, {
-        user: { id: user?.id },
-        extra: {
-          input,
+    const { data } = validatedInput
+    const result = await triggerServerActionForForm(
+      {
+        formName: 'User Action Form Call Congressperson',
+        analyticsProps: {
+          ...convertAddressToAnalyticsProperties(data.address),
+          'Campaign Name': data.campaignName,
+          'User Action Type': UserActionType.CALL,
+          'DTSI Slug': data.dtsiSlug,
         },
-      })
-    })
+      },
+      () => actionCreateUserActionCallCongressperson(data),
+    )
 
-    gotoTab(TabNames.SUCCESS_MESSAGE)
+    if (result.status === 'success') {
+      router.refresh()
+      gotoTab(TabNames.SUCCESS_MESSAGE)
+    }
   }, [phoneNumber, user, dtsiPerson])
 
   return (

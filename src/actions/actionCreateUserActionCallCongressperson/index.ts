@@ -12,7 +12,7 @@ import { getLogger } from '@/utils/shared/logger'
 import { User, UserAction, UserActionType } from '@prisma/client'
 import { subDays } from 'date-fns'
 import { z } from 'zod'
-import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/severAnalytics'
+import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import { UserActionCallCampaignName } from '@/utils/shared/userActionCampaigns'
 
 import { createActionCallCongresspersonInputValidationSchema } from './inputValidationSchema'
@@ -21,6 +21,7 @@ import {
   parseLocalUserFromCookies,
 } from '@/utils/server/serverLocalUser'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
+import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 
 export type CreateActionCallCongresspersonInput = z.infer<
   typeof createActionCallCongresspersonInputValidationSchema
@@ -30,6 +31,7 @@ interface SharedDependencies {
   localUser: ReturnType<typeof parseLocalUserFromCookies>
   sessionId: ReturnType<typeof getUserSessionId>
   analytics?: ReturnType<typeof getServerAnalytics>
+  peopleAnalytics?: ReturnType<typeof getServerPeopleAnalytics>
 }
 
 const logger = getLogger(`actionCreateUserActionCallCongressperson`)
@@ -53,7 +55,12 @@ export async function actionCreateUserActionCallCongressperson(
   const userMatch = await getMaybeUserAndMethodOfMatch({
     include: { primaryUserCryptoAddress: true },
   })
+  sharedDependencies.peopleAnalytics = getServerPeopleAnalytics({
+    localUser: sharedDependencies.localUser,
+    ...userMatch,
+  })
   const user = await getOrCreateUser(userMatch, sharedDependencies)
+
   if (!user) {
     throw new Error("Couldn't create user")
   }
@@ -73,7 +80,7 @@ export async function actionCreateUserActionCallCongressperson(
     return { user, userAction: recentUserAction }
   }
 
-  const userAction = await createAction({
+  const { userAction, updatedUser } = await createActionAndUpdateUser({
     user,
     validatedInput: validatedInput.data,
     userMatch,
@@ -82,7 +89,7 @@ export async function actionCreateUserActionCallCongressperson(
 
   // TODO: Mint "Call" NFT
 
-  return { user, userAction }
+  return { userAction, user: updatedUser }
 }
 
 async function getOrCreateUser(
@@ -105,8 +112,9 @@ async function getOrCreateUser(
   logger.info('created user')
 
   if (localUser?.persisted) {
-    const peopleAnalytics = getServerPeopleAnalytics({ localUser: localUser, sessionId: sessionId })
-    peopleAnalytics.setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
+    sharedDependencies.peopleAnalytics?.setOnce(
+      mapPersistedLocalUserToAnalyticsProperties(localUser.persisted),
+    )
   }
 
   return createdUser
@@ -145,6 +153,7 @@ function logSpamActionSubmissions({
     actionType: UserActionType.CALL,
     campaignName: UserActionCallCampaignName.DEFAULT,
     reason: 'Too Many Recent',
+    ...convertAddressToAnalyticsProperties(validatedInput.data.address),
   })
   Sentry.captureMessage(
     `duplicate ${UserActionType.CALL} user action for campaign ${UserActionCallCampaignName.DEFAULT} submitted`,
@@ -155,7 +164,7 @@ function logSpamActionSubmissions({
   )
 }
 
-async function createAction({
+async function createActionAndUpdateUser({
   user,
   validatedInput,
   userMatch,
@@ -188,11 +197,32 @@ async function createAction({
     },
   })
 
-  logger.info('created user action')
+  const address = await prismaClient.address.upsert({
+    where: { googlePlaceId: validatedInput.address.googlePlaceId },
+    create: validatedInput.address,
+    update: validatedInput.address,
+  })
+
+  const updatedUser = await prismaClient.user.update({
+    where: { id: user.id },
+    data: {
+      address: {
+        connect: {
+          id: address.id,
+        },
+      },
+    },
+  })
+  logger.info('created user action and updated user')
+
   sharedDependencies.analytics?.trackUserActionCreated({
     actionType: UserActionType.CALL,
     campaignName: validatedInput.campaignName,
+    ...convertAddressToAnalyticsProperties(validatedInput.address),
+  })
+  sharedDependencies.peopleAnalytics?.set({
+    ...convertAddressToAnalyticsProperties(validatedInput.address),
   })
 
-  return userAction
+  return { userAction, updatedUser }
 }
