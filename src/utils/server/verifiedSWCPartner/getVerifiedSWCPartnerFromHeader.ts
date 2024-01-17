@@ -7,6 +7,7 @@ import * as Sentry from '@sentry/nextjs'
 import { headers } from 'next/headers'
 import crypto from 'crypto'
 
+// Why not just use ===? See https://stackoverflow.com/a/31096242
 const areEqual = (a: string, b: string) => {
   try {
     return crypto.timingSafeEqual(Buffer.from(a), Buffer.from(b))
