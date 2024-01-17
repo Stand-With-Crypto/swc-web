@@ -16,6 +16,10 @@ import { getServerAnalytics } from '@/utils/server/severAnalytics'
 import { UserActionCallCampaignName } from '@/utils/shared/userActionCampaigns'
 
 import { createActionCallCongresspersonInputValidationSchema } from './inputValidationSchema'
+import {
+  mapLocalUserToUserDatabaseFields,
+  parseLocalUserFromCookies,
+} from '@/utils/server/serverLocalUser'
 
 export type CreateActionCallCongresspersonInput = z.infer<
   typeof createActionCallCongresspersonInputValidationSchema
@@ -34,7 +38,9 @@ export async function actionCreateUserActionCallCongressperson(
     }
   }
 
-  const userMatch = await getMaybeUserAndMethodOfMatch({ include: { userCryptoAddress: true } })
+  const userMatch = await getMaybeUserAndMethodOfMatch({
+    include: { primaryUserCryptoAddress: true },
+  })
   const user = await getOrCreateUser(userMatch)
   if (!user && !userMatch?.user) {
     throw new Error("Couldn't create user")
@@ -63,13 +69,14 @@ async function getOrCreateUser(userMatch: UserAndMethodOfMatch) {
     return userMatch.user
   }
 
+  const localUser = parseLocalUserFromCookies()
   const sessionId = getUserSessionId()
   const createdUser = await prismaClient.user.create({
     data: {
       isPubliclyVisible: false,
       userSessions: { create: { id: sessionId } },
+      ...mapLocalUserToUserDatabaseFields(localUser),
     },
-    include: { userCryptoAddress: true },
   })
   logger.info('created user')
   return createdUser
@@ -105,7 +112,8 @@ function logSpamActionSubmissions(
     userId: User['id']
   },
 ) {
-  const analytics = getServerAnalytics(userMatch)
+  const localUser = parseLocalUserFromCookies()
+  const analytics = getServerAnalytics({ ...userMatch, localUser })
 
   analytics.trackUserActionCreatedIgnored({
     actionType: UserActionType.CALL,
@@ -131,7 +139,8 @@ async function createAction({
   userMatch: UserAndMethodOfMatch
 }) {
   const sessionId = getUserSessionId()
-  const analytics = getServerAnalytics(userMatch)
+  const localUser = parseLocalUserFromCookies()
+  const analytics = getServerAnalytics({ ...userMatch, localUser })
 
   const userMatcher =
     'userCryptoAddress' in userMatch
