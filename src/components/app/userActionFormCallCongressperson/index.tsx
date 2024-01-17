@@ -11,7 +11,7 @@ import { Address } from './tabs/address'
 import { SuggestedScript } from './tabs/suggestedScript'
 import { SuccessMessage } from './tabs/successMessage'
 
-const TABS: Tab<UserActionFormCallCongresspersonTabsContext>[] = [
+const TABS: Tab<TabNames, UserActionFormCallCongresspersonTabsContext>[] = [
   {
     id: TabNames.INTRO,
     component: Intro,
@@ -48,10 +48,10 @@ export function UserActionFormCallCongressperson({
 }) {
   const [congressPersonData, setCongresspersonData] = React.useState<OnFindCongressPersonPayload>()
 
-  const { component } = useTabs<UserActionFormCallCongresspersonTabsContext>({
+  const { component } = useTabs<TabNames, UserActionFormCallCongresspersonTabsContext>({
     tabs: TABS,
     initialTabId: TabNames.INTRO,
-    tabAdditionalContext: {
+    componentProps: {
       user,
       onFindCongressperson: setCongresspersonData,
       congressPersonData,

@@ -18,7 +18,7 @@ export function SuggestedScript({
   user,
   congressPersonData,
 }: UserActionFormCallCongresspersonTabsContext) {
-  const { gotoTab } = useTabsContext()
+  const { gotoTab } = useTabsContext<TabNames>()
 
   const { dtsiPerson, civicData } = congressPersonData ?? {}
 

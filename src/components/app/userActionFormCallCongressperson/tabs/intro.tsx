@@ -9,7 +9,7 @@ import { TabNames } from '@/components/app/userActionFormCallCongressperson/user
 import { UserActionFormCallCongresspersonLayout } from './layout'
 
 export function Intro() {
-  const { gotoTab } = useTabsContext()
+  const { gotoTab } = useTabsContext<TabNames>()
 
   return (
     <IntroStaticContent>

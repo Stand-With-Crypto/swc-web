@@ -1,26 +1,32 @@
 import React from 'react'
 import * as Sentry from '@sentry/nextjs'
+import { once } from 'lodash'
 
-export interface Tab<TabProps = object> {
-  id: string
+export interface Tab<TabKey extends string, TabProps = object> {
+  id: TabKey
   component: React.ComponentType<TabProps>
 }
 
-export interface UseTabsProps<TabProps = object> {
-  tabs: Tab<TabProps>[]
-  initialTabId?: string | (() => string)
-  tabAdditionalContext?: TabProps
+export interface UseTabsProps<TabKey extends string, TabProps = object> {
+  tabs: {
+    id: TabKey
+    component: React.ComponentType<TabProps>
+  }[]
+  initialTabId?: TabKey | (() => TabKey)
+  componentProps?: TabProps
 }
 
-interface UseTabsContextValue {
-  currentTab: string
-  gotoTab: (tabId: string) => void
+interface UseTabsContextValue<TabKey extends string = string> {
+  currentTab: TabKey
+  gotoTab: (tabId: TabKey) => void
 }
 
-const UseTabsContext = React.createContext<UseTabsContextValue | null>(null)
+const createUseTabsContext = once(<TabKey extends string>() =>
+  React.createContext<UseTabsContextValue<TabKey> | null>(null),
+)
 
-export function useTabsContext() {
-  const context = React.useContext(UseTabsContext)
+export function useTabsContext<TabKey extends string>() {
+  const context = React.useContext(createUseTabsContext<TabKey>())
   if (!context) {
     const err = new Error('useTabsContext must be used within a useTabs component')
     Sentry.captureException(err)
@@ -29,21 +35,21 @@ export function useTabsContext() {
   return context
 }
 
-export function useTabs<TabProps = object>({
+export function useTabs<TabKey extends string, TabProps = object>({
   tabs,
   initialTabId,
-  tabAdditionalContext = {} as TabProps,
-}: UseTabsProps<TabProps>) {
+  componentProps = {} as TabProps,
+}: UseTabsProps<TabKey, TabProps>) {
   if (!tabs.length) {
     const err = new Error('useTabs: tabs must not be empty')
     Sentry.captureException(err)
     throw err
   }
 
-  const [currentTab, setCurrentTab] = React.useState(initialTabId ?? tabs[0].id)
+  const [currentTab, setCurrentTab] = React.useState<TabKey>(initialTabId ?? tabs[0].id)
 
   const gotoTab = React.useCallback(
-    (tabId: string) => {
+    (tabId: TabKey) => {
       setCurrentTab(tabId)
     },
     [setCurrentTab],
@@ -60,6 +66,7 @@ export function useTabs<TabProps = object>({
     throw err
   }
 
+  const UseTabsContext = createUseTabsContext<TabKey>()
   return {
     currentTab,
     gotoTab,
@@ -71,7 +78,7 @@ export function useTabs<TabProps = object>({
             gotoTab,
           }}
         >
-          <CurrentComponent {...(tabAdditionalContext as TabProps & JSX.IntrinsicAttributes)} />
+          <CurrentComponent {...(componentProps as TabProps & JSX.IntrinsicAttributes)} />
         </UseTabsContext.Provider>
       </>
     ),

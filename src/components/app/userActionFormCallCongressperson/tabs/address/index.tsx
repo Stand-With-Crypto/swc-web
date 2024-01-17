@@ -36,7 +36,7 @@ export function Address({
   onFindCongressperson,
 }: UserActionFormCallCongresspersonTabsContext) {
   const urls = useIntlUrls()
-  const { gotoTab } = useTabsContext()
+  const { gotoTab } = useTabsContext<TabNames>()
 
   const form = useForm<FindRepresentativeCallFormValues>({
     defaultValues: getDefaultValues({ user }),
