@@ -10,6 +10,21 @@ npm run codegen
 # Proposal: once we have a team working on this codebase, protect the main branch so people can't merge directly, and run lint/test on PRs, but not on master and production deployments
 npm run lint
 NODE_ENV=test npm run test
-npm run build
-wait
-echo "frontend assets built"
+# If the branch is a db changes branch, we're going to skip building the preview because it's pointing to a database without the changes (testing)
+if git diff --name-only HEAD^ | grep -q 'prisma/schema.prisma'; then
+    echo "Schema changes detected"
+    if [[ $VERCEL_GIT_COMMIT_REF == "main" || $VERCEL_GIT_COMMIT_REF == "deploy-web-production" ]]; then
+        echo "On a main branch, pushing changes to db. If there are breaking changes this command will fail"
+        npx prisma db push --skip-generate
+        npm run build
+        wait
+        echo "frontend assets built"
+    else
+        echo "Skipping deploy because this preview branch is pointing at the testing db which does not have the schema changes."
+    fi
+else  
+    echo "No schema changes, building app"
+    npm run build
+    wait
+    echo "frontend assets built"
+fi
