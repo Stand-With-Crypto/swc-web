@@ -6,7 +6,7 @@ import { ClientModel, getClientModel } from '@/clientModels/utils'
 import { User, UserCryptoAddress } from '@prisma/client'
 
 export type ClientUser = ClientModel<
-  Pick<User, 'id' | 'datetimeCreated' | 'datetimeUpdated' | 'isPubliclyVisible'> & {
+  Pick<User, 'id' | 'isPubliclyVisible'> & {
     fullName: string | null
     primaryUserCryptoAddress: ClientUserCryptoAddress | null
   }
@@ -15,14 +15,7 @@ export type ClientUser = ClientModel<
 export const getClientUser = (
   record: User & { primaryUserCryptoAddress: null | UserCryptoAddress },
 ): ClientUser => {
-  const {
-    fullName,
-    primaryUserCryptoAddress,
-    id,
-    datetimeCreated,
-    datetimeUpdated,
-    isPubliclyVisible,
-  } = record
+  const { fullName, primaryUserCryptoAddress, id, isPubliclyVisible } = record
   return getClientModel({
     fullName: isPubliclyVisible ? fullName : null,
     primaryUserCryptoAddress:
@@ -30,8 +23,6 @@ export const getClientUser = (
         ? getClientUserCryptoAddress(primaryUserCryptoAddress)
         : null,
     id,
-    datetimeCreated,
-    datetimeUpdated,
     isPubliclyVisible,
   })
 }
