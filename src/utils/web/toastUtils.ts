@@ -17,10 +17,7 @@ export const catchUnexpectedServerErrorAndTriggerToast = (error: unknown) => {
         extra: { error },
       },
     )
-    toast.error(GENERIC_ERROR_TITLE, {
-      description: GENERIC_ERROR_DESCRIPTION,
-      duration: 5000,
-    })
+    toastGenericError()
     return
   }
   if (error instanceof FetchReqError) {
@@ -31,6 +28,10 @@ export const catchUnexpectedServerErrorAndTriggerToast = (error: unknown) => {
     })
     return
   }
+  toastGenericError()
+}
+
+export const toastGenericError = () => {
   toast.error(GENERIC_ERROR_TITLE, {
     description: GENERIC_ERROR_DESCRIPTION,
     duration: 5000,

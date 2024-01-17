@@ -31,6 +31,7 @@ import {
   getDefaultValues,
   FORM_NAME,
 } from './formConfig'
+import { GENERIC_ERROR_TITLE } from '@/utils/web/errorUtils'
 
 interface AddressProps
   extends Pick<UserActionFormCallCongresspersonProps, 'user' | 'onFindCongressperson'> {
@@ -68,7 +69,7 @@ export function Address({ user, onFindCongressperson, congressPersonData }: Addr
 
   const handleNotFoundCongressperson = React.useCallback(
     (notFoundReason: string) => {
-      let message = 'Something went wrong. Please try again later.'
+      let message = GENERIC_ERROR_TITLE
 
       if (notFoundReason === 'MISSING_FROM_DTSI') {
         message = 'No available representative'

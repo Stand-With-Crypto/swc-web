@@ -6,13 +6,14 @@ import { Button } from '@/components/ui/button'
 import { useTabsContext } from '@/hooks/useTabs'
 import { TabNames } from '@/components/app/userActionFormCallCongressperson/userActionFormCallCongressperson.types'
 import { UserActionFormCallCongresspersonProps } from '@/components/app/userActionFormCallCongressperson'
-
-import { UserActionFormCallCongresspersonLayout } from './layout'
 import { getGoogleCivicOfficialByDTSIName } from '@/utils/shared/googleCivicInfo'
 import { InternalLink } from '@/components/ui/link'
 import { actionCreateUserActionCallCongressperson } from '@/actions/actionCreateUserActionCallCongressperson'
 import { UserActionCallCampaignName } from '@/utils/shared/userActionCampaigns'
 import { createActionCallCongresspersonInputValidationSchema } from '@/actions/actionCreateUserActionCallCongressperson/inputValidationSchema'
+import { toastGenericError } from '@/utils/web/toastUtils'
+
+import { UserActionFormCallCongresspersonLayout } from './layout'
 
 export function SuggestedScript({
   user,
@@ -43,7 +44,7 @@ export function SuggestedScript({
       return null
     }
 
-    return _.get(official, 'phones[0]')
+    return official.phones[0]
   }, [])
 
   const handleCallAction = React.useCallback(async () => {
@@ -55,6 +56,7 @@ export function SuggestedScript({
     const validatedInput = createActionCallCongresspersonInputValidationSchema.safeParse(input)
 
     if (!validatedInput.success) {
+      toastGenericError()
       Sentry.captureMessage('Call Action - Invalid input', {
         user: { id: user?.id },
         extra: {
