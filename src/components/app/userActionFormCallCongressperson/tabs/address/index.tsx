@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { SubmitHandler, useForm, useFormContext } from 'react-hook-form'
+import { SubmitHandler, useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import { Button } from '@/components/ui/button'
@@ -19,10 +19,11 @@ import {
 import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { trackFormSubmissionSyncErrors } from '@/utils/web/formUtils'
 import { getDTSIPeopleFromAddress } from '@/hooks/useGetDTSIPeopleFromAddress'
-import type { UserActionFormCallCongresspersonTabsContext } from '@/components/app/userActionFormCallCongressperson'
+import type { UserActionFormCallCongresspersonProps } from '@/components/app/userActionFormCallCongressperson'
 import { InternalLink } from '@/components/ui/link'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { getGoogleCivicDataFromAddress } from '@/utils/shared/googleCivicInfo'
+import useSWR from 'swr'
 
 import {
   findRepresentativeCallFormValidationSchema,
@@ -31,10 +32,12 @@ import {
   FORM_NAME,
 } from './formConfig'
 
-export function Address({
-  user,
-  onFindCongressperson,
-}: UserActionFormCallCongresspersonTabsContext) {
+interface AddressProps
+  extends Pick<UserActionFormCallCongresspersonProps, 'user' | 'onFindCongressperson'> {
+  congressPersonData?: UserActionFormCallCongresspersonProps['congressPersonData']
+}
+
+export function Address({ user, onFindCongressperson, congressPersonData }: AddressProps) {
   const urls = useIntlUrls()
   const { gotoTab } = useTabsContext<TabNames>()
 
@@ -42,37 +45,51 @@ export function Address({
     defaultValues: getDefaultValues({ user }),
     resolver: zodResolver(findRepresentativeCallFormValidationSchema),
   })
+  const address = useWatch({
+    control: form.control,
+    name: 'address',
+  })
+  const { data: liveCongressPersonData, isLoading: isLoadingLiveCongressPersonData } =
+    useCongresspersonData({ address })
 
-  const handleNotFoundCongressperson = React.useCallback((notFoundReason: string) => {
-    let message = 'Something went wrong. Please try again later.'
-
-    if (notFoundReason === 'MISSING_FROM_DTSI') {
-      message = 'No available representative'
+  React.useEffect(() => {
+    if (!liveCongressPersonData) {
+      return
     }
 
-    form.setError('address', {
-      type: 'manual',
-      message,
-    })
-  }, [])
+    const { dtsiPerson, civicData } = liveCongressPersonData
+    if (!dtsiPerson || 'notFoundReason' in dtsiPerson) {
+      const { notFoundReason } = dtsiPerson
+      return handleNotFoundCongressperson(notFoundReason)
+    }
 
-  const handleValidSubmission: SubmitHandler<FindRepresentativeCallFormValues> = React.useCallback(
-    async ({ address }) => {
-      // Don't use Promise.all here, the first function caches a request for the second one
-      // So if we use Promise.all we'll make two requests instead of one
-      const dtsiPerson = await getDTSIPeopleFromAddress(address.description)
-      const civicData = await getGoogleCivicDataFromAddress(address.description)
+    onFindCongressperson({ dtsiPerson, civicData })
+  }, [liveCongressPersonData, onFindCongressperson])
 
-      if ('notFoundReason' in dtsiPerson) {
-        const { notFoundReason } = dtsiPerson as { notFoundReason: string }
-        handleNotFoundCongressperson(notFoundReason)
+  const handleNotFoundCongressperson = React.useCallback(
+    (notFoundReason: string) => {
+      let message = 'Something went wrong. Please try again later.'
+
+      if (notFoundReason === 'MISSING_FROM_DTSI') {
+        message = 'No available representative'
       }
 
-      onFindCongressperson({ dtsiPerson, civicData })
-      gotoTab(TabNames.SUGGESTED_SCRIPT)
+      form.setError('address', {
+        type: 'manual',
+        message,
+      })
     },
-    [handleNotFoundCongressperson, gotoTab, onFindCongressperson],
+    [form],
   )
+
+  const handleValidSubmission: SubmitHandler<FindRepresentativeCallFormValues> =
+    React.useCallback(async () => {
+      if (!congressPersonData) {
+        return handleNotFoundCongressperson('MISSING_FROM_DTSI')
+      }
+
+      gotoTab(TabNames.SUGGESTED_SCRIPT)
+    }, [handleNotFoundCongressperson, gotoTab, congressPersonData])
 
   return (
     <UserActionFormCallCongresspersonLayout onBack={() => gotoTab(TabNames.INTRO)}>
@@ -111,7 +128,9 @@ export function Address({
             </div>
 
             <UserActionFormCallCongresspersonLayout.Footer>
-              <SubmitButton />
+              <SubmitButton
+                isLoading={form.formState.isSubmitting || isLoadingLiveCongressPersonData}
+              />
 
               <p className="text-sm">
                 Learn more about our{' '}
@@ -127,11 +146,19 @@ export function Address({
   )
 }
 
-function SubmitButton() {
-  const { formState } = useFormContext()
+function SubmitButton({ isLoading }: { isLoading: boolean }) {
   return (
-    <Button type="submit" disabled={formState.isSubmitting}>
-      {formState.isSubmitting ? 'Loading...' : 'Continue'}
+    <Button type="submit" disabled={isLoading}>
+      {isLoading ? 'Loading...' : 'Continue'}
     </Button>
   )
+}
+
+function useCongresspersonData({ address }: FindRepresentativeCallFormValues) {
+  return useSWR(address ? `useGetDTSIPeopleFromAddress-${address.description}` : null, async () => {
+    const dtsiPerson = await getDTSIPeopleFromAddress(address.description)
+    const civicData = await getGoogleCivicDataFromAddress(address.description)
+
+    return { dtsiPerson, civicData }
+  })
 }

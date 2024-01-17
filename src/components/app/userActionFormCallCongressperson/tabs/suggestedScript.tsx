@@ -5,7 +5,7 @@ import _ from 'lodash'
 import { Button } from '@/components/ui/button'
 import { useTabsContext } from '@/hooks/useTabs'
 import { TabNames } from '@/components/app/userActionFormCallCongressperson/userActionFormCallCongressperson.types'
-import { UserActionFormCallCongresspersonTabsContext } from '@/components/app/userActionFormCallCongressperson'
+import { UserActionFormCallCongresspersonProps } from '@/components/app/userActionFormCallCongressperson'
 
 import { UserActionFormCallCongresspersonLayout } from './layout'
 import { getGoogleCivicOfficialByDTSIName } from '@/utils/shared/googleCivicInfo'
@@ -16,41 +16,21 @@ import { createActionCallCongresspersonInputValidationSchema } from '@/actions/a
 
 export function SuggestedScript({
   user,
-  congressPersonData,
-}: UserActionFormCallCongresspersonTabsContext) {
+  congressPersonData: { dtsiPerson, civicData },
+}: Pick<UserActionFormCallCongresspersonProps, 'user' | 'congressPersonData'>) {
   const { gotoTab } = useTabsContext<TabNames>()
 
-  const { dtsiPerson, civicData } = congressPersonData ?? {}
-
   const congresspersonFullName = React.useMemo(() => {
-    if (!dtsiPerson || 'notFoundReason' in dtsiPerson) {
-      return null
-    }
-
     return `${dtsiPerson.firstName} ${dtsiPerson.lastName}`
   }, [])
 
   const parsedAddress = React.useMemo(() => {
-    if (!civicData) {
-      return '____'
-    }
     const { normalizedInput } = civicData
 
     return `${normalizedInput.city}, ${normalizedInput.state}`
   }, [])
 
   const phoneNumber = React.useMemo(() => {
-    if (!civicData || !dtsiPerson || 'notFoundReason' in dtsiPerson) {
-      Sentry.captureMessage('Call Action - Missing civicData or dtsiPerson', {
-        user: { id: user?.id },
-        extra: {
-          civicData,
-          dtsiPerson,
-        },
-      })
-      return null
-    }
-
     const official = getGoogleCivicOfficialByDTSIName(
       {
         firstName: dtsiPerson.firstName,
@@ -60,13 +40,6 @@ export function SuggestedScript({
     )
 
     if (!official) {
-      Sentry.captureMessage('Call Action - Official not found', {
-        user: { id: user?.id },
-        extra: {
-          civicData,
-          dtsiPerson,
-        },
-      })
       return null
     }
 
@@ -74,10 +47,6 @@ export function SuggestedScript({
   }, [])
 
   const handleCallAction = React.useCallback(async () => {
-    if (!dtsiPerson || 'notFoundReason' in dtsiPerson || !phoneNumber) {
-      return
-    }
-
     const input = {
       campaignName: UserActionCallCampaignName.DEFAULT,
       dtsiSlug: dtsiPerson.slug,
@@ -126,7 +95,7 @@ export function SuggestedScript({
 
               <p>
                 I live in {parsedAddress} and I'm calling to request Representative{' '}
-                <strong>{congresspersonFullName ?? '____'}</strong>'s support for the{' '}
+                <strong>{congresspersonFullName}</strong>'s support for the{' '}
                 <strong>Financial Innovation and Technology for the 21st Century Act.</strong>
               </p>
 
@@ -141,7 +110,7 @@ export function SuggestedScript({
       </UserActionFormCallCongresspersonLayout>
 
       <UserActionFormCallCongresspersonLayout.CongresspersonDisplayFooter
-        congressperson={congressPersonData?.dtsiPerson}
+        congressperson={dtsiPerson}
       >
         {phoneNumber && (
           <Button asChild>

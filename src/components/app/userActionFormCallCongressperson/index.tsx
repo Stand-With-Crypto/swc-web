@@ -1,9 +1,10 @@
 import React from 'react'
+import * as Sentry from '@sentry/nextjs'
 
 import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
-import { Tab, useTabs } from '@/hooks/useTabs'
-import { UseGetDTSIPeopleFromAddressResponse } from '@/hooks/useGetDTSIPeopleFromAddress'
+import { useTabs, useTabsContext } from '@/hooks/useTabs'
 import { GoogleCivicInfoResponse } from '@/utils/shared/googleCivicInfo'
+import { DTSIPeopleByCongressionalDistrictQueryResult } from '@/data/dtsi/queries/queryDTSIPeopleByCongressionalDistrict'
 
 import { TabNames } from './userActionFormCallCongressperson.types'
 import { Intro } from './tabs/intro'
@@ -11,34 +12,15 @@ import { Address } from './tabs/address'
 import { SuggestedScript } from './tabs/suggestedScript'
 import { SuccessMessage } from './tabs/successMessage'
 
-const TABS: Tab<TabNames, UserActionFormCallCongresspersonTabsContext>[] = [
-  {
-    id: TabNames.INTRO,
-    component: Intro,
-  },
-  {
-    id: TabNames.ADDRESS,
-    component: Address,
-  },
-  {
-    id: TabNames.SUGGESTED_SCRIPT,
-    component: SuggestedScript,
-  },
-  {
-    id: TabNames.SUCCESS_MESSAGE,
-    component: SuccessMessage,
-  },
-]
-
 interface OnFindCongressPersonPayload {
-  dtsiPerson: UseGetDTSIPeopleFromAddressResponse
+  dtsiPerson: DTSIPeopleByCongressionalDistrictQueryResult
   civicData: GoogleCivicInfoResponse
 }
 
-export interface UserActionFormCallCongresspersonTabsContext {
+export interface UserActionFormCallCongresspersonProps {
   user: GetUserFullProfileInfoResponse['user']
   onFindCongressperson: (payload: OnFindCongressPersonPayload) => void
-  congressPersonData?: OnFindCongressPersonPayload
+  congressPersonData: OnFindCongressPersonPayload
 }
 
 export function UserActionFormCallCongressperson({
@@ -46,17 +28,60 @@ export function UserActionFormCallCongressperson({
 }: {
   user: GetUserFullProfileInfoResponse['user']
 }) {
-  const [congressPersonData, setCongresspersonData] = React.useState<OnFindCongressPersonPayload>()
-
-  const { component } = useTabs<TabNames, UserActionFormCallCongresspersonTabsContext>({
-    tabs: TABS,
+  const { TabsProvider } = useTabs<TabNames>({
+    tabs: Object.values(TabNames),
     initialTabId: TabNames.INTRO,
-    componentProps: {
-      user,
-      onFindCongressperson: setCongresspersonData,
-      congressPersonData,
-    },
   })
 
-  return <>{component}</>
+  const [congressPersonData, setCongresspersonData] = React.useState<OnFindCongressPersonPayload>()
+
+  return (
+    <TabsProvider>
+      <TabContent
+        user={user}
+        onFindCongressperson={setCongresspersonData}
+        congressPersonData={congressPersonData}
+      />
+    </TabsProvider>
+  )
+}
+
+type TabContentProps = Pick<
+  UserActionFormCallCongresspersonProps,
+  'user' | 'onFindCongressperson'
+> & {
+  congressPersonData?: UserActionFormCallCongresspersonProps['congressPersonData']
+}
+
+function TabContent({ user, congressPersonData, onFindCongressperson }: TabContentProps) {
+  const { currentTab, onTabNotFound } = useTabsContext<TabNames>()
+
+  switch (currentTab) {
+    case TabNames.INTRO:
+      return <Intro />
+    case TabNames.ADDRESS:
+      return (
+        <Address
+          user={user}
+          onFindCongressperson={onFindCongressperson}
+          congressPersonData={congressPersonData}
+        />
+      )
+    case TabNames.SUGGESTED_SCRIPT:
+      // This should never happen in the normal tab flow, but if it does, we want to know about it
+      if (!congressPersonData) {
+        const err = new Error('Call Action - Missing congressPersonData')
+        Sentry.captureException(err, {
+          user: { id: user?.id },
+        })
+        throw err
+      }
+
+      return <SuggestedScript user={user} congressPersonData={congressPersonData} />
+    case TabNames.SUCCESS_MESSAGE:
+      return <SuccessMessage />
+    default:
+      onTabNotFound()
+      return null
+  }
 }

@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 export function UserActionFormCallCongresspersonSkeleton() {
   return (
     <IntroStaticContent>
-      <Button>Continue</Button>
+      <Button disabled>Loading...</Button>
     </IntroStaticContent>
   )
 }

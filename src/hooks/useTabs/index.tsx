@@ -1,52 +1,20 @@
 import React from 'react'
 import * as Sentry from '@sentry/nextjs'
-import { once } from 'lodash'
 
-export interface Tab<TabKey extends string, TabProps = object> {
-  id: TabKey
-  component: React.ComponentType<TabProps>
-}
+import { UseTabsProps, UseTabsReturn } from './useTabs.types'
+import { createUseTabsContext } from './useTabsContext'
 
-export interface UseTabsProps<TabKey extends string, TabProps = object> {
-  tabs: {
-    id: TabKey
-    component: React.ComponentType<TabProps>
-  }[]
-  initialTabId?: TabKey | (() => TabKey)
-  componentProps?: TabProps
-}
-
-interface UseTabsContextValue<TabKey extends string = string> {
-  currentTab: TabKey
-  gotoTab: (tabId: TabKey) => void
-}
-
-const createUseTabsContext = once(<TabKey extends string>() =>
-  React.createContext<UseTabsContextValue<TabKey> | null>(null),
-)
-
-export function useTabsContext<TabKey extends string>() {
-  const context = React.useContext(createUseTabsContext<TabKey>())
-  if (!context) {
-    const err = new Error('useTabsContext must be used within a useTabs component')
-    Sentry.captureException(err)
-    throw err
-  }
-  return context
-}
-
-export function useTabs<TabKey extends string, TabProps = object>({
+export function useTabs<TabKey extends string>({
   tabs,
   initialTabId,
-  componentProps = {} as TabProps,
-}: UseTabsProps<TabKey, TabProps>) {
+}: UseTabsProps<TabKey>): UseTabsReturn<TabKey> {
   if (!tabs.length) {
     const err = new Error('useTabs: tabs must not be empty')
     Sentry.captureException(err)
     throw err
   }
 
-  const [currentTab, setCurrentTab] = React.useState<TabKey>(initialTabId ?? tabs[0].id)
+  const [currentTab, setCurrentTab] = React.useState<TabKey>(initialTabId ?? tabs[0])
 
   const gotoTab = React.useCallback(
     (tabId: TabKey) => {
@@ -55,32 +23,31 @@ export function useTabs<TabKey extends string, TabProps = object>({
     [setCurrentTab],
   )
 
-  const CurrentComponent = React.useMemo(
-    () => tabs.find(tab => tab.id === currentTab)?.component,
-    [currentTab, tabs],
-  )
-
-  if (!CurrentComponent) {
-    const err = new Error(`useTabs: tab with id ${currentTab} not found`)
+  const handleTabNotFound = React.useCallback(() => {
+    const err = new Error(`useTabs: tab not found: ${currentTab}`)
     Sentry.captureException(err)
     throw err
-  }
+  }, [currentTab])
 
   const UseTabsContext = createUseTabsContext<TabKey>()
-  return {
-    currentTab,
-    gotoTab,
-    component: (
-      <>
+  return React.useMemo<UseTabsReturn<TabKey>>(
+    () => ({
+      currentTab,
+      gotoTab,
+      onTabNotFound: handleTabNotFound,
+      TabsProvider: (props: React.PropsWithChildren) => (
         <UseTabsContext.Provider
           value={{
-            currentTab,
             gotoTab,
+            currentTab,
+            onTabNotFound: handleTabNotFound,
           }}
-        >
-          <CurrentComponent {...(componentProps as TabProps & JSX.IntrinsicAttributes)} />
-        </UseTabsContext.Provider>
-      </>
-    ),
-  }
+          {...props}
+        />
+      ),
+    }),
+    [currentTab, gotoTab, UseTabsContext],
+  )
 }
+
+export { useTabsContext } from './useTabsContext'

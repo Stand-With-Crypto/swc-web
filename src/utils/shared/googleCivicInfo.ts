@@ -1,5 +1,6 @@
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
+import * as Sentry from '@sentry/nextjs'
 
 /*
 Sample response
@@ -141,11 +142,23 @@ export function getGoogleCivicOfficialByDTSIName(
 
   // This is necessary since the Google Civic API return the middle initial (e.g. "John F. Kennedy")
   // While the DTSI data does not (e.g. "John Kennedy")
-  return googleCivicInfoResponse.officials.find(official => {
+  const matchOfficial = googleCivicInfoResponse.officials.find(official => {
     const normalizedOfficialName = normalizeName(official.name)
     return (
       normalizedOfficialName.startsWith(normalizedDTSIFirstName) &&
       normalizedOfficialName.includes(normalizedDTSILastName)
     )
   })
+
+  if (!matchOfficial) {
+    Sentry.captureMessage('getGoogleCivicOfficialByDTSIName - Official not found', {
+      extra: {
+        dtsiPersonName,
+        googleCivicInfoOfficials: googleCivicInfoResponse.officials,
+      },
+    })
+    return null
+  }
+
+  return matchOfficial
 }
