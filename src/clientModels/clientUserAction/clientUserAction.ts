@@ -41,7 +41,7 @@ type ClientUserActionEmail = {
   userActionEmailRecipients: ClientUserActionEmailRecipient[]
   actionType: typeof UserActionType.EMAIL
 }
-type ClientUserActionCall = Pick<UserActionCall, 'recipientPhoneNumber'> & {
+type ClientUserActionCall = {
   person: DTSIPersonForUserActions
   actionType: typeof UserActionType.CALL
 }
@@ -117,9 +117,8 @@ export const getClientUserAction = ({
       return getClientModel({ ...sharedProps, ...callFields })
     }
     case UserActionType.CALL: {
-      const { recipientPhoneNumber, recipientDtsiSlug } = getRelatedModel(record, 'userActionCall')
+      const { recipientDtsiSlug } = getRelatedModel(record, 'userActionCall')
       const callFields: ClientUserActionCall = {
-        recipientPhoneNumber,
         person: peopleBySlug[recipientDtsiSlug],
         actionType,
       }
