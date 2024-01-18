@@ -21,7 +21,8 @@
     "intl:extract-compile": "formatjs extract 'src/**/*.ts*' '!src/**/*.d.ts' --out-file temp.json --flatten --id-interpolation-pattern '[sha512:contenthash:base64:6]' && formatjs compile 'temp.json' --out-file src/intl/generated/compile/en-US.json && rm temp.json",
     "db:seed": "prisma db push --force-reset && prisma db seed",
     "inngest": "npx inngest-cli@latest dev --no-discovery -u http://localhost:3000/api/inngest",
-    "newbranch": "npm i && npx prisma generate && npm run codegen"
+    "newbranch": "npm i && npx prisma generate && npm run codegen",
+    "initial": "npx prisma generate && npm run codegen && npm run intl:extract-compile && npm run db:seed"
   },
   "prisma": {
     "seed": "npm run ts --transpile-only src/bin/seedLocalDb.ts"
