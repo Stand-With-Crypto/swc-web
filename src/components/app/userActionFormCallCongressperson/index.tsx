@@ -31,37 +31,13 @@ export function UserActionFormCallCongressperson({
 }: {
   user: GetUserFullProfileInfoResponse['user']
 }) {
-  const useTabsProps = useTabs<TabNames>({
+  const tabProps = useTabs<TabNames>({
     tabs: Object.values(TabNames),
     initialTabId: TabNames.INTRO,
   })
+  const { currentTab, onTabNotFound } = tabProps
 
   const [congressPersonData, setCongresspersonData] = React.useState<OnFindCongressPersonPayload>()
-
-  return (
-    <TabContent
-      user={user}
-      onFindCongressperson={setCongresspersonData}
-      congressPersonData={congressPersonData}
-      {...useTabsProps}
-    />
-  )
-}
-
-type TabContentProps = Pick<
-  UserActionFormCallCongresspersonProps,
-  'user' | 'onFindCongressperson' | keyof UseTabsReturn<TabNames>
-> & {
-  congressPersonData?: UserActionFormCallCongresspersonProps['congressPersonData']
-}
-
-function TabContent({
-  user,
-  congressPersonData,
-  onFindCongressperson,
-  ...tabProps
-}: TabContentProps) {
-  const { currentTab, onTabNotFound } = tabProps
 
   switch (currentTab) {
     case TabNames.INTRO:
@@ -70,7 +46,7 @@ function TabContent({
       return (
         <Address
           user={user}
-          onFindCongressperson={onFindCongressperson}
+          onFindCongressperson={setCongresspersonData}
           congressPersonData={congressPersonData}
           {...tabProps}
         />

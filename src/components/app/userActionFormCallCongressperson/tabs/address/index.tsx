@@ -82,21 +82,12 @@ export function Address({ user, onFindCongressperson, congressPersonData, gotoTa
     [form],
   )
 
-  const handleValidSubmission: SubmitHandler<FindRepresentativeCallFormValues> =
-    React.useCallback(async () => {
-      if (!congressPersonData) {
-        return handleNotFoundCongressperson('MISSING_FROM_DTSI')
-      }
-
-      gotoTab(TabNames.SUGGESTED_SCRIPT)
-    }, [handleNotFoundCongressperson, gotoTab, congressPersonData])
-
   return (
     <UserActionFormCallCongresspersonLayout onBack={() => gotoTab(TabNames.INTRO)}>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(
-            handleValidSubmission,
+            () => gotoTab(TabNames.SUGGESTED_SCRIPT),
             trackFormSubmissionSyncErrors(FORM_NAME),
           )}
         >
@@ -130,6 +121,7 @@ export function Address({ user, onFindCongressperson, congressPersonData, gotoTa
             <UserActionFormCallCongresspersonLayout.Footer>
               <SubmitButton
                 isLoading={form.formState.isSubmitting || isLoadingLiveCongressPersonData}
+                disabled={!congressPersonData}
               />
 
               <p className="text-sm">
@@ -146,9 +138,9 @@ export function Address({ user, onFindCongressperson, congressPersonData, gotoTa
   )
 }
 
-function SubmitButton({ isLoading }: { isLoading: boolean }) {
+function SubmitButton({ isLoading, disabled }: { isLoading: boolean; disabled: boolean }) {
   return (
-    <Button type="submit" disabled={isLoading}>
+    <Button type="submit" disabled={isLoading || disabled}>
       {isLoading ? 'Loading...' : 'Continue'}
     </Button>
   )

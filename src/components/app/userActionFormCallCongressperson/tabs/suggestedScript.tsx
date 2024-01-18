@@ -31,14 +31,6 @@ export function SuggestedScript({
 >) {
   const router = useRouter()
 
-  const congresspersonFullName = React.useMemo(() => {
-    return dtsiPersonFullName(dtsiPerson)
-  }, [dtsiPerson])
-
-  const parsedAddress = React.useMemo(() => {
-    return `${addressSchema.locality}, ${addressSchema.administrativeAreaLevel1}`
-  }, [addressSchema])
-
   const phoneNumber = React.useMemo(() => {
     const official = getGoogleCivicOfficialByDTSIName(
       {
@@ -117,8 +109,9 @@ export function SuggestedScript({
               </p>
 
               <p>
-                I live in {parsedAddress} and I'm calling to request Representative{' '}
-                <strong>{congresspersonFullName}</strong>'s support for the{' '}
+                I live in {addressSchema.locality}, {addressSchema.administrativeAreaLevel1} and I'm
+                calling to request Representative <strong>{dtsiPersonFullName(dtsiPerson)}</strong>
+                's support for the{' '}
                 <strong>Financial Innovation and Technology for the 21st Century Act.</strong>
               </p>
 
