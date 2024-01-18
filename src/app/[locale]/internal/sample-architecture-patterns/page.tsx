@@ -1,5 +1,5 @@
 // TODO delete before v2 go-live
-import { LiveUpdatingTotalDonations } from '@/app/[locale]/sample-architecture-patterns/liveUpdatingTotalDonations'
+import { LiveUpdatingTotalDonations } from '@/app/[locale]/internal/sample-architecture-patterns/liveUpdatingTotalDonations'
 import { Leaderboard } from '@/components/sampleArchitecture/leaderboard'
 import { LocaleDropdown } from '@/components/sampleArchitecture/localeDropdown'
 import { NavbarSessionButton } from '@/components/app/navbar/navbarSessionButton'

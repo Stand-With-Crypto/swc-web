@@ -68,7 +68,7 @@ Whenever you make Prisma schema changes (or pulling commits from `main` that inc
 
 Before proceeding with anything, **PLEASE** take time to review the [Knowledge pre-requisites](#knowledge-pre-requisites).
 
-- After running the server locally, visit [http://localhost:3000/en-US/sample-architecture-patterns](http://localhost:3000/en-US/sample-architecture-patterns) for sample architectural patterns
+- After running the server locally, visit [http://localhost:3000/en-US/internal/sample-architecture-patterns](http://localhost:3000/en-US/internal/sample-architecture-patterns) for sample architectural patterns
 - Read ["What is Prisma"](https://www.prisma.io/docs/orm/overview/introduction/what-is-prisma) and ["Why Prisma"](https://www.prisma.io/docs/orm/overview/introduction/why-prisma) to learn about the ORM we use to query our database
 - Watch [this YouTube video](https://www.youtube.com/watch?v=CQuTF-bkOgc) for a great overview of the tradeoffs between the UI library/framework options that exist for frontend development, and why we decided to use TailwindCSS + Radix UI as our template
 - Read Vercel's guide on ["Connection Pooling with Serverless Functions"](https://vercel.com/guides/connection-pooling-with-serverless-functions#modern-databases-with-high-connection-limits) to learn about the architecture tradeoffs of connecting to SQL database in serverless environments, and why we decided to leverage the robust scalability architecture inherent in [PlanetScale](https://planetscale.com/features)
