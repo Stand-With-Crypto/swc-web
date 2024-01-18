@@ -10,6 +10,8 @@ import {
   parseLocalUserFromCookiesForPageRouter,
 } from '@/utils/server/serverLocalUser'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
+import { UserEmailAddressSource } from '@prisma/client'
+import { fetchEmbeddedWalletMetadataFromThirdweb } from '@/utils/server/thirdweb/fetchEmbeddedWalletMetadataFromThirdweb'
 
 // TODO migrate this logic from page router to app router once thirdweb supports it
 
@@ -58,6 +60,7 @@ export const thirdwebAuthConfig: ThirdwebAuthConfig = {
       peopleAnalytics.set({ 'Datetime of Last Login': new Date() })
       if (!existingUser) {
         const userSessionId = getUserSessionIdOnPageRouter(req)
+        const embeddedWalletEmailAddress = await fetchEmbeddedWalletMetadataFromThirdweb(address)
         existingUser = await prismaClient.user.findFirst({
           where: { userSessions: { some: { id: userSessionId } } },
         })
@@ -76,10 +79,28 @@ export const thirdwebAuthConfig: ThirdwebAuthConfig = {
                   },
                 },
           },
+          include: { user: true },
         })
+        let primaryUserEmailAddressId: null | string = null
+        if (embeddedWalletEmailAddress) {
+          const email = await prismaClient.userEmailAddress.create({
+            data: {
+              isVerified: true,
+              source: UserEmailAddressSource.THIRDWEB_EMBEDDED_AUTH,
+              emailAddress: embeddedWalletEmailAddress.email.toLowerCase(),
+              userId: userCryptoAddress.userId,
+            },
+          })
+          if (!userCryptoAddress.user.primaryUserEmailAddressId) {
+            primaryUserEmailAddressId = email.id
+          }
+        }
         await prismaClient.user.update({
           where: { id: userCryptoAddress.userId },
-          data: { primaryUserCryptoAddressId: userCryptoAddress.id },
+          data: {
+            primaryUserCryptoAddressId: userCryptoAddress.id,
+            ...(primaryUserEmailAddressId ? { primaryUserEmailAddressId } : {}),
+          },
         })
       }
     },
