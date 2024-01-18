@@ -4,14 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { GenericErrorFormValues } from '@/utils/web/formUtils'
 import { zodManageCookieConsent } from '@/components/app/cookieConsent/cookieConsentSchema'
-import {
-  Form,
-  FormControl,
-  FormErrorMessage,
-  FormField,
-  FormItem,
-  FormLabel,
-} from '@/components/ui/form'
+import { Form, FormControl, FormField, FormItem } from '@/components/ui/form'
 import { Checkbox } from '@/components/ui/checkbox'
 import { CheckboxProps } from '@radix-ui/react-checkbox'
 import InfoBadge from '@/components/ui/infoBadge'

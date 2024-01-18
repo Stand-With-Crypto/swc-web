@@ -1,7 +1,4 @@
-export function UserActionFormCallCongressperson({
-  onCancel,
-  onSuccess,
-}: {
+export function UserActionFormCallCongressperson(_props: {
   onCancel: () => void
   onSuccess: () => void
 }) {

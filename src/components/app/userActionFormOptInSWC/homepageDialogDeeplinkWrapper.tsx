@@ -15,7 +15,6 @@ export function UserActionFormOptInSWCDeeplinkWrapper() {
   const locale = useLocale()
   const urls = getIntlUrls(locale)
   const [state, setState] = useState<'form' | 'success'>('form')
-  const { user } = fetchUser.data || { user: null }
   return fetchUser.isLoading ? (
     <UserActionFormOptInSWCSkeleton locale={locale} />
   ) : state === 'form' ? (

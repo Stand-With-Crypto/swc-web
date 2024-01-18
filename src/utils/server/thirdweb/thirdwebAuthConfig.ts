@@ -1,19 +1,16 @@
-import { ThirdwebAuth, ThirdwebAuthConfig } from '@thirdweb-dev/auth/next'
+import { ThirdwebAuthConfig } from '@thirdweb-dev/auth/next'
 import { PrivateKeyWallet } from '@thirdweb-dev/auth/evm'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN } from '@/utils/shared/sharedEnv'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getUserSessionIdOnPageRouter } from '@/utils/server/serverUserSessionId'
-import { SupportedUserCryptoNetwork, UserEmailAddressSource } from '@prisma/client'
 import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import {
   mapLocalUserToUserDatabaseFields,
   parseLocalUserFromCookiesForPageRouter,
 } from '@/utils/server/serverLocalUser'
-import {
-  mapCurrentSessionLocalUserToAnalyticsProperties,
-  mapPersistedLocalUserToAnalyticsProperties,
-} from '@/utils/shared/localUser'
+import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
+import { UserEmailAddressSource } from '@prisma/client'
 import { fetchEmbeddedWalletMetadataFromThirdweb } from '@/utils/server/thirdweb/fetchEmbeddedWalletMetadataFromThirdweb'
 
 // TODO migrate this logic from page router to app router once thirdweb supports it
@@ -49,7 +46,7 @@ export const thirdwebAuthConfig: ThirdwebAuthConfig = {
       // TODO analytics
     },
     // look for the comment in appRouterGetAuthUser for why we don't use this fn
-    onUser: async (user, req) => {},
+    onUser: async () => {},
     onLogin: async (address, req) => {
       const localUser = parseLocalUserFromCookiesForPageRouter(req)
       // TODO figure out how to get the users email address to persist to the db

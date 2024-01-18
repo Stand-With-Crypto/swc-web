@@ -1,10 +1,8 @@
-import { ClientAddress, getClientAddress } from '@/clientModels/clientAddress'
 import { ClientNFT, getClientNFT } from '@/clientModels/clientNFT'
 import { ClientNFTMint, getClientNFTMint } from '@/clientModels/clientNFTMint'
 import { ClientModel, getClientModel } from '@/clientModels/utils'
 import { DTSIPersonForUserActions } from '@/data/dtsi/queries/queryDTSIPeopleBySlugForUserActions'
 import {
-  Address,
   NFT,
   NFTMint,
   UserAction,

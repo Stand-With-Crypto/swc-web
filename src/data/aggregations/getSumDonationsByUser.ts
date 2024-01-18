@@ -1,6 +1,5 @@
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { getLogger } from '@/utils/shared/logger'
 import { Decimal } from '@prisma/client/runtime/library'
 import _ from 'lodash'
 import 'server-only'

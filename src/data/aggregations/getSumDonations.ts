@@ -1,5 +1,4 @@
 import { prismaClient } from '@/utils/server/prismaClient'
-import { getLogger } from '@/utils/shared/logger'
 import { Decimal } from '@prisma/client/runtime/library'
 import 'server-only'
 

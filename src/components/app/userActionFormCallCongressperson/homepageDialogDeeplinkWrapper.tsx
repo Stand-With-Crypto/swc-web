@@ -15,7 +15,6 @@ export function UserActionFormCallCongresspersonDeeplinkWrapper() {
   const locale = useLocale()
   const urls = getIntlUrls(locale)
   const [state, setState] = useState<'form' | 'success'>('form')
-  const { user } = fetchUser.data || { user: null }
   return fetchUser.isLoading ? (
     <UserActionFormCallCongresspersonSkeleton locale={locale} />
   ) : state === 'form' ? (

@@ -8,7 +8,6 @@ export const getCountPolicymakerContacts = async () => {
     prismaClient.userActionEmailRecipient.count(),
     prismaClient.userAction.count({ where: { actionType: UserActionType.CALL } }),
   ])
-  const count = await prismaClient.user.count()
   return { countUserActionEmailRecipients, countUserActionCalls }
 }
 

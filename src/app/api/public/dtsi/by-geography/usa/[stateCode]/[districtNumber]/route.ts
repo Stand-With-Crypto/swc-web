@@ -1,8 +1,7 @@
-import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
-import { queryDTSIAllPeople } from '@/data/dtsi/queries/queryDTSIAllPeople'
+import 'server-only'
+
 import { queryDTSIPeopleByCongressionalDistrict } from '@/data/dtsi/queries/queryDTSIPeopleByCongressionalDistrict'
 import { NextRequest, NextResponse } from 'next/server'
-import 'server-only'
 import { z } from 'zod'
 
 export const dynamic = 'error'

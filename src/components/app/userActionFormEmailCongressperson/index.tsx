@@ -78,7 +78,6 @@ const getDefaultValues = ({
 }
 
 export function UserActionFormEmailCongressperson({
-  onCancel,
   onSuccess,
   user,
 }: {
@@ -180,7 +179,7 @@ export function UserActionFormEmailCongressperson({
               <FormField
                 control={form.control}
                 name="address"
-                render={({ field: { ref, ...field } }) => (
+                render={({ field: { ref: _ref, ...field } }) => (
                   <FormItem>
                     <FormLabel>Address</FormLabel>
                     <FormControl>

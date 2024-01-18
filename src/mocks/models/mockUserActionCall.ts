@@ -1,6 +1,4 @@
 import { fakerFields } from '@/mocks/fakerUtils'
-import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
-import { faker } from '@faker-js/faker'
 import { UserActionCall } from '@prisma/client'
 
 export function mockUserActionCall(): UserActionCall {

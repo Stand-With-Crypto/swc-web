@@ -3,7 +3,7 @@ import { zodOptionalEmptyString } from '@/validation/utils'
 import { zodAddress } from '@/validation/fields/zodAddress'
 import { zodGooglePlacesAutocompletePrediction } from '@/validation/fields/zodGooglePlacesAutocompletePrediction'
 import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
-import { string, object, union, any, boolean } from 'zod'
+import { string, object, boolean } from 'zod'
 
 const base = object({
   fullName: zodOptionalEmptyString(

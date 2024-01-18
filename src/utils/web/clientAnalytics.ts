@@ -1,4 +1,4 @@
-import { customLogger, logger } from '@/utils/shared/logger'
+import { customLogger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { AnalyticProperties } from '@/utils/shared/sharedAnalytics'
 import mixpanel from 'mixpanel-browser'

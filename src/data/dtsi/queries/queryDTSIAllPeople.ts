@@ -1,5 +1,4 @@
 import { fetchDTSI } from '@/data/dtsi/fetchDTSI'
-import { fragmentDTSIPersonCard } from '@/data/dtsi/fragments/fragmentDTSIPersonCard'
 import { fragmentDTSIPersonTableRow } from '@/data/dtsi/fragments/fragmentDTSIPersonTableRow'
 import { DTSI_AllPeopleQuery, DTSI_AllPeopleQueryVariables } from '@/data/dtsi/generated'
 import * as Sentry from '@sentry/nextjs'

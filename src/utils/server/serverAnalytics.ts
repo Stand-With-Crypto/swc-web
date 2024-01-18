@@ -1,4 +1,4 @@
-import { customLogger, getLogger } from '@/utils/shared/logger'
+import { getLogger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { AnalyticProperties, AnalyticsPeopleProperties } from '@/utils/shared/sharedAnalytics'
 import { UserActionType, UserCryptoAddress } from '@prisma/client'

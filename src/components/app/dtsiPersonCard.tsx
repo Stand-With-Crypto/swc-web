@@ -1,9 +1,8 @@
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
-import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
 import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
-import { DTSI_Person, DTSI_PersonCardFragment } from '@/data/dtsi/generated'
+import { DTSI_PersonCardFragment } from '@/data/dtsi/generated'
 import { SupportedLocale } from '@/intl/locales'
 import { getDTSIFormattedShortPersonRole } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import {
