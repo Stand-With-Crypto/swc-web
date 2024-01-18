@@ -63,7 +63,7 @@ If you prefer accessing the Vercel UI directly instead of using CLI, then you co
 - Log into Vercel.
 - Go to the swc-web project --> Settings --> Environment Variables.
 - Create a new environment variable with key name `DATABASE_URL` and with value of your PlanetScale database URL.
-  - Ensure that the Environment for this key is selected to Preview --> Select Custom branch --> find your specific Vercel branch. **Do NOT overwrite the Production, Preview, or Development**.
+  - Ensure that the Environment for this key is selected to Preview --> Select Custom branch --> find your specific Vercel branch. **Do NOT overwrite Production, Preview, or Development**.
 - Once your preview branch has been merged to main, please delete your branch-specific `DATABASE_URL`.
 
 ### Updating the PlanetScale schema
