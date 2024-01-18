@@ -36,10 +36,21 @@ The author of the PR can merge (squashing if appropriate), close the PR, and del
 
 ## I need to make database migrations as part of my PR, what now?
 
-We use PlanetScale as our database host provider. They have a number of [github actions](https://planetscale.com/blog/announcing-the-planetscale-github-actions) that should simplify our CI process for database migrations, but until they're fully implemented in our codebase, below are some process steps when updating our database schema. NOTE: these steps will only work for core contributors currently:
+We use PlanetScale as our database host provider. They have a number of [github actions](https://planetscale.com/blog/announcing-the-planetscale-github-actions) that should simplify our CI process for database migrations, but until they're fully implemented in our codebase, below are some process steps to follow when updating our database schema. NOTE: these steps will only work for core contributors with access to our vercel account:
 
-- If you have migrations to make, your vercel preview branch will fail by default because it's pointing to the testing db, and testing doesn't have the schema changes from your branch. You can change the database URL your preview branch is pointing to by logging in to Vercel and updating the DATABASE_URL environment variable for the "Preview" environment of your branch. Make sure you press "Select custom branch" and only update the Preview env var for your specific vercel branch.
-- Once your change has been merged to testing, run one of the following against the testing database (you can get credentials in the PlanetScale admin panel):
-  - If your changes do not break any existing schema rules: `npx prisma db push` will update testing db with your schema changes
-  - If your changes break existing schema rules: `npm run db:seed` will wipe and reset testing database with your schema changes. NOTE: This should only be done while we're pre-go-live. After we start deploying to production, we'll need to ensure all changes don't break the schema and leverage one-off bin scripts to migrate data as needed
+- If you have schema changes/migrations to make, then your Vercel preview branch will need to be pointing to _your_ PlanetScale_ development database branch that you used for local development (_e.g._ the PlanetScale branch that you've run `npx prisma db push` on) via updating the `DATABASE_URL`. To update this environment variable:
+  - *This step only needs to be done once*:
+    - Install the [Vercel CLI](https://vercel.com/docs/cli) locally.
+    - Run `vercel login --github` to login to our instance. Ensure that the authentication proceeds with the correct email address.
+    - `cd` into your local swc-web repository.
+    - Run `vercel link`.
+      - Say "y" to the set up.
+      - Select "Stand With Crypto" as the scope containing the project.
+      - Say "y" to the "stand-with-crypto/swc-web" project.
+  - Run `vercel env add DATABASE_URL preview [name-of-your-branch]`, and supply your development database URL.
+    - This will update your preview branch's `DATABASE_URL` environment variable in Vercel.
+  - Once your preview branch has been merged to main, please clean up your branch-specific `DATABASE_URL` by running `vercel env rm DATABASE_URL preview [name-of-your-branch]`
+- The process for merging schema changes to testing will vary based off whether you have breaking changes for our schema in your PR. If you're unsure if your changes are breaking, run `npx prisma db push` against your planetscale developer database branch db with the schema changes. If it updates without prompting you with conflicts, there are no issues:
+  - If your schema updates do not have any breaking changes, vercel will automatically run `npx prisma db push` on deploy to testing
+  - If your changes break existing schema rules: you'll need to run `npm run db:seed` against the testing database with your changes when you merge, before vercel tries to build the application. NOTE: This should only be done while we're pre-go-live. After we start deploying to production, we'll need to ensure all changes don't break the schema and leverage one-off bin scripts to migrate data as needed
 - For now, we aren't deploying any changes to production in PlanetScale so you can stop here
