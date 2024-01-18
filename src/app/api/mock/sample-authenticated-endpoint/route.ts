@@ -1,10 +1,8 @@
 // TODO migrate to app router once thirdweb supports it
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
-import { appRouterGetAuthUser } from '@/utils/server/appRouterGetAuthUser'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { thirdWebAuth } from '@/utils/server/thirdWebAuth'
-import { NextApiRequest, NextApiResponse } from 'next'
+import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
 import { NextRequest, NextResponse } from 'next/server'
 import 'server-only'
 
