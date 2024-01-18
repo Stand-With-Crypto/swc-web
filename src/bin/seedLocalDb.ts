@@ -321,7 +321,7 @@ async function seed() {
   userActionCall
   */
   await batchAsyncAndLog(
-    userActionsByType[UserActionType.CALL].map(action => ({
+    userActionsByType[UserActionType.CALL].map((action, index) => ({
       ...mockUserActionCall(),
       id: action.id,
       addressId: address[index].id,

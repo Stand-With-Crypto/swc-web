@@ -34,7 +34,7 @@ export function useTabs<TabKey extends string>({
       gotoTab,
       onTabNotFound: handleTabNotFound,
     }),
-    [currentTab, gotoTab],
+    [currentTab, gotoTab, handleTabNotFound],
   )
 }
 

@@ -52,20 +52,6 @@ export function Address({ user, onFindCongressperson, congressPersonData, gotoTa
   const { data: liveCongressPersonData, isLoading: isLoadingLiveCongressPersonData } =
     useCongresspersonData({ address })
 
-  React.useEffect(() => {
-    if (!liveCongressPersonData) {
-      return
-    }
-
-    const { dtsiPerson } = liveCongressPersonData
-    if (!dtsiPerson || 'notFoundReason' in dtsiPerson) {
-      const { notFoundReason } = dtsiPerson
-      return handleNotFoundCongressperson(notFoundReason)
-    }
-
-    onFindCongressperson({ ...liveCongressPersonData, dtsiPerson })
-  }, [liveCongressPersonData, onFindCongressperson])
-
   const handleNotFoundCongressperson = React.useCallback(
     (notFoundReason: string) => {
       let message = GENERIC_ERROR_TITLE
@@ -81,6 +67,20 @@ export function Address({ user, onFindCongressperson, congressPersonData, gotoTa
     },
     [form],
   )
+
+  React.useEffect(() => {
+    if (!liveCongressPersonData) {
+      return
+    }
+
+    const { dtsiPerson } = liveCongressPersonData
+    if (!dtsiPerson || 'notFoundReason' in dtsiPerson) {
+      const { notFoundReason } = dtsiPerson
+      return handleNotFoundCongressperson(notFoundReason)
+    }
+
+    onFindCongressperson({ ...liveCongressPersonData, dtsiPerson })
+  }, [handleNotFoundCongressperson, liveCongressPersonData, onFindCongressperson])
 
   return (
     <UserActionFormCallCongresspersonLayout onBack={() => gotoTab(TabNames.INTRO)}>
@@ -101,7 +101,7 @@ export function Address({ user, onFindCongressperson, congressPersonData, gotoTa
               <FormField
                 control={form.control}
                 name="address"
-                render={({ field: { ref, ...field } }) => (
+                render={({ field: { ref: _ref, ...field } }) => (
                   <FormItem>
                     <FormLabel>Address</FormLabel>
                     <FormControl>

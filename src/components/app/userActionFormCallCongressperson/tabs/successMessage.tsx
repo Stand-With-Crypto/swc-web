@@ -29,7 +29,7 @@ export function SuccessMessage() {
       action => !data?.performedUserActionTypes.includes(action.actionType),
     )
     if (action) {
-      const { DialogComponent, ...rest } = action
+      const { DialogComponent: _DialogComponent, ...rest } = action
       return rest
     }
     return null
@@ -84,7 +84,7 @@ function UnauthenticatedSuccessContent() {
 
   const href = React.useMemo(() => {
     return USER_ACTION_DEEPLINK_MAP[UserActionType.OPT_IN].getDeeplinkUrl({ locale })
-  }, [])
+  }, [locale])
 
   return (
     <div className="flex flex-col items-center gap-6">

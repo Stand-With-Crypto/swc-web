@@ -27,7 +27,6 @@ export interface ComboBoxProps<T>
   getOptionKey: (val: T) => string
   popoverContentClassName?: string
   isLoading: boolean
-  popoverFullWidth?: boolean
 }
 
 export function Combobox<T>({
@@ -39,7 +38,6 @@ export function Combobox<T>({
   getOptionKey,
   popoverContentClassName,
   isLoading,
-  popoverFullWidth = true,
   ...inputProps
 }: ComboBoxProps<T>) {
   const parentRef = React.useRef<HTMLButtonElement>(null)

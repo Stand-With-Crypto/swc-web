@@ -90,7 +90,7 @@ export function SuggestedScript({
         gotoTab(TabNames.SUCCESS_MESSAGE)
       }
     },
-    [phoneNumber, dtsiPerson, addressSchema, user],
+    [addressSchema, dtsiPerson.slug, gotoTab, router, user?.id],
   )
 
   return (
