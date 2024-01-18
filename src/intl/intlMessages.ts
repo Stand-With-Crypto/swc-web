@@ -2,7 +2,6 @@ import 'server-only'
 import { SupportedLocale } from '@/intl/locales'
 import { createIntl } from '@formatjs/intl'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
-import { MissingTranslationError } from 'react-intl'
 import * as Sentry from '@sentry/nextjs'
 import { getLogger } from '@/utils/shared/logger'
 

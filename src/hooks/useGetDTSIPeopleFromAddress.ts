@@ -1,7 +1,6 @@
 import { queryDTSIPeopleByCongressionalDistrict } from '@/data/dtsi/queries/queryDTSIPeopleByCongressionalDistrict'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { getCongressionalDistrictFromAddress } from '@/utils/shared/getCongressionalDistrictFromAddress'
-import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { apiUrls } from '@/utils/shared/urls'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
 import useSWR from 'swr'

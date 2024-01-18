@@ -15,7 +15,7 @@ import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
 import { getUserDisplayName } from '@/utils/web/userUtils'
 import { AlertCircle } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { toast } from 'sonner'
 import * as Sentry from '@sentry/nextjs'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
@@ -31,13 +31,13 @@ export function MergeAlertCTA({
   useEffect(() => {
     // Because this should be a rare occurrence, we want to track what % of user profile views have this
     trackClientAnalytic('Merge Account CTA Displayed', { 'User Merge Alert ID': mergeAlert.id })
-  }, [])
+  }, [mergeAlert.id])
   const initialUserToDeleteId = useMemo(() => {
     if (mergeAlert.hasBeenConfirmedByOtherUser) {
       return mergeAlert.otherUser.id
     }
     return mergeAlert.userAId
-  }, [])
+  }, [mergeAlert.hasBeenConfirmedByOtherUser, mergeAlert.otherUser.id, mergeAlert.userAId])
   const [userToDeleteId, setUserToDeleteId] = useState<string>(initialUserToDeleteId)
   const [state, setState] = useState<'loading' | null>(null)
   const handleApproval = () => {

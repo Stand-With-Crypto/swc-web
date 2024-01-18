@@ -4,7 +4,7 @@ import React from 'react'
 const Container = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement> & { asChild?: boolean }
->(({ className, asChild = false, ...props }, ref) => {
+>(({ className, asChild: _asChild = false, ...props }, ref) => {
   return <div className={cn('flex min-h-dvh flex-col', className)} ref={ref} {...props} />
 })
 Container.displayName = 'FullPageHeightContainer'
@@ -12,7 +12,7 @@ Container.displayName = 'FullPageHeightContainer'
 const Content = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement> & { asChild?: boolean }
->(({ className, asChild = false, ...props }, ref) => {
+>(({ className, asChild: _asChild = false, ...props }, ref) => {
   return (
     <main
       className={cn('flex flex-col', className)}

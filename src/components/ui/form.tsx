@@ -178,7 +178,7 @@ const FormGeneralErrorMessage = React.forwardRef<
   React.HTMLAttributes<HTMLParagraphElement> & {
     control: Control<any>
   }
->(({ className, children, control, ...props }, ref) => {
+>(({ className: _className, children: _children, control, ...props }, ref) => {
   return (
     <FormField
       control={control}

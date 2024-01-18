@@ -1,7 +1,6 @@
 import 'server-only'
-import { ThirdwebAuth, ThirdwebAuthUser } from '@thirdweb-dev/auth/next'
+import { ThirdwebAuthUser } from '@thirdweb-dev/auth/next'
 import { ThirdwebAuth as ThirdwebAuthSDK } from '@thirdweb-dev/auth'
-import { NextRequest } from 'next/server'
 import { thirdWebAuthConfig } from '@/utils/server/thirdWebAuth'
 import { cookies } from 'next/headers'
 /*

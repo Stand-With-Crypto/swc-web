@@ -33,7 +33,6 @@ export async function verifiedSWCPartnersUserActionOptIn({
   partner,
   fullName,
   phoneNumber,
-  hasOptedInToReceiveSMSFromSWC,
 }: z.infer<typeof zodVerifiedSWCPartnersUserActionOptIn> & { partner: VerifiedSWCPartner }) {
   const actionType = UserActionType.OPT_IN
   const existingAction = await prismaClient.userAction.findFirst({

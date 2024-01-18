@@ -2,7 +2,6 @@ import Cookies from 'js-cookie'
 
 import React from 'react'
 import mixpanel from 'mixpanel-browser'
-import { isBrowser } from '@/utils/shared/executionEnvironment'
 import {
   COOKIE_CONSENT_COOKIE_NAME,
   CookieConsentPermissions,
@@ -32,7 +31,7 @@ export function useCookieConsent() {
       setCookieConsentCookie(serializeCookieConsent(consentCookie))
       toggleProviders(consentCookie)
     },
-    [setCookieConsentCookie],
+    [setCookieConsentCookie, toggleProviders],
   )
 
   const acceptAllCookieValue = React.useMemo(
@@ -62,7 +61,7 @@ export function useCookieConsent() {
       performance: false,
       targeting: false,
     })
-  }, [setCookieConsentCookie, rejectAllCookieValue])
+  }, [setCookieConsentCookie, rejectAllCookieValue, toggleProviders])
 
   const acceptAllCookies = React.useCallback((): void => {
     setCookieConsentCookie(acceptAllCookieValue)
@@ -71,7 +70,7 @@ export function useCookieConsent() {
       performance: true,
       targeting: true,
     })
-  }, [setCookieConsentCookie, acceptAllCookieValue])
+  }, [setCookieConsentCookie, acceptAllCookieValue, toggleProviders])
 
   return {
     acceptSpecificCookies,
@@ -97,7 +96,7 @@ function useCookieState(
     if (value) {
       Cookies.set(name, value, options)
     }
-  }, [value, name])
+  }, [value, name, options])
 
   const removeCookie = React.useCallback(() => {
     Cookies.remove(name)

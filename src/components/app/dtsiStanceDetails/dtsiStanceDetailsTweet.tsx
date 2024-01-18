@@ -11,8 +11,7 @@ import { ExternalLink } from '@/components/ui/link'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { dtsiTweetUrl } from '@/utils/dtsi/dtsiTweetUtils'
 import { cn } from '@/utils/web/cn'
-import { format } from 'date-fns'
-import { Quote } from 'lucide-react'
+
 // @ts-ignore
 import { parse as twemojiParser } from 'twemoji-parser'
 

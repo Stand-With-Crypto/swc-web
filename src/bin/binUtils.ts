@@ -3,7 +3,6 @@ import path from 'path'
 import fs from 'fs-extra'
 import { prismaClient } from '@/utils/server/prismaClient'
 import * as Sentry from '@sentry/nextjs'
-import { sleep } from '@/utils/shared/sleep'
 // eslint-disable-next-line
 import '../../sentry.server.config'
 

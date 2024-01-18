@@ -5,7 +5,7 @@ export const dynamic = 'error'
 
 type Props = PageProps
 
-export default async function ResourcesPage({ params }: Props) {
+export default async function ResourcesPage(_props: Props) {
   return (
     <div className="container">
       <PageTitle>TODO</PageTitle>

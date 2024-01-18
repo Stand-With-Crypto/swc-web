@@ -1,6 +1,5 @@
 import {
   DTSI_Gender,
-  DTSI_Person,
   DTSI_PersonPoliticalAffiliationCategory,
   DTSI_PersonResolvers,
 } from '@/data/dtsi/generated'
