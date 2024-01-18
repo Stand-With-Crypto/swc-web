@@ -3,7 +3,7 @@ import { usePathname, useRouter } from 'next/navigation'
 
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 
-export function useThirdWeb() {
+export function useThirdwebData() {
   const session = useUser()
   const disconnect = useDisconnect()
   const { logout } = useLogout()

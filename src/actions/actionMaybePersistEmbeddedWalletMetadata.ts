@@ -1,5 +1,5 @@
 'use server'
-import { appRouterGetAuthUser } from '@/utils/server/appRouterGetAuthUser'
+import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getLogger } from '@/utils/shared/logger'
 import { UserEmailAddressSource } from '@prisma/client'
