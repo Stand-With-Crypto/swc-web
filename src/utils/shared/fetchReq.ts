@@ -15,14 +15,13 @@ const maybeParseBody = async (response: Response) =>
   response
     .text()
     .then(x => {
-      if (NEXT_PUBLIC_ENVIRONMENT !== 'local') {
-        return x
-      }
-      // try and format stuff cleaner in local dev
       try {
-        return JSON.stringify(JSON.parse(x), null, 4)
+        return { type: 'json' as const, value: JSON.stringify(JSON.parse(x), null, 4) }
       } catch (e) {
-        return x
+        if (x.includes('<html')) {
+          return { type: 'html' as const, value: x }
+        }
+        return { type: 'string' as const, value: x }
       }
     })
     .catch(x => undefined)
@@ -36,6 +35,19 @@ const maybeWithoutQueryParams = (url: string) => {
   }
 }
 
+const formatErrorNameWithBody = (val: Awaited<ReturnType<typeof maybeParseBody>>) => {
+  switch (val?.type) {
+    case 'string':
+      return ` ${val.value}`
+    case 'html':
+      return ' with html response'
+    case 'json':
+      return 'with json response'
+    default:
+      return ''
+  }
+}
+
 export const fetchReq = async (
   url: string,
   options?: RequestInit,
@@ -45,10 +57,11 @@ export const fetchReq = async (
   if (response.status >= 200 && response.status < 300) {
     return response
   }
+  const maybeBody = await maybeParseBody(response)
   const errorName = `${response.status} from ${options?.method || 'GET'} ${maybeWithoutQueryParams(
     url,
-  )}`
-  const error = new FetchReqError(response, errorName, await maybeParseBody(response))
+  )}${formatErrorNameWithBody(maybeBody)}`
+  const error = new FetchReqError(response, errorName, maybeBody?.value)
   Sentry.withScope(scope => {
     scope.setTransactionName(errorName)
     scope.setFingerprint([url])
