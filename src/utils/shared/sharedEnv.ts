@@ -1,4 +1,15 @@
-import { requiredEnv } from '@/utils/shared/requiredEnv'
+/*
+we cant use import { requiredEnv } from '@/utils/shared/requiredEnv' here because it'll cause a circular dependency with Sentry, so we have a stricter version just for this file
+*/
+
+export function requiredEnv(value: string | undefined, name: string) {
+  if (!value) {
+    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+    const message = `Required environment variable ${name} is missing. Value was ${value}`
+    throw new Error(message)
+  }
+  return value
+}
 
 export const NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN = requiredEnv(
   process.env.NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN,
