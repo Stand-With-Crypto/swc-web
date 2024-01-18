@@ -1,4 +1,4 @@
-import { ThirdwebAuth, ThirdwebAuthConfig } from '@thirdweb-dev/auth/next'
+import { ThirdwebAuthConfig } from '@thirdweb-dev/auth/next'
 import { PrivateKeyWallet } from '@thirdweb-dev/auth/evm'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN } from '@/utils/shared/sharedEnv'

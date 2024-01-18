@@ -1,50 +1,11 @@
-import { fetchReq } from '@/utils/shared/fetchReq'
-import { requiredEnv } from '@/utils/shared/requiredEnv'
+import {
+  GoogleCivicInfoResponse,
+  getGoogleCivicDataFromAddress,
+} from '@/utils/shared/googleCivicInfo'
 import * as Sentry from '@sentry/nextjs'
 import _ from 'lodash'
-/*
-Sample response
-{
-  "normalizedInput": {
-      "line1": "710 West 9th Road",
-      "city": "Far Rockaway",
-      "state": "NY",
-      "zip": "10025"
-  },
-  "kind": "civicinfo#representativeInfoResponse",
-  "divisions": {
-      "ocd-division/country:us": {
-          "name": "United States"
-      },
-      "ocd-division/country:us/state:ny": {
-          "name": "New York"
-      },
-      "ocd-division/country:us/state:ny/cd:5": {
-          "name": "New York's 5th congressional district"
-      }
-  }
-*/
-interface GoogleCivicDataResponse {
-  normalizedInput: unknown // not used
-  kind: 'civicinfo#representativeInfoResponse'
-  divisions: Record<string, { name: string }>
-}
 
-const NEXT_PUBLIC_GOOGLE_CIVIC_API_KEY = requiredEnv(
-  process.env.NEXT_PUBLIC_GOOGLE_CIVIC_API_KEY,
-  'NEXT_PUBLIC_GOOGLE_CIVIC_API_KEY',
-)
-const CIVIC_BY_ADDRESS_ENDPOINT = 'https://www.googleapis.com/civicinfo/v2/representatives'
-function getGoogleCivicDataFromAddress(address: string) {
-  const url = `${CIVIC_BY_ADDRESS_ENDPOINT}?address=${encodeURIComponent(
-    address.trim(),
-  )}&key=${NEXT_PUBLIC_GOOGLE_CIVIC_API_KEY}&levels=country&includeOffices=false`
-  return fetchReq(url)
-    .then(res => res.json())
-    .then(res => res as GoogleCivicDataResponse)
-}
-
-const findCongressionalDistrictString = (response: GoogleCivicDataResponse, address: string) => {
+const findCongressionalDistrictString = (response: GoogleCivicInfoResponse, address: string) => {
   if (Object.keys(response.divisions).every(key => key !== 'ocd-division/country:us')) {
     return { notFoundReason: 'NOT_USA_ADDRESS' as const }
   }

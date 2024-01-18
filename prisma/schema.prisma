@@ -42,6 +42,7 @@ model Address {
   datetimeCreated          DateTime @default(now()) @map("datetime_created")
 
   userActionEmails UserActionEmail[]
+  userActionCalls  UserActionCall[]
   users            User[]
 
   @@map("address")
@@ -286,8 +287,11 @@ model UserActionCall {
   // TODO determine if these need to be nullable in the future
   recipientDtsiSlug    String     @map("recipient_dtsi_slug")
   recipientPhoneNumber String     @map("recipient_phone_number")
+  address              Address    @relation(fields: [addressId], references: [id])
+  addressId            String     @map("address_id")
 
   @@index([id])
+  @@index([addressId])
   @@map("user_action_call")
 }
 

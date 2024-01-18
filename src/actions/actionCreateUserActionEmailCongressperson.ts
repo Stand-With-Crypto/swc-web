@@ -35,6 +35,7 @@ export async function actionCreateUserActionEmailCongressperson(
     }
   }
   logger.info('validated fields')
+
   const localUser = parseLocalUserFromCookies()
   const analytics = getServerAnalytics({ ...userMatch, localUser })
   const user =

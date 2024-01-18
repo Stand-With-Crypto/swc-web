@@ -285,10 +285,10 @@ async function seed() {
   userActionEmail
   */
   await batchAsyncAndLog(
-    userActionsByType[UserActionType.EMAIL].map((action, index) => ({
+    userActionsByType[UserActionType.EMAIL].map(action => ({
       ...mockUserActionEmail(),
       id: action.id,
-      addressId: address[index].id,
+      addressId: faker.helpers.arrayElement(address).id,
     })),
     data =>
       prismaClient.userActionEmail.createMany({
@@ -324,6 +324,7 @@ async function seed() {
     userActionsByType[UserActionType.CALL].map(action => ({
       ...mockUserActionCall(),
       id: action.id,
+      addressId: faker.helpers.arrayElement(address).id,
     })),
     data =>
       prismaClient.userActionCall.createMany({

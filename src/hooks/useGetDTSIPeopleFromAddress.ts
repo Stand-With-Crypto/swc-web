@@ -1,29 +1,44 @@
-import { queryDTSIPeopleByCongressionalDistrict } from '@/data/dtsi/queries/queryDTSIPeopleByCongressionalDistrict'
+import { DTSIPeopleByCongressionalDistrictQueryResult } from '@/data/dtsi/queries/queryDTSIPeopleByCongressionalDistrict'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { getCongressionalDistrictFromAddress } from '@/utils/shared/getCongressionalDistrictFromAddress'
 import { apiUrls } from '@/utils/shared/urls'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
 import useSWR from 'swr'
 
+export type UseGetDTSIPeopleFromAddressResponse =
+  | DTSIPeopleByCongressionalDistrictQueryResult
+  | { notFoundReason: string }
+
+async function getDTSIPeopleFromCongressionalDistrict(
+  result: Awaited<ReturnType<typeof getCongressionalDistrictFromAddress>>,
+) {
+  if ('notFoundReason' in result) {
+    return result
+  }
+
+  const data = await fetchReq(apiUrls.dtsiPeopleByCongressionalDistrict(result))
+    .then(res => res.json())
+    .catch(e => {
+      catchUnexpectedServerErrorAndTriggerToast(e)
+      return { notFoundReason: 'UNEXPECTED_ERROR' as const }
+    })
+
+  if (!data) {
+    return { notFoundReason: 'MISSING_FROM_DTSI' as const }
+  }
+
+  return data as DTSIPeopleByCongressionalDistrictQueryResult
+}
+
+export async function getDTSIPeopleFromAddress(address: string) {
+  const result = await getCongressionalDistrictFromAddress(address)
+
+  return getDTSIPeopleFromCongressionalDistrict(result)
+}
+
 export function useGetDTSIPeopleFromAddress(address: string) {
-  return useSWR(address ? `useGetDTSIPeopleFromAddress-${address}` : null, async () => {
-    const result = await getCongressionalDistrictFromAddress(address)
-    if ('notFoundReason' in result) {
-      return result
-    }
-    return fetchReq(apiUrls.dtsiPeopleByCongressionalDistrict(result))
-      .then(res => res.json())
-      .then(data => {
-        if (!data) {
-          return { notFoundReason: 'MISSING_FROM_DTSI' as const }
-        }
-        return data as NonNullable<
-          Awaited<ReturnType<typeof queryDTSIPeopleByCongressionalDistrict>>
-        >
-      })
-      .catch(e => {
-        catchUnexpectedServerErrorAndTriggerToast(e)
-        return { notFoundReason: 'UNEXPECTED_ERROR' as const }
-      })
-  })
+  return useSWR<UseGetDTSIPeopleFromAddressResponse>(
+    address ? `useGetDTSIPeopleFromAddress-${address}` : null,
+    getDTSIPeopleFromAddress,
+  )
 }
