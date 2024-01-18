@@ -1,5 +1,4 @@
 import { SupportedLocale } from '@/intl/locales'
-import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { differenceInMinutes } from 'date-fns'
 
 export function FormattedRelativeDatetime({

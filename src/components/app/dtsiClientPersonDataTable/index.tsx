@@ -29,7 +29,7 @@ export function useGetAllPeople() {
 }
 // TODO figure out what we want this to look like on mobile
 export function DTSIClientPersonDataTable({ locale }: { locale: SupportedLocale }) {
-  const { data, error } = useGetAllPeople()
+  const { data } = useGetAllPeople()
   const memoizedColumns = useMemo(() => getDTSIClientPersonDataTableColumns({ locale }), [locale])
   return (
     <div className="container mx-auto py-10">

@@ -178,7 +178,7 @@ enum SupportedUserCryptoNetwork {
   ETH
 }
 
-// Using ThirdWeb a user can create multiple "accounts", one per wallet. They can also have some that are self-custodied, and some that are being custodied by ThirdWeb (email, google login, etc)
+// Using Thirdweb a user can create multiple "accounts", one per wallet. They can also have some that are self-custodied, and some that are being custodied by Thirdweb (email, google login, etc)
 model UserCryptoAddress {
   id              String                     @id @default(uuid())
   cryptoNetwork   SupportedUserCryptoNetwork @default(ETH) @map("crypto_network")

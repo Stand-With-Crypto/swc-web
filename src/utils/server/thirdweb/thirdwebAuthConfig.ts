@@ -4,16 +4,12 @@ import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN } from '@/utils/shared/sharedEnv'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getUserSessionIdOnPageRouter } from '@/utils/server/serverUserSessionId'
-import { SupportedUserCryptoNetwork } from '@prisma/client'
 import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import {
   mapLocalUserToUserDatabaseFields,
   parseLocalUserFromCookiesForPageRouter,
 } from '@/utils/server/serverLocalUser'
-import {
-  mapCurrentSessionLocalUserToAnalyticsProperties,
-  mapPersistedLocalUserToAnalyticsProperties,
-} from '@/utils/shared/localUser'
+import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 
 // TODO migrate this logic from page router to app router once thirdweb supports it
 
@@ -22,7 +18,7 @@ const THIRDWEB_AUTH_PRIVATE_KEY = requiredEnv(
   'THIRDWEB_AUTH_PRIVATE_KEY',
 )
 
-export const thirdWebAuthConfig: ThirdwebAuthConfig = {
+export const thirdwebAuthConfig: ThirdwebAuthConfig = {
   domain: NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN,
   // TODO determine if we have requirements for the wallet private key that necessitate a more secure storage mechanism
   wallet: new PrivateKeyWallet(THIRDWEB_AUTH_PRIVATE_KEY),
@@ -48,7 +44,7 @@ export const thirdWebAuthConfig: ThirdwebAuthConfig = {
       // TODO analytics
     },
     // look for the comment in appRouterGetAuthUser for why we don't use this fn
-    onUser: async (user, req) => {},
+    onUser: async () => {},
     onLogin: async (address, req) => {
       const localUser = parseLocalUserFromCookiesForPageRouter(req)
       // TODO figure out how to get the users email address to persist to the db
@@ -89,4 +85,3 @@ export const thirdWebAuthConfig: ThirdwebAuthConfig = {
     },
   },
 }
-export const thirdWebAuth = ThirdwebAuth(thirdWebAuthConfig)

@@ -6,7 +6,6 @@ import { NavbarSessionButton } from '@/components/app/navbar/navbarSessionButton
 import { navbarSessionButtonMessages } from '@/components/app/navbar/navbarSessionButton/navbarSessionButtonClient.messages'
 import { SampleAuthenticatedRequest } from '@/components/sampleArchitecture/sampleAuthenticatedRequest'
 import { Button } from '@/components/ui/button'
-import { getSumDonations } from '@/data/aggregations/getSumDonations'
 import { getLeaderboard } from '@/data/sampleArchitecture/leaderboard'
 import getIntl from '@/intl/intlMessages'
 import { generateClientComponentMessages } from '@/intl/intlServerUtils'

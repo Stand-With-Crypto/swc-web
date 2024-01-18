@@ -1,9 +1,9 @@
 'use server'
 import * as Sentry from '@sentry/nextjs'
-import { appRouterGetAuthUser } from '@/utils/server/appRouterGetAuthUser'
+import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { Prisma, User, UserCryptoAddress } from '@prisma/client'
+import { Prisma, UserCryptoAddress } from '@prisma/client'
 import _ from 'lodash'
 import { GetFindResult } from '@prisma/client/runtime/library'
 

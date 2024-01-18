@@ -1,5 +1,6 @@
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/recentActivityAndLeaderboard/recentActivityAndLeaderboardTabs'
 import { DEFAULT_LOCALE, SupportedLocale } from '@/intl/locales'
+import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
 export const getIntlPrefix = (locale: SupportedLocale) =>
@@ -70,12 +71,19 @@ export const apiUrls = {
   dtsiAllPeople: () => `/api/public/dtsi/all-people`,
 }
 
+const NEXT_PUBLIC_VERCEL_URL = requiredOutsideLocalEnv(
+  process.env.NEXT_PUBLIC_VERCEL_URL,
+  'NEXT_PUBLIC_VERCEL_URL',
+)
+
 export const fullUrl = (path: string) => {
   switch (NEXT_PUBLIC_ENVIRONMENT) {
     case 'local':
       return `http://localhost:3000${path}`
     case 'testing':
       return `https://swc-web-testing.vercel.app${path}`
+    case 'preview':
+      return `${NEXT_PUBLIC_VERCEL_URL!}${path}`
     case 'production':
       return `https://www.standwithcrypto.org${path}`
   }

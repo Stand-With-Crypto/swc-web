@@ -1,7 +1,4 @@
-import {
-  PageUserProfileUser,
-  getAuthenticatedData,
-} from '@/components/app/pageUserProfile/getAuthenticatedData'
+import { PageUserProfileUser } from '@/components/app/pageUserProfile/getAuthenticatedData'
 import { UpdateUserProfileFormDialog } from '@/components/app/updateUserProfileForm/dialog'
 import { hasAllFormFieldsOnUserForUpdateUserProfileForm } from '@/components/app/updateUserProfileForm/hasAllFormFieldsOnUser'
 import { UserActionRowCTAsList } from '@/components/app/userActionRowCTA/userActionRowCTAsList'
@@ -15,7 +12,6 @@ import { PageTitle } from '@/components/ui/pageTitleText'
 import { Progress } from '@/components/ui/progress'
 import { PageProps } from '@/types'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
-import { getIntlUrls } from '@/utils/shared/urls'
 import { getSensitiveDataUserDisplayName } from '@/utils/web/userUtils'
 import { UserActionType } from '@prisma/client'
 import _ from 'lodash'
@@ -26,7 +22,6 @@ export function PageUserProfile({
   user,
 }: PageProps & { user: PageUserProfileUser | null }) {
   const { locale } = params
-  const urls = getIntlUrls(locale)
   if (!user) {
     // TODO UX
     return <div>Not logged in</div>

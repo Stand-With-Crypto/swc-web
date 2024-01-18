@@ -1,6 +1,5 @@
-import { ClientAddress, getClientAddress } from '@/clientModels/clientAddress'
 import { ClientModel, getClientModel } from '@/clientModels/utils'
-import { Address, UserCryptoAddress } from '@prisma/client'
+import { UserCryptoAddress } from '@prisma/client'
 
 export type ClientUserCryptoAddress = ClientModel<
   Pick<UserCryptoAddress, 'id' | 'cryptoAddress' | 'cryptoNetwork'>

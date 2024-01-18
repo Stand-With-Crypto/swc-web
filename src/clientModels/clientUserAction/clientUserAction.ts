@@ -1,10 +1,8 @@
-import { ClientAddress, getClientAddress } from '@/clientModels/clientAddress'
 import { ClientNFT, getClientNFT } from '@/clientModels/clientNFT'
 import { ClientNFTMint, getClientNFTMint } from '@/clientModels/clientNFTMint'
 import { ClientModel, getClientModel } from '@/clientModels/utils'
 import { DTSIPersonForUserActions } from '@/data/dtsi/queries/queryDTSIPeopleBySlugForUserActions'
 import {
-  Address,
   NFT,
   NFTMint,
   UserAction,
@@ -41,7 +39,7 @@ type ClientUserActionEmail = {
   userActionEmailRecipients: ClientUserActionEmailRecipient[]
   actionType: typeof UserActionType.EMAIL
 }
-type ClientUserActionCall = Pick<UserActionCall, 'recipientPhoneNumber'> & {
+type ClientUserActionCall = {
   person: DTSIPersonForUserActions
   actionType: typeof UserActionType.CALL
 }
@@ -117,9 +115,8 @@ export const getClientUserAction = ({
       return getClientModel({ ...sharedProps, ...callFields })
     }
     case UserActionType.CALL: {
-      const { recipientPhoneNumber, recipientDtsiSlug } = getRelatedModel(record, 'userActionCall')
+      const { recipientDtsiSlug } = getRelatedModel(record, 'userActionCall')
       const callFields: ClientUserActionCall = {
-        recipientPhoneNumber,
         person: peopleBySlug[recipientDtsiSlug],
         actionType,
       }

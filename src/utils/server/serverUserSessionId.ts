@@ -1,5 +1,5 @@
 import * as Sentry from '@sentry/nextjs'
-import { USER_SESSION_ID_COOKIE_NAME, generateUserSessionId } from '@/utils/shared/userSessionId'
+import { USER_SESSION_ID_COOKIE_NAME } from '@/utils/shared/userSessionId'
 import { NextApiRequest } from 'next'
 import { cookies, headers } from 'next/headers'
 

@@ -4,7 +4,7 @@ import { getClientUserCryptoAddress } from '@/clientModels/clientUser/clientUser
 import { getSensitiveDataClientUser } from '@/clientModels/clientUser/sensitiveDataClientUser'
 import { getSensitiveDataClientUserAction } from '@/clientModels/clientUserAction/sensitiveDataClientUserAction'
 import { queryDTSIPeopleBySlugForUserActions } from '@/data/dtsi/queries/queryDTSIPeopleBySlugForUserActions'
-import { appRouterGetAuthUser } from '@/utils/server/appRouterGetAuthUser'
+import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
 import { prismaClient } from '@/utils/server/prismaClient'
 import 'server-only'
 
@@ -72,7 +72,13 @@ export async function getAuthenticatedData() {
     ),
     mergeAlerts: [
       ...user.userMergeAlertUserA.map(
-        ({ userB, hasBeenConfirmedByUserA, hasBeenConfirmedByUserB, userBId, ...mergeAlert }) => ({
+        ({
+          userB,
+          hasBeenConfirmedByUserA,
+          hasBeenConfirmedByUserB,
+          userBId: _,
+          ...mergeAlert
+        }) => ({
           ...mergeAlert,
           hasBeenConfirmedByOtherUser: hasBeenConfirmedByUserB,
           hasBeenConfirmedByCurrentUser: hasBeenConfirmedByUserA,
@@ -80,7 +86,13 @@ export async function getAuthenticatedData() {
         }),
       ),
       ...user.userMergeAlertUserB.map(
-        ({ userA, hasBeenConfirmedByUserA, hasBeenConfirmedByUserB, userBId, ...mergeAlert }) => ({
+        ({
+          userA,
+          hasBeenConfirmedByUserA,
+          hasBeenConfirmedByUserB,
+          userBId: _,
+          ...mergeAlert
+        }) => ({
           ...mergeAlert,
           hasBeenConfirmedByCurrentUser: hasBeenConfirmedByUserB,
           hasBeenConfirmedByOtherUser: hasBeenConfirmedByUserA,

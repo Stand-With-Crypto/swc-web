@@ -1,5 +1,5 @@
 import { cn } from '@/utils/web/cn'
-import NextLink, { LinkProps as NextLinkProps } from 'next/link'
+import NextLink from 'next/link'
 import React from 'react'
 
 export const InternalLink = React.forwardRef<

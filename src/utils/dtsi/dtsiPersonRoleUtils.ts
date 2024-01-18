@@ -1,6 +1,4 @@
 import {
-  DTSI_Person,
-  DTSI_PersonPoliticalAffiliationCategory,
   DTSI_PersonRole,
   DTSI_PersonRoleCategory,
   DTSI_PersonRoleStatus,

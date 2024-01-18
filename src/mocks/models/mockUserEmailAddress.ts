@@ -1,12 +1,7 @@
 import { fakerFields } from '@/mocks/fakerUtils'
 import { mockCommonDatetimes } from '@/mocks/mockCommonDatetimes'
-import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
 import { faker } from '@faker-js/faker'
-import {
-  SupportedUserCryptoNetwork,
-  UserEmailAddress,
-  UserEmailAddressSource,
-} from '@prisma/client'
+import { UserEmailAddress, UserEmailAddressSource } from '@prisma/client'
 
 export function mockUserEmailAddress(): UserEmailAddress {
   const source = faker.helpers.arrayElement(Object.values(UserEmailAddressSource))

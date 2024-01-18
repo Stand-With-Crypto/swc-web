@@ -16,7 +16,6 @@ import { batchAsyncAndLog } from '@/utils/shared/batchAsyncAndLog'
 import { MOCK_CURRENT_ETH_USD_EXCHANGE_RATE } from '@/utils/shared/exchangeRate'
 import { getLogger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
-import { splitArray } from '@/utils/shared/splitArray'
 import { faker } from '@faker-js/faker'
 import _ from 'lodash'
 import yargs from 'yargs'
@@ -141,7 +140,7 @@ async function seed() {
   userEmailAddress
   */
   await batchAsyncAndLog(
-    _.times(user.length / 2).map(index => ({
+    _.times(user.length / 2).map(() => ({
       ...mockUserEmailAddress(),
       userId: faker.helpers.arrayElement(user).id,
     })),
@@ -201,7 +200,7 @@ async function seed() {
   await batchAsyncAndLog(
     userActionTypesToPersist
       .filter(x => x === UserActionType.NFT_MINT)
-      .map(index => {
+      .map(() => {
         const selectedNFT = faker.helpers.arrayElement(nft)
         return {
           nftId: selectedNFT.id,
@@ -303,7 +302,7 @@ async function seed() {
   */
   await batchAsyncAndLog(
     _.flatten(
-      userActionsByType[UserActionType.EMAIL].map((actionEmail, index) =>
+      userActionsByType[UserActionType.EMAIL].map(actionEmail =>
         // TODO expand this to be more than 1 recipient once we have UX
         _.times(faker.helpers.arrayElement([1])).map(() => ({
           ...mockUserActionEmailRecipient(),
@@ -322,7 +321,7 @@ async function seed() {
   userActionCall
   */
   await batchAsyncAndLog(
-    userActionsByType[UserActionType.CALL].map((action, index) => ({
+    userActionsByType[UserActionType.CALL].map(action => ({
       ...mockUserActionCall(),
       id: action.id,
       addressId: address[index].id,
@@ -339,7 +338,7 @@ async function seed() {
   userActionDonation
   */
   await batchAsyncAndLog(
-    userActionsByType[UserActionType.DONATION].map((action, index) => {
+    userActionsByType[UserActionType.DONATION].map(action => {
       return {
         ...mockUserActionDonation(),
         id: action.id,
@@ -357,7 +356,7 @@ async function seed() {
   userActionOptIn
   */
   await batchAsyncAndLog(
-    userActionsByType[UserActionType.OPT_IN].map((action, index) => {
+    userActionsByType[UserActionType.OPT_IN].map(action => {
       return {
         ...mockUserActionOptIn(),
         id: action.id,
