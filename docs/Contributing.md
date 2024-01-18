@@ -54,17 +54,10 @@ If you have schema changes/migrations to make, then your Vercel preview branch w
     - Say "y" to the "stand-with-crypto/swc-web" project.
 - Run `vercel env add DATABASE_URL preview [name-of-your-branch]`, and supply your development database URL.
   - This will update your preview branch's `DATABASE_URL` environment variable in Vercel.
+  - Afterwards, you can redeploy your preview branch in Vercel, and your branch should pick up your custom `DATABASE_URL`.
 - Once your preview branch has been merged to main, please clean up your branch-specific `DATABASE_URL` by running `vercel env rm DATABASE_URL preview [name-of-your-branch]`
 
-#### Alternative solution
-
-If you prefer accessing the Vercel UI directly instead of using CLI, then you could follow the steps below:
-
-- Log into Vercel.
-- Go to the swc-web project --> Settings --> Environment Variables.
-- Create a new environment variable with key name `DATABASE_URL` and with value of your PlanetScale database URL.
-  - Ensure that the Environment for this key is selected to Preview --> Select Custom branch --> find your specific Vercel branch. **Do NOT overwrite Production, Preview, or Development**.
-- Once your preview branch has been merged to main, please delete your branch-specific `DATABASE_URL`.
+At any point, if you want an additional sanity check for the existence of your environment variable, you can log into the Vercel website and check for your environment variable.
 
 ### Updating the PlanetScale schema
 

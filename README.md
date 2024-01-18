@@ -35,9 +35,11 @@
 - `npm run db:seed` - resets _your_ [PlanetScale](https://planetscale.com/) database, then populates the PlanetScale database with seed data
   - The database will be based on the `DATABASE_URL` provided in your local `.env` file - we will refer to this as "the database you are connected to"
 - `npm run codegen` - generates TypeScript definitions for any GraphQL operations we have defined in our codebase
+  - Whenever you make GraphQL query updates (_e.g._ our DTSI integration), you should run this command to update your TypeScript definitions
 - `npm run codegen:schemas` - if any of the GraphQL schemas changed for our 3rd-party API partners (_e.g._ https://www.dotheysupportit.com/), run this command to pull in the latest schemas
 - `npm run intl:extract-compile` - generates initial translation files
 - `npm run storybook` - view isolated [storybook stories](https://storybook.js.org/)
+- When checking out someone else's branch with changes - if you encounter TypeScript errors, run `npm run newbranch` to execute several common commands that may fix these errors
 
 ### Updating the database schema
 
@@ -57,7 +59,6 @@ Whenever you make Prisma schema changes (or pulling commits from `main` that inc
   - `npm run typecheck` - audits code against TypeScript
   - `npm run test` - execute Jest tests
   - `npm run precheck` - executes all 3 commands above concurrently
-- When checking out someone else's branch with changes - if you encounter TypeScript errors, run `npm run newbranch` to execute several common commands that may fix these errors
 
 ### Contribution guide
 
