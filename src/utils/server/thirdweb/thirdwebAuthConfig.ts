@@ -4,7 +4,7 @@ import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN } from '@/utils/shared/sharedEnv'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getUserSessionIdOnPageRouter } from '@/utils/server/serverUserSessionId'
-import { SupportedUserCryptoNetwork } from '@prisma/client'
+import { SupportedUserCryptoNetwork, UserEmailAddressSource } from '@prisma/client'
 import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import {
   mapLocalUserToUserDatabaseFields,
@@ -14,6 +14,7 @@ import {
   mapCurrentSessionLocalUserToAnalyticsProperties,
   mapPersistedLocalUserToAnalyticsProperties,
 } from '@/utils/shared/localUser'
+import { fetchEmbeddedWalletMetadataFromThirdweb } from '@/utils/server/thirdweb/fetchEmbeddedWalletMetadataFromThirdweb'
 
 // TODO migrate this logic from page router to app router once thirdweb supports it
 
@@ -62,6 +63,7 @@ export const thirdwebAuthConfig: ThirdwebAuthConfig = {
       peopleAnalytics.set({ 'Datetime of Last Login': new Date() })
       if (!existingUser) {
         const userSessionId = getUserSessionIdOnPageRouter(req)
+        const embeddedWalletEmailAddress = await fetchEmbeddedWalletMetadataFromThirdweb(address)
         existingUser = await prismaClient.user.findFirst({
           where: { userSessions: { some: { id: userSessionId } } },
         })
@@ -80,10 +82,28 @@ export const thirdwebAuthConfig: ThirdwebAuthConfig = {
                   },
                 },
           },
+          include: { user: true },
         })
+        let primaryUserEmailAddressId: null | string = null
+        if (embeddedWalletEmailAddress) {
+          const email = await prismaClient.userEmailAddress.create({
+            data: {
+              isVerified: true,
+              source: UserEmailAddressSource.THIRDWEB_EMBEDDED_AUTH,
+              emailAddress: embeddedWalletEmailAddress.email.toLowerCase(),
+              userId: userCryptoAddress.userId,
+            },
+          })
+          if (!userCryptoAddress.user.primaryUserEmailAddressId) {
+            primaryUserEmailAddressId = email.id
+          }
+        }
         await prismaClient.user.update({
           where: { id: userCryptoAddress.userId },
-          data: { primaryUserCryptoAddressId: userCryptoAddress.id },
+          data: {
+            primaryUserCryptoAddressId: userCryptoAddress.id,
+            ...(primaryUserEmailAddressId ? { primaryUserEmailAddressId } : {}),
+          },
         })
       }
     },
