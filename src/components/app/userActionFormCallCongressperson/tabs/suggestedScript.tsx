@@ -55,47 +55,50 @@ export function SuggestedScript({
     return official.phones[0]
   }, [dtsiPerson, civicData])
 
-  const handleCallAction = React.useCallback(async () => {
-    const input: z.infer<typeof createActionCallCongresspersonInputValidationSchema> = {
-      campaignName: UserActionCallCampaignName.DEFAULT,
-      dtsiSlug: dtsiPerson.slug,
-      phoneNumber: phoneNumber!,
-      address: addressSchema,
-    }
-    const validatedInput = createActionCallCongresspersonInputValidationSchema.safeParse(input)
+  const handleCallAction = React.useCallback(
+    async (phoneNumberToCall: string) => {
+      const input: z.infer<typeof createActionCallCongresspersonInputValidationSchema> = {
+        campaignName: UserActionCallCampaignName.DEFAULT,
+        dtsiSlug: dtsiPerson.slug,
+        phoneNumber: phoneNumberToCall,
+        address: addressSchema,
+      }
+      const validatedInput = createActionCallCongresspersonInputValidationSchema.safeParse(input)
 
-    if (!validatedInput.success) {
-      toastGenericError()
-      Sentry.captureMessage('Call Action - Invalid input', {
-        user: { id: user?.id },
-        extra: {
-          input,
-          validationResult: validatedInput.error,
+      if (!validatedInput.success) {
+        toastGenericError()
+        Sentry.captureMessage('Call Action - Invalid input', {
+          user: { id: user?.id },
+          extra: {
+            input,
+            validationResult: validatedInput.error,
+          },
+        })
+        return
+      }
+
+      const { data } = validatedInput
+      const result = await triggerServerActionForForm(
+        {
+          formName: 'User Action Form Call Congressperson',
+          onError: toastGenericError,
+          analyticsProps: {
+            ...convertAddressToAnalyticsProperties(data.address),
+            'Campaign Name': data.campaignName,
+            'User Action Type': UserActionType.CALL,
+            'DTSI Slug': data.dtsiSlug,
+          },
         },
-      })
-      return
-    }
+        () => actionCreateUserActionCallCongressperson(data),
+      )
 
-    const { data } = validatedInput
-    const result = await triggerServerActionForForm(
-      {
-        formName: 'User Action Form Call Congressperson',
-        onError: toastGenericError,
-        analyticsProps: {
-          ...convertAddressToAnalyticsProperties(data.address),
-          'Campaign Name': data.campaignName,
-          'User Action Type': UserActionType.CALL,
-          'DTSI Slug': data.dtsiSlug,
-        },
-      },
-      () => actionCreateUserActionCallCongressperson(data),
-    )
-
-    if (result.status === 'success') {
-      router.refresh()
-      gotoTab(TabNames.SUCCESS_MESSAGE)
-    }
-  }, [phoneNumber, dtsiPerson, addressSchema, user])
+      if (result.status === 'success') {
+        router.refresh()
+        gotoTab(TabNames.SUCCESS_MESSAGE)
+      }
+    },
+    [phoneNumber, dtsiPerson, addressSchema, user],
+  )
 
   return (
     <>
@@ -134,7 +137,7 @@ export function SuggestedScript({
       >
         {phoneNumber && (
           <Button asChild>
-            <InternalLink href={`tel:${phoneNumber}`} onClick={handleCallAction}>
+            <InternalLink href={`tel:${phoneNumber}`} onClick={() => handleCallAction(phoneNumber)}>
               Call
             </InternalLink>
           </Button>

@@ -27,13 +27,13 @@ export function UserActionFormCallCongresspersonDialog({
     <Dialog {...dialogProps}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="max-w-3xl p-0">
-        <Suspense fallback={<UserActionFormCallCongresspersonSkeleton />}>
-          {isLoading ? (
-            <UserActionFormCallCongresspersonSkeleton />
-          ) : (
+        {isLoading ? (
+          <UserActionFormCallCongresspersonSkeleton />
+        ) : (
+          <Suspense fallback={<UserActionFormCallCongresspersonSkeleton />}>
             <LazyUserActionFormCallCongressperson {...formProps} user={user} />
-          )}
-        </Suspense>
+          </Suspense>
+        )}
       </DialogContent>
     </Dialog>
   )

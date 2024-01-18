@@ -30,8 +30,8 @@ export type CreateActionCallCongresspersonInput = z.infer<
 interface SharedDependencies {
   localUser: ReturnType<typeof parseLocalUserFromCookies>
   sessionId: ReturnType<typeof getUserSessionId>
-  analytics?: ReturnType<typeof getServerAnalytics>
-  peopleAnalytics?: ReturnType<typeof getServerPeopleAnalytics>
+  analytics: ReturnType<typeof getServerAnalytics>
+  peopleAnalytics: ReturnType<typeof getServerPeopleAnalytics>
 }
 
 const logger = getLogger(`actionCreateUserActionCallCongressperson`)
@@ -47,26 +47,21 @@ export async function actionCreateUserActionCallCongressperson(
     }
   }
 
-  const sharedDependencies: SharedDependencies = {
-    localUser: parseLocalUserFromCookies(),
-    sessionId: getUserSessionId(),
-  }
+  const localUser = parseLocalUserFromCookies()
+  const sessionId = getUserSessionId()
 
   const userMatch = await getMaybeUserAndMethodOfMatch({
     include: { primaryUserCryptoAddress: true },
   })
-  sharedDependencies.peopleAnalytics = getServerPeopleAnalytics({
-    localUser: sharedDependencies.localUser,
+  const peopleAnalytics = getServerPeopleAnalytics({
+    localUser,
     ...userMatch,
   })
-  const user = await getOrCreateUser(userMatch, sharedDependencies)
+  const user = await getOrCreateUser(userMatch, { localUser, sessionId, peopleAnalytics })
 
-  if (!user) {
-    throw new Error("Couldn't create user")
-  }
-  sharedDependencies.analytics = getServerAnalytics({
+  const analytics = getServerAnalytics({
     ...userMatch,
-    localUser: sharedDependencies.localUser,
+    localUser,
   })
 
   const recentUserAction = await getRecentUserActionByUserId(user.id)
@@ -75,7 +70,7 @@ export async function actionCreateUserActionCallCongressperson(
       validatedInput,
       userAction: recentUserAction,
       userId: user.id,
-      sharedDependencies,
+      sharedDependencies: { analytics },
     })
     return { user, userAction: recentUserAction }
   }
@@ -84,7 +79,7 @@ export async function actionCreateUserActionCallCongressperson(
     user,
     validatedInput: validatedInput.data,
     userMatch,
-    sharedDependencies,
+    sharedDependencies: { sessionId, analytics, peopleAnalytics },
   })
 
   // TODO: Mint "Call" NFT
@@ -94,7 +89,7 @@ export async function actionCreateUserActionCallCongressperson(
 
 async function getOrCreateUser(
   userMatch: UserAndMethodOfMatch,
-  sharedDependencies: SharedDependencies,
+  sharedDependencies: Pick<SharedDependencies, 'localUser' | 'sessionId' | 'peopleAnalytics'>,
 ) {
   if (userMatch?.user) {
     logger.info('fetched user')
@@ -147,9 +142,9 @@ function logSpamActionSubmissions({
   >
   userAction: UserAction
   userId: User['id']
-  sharedDependencies: SharedDependencies
+  sharedDependencies: Pick<SharedDependencies, 'analytics'>
 }) {
-  sharedDependencies.analytics?.trackUserActionCreatedIgnored({
+  sharedDependencies.analytics.trackUserActionCreatedIgnored({
     actionType: UserActionType.CALL,
     campaignName: UserActionCallCampaignName.DEFAULT,
     reason: 'Too Many Recent',
@@ -173,7 +168,7 @@ async function createActionAndUpdateUser({
   user: User
   validatedInput: z.infer<typeof createActionCallCongresspersonInputValidationSchema>
   userMatch: UserAndMethodOfMatch
-  sharedDependencies: SharedDependencies
+  sharedDependencies: Pick<SharedDependencies, 'sessionId' | 'analytics' | 'peopleAnalytics'>
 }) {
   const userAction = await prismaClient.userAction.create({
     data: {
@@ -189,6 +184,12 @@ async function createActionAndUpdateUser({
         create: {
           recipientDtsiSlug: validatedInput.dtsiSlug,
           recipientPhoneNumber: validatedInput.phoneNumber,
+          address: {
+            connectOrCreate: {
+              where: { googlePlaceId: validatedInput.address.googlePlaceId },
+              create: validatedInput.address,
+            },
+          },
         },
       },
     },
@@ -197,30 +198,26 @@ async function createActionAndUpdateUser({
     },
   })
 
-  const address = await prismaClient.address.upsert({
-    where: { googlePlaceId: validatedInput.address.googlePlaceId },
-    create: validatedInput.address,
-    update: validatedInput.address,
-  })
-
   const updatedUser = await prismaClient.user.update({
     where: { id: user.id },
     data: {
       address: {
         connect: {
-          id: address.id,
+          id: userAction.userActionCall!.addressId,
         },
       },
     },
   })
   logger.info('created user action and updated user')
 
-  sharedDependencies.analytics?.trackUserActionCreated({
+  sharedDependencies.analytics.trackUserActionCreated({
     actionType: UserActionType.CALL,
     campaignName: validatedInput.campaignName,
+    'Recipient DTSI Slug': validatedInput.dtsiSlug,
+    'Recipient Phone Number': validatedInput.phoneNumber,
     ...convertAddressToAnalyticsProperties(validatedInput.address),
   })
-  sharedDependencies.peopleAnalytics?.set({
+  sharedDependencies.peopleAnalytics.set({
     ...convertAddressToAnalyticsProperties(validatedInput.address),
   })
 

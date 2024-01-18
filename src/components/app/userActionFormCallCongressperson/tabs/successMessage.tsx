@@ -17,6 +17,7 @@ import { InternalLink } from '@/components/ui/link'
 import { NextImage } from '@/components/ui/image'
 
 import { UserActionFormCallCongresspersonLayout } from './layout'
+import { Skeleton } from '@/components/ui/skeleton'
 
 export function SuccessMessage() {
   const router = useRouter()
@@ -68,7 +69,7 @@ function SuccessMessageContent() {
   const authUser = useUser()
 
   if (authUser.isLoading) {
-    return <span>loading...</span>
+    return <SuccessMessageSkeleton />
   }
 
   if (authUser.isLoggedIn) {
@@ -125,6 +126,26 @@ function NFTDisplay() {
         width={160}
         height={160}
       />
+    </div>
+  )
+}
+
+function SuccessMessageSkeleton() {
+  return (
+    <div className="flex flex-col items-center gap-6">
+      <NFTDisplay />
+
+      <PageTitle size="md">
+        <Skeleton>Nice work! Get an NFT for calling</Skeleton>
+      </PageTitle>
+
+      <PageSubTitle>
+        <Skeleton>Join Stand with Crypto to get an NFT.</Skeleton>
+      </PageSubTitle>
+
+      <Button variant="secondary">
+        <Skeleton>Join Stand with Crypto</Skeleton>
+      </Button>
     </div>
   )
 }

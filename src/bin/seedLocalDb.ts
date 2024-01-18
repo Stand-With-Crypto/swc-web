@@ -325,6 +325,7 @@ async function seed() {
     userActionsByType[UserActionType.CALL].map((action, index) => ({
       ...mockUserActionCall(),
       id: action.id,
+      addressId: address[index].id,
     })),
     data =>
       prismaClient.userActionCall.createMany({
