@@ -41,6 +41,7 @@ export function SuggestedScript({
     )
 
     if (!official) {
+      toastGenericError()
       return null
     }
 

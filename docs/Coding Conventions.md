@@ -14,6 +14,7 @@ Below is a non-exhaustive list of coding conventions that we try to follow. This
 - Constants should be ALL_UPPER_SNAKE_CASE
   - When defining a constant array, add `readonly` to prevent unexpected mutations
 - variables that are booleans should be prefixed with a descriptor that implies a yes or no answer. Examples of prefixes include `has`, `is`, `should`, `can`, etc
+- If a parameter or prop is required by a component, function or method it should never be defined as optional
 
 ## Validation
 
