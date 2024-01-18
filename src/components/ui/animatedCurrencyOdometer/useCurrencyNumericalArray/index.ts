@@ -7,7 +7,7 @@ const FORMATTED_CURRENCY_BLOCK_REGEX = /(\D+)?(\d+)(\D+)?(\d+)?(\D+)?(\d+)?(\D+)
 export function useCurrencyNumeralArray(value: number, locale = SupportedLocale.EN_US) {
   const formattedValue = useMemo(() => {
     return formatCurrency(value, locale)
-  }, [value])
+  }, [locale, value])
 
   /**
    * @description numeralArray uses regex to split the donation value into an array of strings.

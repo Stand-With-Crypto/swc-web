@@ -24,11 +24,16 @@ module.exports = {
       { allowAny: true, allowNumber: true, allowBoolean: false, allowNullish: false },
     ],
     'no-empty': ['error', { allowEmptyCatch: true }],
-    'react-hooks/exhaustive-deps': 'off',
     'react/no-unescaped-entities': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/ban-ts-comment': 'off',
-    '@typescript-eslint/no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': [
+      'warn',
+      {
+        argsIgnorePattern: '^_',
+        varsIgnorePattern: '^_',
+      },
+    ],
     '@typescript-eslint/no-namespace': 'off',
     'no-relative-import-paths/no-relative-import-paths': ['error', { allowSameFolder: true }],
   },

@@ -1,11 +1,9 @@
 'use client'
 
-import { UserActionFormEmailCongressperson } from '@/components/app/userActionFormEmailCongressperson'
 import { LazyUserActionFormEmailCongressperson } from '@/components/app/userActionFormEmailCongressperson/lazyLoad'
 import { UserActionFormEmailCongresspersonSkeleton } from '@/components/app/userActionFormEmailCongressperson/skeleton'
 import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen/userActionFormSuccessScreen'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
-import { Skeleton } from '@/components/ui/skeleton'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useDialog } from '@/hooks/useDialog'
 import { useLocale } from '@/hooks/useLocale'
@@ -27,7 +25,7 @@ export function UserActionFormEmailCongresspersonDialog({
     if (!dialogProps.open && state !== 'form') {
       setState('form')
     }
-  }, [dialogProps.open])
+  }, [dialogProps.open, state])
   return (
     <Dialog {...dialogProps}>
       <DialogTrigger asChild>{children}</DialogTrigger>

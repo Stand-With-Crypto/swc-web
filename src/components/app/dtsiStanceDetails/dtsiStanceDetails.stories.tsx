@@ -4,7 +4,7 @@ import { DTSI_PersonDetailsQuery, DTSI_PersonStanceType } from '@/data/dtsi/gene
 import { dtsiPersonDetailsQueryString } from '@/data/dtsi/queries/queryDTSIPersonDetails/dtsiPersonDetailsQueryString'
 import { SupportedLocale } from '@/intl/locales'
 import { queryDTSIMockSchema } from '@/mocks/dtsi/queryDTSIMockSchema'
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta } from '@storybook/react'
 
 const meta = {
   title: 'App/DTSIStanceDetails',

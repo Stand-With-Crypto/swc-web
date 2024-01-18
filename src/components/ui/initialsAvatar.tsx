@@ -1,4 +1,3 @@
-import { MaybeNextImgProps, NextImage } from '@/components/ui/image'
 import { cn } from '@/utils/web/cn'
 
 export type InitialsAvatarProps = {

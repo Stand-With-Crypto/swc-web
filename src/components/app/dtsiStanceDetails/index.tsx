@@ -2,8 +2,6 @@ import { DTSIStanceDetailsBillRelationship } from '@/components/app/dtsiStanceDe
 import { DTSIStanceDetailsQuote } from '@/components/app/dtsiStanceDetails/dtsiStanceDetailsQuote'
 import { DTSIStanceDetailsTweet } from '@/components/app/dtsiStanceDetails/dtsiStanceDetailsTweet'
 import {
-  DTSIStanceDetailsPersonProp,
-  DTSIStanceDetailsStancePassedProp,
   DTSIStanceDetailsStanceProp,
   IStanceDetailsProps,
 } from '@/components/app/dtsiStanceDetails/types'

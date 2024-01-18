@@ -1,7 +1,6 @@
 // TODO align on the naming conventions for all these analytics
 // There are internal best practices, but depending on the tool we end up leveraging, we might need to change the naming conventions
 
-import { customLogger, logger } from '@/utils/shared/logger'
 import { Address } from '@prisma/client'
 
 // TODO expand this list as needed

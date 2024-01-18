@@ -24,7 +24,6 @@ export const Single: Story = {
 export const AllOptions: Story = {
   render: () => {
     const variants: any[] = Object.keys(buttonVariantsConfig.variant)
-    const sizes: any[] = Object.keys(buttonVariantsConfig.size)
     return (
       <div className="space-y-4">
         {variants.map(variant => (

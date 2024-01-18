@@ -1,6 +1,4 @@
 import { fakerFields } from '@/mocks/fakerUtils'
-import { mockCommonDatetimes } from '@/mocks/mockCommonDatetimes'
-import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
 import { faker } from '@faker-js/faker'
 import { UserActionEmail } from '@prisma/client'
 

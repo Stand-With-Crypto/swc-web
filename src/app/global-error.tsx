@@ -9,7 +9,7 @@ export default function GlobalErrorPage({ error }: { error: Error & { digest?: s
     logger.info('GlobalErrorPage rendered with:', error)
     Sentry.captureException(error)
     Sentry.captureException(new Error('Global Error Page Displayed'))
-  }, [])
+  }, [error])
   return (
     <html lang="en">
       <body>

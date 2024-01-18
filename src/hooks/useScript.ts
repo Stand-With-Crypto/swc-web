@@ -55,7 +55,7 @@ export function useScript(src: string, options: { removeOnUnmount?: boolean } = 
       setStatus('unknown')
       Sentry.captureMessage('Unexpected useScript state', { extra: { src, domStatus, options } })
     }
-  }, [src])
+  }, [options, src])
 
   return status
 }

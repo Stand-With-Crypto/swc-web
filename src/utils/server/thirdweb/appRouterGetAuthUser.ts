@@ -1,9 +1,9 @@
 import 'server-only'
-import { ThirdwebAuth, ThirdwebAuthUser } from '@thirdweb-dev/auth/next'
+import { ThirdwebAuthUser } from '@thirdweb-dev/auth/next'
 import { ThirdwebAuth as ThirdwebAuthSDK } from '@thirdweb-dev/auth'
-import { NextRequest } from 'next/server'
-import { thirdwebAuthConfig } from '@/utils/server/thirdweb/thirdwebAuthConfig'
 import { cookies } from 'next/headers'
+import { thirdwebAuthConfig } from '@/utils/server/thirdweb/thirdwebAuthConfig'
+
 /*
  Below is a version of getUser from Thirdweb, modified to support the app router.
  We should delete this code once they formally support the NextRequest object with their SDK, 

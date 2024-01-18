@@ -15,7 +15,6 @@ export function UserActionFormDonateDeeplinkWrapper() {
   const locale = useLocale()
   const urls = getIntlUrls(locale)
   const [state, setState] = useState<'form' | 'success'>('form')
-  const { user } = fetchUser.data || { user: null }
   return fetchUser.isLoading ? (
     <UserActionFormDonateSkeleton locale={locale} />
   ) : state === 'form' ? (

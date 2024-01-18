@@ -3,7 +3,6 @@ import {
   PAGE_POLITICIANS_TITLE,
   PagePoliticians,
 } from '@/components/app/pagePoliticians'
-import { Button } from '@/components/ui/button'
 import { queryDTSIHomepagePeople } from '@/data/dtsi/queries/queryDTSIHomepagePeople'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'

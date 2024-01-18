@@ -2,7 +2,6 @@
 
 import { useCookieConsent } from '@/components/app/cookieConsent/useCookieConsent'
 import { Button, ButtonProps } from '@/components/ui/button'
-import { useRouter } from 'next/navigation'
 
 export function CookieConsentFooterButton(props: ButtonProps) {
   const { resetCookieConsent } = useCookieConsent()

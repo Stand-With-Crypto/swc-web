@@ -2,10 +2,8 @@ import { CookieConsentFooterButton } from '@/components/app/cookieConsent/cookie
 import { ExternalLink, InternalLink } from '@/components/ui/link'
 import getIntl from '@/intl/intlMessages'
 import { SupportedLocale } from '@/intl/locales'
-import { PageProps } from '@/types'
 import { externalUrls, getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
-import { defineMessages } from 'react-intl'
 
 const i18nKey = 'FooterLinks'
 

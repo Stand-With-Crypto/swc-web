@@ -5,14 +5,11 @@ import {
   LOCAL_USER_PERSISTED_KEY,
   PersistedLocalUser,
 } from '@/utils/shared/localUser'
-import { getLogger } from '@/utils/shared/logger'
 import { User } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { NextApiRequest } from 'next'
 import { cookies } from 'next/headers'
 import { object, record, string } from 'zod'
-
-const logger = getLogger(`serverLocalUser`)
 
 type ServerLocalUser = {
   persisted: PersistedLocalUser

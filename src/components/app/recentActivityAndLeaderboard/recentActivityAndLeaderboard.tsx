@@ -4,7 +4,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { SumDonationsByUser } from '@/data/aggregations/getSumDonationsByUser'
 import { getPublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 import { SupportedLocale } from '@/intl/locales'
-import { PageProps } from '@/types'
 import { RecentActivityAndLeaderboardTabs } from './recentActivityAndLeaderboardTabs'
 
 export function RecentActivityAndLeaderboard({

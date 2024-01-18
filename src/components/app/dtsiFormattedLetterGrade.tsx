@@ -1,6 +1,4 @@
 import { NextImage } from '@/components/ui/image'
-import { ImageAvatar, ImageAvatarProps } from '@/components/ui/imageAvatar'
-import { InitialsAvatar } from '@/components/ui/initialsAvatar'
 
 import { DTSI_Person } from '@/data/dtsi/generated'
 import {
@@ -27,7 +25,7 @@ const getImage = (letterGrade: DTSILetterGrade | null) => {
 export const DTSIFormattedLetterGrade: React.FC<{
   person: Pick<DTSI_Person, 'computedStanceScore' | 'manuallyOverriddenStanceScore'>
   size: number
-}> = ({ person, size, ...props }) => {
+}> = ({ person, size }) => {
   const letterGrade = convertDTSIStanceScoreToLetterGrade(person)
 
   return (

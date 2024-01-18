@@ -1,4 +1,3 @@
-import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import * as Sentry from '@sentry/nextjs'
 
 export class FetchReqError extends Error {
@@ -24,7 +23,7 @@ const maybeParseBody = async (response: Response) =>
         return { type: 'string' as const, value: x }
       }
     })
-    .catch(x => undefined)
+    .catch(() => undefined)
 
 const maybeWithoutQueryParams = (url: string) => {
   try {

@@ -1,5 +1,4 @@
 import { persistJSONToStaticContentFolder, runBin } from '@/bin/binUtils'
-import { queryDTSIAllPeople } from '@/data/dtsi/queries/queryDTSIAllPeople'
 import { getLogger } from '@/utils/shared/logger'
 import 'dotenv/config'
 

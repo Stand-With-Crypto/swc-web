@@ -1,5 +1,5 @@
 'use client'
-import { UserActionRowCTA, UserActionRowCTAButton } from '@/components/app/userActionRowCTA'
+import { UserActionRowCTAButton } from '@/components/app/userActionRowCTA'
 import { ORDERED_USER_ACTION_ROW_CTA_INFO } from '@/components/app/userActionRowCTA/userActionRowCTAsList'
 import { Button } from '@/components/ui/button'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
@@ -23,7 +23,7 @@ export function UserActionFormSuccessScreen() {
       action => !data?.performedUserActionTypes.includes(action.actionType),
     )
     if (action) {
-      const { DialogComponent, ...rest } = action
+      const { DialogComponent: _DialogComponent, ...rest } = action
       return rest
     }
     return null
