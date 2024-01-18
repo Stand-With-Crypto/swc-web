@@ -38,8 +38,8 @@ The author of the PR can merge (squashing if appropriate), close the PR, and del
 
 We use PlanetScale as our database host provider. They have a number of [github actions](https://planetscale.com/blog/announcing-the-planetscale-github-actions) that should simplify our CI process for database migrations, but until they're fully implemented in our codebase, below are some process steps to follow when updating our database schema. NOTE: these steps will only work for core contributors with access to our vercel account:
 
-- If you have schema changes/migrations to make, then your Vercel preview branch will need to be pointing to _your_ PlanetScale_ development database branch that you used for local development (_e.g._ the PlanetScale branch that you've run `npx prisma db push` on) via updating the `DATABASE_URL`. To update this environment variable:
-  - *This step only needs to be done once*:
+- If you have schema changes/migrations to make, then your Vercel preview branch will need to be pointing to _your_ PlanetScale development database branch that you used for local development (\_e.g.\* the PlanetScale branch that you've run `npx prisma db push` on) via updating the `DATABASE_URL`. To update this environment variable:
+  - _This step only needs to be done once_:
     - Install the [Vercel CLI](https://vercel.com/docs/cli) locally.
     - Run `vercel login --github` to login to our instance. Ensure that the authentication proceeds with the correct email address.
     - `cd` into your local swc-web repository.
