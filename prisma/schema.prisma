@@ -42,6 +42,7 @@ model Address {
   datetimeCreated          DateTime @default(now()) @map("datetime_created")
 
   userActionEmails UserActionEmail[]
+  userActionCalls  UserActionCall[]
   users            User[]
 
   @@map("address")
@@ -54,10 +55,11 @@ model Address {
 // We'll need to track these different "user markers" with their own respective metadata, and join these related models with a User table to provide a single view of a user
 // A key assumption we're making about how this model will be used:
 
-// A user has a one-to-one relationship with a crypto address. We could model it so a user has a one-to-many relationship with adddresses, and try to deduplicate/merge actions a user takes across multiple wallets.
-// given the introduced complexity, and the fact we're not confident that's the desired user behavior (maybe someone wants to represent themselves as two addresses/ENS like if they have a personal wallet and corporation wallet), we opt instead for one-to-one
+// A user has a one-to-one relationship with a "primary" crypto address and can potentially have many crypto addresses. 
+// The situation where a user could have a one-to-many relationship with a crypto address is if they create generate an "embedded" crypto wallet, and then sign in with a web3 wallet
+// In this specific instance, we'll allow the user to "merge" these accounts if they can verify they have ownership of the same email used by both accounts
 
-// A user has a many-to-many relationship with an email.
+//  A user has a one-to-one relationship with a "primary" email address and can potentially have many email addresses
 // Example where a user will have multiple emails: They opt in on the coinbase app, and we associate that email with them, and then later on they go to their profile page and set a different email address as their "primary" email address. We don't want to loose the association to the coinbase opt in
 // Example where an email may have multiple users: A user logs in with multiple wallets, but wants to use the same email on their profile page for both. We'll need to ensure each of these wallets seperately "verifies" they own the email address
 // The user will need a "primary" email address so we are only sending marketing messages to one email address. We can make this togglable in their profile page
@@ -65,25 +67,67 @@ model Address {
 // A user has a one-to-many relationship with a session. A session will only be persisted if a user is not logged in and performs an action on the site. If they are logged in, we will associate the action with thier crypto address.
 // Once we identify a session is associated with a crypto address (the user logs in to the app in the same session after performing an action), we'll want to merge the session and crypto address under the same user. We will maintain the session fk on the action to keep the context that the action was originally linked to a session instead
 model User {
-  id                        String            @id @default(uuid())
-  datetimeUpdated           DateTime          @updatedAt @map("datetime_updated")
-  datetimeCreated           DateTime          @default(now()) @map("datetime_created")
-  fullName                  String            @default("") @map("name")
-  phoneNumber               String            @default("") @map("phone_number")
-  address                   Address?          @relation(fields: [addressId], references: [id])
-  addressId                 String?           @map("address_id")
-  isPubliclyVisible         Boolean           @map("is_publicly_visible")
-  sampleDatabaseIncrement   Int               @default(0) // TODO delete
-  primaryUserEmailAddress   UserEmailAddress? @relation("asPrimaryUserEmailAddress", fields: [primaryUserEmailAddressId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  primaryUserEmailAddressId String?           @unique @map("primary_user_email_address_id")
+  id                         String             @id @default(uuid())
+  datetimeUpdated            DateTime           @updatedAt @map("datetime_updated")
+  datetimeCreated            DateTime           @default(now()) @map("datetime_created")
+  fullName                   String             @default("") @map("name")
+  phoneNumber                String             @default("") @map("phone_number")
+  address                    Address?           @relation(fields: [addressId], references: [id])
+  addressId                  String?            @map("address_id")
+  isPubliclyVisible          Boolean            @map("is_publicly_visible")
+  sampleDatabaseIncrement    Int                @default(0) // TODO delete
+  primaryUserEmailAddress    UserEmailAddress?  @relation("asPrimaryUserEmailAddress", fields: [primaryUserEmailAddressId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  primaryUserEmailAddressId  String?            @unique @map("primary_user_email_address_id")
+  primaryUserCryptoAddress   UserCryptoAddress? @relation("asPrimaryUserCryptoAddress", fields: [primaryUserCryptoAddressId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  primaryUserCryptoAddressId String?            @unique @map("primary_user_crypto_address_id")
+  // We'll collect and capture this information in our product analytics tools, but we'll also want to be able to 
+  // use this metadata to query our relationship database. This information will only be populated if users
+  // opt in to our cookies
+  acquisitionReferer         String             @map("acquisition_referer")
+  acquisitionSource          String             @map("acquisition_source")
+  acquisitionMedium          String             @map("acquisition_medium")
+  acquisitionCampaign        String             @map("acquisition_campaign")
 
-  userCryptoAddress  UserCryptoAddress?
-  userSessions       UserSession[]
-  userEmailAddresses UserEmailAddress[] @relation("userEmailAddresses")
-  userActions        UserAction[]
+  // REMINDER: as we add additional foreign keys to users, we'll want to make sure we account for them in our mergeUsers logic
+  userCryptoAddresses UserCryptoAddress[] @relation("userCryptoAddresses")
+  userSessions        UserSession[]
+  userEmailAddresses  UserEmailAddress[]  @relation("userEmailAddresses")
+  userActions         UserAction[]
+
+  userMergeAlertUserB UserMergeAlert[] @relation("userBMergeAttempt")
+  userMergeAlertUserA UserMergeAlert[] @relation("userAMergeAttempt")
+  userMergeEvents     UserMergeEvent[]
 
   @@index([addressId])
   @@map("user")
+}
+
+// because we delete one of the users after this merge completes, this model will also be deleted
+model UserMergeAlert {
+  id      String @id @default(uuid())
+  userAId String @map("user_a_id")
+  userA   User   @relation("userAMergeAttempt", fields: [userAId], references: [id])
+  userBId String @map("user_b_id")
+  userB   User   @relation("userBMergeAttempt", fields: [userBId], references: [id])
+
+  hasBeenConfirmedByUserA Boolean @default(false) @map("has_been_confirmed_by_user_a")
+  hasBeenConfirmedByUserB Boolean @default(false) @map("has_been_confirmed_by_user_b")
+
+  @@unique([userAId, userBId])
+  @@index([userBId])
+  @@index([userAId])
+  @@map("user_merge_alert")
+}
+
+model UserMergeEvent {
+  id              String   @id @default(uuid())
+  userId          String   @map("user_id")
+  user            User     @relation(fields: [userId], references: [id])
+  datetimeCreated DateTime @default(now()) @map("datetime_created")
+  datetimeUpdated DateTime @updatedAt @map("datetime_updated")
+
+  @@index([userId])
+  @@map("user_merge_event")
 }
 
 // A "user" that is performing actions on our platform but has not logged in to any system yet will have that action associated with a user session
@@ -110,7 +154,7 @@ enum UserEmailAddressSource {
 model UserEmailAddress {
   id              String                 @id @default(uuid())
   isVerified      Boolean                @map("is_verified")
-  address         String
+  emailAddress    String                 @map("email_address")
   userId          String                 @map("user_id")
   user            User                   @relation("userEmailAddresses", map: "userEmailAddresses", fields: [userId], references: [id])
   source          UserEmailAddressSource
@@ -120,7 +164,7 @@ model UserEmailAddress {
   userActions               UserAction[]
   asPrimaryUserEmailAddress User?        @relation("asPrimaryUserEmailAddress")
 
-  @@unique(map: "user_email_address_unique_constraint", [address, userId])
+  @@unique(map: "user_email_address_unique_constraint", [emailAddress, userId])
   @@index([userId])
   @@map("user_email_address")
 }
@@ -134,22 +178,24 @@ enum SupportedUserCryptoNetwork {
   ETH
 }
 
-// Using ThirdWeb a user can create multiple "accounts", one per wallet. They can also have some that are self-custodied, and some that are being custodied by ThirdWeb (email, google login, etc)
+// Using Thirdweb a user can create multiple "accounts", one per wallet. They can also have some that are self-custodied, and some that are being custodied by Thirdweb (email, google login, etc)
 model UserCryptoAddress {
   id              String                     @id @default(uuid())
   cryptoNetwork   SupportedUserCryptoNetwork @default(ETH) @map("crypto_network")
-  address         String                     @map("address")
+  cryptoAddress   String                     @map("crypto_address")
   // TODO figure out how to detect this via thirdweb sdk and then add it to the model
   // initialCustodian Web3AddressCustodian
   datetimeUpdated DateTime                   @updatedAt @map("datetime_updated")
   datetimeCreated DateTime                   @default(now()) @map("datetime_created")
   userId          String                     @unique @map("user_id")
-  user            User                       @relation(fields: [userId], references: [id])
+  user            User                       @relation("userCryptoAddresses", map: "userCryptoAddresses", fields: [userId], references: [id])
 
-  userActions UserAction[]
+  userActions                UserAction[]
+  asPrimaryUserCryptoAddress User?        @relation("asPrimaryUserCryptoAddress")
 
-  @@unique([address, cryptoNetwork])
-  @@index([address])
+  @@unique([cryptoAddress, cryptoNetwork])
+  @@index([cryptoAddress])
+  @@map("user_crypto_address")
 }
 
 enum UserActionType {
@@ -197,7 +243,8 @@ model UserAction {
 }
 
 enum UserActionOptInType {
-  SWC_SIGN_UP
+  SWC_SIGN_UP_AS_SUBSCRIBER
+  SWC_SIGN_UP_AS_MEMBER
 }
 
 model UserActionOptIn {
@@ -240,8 +287,11 @@ model UserActionCall {
   // TODO determine if these need to be nullable in the future
   recipientDtsiSlug    String     @map("recipient_dtsi_slug")
   recipientPhoneNumber String     @map("recipient_phone_number")
+  address              Address    @relation(fields: [addressId], references: [id])
+  addressId            String     @map("address_id")
 
   @@index([id])
+  @@index([addressId])
   @@map("user_action_call")
 }
 

@@ -1,6 +1,5 @@
 import { SupportedLocale } from '@/intl/locales'
 import { getIntlPrefix } from '@/utils/shared/urls'
-import { USER_ACTION_TO_CAMPAIGN_NAME_MAP } from '@/utils/shared/userActionCampaigns'
 import { UserActionType } from '@prisma/client'
 
 export const USER_ACTION_DEEPLINK_MAP: {

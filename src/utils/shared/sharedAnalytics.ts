@@ -1,7 +1,7 @@
 // TODO align on the naming conventions for all these analytics
 // There are internal best practices, but depending on the tool we end up leveraging, we might need to change the naming conventions
 
-import { customLogger, logger } from '@/utils/shared/logger'
+import { Address } from '@prisma/client'
 
 // TODO expand this list as needed
 export enum AnalyticComponentType {
@@ -39,6 +39,28 @@ export enum AnalyticActionType {
 export type AnalyticProperties = {
   action?: AnalyticActionType
   component?: AnalyticComponentType
-  // TODO determine what property types the analytics library we end up using will support
-  [key: string]: any
+  [key: string]: string | number | boolean | undefined | null | Date | string[] | number[]
+}
+
+export type AnalyticsPeopleProperties = {
+  // https://docs.mixpanel.com/docs/data-structure/user-profiles#reserved-user-properties
+  // if we end up using other tools, we might need to map these reserved names to other values
+  $email?: string
+  $phone?: string
+  $name?: string
+  [key: string]: string | number | boolean | undefined | null | Date | string[] | number[]
+}
+
+export function convertAddressToAnalyticsProperties(
+  address: Pick<
+    Address,
+    'administrativeAreaLevel1' | 'administrativeAreaLevel2' | 'countryCode' | 'locality'
+  >,
+) {
+  return {
+    'Address Administrative Area Level 1': address.administrativeAreaLevel1,
+    'Address Administrative Area Level 2': address.administrativeAreaLevel2,
+    'Address Country Code': address.countryCode,
+    'Address Locality': address.locality,
+  }
 }

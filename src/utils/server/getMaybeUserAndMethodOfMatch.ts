@@ -1,10 +1,23 @@
 'use server'
-import { appRouterGetAuthUser } from '@/utils/server/appRouterGetAuthUser'
+import * as Sentry from '@sentry/nextjs'
+import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { Prisma, User, UserCryptoAddress } from '@prisma/client'
+import { Prisma, UserCryptoAddress } from '@prisma/client'
 import _ from 'lodash'
 import { GetFindResult } from '@prisma/client/runtime/library'
+
+export type UserAndMethodOfMatch<
+  I extends Omit<Prisma.UserFindFirstArgs, 'where'> = Omit<Prisma.UserFindFirstArgs, 'where'>,
+> =
+  | {
+      user: GetFindResult<Prisma.$UserPayload, I>
+      userCryptoAddress: UserCryptoAddress
+    }
+  | {
+      user: GetFindResult<Prisma.$UserPayload, I> | null
+      sessionId: string
+    }
 
 /*
 If you're wondering what all the prisma type signatures are for, this allows people to pass additional prismaClient.user.findFirst arguments in
@@ -15,28 +28,19 @@ export async function getMaybeUserAndMethodOfMatch<
 >({
   include,
   ...other
-}: Prisma.SelectSubset<I, Prisma.UserFindFirstArgs>): Promise<
-  | {
-      user: GetFindResult<Prisma.$UserPayload, I>
-      userCryptoAddress: UserCryptoAddress
-    }
-  | {
-      user: GetFindResult<Prisma.$UserPayload, I> | null
-      sessionId: string
-    }
-> {
+}: Prisma.SelectSubset<I, Prisma.UserFindFirstArgs>): Promise<UserAndMethodOfMatch<I>> {
   const authUser = await appRouterGetAuthUser()
   const sessionId = getUserSessionId()
   const userWithoutReturnTypes = await prismaClient.user.findFirst({
     where: {
       OR: _.compact([
-        authUser && { userCryptoAddress: { address: authUser.address } },
+        authUser && { userCryptoAddresses: { some: { cryptoAddress: authUser.address } } },
         { userSessions: { some: { id: sessionId } } },
       ]),
     },
     include: {
       ...((include || {}) as object),
-      userCryptoAddress: true,
+      userCryptoAddresses: true,
     },
     ...other,
   })
@@ -44,12 +48,22 @@ export async function getMaybeUserAndMethodOfMatch<
   if (authUser) {
     if (!user) {
       throw new Error(
-        `unexpectedly didn't return a user for an authenticated address ${authUser.address}}`,
+        `unexpectedly didn't return a user for an authenticated address ${authUser.address}`,
+      )
+    }
+    const authedCryptoAddress = userWithoutReturnTypes!.userCryptoAddresses.find(
+      x => x.cryptoAddress === authUser.address,
+    )!
+    if (authedCryptoAddress.id !== user.primaryUserCryptoAddressId) {
+      // This will happen, but should be relatively infrequent
+      Sentry.captureMessage(
+        'User logged in with a crypto address that is not their primary address',
+        { extra: { user, address: authUser.address } },
       )
     }
     return {
       user,
-      userCryptoAddress: userWithoutReturnTypes!.userCryptoAddress!,
+      userCryptoAddress: authedCryptoAddress,
     }
   }
   return {

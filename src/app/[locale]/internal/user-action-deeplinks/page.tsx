@@ -14,7 +14,7 @@ export default function UserActionDeepLinks() {
     <div className="container mx-auto mt-10 max-w-lg">
       <div className="space-y-7">
         {ORDERED_USER_ACTION_ROW_CTA_INFO.map(props => {
-          const { DialogComponent, ...userAction } = props
+          const { DialogComponent: _, ...userAction } = props
           const url = USER_ACTION_DEEPLINK_MAP[userAction.actionType].getDeeplinkUrl({ locale })
           return (
             <div key={userAction.actionType}>

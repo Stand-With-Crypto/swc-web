@@ -1,5 +1,6 @@
 // TODO migrate to app router once thirdweb supports it
 
-import { thirdWebAuth } from '@/utils/server/thirdWebAuth'
+import { thirdwebAuthConfig } from '@/utils/server/thirdweb/thirdwebAuthConfig'
+import { ThirdwebAuth } from '@thirdweb-dev/auth/next'
 
-export default thirdWebAuth.ThirdwebAuthHandler()
+export default ThirdwebAuth(thirdwebAuthConfig).ThirdwebAuthHandler()

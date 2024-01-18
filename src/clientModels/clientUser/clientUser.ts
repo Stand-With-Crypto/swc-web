@@ -9,41 +9,40 @@ import { UserENSData } from '@/data/web3/types'
 import { User, UserCryptoAddress } from '@prisma/client'
 
 export type ClientUser = ClientModel<
-  Pick<User, 'id' | 'datetimeCreated' | 'datetimeUpdated' | 'isPubliclyVisible'> & {
+  Pick<User, 'id' | 'isPubliclyVisible'> & {
     fullName: string | null
-    cryptoAddress: ClientUserCryptoAddress | null
+    primaryUserCryptoAddress: ClientUserCryptoAddress | null
   }
 >
 
 export const getClientUser = (
-  record: User & { userCryptoAddress: null | UserCryptoAddress },
+  record: User & { primaryUserCryptoAddress: null | UserCryptoAddress },
 ): ClientUser => {
-  const { fullName, userCryptoAddress, id, datetimeCreated, datetimeUpdated, isPubliclyVisible } =
-    record
+  const { fullName, primaryUserCryptoAddress, id, isPubliclyVisible } = record
   return getClientModel({
     fullName: isPubliclyVisible ? fullName : null,
-    cryptoAddress:
-      isPubliclyVisible && userCryptoAddress ? getClientUserCryptoAddress(userCryptoAddress) : null,
+    primaryUserCryptoAddress:
+      isPubliclyVisible && primaryUserCryptoAddress
+        ? getClientUserCryptoAddress(primaryUserCryptoAddress)
+        : null,
     id,
-    datetimeCreated,
-    datetimeUpdated,
     isPubliclyVisible,
   })
 }
 
-export type ClientUserWithENSData = Omit<ClientUser, 'cryptoAddress'> & {
-  cryptoAddress: ClientUserCryptoAddressWithENSData | null
+export type ClientUserWithENSData = Omit<ClientUser, 'primaryUserCryptoAddress'> & {
+  primaryUserCryptoAddress: ClientUserCryptoAddressWithENSData | null
 }
 
 export const getClientUserWithENSData = (
-  record: User & { userCryptoAddress: null | UserCryptoAddress },
+  record: User & { primaryUserCryptoAddress: null | UserCryptoAddress },
   ensData: UserENSData | null | undefined,
 ): ClientUserWithENSData => {
   const initial = getClientUser(record)
   return {
     ...initial,
-    cryptoAddress: record.userCryptoAddress
-      ? getClientUserCryptoAddressWithENSData(record.userCryptoAddress, ensData)
+    primaryUserCryptoAddress: record.primaryUserCryptoAddress
+      ? getClientUserCryptoAddressWithENSData(record.primaryUserCryptoAddress, ensData)
       : null,
   }
 }

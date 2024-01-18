@@ -12,7 +12,6 @@ import { Textarea } from '@/components/ui/textarea'
 import { SupportedLocale } from '@/intl/locales'
 import { getIntlUrls } from '@/utils/shared/urls'
 import _ from 'lodash'
-import { Circle } from 'lucide-react'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 
 export function UserActionFormEmailCongresspersonSkeleton({ locale }: { locale: SupportedLocale }) {

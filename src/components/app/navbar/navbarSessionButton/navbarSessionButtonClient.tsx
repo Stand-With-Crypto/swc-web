@@ -5,8 +5,7 @@ import { ConnectWallet } from '@thirdweb-dev/react'
 
 import { GetDefineMessageResults } from '@/types'
 import { cn } from '@/utils/web/cn'
-import { useThirdWeb } from '@/hooks/useThirdWeb'
-import { useMaybeUpdateUserEmailAfterLoggingInToEmbedWallet } from '@/hooks/useMaybeUpdateUserEmailAfterLoggingInToEmbedWallet'
+import { useThirdwebData } from '@/hooks/useThirdwebData'
 
 import { NavbarLoggedInSessionButton } from './navbarLoggedInSessionButton'
 import { navbarSessionButtonMessages } from './navbarSessionButtonClient.messages'
@@ -16,10 +15,9 @@ interface NavbarSessionButtonProps {
 }
 
 export function NavbarSessionButtonClient(_props: NavbarSessionButtonProps) {
-  const { session } = useThirdWeb()
+  const { session } = useThirdwebData()
 
   const router = useRouter()
-  useMaybeUpdateUserEmailAfterLoggingInToEmbedWallet()
 
   if (session.isLoggedIn) {
     return <NavbarLoggedInSessionButton />

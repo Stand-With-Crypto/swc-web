@@ -4,13 +4,14 @@
 
 import * as Sentry from '@sentry/nextjs'
 import { ExtraErrorData } from '@sentry/integrations'
+import { toBool } from '@/utils/shared/toBool'
+import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
-const environment = process.env.NEXT_PUBLIC_ENVIRONMENT!
 const dsn = process.env.NEXT_PUBLIC_SENTRY_DSN
 Sentry.init({
-  environment,
+  environment: NEXT_PUBLIC_ENVIRONMENT,
   dsn,
-  tracesSampleRate: environment === 'production' ? 0.001 : 1.0,
+  tracesSampleRate: NEXT_PUBLIC_ENVIRONMENT === 'production' ? 0.001 : 1.0,
   // Setting this option to true will print useful information to the console while you're setting up Sentry.
   debug: false,
 
@@ -37,9 +38,9 @@ Sentry.init({
     /^chrome:\/\//i,
   ],
   beforeSend: (event, hint) => {
-    if (environment === 'local') {
+    if (NEXT_PUBLIC_ENVIRONMENT === 'local') {
       console.error(`Sentry`, hint?.originalException || hint?.syntheticException)
-      if (process.env.SUPPRESS_SENTRY_ERRORS_ON_LOCAL || !dsn) {
+      if (toBool(process.env.SUPPRESS_SENTRY_ERRORS_ON_LOCAL) || !dsn) {
         return null
       }
     }

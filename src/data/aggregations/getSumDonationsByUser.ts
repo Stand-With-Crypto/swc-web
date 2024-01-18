@@ -1,4 +1,4 @@
-import { getClientUser, getClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
+import { getClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
 import { getENSDataMapFromCryptoAddressesAndFailGracefully } from '@/data/web3/getENSDataFromCryptoAddress'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { Decimal } from '@prisma/client/runtime/library'
@@ -36,13 +36,13 @@ export const getSumDonationsByUser = async ({ limit, offset }: SumDonationsByUse
       },
     },
     include: {
-      userCryptoAddress: true,
+      primaryUserCryptoAddress: true,
     },
   })
 
   const usersById = _.keyBy(users, 'id')
   const ensDataMap = await getENSDataMapFromCryptoAddressesAndFailGracefully(
-    _.compact(users.map(user => user.userCryptoAddress?.address)),
+    _.compact(users.map(user => user.primaryUserCryptoAddress?.cryptoAddress)),
   )
   return total.map(({ userId, totalAmountUsd }) => {
     const user = usersById[userId]
@@ -51,7 +51,9 @@ export const getSumDonationsByUser = async ({ limit, offset }: SumDonationsByUse
       user: {
         ...getClientUserWithENSData(
           user,
-          user.userCryptoAddress?.address ? ensDataMap[user.userCryptoAddress?.address] : null,
+          user.primaryUserCryptoAddress?.cryptoAddress
+            ? ensDataMap[user.primaryUserCryptoAddress?.cryptoAddress]
+            : null,
         ),
       },
     }

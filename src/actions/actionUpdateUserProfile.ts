@@ -1,6 +1,9 @@
 'use server'
-import { appRouterGetAuthUser } from '@/utils/server/appRouterGetAuthUser'
+import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
 import { prismaClient } from '@/utils/server/prismaClient'
+import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
+import { getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
+import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { zodUpdateUserProfileFormAction } from '@/validation/forms/zodUpdateUserProfile'
 import { UserEmailAddressSource } from '@prisma/client'
 import 'server-only'
@@ -21,20 +24,22 @@ export async function actionUpdateUserProfile(
   }
   const user = await prismaClient.user.findFirstOrThrow({
     where: {
-      userCryptoAddress: { address: authUser.address },
+      userCryptoAddresses: { some: { cryptoAddress: authUser.address } },
     },
     include: {
       userEmailAddresses: true,
     },
   })
   const existingUserEmailAddress = validatedFields.data.email
-    ? user.userEmailAddresses.find(({ address }) => address === validatedFields.data.email)
+    ? user.userEmailAddresses.find(
+        ({ emailAddress }) => emailAddress === validatedFields.data.email,
+      )
     : null
   const primaryUserEmailAddress =
     validatedFields.data.email && !existingUserEmailAddress
       ? await prismaClient.userEmailAddress.create({
           data: {
-            address: validatedFields.data.email,
+            emailAddress: validatedFields.data.email,
             source: UserEmailAddressSource.USER_ENTERED,
             isVerified: false,
             user: {
@@ -56,6 +61,18 @@ export async function actionUpdateUserProfile(
         update: {},
       })
     : null
+  const localUser = parseLocalUserFromCookies()
+  const peopleAnalytics = getServerPeopleAnalytics({ address: authUser.address, localUser })
+  peopleAnalytics.set({
+    ...(validatedFields.data.address
+      ? convertAddressToAnalyticsProperties(validatedFields.data.address)
+      : {}),
+    // https://docs.mixpanel.com/docs/data-structure/user-profiles#reserved-user-properties
+    $email: validatedFields.data.email,
+    $phone: validatedFields.data.phoneNumber,
+    $name: validatedFields.data.fullName,
+  })
+
   const updatedUser = await prismaClient.user.update({
     where: {
       id: user.id,

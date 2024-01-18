@@ -14,20 +14,20 @@ export type SensitiveDataClientUser = ClientModel<
     User,
     'id' | 'datetimeCreated' | 'datetimeUpdated' | 'isPubliclyVisible' | 'fullName' | 'phoneNumber'
   > & {
-    cryptoAddress: ClientUserCryptoAddress | null
+    primaryUserCryptoAddress: ClientUserCryptoAddress | null
     primaryUserEmailAddress: { address: string } | null
   }
 >
 
 export const getSensitiveDataClientUser = (
   record: User & {
-    userCryptoAddress: null | UserCryptoAddress
+    primaryUserCryptoAddress: null | UserCryptoAddress
     primaryUserEmailAddress: UserEmailAddress | null
   },
 ): SensitiveDataClientUser => {
   const {
     fullName,
-    userCryptoAddress,
+    primaryUserCryptoAddress,
     id,
     datetimeCreated,
     datetimeUpdated,
@@ -40,10 +40,12 @@ export const getSensitiveDataClientUser = (
     fullName,
     primaryUserEmailAddress: primaryUserEmailAddress
       ? {
-          address: primaryUserEmailAddress.address,
+          address: primaryUserEmailAddress.emailAddress,
         }
       : null,
-    cryptoAddress: userCryptoAddress ? getClientUserCryptoAddress(userCryptoAddress) : null,
+    primaryUserCryptoAddress: primaryUserCryptoAddress
+      ? getClientUserCryptoAddress(primaryUserCryptoAddress)
+      : null,
     id,
     datetimeCreated,
     datetimeUpdated,
@@ -53,12 +55,12 @@ export const getSensitiveDataClientUser = (
 }
 
 export type SensitiveDataClientUserWithENSData = Omit<SensitiveDataClientUser, 'cryptoAddress'> & {
-  cryptoAddress: ClientUserCryptoAddressWithENSData | null
+  primaryUserCryptoAddress: ClientUserCryptoAddressWithENSData | null
 }
 
 export const getSensitiveDataClientUserWithENSData = (
   record: User & {
-    userCryptoAddress: null | UserCryptoAddress
+    primaryUserCryptoAddress: null | UserCryptoAddress
     primaryUserEmailAddress: UserEmailAddress | null
   },
   ensData: UserENSData | null | undefined,
@@ -66,8 +68,8 @@ export const getSensitiveDataClientUserWithENSData = (
   const initial = getSensitiveDataClientUser(record)
   return {
     ...initial,
-    cryptoAddress: record.userCryptoAddress
-      ? getClientUserCryptoAddressWithENSData(record.userCryptoAddress, ensData)
+    primaryUserCryptoAddress: record.primaryUserCryptoAddress
+      ? getClientUserCryptoAddressWithENSData(record.primaryUserCryptoAddress, ensData)
       : null,
   }
 }

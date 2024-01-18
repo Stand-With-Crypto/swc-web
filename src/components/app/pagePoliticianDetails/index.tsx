@@ -134,14 +134,13 @@ export function PagePoliticianDetails({
                           <>
                             <div className="mb-1 mt-3">Committees</div>
                             <div className="flex flex-col space-y-1">
-                              {domain?.committees.map(
-                                ({ committee, subcommittees, rank }, index) => (
-                                  <div key={index}>
-                                    <div className="text-sm text-gray-600">
-                                      {committee.displayName}
-                                    </div>
-                                    {/* uncomment to enable displaying subcommittees */}
-                                    {/* {!!subcommittees.length && (
+                              {domain?.committees.map(({ committee }, index) => (
+                                <div key={index}>
+                                  <div className="text-sm text-gray-600">
+                                    {committee.displayName}
+                                  </div>
+                                  {/* uncomment to enable displaying subcommittees */}
+                                  {/* {!!subcommittees.length && (
                                                         <Box>
                                                           <Text fontSize={'sm'}>Subcommittees</Text>
                                                           <div className='flex flex-col space-y-1'>
@@ -153,9 +152,8 @@ export function PagePoliticianDetails({
                                                           </VStack>
                                                         </Box>
                                                       )} */}
-                                  </div>
-                                ),
-                              )}
+                                </div>
+                              ))}
                             </div>
                           </>
                         )}
@@ -217,7 +215,7 @@ export function PagePoliticianDetails({
         <h2 className="mb-6 text-2xl font-extrabold">{stances.length} notable statements</h2>
         <div className="flex flex-col space-y-10">
           {!stances.length && <div>No recent statements.</div>}
-          {stances.map((stance, index) => {
+          {stances.map(stance => {
             return (
               <article
                 key={stance.id}

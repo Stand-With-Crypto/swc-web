@@ -1,10 +1,10 @@
-import 'server-only'
-import { prismaClient } from '@/utils/server/prismaClient'
+import { getClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
 import { getClientUserAction } from '@/clientModels/clientUserAction/clientUserAction'
 import { queryDTSIPeopleBySlugForUserActions } from '@/data/dtsi/queries/queryDTSIPeopleBySlugForUserActions'
-import { getClientUser, getClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
 import { getENSDataMapFromCryptoAddressesAndFailGracefully } from '@/data/web3/getENSDataFromCryptoAddress'
+import { prismaClient } from '@/utils/server/prismaClient'
 import _ from 'lodash'
+import 'server-only'
 
 interface RecentActivityConfig {
   limit: number
@@ -20,7 +20,7 @@ const fetchFromPrisma = async (config: RecentActivityConfig) => {
     skip: config.offset,
     include: {
       user: {
-        include: { userCryptoAddress: true },
+        include: { primaryUserCryptoAddress: true },
       },
       userActionEmail: {
         include: {
@@ -53,14 +53,16 @@ export const getPublicRecentActivity = async (config: RecentActivityConfig) => {
     x => x.people,
   )
   const ensDataMap = await getENSDataMapFromCryptoAddressesAndFailGracefully(
-    _.compact(data.map(({ user }) => user.userCryptoAddress?.address)),
+    _.compact(data.map(({ user }) => user.primaryUserCryptoAddress?.cryptoAddress)),
   )
   return data.map(({ user, ...record }) => ({
     ...getClientUserAction({ record, dtsiPeople }),
     user: {
       ...getClientUserWithENSData(
         user,
-        user.userCryptoAddress?.address ? ensDataMap[user.userCryptoAddress?.address] : null,
+        user.primaryUserCryptoAddress?.cryptoAddress
+          ? ensDataMap[user.primaryUserCryptoAddress?.cryptoAddress]
+          : null,
       ),
     },
   }))

@@ -2,10 +2,8 @@
 
 import * as React from 'react'
 
-import { Button } from '@/components/ui/button'
 import {
   Command,
-  CommandEmpty,
   CommandGroup,
   CommandInput,
   CommandItem,
@@ -15,6 +13,7 @@ import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/drawer'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { cn } from '@/utils/web/cn'
+import { useResizeObserver } from '@/hooks/useResizeObserver'
 
 export interface ComboBoxProps<T>
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange' | 'type'> {
@@ -41,8 +40,11 @@ export function Combobox<T>({
   isLoading,
   ...inputProps
 }: ComboBoxProps<T>) {
+  const parentRef = React.useRef<HTMLButtonElement>(null)
   const [open, setOpen] = React.useState(false)
   const isMobile = useIsMobile({ defaultState: false })
+  const size = useResizeObserver(parentRef)
+
   if (isMobile) {
     return (
       <Drawer open={open} onOpenChange={setOpen}>
@@ -69,11 +71,14 @@ export function Combobox<T>({
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>{formatPopoverTrigger(value)}</PopoverTrigger>
+      <PopoverTrigger ref={parentRef} asChild>
+        {formatPopoverTrigger(value)}
+      </PopoverTrigger>
       <PopoverContent
         avoidCollisions={false}
         className={cn('p-0', popoverContentClassName)}
         align="start"
+        style={{ width: size.width }}
       >
         <StatusList
           setOpen={setOpen}

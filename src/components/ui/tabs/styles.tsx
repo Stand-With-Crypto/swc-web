@@ -1,4 +1,4 @@
-import { cn, twNoop } from '@/utils/web/cn'
+import { twNoop } from '@/utils/web/cn'
 
 export const tabListStyles = twNoop(
   'inline-flex h-10 items-center justify-center rounded-full bg-muted p-1 text-muted-foreground',

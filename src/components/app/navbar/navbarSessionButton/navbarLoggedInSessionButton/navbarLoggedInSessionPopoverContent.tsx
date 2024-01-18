@@ -7,7 +7,7 @@ import { useCopyToClipboard } from 'react-use'
 import * as Sentry from '@sentry/nextjs'
 
 import { Button } from '@/components/ui/button'
-import { useThirdWeb } from '@/hooks/useThirdWeb'
+import { useThirdwebData } from '@/hooks/useThirdwebData'
 import { InternalLink } from '@/components/ui/link'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { UserAvatar } from '@/components/app/userAvatar'
@@ -29,7 +29,7 @@ export function NavbarLoggedInSessionPopoverContent({
   user,
 }: NavbarLoggedInSessionPopoverContentProps) {
   const urls = useIntlUrls()
-  const { logoutAndDisconnect } = useThirdWeb()
+  const { logoutAndDisconnect } = useThirdwebData()
 
   return (
     <div className="space-y-2">

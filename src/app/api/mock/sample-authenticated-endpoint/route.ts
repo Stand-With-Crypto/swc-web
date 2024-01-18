@@ -1,10 +1,8 @@
 // TODO migrate to app router once thirdweb supports it
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
-import { appRouterGetAuthUser } from '@/utils/server/appRouterGetAuthUser'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { thirdWebAuth } from '@/utils/server/thirdWebAuth'
-import { NextApiRequest, NextApiResponse } from 'next'
+import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
 import { NextRequest, NextResponse } from 'next/server'
 import 'server-only'
 
@@ -16,9 +14,9 @@ export async function POST(_request: NextRequest) {
   }
   let user = await prismaClient.user.findFirstOrThrow({
     where: {
-      userCryptoAddress: { address: authUser.address },
+      userCryptoAddresses: { some: { cryptoAddress: authUser.address } },
     },
-    include: { userCryptoAddress: true },
+    include: { primaryUserCryptoAddress: true },
   })
   user = await prismaClient.user.update({
     where: {
@@ -27,7 +25,7 @@ export async function POST(_request: NextRequest) {
     data: {
       sampleDatabaseIncrement: user.sampleDatabaseIncrement + 1,
     },
-    include: { userCryptoAddress: true },
+    include: { primaryUserCryptoAddress: true },
   })
   return NextResponse.json(getClientUser(user))
 }

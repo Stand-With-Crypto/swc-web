@@ -1,10 +1,7 @@
 'use client'
 import { actionUpdateUserProfile } from '@/actions/actionUpdateUserProfile'
 import { ClientAddress } from '@/clientModels/clientAddress'
-import {
-  SensitiveDataClientUser,
-  SensitiveDataClientUserWithENSData,
-} from '@/clientModels/clientUser/sensitiveDataClientUser'
+import { SensitiveDataClientUserWithENSData } from '@/clientModels/clientUser/sensitiveDataClientUser'
 import { RecentActivityRow } from '@/components/app/recentActivityRow/recentActivityRow'
 import { hasAllFormFieldsOnUserForUpdateUserProfileForm } from '@/components/app/updateUserProfileForm/hasAllFormFieldsOnUser'
 import { Button } from '@/components/ui/button'
@@ -23,6 +20,7 @@ import { Input } from '@/components/ui/input'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { useLocale } from '@/hooks/useLocale'
+import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import {
   GenericErrorFormValues,
   trackFormSubmissionSyncErrors,
@@ -93,9 +91,7 @@ export function UpdateUserProfileForm({
                 form,
                 formName: FORM_NAME,
                 analyticsProps: {
-                  'Address Administrative Area Level 1': address?.administrativeAreaLevel1,
-                  'Address Country Code': address?.countryCode,
-                  'Address Locality': address?.locality,
+                  ...(address ? convertAddressToAnalyticsProperties(address) : {}),
                   'Is Publicly Visible': values.isPubliclyVisible,
                 },
               },
@@ -152,7 +148,7 @@ export function UpdateUserProfileForm({
             <FormField
               control={form.control}
               name="address"
-              render={({ field: { ref, ...field } }) => (
+              render={({ field: { ref: _ref, ...field } }) => (
                 <FormItem>
                   <FormLabel>Address</FormLabel>
                   <FormControl>
@@ -197,7 +193,7 @@ export function UpdateUserProfileForm({
                 disableHover
                 action={{
                   __client: true,
-                  optInType: UserActionOptInType.SWC_SIGN_UP,
+                  optInType: UserActionOptInType.SWC_SIGN_UP_AS_MEMBER,
                   actionType: UserActionType.OPT_IN,
                   datetimeCreated: new Date(),
                   nftMint: null,

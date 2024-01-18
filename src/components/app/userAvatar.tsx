@@ -1,11 +1,7 @@
-import { ClientUser, ClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
-import {
-  SensitiveDataClientUser,
-  SensitiveDataClientUserWithENSData,
-} from '@/clientModels/clientUser/sensitiveDataClientUser'
+import { ClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
+import { SensitiveDataClientUserWithENSData } from '@/clientModels/clientUser/sensitiveDataClientUser'
 import { NextImage } from '@/components/ui/image'
 import { ImageAvatarProps } from '@/components/ui/imageAvatar'
-import { UserENSData } from '@/data/web3/types'
 
 import { deterministicArraySelection } from '@/utils/shared/deterministicArraySelection'
 
@@ -39,22 +35,24 @@ function DefaultUserAvatar({ size, ...props }: Pick<ImageAvatarProps, 'size' | '
 // TODO support ENS images and person name
 export const UserAvatar: React.FC<
   {
-    user: Pick<ClientUserWithENSData, 'isPubliclyVisible' | 'cryptoAddress'>
+    user: Pick<ClientUserWithENSData, 'isPubliclyVisible' | 'primaryUserCryptoAddress'>
   } & Pick<ImageAvatarProps, 'size' | 'className'>
 > = ({ user, size, ...props }) => {
-  if (!user.isPubliclyVisible || !user.cryptoAddress) {
+  if (!user.isPubliclyVisible || !user.primaryUserCryptoAddress) {
     return <DefaultUserAvatar {...props} size={size} />
   }
 
-  const cryptoAddress = user.cryptoAddress
-  if (cryptoAddress.ensAvatarUrl) {
+  const primaryUserCryptoAddress = user.primaryUserCryptoAddress
+  if (primaryUserCryptoAddress.ensAvatarUrl) {
     return (
       <Container>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           {...props}
-          src={cryptoAddress.ensAvatarUrl}
-          alt={`ENS avatar for ${cryptoAddress.ensName || cryptoAddress.address}`}
+          src={primaryUserCryptoAddress.ensAvatarUrl}
+          alt={`ENS avatar for ${
+            primaryUserCryptoAddress.ensName || primaryUserCryptoAddress.cryptoAddress
+          }`}
           style={{
             width: size,
             height: size,
@@ -67,7 +65,10 @@ export const UserAvatar: React.FC<
     <Container>
       <NextImage
         {...props}
-        src={deterministicArraySelection(genericImages, user.cryptoAddress.address)}
+        src={deterministicArraySelection(
+          genericImages,
+          user.primaryUserCryptoAddress.cryptoAddress,
+        )}
         alt="Generic profile picture for anonymous user"
         width={size}
         height={size}
@@ -80,23 +81,25 @@ export const SensitiveDataUserAvatar: React.FC<
   {
     user: Pick<
       SensitiveDataClientUserWithENSData,
-      'fullName' | 'isPubliclyVisible' | 'cryptoAddress'
+      'fullName' | 'isPubliclyVisible' | 'primaryUserCryptoAddress'
     >
   } & Pick<ImageAvatarProps, 'size' | 'className'>
 > = ({ user, size, ...props }) => {
-  if (!user.cryptoAddress) {
+  if (!user.primaryUserCryptoAddress) {
     return <DefaultUserAvatar {...props} size={size} />
   }
 
-  const cryptoAddress = user.cryptoAddress
-  if (cryptoAddress.ensAvatarUrl) {
+  const primaryUserCryptoAddress = user.primaryUserCryptoAddress
+  if (primaryUserCryptoAddress.ensAvatarUrl) {
     return (
       <Container>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           {...props}
-          src={cryptoAddress.ensAvatarUrl}
-          alt={`ENS avatar for ${cryptoAddress.ensName || cryptoAddress.address}`}
+          src={primaryUserCryptoAddress.ensAvatarUrl}
+          alt={`ENS avatar for ${
+            primaryUserCryptoAddress.ensName || primaryUserCryptoAddress.cryptoAddress
+          }`}
           style={{
             width: size,
             height: size,
@@ -110,7 +113,10 @@ export const SensitiveDataUserAvatar: React.FC<
     <Container>
       <NextImage
         {...props}
-        src={deterministicArraySelection(genericImages, user.cryptoAddress.address)}
+        src={deterministicArraySelection(
+          genericImages,
+          user.primaryUserCryptoAddress.cryptoAddress,
+        )}
         alt="Generic profile picture for anonymous user"
         width={size}
         height={size}

@@ -1,5 +1,6 @@
 import { FetchReqError } from '@/utils/shared/fetchReq'
 import { logger } from '@/utils/shared/logger'
+import { AnalyticProperties } from '@/utils/shared/sharedAnalytics'
 import {
   trackFormSubmitSucceeded,
   trackFormSubmitted,
@@ -9,24 +10,38 @@ import { formatErrorStatus } from '@/utils/web/errorUtils'
 import * as Sentry from '@sentry/nextjs'
 import _ from 'lodash'
 import { UseFormReturn } from 'react-hook-form'
+import { z } from 'zod'
 
 export const GENERIC_FORM_ERROR_KEY = 'FORM_ERROR' as const
 export type GenericErrorFormValues = {
   FORM_ERROR?: string
 }
 
+export type FormValues<T extends z.ZodType<any, any, any>> = z.infer<T> & GenericErrorFormValues
+
 export async function triggerServerActionForForm<
   F extends UseFormReturn<any, any, undefined>,
   Fn extends () => Promise<{ errors: Record<string, string[]> } | object>,
 >(
-  { form, formName, analyticsProps }: { form: F; formName: string; analyticsProps?: object },
+  {
+    form,
+    formName,
+    analyticsProps,
+    onError = form?.setError ?? _.noop,
+  }: {
+    form?: F
+    formName: string
+    analyticsProps?: AnalyticProperties
+    onError?: (key: string, error: { message: string }) => void
+  },
   fn: Fn,
 ) {
   trackFormSubmitted(formName, analyticsProps)
+
   const response = await fn().catch(error => {
     if (!_.isError(error)) {
       trackFormSubmitErrored(formName, { 'Error Type': 'Unknown', ...analyticsProps })
-      form.setError(GENERIC_FORM_ERROR_KEY, { message: error })
+      onError(GENERIC_FORM_ERROR_KEY, { message: error })
       Sentry.captureMessage(`triggerServerActionForForm returned unexpected form response`, {
         tags: { formName, domain: 'triggerServerActionForForm', path: 'Unexpected' },
         extra: { analyticsProps, error, formName },
@@ -34,7 +49,7 @@ export async function triggerServerActionForForm<
     } else if (error instanceof FetchReqError) {
       const formattedErrorStatus = formatErrorStatus(error.response.status)
       trackFormSubmitErrored(formName, { 'Error Type': error.response.status, ...analyticsProps })
-      form.setError(GENERIC_FORM_ERROR_KEY, { message: formattedErrorStatus })
+      onError(GENERIC_FORM_ERROR_KEY, { message: formattedErrorStatus })
       Sentry.captureException(error, {
         fingerprint: [formName, 'FetchReqError', `${error.response.status}`],
         tags: { formName, domain: 'triggerServerActionForForm', path: 'FetchReqError' },
@@ -42,7 +57,7 @@ export async function triggerServerActionForForm<
       })
     } else {
       trackFormSubmitErrored(formName, { 'Error Type': 'Unexpected', ...analyticsProps })
-      form.setError(GENERIC_FORM_ERROR_KEY, { message: error.message })
+      onError(GENERIC_FORM_ERROR_KEY, { message: error.message })
       Sentry.captureException(error, {
         fingerprint: [formName, 'Error', error.message],
         tags: { formName, domain: 'triggerServerActionForForm', path: 'Error' },
@@ -57,7 +72,7 @@ export async function triggerServerActionForForm<
   if ('errors' in response) {
     trackFormSubmitErrored(formName, { 'Error Type': 'Validation', ...analyticsProps })
     Object.entries(response.errors).forEach(([key, val]) => {
-      form.setError(key, {
+      onError(key, {
         // TODO the right way of formatting multiple errors that return
         message: val.join('. '),
       })

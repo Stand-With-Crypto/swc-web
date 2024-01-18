@@ -1,4 +1,4 @@
-import { ORDERED_SUPPORTED_LOCALES, SupportedLocale } from '@/intl/locales'
+import { ORDERED_SUPPORTED_LOCALES } from '@/intl/locales'
 import { getLogger } from '@/utils/shared/logger'
 import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
 import { getIntlUrls } from '@/utils/shared/urls'

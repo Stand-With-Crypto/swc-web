@@ -3,7 +3,7 @@ import { http, Address } from 'viem'
 import { mainnet } from 'viem/chains'
 import { createEnsPublicClient } from '@ensdomains/ensjs'
 import { getName, getRecords, GetNameReturnType } from '@ensdomains/ensjs/public'
-import _, { add } from 'lodash'
+import _ from 'lodash'
 import { formatENSAvatar } from '@/utils/server/formatENSAvatar'
 import { UserENSData } from './types'
 
@@ -21,7 +21,7 @@ async function _getENSDataMapFromCryptoAddresses(
   )
   const addressesWithENS = nameResult
     .map((result, index) => ({
-      address: addresses[index],
+      cryptoAddress: addresses[index],
       ensName: result?.name || null,
     }))
     .filter(({ ensName }) => ensName)
@@ -37,16 +37,16 @@ async function _getENSDataMapFromCryptoAddresses(
     ),
   )
   return _.keyBy(
-    addressesWithENS.map(({ address, ensName }, index) => {
+    addressesWithENS.map(({ cryptoAddress, ensName }, index) => {
       const record = records[index]
       const avatar = record.texts.find(text => text.key === 'avatar')?.value
       return {
-        address,
+        cryptoAddress,
         ensName,
         ensAvatarUrl: avatar ? formatENSAvatar(avatar) : null,
       }
     }),
-    x => x.address,
+    x => x.cryptoAddress,
   )
 }
 

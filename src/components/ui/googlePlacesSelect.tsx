@@ -1,11 +1,10 @@
 import { Combobox } from '@/components/ui/combobox'
-import { Input } from '@/components/ui/input'
 import { InputWithIcon } from '@/components/ui/inputWIthIcon'
 import { useScript } from '@/hooks/useScript'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { cn } from '@/utils/web/cn'
 import { GooglePlaceAutocompletePrediction } from '@/utils/web/googlePlaceUtils'
-import { MapPin, Search } from 'lucide-react'
+import { MapPin } from 'lucide-react'
 import { useEffect } from 'react'
 import usePlacesAutocomplete from 'use-places-autocomplete'
 
@@ -26,7 +25,7 @@ export function GooglePlacesSelect(
   const {
     ready,
     value,
-    suggestions: { status, data },
+    suggestions: { data },
     setValue,
     init,
   } = usePlacesAutocomplete({ callbackName: CALLBACK_NAME })
@@ -39,14 +38,14 @@ export function GooglePlacesSelect(
     if (scriptStatus === 'ready') {
       init()
     }
-  }, [scriptStatus])
+  }, [init, scriptStatus])
   return (
     <Combobox
       isLoading={!ready}
       inputValue={value}
       onChangeInputValue={setValue}
-      value={props.value}
-      onChange={props.onChange}
+      value={propsValue}
+      onChange={propsOnChange}
       formatPopoverTrigger={val => (
         <InputWithIcon
           icon={<MapPin className="h-4 w-4 text-gray-500" />}
@@ -59,7 +58,6 @@ export function GooglePlacesSelect(
       options={data}
       getOptionLabel={val => val.description}
       getOptionKey={val => val.place_id}
-      popoverContentClassName="w-[400px]"
     />
   )
 }

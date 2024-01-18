@@ -3,27 +3,27 @@ import { UserENSData } from '@/data/web3/types'
 import { UserCryptoAddress } from '@prisma/client'
 
 export type ClientUserCryptoAddress = ClientModel<
-  Pick<UserCryptoAddress, 'id' | 'address' | 'cryptoNetwork'>
+  Pick<UserCryptoAddress, 'id' | 'cryptoAddress' | 'cryptoNetwork'>
 >
 
 export const getClientUserCryptoAddress = (record: UserCryptoAddress): ClientUserCryptoAddress => {
-  const { id, address, cryptoNetwork } = record
+  const { id, cryptoAddress, cryptoNetwork } = record
   return getClientModel({
     id,
-    address,
+    cryptoAddress,
     cryptoNetwork,
   })
 }
 
 export type ClientUserCryptoAddressWithENSData = ClientModel<
-  Pick<UserCryptoAddress, 'id' | 'address' | 'cryptoNetwork'> & UserENSData
+  Pick<UserCryptoAddress, 'id' | 'cryptoAddress' | 'cryptoNetwork'> & UserENSData
 >
 
 export const getClientUserCryptoAddressWithENSData = (
   record: UserCryptoAddress,
   ensData: UserENSData | null | undefined,
 ): ClientUserCryptoAddressWithENSData => {
-  if (ensData && ensData?.address !== record.address) {
+  if (ensData && ensData?.cryptoAddress !== record.cryptoAddress) {
     throw new Error(
       `ENS data address does not match crypto address: ${JSON.stringify({ ensData, record })}}`,
     )

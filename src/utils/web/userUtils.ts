@@ -1,9 +1,8 @@
-import { ClientUser, ClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
+import { ClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
 import {
   SensitiveDataClientUser,
   SensitiveDataClientUserWithENSData,
 } from '@/clientModels/clientUser/sensitiveDataClientUser'
-import { UserENSData } from '@/data/web3/types'
 
 export const getUserDisplayName = (user: ClientUserWithENSData | null) => {
   // TODO prioritize ENS first
@@ -13,10 +12,13 @@ export const getUserDisplayName = (user: ClientUserWithENSData | null) => {
   if (user?.fullName) {
     return user.fullName
   }
-  if (user?.cryptoAddress) {
+  if (user?.primaryUserCryptoAddress) {
     return (
-      user.cryptoAddress.ensName ||
-      `${user.cryptoAddress.address.slice(0, 2)}...${user.cryptoAddress.address.slice(-5)}`
+      user.primaryUserCryptoAddress.ensName ||
+      `${user.primaryUserCryptoAddress.cryptoAddress.slice(
+        0,
+        2,
+      )}...${user.primaryUserCryptoAddress.cryptoAddress.slice(-5)}`
     )
   }
   return 'Anonymous'
@@ -28,10 +30,13 @@ export const getSensitiveDataUserDisplayName = (
   if (user?.fullName) {
     return user.fullName
   }
-  if (user?.cryptoAddress) {
+  if (user?.primaryUserCryptoAddress) {
     return (
-      user.cryptoAddress.ensName ||
-      `${user.cryptoAddress.address.slice(0, 2)}...${user.cryptoAddress.address.slice(-5)}`
+      user.primaryUserCryptoAddress.ensName ||
+      `${user.primaryUserCryptoAddress.cryptoAddress.slice(
+        0,
+        2,
+      )}...${user.primaryUserCryptoAddress.cryptoAddress.slice(-5)}`
     )
   }
   return 'Anonymous'
@@ -41,7 +46,7 @@ export const getFullSensitiveDataUserDisplayName = (user: SensitiveDataClientUse
   if (user?.fullName) {
     return user.fullName
   }
-  if (user?.cryptoAddress) {
-    return user.cryptoAddress.address
+  if (user?.primaryUserCryptoAddress) {
+    return user.primaryUserCryptoAddress.cryptoAddress
   }
 }

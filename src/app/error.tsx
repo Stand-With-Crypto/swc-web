@@ -9,7 +9,7 @@ export default function RootErrorPage({ error }: { error: Error & { digest?: str
     logger.info('RootErrorPage rendered with:', error)
     Sentry.captureException(error)
     Sentry.captureException(new Error('Root Error Page Displayed'))
-  }, [])
+  }, [error])
   return (
     <html lang="en">
       <body>

@@ -1,4 +1,3 @@
-import { DTSI_Resolvers } from '@/data/dtsi/generated'
 import introspectionResult from '@/data/dtsi/introspection.json'
 import { dtsiBillMockResolver } from '@/mocks/dtsi/mockResolvers/dtsiBillMockResolver'
 import { dtsiPersonMockResolver } from '@/mocks/dtsi/mockResolvers/dtsiPersonMockResolver'

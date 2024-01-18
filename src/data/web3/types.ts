@@ -1,5 +1,5 @@
 export interface UserENSData {
-  address: string
+  cryptoAddress: string
   ensName: string | null
   ensAvatarUrl: string | null
 }
