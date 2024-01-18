@@ -19,17 +19,7 @@
   - This will generate a new `.env` file in your local repository; this will store all your local environment variables
 - Open the `.env` file with your favorite text editor, and update the environment variables based off the commented instructions
   - **Updating your `.env` is VERY important, so do that before moving on**
-
-### Useful development tips
-
-- `npm run db:seed` - resets _your_ [PlanetScale](https://planetscale.com/) database, then populates the PlanetScale database with seed data
-  - The database will be based on the `DATABASE_URL` provided in your local `.env` file - we will refer to this as "the database you are connected to"
-- `npx prisma generate` - generates [Prisma ORM](https://www.prisma.io/) TypeScript definitions (_i.e._ DB client code) based on `prisma/prisma.schema`
-- `npx prisma studio` - spins up a full database UI for the database you are connected to
-- `npm run intl:extract-compile` - generates initial translation files
-- `npm run codegen` - generates TypeScript definitions for any GraphQL operations we have defined in our codebase
-- `npm run codegen:schemas` - if any of the GraphQL schemas changed for our 3rd-party API partners (_e.g._ https://www.dotheysupportit.com/), run this command to pull in the latest schemas
-- `npm run storybook` - view isolated [storybook stories](https://storybook.js.org/)
+- Run `npm run initial` which includes all required set-up commands for first-time local development.
 
 ### Start the server
 
@@ -37,13 +27,26 @@
 - In a separate terminal tab, `npm run inngest` - runs [Inngest](https://www.inngest.com/)
 - Open [http://localhost:3000](http://localhost:3000) with your browser to see the results
 
+### Useful development tips
+
+- `npx prisma generate` - generates [Prisma ORM](https://www.prisma.io/) TypeScript definitions (_i.e._ DB client code) based on `prisma/prisma.schema`
+  - Whenever you make Prisma schema changes, you should run the generate command
+- `npx prisma studio` - spins up a full database UI for the database you are connected to
+- `npm run db:seed` - resets _your_ [PlanetScale](https://planetscale.com/) database, then populates the PlanetScale database with seed data
+  - The database will be based on the `DATABASE_URL` provided in your local `.env` file - we will refer to this as "the database you are connected to"
+- `npm run codegen` - generates TypeScript definitions for any GraphQL operations we have defined in our codebase
+- `npm run codegen:schemas` - if any of the GraphQL schemas changed for our 3rd-party API partners (_e.g._ https://www.dotheysupportit.com/), run this command to pull in the latest schemas
+- `npm run intl:extract-compile` - generates initial translation files
+- `npm run storybook` - view isolated [storybook stories](https://storybook.js.org/)
+
 ### Updating the database schema
 
 Whenever you make Prisma schema changes (or pulling commits from `main` that includes Prisma schema changes), run the following commands:
 
 - `npx prisma generate` - updates your Prisma TypeScript definitions
-- `npx prisma db push` - pushes the schema changes to the database instance you are connected to
-- `npm run db:seed` - force-pushes the schema updates to the database instance you are connected to, wiping all existing information and freshly populating the database with seed data
+- Then, depending on your situation, run either of the following:
+  - `npx prisma db push` - if your changes are _not_ breaking and you want to maintain the values in your database, then run this command; this will simply push the schema changes to the database instance you are connected to
+  - `npm run db:seed` - if you do have breaking changes, or if you just want to reset your database values, then run this command; this command force-pushes the schema updates to the database instance you are connected to, wiping all existing information and freshly populating the database with seed data
 
 ## Contributing to this project
 
@@ -61,6 +64,8 @@ Whenever you make Prisma schema changes (or pulling commits from `main` that inc
 - Read `docs/Contributing.md` for information on submitting PRs, including database migration steps related to your PR
 
 ## Next Steps
+
+Before proceeding with anything, **PLEASE** take time to review the [Knowledge pre-requisites](#knowledge-pre-requisites).
 
 - After running the server locally, visit [http://localhost:3000/en-US/sample-architecture-patterns](http://localhost:3000/en-US/sample-architecture-patterns) for sample architectural patterns
 - Read ["What is Prisma"](https://www.prisma.io/docs/orm/overview/introduction/what-is-prisma) and ["Why Prisma"](https://www.prisma.io/docs/orm/overview/introduction/why-prisma) to learn about the ORM we use to query our database
