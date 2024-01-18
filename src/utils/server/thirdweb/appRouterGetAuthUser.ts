@@ -1,8 +1,9 @@
 import 'server-only'
 import { ThirdwebAuthUser } from '@thirdweb-dev/auth/next'
 import { ThirdwebAuth as ThirdwebAuthSDK } from '@thirdweb-dev/auth'
-import { thirdWebAuthConfig } from '@/utils/server/thirdWebAuth'
 import { cookies } from 'next/headers'
+import { thirdwebAuthConfig } from '@/utils/server/thirdweb/thirdwebAuthConfig'
+
 /*
  Below is a version of getUser from Thirdweb, modified to support the app router.
  We should delete this code once they formally support the NextRequest object with their SDK, 
@@ -12,9 +13,9 @@ import { cookies } from 'next/headers'
 const THIRDWEB_AUTH_COOKIE_PREFIX = `thirdweb_auth`
 export const THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX = `${THIRDWEB_AUTH_COOKIE_PREFIX}_token`
 export const THIRDWEB_AUTH_ACTIVE_ACCOUNT_COOKIE = `${THIRDWEB_AUTH_COOKIE_PREFIX}_active_account`
-const thirdWebAuthContext = {
-  ...thirdWebAuthConfig,
-  auth: new ThirdwebAuthSDK(thirdWebAuthConfig.wallet, thirdWebAuthConfig.domain),
+const thirdwebAuthContext = {
+  ...thirdwebAuthConfig,
+  auth: new ThirdwebAuthSDK(thirdwebAuthConfig.wallet, thirdwebAuthConfig.domain),
 }
 
 export function getCookie(cookie: string): string | undefined {
@@ -45,10 +46,10 @@ export async function appRouterGetAuthUser(): Promise<ThirdwebAuthUser | null> {
 
   let authUser: ThirdwebAuthUser
   try {
-    authUser = await thirdWebAuthContext.auth.authenticate(token, {
+    authUser = await thirdwebAuthContext.auth.authenticate(token, {
       validateTokenId: async (tokenId: string) => {
-        if (thirdWebAuthContext.authOptions?.validateTokenId) {
-          await thirdWebAuthContext.authOptions?.validateTokenId(tokenId)
+        if (thirdwebAuthContext.authOptions?.validateTokenId) {
+          await thirdwebAuthContext.authOptions?.validateTokenId(tokenId)
         }
       },
     })
@@ -56,7 +57,7 @@ export async function appRouterGetAuthUser(): Promise<ThirdwebAuthUser | null> {
     return null
   }
   /*
-  Normally thirdWebAuthContext.callbacks.onUser(authUser) would be called here, but the type signature expects
+  Normally thirdwebAuthContext.callbacks.onUser(authUser) would be called here, but the type signature expects
   a request object which we don't have in the app router. So we run the logic we want to run "onUser" directly here instead
   */
   // TODO analytics

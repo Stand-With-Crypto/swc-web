@@ -4,7 +4,7 @@ import { getClientUserCryptoAddress } from '@/clientModels/clientUser/clientUser
 import { getSensitiveDataClientUser } from '@/clientModels/clientUser/sensitiveDataClientUser'
 import { getSensitiveDataClientUserAction } from '@/clientModels/clientUserAction/sensitiveDataClientUserAction'
 import { queryDTSIPeopleBySlugForUserActions } from '@/data/dtsi/queries/queryDTSIPeopleBySlugForUserActions'
-import { appRouterGetAuthUser } from '@/utils/server/appRouterGetAuthUser'
+import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
 import { prismaClient } from '@/utils/server/prismaClient'
 import 'server-only'
 

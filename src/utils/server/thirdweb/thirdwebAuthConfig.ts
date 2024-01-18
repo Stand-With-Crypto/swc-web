@@ -18,7 +18,7 @@ const THIRDWEB_AUTH_PRIVATE_KEY = requiredEnv(
   'THIRDWEB_AUTH_PRIVATE_KEY',
 )
 
-export const thirdWebAuthConfig: ThirdwebAuthConfig = {
+export const thirdwebAuthConfig: ThirdwebAuthConfig = {
   domain: NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN,
   // TODO determine if we have requirements for the wallet private key that necessitate a more secure storage mechanism
   wallet: new PrivateKeyWallet(THIRDWEB_AUTH_PRIVATE_KEY),
@@ -85,4 +85,3 @@ export const thirdWebAuthConfig: ThirdwebAuthConfig = {
     },
   },
 }
-export const thirdWebAuth = ThirdwebAuth(thirdWebAuthConfig)
