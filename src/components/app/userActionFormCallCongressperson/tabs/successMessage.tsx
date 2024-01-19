@@ -1,24 +1,23 @@
 'use client'
 
-import React from 'react'
-import { useUser } from '@thirdweb-dev/react'
 import { useRouter } from 'next/navigation'
+import React from 'react'
 
-import { ORDERED_USER_ACTION_ROW_CTA_INFO } from '@/components/app/userActionRowCTA/userActionRowCTAsList'
-import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
 import { UserActionRowCTAButton } from '@/components/app/userActionRowCTA'
-import { USER_ACTION_DEEPLINK_MAP } from '@/utils/shared/urlsDeeplinkUserActions'
-import { useLocale } from '@/hooks/useLocale'
-import { PageTitle } from '@/components/ui/pageTitleText'
-import { PageSubTitle } from '@/components/ui/pageSubTitle'
+import { ORDERED_USER_ACTION_ROW_CTA_INFO } from '@/components/app/userActionRowCTA/userActionRowCTAsList'
 import { Button } from '@/components/ui/button'
-import { UserActionType } from '@prisma/client'
-import { InternalLink } from '@/components/ui/link'
 import { NextImage } from '@/components/ui/image'
+import { InternalLink } from '@/components/ui/link'
+import { PageSubTitle } from '@/components/ui/pageSubTitle'
+import { PageTitle } from '@/components/ui/pageTitleText'
+import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
+import { useLocale } from '@/hooks/useLocale'
+import { USER_ACTION_DEEPLINK_MAP } from '@/utils/shared/urlsDeeplinkUserActions'
+import { UserActionType } from '@prisma/client'
 
-import { UserActionFormCallCongresspersonLayout } from './layout'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useAuthUser } from '@/hooks/useAuthUser'
+import { UserActionFormCallCongresspersonLayout } from './layout'
 
 export function SuccessMessage() {
   const router = useRouter()

@@ -169,5 +169,5 @@ export async function actionCreateUserActionEmailCongressperson(
   // TODO actually trigger the logic to send the email to capital canary. We should be calling some Inngest function here
 
   logger.info('updated user')
-  return { user: getClientUser(user) }
+  return { user: getClientUser(returnedUser) }
 }
