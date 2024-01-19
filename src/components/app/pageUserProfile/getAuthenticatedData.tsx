@@ -1,11 +1,12 @@
 import { getClientAddress } from '@/clientModels/clientAddress'
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
 import { getClientUserCryptoAddress } from '@/clientModels/clientUser/clientUserCryptoAddress'
-import { getSensitiveDataClientUser } from '@/clientModels/clientUser/sensitiveDataClientUser'
+import { getSensitiveDataClientUserWithENSData } from '@/clientModels/clientUser/sensitiveDataClientUser'
 import { getSensitiveDataClientUserAction } from '@/clientModels/clientUserAction/sensitiveDataClientUserAction'
 import { queryDTSIPeopleBySlugForUserActions } from '@/data/dtsi/queries/queryDTSIPeopleBySlugForUserActions'
-import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
+import { getENSDataFromCryptoAddressAndFailGracefully } from '@/data/web3/getENSDataFromCryptoAddress'
 import { prismaClient } from '@/utils/server/prismaClient'
+import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
 import 'server-only'
 
 export async function getAuthenticatedData() {
@@ -50,9 +51,10 @@ export async function getAuthenticatedData() {
       })
     }
   })
-  const dtsiPeople = await queryDTSIPeopleBySlugForUserActions(Array.from(dtsiSlugs)).then(
-    x => x.people,
-  )
+  const [dtsiPeople, ensData] = await Promise.all([
+    queryDTSIPeopleBySlugForUserActions(Array.from(dtsiSlugs)).then(x => x.people),
+    getENSDataFromCryptoAddressAndFailGracefully(user.primaryUserCryptoAddress!.cryptoAddress),
+  ])
   const { userActions, address, ...rest } = user
   const currentlyAuthenticatedUserCryptoAddress = user.userCryptoAddresses.find(
     x => x.cryptoAddress === authUser.address,
@@ -61,11 +63,12 @@ export async function getAuthenticatedData() {
     throw new Error('Primary user crypto address not found')
   }
   return {
-    ...getSensitiveDataClientUser(rest),
+    ...getSensitiveDataClientUserWithENSData(rest, ensData),
     // TODO show UX if this address is not the primary address
     currentlyAuthenticatedUserCryptoAddress: getClientUserCryptoAddress(
       currentlyAuthenticatedUserCryptoAddress,
     ),
+
     address: address && getClientAddress(address),
     userActions: userActions.map(record =>
       getSensitiveDataClientUserAction({ record, dtsiPeople }),
