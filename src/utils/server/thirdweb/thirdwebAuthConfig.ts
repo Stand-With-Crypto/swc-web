@@ -49,7 +49,7 @@ export const thirdwebAuthConfig: ThirdwebAuthConfig = {
     onUser: async () => {},
     onLogin: async (address, req) => {
       const localUser = parseLocalUserFromCookiesForPageRouter(req)
-      // TODO figure out how to get the users email address to persist to the db
+      // try and get the existing user linked to this cryptoAddress
       let existingUser = await prismaClient.user.findFirst({
         where: { userCryptoAddresses: { some: { cryptoAddress: address } } },
       })
@@ -59,14 +59,15 @@ export const thirdwebAuthConfig: ThirdwebAuthConfig = {
       const peopleAnalytics = getServerPeopleAnalytics({ address, localUser })
       peopleAnalytics.set({ 'Datetime of Last Login': new Date() })
       if (!existingUser) {
+        // try and get the existing user linked to the session id passed in the headers
         const userSessionId = getUserSessionIdOnPageRouter(req)
-        const embeddedWalletEmailAddress = await fetchEmbeddedWalletMetadataFromThirdweb(address)
         existingUser = await prismaClient.user.findFirst({
           where: { userSessions: { some: { id: userSessionId } } },
         })
         if (localUser) {
           peopleAnalytics.setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
         }
+        // create a new address and link/create a user
         const userCryptoAddress = await prismaClient.userCryptoAddress.create({
           data: {
             cryptoAddress: address,
@@ -79,21 +80,40 @@ export const thirdwebAuthConfig: ThirdwebAuthConfig = {
                   },
                 },
           },
-          include: { user: true },
+          include: { user: { include: { userEmailAddresses: true } } },
         })
+        const embeddedWalletEmailAddress = await fetchEmbeddedWalletMetadataFromThirdweb(address)
         let primaryUserEmailAddressId: null | string = null
+        /*
+        If the authenticated crypto address came from a thirdweb embedded wallet, we want to create a user email address
+        and link it to the wallet so we know it's an embedded address
+        */
         if (embeddedWalletEmailAddress) {
-          const email = await prismaClient.userEmailAddress.create({
-            data: {
-              isVerified: true,
-              source: UserEmailAddressSource.THIRDWEB_EMBEDDED_AUTH,
+          let email = await prismaClient.userEmailAddress.findFirst({
+            where: {
               emailAddress: embeddedWalletEmailAddress.email.toLowerCase(),
               userId: userCryptoAddress.userId,
             },
           })
+          if (!email) {
+            email = await prismaClient.userEmailAddress.create({
+              data: {
+                isVerified: true,
+                source: UserEmailAddressSource.THIRDWEB_EMBEDDED_AUTH,
+                emailAddress: embeddedWalletEmailAddress.email.toLowerCase(),
+                userId: userCryptoAddress.userId,
+              },
+            })
+          }
           if (!userCryptoAddress.user.primaryUserEmailAddressId) {
             primaryUserEmailAddressId = email.id
           }
+          await prismaClient.userCryptoAddress.update({
+            where: { id: userCryptoAddress.id },
+            data: {
+              embeddedWalletUserEmailAddressId: email.id,
+            },
+          })
         }
         await prismaClient.user.update({
           where: { id: userCryptoAddress.userId },

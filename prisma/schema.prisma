@@ -161,8 +161,9 @@ model UserEmailAddress {
   datetimeUpdated DateTime               @updatedAt @map("datetime_updated")
   datetimeCreated DateTime               @default(now()) @map("datetime_created")
 
-  userActions               UserAction[]
-  asPrimaryUserEmailAddress User?        @relation("asPrimaryUserEmailAddress")
+  userActions                     UserAction[]
+  asPrimaryUserEmailAddress       User?              @relation("asPrimaryUserEmailAddress")
+  embeddedWalletUserCryptoAddress UserCryptoAddress?
 
   @@unique(map: "user_email_address_unique_constraint", [emailAddress, userId])
   @@index([userId])
@@ -180,21 +181,24 @@ enum SupportedUserCryptoNetwork {
 
 // Using Thirdweb a user can create multiple "accounts", one per wallet. They can also have some that are self-custodied, and some that are being custodied by Thirdweb (email, google login, etc)
 model UserCryptoAddress {
-  id              String                     @id @default(uuid())
-  cryptoNetwork   SupportedUserCryptoNetwork @default(ETH) @map("crypto_network")
-  cryptoAddress   String                     @map("crypto_address")
+  id                               String                     @id @default(uuid())
+  cryptoNetwork                    SupportedUserCryptoNetwork @default(ETH) @map("crypto_network")
+  cryptoAddress                    String                     @map("crypto_address")
   // TODO figure out how to detect this via thirdweb sdk and then add it to the model
   // initialCustodian Web3AddressCustodian
-  datetimeUpdated DateTime                   @updatedAt @map("datetime_updated")
-  datetimeCreated DateTime                   @default(now()) @map("datetime_created")
-  userId          String                     @unique @map("user_id")
-  user            User                       @relation("userCryptoAddresses", map: "userCryptoAddresses", fields: [userId], references: [id])
+  datetimeUpdated                  DateTime                   @updatedAt @map("datetime_updated")
+  datetimeCreated                  DateTime                   @default(now()) @map("datetime_created")
+  userId                           String                     @unique @map("user_id")
+  user                             User                       @relation("userCryptoAddresses", map: "userCryptoAddresses", fields: [userId], references: [id])
+  embeddedWalletUserEmailAddressId String?                    @unique @map("embedded_wallet_user_email_address_id")
+  embeddedWalletUserEmailAddress   UserEmailAddress?          @relation(fields: [embeddedWalletUserEmailAddressId], references: [id])
 
   userActions                UserAction[]
   asPrimaryUserCryptoAddress User?        @relation("asPrimaryUserCryptoAddress")
 
   @@unique([cryptoAddress, cryptoNetwork])
   @@index([cryptoAddress])
+  @@index([embeddedWalletUserEmailAddressId])
   @@map("user_crypto_address")
 }
 

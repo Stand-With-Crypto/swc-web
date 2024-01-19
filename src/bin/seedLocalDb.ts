@@ -139,11 +139,25 @@ async function seed() {
   /*
   userEmailAddress
   */
+  const cryptoAddressesToRelateToEmbeddedWallets = [...userCryptoAddress]
   await batchAsyncAndLog(
-    _.times(user.length / 2).map(() => ({
-      ...mockUserEmailAddress(),
-      userId: faker.helpers.arrayElement(user).id,
-    })),
+    _.times(user.length / 2).map(() => {
+      const mockFields = mockUserEmailAddress()
+      return {
+        ...mockFields,
+        embeddedWalletUserEmailAddressId:
+          mockFields.source === UserEmailAddressSource.THIRDWEB_EMBEDDED_AUTH
+            ? cryptoAddressesToRelateToEmbeddedWallets.splice(
+                faker.number.int({
+                  min: 0,
+                  max: cryptoAddressesToRelateToEmbeddedWallets.length - 1,
+                }),
+                1,
+              )[0].id
+            : null,
+        userId: faker.helpers.arrayElement(user).id,
+      }
+    }),
     data =>
       prismaClient.userEmailAddress.createMany({
         data,
