@@ -100,13 +100,43 @@ async function seed() {
   const userSession = await prismaClient.userSession.findMany()
   logEntity({ userSession })
   const usersUnusedOnCryptoAddress = [...user]
+
+  /*
+  userEmailAddress
+  */
+  await batchAsyncAndLog(
+    _.times(user.length / 2).map(() => ({
+      ...mockUserEmailAddress(),
+      userId: faker.helpers.arrayElement(user).id,
+    })),
+    data =>
+      prismaClient.userEmailAddress.createMany({
+        data,
+      }),
+  )
+  const userEmailAddress = await prismaClient.userEmailAddress.findMany()
+  logEntity({ userEmailAddress })
+
   /*
   userCryptoAddress
   */
+  const emailAddressesToRelateToEmbeddedWallets = userEmailAddress.filter(
+    x => x.source === UserEmailAddressSource.THIRDWEB_EMBEDDED_AUTH,
+  )
   await batchAsyncAndLog(
     _.times(user.length / 2).map(index => ({
       ...mockUserCryptoAddress(),
       cryptoAddress: index === 0 ? LOCAL_USER_CRYPTO_ADDRESS : faker.finance.ethereumAddress(),
+      embeddedWalletUserEmailAddressId: emailAddressesToRelateToEmbeddedWallets.length
+        ? emailAddressesToRelateToEmbeddedWallets.splice(
+            faker.number.int({
+              min: 0,
+              max: emailAddressesToRelateToEmbeddedWallets.length - 1,
+            }),
+            1,
+          )[0].id
+        : null,
+
       // a crypto user address must only ever be associated with one user so we use splice here to ensure we can randomly assign these models to users without any duplicates
       userId: usersUnusedOnCryptoAddress.splice(
         faker.number.int({ min: 0, max: usersUnusedOnCryptoAddress.length - 1 }),
@@ -136,35 +166,6 @@ async function seed() {
   logger.info(
     `backfilled newly created userCryptoAddress in to users with primaryUserCryptoAddressId`,
   )
-  /*
-  userEmailAddress
-  */
-  const cryptoAddressesToRelateToEmbeddedWallets = [...userCryptoAddress]
-  await batchAsyncAndLog(
-    _.times(user.length / 2).map(() => {
-      const mockFields = mockUserEmailAddress()
-      return {
-        ...mockFields,
-        embeddedWalletUserEmailAddressId:
-          mockFields.source === UserEmailAddressSource.THIRDWEB_EMBEDDED_AUTH
-            ? cryptoAddressesToRelateToEmbeddedWallets.splice(
-                faker.number.int({
-                  min: 0,
-                  max: cryptoAddressesToRelateToEmbeddedWallets.length - 1,
-                }),
-                1,
-              )[0].id
-            : null,
-        userId: faker.helpers.arrayElement(user).id,
-      }
-    }),
-    data =>
-      prismaClient.userEmailAddress.createMany({
-        data,
-      }),
-  )
-  const userEmailAddress = await prismaClient.userEmailAddress.findMany()
-  logEntity({ userEmailAddress })
 
   /*
       Create a situation where the LOCAL_USER_CRYPTO_ADDRESS has a UserMergeAlert
