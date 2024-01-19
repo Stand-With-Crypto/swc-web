@@ -117,7 +117,7 @@ async function seed() {
       )[0]
       return {
         ...mockUserCryptoAddress(),
-        address:
+        cryptoAddress:
           // we want all known ENS addresses to not have a full name so we always display their ENS
           // in the testing environment. This lets us verify our onchain integrations are working easily
           !initialCryptoAddresses.length || selectedUser.fullName || !selectedUser.isPubliclyVisible
