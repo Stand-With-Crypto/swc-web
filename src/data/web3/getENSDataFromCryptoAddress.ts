@@ -1,45 +1,34 @@
-import * as Sentry from '@sentry/nextjs'
-import { http, Address } from 'viem'
-import { mainnet } from 'viem/chains'
-import { createEnsPublicClient } from '@ensdomains/ensjs'
-import { getName, getRecords, GetNameReturnType } from '@ensdomains/ensjs/public'
-import _ from 'lodash'
 import { formatENSAvatar } from '@/utils/server/formatENSAvatar'
+import { thirdwebRPCClient } from '@/utils/server/thirdweb/thirdwebRPCClient'
+import * as Sentry from '@sentry/nextjs'
+import _ from 'lodash'
+import { Address } from 'viem'
 import { UserENSData } from './types'
 
-// TODO figure out if there's a more performant way of fetching this data with a better RPC
-const client = createEnsPublicClient({
-  chain: mainnet,
-  transport: http(),
-})
+const client = thirdwebRPCClient
 
 async function _getENSDataMapFromCryptoAddresses(
-  addresses: string[],
+  _addresses: string[],
 ): Promise<Record<string, UserENSData>> {
-  const nameResult: Array<GetNameReturnType | null> = await Promise.all(
-    addresses.map(address => getName(client, { address: address as Address })),
-  )
+  const addresses = _addresses as Address[]
+  const nameResult = await Promise.all(addresses.map(address => client.getEnsName({ address })))
   const addressesWithENS = nameResult
     .map((result, index) => ({
       cryptoAddress: addresses[index],
-      ensName: result?.name || null,
+      ensName: result,
     }))
     .filter(({ ensName }) => ensName)
   // TODO figure out how to fetch the name and records in a single call
-  const records = await client.ensBatch(
-    ...addressesWithENS.map(address =>
-      getRecords.batch({
+  const records = await Promise.all(
+    addressesWithENS.map(address =>
+      client.getEnsAvatar({
         name: address.ensName!,
-        records: {
-          texts: ['avatar'],
-        },
       }),
     ),
   )
   return _.keyBy(
     addressesWithENS.map(({ cryptoAddress, ensName }, index) => {
-      const record = records[index]
-      const avatar = record.texts.find(text => text.key === 'avatar')?.value
+      const avatar = records[index]
       return {
         cryptoAddress,
         ensName,
