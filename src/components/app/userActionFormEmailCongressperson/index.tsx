@@ -30,6 +30,7 @@ import {
   triggerServerActionForForm,
 } from '@/utils/web/formUtils'
 import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
+import { identifyUserOnClient } from '@/utils/web/identifyUser'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
 import { zodUserActionFormEmailCongresspersonFields } from '@/validation/forms/zodUserActionFormEmailCongressperson'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -118,7 +119,15 @@ export function UserActionFormEmailCongressperson({
                 'DTSI Slug': values.dtsiSlug,
               },
             },
-            () => actionCreateUserActionEmailCongressperson({ ...values, address }),
+            () =>
+              actionCreateUserActionEmailCongressperson({ ...values, address }).then(
+                actionResult => {
+                  if (actionResult.user) {
+                    identifyUserOnClient(actionResult.user)
+                  }
+                  return actionResult
+                },
+              ),
           )
           if (result.status === 'success') {
             router.refresh()

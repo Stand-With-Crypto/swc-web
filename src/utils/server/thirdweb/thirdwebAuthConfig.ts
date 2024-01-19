@@ -58,32 +58,45 @@ export const thirdwebAuthConfig: ThirdwebAuthConfig = {
       })
       const peopleAnalytics = getServerPeopleAnalytics({ address, localUser })
       peopleAnalytics.set({ 'Datetime of Last Login': new Date() })
-      if (!existingUser) {
-        const userSessionId = getUserSessionIdOnPageRouter(req)
-        const embeddedWalletEmailAddress = await fetchEmbeddedWalletMetadataFromThirdweb(address)
-        existingUser = await prismaClient.user.findFirst({
-          where: { userSessions: { some: { id: userSessionId } } },
-        })
-        if (localUser) {
-          peopleAnalytics.setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
-        }
-        const userCryptoAddress = await prismaClient.userCryptoAddress.create({
-          data: {
-            cryptoAddress: address,
-            user: existingUser
-              ? { connect: { id: existingUser.id } }
-              : {
-                  create: {
-                    isPubliclyVisible: false,
-                    ...mapLocalUserToUserDatabaseFields(localUser),
-                  },
+      if (existingUser) {
+        return { userId: existingUser.id }
+      }
+      const userSessionId = getUserSessionIdOnPageRouter(req)
+      existingUser = await prismaClient.user.findFirst({
+        where: { userSessions: { some: { id: userSessionId } } },
+      })
+      if (localUser) {
+        peopleAnalytics.setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
+      }
+      const userCryptoAddress = await prismaClient.userCryptoAddress.create({
+        data: {
+          cryptoAddress: address,
+          user: existingUser
+            ? { connect: { id: existingUser.id } }
+            : {
+                create: {
+                  isPubliclyVisible: false,
+                  ...mapLocalUserToUserDatabaseFields(localUser),
                 },
+              },
+        },
+        include: { user: true },
+      })
+      const embeddedWalletEmailAddress = await fetchEmbeddedWalletMetadataFromThirdweb(address)
+      let primaryUserEmailAddressId: null | string = null
+      /*
+        If the authenticated crypto address came from a thirdweb embedded wallet, we want to create a user email address
+        and link it to the wallet so we know it's an embedded address
+        */
+      if (embeddedWalletEmailAddress) {
+        let email = await prismaClient.userEmailAddress.findFirst({
+          where: {
+            emailAddress: embeddedWalletEmailAddress.email.toLowerCase(),
+            userId: userCryptoAddress.userId,
           },
-          include: { user: true },
         })
-        let primaryUserEmailAddressId: null | string = null
-        if (embeddedWalletEmailAddress) {
-          const email = await prismaClient.userEmailAddress.create({
+        if (!email) {
+          email = await prismaClient.userEmailAddress.create({
             data: {
               isVerified: true,
               source: UserEmailAddressSource.THIRDWEB_EMBEDDED_AUTH,
@@ -95,14 +108,24 @@ export const thirdwebAuthConfig: ThirdwebAuthConfig = {
             primaryUserEmailAddressId = email.id
           }
         }
-        await prismaClient.user.update({
-          where: { id: userCryptoAddress.userId },
+        if (!userCryptoAddress.user.primaryUserEmailAddressId) {
+          primaryUserEmailAddressId = email.id
+        }
+        await prismaClient.userCryptoAddress.update({
+          where: { id: userCryptoAddress.id },
           data: {
-            primaryUserCryptoAddressId: userCryptoAddress.id,
-            ...(primaryUserEmailAddressId ? { primaryUserEmailAddressId } : {}),
+            embeddedWalletUserEmailAddressId: email.id,
           },
         })
       }
+      await prismaClient.user.update({
+        where: { id: userCryptoAddress.userId },
+        data: {
+          primaryUserCryptoAddressId: userCryptoAddress.id,
+          ...(primaryUserEmailAddressId ? { primaryUserEmailAddressId } : {}),
+        },
+      })
+      return { userId: userCryptoAddress.userId }
     },
   },
 }

@@ -9,20 +9,17 @@ import {
   embeddedWallet,
   en,
   metamaskWallet,
-  useAddress,
   walletConnect,
 } from '@thirdweb-dev/react'
 
+import { useAuthUser } from '@/hooks/useAuthUser'
 import { LocaleContext } from '@/hooks/useLocale'
 import { SupportedLocale } from '@/intl/locales'
 import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
-import {
-  identifyClientAnalyticsUser,
-  initClientAnalytics,
-  trackClientAnalytic,
-} from '@/utils/web/clientAnalytics'
+import { initClientAnalytics, trackClientAnalytic } from '@/utils/web/clientAnalytics'
 import { bootstrapLocalUser } from '@/utils/web/clientLocalUser'
 import { getUserSessionIdOnClient } from '@/utils/web/clientUserSessionId'
+import { identifyUserOnClient } from '@/utils/web/identifyUser'
 import { usePathname } from 'next/navigation'
 import { useEffect } from 'react'
 
@@ -33,21 +30,19 @@ const NEXT_PUBLIC_THIRDWEB_CLIENT_ID = requiredEnv(
 
 const InitialOrchestration = () => {
   const pathname = usePathname()
-  const address = useAddress()
+  const authUser = useAuthUser()
   // Note, in local dev this component will double render. It doesn't do this after it is built (verify in testing)
   useEffect(() => {
     bootstrapLocalUser()
-    const sessionId = getUserSessionIdOnClient()
     initClientAnalytics()
-    identifyClientAnalyticsUser(sessionId)
+    const sessionId = getUserSessionIdOnClient()
     Sentry.setUser({ id: sessionId, idType: 'session' })
   }, [])
   useEffect(() => {
-    if (address) {
-      Sentry.setUser({ id: address, idType: 'cryptoAddress' })
-      identifyClientAnalyticsUser(address)
+    if (authUser.user) {
+      identifyUserOnClient(authUser.user)
     }
-  }, [address])
+  }, [authUser.user])
   useEffect(() => {
     if (!pathname) {
       return

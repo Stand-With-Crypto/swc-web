@@ -16,8 +16,8 @@ export function initClientAnalytics() {
     persistence: 'localStorage',
   })
 }
-export function identifyClientAnalyticsUser(sessionIdOrCryptoWalletAddress: string) {
-  mixpanel.identify(sessionIdOrCryptoWalletAddress)
+export function identifyClientAnalyticsUser(userId: string) {
+  mixpanel.identify(userId)
 }
 
 export function trackClientAnalytic(eventName: string, eventProperties?: AnalyticProperties) {

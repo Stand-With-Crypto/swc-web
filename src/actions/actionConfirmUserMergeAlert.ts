@@ -22,11 +22,7 @@ export async function actionConfirmUserMergeAlert(data: z.infer<typeof schema>) 
   const { userMergeAlertId, userToDeleteId } = validatedFields
   const user = await prismaClient.user.findFirstOrThrow({
     where: {
-      userCryptoAddresses: {
-        some: {
-          cryptoAddress: authUser.address,
-        },
-      },
+      id: authUser.userId,
     },
   })
   let userMergeAlert = await prismaClient.userMergeAlert.findFirstOrThrow({

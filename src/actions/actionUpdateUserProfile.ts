@@ -8,6 +8,7 @@ import { zodUpdateUserProfileFormAction } from '@/validation/forms/zodUpdateUser
 import { UserEmailAddressSource } from '@prisma/client'
 import 'server-only'
 import { z } from 'zod'
+import { getClientUser } from '@/clientModels/clientUser/clientUser'
 
 export async function actionUpdateUserProfile(
   data: z.infer<typeof zodUpdateUserProfileFormAction>,
@@ -24,7 +25,7 @@ export async function actionUpdateUserProfile(
   }
   const user = await prismaClient.user.findFirstOrThrow({
     where: {
-      userCryptoAddresses: { some: { cryptoAddress: authUser.address } },
+      id: authUser.userId,
     },
     include: {
       userEmailAddresses: true,
@@ -84,9 +85,12 @@ export async function actionUpdateUserProfile(
       addressId: address?.id || null,
       primaryUserEmailAddressId: primaryUserEmailAddress?.id || null,
     },
+    include: {
+      primaryUserCryptoAddress: true,
+    },
   })
 
   return {
-    user: updatedUser,
+    user: getClientUser(updatedUser),
   }
 }

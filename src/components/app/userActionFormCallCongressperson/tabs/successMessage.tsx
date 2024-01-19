@@ -18,6 +18,7 @@ import { NextImage } from '@/components/ui/image'
 
 import { UserActionFormCallCongresspersonLayout } from './layout'
 import { Skeleton } from '@/components/ui/skeleton'
+import { useAuthUser } from '@/hooks/useAuthUser'
 
 export function SuccessMessage() {
   const router = useRouter()
@@ -66,7 +67,7 @@ export function SuccessMessage() {
 }
 
 function SuccessMessageContent() {
-  const authUser = useUser()
+  const authUser = useAuthUser()
 
   if (authUser.isLoading) {
     return <SuccessMessageSkeleton />
