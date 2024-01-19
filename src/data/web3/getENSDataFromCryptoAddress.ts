@@ -1,8 +1,8 @@
 import { formatENSAvatar } from '@/utils/server/formatENSAvatar'
 import { thirdwebRPCClient } from '@/utils/server/thirdweb/thirdwebRPCClient'
+import { stringToEthereumAddress } from '@/utils/shared/stringToEthereumAddress'
 import * as Sentry from '@sentry/nextjs'
 import _ from 'lodash'
-import { Address } from 'viem'
 import { UserENSData } from './types'
 
 const client = thirdwebRPCClient
@@ -10,7 +10,7 @@ const client = thirdwebRPCClient
 async function _getENSDataMapFromCryptoAddresses(
   _addresses: string[],
 ): Promise<Record<string, UserENSData>> {
-  const addresses = _addresses as Address[]
+  const addresses = _addresses.map(addr => stringToEthereumAddress(addr))
   const nameResult = await Promise.all(addresses.map(address => client.getEnsName({ address })))
   const addressesWithENS = nameResult
     .map((result, index) => ({
@@ -26,16 +26,17 @@ async function _getENSDataMapFromCryptoAddresses(
       }),
     ),
   )
-  return _.keyBy(
-    addressesWithENS.map(({ cryptoAddress, ensName }, index) => {
+  return addressesWithENS.reduce(
+    (acc, { cryptoAddress, ensName }, index) => {
       const avatar = records[index]
-      return {
+      acc[cryptoAddress] = {
         cryptoAddress,
         ensName,
         ensAvatarUrl: avatar ? formatENSAvatar(avatar) : null,
       }
-    }),
-    x => x.cryptoAddress,
+      return acc
+    },
+    {} as Record<string, UserENSData>,
   )
 }
 

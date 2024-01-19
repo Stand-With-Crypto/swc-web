@@ -1,5 +1,5 @@
 import * as Sentry from '@sentry/nextjs'
-// TODO expand this as we learn about additional formats
+// expand this as we learn about additional formats
 export function formatENSAvatar(avatar: string) {
   avatar = avatar.trim()
 
