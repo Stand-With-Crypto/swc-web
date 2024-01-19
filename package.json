@@ -28,7 +28,6 @@
     "seed": "npm run ts --transpile-only src/bin/seedLocalDb.ts"
   },
   "dependencies": {
-    "@ensdomains/ensjs": "^3.0.0",
     "@graphql-tools/mock": "^9.0.0",
     "@hookform/resolvers": "^3.3.2",
     "@planetscale/database": "^1.13.0",
