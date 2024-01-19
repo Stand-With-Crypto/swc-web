@@ -64,5 +64,9 @@ export async function appRouterGetAuthUser(): Promise<ServerAuthUser | null> {
   Normally thirdwebAuthContext.callbacks.onUser(authUser) would be called here, but the type signature expects
   a request object which we don't have in the app router. So we run the logic we want to run "onUser" directly here instead
   */
-  return { ...authUser, userId: authUser.session!.userId }
+  return {
+    ...authUser,
+    // see https://portal.thirdweb.com/wallets/auth/server-frameworks/next#enhancing-session-data
+    userId: authUser.session!.userId,
+  }
 }

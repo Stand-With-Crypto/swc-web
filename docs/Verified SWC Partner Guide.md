@@ -1,6 +1,6 @@
 # Verified SWC Partner Guide
 
-For verified partners, Stand With Crypto provides APIs that allow you to programmatically subscribe users and perform user actions on behalf of users. See the `/src/app/api/verified-swc-partner` folder for all available API endpoints.
+For verified partners, Stand With Crypto provides APIs that allow you to programmatically subscribe and perform actions on behalf of users. See the `/src/app/api/verified-swc-partner` folder for all available API endpoints.
 
 ## API Response Structure
 
