@@ -20,7 +20,7 @@ import { initClientAnalytics, trackClientAnalytic } from '@/utils/web/clientAnal
 import { bootstrapLocalUser } from '@/utils/web/clientLocalUser'
 import { getUserSessionIdOnClient } from '@/utils/web/clientUserSessionId'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
-import { usePathname } from 'next/navigation'
+import { usePathname, useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
 
 const NEXT_PUBLIC_THIRDWEB_CLIENT_ID = requiredEnv(
@@ -30,6 +30,7 @@ const NEXT_PUBLIC_THIRDWEB_CLIENT_ID = requiredEnv(
 
 const InitialOrchestration = () => {
   const pathname = usePathname()
+  const searchParams = useSearchParams()
   const authUser = useAuthUser()
   // Note, in local dev this component will double render. It doesn't do this after it is built (verify in testing)
   useEffect(() => {
@@ -38,11 +39,20 @@ const InitialOrchestration = () => {
     const sessionId = getUserSessionIdOnClient()
     Sentry.setUser({ id: sessionId, idType: 'session' })
   }, [])
+  const searchParamsUserId = searchParams?.get('userId')
   useEffect(() => {
-    if (authUser.user) {
-      identifyUserOnClient(authUser.user)
+    if (authUser.user || searchParamsUserId) {
+      identifyUserOnClient(authUser.user || { userId: searchParamsUserId! })
     }
-  }, [authUser.user])
+    if (authUser.user && searchParamsUserId && authUser.user.userId !== searchParamsUserId) {
+      Sentry.captureMessage('mismatch between authenticated user and userId in search param', {
+        extra: {
+          authUser: authUser.user,
+          searchParamsUserId,
+        },
+      })
+    }
+  }, [authUser.user, searchParamsUserId])
   useEffect(() => {
     if (!pathname) {
       return
