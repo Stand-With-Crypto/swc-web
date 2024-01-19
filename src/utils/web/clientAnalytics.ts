@@ -2,6 +2,8 @@ import { customLogger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { AnalyticProperties } from '@/utils/shared/sharedAnalytics'
 import mixpanel from 'mixpanel-browser'
+import { track as vercelTrack } from '@vercel/analytics'
+import { formatVercelAnalyticsEventProperties } from '@/utils/shared/vercelAnalytics'
 
 const NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN = requiredEnv(
   process.env.NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN,
@@ -31,6 +33,7 @@ export function trackClientAnalytic(eventName: string, eventProperties?: Analyti
   mixpanel.track(eventName, {
     eventProperties,
   })
+  vercelTrack(eventName, eventProperties && formatVercelAnalyticsEventProperties(eventProperties))
 }
 
 export function setClientAnalyticsUserProperties(userProperties: object) {

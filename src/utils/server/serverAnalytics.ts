@@ -4,10 +4,12 @@ import { AnalyticProperties, AnalyticsPeopleProperties } from '@/utils/shared/sh
 import { UserActionType, UserCryptoAddress } from '@prisma/client'
 import mixpanelLib from 'mixpanel'
 import * as Sentry from '@sentry/nextjs'
+import { track as vercelTrack } from '@vercel/analytics/server'
 import {
   LocalUser,
   mapCurrentSessionLocalUserToAnalyticsProperties,
 } from '@/utils/shared/localUser'
+import { formatVercelAnalyticsEventProperties } from '@/utils/shared/vercelAnalytics'
 
 const NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN = requiredEnv(
   process.env.NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN,
@@ -47,6 +49,7 @@ function trackAnalytic(
     return
   }
   logger.info(`Event Name: "${eventName}"`, eventProperties)
+  vercelTrack(eventName, eventProperties && formatVercelAnalyticsEventProperties(eventProperties))
   // we could wrap this in a promise and await it, but we don't want to block the request
   mixpanel.track(
     eventName,
