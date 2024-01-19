@@ -1,4 +1,5 @@
 import { ClientModel, getClientModel } from '@/clientModels/utils'
+import { UserENSData } from '@/data/web3/types'
 import { UserCryptoAddress } from '@prisma/client'
 
 export type ClientUserCryptoAddress = ClientModel<
@@ -12,4 +13,24 @@ export const getClientUserCryptoAddress = (record: UserCryptoAddress): ClientUse
     cryptoAddress,
     cryptoNetwork,
   })
+}
+
+export type ClientUserCryptoAddressWithENSData = ClientModel<
+  Pick<UserCryptoAddress, 'id' | 'cryptoAddress' | 'cryptoNetwork'> & UserENSData
+>
+
+export const getClientUserCryptoAddressWithENSData = (
+  record: UserCryptoAddress,
+  ensData: UserENSData | null | undefined,
+): ClientUserCryptoAddressWithENSData => {
+  if (ensData && ensData?.cryptoAddress !== record.cryptoAddress) {
+    throw new Error(
+      `ENS data address does not match crypto address: ${JSON.stringify({ ensData, record })}}`,
+    )
+  }
+  return {
+    ...getClientUserCryptoAddress(record),
+    ensAvatarUrl: ensData?.ensAvatarUrl || null,
+    ensName: ensData?.ensName || null,
+  }
 }

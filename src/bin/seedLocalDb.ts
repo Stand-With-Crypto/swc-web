@@ -2,7 +2,7 @@ import 'dotenv/config'
 import { runBin } from '@/bin/binUtils'
 import { mockAddress } from '@/mocks/models/mockAddress'
 import { mockAuthenticationNonce } from '@/mocks/models/mockAuthenticationNonce'
-import { mockUserCryptoAddress } from '@/mocks/models/mockUserCryptoAddress'
+import { PopularCryptoAddress, mockUserCryptoAddress } from '@/mocks/models/mockUserCryptoAddress'
 import { mockUser } from '@/mocks/models/mockUser'
 import { mockNFT } from '@/mocks/models/mockNFT'
 import { mockUserSession } from '@/mocks/models/mockUserSession'
@@ -120,29 +120,43 @@ async function seed() {
   /*
   userCryptoAddress
   */
+  const topDonorCryptoAddressStrings = [
+    PopularCryptoAddress.BRIAN_ARMSTRONG,
+    PopularCryptoAddress.CHRIS_DIXON,
+  ]
+  const initialCryptoAddresses = [...topDonorCryptoAddressStrings, LOCAL_USER_CRYPTO_ADDRESS]
   const emailAddressesToRelateToEmbeddedWallets = userEmailAddress.filter(
     x => x.source === UserEmailAddressSource.THIRDWEB_EMBEDDED_AUTH,
   )
   await batchAsyncAndLog(
-    _.times(user.length / 2).map(index => ({
-      ...mockUserCryptoAddress(),
-      cryptoAddress: index === 0 ? LOCAL_USER_CRYPTO_ADDRESS : faker.finance.ethereumAddress(),
-      embeddedWalletUserEmailAddressId: emailAddressesToRelateToEmbeddedWallets.length
-        ? emailAddressesToRelateToEmbeddedWallets.splice(
-            faker.number.int({
-              min: 0,
-              max: emailAddressesToRelateToEmbeddedWallets.length - 1,
-            }),
-            1,
-          )[0].id
-        : null,
-
+    _.times(user.length / 2).map(() => {
       // a crypto user address must only ever be associated with one user so we use splice here to ensure we can randomly assign these models to users without any duplicates
-      userId: usersUnusedOnCryptoAddress.splice(
+      const selectedUser = usersUnusedOnCryptoAddress.splice(
         faker.number.int({ min: 0, max: usersUnusedOnCryptoAddress.length - 1 }),
         1,
-      )[0].id,
-    })),
+      )[0]
+      // we want all known ENS addresses to not have a full name so we always display their ENS
+      // in the testing environment. This lets us verify our onchain integrations are working easily
+      const shouldUseInitialCryptoAddress =
+        initialCryptoAddresses.length && !selectedUser.fullName && selectedUser.isPubliclyVisible
+      return {
+        ...mockUserCryptoAddress(),
+        embeddedWalletUserEmailAddressId:
+          !shouldUseInitialCryptoAddress && emailAddressesToRelateToEmbeddedWallets.length
+            ? emailAddressesToRelateToEmbeddedWallets.splice(
+                faker.number.int({
+                  min: 0,
+                  max: emailAddressesToRelateToEmbeddedWallets.length - 1,
+                }),
+                1,
+              )[0].id
+            : null,
+        cryptoAddress: shouldUseInitialCryptoAddress
+          ? initialCryptoAddresses.pop()!
+          : faker.finance.ethereumAddress(),
+        userId: selectedUser.id,
+      }
+    }),
     data =>
       prismaClient.userCryptoAddress.createMany({
         data,
@@ -151,6 +165,9 @@ async function seed() {
   const userCryptoAddress = await prismaClient.userCryptoAddress.findMany()
   const localUserCryptoAddress = userCryptoAddress.find(
     x => x.cryptoAddress === LOCAL_USER_CRYPTO_ADDRESS,
+  )!
+  const topDonorCryptoAddresses = userCryptoAddress.filter(x =>
+    topDonorCryptoAddressStrings.includes(x.cryptoAddress),
   )!
   logEntity({ userCryptoAddress })
   batchAsyncAndLog(userCryptoAddress, addresses =>
@@ -234,16 +251,25 @@ async function seed() {
 
   const usedNftMints = [...nftMint]
 
+  const topDonorsLeftToAssign = [...topDonorCryptoAddresses]
   await batchAsyncAndLog(
     userActionTypesToPersist.map((actionType, index) => {
-      const relatedItem =
-        actionType === UserActionType.OPT_IN
-          ? faker.helpers.arrayElement(userEmailAddress)
-          : index < 10
-            ? localUserCryptoAddress
-            : index % 4 === 1
-              ? faker.helpers.arrayElement(userSession)
-              : faker.helpers.arrayElement(userCryptoAddress)
+      const getRelatedItem = () => {
+        if (actionType === UserActionType.OPT_IN) {
+          return faker.helpers.arrayElement(userEmailAddress)
+        }
+        if (index < 10) {
+          return localUserCryptoAddress
+        }
+        if (actionType === UserActionType.DONATION && topDonorsLeftToAssign.length) {
+          return topDonorsLeftToAssign.pop()!
+        }
+        if (index % 4 === 1) {
+          return faker.helpers.arrayElement(userSession)
+        }
+        return faker.helpers.arrayElement(userCryptoAddress)
+      }
+      const relatedItem = getRelatedItem()
 
       return {
         ...mockUserAction({
@@ -352,10 +378,19 @@ async function seed() {
   /*
   userActionDonation
   */
+  const topDonorUserIdMap = _.keyBy(topDonorCryptoAddresses, x => x.userId)
   await batchAsyncAndLog(
     userActionsByType[UserActionType.DONATION].map(action => {
+      const initialMockValues = mockUserActionDonation()
+      const isTopDonor = topDonorUserIdMap[action.userId]
+      const amount = isTopDonor
+        ? faker.number.float({ min: 100000, max: 200000, precision: 0.01 })
+        : initialMockValues.amount
       return {
-        ...mockUserActionDonation(),
+        ...initialMockValues,
+        amount,
+        amountCurrencyCode: isTopDonor ? 'USD' : initialMockValues.amountCurrencyCode,
+        amountUsd: isTopDonor ? amount : initialMockValues.amountUsd,
         id: action.id,
       }
     }),

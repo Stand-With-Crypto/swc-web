@@ -4,7 +4,7 @@ import { faker } from '@faker-js/faker'
 import { User } from '@prisma/client'
 
 export function mockUser(): User {
-  const withData = faker.helpers.maybe(() => true, { probability: 0.7 })
+  const withData = faker.helpers.maybe(() => true, { probability: 0.5 })
   return {
     ...mockCommonDatetimes(),
     acquisitionCampaign: '',
