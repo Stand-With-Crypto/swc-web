@@ -149,7 +149,7 @@ model UserSession {
 }
 
 enum UserEmailAddressSource {
-  COINBASE_AUTH
+  VERIFIED_THIRD_PARTY
   THIRDWEB_EMBEDDED_AUTH
   USER_ENTERED
 }

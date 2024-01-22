@@ -78,6 +78,7 @@ export async function actionCreateUserActionCallCongressperson(
 
   const { updatedUser } = await createActionAndUpdateUser({
     user,
+    isNewUser: !userMatch.user,
     validatedInput: validatedInput.data,
     userMatch,
     sharedDependencies: { sessionId, analytics, peopleAnalytics },
@@ -96,6 +97,9 @@ async function createUser(
     data: {
       isPubliclyVisible: false,
       userSessions: { create: { id: sessionId } },
+      hasOptedInToEmails: false,
+      hasOptedInToMembership: false,
+      hasOptedInToSms: false,
       ...mapLocalUserToUserDatabaseFields(localUser),
     },
     include: {
@@ -146,6 +150,7 @@ function logSpamActionSubmissions({
     actionType: UserActionType.CALL,
     campaignName: UserActionCallCampaignName.DEFAULT,
     reason: 'Too Many Recent',
+    userState: 'Existing',
     ...convertAddressToAnalyticsProperties(validatedInput.data.address),
   })
   Sentry.captureMessage(
@@ -162,8 +167,10 @@ async function createActionAndUpdateUser<U extends User>({
   validatedInput,
   userMatch,
   sharedDependencies,
+  isNewUser,
 }: {
   user: U
+  isNewUser: boolean
   validatedInput: z.infer<typeof createActionCallCongresspersonInputValidationSchema>
   userMatch: UserAndMethodOfMatch
   sharedDependencies: Pick<SharedDependencies, 'sessionId' | 'analytics' | 'peopleAnalytics'>
@@ -217,6 +224,7 @@ async function createActionAndUpdateUser<U extends User>({
     'Recipient DTSI Slug': validatedInput.dtsiSlug,
     'Recipient Phone Number': validatedInput.phoneNumber,
     ...convertAddressToAnalyticsProperties(validatedInput.address),
+    userState: isNewUser ? 'New' : 'Existing',
   })
   sharedDependencies.peopleAnalytics.set({
     ...convertAddressToAnalyticsProperties(validatedInput.address),
