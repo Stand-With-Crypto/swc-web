@@ -1,5 +1,5 @@
 import { prismaClient } from '@/utils/server/prismaClient'
-import { Prisma, UserActionOptInType, UserActionType } from '@prisma/client'
+import { UserActionOptInType, UserActionType } from '@prisma/client'
 import { z } from 'zod'
 import * as Sentry from '@sentry/nextjs'
 import { getLogger } from '@/utils/shared/logger'
@@ -15,7 +15,6 @@ import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
 import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
-import { maybeUpsertUser } from '@/utils/server/maybeUpsertUser'
 
 export const zodVerifiedSWCPartnersUserActionOptIn = z.object({
   emailAddress: z.string().email().toLowerCase().trim(),
@@ -24,8 +23,7 @@ export const zodVerifiedSWCPartnersUserActionOptIn = z.object({
   isVerifiedEmailAddress: z.boolean(),
   fullName: z.string().trim().optional(),
   phoneNumber: zodPhoneNumber.optional().transform(str => str && normalizePhoneNumber(str)),
-  hasOptedInToSms: z.boolean().optional(),
-  hasOptedInToMembership: z.boolean().optional(),
+  hasOptedInToReceiveSMSFromSWC: z.boolean().optional(),
 })
 
 const logger = getLogger('verifiedSWCPartnersUserActionOptIn')
@@ -43,12 +41,9 @@ export async function verifiedSWCPartnersUserActionOptIn({
   partner,
   fullName,
   phoneNumber,
-  hasOptedInToSms,
-  hasOptedInToMembership,
 }: z.infer<typeof zodVerifiedSWCPartnersUserActionOptIn> & {
   partner: VerifiedSWCPartner
 }): Promise<VerifiedSWCPartnerApiResponse<VerifiedSWCPartnersUserActionOptInResult>> {
-  // TODO decide if we need to create two actions based off whether hasOptedInToMembership has been passed
   const actionType = UserActionType.OPT_IN
   const existingAction = await prismaClient.userAction.findFirst({
     include: {
@@ -66,46 +61,30 @@ export async function verifiedSWCPartnersUserActionOptIn({
       },
       user: {
         userEmailAddresses: {
-          some: { emailAddress: emailAddress, isVerified: true },
+          some: { emailAddress: emailAddress },
         },
       },
     },
   })
-  const existingUser = existingAction?.user
-  const { user, upsertUserResult } = await maybeUpsertUser({
-    userArgs: existingUser
-      ? {
-          user: existingUser,
-          updateFields: {
-            ...(fullName && !existingUser.fullName && { fullName }),
-            ...(phoneNumber && !existingUser.phoneNumber && { phoneNumber }),
-            ...(!existingUser.hasOptedInToEmails && { hasOptedInToEmail: true }),
-            ...(hasOptedInToMembership &&
-              !existingUser.hasOptedInToMembership && { hasOptedInToMembership }),
-            ...(hasOptedInToSms && !existingUser.hasOptedInToSms && { hasOptedInToSms }),
-          },
-        }
-      : {
-          createFields: {
-            ...getUserAttributionFieldsForVerifiedSWCPartner({ partner, campaignName }),
-            userSessions: {
-              create: {},
-            },
-            hasOptedInToEmails: true,
-            hasOptedInToMembership: hasOptedInToMembership || false,
-            hasOptedInToSms: hasOptedInToSms || false,
-            isPubliclyVisible: false,
-            fullName: fullName,
-            phoneNumber: phoneNumber,
-          },
-        },
-    selectArgs: {
+  const user =
+    existingAction?.user ||
+    (await prismaClient.user.create({
       include: {
         userEmailAddresses: true,
         userSessions: true,
       },
-    },
-  })
+      data: {
+        ...getUserAttributionFieldsForVerifiedSWCPartner({ partner, campaignName }),
+        userSessions: {
+          create: {},
+        },
+        isPubliclyVisible: false,
+        fullName: fullName,
+        phoneNumber: phoneNumber,
+        // TODO
+        //   hasOptedInToReceiveSMS: hasOptedInToReceiveSMSFromSWC,
+      },
+    }))
   const sessionId = await getOrCreateSessionIdToSendBackToPartner(user)
   const localUser = getLocalUserFromUser(user)
   const analytics = getServerAnalytics({ sessionId, localUser })
@@ -132,7 +111,6 @@ export async function verifiedSWCPartnersUserActionOptIn({
       campaignName,
       creationMethod: 'Verified SWC Partner',
       reason: 'Already Exists',
-      userState: upsertUserResult,
     })
     return {
       result: VerifiedSWCPartnersUserActionOptInResult.EXISTING_ACTION,
@@ -141,7 +119,14 @@ export async function verifiedSWCPartnersUserActionOptIn({
       userId: existingAction.user.id,
     }
   }
-  await prismaClient.userAction.create({
+  const userAction = await prismaClient.userAction.create({
+    include: {
+      user: {
+        include: {
+          userSessions: true,
+        },
+      },
+    },
     data: {
       actionType,
       campaignName: UserActionOptInCampaignName.DEFAULT,
@@ -150,7 +135,21 @@ export async function verifiedSWCPartnersUserActionOptIn({
           optInType,
         },
       },
-      user: { connect: { id: user.id } },
+      user: user
+        ? { connect: { id: user.id } }
+        : {
+            create: {
+              ...getUserAttributionFieldsForVerifiedSWCPartner({ partner, campaignName }),
+              userSessions: {
+                create: {},
+              },
+              isPubliclyVisible: false,
+              fullName: fullName,
+              phoneNumber: phoneNumber,
+              // TODO
+              //   hasOptedInToReceiveSMS: hasOptedInToReceiveSMSFromSWC,
+            },
+          },
     },
   })
 
@@ -158,7 +157,6 @@ export async function verifiedSWCPartnersUserActionOptIn({
     actionType,
     campaignName,
     creationMethod: 'Verified SWC Partner',
-    userState: upsertUserResult,
   })
 
   // TODO send user to capital canary
@@ -166,7 +164,7 @@ export async function verifiedSWCPartnersUserActionOptIn({
   return {
     result: VerifiedSWCPartnersUserActionOptInResult.NEW_ACTION,
     resultOptions: Object.values(VerifiedSWCPartnersUserActionOptInResult),
-    sessionId: await getOrCreateSessionIdToSendBackToPartner(user),
-    userId: user.id,
+    sessionId: await getOrCreateSessionIdToSendBackToPartner(userAction.user),
+    userId: userAction.user.id,
   }
 }
