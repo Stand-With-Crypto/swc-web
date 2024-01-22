@@ -1,7 +1,8 @@
-import { useDisconnect, useUser, useLogout } from '@thirdweb-dev/react'
+import { useDisconnect, useUser, useLogout, useWallet, useAddress } from '@thirdweb-dev/react'
 import { usePathname, useRouter } from 'next/navigation'
 
 import { useIntlUrls } from '@/hooks/useIntlUrls'
+import useSWR from 'swr'
 
 export function useThirdwebData() {
   const session = useUser()
@@ -27,4 +28,18 @@ export function useThirdwebData() {
       handleLogoutSuccess()
     },
   }
+}
+
+export function useWalletBalance() {
+  const session = useUser()
+  const wallet = useWallet()
+
+  const key =
+    session.user?.address && wallet?.getBalance
+      ? `useWalletBallance-${session.user?.address}`
+      : null
+
+  return useSWR(key, async () => {
+    return wallet?.getBalance()
+  })
 }

@@ -9,19 +9,16 @@ import { cn } from '@/utils/web/cn'
 import { DtsiCongresspersonDisplay } from '@/components/app/dtsiCongresspersonDisplay'
 import { UseGetDTSIPeopleFromAddressResponse } from '@/hooks/useGetDTSIPeopleFromAddress'
 
-interface UserActionFormCallCongresspersonLayoutProps extends React.PropsWithChildren {
+interface UserActionFormLayoutProps extends React.PropsWithChildren {
   onBack?: () => void
 }
 
-export function UserActionFormCallCongresspersonLayout({
-  onBack,
-  children,
-}: UserActionFormCallCongresspersonLayoutProps) {
+export function UserActionFormLayout({ onBack, children }: UserActionFormLayoutProps) {
   return (
     <>
       {onBack && <GoBackButton onClick={onBack} />}
 
-      <div className="p-6 md:px-12">{children}</div>
+      <div className="min-h-64 p-6 md:px-12">{children}</div>
     </>
   )
 }
@@ -35,7 +32,7 @@ function Heading({ title, subtitle }: { title: string; subtitle: string }) {
     </div>
   )
 }
-UserActionFormCallCongresspersonLayout.Heading = Heading
+UserActionFormLayout.Heading = Heading
 
 function Container({ children }: React.PropsWithChildren) {
   return (
@@ -44,7 +41,7 @@ function Container({ children }: React.PropsWithChildren) {
     </ScrollArea>
   )
 }
-UserActionFormCallCongresspersonLayout.Container = Container
+UserActionFormLayout.Container = Container
 
 function GoBackButton({ onClick }: { onClick: () => void }) {
   return (
@@ -67,9 +64,9 @@ function CongresspersonDisplayFooter({
     </div>
   )
 }
-UserActionFormCallCongresspersonLayout.CongresspersonDisplayFooter = CongresspersonDisplayFooter
+UserActionFormLayout.CongresspersonDisplayFooter = CongresspersonDisplayFooter
 
 function Footer({ children }: React.PropsWithChildren) {
   return <div className="flex w-full flex-row-reverse items-center justify-between">{children}</div>
 }
-UserActionFormCallCongresspersonLayout.Footer = Footer
+UserActionFormLayout.Footer = Footer

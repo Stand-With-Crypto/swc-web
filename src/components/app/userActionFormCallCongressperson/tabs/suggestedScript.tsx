@@ -19,7 +19,7 @@ import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalyt
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { UseTabsReturn } from '@/hooks/useTabs'
 
-import { UserActionFormCallCongresspersonLayout } from './layout'
+import { UserActionFormLayout } from '@/components/app/userActionFormCommon/layout'
 
 export function SuggestedScript({
   user,
@@ -95,9 +95,9 @@ export function SuggestedScript({
 
   return (
     <>
-      <UserActionFormCallCongresspersonLayout onBack={() => gotoTab(TabNames.ADDRESS)}>
-        <UserActionFormCallCongresspersonLayout.Container>
-          <UserActionFormCallCongresspersonLayout.Heading
+      <UserActionFormLayout onBack={() => gotoTab(TabNames.ADDRESS)}>
+        <UserActionFormLayout.Container>
+          <UserActionFormLayout.Heading
             title="Call your representative"
             subtitle="You may not get a human on the line, but can leave a message to ensure that your voice will be heard."
           />
@@ -123,12 +123,10 @@ export function SuggestedScript({
               <p>Thank you and have a nice day!</p>
             </div>
           </div>
-        </UserActionFormCallCongresspersonLayout.Container>
-      </UserActionFormCallCongresspersonLayout>
+        </UserActionFormLayout.Container>
+      </UserActionFormLayout>
 
-      <UserActionFormCallCongresspersonLayout.CongresspersonDisplayFooter
-        congressperson={dtsiPerson}
-      >
+      <UserActionFormLayout.CongresspersonDisplayFooter congressperson={dtsiPerson}>
         {phoneNumber && (
           <Button asChild>
             <InternalLink href={`tel:${phoneNumber}`} onClick={() => handleCallAction(phoneNumber)}>
@@ -136,7 +134,7 @@ export function SuggestedScript({
             </InternalLink>
           </Button>
         )}
-      </UserActionFormCallCongresspersonLayout.CongresspersonDisplayFooter>
+      </UserActionFormLayout.CongresspersonDisplayFooter>
     </>
   )
 }

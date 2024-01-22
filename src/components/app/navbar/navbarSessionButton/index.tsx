@@ -8,8 +8,8 @@ import { GetDefineMessageResults } from '@/types'
 //   return <NavbarSessionButtonClient session={session} />
 // }
 
-export function NavbarSessionButton(props: {
+export function NavbarSessionButton(_props: {
   messages: GetDefineMessageResults<typeof navbarSessionButtonMessages>
 }) {
-  return <NavbarSessionButtonClient {...props} />
+  return <NavbarSessionButtonClient />
 }

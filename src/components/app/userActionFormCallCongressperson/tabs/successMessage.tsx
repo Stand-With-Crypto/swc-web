@@ -16,8 +16,9 @@ import { UserActionType } from '@prisma/client'
 import { InternalLink } from '@/components/ui/link'
 import { NextImage } from '@/components/ui/image'
 
-import { UserActionFormCallCongresspersonLayout } from './layout'
+import { UserActionFormLayout } from '@/components/app/userActionFormCommon/layout'
 import { Skeleton } from '@/components/ui/skeleton'
+import { NFTDisplay } from '@/components/app/userActionFormCommon'
 
 export function SuccessMessage() {
   const router = useRouter()
@@ -36,11 +37,11 @@ export function SuccessMessage() {
   }, [data])
 
   return (
-    <UserActionFormCallCongresspersonLayout>
-      <UserActionFormCallCongresspersonLayout.Container>
+    <UserActionFormLayout>
+      <UserActionFormLayout.Container>
         <SuccessMessageContent />
 
-        <UserActionFormCallCongresspersonLayout.Footer>
+        <UserActionFormLayout.Footer>
           <div>
             <div className="font-bold">Up next</div>
             {/* 
@@ -59,9 +60,9 @@ export function SuccessMessage() {
               />
             )}
           </div>
-        </UserActionFormCallCongresspersonLayout.Footer>
-      </UserActionFormCallCongresspersonLayout.Container>
-    </UserActionFormCallCongresspersonLayout>
+        </UserActionFormLayout.Footer>
+      </UserActionFormLayout.Container>
+    </UserActionFormLayout>
   )
 }
 
@@ -88,7 +89,7 @@ function UnauthenticatedSuccessContent() {
 
   return (
     <div className="flex flex-col items-center gap-6">
-      <NFTDisplay />
+      <NFTDisplay src="/actionsNftRewards/call.gif" alt="NFT awarded for calling congressperson" />
 
       <PageTitle size="md">Nice work! Get an NFT for calling</PageTitle>
 
@@ -104,7 +105,7 @@ function UnauthenticatedSuccessContent() {
 function AuthenticatedSuccessContent() {
   return (
     <div className="flex flex-col items-center gap-6">
-      <NFTDisplay />
+      <NFTDisplay src="/actionsNftRewards/call.gif" alt="NFT awarded for calling congressperson" />
 
       <PageTitle size="md">Nice work! You got an NFT for calling</PageTitle>
 
@@ -117,23 +118,10 @@ function AuthenticatedSuccessContent() {
   )
 }
 
-function NFTDisplay() {
-  return (
-    <div className="h-40 w-40 overflow-hidden rounded-xl bg-primary">
-      <NextImage
-        src="/actionsNftRewards/call.gif"
-        alt="NFT awarded for calling congressperson"
-        width={160}
-        height={160}
-      />
-    </div>
-  )
-}
-
 function SuccessMessageSkeleton() {
   return (
     <div className="flex flex-col items-center gap-6">
-      <NFTDisplay />
+      <NFTDisplay src="/actionsNftRewards/call.gif" alt="NFT awarded for calling congressperson" />
 
       <PageTitle size="md">
         <Skeleton>Nice work! Get an NFT for calling</Skeleton>

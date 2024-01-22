@@ -6,7 +6,7 @@ import { UseTabsReturn } from '@/hooks/useTabs'
 
 import { TabNames } from '@/components/app/userActionFormCallCongressperson/userActionFormCallCongressperson.types'
 
-import { UserActionFormCallCongresspersonLayout } from './layout'
+import { UserActionFormLayout } from '@/components/app/userActionFormCommon/layout'
 
 export function Intro({ gotoTab }: UseTabsReturn<TabNames>) {
   return (
@@ -18,9 +18,9 @@ export function Intro({ gotoTab }: UseTabsReturn<TabNames>) {
 
 export function IntroStaticContent({ children }: React.PropsWithChildren) {
   return (
-    <UserActionFormCallCongresspersonLayout>
-      <UserActionFormCallCongresspersonLayout.Container>
-        <UserActionFormCallCongresspersonLayout.Heading
+    <UserActionFormLayout>
+      <UserActionFormLayout.Container>
+        <UserActionFormLayout.Heading
           title="It's time to fight to keep crypto in America"
           subtitle="Call your Congressperson and tell them to vote YES on the FIT21 bill. Calling your representative is the most effective way to influence legislation."
         />
@@ -37,11 +37,9 @@ export function IntroStaticContent({ children }: React.PropsWithChildren) {
             </ChecklistItem>
           </ul>
         </div>
-        <UserActionFormCallCongresspersonLayout.Footer>
-          {children}
-        </UserActionFormCallCongresspersonLayout.Footer>
-      </UserActionFormCallCongresspersonLayout.Container>
-    </UserActionFormCallCongresspersonLayout>
+        <UserActionFormLayout.Footer>{children}</UserActionFormLayout.Footer>
+      </UserActionFormLayout.Container>
+    </UserActionFormLayout>
   )
 }
 

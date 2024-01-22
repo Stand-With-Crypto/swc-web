@@ -7,7 +7,6 @@ import useSWR from 'swr'
 
 import { Button } from '@/components/ui/button'
 import { TabNames } from '@/components/app/userActionFormCallCongressperson/userActionFormCallCongressperson.types'
-import { UserActionFormCallCongresspersonLayout } from '@/components/app/userActionFormCallCongressperson/tabs/layout'
 import {
   Form,
   FormItem,
@@ -25,6 +24,7 @@ import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { getGoogleCivicDataFromAddress } from '@/utils/shared/googleCivicInfo'
 import { GENERIC_ERROR_TITLE } from '@/utils/web/errorUtils'
 import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
+import { UserActionFormLayout } from '@/components/app/userActionFormCommon/layout'
 
 import {
   findRepresentativeCallFormValidationSchema,
@@ -83,7 +83,7 @@ export function Address({ user, onFindCongressperson, congressPersonData, gotoTa
   }, [handleNotFoundCongressperson, liveCongressPersonData, onFindCongressperson])
 
   return (
-    <UserActionFormCallCongresspersonLayout onBack={() => gotoTab(TabNames.INTRO)}>
+    <UserActionFormLayout onBack={() => gotoTab(TabNames.INTRO)}>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(
@@ -91,8 +91,8 @@ export function Address({ user, onFindCongressperson, congressPersonData, gotoTa
             trackFormSubmissionSyncErrors(FORM_NAME),
           )}
         >
-          <UserActionFormCallCongresspersonLayout.Container>
-            <UserActionFormCallCongresspersonLayout.Heading
+          <UserActionFormLayout.Container>
+            <UserActionFormLayout.Heading
               title="Find your representative"
               subtitle="Your address will be used to connect you with your representative. Stand With Crypto will never share your data with any third-parties."
             />
@@ -118,7 +118,7 @@ export function Address({ user, onFindCongressperson, congressPersonData, gotoTa
               />
             </div>
 
-            <UserActionFormCallCongresspersonLayout.Footer>
+            <UserActionFormLayout.Footer>
               <SubmitButton
                 isLoading={form.formState.isSubmitting || isLoadingLiveCongressPersonData}
                 disabled={!congressPersonData}
@@ -130,11 +130,11 @@ export function Address({ user, onFindCongressperson, congressPersonData, gotoTa
                   privacy policy
                 </InternalLink>
               </p>
-            </UserActionFormCallCongresspersonLayout.Footer>
-          </UserActionFormCallCongresspersonLayout.Container>
+            </UserActionFormLayout.Footer>
+          </UserActionFormLayout.Container>
         </form>
       </Form>
-    </UserActionFormCallCongresspersonLayout>
+    </UserActionFormLayout>
   )
 }
 
