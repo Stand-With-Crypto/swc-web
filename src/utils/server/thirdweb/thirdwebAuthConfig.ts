@@ -49,7 +49,7 @@ export const thirdwebAuthConfig: ThirdwebAuthConfig = {
     onUser: async () => {},
     onLogin: async (address, req) => {
       const localUser = parseLocalUserFromCookiesForPageRouter(req)
-      // TODO figure out how to get the users email address to persist to the db
+      // try and get the existing user linked to this cryptoAddress
       let existingUser = await prismaClient.user.findFirst({
         where: { userCryptoAddresses: { some: { cryptoAddress: address } } },
       })
@@ -104,10 +104,16 @@ export const thirdwebAuthConfig: ThirdwebAuthConfig = {
               userId: userCryptoAddress.userId,
             },
           })
-          if (!userCryptoAddress.user.primaryUserEmailAddressId) {
-            primaryUserEmailAddressId = email.id
-          }
         }
+        if (!userCryptoAddress.user.primaryUserEmailAddressId) {
+          primaryUserEmailAddressId = email.id
+        }
+        await prismaClient.userCryptoAddress.update({
+          where: { id: userCryptoAddress.id },
+          data: {
+            embeddedWalletUserEmailAddressId: email.id,
+          },
+        })
         if (!userCryptoAddress.user.primaryUserEmailAddressId) {
           primaryUserEmailAddressId = email.id
         }

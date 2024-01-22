@@ -100,6 +100,23 @@ async function seed() {
   const userSession = await prismaClient.userSession.findMany()
   logEntity({ userSession })
   const usersUnusedOnCryptoAddress = [...user]
+
+  /*
+  userEmailAddress
+  */
+  await batchAsyncAndLog(
+    _.times(user.length / 2).map(() => ({
+      ...mockUserEmailAddress(),
+      userId: faker.helpers.arrayElement(user).id,
+    })),
+    data =>
+      prismaClient.userEmailAddress.createMany({
+        data,
+      }),
+  )
+  const userEmailAddress = await prismaClient.userEmailAddress.findMany()
+  logEntity({ userEmailAddress })
+
   /*
   userCryptoAddress
   */
@@ -108,6 +125,9 @@ async function seed() {
     PopularCryptoAddress.CHRIS_DIXON,
   ]
   const initialCryptoAddresses = [...topDonorCryptoAddressStrings, LOCAL_USER_CRYPTO_ADDRESS]
+  const emailAddressesToRelateToEmbeddedWallets = userEmailAddress.filter(
+    x => x.source === UserEmailAddressSource.THIRDWEB_EMBEDDED_AUTH,
+  )
   await batchAsyncAndLog(
     _.times(user.length / 2).map(() => {
       // a crypto user address must only ever be associated with one user so we use splice here to ensure we can randomly assign these models to users without any duplicates
@@ -115,14 +135,25 @@ async function seed() {
         faker.number.int({ min: 0, max: usersUnusedOnCryptoAddress.length - 1 }),
         1,
       )[0]
+      // we want all known ENS addresses to not have a full name so we always display their ENS
+      // in the testing environment. This lets us verify our onchain integrations are working easily
+      const shouldUseInitialCryptoAddress =
+        initialCryptoAddresses.length && !selectedUser.fullName && selectedUser.isPubliclyVisible
       return {
         ...mockUserCryptoAddress(),
-        cryptoAddress:
-          // we want all known ENS addresses to not have a full name so we always display their ENS
-          // in the testing environment. This lets us verify our onchain integrations are working easily
-          !initialCryptoAddresses.length || selectedUser.fullName || !selectedUser.isPubliclyVisible
-            ? faker.finance.ethereumAddress()
-            : initialCryptoAddresses.pop()!,
+        embeddedWalletUserEmailAddressId:
+          !shouldUseInitialCryptoAddress && emailAddressesToRelateToEmbeddedWallets.length
+            ? emailAddressesToRelateToEmbeddedWallets.splice(
+                faker.number.int({
+                  min: 0,
+                  max: emailAddressesToRelateToEmbeddedWallets.length - 1,
+                }),
+                1,
+              )[0].id
+            : null,
+        cryptoAddress: shouldUseInitialCryptoAddress
+          ? initialCryptoAddresses.pop()!
+          : faker.finance.ethereumAddress(),
         userId: selectedUser.id,
       }
     }),
@@ -152,21 +183,6 @@ async function seed() {
   logger.info(
     `backfilled newly created userCryptoAddress in to users with primaryUserCryptoAddressId`,
   )
-  /*
-  userEmailAddress
-  */
-  await batchAsyncAndLog(
-    _.times(user.length / 2).map(() => ({
-      ...mockUserEmailAddress(),
-      userId: faker.helpers.arrayElement(user).id,
-    })),
-    data =>
-      prismaClient.userEmailAddress.createMany({
-        data,
-      }),
-  )
-  const userEmailAddress = await prismaClient.userEmailAddress.findMany()
-  logEntity({ userEmailAddress })
 
   /*
       Create a situation where the LOCAL_USER_CRYPTO_ADDRESS has a UserMergeAlert
