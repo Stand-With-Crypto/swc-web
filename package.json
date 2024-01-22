@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "ts": "TZ=UTC tsx",
+    "ts": "TZ=UTC tsx --tsconfig ./tsconfig.bin.json",
     "dev": "next dev",
     "build": "CI_OVERRIDES=true next build",
     "postbuild": "next-sitemap",
