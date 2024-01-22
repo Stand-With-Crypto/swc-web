@@ -21,7 +21,7 @@ import { bootstrapLocalUser } from '@/utils/web/clientLocalUser'
 import { getUserSessionIdOnClient } from '@/utils/web/clientUserSessionId'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
 import { usePathname, useSearchParams } from 'next/navigation'
-import { useEffect } from 'react'
+import { Suspense, useEffect } from 'react'
 
 const NEXT_PUBLIC_THIRDWEB_CLIENT_ID = requiredEnv(
   process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID,
@@ -95,7 +95,10 @@ export function TopLevelClientLogic({
           authUrl: '/api/auth',
         }}
       >
-        <InitialOrchestration />
+        {/* https://nextjs.org/docs/messages/missing-suspense-with-csr-bailout */}
+        <Suspense>
+          <InitialOrchestration />
+        </Suspense>
         {children}
       </ThirdwebProvider>
     </LocaleContext.Provider>
