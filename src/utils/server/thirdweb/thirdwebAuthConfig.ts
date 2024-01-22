@@ -114,15 +114,6 @@ export const thirdwebAuthConfig: ThirdwebAuthConfig = {
             embeddedWalletUserEmailAddressId: email.id,
           },
         })
-        if (!userCryptoAddress.user.primaryUserEmailAddressId) {
-          primaryUserEmailAddressId = email.id
-        }
-        await prismaClient.userCryptoAddress.update({
-          where: { id: userCryptoAddress.id },
-          data: {
-            embeddedWalletUserEmailAddressId: email.id,
-          },
-        })
       }
       await prismaClient.user.update({
         where: { id: userCryptoAddress.userId },
