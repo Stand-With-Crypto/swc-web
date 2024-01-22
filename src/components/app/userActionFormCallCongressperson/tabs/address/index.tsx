@@ -147,7 +147,7 @@ function SubmitButton({ isLoading, disabled }: { isLoading: boolean; disabled: b
 }
 
 function useCongresspersonData({ address }: FindRepresentativeCallFormValues) {
-  return useSWR(address ? `useGetDTSIPeopleFromAddress-${address.description}` : null, async () => {
+  return useSWR(address ? `useCongresspersonData-${address.description}` : null, async () => {
     const dtsiPerson = await getDTSIPeopleFromAddress(address.description)
     const civicData = await getGoogleCivicDataFromAddress(address.description)
     const addressSchema = await convertGooglePlaceAutoPredictionToAddressSchema(address)
