@@ -80,6 +80,9 @@ model User {
   primaryUserEmailAddressId  String?            @unique @map("primary_user_email_address_id")
   primaryUserCryptoAddress   UserCryptoAddress? @relation("asPrimaryUserCryptoAddress", fields: [primaryUserCryptoAddressId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   primaryUserCryptoAddressId String?            @unique @map("primary_user_crypto_address_id")
+  hasOptedInToEmails         Boolean            @map("has_opted_in_to_emails")
+  hasOptedInToSms            Boolean            @map("has_opted_in_to_sms")
+  hasOptedInToMembership     Boolean            @map("has_opted_in_to_membership")
   // We'll collect and capture this information in our product analytics tools, but we'll also want to be able to 
   // use this metadata to query our relationship database. This information will only be populated if users
   // opt in to our cookies

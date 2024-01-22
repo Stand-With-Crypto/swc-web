@@ -75,17 +75,20 @@ export function getServerAnalytics(config: ServerAnalyticsConfig) {
     actionType,
     campaignName,
     creationMethod = 'On Site',
+    userState,
     ...other
   }: {
     actionType: UserActionType
     creationMethod?: CreationMethod
     campaignName: string
+    userState: 'New' | 'Existing' | 'Existing With Updates'
   } & AnalyticProperties) {
     trackAnalytic(config, 'User Action Created', {
       ...currentSessionAnalytics,
       'User Action Type': actionType,
       'Campaign Name': campaignName,
       'Creation Method': creationMethod,
+      'User State': userState,
       ...other,
     })
   }
@@ -94,18 +97,21 @@ export function getServerAnalytics(config: ServerAnalyticsConfig) {
     campaignName,
     reason,
     creationMethod = 'On Site',
+    userState,
     ...other
   }: {
     actionType: UserActionType
     campaignName: string
     creationMethod?: CreationMethod
     reason: 'Too Many Recent' | 'Already Exists'
+    userState: 'New' | 'Existing' | 'Existing With Updates'
   } & AnalyticProperties) {
     trackAnalytic(config, ' Type Creation Ignored', {
       ...currentSessionAnalytics,
       'User Action Type': actionType,
       'Campaign Name': campaignName,
       'Creation Method': creationMethod,
+      'User State': userState,
       Reason: reason,
       ...other,
     })

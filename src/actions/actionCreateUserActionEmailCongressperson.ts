@@ -17,6 +17,7 @@ import {
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
+import { maybeUpsertUser } from '@/utils/server/maybeUpsertUser'
 
 const logger = getLogger(`actionCreateUserActionEmailCongressperson`)
 
@@ -25,7 +26,7 @@ export async function actionCreateUserActionEmailCongressperson(
 ) {
   logger.info('triggered')
   const userMatch = await getMaybeUserAndMethodOfMatch({
-    include: { primaryUserCryptoAddress: true },
+    include: { primaryUserCryptoAddress: true, userEmailAddresses: true },
   })
   logger.info(userMatch.user ? 'found user' : 'no user found')
   const sessionId = getUserSessionId()
@@ -36,9 +37,52 @@ export async function actionCreateUserActionEmailCongressperson(
     }
   }
   logger.info('validated fields')
-
+  const fields = validatedFields.data
   const localUser = parseLocalUserFromCookies()
   const analytics = getServerAnalytics({ ...userMatch, localUser })
+  const {} = maybeUpsertUser({
+    userArgs: userMatch.user
+      ? {
+          user: userMatch.user,
+          updateFields: {
+            ...(fields.fullName && !userMatch.user.fullName && { fullName: fields.fullName }),
+            ...(fields.phoneNumber &&
+              !userMatch.user.phoneNumber && { phoneNumber: fields.phoneNumber }),
+            ...(fields.email &&
+            userMatch.user.userEmailAddresses.every(email => email.emailAddress !== fields.email) &&
+            userMatch.user.primaryUserEmailAddressId
+              ? {
+                  userEmailAddresses: {
+                    create: {
+                      isVerified: false,
+                      emailAddress: fields.email,
+                      source: UserEmailAddressSource.USER_ENTERED,
+                    },
+                  },
+                }
+              : {
+                  primaryUserEmailAddress: {
+                    create: {
+                      isVerified: false,
+                      emailAddress: fields.email,
+                      source: UserEmailAddressSource.USER_ENTERED,
+                    },
+                  },
+                }),
+            ...(!userMatch.user.hasOptedInToEmails && { hasOptedInToEmail: true }),
+          },
+        }
+      : {
+          createFields: {
+            isPubliclyVisible: false,
+            userSessions: { create: { id: sessionId } },
+            ...mapLocalUserToUserDatabaseFields(localUser),
+          },
+        },
+    selectArgs: {
+      include: { primaryUserCryptoAddress: true },
+    },
+  })
   const user =
     userMatch.user ||
     (await prismaClient.user.create({

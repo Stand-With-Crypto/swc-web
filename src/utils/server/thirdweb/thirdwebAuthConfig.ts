@@ -53,7 +53,8 @@ export const thirdwebAuthConfig: ThirdwebAuthConfig = {
       let existingUser = await prismaClient.user.findFirst({
         where: { userCryptoAddresses: { some: { cryptoAddress: address } } },
       })
-      getServerAnalytics({ address, localUser }).track('User Logged In', {
+      const analytics = getServerAnalytics({ address, localUser })
+      analytics.track('User Logged In', {
         'Is First Time': !existingUser,
       })
       const peopleAnalytics = getServerPeopleAnalytics({ address, localUser })

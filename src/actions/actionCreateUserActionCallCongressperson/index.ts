@@ -23,6 +23,7 @@ import {
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { createActionCallCongresspersonInputValidationSchema } from './inputValidationSchema'
+import { MaybeUpsertUserResult, maybeUpsertUser } from '@/utils/server/maybeUpsertUser'
 
 export type CreateActionCallCongresspersonInput = z.infer<
   typeof createActionCallCongresspersonInputValidationSchema
@@ -52,13 +53,48 @@ export async function actionCreateUserActionCallCongressperson(
   const sessionId = getUserSessionId()
 
   const userMatch = await getMaybeUserAndMethodOfMatch({
-    include: { primaryUserCryptoAddress: true },
+    include: { primaryUserCryptoAddress: true, address: true },
   })
   const peopleAnalytics = getServerPeopleAnalytics({
     localUser,
     ...userMatch,
   })
-  const user = userMatch.user || (await createUser({ localUser, sessionId, peopleAnalytics }))
+  const { user, upsertUserResult } = await maybeUpsertUser({
+    userArgs: userMatch.user
+      ? {
+          user: userMatch.user,
+          updateFields: {
+            ...(userMatch.user.address?.googlePlaceId === validatedInput.data.address.googlePlaceId
+              ? {}
+              : {
+                  address: {
+                    create: {
+                      ...validatedInput.data.address,
+                    },
+                  },
+                }),
+          },
+        }
+      : {
+          createFields: {
+            isPubliclyVisible: false,
+            userSessions: { create: { id: sessionId } },
+            ...mapLocalUserToUserDatabaseFields(localUser),
+            hasOptedInToEmails: false,
+            hasOptedInToMembership: false,
+            hasOptedInToSms: false,
+          },
+        },
+    selectArgs: {
+      include: {
+        primaryUserCryptoAddress: true,
+        address: true,
+      },
+    },
+  })
+  if (localUser?.persisted && upsertUserResult === 'New') {
+    peopleAnalytics.setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
+  }
 
   const analytics = getServerAnalytics({
     ...userMatch,
@@ -68,6 +104,7 @@ export async function actionCreateUserActionCallCongressperson(
   const recentUserAction = await getRecentUserActionByUserId(user.id)
   if (recentUserAction) {
     logSpamActionSubmissions({
+      upsertUserResult,
       validatedInput,
       userAction: recentUserAction,
       userId: user.id,
@@ -76,7 +113,8 @@ export async function actionCreateUserActionCallCongressperson(
     return { user: getClientUser(user) }
   }
 
-  const { updatedUser } = await createActionAndUpdateUser({
+  await createAction({
+    upsertUserResult,
     user,
     validatedInput: validatedInput.data,
     userMatch,
@@ -85,32 +123,7 @@ export async function actionCreateUserActionCallCongressperson(
 
   // TODO: Mint "Call" NFT
 
-  return { user: getClientUser(updatedUser) }
-}
-
-async function createUser(
-  sharedDependencies: Pick<SharedDependencies, 'localUser' | 'sessionId' | 'peopleAnalytics'>,
-) {
-  const { localUser, sessionId } = sharedDependencies
-  const createdUser = await prismaClient.user.create({
-    data: {
-      isPubliclyVisible: false,
-      userSessions: { create: { id: sessionId } },
-      ...mapLocalUserToUserDatabaseFields(localUser),
-    },
-    include: {
-      primaryUserCryptoAddress: true,
-    },
-  })
-  logger.info('created user')
-
-  if (localUser?.persisted) {
-    sharedDependencies.peopleAnalytics?.setOnce(
-      mapPersistedLocalUserToAnalyticsProperties(localUser.persisted),
-    )
-  }
-
-  return createdUser
+  return { user: getClientUser(user) }
 }
 
 async function getRecentUserActionByUserId(userId: User['id']) {
@@ -134,6 +147,7 @@ function logSpamActionSubmissions({
   userAction,
   userId,
   sharedDependencies,
+  upsertUserResult,
 }: {
   validatedInput: z.SafeParseSuccess<
     z.infer<typeof createActionCallCongresspersonInputValidationSchema>
@@ -141,11 +155,13 @@ function logSpamActionSubmissions({
   userAction: UserAction
   userId: User['id']
   sharedDependencies: Pick<SharedDependencies, 'analytics'>
+  upsertUserResult: MaybeUpsertUserResult
 }) {
   sharedDependencies.analytics.trackUserActionCreatedIgnored({
     actionType: UserActionType.CALL,
     campaignName: UserActionCallCampaignName.DEFAULT,
     reason: 'Too Many Recent',
+    userState: upsertUserResult,
     ...convertAddressToAnalyticsProperties(validatedInput.data.address),
   })
   Sentry.captureMessage(
@@ -157,16 +173,18 @@ function logSpamActionSubmissions({
   )
 }
 
-async function createActionAndUpdateUser<U extends User>({
+async function createAction<U extends User>({
   user,
   validatedInput,
   userMatch,
   sharedDependencies,
+  upsertUserResult,
 }: {
   user: U
   validatedInput: z.infer<typeof createActionCallCongresspersonInputValidationSchema>
   userMatch: UserAndMethodOfMatch
   sharedDependencies: Pick<SharedDependencies, 'sessionId' | 'analytics' | 'peopleAnalytics'>
+  upsertUserResult: MaybeUpsertUserResult
 }) {
   const userAction = await prismaClient.userAction.create({
     data: {
@@ -196,31 +214,17 @@ async function createActionAndUpdateUser<U extends User>({
     },
   })
 
-  const updatedUser = await prismaClient.user.update({
-    where: { id: user.id },
-    data: {
-      address: {
-        connect: {
-          id: userAction.userActionCall!.addressId,
-        },
-      },
-    },
-    include: {
-      primaryUserCryptoAddress: true,
-    },
-  })
-  logger.info('created user action and updated user')
-
   sharedDependencies.analytics.trackUserActionCreated({
     actionType: UserActionType.CALL,
     campaignName: validatedInput.campaignName,
     'Recipient DTSI Slug': validatedInput.dtsiSlug,
     'Recipient Phone Number': validatedInput.phoneNumber,
+    userState: upsertUserResult,
     ...convertAddressToAnalyticsProperties(validatedInput.address),
   })
   sharedDependencies.peopleAnalytics.set({
     ...convertAddressToAnalyticsProperties(validatedInput.address),
   })
 
-  return { userAction, updatedUser }
+  return { userAction }
 }
