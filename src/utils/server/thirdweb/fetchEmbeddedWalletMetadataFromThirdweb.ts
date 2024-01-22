@@ -7,7 +7,7 @@ const THIRD_WEB_CLIENT_SECRET = requiredEnv(
   'process.env.THIRD_WEB_CLIENT_SECRET',
 )
 
-interface ThirdwebEmbeddedWalletMetadata {
+export interface ThirdwebEmbeddedWalletMetadata {
   userId: string
   walletAddress: string
   email: string
