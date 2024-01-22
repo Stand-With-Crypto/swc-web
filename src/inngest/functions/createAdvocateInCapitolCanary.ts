@@ -7,7 +7,7 @@ import { NonRetriableError, RetryAfterError } from 'inngest'
 import * as Sentry from '@sentry/nextjs'
 
 const CREATE_CAPITOL_CANARY_ADVOCATE_RETRY_LIMIT = 1
-const CREATE_CAPITOL_CANARY_ADVOCATE_RETRY_TIMEOUT = 5 * 1000 // 5 seconds
+const CREATE_CAPITOL_CANARY_ADVOCATE_RETRY_TIMEOUT = 2 * 1000 // 2 seconds
 
 export const createAdvocateInCapitolCanaryWithInngest = inngest.createFunction(
   {
@@ -32,22 +32,22 @@ export const createAdvocateInCapitolCanaryWithInngest = inngest.createFunction(
       })
     }
 
-    try {
-      const response = await step.run('capitol-canary.create-advocate-api-call', async () => {
-        return createAdvocateInCapitolCanary(parseRequest.data)
-      })
-      return {
-        event,
-        ...response,
+    await step.run('capitol-canary.create-advocate-api-call', async () => {
+      try {
+        const response = createAdvocateInCapitolCanary(parseRequest.data)
+        return {
+          event,
+          ...response,
+        }
+      } catch (error) {
+        throw new RetryAfterError(
+          'failed to create advocate in capitol canary',
+          CREATE_CAPITOL_CANARY_ADVOCATE_RETRY_TIMEOUT,
+          {
+            cause: error,
+          },
+        )
       }
-    } catch (error) {
-      throw new RetryAfterError(
-        'failed to create advocate in capitol canary',
-        CREATE_CAPITOL_CANARY_ADVOCATE_RETRY_TIMEOUT,
-        {
-          cause: error,
-        },
-      )
-    }
+    })
   },
 )
