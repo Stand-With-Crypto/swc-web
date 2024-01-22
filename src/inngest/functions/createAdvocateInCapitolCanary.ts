@@ -11,7 +11,7 @@ const CREATE_CAPITOL_CANARY_ADVOCATE_RETRY_TIMEOUT = 5 * 1000 // 5 seconds
 
 export const createAdvocateInCapitolCanaryWithInngest = inngest.createFunction(
   {
-    id: 'create-capitol-canary-advocate',
+    id: 'capitol-canary.create-advocate',
     retries: CREATE_CAPITOL_CANARY_ADVOCATE_RETRY_LIMIT,
     onFailure: async ({ error }) => {
       Sentry.captureException(error, {
@@ -23,7 +23,7 @@ export const createAdvocateInCapitolCanaryWithInngest = inngest.createFunction(
     },
   },
   { event: 'capitol-canary.create-advocate' },
-  async ({ event }) => {
+  async ({ event, step }) => {
     const parseRequest = await createAdvocateSchema.safeParseAsync(event.data)
     if (parseRequest.success === false) {
       // Do not retry for invalid requests.
@@ -33,17 +33,19 @@ export const createAdvocateInCapitolCanaryWithInngest = inngest.createFunction(
     }
 
     try {
-      const response = await createAdvocateInCapitolCanary(parseRequest.data)
+      const response = await step.run('capitol-canary.create-advocate-api-call', async () => {
+        return createAdvocateInCapitolCanary(parseRequest.data)
+      })
       return {
         event,
         ...response,
       }
-    } catch (err) {
+    } catch (error) {
       throw new RetryAfterError(
         'failed to create advocate in capitol canary',
         CREATE_CAPITOL_CANARY_ADVOCATE_RETRY_TIMEOUT,
         {
-          cause: err,
+          cause: error,
         },
       )
     }
