@@ -1,3 +1,7 @@
+import Balancer from 'react-wrap-balancer'
+import { Minus, Plus } from 'lucide-react'
+import React from 'react'
+
 import {
   NFTDisplay,
   NFTDisplaySkeleton,
@@ -14,18 +18,24 @@ import { Card } from '@/components/ui/card'
 import { UseTabsReturn } from '@/hooks/useTabs'
 import { useThirdwebContractMetadata } from '@/hooks/useThirdwebContractMetadata'
 import { SupportedCryptoCurrencyCodes } from '@/utils/shared/currency'
-import { Minus, Plus } from 'lucide-react'
-import React from 'react'
+import { PageTitle } from '@/components/ui/pageTitleText'
+import { PageSubTitle } from '@/components/ui/pageSubTitle'
+import { useCheckoutController } from '@/components/app/userActionFormNFTMint/useCheckoutController'
 
 import styles from './checkout.module.css'
 
 export function UserActionFormNFTMintCheckout({
   gotoTab,
-}: UseTabsReturn<UserActionFormNFTMintTabNames>) {
+  quantity,
+  incrementQuantity,
+  decrementQuantity,
+  setQuantity,
+  mintFee,
+  total,
+  gasFee,
+}: UseTabsReturn<UserActionFormNFTMintTabNames> & ReturnType<typeof useCheckoutController>) {
   const { data: contractMetadata, isLoading } =
     useThirdwebContractMetadata(MINT_NFT_CONTRACT_ADDRESS)
-
-  const [quantity, setQuantity] = React.useState(1)
 
   const fixDecimals = (value: number) => Number(value.toFixed(5))
 
@@ -42,71 +52,131 @@ export function UserActionFormNFTMintCheckout({
   return (
     <UserActionFormLayout onBack={() => gotoTab(UserActionFormNFTMintTabNames.INTRO)}>
       <UserActionFormLayout.Container>
-        <NFTDisplay size="sm" src={contractMetadata?.image ?? ''} alt={contractMetadata.name} raw />
+        <div className="flex gap-6">
+          <NFTDisplay
+            size="sm"
+            src={contractMetadata?.image ?? ''}
+            alt={contractMetadata.name}
+            raw
+          />
+
+          <div>
+            <PageTitle size="sm" className="text-start">
+              {contractMetadata.name}
+            </PageTitle>
+
+            <PageSubTitle className="text-start">on Base Network</PageSubTitle>
+          </div>
+        </div>
 
         <Card>
           <div className="flex items-center justify-between">
             <p>Quantity</p>
-            <QuantityInput value={quantity} onChange={setQuantity} />
+            <QuantityInput
+              value={quantity}
+              onChange={setQuantity}
+              onIncrement={incrementQuantity}
+              onDecrement={decrementQuantity}
+            />
           </div>
         </Card>
 
         <Card>
-          <div className="flex flex-col gap-5">
+          <div className="space-y-8">
             <div className="flex items-center justify-between">
-              <p>Donation</p>
-              <p>
-                {fixDecimals(NFT_DONATION_AMOUNT * quantity)} {SupportedCryptoCurrencyCodes.ETH}
+              <div>
+                <p>Donation</p>
+                <p className="text-xs text-muted-foreground">
+                  <Balancer>
+                    {fixDecimals(mintFee)}
+                    {SupportedCryptoCurrencyCodes.ETH} of the mint fee will be donated to Stand With
+                    Crypto Alliance, Inc. (SWCA). Donations from foreign nationals and government
+                    contractors are prohibited.
+                  </Balancer>
+                </p>
+              </div>
+
+              <p className="min-w-max">
+                {fixDecimals(mintFee)} {SupportedCryptoCurrencyCodes.ETH}
               </p>
             </div>
 
             <div className="flex items-center justify-between">
               <p>Gas fee</p>
-              <p>
-                {fixDecimals(NFT_DONATION_GAS_FEE)} {SupportedCryptoCurrencyCodes.ETH}
+              <p className="min-w-max">
+                {fixDecimals(gasFee)} {SupportedCryptoCurrencyCodes.ETH}
               </p>
             </div>
 
             <div className="flex items-center justify-between">
               <p>Total</p>
-              <p>
-                {fixDecimals(NFT_DONATION_AMOUNT * quantity + NFT_DONATION_GAS_FEE)}{' '}
-                {SupportedCryptoCurrencyCodes.ETH}
+              <p className="min-w-max">
+                {fixDecimals(total)} {SupportedCryptoCurrencyCodes.ETH}
               </p>
             </div>
           </div>
         </Card>
+
+        <UserActionFormLayout.Footer>
+          <Button
+            size="lg"
+            onClick={() => {
+              gotoTab(UserActionFormNFTMintTabNames.SUCCESS)
+            }}
+          >
+            Mint now
+          </Button>
+        </UserActionFormLayout.Footer>
       </UserActionFormLayout.Container>
     </UserActionFormLayout>
   )
 }
 
-function QuantityInput({ value, onChange }: { value: number; onChange: (value: number) => void }) {
+function QuantityInput({
+  value,
+  onChange,
+  onIncrement,
+  onDecrement,
+}: {
+  value: number
+  onChange: (value: number) => void
+  onIncrement: () => void
+  onDecrement: () => void
+}) {
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = Number(event.target.value)
+    if (newValue > 0) {
+      onChange(newValue)
+    }
+  }
+
   return (
-    <div className="flex items-center gap-5">
+    <div className="flex items-center gap-2">
       <Button
         size="icon"
         variant="secondary"
         className="h-8 w-8 bg-white hover:bg-white/80"
-        onClick={() => {
-          if (value > 1) {
-            onChange(value - 1)
-          }
-        }}
+        onClick={onDecrement}
         disabled={value <= 1}
       >
         <Minus />
       </Button>
 
-      <input type="number" className={styles.numberInput} value={value} />
-
-      <p>{value}</p>
+      <div>
+        <input
+          type="number"
+          className={styles.numberInput}
+          value={value}
+          onChange={handleInputChange}
+          onFocus={event => event.target.select()}
+        />
+      </div>
 
       <Button
         size="icon"
         variant="secondary"
         className="h-8 w-8 bg-white hover:bg-white/80"
-        onClick={() => onChange(value + 1)}
+        onClick={onIncrement}
       >
         <Plus />
       </Button>

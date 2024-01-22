@@ -1,6 +1,11 @@
 .numberInput {
   appearance: textfield;
   -moz-appearance: textfield;
+  background: transparent;
+  max-width: 100%;
+  box-sizing: content-box;
+  width: 48px;
+  text-align: center;
 }
 
 .numberInput::-webkit-outer-spin-button,

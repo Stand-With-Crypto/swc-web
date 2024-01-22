@@ -1,4 +1,5 @@
 'use client'
+
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN } from '@/utils/shared/sharedEnv'
 import * as Sentry from '@sentry/nextjs'

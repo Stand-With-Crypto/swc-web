@@ -28,6 +28,7 @@ export function UserActionFormNFTMintIntro({
 }: UseTabsReturn<UserActionFormNFTMintTabNames>) {
   const { session } = useThirdwebData()
   const contractMetadata = useThirdwebContractMetadata(MINT_NFT_CONTRACT_ADDRESS)
+  console.log({ contractMetadata })
 
   return (
     <UserActionFormLayout>
@@ -37,7 +38,7 @@ export function UserActionFormNFTMintIntro({
 
         <UserActionFormLayout.Footer>
           {session.isLoggedIn ? (
-            <Button onClick={() => gotoTab(UserActionFormNFTMintTabNames.CHECKOUT)}>
+            <Button onClick={() => gotoTab(UserActionFormNFTMintTabNames.CHECKOUT)} size="lg">
               Continue
             </Button>
           ) : (
