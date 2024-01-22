@@ -3,6 +3,7 @@ import { ThirdwebAuthUser } from '@thirdweb-dev/auth/next'
 import { Json, ThirdwebAuth as ThirdwebAuthSDK } from '@thirdweb-dev/auth'
 import { cookies } from 'next/headers'
 import { thirdwebAuthConfig } from '@/utils/server/thirdweb/thirdwebAuthConfig'
+import { AuthSessionMetadata } from '@/utils/server/thirdweb/types'
 
 /*
  Below is a version of getUser from Thirdweb, modified to support the app router.
@@ -48,7 +49,7 @@ export async function appRouterGetAuthUser(): Promise<ServerAuthUser | null> {
     return null
   }
 
-  let authUser: ThirdwebAuthUser<Json, { userId: string }>
+  let authUser: ThirdwebAuthUser<Json, AuthSessionMetadata>
   try {
     authUser = await thirdwebAuthContext.auth.authenticate(token, {
       validateTokenId: async (tokenId: string) => {
@@ -64,9 +65,10 @@ export async function appRouterGetAuthUser(): Promise<ServerAuthUser | null> {
   Normally thirdwebAuthContext.callbacks.onUser(authUser) would be called here, but the type signature expects
   a request object which we don't have in the app router. So we run the logic we want to run "onUser" directly here instead
   */
+  const sessionData: AuthSessionMetadata = authUser.session!
   return {
     ...authUser,
     // see https://portal.thirdweb.com/wallets/auth/server-frameworks/next#enhancing-session-data
-    userId: authUser.session!.userId,
+    userId: sessionData.userId,
   }
 }
