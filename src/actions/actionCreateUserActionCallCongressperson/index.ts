@@ -1,27 +1,28 @@
 'use server'
 import 'server-only'
 
-import * as Sentry from '@sentry/nextjs'
 import {
   UserAndMethodOfMatch,
   getMaybeUserAndMethodOfMatch,
 } from '@/utils/server/getMaybeUserAndMethodOfMatch'
 import { prismaClient } from '@/utils/server/prismaClient'
+import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { getLogger } from '@/utils/shared/logger'
+import { UserActionCallCampaignName } from '@/utils/shared/userActionCampaigns'
 import { User, UserAction, UserActionType } from '@prisma/client'
+import * as Sentry from '@sentry/nextjs'
 import { subDays } from 'date-fns'
 import { z } from 'zod'
-import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
-import { UserActionCallCampaignName } from '@/utils/shared/userActionCampaigns'
 
-import { createActionCallCongresspersonInputValidationSchema } from './inputValidationSchema'
+import { getClientUser } from '@/clientModels/clientUser/clientUser'
 import {
   mapLocalUserToUserDatabaseFields,
   parseLocalUserFromCookies,
 } from '@/utils/server/serverLocalUser'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
+import { createActionCallCongresspersonInputValidationSchema } from './inputValidationSchema'
 
 export type CreateActionCallCongresspersonInput = z.infer<
   typeof createActionCallCongresspersonInputValidationSchema
@@ -57,7 +58,7 @@ export async function actionCreateUserActionCallCongressperson(
     localUser,
     ...userMatch,
   })
-  const user = await getOrCreateUser(userMatch, { localUser, sessionId, peopleAnalytics })
+  const user = userMatch.user || (await createUser({ localUser, sessionId, peopleAnalytics }))
 
   const analytics = getServerAnalytics({
     ...userMatch,
@@ -72,10 +73,10 @@ export async function actionCreateUserActionCallCongressperson(
       userId: user.id,
       sharedDependencies: { analytics },
     })
-    return { user, userAction: recentUserAction }
+    return { user: getClientUser(user) }
   }
 
-  const { userAction, updatedUser } = await createActionAndUpdateUser({
+  const { updatedUser } = await createActionAndUpdateUser({
     user,
     validatedInput: validatedInput.data,
     userMatch,
@@ -84,24 +85,21 @@ export async function actionCreateUserActionCallCongressperson(
 
   // TODO: Mint "Call" NFT
 
-  return { userAction, user: updatedUser }
+  return { user: getClientUser(updatedUser) }
 }
 
-async function getOrCreateUser(
-  userMatch: UserAndMethodOfMatch,
+async function createUser(
   sharedDependencies: Pick<SharedDependencies, 'localUser' | 'sessionId' | 'peopleAnalytics'>,
 ) {
-  if (userMatch?.user) {
-    logger.info('fetched user')
-    return userMatch.user
-  }
-
   const { localUser, sessionId } = sharedDependencies
   const createdUser = await prismaClient.user.create({
     data: {
       isPubliclyVisible: false,
       userSessions: { create: { id: sessionId } },
       ...mapLocalUserToUserDatabaseFields(localUser),
+    },
+    include: {
+      primaryUserCryptoAddress: true,
     },
   })
   logger.info('created user')
@@ -159,13 +157,13 @@ function logSpamActionSubmissions({
   )
 }
 
-async function createActionAndUpdateUser({
+async function createActionAndUpdateUser<U extends User>({
   user,
   validatedInput,
   userMatch,
   sharedDependencies,
 }: {
-  user: User
+  user: U
   validatedInput: z.infer<typeof createActionCallCongresspersonInputValidationSchema>
   userMatch: UserAndMethodOfMatch
   sharedDependencies: Pick<SharedDependencies, 'sessionId' | 'analytics' | 'peopleAnalytics'>
@@ -206,6 +204,9 @@ async function createActionAndUpdateUser({
           id: userAction.userActionCall!.addressId,
         },
       },
+    },
+    include: {
+      primaryUserCryptoAddress: true,
     },
   })
   logger.info('created user action and updated user')

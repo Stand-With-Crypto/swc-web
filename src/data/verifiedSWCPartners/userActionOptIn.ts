@@ -5,7 +5,10 @@ import * as Sentry from '@sentry/nextjs'
 import { getLogger } from '@/utils/shared/logger'
 import { getOrCreateSessionIdToSendBackToPartner } from '@/utils/server/verifiedSWCPartner/getOrCreateSessionIdToSendBackToPartner'
 import { getUserAttributionFieldsForVerifiedSWCPartner } from '@/utils/server/verifiedSWCPartner/attribution'
-import { VerifiedSWCPartner } from '@/utils/server/verifiedSWCPartner/constants'
+import {
+  VerifiedSWCPartner,
+  VerifiedSWCPartnerApiResponse,
+} from '@/utils/server/verifiedSWCPartner/constants'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
 import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
 import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
@@ -25,6 +28,11 @@ export const zodVerifiedSWCPartnersUserActionOptIn = z.object({
 
 const logger = getLogger('verifiedSWCPartnersUserActionOptIn')
 
+export enum VerifiedSWCPartnersUserActionOptInResult {
+  NEW_ACTION = 'new-action',
+  EXISTING_ACTION = 'existing-action',
+}
+
 export async function verifiedSWCPartnersUserActionOptIn({
   emailAddress,
   optInType,
@@ -33,7 +41,9 @@ export async function verifiedSWCPartnersUserActionOptIn({
   partner,
   fullName,
   phoneNumber,
-}: z.infer<typeof zodVerifiedSWCPartnersUserActionOptIn> & { partner: VerifiedSWCPartner }) {
+}: z.infer<typeof zodVerifiedSWCPartnersUserActionOptIn> & {
+  partner: VerifiedSWCPartner
+}): Promise<VerifiedSWCPartnerApiResponse<VerifiedSWCPartnersUserActionOptInResult>> {
   const actionType = UserActionType.OPT_IN
   const existingAction = await prismaClient.userAction.findFirst({
     include: {
@@ -103,8 +113,10 @@ export async function verifiedSWCPartnersUserActionOptIn({
       reason: 'Already Exists',
     })
     return {
-      result: 'existing-action' as const,
+      result: VerifiedSWCPartnersUserActionOptInResult.EXISTING_ACTION,
+      resultOptions: Object.values(VerifiedSWCPartnersUserActionOptInResult),
       sessionId: await getOrCreateSessionIdToSendBackToPartner(existingAction.user),
+      userId: existingAction.user.id,
     }
   }
   const userAction = await prismaClient.userAction.create({
@@ -150,7 +162,9 @@ export async function verifiedSWCPartnersUserActionOptIn({
   // TODO send user to capital canary
 
   return {
-    result: 'new-action' as const,
+    result: VerifiedSWCPartnersUserActionOptInResult.NEW_ACTION,
+    resultOptions: Object.values(VerifiedSWCPartnersUserActionOptInResult),
     sessionId: await getOrCreateSessionIdToSendBackToPartner(userAction.user),
+    userId: userAction.user.id,
   }
 }

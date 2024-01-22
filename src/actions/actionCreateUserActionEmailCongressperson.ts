@@ -16,6 +16,7 @@ import {
 } from '@/utils/server/serverLocalUser'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
+import { getClientUser } from '@/clientModels/clientUser/clientUser'
 
 const logger = getLogger(`actionCreateUserActionEmailCongressperson`)
 
@@ -46,6 +47,7 @@ export async function actionCreateUserActionEmailCongressperson(
         userSessions: { create: { id: sessionId } },
         ...mapLocalUserToUserDatabaseFields(localUser),
       },
+      include: { primaryUserCryptoAddress: true },
     }))
   const peopleAnalytics = getServerPeopleAnalytics({ ...userMatch, localUser })
   if (localUser) {
@@ -79,7 +81,7 @@ export async function actionCreateUserActionEmailCongressperson(
       `duplicate ${actionType} user action for campaign ${campaignName} submitted`,
       { extra: { validatedFields, userAction }, user: { id: user.id } },
     )
-    return { user, userAction }
+    return { user: getClientUser(user) }
   }
 
   userAction = await prismaClient.userAction.create({
@@ -136,6 +138,7 @@ export async function actionCreateUserActionEmailCongressperson(
   We assume any updates the user makes to this action should propagate to the user's profile
   */
   const returnedUser = await prismaClient.user.update({
+    include: { primaryUserCryptoAddress: true },
     where: { id: user.id },
     data: {
       fullName: validatedFields.data.fullName,
@@ -166,5 +169,5 @@ export async function actionCreateUserActionEmailCongressperson(
   // TODO actually trigger the logic to send the email to capital canary. We should be calling some Inngest function here
 
   logger.info('updated user')
-  return { user: returnedUser, userAction }
+  return { user: getClientUser(returnedUser) }
 }
