@@ -48,6 +48,11 @@ model Address {
   @@map("address")
 }
 
+enum UserInternalStatus {
+  VISIBLE
+  MANUALLY_HIDDEN
+}
+
 // A user can interact with our platform multiple ways. 
 // Sometimes that user will be signing up via coinbase, 
 // sometimes a user will be signing up via a wallet on the website, or multiple wallets
@@ -83,6 +88,7 @@ model User {
   hasOptedInToEmails         Boolean            @map("has_opted_in_to_emails")
   hasOptedInToSms            Boolean            @map("has_opted_in_to_sms")
   hasOptedInToMembership     Boolean            @map("has_opted_in_to_membership")
+  internalStatus             UserInternalStatus @map("internal_status") @default(VISIBLE)
   // We'll collect and capture this information in our product analytics tools, but we'll also want to be able to 
   // use this metadata to query our relationship database. This information will only be populated if users
   // opt in to our cookies
