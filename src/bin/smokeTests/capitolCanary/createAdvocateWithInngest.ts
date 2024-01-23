@@ -12,12 +12,6 @@ import 'dotenv/config'
  * Command: npm run ts src/bin/smokeTests/capitolCanary/createAdvocateWithInngest.ts
  *
  * Verify that the advocate is created in Capitol Canary with an administrator.
- *
- * TODO: Fix this smoke test. It's not working.
- *
- * ```
- * Error: Required environment variable process.env.NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN is missing. Value was undefined
- * ```
  */
 
 async function smokeTestCreateAdvocateWithInngest() {
