@@ -26,7 +26,7 @@ async function smokeTestUserActionOptIn() {
     },
     body: JSON.stringify({
       emailAddress: faker.internet.email(),
-      optInType: UserActionOptInType.SWC_SIGN_UP_AS_MEMBER,
+      optInType: UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER,
       isVerifiedEmailAddress: true,
       campaignName: 'foobar',
     } satisfies Omit<Parameters<typeof verifiedSWCPartnersUserActionOptIn>[0], 'partner'>),
