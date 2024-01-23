@@ -251,7 +251,6 @@ model UserAction {
 
 enum UserActionOptInType {
   SWC_SIGN_UP_AS_SUBSCRIBER
-  SWC_SIGN_UP_AS_MEMBER
 }
 
 model UserActionOptIn {
