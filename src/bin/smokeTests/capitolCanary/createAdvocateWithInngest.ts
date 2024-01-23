@@ -4,6 +4,8 @@ import { faker } from '@faker-js/faker'
 import { runBin } from '@/bin/binUtils'
 import { capitolCanaryCampaignId } from '@/utils/server/capitolCanary/capitolCanaryCampaigns'
 
+import 'dotenv/config'
+
 /**
  * Run this script only after you have the server AND Inngest running locally.
  * Please set environment variables as needed.
@@ -20,7 +22,7 @@ import { capitolCanaryCampaignId } from '@/utils/server/capitolCanary/capitolCan
 
 async function smokeTestCreateAdvocateWithInngest() {
   await inngest.send({
-    name: CREATE_CAPITOL_CANARY_ADVOCATE_FUNCTION_ID,
+    name: `capitol-canary.create-advocate`,
     data: {
       campaignId: capitolCanaryCampaignId.TESTING,
       user: {
