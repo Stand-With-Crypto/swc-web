@@ -1,5 +1,7 @@
 import '@/globals.css'
+import { PageProps } from '@/types'
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+// This file is needed otherwise the top level not-found will not work
+export default function Layout({ children }: PageProps & { children: React.ReactNode }) {
   return children
 }
