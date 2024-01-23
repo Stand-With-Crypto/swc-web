@@ -2,6 +2,7 @@ import { prismaClient } from '@/utils/server/prismaClient'
 import { getUserSessionIdOnPageRouter } from '@/utils/server/serverUserSessionId'
 import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import {
+  ServerLocalUser,
   mapLocalUserToUserDatabaseFields,
   parseLocalUserFromCookiesForPageRouter,
 } from '@/utils/server/serverLocalUser'
@@ -13,6 +14,7 @@ import {
 } from '@/utils/server/thirdweb/fetchEmbeddedWalletMetadataFromThirdweb'
 import { NextApiRequest } from 'next'
 import { AuthSessionMetadata } from '@/utils/server/thirdweb/types'
+import { AnalyticProperties } from '@/utils/shared/sharedAnalytics'
 
 export async function onLogin(address: string, req: NextApiRequest): Promise<AuthSessionMetadata> {
   const localUser = parseLocalUserFromCookiesForPageRouter(req)
@@ -20,21 +22,18 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
   let existingUser = await prismaClient.user.findFirst({
     where: { userCryptoAddresses: { some: { cryptoAddress: address } } },
   })
-  getServerAnalytics({ address, localUser }).track('User Logged In', {
-    'Is First Time': !existingUser,
-  })
-  const peopleAnalytics = getServerPeopleAnalytics({ address, localUser })
-  peopleAnalytics.set({ 'Datetime of Last Login': new Date() })
   if (existingUser) {
+    trackUserLogin({
+      existingUser,
+      localUser,
+      isNewlyCreatedUser: false,
+    })
     return { userId: existingUser.id }
   }
   const userSessionId = getUserSessionIdOnPageRouter(req)
   existingUser = await prismaClient.user.findFirst({
     where: { userSessions: { some: { id: userSessionId } } },
   })
-  if (localUser) {
-    peopleAnalytics.setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
-  }
   const userCryptoAddress = await prismaClient.userCryptoAddress.create({
     data: {
       cryptoAddress: address,
@@ -71,7 +70,38 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
       ...(primaryUserEmailAddressId ? { primaryUserEmailAddressId } : {}),
     },
   })
-  return { userId: userCryptoAddress.userId }
+  trackUserLogin({
+    existingUser: userCryptoAddress.user,
+    localUser,
+    isNewlyCreatedUser: !existingUser,
+  })
+
+  return { userId: userCryptoAddress.user.id }
+}
+
+function trackUserLogin({
+  existingUser,
+  localUser,
+  isNewlyCreatedUser,
+  props,
+}: {
+  existingUser: User
+  isNewlyCreatedUser: boolean
+  localUser: ServerLocalUser | null
+  props?: AnalyticProperties
+}) {
+  if (isNewlyCreatedUser && localUser) {
+    getServerPeopleAnalytics({ userId: existingUser.id, localUser }).setOnce(
+      mapPersistedLocalUserToAnalyticsProperties(localUser.persisted),
+    )
+  }
+  getServerAnalytics({ userId: existingUser.id, localUser }).track('User Logged In', {
+    'Is First Time': isNewlyCreatedUser,
+    ...props,
+  })
+  getServerPeopleAnalytics({ userId: existingUser.id, localUser }).set({
+    'Datetime of Last Login': new Date(),
+  })
 }
 
 async function upsertEmbeddedWalletEmailAddress(

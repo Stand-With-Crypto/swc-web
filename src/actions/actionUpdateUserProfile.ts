@@ -63,7 +63,7 @@ export async function actionUpdateUserProfile(
       })
     : null
   const localUser = parseLocalUserFromCookies()
-  const peopleAnalytics = getServerPeopleAnalytics({ address: authUser.address, localUser })
+  const peopleAnalytics = getServerPeopleAnalytics({ userId: authUser.userId, localUser })
   peopleAnalytics.set({
     ...(validatedFields.data.address
       ? convertAddressToAnalyticsProperties(validatedFields.data.address)

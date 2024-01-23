@@ -38,7 +38,6 @@ export async function actionCreateUserActionEmailCongressperson(
   logger.info('validated fields')
 
   const localUser = parseLocalUserFromCookies()
-  const analytics = getServerAnalytics({ ...userMatch, localUser })
   const user =
     userMatch.user ||
     (await prismaClient.user.create({
@@ -49,7 +48,9 @@ export async function actionCreateUserActionEmailCongressperson(
       },
       include: { primaryUserCryptoAddress: true },
     }))
-  const peopleAnalytics = getServerPeopleAnalytics({ ...userMatch, localUser })
+
+  const analytics = getServerAnalytics({ userId: user.id, localUser })
+  const peopleAnalytics = getServerPeopleAnalytics({ userId: user.id, localUser })
   if (localUser) {
     peopleAnalytics.setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
   }
