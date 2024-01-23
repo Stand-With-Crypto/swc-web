@@ -1,10 +1,10 @@
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
-import * as Sentry from '@sentry/nextjs'
 import { User, Address, UserEmailAddress } from '@prisma/client'
 import { CapitolCanaryCampaignId } from '@/utils/server/capitolCanary/campaigns'
 import { CapitolCanaryOpts } from '@/utils/server/capitolCanary/opts'
 import { CapitolCanaryMetadata } from '@/utils/server/capitolCanary/metadata'
+import * as Sentry from '@sentry/nextjs'
 
 const CAPITOL_CANARY_API_KEY = requiredEnv(
   process.env.CAPITOL_CANARY_API_KEY,
@@ -23,7 +23,7 @@ export const CAPITOL_CANARY_CREATE_ADVOCATE_SUCCESS_CODE = 1
 // Interface is exported for external use.
 export interface CreateAdvocateInCapitolCanaryPayloadRequirements {
   campaignId: CapitolCanaryCampaignId
-  user: User & { address: Address | undefined } & { emailAddress: UserEmailAddress | undefined }
+  user: User & { address: Address | null } & { primaryUserEmailAddress: UserEmailAddress | null }
   opts?: CapitolCanaryOpts
   metadata?: CapitolCanaryMetadata
 }
@@ -71,14 +71,9 @@ interface CreateAdvocateInCapitolCanaryResponse {
 }
 
 // This function should not be called directly. Use the respective Inngest function instead.
-export async function formatCapitolCanaryAdvocateCreationRequest(
+export function formatCapitolCanaryAdvocateCreationRequest(
   payload: CreateAdvocateInCapitolCanaryPayloadRequirements,
 ) {
-  // Campaign validation.
-  if (payload.campaignId === undefined) {
-    throw new Error('must include campaign id')
-  }
-
   const formattedRequest: CreateAdvocateInCapitolCanaryRequest = {
     campaigns: [payload.campaignId],
   }
@@ -104,8 +99,8 @@ export async function formatCapitolCanaryAdvocateCreationRequest(
     formattedRequest.country = address.countryCode
   }
 
-  if (payload.user.emailAddress) {
-    formattedRequest.email = payload.user.emailAddress.emailAddress
+  if (payload.user.primaryUserEmailAddress) {
+    formattedRequest.email = payload.user.primaryUserEmailAddress.emailAddress
   }
 
   if (payload.opts) {
@@ -134,7 +129,7 @@ export async function formatCapitolCanaryAdvocateCreationRequest(
     errors.push('must include email or phone')
   }
   if (errors.length > 0) {
-    throw new Error(errors.join('. '))
+    return new Error(errors.join('. '))
   }
 
   // Request fixups.
@@ -154,8 +149,7 @@ export async function formatCapitolCanaryAdvocateCreationRequest(
 }
 
 export async function createAdvocateInCapitolCanary(request: CreateAdvocateInCapitolCanaryRequest) {
-  const url = new URL(CAPITOL_CANARY_CREATE_ADVOCATE_API_URL)
-  const httpResp = await fetchReq(url.href, {
+  const httpResp = await fetchReq(CAPITOL_CANARY_CREATE_ADVOCATE_API_URL, {
     method: 'POST',
     headers: {
       Authorization: `Basic ${btoa(`${CAPITOL_CANARY_API_KEY}:${CAPITOL_CANARY_API_SECRET}`)}`,

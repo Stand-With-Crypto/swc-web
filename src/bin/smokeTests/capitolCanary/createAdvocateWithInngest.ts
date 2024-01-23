@@ -1,8 +1,11 @@
 import { inngest } from '@/inngest/inngest'
-import { faker } from '@faker-js/faker'
 import { runBin } from '@/bin/binUtils'
 import { CapitolCanaryCampaignId } from '@/utils/server/capitolCanary/campaigns'
 import { CREATE_CAPITOL_CANARY_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/createAdvocateInCapitolCanary'
+import { CreateAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/createAdvocate'
+import { mockUser } from '@/mocks/models/mockUser'
+import { mockAddress } from '@/mocks/models/mockAddress'
+import { mockUserEmailAddress } from '@/mocks/models/mockUserEmailAddress'
 
 /**
  * Run this script only after you have the server AND Inngest running locally.
@@ -13,31 +16,29 @@ import { CREATE_CAPITOL_CANARY_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/fun
  */
 
 async function smokeTestCreateAdvocateWithInngest() {
-  const inngestResponse = await inngest.send({
-    name: CREATE_CAPITOL_CANARY_ADVOCATE_INNGEST_EVENT_NAME,
-    data: {
-      campaignId: CapitolCanaryCampaignId.TESTING,
-      user: {
-        fullName: faker.person.fullName(),
-        address: {
-          postalCode: faker.location.zipCode(),
-        },
-        emailAddress: {
-          emailAddress: faker.internet.email({
-            provider: 'example.fakerjs.dev',
-          }),
-        },
-      },
-      opts: {
-        isEmailOptIn: true,
-      },
-      metadata: {
-        tags: ['Smoke Test User'],
-      },
-    },
-  })
+  const mockedUser = mockUser()
+  const mockedAddress = mockAddress()
+  const mockedEmailAddress = mockUserEmailAddress()
 
-  console.log(inngestResponse)
+  const payload: CreateAdvocateInCapitolCanaryPayloadRequirements = {
+    campaignId: CapitolCanaryCampaignId.TESTING,
+    user: {
+      ...mockedUser,
+      address: mockedAddress,
+      primaryUserEmailAddress: mockedEmailAddress,
+    },
+    opts: {
+      isEmailOptin: true,
+    },
+    metadata: {
+      tags: ['Smoke Test User'],
+    },
+  }
+
+  await inngest.send({
+    name: CREATE_CAPITOL_CANARY_ADVOCATE_INNGEST_EVENT_NAME,
+    data: payload,
+  })
 }
 
 runBin(smokeTestCreateAdvocateWithInngest)
