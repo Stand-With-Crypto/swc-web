@@ -108,7 +108,7 @@ export async function formatCapitolCanaryAdvocateCreationRequest(
 
   if (payload.user.address) {
     const address = payload.user.address
-    formattedRequest.address1 = `${address.streetNumber} ${address.route}`
+    formattedRequest.address1 = `${address.streetNumber || ''} ${address.route || ''}`.trim()
     formattedRequest.address2 = address.subpremise
     formattedRequest.city = address.locality
     formattedRequest.state = address.administrativeAreaLevel1

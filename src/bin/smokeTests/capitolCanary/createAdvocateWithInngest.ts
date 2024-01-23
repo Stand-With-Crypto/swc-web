@@ -1,10 +1,7 @@
-import { CREATE_CAPITOL_CANARY_ADVOCATE_FUNCTION_ID } from '@/inngest/functions/createAdvocateInCapitolCanary'
 import { inngest } from '@/inngest/inngest'
 import { faker } from '@faker-js/faker'
 import { runBin } from '@/bin/binUtils'
 import { capitolCanaryCampaignId } from '@/utils/server/capitolCanary/capitolCanaryCampaigns'
-
-import 'dotenv/config'
 
 /**
  * Run this script only after you have the server AND Inngest running locally.
@@ -16,11 +13,14 @@ import 'dotenv/config'
 
 async function smokeTestCreateAdvocateWithInngest() {
   const inngestResponse = await inngest.send({
-    name: 'capitol.canary/create.advocate',
+    name: 'capitol.canary/create.advocate', // TODO: Use Travis' fix for environment variables when implemented.
     data: {
       campaignId: capitolCanaryCampaignId.TESTING,
       user: {
         fullName: faker.person.fullName(),
+        address: {
+          postalCode: faker.location.zipCode(),
+        },
         emailAddress: {
           emailAddress: faker.internet.email({
             provider: 'example.fakerjs.dev',
