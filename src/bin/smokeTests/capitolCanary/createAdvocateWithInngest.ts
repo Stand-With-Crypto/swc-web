@@ -15,8 +15,8 @@ import 'dotenv/config'
  */
 
 async function smokeTestCreateAdvocateWithInngest() {
-  await inngest.send({
-    name: `capitol-canary.create-advocate`,
+  const inngestResponse = await inngest.send({
+    name: 'capitol.canary/create.advocate',
     data: {
       campaignId: capitolCanaryCampaignId.TESTING,
       user: {
@@ -32,6 +32,8 @@ async function smokeTestCreateAdvocateWithInngest() {
       },
     },
   })
+
+  console.log(inngestResponse)
 }
 
 runBin(smokeTestCreateAdvocateWithInngest)

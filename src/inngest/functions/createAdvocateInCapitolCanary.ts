@@ -13,6 +13,7 @@ const CREATE_CAPITOL_CANARY_ADVOCATE_RETRY_TIMEOUT = 10 * 60 * 1000 // 10 minute
 const CREATE_CAPITOL_CANARY_ADVOCATE_API_CALL_STEP_ID = 'capitol-canary.create-advocate-api-call'
 
 export const CREATE_CAPITOL_CANARY_ADVOCATE_FUNCTION_ID = 'capitol-canary.create-advocate'
+export const CREATE_CAPITOL_CANARY_ADVOCATE_EVENT_NAME = 'capitol.canary/create.advocate'
 
 export const createAdvocateInCapitolCanaryWithInngest = inngest.createFunction(
   {
@@ -22,7 +23,7 @@ export const createAdvocateInCapitolCanaryWithInngest = inngest.createFunction(
       await onFailureCapitolCanary(CREATE_CAPITOL_CANARY_ADVOCATE_FUNCTION_ID, error)
     },
   },
-  { event: CREATE_CAPITOL_CANARY_ADVOCATE_FUNCTION_ID },
+  { event: CREATE_CAPITOL_CANARY_ADVOCATE_EVENT_NAME },
   async ({ event, step }) => {
     const data = event.data as CreateAdvocateInCapitolCanaryPayloadRequirements
     const formattedRequest = await formatCapitolCanaryAdvocateCreationRequest(data)
