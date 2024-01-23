@@ -1,7 +1,8 @@
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import * as Sentry from '@sentry/nextjs'
-import { z } from 'zod'
+import { User, Address, UserEmailAddress } from '@prisma/client'
+import { capitolCanaryCampaignId } from '@/utils/server/capitolCanary/capitolCanaryCampaigns'
 
 const CAPITOL_CANARY_API_KEY = requiredEnv(
   process.env.CAPITOL_CANARY_API_KEY,
@@ -15,79 +16,152 @@ const CAPITOL_CANARY_API_SECRET = requiredEnv(
 
 const CAPITOL_CANARY_CREATE_ADVOCATE_API_URL = 'https://api.phone2action.com/2.0/advocates'
 
-// Schema based on: https://docs.phone2action.com/#:~:text=update%20Phone2Action%20advocates-,Create%20an%20advocate,-This%20endpoint%20will
-export const createAdvocateSchema = z
-  .object({
-    // Capitol Canary campaigns to be joined.
-    campaigns: z.array(z.number()),
+export const CAPITOL_CANARY_CREATE_ADVOCATE_SUCCESS_CODE = 1
 
-    // Advocate information.
-    email: z.string().email().optional(),
-    phone: z
-      .string()
-      .length(10)
-      .regex(/^(\+\d{1,3}[- ]?)?\d{10}$/)
-      .optional(),
-    firstname: z.string().optional(),
-    lastname: z.string().optional(),
-    address1: z.string().optional(),
-    address2: z.string().optional(),
-    city: z.string().optional(),
-    state: z.string().optional(),
-    zip5: z.string().length(5).regex(/^\d+$/).optional(),
-    country: z.string().length(5).regex(/^\d+$/).optional(),
+// Interface is exported for external use.
+export interface CreateAdvocateInCapitolCanaryPayloadRequirements {
+  campaignId: capitolCanaryCampaignId
+  user: User & { address: Address | undefined } & { emailAddress: UserEmailAddress | undefined }
+  opts?: {
+    isSmsOptin?: boolean
+    isSmsOptinConfirmed?: boolean
+    isSmsOptout?: boolean
+    isEmailOptin?: boolean
+    isEmailOptout?: boolean
+  }
+  metadata?: {
+    p2aSource?: string
+    utmSource?: string
+    utmMedium?: string
+    utmCampaign?: string
+    utmTerm?: string
+    utmContent?: string
+    tags?: string[]
+  }
+}
 
-    // Opt-in/out.
-    smsOptin: z.boolean().optional(),
-    smsOptinConfirmed: z.boolean().optional(),
-    smsOptout: z.boolean().optional(),
-    emailOptin: z.boolean().optional(),
-    emailOptout: z.boolean().optional(),
+// Interface based on: https://docs.phone2action.com/#:~:text=update%20Phone2Action%20advocates-,Create%20an%20advocate,-This%20endpoint%20will
+// Interface should not be accessed directly - use the requirements interface above.
+interface CreateAdvocateInCapitolCanaryRequest {
+  // Required information.
+  campaigns: number[]
 
-    // Metadata for Capitol Canary.
-    p2aSource: z.string().optional(),
-    utm_source: z.string().optional(),
-    utm_medium: z.string().optional(),
-    utm_campaign: z.string().optional(),
-    utm_term: z.string().optional(),
-    utm_content: z.string().optional(),
-    tags: z.array(z.string()).optional(),
-  })
-  .superRefine((data, ctx) => {
-    if (!data.email && !data.phone) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: 'Must include email or phone',
-      })
-    }
-    if (!data.phone && (data.smsOptin || data.smsOptout)) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: 'Must include phone if emailOptin or smsOptout is true',
-      })
-    }
-    if (!data.smsOptin && data.smsOptinConfirmed) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: 'Must include smsOptin if smsOptinConfirmed is true',
-      })
-    }
-    if (!data.email && (data.emailOptin || data.emailOptout)) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: 'Must include email if emailOptin or emailOptout is true',
-      })
-    }
-  })
+  // Advocate information.
+  email?: string
+  phone?: string
+  firstname?: string
+  lastname?: string
+  address1?: string
+  address2?: string
+  city?: string
+  state?: string
+  zip5?: string
+  country?: string
 
-interface createAdvocateInCapitolCanaryResponse {
+  // Opt-in/out.
+  smsOptin?: number
+  smsOptinConfirmed?: number
+  smsOptout?: number
+  emailOptin?: number
+  emailOptout?: number
+
+  // Metadata for Capitol Canary.
+  p2aSource?: string
+  utm_source?: string
+  utm_medium?: string
+  utm_campaign?: string
+  utm_term?: string
+  utm_content?: string
+  tags?: string[]
+}
+
+interface CreateAdvocateInCapitolCanaryResponse {
   success: number
   error: string
   type: string
   advocateid: string
 }
 
-export async function createAdvocateInCapitolCanary(request: z.infer<typeof createAdvocateSchema>) {
+// This function should not be called directly. Use the respective Inngest function instead.
+export async function formatCapitolCanaryAdvocateCreationRequest(
+  payload: CreateAdvocateInCapitolCanaryPayloadRequirements,
+) {
+  // Campaign validation.
+  if (payload.campaignId === undefined) {
+    throw new Error('must include campaign id')
+  }
+
+  const formattedRequest: CreateAdvocateInCapitolCanaryRequest = {
+    campaigns: [payload.campaignId],
+  }
+
+  if (payload.user.fullName) {
+    const [firstname, ...lastnameParts] = payload.user.fullName.split(' ')
+    const lastname = lastnameParts.join(' ')
+    formattedRequest.firstname = firstname
+    formattedRequest.lastname = lastname
+  }
+
+  if (payload.user.phoneNumber) {
+    formattedRequest.phone = payload.user.phoneNumber
+  }
+
+  if (payload.user.address) {
+    const address = payload.user.address
+    formattedRequest.address1 = `${address.streetNumber} ${address.route}`
+    formattedRequest.address2 = address.subpremise
+    formattedRequest.city = address.locality
+    formattedRequest.state = address.administrativeAreaLevel1
+    formattedRequest.zip5 = address.postalCode
+    formattedRequest.country = address.countryCode
+  }
+
+  if (payload.user.emailAddress) {
+    formattedRequest.email = payload.user.emailAddress.emailAddress
+  }
+
+  if (payload.opts) {
+    const opts = payload.opts
+    formattedRequest.smsOptin = opts.isSmsOptin ? 1 : 0
+    formattedRequest.smsOptinConfirmed = opts.isSmsOptinConfirmed ? 1 : 0
+    formattedRequest.smsOptout = opts.isSmsOptout ? 1 : 0
+    formattedRequest.emailOptin = opts.isEmailOptin ? 1 : 0
+    formattedRequest.emailOptout = opts.isEmailOptout ? 1 : 0
+  }
+
+  if (payload.metadata) {
+    const metadata = payload.metadata
+    formattedRequest.p2aSource = metadata.p2aSource
+    formattedRequest.utm_source = metadata.utmSource
+    formattedRequest.utm_medium = metadata.utmMedium
+    formattedRequest.utm_campaign = metadata.utmCampaign
+    formattedRequest.utm_term = metadata.utmTerm
+    formattedRequest.utm_content = metadata.utmContent
+    formattedRequest.tags = metadata.tags
+  }
+
+  // Formatted request validation.
+  const errors = []
+  if (!formattedRequest.email && !formattedRequest.phone) {
+    errors.push('must include email or phone')
+  }
+  if (!formattedRequest.phone && (formattedRequest.smsOptin || formattedRequest.smsOptout)) {
+    errors.push('must include phone if emailOptin or smsOptout is true')
+  }
+  if (!formattedRequest.smsOptin && formattedRequest.smsOptinConfirmed) {
+    errors.push('must include smsOptin if smsOptinConfirmed is true')
+  }
+  if (!formattedRequest.email && (formattedRequest.emailOptin || formattedRequest.emailOptout)) {
+    errors.push('must include email if emailOptin or emailOptout is true')
+  }
+  if (errors.length > 0) {
+    throw new Error(errors.join('. '))
+  }
+
+  return formattedRequest
+}
+
+export async function createAdvocateInCapitolCanary(request: CreateAdvocateInCapitolCanaryRequest) {
   const url = new URL(CAPITOL_CANARY_CREATE_ADVOCATE_API_URL)
   const httpResp = await fetchReq(url.href, {
     method: 'POST',
@@ -95,15 +169,7 @@ export async function createAdvocateInCapitolCanary(request: z.infer<typeof crea
       Authorization: `Basic ${btoa(`${CAPITOL_CANARY_API_KEY}:${CAPITOL_CANARY_API_SECRET}`)}`,
       'Content-Type': 'application/json',
     },
-    // Changing the request body to match the Capitol Canary API.
-    body: JSON.stringify({
-      ...request,
-      smsOptin: request.smsOptin ? 1 : 0,
-      smsOptinConfirmed: request.smsOptinConfirmed ? 1 : 0,
-      smsOptout: request.smsOptout ? 1 : 0,
-      emailOptin: request.emailOptin ? 1 : 0,
-      emailOptout: request.emailOptout ? 1 : 0,
-    }),
+    body: JSON.stringify(request),
   }).catch(error => {
     Sentry.captureException(error, {
       level: 'error',
@@ -114,10 +180,10 @@ export async function createAdvocateInCapitolCanary(request: z.infer<typeof crea
       },
       tags: {
         domain: 'createAdvocateInCapitolCanary',
-        campaigns: request.campaigns.join(','),
+        campaigns: request.campaigns.join(', '),
       },
     })
     throw error
   })
-  return (await httpResp.json()) as createAdvocateInCapitolCanaryResponse
+  return (await httpResp.json()) as CreateAdvocateInCapitolCanaryResponse
 }

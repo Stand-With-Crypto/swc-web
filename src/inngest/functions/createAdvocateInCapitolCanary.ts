@@ -1,53 +1,56 @@
 import { inngest } from '@/inngest/inngest'
+import { onFailureCapitolCanary } from '@/inngest/onFailureCapitolCanary'
 import {
+  CreateAdvocateInCapitolCanaryPayloadRequirements,
   createAdvocateInCapitolCanary,
-  createAdvocateSchema,
+  formatCapitolCanaryAdvocateCreationRequest,
 } from '@/utils/server/capitolCanary/createAdvocateInCapitolCanary'
+import { FetchReqError } from '@/utils/shared/fetchReq'
 import { NonRetriableError, RetryAfterError } from 'inngest'
-import * as Sentry from '@sentry/nextjs'
 
 const CREATE_CAPITOL_CANARY_ADVOCATE_RETRY_LIMIT = 1
 const CREATE_CAPITOL_CANARY_ADVOCATE_RETRY_TIMEOUT = 2 * 1000 // 2 seconds
+const CREATE_CAPITOL_CANARY_ADVOCATE_API_CALL_STEP_ID = 'capitol-canary.create-advocate-api-call'
+
+export const CREATE_CAPITOL_CANARY_ADVOCATE_FUNCTION_ID = 'capitol-canary.create-advocate'
 
 export const createAdvocateInCapitolCanaryWithInngest = inngest.createFunction(
   {
-    id: 'capitol-canary.create-advocate',
+    id: CREATE_CAPITOL_CANARY_ADVOCATE_FUNCTION_ID,
     retries: CREATE_CAPITOL_CANARY_ADVOCATE_RETRY_LIMIT,
     onFailure: async ({ error }) => {
-      Sentry.captureException(error, {
-        level: 'error',
-        tags: {
-          domain: 'createAdvocateInCapitolCanaryWithInngest',
-        },
-      })
+      await onFailureCapitolCanary(CREATE_CAPITOL_CANARY_ADVOCATE_FUNCTION_ID, error)
     },
   },
-  { event: 'capitol-canary.create-advocate' },
+  { event: CREATE_CAPITOL_CANARY_ADVOCATE_FUNCTION_ID },
   async ({ event, step }) => {
-    const parseRequest = await createAdvocateSchema.safeParseAsync(event.data)
-    if (parseRequest.success === false) {
-      // Do not retry for invalid requests.
-      throw new NonRetriableError('invalid request for creating capitol canary advocate', {
-        cause: parseRequest.error,
+    const data = event.data as CreateAdvocateInCapitolCanaryPayloadRequirements
+    const formattedRequest = await formatCapitolCanaryAdvocateCreationRequest(data)
+    // Do not retry if the request is invalid.
+    if (formattedRequest instanceof Error) {
+      throw new NonRetriableError(formattedRequest.message, {
+        cause: formattedRequest,
       })
     }
-
-    await step.run('capitol-canary.create-advocate-api-call', async () => {
+    const response = await step.run(CREATE_CAPITOL_CANARY_ADVOCATE_API_CALL_STEP_ID, async () => {
       try {
-        const response = createAdvocateInCapitolCanary(parseRequest.data)
+        const capitolCanaryResponse = await createAdvocateInCapitolCanary(formattedRequest)
         return {
           event,
-          ...response,
+          ...capitolCanaryResponse,
         }
       } catch (error) {
         throw new RetryAfterError(
-          'failed to create advocate in capitol canary',
+          error instanceof FetchReqError
+            ? error.message
+            : 'unknown error when creating advocate in capitol canary',
           CREATE_CAPITOL_CANARY_ADVOCATE_RETRY_TIMEOUT,
           {
-            cause: error,
+            cause: error instanceof FetchReqError ? error : undefined,
           },
         )
       }
     })
+    return response
   },
 )
