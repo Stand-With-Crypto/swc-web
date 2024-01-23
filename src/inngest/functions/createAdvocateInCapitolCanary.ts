@@ -8,8 +8,8 @@ import {
 import { FetchReqError } from '@/utils/shared/fetchReq'
 import { NonRetriableError, RetryAfterError } from 'inngest'
 
-const CREATE_CAPITOL_CANARY_ADVOCATE_RETRY_LIMIT = 1
-const CREATE_CAPITOL_CANARY_ADVOCATE_RETRY_TIMEOUT = 2 * 1000 // 2 seconds
+const CREATE_CAPITOL_CANARY_ADVOCATE_RETRY_LIMIT = 20
+const CREATE_CAPITOL_CANARY_ADVOCATE_RETRY_TIMEOUT = 10 * 60 * 1000 // 10 minutes - total of 200 minutes for retrying.
 const CREATE_CAPITOL_CANARY_ADVOCATE_API_CALL_STEP_ID = 'capitol-canary.create-advocate-api-call'
 
 export const CREATE_CAPITOL_CANARY_ADVOCATE_FUNCTION_ID = 'capitol-canary.create-advocate'
