@@ -50,6 +50,7 @@ function trackAnalytic(
 }
 
 type CreationMethod = 'On Site' | 'Verified SWC Partner'
+export type AnalyticsUserActionUserState = 'New' | 'Existing' | 'Existing With Updates'
 // TODO determine if we need to be awaiting this
 export function getServerAnalytics(config: ServerAnalyticsConfig) {
   const currentSessionAnalytics =
@@ -59,17 +60,20 @@ export function getServerAnalytics(config: ServerAnalyticsConfig) {
     actionType,
     campaignName,
     creationMethod = 'On Site',
+    userState,
     ...other
   }: {
     actionType: UserActionType
     creationMethod?: CreationMethod
     campaignName: string
+    userState: AnalyticsUserActionUserState
   } & AnalyticProperties) {
     trackAnalytic(config, 'User Action Created', {
       ...currentSessionAnalytics,
       'User Action Type': actionType,
       'Campaign Name': campaignName,
       'Creation Method': creationMethod,
+      'User State': userState,
       ...other,
     })
   }
@@ -78,18 +82,21 @@ export function getServerAnalytics(config: ServerAnalyticsConfig) {
     campaignName,
     reason,
     creationMethod = 'On Site',
+    userState,
     ...other
   }: {
     actionType: UserActionType
     campaignName: string
     creationMethod?: CreationMethod
     reason: 'Too Many Recent' | 'Already Exists'
+    userState: AnalyticsUserActionUserState
   } & AnalyticProperties) {
     trackAnalytic(config, ' Type Creation Ignored', {
       ...currentSessionAnalytics,
       'User Action Type': actionType,
       'Campaign Name': campaignName,
       'Creation Method': creationMethod,
+      'User State': userState,
       Reason: reason,
       ...other,
     })

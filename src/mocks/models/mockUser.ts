@@ -19,5 +19,8 @@ export function mockUser(): User {
     isPubliclyVisible: faker.helpers.maybe(() => true, { probability: 0.9 }) || false,
     phoneNumber: withData ? fakerFields.phoneNumber() : '',
     addressId: withData ? fakerFields.id() : null,
+    hasOptedInToEmails: true,
+    hasOptedInToMembership: false,
+    hasOptedInToSms: false,
   }
 }

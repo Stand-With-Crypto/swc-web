@@ -42,6 +42,9 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
         : {
             create: {
               isPubliclyVisible: false,
+              hasOptedInToEmails: true,
+              hasOptedInToMembership: false,
+              hasOptedInToSms: false,
               ...mapLocalUserToUserDatabaseFields(localUser),
             },
           },

@@ -112,9 +112,9 @@ function UserHeading(props: {
             <Copy width={16} height={16} />
           </Button>
         </div>
-        {user.primaryUserEmailAddress?.address && (
+        {user.primaryUserEmailAddress?.emailAddress && (
           <p className="text-ellipsis text-xs text-muted-foreground">
-            {maybeEllipsisText(user.primaryUserEmailAddress?.address, 30)}
+            {maybeEllipsisText(user.primaryUserEmailAddress?.emailAddress, 30)}
           </p>
         )}
       </div>

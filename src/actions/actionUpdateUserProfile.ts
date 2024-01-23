@@ -31,16 +31,16 @@ export async function actionUpdateUserProfile(
       userEmailAddresses: true,
     },
   })
-  const existingUserEmailAddress = validatedFields.data.email
+  const existingUserEmailAddress = validatedFields.data.emailAddress
     ? user.userEmailAddresses.find(
-        ({ emailAddress }) => emailAddress === validatedFields.data.email,
+        ({ emailAddress }) => emailAddress === validatedFields.data.emailAddress,
       )
     : null
   const primaryUserEmailAddress =
-    validatedFields.data.email && !existingUserEmailAddress
+    validatedFields.data.emailAddress && !existingUserEmailAddress
       ? await prismaClient.userEmailAddress.create({
           data: {
-            emailAddress: validatedFields.data.email,
+            emailAddress: validatedFields.data.emailAddress,
             source: UserEmailAddressSource.USER_ENTERED,
             isVerified: false,
             user: {
@@ -69,7 +69,7 @@ export async function actionUpdateUserProfile(
       ? convertAddressToAnalyticsProperties(validatedFields.data.address)
       : {}),
     // https://docs.mixpanel.com/docs/data-structure/user-profiles#reserved-user-properties
-    $email: validatedFields.data.email,
+    $email: validatedFields.data.emailAddress,
     $phone: validatedFields.data.phoneNumber,
     $name: validatedFields.data.fullName,
   })

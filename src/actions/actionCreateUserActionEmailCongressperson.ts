@@ -1,35 +1,53 @@
 'use server'
-import * as Sentry from '@sentry/nextjs'
+import { getClientUser } from '@/clientModels/clientUser/clientUser'
 import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { getUserSessionId } from '@/utils/server/serverUserSessionId'
-import { getLogger } from '@/utils/shared/logger'
-import { zodUserActionFormEmailCongresspersonAction } from '@/validation/forms/zodUserActionFormEmailCongressperson'
-import { UserActionType, UserEmailAddressSource } from '@prisma/client'
-import { subDays } from 'date-fns'
-import 'server-only'
-import { z } from 'zod'
-import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import {
+  AnalyticsUserActionUserState,
+  getServerAnalytics,
+  getServerPeopleAnalytics,
+} from '@/utils/server/serverAnalytics'
+import {
+  ServerLocalUser,
   mapLocalUserToUserDatabaseFields,
   parseLocalUserFromCookies,
 } from '@/utils/server/serverLocalUser'
-import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
+import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
-import { getClientUser } from '@/clientModels/clientUser/clientUser'
+import { getLogger } from '@/utils/shared/logger'
+import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
+import { zodUserActionFormEmailCongresspersonAction } from '@/validation/forms/zodUserActionFormEmailCongressperson'
+import {
+  Address,
+  Prisma,
+  User,
+  UserActionType,
+  UserCryptoAddress,
+  UserEmailAddress,
+  UserEmailAddressSource,
+} from '@prisma/client'
+import * as Sentry from '@sentry/nextjs'
+import { subDays } from 'date-fns'
+import 'server-only'
+import { z } from 'zod'
 
 const logger = getLogger(`actionCreateUserActionEmailCongressperson`)
 
-export async function actionCreateUserActionEmailCongressperson(
-  data: z.infer<typeof zodUserActionFormEmailCongresspersonAction>,
-) {
+type UserWithRelations = User & {
+  primaryUserCryptoAddress: UserCryptoAddress | null
+  userEmailAddresses: UserEmailAddress[]
+  address: Address | null
+}
+type Input = z.infer<typeof zodUserActionFormEmailCongresspersonAction>
+
+export async function actionCreateUserActionEmailCongressperson(input: Input) {
   logger.info('triggered')
   const userMatch = await getMaybeUserAndMethodOfMatch({
-    include: { primaryUserCryptoAddress: true },
+    include: { primaryUserCryptoAddress: true, userEmailAddresses: true, address: true },
   })
   logger.info(userMatch.user ? 'found user' : 'no user found')
   const sessionId = getUserSessionId()
-  const validatedFields = zodUserActionFormEmailCongresspersonAction.safeParse(data)
+  const validatedFields = zodUserActionFormEmailCongresspersonAction.safeParse(input)
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
@@ -38,17 +56,12 @@ export async function actionCreateUserActionEmailCongressperson(
   logger.info('validated fields')
 
   const localUser = parseLocalUserFromCookies()
-  const user =
-    userMatch.user ||
-    (await prismaClient.user.create({
-      data: {
-        isPubliclyVisible: false,
-        userSessions: { create: { id: sessionId } },
-        ...mapLocalUserToUserDatabaseFields(localUser),
-      },
-      include: { primaryUserCryptoAddress: true },
-    }))
-
+  const { user, userState } = await maybeUpsertUser({
+    existingUser: userMatch.user,
+    input: validatedFields.data,
+    sessionId,
+    localUser,
+  })
   const analytics = getServerAnalytics({ userId: user.id, localUser })
   const peopleAnalytics = getServerPeopleAnalytics({ userId: user.id, localUser })
   if (localUser) {
@@ -76,6 +89,7 @@ export async function actionCreateUserActionEmailCongressperson(
       campaignName,
       reason: 'Too Many Recent',
       creationMethod: 'On Site',
+      userState,
       ...convertAddressToAnalyticsProperties(validatedFields.data.address),
     })
     Sentry.captureMessage(
@@ -97,7 +111,7 @@ export async function actionCreateUserActionEmailCongressperson(
         : { userSession: { connect: { id: sessionId } } }),
       userActionEmail: {
         create: {
-          senderEmail: validatedFields.data.email,
+          senderEmail: validatedFields.data.emailAddress,
           fullName: validatedFields.data.fullName,
           phoneNumber: validatedFields.data.phoneNumber,
           address: {
@@ -126,49 +140,124 @@ export async function actionCreateUserActionEmailCongressperson(
     actionType,
     campaignName,
     creationMethod: 'On Site',
+    userState,
     ...convertAddressToAnalyticsProperties(validatedFields.data.address),
   })
   peopleAnalytics.set({
     ...convertAddressToAnalyticsProperties(validatedFields.data.address),
     // https://docs.mixpanel.com/docs/data-structure/user-profiles#reserved-user-properties
-    $email: validatedFields.data.email,
+    $email: validatedFields.data.emailAddress,
     $phone: validatedFields.data.phoneNumber,
     $name: validatedFields.data.fullName,
   })
-  /*
-  We assume any updates the user makes to this action should propagate to the user's profile
-  */
-  const returnedUser = await prismaClient.user.update({
-    include: { primaryUserCryptoAddress: true },
-    where: { id: user.id },
-    data: {
-      fullName: validatedFields.data.fullName,
-      phoneNumber: validatedFields.data.phoneNumber,
-      address: {
-        connect: {
-          id: userAction.userActionEmail!.addressId,
-        },
-      },
-      primaryUserEmailAddress: {
-        connectOrCreate: {
-          where: {
-            emailAddress_userId: {
-              emailAddress: validatedFields.data.email,
-              userId: user.id,
+
+  // TODO actually trigger the logic to send the email to capital canary. We should be calling some Inngest function here
+
+  logger.info('updated user')
+  return { user: getClientUser(user) }
+}
+
+async function maybeUpsertUser({
+  existingUser,
+  input,
+  sessionId,
+  localUser,
+}: {
+  existingUser: UserWithRelations | null
+  input: Input
+  sessionId: string
+  localUser: ServerLocalUser | null
+}): Promise<{ user: UserWithRelations; userState: AnalyticsUserActionUserState }> {
+  const { fullName, emailAddress, phoneNumber, address } = input
+
+  if (existingUser) {
+    const updatePayload: Prisma.UserUpdateInput = {
+      ...(fullName && fullName !== existingUser.fullName && { fullName }),
+      ...(phoneNumber && phoneNumber !== existingUser.phoneNumber && { phoneNumber }),
+      ...(!existingUser.hasOptedInToEmails && { hasOptedInToEmail: true }),
+      ...(emailAddress &&
+        existingUser.userEmailAddresses.every(addr => addr.emailAddress !== emailAddress) && {
+          userEmailAddresses: {
+            create: {
+              emailAddress,
+              isVerified: false,
+              source: UserEmailAddressSource.USER_ENTERED,
             },
           },
-          create: {
-            emailAddress: validatedFields.data.email,
-            isVerified: false,
-            source: UserEmailAddressSource.USER_ENTERED,
-            userId: user.id,
+        }),
+      ...(address &&
+        existingUser.address?.googlePlaceId !== address.googlePlaceId && {
+          address: {
+            connectOrCreate: {
+              where: { googlePlaceId: address.googlePlaceId },
+              create: address,
+            },
           },
+        }),
+    }
+    const keysToUpdate = Object.keys(updatePayload)
+    if (!keysToUpdate.length) {
+      return { user: existingUser, userState: 'Existing' }
+    }
+    logger.info(`updating the following user fields ${keysToUpdate.join(', ')}`)
+    const user = await prismaClient.user.update({
+      where: { id: existingUser.id },
+      data: updatePayload,
+      include: {
+        primaryUserCryptoAddress: true,
+        userEmailAddresses: true,
+        address: true,
+      },
+    })
+
+    if (!user.primaryUserEmailAddressId && emailAddress) {
+      const newEmail = user.userEmailAddresses.find(addr => addr.emailAddress === emailAddress)!
+      logger.info(`updating primary email`)
+      await prismaClient.user.update({
+        where: { id: user.id },
+        data: { primaryUserEmailAddressId: newEmail.id },
+      })
+      user.primaryUserEmailAddressId = newEmail.id
+    }
+    return { user, userState: 'Existing With Updates' }
+  }
+  const user = await prismaClient.user.create({
+    include: {
+      primaryUserCryptoAddress: true,
+      userEmailAddresses: true,
+      address: true,
+    },
+    data: {
+      ...mapLocalUserToUserDatabaseFields(localUser),
+      isPubliclyVisible: false,
+      userSessions: { create: { id: sessionId } },
+      hasOptedInToEmails: true,
+      hasOptedInToMembership: false,
+      hasOptedInToSms: false,
+      fullName,
+      phoneNumber,
+      userEmailAddresses: {
+        create: {
+          emailAddress,
+          isVerified: false,
+          source: UserEmailAddressSource.USER_ENTERED,
+        },
+      },
+      address: {
+        connectOrCreate: {
+          where: { googlePlaceId: address.googlePlaceId },
+          create: address,
         },
       },
     },
   })
-  // TODO actually trigger the logic to send the email to capital canary. We should be calling some Inngest function here
-
-  logger.info('updated user')
-  return { user: getClientUser(returnedUser) }
+  const primaryUserEmailAddressId = user.userEmailAddresses[0].id
+  await prismaClient.user.update({
+    where: { id: user.id },
+    data: {
+      primaryUserEmailAddressId,
+    },
+  })
+  user.primaryUserEmailAddressId = primaryUserEmailAddressId
+  return { user, userState: 'New' }
 }

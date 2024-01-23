@@ -10,7 +10,7 @@ export function mockUserEmailAddress(): UserEmailAddress {
     id: fakerFields.id(),
     emailAddress: faker.internet.email(),
     source,
-    isVerified: source === UserEmailAddressSource.COINBASE_AUTH,
+    isVerified: source === UserEmailAddressSource.VERIFIED_THIRD_PARTY,
     userId: fakerFields.id(),
   }
 }

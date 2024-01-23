@@ -1,20 +1,32 @@
 import { prismaClient } from '@/utils/server/prismaClient'
-import { UserActionOptInType, UserActionType } from '@prisma/client'
-import { z } from 'zod'
-import * as Sentry from '@sentry/nextjs'
-import { getLogger } from '@/utils/shared/logger'
-import { getOrCreateSessionIdToSendBackToPartner } from '@/utils/server/verifiedSWCPartner/getOrCreateSessionIdToSendBackToPartner'
+import {
+  AnalyticsUserActionUserState,
+  getServerAnalytics,
+  getServerPeopleAnalytics,
+} from '@/utils/server/serverAnalytics'
+import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
 import { getUserAttributionFieldsForVerifiedSWCPartner } from '@/utils/server/verifiedSWCPartner/attribution'
 import {
   VerifiedSWCPartner,
   VerifiedSWCPartnerApiResponse,
 } from '@/utils/server/verifiedSWCPartner/constants'
+import { getOrCreateSessionIdToSendBackToPartner } from '@/utils/server/verifiedSWCPartner/getOrCreateSessionIdToSendBackToPartner'
+import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
+import { getLogger } from '@/utils/shared/logger'
+import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
 import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
-import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
-import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
-import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
-import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
+import {
+  Prisma,
+  User,
+  UserActionOptInType,
+  UserActionType,
+  UserEmailAddress,
+  UserEmailAddressSource,
+  UserSession,
+} from '@prisma/client'
+import * as Sentry from '@sentry/nextjs'
+import { z } from 'zod'
 
 export const zodVerifiedSWCPartnersUserActionOptIn = z.object({
   emailAddress: z.string().email().toLowerCase().trim(),
@@ -24,6 +36,8 @@ export const zodVerifiedSWCPartnersUserActionOptIn = z.object({
   fullName: z.string().trim().optional(),
   phoneNumber: zodPhoneNumber.optional().transform(str => str && normalizePhoneNumber(str)),
   hasOptedInToReceiveSMSFromSWC: z.boolean().optional(),
+  hasOptedInToSms: z.boolean().optional(),
+  hasOptedInToMembership: z.boolean().optional(),
 })
 
 const logger = getLogger('verifiedSWCPartnersUserActionOptIn')
@@ -33,17 +47,19 @@ export enum VerifiedSWCPartnersUserActionOptInResult {
   EXISTING_ACTION = 'existing-action',
 }
 
-export async function verifiedSWCPartnersUserActionOptIn({
-  emailAddress,
-  optInType,
-  isVerifiedEmailAddress,
-  campaignName,
-  partner,
-  fullName,
-  phoneNumber,
-}: z.infer<typeof zodVerifiedSWCPartnersUserActionOptIn> & {
+type UserWithRelations = User & {
+  userEmailAddresses: UserEmailAddress[]
+  userSessions: Array<UserSession>
+}
+
+type Input = z.infer<typeof zodVerifiedSWCPartnersUserActionOptIn> & {
   partner: VerifiedSWCPartner
-}): Promise<VerifiedSWCPartnerApiResponse<VerifiedSWCPartnersUserActionOptInResult>> {
+}
+
+export async function verifiedSWCPartnersUserActionOptIn(
+  input: Input,
+): Promise<VerifiedSWCPartnerApiResponse<VerifiedSWCPartnersUserActionOptInResult>> {
+  const { emailAddress, optInType, isVerifiedEmailAddress, campaignName } = input
   const actionType = UserActionType.OPT_IN
   const existingAction = await prismaClient.userAction.findFirst({
     include: {
@@ -66,40 +82,14 @@ export async function verifiedSWCPartnersUserActionOptIn({
       },
     },
   })
-  const user =
-    existingAction?.user ||
-    (await prismaClient.user.create({
-      include: {
-        userEmailAddresses: true,
-        userSessions: true,
-      },
-      data: {
-        ...getUserAttributionFieldsForVerifiedSWCPartner({ partner, campaignName }),
-        userSessions: {
-          create: {},
-        },
-        isPubliclyVisible: false,
-        fullName: fullName,
-        phoneNumber: phoneNumber,
-        // TODO
-        //   hasOptedInToReceiveSMS: hasOptedInToReceiveSMSFromSWC,
-      },
-    }))
+  const { user, userState } = await maybeUpsertUser({ existingUser: existingAction?.user, input })
   const localUser = getLocalUserFromUser(user)
   const analytics = getServerAnalytics({ userId: user.id, localUser })
   const peopleAnalytics = getServerPeopleAnalytics({ userId: user.id, localUser })
   if (!existingAction?.user) {
     peopleAnalytics.setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
   }
-  const existingEmail = user.userEmailAddresses.find(email => email.emailAddress === emailAddress)
-  if (existingEmail && !existingEmail.isVerified && isVerifiedEmailAddress) {
-    logger.info(`verifying previously unverified email`)
-    analytics.track('Email Verified', { creationMethod: 'Verified SWC Partner' })
-    await prismaClient.userEmailAddress.update({
-      where: { id: existingEmail.id },
-      data: { isVerified: true },
-    })
-  }
+
   if (existingAction) {
     Sentry.captureMessage('verifiedSWCPartnersUserActionOptIn action already exists', {
       extra: { emailAddress, isVerifiedEmailAddress },
@@ -110,6 +100,7 @@ export async function verifiedSWCPartnersUserActionOptIn({
       campaignName,
       creationMethod: 'Verified SWC Partner',
       reason: 'Already Exists',
+      userState,
     })
     return {
       result: VerifiedSWCPartnersUserActionOptInResult.EXISTING_ACTION,
@@ -134,21 +125,7 @@ export async function verifiedSWCPartnersUserActionOptIn({
           optInType,
         },
       },
-      user: user
-        ? { connect: { id: user.id } }
-        : {
-            create: {
-              ...getUserAttributionFieldsForVerifiedSWCPartner({ partner, campaignName }),
-              userSessions: {
-                create: {},
-              },
-              isPubliclyVisible: false,
-              fullName: fullName,
-              phoneNumber: phoneNumber,
-              // TODO
-              //   hasOptedInToReceiveSMS: hasOptedInToReceiveSMSFromSWC,
-            },
-          },
+      user: { connect: { id: user.id } },
     },
   })
 
@@ -156,6 +133,7 @@ export async function verifiedSWCPartnersUserActionOptIn({
     actionType,
     campaignName,
     creationMethod: 'Verified SWC Partner',
+    userState,
   })
 
   // TODO send user to capital canary
@@ -166,4 +144,112 @@ export async function verifiedSWCPartnersUserActionOptIn({
     sessionId: await getOrCreateSessionIdToSendBackToPartner(userAction.user),
     userId: userAction.user.id,
   }
+}
+
+async function maybeUpsertUser({
+  existingUser,
+  input,
+}: {
+  existingUser: UserWithRelations | undefined
+  input: Input
+}): Promise<{ user: UserWithRelations; userState: AnalyticsUserActionUserState }> {
+  const {
+    emailAddress,
+    isVerifiedEmailAddress,
+    campaignName,
+    partner,
+    fullName,
+    phoneNumber,
+    hasOptedInToMembership,
+    hasOptedInToSms,
+  } = input
+
+  if (existingUser) {
+    const updatePayload: Prisma.UserUpdateInput = {
+      ...(fullName && !existingUser.fullName && { fullName }),
+      ...(phoneNumber && !existingUser.phoneNumber && { phoneNumber }),
+      ...(!existingUser.hasOptedInToEmails && { hasOptedInToEmail: true }),
+      ...(hasOptedInToMembership &&
+        !existingUser.hasOptedInToMembership && { hasOptedInToMembership }),
+      ...(hasOptedInToSms && !existingUser.hasOptedInToSms && { hasOptedInToSms }),
+      ...(emailAddress &&
+        existingUser.userEmailAddresses.every(addr => addr.emailAddress !== emailAddress) && {
+          userEmailAddresses: {
+            create: {
+              emailAddress,
+              isVerified: isVerifiedEmailAddress,
+              source: UserEmailAddressSource.VERIFIED_THIRD_PARTY,
+            },
+          },
+        }),
+    }
+    const keysToUpdate = Object.keys(updatePayload)
+    if (!keysToUpdate.length) {
+      return { user: existingUser, userState: 'Existing' }
+    }
+    logger.info(`updating the following user fields ${keysToUpdate.join(', ')}`)
+    const user = await prismaClient.user.update({
+      where: { id: existingUser.id },
+      data: updatePayload,
+      include: {
+        userEmailAddresses: true,
+        userSessions: true,
+      },
+    })
+    const existingEmail = user.userEmailAddresses.find(email => email.emailAddress === emailAddress)
+    if (existingEmail && !existingEmail.isVerified && isVerifiedEmailAddress) {
+      logger.info(`verifying previously unverified email`)
+      await prismaClient.userEmailAddress.update({
+        where: { id: existingEmail.id },
+        data: { isVerified: true },
+      })
+    }
+
+    if (!user.primaryUserEmailAddressId && emailAddress) {
+      const newEmail = user.userEmailAddresses.find(addr => addr.emailAddress === emailAddress)!
+      logger.info(`updating primary email`)
+      await prismaClient.user.update({
+        where: { id: user.id },
+        data: { primaryUserEmailAddressId: newEmail.id },
+      })
+      user.primaryUserEmailAddressId = newEmail.id
+    }
+    return { user, userState: 'Existing With Updates' }
+  }
+  let user = await prismaClient.user.create({
+    include: {
+      userEmailAddresses: true,
+      userSessions: true,
+    },
+    data: {
+      ...getUserAttributionFieldsForVerifiedSWCPartner({ partner, campaignName }),
+      userSessions: {
+        create: {},
+      },
+      isPubliclyVisible: false,
+      fullName: fullName,
+      phoneNumber: phoneNumber,
+      hasOptedInToEmails: true,
+      hasOptedInToMembership: hasOptedInToMembership || false,
+      hasOptedInToSms: hasOptedInToSms || false,
+      userEmailAddresses: {
+        create: {
+          emailAddress,
+          isVerified: isVerifiedEmailAddress,
+          source: UserEmailAddressSource.VERIFIED_THIRD_PARTY,
+        },
+      },
+    },
+  })
+  user = await prismaClient.user.update({
+    include: {
+      userEmailAddresses: true,
+      userSessions: true,
+    },
+    where: { id: user.id },
+    data: {
+      primaryUserEmailAddressId: user.userEmailAddresses[0].id,
+    },
+  })
+  return { user, userState: 'New' }
 }
