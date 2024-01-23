@@ -10,13 +10,19 @@ import { capitolCanaryCampaignId } from '@/utils/server/capitolCanary/capitolCan
  * Command: npm run ts src/bin/smokeTests/capitolCanary/createAdvocateWithInngest.ts
  *
  * Verify that the advocate is created in Capitol Canary with an administrator.
+ *
+ * TODO: Fix this smoke test. It's not working.
+ *
+ * ```
+ * Error: Required environment variable process.env.NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN is missing. Value was undefined
+ * ```
  */
 
 async function smokeTestCreateAdvocateWithInngest() {
   await inngest.send({
     name: CREATE_CAPITOL_CANARY_ADVOCATE_FUNCTION_ID,
     data: {
-      campaignId: capitolCanaryCampaignId.DEFAULT_MEMBERSHIP,
+      campaignId: capitolCanaryCampaignId.TESTING,
       user: {
         fullName: faker.person.fullName(),
         emailAddress: {
