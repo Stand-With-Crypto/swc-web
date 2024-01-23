@@ -16,5 +16,11 @@ export default function GlobalErrorPage({
     Sentry.captureException(error)
     Sentry.captureException(new Error('Global Error Page Displayed'))
   }, [error])
-  return <ErrorPagesContent reset={reset} />
+  return (
+    <html>
+      <body>
+        <ErrorPagesContent reset={reset} />
+      </body>
+    </html>
+  )
 }
