@@ -83,10 +83,9 @@ export async function verifiedSWCPartnersUserActionOptIn(
     },
   })
   const { user, userState } = await maybeUpsertUser({ existingUser: existingAction?.user, input })
-  const sessionId = await getOrCreateSessionIdToSendBackToPartner(user)
   const localUser = getLocalUserFromUser(user)
-  const analytics = getServerAnalytics({ sessionId, localUser })
-  const peopleAnalytics = getServerPeopleAnalytics({ sessionId, localUser })
+  const analytics = getServerAnalytics({ userId: user.id, localUser })
+  const peopleAnalytics = getServerPeopleAnalytics({ userId: user.id, localUser })
   if (!existingAction?.user) {
     peopleAnalytics.setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
   }

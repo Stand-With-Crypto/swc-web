@@ -11,6 +11,7 @@ import { ExternalLink } from '@/components/ui/link'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { dtsiTweetUrl } from '@/utils/dtsi/dtsiTweetUtils'
 import { cn } from '@/utils/web/cn'
+import sanitizeHtml from 'sanitize-html'
 
 // @ts-ignore
 import { parse as twemojiParser } from 'twemoji-parser'
@@ -128,7 +129,14 @@ const TweetBody: React.FC<{ tweet: DTSIStanceDetailsTweetProp['tweet'] }> = ({ t
               <span
                 key={i}
                 dangerouslySetInnerHTML={{
-                  __html: twemoji.parse(text),
+                  __html: sanitizeHtml(twemoji.parse(text), {
+                    allowedTags: ['b', 'i', 'em', 'strong', 'img'],
+                    allowedSchemes: ['https'],
+                    allowedAttributes: {
+                      // these are the tags that twemoji adds to the inline emoji images
+                      img: ['src', 'alt', 'class', 'draggable'],
+                    },
+                  }),
                 }}
               />
             )

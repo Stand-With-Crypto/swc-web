@@ -54,14 +54,14 @@ export async function actionCreateUserActionCallCongressperson(
   const userMatch = await getMaybeUserAndMethodOfMatch({
     include: { primaryUserCryptoAddress: true },
   })
+  const user = userMatch.user || (await createUser({ localUser, sessionId }))
+
   const peopleAnalytics = getServerPeopleAnalytics({
     localUser,
-    ...userMatch,
+    userId: user.id,
   })
-  const user = userMatch.user || (await createUser({ localUser, sessionId, peopleAnalytics }))
-
   const analytics = getServerAnalytics({
-    ...userMatch,
+    userId: user.id,
     localUser,
   })
 
@@ -89,9 +89,7 @@ export async function actionCreateUserActionCallCongressperson(
   return { user: getClientUser(updatedUser) }
 }
 
-async function createUser(
-  sharedDependencies: Pick<SharedDependencies, 'localUser' | 'sessionId' | 'peopleAnalytics'>,
-) {
+async function createUser(sharedDependencies: Pick<SharedDependencies, 'localUser' | 'sessionId'>) {
   const { localUser, sessionId } = sharedDependencies
   const createdUser = await prismaClient.user.create({
     data: {
@@ -109,7 +107,7 @@ async function createUser(
   logger.info('created user')
 
   if (localUser?.persisted) {
-    sharedDependencies.peopleAnalytics?.setOnce(
+    getServerPeopleAnalytics({ localUser, userId: createdUser.id }).setOnce(
       mapPersistedLocalUserToAnalyticsProperties(localUser.persisted),
     )
   }

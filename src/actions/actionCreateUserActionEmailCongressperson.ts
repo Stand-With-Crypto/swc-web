@@ -56,14 +56,14 @@ export async function actionCreateUserActionEmailCongressperson(input: Input) {
   logger.info('validated fields')
 
   const localUser = parseLocalUserFromCookies()
-  const analytics = getServerAnalytics({ ...userMatch, localUser })
   const { user, userState } = await maybeUpsertUser({
     existingUser: userMatch.user,
     input: validatedFields.data,
     sessionId,
     localUser,
   })
-  const peopleAnalytics = getServerPeopleAnalytics({ ...userMatch, localUser })
+  const analytics = getServerAnalytics({ userId: user.id, localUser })
+  const peopleAnalytics = getServerPeopleAnalytics({ userId: user.id, localUser })
   if (localUser) {
     peopleAnalytics.setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
   }

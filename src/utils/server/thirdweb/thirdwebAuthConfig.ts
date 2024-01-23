@@ -6,6 +6,7 @@ import { prismaClient } from '@/utils/server/prismaClient'
 import { getServerAnalytics } from '@/utils/server/serverAnalytics'
 import { parseLocalUserFromCookiesForPageRouter } from '@/utils/server/serverLocalUser'
 import { onLogin } from '@/utils/server/thirdweb/onLogin'
+import { AuthSessionMetadata } from '@/utils/server/thirdweb/types'
 
 // TODO migrate this logic from page router to app router once thirdweb supports it
 
@@ -36,8 +37,8 @@ export const thirdwebAuthConfig: ThirdwebAuthConfig = {
   callbacks: {
     onLogout: (user, req) => {
       const localUser = parseLocalUserFromCookiesForPageRouter(req)
-      getServerAnalytics({ address: user.address, localUser }).track('User Logged Out')
-      // TODO analytics
+      const sessionData = user.session as AuthSessionMetadata
+      getServerAnalytics({ userId: sessionData.userId, localUser }).track('User Logged Out')
     },
     // look for the comment in appRouterGetAuthUser for why we don't use this fn
     onUser: async () => {},
