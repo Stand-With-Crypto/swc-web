@@ -2,6 +2,7 @@ import { useTabs } from '@/hooks/useTabs'
 
 import { UserActionFormNFTMintIntro } from './tabs/intro'
 import { UserActionFormNFTMintCheckout } from './tabs/checkout'
+import { UserActionFormNFTMintSuccess } from './tabs/success'
 import { useCheckoutController } from './useCheckoutController'
 
 export enum UserActionFormNFTMintTabNames {
@@ -26,7 +27,7 @@ export function UserActionFormNFTMint(_props: { onCancel: () => void; onSuccess:
       return <UserActionFormNFTMintCheckout {...tabProps} {...checkoutController} />
 
     case UserActionFormNFTMintTabNames.SUCCESS:
-      return <>Success</>
+      return <UserActionFormNFTMintSuccess {...tabProps} totalFee={checkoutController.totalFee} />
 
     default:
       tabProps.onTabNotFound()

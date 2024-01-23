@@ -14,7 +14,6 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { Button } from '@/components/ui/button'
 import { UserActionType } from '@prisma/client'
 import { InternalLink } from '@/components/ui/link'
-import { NextImage } from '@/components/ui/image'
 
 import { UserActionFormLayout } from '@/components/app/userActionFormCommon/layout'
 import { Skeleton } from '@/components/ui/skeleton'

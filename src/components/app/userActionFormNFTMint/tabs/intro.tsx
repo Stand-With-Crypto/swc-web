@@ -27,14 +27,14 @@ export function UserActionFormNFTMintIntro({
   gotoTab,
 }: UseTabsReturn<UserActionFormNFTMintTabNames>) {
   const { session } = useThirdwebData()
-  const contractMetadata = useThirdwebContractMetadata(MINT_NFT_CONTRACT_ADDRESS)
-  console.log({ contractMetadata })
+  const { data: contractMetadata, isLoading: isLoadingContractMetadata } =
+    useThirdwebContractMetadata(MINT_NFT_CONTRACT_ADDRESS)
 
   return (
     <UserActionFormLayout>
-      {(session.isLoading || contractMetadata.isLoading) && <LoadingOverlay />}
+      {(session.isLoading || isLoadingContractMetadata) && <LoadingOverlay />}
       <UserActionFormLayout.Container>
-        <ContractMetadataDisplay contractMetadata={contractMetadata.data} />
+        <ContractMetadataDisplay contractMetadata={contractMetadata} />
 
         <UserActionFormLayout.Footer>
           {session.isLoggedIn ? (

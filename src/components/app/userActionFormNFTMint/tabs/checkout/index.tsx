@@ -8,11 +8,7 @@ import {
   UserActionFormLayout,
 } from '@/components/app/userActionFormCommon'
 import { UserActionFormNFTMintTabNames } from '@/components/app/userActionFormNFTMint'
-import {
-  MINT_NFT_CONTRACT_ADDRESS,
-  NFT_DONATION_AMOUNT,
-  NFT_DONATION_GAS_FEE,
-} from '@/components/app/userActionFormNFTMint/constants'
+import { MINT_NFT_CONTRACT_ADDRESS } from '@/components/app/userActionFormNFTMint/constants'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { UseTabsReturn } from '@/hooks/useTabs'
@@ -20,7 +16,7 @@ import { useThirdwebContractMetadata } from '@/hooks/useThirdwebContractMetadata
 import { SupportedCryptoCurrencyCodes } from '@/utils/shared/currency'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
-import { useCheckoutController } from '@/components/app/userActionFormNFTMint/useCheckoutController'
+import { UseCheckoutControllerReturn } from '@/components/app/userActionFormNFTMint/useCheckoutController'
 
 import styles from './checkout.module.css'
 
@@ -31,12 +27,13 @@ export function UserActionFormNFTMintCheckout({
   decrementQuantity,
   setQuantity,
   mintFee,
-  total,
+  totalFee,
   gasFee,
-}: UseTabsReturn<UserActionFormNFTMintTabNames> & ReturnType<typeof useCheckoutController>) {
+}: UseTabsReturn<UserActionFormNFTMintTabNames> & UseCheckoutControllerReturn) {
   const { data: contractMetadata, isLoading } =
     useThirdwebContractMetadata(MINT_NFT_CONTRACT_ADDRESS)
 
+  console.log({ gasFee, mintFee, totalFee })
   const fixDecimals = (value: number) => Number(value.toFixed(5))
 
   if (!contractMetadata || isLoading) {
@@ -111,7 +108,7 @@ export function UserActionFormNFTMintCheckout({
             <div className="flex items-center justify-between">
               <p>Total</p>
               <p className="min-w-max">
-                {fixDecimals(total)} {SupportedCryptoCurrencyCodes.ETH}
+                {fixDecimals(totalFee)} {SupportedCryptoCurrencyCodes.ETH}
               </p>
             </div>
           </div>
