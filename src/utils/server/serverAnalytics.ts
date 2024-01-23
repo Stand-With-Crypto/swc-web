@@ -1,15 +1,15 @@
-import { getLogger } from '@/utils/shared/logger'
-import { requiredEnv } from '@/utils/shared/requiredEnv'
-import { AnalyticProperties, AnalyticsPeopleProperties } from '@/utils/shared/sharedAnalytics'
-import { UserActionType, UserCryptoAddress } from '@prisma/client'
-import mixpanelLib from 'mixpanel'
-import * as Sentry from '@sentry/nextjs'
-import { track as vercelTrack } from '@vercel/analytics/server'
 import {
   LocalUser,
   mapCurrentSessionLocalUserToAnalyticsProperties,
 } from '@/utils/shared/localUser'
+import { getLogger } from '@/utils/shared/logger'
+import { requiredEnv } from '@/utils/shared/requiredEnv'
+import { AnalyticProperties, AnalyticsPeopleProperties } from '@/utils/shared/sharedAnalytics'
 import { formatVercelAnalyticsEventProperties } from '@/utils/shared/vercelAnalytics'
+import { UserActionType } from '@prisma/client'
+import * as Sentry from '@sentry/nextjs'
+import { track as vercelTrack } from '@vercel/analytics/server'
+import mixpanelLib from 'mixpanel'
 
 const NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN = requiredEnv(
   process.env.NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN,
@@ -20,23 +20,7 @@ const mixpanel = mixpanelLib.init(NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN)
 
 const logger = getLogger('serverAnalytics')
 
-type ServerAnalyticsConfig = { localUser: LocalUser | null } & (
-  | { userCryptoAddress: UserCryptoAddress }
-  | { address: string }
-  | {
-      sessionId: string
-    }
-)
-
-const getDistinctId = (clientIdentifier: ServerAnalyticsConfig) => {
-  if ('sessionId' in clientIdentifier) {
-    return clientIdentifier.sessionId
-  }
-  if ('userCryptoAddress' in clientIdentifier) {
-    return clientIdentifier.userCryptoAddress.cryptoAddress
-  }
-  return clientIdentifier.address
-}
+type ServerAnalyticsConfig = { localUser: LocalUser | null; userId: string }
 
 function trackAnalytic(
   config: ServerAnalyticsConfig,
@@ -55,7 +39,7 @@ function trackAnalytic(
     eventName,
     {
       ...eventProperties,
-      distinct_id: getDistinctId(config),
+      distinct_id: config.userId,
     },
     err => {
       if (err) {
@@ -137,7 +121,7 @@ export function getServerPeopleAnalytics(config: ServerAnalyticsConfig) {
 
     logger.info(`People Properties Set Once`, peopleProperties)
     // we could wrap this in a promise and await it, but we don't want to block the request
-    mixpanel.people.set_once(getDistinctId(config), peopleProperties, err => {
+    mixpanel.people.set_once(config.userId, peopleProperties, err => {
       if (err) {
         Sentry.captureException(err, { tags: { domain: 'trackPeopleAnalyticOnce' } })
       }
@@ -151,7 +135,7 @@ export function getServerPeopleAnalytics(config: ServerAnalyticsConfig) {
     }
     logger.info(`People Properties Set`, peopleProperties)
     // we could wrap this in a promise and await it, but we don't want to block the request
-    mixpanel.people.set(getDistinctId(config), peopleProperties, err => {
+    mixpanel.people.set(config.userId, peopleProperties, err => {
       if (err) {
         Sentry.captureException(err, { tags: { domain: 'trackPeopleAnalytic' } })
       }
