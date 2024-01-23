@@ -1,4 +1,4 @@
-import { runBin } from '@/bin/binUtils'
+import { runBin } from '@/bin/runBin'
 
 async function run() {
   /*

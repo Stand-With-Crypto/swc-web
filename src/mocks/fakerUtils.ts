@@ -1,6 +1,6 @@
 import { SupportedCryptoCurrencyCodes, SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { faker } from '@faker-js/faker'
-import dtsiSlugs from '@/staticContent/mocks/dtsiSlugs.json'
+import dtsiSlugs from '@/staticContent/dtsiSlugs.json'
 
 export const fakerFields = {
   id: () => faker.string.uuid(),
