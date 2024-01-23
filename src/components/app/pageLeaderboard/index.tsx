@@ -13,8 +13,8 @@ import { getDataForPageLeaderboard } from '@/components/app/pageLeaderboard/getD
 
 // TODO determine if we need to dynamically generate this or if we're comfortable just supporting a hardcoded amount
 export const PAGE_LEADERBOARD_TOTAL_PAGES = process.env.SPEED_UP_LOCAL_BUILDS ? 1 : 10
-export const PAGE_LEADERBOARD_TITLE = 'Find out where politicians stand on crypto'
-export const PAGE_LEADERBOARD_DESCRIPTION = `Crypto drives American innovation. Keeping crypto in America means securing 4 million jobs over the next 7 years to increase economic mobility. Discover the politicians fighting to keep crypto in America.`
+export const PAGE_LEADERBOARD_TITLE = 'Our community'
+export const PAGE_LEADERBOARD_DESCRIPTION = `See how our community is taking a stand to safeguard the future of crypto in America.`
 
 export function PageLeaderboard({
   tab,
