@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "ts": "TZ=UTC tsx --tsconfig ./tsconfig.bin.json",
+    "ts": "TZ=UTC dotenv -- tsx --tsconfig ./tsconfig.bin.json",
     "dev": "next dev",
     "build": "CI_OVERRIDES=true next build",
     "postbuild": "next-sitemap",
@@ -65,6 +65,7 @@
     "date-fns": "^2.30.0",
     "decimal.js": "^10.4.3",
     "dotenv": "^16.3.1",
+    "dotenv-cli": "^7.3.0",
     "ethers": "^5.7.2",
     "fast-json-stable-stringify": "^2.1.0",
     "formatjs": "^0.1.1",

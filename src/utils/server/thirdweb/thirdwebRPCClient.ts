@@ -1,4 +1,4 @@
-import { requiredEnv } from '@/utils/shared/sharedEnv'
+import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { createPublicClient, http } from 'viem'
 import { mainnet } from 'viem/chains'
 
