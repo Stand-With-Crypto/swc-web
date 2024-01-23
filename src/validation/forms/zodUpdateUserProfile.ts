@@ -9,7 +9,7 @@ const base = object({
   fullName: zodOptionalEmptyString(
     string().trim().min(1, 'Please enter your full name').max(100, 'Please enter your full name'),
   ),
-  email: zodOptionalEmptyString(
+  emailAddress: zodOptionalEmptyString(
     string().trim().email('Please enter a valid email address').toLowerCase(),
   ),
   phoneNumber: zodOptionalEmptyString(zodPhoneNumber).transform(

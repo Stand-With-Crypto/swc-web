@@ -11,7 +11,7 @@ import { NextApiRequest } from 'next'
 import { cookies } from 'next/headers'
 import { object, record, string } from 'zod'
 
-type ServerLocalUser = {
+export type ServerLocalUser = {
   persisted: PersistedLocalUser
   currentSession: CurrentSessionLocalUser
 }

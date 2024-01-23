@@ -55,7 +55,7 @@ export function UpdateUserProfileForm({
     resolver: zodResolver(zodUpdateUserProfileFormFields),
     defaultValues: {
       fullName: user.fullName,
-      email: user.primaryUserEmailAddress?.address || '',
+      emailAddress: user.primaryUserEmailAddress?.emailAddress || '',
       phoneNumber: user.phoneNumber,
       isPubliclyVisible: user.isPubliclyVisible,
       address: user.address
@@ -121,7 +121,7 @@ export function UpdateUserProfileForm({
             />
             <FormField
               control={form.control}
-              name="email"
+              name="emailAddress"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Email</FormLabel>

@@ -56,7 +56,7 @@ const getDefaultValues = ({
     return {
       campaignName: UserActionEmailCampaignName.DEFAULT,
       fullName: user.fullName,
-      email: user.primaryUserEmailAddress?.address || '',
+      emailAddress: user.primaryUserEmailAddress?.emailAddress || '',
       phoneNumber: user.phoneNumber,
       message: getDefaultText(),
       address: user.address
@@ -70,7 +70,7 @@ const getDefaultValues = ({
   return {
     campaignName: UserActionEmailCampaignName.DEFAULT,
     fullName: '',
-    email: '',
+    emailAddress: '',
     phoneNumber: '',
     message: getDefaultText(),
     address: undefined,
@@ -161,7 +161,7 @@ export function UserActionFormEmailCongressperson({
               />
               <FormField
                 control={form.control}
-                name="email"
+                name="emailAddress"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Email</FormLabel>
