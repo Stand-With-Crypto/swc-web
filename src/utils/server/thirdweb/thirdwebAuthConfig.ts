@@ -39,7 +39,6 @@ export const thirdwebAuthConfig: ThirdwebAuthConfig = {
       const localUser = parseLocalUserFromCookiesForPageRouter(req)
       const sessionData = user.session as AuthSessionMetadata
       getServerAnalytics({ userId: sessionData.userId, localUser }).track('User Logged Out')
-      // TODO analytics
     },
     // look for the comment in appRouterGetAuthUser for why we don't use this fn
     onUser: async () => {},
