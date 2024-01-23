@@ -2,7 +2,9 @@ import { fetchReq } from '@/utils/shared/fetchReq'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import * as Sentry from '@sentry/nextjs'
 import { User, Address, UserEmailAddress } from '@prisma/client'
-import { capitolCanaryCampaignId } from '@/utils/server/capitolCanary/capitolCanaryCampaigns'
+import { CapitolCanaryCampaignId } from '@/utils/server/capitolCanary/campaigns'
+import { CapitolCanaryOpts } from '@/utils/server/capitolCanary/opts'
+import { CapitolCanaryMetadata } from '@/utils/server/capitolCanary/metadata'
 
 const CAPITOL_CANARY_API_KEY = requiredEnv(
   process.env.CAPITOL_CANARY_API_KEY,
@@ -20,24 +22,10 @@ export const CAPITOL_CANARY_CREATE_ADVOCATE_SUCCESS_CODE = 1
 
 // Interface is exported for external use.
 export interface CreateAdvocateInCapitolCanaryPayloadRequirements {
-  campaignId: capitolCanaryCampaignId
+  campaignId: CapitolCanaryCampaignId
   user: User & { address: Address | undefined } & { emailAddress: UserEmailAddress | undefined }
-  opts?: {
-    isSmsOptin?: boolean
-    isSmsOptinConfirmed?: boolean
-    isSmsOptout?: boolean
-    isEmailOptin?: boolean
-    isEmailOptout?: boolean
-  }
-  metadata?: {
-    p2aSource?: string
-    utmSource?: string
-    utmMedium?: string
-    utmCampaign?: string
-    utmTerm?: string
-    utmContent?: string
-    tags?: string[]
-  }
+  opts?: CapitolCanaryOpts
+  metadata?: CapitolCanaryMetadata
 }
 
 // Interface based on: https://docs.phone2action.com/#:~:text=update%20Phone2Action%20advocates-,Create%20an%20advocate,-This%20endpoint%20will
@@ -145,17 +133,21 @@ export async function formatCapitolCanaryAdvocateCreationRequest(
   if (!formattedRequest.email && !formattedRequest.phone) {
     errors.push('must include email or phone')
   }
-  if (!formattedRequest.phone && (formattedRequest.smsOptin || formattedRequest.smsOptout)) {
-    errors.push('must include phone if emailOptin or smsOptout is true')
-  }
-  if (!formattedRequest.smsOptin && formattedRequest.smsOptinConfirmed) {
-    errors.push('must include smsOptin if smsOptinConfirmed is true')
-  }
-  if (!formattedRequest.email && (formattedRequest.emailOptin || formattedRequest.emailOptout)) {
-    errors.push('must include email if emailOptin or emailOptout is true')
-  }
   if (errors.length > 0) {
     throw new Error(errors.join('. '))
+  }
+
+  // Request fixups.
+  if (!formattedRequest.phone && (formattedRequest.smsOptin || formattedRequest.smsOptout)) {
+    formattedRequest.smsOptin = 0
+    formattedRequest.smsOptout = 0
+  }
+  if (!formattedRequest.smsOptin && formattedRequest.smsOptinConfirmed) {
+    formattedRequest.smsOptinConfirmed = 0
+  }
+  if (!formattedRequest.email && (formattedRequest.emailOptin || formattedRequest.emailOptout)) {
+    formattedRequest.emailOptin = 0
+    formattedRequest.emailOptout = 0
   }
 
   return formattedRequest

@@ -1,4 +1,5 @@
-export const enum capitolCanaryCampaignId {
+// Campaign IDs representing the different campaigns in Capitol Canary.
+export const enum CapitolCanaryCampaignId {
   TESTING = 137795,
 
   DEFAULT_MEMBERSHIP = 137775,
