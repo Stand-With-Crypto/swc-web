@@ -108,6 +108,7 @@ model User {
   userMergeEvents     UserMergeEvent[]
 
   @@index([addressId])
+  @@index([internalStatus])
   @@map("user")
 }
 
