@@ -3,7 +3,7 @@ on: [push]
 jobs:
   cypress-run:
     environment: preview
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest-l
     strategy:
       fail-fast: false # https://github.com/cypress-io/github-action/issues/48
     env:
