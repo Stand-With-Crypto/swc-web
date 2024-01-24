@@ -12,7 +12,7 @@ export function ErrorPagesContent({ reset }: { reset: () => void }) {
       action: AnalyticActionType.click,
     })
     reset()
-  }, [])
+  }, [reset])
   return (
     <div className="container flex flex-grow flex-col items-center justify-center space-y-7">
       <MaybeNextImg src="/error_shield.svg" width={120} height={120} alt="" />
