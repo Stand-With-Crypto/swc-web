@@ -2,6 +2,7 @@ name: Cypress Tests
 on: [push]
 jobs:
   cypress-run:
+    environment: preview
     runs-on: ubuntu-latest
     # Runs tests in parallel with matrix strategy https://docs.cypress.io/guides/guides/parallelization
     # https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs
@@ -26,8 +27,12 @@ jobs:
           record: true
           parallel: true # Runs test in parallel using settings above
         env:
-          # For recording and parallelization to work you must set your CYPRESS_RECORD_KEY
-          # in GitHub repo → Settings → Secrets → Actions
+          # environment secrets
+          VERIFIED_SWC_PARTNER_SECRET_COINBASE: ${{ secrets.VERIFIED_SWC_PARTNER_SECRET_COINBASE }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DO_THEY_SUPPORT_IT_API_KEY: ${{ secrets.DO_THEY_SUPPORT_IT_API_KEY }}
+          THIRD_WEB_CLIENT_SECRET: ${{ secrets.THIRD_WEB_CLIENT_SECRET }}
+          THIRDWEB_AUTH_PRIVATE_KEY: ${{ secrets.THIRDWEB_AUTH_PRIVATE_KEY }}
+          # org level secrets
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          # Creating a token https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
           GITHUB_TOKEN: ${{ secrets.CYPRESS_GITHUB_WORKFLOW_TOKEN_TRAVIS }}
