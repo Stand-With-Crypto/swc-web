@@ -57,15 +57,15 @@ jobs:
           npm run codegen
           npm run intl:extract-compile
           npm run db:seed
-      # - name: Cypress run
-      #   # Uses the official Cypress GitHub action https://github.com/cypress-io/github-action
-      #   uses: cypress-io/github-action@v6
-      #   with:
-      #     # Starts web server for E2E tests - replace with your own server invocation
-      #     # https://docs.cypress.io/guides/continuous-integration/introduction#Boot-your-server
-      #     start: npm run dev
-      #     wait-on: 'http://localhost:3000' # Waits for above
-      #     # Records to Cypress Cloud
-      #     # https://docs.cypress.io/guides/cloud/projects#Set-up-a-project-to-record
-      #     record: true
-      #     parallel: true # Runs test in parallel using settings above
+      - name: Cypress run
+        # Uses the official Cypress GitHub action https://github.com/cypress-io/github-action
+        uses: cypress-io/github-action@v6
+        with:
+          # Starts web server for E2E tests - replace with your own server invocation
+          # https://docs.cypress.io/guides/continuous-integration/introduction#Boot-your-server
+          start: npm run dev
+          wait-on: 'http://localhost:3000' # Waits for above
+          # Records to Cypress Cloud
+          # https://docs.cypress.io/guides/cloud/projects#Set-up-a-project-to-record
+          record: true
+          parallel: true # Runs test in parallel using settings above
