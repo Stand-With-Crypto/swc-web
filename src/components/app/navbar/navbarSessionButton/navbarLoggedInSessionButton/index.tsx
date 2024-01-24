@@ -21,7 +21,7 @@ export function NavbarLoggedInSessionButton() {
   return (
     <Popover {...dialogProps}>
       <PopoverTrigger asChild>
-        <Button variant="secondary" className="min-w-[96px]">
+        <Button variant="secondary" className="min-w-24">
           <div>
             {user &&
               !ensData.isLoading &&
