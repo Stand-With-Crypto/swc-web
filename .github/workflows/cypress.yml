@@ -35,7 +35,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Build
-        run: npm run initial
+        run: |
+          npx prisma generate
+          npm run codegen
+          npm run intl:extract-compile
+          npm run db:seed
+          prisma db push --force-reset
+          npm run ts:ci --transpile-only src/bin/seedLocalDb.ts
       - name: Cypress run
         # Uses the official Cypress GitHub action https://github.com/cypress-io/github-action
         uses: cypress-io/github-action@v6
