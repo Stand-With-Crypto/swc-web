@@ -22,6 +22,8 @@ export const getSumDonationsByUser = async ({ limit, offset }: SumDonationsByUse
       SUM(amount_usd) AS totalAmountUsd
     FROM user_action_donation
     JOIN user_action ON user_action.id = user_action_donation.id
+    JOIN user ON user.id = user_action.user_id
+    WHERE user.internal_status = 'VISIBLE'
     GROUP BY userId
     ORDER BY totalAmountUsd DESC
     -- don't worry, prisma $queryRaw sanitizes the input
