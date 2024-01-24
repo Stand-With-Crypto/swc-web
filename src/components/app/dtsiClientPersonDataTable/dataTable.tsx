@@ -12,6 +12,11 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 
+import { Person } from '@/components/app/dtsiClientPersonDataTable/columns'
+import { DataTablePagination } from '@/components/app/dtsiClientPersonDataTable/dataTablePagination'
+import { Button } from '@/components/ui/button'
+import { InputWithIcon } from '@/components/ui/inputWIthIcon'
+import { PageTitle } from '@/components/ui/pageTitleText'
 import {
   Table,
   TableBody,
@@ -20,35 +25,16 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { Button } from '@/components/ui/button'
-import React, { useMemo } from 'react'
 import { ArrowUpDown, Search } from 'lucide-react'
-import { Input } from '@/components/ui/input'
-import { DataTablePagination } from '@/components/app/dtsiClientPersonDataTable/dataTablePagination'
-import { Person } from '@/components/app/dtsiClientPersonDataTable/columns'
+import React, { useMemo } from 'react'
 import {
-  DTSI_PersonPoliticalAffiliationCategory,
-  DTSI_PersonRoleCategory,
-  DTSI_PersonRoleStatus,
-} from '@/data/dtsi/generated'
-import { InputWithIcon } from '@/components/ui/inputWIthIcon'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
-import {
-  US_STATE_CODE_TO_DISPLAY_NAME_MAP,
-  getUSStateNameFromStateCode,
-} from '@/utils/shared/usStateUtils'
-import {
-  getDTSIPersonRoleCategoryDisplayName,
-  getFormattedDTSIPersonRoleDateRange,
-} from '@/utils/dtsi/dtsiPersonRoleUtils'
-import { gl } from 'date-fns/locale'
-import { PageTitle } from '@/components/ui/pageTitleText'
+  GlobalFilters,
+  PARTY_OPTIONS,
+  ROLE_OPTIONS,
+  StanceOnCryptoOptions,
+  filterDataViaGlobalFilters,
+  getGlobalFilterDefaults,
+} from '@/components/app/dtsiClientPersonDataTable/globalFiltersUtils'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -75,61 +61,6 @@ export const SortableHeader = <TData, TValue>({
   )
 }
 
-enum StanceOnCryptoOptions {
-  PRO_CRYPTO = 'Pro-crypto',
-  ANTI_CRYPTO = 'Anti-crypto',
-  ALL = 'All',
-}
-
-const PARTY_OPTIONS = {
-  REPUBLICAN: DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN,
-  DEMOCRAT: DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT,
-  ALL: 'All',
-}
-function getPartyOptionDisplayName(party: string) {
-  switch (party) {
-    case PARTY_OPTIONS.REPUBLICAN:
-      return 'Republican'
-    case PARTY_OPTIONS.DEMOCRAT:
-      return 'Democrat'
-    default:
-      return 'All'
-  }
-}
-
-const ROLE_OPTIONS = {
-  PRESIDENT: DTSI_PersonRoleCategory.PRESIDENT,
-  SENATE: DTSI_PersonRoleCategory.SENATE,
-  CONGRESS: DTSI_PersonRoleCategory.CONGRESS,
-  ALL: 'All',
-}
-function getRoleOptionDisplayName(role: string) {
-  switch (role) {
-    case ROLE_OPTIONS.PRESIDENT:
-      return 'National Political Figure'
-    case ROLE_OPTIONS.SENATE:
-      return 'Senate'
-    case ROLE_OPTIONS.CONGRESS:
-      return 'House of Reps'
-    default:
-      return 'All'
-  }
-}
-
-interface GlobalFilters {
-  role: (typeof ROLE_OPTIONS)[keyof typeof ROLE_OPTIONS]
-  party: (typeof PARTY_OPTIONS)[keyof typeof PARTY_OPTIONS]
-  stance: StanceOnCryptoOptions
-  state: 'All' | keyof typeof US_STATE_CODE_TO_DISPLAY_NAME_MAP
-}
-
-const getGlobalFilterDefaults = (): GlobalFilters => ({
-  role: ROLE_OPTIONS.ALL,
-  party: PARTY_OPTIONS.ALL,
-  stance: StanceOnCryptoOptions.ALL,
-  state: 'All',
-})
-
 export function DataTable<TData extends Person, TValue>({
   columns,
   data: passedData,
@@ -138,41 +69,8 @@ export function DataTable<TData extends Person, TValue>({
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
   const [globalFilter, setGlobalFilter] = React.useState<GlobalFilters>(getGlobalFilterDefaults())
-  const stateOptions = useMemo(() => {
-    return ['All', ...Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP).sort()]
-  }, [])
   const data = useMemo(() => {
-    return passedData.filter(x => {
-      if (globalFilter.stance !== StanceOnCryptoOptions.ALL) {
-        const scoreToUse = x.manuallyOverriddenStanceScore ?? x.computedStanceScore
-        const stance =
-          !scoreToUse || scoreToUse === 50
-            ? StanceOnCryptoOptions.ALL
-            : scoreToUse > 50
-              ? StanceOnCryptoOptions.PRO_CRYPTO
-              : StanceOnCryptoOptions.ANTI_CRYPTO
-        if (stance !== globalFilter.stance) {
-          return false
-        }
-      }
-      if (
-        globalFilter.role !== ROLE_OPTIONS.ALL &&
-        globalFilter.role !== x.primaryRole?.roleCategory
-      ) {
-        return false
-      }
-      if (
-        globalFilter.party !== PARTY_OPTIONS.ALL &&
-        globalFilter.party !== x.politicalAffiliationCategory
-      ) {
-        return false
-      }
-      console.log(globalFilter.state, x.primaryRole?.primaryState)
-      if (globalFilter.state !== 'All' && globalFilter.state !== x.primaryRole?.primaryState) {
-        return false
-      }
-      return true
-    })
+    return filterDataViaGlobalFilters<TData>(passedData, globalFilter)
   }, [globalFilter, passedData])
   const table = useReactTable({
     data,
@@ -226,80 +124,7 @@ export function DataTable<TData extends Person, TValue>({
             <PageTitle className="text-left" size="sm">
               Politicians
             </PageTitle>
-            {/* Styles get a little funky here so we can responsively support sideways scroll with the proper padding on mobile */}
-            <div className="flex gap-2 overflow-x-auto pb-3 pr-3 pt-3 md:pb-0 md:pr-0 md:pt-0">
-              <Select
-                value={globalFilter.stance}
-                onValueChange={(stance: StanceOnCryptoOptions) =>
-                  setGlobalFilter({ ...globalFilter, stance })
-                }
-              >
-                <SelectTrigger className="w-[195px] flex-shrink-0">
-                  <span className="mr-2 inline-block flex-shrink-0 font-bold">
-                    Stance on crypto
-                  </span>
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  {Object.values(StanceOnCryptoOptions).map(stance => (
-                    <SelectItem key={stance} value={stance}>
-                      {stance}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-
-              <Select
-                value={globalFilter.role}
-                onValueChange={role => setGlobalFilter({ ...globalFilter, role })}
-              >
-                <SelectTrigger className="w-[130px] flex-shrink-0">
-                  <span className="mr-2 inline-block flex-shrink-0 font-bold">Role</span>
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  {Object.values(ROLE_OPTIONS).map(role => (
-                    <SelectItem key={role} value={role}>
-                      {getRoleOptionDisplayName(role)}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              <Select
-                value={globalFilter.party}
-                onValueChange={party => setGlobalFilter({ ...globalFilter, party })}
-              >
-                <SelectTrigger className="w-[120px] flex-shrink-0">
-                  <span className="mr-2 inline-block flex-shrink-0 font-bold">Party</span>
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  {Object.values(PARTY_OPTIONS).map(party => (
-                    <SelectItem key={party} value={party}>
-                      {getPartyOptionDisplayName(party)}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              <Select
-                value={globalFilter.state}
-                onValueChange={(state: typeof globalFilter.state) =>
-                  setGlobalFilter({ ...globalFilter, state })
-                }
-              >
-                <SelectTrigger className="w-[110px] flex-shrink-0">
-                  <span className="mr-2 inline-block flex-shrink-0 font-bold">State</span>
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  {stateOptions.map(state => (
-                    <SelectItem key={state} value={state}>
-                      {state}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
+            <GlobalFilters {...{ globalFilter, setGlobalFilter }} />
           </div>
           <Table>
             <TableHeader className="bg-gray-100 text-gray-400">
