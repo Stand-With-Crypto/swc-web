@@ -1,15 +1,6 @@
 'use client'
 import { getDTSIClientPersonDataTableColumns } from '@/components/app/dtsiClientPersonDataTable/columns'
 import { DataTable } from '@/components/app/dtsiClientPersonDataTable/dataTable'
-import { Skeleton } from '@/components/ui/skeleton'
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table'
 import { queryDTSIAllPeople } from '@/data/dtsi/queries/queryDTSIAllPeople'
 import { SupportedLocale } from '@/intl/locales'
 import { fetchReq } from '@/utils/shared/fetchReq'
@@ -18,6 +9,13 @@ import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtil
 import _ from 'lodash'
 import { useMemo } from 'react'
 import useSWR from 'swr'
+
+type People = Awaited<ReturnType<typeof queryDTSIAllPeople>>['people']
+
+/*
+To prevent excessive initial page load size, we lazy load the majority of the data for this page via api endpoint.
+The static data is just the first "screen" of the politicians table
+*/
 
 export function useGetAllPeople() {
   return useSWR(apiUrls.dtsiAllPeople(), url =>
@@ -28,39 +26,25 @@ export function useGetAllPeople() {
   )
 }
 // TODO figure out what we want this to look like on mobile
-export function DTSIClientPersonDataTable({ locale }: { locale: SupportedLocale }) {
+export function DTSIClientPersonDataTable({
+  locale,
+  initialData,
+}: {
+  locale: SupportedLocale
+  initialData: People
+}) {
   const { data } = useGetAllPeople()
   const memoizedColumns = useMemo(() => getDTSIClientPersonDataTableColumns({ locale }), [locale])
+  const passedData = useMemo(
+    () => _.sortBy(data?.people || initialData, person => person.promotedPositioning),
+    [data, initialData],
+  )
   return (
-    <div className="container mx-auto py-10">
-      {data ? (
-        <DataTable columns={memoizedColumns} data={data.people} />
-      ) : (
-        <div className="min-h-[578px] rounded-md border">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                {_.times(5).map(x => (
-                  <TableHead key={x}>
-                    <Skeleton className="h-5 w-20" />
-                  </TableHead>
-                ))}
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {_.times(10).map(x => (
-                <TableRow key={x}>
-                  {_.times(5).map(y => (
-                    <TableCell key={y}>
-                      <Skeleton className="h-5 w-20" />
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </div>
-      )}
-    </div>
+    <DataTable
+      loadState={data?.people ? 'loaded' : 'static'}
+      key={data?.people ? 'loaded' : 'static'}
+      columns={memoizedColumns}
+      data={passedData}
+    />
   )
 }
