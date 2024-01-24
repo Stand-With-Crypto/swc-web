@@ -1,12 +1,16 @@
 import { Button } from '@/components/ui/button'
 import { MaybeNextImg } from '@/components/ui/image'
 import { PageTitle } from '@/components/ui/pageTitleText'
+import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
 import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
 import { useCallback } from 'react'
 
 export function ErrorPagesContent({ reset }: { reset: () => void }) {
   const onPress = useCallback(() => {
-    trackClientAnalytic('Error Page Try Again Pressed')
+    trackClientAnalytic('Error Page Try Again Pressed', {
+      component: AnalyticComponentType.button,
+      action: AnalyticActionType.click,
+    })
     reset()
   }, [])
   return (
