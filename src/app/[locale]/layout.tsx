@@ -71,7 +71,7 @@ export default function Layout({ children, params }: PageProps & { children: Rea
           <FullHeight.Container>
             <FullHeight.Content>
               <Navbar locale={locale} />
-              <main>{children}</main>
+              {children}
             </FullHeight.Content>
             <Footer locale={locale} />
           </FullHeight.Container>
