@@ -3,6 +3,7 @@ import { getClientUserAction } from '@/clientModels/clientUserAction/clientUserA
 import { queryDTSIPeopleBySlugForUserActions } from '@/data/dtsi/queries/queryDTSIPeopleBySlugForUserActions'
 import { getENSDataMapFromCryptoAddressesAndFailGracefully } from '@/data/web3/getENSDataFromCryptoAddress'
 import { prismaClient } from '@/utils/server/prismaClient'
+import { UserInternalStatus } from '@prisma/client'
 import _ from 'lodash'
 import 'server-only'
 
@@ -18,6 +19,11 @@ const fetchFromPrisma = async (config: RecentActivityConfig) => {
     },
     take: config.limit,
     skip: config.offset,
+    where: {
+      user: {
+        internalStatus: UserInternalStatus.VISIBLE,
+      },
+    },
     include: {
       user: {
         include: { primaryUserCryptoAddress: true },

@@ -1,4 +1,4 @@
-import { runBin } from '@/bin/binUtils'
+import { runBin } from '@/bin/runBin'
 import { verifiedSWCPartnersUserActionOptIn } from '@/data/verifiedSWCPartners/userActionOptIn'
 import { createBasicAuthHeader } from '@/utils/server/basicAuth'
 import { VerifiedSWCPartner } from '@/utils/server/verifiedSWCPartner/constants'
