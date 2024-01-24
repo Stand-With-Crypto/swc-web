@@ -18,13 +18,13 @@ export const DTSIStanceDetailsQuoteShared: React.FC<
   IDTSIStanceDetailsQuoteProps & { children: React.ReactNode }
 > = ({ children, stance, className }) => {
   return (
-    <div className={cn('text-gray-800 lg:text-xl', className)}>
+    <div className={cn('text-gray-800', className)}>
       {children}
       <hr className="my-4 border" style={{ width: '120px' }} />
       {stance.quote.richTextDescription ? (
         <div className="flex">
           <div className="mr-3 w-7 shrink-0">
-            <Quote className="h-7 w-7" />
+            <Quote className="h-6 w-6" />
           </div>
           <RichTextFormatter richText={stance.quote.richTextDescription} />
         </div>

@@ -1,5 +1,6 @@
 import { DTSI_Person } from '@/data/dtsi/generated'
 import { twNoop } from '@/utils/web/cn'
+import _ from 'lodash'
 
 export enum DTSILetterGrade {
   A = 'A',
@@ -19,7 +20,7 @@ const getScore = (item: EntityWithStanceScore) =>
 
 export const convertDTSIStanceScoreToLetterGrade = (entity: EntityWithStanceScore) => {
   const score = getScore(entity)
-  if (!score) {
+  if (_.isNil(score)) {
     return null
   }
   if (score >= 90) {
@@ -39,7 +40,7 @@ export const convertDTSIStanceScoreToLetterGrade = (entity: EntityWithStanceScor
 
 export const convertDTSIStanceScoreToCryptoSupportLanguage = (entity: EntityWithStanceScore) => {
   const score = getScore(entity)
-  if (!score) {
+  if (_.isNil(score)) {
     return 'Pending'
   }
   if (score >= 90) {
@@ -61,7 +62,7 @@ export const convertDTSIStanceScoreToCryptoSupportLanguageSentence = (
   entity: EntityWithStanceScore,
 ) => {
   const score = getScore(entity)
-  if (!score) {
+  if (_.isNil(score)) {
     return 'Pending stance on crypto'
   }
   if (score >= 90) {
@@ -81,7 +82,7 @@ export const convertDTSIStanceScoreToCryptoSupportLanguageSentence = (
 
 export const convertDTSIStanceScoreToTextColorClass = (entity: EntityWithStanceScore) => {
   const score = getScore(entity)
-  if (!score) {
+  if (_.isNil(score)) {
     return twNoop('text-gray-600')
   }
   if (score >= 90) {
