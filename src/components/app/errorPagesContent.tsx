@@ -1,3 +1,4 @@
+'use client'
 import { Button } from '@/components/ui/button'
 import { MaybeNextImg } from '@/components/ui/image'
 import { PageTitle } from '@/components/ui/pageTitleText'
@@ -5,12 +6,20 @@ import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/shared
 import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
 import { useCallback } from 'react'
 
-export function ErrorPagesContent({ reset }: { reset: () => void }) {
+export function ErrorPagesContent({
+  reset,
+  skipTracking,
+}: {
+  reset: () => void
+  skipTracking?: boolean
+}) {
   const onPress = useCallback(() => {
-    trackClientAnalytic('ErrorPagesContent Try Again Pressed', {
-      component: AnalyticComponentType.button,
-      action: AnalyticActionType.click,
-    })
+    if (!skipTracking) {
+      trackClientAnalytic('ErrorPagesContent Try Again Pressed', {
+        component: AnalyticComponentType.button,
+        action: AnalyticActionType.click,
+      })
+    }
     reset()
   }, [])
   return (
