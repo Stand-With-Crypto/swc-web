@@ -6,6 +6,8 @@ it('sanity checks that the homepage is loading as expected', () => {
   cy.contains('Watch').click()
   // verify that there is an iframe on the page with youtube.com in the src
   cy.get('iframe[allowfullscreen]').should('have.attr', 'src').and('include', 'youtube.com')
+  // wait so the iframe can fully load
+  cy.wait(1000)
   cy.contains('Close').click()
 
   // verify the donations tab shows top donors

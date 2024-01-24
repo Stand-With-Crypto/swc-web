@@ -33,8 +33,7 @@ jobs:
         # Uses the official Cypress GitHub action https://github.com/cypress-io/github-action
         uses: cypress-io/github-action@v6
         with:
-          install-command: |
-            npm install
+          build: |
             npx prisma generate
             npm run codegen
             npm run intl:extract-compile
