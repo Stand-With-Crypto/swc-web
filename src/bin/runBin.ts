@@ -6,7 +6,7 @@ import '../../sentry.server.config'
 export const runBin = async (fn: (...args: any[]) => Promise<any>) => {
   return fn()
     .then(async () => {
-      // await prismaClient.$disconnect()
+      await prismaClient.$disconnect()
       await Sentry.flush(2000)
     })
     .catch(async (e: any) => {
