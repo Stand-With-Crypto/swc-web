@@ -38,7 +38,8 @@ export default function FormEmailYourCongressperson() {
     resolver: zodResolver(zodEmailYourCongressperson),
     defaultValues: {
       // added sample data to just make testing easier
-      fullName: 'Test User',
+      firstName: 'Test',
+      lastName: 'User',
       zipCode: '10025',
       email: 'helloworld@foobar.com',
       phoneNumber: '2032224453',
@@ -61,12 +62,25 @@ export default function FormEmailYourCongressperson() {
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           <FormField
             control={form.control}
-            name="fullName"
+            name="firstName"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Full name</FormLabel>
+                <FormLabel>First name</FormLabel>
                 <FormControl>
-                  <Input placeholder="Your name" {...field} />
+                  <Input placeholder="Your first name" {...field} />
+                </FormControl>
+                <FormErrorMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="lastName"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Last name</FormLabel>
+                <FormControl>
+                  <Input placeholder="Your last name" {...field} />
                 </FormControl>
                 <FormErrorMessage />
               </FormItem>

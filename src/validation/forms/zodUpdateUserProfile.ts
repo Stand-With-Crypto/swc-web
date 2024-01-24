@@ -4,11 +4,11 @@ import { zodAddress } from '@/validation/fields/zodAddress'
 import { zodGooglePlacesAutocompletePrediction } from '@/validation/fields/zodGooglePlacesAutocompletePrediction'
 import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
 import { string, object, boolean } from 'zod'
+import { zodFirstName, zodLastName } from '@/validation/fields/zodName'
 
 const base = object({
-  fullName: zodOptionalEmptyString(
-    string().trim().min(1, 'Please enter your full name').max(100, 'Please enter your full name'),
-  ),
+  firstName: zodOptionalEmptyString(zodFirstName),
+  lastName: zodOptionalEmptyString(zodLastName),
   emailAddress: zodOptionalEmptyString(
     string().trim().email('Please enter a valid email address').toLowerCase(),
   ),

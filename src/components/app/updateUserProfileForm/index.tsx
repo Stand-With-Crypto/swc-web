@@ -54,7 +54,8 @@ export function UpdateUserProfileForm({
   const form = useForm<FormValues>({
     resolver: zodResolver(zodUpdateUserProfileFormFields),
     defaultValues: {
-      fullName: user.fullName,
+      firstName: user.firstName,
+      lastName: user.lastName,
       emailAddress: user.primaryUserEmailAddress?.emailAddress || '',
       phoneNumber: user.phoneNumber,
       isPubliclyVisible: user.isPubliclyVisible,
@@ -105,15 +106,28 @@ export function UpdateUserProfileForm({
           }, trackFormSubmissionSyncErrors(FORM_NAME))}
           className="space-y-8"
         >
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-4">
             <FormField
               control={form.control}
-              name="fullName"
+              name="firstName"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Name</FormLabel>
+                  <FormLabel>First name</FormLabel>
                   <FormControl>
-                    <Input placeholder="Your name" {...field} />
+                    <Input placeholder="Your first name" {...field} />
+                  </FormControl>
+                  <FormErrorMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="lastName"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Last name</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Your last name" {...field} />
                   </FormControl>
                   <FormErrorMessage />
                 </FormItem>

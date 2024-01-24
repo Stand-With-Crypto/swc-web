@@ -23,7 +23,7 @@ export async function actionEmailYourCongressPerson(
       errors: validatedFields.error.flatten().fieldErrors,
     }
   }
-  if (validatedFields.data.fullName === 'throw') {
+  if (validatedFields.data.firstName === 'throw') {
     throw new Error('throwing error to mock out server errors on client')
   }
   // TODO trigger actual logic

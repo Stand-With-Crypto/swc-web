@@ -6,8 +6,8 @@ export function mockUserActionEmail(): UserActionEmail {
   return {
     id: fakerFields.id(),
     senderEmail: faker.internet.email(),
-    fullName: faker.person.fullName(),
-    phoneNumber: fakerFields.phoneNumber(),
+    firstName: faker.person.firstName(),
+    lastName: faker.person.lastName(),
     addressId: fakerFields.id(),
   }
 }

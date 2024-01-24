@@ -78,11 +78,12 @@ export function formatCapitolCanaryAdvocateCreationRequest(
     campaigns: [payload.campaignId],
   }
 
-  if (payload.user.fullName) {
-    const [firstname, ...lastnameParts] = payload.user.fullName.split(' ')
-    const lastname = lastnameParts.join(' ')
-    formattedRequest.firstname = firstname
-    formattedRequest.lastname = lastname
+  if (payload.user.firstName) {
+    formattedRequest.firstname = payload.user.firstName
+  }
+
+  if (payload.user.lastName) {
+    formattedRequest.lastname = payload.user.lastName
   }
 
   if (payload.user.phoneNumber) {
