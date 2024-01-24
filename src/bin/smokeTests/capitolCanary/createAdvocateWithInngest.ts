@@ -1,11 +1,11 @@
 import { inngest } from '@/inngest/inngest'
-import { runBin } from '@/bin/binUtils'
 import { CapitolCanaryCampaignId } from '@/utils/server/capitolCanary/campaigns'
 import { CREATE_CAPITOL_CANARY_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/createAdvocateInCapitolCanary'
 import { CreateAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/createAdvocate'
 import { mockUser } from '@/mocks/models/mockUser'
 import { mockAddress } from '@/mocks/models/mockAddress'
 import { mockUserEmailAddress } from '@/mocks/models/mockUserEmailAddress'
+import { runBin } from '@/bin/runBin'
 
 /**
  * Run this script only after you have the server AND Inngest running locally.
