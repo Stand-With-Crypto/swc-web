@@ -20,6 +20,7 @@ import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { UseTabsReturn } from '@/hooks/useTabs'
 
 import { UserActionFormCallCongresspersonLayout } from './layout'
+import { identifyUserOnClient } from '@/utils/web/identifyUser'
 
 export function SuggestedScript({
   user,
@@ -82,7 +83,13 @@ export function SuggestedScript({
             'DTSI Slug': data.dtsiSlug,
           },
         },
-        () => actionCreateUserActionCallCongressperson(data),
+        () =>
+          actionCreateUserActionCallCongressperson(data).then(actionResult => {
+            if (actionResult.user) {
+              identifyUserOnClient(actionResult.user)
+            }
+            return actionResult
+          }),
       )
 
       if (result.status === 'success') {

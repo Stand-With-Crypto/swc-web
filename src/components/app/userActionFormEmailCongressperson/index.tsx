@@ -30,6 +30,7 @@ import {
   triggerServerActionForForm,
 } from '@/utils/web/formUtils'
 import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
+import { identifyUserOnClient } from '@/utils/web/identifyUser'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
 import { zodUserActionFormEmailCongresspersonFields } from '@/validation/forms/zodUserActionFormEmailCongressperson'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -55,7 +56,7 @@ const getDefaultValues = ({
     return {
       campaignName: UserActionEmailCampaignName.DEFAULT,
       fullName: user.fullName,
-      email: user.primaryUserEmailAddress?.address || '',
+      emailAddress: user.primaryUserEmailAddress?.emailAddress || '',
       phoneNumber: user.phoneNumber,
       message: getDefaultText(),
       address: user.address
@@ -69,7 +70,7 @@ const getDefaultValues = ({
   return {
     campaignName: UserActionEmailCampaignName.DEFAULT,
     fullName: '',
-    email: '',
+    emailAddress: '',
     phoneNumber: '',
     message: getDefaultText(),
     address: undefined,
@@ -118,7 +119,15 @@ export function UserActionFormEmailCongressperson({
                 'DTSI Slug': values.dtsiSlug,
               },
             },
-            () => actionCreateUserActionEmailCongressperson({ ...values, address }),
+            () =>
+              actionCreateUserActionEmailCongressperson({ ...values, address }).then(
+                actionResult => {
+                  if (actionResult.user) {
+                    identifyUserOnClient(actionResult.user)
+                  }
+                  return actionResult
+                },
+              ),
           )
           if (result.status === 'success') {
             router.refresh()
@@ -152,7 +161,7 @@ export function UserActionFormEmailCongressperson({
               />
               <FormField
                 control={form.control}
-                name="email"
+                name="emailAddress"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Email</FormLabel>

@@ -1,5 +1,5 @@
 import 'dotenv/config'
-import { runBin } from '@/bin/binUtils'
+import { runBin } from '@/bin/runBin'
 import { mockAddress } from '@/mocks/models/mockAddress'
 import { mockAuthenticationNonce } from '@/mocks/models/mockAuthenticationNonce'
 import { PopularCryptoAddress, mockUserCryptoAddress } from '@/mocks/models/mockUserCryptoAddress'

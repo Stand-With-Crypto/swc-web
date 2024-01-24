@@ -8,6 +8,7 @@ import { zodUpdateUserProfileFormAction } from '@/validation/forms/zodUpdateUser
 import { UserEmailAddressSource } from '@prisma/client'
 import 'server-only'
 import { z } from 'zod'
+import { getClientUser } from '@/clientModels/clientUser/clientUser'
 
 export async function actionUpdateUserProfile(
   data: z.infer<typeof zodUpdateUserProfileFormAction>,
@@ -24,22 +25,22 @@ export async function actionUpdateUserProfile(
   }
   const user = await prismaClient.user.findFirstOrThrow({
     where: {
-      userCryptoAddresses: { some: { cryptoAddress: authUser.address } },
+      id: authUser.userId,
     },
     include: {
       userEmailAddresses: true,
     },
   })
-  const existingUserEmailAddress = validatedFields.data.email
+  const existingUserEmailAddress = validatedFields.data.emailAddress
     ? user.userEmailAddresses.find(
-        ({ emailAddress }) => emailAddress === validatedFields.data.email,
+        ({ emailAddress }) => emailAddress === validatedFields.data.emailAddress,
       )
     : null
   const primaryUserEmailAddress =
-    validatedFields.data.email && !existingUserEmailAddress
+    validatedFields.data.emailAddress && !existingUserEmailAddress
       ? await prismaClient.userEmailAddress.create({
           data: {
-            emailAddress: validatedFields.data.email,
+            emailAddress: validatedFields.data.emailAddress,
             source: UserEmailAddressSource.USER_ENTERED,
             isVerified: false,
             user: {
@@ -62,13 +63,13 @@ export async function actionUpdateUserProfile(
       })
     : null
   const localUser = parseLocalUserFromCookies()
-  const peopleAnalytics = getServerPeopleAnalytics({ address: authUser.address, localUser })
+  const peopleAnalytics = getServerPeopleAnalytics({ userId: authUser.userId, localUser })
   peopleAnalytics.set({
     ...(validatedFields.data.address
       ? convertAddressToAnalyticsProperties(validatedFields.data.address)
       : {}),
     // https://docs.mixpanel.com/docs/data-structure/user-profiles#reserved-user-properties
-    $email: validatedFields.data.email,
+    $email: validatedFields.data.emailAddress,
     $phone: validatedFields.data.phoneNumber,
     $name: validatedFields.data.fullName,
   })
@@ -84,9 +85,12 @@ export async function actionUpdateUserProfile(
       addressId: address?.id || null,
       primaryUserEmailAddressId: primaryUserEmailAddress?.id || null,
     },
+    include: {
+      primaryUserCryptoAddress: true,
+    },
   })
 
   return {
-    user: updatedUser,
+    user: getClientUser(updatedUser),
   }
 }

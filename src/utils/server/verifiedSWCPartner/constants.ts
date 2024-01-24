@@ -4,6 +4,13 @@ export enum VerifiedSWCPartner {
   COINBASE = 'coinbase',
 }
 
+export type VerifiedSWCPartnerApiResponse<ResultOptions extends string> = {
+  result: ResultOptions
+  resultOptions: ResultOptions[]
+  sessionId: string
+  userId: string
+}
+
 const VERIFIED_SWC_PARTNER_SECRET_COINBASE = requiredEnv(
   process.env.VERIFIED_SWC_PARTNER_SECRET_COINBASE,
   'process.env.VERIFIED_SWC_PARTNER_SECRET_COINBASE',

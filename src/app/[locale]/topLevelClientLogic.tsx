@@ -9,22 +9,20 @@ import {
   embeddedWallet,
   en,
   metamaskWallet,
-  useAddress,
   walletConnect,
 } from '@thirdweb-dev/react'
 
+import { useAuthUser } from '@/hooks/useAuthUser'
 import { LocaleContext } from '@/hooks/useLocale'
 import { SupportedLocale } from '@/intl/locales'
 import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
-import {
-  identifyClientAnalyticsUser,
-  initClientAnalytics,
-  trackClientAnalytic,
-} from '@/utils/web/clientAnalytics'
+import { initClientAnalytics, trackClientAnalytic } from '@/utils/web/clientAnalytics'
 import { bootstrapLocalUser } from '@/utils/web/clientLocalUser'
 import { getUserSessionIdOnClient } from '@/utils/web/clientUserSessionId'
-import { usePathname } from 'next/navigation'
-import { useEffect } from 'react'
+import { identifyUserOnClient } from '@/utils/web/identifyUser'
+import { usePathname, useSearchParams } from 'next/navigation'
+import { Suspense, useEffect } from 'react'
+import { useDetectWipedDatabaseAndLogOutUser } from '@/hooks/useDetectWipedDatabaseAndLogOutUser'
 
 const NEXT_PUBLIC_THIRDWEB_CLIENT_ID = requiredEnv(
   process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID,
@@ -33,21 +31,30 @@ const NEXT_PUBLIC_THIRDWEB_CLIENT_ID = requiredEnv(
 
 const InitialOrchestration = () => {
   const pathname = usePathname()
-  const address = useAddress()
+  const searchParams = useSearchParams()
+  const authUser = useAuthUser()
+  useDetectWipedDatabaseAndLogOutUser()
   // Note, in local dev this component will double render. It doesn't do this after it is built (verify in testing)
   useEffect(() => {
     bootstrapLocalUser()
-    const sessionId = getUserSessionIdOnClient()
     initClientAnalytics()
-    identifyClientAnalyticsUser(sessionId)
+    const sessionId = getUserSessionIdOnClient()
     Sentry.setUser({ id: sessionId, idType: 'session' })
   }, [])
+  const searchParamsUserId = searchParams?.get('userId')
   useEffect(() => {
-    if (address) {
-      Sentry.setUser({ id: address, idType: 'cryptoAddress' })
-      identifyClientAnalyticsUser(address)
+    if (authUser.user || searchParamsUserId) {
+      identifyUserOnClient(authUser.user || { userId: searchParamsUserId! })
     }
-  }, [address])
+    if (authUser.user && searchParamsUserId && authUser.user.userId !== searchParamsUserId) {
+      Sentry.captureMessage('mismatch between authenticated user and userId in search param', {
+        extra: {
+          authUser: authUser.user,
+          searchParamsUserId,
+        },
+      })
+    }
+  }, [authUser.user, searchParamsUserId])
   useEffect(() => {
     if (!pathname) {
       return
@@ -90,7 +97,10 @@ export function TopLevelClientLogic({
           authUrl: '/api/auth',
         }}
       >
-        <InitialOrchestration />
+        {/* https://nextjs.org/docs/messages/missing-suspense-with-csr-bailout */}
+        <Suspense>
+          <InitialOrchestration />
+        </Suspense>
         {children}
       </ThirdwebProvider>
     </LocaleContext.Provider>

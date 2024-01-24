@@ -55,7 +55,7 @@ export function UpdateUserProfileForm({
     resolver: zodResolver(zodUpdateUserProfileFormFields),
     defaultValues: {
       fullName: user.fullName,
-      email: user.primaryUserEmailAddress?.address || '',
+      emailAddress: user.primaryUserEmailAddress?.emailAddress || '',
       phoneNumber: user.phoneNumber,
       isPubliclyVisible: user.isPubliclyVisible,
       address: user.address
@@ -121,7 +121,7 @@ export function UpdateUserProfileForm({
             />
             <FormField
               control={form.control}
-              name="email"
+              name="emailAddress"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Email</FormLabel>
@@ -193,7 +193,7 @@ export function UpdateUserProfileForm({
                 disableHover
                 action={{
                   __client: true,
-                  optInType: UserActionOptInType.SWC_SIGN_UP_AS_MEMBER,
+                  optInType: UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER,
                   actionType: UserActionType.OPT_IN,
                   datetimeCreated: new Date(),
                   nftMint: null,

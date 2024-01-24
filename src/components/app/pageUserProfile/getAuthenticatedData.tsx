@@ -16,7 +16,7 @@ export async function getAuthenticatedData() {
   }
   const user = await prismaClient.user.findFirstOrThrow({
     where: {
-      userCryptoAddresses: { some: { cryptoAddress: authUser.address } },
+      id: authUser.userId,
     },
     include: {
       userMergeAlertUserA: { include: { userB: { include: { primaryUserCryptoAddress: true } } } },

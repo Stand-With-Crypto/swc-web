@@ -6,15 +6,14 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
+import { useAuthUser } from '@/hooks/useAuthUser'
 import { useLocale } from '@/hooks/useLocale'
 import { USER_ACTION_DEEPLINK_MAP } from '@/utils/shared/urlsDeeplinkUserActions'
-import { useUser } from '@thirdweb-dev/react'
-import _ from 'lodash'
 import { useRouter } from 'next/navigation'
 import { useMemo } from 'react'
 
 export function UserActionFormSuccessScreen() {
-  const authUser = useUser()
+  const authUser = useAuthUser()
   const router = useRouter()
   const locale = useLocale()
   const { data } = useApiResponseForUserPerformedUserActionTypes()

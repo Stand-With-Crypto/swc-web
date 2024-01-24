@@ -34,7 +34,7 @@ export async function getMaybeUserAndMethodOfMatch<
   const userWithoutReturnTypes = await prismaClient.user.findFirst({
     where: {
       OR: _.compact([
-        authUser && { userCryptoAddresses: { some: { cryptoAddress: authUser.address } } },
+        authUser && { id: authUser.userId },
         { userSessions: { some: { id: sessionId } } },
       ]),
     },

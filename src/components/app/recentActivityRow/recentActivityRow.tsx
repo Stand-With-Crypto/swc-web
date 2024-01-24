@@ -107,13 +107,6 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
             case UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER:
               return (
                 <>
-                  subscribed to <span className="hidden sm:inline">Stand With Crypto</span>
-                  <span className="sm:hidden">SWC</span> alerts
-                </>
-              )
-            case UserActionOptInType.SWC_SIGN_UP_AS_MEMBER:
-              return (
-                <>
                   joined <span className="hidden sm:inline">Stand With Crypto</span>
                   <span className="sm:hidden">SWC</span>
                 </>

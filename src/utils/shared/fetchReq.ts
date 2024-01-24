@@ -41,7 +41,7 @@ const formatErrorNameWithBody = (val: Awaited<ReturnType<typeof maybeParseBody>>
     case 'html':
       return ' with html response'
     case 'json':
-      return 'with json response'
+      return ' with json response'
     default:
       return ''
   }

@@ -1,10 +1,11 @@
-import { useDisconnect, useUser, useLogout } from '@thirdweb-dev/react'
+import { useDisconnect, useLogout } from '@thirdweb-dev/react'
 import { usePathname, useRouter } from 'next/navigation'
 
+import { useAuthUser } from '@/hooks/useAuthUser'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 
 export function useThirdwebData() {
-  const session = useUser()
+  const session = useAuthUser()
   const disconnect = useDisconnect()
   const { logout } = useLogout()
 

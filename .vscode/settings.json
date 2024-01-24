@@ -21,6 +21,7 @@
   },
   "search.exclude": {
     ".next": true,
+    "./src/bin/localCache": true,
     "**/**.svg": true
   },
   "files.watcherExclude": {},
@@ -34,6 +35,7 @@
   "editor.formatOnSave": true,
   "cSpell.ignorePaths": ["**/*.json"],
   "cSpell.words": [
+    "accum",
     "Actioned",
     "changefreq",
     "clsx",
@@ -50,6 +52,7 @@
     "precheck",
     "pscale",
     "sonner",
+    "standwithcrypto",
     "subpremise",
     "thirdweb",
     "typecheck",

@@ -68,6 +68,7 @@ export const apiUrls = {
   mockTotalDonations: (locale: SupportedLocale) => `/api/mock/total-donations/${locale}`,
   userPerformedUserActionTypes: () => `/api/identified-user/performed-user-action-types`,
   userFullProfileInfo: () => `/api/identified-user/full-profile-info`,
+  detectWipedDatabase: () => `/api/identified-user/detect-wiped-database`,
   dtsiAllPeople: () => `/api/public/dtsi/all-people`,
 }
 
