@@ -13,6 +13,7 @@ import {
   parseLocalUserFromCookies,
 } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
+import { userFullName } from '@/utils/shared/userFullName'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
@@ -112,8 +113,8 @@ export async function actionCreateUserActionEmailCongressperson(input: Input) {
       userActionEmail: {
         create: {
           senderEmail: validatedFields.data.emailAddress,
-          fullName: validatedFields.data.fullName,
-          phoneNumber: validatedFields.data.phoneNumber,
+          firstName: validatedFields.data.firstName,
+          lastName: validatedFields.data.lastName,
           address: {
             connectOrCreate: {
               where: { googlePlaceId: validatedFields.data.address.googlePlaceId },
@@ -147,8 +148,7 @@ export async function actionCreateUserActionEmailCongressperson(input: Input) {
     ...convertAddressToAnalyticsProperties(validatedFields.data.address),
     // https://docs.mixpanel.com/docs/data-structure/user-profiles#reserved-user-properties
     $email: validatedFields.data.emailAddress,
-    $phone: validatedFields.data.phoneNumber,
-    $name: validatedFields.data.fullName,
+    $name: userFullName(validatedFields.data),
   })
 
   // TODO actually trigger the logic to send the email to capital canary. We should be calling some Inngest function here
@@ -168,12 +168,12 @@ async function maybeUpsertUser({
   sessionId: string
   localUser: ServerLocalUser | null
 }): Promise<{ user: UserWithRelations; userState: AnalyticsUserActionUserState }> {
-  const { fullName, emailAddress, phoneNumber, address } = input
+  const { firstName, lastName, emailAddress, address } = input
 
   if (existingUser) {
     const updatePayload: Prisma.UserUpdateInput = {
-      ...(fullName && fullName !== existingUser.fullName && { fullName }),
-      ...(phoneNumber && phoneNumber !== existingUser.phoneNumber && { phoneNumber }),
+      ...(firstName && firstName !== existingUser.firstName && { firstName }),
+      ...(lastName && lastName !== existingUser.lastName && { lastName }),
       ...(!existingUser.hasOptedInToEmails && { hasOptedInToEmail: true }),
       ...(emailAddress &&
         existingUser.userEmailAddresses.every(addr => addr.emailAddress !== emailAddress) && {
@@ -234,8 +234,8 @@ async function maybeUpsertUser({
       hasOptedInToEmails: true,
       hasOptedInToMembership: false,
       hasOptedInToSms: false,
-      fullName,
-      phoneNumber,
+      firstName,
+      lastName,
       userEmailAddresses: {
         create: {
           emailAddress,

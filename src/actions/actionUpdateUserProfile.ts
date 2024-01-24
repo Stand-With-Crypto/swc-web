@@ -9,6 +9,7 @@ import { UserEmailAddressSource } from '@prisma/client'
 import 'server-only'
 import { z } from 'zod'
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
+import { userFullName } from '@/utils/shared/userFullName'
 
 export async function actionUpdateUserProfile(
   data: z.infer<typeof zodUpdateUserProfileFormAction>,
@@ -71,7 +72,7 @@ export async function actionUpdateUserProfile(
     // https://docs.mixpanel.com/docs/data-structure/user-profiles#reserved-user-properties
     $email: validatedFields.data.emailAddress,
     $phone: validatedFields.data.phoneNumber,
-    $name: validatedFields.data.fullName,
+    $name: userFullName(validatedFields.data),
   })
 
   const updatedUser = await prismaClient.user.update({
@@ -79,7 +80,8 @@ export async function actionUpdateUserProfile(
       id: user.id,
     },
     data: {
-      fullName: validatedFields.data.fullName,
+      firstName: validatedFields.data.firstName,
+      lastName: validatedFields.data.lastName,
       phoneNumber: validatedFields.data.phoneNumber,
       isPubliclyVisible: validatedFields.data.isPubliclyVisible,
       addressId: address?.id || null,

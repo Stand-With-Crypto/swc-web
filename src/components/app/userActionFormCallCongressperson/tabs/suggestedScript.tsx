@@ -21,6 +21,7 @@ import { UseTabsReturn } from '@/hooks/useTabs'
 
 import { UserActionFormCallCongresspersonLayout } from './layout'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
+import { userFullName } from '@/utils/shared/userFullName'
 
 export function SuggestedScript({
   user,
@@ -113,7 +114,7 @@ export function SuggestedScript({
             <h2 className="text-base font-semibold">Suggested script</h2>
             <div className="prose rounded-2xl bg-secondary p-5">
               <p>
-                Hi, my name is <strong>{user?.fullName ?? '____'}</strong>
+                Hi, my name is <strong>{userFullName(user ?? {}, { fallback: '____' })}</strong>
               </p>
 
               <p>
