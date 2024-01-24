@@ -24,7 +24,7 @@ export default function GlobalErrorPage({
   return (
     <html lang="en">
       <body className={cn(inter.className, 'flex h-screen content-center items-center')}>
-        <ErrorPagesContent reset={reset} />
+        <ErrorPagesContent reset={reset} skipTracking />
       </body>
     </html>
   )
