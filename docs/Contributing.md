@@ -53,9 +53,9 @@ If you have schema changes/migrations to make, then your Vercel preview branch w
     - Select "Stand With Crypto" as the scope containing the project.
     - Say "y" to the "stand-with-crypto/swc-web" project.
 - Run `vercel env add DATABASE_URL preview [name-of-your-branch]`, and supply your development database URL.
+  - Alternatively you can run `sh ./bin/add_preview_database_url_env.sh`. This will automatically use the `DATABASE_URL` from your local `.env` file.
   - This will update your preview branch's `DATABASE_URL` environment variable in Vercel.
   - Afterwards, you can redeploy your preview branch in Vercel, and your branch should pick up your custom `DATABASE_URL`.
-  - Alternatively you can run `sh ./bin/add_preview_database_url_env.sh`. This will automatically use the `DATABASE_URL` from your local `.env` file.
 - Once your preview branch has been merged to main, please clean up your branch-specific `DATABASE_URL` by running `sh ./bin/remove_preview_database_url_env.sh`.
 
 At any point, if you want an additional sanity check for the existence of your environment variable, you can log into the Vercel website and check for your environment variable.
