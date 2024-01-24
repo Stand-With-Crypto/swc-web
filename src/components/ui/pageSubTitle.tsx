@@ -12,7 +12,7 @@ export const PageSubTitle = React.forwardRef<
   return (
     <Comp
       ref={ref}
-      className={cn('text-center text-sm text-gray-500 lg:text-base', className)}
+      className={cn('text-center text-base text-fontcolor-muted lg:text-xl', className)}
       {...props}
     >
       {withoutBalancer ? children : <Balancer>{children}</Balancer>}
