@@ -12,6 +12,21 @@ const nextConfig = {
       { protocol: 'https', hostname: 'db0prh5pvbqwd.cloudfront.net' },
     ],
   },
+  async redirects() {
+    return [
+      // v1 redirects
+      {
+        source: '/politicians/senate',
+        destination: '/politicians',
+        permanent: true,
+      },
+      {
+        source: '/politicians/house',
+        destination: '/politicians',
+        permanent: true,
+      },
+    ]
+  },
 }
 /** @type {import('@sentry/nextjs').SentryWebpackPluginOptions} */
 const sentryWebpackPluginOptions = {

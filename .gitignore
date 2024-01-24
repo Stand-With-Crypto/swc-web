@@ -47,3 +47,5 @@ src/intl/generated/*
 public/robots.txt
 public/sitemap.xml
 public/sitemap-0.xml
+
+src/bin/localCache
