@@ -155,7 +155,6 @@ export function DataTable<TData extends Person, TValue>({
           return false
         }
       }
-      console.log(globalFilter.role !== x.primaryRole?.roleCategory)
       if (
         globalFilter.role !== ROLE_OPTIONS.ALL &&
         globalFilter.role !== x.primaryRole?.roleCategory
