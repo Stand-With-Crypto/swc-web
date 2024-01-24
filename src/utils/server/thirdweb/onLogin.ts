@@ -15,7 +15,20 @@ import {
 import { NextApiRequest } from 'next'
 import { AuthSessionMetadata } from '@/utils/server/thirdweb/types'
 import { AnalyticProperties } from '@/utils/shared/sharedAnalytics'
+import _ from 'lodash'
 
+/*
+The desired behavior of this function:
+- If there is a user associated with this crypto address, return that user
+- If not, we want to find any existing user in our system that has a session with the same id as the session id that was passed in the headers
+  OR we want to find any existing user in our system that has a verified email address that matches the email address of the crypto address, if the address 
+  is associated with a thirdweb embedded wallet.
+    - This embedded wallet use cases is necessary for the scenario where a user signs up on the coinbase app, and then "signs in" on the SWC website later on.
+      In this case, because we have confidence that coinbase verified the email, and TW verified the email, we can link the users
+- If we find a user using the method above, create the crypto address and link it to the user
+  If we don't find a user, create a new one and link the crypto address to it
+- If there was an embedded wallet email address, link it to the existing user or the newly created user
+*/
 export async function onLogin(address: string, req: NextApiRequest): Promise<AuthSessionMetadata> {
   const localUser = parseLocalUserFromCookiesForPageRouter(req)
   // try and get the existing user linked to this cryptoAddress
@@ -31,8 +44,20 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
     return { userId: existingUser.id }
   }
   const userSessionId = getUserSessionIdOnPageRouter(req)
+  const embeddedWalletEmailAddress = await fetchEmbeddedWalletMetadataFromThirdweb(address)
   existingUser = await prismaClient.user.findFirst({
-    where: { userSessions: { some: { id: userSessionId } } },
+    where: embeddedWalletEmailAddress
+      ? {
+          OR: [
+            { userSessions: { some: { id: userSessionId } } },
+            {
+              userEmailAddresses: {
+                some: { emailAddress: embeddedWalletEmailAddress.email, isVerified: true },
+              },
+            },
+          ],
+        }
+      : { userSessions: { some: { id: userSessionId } } },
   })
   const userCryptoAddress = await prismaClient.userCryptoAddress.create({
     data: {
@@ -51,7 +76,6 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
     },
     include: { user: true },
   })
-  const embeddedWalletEmailAddress = await fetchEmbeddedWalletMetadataFromThirdweb(address)
   let primaryUserEmailAddressId: null | string = null
   /*
     If the authenticated crypto address came from a thirdweb embedded wallet, we want to create a user email address
