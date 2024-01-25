@@ -28,8 +28,24 @@
 
 Cypress.Commands.add('selectFromComboBox', ({ trigger, searchText }) => {
   trigger.click()
-  cy.get('[cmdk-input]').clear().type(searchText, { timeout: 1000 })
-  cy.get('[cmdk-group-items]').first().click()
+  cy.get('[cmdk-input]').then(input => {
+    // clear input and wait for results to clear before typing and selecting the new option
+    if (input.val()) {
+      return cy.get('[cmdk-input]').clear().wait(500).type(searchText)
+    }
+    return cy.get('[cmdk-input]').type(searchText)
+  })
+  // wait for items to appear
+  cy.get('[cmdk-item]')
+  // select the first item
+  cy.get('[cmdk-group-items]')
+    .children()
+    .first()
+    .click()
+    .then(el => {
+      // sometimes we need a double click to select the item
+      el?.trigger('click')
+    })
 })
 
 export {}
