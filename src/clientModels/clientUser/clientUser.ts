@@ -10,7 +10,8 @@ import { User, UserCryptoAddress } from '@prisma/client'
 
 export type ClientUser = ClientModel<
   Pick<User, 'id' | 'isPubliclyVisible'> & {
-    fullName: string | null
+    firstName: string | null
+    lastName: string | null
     primaryUserCryptoAddress: ClientUserCryptoAddress | null
   }
 >
@@ -18,9 +19,10 @@ export type ClientUser = ClientModel<
 export const getClientUser = (
   record: User & { primaryUserCryptoAddress: null | UserCryptoAddress },
 ): ClientUser => {
-  const { fullName, primaryUserCryptoAddress, id, isPubliclyVisible } = record
+  const { firstName, lastName, primaryUserCryptoAddress, id, isPubliclyVisible } = record
   return getClientModel({
-    fullName: isPubliclyVisible ? fullName : null,
+    firstName: isPubliclyVisible ? firstName : null,
+    lastName: isPubliclyVisible ? lastName : null,
     primaryUserCryptoAddress:
       isPubliclyVisible && primaryUserCryptoAddress
         ? getClientUserCryptoAddress(primaryUserCryptoAddress)

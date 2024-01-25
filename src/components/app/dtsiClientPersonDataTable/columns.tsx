@@ -12,6 +12,7 @@ import {
   dtsiPersonFullName,
   dtsiPersonPoliticalAffiliationCategoryDisplayName,
 } from '@/utils/dtsi/dtsiPersonUtils'
+import { convertDTSIStanceScoreToCryptoSupportLanguage } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { getUSStateNameFromStateCode } from '@/utils/shared/usStateUtils'
 import { ColumnDef } from '@tanstack/react-table'
@@ -42,18 +43,22 @@ export const getDTSIClientPersonDataTableColumns = ({
     },
   },
   {
-    accessorKey: 'politicalAffiliationCategory',
+    accessorKey: 'swcStanceScore',
+    accessorFn: row => row.manuallyOverriddenStanceScore || row.computedStanceScore,
     header: ({ column }) => {
-      return <SortableHeader column={column}>Party</SortableHeader>
+      return (
+        <SortableHeader column={column}>
+          Stance <span className="hidden md:inline">on crypto</span>
+        </SortableHeader>
+      )
     },
     cell: ({ row }) => (
-      <>
-        {row.original.politicalAffiliationCategory
-          ? dtsiPersonPoliticalAffiliationCategoryDisplayName(
-              row.original.politicalAffiliationCategory,
-            )
-          : '-'}
-      </>
+      <div className="flex items-center gap-2">
+        <DTSIFormattedLetterGrade size={30} person={row.original} />
+        <span className="hidden md:inline">
+          {convertDTSIStanceScoreToCryptoSupportLanguage(row.original)}
+        </span>
+      </div>
     ),
   },
   {
@@ -73,14 +78,6 @@ export const getDTSIClientPersonDataTableColumns = ({
     ),
   },
   {
-    accessorKey: 'swcStanceScore',
-    accessorFn: row => row.manuallyOverriddenStanceScore || row.computedStanceScore,
-    header: ({ column }) => {
-      return <SortableHeader column={column}>Stance on crypto</SortableHeader>
-    },
-    cell: ({ row }) => <DTSIFormattedLetterGrade size={30} person={row.original} />,
-  },
-  {
     accessorKey: 'primaryStateCodeWithDisplayName',
     accessorFn: row =>
       row.primaryRole?.primaryState
@@ -95,5 +92,20 @@ export const getDTSIClientPersonDataTableColumns = ({
       row.original.primaryRole?.primaryState
         ? getUSStateNameFromStateCode(row.original.primaryRole.primaryState)
         : '-',
+  },
+  {
+    accessorKey: 'politicalAffiliationCategory',
+    header: ({ column }) => {
+      return <SortableHeader column={column}>Party</SortableHeader>
+    },
+    cell: ({ row }) => (
+      <>
+        {row.original.politicalAffiliationCategory
+          ? dtsiPersonPoliticalAffiliationCategoryDisplayName(
+              row.original.politicalAffiliationCategory,
+            )
+          : '-'}
+      </>
+    ),
   },
 ]

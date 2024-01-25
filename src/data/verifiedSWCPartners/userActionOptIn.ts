@@ -15,6 +15,7 @@ import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/local
 import { getLogger } from '@/utils/shared/logger'
 import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
+import { zodFirstName, zodLastName } from '@/validation/fields/zodName'
 import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
 import {
   Prisma,
@@ -33,7 +34,8 @@ export const zodVerifiedSWCPartnersUserActionOptIn = z.object({
   optInType: z.nativeEnum(UserActionOptInType),
   campaignName: z.string(),
   isVerifiedEmailAddress: z.boolean(),
-  fullName: z.string().trim().optional(),
+  firstName: zodFirstName.optional(),
+  lastName: zodLastName.optional(),
   phoneNumber: zodPhoneNumber.optional().transform(str => str && normalizePhoneNumber(str)),
   hasOptedInToReceiveSMSFromSWC: z.boolean().optional(),
   hasOptedInToSms: z.boolean().optional(),
@@ -158,7 +160,8 @@ async function maybeUpsertUser({
     isVerifiedEmailAddress,
     campaignName,
     partner,
-    fullName,
+    firstName,
+    lastName,
     phoneNumber,
     hasOptedInToMembership,
     hasOptedInToSms,
@@ -166,7 +169,8 @@ async function maybeUpsertUser({
 
   if (existingUser) {
     const updatePayload: Prisma.UserUpdateInput = {
-      ...(fullName && !existingUser.fullName && { fullName }),
+      ...(firstName && !existingUser.firstName && { firstName }),
+      ...(lastName && !existingUser.lastName && { lastName }),
       ...(phoneNumber && !existingUser.phoneNumber && { phoneNumber }),
       ...(!existingUser.hasOptedInToEmails && { hasOptedInToEmail: true }),
       ...(hasOptedInToMembership &&
@@ -227,8 +231,9 @@ async function maybeUpsertUser({
         create: {},
       },
       isPubliclyVisible: false,
-      fullName: fullName,
-      phoneNumber: phoneNumber,
+      firstName,
+      lastName,
+      phoneNumber,
       hasOptedInToEmails: true,
       hasOptedInToMembership: hasOptedInToMembership || false,
       hasOptedInToSms: hasOptedInToSms || false,

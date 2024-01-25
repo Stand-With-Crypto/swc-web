@@ -51,13 +51,13 @@ const getDefaultValues = ({
 }: {
   user: GetUserFullProfileInfoResponse['user']
   dtsiSlug: string | undefined
-}) => {
+}): Partial<FormValues> => {
   if (user) {
     return {
       campaignName: UserActionEmailCampaignName.DEFAULT,
-      fullName: user.fullName,
+      firstName: user.firstName,
+      lastName: user.lastName,
       emailAddress: user.primaryUserEmailAddress?.emailAddress || '',
-      phoneNumber: user.phoneNumber,
       message: getDefaultText(),
       address: user.address
         ? {
@@ -69,9 +69,9 @@ const getDefaultValues = ({
   }
   return {
     campaignName: UserActionEmailCampaignName.DEFAULT,
-    fullName: '',
+    firstName: '',
+    lastName: '',
     emailAddress: '',
-    phoneNumber: '',
     message: getDefaultText(),
     address: undefined,
     dtsiSlug,
@@ -148,12 +148,25 @@ export function UserActionFormEmailCongressperson({
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <FormField
                 control={form.control}
-                name="fullName"
+                name="firstName"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Name</FormLabel>
+                    <FormLabel>First name</FormLabel>
                     <FormControl>
-                      <Input placeholder="Your name" {...field} />
+                      <Input placeholder="Your first name" {...field} />
+                    </FormControl>
+                    <FormErrorMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="lastName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Last name</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Your last name" {...field} />
                     </FormControl>
                     <FormErrorMessage />
                   </FormItem>
@@ -167,19 +180,6 @@ export function UserActionFormEmailCongressperson({
                     <FormLabel>Email</FormLabel>
                     <FormControl>
                       <Input placeholder="Your email" {...field} />
-                    </FormControl>
-                    <FormErrorMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="phoneNumber"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Phone number</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Your phone number" {...field} />
                     </FormControl>
                     <FormErrorMessage />
                   </FormItem>

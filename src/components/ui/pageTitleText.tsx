@@ -5,9 +5,9 @@ import Balancer from 'react-wrap-balancer'
 
 const titleVariantsConfig = {
   size: {
-    lg: twNoop('text-3xl md:text-4xl lg:text-5xl'),
-    md: twNoop('text-2xl md:text-3xl lg:text-4xl'),
-    sm: twNoop('text-lg md:text-xl lg:text-2xl'),
+    lg: twNoop('text-4xl md:text-5xl lg:text-6xl'),
+    md: twNoop('text-3xl md:text-4xl lg:text-5xl'),
+    sm: twNoop('text-xl md:text-2xl lg:text-3xl'),
   },
 }
 

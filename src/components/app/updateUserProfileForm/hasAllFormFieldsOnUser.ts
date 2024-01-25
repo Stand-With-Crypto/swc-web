@@ -4,5 +4,11 @@ import { SensitiveDataClientUser } from '@/clientModels/clientUser/sensitiveData
 export const hasAllFormFieldsOnUserForUpdateUserProfileForm = (
   user: SensitiveDataClientUser & { address: ClientAddress | null },
 ) => {
-  return Boolean(user.fullName && user.primaryUserEmailAddress && user.phoneNumber && user.address)
+  return Boolean(
+    user.firstName &&
+      user.lastName &&
+      user.primaryUserEmailAddress &&
+      user.phoneNumber &&
+      user.address,
+  )
 }

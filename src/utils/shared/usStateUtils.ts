@@ -1,4 +1,4 @@
-const US_STATE_CODE_TO_DISPLAY_NAME_MAP = {
+export const US_STATE_CODE_TO_DISPLAY_NAME_MAP = {
   AL: 'Alabama',
   AK: 'Alaska',
   AZ: 'Arizona',
