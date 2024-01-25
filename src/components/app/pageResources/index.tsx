@@ -1,3 +1,4 @@
+import { UserActionRowCTAsListWithApi } from '@/components/app/userActionRowCTA/userActionRowCTAsListWithApi'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 
@@ -31,6 +32,14 @@ export function PageResources() {
         <p>
           Learn more about the pending bills and resolutions that can shape the industry’s future.
         </p>
+      </section>
+
+      <section className="mb-16 space-y-4 text-center">
+        <PageTitle as="h2" size="sm">
+          Get involved
+        </PageTitle>
+        <p>The future of crypto is in your hands. Here’s how you can help.</p>
+        <UserActionRowCTAsListWithApi />
       </section>
     </div>
   )
