@@ -15,6 +15,7 @@ Sentry.init({
   dsn,
   integrations: [new ExtraErrorData({ depth: 10 })],
   tracesSampleRate: NEXT_PUBLIC_ENVIRONMENT === 'production' ? 0.001 : 1.0,
+  normalizeDepth: 10,
 
   // Setting this option to true will print useful information to the console while you're setting up Sentry.
   debug: false,
