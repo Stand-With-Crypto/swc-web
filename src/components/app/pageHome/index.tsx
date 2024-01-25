@@ -46,9 +46,11 @@ export function PageHome({
             Congress is writing the rules as we speak - but they won't vote YES until they've heard
             from you.
           </PageSubTitle>
-          <UserActionFormOptInSWCDialog>
-            <Button size="lg">Join the fight</Button>
-          </UserActionFormOptInSWCDialog>
+          <Button size="lg" asChild>
+            <InternalLink href={urls.login()} underlineOnHover={false}>
+              Join the fight
+            </InternalLink>
+          </Button>
         </div>
         <div className="order-0 md:container lg:order-1 lg:px-0">
           <Dialog>

@@ -129,11 +129,18 @@ export async function Navbar({ locale }: { locale: SupportedLocale }) {
         <div className="hidden md:flex">
           {/* TODO actually implement donate button */}
           <Button className="mr-3" asChild>
-            <InternalLink href={urls.donate()}>Donate</InternalLink>
+            <InternalLink underlineOnHover={false} href={urls.donate()}>
+              Donate
+            </InternalLink>
           </Button>
           <NavbarSessionButton
             messages={generateClientComponentMessages(intl, navbarSessionButtonMessages)}
           />
+          <Button asChild>
+            <InternalLink underlineOnHover={false} href={urls.login()}>
+              Login
+            </InternalLink>
+          </Button>
         </div>
       </nav>
     </>
