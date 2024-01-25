@@ -15,21 +15,20 @@ it('page - politicians interactions', () => {
   cy.contains('Person required to submit')
 
   // validate invalid address
-  cy.get('input[placeholder="Your full address"]').click()
-  cy.get('input[placeholder="Type your address..."]').type('new york')
-  cy.contains('New York, NY, USA').click()
+  cy.selectFromComboBox({
+    trigger: cy.get('input[placeholder="Your full address"]'),
+    searchText: 'new york',
+  })
   cy.contains('No available representative')
 
   // validate success
   cy.get('input[placeholder="Your first name"]').type('John')
   cy.get('input[placeholder="Your last name"]').type('Doe')
   cy.get('input[placeholder="Your email"]').type('johndoe@gmail.com')
-  cy.get('input[placeholder="Your full address"]').click()
-  cy.get('input[placeholder="Type your address..."]')
-    .clear()
-    .type('350 Fifth Avenue New York, NY 10118')
-    .wait(1000)
-  cy.contains('350 Fifth Avenue, New York, NY 10118, USA').click()
+  cy.selectFromComboBox({
+    trigger: cy.get('input[placeholder="Your full address"]'),
+    searchText: '350 Fifth Avenue New York, NY 10118',
+  })
   cy.contains('Your representative is Jerry Nadler')
   cy.get('textarea').type('test message')
   cy.get('button[type="submit"]').click()
