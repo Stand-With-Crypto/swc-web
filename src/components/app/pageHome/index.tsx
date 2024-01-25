@@ -37,15 +37,15 @@ export function PageHome({
   return (
     <>
       <section className="grid-fl mb-6 grid grid-cols-1 items-center gap-4 lg:container lg:grid-cols-2">
-        <div className="lg:order-0 container order-1 space-y-6 text-center lg:max-w-[405px] lg:px-0 lg:text-left">
-          <h1 className={'text-3xl font-bold md:text-4xl lg:text-5xl'}>
+        <div className="lg:order-0 container order-1 space-y-6 text-center lg:px-0 lg:text-left">
+          <PageTitle className={'text-left'} withoutBalancer>
             If you care about crypto, it's time to prove it
-          </h1>
-          <h2 className="mx-auto max-w-xl text-sm text-gray-500 lg:text-base">
+          </PageTitle>
+          <PageSubTitle className="max-w-xl text-left" withoutBalancer>
             52 million Americans own crypto. And yet, crypto's future in America remains uncertain.
             Congress is writing the rules as we speak - but they won't vote YES until they've heard
             from you.
-          </h2>
+          </PageSubTitle>
           <UserActionFormOptInSWCDialog>
             <Button size="lg">Join the fight</Button>
           </UserActionFormOptInSWCDialog>
@@ -152,7 +152,7 @@ export function PageHome({
           ))}
         </section>
         <section className="mb-16 text-center md:mb-24">
-          <PageTitle as="h3" className="mb-7">
+          <PageTitle as="h3" size="md" className="mb-7">
             Our mission
           </PageTitle>
           <PageSubTitle as="h4" className="mb-7">
@@ -169,7 +169,9 @@ export function PageHome({
           </div>
         </section>
         <section className="mb-16 space-y-7 md:mb-24">
-          <PageTitle as="h3">Our community</PageTitle>
+          <PageTitle as="h3" size="md">
+            Our community
+          </PageTitle>
           <PageSubTitle as="h4">
             See how our community is taking a stand to safeguard the future of crypto in America.
           </PageSubTitle>
@@ -185,14 +187,18 @@ export function PageHome({
           <div></div>
         </section>
         <section className="mb-16 space-y-7 md:mb-24">
-          <PageTitle as="h3">Get involved</PageTitle>
+          <PageTitle as="h3" size="md">
+            Get involved
+          </PageTitle>
           <PageSubTitle as="h4">
             The future of crypto is in your hands. Here's how you can help.
           </PageSubTitle>
           <UserActionRowCTAsListWithApi />
         </section>
         <section className="mb-16 space-y-7 md:mb-24">
-          <PageTitle as="h3">Where politicians stand on crypto</PageTitle>
+          <PageTitle as="h3" size="md">
+            Where politicians stand on crypto
+          </PageTitle>
           <PageSubTitle as="h4">
             Ask your politician to be pro-crypto. Here's where they stand now.
           </PageSubTitle>

@@ -81,7 +81,7 @@ export const SensitiveDataUserAvatar: React.FC<
   {
     user: Pick<
       SensitiveDataClientUserWithENSData,
-      'fullName' | 'isPubliclyVisible' | 'primaryUserCryptoAddress'
+      'firstName' | 'lastName' | 'isPubliclyVisible' | 'primaryUserCryptoAddress'
     >
   } & Pick<ImageAvatarProps, 'size' | 'className'>
 > = ({ user, size, ...props }) => {

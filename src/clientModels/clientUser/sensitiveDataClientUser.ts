@@ -12,7 +12,13 @@ import { User, UserCryptoAddress, UserEmailAddress } from '@prisma/client'
 export type SensitiveDataClientUser = ClientModel<
   Pick<
     User,
-    'id' | 'datetimeCreated' | 'datetimeUpdated' | 'isPubliclyVisible' | 'fullName' | 'phoneNumber'
+    | 'id'
+    | 'datetimeCreated'
+    | 'datetimeUpdated'
+    | 'isPubliclyVisible'
+    | 'firstName'
+    | 'lastName'
+    | 'phoneNumber'
   > & {
     primaryUserCryptoAddress: ClientUserCryptoAddress | null
     primaryUserEmailAddress: { emailAddress: string } | null
@@ -26,7 +32,8 @@ export const getSensitiveDataClientUser = (
   },
 ): SensitiveDataClientUser => {
   const {
-    fullName,
+    firstName,
+    lastName,
     primaryUserCryptoAddress,
     id,
     datetimeCreated,
@@ -37,7 +44,8 @@ export const getSensitiveDataClientUser = (
   } = record
 
   return getClientModel({
-    fullName,
+    firstName,
+    lastName,
     primaryUserEmailAddress: primaryUserEmailAddress
       ? {
           emailAddress: primaryUserEmailAddress.emailAddress,

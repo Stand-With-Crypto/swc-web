@@ -138,7 +138,7 @@ async function seed() {
       // we want all known ENS addresses to not have a full name so we always display their ENS
       // in the testing environment. This lets us verify our onchain integrations are working easily
       const shouldUseInitialCryptoAddress =
-        initialCryptoAddresses.length && !selectedUser.fullName && selectedUser.isPubliclyVisible
+        initialCryptoAddresses.length && !selectedUser.firstName && selectedUser.isPubliclyVisible
       return {
         ...mockUserCryptoAddress(),
         embeddedWalletUserEmailAddressId:
