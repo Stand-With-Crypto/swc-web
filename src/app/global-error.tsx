@@ -6,7 +6,6 @@ import * as Sentry from '@sentry/nextjs'
 import { Inter } from 'next/font/google'
 import { useEffect } from 'react'
 
-// TODO replace with font we want
 const inter = Inter({ subsets: ['latin'] })
 export const dynamic = 'error'
 

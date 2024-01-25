@@ -25,7 +25,6 @@ export function useGetAllPeople() {
       .catch(catchUnexpectedServerErrorAndTriggerToast),
   )
 }
-// TODO figure out what we want this to look like on mobile
 export function DTSIClientPersonDataTable({
   locale,
   initialData,

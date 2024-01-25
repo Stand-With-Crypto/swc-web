@@ -32,7 +32,6 @@ function DefaultUserAvatar({ size, ...props }: Pick<ImageAvatarProps, 'size' | '
   )
 }
 
-// TODO support ENS images and person name
 export const UserAvatar: React.FC<
   {
     user: Pick<ClientUserWithENSData, 'isPubliclyVisible' | 'primaryUserCryptoAddress'>

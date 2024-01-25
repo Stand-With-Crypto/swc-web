@@ -181,10 +181,6 @@ model UserEmailAddress {
   @@map("user_email_address")
 }
 
-// enum Web3AddressCustodian {
-//   SELF_CUSTODY
-//   THIRDWEB
-// }
 
 enum SupportedUserCryptoNetwork {
   ETH
@@ -195,8 +191,6 @@ model UserCryptoAddress {
   id                               String                     @id @default(uuid())
   cryptoNetwork                    SupportedUserCryptoNetwork @default(ETH) @map("crypto_network")
   cryptoAddress                    String                     @map("crypto_address")
-  // TODO figure out how to detect this via thirdweb sdk and then add it to the model
-  // initialCustodian Web3AddressCustodian
   datetimeUpdated                  DateTime                   @updatedAt @map("datetime_updated")
   datetimeCreated                  DateTime                   @default(now()) @map("datetime_created")
   userId                           String                     @unique @map("user_id")
@@ -298,7 +292,6 @@ model UserActionEmailRecipient {
 model UserActionCall {
   id                   String     @id @default(uuid())
   userAction           UserAction @relation(fields: [id], references: [id])
-  // TODO determine if these need to be nullable in the future
   recipientDtsiSlug    String     @map("recipient_dtsi_slug")
   recipientPhoneNumber String     @map("recipient_phone_number")
   address              Address    @relation(fields: [addressId], references: [id])

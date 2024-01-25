@@ -51,7 +51,7 @@ export async function actionConfirmUserMergeAlert(data: z.infer<typeof schema>) 
     throw new Error('User already confirmed merge and is waiting other confirmation')
   }
 
-  // TODO add analytics
+  // Post go-live TODO add analytics
 
   userMergeAlert = await prismaClient.userMergeAlert.update({
     where: { id: userMergeAlertId },

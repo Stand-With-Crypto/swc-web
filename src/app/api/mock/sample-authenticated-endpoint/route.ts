@@ -1,12 +1,9 @@
-// TODO migrate to app router once thirdweb supports it
-
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
 import { NextRequest, NextResponse } from 'next/server'
 import 'server-only'
 
-// TODO move to server action
 export async function POST(_request: NextRequest) {
   const authUser = await appRouterGetAuthUser()
   if (!authUser) {
