@@ -80,35 +80,33 @@ it('formats the request correctly', () => {
   const formattedRequest = formatCapitolCanaryAdvocateCreationRequest(payload)
 
   expect(formattedRequest).toMatchInlineSnapshot(`
-    {
-      "address1": "78231 Macejkovic Row",
-      "address2": "Suite 662",
-      "campaigns": [
-        137795,
-      ],
-      "city": "Considinefurt",
-      "country": "AM",
-      "email": "Hellen_Durgan75@yahoo.com",
-      "emailOptin": 1,
-      "emailOptout": 0,
-      "firstname": "John",
-      "lastname": "Doe",
-      "p2aSource": "source",
-      "phone": "1234567890",
-      "smsOptin": 1,
-      "smsOptinConfirmed": 0,
-      "smsOptout": 0,
-      "state": "Maryland",
-      "tags": [
-        "tag1",
-        "tag2",
-      ],
-      "utm_campaign": "utmCampaign",
-      "utm_content": "utmContent",
-      "utm_medium": "utmMedium",
-      "utm_source": "utmSource",
-      "utm_term": "utmTerm",
-      "zip5": "14511",
-    }
-  `)
+{
+  "address1": "78231 Macejkovic Row",
+  "address2": "Suite 662",
+  "campaigns": [
+    137795,
+  ],
+  "city": "Considinefurt",
+  "country": "AM",
+  "email": "Hellen_Durgan75@yahoo.com",
+  "emailOptin": 1,
+  "emailOptout": 0,
+  "p2aSource": "source",
+  "phone": "1234567890",
+  "smsOptin": 1,
+  "smsOptinConfirmed": 0,
+  "smsOptout": 0,
+  "state": "Maryland",
+  "tags": [
+    "tag1",
+    "tag2",
+  ],
+  "utm_campaign": "utmCampaign",
+  "utm_content": "utmContent",
+  "utm_medium": "utmMedium",
+  "utm_source": "utmSource",
+  "utm_term": "utmTerm",
+  "zip5": "14511",
+}
+`)
 })
