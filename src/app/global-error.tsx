@@ -18,7 +18,7 @@ export default function GlobalErrorPage({
   reset: () => void
 }) {
   useEffect(() => {
-    logger.info(`Global Error Page rendered with:`, error)
+    logger.info('Global Error Page rendered with:', error)
     Sentry.captureException(error)
     Sentry.captureException(new Error('Global Error Page Displayed'))
   }, [error])
