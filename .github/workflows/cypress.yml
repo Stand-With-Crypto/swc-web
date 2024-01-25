@@ -1,10 +1,16 @@
 name: Cypress Tests
 on:
-  pull_request:
-    types: ['opened', 'edited', 'reopened', 'synchronize', 'ready_for_review']
+  push:
+    branches:
+      - cypress-setup
+# Ideally we run this on every PR. Currently the CI flow wipes the testing database to ensure that each run is deterministic
+# To support per-branch testing, we need to invest the eng effort in allowing someone to point thier branch to their local db
+# on:
+#   pull_request:
+#     types: ['opened', 'edited', 'reopened', 'synchronize', 'ready_for_review']
 jobs:
   cypress-run:
-    if: github.event.pull_request.draft == false
+    # if: github.event.pull_request.draft == false
     environment: preview
     runs-on: ubuntu-latest-8core
     strategy:
