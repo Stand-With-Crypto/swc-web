@@ -51,7 +51,6 @@ export const emailRepsViaCapitolCanaryWithInngest = inngest.createFunction(
           )
         }
         return {
-          event,
           ...createAdvocateResp,
         }
       },
@@ -79,7 +78,6 @@ export const emailRepsViaCapitolCanaryWithInngest = inngest.createFunction(
           )
         }
         return {
-          event,
           ...emailRepResp,
         }
       },

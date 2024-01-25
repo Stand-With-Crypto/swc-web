@@ -43,7 +43,6 @@ export const createAdvocateInCapitolCanaryWithInngest = inngest.createFunction(
           )
         }
         return {
-          event,
           ...createAdvocateResp,
         }
       },
