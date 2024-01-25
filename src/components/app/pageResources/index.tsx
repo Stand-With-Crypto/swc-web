@@ -16,6 +16,22 @@ export function PageResources() {
           US isn’t sidelined from the future financial system.
         </PageSubTitle>
       </section>
+
+      <section className="mb-16 space-y-4 text-center">
+        <PageTitle as="h2" size="sm">
+          Events
+        </PageTitle>
+        <p>Learn more about recent and upcoming events to mobilize the crypto community.</p>
+      </section>
+
+      <section className="mb-16 space-y-4 text-center">
+        <PageTitle as="h2" size="sm">
+          Policy
+        </PageTitle>
+        <p>
+          Learn more about the pending bills and resolutions that can shape the industry’s future.
+        </p>
+      </section>
     </div>
   )
 }
