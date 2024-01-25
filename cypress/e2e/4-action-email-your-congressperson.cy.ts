@@ -19,7 +19,7 @@ it('page - politicians interactions', () => {
     trigger: cy.get('input[placeholder="Your full address"]'),
     searchText: 'new york',
   })
-  cy.contains('No available representative')
+  cy.contains('Please enter a specific address that includes street-level information')
 
   // validate success
   cy.get('input[placeholder="Your first name"]').type('John')

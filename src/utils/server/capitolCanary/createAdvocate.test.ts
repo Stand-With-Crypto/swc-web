@@ -1,14 +1,13 @@
+import { mockAddress } from '@/mocks/models/mockAddress'
+import { mockUser } from '@/mocks/models/mockUser'
+import { mockUserEmailAddress } from '@/mocks/models/mockUserEmailAddress'
 import { CapitolCanaryCampaignId } from '@/utils/server/capitolCanary/campaigns'
 import {
   CreateAdvocateInCapitolCanaryPayloadRequirements,
   formatCapitolCanaryAdvocateCreationRequest,
 } from '@/utils/server/capitolCanary/createAdvocate'
-import { Address, User, UserEmailAddress } from '@prisma/client'
-import { expect } from '@jest/globals'
-import { mockUser } from '@/mocks/models/mockUser'
-import { mockAddress } from '@/mocks/models/mockAddress'
-import { mockUserEmailAddress } from '@/mocks/models/mockUserEmailAddress'
 import { faker } from '@faker-js/faker'
+import { expect } from '@jest/globals'
 
 it('formats the request correctly', () => {
   faker.seed(1)

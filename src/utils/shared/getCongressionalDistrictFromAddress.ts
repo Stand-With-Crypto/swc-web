@@ -15,7 +15,7 @@ const findCongressionalDistrictString = (response: GoogleCivicInfoResponse, addr
       tags: { domain: 'getCongressionalDistrictFromAddress' },
       extra: { response, address },
     })
-    return { notFoundReason: 'UNEXPECTED_ERROR' as const }
+    return { notFoundReason: 'NOT_SPECIFIC_ENOUGH' as const }
   }
   if (district.length > 1) {
     Sentry.captureMessage('more than one district returned for address', {

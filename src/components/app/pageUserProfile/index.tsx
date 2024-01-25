@@ -15,7 +15,6 @@ import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { getSensitiveDataUserDisplayName } from '@/utils/web/userUtils'
 import { UserActionType } from '@prisma/client'
 import _ from 'lodash'
-import { MergeAlertCTA } from './mergeAlertCTA'
 
 export function PageUserProfile({
   params,

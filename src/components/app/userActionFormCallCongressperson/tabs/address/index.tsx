@@ -1,36 +1,38 @@
 'use client'
 
+import { zodResolver } from '@hookform/resolvers/zod'
 import React from 'react'
 import { useForm, useWatch } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
 import useSWR from 'swr'
 
-import { Button } from '@/components/ui/button'
-import { TabNames } from '@/components/app/userActionFormCallCongressperson/userActionFormCallCongressperson.types'
+import type { UserActionFormCallCongresspersonProps } from '@/components/app/userActionFormCallCongressperson'
 import { UserActionFormCallCongresspersonLayout } from '@/components/app/userActionFormCallCongressperson/tabs/layout'
+import { TabNames } from '@/components/app/userActionFormCallCongressperson/userActionFormCallCongressperson.types'
+import { Button } from '@/components/ui/button'
 import {
   Form,
-  FormItem,
-  FormLabel,
   FormControl,
   FormErrorMessage,
   FormField,
+  FormItem,
+  FormLabel,
 } from '@/components/ui/form'
 import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
-import { trackFormSubmissionSyncErrors } from '@/utils/web/formUtils'
-import { getDTSIPeopleFromAddress } from '@/hooks/useGetDTSIPeopleFromAddress'
-import type { UserActionFormCallCongresspersonProps } from '@/components/app/userActionFormCallCongressperson'
 import { InternalLink } from '@/components/ui/link'
+import {
+  formatGetDTSIPeopleFromAddressNotFoundReason,
+  getDTSIPeopleFromAddress,
+} from '@/hooks/useGetDTSIPeopleFromAddress'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { getGoogleCivicDataFromAddress } from '@/utils/shared/googleCivicInfo'
-import { GENERIC_ERROR_TITLE } from '@/utils/web/errorUtils'
+import { trackFormSubmissionSyncErrors } from '@/utils/web/formUtils'
 import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
 
 import {
-  findRepresentativeCallFormValidationSchema,
-  type FindRepresentativeCallFormValues,
-  getDefaultValues,
   FORM_NAME,
+  findRepresentativeCallFormValidationSchema,
+  getDefaultValues,
+  type FindRepresentativeCallFormValues,
 } from './formConfig'
 
 interface AddressProps
@@ -52,22 +54,6 @@ export function Address({ user, onFindCongressperson, congressPersonData, gotoTa
   const { data: liveCongressPersonData, isLoading: isLoadingLiveCongressPersonData } =
     useCongresspersonData({ address })
 
-  const handleNotFoundCongressperson = React.useCallback(
-    (notFoundReason: string) => {
-      let message = GENERIC_ERROR_TITLE
-
-      if (notFoundReason === 'MISSING_FROM_DTSI') {
-        message = 'No available representative'
-      }
-
-      form.setError('address', {
-        type: 'manual',
-        message,
-      })
-    },
-    [form],
-  )
-
   React.useEffect(() => {
     if (!liveCongressPersonData) {
       return
@@ -75,12 +61,15 @@ export function Address({ user, onFindCongressperson, congressPersonData, gotoTa
 
     const { dtsiPerson } = liveCongressPersonData
     if (!dtsiPerson || 'notFoundReason' in dtsiPerson) {
-      const { notFoundReason } = dtsiPerson
-      return handleNotFoundCongressperson(notFoundReason)
+      form.setError('address', {
+        type: 'manual',
+        message: formatGetDTSIPeopleFromAddressNotFoundReason(dtsiPerson),
+      })
+      return
     }
 
     onFindCongressperson({ ...liveCongressPersonData, dtsiPerson })
-  }, [handleNotFoundCongressperson, liveCongressPersonData, onFindCongressperson])
+  }, [liveCongressPersonData, onFindCongressperson, form])
 
   return (
     <UserActionFormCallCongresspersonLayout onBack={() => gotoTab(TabNames.INTRO)}>
