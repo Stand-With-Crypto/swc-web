@@ -39,6 +39,6 @@ export async function getDTSIPeopleFromAddress(address: string) {
 export function useGetDTSIPeopleFromAddress(address: string) {
   return useSWR<UseGetDTSIPeopleFromAddressResponse>(
     address ? `useGetDTSIPeopleFromAddress-${address}` : null,
-    getDTSIPeopleFromAddress,
+    () => getDTSIPeopleFromAddress(address),
   )
 }
