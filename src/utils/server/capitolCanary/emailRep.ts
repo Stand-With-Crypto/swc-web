@@ -1,17 +1,5 @@
 import { EmailRepViaCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
-import { FetchReqError, fetchReq } from '@/utils/shared/fetchReq'
-import { requiredEnv } from '@/utils/shared/requiredEnv'
-import * as Sentry from '@sentry/nextjs'
-
-const CAPITOL_CANARY_API_KEY = requiredEnv(
-  process.env.CAPITOL_CANARY_API_KEY,
-  'process.env.CAPITOL_CANARY_API_KEY',
-)
-
-const CAPITOL_CANARY_API_SECRET = requiredEnv(
-  process.env.CAPITOL_CANARY_API_SECRET,
-  'process.env.CAPITOL_CANARY_API_SECRET',
-)
+import { sendCapitolCanaryRequest } from '@/utils/server/capitolCanary/sendCapitolCanaryRequest'
 
 const CAPITOL_CANARY_EMAIL_REP_API_URL = 'https://api.phone2action.com/2.0/connections'
 
@@ -86,37 +74,8 @@ export function formatCapitolCanaryEmailRepRequest(
 }
 
 export async function emailRepViaCapitolCanary(request: EmailRepViaCapitolCanaryRequest) {
-  try {
-    const httpResp = await fetchReq(CAPITOL_CANARY_EMAIL_REP_API_URL, {
-      method: 'POST',
-      headers: {
-        Authorization: `Basic ${btoa(`${CAPITOL_CANARY_API_KEY}:${CAPITOL_CANARY_API_SECRET}`)}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(request),
-    })
-    return (await httpResp.json()) as EmailRepViaCapitolCanaryResponse
-  } catch (error) {
-    Sentry.captureException(error, {
-      level: 'error',
-      extra: {
-        advocate: request.advocateid,
-        campaign: request.campaignid,
-      },
-      tags: {
-        domain: 'emailRepViaCapitolCanary',
-        advocate: request.advocateid,
-        campaigns: request.campaignid,
-      },
-    })
-    // Return the error body if it's a 4xx error.
-    if (
-      error instanceof FetchReqError &&
-      error.response?.status >= 400 &&
-      error.response?.status < 500
-    ) {
-      return JSON.parse(error.body as string) as EmailRepViaCapitolCanaryResponse
-    }
-    throw error
-  }
+  return await sendCapitolCanaryRequest<
+    EmailRepViaCapitolCanaryRequest,
+    EmailRepViaCapitolCanaryResponse
+  >(request, 'POST', CAPITOL_CANARY_EMAIL_REP_API_URL)
 }
