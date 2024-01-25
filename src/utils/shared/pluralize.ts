@@ -1,11 +1,17 @@
 export function pluralize({
   count,
-  noun,
-  suffix = 's',
+  singular,
+  plural,
 }: {
   count: number
-  noun: string
-  suffix?: string
+  singular: string
+  plural?: string
 }) {
-  return `${noun}${count !== 1 ? suffix : ''}`
+  if (count === 1) {
+    return singular
+  }
+  if (plural) {
+    return plural
+  }
+  return `${singular}s`
 }

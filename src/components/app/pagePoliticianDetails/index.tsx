@@ -128,7 +128,7 @@ export function PagePoliticianDetails({
                 <h4 className="text-fontcolor-muted">
                   {person.firstNickname || person.firstName} has made{' '}
                   <FormattedNumber amount={stances.length} locale={locale} />{' '}
-                  {pluralize({ noun: 'stance', count: stances.length })} about crypto.
+                  {pluralize({ singular: 'stance', count: stances.length })} about crypto.
                 </h4>
               </div>
             </TooltipTrigger>
