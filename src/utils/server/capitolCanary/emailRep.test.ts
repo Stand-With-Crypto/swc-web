@@ -5,6 +5,7 @@ import { mockAddress } from '@/mocks/models/mockAddress'
 import { mockUserEmailAddress } from '@/mocks/models/mockUserEmailAddress'
 import { EmailRepViaCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { formatCapitolCanaryEmailRepRequest } from '@/utils/server/capitolCanary/emailRep'
+import { expect } from '@jest/globals'
 
 it('formats the "email rep via capitol canary" request correctly', () => {
   // Set the seed so that the mocked output is deterministic.
