@@ -127,7 +127,6 @@ export async function Navbar({ locale }: { locale: SupportedLocale }) {
         </Drawer>
 
         <div className="hidden md:flex">
-          {/* TODO actually implement donate button */}
           <Button className="mr-3" asChild>
             <InternalLink underlineOnHover={false} href={urls.donate()}>
               Donate

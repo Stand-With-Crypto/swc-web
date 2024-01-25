@@ -58,11 +58,7 @@ export const metadata: Metadata = {
   },
 }
 
-export default function Layout({
-  children,
-  params,
-  dialog,
-}: PageProps & { children: React.ReactNode; dialog: React.ReactNode }) {
+export default function Layout({ children, params }: PageProps & { children: React.ReactNode }) {
   const { locale } = params
 
   if (!ORDERED_SUPPORTED_LOCALES.includes(locale)) {
@@ -76,10 +72,7 @@ export default function Layout({
           <FullHeight.Container>
             <FullHeight.Content>
               <Navbar locale={locale} />
-              <main>
-                {dialog}
-                {children}
-              </main>
+              <main>{children}</main>
             </FullHeight.Content>
             <Footer locale={locale} />
           </FullHeight.Container>

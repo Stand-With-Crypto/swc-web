@@ -49,7 +49,7 @@ const DialogContent = React.forwardRef<
     <DialogOverlay />
     <DialogPrimitive.Content ref={ref} className={cn(dialogContentStyles, className)} {...props}>
       {children}
-      <DialogPrimitive.Close className={dialogCloseStyles}>
+      <DialogPrimitive.Close className={dialogCloseStyles} tabIndex={-1}>
         <X className="h-4 w-4" />
         <span className="sr-only">Close</span>
       </DialogPrimitive.Close>

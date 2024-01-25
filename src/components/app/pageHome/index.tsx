@@ -1,6 +1,6 @@
+import { AccountAuthButton } from '@/components/app/accountAuth/context'
 import { DTSIPersonCard } from '@/components/app/dtsiPersonCard'
 import { RecentActivityAndLeaderboard } from '@/components/app/recentActivityAndLeaderboard/recentActivityAndLeaderboard'
-import { UserActionFormOptInSWCDialog } from '@/components/app/userActionFormOptInSWC/dialog'
 import { UserActionRowCTAsListWithApi } from '@/components/app/userActionRowCTA/userActionRowCTAsListWithApi'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
@@ -46,11 +46,7 @@ export function PageHome({
             Congress is writing the rules as we speak - but they won't vote YES until they've heard
             from you.
           </PageSubTitle>
-          <Button size="lg" asChild>
-            <InternalLink href={urls.login()} underlineOnHover={false}>
-              Join the fight
-            </InternalLink>
-          </Button>
+          <AccountAuthButton size="lg">Join the fight</AccountAuthButton>
         </div>
         <div className="order-0 md:container lg:order-1 lg:px-0">
           <Dialog>
