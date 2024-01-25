@@ -1,13 +1,13 @@
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { DTSIStanceDetails } from '@/components/app/dtsiStanceDetails'
-import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
-import { MaybeNextImg } from '@/components/ui/image'
+import { FormattedNumber } from '@/components/ui/formattedNumber'
+import { MaybeNextImg, NextImage } from '@/components/ui/image'
 import { InitialsAvatar } from '@/components/ui/initialsAvatar'
 import { ExternalLink } from '@/components/ui/link'
+import { PageSubTitle } from '@/components/ui/pageSubTitle'
+import { PageTitle } from '@/components/ui/pageTitleText'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
-import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
 import { DTSIPersonDetails } from '@/data/dtsi/queries/queryDTSIPersonDetails'
 import { SupportedLocale } from '@/intl/locales'
 import {
@@ -17,21 +17,18 @@ import {
   getHasDTSIPersonRoleEnded,
   orderDTSIPersonRolesByImportance,
 } from '@/utils/dtsi/dtsiPersonRoleUtils'
-import { groupDTSIPersonRolesByDomain } from '@/utils/dtsi/dtsiPersonRoleWithDomain'
 import {
   dtsiPersonFullName,
-  dtsiPersonPoliticalAffiliationCategoryAbbreviation,
+  dtsiPersonPoliticalAffiliationCategoryDisplayName,
   getDTSIPersonProfilePictureUrlDimensions,
 } from '@/utils/dtsi/dtsiPersonUtils'
-import {
-  convertDTSIStanceScoreToCryptoSupportLanguage,
-  convertDTSIStanceScoreToTextColorClass,
-} from '@/utils/dtsi/dtsiStanceScoreUtils'
+import { convertDTSIStanceScoreToCryptoSupportLanguageSentence } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { dtsiTwitterAccountUrl } from '@/utils/dtsi/dtsiTwitterAccountUtils'
+import { pluralize } from '@/utils/shared/pluralize'
 import { externalUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 import _ from 'lodash'
-import { Info, MoveUpRight } from 'lucide-react'
+import { Globe, MoveUpRight } from 'lucide-react'
 
 export function PagePoliticianDetails({
   person,
@@ -42,185 +39,125 @@ export function PagePoliticianDetails({
 }) {
   const orderedRoles = orderDTSIPersonRolesByImportance(person.roles)
   const primaryRole = orderedRoles.byImportance[0]
-  const rolesWithDomains = groupDTSIPersonRolesByDomain(orderedRoles.byDateStart)
   const stances = _.orderBy(person.stances, x => -1 * new Date(x.dateStanceMade).getTime())
   return (
-    <div className="container grid grid-cols-1 space-y-6 md:grid-cols-3 md:space-y-0">
-      <aside className="md:col-span-1">
-        <div className="sticky top-0 text-center md:mr-6 md:max-h-dvh md:min-h-dvh md:overflow-y-auto md:border-r md:pb-12 md:pr-6 md:text-left">
-          <article className="md:mt-5">
-            {person.profilePictureUrl ? (
-              <div
-                className="mx-auto mb-6 overflow-hidden rounded-lg md:mx-0"
-                style={{ maxWidth: 200 }}
-              >
-                <MaybeNextImg
-                  sizes="200px"
-                  alt={`profile picture of ${dtsiPersonFullName(person)}`}
-                  {...(getDTSIPersonProfilePictureUrlDimensions(person) || {})}
-                  src={person.profilePictureUrl}
-                />
-              </div>
-            ) : (
-              <div className="mx-auto mb-6 md:mx-0">
-                <InitialsAvatar
-                  size={100}
-                  firstInitial={(person.firstNickname || person.firstName).slice(0, 1)}
-                  lastInitial={person.lastName.slice(0, 1)}
-                />
-              </div>
-            )}
-            {primaryRole &&
-              (primaryRole.roleCategory === DTSI_PersonRoleCategory.SENATE ||
-                primaryRole.roleCategory === DTSI_PersonRoleCategory.CONGRESS) &&
-              !getHasDTSIPersonRoleEnded(primaryRole) && (
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger>
-                      <Badge className="mb-3 bg-green-100 font-bold text-green-700 hover:bg-green-100/80">
-                        Active <Info className="ml-1 h-4 w-4 text-gray-600" />
-                      </Badge>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p>This member is currently a member of Congress</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
+    <div className="container max-w-3xl">
+      <section>
+        {person.profilePictureUrl ? (
+          <div className="mx-auto mb-6 overflow-hidden rounded-full" style={{ maxWidth: 100 }}>
+            <MaybeNextImg
+              sizes="100px"
+              alt={`profile picture of ${dtsiPersonFullName(person)}`}
+              {...(getDTSIPersonProfilePictureUrlDimensions(person) || {})}
+              src={person.profilePictureUrl}
+            />
+          </div>
+        ) : (
+          <div className="mx-auto mb-6 md:mx-0">
+            <InitialsAvatar
+              size={100}
+              firstInitial={(person.firstNickname || person.firstName).slice(0, 1)}
+              lastInitial={person.lastName.slice(0, 1)}
+            />
+          </div>
+        )}
+        <PageTitle className="mb-3" size="md">
+          {dtsiPersonFullName(person)}
+        </PageTitle>
+        <PageSubTitle className="mb-3">
+          {primaryRole && (
+            <>
+              <PageSubTitle>
+                {person.politicalAffiliationCategory && (
+                  <>
+                    {dtsiPersonPoliticalAffiliationCategoryDisplayName(
+                      person.politicalAffiliationCategory,
+                    )}{' '}
+                  </>
+                )}
+                {getDTSIPersonRoleCategoryDisplayName(primaryRole)}
+                {getDTSIPersonRoleLocation(primaryRole) && (
+                  <span className="font-normal text-gray-500">
+                    {' '}
+                    from {getDTSIPersonRoleLocation(primaryRole)}
+                  </span>
+                )}
+              </PageSubTitle>
+              {getHasDTSIPersonRoleEnded(primaryRole) && (
+                <div className="text-gray-500">
+                  {getFormattedDTSIPersonRoleDateRange(primaryRole)}
+                </div>
               )}
-
-            <h1 className="text-xl font-bold">
-              {dtsiPersonFullName(person)}{' '}
-              {person.politicalAffiliationCategory &&
-                `(${dtsiPersonPoliticalAffiliationCategoryAbbreviation(
-                  person.politicalAffiliationCategory,
-                )})`}
-            </h1>
-
-            {primaryRole && (
-              <>
-                <h3 className="text-xl font-bold md:text-lg lg:text-xl">
-                  {getDTSIPersonRoleCategoryDisplayName(primaryRole)}
-                  {getDTSIPersonRoleLocation(primaryRole) && (
-                    <span className="font-normal text-gray-500">
-                      , {getDTSIPersonRoleLocation(primaryRole)}
-                    </span>
-                  )}
-                </h3>
-                {getHasDTSIPersonRoleEnded(primaryRole) && (
-                  <div className="text-gray-500">
-                    {getFormattedDTSIPersonRoleDateRange(primaryRole)}
-                  </div>
-                )}
-              </>
-            )}
-          </article>
-          {rolesWithDomains.length > 1 && (
-            <Collapsible>
-              <CollapsibleTrigger asChild>
-                <Button size="sm" className="mt-3">
-                  <span className="whitespace-pre-wrap md:hidden lg:inline">Show </span> All
-                  Positions
-                </Button>
-              </CollapsibleTrigger>
-              <CollapsibleContent className="AnimateCollapsibleContent">
-                <article>
-                  <h4 className="mb-2 pt-4 text-xl font-bold lg:pt-6">All Positions</h4>
-                  <div className="flex flex-col space-y-6">
-                    {rolesWithDomains.map(({ role, domain }) => (
-                      <article key={role.id}>
-                        <p className="text-lg">{getDTSIPersonRoleCategoryDisplayName(role)}</p>
-                        <p className="text-gray-500">{getFormattedDTSIPersonRoleDateRange(role)}</p>
-                        {Boolean(domain?.committees.length) && (
-                          <>
-                            <div className="mb-1 mt-3">Committees</div>
-                            <div className="flex flex-col space-y-1">
-                              {domain?.committees.map(({ committee }, index) => (
-                                <div key={index}>
-                                  <div className="text-sm text-gray-600">
-                                    {committee.displayName}
-                                  </div>
-                                  {/* uncomment to enable displaying subcommittees */}
-                                  {/* {!!subcommittees.length && (
-                                                        <Box>
-                                                          <Text fontSize={'sm'}>Subcommittees</Text>
-                                                          <div className='flex flex-col space-y-1'>
-                                                            {subcommittees.map(({ subcommittee }, index) => (
-                                                              <Text key={index} fontSize={'sm'} color="gray.400">
-                                                                {subcommittee.displayName}
-                                                              </Text>
-                                                            ))}
-                                                          </VStack>
-                                                        </Box>
-                                                      )} */}
-                                </div>
-                              ))}
-                            </div>
-                          </>
-                        )}
-                      </article>
-                    ))}
-                  </div>
-                </article>
-              </CollapsibleContent>
-            </Collapsible>
+            </>
           )}
-          <article className="mx-auto mt-4 max-w-xs border-t pt-4 md:mx-0 lg:mt-6 lg:pt-6">
-            <h2 className="text-xl font-semibold">Crypto position</h2>
-            <div className="mx-auto my-4 flex max-w-[200px] gap-4 md:mx-0">
-              <div className="flex-shrink-0">
-                <DTSIFormattedLetterGrade size={60} person={person} />
-              </div>
-              <div
-                className={cn(
-                  convertDTSIStanceScoreToTextColorClass(person),
-                  'text-left text-xl font-semibold',
-                )}
-              >
-                {convertDTSIStanceScoreToCryptoSupportLanguage(person)}
-              </div>
-            </div>
-            <p className="my-4 text-sm text-gray-700">
-              DoTheySupportIt generates the score from the member’s public statements. You can
-              change the score by contributing more statements.
-            </p>
+        </PageSubTitle>
+        <div className="flex justify-center gap-3">
+          {person.donationUrl && (
             <Button asChild>
-              <ExternalLink href={externalUrls.dtsiCreateStance(person.slug)}>
-                Add Position <MoveUpRight className="ml-2" />
+              <ExternalLink href={person.donationUrl}>Donate</ExternalLink>
+            </Button>
+          )}
+          {Boolean(person.officialUrl) && (
+            <Button variant="secondary" className="rounded-full px-3 py-3" asChild>
+              <ExternalLink href={person.officialUrl}>
+                <Globe className="h-6 w-6" />
+                <span className="sr-only">{person.officialUrl}</span>
               </ExternalLink>
             </Button>
-          </article>
-          <article className="mt-4 border-t pt-4 lg:mt-6 lg:pt-6">
-            <h4 className="mb-2 text-xl font-bold">Links</h4>
-            {person.twitterAccounts.map(account => (
-              // TODO make this an ellipsis
-              <div key={account.id} className="overflow-hidden">
-                <ExternalLink href={dtsiTwitterAccountUrl(account)}>
-                  {dtsiTwitterAccountUrl(account)}
-                </ExternalLink>
-              </div>
-            ))}
+          )}
 
-            {Boolean(person.officialUrl) && (
-              <div>
-                <ExternalLink href={person.officialUrl}>{person.officialUrl}</ExternalLink>
-              </div>
-            )}
-            <Button variant={'outline'} className="mt-3">
-              DONATE (TODO)
+          {person.twitterAccounts.slice(0, 1).map(account => (
+            <Button variant="secondary" className="rounded-full px-3 py-3" asChild key={account.id}>
+              <ExternalLink href={dtsiTwitterAccountUrl(account)}>
+                <NextImage alt="x.com logo" src={'/misc/xDotComLogo.svg'} width={24} height={24} />
+                <span className="sr-only">{dtsiTwitterAccountUrl(account)}</span>
+              </ExternalLink>
             </Button>
-          </article>
+          ))}
         </div>
-      </aside>
-      <section className="md:col-span-2">
-        <h2 className="mb-6 text-2xl font-extrabold">{stances.length} notable statements</h2>
-        <div className="flex flex-col space-y-10">
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger className="my-8 flex w-full items-center gap-4 rounded-xl bg-gray-100 p-3 text-left md:my-12">
+              <div>
+                <DTSIFormattedLetterGrade size={60} person={person} />
+              </div>
+              <div>
+                <h3 className="mb-1 text-xl font-bold">
+                  {convertDTSIStanceScoreToCryptoSupportLanguageSentence(person)}
+                </h3>
+                <h4 className="text-fontcolor-muted">
+                  {person.firstNickname || person.firstName} has made{' '}
+                  <FormattedNumber amount={stances.length} locale={locale} />{' '}
+                  {pluralize({ singular: 'stance', count: stances.length })} about crypto.
+                </h4>
+              </div>
+            </TooltipTrigger>
+            <TooltipContent className="max-w-xs">
+              <div className="text-center">
+                <p className="mb-3 text-sm">
+                  <ExternalLink href={externalUrls.dtsi()}>DoTheySupportIt</ExternalLink> generates
+                  the score from the member’s public statements. You can change the score by
+                  contributing more statements.
+                </p>
+                <Button variant="secondary" asChild>
+                  <ExternalLink href={externalUrls.dtsiCreateStance(person.slug)}>
+                    Add Position <MoveUpRight className="ml-2" />
+                  </ExternalLink>
+                </Button>
+              </div>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      </section>
+      <section>
+        <PageTitle as="h2" size="sm" className="mb-4 text-left">
+          Notable statements
+        </PageTitle>
+        <div className="flex flex-col space-y-4">
           {!stances.length && <div>No recent statements.</div>}
           {stances.map(stance => {
             return (
-              <article
-                key={stance.id}
-                className={cn('rounded-lg border border-gray-400 p-4 md:p-6')}
-              >
+              <article key={stance.id} className={cn('rounded-xl bg-gray-100 p-4 md:p-6')}>
                 <DTSIStanceDetails locale={locale} stance={stance} person={person} />
               </article>
             )
