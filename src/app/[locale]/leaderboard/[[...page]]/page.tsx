@@ -27,7 +27,7 @@ export async function generateMetadata(_props: Props): Promise<Metadata> {
 }
 
 const pageValidator = z.string().pipe(z.coerce.number().int().gte(1).lte(50))
-const validatePageNum = ([page]: (string | undefined)[]) => {
+function validatePageNum([page]: (string | undefined)[]) {
   if (!page) {
     return 1
   }
@@ -37,7 +37,7 @@ const validatePageNum = ([page]: (string | undefined)[]) => {
   }
   return null
 }
-const validateTab = ([_page, tab]: (string | undefined)[]) => {
+function validateTab([_page, tab]: (string | undefined)[]) {
   if (!tab) {
     return RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY
   }

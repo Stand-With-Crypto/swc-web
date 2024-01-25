@@ -15,6 +15,7 @@ module.exports = {
     tsconfigRootDir: __dirname,
   },
   rules: {
+    'func-style': ['error', 'declaration'],
     'formatjs/enforce-description': ['error', 'literal'],
     'formatjs/no-offset': 'error',
     'formatjs/enforce-default-message': ['error', 'literal'],

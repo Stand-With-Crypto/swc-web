@@ -12,7 +12,7 @@ import { fetchReq } from '@/utils/shared/fetchReq'
 import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
 import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
 
-const useGetEntities = ({ limit }: { limit: number }) => {
+function useGetEntities({ limit }: { limit: number }) {
   return useSWRInfinite(
     (pageIndex, previousPageData) => {
       if (previousPageData && !previousPageData.length) return null // reached the end

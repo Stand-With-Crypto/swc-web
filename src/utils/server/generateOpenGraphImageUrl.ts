@@ -6,7 +6,7 @@ export const OPEN_GRAPH_IMAGE_DIMENSIONS = {
   width: 1200,
   height: 630,
 }
-export const getOpenGraphImageUrl = (props: OpenGraphImageOptions) => {
+export function getOpenGraphImageUrl(props: OpenGraphImageOptions) {
   return {
     url: fullUrl(`/api/public/og/${encodeObjectForUrl(props)}`),
     ...OPEN_GRAPH_IMAGE_DIMENSIONS,

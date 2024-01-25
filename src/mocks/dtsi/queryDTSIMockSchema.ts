@@ -36,7 +36,7 @@ const schemaWithMocks = addMocksToSchema({
   },
 })
 
-export const queryDTSIMockSchema = <R>(query: string, variables?: any) => {
+export function queryDTSIMockSchema<R>(query: string, variables?: any) {
   faker.seed(1)
   return graphql({
     schema: schemaWithMocks,

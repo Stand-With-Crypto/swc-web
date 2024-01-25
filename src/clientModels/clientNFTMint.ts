@@ -5,7 +5,7 @@ export type ClientNFTMint = ClientModel<
   Pick<NFTMint, 'id' | 'costAtMintCurrencyCode'> & { costAtMint: number; costAtMintUsd: number }
 >
 
-export const getClientNFTMint = (record: NFTMint): ClientNFTMint => {
+export function getClientNFTMint(record: NFTMint): ClientNFTMint {
   const { id, costAtMint, costAtMintCurrencyCode, costAtMintUsd } = record
   return getClientModel({
     id,

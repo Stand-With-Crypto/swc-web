@@ -5,6 +5,6 @@ const LOCALE_FLAG_MAP: Record<SupportedLocale, string> = {
   [SupportedLocale.ES]: '🇪🇸',
 }
 
-export const getLocaleFlagEmoji = (locale: SupportedLocale): string => {
+export function getLocaleFlagEmoji(locale: SupportedLocale): string {
   return LOCALE_FLAG_MAP[locale]
 }

@@ -18,20 +18,22 @@ export function LocaleDropdown({ locale }: { locale: SupportedLocale }) {
   const router = useRouter()
   const currentPathname = usePathname()
 
-  const handleChange = (newLocale: SupportedLocale) => async () => {
-    if (newLocale === locale || !currentPathname) return
-    trackClientAnalytic('New Locale Selected', {
-      newLocale,
-      component: AnalyticComponentType.dropdown,
-      action: AnalyticActionType.select,
-    })
-    // set cookie for next-i18n-router
-    const expiresDate = addDays(new Date(), 30)
-    await actionServerOnlyCookie('NEXT_LOCALE', newLocale, { expires: expiresDate })
-    if (locale === DEFAULT_LOCALE) {
-      router.push(`/${newLocale}${currentPathname}`)
-    } else {
-      router.push(currentPathname.replace(`/${locale}`, `/${newLocale}`))
+  function handleChange(newLocale: SupportedLocale) {
+    return async () => {
+      if (newLocale === locale || !currentPathname) return
+      trackClientAnalytic('New Locale Selected', {
+        newLocale,
+        component: AnalyticComponentType.dropdown,
+        action: AnalyticActionType.select,
+      })
+      // set cookie for next-i18n-router
+      const expiresDate = addDays(new Date(), 30)
+      await actionServerOnlyCookie('NEXT_LOCALE', newLocale, { expires: expiresDate })
+      if (locale === DEFAULT_LOCALE) {
+        router.push(`/${newLocale}${currentPathname}`)
+      } else {
+        router.push(currentPathname.replace(`/${locale}`, `/${newLocale}`))
+      }
     }
   }
 

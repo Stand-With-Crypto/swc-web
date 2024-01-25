@@ -84,10 +84,10 @@ export type SensitiveDataClientUserAction = ClientModel<
     )
 >
 
-const getRelatedModel = <K extends keyof SensitiveDataClientUserActionDatabaseQuery>(
+function getRelatedModel<K extends keyof SensitiveDataClientUserActionDatabaseQuery>(
   record: SensitiveDataClientUserActionDatabaseQuery,
   key: K,
-) => {
+) {
   const val = record[key]
   if (!val) {
     throw new Error(
@@ -97,13 +97,13 @@ const getRelatedModel = <K extends keyof SensitiveDataClientUserActionDatabaseQu
   return val
 }
 
-export const getSensitiveDataClientUserAction = ({
+export function getSensitiveDataClientUserAction({
   record,
   dtsiPeople,
 }: {
   record: SensitiveDataClientUserActionDatabaseQuery
   dtsiPeople: DTSIPersonForUserActions[]
-}): SensitiveDataClientUserAction => {
+}): SensitiveDataClientUserAction {
   // TODO determine how we want to "gracefully fail" if a DTSI slug doesn't exist
   const peopleBySlug = _.keyBy(dtsiPeople, x => x.slug)
   const { id, datetimeCreated, actionType, nftMint } = record

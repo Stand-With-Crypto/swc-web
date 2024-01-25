@@ -35,7 +35,7 @@ export const UserActionRowCTAButton = React.forwardRef<
   ) => {
     const canBeActionedOn =
       canBeTriggeredMultipleTimes || (!canBeTriggeredMultipleTimes && state !== 'complete')
-    const getStateUI = () => {
+    function getStateUI() {
       switch (state) {
         case 'unknown':
           // we add a div to take up this space so if the answer to complete/incomplete is unknown, the UI doesn't jump once we fetch that data

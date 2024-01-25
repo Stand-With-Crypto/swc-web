@@ -42,14 +42,14 @@ const argv = yargs(hideBin(process.argv)).option('size', {
 }).argv
 
 const logger = getLogger('seedLocalDb')
-const logEntity = (obj: Record<string, any[]>) => {
+function logEntity(obj: Record<string, any[]>) {
   const key = Object.keys(obj)[0]
   logger.info(`created ${obj[key].length} ${key}`)
 }
 
 async function seed() {
   const { size: seedSize } = await argv
-  const seedSizes = (sizes: [number, number, number]) => {
+  function seedSizes(sizes: [number, number, number]) {
     const [sm, md, lg] = sizes
     switch (seedSize) {
       case SeedSize.SM:
@@ -254,7 +254,7 @@ async function seed() {
   const topDonorsLeftToAssign = [...topDonorCryptoAddresses]
   await batchAsyncAndLog(
     userActionTypesToPersist.map((actionType, index) => {
-      const getRelatedItem = () => {
+      function getRelatedItem() {
         if (actionType === UserActionType.OPT_IN) {
           return faker.helpers.arrayElement(userEmailAddress)
         }

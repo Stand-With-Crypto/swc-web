@@ -6,7 +6,7 @@ import {
 import { fakerFields } from '@/mocks/fakerUtils'
 import { faker } from '@faker-js/faker'
 
-export const dtsiPersonMockResolver = (): Partial<DTSI_PersonResolvers> => {
+export function dtsiPersonMockResolver(): Partial<DTSI_PersonResolvers> {
   const firstName = faker.person.firstName()
   const lastName = faker.person.lastName()
   return {

@@ -79,14 +79,14 @@ function RecentActivityRowBase({
   )
 }
 
-const MainText = ({ children }: { children: React.ReactNode }) => (
-  <div className="text-sm font-bold text-gray-900">{children}</div>
-)
-const SubText = ({ children }: { children: React.ReactNode }) => (
-  <div className="hidden text-xs text-gray-500 md:block">{children}</div>
-)
+function MainText({ children }: { children: React.ReactNode }) {
+  return <div className="text-sm font-bold text-gray-900">{children}</div>
+}
+function SubText({ children }: { children: React.ReactNode }) {
+  return <div className="hidden text-xs text-gray-500 md:block">{children}</div>
+}
 
-const formatDTSIPerson = (person: DTSIPersonForUserActions) => {
+function formatDTSIPerson(person: DTSIPersonForUserActions) {
   // TODO add their current role
   const politicalAffiliation = person.politicalAffiliationCategory
     ? `(${dtsiPersonPoliticalAffiliationCategoryAbbreviation(person.politicalAffiliationCategory)})`
@@ -99,7 +99,7 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
   const userDisplayName = getUserDisplayName(props.action.user)
   const { data } = useApiResponseForUserPerformedUserActionTypes()
   const hasSignedUp = data?.performedUserActionTypes.includes(UserActionType.OPT_IN)
-  const getActionSpecificProps = () => {
+  function getActionSpecificProps() {
     switch (action.actionType) {
       case UserActionType.OPT_IN: {
         const getTypeDisplayText = () => {

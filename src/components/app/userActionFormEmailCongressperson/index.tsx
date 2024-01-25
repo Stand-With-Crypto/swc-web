@@ -45,13 +45,13 @@ const FORM_NAME = 'User Action Form Email Congressperson'
 type FormValues = z.infer<typeof zodUserActionFormEmailCongresspersonFields> &
   GenericErrorFormValues
 
-const getDefaultValues = ({
+function getDefaultValues({
   user,
   dtsiSlug,
 }: {
   user: GetUserFullProfileInfoResponse['user']
   dtsiSlug: string | undefined
-}): Partial<FormValues> => {
+}): Partial<FormValues> {
   if (user) {
     return {
       campaignName: UserActionEmailCampaignName.DEFAULT,

@@ -1,26 +1,26 @@
 import { DTSI_Person, DTSI_PersonPoliticalAffiliationCategory } from '@/data/dtsi/generated'
 import _ from 'lodash'
 
-export const dtsiPersonFullName = (
+export function dtsiPersonFullName(
   person: Pick<DTSI_Person, 'firstName' | 'lastName' | 'firstNickname' | 'nameSuffix'>,
-) => {
+) {
   return `${person.firstNickname || person.firstName} ${person.lastName}${
     person.nameSuffix && ` ${person.nameSuffix}`
   }`
 }
 
-export const getDTSIPersonProfilePictureUrlDimensions = (
+export function getDTSIPersonProfilePictureUrlDimensions(
   person: Pick<DTSI_Person, 'profilePictureUrlDimensions'>,
-) => {
+) {
   if (person.profilePictureUrlDimensions) {
     return person.profilePictureUrlDimensions as { width: number; height: number }
   }
   return null
 }
 
-export const dtsiPersonPoliticalAffiliationCategoryAbbreviation = (
+export function dtsiPersonPoliticalAffiliationCategoryAbbreviation(
   category: DTSI_PersonPoliticalAffiliationCategory,
-) => {
+) {
   switch (category) {
     case DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT:
       return 'D'
@@ -31,9 +31,9 @@ export const dtsiPersonPoliticalAffiliationCategoryAbbreviation = (
   }
 }
 
-export const dtsiPersonPoliticalAffiliationCategoryDisplayName = (
+export function dtsiPersonPoliticalAffiliationCategoryDisplayName(
   category: DTSI_PersonPoliticalAffiliationCategory,
-) => {
+) {
   switch (category) {
     case DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT:
       return 'Democrat'
@@ -49,11 +49,9 @@ type WithComputedStanceScore<P extends Pick<DTSI_Person, 'id' | 'computedStanceS
   'computedStanceScore'
 > & { computedStanceScore: number }
 
-export const groupAndSortDTSIPeopleByCryptoStance = <
+export function groupAndSortDTSIPeopleByCryptoStance<
   P extends Pick<DTSI_Person, 'id' | 'computedStanceScore'>,
->(
-  people: P[],
-) => {
+>(people: P[]) {
   const proCrypto: WithComputedStanceScore<P>[] = []
   const antiCrypto: WithComputedStanceScore<P>[] = []
   const neutralCrypto: P[] = []

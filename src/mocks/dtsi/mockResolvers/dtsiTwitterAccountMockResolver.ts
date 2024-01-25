@@ -1,5 +1,7 @@
 import { DTSI_TwitterAccountResolvers } from '@/data/dtsi/generated'
 
-export const dtsiTwitterAccountMockResolver = (): Partial<DTSI_TwitterAccountResolvers> => ({
-  username: () => 'RepRitchie',
-})
+export function dtsiTwitterAccountMockResolver(): Partial<DTSI_TwitterAccountResolvers> {
+  return {
+    username: () => 'RepRitchie',
+  }
+}

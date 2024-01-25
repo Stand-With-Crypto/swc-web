@@ -13,7 +13,7 @@ export function useThirdwebData() {
   const pathname = usePathname()
   const internalUrls = useIntlUrls()
 
-  const handleLogoutSuccess = () => {
+  function handleLogoutSuccess() {
     if (pathname === internalUrls.profile()) {
       router.push(internalUrls.home())
     } else {

@@ -2,7 +2,7 @@ import { DTSI_BillResolvers, DTSI_BillStatus } from '@/data/dtsi/generated'
 import { fakerFields } from '@/mocks/fakerUtils'
 import { faker } from '@faker-js/faker'
 
-export const dtsiBillMockResolver = (): Partial<DTSI_BillResolvers> => {
+export function dtsiBillMockResolver(): Partial<DTSI_BillResolvers> {
   return {
     computedStanceScore: () => fakerFields.dtsiStanceScore(),
     congressDotGovUrl: () => faker.internet.url(),

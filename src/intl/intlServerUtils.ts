@@ -6,10 +6,10 @@ export function defineMessages<U extends Record<string, MessageDescriptor>>(msgs
   return msgs
 }
 
-export const generateClientComponentMessages = <M extends ReturnType<typeof defineMessages>>(
+export function generateClientComponentMessages<M extends ReturnType<typeof defineMessages>>(
   intl: IntlShape<string>,
   messages: M,
-) => {
+) {
   const clientMessages: Record<string, string> = {}
   Object.entries(messages).forEach(([key, value]) => {
     clientMessages[key] = intl.formatMessage(value)

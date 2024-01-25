@@ -5,6 +5,6 @@
 */
 export type ClientModel<T> = T & { __client: true }
 
-export const getClientModel = <T>(record: T): ClientModel<T> => {
+export function getClientModel<T>(record: T): ClientModel<T> {
   return { ...record, __client: true }
 }

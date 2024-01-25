@@ -25,12 +25,12 @@ export type SensitiveDataClientUser = ClientModel<
   }
 >
 
-export const getSensitiveDataClientUser = (
+export function getSensitiveDataClientUser(
   record: User & {
     primaryUserCryptoAddress: null | UserCryptoAddress
     primaryUserEmailAddress: UserEmailAddress | null
   },
-): SensitiveDataClientUser => {
+): SensitiveDataClientUser {
   const {
     firstName,
     lastName,
@@ -66,13 +66,13 @@ export type SensitiveDataClientUserWithENSData = Omit<SensitiveDataClientUser, '
   primaryUserCryptoAddress: ClientUserCryptoAddressWithENSData | null
 }
 
-export const getSensitiveDataClientUserWithENSData = (
+export function getSensitiveDataClientUserWithENSData(
   record: User & {
     primaryUserCryptoAddress: null | UserCryptoAddress
     primaryUserEmailAddress: UserEmailAddress | null
   },
   ensData: UserENSData | null | undefined,
-): SensitiveDataClientUserWithENSData => {
+): SensitiveDataClientUserWithENSData {
   const initial = getSensitiveDataClientUser(record)
   return {
     ...initial,

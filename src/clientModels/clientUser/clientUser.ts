@@ -16,9 +16,9 @@ export type ClientUser = ClientModel<
   }
 >
 
-export const getClientUser = (
+export function getClientUser(
   record: User & { primaryUserCryptoAddress: null | UserCryptoAddress },
-): ClientUser => {
+): ClientUser {
   const { firstName, lastName, primaryUserCryptoAddress, id, isPubliclyVisible } = record
   return getClientModel({
     firstName: isPubliclyVisible ? firstName : null,
@@ -36,10 +36,10 @@ export type ClientUserWithENSData = Omit<ClientUser, 'primaryUserCryptoAddress'>
   primaryUserCryptoAddress: ClientUserCryptoAddressWithENSData | null
 }
 
-export const getClientUserWithENSData = (
+export function getClientUserWithENSData(
   record: User & { primaryUserCryptoAddress: null | UserCryptoAddress },
   ensData: UserENSData | null | undefined,
-): ClientUserWithENSData => {
+): ClientUserWithENSData {
   const initial = getClientUser(record)
   return {
     ...initial,

@@ -8,7 +8,7 @@ import { fetchReq } from '@/utils/shared/fetchReq'
 import { apiUrls } from '@/utils/shared/urls'
 import useSWR from 'swr'
 
-const useGetTotalDonations = (locale: SupportedLocale) => {
+function useGetTotalDonations(locale: SupportedLocale) {
   return useSWR(
     apiUrls.mockTotalDonations(locale),
     url =>

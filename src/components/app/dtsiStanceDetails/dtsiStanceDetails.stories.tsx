@@ -21,14 +21,14 @@ const meta = {
 
 export default meta
 
-const getProps =
-  (transform = (props: IStanceDetailsProps) => props) =>
-  () =>
+function getProps(transform = (props: IStanceDetailsProps) => props) {
+  return () =>
     queryDTSIMockSchema<DTSI_PersonDetailsQuery>(dtsiPersonDetailsQueryString).then(data => {
       const person = data.people[0]
       const stance = person.stances[0]
       return transform({ person, stance, locale: SupportedLocale.EN_US })
     })
+}
 
 export const Quote = {
   loaders: [

@@ -1,6 +1,6 @@
 import { DTSI_BillPersonRelationshipType } from '@/data/dtsi/generated'
 
-export const dtsiPersonBillRelationshipTypeAsVerb = (relType: DTSI_BillPersonRelationshipType) => {
+export function dtsiPersonBillRelationshipTypeAsVerb(relType: DTSI_BillPersonRelationshipType) {
   switch (relType) {
     case DTSI_BillPersonRelationshipType.COSPONSOR:
       return 'cosponsored'

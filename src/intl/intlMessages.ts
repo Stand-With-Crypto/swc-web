@@ -8,7 +8,7 @@ import { getLogger } from '@/utils/shared/logger'
 const logger = getLogger('intlMessages')
 
 // TODO figure out the translation workflow with a 3rd party provider
-const mockGetIntlMessages = async (locale: SupportedLocale) => {
+async function mockGetIntlMessages(locale: SupportedLocale) {
   // We never want to use any compiled translations in local development for english because we always want the latest changes to the defaultMessage to be displayed
   const enUSTranslations =
     NEXT_PUBLIC_ENVIRONMENT === 'local'

@@ -3,7 +3,7 @@ import * as Sentry from '@sentry/nextjs'
 // eslint-disable-next-line
 import '../../sentry.server.config'
 
-export const runBin = async (fn: (...args: any[]) => Promise<any>) => {
+export async function runBin(fn: (...args: any[]) => Promise<any>) {
   return fn()
     .then(async () => {
       await prismaClient.$disconnect()

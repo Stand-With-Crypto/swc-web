@@ -27,7 +27,7 @@ export function AnimatedCurrencyOdometer({
   const numeralArray = useCurrencyNumeralArray(value, locale)
 
   useEffect(() => {
-    const activate = () => {
+    function activate() {
       setTimeout(() => {
         for (const spanElement of spanArray.current) {
           if (spanElement) {

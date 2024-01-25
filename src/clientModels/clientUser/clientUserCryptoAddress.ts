@@ -6,7 +6,7 @@ export type ClientUserCryptoAddress = ClientModel<
   Pick<UserCryptoAddress, 'id' | 'cryptoAddress' | 'cryptoNetwork'>
 >
 
-export const getClientUserCryptoAddress = (record: UserCryptoAddress): ClientUserCryptoAddress => {
+export function getClientUserCryptoAddress(record: UserCryptoAddress): ClientUserCryptoAddress {
   const { id, cryptoAddress, cryptoNetwork } = record
   return getClientModel({
     id,
@@ -19,10 +19,10 @@ export type ClientUserCryptoAddressWithENSData = ClientModel<
   Pick<UserCryptoAddress, 'id' | 'cryptoAddress' | 'cryptoNetwork'> & UserENSData
 >
 
-export const getClientUserCryptoAddressWithENSData = (
+export function getClientUserCryptoAddressWithENSData(
   record: UserCryptoAddress,
   ensData: UserENSData | null | undefined,
-): ClientUserCryptoAddressWithENSData => {
+): ClientUserCryptoAddressWithENSData {
   if (ensData && ensData?.cryptoAddress !== record.cryptoAddress) {
     throw new Error(
       `ENS data address does not match crypto address: ${JSON.stringify({ ensData, record })}}`,

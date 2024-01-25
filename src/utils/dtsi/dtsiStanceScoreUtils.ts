@@ -18,7 +18,7 @@ type EntityWithStanceScore = Pick<
 const getScore = (item: EntityWithStanceScore) =>
   item.manuallyOverriddenStanceScore ?? item.computedStanceScore
 
-export const convertDTSIStanceScoreToLetterGrade = (entity: EntityWithStanceScore) => {
+export function convertDTSIStanceScoreToLetterGrade(entity: EntityWithStanceScore) {
   const score = getScore(entity)
   if (_.isNil(score)) {
     return null
@@ -38,7 +38,7 @@ export const convertDTSIStanceScoreToLetterGrade = (entity: EntityWithStanceScor
   return DTSILetterGrade.F
 }
 
-export const convertDTSIStanceScoreToCryptoSupportLanguage = (entity: EntityWithStanceScore) => {
+export function convertDTSIStanceScoreToCryptoSupportLanguage(entity: EntityWithStanceScore) {
   const score = getScore(entity)
   if (_.isNil(score)) {
     return 'Pending'
@@ -57,10 +57,9 @@ export const convertDTSIStanceScoreToCryptoSupportLanguage = (entity: EntityWith
   }
   return 'Very against'
 }
-
-export const convertDTSIStanceScoreToCryptoSupportLanguageSentence = (
+export function convertDTSIStanceScoreToCryptoSupportLanguageSentence(
   entity: EntityWithStanceScore,
-) => {
+) {
   const score = getScore(entity)
   if (_.isNil(score)) {
     return 'Pending stance on crypto'
@@ -80,7 +79,7 @@ export const convertDTSIStanceScoreToCryptoSupportLanguageSentence = (
   return 'Strongly against crypto'
 }
 
-export const convertDTSIStanceScoreToTextColorClass = (entity: EntityWithStanceScore) => {
+export function convertDTSIStanceScoreToTextColorClass(entity: EntityWithStanceScore) {
   const score = getScore(entity)
   if (_.isNil(score)) {
     return twNoop('text-gray-600')

@@ -40,7 +40,7 @@ export function MergeAlertCTA({
   }, [mergeAlert.hasBeenConfirmedByOtherUser, mergeAlert.otherUser.id, mergeAlert.userAId])
   const [userToDeleteId, setUserToDeleteId] = useState<string>(initialUserToDeleteId)
   const [state, setState] = useState<'loading' | null>(null)
-  const handleApproval = () => {
+  function handleApproval() {
     setState('loading')
     return actionConfirmUserMergeAlert({
       userMergeAlertId: mergeAlert.id,

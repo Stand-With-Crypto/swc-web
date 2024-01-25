@@ -23,7 +23,7 @@ export function NavbarSessionButtonClient(_props: NavbarSessionButtonProps) {
   const address = useAddress()
   const { login, isLoading: isLoggingIn } = useLogin()
 
-  const handleLoginSuccess = () => {
+  function handleLoginSuccess() {
     // ensure that any server components on the page that's being used are refreshed with the context the user is now logged in
     router.refresh()
   }

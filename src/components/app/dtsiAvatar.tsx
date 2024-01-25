@@ -4,19 +4,20 @@ import { InitialsAvatar } from '@/components/ui/initialsAvatar'
 import { DTSI_Person } from '@/data/dtsi/generated'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 
-export const DTSIAvatar: React.FC<
-  {
-    person: Pick<
-      DTSI_Person,
-      | 'firstName'
-      | 'lastName'
-      | 'firstNickname'
-      | 'nameSuffix'
-      | 'profilePictureUrl'
-      | 'profilePictureUrlDimensions'
-    >
-  } & Pick<ImageAvatarProps, 'size' | 'className'>
-> = ({ person, ...props }) => {
+export function DTSIAvatar({
+  person,
+  ...props
+}: {
+  person: Pick<
+    DTSI_Person,
+    | 'firstName'
+    | 'lastName'
+    | 'firstNickname'
+    | 'nameSuffix'
+    | 'profilePictureUrl'
+    | 'profilePictureUrlDimensions'
+  >
+} & Pick<ImageAvatarProps, 'size' | 'className'>) {
   if (person.profilePictureUrl) {
     return (
       <ImageAvatar

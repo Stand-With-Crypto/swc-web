@@ -7,7 +7,7 @@ import {
 } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import _ from 'lodash'
 
-const getImage = (letterGrade: DTSILetterGrade | null) => {
+function getImage(letterGrade: DTSILetterGrade | null) {
   switch (letterGrade) {
     case 'A':
     case 'B':
@@ -22,10 +22,13 @@ const getImage = (letterGrade: DTSILetterGrade | null) => {
   return '/dtsiLetterGrade/grey.svg'
 }
 
-export const DTSIFormattedLetterGrade: React.FC<{
+export function DTSIFormattedLetterGrade({
+  person,
+  size,
+}: {
   person: Pick<DTSI_Person, 'computedStanceScore' | 'manuallyOverriddenStanceScore'>
   size: number
-}> = ({ person, size }) => {
+}) {
   const letterGrade = convertDTSIStanceScoreToLetterGrade(person)
 
   return (

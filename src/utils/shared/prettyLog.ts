@@ -1,3 +1,7 @@
-export const prettyStringify = (obj: any) => JSON.stringify(obj, null, 4)
+export function prettyStringify(obj: any) {
+  return JSON.stringify(obj, null, 4)
+}
 
-export const prettyLog = (obj: any) => console.log(prettyStringify(obj))
+export function prettyLog(obj: any) {
+  return console.log(prettyStringify(obj))
+}

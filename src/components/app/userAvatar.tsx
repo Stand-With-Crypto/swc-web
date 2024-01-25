@@ -14,9 +14,9 @@ const genericImages = [
   '/userAvatars/yellow.svg',
 ]
 
-const Container = ({ children }: { children: React.ReactNode }) => (
-  <div className="overflow-hidden rounded-full">{children}</div>
-)
+function Container({ children }: { children: React.ReactNode }) {
+  return <div className="overflow-hidden rounded-full">{children}</div>
+}
 
 function DefaultUserAvatar({ size, ...props }: Pick<ImageAvatarProps, 'size' | 'className'>) {
   return (
@@ -33,11 +33,13 @@ function DefaultUserAvatar({ size, ...props }: Pick<ImageAvatarProps, 'size' | '
 }
 
 // TODO support ENS images and person name
-export const UserAvatar: React.FC<
-  {
-    user: Pick<ClientUserWithENSData, 'isPubliclyVisible' | 'primaryUserCryptoAddress'>
-  } & Pick<ImageAvatarProps, 'size' | 'className'>
-> = ({ user, size, ...props }) => {
+export function UserAvatar({
+  user,
+  size,
+  ...props
+}: {
+  user: Pick<ClientUserWithENSData, 'isPubliclyVisible' | 'primaryUserCryptoAddress'>
+} & Pick<ImageAvatarProps, 'size' | 'className'>) {
   if (!user.isPubliclyVisible || !user.primaryUserCryptoAddress) {
     return <DefaultUserAvatar {...props} size={size} />
   }

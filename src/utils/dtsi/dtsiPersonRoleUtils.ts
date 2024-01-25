@@ -8,12 +8,12 @@ import { getUSStateNameFromStateCode } from '@/utils/shared/usStateUtils'
 import _ from 'lodash'
 import { format as dateFormat, isBefore, parseISO } from 'date-fns'
 
-export const getDTSIFormattedShortPersonRole = (
+export function getDTSIFormattedShortPersonRole(
   role: Pick<
     DTSI_PersonRole,
     'status' | 'primaryState' | 'primaryCountryCode' | 'title' | 'roleCategory'
   >,
-) => {
+) {
   // TODO verify we only need to be vague when referring to roles someone currently does not hold
   if (role.status === DTSI_PersonRoleStatus.RUNNING_FOR) {
     return 'National Political Figure'
@@ -30,14 +30,14 @@ export const getDTSIFormattedShortPersonRole = (
   })
 }
 
-export const getHasDTSIPersonRoleEnded = ({ dateEnd }: { dateEnd: string | null | undefined }) => {
+export function getHasDTSIPersonRoleEnded({ dateEnd }: { dateEnd: string | null | undefined }) {
   if (!dateEnd) {
     return false
   }
   return isBefore(parseISO(dateEnd), new Date())
 }
 
-export const getFormattedDTSIPersonRoleDateRange = ({
+export function getFormattedDTSIPersonRoleDateRange({
   dateEnd,
   dateStart,
   format = 'd LLLL, yyyy',
@@ -45,15 +45,15 @@ export const getFormattedDTSIPersonRoleDateRange = ({
   dateStart: string
   dateEnd: string | null | undefined
   format?: string
-}) => {
+}) {
   return _.compact([dateStart, dateEnd])
     .map(date => dateFormat(parseISO(date), format))
     .join(' - ')
 }
 
-export const getDTSIPersonRoleCategoryDisplayName = (
+export function getDTSIPersonRoleCategoryDisplayName(
   role: Pick<DTSI_PersonRole, 'roleCategory' | 'title' | 'status'>,
-) => {
+) {
   // TODO verify we only need to be vague when referring to roles someone currently does not hold
   if (role.status !== DTSI_PersonRoleStatus.HELD) {
     return 'National Political Figure'
@@ -75,12 +75,12 @@ export const getDTSIPersonRoleCategoryDisplayName = (
   return role.title
 }
 
-export const getDTSIPersonRoleLocation = (
+export function getDTSIPersonRoleLocation(
   role: Pick<
     DTSI_PersonRole,
     'primaryCity' | 'primaryCountryCode' | 'primaryDistrict' | 'primaryState'
   >,
-) => {
+) {
   return _.compact([
     role.primaryCity,
     role.primaryState && getUSStateNameFromStateCode(role.primaryState),
@@ -101,15 +101,13 @@ const DTSI_PERSON_ROLE_IMPORTANCE = [
   DTSI_PersonRoleCategory.COMMITTEE_CHAIR,
 ]
 
-export const orderDTSIPersonRolesByImportance = <
+export function orderDTSIPersonRolesByImportance<
   T extends {
     roleCategory: DTSI_PersonRoleCategory | null | undefined
     dateStart: string
     dateEnd: string | null | undefined
   },
->(
-  roles: Array<T>,
-) => {
+>(roles: Array<T>) {
   const byDateStart = _.sortBy([...roles], x => -1 * new Date(x.dateStart).getTime())
   const byImportance = [...byDateStart]
   byImportance.sort((role1, role2) => {

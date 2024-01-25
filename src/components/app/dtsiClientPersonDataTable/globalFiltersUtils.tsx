@@ -59,12 +59,14 @@ export interface GlobalFilters {
   state: 'All' | keyof typeof US_STATE_CODE_TO_DISPLAY_NAME_MAP
 }
 
-export const getGlobalFilterDefaults = (): GlobalFilters => ({
-  role: ROLE_OPTIONS.ALL,
-  party: PARTY_OPTIONS.ALL,
-  stance: StanceOnCryptoOptions.ALL,
-  state: 'All',
-})
+export function getGlobalFilterDefaults(): GlobalFilters {
+  return {
+    role: ROLE_OPTIONS.ALL,
+    party: PARTY_OPTIONS.ALL,
+    stance: StanceOnCryptoOptions.ALL,
+    state: 'All',
+  }
+}
 
 export function GlobalFilters({
   globalFilter,

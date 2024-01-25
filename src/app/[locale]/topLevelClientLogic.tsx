@@ -29,7 +29,7 @@ const NEXT_PUBLIC_THIRDWEB_CLIENT_ID = requiredEnv(
   'process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID',
 )
 
-const InitialOrchestration = () => {
+function InitialOrchestration() {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const authUser = useAuthUser()

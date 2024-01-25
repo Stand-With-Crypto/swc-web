@@ -2,7 +2,7 @@ import { prismaClient } from '@/utils/server/prismaClient'
 import { UserActionType } from '@prisma/client'
 import 'server-only'
 
-export const getCountPolicymakerContacts = async () => {
+export async function getCountPolicymakerContacts() {
   // TODO verify what we mean when we say "policymaker contacts".
   const [countUserActionEmailRecipients, countUserActionCalls] = await Promise.all([
     prismaClient.userActionEmailRecipient.count(),

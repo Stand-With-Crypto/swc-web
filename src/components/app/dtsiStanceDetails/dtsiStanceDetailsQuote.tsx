@@ -14,9 +14,11 @@ type IDTSIStanceDetailsQuoteProps = Omit<IStanceDetailsProps, 'stance'> & {
   stance: DTSIStanceDetailsStanceProp<DTSIStanceDetailsQuoteProp>
 }
 
-export const DTSIStanceDetailsQuoteShared: React.FC<
-  IDTSIStanceDetailsQuoteProps & { children: React.ReactNode }
-> = ({ children, stance, className }) => {
+export function DTSIStanceDetailsQuoteShared({
+  children,
+  stance,
+  className,
+}: IDTSIStanceDetailsQuoteProps & { children: React.ReactNode }) {
   return (
     <div className={cn('text-gray-800', className)}>
       {children}
@@ -33,7 +35,7 @@ export const DTSIStanceDetailsQuoteShared: React.FC<
   )
 }
 
-export const DTSIStanceDetailsQuote: React.FC<IDTSIStanceDetailsQuoteProps> = props => {
+export function DTSIStanceDetailsQuote(props: IDTSIStanceDetailsQuoteProps) {
   const { stance } = props
   return (
     <DTSIStanceDetailsQuoteShared {...props}>

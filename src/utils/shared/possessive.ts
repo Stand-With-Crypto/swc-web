@@ -1,4 +1,4 @@
-export const possessive = (str: string) => {
+export function possessive(str: string) {
   if (str == '') {
     return str
   }

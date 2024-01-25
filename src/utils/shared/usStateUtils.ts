@@ -52,7 +52,7 @@ export const US_STATE_CODE_TO_DISPLAY_NAME_MAP = {
   WY: 'Wyoming',
 }
 
-export const getUSStateNameFromStateCode = (stateCode: string) => {
+export function getUSStateNameFromStateCode(stateCode: string) {
   // @ts-ignore
   const name: string = US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]
   if (name) {

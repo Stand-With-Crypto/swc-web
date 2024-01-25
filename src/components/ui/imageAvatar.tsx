@@ -6,7 +6,7 @@ export type ImageAvatarProps = { size: number; className?: string } & Omit<
   'width' | 'height'
 >
 
-export const ImageAvatar: React.FC<ImageAvatarProps> = ({ size, className, ...props }) => {
+export function ImageAvatar({ size, className, ...props }: ImageAvatarProps) {
   return (
     <span className="relative inline-block" style={{ width: size, height: size }}>
       <NextImage

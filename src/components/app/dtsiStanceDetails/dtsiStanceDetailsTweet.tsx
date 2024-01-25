@@ -20,7 +20,7 @@ import sanitizeHtml from 'sanitize-html'
 import { parse as twemojiParser } from 'twemoji-parser'
 import { InitialsAvatar } from '@/components/ui/initialsAvatar'
 
-export const getEmojiIndexes = (tweet: DTSIStanceDetailsTweetProp['tweet']) => {
+export function getEmojiIndexes(tweet: DTSIStanceDetailsTweetProp['tweet']) {
   // define a regular expression to match all Unicode emoji characters
 
   // use matchAll() method to find all matches of the emoji regex in the string
@@ -33,10 +33,10 @@ export const getEmojiIndexes = (tweet: DTSIStanceDetailsTweetProp['tweet']) => {
   return indexesWithOffsite
 }
 
-const modifyEntitiesToAccountForEmojisOffset = (
+function modifyEntitiesToAccountForEmojisOffset(
   emojiIndexes: number[],
   entities: TweetEntityOptionsWithType[],
-) => {
+) {
   return entities.map(entity => {
     const relevantEmojis = emojiIndexes.filter(index => index < entity.start)
     return {
@@ -110,16 +110,18 @@ function getEntities(tweet: DTSIStanceDetailsTweetProp['tweet']) {
   return result
 }
 
-const TweetLink: React.FC<React.ComponentPropsWithoutRef<typeof ExternalLink>> = props => (
-  <ExternalLink
-    className="font-semibold text-blue-400"
-    style={{ wordWrap: 'break-word', overflowWrap: 'anywhere' }}
-    rel="nofollow"
-    {...props}
-  />
-)
+function TweetLink(props: React.ComponentPropsWithoutRef<typeof ExternalLink>) {
+  return (
+    <ExternalLink
+      className="font-semibold text-blue-400"
+      style={{ wordWrap: 'break-word', overflowWrap: 'anywhere' }}
+      rel="nofollow"
+      {...props}
+    />
+  )
+}
 
-const TweetBody: React.FC<{ tweet: DTSIStanceDetailsTweetProp['tweet'] }> = ({ tweet }) => {
+function TweetBody({ tweet }: { tweet: DTSIStanceDetailsTweetProp['tweet'] }) {
   const entities = getEntities(tweet)
 
   return (
@@ -174,11 +176,13 @@ const TweetBody: React.FC<{ tweet: DTSIStanceDetailsTweetProp['tweet'] }> = ({ t
   )
 }
 
-export const DTSIStanceDetailsTweet: React.FC<
-  Omit<IStanceDetailsProps, 'stance'> & {
-    stance: DTSIStanceDetailsStanceProp<DTSIStanceDetailsTweetProp>
-  }
-> = ({ stance, person, locale }) => {
+export function DTSIStanceDetailsTweet({
+  stance,
+  person,
+  locale,
+}: Omit<IStanceDetailsProps, 'stance'> & {
+  stance: DTSIStanceDetailsStanceProp<DTSIStanceDetailsTweetProp>
+}) {
   const isOwnTweet = stance.tweet.twitterAccount.personId === person.id
   return (
     <article className="rounded-lg text-gray-800">

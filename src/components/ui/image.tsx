@@ -7,7 +7,7 @@ export type MaybeNextImgProps = Omit<NextImageProps, 'width' | 'height'> & {
   height?: number
 }
 
-export const MaybeNextImg: React.FC<MaybeNextImgProps> = props => {
+export function MaybeNextImg(props: MaybeNextImgProps) {
   if (props.width && props.height) {
     return <NextImage {...(props as NextImageProps)} />
   }

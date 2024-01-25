@@ -42,13 +42,13 @@ interface DataTableProps<TData, TValue> {
   loadState: 'loaded' | 'static'
 }
 
-export const SortableHeader = <TData, TValue>({
+export function SortableHeader<TData, TValue>({
   column,
   children,
 }: {
   column: Column<TData, TValue>
   children: React.ReactNode
-}) => {
+}) {
   return (
     <Button
       className="p-0"

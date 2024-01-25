@@ -74,10 +74,10 @@ export type ClientUserAction = ClientModel<
     )
 >
 
-const getRelatedModel = <K extends keyof ClientUserActionDatabaseQuery>(
+function getRelatedModel<K extends keyof ClientUserActionDatabaseQuery>(
   record: ClientUserActionDatabaseQuery,
   key: K,
-) => {
+) {
   const val = record[key]
   if (!val) {
     throw new Error(
@@ -87,13 +87,13 @@ const getRelatedModel = <K extends keyof ClientUserActionDatabaseQuery>(
   return val
 }
 
-export const getClientUserAction = ({
+export function getClientUserAction({
   record,
   dtsiPeople,
 }: {
   record: ClientUserActionDatabaseQuery
   dtsiPeople: DTSIPersonForUserActions[]
-}): ClientUserAction => {
+}): ClientUserAction {
   // TODO determine how we want to "gracefully fail" if a DTSI slug doesn't exist
   const peopleBySlug = _.keyBy(dtsiPeople, x => x.slug)
   const { id, datetimeCreated, actionType, nftMint } = record

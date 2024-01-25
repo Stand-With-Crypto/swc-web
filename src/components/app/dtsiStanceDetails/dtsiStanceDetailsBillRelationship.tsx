@@ -12,9 +12,7 @@ type IStanceDetailsBillRelationshipProps = Omit<IStanceDetailsProps, 'stance'> &
   stance: DTSIStanceDetailsStanceProp<DTSIStanceDetailsBillRelationshipProp>
 }
 
-export const DTSIStanceDetailsBillRelationship: React.FC<
-  IStanceDetailsBillRelationshipProps
-> = props => {
+export function DTSIStanceDetailsBillRelationship(props: IStanceDetailsBillRelationshipProps) {
   const { stance } = props
   const { bill } = stance.billRelationship
   return (

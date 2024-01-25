@@ -43,7 +43,7 @@ type DTSI_PersonRoleWithDomain<
   domain: D
 }
 
-const getCommitteeChamberFromGroupCategory = (category: DTSI_PersonRoleGroupCategory) => {
+function getCommitteeChamberFromGroupCategory(category: DTSI_PersonRoleGroupCategory) {
   switch (category) {
     case DTSI_PersonRoleGroupCategory.CONGRESS_JOINT_COMMITTEE:
     case DTSI_PersonRoleGroupCategory.CONGRESS_JOINT_SUBCOMMITTEE:
@@ -58,7 +58,7 @@ const getCommitteeChamberFromGroupCategory = (category: DTSI_PersonRoleGroupCate
   throw new Error(`unexpected category ${category} passed to getCommitteeChamberFromGroupCategory`)
 }
 
-const getChamberFromRoleCategory = (category: DTSI_PersonRoleCategory | null | undefined) => {
+function getChamberFromRoleCategory(category: DTSI_PersonRoleCategory | null | undefined) {
   switch (category) {
     case DTSI_PersonRoleCategory.CONGRESS:
     case DTSI_PersonRoleCategory.SENATE:
@@ -67,7 +67,7 @@ const getChamberFromRoleCategory = (category: DTSI_PersonRoleCategory | null | u
   throw new Error(`unexpected category ${category!} passed to getChamberFromRoleCategory`)
 }
 
-const getRankFromRoleCategory = (category: DTSI_PersonRoleCategory | null | undefined) => {
+function getRankFromRoleCategory(category: DTSI_PersonRoleCategory | null | undefined) {
   switch (category) {
     case DTSI_PersonRoleCategory.COMMITTEE_CHAIR:
       return 'CHAIR' as const
@@ -94,9 +94,9 @@ export type DTSI_PersonRoleWithAllSubGroups<T extends PartialGroup, R extends Pa
     | undefined
 }
 
-export const getDTSIPersonRoleDomain = <T extends PartialGroup, R extends PartialRole>(
+function getDTSIPersonRoleDomain<T extends PartialGroup, R extends PartialRole>(
   role: DTSI_PersonRoleWithAllSubGroups<T, R>,
-): DTSI_PersonRoleDomain<T> | null | undefined => {
+): DTSI_PersonRoleDomain<T> | null | undefined {
   switch (role.group?.category) {
     case null:
     case undefined:
@@ -158,9 +158,9 @@ export type DTSI_PersonRoleWithNestedDomain<T extends PartialGroup, R extends Pa
   domain: NestedCongressionalRoleDomain<T> | null | undefined
 }
 
-export const groupDTSIPersonRolesByDomain = <T extends PartialGroup, R extends PartialRole>(
+function groupDTSIPersonRolesByDomain<T extends PartialGroup, R extends PartialRole>(
   roles: Array<DTSI_PersonRoleWithAllSubGroups<T, R>>,
-) => {
+) {
   const rolesWithoutDomain: Array<DTSI_PersonRoleWithNestedDomain<T, R>> = []
   const withNestedDomains: Required<{
     role: R

@@ -20,7 +20,7 @@ const getFontSize = (size: number) => {
   return cn('text-4xl')
 }
 
-export const InitialsAvatar: React.FC<InitialsAvatarProps> = ({ size, className, ...props }) => {
+export function InitialsAvatar({ size, className, ...props }: InitialsAvatarProps) {
   return (
     <span
       className={cn('inline-flex items-center justify-center rounded-full bg-gray-800', className)}

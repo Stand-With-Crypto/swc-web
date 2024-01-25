@@ -10,7 +10,7 @@ import { ExternalLink } from '@/components/ui/link'
 import * as Sentry from '@sentry/nextjs'
 import { cn } from '@/utils/web/cn'
 
-const getRichTextComponent = (node: RichText) => {
+function getRichTextComponent(node: RichText) {
   return (
     <span
       className={cn(
@@ -24,11 +24,11 @@ const getRichTextComponent = (node: RichText) => {
   )
 }
 
-const isInlineDescendant = (node: MyInlineDescendant): node is MyInlineElement => {
+function isInlineDescendant(node: MyInlineDescendant): node is MyInlineElement {
   return 'type' in node && node.type === 'a'
 }
 
-const getInlineDescendantComponent = (node: MyInlineDescendant) => {
+function getInlineDescendantComponent(node: MyInlineDescendant) {
   if (isInlineDescendant(node)) {
     return (
       <ExternalLink href={node.url} className="underline">
@@ -41,7 +41,7 @@ const getInlineDescendantComponent = (node: MyInlineDescendant) => {
   return getRichTextComponent(node)
 }
 
-const getRootBlockComponent = (node: RichTextEditorRootBlock) => {
+function getRootBlockComponent(node: RichTextEditorRootBlock) {
   if ('type' in node) {
     switch (node.type) {
       case 'h1':
@@ -114,7 +114,7 @@ const getRootBlockComponent = (node: RichTextEditorRootBlock) => {
   return null
 }
 
-export const RichTextFormatter: React.FC<{ richText: unknown | null }> = ({ richText }) => {
+export function RichTextFormatter({ richText }: { richText: unknown | null }) {
   if (!richText) {
     return null
   }

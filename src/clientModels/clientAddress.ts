@@ -5,7 +5,7 @@ export type ClientAddress = ClientModel<
   Pick<Address, 'id' | 'googlePlaceId' | 'formattedDescription'>
 >
 
-export const getClientAddress = (record: Address): ClientAddress => {
+export function getClientAddress(record: Address): ClientAddress {
   const { id, googlePlaceId, formattedDescription } = record
   return getClientModel({
     id,

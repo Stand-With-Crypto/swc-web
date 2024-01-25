@@ -8,10 +8,7 @@ import {
 import { DTSI_PersonStanceType } from '@/data/dtsi/generated'
 import React from 'react'
 
-export const DTSIStanceDetails: React.FC<IStanceDetailsProps> = ({
-  stance: passedStance,
-  ...props
-}) => {
+export function DTSIStanceDetails({ stance: passedStance, ...props }: IStanceDetailsProps) {
   const stance = passedStance as DTSIStanceDetailsStanceProp
   if (stance.stanceType === DTSI_PersonStanceType.TWEET) {
     return <DTSIStanceDetailsTweet {...props} stance={stance} />

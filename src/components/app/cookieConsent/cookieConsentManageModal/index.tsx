@@ -38,7 +38,7 @@ export default function ManageCookiesModal({ onSubmit }: ManageCookiesModalProps
     ContainerTitle,
   } = useParentComponent()
 
-  const handleManageCookiesSubmit = (values: CookieConsentPermissions) => {
+  function handleManageCookiesSubmit(values: CookieConsentPermissions) {
     onSubmit(values)
     dialogProps.onOpenChange(false)
   }

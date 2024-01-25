@@ -3,10 +3,11 @@ import { DEFAULT_LOCALE, SupportedLocale } from '@/intl/locales'
 import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
-export const getIntlPrefix = (locale: SupportedLocale) =>
-  locale === DEFAULT_LOCALE ? '' : `/${locale}`
+export function getIntlPrefix(locale: SupportedLocale) {
+  return locale === DEFAULT_LOCALE ? '' : `/${locale}`
+}
 
-export const getIntlUrls = (
+export function getIntlUrls(
   locale: SupportedLocale,
   {
     actualPaths,
@@ -14,7 +15,7 @@ export const getIntlUrls = (
     // when triggering vercel logic like revalidatePath, we need the actual paths, not the paths that get rewritten in our middleware (for example, all /en paths get rewritten to /)
     actualPaths?: true
   } = {},
-) => {
+) {
   const localePrefix = locale === DEFAULT_LOCALE && !actualPaths ? '' : `/${locale}`
   return {
     home: () => `${locale === DEFAULT_LOCALE ? '/' : localePrefix}`,
@@ -77,7 +78,7 @@ const NEXT_PUBLIC_VERCEL_URL = requiredOutsideLocalEnv(
   'NEXT_PUBLIC_VERCEL_URL',
 )
 
-export const fullUrl = (path: string) => {
+export function fullUrl(path: string) {
   switch (NEXT_PUBLIC_ENVIRONMENT) {
     case 'local':
       return `http://localhost:3000${path}`

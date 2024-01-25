@@ -1,4 +1,4 @@
-export const userFullName = (
+export function userFullName(
   {
     firstName,
     lastName,
@@ -7,7 +7,7 @@ export const userFullName = (
     lastName?: string | null
   },
   { fallback = '' }: { fallback?: string } = {},
-): string => {
+): string {
   const firstNameTrimmed = firstName?.trim()
   const lastNameTrimmed = lastName?.trim()
 
