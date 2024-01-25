@@ -6,22 +6,14 @@ import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/shared
 import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
 import { useCallback } from 'react'
 
-export function ErrorPagesContent({
-  reset,
-  skipTracking,
-}: {
-  reset: () => void
-  skipTracking?: boolean
-}) {
+export function ErrorPagesContent({ reset }: { reset: () => void }) {
   const onPress = useCallback(() => {
-    if (!skipTracking) {
-      trackClientAnalytic('ErrorPagesContent Try Again Pressed', {
-        component: AnalyticComponentType.button,
-        action: AnalyticActionType.click,
-      })
-    }
+    trackClientAnalytic('ErrorPagesContent Try Again Pressed', {
+      component: AnalyticComponentType.button,
+      action: AnalyticActionType.click,
+    })
     reset()
-  }, [])
+  }, [reset])
   return (
     <div className="container flex flex-grow flex-col items-center justify-center space-y-7">
       <MaybeNextImg src="/error_shield.svg" width={120} height={120} alt="" />
