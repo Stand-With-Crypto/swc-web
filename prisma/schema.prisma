@@ -89,7 +89,7 @@ model User {
   hasOptedInToEmails         Boolean            @map("has_opted_in_to_emails")
   hasOptedInToSms            Boolean            @map("has_opted_in_to_sms")
   hasOptedInToMembership     Boolean            @map("has_opted_in_to_membership")
-  internalStatus             UserInternalStatus @map("internal_status") @default(VISIBLE)
+  internalStatus             UserInternalStatus @default(VISIBLE) @map("internal_status")
   // We'll collect and capture this information in our product analytics tools, but we'll also want to be able to 
   // use this metadata to query our relationship database. This information will only be populated if users
   // opt in to our cookies
@@ -324,37 +324,27 @@ enum NFTCurrency {
   ETH
 }
 
-// TODO determine if this actually should be a model or just an enum
-// my gut is that we want to be able to spin up new mints in the future without having to migrate the db
-// if that's the case then we want a freestanding model
-model NFT {
-  id               String      @id @default(uuid())
-  name             String
-  cost             Decimal     @map("cost")
-  costCurrencyCode NFTCurrency @map("cost_currency_code")
-  datetimeUpdated  DateTime    @updatedAt @map("datetime_updated")
-  datetimeCreated  DateTime    @default(now()) @map("datetime_created")
-
-  nftMint NFTMint[]
-  // TODO Web3 info about address/contract/etc/price (img)
-
-  @@index([id])
-  @@map("nft")
+enum NFTMintStatus {
+  REQUESTED
+  CLAIMED
+  FAILED
 }
 
 model NFTMint {
-  id                     String      @id @default(uuid())
-  nftId                  String      @map("nft_id")
-  nft                    NFT         @relation(fields: [nftId], references: [id])
-  datetimeUpdated        DateTime    @updatedAt @map("datetime_updated")
-  datetimeCreated        DateTime    @default(now()) @map("datetime_created")
-  costAtMint             Decimal     @map("cost_at_mint")
-  costAtMintCurrencyCode NFTCurrency @map("cost_at_mint_currency_code")
-  costAtMintUsd          Decimal     @map("cost_at_mint_usd")
+  id                     String        @id @default(uuid())
+  nftSlug                String        @map("nft_slug")
+  contractAddress        String        @map("contract_address")
+  transactionHash        String        @map("transaction_hash")
+  status                 NFTMintStatus @map("status")
+  datetimeUpdated        DateTime      @updatedAt @map("datetime_updated")
+  datetimeCreated        DateTime      @default(now()) @map("datetime_created")
+  costAtMint             Decimal       @map("cost_at_mint")
+  costAtMintCurrencyCode NFTCurrency   @map("cost_at_mint_currency_code")
+  costAtMintUsd          Decimal       @map("cost_at_mint_usd")
 
   userActions UserAction[]
 
   @@index([id])
-  @@index([nftId])
+  @@index([nftSlug])
   @@map("nft_mint")
 }

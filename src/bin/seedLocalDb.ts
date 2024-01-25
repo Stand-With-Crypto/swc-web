@@ -23,6 +23,7 @@ import { hideBin } from 'yargs/helpers'
 import { UserActionType, UserEmailAddressSource } from '@prisma/client'
 import { mockUserActionOptIn } from '@/mocks/models/mockUserActionOptIn'
 import { mockUserEmailAddress } from '@/mocks/models/mockUserEmailAddress'
+import { mockNFTMint } from '@/mocks/models/mockNFTMint'
 
 const LOCAL_USER_CRYPTO_ADDRESS = requiredEnv(
   process.env.LOCAL_USER_CRYPTO_ADDRESS,
@@ -34,6 +35,7 @@ enum SeedSize {
   MD = 'MD',
   LG = 'LG',
 }
+
 const argv = yargs(hideBin(process.argv)).option('size', {
   type: 'string',
   describe: 'The timestamp of the last updated record',
@@ -208,24 +210,13 @@ async function seed() {
   })
 
   /*
-  nft
-  */
-  await batchAsyncAndLog(
-    _.times(seedSizes([5, 10, 15])).map(() => mockNFT()),
-    data =>
-      prismaClient.nFT.createMany({
-        data,
-      }),
-  )
-  const nft = await prismaClient.nFT.findMany()
-  logEntity({ nft })
-  /*
   userAction
   */
   const userActionTypes = Object.values(UserActionType)
   const userActionTypesToPersist = _.times(seedSizes([400, 4000, 40000])).map(index => {
     return userActionTypes[index % userActionTypes.length]
   })
+
   /*
   NFTMint
   */
@@ -233,13 +224,7 @@ async function seed() {
     userActionTypesToPersist
       .filter(x => x === UserActionType.NFT_MINT)
       .map(() => {
-        const selectedNFT = faker.helpers.arrayElement(nft)
-        return {
-          nftId: selectedNFT.id,
-          costAtMint: selectedNFT.cost,
-          costAtMintCurrencyCode: selectedNFT.costCurrencyCode,
-          costAtMintUsd: selectedNFT.cost.times(MOCK_CURRENT_ETH_USD_EXCHANGE_RATE),
-        }
+        return mockNFTMint()
       }),
     data =>
       prismaClient.nFTMint.createMany({
