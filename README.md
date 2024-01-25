@@ -59,6 +59,8 @@ Whenever you make Prisma schema changes (or pulling commits from `main` that inc
   - `npm run typecheck` - audits code against TypeScript
   - `npm run test` - execute Jest tests
   - `npm run precheck` - executes all 3 commands above concurrently
+  - `npm run e2e:run-headless` - runs all our e2e tests
+    - Currently these only execute when new comments are made to main branch because of database dependencies, this may change in the future
 
 ### Contribution guide
 

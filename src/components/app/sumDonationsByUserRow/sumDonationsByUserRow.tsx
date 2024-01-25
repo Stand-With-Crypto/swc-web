@@ -30,7 +30,7 @@ export function SumDonationsByUserRow({
               width={20}
               height={20}
               src={INDEX_SHIELD_IMAGE_MAP[index]}
-              alt={`${index + 1}`}
+              alt={`position ${index + 1} medal`}
             />
           ) : (
             index + 1
