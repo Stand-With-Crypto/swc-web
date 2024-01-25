@@ -14,8 +14,7 @@ export const getDTSIFormattedShortPersonRole = (
     'status' | 'primaryState' | 'primaryCountryCode' | 'title' | 'roleCategory'
   >,
 ) => {
-  // TODO verify we only need to be vague when referring to roles someone currently does not hold
-  if (role.status === DTSI_PersonRoleStatus.RUNNING_FOR) {
+  if (role.status !== DTSI_PersonRoleStatus.HELD) {
     return 'National Political Figure'
   }
   if (role.primaryState && role.primaryCountryCode === 'US') {
@@ -54,7 +53,6 @@ export const getFormattedDTSIPersonRoleDateRange = ({
 export const getDTSIPersonRoleCategoryDisplayName = (
   role: Pick<DTSI_PersonRole, 'roleCategory' | 'title' | 'status'>,
 ) => {
-  // TODO verify we only need to be vague when referring to roles someone currently does not hold
   if (role.status !== DTSI_PersonRoleStatus.HELD) {
     return 'National Political Figure'
   }
