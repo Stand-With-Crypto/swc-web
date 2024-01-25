@@ -33,9 +33,7 @@ const fetchFromPrisma = async (config: RecentActivityConfig) => {
           userActionEmailRecipients: true,
         },
       },
-      nftMint: {
-        include: { nft: true },
-      },
+      nftMint: true,
       userActionCall: true,
       userActionDonation: true,
       userActionOptIn: true,

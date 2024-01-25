@@ -35,7 +35,7 @@ export async function getAuthenticatedData() {
             },
           },
           userActionCall: true,
-          nftMint: { include: { nft: true } },
+          nftMint: true,
           userActionOptIn: true,
         },
       },
