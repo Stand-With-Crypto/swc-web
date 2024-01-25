@@ -2,6 +2,9 @@ import { NextImage } from '@/components/ui/image'
 import { ExternalLink } from '@/components/ui/link'
 import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
 import { PageTitle } from '@/components/ui/pageTitleText'
+import { ArrowRight } from 'lucide-react'
+
+const ICON_SIZE_PX = 32
 
 export function EventCard({
   imageUrl,
@@ -27,10 +30,14 @@ export function EventCard({
         <PageTitle as="span" size="sm" className="text-left">
           {title}
         </PageTitle>
-        <ExternalLink className={linkBoxLinkClassName} data-link-box-subject href={link}>
-          <span className="text-xl font-bold">{cta}</span>
-          <span></span>
-        </ExternalLink>
+        <div className="w-full">
+          <ExternalLink className={linkBoxLinkClassName} data-link-box-subject href={link}>
+            <div className="flex w-full flex-row items-center justify-between gap-4">
+              <span className="text-xl font-bold">{cta}</span>
+              <ArrowRight size={ICON_SIZE_PX} />
+            </div>
+          </ExternalLink>
+        </div>
       </div>
     </LinkBox>
   )
