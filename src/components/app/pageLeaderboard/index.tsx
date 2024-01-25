@@ -10,9 +10,14 @@ import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 import { SupportedLocale } from '@/intl/locales'
 import { getDataForPageLeaderboard } from '@/components/app/pageLeaderboard/getData'
+import { toBool } from '@/utils/shared/toBool'
 
-// TODO determine if we need to dynamically generate this or if we're comfortable just supporting a hardcoded amount
-export const PAGE_LEADERBOARD_TOTAL_PAGES = process.env.SPEED_UP_LOCAL_BUILDS ? 1 : 10
+export const PAGE_LEADERBOARD_TOTAL_PAGES = 10
+export const PAGE_LEADERBOARD_TOTAL_PRE_GENERATED_PAGES = toBool(
+  process.env.MINIMIZE_PAGE_PRE_GENERATION,
+)
+  ? 1
+  : PAGE_LEADERBOARD_TOTAL_PAGES
 export const PAGE_LEADERBOARD_TITLE = 'Our community'
 export const PAGE_LEADERBOARD_DESCRIPTION = `See how our community is taking a stand to safeguard the future of crypto in America.`
 
