@@ -12,6 +12,7 @@ const createJestConfig = nextJest({
 })
 
 const config: Config = {
+  prettierPath: null,
   // All imported modules in your tests should be mocked automatically
   // automock: false,
 
