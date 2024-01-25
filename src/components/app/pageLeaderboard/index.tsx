@@ -37,8 +37,8 @@ export function PageLeaderboard({
   const urls = getIntlUrls(locale)
   return (
     <div className="container space-y-7">
-      <PageTitle as="h3">{PAGE_LEADERBOARD_TITLE}</PageTitle>
-      <PageSubTitle as="h4">{PAGE_LEADERBOARD_DESCRIPTION}</PageSubTitle>
+      <PageTitle>{PAGE_LEADERBOARD_TITLE}</PageTitle>
+      <PageSubTitle>{PAGE_LEADERBOARD_DESCRIPTION}</PageSubTitle>
       <div className="text-center">
         <div className={cn(tabListStyles, 'mx-auto')}>
           <InternalLink

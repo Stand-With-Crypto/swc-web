@@ -55,6 +55,7 @@ export function GooglePlacesSelect(
           {...inputProps}
         />
       )}
+      placeholder="Type your address..."
       options={data}
       getOptionLabel={val => val.description}
       getOptionKey={val => val.place_id}
