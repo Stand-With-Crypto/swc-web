@@ -205,7 +205,7 @@ export const groupDTSIPersonRolesByDomain = <T extends PartialGroup, R extends P
     })
   })
 
-  /* TODO uncomment to enable displaying subcommittees */
+  /* LATER-TASK uncomment to enable displaying subcommittees */
   // finalRoundToBackfill.forEach(({ role, domain }) => {
   //   const indexOfCongressionalRole = withNestedDomains.findIndex(
   //     x => x.domain.congress.id === domain.congress.id,

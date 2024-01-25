@@ -11,7 +11,6 @@ import { Toaster } from 'sonner'
 import { Navbar } from '@/components/app/navbar'
 import { Footer } from '@/components/app/footer'
 
-// TODO replace with font we want
 const inter = Inter({ subsets: ['latin'] })
 export const dynamic = 'error'
 

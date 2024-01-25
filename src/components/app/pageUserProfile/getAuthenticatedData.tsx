@@ -64,7 +64,7 @@ export async function getAuthenticatedData() {
   }
   return {
     ...getSensitiveDataClientUserWithENSData(rest, ensData),
-    // TODO show UX if this address is not the primary address
+    // LATER-TASK show UX if this address is not the primary address
     currentlyAuthenticatedUserCryptoAddress: getClientUserCryptoAddress(
       currentlyAuthenticatedUserCryptoAddress,
     ),

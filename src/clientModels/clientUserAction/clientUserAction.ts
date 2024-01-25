@@ -70,7 +70,7 @@ export type ClientUserAction = ClientModel<
       | ClientUserActionEmail
       | ClientUserActionCall
       | ClientUserActionDonation
-      | ClientUserActionNFTMint // TODO determine if we want to support NFTMints being offered alongside other actions (so you could have this type alongside others)
+      | ClientUserActionNFTMint
     )
 >
 
@@ -94,7 +94,6 @@ export const getClientUserAction = ({
   record: ClientUserActionDatabaseQuery
   dtsiPeople: DTSIPersonForUserActions[]
 }): ClientUserAction => {
-  // TODO determine how we want to "gracefully fail" if a DTSI slug doesn't exist
   const peopleBySlug = _.keyBy(dtsiPeople, x => x.slug)
   const { id, datetimeCreated, actionType, nftMint } = record
   const sharedProps = {

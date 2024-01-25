@@ -70,7 +70,6 @@ export async function Navbar({ locale }: { locale: SupportedLocale }) {
           </div>
         </div>
       )}
-      {/* TODO mobile once they have mockups */}
       <nav className="container flex justify-between py-3 md:py-8">
         <div className="flex items-center gap-8">
           <InternalLink className="flex-shrink-0" href={urls.home()}>
@@ -127,7 +126,6 @@ export async function Navbar({ locale }: { locale: SupportedLocale }) {
         </Drawer>
 
         <div className="hidden md:flex">
-          {/* TODO actually implement donate button */}
           <Button className="mr-3" asChild>
             <InternalLink href={urls.donate()}>Donate</InternalLink>
           </Button>

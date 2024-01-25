@@ -30,13 +30,14 @@ export function PageUserProfile({
   const performedUserActionTypes = _.uniq(userActions.map(x => x.actionType))
   return (
     <div className="container">
-      {!!user.mergeAlerts.length && (
+      {/* LATER-TASK enable this feature */}
+      {/* {!!user.mergeAlerts.length && (
         <div className="mb-6 space-y-2">
           {user.mergeAlerts.map(mergeAlert => (
             <MergeAlertCTA key={mergeAlert.id} user={user} mergeAlert={mergeAlert} />
           ))}
         </div>
-      )}
+      )} */}
 
       <div className="mb-6 flex items-center justify-between md:mx-4">
         <div className="flex items-center gap-2">

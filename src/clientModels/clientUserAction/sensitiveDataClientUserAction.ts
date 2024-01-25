@@ -80,7 +80,7 @@ export type SensitiveDataClientUserAction = ClientModel<
       | SensitiveDataClientUserActionEmail
       | SensitiveDataClientUserActionCall
       | SensitiveDataClientUserActionDonation
-      | SensitiveDataClientUserActionNFTMint // TODO determine if we want to support NFTMints being offered alongside other actions (so you could have this type alongside others)
+      | SensitiveDataClientUserActionNFTMint
     )
 >
 
@@ -104,7 +104,6 @@ export const getSensitiveDataClientUserAction = ({
   record: SensitiveDataClientUserActionDatabaseQuery
   dtsiPeople: DTSIPersonForUserActions[]
 }): SensitiveDataClientUserAction => {
-  // TODO determine how we want to "gracefully fail" if a DTSI slug doesn't exist
   const peopleBySlug = _.keyBy(dtsiPeople, x => x.slug)
   const { id, datetimeCreated, actionType, nftMint } = record
   const sharedProps = {

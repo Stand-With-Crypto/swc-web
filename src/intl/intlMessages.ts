@@ -7,7 +7,7 @@ import { getLogger } from '@/utils/shared/logger'
 
 const logger = getLogger('intlMessages')
 
-// TODO figure out the translation workflow with a 3rd party provider
+// LATER-TASK figure out the translation workflow with a 3rd party provider
 const mockGetIntlMessages = async (locale: SupportedLocale) => {
   // We never want to use any compiled translations in local development for english because we always want the latest changes to the defaultMessage to be displayed
   const enUSTranslations =
@@ -31,7 +31,7 @@ export default async function getIntl(locale: SupportedLocale) {
     locale,
     messages: await mockGetIntlMessages(locale),
     onError: err => {
-      // TODO determine when we want to enforce no missing translations
+      // LATER-TASK determine when we want to enforce no missing translations
       if ('code' in err && err.code === 'MISSING_TRANSLATION') {
         return
       }

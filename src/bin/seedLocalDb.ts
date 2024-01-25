@@ -344,7 +344,7 @@ async function seed() {
   await batchAsyncAndLog(
     _.flatten(
       userActionsByType[UserActionType.EMAIL].map(actionEmail =>
-        // TODO expand this to be more than 1 recipient once we have UX
+        // LATER-TASK expand this to be more than 1 recipient once we have UX
         _.times(faker.helpers.arrayElement([1])).map(() => ({
           ...mockUserActionEmailRecipient(),
           userActionEmailId: actionEmail.id,
