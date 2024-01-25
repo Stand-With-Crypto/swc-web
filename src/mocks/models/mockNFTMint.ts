@@ -13,7 +13,10 @@ import NFTMintStatus = $Enums.NFTMintStatus
 export function mockNFTMint(): NFTMint {
   const status = faker.helpers.arrayElement(Object.values(NFTMintStatus))
   const transactionHash = status === NFTMintStatus.CLAIMED ? faker.git.commitSha() : ''
-  const nft = faker.helpers.arrayElement([SWCShieldThirdWebNFT, CallYourRepresentativeSept11ThirdWebNFT])
+  const nft = faker.helpers.arrayElement([
+    SWCShieldThirdWebNFT,
+    CallYourRepresentativeSept11ThirdWebNFT,
+  ])
   const costAtMint = new Decimal(faker.number.float({ min: 0.01, max: 0.2, precision: 0.01 }))
   return {
     ...mockCommonDatetimes(),
