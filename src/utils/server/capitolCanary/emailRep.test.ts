@@ -1,12 +1,12 @@
 import { CapitolCanaryCampaignId } from '@/utils/server/capitolCanary/campaigns'
-import { formatCapitolCanaryAdvocateCreationRequest } from '@/utils/server/capitolCanary/createAdvocate'
 import { faker } from '@faker-js/faker'
 import { mockUser } from '@/mocks/models/mockUser'
 import { mockAddress } from '@/mocks/models/mockAddress'
 import { mockUserEmailAddress } from '@/mocks/models/mockUserEmailAddress'
-import { CreateAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
+import { EmailRepViaCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
+import { formatCapitolCanaryEmailRepRequest } from '@/utils/server/capitolCanary/emailRep'
 
-it('formats the "create capitol canary advocate" request correctly', () => {
+it('formats the "email rep via capitol canary" request correctly', () => {
   // Set the seed so that the mocked output is deterministic.
   faker.seed(1)
 
@@ -14,7 +14,7 @@ it('formats the "create capitol canary advocate" request correctly', () => {
   const mockedAddress = mockAddress()
   const mockedEmailAddress = mockUserEmailAddress()
 
-  const payload: CreateAdvocateInCapitolCanaryPayloadRequirements = {
+  const payload: EmailRepViaCapitolCanaryPayloadRequirements = {
     campaignId: CapitolCanaryCampaignId.TESTING,
     user: {
       ...mockedUser,
@@ -37,40 +37,27 @@ it('formats the "create capitol canary advocate" request correctly', () => {
       utmContent: 'utmContent',
       tags: ['tag1', 'tag2'],
     },
+    emailMessage: 'This is a test email message.',
+    emailSubject: 'This is a test email subject.',
   }
 
-  const formattedRequest = formatCapitolCanaryAdvocateCreationRequest(payload)
+  const formattedRequest = formatCapitolCanaryEmailRepRequest({ ...payload, advocateId: 123456 })
 
   expect(formattedRequest).toMatchInlineSnapshot(`
     {
-      "address1": "5976 Armstrong Fords",
-      "address2": "Suite 865",
-      "campaigns": [
-        137795,
-      ],
-      "city": "Bell Gardens",
-      "country": "KG",
-      "email": "Wade81@yahoo.com",
-      "emailOptin": 1,
-      "emailOptout": 0,
-      "firstname": "Blake",
-      "lastname": "Leffler",
+      "advocateid": 123456,
+      "campaignid": 137795,
+      "emailMessage": "This is a test email message.",
+      "emailSubject": "This is a test email subject.",
       "p2aSource": "source",
-      "phone": "+10692922450",
-      "smsOptin": 1,
-      "smsOptinConfirmed": 0,
-      "smsOptout": 0,
-      "state": "Florida",
-      "tags": [
-        "tag1",
-        "tag2",
+      "type": [
+        "email",
       ],
       "utm_campaign": "utmCampaign",
       "utm_content": "utmContent",
       "utm_medium": "utmMedium",
       "utm_source": "utmSource",
       "utm_term": "utmTerm",
-      "zip5": "17916",
     }
   `)
 })
