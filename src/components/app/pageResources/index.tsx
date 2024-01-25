@@ -1,4 +1,5 @@
 import { EventCard } from '@/components/app/pageResources/eventCard'
+import { PolicyCard } from '@/components/app/pageResources/policyCard'
 import { UserActionRowCTAsListWithApi } from '@/components/app/userActionRowCTA/userActionRowCTAsListWithApi'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
@@ -53,6 +54,20 @@ export function PageResources() {
         <p>
           Learn more about the pending bills and resolutions that can shape the industry’s future.
         </p>
+        <div className="flex flex-col gap-4">
+          <PolicyCard
+            title="FIT21 [H.R. 4763]"
+            description="Setting the foundational rules for crypto that are pro-consumer and pro-job creation"
+            primaryCta="Learn more"
+            primaryCtaUrl="https://www.standwithcrypto.org/docs/FIT21_One_Pager.pdf"
+          />
+          <PolicyCard
+            title="Clarity for Stablecoin Act [H.R. 4766]"
+            description="A regulatory framework for stablecoins like USDC"
+            primaryCta="Learn more"
+            primaryCtaUrl="https://www.standwithcrypto.org/docs/SWC_Stablecoin.pdf"
+          />
+        </div>
       </section>
 
       <section className="mb-16 space-y-4 text-center">
