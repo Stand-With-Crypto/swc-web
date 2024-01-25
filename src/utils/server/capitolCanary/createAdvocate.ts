@@ -1,9 +1,6 @@
-import { fetchReq } from '@/utils/shared/fetchReq'
+import { CreateAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
+import { FetchReqError, fetchReq } from '@/utils/shared/fetchReq'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
-import { User, Address, UserEmailAddress } from '@prisma/client'
-import { CapitolCanaryCampaignId } from '@/utils/server/capitolCanary/campaigns'
-import { CapitolCanaryOpts } from '@/utils/server/capitolCanary/opts'
-import { CapitolCanaryMetadata } from '@/utils/server/capitolCanary/metadata'
 import * as Sentry from '@sentry/nextjs'
 
 const CAPITOL_CANARY_API_KEY = requiredEnv(
@@ -17,16 +14,6 @@ const CAPITOL_CANARY_API_SECRET = requiredEnv(
 )
 
 const CAPITOL_CANARY_CREATE_ADVOCATE_API_URL = 'https://api.phone2action.com/2.0/advocates'
-
-export const CAPITOL_CANARY_CREATE_ADVOCATE_SUCCESS_CODE = 1
-
-// Interface is exported for external use.
-export interface CreateAdvocateInCapitolCanaryPayloadRequirements {
-  campaignId: CapitolCanaryCampaignId
-  user: User & { address: Address | null } & { primaryUserEmailAddress: UserEmailAddress | null }
-  opts?: CapitolCanaryOpts
-  metadata?: CapitolCanaryMetadata
-}
 
 // Interface based on: https://docs.phone2action.com/#:~:text=update%20Phone2Action%20advocates-,Create%20an%20advocate,-This%20endpoint%20will
 // Interface should not be accessed directly - use the requirements interface above.
@@ -124,40 +111,21 @@ export function formatCapitolCanaryAdvocateCreationRequest(
     formattedRequest.tags = metadata.tags
   }
 
-  // Formatted request validation.
-  const errors = []
-  if (!formattedRequest.email && !formattedRequest.phone) {
-    errors.push('must include email or phone')
-  }
-  if (errors.length > 0) {
-    return new Error(errors.join('. '))
-  }
-
-  // Request fixups.
-  if (!formattedRequest.phone && (formattedRequest.smsOptin || formattedRequest.smsOptout)) {
-    formattedRequest.smsOptin = 0
-    formattedRequest.smsOptout = 0
-  }
-  if (!formattedRequest.smsOptin && formattedRequest.smsOptinConfirmed) {
-    formattedRequest.smsOptinConfirmed = 0
-  }
-  if (!formattedRequest.email && (formattedRequest.emailOptin || formattedRequest.emailOptout)) {
-    formattedRequest.emailOptin = 0
-    formattedRequest.emailOptout = 0
-  }
-
   return formattedRequest
 }
 
 export async function createAdvocateInCapitolCanary(request: CreateAdvocateInCapitolCanaryRequest) {
-  const httpResp = await fetchReq(CAPITOL_CANARY_CREATE_ADVOCATE_API_URL, {
-    method: 'POST',
-    headers: {
-      Authorization: `Basic ${btoa(`${CAPITOL_CANARY_API_KEY}:${CAPITOL_CANARY_API_SECRET}`)}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(request),
-  }).catch(error => {
+  try {
+    const httpResp = await fetchReq(CAPITOL_CANARY_CREATE_ADVOCATE_API_URL, {
+      method: 'POST',
+      headers: {
+        Authorization: `Basic ${btoa(`${CAPITOL_CANARY_API_KEY}:${CAPITOL_CANARY_API_SECRET}`)}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(request),
+    })
+    return (await httpResp.json()) as CreateAdvocateInCapitolCanaryResponse
+  } catch (error) {
     Sentry.captureException(error, {
       level: 'error',
       extra: {
@@ -170,7 +138,13 @@ export async function createAdvocateInCapitolCanary(request: CreateAdvocateInCap
         campaigns: request.campaigns.join(', '),
       },
     })
+    if (
+      error instanceof FetchReqError &&
+      error.response?.status >= 400 &&
+      error.response?.status < 500
+    ) {
+      return JSON.parse(error.body as string) as CreateAdvocateInCapitolCanaryResponse
+    }
     throw error
-  })
-  return (await httpResp.json()) as CreateAdvocateInCapitolCanaryResponse
+  }
 }
