@@ -15,12 +15,7 @@ interface SumDonationsRowProps {
 
 const INDEX_SHIELD_IMAGE_MAP = ['/shields/gold.svg', '/shields/silver.svg', '/shields/bronze.svg']
 
-export function SumDonationsByUserRow({
-  locale,
-  sumDonations,
-  index,
-  overrideDonationRecipient,
-}: SumDonationsRowProps) {
+export function SumDonationsByUserRow({ locale, sumDonations, index }: SumDonationsRowProps) {
   return (
     <div className="flex items-center justify-between gap-5">
       <div className="flex items-center gap-2">
@@ -41,9 +36,6 @@ export function SumDonationsByUserRow({
         </div>
         <div>
           <div>{getUserDisplayName(sumDonations.user)}</div>
-          <div className="text-xs text-gray-500">
-            {overrideDonationRecipient || 'Stand With Crypto'}
-          </div>
         </div>
       </div>
       <div className="shrink-0 text-sm">

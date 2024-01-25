@@ -5,6 +5,7 @@ import { SumDonationsByUser } from '@/data/aggregations/getSumDonationsByUser'
 import { getPublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 import { SupportedLocale } from '@/intl/locales'
 import { RecentActivityAndLeaderboardTabs } from './recentActivityAndLeaderboardTabs'
+import { ExternalLink } from '@/components/ui/link'
 
 export function RecentActivityAndLeaderboard({
   locale,
@@ -38,10 +39,14 @@ export function RecentActivityAndLeaderboard({
         ))}
       </TabsContent>
       <TabsContent value={RecentActivityAndLeaderboardTabs.LEADERBOARD} className="space-y-7">
-        {/* TODO tooltip for Fairshake */}
-        {/* TODO hardcode brian's donations are from fairshake*/}
         <p className="mt-2 h-7 text-center text-xs text-gray-500">
-          Donations are from FairShake and Stand With Crypto
+          Donations to{' '}
+          <ExternalLink
+            href={'https://www.axios.com/2023/12/18/crypto-super-pac-fairshake-2024-elections'}
+          >
+            Fairshake
+          </ExternalLink>
+          , a pro-crypto Super PAC, are not included on the leaderboard.
         </p>
         {sumDonationsByUser.map((donor, index) => (
           <SumDonationsByUserRow
