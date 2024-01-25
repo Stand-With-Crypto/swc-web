@@ -40,7 +40,7 @@ export function DTSIPersonCard({
         </div>
       </div>
       <div>
-        <DTSIFormattedLetterGrade size={30} person={person} />
+        <DTSIFormattedLetterGrade size={40} person={person} />
       </div>
     </LinkBox>
   )
