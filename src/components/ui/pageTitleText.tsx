@@ -21,7 +21,7 @@ const pageTitleVariants = cva('text-center text-3xl font-bold md:text-4xl lg:tex
 interface PageTitleProps
   extends React.HTMLAttributes<HTMLHeadingElement>,
     VariantProps<typeof pageTitleVariants> {
-  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p'
+  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span'
   withoutBalancer?: boolean
 }
 
