@@ -7,7 +7,9 @@ const config: Config = {
       center: true,
       padding: { DEFAULT: '1rem', md: '2rem' },
       screens: {
-        '2xl': '1086px',
+        sm: '360px',
+        md: '768px',
+        lg: '1280px',
       },
     },
     extend: {
