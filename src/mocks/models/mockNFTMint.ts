@@ -11,28 +11,21 @@ import {
 import NFTMintStatus = $Enums.NFTMintStatus
 
 export function mockNFTMint(): NFTMint {
-  let index = Math.floor(Math.random() * Object.keys(NFTMintStatus).length * 2)
-  let status: NFTMintStatus
-  if (index >= Object.keys(NFTMintStatus).length) {
-    status = NFTMintStatus.CLAIMED
-  } else {
-    status = Object.values(NFTMintStatus)[index]
-  }
+  const status = faker.helpers.arrayElement(Object.values(NFTMintStatus))
+
   let transactionHash = ''
-  if (status == NFTMintStatus.CLAIMED) {
+  if (status === NFTMintStatus.CLAIMED) {
     transactionHash = faker.git.commitSha()
   }
-  const nfts = [SWCShieldThirdWebNFT, CallYourRepresentativeSept11ThirdWebNFT]
-  index = Math.floor(Math.random() * nfts.length)
-  const nft = nfts[index]
+  const nft = faker.helpers.arrayElement([SWCShieldThirdWebNFT, CallYourRepresentativeSept11ThirdWebNFT])
 
   const costAtMint = new Decimal(faker.number.float({ min: 0.01, max: 0.2, precision: 0.01 }))
   return {
     ...mockCommonDatetimes(),
     id: fakerFields.id(),
-    nftSlug: nft.Slug,
-    contractAddress: nft.ContractAddress,
-    transactionHash: transactionHash,
+    nftSlug: nft.slug,
+    contractAddress: nft.contractAddress,
+    transactionHash,
     status: status,
     costAtMint: costAtMint,
     costAtMintCurrencyCode: NFTCurrency.ETH,
