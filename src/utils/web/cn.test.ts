@@ -1,3 +1,4 @@
+import { expect } from '@jest/globals'
 import { cn } from './cn'
 
 it('strips conflicting classes', () => {

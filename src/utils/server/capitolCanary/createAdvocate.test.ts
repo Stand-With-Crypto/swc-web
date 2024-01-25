@@ -4,6 +4,7 @@ import {
   formatCapitolCanaryAdvocateCreationRequest,
 } from '@/utils/server/capitolCanary/createAdvocate'
 import { Address, User, UserEmailAddress } from '@prisma/client'
+import { expect } from '@jest/globals'
 
 it('formats the request correctly', () => {
   const mockedUser: User = {
