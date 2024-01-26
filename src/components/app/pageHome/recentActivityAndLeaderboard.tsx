@@ -4,22 +4,21 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { SumDonationsByUser } from '@/data/aggregations/getSumDonationsByUser'
 import { getPublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 import { SupportedLocale } from '@/intl/locales'
-import { RecentActivityAndLeaderboardTabs } from './recentActivityAndLeaderboardTabs'
 import { ExternalLink } from '@/components/ui/link'
+import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
+import { useApiHomepageCommunityMetrics } from '@/hooks/useApiHomepageCommunityMetrics'
 
 export function RecentActivityAndLeaderboard({
   locale,
-  actions,
-  sumDonationsByUser,
-  offset = 0,
   defaultValue = RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
+  ...data
 }: {
   locale: SupportedLocale
   actions: Awaited<ReturnType<typeof getPublicRecentActivity>>
   sumDonationsByUser: SumDonationsByUser
-  offset?: number
   defaultValue?: RecentActivityAndLeaderboardTabs
 }) {
+  const { sumDonationsByUser, actions } = useApiHomepageCommunityMetrics(data).data
   return (
     <Tabs defaultValue={defaultValue} className="mx-auto w-full max-w-2xl">
       <div className="text-center">
@@ -49,12 +48,7 @@ export function RecentActivityAndLeaderboard({
           , a pro-crypto Super PAC, are not included on the leaderboard.
         </p>
         {sumDonationsByUser.map((donor, index) => (
-          <SumDonationsByUserRow
-            key={index}
-            index={offset + index}
-            sumDonations={donor}
-            locale={locale}
-          />
+          <SumDonationsByUserRow key={index} index={index} sumDonations={donor} locale={locale} />
         ))}
       </TabsContent>
     </Tabs>
