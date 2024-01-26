@@ -1,0 +1,53 @@
+import { WalletConfig, useWallet, useWallets } from '@thirdweb-dev/react-core'
+import { useState, useEffect, useRef, createContext, useContext } from 'react'
+
+export enum ReservedScreens {
+  MAIN = 'main',
+  GET_STARTED = 'getStarted',
+  SIGN_IN = 'signIn',
+}
+
+type Screen = string | WalletConfig
+
+export const ScreenContext = createContext<Screen | undefined>(undefined)
+
+export function useScreen() {
+  const walletConfigs = useWallets()
+  const initialScreen =
+    (walletConfigs.length === 1 && !walletConfigs[0]?.selectUI
+      ? walletConfigs[0]
+      : ReservedScreens.MAIN) || ReservedScreens.MAIN
+
+  const [screen, setScreen] = useState<string | WalletConfig>(initialScreen)
+  const prevInitialScreen = useRef(initialScreen)
+  const wallet = useWallet()
+
+  // when the initial screen changes, reset the screen to the initial screen ( if the modal is closed )
+  useEffect(() => {
+    if (initialScreen !== prevInitialScreen.current) {
+      prevInitialScreen.current = initialScreen
+      setScreen(initialScreen)
+    }
+  }, [initialScreen])
+
+  // if on signature screen and suddenly the wallet is disconnected, go back to the main screen
+  useEffect(() => {
+    if (!wallet && screen === ReservedScreens.SIGN_IN) {
+      setScreen(ReservedScreens.MAIN)
+    }
+  }, [wallet, screen])
+
+  return {
+    screen,
+    setScreen,
+    initialScreen,
+  }
+}
+
+export function useScreenContext() {
+  const screen = useContext(ScreenContext)
+  if (!screen) {
+    throw new Error('useScreenContext must be used within a <ScreenProvider />')
+  }
+  return screen
+}
