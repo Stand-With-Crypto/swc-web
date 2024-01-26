@@ -170,19 +170,10 @@ export async function actionCreateUserActionEmailCongressperson(input: Input) {
     user: {
       ...user,
       address: user.address!,
-      primaryUserEmailAddress: {
-        // NOTE: The user might send the message using a different email than their primary email, hence why we use the provided email address.
-        emailAddress: validatedFields.data.emailAddress,
-
-        // The remaining fields do not matter as they are not used in Capitol Canary.
-        id: '',
-        userId: user.id,
-        datetimeCreated: new Date(),
-        datetimeUpdated: new Date(),
-        isVerified: false,
-        source: UserEmailAddressSource.USER_ENTERED,
-      },
     },
+    userEmailAddress: user.userEmailAddresses.find(
+      emailAddr => emailAddr.emailAddress === validatedFields.data.emailAddress,
+    )!,
     emailSubject: 'Support FIT21', // This does not particularly matter as subject is overridden in Capitol Canary.
     emailMessage: validatedFields.data.message,
   }

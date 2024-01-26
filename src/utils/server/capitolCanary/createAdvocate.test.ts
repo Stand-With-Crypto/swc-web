@@ -20,8 +20,8 @@ it('formats the "create capitol canary advocate" request correctly', () => {
     user: {
       ...mockedUser,
       address: mockedAddress,
-      primaryUserEmailAddress: mockedEmailAddress,
     },
+    userEmailAddress: mockedEmailAddress,
     opts: {
       isSmsOptin: true,
       isSmsOptinConfirmed: false,
@@ -44,24 +44,24 @@ it('formats the "create capitol canary advocate" request correctly', () => {
 
   expect(formattedRequest).toMatchInlineSnapshot(`
 {
-  "address1": "5976 Armstrong Fords",
-  "address2": "Suite 865",
+  "address1": "9764 Domenico Viaduct",
+  "address2": "Suite 759",
   "campaigns": [
     142628,
   ],
-  "city": "Bell Gardens",
-  "country": "KG",
-  "email": "Wade81@yahoo.com",
+  "city": "East Jaquanville",
+  "country": "UA",
+  "email": "Edythe.Raynor@hotmail.com",
   "emailOptin": 1,
   "emailOptout": 0,
   "firstname": "Blake",
   "lastname": "Leffler",
   "p2aSource": "source",
-  "phone": "+10692922450",
+  "phone": "+16929224505",
   "smsOptin": 1,
   "smsOptinConfirmed": 0,
   "smsOptout": 0,
-  "state": "Florida",
+  "state": "Pennsylvania",
   "tags": [
     "tag1",
     "tag2",
@@ -71,7 +71,7 @@ it('formats the "create capitol canary advocate" request correctly', () => {
   "utm_medium": "utmMedium",
   "utm_source": "utmSource",
   "utm_term": "utmTerm",
-  "zip5": "17916",
+  "zip5": "16402-7572",
 }
 `)
 })

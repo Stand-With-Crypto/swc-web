@@ -25,8 +25,8 @@ async function smokeTestCreateAdvocateWithInngest() {
     user: {
       ...mockedUser,
       address: mockedAddress,
-      primaryUserEmailAddress: mockedEmailAddress,
     },
+    userEmailAddress: mockedEmailAddress,
     opts: {
       isEmailOptin: true,
     },

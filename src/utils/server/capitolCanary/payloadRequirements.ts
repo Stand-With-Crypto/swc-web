@@ -8,7 +8,8 @@ import { CapitolCanaryMetadata } from '@/utils/server/capitolCanary/metadata'
 
 export interface CreateAdvocateInCapitolCanaryPayloadRequirements {
   campaignId: CapitolCanaryCampaignId | SandboxCapitolCanaryCampaignId
-  user: User & { address: Address | null } & { primaryUserEmailAddress: UserEmailAddress | null }
+  user: User & { address: Address | null }
+  userEmailAddress: UserEmailAddress
   opts?: CapitolCanaryOpts
   metadata?: CapitolCanaryMetadata
 }

@@ -26,8 +26,8 @@ async function smokeTestEmailRepWithInngest() {
     user: {
       ...mockedUser,
       address: mockedAddress,
-      primaryUserEmailAddress: mockedEmailAddress,
     },
+    userEmailAddress: mockedEmailAddress,
     metadata: {
       tags: ['Smoke Test User'],
     },

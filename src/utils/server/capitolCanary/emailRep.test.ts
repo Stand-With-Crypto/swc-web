@@ -20,8 +20,8 @@ it('formats the "email rep via capitol canary" request correctly', () => {
     user: {
       ...mockedUser,
       address: mockedAddress,
-      primaryUserEmailAddress: mockedEmailAddress,
     },
+    userEmailAddress: mockedEmailAddress,
     opts: {
       isSmsOptin: true,
       isSmsOptinConfirmed: false,
