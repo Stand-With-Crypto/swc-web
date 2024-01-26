@@ -1,11 +1,9 @@
 import { ClientAddress, getClientAddress } from '@/clientModels/clientAddress'
-import { ClientNFT, getClientNFT } from '@/clientModels/clientNFT'
 import { ClientNFTMint, getClientNFTMint } from '@/clientModels/clientNFTMint'
 import { ClientModel, getClientModel } from '@/clientModels/utils'
 import { DTSIPersonForUserActions } from '@/data/dtsi/queries/queryDTSIPeopleBySlugForUserActions'
 import {
   Address,
-  NFT,
   NFTMint,
   UserAction,
   UserActionCall,
@@ -29,7 +27,7 @@ type SensitiveDataClientUserActionDatabaseQuery = UserAction & {
         userActionEmailRecipients: UserActionEmailRecipient[]
       })
     | null
-  nftMint: (NFTMint & { nft: NFT }) | null
+  nftMint: NFTMint | null
   userActionCall: UserActionCall | null
   userActionDonation: UserActionDonation | null
   userActionOptIn: UserActionOptIn | null
@@ -59,7 +57,7 @@ type SensitiveDataClientUserActionDonation = Pick<
   actionType: typeof UserActionType.DONATION
 }
 type SensitiveDataClientUserActionNFTMint = {
-  nftMint: ClientNFTMint & { nft: ClientNFT }
+  nftMint: ClientNFTMint
   actionType: typeof UserActionType.NFT_MINT
 }
 type SensitiveDataClientUserActionOptIn = Pick<UserActionOptIn, 'optInType'> & {
@@ -73,7 +71,7 @@ At the database schema level we can't enforce that a single action only has one 
 */
 export type SensitiveDataClientUserAction = ClientModel<
   Pick<UserAction, 'id' | 'datetimeCreated' | 'actionType'> & {
-    nftMint: (ClientNFTMint & { nft: ClientNFT }) | null
+    nftMint: ClientNFTMint | null
   } & (
       | SensitiveDataClientUserActionTweet
       | SensitiveDataClientUserActionOptIn
@@ -113,7 +111,6 @@ export const getSensitiveDataClientUserAction = ({
     nftMint: nftMint
       ? {
           ...getClientNFTMint(nftMint),
-          nft: getClientNFT(nftMint.nft),
         }
       : null,
   }

@@ -48,4 +48,7 @@ public/robots.txt
 public/sitemap.xml
 public/sitemap-0.xml
 
+# jetbrains
+.idea
+
 src/bin/localCache
