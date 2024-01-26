@@ -174,7 +174,7 @@ export async function actionCreateUserActionEmailCongressperson(input: Input) {
         // NOTE: The user might send the message using a different email than their primary email, hence why we use the provided email address.
         emailAddress: validatedFields.data.emailAddress,
 
-        // The remaining fields to not matter as they are not used in Capitol Canary.
+        // The remaining fields do not matter as they are not used in Capitol Canary.
         id: '',
         userId: user.id,
         datetimeCreated: new Date(),
