@@ -32,7 +32,7 @@ export const zodUpdateUserProfileFormFields = base
       const parseEmail = emailParser(data.emailAddress)
       if (!parseEmail.success) {
         parseEmail.error.issues.forEach(issue => {
-          ctx.addIssue(issue)
+          ctx.addIssue({ ...issue, path: ['emailAddress'] })
         })
       }
     }

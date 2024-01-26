@@ -117,7 +117,7 @@ export function UpdateUserProfileForm({
           className="space-y-8"
         >
           <div className="grid grid-cols-1 gap-4">
-            {isEmbeddedWalletUser && (
+            {isEmbeddedWalletUser || (
               <FormField
                 control={form.control}
                 name="emailAddress"
