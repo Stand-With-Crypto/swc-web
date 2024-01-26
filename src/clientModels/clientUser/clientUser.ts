@@ -6,10 +6,10 @@ import {
 } from '@/clientModels/clientUser/clientUserCryptoAddress'
 import { ClientModel, getClientModel } from '@/clientModels/utils'
 import { UserENSData } from '@/data/web3/types'
-import { User, UserCryptoAddress } from '@prisma/client'
+import { User, UserCryptoAddress, UserInformationVisibility } from '@prisma/client'
 
 export type ClientUser = ClientModel<
-  Pick<User, 'id' | 'isPubliclyVisible'> & {
+  Pick<User, 'id' | 'informationVisibility'> & {
     firstName: string | null
     lastName: string | null
     primaryUserCryptoAddress: ClientUserCryptoAddress | null
@@ -19,16 +19,16 @@ export type ClientUser = ClientModel<
 export const getClientUser = (
   record: User & { primaryUserCryptoAddress: null | UserCryptoAddress },
 ): ClientUser => {
-  const { firstName, lastName, primaryUserCryptoAddress, id, isPubliclyVisible } = record
+  const { firstName, lastName, primaryUserCryptoAddress, id, informationVisibility } = record
   return getClientModel({
-    firstName: isPubliclyVisible ? firstName : null,
-    lastName: isPubliclyVisible ? lastName : null,
+    firstName: informationVisibility === UserInformationVisibility.ALL_INFO ? firstName : null,
+    lastName: informationVisibility === UserInformationVisibility.ALL_INFO ? lastName : null,
     primaryUserCryptoAddress:
-      isPubliclyVisible && primaryUserCryptoAddress
+      informationVisibility !== UserInformationVisibility.ANONYMOUS && primaryUserCryptoAddress
         ? getClientUserCryptoAddress(primaryUserCryptoAddress)
         : null,
     id,
-    isPubliclyVisible,
+    informationVisibility,
   })
 }
 

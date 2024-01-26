@@ -1,7 +1,7 @@
 import { RecentActivityRow } from '@/components/app/recentActivityRow/recentActivityRow'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/recentActivityAndLeaderboard/recentActivityAndLeaderboardTabs'
 import { SumDonationsByUserRow } from '@/components/app/sumDonationsByUserRow/sumDonationsByUserRow'
-import { InternalLink } from '@/components/ui/link'
+import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { PaginationLinks } from '@/components/ui/paginationLinks'
@@ -37,8 +37,8 @@ export function PageLeaderboard({
   const urls = getIntlUrls(locale)
   return (
     <div className="container space-y-7">
-      <PageTitle as="h3">{PAGE_LEADERBOARD_TITLE}</PageTitle>
-      <PageSubTitle as="h4">{PAGE_LEADERBOARD_DESCRIPTION}</PageSubTitle>
+      <PageTitle>{PAGE_LEADERBOARD_TITLE}</PageTitle>
+      <PageSubTitle>{PAGE_LEADERBOARD_DESCRIPTION}</PageSubTitle>
       <div className="text-center">
         <div className={cn(tabListStyles, 'mx-auto')}>
           <InternalLink
@@ -75,7 +75,13 @@ export function PageLeaderboard({
         {tab === RecentActivityAndLeaderboardTabs.LEADERBOARD && (
           <>
             <p className="mt-2 h-7 text-center text-xs text-gray-500">
-              Donations are from FairShake and Stand With Crypto
+              Donations to{' '}
+              <ExternalLink
+                href={'https://www.axios.com/2023/12/18/crypto-super-pac-fairshake-2024-elections'}
+              >
+                Fairshake
+              </ExternalLink>
+              , a pro-crypto Super PAC, are not included on the leaderboard.
             </p>
             {sumDonationsByUser.map((donor, index) => (
               <SumDonationsByUserRow

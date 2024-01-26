@@ -37,7 +37,6 @@ export function ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: Suppo
   if (!address || !res.data) {
     return (
       <div className="mx-auto max-w-md">
-        {/* TODO style */}
         <GooglePlacesSelect
           className="rounded-full bg-gray-100 text-gray-600"
           placeholder="Enter your address"

@@ -4,6 +4,7 @@ import { NextImage } from '@/components/ui/image'
 import { ImageAvatarProps } from '@/components/ui/imageAvatar'
 
 import { deterministicArraySelection } from '@/utils/shared/deterministicArraySelection'
+import { UserInformationVisibility } from '@prisma/client'
 
 const genericImages = [
   '/userAvatars/blue.svg',
@@ -32,13 +33,15 @@ function DefaultUserAvatar({ size, ...props }: Pick<ImageAvatarProps, 'size' | '
   )
 }
 
-// TODO support ENS images and person name
 export const UserAvatar: React.FC<
   {
-    user: Pick<ClientUserWithENSData, 'isPubliclyVisible' | 'primaryUserCryptoAddress'>
+    user: Pick<ClientUserWithENSData, 'informationVisibility' | 'primaryUserCryptoAddress'>
   } & Pick<ImageAvatarProps, 'size' | 'className'>
 > = ({ user, size, ...props }) => {
-  if (!user.isPubliclyVisible || !user.primaryUserCryptoAddress) {
+  if (
+    user.informationVisibility === UserInformationVisibility.ANONYMOUS ||
+    !user.primaryUserCryptoAddress
+  ) {
     return <DefaultUserAvatar {...props} size={size} />
   }
 
@@ -81,7 +84,7 @@ export const SensitiveDataUserAvatar: React.FC<
   {
     user: Pick<
       SensitiveDataClientUserWithENSData,
-      'firstName' | 'lastName' | 'isPubliclyVisible' | 'primaryUserCryptoAddress'
+      'firstName' | 'lastName' | 'primaryUserCryptoAddress'
     >
   } & Pick<ImageAvatarProps, 'size' | 'className'>
 > = ({ user, size, ...props }) => {

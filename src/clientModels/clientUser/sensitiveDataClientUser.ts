@@ -15,7 +15,7 @@ export type SensitiveDataClientUser = ClientModel<
     | 'id'
     | 'datetimeCreated'
     | 'datetimeUpdated'
-    | 'isPubliclyVisible'
+    | 'informationVisibility'
     | 'firstName'
     | 'lastName'
     | 'phoneNumber'
@@ -38,7 +38,7 @@ export const getSensitiveDataClientUser = (
     id,
     datetimeCreated,
     datetimeUpdated,
-    isPubliclyVisible,
+    informationVisibility,
     primaryUserEmailAddress,
     phoneNumber,
   } = record
@@ -57,7 +57,7 @@ export const getSensitiveDataClientUser = (
     id,
     datetimeCreated,
     datetimeUpdated,
-    isPubliclyVisible,
+    informationVisibility,
     phoneNumber: phoneNumber ? formatPhoneNumber(phoneNumber) : '',
   })
 }

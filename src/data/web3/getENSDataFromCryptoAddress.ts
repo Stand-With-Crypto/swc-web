@@ -18,7 +18,6 @@ async function _getENSDataMapFromCryptoAddresses(
       ensName: result,
     }))
     .filter(({ ensName }) => ensName)
-  // TODO figure out how to fetch the name and records in a single call
   const records = await Promise.all(
     addressesWithENS.map(address =>
       client.getEnsAvatar({

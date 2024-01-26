@@ -19,6 +19,13 @@ import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { Input } from '@/components/ui/input'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 import { useLocale } from '@/hooks/useLocale'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import {
@@ -28,6 +35,10 @@ import {
 } from '@/utils/web/formUtils'
 import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
+import {
+  USER_INFORMATION_VISIBILITY_DISPLAY_NAME_MAP,
+  USER_INFORMATION_VISIBILITY_ORDERED_LIST,
+} from '@/utils/web/userUtils'
 import { zodUpdateUserProfileFormFields } from '@/validation/forms/zodUpdateUserProfile'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { UserActionOptInType, UserActionType } from '@prisma/client'
@@ -58,7 +69,7 @@ export function UpdateUserProfileForm({
       lastName: user.lastName,
       emailAddress: user.primaryUserEmailAddress?.emailAddress || '',
       phoneNumber: user.phoneNumber,
-      isPubliclyVisible: user.isPubliclyVisible,
+      informationVisibility: user.informationVisibility,
       address: user.address
         ? {
             description: user.address.formattedDescription,
@@ -93,7 +104,7 @@ export function UpdateUserProfileForm({
                 formName: FORM_NAME,
                 analyticsProps: {
                   ...(address ? convertAddressToAnalyticsProperties(address) : {}),
-                  'Is Publicly Visible': values.isPubliclyVisible,
+                  'Information Visibility': values.informationVisibility,
                 },
               },
               () => actionUpdateUserProfile({ ...values, address }),
@@ -181,21 +192,31 @@ export function UpdateUserProfileForm({
           <div>
             <FormField
               control={form.control}
-              name="isPubliclyVisible"
-              render={({ field: { value, ...field } }) => (
+              name="informationVisibility"
+              render={({ field: { ref, ...field } }) => (
                 <FormItem>
                   <FormLabel className="mb-3 flex items-center justify-between">
                     <div>How you appear:</div>
-                    <div className="flex items-center gap-2">
-                      <p className="text-xs text-fontcolor-muted">Anonymous</p>
-                      <FormControl>
-                        <Checkbox
-                          {...field}
-                          checked={!value}
-                          onCheckedChange={val => field.onChange(!val)}
-                        />
-                      </FormControl>
-                    </div>
+                    <Select
+                      value={field.value}
+                      onOpenChange={open => {
+                        if (!open) {
+                          field.onBlur()
+                        }
+                      }}
+                      onValueChange={field.onChange}
+                    >
+                      <SelectTrigger ref={ref}>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {USER_INFORMATION_VISIBILITY_ORDERED_LIST.map(option => (
+                          <SelectItem key={option} value={option}>
+                            {USER_INFORMATION_VISIBILITY_DISPLAY_NAME_MAP[option]}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                   </FormLabel>
                   <FormErrorMessage />
                 </FormItem>
@@ -214,7 +235,9 @@ export function UpdateUserProfileForm({
                   id: 'mockId',
                   user: {
                     ...user,
-                    isPubliclyVisible: form.getValues('isPubliclyVisible'),
+                    firstName: form.getValues('firstName'),
+                    lastName: form.getValues('lastName'),
+                    informationVisibility: form.getValues('informationVisibility'),
                   },
                 }}
                 locale={locale}

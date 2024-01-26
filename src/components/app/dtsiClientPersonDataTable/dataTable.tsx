@@ -113,7 +113,7 @@ export function DataTable<TData extends Person, TValue>({
                   setGlobalFilter(getGlobalFilterDefaults())
                 }
               }}
-              placeholder="Search By name"
+              placeholder="Search by name"
             />
           </div>
         </div>

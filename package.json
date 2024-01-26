@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "ts": "TZ=UTC dotenv -- tsx --tsconfig ./tsconfig.bin.json",
+    "ts:ci": "TZ=UTC tsx --tsconfig ./tsconfig.bin.json",
     "dev": "next dev",
     "build": "CI_OVERRIDES=true next build",
     "postbuild": "next-sitemap",
@@ -22,7 +23,9 @@
     "db:seed": "prisma db push --force-reset && prisma db seed",
     "inngest": "npx inngest-cli@latest dev --no-discovery -u http://localhost:3000/api/inngest",
     "newbranch": "npm i && npx prisma generate && npm run codegen",
-    "initial": "npx prisma generate && npm run codegen && npm run intl:extract-compile && npm run db:seed"
+    "initial": "npx prisma generate && npm run codegen && npm run intl:extract-compile && npm run db:seed",
+    "e2e:run": "NEXT_PUBLIC_IS_CYPRESS=true start-server-and-test 'npm run dev -- -p 3001' http://localhost:3001 \"cypress open --e2e --config baseUrl=http://localhost:3001\"",
+    "e2e:run-headless": "NEXT_PUBLIC_IS_CYPRESS=true start-server-and-test 'npm run dev -- -p 3001' http://localhost:3001 \"cypress run --e2e --config baseUrl=http://localhost:3001\""
   },
   "prisma": {
     "seed": "npm run ts --transpile-only src/bin/seedLocalDb.ts"
@@ -152,6 +155,7 @@
     "@typescript-eslint/parser": "^6.14.0",
     "autoprefixer": "^10.0.1",
     "concurrently": "^8.2.2",
+    "cypress": "^13.6.3",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
     "eslint-plugin-formatjs": "^4.11.3",
@@ -164,6 +168,7 @@
     "prettier-plugin-tailwindcss": "^0.5.11",
     "prisma": "^5.7.0",
     "prisma-erd-generator": "^1.11.2",
+    "start-server-and-test": "^2.0.3",
     "storybook": "^7.6.4",
     "tailwindcss": "^3.4.1",
     "tsconfig-paths": "^4.2.0",

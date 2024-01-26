@@ -20,6 +20,7 @@ import { groupAndSortDTSIPeopleByCryptoStance } from '@/utils/dtsi/dtsiPersonUti
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
+import { ArrowUpRight, ThumbsDown, ThumbsUp } from 'lucide-react'
 import { Suspense } from 'react'
 
 export function PageHome({
@@ -80,7 +81,7 @@ export function PageHome({
                     data-link-box-subject
                     variant="secondary"
                   >
-                    Watch
+                    Watch <ArrowUpRight />
                   </Button>
                 </div>
               </LinkBox>
@@ -110,8 +111,8 @@ export function PageHome({
                     </TooltipTrigger>
                     <TooltipContent className="max-w-xs">
                       <p className="text-sm font-normal tracking-normal">
-                        Total includes donations to the Stand With Crypto Alliance nonprofit and to
-                        the Fairshake Super PAC and its affiliates
+                        Total includes donations to Stand with Crypto Alliance and to Fairshake, a
+                        pro-crypto Super PAC.
                       </p>
                     </TooltipContent>
                   </Tooltip>
@@ -146,7 +147,7 @@ export function PageHome({
               )}
               key={label}
             >
-              <div className="text-xl font-bold tracking-wider">{value}</div>
+              <div className="text-2xl font-bold tracking-wider">{value}</div>
               <div className="text-gray-500">{label}</div>
             </div>
           ))}
@@ -200,11 +201,16 @@ export function PageHome({
             Where politicians stand on crypto
           </PageTitle>
           <PageSubTitle as="h4">
-            Ask your politician to be pro-crypto. Here's where they stand now.
+            Ask your policymakers to be pro-crypto. Here’s where they stand now.
           </PageSubTitle>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <div>
-              <h5 className="mb-4 text-center text-xl font-bold text-green-600">Pro-crypto</h5>
+              <div className="text-center">
+                <h5 className="mb-4 inline-flex gap-2 rounded-lg bg-green-100 p-3 text-center text-xl font-semibold text-green-600">
+                  <ThumbsUp />
+                  <div> Pro-crypto</div>
+                </h5>
+              </div>
               <div className="space-y-3">
                 {groupedDTSIHomepagePeople.proCrypto.map(person => (
                   <DTSIPersonCard locale={locale} key={person.id} person={person} />
@@ -212,7 +218,12 @@ export function PageHome({
               </div>
             </div>
             <div>
-              <h5 className="mb-4 text-center text-xl font-bold text-red-600">Anti-crypto</h5>
+              <div className="text-center">
+                <h5 className="mb-4 inline-flex gap-2 rounded-lg bg-red-100 p-3 text-center text-xl font-semibold text-red-600">
+                  <ThumbsDown />
+                  <div> Anti-crypto</div>
+                </h5>
+              </div>
               <div className="space-y-3">
                 {groupedDTSIHomepagePeople.antiCrypto.map(person => (
                   <DTSIPersonCard locale={locale} key={person.id} person={person} />

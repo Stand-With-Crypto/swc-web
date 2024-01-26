@@ -8,7 +8,7 @@ import { parseLocalUserFromCookiesForPageRouter } from '@/utils/server/serverLoc
 import { onLogin } from '@/utils/server/thirdweb/onLogin'
 import { AuthSessionMetadata } from '@/utils/server/thirdweb/types'
 
-// TODO migrate this logic from page router to app router once thirdweb supports it
+// LATER-TASK migrate this logic from page router to app router once thirdweb supports it
 
 const THIRDWEB_AUTH_PRIVATE_KEY = requiredEnv(
   process.env.THIRDWEB_AUTH_PRIVATE_KEY,
@@ -20,7 +20,6 @@ export const thirdwebAuthConfig: ThirdwebAuthConfig = {
   // TODO determine if we have requirements for the wallet private key that necessitate a more secure storage mechanism
   wallet: new PrivateKeyWallet(THIRDWEB_AUTH_PRIVATE_KEY),
   authOptions: {
-    // TODO determine what IT security wants to do here
     tokenDurationInSeconds: 60 * 60 * 24 * 7, // 1 week
     validateNonce: async (nonce: string) => {
       const nonceExists = await prismaClient.authenticationNonce.findUnique({

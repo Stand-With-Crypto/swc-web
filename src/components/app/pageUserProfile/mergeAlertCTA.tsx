@@ -113,7 +113,7 @@ export function MergeAlertCTA({
           )
         })()}
       </div>
-      {/* TODO add distribution email for tech support */}
+      {/* LATER-TASK add distribution email for tech support */}
       <div className="mt-3 text-sm text-fontcolor-muted">Questions? Send an email to TODO</div>
     </Alert>
   )

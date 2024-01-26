@@ -1,4 +1,5 @@
 import { parseENSImageUrl } from '.'
+import { expect } from '@jest/globals'
 
 describe('parseENSImageUrl', () => {
   it('should return null for empty url', () => {

@@ -85,7 +85,7 @@ export function GlobalFilters({
           setGlobalFilter({ ...globalFilter, stance })
         }
       >
-        <SelectTrigger className="w-[195px] flex-shrink-0">
+        <SelectTrigger data-testid="stance-filter-trigger" className="w-[195px] flex-shrink-0">
           <span className="mr-2 inline-block flex-shrink-0 font-bold">Stance on crypto</span>
           <SelectValue />
         </SelectTrigger>
@@ -102,7 +102,7 @@ export function GlobalFilters({
         value={globalFilter.role}
         onValueChange={role => setGlobalFilter({ ...globalFilter, role })}
       >
-        <SelectTrigger className="w-[130px] flex-shrink-0">
+        <SelectTrigger data-testid="role-filter-trigger" className="w-[130px] flex-shrink-0">
           <span className="mr-2 inline-block flex-shrink-0 font-bold">Role</span>
           <SelectValue />
         </SelectTrigger>
@@ -118,7 +118,7 @@ export function GlobalFilters({
         value={globalFilter.party}
         onValueChange={party => setGlobalFilter({ ...globalFilter, party })}
       >
-        <SelectTrigger className="w-[120px] flex-shrink-0">
+        <SelectTrigger data-testid="party-filter-trigger" className="w-[120px] flex-shrink-0">
           <span className="mr-2 inline-block flex-shrink-0 font-bold">Party</span>
           <SelectValue />
         </SelectTrigger>
@@ -136,7 +136,7 @@ export function GlobalFilters({
           setGlobalFilter({ ...globalFilter, state })
         }
       >
-        <SelectTrigger className="w-[110px] flex-shrink-0">
+        <SelectTrigger data-testid="state-filter-trigger" className="w-[110px] flex-shrink-0">
           <span className="mr-2 inline-block flex-shrink-0 font-bold">State</span>
           <SelectValue />
         </SelectTrigger>
