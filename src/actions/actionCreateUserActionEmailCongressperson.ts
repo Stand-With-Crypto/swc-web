@@ -32,6 +32,14 @@ import * as Sentry from '@sentry/nextjs'
 import { subDays } from 'date-fns'
 import 'server-only'
 import { z } from 'zod'
+import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
+import {
+  CapitolCanaryCampaignId,
+  SandboxCapitolCanaryCampaignId,
+} from '@/utils/server/capitolCanary/campaigns'
+import { EmailRepViaCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
+import { CAPITOL_CANARY_EMAIL_REP_INNGEST_EVENT_NAME } from '@/inngest/functions/emailRepViaCapitolCanary'
+import { inngest } from '@/inngest/inngest'
 
 const logger = getLogger(`actionCreateUserActionEmailCongressperson`)
 
@@ -152,7 +160,27 @@ export async function actionCreateUserActionEmailCongressperson(input: Input) {
     $name: userFullName(validatedFields.data),
   })
 
-  // TODO actually trigger the logic to send the email to capital canary. We should be calling some Inngest function here
+  // Send email via Capitol Canary.
+  const campaignId: number =
+    NEXT_PUBLIC_ENVIRONMENT === 'production'
+      ? CapitolCanaryCampaignId.DEFAULT_EMAIL_REPRESENTATIVE
+      : SandboxCapitolCanaryCampaignId.DEFAULT_EMAIL_REPRESENTATIVE
+  const payload: EmailRepViaCapitolCanaryPayloadRequirements = {
+    campaignId,
+    user: {
+      ...user,
+      address: user.address!,
+    },
+    userEmailAddress: user.userEmailAddresses.find(
+      emailAddr => emailAddr.emailAddress === validatedFields.data.emailAddress,
+    )!,
+    emailSubject: 'Support Crypto', // This does not particularly matter as subject is overridden in Capitol Canary.
+    emailMessage: validatedFields.data.message,
+  }
+  await inngest.send({
+    name: CAPITOL_CANARY_EMAIL_REP_INNGEST_EVENT_NAME,
+    data: payload,
+  })
 
   logger.info('updated user')
   return { user: getClientUser(user) }

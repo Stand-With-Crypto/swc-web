@@ -1,7 +1,7 @@
 import { mockAddress } from '@/mocks/models/mockAddress'
 import { mockUser } from '@/mocks/models/mockUser'
 import { mockUserEmailAddress } from '@/mocks/models/mockUserEmailAddress'
-import { CapitolCanaryCampaignId } from '@/utils/server/capitolCanary/campaigns'
+import { SandboxCapitolCanaryCampaignId } from '@/utils/server/capitolCanary/campaigns'
 import { formatCapitolCanaryAdvocateCreationRequest } from '@/utils/server/capitolCanary/createAdvocate'
 import { CreateAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { faker } from '@faker-js/faker'
@@ -16,12 +16,12 @@ it('formats the "create capitol canary advocate" request correctly', () => {
   const mockedEmailAddress = mockUserEmailAddress()
 
   const payload: CreateAdvocateInCapitolCanaryPayloadRequirements = {
-    campaignId: CapitolCanaryCampaignId.TESTING,
+    campaignId: SandboxCapitolCanaryCampaignId.DEFAULT_MEMBERSHIP,
     user: {
       ...mockedUser,
       address: mockedAddress,
-      primaryUserEmailAddress: mockedEmailAddress,
     },
+    userEmailAddress: mockedEmailAddress,
     opts: {
       isSmsOptin: true,
       isSmsOptinConfirmed: false,
@@ -47,7 +47,7 @@ it('formats the "create capitol canary advocate" request correctly', () => {
   "address1": "9764 Domenico Viaduct",
   "address2": "Suite 759",
   "campaigns": [
-    137795,
+    142628,
   ],
   "city": "East Jaquanville",
   "country": "UA",

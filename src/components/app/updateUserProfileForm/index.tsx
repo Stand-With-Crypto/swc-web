@@ -5,7 +5,6 @@ import { SensitiveDataClientUserWithENSData } from '@/clientModels/clientUser/se
 import { RecentActivityRow } from '@/components/app/recentActivityRow/recentActivityRow'
 import { hasAllFormFieldsOnUserForUpdateUserProfileForm } from '@/components/app/updateUserProfileForm/hasAllFormFieldsOnUser'
 import { Button } from '@/components/ui/button'
-import { Checkbox } from '@/components/ui/checkbox'
 import {
   Form,
   FormControl,
