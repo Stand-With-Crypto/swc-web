@@ -1,30 +1,35 @@
 'use client'
 
+import { AccountAuth } from '.'
 import { Button } from '@/components/ui/button'
-import { Dialog, DialogContent } from '@/components/ui/dialog'
+import { useResponsiveDialog } from '@/components/ui/responsiveDialog'
 import { useDialog } from '@/hooks/useDialog'
 import React from 'react'
 
 interface AccountAuthContextValue {
   openAccountAuthModal: () => void
+  closeAccountAuthModal: () => void
 }
 
 const AccountAuthContext = React.createContext<AccountAuthContextValue>({
   openAccountAuthModal: () => {},
+  closeAccountAuthModal: () => {},
 })
 
 export function AccountAuthContextProvider({ children }: React.PropsWithChildren) {
   const dialog = useDialog(false)
+  const { Dialog, DialogContent } = useResponsiveDialog()
 
   return (
     <AccountAuthContext.Provider
       value={{
         openAccountAuthModal: () => dialog.onOpenChange(true),
+        closeAccountAuthModal: () => dialog.onOpenChange(false),
       }}
     >
       <Dialog {...dialog}>
-        <DialogContent>
-          <h1>Hello World</h1>
+        <DialogContent className="max-w-3xl">
+          <AccountAuth />
         </DialogContent>
       </Dialog>
 
@@ -33,8 +38,18 @@ export function AccountAuthContextProvider({ children }: React.PropsWithChildren
   )
 }
 
+export function useAccountAuthContext() {
+  const ctx = React.useContext(AccountAuthContext)
+
+  if (!ctx) {
+    throw new Error('useAccountAuthContext must be used within AccountAuthContextProvider')
+  }
+
+  return ctx
+}
+
 export const AccountAuthButton: typeof Button = React.forwardRef(({ onClick, ...props }, ref) => {
-  const { openAccountAuthModal } = React.useContext(AccountAuthContext)
+  const { openAccountAuthModal } = useAccountAuthContext()
 
   return (
     <Button

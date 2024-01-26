@@ -1,3 +1,4 @@
+import { AccountAuthButton } from '@/components/app/accountAuth/context'
 import { NavbarSessionButton } from '@/components/app/navbar/navbarSessionButton'
 import { navbarSessionButtonMessages } from '@/components/app/navbar/navbarSessionButton/navbarSessionButtonClient.messages'
 import { Button } from '@/components/ui/button'
@@ -135,11 +136,7 @@ export async function Navbar({ locale }: { locale: SupportedLocale }) {
           <NavbarSessionButton
             messages={generateClientComponentMessages(intl, navbarSessionButtonMessages)}
           />
-          <Button asChild>
-            <InternalLink underlineOnHover={false} href={urls.login()}>
-              Login
-            </InternalLink>
-          </Button>
+          <AccountAuthButton>Login</AccountAuthButton>
         </div>
       </nav>
     </>

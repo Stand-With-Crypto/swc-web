@@ -54,6 +54,7 @@
     "@tanstack/react-table": "^8.11.2",
     "@thirdweb-dev/auth": "^4.1.17",
     "@thirdweb-dev/react": "^4.1.15",
+    "@thirdweb-dev/wallets": "^2.4.3",
     "@types/lodash": "^4.14.202",
     "@udecode/plate": "^29.0.1",
     "@vercel/analytics": "^1.1.2",
