@@ -28,18 +28,21 @@ export function PageResources() {
         <div className="grid grid-flow-col grid-rows-3 gap-4 sm:justify-center lg:grid-rows-1">
           <EventCard
             imageUrl="/resources/eventCards/stand_with_crypto_day_dc.webp"
+            imageAltText="Stand With Crypto Day (Washington DC) event card image"
             title="Stand With Crypto Day (Washington DC)"
             cta="Watch"
             link="https://www.youtube.com/watch?v=MzrUzOhgA6I"
           />
           <EventCard
             imageUrl="/resources/eventCards/atlanta_advocate_town_hall.webp"
+            imageAltText="Atlanta Advocate Town Hall event card image"
             title="Atlanta Advocate Town Hall"
             cta="Watch"
             link="https://www.youtube.com/watch?v=ETq_UZ1aRGQ"
           />
           <EventCard
             imageUrl="/resources/eventCards/crypto_presidential_forum_nh_townhall.webp"
+            imageAltText="Crypto Presidential Forum (New Hampshire) event card image"
             title="Crypto Presidential Forum (New Hampshire)"
             cta="Watch"
             link="https://www.youtube.com/watch?v=refW193w3Xw"

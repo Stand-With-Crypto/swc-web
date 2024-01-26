@@ -11,18 +11,26 @@ const ICON_SIZE_PX = 32
 
 export function EventCard({
   imageUrl,
+  imageAltText,
   cta,
   link,
   title,
 }: {
   imageUrl: string
+  imageAltText: string
   cta: string
   link: string
   title: string
 }) {
   return (
     <LinkBox className="relative h-[329px] w-full cursor-pointer overflow-hidden rounded-[32px] sm:w-[357px]">
-      <NextImage priority alt="" src={imageUrl} fill className="h-full w-full object-cover" />
+      <NextImage
+        priority
+        alt={imageAltText}
+        src={imageUrl}
+        fill
+        className="h-full w-full object-cover"
+      />
       <div
         style={{
           background: 'rgba(0, 0, 0, 0.55)',
