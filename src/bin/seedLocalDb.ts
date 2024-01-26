@@ -18,7 +18,7 @@ import { faker } from '@faker-js/faker'
 import _ from 'lodash'
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
-import { UserActionType, UserEmailAddressSource } from '@prisma/client'
+import { UserActionType, UserEmailAddressSource, UserInformationVisibility } from '@prisma/client'
 import { mockUserActionOptIn } from '@/mocks/models/mockUserActionOptIn'
 import { mockUserEmailAddress } from '@/mocks/models/mockUserEmailAddress'
 import { mockNFTMint } from '@/mocks/models/mockNFTMint'
@@ -138,7 +138,9 @@ async function seed() {
       // we want all known ENS addresses to not have a full name so we always display their ENS
       // in the testing environment. This lets us verify our onchain integrations are working easily
       const shouldUseInitialCryptoAddress =
-        initialCryptoAddresses.length && !selectedUser.firstName && selectedUser.isPubliclyVisible
+        initialCryptoAddresses.length &&
+        !selectedUser.firstName &&
+        selectedUser.informationVisibility === UserInformationVisibility.CRYPTO_INFO_ONLY
       return {
         ...mockUserCryptoAddress(),
         embeddedWalletUserEmailAddressId:

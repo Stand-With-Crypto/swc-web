@@ -26,6 +26,7 @@ import {
   UserCryptoAddress,
   UserEmailAddress,
   UserEmailAddressSource,
+  UserInformationVisibility,
 } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { subDays } from 'date-fns'
@@ -229,7 +230,7 @@ async function maybeUpsertUser({
     },
     data: {
       ...mapLocalUserToUserDatabaseFields(localUser),
-      isPubliclyVisible: false,
+      informationVisibility: UserInformationVisibility.ANONYMOUS,
       userSessions: { create: { id: sessionId } },
       hasOptedInToEmails: true,
       hasOptedInToMembership: false,

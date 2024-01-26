@@ -1,10 +1,11 @@
 import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
-import { zodOptionalEmptyString } from '@/validation/utils'
 import { zodAddress } from '@/validation/fields/zodAddress'
 import { zodGooglePlacesAutocompletePrediction } from '@/validation/fields/zodGooglePlacesAutocompletePrediction'
-import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
-import { string, object, boolean } from 'zod'
 import { zodFirstName, zodLastName } from '@/validation/fields/zodName'
+import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
+import { zodOptionalEmptyString } from '@/validation/utils'
+import { UserInformationVisibility } from '@prisma/client'
+import { nativeEnum, object, string } from 'zod'
 
 const base = object({
   firstName: zodOptionalEmptyString(zodFirstName),
@@ -15,7 +16,7 @@ const base = object({
   phoneNumber: zodOptionalEmptyString(zodPhoneNumber).transform(
     str => str && normalizePhoneNumber(str),
   ),
-  isPubliclyVisible: boolean(),
+  informationVisibility: nativeEnum(UserInformationVisibility),
 })
 
 export const zodUpdateUserProfileFormFields = base.extend({

@@ -53,6 +53,12 @@ enum UserInternalStatus {
   MANUALLY_HIDDEN
 }
 
+enum UserInformationVisibility {
+  ANONYMOUS
+  CRYPTO_INFO_ONLY
+  ALL_INFO
+}
+
 // A user can interact with our platform multiple ways. 
 // Sometimes that user will be signing up via coinbase, 
 // sometimes a user will be signing up via a wallet on the website, or multiple wallets
@@ -72,31 +78,31 @@ enum UserInternalStatus {
 // A user has a one-to-many relationship with a session. A session will only be persisted if a user is not logged in and performs an action on the site. If they are logged in, we will associate the action with thier crypto address.
 // Once we identify a session is associated with a crypto address (the user logs in to the app in the same session after performing an action), we'll want to merge the session and crypto address under the same user. We will maintain the session fk on the action to keep the context that the action was originally linked to a session instead
 model User {
-  id                         String             @id @default(uuid())
-  datetimeUpdated            DateTime           @updatedAt @map("datetime_updated")
-  datetimeCreated            DateTime           @default(now()) @map("datetime_created")
-  firstName                  String             @default("") @map("first_name")
-  lastName                   String             @default("") @map("last_name")
-  phoneNumber                String             @default("") @map("phone_number")
-  address                    Address?           @relation(fields: [addressId], references: [id])
-  addressId                  String?            @map("address_id")
-  isPubliclyVisible          Boolean            @map("is_publicly_visible")
-  sampleDatabaseIncrement    Int                @default(0) // TODO delete
-  primaryUserEmailAddress    UserEmailAddress?  @relation("asPrimaryUserEmailAddress", fields: [primaryUserEmailAddressId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  primaryUserEmailAddressId  String?            @unique @map("primary_user_email_address_id")
-  primaryUserCryptoAddress   UserCryptoAddress? @relation("asPrimaryUserCryptoAddress", fields: [primaryUserCryptoAddressId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  primaryUserCryptoAddressId String?            @unique @map("primary_user_crypto_address_id")
-  hasOptedInToEmails         Boolean            @map("has_opted_in_to_emails")
-  hasOptedInToSms            Boolean            @map("has_opted_in_to_sms")
-  hasOptedInToMembership     Boolean            @map("has_opted_in_to_membership")
-  internalStatus             UserInternalStatus @default(VISIBLE) @map("internal_status")
+  id                         String                    @id @default(uuid())
+  datetimeUpdated            DateTime                  @updatedAt @map("datetime_updated")
+  datetimeCreated            DateTime                  @default(now()) @map("datetime_created")
+  firstName                  String                    @default("") @map("first_name")
+  lastName                   String                    @default("") @map("last_name")
+  phoneNumber                String                    @default("") @map("phone_number")
+  address                    Address?                  @relation(fields: [addressId], references: [id])
+  addressId                  String?                   @map("address_id")
+  informationVisibility      UserInformationVisibility @map("information_visiblity")
+  sampleDatabaseIncrement    Int                       @default(0) // TODO delete
+  primaryUserEmailAddress    UserEmailAddress?         @relation("asPrimaryUserEmailAddress", fields: [primaryUserEmailAddressId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  primaryUserEmailAddressId  String?                   @unique @map("primary_user_email_address_id")
+  primaryUserCryptoAddress   UserCryptoAddress?        @relation("asPrimaryUserCryptoAddress", fields: [primaryUserCryptoAddressId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  primaryUserCryptoAddressId String?                   @unique @map("primary_user_crypto_address_id")
+  hasOptedInToEmails         Boolean                   @map("has_opted_in_to_emails")
+  hasOptedInToSms            Boolean                   @map("has_opted_in_to_sms")
+  hasOptedInToMembership     Boolean                   @map("has_opted_in_to_membership")
+  internalStatus             UserInternalStatus        @default(VISIBLE) @map("internal_status")
   // We'll collect and capture this information in our product analytics tools, but we'll also want to be able to 
   // use this metadata to query our relationship database. This information will only be populated if users
   // opt in to our cookies
-  acquisitionReferer         String             @map("acquisition_referer")
-  acquisitionSource          String             @map("acquisition_source")
-  acquisitionMedium          String             @map("acquisition_medium")
-  acquisitionCampaign        String             @map("acquisition_campaign")
+  acquisitionReferer         String                    @map("acquisition_referer")
+  acquisitionSource          String                    @map("acquisition_source")
+  acquisitionMedium          String                    @map("acquisition_medium")
+  acquisitionCampaign        String                    @map("acquisition_campaign")
 
   // REMINDER: as we add additional foreign keys to users, we'll want to make sure we account for them in our mergeUsers logic
   userCryptoAddresses UserCryptoAddress[] @relation("userCryptoAddresses")
@@ -180,7 +186,6 @@ model UserEmailAddress {
   @@index([userId])
   @@map("user_email_address")
 }
-
 
 enum SupportedUserCryptoNetwork {
   ETH

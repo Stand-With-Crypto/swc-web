@@ -1,12 +1,9 @@
-import { NextImage } from '@/components/ui/image'
-
 import { DTSI_Person } from '@/data/dtsi/generated'
 import {
   convertDTSIStanceScoreToLetterGrade,
   DTSILetterGrade,
 } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { cn, twNoop } from '@/utils/web/cn'
-import _ from 'lodash'
 
 const getBgColor = (letterGrade: DTSILetterGrade | null) => {
   switch (letterGrade) {
