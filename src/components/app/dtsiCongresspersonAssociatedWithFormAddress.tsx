@@ -2,7 +2,10 @@
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { Skeleton } from '@/components/ui/skeleton'
-import { useGetDTSIPeopleFromAddress } from '@/hooks/useGetDTSIPeopleFromAddress'
+import {
+  formatGetDTSIPeopleFromAddressNotFoundReason,
+  useGetDTSIPeopleFromAddress,
+} from '@/hooks/useGetDTSIPeopleFromAddress'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { convertDTSIStanceScoreToCryptoSupportLanguageSentence } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { zodGooglePlacesAutocompletePrediction } from '@/validation/fields/zodGooglePlacesAutocompletePrediction'
@@ -40,7 +43,7 @@ export function DTSICongresspersonAssociatedWithFormAddress({
     )
   }
   if (!res.data || 'notFoundReason' in res.data) {
-    return <div>No available representative</div>
+    return <div>{formatGetDTSIPeopleFromAddressNotFoundReason(res.data)}</div>
   }
   const person = res.data
   return (

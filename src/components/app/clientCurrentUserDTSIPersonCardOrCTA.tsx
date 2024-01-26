@@ -6,7 +6,10 @@ import { Button } from '@/components/ui/button'
 import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { InternalLink } from '@/components/ui/link'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
-import { useGetDTSIPeopleFromAddress } from '@/hooks/useGetDTSIPeopleFromAddress'
+import {
+  formatGetDTSIPeopleFromAddressNotFoundReason,
+  useGetDTSIPeopleFromAddress,
+} from '@/hooks/useGetDTSIPeopleFromAddress'
 import { SupportedLocale } from '@/intl/locales'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { possessive } from '@/utils/shared/possessive'
@@ -52,9 +55,10 @@ export function ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: Suppo
   if ('notFoundReason' in res.data) {
     return (
       <div>
-        {res.data.notFoundReason === 'NOT_USA_ADDRESS'
-          ? "Currently you can only look up your representatives in the USA. We're actively working to make Stand With Crypto a global project"
-          : `We can't find your representative right now, we're working on a fix :).`}
+        {formatGetDTSIPeopleFromAddressNotFoundReason(res.data)}{' '}
+        <button className="font-bold text-fontcolor underline" onClick={() => setAddress(null)}>
+          Try another address.
+        </button>
       </div>
     )
   }

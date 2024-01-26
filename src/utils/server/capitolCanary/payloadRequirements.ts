@@ -1,11 +1,15 @@
 import { User, Address, UserEmailAddress } from '@prisma/client'
-import { CapitolCanaryCampaignId } from '@/utils/server/capitolCanary/campaigns'
+import {
+  CapitolCanaryCampaignId,
+  SandboxCapitolCanaryCampaignId,
+} from '@/utils/server/capitolCanary/campaigns'
 import { CapitolCanaryOpts } from '@/utils/server/capitolCanary/opts'
 import { CapitolCanaryMetadata } from '@/utils/server/capitolCanary/metadata'
 
 export interface CreateAdvocateInCapitolCanaryPayloadRequirements {
-  campaignId: CapitolCanaryCampaignId
-  user: User & { address: Address | null } & { primaryUserEmailAddress: UserEmailAddress | null }
+  campaignId: CapitolCanaryCampaignId | SandboxCapitolCanaryCampaignId
+  user: User & { address: Address | null }
+  userEmailAddress: UserEmailAddress
   opts?: CapitolCanaryOpts
   metadata?: CapitolCanaryMetadata
 }

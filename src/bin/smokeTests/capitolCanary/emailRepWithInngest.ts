@@ -1,5 +1,5 @@
 import { inngest } from '@/inngest/inngest'
-import { CapitolCanaryCampaignId } from '@/utils/server/capitolCanary/campaigns'
+import { SandboxCapitolCanaryCampaignId } from '@/utils/server/capitolCanary/campaigns'
 import { EmailRepViaCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { mockUser } from '@/mocks/models/mockUser'
 import { mockAddress } from '@/mocks/models/mockAddress'
@@ -13,6 +13,7 @@ import { CAPITOL_CANARY_EMAIL_REP_INNGEST_EVENT_NAME } from '@/inngest/functions
  * Command: npm run ts src/bin/smokeTests/capitolCanary/emailRepWithInngest.ts
  *
  * Verify that the advocate is created in Capitol Canary with an administrator.
+ * The test email may not be "sent" if the zip code and address do not match up.
  */
 
 async function smokeTestEmailRepWithInngest() {
@@ -21,15 +22,12 @@ async function smokeTestEmailRepWithInngest() {
   const mockedEmailAddress = mockUserEmailAddress()
 
   const payload: EmailRepViaCapitolCanaryPayloadRequirements = {
-    campaignId: CapitolCanaryCampaignId.TESTING,
+    campaignId: SandboxCapitolCanaryCampaignId.DEFAULT_EMAIL_REPRESENTATIVE,
     user: {
       ...mockedUser,
       address: mockedAddress,
-      primaryUserEmailAddress: mockedEmailAddress,
     },
-    opts: {
-      isEmailOptin: true,
-    },
+    userEmailAddress: mockedEmailAddress,
     metadata: {
       tags: ['Smoke Test User'],
     },

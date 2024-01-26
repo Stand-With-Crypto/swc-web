@@ -51,6 +51,7 @@ export function formatCapitolCanaryAdvocateCreationRequest(
 ) {
   const formattedRequest: CreateAdvocateInCapitolCanaryRequest = {
     campaigns: [payload.campaignId],
+    email: payload.userEmailAddress.emailAddress,
   }
 
   if (payload.user.firstName) {
@@ -73,10 +74,6 @@ export function formatCapitolCanaryAdvocateCreationRequest(
     formattedRequest.state = address.administrativeAreaLevel1
     formattedRequest.zip5 = address.postalCode
     formattedRequest.country = address.countryCode
-  }
-
-  if (payload.user.primaryUserEmailAddress) {
-    formattedRequest.email = payload.user.primaryUserEmailAddress.emailAddress
   }
 
   if (payload.opts) {
