@@ -28,7 +28,7 @@ export function EventCard({
           background: 'rgba(0, 0, 0, 0.55)',
           backgroundBlendMode: 'overlay',
         }}
-        className="absolute flex h-full w-full flex-col items-start justify-between gap-4 p-[32px] text-white"
+        className="absolute flex h-full w-full flex-col items-start justify-between gap-4 p-8 text-white"
       >
         <PageTitle as="span" size="sm" className="text-left">
           {title}

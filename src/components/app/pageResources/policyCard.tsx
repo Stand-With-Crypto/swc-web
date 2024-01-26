@@ -20,7 +20,7 @@ export function PolicyCard({
   secondaryCtaUrl?: string
 }) {
   return (
-    <div className="flex flex-col content-center items-center gap-4 rounded-3xl bg-[#F5F8FF]  p-6  md:flex-row">
+    <div className="flex flex-col content-center items-center gap-4 rounded-3xl bg-slate-200  p-6  md:flex-row">
       <div className="flex w-full flex-row items-center justify-start gap-4 ">
         <div className="flex flex-col gap-2 text-left">
           <span className="text-xl font-bold">{title}</span>

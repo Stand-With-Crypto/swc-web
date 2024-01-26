@@ -9,7 +9,7 @@ export function PageResources() {
     <div className="container">
       <section className="mb-16 space-y-7 text-center">
         <PageTitle>Your voice will shape the future of crypto in America</PageTitle>
-        <PageSubTitle className="gap-10">
+        <PageSubTitle>
           Every day lawmakers are discussing policies and regulations that impact your ability to
           use crypto. They care what you think, but you have to make sure that you are connecting
           with your lawmakers.
