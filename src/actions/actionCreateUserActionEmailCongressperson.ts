@@ -174,7 +174,7 @@ export async function actionCreateUserActionEmailCongressperson(input: Input) {
     userEmailAddress: user.userEmailAddresses.find(
       emailAddr => emailAddr.emailAddress === validatedFields.data.emailAddress,
     )!,
-    emailSubject: 'Support FIT21', // This does not particularly matter as subject is overridden in Capitol Canary.
+    emailSubject: 'Support Crypto', // This does not particularly matter as subject is overridden in Capitol Canary.
     emailMessage: validatedFields.data.message,
   }
   await inngest.send({
