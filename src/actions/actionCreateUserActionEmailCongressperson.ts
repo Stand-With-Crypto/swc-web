@@ -160,11 +160,11 @@ export async function actionCreateUserActionEmailCongressperson(input: Input) {
     $name: userFullName(validatedFields.data),
   })
 
+  // Send email via Capitol Canary.
   const campaignId: number =
     NEXT_PUBLIC_ENVIRONMENT === 'production'
       ? CapitolCanaryCampaignId.DEFAULT_EMAIL_REPRESENTATIVE
       : SandboxCapitolCanaryCampaignId.DEFAULT_EMAIL_REPRESENTATIVE
-
   const payload: EmailRepViaCapitolCanaryPayloadRequirements = {
     campaignId,
     user: {
@@ -186,7 +186,6 @@ export async function actionCreateUserActionEmailCongressperson(input: Input) {
     emailSubject: 'Support FIT21', // This does not particularly matter as subject is overridden in Capitol Canary.
     emailMessage: validatedFields.data.message,
   }
-
   await inngest.send({
     name: CAPITOL_CANARY_EMAIL_REP_INNGEST_EVENT_NAME,
     data: payload,
