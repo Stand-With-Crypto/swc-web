@@ -1,3 +1,4 @@
+'use client'
 import { SumDonationsByUserRow } from '@/components/app/sumDonationsByUserRow/sumDonationsByUserRow'
 import { RecentActivityRow } from '@/components/app/recentActivityRow/recentActivityRow'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'

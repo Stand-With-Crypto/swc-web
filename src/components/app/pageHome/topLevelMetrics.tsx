@@ -1,3 +1,4 @@
+'use client'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'

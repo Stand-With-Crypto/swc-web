@@ -5,6 +5,7 @@ import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { cn } from '@/utils/web/cn'
 import { GooglePlaceAutocompletePrediction } from '@/utils/web/googlePlaceUtils'
 import { MapPin } from 'lucide-react'
+import React from 'react'
 import { useEffect } from 'react'
 import usePlacesAutocomplete from 'use-places-autocomplete'
 
@@ -15,50 +16,54 @@ const NEXT_PUBLIC_GOOGLE_PLACES_API_KEY = requiredEnv(
   'NEXT_PUBLIC_GOOGLE_PLACES_API_KEY',
 )
 
-export function GooglePlacesSelect(
-  props: {
-    value: GooglePlaceAutocompletePrediction | null
-    onChange: (val: GooglePlaceAutocompletePrediction | null) => void
-  } & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange' | 'type'>,
-) {
-  const { value: propsValue, onChange: propsOnChange, ...inputProps } = props
-  const {
-    ready,
-    value,
-    suggestions: { data },
-    setValue,
-    init,
-  } = usePlacesAutocomplete({ callbackName: CALLBACK_NAME })
+type Props = {
+  value: GooglePlaceAutocompletePrediction | null
+  onChange: (val: GooglePlaceAutocompletePrediction | null) => void
+} & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange' | 'type'>
 
-  const scriptStatus = useScript(
-    `https://maps.googleapis.com/maps/api/js?key=${NEXT_PUBLIC_GOOGLE_PLACES_API_KEY}&libraries=places&callback=${CALLBACK_NAME}`,
-  )
+export const GooglePlacesSelect = React.forwardRef<React.ElementRef<'input'>, Props>(
+  (props, ref) => {
+    const { value: propsValue, onChange: propsOnChange, ...inputProps } = props
+    const {
+      ready,
+      value,
+      suggestions: { data },
+      setValue,
+      init,
+    } = usePlacesAutocomplete({ callbackName: CALLBACK_NAME })
 
-  useEffect(() => {
-    if (scriptStatus === 'ready') {
-      init()
-    }
-  }, [init, scriptStatus])
-  return (
-    <Combobox
-      isLoading={!ready}
-      inputValue={value}
-      onChangeInputValue={setValue}
-      value={propsValue}
-      onChange={propsOnChange}
-      formatPopoverTrigger={val => (
-        <InputWithIcon
-          icon={<MapPin className="h-4 w-4 text-gray-500" />}
-          className={cn(val || 'text-gray-500')}
-          value={val?.description || inputProps.placeholder || 'select a location'}
-          placeholder="select a location"
-          {...inputProps}
-        />
-      )}
-      placeholder="Type your address..."
-      options={data}
-      getOptionLabel={val => val.description}
-      getOptionKey={val => val.place_id}
-    />
-  )
-}
+    const scriptStatus = useScript(
+      `https://maps.googleapis.com/maps/api/js?key=${NEXT_PUBLIC_GOOGLE_PLACES_API_KEY}&libraries=places&callback=${CALLBACK_NAME}`,
+    )
+
+    useEffect(() => {
+      if (scriptStatus === 'ready') {
+        init()
+      }
+    }, [init, scriptStatus])
+    return (
+      <Combobox
+        isLoading={!ready}
+        inputValue={value}
+        onChangeInputValue={setValue}
+        value={propsValue}
+        onChange={propsOnChange}
+        formatPopoverTrigger={val => (
+          <InputWithIcon
+            ref={ref}
+            icon={<MapPin className="h-4 w-4 text-gray-500" />}
+            className={cn(val || 'text-gray-500')}
+            value={val?.description || inputProps.placeholder || 'select a location'}
+            placeholder="select a location"
+            {...inputProps}
+          />
+        )}
+        placeholder="Type your address..."
+        options={data}
+        getOptionLabel={val => val.description}
+        getOptionKey={val => val.place_id}
+      />
+    )
+  },
+)
+GooglePlacesSelect.displayName = 'GooglePlacesSelect'

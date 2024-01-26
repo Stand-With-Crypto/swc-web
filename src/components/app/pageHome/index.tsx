@@ -54,7 +54,7 @@ export function PageHome({
                 <NextImage
                   priority
                   alt="First in the Nation Crypto Presidential Forum December 11th 2023 St. Anselm College"
-                  src="/homepageHero.png"
+                  src="/homepageHero.jpg"
                   fill
                   // width={1046}
                   // height={892}

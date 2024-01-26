@@ -1,7 +1,7 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 import useSWR from 'swr'
 
@@ -47,6 +47,9 @@ export function Address({ user, onFindCongressperson, congressPersonData, gotoTa
     defaultValues: getDefaultValues({ user }),
     resolver: zodResolver(findRepresentativeCallFormValidationSchema),
   })
+  useEffect(() => {
+    form.setFocus('address')
+  }, [form])
   const address = useWatch({
     control: form.control,
     name: 'address',
@@ -90,7 +93,7 @@ export function Address({ user, onFindCongressperson, congressPersonData, gotoTa
               <FormField
                 control={form.control}
                 name="address"
-                render={({ field: { ref: _ref, ...field } }) => (
+                render={({ field }) => (
                   <FormItem>
                     <FormLabel>Address</FormLabel>
                     <FormControl>
