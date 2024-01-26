@@ -1,6 +1,5 @@
-'use client'
 import { Button } from '@/components/ui/button'
-import { ExternalLink } from '@/components/ui/link'
+import { TrackedExternalLink } from '@/components/ui/trackedExternalLink'
 import { AnalyticComponentType, AnalyticActionType } from '@/utils/shared/sharedAnalytics'
 import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
 
@@ -28,31 +27,34 @@ export function PolicyCard({
         </div>
       </div>
       <div className="flex flex-row gap-4">
-        <Button
-          onClick={() =>
-            trackClientAnalytic('Policy Card Primary Button clicked', {
+        <Button asChild>
+          <TrackedExternalLink
+            eventProperties={{
               component: AnalyticComponentType.button,
               action: AnalyticActionType.click,
               link: primaryCtaUrl,
-            })
-          }
-          asChild
-        >
-          <ExternalLink href={primaryCtaUrl}>{primaryCta}</ExternalLink>
+              page: 'Resources',
+              surface: 'Policy Card',
+            }}
+            href={primaryCtaUrl}
+          >
+            {primaryCta}
+          </TrackedExternalLink>
         </Button>
         {secondaryCta && secondaryCtaUrl && (
-          <Button
-            onClick={() =>
-              trackClientAnalytic('Policy Card Secondary Button clicked', {
+          <Button variant="secondary" asChild>
+            <TrackedExternalLink
+              eventProperties={{
                 component: AnalyticComponentType.button,
                 action: AnalyticActionType.click,
                 link: secondaryCtaUrl,
-              })
-            }
-            variant="secondary"
-            asChild
-          >
-            <ExternalLink href={secondaryCtaUrl}>{secondaryCta}</ExternalLink>
+                page: 'Resources',
+                surface: 'Policy Card',
+              }}
+              href={secondaryCtaUrl}
+            >
+              {secondaryCta}
+            </TrackedExternalLink>
           </Button>
         )}
       </div>
