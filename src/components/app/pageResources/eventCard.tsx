@@ -45,6 +45,8 @@ export function EventCard({
               component: AnalyticComponentType.card,
               action: AnalyticActionType.click,
               link,
+              page: 'Resources',
+              surface: 'Event Card',
             }}
             className={linkBoxLinkClassName}
             data-link-box-subject
