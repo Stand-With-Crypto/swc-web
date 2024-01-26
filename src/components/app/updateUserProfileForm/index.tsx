@@ -193,12 +193,20 @@ export function UpdateUserProfileForm({
             <FormField
               control={form.control}
               name="informationVisibility"
-              render={({ field: field }) => (
+              render={({ field: { ref, ...field } }) => (
                 <FormItem>
                   <FormLabel className="mb-3 flex items-center justify-between">
                     <div>How you appear:</div>
-                    <Select {...field} onValueChange={field.onChange}>
-                      <SelectTrigger>
+                    <Select
+                      value={field.value}
+                      onOpenChange={open => {
+                        if (!open) {
+                          field.onBlur()
+                        }
+                      }}
+                      onValueChange={field.onChange}
+                    >
+                      <SelectTrigger ref={ref}>
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
@@ -209,17 +217,6 @@ export function UpdateUserProfileForm({
                         ))}
                       </SelectContent>
                     </Select>
-
-                    <div className="flex items-center gap-2">
-                      <p className="text-xs text-fontcolor-muted">Anonymous</p>
-                      <FormControl>
-                        <Checkbox
-                          {...field}
-                          checked={!value}
-                          onCheckedChange={val => field.onChange(!val)}
-                        />
-                      </FormControl>
-                    </div>
                   </FormLabel>
                   <FormErrorMessage />
                 </FormItem>
@@ -238,6 +235,8 @@ export function UpdateUserProfileForm({
                   id: 'mockId',
                   user: {
                     ...user,
+                    firstName: form.getValues('firstName'),
+                    lastName: form.getValues('lastName'),
                     informationVisibility: form.getValues('informationVisibility'),
                   },
                 }}
