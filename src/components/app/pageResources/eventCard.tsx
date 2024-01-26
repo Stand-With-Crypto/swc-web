@@ -1,7 +1,10 @@
+'use client'
 import { NextImage } from '@/components/ui/image'
 import { ExternalLink } from '@/components/ui/link'
 import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
 import { PageTitle } from '@/components/ui/pageTitleText'
+import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
+import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
 import { ArrowRight } from 'lucide-react'
 
 const ICON_SIZE_PX = 32
@@ -31,7 +34,18 @@ export function EventCard({
           {title}
         </PageTitle>
         <div className="w-full">
-          <ExternalLink className={linkBoxLinkClassName} data-link-box-subject href={link}>
+          <ExternalLink
+            onClick={() =>
+              trackClientAnalytic('Event Card clicked', {
+                component: AnalyticComponentType.card,
+                action: AnalyticActionType.click,
+                link,
+              })
+            }
+            className={linkBoxLinkClassName}
+            data-link-box-subject
+            href={link}
+          >
             <div className="flex w-full flex-row items-center justify-between gap-4">
               <span className="text-xl font-bold">{cta}</span>
               <ArrowRight size={ICON_SIZE_PX} />

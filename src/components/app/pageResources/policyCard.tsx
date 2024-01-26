@@ -1,5 +1,8 @@
+'use client'
 import { Button } from '@/components/ui/button'
 import { ExternalLink } from '@/components/ui/link'
+import { AnalyticComponentType, AnalyticActionType } from '@/utils/shared/sharedAnalytics'
+import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
 
 export function PolicyCard({
   title,
@@ -25,11 +28,30 @@ export function PolicyCard({
         </div>
       </div>
       <div className="flex flex-row gap-4">
-        <Button asChild>
+        <Button
+          onClick={() =>
+            trackClientAnalytic('Policy Card Primary Button clicked', {
+              component: AnalyticComponentType.button,
+              action: AnalyticActionType.click,
+              link: primaryCtaUrl,
+            })
+          }
+          asChild
+        >
           <ExternalLink href={primaryCtaUrl}>{primaryCta}</ExternalLink>
         </Button>
         {secondaryCta && secondaryCtaUrl && (
-          <Button variant="secondary" asChild>
+          <Button
+            onClick={() =>
+              trackClientAnalytic('Policy Card Secondary Button clicked', {
+                component: AnalyticComponentType.button,
+                action: AnalyticActionType.click,
+                link: secondaryCtaUrl,
+              })
+            }
+            variant="secondary"
+            asChild
+          >
             <ExternalLink href={secondaryCtaUrl}>{secondaryCta}</ExternalLink>
           </Button>
         )}
