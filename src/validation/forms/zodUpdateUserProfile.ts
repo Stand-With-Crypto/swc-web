@@ -4,25 +4,50 @@ import { zodGooglePlacesAutocompletePrediction } from '@/validation/fields/zodGo
 import { zodFirstName, zodLastName } from '@/validation/fields/zodName'
 import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
 import { zodOptionalEmptyString } from '@/validation/utils'
-import { UserInformationVisibility } from '@prisma/client'
-import { nativeEnum, object, string } from 'zod'
+import { boolean, object, string } from 'zod'
 
 const base = object({
+  isEmbeddedWalletUser: boolean(),
   firstName: zodOptionalEmptyString(zodFirstName),
   lastName: zodOptionalEmptyString(zodLastName),
-  emailAddress: zodOptionalEmptyString(
-    string().trim().email('Please enter a valid email address').toLowerCase(),
-  ),
+  emailAddress: zodOptionalEmptyString(string().trim().toLowerCase()),
   phoneNumber: zodOptionalEmptyString(zodPhoneNumber).transform(
     str => str && normalizePhoneNumber(str),
   ),
-  informationVisibility: nativeEnum(UserInformationVisibility),
+  hasOptedInToSms: boolean(),
+  hasOptedInToMembership: boolean(),
+  // This now comes after the form in a separate step
+  // informationVisibility: nativeEnum(UserInformationVisibility),
 })
 
-export const zodUpdateUserProfileFormFields = base.extend({
-  address: zodGooglePlacesAutocompletePrediction.nullable(),
-})
+const emailParser = (email: string) =>
+  string().trim().email('Please enter a valid email address').toLowerCase().safeParse(email)
 
-export const zodUpdateUserProfileFormAction = base.extend({
-  address: zodAddress.nullable(),
-})
+export const zodUpdateUserProfileFormFields = base
+  .extend({
+    address: zodGooglePlacesAutocompletePrediction.nullable(),
+  })
+  .superRefine((data, ctx) => {
+    if (!data.isEmbeddedWalletUser) {
+      const parseEmail = emailParser(data.emailAddress)
+      if (!parseEmail.success) {
+        parseEmail.error.issues.forEach(issue => {
+          ctx.addIssue(issue)
+        })
+      }
+    }
+  })
+export const zodUpdateUserProfileFormAction = base
+  .extend({
+    address: zodAddress.nullable(),
+  })
+  .superRefine((data, ctx) => {
+    if (!data.isEmbeddedWalletUser) {
+      const parseEmail = emailParser(data.emailAddress)
+      if (!parseEmail.success) {
+        parseEmail.error.issues.forEach(issue => {
+          ctx.addIssue(issue)
+        })
+      }
+    }
+  })

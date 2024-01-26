@@ -16,7 +16,7 @@ const genericImages = [
 ]
 
 const Container = ({ children }: { children: React.ReactNode }) => (
-  <div className="overflow-hidden rounded-full">{children}</div>
+  <div className="inline-block overflow-hidden rounded-full">{children}</div>
 )
 
 function DefaultUserAvatar({ size, ...props }: Pick<ImageAvatarProps, 'size' | 'className'>) {
