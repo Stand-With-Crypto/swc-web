@@ -1,7 +1,7 @@
 import { mockAddress } from '@/mocks/models/mockAddress'
 import { mockUser } from '@/mocks/models/mockUser'
 import { mockUserEmailAddress } from '@/mocks/models/mockUserEmailAddress'
-import { CapitolCanaryCampaignId } from '@/utils/server/capitolCanary/campaigns'
+import { SandboxCapitolCanaryCampaignId } from '@/utils/server/capitolCanary/campaigns'
 import { formatCapitolCanaryAdvocateCreationRequest } from '@/utils/server/capitolCanary/createAdvocate'
 import { CreateAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { faker } from '@faker-js/faker'
@@ -16,7 +16,7 @@ it('formats the "create capitol canary advocate" request correctly', () => {
   const mockedEmailAddress = mockUserEmailAddress()
 
   const payload: CreateAdvocateInCapitolCanaryPayloadRequirements = {
-    campaignId: CapitolCanaryCampaignId.TESTING,
+    campaignId: SandboxCapitolCanaryCampaignId.DEFAULT_MEMBERSHIP,
     user: {
       ...mockedUser,
       address: mockedAddress,
@@ -44,24 +44,24 @@ it('formats the "create capitol canary advocate" request correctly', () => {
 
   expect(formattedRequest).toMatchInlineSnapshot(`
 {
-  "address1": "9764 Domenico Viaduct",
-  "address2": "Suite 759",
+  "address1": "5976 Armstrong Fords",
+  "address2": "Suite 865",
   "campaigns": [
-    137795,
+    142628,
   ],
-  "city": "East Jaquanville",
-  "country": "UA",
-  "email": "Edythe.Raynor@hotmail.com",
+  "city": "Bell Gardens",
+  "country": "KG",
+  "email": "Wade81@yahoo.com",
   "emailOptin": 1,
   "emailOptout": 0,
   "firstname": "Blake",
   "lastname": "Leffler",
   "p2aSource": "source",
-  "phone": "+16929224505",
+  "phone": "+10692922450",
   "smsOptin": 1,
   "smsOptinConfirmed": 0,
   "smsOptout": 0,
-  "state": "Pennsylvania",
+  "state": "Florida",
   "tags": [
     "tag1",
     "tag2",
@@ -71,7 +71,7 @@ it('formats the "create capitol canary advocate" request correctly', () => {
   "utm_medium": "utmMedium",
   "utm_source": "utmSource",
   "utm_term": "utmTerm",
-  "zip5": "16402-7572",
+  "zip5": "17916",
 }
 `)
 })

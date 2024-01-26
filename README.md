@@ -19,12 +19,13 @@
   - This will generate a new `.env` file in your local repository; this will store all your local environment variables
 - Open the `.env` file with your favorite text editor, and update the environment variables based off the commented instructions
   - **Updating your `.env` is VERY important, so do that before moving on**
-- Run `npm run initial` which includes all required set-up commands for first-time local development.
+- Run `npm run initial` which includes all required set-up commands for first-time local development
 
 ### Start the server
 
 - `npm run dev` - runs the development server locally
 - In a separate terminal tab, `npm run inngest` - runs [Inngest](https://www.inngest.com/)
+  - Both the development server AND Inngest are required for a fully functional website
 - Open [http://localhost:3000](http://localhost:3000) with your browser to see the results
 
 ### Useful development tips

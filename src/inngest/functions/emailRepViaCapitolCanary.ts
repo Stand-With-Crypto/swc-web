@@ -17,9 +17,9 @@ export const CAPITOL_CANARY_EMAIL_REP_INNGEST_FUNCTION_ID = 'capitol-canary.emai
 export const CAPITOL_CANARY_EMAIL_REP_INNGEST_EVENT_NAME = 'capitol.canary/email.rep'
 
 /**
- * Refer to `src/bin/smokeTests/capitolCanary/createAdvocateWithInngest.ts` to see how to call this function.
+ * Refer to `src/bin/smokeTests/capitolCanary/emailRepWithInngest.ts` to see how to call this function.
  */
-export const emailRepsViaCapitolCanaryWithInngest = inngest.createFunction(
+export const emailRepViaCapitolCanaryWithInngest = inngest.createFunction(
   {
     id: CAPITOL_CANARY_EMAIL_REP_INNGEST_FUNCTION_ID,
     retries: CAPITOL_CANARY_EMAIL_REP_RETRY_LIMIT,
