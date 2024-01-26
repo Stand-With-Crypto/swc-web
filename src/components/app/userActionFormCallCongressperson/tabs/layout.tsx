@@ -38,11 +38,7 @@ function Heading({ title, subtitle }: { title: string; subtitle: string }) {
 UserActionFormCallCongresspersonLayout.Heading = Heading
 
 function Container({ children }: React.PropsWithChildren) {
-  return (
-    <ScrollArea>
-      <div className="space-y-4 md:space-y-8">{children}</div>
-    </ScrollArea>
-  )
+  return <div className="space-y-4 md:space-y-8">{children}</div>
 }
 UserActionFormCallCongresspersonLayout.Container = Container
 
