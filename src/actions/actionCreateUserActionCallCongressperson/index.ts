@@ -10,7 +10,7 @@ import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/ser
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { getLogger } from '@/utils/shared/logger'
 import { UserActionCallCampaignName } from '@/utils/shared/userActionCampaigns'
-import { User, UserAction, UserActionType } from '@prisma/client'
+import { User, UserAction, UserActionType, UserInformationVisibility } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { subDays } from 'date-fns'
 import { z } from 'zod'
@@ -93,7 +93,7 @@ async function createUser(sharedDependencies: Pick<SharedDependencies, 'localUse
   const { localUser, sessionId } = sharedDependencies
   const createdUser = await prismaClient.user.create({
     data: {
-      isPubliclyVisible: false,
+      informationVisibility: UserInformationVisibility.ANONYMOUS,
       userSessions: { create: { id: sessionId } },
       hasOptedInToEmails: false,
       hasOptedInToMembership: false,

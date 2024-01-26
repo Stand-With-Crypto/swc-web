@@ -53,6 +53,12 @@ enum UserInternalStatus {
   MANUALLY_HIDDEN
 }
 
+enum UserInformationVisibility {
+  ANONYMOUS
+  CRYPTO_INFO_ONLY
+  ALL_INFO
+}
+
 // A user can interact with our platform multiple ways. 
 // Sometimes that user will be signing up via coinbase, 
 // sometimes a user will be signing up via a wallet on the website, or multiple wallets
@@ -80,7 +86,7 @@ model User {
   phoneNumber                String             @default("") @map("phone_number")
   address                    Address?           @relation(fields: [addressId], references: [id])
   addressId                  String?            @map("address_id")
-  isPubliclyVisible          Boolean            @map("is_publicly_visible")
+  informationVisibility          UserInformationVisibility            @map("information_visiblity")
   sampleDatabaseIncrement    Int                @default(0) // TODO delete
   primaryUserEmailAddress    UserEmailAddress?  @relation("asPrimaryUserEmailAddress", fields: [primaryUserEmailAddressId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   primaryUserEmailAddressId  String?            @unique @map("primary_user_email_address_id")

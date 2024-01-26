@@ -83,7 +83,7 @@ export async function actionUpdateUserProfile(
       firstName: validatedFields.data.firstName,
       lastName: validatedFields.data.lastName,
       phoneNumber: validatedFields.data.phoneNumber,
-      isPubliclyVisible: validatedFields.data.isPubliclyVisible,
+      informationVisibility: validatedFields.data.informationVisibility,
       addressId: address?.id || null,
       primaryUserEmailAddressId: primaryUserEmailAddress?.id || null,
     },

@@ -7,7 +7,12 @@ import {
   parseLocalUserFromCookiesForPageRouter,
 } from '@/utils/server/serverLocalUser'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
-import { User, UserCryptoAddress, UserEmailAddressSource } from '@prisma/client'
+import {
+  User,
+  UserCryptoAddress,
+  UserEmailAddressSource,
+  UserInformationVisibility,
+} from '@prisma/client'
 import {
   ThirdwebEmbeddedWalletMetadata,
   fetchEmbeddedWalletMetadataFromThirdweb,
@@ -66,7 +71,7 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
         ? { connect: { id: existingUser.id } }
         : {
             create: {
-              isPubliclyVisible: false,
+              informationVisibility: UserInformationVisibility.ANONYMOUS,
               hasOptedInToEmails: true,
               hasOptedInToMembership: false,
               hasOptedInToSms: false,

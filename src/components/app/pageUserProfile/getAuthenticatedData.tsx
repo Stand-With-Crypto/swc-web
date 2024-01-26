@@ -7,6 +7,7 @@ import { queryDTSIPeopleBySlugForUserActions } from '@/data/dtsi/queries/queryDT
 import { getENSDataFromCryptoAddressAndFailGracefully } from '@/data/web3/getENSDataFromCryptoAddress'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
+import { UserInformationVisibility } from '@prisma/client'
 import 'server-only'
 
 export async function getAuthenticatedData() {
@@ -85,7 +86,10 @@ export async function getAuthenticatedData() {
           ...mergeAlert,
           hasBeenConfirmedByOtherUser: hasBeenConfirmedByUserB,
           hasBeenConfirmedByCurrentUser: hasBeenConfirmedByUserA,
-          otherUser: getClientUser({ ...userB, isPubliclyVisible: true }),
+          otherUser: getClientUser({
+            ...userB,
+            informationVisibility: UserInformationVisibility.ALL_INFO,
+          }),
         }),
       ),
       ...user.userMergeAlertUserB.map(
@@ -99,7 +103,10 @@ export async function getAuthenticatedData() {
           ...mergeAlert,
           hasBeenConfirmedByCurrentUser: hasBeenConfirmedByUserB,
           hasBeenConfirmedByOtherUser: hasBeenConfirmedByUserA,
-          otherUser: getClientUser({ ...userA, isPubliclyVisible: true }),
+          otherUser: getClientUser({
+            ...userA,
+            informationVisibility: UserInformationVisibility.ALL_INFO,
+          }),
         }),
       ),
     ],

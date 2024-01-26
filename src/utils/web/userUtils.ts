@@ -4,12 +4,13 @@ import {
   SensitiveDataClientUserWithENSData,
 } from '@/clientModels/clientUser/sensitiveDataClientUser'
 import { userFullName } from '@/utils/shared/userFullName'
+import { UserInformationVisibility } from '@prisma/client'
 
 export const getUserDisplayName = (user: ClientUserWithENSData | null) => {
-  if (user?.isPubliclyVisible === false) {
+  if (user?.informationVisibility === UserInformationVisibility.ANONYMOUS) {
     return 'Anonymous'
   }
-  if (user?.firstName) {
+  if (user?.firstName && user?.informationVisibility === UserInformationVisibility.ALL_INFO) {
     return userFullName(user)
   }
   if (user?.primaryUserCryptoAddress) {
@@ -25,10 +26,10 @@ export const getUserDisplayName = (user: ClientUserWithENSData | null) => {
 }
 
 export const getUserDisplayNameWithoutENS = (user: ClientUser | null) => {
-  if (user?.isPubliclyVisible === false) {
+  if (user?.informationVisibility === UserInformationVisibility.ANONYMOUS) {
     return 'Anonymous'
   }
-  if (user?.firstName) {
+  if (user?.firstName && user?.informationVisibility === UserInformationVisibility.ALL_INFO) {
     return userFullName(user)
   }
   if (user?.primaryUserCryptoAddress) {
@@ -65,4 +66,19 @@ export const getFullSensitiveDataUserDisplayName = (user: SensitiveDataClientUse
   if (user?.primaryUserCryptoAddress) {
     return user.primaryUserCryptoAddress.cryptoAddress
   }
+}
+
+export const USER_INFORMATION_VISIBILITY_ORDERED_LIST: UserInformationVisibility[] = [
+  UserInformationVisibility.ANONYMOUS,
+  UserInformationVisibility.CRYPTO_INFO_ONLY,
+  UserInformationVisibility.ALL_INFO,
+]
+
+export const USER_INFORMATION_VISIBILITY_DISPLAY_NAME_MAP: Record<
+  UserInformationVisibility,
+  string
+> = {
+  [UserInformationVisibility.ANONYMOUS]: 'Anonymous',
+  [UserInformationVisibility.CRYPTO_INFO_ONLY]: 'Crypto Info Only',
+  [UserInformationVisibility.ALL_INFO]: 'All Info',
 }

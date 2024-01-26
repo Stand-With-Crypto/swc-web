@@ -43,35 +43,35 @@ it('formats the "create capitol canary advocate" request correctly', () => {
   const formattedRequest = formatCapitolCanaryAdvocateCreationRequest(payload)
 
   expect(formattedRequest).toMatchInlineSnapshot(`
-    {
-      "address1": "5976 Armstrong Fords",
-      "address2": "Suite 865",
-      "campaigns": [
-        137795,
-      ],
-      "city": "Bell Gardens",
-      "country": "KG",
-      "email": "Wade81@yahoo.com",
-      "emailOptin": 1,
-      "emailOptout": 0,
-      "firstname": "Blake",
-      "lastname": "Leffler",
-      "p2aSource": "source",
-      "phone": "+10692922450",
-      "smsOptin": 1,
-      "smsOptinConfirmed": 0,
-      "smsOptout": 0,
-      "state": "Florida",
-      "tags": [
-        "tag1",
-        "tag2",
-      ],
-      "utm_campaign": "utmCampaign",
-      "utm_content": "utmContent",
-      "utm_medium": "utmMedium",
-      "utm_source": "utmSource",
-      "utm_term": "utmTerm",
-      "zip5": "17916",
-    }
-  `)
+{
+  "address1": "9764 Domenico Viaduct",
+  "address2": "Suite 759",
+  "campaigns": [
+    137795,
+  ],
+  "city": "East Jaquanville",
+  "country": "UA",
+  "email": "Edythe.Raynor@hotmail.com",
+  "emailOptin": 1,
+  "emailOptout": 0,
+  "firstname": "Blake",
+  "lastname": "Leffler",
+  "p2aSource": "source",
+  "phone": "+16929224505",
+  "smsOptin": 1,
+  "smsOptinConfirmed": 0,
+  "smsOptout": 0,
+  "state": "Pennsylvania",
+  "tags": [
+    "tag1",
+    "tag2",
+  ],
+  "utm_campaign": "utmCampaign",
+  "utm_content": "utmContent",
+  "utm_medium": "utmMedium",
+  "utm_source": "utmSource",
+  "utm_term": "utmTerm",
+  "zip5": "16402-7572",
+}
+`)
 })
