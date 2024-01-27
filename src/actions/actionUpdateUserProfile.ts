@@ -10,6 +10,14 @@ import 'server-only'
 import { z } from 'zod'
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
 import { userFullName } from '@/utils/shared/userFullName'
+import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
+import {
+  CapitolCanaryCampaignId,
+  SandboxCapitolCanaryCampaignId,
+} from '@/utils/server/capitolCanary/campaigns'
+import { CreateAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
+import { inngest } from '@/inngest/inngest'
+import { CREATE_CAPITOL_CANARY_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/createAdvocateInCapitolCanary'
 
 export async function actionUpdateUserProfile(
   data: z.infer<typeof zodUpdateUserProfileFormAction>,
@@ -98,6 +106,29 @@ export async function actionUpdateUserProfile(
       primaryUserCryptoAddress: true,
     },
   })
+
+  // Create subscriber advocate in Capitol Canary if primary email exists.
+  if (primaryUserEmailAddress) {
+    const campaignId: number =
+      NEXT_PUBLIC_ENVIRONMENT === 'production'
+        ? CapitolCanaryCampaignId.DEFAULT_SUBSCRIBER
+        : SandboxCapitolCanaryCampaignId.DEFAULT_SUBSCRIBER
+    const payload: CreateAdvocateInCapitolCanaryPayloadRequirements = {
+      campaignId,
+      user: {
+        ...updatedUser,
+        address,
+      },
+      userEmailAddress: primaryUserEmailAddress,
+      opts: {
+        isEmailOptin: true,
+      },
+    }
+    await inngest.send({
+      name: CREATE_CAPITOL_CANARY_ADVOCATE_INNGEST_EVENT_NAME,
+      data: payload,
+    })
+  }
 
   return {
     user: getClientUser(updatedUser),

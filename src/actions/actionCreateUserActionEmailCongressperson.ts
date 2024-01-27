@@ -160,13 +160,13 @@ export async function actionCreateUserActionEmailCongressperson(input: Input) {
     $name: userFullName(validatedFields.data),
   })
 
-  // Send email via Capitol Canary.
-  const campaignId: number =
-    NEXT_PUBLIC_ENVIRONMENT === 'production'
-      ? CapitolCanaryCampaignId.DEFAULT_EMAIL_REPRESENTATIVE
-      : SandboxCapitolCanaryCampaignId.DEFAULT_EMAIL_REPRESENTATIVE
+  // Send email via Capitol Canary, and add user to Capitol Canary email subscriber list.
+  // By this point, the email address and physical address should have been added to our database.
   const payload: EmailRepViaCapitolCanaryPayloadRequirements = {
-    campaignId,
+    campaignId:
+      NEXT_PUBLIC_ENVIRONMENT === 'production'
+        ? CapitolCanaryCampaignId.DEFAULT_EMAIL_REPRESENTATIVE
+        : SandboxCapitolCanaryCampaignId.DEFAULT_EMAIL_REPRESENTATIVE,
     user: {
       ...user,
       address: user.address!,
@@ -174,7 +174,10 @@ export async function actionCreateUserActionEmailCongressperson(input: Input) {
     userEmailAddress: user.userEmailAddresses.find(
       emailAddr => emailAddr.emailAddress === validatedFields.data.emailAddress,
     )!,
-    emailSubject: 'Support Crypto', // This does not particularly matter as subject is overridden in Capitol Canary.
+    opts: {
+      isEmailOptin: true,
+    },
+    emailSubject: 'Support Crypto', // This does not particularly matter for now as subject is currently overridden in Capitol Canary.
     emailMessage: validatedFields.data.message,
   }
   await inngest.send({
