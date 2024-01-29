@@ -21,16 +21,7 @@ export const UserActionRowCTAButton = React.forwardRef<
   Omit<UserActionRowCTAProps, 'DialogComponent'> & React.ButtonHTMLAttributes<HTMLButtonElement>
 >(
   (
-    {
-      state,
-      image,
-      text,
-      subtext,
-      canBeTriggeredMultipleTimes,
-      className,
-      actionType: _actionType,
-      ...props
-    },
+    { state, image, text, subtext, canBeTriggeredMultipleTimes, className, actionType, ...props },
     ref,
   ) => {
     const canBeActionedOn =
@@ -64,6 +55,7 @@ export const UserActionRowCTAButton = React.forwardRef<
       <button
         {...props}
         ref={ref}
+        data-test-id={`user-action-cta-${actionType}`}
         disabled={!canBeActionedOn}
         className={cn(
           'flex w-full items-center justify-between gap-4 rounded-xl bg-gray-100 p-4 text-left',
