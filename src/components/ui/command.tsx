@@ -3,7 +3,7 @@
 import * as React from 'react'
 import { type DialogProps } from '@radix-ui/react-dialog'
 import { Command as CommandPrimitive } from 'cmdk'
-import { Search } from 'lucide-react'
+import { Search, X } from 'lucide-react'
 
 import { cn } from '@/utils/web/cn'
 import { Dialog, DialogContent } from '@/components/ui/dialog'
@@ -39,8 +39,11 @@ const CommandDialog = ({ children, ...props }: CommandDialogProps) => {
 
 const CommandInput = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive.Input>,
-  React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input>
->(({ className, ...props }, ref) => (
+  React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input> & {
+    onClear: () => void
+    commandValue?: unknown
+  }
+>(({ className, onClear, commandValue, ...props }, ref) => (
   <div className="flex items-center border-b px-3" cmdk-input-wrapper="">
     <Search className="mr-2 h-4 w-4 shrink-0 opacity-50" />
     <CommandPrimitive.Input
@@ -51,6 +54,9 @@ const CommandInput = React.forwardRef<
       )}
       {...props}
     />
+    {Boolean(props.value || commandValue) && (
+      <X className="ml-2 h-4 w-4 shrink-0 opacity-50" onClick={onClear} />
+    )}
   </div>
 ))
 

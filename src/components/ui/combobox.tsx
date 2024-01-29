@@ -113,9 +113,22 @@ function StatusList<T>({
   | 'getOptionKey'
   | 'isLoading'
 >) {
+  const inputRef = React.useRef<HTMLInputElement>(null)
+  React.useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus()
+    }
+  }, [])
   return (
     <Command shouldFilter={false}>
       <CommandInput
+        commandValue={value}
+        onClear={() => {
+          onChange(null)
+          onChangeInputValue('')
+          inputRef.current?.focus()
+        }}
+        ref={inputRef}
         placeholder="Filter status..."
         onValueChange={onChangeInputValue}
         value={inputValue}
