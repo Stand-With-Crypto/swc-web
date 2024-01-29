@@ -15,7 +15,7 @@ import {
 import { Person } from '@/components/app/dtsiClientPersonDataTable/columns'
 import { DataTablePagination } from '@/components/app/dtsiClientPersonDataTable/dataTablePagination'
 import { Button } from '@/components/ui/button'
-import { InputWithIcon } from '@/components/ui/inputWIthIcon'
+import { InputWithIcons } from '@/components/ui/inputWithIcons'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import {
   Table,
@@ -98,9 +98,9 @@ export function DataTable<TData extends Person, TValue>({
             </p>
           </div>
           <div className="w-full flex-shrink-0 md:max-w-96">
-            <InputWithIcon
+            <InputWithIcons
               className="rounded-full bg-gray-100 text-gray-600"
-              icon={<Search className="h-4 w-4 text-gray-500" />}
+              leftIcon={<Search className="h-4 w-4 text-gray-500" />}
               value={(table.getColumn('fullName')?.getFilterValue() as string) ?? ''}
               onChange={event => {
                 table.getColumn('fullName')?.setFilterValue(event.target.value)
