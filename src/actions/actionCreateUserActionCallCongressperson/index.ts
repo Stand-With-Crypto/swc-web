@@ -36,6 +36,9 @@ const createActionCallCongresspersonInputValidationSchema = object({
   dtsiSlug: zodDTSISlug,
   address: zodAddress,
 })
+import { createActionCallCongresspersonInputValidationSchema } from './inputValidationSchema'
+import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
+import { claimNFT } from '@/utils/server/airdrop'
 
 export type CreateActionCallCongresspersonInput = z.infer<
   typeof createActionCallCongresspersonInputValidationSchema
@@ -97,7 +100,7 @@ async function _actionCreateUserActionCallCongressperson(
     return { user: getClientUser(user) }
   }
 
-  const { updatedUser } = await createActionAndUpdateUser({
+  const { userAction, updatedUser } = await createActionAndUpdateUser({
     user,
     isNewUser: !userMatch.user,
     validatedInput: validatedInput.data,
@@ -105,7 +108,10 @@ async function _actionCreateUserActionCallCongressperson(
     sharedDependencies: { sessionId, analytics, peopleAnalytics },
   })
 
-  // TODO: Mint "Call" NFT
+  if (user.primaryUserCryptoAddress != null) {
+    logger.info('airdrop NFT')
+    await claimNFT(userAction, user.primaryUserCryptoAddress.cryptoAddress)
+  }
 
   return { user: getClientUser(updatedUser) }
 }
