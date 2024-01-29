@@ -35,6 +35,7 @@ function useLiveSumDonations({ locale, initialData }: SumDonationsCounterProps) 
         .then(data => data as SumDonations),
     {
       refreshInterval: 5 * 1000,
+      // we mock this value to be slightly lower so that we get an animation on initial render
       fallbackData: { amountUsd: initialData.amountUsd - 99 },
     },
   )
