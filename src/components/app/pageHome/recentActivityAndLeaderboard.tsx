@@ -1,13 +1,15 @@
 'use client'
-import { SumDonationsByUserRow } from '@/components/app/sumDonationsByUserRow/sumDonationsByUserRow'
+import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
 import { RecentActivityRow } from '@/components/app/recentActivityRow/recentActivityRow'
+import { SumDonationsByUserRow } from '@/components/app/sumDonationsByUserRow/sumDonationsByUserRow'
+import { ExternalLink } from '@/components/ui/link'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { SumDonationsByUser } from '@/data/aggregations/getSumDonationsByUser'
 import { getPublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
-import { SupportedLocale } from '@/intl/locales'
-import { ExternalLink } from '@/components/ui/link'
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
 import { useApiHomepageCommunityMetrics } from '@/hooks/useApiHomepageCommunityMetrics'
+import { SupportedLocale } from '@/intl/locales'
+import { AnimatePresence, motion, useInView } from 'framer-motion'
+import { useRef } from 'react'
 
 export function RecentActivityAndLeaderboard({
   locale,
@@ -20,8 +22,11 @@ export function RecentActivityAndLeaderboard({
   defaultValue?: RecentActivityAndLeaderboardTabs
 }) {
   const { sumDonationsByUser, actions } = useApiHomepageCommunityMetrics(data).data
+  const ref = useRef(null)
+  const isInVew = useInView(ref, { margin: '-50%', once: true })
+
   return (
-    <Tabs defaultValue={defaultValue} className="mx-auto w-full max-w-2xl">
+    <Tabs ref={ref} defaultValue={defaultValue} className="mx-auto w-full max-w-2xl">
       <div className="text-center">
         <TabsList className="mx-auto">
           <TabsTrigger value={RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY}>
@@ -34,9 +39,18 @@ export function RecentActivityAndLeaderboard({
       </div>
       <TabsContent value={RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY} className="space-y-7">
         <div className="mt-2 h-7" />
-        {actions.map(action => (
-          <RecentActivityRow locale={locale} action={action} key={action.id} />
-        ))}
+        <AnimatePresence initial={false}>
+          {actions.slice(isInVew ? 0 : 1, actions.length).map(action => (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'inherit' }}
+              exit={{ opacity: 0, height: 0 }}
+              key={action.id}
+            >
+              <RecentActivityRow locale={locale} action={action} />
+            </motion.div>
+          ))}
+        </AnimatePresence>
       </TabsContent>
       <TabsContent value={RecentActivityAndLeaderboardTabs.LEADERBOARD} className="space-y-7">
         <p className="mt-2 h-7 text-center text-xs text-gray-500">
