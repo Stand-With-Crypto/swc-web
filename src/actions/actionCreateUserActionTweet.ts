@@ -58,7 +58,7 @@ export async function actionCreateUserActionTweet() {
       userId: user.id,
     },
   })
-  console.log('userAction', userAction)
+
   if (userAction) {
     analytics.trackUserActionCreatedIgnored({
       actionType,
@@ -107,7 +107,7 @@ async function maybeUpsertUser({
   localUser: ServerLocalUser | null
 }): Promise<{ user: UserWithRelations; userState: AnalyticsUserActionUserState }> {
   if (existingUser) {
-    return { user: existingUser, userState: 'Existing With Updates' }
+    return { user: existingUser, userState: 'Existing' }
   }
   const user = await prismaClient.user.create({
     include: {
