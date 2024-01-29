@@ -5,7 +5,7 @@ import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { zodUpdateUserProfileFormAction } from '@/validation/forms/zodUpdateUserProfile'
-import { UserEmailAddressSource } from '@prisma/client'
+import { Address, User, UserEmailAddress, UserEmailAddressSource } from '@prisma/client'
 import 'server-only'
 import { z } from 'zod'
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
@@ -17,6 +17,7 @@ import {
 import { CreateAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { inngest } from '@/inngest/inngest'
 import { CREATE_CAPITOL_CANARY_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/createAdvocateInCapitolCanary'
+import { CapitolCanaryOpts } from '@/utils/server/capitolCanary/opts'
 
 export async function actionUpdateUserProfile(
   data: z.infer<typeof zodUpdateUserProfileFormAction>,
@@ -111,49 +112,27 @@ export async function actionUpdateUserProfile(
 
   /**
    * Subscribe new email address and phone number to Capitol Canary.
-   * UI requires non-empty email address within its validation, so we can use email safely.
+   * UI requires non-empty email address within its validation, so we can use primary email safely.
    */
-  const campaignId = getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_MEMBERSHIP)
-  let payload: CreateAdvocateInCapitolCanaryPayloadRequirements = {
-    campaignId,
-    user: {
-      ...updatedUser,
-      address,
-    },
-    userEmailAddress: primaryUserEmailAddress!,
-    opts: {
-      isEmailOptin: true,
-      isSmsOptin: updatedUser.hasOptedInToSms,
-      isSmsOptinConfirmed: true,
-    },
-  }
-  await inngest.send({
-    name: CREATE_CAPITOL_CANARY_ADVOCATE_INNGEST_EVENT_NAME,
-    data: payload,
+  await sendCapitolCanaryPayload(updatedUser, address, primaryUserEmailAddress!, {
+    isEmailOptin: true,
+    isSmsOptin: updatedUser.hasOptedInToSms,
+    isSmsOptinConfirmed: true,
   })
 
   /**
    * Unsubscribe old phone number from Capitol Canary if the old differs from the new.
    * UI requires non-empty email address within its validation, so we can use primary email safely if needed.
    */
-  if (user.phoneNumber !== '' && user.phoneNumber !== updatedUser.phoneNumber) {
-    payload = {
-      campaignId,
-      user: {
-        ...user,
-        address,
-      },
-      userEmailAddress: existingUserEmailAddress
-        ? existingUserEmailAddress
-        : primaryUserEmailAddress!,
-      opts: {
+  if (user.phoneNumber && user.phoneNumber !== updatedUser.phoneNumber) {
+    await sendCapitolCanaryPayload(
+      user,
+      address,
+      user.primaryUserEmailAddress ? user.primaryUserEmailAddress : primaryUserEmailAddress!,
+      {
         isSmsOptout: true,
       },
-    }
-    await inngest.send({
-      name: CREATE_CAPITOL_CANARY_ADVOCATE_INNGEST_EVENT_NAME,
-      data: payload,
-    })
+    )
   }
 
   /**
@@ -164,24 +143,34 @@ export async function actionUpdateUserProfile(
     user.primaryUserEmailAddress &&
     user.primaryUserEmailAddress?.emailAddress !== primaryUserEmailAddress?.emailAddress
   ) {
-    payload = {
-      campaignId,
-      user: {
-        ...user,
-        address,
-      },
-      userEmailAddress: user.primaryUserEmailAddress,
-      opts: {
-        isEmailOptout: true,
-      },
-    }
-    await inngest.send({
-      name: CREATE_CAPITOL_CANARY_ADVOCATE_INNGEST_EVENT_NAME,
-      data: payload,
+    await sendCapitolCanaryPayload(user, address, user.primaryUserEmailAddress, {
+      isEmailOptout: true,
     })
   }
 
   return {
     user: getClientUser(updatedUser),
   }
+}
+
+async function sendCapitolCanaryPayload(
+  user: User,
+  address: Address | null,
+  userEmailAddress: UserEmailAddress,
+  opts: CapitolCanaryOpts,
+) {
+  const campaignId = getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_MEMBERSHIP)
+  const payload: CreateAdvocateInCapitolCanaryPayloadRequirements = {
+    campaignId,
+    user: {
+      ...user,
+      address,
+    },
+    userEmailAddress,
+    opts,
+  }
+  await inngest.send({
+    name: CREATE_CAPITOL_CANARY_ADVOCATE_INNGEST_EVENT_NAME,
+    data: payload,
+  })
 }
