@@ -16,9 +16,11 @@ import {
 import { USER_INFORMATION_VISIBILITY_ORDERED_LIST, getUserDisplayName } from '@/utils/web/userUtils'
 import { zodUpdateUserInformationVisibility } from '@/validation/forms/zodUpdateUserInformationVisibility'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { UserEmailAddressSource, UserInformationVisibility } from '@prisma/client'
 import { RadioGroup, RadioGroupIndicator, RadioGroupItem } from '@radix-ui/react-radio-group'
 import { Check } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import { useMemo } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { z } from 'zod'
@@ -28,7 +30,6 @@ type FormValues = z.infer<typeof zodUpdateUserInformationVisibility> & GenericEr
 
 export function UpdateUserInformationVisibilityForm({
   user,
-  onCancel,
   onSuccess,
 }: {
   user: SensitiveDataClientUserWithENSData & { address: ClientAddress | null }
@@ -42,6 +43,22 @@ export function UpdateUserInformationVisibilityForm({
       informationVisibility: user.informationVisibility,
     },
   })
+  const options = useMemo(
+    () =>
+      USER_INFORMATION_VISIBILITY_ORDERED_LIST.filter(x => {
+        switch (x) {
+          case UserInformationVisibility.CRYPTO_INFO_ONLY:
+            return (
+              user.primaryUserEmailAddress?.source !== UserEmailAddressSource.THIRDWEB_EMBEDDED_AUTH
+            )
+          case UserInformationVisibility.ALL_INFO:
+            return user.firstName || user.lastName
+          default:
+            return true
+        }
+      }),
+    [user],
+  )
   return (
     <Form {...form}>
       <div>
@@ -81,7 +98,7 @@ export function UpdateUserInformationVisibilityForm({
                   onValueChange={field.onChange}
                   className="space-y-6"
                 >
-                  {USER_INFORMATION_VISIBILITY_ORDERED_LIST.map(option => (
+                  {options.map(option => (
                     <RadioGroupItem
                       key={option}
                       value={option}
@@ -114,16 +131,7 @@ export function UpdateUserInformationVisibilityForm({
               disabled={form.formState.isSubmitting}
               className="w-full"
             >
-              Submit
-            </Button>
-            <Button
-              onClick={onCancel}
-              size="lg"
-              variant="secondary"
-              disabled={form.formState.isSubmitting}
-              className="w-full"
-            >
-              Skip
+              Next
             </Button>
           </div>
         </form>
