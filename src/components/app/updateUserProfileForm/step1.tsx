@@ -161,7 +161,7 @@ export function UpdateUserProfileForm({
             <FormField
               control={form.control}
               name="address"
-              render={({ field: { ref: _ref, ...field } }) => (
+              render={({ field }) => (
                 <FormItem>
                   <FormLabel>Address</FormLabel>
                   <FormControl>

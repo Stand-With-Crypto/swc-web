@@ -13,8 +13,6 @@ export type SensitiveDataClientUser = ClientModel<
   Pick<
     User,
     | 'id'
-    | 'datetimeCreated'
-    | 'datetimeUpdated'
     | 'informationVisibility'
     | 'firstName'
     | 'lastName'
@@ -22,6 +20,8 @@ export type SensitiveDataClientUser = ClientModel<
     | 'hasOptedInToMembership'
     | 'hasOptedInToSms'
   > & {
+    datetimeCreated: string
+    datetimeUpdated: string
     primaryUserCryptoAddress: ClientUserCryptoAddress | null
     primaryUserEmailAddress: Pick<UserEmailAddress, 'emailAddress' | 'source'> | null
   }
@@ -60,8 +60,8 @@ export const getSensitiveDataClientUser = (
       ? getClientUserCryptoAddress(primaryUserCryptoAddress)
       : null,
     id,
-    datetimeCreated,
-    datetimeUpdated,
+    datetimeCreated: datetimeCreated.toISOString(),
+    datetimeUpdated: datetimeUpdated.toISOString(),
     informationVisibility,
     phoneNumber: phoneNumber ? formatPhoneNumber(phoneNumber) : '',
     hasOptedInToMembership,

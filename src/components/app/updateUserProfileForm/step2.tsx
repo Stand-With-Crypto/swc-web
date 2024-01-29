@@ -74,7 +74,7 @@ export function UpdateUserInformationVisibilityForm({
           <FormField
             control={form.control}
             name="informationVisibility"
-            render={({ field: { ref: _ref, ...field } }) => (
+            render={({ field }) => (
               <>
                 <RadioGroup
                   value={field.value}

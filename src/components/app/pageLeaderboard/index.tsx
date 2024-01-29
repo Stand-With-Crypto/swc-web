@@ -1,5 +1,5 @@
 import { RecentActivityRow } from '@/components/app/recentActivityRow/recentActivityRow'
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/recentActivityAndLeaderboard/recentActivityAndLeaderboardTabs'
+import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
 import { SumDonationsByUserRow } from '@/components/app/sumDonationsByUserRow/sumDonationsByUserRow'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
@@ -12,12 +12,12 @@ import { SupportedLocale } from '@/intl/locales'
 import { getDataForPageLeaderboard } from '@/components/app/pageLeaderboard/getData'
 import { toBool } from '@/utils/shared/toBool'
 
-export const PAGE_LEADERBOARD_TOTAL_PAGES = 10
+export const PAGE_LEADERBOARD_TOTAL_PAGES = 50 // TODO replace this based off the numbers we see with prod data
 export const PAGE_LEADERBOARD_TOTAL_PRE_GENERATED_PAGES = toBool(
   process.env.MINIMIZE_PAGE_PRE_GENERATION,
 )
   ? 1
-  : PAGE_LEADERBOARD_TOTAL_PAGES
+  : 10
 export const PAGE_LEADERBOARD_TITLE = 'Our community'
 export const PAGE_LEADERBOARD_DESCRIPTION = `See how our community is taking a stand to safeguard the future of crypto in America.`
 

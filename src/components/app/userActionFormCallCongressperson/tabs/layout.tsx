@@ -1,13 +1,12 @@
 import { ArrowLeft } from 'lucide-react'
 import React from 'react'
 
+import { DtsiCongresspersonDisplay } from '@/components/app/dtsiCongresspersonDisplay'
 import { dialogButtonStyles } from '@/components/ui/dialog/styles'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { ScrollArea } from '@/components/ui/scroll-area'
-import { cn } from '@/utils/web/cn'
-import { DtsiCongresspersonDisplay } from '@/components/app/dtsiCongresspersonDisplay'
 import { UseGetDTSIPeopleFromAddressResponse } from '@/hooks/useGetDTSIPeopleFromAddress'
+import { cn } from '@/utils/web/cn'
 
 interface UserActionFormCallCongresspersonLayoutProps extends React.PropsWithChildren {
   onBack?: () => void
@@ -38,11 +37,7 @@ function Heading({ title, subtitle }: { title: string; subtitle: string }) {
 UserActionFormCallCongresspersonLayout.Heading = Heading
 
 function Container({ children }: React.PropsWithChildren) {
-  return (
-    <ScrollArea>
-      <div className="space-y-4 md:space-y-8">{children}</div>
-    </ScrollArea>
-  )
+  return <div className="space-y-4 md:space-y-8">{children}</div>
 }
 UserActionFormCallCongresspersonLayout.Container = Container
 

@@ -45,7 +45,11 @@ export function PageUserProfile({
             <div className="text-lg font-bold">{getSensitiveDataUserDisplayName(user)}</div>
             <div className="text-sm text-gray-500">
               Joined{' '}
-              <FormattedDatetime date={user.datetimeCreated} dateStyle="medium" locale={locale} />
+              <FormattedDatetime
+                date={new Date(user.datetimeCreated)}
+                dateStyle="medium"
+                locale={locale}
+              />
             </div>
           </div>
         </div>
