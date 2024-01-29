@@ -1,12 +1,12 @@
 'use client'
-import { FormattedCurrency } from '@/components/ui/formattedCurrency'
-import { FormattedNumber } from '@/components/ui/formattedNumber'
+import { AnimatedNumericOdometer } from '@/components/ui/animatedNumericOdometer'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
 import { useApiHomepageTopLevelMetrics } from '@/hooks/useApiHomepageTopLevelMetrics'
 import { SupportedLocale } from '@/intl/locales'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { cn } from '@/utils/web/cn'
+import { useMemo } from 'react'
 
 export function TopLevelMetrics({
   locale,
@@ -15,8 +15,28 @@ export function TopLevelMetrics({
   Awaited<ReturnType<typeof getHomepageData>>,
   'countPolicymakerContacts' | 'countUsers' | 'sumDonations'
 > & { locale: SupportedLocale }) {
-  const { sumDonations, countPolicymakerContacts, countUsers } =
-    useApiHomepageTopLevelMetrics(data).data
+  const values = useApiHomepageTopLevelMetrics(data).data
+
+  const formatted = useMemo(() => {
+    return {
+      sumDonations: {
+        amountUsd: new Intl.NumberFormat(locale, {
+          style: 'currency',
+          currency: SupportedFiatCurrencyCodes.USD,
+          maximumFractionDigits: 0,
+        }).format(values.sumDonations.amountUsd),
+      },
+      countUsers: {
+        count: new Intl.NumberFormat(locale).format(values.countUsers.count),
+      },
+      countPolicymakerContacts: {
+        count: new Intl.NumberFormat(locale).format(
+          values.countPolicymakerContacts.countUserActionCalls +
+            values.countPolicymakerContacts.countUserActionCalls,
+        ),
+      },
+    }
+  }, [values, locale])
   return (
     <section className="mb-16 flex flex-col gap-3 rounded-lg text-center sm:flex-row sm:gap-0 md:mb-24">
       {[
@@ -25,12 +45,8 @@ export function TopLevelMetrics({
           value: (
             <TooltipProvider>
               <Tooltip>
-                <TooltipTrigger>
-                  <FormattedCurrency
-                    amount={sumDonations.amountUsd + 78000000}
-                    currencyCode={SupportedFiatCurrencyCodes.USD}
-                    locale={locale}
-                  />
+                <TooltipTrigger style={{ height: 35 }} className="mx-auto block">
+                  <AnimatedNumericOdometer size={35} value={formatted.sumDonations.amountUsd} />
                 </TooltipTrigger>
                 <TooltipContent className="max-w-xs">
                   <p className="text-sm font-normal tracking-normal">
@@ -44,18 +60,18 @@ export function TopLevelMetrics({
         },
         {
           label: 'Crypto advocates',
-          value: <FormattedNumber locale={locale} amount={countUsers.count} />,
+          value: (
+            <div>
+              <AnimatedNumericOdometer size={35} value={formatted.countUsers.count} />
+            </div>
+          ),
         },
         {
           label: 'Policymaker contacts',
           value: (
-            <FormattedNumber
-              locale={locale}
-              amount={
-                countPolicymakerContacts.countUserActionCalls +
-                countPolicymakerContacts.countUserActionEmailRecipients
-              }
-            />
+            <div>
+              <AnimatedNumericOdometer size={35} value={formatted.countPolicymakerContacts.count} />
+            </div>
           ),
         },
       ].map(({ label, value }, index) => (
@@ -70,7 +86,7 @@ export function TopLevelMetrics({
           )}
           key={label}
         >
-          <div className="text-2xl font-bold tracking-wider">{value}</div>
+          {value}
           <div className="text-gray-500">{label}</div>
         </div>
       ))}

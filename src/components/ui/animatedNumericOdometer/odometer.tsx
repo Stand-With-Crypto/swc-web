@@ -1,51 +1,41 @@
 'use client'
 
 import { useEffect, useMemo, useRef } from 'react'
-import { SupportedLocale } from '@/intl/locales'
 
-import { useCurrencyNumeralArray } from './useCurrencyNumericalArray'
 import styles from './odometer.module.css'
+import { useNumeralArray } from './useNumericalArray'
 
-const time = 600
-const DEFAULT_DONATION_VALUE = 2_399_800
-
-export interface AnimatedCurrencyOdometerProps {
-  value?: number
-  locale?: SupportedLocale
+export interface AnimatedNumericOdometerProps {
+  value: string
+  size: number
 }
 
-export function AnimatedCurrencyOdometer({
-  value = DEFAULT_DONATION_VALUE,
-  locale,
-}: AnimatedCurrencyOdometerProps) {
+export function AnimatedNumericOdometer({ value, size }: AnimatedNumericOdometerProps) {
   const spanArray = useRef<(HTMLSpanElement | null)[]>([])
 
   const valueNumericalLength = useMemo(() => {
     return String(value).length
   }, [value])
 
-  const numeralArray = useCurrencyNumeralArray(value, locale)
+  const numeralArray = useNumeralArray(value)
 
   useEffect(() => {
-    const activate = () => {
-      setTimeout(() => {
-        for (const spanElement of spanArray.current) {
-          if (spanElement) {
-            const dist = Number(spanElement.getAttribute('data-value')) + 1
-            spanElement.style.transform = `translateY(-${dist * 100}%)`
-          }
-        }
-      }, time)
+    for (const spanElement of spanArray.current) {
+      if (spanElement) {
+        const dist = Number(spanElement.getAttribute('data-value')) + 1
+        spanElement.style.transform = `translateY(-${dist * 100}%)`
+      }
     }
-
-    activate()
   }, [numeralArray])
 
+  console.log(numeralArray)
   return (
     <h1
       className={styles.odometer}
       style={{
         fontFeatureSettings: `'tnum', 'lnum'`,
+        height: size,
+        fontSize: size * 0.8,
       }}
     >
       {numeralArray.map((numeralGroup, numeralGroupIndex) => {
@@ -64,6 +54,9 @@ export function AnimatedCurrencyOdometer({
             <span
               key={digitIndex}
               data-value={digit}
+              style={{
+                transform: `translateY(-${(Number(digit) + 1) * 100}%)`,
+              }}
               ref={el => {
                 if (el && spanArray.current.length < valueNumericalLength) {
                   spanArray.current.push(el)
