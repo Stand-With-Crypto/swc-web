@@ -12,7 +12,7 @@ InternalLink.displayName = 'InternalLink'
 
 export const ExternalLink = React.forwardRef<
   HTMLAnchorElement,
-  React.LinkHTMLAttributes<HTMLAnchorElement>
+  React.AnchorHTMLAttributes<HTMLAnchorElement>
 >(({ className, ...props }, ref) => {
   return <a target="_blank" className={cn('hover:underline', className)} ref={ref} {...props} />
 })
