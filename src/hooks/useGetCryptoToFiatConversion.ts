@@ -13,7 +13,7 @@ type CryptoToFiatConversionResult = {
 /**
  * Get the USD price for a crypto asset.
  * @param tickerSymbol
- * @returns CryptoFiatConversionResult
+ * @returns CryptoToFiatConversionResult
  */
 export async function getCryptoToFiatConversion(tickerSymbol: string) {
   const data = await fetchReq(externalUrls.coinbaseApi(tickerSymbol))
@@ -37,11 +37,11 @@ export type UseGetCryptoToFiatConversionResponse = Awaited<
 /**
  * Get the USD price for a crypto asset.
  * @param tickerSymbol
- * @returns CryptoFiatConversionResult
+ * @returns CryptoToFiatConversionResult
  */
-export function useGetCryptoFiatConversion(tickerSymbol: string) {
+export function useGetCryptoToFiatConversion(tickerSymbol: string) {
   return useSWR<UseGetCryptoToFiatConversionResponse>(
-    tickerSymbol ? `useGetCryptoFiatConversion-${tickerSymbol}` : null,
+    tickerSymbol ? `useGetCryptoToFiatConversion-${tickerSymbol}` : null,
     () => getCryptoToFiatConversion(tickerSymbol),
   )
 }

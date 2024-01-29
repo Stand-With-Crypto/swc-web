@@ -1,8 +1,8 @@
 import { runBin } from '@/bin/runBin'
-import { getCryptoFiatConversion } from '@/hooks/useGetCryptoFiatConversion'
+import { getCryptoToFiatConversion } from '@/hooks/useGetCryptoToFiatConversion'
 
-async function smokeTestGetCryptoFiatConversion() {
-  await getCryptoFiatConversion('ETH')
+async function smokeTestGetCryptoToFiatConversion() {
+  await getCryptoToFiatConversion('ETH')
     .then(res => console.log(JSON.stringify(res, null, 4)))
     .catch(e => {
       console.error(e)
@@ -10,4 +10,4 @@ async function smokeTestGetCryptoFiatConversion() {
     })
 }
 
-runBin(smokeTestGetCryptoFiatConversion)
+runBin(smokeTestGetCryptoToFiatConversion)
