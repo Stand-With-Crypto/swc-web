@@ -1,5 +1,5 @@
 import { Combobox } from '@/components/ui/combobox'
-import { InputWithIcons } from '@/components/ui/inputWIthIcons'
+import { InputWithIcons } from '@/components/ui/inputWithIconss'
 import { useScript } from '@/hooks/useScript'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { cn } from '@/utils/web/cn'

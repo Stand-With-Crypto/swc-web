@@ -55,7 +55,10 @@ const CommandInput = React.forwardRef<
       {...props}
     />
     {Boolean(props.value || commandValue) && (
-      <X className="ml-2 h-4 w-4 shrink-0 opacity-50" onClick={onClear} />
+      <button onClick={onClear} className="py-3">
+        <span className="sr-only">Clear input</span>
+        <X className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+      </button>
     )}
   </div>
 ))

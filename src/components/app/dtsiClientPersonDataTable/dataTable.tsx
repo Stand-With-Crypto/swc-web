@@ -15,7 +15,7 @@ import {
 import { Person } from '@/components/app/dtsiClientPersonDataTable/columns'
 import { DataTablePagination } from '@/components/app/dtsiClientPersonDataTable/dataTablePagination'
 import { Button } from '@/components/ui/button'
-import { InputWithIcons } from '@/components/ui/inputWIthIcons'
+import { InputWithIcons } from '@/components/ui/inputWithIconss'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import {
   Table,
