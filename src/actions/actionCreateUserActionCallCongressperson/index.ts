@@ -119,7 +119,7 @@ async function getRecentUserActionByUserId(userId: User['id']) {
   return prismaClient.userAction.findFirst({
     where: {
       datetimeCreated: {
-        lte: subDays(new Date(), 1),
+        gte: subDays(new Date(), 1),
       },
       actionType: UserActionType.CALL,
       campaignName: UserActionCallCampaignName.DEFAULT,

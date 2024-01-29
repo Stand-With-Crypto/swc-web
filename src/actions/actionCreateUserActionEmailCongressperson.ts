@@ -83,7 +83,7 @@ export async function actionCreateUserActionEmailCongressperson(input: Input) {
   let userAction = await prismaClient.userAction.findFirst({
     where: {
       datetimeCreated: {
-        lte: subDays(new Date(), 1),
+        gte: subDays(new Date(), 1),
       },
       actionType,
       campaignName,
@@ -112,7 +112,7 @@ export async function actionCreateUserActionEmailCongressperson(input: Input) {
   userAction = await prismaClient.userAction.create({
     data: {
       user: { connect: { id: user.id } },
-      actionType: UserActionType.EMAIL,
+      actionType,
       campaignName: validatedFields.data.campaignName,
       ...('userCryptoAddress' in userMatch
         ? {
