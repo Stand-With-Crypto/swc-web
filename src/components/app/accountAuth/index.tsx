@@ -22,6 +22,7 @@ export function AccountAuth({
     }
   }, [requiresSignIn, screen, setScreen])
 
+  console.log({ isAutoConnecting, connectionStatus })
   if (isAutoConnecting || connectionStatus === 'unknown') {
     // TODO: add loading state
     return null
@@ -35,14 +36,7 @@ export function AccountAuth({
       setScreen={setScreen}
       isOpen={true}
       onClose={() => {
-        console.log('onClose')
         closeAccountAuthModal()
-      }}
-      onHide={() => {
-        // no op
-      }}
-      onShow={() => {
-        // no op
       }}
     />
   )

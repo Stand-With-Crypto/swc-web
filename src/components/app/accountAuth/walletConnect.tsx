@@ -26,7 +26,7 @@ interface WalletSelectorProps {
   selectUIProps: WalletSelectUIProps
 }
 
-export function WalletSelector(props: WalletSelectorProps) {
+export function WalletConnect(props: WalletSelectorProps) {
   const { walletConfigs, selectWallet, selectUIProps, setSelectionData } = props
 
   if (walletConfigs.some(config => config.category === 'socialLogin')) {

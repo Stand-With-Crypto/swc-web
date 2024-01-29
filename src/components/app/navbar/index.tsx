@@ -136,7 +136,6 @@ export async function Navbar({ locale }: { locale: SupportedLocale }) {
           <NavbarSessionButton
             messages={generateClientComponentMessages(intl, navbarSessionButtonMessages)}
           />
-          <AccountAuthButton>Login</AccountAuthButton>
         </div>
       </nav>
     </>

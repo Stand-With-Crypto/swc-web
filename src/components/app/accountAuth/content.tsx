@@ -24,25 +24,24 @@ import { Button } from '@/components/ui/button'
 import { useResponsiveDialog } from '@/components/ui/responsiveDialog'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 
-import { ReservedScreens, ScreenContext } from './screen'
-import { WalletSelectUIProps, WalletSelector } from './walletSelector'
+import { ReservedScreens } from './screen'
+import { WalletSelectUIProps, WalletConnect } from './walletConnect'
 import { GOOGLE_AUTH_LOGO, ACCOUNT_AUTH_CONFIG } from './constants'
 import { SignatureScreen } from './signatureScreen'
+import { noop } from 'lodash'
 
 export function AccountAuthContent(props: {
   screen: string | WalletConfig
   initialScreen: string | WalletConfig
   setScreen: (screen: string | WalletConfig) => void
-  onHide: () => void
-  onShow: () => void
   isOpen: boolean
   onClose: () => void
 }) {
-  const { screen, setScreen, initialScreen, onHide, onShow, onClose } = props
+  const { screen, setScreen, initialScreen, onClose } = props
 
   const [selectionData, setSelectionData] = React.useState()
   const [isLoading, setIsLoading] = React.useState(false)
-  const { Dialog, DialogContent, DialogTrigger, DialogTitle } = useResponsiveDialog()
+  const { Dialog, DialogContent, DialogTrigger } = useResponsiveDialog()
 
   const { user } = useUser()
   const authConfig = useThirdwebAuthContext()
@@ -99,9 +98,38 @@ export function AccountAuthContent(props: {
     connectionStatus: connectionStatus,
   }
 
-  console.log({ socialLoginConfig, selectionData })
+  console.log({ screen })
 
-  const walletList = (
+  const getWalletUI = (walletConfig: WalletConfig) => {
+    const ConnectUI = walletConfig.connectUI || Noop
+
+    return (
+      <ConnectUI
+        supportedWallets={walletConfigs}
+        theme={ACCOUNT_AUTH_CONFIG.theme}
+        goBack={handleBack}
+        connected={handleConnected}
+        isOpen={props.isOpen}
+        show={noop}
+        hide={noop}
+        walletConfig={walletConfig}
+        modalSize={ACCOUNT_AUTH_CONFIG.modalSize}
+        selectionData={selectionData}
+        connect={(options: any) => connect(walletConfig, options)}
+        setConnectionStatus={setConnectionStatus}
+        setConnectedWallet={setConnectedWallet}
+        createWalletInstance={() => createWalletInstance(walletConfig)}
+        connectionStatus={connectionStatus}
+        connectedWallet={activeWallet}
+        connectedWalletAddress={address}
+        setSelectionData={data => {
+          setSelectionData(data)
+        }}
+      />
+    )
+  }
+
+  const walletConnect = (
     <div className="space-y-4">
       {socialLoginConfig && (
         <Button
@@ -112,8 +140,9 @@ export function AccountAuthContent(props: {
             setIsLoading(true)
             await connectEmbeddedWallet({
               strategy: 'google',
-            }).catch(Sentry.captureException)
-            setIsLoading(false)
+            })
+              .catch(Sentry.captureException)
+              .finally(() => setIsLoading(false))
           }}
         >
           <NextImage src={GOOGLE_AUTH_LOGO} width={24} height={24} alt="" />
@@ -131,61 +160,42 @@ export function AccountAuthContent(props: {
           </Button>
         </DialogTrigger>
         <DialogContent>
-          <WalletSelector
-            walletConfigs={nonSocialLoginConfigs}
-            onGetStarted={() => {
-              setScreen(ReservedScreens.GET_STARTED)
-            }}
-            setSelectionData={setSelectionData}
-            selectWallet={handleSelect}
-            selectUIProps={selectUIProps}
-          />
+          {typeof screen !== 'string' ? (
+            getWalletUI(screen)
+          ) : (
+            <WalletConnect
+              walletConfigs={nonSocialLoginConfigs}
+              onGetStarted={() => {
+                setScreen(ReservedScreens.GET_STARTED)
+              }}
+              setSelectionData={setSelectionData}
+              selectWallet={handleSelect}
+              selectUIProps={selectUIProps}
+            />
+          )}
         </DialogContent>
       </Dialog>
     </div>
   )
 
-  const getWalletUI = (walletConfig: WalletConfig) => {
-    const ConnectUI = walletConfig.connectUI || Noop
+  const signatureScreen = <SignatureScreen onDone={onClose} />
 
+  if (screen === ReservedScreens.SIGN_IN) {
     return (
-      <ConnectUI
-        supportedWallets={walletConfigs}
-        theme={ACCOUNT_AUTH_CONFIG.theme}
-        goBack={handleBack}
-        connected={handleConnected}
-        isOpen={props.isOpen}
-        show={onShow}
-        hide={onHide}
-        walletConfig={walletConfig}
-        modalSize={ACCOUNT_AUTH_CONFIG.modalSize}
-        selectionData={selectionData}
-        connect={(options: any) => connect(walletConfig, options)}
-        setConnectionStatus={setConnectionStatus}
-        setConnectedWallet={setConnectedWallet}
-        createWalletInstance={() => createWalletInstance(walletConfig)}
-        connectionStatus={connectionStatus}
-        connectedWallet={activeWallet}
-        connectedWalletAddress={address}
-        setSelectionData={data => {
-          console.log({ data })
-          setSelectionData(data)
-        }}
-      />
+      <>
+        {isLoading && <LoadingOverlay />}
+
+        {signatureScreen}
+      </>
     )
   }
 
-  const signatureScreen = <SignatureScreen onDone={onClose} />
-
   return (
-    <ScreenContext.Provider value={screen}>
+    <>
       {isLoading && <LoadingOverlay />}
 
-      {screen === ReservedScreens.MAIN && <Container>{walletList}</Container>}
-      {screen === ReservedScreens.SIGN_IN && signatureScreen}
-      {/* {screen === ReservedScreens.GET_STARTED && getStarted} */}
-      {typeof screen !== 'string' && getWalletUI(screen)}
-    </ScreenContext.Provider>
+      <Container>{walletConnect}</Container>
+    </>
   )
 }
 

@@ -28,7 +28,7 @@ export function AccountAuthContextProvider({ children }: React.PropsWithChildren
       }}
     >
       <Dialog {...dialog}>
-        <DialogContent className="max-w-3xl">
+        <DialogContent>
           <AccountAuth />
         </DialogContent>
       </Dialog>

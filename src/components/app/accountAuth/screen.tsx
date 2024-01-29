@@ -1,5 +1,5 @@
 import { WalletConfig, useWallet, useWallets } from '@thirdweb-dev/react-core'
-import { useState, useEffect, useRef, createContext, useContext } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 export enum ReservedScreens {
   MAIN = 'main',
@@ -8,8 +8,6 @@ export enum ReservedScreens {
 }
 
 type Screen = string | WalletConfig
-
-export const ScreenContext = createContext<Screen | undefined>(undefined)
 
 export function useScreen() {
   const walletConfigs = useWallets()
@@ -42,12 +40,4 @@ export function useScreen() {
     setScreen,
     initialScreen,
   }
-}
-
-export function useScreenContext() {
-  const screen = useContext(ScreenContext)
-  if (!screen) {
-    throw new Error('useScreenContext must be used within a <ScreenProvider />')
-  }
-  return screen
 }
