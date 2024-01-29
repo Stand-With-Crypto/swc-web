@@ -4,7 +4,7 @@ import { zodGooglePlacesAutocompletePrediction } from '@/validation/fields/zodGo
 import { zodFirstName, zodLastName } from '@/validation/fields/zodName'
 import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
 import { zodOptionalEmptyString } from '@/validation/utils'
-import { boolean, object, string } from 'zod'
+import { boolean, object, string, z, RefinementCtx } from 'zod'
 
 const base = object({
   isEmbeddedWalletUser: boolean(),
@@ -20,34 +20,36 @@ const base = object({
   // informationVisibility: nativeEnum(UserInformationVisibility),
 })
 
-const emailParser = (email: string) =>
-  string().trim().email('Please enter a valid email address').toLowerCase().safeParse(email)
+function superRefine(data: z.infer<typeof base>, ctx: RefinementCtx) {
+  if (!data.isEmbeddedWalletUser) {
+    const parseEmail = string()
+      .trim()
+      .email('Please enter a valid email address')
+      .toLowerCase()
+      .safeParse(data.emailAddress)
+    if (!parseEmail.success) {
+      parseEmail.error.issues.forEach(issue => {
+        ctx.addIssue({ ...issue, path: ['emailAddress'] })
+      })
+    }
+  }
+  if (!data.phoneNumber && data.hasOptedInToSms) {
+    ctx.addIssue({
+      code: 'custom',
+      message: 'Please enter a phone number to opt in to SMS',
+      path: ['phoneNumber'],
+    })
+  }
+}
 
 export const zodUpdateUserProfileFormFields = base
   .extend({
     address: zodGooglePlacesAutocompletePrediction.nullable(),
   })
-  .superRefine((data, ctx) => {
-    if (!data.isEmbeddedWalletUser) {
-      const parseEmail = emailParser(data.emailAddress)
-      if (!parseEmail.success) {
-        parseEmail.error.issues.forEach(issue => {
-          ctx.addIssue({ ...issue, path: ['emailAddress'] })
-        })
-      }
-    }
-  })
+  .superRefine(superRefine)
+
 export const zodUpdateUserProfileFormAction = base
   .extend({
     address: zodAddress.nullable(),
   })
-  .superRefine((data, ctx) => {
-    if (!data.isEmbeddedWalletUser) {
-      const parseEmail = emailParser(data.emailAddress)
-      if (!parseEmail.success) {
-        parseEmail.error.issues.forEach(issue => {
-          ctx.addIssue(issue)
-        })
-      }
-    }
-  })
+  .superRefine(superRefine)
