@@ -10,16 +10,9 @@ import { formatPhoneNumber } from '@/utils/shared/phoneNumber'
 import { User, UserCryptoAddress, UserEmailAddress } from '@prisma/client'
 
 export type SensitiveDataClientUser = ClientModel<
-  Pick<
-    User,
-    | 'id'
-    | 'datetimeCreated'
-    | 'datetimeUpdated'
-    | 'informationVisibility'
-    | 'firstName'
-    | 'lastName'
-    | 'phoneNumber'
-  > & {
+  Pick<User, 'id' | 'informationVisibility' | 'firstName' | 'lastName' | 'phoneNumber'> & {
+    datetimeCreated: string
+    datetimeUpdated: string
     primaryUserCryptoAddress: ClientUserCryptoAddress | null
     primaryUserEmailAddress: { emailAddress: string } | null
   }
@@ -55,8 +48,8 @@ export const getSensitiveDataClientUser = (
       ? getClientUserCryptoAddress(primaryUserCryptoAddress)
       : null,
     id,
-    datetimeCreated,
-    datetimeUpdated,
+    datetimeCreated: datetimeCreated.toISOString(),
+    datetimeUpdated: datetimeUpdated.toISOString(),
     informationVisibility,
     phoneNumber: phoneNumber ? formatPhoneNumber(phoneNumber) : '',
   })

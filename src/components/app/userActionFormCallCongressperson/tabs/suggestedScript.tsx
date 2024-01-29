@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import * as Sentry from '@sentry/nextjs'
 import _ from 'lodash'
 import { z } from 'zod'
@@ -32,7 +32,10 @@ export function SuggestedScript({
   'user' | 'congressPersonData' | keyof UseTabsReturn<TabNames>
 >) {
   const router = useRouter()
-
+  const ref = React.useRef<HTMLAnchorElement>(null)
+  useEffect(() => {
+    ref.current?.focus()
+  }, [ref])
   const phoneNumber = React.useMemo(() => {
     const official = getGoogleCivicOfficialByDTSIName(
       {
@@ -139,7 +142,11 @@ export function SuggestedScript({
       >
         {phoneNumber && (
           <Button asChild>
-            <InternalLink href={`tel:${phoneNumber}`} onClick={() => handleCallAction(phoneNumber)}>
+            <InternalLink
+              ref={ref}
+              href={`tel:${phoneNumber}`}
+              onClick={() => handleCallAction(phoneNumber)}
+            >
               Call
             </InternalLink>
           </Button>

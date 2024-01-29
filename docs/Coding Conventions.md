@@ -42,6 +42,7 @@ Below is a non-exhaustive list of coding conventions that we try to follow. This
 - When working on a page that dynamically fetches data before rendering, make sure to add a [loading.tsx page](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming) to optimistically show users a skeleton of the data they're fetching
 - to rapidly build a skeleton, copy paste the main, above the fold, UX of the dynamic page and wrap the core component text with `<Skeleton />` components
 - When developing full-height design elements (for example, scrollable modals with a lot of content), make sure to QA your UI on an actual iOS simulator in addition to a responsive desktop web browser. There are nuances with the way iOS deals with css styles like `max-height: 100vh` that generally make `max-height: 100dvh` better suited for styling.
+- When building forms and multi-step wizards, make sure you specify the initial focus state you'd like the UI to have
 
 ## Backend Development
 
