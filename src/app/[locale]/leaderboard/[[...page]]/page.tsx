@@ -5,7 +5,7 @@ import {
   PageLeaderboard,
 } from '@/components/app/pageLeaderboard'
 import { getDataForPageLeaderboard } from '@/components/app/pageLeaderboard/getData'
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/recentActivityAndLeaderboard/recentActivityAndLeaderboardTabs'
+import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import _ from 'lodash'
@@ -13,7 +13,7 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { z } from 'zod'
 
-export const revalidate = 3600
+export const revalidate = 5
 export const dynamic = 'error'
 export const dynamicParams = true
 

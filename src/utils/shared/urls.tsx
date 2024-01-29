@@ -1,4 +1,4 @@
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/recentActivityAndLeaderboard/recentActivityAndLeaderboardTabs'
+import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
 import { DEFAULT_LOCALE, SupportedLocale } from '@/intl/locales'
 import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
@@ -70,6 +70,8 @@ export const apiUrls = {
   userFullProfileInfo: () => `/api/identified-user/full-profile-info`,
   detectWipedDatabase: () => `/api/identified-user/detect-wiped-database`,
   dtsiAllPeople: () => `/api/public/dtsi/all-people`,
+  homepageCommunityMetrics: () => `/api/public/homepage/community-metrics`,
+  homepageTopLevelMetrics: () => `/api/public/homepage/top-level-metrics`,
 }
 
 const NEXT_PUBLIC_VERCEL_URL = requiredOutsideLocalEnv(

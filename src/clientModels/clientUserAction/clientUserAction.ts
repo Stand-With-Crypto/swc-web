@@ -60,7 +60,8 @@ type ClientUserActionTweet = { actionType: typeof UserActionType.TWEET }
 At the database schema level we can't enforce that a single action only has one "type" FK, but at the client level we can and should
 */
 export type ClientUserAction = ClientModel<
-  Pick<UserAction, 'id' | 'datetimeCreated' | 'actionType'> & {
+  Pick<UserAction, 'id' | 'actionType'> & {
+    datetimeCreated: string
     nftMint: ClientNFTMint | null
   } & (
       | ClientUserActionTweet
@@ -96,7 +97,7 @@ export const getClientUserAction = ({
   const { id, datetimeCreated, actionType, nftMint } = record
   const sharedProps = {
     id,
-    datetimeCreated,
+    datetimeCreated: datetimeCreated.toISOString(),
     actionType,
     nftMint: nftMint
       ? {

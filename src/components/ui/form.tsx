@@ -32,11 +32,26 @@ const FormField = <
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 >({
+  render,
   ...props
 }: ControllerProps<TFieldValues, TName>) => {
   return (
     <FormFieldContext.Provider value={{ name: props.name }}>
-      <Controller {...props} />
+      <Controller
+        {...props}
+        render={({ field, ...renderProps }) => {
+          /*
+          There is a super bizarre tab focus bug. If we render a react-hook-form in a radix dialog modal, and try to tab through the inputs,
+          we'll get a really weird behavior where the first time you try to tab over to an input, the tab will reset to the dialog, but the second time it works.
+          I've confirmed:
+          - This behavior doesn't existing when using a react-hook-form outside of a radix dialog modal
+          - It only occurs if "onBlur" is allowed to be triggered on the input
+
+          This is an ugly hack to prevent it from occurring. If you can solve the problem, we can delete this overrides.
+          */
+          return render({ ...renderProps, field: { ...field, onBlur: () => {} } })
+        }}
+      />
     </FormFieldContext.Provider>
   )
 }

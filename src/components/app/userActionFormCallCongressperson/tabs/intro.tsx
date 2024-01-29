@@ -1,5 +1,6 @@
+'use client'
 import { Check } from 'lucide-react'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { Button } from '@/components/ui/button'
 import { UseTabsReturn } from '@/hooks/useTabs'
@@ -9,9 +10,15 @@ import { TabNames } from '@/components/app/userActionFormCallCongressperson/user
 import { UserActionFormCallCongresspersonLayout } from './layout'
 
 export function Intro({ gotoTab }: UseTabsReturn<TabNames>) {
+  const ref = React.useRef<HTMLButtonElement>(null)
+  useEffect(() => {
+    ref.current?.focus()
+  }, [ref])
   return (
     <IntroStaticContent>
-      <Button onClick={() => gotoTab(TabNames.ADDRESS)}>Continue</Button>
+      <Button ref={ref} onClick={() => gotoTab(TabNames.ADDRESS)}>
+        Continue
+      </Button>
     </IntroStaticContent>
   )
 }

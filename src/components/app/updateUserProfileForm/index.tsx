@@ -172,7 +172,7 @@ export function UpdateUserProfileForm({
             <FormField
               control={form.control}
               name="address"
-              render={({ field: { ref: _ref, ...field } }) => (
+              render={({ field }) => (
                 <FormItem>
                   <FormLabel>Address</FormLabel>
                   <FormControl>
@@ -229,7 +229,7 @@ export function UpdateUserProfileForm({
                   __client: true,
                   optInType: UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER,
                   actionType: UserActionType.OPT_IN,
-                  datetimeCreated: new Date(),
+                  datetimeCreated: new Date().toISOString(),
                   nftMint: null,
                   id: 'mockId',
                   user: {

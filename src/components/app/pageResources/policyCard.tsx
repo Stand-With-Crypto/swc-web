@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { TrackedExternalLink } from '@/components/ui/trackedExternalLink'
-import { AnalyticComponentType, AnalyticActionType } from '@/utils/shared/sharedAnalytics'
+import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
 
 export function PolicyCard({
   title,

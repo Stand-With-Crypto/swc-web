@@ -61,14 +61,14 @@ function RecentActivityRowBase({
           <>
             <span className="hidden md:inline">
               <FormattedRelativeDatetimeWithClientHydration
-                date={action.datetimeCreated}
+                date={new Date(action.datetimeCreated)}
                 locale={locale}
               />
             </span>
             <span className="inline md:hidden">
               <FormattedRelativeDatetimeWithClientHydration
                 timeFormatStyle="narrow"
-                date={action.datetimeCreated}
+                date={new Date(action.datetimeCreated)}
                 locale={locale}
               />
             </span>
