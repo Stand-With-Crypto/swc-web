@@ -28,7 +28,6 @@ export function AnimatedNumericOdometer({ value, size }: AnimatedNumericOdometer
     }
   }, [numeralArray])
 
-  console.log(numeralArray)
   return (
     <h1
       className={styles.odometer}
