@@ -10,21 +10,24 @@ import NFTMintStatus = $Enums.NFTMintStatus
 import { inngest } from '@/inngest/inngest'
 import { AIRDROP_NFT_INNGEST_EVENT_NAME } from '@/inngest/functions/airdropNFT'
 
-const actionTypeNFTMapping: { [key: string]: NFTInformation } = {}
-actionTypeNFTMapping[UserActionType.OPT_IN] = SWCShieldThirdWebNFT
-actionTypeNFTMapping[UserActionType.CALL] = CallYourRepresentativeSept11ThirdWebNFT
+const USER_ACTION_WITH_NFT = [UserActionType.OPT_IN, UserActionType.CALL]
+
+const USER_ACTION_TO_NFT_INFORMATION: { [key: string]: NFTInformation } = {}
+USER_ACTION_TO_NFT_INFORMATION[UserActionType.OPT_IN] = SWCShieldThirdWebNFT
+USER_ACTION_TO_NFT_INFORMATION[UserActionType.CALL] = CallYourRepresentativeSept11ThirdWebNFT
 
 const logger = getLogger(`airdrop`)
 
 export async function claimNFT(userAction: UserAction, walletAddress: string) {
   logger.info('Triggered')
-  const nft = actionTypeNFTMapping[userAction.actionType]
+  const nft = USER_ACTION_TO_NFT_INFORMATION[userAction.actionType]
   if (nft === null) {
     return
   }
 
   logger.info('nft found')
   if (await userAlreadyClaimedNFT(userAction.userId, nft.slug)) {
+    logger.info('nft already requested or claimed')
     return
   }
 
@@ -54,7 +57,7 @@ export async function claimNFT(userAction: UserAction, walletAddress: string) {
   await inngest.send({
     name: AIRDROP_NFT_INNGEST_EVENT_NAME,
     data: {
-      userAction: userMintAction,
+      userAction: userMintAction.nftMint,
       walletAddress: walletAddress,
     },
   })
@@ -62,18 +65,46 @@ export async function claimNFT(userAction: UserAction, walletAddress: string) {
 
 async function userAlreadyClaimedNFT(userId: string, nftSlug: string) {
   logger.info('userAlreadyClaimedNFT triggered')
-  const userActions = await prismaClient.user.findFirst({
+  const userActions = await prismaClient.userAction.findFirst({
     where: {
-      id: userId,
-      userActions: {
-        every: {
-          nftMint: {
-            nftSlug: nftSlug,
-          },
-        },
+      userId: userId,
+      nftMint: {
+        nftSlug: nftSlug,
+        status: { in: [NFTMintStatus.CLAIMED, NFTMintStatus.REQUESTED] },
       },
     },
   })
-  logger.info(userActions)
   return userActions !== null
+}
+
+export async function updateMinNFTStatus(
+  mintNftId: string,
+  nftMintStatus: NFTMintStatus,
+  transactionHash: string,
+) {
+  await prismaClient.nFTMint.update({
+    where: {
+      id: mintNftId,
+    },
+    data: {
+      status: nftMintStatus,
+      transactionHash: transactionHash,
+    },
+  })
+}
+
+export async function mintPastActions(userId: string, walletAddress: string) {
+  for (const actionType of USER_ACTION_WITH_NFT) {
+    const action = await prismaClient.userAction.findFirst({
+      where: {
+        userId: userId,
+        nftMintId: null,
+        actionType: actionType,
+      },
+    })
+
+    if (action !== null) {
+      await claimNFT(action, walletAddress)
+    }
+  }
 }

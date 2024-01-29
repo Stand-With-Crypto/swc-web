@@ -37,6 +37,7 @@ import {
 } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { z } from 'zod'
+import { claimNFT } from '@/utils/server/airdrop'
 
 export const zodVerifiedSWCPartnersUserActionOptIn = z.object({
   emailAddress: z.string().email().toLowerCase().trim(),
@@ -140,6 +141,16 @@ export async function verifiedSWCPartnersUserActionOptIn(
       user: { connect: { id: user.id } },
     },
   })
+  if (user.primaryUserCryptoAddressId !== null) {
+    const userCryptoAddress = await prismaClient.userCryptoAddress.findFirst({
+      where: {
+        userId: user.id,
+      },
+    })
+    if (userCryptoAddress != null) {
+      await claimNFT(userAction, userCryptoAddress.cryptoAddress)
+    }
+  }
 
   analytics.trackUserActionCreated({
     actionType,
