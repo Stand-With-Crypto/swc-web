@@ -21,7 +21,10 @@ export function EventCard({
   title: string
 }) {
   return (
-    <LinkBox className="relative h-[329px] w-full cursor-pointer overflow-hidden rounded-[32px] sm:w-[357px]">
+    <LinkBox
+      data-test-id="event-card"
+      className="relative h-[329px] w-full cursor-pointer overflow-hidden rounded-[32px] sm:w-[357px]"
+    >
       <NextImage
         priority
         alt={imageAltText}

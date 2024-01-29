@@ -1,7 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { TrackedExternalLink } from '@/components/ui/trackedExternalLink'
 import { AnalyticComponentType, AnalyticActionType } from '@/utils/shared/sharedAnalytics'
-import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
 
 export function PolicyCard({
   title,
@@ -19,7 +18,10 @@ export function PolicyCard({
   secondaryCtaUrl?: string
 }) {
   return (
-    <div className="flex flex-col content-center items-center gap-4 rounded-3xl bg-slate-200  p-6  md:flex-row">
+    <div
+      data-test-id="policy-card"
+      className="flex flex-col content-center items-center gap-4 rounded-3xl bg-slate-200  p-6  md:flex-row"
+    >
       <div className="flex w-full flex-row items-center justify-start gap-4 ">
         <div className="flex flex-col gap-2 text-left">
           <span className="text-xl font-bold">{title}</span>
