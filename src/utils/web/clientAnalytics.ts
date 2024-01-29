@@ -51,3 +51,7 @@ export function trackFormSubmitSucceeded(formName: string, other?: AnalyticPrope
 export function trackFormSubmitErrored(formName: string, other?: AnalyticProperties) {
   trackClientAnalytic('Form Submit Errored', { 'Form Name': formName, ...other })
 }
+
+export function trackExternalLink(eventProperties?: AnalyticProperties) {
+  trackClientAnalytic('External Link clicked', { ...eventProperties })
+}
