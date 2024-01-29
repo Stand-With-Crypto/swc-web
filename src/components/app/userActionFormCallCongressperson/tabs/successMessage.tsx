@@ -29,7 +29,7 @@ export function SuccessMessage() {
       action => !data?.performedUserActionTypes.includes(action.actionType),
     )
     if (action) {
-      const { DialogComponent: _DialogComponent, ...rest } = action
+      const { WrapperComponent: _WrapperComponent, ...rest } = action
       return rest
     }
     return null

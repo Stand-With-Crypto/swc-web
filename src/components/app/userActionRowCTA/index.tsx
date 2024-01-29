@@ -12,13 +12,13 @@ export interface UserActionRowCTAProps {
   text: string
   subtext: string
   canBeTriggeredMultipleTimes: boolean
-  DialogComponent: (args: { children: React.ReactNode }) => React.ReactNode
+  WrapperComponent: (args: { children: React.ReactNode }) => React.ReactNode
   onClick?: () => void
 }
 
 export const UserActionRowCTAButton = React.forwardRef<
   React.ElementRef<'button'>,
-  Omit<UserActionRowCTAProps, 'DialogComponent'> & React.ButtonHTMLAttributes<HTMLButtonElement>
+  Omit<UserActionRowCTAProps, 'WrapperComponent'> & React.ButtonHTMLAttributes<HTMLButtonElement>
 >(
   (
     { state, image, text, subtext, canBeTriggeredMultipleTimes, className, actionType, ...props },
@@ -84,10 +84,10 @@ export const UserActionRowCTAButton = React.forwardRef<
 )
 UserActionRowCTAButton.displayName = 'UserActionRowCTAButton'
 
-export function UserActionRowCTA({ DialogComponent, ...props }: UserActionRowCTAProps) {
+export function UserActionRowCTA({ WrapperComponent, ...props }: UserActionRowCTAProps) {
   return (
-    <DialogComponent>
+    <WrapperComponent>
       <UserActionRowCTAButton {...props} />
-    </DialogComponent>
+    </WrapperComponent>
   )
 }
