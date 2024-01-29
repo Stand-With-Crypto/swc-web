@@ -51,7 +51,10 @@ export function formatCapitolCanaryAdvocateCreationRequest(
 ) {
   const formattedRequest: CreateAdvocateInCapitolCanaryRequest = {
     campaigns: [payload.campaignId],
-    email: payload.userEmailAddress.emailAddress,
+  }
+
+  if (payload.userEmailAddress) {
+    formattedRequest.email = payload.userEmailAddress.emailAddress
   }
 
   if (payload.user.firstName) {

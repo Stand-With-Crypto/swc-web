@@ -24,10 +24,9 @@ import { AuthSessionMetadata } from '@/utils/server/thirdweb/types'
 import { AnalyticProperties } from '@/utils/shared/sharedAnalytics'
 import _ from 'lodash'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
-import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import {
-  CapitolCanaryCampaignId,
-  SandboxCapitolCanaryCampaignId,
+  CapitolCanaryCampaignName,
+  getCapitolCanaryCampaignID,
 } from '@/utils/server/capitolCanary/campaigns'
 import { CreateAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { inngest } from '@/inngest/inngest'
@@ -95,27 +94,15 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
               hasOptedInToEmails: true,
               hasOptedInToMembership: false,
               hasOptedInToSms: false,
-              // Creating appropriate opt-in user action given that we default to opting in users to emails.
-              userActions: {
-                create: [
-                  {
-                    campaignName: UserActionOptInCampaignName.DEFAULT,
-                    actionType: UserActionType.OPT_IN,
-                    userActionOptIn: {
-                      create: {
-                        optInType: UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER,
-                      },
-                    },
-                  },
-                ],
-              },
               ...mapLocalUserToUserDatabaseFields(localUser),
             },
           },
     },
     include: { user: true },
   })
+
   let primaryUserEmailAddressId: null | string = null
+
   /**
    * If the authenticated crypto address came from a thirdweb embedded wallet, we want to create a user email address
    * and link it to the wallet so we know it's an embedded address
@@ -131,10 +118,7 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
 
     // Create subscriber advocate in Capitol Canary.
     const payload: CreateAdvocateInCapitolCanaryPayloadRequirements = {
-      campaignId:
-        NEXT_PUBLIC_ENVIRONMENT === 'production'
-          ? CapitolCanaryCampaignId.DEFAULT_SUBSCRIBER
-          : SandboxCapitolCanaryCampaignId.DEFAULT_SUBSCRIBER,
+      campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_MEMBERSHIP),
       user: {
         ...userCryptoAddress.user,
         address: existingUser?.address || null,
@@ -151,39 +135,32 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
   }
 
   /**
-   * Ensure subscriber opt-in user action exists for existing users that have a primary email address available.
-   * This could happen if someone sends an email to a representative in a logged-out state.
-   * Create if action does not exist.
+   * Ensure subscriber opt-in user action exists for this logged-in user (user can be new or existing).
+   * Create if opt-in action does not exist.
    */
-  if (
-    existingUser
-      ? primaryUserEmailAddressId || userCryptoAddress.user.primaryUserEmailAddressId
-      : null
-  ) {
-    const existingOptInUserAction = await prismaClient.userAction.findFirst({
-      where: {
-        userId: userCryptoAddress.userId,
-        campaignName: UserActionOptInCampaignName.DEFAULT,
+  const existingOptInUserAction = await prismaClient.userAction.findFirst({
+    where: {
+      userId: userCryptoAddress.userId,
+      campaignName: UserActionOptInCampaignName.DEFAULT,
+      actionType: UserActionType.OPT_IN,
+      userActionOptIn: {
+        optInType: UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER,
+      },
+    },
+  })
+  if (!existingOptInUserAction) {
+    await prismaClient.userAction.create({
+      data: {
+        user: { connect: { id: userCryptoAddress.userId } },
         actionType: UserActionType.OPT_IN,
+        campaignName: UserActionOptInCampaignName.DEFAULT,
         userActionOptIn: {
-          optInType: UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER,
+          create: {
+            optInType: UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER,
+          },
         },
       },
     })
-    if (!existingOptInUserAction) {
-      await prismaClient.userAction.create({
-        data: {
-          user: { connect: { id: userCryptoAddress.userId } },
-          actionType: UserActionType.OPT_IN,
-          campaignName: UserActionOptInCampaignName.DEFAULT,
-          userActionOptIn: {
-            create: {
-              optInType: UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER,
-            },
-          },
-        },
-      })
-    }
   }
 
   await prismaClient.user.update({

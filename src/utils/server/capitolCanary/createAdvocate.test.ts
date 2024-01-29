@@ -1,7 +1,10 @@
 import { mockAddress } from '@/mocks/models/mockAddress'
 import { mockUser } from '@/mocks/models/mockUser'
 import { mockUserEmailAddress } from '@/mocks/models/mockUserEmailAddress'
-import { SandboxCapitolCanaryCampaignId } from '@/utils/server/capitolCanary/campaigns'
+import {
+  CapitolCanaryCampaignName,
+  getCapitolCanaryCampaignID,
+} from '@/utils/server/capitolCanary/campaigns'
 import { formatCapitolCanaryAdvocateCreationRequest } from '@/utils/server/capitolCanary/createAdvocate'
 import { CreateAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { faker } from '@faker-js/faker'
@@ -16,7 +19,7 @@ it('formats the "create capitol canary advocate" request correctly', () => {
   const mockedEmailAddress = mockUserEmailAddress()
 
   const payload: CreateAdvocateInCapitolCanaryPayloadRequirements = {
-    campaignId: SandboxCapitolCanaryCampaignId.DEFAULT_MEMBERSHIP,
+    campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_MEMBERSHIP),
     user: {
       ...mockedUser,
       address: mockedAddress,

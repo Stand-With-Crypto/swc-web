@@ -1,5 +1,8 @@
 import { inngest } from '@/inngest/inngest'
-import { SandboxCapitolCanaryCampaignId } from '@/utils/server/capitolCanary/campaigns'
+import {
+  CapitolCanaryCampaignName,
+  getCapitolCanaryCampaignID,
+} from '@/utils/server/capitolCanary/campaigns'
 import { EmailRepViaCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { mockUser } from '@/mocks/models/mockUser'
 import { mockAddress } from '@/mocks/models/mockAddress'
@@ -22,7 +25,7 @@ async function smokeTestEmailRepWithInngest() {
   const mockedEmailAddress = mockUserEmailAddress()
 
   const payload: EmailRepViaCapitolCanaryPayloadRequirements = {
-    campaignId: SandboxCapitolCanaryCampaignId.DEFAULT_EMAIL_REPRESENTATIVE,
+    campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_EMAIL_REPRESENTATIVE),
     user: {
       ...mockedUser,
       address: mockedAddress,
@@ -30,6 +33,10 @@ async function smokeTestEmailRepWithInngest() {
     userEmailAddress: mockedEmailAddress,
     metadata: {
       tags: ['Smoke Test User'],
+    },
+    opts: {
+      isEmailOptin: true,
+      isSmsOptinConfirmed: true,
     },
     emailSubject: 'This is a test email subject.',
     emailMessage: 'This is a test email message.',

@@ -10,10 +10,9 @@ import 'server-only'
 import { z } from 'zod'
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
 import { userFullName } from '@/utils/shared/userFullName'
-import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import {
-  CapitolCanaryCampaignId,
-  SandboxCapitolCanaryCampaignId,
+  CapitolCanaryCampaignName,
+  getCapitolCanaryCampaignID,
 } from '@/utils/server/capitolCanary/campaigns'
 import { CreateAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { inngest } from '@/inngest/inngest'
@@ -38,6 +37,7 @@ export async function actionUpdateUserProfile(
     },
     include: {
       userEmailAddresses: true,
+      primaryUserEmailAddress: true,
     },
   })
   const {
@@ -107,21 +107,72 @@ export async function actionUpdateUserProfile(
     },
   })
 
-  // Create subscriber advocate in Capitol Canary if primary email exists.
-  if (primaryUserEmailAddress) {
-    const campaignId: number =
-      NEXT_PUBLIC_ENVIRONMENT === 'production'
-        ? CapitolCanaryCampaignId.DEFAULT_SUBSCRIBER
-        : SandboxCapitolCanaryCampaignId.DEFAULT_SUBSCRIBER
-    const payload: CreateAdvocateInCapitolCanaryPayloadRequirements = {
+  // TODO: Handle membership toggling options: https://github.com/Stand-With-Crypto/swc-web/issues/173
+
+  /**
+   * Subscribe new email address and phone number to Capitol Canary.
+   * UI requires non-empty email address within its validation, so we can use email safely.
+   */
+  const campaignId = getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_MEMBERSHIP)
+  let payload: CreateAdvocateInCapitolCanaryPayloadRequirements = {
+    campaignId,
+    user: {
+      ...updatedUser,
+      address,
+    },
+    userEmailAddress: primaryUserEmailAddress!,
+    opts: {
+      isEmailOptin: true,
+      isSmsOptin: updatedUser.hasOptedInToSms,
+      isSmsOptinConfirmed: true,
+    },
+  }
+  await inngest.send({
+    name: CREATE_CAPITOL_CANARY_ADVOCATE_INNGEST_EVENT_NAME,
+    data: payload,
+  })
+
+  /**
+   * Unsubscribe old phone number from Capitol Canary if the old differs from the new.
+   * UI requires non-empty email address within its validation, so we can use primary email safely if needed.
+   */
+  if (user.phoneNumber !== '' && user.phoneNumber !== updatedUser.phoneNumber) {
+    payload = {
       campaignId,
       user: {
-        ...updatedUser,
+        ...user,
         address,
       },
-      userEmailAddress: primaryUserEmailAddress,
+      userEmailAddress: existingUserEmailAddress
+        ? existingUserEmailAddress
+        : primaryUserEmailAddress!,
       opts: {
-        isEmailOptin: true,
+        isSmsOptout: true,
+      },
+    }
+    await inngest.send({
+      name: CREATE_CAPITOL_CANARY_ADVOCATE_INNGEST_EVENT_NAME,
+      data: payload,
+    })
+  }
+
+  /**
+   * Unsubscribe old email address from Capitol Canary if the old differs from the new.
+   * Only can perform if the old email address exists.
+   */
+  if (
+    user.primaryUserEmailAddress &&
+    user.primaryUserEmailAddress?.emailAddress !== primaryUserEmailAddress?.emailAddress
+  ) {
+    payload = {
+      campaignId,
+      user: {
+        ...user,
+        address,
+      },
+      userEmailAddress: user.primaryUserEmailAddress,
+      opts: {
+        isEmailOptout: true,
       },
     }
     await inngest.send({

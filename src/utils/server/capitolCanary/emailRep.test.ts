@@ -1,4 +1,7 @@
-import { SandboxCapitolCanaryCampaignId } from '@/utils/server/capitolCanary/campaigns'
+import {
+  CapitolCanaryCampaignName,
+  getCapitolCanaryCampaignID,
+} from '@/utils/server/capitolCanary/campaigns'
 import { faker } from '@faker-js/faker'
 import { mockUser } from '@/mocks/models/mockUser'
 import { mockAddress } from '@/mocks/models/mockAddress'
@@ -16,7 +19,7 @@ it('formats the "email rep via capitol canary" request correctly', () => {
   const mockedEmailAddress = mockUserEmailAddress()
 
   const payload: EmailRepViaCapitolCanaryPayloadRequirements = {
-    campaignId: SandboxCapitolCanaryCampaignId.DEFAULT_EMAIL_REPRESENTATIVE,
+    campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_EMAIL_REPRESENTATIVE),
     user: {
       ...mockedUser,
       address: mockedAddress,

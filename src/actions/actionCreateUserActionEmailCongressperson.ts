@@ -32,10 +32,9 @@ import * as Sentry from '@sentry/nextjs'
 import { subDays } from 'date-fns'
 import 'server-only'
 import { z } from 'zod'
-import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import {
-  CapitolCanaryCampaignId,
-  SandboxCapitolCanaryCampaignId,
+  CapitolCanaryCampaignName,
+  getCapitolCanaryCampaignID,
 } from '@/utils/server/capitolCanary/campaigns'
 import { EmailRepViaCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { CAPITOL_CANARY_EMAIL_REP_INNGEST_EVENT_NAME } from '@/inngest/functions/emailRepViaCapitolCanary'
@@ -163,10 +162,7 @@ export async function actionCreateUserActionEmailCongressperson(input: Input) {
   // Send email via Capitol Canary, and add user to Capitol Canary email subscriber list.
   // By this point, the email address and physical address should have been added to our database.
   const payload: EmailRepViaCapitolCanaryPayloadRequirements = {
-    campaignId:
-      NEXT_PUBLIC_ENVIRONMENT === 'production'
-        ? CapitolCanaryCampaignId.DEFAULT_EMAIL_REPRESENTATIVE
-        : SandboxCapitolCanaryCampaignId.DEFAULT_EMAIL_REPRESENTATIVE,
+    campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_EMAIL_REPRESENTATIVE),
     user: {
       ...user,
       address: user.address!,
