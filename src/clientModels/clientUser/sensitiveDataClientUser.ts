@@ -10,11 +10,20 @@ import { formatPhoneNumber } from '@/utils/shared/phoneNumber'
 import { User, UserCryptoAddress, UserEmailAddress } from '@prisma/client'
 
 export type SensitiveDataClientUser = ClientModel<
-  Pick<User, 'id' | 'informationVisibility' | 'firstName' | 'lastName' | 'phoneNumber'> & {
+  Pick<
+    User,
+    | 'id'
+    | 'informationVisibility'
+    | 'firstName'
+    | 'lastName'
+    | 'phoneNumber'
+    | 'hasOptedInToMembership'
+    | 'hasOptedInToSms'
+  > & {
     datetimeCreated: string
     datetimeUpdated: string
     primaryUserCryptoAddress: ClientUserCryptoAddress | null
-    primaryUserEmailAddress: { emailAddress: string } | null
+    primaryUserEmailAddress: Pick<UserEmailAddress, 'emailAddress' | 'source'> | null
   }
 >
 
@@ -34,6 +43,8 @@ export const getSensitiveDataClientUser = (
     informationVisibility,
     primaryUserEmailAddress,
     phoneNumber,
+    hasOptedInToMembership,
+    hasOptedInToSms,
   } = record
 
   return getClientModel({
@@ -42,6 +53,7 @@ export const getSensitiveDataClientUser = (
     primaryUserEmailAddress: primaryUserEmailAddress
       ? {
           emailAddress: primaryUserEmailAddress.emailAddress,
+          source: primaryUserEmailAddress.source,
         }
       : null,
     primaryUserCryptoAddress: primaryUserCryptoAddress
@@ -52,6 +64,8 @@ export const getSensitiveDataClientUser = (
     datetimeUpdated: datetimeUpdated.toISOString(),
     informationVisibility,
     phoneNumber: phoneNumber ? formatPhoneNumber(phoneNumber) : '',
+    hasOptedInToMembership,
+    hasOptedInToSms,
   })
 }
 

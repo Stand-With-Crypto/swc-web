@@ -32,26 +32,14 @@ export async function actionUpdateUserProfile(
       userEmailAddresses: true,
     },
   })
-  const existingUserEmailAddress = validatedFields.data.emailAddress
-    ? user.userEmailAddresses.find(
-        ({ emailAddress }) => emailAddress === validatedFields.data.emailAddress,
-      )
-    : null
-  const primaryUserEmailAddress =
-    validatedFields.data.emailAddress && !existingUserEmailAddress
-      ? await prismaClient.userEmailAddress.create({
-          data: {
-            emailAddress: validatedFields.data.emailAddress,
-            source: UserEmailAddressSource.USER_ENTERED,
-            isVerified: false,
-            user: {
-              connect: {
-                id: user.id,
-              },
-            },
-          },
-        })
-      : existingUserEmailAddress
+  const {
+    firstName,
+    lastName,
+    emailAddress,
+    phoneNumber,
+    hasOptedInToSms,
+    hasOptedInToMembership,
+  } = validatedFields.data
   const address = validatedFields.data.address
     ? await prismaClient.address.upsert({
         where: {
@@ -63,16 +51,34 @@ export async function actionUpdateUserProfile(
         update: {},
       })
     : null
+  const existingUserEmailAddress = emailAddress
+    ? user.userEmailAddresses.find(addr => addr.emailAddress === emailAddress)
+    : null
+  const primaryUserEmailAddress =
+    emailAddress && !existingUserEmailAddress
+      ? await prismaClient.userEmailAddress.create({
+          data: {
+            emailAddress,
+            source: UserEmailAddressSource.USER_ENTERED,
+            isVerified: false,
+            user: {
+              connect: {
+                id: user.id,
+              },
+            },
+          },
+        })
+      : existingUserEmailAddress
   const localUser = parseLocalUserFromCookies()
   const peopleAnalytics = getServerPeopleAnalytics({ userId: authUser.userId, localUser })
   peopleAnalytics.set({
-    ...(validatedFields.data.address
-      ? convertAddressToAnalyticsProperties(validatedFields.data.address)
-      : {}),
+    ...(address ? convertAddressToAnalyticsProperties(address) : {}),
     // https://docs.mixpanel.com/docs/data-structure/user-profiles#reserved-user-properties
-    $email: validatedFields.data.emailAddress,
-    $phone: validatedFields.data.phoneNumber,
+    $email: emailAddress,
+    $phone: phoneNumber,
     $name: userFullName(validatedFields.data),
+    'Has Opted In To Membership': hasOptedInToMembership,
+    'Has Opted In To Sms': hasOptedInToSms,
   })
 
   const updatedUser = await prismaClient.user.update({
@@ -80,10 +86,11 @@ export async function actionUpdateUserProfile(
       id: user.id,
     },
     data: {
-      firstName: validatedFields.data.firstName,
-      lastName: validatedFields.data.lastName,
-      phoneNumber: validatedFields.data.phoneNumber,
-      informationVisibility: validatedFields.data.informationVisibility,
+      firstName,
+      lastName,
+      phoneNumber,
+      hasOptedInToMembership,
+      hasOptedInToSms,
       addressId: address?.id || null,
       primaryUserEmailAddressId: primaryUserEmailAddress?.id || null,
     },
