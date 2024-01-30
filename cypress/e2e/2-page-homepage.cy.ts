@@ -12,6 +12,5 @@ it('page - homepage interactions', () => {
 
   // verify the donations tab shows top donors
   cy.contains('Top donations').click()
-  cy.wait(2000)
-  cy.get('img[alt="position 1 medal"]')
+  cy.wait(2000).get('img[alt="position 1 medal"]')
 })
