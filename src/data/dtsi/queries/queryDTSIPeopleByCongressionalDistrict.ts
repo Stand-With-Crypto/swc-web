@@ -35,7 +35,7 @@ export const queryDTSIPeopleByCongressionalDistrict = async ({
     stateCode,
     congressionalDistrict: districtNumber,
   })
-  // TODO now that we can support multiple reps being returned, we should build the UX for it
+  // LATER-TASK now that we can support multiple reps being returned, we should build the UX for it
   const person = data.peopleByUSCongressionalDistrict.find(
     x => x.primaryRole?.roleCategory === DTSI_PersonRoleCategory.CONGRESS,
   )

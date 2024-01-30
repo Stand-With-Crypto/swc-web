@@ -6,11 +6,11 @@ import { UserActionFormDonateDialog } from '@/components/app/userActionFormDonat
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
 import { UserActionFormOptInSWCDialog } from '@/components/app/userActionFormOptInSWC/dialog'
-import { UserActionFormTweetDialog } from '@/components/app/userActionFormTweet/dialog'
 import { UserAvatar } from '@/components/app/userAvatar'
 import { Button } from '@/components/ui/button'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
 import { FormattedRelativeDatetimeWithClientHydration } from '@/components/ui/formattedRelativeDatetimeWithClientHydration'
+import { UserActionTweetLink } from '@/components/ui/userActionTweetLink'
 import { DTSIPersonForUserActions } from '@/data/dtsi/queries/queryDTSIPeopleBySlugForUserActions'
 import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
 import { useIsMobile } from '@/hooks/useIsMobile'
@@ -61,14 +61,14 @@ function RecentActivityRowBase({
           <>
             <span className="hidden md:inline">
               <FormattedRelativeDatetimeWithClientHydration
-                date={action.datetimeCreated}
+                date={new Date(action.datetimeCreated)}
                 locale={locale}
               />
             </span>
             <span className="inline md:hidden">
               <FormattedRelativeDatetimeWithClientHydration
                 timeFormatStyle="narrow"
-                date={action.datetimeCreated}
+                date={new Date(action.datetimeCreated)}
                 locale={locale}
               />
             </span>
@@ -196,11 +196,7 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
       }
       case UserActionType.TWEET: {
         return {
-          onFocusContent: () => (
-            <UserActionFormTweetDialog>
-              <Button>Tweet</Button>
-            </UserActionFormTweetDialog>
-          ),
+          onFocusContent: () => <UserActionTweetLink>Tweet</UserActionTweetLink>,
           children: <MainText>{userDisplayName} tweeted in support of crypto</MainText>,
         }
       }

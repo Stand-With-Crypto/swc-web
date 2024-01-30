@@ -1,3 +1,4 @@
+'use client'
 import { Button } from '@/components/ui/button'
 import { MaybeNextImg } from '@/components/ui/image'
 import { PageTitle } from '@/components/ui/pageTitleText'

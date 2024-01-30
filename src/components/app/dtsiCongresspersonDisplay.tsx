@@ -1,7 +1,10 @@
 'use client'
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
-import { UseGetDTSIPeopleFromAddressResponse } from '@/hooks/useGetDTSIPeopleFromAddress'
+import {
+  UseGetDTSIPeopleFromAddressResponse,
+  formatGetDTSIPeopleFromAddressNotFoundReason,
+} from '@/hooks/useGetDTSIPeopleFromAddress'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { convertDTSIStanceScoreToCryptoSupportLanguageSentence } from '@/utils/dtsi/dtsiStanceScoreUtils'
 
@@ -11,7 +14,7 @@ export function DtsiCongresspersonDisplay({
   congressperson?: UseGetDTSIPeopleFromAddressResponse
 }) {
   if (!congressperson || 'notFoundReason' in congressperson) {
-    return <div>No available representative</div>
+    return <div>{formatGetDTSIPeopleFromAddressNotFoundReason(congressperson)}</div>
   }
 
   return (

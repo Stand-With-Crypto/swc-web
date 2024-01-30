@@ -56,7 +56,7 @@ export function AccountAuthContent(props: {
   const address = useAddress()
   const { setConnectionStatus, setConnectedWallet, createWalletInstance, activeWallet } =
     useWalletContext()
-  const { connect: connectEmbeddedWallet, sendVerificationEmail } = useEmbeddedWallet()
+  const { connect: connectEmbeddedWallet } = useEmbeddedWallet()
 
   const handleBack = React.useCallback(() => {
     setScreen(initialScreen)

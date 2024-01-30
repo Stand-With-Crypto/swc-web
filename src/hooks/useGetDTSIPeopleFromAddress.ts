@@ -5,10 +5,6 @@ import { apiUrls } from '@/utils/shared/urls'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
 import useSWR from 'swr'
 
-export type UseGetDTSIPeopleFromAddressResponse =
-  | DTSIPeopleByCongressionalDistrictQueryResult
-  | { notFoundReason: string }
-
 async function getDTSIPeopleFromCongressionalDistrict(
   result: Awaited<ReturnType<typeof getCongressionalDistrictFromAddress>>,
 ) {
@@ -36,9 +32,27 @@ export async function getDTSIPeopleFromAddress(address: string) {
   return getDTSIPeopleFromCongressionalDistrict(result)
 }
 
+export type UseGetDTSIPeopleFromAddressResponse = Awaited<
+  ReturnType<typeof getDTSIPeopleFromAddress>
+>
+
 export function useGetDTSIPeopleFromAddress(address: string) {
   return useSWR<UseGetDTSIPeopleFromAddressResponse>(
     address ? `useGetDTSIPeopleFromAddress-${address}` : null,
     () => getDTSIPeopleFromAddress(address),
   )
+}
+export function formatGetDTSIPeopleFromAddressNotFoundReason(
+  data: Exclude<UseGetDTSIPeopleFromAddressResponse, { id: string }> | undefined | null,
+) {
+  switch (data?.notFoundReason) {
+    case 'NOT_USA_ADDRESS':
+      return 'Please enter a US-based address.'
+    case 'NOT_SPECIFIC_ENOUGH':
+      return 'Please enter a specific address that includes street-level information.'
+    case 'MISSING_FROM_DTSI':
+    case 'UNEXPECTED_ERROR':
+    default:
+      return `We can't find your representative right now, we're working on a fix :)`
+  }
 }

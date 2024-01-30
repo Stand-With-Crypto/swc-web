@@ -1,0 +1,57 @@
+name: Cypress Tests
+on:
+  push:
+    branches:
+      - cypress-setup
+      - main
+# Ideally we run this on every PR. Currently the CI flow wipes the testing database to ensure that each run is deterministic
+# To support per-branch testing, we need to invest the eng effort in allowing someone to point thier branch to their local db
+# on:
+#   pull_request:
+#     types: ['opened', 'edited', 'reopened', 'synchronize', 'ready_for_review']
+jobs:
+  cypress-run:
+    # if: github.event.pull_request.draft == false
+    environment: preview
+    runs-on: ubuntu-latest-8core
+    strategy:
+      fail-fast: false # https://github.com/cypress-io/github-action/issues/48
+    env:
+      # environment secrets
+      VERIFIED_SWC_PARTNER_SECRET_COINBASE: ${{ secrets.VERIFIED_SWC_PARTNER_SECRET_COINBASE }}
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      DO_THEY_SUPPORT_IT_API_KEY: ${{ secrets.DO_THEY_SUPPORT_IT_API_KEY }}
+      THIRD_WEB_CLIENT_SECRET: ${{ secrets.THIRD_WEB_CLIENT_SECRET }}
+      THIRDWEB_AUTH_PRIVATE_KEY: ${{ secrets.THIRDWEB_AUTH_PRIVATE_KEY }}
+      CAPITOL_CANARY_API_KEY: ${{ secrets.CAPITOL_CANARY_API_KEY }}
+      CAPITOL_CANARY_API_SECRET: ${{ secrets.CAPITOL_CANARY_API_SECRET }}
+      CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
+      # environment variables
+      LOCAL_USER_CRYPTO_ADDRESS: ${{vars.LOCAL_USER_CRYPTO_ADDRESS}}
+      NEXT_PUBLIC_ENVIRONMENT: ${{vars.NEXT_PUBLIC_ENVIRONMENT}}
+      NEXT_PUBLIC_GOOGLE_CIVIC_API_KEY: ${{vars.NEXT_PUBLIC_GOOGLE_CIVIC_API_KEY}}
+      NEXT_PUBLIC_GOOGLE_PLACES_API_KEY: ${{vars.NEXT_PUBLIC_GOOGLE_PLACES_API_KEY}}
+      NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN: ${{vars.NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN}}
+      NEXT_PUBLIC_SENTRY_DSN: ${{vars.NEXT_PUBLIC_SENTRY_DSN}}
+      NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN: ${{vars.NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN}}
+      NEXT_PUBLIC_THIRDWEB_CLIENT_ID: ${{vars.NEXT_PUBLIC_THIRDWEB_CLIENT_ID}}
+      MINIMIZE_PAGE_PRE_GENERATION: ${{vars.MINIMIZE_PAGE_PRE_GENERATION}}
+      # org level secrets
+      CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+      GITHUB_TOKEN: ${{ secrets.CYPRESS_GITHUB_WORKFLOW_TOKEN_TRAVIS }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Cypress run
+        # Uses the official Cypress GitHub action https://github.com/cypress-io/github-action
+        uses: cypress-io/github-action@1b70233146622b69e789ccdd4f9452adc638d25a # v6.6.1
+        with:
+          build: bash bin/cypress_build.sh
+          # Starts web server for E2E tests - replace with your own server invocation
+          # https://docs.cypress.io/guides/continuous-integration/introduction#Boot-your-server
+          start: npm run start
+          wait-on: 'http://localhost:3000' # Waits for above
+          # Records to Cypress Cloud
+          # https://docs.cypress.io/guides/cloud/projects#Set-up-a-project-to-record
+          record: true
+          parallel: true # Runs test in parallel using settings above

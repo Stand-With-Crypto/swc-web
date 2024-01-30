@@ -12,7 +12,7 @@ export default function RootErrorPage({
   reset: () => void
 }) {
   useEffect(() => {
-    logger.info('RootErrorPage rendered with:', error)
+    logger.info('Root Error Page rendered with:', error)
     Sentry.captureException(error)
     Sentry.captureException(new Error('Root Error Page Displayed'))
   }, [error])

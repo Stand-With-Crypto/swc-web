@@ -1,27 +1,26 @@
-import React from 'react'
 import * as Sentry from '@sentry/nextjs'
-import _ from 'lodash'
-import { z } from 'zod'
 import { useRouter } from 'next/navigation'
+import React, { useEffect } from 'react'
+import { z } from 'zod'
 
-import { Button } from '@/components/ui/button'
-import { TabNames } from '@/components/app/userActionFormCallCongressperson/userActionFormCallCongressperson.types'
-import { UserActionFormCallCongresspersonProps } from '@/components/app/userActionFormCallCongressperson'
-import { getGoogleCivicOfficialByDTSIName } from '@/utils/shared/googleCivicInfo'
-import { InternalLink } from '@/components/ui/link'
 import { actionCreateUserActionCallCongressperson } from '@/actions/actionCreateUserActionCallCongressperson'
-import { UserActionCallCampaignName } from '@/utils/shared/userActionCampaigns'
 import { createActionCallCongresspersonInputValidationSchema } from '@/actions/actionCreateUserActionCallCongressperson/inputValidationSchema'
-import { toastGenericError } from '@/utils/web/toastUtils'
-import { triggerServerActionForForm } from '@/utils/web/formUtils'
-import { UserActionType } from '@prisma/client'
-import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
-import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
+import { UserActionFormCallCongresspersonProps } from '@/components/app/userActionFormCallCongressperson'
+import { TabNames } from '@/components/app/userActionFormCallCongressperson/userActionFormCallCongressperson.types'
+import { Button } from '@/components/ui/button'
 import { UseTabsReturn } from '@/hooks/useTabs'
+import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
+import { getGoogleCivicOfficialByDTSIName } from '@/utils/shared/googleCivicInfo'
+import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
+import { UserActionCallCampaignName } from '@/utils/shared/userActionCampaigns'
+import { triggerServerActionForForm } from '@/utils/web/formUtils'
+import { toastGenericError } from '@/utils/web/toastUtils'
+import { UserActionType } from '@prisma/client'
 
-import { UserActionFormCallCongresspersonLayout } from './layout'
-import { identifyUserOnClient } from '@/utils/web/identifyUser'
+import { TrackedExternalLink } from '@/components/ui/trackedExternalLink'
 import { userFullName } from '@/utils/shared/userFullName'
+import { identifyUserOnClient } from '@/utils/web/identifyUser'
+import { UserActionFormCallCongresspersonLayout } from './layout'
 
 export function SuggestedScript({
   user,
@@ -32,7 +31,10 @@ export function SuggestedScript({
   'user' | 'congressPersonData' | keyof UseTabsReturn<TabNames>
 >) {
   const router = useRouter()
-
+  const ref = React.useRef<HTMLAnchorElement>(null)
+  useEffect(() => {
+    ref.current?.focus()
+  }, [ref])
   const phoneNumber = React.useMemo(() => {
     const official = getGoogleCivicOfficialByDTSIName(
       {
@@ -139,9 +141,14 @@ export function SuggestedScript({
       >
         {phoneNumber && (
           <Button asChild>
-            <InternalLink href={`tel:${phoneNumber}`} onClick={() => handleCallAction(phoneNumber)}>
+            <TrackedExternalLink
+              target="_self"
+              ref={ref}
+              href={`tel:${phoneNumber}`}
+              onClick={() => handleCallAction(phoneNumber)}
+            >
               Call
-            </InternalLink>
+            </TrackedExternalLink>
           </Button>
         )}
       </UserActionFormCallCongresspersonLayout.CongresspersonDisplayFooter>

@@ -11,7 +11,6 @@ import {
   convertDTSIStanceScoreToLetterGrade,
 } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { toBool } from '@/utils/shared/toBool'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'

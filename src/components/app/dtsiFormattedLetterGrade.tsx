@@ -1,25 +1,23 @@
-import { NextImage } from '@/components/ui/image'
-
 import { DTSI_Person } from '@/data/dtsi/generated'
 import {
   convertDTSIStanceScoreToLetterGrade,
   DTSILetterGrade,
 } from '@/utils/dtsi/dtsiStanceScoreUtils'
-import _ from 'lodash'
+import { cn, twNoop } from '@/utils/web/cn'
 
-const getImage = (letterGrade: DTSILetterGrade | null) => {
+const getBgColor = (letterGrade: DTSILetterGrade | null) => {
   switch (letterGrade) {
     case 'A':
     case 'B':
-      return '/dtsiLetterGrade/green.svg'
+      return twNoop('bg-green-600')
 
     case 'C':
-      return '/dtsiLetterGrade/yellow.svg'
+      return twNoop('bg-yellow-600')
     case 'D':
     case 'F':
-      return '/dtsiLetterGrade/red.svg'
+      return twNoop('bg-red-600')
   }
-  return '/dtsiLetterGrade/grey.svg'
+  return twNoop('bg-gray-600')
 }
 
 export const DTSIFormattedLetterGrade: React.FC<{
@@ -29,19 +27,19 @@ export const DTSIFormattedLetterGrade: React.FC<{
   const letterGrade = convertDTSIStanceScoreToLetterGrade(person)
 
   return (
-    <div className="relative inline-block">
+    <div
+      className={cn(
+        'relative inline-flex items-center justify-center rounded-full text-4xl',
+        getBgColor(letterGrade),
+      )}
+      style={{ width: size, height: size }}
+    >
       <div
-        className="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center text-center font-extrabold leading-none text-white"
-        style={{ fontSize: size * 0.66, paddingBottom: size * 0.1 }}
+        className="font-extrabold text-white"
+        style={{ fontSize: size * 0.66, paddingTop: size * 0.05, lineHeight: 0 }}
       >
-        <div>{letterGrade || '?'}</div>
+        {letterGrade || '?'}
       </div>
-      <NextImage
-        alt={`Crypto letter grade of ${letterGrade || 'N/A'}`}
-        width={size}
-        height={size}
-        src={getImage(letterGrade)}
-      />
     </div>
   )
 }

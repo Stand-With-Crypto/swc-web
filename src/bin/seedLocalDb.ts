@@ -4,7 +4,6 @@ import { mockAddress } from '@/mocks/models/mockAddress'
 import { mockAuthenticationNonce } from '@/mocks/models/mockAuthenticationNonce'
 import { PopularCryptoAddress, mockUserCryptoAddress } from '@/mocks/models/mockUserCryptoAddress'
 import { mockUser } from '@/mocks/models/mockUser'
-import { mockNFT } from '@/mocks/models/mockNFT'
 import { mockUserSession } from '@/mocks/models/mockUserSession'
 import { mockUserAction } from '@/mocks/models/mockUserAction'
 import { mockUserActionCall } from '@/mocks/models/mockUserActionCall'
@@ -13,16 +12,16 @@ import { mockUserActionEmail } from '@/mocks/models/mockUserActionEmail'
 import { mockUserActionEmailRecipient } from '@/mocks/models/mockUserActionEmailRecipient'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { batchAsyncAndLog } from '@/utils/shared/batchAsyncAndLog'
-import { MOCK_CURRENT_ETH_USD_EXCHANGE_RATE } from '@/utils/shared/exchangeRate'
 import { getLogger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { faker } from '@faker-js/faker'
 import _ from 'lodash'
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
-import { UserActionType, UserEmailAddressSource } from '@prisma/client'
+import { UserActionType, UserEmailAddressSource, UserInformationVisibility } from '@prisma/client'
 import { mockUserActionOptIn } from '@/mocks/models/mockUserActionOptIn'
 import { mockUserEmailAddress } from '@/mocks/models/mockUserEmailAddress'
+import { mockNFTMint } from '@/mocks/models/mockNFTMint'
 
 const LOCAL_USER_CRYPTO_ADDRESS = requiredEnv(
   process.env.LOCAL_USER_CRYPTO_ADDRESS,
@@ -34,6 +33,7 @@ enum SeedSize {
   MD = 'MD',
   LG = 'LG',
 }
+
 const argv = yargs(hideBin(process.argv)).option('size', {
   type: 'string',
   describe: 'The timestamp of the last updated record',
@@ -138,7 +138,9 @@ async function seed() {
       // we want all known ENS addresses to not have a full name so we always display their ENS
       // in the testing environment. This lets us verify our onchain integrations are working easily
       const shouldUseInitialCryptoAddress =
-        initialCryptoAddresses.length && !selectedUser.firstName && selectedUser.isPubliclyVisible
+        initialCryptoAddresses.length &&
+        !selectedUser.firstName &&
+        selectedUser.informationVisibility === UserInformationVisibility.CRYPTO_INFO_ONLY
       return {
         ...mockUserCryptoAddress(),
         embeddedWalletUserEmailAddressId:
@@ -208,24 +210,13 @@ async function seed() {
   })
 
   /*
-  nft
-  */
-  await batchAsyncAndLog(
-    _.times(seedSizes([5, 10, 15])).map(() => mockNFT()),
-    data =>
-      prismaClient.nFT.createMany({
-        data,
-      }),
-  )
-  const nft = await prismaClient.nFT.findMany()
-  logEntity({ nft })
-  /*
   userAction
   */
   const userActionTypes = Object.values(UserActionType)
   const userActionTypesToPersist = _.times(seedSizes([400, 4000, 40000])).map(index => {
     return userActionTypes[index % userActionTypes.length]
   })
+
   /*
   NFTMint
   */
@@ -233,13 +224,7 @@ async function seed() {
     userActionTypesToPersist
       .filter(x => x === UserActionType.NFT_MINT)
       .map(() => {
-        const selectedNFT = faker.helpers.arrayElement(nft)
-        return {
-          nftId: selectedNFT.id,
-          costAtMint: selectedNFT.cost,
-          costAtMintCurrencyCode: selectedNFT.costCurrencyCode,
-          costAtMintUsd: selectedNFT.cost.times(MOCK_CURRENT_ETH_USD_EXCHANGE_RATE),
-        }
+        return mockNFTMint()
       }),
     data =>
       prismaClient.nFTMint.createMany({
@@ -344,7 +329,7 @@ async function seed() {
   await batchAsyncAndLog(
     _.flatten(
       userActionsByType[UserActionType.EMAIL].map(actionEmail =>
-        // TODO expand this to be more than 1 recipient once we have UX
+        // LATER-TASK expand this to be more than 1 recipient once we have UX
         _.times(faker.helpers.arrayElement([1])).map(() => ({
           ...mockUserActionEmailRecipient(),
           userActionEmailId: actionEmail.id,

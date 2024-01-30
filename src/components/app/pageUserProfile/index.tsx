@@ -15,7 +15,6 @@ import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { getSensitiveDataUserDisplayName } from '@/utils/web/userUtils'
 import { UserActionType } from '@prisma/client'
 import _ from 'lodash'
-import { MergeAlertCTA } from './mergeAlertCTA'
 
 export function PageUserProfile({
   params,
@@ -30,22 +29,27 @@ export function PageUserProfile({
   const performedUserActionTypes = _.uniq(userActions.map(x => x.actionType))
   return (
     <div className="container">
-      {!!user.mergeAlerts.length && (
+      {/* LATER-TASK enable this feature */}
+      {/* {!!user.mergeAlerts.length && (
         <div className="mb-6 space-y-2">
           {user.mergeAlerts.map(mergeAlert => (
             <MergeAlertCTA key={mergeAlert.id} user={user} mergeAlert={mergeAlert} />
           ))}
         </div>
-      )}
+      )} */}
 
       <div className="mb-6 flex items-center justify-between md:mx-4">
         <div className="flex items-center gap-2">
-          <SensitiveDataUserAvatar size={60} user={user} />
+          <SensitiveDataUserAvatar size={48} user={user} />
           <div>
             <div className="text-lg font-bold">{getSensitiveDataUserDisplayName(user)}</div>
             <div className="text-sm text-gray-500">
               Joined{' '}
-              <FormattedDatetime date={user.datetimeCreated} dateStyle="medium" locale={locale} />
+              <FormattedDatetime
+                date={new Date(user.datetimeCreated)}
+                dateStyle="medium"
+                locale={locale}
+              />
             </div>
           </div>
         </div>

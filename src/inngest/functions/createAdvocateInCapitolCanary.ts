@@ -1,10 +1,10 @@
 import { inngest } from '@/inngest/inngest'
 import { onFailureCapitolCanary } from '@/inngest/onFailureCapitolCanary'
 import {
-  CreateAdvocateInCapitolCanaryPayloadRequirements,
   createAdvocateInCapitolCanary,
   formatCapitolCanaryAdvocateCreationRequest,
 } from '@/utils/server/capitolCanary/createAdvocate'
+import { CreateAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { NonRetriableError } from 'inngest'
 
 const CREATE_CAPITOL_CANARY_ADVOCATE_RETRY_LIMIT = 20
@@ -31,12 +31,22 @@ export const createAdvocateInCapitolCanaryWithInngest = inngest.createFunction(
         cause: formattedRequest,
       })
     }
-    const stepResponse = await step.run('capitol-canary.create-advocate-api-call', async () => {
-      return {
-        event,
-        ...(await createAdvocateInCapitolCanary(formattedRequest)),
-      }
-    })
+    const stepResponse = await step.run(
+      'capitol-canary.create-advocate.create-advocate-in-capitol-canary',
+      async () => {
+        const createAdvocateResp = await createAdvocateInCapitolCanary(formattedRequest)
+        if (createAdvocateResp.success != 1) {
+          throw new NonRetriableError(
+            `client error for creating advocate in capitol canary: ${JSON.stringify(
+              createAdvocateResp,
+            )}`,
+          )
+        }
+        return {
+          ...createAdvocateResp,
+        }
+      },
+    )
     return stepResponse
   },
 )

@@ -7,7 +7,7 @@ const logger = getLogger(`maybeCreateMergeAlertAfterEmailVerification`)
 /*
 Logic that occurs anytime a users email is verified and the user previously existed
 */
-// TODO integrate with logic that deals with verified emails being persisted to db
+// LATER-TASK integrate with logic that deals with verified emails being persisted to db
 
 export async function maybeCreateMergeAlertAfterEmailVerification(userEmailAddressId: string) {
   const user = await prismaClient.user.findFirstOrThrow({

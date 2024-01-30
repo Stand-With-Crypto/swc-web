@@ -1,6 +1,6 @@
 'use client'
 
-import { UpdateUserProfileForm } from '@/components/app/updateUserProfileForm'
+import { UpdateUserProfileFormContainer } from '@/components/app/updateUserProfileForm'
 import { LazyUpdateUserProfileForm } from '@/components/app/updateUserProfileForm/lazyLoad'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -11,7 +11,7 @@ export function UpdateUserProfileFormDialog({
   children,
   defaultOpen = false,
   ...formProps
-}: Omit<React.ComponentProps<typeof UpdateUserProfileForm>, 'onCancel' | 'onSuccess'> & {
+}: Omit<React.ComponentProps<typeof UpdateUserProfileFormContainer>, 'onCancel' | 'onSuccess'> & {
   children: React.ReactNode
   defaultOpen?: boolean
 }) {
@@ -19,7 +19,7 @@ export function UpdateUserProfileFormDialog({
   return (
     <Dialog {...dialogProps}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="max-w-3xl">
+      <DialogContent className="max-w-md">
         <Suspense fallback={<Skeleton className="h-80 w-full" />}>
           <LazyUpdateUserProfileForm
             {...formProps}

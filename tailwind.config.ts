@@ -3,6 +3,11 @@ import type { Config } from 'tailwindcss'
 const config: Config = {
   content: ['./src/**/*.{ts,tsx}'],
   theme: {
+    screens: {
+      sm: '360px',
+      md: '768px',
+      lg: '1280px',
+    },
     container: {
       center: true,
       padding: { DEFAULT: '1rem', md: '2rem' },

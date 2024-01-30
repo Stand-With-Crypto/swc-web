@@ -37,6 +37,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { UserActionType } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { useRouter } from 'next/navigation'
+import React from 'react'
 import { useMemo } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -94,6 +95,9 @@ export function UserActionFormEmailCongressperson({
     resolver: zodResolver(zodUserActionFormEmailCongresspersonFields),
     defaultValues,
   })
+  React.useEffect(() => {
+    form.setFocus('firstName')
+  }, [form])
   return (
     <Form {...form}>
       <form
@@ -188,7 +192,7 @@ export function UserActionFormEmailCongressperson({
               <FormField
                 control={form.control}
                 name="address"
-                render={({ field: { ref: _ref, ...field } }) => (
+                render={({ field }) => (
                   <FormItem>
                     <FormLabel>Address</FormLabel>
                     <FormControl>
@@ -227,8 +231,14 @@ export function UserActionFormEmailCongressperson({
               <p className="text-xs text-fontcolor-muted">
                 By submitting, I understand that Stand With Crypto and its vendors may collect and
                 use my Personal Information. To learn more, visit the Stand With Crypto Alliance{' '}
-                <InternalLink href={urls.privacyPolicy()}>Privacy Policy</InternalLink> and{' '}
-                <ExternalLink href={'https://www.quorum.us/static/Privacy-Policy.pdf'}>
+                <InternalLink tabIndex={-1} href={urls.privacyPolicy()}>
+                  Privacy Policy
+                </InternalLink>{' '}
+                and{' '}
+                <ExternalLink
+                  tabIndex={-1}
+                  href={'https://www.quorum.us/static/Privacy-Policy.pdf'}
+                >
                   Quorum Privacy Policy
                 </ExternalLink>
                 .

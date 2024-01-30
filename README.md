@@ -19,12 +19,13 @@
   - This will generate a new `.env` file in your local repository; this will store all your local environment variables
 - Open the `.env` file with your favorite text editor, and update the environment variables based off the commented instructions
   - **Updating your `.env` is VERY important, so do that before moving on**
-- Run `npm run initial` which includes all required set-up commands for first-time local development.
+- Run `npm run initial` which includes all required set-up commands for first-time local development
 
 ### Start the server
 
 - `npm run dev` - runs the development server locally
 - In a separate terminal tab, `npm run inngest` - runs [Inngest](https://www.inngest.com/)
+  - Both the development server AND Inngest are required for a fully functional website
 - Open [http://localhost:3000](http://localhost:3000) with your browser to see the results
 
 ### Useful development tips
@@ -59,6 +60,8 @@ Whenever you make Prisma schema changes (or pulling commits from `main` that inc
   - `npm run typecheck` - audits code against TypeScript
   - `npm run test` - execute Jest tests
   - `npm run precheck` - executes all 3 commands above concurrently
+  - `npm run e2e:run-headless` - runs all our e2e tests
+    - Currently these only execute when new comments are made to main branch because of database dependencies, this may change in the future
 
 ### Contribution guide
 

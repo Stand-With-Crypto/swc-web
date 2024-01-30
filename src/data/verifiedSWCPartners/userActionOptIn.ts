@@ -24,6 +24,7 @@ import {
   UserActionType,
   UserEmailAddress,
   UserEmailAddressSource,
+  UserInformationVisibility,
   UserSession,
 } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
@@ -230,7 +231,7 @@ async function maybeUpsertUser({
       userSessions: {
         create: {},
       },
-      isPubliclyVisible: false,
+      informationVisibility: UserInformationVisibility.ANONYMOUS,
       firstName,
       lastName,
       phoneNumber,

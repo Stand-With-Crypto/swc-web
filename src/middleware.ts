@@ -1,4 +1,5 @@
 import { DEFAULT_LOCALE, ORDERED_SUPPORTED_LOCALES } from '@/intl/locales'
+import { isCypress } from '@/utils/shared/executionEnvironment'
 import { getLogger } from '@/utils/shared/logger'
 import { USER_SESSION_ID_COOKIE_NAME, generateUserSessionId } from '@/utils/shared/userSessionId'
 import { i18nRouter } from 'next-i18n-router'
@@ -7,7 +8,12 @@ import { NextRequest } from 'next/server'
 const logger = getLogger('middleware')
 // taken from https://i18nexus.com/tutorials/nextjs/react-intl
 
+// The conditionals for cypress silence some of the annoying logs that show up when spinning up the e2e server environment
+
 export function middleware(request: NextRequest) {
+  if (isCypress) {
+    request.headers.set('accept-language', 'en-US,en;q=0.9')
+  }
   const i18nParsedResponse = i18nRouter(request, {
     locales: ORDERED_SUPPORTED_LOCALES as string[],
     defaultLocale: DEFAULT_LOCALE,
@@ -24,7 +30,9 @@ export function middleware(request: NextRequest) {
   }
   if (!existingSessionId) {
     const sessionId = generateUserSessionId()
-    logger.info(`setting initial session id: ${sessionId}`)
+    if (!isCypress) {
+      logger.info(`setting initial session id: ${sessionId}`)
+    }
     i18nParsedResponse.cookies.set({
       name: USER_SESSION_ID_COOKIE_NAME,
       value: sessionId,

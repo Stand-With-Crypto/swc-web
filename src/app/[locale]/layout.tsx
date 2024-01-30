@@ -23,7 +23,6 @@ export async function generateStaticParams() {
   return ORDERED_SUPPORTED_LOCALES.map(locale => ({ locale }))
 }
 
-// TODO replace with font we want
 const inter = Inter({ subsets: ['latin'] })
 
 const title = `Stand With Crypto`
@@ -50,7 +49,7 @@ export const metadata: Metadata = {
     { url: '/logo/favicon-16x16.png', sizes: '16x16' },
     { url: '/logo/favicon-32x32.png', sizes: '32x32' },
   ],
-  // manifest: '/site.webmanifest', // TODO figure out why we get 401s when we uncomment this
+  // manifest: '/site.webmanifest', // LATER-TASK figure out why we get 401s when we uncomment this
   appleWebApp: {
     title: 'Stand With Crypto',
     statusBarStyle: 'black-translucent',
@@ -72,7 +71,7 @@ export default function Layout({ children, params }: PageProps & { children: Rea
           <FullHeight.Container>
             <FullHeight.Content>
               <Navbar locale={locale} />
-              <main>{children}</main>
+              {children}
             </FullHeight.Content>
             <Footer locale={locale} />
           </FullHeight.Container>
