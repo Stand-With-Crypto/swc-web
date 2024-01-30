@@ -147,10 +147,6 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
   })
   logWithAddress(`user crypto address created`)
 
-  if (existingUser !== null) {
-    await mintPastActions(existingUser.id, userCryptoAddress.cryptoAddress)
-  }
-
   let primaryUserEmailAddressId: null | string = null
 
   /**
@@ -232,6 +228,11 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
       ...(primaryUserEmailAddressId ? { primaryUserEmailAddressId } : {}),
     },
   })
+
+  if (existingUser !== null) {
+    await mintPastActions(existingUser.id, userCryptoAddress)
+  }
+
   trackUserLogin({
     existingUser: userCryptoAddress.user,
     localUser,

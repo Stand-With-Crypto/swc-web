@@ -13,17 +13,10 @@ export async function airdropNFT(
 
   try {
     const contract = await thirdwebSDK.getContract(contractAddresses)
-    logger.info('Got Contract')
-    const preparedTx = await contract.erc721.claimTo.prepare(walletAddress, quantity)
-
-    logger.info(preparedTx.getGasPrice())
-    // const tx = await contract.erc721.claimTo(walletAddress, quantity, {})
-
-    const tx = await preparedTx.execute()
-    logger.info('Done')
-
+    const tx = await contract.erc721.claimTo(walletAddress, quantity, {})
     return tx[0].receipt.transactionHash
   } catch (e) {
+    logger.error('Failed to airdrop NFT')
     Sentry.captureException(e, {
       level: 'error',
     })

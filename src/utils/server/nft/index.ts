@@ -1,5 +1,5 @@
 import { prismaClient } from '@/utils/server/prismaClient'
-import { $Enums, NFTCurrency, UserAction, UserActionType } from '@prisma/client'
+import { $Enums, NFTCurrency, UserAction, UserActionType, UserCryptoAddress } from '@prisma/client'
 import {
   CallYourRepresentativeSept11ThirdWebNFT,
   NFTInformation,
@@ -18,7 +18,7 @@ USER_ACTION_TO_NFT_INFORMATION[UserActionType.CALL] = CallYourRepresentativeSept
 
 const logger = getLogger(`airdrop`)
 
-export async function claimNFT(userAction: UserAction, walletAddress: string) {
+export async function claimNFT(userAction: UserAction, userCryptoAddress: UserCryptoAddress) {
   logger.info('Triggered')
   const nft = USER_ACTION_TO_NFT_INFORMATION[userAction.actionType]
   if (nft === null) {
@@ -31,11 +31,12 @@ export async function claimNFT(userAction: UserAction, walletAddress: string) {
     return
   }
 
+  logger.info('cryptoAddress id: ' + userCryptoAddress.id)
   const userMintAction = await prismaClient.userAction.create({
     data: {
       user: { connect: { id: userAction.userId } },
       actionType: UserActionType.NFT_MINT,
-      userCryptoAddress: { connect: { id: userAction.userCryptoAddressId! } },
+      userCryptoAddress: { connect: { id: userCryptoAddress.id } },
       campaignName: userAction.campaignName,
       nftMint: {
         create: {
@@ -58,7 +59,7 @@ export async function claimNFT(userAction: UserAction, walletAddress: string) {
     name: AIRDROP_NFT_INNGEST_EVENT_NAME,
     data: {
       userAction: userMintAction.nftMint,
-      walletAddress: walletAddress,
+      walletAddress: userCryptoAddress.cryptoAddress,
     },
   })
 }
@@ -93,18 +94,18 @@ export async function updateMinNFTStatus(
   })
 }
 
-export async function mintPastActions(userId: string, walletAddress: string) {
+export async function mintPastActions(userId: string, userCryptoAddress: UserCryptoAddress) {
   for (const actionType of USER_ACTION_WITH_NFT) {
     const action = await prismaClient.userAction.findFirst({
       where: {
         userId: userId,
-        nftMintId: null,
         actionType: actionType,
       },
     })
 
     if (action !== null) {
-      await claimNFT(action, walletAddress)
+      logger.info('mint past actions:' + action.actionType)
+      await claimNFT(action, userCryptoAddress)
     }
   }
 }

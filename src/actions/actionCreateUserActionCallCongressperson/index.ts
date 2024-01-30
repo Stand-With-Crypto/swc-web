@@ -110,7 +110,7 @@ async function _actionCreateUserActionCallCongressperson(
 
   if (user.primaryUserCryptoAddress != null) {
     logger.info('airdrop NFT')
-    await claimNFT(userAction, user.primaryUserCryptoAddress.cryptoAddress)
+    await claimNFT(userAction, user.primaryUserCryptoAddress)
   }
 
   return { user: getClientUser(updatedUser) }
