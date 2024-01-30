@@ -78,7 +78,7 @@ export function PageResources() {
           Get involved
         </PageTitle>
         <p>The future of crypto is in your hands. Here’s how you can help.</p>
-        <UserActionRowCTAsListWithApi />
+        <UserActionRowCTAsListWithApi excludeUserActionTypes={['NFT_MINT']} />
       </section>
     </div>
   )
