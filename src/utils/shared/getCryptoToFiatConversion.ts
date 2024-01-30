@@ -1,4 +1,5 @@
 import { fetchReq } from '@/utils/shared/fetchReq'
+import * as Sentry from '@sentry/nextjs'
 
 type CryptoToFiatConversionResult = {
   data: {
@@ -18,6 +19,10 @@ export async function getCryptoToFiatConversion(tickerSymbol: string) {
   )
     .then(res => res.json())
     .catch(() => {
+      Sentry.captureMessage('Error fetching crypto to fiat conversion', {
+        tags: { parentDomain: 'getCryptoToFiatConversion' },
+        extra: { response: data },
+      })
       return undefined
     })
 
