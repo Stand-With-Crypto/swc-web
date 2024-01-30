@@ -20,7 +20,7 @@ export function UserActionFormCallCongresspersonLayout({
     <>
       {onBack && <GoBackButton onClick={onBack} />}
 
-      <div className="p-6 md:px-12">{children}</div>
+      <div className="flex min-h-[400px] flex-col px-6 md:px-12">{children}</div>
     </>
   )
 }
@@ -37,7 +37,11 @@ function Heading({ title, subtitle }: { title: string; subtitle: string }) {
 UserActionFormCallCongresspersonLayout.Heading = Heading
 
 function Container({ children }: React.PropsWithChildren) {
-  return <div className="space-y-4 md:space-y-8">{children}</div>
+  return (
+    <div className="flex flex-grow">
+      <div className="space-y-4 md:space-y-8">{children}</div>
+    </div>
+  )
 }
 UserActionFormCallCongresspersonLayout.Container = Container
 

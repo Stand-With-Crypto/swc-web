@@ -141,7 +141,7 @@ export function UserActionFormEmailCongressperson({
         className="flex max-h-dvh flex-col"
       >
         <ScrollArea>
-          <div className="space-y-4 p-6 md:space-y-8 md:px-12">
+          <div className="space-y-4 px-6 pb-6 md:space-y-8 md:px-12">
             <PageTitle size="sm" className="mb-3">
               Email your congressperson
             </PageTitle>
