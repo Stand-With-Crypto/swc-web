@@ -29,7 +29,7 @@ export function NavbarSessionButtonClient(_props: NavbarSessionButtonProps) {
     router.refresh()
   }
 
-  console.log('NavbarSessionButtonClient', { session, isLoggingIn })
+  console.log('NavbarSessionButtonClient', { session, isLoggingIn, address })
   if (session.isLoading || isLoggingIn) {
     return <Skeleton className="min-w-24 rounded-full" />
   }

@@ -36,5 +36,11 @@ module.exports = {
     ],
     '@typescript-eslint/no-namespace': 'off',
     'no-relative-import-paths/no-relative-import-paths': ['error', { allowSameFolder: true }],
+    'react-hooks/exhaustive-deps': [
+      'warn',
+      {
+        additionalHooks: 'useLoadingCallback',
+      },
+    ],
   },
 }

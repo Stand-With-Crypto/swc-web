@@ -6,6 +6,7 @@ import {
   useConnectionStatus,
   useDisconnect,
   useEmbeddedWallet,
+  useLogin,
   useThirdwebAuthContext,
   useUser,
   useWalletContext,
@@ -23,12 +24,14 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { useResponsiveDialog } from '@/components/ui/responsiveDialog'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
+import { useLoadingCallback } from '@/hooks/useLoadingCallback'
 
 import { ReservedScreens } from './screen'
 import { WalletSelectUIProps, WalletConnect } from './walletConnect'
 import { GOOGLE_AUTH_LOGO, ACCOUNT_AUTH_CONFIG } from './constants'
 import { SignatureScreen } from './signatureScreen'
 import { noop } from 'lodash'
+import { useRouter } from 'next/navigation'
 
 export function AccountAuthContent(props: {
   screen: string | WalletConfig
@@ -40,10 +43,11 @@ export function AccountAuthContent(props: {
   const { screen, setScreen, initialScreen, onClose } = props
 
   const [selectionData, setSelectionData] = React.useState()
-  const [isLoading, setIsLoading] = React.useState(false)
   const { Dialog, DialogContent, DialogTrigger } = useResponsiveDialog()
+  const router = useRouter()
 
   const { user } = useUser()
+  const { login } = useLogin()
   const authConfig = useThirdwebAuthContext()
   const walletConfigs = useWallets()
   const connectionStatus = useConnectionStatus()
@@ -56,7 +60,6 @@ export function AccountAuthContent(props: {
 
   const handleBack = React.useCallback(() => {
     setScreen(initialScreen)
-    setIsLoading(false)
     if (connectionStatus === 'connecting') {
       disconnect()
     }
@@ -74,6 +77,11 @@ export function AccountAuthContent(props: {
     }
   }, [authConfig?.authUrl, user?.address, setScreen, onClose])
 
+  const handleLoginSuccess = React.useCallback(() => {
+    // ensure that any server components on the page that's being used are refreshed with the context the user is now logged in
+    router.refresh()
+  }, [router])
+
   const handleSelect = async (wallet: WalletConfig) => {
     if (connectionStatus !== 'disconnected') {
       await disconnect()
@@ -89,6 +97,21 @@ export function AccountAuthContent(props: {
     }),
     [walletConfigs],
   )
+
+  const [handleLoginWithGoogle, isLoading] = useLoadingCallback(async () => {
+    const response = await connectEmbeddedWallet({
+      strategy: 'google',
+    }).catch(Sentry.captureException)
+
+    console.log('handleLoginWithGoogle', { connectionStatus, response })
+
+    if (connectionStatus === 'connected') {
+      await login()
+      handleLoginSuccess()
+    }
+  }, [connectEmbeddedWallet, connectionStatus, handleLoginSuccess, login])
+
+  console.log(isLoading)
 
   const selectUIProps: WalletSelectUIProps = {
     connect,
@@ -136,14 +159,7 @@ export function AccountAuthContent(props: {
           variant="secondary"
           className="flex w-full items-center gap-2"
           size="lg"
-          onClick={async () => {
-            setIsLoading(true)
-            await connectEmbeddedWallet({
-              strategy: 'google',
-            })
-              .catch(Sentry.captureException)
-              .finally(() => setIsLoading(false))
-          }}
+          onClick={handleLoginWithGoogle}
         >
           <NextImage src={GOOGLE_AUTH_LOGO} width={24} height={24} alt="" />
           <span>Continue with Google</span>
