@@ -148,7 +148,7 @@ export async function verifiedSWCPartnersUserActionOptIn(
       },
     })
     if (userCryptoAddress != null) {
-      await claimNFT(userAction, userCryptoAddress.cryptoAddress)
+      await claimNFT(userAction, userCryptoAddress)
     }
   }
 
