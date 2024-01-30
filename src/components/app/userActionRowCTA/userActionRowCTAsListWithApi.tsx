@@ -2,8 +2,19 @@
 
 import { UserActionRowCTAsList } from '@/components/app/userActionRowCTA/userActionRowCTAsList'
 import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
+import { UserActionType } from '@prisma/client'
 
-export function UserActionRowCTAsListWithApi() {
+type UserActionRowCTAsListWithApiProps = {
+  excludeUserActionTypes?: UserActionType[]
+}
+export function UserActionRowCTAsListWithApi({
+  excludeUserActionTypes,
+}: UserActionRowCTAsListWithApiProps) {
   const { data } = useApiResponseForUserPerformedUserActionTypes()
-  return <UserActionRowCTAsList performedUserActionTypes={data?.performedUserActionTypes} />
+  return (
+    <UserActionRowCTAsList
+      excludeUserActionTypes={excludeUserActionTypes}
+      performedUserActionTypes={data?.performedUserActionTypes}
+    />
+  )
 }
