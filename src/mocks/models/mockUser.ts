@@ -33,5 +33,7 @@ export function mockUser(): User {
     hasOptedInToMembership: false,
     hasOptedInToSms: false,
     internalStatus: isVisible ? UserInternalStatus.VISIBLE : UserInternalStatus.MANUALLY_HIDDEN,
+    capitolCanaryAdvocateId: null,
+    capitolCanaryInstance: null,
   }
 }
