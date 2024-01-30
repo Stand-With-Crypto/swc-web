@@ -1,5 +1,4 @@
 import { fetchReq } from '@/utils/shared/fetchReq'
-import { externalUrls } from '@/utils/shared/urls'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
 import useSWR from 'swr'
 
@@ -16,7 +15,9 @@ type CryptoToFiatConversionResult = {
  * @returns CryptoToFiatConversionResult
  */
 export async function getCryptoToFiatConversion(tickerSymbol: string) {
-  const data = await fetchReq(externalUrls.coinbaseApi(tickerSymbol))
+  const data = await fetchReq(
+    `https://api.coinbase.com/v2/prices/${tickerSymbol.toLowerCase()}-usd/spot`,
+  )
     .then(res => res.json())
     .catch(e => {
       catchUnexpectedServerErrorAndTriggerToast(e)
@@ -24,7 +25,7 @@ export async function getCryptoToFiatConversion(tickerSymbol: string) {
     })
 
   if (!data) {
-    return { notFoundReason: 'API_ERROR' as const }
+    return { notFoundReason: 'NO_DATA_RETURNED' as const }
   }
 
   return data as CryptoToFiatConversionResult

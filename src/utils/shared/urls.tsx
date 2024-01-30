@@ -53,8 +53,6 @@ export const externalUrls = {
   linkedin: () => 'https://www.linkedin.com/company/standwithcrypto/',
   twitter: () => 'https://twitter.com/standwithcrypto',
   youtube: () => 'https://www.youtube.com/@StandWithCryptoAlliance/featured',
-  coinbaseApi: (tickerSymbol: string) =>
-    `https://api.coinbase.com/v2/prices/${tickerSymbol.toLowerCase()}-usd/spot`,
 }
 
 export const apiUrls = {
