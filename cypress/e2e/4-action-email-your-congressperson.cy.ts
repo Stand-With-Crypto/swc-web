@@ -34,5 +34,5 @@ it('page - politicians interactions', () => {
   cy.get('button[type="submit"]').click()
 
   // waiting for Inngest to consume job
-  cy.contains('Nice work!', { timeout: 10000 })
+  cy.contains('Nice work!')
 })
