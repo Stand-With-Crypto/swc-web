@@ -3,11 +3,9 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
 
-const isProd = process.env.NODE_ENV === 'production' && process.env.CORS_ENV_PREFIX;
+const isLocalDevelopment = process.env.NODE_ENV === 'development' && !process.env.CORS_ENV_PREFIX
 
-const standWithCryptoDomain = isLocalDevelopment
-  ? 'http://localhost:*'
-  : process.env.CORS_ENV_PREFIX;
+const standWithCryptoDomain = 'http://localhost:*'
 
 const contentSecurityPolicy = {
   'default-src': ["'self'", 'blob:'],
@@ -27,6 +25,9 @@ const contentSecurityPolicy = {
     'https://*.gstatic.com',
     '*.google.com',
     'https://static.ads-twitter.com/uwt.js',
+    'https://va.vercel-scripts.com/v1/speed-insights/script.debug.js',
+    'https://va.vercel-scripts.com/v1/script.debug.js',
+    'https://www.youtube.com/*',
   ],
   'img-src': [
     "'self'",
@@ -38,6 +39,7 @@ const contentSecurityPolicy = {
     'https://*.googleapis.com',
     'https://*.gstatic.com',
     '*.google.com',
+    'https://ipfs.io/ipfs/',
   ],
   'connect-src': [
     "'self'",
@@ -53,7 +55,14 @@ const contentSecurityPolicy = {
     'https://*.gstatic.com',
     '*.google.com',
   ],
-  'frame-src': ['*.google.com'],
+  'frame-src': ['*.google.com', 'https://embedded-wallet.thirdweb.com/'],
+  'font-src': ["'self'"],
+  'object-src': ['none'],
+  'base-uri': ["'self'"],
+  'form-action': ["'self'"],
+  'frame-ancestors': ["'none'"],
+  'block-all-mixed-content': [],
+  'upgrade-insecure-requests': [],
 }
 
 const cspObjectToString = Object.entries(contentSecurityPolicy).reduce((acc, [key, value]) => {
@@ -107,27 +116,10 @@ const nextConfig = {
       { protocol: 'https', hostname: 'db0prh5pvbqwd.cloudfront.net' },
     ],
   },
-  env: {
-    CIVIC_API: process.env.NEXT_PUBLIC_GOOGLE_CIVIC_API,
-    CIVIC_API_KEY: process.env.NEXT_PUBLIC_GOOGLE_CIVIC_API_KEY,
-    PLACES_API_KEY: process.env.NEXT_PUBLIC_GOOGLE_PLACES_API_KEY,
-    LOGGED_OUT_CONTENT_PREVIEW_API_KEY:
-      process.env.NEXT_PUBLIC_LOGGED_OUT_CONTENT_PREVIEW_API_KEY,
-    LOGGED_OUT_CONTENT_DELIVERY_API_KEY:
-      process.env.NEXT_PUBLIC_LOGGED_OUT_CONTENT_DELIVERY_API_KEY,
-    NEXT_PUBLIC_DONATIONS_ID: process.env.NEXT_PUBLIC_DONATIONS_ID,
-    NEXT_PUBLIC_ALLIANCE_DETAILS_URL: process.env.NEXT_PUBLIC_ALLIANCE_DETAILS_URL,
-    NEXT_PUBLIC_DONATIONS_URL: isProd
-      ? 'https://commerce.coinbase.com/checkout/396fc233-3d1f-4dd3-8e82-6efdf78432ad'
-      : 'https://commerce.coinbase.com/checkout/4aac12b1-a0d3-40e1-8b20-62c6cf5e8cfe',
-    RECAPTCHA_API_KEY: process.env.NEXT_PUBLIC_RECAPTCHA_API_KEY,
-    TARGET_ENV: process.env.TARGET_ENV,
-  },
   async headers() {
     return [
       {
         source: '/(.*)',
-        basePath: false,
         headers: securityHeaders,
       },
     ]
@@ -160,9 +152,10 @@ const nextConfig = {
         destination: '/politicians',
         permanent: true,
       },
-    ],
+    ]
   },
 }
+
 /** @type {import('@sentry/nextjs').SentryWebpackPluginOptions} */
 const sentryWebpackPluginOptions = {
   // For all available options, see:
