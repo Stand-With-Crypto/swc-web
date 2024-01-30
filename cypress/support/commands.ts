@@ -28,16 +28,15 @@
 
 Cypress.Commands.add('selectFromComboBox', ({ trigger, searchText }) => {
   trigger.click()
-  // wait for search to be fully ready
+  // wait for combo box to be fully ready
   cy.wait(1000)
-    .get('[cmdk-input]')
-    .then(input => {
-      // clear input and wait for results to clear before typing and selecting the new option
-      if (input.val()) {
-        return cy.get('[cmdk-input]').clear().wait(500).type(searchText)
-      }
-      return cy.get('[cmdk-input]').type(searchText)
-    })
+  cy.get('[cmdk-input]').then(input => {
+    // clear input and wait for results to clear before typing and selecting the new option
+    if (input.val()) {
+      return cy.get('[cmdk-input]').clear().wait(500).type(searchText)
+    }
+    return cy.get('[cmdk-input]').type(searchText)
+  })
   // wait for items to appear
   cy.get('[cmdk-item]')
   // select the first item
