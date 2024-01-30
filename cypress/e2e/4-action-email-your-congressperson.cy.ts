@@ -33,5 +33,5 @@ it('page - politicians interactions', () => {
   cy.get('textarea').type('test message')
   cy.get('button[type="submit"]').click()
 
-  cy.contains('Nice work!')
+  cy.contains('Nice work!', { timeout: 10000 })
 })

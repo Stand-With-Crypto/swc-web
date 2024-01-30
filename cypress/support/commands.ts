@@ -28,6 +28,7 @@
 
 Cypress.Commands.add('selectFromComboBox', ({ trigger, searchText }) => {
   trigger.click()
+  cy.wait(1000)
   cy.get('[cmdk-input]').then(input => {
     // clear input and wait for results to clear before typing and selecting the new option
     if (input.val()) {
