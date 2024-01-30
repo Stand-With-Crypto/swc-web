@@ -10,19 +10,23 @@ import {
   useWalletContext,
 } from '@thirdweb-dev/react'
 import { walletIds } from '@thirdweb-dev/wallets'
+import * as Sentry from '@sentry/nextjs'
+import { useRouter } from 'next/navigation'
+import { ReloadIcon } from '@radix-ui/react-icons'
+
 import { safeChainIdToSlug } from '@/components/app/accountAuth/constants'
 import { sleep } from '@/utils/shared/sleep'
-import { useRouter } from 'next/navigation'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { NextImage } from '@/components/ui/image'
 import { Button } from '@/components/ui/button'
-import { ReloadIcon } from '@radix-ui/react-icons'
+
+import { HeadlessSignIn } from './headlessSignIn'
 
 interface SignatureScreenProps {
   onDone: () => void
 }
-type Status = 'signing' | 'failed' | 'idle'
+export type SignatureScreenStatus = 'signing' | 'failed' | 'idle'
 
 export function SignatureScreen({ onDone }: SignatureScreenProps) {
   const walletConfig = useWalletConfig()
@@ -33,7 +37,7 @@ export function SignatureScreen({ onDone }: SignatureScreenProps) {
   const address = useAddress()
   const router = useRouter()
 
-  const [status, setStatus] = React.useState<Status>('idle')
+  const [status, setStatus] = React.useState<SignatureScreenStatus>('idle')
   const [tryId, setTryId] = React.useState(0)
 
   const isSafeWallet = wallet?.walletId === walletIds.safe
@@ -46,12 +50,15 @@ export function SignatureScreen({ onDone }: SignatureScreenProps) {
   const signIn = React.useCallback(async () => {
     try {
       setStatus('signing')
+      // This is copied from thirdweb-react, to my understanding this is waiting
+      // for the wallet to be connected before trying to sign in
       await sleep(1000)
       await login()
       router.refresh()
       onDone()
     } catch (err) {
       setStatus('failed')
+      Sentry.captureException(err)
       console.error('failed to log in', err)
     }
   }, [login, onDone, router])
@@ -70,9 +77,7 @@ export function SignatureScreen({ onDone }: SignatureScreenProps) {
   }
 
   if (walletConfig?.isHeadless) {
-    // TODO: Implement
-    // return <HeadlessSignIn signIn={signIn} status={status} />;
-    return null
+    return <HeadlessSignIn signIn={signIn} status={status} />
   }
 
   return (
@@ -82,7 +87,7 @@ export function SignatureScreen({ onDone }: SignatureScreenProps) {
       <div className="flex w-full flex-col items-center space-y-12">
         {walletConfig && (
           <div className="relative rounded-full">
-            <div className="animate-ping-small absolute -z-10 h-full w-full rounded-full bg-primary" />
+            <div className="absolute -z-10 h-full w-full animate-ping-small rounded-full bg-primary" />
             <div className="h-20 w-20 overflow-hidden rounded-full">
               <NextImage
                 src={walletConfig.meta.iconURL}

@@ -6,7 +6,6 @@ import {
   useConnectionStatus,
   useDisconnect,
   useEmbeddedWallet,
-  useLogin,
   useThirdwebAuthContext,
   useUser,
   useWalletContext,
@@ -31,7 +30,6 @@ import { WalletSelectUIProps, WalletConnect } from './walletConnect'
 import { GOOGLE_AUTH_LOGO, ACCOUNT_AUTH_CONFIG } from './constants'
 import { SignatureScreen } from './signatureScreen'
 import { noop } from 'lodash'
-import { useRouter } from 'next/navigation'
 
 export function AccountAuthContent(props: {
   screen: string | WalletConfig
@@ -44,10 +42,8 @@ export function AccountAuthContent(props: {
 
   const [selectionData, setSelectionData] = React.useState()
   const { Dialog, DialogContent, DialogTrigger } = useResponsiveDialog()
-  const router = useRouter()
 
   const { user } = useUser()
-  const { login } = useLogin()
   const authConfig = useThirdwebAuthContext()
   const walletConfigs = useWallets()
   const connectionStatus = useConnectionStatus()
@@ -77,11 +73,6 @@ export function AccountAuthContent(props: {
     }
   }, [authConfig?.authUrl, user?.address, setScreen, onClose])
 
-  const handleLoginSuccess = React.useCallback(() => {
-    // ensure that any server components on the page that's being used are refreshed with the context the user is now logged in
-    router.refresh()
-  }, [router])
-
   const handleSelect = async (wallet: WalletConfig) => {
     if (connectionStatus !== 'disconnected') {
       await disconnect()
@@ -99,19 +90,12 @@ export function AccountAuthContent(props: {
   )
 
   const [handleLoginWithGoogle, isLoading] = useLoadingCallback(async () => {
-    const response = await connectEmbeddedWallet({
+    await connectEmbeddedWallet({
       strategy: 'google',
-    }).catch(Sentry.captureException)
-
-    console.log('handleLoginWithGoogle', { connectionStatus, response })
-
-    if (connectionStatus === 'connected') {
-      await login()
-      handleLoginSuccess()
-    }
-  }, [connectEmbeddedWallet, connectionStatus, handleLoginSuccess, login])
-
-  console.log(isLoading)
+    })
+      .then(setConnectedWallet)
+      .catch(Sentry.captureException)
+  }, [connectEmbeddedWallet, setConnectedWallet])
 
   const selectUIProps: WalletSelectUIProps = {
     connect,
@@ -120,8 +104,6 @@ export function AccountAuthContent(props: {
     createWalletInstance,
     connectionStatus: connectionStatus,
   }
-
-  console.log({ screen })
 
   const getWalletUI = (walletConfig: WalletConfig) => {
     const ConnectUI = walletConfig.connectUI || Noop

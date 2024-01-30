@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { ConnectWallet, useAddress, useLogin } from '@thirdweb-dev/react'
+import { ConnectWallet, useAddress, useConnectionStatus, useLogin } from '@thirdweb-dev/react'
 
 import { GetDefineMessageResults } from '@/types'
 import { cn } from '@/utils/web/cn'
@@ -29,7 +29,6 @@ export function NavbarSessionButtonClient(_props: NavbarSessionButtonProps) {
     router.refresh()
   }
 
-  console.log('NavbarSessionButtonClient', { session, isLoggingIn, address })
   if (session.isLoading || isLoggingIn) {
     return <Skeleton className="min-w-24 rounded-full" />
   }
@@ -60,7 +59,7 @@ export function NavbarSessionButtonClient(_props: NavbarSessionButtonProps) {
       <ConnectWallet
         theme="light"
         modalSize="compact"
-        btnTitle="Log in"
+        btnTitle="Log in - Old"
         auth={{
           loginOptional: false,
           onLogin: handleLoginSuccess,
@@ -84,7 +83,7 @@ export function NavbarSessionButtonClient(_props: NavbarSessionButtonProps) {
         // the library puts a inline min-width: 140px on the button, so this is the only way to take priority over that
         style={{ minWidth: '96px' }}
       />
-      <AccountAuthButton variant="secondary">Log in</AccountAuthButton>
+      <AccountAuthButton variant="secondary">Log in - New</AccountAuthButton>
     </>
   )
 }

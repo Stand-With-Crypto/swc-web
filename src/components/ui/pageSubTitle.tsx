@@ -1,4 +1,4 @@
-import { twNoop } from '@/utils/web/cn'
+import { twNoop, cn } from '@/utils/web/cn'
 import { VariantProps, cva } from 'class-variance-authority'
 import React from 'react'
 import Balancer from 'react-wrap-balancer'
@@ -27,7 +27,7 @@ interface PageSubTitleProps
 export const PageSubTitle = React.forwardRef<HTMLHeadingElement, PageSubTitleProps>(
   ({ className, children, size = 'md', as: Comp = 'h2', withoutBalancer, ...props }, ref) => {
     return (
-      <Comp ref={ref} className={pageSubTitleVariants({ size, className })} {...props}>
+      <Comp ref={ref} className={cn(pageSubTitleVariants({ size, className }))} {...props}>
         {withoutBalancer ? children : <Balancer>{children}</Balancer>}
       </Comp>
     )

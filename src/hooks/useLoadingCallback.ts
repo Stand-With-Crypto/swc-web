@@ -7,11 +7,10 @@ export function useLoadingCallback<T extends (...args: unknown[]) => unknown | P
   const [loading, setLoading] = React.useState(false)
 
   const callbackMemoized = React.useCallback(
-    (...args: Parameters<T>) => {
-      console.log({ started: 'callback' })
+    async (...args: Parameters<T>) => {
       setLoading(true)
       try {
-        return callback(...args)
+        return await callback(...args)
       } finally {
         setLoading(false)
       }
