@@ -27,7 +27,7 @@ it('formats the "email rep via capitol canary" request correctly', () => {
     userEmailAddress: mockedEmailAddress,
     opts: {
       isSmsOptin: true,
-      isSmsOptinConfirmed: false,
+      shouldSendSmsOptinConfirmation: false,
       isSmsOptout: false,
       isEmailOptin: true,
       isEmailOptout: false,

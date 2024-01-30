@@ -5,20 +5,11 @@ import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { zodUpdateUserProfileFormAction } from '@/validation/forms/zodUpdateUserProfile'
-import { Address, User, UserEmailAddress, UserEmailAddressSource } from '@prisma/client'
+import { UserEmailAddressSource } from '@prisma/client'
 import 'server-only'
 import { z } from 'zod'
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
 import { userFullName } from '@/utils/shared/userFullName'
-import {
-  CapitolCanaryCampaignName,
-  getCapitolCanaryCampaignID,
-} from '@/utils/server/capitolCanary/campaigns'
-import { CreateAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
-import { inngest } from '@/inngest/inngest'
-import { CREATE_CAPITOL_CANARY_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/createAdvocateInCapitolCanary'
-import { CapitolCanaryOpts } from '@/utils/server/capitolCanary/opts'
-
 export async function actionUpdateUserProfile(
   data: z.infer<typeof zodUpdateUserProfileFormAction>,
 ) {
@@ -109,68 +100,9 @@ export async function actionUpdateUserProfile(
   })
 
   // TODO: Handle membership toggling options: https://github.com/Stand-With-Crypto/swc-web/issues/173
-
-  /**
-   * Subscribe new email address and phone number to Capitol Canary.
-   * UI requires non-empty email address within its validation, so we can use primary email safely.
-   */
-  await sendCapitolCanaryPayload(updatedUser, address, primaryUserEmailAddress!, {
-    isEmailOptin: true,
-    isSmsOptin: updatedUser.hasOptedInToSms,
-    isSmsOptinConfirmed: true,
-  })
-
-  /**
-   * Unsubscribe old phone number from Capitol Canary if the old differs from the new.
-   * UI requires non-empty email address within its validation, so we can use primary email safely if needed.
-   */
-  if (user.phoneNumber && user.phoneNumber !== updatedUser.phoneNumber) {
-    await sendCapitolCanaryPayload(
-      user,
-      address,
-      user.primaryUserEmailAddress ? user.primaryUserEmailAddress : primaryUserEmailAddress!,
-      {
-        isSmsOptout: true,
-      },
-    )
-  }
-
-  /**
-   * Unsubscribe old email address from Capitol Canary if the old differs from the new.
-   * Only can perform if the old email address exists.
-   */
-  if (
-    user.primaryUserEmailAddress &&
-    user.primaryUserEmailAddress?.emailAddress !== primaryUserEmailAddress?.emailAddress
-  ) {
-    await sendCapitolCanaryPayload(user, address, user.primaryUserEmailAddress, {
-      isEmailOptout: true,
-    })
-  }
+  // TODO: Handle updating advocate profile in Capitol Canary: https://github.com/Stand-With-Crypto/swc-web/issues/204
 
   return {
     user: getClientUser(updatedUser),
   }
-}
-
-async function sendCapitolCanaryPayload(
-  user: User,
-  address: Address | null,
-  userEmailAddress: UserEmailAddress,
-  opts: CapitolCanaryOpts,
-) {
-  const campaignId = getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_MEMBERSHIP)
-  const payload: CreateAdvocateInCapitolCanaryPayloadRequirements = {
-    campaignId,
-    user: {
-      ...user,
-      address,
-    },
-    userEmailAddress,
-    opts,
-  }
-  await inngest.send({
-    name: CREATE_CAPITOL_CANARY_ADVOCATE_INNGEST_EVENT_NAME,
-    data: payload,
-  })
 }

@@ -27,7 +27,7 @@ it('formats the "create capitol canary advocate" request correctly', () => {
     userEmailAddress: mockedEmailAddress,
     opts: {
       isSmsOptin: true,
-      isSmsOptinConfirmed: false,
+      shouldSendSmsOptinConfirmation: false,
       isSmsOptout: false,
       isEmailOptin: true,
       isEmailOptout: false,

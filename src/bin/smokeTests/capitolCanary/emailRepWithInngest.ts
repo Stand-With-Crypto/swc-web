@@ -36,7 +36,6 @@ async function smokeTestEmailRepWithInngest() {
     },
     opts: {
       isEmailOptin: true,
-      isSmsOptinConfirmed: true,
     },
     emailSubject: 'This is a test email subject.',
     emailMessage: 'This is a test email message.',

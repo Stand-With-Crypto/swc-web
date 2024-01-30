@@ -32,7 +32,6 @@ async function smokeTestCreateAdvocateWithInngest() {
     userEmailAddress: mockedEmailAddress,
     opts: {
       isEmailOptin: true,
-      isSmsOptinConfirmed: true,
     },
     metadata: {
       tags: ['C4 Member', 'Smoke Test User'],
