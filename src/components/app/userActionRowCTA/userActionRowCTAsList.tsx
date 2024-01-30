@@ -11,6 +11,7 @@ import { UserActionFormOptInSWCDialog } from '@/components/app/userActionFormOpt
 import { UserActionRowCTAProps } from '@/components/app/userActionRowCTA'
 import { UserActionTweetLink } from '@/components/ui/userActionTweetLink'
 import { cn } from '@/utils/web/cn'
+import { useMemo } from 'react'
 
 export const ORDERED_USER_ACTION_ROW_CTA_INFO: ReadonlyArray<Omit<UserActionRowCTAProps, 'state'>> =
   [
@@ -68,14 +69,23 @@ export const ORDERED_USER_ACTION_ROW_CTA_INFO: ReadonlyArray<Omit<UserActionRowC
 
 export function UserActionRowCTAsList({
   performedUserActionTypes,
+  excludeUserActionTypes,
   className,
 }: {
   className?: string
   performedUserActionTypes?: UserActionType[]
+  excludeUserActionTypes?: UserActionType[]
 }) {
+  const filteredActions = useMemo(
+    () =>
+      ORDERED_USER_ACTION_ROW_CTA_INFO.filter(
+        action => !excludeUserActionTypes?.includes(action.actionType),
+      ),
+    [excludeUserActionTypes],
+  )
   return (
     <div className={cn('space-y-4', className)}>
-      {ORDERED_USER_ACTION_ROW_CTA_INFO.map(({ actionType, ...rest }) => (
+      {filteredActions.map(({ actionType, ...rest }) => (
         <UserActionRowCTA
           key={actionType}
           state={
