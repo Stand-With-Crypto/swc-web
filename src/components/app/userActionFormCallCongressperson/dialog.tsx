@@ -12,10 +12,7 @@ export function UserActionFormCallCongresspersonDialog({
   children,
   defaultOpen = false,
   ...formProps
-}: Omit<
-  React.ComponentProps<typeof UserActionFormCallCongressperson>,
-  'user' | 'onCancel' | 'onSuccess'
-> & {
+}: Omit<React.ComponentProps<typeof UserActionFormCallCongressperson>, 'user' | 'onClose'> & {
   children: React.ReactNode
   defaultOpen?: boolean
 }) {
@@ -26,12 +23,16 @@ export function UserActionFormCallCongresspersonDialog({
   return (
     <Dialog {...dialogProps}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="max-w-3xl p-0">
+      <DialogContent className="max-w-3xl px-0">
         {isLoading ? (
           <UserActionFormCallCongresspersonSkeleton />
         ) : (
           <Suspense fallback={<UserActionFormCallCongresspersonSkeleton />}>
-            <LazyUserActionFormCallCongressperson {...formProps} user={user} />
+            <LazyUserActionFormCallCongressperson
+              {...formProps}
+              onClose={() => dialogProps.onOpenChange(false)}
+              user={user}
+            />
           </Suspense>
         )}
       </DialogContent>

@@ -4,7 +4,7 @@ import { ClientAddress } from '@/clientModels/clientAddress'
 import { SensitiveDataClientUserWithENSData } from '@/clientModels/clientUser/sensitiveDataClientUser'
 import { PrivacyPolicyDialog } from '@/components/app/pagePrivacyPolicy/dialog'
 import { SWCMembershipDialog } from '@/components/app/updateUserProfileForm/swcMembershipDialog'
-import { hasAllFormFieldsOnUserForUpdateUserProfileForm } from '@/components/app/updateUserProfileForm/hasAllFormFieldsOnUser'
+import { hasCompleteUserProfile } from '@/utils/web/hasCompleteUserProfile'
 import { UserAvatar } from '@/components/app/userAvatar'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -79,7 +79,7 @@ export function UpdateUserProfileForm({
         <UserAvatar user={user} size={60} />
       </div>
       <PageTitle size="sm" className="mb-1">
-        {hasAllFormFieldsOnUserForUpdateUserProfileForm(user) ? 'Edit' : 'Finish'} your profile
+        {hasCompleteUserProfile(user) ? 'Edit' : 'Finish'} your profile
       </PageTitle>
       <PageSubTitle size="md" className="mb-7">
         Completing your profile makes it easier for you to take action, locate your representative
