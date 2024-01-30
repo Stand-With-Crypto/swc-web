@@ -10,6 +10,7 @@ import 'server-only'
 import { z } from 'zod'
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
 import { userFullName } from '@/utils/shared/userFullName'
+
 export async function actionUpdateUserProfile(
   data: z.infer<typeof zodUpdateUserProfileFormAction>,
 ) {
@@ -29,7 +30,6 @@ export async function actionUpdateUserProfile(
     },
     include: {
       userEmailAddresses: true,
-      primaryUserEmailAddress: true,
     },
   })
   const {
