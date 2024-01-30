@@ -9,6 +9,8 @@ import {
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import {
   User,
+  UserActionOptInType,
+  UserActionType,
   UserCryptoAddress,
   UserEmailAddressSource,
   UserInformationVisibility,
@@ -21,6 +23,14 @@ import { NextApiRequest } from 'next'
 import { AuthSessionMetadata } from '@/utils/server/thirdweb/types'
 import { AnalyticProperties } from '@/utils/shared/sharedAnalytics'
 import _ from 'lodash'
+import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
+import {
+  CapitolCanaryCampaignName,
+  getCapitolCanaryCampaignID,
+} from '@/utils/server/capitolCanary/campaigns'
+import { CreateAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
+import { inngest } from '@/inngest/inngest'
+import { CREATE_CAPITOL_CANARY_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/createAdvocateInCapitolCanary'
 
 /*
 The desired behavior of this function:
@@ -36,8 +46,14 @@ The desired behavior of this function:
 */
 export async function onLogin(address: string, req: NextApiRequest): Promise<AuthSessionMetadata> {
   const localUser = parseLocalUserFromCookiesForPageRouter(req)
-  // try and get the existing user linked to this cryptoAddress
+  /**
+   * Try and get the existing user linked to the provided crypto address.
+   * Also fetch existing user's address if that information is available.
+   */
   let existingUser = await prismaClient.user.findFirst({
+    include: {
+      address: true,
+    },
     where: { userCryptoAddresses: { some: { cryptoAddress: address } } },
   })
   if (existingUser) {
@@ -51,6 +67,9 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
   const userSessionId = getUserSessionIdOnPageRouter(req)
   const embeddedWalletEmailAddress = await fetchEmbeddedWalletMetadataFromThirdweb(address)
   existingUser = await prismaClient.user.findFirst({
+    include: {
+      address: true,
+    },
     where: embeddedWalletEmailAddress
       ? {
           OR: [
@@ -81,11 +100,13 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
     },
     include: { user: true },
   })
+
   let primaryUserEmailAddressId: null | string = null
-  /*
-    If the authenticated crypto address came from a thirdweb embedded wallet, we want to create a user email address
-    and link it to the wallet so we know it's an embedded address
-    */
+
+  /**
+   * If the authenticated crypto address came from a thirdweb embedded wallet, we want to create a user email address
+   * and link it to the wallet so we know it's an embedded address
+   */
   if (embeddedWalletEmailAddress) {
     const email = await upsertEmbeddedWalletEmailAddress(
       embeddedWalletEmailAddress,
@@ -94,7 +115,54 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
     if (!userCryptoAddress.user.primaryUserEmailAddressId) {
       primaryUserEmailAddressId = email.id
     }
+
+    // Create subscriber advocate in Capitol Canary.
+    const payload: CreateAdvocateInCapitolCanaryPayloadRequirements = {
+      campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_MEMBERSHIP),
+      user: {
+        ...userCryptoAddress.user,
+        address: existingUser?.address || null,
+      },
+      userEmailAddress: email,
+      opts: {
+        isEmailOptin: true,
+      },
+    }
+    await inngest.send({
+      name: CREATE_CAPITOL_CANARY_ADVOCATE_INNGEST_EVENT_NAME,
+      data: payload,
+    })
   }
+
+  /**
+   * Ensure subscriber opt-in user action exists for this logged-in user (user can be new or existing).
+   * Create if opt-in action does not exist.
+   */
+  const existingOptInUserAction = await prismaClient.userAction.findFirst({
+    where: {
+      userId: userCryptoAddress.userId,
+      campaignName: UserActionOptInCampaignName.DEFAULT,
+      actionType: UserActionType.OPT_IN,
+      userActionOptIn: {
+        optInType: UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER,
+      },
+    },
+  })
+  if (!existingOptInUserAction) {
+    await prismaClient.userAction.create({
+      data: {
+        user: { connect: { id: userCryptoAddress.userId } },
+        actionType: UserActionType.OPT_IN,
+        campaignName: UserActionOptInCampaignName.DEFAULT,
+        userActionOptIn: {
+          create: {
+            optInType: UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER,
+          },
+        },
+      },
+    })
+  }
+
   await prismaClient.user.update({
     where: { id: userCryptoAddress.userId },
     data: {

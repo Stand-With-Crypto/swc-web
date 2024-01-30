@@ -102,6 +102,9 @@ export async function actionUpdateUserProfile(
     },
   })
 
+  // TODO: Handle membership toggling options: https://github.com/Stand-With-Crypto/swc-web/issues/173
+  // TODO: Handle updating advocate profile in Capitol Canary: https://github.com/Stand-With-Crypto/swc-web/issues/204
+
   return {
     user: {
       ...getClientUserWithENSData(

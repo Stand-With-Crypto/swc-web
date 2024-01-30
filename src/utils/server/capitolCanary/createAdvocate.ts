@@ -51,7 +51,10 @@ export function formatCapitolCanaryAdvocateCreationRequest(
 ) {
   const formattedRequest: CreateAdvocateInCapitolCanaryRequest = {
     campaigns: [payload.campaignId],
-    email: payload.userEmailAddress.emailAddress,
+  }
+
+  if (payload.userEmailAddress) {
+    formattedRequest.email = payload.userEmailAddress.emailAddress
   }
 
   if (payload.user.firstName) {
@@ -79,7 +82,7 @@ export function formatCapitolCanaryAdvocateCreationRequest(
   if (payload.opts) {
     const opts = payload.opts
     formattedRequest.smsOptin = opts.isSmsOptin ? 1 : 0
-    formattedRequest.smsOptinConfirmed = opts.isSmsOptinConfirmed ? 1 : 0
+    formattedRequest.smsOptinConfirmed = opts.shouldSendSmsOptinConfirmation ? 1 : 0
     formattedRequest.smsOptout = opts.isSmsOptout ? 1 : 0
     formattedRequest.emailOptin = opts.isEmailOptin ? 1 : 0
     formattedRequest.emailOptout = opts.isEmailOptout ? 1 : 0

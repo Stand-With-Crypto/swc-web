@@ -1,5 +1,8 @@
 import { inngest } from '@/inngest/inngest'
-import { SandboxCapitolCanaryCampaignId } from '@/utils/server/capitolCanary/campaigns'
+import {
+  CapitolCanaryCampaignName,
+  getCapitolCanaryCampaignID,
+} from '@/utils/server/capitolCanary/campaigns'
 import { CreateAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { CREATE_CAPITOL_CANARY_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/createAdvocateInCapitolCanary'
 import { mockUser } from '@/mocks/models/mockUser'
@@ -21,7 +24,7 @@ async function smokeTestCreateAdvocateWithInngest() {
   const mockedEmailAddress = mockUserEmailAddress()
 
   const payload: CreateAdvocateInCapitolCanaryPayloadRequirements = {
-    campaignId: SandboxCapitolCanaryCampaignId.DEFAULT_MEMBERSHIP,
+    campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_MEMBERSHIP),
     user: {
       ...mockedUser,
       address: mockedAddress,
