@@ -1,5 +1,5 @@
 import { runBin } from '@/bin/runBin'
-import { getCryptoToFiatConversion } from '@/hooks/useGetCryptoToFiatConversion'
+import { getCryptoToFiatConversion } from '@/utils/shared/getCryptoToFiatConversion'
 
 async function smokeTestGetCryptoToFiatConversion() {
   await getCryptoToFiatConversion('ETH')
