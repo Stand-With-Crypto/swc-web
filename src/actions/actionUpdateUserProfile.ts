@@ -1,15 +1,17 @@
 'use server'
-import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
+import { getClientAddress } from '@/clientModels/clientAddress'
+import { getClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
+import { getENSDataFromCryptoAddressAndFailGracefully } from '@/data/web3/getENSDataFromCryptoAddress'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
+import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
+import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
+import { userFullName } from '@/utils/shared/userFullName'
 import { zodUpdateUserProfileFormAction } from '@/validation/forms/zodUpdateUserProfile'
 import { UserEmailAddressSource } from '@prisma/client'
 import 'server-only'
 import { z } from 'zod'
-import { getClientUser } from '@/clientModels/clientUser/clientUser'
-import { userFullName } from '@/utils/shared/userFullName'
 
 export async function actionUpdateUserProfile(
   data: z.infer<typeof zodUpdateUserProfileFormAction>,
@@ -95,11 +97,20 @@ export async function actionUpdateUserProfile(
       primaryUserEmailAddressId: primaryUserEmailAddress?.id || null,
     },
     include: {
+      address: true,
       primaryUserCryptoAddress: true,
     },
   })
 
   return {
-    user: getClientUser(updatedUser),
+    user: {
+      ...getClientUserWithENSData(
+        updatedUser,
+        await getENSDataFromCryptoAddressAndFailGracefully(
+          updatedUser.primaryUserCryptoAddress!.cryptoAddress,
+        ),
+      ),
+      address: updatedUser.address && getClientAddress(updatedUser.address),
+    },
   }
 }

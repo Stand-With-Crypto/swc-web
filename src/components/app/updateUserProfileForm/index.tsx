@@ -4,6 +4,7 @@ import { SensitiveDataClientUserWithENSData } from '@/clientModels/clientUser/se
 import { UpdateUserProfileForm } from '@/components/app/updateUserProfileForm/step1'
 import { UpdateUserInformationVisibilityForm } from '@/components/app/updateUserProfileForm/step2'
 import { useTabs } from '@/hooks/useTabs'
+import { useState } from 'react'
 
 enum Tabs {
   Profile = 'Profile',
@@ -23,19 +24,28 @@ export function UpdateUserProfileFormContainer({
     tabs: [Tabs.Profile, Tabs.InformationVisibility],
     initialTabId: Tabs.Profile,
   })
+  // we need to leverage the data submitted in the first step in the second step (whether we show the option to use first/last name)
+  const [statefulUser, setStatefulUser] = useState(user)
 
   if (tabs.currentTab === Tabs.Profile) {
     return (
       <UpdateUserProfileForm
         user={user}
         onCancel={() => tabs.gotoTab(Tabs.InformationVisibility)}
-        onSuccess={() => tabs.gotoTab(Tabs.InformationVisibility)}
+        onSuccess={newFields => {
+          setStatefulUser({ ...user, ...newFields })
+          tabs.gotoTab(Tabs.InformationVisibility)
+        }}
       />
     )
   }
   if (tabs.currentTab === Tabs.InformationVisibility) {
     return (
-      <UpdateUserInformationVisibilityForm user={user} onCancel={onCancel} onSuccess={onSuccess} />
+      <UpdateUserInformationVisibilityForm
+        user={statefulUser}
+        onCancel={onCancel}
+        onSuccess={onSuccess}
+      />
     )
   }
 }
