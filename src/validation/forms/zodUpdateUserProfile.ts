@@ -10,7 +10,7 @@ const base = object({
   isEmbeddedWalletUser: boolean(),
   firstName: zodOptionalEmptyString(zodFirstName),
   lastName: zodOptionalEmptyString(zodLastName),
-  emailAddress: zodOptionalEmptyString(string().trim().toLowerCase()),
+  emailAddress: string(),
   phoneNumber: zodOptionalEmptyString(zodPhoneNumber).transform(
     str => str && normalizePhoneNumber(str),
   ),
@@ -22,11 +22,9 @@ const base = object({
 
 function superRefine(data: z.infer<typeof base>, ctx: RefinementCtx) {
   if (!data.isEmbeddedWalletUser) {
-    const parseEmail = string()
-      .trim()
-      .email('Please enter a valid email address')
-      .toLowerCase()
-      .safeParse(data.emailAddress)
+    const parseEmail = zodOptionalEmptyString(
+      string().trim().email('Please enter a valid email address').toLowerCase(),
+    ).safeParse(data.emailAddress)
     if (!parseEmail.success) {
       parseEmail.error.issues.forEach(issue => {
         ctx.addIssue({ ...issue, path: ['emailAddress'] })

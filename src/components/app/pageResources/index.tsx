@@ -3,6 +3,9 @@ import { PolicyCard } from '@/components/app/pageResources/policyCard'
 import { UserActionRowCTAsListWithApi } from '@/components/app/userActionRowCTA/userActionRowCTAsListWithApi'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
+import { UserActionType } from '@prisma/client'
+
+const EXCLUDE_USER_ACTION_TYPES: UserActionType[] = ['NFT_MINT']
 
 export function PageResources() {
   return (
@@ -78,7 +81,7 @@ export function PageResources() {
           Get involved
         </PageTitle>
         <p>The future of crypto is in your hands. Here’s how you can help.</p>
-        <UserActionRowCTAsListWithApi />
+        <UserActionRowCTAsListWithApi excludeUserActionTypes={EXCLUDE_USER_ACTION_TYPES} />
       </section>
     </div>
   )

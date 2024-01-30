@@ -86,7 +86,7 @@ export function SuggestedScript({
         gotoTab(TabNames.SUCCESS_MESSAGE)
       }
     },
-    [addressSchema, dtsiPerson.slug, gotoTab, router, user?.id],
+    [addressSchema, dtsiPerson.slug, gotoTab, router],
   )
 
   return (
