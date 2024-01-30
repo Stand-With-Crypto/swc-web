@@ -1,6 +1,6 @@
 import * as Sentry from '@sentry/nextjs'
 import { useRouter } from 'next/navigation'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { z } from 'zod'
 
 import { actionCreateUserActionCallCongressperson } from '@/actions/actionCreateUserActionCallCongressperson'
@@ -21,6 +21,7 @@ import { TrackedExternalLink } from '@/components/ui/trackedExternalLink'
 import { userFullName } from '@/utils/shared/userFullName'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
 import { UserActionFormCallCongresspersonLayout } from './layout'
+import { ArrowRight } from 'lucide-react'
 
 export function SuggestedScript({
   user,
@@ -51,6 +52,8 @@ export function SuggestedScript({
 
     return official.phones[0]
   }, [dtsiPerson, civicData])
+
+  const [isCalling, setIsCalling] = useState(false)
 
   const handleCallAction = React.useCallback(
     async (phoneNumberToCall: string) => {
@@ -139,18 +142,25 @@ export function SuggestedScript({
       <UserActionFormCallCongresspersonLayout.CongresspersonDisplayFooter
         congressperson={dtsiPerson}
       >
-        {phoneNumber && (
-          <Button asChild>
-            <TrackedExternalLink
-              target="_self"
-              ref={ref}
-              href={`tel:${phoneNumber}`}
-              onClick={() => handleCallAction(phoneNumber)}
-            >
-              Call
-            </TrackedExternalLink>
-          </Button>
-        )}
+        {phoneNumber ? (
+          isCalling ? (
+            <Button onClick={() => handleCallAction(phoneNumber)}>
+              <span className="mr-1 inline-block">Call complete</span>{' '}
+              <ArrowRight className="h-5 w-5" />
+            </Button>
+          ) : (
+            <Button asChild>
+              <TrackedExternalLink
+                target="_self"
+                ref={ref}
+                href={`tel:${phoneNumber}`}
+                onClick={() => setIsCalling(true)}
+              >
+                Call
+              </TrackedExternalLink>
+            </Button>
+          )
+        ) : null}
       </UserActionFormCallCongresspersonLayout.CongresspersonDisplayFooter>
     </>
   )

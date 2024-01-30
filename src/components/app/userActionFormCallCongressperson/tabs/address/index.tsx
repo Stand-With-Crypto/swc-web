@@ -118,7 +118,7 @@ export function Address({ user, onFindCongressperson, congressPersonData, gotoTa
 
               <p className="text-sm">
                 Learn more about our{' '}
-                <InternalLink href={urls.privacyPolicy()} className="underline">
+                <InternalLink href={urls.privacyPolicy()} tabIndex={-1} className="underline">
                   privacy policy
                 </InternalLink>
               </p>
