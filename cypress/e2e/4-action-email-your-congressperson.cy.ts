@@ -7,7 +7,7 @@ it('page - politicians interactions', () => {
   cy.get('[role="dialog"]')
 
   // validate error messages display
-  cy.get('button[type="submit"]', { timeout: 8000 }).click()
+  cy.get('button[type="submit"]').click()
   cy.contains('Please enter your first name')
   cy.contains('Please enter your last name')
   cy.contains('Please enter a valid email address')
