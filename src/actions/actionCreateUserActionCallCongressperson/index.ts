@@ -29,7 +29,7 @@ import { zodDTSISlug } from '@/validation/fields/zodDTSISlug'
 import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
 import { nativeEnum, object } from 'zod'
 
-export const createActionCallCongresspersonInputValidationSchema = object({
+const createActionCallCongresspersonInputValidationSchema = object({
   phoneNumber: zodPhoneNumber.transform(str => str && normalizePhoneNumber(str)),
   campaignName: nativeEnum(UserActionCallCampaignName),
   dtsiSlug: zodDTSISlug,

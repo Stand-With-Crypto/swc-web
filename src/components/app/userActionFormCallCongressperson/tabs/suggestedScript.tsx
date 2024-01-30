@@ -1,12 +1,7 @@
-import * as Sentry from '@sentry/nextjs'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
-import { z } from 'zod'
 
-import {
-  actionCreateUserActionCallCongressperson,
-  createActionCallCongresspersonInputValidationSchema,
-} from '@/actions/actionCreateUserActionCallCongressperson'
+import { actionCreateUserActionCallCongressperson } from '@/actions/actionCreateUserActionCallCongressperson'
 import { UserActionFormCallCongresspersonProps } from '@/components/app/userActionFormCallCongressperson'
 import { TabNames } from '@/components/app/userActionFormCallCongressperson/userActionFormCallCongressperson.types'
 import { Button } from '@/components/ui/button'
@@ -59,27 +54,13 @@ export function SuggestedScript({
 
   const handleCallAction = React.useCallback(
     async (phoneNumberToCall: string) => {
-      const input: z.infer<typeof createActionCallCongresspersonInputValidationSchema> = {
+      const data: Parameters<typeof actionCreateUserActionCallCongressperson>[0] = {
         campaignName: UserActionCallCampaignName.DEFAULT,
         dtsiSlug: dtsiPerson.slug,
         phoneNumber: phoneNumberToCall,
         address: addressSchema,
       }
-      const validatedInput = createActionCallCongresspersonInputValidationSchema.safeParse(input)
 
-      if (!validatedInput.success) {
-        toastGenericError()
-        Sentry.captureMessage('Call Action - Invalid input', {
-          user: { id: user?.id },
-          extra: {
-            input,
-            validationResult: validatedInput.error,
-          },
-        })
-        return
-      }
-
-      const { data } = validatedInput
       const result = await triggerServerActionForForm(
         {
           formName: 'User Action Form Call Congressperson',
