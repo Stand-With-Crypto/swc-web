@@ -5,7 +5,9 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 
 const isLocalDevelopment = process.env.NODE_ENV === 'development' && !process.env.CORS_ENV_PREFIX
 
-const standWithCryptoDomain = 'http://localhost:*'
+const standWithCryptoDomain = isLocalDevelopment
+  ? 'http://localhost:*'
+  : process.env.CORS_ENV_PREFIX
 
 const contentSecurityPolicy = {
   'default-src': ["'self'", 'blob:'],
