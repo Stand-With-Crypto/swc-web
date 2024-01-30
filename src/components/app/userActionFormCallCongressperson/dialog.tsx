@@ -23,7 +23,7 @@ export function UserActionFormCallCongresspersonDialog({
   return (
     <Dialog {...dialogProps}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="max-w-3xl px-0">
+      <DialogContent className="max-w-3xl">
         {isLoading ? (
           <UserActionFormCallCongresspersonSkeleton />
         ) : (

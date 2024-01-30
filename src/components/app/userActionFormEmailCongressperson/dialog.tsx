@@ -29,7 +29,7 @@ export function UserActionFormEmailCongresspersonDialog({
   return (
     <Dialog {...dialogProps}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="max-w-3xl px-0">
+      <DialogContent className="max-w-3xl" padding={false}>
         <Suspense fallback={<UserActionFormEmailCongresspersonSkeleton locale={locale} />}>
           {fetchUser.isLoading ? (
             <UserActionFormEmailCongresspersonSkeleton locale={locale} />

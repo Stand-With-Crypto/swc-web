@@ -20,7 +20,7 @@ export function UserActionFormCallCongresspersonLayout({
     <>
       {onBack && <GoBackButton onClick={onBack} />}
 
-      <div className="flex min-h-[400px] flex-col px-6 md:px-12">{children}</div>
+      <div className="flex min-h-[400px] flex-col">{children}</div>
     </>
   )
 }

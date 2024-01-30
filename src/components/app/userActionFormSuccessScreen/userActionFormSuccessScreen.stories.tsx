@@ -5,6 +5,7 @@ import { UserActionFormSuccessScreenMainCTA } from '@/components/app/userActionF
 import { ORDERED_USER_ACTION_ROW_CTA_INFO } from '@/components/app/userActionRowCTA/userActionRowCTAsList'
 import {
   dialogCloseStyles,
+  dialogContentPaddingStyles,
   dialogContentStyles,
   dialogOverlayStyles,
 } from '@/components/ui/dialog/styles'
@@ -24,7 +25,7 @@ export type Props = React.ComponentPropsWithoutRef<typeof UserActionFormSuccessS
 function UserActionFormSuccessScreenStory(props: Props) {
   return (
     <div className={cn(dialogOverlayStyles)}>
-      <div className={cn(dialogContentStyles, 'max-w-3xl px-6')}>
+      <div className={cn(dialogContentStyles, dialogContentPaddingStyles, 'max-w-3xl')}>
         <UserActionFormSuccessScreenContent {...props} />
         <div className={dialogCloseStyles}>
           <X className="h-4 w-4" />

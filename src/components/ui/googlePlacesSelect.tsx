@@ -56,8 +56,8 @@ export const GooglePlacesSelect = React.forwardRef<React.ElementRef<'input'>, Pr
               val?.description
                 ? // There's a weird bug where, because the input is type="button", on mobile a long address string will overflow the entire page
                   // this is a hack to prevent that, but ideally we could fix with CSS (all the usual suspects didn't work)
-                  val.description.length > 35
-                  ? `${val.description.slice(0, 35)}...`
+                  val.description.length > 45
+                  ? `${val.description.slice(0, 42)}...`
                   : val.description
                 : inputProps.placeholder || 'select a location'
             }

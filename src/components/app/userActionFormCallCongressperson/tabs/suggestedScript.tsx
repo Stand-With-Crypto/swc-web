@@ -98,9 +98,9 @@ export function SuggestedScript({
             subtitle="You may not get a human on the line, but can leave a message to ensure that your voice will be heard."
           />
 
-          <div className="space-y-2">
-            <h2 className="text-base font-semibold">Suggested script</h2>
-            <div className="prose rounded-2xl bg-secondary p-5">
+          <div className="prose mx-auto">
+            <h2 className="mb-2 text-base font-semibold">Suggested script</h2>
+            <div className="rounded-2xl bg-secondary p-5">
               <p>
                 Hi, my name is <strong>{userFullName(user ?? {}, { fallback: '____' })}</strong>
               </p>

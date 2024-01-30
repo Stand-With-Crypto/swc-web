@@ -4,6 +4,7 @@ import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-p
 import { DTSICongresspersonAssociatedWithFormAddress } from '@/components/app/dtsiCongresspersonAssociatedWithFormAddress'
 import { getDefaultText } from '@/components/app/userActionFormEmailCongressperson/getDefaultText'
 import { Button } from '@/components/ui/button'
+import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import {
   Form,
   FormControl,
@@ -24,6 +25,7 @@ import { useLocale } from '@/hooks/useLocale'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { UserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns'
+import { cn } from '@/utils/web/cn'
 import {
   GenericErrorFormValues,
   trackFormSubmissionSyncErrors,
@@ -141,7 +143,7 @@ export function UserActionFormEmailCongressperson({
         className="flex max-h-dvh flex-col"
       >
         <ScrollArea>
-          <div className="space-y-4 px-6 pb-6 md:space-y-8 md:px-12">
+          <div className={cn(dialogContentPaddingStyles, 'space-y-4 md:space-y-8')}>
             <PageTitle size="sm" className="mb-3">
               Email your congressperson
             </PageTitle>
