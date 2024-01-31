@@ -15,7 +15,6 @@ export function mockUser(): User {
     id: fakerFields.id(),
     primaryUserEmailAddressId: fakerFields.id(),
     primaryUserCryptoAddressId: fakerFields.id(),
-    sampleDatabaseIncrement: 0,
     firstName: withData ? faker.person.firstName() : '',
     lastName: withData ? faker.person.lastName() : '',
     informationVisibility:

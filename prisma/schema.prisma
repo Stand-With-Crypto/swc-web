@@ -92,7 +92,6 @@ model User {
   address                    Address?                  @relation(fields: [addressId], references: [id])
   addressId                  String?                   @map("address_id")
   informationVisibility      UserInformationVisibility @map("information_visiblity")
-  sampleDatabaseIncrement    Int                       @default(0) // TODO delete
   primaryUserEmailAddress    UserEmailAddress?         @relation("asPrimaryUserEmailAddress", fields: [primaryUserEmailAddressId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   primaryUserEmailAddressId  String?                   @unique @map("primary_user_email_address_id")
   primaryUserCryptoAddress   UserCryptoAddress?        @relation("asPrimaryUserCryptoAddress", fields: [primaryUserCryptoAddressId], references: [id], onDelete: NoAction, onUpdate: NoAction)
