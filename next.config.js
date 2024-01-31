@@ -124,12 +124,12 @@ const nextConfig = {
     return [
       // v1 redirects
       {
-        permanent: false,
+        permanent: true,
         destination: '/action/call',
         source: '/call',
       },
       {
-        permanent: false,
+        permanent: true,
         destination: '/action/opt-in  ',
         source: '/member-join',
       },
