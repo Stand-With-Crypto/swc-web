@@ -53,15 +53,22 @@ Whenever you make Prisma schema changes (or pulling commits from `main` that inc
 
 ## Contributing to this project
 
-### Pre-commit audits
+### Pre-commit audits & testing
 
 - Before committing changes, please audit your code locally:
+
   - `npm run lint` - audits code against ESLint and Prettier
   - `npm run typecheck` - audits code against TypeScript
   - `npm run test` - execute Jest tests
   - `npm run precheck` - executes all 3 commands above concurrently
-  - `npm run e2e:run-headless` - runs all our e2e tests
-    - Currently these only execute when new comments are made to main branch because of database dependencies, this may change in the future
+    - If `precheck` fails, then it is very likely that your PR will not pass GitHub CI
+
+- Likewise, test E2E flows as necessary:
+  - `npm run e2e:run` - starts up [Cypress](https://www.cypress.io/) UI
+    - With the UI, you can run individual E2E tests under "Specs" and visually follow the flows
+  - `npm run e2e:run-headless` - runs all our E2E tests consecutively via Cypress CLI
+    - Currently, this command only executes when new comments are made to main branch because of database dependencies - this may change in the future
+  - Refer to `docs/Coding Conventions.md/Testing` for more information
 
 ### Contribution guide
 
