@@ -30,7 +30,7 @@ export function useApiHomepageTopLevelMetrics(initial: GetHomepageTopLevelMetric
       setRefreshInterval(1000 * 10)
     }, initialDelayToShowAnimation * 2)
     return () => clearTimeout(timeout)
-  }, [])
+  }, [initialDelayToShowAnimation])
   return useSWR(
     apiUrls.homepageTopLevelMetrics(),
     url =>
