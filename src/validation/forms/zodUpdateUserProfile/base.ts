@@ -1,8 +1,7 @@
 import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
-import { zodFirstName, zodLastName } from '@/validation/fields/zodName'
 import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
 import { zodOptionalEmptyString } from '@/validation/utils'
-import { boolean, object, string, z, RefinementCtx } from 'zod'
+import { RefinementCtx, boolean, object, string, z } from 'zod'
 
 export const zodUpdateUserProfileBase = object({
   isEmbeddedWalletUser: boolean(),
