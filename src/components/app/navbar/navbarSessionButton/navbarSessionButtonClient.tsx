@@ -1,18 +1,17 @@
 'use client'
+import { ConnectWallet, useAddress, useLogin } from '@thirdweb-dev/react'
 import Cookies from 'js-cookie'
 import { useRouter } from 'next/navigation'
-import { ConnectWallet, useAddress, useLogin } from '@thirdweb-dev/react'
 
+import { useThirdwebData } from '@/hooks/useThirdwebData'
 import { GetDefineMessageResults } from '@/types'
 import { cn } from '@/utils/web/cn'
-import { useThirdwebData } from '@/hooks/useThirdwebData'
 
-import { NavbarLoggedInSessionButton } from './navbarLoggedInSessionButton'
-import { navbarSessionButtonMessages } from './navbarSessionButtonClient.messages'
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
-import { USER_SESSION_ID_COOKIE_NAME } from '@/utils/shared/userSessionId'
-import { getUserSessionId } from '@/utils/server/serverUserSessionId'
+import { USER_SESSION_ID_COOKIE_NAME, generateUserSessionId } from '@/utils/shared/userSessionId'
+import { NavbarLoggedInSessionButton } from './navbarLoggedInSessionButton'
+import { navbarSessionButtonMessages } from './navbarSessionButtonClient.messages'
 
 interface NavbarSessionButtonProps {
   messages: GetDefineMessageResults<typeof navbarSessionButtonMessages>
@@ -64,7 +63,7 @@ export function NavbarSessionButtonClient(_props: NavbarSessionButtonProps) {
         loginOptional: false,
         onLogin: handleLoginSuccess,
         onLogout: () => {
-          Cookies.set(USER_SESSION_ID_COOKIE_NAME, getUserSessionId())
+          Cookies.set(USER_SESSION_ID_COOKIE_NAME, generateUserSessionId())
         },
       }}
       className={
