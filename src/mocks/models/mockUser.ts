@@ -15,7 +15,6 @@ export function mockUser(): User {
     id: fakerFields.id(),
     primaryUserEmailAddressId: fakerFields.id(),
     primaryUserCryptoAddressId: fakerFields.id(),
-    sampleDatabaseIncrement: 0,
     firstName: withData ? faker.person.firstName() : '',
     lastName: withData ? faker.person.lastName() : '',
     informationVisibility:
@@ -33,5 +32,7 @@ export function mockUser(): User {
     hasOptedInToMembership: false,
     hasOptedInToSms: false,
     internalStatus: isVisible ? UserInternalStatus.VISIBLE : UserInternalStatus.MANUALLY_HIDDEN,
+    capitolCanaryAdvocateId: null,
+    capitolCanaryInstance: null,
   }
 }

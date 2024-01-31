@@ -15,10 +15,6 @@ export default async function InternalHomepage() {
             links: [
               { children: 'User Settings', href: '/internal/user-settings' },
               { children: 'User Action Deeplinks', href: '/internal/user-action-deeplinks' },
-              {
-                children: 'v2 Sample Architecture Patterns',
-                href: '/internal/sample-architecture-patterns',
-              },
             ],
           },
           {
