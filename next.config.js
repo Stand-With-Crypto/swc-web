@@ -20,9 +20,7 @@ const contentSecurityPolicy = {
     "'self'",
     isLocalDevelopment ? "'unsafe-eval' 'unsafe-inline'" : '', // NextJS requires 'unsafe-eval' in dev (faster source maps)
     standWithCryptoDomain,
-    isLocalDevelopment || process.env.TARGET_ENV === 'dev'
-      ? ''
-      : 'https://static.ads-twitter.com/uwt.js',
+    isLocalDevelopment ? '' : 'https://static.ads-twitter.com/uwt.js',
     'https://*.googleapis.com',
     'https://*.gstatic.com',
     '*.google.com',
@@ -131,17 +129,12 @@ const nextConfig = {
       // v1 redirects
       {
         permanent: false,
-        destination: '/?action=call-your-representative',
+        destination: '/action/call',
         source: '/call',
       },
       {
         permanent: false,
-        destination: '/?modal=nh-event',
-        source: '/events/nh-potus',
-      },
-      {
-        permanent: false,
-        destination: '/?modal=member-join',
+        destination: '/action/opt-in  ',
         source: '/member-join',
       },
       {
