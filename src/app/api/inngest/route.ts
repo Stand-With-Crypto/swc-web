@@ -4,6 +4,7 @@ import { upsertAdvocateInCapitolCanaryWithInngest } from '@/inngest/functions/up
 import { airdropNFTWithInngest } from '@/inngest/functions/airdropNFT'
 import { inngest } from '@/inngest/inngest'
 import { serve } from 'inngest/next'
+import { updateNFTStatus } from '@/inngest/functions/updateNFTStatus'
 
 export const { GET, POST, PUT } = serve({
   client: inngest,
@@ -12,5 +13,6 @@ export const { GET, POST, PUT } = serve({
     upsertAdvocateInCapitolCanaryWithInngest,
     emailRepViaCapitolCanaryWithInngest,
     airdropNFTWithInngest,
+    updateNFTStatus,
   ],
 })
