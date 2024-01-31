@@ -2,7 +2,7 @@ name: Cypress Tests
 on:
   push:
     branches:
-      - cypress-setup
+      - node-version-workflow
       - main
 # Ideally we run this on every PR. Currently the CI flow wipes the testing database to ensure that each run is deterministic
 # To support per-branch testing, we need to invest the eng effort in allowing someone to point thier branch to their local db
