@@ -20,7 +20,6 @@ import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalyt
 import { zodUserActionFormEmailCongresspersonAction } from '@/validation/forms/zodUserActionFormEmailCongressperson'
 import {
   Address,
-  CapitolCanaryInstance,
   Prisma,
   User,
   UserActionType,
@@ -180,8 +179,6 @@ export async function actionCreateUserActionEmailCongressperson(input: Input) {
     },
     emailSubject: 'Support Crypto', // This does not particularly matter for now as subject is currently overridden in the Capitol Canary admin settings.
     emailMessage: validatedFields.data.message,
-    shouldUpdateUserWithAdvocateId:
-      !user.capitolCanaryAdvocateId || user.capitolCanaryInstance === CapitolCanaryInstance.LEGACY, // Update DB if we have no SWC advocate ID.
   }
   await inngest.send({
     name: CAPITOL_CANARY_EMAIL_REP_INNGEST_EVENT_NAME,

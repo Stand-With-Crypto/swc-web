@@ -20,7 +20,14 @@ import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUs
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { userFullName } from '@/utils/shared/userFullName'
 import { zodUpdateUserProfileFormAction } from '@/validation/forms/zodUpdateUserProfile/zodUpdateUserProfileFormAction'
-import { CapitolCanaryInstance, UserEmailAddressSource } from '@prisma/client'
+import {
+  Address,
+  CapitolCanaryInstance,
+  User,
+  UserCryptoAddress,
+  UserEmailAddress,
+  UserEmailAddressSource,
+} from '@prisma/client'
 import 'server-only'
 import { z } from 'zod'
 
@@ -115,74 +122,12 @@ export async function actionUpdateUserProfile(
     },
   })
 
-  // TODO: Handle membership toggling options: https://github.com/Stand-With-Crypto/swc-web/issues/173
-
-  /**
-   * If the user does NOT have an advocate ID, or if the instance is from the legacy Stand with Crypto, then create a new advocate profile and update the database.
-   * Otherwise, update the existing advocate profile appropriately (and no need to update database).
-   * NOTE: We should only send the payload if the updated user has an email address or phone number.
-   */
-  const commonPayloadData = {
-    campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
-    user: {
-      ...updatedUser,
-      address: updatedUser.address,
-    },
-    userEmailAddress: primaryUserEmailAddress!, // UI requires email to update profile.
-    opts: {
-      isEmailOptin: true,
-      isSmsOptin: hasOptedInToSms,
-      shouldSendSmsOptinConfirmation: hasOptedInToSms,
-    },
-  }
-  if (primaryUserEmailAddress || updatedUser.phoneNumber) {
-    // Create if we have no SWC advocate ID.
-    if (
-      !updatedUser.capitolCanaryAdvocateId ||
-      updatedUser.capitolCanaryInstance == CapitolCanaryInstance.LEGACY
-    ) {
-      const payload: CreateAdvocateInCapitolCanaryPayloadRequirements = {
-        ...commonPayloadData,
-        shouldUpdateUserWithAdvocateId: true,
-      }
-      await inngest.send({
-        name: CAPITOL_CANARY_CREATE_ADVOCATE_INNGEST_EVENT_NAME,
-        data: payload,
-      })
-    } else {
-      // Unsubscribe old email/phone number if applicable.
-      const unsubscribePayload: UpdateAdvocateInCapitolCanaryPayloadRequirements = {
-        advocateId: updatedUser.capitolCanaryAdvocateId,
-        campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
-        user: {
-          ...user,
-          address: user.address,
-        },
-        userEmailAddress: user.primaryUserEmailAddress!, // Email must exist if advocate ID exists.
-        opts: {
-          isEmailOptout:
-            user.primaryUserEmailAddress?.emailAddress !== primaryUserEmailAddress?.emailAddress
-              ? true
-              : false, // Opt-out of email if email changed.
-          isSmsOptout:
-            user.phoneNumber && user.phoneNumber !== updatedUser.phoneNumber ? true : false, // Opt-out of SMS if phone number changed.
-        },
-      }
-      await inngest.send({
-        name: CAPITOL_CANARY_UPDATE_ADVOCATE_INNGEST_EVENT_NAME,
-        data: unsubscribePayload,
-      })
-      // Subscribe with new email/phone number.
-      const payload: UpdateAdvocateInCapitolCanaryPayloadRequirements = {
-        ...commonPayloadData,
-        advocateId: updatedUser.capitolCanaryAdvocateId,
-      }
-      await inngest.send({
-        name: CAPITOL_CANARY_UPDATE_ADVOCATE_INNGEST_EVENT_NAME,
-        data: payload,
-      })
-    }
-  }
+  await handleCapitolCanaryAdvocateUpdate(
+    updatedUser,
+    primaryUserEmailAddress,
+    hasOptedInToSms,
+    user,
+  )
 
   return {
     user: {
@@ -195,4 +140,101 @@ export async function actionUpdateUserProfile(
       address: updatedUser.address && getClientAddress(updatedUser.address),
     },
   }
+}
+
+/**
+ * If the user does NOT have an advocate ID, or if the instance is from the legacy Stand with Crypto, then create a new advocate profile and update the database.
+ * Otherwise, update the existing advocate profile appropriately (and no need to update database).
+ *
+ * TODO (Benson): Handle CC membership toggling options: https://github.com/Stand-With-Crypto/swc-web/issues/173
+ */
+async function handleCapitolCanaryAdvocateUpdate(
+  updatedUser: User & { address: Address | null } & {
+    primaryUserCryptoAddress: UserCryptoAddress | null
+  },
+  primaryUserEmailAddress: UserEmailAddress | null | undefined,
+  hasOptedInToSms: boolean,
+  oldUser: User & { address: Address | null } & {
+    primaryUserEmailAddress: UserEmailAddress | null
+  } & { userEmailAddresses: UserEmailAddress[] },
+) {
+  // We should only send the payload if the updated user has an email address or phone number.
+  if (!primaryUserEmailAddress && !updatedUser.phoneNumber) {
+    return
+  }
+
+  const commonPayloadData = {
+    campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
+    user: {
+      ...updatedUser,
+      address: updatedUser.address,
+    },
+    userEmailAddress: primaryUserEmailAddress!,
+    opts: {
+      isEmailOptin: true,
+      isSmsOptin: hasOptedInToSms,
+      shouldSendSmsOptinConfirmation: hasOptedInToSms,
+    },
+  }
+
+  // Create a new advocate if we have no SWC advocate ID.
+  if (
+    !updatedUser.capitolCanaryAdvocateId ||
+    updatedUser.capitolCanaryInstance == CapitolCanaryInstance.LEGACY
+  ) {
+    const payload: CreateAdvocateInCapitolCanaryPayloadRequirements = {
+      ...commonPayloadData,
+    }
+    await inngest.send({
+      name: CAPITOL_CANARY_CREATE_ADVOCATE_INNGEST_EVENT_NAME,
+      data: payload,
+    })
+    return
+  }
+
+  // Otherwise, we attempt to update the existing advocate.
+  // If there is no change in name, address, email, and phone number, then we can return early.
+  if (
+    oldUser.firstName === updatedUser.firstName &&
+    oldUser.lastName === updatedUser.lastName &&
+    oldUser.address?.googlePlaceId === updatedUser.address?.googlePlaceId &&
+    oldUser.primaryUserEmailAddress?.emailAddress === primaryUserEmailAddress?.emailAddress &&
+    oldUser.phoneNumber === updatedUser.phoneNumber
+  ) {
+    return
+  }
+
+  // Else, we should proceed with the payloads.
+  // Unsubscribe old email/phone number if applicable.
+  const unsubscribePayload: UpdateAdvocateInCapitolCanaryPayloadRequirements = {
+    advocateId: updatedUser.capitolCanaryAdvocateId,
+    campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
+    user: {
+      ...updatedUser, // Always use new user information.
+      address: updatedUser.address, // Always use new user information.
+    },
+    userEmailAddress: oldUser.primaryUserEmailAddress!, // Old email must exist if advocate ID exists.
+    opts: {
+      isEmailOptout:
+        oldUser.primaryUserEmailAddress?.emailAddress !== primaryUserEmailAddress?.emailAddress
+          ? true
+          : false, // Opt-out of email if email changed.
+      isSmsOptout:
+        oldUser.phoneNumber && oldUser.phoneNumber !== updatedUser.phoneNumber ? true : false, // Opt-out of SMS if phone number changed.
+    },
+  }
+  await inngest.send({
+    name: CAPITOL_CANARY_UPDATE_ADVOCATE_INNGEST_EVENT_NAME,
+    data: unsubscribePayload,
+  })
+
+  // Subscribe with new email/phone number.
+  const payload: UpdateAdvocateInCapitolCanaryPayloadRequirements = {
+    ...commonPayloadData,
+    advocateId: updatedUser.capitolCanaryAdvocateId,
+  }
+  await inngest.send({
+    name: CAPITOL_CANARY_UPDATE_ADVOCATE_INNGEST_EVENT_NAME,
+    data: payload,
+  })
 }

@@ -57,8 +57,11 @@ export const emailRepViaCapitolCanaryWithInngest = inngest.createFunction(
       },
     )
 
-    // Update database if requested.
-    if (data.shouldUpdateUserWithAdvocateId) {
+    // Update database if needed.
+    if (
+      !data.user.capitolCanaryAdvocateId ||
+      data.user.capitolCanaryInstance === CapitolCanaryInstance.LEGACY
+    ) {
       await step.run('capitol-canary.email-rep.update-user-with-advocate-id', async () => {
         await prismaClient.user.update({
           where: { id: data.user.id },

@@ -29,9 +29,13 @@ import {
   CapitolCanaryCampaignName,
   getCapitolCanaryCampaignID,
 } from '@/utils/server/capitolCanary/campaigns'
-import { CreateAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
+import {
+  CreateAdvocateInCapitolCanaryPayloadRequirements,
+  UpdateAdvocateInCapitolCanaryPayloadRequirements,
+} from '@/utils/server/capitolCanary/payloadRequirements'
 import { inngest } from '@/inngest/inngest'
 import { CAPITOL_CANARY_CREATE_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/createAdvocateInCapitolCanary'
+import { CAPITOL_CANARY_UPDATE_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/updateAdvocateInCapitolCanary'
 
 /*
 The desired behavior of this function:
@@ -54,6 +58,7 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
   let existingUser = await prismaClient.user.findFirst({
     include: {
       address: true,
+      primaryUserEmailAddress: true,
     },
     where: { userCryptoAddresses: { some: { cryptoAddress: address } } },
   })
@@ -72,6 +77,7 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
   existingUser = await prismaClient.user.findFirst({
     include: {
       address: true,
+      primaryUserEmailAddress: true,
     },
     where: embeddedWalletEmailAddress
       ? {
@@ -115,19 +121,19 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
       embeddedWalletEmailAddress,
       userCryptoAddress,
     )
-    if (!userCryptoAddress.user.primaryUserEmailAddressId) {
-      primaryUserEmailAddressId = email.id
-    }
+
+    // Always use the embedded wallet email address as the primary email address.
+    primaryUserEmailAddressId = email.id
 
     /**
      * If the email user does NOT have an advocate ID, or if the instance is from the legacy Stand with Crypto,
      * then create a new advocate profile and update the database.
+     * Otherwise, if the `email.emailAddress` is different than what is already in the database, update the advocate profile appropriately.
      */
     if (
       !userCryptoAddress.user.capitolCanaryAdvocateId ||
       userCryptoAddress.user.capitolCanaryInstance == CapitolCanaryInstance.LEGACY
     ) {
-      // Create subscriber advocate in Capitol Canary.
       const payload: CreateAdvocateInCapitolCanaryPayloadRequirements = {
         campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
         user: {
@@ -138,10 +144,26 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
         opts: {
           isEmailOptin: true,
         },
-        shouldUpdateUserWithAdvocateId: true,
       }
       await inngest.send({
         name: CAPITOL_CANARY_CREATE_ADVOCATE_INNGEST_EVENT_NAME,
+        data: payload,
+      })
+    } else if (existingUser?.primaryUserEmailAddress?.emailAddress !== email.emailAddress) {
+      const payload: UpdateAdvocateInCapitolCanaryPayloadRequirements = {
+        advocateId: userCryptoAddress.user.capitolCanaryAdvocateId,
+        campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
+        user: {
+          ...userCryptoAddress.user,
+          address: existingUser?.address || null,
+        },
+        userEmailAddress: email,
+        opts: {
+          isEmailOptin: true,
+        },
+      }
+      await inngest.send({
+        name: CAPITOL_CANARY_UPDATE_ADVOCATE_INNGEST_EVENT_NAME,
         data: payload,
       })
     }

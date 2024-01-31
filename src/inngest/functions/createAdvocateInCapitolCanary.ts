@@ -50,8 +50,11 @@ export const createAdvocateInCapitolCanaryWithInngest = inngest.createFunction(
       },
     )
 
-    // Update database if requested.
-    if (data.shouldUpdateUserWithAdvocateId) {
+    // Update user database if needed
+    if (
+      !data.user.capitolCanaryAdvocateId ||
+      data.user.capitolCanaryInstance === CapitolCanaryInstance.LEGACY
+    ) {
       await step.run('capitol-canary.create-advocate.update-user-with-advocate-id', async () => {
         await prismaClient.user.update({
           where: { id: data.user.id },

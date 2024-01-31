@@ -1,3 +1,10 @@
+import { CAPITOL_CANARY_CREATE_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/createAdvocateInCapitolCanary'
+import { inngest } from '@/inngest/inngest'
+import {
+  CapitolCanaryCampaignName,
+  getCapitolCanaryCampaignID,
+} from '@/utils/server/capitolCanary/campaigns'
+import { CreateAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { prismaClient } from '@/utils/server/prismaClient'
 import {
   AnalyticsUserActionUserState,
@@ -18,6 +25,8 @@ import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
 import { zodFirstName, zodLastName } from '@/validation/fields/zodName'
 import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
 import {
+  Address,
+  CapitolCanaryInstance,
   Prisma,
   User,
   UserActionOptInType,
@@ -53,6 +62,7 @@ export enum VerifiedSWCPartnersUserActionOptInResult {
 type UserWithRelations = User & {
   userEmailAddresses: UserEmailAddress[]
   userSessions: Array<UserSession>
+  address?: Address | null
 }
 
 type Input = z.infer<typeof zodVerifiedSWCPartnersUserActionOptIn> & {
@@ -139,7 +149,34 @@ export async function verifiedSWCPartnersUserActionOptIn(
     userState,
   })
 
-  // TODO send user to capital canary
+  /**
+   * If the email user does NOT have an advocate ID, or if the instance is from the legacy Stand with Crypto,
+   * then create a new advocate profile and update the database.
+   *
+   * TODO (Benson): Handle CC membership toggling options: https://github.com/Stand-With-Crypto/swc-web/issues/173
+   * TODO (Benson): Include p2a source in Capitol Canary payload.
+   */
+  if (!user.capitolCanaryAdvocateId || user.capitolCanaryInstance == CapitolCanaryInstance.LEGACY) {
+    const payload: CreateAdvocateInCapitolCanaryPayloadRequirements = {
+      campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
+      user: {
+        ...user,
+        address: user.address || null,
+      },
+      userEmailAddress: user.userEmailAddresses.find(
+        emailAddr => emailAddr.id === user.primaryUserEmailAddressId,
+      )!,
+      opts: {
+        isEmailOptin: true,
+        isSmsOptin: input.hasOptedInToSms,
+        shouldSendSmsOptinConfirmation: false,
+      },
+    }
+    await inngest.send({
+      name: CAPITOL_CANARY_CREATE_ADVOCATE_INNGEST_EVENT_NAME,
+      data: payload,
+    })
+  }
 
   return {
     result: VerifiedSWCPartnersUserActionOptInResult.NEW_ACTION,
@@ -199,6 +236,7 @@ async function maybeUpsertUser({
       include: {
         userEmailAddresses: true,
         userSessions: true,
+        address: true,
       },
     })
     const existingEmail = user.userEmailAddresses.find(email => email.emailAddress === emailAddress)
@@ -225,6 +263,7 @@ async function maybeUpsertUser({
     include: {
       userEmailAddresses: true,
       userSessions: true,
+      address: true,
     },
     data: {
       ...getUserAttributionFieldsForVerifiedSWCPartner({ partner, campaignName }),
@@ -251,6 +290,7 @@ async function maybeUpsertUser({
     include: {
       userEmailAddresses: true,
       userSessions: true,
+      address: true,
     },
     where: { id: user.id },
     data: {
