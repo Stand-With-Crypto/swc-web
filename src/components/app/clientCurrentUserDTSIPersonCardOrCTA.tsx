@@ -37,6 +37,7 @@ export function ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: Suppo
       })
     }
   }, [userAddress])
+
   if (!address || !res.data) {
     return (
       <div className="mx-auto max-w-md">

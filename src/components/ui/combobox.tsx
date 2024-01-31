@@ -116,6 +116,12 @@ function StatusList<T>({
   return (
     <Command shouldFilter={false}>
       <CommandInput
+        commandValue={value}
+        onClear={() => {
+          onChange(null)
+          onChangeInputValue('')
+        }}
+        autoFocus
         placeholder="Filter status..."
         onValueChange={onChangeInputValue}
         value={inputValue}

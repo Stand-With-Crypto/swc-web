@@ -32,14 +32,14 @@ import * as Sentry from '@sentry/nextjs'
 import { subDays } from 'date-fns'
 import 'server-only'
 import { z } from 'zod'
-import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import {
-  CapitolCanaryCampaignId,
-  SandboxCapitolCanaryCampaignId,
+  CapitolCanaryCampaignName,
+  getCapitolCanaryCampaignID,
 } from '@/utils/server/capitolCanary/campaigns'
 import { EmailRepViaCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { CAPITOL_CANARY_EMAIL_REP_INNGEST_EVENT_NAME } from '@/inngest/functions/emailRepViaCapitolCanary'
 import { inngest } from '@/inngest/inngest'
+import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
 
 const logger = getLogger(`actionCreateUserActionEmailCongressperson`)
 
@@ -64,7 +64,7 @@ export async function actionCreateUserActionEmailCongressperson(input: Input) {
     }
   }
   logger.info('validated fields')
-
+  await throwIfRateLimited()
   const localUser = parseLocalUserFromCookies()
   const { user, userState } = await maybeUpsertUser({
     existingUser: userMatch.user,
@@ -83,7 +83,7 @@ export async function actionCreateUserActionEmailCongressperson(input: Input) {
   let userAction = await prismaClient.userAction.findFirst({
     where: {
       datetimeCreated: {
-        lte: subDays(new Date(), 1),
+        gte: subDays(new Date(), 1),
       },
       actionType,
       campaignName,
@@ -112,7 +112,7 @@ export async function actionCreateUserActionEmailCongressperson(input: Input) {
   userAction = await prismaClient.userAction.create({
     data: {
       user: { connect: { id: user.id } },
-      actionType: UserActionType.EMAIL,
+      actionType,
       campaignName: validatedFields.data.campaignName,
       ...('userCryptoAddress' in userMatch
         ? {
@@ -160,13 +160,10 @@ export async function actionCreateUserActionEmailCongressperson(input: Input) {
     $name: userFullName(validatedFields.data),
   })
 
-  // Send email via Capitol Canary.
-  const campaignId: number =
-    NEXT_PUBLIC_ENVIRONMENT === 'production'
-      ? CapitolCanaryCampaignId.DEFAULT_EMAIL_REPRESENTATIVE
-      : SandboxCapitolCanaryCampaignId.DEFAULT_EMAIL_REPRESENTATIVE
+  // Send email via Capitol Canary, and add user to Capitol Canary email subscriber list.
+  // By this point, the email address and physical address should have been added to our database.
   const payload: EmailRepViaCapitolCanaryPayloadRequirements = {
-    campaignId,
+    campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_EMAIL_REPRESENTATIVE),
     user: {
       ...user,
       address: user.address!,
@@ -174,7 +171,10 @@ export async function actionCreateUserActionEmailCongressperson(input: Input) {
     userEmailAddress: user.userEmailAddresses.find(
       emailAddr => emailAddr.emailAddress === validatedFields.data.emailAddress,
     )!,
-    emailSubject: 'Support Crypto', // This does not particularly matter as subject is overridden in Capitol Canary.
+    opts: {
+      isEmailOptin: true,
+    },
+    emailSubject: 'Support Crypto', // This does not particularly matter for now as subject is currently overridden in Capitol Canary.
     emailMessage: validatedFields.data.message,
   }
   await inngest.send({

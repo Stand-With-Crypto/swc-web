@@ -1,12 +1,11 @@
 import { Combobox } from '@/components/ui/combobox'
-import { InputWithIcon } from '@/components/ui/inputWIthIcon'
+import { InputWithIcons } from '@/components/ui/inputWithIcons'
 import { useScript } from '@/hooks/useScript'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { cn } from '@/utils/web/cn'
 import { GooglePlaceAutocompletePrediction } from '@/utils/web/googlePlaceUtils'
 import { MapPin } from 'lucide-react'
-import React from 'react'
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import usePlacesAutocomplete from 'use-places-autocomplete'
 
 const CALLBACK_NAME = 'PLACES_AUTOCOMPLETE'
@@ -49,9 +48,9 @@ export const GooglePlacesSelect = React.forwardRef<React.ElementRef<'input'>, Pr
         value={propsValue}
         onChange={propsOnChange}
         formatPopoverTrigger={val => (
-          <InputWithIcon
+          <InputWithIcons
             ref={ref}
-            icon={<MapPin className="h-4 w-4 text-gray-500" />}
+            leftIcon={<MapPin className="h-4 w-4 text-gray-500" />}
             className={cn(val || 'text-gray-500')}
             value={val?.description || inputProps.placeholder || 'select a location'}
             placeholder="select a location"

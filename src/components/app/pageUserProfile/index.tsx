@@ -40,7 +40,7 @@ export function PageUserProfile({
 
       <div className="mb-6 flex items-center justify-between md:mx-4">
         <div className="flex items-center gap-2">
-          <SensitiveDataUserAvatar size={60} user={user} />
+          <SensitiveDataUserAvatar size={48} user={user} />
           <div>
             <div className="text-lg font-bold">{getSensitiveDataUserDisplayName(user)}</div>
             <div className="text-sm text-gray-500">

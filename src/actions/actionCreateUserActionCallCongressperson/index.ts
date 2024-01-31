@@ -23,6 +23,7 @@ import {
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { createActionCallCongresspersonInputValidationSchema } from './inputValidationSchema'
+import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
 
 export type CreateActionCallCongresspersonInput = z.infer<
   typeof createActionCallCongresspersonInputValidationSchema
@@ -54,6 +55,8 @@ export async function actionCreateUserActionCallCongressperson(
   const userMatch = await getMaybeUserAndMethodOfMatch({
     include: { primaryUserCryptoAddress: true },
   })
+  await throwIfRateLimited()
+
   const user = userMatch.user || (await createUser({ localUser, sessionId }))
 
   const peopleAnalytics = getServerPeopleAnalytics({
@@ -119,7 +122,7 @@ async function getRecentUserActionByUserId(userId: User['id']) {
   return prismaClient.userAction.findFirst({
     where: {
       datetimeCreated: {
-        lte: subDays(new Date(), 1),
+        gte: subDays(new Date(), 1),
       },
       actionType: UserActionType.CALL,
       campaignName: UserActionCallCampaignName.DEFAULT,
