@@ -51,6 +51,8 @@
     "Leaderboard",
     "precheck",
     "pscale",
+    "ratelimit",
+    "ratelimiter",
     "sonner",
     "standwithcrypto",
     "subpremise",
