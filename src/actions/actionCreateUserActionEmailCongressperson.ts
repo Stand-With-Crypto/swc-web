@@ -1,7 +1,15 @@
 'use server'
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
+import { CAPITOL_CANARY_EMAIL_REP_INNGEST_EVENT_NAME } from '@/inngest/functions/emailRepViaCapitolCanary'
+import { inngest } from '@/inngest/inngest'
+import {
+  CapitolCanaryCampaignName,
+  getCapitolCanaryCampaignID,
+} from '@/utils/server/capitolCanary/campaigns'
+import { EmailRepViaCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
 import { prismaClient } from '@/utils/server/prismaClient'
+import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
 import {
   AnalyticsUserActionUserState,
   getServerAnalytics,
@@ -13,10 +21,11 @@ import {
   parseLocalUserFromCookies,
 } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
-import { userFullName } from '@/utils/shared/userFullName'
+import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
+import { userFullName } from '@/utils/shared/userFullName'
 import { zodUserActionFormEmailCongresspersonAction } from '@/validation/forms/zodUserActionFormEmailCongressperson'
 import {
   Address,
@@ -32,14 +41,6 @@ import * as Sentry from '@sentry/nextjs'
 import { subDays } from 'date-fns'
 import 'server-only'
 import { z } from 'zod'
-import {
-  CapitolCanaryCampaignName,
-  getCapitolCanaryCampaignID,
-} from '@/utils/server/capitolCanary/campaigns'
-import { EmailRepViaCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
-import { CAPITOL_CANARY_EMAIL_REP_INNGEST_EVENT_NAME } from '@/inngest/functions/emailRepViaCapitolCanary'
-import { inngest } from '@/inngest/inngest'
-import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
 
 const logger = getLogger(`actionCreateUserActionEmailCongressperson`)
 
@@ -50,7 +51,12 @@ type UserWithRelations = User & {
 }
 type Input = z.infer<typeof zodUserActionFormEmailCongresspersonAction>
 
-export async function actionCreateUserActionEmailCongressperson(input: Input) {
+export const actionCreateUserActionEmailCongressperson = withServerActionMiddleware(
+  'actionCreateUserActionEmailCongressperson',
+  _actionCreateUserActionEmailCongressperson,
+)
+
+async function _actionCreateUserActionEmailCongressperson(input: Input) {
   logger.info('triggered')
   const userMatch = await getMaybeUserAndMethodOfMatch({
     include: { primaryUserCryptoAddress: true, userEmailAddresses: true, address: true },
@@ -203,7 +209,7 @@ async function maybeUpsertUser({
     const updatePayload: Prisma.UserUpdateInput = {
       ...(firstName && firstName !== existingUser.firstName && { firstName }),
       ...(lastName && lastName !== existingUser.lastName && { lastName }),
-      ...(!existingUser.hasOptedInToEmails && { hasOptedInToEmail: true }),
+      ...(!existingUser.hasOptedInToEmails && { hasOptedInToEmails: true }),
       ...(emailAddress &&
         existingUser.userEmailAddresses.every(addr => addr.emailAddress !== emailAddress) && {
           userEmailAddresses: {

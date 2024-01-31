@@ -16,14 +16,15 @@ import { subDays } from 'date-fns'
 import { z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
+import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
 import {
   mapLocalUserToUserDatabaseFields,
   parseLocalUserFromCookies,
 } from '@/utils/server/serverLocalUser'
+import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { createActionCallCongresspersonInputValidationSchema } from './inputValidationSchema'
-import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
 
 export type CreateActionCallCongresspersonInput = z.infer<
   typeof createActionCallCongresspersonInputValidationSchema
@@ -37,7 +38,13 @@ interface SharedDependencies {
 }
 
 const logger = getLogger(`actionCreateUserActionCallCongressperson`)
-export async function actionCreateUserActionCallCongressperson(
+
+export const actionCreateUserActionCallCongressperson = withServerActionMiddleware(
+  'actionCreateUserActionCallCongressperson',
+  _actionCreateUserActionCallCongressperson,
+)
+
+async function _actionCreateUserActionCallCongressperson(
   input: CreateActionCallCongresspersonInput,
 ) {
   logger.info('triggered')
