@@ -1,5 +1,6 @@
 import { ClientModel, getClientModel } from '@/clientModels/utils'
 import { UserENSData } from '@/data/web3/types'
+import { censorWord } from '@/utils/server/obscenityMatcher'
 import { UserCryptoAddress } from '@prisma/client'
 
 export type ClientUserCryptoAddress = ClientModel<
@@ -31,6 +32,6 @@ export const getClientUserCryptoAddressWithENSData = (
   return {
     ...getClientUserCryptoAddress(record),
     ensAvatarUrl: ensData?.ensAvatarUrl || null,
-    ensName: ensData?.ensName || null,
+    ensName: ensData?.ensName ? censorWord(ensData.ensName) : null,
   }
 }
