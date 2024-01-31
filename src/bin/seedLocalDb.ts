@@ -76,7 +76,7 @@ async function seed() {
   user
   */
   await batchAsyncAndLog(
-    _.times(seedSizes([10, 100, 1000])).map(() => mockUser()),
+    _.times(seedSizes([12, 98, 987])).map(() => mockUser()),
     data =>
       prismaClient.user.createMany({
         data,

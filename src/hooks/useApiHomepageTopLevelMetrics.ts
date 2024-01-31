@@ -2,6 +2,7 @@
 import { GetHomepageTopLevelMetricsResponse } from '@/data/pageSpecific/getHomepageData'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { apiUrls } from '@/utils/shared/urls'
+import { useEffect, useState } from 'react'
 import useSWR from 'swr'
 
 export function useApiHomepageTopLevelMetrics(initial: GetHomepageTopLevelMetricsResponse) {
@@ -19,6 +20,17 @@ export function useApiHomepageTopLevelMetrics(initial: GetHomepageTopLevelMetric
           initial.countPolicymakerContacts.countUserActionEmailRecipients - 1,
       },
     }
+  const initialDelayToShowAnimation = 1000 * 3
+  const [refreshInterval, setRefreshInterval] = useState(initialDelayToShowAnimation)
+  /*
+    After we initially fetch data we can slow down how often we check for additional data
+  */
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setRefreshInterval(1000 * 10)
+    }, initialDelayToShowAnimation * 2)
+    return () => clearTimeout(timeout)
+  }, [])
   return useSWR(
     apiUrls.homepageTopLevelMetrics(),
     url =>
@@ -26,8 +38,9 @@ export function useApiHomepageTopLevelMetrics(initial: GetHomepageTopLevelMetric
         .then(res => res.json())
         .then(data => data as GetHomepageTopLevelMetricsResponse),
     {
+      revalidateOnMount: false,
       fallbackData: mockDecreaseInValuesOnInitialLoadSoWeCanAnimateIncrease,
-      refreshInterval: 1000 * 5,
+      refreshInterval,
     },
   )
 }
