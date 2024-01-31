@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+BRANCH="$(git branch --show-current)"
 DATABASE_URL=$(cat .env | grep -e "^DATABASE_URL=" | tail -1 | sed -e "s/^DATABASE_URL=//g")
 bold=$(tput bold)
 normal=$(tput sgr0)

@@ -33,5 +33,6 @@ it('page - politicians interactions', () => {
   cy.get('textarea').type('test message')
   cy.get('button[type="submit"]').click()
 
+  // waiting for Inngest to consume job
   cy.contains('Nice work!')
 })

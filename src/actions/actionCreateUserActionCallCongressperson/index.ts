@@ -28,6 +28,7 @@ import { zodAddress } from '@/validation/fields/zodAddress'
 import { zodDTSISlug } from '@/validation/fields/zodDTSISlug'
 import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
 import { nativeEnum, object } from 'zod'
+import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
 
 const createActionCallCongresspersonInputValidationSchema = object({
   phoneNumber: zodPhoneNumber.transform(str => str && normalizePhoneNumber(str)),
@@ -66,6 +67,8 @@ export async function actionCreateUserActionCallCongressperson(
   const userMatch = await getMaybeUserAndMethodOfMatch({
     include: { primaryUserCryptoAddress: true },
   })
+  await throwIfRateLimited()
+
   const user = userMatch.user || (await createUser({ localUser, sessionId }))
 
   const peopleAnalytics = getServerPeopleAnalytics({

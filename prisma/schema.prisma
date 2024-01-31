@@ -59,14 +59,19 @@ enum UserInformationVisibility {
   ALL_INFO
 }
 
-// A user can interact with our platform multiple ways. 
-// Sometimes that user will be signing up via coinbase, 
+enum CapitolCanaryInstance {
+  STAND_WITH_CRYPTO
+  LEGACY
+}
+
+// A user can interact with our platform multiple ways.
+// Sometimes that user will be signing up via coinbase,
 // sometimes a user will be signing up via a wallet on the website, or multiple wallets
-// sometimes they won't be logged in at all but we'll need to cache a session id for them so that if they log in with a eth address later we can associate their actions with the new address. 
+// sometimes they won't be logged in at all but we'll need to cache a session id for them so that if they log in with a eth address later we can associate their actions with the new address.
 // We'll need to track these different "user markers" with their own respective metadata, and join these related models with a User table to provide a single view of a user
 // A key assumption we're making about how this model will be used:
 
-// A user has a one-to-one relationship with a "primary" crypto address and can potentially have many crypto addresses. 
+// A user has a one-to-one relationship with a "primary" crypto address and can potentially have many crypto addresses.
 // The situation where a user could have a one-to-many relationship with a crypto address is if they create generate an "embedded" crypto wallet, and then sign in with a web3 wallet
 // In this specific instance, we'll allow the user to "merge" these accounts if they can verify they have ownership of the same email used by both accounts
 
@@ -87,7 +92,6 @@ model User {
   address                    Address?                  @relation(fields: [addressId], references: [id])
   addressId                  String?                   @map("address_id")
   informationVisibility      UserInformationVisibility @map("information_visiblity")
-  sampleDatabaseIncrement    Int                       @default(0) // TODO delete
   primaryUserEmailAddress    UserEmailAddress?         @relation("asPrimaryUserEmailAddress", fields: [primaryUserEmailAddressId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   primaryUserEmailAddressId  String?                   @unique @map("primary_user_email_address_id")
   primaryUserCryptoAddress   UserCryptoAddress?        @relation("asPrimaryUserCryptoAddress", fields: [primaryUserCryptoAddressId], references: [id], onDelete: NoAction, onUpdate: NoAction)
@@ -96,7 +100,7 @@ model User {
   hasOptedInToSms            Boolean                   @map("has_opted_in_to_sms")
   hasOptedInToMembership     Boolean                   @map("has_opted_in_to_membership")
   internalStatus             UserInternalStatus        @default(VISIBLE) @map("internal_status")
-  // We'll collect and capture this information in our product analytics tools, but we'll also want to be able to 
+  // We'll collect and capture this information in our product analytics tools, but we'll also want to be able to
   // use this metadata to query our relationship database. This information will only be populated if users
   // opt in to our cookies
   acquisitionReferer         String                    @map("acquisition_referer")
@@ -113,6 +117,9 @@ model User {
   userMergeAlertUserB UserMergeAlert[] @relation("userBMergeAttempt")
   userMergeAlertUserA UserMergeAlert[] @relation("userAMergeAttempt")
   userMergeEvents     UserMergeEvent[]
+
+  capitolCanaryAdvocateId Int? @map("capitol_canary_advocate_id")
+  capitolCanaryInstance  CapitolCanaryInstance? @map("capitol_canary_instance")
 
   @@index([addressId])
   @@index([internalStatus])

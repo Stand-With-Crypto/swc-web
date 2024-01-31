@@ -1,7 +1,10 @@
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
-import { actionCreateUserActionCallCongressperson } from '@/actions/actionCreateUserActionCallCongressperson'
+import {
+  CreateActionCallCongresspersonInput,
+  actionCreateUserActionCallCongressperson,
+} from '@/actions/actionCreateUserActionCallCongressperson'
 import { UserActionFormCallCongresspersonProps } from '@/components/app/userActionFormCallCongressperson'
 import { TabNames } from '@/components/app/userActionFormCallCongressperson/userActionFormCallCongressperson.types'
 import { Button } from '@/components/ui/button'
@@ -54,7 +57,7 @@ export function SuggestedScript({
 
   const handleCallAction = React.useCallback(
     async (phoneNumberToCall: string) => {
-      const data: Parameters<typeof actionCreateUserActionCallCongressperson>[0] = {
+      const data: CreateActionCallCongresspersonInput = {
         campaignName: UserActionCallCampaignName.DEFAULT,
         dtsiSlug: dtsiPerson.slug,
         phoneNumber: phoneNumberToCall,
