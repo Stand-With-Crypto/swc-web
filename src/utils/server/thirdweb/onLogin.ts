@@ -35,7 +35,7 @@ import { inngest } from '@/inngest/inngest'
 import { CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/upsertAdvocateInCapitolCanary'
 import { getLogger } from '@/utils/shared/logger'
 import { CREATE_CAPITOL_CANARY_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/createAdvocateInCapitolCanary'
-import { mintPastActions } from '@/utils/server/airdrop'
+import { claimNFT, mintPastActions } from '@/utils/server/airdrop'
 
 /*
 The desired behavior of this function:
@@ -206,7 +206,7 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
     },
   })
   if (!existingOptInUserAction) {
-    await prismaClient.userAction.create({
+    const userAction = await prismaClient.userAction.create({
       data: {
         user: { connect: { id: userCryptoAddress.userId } },
         actionType: UserActionType.OPT_IN,
@@ -219,6 +219,8 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
       },
     })
     logWithAddress(`opt in user action created`)
+
+    await claimNFT(userAction, userCryptoAddress)
   }
 
   await prismaClient.user.update({

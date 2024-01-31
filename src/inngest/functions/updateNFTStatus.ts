@@ -5,13 +5,10 @@ import { updateMinNFTStatus } from '@/utils/server/airdrop'
 import NFTMintStatus = $Enums.NFTMintStatus
 import { onFailureUpdateNFTStatus } from '@/inngest/onFailureAirdropNFT'
 import { RetryAfterError } from 'inngest'
-import { getLogger } from '@/utils/shared/logger'
 
 export const NFT_REQUESTED_INNGEST_EVENT_NAME = 'app/NTF.requested'
 const NFT_REQUESTED_INNGEST_FUNCTION_ID = 'update-nft-status'
 const NFT_UPDATE_STATUS_RETRY = 10
-
-const logger = getLogger(`updateNFTStatus`)
 
 export const updateNFTStatus = inngest.createFunction(
   {
@@ -28,9 +25,6 @@ export const updateNFTStatus = inngest.createFunction(
       return await engineGetMintStatus(queryId)
     })
 
-    logger.info(result.status)
-    logger.info(result.transactionHash)
-    console.log(result)
     if (result.status === 'mined') {
       await step.run('update-mintNFT-Status', async () => {
         await updateMinNFTStatus(mintNft.id, NFTMintStatus.CLAIMED, result.transactionHash!)

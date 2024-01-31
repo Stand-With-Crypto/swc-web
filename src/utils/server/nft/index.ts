@@ -25,13 +25,11 @@ export async function claimNFT(userAction: UserAction, userCryptoAddress: UserCr
     return
   }
 
-  logger.info('nft found')
   if (await userAlreadyClaimedNFT(userAction.userId, nft.slug)) {
     logger.info('nft already requested or claimed')
     return
   }
 
-  logger.info('cryptoAddress id: ' + userCryptoAddress.id)
   const userMintAction = await prismaClient.userAction.create({
     data: {
       user: { connect: { id: userAction.userId } },
@@ -65,7 +63,6 @@ export async function claimNFT(userAction: UserAction, userCryptoAddress: UserCr
 }
 
 async function userAlreadyClaimedNFT(userId: string, nftSlug: string) {
-  logger.info('userAlreadyClaimedNFT triggered')
   const userActions = await prismaClient.userAction.findFirst({
     where: {
       userId: userId,
