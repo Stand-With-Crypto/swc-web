@@ -1,6 +1,7 @@
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getUserSessionIdOnPageRouter } from '@/utils/server/serverUserSessionId'
 import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
+import * as Sentry from '@sentry/nextjs'
 import {
   ServerLocalUser,
   mapLocalUserToUserDatabaseFields,
@@ -83,6 +84,23 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
         }
       : { userSessions: { some: { id: userSessionId } } },
   })
+  /*
+  The situation below will occur when:
+  - a user logs in to multiple crypto wallets with the same session id
+  - a user creates a web3 wallet with a verified email from CB and then creates an embedded wallet with the same email
+  we should not associate those wallets with the same user. We could, but it would be confusing for the user and it's unclear whether that's their intent
+  */
+  if (existingUser && existingUser.primaryUserCryptoAddressId) {
+    getServerAnalytics({ userId: existingUser.id, localUser }).track('Separate User Created', {
+      Reason: 'Different Wallet Address',
+      'New Crypto Wallet Address': address,
+    })
+    Sentry.captureMessage(
+      'User found via verified email/session id unassociated from this crypto address',
+      { extra: { embeddedWalletEmailAddress, address, userSessionId, existingUser } },
+    )
+    existingUser = null
+  }
   const userCryptoAddress = await prismaClient.userCryptoAddress.create({
     data: {
       cryptoAddress: address,
