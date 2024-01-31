@@ -4,6 +4,8 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 })
 
 const isLocalDevelopment = process.env.NODE_ENV === 'development'
+console.log('isLocalDevelopment', isLocalDevelopment)
+console.log('process.env.NODE_ENV', process.env.NODE_ENV)
 
 const contentSecurityPolicy = {
   'default-src': ["'self'", 'blob:'],
