@@ -68,25 +68,16 @@ export const emailRepViaCapitolCanaryWithInngest = inngest.createFunction(
         },
       )
 
-      // Update database.
-      await step.run('capitol-canary.email-rep.update-user-with-advocate-id', async () => {
-        await prismaClient.user.update({
-          where: { id: data.user.id },
-          data: {
-            capitolCanaryAdvocateId: createAdvocateStepResponse.advocateid,
-            capitolCanaryInstance: CapitolCanaryInstance.STAND_WITH_CRYPTO,
-          },
-        })
-      })
-
       // Assign newly created advocate ID.
       emailAdvocateId = createAdvocateStepResponse.advocateid
     } else {
       // Format update request.
-      const formattedUpdateRequest = formatCapitolCanaryAdvocateUpdateRequest({
-        ...data,
-        advocateId: data.user.capitolCanaryAdvocateId,
-      })
+      const formattedUpdateRequest = formatCapitolCanaryAdvocateUpdateRequest(data)
+      if (formattedUpdateRequest instanceof Error) {
+        throw new NonRetriableError(formattedUpdateRequest.message, {
+          cause: formattedUpdateRequest,
+        })
+      }
       // Update the advocate in Capitol Canary.
       const updateAdvocateStepResponse = await step.run(
         'capitol-canary.email-rep.update-advocate-in-capitol-canary',
@@ -107,6 +98,10 @@ export const emailRepViaCapitolCanaryWithInngest = inngest.createFunction(
 
       // Assign existing advocate ID.
       emailAdvocateId = updateAdvocateStepResponse.advocateid
+    }
+
+    if (!emailAdvocateId) {
+      throw new NonRetriableError('could not resolve advocate ID')
     }
 
     // Format email request.
@@ -134,6 +129,22 @@ export const emailRepViaCapitolCanaryWithInngest = inngest.createFunction(
         }
       },
     )
+
+    // Update database with new SwC advocate ID if new ID was created.
+    if (
+      data.user.capitolCanaryAdvocateId !== emailAdvocateId ||
+      data.user.capitolCanaryInstance === CapitolCanaryInstance.LEGACY
+    ) {
+      await step.run('capitol-canary.email-rep.update-user-with-advocate-id', async () => {
+        await prismaClient.user.update({
+          where: { id: data.user.id },
+          data: {
+            capitolCanaryAdvocateId: emailAdvocateId,
+            capitolCanaryInstance: CapitolCanaryInstance.STAND_WITH_CRYPTO,
+          },
+        })
+      })
+    }
 
     return emailRepStepResponse
   },

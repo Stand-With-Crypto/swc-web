@@ -29,13 +29,9 @@ import {
   CapitolCanaryCampaignName,
   getCapitolCanaryCampaignID,
 } from '@/utils/server/capitolCanary/campaigns'
-import {
-  CreateAdvocateInCapitolCanaryPayloadRequirements,
-  UpdateAdvocateInCapitolCanaryPayloadRequirements,
-} from '@/utils/server/capitolCanary/payloadRequirements'
+import { UpsertAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { inngest } from '@/inngest/inngest'
-import { CAPITOL_CANARY_CREATE_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/createAdvocateInCapitolCanary'
-import { CAPITOL_CANARY_UPDATE_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/updateAdvocateInCapitolCanary'
+import { CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/upsertAdvocateInCapitolCanary'
 
 /*
 The desired behavior of this function:
@@ -125,40 +121,25 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
     // Always use the embedded wallet email address as the primary email address.
     primaryUserEmailAddressId = email.id
 
-    /**
-     * If the email user does NOT have an advocate ID, or if the instance is from the legacy Stand with Crypto,
-     * then create a new advocate profile and update the database.
-     * Otherwise, if the `email.emailAddress` is different than what is already in the database, update the advocate profile appropriately.
-     */
-    const commonPayload = {
-      campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
-      user: {
-        ...userCryptoAddress.user,
-        address: existingUser?.address || null,
-      },
-      userEmailAddress: email,
-      opts: {
-        isEmailOptin: true,
-      },
-    }
+    // Note: we only want to update if the stored primary email address is different than the embedded wallet email address.
     if (
       !userCryptoAddress.user.capitolCanaryAdvocateId ||
-      userCryptoAddress.user.capitolCanaryInstance == CapitolCanaryInstance.LEGACY
+      userCryptoAddress.user.capitolCanaryInstance == CapitolCanaryInstance.LEGACY ||
+      existingUser?.primaryUserEmailAddress?.emailAddress !== email.emailAddress
     ) {
-      const payload: CreateAdvocateInCapitolCanaryPayloadRequirements = {
-        ...commonPayload,
+      const payload: UpsertAdvocateInCapitolCanaryPayloadRequirements = {
+        campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
+        user: {
+          ...userCryptoAddress.user,
+          address: existingUser?.address || null,
+        },
+        userEmailAddress: email,
+        opts: {
+          isEmailOptin: true,
+        },
       }
       await inngest.send({
-        name: CAPITOL_CANARY_CREATE_ADVOCATE_INNGEST_EVENT_NAME,
-        data: payload,
-      })
-    } else if (existingUser?.primaryUserEmailAddress?.emailAddress !== email.emailAddress) {
-      const payload: UpdateAdvocateInCapitolCanaryPayloadRequirements = {
-        ...commonPayload,
-        advocateId: userCryptoAddress.user.capitolCanaryAdvocateId,
-      }
-      await inngest.send({
-        name: CAPITOL_CANARY_UPDATE_ADVOCATE_INNGEST_EVENT_NAME,
+        name: CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME,
         data: payload,
       })
     }

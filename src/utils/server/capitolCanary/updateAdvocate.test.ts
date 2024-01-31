@@ -5,7 +5,7 @@ import {
   CapitolCanaryCampaignName,
   getCapitolCanaryCampaignID,
 } from '@/utils/server/capitolCanary/campaigns'
-import { UpdateAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
+import { UpsertAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { formatCapitolCanaryAdvocateUpdateRequest } from '@/utils/server/capitolCanary/updateAdvocate'
 import { faker } from '@faker-js/faker'
 import { expect } from '@jest/globals'
@@ -18,8 +18,10 @@ it('formats the "update capitol canary advocate" request correctly', () => {
   const mockedAddress = mockAddress()
   const mockedEmailAddress = mockUserEmailAddress()
 
-  const payload: UpdateAdvocateInCapitolCanaryPayloadRequirements = {
-    advocateId: 68251920,
+  mockedUser.capitolCanaryAdvocateId = 68251920
+  mockedUser.capitolCanaryInstance = 'STAND_WITH_CRYPTO'
+
+  const payload: UpsertAdvocateInCapitolCanaryPayloadRequirements = {
     campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_MEMBERSHIP),
     user: {
       ...mockedUser,

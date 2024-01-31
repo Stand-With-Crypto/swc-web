@@ -162,8 +162,8 @@ export async function actionCreateUserActionEmailCongressperson(input: Input) {
 
   /**
    * Send email via Capitol Canary, and add user to Capitol Canary email subscriber list.
+   * Inngest will create a new advocate in Capitol Canary if we do not have the user's advocate ID, or will reuse an existing advocate.
    * By this point, the email address and physical address should have been added to our database.
-   * The database should also be updated if the user does NOT have an advocate ID or if the instance is from the legacy Stand with Crypto.
    */
   const payload: EmailRepViaCapitolCanaryPayloadRequirements = {
     campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_EMAIL_REPRESENTATIVE),

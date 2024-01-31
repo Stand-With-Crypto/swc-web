@@ -78,10 +78,12 @@ export const upsertAdvocateInCapitolCanaryWithInngest = inngest.createFunction(
 
     // Otherwise, we can update the existing advocate profile appropriately.
     // Format update request.
-    const formattedUpdateRequest = formatCapitolCanaryAdvocateUpdateRequest({
-      ...data,
-      advocateId: data.user.capitolCanaryAdvocateId,
-    })
+    const formattedUpdateRequest = formatCapitolCanaryAdvocateUpdateRequest(data)
+    if (formattedUpdateRequest instanceof Error) {
+      throw new NonRetriableError(formattedUpdateRequest.message, {
+        cause: formattedUpdateRequest,
+      })
+    }
     // Update the advocate in Capitol Canary.
     const updateAdvocateStepResponse = await step.run(
       'capitol-canary.upsert-advocate.update-advocate-in-capitol-canary',
@@ -99,6 +101,8 @@ export const upsertAdvocateInCapitolCanaryWithInngest = inngest.createFunction(
         }
       },
     )
+
+    // No need to update advocate ID in database since it already exists.
 
     return updateAdvocateStepResponse
   },
