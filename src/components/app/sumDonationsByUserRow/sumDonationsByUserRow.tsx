@@ -4,7 +4,9 @@ import { NextImage } from '@/components/ui/image'
 import { SumDonationsByUser } from '@/data/aggregations/getSumDonationsByUser'
 import { SupportedLocale } from '@/intl/locales'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
+import { cn } from '@/utils/web/cn'
 import { getUserDisplayName } from '@/utils/web/userUtils'
+import _ from 'lodash'
 
 interface SumDonationsRowProps {
   sumDonations: SumDonationsByUser[0]
@@ -19,16 +21,19 @@ export function SumDonationsByUserRow({ locale, sumDonations, index }: SumDonati
   return (
     <div className="flex items-center justify-between gap-5">
       <div className="flex items-center gap-2">
-        <div className="w-5">
-          {INDEX_SHIELD_IMAGE_MAP[index] ? (
+        <div className="relative w-6 text-center">
+          <div className={cn('z-1', !_.isNil(INDEX_SHIELD_IMAGE_MAP[index]) && 'text-white')}>
+            {index + 1}
+          </div>
+          {!_.isNil(INDEX_SHIELD_IMAGE_MAP[index]) && (
             <NextImage
-              width={20}
-              height={20}
+              className="absolute"
+              style={{ zIndex: -1, top: '1px' }}
+              width={24}
+              height={24}
               src={INDEX_SHIELD_IMAGE_MAP[index]}
               alt={`position ${index + 1} medal`}
             />
-          ) : (
-            index + 1
           )}
         </div>
         <div>
