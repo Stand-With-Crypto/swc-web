@@ -30,7 +30,7 @@ import {
 } from '@/utils/web/formUtils'
 import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
-import { zodUpdateUserProfileFormFields } from '@/validation/forms/zodUpdateUserProfile'
+import { zodUpdateUserProfileFormFields } from '@/validation/forms/zodUpdateUserProfile/zodUpdateUserProfileFormFields'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { UserEmailAddressSource } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'

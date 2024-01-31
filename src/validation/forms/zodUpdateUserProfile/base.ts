@@ -1,15 +1,11 @@
 import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
-import { zodAddress } from '@/validation/fields/zodAddress'
-import { zodGooglePlacesAutocompletePrediction } from '@/validation/fields/zodGooglePlacesAutocompletePrediction'
 import { zodFirstName, zodLastName } from '@/validation/fields/zodName'
 import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
 import { zodOptionalEmptyString } from '@/validation/utils'
 import { boolean, object, string, z, RefinementCtx } from 'zod'
 
-const base = object({
+export const zodUpdateUserProfileBase = object({
   isEmbeddedWalletUser: boolean(),
-  firstName: zodOptionalEmptyString(zodFirstName),
-  lastName: zodOptionalEmptyString(zodLastName),
   emailAddress: string(),
   phoneNumber: zodOptionalEmptyString(zodPhoneNumber).transform(
     str => str && normalizePhoneNumber(str),
@@ -20,7 +16,10 @@ const base = object({
   // informationVisibility: nativeEnum(UserInformationVisibility),
 })
 
-function superRefine(data: z.infer<typeof base>, ctx: RefinementCtx) {
+export function zodUpdateUserProfileBaseSuperRefine(
+  data: z.infer<typeof zodUpdateUserProfileBase>,
+  ctx: RefinementCtx,
+) {
   if (!data.isEmbeddedWalletUser) {
     const parseEmail = zodOptionalEmptyString(
       string().trim().email('Please enter a valid email address').toLowerCase(),
@@ -39,15 +38,3 @@ function superRefine(data: z.infer<typeof base>, ctx: RefinementCtx) {
     })
   }
 }
-
-export const zodUpdateUserProfileFormFields = base
-  .extend({
-    address: zodGooglePlacesAutocompletePrediction.nullable(),
-  })
-  .superRefine(superRefine)
-
-export const zodUpdateUserProfileFormAction = base
-  .extend({
-    address: zodAddress.nullable(),
-  })
-  .superRefine(superRefine)
