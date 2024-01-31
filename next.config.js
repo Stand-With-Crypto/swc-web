@@ -3,23 +3,17 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
 
-const isLocalDevelopment = process.env.NODE_ENV === 'development' && !process.env.CORS_ENV_PREFIX
-
-const standWithCryptoDomain = isLocalDevelopment
-  ? 'http://localhost:*'
-  : process.env.CORS_ENV_PREFIX
+const isLocalDevelopment = process.env.NODE_ENV === 'development'
 
 const contentSecurityPolicy = {
   'default-src': ["'self'", 'blob:'],
   'style-src': [
     "'self'",
     "'unsafe-inline'", // NextJS requires 'unsafe-inline'
-    standWithCryptoDomain,
   ],
   'script-src': [
     "'self'",
     isLocalDevelopment ? "'unsafe-eval' 'unsafe-inline'" : '', // NextJS requires 'unsafe-eval' in dev (faster source maps)
-    standWithCryptoDomain,
     isLocalDevelopment ? '' : 'https://static.ads-twitter.com/uwt.js',
     'https://*.googleapis.com',
     'https://*.gstatic.com',
@@ -27,7 +21,7 @@ const contentSecurityPolicy = {
     'https://static.ads-twitter.com/uwt.js',
     'https://va.vercel-scripts.com/v1/speed-insights/script.debug.js',
     'https://va.vercel-scripts.com/v1/script.debug.js',
-    'https://www.youtube.com/*',
+    'https://www.youtube.com/',
   ],
   'img-src': [
     "'self'",
@@ -35,7 +29,6 @@ const contentSecurityPolicy = {
     'https://res.cloudinary.com/',
     'https://*.walletconnect.com/',
     'https://euc.li/',
-    standWithCryptoDomain,
     'https://*.googleapis.com',
     'https://*.gstatic.com',
     '*.google.com',
@@ -44,7 +37,6 @@ const contentSecurityPolicy = {
   'connect-src': [
     "'self'",
     'ws: wss:',
-    isLocalDevelopment ? 'ws://localhost:*' : process.env.CORS_ENV_PREFIX,
     'https://cloudflare-eth.com',
     'https://base.rpc.thirdweb.com/',
     'https://polygon.rpc.thirdweb.com/',
@@ -55,7 +47,11 @@ const contentSecurityPolicy = {
     'https://*.gstatic.com',
     '*.google.com',
   ],
-  'frame-src': ['*.google.com', 'https://embedded-wallet.thirdweb.com/'],
+  'frame-src': [
+    '*.google.com',
+    'https://embedded-wallet.thirdweb.com/',
+    'https://www.youtube.com/embed/',
+  ],
   'font-src': ["'self'"],
   'object-src': ['none'],
   'base-uri': ["'self'"],
