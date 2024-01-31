@@ -134,7 +134,7 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
       !userCryptoAddress.user.capitolCanaryAdvocateId ||
       userCryptoAddress.user.capitolCanaryInstance == CapitolCanaryInstance.LEGACY
     ) {
-      const payload: CreateAdvocateInCapitolCanaryPayloadRequirements = {
+      const commonPayload = {
         campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
         user: {
           ...userCryptoAddress.user,
@@ -145,27 +145,27 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
           isEmailOptin: true,
         },
       }
-      await inngest.send({
-        name: CAPITOL_CANARY_CREATE_ADVOCATE_INNGEST_EVENT_NAME,
-        data: payload,
-      })
-    } else if (existingUser?.primaryUserEmailAddress?.emailAddress !== email.emailAddress) {
-      const payload: UpdateAdvocateInCapitolCanaryPayloadRequirements = {
-        advocateId: userCryptoAddress.user.capitolCanaryAdvocateId,
-        campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
-        user: {
-          ...userCryptoAddress.user,
-          address: existingUser?.address || null,
-        },
-        userEmailAddress: email,
-        opts: {
-          isEmailOptin: true,
-        },
+      if (
+        !userCryptoAddress.user.capitolCanaryAdvocateId ||
+        userCryptoAddress.user.capitolCanaryInstance == CapitolCanaryInstance.LEGACY
+      ) {
+        const payload: CreateAdvocateInCapitolCanaryPayloadRequirements = {
+          ...commonPayload,
+        }
+        await inngest.send({
+          name: CAPITOL_CANARY_CREATE_ADVOCATE_INNGEST_EVENT_NAME,
+          data: payload,
+        })
+      } else if (existingUser?.primaryUserEmailAddress?.emailAddress !== email.emailAddress) {
+        const payload: UpdateAdvocateInCapitolCanaryPayloadRequirements = {
+          ...commonPayload,
+          advocateId: userCryptoAddress.user.capitolCanaryAdvocateId,
+        }
+        await inngest.send({
+          name: CAPITOL_CANARY_UPDATE_ADVOCATE_INNGEST_EVENT_NAME,
+          data: payload,
+        })
       }
-      await inngest.send({
-        name: CAPITOL_CANARY_UPDATE_ADVOCATE_INNGEST_EVENT_NAME,
-        data: payload,
-      })
     }
   }
 
