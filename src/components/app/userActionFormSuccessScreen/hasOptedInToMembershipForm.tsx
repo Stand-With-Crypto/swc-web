@@ -58,7 +58,6 @@ export function HasOptedInToMembershipForm({
               },
               () => actionUpdateUserHasOptedInToMembership(),
             )
-            console.log('asasddasd')
             setFormState('default')
             onSuccess()
           }}
