@@ -2,6 +2,7 @@
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
 import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
 import { prismaClient } from '@/utils/server/prismaClient'
+import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
 import {
   AnalyticsUserActionUserState,
   getServerAnalytics,
@@ -35,6 +36,7 @@ export async function actionCreateUserActionTweet() {
   logger.info(userMatch.user ? 'found user' : 'no user found')
   const sessionId = getUserSessionId()
   const localUser = parseLocalUserFromCookies()
+  await throwIfRateLimited()
   const { user, userState } = await maybeUpsertUser({
     existingUser: userMatch.user,
     sessionId,

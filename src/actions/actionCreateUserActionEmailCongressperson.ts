@@ -39,6 +39,7 @@ import {
 import { EmailRepViaCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { CAPITOL_CANARY_EMAIL_REP_INNGEST_EVENT_NAME } from '@/inngest/functions/emailRepViaCapitolCanary'
 import { inngest } from '@/inngest/inngest'
+import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
 
 const logger = getLogger(`actionCreateUserActionEmailCongressperson`)
 
@@ -63,7 +64,7 @@ export async function actionCreateUserActionEmailCongressperson(input: Input) {
     }
   }
   logger.info('validated fields')
-
+  await throwIfRateLimited()
   const localUser = parseLocalUserFromCookies()
   const { user, userState } = await maybeUpsertUser({
     existingUser: userMatch.user,
