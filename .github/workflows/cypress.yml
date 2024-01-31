@@ -39,9 +39,14 @@ jobs:
       # org level secrets
       CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
       GITHUB_TOKEN: ${{ secrets.CYPRESS_GITHUB_WORKFLOW_TOKEN_TRAVIS }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Set Node.js to 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
       - name: Cypress run
         # Uses the official Cypress GitHub action https://github.com/cypress-io/github-action
         uses: cypress-io/github-action@1b70233146622b69e789ccdd4f9452adc638d25a # v6.6.1
