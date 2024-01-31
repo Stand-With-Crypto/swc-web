@@ -3,27 +3,29 @@ import {
   CapitolCanaryCampaignName,
   getCapitolCanaryCampaignID,
 } from '@/utils/server/capitolCanary/campaigns'
-import { CreateAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
-import { CAPITOL_CANARY_CREATE_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/createAdvocateInCapitolCanary'
+import { UpdateAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { mockUser } from '@/mocks/models/mockUser'
 import { mockAddress } from '@/mocks/models/mockAddress'
 import { mockUserEmailAddress } from '@/mocks/models/mockUserEmailAddress'
 import { runBin } from '@/bin/runBin'
+import { CAPITOL_CANARY_UPDATE_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/updateAdvocateInCapitolCanary'
 
 /**
  * Run this script only after you have the server AND Inngest running locally.
  * Please set environment variables as needed.
- * Command: npm run ts src/bin/smokeTests/capitolCanary/createAdvocateWithInngest.ts
+ * Command: npm run ts src/bin/smokeTests/capitolCanary/updateAdvocateWithInngest.ts
  *
- * Verify that the advocate is created in Capitol Canary with an administrator.
+ * Verify that the advocate is updated in Capitol Canary with an administrator.
+ * https://admin.phone2action.com/advocates/68251920 - SANDBOX ACCOUNT
  */
 
-async function smokeTestCreateAdvocateWithInngest() {
+async function smokeTestUpdateAdvocateWithInngest() {
   const mockedUser = mockUser()
   const mockedAddress = mockAddress()
   const mockedEmailAddress = mockUserEmailAddress()
 
-  const payload: CreateAdvocateInCapitolCanaryPayloadRequirements = {
+  const payload: UpdateAdvocateInCapitolCanaryPayloadRequirements = {
+    advocateId: 68251920, // This is the advocate ID for the test user in Capitol Canary.
     campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_MEMBERSHIP),
     user: {
       ...mockedUser,
@@ -39,9 +41,9 @@ async function smokeTestCreateAdvocateWithInngest() {
   }
 
   await inngest.send({
-    name: CAPITOL_CANARY_CREATE_ADVOCATE_INNGEST_EVENT_NAME,
+    name: CAPITOL_CANARY_UPDATE_ADVOCATE_INNGEST_EVENT_NAME,
     data: payload,
   })
 }
 
-runBin(smokeTestCreateAdvocateWithInngest)
+runBin(smokeTestUpdateAdvocateWithInngest)

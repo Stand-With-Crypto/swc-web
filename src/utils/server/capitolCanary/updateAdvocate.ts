@@ -1,12 +1,13 @@
-import { CreateAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
+import { UpdateAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { sendCapitolCanaryRequest } from '@/utils/server/capitolCanary/sendCapitolCanaryRequest'
 
-const CAPITOL_CANARY_CREATE_ADVOCATE_API_URL = 'https://api.phone2action.com/2.0/advocates'
+const CAPITOL_CANARY_UPDATE_ADVOCATE_API_URL = 'https://api.phone2action.com/2.0/advocates'
 
-// Interface based on: https://docs.phone2action.com/#:~:text=update%20Phone2Action%20advocates-,Create%20an%20advocate,-This%20endpoint%20will
-// Interface should not be accessed directly - use the requirements interface above.
-interface CreateAdvocateInCapitolCanaryRequest {
+// Interface based on: https://docs.phone2action.com/#:~:text=%3A19302020%0A%7D-,Update%20an%20advocate,-In%20order%20to
+// Interface should not be accessed directly - use the requirements interface (see `payloadRequirements.ts`).
+interface UpdateAdvocateInCapitolCanaryRequest {
   // Required information.
+  advocateid: number
   campaigns: number[]
 
   // Advocate information.
@@ -38,7 +39,7 @@ interface CreateAdvocateInCapitolCanaryRequest {
   tags?: string[]
 }
 
-interface CreateAdvocateInCapitolCanaryResponse {
+interface UpdateAdvocateInCapitolCanaryResponse {
   success: number
   error: string
   type: string
@@ -46,10 +47,11 @@ interface CreateAdvocateInCapitolCanaryResponse {
 }
 
 // This function should not be called directly. Use the respective Inngest function instead.
-export function formatCapitolCanaryAdvocateCreationRequest(
-  payload: CreateAdvocateInCapitolCanaryPayloadRequirements,
+export function formatCapitolCanaryAdvocateUpdateRequest(
+  payload: UpdateAdvocateInCapitolCanaryPayloadRequirements,
 ) {
-  const formattedRequest: CreateAdvocateInCapitolCanaryRequest = {
+  const formattedRequest: UpdateAdvocateInCapitolCanaryRequest = {
+    advocateid: payload.advocateId,
     campaigns: [payload.campaignId],
   }
 
@@ -102,9 +104,9 @@ export function formatCapitolCanaryAdvocateCreationRequest(
   return formattedRequest
 }
 
-export async function createAdvocateInCapitolCanary(request: CreateAdvocateInCapitolCanaryRequest) {
+export async function updateAdvocateInCapitolCanary(request: UpdateAdvocateInCapitolCanaryRequest) {
   return await sendCapitolCanaryRequest<
-    CreateAdvocateInCapitolCanaryRequest,
-    CreateAdvocateInCapitolCanaryResponse
-  >(request, 'POST', CAPITOL_CANARY_CREATE_ADVOCATE_API_URL)
+    UpdateAdvocateInCapitolCanaryRequest,
+    UpdateAdvocateInCapitolCanaryResponse
+  >(request, 'POST', CAPITOL_CANARY_UPDATE_ADVOCATE_API_URL)
 }

@@ -12,10 +12,16 @@ export interface CreateAdvocateInCapitolCanaryPayloadRequirements {
   userEmailAddress: UserEmailAddress
   opts?: CapitolCanaryOpts
   metadata?: CapitolCanaryMetadata
+  shouldUpdateUserWithAdvocateId?: boolean // Set to true to update the user's database record with the returned advocate ID.
 }
 
 export interface EmailRepViaCapitolCanaryPayloadRequirements
   extends CreateAdvocateInCapitolCanaryPayloadRequirements {
   emailSubject: string
   emailMessage: string
+}
+
+export interface UpdateAdvocateInCapitolCanaryPayloadRequirements
+  extends CreateAdvocateInCapitolCanaryPayloadRequirements {
+  advocateId: number
 }

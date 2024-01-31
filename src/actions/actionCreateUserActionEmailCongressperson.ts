@@ -20,6 +20,7 @@ import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalyt
 import { zodUserActionFormEmailCongresspersonAction } from '@/validation/forms/zodUserActionFormEmailCongressperson'
 import {
   Address,
+  CapitolCanaryInstance,
   Prisma,
   User,
   UserActionType,
@@ -160,8 +161,11 @@ export async function actionCreateUserActionEmailCongressperson(input: Input) {
     $name: userFullName(validatedFields.data),
   })
 
-  // Send email via Capitol Canary, and add user to Capitol Canary email subscriber list.
-  // By this point, the email address and physical address should have been added to our database.
+  /**
+   * Send email via Capitol Canary, and add user to Capitol Canary email subscriber list.
+   * By this point, the email address and physical address should have been added to our database.
+   * The database should also be updated if the user does NOT have an advocate ID or if the instance is from the legacy Stand with Crypto.
+   */
   const payload: EmailRepViaCapitolCanaryPayloadRequirements = {
     campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_EMAIL_REPRESENTATIVE),
     user: {
@@ -174,8 +178,10 @@ export async function actionCreateUserActionEmailCongressperson(input: Input) {
     opts: {
       isEmailOptin: true,
     },
-    emailSubject: 'Support Crypto', // This does not particularly matter for now as subject is currently overridden in Capitol Canary.
+    emailSubject: 'Support Crypto', // This does not particularly matter for now as subject is currently overridden in the Capitol Canary admin settings.
     emailMessage: validatedFields.data.message,
+    shouldUpdateUserWithAdvocateId:
+      !user.capitolCanaryAdvocateId || user.capitolCanaryInstance === CapitolCanaryInstance.LEGACY, // Update DB if we have no SWC advocate ID.
   }
   await inngest.send({
     name: CAPITOL_CANARY_EMAIL_REP_INNGEST_EVENT_NAME,

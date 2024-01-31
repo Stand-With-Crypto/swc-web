@@ -8,6 +8,7 @@ import {
 } from '@/utils/server/serverLocalUser'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import {
+  CapitolCanaryInstance,
   User,
   UserActionOptInType,
   UserActionType,
@@ -30,7 +31,7 @@ import {
 } from '@/utils/server/capitolCanary/campaigns'
 import { CreateAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { inngest } from '@/inngest/inngest'
-import { CREATE_CAPITOL_CANARY_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/createAdvocateInCapitolCanary'
+import { CAPITOL_CANARY_CREATE_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/createAdvocateInCapitolCanary'
 
 /*
 The desired behavior of this function:
@@ -56,6 +57,7 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
     },
     where: { userCryptoAddresses: { some: { cryptoAddress: address } } },
   })
+  // If a proper user already exists (e.g. has a crypto address associated with it), return the user.
   if (existingUser) {
     trackUserLogin({
       existingUser,
@@ -64,6 +66,7 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
     })
     return { userId: existingUser.id }
   }
+
   const userSessionId = getUserSessionIdOnPageRouter(req)
   const embeddedWalletEmailAddress = await fetchEmbeddedWalletMetadataFromThirdweb(address)
   existingUser = await prismaClient.user.findFirst({
@@ -116,22 +119,32 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
       primaryUserEmailAddressId = email.id
     }
 
-    // Create subscriber advocate in Capitol Canary.
-    const payload: CreateAdvocateInCapitolCanaryPayloadRequirements = {
-      campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_MEMBERSHIP),
-      user: {
-        ...userCryptoAddress.user,
-        address: existingUser?.address || null,
-      },
-      userEmailAddress: email,
-      opts: {
-        isEmailOptin: true,
-      },
+    /**
+     * If the email user does NOT have an advocate ID, or if the instance is from the legacy Stand with Crypto,
+     * then create a new advocate profile and update the database.
+     */
+    if (
+      !userCryptoAddress.user.capitolCanaryAdvocateId ||
+      userCryptoAddress.user.capitolCanaryInstance == CapitolCanaryInstance.LEGACY
+    ) {
+      // Create subscriber advocate in Capitol Canary.
+      const payload: CreateAdvocateInCapitolCanaryPayloadRequirements = {
+        campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
+        user: {
+          ...userCryptoAddress.user,
+          address: existingUser?.address || null,
+        },
+        userEmailAddress: email,
+        opts: {
+          isEmailOptin: true,
+        },
+        shouldUpdateUserWithAdvocateId: true,
+      }
+      await inngest.send({
+        name: CAPITOL_CANARY_CREATE_ADVOCATE_INNGEST_EVENT_NAME,
+        data: payload,
+      })
     }
-    await inngest.send({
-      name: CREATE_CAPITOL_CANARY_ADVOCATE_INNGEST_EVENT_NAME,
-      data: payload,
-    })
   }
 
   /**

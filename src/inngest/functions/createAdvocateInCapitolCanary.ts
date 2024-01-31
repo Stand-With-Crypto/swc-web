@@ -1,4 +1,5 @@
 import { inngest } from '@/inngest/inngest'
+import { prismaClient } from '@/utils/server/prismaClient'
 import { onFailureCapitolCanary } from '@/inngest/onFailureCapitolCanary'
 import {
   createAdvocateInCapitolCanary,
@@ -6,22 +7,23 @@ import {
 } from '@/utils/server/capitolCanary/createAdvocate'
 import { CreateAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { NonRetriableError } from 'inngest'
+import { CapitolCanaryInstance } from '@prisma/client'
 
-const CREATE_CAPITOL_CANARY_ADVOCATE_RETRY_LIMIT = 20
+const CAPITOL_CANARY_CREATE_ADVOCATE_RETRY_LIMIT = 20
 
-export const CREATE_CAPITOL_CANARY_ADVOCATE_INNGEST_FUNCTION_ID = 'capitol-canary.create-advocate'
-export const CREATE_CAPITOL_CANARY_ADVOCATE_INNGEST_EVENT_NAME = 'capitol.canary/create.advocate'
+export const CAPITOL_CANARY_CREATE_ADVOCATE_INNGEST_FUNCTION_ID = 'capitol-canary.create-advocate'
+export const CAPITOL_CANARY_CREATE_ADVOCATE_INNGEST_EVENT_NAME = 'capitol.canary/create.advocate'
 
 /**
  * Refer to `src/bin/smokeTests/capitolCanary/createAdvocateWithInngest.ts` to see how to call this function.
  */
 export const createAdvocateInCapitolCanaryWithInngest = inngest.createFunction(
   {
-    id: CREATE_CAPITOL_CANARY_ADVOCATE_INNGEST_FUNCTION_ID,
-    retries: CREATE_CAPITOL_CANARY_ADVOCATE_RETRY_LIMIT,
+    id: CAPITOL_CANARY_CREATE_ADVOCATE_INNGEST_FUNCTION_ID,
+    retries: CAPITOL_CANARY_CREATE_ADVOCATE_RETRY_LIMIT,
     onFailure: onFailureCapitolCanary,
   },
-  { event: CREATE_CAPITOL_CANARY_ADVOCATE_INNGEST_EVENT_NAME },
+  { event: CAPITOL_CANARY_CREATE_ADVOCATE_INNGEST_EVENT_NAME },
   async ({ event, step }) => {
     const data = event.data as CreateAdvocateInCapitolCanaryPayloadRequirements
     const formattedRequest = formatCapitolCanaryAdvocateCreationRequest(data)
@@ -31,7 +33,7 @@ export const createAdvocateInCapitolCanaryWithInngest = inngest.createFunction(
         cause: formattedRequest,
       })
     }
-    const stepResponse = await step.run(
+    const createStepResponse = await step.run(
       'capitol-canary.create-advocate.create-advocate-in-capitol-canary',
       async () => {
         const createAdvocateResp = await createAdvocateInCapitolCanary(formattedRequest)
@@ -47,6 +49,20 @@ export const createAdvocateInCapitolCanaryWithInngest = inngest.createFunction(
         }
       },
     )
-    return stepResponse
+
+    // Update database if requested.
+    if (data.shouldUpdateUserWithAdvocateId) {
+      await step.run('capitol-canary.create-advocate.update-user-with-advocate-id', async () => {
+        await prismaClient.user.update({
+          where: { id: data.user.id },
+          data: {
+            capitolCanaryAdvocateId: createStepResponse.advocateid,
+            capitolCanaryInstance: CapitolCanaryInstance.STAND_WITH_CRYPTO,
+          },
+        })
+      })
+    }
+
+    return createStepResponse
   },
 )
