@@ -93,16 +93,14 @@ export async function Navbar({ locale }: { locale: SupportedLocale }) {
             )
           })}
         </div>
-        {/* padding improves the touch target */}
-        {/* TODO swap this to drop down from the top once https://github.com/emilkowalski/vaul/pull/187 lands */}
-        <Drawer>
+        <Drawer direction="top">
           <DrawerTrigger asChild>
             <button className="py-3 pl-3 md:hidden">
               <span className="sr-only">Open navigation menu</span>
               <Menu />
             </button>
           </DrawerTrigger>
-          <DrawerContent>
+          <DrawerContent direction="top">
             <div className="space-y-6 px-6 pb-6 pt-3 text-center md:space-y-8">
               {leftLinks.map(({ href, text }) => {
                 return (
