@@ -130,42 +130,37 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
      * then create a new advocate profile and update the database.
      * Otherwise, if the `email.emailAddress` is different than what is already in the database, update the advocate profile appropriately.
      */
+    const commonPayload = {
+      campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
+      user: {
+        ...userCryptoAddress.user,
+        address: existingUser?.address || null,
+      },
+      userEmailAddress: email,
+      opts: {
+        isEmailOptin: true,
+      },
+    }
     if (
       !userCryptoAddress.user.capitolCanaryAdvocateId ||
       userCryptoAddress.user.capitolCanaryInstance == CapitolCanaryInstance.LEGACY
     ) {
-      const commonPayload = {
-        campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
-        user: {
-          ...userCryptoAddress.user,
-          address: existingUser?.address || null,
-        },
-        userEmailAddress: email,
-        opts: {
-          isEmailOptin: true,
-        },
+      const payload: CreateAdvocateInCapitolCanaryPayloadRequirements = {
+        ...commonPayload,
       }
-      if (
-        !userCryptoAddress.user.capitolCanaryAdvocateId ||
-        userCryptoAddress.user.capitolCanaryInstance == CapitolCanaryInstance.LEGACY
-      ) {
-        const payload: CreateAdvocateInCapitolCanaryPayloadRequirements = {
-          ...commonPayload,
-        }
-        await inngest.send({
-          name: CAPITOL_CANARY_CREATE_ADVOCATE_INNGEST_EVENT_NAME,
-          data: payload,
-        })
-      } else if (existingUser?.primaryUserEmailAddress?.emailAddress !== email.emailAddress) {
-        const payload: UpdateAdvocateInCapitolCanaryPayloadRequirements = {
-          ...commonPayload,
-          advocateId: userCryptoAddress.user.capitolCanaryAdvocateId,
-        }
-        await inngest.send({
-          name: CAPITOL_CANARY_UPDATE_ADVOCATE_INNGEST_EVENT_NAME,
-          data: payload,
-        })
+      await inngest.send({
+        name: CAPITOL_CANARY_CREATE_ADVOCATE_INNGEST_EVENT_NAME,
+        data: payload,
+      })
+    } else if (existingUser?.primaryUserEmailAddress?.emailAddress !== email.emailAddress) {
+      const payload: UpdateAdvocateInCapitolCanaryPayloadRequirements = {
+        ...commonPayload,
+        advocateId: userCryptoAddress.user.capitolCanaryAdvocateId,
       }
+      await inngest.send({
+        name: CAPITOL_CANARY_UPDATE_ADVOCATE_INNGEST_EVENT_NAME,
+        data: payload,
+      })
     }
   }
 

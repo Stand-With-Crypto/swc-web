@@ -1,9 +1,7 @@
 import { inngest } from '@/inngest/inngest'
-import { prismaClient } from '@/utils/server/prismaClient'
 import { onFailureCapitolCanary } from '@/inngest/onFailureCapitolCanary'
 import { UpdateAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { NonRetriableError } from 'inngest'
-import { CapitolCanaryInstance } from '@prisma/client'
 import {
   formatCapitolCanaryAdvocateUpdateRequest,
   updateAdvocateInCapitolCanary,
@@ -49,22 +47,6 @@ export const updateAdvocateInCapitolCanaryWithInngest = inngest.createFunction(
         }
       },
     )
-
-    // Update user database if needed.
-    if (
-      !data.user.capitolCanaryAdvocateId ||
-      data.user.capitolCanaryInstance === CapitolCanaryInstance.LEGACY
-    ) {
-      await step.run('capitol-canary.update-advocate.update-user-with-advocate-id', async () => {
-        await prismaClient.user.update({
-          where: { id: data.user.id },
-          data: {
-            capitolCanaryAdvocateId: updateStepResponse.advocateid,
-            capitolCanaryInstance: CapitolCanaryInstance.STAND_WITH_CRYPTO,
-          },
-        })
-      })
-    }
 
     return updateStepResponse
   },

@@ -1,4 +1,4 @@
-import { CreateAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
+import { UpsertAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { sendCapitolCanaryRequest } from '@/utils/server/capitolCanary/sendCapitolCanaryRequest'
 
 const CAPITOL_CANARY_CREATE_ADVOCATE_API_URL = 'https://api.phone2action.com/2.0/advocates'
@@ -47,7 +47,7 @@ interface CreateAdvocateInCapitolCanaryResponse {
 
 // This function should not be called directly. Use the respective Inngest function instead.
 export function formatCapitolCanaryAdvocateCreationRequest(
-  payload: CreateAdvocateInCapitolCanaryPayloadRequirements,
+  payload: UpsertAdvocateInCapitolCanaryPayloadRequirements,
 ) {
   const formattedRequest: CreateAdvocateInCapitolCanaryRequest = {
     campaigns: [payload.campaignId],

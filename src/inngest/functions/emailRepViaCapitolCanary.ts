@@ -9,6 +9,10 @@ import {
   formatCapitolCanaryEmailRepRequest,
 } from '@/utils/server/capitolCanary/emailRep'
 import { EmailRepViaCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
+import {
+  formatCapitolCanaryAdvocateUpdateRequest,
+  updateAdvocateInCapitolCanary,
+} from '@/utils/server/capitolCanary/updateAdvocate'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { CapitolCanaryInstance } from '@prisma/client'
 import { NonRetriableError } from 'inngest'
@@ -30,38 +34,41 @@ export const emailRepViaCapitolCanaryWithInngest = inngest.createFunction(
   { event: CAPITOL_CANARY_EMAIL_REP_INNGEST_EVENT_NAME },
   async ({ event, step }) => {
     const data = event.data as EmailRepViaCapitolCanaryPayloadRequirements
+    let emailAdvocateId = 0
 
-    // Format create request.
-    const formattedCreateRequest = formatCapitolCanaryAdvocateCreationRequest(data)
-    if (formattedCreateRequest instanceof Error) {
-      throw new NonRetriableError(formattedCreateRequest.message, {
-        cause: formattedCreateRequest,
-      })
-    }
-    // Create the advocate in Capitol Canary.
-    // If advocate already exists for the given campaign ID, then that's alright - nothing will happen, which is fine.
-    const createAdvocateStepResponse = await step.run(
-      'capitol-canary.email-rep.create-advocate-in-capitol-canary',
-      async () => {
-        const createAdvocateResp = await createAdvocateInCapitolCanary(formattedCreateRequest)
-        if (createAdvocateResp.success != 1) {
-          throw new NonRetriableError(
-            `client error for creating advocate in capitol canary: ${JSON.stringify(
-              createAdvocateResp,
-            )}`,
-          )
-        }
-        return {
-          ...createAdvocateResp,
-        }
-      },
-    )
-
-    // Update database if needed.
+    // If the user does not have an SwC advocate ID, then we need to create one for them.
+    // Otherwise, we can add the stored advocate ID to the emailing campaign.
     if (
       !data.user.capitolCanaryAdvocateId ||
       data.user.capitolCanaryInstance === CapitolCanaryInstance.LEGACY
     ) {
+      // Format create request.
+      const formattedCreateRequest = formatCapitolCanaryAdvocateCreationRequest(data)
+      if (formattedCreateRequest instanceof Error) {
+        throw new NonRetriableError(formattedCreateRequest.message, {
+          cause: formattedCreateRequest,
+        })
+      }
+      // Create the advocate in Capitol Canary.
+      // If advocate already exists for the given campaign ID, then that's alright - nothing will happen, which is fine.
+      const createAdvocateStepResponse = await step.run(
+        'capitol-canary.email-rep.create-advocate-in-capitol-canary',
+        async () => {
+          const createAdvocateResp = await createAdvocateInCapitolCanary(formattedCreateRequest)
+          if (createAdvocateResp.success != 1) {
+            throw new NonRetriableError(
+              `client error for creating advocate in capitol canary: ${JSON.stringify(
+                createAdvocateResp,
+              )}`,
+            )
+          }
+          return {
+            ...createAdvocateResp,
+          }
+        },
+      )
+
+      // Update database.
       await step.run('capitol-canary.email-rep.update-user-with-advocate-id', async () => {
         await prismaClient.user.update({
           where: { id: data.user.id },
@@ -71,12 +78,41 @@ export const emailRepViaCapitolCanaryWithInngest = inngest.createFunction(
           },
         })
       })
+
+      // Assign newly created advocate ID.
+      emailAdvocateId = createAdvocateStepResponse.advocateid
+    } else {
+      // Format update request.
+      const formattedUpdateRequest = formatCapitolCanaryAdvocateUpdateRequest({
+        ...data,
+        advocateId: data.user.capitolCanaryAdvocateId,
+      })
+      // Update the advocate in Capitol Canary.
+      const updateAdvocateStepResponse = await step.run(
+        'capitol-canary.email-rep.update-advocate-in-capitol-canary',
+        async () => {
+          const updateAdvocateResp = await updateAdvocateInCapitolCanary(formattedUpdateRequest)
+          if (updateAdvocateResp.success != 1) {
+            throw new NonRetriableError(
+              `client error for updating advocate in capitol canary: ${JSON.stringify(
+                updateAdvocateResp,
+              )}`,
+            )
+          }
+          return {
+            ...updateAdvocateResp,
+          }
+        },
+      )
+
+      // Assign existing advocate ID.
+      emailAdvocateId = updateAdvocateStepResponse.advocateid
     }
 
     // Format email request.
     const formattedEmailRepRequest = formatCapitolCanaryEmailRepRequest({
       ...data,
-      advocateId: createAdvocateStepResponse.advocateid,
+      advocateId: emailAdvocateId,
     })
     if (formattedEmailRepRequest instanceof Error) {
       throw new NonRetriableError(formattedEmailRepRequest.message, {
