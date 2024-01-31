@@ -35,8 +35,6 @@ export const getIntlUrls = (
     politiciansHomepage: () => `${localePrefix}/politicians`,
     politicianDetails: (dtsiSlug: string) => `${localePrefix}/politicians/person/${dtsiSlug}`,
     profile: () => `${localePrefix}/profile`,
-    // TODO delete before v2 go-live
-    sampleArchitecturePatterns: () => `${localePrefix}/internal/sample-architecture-patterns`,
     internalHomepage: () => `${localePrefix}/internal`,
   }
 }

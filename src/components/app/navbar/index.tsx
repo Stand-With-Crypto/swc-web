@@ -60,12 +60,6 @@ export async function Navbar({ locale }: { locale: SupportedLocale }) {
               <InternalLink className="underline" href={urls.internalHomepage()}>
                 Internal Pages
               </InternalLink>
-              <InternalLink
-                className="hidden underline sm:inline-block"
-                href={urls.sampleArchitecturePatterns()}
-              >
-                v2 Architecture Samples
-              </InternalLink>
             </div>
           </div>
         </div>

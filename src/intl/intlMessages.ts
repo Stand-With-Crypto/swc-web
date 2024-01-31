@@ -16,12 +16,7 @@ const mockGetIntlMessages = async (locale: SupportedLocale) => {
       : await import('@/intl/generated/compile/en-US.json').then(res => res.default)
   const options = {
     'en-US': enUSTranslations,
-    es: {
-      'sampleArchitecturePatterns.sampleTranslationClientComponent.translatedText':
-        'Este texto del lado del servidor está traducido!',
-      'sampleArchitecturePatterns.translatedText':
-        'Este texto del lado del cliente está traducido!',
-    },
+    es: {},
   } satisfies Partial<Record<SupportedLocale, Record<string, string>>>
   return locale in options ? options[locale] : {}
 }
