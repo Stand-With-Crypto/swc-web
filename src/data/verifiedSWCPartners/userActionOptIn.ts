@@ -153,6 +153,8 @@ export async function verifiedSWCPartnersUserActionOptIn(
    * If the email user does NOT have an advocate ID, or if the instance is from the legacy Stand with Crypto,
    * then create a new advocate profile and update the database.
    *
+   * If we reached this point, then we can assume that the user is brand new.
+   *
    * TODO (Benson): Handle CC membership toggling options: https://github.com/Stand-With-Crypto/swc-web/issues/173
    * TODO (Benson): Include p2a source in Capitol Canary payload.
    */
