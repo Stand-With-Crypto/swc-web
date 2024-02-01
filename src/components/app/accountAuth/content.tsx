@@ -26,7 +26,7 @@ import { Button } from '@/components/ui/button'
 import { useResponsiveDialog } from '@/components/ui/responsiveDialog'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { useLoadingCallback } from '@/hooks/useLoadingCallback'
-import { InternalLink } from '@/components/ui/link'
+import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { zodEmailAddress } from '@/validation/fields/zodEmailAddress'
@@ -353,9 +353,12 @@ function ConnectionMethodsContainer({ children }: React.PropsWithChildren) {
             Stand With Crypto Alliance Privacy Policy
           </InternalLink>{' '}
           and{' '}
-          <InternalLink className="text-blue-600" target="_blank" href={urls.privacyPolicy()}>
-            Quorum Privacy Policy (TODO: Figure out where this link should go)
-          </InternalLink>
+          <ExternalLink
+            className="text-blue-600"
+            href="https://www.quorum.us/static/Privacy-Policy.pdf"
+          >
+            Quorum Privacy Policy
+          </ExternalLink>
         </p>
       </div>
     </div>
