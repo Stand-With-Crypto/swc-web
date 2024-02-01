@@ -39,7 +39,6 @@ export async function triggerServerActionForForm<
   trackFormSubmitted(formName, analyticsProps)
 
   const response = await fn().catch(error => {
-    console.log('catch error!')
     if (!_.isError(error)) {
       trackFormSubmitErrored(formName, { 'Error Type': 'Unknown', ...analyticsProps })
       onError(GENERIC_FORM_ERROR_KEY, { message: error })
@@ -67,7 +66,6 @@ export async function triggerServerActionForForm<
     }
     return { status: 'error' as const }
   })
-  console.log(response)
   if ('status' in response) {
     return { status: response.status }
   }
