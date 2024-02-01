@@ -21,9 +21,8 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Textarea } from '@/components/ui/textarea'
-import { useLocale } from '@/hooks/useLocale'
+import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
-import { getIntlUrls } from '@/utils/shared/urls'
 import { UserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns'
 import { cn } from '@/utils/web/cn'
 import {
@@ -39,8 +38,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { UserActionType } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { useRouter } from 'next/navigation'
-import React from 'react'
-import { useMemo } from 'react'
+import React, { useMemo } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
@@ -90,8 +88,7 @@ export function UserActionFormEmailCongressperson({
   onSuccess: () => void
 }) {
   const router = useRouter()
-  const locale = useLocale()
-  const urls = getIntlUrls(locale)
+  const urls = useIntlUrls()
   const defaultValues = useMemo(() => getDefaultValues({ user, dtsiSlug: undefined }), [user])
   const form = useForm<FormValues>({
     resolver: zodResolver(zodUserActionFormEmailCongresspersonFields),

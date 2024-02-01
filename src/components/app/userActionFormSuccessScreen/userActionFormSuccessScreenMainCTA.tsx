@@ -10,8 +10,7 @@ import { InternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { Skeleton } from '@/components/ui/skeleton'
-import { useLocale } from '@/hooks/useLocale'
-import { getIntlUrls } from '@/utils/shared/urls'
+import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { hasCompleteUserProfile } from '@/utils/web/hasCompleteUserProfile'
 import { NFTClientMetadata } from '@/utils/web/nft'
 import { Check } from 'lucide-react'
@@ -51,8 +50,7 @@ export function UserActionFormSuccessScreenMainCTA({
   }
   onClose: () => void
 }) {
-  const locale = useLocale()
-  const urls = getIntlUrls(locale)
+  const urls = useIntlUrls()
   const [hasOptedInToMembershipState, setHasOptedInToMembershipState] = useState<
     'hidden' | 'visible' | 'submitted'
   >('hidden')
