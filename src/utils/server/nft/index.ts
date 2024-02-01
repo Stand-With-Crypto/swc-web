@@ -32,23 +32,22 @@ export async function claimNFT(userAction: UserAction, userCryptoAddress: UserCr
     return
   }
 
-  const userMintAction = await prismaClient.userAction.create({
+  const nftMint = await prismaClient.nFTMint.create({
     data: {
-      user: { connect: { id: userAction.userId } },
-      actionType: UserActionType.NFT_MINT,
-      userCryptoAddress: { connect: { id: userCryptoAddress.id } },
-      campaignName: userAction.campaignName,
-      nftMint: {
-        create: {
-          nftSlug: nftSlug,
-          status: NFTMintStatus.REQUESTED,
-          costAtMint: 0.0,
-          contractAddress: NFT_CONTRACT_ADDRESS[nftSlug],
-          costAtMintCurrencyCode: NFTCurrency.ETH,
-          transactionHash: '',
-          costAtMintUsd: '0',
-        },
-      },
+      nftSlug: nftSlug,
+      status: NFTMintStatus.REQUESTED,
+      costAtMint: 0.0,
+      contractAddress: NFT_CONTRACT_ADDRESS[nftSlug],
+      costAtMintCurrencyCode: NFTCurrency.ETH,
+      transactionHash: '',
+      costAtMintUsd: '0',
+    },
+  })
+
+  await prismaClient.userAction.update({
+    where: { id: userAction.id },
+    data: {
+      nftMintId: nftMint.id,
     },
     include: {
       nftMint: true,
@@ -56,7 +55,7 @@ export async function claimNFT(userAction: UserAction, userCryptoAddress: UserCr
   })
 
   const payload: airdropPayload = {
-    nftMintId: userMintAction.nftMint!.id,
+    nftMintId: nftMint.id,
     recipientWalletAddress: userCryptoAddress.cryptoAddress,
     contractAddress: NFT_CONTRACT_ADDRESS[nftSlug],
   }

@@ -19,7 +19,6 @@ export const airdropNFTWithInngest = inngest.createFunction(
   { event: AIRDROP_NFT_INNGEST_EVENT_NAME },
   async ({ event, step }) => {
     const payload = event.data as airdropPayload
-    // const walletAddress = event.data.walletAddress as string
 
     const queryId = await step.run('airdropNFT', async () => {
       return await engineAirdropNFT(payload.contractAddress, payload.recipientWalletAddress, 1)
