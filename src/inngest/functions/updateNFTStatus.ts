@@ -1,10 +1,11 @@
 import { inngest } from '@/inngest/inngest'
-import { $Enums, NFTMint } from '@prisma/client'
+import { $Enums } from '@prisma/client'
 import { engineGetMintStatus } from '@/utils/server/thirdweb/engineAirdropNFT'
 import { updateMinNFTStatus } from '@/utils/server/airdrop'
 import NFTMintStatus = $Enums.NFTMintStatus
 import { onFailureUpdateNFTStatus } from '@/inngest/onFailureAirdropNFT'
 import { RetryAfterError } from 'inngest'
+import { getAirdropStatusPayload } from '@/utils/server/airdrop/payload'
 
 export const NFT_REQUESTED_INNGEST_EVENT_NAME = 'app/NTF.requested'
 const NFT_REQUESTED_INNGEST_FUNCTION_ID = 'update-nft-status'
@@ -18,20 +19,19 @@ export const updateNFTStatus = inngest.createFunction(
   },
   { event: NFT_REQUESTED_INNGEST_EVENT_NAME },
   async ({ event, step }) => {
-    const mintNft = event.data.userAction as NFTMint
-    const queryId = event.data.queryId as string
+    const payload = event.data as getAirdropStatusPayload
 
     const result = await step.run('update-mintNFT-Status', async () => {
-      return await engineGetMintStatus(queryId)
+      return await engineGetMintStatus(payload.queryId)
     })
 
     if (result.status === 'mined') {
       await step.run('update-mintNFT-Status', async () => {
-        await updateMinNFTStatus(mintNft.id, NFTMintStatus.CLAIMED, result.transactionHash!)
+        await updateMinNFTStatus(payload.nftMintId, NFTMintStatus.CLAIMED, result.transactionHash!)
       })
     } else if (result.status === 'errored' || result.status === 'cancelled') {
       await step.run('update-mintNFT-Status', async () => {
-        await updateMinNFTStatus(mintNft.id, NFTMintStatus.FAILED, '')
+        await updateMinNFTStatus(payload.nftMintId, NFTMintStatus.FAILED, '')
       })
     } else {
       throw new RetryAfterError('NFT not processed yet', '20s')
