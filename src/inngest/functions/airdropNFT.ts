@@ -20,41 +20,37 @@ export const airdropNFTWithInngest = inngest.createFunction(
   async ({ event, step }) => {
     const payload = event.data as airdropPayload
 
-    const queryId = await step.run('airdropNFT', async () => {
+    const queryId = await step.run('airdrop-NFT', async () => {
       return await engineAirdropNFT(payload.contractAddress, payload.recipientWalletAddress, 1)
-    })
-
-    await step.run('update-mintNFT-Status', async () => {
-      await updateMinNFTStatus(payload.nftMintId, NFTMintStatus.CLAIMED, '')
     })
 
     let attempt = 1
     const finaleStates = ['mined', 'errored', 'cancelled']
-    let resultWeWant: string | null = null
+    let mintStatus: string | null = null
     let transactionHash: string | null
     while (
-      (attempt <= 5 && resultWeWant === null) ||
-      (attempt <= 5 && resultWeWant !== null && !finaleStates.includes(resultWeWant))
+      (attempt <= 5 && mintStatus === null) ||
+      (attempt <= 5 && mintStatus !== null && !finaleStates.includes(mintStatus))
     ) {
-      await step.sleep('wait-before-checking-status-' + attempt, `${attempt * 20}s`)
+      await step.sleep(`wait-before-checking-status-${attempt}`, `${attempt * 20}s`)
       const transactionStatus = await engineGetMintStatus(queryId)
-      resultWeWant = transactionStatus.status
+      mintStatus = transactionStatus.status
       transactionHash = transactionStatus.transactionHash
       attempt += 1
     }
 
-    if (!resultWeWant || !finaleStates.includes(resultWeWant)) {
+    if (!mintStatus || !finaleStates.includes(mintStatus)) {
       throw new Error('cannot get final states of minting request')
     }
 
-    if (resultWeWant === 'mined') {
+    if (mintStatus === 'mined') {
       await step.run('update-mintNFT-Status', async () => {
         await updateMinNFTStatus(payload.nftMintId, NFTMintStatus.CLAIMED, transactionHash)
       })
       return
     }
 
-    if (resultWeWant === 'errored' || resultWeWant === 'cancelled') {
+    if (mintStatus === 'errored' || mintStatus === 'cancelled') {
       await step.run('update-mintNFT-Status', async () => {
         await updateMinNFTStatus(payload.nftMintId, NFTMintStatus.FAILED, transactionHash)
       })
