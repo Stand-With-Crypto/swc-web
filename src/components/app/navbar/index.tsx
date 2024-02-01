@@ -1,4 +1,3 @@
-import { AccountAuthButton } from '@/components/app/accountAuth/context'
 import { NavbarSessionButton } from '@/components/app/navbar/navbarSessionButton'
 import { navbarSessionButtonMessages } from '@/components/app/navbar/navbarSessionButton/navbarSessionButtonClient.messages'
 import { Button } from '@/components/ui/button'
@@ -88,7 +87,7 @@ export async function Navbar({ locale }: { locale: SupportedLocale }) {
             )
           })}
         </div>
-        <Drawer direction="top">
+        <Drawer>
           <DrawerTrigger asChild>
             <button className="py-3 pl-3 md:hidden">
               <span className="sr-only">Open navigation menu</span>

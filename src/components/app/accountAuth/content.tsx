@@ -209,81 +209,6 @@ export function AccountAuthContent(props: {
     )
   }
 
-  const isConnectingWalletUI = typeof screen !== 'string'
-  const connectMethods = (
-    <>
-      <EmailForm
-        onSubmit={({ emailAddress }) => {
-          setLastAttemptedMethod('email')
-          setOTPEmailAddress(emailAddress)
-          setScreen(ReservedScreens.OTP_EMAIL_CONFIRMATION)
-        }}
-      />
-
-      <div className="flex w-full items-center gap-2">
-        <hr className="flex-1" />
-        <span className="text-sm text-muted-foreground">Or</span>
-        <hr className="flex-1" />
-      </div>
-
-      <div className="w-full">
-        <div className="space-y-4">
-          {socialLoginConfig && (
-            <Button
-              variant="secondary"
-              className="flex w-full items-center gap-2"
-              size="lg"
-              onClick={handleLoginWithGoogle}
-            >
-              <NextImage src={GOOGLE_AUTH_LOGO} width={24} height={24} alt="" />
-              <span>Continue with Google</span>
-            </Button>
-          )}
-
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button variant="secondary" className="flex w-full items-center gap-2" size="lg">
-                {previewIcons.map(iconUrl => (
-                  <NextImage key={iconUrl} src={iconUrl} width={24} height={24} alt="" />
-                ))}
-                <span>Connect a wallet</span>
-              </Button>
-            </DialogTrigger>
-            <DialogContent
-              // Match the spacings of thirdweb's wallet connect UI on desktop
-              className={cn(!isMobile && isConnectingWalletUI && 'p-0')}
-              closeClassName={cn(isConnectingWalletUI && 'top-6 right-6')}
-              touchableIndicatorClassName={cn(isConnectingWalletUI && 'mb-0')}
-            >
-              {isConnectingWalletUI ? (
-                getWalletUI(screen)
-              ) : (
-                <WalletConnect
-                  walletConfigs={nonSocialLoginConfigs}
-                  onGetStarted={() => {
-                    setScreen(ReservedScreens.GET_STARTED)
-                  }}
-                  setSelectionData={setSelectionData}
-                  selectWallet={handleSelect}
-                  selectUIProps={selectUIProps}
-                />
-              )}
-            </DialogContent>
-          </Dialog>
-        </div>
-      </div>
-    </>
-  )
-
-  const signatureScreen = (
-    <SignatureScreen
-      onDone={() => {
-        registerLoginAttemptOnAnalytics()
-        onClose()
-      }}
-    />
-  )
-
   if (screen === ReservedScreens.OTP_EMAIL_CONFIRMATION && OTPEmailAddress) {
     return (
       <>
@@ -306,16 +231,83 @@ export function AccountAuthContent(props: {
       <>
         {isConnectingWithGoogle && <LoadingOverlay />}
 
-        {signatureScreen}
+        <SignatureScreen
+          onDone={() => {
+            registerLoginAttemptOnAnalytics()
+            onClose()
+          }}
+        />
       </>
     )
   }
 
+  const isConnectingWalletUI = typeof screen !== 'string'
   return (
     <>
       {isConnectingWithGoogle && <LoadingOverlay />}
 
-      <ConnectionMethodsContainer>{connectMethods}</ConnectionMethodsContainer>
+      <ConnectionMethodsContainer>
+        <EmailForm
+          onSubmit={({ emailAddress }) => {
+            setLastAttemptedMethod('email')
+            setOTPEmailAddress(emailAddress)
+            setScreen(ReservedScreens.OTP_EMAIL_CONFIRMATION)
+          }}
+        />
+
+        <div className="flex w-full items-center gap-2">
+          <hr className="flex-1" />
+          <span className="text-sm text-muted-foreground">Or</span>
+          <hr className="flex-1" />
+        </div>
+
+        <div className="w-full">
+          <div className="space-y-4">
+            {socialLoginConfig && (
+              <Button
+                variant="secondary"
+                className="flex w-full items-center gap-2"
+                size="lg"
+                onClick={handleLoginWithGoogle}
+              >
+                <NextImage src={GOOGLE_AUTH_LOGO} width={24} height={24} alt="" />
+                <span>Continue with Google</span>
+              </Button>
+            )}
+
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant="secondary" className="flex w-full items-center gap-2" size="lg">
+                  {previewIcons.map(iconUrl => (
+                    <NextImage key={iconUrl} src={iconUrl} width={24} height={24} alt="" />
+                  ))}
+                  <span>Connect a wallet</span>
+                </Button>
+              </DialogTrigger>
+              <DialogContent
+                // Match the spacings of thirdweb's wallet connect UI on desktop
+                className={cn(!isMobile && isConnectingWalletUI && 'p-0')}
+                closeClassName={cn(isConnectingWalletUI && 'top-6 right-6')}
+                touchableIndicatorClassName={cn(isConnectingWalletUI && 'mb-0')}
+              >
+                {isConnectingWalletUI ? (
+                  getWalletUI(screen)
+                ) : (
+                  <WalletConnect
+                    walletConfigs={nonSocialLoginConfigs}
+                    onGetStarted={() => {
+                      setScreen(ReservedScreens.GET_STARTED)
+                    }}
+                    setSelectionData={setSelectionData}
+                    selectWallet={handleSelect}
+                    selectUIProps={selectUIProps}
+                  />
+                )}
+              </DialogContent>
+            </Dialog>
+          </div>
+        </div>
+      </ConnectionMethodsContainer>
     </>
   )
 }

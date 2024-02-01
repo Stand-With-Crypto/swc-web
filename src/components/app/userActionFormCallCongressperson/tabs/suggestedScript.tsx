@@ -137,7 +137,6 @@ export function SuggestedScript({
           ) : (
             <Button asChild>
               <TrackedExternalLink
-                target="_self"
                 ref={ref}
                 href={`tel:${phoneNumber}`}
                 onClick={() => setIsCalling(true)}
