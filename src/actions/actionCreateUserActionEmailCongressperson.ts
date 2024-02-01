@@ -160,8 +160,11 @@ export async function actionCreateUserActionEmailCongressperson(input: Input) {
     $name: userFullName(validatedFields.data),
   })
 
-  // Send email via Capitol Canary, and add user to Capitol Canary email subscriber list.
-  // By this point, the email address and physical address should have been added to our database.
+  /**
+   * Send email via Capitol Canary, and add user to Capitol Canary email subscriber list.
+   * Inngest will create a new advocate in Capitol Canary if we do not have the user's advocate ID, or will reuse an existing advocate.
+   * By this point, the email address and physical address should have been added to our database.
+   */
   const payload: EmailRepViaCapitolCanaryPayloadRequirements = {
     campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_EMAIL_REPRESENTATIVE),
     user: {
@@ -170,11 +173,11 @@ export async function actionCreateUserActionEmailCongressperson(input: Input) {
     },
     userEmailAddress: user.userEmailAddresses.find(
       emailAddr => emailAddr.emailAddress === validatedFields.data.emailAddress,
-    )!,
+    ),
     opts: {
       isEmailOptin: true,
     },
-    emailSubject: 'Support Crypto', // This does not particularly matter for now as subject is currently overridden in Capitol Canary.
+    emailSubject: 'Support Crypto', // This does not particularly matter for now as subject is currently overridden in the Capitol Canary admin settings.
     emailMessage: validatedFields.data.message,
   }
   await inngest.send({

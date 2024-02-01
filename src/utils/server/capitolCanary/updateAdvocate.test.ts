@@ -5,18 +5,21 @@ import {
   CapitolCanaryCampaignName,
   getCapitolCanaryCampaignID,
 } from '@/utils/server/capitolCanary/campaigns'
-import { formatCapitolCanaryAdvocateCreationRequest } from '@/utils/server/capitolCanary/createAdvocate'
 import { UpsertAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
+import { formatCapitolCanaryAdvocateUpdateRequest } from '@/utils/server/capitolCanary/updateAdvocate'
 import { faker } from '@faker-js/faker'
 import { expect } from '@jest/globals'
 
-it('formats the "create capitol canary advocate" request correctly', () => {
+it('formats the "update capitol canary advocate" request correctly', () => {
   // Set the seed so that the mocked output is deterministic.
   faker.seed(1)
 
   const mockedUser = mockUser()
   const mockedAddress = mockAddress()
   const mockedEmailAddress = mockUserEmailAddress()
+
+  mockedUser.capitolCanaryAdvocateId = 68251920
+  mockedUser.capitolCanaryInstance = 'STAND_WITH_CRYPTO'
 
   const payload: UpsertAdvocateInCapitolCanaryPayloadRequirements = {
     campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_MEMBERSHIP),
@@ -43,12 +46,13 @@ it('formats the "create capitol canary advocate" request correctly', () => {
     },
   }
 
-  const formattedRequest = formatCapitolCanaryAdvocateCreationRequest(payload)
+  const formattedRequest = formatCapitolCanaryAdvocateUpdateRequest(payload)
 
   expect(formattedRequest).toMatchInlineSnapshot(`
 {
   "address1": "9764 Domenico Viaduct",
   "address2": "Suite 759",
+  "advocateid": 68251920,
   "campaigns": [
     142628,
   ],
