@@ -31,8 +31,6 @@ export function AccountAuth({
   }, [closeAccountAuthModal, router])
 
   if (isAutoConnecting || connectionStatus === 'unknown') {
-    console.log({ isAutoConnecting, connectionStatus })
-    // TODO: add loading state
     return null
   }
 

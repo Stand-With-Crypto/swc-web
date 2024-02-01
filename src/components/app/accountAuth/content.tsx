@@ -12,24 +12,39 @@ import {
   useWallets,
 } from '@thirdweb-dev/react'
 import * as Sentry from '@sentry/react'
+import { noop } from 'lodash'
+import { useForm } from 'react-hook-form'
+import { object } from 'zod'
 
 import { Noop } from '@/components/ui/noop'
 import { NextImage } from '@/components/ui/image'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
-import { FormItem } from '@/components/ui/form'
-import { Label } from '@/components/ui/label'
+import {
+  Form,
+  FormControl,
+  FormErrorMessage,
+  FormField,
+  FormItem,
+  FormLabel,
+} from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { useResponsiveDialog } from '@/components/ui/responsiveDialog'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { useLoadingCallback } from '@/hooks/useLoadingCallback'
+import { InternalLink } from '@/components/ui/link'
+import { useIntlUrls } from '@/hooks/useIntlUrls'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { zodEmailAddress } from '@/validation/fields/zodEmailAddress'
 
 import { ReservedScreens } from './screen'
 import { WalletSelectUIProps, WalletConnect } from './walletConnect'
 import { GOOGLE_AUTH_LOGO, ACCOUNT_AUTH_CONFIG } from './constants'
 import { SignatureScreen } from './signatureScreen'
-import { noop } from 'lodash'
+import { OTPEmailConfirmation } from './emailConfirmation'
+import { toast } from 'sonner'
+import { toastGenericError } from '@/utils/web/toastUtils'
 
 export function AccountAuthContent(props: {
   screen: string | WalletConfig
@@ -41,6 +56,7 @@ export function AccountAuthContent(props: {
   const { screen, setScreen, initialScreen, onClose } = props
 
   const [selectionData, setSelectionData] = React.useState()
+  const [OTPEmailAddress, setOTPEmailAddress] = React.useState('')
   const { Dialog, DialogContent, DialogTrigger } = useResponsiveDialog()
 
   const { user } = useUser()
@@ -89,13 +105,50 @@ export function AccountAuthContent(props: {
     [walletConfigs],
   )
 
-  const [handleLoginWithGoogle, isLoading] = useLoadingCallback(async () => {
+  const [handleLoginWithGoogle, isConnectingWithGoogle] = useLoadingCallback(async () => {
     await connectEmbeddedWallet({
       strategy: 'google',
     })
       .then(setConnectedWallet)
       .catch(Sentry.captureException)
   }, [connectEmbeddedWallet, setConnectedWallet])
+
+  const getOTPErrorType = React.useCallback((errorMessage: string): 'internal' | 'expiredCode' => {
+    if (errorMessage.includes('Your OTP code is invalid or expired')) {
+      return 'expiredCode'
+    }
+
+    return 'internal'
+  }, [])
+
+  const [handleLoginWithOTP, isConnectingWithOTP] = useLoadingCallback(
+    async (verificationCode: string) => {
+      const wallet = await connectEmbeddedWallet({
+        strategy: 'email_verification',
+        verificationCode,
+        email: OTPEmailAddress,
+      }).catch(err => {
+        const errorType = getOTPErrorType(err.message)
+
+        if (errorType === 'expiredCode') {
+          toast.error('Invalid code', {
+            description: 'Your verification code is invalid or expired. Please try again.',
+          })
+        }
+
+        if (errorType === 'internal') {
+          Sentry.captureException(err)
+          toastGenericError()
+        }
+      })
+
+      if (wallet) {
+        setConnectedWallet(wallet)
+        handleConnected()
+      }
+    },
+    [connectEmbeddedWallet, OTPEmailAddress, getOTPErrorType, setConnectedWallet, handleConnected],
+  )
 
   const selectUIProps: WalletSelectUIProps = {
     connect,
@@ -134,54 +187,88 @@ export function AccountAuthContent(props: {
     )
   }
 
-  const walletConnect = (
-    <div className="space-y-4">
-      {socialLoginConfig && (
-        <Button
-          variant="secondary"
-          className="flex w-full items-center gap-2"
-          size="lg"
-          onClick={handleLoginWithGoogle}
-        >
-          <NextImage src={GOOGLE_AUTH_LOGO} width={24} height={24} alt="" />
-          <span>Continue with Google</span>
-        </Button>
-      )}
+  const connectMethods = (
+    <>
+      <EmailForm
+        onSubmit={({ emailAddress }) => {
+          setOTPEmailAddress(emailAddress)
+          setScreen(ReservedScreens.OTP_EMAIL_CONFIRMATION)
+        }}
+      />
 
-      <Dialog>
-        <DialogTrigger asChild>
-          <Button variant="secondary" className="flex w-full items-center gap-2" size="lg">
-            {previewIcons.map(iconUrl => (
-              <NextImage key={iconUrl} src={iconUrl} width={24} height={24} alt="" />
-            ))}
-            <span>Connect a wallet</span>
-          </Button>
-        </DialogTrigger>
-        <DialogContent>
-          {typeof screen !== 'string' ? (
-            getWalletUI(screen)
-          ) : (
-            <WalletConnect
-              walletConfigs={nonSocialLoginConfigs}
-              onGetStarted={() => {
-                setScreen(ReservedScreens.GET_STARTED)
-              }}
-              setSelectionData={setSelectionData}
-              selectWallet={handleSelect}
-              selectUIProps={selectUIProps}
-            />
+      <div className="flex w-full items-center gap-2">
+        <hr className="flex-1" />
+        <span className="text-sm text-muted-foreground">Or</span>
+        <hr className="flex-1" />
+      </div>
+
+      <div className="w-full">
+        <div className="space-y-4">
+          {socialLoginConfig && (
+            <Button
+              variant="secondary"
+              className="flex w-full items-center gap-2"
+              size="lg"
+              onClick={handleLoginWithGoogle}
+            >
+              <NextImage src={GOOGLE_AUTH_LOGO} width={24} height={24} alt="" />
+              <span>Continue with Google</span>
+            </Button>
           )}
-        </DialogContent>
-      </Dialog>
-    </div>
+
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant="secondary" className="flex w-full items-center gap-2" size="lg">
+                {previewIcons.map(iconUrl => (
+                  <NextImage key={iconUrl} src={iconUrl} width={24} height={24} alt="" />
+                ))}
+                <span>Connect a wallet</span>
+              </Button>
+            </DialogTrigger>
+            <DialogContent>
+              {typeof screen !== 'string' ? (
+                getWalletUI(screen)
+              ) : (
+                <WalletConnect
+                  walletConfigs={nonSocialLoginConfigs}
+                  onGetStarted={() => {
+                    setScreen(ReservedScreens.GET_STARTED)
+                  }}
+                  setSelectionData={setSelectionData}
+                  selectWallet={handleSelect}
+                  selectUIProps={selectUIProps}
+                />
+              )}
+            </DialogContent>
+          </Dialog>
+        </div>
+      </div>
+    </>
   )
 
   const signatureScreen = <SignatureScreen onDone={onClose} />
 
+  if (screen === ReservedScreens.OTP_EMAIL_CONFIRMATION && OTPEmailAddress) {
+    return (
+      <>
+        {isConnectingWithOTP && <LoadingOverlay />}
+
+        <OTPEmailConfirmation
+          onConfirm={handleLoginWithOTP}
+          emailAddress={OTPEmailAddress}
+          onBack={() => {
+            setScreen(ReservedScreens.MAIN)
+            setOTPEmailAddress('')
+          }}
+        />
+      </>
+    )
+  }
+
   if (screen === ReservedScreens.SIGN_IN) {
     return (
       <>
-        {isLoading && <LoadingOverlay />}
+        {isConnectingWithGoogle && <LoadingOverlay />}
 
         {signatureScreen}
       </>
@@ -190,14 +277,15 @@ export function AccountAuthContent(props: {
 
   return (
     <>
-      {isLoading && <LoadingOverlay />}
+      {isConnectingWithGoogle && <LoadingOverlay />}
 
-      <Container>{walletConnect}</Container>
+      <ConnectionMethodsContainer>{connectMethods}</ConnectionMethodsContainer>
     </>
   )
 }
 
-function Container({ children }: React.PropsWithChildren) {
+function ConnectionMethodsContainer({ children }: React.PropsWithChildren) {
+  const urls = useIntlUrls()
   return (
     <div className="p-6">
       <div className="mx-auto flex max-w-[460px] flex-col items-center gap-8">
@@ -220,25 +308,59 @@ function Container({ children }: React.PropsWithChildren) {
           </div>
         </div>
 
-        <div className="w-full space-y-4">
-          <FormItem>
-            <Label htmlFor="email-input">Email</Label>
-            <Input id="email-input" placeholder="Email address" type="email" />
-          </FormItem>
+        {children}
 
-          <Button className="w-full" size="lg">
+        <p className="text-center text-xs text-muted-foreground">
+          By signing up, I understand that Stand With Crypto and its vendors may collect and use my
+          Personal Information. To learn more, visit the{' '}
+          <InternalLink className="text-blue-600" target="_blank" href={urls.privacyPolicy()}>
+            Stand With Crypto Alliance Privacy Policy
+          </InternalLink>{' '}
+          and{' '}
+          <InternalLink className="text-blue-600" target="_blank" href={urls.privacyPolicy()}>
+            Quorum Privacy Policy (TODO: Figure out where this link should go)
+          </InternalLink>
+        </p>
+      </div>
+    </div>
+  )
+}
+
+function EmailForm({ onSubmit }: { onSubmit: (data: { emailAddress: string }) => void }) {
+  const form = useForm({
+    defaultValues: {
+      emailAddress: '',
+    },
+    mode: 'onBlur',
+    resolver: zodResolver(
+      object({
+        emailAddress: zodEmailAddress,
+      }),
+    ),
+  })
+
+  return (
+    <Form {...form}>
+      <form className="w-full" onSubmit={form.handleSubmit(onSubmit)}>
+        <div className="w-full space-y-4">
+          <FormField
+            control={form.control}
+            name="emailAddress"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Email</FormLabel>
+                <FormControl>
+                  <Input placeholder="Email address" {...field} />
+                </FormControl>
+                <FormErrorMessage />
+              </FormItem>
+            )}
+          />
+          <Button className="w-full" size="lg" type="submit">
             Continue
           </Button>
         </div>
-
-        <div className="flex w-full items-center gap-2">
-          <hr className="flex-1" />
-          <span className="text-sm text-muted-foreground">Or</span>
-          <hr className="flex-1" />
-        </div>
-
-        <div className="w-full">{children}</div>
-      </div>
-    </div>
+      </form>
+    </Form>
   )
 }

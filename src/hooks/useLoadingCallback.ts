@@ -1,8 +1,10 @@
 import React from 'react'
 
-export function useLoadingCallback<T extends (...args: unknown[]) => unknown | Promise<unknown>>(
+// `(...args: any)` is necessary for type inference to work properly
+// The type of T will be inferred by `callback` on usage though
+export function useLoadingCallback<T extends (...args: any) => unknown | Promise<unknown>>(
   callback: T,
-  deps: React.DependencyList,
+  deps: React.DependencyList = [],
 ): [T, boolean] {
   const [loading, setLoading] = React.useState(false)
 

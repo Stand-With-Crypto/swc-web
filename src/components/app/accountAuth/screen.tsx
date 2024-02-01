@@ -5,6 +5,7 @@ export enum ReservedScreens {
   MAIN = 'main',
   GET_STARTED = 'getStarted',
   SIGN_IN = 'signIn',
+  OTP_EMAIL_CONFIRMATION = 'OTPEmailConfirmation',
 }
 
 type Screen = string | WalletConfig
@@ -16,7 +17,7 @@ export function useScreen() {
       ? walletConfigs[0]
       : ReservedScreens.MAIN) || ReservedScreens.MAIN
 
-  const [screen, setScreen] = useState<string | WalletConfig>(initialScreen)
+  const [screen, setScreen] = useState<Screen>(initialScreen)
   const prevInitialScreen = useRef(initialScreen)
   const wallet = useWallet()
 
