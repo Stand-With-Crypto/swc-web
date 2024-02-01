@@ -20,7 +20,7 @@ export function useApiHomepageTopLevelMetrics(initial: GetHomepageTopLevelMetric
           initial.countPolicymakerContacts.countUserActionEmailRecipients - 1,
       },
     }
-  const initialDelayToShowAnimation = 1000 * 3
+  const initialDelayToShowAnimation = 1500
   const [refreshInterval, setRefreshInterval] = useState(initialDelayToShowAnimation)
   /*
     After we initially fetch data we can slow down how often we check for additional data
