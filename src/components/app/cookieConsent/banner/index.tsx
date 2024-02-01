@@ -9,7 +9,6 @@ import { InternalLink } from '@/components/ui/link'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { SupportedLocale } from '@/intl/locales'
 
-import styles from './banner.module.css'
 import ManageCookiesModal from '@/components/app/cookieConsent/cookieConsentManageModal'
 import { CookieConsentPermissions } from '@/utils/shared/cookieConsent'
 
@@ -31,39 +30,52 @@ export function CookieConsentBanner({
   return (
     <div
       className={cn(
-        'max-w-screen fixed bottom-0 left-0 w-full bg-secondary p-4 pb-2 md:p-6',
-        styles.banner,
+        'max-w-screen fixed bottom-0 left-0 flex w-full flex-col bg-secondary p-3 pb-2 md:flex-row md:justify-between md:gap-5 md:p-6',
       )}
     >
-      <p className={cn('text-xs text-muted-foreground md:max-w-4xl', styles.description)}>
-        We use our own and third-party cookies on our website to enhance your experience, analyze
-        traffic, and for security. Cookies may collect your personal information, such as IP
-        addresses or device identifiers, which we may disclose to our third-party partners. You may
-        opt out of the cookies that are not strictly necessary by choosing from the below options.
-        For more information, visit our{' '}
-        <InternalLink className="underline" href={urls.privacyPolicy()}>
-          Privacy Policy
-        </InternalLink>
-        .
-      </p>
-
-      <div className={cn('flex items-center gap-4 md:justify-end', styles.actions)}>
-        <ManageCookiesModal onSubmit={onAcceptSpecificCookies} />
-        <Button variant="link" className="p-0 font-bold" onClick={onRejectAll}>
-          Reject all
-        </Button>
-        {/* TODO: Change this to primary color once tailwind is configured properly */}
-        <Button variant="link" className="p-0 font-bold text-blue-500" onClick={onAcceptAll}>
-          Accept all
-        </Button>
-      </div>
-
-      <div className={cn('flex items-start justify-end md:items-center', styles.close)}>
+      <div className="relative">
         <button
           onClick={onRejectAll}
-          className="h-auto rounded-full bg-gray-300 p-1 text-white transition-all hover:bg-gray-400"
+          className="relative right-[-4px] top-[-4px] float-right h-auto px-1 md:static md:hidden"
         >
-          <X className="h-4 w-4" />
+          <div className="rounded-full bg-gray-300 p-1 text-white transition-all hover:bg-gray-400">
+            <X className="h-4 w-4" />
+          </div>
+        </button>
+        <p className={cn('max-w-3xl text-justify text-xs text-muted-foreground md:text-left')}>
+          We use our own and third-party cookies on our website to enhance your experience, analyze
+          traffic, and for security. You may opt out of the cookies that are not strictly necessary
+          by choosing from the below options. For more information, visit our{' '}
+          <InternalLink className="underline" href={urls.privacyPolicy()}>
+            Privacy Policy
+          </InternalLink>
+          .
+        </p>
+      </div>
+
+      <div className={cn('flex items-center justify-between gap-4 md:justify-end')}>
+        <div className="flex gap-4">
+          <ManageCookiesModal onSubmit={onAcceptSpecificCookies}>
+            <Button variant="link" className="p-0 text-xs md:text-sm">
+              Manage cookies
+            </Button>
+          </ManageCookiesModal>
+          <Button variant="link" className="p-0 text-xs md:text-sm" onClick={onRejectAll}>
+            Reject all
+          </Button>
+        </div>
+        {/* TODO: Change this to primary color once tailwind is configured properly */}
+        <Button
+          variant="link"
+          className="p-0 px-4 font-bold text-blue-500 md:px-0"
+          onClick={onAcceptAll}
+        >
+          Accept all
+        </Button>
+        <button onClick={onRejectAll} className="hidden md:block">
+          <div className="rounded-full bg-gray-300 p-1 text-white transition-all hover:bg-gray-400">
+            <X className="h-4 w-4" />
+          </div>
         </button>
       </div>
     </div>

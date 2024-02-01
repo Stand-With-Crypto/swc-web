@@ -25,9 +25,10 @@ import { CookieConsentPermissions } from '@/utils/shared/cookieConsent'
 
 export interface ManageCookiesModalProps {
   onSubmit: (accepted: CookieConsentPermissions) => void
+  children: React.ReactNode
 }
 
-export default function ManageCookiesModal({ onSubmit }: ManageCookiesModalProps) {
+export default function ManageCookiesModal({ onSubmit, children }: ManageCookiesModalProps) {
   const dialogProps = useDialog(false)
   const {
     isMobile,
@@ -45,11 +46,7 @@ export default function ManageCookiesModal({ onSubmit }: ManageCookiesModalProps
 
   return (
     <Container {...dialogProps}>
-      <ContainerTrigger asChild>
-        <Button variant="link" className="p-0 font-bold">
-          Manage cookies
-        </Button>
-      </ContainerTrigger>
+      <ContainerTrigger asChild>{children}</ContainerTrigger>
       <ContainerContent>
         <ContainerHeader>
           <ContainerTitle>Cookie Preferences</ContainerTitle>
