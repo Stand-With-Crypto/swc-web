@@ -8,6 +8,7 @@ import { SumDonationsByUser } from '@/data/aggregations/getSumDonationsByUser'
 import { getPublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 import { useApiHomepageCommunityMetrics } from '@/hooks/useApiHomepageCommunityMetrics'
 import { SupportedLocale } from '@/intl/locales'
+import { cn } from '@/utils/web/cn'
 import { AnimatePresence, motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 
@@ -24,7 +25,7 @@ export function RecentActivityAndLeaderboard({
   const { sumDonationsByUser, actions } = useApiHomepageCommunityMetrics(data).data
   const ref = useRef(null)
   const isInVew = useInView(ref, { margin: '-50%', once: true })
-
+  const visibleActions = actions.slice(isInVew ? 0 : 1, actions.length)
   return (
     <Tabs ref={ref} defaultValue={defaultValue} className="mx-auto w-full max-w-2xl">
       <div className="text-center">
@@ -37,13 +38,16 @@ export function RecentActivityAndLeaderboard({
           </TabsTrigger>
         </TabsList>
       </div>
-      <TabsContent value={RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY} className="space-y-7">
+      <TabsContent value={RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY}>
         <div className="mt-2 h-7" />
         <AnimatePresence initial={false}>
-          {actions.slice(isInVew ? 0 : 1, actions.length).map(action => (
+          {visibleActions.map((action, index) => (
             <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'inherit' }}
+              // we apply individual pb to the elements instead of space-y-7 to ensure that there's no jank in the animation as the height transitions in
+              className={cn(index !== 0 && 'pt-7')}
+              transition={{ duration: 0.8 }}
+              initial={{ opacity: 0, height: 0, transform: 'translateY(20px)' }}
+              animate={{ opacity: 1, height: 'inherit', transform: 'translateY(0)' }}
               exit={{ opacity: 0, height: 0 }}
               key={action.id}
             >
