@@ -3,8 +3,10 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
 
-const isLocalDevelopment =
-  process.env.NODE_ENV === 'development' || process.env.VERCEL_ENV === 'development'
+const isDev =
+  process.env.NODE_ENV === 'development' ||
+  process.env.VERCEL_ENV === 'development' ||
+  process.env.NODE_ENV === 'test'
 
 const contentSecurityPolicy = {
   'default-src': ["'self'", 'blob:'],
@@ -14,8 +16,8 @@ const contentSecurityPolicy = {
   ],
   'script-src': [
     "'self'",
-    isLocalDevelopment ? "'unsafe-eval' 'unsafe-inline'" : '', // NextJS requires 'unsafe-eval' in dev (faster source maps)
-    isLocalDevelopment ? '' : 'https://static.ads-twitter.com/uwt.js',
+    isDev ? "'unsafe-eval' 'unsafe-inline'" : '', // NextJS requires 'unsafe-eval' in dev (faster source maps)
+    isDev ? '' : 'https://static.ads-twitter.com/uwt.js',
     'https://*.googleapis.com',
     'https://*.gstatic.com',
     '*.google.com',
