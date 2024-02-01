@@ -4,6 +4,6 @@ import 'server-only'
 
 export const actionDebugSentry = withServerActionMiddleware('actionDebugSentry', _actionDebugSentry)
 
-function _actionDebugSentry(args: any) {
+function _actionDebugSentry() {
   throw new Error('Debug Sentry 2')
 }

@@ -4,9 +4,9 @@ import { headers } from 'next/headers'
 // sentry only allows form data to be passed but we want to support json objects as well so we need to make it form data
 const convertArgsToFormData = <T extends any[]>(args: T) => {
   try {
-    var data = new FormData()
+    const data = new FormData()
     args.forEach((arg, index) => {
-      for (var key in arg) {
+      for (const key in arg) {
         const formattedKey = args.length === 1 ? key : `arg ${index} - ${key}`
         data.append(formattedKey, JSON.stringify(arg[key]))
       }
