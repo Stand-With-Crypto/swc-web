@@ -143,7 +143,7 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
     // and we want to update if the stored primary email address is different than the embedded wallet email address.
     if (
       !userCryptoAddress.user.capitolCanaryAdvocateId ||
-      userCryptoAddress.user.capitolCanaryInstance == CapitolCanaryInstance.LEGACY ||
+      userCryptoAddress.user.capitolCanaryInstance === CapitolCanaryInstance.LEGACY ||
       existingUser?.primaryUserEmailAddress?.emailAddress !== email.emailAddress
     ) {
       const payload: UpsertAdvocateInCapitolCanaryPayloadRequirements = {

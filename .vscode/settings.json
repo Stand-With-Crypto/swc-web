@@ -54,6 +54,7 @@
     "pscale",
     "ratelimit",
     "ratelimiter",
+    "Retriable",
     "sonner",
     "standwithcrypto",
     "subpremise",

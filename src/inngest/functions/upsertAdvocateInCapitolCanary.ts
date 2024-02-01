@@ -49,7 +49,7 @@ export const upsertAdvocateInCapitolCanaryWithInngest = inngest.createFunction(
         'capitol-canary.upsert-advocate.create-advocate-in-capitol-canary',
         async () => {
           const createAdvocateResp = await createAdvocateInCapitolCanary(formattedCreateRequest)
-          if (createAdvocateResp.success != 1) {
+          if (createAdvocateResp.success !== 1) {
             throw new NonRetriableError(
               `client error for creating advocate in capitol canary: ${JSON.stringify(
                 createAdvocateResp,
@@ -89,7 +89,7 @@ export const upsertAdvocateInCapitolCanaryWithInngest = inngest.createFunction(
       'capitol-canary.upsert-advocate.update-advocate-in-capitol-canary',
       async () => {
         const updateAdvocateResp = await updateAdvocateInCapitolCanary(formattedUpdateRequest)
-        if (updateAdvocateResp.success != 1) {
+        if (updateAdvocateResp.success !== 1) {
           throw new NonRetriableError(
             `client error for updating advocate in capitol canary: ${JSON.stringify(
               updateAdvocateResp,

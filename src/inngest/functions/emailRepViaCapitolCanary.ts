@@ -55,7 +55,7 @@ export const emailRepViaCapitolCanaryWithInngest = inngest.createFunction(
         'capitol-canary.email-rep.create-advocate-in-capitol-canary',
         async () => {
           const createAdvocateResp = await createAdvocateInCapitolCanary(formattedCreateRequest)
-          if (createAdvocateResp.success != 1) {
+          if (createAdvocateResp.success !== 1) {
             throw new NonRetriableError(
               `client error for creating advocate in capitol canary: ${JSON.stringify(
                 createAdvocateResp,
@@ -83,7 +83,7 @@ export const emailRepViaCapitolCanaryWithInngest = inngest.createFunction(
         'capitol-canary.email-rep.update-advocate-in-capitol-canary',
         async () => {
           const updateAdvocateResp = await updateAdvocateInCapitolCanary(formattedUpdateRequest)
-          if (updateAdvocateResp.success != 1) {
+          if (updateAdvocateResp.success !== 1) {
             throw new NonRetriableError(
               `client error for updating advocate in capitol canary: ${JSON.stringify(
                 updateAdvocateResp,
@@ -119,7 +119,7 @@ export const emailRepViaCapitolCanaryWithInngest = inngest.createFunction(
       'capitol-canary.email-rep.email-rep-via-capitol-canary',
       async () => {
         const emailRepResp = await emailRepViaCapitolCanary(formattedEmailRepRequest)
-        if (emailRepResp.success != 1) {
+        if (emailRepResp.success !== 1) {
           throw new NonRetriableError(
             `client error for emailing rep via capitol canary: ${JSON.stringify(emailRepResp)}`,
           )
