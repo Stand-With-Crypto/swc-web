@@ -103,13 +103,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'ipfs.io',
-        port: '',
-      },
-      {
-        protocol: 'https',
         hostname: 'euc.li',
-        port: '',
       },
       // dotheysupportit image cdn
       { protocol: 'https', hostname: 'db0prh5pvbqwd.cloudfront.net' },
@@ -133,7 +127,7 @@ const nextConfig = {
       },
       {
         permanent: true,
-        destination: '/action/opt-in  ',
+        destination: '/action/opt-in',
         source: '/member-join',
       },
       {
