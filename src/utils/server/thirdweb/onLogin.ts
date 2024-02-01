@@ -35,7 +35,7 @@ import { inngest } from '@/inngest/inngest'
 import { CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/upsertAdvocateInCapitolCanary'
 import { getLogger } from '@/utils/shared/logger'
 import { CREATE_CAPITOL_CANARY_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/createAdvocateInCapitolCanary'
-import { claimNFT, mintPastActions } from '@/utils/server/airdrop'
+import { claimNFT, mintPastActions } from '@/utils/server/nft'
 
 /*
 The desired behavior of this function:

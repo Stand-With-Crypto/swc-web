@@ -29,6 +29,7 @@ import { zodAddress } from '@/validation/fields/zodAddress'
 import { zodDTSISlug } from '@/validation/fields/zodDTSISlug'
 import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
 import { nativeEnum, object } from 'zod'
+import { claimNFT } from '@/utils/server/nft'
 
 const createActionCallCongresspersonInputValidationSchema = object({
   phoneNumber: zodPhoneNumber.transform(str => str && normalizePhoneNumber(str)),
@@ -36,9 +37,6 @@ const createActionCallCongresspersonInputValidationSchema = object({
   dtsiSlug: zodDTSISlug,
   address: zodAddress,
 })
-import { createActionCallCongresspersonInputValidationSchema } from './inputValidationSchema'
-import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
-import { claimNFT } from '@/utils/server/airdrop'
 
 export type CreateActionCallCongresspersonInput = z.infer<
   typeof createActionCallCongresspersonInputValidationSchema
@@ -108,7 +106,7 @@ async function _actionCreateUserActionCallCongressperson(
     sharedDependencies: { sessionId, analytics, peopleAnalytics },
   })
 
-  if (user.primaryUserCryptoAddress != null) {
+  if (user.primaryUserCryptoAddress !== null) {
     logger.info('airdrop NFT')
     await claimNFT(userAction, user.primaryUserCryptoAddress)
   }

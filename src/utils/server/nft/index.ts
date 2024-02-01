@@ -1,32 +1,25 @@
 import { prismaClient } from '@/utils/server/prismaClient'
 import { $Enums, NFTCurrency, UserAction, UserActionType, UserCryptoAddress } from '@prisma/client'
-import {
-  CallYourRepresentativeSept11ThirdWebNFT,
-  NFTInformation,
-  SWCShieldThirdWebNFT,
-} from '@/utils/server/airdrop/nfts'
+
 import { getLogger } from '@/utils/shared/logger'
 import NFTMintStatus = $Enums.NFTMintStatus
 import { inngest } from '@/inngest/inngest'
 import { AIRDROP_NFT_INNGEST_EVENT_NAME } from '@/inngest/functions/airdropNFT'
-import { airdropPayload } from '@/utils/server/airdrop/payload'
+import { airdropPayload } from '@/utils/server/nft/payload'
+import { ACTION_NFT_SLUG, NFT_CONTRACT_ADDRESS } from '@/utils/server/nft/contractAddress'
 
 const USER_ACTION_WITH_NFT = [UserActionType.OPT_IN, UserActionType.CALL]
-
-const USER_ACTION_TO_NFT_INFORMATION: { [key: string]: NFTInformation } = {}
-USER_ACTION_TO_NFT_INFORMATION[UserActionType.OPT_IN] = SWCShieldThirdWebNFT
-USER_ACTION_TO_NFT_INFORMATION[UserActionType.CALL] = CallYourRepresentativeSept11ThirdWebNFT
 
 const logger = getLogger(`airdrop`)
 
 export async function claimNFT(userAction: UserAction, userCryptoAddress: UserCryptoAddress) {
   logger.info('Triggered')
-  const nft = USER_ACTION_TO_NFT_INFORMATION[userAction.actionType]
-  if (nft === null) {
+  const nftSlug = ACTION_NFT_SLUG[userAction.actionType]
+  if (nftSlug === null) {
     return
   }
 
-  if (await userAlreadyClaimedNFT(userAction.userId, nft.slug)) {
+  if (await userAlreadyClaimedNFT(userAction.userId, nftSlug)) {
     logger.info('nft already requested or claimed')
     return
   }
@@ -39,10 +32,10 @@ export async function claimNFT(userAction: UserAction, userCryptoAddress: UserCr
       campaignName: userAction.campaignName,
       nftMint: {
         create: {
-          nftSlug: nft.slug,
+          nftSlug: nftSlug,
           status: NFTMintStatus.REQUESTED,
           costAtMint: 0.0,
-          contractAddress: nft.contractAddress,
+          contractAddress: NFT_CONTRACT_ADDRESS[nftSlug],
           costAtMintCurrencyCode: NFTCurrency.ETH,
           transactionHash: '',
           costAtMintUsd: '0',
@@ -57,7 +50,7 @@ export async function claimNFT(userAction: UserAction, userCryptoAddress: UserCr
   const payload: airdropPayload = {
     nftMintId: userMintAction.nftMint!.id,
     recipientWalletAddress: userCryptoAddress.cryptoAddress,
-    contractAddress: nft.contractAddress,
+    contractAddress: NFT_CONTRACT_ADDRESS[nftSlug],
   }
 
   await inngest.send({
