@@ -173,7 +173,7 @@ export async function actionCreateUserActionEmailCongressperson(input: Input) {
     },
     userEmailAddress: user.userEmailAddresses.find(
       emailAddr => emailAddr.emailAddress === validatedFields.data.emailAddress,
-    )!,
+    ),
     opts: {
       isEmailOptin: true,
     },

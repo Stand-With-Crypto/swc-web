@@ -149,27 +149,12 @@ async function handleCapitolCanaryAdvocateUpsert(
     primaryUserEmailAddress: UserEmailAddress | null
   } & { userEmailAddresses: UserEmailAddress[] },
 ) {
-  // We should NOT send the upsert payload if any of these conditions has true:
-  // - The updated user has no email address nor phone number.
-  // - We already have an SwC advocate ID and that the update did not change the name, address, email, or phone number, or that they have not opted in/out of SMS.
-  if (
-    (!primaryUserEmailAddress && !updatedUser.phoneNumber) ||
-    (updatedUser.capitolCanaryAdvocateId &&
-      updatedUser.capitolCanaryInstance !== CapitolCanaryInstance.LEGACY &&
-      oldUser.firstName === updatedUser.firstName &&
-      oldUser.lastName === updatedUser.lastName &&
-      oldUser.address?.googlePlaceId === updatedUser.address?.googlePlaceId &&
-      oldUser.primaryUserEmailAddress?.emailAddress === primaryUserEmailAddress?.emailAddress &&
-      oldUser.phoneNumber === updatedUser.phoneNumber &&
-      oldUser.hasOptedInToSms === updatedUser.hasOptedInToSms)
-  ) {
-    return
-  }
-
-  // Unsubscribe the old email address or phone number if they have changed.
+  // Send unsubscribe payload if the old email address or phone number has changed, or if the user removed their old email or phone number.
   if (
     oldUser.primaryUserEmailAddress?.emailAddress !== primaryUserEmailAddress?.emailAddress ||
-    oldUser.phoneNumber !== updatedUser.phoneNumber
+    oldUser.phoneNumber !== updatedUser.phoneNumber ||
+    primaryUserEmailAddress === null ||
+    (oldUser.phoneNumber && !updatedUser.phoneNumber)
   ) {
     const unsubscribePayload: UpsertAdvocateInCapitolCanaryPayloadRequirements = {
       campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
@@ -180,11 +165,15 @@ async function handleCapitolCanaryAdvocateUpsert(
       userEmailAddress: oldUser.primaryUserEmailAddress, // Using old email here.
       opts: {
         isEmailOptout:
-          oldUser.primaryUserEmailAddress?.emailAddress !== primaryUserEmailAddress?.emailAddress
+          oldUser.primaryUserEmailAddress?.emailAddress !== primaryUserEmailAddress?.emailAddress ||
+          primaryUserEmailAddress === null
             ? true
-            : false, // Opt-out of email if email changed.
+            : false,
         isSmsOptout:
-          oldUser.phoneNumber && oldUser.phoneNumber !== updatedUser.phoneNumber ? true : false, // Opt-out of SMS if phone number changed.
+          oldUser.phoneNumber !== updatedUser.phoneNumber ||
+          (oldUser.phoneNumber && !updatedUser.phoneNumber)
+            ? true
+            : false,
       },
     }
     await inngest.send({
@@ -193,22 +182,35 @@ async function handleCapitolCanaryAdvocateUpsert(
     })
   }
 
-  // Common payload consists of new user information.
-  const payload: UpsertAdvocateInCapitolCanaryPayloadRequirements = {
-    campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
-    user: {
-      ...updatedUser,
-      address: updatedUser.address,
-    },
-    userEmailAddress: primaryUserEmailAddress!,
-    opts: {
-      isEmailOptin: true,
-      isSmsOptin: hasOptedInToSms,
-      isSmsOptout: oldUser.hasOptedInToSms && !hasOptedInToSms,
-    },
+  // Only send updating payload if we do not have an SwC advocate ID or there has been a changed field, and we at least have email or phone number.
+  // Breaking early if nothing has been changed.
+  if (
+    (!updatedUser.capitolCanaryAdvocateId ||
+      updatedUser.capitolCanaryInstance === CapitolCanaryInstance.LEGACY ||
+      oldUser.firstName !== updatedUser.firstName ||
+      oldUser.lastName !== updatedUser.lastName ||
+      oldUser.address?.googlePlaceId !== updatedUser.address?.googlePlaceId ||
+      oldUser.primaryUserEmailAddress?.emailAddress !== primaryUserEmailAddress?.emailAddress ||
+      oldUser.phoneNumber !== updatedUser.phoneNumber ||
+      oldUser.hasOptedInToSms !== updatedUser.hasOptedInToSms) &&
+    (primaryUserEmailAddress || updatedUser.phoneNumber)
+  ) {
+    const payload: UpsertAdvocateInCapitolCanaryPayloadRequirements = {
+      campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
+      user: {
+        ...updatedUser,
+        address: updatedUser.address,
+      },
+      userEmailAddress: primaryUserEmailAddress,
+      opts: {
+        isEmailOptin: true,
+        isSmsOptin: hasOptedInToSms,
+        isSmsOptout: oldUser.hasOptedInToSms && !hasOptedInToSms, // Only opt-out of SMS if the user has opted in before and now they are opting out.
+      },
+    }
+    await inngest.send({
+      name: CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME,
+      data: payload,
+    })
   }
-  await inngest.send({
-    name: CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME,
-    data: payload,
-  })
 }

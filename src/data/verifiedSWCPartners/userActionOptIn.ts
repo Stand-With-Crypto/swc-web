@@ -149,7 +149,7 @@ export async function verifiedSWCPartnersUserActionOptIn(
   })
 
   // TODO (Benson): Handle CC membership toggling options: https://github.com/Stand-With-Crypto/swc-web/issues/173
-  // TODO (Benson): Include p2a source in Capitol Canary payload.
+  // TODO (Benson): Include p2a source in Capitol Canary payload to know which 3P is sending this request.
   const payload: UpsertAdvocateInCapitolCanaryPayloadRequirements = {
     campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
     user: {
@@ -158,7 +158,7 @@ export async function verifiedSWCPartnersUserActionOptIn(
     },
     userEmailAddress: user.userEmailAddresses.find(
       emailAddr => emailAddr.id === user.primaryUserEmailAddressId,
-    )!,
+    ),
     opts: {
       isEmailOptin: true,
       isSmsOptin: input.hasOptedInToSms,
