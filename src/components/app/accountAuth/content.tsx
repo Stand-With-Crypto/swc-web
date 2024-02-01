@@ -63,7 +63,7 @@ export function AccountAuthContent(props: {
   const [lastAttemptedMethod, setLastAttemptedMethod] = React.useState<LoginAttemptMethod | null>(
     null,
   )
-  const { Dialog, DialogContent, DialogTrigger, isMobile } = useResponsiveDialog()
+  const { Dialog, DialogContent, DialogTrigger } = useResponsiveDialog()
 
   const { user } = useUser()
   const authConfig = useThirdwebAuthContext()
@@ -286,7 +286,7 @@ export function AccountAuthContent(props: {
               </DialogTrigger>
               <DialogContent
                 // Match the spacings of thirdweb's wallet connect UI on desktop
-                className={cn(!isMobile && isConnectingWalletUI && 'p-0')}
+                className={cn(isConnectingWalletUI && 'md:p-0')}
                 closeClassName={cn(isConnectingWalletUI && 'top-6 right-6')}
                 touchableIndicatorClassName={cn(isConnectingWalletUI && 'mb-0')}
               >
