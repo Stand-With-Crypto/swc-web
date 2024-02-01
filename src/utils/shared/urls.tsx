@@ -68,7 +68,7 @@ export const apiUrls = {
   userFullProfileInfo: () => `/api/identified-user/full-profile-info`,
   detectWipedDatabase: () => `/api/identified-user/detect-wiped-database`,
   dtsiAllPeople: () => `/api/public/dtsi/all-people`,
-  homepageCommunityMetrics: () => `/api/public/homepage/community-metrics`,
+  recentActivity: ({ limit }: { limit: number }) => `/api/public/recent-activity/${limit}`,
   homepageTopLevelMetrics: () => `/api/public/homepage/top-level-metrics`,
 }
 
