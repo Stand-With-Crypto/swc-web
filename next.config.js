@@ -131,6 +131,26 @@ const nextConfig = {
         source: '/member-join',
       },
       {
+        permanent: true,
+        destination: '/action/email',
+        source: '/?action=email-representative',
+      },
+      {
+        permanent: true,
+        destination: '/action/email',
+        source: '/?modal=email-senator',
+      },
+      {
+        permanent: true,
+        destination: '/action/nft-mint',
+        source: '/?modal=mintNFT',
+      },
+      {
+        permanent: true,
+        destination: '/action/call',
+        source: '/?modal=call-your-representative',
+      },
+      {
         source: '/politicians/senate',
         destination: '/politicians',
         permanent: true,
