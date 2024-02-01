@@ -50,7 +50,7 @@ export function SignatureScreen({ onDone }: SignatureScreenProps) {
   const signIn = React.useCallback(async () => {
     try {
       setStatus('signing')
-      // This is copied from thirdweb-react, to my understanding this is waiting
+      // Copied from thirdweb-react, this is waiting
       // for the wallet to be connected before trying to sign in
       await sleep(1000)
       await login()
@@ -59,7 +59,6 @@ export function SignatureScreen({ onDone }: SignatureScreenProps) {
     } catch (err) {
       setStatus('failed')
       Sentry.captureException(err)
-      console.error('failed to log in', err)
     }
   }, [login, onDone, router])
 
