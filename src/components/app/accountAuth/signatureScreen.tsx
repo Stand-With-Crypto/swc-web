@@ -81,7 +81,7 @@ export function SignatureScreen({ onDone }: SignatureScreenProps) {
   }
 
   return (
-    <div className="w-full space-y-12">
+    <div className="w-full space-y-12 pb-6 md:pb-0">
       <PageTitle size="sm">Sign in</PageTitle>
 
       <div className="flex w-full flex-col items-center space-y-12">

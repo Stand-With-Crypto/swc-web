@@ -1,4 +1,8 @@
-export const ACCOUNT_AUTH_CONFIG = {
+export const ACCOUNT_AUTH_CONFIG: {
+  theme: 'light' | 'dark'
+  loginOptional: boolean
+  modalSize: 'compact' | 'wide'
+} = {
   theme: 'light' as const,
   loginOptional: false,
   modalSize: 'compact' as const,

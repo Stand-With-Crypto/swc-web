@@ -24,6 +24,7 @@ import { usePathname, useSearchParams } from 'next/navigation'
 import { Suspense, useEffect } from 'react'
 import { useDetectWipedDatabaseAndLogOutUser } from '@/hooks/useDetectWipedDatabaseAndLogOutUser'
 import { AccountAuthContextProvider } from '@/components/app/accountAuth'
+import { ACCOUNT_AUTH_CONFIG } from '@/components/app/accountAuth/constants'
 
 const NEXT_PUBLIC_THIRDWEB_CLIENT_ID = requiredEnv(
   process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID,
@@ -81,7 +82,7 @@ export function TopLevelClientLogic({
     <LocaleContext.Provider value={locale}>
       <ThirdwebProvider
         locale={en()}
-        theme="light"
+        theme={ACCOUNT_AUTH_CONFIG.theme}
         activeChain={Base}
         supportedWallets={[
           metamaskWallet(),

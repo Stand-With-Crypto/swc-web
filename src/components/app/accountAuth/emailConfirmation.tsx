@@ -17,6 +17,8 @@ interface EmailConfirmationProps {
   emailAddress: string
 }
 
+const OTP_LENGTH = 6
+
 export function OTPEmailConfirmation({ onConfirm, onBack, emailAddress }: EmailConfirmationProps) {
   const { sendVerificationEmail } = useEmbeddedWallet()
   const [code, setCode] = React.useState('')
@@ -36,7 +38,7 @@ export function OTPEmailConfirmation({ onConfirm, onBack, emailAddress }: EmailC
 
   const handleChangeOTPInput = (newCode: string) => {
     setCode(newCode)
-    if (newCode.length === 6) {
+    if (newCode.length === OTP_LENGTH) {
       handleConfirm(newCode)
     }
   }
@@ -58,7 +60,7 @@ export function OTPEmailConfirmation({ onConfirm, onBack, emailAddress }: EmailC
 
           <OTPInput
             onChange={handleChangeOTPInput}
-            length={6}
+            length={OTP_LENGTH}
             onEnter={handleConfirm}
             disabled={isSendingVerificationMail}
           />

@@ -57,7 +57,9 @@
     "thirdweb",
     "typecheck",
     "undici",
-    "unoptimized"
+    "unoptimized",
+    "hookform",
+    "vaul"
   ],
   "typescript.tsdk": "node_modules/typescript/lib"
 }

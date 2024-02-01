@@ -19,7 +19,6 @@ export function AccountAuth({
   const { screen, setScreen, initialScreen } = useScreen()
   const requiresSignIn = useSignInRequired(loginOptional)
   const { closeAccountAuthModal } = useAccountAuthContext()
-
   React.useEffect(() => {
     if (requiresSignIn && screen === ReservedScreens.MAIN) {
       setScreen(ReservedScreens.SIGN_IN)
