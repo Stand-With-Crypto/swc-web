@@ -1,6 +1,7 @@
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getUserSessionIdOnPageRouter } from '@/utils/server/serverUserSessionId'
 import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
+import * as Sentry from '@sentry/nextjs'
 import {
   ServerLocalUser,
   mapLocalUserToUserDatabaseFields,
@@ -8,6 +9,7 @@ import {
 } from '@/utils/server/serverLocalUser'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import {
+  CapitolCanaryInstance,
   User,
   UserActionOptInType,
   UserActionType,
@@ -28,9 +30,9 @@ import {
   CapitolCanaryCampaignName,
   getCapitolCanaryCampaignID,
 } from '@/utils/server/capitolCanary/campaigns'
-import { CreateAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
+import { UpsertAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { inngest } from '@/inngest/inngest'
-import { CREATE_CAPITOL_CANARY_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/createAdvocateInCapitolCanary'
+import { CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/upsertAdvocateInCapitolCanary'
 
 /*
 The desired behavior of this function:
@@ -53,9 +55,11 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
   let existingUser = await prismaClient.user.findFirst({
     include: {
       address: true,
+      primaryUserEmailAddress: true,
     },
     where: { userCryptoAddresses: { some: { cryptoAddress: address } } },
   })
+  // If a proper user already exists (e.g. has a crypto address associated with it), return the user.
   if (existingUser) {
     trackUserLogin({
       existingUser,
@@ -64,11 +68,13 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
     })
     return { userId: existingUser.id }
   }
+
   const userSessionId = getUserSessionIdOnPageRouter(req)
   const embeddedWalletEmailAddress = await fetchEmbeddedWalletMetadataFromThirdweb(address)
   existingUser = await prismaClient.user.findFirst({
     include: {
       address: true,
+      primaryUserEmailAddress: true,
     },
     where: embeddedWalletEmailAddress
       ? {
@@ -83,6 +89,23 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
         }
       : { userSessions: { some: { id: userSessionId } } },
   })
+  /*
+  The situation below will occur when:
+  - a user logs in to multiple crypto wallets with the same session id
+  - a user creates a web3 wallet with a verified email from CB and then creates an embedded wallet with the same email
+  we should not associate those wallets with the same user. We could, but it would be confusing for the user and it's unclear whether that's their intent
+  */
+  if (existingUser && existingUser.primaryUserCryptoAddressId) {
+    getServerAnalytics({ userId: existingUser.id, localUser }).track('Separate User Created', {
+      Reason: 'Different Wallet Address',
+      'New Crypto Wallet Address': address,
+    })
+    Sentry.captureMessage(
+      'User found via verified email/session id unassociated from this crypto address',
+      { extra: { embeddedWalletEmailAddress, address, userSessionId, existingUser } },
+    )
+    existingUser = null
+  }
   const userCryptoAddress = await prismaClient.userCryptoAddress.create({
     data: {
       cryptoAddress: address,
@@ -112,26 +135,33 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
       embeddedWalletEmailAddress,
       userCryptoAddress,
     )
-    if (!userCryptoAddress.user.primaryUserEmailAddressId) {
-      primaryUserEmailAddressId = email.id
-    }
 
-    // Create subscriber advocate in Capitol Canary.
-    const payload: CreateAdvocateInCapitolCanaryPayloadRequirements = {
-      campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_MEMBERSHIP),
-      user: {
-        ...userCryptoAddress.user,
-        address: existingUser?.address || null,
-      },
-      userEmailAddress: email,
-      opts: {
-        isEmailOptin: true,
-      },
+    // Always use the embedded wallet email address as the primary email address.
+    primaryUserEmailAddressId = email.id
+
+    // Note: we want to create if we don't have a SwC advocate ID,
+    // and we want to update if the stored primary email address is different than the embedded wallet email address.
+    if (
+      !userCryptoAddress.user.capitolCanaryAdvocateId ||
+      userCryptoAddress.user.capitolCanaryInstance === CapitolCanaryInstance.LEGACY ||
+      existingUser?.primaryUserEmailAddress?.emailAddress !== email.emailAddress
+    ) {
+      const payload: UpsertAdvocateInCapitolCanaryPayloadRequirements = {
+        campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
+        user: {
+          ...userCryptoAddress.user,
+          address: existingUser?.address || null,
+        },
+        userEmailAddress: email,
+        opts: {
+          isEmailOptin: true,
+        },
+      }
+      await inngest.send({
+        name: CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME,
+        data: payload,
+      })
     }
-    await inngest.send({
-      name: CREATE_CAPITOL_CANARY_ADVOCATE_INNGEST_EVENT_NAME,
-      data: payload,
-    })
   }
 
   /**

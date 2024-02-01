@@ -2,7 +2,7 @@
 
 import { UserActionFormEmailCongressperson } from '@/components/app/userActionFormEmailCongressperson'
 import { UserActionFormEmailCongresspersonSkeleton } from '@/components/app/userActionFormEmailCongressperson/skeleton'
-import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen/userActionFormSuccessScreen'
+import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useLocale } from '@/hooks/useLocale'
 import { getIntlUrls } from '@/utils/shared/urls'
@@ -25,6 +25,6 @@ export function UserActionFormEmailCongresspersonDeeplinkWrapper() {
       onSuccess={() => setState('success')}
     />
   ) : (
-    <UserActionFormSuccessScreen />
+    <UserActionFormSuccessScreen onClose={() => router.replace(urls.home())} />
   )
 }

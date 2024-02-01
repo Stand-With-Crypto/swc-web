@@ -6,7 +6,7 @@ import {
   getCapitolCanaryCampaignID,
 } from '@/utils/server/capitolCanary/campaigns'
 import { formatCapitolCanaryAdvocateCreationRequest } from '@/utils/server/capitolCanary/createAdvocate'
-import { CreateAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
+import { UpsertAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { faker } from '@faker-js/faker'
 import { expect } from '@jest/globals'
 
@@ -18,7 +18,7 @@ it('formats the "create capitol canary advocate" request correctly', () => {
   const mockedAddress = mockAddress()
   const mockedEmailAddress = mockUserEmailAddress()
 
-  const payload: CreateAdvocateInCapitolCanaryPayloadRequirements = {
+  const payload: UpsertAdvocateInCapitolCanaryPayloadRequirements = {
     campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_MEMBERSHIP),
     user: {
       ...mockedUser,
@@ -62,7 +62,7 @@ it('formats the "create capitol canary advocate" request correctly', () => {
   "p2aSource": "source",
   "phone": "+16929224505",
   "smsOptin": 1,
-  "smsOptinConfirmed": 0,
+  "smsOptinConfirmed": 1,
   "smsOptout": 0,
   "state": "Pennsylvania",
   "tags": [

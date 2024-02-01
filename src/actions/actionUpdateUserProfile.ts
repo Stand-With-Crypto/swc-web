@@ -2,14 +2,28 @@
 import { getClientAddress } from '@/clientModels/clientAddress'
 import { getClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
 import { getENSDataFromCryptoAddressAndFailGracefully } from '@/data/web3/getENSDataFromCryptoAddress'
+import { CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/upsertAdvocateInCapitolCanary'
+import { inngest } from '@/inngest/inngest'
+import {
+  CapitolCanaryCampaignName,
+  getCapitolCanaryCampaignID,
+} from '@/utils/server/capitolCanary/campaigns'
+import { UpsertAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { userFullName } from '@/utils/shared/userFullName'
-import { zodUpdateUserProfileFormAction } from '@/validation/forms/zodUpdateUserProfile'
-import { UserEmailAddressSource } from '@prisma/client'
+import { zodUpdateUserProfileFormAction } from '@/validation/forms/zodUpdateUserProfile/zodUpdateUserProfileFormAction'
+import {
+  Address,
+  CapitolCanaryInstance,
+  User,
+  UserCryptoAddress,
+  UserEmailAddress,
+  UserEmailAddressSource,
+} from '@prisma/client'
 import 'server-only'
 import { z } from 'zod'
 
@@ -32,6 +46,8 @@ export async function actionUpdateUserProfile(
     },
     include: {
       userEmailAddresses: true,
+      primaryUserEmailAddress: true,
+      address: true,
     },
   })
   const {
@@ -102,8 +118,12 @@ export async function actionUpdateUserProfile(
     },
   })
 
-  // TODO: Handle membership toggling options: https://github.com/Stand-With-Crypto/swc-web/issues/173
-  // TODO: Handle updating advocate profile in Capitol Canary: https://github.com/Stand-With-Crypto/swc-web/issues/204
+  await handleCapitolCanaryAdvocateUpsert(
+    updatedUser,
+    primaryUserEmailAddress,
+    hasOptedInToSms,
+    user,
+  )
 
   return {
     user: {
@@ -115,5 +135,84 @@ export async function actionUpdateUserProfile(
       ),
       address: updatedUser.address && getClientAddress(updatedUser.address),
     },
+  }
+}
+
+// TODO (Benson): Handle CC membership toggling options: https://github.com/Stand-With-Crypto/swc-web/issues/173
+async function handleCapitolCanaryAdvocateUpsert(
+  updatedUser: User & { address: Address | null } & {
+    primaryUserCryptoAddress: UserCryptoAddress | null
+  },
+  primaryUserEmailAddress: UserEmailAddress | null | undefined,
+  hasOptedInToSms: boolean,
+  oldUser: User & { address: Address | null } & {
+    primaryUserEmailAddress: UserEmailAddress | null
+  } & { userEmailAddresses: UserEmailAddress[] },
+) {
+  // Send unsubscribe payload if the old email address or phone number has changed, or if the user removed their old email or phone number.
+  if (
+    oldUser.primaryUserEmailAddress?.emailAddress !== primaryUserEmailAddress?.emailAddress ||
+    oldUser.phoneNumber !== updatedUser.phoneNumber ||
+    primaryUserEmailAddress === null ||
+    (oldUser.phoneNumber && !updatedUser.phoneNumber)
+  ) {
+    const unsubscribePayload: UpsertAdvocateInCapitolCanaryPayloadRequirements = {
+      campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
+      user: {
+        ...updatedUser, // Always use new user information.
+        address: updatedUser.address, // Always use new user information.
+      },
+      userEmailAddress: oldUser.primaryUserEmailAddress, // Using old email here.
+      opts: {
+        isEmailOptout:
+          oldUser.primaryUserEmailAddress?.emailAddress !== primaryUserEmailAddress?.emailAddress ||
+          primaryUserEmailAddress === null
+            ? true
+            : false,
+        isSmsOptout:
+          oldUser.phoneNumber !== updatedUser.phoneNumber ||
+          (oldUser.phoneNumber && !updatedUser.phoneNumber)
+            ? true
+            : false,
+      },
+    }
+    await inngest.send({
+      name: CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME,
+      data: unsubscribePayload,
+    })
+  }
+
+  // Only send updating payload if we do not have an SwC advocate ID
+  // or there has been a changed field (name, address, email address, phone number, and opt-ins/outs),
+  // and we at least have email or phone number.
+  // Breaking early if nothing has been changed.
+  if (
+    (!updatedUser.capitolCanaryAdvocateId ||
+      updatedUser.capitolCanaryInstance === CapitolCanaryInstance.LEGACY ||
+      oldUser.firstName !== updatedUser.firstName ||
+      oldUser.lastName !== updatedUser.lastName ||
+      oldUser.address?.googlePlaceId !== updatedUser.address?.googlePlaceId ||
+      oldUser.primaryUserEmailAddress?.emailAddress !== primaryUserEmailAddress?.emailAddress ||
+      oldUser.phoneNumber !== updatedUser.phoneNumber ||
+      oldUser.hasOptedInToSms !== updatedUser.hasOptedInToSms) &&
+    (primaryUserEmailAddress || updatedUser.phoneNumber)
+  ) {
+    const payload: UpsertAdvocateInCapitolCanaryPayloadRequirements = {
+      campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
+      user: {
+        ...updatedUser,
+        address: updatedUser.address,
+      },
+      userEmailAddress: primaryUserEmailAddress,
+      opts: {
+        isEmailOptin: true,
+        isSmsOptin: hasOptedInToSms,
+        isSmsOptout: oldUser.hasOptedInToSms && !hasOptedInToSms, // Only opt-out of SMS if the user has opted in before and now they are opting out.
+      },
+    }
+    await inngest.send({
+      name: CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME,
+      data: payload,
+    })
   }
 }

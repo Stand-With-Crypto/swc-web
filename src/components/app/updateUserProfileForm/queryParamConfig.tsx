@@ -1,0 +1,1 @@
+export const OPEN_UPDATE_USER_PROFILE_FORM_QUERY_PARAM_KEY = 'hasOpenUpdateUserProfileForm'

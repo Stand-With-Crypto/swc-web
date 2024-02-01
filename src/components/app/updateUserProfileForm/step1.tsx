@@ -3,7 +3,6 @@ import { actionUpdateUserProfile } from '@/actions/actionUpdateUserProfile'
 import { ClientAddress } from '@/clientModels/clientAddress'
 import { SensitiveDataClientUserWithENSData } from '@/clientModels/clientUser/sensitiveDataClientUser'
 import { PrivacyPolicyDialog } from '@/components/app/pagePrivacyPolicy/dialog'
-import { hasAllFormFieldsOnUserForUpdateUserProfileForm } from '@/components/app/updateUserProfileForm/hasAllFormFieldsOnUser'
 import { SWCMembershipDialog } from '@/components/app/updateUserProfileForm/swcMembershipDialog'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -29,8 +28,9 @@ import {
   triggerServerActionForForm,
 } from '@/utils/web/formUtils'
 import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
+import { hasCompleteUserProfile } from '@/utils/web/hasCompleteUserProfile'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
-import { zodUpdateUserProfileFormFields } from '@/validation/forms/zodUpdateUserProfile'
+import { zodUpdateUserProfileFormFields } from '@/validation/forms/zodUpdateUserProfile/zodUpdateUserProfileFormFields'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { UserEmailAddressSource } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
@@ -106,7 +106,7 @@ export function UpdateUserProfileForm({
       >
         <div>
           <PageTitle size="sm" className="mb-1">
-            {hasAllFormFieldsOnUserForUpdateUserProfileForm(user) ? 'Edit' : 'Finish'} your profile
+            {hasCompleteUserProfile(user) ? 'Edit' : 'Finish'} your profile
           </PageTitle>
           <PageSubTitle size="md" className="mb-7">
             Completing your profile makes it easier for you to take action, locate your

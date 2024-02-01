@@ -1,7 +1,7 @@
 import { ClientAddress } from '@/clientModels/clientAddress'
 import { SensitiveDataClientUser } from '@/clientModels/clientUser/sensitiveDataClientUser'
 
-export const hasAllFormFieldsOnUserForUpdateUserProfileForm = (
+export const hasCompleteUserProfile = (
   user: SensitiveDataClientUser & { address: ClientAddress | null },
 ) => {
   return Boolean(

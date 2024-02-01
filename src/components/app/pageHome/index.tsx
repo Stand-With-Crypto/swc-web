@@ -82,7 +82,7 @@ export function PageHome({
                 </div>
               </LinkBox>
             </DialogTrigger>
-            <DialogContent className="w-full max-w-7xl md:p-10">
+            <DialogContent className="w-full max-w-7xl md:p-14">
               <Suspense fallback={<Skeleton className="h-20 w-full" />}>
                 <LazyResponsiveYoutube videoId="uETMq54w45Y" />
               </Suspense>

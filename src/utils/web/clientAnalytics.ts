@@ -4,11 +4,14 @@ import { AnalyticProperties } from '@/utils/shared/sharedAnalytics'
 import mixpanel from 'mixpanel-browser'
 import { track as vercelTrack } from '@vercel/analytics'
 import { formatVercelAnalyticsEventProperties } from '@/utils/shared/vercelAnalytics'
+import { isCypress, isStorybook } from '@/utils/shared/executionEnvironment'
 
 const NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN = requiredEnv(
   process.env.NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN,
   'process.env.NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN',
 )
+
+const environmentHasAnalyticsEnabled = !isStorybook && !isCypress
 
 export function initClientAnalytics() {
   mixpanel.init(NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN, {
@@ -17,7 +20,9 @@ export function initClientAnalytics() {
   })
 }
 export function identifyClientAnalyticsUser(userId: string) {
-  mixpanel.identify(userId)
+  if (environmentHasAnalyticsEnabled) {
+    mixpanel.identify(userId)
+  }
 }
 
 export function trackClientAnalytic(eventName: string, eventProperties?: AnalyticProperties) {
@@ -30,14 +35,18 @@ export function trackClientAnalytic(eventName: string, eventProperties?: Analyti
     ['color: #00aaff', 'color: #FCFDFB'],
     eventProperties,
   )
-  mixpanel.track(eventName, {
-    eventProperties,
-  })
-  vercelTrack(eventName, eventProperties && formatVercelAnalyticsEventProperties(eventProperties))
+  if (environmentHasAnalyticsEnabled) {
+    mixpanel.track(eventName, {
+      eventProperties,
+    })
+    vercelTrack(eventName, eventProperties && formatVercelAnalyticsEventProperties(eventProperties))
+  }
 }
 
 export function setClientAnalyticsUserProperties(userProperties: object) {
-  mixpanel.people.set(userProperties)
+  if (environmentHasAnalyticsEnabled) {
+    mixpanel.people.set(userProperties)
+  }
 }
 
 export function trackFormSubmitted(formName: string, other?: AnalyticProperties) {
