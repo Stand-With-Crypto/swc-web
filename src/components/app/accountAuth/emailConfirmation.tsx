@@ -1,14 +1,15 @@
-import { Button } from '@/components/ui/button'
-import { dialogButtonStyles } from '@/components/ui/dialog/styles'
-import { Input } from '@/components/ui/input'
-import { LoadingOverlay } from '@/components/ui/loadingOverlay'
-import { PageTitle } from '@/components/ui/pageTitleText'
-import { useLoadingCallback } from '@/hooks/useLoadingCallback'
-import { cn } from '@/utils/web/cn'
 import { useEmbeddedWallet } from '@thirdweb-dev/react'
 import { ChevronLeft } from 'lucide-react'
 import React from 'react'
 import { useEffectOnce } from 'react-use'
+
+import { Button } from '@/components/ui/button'
+import { dialogButtonStyles } from '@/components/ui/dialog/styles'
+import { LoadingOverlay } from '@/components/ui/loadingOverlay'
+import { PageTitle } from '@/components/ui/pageTitleText'
+import { useLoadingCallback } from '@/hooks/useLoadingCallback'
+import { cn } from '@/utils/web/cn'
+import { OTPInput } from '@/components/ui/otpInput'
 
 interface EmailConfirmationProps {
   onConfirm: (code: string) => void
@@ -29,6 +30,17 @@ export function OTPEmailConfirmation({ onConfirm, onBack, emailAddress }: EmailC
 
   useEffectOnce(sendVerificationEmailToAddress)
 
+  const handleConfirm = (syncCode?: string) => {
+    onConfirm(syncCode ?? code)
+  }
+
+  const handleChangeOTPInput = (newCode: string) => {
+    setCode(newCode)
+    if (newCode.length === 6) {
+      handleConfirm(newCode)
+    }
+  }
+
   return (
     <>
       <GoBackButton onClick={onBack} />
@@ -44,9 +56,14 @@ export function OTPEmailConfirmation({ onConfirm, onBack, emailAddress }: EmailC
             <strong>{emailAddress}</strong>
           </p>
 
-          <Input value={code} onChange={e => setCode(e.currentTarget.value)} />
+          <OTPInput
+            onChange={handleChangeOTPInput}
+            length={6}
+            onEnter={handleConfirm}
+            disabled={isSendingVerificationMail}
+          />
 
-          <Button size="lg" className="w-full" onClick={() => onConfirm(code)}>
+          <Button size="lg" className="w-full" onClick={() => handleConfirm()}>
             Verify
           </Button>
 

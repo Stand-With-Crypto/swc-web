@@ -1,12 +1,13 @@
 import React from 'react'
-
-import type { SignatureScreenStatus } from './signatureScreen'
 import { useEffectOnce } from 'react-use'
+import { CrossCircledIcon } from '@radix-ui/react-icons'
+
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
-import { CrossCircledIcon } from '@radix-ui/react-icons'
 import { cn } from '@/utils/web/cn'
+
+import type { SignatureScreenStatus } from './signatureScreen'
 
 interface HeadlessSignInProps {
   signIn: () => void

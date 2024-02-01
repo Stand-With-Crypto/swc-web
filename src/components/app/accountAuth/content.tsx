@@ -15,6 +15,7 @@ import * as Sentry from '@sentry/react'
 import { noop } from 'lodash'
 import { useForm } from 'react-hook-form'
 import { object } from 'zod'
+import { toast } from 'sonner'
 
 import { Noop } from '@/components/ui/noop'
 import { NextImage } from '@/components/ui/image'
@@ -37,14 +38,14 @@ import { InternalLink } from '@/components/ui/link'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { zodEmailAddress } from '@/validation/fields/zodEmailAddress'
+import { toastGenericError } from '@/utils/web/toastUtils'
 
 import { ReservedScreens } from './screen'
 import { WalletSelectUIProps, WalletConnect } from './walletConnect'
 import { GOOGLE_AUTH_LOGO, ACCOUNT_AUTH_CONFIG } from './constants'
 import { SignatureScreen } from './signatureScreen'
 import { OTPEmailConfirmation } from './emailConfirmation'
-import { toast } from 'sonner'
-import { toastGenericError } from '@/utils/web/toastUtils'
+import { cn, twNoop } from '@/utils/web/cn'
 
 export function AccountAuthContent(props: {
   screen: string | WalletConfig
@@ -164,7 +165,7 @@ export function AccountAuthContent(props: {
     return (
       <ConnectUI
         supportedWallets={walletConfigs}
-        theme={ACCOUNT_AUTH_CONFIG.theme}
+        theme={'dark'}
         goBack={handleBack}
         connected={handleConnected}
         isOpen={props.isOpen}
@@ -187,6 +188,7 @@ export function AccountAuthContent(props: {
     )
   }
 
+  const isConnectingWalletUI = typeof screen !== 'string'
   const connectMethods = (
     <>
       <EmailForm
@@ -225,8 +227,12 @@ export function AccountAuthContent(props: {
                 <span>Connect a wallet</span>
               </Button>
             </DialogTrigger>
-            <DialogContent>
-              {typeof screen !== 'string' ? (
+            <DialogContent
+              // Match the positioning of thirdweb wallet connect UI
+              className={cn(isConnectingWalletUI && 'p-0')}
+              closeClassName={cn(isConnectingWalletUI && twNoop('top-6 right-6'))}
+            >
+              {isConnectingWalletUI ? (
                 getWalletUI(screen)
               ) : (
                 <WalletConnect

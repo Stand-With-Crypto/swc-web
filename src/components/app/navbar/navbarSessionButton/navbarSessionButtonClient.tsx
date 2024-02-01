@@ -1,17 +1,17 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { ConnectWallet, useAddress, useConnectionStatus, useLogin } from '@thirdweb-dev/react'
+import { ConnectWallet, useAddress, useLogin } from '@thirdweb-dev/react'
 
 import { GetDefineMessageResults } from '@/types'
 import { cn } from '@/utils/web/cn'
 import { useThirdwebData } from '@/hooks/useThirdwebData'
-
-import { NavbarLoggedInSessionButton } from './navbarLoggedInSessionButton'
-import { navbarSessionButtonMessages } from './navbarSessionButtonClient.messages'
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
 import { AccountAuthButton } from '@/components/app/accountAuth/context'
+
+import { NavbarLoggedInSessionButton } from './navbarLoggedInSessionButton'
+import { navbarSessionButtonMessages } from './navbarSessionButtonClient.messages'
 
 interface NavbarSessionButtonProps {
   messages: GetDefineMessageResults<typeof navbarSessionButtonMessages>

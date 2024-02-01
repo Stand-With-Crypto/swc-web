@@ -1,11 +1,10 @@
-import { Button } from '@/components/ui/button'
-import { NextImage } from '@/components/ui/image'
-import { PageTitle } from '@/components/ui/pageTitleText'
 import { SelectUIProps, WalletConfig, WalletInstance } from '@thirdweb-dev/react'
 import { walletIds } from '@thirdweb-dev/wallets'
 import React from 'react'
 
-import { ACCOUNT_AUTH_CONFIG } from './constants'
+import { Button } from '@/components/ui/button'
+import { NextImage } from '@/components/ui/image'
+import { PageTitle } from '@/components/ui/pageTitleText'
 
 export interface WalletSelectUIProps {
   connect: (walletConfig: WalletConfig, options?: any) => Promise<WalletInstance>

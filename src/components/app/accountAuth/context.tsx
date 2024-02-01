@@ -1,10 +1,12 @@
 'use client'
 
-import { AccountAuth } from '.'
+import React from 'react'
+
 import { Button } from '@/components/ui/button'
 import { useResponsiveDialog } from '@/components/ui/responsiveDialog'
 import { useDialog } from '@/hooks/useDialog'
-import React from 'react'
+
+import { AccountAuth } from './accountAuth'
 
 interface AccountAuthContextValue {
   openAccountAuthModal: () => void

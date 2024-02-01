@@ -23,7 +23,7 @@ import { identifyUserOnClient } from '@/utils/web/identifyUser'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { Suspense, useEffect } from 'react'
 import { useDetectWipedDatabaseAndLogOutUser } from '@/hooks/useDetectWipedDatabaseAndLogOutUser'
-import { AccountAuthContextProvider } from '@/components/app/accountAuth/context'
+import { AccountAuthContextProvider } from '@/components/app/accountAuth'
 
 const NEXT_PUBLIC_THIRDWEB_CLIENT_ID = requiredEnv(
   process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID,
@@ -81,6 +81,7 @@ export function TopLevelClientLogic({
     <LocaleContext.Provider value={locale}>
       <ThirdwebProvider
         locale={en()}
+        theme="light"
         activeChain={Base}
         supportedWallets={[
           metamaskWallet(),
