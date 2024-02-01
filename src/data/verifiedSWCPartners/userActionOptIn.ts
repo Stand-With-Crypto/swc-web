@@ -199,10 +199,11 @@ async function maybeUpsertUser({
 
   if (existingUser) {
     const updatePayload: Prisma.UserUpdateInput = {
+      // TODO typesafe against invalid fields
       ...(firstName && !existingUser.firstName && { firstName }),
       ...(lastName && !existingUser.lastName && { lastName }),
       ...(phoneNumber && !existingUser.phoneNumber && { phoneNumber }),
-      ...(!existingUser.hasOptedInToEmails && { hasOptedInToEmail: true }),
+      ...(!existingUser.hasOptedInToEmails && { hasOptedInToEmails: true }),
       ...(hasOptedInToMembership &&
         !existingUser.hasOptedInToMembership && { hasOptedInToMembership }),
       ...(hasOptedInToSms && !existingUser.hasOptedInToSms && { hasOptedInToSms }),

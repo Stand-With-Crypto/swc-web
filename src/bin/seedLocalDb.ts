@@ -1,27 +1,25 @@
-import 'dotenv/config'
 import { runBin } from '@/bin/runBin'
 import { mockAddress } from '@/mocks/models/mockAddress'
 import { mockAuthenticationNonce } from '@/mocks/models/mockAuthenticationNonce'
-import { PopularCryptoAddress, mockUserCryptoAddress } from '@/mocks/models/mockUserCryptoAddress'
+import { mockNFTMint } from '@/mocks/models/mockNFTMint'
 import { mockUser } from '@/mocks/models/mockUser'
-import { mockUserSession } from '@/mocks/models/mockUserSession'
 import { mockUserAction } from '@/mocks/models/mockUserAction'
 import { mockUserActionCall } from '@/mocks/models/mockUserActionCall'
 import { mockUserActionDonation } from '@/mocks/models/mockUserActionDonation'
 import { mockUserActionEmail } from '@/mocks/models/mockUserActionEmail'
 import { mockUserActionEmailRecipient } from '@/mocks/models/mockUserActionEmailRecipient'
+import { mockUserActionOptIn } from '@/mocks/models/mockUserActionOptIn'
+import { PopularCryptoAddress, mockUserCryptoAddress } from '@/mocks/models/mockUserCryptoAddress'
+import { mockUserEmailAddress } from '@/mocks/models/mockUserEmailAddress'
+import { mockUserSession } from '@/mocks/models/mockUserSession'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { batchAsyncAndLog } from '@/utils/shared/batchAsyncAndLog'
 import { getLogger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { faker } from '@faker-js/faker'
-import _ from 'lodash'
-import yargs from 'yargs'
-import { hideBin } from 'yargs/helpers'
 import { UserActionType, UserEmailAddressSource, UserInformationVisibility } from '@prisma/client'
-import { mockUserActionOptIn } from '@/mocks/models/mockUserActionOptIn'
-import { mockUserEmailAddress } from '@/mocks/models/mockUserEmailAddress'
-import { mockNFTMint } from '@/mocks/models/mockNFTMint'
+import 'dotenv/config'
+import _ from 'lodash'
 
 const LOCAL_USER_CRYPTO_ADDRESS = requiredEnv(
   process.env.LOCAL_USER_CRYPTO_ADDRESS,
@@ -34,13 +32,6 @@ enum SeedSize {
   LG = 'LG',
 }
 
-const argv = yargs(hideBin(process.argv)).option('size', {
-  type: 'string',
-  describe: 'The timestamp of the last updated record',
-  choices: Object.values(SeedSize),
-  default: SeedSize.MD,
-}).argv
-
 const logger = getLogger('seedLocalDb')
 const logEntity = (obj: Record<string, any[]>) => {
   const key = Object.keys(obj)[0]
@@ -48,7 +39,7 @@ const logEntity = (obj: Record<string, any[]>) => {
 }
 
 async function seed() {
-  const { size: seedSize } = await argv
+  const seedSize = process.env.SEED_SIZE || SeedSize.MD
   const seedSizes = (sizes: [number, number, number]) => {
     const [sm, md, lg] = sizes
     switch (seedSize) {
@@ -58,6 +49,8 @@ async function seed() {
         return md
       case SeedSize.LG:
         return lg
+      default:
+        throw new Error(`Invalid seed size passed: ${seedSize}`)
     }
   }
   /*

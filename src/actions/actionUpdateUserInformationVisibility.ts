@@ -4,11 +4,17 @@ import { prismaClient } from '@/utils/server/prismaClient'
 import { getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
+import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
 import { zodUpdateUserInformationVisibility } from '@/validation/forms/zodUpdateUserInformationVisibility'
 import 'server-only'
 import { z } from 'zod'
 
-export async function actionUpdateUserInformationVisibility(
+export const actionUpdateUserInformationVisibility = withServerActionMiddleware(
+  'actionUpdateUserInformationVisibility',
+  _actionUpdateUserInformationVisibility,
+)
+
+async function _actionUpdateUserInformationVisibility(
   data: z.infer<typeof zodUpdateUserInformationVisibility>,
 ) {
   const authUser = await appRouterGetAuthUser()

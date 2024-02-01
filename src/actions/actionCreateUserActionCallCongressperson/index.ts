@@ -16,10 +16,12 @@ import { subDays } from 'date-fns'
 import { z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
+import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
 import {
   mapLocalUserToUserDatabaseFields,
   parseLocalUserFromCookies,
 } from '@/utils/server/serverLocalUser'
+import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 
@@ -28,7 +30,6 @@ import { zodAddress } from '@/validation/fields/zodAddress'
 import { zodDTSISlug } from '@/validation/fields/zodDTSISlug'
 import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
 import { nativeEnum, object } from 'zod'
-import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
 
 const createActionCallCongresspersonInputValidationSchema = object({
   phoneNumber: zodPhoneNumber.transform(str => str && normalizePhoneNumber(str)),
@@ -49,7 +50,13 @@ interface SharedDependencies {
 }
 
 const logger = getLogger(`actionCreateUserActionCallCongressperson`)
-export async function actionCreateUserActionCallCongressperson(
+
+export const actionCreateUserActionCallCongressperson = withServerActionMiddleware(
+  'actionCreateUserActionCallCongressperson',
+  _actionCreateUserActionCallCongressperson,
+)
+
+async function _actionCreateUserActionCallCongressperson(
   input: CreateActionCallCongresspersonInput,
 ) {
   logger.info('triggered')

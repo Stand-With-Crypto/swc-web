@@ -13,6 +13,7 @@ import { prismaClient } from '@/utils/server/prismaClient'
 import { getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
+import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { userFullName } from '@/utils/shared/userFullName'
 import { zodUpdateUserProfileFormAction } from '@/validation/forms/zodUpdateUserProfile/zodUpdateUserProfileFormAction'
@@ -27,9 +28,12 @@ import {
 import 'server-only'
 import { z } from 'zod'
 
-export async function actionUpdateUserProfile(
-  data: z.infer<typeof zodUpdateUserProfileFormAction>,
-) {
+export const actionUpdateUserProfile = withServerActionMiddleware(
+  'actionUpdateUserProfile',
+  _actionUpdateUserProfile,
+)
+
+async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfileFormAction>) {
   const authUser = await appRouterGetAuthUser()
   if (!authUser) {
     throw new Error('Unauthenticated')
