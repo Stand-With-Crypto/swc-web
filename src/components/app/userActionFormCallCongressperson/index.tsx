@@ -1,18 +1,18 @@
-import React from 'react'
 import * as Sentry from '@sentry/nextjs'
+import React from 'react'
 import { z } from 'zod'
 
 import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
+import { DTSIPeopleByCongressionalDistrictQueryResult } from '@/data/dtsi/queries/queryDTSIPeopleByCongressionalDistrict'
 import { UseTabsReturn, useTabs } from '@/hooks/useTabs'
 import { GoogleCivicInfoResponse } from '@/utils/shared/googleCivicInfo'
-import { DTSIPeopleByCongressionalDistrictQueryResult } from '@/data/dtsi/queries/queryDTSIPeopleByCongressionalDistrict'
 import { zodAddress } from '@/validation/fields/zodAddress'
 
-import { TabNames } from './userActionFormCallCongressperson.types'
-import { Intro } from './tabs/intro'
+import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
 import { Address } from './tabs/address'
+import { Intro } from './tabs/intro'
 import { SuggestedScript } from './tabs/suggestedScript'
-import { SuccessMessage } from './tabs/successMessage'
+import { TabNames } from './userActionFormCallCongressperson.types'
 
 interface OnFindCongressPersonPayload {
   dtsiPerson: DTSIPeopleByCongressionalDistrictQueryResult
@@ -28,8 +28,10 @@ export interface UserActionFormCallCongresspersonProps extends UseTabsReturn<Tab
 
 export function UserActionFormCallCongressperson({
   user,
+  onClose,
 }: {
   user: GetUserFullProfileInfoResponse['user']
+  onClose: () => void
 }) {
   const tabProps = useTabs<TabNames>({
     tabs: Object.values(TabNames),
@@ -63,7 +65,7 @@ export function UserActionFormCallCongressperson({
 
       return <SuggestedScript user={user} congressPersonData={congressPersonData} {...tabProps} />
     case TabNames.SUCCESS_MESSAGE:
-      return <SuccessMessage />
+      return <UserActionFormSuccessScreen onClose={onClose} />
     default:
       onTabNotFound()
       return null

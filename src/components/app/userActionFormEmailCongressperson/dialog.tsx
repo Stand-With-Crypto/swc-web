@@ -2,7 +2,7 @@
 
 import { LazyUserActionFormEmailCongressperson } from '@/components/app/userActionFormEmailCongressperson/lazyLoad'
 import { UserActionFormEmailCongresspersonSkeleton } from '@/components/app/userActionFormEmailCongressperson/skeleton'
-import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen/userActionFormSuccessScreen'
+import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useDialog } from '@/hooks/useDialog'
@@ -29,7 +29,7 @@ export function UserActionFormEmailCongresspersonDialog({
   return (
     <Dialog {...dialogProps}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="max-w-3xl p-0">
+      <DialogContent className="max-w-3xl" padding={false}>
         <Suspense fallback={<UserActionFormEmailCongresspersonSkeleton locale={locale} />}>
           {fetchUser.isLoading ? (
             <UserActionFormEmailCongresspersonSkeleton locale={locale} />
@@ -40,7 +40,9 @@ export function UserActionFormEmailCongresspersonDialog({
               onSuccess={() => setState('success')}
             />
           ) : (
-            <UserActionFormSuccessScreen />
+            <div className="px-6">
+              <UserActionFormSuccessScreen onClose={() => dialogProps.onOpenChange(false)} />
+            </div>
           )}
         </Suspense>
       </DialogContent>

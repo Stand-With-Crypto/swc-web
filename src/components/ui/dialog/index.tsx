@@ -5,6 +5,7 @@ import * as React from 'react'
 
 import {
   dialogCloseStyles,
+  dialogContentPaddingStyles,
   dialogContentStyles,
   dialogOverlayStyles,
 } from '@/components/ui/dialog/styles'
@@ -43,11 +44,15 @@ DialogOverlay.displayName = DialogPrimitive.Overlay.displayName
 
 const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
->(({ className, children, ...props }, ref) => (
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & { padding?: boolean }
+>(({ className, children, padding = true, ...props }, ref) => (
   <DialogPortal>
     <DialogOverlay />
-    <DialogPrimitive.Content ref={ref} className={cn(dialogContentStyles, className)} {...props}>
+    <DialogPrimitive.Content
+      ref={ref}
+      className={cn(dialogContentStyles, padding && dialogContentPaddingStyles, className)}
+      {...props}
+    >
       {children}
       <DialogPrimitive.Close className={dialogCloseStyles}>
         <X className="h-4 w-4" />

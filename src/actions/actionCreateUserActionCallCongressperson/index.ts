@@ -22,8 +22,20 @@ import {
 } from '@/utils/server/serverLocalUser'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
-import { createActionCallCongresspersonInputValidationSchema } from './inputValidationSchema'
+
+import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
+import { zodAddress } from '@/validation/fields/zodAddress'
+import { zodDTSISlug } from '@/validation/fields/zodDTSISlug'
+import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
+import { nativeEnum, object } from 'zod'
 import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
+
+const createActionCallCongresspersonInputValidationSchema = object({
+  phoneNumber: zodPhoneNumber.transform(str => str && normalizePhoneNumber(str)),
+  campaignName: nativeEnum(UserActionCallCampaignName),
+  dtsiSlug: zodDTSISlug,
+  address: zodAddress,
+})
 
 export type CreateActionCallCongresspersonInput = z.infer<
   typeof createActionCallCongresspersonInputValidationSchema
