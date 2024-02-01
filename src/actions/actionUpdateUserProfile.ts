@@ -182,7 +182,9 @@ async function handleCapitolCanaryAdvocateUpsert(
     })
   }
 
-  // Only send updating payload if we do not have an SwC advocate ID or there has been a changed field, and we at least have email or phone number.
+  // Only send updating payload if we do not have an SwC advocate ID
+  // or there has been a changed field (name, address, email address, phone number, and opt-ins/outs),
+  // and we at least have email or phone number.
   // Breaking early if nothing has been changed.
   if (
     (!updatedUser.capitolCanaryAdvocateId ||

@@ -121,7 +121,8 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
     // Always use the embedded wallet email address as the primary email address.
     primaryUserEmailAddressId = email.id
 
-    // Note: we only want to update if the stored primary email address is different than the embedded wallet email address.
+    // Note: we want to create if we don't have a SwC advocate ID,
+    // and we want to update if the stored primary email address is different than the embedded wallet email address.
     if (
       !userCryptoAddress.user.capitolCanaryAdvocateId ||
       userCryptoAddress.user.capitolCanaryInstance == CapitolCanaryInstance.LEGACY ||

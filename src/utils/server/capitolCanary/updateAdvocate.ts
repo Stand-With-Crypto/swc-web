@@ -1,42 +1,14 @@
 import { UpsertAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { sendCapitolCanaryRequest } from '@/utils/server/capitolCanary/sendCapitolCanaryRequest'
+import { BaseUpsertAdvocateRequest } from '@/utils/server/capitolCanary/base'
 
 const CAPITOL_CANARY_UPDATE_ADVOCATE_API_URL = 'https://api.phone2action.com/2.0/advocates'
 
 // Interface based on: https://docs.phone2action.com/#:~:text=%3A19302020%0A%7D-,Update%20an%20advocate,-In%20order%20to
 // Interface should not be accessed directly - use the requirements interface (see `payloadRequirements.ts`).
-interface UpdateAdvocateInCapitolCanaryRequest {
+interface UpdateAdvocateInCapitolCanaryRequest extends BaseUpsertAdvocateRequest {
   // Required information.
   advocateid: number
-  campaigns: number[]
-
-  // Advocate information.
-  email?: string
-  phone?: string
-  firstname?: string
-  lastname?: string
-  address1?: string
-  address2?: string
-  city?: string
-  state?: string
-  zip5?: string
-  country?: string
-
-  // Opt-in/out.
-  smsOptin?: number
-  smsOptinConfirmed?: number
-  smsOptout?: number
-  emailOptin?: number
-  emailOptout?: number
-
-  // Metadata for Capitol Canary.
-  p2aSource?: string
-  utm_source?: string
-  utm_medium?: string
-  utm_campaign?: string
-  utm_term?: string
-  utm_content?: string
-  tags?: string[]
 }
 
 interface UpdateAdvocateInCapitolCanaryResponse {
