@@ -41,7 +41,10 @@ export const getIntlUrls = (
 
 export const externalUrls = {
   discord: () => 'https://discord.com/invite/standwithcrypto',
-  donate: () => 'https://commerce.coinbase.com/checkout/396fc233-3d1f-4dd3-8e82-6efdf78432ad',
+  donate: () =>
+    NEXT_PUBLIC_ENVIRONMENT === 'production'
+      ? 'https://commerce.coinbase.com/checkout/396fc233-3d1f-4dd3-8e82-6efdf78432ad'
+      : 'https://commerce.coinbase.com/checkout/582a836d-733c-4a66-84d9-4e3c40c90281',
   dtsi: () => 'https://www.dotheysupportit.com',
   dtsiCreateStance: (slug: string) =>
     `https://www.dotheysupportit.com/people/${slug}/create-stance`,
