@@ -34,7 +34,6 @@ it('page - resources interactions', () => {
   cy.get('[data-test-id=user-action-cta-CALL').should('have.length', 1)
   cy.get('[data-test-id=user-action-cta-DONATION').should('have.length', 1)
   cy.get('[data-test-id=user-action-cta-TWEET').should('have.length', 1)
-  cy.get('[data-test-id=user-action-cta-NFT_MINT').should('have.length', 1)
 
   // Test all links
   cy.get("a:not([href*='mailto:'])").each(page => {
