@@ -1,12 +1,8 @@
 'use client'
-
-import { useRouter } from 'next/navigation'
-import { ConnectWallet, useAddress, useLogin } from '@thirdweb-dev/react'
+import { useLogin } from '@thirdweb-dev/react'
 
 import { GetDefineMessageResults } from '@/types'
-import { cn } from '@/utils/web/cn'
 import { useThirdwebData } from '@/hooks/useThirdwebData'
-import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
 import { AccountAuthButton } from '@/components/app/accountAuth/context'
 

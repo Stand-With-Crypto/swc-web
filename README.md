@@ -53,15 +53,22 @@ Whenever you make Prisma schema changes (or pulling commits from `main` that inc
 
 ## Contributing to this project
 
-### Pre-commit audits
+### Pre-commit audits & testing
 
 - Before committing changes, please audit your code locally:
+
   - `npm run lint` - audits code against ESLint and Prettier
   - `npm run typecheck` - audits code against TypeScript
   - `npm run test` - execute Jest tests
   - `npm run precheck` - executes all 3 commands above concurrently
-  - `npm run e2e:run-headless` - runs all our e2e tests
-    - Currently these only execute when new comments are made to main branch because of database dependencies, this may change in the future
+    - If `precheck` fails, then it is very likely that your PR will not pass GitHub CI
+
+- Likewise, test E2E flows as necessary:
+  - `npm run e2e:run` - starts up [Cypress](https://www.cypress.io/) UI
+    - With the UI, you can run individual E2E tests under "Specs" and visually follow the flows
+  - `npm run e2e:run-headless` - runs all our E2E tests consecutively via Cypress CLI
+    - Currently, this command only executes when new comments are made to main branch because of database dependencies - this may change in the future
+  - Refer to `docs/Coding Conventions.md/Testing` for more information
 
 ### Contribution guide
 
@@ -71,7 +78,6 @@ Whenever you make Prisma schema changes (or pulling commits from `main` that inc
 
 Before proceeding with anything, **PLEASE** take time to review the [Knowledge pre-requisites](#knowledge-pre-requisites).
 
-- After running the server locally, visit [http://localhost:3000/en-US/internal/sample-architecture-patterns](http://localhost:3000/en-US/internal/sample-architecture-patterns) for sample architectural patterns
 - Read ["What is Prisma"](https://www.prisma.io/docs/orm/overview/introduction/what-is-prisma) and ["Why Prisma"](https://www.prisma.io/docs/orm/overview/introduction/why-prisma) to learn about the ORM we use to query our database
 - Watch [this YouTube video](https://www.youtube.com/watch?v=CQuTF-bkOgc) for a great overview of the tradeoffs between the UI library/framework options that exist for frontend development, and why we decided to use TailwindCSS + Radix UI as our template
 - Read Vercel's guide on ["Connection Pooling with Serverless Functions"](https://vercel.com/guides/connection-pooling-with-serverless-functions#modern-databases-with-high-connection-limits) to learn about the architecture tradeoffs of connecting to SQL database in serverless environments, and why we decided to leverage the robust scalability architecture inherent in [PlanetScale](https://planetscale.com/features)

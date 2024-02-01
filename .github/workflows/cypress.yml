@@ -2,7 +2,7 @@ name: Cypress Tests
 on:
   push:
     branches:
-      - cypress-setup
+      - node-version-workflow
       - main
 # Ideally we run this on every PR. Currently the CI flow wipes the testing database to ensure that each run is deterministic
 # To support per-branch testing, we need to invest the eng effort in allowing someone to point thier branch to their local db
@@ -26,6 +26,12 @@ jobs:
       CAPITOL_CANARY_API_KEY: ${{ secrets.CAPITOL_CANARY_API_KEY }}
       CAPITOL_CANARY_API_SECRET: ${{ secrets.CAPITOL_CANARY_API_SECRET }}
       CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
+      SWC_SHIELD_NFT_CONTRACT_ADDRESS: ${{ secrets.SWC_SHIELD_NFT_CONTRACT_ADDRESS }}
+      CALL_REPRESENTATIVE_NFT_CONTRACT_ADDRESS: ${{ secrets.CALL_REPRESENTATIVE_NFT_CONTRACT_ADDRESS }}
+      UPSTASH_REDIS_REST_URL: ${{ secrets.UPSTASH_REDIS_REST_URL }}
+      UPSTASH_REDIS_REST_TOKEN: ${{ secrets.UPSTASH_REDIS_REST_TOKEN }}
+      INNGEST_EVENT_KEY: ${{ secrets.INNGEST_EVENT_KEY }}
+      INNGEST_SIGNING_KEY: ${{ secrets.INNGEST_SIGNING_KEY }}
       # environment variables
       LOCAL_USER_CRYPTO_ADDRESS: ${{vars.LOCAL_USER_CRYPTO_ADDRESS}}
       NEXT_PUBLIC_ENVIRONMENT: ${{vars.NEXT_PUBLIC_ENVIRONMENT}}
@@ -39,6 +45,7 @@ jobs:
       # org level secrets
       CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
       GITHUB_TOKEN: ${{ secrets.CYPRESS_GITHUB_WORKFLOW_TOKEN_TRAVIS }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3

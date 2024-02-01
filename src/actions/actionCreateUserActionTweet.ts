@@ -2,6 +2,7 @@
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
 import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
 import { prismaClient } from '@/utils/server/prismaClient'
+import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
 import {
   AnalyticsUserActionUserState,
   getServerAnalytics,
@@ -13,6 +14,7 @@ import {
   parseLocalUserFromCookies,
 } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
+import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { UserActionTweetCampaignName } from '@/utils/shared/userActionCampaigns'
@@ -27,7 +29,12 @@ type UserWithRelations = User & {
   primaryUserCryptoAddress: UserCryptoAddress | null
 }
 
-export async function actionCreateUserActionTweet() {
+export const actionCreateUserActionTweet = withServerActionMiddleware(
+  'actionCreateUserActionTweet',
+  _actionCreateUserActionTweet,
+)
+
+async function _actionCreateUserActionTweet() {
   logger.info('triggered')
   const userMatch = await getMaybeUserAndMethodOfMatch({
     include: { primaryUserCryptoAddress: true },
@@ -35,6 +42,7 @@ export async function actionCreateUserActionTweet() {
   logger.info(userMatch.user ? 'found user' : 'no user found')
   const sessionId = getUserSessionId()
   const localUser = parseLocalUserFromCookies()
+  await throwIfRateLimited()
   const { user, userState } = await maybeUpsertUser({
     existingUser: userMatch.user,
     sessionId,

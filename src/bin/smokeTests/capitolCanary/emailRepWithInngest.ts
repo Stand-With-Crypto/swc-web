@@ -1,5 +1,8 @@
 import { inngest } from '@/inngest/inngest'
-import { SandboxCapitolCanaryCampaignId } from '@/utils/server/capitolCanary/campaigns'
+import {
+  CapitolCanaryCampaignName,
+  getCapitolCanaryCampaignID,
+} from '@/utils/server/capitolCanary/campaigns'
 import { EmailRepViaCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { mockUser } from '@/mocks/models/mockUser'
 import { mockAddress } from '@/mocks/models/mockAddress'
@@ -14,6 +17,7 @@ import { CAPITOL_CANARY_EMAIL_REP_INNGEST_EVENT_NAME } from '@/inngest/functions
  *
  * Verify that the advocate is created in Capitol Canary with an administrator.
  * The test email may not be "sent" if the zip code and address do not match up.
+ * Updating the database should fail since the mock user does not actually exist in the database.
  */
 
 async function smokeTestEmailRepWithInngest() {
@@ -22,7 +26,7 @@ async function smokeTestEmailRepWithInngest() {
   const mockedEmailAddress = mockUserEmailAddress()
 
   const payload: EmailRepViaCapitolCanaryPayloadRequirements = {
-    campaignId: SandboxCapitolCanaryCampaignId.DEFAULT_EMAIL_REPRESENTATIVE,
+    campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_EMAIL_REPRESENTATIVE),
     user: {
       ...mockedUser,
       address: mockedAddress,
@@ -30,6 +34,9 @@ async function smokeTestEmailRepWithInngest() {
     userEmailAddress: mockedEmailAddress,
     metadata: {
       tags: ['Smoke Test User'],
+    },
+    opts: {
+      isEmailOptin: true,
     },
     emailSubject: 'This is a test email subject.',
     emailMessage: 'This is a test email message.',

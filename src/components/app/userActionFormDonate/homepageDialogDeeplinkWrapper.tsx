@@ -2,7 +2,7 @@
 
 import { UserActionFormDonate } from '@/components/app/userActionFormDonate'
 import { UserActionFormDonateSkeleton } from '@/components/app/userActionFormDonate/skeleton'
-import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen/userActionFormSuccessScreen'
+import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useLocale } from '@/hooks/useLocale'
 import { getIntlUrls } from '@/utils/shared/urls'
@@ -23,6 +23,6 @@ export function UserActionFormDonateDeeplinkWrapper() {
       onSuccess={() => setState('success')}
     />
   ) : (
-    <UserActionFormSuccessScreen />
+    <UserActionFormSuccessScreen onClose={() => router.replace(urls.home())} />
   )
 }

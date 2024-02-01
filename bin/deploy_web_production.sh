@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 CHANGED=$(git diff-index --name-only HEAD --)
-BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+BRANCH="$(git branch --show-current)"
 
 if [[ "$BRANCH" != "main" ]]; then
      echo "deploy scripts should only be run from the main branch. you are on $BRANCH. Exiting deploy script.";
      exit 1;
 elif [[ -n "$CHANGED" ]] ; then
-     echo "You have uncommited changes, please commit those to main before deploying. Exiting deploy script."; 
+     echo "You have uncommited changes, please commit those to main before deploying. Exiting deploy script.";
      exit 1;
 else
      echo "deploying production web."
