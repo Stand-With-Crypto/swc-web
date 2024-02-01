@@ -6,9 +6,17 @@ import NFTMintStatus = $Enums.NFTMintStatus
 import { inngest } from '@/inngest/inngest'
 import { AIRDROP_NFT_INNGEST_EVENT_NAME } from '@/inngest/functions/airdropNFT'
 import { airdropPayload } from '@/utils/server/nft/payload'
-import { ACTION_NFT_SLUG, NFT_CONTRACT_ADDRESS } from '@/utils/server/nft/contractAddress'
+import { NFT_CONTRACT_ADDRESS } from '@/utils/server/nft/contractAddress'
+import { NFTSlug } from '@/utils/shared/nft'
 
-const USER_ACTION_WITH_NFT = [UserActionType.OPT_IN, UserActionType.CALL]
+const ACTION_NFT_SLUG: Record<UserActionType, NFTSlug | null> = {
+  [UserActionType.OPT_IN]: NFTSlug.SWC_SHIELD,
+  [UserActionType.CALL]: NFTSlug.CALL_REPRESENTATIVE_SEPT_11,
+  [UserActionType.EMAIL]: null,
+  [UserActionType.DONATION]: null,
+  [UserActionType.NFT_MINT]: null,
+  [UserActionType.TWEET]: null,
+}
 
 const logger = getLogger(`airdrop`)
 
@@ -75,7 +83,7 @@ async function userAlreadyClaimedNFT(userId: string, nftSlug: string) {
 export async function updateMinNFTStatus(
   mintNftId: string,
   nftMintStatus: NFTMintStatus,
-  transactionHash: string,
+  transactionHash: string | null,
 ) {
   await prismaClient.nFTMint.update({
     where: {
@@ -83,13 +91,17 @@ export async function updateMinNFTStatus(
     },
     data: {
       status: nftMintStatus,
-      transactionHash: transactionHash,
+      transactionHash: transactionHash ? transactionHash : '',
     },
   })
 }
 
 export async function mintPastActions(userId: string, userCryptoAddress: UserCryptoAddress) {
-  for (const actionType of USER_ACTION_WITH_NFT) {
+  const actionWithNFT = (Object.keys(ACTION_NFT_SLUG) as Array<UserActionType>).filter(
+    key => ACTION_NFT_SLUG[key] !== null,
+  )
+
+  for (const actionType of actionWithNFT) {
     const action = await prismaClient.userAction.findFirst({
       where: {
         userId: userId,

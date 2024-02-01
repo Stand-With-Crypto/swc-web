@@ -29,6 +29,8 @@ export async function engineAirdropNFT(
     logger.error('error airdropping NFT:' + e)
     Sentry.captureException(e, {
       level: 'error',
+      tags: { domain: 'engineAirdropNFT' },
+      extra: { contractAddress, walletAddress, quantity },
     })
     throw e
   }
@@ -44,6 +46,8 @@ export async function engineGetMintStatus(queryId: string) {
     logger.error('error airdropping NFT:' + e)
     Sentry.captureException(e, {
       level: 'error',
+      tags: { domain: 'engineGetMintStatus' },
+      extra: { queryId },
     })
     throw e
   }
