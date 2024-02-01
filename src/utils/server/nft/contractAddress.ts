@@ -1,3 +1,4 @@
+import { NFTSlug } from '@/utils/shared/nft'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 
 const SWC_SHIELD_NFT_CONTRACT_ADDRESS = requiredEnv(
@@ -10,17 +11,7 @@ const CALL_REPRESENTATIVE_NFT_CONTRACT_ADDRESS = requiredEnv(
   'CALL_REPRESENTATIVE_NFT_CONTRACT_ADDRESS',
 )
 
-export interface NFTInformation {
-  slug: string
-  contractAddress: string
-}
-
-export const SWCShieldThirdWebNFT = {
-  slug: 'swc-shield',
-  contractAddress: SWC_SHIELD_NFT_CONTRACT_ADDRESS,
-}
-
-export const CallYourRepresentativeSept11ThirdWebNFT = {
-  slug: 'call-representative-sept-11',
-  contractAddress: CALL_REPRESENTATIVE_NFT_CONTRACT_ADDRESS,
+export const NFT_CONTRACT_ADDRESS: Record<NFTSlug, string> = {
+  [NFTSlug.SWC_SHIELD]: SWC_SHIELD_NFT_CONTRACT_ADDRESS,
+  [NFTSlug.CALL_REPRESENTATIVE_SEPT_11]: CALL_REPRESENTATIVE_NFT_CONTRACT_ADDRESS,
 }

@@ -19,7 +19,7 @@ export function UserActionFormNFTMintDialog({
   return (
     <Dialog {...dialogProps}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="max-w-3xl p-0">
+      <DialogContent className="max-w-3xl">
         <Suspense fallback={<Skeleton className="h-80 w-full" />}>
           <LazyUserActionFormNFTMint
             {...formProps}

@@ -17,6 +17,7 @@ import { CAPITOL_CANARY_EMAIL_REP_INNGEST_EVENT_NAME } from '@/inngest/functions
  *
  * Verify that the advocate is created in Capitol Canary with an administrator.
  * The test email may not be "sent" if the zip code and address do not match up.
+ * Updating the database should fail since the mock user does not actually exist in the database.
  */
 
 async function smokeTestEmailRepWithInngest() {

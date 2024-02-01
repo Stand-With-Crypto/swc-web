@@ -44,10 +44,10 @@ export function IntroStaticContent({ children }: React.PropsWithChildren) {
             </ChecklistItem>
           </ul>
         </div>
-        <UserActionFormCallCongresspersonLayout.Footer>
-          {children}
-        </UserActionFormCallCongresspersonLayout.Footer>
       </UserActionFormCallCongresspersonLayout.Container>
+      <UserActionFormCallCongresspersonLayout.Footer>
+        {children}
+      </UserActionFormCallCongresspersonLayout.Footer>
     </UserActionFormCallCongresspersonLayout>
   )
 }

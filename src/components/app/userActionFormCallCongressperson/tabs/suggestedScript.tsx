@@ -1,10 +1,10 @@
-import * as Sentry from '@sentry/nextjs'
 import { useRouter } from 'next/navigation'
-import React, { useEffect } from 'react'
-import { z } from 'zod'
+import React, { useEffect, useState } from 'react'
 
-import { actionCreateUserActionCallCongressperson } from '@/actions/actionCreateUserActionCallCongressperson'
-import { createActionCallCongresspersonInputValidationSchema } from '@/actions/actionCreateUserActionCallCongressperson/inputValidationSchema'
+import {
+  CreateActionCallCongresspersonInput,
+  actionCreateUserActionCallCongressperson,
+} from '@/actions/actionCreateUserActionCallCongressperson'
 import { UserActionFormCallCongresspersonProps } from '@/components/app/userActionFormCallCongressperson'
 import { TabNames } from '@/components/app/userActionFormCallCongressperson/userActionFormCallCongressperson.types'
 import { Button } from '@/components/ui/button'
@@ -20,6 +20,7 @@ import { UserActionType } from '@prisma/client'
 import { TrackedExternalLink } from '@/components/ui/trackedExternalLink'
 import { userFullName } from '@/utils/shared/userFullName'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
+import { ArrowRight } from 'lucide-react'
 import { UserActionFormCallCongresspersonLayout } from './layout'
 
 export function SuggestedScript({
@@ -52,29 +53,17 @@ export function SuggestedScript({
     return official.phones[0]
   }, [dtsiPerson, civicData])
 
+  const [isCalling, setIsCalling] = useState(false)
+
   const handleCallAction = React.useCallback(
     async (phoneNumberToCall: string) => {
-      const input: z.infer<typeof createActionCallCongresspersonInputValidationSchema> = {
+      const data: CreateActionCallCongresspersonInput = {
         campaignName: UserActionCallCampaignName.DEFAULT,
         dtsiSlug: dtsiPerson.slug,
         phoneNumber: phoneNumberToCall,
         address: addressSchema,
       }
-      const validatedInput = createActionCallCongresspersonInputValidationSchema.safeParse(input)
 
-      if (!validatedInput.success) {
-        toastGenericError()
-        Sentry.captureMessage('Call Action - Invalid input', {
-          user: { id: user?.id },
-          extra: {
-            input,
-            validationResult: validatedInput.error,
-          },
-        })
-        return
-      }
-
-      const { data } = validatedInput
       const result = await triggerServerActionForForm(
         {
           formName: 'User Action Form Call Congressperson',
@@ -100,7 +89,7 @@ export function SuggestedScript({
         gotoTab(TabNames.SUCCESS_MESSAGE)
       }
     },
-    [addressSchema, dtsiPerson.slug, gotoTab, router, user?.id],
+    [addressSchema, dtsiPerson.slug, gotoTab, router],
   )
 
   return (
@@ -112,9 +101,9 @@ export function SuggestedScript({
             subtitle="You may not get a human on the line, but can leave a message to ensure that your voice will be heard."
           />
 
-          <div className="space-y-2">
-            <h2 className="text-base font-semibold">Suggested script</h2>
-            <div className="prose rounded-2xl bg-secondary p-5">
+          <div className="prose mx-auto">
+            <h2 className="mb-2 text-base font-semibold">Suggested script</h2>
+            <div className="rounded-2xl bg-secondary p-5">
               <p>
                 Hi, my name is <strong>{userFullName(user ?? {}, { fallback: '____' })}</strong>
               </p>
@@ -139,18 +128,25 @@ export function SuggestedScript({
       <UserActionFormCallCongresspersonLayout.CongresspersonDisplayFooter
         congressperson={dtsiPerson}
       >
-        {phoneNumber && (
-          <Button asChild>
-            <TrackedExternalLink
-              target="_self"
-              ref={ref}
-              href={`tel:${phoneNumber}`}
-              onClick={() => handleCallAction(phoneNumber)}
-            >
-              Call
-            </TrackedExternalLink>
-          </Button>
-        )}
+        {phoneNumber ? (
+          isCalling ? (
+            <Button onClick={() => handleCallAction(phoneNumber)}>
+              <span className="mr-1 inline-block">Call complete</span>{' '}
+              <ArrowRight className="h-5 w-5" />
+            </Button>
+          ) : (
+            <Button asChild>
+              <TrackedExternalLink
+                target="_self"
+                ref={ref}
+                href={`tel:${phoneNumber}`}
+                onClick={() => setIsCalling(true)}
+              >
+                Call
+              </TrackedExternalLink>
+            </Button>
+          )
+        ) : null}
       </UserActionFormCallCongresspersonLayout.CongresspersonDisplayFooter>
     </>
   )
