@@ -13,17 +13,31 @@ import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/shared
 import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
 import { cn } from '@/utils/web/cn'
 import { X } from 'lucide-react'
+import {
+  PrimitiveComponentAnalytics,
+  trackPrimitiveComponentAnalytics,
+} from '@/utils/web/primitiveComponentAnalytics'
 
-function Dialog({ onOpenChange, ...props }: DialogPrimitive.DialogProps) {
+function Dialog({
+  onOpenChange,
+  analytics,
+  ...props
+}: DialogPrimitive.DialogProps & PrimitiveComponentAnalytics<boolean>) {
   const wrappedOnChangeOpen = React.useCallback(
     (open: boolean) => {
-      trackClientAnalytic(`Dialog ${open ? 'Opened' : 'Closed'}`, {
-        component: AnalyticComponentType.modal,
-        action: AnalyticActionType.view,
-      })
+      trackPrimitiveComponentAnalytics(
+        ({ properties }) => {
+          trackClientAnalytic(`Dialog ${open ? 'Opened' : 'Closed'}`, {
+            component: AnalyticComponentType.modal,
+            action: AnalyticActionType.view,
+            ...properties,
+          })
+        },
+        { args: open, analytics },
+      )
       onOpenChange?.(open)
     },
-    [onOpenChange],
+    [onOpenChange, analytics],
   )
   return <DialogPrimitive.Root onOpenChange={wrappedOnChangeOpen} {...props} />
 }

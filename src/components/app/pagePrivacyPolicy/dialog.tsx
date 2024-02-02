@@ -14,7 +14,7 @@ export const LazyPagePrivacyPolicy = lazy(() =>
 
 export function PrivacyPolicyDialog({ children }: { children: React.ReactNode }) {
   return (
-    <Dialog>
+    <Dialog analytics={'Privacy Policy'}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className=" max-w-7xl" padding={false}>
         <div className="flex max-h-dvh w-full flex-col">

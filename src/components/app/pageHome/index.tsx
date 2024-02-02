@@ -51,7 +51,9 @@ export function PageHome({
           </UserActionFormOptInSWCDialog>
         </div>
         <div className="order-0 md:container lg:order-1 lg:px-0">
-          <Dialog>
+          <Dialog
+            analytics={{ Category: 'Homepage Hero Section', CTA: '2023-12-11 Presidential Forum' }}
+          >
             <DialogTrigger asChild>
               <LinkBox className="relative h-[320px] cursor-pointer overflow-hidden md:rounded-xl lg:h-[400px]">
                 <NextImage
@@ -120,6 +122,7 @@ export function PageHome({
             See how our community is taking a stand to safeguard the future of crypto in America.
           </PageSubTitle>
           <Tabs
+            analytics={'Homepage Our Community Tabs'}
             defaultValue={RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY}
             className="mx-auto w-full max-w-2xl"
           >

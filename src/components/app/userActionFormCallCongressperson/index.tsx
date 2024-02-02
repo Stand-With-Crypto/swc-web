@@ -4,7 +4,7 @@ import { z } from 'zod'
 
 import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
 import { DTSIPeopleByCongressionalDistrictQueryResult } from '@/data/dtsi/queries/queryDTSIPeopleByCongressionalDistrict'
-import { UseTabsReturn, useTabs } from '@/hooks/useTabs'
+import { UseSectionsReturn, useSections } from '@/hooks/useSections'
 import { GoogleCivicInfoResponse } from '@/utils/shared/googleCivicInfo'
 import { zodAddress } from '@/validation/fields/zodAddress'
 
@@ -12,7 +12,7 @@ import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSucc
 import { Address } from './tabs/address'
 import { Intro } from './tabs/intro'
 import { SuggestedScript } from './tabs/suggestedScript'
-import { TabNames } from './userActionFormCallCongressperson.types'
+import { ANALYTICS_NAME_USER_ACTION_FORM_CALL_CONGRESSPERSON, SectionNames } from './constants'
 
 interface OnFindCongressPersonPayload {
   dtsiPerson: DTSIPeopleByCongressionalDistrictQueryResult
@@ -20,7 +20,7 @@ interface OnFindCongressPersonPayload {
   addressSchema: z.infer<typeof zodAddress>
 }
 
-export interface UserActionFormCallCongresspersonProps extends UseTabsReturn<TabNames> {
+export interface UserActionFormCallCongresspersonProps extends UseSectionsReturn<SectionNames> {
   user: GetUserFullProfileInfoResponse['user']
   onFindCongressperson: (payload: OnFindCongressPersonPayload) => void
   congressPersonData: OnFindCongressPersonPayload
@@ -33,27 +33,28 @@ export function UserActionFormCallCongressperson({
   user: GetUserFullProfileInfoResponse['user']
   onClose: () => void
 }) {
-  const tabProps = useTabs<TabNames>({
-    tabs: Object.values(TabNames),
-    initialTabId: TabNames.INTRO,
+  const sectionProps = useSections<SectionNames>({
+    sections: Object.values(SectionNames),
+    initialSectionId: SectionNames.INTRO,
+    analyticsName: ANALYTICS_NAME_USER_ACTION_FORM_CALL_CONGRESSPERSON,
   })
-  const { currentTab, onTabNotFound } = tabProps
+  const { currentSection: currentTab, onSectionNotFound: onTabNotFound } = sectionProps
 
   const [congressPersonData, setCongresspersonData] = React.useState<OnFindCongressPersonPayload>()
 
   switch (currentTab) {
-    case TabNames.INTRO:
-      return <Intro {...tabProps} />
-    case TabNames.ADDRESS:
+    case SectionNames.INTRO:
+      return <Intro {...sectionProps} />
+    case SectionNames.ADDRESS:
       return (
         <Address
           user={user}
           onFindCongressperson={setCongresspersonData}
           congressPersonData={congressPersonData}
-          {...tabProps}
+          {...sectionProps}
         />
       )
-    case TabNames.SUGGESTED_SCRIPT:
+    case SectionNames.SUGGESTED_SCRIPT:
       // This should never happen in the normal tab flow, but if it does, we want to know about it
       if (!congressPersonData) {
         const err = new Error('Call Action - Missing congressPersonData')
@@ -63,8 +64,10 @@ export function UserActionFormCallCongressperson({
         throw err
       }
 
-      return <SuggestedScript user={user} congressPersonData={congressPersonData} {...tabProps} />
-    case TabNames.SUCCESS_MESSAGE:
+      return (
+        <SuggestedScript user={user} congressPersonData={congressPersonData} {...sectionProps} />
+      )
+    case SectionNames.SUCCESS_MESSAGE:
       return <UserActionFormSuccessScreen onClose={onClose} />
     default:
       onTabNotFound()
