@@ -32,6 +32,7 @@ const Tabs = React.forwardRef<
   )
   return <TabsPrimitive.Root onValueChange={wrappedOnChangeOpen} ref={ref} {...props} />
 })
+Tabs.displayName = TabsPrimitive.Root.displayName
 
 const TabsList = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.List>,

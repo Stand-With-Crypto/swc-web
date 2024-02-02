@@ -92,16 +92,19 @@ interface CheckboxFieldProps extends CheckboxProps {
   helpText: string
 }
 
-function CheckboxField({ label, helpText, ...props }: CheckboxFieldProps) {
-  return (
-    <FormItem>
-      <label className="flex cursor-pointer items-center gap-2">
-        <FormControl>
-          <Checkbox {...props} />
-        </FormControl>
-        <p>{label}</p>
-        <InfoBadge analytics={'Cookie Preferences Info Badge'}>{helpText}</InfoBadge>
-      </label>
-    </FormItem>
-  )
-}
+const CheckboxField = React.forwardRef<React.ElementRef<typeof FormItem>, CheckboxFieldProps>(
+  ({ label, helpText, ...props }, ref) => {
+    return (
+      <FormItem ref={ref}>
+        <label className="flex cursor-pointer items-center gap-2">
+          <FormControl>
+            <Checkbox {...props} />
+          </FormControl>
+          <p>{label}</p>
+          <InfoBadge analytics={'Cookie Preferences Info Badge'}>{helpText}</InfoBadge>
+        </label>
+      </FormItem>
+    )
+  },
+)
+CheckboxField.displayName = 'CheckboxField'
