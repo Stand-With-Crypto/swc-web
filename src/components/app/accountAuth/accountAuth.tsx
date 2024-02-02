@@ -7,6 +7,8 @@ import { ConnectEmbedProps, useConnectionStatus, useWalletContext } from '@third
 import { useScreen, ReservedScreens } from './screen'
 import { useSignInRequired } from './useSignInRequired'
 import { AccountAuthContent } from './content'
+import { LoadingOverlay } from '@/components/ui/loadingOverlay'
+import { noop } from 'lodash'
 
 export function AccountAuth({ onClose, ...props }: ConnectEmbedProps & { onClose: () => void }) {
   const router = useRouter()
@@ -26,18 +28,29 @@ export function AccountAuth({ onClose, ...props }: ConnectEmbedProps & { onClose
     router.refresh()
   }, [onClose, router])
 
-  if (isAutoConnecting || connectionStatus === 'unknown') {
-    return null
+  const accountAuthContentProps = {
+    ...props,
+    initialScreen: initialScreen,
+    screen: screen,
+    setScreen: setScreen,
+    isOpen: true,
+    onClose: handleClose,
   }
 
-  return (
-    <AccountAuthContent
-      {...props}
-      initialScreen={initialScreen}
-      screen={screen}
-      setScreen={setScreen}
-      isOpen={true}
-      onClose={handleClose}
-    />
-  )
+  if (isAutoConnecting || connectionStatus === 'unknown') {
+    return (
+      <>
+        <LoadingOverlay />
+        <AccountAuthContent
+          {...accountAuthContentProps}
+          screen={initialScreen}
+          setScreen={noop}
+          onClose={handleClose}
+          disabled
+        />
+      </>
+    )
+  }
+
+  return <AccountAuthContent {...accountAuthContentProps} />
 }

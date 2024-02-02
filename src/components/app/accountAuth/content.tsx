@@ -56,8 +56,9 @@ export function AccountAuthContent(props: {
   setScreen: (screen: string | WalletConfig) => void
   isOpen: boolean
   onClose: () => void
+  disabled?: boolean
 }) {
-  const { screen, setScreen, initialScreen, onClose } = props
+  const { screen, setScreen, initialScreen, onClose, disabled = false } = props
 
   const [selectionData, setSelectionData] = React.useState()
   const [OTPEmailAddress, setOTPEmailAddress] = React.useState('')
@@ -249,6 +250,7 @@ export function AccountAuthContent(props: {
             setOTPEmailAddress(emailAddress)
             setScreen(ReservedScreens.OTP_EMAIL_CONFIRMATION)
           }}
+          disabled={disabled}
         />
 
         <div className="flex w-full items-center gap-2">
@@ -352,7 +354,13 @@ function ConnectionMethodsContainer({ children }: React.PropsWithChildren) {
   )
 }
 
-function EmailForm({ onSubmit }: { onSubmit: (data: { emailAddress: string }) => void }) {
+function EmailForm({
+  onSubmit,
+  disabled = false,
+}: {
+  onSubmit: (data: { emailAddress: string }) => void
+  disabled?: boolean
+}) {
   const form = useForm({
     defaultValues: {
       emailAddress: '',
@@ -372,6 +380,7 @@ function EmailForm({ onSubmit }: { onSubmit: (data: { emailAddress: string }) =>
           <FormField
             control={form.control}
             name="emailAddress"
+            disabled={disabled}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Email</FormLabel>
