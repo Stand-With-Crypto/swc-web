@@ -52,7 +52,7 @@ const contentSecurityPolicy = {
     '*.google.com',
     'https://vercel.live/api/event/tick',
     'https://vitals.vercel-insights.com/v1/vitals',
-    'https://api-js.mixpanel.com/track/*',
+    'https://api-js.mixpanel.com/',
   ],
   'frame-src': [
     '*.google.com',
