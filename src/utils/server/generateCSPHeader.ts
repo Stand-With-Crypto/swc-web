@@ -59,8 +59,7 @@ export function generateCSPHeader() {
                 These tradeoffs are establish
                 */
 
-          // `'${nonce}'`
-          ``,
+          `'${nonce}'`,
       isDev ? '' : 'https://static.ads-twitter.com/uwt.js',
       'https://*.googleapis.com',
       'https://*.gstatic.com',
