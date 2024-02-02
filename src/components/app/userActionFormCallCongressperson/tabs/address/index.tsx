@@ -75,58 +75,55 @@ export function Address({ user, onFindCongressperson, congressPersonData, gotoTa
   }, [liveCongressPersonData, onFindCongressperson, form])
 
   return (
-    <UserActionFormCallCongresspersonLayout onBack={() => gotoTab(TabNames.INTRO)}>
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(
-            () => gotoTab(TabNames.SUGGESTED_SCRIPT),
-            trackFormSubmissionSyncErrors(FORM_NAME),
-          )}
-        >
+    <Form {...form}>
+      <form
+        onSubmit={form.handleSubmit(
+          () => gotoTab(TabNames.SUGGESTED_SCRIPT),
+          trackFormSubmissionSyncErrors(FORM_NAME),
+        )}
+      >
+        <UserActionFormCallCongresspersonLayout onBack={() => gotoTab(TabNames.INTRO)}>
           <UserActionFormCallCongresspersonLayout.Container>
             <UserActionFormCallCongresspersonLayout.Heading
               title="Find your representative"
               subtitle="Your address will be used to connect you with your representative. Stand With Crypto will never share your data with any third-parties."
             />
 
-            <div className="pb-64">
-              <FormField
-                control={form.control}
-                name="address"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Address</FormLabel>
-                    <FormControl>
-                      <GooglePlacesSelect
-                        {...field}
-                        value={field.value}
-                        onChange={field.onChange}
-                        placeholder="Your full address"
-                      />
-                    </FormControl>
-                    <FormErrorMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-
-            <UserActionFormCallCongresspersonLayout.Footer>
-              <SubmitButton
-                isLoading={form.formState.isSubmitting || isLoadingLiveCongressPersonData}
-                disabled={!congressPersonData}
-              />
-
-              <p className="text-sm">
-                Learn more about our{' '}
-                <InternalLink href={urls.privacyPolicy()} className="underline">
-                  privacy policy
-                </InternalLink>
-              </p>
-            </UserActionFormCallCongresspersonLayout.Footer>
+            <FormField
+              control={form.control}
+              name="address"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Address</FormLabel>
+                  <FormControl>
+                    <GooglePlacesSelect
+                      {...field}
+                      value={field.value}
+                      onChange={field.onChange}
+                      placeholder="Your full address"
+                    />
+                  </FormControl>
+                  <FormErrorMessage />
+                </FormItem>
+              )}
+            />
           </UserActionFormCallCongresspersonLayout.Container>
-        </form>
-      </Form>
-    </UserActionFormCallCongresspersonLayout>
+          <UserActionFormCallCongresspersonLayout.Footer>
+            <SubmitButton
+              isLoading={form.formState.isSubmitting || isLoadingLiveCongressPersonData}
+              disabled={!congressPersonData}
+            />
+
+            <p className="text-sm">
+              Learn more about our{' '}
+              <InternalLink href={urls.privacyPolicy()} tabIndex={-1} className="underline">
+                privacy policy
+              </InternalLink>
+            </p>
+          </UserActionFormCallCongresspersonLayout.Footer>
+        </UserActionFormCallCongresspersonLayout>
+      </form>
+    </Form>
   )
 }
 

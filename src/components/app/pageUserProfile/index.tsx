@@ -1,6 +1,6 @@
 import { PageUserProfileUser } from '@/components/app/pageUserProfile/getAuthenticatedData'
 import { UpdateUserProfileFormDialog } from '@/components/app/updateUserProfileForm/dialog'
-import { hasAllFormFieldsOnUserForUpdateUserProfileForm } from '@/components/app/updateUserProfileForm/hasAllFormFieldsOnUser'
+import { hasCompleteUserProfile } from '@/utils/web/hasCompleteUserProfile'
 import { UserActionRowCTAsList } from '@/components/app/userActionRowCTA/userActionRowCTAsList'
 import { SensitiveDataUserAvatar } from '@/components/app/userAvatar'
 import { Button } from '@/components/ui/button'
@@ -55,7 +55,7 @@ export function PageUserProfile({
         </div>
         <div>
           <UpdateUserProfileFormDialog user={user}>
-            {hasAllFormFieldsOnUserForUpdateUserProfileForm(user) ? (
+            {hasCompleteUserProfile(user) ? (
               <Button variant="secondary">Edit your profile</Button>
             ) : (
               <Button>Finish your profile</Button>

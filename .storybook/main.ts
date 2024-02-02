@@ -14,6 +14,7 @@ const config: StorybookConfig = {
     name: '@storybook/nextjs',
     options: {},
   },
+  staticDirs: ['../public'],
   docs: {
     autodocs: 'tag',
   },
@@ -22,6 +23,19 @@ const config: StorybookConfig = {
     if (config.resolve) {
       config.resolve.alias = {
         ...config.resolve.alias,
+        '@/actions/actionCreateUserActionTweet': path.resolve(__dirname, './serverActionMocks.ts'),
+        '@/actions/actionCreateUserActionCallCongressperson': path.resolve(
+          __dirname,
+          './serverActionMocks.ts',
+        ),
+        '@/actions/actionCreateUserActionEmailCongressperson': path.resolve(
+          __dirname,
+          './serverActionMocks.ts',
+        ),
+        '@/actions/actionUpdateUserHasOptedInToMembership': path.resolve(
+          __dirname,
+          './serverActionMocks.ts',
+        ),
         '@': path.resolve(__dirname, '../src'),
       }
     }

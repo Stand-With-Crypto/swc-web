@@ -1,7 +1,8 @@
 'use server'
-import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
 import { mergeUsers } from '@/utils/server/mergeUsers/mergeUsers'
 import { prismaClient } from '@/utils/server/prismaClient'
+import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
+import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
 import { getLogger } from '@/utils/shared/logger'
 import 'server-only'
 import { z } from 'zod'
@@ -13,7 +14,12 @@ const schema = z.object({
 
 const logger = getLogger(`actionConfirmUserMergeAlert`)
 
-export async function actionConfirmUserMergeAlert(data: z.infer<typeof schema>) {
+export const actionConfirmUserMergeAlert = withServerActionMiddleware(
+  'actionConfirmUserMergeAlert',
+  _actionConfirmUserMergeAlert,
+)
+
+async function _actionConfirmUserMergeAlert(data: z.infer<typeof schema>) {
   const authUser = await appRouterGetAuthUser()
   if (!authUser) {
     throw new Error('Unauthenticated')

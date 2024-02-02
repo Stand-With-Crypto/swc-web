@@ -27,6 +27,11 @@ export default async function InternalHomepage() {
                 target: '_blank',
               },
               {
+                children: 'Page - Client Component Server Action Error',
+                href: '/internal/debug-sentry-client-server-action',
+                target: '_blank',
+              },
+              {
                 children: 'Page - Server Component Dynamic Error',
                 href: '/internal/debug-sentry-dynamic-server',
                 target: '_blank',

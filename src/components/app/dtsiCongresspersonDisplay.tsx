@@ -26,7 +26,10 @@ export function DtsiCongresspersonDisplay({
         </div>
       </div>
       <div>
-        <div className="font-bold">Your representative is {dtsiPersonFullName(congressperson)}</div>
+        <div className="font-bold">
+          Your representative is{' '}
+          <span className="text-nowrap">{dtsiPersonFullName(congressperson)}</span>
+        </div>
         <div className="text-fontcolor-muted">
           {convertDTSIStanceScoreToCryptoSupportLanguageSentence(congressperson)}
         </div>
