@@ -11,6 +11,7 @@ import { PageTitle } from '@/components/ui/pageTitleText'
 import { useLoadingCallback } from '@/hooks/useLoadingCallback'
 import { cn } from '@/utils/web/cn'
 import { OTPInput } from '@/components/ui/otpInput'
+import { useEffectOnce } from '@/hooks/useEffectOnce'
 
 interface EmailConfirmationProps {
   onConfirm: (code: string) => void
@@ -31,17 +32,7 @@ export function OTPEmailConfirmation({ onConfirm, onBack, emailAddress }: EmailC
     sendVerificationEmailWithLoading({ email: emailAddress })
   }, [emailAddress, sendVerificationEmailWithLoading])
 
-  // The component is mounted twice on local due to strict mode,
-  // this ensures we only send the email once both in local and in production
-  // This comes from @thirdweb-dev/react
-  const sentVerificationEmailOnMount = React.useRef(false)
-  React.useEffect(() => {
-    if (!sentVerificationEmailOnMount.current) {
-      sendVerificationEmailToAddress()
-      sentVerificationEmailOnMount.current = true
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  useEffectOnce(sendVerificationEmailToAddress)
 
   const handleConfirm = (syncCode?: string) => {
     const codeToUse = syncCode ?? code

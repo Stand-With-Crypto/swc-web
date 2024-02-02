@@ -1,7 +1,6 @@
 'use client'
 
 import React from 'react'
-import { useEffectOnce } from 'react-use'
 import { CrossCircledIcon } from '@radix-ui/react-icons'
 
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
@@ -10,6 +9,7 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { cn } from '@/utils/web/cn'
 
 import type { SignatureScreenStatus } from './signatureScreen'
+import { useEffectOnce } from '@/hooks/useEffectOnce'
 
 interface HeadlessSignInProps {
   signIn: () => void
@@ -17,9 +17,7 @@ interface HeadlessSignInProps {
 }
 
 export function HeadlessSignIn({ signIn, status }: HeadlessSignInProps) {
-  useEffectOnce(() => {
-    signIn()
-  })
+  useEffectOnce(signIn)
 
   return (
     <div className={cn('flex min-h-96 w-full flex-col')}>
