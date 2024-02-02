@@ -34,7 +34,7 @@ async function smokeTestAirdropNFTWithInngest() {
     },
   })
 
-  const userAction = await prismaClient.userAction.create({
+  await prismaClient.userAction.create({
     data: {
       user: { connect: { id: user.id } },
       nftMint: { connect: { id: nftMint.id } },
