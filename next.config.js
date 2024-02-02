@@ -3,7 +3,10 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
 
-const isDev = process.env.NEXT_PUBLIC_ENVIRONMENT === 'local'
+const isDev =
+  process.env.NODE_ENV === 'development' ||
+  process.env.VERCEL_ENV === 'development' ||
+  process.env.NODE_ENV === 'test'
 
 const contentSecurityPolicy = {
   'default-src': ["'self'", 'blob:'],
@@ -22,6 +25,7 @@ const contentSecurityPolicy = {
     'https://va.vercel-scripts.com/v1/speed-insights/script.debug.js',
     'https://va.vercel-scripts.com/v1/script.debug.js',
     'https://www.youtube.com/',
+    'https://vercel.live/_next-live/feedback/feedback.js',
   ],
   'img-src': [
     "'self'",
