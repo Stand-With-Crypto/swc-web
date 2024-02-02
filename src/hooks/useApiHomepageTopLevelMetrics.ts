@@ -6,20 +6,6 @@ import { useEffect, useState } from 'react'
 import useSWR from 'swr'
 
 export function useApiHomepageTopLevelMetrics(initial: GetHomepageTopLevelMetricsResponse) {
-  const mockDecreaseInValuesOnInitialLoadSoWeCanAnimateIncrease: GetHomepageTopLevelMetricsResponse =
-    {
-      sumDonations: {
-        amountUsd: initial.sumDonations.amountUsd - 99,
-      },
-      countUsers: {
-        count: initial.countUsers.count - 1,
-      },
-      countPolicymakerContacts: {
-        countUserActionCalls: initial.countPolicymakerContacts.countUserActionCalls - 1,
-        countUserActionEmailRecipients:
-          initial.countPolicymakerContacts.countUserActionEmailRecipients - 1,
-      },
-    }
   const initialDelayToShowAnimation = 1500
   const [refreshInterval, setRefreshInterval] = useState(initialDelayToShowAnimation)
   /*
@@ -39,7 +25,7 @@ export function useApiHomepageTopLevelMetrics(initial: GetHomepageTopLevelMetric
         .then(data => data as GetHomepageTopLevelMetricsResponse),
     {
       revalidateOnMount: false,
-      fallbackData: mockDecreaseInValuesOnInitialLoadSoWeCanAnimateIncrease,
+      fallbackData: initial,
       refreshInterval,
     },
   )

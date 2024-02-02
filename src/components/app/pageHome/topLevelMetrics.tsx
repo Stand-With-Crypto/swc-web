@@ -6,17 +6,38 @@ import { useApiHomepageTopLevelMetrics } from '@/hooks/useApiHomepageTopLevelMet
 import { SupportedLocale } from '@/intl/locales'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { cn } from '@/utils/web/cn'
+import { motion } from 'framer-motion'
 import { useMemo } from 'react'
 
-export function TopLevelMetrics({
-  locale,
-  ...data
-}: Pick<
+type Props = Pick<
   Awaited<ReturnType<typeof getHomepageData>>,
   'countPolicymakerContacts' | 'countUsers' | 'sumDonations'
-> & { locale: SupportedLocale }) {
-  const values = useApiHomepageTopLevelMetrics(data).data
+> & { locale: SupportedLocale }
 
+const mockDecreaseInValuesOnInitialLoadSoWeCanAnimateIncrease = (
+  initial: Omit<Props, 'locale'>,
+): Omit<Props, 'locale'> => ({
+  sumDonations: {
+    amountUsd: initial.sumDonations.amountUsd - 99,
+  },
+  countUsers: {
+    count: initial.countUsers.count - 1,
+  },
+  countPolicymakerContacts: {
+    countUserActionCalls: initial.countPolicymakerContacts.countUserActionCalls - 1,
+    countUserActionEmailRecipients:
+      initial.countPolicymakerContacts.countUserActionEmailRecipients - 1,
+  },
+})
+
+export function TopLevelMetrics({ locale, ...data }: Props & { locale: SupportedLocale }) {
+  const decreasedInitialValues = useMemo(
+    () => mockDecreaseInValuesOnInitialLoadSoWeCanAnimateIncrease(data),
+    [data],
+  )
+  const values = useApiHomepageTopLevelMetrics(decreasedInitialValues).data
+  const isUsingDecreasedInitialValues =
+    decreasedInitialValues.sumDonations.amountUsd === values.sumDonations.amountUsd
   const formatted = useMemo(() => {
     return {
       sumDonations: {
@@ -60,18 +81,12 @@ export function TopLevelMetrics({
         },
         {
           label: 'Crypto advocates',
-          value: (
-            <div>
-              <AnimatedNumericOdometer size={35} value={formatted.countUsers.count} />
-            </div>
-          ),
+          value: <AnimatedNumericOdometer size={35} value={formatted.countUsers.count} />,
         },
         {
           label: 'Policymaker contacts',
           value: (
-            <div>
-              <AnimatedNumericOdometer size={35} value={formatted.countPolicymakerContacts.count} />
-            </div>
+            <AnimatedNumericOdometer size={35} value={formatted.countPolicymakerContacts.count} />
           ),
         },
       ].map(({ label, value }, index) => (
@@ -86,8 +101,14 @@ export function TopLevelMetrics({
           )}
           key={label}
         >
-          {value}
-          <div className="text-gray-500">{label}</div>
+          <motion.div
+            initial={{ opacity: 0.5 }}
+            transition={{ duration: 1.5 }}
+            animate={isUsingDecreasedInitialValues ? { opacity: 0.5 } : { opacity: 1 }}
+          >
+            {value}
+          </motion.div>
+          <motion.div className="text-gray-500">{label}</motion.div>
         </div>
       ))}
     </section>
