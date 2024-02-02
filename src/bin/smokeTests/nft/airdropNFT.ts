@@ -1,7 +1,4 @@
 import { inngest } from '@/inngest/inngest'
-import { mockUser } from '@/mocks/models/mockUser'
-import { mockAddress } from '@/mocks/models/mockAddress'
-import { mockUserEmailAddress } from '@/mocks/models/mockUserEmailAddress'
 import { runBin } from '@/bin/runBin'
 import { airdropPayload } from '@/utils/server/nft/payload'
 import { AIRDROP_NFT_INNGEST_EVENT_NAME } from '@/inngest/functions/airdropNFT'
