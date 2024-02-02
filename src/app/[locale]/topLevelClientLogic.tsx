@@ -104,7 +104,7 @@ export function TopLevelClientLogic({
         <Suspense>
           <InitialOrchestration />
         </Suspense>
-        <AccountAuthContextProvider>{children}</AccountAuthContextProvider>
+        {children}
       </ThirdwebProvider>
     </LocaleContext.Provider>
   )

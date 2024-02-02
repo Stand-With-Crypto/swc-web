@@ -22,11 +22,11 @@ export function useResponsiveDialog() {
   return React.useMemo(
     () => ({
       isMobile,
-      Dialog: isMobile ? Drawer : Dialog,
-      DialogTrigger: isMobile ? DrawerTrigger : DialogTrigger,
-      DialogContent: isMobile ? DrawerContent : DialogContent,
-      DialogHeader: isMobile ? DrawerHeader : DialogHeader,
-      DialogTitle: isMobile ? DrawerTitle : DialogTitle,
+      Dialog: Dialog,
+      DialogTrigger: DialogTrigger,
+      DialogContent: DialogContent,
+      DialogHeader: DialogHeader,
+      DialogTitle: DialogTitle,
     }),
     [isMobile],
   )

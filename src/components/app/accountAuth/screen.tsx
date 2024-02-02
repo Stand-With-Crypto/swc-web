@@ -22,6 +22,7 @@ export function useScreen() {
   const wallet = useWallet()
 
   // when the initial screen changes, reset the screen to the initial screen ( if the modal is closed )
+  // TODO: Explain it is from thirdweb
   useEffect(() => {
     if (initialScreen !== prevInitialScreen.current) {
       prevInitialScreen.current = initialScreen

@@ -140,6 +140,7 @@ export function SuggestedScript({
                 ref={ref}
                 href={`tel:${phoneNumber}`}
                 onClick={() => setIsCalling(true)}
+                target="_self"
               >
                 Call
               </TrackedExternalLink>

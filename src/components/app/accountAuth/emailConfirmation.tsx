@@ -60,7 +60,7 @@ export function OTPEmailConfirmation({ onConfirm, onBack, emailAddress }: EmailC
 
           <OTPInput
             onChange={handleChangeOTPInput}
-            length={OTP_LENGTH}
+            numInputs={OTP_LENGTH}
             onEnter={handleConfirm}
             disabled={isSendingVerificationMail}
           />

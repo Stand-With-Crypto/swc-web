@@ -65,11 +65,11 @@ export function trackExternalLink(eventProperties?: AnalyticProperties) {
   trackClientAnalytic('External Link clicked', { ...eventProperties })
 }
 
-export type LoginAttemptMethod = 'email' | 'google' | 'wallet'
+export type LoginProvider = 'email' | 'google' | 'wallet'
 export function trackLoginAttempt({
   method,
   ...eventProperties
-}: { method: LoginAttemptMethod } & AnalyticProperties) {
+}: { method: LoginProvider } & AnalyticProperties) {
   trackClientAnalytic('Login Attempt', {
     Method: method,
     ...eventProperties,

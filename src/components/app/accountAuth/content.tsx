@@ -17,7 +17,6 @@ import { useForm } from 'react-hook-form'
 import { object } from 'zod'
 import { toast } from 'sonner'
 
-import { Noop } from '@/components/ui/noop'
 import { NextImage } from '@/components/ui/image'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
@@ -32,7 +31,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { zodEmailAddress } from '@/validation/fields/zodEmailAddress'
 import { toastGenericError } from '@/utils/web/toastUtils'
 import { cn } from '@/utils/web/cn'
-import { LoginAttemptMethod, trackLoginAttempt } from '@/utils/web/clientAnalytics'
+import { LoginProvider, trackLoginAttempt } from '@/utils/web/clientAnalytics'
 import { getUserSessionIdOnClient } from '@/utils/web/clientUserSessionId'
 import {
   Form,
@@ -48,6 +47,7 @@ import { WalletSelectUIProps, WalletConnect } from './walletConnect'
 import { GOOGLE_AUTH_LOGO, ACCOUNT_AUTH_CONFIG } from './constants'
 import { SignatureScreen } from './signatureScreen'
 import { OTPEmailConfirmation } from './emailConfirmation'
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 
 export function AccountAuthContent(props: {
   screen: string | WalletConfig
@@ -60,10 +60,7 @@ export function AccountAuthContent(props: {
 
   const [selectionData, setSelectionData] = React.useState()
   const [OTPEmailAddress, setOTPEmailAddress] = React.useState('')
-  const [lastAttemptedMethod, setLastAttemptedMethod] = React.useState<LoginAttemptMethod | null>(
-    null,
-  )
-  const { Dialog, DialogContent, DialogTrigger } = useResponsiveDialog()
+  const [currentLoginProvider, setCurrentLoginProvider] = React.useState<LoginProvider | null>(null)
 
   const { user } = useUser()
   const authConfig = useThirdwebAuthContext()
@@ -84,22 +81,20 @@ export function AccountAuthContent(props: {
   }, [setScreen, initialScreen, connectionStatus, disconnect])
 
   const registerLoginAttemptOnAnalytics = React.useCallback(() => {
-    if (!lastAttemptedMethod) {
+    if (!currentLoginProvider) {
       return
     }
 
     const sessionId = getUserSessionIdOnClient()
     trackLoginAttempt({
-      method: lastAttemptedMethod,
+      method: currentLoginProvider,
       'Session Id': sessionId,
       ...(typeof screen !== 'string' && { 'Wallet Name': screen.meta.name }),
     })
-  }, [lastAttemptedMethod, screen])
+  }, [currentLoginProvider, screen])
 
   const handleConnected = React.useCallback(() => {
-    const requiresSignIn = ACCOUNT_AUTH_CONFIG.loginOptional
-      ? false
-      : !!authConfig?.authUrl && !user?.address
+    const requiresSignIn = !!authConfig?.authUrl && !user?.address
 
     if (requiresSignIn) {
       setScreen(ReservedScreens.SIGN_IN)
@@ -113,7 +108,7 @@ export function AccountAuthContent(props: {
     if (connectionStatus !== 'disconnected') {
       await disconnect()
     }
-    setLastAttemptedMethod('wallet')
+    setCurrentLoginProvider('wallet')
     setScreen(wallet)
   }
 
@@ -127,7 +122,7 @@ export function AccountAuthContent(props: {
   )
 
   const [handleLoginWithGoogle, isConnectingWithGoogle] = useLoadingCallback(async () => {
-    setLastAttemptedMethod('google')
+    setCurrentLoginProvider('google')
     await connectEmbeddedWallet({
       strategy: 'google',
     })
@@ -181,7 +176,7 @@ export function AccountAuthContent(props: {
   }
 
   const getWalletUI = (walletConfig: WalletConfig) => {
-    const ConnectUI = walletConfig.connectUI || Noop
+    const ConnectUI = walletConfig.connectUI || React.Fragment
 
     return (
       <ConnectUI
@@ -249,7 +244,7 @@ export function AccountAuthContent(props: {
       <ConnectionMethodsContainer>
         <EmailForm
           onSubmit={({ emailAddress }) => {
-            setLastAttemptedMethod('email')
+            setCurrentLoginProvider('email')
             setOTPEmailAddress(emailAddress)
             setScreen(ReservedScreens.OTP_EMAIL_CONFIRMATION)
           }}
@@ -288,7 +283,6 @@ export function AccountAuthContent(props: {
                 // Match the spacings of thirdweb's wallet connect UI on desktop
                 className={cn(isConnectingWalletUI && 'md:p-0')}
                 closeClassName={cn(isConnectingWalletUI && 'top-6 right-6')}
-                touchableIndicatorClassName={cn(isConnectingWalletUI && 'mb-0')}
               >
                 {isConnectingWalletUI ? (
                   getWalletUI(screen)

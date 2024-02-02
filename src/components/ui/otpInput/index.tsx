@@ -1,93 +1,195 @@
+'use client'
+
 import { Input } from '@/components/ui/input'
-import React, { useState, Fragment, useRef, useEffect } from 'react'
-
-import styles from './otpInput.module.css'
 import { cn } from '@/utils/web/cn'
+import * as React from 'react'
 
-type OtpInputProps = {
-  length: number
-  onChange: (otp: string) => void
+interface OTPInputProps
+  extends Omit<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    | 'ref'
+    | 'value'
+    | 'onFocus'
+    | 'onBlur'
+    | 'onKeyDown'
+    | 'onPaste'
+    | 'autoComplete'
+    | 'maxLength'
+    | 'onChange'
+  > {
+  value?: string
+  onChange?: (otp: string) => void
+  numInputs?: number
   onEnter?: () => void
-  disabled?: boolean
 }
 
 export function OTPInput({
-  length,
+  value = '',
+  numInputs = 6,
   onChange,
+  type = 'text',
+  placeholder = '_',
+  pattern = '[0-9]',
+  autoFocus = true,
+  className,
+  id,
+  name,
   onEnter,
-  disabled = false,
-}: OtpInputProps): JSX.Element {
-  const [value, setValue] = useState<string[]>(Array.from({ length }, () => ''))
-  const [activeOtpIndex, setActiveOtpIndex] = useState<number>(0)
-  const activeInputRef = useRef<HTMLInputElement>(null)
-  const currentOtpIndexRef = useRef(0)
+  ...rest
+}: OTPInputProps) {
+  const [otpValue, setOTPValue] = React.useState(value)
+  const [activeInput, setActiveInput] = React.useState(0)
+  const inputRefs = React.useRef<Array<HTMLInputElement | null>>([])
 
-  const handleOnchange = ({ target }: React.ChangeEvent<HTMLInputElement>): void => {
-    const newOtp: string[] = [...value]
-    newOtp[currentOtpIndexRef.current] = target.value.substring(target.value.length - 1)
+  const getOTPValue = () => (otpValue ? otpValue.toString().split('') : [])
 
-    if (!target.value) {
-      setActiveOtpIndex(currentOtpIndexRef.current - 1)
-    } else {
-      setActiveOtpIndex(currentOtpIndexRef.current + 1)
+  const isInputNum = type === 'number' || type === 'tel'
+
+  React.useEffect(() => {
+    inputRefs.current = inputRefs.current.slice(0, numInputs)
+  }, [numInputs])
+
+  React.useEffect(() => {
+    if (autoFocus) {
+      inputRefs.current[0]?.focus()
     }
+  }, [autoFocus])
 
-    onChange(newOtp.join(''))
-    setValue(newOtp)
+  const isInputValueValid = (inputValue: string) => {
+    const isTypeValid = isInputNum ? !isNaN(Number(inputValue)) : typeof inputValue === 'string'
+    return isTypeValid && inputValue.trim().length === 1
   }
 
-  const handleOnKeyDown = (event: React.KeyboardEvent<HTMLInputElement>, index: number) => {
-    const { key } = event
-    currentOtpIndexRef.current = index
-    const isFirstDigit = index === 0
-    const isLastDigit = index === length - 1
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value: newValue } = event.target
 
-    if (key === 'Backspace' && !isFirstDigit) {
-      setActiveOtpIndex(currentOtpIndexRef.current - 1)
+    if (isInputValueValid(newValue)) {
+      changeCodeAtFocus(newValue)
+      focusInput(activeInput + 1)
     }
+  }
 
-    if (key === 'ArrowLeft' && !isFirstDigit) {
-      setActiveOtpIndex(currentOtpIndexRef.current - 1)
-    }
+  const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => (index: number) => {
+    setActiveInput(index)
+    event.target.select()
+  }
 
-    if (key === 'ArrowRight' && !isLastDigit) {
-      setActiveOtpIndex(currentOtpIndexRef.current + 1)
-    }
+  const handleBlur = () => {
+    setActiveInput(activeInput - 1)
+  }
 
-    // Suppressing changing the value with arrow keys
-    // That causes a conflict with changing focus on type
-    if (key === 'ArrowUp' || key === 'ArrowDown') {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    const otp = getOTPValue()
+    if ([event.code, event.key].includes('Backspace')) {
       event.preventDefault()
-      event.stopPropagation()
-    }
-
-    if (key === 'Enter' && onEnter) {
+      changeCodeAtFocus('')
+      focusInput(activeInput - 1)
+    } else if (event.code === 'Delete') {
+      event.preventDefault()
+      changeCodeAtFocus('')
+    } else if (event.code === 'ArrowLeft') {
+      event.preventDefault()
+      focusInput(activeInput - 1)
+    } else if (event.code === 'ArrowRight') {
+      event.preventDefault()
+      focusInput(activeInput + 1)
+    } else if (event.code === 'Enter' && onEnter) {
+      event.preventDefault()
       onEnter()
     }
+
+    // React does not trigger onChange when the same value is entered
+    // again. So we need to focus the next input manually in this case.
+    else if (event.key === otp[activeInput]) {
+      event.preventDefault()
+      focusInput(activeInput + 1)
+    } else if (
+      event.code === 'Spacebar' ||
+      event.code === 'Space' ||
+      event.code === 'ArrowUp' ||
+      event.code === 'ArrowDown'
+    ) {
+      event.preventDefault()
+    } else if (isInputNum && !isInputValueValid(event.key)) {
+      event.preventDefault()
+    }
   }
 
-  useEffect(() => {
-    activeInputRef.current?.focus()
-  }, [activeOtpIndex])
+  const focusInput = (index: number) => {
+    const currentActiveInput = Math.max(Math.min(numInputs - 1, index), 0)
+
+    if (inputRefs.current[currentActiveInput]) {
+      inputRefs.current[currentActiveInput]?.focus()
+      inputRefs.current[currentActiveInput]?.select()
+      setActiveInput(currentActiveInput)
+    }
+  }
+
+  const changeCodeAtFocus = (newValue: string) => {
+    const otp = getOTPValue()
+    otp[activeInput] = newValue[0]
+    handleOTPChange(otp)
+  }
+
+  const handleOTPChange = (otp: Array<string>) => {
+    const newOtpValue = otp.join('')
+    setOTPValue(newOtpValue)
+    onChange?.(newOtpValue)
+  }
+
+  const handlePaste = (event: React.ClipboardEvent<HTMLInputElement>) => {
+    event.preventDefault()
+
+    const otp = getOTPValue()
+    let nextActiveInput = activeInput
+
+    // Get pastedData in an array of max size (num of inputs - current position)
+    const pastedData = event.clipboardData
+      .getData('text/plain')
+      .slice(0, numInputs - activeInput)
+      .split('')
+
+    // Prevent pasting if the clipboard data contains non-numeric values for number inputs
+    if (isInputNum && pastedData.some(v => isNaN(Number(v)))) {
+      return
+    }
+
+    // Paste data from focused input onwards
+    for (let pos = 0; pos < numInputs; ++pos) {
+      if (pos >= activeInput && pastedData.length > 0) {
+        otp[pos] = pastedData.shift() ?? ''
+        nextActiveInput++
+      }
+    }
+
+    focusInput(nextActiveInput)
+    handleOTPChange(otp)
+  }
 
   return (
-    <div className="flex w-fit items-center space-x-4">
-      {value.map((digit, index) => {
-        return (
-          <Fragment key={index}>
-            <Input
-              ref={index === activeOtpIndex ? activeInputRef : null}
-              onChange={handleOnchange}
-              onKeyDown={e => handleOnKeyDown(e, index)}
-              onFocus={e => e.target.select()}
-              className={cn('w-10 text-center', styles.numberInput)}
-              type="number"
-              value={digit}
-              disabled={disabled}
-            />
-          </Fragment>
-        )
-      })}
+    <div className="flex gap-2">
+      {Array.from({ length: numInputs }, (_, index) => index).map(i => (
+        <Input
+          key={i}
+          id={`${id ?? ''}-${i}`}
+          name={`${name ?? ''}-${i}`}
+          value={getOTPValue()[i] ?? ''}
+          placeholder={placeholder}
+          ref={element => (inputRefs.current[i] = element)}
+          onChange={handleChange}
+          onFocus={event => handleFocus(event)(i)}
+          onBlur={handleBlur}
+          onKeyDown={handleKeyDown}
+          onPaste={handlePaste}
+          autoComplete="off"
+          maxLength={1}
+          size={1}
+          className={cn('text-center font-bold', className)}
+          pattern={pattern}
+          {...rest}
+        />
+      ))}
+      <input type="hidden" id={id} name={name} value={otpValue} />
     </div>
   )
 }

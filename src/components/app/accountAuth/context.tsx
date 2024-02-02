@@ -31,7 +31,7 @@ export function AccountAuthContextProvider({ children }: React.PropsWithChildren
     >
       <Dialog {...dialog}>
         <DialogContent>
-          <AccountAuth />
+          <AccountAuth onClose={() => dialog.onOpenChange(false)} />
         </DialogContent>
       </Dialog>
 
@@ -51,17 +51,18 @@ export function useAccountAuthContext() {
 }
 
 export const AccountAuthButton: typeof Button = React.forwardRef(({ onClick, ...props }, ref) => {
-  const { openAccountAuthModal } = useAccountAuthContext()
+  const dialog = useDialog(false)
+  const { Dialog, DialogContent, DialogTrigger } = useResponsiveDialog()
 
   return (
-    <Button
-      ref={ref}
-      {...props}
-      onClick={e => {
-        onClick?.(e)
-        openAccountAuthModal()
-      }}
-    />
+    <Dialog {...dialog}>
+      <DialogTrigger asChild>
+        <Button ref={ref} {...props} />
+      </DialogTrigger>
+      <DialogContent>
+        <AccountAuth onClose={() => dialog.onOpenChange(false)} />
+      </DialogContent>
+    </Dialog>
   )
 })
 AccountAuthButton.displayName = 'AccountAuthButton'

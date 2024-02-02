@@ -87,7 +87,7 @@ export async function Navbar({ locale }: { locale: SupportedLocale }) {
             )
           })}
         </div>
-        <Drawer>
+        <Drawer direction="top">
           <DrawerTrigger asChild>
             <button className="py-3 pl-3 md:hidden">
               <span className="sr-only">Open navigation menu</span>
@@ -119,7 +119,7 @@ export async function Navbar({ locale }: { locale: SupportedLocale }) {
 
         <div className="hidden md:flex">
           <Button className="mr-3" asChild>
-            <InternalLink underlineOnHover={false} href={urls.donate()}>
+            <InternalLink className="hover:no-underline" href={urls.donate()}>
               Donate
             </InternalLink>
           </Button>

@@ -3,9 +3,9 @@ export const ACCOUNT_AUTH_CONFIG: {
   loginOptional: boolean
   modalSize: 'compact' | 'wide'
 } = {
-  theme: 'light' as const,
+  theme: 'light',
   loginOptional: false,
-  modalSize: 'compact' as const,
+  modalSize: 'compact',
 }
 
 export const GOOGLE_AUTH_LOGO =
