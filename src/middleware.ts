@@ -1,9 +1,10 @@
 import { DEFAULT_LOCALE, ORDERED_SUPPORTED_LOCALES } from '@/intl/locales'
+import { generateCSPHeader } from '@/utils/server/generateCSPHeader'
 import { isCypress } from '@/utils/shared/executionEnvironment'
 import { getLogger } from '@/utils/shared/logger'
 import { USER_SESSION_ID_COOKIE_NAME, generateUserSessionId } from '@/utils/shared/userSessionId'
 import { i18nRouter } from 'next-i18n-router'
-import { NextRequest } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 
 const logger = getLogger('middleware')
 // taken from https://i18nexus.com/tutorials/nextjs/react-intl
@@ -39,9 +40,21 @@ export function middleware(request: NextRequest) {
       httpOnly: false,
     })
   }
+  const { nonce, cspHeader } = generateCSPHeader()
+  // const requestHeaders = new Headers(request.headers)
+  // requestHeaders.set('x-nonce', nonce)
+  // requestHeaders.set('Content-Security-Policy', cspHeader)
+  // const response = NextResponse.next({
+  //   request: {
+  //     headers: requestHeaders,
+  //   },
+  // })
+  i18nParsedResponse.headers.set('Content-Security-Policy', cspHeader)
+  i18nParsedResponse.headers.set('x-nonce', nonce)
+
   return i18nParsedResponse
 }
 
 export const config = {
-  matcher: '/((?!api|static|.*\\..*|_next).*)',
+  matcher: '/((?!api|static|.*\\..*|_next|favicon.ico).*)',
 }
