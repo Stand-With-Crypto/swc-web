@@ -1,5 +1,12 @@
 import { fakerFields } from '@/mocks/fakerUtils'
-import { UserActionCall } from '@prisma/client'
+import { Prisma, UserActionCall } from '@prisma/client'
+
+export function mockCreateUserActionCallInput() {
+  return {
+    recipientPhoneNumber: fakerFields.phoneNumber(),
+    recipientDtsiSlug: fakerFields.dtsiSlug(),
+  } satisfies Omit<Prisma.UserActionCallCreateInput, 'addressId' | 'address'>
+}
 
 export function mockUserActionCall(): UserActionCall {
   return {
