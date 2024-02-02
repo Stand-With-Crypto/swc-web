@@ -1,27 +1,26 @@
 import React from 'react'
 
-import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogContent,
-  DialogTrigger,
-  DialogTitle,
   DialogHeader,
+  DialogTitle,
+  DialogTrigger,
 } from '@/components/ui/dialog'
 import {
   Drawer,
   DrawerContent,
-  DrawerTrigger,
-  DrawerTitle,
   DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
 } from '@/components/ui/drawer'
+import { useDialog } from '@/hooks/useDialog'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { cn } from '@/utils/web/cn'
-import { useDialog } from '@/hooks/useDialog'
 
-import { CookiePreferencesForm } from './cookiePreferencesForm'
-import { DialogProps } from '@radix-ui/react-dialog'
 import { CookieConsentPermissions } from '@/utils/shared/cookieConsent'
+import { DialogProps } from '@radix-ui/react-dialog'
+import { CookiePreferencesForm } from './cookiePreferencesForm'
 
 export interface ManageCookiesModalProps {
   onSubmit: (accepted: CookieConsentPermissions) => void
