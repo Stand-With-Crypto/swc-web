@@ -25,6 +25,7 @@ const contentSecurityPolicy = {
     'https://va.vercel-scripts.com/v1/speed-insights/script.debug.js',
     'https://va.vercel-scripts.com/v1/script.debug.js',
     'https://www.youtube.com/',
+    'https://vercel.live/_next-live/feedback/feedback.js',
   ],
   'img-src': [
     "'self'",
@@ -96,6 +97,66 @@ const securityHeaders = [
   },
 ]
 
+const ACTION_REDIRECTS = [
+  {
+    destination: '/action/email',
+    queryKey: 'action',
+    queryValue: 'email-representative',
+  },
+  {
+    destination: '/action/email',
+    queryKey: 'modal',
+    queryValue: 'email-senator',
+  },
+  {
+    destination: '/action/nft-mint',
+    queryKey: 'modal',
+    queryValue: 'mintNFT',
+  },
+  {
+    destination: '/action/nft-mint',
+    queryKey: 'action',
+    queryValue: 'mint-nft',
+  },
+  {
+    destination: '/action/call',
+    queryKey: 'modal',
+    queryValue: 'call-your-representative',
+  },
+  {
+    destination: '/action/call',
+    queryKey: 'modal',
+    queryValue: 'callRepresentative',
+  },
+  {
+    destination: '/action/call',
+    queryKey: 'action',
+    queryValue: 'call-your-representative',
+  },
+  {
+    destination: '/action/opt-in',
+    queryKey: 'action',
+    queryValue: 'join-stand-with-crypto',
+  },
+  {
+    destination: '/action/opt-in',
+    queryKey: 'modal',
+    queryValue: 'member-join',
+  },
+]
+const V1_REDIRECTS = ACTION_REDIRECTS.map(({ destination, queryKey, queryValue }) => ({
+  permanent: true,
+  source: '/',
+  destination,
+  has: [
+    {
+      type: 'query',
+      key: queryKey,
+      value: queryValue,
+    },
+  ],
+}))
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -119,7 +180,7 @@ const nextConfig = {
   },
   async redirects() {
     return [
-      // v1 redirects
+      ...V1_REDIRECTS,
       {
         permanent: true,
         destination: '/action/call',
