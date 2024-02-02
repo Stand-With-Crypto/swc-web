@@ -4,6 +4,7 @@ import { UserActionFormCallCongressperson } from '@/components/app/userActionFor
 import { UserActionFormCallCongresspersonSkeleton } from '@/components/app/userActionFormCallCongressperson/skeleton'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
+import { useParseRnQueryParam } from '@/hooks/useRnQueryParams'
 import { useRouter } from 'next/navigation'
 
 export function UserActionFormCallCongresspersonDeeplinkWrapper() {
@@ -11,9 +12,15 @@ export function UserActionFormCallCongresspersonDeeplinkWrapper() {
   const urls = useIntlUrls()
   const router = useRouter()
   const { user } = fetchUser.data || { user: null }
-  return fetchUser.isLoading ? (
+  const { address: rnAddress, loading: loadingRnQueryParam } = useParseRnQueryParam()
+
+  return fetchUser.isLoading || loadingRnQueryParam ? (
     <UserActionFormCallCongresspersonSkeleton />
   ) : (
-    <UserActionFormCallCongressperson user={user} onClose={() => router.push(urls.home())} />
+    <UserActionFormCallCongressperson
+      rnAddress={rnAddress}
+      user={user}
+      onClose={() => router.push(urls.home())}
+    />
   )
 }

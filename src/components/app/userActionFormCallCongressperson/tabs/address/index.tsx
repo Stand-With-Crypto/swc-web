@@ -38,9 +38,16 @@ import {
 interface AddressProps
   extends Pick<UserActionFormCallCongresspersonProps, 'user' | 'onFindCongressperson' | 'gotoTab'> {
   congressPersonData?: UserActionFormCallCongresspersonProps['congressPersonData']
+  rnAddress: string
 }
 
-export function Address({ user, onFindCongressperson, congressPersonData, gotoTab }: AddressProps) {
+export function Address({
+  user,
+  onFindCongressperson,
+  congressPersonData,
+  gotoTab,
+  rnAddress,
+}: AddressProps) {
   const urls = useIntlUrls()
 
   const form = useForm<FindRepresentativeCallFormValues>({
@@ -50,10 +57,17 @@ export function Address({ user, onFindCongressperson, congressPersonData, gotoTa
   useEffect(() => {
     form.setFocus('address')
   }, [form])
+
+  useEffect(() => {
+    form.setValue('address', { description: rnAddress, place_id: '' })
+  }, [form, rnAddress])
+
   const address = useWatch({
     control: form.control,
     name: 'address',
+    defaultValue: { description: rnAddress, place_id: '' },
   })
+
   const { data: liveCongressPersonData, isLoading: isLoadingLiveCongressPersonData } =
     useCongresspersonData({ address })
 

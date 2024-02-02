@@ -29,9 +29,11 @@ export interface UserActionFormCallCongresspersonProps extends UseTabsReturn<Tab
 export function UserActionFormCallCongressperson({
   user,
   onClose,
+  rnAddress,
 }: {
   user: GetUserFullProfileInfoResponse['user']
   onClose: () => void
+  rnAddress: string
 }) {
   const tabProps = useTabs<TabNames>({
     tabs: Object.values(TabNames),
@@ -48,6 +50,7 @@ export function UserActionFormCallCongressperson({
       return (
         <Address
           user={user}
+          rnAddress={rnAddress}
           onFindCongressperson={setCongresspersonData}
           congressPersonData={congressPersonData}
           {...tabProps}
