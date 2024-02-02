@@ -3,7 +3,7 @@ import { prettyLog } from '@/utils/shared/prettyLog'
 import { authenticatePaymentRequest } from '@/utils/server/coinbaseCommerce/authenticatePaymentRequest'
 import * as Sentry from '@sentry/nextjs'
 
-// Final interfaces are TBD - this is currently all available (known) fields.
+// Final interfaces are TBD - this is currently all known fields.
 interface CoinbaseCommercePaymentDetails {
   network: string
   transaction_id: string
