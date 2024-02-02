@@ -5,7 +5,8 @@ import Balancer from 'react-wrap-balancer'
 
 const subTitleVariantsConfig = {
   size: {
-    md: twNoop('text-base lg:text-xl'),
+    lg: twNoop('text-base lg:text-xl'),
+    md: twNoop('text-base'),
     sm: twNoop('text-sm lg:text-base'),
   },
 }
@@ -13,7 +14,7 @@ const subTitleVariantsConfig = {
 const pageSubTitleVariants = cva('text-center text-fontcolor-muted', {
   variants: subTitleVariantsConfig,
   defaultVariants: {
-    size: 'md',
+    size: 'lg',
   },
 })
 

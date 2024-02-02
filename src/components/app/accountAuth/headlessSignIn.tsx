@@ -34,7 +34,9 @@ function HeadlessSignInContent({ status }: { status: SignatureScreenStatus }) {
     return (
       <div className="my-auto flex flex-col items-center gap-5">
         <CrossCircledIcon className="h-10 w-10" />
-        <PageSubTitle className="text-foreground">Failed to Sign in</PageSubTitle>
+        <PageSubTitle size="md" className="text-foreground">
+          Failed to Sign in
+        </PageSubTitle>
       </div>
     )
   }
