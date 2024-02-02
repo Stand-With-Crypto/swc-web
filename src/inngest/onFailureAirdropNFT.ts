@@ -1,9 +1,9 @@
 import { FailureEventArgs } from 'inngest'
 import * as Sentry from '@sentry/nextjs'
 import { $Enums } from '@prisma/client'
-import { updateMinNFTStatus } from '@/utils/server/nft'
 import NFTMintStatus = $Enums.NFTMintStatus
 import { airdropPayload } from '@/utils/server/nft/payload'
+import { updateMintNFTStatus } from '@/utils/server/nft/updateMintNFTStatus'
 
 export async function onFailureAirdropNFT(failureEventArgs: FailureEventArgs) {
   Sentry.captureException(failureEventArgs.error, {
@@ -14,5 +14,5 @@ export async function onFailureAirdropNFT(failureEventArgs: FailureEventArgs) {
   })
 
   const payload = failureEventArgs.event.data.event.data as airdropPayload
-  await updateMinNFTStatus(payload.nftMintId, NFTMintStatus.FAILED, '')
+  await updateMintNFTStatus(payload.nftMintId, NFTMintStatus.FAILED, '')
 }

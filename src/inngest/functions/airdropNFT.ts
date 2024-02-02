@@ -1,10 +1,10 @@
 import { inngest } from '@/inngest/inngest'
 import { $Enums } from '@prisma/client'
 import { engineAirdropNFT, engineGetMintStatus } from '@/utils/server/thirdweb/engineAirdropNFT'
-import { updateMinNFTStatus } from '@/utils/server/nft'
 import NFTMintStatus = $Enums.NFTMintStatus
 import { onFailureAirdropNFT } from '@/inngest/onFailureAirdropNFT'
 import { airdropPayload } from '@/utils/server/nft/payload'
+import { updateMintNFTStatus } from '@/utils/server/nft/updateMintNFTStatus'
 
 export const AIRDROP_NFT_INNGEST_EVENT_NAME = 'app/airdrop.request'
 const AIRDROP_NFT_INNGEST_FUNCTION_ID = 'airdrop-nft'
@@ -45,14 +45,14 @@ export const airdropNFTWithInngest = inngest.createFunction(
 
     if (mintStatus === 'mined') {
       await step.run('update-mintNFT-Status', async () => {
-        await updateMinNFTStatus(payload.nftMintId, NFTMintStatus.CLAIMED, transactionHash)
+        await updateMintNFTStatus(payload.nftMintId, NFTMintStatus.CLAIMED, transactionHash)
       })
       return
     }
 
     if (mintStatus === 'errored' || mintStatus === 'cancelled') {
       await step.run('update-mintNFT-Status', async () => {
-        await updateMinNFTStatus(payload.nftMintId, NFTMintStatus.FAILED, transactionHash)
+        await updateMintNFTStatus(payload.nftMintId, NFTMintStatus.FAILED, transactionHash)
       })
       return
     }
