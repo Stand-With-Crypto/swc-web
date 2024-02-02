@@ -1,12 +1,10 @@
 import { fakerFields } from '@/mocks/fakerUtils'
 import { mockCommonDatetimes } from '@/mocks/mockCommonDatetimes'
 import { faker } from '@faker-js/faker'
-import { Address } from '@prisma/client'
+import { Address, Prisma } from '@prisma/client'
 
-export function mockAddress(): Address {
-  const fields = {
-    ...mockCommonDatetimes(),
-    id: fakerFields.id(),
+export function mockCreateAddressInput() {
+  const partial = {
     googlePlaceId: faker.string.uuid(),
     streetNumber: faker.location.buildingNumber(),
     route: faker.location.street(),
@@ -17,9 +15,16 @@ export function mockAddress(): Address {
     postalCode: faker.location.zipCode(),
     postalCodeSuffix: '',
     countryCode: faker.location.countryCode(),
-  } satisfies Partial<Address>
+  } satisfies Partial<Prisma.AddressCreateInput>
   return {
-    ...fields,
-    formattedDescription: `${fields.streetNumber} ${fields.route}, ${fields.subpremise}, ${fields.locality} ${fields.administrativeAreaLevel1}, ${fields.postalCode} ${fields.countryCode}`,
+    ...partial,
+    formattedDescription: `${partial.streetNumber} ${partial.route}, ${partial.subpremise}, ${partial.locality} ${partial.administrativeAreaLevel1}, ${partial.postalCode} ${partial.countryCode}`,
+  } satisfies Prisma.AddressCreateInput
+}
+export function mockAddress(): Address {
+  return {
+    ...mockCreateAddressInput(),
+    ...mockCommonDatetimes(),
+    id: fakerFields.id(),
   }
 }

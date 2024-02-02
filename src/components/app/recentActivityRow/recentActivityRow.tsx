@@ -25,10 +25,9 @@ import { getUserDisplayName } from '@/utils/web/userUtils'
 import { UserActionOptInType, UserActionType } from '@prisma/client'
 import React from 'react'
 
-interface RecentActivityRowProps {
+export interface RecentActivityRowProps {
   action: ClientUserAction & { user: ClientUserWithENSData }
   locale: SupportedLocale
-  disableHover?: boolean
 }
 
 function RecentActivityRowBase({
@@ -36,7 +35,6 @@ function RecentActivityRowBase({
   action,
   children,
   onFocusContent,
-  disableHover,
 }: RecentActivityRowProps & { children: React.ReactNode; onFocusContent?: () => React.ReactNode }) {
   const [hasFocus, setHasFocus] = React.useState(false)
   const isMobile = useIsMobile({ defaultState: true })
@@ -44,8 +42,8 @@ function RecentActivityRowBase({
     <div
       // added min height to prevent height shifting on hover
       className="flex min-h-[41px] items-center justify-between gap-5"
-      onMouseEnter={() => disableHover || isMobile || setHasFocus(true)}
-      onMouseLeave={() => disableHover || isMobile || setHasFocus(false)}
+      onMouseEnter={() => isMobile || setHasFocus(true)}
+      onMouseLeave={() => isMobile || setHasFocus(false)}
     >
       <div className="flex items-center gap-2">
         <div>
@@ -207,12 +205,5 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
       fallback: 'helped crypto',
     })
   }
-  return (
-    <RecentActivityRowBase
-      disableHover={props.disableHover}
-      action={action}
-      locale={locale}
-      {...getActionSpecificProps()}
-    />
-  )
+  return <RecentActivityRowBase action={action} locale={locale} {...getActionSpecificProps()} />
 }

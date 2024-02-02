@@ -1,17 +1,19 @@
 import { runBin } from '@/bin/runBin'
-import { mockAddress } from '@/mocks/models/mockAddress'
-import { mockAuthenticationNonce } from '@/mocks/models/mockAuthenticationNonce'
-import { mockNFTMint } from '@/mocks/models/mockNFTMint'
-import { mockUser } from '@/mocks/models/mockUser'
-import { mockUserAction } from '@/mocks/models/mockUserAction'
-import { mockUserActionCall } from '@/mocks/models/mockUserActionCall'
-import { mockUserActionDonation } from '@/mocks/models/mockUserActionDonation'
-import { mockUserActionEmail } from '@/mocks/models/mockUserActionEmail'
-import { mockUserActionEmailRecipient } from '@/mocks/models/mockUserActionEmailRecipient'
-import { mockUserActionOptIn } from '@/mocks/models/mockUserActionOptIn'
-import { PopularCryptoAddress, mockUserCryptoAddress } from '@/mocks/models/mockUserCryptoAddress'
-import { mockUserEmailAddress } from '@/mocks/models/mockUserEmailAddress'
-import { mockUserSession } from '@/mocks/models/mockUserSession'
+import { mockCreateAddressInput } from '@/mocks/models/mockAddress'
+import { mockCreateAuthenticationNonceInput } from '@/mocks/models/mockAuthenticationNonce'
+import { mockCreateNFTMintInput } from '@/mocks/models/mockNFTMint'
+import { mockCreateUserInput } from '@/mocks/models/mockUser'
+import { mockCreateUserActionInput } from '@/mocks/models/mockUserAction'
+import { mockCreateUserActionCallInput } from '@/mocks/models/mockUserActionCall'
+import { mockCreateUserActionDonationInput } from '@/mocks/models/mockUserActionDonation'
+import { mockCreateUserActionEmailInput } from '@/mocks/models/mockUserActionEmail'
+import { mockCreateUserActionEmailRecipientInput } from '@/mocks/models/mockUserActionEmailRecipient'
+import { mockCreateUserActionOptInInput } from '@/mocks/models/mockUserActionOptIn'
+import {
+  mockCreateUserCryptoAddressInput,
+  PopularCryptoAddress,
+} from '@/mocks/models/mockUserCryptoAddress'
+import { mockCreateUserEmailAddressInput } from '@/mocks/models/mockUserEmailAddress'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { batchAsyncAndLog } from '@/utils/shared/batchAsyncAndLog'
 import { getLogger } from '@/utils/shared/logger'
@@ -57,7 +59,7 @@ async function seed() {
   authenticationNonce
   */
   await batchAsyncAndLog(
-    _.times(seedSizes([10, 100, 1000])).map(() => mockAuthenticationNonce()),
+    _.times(seedSizes([10, 100, 1000])).map(() => mockCreateAuthenticationNonceInput()),
     data =>
       prismaClient.authenticationNonce.createMany({
         data,
@@ -69,7 +71,7 @@ async function seed() {
   user
   */
   await batchAsyncAndLog(
-    _.times(seedSizes([10, 100, 1000])).map(() => mockUser()),
+    _.times(seedSizes([10, 100, 1000])).map(() => mockCreateUserInput()),
     data =>
       prismaClient.user.createMany({
         data,
@@ -82,7 +84,6 @@ async function seed() {
   */
   await batchAsyncAndLog(
     _.times(user.length * 2).map(() => ({
-      ...mockUserSession(),
       userId: faker.helpers.arrayElement(user).id,
     })),
     data =>
@@ -99,7 +100,7 @@ async function seed() {
   */
   await batchAsyncAndLog(
     _.times(user.length / 2).map(() => ({
-      ...mockUserEmailAddress(),
+      ...mockCreateUserEmailAddressInput(),
       userId: faker.helpers.arrayElement(user).id,
     })),
     data =>
@@ -135,7 +136,7 @@ async function seed() {
         !selectedUser.firstName &&
         selectedUser.informationVisibility === UserInformationVisibility.CRYPTO_INFO_ONLY
       return {
-        ...mockUserCryptoAddress(),
+        ...mockCreateUserCryptoAddressInput(),
         embeddedWalletUserEmailAddressId:
           !shouldUseInitialCryptoAddress && emailAddressesToRelateToEmbeddedWallets.length
             ? emailAddressesToRelateToEmbeddedWallets.splice(
@@ -217,7 +218,7 @@ async function seed() {
     userActionTypesToPersist
       .filter(x => x === UserActionType.NFT_MINT)
       .map(() => {
-        return mockNFTMint()
+        return mockCreateNFTMintInput()
       }),
     data =>
       prismaClient.nFTMint.createMany({
@@ -250,22 +251,21 @@ async function seed() {
       const relatedItem = getRelatedItem()
 
       return {
-        ...mockUserAction({
-          actionType,
-          userCryptoAddressId:
-            actionType === UserActionType.OPT_IN
+        ...mockCreateUserActionInput(),
+        actionType,
+        userCryptoAddressId:
+          actionType === UserActionType.OPT_IN
+            ? null
+            : 'cryptoAddress' in relatedItem
+              ? relatedItem.id
+              : null,
+        userSessionId:
+          actionType === UserActionType.OPT_IN
+            ? null
+            : 'cryptoAddress' in relatedItem
               ? null
-              : 'cryptoAddress' in relatedItem
-                ? relatedItem.id
-                : null,
-          userSessionId:
-            actionType === UserActionType.OPT_IN
-              ? null
-              : 'cryptoAddress' in relatedItem
-                ? null
-                : relatedItem.id,
-          userEmailAddressId: actionType === UserActionType.OPT_IN ? relatedItem.id : null,
-        }),
+              : relatedItem.id,
+        userEmailAddressId: actionType === UserActionType.OPT_IN ? relatedItem.id : null,
         userId: relatedItem.userId,
         // a nft mint must only ever be associated with one action so we use splice here to ensure we can randomly assign these models to users without any duplicates
         nftMintId:
@@ -291,7 +291,7 @@ async function seed() {
   address
   */
   await batchAsyncAndLog(
-    userActionsByType[UserActionType.EMAIL].map(() => mockAddress()),
+    userActionsByType[UserActionType.EMAIL].map(() => mockCreateAddressInput()),
     data =>
       prismaClient.address.createMany({
         data,
@@ -305,7 +305,7 @@ async function seed() {
   */
   await batchAsyncAndLog(
     userActionsByType[UserActionType.EMAIL].map(action => ({
-      ...mockUserActionEmail(),
+      ...mockCreateUserActionEmailInput(),
       id: action.id,
       addressId: faker.helpers.arrayElement(address).id,
     })),
@@ -324,7 +324,7 @@ async function seed() {
       userActionsByType[UserActionType.EMAIL].map(actionEmail =>
         // LATER-TASK expand this to be more than 1 recipient once we have UX
         _.times(faker.helpers.arrayElement([1])).map(() => ({
-          ...mockUserActionEmailRecipient(),
+          ...mockCreateUserActionEmailRecipientInput(),
           userActionEmailId: actionEmail.id,
         })),
       ),
@@ -341,7 +341,7 @@ async function seed() {
   */
   await batchAsyncAndLog(
     userActionsByType[UserActionType.CALL].map(action => ({
-      ...mockUserActionCall(),
+      ...mockCreateUserActionCallInput(),
       id: action.id,
       addressId: faker.helpers.arrayElement(address).id,
     })),
@@ -359,7 +359,7 @@ async function seed() {
   const topDonorUserIdMap = _.keyBy(topDonorCryptoAddresses, x => x.userId)
   await batchAsyncAndLog(
     userActionsByType[UserActionType.DONATION].map(action => {
-      const initialMockValues = mockUserActionDonation()
+      const initialMockValues = mockCreateUserActionDonationInput()
       const isTopDonor = topDonorUserIdMap[action.userId]
       const amount = isTopDonor
         ? faker.number.float({ min: 100000, max: 200000, precision: 0.01 })
@@ -386,7 +386,7 @@ async function seed() {
   await batchAsyncAndLog(
     userActionsByType[UserActionType.OPT_IN].map(action => {
       return {
-        ...mockUserActionOptIn(),
+        ...mockCreateUserActionOptInInput(),
         id: action.id,
       }
     }),

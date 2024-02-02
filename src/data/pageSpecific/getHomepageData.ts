@@ -22,29 +22,17 @@ export type GetHomepageTopLevelMetricsResponse = Awaited<
   ReturnType<typeof getHomepageTopLevelMetrics>
 >
 
-export async function getHomepageCommunityMetrics() {
-  const [actions, sumDonationsByUser] = await Promise.all([
-    getPublicRecentActivity({ limit: 10 }),
-    getSumDonationsByUser({ limit: 10 }),
-  ])
-  return {
-    actions,
-    sumDonationsByUser,
-  }
-}
-export type GetHomepageCommunityMetricsResponse = Awaited<
-  ReturnType<typeof getHomepageCommunityMetrics>
->
-
 export async function getHomepageData() {
   const [
     { sumDonations, countUsers, countPolicymakerContacts },
-    { actions, sumDonationsByUser },
+    actions,
     dtsiHomepagePeople,
+    sumDonationsByUser,
   ] = await Promise.all([
     getHomepageTopLevelMetrics(),
-    getHomepageCommunityMetrics(),
+    getPublicRecentActivity({ limit: 10 }),
     queryDTSIHomepagePeople(),
+    getSumDonationsByUser({ limit: 10 }),
   ])
   return {
     sumDonations,

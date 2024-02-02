@@ -71,3 +71,4 @@ export const getPublicRecentActivity = async (config: RecentActivityConfig) => {
     },
   }))
 }
+export type PublicRecentActivity = Awaited<ReturnType<typeof getPublicRecentActivity>>
