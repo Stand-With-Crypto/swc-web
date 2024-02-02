@@ -1,7 +1,7 @@
 'use client'
 
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-import { PrimitiveComponentAnalytics } from '@/utils/web/primativeComponentAnalytics'
+import { PrimitiveComponentAnalytics } from '@/utils/web/primitiveComponentAnalytics'
 import { Info } from 'lucide-react'
 import React from 'react'
 

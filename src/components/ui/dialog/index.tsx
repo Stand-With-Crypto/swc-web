@@ -17,7 +17,7 @@ import _ from 'lodash'
 import {
   PrimitiveComponentAnalytics,
   trackPrimitiveComponentAnalytics,
-} from '@/utils/web/primativeComponentAnalytics'
+} from '@/utils/web/primitiveComponentAnalytics'
 
 function Dialog({
   onOpenChange,

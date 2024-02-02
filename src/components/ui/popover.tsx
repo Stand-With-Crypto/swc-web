@@ -7,7 +7,7 @@ import { cn } from '@/utils/web/cn'
 import {
   PrimitiveComponentAnalytics,
   trackPrimitiveComponentAnalytics,
-} from '@/utils/web/primativeComponentAnalytics'
+} from '@/utils/web/primitiveComponentAnalytics'
 import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
 import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
 

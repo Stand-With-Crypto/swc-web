@@ -13,7 +13,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
 import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
-import { trackPrimitiveComponentAnalytics } from '@/utils/web/primativeComponentAnalytics'
+import { trackPrimitiveComponentAnalytics } from '@/utils/web/primitiveComponentAnalytics'
 
 // We want to track consistently between mobile and desktop popovers
 const ResponsivePopoverDrawerRoot = ({

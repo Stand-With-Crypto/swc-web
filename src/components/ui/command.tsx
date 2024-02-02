@@ -7,7 +7,7 @@ import { Search, X } from 'lucide-react'
 
 import { cn } from '@/utils/web/cn'
 import { Dialog, DialogContent } from '@/components/ui/dialog'
-import { PrimitiveComponentAnalytics } from '@/utils/web/primativeComponentAnalytics'
+import { PrimitiveComponentAnalytics } from '@/utils/web/primitiveComponentAnalytics'
 
 const Command = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive>,

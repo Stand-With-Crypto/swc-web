@@ -8,14 +8,13 @@ import { cn } from '@/utils/web/cn'
 import {
   PrimitiveComponentAnalytics,
   trackPrimitiveComponentAnalytics,
-} from '@/utils/web/primativeComponentAnalytics'
+} from '@/utils/web/primitiveComponentAnalytics'
 import { tabListStyles, tabTriggerStyles } from './styles'
 
-function Tabs({
-  analytics,
-  onValueChange,
-  ...props
-}: TabsPrimitive.TabsProps & PrimitiveComponentAnalytics<string>) {
+const Tabs = React.forwardRef<
+  React.ElementRef<typeof TabsPrimitive.Root>,
+  TabsPrimitive.TabsProps & PrimitiveComponentAnalytics<string>
+>(({ analytics, onValueChange, ...props }, ref) => {
   const wrappedOnChangeOpen = React.useCallback(
     (currentTab: string) => {
       trackPrimitiveComponentAnalytics(
@@ -31,8 +30,8 @@ function Tabs({
     },
     [onValueChange, analytics],
   )
-  return <TabsPrimitive.Root onValueChange={wrappedOnChangeOpen} {...props} />
-}
+  return <TabsPrimitive.Root onValueChange={wrappedOnChangeOpen} ref={ref} {...props} />
+})
 
 const TabsList = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.List>,

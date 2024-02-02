@@ -17,7 +17,7 @@ import { useResizeObserver } from '@/hooks/useResizeObserver'
 import {
   PrimitiveComponentAnalytics,
   trackPrimitiveComponentAnalytics,
-} from '@/utils/web/primativeComponentAnalytics'
+} from '@/utils/web/primitiveComponentAnalytics'
 import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
 
 export interface ComboBoxProps<T>
