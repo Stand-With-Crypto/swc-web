@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import { useEffectOnce } from 'react-use'
 import { CrossCircledIcon } from '@radix-ui/react-icons'
@@ -13,6 +15,8 @@ interface HeadlessSignInProps {
   signIn: () => void
   status: SignatureScreenStatus
 }
+
+const a = 'hello world'
 
 export function HeadlessSignIn({ signIn, status }: HeadlessSignInProps) {
   useEffectOnce(() => {

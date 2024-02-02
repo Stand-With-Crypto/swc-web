@@ -1,4 +1,4 @@
-import { AccountAuthButton } from '@/components/app/accountAuth/context'
+import { AccountAuthButton } from '@/components/app/accountAuth'
 import { DTSIPersonCard } from '@/components/app/dtsiPersonCard'
 import { RecentActivityAndLeaderboard } from '@/components/app/pageHome/recentActivityAndLeaderboard'
 import { UserActionRowCTAsListWithApi } from '@/components/app/userActionRowCTA/userActionRowCTAsListWithApi'

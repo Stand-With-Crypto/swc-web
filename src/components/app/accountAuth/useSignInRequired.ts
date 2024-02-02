@@ -1,3 +1,5 @@
+'use client'
+
 import { ACCOUNT_AUTH_CONFIG } from '@/components/app/accountAuth/constants'
 import { useConnectionStatus, useThirdwebAuthContext, useUser } from '@thirdweb-dev/react'
 

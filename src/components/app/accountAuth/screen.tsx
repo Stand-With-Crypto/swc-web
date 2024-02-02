@@ -1,3 +1,5 @@
+'use client'
+
 import { WalletConfig, useWallet, useWallets } from '@thirdweb-dev/react-core'
 import { useState, useEffect, useRef } from 'react'
 

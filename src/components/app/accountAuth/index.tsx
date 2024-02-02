@@ -1,2 +1,2 @@
 export { AccountAuth } from './accountAuth'
-export { AccountAuthButton, AccountAuthContextProvider } from './context'
+export { AccountAuthButton } from './accountAuthButton'

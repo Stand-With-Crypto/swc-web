@@ -7,20 +7,11 @@ import * as React from 'react'
 interface OTPInputProps
   extends Omit<
     React.InputHTMLAttributes<HTMLInputElement>,
-    | 'ref'
-    | 'value'
-    | 'onFocus'
-    | 'onBlur'
-    | 'onKeyDown'
-    | 'onPaste'
-    | 'autoComplete'
-    | 'maxLength'
-    | 'onChange'
+    'ref' | 'value' | 'onFocus' | 'onBlur' | 'onPaste' | 'autoComplete' | 'maxLength' | 'onChange'
   > {
   value?: string
   onChange?: (otp: string) => void
   numInputs?: number
-  onEnter?: () => void
 }
 
 export function OTPInput({
@@ -34,7 +25,7 @@ export function OTPInput({
   className,
   id,
   name,
-  onEnter,
+  onKeyDown,
   ...rest
 }: OTPInputProps) {
   const [otpValue, setOTPValue] = React.useState(value)
@@ -79,6 +70,8 @@ export function OTPInput({
   }
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    onKeyDown?.(event)
+
     const otp = getOTPValue()
     if ([event.code, event.key].includes('Backspace')) {
       event.preventDefault()
@@ -93,9 +86,6 @@ export function OTPInput({
     } else if (event.code === 'ArrowRight') {
       event.preventDefault()
       focusInput(activeInput + 1)
-    } else if (event.code === 'Enter' && onEnter) {
-      event.preventDefault()
-      onEnter()
     }
 
     // React does not trigger onChange when the same value is entered

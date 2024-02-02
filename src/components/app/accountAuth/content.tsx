@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import {
   WalletConfig,
@@ -22,7 +24,6 @@ import { PageTitle } from '@/components/ui/pageTitleText'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { useResponsiveDialog } from '@/components/ui/responsiveDialog'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { useLoadingCallback } from '@/hooks/useLoadingCallback'
 import { ExternalLink, InternalLink } from '@/components/ui/link'

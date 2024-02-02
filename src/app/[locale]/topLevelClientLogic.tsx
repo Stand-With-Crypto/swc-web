@@ -23,7 +23,6 @@ import { identifyUserOnClient } from '@/utils/web/identifyUser'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { Suspense, useEffect } from 'react'
 import { useDetectWipedDatabaseAndLogOutUser } from '@/hooks/useDetectWipedDatabaseAndLogOutUser'
-import { AccountAuthContextProvider } from '@/components/app/accountAuth'
 import { ACCOUNT_AUTH_CONFIG } from '@/components/app/accountAuth/constants'
 
 const NEXT_PUBLIC_THIRDWEB_CLIENT_ID = requiredEnv(

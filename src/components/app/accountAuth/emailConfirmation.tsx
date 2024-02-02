@@ -1,3 +1,5 @@
+'use client'
+
 import { useEmbeddedWallet } from '@thirdweb-dev/react'
 import { ChevronLeft } from 'lucide-react'
 import React from 'react'
@@ -33,14 +35,21 @@ export function OTPEmailConfirmation({ onConfirm, onBack, emailAddress }: EmailC
   useEffectOnce(sendVerificationEmailToAddress)
 
   const handleConfirm = (syncCode?: string) => {
-    onConfirm(syncCode ?? code)
+    const codeToUse = syncCode ?? code
+
+    if (codeToUse.length < OTP_LENGTH) {
+      return
+    }
+
+    onConfirm(codeToUse)
   }
 
   const handleChangeOTPInput = (newCode: string) => {
-    setCode(newCode)
-    if (newCode.length === OTP_LENGTH) {
+    if (newCode.length === OTP_LENGTH && code.length < OTP_LENGTH) {
       handleConfirm(newCode)
     }
+
+    setCode(newCode)
   }
 
   return (
@@ -61,11 +70,21 @@ export function OTPEmailConfirmation({ onConfirm, onBack, emailAddress }: EmailC
           <OTPInput
             onChange={handleChangeOTPInput}
             numInputs={OTP_LENGTH}
-            onEnter={handleConfirm}
             disabled={isSendingVerificationMail}
+            onKeyDown={e => {
+              if (e.key === 'Enter') {
+                e.preventDefault()
+                handleConfirm()
+              }
+            }}
           />
 
-          <Button size="lg" className="w-full" onClick={() => handleConfirm()}>
+          <Button
+            size="lg"
+            className="w-full"
+            onClick={() => handleConfirm()}
+            disabled={code.length < OTP_LENGTH}
+          >
             Verify
           </Button>
 

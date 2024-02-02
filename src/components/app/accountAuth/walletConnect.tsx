@@ -1,3 +1,5 @@
+'use client'
+
 import { SelectUIProps, WalletConfig, WalletInstance } from '@thirdweb-dev/react'
 import { walletIds } from '@thirdweb-dev/wallets'
 import React from 'react'

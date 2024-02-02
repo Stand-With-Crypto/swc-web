@@ -4,7 +4,7 @@ import { useLogin } from '@thirdweb-dev/react'
 import { GetDefineMessageResults } from '@/types'
 import { useThirdwebData } from '@/hooks/useThirdwebData'
 import { Skeleton } from '@/components/ui/skeleton'
-import { AccountAuthButton } from '@/components/app/accountAuth/context'
+import { AccountAuthButton } from '@/components/app/accountAuth'
 
 import { NavbarLoggedInSessionButton } from './navbarLoggedInSessionButton'
 import { navbarSessionButtonMessages } from './navbarSessionButtonClient.messages'
