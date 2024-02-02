@@ -1,7 +1,6 @@
 import { cn, twNoop } from '@/utils/web/cn'
 import { type VariantProps, cva } from 'class-variance-authority'
 import React from 'react'
-import Balancer from 'react-wrap-balancer'
 
 const titleVariantsConfig = {
   size: {
@@ -22,14 +21,13 @@ interface PageTitleProps
   extends React.HTMLAttributes<HTMLHeadingElement>,
     VariantProps<typeof pageTitleVariants> {
   as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span'
-  withoutBalancer?: boolean
 }
 
 export const PageTitle = React.forwardRef<HTMLHeadingElement, PageTitleProps>(
-  ({ className, children, as: Comp = 'h1', size, withoutBalancer, ...props }, ref) => {
+  ({ className, children, as: Comp = 'h1', size, ...props }, ref) => {
     return (
       <Comp ref={ref} className={cn(pageTitleVariants({ className, size }))} {...props}>
-        {withoutBalancer ? children : <Balancer>{children}</Balancer>}
+        {children}
       </Comp>
     )
   },
