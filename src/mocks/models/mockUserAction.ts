@@ -1,24 +1,27 @@
 import { fakerFields } from '@/mocks/fakerUtils'
 import { mockCommonDatetimes } from '@/mocks/mockCommonDatetimes'
 import { USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns'
-import { UserAction } from '@prisma/client'
+import { faker } from '@faker-js/faker'
+import { Prisma, UserAction, UserActionType } from '@prisma/client'
 
-export function mockUserAction({
-  actionType,
-  userCryptoAddressId,
-  userSessionId,
-  userEmailAddressId,
-}: Pick<
-  UserAction,
-  'actionType' | 'userCryptoAddressId' | 'userEmailAddressId' | 'userSessionId'
->): UserAction {
+export function mockCreateUserActionInput() {
+  const actionType = faker.helpers.arrayElement(Object.values(UserActionType))
   return {
-    ...mockCommonDatetimes(),
     actionType,
     campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[actionType],
-    userCryptoAddressId,
-    userSessionId,
-    userEmailAddressId,
+  } satisfies Omit<
+    Prisma.UserActionCreateInput,
+    'userId' | 'nftMintId' | 'userCryptoAddressId' | 'userSessionId' | 'userEmailAddressId' | 'user'
+  >
+}
+
+export function mockUserAction(): UserAction {
+  return {
+    ...mockCreateUserActionInput(),
+    ...mockCommonDatetimes(),
+    userCryptoAddressId: null,
+    userSessionId: fakerFields.id(),
+    userEmailAddressId: null,
     nftMintId: null,
     id: fakerFields.id(),
     userId: fakerFields.id(),

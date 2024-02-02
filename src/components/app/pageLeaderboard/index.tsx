@@ -1,23 +1,18 @@
-import { RecentActivityRow } from '@/components/app/recentActivityRow/recentActivityRow'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
+import { DynamicRecentActivity } from '@/components/app/pageLeaderboard/dynamicRecentActivity'
+import { getDataForPageLeaderboard } from '@/components/app/pageLeaderboard/getData'
+import { RecentActivityRow } from '@/components/app/recentActivityRow/recentActivityRow'
 import { SumDonationsByUserRow } from '@/components/app/sumDonationsByUserRow/sumDonationsByUserRow'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { PaginationLinks } from '@/components/ui/paginationLinks'
 import { tabListStyles, tabTriggerStyles } from '@/components/ui/tabs/styles'
+import { SupportedLocale } from '@/intl/locales'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
-import { SupportedLocale } from '@/intl/locales'
-import { getDataForPageLeaderboard } from '@/components/app/pageLeaderboard/getData'
-import { toBool } from '@/utils/shared/toBool'
+import { PAGE_LEADERBOARD_TOTAL_PAGES } from './constants'
 
-export const PAGE_LEADERBOARD_TOTAL_PAGES = 50 // TODO replace this based off the numbers we see with prod data
-export const PAGE_LEADERBOARD_TOTAL_PRE_GENERATED_PAGES = toBool(
-  process.env.MINIMIZE_PAGE_PRE_GENERATION,
-)
-  ? 1
-  : 10
 export const PAGE_LEADERBOARD_TITLE = 'Our community'
 export const PAGE_LEADERBOARD_DESCRIPTION = `See how our community is taking a stand to safeguard the future of crypto in America.`
 
@@ -64,14 +59,18 @@ export function PageLeaderboard({
         </div>
       </div>
       <div className="mx-auto w-full max-w-2xl space-y-7">
-        {tab === RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY && (
-          <>
-            <div className="mt-2 h-7" />
-            {actions.map(action => (
-              <RecentActivityRow locale={locale} action={action} key={action.id} />
-            ))}
-          </>
-        )}
+        {tab === RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY ? (
+          pageNum === 1 ? (
+            <DynamicRecentActivity actions={actions} />
+          ) : (
+            <>
+              <div className="mt-2 h-7" />
+              {actions.map(action => (
+                <RecentActivityRow locale={locale} action={action} key={action.id} />
+              ))}
+            </>
+          )
+        ) : null}
         {tab === RecentActivityAndLeaderboardTabs.LEADERBOARD && (
           <>
             <p className="mt-2 h-7 text-center text-xs text-gray-500">
