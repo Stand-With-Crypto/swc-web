@@ -3,10 +3,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
 
-const isDev =
-  process.env.NODE_ENV === 'development' ||
-  process.env.VERCEL_ENV === 'development' ||
-  process.env.NODE_ENV === 'test'
+const isDev = process.env.NEXT_PUBLIC_ENVIRONMENT === 'local'
 
 const contentSecurityPolicy = {
   'default-src': ["'self'", 'blob:'],
@@ -96,6 +93,66 @@ const securityHeaders = [
   },
 ]
 
+const ACTION_REDIRECTS = [
+  {
+    destination: '/action/email',
+    queryKey: 'action',
+    queryValue: 'email-representative',
+  },
+  {
+    destination: '/action/email',
+    queryKey: 'modal',
+    queryValue: 'email-senator',
+  },
+  {
+    destination: '/action/nft-mint',
+    queryKey: 'modal',
+    queryValue: 'mintNFT',
+  },
+  {
+    destination: '/action/nft-mint',
+    queryKey: 'action',
+    queryValue: 'mint-nft',
+  },
+  {
+    destination: '/action/call',
+    queryKey: 'modal',
+    queryValue: 'call-your-representative',
+  },
+  {
+    destination: '/action/call',
+    queryKey: 'modal',
+    queryValue: 'callRepresentative',
+  },
+  {
+    destination: '/action/call',
+    queryKey: 'action',
+    queryValue: 'call-your-representative',
+  },
+  {
+    destination: '/action/opt-in',
+    queryKey: 'action',
+    queryValue: 'join-stand-with-crypto',
+  },
+  {
+    destination: '/action/opt-in',
+    queryKey: 'modal',
+    queryValue: 'member-join',
+  },
+]
+const V1_REDIRECTS = ACTION_REDIRECTS.map(({ destination, queryKey, queryValue }) => ({
+  permanent: true,
+  source: '/',
+  destination,
+  has: [
+    {
+      type: 'query',
+      key: queryKey,
+      value: queryValue,
+    },
+  ],
+}))
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -119,7 +176,7 @@ const nextConfig = {
   },
   async redirects() {
     return [
-      // v1 redirects
+      ...V1_REDIRECTS,
       {
         permanent: true,
         destination: '/action/call',
@@ -129,26 +186,6 @@ const nextConfig = {
         permanent: true,
         destination: '/action/opt-in',
         source: '/member-join',
-      },
-      {
-        permanent: true,
-        destination: '/action/email',
-        source: '/?action=email-representative',
-      },
-      {
-        permanent: true,
-        destination: '/action/email',
-        source: '/?modal=email-senator',
-      },
-      {
-        permanent: true,
-        destination: '/action/nft-mint',
-        source: '/?modal=mintNFT',
-      },
-      {
-        permanent: true,
-        destination: '/action/call',
-        source: '/?modal=call-your-representative',
       },
       {
         source: '/politicians/senate',
