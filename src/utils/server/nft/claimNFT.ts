@@ -7,6 +7,7 @@ import { AirdropPayload } from '@/utils/server/nft/payload'
 import { NFT_CONTRACT_ADDRESS } from '@/utils/server/nft/contractAddress'
 import { NFTSlug } from '@/utils/shared/nft'
 import NFTMintStatus = $Enums.NFTMintStatus
+import { Decimal } from '@prisma/client/runtime/library'
 
 export const ACTION_NFT_SLUG: Record<UserActionType, NFTSlug | null> = {
   [UserActionType.OPT_IN]: NFTSlug.SWC_SHIELD,
@@ -34,7 +35,7 @@ export async function claimNFT(userAction: UserAction, userCryptoAddress: UserCr
       contractAddress: NFT_CONTRACT_ADDRESS[nftSlug],
       costAtMintCurrencyCode: NFTCurrency.ETH,
       transactionHash: '',
-      costAtMintUsd: '0',
+      costAtMintUsd: new Decimal(0),
     },
   })
 

@@ -1,10 +1,17 @@
 import { inngest } from '@/inngest/inngest'
-import { $Enums } from '@prisma/client'
-import { engineAirdropNFT, engineGetMintStatus } from '@/utils/server/thirdweb/engineAirdropNFT'
-import NFTMintStatus = $Enums.NFTMintStatus
+import { engineAirdropNFT } from '@/utils/server/thirdweb/engineAirdropNFT'
 import { onFailureAirdropNFT } from '@/inngest/onFailureAirdropNFT'
 import { AirdropPayload } from '@/utils/server/nft/payload'
-import { updateMintNFTStatus } from '@/utils/server/nft/updateMintNFTStatus'
+import {
+  THIRDWEB_TRANSACTION_STATUS_TO_NFT_MINT_STATUS,
+  updateMintNFTStatus,
+} from '@/utils/server/nft/updateMintNFTStatus'
+import {
+  engineGetMintStatus,
+  THIRDWEB_TRANSACTION_STATUSES,
+  ThirdwebTransactionStatus,
+} from '@/utils/server/thirdweb/engineGetMintStatus'
+import { NonRetriableError } from 'inngest'
 
 export const AIRDROP_NFT_INNGEST_EVENT_NAME = 'app/airdrop.request'
 const AIRDROP_NFT_INNGEST_FUNCTION_ID = 'airdrop-nft'
@@ -25,36 +32,34 @@ export const airdropNFTWithInngest = inngest.createFunction(
     })
 
     let attempt = 1
-    const finaleStates = ['mined', 'errored', 'cancelled']
+
     let mintStatus: string | null = null
     let transactionHash: string | null
+    let gasPrice: string | null
     while (
       (attempt <= 5 && mintStatus === null) ||
-      (attempt <= 5 && mintStatus !== null && !finaleStates.includes(mintStatus))
+      (attempt <= 5 && mintStatus !== null && !THIRDWEB_TRANSACTION_STATUSES.includes(mintStatus))
     ) {
       await step.sleep(`wait-before-checking-status-${attempt}`, `${attempt * 20}s`)
       const transactionStatus = await engineGetMintStatus(queryId)
       mintStatus = transactionStatus.status
+      gasPrice = transactionStatus.gasPrice
       transactionHash = transactionStatus.transactionHash
       attempt += 1
     }
 
-    if (!mintStatus || !finaleStates.includes(mintStatus)) {
-      throw new Error('cannot get final states of minting request')
+    if (!mintStatus || !THIRDWEB_TRANSACTION_STATUSES.includes(mintStatus)) {
+      throw new NonRetriableError('cannot get final states of minting request')
     }
 
-    if (mintStatus === 'mined') {
-      await step.run('update-mintNFT-Status', async () => {
-        await updateMintNFTStatus(payload.nftMintId, NFTMintStatus.CLAIMED, transactionHash)
-      })
-      return
-    }
-
-    if (mintStatus === 'errored' || mintStatus === 'cancelled') {
-      await step.run('update-mintNFT-Status', async () => {
-        await updateMintNFTStatus(payload.nftMintId, NFTMintStatus.FAILED, transactionHash)
-      })
-      return
-    }
+    const status = mintStatus! as ThirdwebTransactionStatus
+    await step.run('update-mintNFT-Status', async () => {
+      await updateMintNFTStatus(
+        payload.nftMintId,
+        THIRDWEB_TRANSACTION_STATUS_TO_NFT_MINT_STATUS[status],
+        transactionHash,
+        gasPrice,
+      )
+    })
   },
 )
