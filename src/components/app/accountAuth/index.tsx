@@ -1,2 +1,2 @@
 export { AccountAuth } from './accountAuth'
-export { AccountAuthButton } from './accountAuthButton'
+export { AccountAuthDialogWrapper } from './accountAuthDialogWrapper'

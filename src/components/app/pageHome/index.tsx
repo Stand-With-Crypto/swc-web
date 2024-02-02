@@ -1,4 +1,4 @@
-import { AccountAuthButton } from '@/components/app/accountAuth'
+import { AccountAuthDialogWrapper } from '@/components/app/accountAuth'
 import { DTSIPersonCard } from '@/components/app/dtsiPersonCard'
 import { DelayedRecentActivity } from '@/components/app/pageHome/delayedRecentActivity'
 import { UserActionRowCTAsListWithApi } from '@/components/app/userActionRowCTA/userActionRowCTAsListWithApi'
@@ -46,7 +46,9 @@ export function PageHome({
             Congress is writing the rules as we speak - but they won't vote YES until they've heard
             from you.
           </PageSubTitle>
-          <AccountAuthButton size="lg">Join the fight</AccountAuthButton>
+          <AccountAuthDialogWrapper>
+            <Button size="lg">Join the fight</Button>
+          </AccountAuthDialogWrapper>
         </div>
         <div className="order-0 md:container lg:order-1 lg:px-0">
           <Dialog>

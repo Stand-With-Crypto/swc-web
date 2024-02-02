@@ -4,10 +4,11 @@ import { useLogin } from '@thirdweb-dev/react'
 import { GetDefineMessageResults } from '@/types'
 import { useThirdwebData } from '@/hooks/useThirdwebData'
 import { Skeleton } from '@/components/ui/skeleton'
-import { AccountAuthButton } from '@/components/app/accountAuth'
+import { AccountAuthDialogWrapper } from '@/components/app/accountAuth'
 
 import { NavbarLoggedInSessionButton } from './navbarLoggedInSessionButton'
 import { navbarSessionButtonMessages } from './navbarSessionButtonClient.messages'
+import { Button } from '@/components/ui/button'
 
 interface NavbarSessionButtonProps {
   messages: GetDefineMessageResults<typeof navbarSessionButtonMessages>
@@ -25,5 +26,9 @@ export function NavbarSessionButtonClient(_props: NavbarSessionButtonProps) {
     return <NavbarLoggedInSessionButton />
   }
 
-  return <AccountAuthButton variant="secondary">Log in</AccountAuthButton>
+  return (
+    <AccountAuthDialogWrapper>
+      <Button variant="secondary">Log in</Button>
+    </AccountAuthDialogWrapper>
+  )
 }
