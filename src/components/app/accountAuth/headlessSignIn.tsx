@@ -16,8 +16,6 @@ interface HeadlessSignInProps {
   status: SignatureScreenStatus
 }
 
-const a = 'hello world'
-
 export function HeadlessSignIn({ signIn, status }: HeadlessSignInProps) {
   useEffectOnce(() => {
     signIn()
