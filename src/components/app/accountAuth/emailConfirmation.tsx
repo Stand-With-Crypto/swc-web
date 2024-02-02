@@ -3,7 +3,6 @@
 import { useEmbeddedWallet } from '@thirdweb-dev/react'
 import { ChevronLeft } from 'lucide-react'
 import React from 'react'
-import { useEffectOnce } from 'react-use'
 
 import { Button } from '@/components/ui/button'
 import { dialogButtonStyles } from '@/components/ui/dialog/styles'
@@ -32,7 +31,17 @@ export function OTPEmailConfirmation({ onConfirm, onBack, emailAddress }: EmailC
     sendVerificationEmailWithLoading({ email: emailAddress })
   }, [emailAddress, sendVerificationEmailWithLoading])
 
-  useEffectOnce(sendVerificationEmailToAddress)
+  // The component is mounted twice on local due to strict mode,
+  // this ensures we only send the email once both in local and in production
+  // This comes from @thirdweb-dev/react
+  const sentVerificationEmailOnMount = React.useRef(false)
+  React.useEffect(() => {
+    if (!sentVerificationEmailOnMount.current) {
+      sendVerificationEmailToAddress()
+      sentVerificationEmailOnMount.current = true
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const handleConfirm = (syncCode?: string) => {
     const codeToUse = syncCode ?? code
