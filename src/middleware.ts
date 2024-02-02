@@ -40,18 +40,6 @@ export function middleware(request: NextRequest) {
       httpOnly: false,
     })
   }
-  const { nonce, cspHeader } = generateCSPHeader()
-  // const requestHeaders = new Headers(request.headers)
-  // requestHeaders.set('x-nonce', nonce)
-  // requestHeaders.set('Content-Security-Policy', cspHeader)
-  // const response = NextResponse.next({
-  //   request: {
-  //     headers: requestHeaders,
-  //   },
-  // })
-  i18nParsedResponse.headers.set('Content-Security-Policy', cspHeader)
-  i18nParsedResponse.headers.set('x-nonce', nonce)
-
   return i18nParsedResponse
 }
 
