@@ -8,6 +8,7 @@ import { NFT_CONTRACT_ADDRESS } from '@/utils/server/nft/contractAddress'
 import { NFTSlug } from '@/utils/shared/nft'
 import NFTMintStatus = $Enums.NFTMintStatus
 import { Decimal } from '@prisma/client/runtime/library'
+import { error } from 'winston'
 
 export const ACTION_NFT_SLUG: Record<UserActionType, NFTSlug | null> = {
   [UserActionType.OPT_IN]: NFTSlug.SWC_SHIELD,
@@ -24,7 +25,11 @@ export async function claimNFT(userAction: UserAction, userCryptoAddress: UserCr
   logger.info('Triggered')
   const nftSlug = ACTION_NFT_SLUG[userAction.actionType]
   if (nftSlug === null) {
-    return
+    throw error(`Action ${userAction.actionType} doesn't have an NFT slug.`)
+  }
+
+  if (userAction.nftMintId !== null) {
+    throw error(`Action ${userAction.id} already has an NFTmint.`)
   }
 
   const nftMint = await prismaClient.nFTMint.create({

@@ -11,17 +11,15 @@ export async function mintPastActions(userId: string, userCryptoAddress: UserCry
     key => ACTION_NFT_SLUG[key] !== null,
   )
 
-  for (const actionType of actionWithNFT) {
-    const action = await prismaClient.userAction.findFirst({
-      where: {
-        userId: userId,
-        actionType: actionType,
-      },
-    })
+  const actions = await prismaClient.userAction.findMany({
+    where: {
+      userId: userId,
+      actionType: { in: actionWithNFT },
+    },
+  })
 
-    if (action !== null) {
-      logger.info('mint past actions:' + action.actionType)
-      await claimNFT(action, userCryptoAddress)
-    }
+  for (const action of actions) {
+    logger.info('mint past actions:' + action.actionType)
+    await claimNFT(action, userCryptoAddress)
   }
 }
