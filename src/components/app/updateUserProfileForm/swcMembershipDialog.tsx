@@ -7,7 +7,7 @@ export function SWCMembershipDialog({ children }: { children: React.ReactNode })
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="spacy-y-7 w-full max-w-md">
-        <PageTitle size="sm" className="mb-1 text-left" withoutBalancer>
+        <PageTitle size="sm" className="mb-1 text-left">
           What does it mean to be a Stand With Crypto Alliance member?
         </PageTitle>
         <div className="text-fontcolor-muted">
