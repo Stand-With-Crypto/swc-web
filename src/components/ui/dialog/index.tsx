@@ -13,7 +13,6 @@ import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/shared
 import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
 import { cn } from '@/utils/web/cn'
 import { X } from 'lucide-react'
-import _ from 'lodash'
 import {
   PrimitiveComponentAnalytics,
   trackPrimitiveComponentAnalytics,
