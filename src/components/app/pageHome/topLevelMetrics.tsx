@@ -59,7 +59,7 @@ export function TopLevelMetrics({ locale, ...data }: Props & { locale: Supported
     }
   }, [values, locale])
   return (
-    <section className="mb-16 flex flex-col gap-3 rounded-lg text-center sm:flex-row sm:gap-0 md:mb-24">
+    <section className="mb-16 flex flex-col gap-3 rounded-lg text-center md:mb-24 md:flex-row md:gap-0">
       {[
         {
           label: 'Donated by crypto advocates',
@@ -92,12 +92,12 @@ export function TopLevelMetrics({ locale, ...data }: Props & { locale: Supported
       ].map(({ label, value }, index) => (
         <div
           className={cn(
-            'w-full flex-shrink-0 rounded-lg bg-blue-50 p-6 sm:w-1/3',
+            'w-full flex-shrink-0 rounded-lg bg-blue-50 p-6 md:w-1/3',
             index === 0
-              ? 'rounded-none sm:rounded-l-lg'
+              ? 'md:rounded-none md:rounded-l-lg'
               : index === 2
-                ? 'rounded-none sm:rounded-r-lg'
-                : 'rounded-none',
+                ? 'md:rounded-none md:rounded-r-lg'
+                : 'md:rounded-none',
           )}
           key={label}
         >
