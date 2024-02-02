@@ -3,7 +3,7 @@ import { $Enums } from '@prisma/client'
 import { engineAirdropNFT, engineGetMintStatus } from '@/utils/server/thirdweb/engineAirdropNFT'
 import NFTMintStatus = $Enums.NFTMintStatus
 import { onFailureAirdropNFT } from '@/inngest/onFailureAirdropNFT'
-import { airdropPayload } from '@/utils/server/nft/payload'
+import { AirdropPayload } from '@/utils/server/nft/payload'
 import { updateMintNFTStatus } from '@/utils/server/nft/updateMintNFTStatus'
 
 export const AIRDROP_NFT_INNGEST_EVENT_NAME = 'app/airdrop.request'
@@ -18,7 +18,7 @@ export const airdropNFTWithInngest = inngest.createFunction(
   },
   { event: AIRDROP_NFT_INNGEST_EVENT_NAME },
   async ({ event, step }) => {
-    const payload = event.data as airdropPayload
+    const payload = event.data as AirdropPayload
 
     const queryId = await step.run('airdrop-NFT', async () => {
       return await engineAirdropNFT(payload.contractAddress, payload.recipientWalletAddress, 1)

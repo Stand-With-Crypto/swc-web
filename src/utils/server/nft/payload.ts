@@ -1,10 +1,5 @@
-export interface airdropPayload {
+export interface AirdropPayload {
   nftMintId: string
   contractAddress: string
   recipientWalletAddress: string
-}
-
-export interface getAirdropStatusPayload {
-  nftMintId: string
-  queryId: string
 }

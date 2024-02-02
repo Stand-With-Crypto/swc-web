@@ -1,6 +1,6 @@
 import { inngest } from '@/inngest/inngest'
 import { runBin } from '@/bin/runBin'
-import { airdropPayload } from '@/utils/server/nft/payload'
+import { AirdropPayload } from '@/utils/server/nft/payload'
 import { AIRDROP_NFT_INNGEST_EVENT_NAME } from '@/inngest/functions/airdropNFT'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
@@ -48,7 +48,7 @@ async function smokeTestAirdropNFTWithInngest() {
     },
   })
 
-  const payload: airdropPayload = {
+  const payload: AirdropPayload = {
     nftMintId: nftMint.id,
     contractAddress: nftMint.contractAddress,
     recipientWalletAddress: LOCAL_USER_CRYPTO_ADDRESS,

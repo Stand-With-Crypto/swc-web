@@ -3,7 +3,7 @@ import { $Enums, NFTCurrency, UserAction, UserActionType, UserCryptoAddress } fr
 import { getLogger } from '@/utils/shared/logger'
 import { inngest } from '@/inngest/inngest'
 import { AIRDROP_NFT_INNGEST_EVENT_NAME } from '@/inngest/functions/airdropNFT'
-import { airdropPayload } from '@/utils/server/nft/payload'
+import { AirdropPayload } from '@/utils/server/nft/payload'
 import { NFT_CONTRACT_ADDRESS } from '@/utils/server/nft/contractAddress'
 import { NFTSlug } from '@/utils/shared/nft'
 import NFTMintStatus = $Enums.NFTMintStatus
@@ -48,7 +48,7 @@ export async function claimNFT(userAction: UserAction, userCryptoAddress: UserCr
     },
   })
 
-  const payload: airdropPayload = {
+  const payload: AirdropPayload = {
     nftMintId: nftMint.id,
     recipientWalletAddress: userCryptoAddress.cryptoAddress,
     contractAddress: NFT_CONTRACT_ADDRESS[nftSlug],
