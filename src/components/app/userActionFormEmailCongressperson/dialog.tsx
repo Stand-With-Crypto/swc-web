@@ -1,5 +1,6 @@
 'use client'
 
+import { ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON } from '@/components/app/userActionFormEmailCongressperson/constants'
 import { LazyUserActionFormEmailCongressperson } from '@/components/app/userActionFormEmailCongressperson/lazyLoad'
 import { UserActionFormEmailCongresspersonSkeleton } from '@/components/app/userActionFormEmailCongressperson/skeleton'
 import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
@@ -27,7 +28,7 @@ export function UserActionFormEmailCongresspersonDialog({
     }
   }, [dialogProps.open, state])
   return (
-    <Dialog {...dialogProps}>
+    <Dialog analytics={ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON} {...dialogProps}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="max-w-3xl" padding={false}>
         <Suspense fallback={<UserActionFormEmailCongresspersonSkeleton locale={locale} />}>

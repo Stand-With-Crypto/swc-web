@@ -17,7 +17,7 @@ export function UserActionFormDonateDialog({
 }) {
   const dialogProps = useDialog(defaultOpen)
   return (
-    <Dialog {...dialogProps}>
+    <Dialog analytics={'User Action Form Donate'} {...dialogProps}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="max-w-3xl">
         <Suspense fallback={<Skeleton className="h-80 w-full" />}>

@@ -7,7 +7,7 @@ import { zodManageCookieConsent } from '@/components/app/cookieConsent/cookieCon
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form'
 import { Checkbox } from '@/components/ui/checkbox'
 import { CheckboxProps } from '@radix-ui/react-checkbox'
-import InfoBadge from '@/components/ui/infoBadge'
+import { InfoBadge } from '@/components/ui/infoBadge'
 import { Button } from '@/components/ui/button'
 import { CookieConsentPermissions, OptionalCookieConsentTypes } from '@/utils/shared/cookieConsent'
 
@@ -100,7 +100,7 @@ function CheckboxField({ label, helpText, ...props }: CheckboxFieldProps) {
           <Checkbox {...props} />
         </FormControl>
         <p>{label}</p>
-        <InfoBadge>{helpText}</InfoBadge>
+        <InfoBadge analytics={'Cookie Preferences Info Badge'}>{helpText}</InfoBadge>
       </label>
     </FormItem>
   )
