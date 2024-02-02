@@ -133,9 +133,7 @@ export function PageHome({
                 </TabsTrigger>
               </TabsList>
             </div>
-            <TabsContent value={RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY}>
-              <DelayedRecentActivity actions={actions} />
-            </TabsContent>
+            <DelayedRecentActivity actions={actions} />
             <TabsContent value={RecentActivityAndLeaderboardTabs.LEADERBOARD} className="space-y-7">
               <p className="mt-2 h-7 text-center text-xs text-gray-500">
                 Donations to{' '}
