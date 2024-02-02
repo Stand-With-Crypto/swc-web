@@ -1,6 +1,6 @@
 import { FailureEventArgs } from 'inngest'
 import * as Sentry from '@sentry/nextjs'
-import { $Enums, NFTMint } from '@prisma/client'
+import { $Enums } from '@prisma/client'
 import { updateMinNFTStatus } from '@/utils/server/nft'
 import NFTMintStatus = $Enums.NFTMintStatus
 import { airdropPayload } from '@/utils/server/nft/payload'
