@@ -39,7 +39,6 @@ export async function claimNFT(userAction: UserAction, userCryptoAddress: UserCr
       costAtMint: 0.0,
       contractAddress: NFT_CONTRACT_ADDRESS[nftSlug],
       costAtMintCurrencyCode: NFTCurrency.ETH,
-      transactionHash: '',
       costAtMintUsd: new Decimal(0),
     },
   })

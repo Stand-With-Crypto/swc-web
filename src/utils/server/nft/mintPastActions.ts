@@ -15,6 +15,7 @@ export async function mintPastActions(userId: string, userCryptoAddress: UserCry
     where: {
       userId: userId,
       actionType: { in: actionWithNFT },
+      nftMintId: null,
     },
   })
 

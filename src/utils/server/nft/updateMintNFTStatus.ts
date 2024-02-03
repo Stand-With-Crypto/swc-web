@@ -42,7 +42,7 @@ export async function updateMintNFTStatus(
     },
     data: {
       status: nftMintStatus,
-      transactionHash: transactionHash ? transactionHash : '',
+      transactionHash: transactionHash,
       costAtMint: costAtMint,
       costAtMintUsd: costAtMintUsd,
     },

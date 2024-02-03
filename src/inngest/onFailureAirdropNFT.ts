@@ -14,5 +14,5 @@ export async function onFailureAirdropNFT(failureEventArgs: FailureEventArgs) {
   })
 
   const payload = failureEventArgs.event.data.event.data as AirdropPayload
-  await updateMintNFTStatus(payload.nftMintId, NFTMintStatus.FAILED, '')
+  await updateMintNFTStatus(payload.nftMintId, NFTMintStatus.FAILED, null, null)
 }
