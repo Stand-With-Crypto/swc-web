@@ -118,8 +118,8 @@ model User {
   userMergeAlertUserA UserMergeAlert[] @relation("userAMergeAttempt")
   userMergeEvents     UserMergeEvent[]
 
-  capitolCanaryAdvocateId Int? @map("capitol_canary_advocate_id")
-  capitolCanaryInstance  CapitolCanaryInstance? @map("capitol_canary_instance")
+  capitolCanaryAdvocateId Int?                   @map("capitol_canary_advocate_id")
+  capitolCanaryInstance   CapitolCanaryInstance? @map("capitol_canary_instance")
 
   @@index([addressId])
   @@index([internalStatus])
@@ -328,6 +328,8 @@ model UserActionDonation {
   amountCurrencyCode String               @map("amount_currency_code")
   amountUsd          Decimal              @map("amount_usd")
   recipient          DonationOrganization
+
+  coinbaseCommerceDonationId String? @map("coinbase_commerce_donation_id")
 
   @@index([id])
   @@map("user_action_donation")
