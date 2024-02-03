@@ -13,7 +13,7 @@ export async function engineAirdropNFT(
   walletAddress: string,
   quantity: number,
 ) {
-  logger.info('engine airdrop triggered')
+  logger.info('Triggered')
   try {
     const result = await thirdwebEngine.erc721.claimTo(
       CHAIN_ID,

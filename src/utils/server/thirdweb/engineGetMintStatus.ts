@@ -13,7 +13,7 @@ export const THIRDWEB_TRANSACTION_STATUSES: ThirdwebTransactionStatus[] = [
 ]
 
 export async function engineGetMintStatus(queryId: string) {
-  logger.info('engine airdrop triggered')
+  logger.info('Triggered')
   try {
     const result = await thirdwebEngine.transaction.status(queryId)
 
