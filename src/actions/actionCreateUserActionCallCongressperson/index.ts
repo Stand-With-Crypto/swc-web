@@ -140,15 +140,9 @@ async function createUser(sharedDependencies: Pick<SharedDependencies, 'localUse
 async function getRecentUserActionByUserId(userId: User['id']) {
   return prismaClient.userAction.findFirst({
     where: {
-      datetimeCreated: {
-        gte: subDays(new Date(), 1),
-      },
       actionType: UserActionType.CALL,
       campaignName: UserActionCallCampaignName.DEFAULT,
       userId: userId,
-    },
-    include: {
-      userActionEmail: true,
     },
   })
 }

@@ -58,9 +58,6 @@ async function _actionCreateUserActionTweet() {
   const actionType = UserActionType.TWEET
   let userAction = await prismaClient.userAction.findFirst({
     where: {
-      datetimeCreated: {
-        gte: subDays(new Date(), 1),
-      },
       actionType,
       campaignName,
       userId: user.id,

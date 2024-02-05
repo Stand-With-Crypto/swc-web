@@ -88,9 +88,6 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
   const actionType = UserActionType.EMAIL
   let userAction = await prismaClient.userAction.findFirst({
     where: {
-      datetimeCreated: {
-        gte: subDays(new Date(), 1),
-      },
       actionType,
       campaignName,
       userId: user.id,
