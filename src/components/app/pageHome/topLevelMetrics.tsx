@@ -14,19 +14,29 @@ type Props = Pick<
   'countPolicymakerContacts' | 'countUsers' | 'sumDonations'
 > & { locale: SupportedLocale }
 
+/*
+Odometer animations are smoothest when we aren't going from a higher number to a lower number
+so to create the desired initial loading effect, we want the animating numbers to always start at zero
+To prevent not animating because the actual number is zero, we subtract one from the actual number
+*/
+const roundDownMock = (value: number, roundTo: number) =>
+  Math.floor((value - 1) / roundTo) * roundTo
+
 const mockDecreaseInValuesOnInitialLoadSoWeCanAnimateIncrease = (
   initial: Omit<Props, 'locale'>,
 ): Omit<Props, 'locale'> => ({
   sumDonations: {
-    amountUsd: initial.sumDonations.amountUsd - 99,
+    amountUsd: roundDownMock(initial.sumDonations.amountUsd, 10000),
   },
   countUsers: {
-    count: initial.countUsers.count - 1,
+    count: roundDownMock(initial.countUsers.count, 100),
   },
   countPolicymakerContacts: {
-    countUserActionCalls: initial.countPolicymakerContacts.countUserActionCalls - 1,
-    countUserActionEmailRecipients:
-      initial.countPolicymakerContacts.countUserActionEmailRecipients - 1,
+    countUserActionCalls: roundDownMock(initial.countPolicymakerContacts.countUserActionCalls, 100),
+    countUserActionEmailRecipients: roundDownMock(
+      initial.countPolicymakerContacts.countUserActionEmailRecipients,
+      100,
+    ),
   },
 })
 
