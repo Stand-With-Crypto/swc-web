@@ -4,7 +4,7 @@ import { PageTitle } from '@/components/ui/pageTitleText'
 
 export function SWCMembershipDialog({ children }: { children: React.ReactNode }) {
   return (
-    <Dialog>
+    <Dialog analytics={'SWC Membership Explainer'}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="spacy-y-7 w-full max-w-md">
         <PageTitle size="sm" className="mb-1 text-left" withoutBalancer>

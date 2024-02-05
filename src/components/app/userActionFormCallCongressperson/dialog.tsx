@@ -1,6 +1,7 @@
 'use client'
 
 import { UserActionFormCallCongressperson } from '@/components/app/userActionFormCallCongressperson'
+import { ANALYTICS_NAME_USER_ACTION_FORM_CALL_CONGRESSPERSON } from '@/components/app/userActionFormCallCongressperson/constants'
 import { LazyUserActionFormCallCongressperson } from '@/components/app/userActionFormCallCongressperson/lazyLoad'
 import { UserActionFormCallCongresspersonSkeleton } from '@/components/app/userActionFormCallCongressperson/skeleton'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
@@ -21,7 +22,7 @@ export function UserActionFormCallCongresspersonDialog({
   const { user } = data ?? { user: null }
 
   return (
-    <Dialog {...dialogProps}>
+    <Dialog analytics={ANALYTICS_NAME_USER_ACTION_FORM_CALL_CONGRESSPERSON} {...dialogProps}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="max-w-3xl">
         {isLoading ? (

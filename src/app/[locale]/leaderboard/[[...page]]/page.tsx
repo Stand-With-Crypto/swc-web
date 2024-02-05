@@ -1,9 +1,9 @@
 import {
   PAGE_LEADERBOARD_DESCRIPTION,
   PAGE_LEADERBOARD_TITLE,
-  PAGE_LEADERBOARD_TOTAL_PRE_GENERATED_PAGES,
   PageLeaderboard,
 } from '@/components/app/pageLeaderboard'
+import { PAGE_LEADERBOARD_TOTAL_PRE_GENERATED_PAGES } from '@/components/app/pageLeaderboard/constants'
 import { getDataForPageLeaderboard } from '@/components/app/pageLeaderboard/getData'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
 import { PageProps } from '@/types'

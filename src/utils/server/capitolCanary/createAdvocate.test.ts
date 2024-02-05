@@ -47,24 +47,24 @@ it('formats the "create capitol canary advocate" request correctly', () => {
 
   expect(formattedRequest).toMatchInlineSnapshot(`
 {
-  "address1": "9764 Domenico Viaduct",
-  "address2": "Suite 759",
+  "address1": "164 Bins Corners",
+  "address2": "Suite 904",
   "campaigns": [
     142628,
   ],
-  "city": "East Jaquanville",
-  "country": "UA",
-  "email": "Edythe.Raynor@hotmail.com",
+  "city": "New Trycia",
+  "country": "GA",
+  "email": "Nicklaus_Walker12@gmail.com",
   "emailOptin": 1,
   "emailOptout": 0,
-  "firstname": "Blake",
-  "lastname": "Leffler",
+  "firstname": "Mina",
+  "lastname": "Abbott",
   "p2aSource": "source",
-  "phone": "+16929224505",
+  "phone": "+19120313363",
   "smsOptin": 1,
   "smsOptinConfirmed": 1,
   "smsOptout": 0,
-  "state": "Pennsylvania",
+  "state": "Massachusetts",
   "tags": [
     "tag1",
     "tag2",
@@ -74,7 +74,7 @@ it('formats the "create capitol canary advocate" request correctly', () => {
   "utm_medium": "utmMedium",
   "utm_source": "utmSource",
   "utm_term": "utmTerm",
-  "zip5": "16402-7572",
+  "zip5": "27975",
 }
 `)
 })

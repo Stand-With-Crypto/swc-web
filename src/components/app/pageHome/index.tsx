@@ -1,11 +1,11 @@
 import { DTSIPersonCard } from '@/components/app/dtsiPersonCard'
-import { RecentActivityAndLeaderboard } from '@/components/app/pageHome/recentActivityAndLeaderboard'
+import { DelayedRecentActivity } from '@/components/app/pageHome/delayedRecentActivity'
 import { UserActionFormOptInSWCDialog } from '@/components/app/userActionFormOptInSWC/dialog'
 import { UserActionRowCTAsListWithApi } from '@/components/app/userActionRowCTA/userActionRowCTAsListWithApi'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { NextImage } from '@/components/ui/image'
-import { InternalLink } from '@/components/ui/link'
+import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
@@ -18,6 +18,9 @@ import { getIntlUrls } from '@/utils/shared/urls'
 import { ArrowUpRight, ThumbsDown, ThumbsUp } from 'lucide-react'
 import { Suspense } from 'react'
 import { TopLevelMetrics } from './topLevelMetrics'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
+import { SumDonationsByUserRow } from '@/components/app/sumDonationsByUserRow/sumDonationsByUserRow'
 
 export function PageHome({
   params,
@@ -48,7 +51,9 @@ export function PageHome({
           </UserActionFormOptInSWCDialog>
         </div>
         <div className="order-0 md:container lg:order-1 lg:px-0">
-          <Dialog>
+          <Dialog
+            analytics={{ Category: 'Homepage Hero Section', CTA: '2023-12-11 Presidential Forum' }}
+          >
             <DialogTrigger asChild>
               <LinkBox className="relative h-[320px] cursor-pointer overflow-hidden md:rounded-xl lg:h-[400px]">
                 <NextImage
@@ -116,7 +121,44 @@ export function PageHome({
           <PageSubTitle as="h4">
             See how our community is taking a stand to safeguard the future of crypto in America.
           </PageSubTitle>
-          <RecentActivityAndLeaderboard {...{ locale, actions, sumDonationsByUser }} />
+          <Tabs
+            analytics={'Homepage Our Community Tabs'}
+            defaultValue={RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY}
+            className="mx-auto w-full max-w-2xl"
+          >
+            <div className="text-center">
+              <TabsList className="mx-auto">
+                <TabsTrigger value={RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY}>
+                  Recent activity
+                </TabsTrigger>
+                <TabsTrigger value={RecentActivityAndLeaderboardTabs.LEADERBOARD}>
+                  Top donations
+                </TabsTrigger>
+              </TabsList>
+            </div>
+            <DelayedRecentActivity actions={actions} />
+            <TabsContent value={RecentActivityAndLeaderboardTabs.LEADERBOARD} className="space-y-7">
+              <p className="mt-2 h-7 text-center text-xs text-gray-500">
+                Donations to{' '}
+                <ExternalLink
+                  href={
+                    'https://www.axios.com/2023/12/18/crypto-super-pac-fairshake-2024-elections'
+                  }
+                >
+                  Fairshake
+                </ExternalLink>
+                , a pro-crypto Super PAC, are not included on the leaderboard.
+              </p>
+              {sumDonationsByUser.map((donor, index) => (
+                <SumDonationsByUserRow
+                  key={index}
+                  index={index}
+                  sumDonations={donor}
+                  locale={locale}
+                />
+              ))}
+            </TabsContent>
+          </Tabs>
           <div className="space-x-4 text-center">
             <Button asChild>
               <InternalLink href={urls.donate()}>Donate</InternalLink>

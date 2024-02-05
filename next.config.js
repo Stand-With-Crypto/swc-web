@@ -3,18 +3,194 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
 
-// TODO bring over old configs
+const isDev =
+  process.env.NODE_ENV === 'development' ||
+  process.env.VERCEL_ENV === 'development' ||
+  process.env.NODE_ENV === 'test'
+
+const contentSecurityPolicy = {
+  'default-src': ["'self'", 'blob:'],
+  'style-src': [
+    "'self'",
+    "'unsafe-inline'", // NextJS requires 'unsafe-inline'
+  ],
+  'script-src': [
+    "'self'",
+    isDev ? "'unsafe-eval' 'unsafe-inline'" : '', // NextJS requires 'unsafe-eval' in dev (faster source maps)
+    isDev ? '' : 'https://static.ads-twitter.com/uwt.js',
+    'https://*.googleapis.com',
+    'https://*.gstatic.com',
+    '*.google.com',
+    'https://static.ads-twitter.com/uwt.js',
+    'https://va.vercel-scripts.com/v1/speed-insights/script.debug.js',
+    'https://va.vercel-scripts.com/v1/script.debug.js',
+    'https://www.youtube.com/',
+    'https://vercel.live/_next-live/feedback/feedback.js',
+  ],
+  'img-src': [
+    "'self'",
+    'blob: data:',
+    'https://res.cloudinary.com/',
+    'https://*.walletconnect.com/',
+    'https://euc.li/',
+    'https://*.googleapis.com',
+    'https://*.gstatic.com',
+    '*.google.com',
+    'https://ipfs.io/ipfs/',
+  ],
+  'connect-src': [
+    "'self'",
+    'ws: wss:',
+    'https://cloudflare-eth.com',
+    'https://base.rpc.thirdweb.com/',
+    'https://polygon.rpc.thirdweb.com/',
+    'https://ipfs.io/ipfs/',
+    'https://*.walletconnect.com/',
+    'https://developer-access-mainnet.base.org/',
+    'https://*.googleapis.com',
+    'https://*.gstatic.com',
+    '*.google.com',
+  ],
+  'frame-src': [
+    '*.google.com',
+    'https://embedded-wallet.thirdweb.com/',
+    'https://www.youtube.com/embed/',
+  ],
+  'font-src': ["'self'"],
+  'object-src': ['none'],
+  'base-uri': ["'self'"],
+  'form-action': ["'self'"],
+  'frame-ancestors': ["'none'"],
+  'block-all-mixed-content': [],
+  'upgrade-insecure-requests': [],
+}
+
+const cspObjectToString = Object.entries(contentSecurityPolicy).reduce((acc, [key, value]) => {
+  return `${acc}${key} ${value.join(' ')};`
+}, '')
+
+const securityHeaders = [
+  {
+    key: 'Strict-Transport-Security',
+    value: 'max-age=15552000; includeSubDomains; preload',
+  },
+  {
+    key: 'X-Content-Type-Options',
+    value: 'nosniff',
+  },
+  {
+    key: 'X-Frame-Options',
+    value: 'SAMEORIGIN',
+  },
+
+  {
+    key: 'X-XSS-Protection',
+    value: '1; mode=block',
+  },
+  {
+    key: 'Referrer-Policy',
+    value: 'strict-origin-when-cross-origin',
+  },
+  {
+    key: 'Content-Security-Policy',
+    value: cspObjectToString,
+  },
+]
+
+const ACTION_REDIRECTS = [
+  {
+    destination: '/action/email',
+    queryKey: 'action',
+    queryValue: 'email-representative',
+  },
+  {
+    destination: '/action/email',
+    queryKey: 'modal',
+    queryValue: 'email-senator',
+  },
+  {
+    destination: '/action/nft-mint',
+    queryKey: 'modal',
+    queryValue: 'mintNFT',
+  },
+  {
+    destination: '/action/nft-mint',
+    queryKey: 'action',
+    queryValue: 'mint-nft',
+  },
+  {
+    destination: '/action/call',
+    queryKey: 'modal',
+    queryValue: 'call-your-representative',
+  },
+  {
+    destination: '/action/call',
+    queryKey: 'modal',
+    queryValue: 'callRepresentative',
+  },
+  {
+    destination: '/action/call',
+    queryKey: 'action',
+    queryValue: 'call-your-representative',
+  },
+  {
+    destination: '/action/opt-in',
+    queryKey: 'action',
+    queryValue: 'join-stand-with-crypto',
+  },
+  {
+    destination: '/action/opt-in',
+    queryKey: 'modal',
+    queryValue: 'member-join',
+  },
+]
+const V1_REDIRECTS = ACTION_REDIRECTS.map(({ destination, queryKey, queryValue }) => ({
+  permanent: true,
+  source: '/',
+  destination,
+  has: [
+    {
+      type: 'query',
+      key: queryKey,
+      value: queryValue,
+    },
+  ],
+}))
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
+    unoptimized: false,
     remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'euc.li',
+      },
       // dotheysupportit image cdn
       { protocol: 'https', hostname: 'db0prh5pvbqwd.cloudfront.net' },
     ],
   },
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: securityHeaders,
+      },
+    ]
+  },
   async redirects() {
     return [
-      // v1 redirects
+      ...V1_REDIRECTS,
+      {
+        permanent: true,
+        destination: '/action/call',
+        source: '/call',
+      },
+      {
+        permanent: true,
+        destination: '/action/opt-in',
+        source: '/member-join',
+      },
       {
         source: '/politicians/senate',
         destination: '/politicians',
@@ -28,6 +204,7 @@ const nextConfig = {
     ]
   },
 }
+
 /** @type {import('@sentry/nextjs').SentryWebpackPluginOptions} */
 const sentryWebpackPluginOptions = {
   // For all available options, see:

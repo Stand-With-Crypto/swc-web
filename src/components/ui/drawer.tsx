@@ -4,13 +4,43 @@ import * as React from 'react'
 import { Drawer as DrawerPrimitive } from 'vaul'
 
 import { cn } from '@/utils/web/cn'
+import {
+  PrimitiveComponentAnalytics,
+  trackPrimitiveComponentAnalytics,
+} from '@/utils/web/primitiveComponentAnalytics'
+import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
+import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
 
 const Drawer = ({
   shouldScaleBackground = true,
+  analytics,
+  onOpenChange,
   ...props
-}: React.ComponentProps<typeof DrawerPrimitive.Root>) => (
-  <DrawerPrimitive.Root shouldScaleBackground={shouldScaleBackground} {...props} />
-)
+}: React.ComponentProps<typeof DrawerPrimitive.Root> & PrimitiveComponentAnalytics<boolean>) => {
+  const wrappedOnChangeOpen = React.useCallback(
+    (open: boolean) => {
+      trackPrimitiveComponentAnalytics(
+        ({ properties }) => {
+          trackClientAnalytic(`Dialog ${open ? 'Opened' : 'Closed'}`, {
+            component: AnalyticComponentType.modal,
+            action: AnalyticActionType.view,
+            ...properties,
+          })
+        },
+        { args: open, analytics },
+      )
+      onOpenChange?.(open)
+    },
+    [onOpenChange, analytics],
+  )
+  return (
+    <DrawerPrimitive.Root
+      shouldScaleBackground={shouldScaleBackground}
+      onOpenChange={wrappedOnChangeOpen}
+      {...props}
+    />
+  )
+}
 Drawer.displayName = 'Drawer'
 
 const DrawerTrigger = DrawerPrimitive.Trigger

@@ -4,9 +4,36 @@ import * as React from 'react'
 import * as PopoverPrimitive from '@radix-ui/react-popover'
 
 import { cn } from '@/utils/web/cn'
+import {
+  PrimitiveComponentAnalytics,
+  trackPrimitiveComponentAnalytics,
+} from '@/utils/web/primitiveComponentAnalytics'
+import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
+import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
 
-const Popover = PopoverPrimitive.Root
-
+const Popover = ({
+  analytics,
+  onOpenChange,
+  ...props
+}: React.ComponentProps<typeof PopoverPrimitive.Root> & PrimitiveComponentAnalytics<boolean>) => {
+  const wrappedOnChangeOpen = React.useCallback(
+    (open: boolean) => {
+      trackPrimitiveComponentAnalytics(
+        ({ properties }) => {
+          trackClientAnalytic(`Popover ${open ? 'Opened' : 'Closed'}`, {
+            component: AnalyticComponentType.dropdown,
+            action: AnalyticActionType.view,
+            ...properties,
+          })
+        },
+        { args: open, analytics },
+      )
+      onOpenChange?.(open)
+    },
+    [onOpenChange, analytics],
+  )
+  return <PopoverPrimitive.Root onOpenChange={wrappedOnChangeOpen} {...props} />
+}
 const PopoverTrigger = PopoverPrimitive.Trigger
 
 const PopoverContent = React.forwardRef<
