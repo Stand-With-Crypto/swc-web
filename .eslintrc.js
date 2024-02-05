@@ -29,7 +29,7 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/no-unused-vars': [
-      'error',
+      'warn',
       {
         argsIgnorePattern: '^_',
         varsIgnorePattern: '^_',
@@ -37,5 +37,11 @@ module.exports = {
     ],
     '@typescript-eslint/no-namespace': 'off',
     'no-relative-import-paths/no-relative-import-paths': ['error', { allowSameFolder: true }],
+    'react-hooks/exhaustive-deps': [
+      'warn',
+      {
+        additionalHooks: 'useLoadingCallback',
+      },
+    ],
   },
 }
