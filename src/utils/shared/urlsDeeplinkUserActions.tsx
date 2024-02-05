@@ -9,7 +9,7 @@ export const USER_ACTION_DEEPLINK_MAP: {
 } = {
   [UserActionType.OPT_IN]: {
     getDeeplinkUrl: ({ locale }) => {
-      return `${getIntlPrefix(locale)}/action/opt-in`
+      return `${getIntlPrefix(locale)}/action/sign-up`
     },
   },
   [UserActionType.CALL]: {

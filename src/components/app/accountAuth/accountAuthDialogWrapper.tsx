@@ -7,8 +7,15 @@ import { useDialog } from '@/hooks/useDialog'
 import { AccountAuth } from './accountAuth'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 
-export function AccountAuthDialogWrapper({ children }: React.PropsWithChildren) {
-  const dialog = useDialog(false)
+interface AccountAuthDialogWrapperProps extends React.PropsWithChildren {
+  defaultOpen?: boolean
+}
+
+export function AccountAuthDialogWrapper({
+  children,
+  defaultOpen = false,
+}: AccountAuthDialogWrapperProps) {
+  const dialog = useDialog(defaultOpen)
 
   return (
     <Dialog {...dialog}>

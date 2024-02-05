@@ -1,4 +1,5 @@
 import { PageHome } from '@/components/app/pageHome'
+import { Dialog, DialogContent } from '@/components/ui/dialog'
 import {
   dialogCloseStyles,
   dialogContentStyles,
@@ -10,9 +11,6 @@ import { PageProps } from '@/types'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 import { X } from 'lucide-react'
-
-export const revalidate = 3600
-export const dynamic = 'error'
 
 export default async function Layout({
   children,
