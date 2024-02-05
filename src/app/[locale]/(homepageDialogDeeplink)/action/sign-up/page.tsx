@@ -11,10 +11,8 @@ export default async function UserActionOptInSWCDeepLink({ params: { locale } }:
   const urls = getIntlUrls(locale)
   const userAction = await getSignedUserActionByType(UserActionType.OPT_IN)
 
-  // We disable the button when the user has completed the action
-  // In this case we cannot allow the user to opt-in again, so we redirect to his profile
   if (userAction) {
-    return redirect(urls.profile(), RedirectType.replace)
+    redirect(urls.profile(), RedirectType.replace)
   }
 
   return <AccountAuthDialogWrapper defaultOpen />
