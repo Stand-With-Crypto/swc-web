@@ -11,7 +11,7 @@ export function AccountAuthDialogWrapper({ children }: React.PropsWithChildren) 
   const dialog = useDialog({ analytics: 'Account Auth' })
 
   return (
-    <Dialog {...dialog}>
+    <Dialog analytics={''} {...dialog}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent>
         <AccountAuth onClose={() => dialog.onOpenChange(false)} />
