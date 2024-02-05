@@ -28,12 +28,12 @@ export const airdropNFTWithInngest = inngest.createFunction(
     const payload = event.data as AirdropPayload
 
     const queryId = await step.run('airdrop-NFT', async () => {
-      return await engineAirdropNFT(payload.contractAddress, payload.recipientWalletAddress, 1)
+      return engineAirdropNFT(payload.contractAddress, payload.recipientWalletAddress, 1)
     })
 
     let attempt = 1
 
-    let mintStatus: string | null = null
+    let mintStatus: ThirdwebTransactionStatus | null = null
     let transactionHash: string | null
     let gasPrice: string | null
     while (

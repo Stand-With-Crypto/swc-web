@@ -4,7 +4,13 @@ import { getLogger } from '@/utils/shared/logger'
 
 const logger = getLogger(`engineGetMintStatus`)
 
-export type ThirdwebTransactionStatus = 'mined' | 'errored' | 'cancelled'
+export type ThirdwebTransactionStatus =
+  | 'queued'
+  | 'sent'
+  | 'mined'
+  | 'errored'
+  | 'retried'
+  | 'cancelled'
 
 export const THIRDWEB_TRANSACTION_STATUSES: ThirdwebTransactionStatus[] = [
   'mined',
@@ -17,7 +23,10 @@ export async function engineGetMintStatus(queryId: string) {
   try {
     const result = await thirdwebEngine.transaction.status(queryId)
 
-    return result.result
+    return {
+      ...result.result,
+      status: result.result.status as ThirdwebTransactionStatus,
+    }
   } catch (e) {
     logger.error('error airdropping NFT:' + e)
     Sentry.captureException(e, {

@@ -2,6 +2,8 @@ import { UserActionType, UserCryptoAddress } from '@prisma/client'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { ACTION_NFT_SLUG, claimNFT } from '@/utils/server/nft/claimNFT'
 import { getLogger } from '@/utils/shared/logger'
+import { getServerAnalytics } from '@/utils/server/serverAnalytics'
+import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 
 const logger = getLogger('mintPastActions')
 
@@ -19,8 +21,14 @@ export async function mintPastActions(userId: string, userCryptoAddress: UserCry
     },
   })
 
+  const localUser = parseLocalUserFromCookies()
+
   for (const action of actions) {
     logger.info('mint past actions:' + action.actionType)
+    getServerAnalytics({ userId: userId, localUser }).track('NFT Mint Backfill Triggered', {
+      'User Action Type': action.actionType,
+      'User Action Id': action.id,
+    })
     await claimNFT(action, userCryptoAddress)
   }
 }

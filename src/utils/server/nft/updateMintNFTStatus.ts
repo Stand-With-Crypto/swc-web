@@ -3,6 +3,7 @@ import { NFTCurrency, NFTMintStatus } from '@prisma/client'
 import { getLogger } from '@/utils/shared/logger'
 import { ThirdwebTransactionStatus } from '@/utils/server/thirdweb/engineGetMintStatus'
 import { getCryptoToFiatConversion } from '@/utils/shared/getCryptoToFiatConversion'
+import { Decimal } from '@prisma/client/runtime/library'
 
 const logger = getLogger('updateMintNFTStatus')
 
@@ -10,6 +11,9 @@ export const THIRDWEB_TRANSACTION_STATUS_TO_NFT_MINT_STATUS: Record<
   ThirdwebTransactionStatus,
   NFTMintStatus
 > = {
+  queued: NFTMintStatus.REQUESTED,
+  retried: NFTMintStatus.REQUESTED,
+  sent: NFTMintStatus.REQUESTED,
   mined: NFTMintStatus.CLAIMED,
   cancelled: NFTMintStatus.FAILED,
   errored: NFTMintStatus.FAILED,
@@ -23,20 +27,21 @@ export async function updateMintNFTStatus(
 ) {
   logger.info('Triggered')
 
-  const costAtMint = gasPrice ? +gasPrice * 0.000000001 : 0.0
-  let costAtMintUsd = 0.0
-  if (costAtMint > 0) {
+  logger.info(gasPrice)
+  const costAtMint = gasPrice ? new Decimal(+gasPrice * 1e-9) : new Decimal(0.0)
+  let costAtMintUsd = new Decimal(0.0)
+  if (costAtMint.greaterThan(0.0)) {
     await getCryptoToFiatConversion(NFTCurrency.ETH)
       .then(res => {
         const ratio = res?.data.amount ? +res?.data.amount : 0.0
-        costAtMintUsd = costAtMint * ratio
+        costAtMintUsd = costAtMint.mul(ratio)
       })
       .catch(e => {
         logger.error(e)
       })
   }
 
-  await prismaClient.nFTMint.update({
+  return prismaClient.nFTMint.update({
     where: {
       id: mintNftId,
     },
