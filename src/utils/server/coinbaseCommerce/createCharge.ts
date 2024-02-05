@@ -37,12 +37,16 @@ interface CreateChargeResponseWeb3Data {
 }
 
 interface CreateChargeResponseData {
+  addresses?: Record<string, string> // From Commerce V1 API.
   charge_kind: string
   collected_email: boolean
+  cancel_url?: string // From Commerce V1 API.
   created_at: string
+  exchange_rates: Record<string, string> // From Commerce V1 API.
   expires_at: string
   hosted_url: string // This is the URL to use.
   id: string
+  local_exchange_rates: Record<string, string> // From Commerce V1 API.
   metadata: Record<string, string>
   organization_name: string
   payments: any[]
