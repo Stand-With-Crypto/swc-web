@@ -20,7 +20,6 @@ import { getLogger } from '@/utils/shared/logger'
 import { UserActionTweetCampaignName } from '@/utils/shared/userActionCampaigns'
 import { User, UserActionType, UserCryptoAddress, UserInformationVisibility } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
-import { subDays } from 'date-fns'
 import 'server-only'
 
 const logger = getLogger(`actionCreateUserActionTweet`)
@@ -58,9 +57,6 @@ async function _actionCreateUserActionTweet() {
   const actionType = UserActionType.TWEET
   let userAction = await prismaClient.userAction.findFirst({
     where: {
-      datetimeCreated: {
-        gte: subDays(new Date(), 1),
-      },
       actionType,
       campaignName,
       userId: user.id,

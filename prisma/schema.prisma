@@ -255,7 +255,8 @@ model UserAction {
   userActionOptIn    UserActionOptIn?
 
   @@index([datetimeCreated])
-  @@index([userId, campaignName])
+  @@index([userId, actionType, campaignName])
+  @@index([actionType, campaignName])
   @@index([userCryptoAddressId])
   @@index([userSessionId])
   @@index([nftMintId])
