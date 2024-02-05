@@ -273,7 +273,7 @@ export function AccountAuthContent(props: {
               </Button>
             )}
 
-            <Dialog>
+            <Dialog analytics="Account Auth - Connect a Wallet">
               <DialogTrigger asChild>
                 <Button variant="secondary" className="flex w-full items-center gap-2" size="lg">
                   {previewIcons.map(iconUrl => (
