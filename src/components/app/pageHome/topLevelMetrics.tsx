@@ -1,5 +1,6 @@
 'use client'
 import { AnimatedNumericOdometer } from '@/components/ui/animatedNumericOdometer'
+import { roundDownNumberToAnimateIn } from '@/components/ui/animatedNumericOdometer/roundDownNumberToAnimateIn'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
 import { useApiHomepageTopLevelMetrics } from '@/hooks/useApiHomepageTopLevelMetrics'
@@ -8,7 +9,6 @@ import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { cn } from '@/utils/web/cn'
 import { motion } from 'framer-motion'
 import { useMemo } from 'react'
-import { roundDownNumberToAnimateIn } from '../../ui/animatedNumericOdometer/roundDownNumberToAnimateIn'
 
 type Props = Pick<
   Awaited<ReturnType<typeof getHomepageData>>,
