@@ -64,3 +64,14 @@ export function trackFormSubmitErrored(formName: string, other?: AnalyticPropert
 export function trackExternalLink(eventProperties?: AnalyticProperties) {
   trackClientAnalytic('External Link clicked', { ...eventProperties })
 }
+
+export type LoginProvider = 'email' | 'google' | 'wallet'
+export function trackLoginAttempt({
+  method,
+  ...eventProperties
+}: { method: LoginProvider } & AnalyticProperties) {
+  trackClientAnalytic('Login Attempt', {
+    Method: method,
+    ...eventProperties,
+  })
+}

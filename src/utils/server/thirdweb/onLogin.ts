@@ -33,6 +33,7 @@ import {
 import { UpsertAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { inngest } from '@/inngest/inngest'
 import { CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/upsertAdvocateInCapitolCanary'
+import { getLogger } from '@/utils/shared/logger'
 
 /*
 The desired behavior of this function:
@@ -46,7 +47,12 @@ The desired behavior of this function:
   If we don't find a user, create a new one and link the crypto address to it
 - If there was an embedded wallet email address, link it to the existing user or the newly created user
 */
+
+const logger = getLogger('onLogin')
+
 export async function onLogin(address: string, req: NextApiRequest): Promise<AuthSessionMetadata> {
+  const logWithAddress = (message: string) => logger.info(`address ${address}: ${message}`)
+  logWithAddress(`triggered`)
   const localUser = parseLocalUserFromCookiesForPageRouter(req)
   /**
    * Try and get the existing user linked to the provided crypto address.
@@ -56,9 +62,11 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
     include: {
       address: true,
       primaryUserEmailAddress: true,
+      userEmailAddresses: true,
     },
     where: { userCryptoAddresses: { some: { cryptoAddress: address } } },
   })
+  logWithAddress(`existing user found`)
   // If a proper user already exists (e.g. has a crypto address associated with it), return the user.
   if (existingUser) {
     trackUserLogin({
@@ -71,10 +79,14 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
 
   const userSessionId = getUserSessionIdOnPageRouter(req)
   const embeddedWalletEmailAddress = await fetchEmbeddedWalletMetadataFromThirdweb(address)
+  if (embeddedWalletEmailAddress) {
+    logWithAddress(`found embedded wallet email address`)
+  }
   existingUser = await prismaClient.user.findFirst({
     include: {
       address: true,
       primaryUserEmailAddress: true,
+      userEmailAddresses: true,
     },
     where: embeddedWalletEmailAddress
       ? {
@@ -89,6 +101,14 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
         }
       : { userSessions: { some: { id: userSessionId } } },
   })
+  const sourceOfExistingUser = existingUser?.userEmailAddresses.find(
+    addr => addr.emailAddress === embeddedWalletEmailAddress?.email,
+  )
+    ? 'email'
+    : 'session'
+  if (existingUser) {
+    logWithAddress(`found existing user via ${sourceOfExistingUser}`)
+  }
   /*
   The situation below will occur when:
   - a user logs in to multiple crypto wallets with the same session id
@@ -123,7 +143,7 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
     },
     include: { user: true },
   })
-
+  logWithAddress(`user crypto address created`)
   let primaryUserEmailAddressId: null | string = null
 
   /**
@@ -131,10 +151,13 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
    * and link it to the wallet so we know it's an embedded address
    */
   if (embeddedWalletEmailAddress) {
-    const email = await upsertEmbeddedWalletEmailAddress(
+    const { email, wasCreated } = await upsertEmbeddedWalletEmailAddress(
       embeddedWalletEmailAddress,
       userCryptoAddress,
     )
+    if (wasCreated) {
+      logWithAddress(`user email address created from embedded wallet`)
+    }
 
     // Always use the embedded wallet email address as the primary email address.
     primaryUserEmailAddressId = email.id
@@ -161,6 +184,7 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
         name: CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME,
         data: payload,
       })
+      logWithAddress(`metadata added to capital canary`)
     }
   }
 
@@ -191,6 +215,7 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
         },
       },
     })
+    logWithAddress(`opt in user action created`)
   }
 
   await prismaClient.user.update({
@@ -244,6 +269,7 @@ async function upsertEmbeddedWalletEmailAddress(
       userId: userCryptoAddress.userId,
     },
   })
+  let wasCreated = false
   if (!email) {
     email = await prismaClient.userEmailAddress.create({
       data: {
@@ -253,6 +279,7 @@ async function upsertEmbeddedWalletEmailAddress(
         userId: userCryptoAddress.userId,
       },
     })
+    wasCreated = true
   }
   await prismaClient.userCryptoAddress.update({
     where: { id: userCryptoAddress.id },
@@ -260,5 +287,5 @@ async function upsertEmbeddedWalletEmailAddress(
       embeddedWalletUserEmailAddressId: email.id,
     },
   })
-  return email
+  return { email, wasCreated }
 }
