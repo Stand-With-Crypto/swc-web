@@ -3,6 +3,7 @@ import { actionCreateUserActionEmailCongressperson } from '@/actions/actionCreat
 import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
 import { DTSICongresspersonAssociatedWithFormAddress } from '@/components/app/dtsiCongresspersonAssociatedWithFormAddress'
 import { getDefaultText } from '@/components/app/userActionFormEmailCongressperson/getDefaultText'
+import { RnParams } from '@/components/app/userActionFormEmailCongressperson/types'
 import { Button } from '@/components/ui/button'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import {
@@ -39,7 +40,7 @@ import { UserActionType } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { useRouter } from 'next/navigation'
 import React, { useMemo } from 'react'
-import { useForm } from 'react-hook-form'
+import { useForm, useWatch } from 'react-hook-form'
 import { z } from 'zod'
 
 const FORM_NAME = 'User Action Form Email Congressperson'
@@ -82,10 +83,12 @@ const getDefaultValues = ({
 export function UserActionFormEmailCongressperson({
   onSuccess,
   user,
+  rnParams,
 }: {
   user: GetUserFullProfileInfoResponse['user']
   onCancel: () => void
   onSuccess: () => void
+  rnParams: RnParams
 }) {
   const router = useRouter()
   const urls = useIntlUrls()
@@ -94,9 +97,25 @@ export function UserActionFormEmailCongressperson({
     resolver: zodResolver(zodUserActionFormEmailCongresspersonFields),
     defaultValues,
   })
+
+  const formAddressValue = useWatch({
+    control: form.control,
+    name: 'address',
+    defaultValue: { description: '', place_id: '' },
+  })
+
   React.useEffect(() => {
     form.setFocus('firstName')
   }, [form])
+
+  React.useEffect(() => {
+    const splitFullName = rnParams.fullName.split(' ')
+    form.setValue('address', { description: rnParams.address, place_id: '' })
+    form.setValue('emailAddress', rnParams.email)
+    form.setValue('firstName', splitFullName[0])
+    form.setValue('lastName', splitFullName.splice(1).join(' '))
+  }, [form, rnParams.address, rnParams.email, rnParams.fullName])
+
   return (
     <Form {...form}>
       <form
@@ -197,6 +216,7 @@ export function UserActionFormEmailCongressperson({
                     <FormControl>
                       <GooglePlacesSelect
                         {...field}
+                        defaultValue={rnParams.address}
                         value={field.value}
                         onChange={field.onChange}
                         placeholder="Your full address"
@@ -274,7 +294,7 @@ export function UserActionFormEmailCongressperson({
               className="w-full sm:w-auto"
               size="lg"
               type="submit"
-              disabled={form.formState.isSubmitting}
+              disabled={form.formState.isSubmitting || !formAddressValue.place_id}
             >
               Send
             </Button>

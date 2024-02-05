@@ -5,8 +5,10 @@ import { UserActionFormEmailCongresspersonSkeleton } from '@/components/app/user
 import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useLocale } from '@/hooks/useLocale'
+import { useParseRnQueryParam } from '@/hooks/useRnQueryParams'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { useRouter } from 'next/navigation'
+import React from 'react'
 import { useState } from 'react'
 
 export function UserActionFormEmailCongresspersonDeeplinkWrapper() {
@@ -16,11 +18,16 @@ export function UserActionFormEmailCongresspersonDeeplinkWrapper() {
   const urls = getIntlUrls(locale)
   const [state, setState] = useState<'form' | 'success'>('form')
   const { user } = fetchUser.data || { user: null }
-  return fetchUser.isLoading ? (
+  const { address, email, fullName, loading: loadingRnQueryParam } = useParseRnQueryParam()
+
+  const rnParams = React.useMemo(() => ({ address, email, fullName }), [address, email, fullName])
+
+  return fetchUser.isLoading || loadingRnQueryParam ? (
     <UserActionFormEmailCongresspersonSkeleton locale={locale} />
   ) : state === 'form' ? (
     <UserActionFormEmailCongressperson
       user={user}
+      rnParams={rnParams}
       onCancel={() => router.replace(urls.home())}
       onSuccess={() => setState('success')}
     />
