@@ -1,5 +1,6 @@
 import { ThirdwebAuthConfig } from '@thirdweb-dev/auth/next'
 import { PrivateKeyWallet } from '@thirdweb-dev/auth/evm'
+
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN } from '@/utils/shared/sharedEnv'
 import { prismaClient } from '@/utils/server/prismaClient'
@@ -20,6 +21,8 @@ export const thirdwebAuthConfig: ThirdwebAuthConfig = {
   // TODO determine if we have requirements for the wallet private key that necessitate a more secure storage mechanism
   wallet: new PrivateKeyWallet(THIRDWEB_AUTH_PRIVATE_KEY),
   authOptions: {
+    // TODO check what should be the message with product
+    statement: 'Hello World',
     tokenDurationInSeconds: 60 * 60 * 24 * 7, // 1 week
     validateNonce: async (nonce: string) => {
       const nonceExists = await prismaClient.authenticationNonce.findUnique({

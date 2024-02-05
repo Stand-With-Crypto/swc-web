@@ -13,18 +13,18 @@ import { appendENSHookDataToUser } from '@/utils/web/appendENSHookDataToUser'
 
 export function NavbarLoggedInSessionButton() {
   const { Popover, PopoverContent, PopoverTrigger } = useResponsivePopover()
-  const dialogProps = useDialog(false)
+  const dialogProps = useDialog({ analytics: 'Navbar Logged In Session Button' })
   const ensData = useENS()
   const { data } = useApiResponseForUserFullProfileInfo()
   const user = data?.user
 
   return (
-    <Popover analytics={'Navbar Logged In Session Button'} {...dialogProps}>
+    <Popover {...dialogProps}>
       <PopoverTrigger asChild>
         <Button variant="secondary" className="min-w-24">
           <div>
             {user &&
-              !ensData.isLoading &&
+              !ensData.isFetching &&
               getSensitiveDataUserDisplayName(appendENSHookDataToUser(user, ensData.data))}
           </div>
         </Button>

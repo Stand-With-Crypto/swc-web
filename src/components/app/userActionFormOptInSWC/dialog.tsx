@@ -15,9 +15,12 @@ export function UserActionFormOptInSWCDialog({
   children: React.ReactNode
   defaultOpen?: boolean
 }) {
-  const dialogProps = useDialog(defaultOpen)
+  const dialogProps = useDialog({
+    initialOpen: defaultOpen,
+    analytics: 'User Action Form Opt In',
+  })
   return (
-    <Dialog analytics={'User Action Form Opt In'} {...dialogProps}>
+    <Dialog {...dialogProps}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="max-w-3xl">
         <Suspense fallback={<Skeleton className="h-80 w-full" />}>

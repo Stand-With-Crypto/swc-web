@@ -18,11 +18,9 @@ import {
   trackPrimitiveComponentAnalytics,
 } from '@/utils/web/primitiveComponentAnalytics'
 
-function Dialog({
-  onOpenChange,
-  analytics,
-  ...props
-}: DialogPrimitive.DialogProps & PrimitiveComponentAnalytics<boolean>) {
+export type DialogProps = DialogPrimitive.DialogProps & PrimitiveComponentAnalytics<boolean>
+
+function Dialog({ onOpenChange, analytics, ...props }: DialogProps) {
   const wrappedOnChangeOpen = React.useCallback(
     (open: boolean) => {
       trackPrimitiveComponentAnalytics(
@@ -56,10 +54,15 @@ const DialogOverlay = React.forwardRef<
 ))
 DialogOverlay.displayName = DialogPrimitive.Overlay.displayName
 
+interface DialogContentProps
+  extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> {
+  padding?: boolean
+  closeClassName?: string
+}
 const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & { padding?: boolean }
->(({ className, children, padding = true, ...props }, ref) => (
+  DialogContentProps
+>(({ className, children, padding = true, closeClassName = '', ...props }, ref) => (
   <DialogPortal>
     <DialogOverlay />
     <DialogPrimitive.Content
@@ -68,7 +71,7 @@ const DialogContent = React.forwardRef<
       {...props}
     >
       {children}
-      <DialogPrimitive.Close className={dialogCloseStyles}>
+      <DialogPrimitive.Close className={cn(dialogCloseStyles, closeClassName)} tabIndex={-1}>
         <X className="h-4 w-4" />
         <span className="sr-only">Close</span>
       </DialogPrimitive.Close>
