@@ -90,8 +90,7 @@ export async function createCharge(sessionId: string) {
       },
       body: JSON.stringify(payload),
     })
-    const resp = (await httpResp.json()) as CreateChargeResponse
-    return resp.data.hosted_url
+    return (await httpResp.json()) as CreateChargeResponse
   } catch (error) {
     Sentry.captureException(error, {
       level: 'error',

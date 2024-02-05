@@ -9,5 +9,6 @@ export const actionCreateCoinbaseCommerceCharge = withServerActionMiddleware(
 )
 
 async function _actionCreateCoinbaseCommerceCharge() {
-  return await createCharge(getUserSessionId())
+  const hostedUrl = (await createCharge(getUserSessionId())).data.hosted_url
+  return { hostedUrl }
 }
