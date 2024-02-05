@@ -31,14 +31,16 @@ export async function updateMintNFTStatus(
   const costAtMint = gasPrice ? new Decimal(+gasPrice * 1e-9) : new Decimal(0.0)
   let costAtMintUsd = new Decimal(0.0)
   if (costAtMint.greaterThan(0.0)) {
-    await getCryptoToFiatConversion(NFTCurrency.ETH)
+    const ratio = getCryptoToFiatConversion(NFTCurrency.ETH)
       .then(res => {
-        const ratio = res?.data.amount ? +res?.data.amount : 0.0
-        costAtMintUsd = costAtMint.mul(ratio)
+        return res?.data.amount ? +res?.data.amount : 0.0
       })
       .catch(e => {
         logger.error(e)
+        return 0.0
       })
+
+    costAtMintUsd = costAtMint.mul(await ratio)
   }
 
   return prismaClient.nFTMint.update({
