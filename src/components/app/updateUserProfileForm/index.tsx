@@ -1,12 +1,13 @@
 'use client'
 import { ClientAddress } from '@/clientModels/clientAddress'
 import { SensitiveDataClientUserWithENSData } from '@/clientModels/clientUser/sensitiveDataClientUser'
+import { ANALYTICS_NAME_UPDATE_USER_PROFILE_FORM } from '@/components/app/updateUserProfileForm/constants'
 import { UpdateUserProfileForm } from '@/components/app/updateUserProfileForm/step1'
 import { UpdateUserInformationVisibilityForm } from '@/components/app/updateUserProfileForm/step2'
-import { useTabs } from '@/hooks/useTabs'
+import { useSections } from '@/hooks/useSections'
 import { useState } from 'react'
 
-enum Tabs {
+enum Sections {
   Profile = 'Profile',
   InformationVisibility = 'Information Visibility',
 }
@@ -20,26 +21,27 @@ export function UpdateUserProfileFormContainer({
   onCancel: () => void
   onSuccess: () => void
 }) {
-  const tabs = useTabs({
-    tabs: [Tabs.Profile, Tabs.InformationVisibility],
-    initialTabId: Tabs.Profile,
+  const sections = useSections({
+    sections: [Sections.Profile, Sections.InformationVisibility],
+    initialSectionId: Sections.Profile,
+    analyticsName: ANALYTICS_NAME_UPDATE_USER_PROFILE_FORM,
   })
   // we need to leverage the data submitted in the first step in the second step (whether we show the option to use first/last name)
   const [statefulUser, setStatefulUser] = useState(user)
 
-  if (tabs.currentTab === Tabs.Profile) {
+  if (sections.currentSection === Sections.Profile) {
     return (
       <UpdateUserProfileForm
         user={user}
-        onCancel={() => tabs.gotoTab(Tabs.InformationVisibility)}
+        onCancel={() => sections.goToSection(Sections.InformationVisibility)}
         onSuccess={newFields => {
           setStatefulUser({ ...user, ...newFields })
-          tabs.gotoTab(Tabs.InformationVisibility)
+          sections.goToSection(Sections.InformationVisibility)
         }}
       />
     )
   }
-  if (tabs.currentTab === Tabs.InformationVisibility) {
+  if (sections.currentSection === Sections.InformationVisibility) {
     return (
       <UpdateUserInformationVisibilityForm
         user={statefulUser}

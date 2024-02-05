@@ -44,7 +44,7 @@ export default function ManageCookiesModal({ onSubmit }: ManageCookiesModalProps
   }
 
   return (
-    <Container {...dialogProps}>
+    <Container analytics={'Cookie Consent Management'} {...dialogProps}>
       <ContainerTrigger asChild>
         <Button variant="link" className="p-0 font-bold">
           Manage cookies

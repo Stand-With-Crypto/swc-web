@@ -3,20 +3,20 @@ import { Check } from 'lucide-react'
 import React, { useEffect } from 'react'
 
 import { Button } from '@/components/ui/button'
-import { UseTabsReturn } from '@/hooks/useTabs'
+import { UseSectionsReturn } from '@/hooks/useSections'
 
-import { TabNames } from '@/components/app/userActionFormCallCongressperson/userActionFormCallCongressperson.types'
+import { SectionNames } from '@/components/app/userActionFormCallCongressperson/constants'
 
 import { UserActionFormCallCongresspersonLayout } from './layout'
 
-export function Intro({ gotoTab }: UseTabsReturn<TabNames>) {
+export function Intro({ goToSection: gotoTab }: UseSectionsReturn<SectionNames>) {
   const ref = React.useRef<HTMLButtonElement>(null)
   useEffect(() => {
     ref.current?.focus()
   }, [ref])
   return (
     <IntroStaticContent>
-      <Button ref={ref} onClick={() => gotoTab(TabNames.ADDRESS)}>
+      <Button ref={ref} onClick={() => gotoTab(SectionNames.ADDRESS)}>
         Continue
       </Button>
     </IntroStaticContent>

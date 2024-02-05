@@ -6,9 +6,9 @@ import {
   actionCreateUserActionCallCongressperson,
 } from '@/actions/actionCreateUserActionCallCongressperson'
 import { UserActionFormCallCongresspersonProps } from '@/components/app/userActionFormCallCongressperson'
-import { TabNames } from '@/components/app/userActionFormCallCongressperson/userActionFormCallCongressperson.types'
+import { SectionNames } from '@/components/app/userActionFormCallCongressperson/constants'
 import { Button } from '@/components/ui/button'
-import { UseTabsReturn } from '@/hooks/useTabs'
+import { UseSectionsReturn } from '@/hooks/useSections'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { getGoogleCivicOfficialByDTSIName } from '@/utils/shared/googleCivicInfo'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
@@ -26,10 +26,10 @@ import { UserActionFormCallCongresspersonLayout } from './layout'
 export function SuggestedScript({
   user,
   congressPersonData: { dtsiPerson, civicData, addressSchema },
-  gotoTab,
+  goToSection: gotoTab,
 }: Pick<
   UserActionFormCallCongresspersonProps,
-  'user' | 'congressPersonData' | keyof UseTabsReturn<TabNames>
+  'user' | 'congressPersonData' | keyof UseSectionsReturn<SectionNames>
 >) {
   const router = useRouter()
   const ref = React.useRef<HTMLAnchorElement>(null)
@@ -86,7 +86,7 @@ export function SuggestedScript({
 
       if (result.status === 'success') {
         router.refresh()
-        gotoTab(TabNames.SUCCESS_MESSAGE)
+        gotoTab(SectionNames.SUCCESS_MESSAGE)
       }
     },
     [addressSchema, dtsiPerson.slug, gotoTab, router],
@@ -94,7 +94,7 @@ export function SuggestedScript({
 
   return (
     <>
-      <UserActionFormCallCongresspersonLayout onBack={() => gotoTab(TabNames.ADDRESS)}>
+      <UserActionFormCallCongresspersonLayout onBack={() => gotoTab(SectionNames.ADDRESS)}>
         <UserActionFormCallCongresspersonLayout.Container>
           <UserActionFormCallCongresspersonLayout.Heading
             title="Call your representative"

@@ -19,7 +19,7 @@ export function NavbarLoggedInSessionButton() {
   const user = data?.user
 
   return (
-    <Popover {...dialogProps}>
+    <Popover analytics={'Navbar Logged In Session Button'} {...dialogProps}>
       <PopoverTrigger asChild>
         <Button variant="secondary" className="min-w-24">
           <div>
