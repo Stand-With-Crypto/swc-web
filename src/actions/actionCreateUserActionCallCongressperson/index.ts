@@ -12,7 +12,6 @@ import { getLogger } from '@/utils/shared/logger'
 import { UserActionCallCampaignName } from '@/utils/shared/userActionCampaigns'
 import { User, UserAction, UserActionType, UserInformationVisibility } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
-import { subDays } from 'date-fns'
 import { z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
@@ -140,15 +139,9 @@ async function createUser(sharedDependencies: Pick<SharedDependencies, 'localUse
 async function getRecentUserActionByUserId(userId: User['id']) {
   return prismaClient.userAction.findFirst({
     where: {
-      datetimeCreated: {
-        gte: subDays(new Date(), 1),
-      },
       actionType: UserActionType.CALL,
       campaignName: UserActionCallCampaignName.DEFAULT,
       userId: userId,
-    },
-    include: {
-      userActionEmail: true,
     },
   })
 }

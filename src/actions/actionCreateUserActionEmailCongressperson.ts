@@ -38,7 +38,6 @@ import {
   UserInformationVisibility,
 } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
-import { subDays } from 'date-fns'
 import 'server-only'
 import { z } from 'zod'
 
@@ -88,9 +87,6 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
   const actionType = UserActionType.EMAIL
   let userAction = await prismaClient.userAction.findFirst({
     where: {
-      datetimeCreated: {
-        gte: subDays(new Date(), 1),
-      },
       actionType,
       campaignName,
       userId: user.id,

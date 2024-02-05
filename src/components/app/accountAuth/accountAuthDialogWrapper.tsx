@@ -15,7 +15,7 @@ export function AccountAuthDialogWrapper({
   children,
   defaultOpen = false,
 }: AccountAuthDialogWrapperProps) {
-  const dialog = useDialog(defaultOpen)
+  const dialog = useDialog({ analytics: 'Account Auth', initialOpen: defaultOpen })
 
   return (
     <Dialog {...dialog}>
