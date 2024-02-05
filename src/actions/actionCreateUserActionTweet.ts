@@ -20,7 +20,6 @@ import { getLogger } from '@/utils/shared/logger'
 import { UserActionTweetCampaignName } from '@/utils/shared/userActionCampaigns'
 import { User, UserActionType, UserCryptoAddress, UserInformationVisibility } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
-import { subDays } from 'date-fns'
 import 'server-only'
 
 const logger = getLogger(`actionCreateUserActionTweet`)

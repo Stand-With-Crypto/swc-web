@@ -12,7 +12,6 @@ import { getLogger } from '@/utils/shared/logger'
 import { UserActionCallCampaignName } from '@/utils/shared/userActionCampaigns'
 import { User, UserAction, UserActionType, UserInformationVisibility } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
-import { subDays } from 'date-fns'
 import { z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
