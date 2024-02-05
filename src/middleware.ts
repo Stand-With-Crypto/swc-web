@@ -18,6 +18,10 @@ export function middleware(request: NextRequest) {
     locales: ORDERED_SUPPORTED_LOCALES as string[],
     defaultLocale: DEFAULT_LOCALE,
   })
+
+  // Recommended way to get the pathname server side
+  i18nParsedResponse.headers.set('x-pathname', request.nextUrl.pathname)
+
   const urlSessionId = request.nextUrl.searchParams.get('sessionId')
   const existingSessionId = request.cookies.get(USER_SESSION_ID_COOKIE_NAME)?.value
   if (urlSessionId && urlSessionId !== existingSessionId) {

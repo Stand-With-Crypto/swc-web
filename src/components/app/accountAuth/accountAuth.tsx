@@ -9,6 +9,7 @@ import { useSignInRequired } from './useSignInRequired'
 import { AccountAuthContent } from './content'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { noop } from 'lodash'
+import { useIntlUrls } from '@/hooks/useIntlUrls'
 
 export function AccountAuth({ onClose, ...props }: ConnectEmbedProps & { onClose: () => void }) {
   const router = useRouter()
@@ -53,4 +54,17 @@ export function AccountAuth({ onClose, ...props }: ConnectEmbedProps & { onClose
   }
 
   return <AccountAuthContent {...accountAuthContentProps} />
+}
+
+export function EmbeddedAccountAuth() {
+  const router = useRouter()
+  const urls = useIntlUrls()
+
+  return (
+    <AccountAuth
+      onClose={() => {
+        router.push(urls.home())
+      }}
+    />
+  )
 }
