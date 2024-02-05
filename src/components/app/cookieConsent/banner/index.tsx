@@ -29,7 +29,7 @@ export function CookieConsentBanner({
 
   return (
     <div className={cn('max-w-screen fixed bottom-0 left-0 w-full bg-secondary p-3 pb-2 md:p-6')}>
-      <div className="container flex flex-col md:flex-row md:justify-between md:gap-5">
+      <div className="flex flex-col md:container md:flex-row md:justify-between md:gap-5">
         <div className="relative">
           <button
             onClick={onRejectAll}
