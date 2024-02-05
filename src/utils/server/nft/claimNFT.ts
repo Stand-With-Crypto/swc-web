@@ -32,21 +32,19 @@ export async function claimNFT(userAction: UserAction, userCryptoAddress: UserCr
     throw error(`Action ${userAction.id} already has an NFTmint.`)
   }
 
-  const nftMint = await prismaClient.nFTMint.create({
-    data: {
-      nftSlug: nftSlug,
-      status: NFTMintStatus.REQUESTED,
-      costAtMint: 0.0,
-      contractAddress: NFT_CONTRACT_ADDRESS[nftSlug],
-      costAtMintCurrencyCode: NFTCurrency.ETH,
-      costAtMintUsd: new Decimal(0),
-    },
-  })
-
-  await prismaClient.userAction.update({
+  const action = await prismaClient.userAction.update({
     where: { id: userAction.id },
     data: {
-      nftMintId: nftMint.id,
+      nftMint: {
+        create: {
+          nftSlug: nftSlug,
+          status: NFTMintStatus.REQUESTED,
+          costAtMint: 0.0,
+          contractAddress: NFT_CONTRACT_ADDRESS[nftSlug],
+          costAtMintCurrencyCode: NFTCurrency.ETH,
+          costAtMintUsd: new Decimal(0),
+        },
+      },
     },
     include: {
       nftMint: true,
@@ -54,7 +52,7 @@ export async function claimNFT(userAction: UserAction, userCryptoAddress: UserCr
   })
 
   const payload: AirdropPayload = {
-    nftMintId: nftMint.id,
+    nftMintId: action.nftMintId!,
     recipientWalletAddress: userCryptoAddress.cryptoAddress,
     contractAddress: NFT_CONTRACT_ADDRESS[nftSlug],
   }
