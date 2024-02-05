@@ -95,6 +95,7 @@ export async function createCharge(sessionId: string) {
   } catch (error) {
     Sentry.captureException(error, {
       level: 'error',
+      extra: { sessionId },
     })
     throw error
   }
