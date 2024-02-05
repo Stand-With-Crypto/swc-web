@@ -18,11 +18,9 @@ import {
   trackPrimitiveComponentAnalytics,
 } from '@/utils/web/primitiveComponentAnalytics'
 
-function Dialog({
-  onOpenChange,
-  analytics,
-  ...props
-}: DialogPrimitive.DialogProps & PrimitiveComponentAnalytics<boolean>) {
+export type DialogProps = DialogPrimitive.DialogProps & PrimitiveComponentAnalytics<boolean>
+
+function Dialog({ onOpenChange, analytics, ...props }: DialogProps) {
   const wrappedOnChangeOpen = React.useCallback(
     (open: boolean) => {
       trackPrimitiveComponentAnalytics(

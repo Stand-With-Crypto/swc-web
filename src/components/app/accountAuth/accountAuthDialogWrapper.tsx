@@ -8,7 +8,7 @@ import { AccountAuth } from './accountAuth'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 
 export function AccountAuthDialogWrapper({ children }: React.PropsWithChildren) {
-  const dialog = useDialog(false)
+  const dialog = useDialog({ analytics: 'Account Auth' })
 
   return (
     <Dialog {...dialog}>
