@@ -3,10 +3,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
 
-const isDev =
-  process.env.NODE_ENV === 'development' ||
-  process.env.VERCEL_ENV === 'development' ||
-  process.env.NODE_ENV === 'test'
+const isDev = process.env.NEXT_PUBLIC_ENVIRONMENT === 'local'
 
 const contentSecurityPolicy = {
   'default-src': ["'self'", 'blob:'],
@@ -16,7 +13,15 @@ const contentSecurityPolicy = {
   ],
   'script-src': [
     "'self'",
-    isDev ? "'unsafe-eval' 'unsafe-inline'" : '', // NextJS requires 'unsafe-eval' in dev (faster source maps)
+    isDev
+      ? // NextJS requires 'unsafe-eval' in dev (faster source maps)
+        "'unsafe-eval' 'unsafe-inline'"
+      : /*
+        Streaming react server components within next.js relies on adding inline scripts to the page as content
+        is progressively streamed in. https://github.com/vercel/next.js/discussions/42170#discussioncomment-8137079
+        a nonce strategy won't work as it requires all our pages to be dynamically generated https://nextjs.org/docs/app/building-your-application/configuring/content-security-policy#adding-a-nonce-with-middleware
+        */
+        "'unsafe-inline'",
     isDev ? '' : 'https://static.ads-twitter.com/uwt.js',
     'https://*.googleapis.com',
     'https://*.gstatic.com',
@@ -50,11 +55,15 @@ const contentSecurityPolicy = {
     'https://*.googleapis.com',
     'https://*.gstatic.com',
     '*.google.com',
+    'https://vercel.live/api/event/tick',
+    'https://vitals.vercel-insights.com/v1/vitals',
+    'https://api-js.mixpanel.com/',
   ],
   'frame-src': [
     '*.google.com',
     'https://embedded-wallet.thirdweb.com/',
     'https://www.youtube.com/embed/',
+    'https://vercel.live/',
   ],
   'font-src': ["'self'"],
   'object-src': ['none'],
