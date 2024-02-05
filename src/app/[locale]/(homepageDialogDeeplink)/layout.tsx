@@ -1,5 +1,4 @@
 import { PageHome } from '@/components/app/pageHome'
-import { Dialog, DialogContent } from '@/components/ui/dialog'
 import {
   dialogCloseStyles,
   dialogContentStyles,
