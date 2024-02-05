@@ -2,6 +2,7 @@
 import { actionCreateUserActionEmailCongressperson } from '@/actions/actionCreateUserActionEmailCongressperson'
 import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
 import { DTSICongresspersonAssociatedWithFormAddress } from '@/components/app/dtsiCongresspersonAssociatedWithFormAddress'
+import { ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON } from '@/components/app/userActionFormEmailCongressperson/constants'
 import { getDefaultText } from '@/components/app/userActionFormEmailCongressperson/getDefaultText'
 import { RnParams } from '@/components/app/userActionFormEmailCongressperson/types'
 import { Button } from '@/components/ui/button'
@@ -43,7 +44,6 @@ import React, { useMemo } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 import { z } from 'zod'
 
-const FORM_NAME = 'User Action Form Email Congressperson'
 type FormValues = z.infer<typeof zodUserActionFormEmailCongresspersonFields> &
   GenericErrorFormValues
 
@@ -133,7 +133,7 @@ export function UserActionFormEmailCongressperson({
           const result = await triggerServerActionForForm(
             {
               form,
-              formName: FORM_NAME,
+              formName: ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON,
               analyticsProps: {
                 ...(address ? convertAddressToAnalyticsProperties(address) : {}),
                 'Campaign Name': values.campaignName,
@@ -155,7 +155,7 @@ export function UserActionFormEmailCongressperson({
             router.refresh()
             onSuccess()
           }
-        }, trackFormSubmissionSyncErrors(FORM_NAME))}
+        }, trackFormSubmissionSyncErrors(ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON))}
         className="flex max-h-dvh flex-col"
       >
         <ScrollArea>

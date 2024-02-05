@@ -87,7 +87,7 @@ export async function Navbar({ locale }: { locale: SupportedLocale }) {
             )
           })}
         </div>
-        <Drawer direction="top">
+        <Drawer analytics={'Mobile Navbar'} direction="top">
           <DrawerTrigger asChild>
             <button className="py-3 pl-3 md:hidden">
               <span className="sr-only">Open navigation menu</span>

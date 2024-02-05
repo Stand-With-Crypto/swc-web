@@ -7,7 +7,7 @@ import useSWR from 'swr'
 
 import type { UserActionFormCallCongresspersonProps } from '@/components/app/userActionFormCallCongressperson'
 import { UserActionFormCallCongresspersonLayout } from '@/components/app/userActionFormCallCongressperson/tabs/layout'
-import { TabNames } from '@/components/app/userActionFormCallCongressperson/userActionFormCallCongressperson.types'
+import { SectionNames } from '@/components/app/userActionFormCallCongressperson/constants'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -36,7 +36,10 @@ import {
 } from './formConfig'
 
 interface AddressProps
-  extends Pick<UserActionFormCallCongresspersonProps, 'user' | 'onFindCongressperson' | 'gotoTab'> {
+  extends Pick<
+    UserActionFormCallCongresspersonProps,
+    'user' | 'onFindCongressperson' | 'goToSection'
+  > {
   congressPersonData?: UserActionFormCallCongresspersonProps['congressPersonData']
   rnAddress: string
 }
@@ -45,7 +48,7 @@ export function Address({
   user,
   onFindCongressperson,
   congressPersonData,
-  gotoTab,
+  goToSection,
   rnAddress,
 }: AddressProps) {
   const urls = useIntlUrls()
@@ -91,11 +94,11 @@ export function Address({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(
-          () => gotoTab(TabNames.SUGGESTED_SCRIPT),
+          () => goToSection(SectionNames.SUGGESTED_SCRIPT),
           trackFormSubmissionSyncErrors(FORM_NAME),
         )}
       >
-        <UserActionFormCallCongresspersonLayout onBack={() => gotoTab(TabNames.INTRO)}>
+        <UserActionFormCallCongresspersonLayout onBack={() => goToSection(SectionNames.INTRO)}>
           <UserActionFormCallCongresspersonLayout.Container>
             <UserActionFormCallCongresspersonLayout.Heading
               title="Find your representative"

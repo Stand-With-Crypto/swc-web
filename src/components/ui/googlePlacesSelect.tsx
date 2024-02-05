@@ -46,6 +46,7 @@ export const GooglePlacesSelect = React.forwardRef<React.ElementRef<'input'>, Pr
     }, [defaultValue, init, scriptStatus, setValue])
     return (
       <Combobox
+        analytics={'Google Place Select'}
         isLoading={!ready}
         inputValue={value}
         onChangeInputValue={setValue}
