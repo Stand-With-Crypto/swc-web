@@ -65,7 +65,6 @@ export function Address({
   const address = useWatch({
     control: form.control,
     name: 'address',
-    defaultValue: { description: rnAddress, place_id: '' },
   })
 
   const { data: liveCongressPersonData, isLoading: isLoadingLiveCongressPersonData } =
@@ -112,6 +111,7 @@ export function Address({
                   <FormControl>
                     <GooglePlacesSelect
                       {...field}
+                      defaultValue={rnAddress}
                       value={field.value}
                       onChange={field.onChange}
                       placeholder="Your full address"

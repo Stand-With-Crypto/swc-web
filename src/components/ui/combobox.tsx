@@ -45,6 +45,12 @@ export function Combobox<T>({
   const isMobile = useIsMobile({ defaultState: false })
   const size = useResizeObserver(parentRef)
 
+  React.useEffect(() => {
+    if (options.length) {
+      setOpen(true)
+    }
+  }, [options.length])
+
   if (isMobile) {
     return (
       <Drawer open={open} onOpenChange={setOpen}>
