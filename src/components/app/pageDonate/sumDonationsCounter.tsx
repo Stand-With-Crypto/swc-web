@@ -1,10 +1,13 @@
 'use client'
 
-import { AnimatedCurrencyOdometer } from '@/components/ui/animatedCurrencyOdometer'
+import { AnimatedNumericOdometer } from '@/components/ui/animatedNumericOdometer'
+import { roundDownNumberToAnimateIn } from '@/components/ui/animatedNumericOdometer/roundDownNumberToAnimateIn'
 import { SumDonations } from '@/data/aggregations/getSumDonations'
 import { SupportedLocale } from '@/intl/locales'
+import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { apiUrls } from '@/utils/shared/urls'
+import { useMemo } from 'react'
 import useSWR from 'swr'
 
 interface SumDonationsCounterProps {
@@ -14,8 +17,14 @@ interface SumDonationsCounterProps {
 
 export function SumDonationsCounter(props: SumDonationsCounterProps) {
   const { data } = useLiveSumDonations(props)
-
-  return <AnimatedCurrencyOdometer value={data?.amountUsd} locale={props.locale} />
+  const formatted = useMemo(() => {
+    return new Intl.NumberFormat(props.locale, {
+      style: 'currency',
+      currency: SupportedFiatCurrencyCodes.USD,
+      maximumFractionDigits: 0,
+    }).format(data.amountUsd)
+  }, [props.locale, data.amountUsd])
+  return <AnimatedNumericOdometer size={60} value={formatted} />
 }
 
 function useLiveSumDonations({ locale, initialData }: SumDonationsCounterProps) {
@@ -27,7 +36,7 @@ function useLiveSumDonations({ locale, initialData }: SumDonationsCounterProps) 
         .then(data => data as SumDonations),
     {
       refreshInterval: 5 * 1000,
-      fallbackData: initialData,
+      fallbackData: { amountUsd: roundDownNumberToAnimateIn(initialData.amountUsd, 10000) },
     },
   )
 }
