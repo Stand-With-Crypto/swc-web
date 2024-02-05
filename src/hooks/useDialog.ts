@@ -1,11 +1,18 @@
+import { DialogProps } from '@/components/ui/dialog'
 import { useState } from 'react'
 
-export const useDialog = (
-  initial: boolean,
-): {
-  open: boolean
-  onOpenChange(open: boolean): void
-} => {
-  const [open, onOpenChange] = useState(initial)
-  return { open, onOpenChange }
+interface UseDialogOptions {
+  initialOpen?: boolean
+  analytics: string
+}
+
+interface UseDialogReturn {
+  open: NonNullable<DialogProps['open']>
+  onOpenChange: NonNullable<DialogProps['onOpenChange']>
+  analytics: NonNullable<DialogProps['analytics']>
+}
+
+export function useDialog({ initialOpen = false, analytics }: UseDialogOptions): UseDialogReturn {
+  const [open, onOpenChange] = useState(initialOpen)
+  return { open, onOpenChange, analytics }
 }

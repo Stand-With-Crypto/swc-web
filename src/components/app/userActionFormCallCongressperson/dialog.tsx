@@ -17,12 +17,15 @@ export function UserActionFormCallCongresspersonDialog({
   children: React.ReactNode
   defaultOpen?: boolean
 }) {
-  const dialogProps = useDialog(defaultOpen)
+  const dialogProps = useDialog({
+    initialOpen: defaultOpen,
+    analytics: ANALYTICS_NAME_USER_ACTION_FORM_CALL_CONGRESSPERSON,
+  })
   const { data, isLoading } = useApiResponseForUserFullProfileInfo()
   const { user } = data ?? { user: null }
 
   return (
-    <Dialog analytics={ANALYTICS_NAME_USER_ACTION_FORM_CALL_CONGRESSPERSON} {...dialogProps}>
+    <Dialog {...dialogProps}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="max-w-3xl">
         {isLoading ? (

@@ -17,7 +17,10 @@ export function UserActionFormEmailCongresspersonDialog({
   children: React.ReactNode
   defaultOpen?: boolean
 }) {
-  const dialogProps = useDialog(defaultOpen)
+  const dialogProps = useDialog({
+    initialOpen: defaultOpen,
+    analytics: ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON,
+  })
   const locale = useLocale()
   const fetchUser = useApiResponseForUserFullProfileInfo()
   const [state, setState] = useState<'form' | 'success'>('form')
@@ -28,7 +31,7 @@ export function UserActionFormEmailCongresspersonDialog({
     }
   }, [dialogProps.open, state])
   return (
-    <Dialog analytics={ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON} {...dialogProps}>
+    <Dialog {...dialogProps}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="max-w-3xl" padding={false}>
         <Suspense fallback={<UserActionFormEmailCongresspersonSkeleton locale={locale} />}>
