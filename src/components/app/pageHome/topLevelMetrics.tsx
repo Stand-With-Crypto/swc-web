@@ -8,32 +8,28 @@ import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { cn } from '@/utils/web/cn'
 import { motion } from 'framer-motion'
 import { useMemo } from 'react'
+import { roundDownNumberToAnimateIn } from '../../ui/animatedNumericOdometer/roundDownNumberToAnimateIn'
 
 type Props = Pick<
   Awaited<ReturnType<typeof getHomepageData>>,
   'countPolicymakerContacts' | 'countUsers' | 'sumDonations'
 > & { locale: SupportedLocale }
 
-/*
-Odometer animations are smoothest when we aren't going from a higher number to a lower number
-so to create the desired initial loading effect, we want the animating numbers to always start at zero
-To prevent not animating because the actual number is zero, we subtract one from the actual number
-*/
-const roundDownMock = (value: number, roundTo: number) =>
-  Math.floor((value - 1) / roundTo) * roundTo
-
 const mockDecreaseInValuesOnInitialLoadSoWeCanAnimateIncrease = (
   initial: Omit<Props, 'locale'>,
 ): Omit<Props, 'locale'> => ({
   sumDonations: {
-    amountUsd: roundDownMock(initial.sumDonations.amountUsd, 10000),
+    amountUsd: roundDownNumberToAnimateIn(initial.sumDonations.amountUsd, 10000),
   },
   countUsers: {
-    count: roundDownMock(initial.countUsers.count, 100),
+    count: roundDownNumberToAnimateIn(initial.countUsers.count, 100),
   },
   countPolicymakerContacts: {
-    countUserActionCalls: roundDownMock(initial.countPolicymakerContacts.countUserActionCalls, 100),
-    countUserActionEmailRecipients: roundDownMock(
+    countUserActionCalls: roundDownNumberToAnimateIn(
+      initial.countPolicymakerContacts.countUserActionCalls,
+      100,
+    ),
+    countUserActionEmailRecipients: roundDownNumberToAnimateIn(
       initial.countPolicymakerContacts.countUserActionEmailRecipients,
       100,
     ),

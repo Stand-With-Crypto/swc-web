@@ -8,7 +8,7 @@ import { getPublicRecentActivity } from '@/data/recentActivity/getPublicRecentAc
 
 export async function getHomepageTopLevelMetrics() {
   const [sumDonations, countUsers, countPolicymakerContacts] = await Promise.all([
-    getSumDonations(),
+    getSumDonations({ includeFairshake: true }),
     getCountUsers(),
     getCountPolicymakerContacts(),
   ])

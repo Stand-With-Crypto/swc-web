@@ -1,6 +1,7 @@
 'use client'
 
 import { AnimatedNumericOdometer } from '@/components/ui/animatedNumericOdometer'
+import { roundDownNumberToAnimateIn } from '@/components/ui/animatedNumericOdometer/roundDownNumberToAnimateIn'
 import { SumDonations } from '@/data/aggregations/getSumDonations'
 import { SupportedLocale } from '@/intl/locales'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
@@ -35,8 +36,7 @@ function useLiveSumDonations({ locale, initialData }: SumDonationsCounterProps) 
         .then(data => data as SumDonations),
     {
       refreshInterval: 5 * 1000,
-      // we mock this value to be slightly lower so that we get an animation on initial render
-      fallbackData: { amountUsd: initialData.amountUsd - 99 },
+      fallbackData: { amountUsd: roundDownNumberToAnimateIn(initialData.amountUsd, 10000) },
     },
   )
 }
