@@ -1,17 +1,18 @@
-import { cn, twNoop } from '@/utils/web/cn'
-import { type VariantProps, cva } from 'class-variance-authority'
+import { twNoop, cn } from '@/utils/web/cn'
+import { VariantProps, cva } from 'class-variance-authority'
 import React from 'react'
 import Balancer from 'react-wrap-balancer'
 
-const variantsConfig = {
+const subTitleVariantsConfig = {
   size: {
     lg: twNoop('text-base lg:text-xl'),
     md: twNoop('text-base'),
+    sm: twNoop('text-sm lg:text-base'),
   },
 }
 
-const variants = cva('text-center text-fontcolor-muted', {
-  variants: variantsConfig,
+const pageSubTitleVariants = cva('text-center text-fontcolor-muted', {
+  variants: subTitleVariantsConfig,
   defaultVariants: {
     size: 'lg',
   },
@@ -19,15 +20,15 @@ const variants = cva('text-center text-fontcolor-muted', {
 
 interface PageSubTitleProps
   extends React.HTMLAttributes<HTMLHeadingElement>,
-    VariantProps<typeof variants> {
+    VariantProps<typeof pageSubTitleVariants> {
   as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p'
   withoutBalancer?: boolean
 }
 
 export const PageSubTitle = React.forwardRef<HTMLHeadingElement, PageSubTitleProps>(
-  ({ className, children, as: Comp = 'h2', size, withoutBalancer, ...props }, ref) => {
+  ({ className, children, size = 'md', as: Comp = 'h2', withoutBalancer, ...props }, ref) => {
     return (
-      <Comp ref={ref} className={cn(variants({ className, size }))} {...props}>
+      <Comp ref={ref} className={cn(pageSubTitleVariants({ size, className }))} {...props}>
         {withoutBalancer ? children : <Balancer>{children}</Balancer>}
       </Comp>
     )

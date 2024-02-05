@@ -59,6 +59,7 @@ export const metadata: Metadata = {
 
 export default function Layout({ children, params }: PageProps & { children: React.ReactNode }) {
   const { locale } = params
+
   if (!ORDERED_SUPPORTED_LOCALES.includes(locale)) {
     notFound()
   }
