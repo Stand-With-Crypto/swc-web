@@ -30,7 +30,11 @@ export function UserActionFormVoterRegistrationNft({ onClose }: { onClose: () =>
       case SectionNames.ACCOUNT_REGISTRATION:
         return null
       case SectionNames.SUCCESS:
-        return <UserActionFormSuccessScreen onClose={onClose} />
+        return (
+          <div className="p-6">
+            <UserActionFormSuccessScreen onClose={onClose} />
+          </div>
+        )
       default:
         onTabNotFound()
         return null

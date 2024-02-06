@@ -17,7 +17,7 @@ export function UserActionFormVoterRegistrationNftLayout({
   return (
     <>
       {onBack && <GoBackButton onClick={onBack} />}
-      <div className="flex min-h-[400px] flex-col">{children}</div>
+      <div className="flex min-h-[400px] flex-col p-6">{children}</div>
     </>
   )
 }
@@ -50,10 +50,6 @@ function GoBackButton({ onClick }: { onClick: () => void }) {
 }
 
 function Footer({ children }: React.PropsWithChildren) {
-  return (
-    <div className="flex w-full flex-row-reverse items-center justify-between p-4 md:p-8">
-      {children}
-    </div>
-  )
+  return <div className="flex w-full flex-row-reverse items-center justify-between">{children}</div>
 }
 UserActionFormVoterRegistrationNftLayout.Footer = Footer
