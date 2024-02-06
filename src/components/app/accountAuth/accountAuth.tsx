@@ -11,7 +11,11 @@ import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { noop } from 'lodash'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 
-export function AccountAuth({ onClose, ...props }: ConnectEmbedProps & { onClose: () => void }) {
+export function AccountAuth({
+  onClose,
+  isLoading = false,
+  ...props
+}: ConnectEmbedProps & { onClose: () => void; isLoading?: boolean }) {
   const router = useRouter()
 
   const connectionStatus = useConnectionStatus()
@@ -38,7 +42,7 @@ export function AccountAuth({ onClose, ...props }: ConnectEmbedProps & { onClose
     onClose: handleClose,
   }
 
-  if (isAutoConnecting || connectionStatus === 'unknown') {
+  if (isAutoConnecting || connectionStatus === 'unknown' || isLoading) {
     return (
       <>
         <LoadingOverlay />
@@ -54,17 +58,4 @@ export function AccountAuth({ onClose, ...props }: ConnectEmbedProps & { onClose
   }
 
   return <AccountAuthContent {...accountAuthContentProps} />
-}
-
-export function EmbeddedAccountAuth() {
-  const router = useRouter()
-  const urls = useIntlUrls()
-
-  return (
-    <AccountAuth
-      onClose={() => {
-        router.push(urls.home())
-      }}
-    />
-  )
 }
