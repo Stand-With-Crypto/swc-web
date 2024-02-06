@@ -2,25 +2,51 @@ import { NextRequest, NextResponse } from 'next/server'
 import { authenticatePaymentRequest } from '@/utils/server/coinbaseCommerce/authenticatePaymentRequest'
 import * as Sentry from '@sentry/nextjs'
 import { storePaymentRequest } from '@/utils/server/coinbaseCommerce/storePaymentRequest'
-import { CoinbaseCommercePayment } from '@/utils/server/coinbaseCommerce/paymentRequest'
-import { prettyLog } from '@/utils/shared/prettyLog'
+import {
+  CoinbaseCommercePayment,
+  zodCoinbaseCommercePayment,
+} from '@/utils/server/coinbaseCommerce/paymentRequest'
+import { getServerAnalytics } from '@/utils/server/serverAnalytics'
+import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 
 export async function POST(request: NextRequest) {
   const rawRequestBody = await request.json()
   authenticatePaymentRequest(rawRequestBody)
+  const body = rawRequestBody as CoinbaseCommercePayment
+  const zodResult = zodCoinbaseCommercePayment.safeParse(body)
+  if (!zodResult.success) {
+    Sentry.captureMessage('unexpected Coinbase Commerce payment request format'),
+      {
+        extra: {
+          body,
+          errors: zodResult.error.flatten(),
+        },
+      }
+  }
+
   try {
-    const body = rawRequestBody as CoinbaseCommercePayment
-    prettyLog(body)
+    getServerAnalytics({
+      localUser: parseLocalUserFromCookies(),
+      userId: body.event.data.metadata.userId,
+    }).track('Coinbase Commerce Payment', {
+      paymentExpire: body.event.data.expires_at,
+      paymentId: body.id,
+      paymentPrice: `${body.event.data.pricing.local.amount} ${body.event.data.pricing.local.currency}`,
+      paymentType: body.event.type,
+      sessionId: body.event.data.metadata.sessionId,
+      userId: body.event.data.metadata.userId,
+    })
+
     // Only store the payment request if the charge has been confirmed.
     if (body.event.type === 'charge:confirmed') {
-      storePaymentRequest(body)
+      await storePaymentRequest(body)
     }
   } catch (error) {
     Sentry.captureException(error, {
       extra: {
-        id: (rawRequestBody as CoinbaseCommercePayment).id,
-        pricing: (rawRequestBody as CoinbaseCommercePayment).event.data.pricing,
-        sessionId: (rawRequestBody as CoinbaseCommercePayment).event.data.metadata.sessionId,
+        id: body.id,
+        pricing: body.event.data.pricing,
+        sessionId: body.event.data.metadata.sessionId,
       },
     })
     return new NextResponse('internal error', { status: 500 })

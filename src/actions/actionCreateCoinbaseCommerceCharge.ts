@@ -1,7 +1,7 @@
 'use server'
 import { createCharge } from '@/utils/server/coinbaseCommerce/createCharge'
+import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
-import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
 
 export const actionCreateCoinbaseCommerceCharge = withServerActionMiddleware(
@@ -10,9 +10,9 @@ export const actionCreateCoinbaseCommerceCharge = withServerActionMiddleware(
 )
 
 async function _actionCreateCoinbaseCommerceCharge() {
-  const authUser = await appRouterGetAuthUser()
+  const user = await getMaybeUserAndMethodOfMatch({})
   const hostedUrl = (
-    await createCharge({ sessionId: getUserSessionId(), userId: authUser?.userId ?? '' })
+    await createCharge({ sessionId: getUserSessionId(), userId: user.user?.id ?? '' })
   ).data.hosted_url
   return { hostedUrl }
 }
