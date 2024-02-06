@@ -50,6 +50,10 @@ function GoBackButton({ onClick }: { onClick: () => void }) {
 }
 
 function Footer({ children }: React.PropsWithChildren) {
-  return <div className="flex w-full flex-row-reverse items-center justify-between">{children}</div>
+  return (
+    <div className="flex flex-row-reverse items-center justify-between space-y-4 px-8 md:space-y-8">
+      {children}
+    </div>
+  )
 }
 UserActionFormVoterRegistrationNftLayout.Footer = Footer
