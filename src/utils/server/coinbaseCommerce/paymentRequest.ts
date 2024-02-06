@@ -44,6 +44,7 @@ interface CoinbaseCommercePaymentEventData {
   }
   pricing: {
     local: { amount: string; currency: string }
+    settlement: { amount: string; currency: string }
   }
   pricing_type: string
   payments: CoinbaseCommercePaymentDetails[]
