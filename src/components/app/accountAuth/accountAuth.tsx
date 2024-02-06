@@ -9,7 +9,6 @@ import { useSignInRequired } from './useSignInRequired'
 import { AccountAuthContent } from './content'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { noop } from 'lodash'
-import { useIntlUrls } from '@/hooks/useIntlUrls'
 
 export function AccountAuth({
   onClose,
