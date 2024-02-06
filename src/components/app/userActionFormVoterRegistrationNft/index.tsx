@@ -23,6 +23,8 @@ export function UserActionFormVoterRegistrationNft({ onClose }: { onClose: () =>
         return <Survey {...sectionProps} />
       case SectionNames.VOTER_REGISTRATION_FORM:
         return <VoterRegistrationForm {...sectionProps} />
+      case SectionNames.CHECK_REGISTRATION_FORM:
+        return <VoterRegistrationForm checkRegistration {...sectionProps} />
       case SectionNames.CLAIM_NFT:
         return <ClaimNft {...sectionProps} />
       case SectionNames.ACCOUNT_REGISTRATION:
