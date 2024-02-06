@@ -42,6 +42,7 @@ Below is a non-exhaustive list of coding conventions that we try to follow. This
 - When working on a page that dynamically fetches data before rendering, make sure to add a [loading.tsx page](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming) to optimistically show users a skeleton of the data they're fetching
 - to rapidly build a skeleton, copy paste the main, above the fold, UX of the dynamic page and wrap the core component text with `<Skeleton />` components
 - When developing full-height design elements (for example, scrollable modals with a lot of content), make sure to QA your UI on an actual iOS simulator in addition to a responsive desktop web browser. There are nuances with the way iOS deals with css styles like `max-height: 100vh` that generally make `max-height: 100dvh` better suited for styling.
+- When building forms and multi-step wizards, make sure you specify the initial focus state you'd like the UI to have
 
 ## Backend Development
 
@@ -80,3 +81,9 @@ Below is a non-exhaustive list of coding conventions that we try to follow. This
 - Analytic event name should take the form of Noun Verb. An example is "User Logged In" or "Form Submitted"
 - Try and standardize naming for properties across events. If we refer to a property in two different events, the name should be the same
 - For server actions core to our workflow, try and trigger server-side events as well. This reduces the chance we won't account for client analytics that might be dropped due to network connectivity/blockers.
+
+# Testing
+
+- [This is an excellent blog post](https://kentcdodds.com/blog/write-tests) that highlights the tradeoffs between various testing focuses a team can have
+- Ensuring we adhere to strictly typed TypeScript (see "TypeScript" section) will prevent the majority of bugs that traditional unit tests catch. There are still places where unit testing business logic that can't be validated with types alone make sense. For these use-cases, we use `jest` (see our .test.ts files in the codebase for examples).
+- Our core user workflows should be testing via cypress (see `cypress/`) folder for examples.

@@ -1,11 +1,14 @@
-import { useDisconnect, useUser, useLogout, useWallet, useAddress } from '@thirdweb-dev/react'
+import { useDisconnect, useLogout, useUser, useWallet } from '@thirdweb-dev/react'
 import { usePathname, useRouter } from 'next/navigation'
-
-import { useIntlUrls } from '@/hooks/useIntlUrls'
+import Cookies from 'js-cookie'
 import useSWR from 'swr'
 
+import { useAuthUser } from '@/hooks/useAuthUser'
+import { useIntlUrls } from '@/hooks/useIntlUrls'
+import { USER_SESSION_ID_COOKIE_NAME, generateUserSessionId } from '@/utils/shared/userSessionId'
+
 export function useThirdwebData() {
-  const session = useUser()
+  const session = useAuthUser()
   const disconnect = useDisconnect()
   const { logout } = useLogout()
 
@@ -26,6 +29,7 @@ export function useThirdwebData() {
     logoutAndDisconnect: async () => {
       await Promise.all([logout(), disconnect()])
       handleLogoutSuccess()
+      Cookies.set(USER_SESSION_ID_COOKIE_NAME, generateUserSessionId())
     },
   }
 }

@@ -8,9 +8,10 @@ import { UserActionFormDonateDialog } from '@/components/app/userActionFormDonat
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
 import { UserActionFormOptInSWCDialog } from '@/components/app/userActionFormOptInSWC/dialog'
-import { UserActionFormTweetDialog } from '@/components/app/userActionFormTweet/dialog'
 import { UserActionRowCTAProps } from '@/components/app/userActionRowCTA'
+import { UserActionTweetLink } from '@/components/ui/userActionTweetLink'
 import { cn } from '@/utils/web/cn'
+import { useMemo } from 'react'
 
 export const ORDERED_USER_ACTION_ROW_CTA_INFO: ReadonlyArray<Omit<UserActionRowCTAProps, 'state'>> =
   [
@@ -19,9 +20,8 @@ export const ORDERED_USER_ACTION_ROW_CTA_INFO: ReadonlyArray<Omit<UserActionRowC
       image: '/actionTypeIcons/optIn.svg',
       text: 'Join Stand With Crypto',
       subtext: 'Join over 100,000 advocates fighting to keep crypto in America.',
-      // TODO we need to modify this so that it can still be actioned on until the user opts in to both subscriber AND member
       canBeTriggeredMultipleTimes: false,
-      DialogComponent: UserActionFormOptInSWCDialog,
+      WrapperComponent: UserActionFormOptInSWCDialog,
     },
     {
       actionType: UserActionType.CALL,
@@ -29,7 +29,7 @@ export const ORDERED_USER_ACTION_ROW_CTA_INFO: ReadonlyArray<Omit<UserActionRowC
       text: 'Call your Congressperson',
       subtext: 'The most effective way to make your voice heard.',
       canBeTriggeredMultipleTimes: true,
-      DialogComponent: UserActionFormCallCongresspersonDialog,
+      WrapperComponent: UserActionFormCallCongresspersonDialog,
     },
     {
       actionType: UserActionType.EMAIL,
@@ -37,7 +37,7 @@ export const ORDERED_USER_ACTION_ROW_CTA_INFO: ReadonlyArray<Omit<UserActionRowC
       text: 'Email your Congressperson',
       subtext: 'We drafted an email for you. All you have to do is hit send.',
       canBeTriggeredMultipleTimes: true,
-      DialogComponent: UserActionFormEmailCongresspersonDialog,
+      WrapperComponent: UserActionFormEmailCongresspersonDialog,
     },
     {
       actionType: UserActionType.DONATION,
@@ -45,7 +45,7 @@ export const ORDERED_USER_ACTION_ROW_CTA_INFO: ReadonlyArray<Omit<UserActionRowC
       text: 'Donate to Stand With Crypto',
       subtext: 'Support our aim to mobilize 52 million crypto advocates in the U.S.',
       canBeTriggeredMultipleTimes: true,
-      DialogComponent: UserActionFormDonateDialog,
+      WrapperComponent: UserActionFormDonateDialog,
     },
     {
       actionType: UserActionType.TWEET,
@@ -53,7 +53,9 @@ export const ORDERED_USER_ACTION_ROW_CTA_INFO: ReadonlyArray<Omit<UserActionRowC
       text: 'Share on Twitter/X',
       subtext: 'Bring more people to the movement.',
       canBeTriggeredMultipleTimes: true,
-      DialogComponent: UserActionFormTweetDialog,
+      WrapperComponent: ({ children }) => (
+        <UserActionTweetLink asChild>{children}</UserActionTweetLink>
+      ),
     },
     {
       actionType: UserActionType.NFT_MINT,
@@ -61,20 +63,29 @@ export const ORDERED_USER_ACTION_ROW_CTA_INFO: ReadonlyArray<Omit<UserActionRowC
       text: 'Mint your Supporter NFT',
       subtext: 'All mint proceeds are donated to the movement.',
       canBeTriggeredMultipleTimes: true,
-      DialogComponent: UserActionFormNFTMintDialog,
+      WrapperComponent: UserActionFormNFTMintDialog,
     },
   ]
 
 export function UserActionRowCTAsList({
   performedUserActionTypes,
+  excludeUserActionTypes,
   className,
 }: {
   className?: string
   performedUserActionTypes?: UserActionType[]
+  excludeUserActionTypes?: UserActionType[]
 }) {
+  const filteredActions = useMemo(
+    () =>
+      ORDERED_USER_ACTION_ROW_CTA_INFO.filter(
+        action => !excludeUserActionTypes?.includes(action.actionType),
+      ),
+    [excludeUserActionTypes],
+  )
   return (
     <div className={cn('space-y-4', className)}>
-      {ORDERED_USER_ACTION_ROW_CTA_INFO.map(({ actionType, ...rest }) => (
+      {filteredActions.map(({ actionType, ...rest }) => (
         <UserActionRowCTA
           key={actionType}
           state={

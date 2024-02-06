@@ -12,13 +12,13 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
-import { getUserDisplayName } from '@/utils/web/userUtils'
+import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
+import { getUserDisplayNameWithoutENS } from '@/utils/web/userUtils'
+import * as Sentry from '@sentry/nextjs'
 import { AlertCircle } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useEffect, useMemo, useState } from 'react'
 import { toast } from 'sonner'
-import * as Sentry from '@sentry/nextjs'
-import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
 
 export function MergeAlertCTA({
   mergeAlert,
@@ -66,8 +66,8 @@ export function MergeAlertCTA({
       <AlertCircle />
       <AlertTitle>Merge your accounts</AlertTitle>
       <AlertDescription className="mb-4">
-        It looks like this account and {getUserDisplayName(mergeAlert.otherUser)} might both belong
-        to you. Would you like to merge them?
+        It looks like this account and {getUserDisplayNameWithoutENS(mergeAlert.otherUser)} might
+        both belong to you. Would you like to merge them?
       </AlertDescription>
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end">
         <FormItemSkeleton>
@@ -113,7 +113,7 @@ export function MergeAlertCTA({
           )
         })()}
       </div>
-      {/* TODO add distribution email for tech support */}
+      {/* LATER-TASK add distribution email for tech support */}
       <div className="mt-3 text-sm text-fontcolor-muted">Questions? Send an email to TODO</div>
     </Alert>
   )

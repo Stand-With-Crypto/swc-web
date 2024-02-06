@@ -2,11 +2,16 @@ import { customLogger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { AnalyticProperties } from '@/utils/shared/sharedAnalytics'
 import mixpanel from 'mixpanel-browser'
+import { track as vercelTrack } from '@vercel/analytics'
+import { formatVercelAnalyticsEventProperties } from '@/utils/shared/vercelAnalytics'
+import { isCypress, isStorybook } from '@/utils/shared/executionEnvironment'
 
 const NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN = requiredEnv(
   process.env.NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN,
   'process.env.NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN',
 )
+
+const environmentHasAnalyticsEnabled = !isStorybook && !isCypress
 
 export function initClientAnalytics() {
   mixpanel.init(NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN, {
@@ -14,8 +19,10 @@ export function initClientAnalytics() {
     persistence: 'localStorage',
   })
 }
-export function identifyClientAnalyticsUser(sessionIdOrCryptoWalletAddress: string) {
-  mixpanel.identify(sessionIdOrCryptoWalletAddress)
+export function identifyClientAnalyticsUser(userId: string) {
+  if (environmentHasAnalyticsEnabled) {
+    mixpanel.identify(userId)
+  }
 }
 
 export function trackClientAnalytic(eventName: string, eventProperties?: AnalyticProperties) {
@@ -28,13 +35,18 @@ export function trackClientAnalytic(eventName: string, eventProperties?: Analyti
     ['color: #00aaff', 'color: #FCFDFB'],
     eventProperties,
   )
-  mixpanel.track(eventName, {
-    eventProperties,
-  })
+  if (environmentHasAnalyticsEnabled) {
+    mixpanel.track(eventName, {
+      eventProperties,
+    })
+    vercelTrack(eventName, eventProperties && formatVercelAnalyticsEventProperties(eventProperties))
+  }
 }
 
 export function setClientAnalyticsUserProperties(userProperties: object) {
-  mixpanel.people.set(userProperties)
+  if (environmentHasAnalyticsEnabled) {
+    mixpanel.people.set(userProperties)
+  }
 }
 
 export function trackFormSubmitted(formName: string, other?: AnalyticProperties) {
@@ -47,4 +59,19 @@ export function trackFormSubmitSucceeded(formName: string, other?: AnalyticPrope
 
 export function trackFormSubmitErrored(formName: string, other?: AnalyticProperties) {
   trackClientAnalytic('Form Submit Errored', { 'Form Name': formName, ...other })
+}
+
+export function trackExternalLink(eventProperties?: AnalyticProperties) {
+  trackClientAnalytic('External Link clicked', { ...eventProperties })
+}
+
+export type LoginProvider = 'email' | 'google' | 'wallet'
+export function trackLoginAttempt({
+  method,
+  ...eventProperties
+}: { method: LoginProvider } & AnalyticProperties) {
+  trackClientAnalytic('Login Attempt', {
+    Method: method,
+    ...eventProperties,
+  })
 }

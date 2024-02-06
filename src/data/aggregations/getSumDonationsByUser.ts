@@ -1,4 +1,5 @@
-import { getClientUser } from '@/clientModels/clientUser/clientUser'
+import { getClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
+import { getENSDataMapFromCryptoAddressesAndFailGracefully } from '@/data/web3/getENSDataFromCryptoAddress'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { Decimal } from '@prisma/client/runtime/library'
 import _ from 'lodash'
@@ -21,6 +22,8 @@ export const getSumDonationsByUser = async ({ limit, offset }: SumDonationsByUse
       SUM(amount_usd) AS totalAmountUsd
     FROM user_action_donation
     JOIN user_action ON user_action.id = user_action_donation.id
+    JOIN user ON user.id = user_action.user_id
+    WHERE user.internal_status = 'VISIBLE'
     GROUP BY userId
     ORDER BY totalAmountUsd DESC
     -- don't worry, prisma $queryRaw sanitizes the input
@@ -40,11 +43,23 @@ export const getSumDonationsByUser = async ({ limit, offset }: SumDonationsByUse
   })
 
   const usersById = _.keyBy(users, 'id')
-
-  return total.map(({ userId, totalAmountUsd }) => ({
-    totalAmountUsd: totalAmountUsd.toNumber(),
-    user: getClientUser(usersById[userId]),
-  }))
+  const ensDataMap = await getENSDataMapFromCryptoAddressesAndFailGracefully(
+    _.compact(users.map(user => user.primaryUserCryptoAddress?.cryptoAddress)),
+  )
+  return total.map(({ userId, totalAmountUsd }) => {
+    const user = usersById[userId]
+    return {
+      totalAmountUsd: totalAmountUsd.toNumber(),
+      user: {
+        ...getClientUserWithENSData(
+          user,
+          user.primaryUserCryptoAddress?.cryptoAddress
+            ? ensDataMap[user.primaryUserCryptoAddress?.cryptoAddress]
+            : null,
+        ),
+      },
+    }
+  })
 }
 
 export type SumDonationsByUser = Awaited<ReturnType<typeof getSumDonationsByUser>>

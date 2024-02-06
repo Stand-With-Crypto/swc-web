@@ -1,10 +1,10 @@
 import { UserActionType } from '@prisma/client'
 
 export enum UserActionEmailCampaignName {
-  DEFAULT = 'DEFAULT',
+  DEFAULT = 'EMAIL_YOUR_CONGRESSPERSON_FIT21',
 }
 export enum UserActionCallCampaignName {
-  DEFAULT = 'DEFAULT',
+  DEFAULT = 'CALL_YOUR_CONGRESSPERSON_FIT21',
 }
 export enum UserActionDonationCampaignName {
   DEFAULT = 'DEFAULT',

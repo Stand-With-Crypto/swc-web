@@ -18,6 +18,9 @@ import {
 import { Skeleton } from '@/components/ui/skeleton'
 import { maybeEllipsisText } from '@/utils/web/maybeEllipsisText'
 import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
+import { useENS } from '@thirdweb-dev/react'
+import { ClientUserCryptoAddressWithENSData } from '@/clientModels/clientUser/clientUserCryptoAddress'
+import { appendENSHookDataToUser } from '@/utils/web/appendENSHookDataToUser'
 
 interface NavbarLoggedInSessionPopoverContentProps {
   onClose: () => void
@@ -30,12 +33,17 @@ export function NavbarLoggedInSessionPopoverContent({
 }: NavbarLoggedInSessionPopoverContentProps) {
   const urls = useIntlUrls()
   const { logoutAndDisconnect } = useThirdwebData()
+  const ensData = useENS()
 
   return (
     <div className="space-y-2">
       <div className="flex flex-col gap-6 p-4">
         <div className="flex items-center gap-4">
-          {user ? <UserHeading user={user} /> : <UserHeadingSkeleton />}
+          {user && !ensData.isLoading ? (
+            <UserHeading user={appendENSHookDataToUser(user, ensData.data)} />
+          ) : (
+            <UserHeadingSkeleton />
+          )}
         </div>
 
         <div className="space-y-1">
@@ -58,7 +66,11 @@ export function NavbarLoggedInSessionPopoverContent({
   )
 }
 
-function UserHeading(props: { user: GetUserFullProfileInfoResponse['user'] }) {
+function UserHeading(props: {
+  user: NonNullable<GetUserFullProfileInfoResponse['user']> & {
+    primaryUserCryptoAddress: ClientUserCryptoAddressWithENSData | null
+  }
+}) {
   const user = props.user!
   const [{ error, value }, copyToClipboard] = useCopyToClipboard()
 
@@ -100,9 +112,9 @@ function UserHeading(props: { user: GetUserFullProfileInfoResponse['user'] }) {
             <Copy width={16} height={16} />
           </Button>
         </div>
-        {user.primaryUserEmailAddress?.address && (
+        {user.primaryUserEmailAddress?.emailAddress && (
           <p className="text-ellipsis text-xs text-muted-foreground">
-            {maybeEllipsisText(user.primaryUserEmailAddress?.address, 30)}
+            {maybeEllipsisText(user.primaryUserEmailAddress?.emailAddress, 30)}
           </p>
         )}
       </div>

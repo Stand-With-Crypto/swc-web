@@ -15,10 +15,6 @@ export default async function InternalHomepage() {
             links: [
               { children: 'User Settings', href: '/internal/user-settings' },
               { children: 'User Action Deeplinks', href: '/internal/user-action-deeplinks' },
-              {
-                children: 'v2 Sample Architecture Patterns',
-                href: '/internal/sample-architecture-patterns',
-              },
             ],
           },
           {
@@ -28,6 +24,11 @@ export default async function InternalHomepage() {
               {
                 children: 'Page - Client Component Error',
                 href: '/internal/debug-sentry-client',
+                target: '_blank',
+              },
+              {
+                children: 'Page - Client Component Server Action Error',
+                href: '/internal/debug-sentry-client-server-action',
                 target: '_blank',
               },
               {

@@ -1,16 +1,16 @@
 'use client'
-import { ClientUser } from '@/clientModels/clientUser/clientUser'
+import { ClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
 import { ClientUserAction } from '@/clientModels/clientUserAction/clientUserAction'
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
 import { UserActionFormDonateDialog } from '@/components/app/userActionFormDonate/dialog'
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
 import { UserActionFormOptInSWCDialog } from '@/components/app/userActionFormOptInSWC/dialog'
-import { UserActionFormTweetDialog } from '@/components/app/userActionFormTweet/dialog'
 import { UserAvatar } from '@/components/app/userAvatar'
 import { Button } from '@/components/ui/button'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
 import { FormattedRelativeDatetimeWithClientHydration } from '@/components/ui/formattedRelativeDatetimeWithClientHydration'
+import { UserActionTweetLink } from '@/components/ui/userActionTweetLink'
 import { DTSIPersonForUserActions } from '@/data/dtsi/queries/queryDTSIPeopleBySlugForUserActions'
 import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
 import { useIsMobile } from '@/hooks/useIsMobile'
@@ -25,10 +25,9 @@ import { getUserDisplayName } from '@/utils/web/userUtils'
 import { UserActionOptInType, UserActionType } from '@prisma/client'
 import React from 'react'
 
-interface RecentActivityRowProps {
-  action: ClientUserAction & { user: ClientUser }
+export interface RecentActivityRowProps {
+  action: ClientUserAction & { user: ClientUserWithENSData }
   locale: SupportedLocale
-  disableHover?: boolean
 }
 
 function RecentActivityRowBase({
@@ -36,7 +35,6 @@ function RecentActivityRowBase({
   action,
   children,
   onFocusContent,
-  disableHover,
 }: RecentActivityRowProps & { children: React.ReactNode; onFocusContent?: () => React.ReactNode }) {
   const [hasFocus, setHasFocus] = React.useState(false)
   const isMobile = useIsMobile({ defaultState: true })
@@ -44,8 +42,8 @@ function RecentActivityRowBase({
     <div
       // added min height to prevent height shifting on hover
       className="flex min-h-[41px] items-center justify-between gap-5"
-      onMouseEnter={() => disableHover || isMobile || setHasFocus(true)}
-      onMouseLeave={() => disableHover || isMobile || setHasFocus(false)}
+      onMouseEnter={() => isMobile || setHasFocus(true)}
+      onMouseLeave={() => isMobile || setHasFocus(false)}
     >
       <div className="flex items-center gap-2">
         <div>
@@ -61,14 +59,14 @@ function RecentActivityRowBase({
           <>
             <span className="hidden md:inline">
               <FormattedRelativeDatetimeWithClientHydration
-                date={action.datetimeCreated}
+                date={new Date(action.datetimeCreated)}
                 locale={locale}
               />
             </span>
             <span className="inline md:hidden">
               <FormattedRelativeDatetimeWithClientHydration
                 timeFormatStyle="narrow"
-                date={action.datetimeCreated}
+                date={new Date(action.datetimeCreated)}
                 locale={locale}
               />
             </span>
@@ -105,13 +103,6 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
         const getTypeDisplayText = () => {
           switch (action.optInType) {
             case UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER:
-              return (
-                <>
-                  subscribed to <span className="hidden sm:inline">Stand With Crypto</span>
-                  <span className="sm:hidden">SWC</span> alerts
-                </>
-              )
-            case UserActionOptInType.SWC_SIGN_UP_AS_MEMBER:
               return (
                 <>
                   joined <span className="hidden sm:inline">Stand With Crypto</span>
@@ -203,11 +194,7 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
       }
       case UserActionType.TWEET: {
         return {
-          onFocusContent: () => (
-            <UserActionFormTweetDialog>
-              <Button>Tweet</Button>
-            </UserActionFormTweetDialog>
-          ),
+          onFocusContent: () => <UserActionTweetLink>Tweet</UserActionTweetLink>,
           children: <MainText>{userDisplayName} tweeted in support of crypto</MainText>,
         }
       }
@@ -218,12 +205,5 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
       fallback: 'helped crypto',
     })
   }
-  return (
-    <RecentActivityRowBase
-      disableHover={props.disableHover}
-      action={action}
-      locale={locale}
-      {...getActionSpecificProps()}
-    />
-  )
+  return <RecentActivityRowBase action={action} locale={locale} {...getActionSpecificProps()} />
 }

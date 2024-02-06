@@ -11,7 +11,7 @@ import { NextApiRequest } from 'next'
 import { cookies } from 'next/headers'
 import { object, record, string } from 'zod'
 
-type ServerLocalUser = {
+export type ServerLocalUser = {
   persisted: PersistedLocalUser
   currentSession: CurrentSessionLocalUser
 }
@@ -76,13 +76,15 @@ function parseFromCookieStrings({
   persistedStr,
   currentSessionStr,
   cookieConsentStr,
+  source,
 }: {
+  source: string
   cookieConsentStr: string | undefined
   persistedStr: string | undefined
   currentSessionStr: string | undefined
 }) {
   if (!cookieConsentStr) {
-    Sentry.captureMessage('serverLocalUser: no cookie consent string found')
+    Sentry.captureMessage('serverLocalUser: no cookie consent string found', { tags: { source } })
     return null
   }
   const consent = deserializeCookieConsent(cookieConsentStr)
@@ -92,6 +94,7 @@ function parseFromCookieStrings({
   if (!currentSessionStr || !persistedStr) {
     Sentry.captureMessage('serverLocalUser: cookie missing currentSession or persisted', {
       extra: { currentSessionStr, persistedStr, consent },
+      tags: { source },
     })
     return null
   }
@@ -104,12 +107,14 @@ function parseFromCookieStrings({
     } catch (e) {
       Sentry.captureMessage('serverLocalUser: JSON failed to validate', {
         extra: { persistedStr, currentSessionStr },
+        tags: { source },
       })
       return null
     }
   } catch (e) {
     Sentry.captureMessage('serverLocalUser: cookie contained invalid JSON', {
       extra: { persistedStr, currentSessionStr },
+      tags: { source },
     })
     return null
   }
@@ -120,12 +125,22 @@ export function parseLocalUserFromCookies() {
   const persistedStr = cookieObj.get(LOCAL_USER_PERSISTED_KEY)?.value
   const currentSessionStr = cookieObj.get(LOCAL_USER_CURRENT_SESSION_KEY)?.value
   const cookieConsentStr = cookieObj.get(COOKIE_CONSENT_COOKIE_NAME)?.value
-  return parseFromCookieStrings({ persistedStr, currentSessionStr, cookieConsentStr })
+  return parseFromCookieStrings({
+    persistedStr,
+    currentSessionStr,
+    cookieConsentStr,
+    source: 'app-router',
+  })
 }
 
 export function parseLocalUserFromCookiesForPageRouter(req: NextApiRequest) {
   const persistedStr = req.cookies[LOCAL_USER_PERSISTED_KEY]
   const currentSessionStr = req.cookies[LOCAL_USER_CURRENT_SESSION_KEY]
   const cookieConsentStr = req.cookies[COOKIE_CONSENT_COOKIE_NAME]
-  return parseFromCookieStrings({ persistedStr, currentSessionStr, cookieConsentStr })
+  return parseFromCookieStrings({
+    persistedStr,
+    currentSessionStr,
+    cookieConsentStr,
+    source: 'page-router',
+  })
 }

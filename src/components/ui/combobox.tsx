@@ -14,9 +14,15 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { cn } from '@/utils/web/cn'
 import { useResizeObserver } from '@/hooks/useResizeObserver'
+import {
+  PrimitiveComponentAnalytics,
+  trackPrimitiveComponentAnalytics,
+} from '@/utils/web/primitiveComponentAnalytics'
+import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
 
 export interface ComboBoxProps<T>
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange' | 'type'> {
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange' | 'type'>,
+    PrimitiveComponentAnalytics<boolean> {
   inputValue: string
   onChangeInputValue: (val: string) => void
   options: T[]
@@ -38,16 +44,29 @@ export function Combobox<T>({
   getOptionKey,
   popoverContentClassName,
   isLoading,
+  analytics,
   ...inputProps
 }: ComboBoxProps<T>) {
   const parentRef = React.useRef<HTMLButtonElement>(null)
   const [open, setOpen] = React.useState(false)
   const isMobile = useIsMobile({ defaultState: false })
   const size = useResizeObserver(parentRef)
+  const wrappedAnalytics = React.useCallback(
+    (newOpen: boolean) =>
+      trackPrimitiveComponentAnalytics(
+        ({ properties }) => {
+          trackClientAnalytic(`Combobox ${newOpen ? 'Opened' : 'Closed'}`, {
+            ...properties,
+          })
+        },
+        { args: newOpen, analytics },
+      ),
+    [analytics],
+  )
 
   if (isMobile) {
     return (
-      <Drawer open={open} onOpenChange={setOpen}>
+      <Drawer analytics={wrappedAnalytics} open={open} onOpenChange={setOpen}>
         <DrawerTrigger asChild>{formatPopoverTrigger(value)}</DrawerTrigger>
         <DrawerContent>
           <div className="mt-4 min-h-[260px] border-t">
@@ -70,7 +89,7 @@ export function Combobox<T>({
   }
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
+    <Popover analytics={wrappedAnalytics} open={open} onOpenChange={setOpen}>
       <PopoverTrigger ref={parentRef} asChild>
         {formatPopoverTrigger(value)}
       </PopoverTrigger>
@@ -116,6 +135,12 @@ function StatusList<T>({
   return (
     <Command shouldFilter={false}>
       <CommandInput
+        commandValue={value}
+        onClear={() => {
+          onChange(null)
+          onChangeInputValue('')
+        }}
+        autoFocus
         placeholder="Filter status..."
         onValueChange={onChangeInputValue}
         value={inputValue}

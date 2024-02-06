@@ -1,4 +1,4 @@
-const US_STATE_CODE_TO_DISPLAY_NAME_MAP = {
+export const US_STATE_CODE_TO_DISPLAY_NAME_MAP = {
   AL: 'Alabama',
   AK: 'Alaska',
   AZ: 'Arizona',
@@ -59,9 +59,4 @@ export const getUSStateNameFromStateCode = (stateCode: string) => {
     return name
   }
   return stateCode
-  // TODO audit dtsi to ensure every state is in fact a state code
-  // return gracefullyError({
-  //   msg: `getUSStateNameFromStateCode returned no state for ${stateCode}`,
-  //   fallback: stateCode,
-  // })
 }

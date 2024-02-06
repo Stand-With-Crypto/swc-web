@@ -6,14 +6,19 @@ import {
   IStanceDetailsProps,
 } from '@/components/app/dtsiStanceDetails/types'
 import { FormattedDatetime } from '@/components/ui/formattedDatetime'
-import { NextImage } from '@/components/ui/image'
+import { MaybeNextImg, NextImage } from '@/components/ui/image'
 import { ExternalLink } from '@/components/ui/link'
-import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
+import {
+  dtsiPersonFullName,
+  getDTSIPersonProfilePictureUrlDimensions,
+} from '@/utils/dtsi/dtsiPersonUtils'
 import { dtsiTweetUrl } from '@/utils/dtsi/dtsiTweetUtils'
 import { cn } from '@/utils/web/cn'
+import sanitizeHtml from 'sanitize-html'
 
 // @ts-ignore
 import { parse as twemojiParser } from 'twemoji-parser'
+import { InitialsAvatar } from '@/components/ui/initialsAvatar'
 
 export const getEmojiIndexes = (tweet: DTSIStanceDetailsTweetProp['tweet']) => {
   // define a regular expression to match all Unicode emoji characters
@@ -128,7 +133,14 @@ const TweetBody: React.FC<{ tweet: DTSIStanceDetailsTweetProp['tweet'] }> = ({ t
               <span
                 key={i}
                 dangerouslySetInnerHTML={{
-                  __html: twemoji.parse(text),
+                  __html: sanitizeHtml(twemoji.parse(text), {
+                    allowedTags: ['b', 'i', 'em', 'strong', 'img'],
+                    allowedSchemes: ['https'],
+                    allowedAttributes: {
+                      // these are the tags that twemoji adds to the inline emoji images
+                      img: ['src', 'alt', 'class', 'draggable'],
+                    },
+                  }),
                 }}
               />
             )
@@ -167,16 +179,48 @@ export const DTSIStanceDetailsTweet: React.FC<
     stance: DTSIStanceDetailsStanceProp<DTSIStanceDetailsTweetProp>
   }
 > = ({ stance, person, locale }) => {
+  const isOwnTweet = stance.tweet.twitterAccount.personId === person.id
   return (
-    <article className="rounded-lg text-gray-800 lg:text-xl">
-      {stance.tweet.twitterAccount.personId !== person.id && (
-        <div className="mb-3 flex items-center border-b pb-3 italic text-gray-700">
-          <div>
+    <article className="rounded-lg text-gray-800">
+      <div
+        className={cn('mb-3 flex justify-between pb-3', isOwnTweet || 'border-b border-gray-300')}
+      >
+        {isOwnTweet ? (
+          <div className="flex items-center gap-2">
+            {person.profilePictureUrl ? (
+              <div className="h-12 w-12 overflow-hidden rounded-full">
+                <MaybeNextImg
+                  sizes="48px"
+                  alt={`profile picture of ${dtsiPersonFullName(person)}`}
+                  {...(getDTSIPersonProfilePictureUrlDimensions(person) || {})}
+                  src={person.profilePictureUrl}
+                />
+              </div>
+            ) : (
+              <div>
+                <InitialsAvatar
+                  size={48}
+                  firstInitial={(person.firstNickname || person.firstName).slice(0, 1)}
+                  lastInitial={person.lastName.slice(0, 1)}
+                />
+              </div>
+            )}
+            <div>
+              <p className="text-sm font-bold">{dtsiPersonFullName(person)}</p>
+              <p className="text-sm text-muted-foreground">
+                @{stance.tweet.twitterAccount.username}
+              </p>
+            </div>
+          </div>
+        ) : (
+          <div className="italic text-gray-700">
             A tweet from @{stance.tweet.twitterAccount.username} referenced{' '}
             {dtsiPersonFullName(person)}
           </div>
-        </div>
-      )}
+        )}
+        <NextImage alt="x.com logo" src={'/misc/xDotComLogo.svg'} width={24} height={24} />
+      </div>
+
       <div className="mb-3 whitespace-pre-line " style={{ lineHeight: 1.2 }}>
         <TweetBody tweet={stance.tweet} />
       </div>

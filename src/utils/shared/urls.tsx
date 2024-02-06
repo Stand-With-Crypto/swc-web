@@ -1,4 +1,4 @@
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/recentActivityAndLeaderboard/recentActivityAndLeaderboardTabs'
+import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
 import { DEFAULT_LOCALE, SupportedLocale } from '@/intl/locales'
 import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
@@ -35,15 +35,16 @@ export const getIntlUrls = (
     politiciansHomepage: () => `${localePrefix}/politicians`,
     politicianDetails: (dtsiSlug: string) => `${localePrefix}/politicians/person/${dtsiSlug}`,
     profile: () => `${localePrefix}/profile`,
-    // TODO delete before v2 go-live
-    sampleArchitecturePatterns: () => `${localePrefix}/internal/sample-architecture-patterns`,
     internalHomepage: () => `${localePrefix}/internal`,
   }
 }
 
 export const externalUrls = {
   discord: () => 'https://discord.com/invite/standwithcrypto',
-  donate: () => 'https://commerce.coinbase.com/checkout/396fc233-3d1f-4dd3-8e82-6efdf78432ad',
+  donate: () =>
+    NEXT_PUBLIC_ENVIRONMENT === 'production'
+      ? 'https://commerce.coinbase.com/checkout/396fc233-3d1f-4dd3-8e82-6efdf78432ad'
+      : 'https://commerce.coinbase.com/checkout/582a836d-733c-4a66-84d9-4e3c40c90281',
   dtsi: () => 'https://www.dotheysupportit.com',
   dtsiCreateStance: (slug: string) =>
     `https://www.dotheysupportit.com/people/${slug}/create-stance`,
@@ -68,7 +69,10 @@ export const apiUrls = {
   mockTotalDonations: (locale: SupportedLocale) => `/api/mock/total-donations/${locale}`,
   userPerformedUserActionTypes: () => `/api/identified-user/performed-user-action-types`,
   userFullProfileInfo: () => `/api/identified-user/full-profile-info`,
+  detectWipedDatabase: () => `/api/identified-user/detect-wiped-database`,
   dtsiAllPeople: () => `/api/public/dtsi/all-people`,
+  recentActivity: ({ limit }: { limit: number }) => `/api/public/recent-activity/${limit}`,
+  homepageTopLevelMetrics: () => `/api/public/homepage/top-level-metrics`,
 }
 
 const NEXT_PUBLIC_VERCEL_URL = requiredOutsideLocalEnv(

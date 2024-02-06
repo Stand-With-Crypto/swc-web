@@ -1,72 +1,69 @@
 'use client'
 
-import React from 'react'
-import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import React, { useEffect } from 'react'
+import { useForm, useWatch } from 'react-hook-form'
 import useSWR from 'swr'
 
+import type { UserActionFormCallCongresspersonProps } from '@/components/app/userActionFormCallCongressperson'
+import { SectionNames } from '@/components/app/userActionFormCallCongressperson/constants'
 import { Button } from '@/components/ui/button'
-import { TabNames } from '@/components/app/userActionFormCallCongressperson/userActionFormCallCongressperson.types'
 import {
   Form,
-  FormItem,
-  FormLabel,
   FormControl,
   FormErrorMessage,
   FormField,
+  FormItem,
+  FormLabel,
 } from '@/components/ui/form'
 import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
-import { trackFormSubmissionSyncErrors } from '@/utils/web/formUtils'
-import { getDTSIPeopleFromAddress } from '@/hooks/useGetDTSIPeopleFromAddress'
-import type { UserActionFormCallCongresspersonProps } from '@/components/app/userActionFormCallCongressperson'
 import { InternalLink } from '@/components/ui/link'
+import {
+  formatGetDTSIPeopleFromAddressNotFoundReason,
+  getDTSIPeopleFromAddress,
+} from '@/hooks/useGetDTSIPeopleFromAddress'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { getGoogleCivicDataFromAddress } from '@/utils/shared/googleCivicInfo'
-import { GENERIC_ERROR_TITLE } from '@/utils/web/errorUtils'
+import { trackFormSubmissionSyncErrors } from '@/utils/web/formUtils'
 import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
 import { UserActionFormLayout } from '@/components/app/userActionFormCommon/layout'
 
 import {
-  findRepresentativeCallFormValidationSchema,
-  type FindRepresentativeCallFormValues,
-  getDefaultValues,
   FORM_NAME,
+  findRepresentativeCallFormValidationSchema,
+  getDefaultValues,
+  type FindRepresentativeCallFormValues,
 } from './formConfig'
 
 interface AddressProps
-  extends Pick<UserActionFormCallCongresspersonProps, 'user' | 'onFindCongressperson' | 'gotoTab'> {
+  extends Pick<
+    UserActionFormCallCongresspersonProps,
+    'user' | 'onFindCongressperson' | 'goToSection'
+  > {
   congressPersonData?: UserActionFormCallCongresspersonProps['congressPersonData']
 }
 
-export function Address({ user, onFindCongressperson, congressPersonData, gotoTab }: AddressProps) {
+export function Address({
+  user,
+  onFindCongressperson,
+  congressPersonData,
+  goToSection,
+}: AddressProps) {
   const urls = useIntlUrls()
 
   const form = useForm<FindRepresentativeCallFormValues>({
     defaultValues: getDefaultValues({ user }),
     resolver: zodResolver(findRepresentativeCallFormValidationSchema),
   })
+  useEffect(() => {
+    form.setFocus('address')
+  }, [form])
   const address = useWatch({
     control: form.control,
     name: 'address',
   })
   const { data: liveCongressPersonData, isLoading: isLoadingLiveCongressPersonData } =
     useCongresspersonData({ address })
-
-  const handleNotFoundCongressperson = React.useCallback(
-    (notFoundReason: string) => {
-      let message = GENERIC_ERROR_TITLE
-
-      if (notFoundReason === 'MISSING_FROM_DTSI') {
-        message = 'No available representative'
-      }
-
-      form.setError('address', {
-        type: 'manual',
-        message,
-      })
-    },
-    [form],
-  )
 
   React.useEffect(() => {
     if (!liveCongressPersonData) {
@@ -75,66 +72,66 @@ export function Address({ user, onFindCongressperson, congressPersonData, gotoTa
 
     const { dtsiPerson } = liveCongressPersonData
     if (!dtsiPerson || 'notFoundReason' in dtsiPerson) {
-      const { notFoundReason } = dtsiPerson
-      return handleNotFoundCongressperson(notFoundReason)
+      form.setError('address', {
+        type: 'manual',
+        message: formatGetDTSIPeopleFromAddressNotFoundReason(dtsiPerson),
+      })
+      return
     }
 
     onFindCongressperson({ ...liveCongressPersonData, dtsiPerson })
-  }, [handleNotFoundCongressperson, liveCongressPersonData, onFindCongressperson])
+  }, [liveCongressPersonData, onFindCongressperson, form])
 
   return (
-    <UserActionFormLayout onBack={() => gotoTab(TabNames.INTRO)}>
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(
-            () => gotoTab(TabNames.SUGGESTED_SCRIPT),
-            trackFormSubmissionSyncErrors(FORM_NAME),
-          )}
-        >
+    <Form {...form}>
+      <form
+        onSubmit={form.handleSubmit(
+          () => goToSection(SectionNames.SUGGESTED_SCRIPT),
+          trackFormSubmissionSyncErrors(FORM_NAME),
+        )}
+      >
+        <UserActionFormLayout onBack={() => goToSection(SectionNames.INTRO)}>
           <UserActionFormLayout.Container>
             <UserActionFormLayout.Heading
               title="Find your representative"
               subtitle="Your address will be used to connect you with your representative. Stand With Crypto will never share your data with any third-parties."
             />
 
-            <div className="pb-64">
-              <FormField
-                control={form.control}
-                name="address"
-                render={({ field: { ref: _ref, ...field } }) => (
-                  <FormItem>
-                    <FormLabel>Address</FormLabel>
-                    <FormControl>
-                      <GooglePlacesSelect
-                        {...field}
-                        value={field.value}
-                        onChange={field.onChange}
-                        placeholder="Your full address"
-                      />
-                    </FormControl>
-                    <FormErrorMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-
-            <UserActionFormLayout.Footer>
-              <SubmitButton
-                isLoading={form.formState.isSubmitting || isLoadingLiveCongressPersonData}
-                disabled={!congressPersonData}
-              />
-
-              <p className="text-sm">
-                Learn more about our{' '}
-                <InternalLink href={urls.privacyPolicy()} className="underline">
-                  privacy policy
-                </InternalLink>
-              </p>
-            </UserActionFormLayout.Footer>
+            <FormField
+              control={form.control}
+              name="address"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Address</FormLabel>
+                  <FormControl>
+                    <GooglePlacesSelect
+                      {...field}
+                      value={field.value}
+                      onChange={field.onChange}
+                      placeholder="Your full address"
+                    />
+                  </FormControl>
+                  <FormErrorMessage />
+                </FormItem>
+              )}
+            />
           </UserActionFormLayout.Container>
-        </form>
-      </Form>
-    </UserActionFormLayout>
+          <UserActionFormLayout.Footer>
+            <SubmitButton
+              isLoading={form.formState.isSubmitting || isLoadingLiveCongressPersonData}
+              disabled={!congressPersonData}
+            />
+
+            <p className="text-sm">
+              Learn more about our{' '}
+              <InternalLink href={urls.privacyPolicy()} tabIndex={-1} className="underline">
+                privacy policy
+              </InternalLink>
+            </p>
+          </UserActionFormLayout.Footer>
+        </UserActionFormLayout>
+      </form>
+    </Form>
   )
 }
 
@@ -147,7 +144,7 @@ function SubmitButton({ isLoading, disabled }: { isLoading: boolean; disabled: b
 }
 
 function useCongresspersonData({ address }: FindRepresentativeCallFormValues) {
-  return useSWR(address ? `useGetDTSIPeopleFromAddress-${address.description}` : null, async () => {
+  return useSWR(address ? `useCongresspersonData-${address.description}` : null, async () => {
     const dtsiPerson = await getDTSIPeopleFromAddress(address.description)
     const civicData = await getGoogleCivicDataFromAddress(address.description)
     const addressSchema = await convertGooglePlaceAutoPredictionToAddressSchema(address)

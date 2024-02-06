@@ -55,6 +55,7 @@ export const dtsiPersonDetailsQueryString = /* GraphQL */ `
         status
         title
       }
+      donationUrl
       firstName
       firstNickname
       gender

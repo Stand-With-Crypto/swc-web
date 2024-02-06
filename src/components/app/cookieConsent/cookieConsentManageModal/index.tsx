@@ -28,7 +28,7 @@ export interface ManageCookiesModalProps {
 }
 
 export default function ManageCookiesModal({ onSubmit }: ManageCookiesModalProps) {
-  const dialogProps = useDialog(false)
+  const dialogProps = useDialog({ analytics: 'Cookie Consent Management' })
   const {
     isMobile,
     Container,

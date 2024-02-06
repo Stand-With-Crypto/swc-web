@@ -1,13 +1,38 @@
 'use client'
 
-import * as React from 'react'
 import * as TabsPrimitive from '@radix-ui/react-tabs'
+import * as React from 'react'
 
+import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
 import { cn } from '@/utils/web/cn'
+import {
+  PrimitiveComponentAnalytics,
+  trackPrimitiveComponentAnalytics,
+} from '@/utils/web/primitiveComponentAnalytics'
 import { tabListStyles, tabTriggerStyles } from './styles'
 
-// TODO add analytics
-const Tabs = TabsPrimitive.Root
+const Tabs = React.forwardRef<
+  React.ElementRef<typeof TabsPrimitive.Root>,
+  TabsPrimitive.TabsProps & PrimitiveComponentAnalytics<string>
+>(({ analytics, onValueChange, ...props }, ref) => {
+  const wrappedOnChangeOpen = React.useCallback(
+    (currentTab: string) => {
+      trackPrimitiveComponentAnalytics(
+        ({ properties }) => {
+          trackClientAnalytic(`Tab Changed`, {
+            ...properties,
+            'Current Tab': currentTab,
+          })
+        },
+        { args: currentTab, analytics },
+      )
+      onValueChange?.(currentTab)
+    },
+    [onValueChange, analytics],
+  )
+  return <TabsPrimitive.Root onValueChange={wrappedOnChangeOpen} ref={ref} {...props} />
+})
+Tabs.displayName = TabsPrimitive.Root.displayName
 
 const TabsList = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.List>,
@@ -40,4 +65,4 @@ const TabsContent = React.forwardRef<
 ))
 TabsContent.displayName = TabsPrimitive.Content.displayName
 
-export { Tabs, TabsList, TabsTrigger, TabsContent }
+export { Tabs, TabsContent, TabsList, TabsTrigger }

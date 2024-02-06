@@ -48,14 +48,30 @@ model Address {
   @@map("address")
 }
 
-// A user can interact with our platform multiple ways. 
-// Sometimes that user will be signing up via coinbase, 
+enum UserInternalStatus {
+  VISIBLE
+  MANUALLY_HIDDEN
+}
+
+enum UserInformationVisibility {
+  ANONYMOUS
+  CRYPTO_INFO_ONLY
+  ALL_INFO
+}
+
+enum CapitolCanaryInstance {
+  STAND_WITH_CRYPTO
+  LEGACY
+}
+
+// A user can interact with our platform multiple ways.
+// Sometimes that user will be signing up via coinbase,
 // sometimes a user will be signing up via a wallet on the website, or multiple wallets
-// sometimes they won't be logged in at all but we'll need to cache a session id for them so that if they log in with a eth address later we can associate their actions with the new address. 
+// sometimes they won't be logged in at all but we'll need to cache a session id for them so that if they log in with a eth address later we can associate their actions with the new address.
 // We'll need to track these different "user markers" with their own respective metadata, and join these related models with a User table to provide a single view of a user
 // A key assumption we're making about how this model will be used:
 
-// A user has a one-to-one relationship with a "primary" crypto address and can potentially have many crypto addresses. 
+// A user has a one-to-one relationship with a "primary" crypto address and can potentially have many crypto addresses.
 // The situation where a user could have a one-to-many relationship with a crypto address is if they create generate an "embedded" crypto wallet, and then sign in with a web3 wallet
 // In this specific instance, we'll allow the user to "merge" these accounts if they can verify they have ownership of the same email used by both accounts
 
@@ -67,26 +83,30 @@ model Address {
 // A user has a one-to-many relationship with a session. A session will only be persisted if a user is not logged in and performs an action on the site. If they are logged in, we will associate the action with thier crypto address.
 // Once we identify a session is associated with a crypto address (the user logs in to the app in the same session after performing an action), we'll want to merge the session and crypto address under the same user. We will maintain the session fk on the action to keep the context that the action was originally linked to a session instead
 model User {
-  id                         String             @id @default(uuid())
-  datetimeUpdated            DateTime           @updatedAt @map("datetime_updated")
-  datetimeCreated            DateTime           @default(now()) @map("datetime_created")
-  fullName                   String             @default("") @map("name")
-  phoneNumber                String             @default("") @map("phone_number")
-  address                    Address?           @relation(fields: [addressId], references: [id])
-  addressId                  String?            @map("address_id")
-  isPubliclyVisible          Boolean            @map("is_publicly_visible")
-  sampleDatabaseIncrement    Int                @default(0) // TODO delete
-  primaryUserEmailAddress    UserEmailAddress?  @relation("asPrimaryUserEmailAddress", fields: [primaryUserEmailAddressId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  primaryUserEmailAddressId  String?            @unique @map("primary_user_email_address_id")
-  primaryUserCryptoAddress   UserCryptoAddress? @relation("asPrimaryUserCryptoAddress", fields: [primaryUserCryptoAddressId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  primaryUserCryptoAddressId String?            @unique @map("primary_user_crypto_address_id")
-  // We'll collect and capture this information in our product analytics tools, but we'll also want to be able to 
+  id                         String                    @id @default(uuid())
+  datetimeUpdated            DateTime                  @updatedAt @map("datetime_updated")
+  datetimeCreated            DateTime                  @default(now()) @map("datetime_created")
+  firstName                  String                    @default("") @map("first_name")
+  lastName                   String                    @default("") @map("last_name")
+  phoneNumber                String                    @default("") @map("phone_number")
+  address                    Address?                  @relation(fields: [addressId], references: [id])
+  addressId                  String?                   @map("address_id")
+  informationVisibility      UserInformationVisibility @map("information_visiblity")
+  primaryUserEmailAddress    UserEmailAddress?         @relation("asPrimaryUserEmailAddress", fields: [primaryUserEmailAddressId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  primaryUserEmailAddressId  String?                   @unique @map("primary_user_email_address_id")
+  primaryUserCryptoAddress   UserCryptoAddress?        @relation("asPrimaryUserCryptoAddress", fields: [primaryUserCryptoAddressId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  primaryUserCryptoAddressId String?                   @unique @map("primary_user_crypto_address_id")
+  hasOptedInToEmails         Boolean                   @map("has_opted_in_to_emails")
+  hasOptedInToSms            Boolean                   @map("has_opted_in_to_sms")
+  hasOptedInToMembership     Boolean                   @map("has_opted_in_to_membership")
+  internalStatus             UserInternalStatus        @default(VISIBLE) @map("internal_status")
+  // We'll collect and capture this information in our product analytics tools, but we'll also want to be able to
   // use this metadata to query our relationship database. This information will only be populated if users
   // opt in to our cookies
-  acquisitionReferer         String             @map("acquisition_referer")
-  acquisitionSource          String             @map("acquisition_source")
-  acquisitionMedium          String             @map("acquisition_medium")
-  acquisitionCampaign        String             @map("acquisition_campaign")
+  acquisitionReferer         String                    @map("acquisition_referer")
+  acquisitionSource          String                    @map("acquisition_source")
+  acquisitionMedium          String                    @map("acquisition_medium")
+  acquisitionCampaign        String                    @map("acquisition_campaign")
 
   // REMINDER: as we add additional foreign keys to users, we'll want to make sure we account for them in our mergeUsers logic
   userCryptoAddresses UserCryptoAddress[] @relation("userCryptoAddresses")
@@ -98,7 +118,11 @@ model User {
   userMergeAlertUserA UserMergeAlert[] @relation("userAMergeAttempt")
   userMergeEvents     UserMergeEvent[]
 
+  capitolCanaryAdvocateId Int? @map("capitol_canary_advocate_id")
+  capitolCanaryInstance  CapitolCanaryInstance? @map("capitol_canary_instance")
+
   @@index([addressId])
+  @@index([internalStatus])
   @@map("user")
 }
 
@@ -146,7 +170,7 @@ model UserSession {
 }
 
 enum UserEmailAddressSource {
-  COINBASE_AUTH
+  VERIFIED_THIRD_PARTY
   THIRDWEB_EMBEDDED_AUTH
   USER_ENTERED
 }
@@ -161,18 +185,14 @@ model UserEmailAddress {
   datetimeUpdated DateTime               @updatedAt @map("datetime_updated")
   datetimeCreated DateTime               @default(now()) @map("datetime_created")
 
-  userActions               UserAction[]
-  asPrimaryUserEmailAddress User?        @relation("asPrimaryUserEmailAddress")
+  userActions                     UserAction[]
+  asPrimaryUserEmailAddress       User?              @relation("asPrimaryUserEmailAddress")
+  embeddedWalletUserCryptoAddress UserCryptoAddress?
 
   @@unique(map: "user_email_address_unique_constraint", [emailAddress, userId])
   @@index([userId])
   @@map("user_email_address")
 }
-
-// enum Web3AddressCustodian {
-//   SELF_CUSTODY
-//   THIRDWEB
-// }
 
 enum SupportedUserCryptoNetwork {
   ETH
@@ -180,21 +200,22 @@ enum SupportedUserCryptoNetwork {
 
 // Using Thirdweb a user can create multiple "accounts", one per wallet. They can also have some that are self-custodied, and some that are being custodied by Thirdweb (email, google login, etc)
 model UserCryptoAddress {
-  id              String                     @id @default(uuid())
-  cryptoNetwork   SupportedUserCryptoNetwork @default(ETH) @map("crypto_network")
-  cryptoAddress   String                     @map("crypto_address")
-  // TODO figure out how to detect this via thirdweb sdk and then add it to the model
-  // initialCustodian Web3AddressCustodian
-  datetimeUpdated DateTime                   @updatedAt @map("datetime_updated")
-  datetimeCreated DateTime                   @default(now()) @map("datetime_created")
-  userId          String                     @unique @map("user_id")
-  user            User                       @relation("userCryptoAddresses", map: "userCryptoAddresses", fields: [userId], references: [id])
+  id                               String                     @id @default(uuid())
+  cryptoNetwork                    SupportedUserCryptoNetwork @default(ETH) @map("crypto_network")
+  cryptoAddress                    String                     @map("crypto_address")
+  datetimeUpdated                  DateTime                   @updatedAt @map("datetime_updated")
+  datetimeCreated                  DateTime                   @default(now()) @map("datetime_created")
+  userId                           String                     @unique @map("user_id")
+  user                             User                       @relation("userCryptoAddresses", map: "userCryptoAddresses", fields: [userId], references: [id])
+  embeddedWalletUserEmailAddressId String?                    @unique @map("embedded_wallet_user_email_address_id")
+  embeddedWalletUserEmailAddress   UserEmailAddress?          @relation(fields: [embeddedWalletUserEmailAddressId], references: [id])
 
   userActions                UserAction[]
   asPrimaryUserCryptoAddress User?        @relation("asPrimaryUserCryptoAddress")
 
   @@unique([cryptoAddress, cryptoNetwork])
   @@index([cryptoAddress])
+  @@index([embeddedWalletUserEmailAddressId])
   @@map("user_crypto_address")
 }
 
@@ -234,7 +255,8 @@ model UserAction {
   userActionOptIn    UserActionOptIn?
 
   @@index([datetimeCreated])
-  @@index([userId, campaignName])
+  @@index([userId, actionType, campaignName])
+  @@index([actionType, campaignName])
   @@index([userCryptoAddressId])
   @@index([userSessionId])
   @@index([nftMintId])
@@ -244,7 +266,6 @@ model UserAction {
 
 enum UserActionOptInType {
   SWC_SIGN_UP_AS_SUBSCRIBER
-  SWC_SIGN_UP_AS_MEMBER
 }
 
 model UserActionOptIn {
@@ -260,8 +281,8 @@ model UserActionEmail {
   id                        String                     @id @default(uuid())
   userAction                UserAction                 @relation(fields: [id], references: [id])
   senderEmail               String                     @map("sender_email")
-  fullName                  String                     @map("full_name")
-  phoneNumber               String                     @map("phone_number")
+  firstName                 String                     @map("first_name")
+  lastName                  String                     @map("last_name")
   address                   Address                    @relation(fields: [addressId], references: [id])
   addressId                 String                     @map("address_id")
   userActionEmailRecipients UserActionEmailRecipient[]
@@ -284,7 +305,6 @@ model UserActionEmailRecipient {
 model UserActionCall {
   id                   String     @id @default(uuid())
   userAction           UserAction @relation(fields: [id], references: [id])
-  // TODO determine if these need to be nullable in the future
   recipientDtsiSlug    String     @map("recipient_dtsi_slug")
   recipientPhoneNumber String     @map("recipient_phone_number")
   address              Address    @relation(fields: [addressId], references: [id])
@@ -317,37 +337,27 @@ enum NFTCurrency {
   ETH
 }
 
-// TODO determine if this actually should be a model or just an enum
-// my gut is that we want to be able to spin up new mints in the future without having to migrate the db
-// if that's the case then we want a freestanding model
-model NFT {
-  id               String      @id @default(uuid())
-  name             String
-  cost             Decimal     @map("cost")
-  costCurrencyCode NFTCurrency @map("cost_currency_code")
-  datetimeUpdated  DateTime    @updatedAt @map("datetime_updated")
-  datetimeCreated  DateTime    @default(now()) @map("datetime_created")
-
-  nftMint NFTMint[]
-  // TODO Web3 info about address/contract/etc/price (img)
-
-  @@index([id])
-  @@map("nft")
+enum NFTMintStatus {
+  REQUESTED
+  CLAIMED
+  FAILED
 }
 
 model NFTMint {
-  id                     String      @id @default(uuid())
-  nftId                  String      @map("nft_id")
-  nft                    NFT         @relation(fields: [nftId], references: [id])
-  datetimeUpdated        DateTime    @updatedAt @map("datetime_updated")
-  datetimeCreated        DateTime    @default(now()) @map("datetime_created")
-  costAtMint             Decimal     @map("cost_at_mint")
-  costAtMintCurrencyCode NFTCurrency @map("cost_at_mint_currency_code")
-  costAtMintUsd          Decimal     @map("cost_at_mint_usd")
+  id                     String        @id @default(uuid())
+  nftSlug                String        @map("nft_slug")
+  contractAddress        String        @map("contract_address")
+  transactionHash        String        @map("transaction_hash")
+  status                 NFTMintStatus @map("status")
+  datetimeUpdated        DateTime      @updatedAt @map("datetime_updated")
+  datetimeCreated        DateTime      @default(now()) @map("datetime_created")
+  costAtMint             Decimal       @map("cost_at_mint")
+  costAtMintCurrencyCode NFTCurrency   @map("cost_at_mint_currency_code")
+  costAtMintUsd          Decimal       @map("cost_at_mint_usd")
 
   userActions UserAction[]
 
   @@index([id])
-  @@index([nftId])
+  @@index([nftSlug])
   @@map("nft_mint")
 }

@@ -21,6 +21,7 @@
   },
   "search.exclude": {
     ".next": true,
+    "./src/bin/localCache": true,
     "**/**.svg": true
   },
   "files.watcherExclude": {},
@@ -34,6 +35,7 @@
   "editor.formatOnSave": true,
   "cSpell.ignorePaths": ["**/*.json"],
   "cSpell.words": [
+    "accum",
     "Actioned",
     "changefreq",
     "clsx",
@@ -46,15 +48,23 @@
     "DTSI",
     "FAIRSHAKE",
     "inngest",
+    "jank",
     "Leaderboard",
+    "nextjs",
     "precheck",
     "pscale",
+    "ratelimit",
+    "ratelimiter",
+    "Retriable",
     "sonner",
+    "standwithcrypto",
     "subpremise",
     "thirdweb",
     "typecheck",
     "undici",
-    "unoptimized"
+    "unoptimized",
+    "hookform",
+    "vaul"
   ],
   "typescript.tsdk": "node_modules/typescript/lib"
 }

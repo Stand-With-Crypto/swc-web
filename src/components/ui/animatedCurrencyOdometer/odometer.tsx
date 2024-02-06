@@ -42,7 +42,12 @@ export function AnimatedCurrencyOdometer({
   }, [numeralArray])
 
   return (
-    <h1 className={styles.odometer}>
+    <h1
+      className={styles.odometer}
+      style={{
+        fontFeatureSettings: `'tnum', 'lnum'`,
+      }}
+    >
       {numeralArray.map((numeralGroup, numeralGroupIndex) => {
         /**
          * numeralGroup can be a single string characther like "$" or "," OR a number like "2" or "395" or "081".

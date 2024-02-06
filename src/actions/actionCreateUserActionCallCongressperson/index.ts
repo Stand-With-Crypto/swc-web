@@ -1,27 +1,41 @@
 'use server'
 import 'server-only'
 
-import * as Sentry from '@sentry/nextjs'
 import {
   UserAndMethodOfMatch,
   getMaybeUserAndMethodOfMatch,
 } from '@/utils/server/getMaybeUserAndMethodOfMatch'
 import { prismaClient } from '@/utils/server/prismaClient'
+import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { getLogger } from '@/utils/shared/logger'
-import { User, UserAction, UserActionType } from '@prisma/client'
-import { subDays } from 'date-fns'
-import { z } from 'zod'
-import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import { UserActionCallCampaignName } from '@/utils/shared/userActionCampaigns'
+import { User, UserAction, UserActionType, UserInformationVisibility } from '@prisma/client'
+import * as Sentry from '@sentry/nextjs'
+import { z } from 'zod'
 
-import { createActionCallCongresspersonInputValidationSchema } from './inputValidationSchema'
+import { getClientUser } from '@/clientModels/clientUser/clientUser'
+import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
 import {
   mapLocalUserToUserDatabaseFields,
   parseLocalUserFromCookies,
 } from '@/utils/server/serverLocalUser'
+import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
+
+import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
+import { zodAddress } from '@/validation/fields/zodAddress'
+import { zodDTSISlug } from '@/validation/fields/zodDTSISlug'
+import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
+import { nativeEnum, object } from 'zod'
+
+const createActionCallCongresspersonInputValidationSchema = object({
+  phoneNumber: zodPhoneNumber.transform(str => str && normalizePhoneNumber(str)),
+  campaignName: nativeEnum(UserActionCallCampaignName),
+  dtsiSlug: zodDTSISlug,
+  address: zodAddress,
+})
 
 export type CreateActionCallCongresspersonInput = z.infer<
   typeof createActionCallCongresspersonInputValidationSchema
@@ -35,7 +49,13 @@ interface SharedDependencies {
 }
 
 const logger = getLogger(`actionCreateUserActionCallCongressperson`)
-export async function actionCreateUserActionCallCongressperson(
+
+export const actionCreateUserActionCallCongressperson = withServerActionMiddleware(
+  'actionCreateUserActionCallCongressperson',
+  _actionCreateUserActionCallCongressperson,
+)
+
+async function _actionCreateUserActionCallCongressperson(
   input: CreateActionCallCongresspersonInput,
 ) {
   logger.info('triggered')
@@ -53,14 +73,16 @@ export async function actionCreateUserActionCallCongressperson(
   const userMatch = await getMaybeUserAndMethodOfMatch({
     include: { primaryUserCryptoAddress: true },
   })
+  await throwIfRateLimited()
+
+  const user = userMatch.user || (await createUser({ localUser, sessionId }))
+
   const peopleAnalytics = getServerPeopleAnalytics({
     localUser,
-    ...userMatch,
+    userId: user.id,
   })
-  const user = await getOrCreateUser(userMatch, { localUser, sessionId, peopleAnalytics })
-
   const analytics = getServerAnalytics({
-    ...userMatch,
+    userId: user.id,
     localUser,
   })
 
@@ -72,11 +94,12 @@ export async function actionCreateUserActionCallCongressperson(
       userId: user.id,
       sharedDependencies: { analytics },
     })
-    return { user, userAction: recentUserAction }
+    return { user: getClientUser(user) }
   }
 
-  const { userAction, updatedUser } = await createActionAndUpdateUser({
+  const { updatedUser } = await createActionAndUpdateUser({
     user,
+    isNewUser: !userMatch.user,
     validatedInput: validatedInput.data,
     userMatch,
     sharedDependencies: { sessionId, analytics, peopleAnalytics },
@@ -84,30 +107,28 @@ export async function actionCreateUserActionCallCongressperson(
 
   // TODO: Mint "Call" NFT
 
-  return { userAction, user: updatedUser }
+  return { user: getClientUser(updatedUser) }
 }
 
-async function getOrCreateUser(
-  userMatch: UserAndMethodOfMatch,
-  sharedDependencies: Pick<SharedDependencies, 'localUser' | 'sessionId' | 'peopleAnalytics'>,
-) {
-  if (userMatch?.user) {
-    logger.info('fetched user')
-    return userMatch.user
-  }
-
+async function createUser(sharedDependencies: Pick<SharedDependencies, 'localUser' | 'sessionId'>) {
   const { localUser, sessionId } = sharedDependencies
   const createdUser = await prismaClient.user.create({
     data: {
-      isPubliclyVisible: false,
+      informationVisibility: UserInformationVisibility.ANONYMOUS,
       userSessions: { create: { id: sessionId } },
+      hasOptedInToEmails: false,
+      hasOptedInToMembership: false,
+      hasOptedInToSms: false,
       ...mapLocalUserToUserDatabaseFields(localUser),
+    },
+    include: {
+      primaryUserCryptoAddress: true,
     },
   })
   logger.info('created user')
 
   if (localUser?.persisted) {
-    sharedDependencies.peopleAnalytics?.setOnce(
+    getServerPeopleAnalytics({ localUser, userId: createdUser.id }).setOnce(
       mapPersistedLocalUserToAnalyticsProperties(localUser.persisted),
     )
   }
@@ -118,15 +139,9 @@ async function getOrCreateUser(
 async function getRecentUserActionByUserId(userId: User['id']) {
   return prismaClient.userAction.findFirst({
     where: {
-      datetimeCreated: {
-        lte: subDays(new Date(), 1),
-      },
       actionType: UserActionType.CALL,
       campaignName: UserActionCallCampaignName.DEFAULT,
       userId: userId,
-    },
-    include: {
-      userActionEmail: true,
     },
   })
 }
@@ -148,6 +163,7 @@ function logSpamActionSubmissions({
     actionType: UserActionType.CALL,
     campaignName: UserActionCallCampaignName.DEFAULT,
     reason: 'Too Many Recent',
+    userState: 'Existing',
     ...convertAddressToAnalyticsProperties(validatedInput.data.address),
   })
   Sentry.captureMessage(
@@ -159,13 +175,15 @@ function logSpamActionSubmissions({
   )
 }
 
-async function createActionAndUpdateUser({
+async function createActionAndUpdateUser<U extends User>({
   user,
   validatedInput,
   userMatch,
   sharedDependencies,
+  isNewUser,
 }: {
-  user: User
+  user: U
+  isNewUser: boolean
   validatedInput: z.infer<typeof createActionCallCongresspersonInputValidationSchema>
   userMatch: UserAndMethodOfMatch
   sharedDependencies: Pick<SharedDependencies, 'sessionId' | 'analytics' | 'peopleAnalytics'>
@@ -207,6 +225,9 @@ async function createActionAndUpdateUser({
         },
       },
     },
+    include: {
+      primaryUserCryptoAddress: true,
+    },
   })
   logger.info('created user action and updated user')
 
@@ -216,6 +237,7 @@ async function createActionAndUpdateUser({
     'Recipient DTSI Slug': validatedInput.dtsiSlug,
     'Recipient Phone Number': validatedInput.phoneNumber,
     ...convertAddressToAnalyticsProperties(validatedInput.address),
+    userState: isNewUser ? 'New' : 'Existing',
   })
   sharedDependencies.peopleAnalytics.set({
     ...convertAddressToAnalyticsProperties(validatedInput.address),

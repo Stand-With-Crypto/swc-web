@@ -5,6 +5,7 @@ import * as React from 'react'
 
 import {
   dialogCloseStyles,
+  dialogContentPaddingStyles,
   dialogContentStyles,
   dialogOverlayStyles,
 } from '@/components/ui/dialog/styles'
@@ -12,17 +13,29 @@ import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/shared
 import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
 import { cn } from '@/utils/web/cn'
 import { X } from 'lucide-react'
+import {
+  PrimitiveComponentAnalytics,
+  trackPrimitiveComponentAnalytics,
+} from '@/utils/web/primitiveComponentAnalytics'
 
-function Dialog({ onOpenChange, ...props }: DialogPrimitive.DialogProps) {
+export type DialogProps = DialogPrimitive.DialogProps & PrimitiveComponentAnalytics<boolean>
+
+function Dialog({ onOpenChange, analytics, ...props }: DialogProps) {
   const wrappedOnChangeOpen = React.useCallback(
     (open: boolean) => {
-      trackClientAnalytic(`Dialog ${open ? 'Opened' : 'Closed'}`, {
-        component: AnalyticComponentType.modal,
-        action: AnalyticActionType.view,
-      })
+      trackPrimitiveComponentAnalytics(
+        ({ properties }) => {
+          trackClientAnalytic(`Dialog ${open ? 'Opened' : 'Closed'}`, {
+            component: AnalyticComponentType.modal,
+            action: AnalyticActionType.view,
+            ...properties,
+          })
+        },
+        { args: open, analytics },
+      )
       onOpenChange?.(open)
     },
-    [onOpenChange],
+    [onOpenChange, analytics],
   )
   return <DialogPrimitive.Root onOpenChange={wrappedOnChangeOpen} {...props} />
 }
@@ -41,15 +54,24 @@ const DialogOverlay = React.forwardRef<
 ))
 DialogOverlay.displayName = DialogPrimitive.Overlay.displayName
 
+interface DialogContentProps
+  extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> {
+  padding?: boolean
+  closeClassName?: string
+}
 const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
->(({ className, children, ...props }, ref) => (
+  DialogContentProps
+>(({ className, children, padding = true, closeClassName = '', ...props }, ref) => (
   <DialogPortal>
     <DialogOverlay />
-    <DialogPrimitive.Content ref={ref} className={cn(dialogContentStyles, className)} {...props}>
+    <DialogPrimitive.Content
+      ref={ref}
+      className={cn(dialogContentStyles, padding && dialogContentPaddingStyles, className)}
+      {...props}
+    >
       {children}
-      <DialogPrimitive.Close className={dialogCloseStyles}>
+      <DialogPrimitive.Close className={cn(dialogCloseStyles, closeClassName)} tabIndex={-1}>
         <X className="h-4 w-4" />
         <span className="sr-only">Close</span>
       </DialogPrimitive.Close>

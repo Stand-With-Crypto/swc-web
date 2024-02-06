@@ -4,13 +4,43 @@ import * as React from 'react'
 import { Drawer as DrawerPrimitive } from 'vaul'
 
 import { cn } from '@/utils/web/cn'
+import {
+  PrimitiveComponentAnalytics,
+  trackPrimitiveComponentAnalytics,
+} from '@/utils/web/primitiveComponentAnalytics'
+import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
+import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
 
 const Drawer = ({
   shouldScaleBackground = true,
+  analytics,
+  onOpenChange,
   ...props
-}: React.ComponentProps<typeof DrawerPrimitive.Root>) => (
-  <DrawerPrimitive.Root shouldScaleBackground={shouldScaleBackground} {...props} />
-)
+}: React.ComponentProps<typeof DrawerPrimitive.Root> & PrimitiveComponentAnalytics<boolean>) => {
+  const wrappedOnChangeOpen = React.useCallback(
+    (open: boolean) => {
+      trackPrimitiveComponentAnalytics(
+        ({ properties }) => {
+          trackClientAnalytic(`Dialog ${open ? 'Opened' : 'Closed'}`, {
+            component: AnalyticComponentType.modal,
+            action: AnalyticActionType.view,
+            ...properties,
+          })
+        },
+        { args: open, analytics },
+      )
+      onOpenChange?.(open)
+    },
+    [onOpenChange, analytics],
+  )
+  return (
+    <DrawerPrimitive.Root
+      shouldScaleBackground={shouldScaleBackground}
+      onOpenChange={wrappedOnChangeOpen}
+      {...props}
+    />
+  )
+}
 Drawer.displayName = 'Drawer'
 
 const DrawerTrigger = DrawerPrimitive.Trigger
@@ -31,25 +61,46 @@ const DrawerOverlay = React.forwardRef<
 ))
 DrawerOverlay.displayName = DrawerPrimitive.Overlay.displayName
 
+interface DrawerContentProps
+  extends React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content> {
+  touchableIndicatorClassName?: string
+  direction?: 'top' | 'bottom'
+}
 const DrawerContent = React.forwardRef<
   React.ElementRef<typeof DrawerPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content>
->(({ className, children, ...props }, ref) => (
-  <DrawerPortal>
-    <DrawerOverlay />
-    <DrawerPrimitive.Content
-      ref={ref}
-      className={cn(
-        'fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-[10px] border bg-background',
-        className,
-      )}
-      {...props}
-    >
-      <div className="mx-auto mt-4 h-2 w-[100px] rounded-full bg-muted" />
-      {children}
-    </DrawerPrimitive.Content>
-  </DrawerPortal>
-))
+  DrawerContentProps
+>(
+  (
+    { className, children, touchableIndicatorClassName = '', direction = 'bottom', ...props },
+    ref,
+  ) => (
+    <DrawerPortal>
+      <DrawerOverlay />
+      <DrawerPrimitive.Content
+        ref={ref}
+        className={cn(
+          'fixed inset-x-0 z-50 flex h-auto flex-col border bg-background',
+          direction === 'top' ? 'top-0 mb-24 rounded-b-[10px]' : 'bottom-0 mt-24 rounded-t-[10px]',
+          className,
+        )}
+        {...props}
+      >
+        {direction === 'bottom' && (
+          <div
+            className={cn(
+              'mx-auto my-4 h-2 w-[100px] rounded-full bg-muted',
+              touchableIndicatorClassName,
+            )}
+          />
+        )}
+        {children}
+        {direction === 'top' && (
+          <div className="mx-auto mb-4 h-2 w-[100px] rounded-full bg-muted" />
+        )}
+      </DrawerPrimitive.Content>
+    </DrawerPortal>
+  ),
+)
 DrawerContent.displayName = 'DrawerContent'
 
 const DrawerHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (

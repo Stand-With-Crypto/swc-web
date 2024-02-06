@@ -1,9 +1,7 @@
-import { ClientNFT, getClientNFT } from '@/clientModels/clientNFT'
 import { ClientNFTMint, getClientNFTMint } from '@/clientModels/clientNFTMint'
 import { ClientModel, getClientModel } from '@/clientModels/utils'
 import { DTSIPersonForUserActions } from '@/data/dtsi/queries/queryDTSIPeopleBySlugForUserActions'
 import {
-  NFT,
   NFTMint,
   UserAction,
   UserActionCall,
@@ -26,7 +24,7 @@ type ClientUserActionDatabaseQuery = UserAction & {
         userActionEmailRecipients: UserActionEmailRecipient[]
       })
     | null
-  nftMint: (NFTMint & { nft: NFT }) | null
+  nftMint: NFTMint | null
   userActionCall: UserActionCall | null
   userActionDonation: UserActionDonation | null
   userActionOptIn: UserActionOptIn | null
@@ -49,7 +47,7 @@ type ClientUserActionDonation = Pick<UserActionDonation, 'amountCurrencyCode' | 
   amountUsd: number
 }
 type ClientUserActionNFTMint = {
-  nftMint: ClientNFTMint & { nft: ClientNFT }
+  nftMint: ClientNFTMint
   actionType: typeof UserActionType.NFT_MINT
 }
 type ClientUserActionOptIn = Pick<UserActionOptIn, 'optInType'> & {
@@ -62,15 +60,16 @@ type ClientUserActionTweet = { actionType: typeof UserActionType.TWEET }
 At the database schema level we can't enforce that a single action only has one "type" FK, but at the client level we can and should
 */
 export type ClientUserAction = ClientModel<
-  Pick<UserAction, 'id' | 'datetimeCreated' | 'actionType'> & {
-    nftMint: (ClientNFTMint & { nft: ClientNFT }) | null
+  Pick<UserAction, 'id' | 'actionType'> & {
+    datetimeCreated: string
+    nftMint: ClientNFTMint | null
   } & (
       | ClientUserActionTweet
       | ClientUserActionOptIn
       | ClientUserActionEmail
       | ClientUserActionCall
       | ClientUserActionDonation
-      | ClientUserActionNFTMint // TODO determine if we want to support NFTMints being offered alongside other actions (so you could have this type alongside others)
+      | ClientUserActionNFTMint
     )
 >
 
@@ -94,17 +93,15 @@ export const getClientUserAction = ({
   record: ClientUserActionDatabaseQuery
   dtsiPeople: DTSIPersonForUserActions[]
 }): ClientUserAction => {
-  // TODO determine how we want to "gracefully fail" if a DTSI slug doesn't exist
   const peopleBySlug = _.keyBy(dtsiPeople, x => x.slug)
   const { id, datetimeCreated, actionType, nftMint } = record
   const sharedProps = {
     id,
-    datetimeCreated,
+    datetimeCreated: datetimeCreated.toISOString(),
     actionType,
     nftMint: nftMint
       ? {
           ...getClientNFTMint(nftMint),
-          nft: getClientNFT(nftMint.nft),
         }
       : null,
   }

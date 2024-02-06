@@ -1,9 +1,10 @@
-import { ClientUser } from '@/clientModels/clientUser/clientUser'
-import { SensitiveDataClientUser } from '@/clientModels/clientUser/sensitiveDataClientUser'
+import { ClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
+import { SensitiveDataClientUserWithENSData } from '@/clientModels/clientUser/sensitiveDataClientUser'
 import { NextImage } from '@/components/ui/image'
 import { ImageAvatarProps } from '@/components/ui/imageAvatar'
 
 import { deterministicArraySelection } from '@/utils/shared/deterministicArraySelection'
+import { UserInformationVisibility } from '@prisma/client'
 
 const genericImages = [
   '/userAvatars/blue.svg',
@@ -15,7 +16,7 @@ const genericImages = [
 ]
 
 const Container = ({ children }: { children: React.ReactNode }) => (
-  <div className="overflow-hidden rounded-full">{children}</div>
+  <div className="inline-block overflow-hidden rounded-full">{children}</div>
 )
 
 function DefaultUserAvatar({ size, ...props }: Pick<ImageAvatarProps, 'size' | 'className'>) {
@@ -32,20 +33,19 @@ function DefaultUserAvatar({ size, ...props }: Pick<ImageAvatarProps, 'size' | '
   )
 }
 
-// TODO support ENS images and person name
 export const UserAvatar: React.FC<
   {
-    user: Pick<ClientUser, 'isPubliclyVisible' | 'primaryUserCryptoAddress'>
+    user: Pick<ClientUserWithENSData, 'informationVisibility' | 'primaryUserCryptoAddress'>
   } & Pick<ImageAvatarProps, 'size' | 'className'>
 > = ({ user, size, ...props }) => {
-  if (!user.isPubliclyVisible || !user.primaryUserCryptoAddress) {
+  if (
+    user.informationVisibility === UserInformationVisibility.ANONYMOUS ||
+    !user.primaryUserCryptoAddress
+  ) {
     return <DefaultUserAvatar {...props} size={size} />
   }
 
-  // TODO: Remove this type cast once we have ENS data in the client
-  // This was made to avoid stepping on the toes of the PR that adds ENS data to the client
-  // see https://github.com/Stand-With-Crypto/swc-web/pull/80
-  const primaryUserCryptoAddress = user.primaryUserCryptoAddress as any
+  const primaryUserCryptoAddress = user.primaryUserCryptoAddress
   if (primaryUserCryptoAddress.ensAvatarUrl) {
     return (
       <Container>
@@ -54,7 +54,7 @@ export const UserAvatar: React.FC<
           {...props}
           src={primaryUserCryptoAddress.ensAvatarUrl}
           alt={`ENS avatar for ${
-            primaryUserCryptoAddress.ensName || primaryUserCryptoAddress.address
+            primaryUserCryptoAddress.ensName || primaryUserCryptoAddress.cryptoAddress
           }`}
           style={{
             width: size,
@@ -64,7 +64,6 @@ export const UserAvatar: React.FC<
       </Container>
     )
   }
-
   return (
     <Container>
       <NextImage
@@ -84,8 +83,8 @@ export const UserAvatar: React.FC<
 export const SensitiveDataUserAvatar: React.FC<
   {
     user: Pick<
-      SensitiveDataClientUser,
-      'fullName' | 'isPubliclyVisible' | 'primaryUserCryptoAddress'
+      SensitiveDataClientUserWithENSData,
+      'firstName' | 'lastName' | 'primaryUserCryptoAddress'
     >
   } & Pick<ImageAvatarProps, 'size' | 'className'>
 > = ({ user, size, ...props }) => {
@@ -93,10 +92,7 @@ export const SensitiveDataUserAvatar: React.FC<
     return <DefaultUserAvatar {...props} size={size} />
   }
 
-  // TODO: Remove this type cast once we have ENS data in the client
-  // This was made to avoid stepping on the toes of the PR that adds ENS data to the client
-  // see https://github.com/Stand-With-Crypto/swc-web/pull/80
-  const primaryUserCryptoAddress = user.primaryUserCryptoAddress as any
+  const primaryUserCryptoAddress = user.primaryUserCryptoAddress
   if (primaryUserCryptoAddress.ensAvatarUrl) {
     return (
       <Container>
@@ -105,7 +101,7 @@ export const SensitiveDataUserAvatar: React.FC<
           {...props}
           src={primaryUserCryptoAddress.ensAvatarUrl}
           alt={`ENS avatar for ${
-            primaryUserCryptoAddress.ensName || primaryUserCryptoAddress.address
+            primaryUserCryptoAddress.ensName || primaryUserCryptoAddress.cryptoAddress
           }`}
           style={{
             width: size,

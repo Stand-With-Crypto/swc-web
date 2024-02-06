@@ -1,13 +1,12 @@
 import { ArrowLeft } from 'lucide-react'
 import React from 'react'
 
+import { DtsiCongresspersonDisplay } from '@/components/app/dtsiCongresspersonDisplay'
 import { dialogButtonStyles } from '@/components/ui/dialog/styles'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { ScrollArea } from '@/components/ui/scroll-area'
-import { cn } from '@/utils/web/cn'
-import { DtsiCongresspersonDisplay } from '@/components/app/dtsiCongresspersonDisplay'
 import { UseGetDTSIPeopleFromAddressResponse } from '@/hooks/useGetDTSIPeopleFromAddress'
+import { cn } from '@/utils/web/cn'
 
 interface UserActionFormLayoutProps extends React.PropsWithChildren {
   onBack?: () => void
@@ -18,7 +17,7 @@ export function UserActionFormLayout({ onBack, children }: UserActionFormLayoutP
     <>
       {onBack && <GoBackButton onClick={onBack} />}
 
-      <div className="min-h-64 p-6 md:px-12">{children}</div>
+      <div className="flex min-h-[400px] flex-col">{children}</div>
     </>
   )
 }
@@ -36,9 +35,9 @@ UserActionFormLayout.Heading = Heading
 
 function Container({ children }: React.PropsWithChildren) {
   return (
-    <ScrollArea>
+    <div className="flex flex-grow">
       <div className="space-y-4 md:space-y-8">{children}</div>
-    </ScrollArea>
+    </div>
   )
 }
 UserActionFormLayout.Container = Container
@@ -58,7 +57,7 @@ function CongresspersonDisplayFooter({
   congressperson?: UseGetDTSIPeopleFromAddressResponse
 }>) {
   return (
-    <div className="flex w-full items-center justify-between border-t p-6 pt-3 md:px-12">
+    <div className="flex w-full flex-col gap-4 border-t p-6 pt-3 md:flex-row md:items-center md:justify-between md:px-12">
       <DtsiCongresspersonDisplay congressperson={congressperson} />
       {children}
     </div>

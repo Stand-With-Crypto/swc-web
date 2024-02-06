@@ -15,6 +15,7 @@ module.exports = {
     tsconfigRootDir: __dirname,
   },
   rules: {
+    eqeqeq: ['error', 'always'],
     'formatjs/enforce-description': ['error', 'literal'],
     'formatjs/no-offset': 'error',
     'formatjs/enforce-default-message': ['error', 'literal'],
@@ -36,5 +37,11 @@ module.exports = {
     ],
     '@typescript-eslint/no-namespace': 'off',
     'no-relative-import-paths/no-relative-import-paths': ['error', { allowSameFolder: true }],
+    'react-hooks/exhaustive-deps': [
+      'warn',
+      {
+        additionalHooks: 'useLoadingCallback',
+      },
+    ],
   },
 }

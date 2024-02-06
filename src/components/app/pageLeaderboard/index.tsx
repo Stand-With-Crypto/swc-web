@@ -1,20 +1,20 @@
+import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
+import { DynamicRecentActivity } from '@/components/app/pageLeaderboard/dynamicRecentActivity'
+import { getDataForPageLeaderboard } from '@/components/app/pageLeaderboard/getData'
 import { RecentActivityRow } from '@/components/app/recentActivityRow/recentActivityRow'
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/recentActivityAndLeaderboard/recentActivityAndLeaderboardTabs'
 import { SumDonationsByUserRow } from '@/components/app/sumDonationsByUserRow/sumDonationsByUserRow'
-import { InternalLink } from '@/components/ui/link'
+import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { PaginationLinks } from '@/components/ui/paginationLinks'
 import { tabListStyles, tabTriggerStyles } from '@/components/ui/tabs/styles'
+import { SupportedLocale } from '@/intl/locales'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
-import { SupportedLocale } from '@/intl/locales'
-import { getDataForPageLeaderboard } from '@/components/app/pageLeaderboard/getData'
+import { PAGE_LEADERBOARD_TOTAL_PAGES } from './constants'
 
-// TODO determine if we need to dynamically generate this or if we're comfortable just supporting a hardcoded amount
-export const PAGE_LEADERBOARD_TOTAL_PAGES = process.env.SPEED_UP_LOCAL_BUILDS ? 1 : 10
-export const PAGE_LEADERBOARD_TITLE = 'Find out where politicians stand on crypto'
-export const PAGE_LEADERBOARD_DESCRIPTION = `Crypto drives American innovation. Keeping crypto in America means securing 4 million jobs over the next 7 years to increase economic mobility. Discover the politicians fighting to keep crypto in America.`
+export const PAGE_LEADERBOARD_TITLE = 'Our community'
+export const PAGE_LEADERBOARD_DESCRIPTION = `See how our community is taking a stand to safeguard the future of crypto in America.`
 
 export function PageLeaderboard({
   tab,
@@ -32,8 +32,8 @@ export function PageLeaderboard({
   const urls = getIntlUrls(locale)
   return (
     <div className="container space-y-7">
-      <PageTitle as="h3">{PAGE_LEADERBOARD_TITLE}</PageTitle>
-      <PageSubTitle as="h4">{PAGE_LEADERBOARD_DESCRIPTION}</PageSubTitle>
+      <PageTitle>{PAGE_LEADERBOARD_TITLE}</PageTitle>
+      <PageSubTitle>{PAGE_LEADERBOARD_DESCRIPTION}</PageSubTitle>
       <div className="text-center">
         <div className={cn(tabListStyles, 'mx-auto')}>
           <InternalLink
@@ -59,18 +59,28 @@ export function PageLeaderboard({
         </div>
       </div>
       <div className="mx-auto w-full max-w-2xl space-y-7">
-        {tab === RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY && (
-          <>
-            <div className="mt-2 h-7" />
-            {actions.map(action => (
-              <RecentActivityRow locale={locale} action={action} key={action.id} />
-            ))}
-          </>
-        )}
+        {tab === RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY ? (
+          pageNum === 1 ? (
+            <DynamicRecentActivity actions={actions} />
+          ) : (
+            <>
+              <div className="mt-2 h-7" />
+              {actions.map(action => (
+                <RecentActivityRow locale={locale} action={action} key={action.id} />
+              ))}
+            </>
+          )
+        ) : null}
         {tab === RecentActivityAndLeaderboardTabs.LEADERBOARD && (
           <>
             <p className="mt-2 h-7 text-center text-xs text-gray-500">
-              Donations are from FairShake and Stand With Crypto
+              Donations to{' '}
+              <ExternalLink
+                href={'https://www.axios.com/2023/12/18/crypto-super-pac-fairshake-2024-elections'}
+              >
+                Fairshake
+              </ExternalLink>
+              , a pro-crypto Super PAC, are not included on the leaderboard.
             </p>
             {sumDonationsByUser.map((donor, index) => (
               <SumDonationsByUserRow

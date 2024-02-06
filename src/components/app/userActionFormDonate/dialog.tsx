@@ -15,11 +15,14 @@ export function UserActionFormDonateDialog({
   children: React.ReactNode
   defaultOpen?: boolean
 }) {
-  const dialogProps = useDialog(defaultOpen)
+  const dialogProps = useDialog({
+    initialOpen: defaultOpen,
+    analytics: 'User Action Form Donate',
+  })
   return (
     <Dialog {...dialogProps}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="max-w-3xl p-0">
+      <DialogContent className="max-w-3xl">
         <Suspense fallback={<Skeleton className="h-80 w-full" />}>
           <LazyUserActionFormDonate
             {...formProps}

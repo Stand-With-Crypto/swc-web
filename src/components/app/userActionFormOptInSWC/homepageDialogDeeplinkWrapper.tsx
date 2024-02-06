@@ -2,7 +2,7 @@
 
 import { UserActionFormOptInSWC } from '@/components/app/userActionFormOptInSWC'
 import { UserActionFormOptInSWCSkeleton } from '@/components/app/userActionFormOptInSWC/skeleton'
-import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen/userActionFormSuccessScreen'
+import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useLocale } from '@/hooks/useLocale'
 import { getIntlUrls } from '@/utils/shared/urls'
@@ -23,6 +23,6 @@ export function UserActionFormOptInSWCDeeplinkWrapper() {
       onSuccess={() => setState('success')}
     />
   ) : (
-    <UserActionFormSuccessScreen />
+    <UserActionFormSuccessScreen onClose={() => router.replace(urls.home())} />
   )
 }

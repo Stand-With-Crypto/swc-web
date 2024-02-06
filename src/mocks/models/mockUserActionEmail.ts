@@ -1,13 +1,19 @@
 import { fakerFields } from '@/mocks/fakerUtils'
 import { faker } from '@faker-js/faker'
-import { UserActionEmail } from '@prisma/client'
+import { Prisma, UserActionEmail } from '@prisma/client'
+
+export function mockCreateUserActionEmailInput() {
+  return {
+    senderEmail: faker.internet.email(),
+    firstName: faker.person.firstName(),
+    lastName: faker.person.lastName(),
+  } satisfies Omit<Prisma.UserActionEmailCreateInput, 'address' | 'addressId'>
+}
 
 export function mockUserActionEmail(): UserActionEmail {
   return {
+    ...mockCreateUserActionEmailInput(),
     id: fakerFields.id(),
-    senderEmail: faker.internet.email(),
-    fullName: faker.person.fullName(),
-    phoneNumber: fakerFields.phoneNumber(),
     addressId: fakerFields.id(),
   }
 }

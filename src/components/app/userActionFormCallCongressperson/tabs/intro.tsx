@@ -1,17 +1,24 @@
+'use client'
 import { Check } from 'lucide-react'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { Button } from '@/components/ui/button'
-import { UseTabsReturn } from '@/hooks/useTabs'
+import { UseSectionsReturn } from '@/hooks/useSections'
 
-import { TabNames } from '@/components/app/userActionFormCallCongressperson/userActionFormCallCongressperson.types'
+import { SectionNames } from '@/components/app/userActionFormCallCongressperson/constants'
 
 import { UserActionFormLayout } from '@/components/app/userActionFormCommon/layout'
 
-export function Intro({ gotoTab }: UseTabsReturn<TabNames>) {
+export function Intro({ goToSection: gotoTab }: UseSectionsReturn<SectionNames>) {
+  const ref = React.useRef<HTMLButtonElement>(null)
+  useEffect(() => {
+    ref.current?.focus()
+  }, [ref])
   return (
     <IntroStaticContent>
-      <Button onClick={() => gotoTab(TabNames.ADDRESS)}>Continue</Button>
+      <Button ref={ref} onClick={() => gotoTab(SectionNames.ADDRESS)}>
+        Continue
+      </Button>
     </IntroStaticContent>
   )
 }
@@ -37,8 +44,8 @@ export function IntroStaticContent({ children }: React.PropsWithChildren) {
             </ChecklistItem>
           </ul>
         </div>
-        <UserActionFormLayout.Footer>{children}</UserActionFormLayout.Footer>
       </UserActionFormLayout.Container>
+      <UserActionFormLayout.Footer>{children}</UserActionFormLayout.Footer>
     </UserActionFormLayout>
   )
 }

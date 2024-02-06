@@ -2,8 +2,10 @@
 import { actionCreateUserActionEmailCongressperson } from '@/actions/actionCreateUserActionEmailCongressperson'
 import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
 import { DTSICongresspersonAssociatedWithFormAddress } from '@/components/app/dtsiCongresspersonAssociatedWithFormAddress'
+import { ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON } from '@/components/app/userActionFormEmailCongressperson/constants'
 import { getDefaultText } from '@/components/app/userActionFormEmailCongressperson/getDefaultText'
 import { Button } from '@/components/ui/button'
+import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import {
   Form,
   FormControl,
@@ -20,27 +22,27 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Textarea } from '@/components/ui/textarea'
-import { useLocale } from '@/hooks/useLocale'
+import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
-import { getIntlUrls } from '@/utils/shared/urls'
 import { UserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns'
+import { cn } from '@/utils/web/cn'
 import {
   GenericErrorFormValues,
   trackFormSubmissionSyncErrors,
   triggerServerActionForForm,
 } from '@/utils/web/formUtils'
 import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
+import { identifyUserOnClient } from '@/utils/web/identifyUser'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
 import { zodUserActionFormEmailCongresspersonFields } from '@/validation/forms/zodUserActionFormEmailCongressperson'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { UserActionType } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { useRouter } from 'next/navigation'
-import { useMemo } from 'react'
+import React, { useMemo } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-const FORM_NAME = 'User Action Form Email Congressperson'
 type FormValues = z.infer<typeof zodUserActionFormEmailCongresspersonFields> &
   GenericErrorFormValues
 
@@ -50,13 +52,13 @@ const getDefaultValues = ({
 }: {
   user: GetUserFullProfileInfoResponse['user']
   dtsiSlug: string | undefined
-}) => {
+}): Partial<FormValues> => {
   if (user) {
     return {
       campaignName: UserActionEmailCampaignName.DEFAULT,
-      fullName: user.fullName,
-      email: user.primaryUserEmailAddress?.address || '',
-      phoneNumber: user.phoneNumber,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      emailAddress: user.primaryUserEmailAddress?.emailAddress || '',
       message: getDefaultText(),
       address: user.address
         ? {
@@ -68,9 +70,9 @@ const getDefaultValues = ({
   }
   return {
     campaignName: UserActionEmailCampaignName.DEFAULT,
-    fullName: '',
-    email: '',
-    phoneNumber: '',
+    firstName: '',
+    lastName: '',
+    emailAddress: '',
     message: getDefaultText(),
     address: undefined,
     dtsiSlug,
@@ -86,13 +88,15 @@ export function UserActionFormEmailCongressperson({
   onSuccess: () => void
 }) {
   const router = useRouter()
-  const locale = useLocale()
-  const urls = getIntlUrls(locale)
+  const urls = useIntlUrls()
   const defaultValues = useMemo(() => getDefaultValues({ user, dtsiSlug: undefined }), [user])
   const form = useForm<FormValues>({
     resolver: zodResolver(zodUserActionFormEmailCongresspersonFields),
     defaultValues,
   })
+  React.useEffect(() => {
+    form.setFocus('firstName')
+  }, [form])
   return (
     <Form {...form}>
       <form
@@ -110,7 +114,7 @@ export function UserActionFormEmailCongressperson({
           const result = await triggerServerActionForForm(
             {
               form,
-              formName: FORM_NAME,
+              formName: ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON,
               analyticsProps: {
                 ...(address ? convertAddressToAnalyticsProperties(address) : {}),
                 'Campaign Name': values.campaignName,
@@ -118,17 +122,25 @@ export function UserActionFormEmailCongressperson({
                 'DTSI Slug': values.dtsiSlug,
               },
             },
-            () => actionCreateUserActionEmailCongressperson({ ...values, address }),
+            () =>
+              actionCreateUserActionEmailCongressperson({ ...values, address }).then(
+                actionResult => {
+                  if (actionResult.user) {
+                    identifyUserOnClient(actionResult.user)
+                  }
+                  return actionResult
+                },
+              ),
           )
           if (result.status === 'success') {
             router.refresh()
             onSuccess()
           }
-        }, trackFormSubmissionSyncErrors(FORM_NAME))}
+        }, trackFormSubmissionSyncErrors(ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON))}
         className="flex max-h-dvh flex-col"
       >
         <ScrollArea>
-          <div className="space-y-4 p-6 md:space-y-8 md:px-12">
+          <div className={cn(dialogContentPaddingStyles, 'space-y-4 md:space-y-8')}>
             <PageTitle size="sm" className="mb-3">
               Email your congressperson
             </PageTitle>
@@ -139,12 +151,12 @@ export function UserActionFormEmailCongressperson({
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <FormField
                 control={form.control}
-                name="fullName"
+                name="firstName"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Name</FormLabel>
+                    <FormLabel>First name</FormLabel>
                     <FormControl>
-                      <Input placeholder="Your name" {...field} />
+                      <Input placeholder="Your first name" {...field} />
                     </FormControl>
                     <FormErrorMessage />
                   </FormItem>
@@ -152,7 +164,20 @@ export function UserActionFormEmailCongressperson({
               />
               <FormField
                 control={form.control}
-                name="email"
+                name="lastName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Last name</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Your last name" {...field} />
+                    </FormControl>
+                    <FormErrorMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="emailAddress"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Email</FormLabel>
@@ -165,21 +190,8 @@ export function UserActionFormEmailCongressperson({
               />
               <FormField
                 control={form.control}
-                name="phoneNumber"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Phone number</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Your phone number" {...field} />
-                    </FormControl>
-                    <FormErrorMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
                 name="address"
-                render={({ field: { ref: _ref, ...field } }) => (
+                render={({ field }) => (
                   <FormItem>
                     <FormLabel>Address</FormLabel>
                     <FormControl>
@@ -218,8 +230,14 @@ export function UserActionFormEmailCongressperson({
               <p className="text-xs text-fontcolor-muted">
                 By submitting, I understand that Stand With Crypto and its vendors may collect and
                 use my Personal Information. To learn more, visit the Stand With Crypto Alliance{' '}
-                <InternalLink href={urls.privacyPolicy()}>Privacy Policy</InternalLink> and{' '}
-                <ExternalLink href={'https://www.quorum.us/static/Privacy-Policy.pdf'}>
+                <InternalLink tabIndex={-1} href={urls.privacyPolicy()}>
+                  Privacy Policy
+                </InternalLink>{' '}
+                and{' '}
+                <ExternalLink
+                  tabIndex={-1}
+                  href={'https://www.quorum.us/static/Privacy-Policy.pdf'}
+                >
                   Quorum Privacy Policy
                 </ExternalLink>
                 .

@@ -19,12 +19,17 @@ Sentry.init({
     new Sentry.Integrations.Prisma({ client: prismaClient }),
   ],
   tracesSampleRate: NEXT_PUBLIC_ENVIRONMENT === 'production' ? 0.001 : 1.0,
+  normalizeDepth: 10,
   // Setting this option to true will print useful information to the console while you're setting up Sentry.
   debug: false,
   beforeSend: (event, hint) => {
     if (NEXT_PUBLIC_ENVIRONMENT === 'local') {
-      console.error(`Sentry`, hint?.originalException || hint?.syntheticException)
-      if (toBool(process.env.SUPPRESS_SENTRY_ERRORS_ON_LOCAL) || !dsn) {
+      const shouldSuppress = toBool(process.env.SUPPRESS_SENTRY_ERRORS_ON_LOCAL) || !dsn
+      console.error(
+        `${shouldSuppress ? 'Suppressed ' : ''}Sentry`,
+        hint?.originalException || hint?.syntheticException,
+      )
+      if (shouldSuppress) {
         return null
       }
     }

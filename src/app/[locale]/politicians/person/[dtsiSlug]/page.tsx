@@ -11,7 +11,7 @@ import {
   convertDTSIStanceScoreToLetterGrade,
 } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
+import { toBool } from '@/utils/shared/toBool'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { cache } from 'react'
@@ -64,7 +64,7 @@ export async function generateStaticParams() {
   const slugs = await queryDTSIAllPeopleSlugs().then(x =>
     x.people.map(({ slug: dtsiSlug }) => ({ dtsiSlug })),
   )
-  if (NEXT_PUBLIC_ENVIRONMENT === 'local' && process.env.SPEED_UP_LOCAL_BUILDS) {
+  if (toBool(process.env.MINIMIZE_PAGE_PRE_GENERATION)) {
     return slugs.slice(0, 2)
   }
   return slugs

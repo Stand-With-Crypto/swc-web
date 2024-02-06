@@ -28,7 +28,7 @@ export default async function Layout({
         href={urls.home()}
         className={cn(dialogOverlayStyles, 'cursor-default')}
       />
-      <div className={cn(dialogContentStyles, 'max-w-3xl p-0')}>
+      <div className={cn(dialogContentStyles, 'max-w-3xl')}>
         {children}
         <InternalLink className={dialogCloseStyles} replace href={urls.home()}>
           <X className="h-4 w-4" />
