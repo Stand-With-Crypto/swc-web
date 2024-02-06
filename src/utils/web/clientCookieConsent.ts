@@ -6,7 +6,7 @@ import {
 } from '@/utils/shared/cookieConsent'
 import Cookies from 'js-cookie'
 
-export let mutableClientCookieConsent: CookieConsentPermissions | null | undefined = null
+export let mutableClientCookieConsent: CookieConsentPermissions | null | undefined = undefined
 export function setClientCookieConsent(val: CookieConsentPermissions | null) {
   mutableClientCookieConsent = val
 }
