@@ -1,5 +1,3 @@
-import { SupportedLocale } from '@/intl/locales'
-
-export function UserActionFormVoterRegistrationNftSkeleton(_props: { locale: SupportedLocale }) {
+export function UserActionFormVoterRegistrationNftSkeleton() {
   return <div>TODO</div>
 }
