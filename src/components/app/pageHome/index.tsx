@@ -36,7 +36,7 @@ export function PageHome({
   const groupedDTSIHomepagePeople = groupAndSortDTSIPeopleByCryptoStance(dtsiHomepagePeople.people)
   return (
     <>
-      <section className="grid-fl mb-6 grid grid-cols-1 items-center gap-4 lg:container lg:grid-cols-2">
+      <section className="grid-fl mb-6 grid grid-cols-1 items-center gap-4 lg:container lg:grid-cols-2 lg:gap-8">
         <div className="lg:order-0 container order-1 space-y-6 text-center lg:px-0 lg:text-left">
           <PageTitle className={'text-left'} withoutBalancer>
             If you care about crypto, it's time to prove it
