@@ -24,7 +24,7 @@ export default function UserActionOptInSWCDeepLink() {
         data?.performedUserActionTypes.includes(UserActionType.OPT_IN)
       }
       onClose={() => {
-        router.push(urls.home())
+        router.replace(urls.home())
       }}
     />
   )
