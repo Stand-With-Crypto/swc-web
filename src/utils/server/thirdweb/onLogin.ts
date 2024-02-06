@@ -232,7 +232,7 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
   })
 
   if (existingUser !== null) {
-    await mintPastActions(existingUser.id, userCryptoAddress)
+    await mintPastActions(existingUser.id, userCryptoAddress, localUser)
   }
 
   trackUserLogin({

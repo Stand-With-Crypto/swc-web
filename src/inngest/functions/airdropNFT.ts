@@ -54,7 +54,7 @@ export const airdropNFTWithInngest = inngest.createFunction(
 
     const status = mintStatus! as ThirdwebTransactionStatus
     await step.run('update-mintNFT-Status', async () => {
-      await updateMintNFTStatus(
+      return await updateMintNFTStatus(
         payload.nftMintId,
         THIRDWEB_TRANSACTION_STATUS_TO_NFT_MINT_STATUS[status],
         transactionHash,

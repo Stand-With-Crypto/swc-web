@@ -8,6 +8,7 @@ import { NFTCurrency, NFTMintStatus, UserActionOptInType, UserActionType } from 
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
 import { NFT_CONTRACT_ADDRESS } from '@/utils/server/nft/contractAddress'
 import { NFTSlug } from '@/utils/shared/nft'
+import { Decimal } from '@prisma/client/runtime/library'
 
 const LOCAL_USER_CRYPTO_ADDRESS = requiredEnv(
   process.env.LOCAL_USER_CRYPTO_ADDRESS,
@@ -32,7 +33,7 @@ async function smokeTestAirdropNFTWithInngest() {
           costAtMint: 0.0,
           contractAddress: NFT_CONTRACT_ADDRESS[NFTSlug.SWC_SHIELD],
           costAtMintCurrencyCode: NFTCurrency.ETH,
-          costAtMintUsd: '0',
+          costAtMintUsd: new Decimal(0),
         },
       },
       actionType: UserActionType.OPT_IN,

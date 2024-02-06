@@ -57,7 +57,7 @@ export async function claimNFT(userAction: UserAction, userCryptoAddress: UserCr
     contractAddress: NFT_CONTRACT_ADDRESS[nftSlug],
   }
 
-  await inngest.send({
+  return inngest.send({
     name: AIRDROP_NFT_INNGEST_EVENT_NAME,
     data: payload,
   })
