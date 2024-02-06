@@ -1,18 +1,22 @@
 import { SectionNames } from '@/components/app/userActionFormVoterRegistrationNft/constants'
 import { UserActionFormVoterRegistrationNftLayout } from '@/components/app/userActionFormVoterRegistrationNft/sections/layout'
 import { Button } from '@/components/ui/button'
+import { ExternalLink } from '@/components/ui/link'
 import { UseSectionsReturn } from '@/hooks/useSections'
+import { ArrowUpRight } from 'lucide-react'
 
 const MESSAGES = {
   register: {
     title: 'Register to vote and get a free "I Registered" NFT',
     subtitle: 'Register now to be ready to vote in your state this year.',
     step2: 'Go and register to vote',
+    step2Cta: 'Register',
   },
   checkRegistration: {
     title: 'Check your registration and get a free "I Registered" NFT',
     subtitle: 'Check your voter registration in your state this year. ',
     step2: 'Check voter registration',
+    step2Cta: 'Check',
   },
 } as const
 
@@ -61,7 +65,14 @@ export function VoterRegistrationForm({
                 fill="#5B616E"
               />
             </svg>
-            {messages.step2}
+            <div className="flex flex-grow flex-row items-center justify-between">
+              {messages.step2}
+              <Button variant="secondary" asChild>
+                <ExternalLink href="https://www.google.com/">
+                  {messages.step2Cta} <ArrowUpRight />
+                </ExternalLink>
+              </Button>
+            </div>
           </li>
           <li className="flex flex-row items-center gap-4 py-4">
             <svg
