@@ -37,5 +37,5 @@ export function UserActionFormVoterRegistrationNft({ onClose }: { onClose: () =>
     }
   }, [currentTab, onClose, onTabNotFound, sectionProps])
 
-  return <div className="min-h-[400px] p-6 text-center">{content}</div>
+  return content
 }
