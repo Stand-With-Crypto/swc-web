@@ -12,7 +12,7 @@ export type ThirdwebTransactionStatus =
   | 'retried'
   | 'cancelled'
 
-export const THIRDWEB_TRANSACTION_STATUSES: ThirdwebTransactionStatus[] = [
+export const THIRDWEB_FINAL_TRANSACTION_STATUSES: ThirdwebTransactionStatus[] = [
   'mined',
   'errored',
   'cancelled',

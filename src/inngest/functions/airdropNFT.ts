@@ -8,7 +8,7 @@ import {
 } from '@/utils/server/nft/updateMintNFTStatus'
 import {
   engineGetMintStatus,
-  THIRDWEB_TRANSACTION_STATUSES,
+  THIRDWEB_FINAL_TRANSACTION_STATUSES,
   ThirdwebTransactionStatus,
 } from '@/utils/server/thirdweb/engineGetMintStatus'
 import { NonRetriableError } from 'inngest'
@@ -38,7 +38,9 @@ export const airdropNFTWithInngest = inngest.createFunction(
     let gasPrice: string | null
     while (
       (attempt <= 5 && mintStatus === null) ||
-      (attempt <= 5 && mintStatus !== null && !THIRDWEB_TRANSACTION_STATUSES.includes(mintStatus))
+      (attempt <= 5 &&
+        mintStatus !== null &&
+        !THIRDWEB_FINAL_TRANSACTION_STATUSES.includes(mintStatus))
     ) {
       await step.sleep(`wait-before-checking-status-${attempt}`, `${attempt * 20}s`)
       const transactionStatus = await engineGetMintStatus(queryId)
@@ -48,7 +50,7 @@ export const airdropNFTWithInngest = inngest.createFunction(
       attempt += 1
     }
 
-    if (!mintStatus || !THIRDWEB_TRANSACTION_STATUSES.includes(mintStatus)) {
+    if (!mintStatus || !THIRDWEB_FINAL_TRANSACTION_STATUSES.includes(mintStatus)) {
       throw new NonRetriableError('cannot get final states of minting request')
     }
 
