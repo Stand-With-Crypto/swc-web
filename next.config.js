@@ -147,12 +147,12 @@ const ACTION_REDIRECTS = [
     queryValue: 'call-your-representative',
   },
   {
-    destination: '/action/opt-in',
+    destination: '/action/sign-up',
     queryKey: 'action',
     queryValue: 'join-stand-with-crypto',
   },
   {
-    destination: '/action/opt-in',
+    destination: '/action/sign-up',
     queryKey: 'modal',
     queryValue: 'member-join',
   },
@@ -201,7 +201,7 @@ const nextConfig = {
       },
       {
         permanent: true,
-        destination: '/action/opt-in',
+        destination: '/action/sign-up',
         source: '/member-join',
       },
       {
