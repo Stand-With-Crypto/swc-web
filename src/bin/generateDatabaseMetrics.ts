@@ -2,25 +2,21 @@ import { runBin } from '@/bin/runBin'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { camelCaseToWords } from '@/utils/shared/camelCaseToWords'
 import { UserActionType } from '@prisma/client'
-import { isSunday, subDays } from 'date-fns'
+import { addWeeks, endOfDay, isSunday, subDays, subWeeks } from 'date-fns'
 import xlsx from 'xlsx'
 
-const DAYS_IN_PAST_TO_RUN_REPORT = 90
+const WEEKS_IN_REPORT = 12
 
 function getStartingSunday() {
-  let currentDate = subDays(new Date(), DAYS_IN_PAST_TO_RUN_REPORT - 1)
-
-  // eslint-disable-next-line no-constant-condition
-  while (true) {
-    currentDate = subDays(currentDate, 1)
-
-    if (isSunday(currentDate)) {
-      return currentDate
-    }
-  }
+  let currentDate = subWeeks(subDays(new Date(), 1), WEEKS_IN_REPORT)
+  const dayOfWeek = currentDate.getDay()
+  return subDays(currentDate, dayOfWeek === 0 ? 0 : dayOfWeek)
 }
-
+function getEndingDate(startingSunday: Date) {
+  return endOfDay(addWeeks(subDays(startingSunday, 1), WEEKS_IN_REPORT))
+}
 const gteDate = getStartingSunday()
+const lteDate = getEndingDate(gteDate)
 
 async function generateDatabaseMetrics() {
   const [
@@ -41,7 +37,7 @@ async function generateDatabaseMetrics() {
         acquisition_source as acquisitionSource, 
         COUNT(*) AS totalCount
     FROM user
-    WHERE datetime_created >= ${gteDate}
+    WHERE datetime_created >= ${gteDate} AND datetime_created <= ${lteDate}
     GROUP BY  
         datetimeCreatedWeek,
         acquisitionSource
@@ -55,7 +51,7 @@ async function generateDatabaseMetrics() {
         action_type as actionType, 
         COUNT(*) AS totalCount
     FROM user_action
-    WHERE datetime_created >= ${gteDate}
+    WHERE datetime_created >= ${gteDate} AND datetime_created <= ${lteDate}
     GROUP BY  
         datetimeCreatedWeek,
         actionType
