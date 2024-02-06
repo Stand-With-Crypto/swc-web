@@ -179,22 +179,6 @@ async function createNewUser(payment: CoinbaseCommercePayment) {
         : {}),
     },
   })
-  // We are confident that the email does not exist if we reached this step,
-  //   so we can create a new record if that metadata is provided.
-  if (payment.event.data.metadata.email) {
-    await prismaClient.userEmailAddress.create({
-      data: {
-        isVerified: false,
-        emailAddress: payment.event.data.metadata.email,
-        user: {
-          connect: {
-            id: newUser.id,
-          },
-        },
-        source: 'USER_ENTERED',
-      },
-    })
-  }
   // If there is a user session, then we should update the user ID.
   // Otherwise, if that metadata is provided, then we should create a new session.
   const userSession = await prismaClient.userSession.findFirst({
