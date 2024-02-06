@@ -23,7 +23,7 @@ export function EventCard({
   return (
     <LinkBox
       data-test-id="event-card"
-      className="relative h-[329px] w-full cursor-pointer overflow-hidden rounded-[32px] sm:w-[357px]"
+      className="relative h-[329px] w-full cursor-pointer overflow-hidden rounded-[32px]"
     >
       <NextImage
         priority

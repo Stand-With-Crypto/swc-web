@@ -23,7 +23,7 @@ export const AllOptions: Story = {
       <div className="space-y-8">
         {sizes.map(size => (
           <PageTitle key={size} size={size}>
-            Page Sub Title Size "{size}"
+            Page Title Size "{size}"
           </PageTitle>
         ))}
       </div>

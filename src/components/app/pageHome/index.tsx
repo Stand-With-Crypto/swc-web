@@ -37,11 +37,11 @@ export function PageHome({
   return (
     <>
       <section className="grid-fl mb-6 grid grid-cols-1 items-center gap-4 lg:container lg:grid-cols-2 lg:gap-8">
-        <div className="lg:order-0 container order-1 space-y-6 text-center lg:px-0 lg:text-left">
-          <PageTitle className={'text-left'} withoutBalancer>
+        <div className="lg:order-0 container order-1 mx-auto max-w-xl space-y-6 text-center md:max-w-3xl lg:px-0 lg:text-left">
+          <PageTitle className={'lg:text-left'} withoutBalancer>
             If you care about crypto, it's time to prove it
           </PageTitle>
-          <PageSubTitle className="max-w-xl text-left" withoutBalancer>
+          <PageSubTitle className="lg:max-w-xl lg:text-left" withoutBalancer>
             52 million Americans own crypto. And yet, crypto's future in America remains uncertain.
             Congress is writing the rules as we speak - but they won't vote YES until they've heard
             from you.
@@ -124,7 +124,6 @@ export function PageHome({
           <Tabs
             analytics={'Homepage Our Community Tabs'}
             defaultValue={RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY}
-            className="mx-auto w-full max-w-2xl"
           >
             <div className="text-center">
               <TabsList className="mx-auto">

@@ -19,7 +19,7 @@ export function RecentActivityRowAnimatedContainer({
         {actions.map((action, index) => (
           <motion.div
             // we apply individual pb to the elements instead of space-y-7 to ensure that there's no jank in the animation as the height transitions in
-            className={cn(index !== 0 && 'pt-8')}
+            className={cn(index !== 0 && 'pt-8 lg:pt-10')}
             transition={{ duration: 0.8 }}
             initial={{ opacity: 0, transform: 'translateY(60px)' }}
             animate={{ opacity: 1, transform: 'translateY(0)' }}

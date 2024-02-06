@@ -1,7 +1,7 @@
 import { cn, twNoop } from '@/utils/web/cn'
 import { PropsWithChildren } from 'react'
 
-export const cardClassNames = twNoop('bg-secondary px-4 py-6 rounded-xl')
+export const cardClassNames = twNoop('bg-secondary px-4 py-6 rounded-3xl')
 
 function CardGroup({ children }: PropsWithChildren) {
   return <div className="flex flex-wrap gap-4">{children}</div>
