@@ -2,13 +2,13 @@ import { runBin } from '@/bin/runBin'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { camelCaseToWords } from '@/utils/shared/camelCaseToWords'
 import { UserActionType } from '@prisma/client'
-import { addWeeks, endOfDay, isSunday, subDays, subWeeks } from 'date-fns'
+import { addWeeks, endOfDay, subDays, subWeeks } from 'date-fns'
 import xlsx from 'xlsx'
 
 const WEEKS_IN_REPORT = 12
 
 function getStartingSunday() {
-  let currentDate = subWeeks(subDays(new Date(), 1), WEEKS_IN_REPORT)
+  const currentDate = subWeeks(subDays(new Date(), 1), WEEKS_IN_REPORT)
   const dayOfWeek = currentDate.getDay()
   return subDays(currentDate, dayOfWeek === 0 ? 0 : dayOfWeek)
 }
