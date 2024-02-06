@@ -89,7 +89,7 @@ export function VoterRegistrationForm({
   }, [])
 
   return (
-    <UserActionFormVoterRegistrationNftLayout>
+    <UserActionFormVoterRegistrationNftLayout onBack={() => goToSection(SectionNames.SURVEY)}>
       <UserActionFormVoterRegistrationNftLayout.Container>
         <UserActionFormVoterRegistrationNftLayout.Heading title={title} subtitle={subtitle} />
         <ol className="flex flex-col gap-2 justify-self-center">

@@ -7,7 +7,7 @@ interface ClaimNftProps extends UseSectionsReturn<SectionNames> {}
 
 export function ClaimNft({ goToSection }: ClaimNftProps) {
   return (
-    <UserActionFormVoterRegistrationNftLayout>
+    <UserActionFormVoterRegistrationNftLayout onBack={() => goToSection(SectionNames.SURVEY)}>
       <UserActionFormVoterRegistrationNftLayout.Container>
         <UserActionFormVoterRegistrationNftLayout.Heading
           title="Get your “I Registered” NFT"
