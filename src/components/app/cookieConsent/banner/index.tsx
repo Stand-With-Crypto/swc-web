@@ -28,7 +28,9 @@ export function CookieConsentBanner({
   const urls = useMemo(() => getIntlUrls(locale), [locale])
 
   return (
-    <div className={cn('max-w-screen fixed bottom-0 left-0 w-full bg-secondary p-3 pb-2 md:p-6')}>
+    <div
+      className={cn('max-w-screen fixed bottom-0 left-0 z-10 w-full bg-secondary p-3 pb-2 md:p-6')}
+    >
       <div className="flex flex-col md:container md:flex-row md:justify-between md:gap-5">
         <div className="relative">
           <button
