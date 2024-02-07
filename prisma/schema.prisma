@@ -349,7 +349,7 @@ model NFTMint {
   id                     String        @id @default(uuid())
   nftSlug                String        @map("nft_slug")
   contractAddress        String        @map("contract_address")
-  transactionHash        String        @map("transaction_hash")
+  transactionHash        String?       @map("transaction_hash")
   status                 NFTMintStatus @map("status")
   datetimeUpdated        DateTime      @updatedAt @map("datetime_updated")
   datetimeCreated        DateTime      @default(now()) @map("datetime_created")

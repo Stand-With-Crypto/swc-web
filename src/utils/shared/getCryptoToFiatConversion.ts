@@ -1,9 +1,10 @@
 import { fetchReq } from '@/utils/shared/fetchReq'
+import { Decimal } from '@prisma/client/runtime/library'
 import * as Sentry from '@sentry/nextjs'
 
 type CryptoToFiatConversionResult = {
   data: {
-    amount: string
+    amount: Decimal
     currency: string
   }
 }
@@ -18,6 +19,13 @@ export async function getCryptoToFiatConversion(tickerSymbol: string) {
     `https://api.coinbase.com/v2/prices/${tickerSymbol.toLowerCase()}-usd/spot`,
   )
     .then(res => res.json())
+    .then(data => {
+      const unformatted = data as { data: { amount: string; currency: string } }
+      const formatted: CryptoToFiatConversionResult = {
+        data: { amount: new Decimal(unformatted.data.amount), currency: unformatted.data.currency },
+      }
+      return formatted
+    })
     .catch(error => {
       Sentry.captureException(error, {
         tags: { domain: 'getCryptoToFiatConversion' },
@@ -26,9 +34,5 @@ export async function getCryptoToFiatConversion(tickerSymbol: string) {
       return undefined
     })
 
-  if (!data) {
-    return undefined
-  }
-
-  return data as CryptoToFiatConversionResult
+  return data
 }

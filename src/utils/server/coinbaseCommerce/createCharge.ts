@@ -71,15 +71,15 @@ interface CreateChargeRequest {
     amount?: string
     currency?: string
   }
-  metadata?: Record<string, string>
+  metadata?: Record<string, string> // Pass session ID, email, name, and other fields through here.
   pricing_type: 'fixed_price' | 'no_price'
   redirect_url?: string
 }
 
-export async function createCharge(sessionId: string) {
+export async function createCharge({ sessionId, userId }: { sessionId: string; userId: string }) {
   const payload: CreateChargeRequest = {
     pricing_type: 'no_price',
-    metadata: { sessionId },
+    metadata: { sessionId, userId },
     cancel_url: `https://www.standwithcrypto.org?sessionId=${sessionId}`,
   }
 

@@ -1,3 +1,5 @@
+import { z } from 'zod'
+
 // Final interfaces are TBD - this is currently all known fields.
 interface CoinbaseCommercePaymentDetails {
   network: string
@@ -44,6 +46,7 @@ interface CoinbaseCommercePaymentEventData {
   }
   pricing: {
     local: { amount: string; currency: string }
+    settlement: { amount: string; currency: string }
   }
   pricing_type: string
   payments: CoinbaseCommercePaymentDetails[]
@@ -71,3 +74,21 @@ export interface CoinbaseCommercePayment {
   attempt_number: number
   event: CoinbaseCommercePaymentEvent
 }
+
+// We expect the incoming Coinbase Commerce payment request to at least have these fields.
+export const zodCoinbaseCommercePayment = z.object({
+  id: z.string(),
+  event: z.object({
+    type: z.string(),
+    data: z.object({
+      expires_at: z.string(),
+      pricing: z.object({
+        local: z.object({
+          amount: z.string(),
+          currency: z.string(),
+        }),
+      }),
+      metadata: z.record(z.string(), z.string()),
+    }),
+  }),
+})

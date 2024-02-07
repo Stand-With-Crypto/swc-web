@@ -37,13 +37,11 @@ export function SumDonationsByUserRow({ locale, sumDonations, index }: SumDonati
           )}
         </div>
         <div>
-          <UserAvatar size={30} user={sumDonations.user} />
+          <UserAvatar size={40} user={sumDonations.user} />
         </div>
-        <div>
-          <div>{getUserDisplayName(sumDonations.user)}</div>
-        </div>
+        <div className="font-semibold lg:text-xl">{getUserDisplayName(sumDonations.user)}</div>
       </div>
-      <div className="shrink-0 text-sm">
+      <div className="shrink-0 text-sm lg:text-base">
         <FormattedCurrency
           amount={sumDonations.totalAmountUsd}
           locale={locale}
