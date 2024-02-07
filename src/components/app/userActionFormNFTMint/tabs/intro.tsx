@@ -12,8 +12,8 @@ import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { useThirdwebData } from '@/hooks/useThirdwebData'
-import { UseTabsReturn } from '@/hooks/useTabs'
-import { UserActionFormNFTMintTabNames } from '@/components/app/userActionFormNFTMint'
+import { UseSectionsReturn } from '@/hooks/useSections'
+import { UserActionFormNFTMintSectionNames } from '@/components/app/userActionFormNFTMint'
 import { Button } from '@/components/ui/button'
 import {
   NFT_DONATION_AMOUNT,
@@ -24,8 +24,8 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { useThirdwebContractMetadata } from '@/hooks/useThirdwebContractMetadata'
 
 export function UserActionFormNFTMintIntro({
-  gotoTab,
-}: UseTabsReturn<UserActionFormNFTMintTabNames>) {
+  goToSection,
+}: UseSectionsReturn<UserActionFormNFTMintSectionNames>) {
   const { session } = useThirdwebData()
   const { data: contractMetadata, isLoading: isLoadingContractMetadata } =
     useThirdwebContractMetadata(MINT_NFT_CONTRACT_ADDRESS)
@@ -38,7 +38,10 @@ export function UserActionFormNFTMintIntro({
 
         <UserActionFormLayout.Footer>
           {session.isLoggedIn ? (
-            <Button onClick={() => gotoTab(UserActionFormNFTMintTabNames.CHECKOUT)} size="lg">
+            <Button
+              onClick={() => goToSection(UserActionFormNFTMintSectionNames.CHECKOUT)}
+              size="lg"
+            >
               Continue
             </Button>
           ) : (

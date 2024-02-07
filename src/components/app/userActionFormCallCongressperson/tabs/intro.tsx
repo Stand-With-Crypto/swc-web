@@ -9,14 +9,14 @@ import { SectionNames } from '@/components/app/userActionFormCallCongressperson/
 
 import { UserActionFormLayout } from '@/components/app/userActionFormCommon/layout'
 
-export function Intro({ goToSection: gotoTab }: UseSectionsReturn<SectionNames>) {
+export function Intro({ goToSection }: UseSectionsReturn<SectionNames>) {
   const ref = React.useRef<HTMLButtonElement>(null)
   useEffect(() => {
     ref.current?.focus()
   }, [ref])
   return (
     <IntroStaticContent>
-      <Button ref={ref} onClick={() => gotoTab(SectionNames.ADDRESS)}>
+      <Button ref={ref} onClick={() => goToSection(SectionNames.ADDRESS)}>
         Continue
       </Button>
     </IntroStaticContent>

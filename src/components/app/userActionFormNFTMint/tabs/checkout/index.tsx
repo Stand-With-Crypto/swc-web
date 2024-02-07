@@ -7,11 +7,11 @@ import {
   NFTDisplaySkeleton,
   UserActionFormLayout,
 } from '@/components/app/userActionFormCommon'
-import { UserActionFormNFTMintTabNames } from '@/components/app/userActionFormNFTMint'
+import { UserActionFormNFTMintSectionNames } from '@/components/app/userActionFormNFTMint'
 import { MINT_NFT_CONTRACT_ADDRESS } from '@/components/app/userActionFormNFTMint/constants'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
-import { UseTabsReturn } from '@/hooks/useTabs'
+import { UseSectionsReturn } from '@/hooks/useSections'
 import { useThirdwebContractMetadata } from '@/hooks/useThirdwebContractMetadata'
 import { SupportedCryptoCurrencyCodes } from '@/utils/shared/currency'
 import { PageTitle } from '@/components/ui/pageTitleText'
@@ -21,7 +21,7 @@ import { UseCheckoutControllerReturn } from '@/components/app/userActionFormNFTM
 import styles from './checkout.module.css'
 
 export function UserActionFormNFTMintCheckout({
-  gotoTab,
+  goToSection,
   quantity,
   incrementQuantity,
   decrementQuantity,
@@ -29,7 +29,7 @@ export function UserActionFormNFTMintCheckout({
   mintFee,
   totalFee,
   gasFee,
-}: UseTabsReturn<UserActionFormNFTMintTabNames> & UseCheckoutControllerReturn) {
+}: UseSectionsReturn<UserActionFormNFTMintSectionNames> & UseCheckoutControllerReturn) {
   const { data: contractMetadata, isLoading } =
     useThirdwebContractMetadata(MINT_NFT_CONTRACT_ADDRESS)
 
@@ -47,7 +47,7 @@ export function UserActionFormNFTMintCheckout({
   }
 
   return (
-    <UserActionFormLayout onBack={() => gotoTab(UserActionFormNFTMintTabNames.INTRO)}>
+    <UserActionFormLayout onBack={() => goToSection(UserActionFormNFTMintSectionNames.INTRO)}>
       <UserActionFormLayout.Container>
         <div className="flex gap-6">
           <NFTDisplay
@@ -118,7 +118,7 @@ export function UserActionFormNFTMintCheckout({
           <Button
             size="lg"
             onClick={() => {
-              gotoTab(UserActionFormNFTMintTabNames.SUCCESS)
+              goToSection(UserActionFormNFTMintSectionNames.SUCCESS)
             }}
           >
             Mint now

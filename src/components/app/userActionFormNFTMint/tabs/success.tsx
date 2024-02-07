@@ -4,17 +4,18 @@ import { UnauthenticatedSessionButton } from '@/components/app/unauthenticatedSe
 import { UserActionFormLayout } from '@/components/app/userActionFormCommon'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { useThirdwebData } from '@/hooks/useThirdwebData'
-import { UseTabsReturn } from '@/hooks/useTabs'
-import { UserActionFormNFTMintTabNames } from '@/components/app/userActionFormNFTMint'
+import { UseSectionsReturn } from '@/hooks/useSections'
+import { UserActionFormNFTMintSectionNames } from '@/components/app/userActionFormNFTMint'
 import { Button } from '@/components/ui/button'
 import { MINT_NFT_CONTRACT_ADDRESS } from '@/components/app/userActionFormNFTMint/constants'
 import { useThirdwebContractMetadata } from '@/hooks/useThirdwebContractMetadata'
 import { UseCheckoutControllerReturn } from '@/components/app/userActionFormNFTMint/useCheckoutController'
 
 export function UserActionFormNFTMintSuccess({
-  gotoTab,
+  goToSection,
   totalFee: _totalFee,
-}: UseTabsReturn<UserActionFormNFTMintTabNames> & Pick<UseCheckoutControllerReturn, 'totalFee'>) {
+}: UseSectionsReturn<UserActionFormNFTMintSectionNames> &
+  Pick<UseCheckoutControllerReturn, 'totalFee'>) {
   const { session } = useThirdwebData()
   const { data: _contractMetadata, isLoading: isLoadingContractMetadata } =
     useThirdwebContractMetadata(MINT_NFT_CONTRACT_ADDRESS)
@@ -25,7 +26,10 @@ export function UserActionFormNFTMintSuccess({
       <UserActionFormLayout.Container>
         <UserActionFormLayout.Footer>
           {session.isLoggedIn ? (
-            <Button onClick={() => gotoTab(UserActionFormNFTMintTabNames.CHECKOUT)} size="lg">
+            <Button
+              onClick={() => goToSection(UserActionFormNFTMintSectionNames.CHECKOUT)}
+              size="lg"
+            >
               Continue
             </Button>
           ) : (

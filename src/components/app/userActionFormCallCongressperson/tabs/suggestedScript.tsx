@@ -25,7 +25,7 @@ import { UserActionFormLayout } from '@/components/app/userActionFormCommon/layo
 export function SuggestedScript({
   user,
   congressPersonData: { dtsiPerson, civicData, addressSchema },
-  goToSection: gotoTab,
+  goToSection,
 }: Pick<
   UserActionFormCallCongresspersonProps,
   'user' | 'congressPersonData' | keyof UseSectionsReturn<SectionNames>
@@ -89,17 +89,17 @@ export function SuggestedScript({
       if (result.status === 'success') {
         setCallingState('call-complete')
         router.refresh()
-        gotoTab(SectionNames.SUCCESS_MESSAGE)
+        goToSection(SectionNames.SUCCESS_MESSAGE)
       } else {
         setCallingState('error')
       }
     },
-    [addressSchema, dtsiPerson.slug, gotoTab, router],
+    [addressSchema, dtsiPerson.slug, goToSection, router],
   )
 
   return (
     <>
-      <UserActionFormLayout onBack={() => gotoTab(SectionNames.ADDRESS)}>
+      <UserActionFormLayout onBack={() => goToSection(SectionNames.ADDRESS)}>
         <UserActionFormLayout.Container>
           <UserActionFormLayout.Heading
             title="Call your representative"

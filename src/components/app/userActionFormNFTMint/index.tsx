@@ -1,36 +1,39 @@
-import { useTabs } from '@/hooks/useTabs'
+import { useSections } from '@/hooks/useSections'
 
 import { UserActionFormNFTMintIntro } from './tabs/intro'
 import { UserActionFormNFTMintCheckout } from './tabs/checkout'
 import { UserActionFormNFTMintSuccess } from './tabs/success'
 import { useCheckoutController } from './useCheckoutController'
 
-export enum UserActionFormNFTMintTabNames {
+export enum UserActionFormNFTMintSectionNames {
   INTRO = 'intro',
   CHECKOUT = 'checkout',
   SUCCESS = 'success',
 }
 
 export function UserActionFormNFTMint(_props: { onCancel: () => void; onSuccess: () => void }) {
-  const tabProps = useTabs({
-    tabs: Object.values(UserActionFormNFTMintTabNames),
-    initialTabId: UserActionFormNFTMintTabNames.INTRO,
+  const sectionProps = useSections({
+    sections: Object.values(UserActionFormNFTMintSectionNames),
+    initialSectionId: UserActionFormNFTMintSectionNames.INTRO,
+    analyticsName: 'User Action Form NFT Mint',
   })
 
   const checkoutController = useCheckoutController()
 
-  switch (tabProps.currentTab) {
-    case UserActionFormNFTMintTabNames.INTRO:
-      return <UserActionFormNFTMintIntro {...tabProps} />
+  switch (sectionProps.currentSection) {
+    case UserActionFormNFTMintSectionNames.INTRO:
+      return <UserActionFormNFTMintIntro {...sectionProps} />
 
-    case UserActionFormNFTMintTabNames.CHECKOUT:
-      return <UserActionFormNFTMintCheckout {...tabProps} {...checkoutController} />
+    case UserActionFormNFTMintSectionNames.CHECKOUT:
+      return <UserActionFormNFTMintCheckout {...sectionProps} {...checkoutController} />
 
-    case UserActionFormNFTMintTabNames.SUCCESS:
-      return <UserActionFormNFTMintSuccess {...tabProps} totalFee={checkoutController.totalFee} />
+    case UserActionFormNFTMintSectionNames.SUCCESS:
+      return (
+        <UserActionFormNFTMintSuccess {...sectionProps} totalFee={checkoutController.totalFee} />
+      )
 
     default:
-      tabProps.onTabNotFound()
+      sectionProps.onSectionNotFound()
       return null
   }
 }
