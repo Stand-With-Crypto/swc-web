@@ -3,15 +3,14 @@
 import { UserActionType } from '@prisma/client'
 import { useMemo } from 'react'
 
-import { UserActionRowCTA } from '@/components/app/userActionRowCTA'
+import { TriggerAuthModalOnClick } from '@/components/app/authentication/triggerAuthModalOnClick'
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
 import { UserActionFormDonateDialog } from '@/components/app/userActionFormDonate/dialog'
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
-import { UserActionRowCTAProps } from '@/components/app/userActionRowCTA'
+import { UserActionRowCTA, UserActionRowCTAProps } from '@/components/app/userActionRowCTA'
 import { UserActionTweetLink } from '@/components/ui/userActionTweetLink'
 import { cn } from '@/utils/web/cn'
-import { AccountAuthDialogWrapper } from '@/components/app/accountAuth'
 
 export const ORDERED_USER_ACTION_ROW_CTA_INFO: ReadonlyArray<Omit<UserActionRowCTAProps, 'state'>> =
   [
@@ -21,7 +20,11 @@ export const ORDERED_USER_ACTION_ROW_CTA_INFO: ReadonlyArray<Omit<UserActionRowC
       text: 'Join Stand With Crypto',
       subtext: 'Join over 100,000 advocates fighting to keep crypto in America.',
       canBeTriggeredMultipleTimes: false,
-      WrapperComponent: AccountAuthDialogWrapper,
+      WrapperComponent: ({ children }) => (
+        <TriggerAuthModalOnClick loginButtonProps={{ children: 'Hidden' }}>
+          {children}
+        </TriggerAuthModalOnClick>
+      ),
     },
     {
       actionType: UserActionType.CALL,

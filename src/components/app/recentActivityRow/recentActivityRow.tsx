@@ -1,7 +1,8 @@
 'use client'
 import { ClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
 import { ClientUserAction } from '@/clientModels/clientUserAction/clientUserAction'
-import { AccountAuthDialogWrapper } from '@/components/app/accountAuth'
+import { MaybeAuthenticatedContent } from '@/components/app/authentication/maybeAuthenticatedContent'
+import { ThirdwebLoginButton } from '@/components/app/authentication/thirdwebLoginButton'
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
 import { UserActionFormDonateDialog } from '@/components/app/userActionFormDonate/dialog'
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
@@ -115,9 +116,9 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
           onFocusContent: hasSignedUp
             ? undefined
             : () => (
-                <AccountAuthDialogWrapper>
-                  <Button>Join</Button>
-                </AccountAuthDialogWrapper>
+                <MaybeAuthenticatedContent authenticatedContent={null}>
+                  <ThirdwebLoginButton>Join</ThirdwebLoginButton>
+                </MaybeAuthenticatedContent>
               ),
           children: (
             <>

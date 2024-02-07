@@ -1,22 +1,23 @@
 'use client'
-import * as Sentry from '@sentry/nextjs'
-import Cookies from 'js-cookie'
+import { Button } from '@/components/ui/button'
+import { useThirdwebData } from '@/hooks/useThirdwebData'
 import { USER_SESSION_ID_COOKIE_NAME, generateUserSessionId } from '@/utils/shared/userSessionId'
+import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
 import { cn } from '@/utils/web/cn'
 import { ConnectWallet, lightTheme } from '@thirdweb-dev/react'
+import Cookies from 'js-cookie'
 import { useRouter } from 'next/navigation'
-import { useThirdwebData } from '@/hooks/useThirdwebData'
-import { Button } from '@/components/ui/button'
 import { useEffect, useRef, useState } from 'react'
-import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
-interface ThirdwebLoginButtonProps {
+
+export interface ThirdwebLoginButtonProps {
   children: string
   variant?: 'secondary'
   size?: 'lg'
+  style?: React.CSSProperties
 }
 
 export function ThirdwebLoginButton(props: ThirdwebLoginButtonProps) {
-  const { children, variant, size } = props
+  const { children, variant, size, style } = props
   const { session } = useThirdwebData()
   const [hasClicked, setHasClicked] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
@@ -29,7 +30,7 @@ export function ThirdwebLoginButton(props: ThirdwebLoginButtonProps) {
   }, [hasClicked, session.isLoggedIn])
   if (session.isLoading) {
     return (
-      <Button variant={variant} size={size} onClick={() => setHasClicked(true)}>
+      <Button variant={variant} size={size} onClick={() => setHasClicked(true)} style={style}>
         {hasClicked ? 'Loading' : children}
       </Button>
     )
@@ -41,7 +42,13 @@ export function ThirdwebLoginButton(props: ThirdwebLoginButtonProps) {
     </div>
   )
 }
-export function BaseThirdwebLoginButton({ children, variant, size }: ThirdwebLoginButtonProps) {
+
+export function BaseThirdwebLoginButton({
+  children,
+  variant,
+  size,
+  style,
+}: ThirdwebLoginButtonProps) {
   const router = useRouter()
   return (
     <ConnectWallet
@@ -90,7 +97,7 @@ export function BaseThirdwebLoginButton({ children, variant, size }: ThirdwebLog
         )
       }
       // the library puts a inline min-width: 140px on the button, so this is the only way to take priority over that
-      style={{ minWidth: '96px' }}
+      style={style || { minWidth: '96px' }}
       btnTitle={children}
       modalTitle={'Stand With Crypto'}
       switchToActiveChain={true}
