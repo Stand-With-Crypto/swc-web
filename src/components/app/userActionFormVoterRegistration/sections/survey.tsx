@@ -21,6 +21,7 @@ export function Survey({ goToSection }: SurveyProps) {
               onClick={() => goToSection(SectionNames.CLAIM_NFT)}
               variant="secondary"
               size="lg"
+              className="w-full lg:w-auto"
             >
               Yes
             </Button>
@@ -28,6 +29,7 @@ export function Survey({ goToSection }: SurveyProps) {
               onClick={() => goToSection(SectionNames.VOTER_REGISTRATION_FORM)}
               variant="secondary"
               size="lg"
+              className="w-full lg:w-auto"
             >
               No
             </Button>
@@ -35,6 +37,7 @@ export function Survey({ goToSection }: SurveyProps) {
               onClick={() => goToSection(SectionNames.CHECK_REGISTRATION_FORM)}
               variant="secondary"
               size="lg"
+              className="w-full lg:w-auto"
             >
               I’m not sure
             </Button>
