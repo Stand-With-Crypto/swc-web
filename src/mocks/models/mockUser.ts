@@ -8,7 +8,6 @@ export function mockCreateUserInput({
 }: {
   withData?: boolean
 } = {}) {
-  const isVisible = faker.helpers.maybe(() => true, { probability: 0.9 })
   return {
     acquisitionCampaign: '',
     acquisitionMedium: '',
@@ -29,7 +28,7 @@ export function mockCreateUserInput({
     hasOptedInToEmails: true,
     hasOptedInToMembership: false,
     hasOptedInToSms: false,
-    internalStatus: isVisible ? UserInternalStatus.VISIBLE : UserInternalStatus.MANUALLY_HIDDEN,
+    internalStatus: UserInternalStatus.VISIBLE,
     capitolCanaryAdvocateId: null,
     capitolCanaryInstance: null,
   } satisfies Prisma.UserCreateInput
