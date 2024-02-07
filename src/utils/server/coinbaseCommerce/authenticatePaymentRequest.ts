@@ -1,4 +1,4 @@
-import { CoinbaseCommercePayment } from '@/app/api/commerce/process-payment/route'
+import { CoinbaseCommercePayment } from '@/utils/server/coinbaseCommerce/paymentRequest'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import * as Sentry from '@sentry/nextjs'
 import crypto from 'crypto'
@@ -17,7 +17,7 @@ function areSignaturesEqual(a: string, b: string) {
   }
 }
 
-// The below is left as any because we want to be able to accept any raw request body.
+// The below argument is left as any because we want to be able to accept any raw request body.
 export function authenticatePaymentRequest(rawRequestBody: any) {
   const headerSignature = headers().get('x-cc-webhook-signature')
   if (!headerSignature) {

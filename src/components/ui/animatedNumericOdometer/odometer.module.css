@@ -1,6 +1,4 @@
 .odometer {
-  letter-spacing: -3px;
-  font-size: 64px;
   font-style: normal;
   font-weight: bold;
   line-height: 1;
@@ -9,7 +7,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  height: 70px;
+  letter-spacing: -1px;
 }
 
 .odometer,

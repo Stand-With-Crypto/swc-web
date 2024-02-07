@@ -12,6 +12,7 @@ export function mockCreateUserActionDonationInput() {
     amountCurrencyCode,
     amountUsd: amount,
     recipient: faker.helpers.arrayElement(Object.values(DonationOrganization)),
+    coinbaseCommerceDonationId: fakerFields.id(),
   } satisfies Prisma.UserActionDonationCreateInput
 }
 

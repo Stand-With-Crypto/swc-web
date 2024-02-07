@@ -34,6 +34,8 @@ import { UpsertAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server
 import { inngest } from '@/inngest/inngest'
 import { CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/upsertAdvocateInCapitolCanary'
 import { getLogger } from '@/utils/shared/logger'
+import { claimNFT } from '@/utils/server/nft/claimNFT'
+import { mintPastActions } from '@/utils/server/nft/mintPastActions'
 
 /*
 The desired behavior of this function:
@@ -144,6 +146,7 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
     include: { user: true },
   })
   logWithAddress(`user crypto address created`)
+
   let primaryUserEmailAddressId: null | string = null
 
   /**
@@ -203,7 +206,7 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
     },
   })
   if (!existingOptInUserAction) {
-    await prismaClient.userAction.create({
+    const userAction = await prismaClient.userAction.create({
       data: {
         user: { connect: { id: userCryptoAddress.userId } },
         actionType: UserActionType.OPT_IN,
@@ -216,6 +219,8 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
       },
     })
     logWithAddress(`opt in user action created`)
+
+    await claimNFT(userAction, userCryptoAddress)
   }
 
   await prismaClient.user.update({
@@ -225,6 +230,11 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
       ...(primaryUserEmailAddressId ? { primaryUserEmailAddressId } : {}),
     },
   })
+
+  if (existingUser !== null) {
+    await mintPastActions(existingUser.id, userCryptoAddress, localUser)
+  }
+
   trackUserLogin({
     existingUser: userCryptoAddress.user,
     localUser,

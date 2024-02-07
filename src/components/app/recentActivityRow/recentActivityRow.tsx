@@ -1,11 +1,11 @@
 'use client'
 import { ClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
 import { ClientUserAction } from '@/clientModels/clientUserAction/clientUserAction'
+import { AccountAuthDialogWrapper } from '@/components/app/accountAuth'
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
 import { UserActionFormDonateDialog } from '@/components/app/userActionFormDonate/dialog'
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
-import { UserActionFormOptInSWCDialog } from '@/components/app/userActionFormOptInSWC/dialog'
 import { UserAvatar } from '@/components/app/userAvatar'
 import { Button } from '@/components/ui/button'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
@@ -115,9 +115,9 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
           onFocusContent: hasSignedUp
             ? undefined
             : () => (
-                <UserActionFormOptInSWCDialog>
+                <AccountAuthDialogWrapper>
                   <Button>Join</Button>
-                </UserActionFormOptInSWCDialog>
+                </AccountAuthDialogWrapper>
               ),
           children: (
             <>

@@ -69,3 +69,13 @@ The process for merging schema changes to the `testing` PlanetScale database sch
   - NOTE: This should only be done while we're pre-go-live. After we start deploying to production, we'll need to ensure all changes don't break the schema and leverage one-off bin scripts to migrate data as needed.
 
 For now, we aren't deploying any changes to production in PlanetScale, so you can stop here.
+
+### Adding Environment Variables
+
+If you need to add environment variables, please ensure the following:
+
+- You update the `.env.example` with commentary explaining how to get the value
+- If you are a core contributor
+  - Add it to our shared secrets vault
+  - Update `.github/workflows/cypress.yml` and reach out to @travisbloom-cb add it to our github secrets
+  - Update our vercel environment variables

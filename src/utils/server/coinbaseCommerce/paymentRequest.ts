@@ -1,7 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { prettyLog } from '@/utils/shared/prettyLog'
-import { authenticatePaymentRequest } from '@/utils/server/coinbaseCommerce/authenticatePaymentRequest'
-import * as Sentry from '@sentry/nextjs'
+import { z } from 'zod'
 
 // Final interfaces are TBD - this is currently all known fields.
 interface CoinbaseCommercePaymentDetails {
@@ -19,6 +16,7 @@ interface CoinbaseCommercePaymentDetails {
     confirmations_accumulated: number
     confirmations_required: number
   }
+  payer_addresses?: string[]
 }
 
 interface CoinbaseCommercePaymentTimeline {
@@ -39,6 +37,7 @@ interface CoinbaseCommercePaymentEventData {
   expires_at: string
   support_email: string
   timeline: CoinbaseCommercePaymentTimeline[]
+  metadata: Record<string, string> // Includes custom fields sent through "create charge" API request.
   payment_threshold: {
     overpayment_absolute_threshold: { amount: string; currency: string }
     overpayment_relative_threshold: string
@@ -47,6 +46,7 @@ interface CoinbaseCommercePaymentEventData {
   }
   pricing: {
     local: { amount: string; currency: string }
+    settlement: { amount: string; currency: string }
   }
   pricing_type: string
   payments: CoinbaseCommercePaymentDetails[]
@@ -75,18 +75,20 @@ export interface CoinbaseCommercePayment {
   event: CoinbaseCommercePaymentEvent
 }
 
-export async function POST(request: NextRequest) {
-  const rawRequestBody = await request.json()
-  authenticatePaymentRequest(rawRequestBody)
-  try {
-    const body = rawRequestBody as CoinbaseCommercePayment
-    prettyLog(body)
-    // TODO (Benson): Record donation in database.
-  } catch (error) {
-    Sentry.captureException('internal error processing request body', {
-      extra: { id: (rawRequestBody as CoinbaseCommercePayment).id },
-    })
-    return new NextResponse('internal error', { status: 500 })
-  }
-  return new NextResponse('success', { status: 200 })
-}
+// We expect the incoming Coinbase Commerce payment request to at least have these fields.
+export const zodCoinbaseCommercePayment = z.object({
+  id: z.string(),
+  event: z.object({
+    type: z.string(),
+    data: z.object({
+      expires_at: z.string(),
+      pricing: z.object({
+        local: z.object({
+          amount: z.string(),
+          currency: z.string(),
+        }),
+      }),
+      metadata: z.record(z.string(), z.string()),
+    }),
+  }),
+})

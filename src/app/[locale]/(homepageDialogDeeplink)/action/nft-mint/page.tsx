@@ -1,5 +1,14 @@
-import { UserActionFormNFTMintDeeplinkWrapper } from '@/components/app/userActionFormNFTMint/homepageDialogDeeplinkWrapper'
+import { HomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogDeeplinkLayout'
+import { UserActionFormNFTMintDeeplinkWrapper } from '@/components/app/homepageDialogDeeplinkWrapper'
+import { PageProps } from '@/types'
 
-export default function UserActionNFTMintDeepLink() {
-  return <UserActionFormNFTMintDeeplinkWrapper />
+export const revalidate = 3600
+export const dynamic = 'error'
+
+export default function UserActionNFTMintDeepLink({ params }: PageProps) {
+  return (
+    <HomepageDialogDeeplinkLayout pageParams={params}>
+      <UserActionFormNFTMintDeeplinkWrapper />
+    </HomepageDialogDeeplinkLayout>
+  )
 }

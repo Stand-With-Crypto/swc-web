@@ -1,14 +1,8 @@
-import { SupportedLocale } from '@/intl/locales'
-import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { useMemo } from 'react'
 
 const FORMATTED_CURRENCY_BLOCK_REGEX = /(\D+)?(\d+)(\D+)?(\d+)?(\D+)?(\d+)?(\D+)?/
 
-export function useCurrencyNumeralArray(value: number, locale = SupportedLocale.EN_US) {
-  const formattedValue = useMemo(() => {
-    return formatCurrency(value, locale)
-  }, [locale, value])
-
+export function useNumeralArray(formattedValue: string) {
   /**
    * @description numeralArray uses regex to split the donation value into an array of strings.
    * @example // $2,395,081 => ["$", "2", ",", "395", ",", "081"]
@@ -27,12 +21,4 @@ export function useCurrencyNumeralArray(value: number, locale = SupportedLocale.
   }, [formattedValue])
 
   return numeralArray
-}
-
-function formatCurrency(value: number, locale: SupportedLocale) {
-  return new Intl.NumberFormat(locale, {
-    style: 'currency',
-    currency: SupportedFiatCurrencyCodes.USD,
-    maximumFractionDigits: 0,
-  }).format(value)
 }
