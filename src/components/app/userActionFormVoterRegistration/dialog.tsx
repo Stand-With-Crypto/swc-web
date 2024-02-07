@@ -26,7 +26,10 @@ export function UserActionFormVoterRegistrationDialog({
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="max-w-3xl">
         <Suspense fallback={<UserActionFormVoterRegistrationSkeleton />}>
-          <LazyUserActionFormVoterRegistration {...formProps} />
+          <LazyUserActionFormVoterRegistration
+            {...formProps}
+            onClose={() => dialogProps.onOpenChange(false)}
+          />
         </Suspense>
       </DialogContent>
     </Dialog>

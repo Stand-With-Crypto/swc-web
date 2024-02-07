@@ -16,25 +16,25 @@ export function Survey({ goToSection }: SurveyProps) {
             title="Are you registered to vote?"
             subtitle='Register to vote or check your voter registration and get a free "I Registered" NFT'
           />
-          <div className="flex flex-col content-center items-center gap-3 lg:flex-row">
+          <div className="flex flex-grow flex-col items-center justify-center gap-3 lg:flex-row">
             <Button
               onClick={() => goToSection(SectionNames.CLAIM_NFT)}
               variant="secondary"
-              className="w-[190px]"
+              size="lg"
             >
               Yes
             </Button>
             <Button
               onClick={() => goToSection(SectionNames.VOTER_REGISTRATION_FORM)}
               variant="secondary"
-              className="w-[190px]"
+              size="lg"
             >
               No
             </Button>
             <Button
               onClick={() => goToSection(SectionNames.CHECK_REGISTRATION_FORM)}
               variant="secondary"
-              className="w-[190px]"
+              size="lg"
             >
               I’m not sure
             </Button>

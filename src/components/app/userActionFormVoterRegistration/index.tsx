@@ -1,15 +1,15 @@
+import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
 import {
   ANALYTICS_NAME_USER_ACTION_FORM_VOTER_REGISTRATION,
   SectionNames,
 } from '@/components/app/userActionFormVoterRegistration/constants'
 import { ClaimNft } from '@/components/app/userActionFormVoterRegistration/sections/claimNft'
-import { ClaimNftSuccess } from '@/components/app/userActionFormVoterRegistration/sections/claimNftSuccess'
 import { Survey } from '@/components/app/userActionFormVoterRegistration/sections/survey'
 import { VoterRegistrationForm } from '@/components/app/userActionFormVoterRegistration/sections/voterRegistrationForm'
 import { useSections } from '@/hooks/useSections'
 import { useMemo } from 'react'
 
-export function UserActionFormVoterRegistration() {
+export function UserActionFormVoterRegistration({ onClose }: { onClose: () => void }) {
   const sectionProps = useSections<SectionNames>({
     sections: Object.values(SectionNames),
     initialSectionId: SectionNames.SURVEY,
@@ -30,12 +30,12 @@ export function UserActionFormVoterRegistration() {
       case SectionNames.ACCOUNT_REGISTRATION:
         return null
       case SectionNames.SUCCESS:
-        return <ClaimNftSuccess {...sectionProps} />
+        return <UserActionFormSuccessScreen {...sectionProps} onClose={onClose} />
       default:
         onTabNotFound()
         return null
     }
-  }, [currentTab, onTabNotFound, sectionProps])
+  }, [currentTab, onClose, onTabNotFound, sectionProps])
 
   return content
 }

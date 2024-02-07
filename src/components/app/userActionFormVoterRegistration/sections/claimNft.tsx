@@ -15,7 +15,9 @@ export function ClaimNft({ goToSection }: ClaimNftProps) {
         />
       </UserActionFormVoterRegistrationLayout.Container>
       <UserActionFormVoterRegistrationLayout.Footer>
-        <Button onClick={() => goToSection(SectionNames.SUCCESS)}>Claim NFT</Button>
+        <Button size="lg" onClick={() => goToSection(SectionNames.SUCCESS)}>
+          Claim NFT
+        </Button>
       </UserActionFormVoterRegistrationLayout.Footer>
     </UserActionFormVoterRegistrationLayout>
   )
