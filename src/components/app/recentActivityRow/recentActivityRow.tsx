@@ -6,6 +6,7 @@ import { UserActionFormCallCongresspersonDialog } from '@/components/app/userAct
 import { UserActionFormDonateDialog } from '@/components/app/userActionFormDonate/dialog'
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
+import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
 import { UserAvatar } from '@/components/app/userAvatar'
 import { Button } from '@/components/ui/button'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
@@ -196,6 +197,16 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
         return {
           onFocusContent: () => <UserActionTweetLink>Tweet</UserActionTweetLink>,
           children: <MainText>{userDisplayName} tweeted in support of crypto</MainText>,
+        }
+      }
+      case UserActionType.VOTER_REGISTRATION: {
+        return {
+          onFocusContent: () => (
+            <UserActionFormVoterRegistrationDialog>
+              <Button>Register</Button>
+            </UserActionFormVoterRegistrationDialog>
+          ),
+          children: <MainText>{userDisplayName} registered to vote</MainText>,
         }
       }
     }
