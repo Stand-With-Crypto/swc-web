@@ -37,4 +37,9 @@ export const USER_ACTION_DEEPLINK_MAP: {
       return `${getIntlPrefix(locale)}/action/nft-mint`
     },
   },
+  VOTER_REGISTRATION: {
+    getDeeplinkUrl: ({ locale }) => {
+      return `${getIntlPrefix(locale)}/action/voter-registration`
+    },
+  },
 }
