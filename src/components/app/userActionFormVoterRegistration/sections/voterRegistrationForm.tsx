@@ -1,5 +1,5 @@
-import { SectionNames } from '@/components/app/userActionFormVoterRegistrationNft/constants'
-import { UserActionFormVoterRegistrationNftLayout } from '@/components/app/userActionFormVoterRegistrationNft/sections/layout'
+import { SectionNames } from '@/components/app/userActionFormVoterRegistration/constants'
+import { UserActionFormVoterRegistrationLayout } from '@/components/app/userActionFormVoterRegistration/sections/layout'
 import { Button } from '@/components/ui/button'
 import { ExternalLink } from '@/components/ui/link'
 import {
@@ -89,9 +89,9 @@ export function VoterRegistrationForm({
   }, [])
 
   return (
-    <UserActionFormVoterRegistrationNftLayout onBack={() => goToSection(SectionNames.SURVEY)}>
-      <UserActionFormVoterRegistrationNftLayout.Container>
-        <UserActionFormVoterRegistrationNftLayout.Heading title={title} subtitle={subtitle} />
+    <UserActionFormVoterRegistrationLayout onBack={() => goToSection(SectionNames.SURVEY)}>
+      <UserActionFormVoterRegistrationLayout.Container>
+        <UserActionFormVoterRegistrationLayout.Heading title={title} subtitle={subtitle} />
         <ol className="flex flex-col gap-2 justify-self-center">
           <li className={LIST_ITEM_STYLE}>
             <Step1Svg />
@@ -132,10 +132,15 @@ export function VoterRegistrationForm({
             Return here to claim your free NFT
           </li>
         </ol>
-      </UserActionFormVoterRegistrationNftLayout.Container>
-      <UserActionFormVoterRegistrationNftLayout.Footer>
-        <Button onClick={() => goToSection(SectionNames.SUCCESS)}>Claim NFT</Button>
-      </UserActionFormVoterRegistrationNftLayout.Footer>
-    </UserActionFormVoterRegistrationNftLayout>
+      </UserActionFormVoterRegistrationLayout.Container>
+      <UserActionFormVoterRegistrationLayout.Footer>
+        <div className="flex flex-grow flex-row items-center justify-between">
+          <span className="text-sm text-fontcolor-muted">
+            Complete registration at step 2 to claim NFT
+          </span>
+          <Button onClick={() => goToSection(SectionNames.SUCCESS)}>Claim NFT</Button>
+        </div>
+      </UserActionFormVoterRegistrationLayout.Footer>
+    </UserActionFormVoterRegistrationLayout>
   )
 }

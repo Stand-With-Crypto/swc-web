@@ -1,19 +1,19 @@
 import {
-  ANALYTICS_NAME_USER_ACTION_FORM_VOTER_REGISTRATION_NFT,
+  ANALYTICS_NAME_USER_ACTION_FORM_VOTER_REGISTRATION,
   SectionNames,
-} from '@/components/app/userActionFormVoterRegistrationNft/constants'
-import { ClaimNft } from '@/components/app/userActionFormVoterRegistrationNft/sections/claimNft'
-import { ClaimNftSuccess } from '@/components/app/userActionFormVoterRegistrationNft/sections/claimNftSuccess'
-import { Survey } from '@/components/app/userActionFormVoterRegistrationNft/sections/survey'
-import { VoterRegistrationForm } from '@/components/app/userActionFormVoterRegistrationNft/sections/voterRegistrationForm'
+} from '@/components/app/userActionFormVoterRegistration/constants'
+import { ClaimNft } from '@/components/app/userActionFormVoterRegistration/sections/claimNft'
+import { ClaimNftSuccess } from '@/components/app/userActionFormVoterRegistration/sections/claimNftSuccess'
+import { Survey } from '@/components/app/userActionFormVoterRegistration/sections/survey'
+import { VoterRegistrationForm } from '@/components/app/userActionFormVoterRegistration/sections/voterRegistrationForm'
 import { useSections } from '@/hooks/useSections'
 import { useMemo } from 'react'
 
-export function UserActionFormVoterRegistrationNft() {
+export function UserActionFormVoterRegistration() {
   const sectionProps = useSections<SectionNames>({
     sections: Object.values(SectionNames),
     initialSectionId: SectionNames.SURVEY,
-    analyticsName: ANALYTICS_NAME_USER_ACTION_FORM_VOTER_REGISTRATION_NFT,
+    analyticsName: ANALYTICS_NAME_USER_ACTION_FORM_VOTER_REGISTRATION,
   })
   const { currentSection: currentTab, onSectionNotFound: onTabNotFound } = sectionProps
 

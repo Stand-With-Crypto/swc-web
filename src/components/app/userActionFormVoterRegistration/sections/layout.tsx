@@ -6,14 +6,14 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { cn } from '@/utils/web/cn'
 
-interface UserActionFormVoterRegistrationNftLayoutProps extends React.PropsWithChildren {
+interface UserActionFormVoterRegistrationLayoutProps extends React.PropsWithChildren {
   onBack?: () => void
 }
 
-export function UserActionFormVoterRegistrationNftLayout({
+export function UserActionFormVoterRegistrationLayout({
   onBack,
   children,
-}: UserActionFormVoterRegistrationNftLayoutProps) {
+}: UserActionFormVoterRegistrationLayoutProps) {
   return (
     <>
       {onBack && <GoBackButton onClick={onBack} />}
@@ -30,7 +30,7 @@ function Heading({ title, subtitle }: { title: string; subtitle: string }) {
     </div>
   )
 }
-UserActionFormVoterRegistrationNftLayout.Heading = Heading
+UserActionFormVoterRegistrationLayout.Heading = Heading
 
 function Container({ children }: React.PropsWithChildren) {
   return (
@@ -39,7 +39,7 @@ function Container({ children }: React.PropsWithChildren) {
     </div>
   )
 }
-UserActionFormVoterRegistrationNftLayout.Container = Container
+UserActionFormVoterRegistrationLayout.Container = Container
 
 function GoBackButton({ onClick }: { onClick: () => void }) {
   return (
@@ -56,4 +56,4 @@ function Footer({ children }: React.PropsWithChildren) {
     </div>
   )
 }
-UserActionFormVoterRegistrationNftLayout.Footer = Footer
+UserActionFormVoterRegistrationLayout.Footer = Footer

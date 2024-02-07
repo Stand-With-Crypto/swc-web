@@ -1,5 +1,5 @@
-import { SectionNames } from '@/components/app/userActionFormVoterRegistrationNft/constants'
-import { UserActionFormVoterRegistrationNftLayout } from '@/components/app/userActionFormVoterRegistrationNft/sections/layout'
+import { SectionNames } from '@/components/app/userActionFormVoterRegistration/constants'
+import { UserActionFormVoterRegistrationLayout } from '@/components/app/userActionFormVoterRegistration/sections/layout'
 import { Button } from '@/components/ui/button'
 import { ExternalLink } from '@/components/ui/link'
 import { UseSectionsReturn } from '@/hooks/useSections'
@@ -8,12 +8,12 @@ interface ClaimNftSuccessProps extends UseSectionsReturn<SectionNames> {}
 
 export function ClaimNftSuccess({ goToSection }: ClaimNftSuccessProps) {
   return (
-    <UserActionFormVoterRegistrationNftLayout
+    <UserActionFormVoterRegistrationLayout
       onBack={() => goToSection(SectionNames.VOTER_REGISTRATION_FORM)}
     >
-      <UserActionFormVoterRegistrationNftLayout.Container>
+      <UserActionFormVoterRegistrationLayout.Container>
         <div className="flex flex-col items-center justify-center gap-8">
-          <UserActionFormVoterRegistrationNftLayout.Heading
+          <UserActionFormVoterRegistrationLayout.Heading
             title="Nice work!"
             subtitle="You're NFT is on the way. Share your activity and help others #standwithcrypto"
           />
@@ -21,7 +21,7 @@ export function ClaimNftSuccess({ goToSection }: ClaimNftSuccessProps) {
             <ExternalLink href="">Share on Twitter/X</ExternalLink>
           </Button>
         </div>
-      </UserActionFormVoterRegistrationNftLayout.Container>
-    </UserActionFormVoterRegistrationNftLayout>
+      </UserActionFormVoterRegistrationLayout.Container>
+    </UserActionFormVoterRegistrationLayout>
   )
 }

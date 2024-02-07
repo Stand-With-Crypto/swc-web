@@ -1,7 +1,7 @@
 'use client'
 import { PrivacyPolicyDialog } from '@/components/app/pagePrivacyPolicy/dialog'
-import { SectionNames } from '@/components/app/userActionFormVoterRegistrationNft/constants'
-import { UserActionFormVoterRegistrationNftLayout } from '@/components/app/userActionFormVoterRegistrationNft/sections/layout'
+import { SectionNames } from '@/components/app/userActionFormVoterRegistration/constants'
+import { UserActionFormVoterRegistrationLayout } from '@/components/app/userActionFormVoterRegistration/sections/layout'
 import { Button } from '@/components/ui/button'
 import { UseSectionsReturn } from '@/hooks/useSections'
 
@@ -9,10 +9,10 @@ interface SurveyProps extends UseSectionsReturn<SectionNames> {}
 
 export function Survey({ goToSection }: SurveyProps) {
   return (
-    <UserActionFormVoterRegistrationNftLayout>
-      <UserActionFormVoterRegistrationNftLayout.Container>
+    <UserActionFormVoterRegistrationLayout>
+      <UserActionFormVoterRegistrationLayout.Container>
         <div className="flex flex-col gap-24">
-          <UserActionFormVoterRegistrationNftLayout.Heading
+          <UserActionFormVoterRegistrationLayout.Heading
             title="Are you registered to vote?"
             subtitle='Register to vote or check your voter registration and get a free "I Registered" NFT'
           />
@@ -47,7 +47,7 @@ export function Survey({ goToSection }: SurveyProps) {
             .
           </p>
         </div>
-      </UserActionFormVoterRegistrationNftLayout.Container>
-    </UserActionFormVoterRegistrationNftLayout>
+      </UserActionFormVoterRegistrationLayout.Container>
+    </UserActionFormVoterRegistrationLayout>
   )
 }

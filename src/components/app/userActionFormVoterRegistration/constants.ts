@@ -7,5 +7,5 @@ export enum SectionNames {
   SUCCESS = 'Success',
 }
 
-export const ANALYTICS_NAME_USER_ACTION_FORM_VOTER_REGISTRATION_NFT =
+export const ANALYTICS_NAME_USER_ACTION_FORM_VOTER_REGISTRATION =
   'User Action Form Voter Registration NFT'
