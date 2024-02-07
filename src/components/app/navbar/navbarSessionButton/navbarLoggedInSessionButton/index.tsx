@@ -24,7 +24,7 @@ export function NavbarLoggedInSessionButton() {
         <Button variant="secondary" className="min-w-24">
           <div>
             {user &&
-              !ensData.isFetching &&
+              !ensData.isLoading &&
               getSensitiveDataUserDisplayName(appendENSHookDataToUser(user, ensData.data))}
           </div>
         </Button>
