@@ -8,4 +8,4 @@ export enum SectionNames {
 }
 
 export const ANALYTICS_NAME_USER_ACTION_FORM_VOTER_REGISTRATION =
-  'User Action Form Voter Registration NFT'
+  'User Action Form Voter Registration'
