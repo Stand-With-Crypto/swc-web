@@ -9,7 +9,7 @@ import { VoterRegistrationForm } from '@/components/app/userActionFormVoterRegis
 import { useSections } from '@/hooks/useSections'
 import { useMemo } from 'react'
 
-export function UserActionFormVoterRegistrationNft({ onClose }: { onClose: () => void }) {
+export function UserActionFormVoterRegistrationNft() {
   const sectionProps = useSections<SectionNames>({
     sections: Object.values(SectionNames),
     initialSectionId: SectionNames.SURVEY,
