@@ -42,11 +42,10 @@ export function CookieConsentBanner({
             </div>
           </button>
           <p className={cn('max-w-2xl text-justify text-xs text-muted-foreground md:text-left')}>
-            We use our own and third-party cookies on our website to enhance your experience,
-            analyze traffic, and for security. Cookies may collect your personal information, such
-            as IP addresses or device identifiers, which we may disclose to our third-party
-            partners. You may opt out of the cookies that are not strictly necessary by choosing
-            from the below options. For more information, visit our{' '}
+            We use our own third-party cookies on our website to enhance your experience, analyze
+            traffic, and for security. Cookies may collect personal information and may be shared
+            with our third-party partners. You may opt out of the cookies that are not strictly
+            necessary by choosing from the below options. For more information, visit our{' '}
             <InternalLink className="underline" href={urls.privacyPolicy()}>
               Privacy Policy
             </InternalLink>

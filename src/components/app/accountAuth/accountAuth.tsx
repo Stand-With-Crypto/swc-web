@@ -10,7 +10,11 @@ import { AccountAuthContent } from './content'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { noop } from 'lodash'
 
-export function AccountAuth({ onClose, ...props }: ConnectEmbedProps & { onClose: () => void }) {
+export function AccountAuth({
+  onClose,
+  isLoading = false,
+  ...props
+}: ConnectEmbedProps & { onClose: () => void; isLoading?: boolean }) {
   const router = useRouter()
 
   const connectionStatus = useConnectionStatus()
@@ -37,7 +41,7 @@ export function AccountAuth({ onClose, ...props }: ConnectEmbedProps & { onClose
     onClose: handleClose,
   }
 
-  if (isAutoConnecting || connectionStatus === 'unknown') {
+  if (isAutoConnecting || connectionStatus === 'unknown' || isLoading) {
     return (
       <>
         <LoadingOverlay />

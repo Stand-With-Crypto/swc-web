@@ -1,5 +1,6 @@
 'use server'
 import { createCharge } from '@/utils/server/coinbaseCommerce/createCharge'
+import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
 
@@ -9,6 +10,9 @@ export const actionCreateCoinbaseCommerceCharge = withServerActionMiddleware(
 )
 
 async function _actionCreateCoinbaseCommerceCharge() {
-  const hostedUrl = (await createCharge(getUserSessionId())).data.hosted_url
+  const user = await getMaybeUserAndMethodOfMatch({})
+  const hostedUrl = (
+    await createCharge({ sessionId: getUserSessionId(), userId: user.user?.id ?? '' })
+  ).data.hosted_url
   return { hostedUrl }
 }

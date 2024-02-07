@@ -1,3 +1,6 @@
+import 'server-only'
+import React from 'react'
+
 import { PageHome } from '@/components/app/pageHome'
 import {
   dialogCloseStyles,
@@ -6,21 +9,24 @@ import {
 } from '@/components/ui/dialog/styles'
 import { InternalLink } from '@/components/ui/link'
 import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
-import { PageProps } from '@/types'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 import { X } from 'lucide-react'
+import { PageProps } from '@/types'
 
-export const revalidate = 3600
-export const dynamic = 'error'
+interface HomepageDialogDeeplinkLayoutProps extends React.PropsWithChildren {
+  size?: 'sm' | 'md'
+  pageParams: PageProps['params']
+  hideModal?: boolean
+}
 
-export default async function Layout({
+export async function HomepageDialogDeeplinkLayout({
   children,
-  params,
-}: PageProps & { children: React.ReactNode }) {
-  const { locale } = params
+  size = 'md',
+  pageParams,
+}: HomepageDialogDeeplinkLayoutProps) {
+  const urls = getIntlUrls(pageParams.locale)
   const asyncProps = await getHomepageData()
-  const urls = getIntlUrls(locale)
   return (
     <>
       <InternalLink
@@ -28,14 +34,15 @@ export default async function Layout({
         href={urls.home()}
         className={cn(dialogOverlayStyles, 'cursor-default')}
       />
-      <div className={cn(dialogContentStyles, 'max-w-3xl')}>
+      <div className={cn(dialogContentStyles, size === 'md' && 'max-w-3xl', 'min-h-[400px]')}>
         {children}
         <InternalLink className={dialogCloseStyles} replace href={urls.home()}>
           <X className="h-4 w-4" />
           <span className="sr-only">Close</span>
         </InternalLink>
       </div>
-      <PageHome params={params} {...asyncProps} />
+
+      <PageHome params={pageParams} {...asyncProps} />
     </>
   )
 }

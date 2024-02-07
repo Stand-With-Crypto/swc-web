@@ -20,14 +20,10 @@ import { object } from 'zod'
 import { toast } from 'sonner'
 
 import { NextImage } from '@/components/ui/image'
-import { PageTitle } from '@/components/ui/pageTitleText'
-import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { useLoadingCallback } from '@/hooks/useLoadingCallback'
-import { ExternalLink, InternalLink } from '@/components/ui/link'
-import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { zodEmailAddress } from '@/validation/fields/zodEmailAddress'
 import { toastGenericError } from '@/utils/web/toastUtils'
@@ -42,13 +38,14 @@ import {
   FormItem,
   FormLabel,
 } from '@/components/ui/form'
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 
 import { ReservedScreens } from './screen'
 import { WalletSelectUIProps, WalletConnect } from './walletConnect'
 import { GOOGLE_AUTH_LOGO, ACCOUNT_AUTH_CONFIG } from './constants'
 import { SignatureScreen } from './signatureScreen'
 import { OTPEmailConfirmation } from './emailConfirmation'
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
+import { ConnectionMethodsContainer } from './connectionMethodsContainer'
 
 export function AccountAuthContent(props: {
   screen: string | WalletConfig
@@ -306,51 +303,6 @@ export function AccountAuthContent(props: {
         </div>
       </ConnectionMethodsContainer>
     </>
-  )
-}
-
-function ConnectionMethodsContainer({ children }: React.PropsWithChildren) {
-  const urls = useIntlUrls()
-  return (
-    <div className="p-6">
-      <div className="mx-auto flex max-w-[460px] flex-col items-center gap-8">
-        <div className="flex flex-col items-center space-y-6">
-          <NextImage
-            priority
-            width={80}
-            height={80}
-            src="/logo/shield.svg"
-            alt="Stand With Crypto Logo"
-          />
-
-          <div className="space-y-4">
-            <PageTitle size="sm">Join Stand With Crypto</PageTitle>
-            <PageSubTitle size="sm">
-              Lawmakers and regulators are threatening the crypto industry. You can fight back and
-              ask for sensible rules. Join the Stand with Crypto movement to make your voice heard
-              in Washington D.C.
-            </PageSubTitle>
-          </div>
-        </div>
-
-        {children}
-
-        <p className="text-center text-xs text-muted-foreground">
-          By signing up, I understand that Stand With Crypto and its vendors may collect and use my
-          Personal Information. To learn more, visit the{' '}
-          <InternalLink className="text-blue-600" target="_blank" href={urls.privacyPolicy()}>
-            Stand With Crypto Alliance Privacy Policy
-          </InternalLink>{' '}
-          and{' '}
-          <ExternalLink
-            className="text-blue-600"
-            href="https://www.quorum.us/static/Privacy-Policy.pdf"
-          >
-            Quorum Privacy Policy
-          </ExternalLink>
-        </p>
-      </div>
-    </div>
   )
 }
 

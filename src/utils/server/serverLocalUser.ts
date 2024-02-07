@@ -83,17 +83,12 @@ function parseFromCookieStrings({
   persistedStr: string | undefined
   currentSessionStr: string | undefined
 }) {
-  if (!cookieConsentStr) {
-    Sentry.captureMessage('serverLocalUser: no cookie consent string found', { tags: { source } })
-    return null
-  }
-  const consent = deserializeCookieConsent(cookieConsentStr)
-  if (!consent.targeting) {
+  if (cookieConsentStr && !deserializeCookieConsent(cookieConsentStr).targeting) {
     return null
   }
   if (!currentSessionStr || !persistedStr) {
     Sentry.captureMessage('serverLocalUser: cookie missing currentSession or persisted', {
-      extra: { currentSessionStr, persistedStr, consent },
+      extra: { currentSessionStr, persistedStr, cookieConsentStr },
       tags: { source },
     })
     return null

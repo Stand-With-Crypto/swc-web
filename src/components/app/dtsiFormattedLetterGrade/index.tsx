@@ -20,11 +20,16 @@ const getBgColor = (letterGrade: DTSILetterGrade | null) => {
   return twNoop('bg-gray-600')
 }
 
-export const DTSIFormattedLetterGrade: React.FC<{
-  person: Pick<DTSI_Person, 'computedStanceScore' | 'manuallyOverriddenStanceScore'>
-  size: number
-}> = ({ person, size }) => {
-  const letterGrade = convertDTSIStanceScoreToLetterGrade(person)
+export const DTSIFormattedLetterGrade: React.FC<
+  (
+    | { person: Pick<DTSI_Person, 'computedStanceScore' | 'manuallyOverriddenStanceScore'> }
+    | { letterGrade: DTSILetterGrade | null }
+  ) & {
+    size: number
+  }
+> = ({ size, ...other }) => {
+  const letterGrade =
+    'letterGrade' in other ? other.letterGrade : convertDTSIStanceScoreToLetterGrade(other.person)
 
   return (
     <div
@@ -34,10 +39,7 @@ export const DTSIFormattedLetterGrade: React.FC<{
       )}
       style={{ width: size, height: size }}
     >
-      <div
-        className="font-extrabold text-white"
-        style={{ fontSize: size * 0.66, paddingTop: size * 0.05, lineHeight: 0 }}
-      >
+      <div className="font-extrabold text-white" style={{ fontSize: size * 0.66, lineHeight: 1 }}>
         {letterGrade || '?'}
       </div>
     </div>

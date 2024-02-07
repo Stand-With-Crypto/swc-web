@@ -50,25 +50,25 @@ it('formats the "update capitol canary advocate" request correctly', () => {
 
   expect(formattedRequest).toMatchInlineSnapshot(`
 {
-  "address1": "164 Bins Corners",
-  "address2": "Suite 904",
+  "address1": "906 Mueller Centers",
+  "address2": "Apt. 890",
   "advocateid": 68251920,
   "campaigns": [
     142628,
   ],
-  "city": "New Trycia",
-  "country": "GA",
-  "email": "Nicklaus_Walker12@gmail.com",
+  "city": "Finnstead",
+  "country": "MH",
+  "email": "Johan71@hotmail.com",
   "emailOptin": 1,
   "emailOptout": 0,
-  "firstname": "Mina",
-  "lastname": "Abbott",
+  "firstname": "Zion",
+  "lastname": "Watsica",
   "p2aSource": "source",
-  "phone": "+19120313363",
+  "phone": "+13912031336",
   "smsOptin": 1,
   "smsOptinConfirmed": 1,
   "smsOptout": 0,
-  "state": "Massachusetts",
+  "state": "West Virginia",
   "tags": [
     "tag1",
     "tag2",
@@ -78,7 +78,7 @@ it('formats the "update capitol canary advocate" request correctly', () => {
   "utm_medium": "utmMedium",
   "utm_source": "utmSource",
   "utm_term": "utmTerm",
-  "zip5": "27975",
+  "zip5": "32797",
 }
 `)
 })

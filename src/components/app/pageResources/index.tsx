@@ -28,7 +28,7 @@ export function PageResources() {
           Events
         </PageTitle>
         <p>Learn more about recent and upcoming events to mobilize the crypto community.</p>
-        <div className="grid grid-flow-col grid-rows-3 gap-4 sm:justify-center lg:grid-rows-1">
+        <div className="grid grid-flow-col grid-rows-3 gap-4 lg:grid-rows-1">
           <EventCard
             imageUrl="/resources/eventCards/stand_with_crypto_day_dc.webp"
             imageAltText="Stand With Crypto Day (Washington DC) event card image"
