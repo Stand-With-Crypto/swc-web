@@ -1,9 +1,9 @@
-import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
 import {
   ANALYTICS_NAME_USER_ACTION_FORM_VOTER_REGISTRATION_NFT,
   SectionNames,
 } from '@/components/app/userActionFormVoterRegistrationNft/constants'
 import { ClaimNft } from '@/components/app/userActionFormVoterRegistrationNft/sections/claimNft'
+import { ClaimNftSuccess } from '@/components/app/userActionFormVoterRegistrationNft/sections/claimNftSuccess'
 import { Survey } from '@/components/app/userActionFormVoterRegistrationNft/sections/survey'
 import { VoterRegistrationForm } from '@/components/app/userActionFormVoterRegistrationNft/sections/voterRegistrationForm'
 import { useSections } from '@/hooks/useSections'
@@ -30,16 +30,12 @@ export function UserActionFormVoterRegistrationNft({ onClose }: { onClose: () =>
       case SectionNames.ACCOUNT_REGISTRATION:
         return null
       case SectionNames.SUCCESS:
-        return (
-          <div className="p-6">
-            <UserActionFormSuccessScreen onClose={onClose} />
-          </div>
-        )
+        return <ClaimNftSuccess {...sectionProps} />
       default:
         onTabNotFound()
         return null
     }
-  }, [currentTab, onClose, onTabNotFound, sectionProps])
+  }, [currentTab, onTabNotFound, sectionProps])
 
   return content
 }
