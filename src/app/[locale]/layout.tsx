@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import { notFound } from 'next/navigation'
+import _ from 'lodash'
 import NextTopLoader from 'nextjs-toploader'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 
@@ -15,6 +16,7 @@ import { Toaster } from '@/components/ui/sonner'
 import { TopLevelClientLogic } from '@/app/[locale]/topLevelClientLogic'
 import { CookieConsent } from '@/components/app/cookieConsent'
 import { Analytics } from '@vercel/analytics/react'
+import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
 // we want dynamicParams to be false for this top level layout, but we also want to ensure that subpages can have dynamic params
 // Next.js doesn't allow this so we allow dynamic params in the config here, and then trigger a notFound in the layout if one is passed
@@ -25,7 +27,11 @@ export async function generateStaticParams() {
 
 const inter = Inter({ subsets: ['latin'] })
 
-const title = `Stand With Crypto`
+const title = `${
+  NEXT_PUBLIC_ENVIRONMENT === 'production'
+    ? ''
+    : `${_.capitalize(NEXT_PUBLIC_ENVIRONMENT.toLowerCase())} Env - `
+}Stand With Crypto`
 const description = `Stand with Crypto Alliance is a non-profit organization dedicated to uniting global crypto advocates.`
 const ogImage = getOpenGraphImageUrl({ title: description })
 

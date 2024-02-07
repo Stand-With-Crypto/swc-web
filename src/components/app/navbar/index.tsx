@@ -1,5 +1,6 @@
-import { NavbarSessionButton } from '@/components/app/navbar/navbarSessionButton'
-import { navbarSessionButtonMessages } from '@/components/app/navbar/navbarSessionButton/navbarSessionButtonClient.messages'
+import { MaybeAuthenticatedContent } from '@/components/app/maybeAuthenticatedContent'
+import { NavbarLoggedInButton } from '@/components/app/navbar/navbarLoggedInButton'
+import { ThirdwebLoginButton } from '@/components/app/thirdwebLoginButton'
 import { Button } from '@/components/ui/button'
 import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/drawer'
 import { NextImage } from '@/components/ui/image'
@@ -109,9 +110,9 @@ export async function Navbar({ locale }: { locale: SupportedLocale }) {
                 </Button>
               </div>
               <div>
-                <NavbarSessionButton
-                  messages={generateClientComponentMessages(intl, navbarSessionButtonMessages)}
-                />
+                <MaybeAuthenticatedContent authenticatedContent={<NavbarLoggedInButton />}>
+                  <ThirdwebLoginButton variant="secondary">Log In</ThirdwebLoginButton>
+                </MaybeAuthenticatedContent>
               </div>
             </div>
           </DrawerContent>
@@ -121,9 +122,9 @@ export async function Navbar({ locale }: { locale: SupportedLocale }) {
           <Button className="mr-3" asChild>
             <InternalLink href={urls.donate()}>Donate</InternalLink>
           </Button>
-          <NavbarSessionButton
-            messages={generateClientComponentMessages(intl, navbarSessionButtonMessages)}
-          />
+          <MaybeAuthenticatedContent authenticatedContent={<NavbarLoggedInButton />}>
+            <ThirdwebLoginButton variant="secondary">Log In</ThirdwebLoginButton>
+          </MaybeAuthenticatedContent>
         </div>
       </nav>
     </>

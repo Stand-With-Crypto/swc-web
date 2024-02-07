@@ -13,6 +13,7 @@ import {
 } from '@thirdweb-dev/react'
 
 import { useAuthUser } from '@/hooks/useAuthUser'
+import { useDetectWipedDatabaseAndLogOutUser } from '@/hooks/useDetectWipedDatabaseAndLogOutUser'
 import { LocaleContext } from '@/hooks/useLocale'
 import { SupportedLocale } from '@/intl/locales'
 import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
@@ -22,8 +23,6 @@ import { getUserSessionIdOnClient } from '@/utils/web/clientUserSessionId'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { Suspense, useEffect } from 'react'
-import { useDetectWipedDatabaseAndLogOutUser } from '@/hooks/useDetectWipedDatabaseAndLogOutUser'
-import { ACCOUNT_AUTH_CONFIG } from '@/components/app/accountAuth/constants'
 
 const NEXT_PUBLIC_THIRDWEB_CLIENT_ID = requiredEnv(
   process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID,
@@ -81,7 +80,6 @@ export function TopLevelClientLogic({
     <LocaleContext.Provider value={locale}>
       <ThirdwebProvider
         locale={en()}
-        theme={ACCOUNT_AUTH_CONFIG.theme}
         activeChain={Base}
         supportedWallets={[
           metamaskWallet(),
