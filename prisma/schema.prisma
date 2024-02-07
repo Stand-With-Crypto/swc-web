@@ -226,6 +226,7 @@ enum UserActionType {
   OPT_IN
   TWEET
   NFT_MINT
+  VOTER_REGISTRATION
 }
 
 model UserAction {
