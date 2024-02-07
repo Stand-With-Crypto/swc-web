@@ -1,8 +1,4 @@
-import {
-  COOKIE_CONSENT_COOKIE_NAME,
-  defaultCookieConsent,
-  deserializeCookieConsent,
-} from '@/utils/shared/cookieConsent'
+import { COOKIE_CONSENT_COOKIE_NAME, deserializeCookieConsent } from '@/utils/shared/cookieConsent'
 import {
   CurrentSessionLocalUser,
   LOCAL_USER_CURRENT_SESSION_KEY,
