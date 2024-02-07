@@ -45,13 +45,13 @@ function RecentActivityRowBase({
       onMouseEnter={() => isMobile || setHasFocus(true)}
       onMouseLeave={() => isMobile || setHasFocus(false)}
     >
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-4">
         <div>
-          <UserAvatar size={30} user={action.user} />
+          <UserAvatar size={40} user={action.user} />
         </div>
         <div>{children}</div>
       </div>
-      <div className="shrink-0 text-xs text-gray-500">
+      <div className="shrink-0 text-xs text-gray-500 lg:text-base">
         {/* TODO add animation */}
         {hasFocus && onFocusContent ? (
           onFocusContent?.()
@@ -78,10 +78,10 @@ function RecentActivityRowBase({
 }
 
 const MainText = ({ children }: { children: React.ReactNode }) => (
-  <div className="text-sm font-bold text-gray-900">{children}</div>
+  <div className="text-sm font-semibold text-gray-900 lg:text-xl">{children}</div>
 )
 const SubText = ({ children }: { children: React.ReactNode }) => (
-  <div className="hidden text-xs text-gray-500 md:block">{children}</div>
+  <div className="hidden text-xs text-gray-500 md:block lg:text-base">{children}</div>
 )
 
 const formatDTSIPerson = (person: DTSIPersonForUserActions) => {

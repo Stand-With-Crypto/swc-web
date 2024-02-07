@@ -117,7 +117,7 @@ export function PagePoliticianDetails({
         </div>
         <TooltipProvider>
           <Tooltip>
-            <TooltipTrigger className="my-8 flex w-full items-center gap-4 rounded-xl bg-gray-100 p-3 text-left md:my-12">
+            <TooltipTrigger className="my-8 flex w-full items-center gap-4 rounded-3xl bg-gray-100 p-3 text-left md:my-12">
               <div>
                 <DTSIFormattedLetterGrade size={60} person={person} />
               </div>
@@ -157,7 +157,7 @@ export function PagePoliticianDetails({
           {!stances.length && <div>No recent statements.</div>}
           {stances.map(stance => {
             return (
-              <article key={stance.id} className={cn('rounded-xl bg-gray-100 p-4 md:p-6')}>
+              <article key={stance.id} className={cn('rounded-3xl bg-gray-100 p-4 md:p-6')}>
                 <DTSIStanceDetails locale={locale} stance={stance} person={person} />
               </article>
             )
