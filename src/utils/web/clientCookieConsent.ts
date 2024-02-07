@@ -1,7 +1,7 @@
 import {
   COOKIE_CONSENT_COOKIE_NAME,
   CookieConsentPermissions,
-  defaultCookieConsent,
+  DEFAULT_COOKIE_CONSENT,
   deserializeCookieConsent,
 } from '@/utils/shared/cookieConsent'
 import Cookies from 'js-cookie'
@@ -13,7 +13,7 @@ export function setClientCookieConsent(val: CookieConsentPermissions | null) {
 
 export function getClientCookieConsent(): CookieConsentPermissions {
   if (mutableClientCookieConsent === null) {
-    return defaultCookieConsent()
+    return DEFAULT_COOKIE_CONSENT
   }
   if (mutableClientCookieConsent) {
     return mutableClientCookieConsent
@@ -21,7 +21,7 @@ export function getClientCookieConsent(): CookieConsentPermissions {
   const cookieValue = Cookies.get(COOKIE_CONSENT_COOKIE_NAME)
   if (!cookieValue) {
     mutableClientCookieConsent = null
-    return defaultCookieConsent()
+    return DEFAULT_COOKIE_CONSENT
   }
   const value = deserializeCookieConsent(cookieValue)
   mutableClientCookieConsent = value

@@ -27,11 +27,8 @@ export function deserializeCookieConsent(cookieValue: string): CookieConsentPerm
   return permissions
 }
 
-export function defaultCookieConsent() {
-  const permissions: CookieConsentPermissions = {
-    functional: true,
-    performance: true,
-    targeting: true,
-  }
-  return permissions
+export const DEFAULT_COOKIE_CONSENT: Readonly<CookieConsentPermissions> = {
+  functional: true,
+  performance: true,
+  targeting: true,
 }
