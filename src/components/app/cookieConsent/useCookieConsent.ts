@@ -7,6 +7,7 @@ import {
   CookieConsentPermissions,
   serializeCookieConsent,
 } from '@/utils/shared/cookieConsent'
+import { setClientCookieConsent } from '@/utils/web/clientCookieConsent'
 
 export function useCookieConsent() {
   const [cookieConsentCookie, setCookieConsentCookie, removeCookieConsentCookie] = useCookieState(
@@ -14,63 +15,38 @@ export function useCookieConsent() {
   )
 
   const toggleProviders = React.useCallback((permissions: CookieConsentPermissions) => {
-    /*
-      to be conservative, if someone opts out of functional or performance, we should assume
-      they don't want targeting either
-      */
-    if (!permissions.functional || !permissions.performance || !permissions.targeting) {
+    if (!permissions.targeting) {
       mixpanel.opt_out_tracking()
     }
-    if (permissions.functional && permissions.performance && permissions.targeting) {
+    if (permissions.targeting) {
       mixpanel.opt_in_tracking()
     }
   }, [])
 
   const acceptSpecificCookies = React.useCallback(
-    (consentCookie: CookieConsentPermissions): void => {
-      setCookieConsentCookie(serializeCookieConsent(consentCookie))
-      toggleProviders(consentCookie)
+    (values: CookieConsentPermissions) => {
+      setCookieConsentCookie(serializeCookieConsent(values))
+      setClientCookieConsent(values)
+      toggleProviders(values)
     },
     [setCookieConsentCookie, toggleProviders],
   )
 
-  const acceptAllCookieValue = React.useMemo(
-    () =>
-      serializeCookieConsent({
-        functional: true,
-        performance: true,
-        targeting: true,
-      }),
-    [],
-  )
-
-  const rejectAllCookieValue = React.useMemo(
-    () =>
-      serializeCookieConsent({
-        functional: false,
-        performance: false,
-        targeting: false,
-      }),
-    [],
-  )
-
-  const rejectAllOptionalCookies = React.useCallback((): void => {
-    setCookieConsentCookie(rejectAllCookieValue)
-    toggleProviders({
+  const rejectAllOptionalCookies = React.useCallback(() => {
+    acceptSpecificCookies({
       functional: false,
       performance: false,
       targeting: false,
     })
-  }, [setCookieConsentCookie, rejectAllCookieValue, toggleProviders])
+  }, [acceptSpecificCookies])
 
-  const acceptAllCookies = React.useCallback((): void => {
-    setCookieConsentCookie(acceptAllCookieValue)
-    toggleProviders({
+  const acceptAllCookies = React.useCallback(() => {
+    acceptSpecificCookies({
       functional: true,
       performance: true,
       targeting: true,
     })
-  }, [setCookieConsentCookie, acceptAllCookieValue, toggleProviders])
+  }, [acceptSpecificCookies])
 
   return {
     acceptSpecificCookies,
