@@ -91,7 +91,7 @@ export function ThirdwebLoginContent(props: ConnectEmbedProps) {
 function ThirdwebLoginEmbedded(props: ConnectEmbedProps) {
   return (
     <ConnectEmbed
-      style={{ border: 'none' }}
+      style={{ border: 'none', maxWidth: 'unset' }}
       theme={lightTheme({
         colors: {
           accentText: '#0f172a',
@@ -104,7 +104,7 @@ function ThirdwebLoginEmbedded(props: ConnectEmbedProps) {
           secondaryButtonBg: '#f1f5f9',
           connectedButtonBg: '#f1f5f9',
           connectedButtonBgHover: '#e4e2e4',
-          walletSelectorButtonHoverBg: '#0f172a',
+          walletSelectorButtonHoverBg: '#e4e2e4',
           secondaryIconColor: '#706f78',
         },
       })}
