@@ -36,7 +36,7 @@ UserActionFormLayout.Heading = Heading
 function Container({ children }: React.PropsWithChildren) {
   return (
     <div className="flex flex-grow">
-      <div className="space-y-4 md:space-y-8">{children}</div>
+      <div className="w-full space-y-4  md:space-y-8">{children}</div>
     </div>
   )
 }

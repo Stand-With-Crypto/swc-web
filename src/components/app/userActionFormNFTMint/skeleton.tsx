@@ -1,7 +1,7 @@
 'use client'
 
 import { UserActionFormLayout } from '@/components/app/userActionFormCommon'
-import { ContractMetadataDisplaySkeleton } from '@/components/app/userActionFormNFTMint/tabs/intro'
+import { ContractMetadataDisplaySkeleton } from '@/components/app/userActionFormNFTMint/sections/intro'
 import { Button } from '@/components/ui/button'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { Skeleton } from '@/components/ui/skeleton'

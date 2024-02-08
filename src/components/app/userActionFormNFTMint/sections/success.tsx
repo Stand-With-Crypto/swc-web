@@ -1,6 +1,5 @@
 'use client'
 
-import { UnauthenticatedSessionButton } from '@/components/app/unauthenticatedSessionButton'
 import { UserActionFormLayout } from '@/components/app/userActionFormCommon'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { useThirdwebData } from '@/hooks/useThirdwebData'
@@ -25,22 +24,9 @@ export function UserActionFormNFTMintSuccess({
       {(session.isLoading || isLoadingContractMetadata) && <LoadingOverlay />}
       <UserActionFormLayout.Container>
         <UserActionFormLayout.Footer>
-          {session.isLoggedIn ? (
-            <Button
-              onClick={() => goToSection(UserActionFormNFTMintSectionNames.CHECKOUT)}
-              size="lg"
-            >
-              Continue
-            </Button>
-          ) : (
-            <UnauthenticatedSessionButton variant="primary" />
-          )}
-
-          {!session.isLoggedIn && (
-            <p className="text-sm text-muted-foreground">
-              You will need to login first to mint the NFT
-            </p>
-          )}
+          <Button onClick={() => goToSection(UserActionFormNFTMintSectionNames.CHECKOUT)} size="lg">
+            Back
+          </Button>
         </UserActionFormLayout.Footer>
       </UserActionFormLayout.Container>
     </UserActionFormLayout>

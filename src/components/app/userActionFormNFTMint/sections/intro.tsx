@@ -16,12 +16,13 @@ import { UseSectionsReturn } from '@/hooks/useSections'
 import { UserActionFormNFTMintSectionNames } from '@/components/app/userActionFormNFTMint'
 import { Button } from '@/components/ui/button'
 import {
-  NFT_DONATION_AMOUNT,
+  ETH_NFT_DONATION_AMOUNT,
   MINT_NFT_CONTRACT_ADDRESS,
 } from '@/components/app/userActionFormNFTMint/constants'
 import { SupportedCryptoCurrencyCodes } from '@/utils/shared/currency'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useThirdwebContractMetadata } from '@/hooks/useThirdwebContractMetadata'
+import { fromBigNumber } from '@/utils/shared/bigNumber'
 
 export function UserActionFormNFTMintIntro({
   goToSection,
@@ -59,6 +60,10 @@ export function UserActionFormNFTMintIntro({
   )
 }
 
+const ETH_NFT_DONATION_AMOUNT_DISPLAY = `${fromBigNumber(ETH_NFT_DONATION_AMOUNT)} ${
+  SupportedCryptoCurrencyCodes.ETH
+}`
+
 function ContractMetadataDisplay({
   contractMetadata,
 }: {
@@ -67,6 +72,8 @@ function ContractMetadataDisplay({
   if (!contractMetadata) {
     return <ContractMetadataDisplaySkeleton />
   }
+
+  console.log(ETH_NFT_DONATION_AMOUNT, ETH_NFT_DONATION_AMOUNT.toNumber())
 
   return (
     <>
@@ -84,9 +91,7 @@ function ContractMetadataDisplay({
 
           <div>
             <PageSubTitle className="text-start">
-              <strong className="text-primary">
-                {NFT_DONATION_AMOUNT} {SupportedCryptoCurrencyCodes.ETH}
-              </strong>
+              <strong className="text-primary">{ETH_NFT_DONATION_AMOUNT_DISPLAY}</strong>
               <br />
               on Base Network
             </PageSubTitle>
@@ -114,9 +119,7 @@ export function ContractMetadataDisplaySkeleton() {
           <div>
             <Skeleton>
               <PageSubTitle className="text-start">
-                <strong className="text-primary">
-                  {NFT_DONATION_AMOUNT} {SupportedCryptoCurrencyCodes.ETH}
-                </strong>
+                <strong className="text-primary">{ETH_NFT_DONATION_AMOUNT_DISPLAY}</strong>
                 <br />
                 on Base Network
               </PageSubTitle>
@@ -128,9 +131,9 @@ export function ContractMetadataDisplaySkeleton() {
       <Skeleton>
         <p className="text-lg text-muted-foreground">
           This collectible commemorates the launch of the Stand With Crypto Alliance on August 14,
-          2023. Priced at {NFT_DONATION_AMOUNT} {SupportedCryptoCurrencyCodes.ETH}, this represents
-          the 435 congressional districts in the U.S. All proceeds benefit the Alliance. Secure
-          yours on standwithcrypto.org.
+          2023. Priced at {ETH_NFT_DONATION_AMOUNT_DISPLAY}, this represents the 435 congressional
+          districts in the U.S. All proceeds benefit the Alliance. Secure yours on
+          standwithcrypto.org.
         </p>
       </Skeleton>
     </>

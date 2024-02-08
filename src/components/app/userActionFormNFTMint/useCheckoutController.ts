@@ -1,13 +1,13 @@
-import {
-  NFT_DONATION_AMOUNT,
-  NFT_DONATION_GAS_FEE,
-} from '@/components/app/userActionFormNFTMint/constants'
+import { ETH_NFT_DONATION_AMOUNT } from '@/components/app/userActionFormNFTMint/constants'
+import { fromBigNumber, toBigNumber } from '@/utils/shared/bigNumber'
+import { getGasPrice, toEther, useSDK } from '@thirdweb-dev/react'
 import React from 'react'
+import useSWR from 'swr'
 
 export interface UseCheckoutControllerReturn {
-  mintFee: number
-  gasFee: number
-  totalFee: number
+  mintFee?: string
+  gasFee?: string
+  totalFee?: string
   quantity: number
   incrementQuantity: () => void
   decrementQuantity: () => void
@@ -15,24 +15,27 @@ export interface UseCheckoutControllerReturn {
 }
 
 export function useCheckoutController({
-  gasUnitFee = NFT_DONATION_GAS_FEE,
-  mintUnitFee = NFT_DONATION_AMOUNT,
+  mintUnitFee = ETH_NFT_DONATION_AMOUNT,
 } = {}): UseCheckoutControllerReturn {
   const [quantity, setQuantity] = React.useState(1)
+  const { data: gasUnitFee } = useGasFee()
 
   const values = React.useMemo<
     Pick<UseCheckoutControllerReturn, 'mintFee' | 'gasFee' | 'totalFee'>
   >(() => {
-    const mintFee = mintUnitFee * quantity
-    const gasFee = gasUnitFee * quantity
-    const totalFee = mintFee + gasFee
+    if (!gasUnitFee) {
+      return {}
+    }
+    const mintFee = mintUnitFee.mul(quantity)
+    const gasFee = gasUnitFee.mul(quantity)
+    const totalFee = mintFee.add(gasFee)
 
     return {
-      mintFee,
-      gasFee,
-      totalFee,
+      mintFee: fromBigNumber(mintFee),
+      gasFee: fromBigNumber(gasFee),
+      totalFee: fromBigNumber(totalFee),
     }
-  }, [mintUnitFee, quantity, gasUnitFee])
+  }, [gasUnitFee, mintUnitFee, quantity])
 
   return {
     ...values,
@@ -41,4 +44,17 @@ export function useCheckoutController({
     decrementQuantity: () => setQuantity(prev => Math.max(prev - 1, 1)),
     setQuantity,
   }
+}
+
+function useGasFee() {
+  const contextSDK = useSDK()
+
+  return useSWR(contextSDK, async sdk => {
+    if (!sdk) {
+      return
+    }
+
+    const gasPrice = await getGasPrice(sdk.getProvider())
+    return toBigNumber(toEther(gasPrice))
+  })
 }

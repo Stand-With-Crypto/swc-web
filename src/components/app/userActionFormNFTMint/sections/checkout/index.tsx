@@ -9,16 +9,30 @@ import {
 } from '@/components/app/userActionFormCommon'
 import { UserActionFormNFTMintSectionNames } from '@/components/app/userActionFormNFTMint'
 import { MINT_NFT_CONTRACT_ADDRESS } from '@/components/app/userActionFormNFTMint/constants'
-import { Button } from '@/components/ui/button'
+import { Button, buttonVariants } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { UseSectionsReturn } from '@/hooks/useSections'
-import { useThirdwebContractMetadata } from '@/hooks/useThirdwebContractMetadata'
 import { SupportedCryptoCurrencyCodes } from '@/utils/shared/currency'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { UseCheckoutControllerReturn } from '@/components/app/userActionFormNFTMint/useCheckoutController'
 
 import styles from './checkout.module.css'
+import { Skeleton } from '@/components/ui/skeleton'
+import {
+  Web3Button,
+  useAddress,
+  useContract,
+  useContractMetadata,
+  useMintNFT,
+} from '@thirdweb-dev/react'
+import { cn } from '@/utils/web/cn'
+
+interface UserActionFormNFTMintCheckoutProps
+  extends UseSectionsReturn<UserActionFormNFTMintSectionNames>,
+    UseCheckoutControllerReturn {
+  onMint: () => void
+}
 
 export function UserActionFormNFTMintCheckout({
   goToSection,
@@ -29,20 +43,32 @@ export function UserActionFormNFTMintCheckout({
   mintFee,
   totalFee,
   gasFee,
-}: UseSectionsReturn<UserActionFormNFTMintSectionNames> & UseCheckoutControllerReturn) {
-  const { data: contractMetadata, isLoading } =
-    useThirdwebContractMetadata(MINT_NFT_CONTRACT_ADDRESS)
+  onMint,
+}: UserActionFormNFTMintCheckoutProps) {
+  const { contract } = useContract(MINT_NFT_CONTRACT_ADDRESS)
+  const { data: contractMetadata, isLoading: isLoadingMetadata } = useContractMetadata(contract)
+  const { mutateAsync: mintNFT, isLoading: isMintingNFT, error } = useMintNFT(contract)
+  const address = useAddress()
 
-  console.log({ gasFee, mintFee, totalFee })
-  const fixDecimals = (value: number) => Number(value.toFixed(5))
-
-  if (!contractMetadata || isLoading) {
+  if (!contractMetadata || isLoadingMetadata || !address) {
     return (
       <UserActionFormLayout>
         <UserActionFormLayout.Container>
           <NFTDisplaySkeleton size="sm" />
         </UserActionFormLayout.Container>
       </UserActionFormLayout>
+    )
+  }
+
+  const handleMintNFT = async () => {
+    mintNFT(
+      {
+        metadata: contractMetadata,
+        to: address,
+      },
+      {
+        onSuccess: () => {},
+      },
     )
   }
 
@@ -78,14 +104,14 @@ export function UserActionFormNFTMintCheckout({
           </div>
         </Card>
 
-        <Card>
+        <Card className="w-full">
           <div className="space-y-8">
             <div className="flex items-center justify-between">
-              <div>
+              <div className="max-w-96">
                 <p>Donation</p>
                 <p className="text-xs text-muted-foreground">
                   <Balancer>
-                    {fixDecimals(mintFee)}
+                    {mintFee}
                     {SupportedCryptoCurrencyCodes.ETH} of the mint fee will be donated to Stand With
                     Crypto Alliance, Inc. (SWCA). Donations from foreign nationals and government
                     contractors are prohibited.
@@ -93,28 +119,30 @@ export function UserActionFormNFTMintCheckout({
                 </p>
               </div>
 
-              <p className="min-w-max">
-                {fixDecimals(mintFee)} {SupportedCryptoCurrencyCodes.ETH}
-              </p>
+              <CurrencyDisplay value={mintFee} />
             </div>
 
             <div className="flex items-center justify-between">
               <p>Gas fee</p>
-              <p className="min-w-max">
-                {fixDecimals(gasFee)} {SupportedCryptoCurrencyCodes.ETH}
-              </p>
+              <CurrencyDisplay value={gasFee} />
             </div>
 
             <div className="flex items-center justify-between">
               <p>Total</p>
-              <p className="min-w-max">
-                {fixDecimals(totalFee)} {SupportedCryptoCurrencyCodes.ETH}
-              </p>
+              <CurrencyDisplay value={totalFee} />
             </div>
           </div>
         </Card>
 
         <UserActionFormLayout.Footer>
+          <Web3Button
+            className={cn(buttonVariants({ variant: 'default', size: 'lg' }))}
+            contractAddress={MINT_NFT_CONTRACT_ADDRESS}
+            action={onMint}
+          >
+            Mint now
+          </Web3Button>
+
           <Button
             size="lg"
             onClick={() => {
@@ -126,6 +154,18 @@ export function UserActionFormNFTMintCheckout({
         </UserActionFormLayout.Footer>
       </UserActionFormLayout.Container>
     </UserActionFormLayout>
+  )
+}
+
+function CurrencyDisplay({ value }: { value?: string }) {
+  if (!value) {
+    return <Skeleton className="min-w-max" />
+  }
+
+  return (
+    <p className="min-w-max">
+      {value} {SupportedCryptoCurrencyCodes.ETH}
+    </p>
   )
 }
 
@@ -142,7 +182,7 @@ function QuantityInput({
 }) {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = Number(event.target.value)
-    if (newValue > 0) {
+    if (newValue > 0 && newValue <= 1000) {
       onChange(newValue)
     }
   }

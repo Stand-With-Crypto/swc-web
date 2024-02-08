@@ -1,8 +1,8 @@
 import { useSections } from '@/hooks/useSections'
 
-import { UserActionFormNFTMintIntro } from './tabs/intro'
-import { UserActionFormNFTMintCheckout } from './tabs/checkout'
-import { UserActionFormNFTMintSuccess } from './tabs/success'
+import { UserActionFormNFTMintIntro } from './sections/intro'
+import { UserActionFormNFTMintCheckout } from './sections/checkout'
+import { UserActionFormNFTMintSuccess } from './sections/success'
 import { useCheckoutController } from './useCheckoutController'
 
 export enum UserActionFormNFTMintSectionNames {
@@ -10,7 +10,6 @@ export enum UserActionFormNFTMintSectionNames {
   CHECKOUT = 'checkout',
   SUCCESS = 'success',
 }
-
 export function UserActionFormNFTMint(_props: { onCancel: () => void; onSuccess: () => void }) {
   const sectionProps = useSections({
     sections: Object.values(UserActionFormNFTMintSectionNames),
