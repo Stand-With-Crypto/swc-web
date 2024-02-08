@@ -1,4 +1,5 @@
 'use client'
+import _ from 'lodash'
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
@@ -64,6 +65,7 @@ export function ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: Suppo
     )
   }
   const person = res.data
+  const score = person.manuallyOverriddenStanceScore || person.computedStanceScore
   return (
     <div>
       <p className="mb-3 text-xl font-bold">Your representative</p>
@@ -84,9 +86,17 @@ export function ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: Suppo
           <div>
             <div className="font-bold">Your representative is {dtsiPersonFullName(person)}</div>
             <div className="text-fontcolor-muted">
-              {/* TODO this needs different copy/UX if they're pro crypto */}
-              Learn how to change {possessive(person.firstNickname || person.firstName)} stance on
-              crypto.
+              {_.isNil(score) || score < 60 ? (
+                <>
+                  Learn how to change {possessive(person.firstNickname || person.firstName)} stance
+                  on crypto.
+                </>
+              ) : (
+                <>
+                  Let {possessive(person.firstNickname || person.firstName)} know how important
+                  pro-crypto politicians are to you.
+                </>
+              )}
             </div>
           </div>
         </div>

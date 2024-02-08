@@ -1,7 +1,7 @@
 export function PageTermsOfService() {
   return (
     <article className="prose max-w-full">
-      <h1>[STAND WITH CRYPTO ALLIANCE] TERMS OF SERVICE</h1>
+      <h1>STAND WITH CRYPTO ALLIANCE TERMS OF SERVICE</h1>
       <p>Effective as of August 14, 2023</p>
 
       <p>

@@ -87,7 +87,6 @@ const SubText = ({ children }: { children: React.ReactNode }) => (
 )
 
 const formatDTSIPerson = (person: DTSIPersonForUserActions) => {
-  // TODO add their current role
   const politicalAffiliation = person.politicalAffiliationCategory
     ? `(${dtsiPersonPoliticalAffiliationCategoryAbbreviation(person.politicalAffiliationCategory)})`
     : ''

@@ -19,7 +19,7 @@ const DTSI_WEBHOOK_SECRET = requiredOutsideLocalEnv(
   'DTSI_WEBHOOK_SECRET',
 )
 
-// TODO debounce this endpoint with inngest
+// LATER-TASK debounce this endpoint with inngest
 
 export async function POST(request: NextRequest) {
   if (!request.headers.get('authorization')) {
