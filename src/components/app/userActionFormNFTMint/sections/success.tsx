@@ -12,7 +12,7 @@ import { UseCheckoutControllerReturn } from '@/components/app/userActionFormNFTM
 
 export function UserActionFormNFTMintSuccess({
   goToSection,
-  totalFee: _totalFee,
+  totalFeeDisplay: _totalFee,
 }: UseSectionsReturn<UserActionFormNFTMintSectionNames> &
   Pick<UseCheckoutControllerReturn, 'totalFee'>) {
   const { session } = useThirdwebData()

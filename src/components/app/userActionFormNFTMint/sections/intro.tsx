@@ -2,7 +2,6 @@
 
 import { ValidContractInstance } from '@thirdweb-dev/react'
 
-import { UnauthenticatedSessionButton } from '@/components/app/unauthenticatedSessionButton'
 import {
   UserActionFormLayout,
   NFTDisplay,
@@ -23,6 +22,8 @@ import { SupportedCryptoCurrencyCodes } from '@/utils/shared/currency'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useThirdwebContractMetadata } from '@/hooks/useThirdwebContractMetadata'
 import { fromBigNumber } from '@/utils/shared/bigNumber'
+import { MaybeAuthenticatedContent } from '@/components/app/authentication/maybeAuthenticatedContent'
+import { ThirdwebLoginDialog } from '@/components/app/authentication/thirdwebLoginContent'
 
 export function UserActionFormNFTMintIntro({
   goToSection,
@@ -38,16 +39,20 @@ export function UserActionFormNFTMintIntro({
         <ContractMetadataDisplay contractMetadata={contractMetadata} />
 
         <UserActionFormLayout.Footer>
-          {session.isLoggedIn ? (
-            <Button
-              onClick={() => goToSection(UserActionFormNFTMintSectionNames.CHECKOUT)}
-              size="lg"
-            >
-              Continue
-            </Button>
-          ) : (
-            <UnauthenticatedSessionButton variant="primary" />
-          )}
+          <MaybeAuthenticatedContent
+            authenticatedContent={
+              <Button
+                onClick={() => goToSection(UserActionFormNFTMintSectionNames.CHECKOUT)}
+                size="lg"
+              >
+                Continue
+              </Button>
+            }
+          >
+            <ThirdwebLoginDialog>
+              <Button size="lg">Log In</Button>
+            </ThirdwebLoginDialog>
+          </MaybeAuthenticatedContent>
 
           {!session.isLoggedIn && (
             <p className="text-sm text-muted-foreground">
@@ -72,8 +77,6 @@ function ContractMetadataDisplay({
   if (!contractMetadata) {
     return <ContractMetadataDisplaySkeleton />
   }
-
-  console.log(ETH_NFT_DONATION_AMOUNT, ETH_NFT_DONATION_AMOUNT.toNumber())
 
   return (
     <>

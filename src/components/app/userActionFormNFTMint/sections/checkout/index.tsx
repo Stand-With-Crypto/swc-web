@@ -9,7 +9,7 @@ import {
 } from '@/components/app/userActionFormCommon'
 import { UserActionFormNFTMintSectionNames } from '@/components/app/userActionFormNFTMint'
 import { MINT_NFT_CONTRACT_ADDRESS } from '@/components/app/userActionFormNFTMint/constants'
-import { Button, buttonVariants } from '@/components/ui/button'
+import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { UseSectionsReturn } from '@/hooks/useSections'
 import { SupportedCryptoCurrencyCodes } from '@/utils/shared/currency'
@@ -19,14 +19,10 @@ import { UseCheckoutControllerReturn } from '@/components/app/userActionFormNFTM
 
 import styles from './checkout.module.css'
 import { Skeleton } from '@/components/ui/skeleton'
-import {
-  Web3Button,
-  useAddress,
-  useContract,
-  useContractMetadata,
-  useMintNFT,
-} from '@thirdweb-dev/react'
-import { cn } from '@/utils/web/cn'
+import { Web3Button, useAddress, useContract, useContractMetadata } from '@thirdweb-dev/react'
+import { useCheckoutError } from '@/components/app/userActionFormNFTMint/sections/checkout/useCheckoutError'
+import { toBigNumber } from '@/utils/shared/bigNumber'
+import { theme } from '@/utils/web/thirdweb/theme'
 
 interface UserActionFormNFTMintCheckoutProps
   extends UseSectionsReturn<UserActionFormNFTMintSectionNames>,
@@ -40,15 +36,18 @@ export function UserActionFormNFTMintCheckout({
   incrementQuantity,
   decrementQuantity,
   setQuantity,
-  mintFee,
+  mintFeeDisplay,
+  totalFeeDisplay,
   totalFee,
-  gasFee,
+  gasFeeDisplay,
   onMint,
 }: UserActionFormNFTMintCheckoutProps) {
   const { contract } = useContract(MINT_NFT_CONTRACT_ADDRESS)
   const { data: contractMetadata, isLoading: isLoadingMetadata } = useContractMetadata(contract)
-  const { mutateAsync: mintNFT, isLoading: isMintingNFT, error } = useMintNFT(contract)
   const address = useAddress()
+  const checkoutError = useCheckoutError({ totalFee: totalFee ?? toBigNumber('0') })
+
+  console.log({ checkoutError })
 
   if (!contractMetadata || isLoadingMetadata || !address) {
     return (
@@ -57,18 +56,6 @@ export function UserActionFormNFTMintCheckout({
           <NFTDisplaySkeleton size="sm" />
         </UserActionFormLayout.Container>
       </UserActionFormLayout>
-    )
-  }
-
-  const handleMintNFT = async () => {
-    mintNFT(
-      {
-        metadata: contractMetadata,
-        to: address,
-      },
-      {
-        onSuccess: () => {},
-      },
     )
   }
 
@@ -111,7 +98,7 @@ export function UserActionFormNFTMintCheckout({
                 <p>Donation</p>
                 <p className="text-xs text-muted-foreground">
                   <Balancer>
-                    {mintFee}
+                    {mintFeeDisplay}
                     {SupportedCryptoCurrencyCodes.ETH} of the mint fee will be donated to Stand With
                     Crypto Alliance, Inc. (SWCA). Donations from foreign nationals and government
                     contractors are prohibited.
@@ -119,38 +106,30 @@ export function UserActionFormNFTMintCheckout({
                 </p>
               </div>
 
-              <CurrencyDisplay value={mintFee} />
+              <CurrencyDisplay value={mintFeeDisplay} />
             </div>
 
             <div className="flex items-center justify-between">
               <p>Gas fee</p>
-              <CurrencyDisplay value={gasFee} />
+              <CurrencyDisplay value={gasFeeDisplay} />
             </div>
 
             <div className="flex items-center justify-between">
               <p>Total</p>
-              <CurrencyDisplay value={totalFee} />
+              <CurrencyDisplay value={totalFeeDisplay} />
             </div>
           </div>
         </Card>
 
         <UserActionFormLayout.Footer>
           <Web3Button
-            className={cn(buttonVariants({ variant: 'default', size: 'lg' }))}
+            className="!rounded-full"
+            theme={theme}
             contractAddress={MINT_NFT_CONTRACT_ADDRESS}
             action={onMint}
           >
             Mint now
           </Web3Button>
-
-          <Button
-            size="lg"
-            onClick={() => {
-              goToSection(UserActionFormNFTMintSectionNames.SUCCESS)
-            }}
-          >
-            Mint now
-          </Button>
         </UserActionFormLayout.Footer>
       </UserActionFormLayout.Container>
     </UserActionFormLayout>
@@ -190,7 +169,7 @@ function QuantityInput({
   return (
     <div className="flex items-center gap-2">
       <Button
-        size="icon"
+        size="sm"
         variant="secondary"
         className="h-8 w-8 bg-white hover:bg-white/80"
         onClick={onDecrement}
@@ -210,7 +189,7 @@ function QuantityInput({
       </div>
 
       <Button
-        size="icon"
+        size="sm"
         variant="secondary"
         className="h-8 w-8 bg-white hover:bg-white/80"
         onClick={onIncrement}

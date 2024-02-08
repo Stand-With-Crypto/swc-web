@@ -4,6 +4,10 @@ import { UserActionFormNFTMintIntro } from './sections/intro'
 import { UserActionFormNFTMintCheckout } from './sections/checkout'
 import { UserActionFormNFTMintSuccess } from './sections/success'
 import { useCheckoutController } from './useCheckoutController'
+import { MINT_NFT_CONTRACT_ADDRESS } from '@/components/app/userActionFormNFTMint/constants'
+import { useSendMintNFTTransaction } from '@/hooks/useSendMintNFTTransaction'
+import { toastGenericError } from '@/utils/web/toastUtils'
+import { toast } from 'sonner'
 
 export enum UserActionFormNFTMintSectionNames {
   INTRO = 'intro',
@@ -19,16 +23,46 @@ export function UserActionFormNFTMint(_props: { onCancel: () => void; onSuccess:
 
   const checkoutController = useCheckoutController()
 
+  const { mintNFT, status: sendNFTTransactionStatus } = useSendMintNFTTransaction({
+    contractAddress: MINT_NFT_CONTRACT_ADDRESS,
+    quantity: checkoutController.quantity,
+    onStatusChange: status => {
+      if (status === 'error') {
+        return toastGenericError()
+      }
+
+      if (status === 'canceled') {
+        return toast.error('Transaction canceled')
+      }
+
+      if (status === 'completed') {
+        sectionProps.goToSection(UserActionFormNFTMintSectionNames.SUCCESS)
+      }
+    },
+  })
+
   switch (sectionProps.currentSection) {
     case UserActionFormNFTMintSectionNames.INTRO:
       return <UserActionFormNFTMintIntro {...sectionProps} />
 
     case UserActionFormNFTMintSectionNames.CHECKOUT:
-      return <UserActionFormNFTMintCheckout {...sectionProps} {...checkoutController} />
+      return (
+        <UserActionFormNFTMintCheckout
+          {...sectionProps}
+          {...checkoutController}
+          onMint={() => {
+            mintNFT()
+            sectionProps.goToSection(UserActionFormNFTMintSectionNames.SUCCESS)
+          }}
+        />
+      )
 
     case UserActionFormNFTMintSectionNames.SUCCESS:
       return (
-        <UserActionFormNFTMintSuccess {...sectionProps} totalFee={checkoutController.totalFee} />
+        <UserActionFormNFTMintSuccess
+          {...sectionProps}
+          totalFeeDisplay={checkoutController.totalFeeDisplay}
+        />
       )
 
     default:

@@ -1,13 +1,15 @@
 import { ETH_NFT_DONATION_AMOUNT } from '@/components/app/userActionFormNFTMint/constants'
 import { fromBigNumber, toBigNumber } from '@/utils/shared/bigNumber'
 import { getGasPrice, toEther, useSDK } from '@thirdweb-dev/react'
+import { BigNumber } from 'ethers'
 import React from 'react'
 import useSWR from 'swr'
 
 export interface UseCheckoutControllerReturn {
-  mintFee?: string
-  gasFee?: string
-  totalFee?: string
+  mintFeeDisplay?: string
+  gasFeeDisplay?: string
+  totalFeeDisplay?: string
+  totalFee?: BigNumber
   quantity: number
   incrementQuantity: () => void
   decrementQuantity: () => void
@@ -21,7 +23,10 @@ export function useCheckoutController({
   const { data: gasUnitFee } = useGasFee()
 
   const values = React.useMemo<
-    Pick<UseCheckoutControllerReturn, 'mintFee' | 'gasFee' | 'totalFee'>
+    Pick<
+      UseCheckoutControllerReturn,
+      'mintFeeDisplay' | 'gasFeeDisplay' | 'totalFeeDisplay' | 'totalFee'
+    >
   >(() => {
     if (!gasUnitFee) {
       return {}
@@ -31,9 +36,10 @@ export function useCheckoutController({
     const totalFee = mintFee.add(gasFee)
 
     return {
-      mintFee: fromBigNumber(mintFee),
-      gasFee: fromBigNumber(gasFee),
-      totalFee: fromBigNumber(totalFee),
+      mintFeeDisplay: fromBigNumber(mintFee),
+      gasFeeDisplay: fromBigNumber(gasFee),
+      totalFeeDisplay: fromBigNumber(totalFee),
+      totalFee,
     }
   }, [gasUnitFee, mintUnitFee, quantity])
 
