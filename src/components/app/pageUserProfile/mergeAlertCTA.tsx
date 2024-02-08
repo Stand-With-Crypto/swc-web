@@ -114,7 +114,6 @@ export function MergeAlertCTA({
           )
         })()}
       </div>
-      \{' '}
       <div className="mt-3 text-sm text-fontcolor-muted">
         Questions? Send an email to{' '}
         <ExternalLink href={'mailto:info@standwithcrypto.org'}>
