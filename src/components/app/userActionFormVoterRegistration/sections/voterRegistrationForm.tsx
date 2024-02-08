@@ -1,4 +1,8 @@
-import { SectionNames } from '@/components/app/userActionFormVoterRegistration/constants'
+import {
+  REGISTRATION_URLS_BY_STATE,
+  SectionNames,
+  StateCode,
+} from '@/components/app/userActionFormVoterRegistration/constants'
 import { UserActionFormVoterRegistrationLayout } from '@/components/app/userActionFormVoterRegistration/sections/layout'
 import { Button } from '@/components/ui/button'
 import { ExternalLink } from '@/components/ui/link'
@@ -10,12 +14,14 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { UseSectionsReturn } from '@/hooks/useSections'
-import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
+import {
+  US_STATE_CODE_TO_DISPLAY_NAME_MAP,
+  getUSStateNameFromStateCode,
+} from '@/utils/shared/usStateUtils'
 import { ArrowUpRight } from 'lucide-react'
 import { useCallback, useMemo, useState } from 'react'
 
-const STATES = Object.values(US_STATE_CODE_TO_DISPLAY_NAME_MAP)
-type State = (typeof STATES)[number]
+const STATE_CODES = Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP)
 
 const COPY = {
   register: {
@@ -75,7 +81,15 @@ export function VoterRegistrationForm({
   checkRegistration,
   goToSection,
 }: VoterRegistrationFormProps) {
-  const [state, setState] = useState<State>()
+  const [stateCode, setStateCode] = useState<StateCode>()
+
+  const link = useMemo(() => {
+    return stateCode
+      ? REGISTRATION_URLS_BY_STATE[stateCode][
+          checkRegistration ? 'checkRegistrationUrl' : 'registerUrl'
+        ]
+      : undefined
+  }, [checkRegistration, stateCode])
 
   const { title, subtitle, step2, step2Cta } = useMemo(
     () => COPY[checkRegistration ? 'checkRegistration' : 'register'],
@@ -83,8 +97,8 @@ export function VoterRegistrationForm({
   )
 
   const handleOnValueChange = useCallback((value: string) => {
-    if (STATES.includes(value)) {
-      setState(value as State)
+    if (STATE_CODES.includes(value)) {
+      setStateCode(value as StateCode)
     }
   }, [])
 
@@ -97,7 +111,7 @@ export function VoterRegistrationForm({
             <Step1Svg />
             <div className="flex flex-grow flex-row items-center justify-between">
               Choose your state
-              <Select value={state} onValueChange={handleOnValueChange}>
+              <Select value={stateCode} onValueChange={handleOnValueChange}>
                 <SelectTrigger
                   data-testid="state-filter-trigger"
                   className="w-[195px] flex-shrink-0"
@@ -105,9 +119,9 @@ export function VoterRegistrationForm({
                   <SelectValue placeholder="State" />
                 </SelectTrigger>
                 <SelectContent>
-                  {STATES.map(stateName => (
-                    <SelectItem key={stateName} value={stateName}>
-                      {stateName}
+                  {Object.entries(US_STATE_CODE_TO_DISPLAY_NAME_MAP).map(([key]) => (
+                    <SelectItem key={key} value={key}>
+                      {getUSStateNameFromStateCode(key)}
                     </SelectItem>
                   ))}
                 </SelectContent>
@@ -118,8 +132,8 @@ export function VoterRegistrationForm({
             <Step2Svg />
             <div className="flex flex-grow flex-row items-center justify-between">
               {step2}
-              <Button variant="secondary" asChild>
-                <ExternalLink href="https://www.google.com/">
+              <Button variant="secondary" asChild disabled={!link}>
+                <ExternalLink href={link}>
                   <div className="flex flex-row items-center justify-center gap-2">
                     {step2Cta} <ArrowUpRight />
                   </div>
