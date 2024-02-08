@@ -1,9 +1,8 @@
 import { DTSIPersonCard } from '@/components/app/dtsiPersonCard'
-import { MaybeAuthenticatedContent } from '@/components/app/authentication/maybeAuthenticatedContent'
 import { DelayedRecentActivity } from '@/components/app/pageHome/delayedRecentActivity'
+import { HeroCTA } from '@/components/app/pageHome/heroCTA'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
 import { SumDonationsByUserRow } from '@/components/app/sumDonationsByUserRow/sumDonationsByUserRow'
-import { ThirdwebLoginButton } from '@/components/app/authentication/thirdwebLoginButton'
 import { UserActionRowCTAsListWithApi } from '@/components/app/userActionRowCTA/userActionRowCTAsListWithApi'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
@@ -47,15 +46,7 @@ export function PageHome({
             Congress is writing the rules as we speak - but they won't vote YES until they've heard
             from you.
           </PageSubTitle>
-          <MaybeAuthenticatedContent
-            authenticatedContent={
-              <Button asChild size="lg">
-                <InternalLink href={urls.profile()}>View Your Profile</InternalLink>
-              </Button>
-            }
-          >
-            <ThirdwebLoginButton size="lg">Join the fight</ThirdwebLoginButton>
-          </MaybeAuthenticatedContent>
+          <HeroCTA />
         </div>
         <div className="order-0 md:container lg:order-1 lg:px-0">
           <Dialog

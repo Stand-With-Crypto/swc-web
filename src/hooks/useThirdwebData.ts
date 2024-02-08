@@ -27,8 +27,8 @@ export function useThirdwebData() {
     session,
     logoutAndDisconnect: async () => {
       await Promise.all([logout(), disconnect()])
-      handleLogoutSuccess()
       Cookies.set(USER_SESSION_ID_COOKIE_NAME, generateUserSessionId())
+      handleLogoutSuccess()
     },
   }
 }

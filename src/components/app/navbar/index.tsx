@@ -1,6 +1,6 @@
 import { MaybeAuthenticatedContent } from '@/components/app/authentication/maybeAuthenticatedContent'
+import { ThirdwebLoginDialog } from '@/components/app/authentication/thirdwebLoginContent'
 import { NavbarLoggedInButton } from '@/components/app/navbar/navbarLoggedInButton'
-import { ThirdwebLoginButton } from '@/components/app/authentication/thirdwebLoginButton'
 import { Button } from '@/components/ui/button'
 import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/drawer'
 import { NextImage } from '@/components/ui/image'
@@ -110,7 +110,9 @@ export async function Navbar({ locale }: { locale: SupportedLocale }) {
               </div>
               <div>
                 <MaybeAuthenticatedContent authenticatedContent={<NavbarLoggedInButton />}>
-                  <ThirdwebLoginButton variant="secondary">Log In</ThirdwebLoginButton>
+                  <ThirdwebLoginDialog>
+                    <Button variant="secondary">Log In</Button>
+                  </ThirdwebLoginDialog>
                 </MaybeAuthenticatedContent>
               </div>
             </div>
@@ -122,7 +124,9 @@ export async function Navbar({ locale }: { locale: SupportedLocale }) {
             <InternalLink href={urls.donate()}>Donate</InternalLink>
           </Button>
           <MaybeAuthenticatedContent authenticatedContent={<NavbarLoggedInButton />}>
-            <ThirdwebLoginButton variant="secondary">Log In</ThirdwebLoginButton>
+            <ThirdwebLoginDialog>
+              <Button variant="secondary">Log In</Button>
+            </ThirdwebLoginDialog>
           </MaybeAuthenticatedContent>
         </div>
       </nav>

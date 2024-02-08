@@ -3,7 +3,7 @@
 import { UserActionType } from '@prisma/client'
 import { useMemo } from 'react'
 
-import { TriggerAuthModalOnClick } from '@/components/app/authentication/triggerAuthModalOnClick'
+import { ThirdwebLoginDialog } from '@/components/app/authentication/thirdwebLoginContent'
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
 import { UserActionFormDonateDialog } from '@/components/app/userActionFormDonate/dialog'
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
@@ -20,11 +20,7 @@ export const ORDERED_USER_ACTION_ROW_CTA_INFO: ReadonlyArray<Omit<UserActionRowC
       text: 'Join Stand With Crypto',
       subtext: 'Join over 100,000 advocates fighting to keep crypto in America.',
       canBeTriggeredMultipleTimes: false,
-      WrapperComponent: ({ children }) => (
-        <TriggerAuthModalOnClick loginButtonProps={{ children: 'Hidden' }}>
-          {children}
-        </TriggerAuthModalOnClick>
-      ),
+      WrapperComponent: ({ children }) => <ThirdwebLoginDialog>{children}</ThirdwebLoginDialog>,
     },
     {
       actionType: UserActionType.CALL,
