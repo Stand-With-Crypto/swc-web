@@ -1,11 +1,11 @@
-import { NavbarSessionButton } from '@/components/app/navbar/navbarSessionButton'
-import { navbarSessionButtonMessages } from '@/components/app/navbar/navbarSessionButton/navbarSessionButtonClient.messages'
+import { MaybeAuthenticatedContent } from '@/components/app/authentication/maybeAuthenticatedContent'
+import { ThirdwebLoginDialog } from '@/components/app/authentication/thirdwebLoginContent'
+import { NavbarLoggedInButton } from '@/components/app/navbar/navbarLoggedInButton'
 import { Button } from '@/components/ui/button'
 import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/drawer'
 import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
 import getIntl from '@/intl/intlMessages'
-import { generateClientComponentMessages } from '@/intl/intlServerUtils'
 import { SupportedLocale } from '@/intl/locales'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { getIntlUrls } from '@/utils/shared/urls'
@@ -109,9 +109,11 @@ export async function Navbar({ locale }: { locale: SupportedLocale }) {
                 </Button>
               </div>
               <div>
-                <NavbarSessionButton
-                  messages={generateClientComponentMessages(intl, navbarSessionButtonMessages)}
-                />
+                <MaybeAuthenticatedContent authenticatedContent={<NavbarLoggedInButton />}>
+                  <ThirdwebLoginDialog>
+                    <Button variant="secondary">Log In</Button>
+                  </ThirdwebLoginDialog>
+                </MaybeAuthenticatedContent>
               </div>
             </div>
           </DrawerContent>
@@ -121,9 +123,11 @@ export async function Navbar({ locale }: { locale: SupportedLocale }) {
           <Button className="mr-3" asChild>
             <InternalLink href={urls.donate()}>Donate</InternalLink>
           </Button>
-          <NavbarSessionButton
-            messages={generateClientComponentMessages(intl, navbarSessionButtonMessages)}
-          />
+          <MaybeAuthenticatedContent authenticatedContent={<NavbarLoggedInButton />}>
+            <ThirdwebLoginDialog>
+              <Button variant="secondary">Log In</Button>
+            </ThirdwebLoginDialog>
+          </MaybeAuthenticatedContent>
         </div>
       </nav>
     </>

@@ -27,7 +27,7 @@ interface NavbarLoggedInSessionPopoverContentProps {
   user?: GetUserFullProfileInfoResponse['user']
 }
 
-export function NavbarLoggedInSessionPopoverContent({
+export function NavbarLoggedInPopoverContent({
   onClose,
   user,
 }: NavbarLoggedInSessionPopoverContentProps) {

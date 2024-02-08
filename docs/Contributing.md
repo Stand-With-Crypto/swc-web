@@ -79,3 +79,4 @@ If you need to add environment variables, please ensure the following:
   - Add it to our shared secrets vault
   - Update `.github/workflows/cypress.yml` and reach out to @travisbloom-cb add it to our github secrets
   - Update our vercel environment variables
+  - Alert the rest of the core contributors that they need to update their local environment

@@ -1,11 +1,12 @@
 'use client'
 import { ClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
 import { ClientUserAction } from '@/clientModels/clientUserAction/clientUserAction'
-import { AccountAuthDialogWrapper } from '@/components/app/accountAuth'
+import { ThirdwebLoginDialog } from '@/components/app/authentication/thirdwebLoginContent'
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
 import { UserActionFormDonateDialog } from '@/components/app/userActionFormDonate/dialog'
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
+import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
 import { UserAvatar } from '@/components/app/userAvatar'
 import { Button } from '@/components/ui/button'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
@@ -45,13 +46,13 @@ function RecentActivityRowBase({
       onMouseEnter={() => isMobile || setHasFocus(true)}
       onMouseLeave={() => isMobile || setHasFocus(false)}
     >
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-4">
         <div>
-          <UserAvatar size={30} user={action.user} />
+          <UserAvatar size={40} user={action.user} />
         </div>
         <div>{children}</div>
       </div>
-      <div className="shrink-0 text-xs text-gray-500">
+      <div className="shrink-0 text-xs text-gray-500 lg:text-base">
         {/* TODO add animation */}
         {hasFocus && onFocusContent ? (
           onFocusContent?.()
@@ -78,10 +79,10 @@ function RecentActivityRowBase({
 }
 
 const MainText = ({ children }: { children: React.ReactNode }) => (
-  <div className="text-sm font-bold text-gray-900">{children}</div>
+  <div className="text-sm font-semibold text-gray-900 lg:text-xl">{children}</div>
 )
 const SubText = ({ children }: { children: React.ReactNode }) => (
-  <div className="hidden text-xs text-gray-500 md:block">{children}</div>
+  <div className="hidden text-xs text-gray-500 md:block lg:text-base">{children}</div>
 )
 
 const formatDTSIPerson = (person: DTSIPersonForUserActions) => {
@@ -115,9 +116,9 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
           onFocusContent: hasSignedUp
             ? undefined
             : () => (
-                <AccountAuthDialogWrapper>
+                <ThirdwebLoginDialog>
                   <Button>Join</Button>
-                </AccountAuthDialogWrapper>
+                </ThirdwebLoginDialog>
               ),
           children: (
             <>
@@ -196,6 +197,16 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
         return {
           onFocusContent: () => <UserActionTweetLink>Tweet</UserActionTweetLink>,
           children: <MainText>{userDisplayName} tweeted in support of crypto</MainText>,
+        }
+      }
+      case UserActionType.VOTER_REGISTRATION: {
+        return {
+          onFocusContent: () => (
+            <UserActionFormVoterRegistrationDialog>
+              <Button>Register</Button>
+            </UserActionFormVoterRegistrationDialog>
+          ),
+          children: <MainText>{userDisplayName} registered to vote</MainText>,
         }
       }
     }

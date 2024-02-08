@@ -7,7 +7,6 @@ import { useApiHomepageTopLevelMetrics } from '@/hooks/useApiHomepageTopLevelMet
 import { SupportedLocale } from '@/intl/locales'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { cn } from '@/utils/web/cn'
-import { motion } from 'framer-motion'
 import { useMemo } from 'react'
 
 type Props = Pick<
@@ -42,8 +41,6 @@ export function TopLevelMetrics({ locale, ...data }: Props & { locale: Supported
     [data],
   )
   const values = useApiHomepageTopLevelMetrics(decreasedInitialValues).data
-  const isUsingDecreasedInitialValues =
-    decreasedInitialValues.sumDonations.amountUsd === values.sumDonations.amountUsd
   const formatted = useMemo(() => {
     return {
       sumDonations: {
@@ -65,7 +62,7 @@ export function TopLevelMetrics({ locale, ...data }: Props & { locale: Supported
     }
   }, [values, locale])
   return (
-    <section className="mb-16 flex flex-col gap-3 rounded-lg text-center md:mb-24 md:flex-row md:gap-0">
+    <section className="mb-16 flex flex-col gap-3 text-center md:mb-24 md:flex-row md:gap-0">
       {[
         {
           label: 'Donated by crypto advocates',
@@ -98,23 +95,17 @@ export function TopLevelMetrics({ locale, ...data }: Props & { locale: Supported
       ].map(({ label, value }, index) => (
         <div
           className={cn(
-            'w-full flex-shrink-0 rounded-lg bg-blue-50 p-6 md:w-1/3',
+            'w-full flex-shrink-0 rounded-3xl bg-blue-50 p-6 md:w-1/3',
             index === 0
-              ? 'md:rounded-none md:rounded-l-lg'
+              ? 'md:rounded-none md:rounded-l-3xl'
               : index === 2
-                ? 'md:rounded-none md:rounded-r-lg'
+                ? 'md:rounded-none md:rounded-r-3xl'
                 : 'md:rounded-none',
           )}
           key={label}
         >
-          <motion.div
-            initial={{ opacity: 0.5 }}
-            transition={{ duration: 1.5 }}
-            animate={isUsingDecreasedInitialValues ? { opacity: 0.5 } : { opacity: 1 }}
-          >
-            {value}
-          </motion.div>
-          <motion.div className="text-gray-500">{label}</motion.div>
+          <div>{value}</div>
+          <div className="text-gray-500">{label}</div>
         </div>
       ))}
     </section>
