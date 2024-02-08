@@ -38,6 +38,11 @@ const COPY = {
   },
 } as const
 
+const WY_DISCLAIMER =
+  'Wyoming does not provide online voter registration checks. But you can still get the free NFT.'
+const ND_DISCLAIMER =
+  'North Dakota does not require voter registration. But you can still get the free NFT.'
+
 const LIST_ITEM_STYLE = 'flex flex-row items-center gap-4 py-4'
 
 function Step1Svg() {
@@ -84,6 +89,16 @@ export const VoterRegistrationForm = memo(function VoterRegistrationForm({
   const [stateCode, setStateCode] = useState<StateCode>()
   const [completeStep2, setCompleteStep2] = useState(false)
 
+  const { title, subtitle, step2, step2Cta } = useMemo(
+    () => COPY[checkRegistration ? 'checkRegistration' : 'register'],
+    [checkRegistration],
+  )
+  const disclaimer = useMemo(() => {
+    if (stateCode === 'ND') return ND_DISCLAIMER
+    if (stateCode === 'WY') return WY_DISCLAIMER
+    return 'Complete registration at step 2 to claim NFT'
+  }, [stateCode])
+
   const link = useMemo(() => {
     return stateCode
       ? REGISTRATION_URLS_BY_STATE[stateCode][
@@ -92,10 +107,9 @@ export const VoterRegistrationForm = memo(function VoterRegistrationForm({
       : undefined
   }, [checkRegistration, stateCode])
 
-  const { title, subtitle, step2, step2Cta } = useMemo(
-    () => COPY[checkRegistration ? 'checkRegistration' : 'register'],
-    [checkRegistration],
-  )
+  const disabledClaimNft = useMemo(() => {
+    return stateCode !== 'WY' && stateCode !== 'ND' && !completeStep2
+  }, [completeStep2, stateCode])
 
   const handleOnValueChange = useCallback((value: string) => {
     if (STATE_CODES.includes(value)) {
@@ -141,31 +155,31 @@ export const VoterRegistrationForm = memo(function VoterRegistrationForm({
               </Select>
             </div>
           </li>
-          <li className={LIST_ITEM_STYLE}>
-            <Step2Svg />
-            <div className="flex flex-grow flex-row items-center justify-between">
-              {step2}
-              <Button variant="secondary" asChild disabled={!link} onClick={handleStep2Cta}>
-                <ExternalLink href={link}>
-                  <div className="flex flex-row items-center justify-center gap-2">
-                    {step2Cta} <ArrowUpRight />
-                  </div>
-                </ExternalLink>
-              </Button>
-            </div>
-          </li>
-          <li className={LIST_ITEM_STYLE}>
-            <Step3Svg />
-            Return here to claim your free NFT
-          </li>
+          <div className={stateCode === 'ND' || stateCode === 'WY' ? 'invisible' : ''}>
+            <li className={LIST_ITEM_STYLE}>
+              <Step2Svg />
+              <div className="flex flex-grow flex-row items-center justify-between">
+                {step2}
+                <Button variant="secondary" asChild disabled={!link} onClick={handleStep2Cta}>
+                  <ExternalLink href={link}>
+                    <div className="flex flex-row items-center justify-center gap-2">
+                      {step2Cta} <ArrowUpRight />
+                    </div>
+                  </ExternalLink>
+                </Button>
+              </div>
+            </li>
+            <li className={LIST_ITEM_STYLE}>
+              <Step3Svg />
+              Return here to claim your free NFT
+            </li>
+          </div>
         </ol>
       </UserActionFormVoterRegistrationLayout.Container>
       <UserActionFormVoterRegistrationLayout.Footer>
-        <div className="flex flex-grow flex-row items-center justify-between">
-          <span className="text-sm text-fontcolor-muted">
-            Complete registration at step 2 to claim NFT
-          </span>
-          <Button disabled={!completeStep2} onClick={handleClaimNft}>
+        <div className="flex flex-grow flex-row items-center justify-between gap-8">
+          <span className="w-2/3 text-sm text-fontcolor-muted">{disclaimer}</span>
+          <Button disabled={disabledClaimNft} onClick={handleClaimNft}>
             Claim NFT
           </Button>
         </div>
