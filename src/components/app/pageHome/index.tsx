@@ -1,6 +1,8 @@
-import { AccountAuthDialogWrapper } from '@/components/app/accountAuth'
 import { DTSIPersonCard } from '@/components/app/dtsiPersonCard'
 import { DelayedRecentActivity } from '@/components/app/pageHome/delayedRecentActivity'
+import { HeroCTA } from '@/components/app/pageHome/heroCTA'
+import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
+import { SumDonationsByUserRow } from '@/components/app/sumDonationsByUserRow/sumDonationsByUserRow'
 import { UserActionRowCTAsListWithApi } from '@/components/app/userActionRowCTA/userActionRowCTAsListWithApi'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
@@ -11,6 +13,7 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { LazyResponsiveYoutube } from '@/components/ui/responsiveYoutube/lazyLoad'
 import { Skeleton } from '@/components/ui/skeleton'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
 import { PageProps } from '@/types'
 import { groupAndSortDTSIPeopleByCryptoStance } from '@/utils/dtsi/dtsiPersonUtils'
@@ -18,9 +21,6 @@ import { getIntlUrls } from '@/utils/shared/urls'
 import { ArrowUpRight, ThumbsDown, ThumbsUp } from 'lucide-react'
 import { Suspense } from 'react'
 import { TopLevelMetrics } from './topLevelMetrics'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
-import { SumDonationsByUserRow } from '@/components/app/sumDonationsByUserRow/sumDonationsByUserRow'
 
 export function PageHome({
   params,
@@ -46,9 +46,7 @@ export function PageHome({
             Congress is writing the rules as we speak - but they won't vote YES until they've heard
             from you.
           </PageSubTitle>
-          <AccountAuthDialogWrapper>
-            <Button size="lg">Join the fight</Button>
-          </AccountAuthDialogWrapper>
+          <HeroCTA />
         </div>
         <div className="order-0 md:container lg:order-1 lg:px-0">
           <Dialog
