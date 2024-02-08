@@ -41,7 +41,8 @@ export const bootstrapLocalUser = () => {
 }
 
 export const getLocalUser = (): LocalUser => {
-  const canUsePersistedData = getClientCookieConsent().targeting
+  const canUsePersistedData =
+    getClientCookieConsent().targeting && getClientCookieConsent().functional
   if (localUser) {
     if (!canUsePersistedData) {
       if (localUser.persisted) {
@@ -70,4 +71,16 @@ export const getLocalUser = (): LocalUser => {
   })
   localUser = { currentSession, persisted: newPersisted }
   return localUser
+}
+
+export function setLocalUserPersistedValues(values: Partial<PersistedLocalUser>) {
+  const canUsePersistedData =
+    getClientCookieConsent().targeting && getClientCookieConsent().functional
+  if (!canUsePersistedData) {
+    return
+  }
+  const newPersisted = { ...getLocalUser().persisted, ...values }
+  Cookies.set(LOCAL_USER_PERSISTED_KEY, JSON.stringify(newPersisted), {
+    expires: 365,
+  })
 }

@@ -14,13 +14,14 @@ import { SupportedLocale } from '@/intl/locales'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { possessive } from '@/utils/shared/possessive'
 import { getIntlUrls } from '@/utils/shared/urls'
+import { getLocalUser, setLocalUserPersistedValues } from '@/utils/web/clientLocalUser'
 import { GooglePlaceAutocompletePrediction } from '@/utils/web/googlePlaceUtils'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 export function ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: SupportedLocale }) {
   const user = useApiResponseForUserFullProfileInfo()
-  const userAddress = user.data?.user?.address
-  const [address, setAddress] = useState<GooglePlaceAutocompletePrediction | null>(
+  const userAddress = user.data?.user?.address || getLocalUser().persisted?.recentlyUsedAddress
+  const [address, _setAddress] = useState<GooglePlaceAutocompletePrediction | null>(
     userAddress
       ? {
           place_id: userAddress.googlePlaceId,
@@ -28,15 +29,29 @@ export function ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: Suppo
         }
       : null,
   )
+  const setAddress = useCallback(
+    (addr: GooglePlaceAutocompletePrediction | null) => {
+      setLocalUserPersistedValues({
+        recentlyUsedAddress: addr
+          ? {
+              googlePlaceId: addr.place_id,
+              formattedDescription: addr.description,
+            }
+          : undefined,
+      })
+      _setAddress(addr)
+    },
+    [_setAddress],
+  )
   const res = useGetDTSIPeopleFromAddress(address?.description || '')
   useEffect(() => {
-    if (userAddress) {
-      setAddress({
+    if (!address && userAddress) {
+      _({
         place_id: userAddress.googlePlaceId,
         description: userAddress.formattedDescription,
       })
     }
-  }, [userAddress])
+  }, [userAddress, address])
 
   if (!address || !res.data) {
     return (
