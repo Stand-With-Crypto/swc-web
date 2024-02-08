@@ -10,6 +10,7 @@ import {
   formatGetDTSIPeopleFromAddressNotFoundReason,
   useGetDTSIPeopleFromAddress,
 } from '@/hooks/useGetDTSIPeopleFromAddress'
+import { useHasHydrated } from '@/hooks/useHasHydrated'
 import { SupportedLocale } from '@/intl/locales'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { possessive } from '@/utils/shared/possessive'
@@ -20,7 +21,10 @@ import { useCallback, useEffect, useState } from 'react'
 
 export function ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: SupportedLocale }) {
   const user = useApiResponseForUserFullProfileInfo()
-  const userAddress = user.data?.user?.address || getLocalUser().persisted?.recentlyUsedAddress
+  const hasHydrated = useHasHydrated()
+  const userAddress = hasHydrated
+    ? user.data?.user?.address || getLocalUser().persisted?.recentlyUsedAddress
+    : null
   const [address, _setAddress] = useState<GooglePlaceAutocompletePrediction | null>(
     userAddress
       ? {
