@@ -11,7 +11,7 @@ import { useDialog } from '@/hooks/useDialog'
 import { useENS } from '@thirdweb-dev/react'
 import { appendENSHookDataToUser } from '@/utils/web/appendENSHookDataToUser'
 
-export function NavbarLoggedInButton() {
+export function NavbarLoggedInButton({ onOpenChange }: { onOpenChange: (open: boolean) => void }) {
   const { Popover, PopoverContent, PopoverTrigger } = useResponsivePopover()
   const dialogProps = useDialog({ analytics: 'Navbar Logged In Button' })
   const ensData = useENS()
@@ -19,7 +19,13 @@ export function NavbarLoggedInButton() {
   const user = data?.user
 
   return (
-    <Popover {...dialogProps}>
+    <Popover
+      {...dialogProps}
+      onOpenChange={open => {
+        dialogProps.onOpenChange(open)
+        onOpenChange?.(open)
+      }}
+    >
       <PopoverTrigger asChild>
         <Button variant="secondary" className="min-w-24">
           <div>
