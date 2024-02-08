@@ -5,12 +5,14 @@ import { useMemo } from 'react'
 
 import { ThirdwebLoginDialog } from '@/components/app/authentication/thirdwebLoginContent'
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
-import { UserActionFormDonateDialog } from '@/components/app/userActionFormDonate/dialog'
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
 import { UserActionRowCTA, UserActionRowCTAProps } from '@/components/app/userActionRowCTA'
 import { UserActionTweetLink } from '@/components/ui/userActionTweetLink'
 import { cn } from '@/utils/web/cn'
+import { InternalLink } from '@/components/ui/link'
+import { useLocale } from '@/hooks/useLocale'
+import { getIntlUrls } from '@/utils/shared/urls'
 
 export const ORDERED_USER_ACTION_ROW_CTA_INFO: ReadonlyArray<Omit<UserActionRowCTAProps, 'state'>> =
   [
@@ -44,7 +46,14 @@ export const ORDERED_USER_ACTION_ROW_CTA_INFO: ReadonlyArray<Omit<UserActionRowC
       text: 'Donate to Stand With Crypto',
       subtext: 'Support our aim to mobilize 52 million crypto advocates in the U.S.',
       canBeTriggeredMultipleTimes: true,
-      WrapperComponent: UserActionFormDonateDialog,
+      WrapperComponent: ({ children }) => {
+        const locale = useLocale()
+        return (
+          <InternalLink className="block" href={getIntlUrls(locale).donate()}>
+            {children}
+          </InternalLink>
+        )
+      },
     },
     {
       actionType: UserActionType.TWEET,
