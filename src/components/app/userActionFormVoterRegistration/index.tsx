@@ -7,9 +7,13 @@ import { ClaimNft } from '@/components/app/userActionFormVoterRegistration/secti
 import { Survey } from '@/components/app/userActionFormVoterRegistration/sections/survey'
 import { VoterRegistrationForm } from '@/components/app/userActionFormVoterRegistration/sections/voterRegistrationForm'
 import { useSections } from '@/hooks/useSections'
-import { useMemo } from 'react'
+import { memo, useMemo } from 'react'
 
-export function UserActionFormVoterRegistration({ onClose }: { onClose: () => void }) {
+export const UserActionFormVoterRegistration = memo(function UserActionFormVoterRegistration({
+  onClose,
+}: {
+  onClose: () => void
+}) {
   const sectionProps = useSections<SectionNames>({
     sections: Object.values(SectionNames),
     initialSectionId: SectionNames.SURVEY,
@@ -42,4 +46,4 @@ export function UserActionFormVoterRegistration({ onClose }: { onClose: () => vo
   }, [currentTab, onClose, onTabNotFound, sectionProps])
 
   return content
-}
+})

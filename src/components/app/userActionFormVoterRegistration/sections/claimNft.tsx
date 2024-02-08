@@ -1,13 +1,20 @@
+'use client'
+
 import { SectionNames } from '@/components/app/userActionFormVoterRegistration/constants'
 import { UserActionFormVoterRegistrationLayout } from '@/components/app/userActionFormVoterRegistration/sections/layout'
 import { Button } from '@/components/ui/button'
 import { UseSectionsReturn } from '@/hooks/useSections'
+import { memo, useCallback } from 'react'
 
 interface ClaimNftProps extends UseSectionsReturn<SectionNames> {}
 
-export function ClaimNft({ goToSection }: ClaimNftProps) {
+export const ClaimNft = memo(function ClaimNft({ goToSection }: ClaimNftProps) {
+  const handleOnBack = useCallback(() => {
+    goToSection(SectionNames.SURVEY)
+  }, [goToSection])
+
   return (
-    <UserActionFormVoterRegistrationLayout onBack={() => goToSection(SectionNames.SURVEY)}>
+    <UserActionFormVoterRegistrationLayout onBack={() => handleOnBack}>
       <UserActionFormVoterRegistrationLayout.Container>
         <UserActionFormVoterRegistrationLayout.Heading
           title="Get your “I Registered” NFT"
@@ -21,4 +28,4 @@ export function ClaimNft({ goToSection }: ClaimNftProps) {
       </UserActionFormVoterRegistrationLayout.Footer>
     </UserActionFormVoterRegistrationLayout>
   )
-}
+})

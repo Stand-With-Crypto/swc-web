@@ -4,10 +4,20 @@ import { SectionNames } from '@/components/app/userActionFormVoterRegistration/c
 import { UserActionFormVoterRegistrationLayout } from '@/components/app/userActionFormVoterRegistration/sections/layout'
 import { Button } from '@/components/ui/button'
 import { UseSectionsReturn } from '@/hooks/useSections'
+import { memo, useCallback } from 'react'
 
 interface SurveyProps extends UseSectionsReturn<SectionNames> {}
 
-export function Survey({ goToSection }: SurveyProps) {
+export const Survey = memo(function Survey({ goToSection }: SurveyProps) {
+  const createSelectionHandler = useCallback(
+    (step: SectionNames) => {
+      return () => {
+        goToSection(step)
+      }
+    },
+    [goToSection],
+  )
+
   return (
     <UserActionFormVoterRegistrationLayout>
       <UserActionFormVoterRegistrationLayout.Container>
@@ -18,7 +28,7 @@ export function Survey({ goToSection }: SurveyProps) {
           />
           <div className="flex flex-grow flex-col items-center justify-center gap-3 lg:flex-row">
             <Button
-              onClick={() => goToSection(SectionNames.CLAIM_NFT)}
+              onClick={createSelectionHandler(SectionNames.CLAIM_NFT)}
               variant="secondary"
               size="lg"
               className="w-full lg:w-auto"
@@ -26,7 +36,7 @@ export function Survey({ goToSection }: SurveyProps) {
               Yes
             </Button>
             <Button
-              onClick={() => goToSection(SectionNames.VOTER_REGISTRATION_FORM)}
+              onClick={createSelectionHandler(SectionNames.VOTER_REGISTRATION_FORM)}
               variant="secondary"
               size="lg"
               className="w-full lg:w-auto"
@@ -34,7 +44,7 @@ export function Survey({ goToSection }: SurveyProps) {
               No
             </Button>
             <Button
-              onClick={() => goToSection(SectionNames.CHECK_REGISTRATION_FORM)}
+              onClick={createSelectionHandler(SectionNames.CHECK_REGISTRATION_FORM)}
               variant="secondary"
               size="lg"
               className="w-full lg:w-auto"
@@ -53,4 +63,4 @@ export function Survey({ goToSection }: SurveyProps) {
       </UserActionFormVoterRegistrationLayout.Container>
     </UserActionFormVoterRegistrationLayout>
   )
-}
+})
