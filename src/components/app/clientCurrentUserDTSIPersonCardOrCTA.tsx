@@ -46,7 +46,7 @@ export function ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: Suppo
   const res = useGetDTSIPeopleFromAddress(address?.description || '')
   useEffect(() => {
     if (!address && userAddress) {
-      _({
+      _setAddress({
         place_id: userAddress.googlePlaceId,
         description: userAddress.formattedDescription,
       })
