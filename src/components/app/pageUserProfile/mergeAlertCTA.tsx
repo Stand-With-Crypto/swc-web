@@ -4,6 +4,7 @@ import { PageUserProfileUser } from '@/components/app/pageUserProfile/getAuthent
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import { FormItemSkeleton } from '@/components/ui/form'
+import { ExternalLink } from '@/components/ui/link'
 import {
   Select,
   SelectContent,
@@ -113,8 +114,13 @@ export function MergeAlertCTA({
           )
         })()}
       </div>
-      {/* LATER-TASK add distribution email for tech support */}
-      <div className="mt-3 text-sm text-fontcolor-muted">Questions? Send an email to TODO</div>
+      \{' '}
+      <div className="mt-3 text-sm text-fontcolor-muted">
+        Questions? Send an email to{' '}
+        <ExternalLink href={'mailto:info@standwithcrypto.org'}>
+          info@standwithcrypto.org
+        </ExternalLink>
+      </div>
     </Alert>
   )
 }

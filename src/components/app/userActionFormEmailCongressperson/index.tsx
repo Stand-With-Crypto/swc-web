@@ -221,12 +221,6 @@ export function UserActionFormEmailCongressperson({
             />
             <FormGeneralErrorMessage control={form.control} />
             <div>
-              {/* TODO where does give feedback link */}
-              {/* <p className="mb-2 text-xs text-fontcolor-muted">
-              Please ensure content accurately represents the facts and your views prior to
-              submitting this email. You are responsible for your submission. This AI generated text
-              may produce inaccurate information about people, places, or facts. Give feedback.
-            </p> */}
               <p className="text-xs text-fontcolor-muted">
                 By submitting, I understand that Stand With Crypto and its vendors may collect and
                 use my Personal Information. To learn more, visit the Stand With Crypto Alliance{' '}

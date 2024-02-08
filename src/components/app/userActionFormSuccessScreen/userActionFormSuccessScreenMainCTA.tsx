@@ -1,6 +1,7 @@
 'use client'
 import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
 import { GetUserPerformedUserActionTypesResponse } from '@/app/api/identified-user/performed-user-action-types/route'
+import { ThirdwebLoginDialog } from '@/components/app/authentication/thirdwebLoginContent'
 import { OPEN_UPDATE_USER_PROFILE_FORM_QUERY_PARAM_KEY } from '@/components/app/updateUserProfileForm/queryParamConfig'
 import { getNextAction } from '@/components/app/userActionFormSuccessScreen/getNextAction'
 import { HasOptedInToMembershipForm } from '@/components/app/userActionFormSuccessScreen/hasOptedInToMembershipForm'
@@ -82,7 +83,9 @@ export function UserActionFormSuccessScreenMainCTA({
             You've earned an NFT for completing this action. Join Stand With Crypto to claim your
             NFT, see your activities, and get personalized content.
           </PageSubTitle>
-          <Button variant="secondary">Join Stand with Crypto TODO</Button>
+          <ThirdwebLoginDialog>
+            <Button variant="secondary">Join Stand with Crypto</Button>
+          </ThirdwebLoginDialog>
         </Container>
       )
     }
@@ -93,7 +96,9 @@ export function UserActionFormSuccessScreenMainCTA({
           Join Stand With Crypto to claim exclusive NFTs, see your activity, and get personalized
           content.
         </PageSubTitle>
-        <Button variant="secondary">Join Stand with Crypto TODO</Button>
+        <ThirdwebLoginDialog>
+          <Button variant="secondary">Join Stand with Crypto</Button>
+        </ThirdwebLoginDialog>
       </Container>
     )
   }

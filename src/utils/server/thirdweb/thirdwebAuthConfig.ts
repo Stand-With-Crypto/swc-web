@@ -22,7 +22,7 @@ export const thirdwebAuthConfig: ThirdwebAuthConfig = {
   wallet: new PrivateKeyWallet(THIRDWEB_AUTH_PRIVATE_KEY),
   authOptions: {
     // TODO check what should be the message with product
-    statement: 'Hello World',
+    // statement: 'Hello World',
     tokenDurationInSeconds: 60 * 60 * 24 * 7, // 1 week
     validateNonce: async (nonce: string) => {
       const nonceExists = await prismaClient.authenticationNonce.findUnique({
