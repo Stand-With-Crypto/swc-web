@@ -11,6 +11,7 @@ import { SupportedLocale } from '@/intl/locales'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { Menu } from 'lucide-react'
+import _ from 'lodash'
 import { useCallback } from 'react'
 
 export function Navbar({ locale }: { locale: SupportedLocale }) {
@@ -44,7 +45,9 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
       {NEXT_PUBLIC_ENVIRONMENT !== 'production' && (
         <div className="bg-yellow-300 py-3 text-center">
           <div className="container flex justify-between">
-            <p className="flex-shrink-0 font-bold">Testing Environment</p>
+            <p className="flex-shrink-0 font-bold">
+              {_.capitalize(NEXT_PUBLIC_ENVIRONMENT.toLowerCase())} Environment
+            </p>
             <div className="xs:text-xs space-x-3 text-sm">
               <InternalLink className="underline" href={urls.internalHomepage()}>
                 Internal Pages
