@@ -108,6 +108,10 @@ const securityHeaders = [
     key: 'Content-Security-Policy',
     value: cspObjectToString,
   },
+  {
+    key: 'Cross-Origin-Opener-Policy',
+    value: 'same-origin-allow-popups',
+  },
 ]
 
 const ACTION_REDIRECTS = [
