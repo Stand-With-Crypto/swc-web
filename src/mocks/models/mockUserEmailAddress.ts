@@ -1,7 +1,12 @@
 import { fakerFields } from '@/mocks/fakerUtils'
 import { mockCommonDatetimes } from '@/mocks/mockCommonDatetimes'
 import { faker } from '@faker-js/faker'
-import { Prisma, UserEmailAddress, UserEmailAddressSource } from '@prisma/client'
+import {
+  DataCreationMethod,
+  Prisma,
+  UserEmailAddress,
+  UserEmailAddressSource,
+} from '@prisma/client'
 
 export function mockCreateUserEmailAddressInput() {
   const source = faker.helpers.arrayElement(Object.values(UserEmailAddressSource))
@@ -18,5 +23,6 @@ export function mockUserEmailAddress(): UserEmailAddress {
     ...mockCreateUserEmailAddressInput(),
     id: fakerFields.id(),
     userId: fakerFields.id(),
+    dataCreationMethod: DataCreationMethod.BY_USER,
   }
 }

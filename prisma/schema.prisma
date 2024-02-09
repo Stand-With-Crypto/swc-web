@@ -64,6 +64,11 @@ enum CapitolCanaryInstance {
   LEGACY
 }
 
+enum DataCreationMethod {
+  INITIAL_BACKFULL
+  BY_USER
+}
+
 // A user can interact with our platform multiple ways.
 // Sometimes that user will be signing up via coinbase,
 // sometimes a user will be signing up via a wallet on the website, or multiple wallets
@@ -100,6 +105,7 @@ model User {
   hasOptedInToSms            Boolean                   @map("has_opted_in_to_sms")
   hasOptedInToMembership     Boolean                   @map("has_opted_in_to_membership")
   internalStatus             UserInternalStatus        @default(VISIBLE) @map("internal_status")
+  dataCreationMethod         DataCreationMethod        @default(BY_USER) @map("data_creation_method")
   // We'll collect and capture this information in our product analytics tools, but we'll also want to be able to
   // use this metadata to query our relationship database. This information will only be populated if users
   // opt in to our cookies
@@ -182,6 +188,7 @@ model UserEmailAddress {
   userId          String                 @map("user_id")
   user            User                   @relation("userEmailAddresses", map: "userEmailAddresses", fields: [userId], references: [id])
   source          UserEmailAddressSource
+  dataCreationMethod         DataCreationMethod        @default(BY_USER) @map("data_creation_method")
   datetimeUpdated DateTime               @updatedAt @map("datetime_updated")
   datetimeCreated DateTime               @default(now()) @map("datetime_created")
 
@@ -207,12 +214,16 @@ model UserCryptoAddress {
   datetimeCreated                  DateTime                   @default(now()) @map("datetime_created")
   userId                           String                     @unique @map("user_id")
   user                             User                       @relation("userCryptoAddresses", map: "userCryptoAddresses", fields: [userId], references: [id])
+  dataCreationMethod               DataCreationMethod        @default(BY_USER) @map("data_creation_method")
+  // because we are populating this table using historical data where we didn't have the auth flow, we need to differentiate between 
+  // addresses that exist but haven't been verified vs. addresses that have been verified via the auth flow
+  hasBeenVerifiedViaAuth            Boolean                   @default(true)
   embeddedWalletUserEmailAddressId String?                    @unique @map("embedded_wallet_user_email_address_id")
   embeddedWalletUserEmailAddress   UserEmailAddress?          @relation(fields: [embeddedWalletUserEmailAddressId], references: [id])
 
   userActions                UserAction[]
   asPrimaryUserCryptoAddress User?        @relation("asPrimaryUserCryptoAddress")
-
+  
   @@unique([cryptoAddress, cryptoNetwork])
   @@index([cryptoAddress])
   @@index([embeddedWalletUserEmailAddressId])
@@ -244,6 +255,7 @@ model UserAction {
   userEmailAddress    UserEmailAddress?  @relation(fields: [userEmailAddressId], references: [id])
   datetimeUpdated     DateTime           @updatedAt @map("datetime_updated")
   datetimeCreated     DateTime           @default(now()) @map("datetime_created")
+  dataCreationMethod  DataCreationMethod @default(BY_USER) @map("data_creation_method")
   // Because some actions that are not NFT_MINT can still have an nft associated with them, we want to have an optional fk constrain on all actions
   nftMintId           String?            @unique @map("nft_mint_id")
   nftMint             NFTMint?           @relation(fields: [nftMintId], references: [id])

@@ -47,6 +47,7 @@
     "dotheysupportit",
     "DTSI",
     "FAIRSHAKE",
+    "hookform",
     "inngest",
     "jank",
     "Leaderboard",
@@ -63,7 +64,7 @@
     "typecheck",
     "undici",
     "unoptimized",
-    "hookform",
+    "Upserted",
     "vaul"
   ],
   "typescript.tsdk": "node_modules/typescript/lib"

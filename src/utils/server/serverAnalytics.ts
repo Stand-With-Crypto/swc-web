@@ -22,6 +22,25 @@ const logger = getLogger('serverAnalytics')
 
 type ServerAnalyticsConfig = { localUser: LocalUser | null; userId: string }
 
+/*
+There are some events that are critical to our debugging, regardless of whether the user has opted out of tracking.
+In this case, we anonymize the user's data but still trigger the analytics events using a dummy user profile
+*/
+export function forceServerAnalyticsConfig(config: ServerAnalyticsConfig): ServerAnalyticsConfig {
+  if (config.localUser) {
+    return config
+  }
+  return {
+    userId: 'ANONYMOUS_USER_TRACKING_ID',
+    localUser: {
+      currentSession: {
+        datetimeOnLoad: new Date().toISOString(),
+        searchParamsOnLoad: {},
+      },
+    },
+  }
+}
+
 function trackAnalytic(
   config: ServerAnalyticsConfig,
   eventName: string,
@@ -33,7 +52,9 @@ function trackAnalytic(
     return
   }
   logger.info(`Event Name: "${eventName}"`, eventProperties)
-  vercelTrack(eventName, eventProperties && formatVercelAnalyticsEventProperties(eventProperties))
+  if (process.env.VERCEL_URL) {
+    vercelTrack(eventName, eventProperties && formatVercelAnalyticsEventProperties(eventProperties))
+  }
   // we could wrap this in a promise and await it, but we don't want to block the request
   mixpanel.track(
     eventName,
