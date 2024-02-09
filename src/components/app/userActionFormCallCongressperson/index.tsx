@@ -9,9 +9,9 @@ import { GoogleCivicInfoResponse } from '@/utils/shared/googleCivicInfo'
 import { zodAddress } from '@/validation/fields/zodAddress'
 
 import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
-import { Address } from './tabs/address'
-import { Intro } from './tabs/intro'
-import { SuggestedScript } from './tabs/suggestedScript'
+import { Address } from './sections/address'
+import { Intro } from './sections/intro'
+import { SuggestedScript } from './sections/suggestedScript'
 import { ANALYTICS_NAME_USER_ACTION_FORM_CALL_CONGRESSPERSON, SectionNames } from './constants'
 
 interface OnFindCongressPersonPayload {
