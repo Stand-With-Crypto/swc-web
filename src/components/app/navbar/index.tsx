@@ -1,4 +1,8 @@
 'use client'
+import { useCallback } from 'react'
+import _ from 'lodash'
+import { Menu } from 'lucide-react'
+
 import { MaybeAuthenticatedContent } from '@/components/app/authentication/maybeAuthenticatedContent'
 import { ThirdwebLoginDialog } from '@/components/app/authentication/thirdwebLoginContent'
 import { NavbarLoggedInButton } from '@/components/app/navbar/navbarLoggedInButton'
@@ -10,9 +14,6 @@ import { useDialog } from '@/hooks/useDialog'
 import { SupportedLocale } from '@/intl/locales'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { getIntlUrls } from '@/utils/shared/urls'
-import { Menu } from 'lucide-react'
-import _ from 'lodash'
-import { useCallback } from 'react'
 
 export function Navbar({ locale }: { locale: SupportedLocale }) {
   const dialogProps = useDialog({ analytics: 'Mobile Navbar' })

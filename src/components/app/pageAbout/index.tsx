@@ -1,9 +1,8 @@
 import { UserActionRowCTAsListWithApi } from '@/components/app/userActionRowCTA/userActionRowCTAsListWithApi'
+import { Card } from '@/components/ui/card'
+import { NextImage } from '@/components/ui/image'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
-
-import { NextImage } from '@/components/ui/image'
-import { Card } from '@/components/ui/card'
 
 export function PageAbout({ title, description }: { title: string; description: string }) {
   return (

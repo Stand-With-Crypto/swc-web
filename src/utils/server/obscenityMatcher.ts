@@ -1,12 +1,13 @@
 // I have concerns about the bundle size of this being imported to the client
 import 'server-only'
+
+import * as Sentry from '@sentry/nextjs'
 import {
-  RegExpMatcher,
-  TextCensor,
   englishDataset,
   englishRecommendedTransformers,
+  RegExpMatcher,
+  TextCensor,
 } from 'obscenity'
-import * as Sentry from '@sentry/nextjs'
 
 export const obscenityMatcher = new RegExpMatcher({
   ...englishDataset.build(),

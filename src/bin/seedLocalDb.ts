@@ -1,3 +1,9 @@
+import 'dotenv/config'
+
+import { faker } from '@faker-js/faker'
+import { UserActionType, UserEmailAddressSource, UserInformationVisibility } from '@prisma/client'
+import _ from 'lodash'
+
 import { runBin } from '@/bin/runBin'
 import { mockCreateAddressInput } from '@/mocks/models/mockAddress'
 import { mockCreateAuthenticationNonceInput } from '@/mocks/models/mockAuthenticationNonce'
@@ -18,10 +24,6 @@ import { prismaClient } from '@/utils/server/prismaClient'
 import { batchAsyncAndLog } from '@/utils/shared/batchAsyncAndLog'
 import { getLogger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
-import { faker } from '@faker-js/faker'
-import { UserActionType, UserEmailAddressSource, UserInformationVisibility } from '@prisma/client'
-import 'dotenv/config'
-import _ from 'lodash'
 
 const LOCAL_USER_CRYPTO_ADDRESS = requiredEnv(
   process.env.LOCAL_USER_CRYPTO_ADDRESS,

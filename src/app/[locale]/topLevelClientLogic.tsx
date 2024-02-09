@@ -1,28 +1,28 @@
 'use client'
-import { requiredEnv } from '@/utils/shared/requiredEnv'
-import { NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN } from '@/utils/shared/sharedEnv'
+import { Suspense, useEffect } from 'react'
 import * as Sentry from '@sentry/nextjs'
 import { Base } from '@thirdweb-dev/chains'
 import {
-  ThirdwebProvider,
   coinbaseWallet,
   embeddedWallet,
   en,
   metamaskWallet,
+  ThirdwebProvider,
   walletConnect,
 } from '@thirdweb-dev/react'
+import { usePathname, useSearchParams } from 'next/navigation'
 
 import { useAuthUser } from '@/hooks/useAuthUser'
 import { useDetectWipedDatabaseAndLogOutUser } from '@/hooks/useDetectWipedDatabaseAndLogOutUser'
 import { LocaleContext } from '@/hooks/useLocale'
 import { SupportedLocale } from '@/intl/locales'
+import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
+import { NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN } from '@/utils/shared/sharedEnv'
 import { initClientAnalytics, trackClientAnalytic } from '@/utils/web/clientAnalytics'
 import { bootstrapLocalUser } from '@/utils/web/clientLocalUser'
 import { getUserSessionIdOnClient } from '@/utils/web/clientUserSessionId'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
-import { usePathname, useSearchParams } from 'next/navigation'
-import { Suspense, useEffect } from 'react'
 
 const NEXT_PUBLIC_THIRDWEB_CLIENT_ID = requiredEnv(
   process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID,

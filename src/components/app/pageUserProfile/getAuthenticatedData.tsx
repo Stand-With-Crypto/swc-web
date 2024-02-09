@@ -1,3 +1,7 @@
+import 'server-only'
+
+import { UserInformationVisibility } from '@prisma/client'
+
 import { getClientAddress } from '@/clientModels/clientAddress'
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
 import { getClientUserCryptoAddress } from '@/clientModels/clientUser/clientUserCryptoAddress'
@@ -7,8 +11,6 @@ import { queryDTSIPeopleBySlugForUserActions } from '@/data/dtsi/queries/queryDT
 import { getENSDataFromCryptoAddressAndFailGracefully } from '@/data/web3/getENSDataFromCryptoAddress'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
-import { UserInformationVisibility } from '@prisma/client'
-import 'server-only'
 
 export async function getAuthenticatedData() {
   const authUser = await appRouterGetAuthUser()

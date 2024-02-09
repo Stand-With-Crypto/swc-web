@@ -4,14 +4,15 @@ lots of APIs will start failing in unpredictable ways because we expect every au
 This hook resets the user to logged out if we detect that the database has been wiped. 
 */
 
+import { useEffect } from 'react'
+import { useLogout } from '@thirdweb-dev/react'
+import useSWR from 'swr'
+
 import { DetectWipedDatabaseResponse } from '@/app/api/identified-user/detect-wiped-database/route'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { getLogger } from '@/utils/shared/logger'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { apiUrls } from '@/utils/shared/urls'
-import { useLogout } from '@thirdweb-dev/react'
-import { useEffect } from 'react'
-import useSWR from 'swr'
 
 const logger = getLogger('useDetectWipedDatabaseAndLogOutUser')
 

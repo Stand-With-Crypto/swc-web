@@ -1,7 +1,8 @@
 'use client'
 
-import * as DialogPrimitive from '@radix-ui/react-dialog'
 import * as React from 'react'
+import * as DialogPrimitive from '@radix-ui/react-dialog'
+import { X } from 'lucide-react'
 
 import {
   dialogCloseStyles,
@@ -12,7 +13,6 @@ import {
 import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
 import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
 import { cn } from '@/utils/web/cn'
-import { X } from 'lucide-react'
 import {
   PrimitiveComponentAnalytics,
   trackPrimitiveComponentAnalytics,

@@ -1,6 +1,7 @@
-import { FetchReqError, fetchReq } from '@/utils/shared/fetchReq'
-import { requiredEnv } from '@/utils/shared/requiredEnv'
 import * as Sentry from '@sentry/nextjs'
+
+import { fetchReq, FetchReqError } from '@/utils/shared/fetchReq'
+import { requiredEnv } from '@/utils/shared/requiredEnv'
 
 const CAPITOL_CANARY_API_KEY = requiredEnv(
   process.env.CAPITOL_CANARY_API_KEY,

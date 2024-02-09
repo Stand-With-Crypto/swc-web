@@ -1,6 +1,7 @@
 'use server'
-import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
 import 'server-only'
+
+import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
 
 export const actionDebugSentry = withServerActionMiddleware('actionDebugSentry', _actionDebugSentry)
 

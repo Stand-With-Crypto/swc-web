@@ -1,3 +1,5 @@
+import { User, UserCryptoAddress, UserInformationVisibility } from '@prisma/client'
+
 import {
   ClientUserCryptoAddress,
   ClientUserCryptoAddressWithENSData,
@@ -6,7 +8,6 @@ import {
 } from '@/clientModels/clientUser/clientUserCryptoAddress'
 import { ClientModel, getClientModel } from '@/clientModels/utils'
 import { UserENSData } from '@/data/web3/types'
-import { User, UserCryptoAddress, UserInformationVisibility } from '@prisma/client'
 
 export type ClientUser = ClientModel<
   Pick<User, 'id' | 'informationVisibility'> & {

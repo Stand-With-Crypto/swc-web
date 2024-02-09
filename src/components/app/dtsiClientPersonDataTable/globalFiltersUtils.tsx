@@ -1,4 +1,6 @@
 'use client'
+import { useMemo } from 'react'
+
 import { Person } from '@/components/app/dtsiClientPersonDataTable/columns'
 import {
   Select,
@@ -12,7 +14,6 @@ import {
   DTSI_PersonRoleCategory,
 } from '@/data/dtsi/generated'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
-import { useMemo } from 'react'
 
 export enum StanceOnCryptoOptions {
   PRO_CRYPTO = 'Pro-crypto',

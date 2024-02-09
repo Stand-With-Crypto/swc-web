@@ -1,9 +1,11 @@
 import 'server-only'
-import { SupportedLocale } from '@/intl/locales'
+
 import { createIntl } from '@formatjs/intl'
-import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import * as Sentry from '@sentry/nextjs'
+
+import { SupportedLocale } from '@/intl/locales'
 import { getLogger } from '@/utils/shared/logger'
+import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
 const logger = getLogger('intlMessages')
 

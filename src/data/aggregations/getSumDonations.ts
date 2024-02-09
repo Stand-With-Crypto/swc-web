@@ -1,6 +1,8 @@
-import { prismaClient } from '@/utils/server/prismaClient'
-import { Decimal } from '@prisma/client/runtime/library'
 import 'server-only'
+
+import { Decimal } from '@prisma/client/runtime/library'
+
+import { prismaClient } from '@/utils/server/prismaClient'
 
 export const getSumDonations = async ({ includeFairshake }: { includeFairshake: boolean }) => {
   // there might be a way of doing this better with https://www.prisma.io/docs/orm/prisma-client/queries/aggregation-grouping-summarizing

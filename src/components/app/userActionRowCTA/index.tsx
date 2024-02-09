@@ -1,9 +1,10 @@
 'use client'
-import { NextImage } from '@/components/ui/image'
-import { cn } from '@/utils/web/cn'
+import React from 'react'
 import { UserActionType } from '@prisma/client'
 import { ChevronRight } from 'lucide-react'
-import React from 'react'
+
+import { NextImage } from '@/components/ui/image'
+import { cn } from '@/utils/web/cn'
 
 export interface UserActionRowCTAProps {
   actionType: UserActionType

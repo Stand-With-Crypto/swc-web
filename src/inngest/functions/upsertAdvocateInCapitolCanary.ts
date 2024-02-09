@@ -1,3 +1,6 @@
+import { CapitolCanaryInstance } from '@prisma/client'
+import { NonRetriableError } from 'inngest'
+
 import { inngest } from '@/inngest/inngest'
 import { onFailureCapitolCanary } from '@/inngest/onFailureCapitolCanary'
 import {
@@ -10,8 +13,6 @@ import {
   updateAdvocateInCapitolCanary,
 } from '@/utils/server/capitolCanary/updateAdvocate'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { CapitolCanaryInstance } from '@prisma/client'
-import { NonRetriableError } from 'inngest'
 
 const CAPITOL_CANARY_UPSERT_ADVOCATE_RETRY_LIMIT = 20
 

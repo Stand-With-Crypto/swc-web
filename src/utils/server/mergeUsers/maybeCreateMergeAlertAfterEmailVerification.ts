@@ -1,6 +1,7 @@
+import _ from 'lodash'
+
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getLogger } from '@/utils/shared/logger'
-import _ from 'lodash'
 
 const logger = getLogger(`maybeCreateMergeAlertAfterEmailVerification`)
 

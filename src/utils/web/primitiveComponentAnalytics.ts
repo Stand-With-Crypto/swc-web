@@ -1,4 +1,5 @@
 import _ from 'lodash'
+
 import { AnalyticProperties } from '@/utils/shared/sharedAnalytics'
 
 type AnalyticsFnCall<A> = (params: {

@@ -1,10 +1,10 @@
-import { PageTitle } from '@/components/ui/pageTitleText'
 import {
   Accordion,
+  AccordionContent,
   AccordionItem,
   AccordionTrigger,
-  AccordionContent,
 } from '@/components/ui/accordion'
+import { PageTitle } from '@/components/ui/pageTitleText'
 
 import { FAQ_DATA } from './faqData'
 

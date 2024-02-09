@@ -1,12 +1,13 @@
 'use client'
 
+import { Suspense } from 'react'
+import { useRouter } from 'next/navigation'
+
 import { UserActionFormCallCongressperson } from '@/components/app/userActionFormCallCongressperson'
 import { UserActionFormCallCongresspersonSkeleton } from '@/components/app/userActionFormCallCongressperson/skeleton'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useParseRnQueryParam } from '@/hooks/useRnQueryParams'
-import { useRouter } from 'next/navigation'
-import { Suspense } from 'react'
 
 function UserActionFormCallCongresspersonDeeplinkWrapperContent() {
   const fetchUser = useApiResponseForUserFullProfileInfo()

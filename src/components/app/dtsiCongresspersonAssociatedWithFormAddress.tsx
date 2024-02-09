@@ -1,4 +1,7 @@
 'use client'
+import { useEffect } from 'react'
+import { z } from 'zod'
+
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -9,8 +12,6 @@ import {
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { convertDTSIStanceScoreToCryptoSupportLanguageSentence } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { zodGooglePlacesAutocompletePrediction } from '@/validation/fields/zodGooglePlacesAutocompletePrediction'
-import { useEffect } from 'react'
-import { z } from 'zod'
 
 export function DTSICongresspersonAssociatedWithFormAddress({
   address,

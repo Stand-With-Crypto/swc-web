@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
-import { useSearchParams } from 'next/navigation'
 import * as Sentry from '@sentry/nextjs'
+import { useSearchParams } from 'next/navigation'
 
 type RnParams = {
   address?: string

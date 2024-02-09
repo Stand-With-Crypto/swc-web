@@ -1,12 +1,13 @@
+import React, { useEffect } from 'react'
+import { MapPin } from 'lucide-react'
+import usePlacesAutocomplete from 'use-places-autocomplete'
+
 import { Combobox } from '@/components/ui/combobox'
 import { InputWithIcons } from '@/components/ui/inputWithIcons'
 import { useScript } from '@/hooks/useScript'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { cn } from '@/utils/web/cn'
 import { GooglePlaceAutocompletePrediction } from '@/utils/web/googlePlaceUtils'
-import { MapPin } from 'lucide-react'
-import React, { useEffect } from 'react'
-import usePlacesAutocomplete from 'use-places-autocomplete'
 
 const CALLBACK_NAME = 'PLACES_AUTOCOMPLETE'
 

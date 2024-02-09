@@ -1,14 +1,15 @@
-import { inngest } from '@/inngest/inngest'
-import { runBin } from '@/bin/runBin'
-import { AirdropPayload } from '@/utils/server/nft/payload'
-import { AIRDROP_NFT_INNGEST_EVENT_NAME } from '@/inngest/functions/airdropNFT'
-import { prismaClient } from '@/utils/server/prismaClient'
-import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { NFTCurrency, NFTMintStatus, UserActionOptInType, UserActionType } from '@prisma/client'
-import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
-import { NFT_CONTRACT_ADDRESS } from '@/utils/server/nft/contractAddress'
-import { NFTSlug } from '@/utils/shared/nft'
 import { Decimal } from '@prisma/client/runtime/library'
+
+import { runBin } from '@/bin/runBin'
+import { AIRDROP_NFT_INNGEST_EVENT_NAME } from '@/inngest/functions/airdropNFT'
+import { inngest } from '@/inngest/inngest'
+import { NFT_CONTRACT_ADDRESS } from '@/utils/server/nft/contractAddress'
+import { AirdropPayload } from '@/utils/server/nft/payload'
+import { prismaClient } from '@/utils/server/prismaClient'
+import { NFTSlug } from '@/utils/shared/nft'
+import { requiredEnv } from '@/utils/shared/requiredEnv'
+import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
 
 const LOCAL_USER_CRYPTO_ADDRESS = requiredEnv(
   process.env.LOCAL_USER_CRYPTO_ADDRESS,

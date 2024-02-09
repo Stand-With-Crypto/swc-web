@@ -1,8 +1,9 @@
 import 'server-only'
 
-import { getPublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
+
+import { getPublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 
 export const dynamic = 'error'
 export const revalidate = 5

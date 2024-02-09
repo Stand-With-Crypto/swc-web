@@ -1,4 +1,5 @@
 import { HomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogDeeplinkLayout'
+
 import { PageProps } from '@/types'
 
 export const revalidate = 3600

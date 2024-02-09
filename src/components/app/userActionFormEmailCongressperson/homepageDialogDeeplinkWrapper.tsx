@@ -1,5 +1,8 @@
 'use client'
 
+import React, { Suspense,useState  } from 'react'
+import { useRouter } from 'next/navigation'
+
 import { UserActionFormEmailCongressperson } from '@/components/app/userActionFormEmailCongressperson'
 import { UserActionFormEmailCongresspersonSkeleton } from '@/components/app/userActionFormEmailCongressperson/skeleton'
 import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
@@ -7,9 +10,6 @@ import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForU
 import { useLocale } from '@/hooks/useLocale'
 import { useParseRnQueryParam } from '@/hooks/useRnQueryParams'
 import { getIntlUrls } from '@/utils/shared/urls'
-import { useRouter } from 'next/navigation'
-import React, { Suspense } from 'react'
-import { useState } from 'react'
 
 function UserActionFormEmailCongresspersonDeeplinkWrapperContent() {
   const fetchUser = useApiResponseForUserFullProfileInfo()

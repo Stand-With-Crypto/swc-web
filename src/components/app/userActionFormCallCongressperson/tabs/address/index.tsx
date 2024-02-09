@@ -1,13 +1,13 @@
 'use client'
 
-import { zodResolver } from '@hookform/resolvers/zod'
 import React, { useEffect } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
 import useSWR from 'swr'
 
 import type { UserActionFormCallCongresspersonProps } from '@/components/app/userActionFormCallCongressperson'
-import { UserActionFormCallCongresspersonLayout } from '@/components/app/userActionFormCallCongressperson/tabs/layout'
 import { SectionNames } from '@/components/app/userActionFormCallCongressperson/constants'
+import { UserActionFormCallCongresspersonLayout } from '@/components/app/userActionFormCallCongressperson/tabs/layout'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -29,10 +29,10 @@ import { trackFormSubmissionSyncErrors } from '@/utils/web/formUtils'
 import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
 
 import {
-  FORM_NAME,
   findRepresentativeCallFormValidationSchema,
-  getDefaultValues,
   type FindRepresentativeCallFormValues,
+  FORM_NAME,
+  getDefaultValues,
 } from './formConfig'
 
 interface AddressProps

@@ -1,4 +1,8 @@
 'use client'
+import { useMemo } from 'react'
+import _ from 'lodash'
+import useSWR from 'swr'
+
 import { getDTSIClientPersonDataTableColumns } from '@/components/app/dtsiClientPersonDataTable/columns'
 import { DataTable } from '@/components/app/dtsiClientPersonDataTable/dataTable'
 import { queryDTSIAllPeople } from '@/data/dtsi/queries/queryDTSIAllPeople'
@@ -6,9 +10,6 @@ import { SupportedLocale } from '@/intl/locales'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { apiUrls } from '@/utils/shared/urls'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
-import _ from 'lodash'
-import { useMemo } from 'react'
-import useSWR from 'swr'
 
 type People = Awaited<ReturnType<typeof queryDTSIAllPeople>>['people']
 

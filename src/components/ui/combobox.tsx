@@ -12,13 +12,13 @@ import {
 import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/drawer'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { useIsMobile } from '@/hooks/useIsMobile'
-import { cn } from '@/utils/web/cn'
 import { useResizeObserver } from '@/hooks/useResizeObserver'
+import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
+import { cn } from '@/utils/web/cn'
 import {
   PrimitiveComponentAnalytics,
   trackPrimitiveComponentAnalytics,
 } from '@/utils/web/primitiveComponentAnalytics'
-import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
 
 export interface ComboBoxProps<T>
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange' | 'type'>,

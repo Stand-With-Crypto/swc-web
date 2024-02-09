@@ -1,9 +1,10 @@
+import { ArrowRight } from 'lucide-react'
+
 import { NextImage } from '@/components/ui/image'
-import { TrackedExternalLink } from '@/components/ui/trackedExternalLink'
 import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
 import { PageTitle } from '@/components/ui/pageTitleText'
+import { TrackedExternalLink } from '@/components/ui/trackedExternalLink'
 import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
-import { ArrowRight } from 'lucide-react'
 
 const ICON_SIZE_PX = 32
 
