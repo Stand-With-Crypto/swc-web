@@ -6,9 +6,10 @@ import {
 import { queryDTSIHomepagePeople } from '@/data/dtsi/queries/queryDTSIHomepagePeople'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
+import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { Metadata } from 'next'
 
-export const revalidate = 3600
+export const revalidate = SECONDS_DURATION.HOUR
 export const dynamic = 'error'
 
 type Props = PageProps

@@ -13,7 +13,7 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { z } from 'zod'
 
-export const revalidate = 5
+export const revalidate = 30
 export const dynamic = 'error'
 export const dynamicParams = true
 

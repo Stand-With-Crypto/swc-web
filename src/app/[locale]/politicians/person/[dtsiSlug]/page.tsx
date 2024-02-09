@@ -11,12 +11,13 @@ import {
   convertDTSIStanceScoreToLetterGrade,
 } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
+import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { toBool } from '@/utils/shared/toBool'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { cache } from 'react'
 
-export const revalidate = 60 * 24 * 7
+export const revalidate = SECONDS_DURATION.WEEK
 export const dynamic = 'error'
 export const dynamicParams = true
 

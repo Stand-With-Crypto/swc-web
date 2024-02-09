@@ -1,0 +1,6 @@
+export const SECONDS_DURATION = {
+  WEEK: 604800,
+  DAY: 86400,
+  HOUR: 3600,
+  MINUTE: 60,
+}

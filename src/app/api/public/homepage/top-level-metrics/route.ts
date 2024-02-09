@@ -4,7 +4,7 @@ import { getHomepageTopLevelMetrics } from '@/data/pageSpecific/getHomepageData'
 import { NextResponse } from 'next/server'
 
 export const dynamic = 'error'
-export const revalidate = 1
+export const revalidate = 5
 
 export async function GET() {
   const data = await getHomepageTopLevelMetrics()
