@@ -182,15 +182,15 @@ enum UserEmailAddressSource {
 }
 
 model UserEmailAddress {
-  id              String                 @id @default(uuid())
-  isVerified      Boolean                @map("is_verified")
-  emailAddress    String                 @map("email_address")
-  userId          String                 @map("user_id")
-  user            User                   @relation("userEmailAddresses", map: "userEmailAddresses", fields: [userId], references: [id])
-  source          UserEmailAddressSource
-  dataCreationMethod         DataCreationMethod        @default(BY_USER) @map("data_creation_method")
-  datetimeUpdated DateTime               @updatedAt @map("datetime_updated")
-  datetimeCreated DateTime               @default(now()) @map("datetime_created")
+  id                 String                 @id @default(uuid())
+  isVerified         Boolean                @map("is_verified")
+  emailAddress       String                 @map("email_address")
+  userId             String                 @map("user_id")
+  user               User                   @relation("userEmailAddresses", map: "userEmailAddresses", fields: [userId], references: [id])
+  source             UserEmailAddressSource
+  dataCreationMethod DataCreationMethod     @default(BY_USER) @map("data_creation_method")
+  datetimeUpdated    DateTime               @updatedAt @map("datetime_updated")
+  datetimeCreated    DateTime               @default(now()) @map("datetime_created")
 
   userActions                     UserAction[]
   asPrimaryUserEmailAddress       User?              @relation("asPrimaryUserEmailAddress")
@@ -214,16 +214,16 @@ model UserCryptoAddress {
   datetimeCreated                  DateTime                   @default(now()) @map("datetime_created")
   userId                           String                     @unique @map("user_id")
   user                             User                       @relation("userCryptoAddresses", map: "userCryptoAddresses", fields: [userId], references: [id])
-  dataCreationMethod               DataCreationMethod        @default(BY_USER) @map("data_creation_method")
+  dataCreationMethod               DataCreationMethod         @default(BY_USER) @map("data_creation_method")
   // because we are populating this table using historical data where we didn't have the auth flow, we need to differentiate between 
   // addresses that exist but haven't been verified vs. addresses that have been verified via the auth flow
-  hasBeenVerifiedViaAuth            Boolean                   @default(true)
+  hasBeenVerifiedViaAuth           Boolean                    @default(true)
   embeddedWalletUserEmailAddressId String?                    @unique @map("embedded_wallet_user_email_address_id")
   embeddedWalletUserEmailAddress   UserEmailAddress?          @relation(fields: [embeddedWalletUserEmailAddressId], references: [id])
 
   userActions                UserAction[]
   asPrimaryUserCryptoAddress User?        @relation("asPrimaryUserCryptoAddress")
-  
+
   @@unique([cryptoAddress, cryptoNetwork])
   @@index([cryptoAddress])
   @@index([embeddedWalletUserEmailAddressId])
