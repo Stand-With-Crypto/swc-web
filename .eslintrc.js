@@ -7,9 +7,7 @@ const sortImports = {
     ['^react$', '^react-native$', '^react', '^@?\\w'],
     // Shared code imports
     ['^:.*'],
-    // Design system
-    ['^@designSystem.*'],
-    // Root level and App specifc imports
+    // Root level and App specific imports
     [
       '^@/(actions|app|bin|clientModels|components|data|hooks|inngest|intl|mocks|pages|staticContent|types|utils|validation)(/.*)',
     ],
