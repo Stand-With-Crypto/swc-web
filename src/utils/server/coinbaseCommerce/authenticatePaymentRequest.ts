@@ -1,8 +1,9 @@
-import { CoinbaseCommercePayment } from '@/utils/server/coinbaseCommerce/paymentRequest'
-import { requiredEnv } from '@/utils/shared/requiredEnv'
 import * as Sentry from '@sentry/nextjs'
 import crypto from 'crypto'
 import { headers } from 'next/headers'
+
+import { CoinbaseCommercePayment } from '@/utils/server/coinbaseCommerce/paymentRequest'
+import { requiredEnv } from '@/utils/shared/requiredEnv'
 
 const COINBASE_COMMERCE_WEBHOOK_SECRET = requiredEnv(
   process.env.COINBASE_COMMERCE_WEBHOOK_SECRET,

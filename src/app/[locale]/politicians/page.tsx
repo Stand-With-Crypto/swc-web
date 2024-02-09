@@ -1,12 +1,14 @@
+import { Metadata } from 'next'
+
 import {
   PAGE_POLITICIANS_DESCRIPTION,
   PAGE_POLITICIANS_TITLE,
   PagePoliticians,
 } from '@/components/app/pagePoliticians'
 import { queryDTSIHomepagePeople } from '@/data/dtsi/queries/queryDTSIHomepagePeople'
-import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { Metadata } from 'next'
+
+import { PageProps } from '@/types'
 
 export const revalidate = 3600
 export const dynamic = 'error'

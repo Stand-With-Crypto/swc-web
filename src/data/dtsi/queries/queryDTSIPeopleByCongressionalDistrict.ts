@@ -1,3 +1,5 @@
+import * as Sentry from '@sentry/nextjs'
+
 import { fetchDTSI } from '@/data/dtsi/fetchDTSI'
 import { fragmentDTSIPersonCard } from '@/data/dtsi/fragments/fragmentDTSIPersonCard'
 import {
@@ -5,7 +7,6 @@ import {
   DTSI_PeopleByUsCongressionalDistrictQueryVariables,
   DTSI_PersonRoleCategory,
 } from '@/data/dtsi/generated'
-import * as Sentry from '@sentry/nextjs'
 
 const query = /* GraphQL */ `
   query PeopleByUSCongressionalDistrict($congressionalDistrict: Int!, $stateCode: String!) {

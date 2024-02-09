@@ -1,8 +1,9 @@
 import 'server-only'
 
-import { queryDTSIPeopleByCongressionalDistrict } from '@/data/dtsi/queries/queryDTSIPeopleByCongressionalDistrict'
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
+
+import { queryDTSIPeopleByCongressionalDistrict } from '@/data/dtsi/queries/queryDTSIPeopleByCongressionalDistrict'
 
 export const dynamic = 'error'
 export const revalidate = 60 * 24

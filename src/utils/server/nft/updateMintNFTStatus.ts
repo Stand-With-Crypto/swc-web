@@ -1,9 +1,10 @@
-import { prismaClient } from '@/utils/server/prismaClient'
 import { NFTCurrency, NFTMintStatus } from '@prisma/client'
-import { getLogger } from '@/utils/shared/logger'
+import { Decimal } from '@prisma/client/runtime/library'
+
+import { prismaClient } from '@/utils/server/prismaClient'
 import { ThirdwebTransactionStatus } from '@/utils/server/thirdweb/engineGetMintStatus'
 import { getCryptoToFiatConversion } from '@/utils/shared/getCryptoToFiatConversion'
-import { Decimal } from '@prisma/client/runtime/library'
+import { getLogger } from '@/utils/shared/logger'
 
 const logger = getLogger('updateMintNFTStatus')
 

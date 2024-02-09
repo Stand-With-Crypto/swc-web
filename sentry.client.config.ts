@@ -2,10 +2,11 @@
 // The config you add here will be used whenever a users loads a page in their browser.
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/
 
-import * as Sentry from '@sentry/nextjs'
 import { ExtraErrorData } from '@sentry/integrations'
-import { toBool } from '@/utils/shared/toBool'
+import * as Sentry from '@sentry/nextjs'
+
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
+import { toBool } from '@/utils/shared/toBool'
 
 const dsn = process.env.NEXT_PUBLIC_SENTRY_DSN
 Sentry.init({

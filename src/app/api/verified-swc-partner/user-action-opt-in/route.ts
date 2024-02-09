@@ -1,9 +1,10 @@
+import { NextRequest, NextResponse } from 'next/server'
+
 import {
   verifiedSWCPartnersUserActionOptIn,
   zodVerifiedSWCPartnersUserActionOptIn,
 } from '@/data/verifiedSWCPartners/userActionOptIn'
 import { authenticateAndGetVerifiedSWCPartnerFromHeader } from '@/utils/server/verifiedSWCPartner/getVerifiedSWCPartnerFromHeader'
-import { NextRequest, NextResponse } from 'next/server'
 
 export async function POST(request: NextRequest) {
   const partner = authenticateAndGetVerifiedSWCPartnerFromHeader()

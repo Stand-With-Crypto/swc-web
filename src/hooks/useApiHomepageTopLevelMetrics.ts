@@ -1,9 +1,10 @@
 'use client'
+import { useEffect, useState } from 'react'
+import useSWR from 'swr'
+
 import { GetHomepageTopLevelMetricsResponse } from '@/data/pageSpecific/getHomepageData'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { apiUrls } from '@/utils/shared/urls'
-import { useEffect, useState } from 'react'
-import useSWR from 'swr'
 
 export function useApiHomepageTopLevelMetrics(initial: GetHomepageTopLevelMetricsResponse) {
   const initialDelayToShowAnimation = 1500

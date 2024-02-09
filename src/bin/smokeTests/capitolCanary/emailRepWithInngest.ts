@@ -1,14 +1,14 @@
+import { runBin } from '@/bin/runBin'
+import { CAPITOL_CANARY_EMAIL_REP_INNGEST_EVENT_NAME } from '@/inngest/functions/emailRepViaCapitolCanary'
 import { inngest } from '@/inngest/inngest'
+import { mockAddress } from '@/mocks/models/mockAddress'
+import { mockUser } from '@/mocks/models/mockUser'
+import { mockUserEmailAddress } from '@/mocks/models/mockUserEmailAddress'
 import {
   CapitolCanaryCampaignName,
   getCapitolCanaryCampaignID,
 } from '@/utils/server/capitolCanary/campaigns'
 import { EmailRepViaCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
-import { mockUser } from '@/mocks/models/mockUser'
-import { mockAddress } from '@/mocks/models/mockAddress'
-import { mockUserEmailAddress } from '@/mocks/models/mockUserEmailAddress'
-import { runBin } from '@/bin/runBin'
-import { CAPITOL_CANARY_EMAIL_REP_INNGEST_EVENT_NAME } from '@/inngest/functions/emailRepViaCapitolCanary'
 
 /**
  * Run this script only after you have the server AND Inngest running locally.

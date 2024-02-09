@@ -1,3 +1,6 @@
+import _ from 'lodash'
+import { Globe, MoveUpRight } from 'lucide-react'
+
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { DTSIStanceDetails } from '@/components/app/dtsiStanceDetails'
 import { Button } from '@/components/ui/button'
@@ -27,8 +30,6 @@ import { dtsiTwitterAccountUrl } from '@/utils/dtsi/dtsiTwitterAccountUtils'
 import { pluralize } from '@/utils/shared/pluralize'
 import { externalUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
-import _ from 'lodash'
-import { Globe, MoveUpRight } from 'lucide-react'
 
 export function PagePoliticianDetails({
   person,

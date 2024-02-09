@@ -3,14 +3,13 @@
 import { useMemo } from 'react'
 import { X } from 'lucide-react'
 
-import { cn } from '@/utils/web/cn'
+import ManageCookiesModal from '@/components/app/cookieConsent/cookieConsentManageModal'
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
-import { getIntlUrls } from '@/utils/shared/urls'
 import { SupportedLocale } from '@/intl/locales'
-
-import ManageCookiesModal from '@/components/app/cookieConsent/cookieConsentManageModal'
 import { CookieConsentPermissions } from '@/utils/shared/cookieConsent'
+import { getIntlUrls } from '@/utils/shared/urls'
+import { cn } from '@/utils/web/cn'
 
 interface CookieConsentBannerProps {
   locale: SupportedLocale

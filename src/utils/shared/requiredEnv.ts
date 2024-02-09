@@ -1,5 +1,6 @@
-import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import * as Sentry from '@sentry/nextjs'
+
+import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
 export function requiredEnv(value: string | undefined, name: string) {
   if (!value) {

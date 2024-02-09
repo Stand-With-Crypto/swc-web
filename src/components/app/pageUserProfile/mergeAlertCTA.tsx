@@ -1,4 +1,10 @@
 'use client'
+import { useEffect, useMemo, useState } from 'react'
+import * as Sentry from '@sentry/nextjs'
+import { AlertCircle } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import { toast } from 'sonner'
+
 import { actionConfirmUserMergeAlert } from '@/actions/actionConfirmUserMergeAlert'
 import { PageUserProfileUser } from '@/components/app/pageUserProfile/getAuthenticatedData'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
@@ -15,11 +21,6 @@ import {
 import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
 import { getUserDisplayNameWithoutENS } from '@/utils/web/userUtils'
-import * as Sentry from '@sentry/nextjs'
-import { AlertCircle } from 'lucide-react'
-import { useRouter } from 'next/navigation'
-import { useEffect, useMemo, useState } from 'react'
-import { toast } from 'sonner'
 
 export function MergeAlertCTA({
   mergeAlert,

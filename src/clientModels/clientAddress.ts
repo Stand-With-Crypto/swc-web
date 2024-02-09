@@ -1,5 +1,6 @@
-import { ClientModel, getClientModel } from '@/clientModels/utils'
 import { Address } from '@prisma/client'
+
+import { ClientModel, getClientModel } from '@/clientModels/utils'
 
 export type ClientAddress = ClientModel<
   Pick<Address, 'id' | 'googlePlaceId' | 'formattedDescription'>

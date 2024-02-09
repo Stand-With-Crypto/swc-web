@@ -1,6 +1,7 @@
+import * as Sentry from '@sentry/nextjs'
+
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
-import * as Sentry from '@sentry/nextjs'
 
 const COINBASE_COMMERCE_CREATE_CHARGE_URL = 'https://api.commerce.coinbase.com/charges'
 

@@ -1,4 +1,23 @@
 /* eslint-env node */
+const sortImports = {
+  groups: [
+    // Side effect imports first i.e. import "some-polyfill";
+    ['^\\u0000'],
+    // React, react-native, react prefixed imports, all other 3rd party imports
+    ['^react$', '^react-native$', '^react', '^@?\\w'],
+    // Shared code imports
+    ['^:.*'],
+    // Root level and App specific imports
+    [
+      '^@/(actions|app|bin|clientModels|components|data|hooks|inngest|intl|mocks|pages|staticContent|types|utils|validation)(/.*)',
+    ],
+    // Parent imports. Put `..` last.
+    ['^\\.\\.(?!/?$)', '^\\.\\./?$'],
+    // Other relative imports. Put same-folder imports and `.` last.
+    ['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'],
+  ],
+}
+
 module.exports = {
   root: true,
   ignorePatterns: ['**/**/*.generated.ts', '*.js'],
@@ -9,7 +28,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:storybook/recommended',
   ],
-  plugins: ['no-relative-import-paths', 'formatjs'],
+  plugins: ['no-relative-import-paths', 'formatjs', 'simple-import-sort'],
   parserOptions: {
     project: './tsconfig.json',
     tsconfigRootDir: __dirname,
@@ -44,5 +63,10 @@ module.exports = {
         additionalHooks: 'useLoadingCallback',
       },
     ],
+    'simple-import-sort/imports': ['error', sortImports],
+    'simple-import-sort/exports': 'error',
+    'import/first': 'error',
+    'import/newline-after-import': 'error',
+    'import/no-duplicates': 'error',
   },
 }

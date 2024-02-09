@@ -1,6 +1,7 @@
+import { Metadata } from 'next'
+
 import { PageAbout } from '@/components/app/pageAbout'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { Metadata } from 'next'
 
 export const dynamic = 'error'
 

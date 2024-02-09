@@ -1,3 +1,5 @@
+import { User, UserCryptoAddress, UserEmailAddress } from '@prisma/client'
+
 import {
   ClientUserCryptoAddress,
   ClientUserCryptoAddressWithENSData,
@@ -7,7 +9,6 @@ import {
 import { ClientModel, getClientModel } from '@/clientModels/utils'
 import { UserENSData } from '@/data/web3/types'
 import { formatPhoneNumber } from '@/utils/shared/phoneNumber'
-import { User, UserCryptoAddress, UserEmailAddress } from '@prisma/client'
 
 export type SensitiveDataClientUser = ClientModel<
   Pick<

@@ -1,3 +1,5 @@
+import Cookies from 'js-cookie'
+
 import {
   CurrentSessionLocalUser,
   LOCAL_USER_CURRENT_SESSION_KEY,
@@ -6,7 +8,6 @@ import {
   PersistedLocalUser,
 } from '@/utils/shared/localUser'
 import { getClientCookieConsent } from '@/utils/web/clientCookieConsent'
-import Cookies from 'js-cookie'
 
 const getPersistedLocalUser = () => {
   const val = Cookies.get(LOCAL_USER_PERSISTED_KEY)

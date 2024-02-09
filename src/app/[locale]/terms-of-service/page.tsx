@@ -1,6 +1,7 @@
+import { Metadata } from 'next'
+
 import { PageTermsOfService } from '@/components/app/pageTermsOfService'
 import { StaticPagesCTA } from '@/components/app/staticPagesCTA'
-import { Metadata } from 'next'
 
 export const dynamic = 'error'
 

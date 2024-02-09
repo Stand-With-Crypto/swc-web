@@ -1,9 +1,11 @@
+import 'server-only'
+
+import { Decimal } from '@prisma/client/runtime/library'
+import _ from 'lodash'
+
 import { getClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
 import { getENSDataMapFromCryptoAddressesAndFailGracefully } from '@/data/web3/getENSDataFromCryptoAddress'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { Decimal } from '@prisma/client/runtime/library'
-import _ from 'lodash'
-import 'server-only'
 
 export type SumDonationsByUserConfig = {
   limit: number

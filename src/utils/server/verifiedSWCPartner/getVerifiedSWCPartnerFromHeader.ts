@@ -1,11 +1,12 @@
+import * as Sentry from '@sentry/nextjs'
+import crypto from 'crypto'
+import { headers } from 'next/headers'
+
 import { decodeBasicAuthHeader } from '@/utils/server/basicAuth'
 import {
   VERIFIED_SWC_PARTNER_SECRET_MAP,
   VerifiedSWCPartner,
 } from '@/utils/server/verifiedSWCPartner/constants'
-import * as Sentry from '@sentry/nextjs'
-import { headers } from 'next/headers'
-import crypto from 'crypto'
 
 // Why not just use ===? See https://stackoverflow.com/a/31096242
 const areEqual = (a: string, b: string) => {

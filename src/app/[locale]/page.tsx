@@ -1,5 +1,6 @@
 import { PageHome } from '@/components/app/pageHome'
 import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
+
 import { PageProps } from '@/types'
 
 export const revalidate = 5

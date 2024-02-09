@@ -1,6 +1,7 @@
+import 'server-only'
+
 import { prismaClient } from '@/utils/server/prismaClient'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
-import 'server-only'
 
 export const getCountUsers = async () => {
   const count = await prismaClient.user.count()

@@ -1,10 +1,12 @@
 'use client'
+import { useRouter } from 'next/navigation'
+
 import { GetUserPerformedUserActionTypesResponse } from '@/app/api/identified-user/performed-user-action-types/route'
 import { UserActionRowCTAButton } from '@/components/app/userActionRowCTA'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useLocale } from '@/hooks/useLocale'
 import { USER_ACTION_DEEPLINK_MAP } from '@/utils/shared/urlsDeeplinkUserActions'
-import { useRouter } from 'next/navigation'
+
 import { getNextAction } from './getNextAction'
 
 export function UserActionFormSuccessScreenNextAction({

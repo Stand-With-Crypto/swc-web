@@ -1,10 +1,11 @@
+import { ImageResponse } from 'next/og'
+import { NextRequest } from 'next/server'
+
 import {
   OPEN_GRAPH_IMAGE_DIMENSIONS,
   OpenGraphImageOptions,
 } from '@/utils/server/generateOpenGraphImageUrl'
 import { decodeObjectForUrl } from '@/utils/shared/encodeObjectForUrl'
-import { ImageResponse } from 'next/og'
-import { NextRequest } from 'next/server'
 
 export const dynamic = 'error'
 export const revalidate = 60 * 60 * 24 * 7 // 1 week
