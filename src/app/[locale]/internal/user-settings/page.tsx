@@ -1,6 +1,6 @@
-import CookieConsentConfig from './cookieConsentConfig'
-
 import { PageTitle } from '@/components/ui/pageTitleText'
+
+import CookieConsentConfig from './cookieConsentConfig'
 
 export const dynamic = 'error'
 

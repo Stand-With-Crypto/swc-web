@@ -4,6 +4,7 @@ import { FailureEventArgs } from 'inngest'
 
 import { AirdropPayload } from '@/utils/server/nft/payload'
 import { updateMintNFTStatus } from '@/utils/server/nft/updateMintNFTStatus'
+
 import NFTMintStatus = $Enums.NFTMintStatus
 
 export async function onFailureAirdropNFT(failureEventArgs: FailureEventArgs) {

@@ -12,10 +12,11 @@ import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { Progress } from '@/components/ui/progress'
-import { PageProps } from '@/types'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { hasCompleteUserProfile } from '@/utils/web/hasCompleteUserProfile'
 import { getSensitiveDataUserDisplayName } from '@/utils/web/userUtils'
+
+import { PageProps } from '@/types'
 
 export function PageUserProfile({
   params,

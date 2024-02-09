@@ -1,5 +1,3 @@
-import { FAQ_DATA } from './faqData'
-
 import {
   Accordion,
   AccordionContent,
@@ -7,6 +5,8 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion'
 import { PageTitle } from '@/components/ui/pageTitleText'
+
+import { FAQ_DATA } from './faqData'
 
 export function FAQ() {
   return (

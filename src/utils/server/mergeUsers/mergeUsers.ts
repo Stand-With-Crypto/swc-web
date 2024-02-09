@@ -1,9 +1,9 @@
 import { Prisma } from '@prisma/client'
 
-import { MERGE_EMAIL_SOURCE_PRIORITY } from './constants'
-
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getLogger } from '@/utils/shared/logger'
+
+import { MERGE_EMAIL_SOURCE_PRIORITY } from './constants'
 
 const logger = getLogger(`mergeUsers`)
 

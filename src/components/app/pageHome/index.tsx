@@ -1,8 +1,6 @@
 import { Suspense } from 'react'
 import { ArrowUpRight, ThumbsDown, ThumbsUp } from 'lucide-react'
 
-import { TopLevelMetrics } from './topLevelMetrics'
-
 import { DTSIPersonCard } from '@/components/app/dtsiPersonCard'
 import { DelayedRecentActivity } from '@/components/app/pageHome/delayedRecentActivity'
 import { HeroCTA } from '@/components/app/pageHome/heroCTA'
@@ -20,9 +18,12 @@ import { LazyResponsiveYoutube } from '@/components/ui/responsiveYoutube/lazyLoa
 import { Skeleton } from '@/components/ui/skeleton'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
-import { PageProps } from '@/types'
 import { groupAndSortDTSIPeopleByCryptoStance } from '@/utils/dtsi/dtsiPersonUtils'
 import { getIntlUrls } from '@/utils/shared/urls'
+
+import { TopLevelMetrics } from './topLevelMetrics'
+
+import { PageProps } from '@/types'
 
 export function PageHome({
   params,

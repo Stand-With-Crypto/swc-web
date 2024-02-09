@@ -3,14 +3,14 @@
 import * as React from 'react'
 import * as TabsPrimitive from '@radix-ui/react-tabs'
 
-import { tabListStyles, tabTriggerStyles } from './styles'
-
 import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
 import { cn } from '@/utils/web/cn'
 import {
   PrimitiveComponentAnalytics,
   trackPrimitiveComponentAnalytics,
 } from '@/utils/web/primitiveComponentAnalytics'
+
+import { tabListStyles, tabTriggerStyles } from './styles'
 
 const Tabs = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.Root>,

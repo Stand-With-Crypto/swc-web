@@ -8,7 +8,6 @@ import {
   DTSIPersonDetails,
   queryDTSIPersonDetails,
 } from '@/data/dtsi/queries/queryDTSIPersonDetails'
-import { PageProps } from '@/types'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import {
   convertDTSIStanceScoreToLetterGrade,
@@ -16,6 +15,8 @@ import {
 } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { toBool } from '@/utils/shared/toBool'
+
+import { PageProps } from '@/types'
 
 export const revalidate = 60 * 24 * 7
 export const dynamic = 'error'

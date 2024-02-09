@@ -1,7 +1,7 @@
-import { dtsiPersonDetailsQueryString } from './dtsiPersonDetailsQueryString'
-
 import { fetchDTSI } from '@/data/dtsi/fetchDTSI'
 import { DTSI_PersonDetailsQuery, DTSI_PersonDetailsQueryVariables } from '@/data/dtsi/generated'
+
+import { dtsiPersonDetailsQueryString } from './dtsiPersonDetailsQueryString'
 
 export type DTSIPersonDetails = DTSI_PersonDetailsQuery['people'][0]
 

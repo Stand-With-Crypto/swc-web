@@ -3,14 +3,14 @@
 import React from 'react'
 import { useENS } from '@thirdweb-dev/react'
 
-import { NavbarLoggedInPopoverContent } from './navbarLoggedInPopoverContent'
-
 import { Button } from '@/components/ui/button'
 import { useResponsivePopover } from '@/components/ui/responsivePopover'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useDialog } from '@/hooks/useDialog'
 import { appendENSHookDataToUser } from '@/utils/web/appendENSHookDataToUser'
 import { getSensitiveDataUserDisplayName } from '@/utils/web/userUtils'
+
+import { NavbarLoggedInPopoverContent } from './navbarLoggedInPopoverContent'
 
 export function NavbarLoggedInButton({ onOpenChange }: { onOpenChange: (open: boolean) => void }) {
   const { Popover, PopoverContent, PopoverTrigger } = useResponsivePopover()

@@ -9,6 +9,7 @@ import { AirdropPayload } from '@/utils/server/nft/payload'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getLogger } from '@/utils/shared/logger'
 import { NFTSlug } from '@/utils/shared/nft'
+
 import NFTMintStatus = $Enums.NFTMintStatus
 
 export const ACTION_NFT_SLUG: Record<UserActionType, NFTSlug | null> = {

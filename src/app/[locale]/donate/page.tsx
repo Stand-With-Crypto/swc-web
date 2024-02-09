@@ -2,8 +2,9 @@ import { Metadata } from 'next'
 
 import { PageDonate } from '@/components/app/pageDonate'
 import { getSumDonations } from '@/data/aggregations/getSumDonations'
-import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
+
+import { PageProps } from '@/types'
 
 export const dynamic = 'error'
 

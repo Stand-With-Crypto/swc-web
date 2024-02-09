@@ -10,7 +10,9 @@ const sortImports = {
     // Design system
     ['^@designSystem.*'],
     // Root level and App specifc imports
-    ['^(@root|types)(/.*)', '^(@utils|@hooks|@config|@contexts|@components)(/.*)'],
+    [
+      '^@/(actions|app|bin|clientModels|components|data|hooks|inngest|intl|mocks|pages|staticContent|types|utils|validation)(/.*)',
+    ],
     // Parent imports. Put `..` last.
     ['^\\.\\.(?!/?$)', '^\\.\\./?$'],
     // Other relative imports. Put same-folder imports and `.` last.

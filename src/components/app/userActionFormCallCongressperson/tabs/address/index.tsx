@@ -5,13 +5,6 @@ import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import useSWR from 'swr'
 
-import {
-  findRepresentativeCallFormValidationSchema,
-  type FindRepresentativeCallFormValues,
-  FORM_NAME,
-  getDefaultValues,
-} from './formConfig'
-
 import type { UserActionFormCallCongresspersonProps } from '@/components/app/userActionFormCallCongressperson'
 import { SectionNames } from '@/components/app/userActionFormCallCongressperson/constants'
 import { UserActionFormCallCongresspersonLayout } from '@/components/app/userActionFormCallCongressperson/tabs/layout'
@@ -34,6 +27,13 @@ import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { getGoogleCivicDataFromAddress } from '@/utils/shared/googleCivicInfo'
 import { trackFormSubmissionSyncErrors } from '@/utils/web/formUtils'
 import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
+
+import {
+  findRepresentativeCallFormValidationSchema,
+  type FindRepresentativeCallFormValues,
+  FORM_NAME,
+  getDefaultValues,
+} from './formConfig'
 
 interface AddressProps
   extends Pick<

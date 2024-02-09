@@ -11,8 +11,9 @@ import {
 } from '@/components/app/pageLeaderboard'
 import { PAGE_LEADERBOARD_TOTAL_PRE_GENERATED_PAGES } from '@/components/app/pageLeaderboard/constants'
 import { getDataForPageLeaderboard } from '@/components/app/pageLeaderboard/getData'
-import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
+
+import { PageProps } from '@/types'
 
 export const revalidate = 5
 export const dynamic = 'error'

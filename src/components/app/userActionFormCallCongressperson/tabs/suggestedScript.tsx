@@ -3,8 +3,6 @@ import { UserActionType } from '@prisma/client'
 import { ArrowRight } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 
-import { UserActionFormCallCongresspersonLayout } from './layout'
-
 import {
   actionCreateUserActionCallCongressperson,
   CreateActionCallCongresspersonInput,
@@ -22,6 +20,8 @@ import { userFullName } from '@/utils/shared/userFullName'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
 import { toastGenericError } from '@/utils/web/toastUtils'
+
+import { UserActionFormCallCongresspersonLayout } from './layout'
 
 export function SuggestedScript({
   user,

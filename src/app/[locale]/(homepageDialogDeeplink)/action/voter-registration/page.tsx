@@ -1,5 +1,6 @@
 import { HomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogDeeplinkLayout'
 import { UserActionFormVoterRegistrationDeeplinkWrapper } from '@/components/app/userActionFormVoterRegistration/homepageDialogDeeplinkWrapper'
+
 import { PageProps } from '@/types'
 
 export const revalidate = 3600

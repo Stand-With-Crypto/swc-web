@@ -1,10 +1,10 @@
 import { expect, it } from '@jest/globals'
 import { renderHook } from '@testing-library/react'
 
-import { useNumeralArray } from '.'
-
 import { SupportedLocale } from '@/intl/locales'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
+
+import { useNumeralArray } from '.'
 
 const EDGE_CASES: [number, string[]][] = [
   [-124123, ['-$', '124', ',', '123']],

@@ -2,11 +2,11 @@
 
 import React from 'react'
 
-import { CookieConsentBanner } from './banner'
-import { useCookieConsent } from './useCookieConsent'
-
 import { SupportedLocale } from '@/intl/locales'
 import { CookieConsentPermissions } from '@/utils/shared/cookieConsent'
+
+import { CookieConsentBanner } from './banner'
+import { useCookieConsent } from './useCookieConsent'
 
 interface CookieConsentProps {
   locale: SupportedLocale

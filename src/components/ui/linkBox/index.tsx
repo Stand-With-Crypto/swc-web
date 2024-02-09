@@ -1,8 +1,8 @@
 import React from 'react'
 
-import styles from './linkBox.module.css'
-
 import { cn } from '@/utils/web/cn'
+
+import styles from './linkBox.module.css'
 
 export const LinkBox = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => {
