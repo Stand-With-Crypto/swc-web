@@ -4,7 +4,6 @@ import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { UserActionType } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
-import * as Sentry from '@sentry/nextjs'
 import { useRouter } from 'next/navigation'
 import { z } from 'zod'
 
