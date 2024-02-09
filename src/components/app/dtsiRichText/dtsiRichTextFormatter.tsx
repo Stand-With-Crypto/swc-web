@@ -31,7 +31,7 @@ const isInlineDescendant = (node: MyInlineDescendant): node is MyInlineElement =
 const getInlineDescendantComponent = (node: MyInlineDescendant) => {
   if (isInlineDescendant(node)) {
     return (
-      <ExternalLink href={node.url} className="underline">
+      <ExternalLink className="underline" href={node.url}>
         {node.children.map((child, index) => (
           <React.Fragment key={index}>{getInlineDescendantComponent(child)}</React.Fragment>
         ))}

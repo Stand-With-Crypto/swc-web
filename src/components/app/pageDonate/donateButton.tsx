@@ -25,7 +25,7 @@ export function DonateButton() {
   }
   return (
     <div className="flex justify-center">
-      <Button size="lg" disabled={buttonState === 'loading'} onClick={handleDonateClick}>
+      <Button disabled={buttonState === 'loading'} onClick={handleDonateClick} size="lg">
         Donate
       </Button>
     </div>

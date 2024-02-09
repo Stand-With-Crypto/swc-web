@@ -76,6 +76,7 @@ export function UpdateUserProfileForm({
   return (
     <Form {...form}>
       <form
+        className="space-y-6"
         onSubmit={form.handleSubmit(async values => {
           const address = values.address
             ? await convertGooglePlaceAutoPredictionToAddressSchema(values.address).catch(e => {
@@ -102,13 +103,12 @@ export function UpdateUserProfileForm({
             onSuccess({ firstName, lastName })
           }
         }, trackFormSubmissionSyncErrors(FORM_NAME))}
-        className="space-y-6"
       >
         <div>
-          <PageTitle size="sm" className="mb-1">
+          <PageTitle className="mb-1" size="sm">
             {hasCompleteUserProfile(user) ? 'Edit' : 'Finish'} your profile
           </PageTitle>
-          <PageSubTitle size="md" className="mb-7">
+          <PageSubTitle className="mb-7" size="md">
             Completing your profile makes it easier for you to take action, locate your
             representative and find local events.
           </PageSubTitle>
@@ -168,9 +168,9 @@ export function UpdateUserProfileForm({
                 <FormControl>
                   <GooglePlacesSelect
                     {...field}
-                    value={field.value}
                     onChange={field.onChange}
                     placeholder="Street address"
+                    value={field.value}
                   />
                 </FormControl>
                 <FormErrorMessage />
@@ -249,15 +249,15 @@ export function UpdateUserProfileForm({
         </div>
         <div className="grid grid-cols-2 gap-4">
           <Button
+            className="w-full"
+            disabled={form.formState.isSubmitting}
             onClick={onCancel}
             size="lg"
             variant="secondary"
-            disabled={form.formState.isSubmitting}
-            className="w-full"
           >
             Skip
           </Button>
-          <Button size="lg" type="submit" disabled={form.formState.isSubmitting} className="w-full">
+          <Button className="w-full" disabled={form.formState.isSubmitting} size="lg" type="submit">
             Submit
           </Button>
         </div>

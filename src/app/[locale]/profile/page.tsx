@@ -19,5 +19,5 @@ export async function generateMetadata(_props: Props): Promise<Metadata> {
 
 export default async function Profile({ params }: Props) {
   const user = await getAuthenticatedData()
-  return <PageUserProfile user={user} params={params} />
+  return <PageUserProfile params={params} user={user} />
 }

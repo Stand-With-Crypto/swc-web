@@ -19,12 +19,12 @@ import { useState } from 'react'
 
 const NFTImage = ({ nft }: { nft: NFTClientMetadata }) => (
   <NextImage
-    className="inline-block rounded-lg"
     alt={nft.image.alt}
-    width={nft.image.width}
+    className="inline-block rounded-lg"
     height={nft.image.height}
-    src={nft.image.url}
     sizes="300px"
+    src={nft.image.url}
+    width={nft.image.width}
   />
 )
 
@@ -134,7 +134,7 @@ export function UserActionFormSuccessScreenMainCTA({
               Become a member of our nonprofit. It's free to join and you'll receive exclusive
               benefits that normal Stand With Crypto members won't get.
             </PageSubTitle>
-            <Button variant="secondary" onClick={() => setHasOptedInToMembershipState('visible')}>
+            <Button onClick={() => setHasOptedInToMembershipState('visible')} variant="secondary">
               Learn More
             </Button>
           </Container>
@@ -142,8 +142,8 @@ export function UserActionFormSuccessScreenMainCTA({
       case 'visible':
         return (
           <HasOptedInToMembershipForm
-            onSuccess={() => setHasOptedInToMembershipState('submitted')}
             onCancel={() => setHasOptedInToMembershipState('hidden')}
+            onSuccess={() => setHasOptedInToMembershipState('submitted')}
           />
         )
       case 'submitted':
@@ -184,7 +184,7 @@ export function UserActionFormSuccessScreenMainCTA({
         You’ve done your part to save crypto, but the fight isn’t over yet. We'll be in touch when
         there's more actions to complete.
       </PageSubTitle>
-      <Button variant="secondary" onClick={() => onClose()}>
+      <Button onClick={() => onClose()} variant="secondary">
         Done
       </Button>
     </Container>

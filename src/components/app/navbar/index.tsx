@@ -60,11 +60,11 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
         <div className="flex items-center gap-8">
           <InternalLink className="flex-shrink-0" href={urls.home()}>
             <NextImage
-              priority
-              width={41}
-              height={40}
-              src="/logo/shield.svg"
               alt={'Stand With Crypto Logo'}
+              height={40}
+              priority
+              src="/logo/shield.svg"
+              width={41}
             />
           </InternalLink>
           {leftLinks.map(({ href, text }) => {
@@ -97,7 +97,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
                 )
               })}
               <div>
-                <Button className="mr-3" asChild>
+                <Button asChild className="mr-3">
                   <InternalLink href={urls.donate()}>Donate</InternalLink>
                 </Button>
               </div>
@@ -119,7 +119,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
         </Drawer>
 
         <div className="hidden md:flex">
-          <Button className="mr-3" asChild>
+          <Button asChild className="mr-3">
             <InternalLink href={urls.donate()}>Donate</InternalLink>
           </Button>
           <MaybeAuthenticatedContent

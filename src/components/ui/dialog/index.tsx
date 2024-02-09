@@ -50,7 +50,7 @@ const DialogOverlay = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Overlay>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>
 >(({ className, ...props }, ref) => (
-  <DialogPrimitive.Overlay ref={ref} className={cn(dialogOverlayStyles, className)} {...props} />
+  <DialogPrimitive.Overlay className={cn(dialogOverlayStyles, className)} ref={ref} {...props} />
 ))
 DialogOverlay.displayName = DialogPrimitive.Overlay.displayName
 
@@ -66,8 +66,8 @@ const DialogContent = React.forwardRef<
   <DialogPortal>
     <DialogOverlay />
     <DialogPrimitive.Content
-      ref={ref}
       className={cn(dialogContentStyles, padding && dialogContentPaddingStyles, className)}
+      ref={ref}
       {...props}
     >
       {children}
@@ -98,8 +98,8 @@ const DialogTitle = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Title
-    ref={ref}
     className={cn('text-lg font-semibold leading-none tracking-tight', className)}
+    ref={ref}
     {...props}
   />
 ))
@@ -110,8 +110,8 @@ const DialogDescription = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Description
-    ref={ref}
     className={cn('text-sm text-muted-foreground', className)}
+    ref={ref}
     {...props}
   />
 ))

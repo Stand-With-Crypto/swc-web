@@ -13,31 +13,31 @@ export function Survey({ goToSection }: SurveyProps) {
       <UserActionFormVoterRegistrationLayout.Container>
         <div className="flex flex-col gap-24">
           <UserActionFormVoterRegistrationLayout.Heading
-            title="Are you registered to vote?"
             subtitle='Register to vote or check your voter registration and get a free "I Registered" NFT'
+            title="Are you registered to vote?"
           />
           <div className="flex flex-grow flex-col items-center justify-center gap-3 lg:flex-row">
             <Button
-              onClick={() => goToSection(SectionNames.CLAIM_NFT)}
-              variant="secondary"
-              size="lg"
               className="w-full lg:w-auto"
+              onClick={() => goToSection(SectionNames.CLAIM_NFT)}
+              size="lg"
+              variant="secondary"
             >
               Yes
             </Button>
             <Button
-              onClick={() => goToSection(SectionNames.VOTER_REGISTRATION_FORM)}
-              variant="secondary"
-              size="lg"
               className="w-full lg:w-auto"
+              onClick={() => goToSection(SectionNames.VOTER_REGISTRATION_FORM)}
+              size="lg"
+              variant="secondary"
             >
               No
             </Button>
             <Button
-              onClick={() => goToSection(SectionNames.CHECK_REGISTRATION_FORM)}
-              variant="secondary"
-              size="lg"
               className="w-full lg:w-auto"
+              onClick={() => goToSection(SectionNames.CHECK_REGISTRATION_FORM)}
+              size="lg"
+              variant="secondary"
             >
               I’m not sure
             </Button>

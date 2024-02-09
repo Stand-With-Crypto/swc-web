@@ -69,7 +69,7 @@ export function TopLevelMetrics({ locale, ...data }: Props & { locale: Supported
           value: (
             <TooltipProvider>
               <Tooltip>
-                <TooltipTrigger style={{ height: 35 }} className="mx-auto block">
+                <TooltipTrigger className="mx-auto block" style={{ height: 35 }}>
                   <AnimatedNumericOdometer size={35} value={formatted.sumDonations.amountUsd} />
                 </TooltipTrigger>
                 <TooltipContent className="max-w-xs">

@@ -15,6 +15,7 @@ module.exports = {
     tsconfigRootDir: __dirname,
   },
   rules: {
+    "react/jsx-sort-props": "error",
     eqeqeq: ['error', 'always'],
     'formatjs/enforce-description': ['error', 'literal'],
     'formatjs/no-offset': 'error',

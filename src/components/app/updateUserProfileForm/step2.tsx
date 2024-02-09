@@ -62,13 +62,14 @@ export function UpdateUserInformationVisibilityForm({
   return (
     <Form {...form}>
       <div>
-        <PageTitle size="sm" className="mb-1">
+        <PageTitle className="mb-1" size="sm">
           How you appear on Stand With Crypto
         </PageTitle>
-        <PageSubTitle size="md" className="mb-7">
+        <PageSubTitle className="mb-7" size="md">
           Choose how you will appear on our public activity feed and leaderboard.
         </PageSubTitle>
         <form
+          className="space-y-8"
           onSubmit={form.handleSubmit(async values => {
             const result = await triggerServerActionForForm(
               {
@@ -86,7 +87,6 @@ export function UpdateUserInformationVisibilityForm({
               onSuccess()
             }
           }, trackFormSubmissionSyncErrors(FORM_NAME))}
-          className="space-y-8"
         >
           <FormField
             control={form.control}
@@ -94,21 +94,21 @@ export function UpdateUserInformationVisibilityForm({
             render={({ field }) => (
               <>
                 <RadioGroup
-                  value={field.value}
-                  onValueChange={field.onChange}
                   className="space-y-6"
+                  onValueChange={field.onChange}
+                  value={field.value}
                 >
                   {options.map(option => (
                     <RadioGroupItem
-                      key={option}
-                      value={option}
                       className={cn(
                         'flex w-full items-center justify-between rounded-lg bg-blue-50 p-6',
                         option === field.value && 'ring-2 ring-blue-600 ring-offset-4',
                       )}
+                      key={option}
+                      value={option}
                     >
                       <div className="flex items-center gap-3">
-                        <UserAvatar user={{ ...user, informationVisibility: option }} size={60} />
+                        <UserAvatar size={60} user={{ ...user, informationVisibility: option }} />
                         <p className="text-xl font-bold">
                           {getUserDisplayName({ ...user, informationVisibility: option })}
                         </p>
@@ -126,10 +126,10 @@ export function UpdateUserInformationVisibilityForm({
           <FormGeneralErrorMessage control={form.control} />
           <div className="space-y-4">
             <Button
+              className="w-full"
+              disabled={form.formState.isSubmitting}
               size="lg"
               type="submit"
-              disabled={form.formState.isSubmitting}
-              className="w-full"
             >
               Next
             </Button>

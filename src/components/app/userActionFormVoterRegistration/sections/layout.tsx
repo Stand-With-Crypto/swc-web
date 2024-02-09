@@ -43,7 +43,7 @@ UserActionFormVoterRegistrationLayout.Container = Container
 
 function GoBackButton({ onClick }: { onClick: () => void }) {
   return (
-    <div role="button" onClick={onClick} className={cn('left-2', dialogButtonStyles)}>
+    <div className={cn('left-2', dialogButtonStyles)} onClick={onClick} role="button">
       <ArrowLeft size={16} />
     </div>
   )

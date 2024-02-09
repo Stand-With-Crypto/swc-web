@@ -47,7 +47,7 @@ export function NavbarLoggedInPopoverContent({
         </div>
 
         <div className="space-y-1">
-          <Button className="w-full" asChild>
+          <Button asChild className="w-full">
             <InternalLink href={urls.profile()} onClick={onClose}>
               View profile
             </InternalLink>
@@ -59,7 +59,7 @@ export function NavbarLoggedInPopoverContent({
       </div>
 
       <hr />
-      <Button variant="link" onClick={logoutAndDisconnect}>
+      <Button onClick={logoutAndDisconnect} variant="link">
         Log out
       </Button>
     </div>
@@ -103,13 +103,13 @@ function UserHeading(props: {
   return (
     <>
       <div className="min-w-[36px]">
-        <UserAvatar user={user} size={36} />
+        <UserAvatar size={36} user={user} />
       </div>
       <div className="flex-1">
         <div className="flex w-full items-center justify-between">
           <p>{getSensitiveDataUserDisplayName(user)}</p>
-          <Button className="h-auto p-1" variant="ghost" onClick={handleCopyNameToClipboard}>
-            <Copy width={16} height={16} />
+          <Button className="h-auto p-1" onClick={handleCopyNameToClipboard} variant="ghost">
+            <Copy height={16} width={16} />
           </Button>
         </div>
         {user.primaryUserEmailAddress?.emailAddress && (

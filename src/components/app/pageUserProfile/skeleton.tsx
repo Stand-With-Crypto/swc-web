@@ -55,10 +55,10 @@ export function PageUserProfileSkeleton() {
           </div>
         ))}
       </div>
-      <PageTitle withoutBalancer className="mb-4">
+      <PageTitle className="mb-4" withoutBalancer>
         <Skeleton>Your advocacy progress</Skeleton>
       </PageTitle>
-      <PageSubTitle withoutBalancer className="mb-5">
+      <PageSubTitle className="mb-5" withoutBalancer>
         <Skeleton>
           You've completed {0} out of {6} actions. Keep going!
         </Skeleton>

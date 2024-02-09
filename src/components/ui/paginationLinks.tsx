@@ -22,7 +22,7 @@ export function PaginationLinks({
   const visiblePageNumbers = _.times(Math.min(3, totalPages), i => i + leftMostVisiblePageNumber)
   return (
     <div className="flex items-center gap-2">
-      <Button variant="secondary" className="hidden h-8 w-8 p-0 lg:flex" asChild>
+      <Button asChild className="hidden h-8 w-8 p-0 lg:flex" variant="secondary">
         <InternalLink href={getPageUrl(currentPageNumber - 1) || '#'}>
           <span className="sr-only">Go to previous page</span>
           <ChevronLeftIcon className="h-4 w-4" />
@@ -31,9 +31,9 @@ export function PaginationLinks({
       {visiblePageNumbers[0] > 1 && (
         <>
           <Button
-            variant={1 === currentPageNumber ? 'default' : 'outline'}
-            className="hidden h-8 w-8 p-0 lg:flex"
             asChild
+            className="hidden h-8 w-8 p-0 lg:flex"
+            variant={1 === currentPageNumber ? 'default' : 'outline'}
           >
             <InternalLink href={getPageUrl(1)}>
               <span className="sr-only">Go to page {1}</span>
@@ -46,10 +46,10 @@ export function PaginationLinks({
 
       {visiblePageNumbers.map(pageNumber => (
         <Button
+          asChild
+          className="hidden h-8 w-8 p-0 lg:flex"
           key={pageNumber}
           variant={pageNumber === currentPageNumber ? 'default' : 'outline'}
-          className="hidden h-8 w-8 p-0 lg:flex"
-          asChild
         >
           <InternalLink href={getPageUrl(pageNumber)}>
             <span className="sr-only">Go to page {pageNumber}</span>
@@ -63,9 +63,9 @@ export function PaginationLinks({
             <DotsHorizontalIcon />
           )}
           <Button
-            variant={totalPages === currentPageNumber ? 'default' : 'outline'}
-            className="hidden h-8 w-8 p-0 lg:flex"
             asChild
+            className="hidden h-8 w-8 p-0 lg:flex"
+            variant={totalPages === currentPageNumber ? 'default' : 'outline'}
           >
             <InternalLink href={getPageUrl(totalPages) || '#'}>
               <span className="sr-only">Go to page {totalPages}</span>
@@ -74,7 +74,7 @@ export function PaginationLinks({
           </Button>
         </>
       )}
-      <Button variant="secondary" className="hidden h-8 w-8 p-0 lg:flex" asChild>
+      <Button asChild className="hidden h-8 w-8 p-0 lg:flex" variant="secondary">
         <InternalLink href={getPageUrl(currentPageNumber + 1)}>
           <span className="sr-only">Go to next page</span>
           <ChevronRightIcon className="h-4 w-4" />

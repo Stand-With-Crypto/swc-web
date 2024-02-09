@@ -40,8 +40,8 @@ export default function CookieConsent({
     <CookieConsentBanner
       locale={locale}
       onAcceptAll={handleActionThenClose(acceptAllCookies)}
-      onRejectAll={handleActionThenClose(rejectAllOptionalCookies)}
       onAcceptSpecificCookies={handleActionThenClose(acceptSpecificCookies)}
+      onRejectAll={handleActionThenClose(rejectAllOptionalCookies)}
     />
   )
 }
