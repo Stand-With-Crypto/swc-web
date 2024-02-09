@@ -73,7 +73,7 @@ export function MergeAlertCTA({
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end">
         <FormItemSkeleton>
           <label className="text-sm">Account to delete</label>
-          <Select value={userToDeleteId} onValueChange={setUserToDeleteId}>
+          <Select onValueChange={setUserToDeleteId} value={userToDeleteId}>
             <SelectTrigger className="sm:w-[180px]">
               <SelectValue />
             </SelectTrigger>

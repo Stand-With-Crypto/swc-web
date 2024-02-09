@@ -8,7 +8,7 @@ const EXCLUDE_USER_ACTION_TYPES: UserActionType[] = ['NFT_MINT', 'DONATION']
 export function CTAs() {
   return (
     <section className="space-y-7">
-      <PageTitle size="sm" as="h2">
+      <PageTitle as="h2" size="sm">
         Other ways to contribute
       </PageTitle>
       <PageSubTitle className="text-base">

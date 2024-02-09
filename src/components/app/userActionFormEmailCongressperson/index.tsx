@@ -100,6 +100,7 @@ export function UserActionFormEmailCongressperson({
   return (
     <Form {...form}>
       <form
+        className="flex max-h-dvh flex-col"
         onSubmit={form.handleSubmit(async values => {
           const address = await convertGooglePlaceAutoPredictionToAddressSchema(
             values.address,
@@ -137,11 +138,10 @@ export function UserActionFormEmailCongressperson({
             onSuccess()
           }
         }, trackFormSubmissionSyncErrors(ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON))}
-        className="flex max-h-dvh flex-col"
       >
         <ScrollArea>
           <div className={cn(dialogContentPaddingStyles, 'space-y-4 md:space-y-8')}>
-            <PageTitle size="sm" className="mb-3">
+            <PageTitle className="mb-3" size="sm">
               Email your congressperson
             </PageTitle>
             <PageSubTitle className="mb-7">
@@ -197,9 +197,9 @@ export function UserActionFormEmailCongressperson({
                     <FormControl>
                       <GooglePlacesSelect
                         {...field}
-                        value={field.value}
                         onChange={field.onChange}
                         placeholder="Your full address"
+                        value={field.value}
                       />
                     </FormControl>
                     <FormErrorMessage />
@@ -213,7 +213,7 @@ export function UserActionFormEmailCongressperson({
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Textarea rows={10} placeholder="Your message..." {...field} />
+                    <Textarea placeholder="Your message..." rows={10} {...field} />
                   </FormControl>
                   <FormErrorMessage />
                 </FormItem>
@@ -224,13 +224,13 @@ export function UserActionFormEmailCongressperson({
               <p className="text-xs text-fontcolor-muted">
                 By submitting, I understand that Stand With Crypto and its vendors may collect and
                 use my Personal Information. To learn more, visit the Stand With Crypto Alliance{' '}
-                <InternalLink tabIndex={-1} href={urls.privacyPolicy()}>
+                <InternalLink href={urls.privacyPolicy()} tabIndex={-1}>
                   Privacy Policy
                 </InternalLink>{' '}
                 and{' '}
                 <ExternalLink
-                  tabIndex={-1}
                   href={'https://www.quorum.us/static/Privacy-Policy.pdf'}
+                  tabIndex={-1}
                 >
                   Quorum Privacy Policy
                 </ExternalLink>
@@ -240,8 +240,8 @@ export function UserActionFormEmailCongressperson({
           </div>
         </ScrollArea>
         <div
-          style={{ boxShadow: 'rgba(0, 0, 0, 0.2) 0px 1px 6px 0px' }}
           className="z-10 flex flex-1 flex-col items-center justify-between gap-4 border border-t p-6 sm:flex-row md:px-12"
+          style={{ boxShadow: 'rgba(0, 0, 0, 0.2) 0px 1px 6px 0px' }}
         >
           <FormField
             control={form.control}
@@ -253,9 +253,9 @@ export function UserActionFormEmailCongressperson({
                 render={dtsiSlugProps => (
                   <div className="w-full">
                     <DTSICongresspersonAssociatedWithFormAddress
-                      onChangeDTSISlug={dtsiSlugProps.field.onChange}
-                      currentDTSISlugValue={dtsiSlugProps.field.value}
                       address={addressProps.field.value}
+                      currentDTSISlugValue={dtsiSlugProps.field.value}
+                      onChangeDTSISlug={dtsiSlugProps.field.onChange}
                     />
                     <FormErrorMessage />
                   </div>
@@ -266,9 +266,9 @@ export function UserActionFormEmailCongressperson({
           <div className="w-full sm:w-auto">
             <Button
               className="w-full sm:w-auto"
+              disabled={form.formState.isSubmitting}
               size="lg"
               type="submit"
-              disabled={form.formState.isSubmitting}
             >
               Send
             </Button>

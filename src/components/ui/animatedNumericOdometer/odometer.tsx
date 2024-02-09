@@ -51,15 +51,15 @@ export function AnimatedNumericOdometer({ value, size }: AnimatedNumericOdometer
         return Array.from(numeralGroup).map((digit, digitIndex) => {
           return (
             <span
-              key={digitIndex}
               data-value={digit}
-              style={{
-                transform: `translateY(-${(Number(digit) + 1) * 100}%)`,
-              }}
+              key={digitIndex}
               ref={el => {
                 if (el && spanArray.current.length < valueNumericalLength) {
                   spanArray.current.push(el)
                 }
+              }}
+              style={{
+                transform: `translateY(-${(Number(digit) + 1) * 100}%)`,
               }}
             >
               <span>&ndash;</span>

@@ -19,10 +19,10 @@ export default async function DonatePage({ params: { locale } }: PageProps) {
 
   return (
     <PageDonate
-      title="Protect the future of crypto"
       description={description}
-      sumDonations={sumDonations}
       locale={locale}
+      sumDonations={sumDonations}
+      title="Protect the future of crypto"
     />
   )
 }

@@ -52,8 +52,8 @@ export const SortableHeader = <TData, TValue>({
   return (
     <Button
       className="p-0"
-      variant="ghost"
       onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+      variant="ghost"
     >
       {children}
       <ArrowUpDown className="ml-2 h-4 w-4" />
@@ -101,7 +101,6 @@ export function DataTable<TData extends Person, TValue>({
             <InputWithIcons
               className="rounded-full bg-gray-100 text-gray-600"
               leftIcon={<Search className="h-4 w-4 text-gray-500" />}
-              value={(table.getColumn('fullName')?.getFilterValue() as string) ?? ''}
               onChange={event => {
                 table.getColumn('fullName')?.setFilterValue(event.target.value)
                 if (
@@ -114,6 +113,7 @@ export function DataTable<TData extends Person, TValue>({
                 }
               }}
               placeholder="Search by name"
+              value={(table.getColumn('fullName')?.getFilterValue() as string) ?? ''}
             />
           </div>
         </div>
@@ -145,7 +145,7 @@ export function DataTable<TData extends Person, TValue>({
             <TableBody>
               {table.getRowModel().rows?.length ? (
                 table.getRowModel().rows.map(row => (
-                  <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
+                  <TableRow data-state={row.getIsSelected() && 'selected'} key={row.id}>
                     {row.getVisibleCells().map(cell => (
                       <TableCell key={cell.id}>
                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -155,7 +155,7 @@ export function DataTable<TData extends Person, TValue>({
                 ))
               ) : (
                 <TableRow>
-                  <TableCell colSpan={columns.length} className="h-24 text-center">
+                  <TableCell className="h-24 text-center" colSpan={columns.length}>
                     No results.
                   </TableCell>
                 </TableRow>

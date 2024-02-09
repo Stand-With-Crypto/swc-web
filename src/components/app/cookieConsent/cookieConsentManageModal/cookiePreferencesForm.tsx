@@ -50,26 +50,26 @@ export function CookiePreferencesForm({ onSubmit }: CookiePreferencesFormProps) 
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4">
+      <form className="flex flex-col gap-4" onSubmit={form.handleSubmit(onSubmit)}>
         <h3 className="font-semibold">Manage Cookies:</h3>
 
         <div className="grid grid-cols-1 gap-3 text-sm md:grid-cols-[repeat(2,minmax(max-content,1fr))] md:gap-5 md:text-base">
           <CheckboxField
-            label="Strictly necessary Cookies"
-            helpText="These cookies are necessary for the website to function and cannot be switched off in our systems. They are usually only set in response to actions made by you which amount to a request for services, such as setting your privacy preferences, logging in or filling in forms. These also include cookies we may rely on for fraud prevention. You can set your browser to block or alert you about these cookies, but some parts of the site will not then work."
             checked
             disabled
+            helpText="These cookies are necessary for the website to function and cannot be switched off in our systems. They are usually only set in response to actions made by you which amount to a request for services, such as setting your privacy preferences, logging in or filling in forms. These also include cookies we may rely on for fraud prevention. You can set your browser to block or alert you about these cookies, but some parts of the site will not then work."
+            label="Strictly necessary Cookies"
           />
 
           {FIELDS_CONFIG.map(({ key, label, helpText }) => (
             <FormField
-              key={key}
               control={form.control}
+              key={key}
               name={key}
               render={({ field: { value, onChange, ...field } }) => (
                 <CheckboxField
-                  label={label}
                   helpText={helpText}
+                  label={label}
                   {...field}
                   checked={value}
                   onCheckedChange={onChange}
@@ -79,7 +79,7 @@ export function CookiePreferencesForm({ onSubmit }: CookiePreferencesFormProps) 
           ))}
         </div>
 
-        <Button type="submit" size="lg" className="mt-4 w-full">
+        <Button className="mt-4 w-full" size="lg" type="submit">
           Save
         </Button>
       </form>

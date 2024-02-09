@@ -40,10 +40,10 @@ export function DTSIClientPersonDataTable({
   )
   return (
     <DataTable
-      loadState={data?.people ? 'loaded' : 'static'}
-      key={data?.people ? 'loaded' : 'static'}
       columns={memoizedColumns}
       data={passedData}
+      key={data?.people ? 'loaded' : 'static'}
+      loadState={data?.people ? 'loaded' : 'static'}
     />
   )
 }

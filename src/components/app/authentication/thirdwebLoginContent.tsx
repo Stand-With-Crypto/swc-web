@@ -46,11 +46,11 @@ export function ThirdwebLoginContent(props: ConnectEmbedProps) {
       <div className="mx-auto flex max-w-[460px] flex-col items-center gap-8">
         <div className="flex flex-col items-center space-y-6">
           <NextImage
-            priority
-            width={80}
-            height={80}
-            src="/logo/shield.svg"
             alt="Stand With Crypto Logo"
+            height={80}
+            priority
+            src="/logo/shield.svg"
+            width={80}
           />
 
           <div className="space-y-4">
@@ -72,7 +72,7 @@ export function ThirdwebLoginContent(props: ConnectEmbedProps) {
         <p className="text-center text-xs text-muted-foreground">
           By signing up, I understand that Stand With Crypto and its vendors may collect and use my
           Personal Information. To learn more, visit the{' '}
-          <InternalLink className="text-blue-600" target="_blank" href={urls.privacyPolicy()}>
+          <InternalLink className="text-blue-600" href={urls.privacyPolicy()} target="_blank">
             Stand With Crypto Alliance Privacy Policy
           </InternalLink>{' '}
           and{' '}

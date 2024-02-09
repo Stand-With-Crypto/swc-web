@@ -103,8 +103,8 @@ export function SuggestedScript({
       <UserActionFormCallCongresspersonLayout onBack={() => gotoTab(SectionNames.ADDRESS)}>
         <UserActionFormCallCongresspersonLayout.Container>
           <UserActionFormCallCongresspersonLayout.Heading
-            title="Call your representative"
             subtitle="You may not get a human on the line, but can leave a message to ensure that your voice will be heard."
+            title="Call your representative"
           />
 
           <div className="prose mx-auto">
@@ -146,10 +146,10 @@ export function SuggestedScript({
           ) : (
             <Button asChild>
               <TrackedExternalLink
-                ref={ref}
                 href={`tel:${phoneNumber}`}
-                target="_self"
                 onClick={() => setCallingState('pressed-called')}
+                ref={ref}
+                target="_self"
               >
                 Call
               </TrackedExternalLink>

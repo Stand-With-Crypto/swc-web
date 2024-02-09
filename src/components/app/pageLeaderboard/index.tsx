@@ -66,7 +66,7 @@ export function PageLeaderboard({
             <>
               <div className="mt-2 h-7" />
               {actions.map(action => (
-                <RecentActivityRow locale={locale} action={action} key={action.id} />
+                <RecentActivityRow action={action} key={action.id} locale={locale} />
               ))}
             </>
           )
@@ -84,10 +84,10 @@ export function PageLeaderboard({
             </p>
             {sumDonationsByUser.map((donor, index) => (
               <SumDonationsByUserRow
-                key={index}
                 index={offset + index}
-                sumDonations={donor}
+                key={index}
                 locale={locale}
+                sumDonations={donor}
               />
             ))}
           </>
@@ -95,12 +95,12 @@ export function PageLeaderboard({
       </div>
       <div className="flex justify-center">
         <PaginationLinks
+          currentPageNumber={pageNum}
           getPageUrl={pageNumber =>
             pageNumber < 1 || pageNumber > PAGE_LEADERBOARD_TOTAL_PAGES
               ? ''
               : urls.leaderboard({ pageNum: pageNumber, tab })
           }
-          currentPageNumber={pageNum}
           totalPages={PAGE_LEADERBOARD_TOTAL_PAGES}
         />
       </div>

@@ -48,9 +48,9 @@ export function UserActionFormCallCongressperson({
     case SectionNames.ADDRESS:
       return (
         <Address
-          user={user}
-          onFindCongressperson={setCongresspersonData}
           congressPersonData={congressPersonData}
+          onFindCongressperson={setCongresspersonData}
+          user={user}
           {...sectionProps}
         />
       )
@@ -65,7 +65,7 @@ export function UserActionFormCallCongressperson({
       }
 
       return (
-        <SuggestedScript user={user} congressPersonData={congressPersonData} {...sectionProps} />
+        <SuggestedScript congressPersonData={congressPersonData} user={user} {...sectionProps} />
       )
     case SectionNames.SUCCESS_MESSAGE:
       return <UserActionFormSuccessScreen onClose={onClose} />

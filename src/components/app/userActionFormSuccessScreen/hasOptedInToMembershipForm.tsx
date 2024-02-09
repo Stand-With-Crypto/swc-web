@@ -48,7 +48,6 @@ export function HasOptedInToMembershipForm({
         </label>
         <Button
           className="text-center"
-          size="lg"
           disabled={!checked || formState === 'submitting'}
           onClick={async () => {
             setFormState('submitting')
@@ -61,12 +60,13 @@ export function HasOptedInToMembershipForm({
             setFormState('default')
             onSuccess()
           }}
+          size="lg"
         >
           Join
         </Button>
       </div>
       <div className="text-center">
-        <Button className="underline" variant="link" onClick={onCancel}>
+        <Button className="underline" onClick={onCancel} variant="link">
           Go back
         </Button>
       </div>

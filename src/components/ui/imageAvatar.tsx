@@ -10,10 +10,10 @@ export const ImageAvatar: React.FC<ImageAvatarProps> = ({ size, className, ...pr
   return (
     <span className="relative inline-block" style={{ width: size, height: size }}>
       <NextImage
-        fill
-        style={{ objectFit: 'cover' }}
         className={cn('inline-block rounded-full', className)}
+        fill
         sizes={`${size}px`}
+        style={{ objectFit: 'cover' }}
         {...props}
       />
     </span>

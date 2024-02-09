@@ -27,7 +27,7 @@ export function NavbarLoggedInButton({ onOpenChange }: { onOpenChange: (open: bo
       }}
     >
       <PopoverTrigger asChild>
-        <Button variant="secondary" className="min-w-24">
+        <Button className="min-w-24" variant="secondary">
           <div>
             {user &&
               !ensData.isFetching &&

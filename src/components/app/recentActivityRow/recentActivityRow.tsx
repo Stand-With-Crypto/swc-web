@@ -67,9 +67,9 @@ function RecentActivityRowBase({
             </span>
             <span className="inline md:hidden">
               <FormattedRelativeDatetimeWithClientHydration
-                timeFormatStyle="narrow"
                 date={new Date(action.datetimeCreated)}
                 locale={locale}
+                timeFormatStyle="narrow"
               />
             </span>
           </>

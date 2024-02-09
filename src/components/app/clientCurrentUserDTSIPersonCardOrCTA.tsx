@@ -63,9 +63,9 @@ export function ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: Suppo
       <div className="mx-auto max-w-md">
         <GooglePlacesSelect
           className="rounded-full bg-gray-100 text-gray-600"
+          onChange={setAddress}
           placeholder="Enter your address"
           value={address}
-          onChange={setAddress}
         />
         <p className="mt-2 text-xs text-fontcolor-muted">
           Enter your address to find your representatives
@@ -99,7 +99,7 @@ export function ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: Suppo
           <div className="relative">
             <DTSIAvatar person={person} size={60} />
             <div className="absolute bottom-[-8px] right-[-8px]">
-              <DTSIFormattedLetterGrade size={25} person={person} />
+              <DTSIFormattedLetterGrade person={person} size={25} />
             </div>
           </div>
           <div>
@@ -123,7 +123,7 @@ export function ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: Suppo
           <UserActionFormCallCongresspersonDialog>
             <Button size="lg">Call</Button>
           </UserActionFormCallCongresspersonDialog>
-          <Button variant="secondary" asChild>
+          <Button asChild variant="secondary">
             <InternalLink href={getIntlUrls(locale).politicianDetails(person.slug)}>
               View profile
             </InternalLink>

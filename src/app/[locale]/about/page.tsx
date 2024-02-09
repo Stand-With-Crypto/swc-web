@@ -15,5 +15,5 @@ export const metadata: Metadata = {
 }
 
 export default async function AboutPage() {
-  return <PageAbout title={title} description={description} />
+  return <PageAbout description={description} title={title} />
 }

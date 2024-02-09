@@ -30,13 +30,13 @@ export async function HomepageDialogDeeplinkLayout({
   return (
     <>
       <InternalLink
-        replace
-        href={urls.home()}
         className={cn(dialogOverlayStyles, 'cursor-default')}
+        href={urls.home()}
+        replace
       />
       <div className={cn(dialogContentStyles, size === 'md' && 'max-w-3xl', 'min-h-[400px]')}>
         {children}
-        <InternalLink className={dialogCloseStyles} replace href={urls.home()}>
+        <InternalLink className={dialogCloseStyles} href={urls.home()} replace>
           <X className="h-4 w-4" />
           <span className="sr-only">Close</span>
         </InternalLink>

@@ -28,7 +28,7 @@ interface PageTitleProps
 export const PageTitle = React.forwardRef<HTMLHeadingElement, PageTitleProps>(
   ({ className, children, as: Comp = 'h1', size, withoutBalancer, ...props }, ref) => {
     return (
-      <Comp ref={ref} className={cn(pageTitleVariants({ className, size }))} {...props}>
+      <Comp className={cn(pageTitleVariants({ className, size }))} ref={ref} {...props}>
         {withoutBalancer ? children : <Balancer>{children}</Balancer>}
       </Comp>
     )
