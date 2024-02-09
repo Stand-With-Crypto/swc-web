@@ -23,7 +23,7 @@ import {
   trackFormSubmissionSyncErrors,
   triggerServerActionForForm,
 } from '@/utils/web/formUtils'
-import { getUserDisplayName,USER_INFORMATION_VISIBILITY_ORDERED_LIST } from '@/utils/web/userUtils'
+import { getUserDisplayName, USER_INFORMATION_VISIBILITY_ORDERED_LIST } from '@/utils/web/userUtils'
 import { zodUpdateUserInformationVisibility } from '@/validation/forms/zodUpdateUserInformationVisibility'
 
 const FORM_NAME = 'User Information Visibility'

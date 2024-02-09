@@ -4,7 +4,7 @@ import { usePathname, useRouter } from 'next/navigation'
 
 import { useAuthUser } from '@/hooks/useAuthUser'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
-import { generateUserSessionId,USER_SESSION_ID_COOKIE_NAME } from '@/utils/shared/userSessionId'
+import { generateUserSessionId, USER_SESSION_ID_COOKIE_NAME } from '@/utils/shared/userSessionId'
 
 export function useThirdwebData() {
   const session = useAuthUser()

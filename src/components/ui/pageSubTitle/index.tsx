@@ -1,8 +1,8 @@
 import React from 'react'
 import Balancer from 'react-wrap-balancer'
-import { cva,VariantProps } from 'class-variance-authority'
+import { cva, VariantProps } from 'class-variance-authority'
 
-import { cn,twNoop } from '@/utils/web/cn'
+import { cn, twNoop } from '@/utils/web/cn'
 
 const subTitleVariantsConfig = {
   size: {

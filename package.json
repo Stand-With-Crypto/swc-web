@@ -14,6 +14,7 @@
     "format": "prettier --write .",
     "test": "jest",
     "eslint": "eslint . --ext .ts,.tsx --fix",
+    "prettier": "prettier --write .",
     "storybook": "storybook dev -p 6006",
     "precheck": "concurrently \"next lint --max-warnings=0\"  \"prettier --check .\" \"npm run typecheck\" \"npm run test\"",
     "build-storybook": "storybook build",

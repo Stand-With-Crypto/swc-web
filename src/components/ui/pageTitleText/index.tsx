@@ -1,6 +1,6 @@
 import React from 'react'
 import Balancer from 'react-wrap-balancer'
-import { cva,type VariantProps } from 'class-variance-authority'
+import { cva, type VariantProps } from 'class-variance-authority'
 
 import { cn, twNoop } from '@/utils/web/cn'
 

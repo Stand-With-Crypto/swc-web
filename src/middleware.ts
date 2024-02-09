@@ -4,7 +4,7 @@ import { i18nRouter } from 'next-i18n-router'
 import { DEFAULT_LOCALE, ORDERED_SUPPORTED_LOCALES } from '@/intl/locales'
 import { isCypress } from '@/utils/shared/executionEnvironment'
 import { getLogger } from '@/utils/shared/logger'
-import { generateUserSessionId,USER_SESSION_ID_COOKIE_NAME } from '@/utils/shared/userSessionId'
+import { generateUserSessionId, USER_SESSION_ID_COOKIE_NAME } from '@/utils/shared/userSessionId'
 
 const logger = getLogger('middleware')
 // taken from https://i18nexus.com/tutorials/nextjs/react-intl

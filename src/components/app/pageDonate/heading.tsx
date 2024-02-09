@@ -1,4 +1,4 @@
-import { MintingAnNFTButton,SumDonationsCounter } from '@/components/app/pageDonate'
+import { MintingAnNFTButton, SumDonationsCounter } from '@/components/app/pageDonate'
 import { DonateButton } from '@/components/app/pageDonate/donateButton'
 import { PageDonateProps } from '@/components/app/pageDonate/pageDonate.types'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
