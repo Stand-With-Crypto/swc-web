@@ -1,6 +1,6 @@
 'use client'
 
-import { ThirdwebNftMedia, ValidContractInstance } from '@thirdweb-dev/react'
+import { ValidContractInstance } from '@thirdweb-dev/react'
 
 import {
   UserActionFormLayout,
