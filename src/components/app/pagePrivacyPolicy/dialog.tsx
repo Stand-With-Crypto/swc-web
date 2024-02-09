@@ -26,11 +26,11 @@ export function PrivacyPolicyDialog({ children }: { children: React.ReactNode })
             </div>
           </ScrollArea>
           <div
-            style={{ boxShadow: 'rgba(0, 0, 0, 0.2) 0px 1px 6px 0px' }}
             className="z-10 flex flex-1 flex-col items-center justify-between gap-4 border border-t p-6 sm:flex-row md:px-12"
+            style={{ boxShadow: 'rgba(0, 0, 0, 0.2) 0px 1px 6px 0px' }}
           >
             <DialogClose asChild>
-              <Button size="lg" className="mx-auto w-full max-w-sm">
+              <Button className="mx-auto w-full max-w-sm" size="lg">
                 Close
               </Button>
             </DialogClose>

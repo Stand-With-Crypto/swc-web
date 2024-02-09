@@ -1,3 +1,4 @@
+'use client'
 import { MaybeAuthenticatedContent } from '@/components/app/authentication/maybeAuthenticatedContent'
 import { ThirdwebLoginDialog } from '@/components/app/authentication/thirdwebLoginContent'
 import { NavbarLoggedInButton } from '@/components/app/navbar/navbarLoggedInButton'
@@ -5,57 +6,48 @@ import { Button } from '@/components/ui/button'
 import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/drawer'
 import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
-import getIntl from '@/intl/intlMessages'
+import { useDialog } from '@/hooks/useDialog'
 import { SupportedLocale } from '@/intl/locales'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { Menu } from 'lucide-react'
+import _ from 'lodash'
+import { useCallback } from 'react'
 
-const INTL_PREFIX = 'Navbar'
-
-export async function Navbar({ locale }: { locale: SupportedLocale }) {
-  const intl = await getIntl(locale)
+export function Navbar({ locale }: { locale: SupportedLocale }) {
+  const dialogProps = useDialog({ analytics: 'Mobile Navbar' })
   const urls = getIntlUrls(locale)
   const leftLinks = [
     {
       href: urls.about(),
-      text: intl.formatMessage({
-        id: `${INTL_PREFIX}.about`,
-        defaultMessage: 'Mission',
-        description: 'Link to the about page',
-      }),
+      text: 'Mission',
     },
     {
       href: urls.leaderboard(),
-      text: intl.formatMessage({
-        id: `${INTL_PREFIX}.leaderboard`,
-        defaultMessage: 'Our Community',
-        description: 'Link to the leaderboard page',
-      }),
+      text: 'Our Community',
     },
     {
       href: urls.politiciansHomepage(),
-      text: intl.formatMessage({
-        id: `${INTL_PREFIX}.politicians`,
-        defaultMessage: 'Politicians',
-        description: 'Link to the politicians page',
-      }),
+      text: 'Politicians',
     },
     {
       href: urls.resources(),
-      text: intl.formatMessage({
-        id: `${INTL_PREFIX}.resources`,
-        defaultMessage: 'Resources',
-        description: 'Link to the resources page',
-      }),
+      text: 'Resources',
     },
   ]
+  const maybeCloseAfterNavigating = useCallback(() => {
+    if (dialogProps.open) {
+      dialogProps.onOpenChange(false)
+    }
+  }, [dialogProps])
   return (
     <>
       {NEXT_PUBLIC_ENVIRONMENT !== 'production' && (
         <div className="bg-yellow-300 py-3 text-center">
           <div className="container flex justify-between">
-            <p className="flex-shrink-0 font-bold">Testing Environment</p>
+            <p className="flex-shrink-0 font-bold">
+              {_.capitalize(NEXT_PUBLIC_ENVIRONMENT.toLowerCase())} Environment
+            </p>
             <div className="xs:text-xs space-x-3 text-sm">
               <InternalLink className="underline" href={urls.internalHomepage()}>
                 Internal Pages
@@ -68,15 +60,11 @@ export async function Navbar({ locale }: { locale: SupportedLocale }) {
         <div className="flex items-center gap-8">
           <InternalLink className="flex-shrink-0" href={urls.home()}>
             <NextImage
-              priority
-              width={41}
+              alt={'Stand With Crypto Logo'}
               height={40}
+              priority
               src="/logo/shield.svg"
-              alt={intl.formatMessage({
-                id: `${INTL_PREFIX}.logoAlt`,
-                defaultMessage: 'Stand With Crypto Logo',
-                description: 'Alt text for the main Stand With Crypto Logo',
-              })}
+              width={41}
             />
           </InternalLink>
           {leftLinks.map(({ href, text }) => {
@@ -87,7 +75,7 @@ export async function Navbar({ locale }: { locale: SupportedLocale }) {
             )
           })}
         </div>
-        <Drawer analytics={'Mobile Navbar'} direction="top">
+        <Drawer {...dialogProps} direction="top">
           <DrawerTrigger asChild>
             <button className="py-3 pl-3 md:hidden">
               <span className="sr-only">Open navigation menu</span>
@@ -98,18 +86,29 @@ export async function Navbar({ locale }: { locale: SupportedLocale }) {
             <div className="space-y-6 px-6 pb-6 pt-3 text-center md:space-y-8">
               {leftLinks.map(({ href, text }) => {
                 return (
-                  <InternalLink className="block font-bold text-gray-800" href={href} key={href}>
+                  <InternalLink
+                    className="block font-bold text-gray-800"
+                    href={href}
+                    key={href}
+                    onClick={maybeCloseAfterNavigating}
+                  >
                     {text}
                   </InternalLink>
                 )
               })}
               <div>
-                <Button className="mr-3" asChild>
+                <Button asChild className="mr-3">
                   <InternalLink href={urls.donate()}>Donate</InternalLink>
                 </Button>
               </div>
               <div>
-                <MaybeAuthenticatedContent authenticatedContent={<NavbarLoggedInButton />}>
+                <MaybeAuthenticatedContent
+                  authenticatedContent={
+                    <NavbarLoggedInButton
+                      onOpenChange={open => open || maybeCloseAfterNavigating()}
+                    />
+                  }
+                >
                   <ThirdwebLoginDialog>
                     <Button variant="secondary">Log In</Button>
                   </ThirdwebLoginDialog>
@@ -120,10 +119,14 @@ export async function Navbar({ locale }: { locale: SupportedLocale }) {
         </Drawer>
 
         <div className="hidden md:flex">
-          <Button className="mr-3" asChild>
+          <Button asChild className="mr-3">
             <InternalLink href={urls.donate()}>Donate</InternalLink>
           </Button>
-          <MaybeAuthenticatedContent authenticatedContent={<NavbarLoggedInButton />}>
+          <MaybeAuthenticatedContent
+            authenticatedContent={
+              <NavbarLoggedInButton onOpenChange={open => open || maybeCloseAfterNavigating()} />
+            }
+          >
             <ThirdwebLoginDialog>
               <Button variant="secondary">Log In</Button>
             </ThirdwebLoginDialog>

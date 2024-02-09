@@ -24,7 +24,7 @@ export const USER_ACTION_DEEPLINK_MAP: {
   },
   [UserActionType.DONATION]: {
     getDeeplinkUrl: ({ locale }) => {
-      return `${getIntlPrefix(locale)}/action/donate`
+      return `${getIntlPrefix(locale)}/donate`
     },
   },
   [UserActionType.TWEET]: {

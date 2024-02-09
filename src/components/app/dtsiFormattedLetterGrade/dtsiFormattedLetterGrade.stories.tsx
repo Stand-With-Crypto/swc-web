@@ -26,10 +26,10 @@ export const Default = {
     return (
       <div className="space-y-8">
         {grades.map(grade => (
-          <div key={grade} className="flex flex-col gap-4 md:flex-row">
+          <div className="flex flex-col gap-4 md:flex-row" key={grade}>
             {sizes.map(size => (
               <div key={size}>
-                <DTSIFormattedLetterGrade size={size} letterGrade={grade} />
+                <DTSIFormattedLetterGrade letterGrade={grade} size={size} />
               </div>
             ))}
           </div>

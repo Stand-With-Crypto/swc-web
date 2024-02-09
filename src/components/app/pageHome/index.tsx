@@ -55,21 +55,21 @@ export function PageHome({
             <DialogTrigger asChild>
               <LinkBox className="relative h-[320px] cursor-pointer overflow-hidden md:rounded-xl lg:h-[400px]">
                 <NextImage
-                  priority
                   alt="First in the Nation Crypto Presidential Forum December 11th 2023 St. Anselm College"
-                  src="/homepageHero.jpg"
+                  className="h-full w-full object-cover"
                   fill
+                  priority
                   // width={1046}
                   // height={892}
-                  className="h-full w-full object-cover"
                   sizes={'(max-width: 768px) 500px, 1046px'}
+                  src="/homepageHero.jpg"
                 />
                 <div
+                  className="absolute bottom-0 flex w-full items-center justify-between gap-4 p-4 text-sm text-white"
                   style={{
                     background:
                       'linear-gradient(to top, hsla(0, 0%, 0%, 0.8) 10%, hsla(0, 0%, 0%, 0.4) 70%,  transparent 100%)',
                   }}
-                  className="absolute bottom-0 flex w-full items-center justify-between gap-4 p-4 text-sm text-white"
                 >
                   <p>
                     First in the Nation Crypto Presidential Forum December 11th 2023 St. Anselm
@@ -96,7 +96,7 @@ export function PageHome({
       <div className="container">
         <TopLevelMetrics {...{ sumDonations, locale, countUsers, countPolicymakerContacts }} />
         <section className="mb-16 text-center md:mb-24">
-          <PageTitle as="h3" size="md" className="mb-7">
+          <PageTitle as="h3" className="mb-7" size="md">
             Our mission
           </PageTitle>
           <PageSubTitle as="h4" className="mb-7">
@@ -107,7 +107,7 @@ export function PageHome({
             potential and foster greater economic freedom.
           </PageSubTitle>
           <div>
-            <Button variant="secondary" asChild>
+            <Button asChild variant="secondary">
               <InternalLink href={urls.about()}>Learn more</InternalLink>
             </Button>
           </div>
@@ -134,7 +134,7 @@ export function PageHome({
               </TabsList>
             </div>
             <DelayedRecentActivity actions={actions} />
-            <TabsContent value={RecentActivityAndLeaderboardTabs.LEADERBOARD} className="space-y-7">
+            <TabsContent className="space-y-7" value={RecentActivityAndLeaderboardTabs.LEADERBOARD}>
               <p className="mt-2 h-7 text-center text-xs text-gray-500">
                 Donations to{' '}
                 <ExternalLink
@@ -148,10 +148,10 @@ export function PageHome({
               </p>
               {sumDonationsByUser.map((donor, index) => (
                 <SumDonationsByUserRow
-                  key={index}
                   index={index}
-                  sumDonations={donor}
+                  key={index}
                   locale={locale}
+                  sumDonations={donor}
                 />
               ))}
             </TabsContent>
@@ -160,7 +160,7 @@ export function PageHome({
             <Button asChild>
               <InternalLink href={urls.donate()}>Donate</InternalLink>
             </Button>
-            <Button variant="secondary" asChild>
+            <Button asChild variant="secondary">
               <InternalLink href={urls.leaderboard()}>View all</InternalLink>
             </Button>
           </div>
@@ -192,7 +192,7 @@ export function PageHome({
               </div>
               <div className="space-y-3">
                 {groupedDTSIHomepagePeople.proCrypto.map(person => (
-                  <DTSIPersonCard locale={locale} key={person.id} person={person} />
+                  <DTSIPersonCard key={person.id} locale={locale} person={person} />
                 ))}
               </div>
             </div>
@@ -205,13 +205,13 @@ export function PageHome({
               </div>
               <div className="space-y-3">
                 {groupedDTSIHomepagePeople.antiCrypto.map(person => (
-                  <DTSIPersonCard locale={locale} key={person.id} person={person} />
+                  <DTSIPersonCard key={person.id} locale={locale} person={person} />
                 ))}
               </div>
             </div>
           </div>
           <div className="space-x-4 text-center">
-            <Button variant="secondary" asChild>
+            <Button asChild variant="secondary">
               <InternalLink href={urls.politiciansHomepage()}>View all</InternalLink>
             </Button>
           </div>

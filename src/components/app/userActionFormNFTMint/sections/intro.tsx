@@ -82,13 +82,13 @@ function ContractMetadataDisplay({
     <>
       <div className="flex gap-6">
         <NFTDisplay
-          size="lg"
-          src={contractMetadata?.image ?? ''}
           alt="Stand with Crypto supporter NFT"
           raw
+          size="lg"
+          src={contractMetadata?.image ?? ''}
         />
         <div className="space-y-2">
-          <PageTitle size="sm" className="text-start">
+          <PageTitle className="text-start" size="sm">
             {contractMetadata.name}
           </PageTitle>
 
@@ -114,7 +114,7 @@ export function ContractMetadataDisplaySkeleton() {
         <NFTDisplaySkeleton size="lg" />
         <div className="space-y-2">
           <Skeleton>
-            <PageTitle size="sm" className="text-start">
+            <PageTitle className="text-start" size="sm">
               Stand With Crypto Supporter
             </PageTitle>
           </Skeleton>

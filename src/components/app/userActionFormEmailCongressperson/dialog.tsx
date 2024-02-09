@@ -39,9 +39,9 @@ export function UserActionFormEmailCongresspersonDialog({
             <UserActionFormEmailCongresspersonSkeleton locale={locale} />
           ) : state === 'form' ? (
             <LazyUserActionFormEmailCongressperson
-              user={user}
               onCancel={() => dialogProps.onOpenChange(false)}
               onSuccess={() => setState('success')}
+              user={user}
             />
           ) : (
             <div className="px-6">

@@ -25,8 +25,8 @@ export function DTSIPersonCard({
         <div>
           <div className="font-bold">
             <InternalLink
-              href={getIntlUrls(locale).politicianDetails(person.slug)}
               className={linkBoxLinkClassName}
+              href={getIntlUrls(locale).politicianDetails(person.slug)}
             >
               {dtsiPersonFullName(person)}{' '}
               {person.politicalAffiliationCategory
@@ -40,7 +40,7 @@ export function DTSIPersonCard({
         </div>
       </div>
       <div>
-        <DTSIFormattedLetterGrade size={40} person={person} />
+        <DTSIFormattedLetterGrade person={person} size={40} />
       </div>
     </LinkBox>
   )

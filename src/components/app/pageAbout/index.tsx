@@ -60,7 +60,7 @@ export function PageAbout({ title, description }: { title: string; description: 
 
         <div className="flex flex-col gap-4">
           <Card className="space-y-4 text-start text-gray-500">
-            <PageTitle as="h3" size="sm" className="text-start text-foreground">
+            <PageTitle as="h3" className="text-start text-foreground" size="sm">
               Crypto creates jobs
             </PageTitle>
             <p>Keeping crypto innovation in America will:</p>
@@ -76,7 +76,7 @@ export function PageAbout({ title, description }: { title: string; description: 
             </ul>
           </Card>
           <Card className="space-y-4 text-gray-500">
-            <PageTitle as="h3" size="sm" className="text-start text-foreground">
+            <PageTitle as="h3" className="text-start text-foreground" size="sm">
               Crypto drives American innovation
             </PageTitle>
             <p>
@@ -91,7 +91,7 @@ export function PageAbout({ title, description }: { title: string; description: 
             </ul>
           </Card>
           <Card className="space-y-4 text-gray-500">
-            <PageTitle as="h3" size="sm" className="text-start text-foreground">
+            <PageTitle as="h3" className="text-start text-foreground" size="sm">
               Crypto is a national priority
             </PageTitle>
             <p>
@@ -169,11 +169,11 @@ export function PageAbout({ title, description }: { title: string; description: 
                   <NextImage
                     // This is necessary because the image is an svg with a "padding",
                     // so we need to offset the padding here
-                    className="mt-[-5px]"
                     alt={image.alt}
+                    className="mt-[-5px]"
+                    height={50}
                     src={image.src}
                     width={50}
-                    height={50}
                   />
                 )}
               </Card.Heading>
@@ -192,7 +192,7 @@ export function PageAbout({ title, description }: { title: string; description: 
         <UserActionRowCTAsListWithApi />
       </section>
 
-      <PageTitle as="p" size="sm" className="text-start">
+      <PageTitle as="p" className="text-start" size="sm">
         Join the fight today!
       </PageTitle>
     </div>

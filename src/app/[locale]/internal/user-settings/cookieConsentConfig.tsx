@@ -10,7 +10,7 @@ export default function CookieConsentConfig() {
 
   return (
     <div className="flex flex-col gap-4">
-      <PageTitle size="sm" as="h2" className="text-start">
+      <PageTitle as="h2" className="text-start" size="sm">
         Cookies
       </PageTitle>
       <div className="flex items-center gap-4">

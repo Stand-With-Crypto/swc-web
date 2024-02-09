@@ -11,6 +11,6 @@ export const TrackedExternalLink = React.forwardRef<
   const onClick = React.useCallback(() => {
     trackExternalLink(eventProperties)
   }, [eventProperties])
-  return <ExternalLink ref={ref} onClick={onClick} {...props} />
+  return <ExternalLink onClick={onClick} ref={ref} {...props} />
 })
 TrackedExternalLink.displayName = 'TrackedExternalLink'

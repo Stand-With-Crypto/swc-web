@@ -73,14 +73,14 @@ export function PageUserProfile({
             label: 'Donated',
             value: (
               <FormattedCurrency
-                locale={locale}
-                currencyCode={SupportedFiatCurrencyCodes.USD}
                 amount={_.sumBy(userActions, x => {
                   if (x.actionType === UserActionType.DONATION) {
                     return x.amountUsd
                   }
                   return 0
                 })}
+                currencyCode={SupportedFiatCurrencyCodes.USD}
+                locale={locale}
               />
             ),
           },
@@ -116,8 +116,8 @@ export function PageUserProfile({
       </div>
       <div className="mb-14 space-y-4">
         <UserActionRowCTAsList
-          performedUserActionTypes={performedUserActionTypes}
           className="mb-14"
+          performedUserActionTypes={performedUserActionTypes}
         />
       </div>
       <PageTitle className="mb-4">Your NFTs</PageTitle>

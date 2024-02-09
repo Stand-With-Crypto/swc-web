@@ -64,15 +64,15 @@ export function UserActionFormNFTMintCheckout({
       <UserActionFormLayout.Container>
         <div className="flex gap-6">
           <NFTDisplay
+            alt={contractMetadata.name}
             loading
+            raw
             size="sm"
             src={contractMetadata?.image ?? ''}
-            alt={contractMetadata.name}
-            raw
           />
 
           <div>
-            <PageTitle size="sm" className="text-start">
+            <PageTitle className="text-start" size="sm">
               {contractMetadata.name}
             </PageTitle>
 
@@ -84,10 +84,10 @@ export function UserActionFormNFTMintCheckout({
           <div className="flex items-center justify-between">
             <p>Quantity</p>
             <QuantityInput
-              value={quantity}
               onChange={setQuantity}
-              onIncrement={incrementQuantity}
               onDecrement={decrementQuantity}
+              onIncrement={incrementQuantity}
+              value={quantity}
             />
           </div>
         </Card>
@@ -124,10 +124,10 @@ export function UserActionFormNFTMintCheckout({
 
         <UserActionFormLayout.Footer>
           <Web3Button
-            className="!rounded-full"
-            theme={theme}
-            contractAddress={MINT_NFT_CONTRACT_ADDRESS}
             action={onMint}
+            className="!rounded-full"
+            contractAddress={MINT_NFT_CONTRACT_ADDRESS}
+            theme={theme}
           >
             Mint now
           </Web3Button>
@@ -170,30 +170,30 @@ function QuantityInput({
   return (
     <div className="flex items-center gap-2">
       <Button
+        className="h-8 w-8 bg-white hover:bg-white/80"
+        disabled={value <= 1}
+        onClick={onDecrement}
         size="sm"
         variant="secondary"
-        className="h-8 w-8 bg-white hover:bg-white/80"
-        onClick={onDecrement}
-        disabled={value <= 1}
       >
         <Minus />
       </Button>
 
       <div>
         <input
-          type="number"
           className={styles.numberInput}
-          value={value}
           onChange={handleInputChange}
           onFocus={event => event.target.select()}
+          type="number"
+          value={value}
         />
       </div>
 
       <Button
-        size="sm"
-        variant="secondary"
         className="h-8 w-8 bg-white hover:bg-white/80"
         onClick={onIncrement}
+        size="sm"
+        variant="secondary"
       >
         <Plus />
       </Button>

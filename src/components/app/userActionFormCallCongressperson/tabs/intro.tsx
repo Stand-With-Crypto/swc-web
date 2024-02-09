@@ -16,7 +16,7 @@ export function Intro({ goToSection }: UseSectionsReturn<SectionNames>) {
   }, [ref])
   return (
     <IntroStaticContent>
-      <Button ref={ref} onClick={() => goToSection(SectionNames.ADDRESS)}>
+      <Button onClick={() => goToSection(SectionNames.ADDRESS)} ref={ref}>
         Continue
       </Button>
     </IntroStaticContent>
@@ -28,8 +28,8 @@ export function IntroStaticContent({ children }: React.PropsWithChildren) {
     <UserActionFormLayout>
       <UserActionFormLayout.Container>
         <UserActionFormLayout.Heading
-          title="It's time to fight to keep crypto in America"
           subtitle="Call your Congressperson and tell them to vote YES on the FIT21 bill. Calling your representative is the most effective way to influence legislation."
+          title="It's time to fight to keep crypto in America"
         />
         <div className="space-y-2">
           <h2 className="text-base font-semibold">Here's what you need to know:</h2>

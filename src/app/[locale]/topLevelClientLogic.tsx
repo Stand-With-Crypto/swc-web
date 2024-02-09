@@ -80,8 +80,13 @@ export function TopLevelClientLogic({
   return (
     <LocaleContext.Provider value={locale}>
       <ThirdwebProvider
-        locale={en()}
         activeChain={Base}
+        authConfig={{
+          domain: NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN,
+          authUrl: '/api/auth',
+        }}
+        clientId={NEXT_PUBLIC_THIRDWEB_CLIENT_ID}
+        locale={en()}
         supportedWallets={[
           metamaskWallet(),
           coinbaseWallet({ recommended: true }),
@@ -92,11 +97,6 @@ export function TopLevelClientLogic({
             },
           }),
         ]}
-        clientId={NEXT_PUBLIC_THIRDWEB_CLIENT_ID}
-        authConfig={{
-          domain: NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN,
-          authUrl: '/api/auth',
-        }}
       >
         {/* https://nextjs.org/docs/messages/missing-suspense-with-csr-bailout */}
         <Suspense>

@@ -46,8 +46,8 @@ export function PagePoliticianDetails({
         {person.profilePictureUrl ? (
           <div className="mx-auto mb-6 overflow-hidden rounded-full" style={{ maxWidth: 100 }}>
             <MaybeNextImg
-              sizes="100px"
               alt={`profile picture of ${dtsiPersonFullName(person)}`}
+              sizes="100px"
               {...(getDTSIPersonProfilePictureUrlDimensions(person) || {})}
               src={person.profilePictureUrl}
             />
@@ -55,9 +55,9 @@ export function PagePoliticianDetails({
         ) : (
           <div className="mx-auto mb-6 md:mx-0">
             <InitialsAvatar
-              size={100}
               firstInitial={(person.firstNickname || person.firstName).slice(0, 1)}
               lastInitial={person.lastName.slice(0, 1)}
+              size={100}
             />
           </div>
         )}
@@ -98,7 +98,7 @@ export function PagePoliticianDetails({
             </Button>
           )}
           {Boolean(person.officialUrl) && (
-            <Button variant="secondary" className="rounded-full px-3 py-3" asChild>
+            <Button asChild className="rounded-full px-3 py-3" variant="secondary">
               <ExternalLink href={person.officialUrl}>
                 <Globe className="h-6 w-6" />
                 <span className="sr-only">{person.officialUrl}</span>
@@ -107,9 +107,9 @@ export function PagePoliticianDetails({
           )}
 
           {person.twitterAccounts.slice(0, 1).map(account => (
-            <Button variant="secondary" className="rounded-full px-3 py-3" asChild key={account.id}>
+            <Button asChild className="rounded-full px-3 py-3" key={account.id} variant="secondary">
               <ExternalLink href={dtsiTwitterAccountUrl(account)}>
-                <NextImage alt="x.com logo" src={'/misc/xDotComLogo.svg'} width={24} height={24} />
+                <NextImage alt="x.com logo" height={24} src={'/misc/xDotComLogo.svg'} width={24} />
                 <span className="sr-only">{dtsiTwitterAccountUrl(account)}</span>
               </ExternalLink>
             </Button>
@@ -119,7 +119,7 @@ export function PagePoliticianDetails({
           <Tooltip>
             <TooltipTrigger className="my-8 flex w-full items-center gap-4 rounded-3xl bg-gray-100 p-3 text-left md:my-12">
               <div>
-                <DTSIFormattedLetterGrade size={60} person={person} />
+                <DTSIFormattedLetterGrade person={person} size={60} />
               </div>
               <div>
                 <h3 className="mb-1 text-xl font-bold">
@@ -139,7 +139,7 @@ export function PagePoliticianDetails({
                   the score from the member’s public statements. You can change the score by
                   contributing more statements.
                 </p>
-                <Button variant="secondary" asChild>
+                <Button asChild variant="secondary">
                   <ExternalLink href={externalUrls.dtsiCreateStance(person.slug)}>
                     Add Position <MoveUpRight className="ml-2" />
                   </ExternalLink>
@@ -150,15 +150,15 @@ export function PagePoliticianDetails({
         </TooltipProvider>
       </section>
       <section>
-        <PageTitle as="h2" size="sm" className="mb-4 text-left">
+        <PageTitle as="h2" className="mb-4 text-left" size="sm">
           Notable statements
         </PageTitle>
         <div className="flex flex-col space-y-4">
           {!stances.length && <div>No recent statements.</div>}
           {stances.map(stance => {
             return (
-              <article key={stance.id} className={cn('rounded-3xl bg-gray-100 p-4 md:p-6')}>
-                <DTSIStanceDetails locale={locale} stance={stance} person={person} />
+              <article className={cn('rounded-3xl bg-gray-100 p-4 md:p-6')} key={stance.id}>
+                <DTSIStanceDetails locale={locale} person={person} stance={stance} />
               </article>
             )
           })}

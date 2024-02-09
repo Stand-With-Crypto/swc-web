@@ -1,4 +1,5 @@
 'use client'
+import _ from 'lodash'
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
@@ -10,17 +11,22 @@ import {
   formatGetDTSIPeopleFromAddressNotFoundReason,
   useGetDTSIPeopleFromAddress,
 } from '@/hooks/useGetDTSIPeopleFromAddress'
+import { useHasHydrated } from '@/hooks/useHasHydrated'
 import { SupportedLocale } from '@/intl/locales'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { possessive } from '@/utils/shared/possessive'
 import { getIntlUrls } from '@/utils/shared/urls'
+import { getLocalUser, setLocalUserPersistedValues } from '@/utils/web/clientLocalUser'
 import { GooglePlaceAutocompletePrediction } from '@/utils/web/googlePlaceUtils'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 export function ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: SupportedLocale }) {
   const user = useApiResponseForUserFullProfileInfo()
-  const userAddress = user.data?.user?.address
-  const [address, setAddress] = useState<GooglePlaceAutocompletePrediction | null>(
+  const hasHydrated = useHasHydrated()
+  const userAddress = hasHydrated
+    ? user.data?.user?.address || getLocalUser().persisted?.recentlyUsedAddress
+    : null
+  const [address, _setAddress] = useState<GooglePlaceAutocompletePrediction | null>(
     userAddress
       ? {
           place_id: userAddress.googlePlaceId,
@@ -28,24 +34,38 @@ export function ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: Suppo
         }
       : null,
   )
+  const setAddress = useCallback(
+    (addr: GooglePlaceAutocompletePrediction | null) => {
+      setLocalUserPersistedValues({
+        recentlyUsedAddress: addr
+          ? {
+              googlePlaceId: addr.place_id,
+              formattedDescription: addr.description,
+            }
+          : undefined,
+      })
+      _setAddress(addr)
+    },
+    [_setAddress],
+  )
   const res = useGetDTSIPeopleFromAddress(address?.description || '')
   useEffect(() => {
-    if (userAddress) {
-      setAddress({
+    if (!address && userAddress) {
+      _setAddress({
         place_id: userAddress.googlePlaceId,
         description: userAddress.formattedDescription,
       })
     }
-  }, [userAddress])
+  }, [userAddress, address])
 
   if (!address || !res.data) {
     return (
       <div className="mx-auto max-w-md">
         <GooglePlacesSelect
           className="rounded-full bg-gray-100 text-gray-600"
+          onChange={setAddress}
           placeholder="Enter your address"
           value={address}
-          onChange={setAddress}
         />
         <p className="mt-2 text-xs text-fontcolor-muted">
           Enter your address to find your representatives
@@ -64,6 +84,7 @@ export function ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: Suppo
     )
   }
   const person = res.data
+  const score = person.manuallyOverriddenStanceScore || person.computedStanceScore
   return (
     <div>
       <p className="mb-3 text-xl font-bold">Your representative</p>
@@ -78,15 +99,23 @@ export function ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: Suppo
           <div className="relative">
             <DTSIAvatar person={person} size={60} />
             <div className="absolute bottom-[-8px] right-[-8px]">
-              <DTSIFormattedLetterGrade size={25} person={person} />
+              <DTSIFormattedLetterGrade person={person} size={25} />
             </div>
           </div>
           <div>
             <div className="font-bold">Your representative is {dtsiPersonFullName(person)}</div>
             <div className="text-fontcolor-muted">
-              {/* TODO this needs different copy/UX if they're pro crypto */}
-              Learn how to change {possessive(person.firstNickname || person.firstName)} stance on
-              crypto.
+              {_.isNil(score) || score < 60 ? (
+                <>
+                  Learn how to change {possessive(person.firstNickname || person.firstName)} stance
+                  on crypto.
+                </>
+              ) : (
+                <>
+                  Let {possessive(person.firstNickname || person.firstName)} know how important
+                  pro-crypto politicians are to you.
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -94,7 +123,7 @@ export function ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: Suppo
           <UserActionFormCallCongresspersonDialog>
             <Button size="lg">Call</Button>
           </UserActionFormCallCongresspersonDialog>
-          <Button variant="secondary" asChild>
+          <Button asChild variant="secondary">
             <InternalLink href={getIntlUrls(locale).politicianDetails(person.slug)}>
               View profile
             </InternalLink>
