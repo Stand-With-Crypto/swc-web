@@ -1,12 +1,5 @@
 import * as Sentry from '@sentry/nextjs'
-import { useLoadingCallback } from '@/hooks/useLoadingCallback'
-import {
-  UserWallet,
-  useContract,
-  useContractMetadata,
-  useSDK,
-  useWatchTransactions,
-} from '@thirdweb-dev/react'
+import { UserWallet, useContract, useContractMetadata, useSDK } from '@thirdweb-dev/react'
 import React from 'react'
 import { keccak256, toHex } from 'viem'
 import { noop } from 'lodash'
@@ -75,7 +68,7 @@ export function useSendMintNFTTransaction({
       handleChangeStatus('error')
       return 'error'
     }
-  }, [contract, contractAddress, contractMetadata, quantity, sdk])
+  }, [contract, contractAddress, contractMetadata, handleChangeStatus, quantity, sdk])
 
   return {
     mintNFT,

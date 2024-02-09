@@ -12,9 +12,9 @@ import { UseCheckoutControllerReturn } from '@/components/app/userActionFormNFTM
 
 export function UserActionFormNFTMintSuccess({
   goToSection,
-  totalFeeDisplay: _totalFee,
+  totalFeeDisplay: _totalFeeDisplay,
 }: UseSectionsReturn<UserActionFormNFTMintSectionNames> &
-  Pick<UseCheckoutControllerReturn, 'totalFee'>) {
+  Pick<UseCheckoutControllerReturn, 'totalFeeDisplay'>) {
   const { session } = useThirdwebData()
   const { data: _contractMetadata, isLoading: isLoadingContractMetadata } =
     useThirdwebContractMetadata(MINT_NFT_CONTRACT_ADDRESS)
