@@ -65,7 +65,6 @@ export function UserActionFormNFTMintCheckout({
         <div className="flex gap-6">
           <NFTDisplay
             alt={contractMetadata.name}
-            loading
             raw
             size="sm"
             src={contractMetadata?.image ?? ''}
@@ -170,13 +169,13 @@ function QuantityInput({
   return (
     <div className="flex items-center gap-2">
       <Button
-        className="h-8 w-8 bg-white hover:bg-white/80"
+        className="h-8 w-8 bg-white p-0 hover:bg-white/80"
         disabled={value <= 1}
         onClick={onDecrement}
         size="sm"
         variant="secondary"
       >
-        <Minus />
+        <Minus className="h-4 w-4" />
       </Button>
 
       <div>
@@ -190,12 +189,12 @@ function QuantityInput({
       </div>
 
       <Button
-        className="h-8 w-8 bg-white hover:bg-white/80"
+        className="h-8 w-8 bg-white p-0 hover:bg-white/80"
         onClick={onIncrement}
         size="sm"
         variant="secondary"
       >
-        <Plus />
+        <Plus className="h-4 w-4" />
       </Button>
     </div>
   )

@@ -15,7 +15,7 @@ interface NFTDisplayProps {
   loading?: boolean
 }
 
-const nftDisplayVariants = cva('overflow-hidden', {
+const nftDisplayVariants = cva('overflow-hidden relative', {
   variants: {
     size: {
       sm: 'h-20 w-20 rounded-xl',
@@ -44,15 +44,15 @@ export function NFTDisplay({
 }: NFTDisplayProps) {
   return (
     <div className={nftDisplayVariants({ size, className })}>
-      {loading && <LoadingOverlay />}
+      {loading && <LoadingOverlay size="sm" />}
       {raw ? (
         <img alt={alt} {...props} />
       ) : (
         <NextImage
           alt={alt}
           {...props}
-          width={NFT_IMAGE_SIZE_BY_VARIANT[size]}
           height={NFT_IMAGE_SIZE_BY_VARIANT[size]}
+          width={NFT_IMAGE_SIZE_BY_VARIANT[size]}
         />
       )}
     </div>

@@ -52,8 +52,10 @@ export function UserActionFormNFTMint(_props: { onCancel: () => void; onSuccess:
           {...sectionProps}
           {...checkoutController}
           onMint={async () => {
-            await mintNFT()
-            sectionProps.goToSection(UserActionFormNFTMintSectionNames.SUCCESS)
+            const result = await mintNFT()
+            if (result === 'completed') {
+              sectionProps.goToSection(UserActionFormNFTMintSectionNames.SUCCESS)
+            }
           }}
         />
       )

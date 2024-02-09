@@ -68,6 +68,8 @@ const contentSecurityPolicy = {
     'https://vercel.live/api/event/tick',
     'https://vitals.vercel-insights.com/v1/vitals',
     'https://api-js.mixpanel.com/',
+    // Mint endpoint
+    'https://*.coinbase.com/',
   ],
   'frame-src': [
     '*.google.com',

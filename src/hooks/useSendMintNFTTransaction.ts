@@ -3,6 +3,7 @@ import { UserWallet, useContract, useContractMetadata, useSDK } from '@thirdweb-
 import React from 'react'
 import { keccak256, toHex } from 'viem'
 import { noop } from 'lodash'
+import { logger } from '@/utils/shared/logger'
 
 type Status = 'idle' | 'loading' | 'completed' | 'canceled' | 'error'
 
@@ -61,6 +62,7 @@ export function useSendMintNFTTransaction({
     } catch (e) {
       const error = getErrorInstance(e)
       Sentry.captureException(error)
+      logger.error('Error minting NFT', error)
 
       if (error.message.includes('user rejected transaction')) {
         handleChangeStatus('canceled')

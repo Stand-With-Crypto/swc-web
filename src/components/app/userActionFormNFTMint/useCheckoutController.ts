@@ -31,6 +31,7 @@ export function useCheckoutController({
     if (!gasUnitFee) {
       return {}
     }
+
     const mintFee = mintUnitFee.mul(quantity)
     const gasFee = gasUnitFee.mul(quantity)
     const totalFee = mintFee.add(gasFee)

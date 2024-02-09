@@ -36,30 +36,31 @@ export function UserActionFormNFTMintIntro({
     <UserActionFormLayout>
       {(session.isLoading || isLoadingContractMetadata) && <LoadingOverlay />}
       <UserActionFormLayout.Container>
-        <ContractMetadataDisplay contractMetadata={contractMetadata} />
+        <div className="flex h-full flex-col gap-6">
+          <ContractMetadataDisplay contractMetadata={contractMetadata} />
 
-        <UserActionFormLayout.Footer>
-          <MaybeAuthenticatedContent
-            authenticatedContent={
-              <Button
-                onClick={() => goToSection(UserActionFormNFTMintSectionNames.CHECKOUT)}
-                size="lg"
-              >
-                Continue
-              </Button>
-            }
-          >
-            <ThirdwebLoginDialog>
-              <Button size="lg">Log In</Button>
-            </ThirdwebLoginDialog>
-          </MaybeAuthenticatedContent>
+          <UserActionFormLayout.Footer>
+            <MaybeAuthenticatedContent
+              authenticatedContent={
+                <Button
+                  onClick={() => goToSection(UserActionFormNFTMintSectionNames.CHECKOUT)}
+                  size="lg"
+                >
+                  Continue
+                </Button>
+              }
+              loadingFallback={<Skeleton className="h-12 w-full" />}
+            >
+              <ThirdwebLoginDialog>
+                <Button size="lg">Log In</Button>
+              </ThirdwebLoginDialog>
 
-          {!session.isLoggedIn && (
-            <p className="text-sm text-muted-foreground">
-              You will need to login first to mint the NFT
-            </p>
-          )}
-        </UserActionFormLayout.Footer>
+              <p className="text-sm text-muted-foreground">
+                You will need to login first to mint the NFT
+              </p>
+            </MaybeAuthenticatedContent>
+          </UserActionFormLayout.Footer>
+        </div>
       </UserActionFormLayout.Container>
     </UserActionFormLayout>
   )
@@ -79,7 +80,7 @@ function ContractMetadataDisplay({
   }
 
   return (
-    <>
+    <div className="flex flex-grow flex-col gap-6">
       <div className="flex gap-6">
         <NFTDisplay
           alt="Stand with Crypto supporter NFT"
@@ -102,8 +103,10 @@ function ContractMetadataDisplay({
         </div>
       </div>
 
-      <p className="text-lg text-muted-foreground">{contractMetadata.description}</p>
-    </>
+      {contractMetadata.description && (
+        <p className="text-lg text-muted-foreground">{contractMetadata.description}</p>
+      )}
+    </div>
   )
 }
 
