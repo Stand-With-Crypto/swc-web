@@ -8,10 +8,10 @@ import { useLocale } from '@/hooks/useLocale'
 import { useParseRnQueryParam } from '@/hooks/useRnQueryParams'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { useRouter } from 'next/navigation'
-import React from 'react'
+import React, { Suspense } from 'react'
 import { useState } from 'react'
 
-export function UserActionFormEmailCongresspersonDeeplinkWrapper() {
+function UserActionFormEmailCongresspersonDeeplinkWrapperContent() {
   const fetchUser = useApiResponseForUserFullProfileInfo()
   const router = useRouter()
   const locale = useLocale()
@@ -33,5 +33,14 @@ export function UserActionFormEmailCongresspersonDeeplinkWrapper() {
     />
   ) : (
     <UserActionFormSuccessScreen onClose={() => router.replace(urls.home())} />
+  )
+}
+
+export function UserActionFormEmailCongresspersonDeeplinkWrapper() {
+  const locale = useLocale()
+  return (
+    <Suspense fallback={<UserActionFormEmailCongresspersonSkeleton locale={locale} />}>
+      <UserActionFormEmailCongresspersonDeeplinkWrapperContent />
+    </Suspense>
   )
 }

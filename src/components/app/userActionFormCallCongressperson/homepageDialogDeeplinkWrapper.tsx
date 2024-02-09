@@ -6,8 +6,9 @@ import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForU
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useParseRnQueryParam } from '@/hooks/useRnQueryParams'
 import { useRouter } from 'next/navigation'
+import { Suspense } from 'react'
 
-export function UserActionFormCallCongresspersonDeeplinkWrapper() {
+function UserActionFormCallCongresspersonDeeplinkWrapperContent() {
   const fetchUser = useApiResponseForUserFullProfileInfo()
   const urls = useIntlUrls()
   const router = useRouter()
@@ -22,5 +23,13 @@ export function UserActionFormCallCongresspersonDeeplinkWrapper() {
       rnAddress={rnAddress}
       user={user}
     />
+  )
+}
+
+export function UserActionFormCallCongresspersonDeeplinkWrapper() {
+  return (
+    <Suspense fallback={<UserActionFormCallCongresspersonSkeleton />}>
+      <UserActionFormCallCongresspersonDeeplinkWrapperContent />
+    </Suspense>
   )
 }

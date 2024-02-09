@@ -9,9 +9,13 @@ type RnParams = {
   zipCode?: string
 }
 
-// decode query param with key rn
-// atob used on client
-// so on react native, we need to do btoa
+/**
+ * RN app encodes the rn query param using btoa.
+ *
+ * This hook decodes the rn query param and returns the decoded values.
+ *
+ * Components using this hook must be wrapped in a Suspense boundary since it uses `useSearchParams`
+ */
 export function useParseRnQueryParam() {
   const searchParams = useSearchParams()
   const [address, setAddress] = useState<string>('')
