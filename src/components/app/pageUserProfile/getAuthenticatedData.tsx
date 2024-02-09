@@ -65,11 +65,11 @@ export async function getAuthenticatedData() {
   }
   return {
     ...getSensitiveDataClientUserWithENSData(rest, ensData),
-    
+
     address: address && getClientAddress(address),
 
     // LATER-TASK show UX if this address is not the primary address
-currentlyAuthenticatedUserCryptoAddress: getClientUserCryptoAddress(
+    currentlyAuthenticatedUserCryptoAddress: getClientUserCryptoAddress(
       currentlyAuthenticatedUserCryptoAddress,
     ),
     mergeAlerts: [

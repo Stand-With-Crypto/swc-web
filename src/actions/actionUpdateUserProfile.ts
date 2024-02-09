@@ -163,7 +163,7 @@ async function handleCapitolCanaryAdvocateUpsert(
     const unsubscribePayload: UpsertAdvocateInCapitolCanaryPayloadRequirements = {
       campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
       // Using old email here.
-opts: {
+      opts: {
         isEmailOptout:
           oldUser.primaryUserEmailAddress?.emailAddress !== primaryUserEmailAddress?.emailAddress ||
           primaryUserEmailAddress === null
@@ -175,11 +175,11 @@ opts: {
             ? true
             : false,
       },
-      
-user: {
+
+      user: {
         ...updatedUser, // Always use new user information.
         address: updatedUser.address, // Always use new user information.
-      }, 
+      },
       userEmailAddress: oldUser.primaryUserEmailAddress,
     }
     await inngest.send({

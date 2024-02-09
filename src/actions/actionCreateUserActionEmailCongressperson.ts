@@ -170,18 +170,18 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
   const payload: EmailRepViaCapitolCanaryPayloadRequirements = {
     campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_EMAIL_REPRESENTATIVE),
     // This does not particularly matter for now as subject is currently overridden in the Capitol Canary admin settings.
-emailMessage: validatedFields.data.message,
-    
-emailSubject: 'Support Crypto',
-    
-opts: {
+    emailMessage: validatedFields.data.message,
+
+    emailSubject: 'Support Crypto',
+
+    opts: {
       isEmailOptin: true,
     },
-    
-user: {
+
+    user: {
       ...user,
       address: user.address!,
-    }, 
+    },
     userEmailAddress: user.userEmailAddresses.find(
       emailAddr => emailAddr.emailAddress === validatedFields.data.emailAddress,
     ),

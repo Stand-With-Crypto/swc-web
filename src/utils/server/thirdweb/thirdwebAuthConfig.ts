@@ -33,20 +33,20 @@ export const thirdwebAuthConfig: ThirdwebAuthConfig = {
       await prismaClient.authenticationNonce.create({ data: { id: nonce } })
     },
   },
-  
+
   callbacks: {
     onLogin,
-    
+
     onLogout: (user, req) => {
       const localUser = parseLocalUserFromCookiesForPageRouter(req)
       const sessionData = user.session as AuthSessionMetadata
       getServerAnalytics({ localUser, userId: sessionData.userId }).track('User Logged Out')
     },
     // look for the comment in appRouterGetAuthUser for why we don't use this fn
-onUser: async () => {},
+    onUser: async () => {},
   },
-  
-domain: NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN,
+
+  domain: NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN,
   // TODO determine if we have requirements for the wallet private key that necessitate a more secure storage mechanism
-wallet: new PrivateKeyWallet(THIRDWEB_AUTH_PRIVATE_KEY),
+  wallet: new PrivateKeyWallet(THIRDWEB_AUTH_PRIVATE_KEY),
 }

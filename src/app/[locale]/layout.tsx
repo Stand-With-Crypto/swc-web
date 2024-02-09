@@ -46,21 +46,21 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   ...generateMetadataDetails({ description, ogImage, title }),
   // manifest: '/site.webmanifest', // LATER-TASK figure out why we get 401s when we uncomment this
-appleWebApp: {
+  appleWebApp: {
     startupImage: ['/logo/apple-touch-icon.png'],
     statusBarStyle: 'black-translucent',
     title: 'Stand With Crypto',
   },
-  
-applicationName: 'Stand With Crypto',
-  
-icons: [
+
+  applicationName: 'Stand With Crypto',
+
+  icons: [
     { sizes: '16x16', url: '/logo/favicon-16x16.png' },
     { sizes: '32x32', url: '/logo/favicon-32x32.png' },
   ],
-  
-metadataBase: new URL('https://www.standwithcrypto.org'),
-  
+
+  metadataBase: new URL('https://www.standwithcrypto.org'),
+
   title: {
     default: title,
     template: '%s | Stand With Crypto',

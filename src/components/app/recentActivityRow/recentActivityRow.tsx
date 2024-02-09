@@ -213,10 +213,9 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
       }
     }
     return gracefullyError({
-      
       fallback: 'helped crypto',
       // @ts-ignore
-msg: `Unknown action type in RecentActivityRow for action ${action.id}: ${action.actionType}`,
+      msg: `Unknown action type in RecentActivityRow for action ${action.id}: ${action.actionType}`,
     })
   }
   return <RecentActivityRowBase action={action} locale={locale} {...getActionSpecificProps()} />

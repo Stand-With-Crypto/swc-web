@@ -263,23 +263,23 @@ async function seed() {
         ...mockCreateUserActionInput(),
         actionType,
         // a nft mint must only ever be associated with one action so we use splice here to ensure we can randomly assign these models to users without any duplicates
-nftMintId:
+        nftMintId:
           actionType === UserActionType.NFT_MINT
             ? usedNftMints.splice(faker.number.int({ max: usedNftMints.length - 1, min: 0 }), 1)[0]
                 .id
             : null,
-        
-userCryptoAddressId:
+
+        userCryptoAddressId:
           actionType === UserActionType.OPT_IN
             ? null
             : 'cryptoAddress' in relatedItem
               ? relatedItem.id
               : null,
-        
-userEmailAddressId: actionType === UserActionType.OPT_IN ? relatedItem.id : null,
-        
-userId: relatedItem.userId,
-        
+
+        userEmailAddressId: actionType === UserActionType.OPT_IN ? relatedItem.id : null,
+
+        userId: relatedItem.userId,
+
         userSessionId:
           actionType === UserActionType.OPT_IN
             ? null
