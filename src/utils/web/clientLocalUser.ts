@@ -28,8 +28,8 @@ const getDefaultCurrentSessionLocalUser = (): CurrentSessionLocalUser => ({
 })
 
 const getDefaultPersistedLocalUser = (): PersistedLocalUser => ({
-  initialReferer: window.document.referrer || undefined,
   datetimeFirstSeen: new Date().toISOString(),
+  initialReferer: window.document.referrer || undefined,
   initialSearchParams: Object.fromEntries(new URLSearchParams(window.location.search)),
 })
 

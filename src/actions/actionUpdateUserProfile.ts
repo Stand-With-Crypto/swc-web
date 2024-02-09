@@ -45,13 +45,13 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
     }
   }
   const user = await prismaClient.user.findFirstOrThrow({
+    include: {
+      address: true,
+      primaryUserEmailAddress: true,
+      userEmailAddresses: true,
+    },
     where: {
       id: authUser.userId,
-    },
-    include: {
-      userEmailAddresses: true,
-      primaryUserEmailAddress: true,
-      address: true,
     },
   })
   const {
@@ -64,13 +64,13 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
   } = validatedFields.data
   const address = validatedFields.data.address
     ? await prismaClient.address.upsert({
-        where: {
-          googlePlaceId: validatedFields.data.address.googlePlaceId,
-        },
         create: {
           ...validatedFields.data.address,
         },
         update: {},
+        where: {
+          googlePlaceId: validatedFields.data.address.googlePlaceId,
+        },
       })
     : null
   const existingUserEmailAddress = emailAddress
@@ -81,8 +81,8 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
       ? await prismaClient.userEmailAddress.create({
           data: {
             emailAddress,
-            source: UserEmailAddressSource.USER_ENTERED,
             isVerified: false,
+            source: UserEmailAddressSource.USER_ENTERED,
             user: {
               connect: {
                 id: user.id,
@@ -92,33 +92,33 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
         })
       : existingUserEmailAddress
   const localUser = parseLocalUserFromCookies()
-  const peopleAnalytics = getServerPeopleAnalytics({ userId: authUser.userId, localUser })
+  const peopleAnalytics = getServerPeopleAnalytics({ localUser, userId: authUser.userId })
   peopleAnalytics.set({
     ...(address ? convertAddressToAnalyticsProperties(address) : {}),
     // https://docs.mixpanel.com/docs/data-structure/user-profiles#reserved-user-properties
     $email: emailAddress,
-    $phone: phoneNumber,
     $name: userFullName(validatedFields.data),
+    $phone: phoneNumber,
     'Has Opted In To Membership': hasOptedInToMembership,
     'Has Opted In To Sms': hasOptedInToSms,
   })
 
   const updatedUser = await prismaClient.user.update({
-    where: {
-      id: user.id,
-    },
     data: {
+      addressId: address?.id || null,
       firstName,
-      lastName,
-      phoneNumber,
       hasOptedInToMembership,
       hasOptedInToSms,
-      addressId: address?.id || null,
+      lastName,
+      phoneNumber,
       primaryUserEmailAddressId: primaryUserEmailAddress?.id || null,
     },
     include: {
       address: true,
       primaryUserCryptoAddress: true,
+    },
+    where: {
+      id: user.id,
     },
   })
 
@@ -162,12 +162,8 @@ async function handleCapitolCanaryAdvocateUpsert(
   ) {
     const unsubscribePayload: UpsertAdvocateInCapitolCanaryPayloadRequirements = {
       campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
-      user: {
-        ...updatedUser, // Always use new user information.
-        address: updatedUser.address, // Always use new user information.
-      },
-      userEmailAddress: oldUser.primaryUserEmailAddress, // Using old email here.
-      opts: {
+      // Using old email here.
+opts: {
         isEmailOptout:
           oldUser.primaryUserEmailAddress?.emailAddress !== primaryUserEmailAddress?.emailAddress ||
           primaryUserEmailAddress === null
@@ -179,10 +175,16 @@ async function handleCapitolCanaryAdvocateUpsert(
             ? true
             : false,
       },
+      
+user: {
+        ...updatedUser, // Always use new user information.
+        address: updatedUser.address, // Always use new user information.
+      }, 
+      userEmailAddress: oldUser.primaryUserEmailAddress,
     }
     await inngest.send({
-      name: CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME,
       data: unsubscribePayload,
+      name: CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME,
     })
   }
 
@@ -203,20 +205,20 @@ async function handleCapitolCanaryAdvocateUpsert(
   ) {
     const payload: UpsertAdvocateInCapitolCanaryPayloadRequirements = {
       campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
-      user: {
-        ...updatedUser,
-        address: updatedUser.address,
-      },
-      userEmailAddress: primaryUserEmailAddress,
       opts: {
         isEmailOptin: true,
         isSmsOptin: hasOptedInToSms,
         isSmsOptout: oldUser.hasOptedInToSms && !hasOptedInToSms, // Only opt-out of SMS if the user has opted in before and now they are opting out.
       },
+      user: {
+        ...updatedUser,
+        address: updatedUser.address,
+      },
+      userEmailAddress: primaryUserEmailAddress,
     }
     await inngest.send({
-      name: CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME,
       data: payload,
+      name: CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME,
     })
   }
 }

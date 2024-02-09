@@ -13,7 +13,7 @@ const convertArgsToFormData = <T extends any[]>(args: T) => {
     })
     return data
   } catch (e) {
-    Sentry.captureException(e, { tags: { domain: 'withServerActionMiddleware' }, extra: { args } })
+    Sentry.captureException(e, { extra: { args }, tags: { domain: 'withServerActionMiddleware' } })
     return undefined
   }
 }
@@ -26,9 +26,9 @@ export function withServerActionMiddleware<T extends (...args: any) => any>(
     return Sentry.withServerActionInstrumentation<() => Awaited<ReturnType<T>>>(
       name,
       {
-        recordResponse: true,
-        headers: headers(),
         formData: convertArgsToFormData(args),
+        headers: headers(),
+        recordResponse: true,
       },
       () => action(...args),
     )

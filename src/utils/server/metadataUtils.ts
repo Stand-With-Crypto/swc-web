@@ -2,8 +2,8 @@ import { getOpenGraphImageUrl } from '@/utils/server/generateOpenGraphImageUrl'
 import { Metadata } from 'next'
 
 export const sharedOpenGraphMetadata = {
-  siteName: 'Stand With Crypto',
   locale: 'en_US',
+  siteName: 'Stand With Crypto',
   type: 'website',
 } satisfies Partial<Metadata['openGraph']>
 
@@ -32,19 +32,19 @@ export const generateMetadataDetails = ({
 }) => {
   const useImage = ogImage || getOpenGraphImageUrl({ title })
   return {
-    title,
     description,
     openGraph: {
       ...sharedOpenGraphMetadata,
-      title,
       description,
       images: [useImage],
+      title,
     },
+    title,
     twitter: {
       ...sharedTwitterMetadata,
-      title,
       description,
       images: [useImage],
+      title,
     },
   } satisfies Metadata
 }

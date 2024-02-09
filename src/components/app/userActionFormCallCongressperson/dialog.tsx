@@ -18,8 +18,8 @@ export function UserActionFormCallCongresspersonDialog({
   defaultOpen?: boolean
 }) {
   const dialogProps = useDialog({
-    initialOpen: defaultOpen,
     analytics: ANALYTICS_NAME_USER_ACTION_FORM_CALL_CONGRESSPERSON,
+    initialOpen: defaultOpen,
   })
   const { data, isLoading } = useApiResponseForUserFullProfileInfo()
   const { user } = data ?? { user: null }

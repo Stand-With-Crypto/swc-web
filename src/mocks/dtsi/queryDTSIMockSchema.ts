@@ -16,24 +16,24 @@ import { buildClientSchema, graphql } from 'graphql'
 const schema = buildClientSchema(introspectionResult as any)
 // Create a new schema with mocks
 const schemaWithMocks = addMocksToSchema({
-  schema,
-  preserveResolvers: false,
   mocks: {
-    DateTime: () => faker.date.past().toISOString(),
-    String: () => faker.word.words(3),
-    Json: () => ({}),
-    Int: () => faker.number.int({ min: 0, max: 100 }),
+    Bill: dtsiBillMockResolver,
     Boolean: () => faker.datatype.boolean(),
-    Float: () => faker.number.float({ min: 0, max: 100, precision: 0.001 }),
+    DateTime: () => faker.date.past().toISOString(),
+    Float: () => faker.number.float({ max: 100, min: 0, precision: 0.001 }),
     ID: () => fakerFields.id(),
+    Int: () => faker.number.int({ max: 100, min: 0 }),
+    Json: () => ({}),
     Person: dtsiPersonMockResolver,
-    PersonStanceQuote: dtsiPersonStanceQuoteMockResolver,
     PersonStance: dtsiPersonStanceMockResolver,
+    PersonStanceQuote: dtsiPersonStanceQuoteMockResolver,
+    String: () => faker.word.words(3),
     Tweet: dtsiTweetMockResolver,
     TweetMedia: dtsiTweetMediaMockResolver,
     TwitterAccount: dtsiTwitterAccountMockResolver,
-    Bill: dtsiBillMockResolver,
   },
+  preserveResolvers: false,
+  schema,
 })
 
 export const queryDTSIMockSchema = <R>(query: string, variables?: any) => {

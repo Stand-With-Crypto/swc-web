@@ -22,12 +22,12 @@ const Drawer = ({
       trackPrimitiveComponentAnalytics(
         ({ properties }) => {
           trackClientAnalytic(`Dialog ${open ? 'Opened' : 'Closed'}`, {
-            component: AnalyticComponentType.modal,
             action: AnalyticActionType.view,
+            component: AnalyticComponentType.modal,
             ...properties,
           })
         },
-        { args: open, analytics },
+        { analytics, args: open },
       )
       onOpenChange?.(open)
     },

@@ -30,8 +30,8 @@ async function _getENSDataMapFromCryptoAddresses(
       const avatar = records[index]
       acc[cryptoAddress] = {
         cryptoAddress,
-        ensName,
         ensAvatarUrl: avatar ? formatENSAvatar(avatar) : null,
+        ensName,
       }
       return acc
     },

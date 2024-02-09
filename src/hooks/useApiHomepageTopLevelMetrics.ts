@@ -24,9 +24,9 @@ export function useApiHomepageTopLevelMetrics(initial: GetHomepageTopLevelMetric
         .then(res => res.json())
         .then(data => data as GetHomepageTopLevelMetricsResponse),
     {
-      revalidateOnMount: false,
       fallbackData: initial,
       refreshInterval,
+      revalidateOnMount: false,
     },
   )
 }

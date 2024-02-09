@@ -34,15 +34,15 @@ export const fetchDTSI = async <R, V = object>(query: string, variables?: V) => 
       fetchReq(
         API_ENDPOINT,
         {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: DO_THEY_SUPPORT_IT_API_KEY,
-          },
           body: JSON.stringify({
             query,
             variables,
           }),
+          headers: {
+            Authorization: DO_THEY_SUPPORT_IT_API_KEY,
+            'Content-Type': 'application/json',
+          },
+          method: 'POST',
         },
         {
           withScope: scope => {
@@ -54,7 +54,7 @@ export const fetchDTSI = async <R, V = object>(query: string, variables?: V) => 
           },
         },
       ),
-    { retries: 2, minTimeout: 4000 },
+    { minTimeout: 4000, retries: 2 },
   )
   logger.debug(`fetchDTSI returned with status ${response.status}`)
   const json = (await response.json()) as { data: R } | { errors: any[] }

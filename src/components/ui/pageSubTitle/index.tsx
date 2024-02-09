@@ -12,10 +12,10 @@ const subTitleVariantsConfig = {
 }
 
 const pageSubTitleVariants = cva('text-center text-fontcolor-muted', {
-  variants: subTitleVariantsConfig,
   defaultVariants: {
     size: 'lg',
   },
+  variants: subTitleVariantsConfig,
 })
 
 interface PageSubTitleProps
@@ -28,7 +28,7 @@ interface PageSubTitleProps
 export const PageSubTitle = React.forwardRef<HTMLHeadingElement, PageSubTitleProps>(
   ({ className, children, size = 'md', as: Comp = 'h2', withoutBalancer, ...props }, ref) => {
     return (
-      <Comp className={cn(pageSubTitleVariants({ size, className }))} ref={ref} {...props}>
+      <Comp className={cn(pageSubTitleVariants({ className, size }))} ref={ref} {...props}>
         {withoutBalancer ? children : <Balancer>{children}</Balancer>}
       </Comp>
     )

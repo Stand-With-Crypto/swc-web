@@ -4,16 +4,16 @@ import { Prisma, UserActionEmail } from '@prisma/client'
 
 export function mockCreateUserActionEmailInput() {
   return {
-    senderEmail: faker.internet.email(),
     firstName: faker.person.firstName(),
     lastName: faker.person.lastName(),
+    senderEmail: faker.internet.email(),
   } satisfies Omit<Prisma.UserActionEmailCreateInput, 'address' | 'addressId'>
 }
 
 export function mockUserActionEmail(): UserActionEmail {
   return {
     ...mockCreateUserActionEmailInput(),
-    id: fakerFields.id(),
     addressId: fakerFields.id(),
+    id: fakerFields.id(),
   }
 }

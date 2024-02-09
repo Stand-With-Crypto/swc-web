@@ -16,16 +16,16 @@ export async function GET(_request: NextRequest, { params }: { params: { config:
       // LATER-TASK style this based off design guidance
       <div
         style={{
-          fontSize: 40,
-          color: 'black',
+          alignItems: 'center',
           background: 'white',
-          width: '100%',
+          color: 'black',
+          display: 'flex',
+          fontSize: 40,
           height: '100%',
+          justifyContent: 'center',
           padding: '50px 200px',
           textAlign: 'center',
-          justifyContent: 'center',
-          alignItems: 'center',
-          display: 'flex',
+          width: '100%',
         }}
       >
         {config.title} - {config.description}

@@ -29,8 +29,8 @@ export function UserActionFormSuccessScreen(props: Omit<Props, 'data'>) {
     const { user } = userData.data
     const { performedUserActionTypes } = performedActionsData.data
     return {
-      user,
       performedUserActionTypes,
+      user,
     }
   }, [userData, performedActionsData])
   return <UserActionFormSuccessScreenContent {...props} data={data} />

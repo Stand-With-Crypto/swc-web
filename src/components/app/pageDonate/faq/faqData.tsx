@@ -7,7 +7,6 @@ export type FAQEntry = {
 
 export const FAQ_DATA: FAQEntry[] = [
   {
-    title: 'If I donate to Stand With Crypto, how will my funds be used?',
     content: () => (
       <>
         <p>
@@ -29,27 +28,27 @@ export const FAQ_DATA: FAQEntry[] = [
         </ul>
       </>
     ),
+    title: 'If I donate to Stand With Crypto, how will my funds be used?',
   },
   {
-    title: 'Are my donations tax deductible?',
     content: () => (
       <p>
         No, donations to Stand With Crypto Alliance, a 501(c)(4) organization, are not
         tax-deductible.
       </p>
     ),
+    title: 'Are my donations tax deductible?',
   },
   {
-    title: 'What is Stand With Crypto and the Stand With Crypto Alliance?',
     content: () => (
       <p>
         Stand With Crypto Alliance is a 501(c)(4) nonprofit organization leading the Stand With
         Crypto movement in the US.
       </p>
     ),
+    title: 'What is Stand With Crypto and the Stand With Crypto Alliance?',
   },
   {
-    title: 'What does it mean to Stand with Crypto?',
     content: () => (
       <>
         <p>By Standing With Crypto you choose to:</p>
@@ -65,5 +64,6 @@ export const FAQ_DATA: FAQEntry[] = [
         </ul>
       </>
     ),
+    title: 'What does it mean to Stand with Crypto?',
   },
 ]

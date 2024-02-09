@@ -55,8 +55,8 @@ export function formatCapitolCanaryEmailRepRequest(
   const formattedRequest: EmailRepViaCapitolCanaryRequest = {
     advocateid: payload.advocateId,
     campaignid: payload.campaignId,
-    emailSubject: payload.emailSubject,
     emailMessage: payload.emailMessage,
+    emailSubject: payload.emailSubject,
     type: ['email'],
   }
 

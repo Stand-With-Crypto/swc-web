@@ -13,8 +13,8 @@ export const catchUnexpectedServerErrorAndTriggerToast = (error: unknown) => {
     Sentry.captureMessage(
       'Unexpected error type passed to catchUnexpectedServerErrorAndTriggerToast',
       {
-        tags: { domain: 'catchUnexpectedServerErrorAndTriggerToast' },
         extra: { error },
+        tags: { domain: 'catchUnexpectedServerErrorAndTriggerToast' },
       },
     )
     toastGenericError()

@@ -106,9 +106,9 @@ export const getSensitiveDataClientUserAction = ({
   const peopleBySlug = _.keyBy(dtsiPeople, x => x.slug)
   const { id, datetimeCreated, actionType, nftMint } = record
   const sharedProps = {
-    id,
-    datetimeCreated: datetimeCreated.toISOString(),
     actionType,
+    datetimeCreated: datetimeCreated.toISOString(),
+    id,
     nftMint: nftMint
       ? {
           ...getClientNFTMint(nftMint),
@@ -118,15 +118,15 @@ export const getSensitiveDataClientUserAction = ({
   switch (actionType) {
     case UserActionType.OPT_IN: {
       const { optInType } = getRelatedModel(record, 'userActionOptIn')
-      const callFields: SensitiveDataClientUserActionOptIn = { optInType, actionType }
+      const callFields: SensitiveDataClientUserActionOptIn = { actionType, optInType }
       return getClientModel({ ...sharedProps, ...callFields })
     }
     case UserActionType.CALL: {
       const { recipientPhoneNumber, recipientDtsiSlug } = getRelatedModel(record, 'userActionCall')
       const callFields: SensitiveDataClientUserActionCall = {
-        recipientPhoneNumber,
-        person: peopleBySlug[recipientDtsiSlug],
         actionType,
+        person: peopleBySlug[recipientDtsiSlug],
+        recipientPhoneNumber,
       }
       return getClientModel({ ...sharedProps, ...callFields })
     }
@@ -136,10 +136,10 @@ export const getSensitiveDataClientUserAction = ({
         'userActionDonation',
       )
       const donationFields: SensitiveDataClientUserActionDonation = {
-        amount: amount.toNumber(),
-        amountUsd: amountUsd.toNumber(),
-        amountCurrencyCode,
         actionType,
+        amount: amount.toNumber(),
+        amountCurrencyCode,
+        amountUsd: amountUsd.toNumber(),
         recipient,
       }
       return getClientModel({ ...sharedProps, ...donationFields })
@@ -149,10 +149,10 @@ export const getSensitiveDataClientUserAction = ({
         getRelatedModel(record, 'userActionEmail')
       const emailFields: SensitiveDataClientUserActionEmail = {
         actionType,
-        senderEmail,
+        address: getClientAddress(address),
         firstName,
         lastName,
-        address: getClientAddress(address),
+        senderEmail,
         userActionEmailRecipients: userActionEmailRecipients.map(x => ({
           id: x.id,
           person: peopleBySlug[x.dtsiSlug],

@@ -24,7 +24,7 @@ const Tabs = React.forwardRef<
             'Current Tab': currentTab,
           })
         },
-        { args: currentTab, analytics },
+        { analytics, args: currentTab },
       )
       onValueChange?.(currentTab)
     },

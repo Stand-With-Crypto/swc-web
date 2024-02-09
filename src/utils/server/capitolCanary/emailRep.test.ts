@@ -20,29 +20,29 @@ it('formats the "email rep via capitol canary" request correctly', () => {
 
   const payload: EmailRepViaCapitolCanaryPayloadRequirements = {
     campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_EMAIL_REPRESENTATIVE),
+    emailMessage: 'This is a test email message.',
+    emailSubject: 'This is a test email subject.',
+    metadata: {
+      p2aSource: 'source',
+      tags: ['tag1', 'tag2'],
+      utmCampaign: 'utmCampaign',
+      utmContent: 'utmContent',
+      utmMedium: 'utmMedium',
+      utmSource: 'utmSource',
+      utmTerm: 'utmTerm',
+    },
+    opts: {
+      isEmailOptin: true,
+      isEmailOptout: false,
+      isSmsOptin: true,
+      isSmsOptout: false,
+      shouldSendSmsOptinConfirmation: false,
+    },
     user: {
       ...mockedUser,
       address: mockedAddress,
     },
     userEmailAddress: mockedEmailAddress,
-    opts: {
-      isSmsOptin: true,
-      shouldSendSmsOptinConfirmation: false,
-      isSmsOptout: false,
-      isEmailOptin: true,
-      isEmailOptout: false,
-    },
-    metadata: {
-      p2aSource: 'source',
-      utmSource: 'utmSource',
-      utmMedium: 'utmMedium',
-      utmCampaign: 'utmCampaign',
-      utmTerm: 'utmTerm',
-      utmContent: 'utmContent',
-      tags: ['tag1', 'tag2'],
-    },
-    emailMessage: 'This is a test email message.',
-    emailSubject: 'This is a test email subject.',
   }
 
   const formattedRequest = formatCapitolCanaryEmailRepRequest({ ...payload, advocateId: 123456 })

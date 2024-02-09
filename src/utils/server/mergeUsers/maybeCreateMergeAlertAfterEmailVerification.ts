@@ -11,13 +11,13 @@ Logic that occurs anytime a users email is verified and the user previously exis
 
 export async function maybeCreateMergeAlertAfterEmailVerification(userEmailAddressId: string) {
   const user = await prismaClient.user.findFirstOrThrow({
-    where: {
-      userEmailAddresses: { some: { id: userEmailAddressId } },
-    },
     include: {
       userEmailAddresses: true,
       userMergeAlertUserA: true,
       userMergeAlertUserB: true,
+    },
+    where: {
+      userEmailAddresses: { some: { id: userEmailAddressId } },
     },
   })
   const userEmailAddress = user.userEmailAddresses.find(x => x.id !== userEmailAddressId)!

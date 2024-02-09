@@ -60,23 +60,23 @@ export function SuggestedScript({
   const handleCallAction = React.useCallback(
     async (phoneNumberToCall: string) => {
       const data: CreateActionCallCongresspersonInput = {
+        address: addressSchema,
         campaignName: UserActionCallCampaignName.DEFAULT,
         dtsiSlug: dtsiPerson.slug,
         phoneNumber: phoneNumberToCall,
-        address: addressSchema,
       }
       setCallingState('loading-call-complete')
 
       const result = await triggerServerActionForForm(
         {
-          formName: 'User Action Form Call Congressperson',
-          onError: toastGenericError,
           analyticsProps: {
             ...convertAddressToAnalyticsProperties(data.address),
             'Campaign Name': data.campaignName,
-            'User Action Type': UserActionType.CALL,
             'DTSI Slug': data.dtsiSlug,
+            'User Action Type': UserActionType.CALL,
           },
+          formName: 'User Action Form Call Congressperson',
+          onError: toastGenericError,
         },
         () =>
           actionCreateUserActionCallCongressperson(data).then(actionResult => {

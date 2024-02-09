@@ -16,8 +16,8 @@ export function UserActionFormNFTMintDialog({
   defaultOpen?: boolean
 }) {
   const dialogProps = useDialog({
-    initialOpen: defaultOpen,
     analytics: 'User Action Form NFT Mint',
+    initialOpen: defaultOpen,
   })
   return (
     <Dialog {...dialogProps}>

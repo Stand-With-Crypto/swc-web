@@ -19,8 +19,8 @@ export function mockUserCryptoAddress(): UserCryptoAddress {
   return {
     ...mockCommonDatetimes(),
     ...mockCreateUserCryptoAddressInput(),
-    id: fakerFields.id(),
     embeddedWalletUserEmailAddressId: null,
+    id: fakerFields.id(),
     userId: fakerFields.id(),
   }
 }

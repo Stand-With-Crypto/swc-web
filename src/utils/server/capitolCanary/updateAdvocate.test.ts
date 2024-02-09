@@ -23,27 +23,27 @@ it('formats the "update capitol canary advocate" request correctly', () => {
 
   const payload: UpsertAdvocateInCapitolCanaryPayloadRequirements = {
     campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_MEMBERSHIP),
+    metadata: {
+      p2aSource: 'source',
+      tags: ['tag1', 'tag2'],
+      utmCampaign: 'utmCampaign',
+      utmContent: 'utmContent',
+      utmMedium: 'utmMedium',
+      utmSource: 'utmSource',
+      utmTerm: 'utmTerm',
+    },
+    opts: {
+      isEmailOptin: true,
+      isEmailOptout: false,
+      isSmsOptin: true,
+      isSmsOptout: false,
+      shouldSendSmsOptinConfirmation: false,
+    },
     user: {
       ...mockedUser,
       address: mockedAddress,
     },
     userEmailAddress: mockedEmailAddress,
-    opts: {
-      isSmsOptin: true,
-      shouldSendSmsOptinConfirmation: false,
-      isSmsOptout: false,
-      isEmailOptin: true,
-      isEmailOptout: false,
-    },
-    metadata: {
-      p2aSource: 'source',
-      utmSource: 'utmSource',
-      utmMedium: 'utmMedium',
-      utmCampaign: 'utmCampaign',
-      utmTerm: 'utmTerm',
-      utmContent: 'utmContent',
-      tags: ['tag1', 'tag2'],
-    },
   }
 
   const formattedRequest = formatCapitolCanaryAdvocateUpdateRequest(payload)

@@ -3,14 +3,14 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { PageTitle } from '@/components/ui/pageTitleText'
 
 const meta = {
-  title: 'UI/PageTitle',
+  args: {
+    children: 'Page Title Size',
+  },
   component: PageTitle,
   parameters: {
     layout: 'centered',
   },
-  args: {
-    children: 'Page Title Size',
-  },
+  title: 'UI/PageTitle',
 } satisfies Meta<typeof PageTitle>
 
 export default meta

@@ -7,11 +7,11 @@ const LOG_LEVEL = (process.env.NEXT_PUBLIC_LOG_LEVEL || 'info') as LogLevel
 const LOG_LEVEL_IMPORTANCE_ORDER: readonly LogLevel[] = ['debug', 'info', 'warn', 'error', 'custom']
 
 const consoleToSentryLevelMap: Record<LogLevel, Sentry.SeverityLevel> = {
+  custom: 'log',
   debug: 'debug',
+  error: 'error',
   info: 'info',
   warn: 'warning',
-  error: 'error',
-  custom: 'log',
 }
 
 let envLogLevelUsed: LogLevel[] | null = null
@@ -24,9 +24,9 @@ const wrappedLogger = (
     if (NEXT_PUBLIC_ENVIRONMENT === 'production' && isBrowser) {
       Sentry.addBreadcrumb({
         category: prefix,
+        data: { data: optionalParams },
         level: consoleToSentryLevelMap[level],
         message,
-        data: { data: optionalParams },
       })
       return
     }
@@ -50,9 +50,9 @@ export const customLogger = (
   if (NEXT_PUBLIC_ENVIRONMENT === 'production' && isBrowser) {
     Sentry.addBreadcrumb({
       category: message.category,
+      data: { data: optionalParams },
       level: 'info',
       message: message.originalMessage,
-      data: { data: optionalParams },
     })
     return
   }
@@ -64,17 +64,17 @@ export const customLogger = (
   return console.log(message.formattedMessage, ...formatting, ...optionalParams)
 }
 export const logger = {
-  error: wrappedLogger('error', console.error),
-  warn: wrappedLogger('warn', console.warn),
-  info: wrappedLogger('info', console.info),
   debug: wrappedLogger('debug', console.debug),
+  error: wrappedLogger('error', console.error),
+  info: wrappedLogger('info', console.info),
+  warn: wrappedLogger('warn', console.warn),
 }
 
 export function getLogger(namespace: string) {
   return {
-    error: wrappedLogger('error', console.error, namespace),
-    warn: wrappedLogger('warn', console.warn, namespace),
-    info: wrappedLogger('info', console.info, namespace),
     debug: wrappedLogger('debug', console.debug, namespace),
+    error: wrappedLogger('error', console.error, namespace),
+    info: wrappedLogger('info', console.info, namespace),
+    warn: wrappedLogger('warn', console.warn, namespace),
   }
 }

@@ -8,9 +8,9 @@ export type ClientNFTMint = ClientModel<
 export const getClientNFTMint = (record: NFTMint): ClientNFTMint => {
   const { id, costAtMint, costAtMintCurrencyCode, costAtMintUsd } = record
   return getClientModel({
-    id,
     costAtMint: costAtMint.toNumber(),
-    costAtMintUsd: costAtMintUsd.toNumber(),
     costAtMintCurrencyCode,
+    costAtMintUsd: costAtMintUsd.toNumber(),
+    id,
   })
 }

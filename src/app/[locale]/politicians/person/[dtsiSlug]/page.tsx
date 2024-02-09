@@ -56,8 +56,8 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   }
   const title = `${dtsiPersonFullName(person)} Crypto Policy Stance`
   return generateMetadataDetails({
-    title,
     description: getDescription(person),
+    title,
   })
 }
 export async function generateStaticParams() {
@@ -76,5 +76,5 @@ export default async function PoliticianDetails({ params }: Props) {
   if (!person) {
     notFound()
   }
-  return <PagePoliticianDetails {...{ person, locale }} />
+  return <PagePoliticianDetails {...{ locale, person }} />
 }

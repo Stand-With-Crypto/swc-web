@@ -27,24 +27,24 @@ async function smokeTestEmailRepWithInngest() {
 
   const payload: EmailRepViaCapitolCanaryPayloadRequirements = {
     campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_EMAIL_REPRESENTATIVE),
-    user: {
-      ...mockedUser,
-      address: mockedAddress,
-    },
-    userEmailAddress: mockedEmailAddress,
+    emailMessage: 'This is a test email message.',
+    emailSubject: 'This is a test email subject.',
     metadata: {
       tags: ['Smoke Test User'],
     },
     opts: {
       isEmailOptin: true,
     },
-    emailSubject: 'This is a test email subject.',
-    emailMessage: 'This is a test email message.',
+    user: {
+      ...mockedUser,
+      address: mockedAddress,
+    },
+    userEmailAddress: mockedEmailAddress,
   }
 
   await inngest.send({
-    name: CAPITOL_CANARY_EMAIL_REP_INNGEST_EVENT_NAME,
     data: payload,
+    name: CAPITOL_CANARY_EMAIL_REP_INNGEST_EVENT_NAME,
   })
 }
 

@@ -57,8 +57,8 @@ export const UserAvatar: React.FC<
           }`}
           src={primaryUserCryptoAddress.ensAvatarUrl}
           style={{
-            width: size,
             height: size,
+            width: size,
           }}
         />
       </Container>
@@ -104,8 +104,8 @@ export const SensitiveDataUserAvatar: React.FC<
           }`}
           src={primaryUserCryptoAddress.ensAvatarUrl}
           style={{
-            width: size,
             height: size,
+            width: size,
           }}
         />
       </Container>

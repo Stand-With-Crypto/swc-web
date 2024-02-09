@@ -32,11 +32,11 @@ export const UserActionTweetLink = React.forwardRef<
         onClick={() => {
           triggerServerActionForForm(
             {
-              formName: 'User Action Tweet',
               analyticsProps: {
                 ...eventProperties,
                 'User Action Type': UserActionType.TWEET,
               },
+              formName: 'User Action Tweet',
             },
             () => actionCreateUserActionTweet(),
           )

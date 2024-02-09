@@ -34,32 +34,32 @@ export async function claimNFT(userAction: UserAction, userCryptoAddress: UserCr
   }
 
   const action = await prismaClient.userAction.update({
-    where: { id: userAction.id },
     data: {
       nftMint: {
         create: {
-          nftSlug: nftSlug,
-          status: NFTMintStatus.REQUESTED,
-          costAtMint: 0.0,
           contractAddress: NFT_CONTRACT_ADDRESS[nftSlug],
+          costAtMint: 0.0,
           costAtMintCurrencyCode: NFTCurrency.ETH,
           costAtMintUsd: new Decimal(0),
+          nftSlug: nftSlug,
+          status: NFTMintStatus.REQUESTED,
         },
       },
     },
     include: {
       nftMint: true,
     },
+    where: { id: userAction.id },
   })
 
   const payload: AirdropPayload = {
+    contractAddress: NFT_CONTRACT_ADDRESS[nftSlug],
     nftMintId: action.nftMintId!,
     recipientWalletAddress: userCryptoAddress.cryptoAddress,
-    contractAddress: NFT_CONTRACT_ADDRESS[nftSlug],
   }
 
   return inngest.send({
-    name: AIRDROP_NFT_INNGEST_EVENT_NAME,
     data: payload,
+    name: AIRDROP_NFT_INNGEST_EVENT_NAME,
   })
 }

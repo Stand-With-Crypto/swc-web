@@ -73,8 +73,8 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
   if (existingUser) {
     trackUserLogin({
       existingUser,
-      localUser,
       isNewlyCreatedUser: false,
+      localUser,
     })
     return { userId: existingUser.id }
   }
@@ -118,13 +118,13 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
   we should not associate those wallets with the same user. We could, but it would be confusing for the user and it's unclear whether that's their intent
   */
   if (existingUser && existingUser.primaryUserCryptoAddressId) {
-    getServerAnalytics({ userId: existingUser.id, localUser }).track('Separate User Created', {
-      Reason: 'Different Wallet Address',
+    getServerAnalytics({ localUser, userId: existingUser.id }).track('Separate User Created', {
       'New Crypto Wallet Address': address,
+      Reason: 'Different Wallet Address',
     })
     Sentry.captureMessage(
       'User found via verified email/session id unassociated from this crypto address',
-      { extra: { embeddedWalletEmailAddress, address, userSessionId, existingUser } },
+      { extra: { address, embeddedWalletEmailAddress, existingUser, userSessionId } },
     )
     existingUser = null
   }
@@ -135,10 +135,10 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
         ? { connect: { id: existingUser.id } }
         : {
             create: {
-              informationVisibility: UserInformationVisibility.ANONYMOUS,
               hasOptedInToEmails: true,
               hasOptedInToMembership: false,
               hasOptedInToSms: false,
+              informationVisibility: UserInformationVisibility.ANONYMOUS,
               ...mapLocalUserToUserDatabaseFields(localUser),
             },
           },
@@ -174,18 +174,18 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
     ) {
       const payload: UpsertAdvocateInCapitolCanaryPayloadRequirements = {
         campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
+        opts: {
+          isEmailOptin: true,
+        },
         user: {
           ...userCryptoAddress.user,
           address: existingUser?.address || null,
         },
         userEmailAddress: email,
-        opts: {
-          isEmailOptin: true,
-        },
       }
       await inngest.send({
-        name: CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME,
         data: payload,
+        name: CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME,
       })
       logWithAddress(`metadata added to capital canary`)
     }
@@ -197,20 +197,20 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
    */
   const existingOptInUserAction = await prismaClient.userAction.findFirst({
     where: {
-      userId: userCryptoAddress.userId,
-      campaignName: UserActionOptInCampaignName.DEFAULT,
       actionType: UserActionType.OPT_IN,
+      campaignName: UserActionOptInCampaignName.DEFAULT,
       userActionOptIn: {
         optInType: UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER,
       },
+      userId: userCryptoAddress.userId,
     },
   })
   if (!existingOptInUserAction) {
     const userAction = await prismaClient.userAction.create({
       data: {
-        user: { connect: { id: userCryptoAddress.userId } },
         actionType: UserActionType.OPT_IN,
         campaignName: UserActionOptInCampaignName.DEFAULT,
+        user: { connect: { id: userCryptoAddress.userId } },
         userActionOptIn: {
           create: {
             optInType: UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER,
@@ -224,11 +224,11 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
   }
 
   await prismaClient.user.update({
-    where: { id: userCryptoAddress.userId },
     data: {
       primaryUserCryptoAddressId: userCryptoAddress.id,
       ...(primaryUserEmailAddressId ? { primaryUserEmailAddressId } : {}),
     },
+    where: { id: userCryptoAddress.userId },
   })
 
   if (existingUser !== null) {
@@ -237,8 +237,8 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
 
   trackUserLogin({
     existingUser: userCryptoAddress.user,
-    localUser,
     isNewlyCreatedUser: !existingUser,
+    localUser,
   })
 
   return { userId: userCryptoAddress.user.id }
@@ -256,15 +256,15 @@ function trackUserLogin({
   props?: AnalyticProperties
 }) {
   if (isNewlyCreatedUser && localUser) {
-    getServerPeopleAnalytics({ userId: existingUser.id, localUser }).setOnce(
+    getServerPeopleAnalytics({ localUser, userId: existingUser.id }).setOnce(
       mapPersistedLocalUserToAnalyticsProperties(localUser.persisted),
     )
   }
-  getServerAnalytics({ userId: existingUser.id, localUser }).track('User Logged In', {
+  getServerAnalytics({ localUser, userId: existingUser.id }).track('User Logged In', {
     'Is First Time': isNewlyCreatedUser,
     ...props,
   })
-  getServerPeopleAnalytics({ userId: existingUser.id, localUser }).set({
+  getServerPeopleAnalytics({ localUser, userId: existingUser.id }).set({
     'Datetime of Last Login': new Date(),
   })
 }
@@ -283,19 +283,19 @@ async function upsertEmbeddedWalletEmailAddress(
   if (!email) {
     email = await prismaClient.userEmailAddress.create({
       data: {
+        emailAddress: embeddedWalletEmailAddress.email.toLowerCase(),
         isVerified: true,
         source: UserEmailAddressSource.THIRDWEB_EMBEDDED_AUTH,
-        emailAddress: embeddedWalletEmailAddress.email.toLowerCase(),
         userId: userCryptoAddress.userId,
       },
     })
     wasCreated = true
   }
   await prismaClient.userCryptoAddress.update({
-    where: { id: userCryptoAddress.id },
     data: {
       embeddedWalletUserEmailAddressId: email.id,
     },
+    where: { id: userCryptoAddress.id },
   })
   return { email, wasCreated }
 }

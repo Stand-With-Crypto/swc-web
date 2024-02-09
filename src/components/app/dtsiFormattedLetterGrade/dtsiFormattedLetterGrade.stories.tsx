@@ -3,11 +3,11 @@ import { DTSILetterGrade } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import type { Meta } from '@storybook/react'
 
 const meta = {
-  title: 'App/DTSIFormattedLetterGrade',
   component: DTSIFormattedLetterGrade,
   parameters: {
     layout: 'centered',
   },
+  title: 'App/DTSIFormattedLetterGrade',
 } satisfies Meta<typeof DTSIFormattedLetterGrade>
 
 export default meta

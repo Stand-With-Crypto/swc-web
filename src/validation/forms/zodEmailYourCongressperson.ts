@@ -3,11 +3,11 @@ import { string, object } from 'zod'
 
 // you don't want to use z. syntax in client-side components because it messes with tree shaking
 export const zodEmailYourCongressperson = object({
-  zipCode: string().min(5, 'Please enter your zip code').max(5, 'Please enter your zip code'),
+  address: string().min(1, 'Please enter your address').max(300, 'Please enter your address'),
   email: string().email('Please enter a valid email address'),
+  message: string().min(1, 'Please enter a message').max(1000, 'Please enter a message'),
   phoneNumber: string()
     .min(10, 'Please enter a valid phone number')
     .max(10, 'Please enter a valid phone number'),
-  address: string().min(1, 'Please enter your address').max(300, 'Please enter your address'),
-  message: string().min(1, 'Please enter a message').max(1000, 'Please enter a message'),
+  zipCode: string().min(5, 'Please enter your zip code').max(5, 'Please enter your zip code'),
 }).merge(zodFirstAndLastNames)

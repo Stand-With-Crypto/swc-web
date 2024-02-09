@@ -9,9 +9,9 @@ export const dynamic = 'force-dynamic'
 async function apiResponseForUserFullProfileInfo() {
   const { user } = await getMaybeUserAndMethodOfMatch({
     include: {
+      address: true,
       primaryUserCryptoAddress: true,
       primaryUserEmailAddress: true,
-      address: true,
     },
   })
 

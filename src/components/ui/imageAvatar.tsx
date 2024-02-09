@@ -8,7 +8,7 @@ export type ImageAvatarProps = { size: number; className?: string } & Omit<
 
 export const ImageAvatar: React.FC<ImageAvatarProps> = ({ size, className, ...props }) => {
   return (
-    <span className="relative inline-block" style={{ width: size, height: size }}>
+    <span className="relative inline-block" style={{ height: size, width: size }}>
       <NextImage
         className={cn('inline-block rounded-full', className)}
         fill

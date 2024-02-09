@@ -30,7 +30,7 @@ export const UserActionRowCTAButton = React.forwardRef<
       switch (state) {
         case 'unknown':
           // we add a div to take up this space so if the answer to complete/incomplete is unknown, the UI doesn't jump once we fetch that data
-          return <div style={{ width: 24, height: 24 }} />
+          return <div style={{ height: 24, width: 24 }} />
         case 'complete':
           return (
             <NextImage

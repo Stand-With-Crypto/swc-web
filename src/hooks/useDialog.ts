@@ -14,5 +14,5 @@ interface UseDialogReturn {
 
 export function useDialog({ initialOpen = false, analytics }: UseDialogOptions): UseDialogReturn {
   const [open, onOpenChange] = useState(initialOpen)
-  return { open, onOpenChange, analytics }
+  return { analytics, onOpenChange, open }
 }

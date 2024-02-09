@@ -60,10 +60,10 @@ async function _actionConfirmUserMergeAlert(data: z.infer<typeof schema>) {
   // LATER-TASK add analytics
 
   userMergeAlert = await prismaClient.userMergeAlert.update({
-    where: { id: userMergeAlertId },
     data: {
       [fieldToUpdate]: true,
     },
+    where: { id: userMergeAlertId },
   })
 
   if (!userMergeAlert.hasBeenConfirmedByUserA || !userMergeAlert.hasBeenConfirmedByUserB) {
@@ -78,9 +78,9 @@ async function _actionConfirmUserMergeAlert(data: z.infer<typeof schema>) {
   logger.info('Both users have confirmed merge, starting merge process')
   // as we add additional foreign keys to users, we'll want to make sure we account for them in this merge logic
   await mergeUsers({
-    userToKeepId: user.id,
-    userToDeleteId,
     persist: true,
+    userToDeleteId,
+    userToKeepId: user.id,
   })
 
   return { status: 'complete' as const }

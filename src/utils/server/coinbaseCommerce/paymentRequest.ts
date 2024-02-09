@@ -77,18 +77,18 @@ export interface CoinbaseCommercePayment {
 
 // We expect the incoming Coinbase Commerce payment request to at least have these fields.
 export const zodCoinbaseCommercePayment = z.object({
-  id: z.string(),
   event: z.object({
-    type: z.string(),
     data: z.object({
       expires_at: z.string(),
+      metadata: z.record(z.string(), z.string()),
       pricing: z.object({
         local: z.object({
           amount: z.string(),
           currency: z.string(),
         }),
       }),
-      metadata: z.record(z.string(), z.string()),
     }),
+    type: z.string(),
   }),
+  id: z.string(),
 })

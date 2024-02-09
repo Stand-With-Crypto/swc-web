@@ -19,9 +19,9 @@ export function SumDonationsCounter(props: SumDonationsCounterProps) {
   const { data } = useLiveSumDonations(props)
   const formatted = useMemo(() => {
     return new Intl.NumberFormat(props.locale, {
-      style: 'currency',
       currency: SupportedFiatCurrencyCodes.USD,
       maximumFractionDigits: 0,
+      style: 'currency',
     }).format(data.amountUsd)
   }, [props.locale, data.amountUsd])
   return <AnimatedNumericOdometer size={60} value={formatted} />
@@ -35,8 +35,8 @@ function useLiveSumDonations({ locale, initialData }: SumDonationsCounterProps) 
         .then(res => res.json())
         .then(data => data as SumDonations),
     {
-      refreshInterval: 5 * 1000,
       fallbackData: { amountUsd: roundDownNumberToAnimateIn(initialData.amountUsd, 10000) },
+      refreshInterval: 5 * 1000,
     },
   )
 }

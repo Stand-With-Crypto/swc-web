@@ -103,8 +103,8 @@ export const getDTSIPersonRoleDomain = <T extends PartialGroup, R extends Partia
       return null
     case DTSI_PersonRoleGroupCategory.CONGRESS: {
       return {
-        congress: role.group,
         chamber: getChamberFromRoleCategory(role.roleCategory),
+        congress: role.group,
       }
     }
     case DTSI_PersonRoleGroupCategory.CONGRESS_JOINT_SUBCOMMITTEE:
@@ -114,11 +114,11 @@ export const getDTSIPersonRoleDomain = <T extends PartialGroup, R extends Partia
       const committee = subcommittee.parentGroup!
       const congress = committee!.parentGroup!
       return {
-        subcommittee,
+        chamber: getCommitteeChamberFromGroupCategory(role.group.category),
         committee,
         congress,
         rank: getRankFromRoleCategory(role.roleCategory),
-        chamber: getCommitteeChamberFromGroupCategory(role.group.category),
+        subcommittee,
       }
     }
     case DTSI_PersonRoleGroupCategory.CONGRESS_JOINT_COMMITTEE:
@@ -127,10 +127,10 @@ export const getDTSIPersonRoleDomain = <T extends PartialGroup, R extends Partia
       const committee = role.group
       const congress = committee!.parentGroup!
       return {
+        chamber: getCommitteeChamberFromGroupCategory(role.group.category),
         committee,
         congress,
         rank: getRankFromRoleCategory(role.roleCategory),
-        chamber: getCommitteeChamberFromGroupCategory(role.group.category),
       }
     }
   }
@@ -174,13 +174,13 @@ export const groupDTSIPersonRolesByDomain = <T extends PartialGroup, R extends P
   roles.forEach(role => {
     const domain = getDTSIPersonRoleDomain(role)
     if (!domain) {
-      return rolesWithoutDomain.push({ role, domain })
+      return rolesWithoutDomain.push({ domain, role })
     }
     if ('committee' in domain) {
-      firstRoundToBackfill.push({ role, domain })
+      firstRoundToBackfill.push({ domain, role })
     } else {
       const { congress } = domain
-      withNestedDomains.push({ role, domain: { congress, committees: [] } })
+      withNestedDomains.push({ domain: { committees: [], congress }, role })
     }
   })
 
@@ -191,16 +191,16 @@ export const groupDTSIPersonRolesByDomain = <T extends PartialGroup, R extends P
   >[] = []
   firstRoundToBackfill.forEach(({ role, domain }) => {
     if ('subcommittee' in domain!) {
-      return finalRoundToBackfill.push({ role, domain })
+      return finalRoundToBackfill.push({ domain, role })
     }
     const indexOfCongressionalRole = withNestedDomains.findIndex(
       x => x.domain.congress.id === domain.congress.id,
     )
     const { rank, committee, chamber } = domain
     withNestedDomains[indexOfCongressionalRole].domain.committees.push({
-      rank,
-      committee,
       chamber,
+      committee,
+      rank,
       subcommittees: [],
     })
   })

@@ -41,8 +41,8 @@ const modifyEntitiesToAccountForEmojisOffset = (
     const relevantEmojis = emojiIndexes.filter(index => index < entity.start)
     return {
       ...entity,
-      start: entity.start + relevantEmojis.length,
       end: entity.end + relevantEmojis.length,
+      start: entity.start + relevantEmojis.length,
     }
   })
 }
@@ -64,15 +64,15 @@ function addEntities(
 
       if (item.start < entity.start) {
         items.unshift({
-          start: item.start,
           end: entity.start,
+          start: item.start,
           type: 'text',
         })
       }
       if (item.end > entity.end) {
         items.push({
-          start: entity.end,
           end: item.end,
+          start: entity.end,
           type: 'text',
         })
       }
@@ -84,7 +84,7 @@ function addEntities(
 }
 
 function getEntities(tweet: DTSIStanceDetailsTweetProp['tweet']) {
-  const result: TweetEntityOptionsWithType[] = [{ start: 0, end: tweet.text.length, type: 'text' }]
+  const result: TweetEntityOptionsWithType[] = [{ end: tweet.text.length, start: 0, type: 'text' }]
 
   const emojiIndexes = getEmojiIndexes(tweet)
   const entities = tweet.entities as FormattedUserTweet['entities']
@@ -114,7 +114,7 @@ const TweetLink: React.FC<React.ComponentPropsWithoutRef<typeof ExternalLink>> =
   <ExternalLink
     className="font-semibold text-blue-400"
     rel="nofollow"
-    style={{ wordWrap: 'break-word', overflowWrap: 'anywhere' }}
+    style={{ overflowWrap: 'anywhere', wordWrap: 'break-word' }}
     {...props}
   />
 )
@@ -133,12 +133,12 @@ const TweetBody: React.FC<{ tweet: DTSIStanceDetailsTweetProp['tweet'] }> = ({ t
               <span
                 dangerouslySetInnerHTML={{
                   __html: sanitizeHtml(twemoji.parse(text), {
-                    allowedTags: ['b', 'i', 'em', 'strong', 'img'],
-                    allowedSchemes: ['https'],
                     allowedAttributes: {
                       // these are the tags that twemoji adds to the inline emoji images
                       img: ['src', 'alt', 'class', 'draggable'],
                     },
+                    allowedSchemes: ['https'],
+                    allowedTags: ['b', 'i', 'em', 'strong', 'img'],
                   }),
                 }}
                 key={i}

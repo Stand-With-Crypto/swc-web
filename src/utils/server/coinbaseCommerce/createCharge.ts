@@ -78,27 +78,27 @@ interface CreateChargeRequest {
 
 export async function createCharge({ sessionId, userId }: { sessionId: string; userId: string }) {
   const payload: CreateChargeRequest = {
-    pricing_type: 'no_price',
-    metadata: { sessionId, userId },
     cancel_url: `https://www.standwithcrypto.org?sessionId=${sessionId}`,
+    metadata: { sessionId, userId },
+    pricing_type: 'no_price',
   }
 
   try {
     const httpResp = await fetchReq(COINBASE_COMMERCE_CREATE_CHARGE_URL, {
-      method: 'POST',
-      mode: 'cors' as RequestMode,
+      body: JSON.stringify(payload),
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
         'X-CC-Api-Key': COINBASE_COMMERCE_API_KEY,
       },
-      body: JSON.stringify(payload),
+      method: 'POST',
+      mode: 'cors' as RequestMode,
     })
     return (await httpResp.json()) as CreateChargeResponse
   } catch (error) {
     Sentry.captureException(error, {
-      level: 'error',
       extra: { sessionId },
+      level: 'error',
     })
     throw error
   }

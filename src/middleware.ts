@@ -15,17 +15,17 @@ export function middleware(request: NextRequest) {
     request.headers.set('accept-language', 'en-US,en;q=0.9')
   }
   const i18nParsedResponse = i18nRouter(request, {
-    locales: ORDERED_SUPPORTED_LOCALES as string[],
     defaultLocale: DEFAULT_LOCALE,
+    locales: ORDERED_SUPPORTED_LOCALES as string[],
   })
   const urlSessionId = request.nextUrl.searchParams.get('sessionId')
   const existingSessionId = request.cookies.get(USER_SESSION_ID_COOKIE_NAME)?.value
   if (urlSessionId && urlSessionId !== existingSessionId) {
     logger.info(`session id being set via url: ${urlSessionId}`)
     i18nParsedResponse.cookies.set({
+      httpOnly: false,
       name: USER_SESSION_ID_COOKIE_NAME,
       value: urlSessionId,
-      httpOnly: false,
     })
   }
   if (!existingSessionId) {
@@ -34,9 +34,9 @@ export function middleware(request: NextRequest) {
       logger.info(`setting initial session id: ${sessionId}`)
     }
     i18nParsedResponse.cookies.set({
+      httpOnly: false,
       name: USER_SESSION_ID_COOKIE_NAME,
       value: sessionId,
-      httpOnly: false,
     })
   }
   return i18nParsedResponse

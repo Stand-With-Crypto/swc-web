@@ -30,9 +30,9 @@ export async function engineGetMintStatus(queryId: string) {
   } catch (e) {
     logger.error('error airdropping NFT:' + e)
     Sentry.captureException(e, {
+      extra: { queryId },
       level: 'error',
       tags: { domain: 'engineGetMintStatus' },
-      extra: { queryId },
     })
     throw e
   }

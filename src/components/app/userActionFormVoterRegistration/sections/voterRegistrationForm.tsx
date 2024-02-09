@@ -18,17 +18,17 @@ const STATES = Object.values(US_STATE_CODE_TO_DISPLAY_NAME_MAP)
 type State = (typeof STATES)[number]
 
 const COPY = {
-  register: {
-    title: 'Register to vote and get a free "I Registered" NFT',
-    subtitle: 'Register now to be ready to vote in your state this year.',
-    step2: 'Go and register to vote',
-    step2Cta: 'Register',
-  },
   checkRegistration: {
-    title: 'Check your registration and get a free "I Registered" NFT',
-    subtitle: 'Check your voter registration in your state this year. ',
     step2: 'Check voter registration',
     step2Cta: 'Check',
+    subtitle: 'Check your voter registration in your state this year. ',
+    title: 'Check your registration and get a free "I Registered" NFT',
+  },
+  register: {
+    step2: 'Go and register to vote',
+    step2Cta: 'Register',
+    subtitle: 'Register now to be ready to vote in your state this year.',
+    title: 'Register to vote and get a free "I Registered" NFT',
   },
 } as const
 

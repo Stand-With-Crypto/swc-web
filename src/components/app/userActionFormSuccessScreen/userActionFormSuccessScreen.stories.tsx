@@ -37,7 +37,6 @@ function UserActionFormSuccessScreenStory(props: Props) {
 }
 
 const meta = {
-  title: 'App/UserActionFormSuccessScreen',
   component: UserActionFormSuccessScreenStory,
   parameters: {
     layout: 'centered',
@@ -45,6 +44,7 @@ const meta = {
       appDirectory: true,
     },
   },
+  title: 'App/UserActionFormSuccessScreen',
   // decorators: [NextRouterDecorator],
 } satisfies Meta<typeof UserActionFormSuccessScreenStory>
 
@@ -54,19 +54,19 @@ type Story = StoryObj<typeof meta>
 
 const getDefault = () => {
   return {
-    onClose: () => {},
     data: {
       performedUserActionTypes: [],
       user: {
         ...getSensitiveDataClientUser({
           ...mockUser(),
+          hasOptedInToMembership: true,
           primaryUserCryptoAddress: mockUserCryptoAddress(),
           primaryUserEmailAddress: mockUserEmailAddress(),
-          hasOptedInToMembership: true,
         }),
         address: getClientAddress(mockAddress()),
       },
     },
+    onClose: () => {},
   } satisfies Props
 }
 

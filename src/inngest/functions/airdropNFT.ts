@@ -20,8 +20,8 @@ const AIRDROP_NFT_RETRY = 2
 export const airdropNFTWithInngest = inngest.createFunction(
   {
     id: AIRDROP_NFT_INNGEST_FUNCTION_ID,
-    retries: AIRDROP_NFT_RETRY,
     onFailure: onFailureAirdropNFT,
+    retries: AIRDROP_NFT_RETRY,
   },
   { event: AIRDROP_NFT_INNGEST_EVENT_NAME },
   async ({ event, step }) => {

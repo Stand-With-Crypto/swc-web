@@ -17,34 +17,34 @@ export type ServerLocalUser = {
 }
 
 const zodServerLocalUser = object({
-  persisted: object({
-    initialSearchParams: record(string(), string()),
-    initialReferer: string().optional(),
-    datetimeFirstSeen: string(),
-  }),
   currentSession: object({
     datetimeOnLoad: string(),
     refererOnLoad: string().optional(),
     searchParamsOnLoad: record(string(), string()),
+  }),
+  persisted: object({
+    datetimeFirstSeen: string(),
+    initialReferer: string().optional(),
+    initialSearchParams: record(string(), string()),
   }),
 })
 
 // needed to reuse logic from our analytics library when we're interacting with third party webhooks/api endpoints that wont have the site headers
 export function getLocalUserFromUser(user: User): ServerLocalUser {
   return {
-    persisted: {
-      initialSearchParams: {
-        utm_source: user.acquisitionSource,
-        utm_medium: user.acquisitionMedium,
-        utm_campaign: user.acquisitionCampaign,
-      },
-      initialReferer: '',
-      datetimeFirstSeen: user.datetimeCreated.toISOString(),
-    },
     currentSession: {
       datetimeOnLoad: user.datetimeCreated.toISOString(),
       refererOnLoad: '',
       searchParamsOnLoad: {},
+    },
+    persisted: {
+      datetimeFirstSeen: user.datetimeCreated.toISOString(),
+      initialReferer: '',
+      initialSearchParams: {
+        utm_campaign: user.acquisitionCampaign,
+        utm_medium: user.acquisitionMedium,
+        utm_source: user.acquisitionSource,
+      },
     },
   }
 }
@@ -56,18 +56,18 @@ export function mapLocalUserToUserDatabaseFields(
   'acquisitionReferer' | 'acquisitionSource' | 'acquisitionMedium' | 'acquisitionCampaign'
 > {
   return {
-    acquisitionReferer: localUser?.persisted?.initialReferer || '',
-    acquisitionSource:
-      localUser?.persisted?.initialSearchParams.utm_source ||
-      localUser?.currentSession.searchParamsOnLoad.utm_source ||
+    acquisitionCampaign:
+      localUser?.persisted?.initialSearchParams.utm_campaign ||
+      localUser?.currentSession.searchParamsOnLoad.utm_campaign ||
       '',
     acquisitionMedium:
       localUser?.persisted?.initialSearchParams.utm_medium ||
       localUser?.currentSession.searchParamsOnLoad.utm_medium ||
       '',
-    acquisitionCampaign:
-      localUser?.persisted?.initialSearchParams.utm_campaign ||
-      localUser?.currentSession.searchParamsOnLoad.utm_campaign ||
+    acquisitionReferer: localUser?.persisted?.initialReferer || '',
+    acquisitionSource:
+      localUser?.persisted?.initialSearchParams.utm_source ||
+      localUser?.currentSession.searchParamsOnLoad.utm_source ||
       '',
   }
 }
@@ -88,7 +88,7 @@ function parseFromCookieStrings({
   }
   if (!currentSessionStr || !persistedStr) {
     Sentry.captureMessage('serverLocalUser: cookie missing currentSession or persisted', {
-      extra: { currentSessionStr, persistedStr, cookieConsentStr },
+      extra: { cookieConsentStr, currentSessionStr, persistedStr },
       tags: { source },
     })
     return null
@@ -97,18 +97,18 @@ function parseFromCookieStrings({
     const persisted = JSON.parse(persistedStr)
     const currentSession = JSON.parse(currentSessionStr)
     try {
-      const localUser: ServerLocalUser = zodServerLocalUser.parse({ persisted, currentSession })
+      const localUser: ServerLocalUser = zodServerLocalUser.parse({ currentSession, persisted })
       return localUser
     } catch (e) {
       Sentry.captureMessage('serverLocalUser: JSON failed to validate', {
-        extra: { persistedStr, currentSessionStr },
+        extra: { currentSessionStr, persistedStr },
         tags: { source },
       })
       return null
     }
   } catch (e) {
     Sentry.captureMessage('serverLocalUser: cookie contained invalid JSON', {
-      extra: { persistedStr, currentSessionStr },
+      extra: { currentSessionStr, persistedStr },
       tags: { source },
     })
     return null
@@ -121,9 +121,9 @@ export function parseLocalUserFromCookies() {
   const currentSessionStr = cookieObj.get(LOCAL_USER_CURRENT_SESSION_KEY)?.value
   const cookieConsentStr = cookieObj.get(COOKIE_CONSENT_COOKIE_NAME)?.value
   return parseFromCookieStrings({
-    persistedStr,
-    currentSessionStr,
     cookieConsentStr,
+    currentSessionStr,
+    persistedStr,
     source: 'app-router',
   })
 }
@@ -133,9 +133,9 @@ export function parseLocalUserFromCookiesForPageRouter(req: NextApiRequest) {
   const currentSessionStr = req.cookies[LOCAL_USER_CURRENT_SESSION_KEY]
   const cookieConsentStr = req.cookies[COOKIE_CONSENT_COOKIE_NAME]
   return parseFromCookieStrings({
-    persistedStr,
-    currentSessionStr,
     cookieConsentStr,
+    currentSessionStr,
+    persistedStr,
     source: 'page-router',
   })
 }

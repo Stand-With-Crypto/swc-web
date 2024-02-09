@@ -29,8 +29,8 @@ export function ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: Suppo
   const [address, _setAddress] = useState<GooglePlaceAutocompletePrediction | null>(
     userAddress
       ? {
-          place_id: userAddress.googlePlaceId,
           description: userAddress.formattedDescription,
+          place_id: userAddress.googlePlaceId,
         }
       : null,
   )
@@ -39,8 +39,8 @@ export function ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: Suppo
       setLocalUserPersistedValues({
         recentlyUsedAddress: addr
           ? {
-              googlePlaceId: addr.place_id,
               formattedDescription: addr.description,
+              googlePlaceId: addr.place_id,
             }
           : undefined,
       })
@@ -52,8 +52,8 @@ export function ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: Suppo
   useEffect(() => {
     if (!address && userAddress) {
       _setAddress({
-        place_id: userAddress.googlePlaceId,
         description: userAddress.formattedDescription,
+        place_id: userAddress.googlePlaceId,
       })
     }
   }, [userAddress, address])

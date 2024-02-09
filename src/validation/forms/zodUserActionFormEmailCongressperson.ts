@@ -6,10 +6,10 @@ import { zodFirstAndLastNames } from '@/validation/fields/zodName'
 import { nativeEnum, object, string } from 'zod'
 
 const base = object({
+  campaignName: nativeEnum(UserActionEmailCampaignName),
+  dtsiSlug: zodDTSISlug,
   emailAddress: string().trim().email('Please enter a valid email address').toLowerCase(),
   message: string().min(1, 'Please enter a message').max(1000, 'Please enter a message'),
-  dtsiSlug: zodDTSISlug,
-  campaignName: nativeEnum(UserActionEmailCampaignName),
 }).merge(zodFirstAndLastNames)
 
 export const zodUserActionFormEmailCongresspersonFields = base.extend({

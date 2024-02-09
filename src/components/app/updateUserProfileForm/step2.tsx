@@ -38,10 +38,10 @@ export function UpdateUserInformationVisibilityForm({
 }) {
   const router = useRouter()
   const form = useForm<FormValues>({
-    resolver: zodResolver(zodUpdateUserInformationVisibility),
     defaultValues: {
       informationVisibility: user.informationVisibility,
     },
+    resolver: zodResolver(zodUpdateUserInformationVisibility),
   })
   const options = useMemo(
     () =>
@@ -73,11 +73,11 @@ export function UpdateUserInformationVisibilityForm({
           onSubmit={form.handleSubmit(async values => {
             const result = await triggerServerActionForForm(
               {
-                form,
-                formName: FORM_NAME,
                 analyticsProps: {
                   'Information Visibility': values.informationVisibility,
                 },
+                form,
+                formName: FORM_NAME,
               },
               () => actionUpdateUserInformationVisibility(values),
             )

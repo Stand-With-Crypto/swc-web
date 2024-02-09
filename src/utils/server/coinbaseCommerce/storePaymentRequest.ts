@@ -89,10 +89,10 @@ export async function storePaymentRequest(payment: CoinbaseCommercePayment) {
         user: true,
       },
       where: {
-        emailAddress: payment.event.data.metadata.email,
         asPrimaryUserEmailAddress: {
           NOT: null || undefined,
         },
+        emailAddress: payment.event.data.metadata.email,
         isVerified: true,
       },
     })
@@ -154,29 +154,29 @@ async function createNewUser(payment: CoinbaseCommercePayment) {
 
   // Create new user and also new email if available.
   const newUser = await prismaClient.user.create({
-    include: {
-      primaryUserEmailAddress: true,
-    },
     data: {
-      hasOptedInToEmails: false,
-      hasOptedInToSms: false,
-      hasOptedInToMembership: false,
-      informationVisibility: UserInformationVisibility.ANONYMOUS,
+      acquisitionCampaign: '',
+      acquisitionMedium: '',
       acquisitionReferer: '',
       acquisitionSource: 'coinbase-commerce-webhook',
-      acquisitionMedium: '',
-      acquisitionCampaign: '',
+      hasOptedInToEmails: false,
+      hasOptedInToMembership: false,
+      hasOptedInToSms: false,
+      informationVisibility: UserInformationVisibility.ANONYMOUS,
       ...(payment.event.data.metadata.email
         ? {
             userEmailAddresses: {
               create: {
-                isVerified: false,
                 emailAddress: payment.event.data.metadata.email,
+                isVerified: false,
                 source: 'USER_ENTERED',
               },
             },
           }
         : {}),
+    },
+    include: {
+      primaryUserEmailAddress: true,
     },
   })
   // If there is a user session, then we should update the user ID.
@@ -198,8 +198,8 @@ async function createNewUser(payment: CoinbaseCommercePayment) {
       },
     })
     await prismaClient.userSession.update({
-      where: { id: userSession.id },
       data: { userId: newUser.id },
+      where: { id: userSession.id },
     })
   } else if (payment.event.data.metadata.sessionId) {
     Sentry.captureMessage('creating new session for new user', {
@@ -210,7 +210,7 @@ async function createNewUser(payment: CoinbaseCommercePayment) {
       },
     })
     await prismaClient.userSession.create({
-      data: { userId: newUser.id, id: payment.event.data.metadata.sessionId },
+      data: { id: payment.event.data.metadata.sessionId, userId: newUser.id },
     })
   }
   return newUser
@@ -224,20 +224,20 @@ async function createNewUser(payment: CoinbaseCommercePayment) {
 async function createUserActionDonation(user: User, payment: CoinbaseCommercePayment) {
   return prismaClient.userAction.create({
     data: {
+      actionType: UserActionType.DONATION,
+      campaignName: UserActionDonationCampaignName.DEFAULT,
       user: {
         connect: {
           id: user.id,
         },
       },
-      campaignName: UserActionDonationCampaignName.DEFAULT,
-      actionType: UserActionType.DONATION,
       userActionDonation: {
         create: {
           amount: payment.event.data.pricing.local.amount, // NOTE: `local` is based on the Coinbase Commerce settings. This should be set to USD.
           amountCurrencyCode: payment.event.data.pricing.local.currency,
           amountUsd: payment.event.data.pricing.local.amount,
-          recipient: DonationOrganization.STAND_WITH_CRYPTO,
           coinbaseCommerceDonationId: payment.id,
+          recipient: DonationOrganization.STAND_WITH_CRYPTO,
         },
       },
     },

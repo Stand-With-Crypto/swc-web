@@ -73,8 +73,8 @@ export function Address({
     const { dtsiPerson } = liveCongressPersonData
     if (!dtsiPerson || 'notFoundReason' in dtsiPerson) {
       form.setError('address', {
-        type: 'manual',
         message: formatGetDTSIPeopleFromAddressNotFoundReason(dtsiPerson),
+        type: 'manual',
       })
       return
     }
@@ -149,6 +149,6 @@ function useCongresspersonData({ address }: FindRepresentativeCallFormValues) {
     const civicData = await getGoogleCivicDataFromAddress(address.description)
     const addressSchema = await convertGooglePlaceAutoPredictionToAddressSchema(address)
 
-    return { dtsiPerson, civicData, addressSchema }
+    return { addressSchema, civicData, dtsiPerson }
   })
 }

@@ -12,8 +12,8 @@ export function appendENSHookDataToUser<U extends ClientUser>(
     ...user,
     primaryUserCryptoAddress: user.primaryUserCryptoAddress && {
       ...user.primaryUserCryptoAddress,
-      ensName: ensData?.ens || null,
       ensAvatarUrl: ensData?.avatarUrl || null,
+      ensName: ensData?.ens || null,
     },
   }
 }

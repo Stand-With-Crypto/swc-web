@@ -48,24 +48,24 @@ export const getSensitiveDataClientUser = (
   } = record
 
   return getClientModel({
+    datetimeCreated: datetimeCreated.toISOString(),
+    datetimeUpdated: datetimeUpdated.toISOString(),
     firstName,
+    hasOptedInToMembership,
+    hasOptedInToSms,
+    id,
+    informationVisibility,
     lastName,
+    phoneNumber: phoneNumber ? formatPhoneNumber(phoneNumber) : '',
+    primaryUserCryptoAddress: primaryUserCryptoAddress
+      ? getClientUserCryptoAddress(primaryUserCryptoAddress)
+      : null,
     primaryUserEmailAddress: primaryUserEmailAddress
       ? {
           emailAddress: primaryUserEmailAddress.emailAddress,
           source: primaryUserEmailAddress.source,
         }
       : null,
-    primaryUserCryptoAddress: primaryUserCryptoAddress
-      ? getClientUserCryptoAddress(primaryUserCryptoAddress)
-      : null,
-    id,
-    datetimeCreated: datetimeCreated.toISOString(),
-    datetimeUpdated: datetimeUpdated.toISOString(),
-    informationVisibility,
-    phoneNumber: phoneNumber ? formatPhoneNumber(phoneNumber) : '',
-    hasOptedInToMembership,
-    hasOptedInToSms,
   })
 }
 

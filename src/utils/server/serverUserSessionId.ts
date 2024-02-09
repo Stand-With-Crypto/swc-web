@@ -23,7 +23,7 @@ export function getUserSessionId() {
   const sessionId = userCookies.get(USER_SESSION_ID_COOKIE_NAME)
   if (!sessionId) {
     Sentry.captureMessage(`getUserSessionIdOnAppRouter: cookie not set`, {
-      extra: { headers: headers(), cookies: userCookies.getAll() },
+      extra: { cookies: userCookies.getAll(), headers: headers() },
     })
     throw new Error('user session cookie not set')
   }

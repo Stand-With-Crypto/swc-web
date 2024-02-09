@@ -9,7 +9,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:storybook/recommended',
   ],
-  plugins: ['no-relative-import-paths', 'formatjs'],
+  plugins: ['no-relative-import-paths', 'formatjs', 'sort-keys-fix'],
   parserOptions: {
     project: './tsconfig.json',
     tsconfigRootDir: __dirname,
@@ -27,6 +27,7 @@ module.exports = {
     'no-empty': ['error', { allowEmptyCatch: true }],
     'react/jsx-sort-props': 'error',
     'react/no-unescaped-entities': 'off',
+    'sort-keys-fix/sort-keys-fix': 'error',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/no-unused-vars': [

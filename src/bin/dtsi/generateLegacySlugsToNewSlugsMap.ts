@@ -49,9 +49,9 @@ async function generateLegacySlugsToNewSlugsMap() {
           .map(match => match.slug)
           .join(', ')}`,
       )
-      return { legacyPoliticianSlug, dtsiSlug: undefined }
+      return { dtsiSlug: undefined, legacyPoliticianSlug }
     }
-    return { legacyPoliticianSlug, dtsiSlug: matches[0]?.slug }
+    return { dtsiSlug: matches[0]?.slug, legacyPoliticianSlug }
   })
 
   const unmatchedLegacyPoliticianSlugs = legacyPoliticianSlugWithDTSISlug

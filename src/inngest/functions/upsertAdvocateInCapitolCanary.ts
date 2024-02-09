@@ -24,8 +24,8 @@ export const CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME = 'capitol.canary
 export const upsertAdvocateInCapitolCanaryWithInngest = inngest.createFunction(
   {
     id: CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_FUNCTION_ID,
-    retries: CAPITOL_CANARY_UPSERT_ADVOCATE_RETRY_LIMIT,
     onFailure: onFailureCapitolCanary,
+    retries: CAPITOL_CANARY_UPSERT_ADVOCATE_RETRY_LIMIT,
   },
   { event: CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME },
   async ({ event, step }) => {
@@ -65,11 +65,11 @@ export const upsertAdvocateInCapitolCanaryWithInngest = inngest.createFunction(
       // Update database with new SwC advocate ID.
       await step.run('capitol-canary.upsert-advocate.update-user-with-advocate-id', async () => {
         await prismaClient.user.update({
-          where: { id: data.user.id },
           data: {
             capitolCanaryAdvocateId: createAdvocateStepResponse.advocateid,
             capitolCanaryInstance: CapitolCanaryInstance.STAND_WITH_CRYPTO,
           },
+          where: { id: data.user.id },
         })
       })
 

@@ -11,7 +11,7 @@ const description =
   'Contributing to the Stand With Crypto Alliance will help shape policy & support policymakers who will champion clear, common-sense legislation that protects consumers and fosters innovation'
 
 export const metadata: Metadata = {
-  ...generateMetadataDetails({ title, description }),
+  ...generateMetadataDetails({ description, title }),
 }
 
 export default async function DonatePage({ params: { locale } }: PageProps) {

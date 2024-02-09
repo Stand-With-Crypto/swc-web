@@ -60,9 +60,9 @@ const InitialOrchestration = () => {
       return
     }
     trackClientAnalytic('Page Visited', {
-      pathname,
-      component: AnalyticComponentType.page,
       action: AnalyticActionType.view,
+      component: AnalyticComponentType.page,
+      pathname,
     })
   }, [pathname])
   return null
@@ -81,8 +81,8 @@ export function TopLevelClientLogic({
       <ThirdwebProvider
         activeChain={Base}
         authConfig={{
-          domain: NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN,
           authUrl: '/api/auth',
+          domain: NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN,
         }}
         clientId={NEXT_PUBLIC_THIRDWEB_CLIENT_ID}
         locale={en()}

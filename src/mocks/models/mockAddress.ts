@@ -5,16 +5,16 @@ import { Address, Prisma } from '@prisma/client'
 
 export function mockCreateAddressInput() {
   const partial = {
-    googlePlaceId: faker.string.uuid(),
-    streetNumber: faker.location.buildingNumber(),
-    route: faker.location.street(),
-    subpremise: faker.location.secondaryAddress(),
-    locality: faker.location.city(),
     administrativeAreaLevel1: faker.location.state(),
     administrativeAreaLevel2: '',
+    countryCode: faker.location.countryCode(),
+    googlePlaceId: faker.string.uuid(),
+    locality: faker.location.city(),
     postalCode: faker.location.zipCode(),
     postalCodeSuffix: '',
-    countryCode: faker.location.countryCode(),
+    route: faker.location.street(),
+    streetNumber: faker.location.buildingNumber(),
+    subpremise: faker.location.secondaryAddress(),
   } satisfies Partial<Prisma.AddressCreateInput>
   return {
     ...partial,

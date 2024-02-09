@@ -34,20 +34,20 @@ async function _actionUpdateUserInformationVisibility(
     },
   })
   const localUser = parseLocalUserFromCookies()
-  const peopleAnalytics = getServerPeopleAnalytics({ userId: authUser.userId, localUser })
+  const peopleAnalytics = getServerPeopleAnalytics({ localUser, userId: authUser.userId })
   peopleAnalytics.set({
     'Information Visibility': informationVisibility,
   })
 
   const updatedUser = await prismaClient.user.update({
-    where: {
-      id: user.id,
-    },
     data: {
       informationVisibility,
     },
     include: {
       primaryUserCryptoAddress: true,
+    },
+    where: {
+      id: user.id,
     },
   })
 

@@ -55,22 +55,22 @@ export function UpdateUserProfileForm({
   const isEmbeddedWalletUser =
     user.primaryUserEmailAddress?.source === UserEmailAddressSource.THIRDWEB_EMBEDDED_AUTH
   const form = useForm<FormValues>({
-    resolver: zodResolver(zodUpdateUserProfileFormFields),
     defaultValues: {
-      isEmbeddedWalletUser,
-      firstName: user.firstName || '',
-      lastName: user.lastName || '',
-      emailAddress: user.primaryUserEmailAddress?.emailAddress || '',
-      phoneNumber: user.phoneNumber || '',
-      hasOptedInToMembership: user.hasOptedInToMembership,
-      hasOptedInToSms: user.hasOptedInToSms,
       address: user.address
         ? {
             description: user.address.formattedDescription,
             place_id: user.address.googlePlaceId,
           }
         : null,
+      emailAddress: user.primaryUserEmailAddress?.emailAddress || '',
+      firstName: user.firstName || '',
+      hasOptedInToMembership: user.hasOptedInToMembership,
+      hasOptedInToSms: user.hasOptedInToSms,
+      isEmbeddedWalletUser,
+      lastName: user.lastName || '',
+      phoneNumber: user.phoneNumber || '',
     },
+    resolver: zodResolver(zodUpdateUserProfileFormFields),
   })
   const phoneNumberValue = form.watch('phoneNumber')
   return (
@@ -88,11 +88,11 @@ export function UpdateUserProfileForm({
 
           const result = await triggerServerActionForForm(
             {
-              form,
-              formName: FORM_NAME,
               analyticsProps: {
                 ...(address ? convertAddressToAnalyticsProperties(address) : {}),
               },
+              form,
+              formName: FORM_NAME,
             },
             () => actionUpdateUserProfile({ ...values, address }),
           )

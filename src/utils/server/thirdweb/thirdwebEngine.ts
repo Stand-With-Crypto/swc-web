@@ -16,6 +16,6 @@ export const THIRDWEB_BACKEND_WALLET = requiredEnv(
 export const CHAIN_ID = 'base'
 
 export const thirdwebEngine = new Engine({
-  url: THIRDWEB_ENGINE_URL,
   accessToken: THIRDWEB_ENGINE_ACCESS_TOKEN,
+  url: THIRDWEB_ENGINE_URL,
 })

@@ -19,12 +19,12 @@ export async function sendCapitolCanaryRequest<T, R>(
 ): Promise<R> {
   try {
     const httpResp = await fetchReq(url, {
-      method: httpMethod,
+      body: JSON.stringify(request),
       headers: {
         Authorization: `Basic ${btoa(`${CAPITOL_CANARY_API_KEY}:${CAPITOL_CANARY_API_SECRET}`)}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(request),
+      method: httpMethod,
     })
     return (await httpResp.json()) as R
   } catch (error) {

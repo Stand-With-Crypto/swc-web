@@ -28,8 +28,8 @@ export const CAPITOL_CANARY_EMAIL_REP_INNGEST_EVENT_NAME = 'capitol.canary/email
 export const emailRepViaCapitolCanaryWithInngest = inngest.createFunction(
   {
     id: CAPITOL_CANARY_EMAIL_REP_INNGEST_FUNCTION_ID,
-    retries: CAPITOL_CANARY_EMAIL_REP_RETRY_LIMIT,
     onFailure: onFailureCapitolCanary,
+    retries: CAPITOL_CANARY_EMAIL_REP_RETRY_LIMIT,
   },
   { event: CAPITOL_CANARY_EMAIL_REP_INNGEST_EVENT_NAME },
   async ({ event, step }) => {
@@ -137,11 +137,11 @@ export const emailRepViaCapitolCanaryWithInngest = inngest.createFunction(
     ) {
       await step.run('capitol-canary.email-rep.update-user-with-advocate-id', async () => {
         await prismaClient.user.update({
-          where: { id: data.user.id },
           data: {
             capitolCanaryAdvocateId: emailAdvocateId,
             capitolCanaryInstance: CapitolCanaryInstance.STAND_WITH_CRYPTO,
           },
+          where: { id: data.user.id },
         })
       })
     }

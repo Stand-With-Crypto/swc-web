@@ -32,8 +32,8 @@ export const queryDTSIPeopleByCongressionalDistrict = async ({
     DTSI_PeopleByUsCongressionalDistrictQuery,
     DTSI_PeopleByUsCongressionalDistrictQueryVariables
   >(query, {
-    stateCode,
     congressionalDistrict: districtNumber,
+    stateCode,
   })
   // LATER-TASK now that we can support multiple reps being returned, we should build the UX for it
   const person = data.peopleByUSCongressionalDistrict.find(
@@ -42,7 +42,7 @@ export const queryDTSIPeopleByCongressionalDistrict = async ({
   if (!person) {
     Sentry.captureMessage(
       'Unexpectedly got back no valid congressperson from queryDTSIPeopleByCongressionalDistrict',
-      { tags: { stateCode, districtNumber }, extra: { data } },
+      { extra: { data }, tags: { districtNumber, stateCode } },
     )
   }
   return person || null

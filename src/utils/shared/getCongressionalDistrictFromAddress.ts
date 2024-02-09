@@ -16,15 +16,15 @@ const findCongressionalDistrictString = (response: GoogleCivicInfoResponse, addr
   const district = districtKeys.filter(key => key.includes('/cd:'))
   if (!district.length) {
     Sentry.captureMessage('No districts returned for address', {
+      extra: { address, response },
       tags: { domain: 'getCongressionalDistrictFromAddress' },
-      extra: { response, address },
     })
     return { notFoundReason: 'NOT_SPECIFIC_ENOUGH' as const }
   }
   if (district.length > 1) {
     Sentry.captureMessage('more than one district returned for address', {
+      extra: { address, response },
       tags: { domain: 'getCongressionalDistrictFromAddress' },
-      extra: { response, address },
     })
   }
   return district[0]
@@ -37,8 +37,8 @@ const parseCongressionalDistrictString = (districtString: string) => {
   const districtNum = parseInt(districtNumString, 10)
   if (cdStr !== 'cd' || !_.isInteger(districtNum)) {
     Sentry.captureMessage('unexpected district string structure', {
+      extra: { cdStr, districtNumString, districtString },
       tags: { domain: 'getCongressionalDistrictFromAddress' },
-      extra: { districtString, cdStr, districtNumString },
     })
     return { notFoundReason: 'UNEXPECTED_ERROR' as const }
   }
@@ -51,8 +51,8 @@ const parseStateString = (districtString: string) => {
   const [stateStr, stateCode] = slashParts[slashParts.length - 2].split(':')
   if (stateStr !== 'state' || stateCode.length !== 2) {
     Sentry.captureMessage('unexpected district string structure', {
+      extra: { stateCode, stateStr },
       tags: { domain: 'getCongressionalDistrictFromAddress' },
-      extra: { stateStr, stateCode },
     })
     return { notFoundReason: 'UNEXPECTED_ERROR' as const }
   }
@@ -73,5 +73,5 @@ export async function getCongressionalDistrictFromAddress(address: string) {
   if (_.isObject(stateCode)) {
     return stateCode
   }
-  return { stateCode, districtNumber }
+  return { districtNumber, stateCode }
 }

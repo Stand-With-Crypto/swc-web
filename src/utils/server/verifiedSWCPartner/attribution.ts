@@ -12,9 +12,9 @@ export function getUserAttributionFieldsForVerifiedSWCPartner({
   'acquisitionReferer' | 'acquisitionSource' | 'acquisitionMedium' | 'acquisitionCampaign'
 > {
   return {
+    acquisitionCampaign: campaignName,
+    acquisitionMedium: 'verified-swc-partner-api',
     acquisitionReferer: '',
     acquisitionSource: partner,
-    acquisitionMedium: 'verified-swc-partner-api',
-    acquisitionCampaign: campaignName,
   }
 }

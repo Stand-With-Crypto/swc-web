@@ -136,7 +136,7 @@ async function seed() {
     _.times(user.length / 2).map(() => {
       // a crypto user address must only ever be associated with one user so we use splice here to ensure we can randomly assign these models to users without any duplicates
       const selectedUser = usersUnusedOnCryptoAddress.splice(
-        faker.number.int({ min: 0, max: usersUnusedOnCryptoAddress.length - 1 }),
+        faker.number.int({ max: usersUnusedOnCryptoAddress.length - 1, min: 0 }),
         1,
       )[0]
       // we want all known ENS addresses to not have a full name so we always display their ENS
@@ -146,19 +146,19 @@ async function seed() {
         selectedUser.informationVisibility === UserInformationVisibility.CRYPTO_INFO_ONLY
       return {
         ...mockCreateUserCryptoAddressInput(),
+        cryptoAddress: shouldUseInitialCryptoAddress
+          ? initialCryptoAddresses.pop()!
+          : faker.finance.ethereumAddress(),
         embeddedWalletUserEmailAddressId:
           !shouldUseInitialCryptoAddress && emailAddressesToRelateToEmbeddedWallets.length
             ? emailAddressesToRelateToEmbeddedWallets.splice(
                 faker.number.int({
-                  min: 0,
                   max: emailAddressesToRelateToEmbeddedWallets.length - 1,
+                  min: 0,
                 }),
                 1,
               )[0].id
             : null,
-        cryptoAddress: shouldUseInitialCryptoAddress
-          ? initialCryptoAddresses.pop()!
-          : faker.finance.ethereumAddress(),
         userId: selectedUser.id,
       }
     }),
@@ -179,8 +179,8 @@ async function seed() {
     Promise.all(
       addresses.map(x =>
         prismaClient.user.update({
-          where: { id: x.userId },
           data: { primaryUserCryptoAddressId: x.id },
+          where: { id: x.userId },
         }),
       ),
     ),
@@ -198,17 +198,17 @@ async function seed() {
   const emailAddress = faker.internet.email()
   await prismaClient.userEmailAddress.createMany({
     data: [otherUserToMerge.id, localUserCryptoAddress.userId].map(userId => ({
-      userId,
       emailAddress: emailAddress,
       isVerified: true,
       source: UserEmailAddressSource.USER_ENTERED,
+      userId,
     })),
   })
   await prismaClient.userMergeAlert.create({
     data: {
+      hasBeenConfirmedByUserA: true,
       userAId: otherUserToMerge.id,
       userBId: localUserCryptoAddress.userId,
-      hasBeenConfirmedByUserA: true,
     },
   })
 
@@ -262,26 +262,30 @@ async function seed() {
       return {
         ...mockCreateUserActionInput(),
         actionType,
-        userCryptoAddressId:
+        // a nft mint must only ever be associated with one action so we use splice here to ensure we can randomly assign these models to users without any duplicates
+nftMintId:
+          actionType === UserActionType.NFT_MINT
+            ? usedNftMints.splice(faker.number.int({ max: usedNftMints.length - 1, min: 0 }), 1)[0]
+                .id
+            : null,
+        
+userCryptoAddressId:
           actionType === UserActionType.OPT_IN
             ? null
             : 'cryptoAddress' in relatedItem
               ? relatedItem.id
               : null,
+        
+userEmailAddressId: actionType === UserActionType.OPT_IN ? relatedItem.id : null,
+        
+userId: relatedItem.userId,
+        
         userSessionId:
           actionType === UserActionType.OPT_IN
             ? null
             : 'cryptoAddress' in relatedItem
               ? null
               : relatedItem.id,
-        userEmailAddressId: actionType === UserActionType.OPT_IN ? relatedItem.id : null,
-        userId: relatedItem.userId,
-        // a nft mint must only ever be associated with one action so we use splice here to ensure we can randomly assign these models to users without any duplicates
-        nftMintId:
-          actionType === UserActionType.NFT_MINT
-            ? usedNftMints.splice(faker.number.int({ min: 0, max: usedNftMints.length - 1 }), 1)[0]
-                .id
-            : null,
       }
     }),
     data =>
@@ -315,8 +319,8 @@ async function seed() {
   await batchAsyncAndLog(
     userActionsByType[UserActionType.EMAIL].map(action => ({
       ...mockCreateUserActionEmailInput(),
-      id: action.id,
       addressId: faker.helpers.arrayElement(address).id,
+      id: action.id,
     })),
     data =>
       prismaClient.userActionEmail.createMany({
@@ -351,8 +355,8 @@ async function seed() {
   await batchAsyncAndLog(
     userActionsByType[UserActionType.CALL].map(action => ({
       ...mockCreateUserActionCallInput(),
-      id: action.id,
       addressId: faker.helpers.arrayElement(address).id,
+      id: action.id,
     })),
     data =>
       prismaClient.userActionCall.createMany({
@@ -371,7 +375,7 @@ async function seed() {
       const initialMockValues = mockCreateUserActionDonationInput()
       const isTopDonor = topDonorUserIdMap[action.userId]
       const amount = isTopDonor
-        ? faker.number.float({ min: 100000, max: 200000, precision: 0.01 })
+        ? faker.number.float({ max: 200000, min: 100000, precision: 0.01 })
         : initialMockValues.amount
       return {
         ...initialMockValues,

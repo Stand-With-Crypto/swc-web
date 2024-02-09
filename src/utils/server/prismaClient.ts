@@ -7,7 +7,7 @@ import { requiredEnv } from '@/utils/shared/requiredEnv'
 const DATABASE_URL = requiredEnv(process.env.DATABASE_URL, 'process.env.DATABASE_URL')
 
 const createPrisma = () => {
-  const client = new Client({ url: DATABASE_URL, fetch: undiciFetch })
+  const client = new Client({ fetch: undiciFetch, url: DATABASE_URL })
   const adapter = new PrismaPlanetScale(client)
   return new PrismaClient({
     adapter,

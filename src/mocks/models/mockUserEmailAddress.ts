@@ -6,9 +6,9 @@ import { Prisma, UserEmailAddress, UserEmailAddressSource } from '@prisma/client
 export function mockCreateUserEmailAddressInput() {
   const source = faker.helpers.arrayElement(Object.values(UserEmailAddressSource))
   return {
-    source,
     emailAddress: faker.internet.email(),
     isVerified: source === UserEmailAddressSource.VERIFIED_THIRD_PARTY,
+    source,
   } satisfies Omit<Prisma.UserEmailAddressCreateInput, 'userId' | 'user'>
 }
 

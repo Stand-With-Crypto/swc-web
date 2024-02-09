@@ -17,8 +17,8 @@ export function UserActionFormVoterRegistrationDialog({
   defaultOpen?: boolean
 }) {
   const dialogProps = useDialog({
-    initialOpen: defaultOpen,
     analytics: ANALYTICS_NAME_USER_ACTION_FORM_VOTER_REGISTRATION,
+    initialOpen: defaultOpen,
   })
 
   return (

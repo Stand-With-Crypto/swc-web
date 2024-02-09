@@ -9,7 +9,7 @@ export function requiredEnv(value: string | undefined, name: string) {
     if (process.env.NEXT_PUBLIC_ENVIRONMENT === 'local') {
       throw new Error(message)
     }
-    Sentry.captureMessage(message, { extra: { value, name } })
+    Sentry.captureMessage(message, { extra: { name, value } })
   }
   return value!
 }

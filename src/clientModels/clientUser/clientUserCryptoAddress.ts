@@ -10,9 +10,9 @@ export type ClientUserCryptoAddress = ClientModel<
 export const getClientUserCryptoAddress = (record: UserCryptoAddress): ClientUserCryptoAddress => {
   const { id, cryptoAddress, cryptoNetwork } = record
   return getClientModel({
-    id,
     cryptoAddress,
     cryptoNetwork,
+    id,
   })
 }
 

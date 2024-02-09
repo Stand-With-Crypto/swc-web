@@ -39,16 +39,16 @@ import * as Sentry from '@sentry/nextjs'
 import { z } from 'zod'
 
 export const zodVerifiedSWCPartnersUserActionOptIn = z.object({
-  emailAddress: z.string().email().toLowerCase().trim(),
-  optInType: z.nativeEnum(UserActionOptInType),
   campaignName: z.string(),
-  isVerifiedEmailAddress: z.boolean(),
+  emailAddress: z.string().email().toLowerCase().trim(),
   firstName: zodFirstName.optional(),
-  lastName: zodLastName.optional(),
-  phoneNumber: zodPhoneNumber.optional().transform(str => str && normalizePhoneNumber(str)),
+  hasOptedInToMembership: z.boolean().optional(),
   hasOptedInToReceiveSMSFromSWC: z.boolean().optional(),
   hasOptedInToSms: z.boolean().optional(),
-  hasOptedInToMembership: z.boolean().optional(),
+  isVerifiedEmailAddress: z.boolean(),
+  lastName: zodLastName.optional(),
+  optInType: z.nativeEnum(UserActionOptInType),
+  phoneNumber: zodPhoneNumber.optional().transform(str => str && normalizePhoneNumber(str)),
 })
 
 const logger = getLogger('verifiedSWCPartnersUserActionOptIn')
@@ -84,20 +84,20 @@ export async function verifiedSWCPartnersUserActionOptIn(
     },
     where: {
       actionType,
-      userActionOptIn: {
-        optInType,
-      },
       user: {
         userEmailAddresses: {
           some: { emailAddress: emailAddress },
         },
       },
+      userActionOptIn: {
+        optInType,
+      },
     },
   })
   const { user, userState } = await maybeUpsertUser({ existingUser: existingAction?.user, input })
   const localUser = getLocalUserFromUser(user)
-  const analytics = getServerAnalytics({ userId: user.id, localUser })
-  const peopleAnalytics = getServerPeopleAnalytics({ userId: user.id, localUser })
+  const analytics = getServerAnalytics({ localUser, userId: user.id })
+  const peopleAnalytics = getServerPeopleAnalytics({ localUser, userId: user.id })
   if (!existingAction?.user) {
     peopleAnalytics.setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
   }
@@ -105,7 +105,7 @@ export async function verifiedSWCPartnersUserActionOptIn(
   if (existingAction) {
     Sentry.captureMessage('verifiedSWCPartnersUserActionOptIn action already exists', {
       extra: { emailAddress, isVerifiedEmailAddress },
-      tags: { optInType, actionType },
+      tags: { actionType, optInType },
     })
     analytics.trackUserActionCreatedIgnored({
       actionType,
@@ -122,22 +122,22 @@ export async function verifiedSWCPartnersUserActionOptIn(
     }
   }
   const userAction = await prismaClient.userAction.create({
+    data: {
+      actionType,
+      campaignName: UserActionOptInCampaignName.DEFAULT,
+      user: { connect: { id: user.id } },
+      userActionOptIn: {
+        create: {
+          optInType,
+        },
+      },
+    },
     include: {
       user: {
         include: {
           userSessions: true,
         },
       },
-    },
-    data: {
-      actionType,
-      campaignName: UserActionOptInCampaignName.DEFAULT,
-      userActionOptIn: {
-        create: {
-          optInType,
-        },
-      },
-      user: { connect: { id: user.id } },
     },
   })
 
@@ -152,6 +152,11 @@ export async function verifiedSWCPartnersUserActionOptIn(
   // TODO (Benson): Include p2a source in Capitol Canary payload to know which 3P is sending this request.
   const payload: UpsertAdvocateInCapitolCanaryPayloadRequirements = {
     campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
+    opts: {
+      isEmailOptin: true,
+      isSmsOptin: input.hasOptedInToSms,
+      shouldSendSmsOptinConfirmation: false,
+    },
     user: {
       ...user,
       address: user.address || null,
@@ -159,15 +164,10 @@ export async function verifiedSWCPartnersUserActionOptIn(
     userEmailAddress: user.userEmailAddresses.find(
       emailAddr => emailAddr.id === user.primaryUserEmailAddressId,
     ),
-    opts: {
-      isEmailOptin: true,
-      isSmsOptin: input.hasOptedInToSms,
-      shouldSendSmsOptinConfirmation: false,
-    },
   }
   await inngest.send({
-    name: CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME,
     data: payload,
+    name: CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME,
   })
 
   return {
@@ -224,20 +224,20 @@ async function maybeUpsertUser({
     }
     logger.info(`updating the following user fields ${keysToUpdate.join(', ')}`)
     const user = await prismaClient.user.update({
-      where: { id: existingUser.id },
       data: updatePayload,
       include: {
+        address: true,
         userEmailAddresses: true,
         userSessions: true,
-        address: true,
       },
+      where: { id: existingUser.id },
     })
     const existingEmail = user.userEmailAddresses.find(email => email.emailAddress === emailAddress)
     if (existingEmail && !existingEmail.isVerified && isVerifiedEmailAddress) {
       logger.info(`verifying previously unverified email`)
       await prismaClient.userEmailAddress.update({
-        where: { id: existingEmail.id },
         data: { isVerified: true },
+        where: { id: existingEmail.id },
       })
     }
 
@@ -245,31 +245,23 @@ async function maybeUpsertUser({
       const newEmail = user.userEmailAddresses.find(addr => addr.emailAddress === emailAddress)!
       logger.info(`updating primary email`)
       await prismaClient.user.update({
-        where: { id: user.id },
         data: { primaryUserEmailAddressId: newEmail.id },
+        where: { id: user.id },
       })
       user.primaryUserEmailAddressId = newEmail.id
     }
     return { user, userState: 'Existing With Updates' }
   }
   let user = await prismaClient.user.create({
-    include: {
-      userEmailAddresses: true,
-      userSessions: true,
-      address: true,
-    },
     data: {
-      ...getUserAttributionFieldsForVerifiedSWCPartner({ partner, campaignName }),
-      userSessions: {
-        create: {},
-      },
-      informationVisibility: UserInformationVisibility.ANONYMOUS,
+      ...getUserAttributionFieldsForVerifiedSWCPartner({ campaignName, partner }),
       firstName,
-      lastName,
-      phoneNumber,
       hasOptedInToEmails: true,
       hasOptedInToMembership: hasOptedInToMembership || false,
       hasOptedInToSms: hasOptedInToSms || false,
+      informationVisibility: UserInformationVisibility.ANONYMOUS,
+      lastName,
+      phoneNumber,
       userEmailAddresses: {
         create: {
           emailAddress,
@@ -277,18 +269,26 @@ async function maybeUpsertUser({
           source: UserEmailAddressSource.VERIFIED_THIRD_PARTY,
         },
       },
+      userSessions: {
+        create: {},
+      },
+    },
+    include: {
+      address: true,
+      userEmailAddresses: true,
+      userSessions: true,
     },
   })
   user = await prismaClient.user.update({
-    include: {
-      userEmailAddresses: true,
-      userSessions: true,
-      address: true,
-    },
-    where: { id: user.id },
     data: {
       primaryUserEmailAddressId: user.userEmailAddresses[0].id,
     },
+    include: {
+      address: true,
+      userEmailAddresses: true,
+      userSessions: true,
+    },
+    where: { id: user.id },
   })
   return { user, userState: 'New' }
 }

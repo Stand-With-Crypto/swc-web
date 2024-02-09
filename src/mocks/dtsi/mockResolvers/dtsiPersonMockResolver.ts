@@ -28,9 +28,9 @@ export const dtsiPersonMockResolver = (): Partial<DTSI_PersonResolvers> => {
     profilePictureUrl: () =>
       'https://db0prh5pvbqwd.cloudfront.net/all/images/12b0866e-c3ab-418d-8914-bc0fba709fb5.jpg',
     profilePictureUrlDimensions: () => ({
+      height: 2048,
       type: 'jpg',
       width: 1363,
-      height: 2048,
     }),
     slug: () => `${firstName}---${lastName}`,
     suffixName: () => faker.person.suffix(),

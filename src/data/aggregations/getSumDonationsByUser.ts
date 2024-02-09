@@ -32,13 +32,13 @@ export const getSumDonationsByUser = async ({ limit, offset }: SumDonationsByUse
   `
 
   const users = await prismaClient.user.findMany({
+    include: {
+      primaryUserCryptoAddress: true,
+    },
     where: {
       id: {
         in: _.compact(total.map(t => t.userId)),
       },
-    },
-    include: {
-      primaryUserCryptoAddress: true,
     },
   })
 

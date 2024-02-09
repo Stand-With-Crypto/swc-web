@@ -49,11 +49,11 @@ export function useCookieConsent() {
   }, [acceptSpecificCookies])
 
   return {
-    acceptSpecificCookies,
-    rejectAllOptionalCookies,
     acceptAllCookies,
-    resetCookieConsent: removeCookieConsentCookie,
+    acceptSpecificCookies,
     acceptedCookies: !!cookieConsentCookie,
+    rejectAllOptionalCookies,
+    resetCookieConsent: removeCookieConsentCookie,
   }
 }
 

@@ -14,12 +14,12 @@ export default function DebugClientServerActionSentry() {
       <Button
         onClick={() =>
           actionDebugSentry({
-            num: 3,
-            bool: true,
-            str: 'test',
-            nestedObject: { something: { deeply: { nested: 'for parsing' } } },
             arr: [1, 2, 3],
+            bool: true,
             date: new Date(),
+            nestedObject: { something: { deeply: { nested: 'for parsing' } } },
+            num: 3,
+            str: 'test',
           })
         }
       >

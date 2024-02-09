@@ -6,6 +6,7 @@ import { zodUpdateUserProfileBase, zodUpdateUserProfileBaseSuperRefine } from '.
 
 export const zodUpdateUserProfileFormAction = zodUpdateUserProfileBase
   .extend({
+    address: zodAddress.nullable(),
     firstName: zodOptionalEmptyString(zodFirstName).refine(
       value => !hasBadWord(value),
       'This first name contains a word that is not allowed. Please try again.',
@@ -14,6 +15,5 @@ export const zodUpdateUserProfileFormAction = zodUpdateUserProfileBase
       value => !hasBadWord(value),
       'This last name contains a word that is not allowed. Please try again.',
     ),
-    address: zodAddress.nullable(),
   })
   .superRefine(zodUpdateUserProfileBaseSuperRefine)

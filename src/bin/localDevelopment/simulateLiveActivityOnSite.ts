@@ -48,9 +48,9 @@ async function createUser() {
         include: {
           user: {
             include: {
-              userSessions: true,
               primaryUserCryptoAddress: true,
               primaryUserEmailAddress: true,
+              userSessions: true,
             },
           },
         },
@@ -63,16 +63,16 @@ async function createUser() {
         include: {
           user: {
             include: {
-              userSessions: true,
               primaryUserCryptoAddress: true,
               primaryUserEmailAddress: true,
+              userSessions: true,
             },
           },
         },
       })
       await prismaClient.user.update({
-        where: { id: user.id },
         data: { primaryUserEmailAddressId: res.id },
+        where: { id: user.id },
       })
       res.user.primaryUserEmailAddressId = res.id
       return res.user
@@ -83,16 +83,16 @@ async function createUser() {
         include: {
           user: {
             include: {
-              userSessions: true,
               primaryUserCryptoAddress: true,
               primaryUserEmailAddress: true,
+              userSessions: true,
             },
           },
         },
       })
       await prismaClient.user.update({
-        where: { id: user.id },
         data: { primaryUserCryptoAddressId: res.id },
+        where: { id: user.id },
       })
       res.user.primaryUserCryptoAddressId = res.id
       return res.user
@@ -108,14 +108,14 @@ async function createAction(user: Awaited<ReturnType<typeof createUser>>) {
     ...mockCreateUserActionInput(),
     actionType,
     user: { connect: { id: user.id } },
-    userSession: user.userSessions[0]?.id
-      ? { connect: { id: user.userSessions[0]?.id } }
-      : undefined,
     userCryptoAddress: user.primaryUserCryptoAddressId
       ? { connect: { id: user.primaryUserCryptoAddressId } }
       : undefined,
     userEmailAddress: user.primaryUserEmailAddressId
       ? { connect: { id: user.primaryUserEmailAddressId } }
+      : undefined,
+    userSession: user.userSessions[0]?.id
+      ? { connect: { id: user.userSessions[0]?.id } }
       : undefined,
   }
   switch (actionType) {

@@ -27,12 +27,12 @@ const ResponsivePopoverDrawerRoot = ({
           trackPrimitiveComponentAnalytics(
             ({ properties }) => {
               trackClientAnalytic(`Popover ${open ? 'Opened' : 'Closed'}`, {
-                component: AnalyticComponentType.dropdown,
                 action: AnalyticActionType.view,
+                component: AnalyticComponentType.dropdown,
                 ...properties,
               })
             },
-            { args: open, analytics },
+            { analytics, args: open },
           ),
         [analytics],
       )}
@@ -45,11 +45,11 @@ export function useResponsivePopover() {
   const isMobile = useIsMobile()
   return React.useMemo(
     () => ({
-      isMobile,
       Popover: isMobile ? ResponsivePopoverDrawerRoot : Popover,
-      PopoverTrigger: isMobile ? DrawerTrigger : PopoverTrigger,
       PopoverContent: isMobile ? DrawerContent : PopoverContent,
       PopoverTitle: isMobile ? DrawerTitle : DrawerHeader,
+      PopoverTrigger: isMobile ? DrawerTrigger : PopoverTrigger,
+      isMobile,
     }),
     [isMobile],
   )

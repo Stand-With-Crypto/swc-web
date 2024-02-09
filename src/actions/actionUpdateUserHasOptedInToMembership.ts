@@ -17,20 +17,20 @@ export async function actionUpdateUserHasOptedInToMembership() {
     },
   })
   const localUser = parseLocalUserFromCookies()
-  const peopleAnalytics = getServerPeopleAnalytics({ userId: authUser.userId, localUser })
+  const peopleAnalytics = getServerPeopleAnalytics({ localUser, userId: authUser.userId })
   peopleAnalytics.set({
     'Has Opted In To Membership': true,
   })
 
   const updatedUser = await prismaClient.user.update({
-    where: {
-      id: user.id,
-    },
     data: {
       hasOptedInToMembership: true,
     },
     include: {
       primaryUserCryptoAddress: true,
+    },
+    where: {
+      id: user.id,
     },
   })
 

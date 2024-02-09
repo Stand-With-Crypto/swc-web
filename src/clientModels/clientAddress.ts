@@ -8,8 +8,8 @@ export type ClientAddress = ClientModel<
 export const getClientAddress = (record: Address): ClientAddress => {
   const { id, googlePlaceId, formattedDescription } = record
   return getClientModel({
-    id,
-    googlePlaceId,
     formattedDescription,
+    googlePlaceId,
+    id,
   })
 }

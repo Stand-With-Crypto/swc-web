@@ -65,8 +65,8 @@ async function generateDatabaseMetrics() {
   let worksheet = xlsx.utils.json_to_sheet(
     Object.entries({
       userCount,
-      userCountHasOptedInToMembership,
       userCountHasOptedInToEmails,
+      userCountHasOptedInToMembership,
       userCountHasOptedInToSms,
     }).map(([metric, value]) => ({ Metric: camelCaseToWords(metric), Value: value })),
   )
@@ -80,9 +80,9 @@ async function generateDatabaseMetrics() {
         totalCount: bigint
       }>
     ).map(data => ({
-      'Datetime Created Week': data.datetimeCreatedWeek,
       'Acquisition Source': data.acquisitionSource || 'Unknown',
       Count: parseInt(data.totalCount.toString(), 10),
+      'Datetime Created Week': data.datetimeCreatedWeek,
     })),
   )
   xlsx.utils.book_append_sheet(workbook, worksheet, 'RAW - Users By Week And Source')
@@ -95,9 +95,9 @@ async function generateDatabaseMetrics() {
         totalCount: bigint
       }>
     ).map(data => ({
-      'Datetime Created Week': data.datetimeCreatedWeek,
       'Action Type': data.actionType,
       Count: parseInt(data.totalCount.toString(), 10),
+      'Datetime Created Week': data.datetimeCreatedWeek,
     })),
   )
   xlsx.utils.book_append_sheet(workbook, worksheet, 'RAW - Actions By Week And Type')

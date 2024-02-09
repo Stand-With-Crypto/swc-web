@@ -32,10 +32,10 @@ import { nativeEnum, object } from 'zod'
 import { claimNFT } from '@/utils/server/nft/claimNFT'
 
 const createActionCallCongresspersonInputValidationSchema = object({
-  phoneNumber: zodPhoneNumber.transform(str => str && normalizePhoneNumber(str)),
+  address: zodAddress,
   campaignName: nativeEnum(UserActionCallCampaignName),
   dtsiSlug: zodDTSISlug,
-  address: zodAddress,
+  phoneNumber: zodPhoneNumber.transform(str => str && normalizePhoneNumber(str)),
 })
 
 export type CreateActionCallCongresspersonInput = z.infer<
@@ -83,27 +83,27 @@ async function _actionCreateUserActionCallCongressperson(
     userId: user.id,
   })
   const analytics = getServerAnalytics({
-    userId: user.id,
     localUser,
+    userId: user.id,
   })
 
   const recentUserAction = await getRecentUserActionByUserId(user.id)
   if (recentUserAction) {
     logSpamActionSubmissions({
-      validatedInput,
+      sharedDependencies: { analytics },
       userAction: recentUserAction,
       userId: user.id,
-      sharedDependencies: { analytics },
+      validatedInput,
     })
     return { user: getClientUser(user) }
   }
 
   const { userAction, updatedUser } = await createActionAndUpdateUser({
-    user,
     isNewUser: !userMatch.user,
-    validatedInput: validatedInput.data,
+    sharedDependencies: { analytics, peopleAnalytics, sessionId },
+    user,
     userMatch,
-    sharedDependencies: { sessionId, analytics, peopleAnalytics },
+    validatedInput: validatedInput.data,
   })
 
   if (user.primaryUserCryptoAddress !== null) {
@@ -117,11 +117,11 @@ async function createUser(sharedDependencies: Pick<SharedDependencies, 'localUse
   const { localUser, sessionId } = sharedDependencies
   const createdUser = await prismaClient.user.create({
     data: {
-      informationVisibility: UserInformationVisibility.ANONYMOUS,
-      userSessions: { create: { id: sessionId } },
       hasOptedInToEmails: false,
       hasOptedInToMembership: false,
       hasOptedInToSms: false,
+      informationVisibility: UserInformationVisibility.ANONYMOUS,
+      userSessions: { create: { id: sessionId } },
       ...mapLocalUserToUserDatabaseFields(localUser),
     },
     include: {
@@ -172,7 +172,7 @@ function logSpamActionSubmissions({
   Sentry.captureMessage(
     `duplicate ${UserActionType.CALL} user action for campaign ${UserActionCallCampaignName.DEFAULT} submitted`,
     {
-      extra: { validatedInput: validatedInput.data, userAction },
+      extra: { userAction, validatedInput: validatedInput.data },
       user: { id: userId },
     },
   )
@@ -193,9 +193,9 @@ async function createActionAndUpdateUser<U extends User>({
 }) {
   const userAction = await prismaClient.userAction.create({
     data: {
-      user: { connect: { id: user.id } },
       actionType: UserActionType.CALL,
       campaignName: validatedInput.campaignName,
+      user: { connect: { id: user.id } },
       ...('userCryptoAddress' in userMatch
         ? {
             userCryptoAddress: { connect: { id: userMatch.userCryptoAddress.id } },
@@ -203,14 +203,14 @@ async function createActionAndUpdateUser<U extends User>({
         : { userSession: { connect: { id: sharedDependencies.sessionId } } }),
       userActionCall: {
         create: {
-          recipientDtsiSlug: validatedInput.dtsiSlug,
-          recipientPhoneNumber: validatedInput.phoneNumber,
           address: {
             connectOrCreate: {
-              where: { googlePlaceId: validatedInput.address.googlePlaceId },
               create: validatedInput.address,
+              where: { googlePlaceId: validatedInput.address.googlePlaceId },
             },
           },
+          recipientDtsiSlug: validatedInput.dtsiSlug,
+          recipientPhoneNumber: validatedInput.phoneNumber,
         },
       },
     },
@@ -220,7 +220,6 @@ async function createActionAndUpdateUser<U extends User>({
   })
 
   const updatedUser = await prismaClient.user.update({
-    where: { id: user.id },
     data: {
       address: {
         connect: {
@@ -231,14 +230,15 @@ async function createActionAndUpdateUser<U extends User>({
     include: {
       primaryUserCryptoAddress: true,
     },
+    where: { id: user.id },
   })
   logger.info('created user action and updated user')
 
   sharedDependencies.analytics.trackUserActionCreated({
-    actionType: UserActionType.CALL,
-    campaignName: validatedInput.campaignName,
     'Recipient DTSI Slug': validatedInput.dtsiSlug,
     'Recipient Phone Number': validatedInput.phoneNumber,
+    actionType: UserActionType.CALL,
+    campaignName: validatedInput.campaignName,
     ...convertAddressToAnalyticsProperties(validatedInput.address),
     userState: isNewUser ? 'New' : 'Existing',
   })
@@ -246,5 +246,5 @@ async function createActionAndUpdateUser<U extends User>({
     ...convertAddressToAnalyticsProperties(validatedInput.address),
   })
 
-  return { userAction, updatedUser }
+  return { updatedUser, userAction }
 }

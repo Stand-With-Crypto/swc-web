@@ -10,8 +10,8 @@ import { useCallback } from 'react'
 export function NotFoundPagesContent() {
   const onPress = useCallback(() => {
     trackClientAnalytic('NotFoundPagesContent Go home Pressed', {
-      component: AnalyticComponentType.button,
       action: AnalyticActionType.click,
+      component: AnalyticComponentType.button,
     })
   }, [])
   return (

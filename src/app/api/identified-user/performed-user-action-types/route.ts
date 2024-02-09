@@ -9,7 +9,7 @@ async function apiResponseForUserPerformedUserActionTypes() {
   const { user } = await getMaybeUserAndMethodOfMatch({
     include: {
       userActions: {
-        select: { id: true, actionType: true },
+        select: { actionType: true, id: true },
       },
     },
   })

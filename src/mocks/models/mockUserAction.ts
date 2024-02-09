@@ -19,11 +19,11 @@ export function mockUserAction(): UserAction {
   return {
     ...mockCreateUserActionInput(),
     ...mockCommonDatetimes(),
-    userCryptoAddressId: null,
-    userSessionId: fakerFields.id(),
-    userEmailAddressId: null,
-    nftMintId: null,
     id: fakerFields.id(),
+    nftMintId: null,
+    userCryptoAddressId: null,
+    userEmailAddressId: null,
     userId: fakerFields.id(),
+    userSessionId: fakerFields.id(),
   }
 }

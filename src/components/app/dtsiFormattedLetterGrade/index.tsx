@@ -37,7 +37,7 @@ export const DTSIFormattedLetterGrade: React.FC<
         'relative inline-flex items-center justify-center rounded-full text-4xl',
         getBgColor(letterGrade),
       )}
-      style={{ width: size, height: size }}
+      style={{ height: size, width: size }}
     >
       <div className="font-extrabold text-white" style={{ fontSize: size * 0.66, lineHeight: 1 }}>
         {letterGrade || '?'}

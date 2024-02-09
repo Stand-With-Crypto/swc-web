@@ -32,15 +32,15 @@ export async function getMaybeUserAndMethodOfMatch<
   const authUser = await appRouterGetAuthUser()
   const sessionId = getUserSessionId()
   const userWithoutReturnTypes = await prismaClient.user.findFirst({
+    include: {
+      ...((include || {}) as object),
+      userCryptoAddresses: true,
+    },
     where: {
       OR: _.compact([
         authUser && { id: authUser.userId },
         { userSessions: { some: { id: sessionId } } },
       ]),
-    },
-    include: {
-      ...((include || {}) as object),
-      userCryptoAddresses: true,
     },
     ...other,
   })
@@ -58,7 +58,7 @@ export async function getMaybeUserAndMethodOfMatch<
       // This will happen, but should be relatively infrequent
       Sentry.captureMessage(
         'User logged in with a crypto address that is not their primary address',
-        { extra: { user, address: authUser.address } },
+        { extra: { address: authUser.address, user } },
       )
     }
     return {
@@ -67,7 +67,7 @@ export async function getMaybeUserAndMethodOfMatch<
     }
   }
   return {
-    user,
     sessionId,
+    user,
   }
 }

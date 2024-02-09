@@ -17,9 +17,6 @@ const THIRDWEB_AUTH_PRIVATE_KEY = requiredEnv(
 )
 
 export const thirdwebAuthConfig: ThirdwebAuthConfig = {
-  domain: NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN,
-  // TODO determine if we have requirements for the wallet private key that necessitate a more secure storage mechanism
-  wallet: new PrivateKeyWallet(THIRDWEB_AUTH_PRIVATE_KEY),
   authOptions: {
     // TODO check what should be the message with product
     // statement: 'Hello World',
@@ -36,14 +33,20 @@ export const thirdwebAuthConfig: ThirdwebAuthConfig = {
       await prismaClient.authenticationNonce.create({ data: { id: nonce } })
     },
   },
+  
   callbacks: {
+    onLogin,
+    
     onLogout: (user, req) => {
       const localUser = parseLocalUserFromCookiesForPageRouter(req)
       const sessionData = user.session as AuthSessionMetadata
-      getServerAnalytics({ userId: sessionData.userId, localUser }).track('User Logged Out')
+      getServerAnalytics({ localUser, userId: sessionData.userId }).track('User Logged Out')
     },
     // look for the comment in appRouterGetAuthUser for why we don't use this fn
-    onUser: async () => {},
-    onLogin,
+onUser: async () => {},
   },
+  
+domain: NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN,
+  // TODO determine if we have requirements for the wallet private key that necessitate a more secure storage mechanism
+wallet: new PrivateKeyWallet(THIRDWEB_AUTH_PRIVATE_KEY),
 }

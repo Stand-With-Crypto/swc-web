@@ -19,17 +19,17 @@ export async function mintPastActions(
 
   const actions = await prismaClient.userAction.findMany({
     where: {
-      userId: userId,
       actionType: { in: actionWithNFT },
       nftMintId: null,
+      userId: userId,
     },
   })
 
   for (const action of actions) {
     logger.info('mint past actions:' + action.actionType)
-    getServerAnalytics({ userId: userId, localUser }).track('NFT Mint Backfill Triggered', {
-      'User Action Type': action.actionType,
+    getServerAnalytics({ localUser, userId: userId }).track('NFT Mint Backfill Triggered', {
       'User Action Id': action.id,
+      'User Action Type': action.actionType,
     })
     await claimNFT(action, userCryptoAddress)
   }

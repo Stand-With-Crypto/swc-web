@@ -15,14 +15,14 @@ export async function mergeUsers({
   persist: boolean
 }) {
   const usersWithData = await prismaClient.user.findMany({
-    where: { id: { in: [userToKeepId, userToDeleteId] } },
     include: {
+      userActions: true,
       userCryptoAddresses: true,
       userEmailAddresses: true,
-      userSessions: true,
-      userActions: true,
       userMergeEvents: true,
+      userSessions: true,
     },
+    where: { id: { in: [userToKeepId, userToDeleteId] } },
   })
   const userToKeep = usersWithData.find(x => x.id === userToKeepId)!
   const userToDelete = usersWithData.find(x => x.id === userToDeleteId)!
@@ -56,18 +56,18 @@ export async function mergeUsers({
   const userCryptoAddressesUpdatePayloads: Prisma.UserCryptoAddressUpdateArgs[] =
     userToDelete.userCryptoAddresses.map(cryptoAddress => {
       return {
-        where: { id: cryptoAddress.id },
         data: {
           userId: userToKeep.id,
         },
+        where: { id: cryptoAddress.id },
       }
     })
   const userSessionsUpdatePayloads = userToDelete.userSessions.map(session => {
     return {
-      where: { id: session.id },
       data: {
         userId: userToKeep.id,
       },
+      where: { id: session.id },
     }
   }) satisfies Prisma.UserSessionUpdateArgs[]
   const userActionUpdatePayloads: Prisma.UserActionUpdateArgs[] = userToDelete.userActions.map(
@@ -79,19 +79,19 @@ export async function mergeUsers({
             x => x.emailAddress === deletedEmail.emailAddress,
           )!
           return {
-            where: { id: action.id },
             data: {
               userEmailAddressId: replacementEmail.id,
               userId: userToKeep.id,
             },
+            where: { id: action.id },
           }
         }
       }
       return {
-        where: { id: action.id },
         data: {
           userId: userToKeep.id,
         },
+        where: { id: action.id },
       }
     },
   )
@@ -113,10 +113,10 @@ export async function mergeUsers({
   await prismaClient.$transaction([
     ...emailsToTransfer.map(email => {
       return prismaClient.userEmailAddress.update({
-        where: { id: email.id },
         data: {
           userId: userToKeep.id,
         },
+        where: { id: email.id },
       })
     }),
     ...userCryptoAddressesUpdatePayloads.map(x => {

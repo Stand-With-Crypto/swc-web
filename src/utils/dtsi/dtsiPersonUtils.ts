@@ -68,8 +68,8 @@ export const groupAndSortDTSIPeopleByCryptoStance = <
     }
   })
   return {
-    proCrypto: _.sortBy(proCrypto, x => x.computedStanceScore),
     antiCrypto: _.sortBy(antiCrypto, x => -1 * x.computedStanceScore),
     neutralCrypto: neutralCrypto,
+    proCrypto: _.sortBy(proCrypto, x => x.computedStanceScore),
   }
 }

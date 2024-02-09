@@ -11,15 +11,13 @@ export default async function InternalHomepage() {
       <div className="space-y-10">
         {[
           {
-            sectionTitle: 'General',
             links: [
               { children: 'User Settings', href: '/internal/user-settings' },
               { children: 'User Action Deeplinks', href: '/internal/user-action-deeplinks' },
             ],
+            sectionTitle: 'General',
           },
           {
-            sectionTitle: 'Sentry Debugging',
-            subSectionTitle: 'Note: only available in testing/local environments',
             links: [
               {
                 children: 'Page - Client Component Error',
@@ -52,6 +50,8 @@ export default async function InternalHomepage() {
                 target: '_blank',
               },
             ],
+            sectionTitle: 'Sentry Debugging',
+            subSectionTitle: 'Note: only available in testing/local environments',
           },
         ].map(({ sectionTitle, subSectionTitle, links }) => (
           <div className="space-y-4" key={sectionTitle}>

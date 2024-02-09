@@ -15,8 +15,8 @@ type Props = PageProps
 
 export async function generateMetadata(_props: Props): Promise<Metadata> {
   return generateMetadataDetails({
-    title: PAGE_POLITICIANS_TITLE,
     description: PAGE_POLITICIANS_DESCRIPTION,
+    title: PAGE_POLITICIANS_TITLE,
   })
 }
 

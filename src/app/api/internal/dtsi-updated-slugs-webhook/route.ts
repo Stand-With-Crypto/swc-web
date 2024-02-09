@@ -10,8 +10,8 @@ import { z } from 'zod'
 const logger = getLogger('/api/internal/dtsi-updated-slugs-webhook')
 
 const zodPayload = z.object({
-  type: z.literal('people-with-updates'),
   personSlugs: z.array(z.string()),
+  type: z.literal('people-with-updates'),
 })
 
 const DTSI_WEBHOOK_SECRET = requiredOutsideLocalEnv(

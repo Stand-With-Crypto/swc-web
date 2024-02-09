@@ -25,19 +25,19 @@ async function smokeTestAirdropNFTWithInngest() {
 
   const action = await prismaClient.userAction.create({
     data: {
-      user: { connect: { id: user.id } },
-      nftMint: {
-        create: {
-          nftSlug: NFTSlug.SWC_SHIELD,
-          status: NFTMintStatus.REQUESTED,
-          costAtMint: 0.0,
-          contractAddress: NFT_CONTRACT_ADDRESS[NFTSlug.SWC_SHIELD],
-          costAtMintCurrencyCode: NFTCurrency.ETH,
-          costAtMintUsd: new Decimal(0),
-        },
-      },
       actionType: UserActionType.OPT_IN,
       campaignName: UserActionOptInCampaignName.DEFAULT,
+      nftMint: {
+        create: {
+          contractAddress: NFT_CONTRACT_ADDRESS[NFTSlug.SWC_SHIELD],
+          costAtMint: 0.0,
+          costAtMintCurrencyCode: NFTCurrency.ETH,
+          costAtMintUsd: new Decimal(0),
+          nftSlug: NFTSlug.SWC_SHIELD,
+          status: NFTMintStatus.REQUESTED,
+        },
+      },
+      user: { connect: { id: user.id } },
       userActionOptIn: {
         create: {
           optInType: UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER,
@@ -47,14 +47,14 @@ async function smokeTestAirdropNFTWithInngest() {
   })
 
   const payload: AirdropPayload = {
-    nftMintId: action.nftMintId!,
     contractAddress: NFT_CONTRACT_ADDRESS[NFTSlug.SWC_SHIELD],
+    nftMintId: action.nftMintId!,
     recipientWalletAddress: LOCAL_USER_CRYPTO_ADDRESS,
   }
 
   await inngest.send({
-    name: AIRDROP_NFT_INNGEST_EVENT_NAME,
     data: payload,
+    name: AIRDROP_NFT_INNGEST_EVENT_NAME,
   })
 }
 

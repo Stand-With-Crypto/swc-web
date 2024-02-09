@@ -14,9 +14,9 @@ export function PageAbout({ title, description }: { title: string; description: 
 
         <Card.Group>
           {[
-            { value: '52M', label: 'Americans own crypto' },
-            { value: '87%', label: 'Believe the financial system needs updating' },
-            { value: '45%', label: 'Will not back anti-crypto candidates' },
+            { label: 'Americans own crypto', value: '52M' },
+            { label: 'Believe the financial system needs updating', value: '87%' },
+            { label: 'Will not back anti-crypto candidates', value: '45%' },
           ].map(({ value, label }) => (
             <Card key={label}>
               <Card.Heading>
@@ -142,24 +142,24 @@ export function PageAbout({ title, description }: { title: string; description: 
         <Card.Group>
           {[
             {
-              value: '18%',
-              label: 'Republicans hold crypto',
               image: {
-                src: '/parties/republicanFlag.svg',
                 alt: 'Republican logo',
+                src: '/parties/republicanFlag.svg',
               },
+              label: 'Republicans hold crypto',
+              value: '18%',
             },
             {
-              value: '22%',
-              label: 'Democrats hold crypto',
               image: {
-                src: '/parties/democratFlag.svg',
                 alt: 'Democrat logo',
+                src: '/parties/democratFlag.svg',
               },
+              label: 'Democrats hold crypto',
+              value: '22%',
             },
             {
-              value: '22%',
               label: 'Independents hold crypto',
+              value: '22%',
             },
           ].map(({ value, label, image }) => (
             <Card key={label}>

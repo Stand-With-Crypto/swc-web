@@ -16,18 +16,14 @@ export async function getAuthenticatedData() {
     return null
   }
   const user = await prismaClient.user.findFirstOrThrow({
-    where: {
-      id: authUser.userId,
-    },
     include: {
-      userMergeAlertUserA: { include: { userB: { include: { primaryUserCryptoAddress: true } } } },
-      userMergeAlertUserB: { include: { userA: { include: { primaryUserCryptoAddress: true } } } },
-      primaryUserCryptoAddress: true,
-      userCryptoAddresses: true,
       address: true,
+      primaryUserCryptoAddress: true,
       primaryUserEmailAddress: true,
       userActions: {
         include: {
+          nftMint: true,
+          userActionCall: true,
           userActionDonation: true,
           userActionEmail: {
             include: {
@@ -35,11 +31,15 @@ export async function getAuthenticatedData() {
               userActionEmailRecipients: true,
             },
           },
-          userActionCall: true,
-          nftMint: true,
           userActionOptIn: true,
         },
       },
+      userCryptoAddresses: true,
+      userMergeAlertUserA: { include: { userB: { include: { primaryUserCryptoAddress: true } } } },
+      userMergeAlertUserB: { include: { userA: { include: { primaryUserCryptoAddress: true } } } },
+    },
+    where: {
+      id: authUser.userId,
     },
   })
   const dtsiSlugs = new Set<string>()
@@ -65,14 +65,12 @@ export async function getAuthenticatedData() {
   }
   return {
     ...getSensitiveDataClientUserWithENSData(rest, ensData),
-    // LATER-TASK show UX if this address is not the primary address
-    currentlyAuthenticatedUserCryptoAddress: getClientUserCryptoAddress(
-      currentlyAuthenticatedUserCryptoAddress,
-    ),
-
+    
     address: address && getClientAddress(address),
-    userActions: userActions.map(record =>
-      getSensitiveDataClientUserAction({ record, dtsiPeople }),
+
+    // LATER-TASK show UX if this address is not the primary address
+currentlyAuthenticatedUserCryptoAddress: getClientUserCryptoAddress(
+      currentlyAuthenticatedUserCryptoAddress,
     ),
     mergeAlerts: [
       ...user.userMergeAlertUserA.map(
@@ -84,8 +82,8 @@ export async function getAuthenticatedData() {
           ...mergeAlert
         }) => ({
           ...mergeAlert,
-          hasBeenConfirmedByOtherUser: hasBeenConfirmedByUserB,
           hasBeenConfirmedByCurrentUser: hasBeenConfirmedByUserA,
+          hasBeenConfirmedByOtherUser: hasBeenConfirmedByUserB,
           otherUser: getClientUser({
             ...userB,
             informationVisibility: UserInformationVisibility.ALL_INFO,
@@ -110,6 +108,9 @@ export async function getAuthenticatedData() {
         }),
       ),
     ],
+    userActions: userActions.map(record =>
+      getSensitiveDataClientUserAction({ dtsiPeople, record }),
+    ),
   }
 }
 

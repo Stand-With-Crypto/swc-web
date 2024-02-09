@@ -11,12 +11,12 @@ export const THIRDWEB_TRANSACTION_STATUS_TO_NFT_MINT_STATUS: Record<
   ThirdwebTransactionStatus,
   NFTMintStatus
 > = {
+  cancelled: NFTMintStatus.FAILED,
+  errored: NFTMintStatus.FAILED,
+  mined: NFTMintStatus.CLAIMED,
   queued: NFTMintStatus.REQUESTED,
   retried: NFTMintStatus.REQUESTED,
   sent: NFTMintStatus.REQUESTED,
-  mined: NFTMintStatus.CLAIMED,
-  cancelled: NFTMintStatus.FAILED,
-  errored: NFTMintStatus.FAILED,
 }
 
 export async function updateMintNFTStatus(
@@ -45,14 +45,14 @@ export async function updateMintNFTStatus(
   }
 
   return prismaClient.nFTMint.update({
-    where: {
-      id: mintNftId,
-    },
     data: {
-      status: nftMintStatus,
-      transactionHash: transactionHash,
       costAtMint: costAtMint,
       costAtMintUsd: costAtMintUsd,
+      status: nftMintStatus,
+      transactionHash: transactionHash,
+    },
+    where: {
+      id: mintNftId,
     },
   })
 }

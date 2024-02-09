@@ -11,10 +11,14 @@ export function mockCreateUserInput({
   return {
     acquisitionCampaign: '',
     acquisitionMedium: '',
-    acquisitionSource: '',
     acquisitionReferer: '',
+    acquisitionSource: '',
+    capitolCanaryAdvocateId: null,
+    capitolCanaryInstance: null,
     firstName: withData ? faker.person.firstName() : '',
-    lastName: withData ? faker.person.lastName() : '',
+    hasOptedInToEmails: true,
+    hasOptedInToMembership: false,
+    hasOptedInToSms: false,
     informationVisibility:
       faker.helpers.maybe(
         () =>
@@ -24,13 +28,9 @@ export function mockCreateUserInput({
           ]),
         { probability: 0.9 },
       ) || UserInformationVisibility.ANONYMOUS,
-    phoneNumber: withData ? fakerFields.phoneNumber() : '',
-    hasOptedInToEmails: true,
-    hasOptedInToMembership: false,
-    hasOptedInToSms: false,
     internalStatus: UserInternalStatus.VISIBLE,
-    capitolCanaryAdvocateId: null,
-    capitolCanaryInstance: null,
+    lastName: withData ? faker.person.lastName() : '',
+    phoneNumber: withData ? fakerFields.phoneNumber() : '',
   } satisfies Prisma.UserCreateInput
 }
 
@@ -39,9 +39,9 @@ export function mockUser(): User {
   return {
     ...mockCreateUserInput({ withData }),
     ...mockCommonDatetimes(),
-    id: fakerFields.id(),
-    primaryUserEmailAddressId: fakerFields.id(),
-    primaryUserCryptoAddressId: fakerFields.id(),
     addressId: withData ? fakerFields.id() : null,
+    id: fakerFields.id(),
+    primaryUserCryptoAddressId: fakerFields.id(),
+    primaryUserEmailAddressId: fakerFields.id(),
   }
 }

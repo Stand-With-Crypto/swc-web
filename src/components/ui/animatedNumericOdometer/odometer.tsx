@@ -33,8 +33,8 @@ export function AnimatedNumericOdometer({ value, size }: AnimatedNumericOdometer
       className={styles.odometer}
       style={{
         fontFeatureSettings: `'tnum', 'lnum'`,
-        height: size,
         fontSize: size * 0.8,
+        height: size,
       }}
     >
       {numeralArray.map((numeralGroup, numeralGroupIndex) => {

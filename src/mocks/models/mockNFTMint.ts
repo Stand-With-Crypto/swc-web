@@ -11,15 +11,15 @@ export function mockCreateNFTMintInput() {
   const status = faker.helpers.arrayElement(Object.values(NFTMintStatus))
   const transactionHash = status === NFTMintStatus.CLAIMED ? faker.git.commitSha() : ''
   const nftSlug = faker.helpers.arrayElement(Object.values(NFTSlug))
-  const costAtMint = new Decimal(faker.number.float({ min: 0.01, max: 0.2, precision: 0.01 }))
+  const costAtMint = new Decimal(faker.number.float({ max: 0.2, min: 0.01, precision: 0.01 }))
   return {
-    nftSlug,
-    transactionHash,
-    status: status,
+    contractAddress: NFT_CONTRACT_ADDRESS[nftSlug],
     costAtMint: costAtMint,
     costAtMintCurrencyCode: NFTCurrency.ETH,
-    contractAddress: NFT_CONTRACT_ADDRESS[nftSlug],
     costAtMintUsd: costAtMint.times(MOCK_CURRENT_ETH_USD_EXCHANGE_RATE),
+    nftSlug,
+    status: status,
+    transactionHash,
   } satisfies Prisma.NFTMintCreateInput
 }
 export function mockNFTMint(): NFTMint {

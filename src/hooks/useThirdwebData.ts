@@ -24,11 +24,11 @@ export function useThirdwebData() {
   }
 
   return {
-    session,
     logoutAndDisconnect: async () => {
       await Promise.all([logout(), disconnect()])
       Cookies.set(USER_SESSION_ID_COOKIE_NAME, generateUserSessionId())
       handleLogoutSuccess()
     },
+    session,
   }
 }

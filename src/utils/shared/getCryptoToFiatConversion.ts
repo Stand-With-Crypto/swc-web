@@ -28,8 +28,8 @@ export async function getCryptoToFiatConversion(tickerSymbol: string) {
     })
     .catch(error => {
       Sentry.captureException(error, {
-        tags: { domain: 'getCryptoToFiatConversion' },
         extra: { response: data },
+        tags: { domain: 'getCryptoToFiatConversion' },
       })
       return undefined
     })

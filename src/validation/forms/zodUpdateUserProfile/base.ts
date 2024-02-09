@@ -4,13 +4,13 @@ import { zodOptionalEmptyString } from '@/validation/utils'
 import { RefinementCtx, boolean, object, string, z } from 'zod'
 
 export const zodUpdateUserProfileBase = object({
-  isEmbeddedWalletUser: boolean(),
   emailAddress: string(),
+  hasOptedInToMembership: boolean(),
+  hasOptedInToSms: boolean(),
+  isEmbeddedWalletUser: boolean(),
   phoneNumber: zodOptionalEmptyString(zodPhoneNumber).transform(
     str => str && normalizePhoneNumber(str),
   ),
-  hasOptedInToSms: boolean(),
-  hasOptedInToMembership: boolean(),
   // This now comes after the form in a separate step
   // informationVisibility: nativeEnum(UserInformationVisibility),
 })

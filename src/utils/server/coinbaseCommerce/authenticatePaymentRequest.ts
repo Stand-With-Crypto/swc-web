@@ -32,7 +32,7 @@ export function authenticatePaymentRequest(rawRequestBody: any) {
     .digest('hex')
   if (!areSignaturesEqual(constructedSignature, headerSignature)) {
     Sentry.captureMessage('invalid signature within request header', {
-      extra: { id: (rawRequestBody as CoinbaseCommercePayment).id, headerSignature },
+      extra: { headerSignature, id: (rawRequestBody as CoinbaseCommercePayment).id },
     })
     throw new Error('unauthorized')
   }

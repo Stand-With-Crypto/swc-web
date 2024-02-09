@@ -18,8 +18,8 @@ export async function GET(
 ) {
   const { stateCode, districtNumber } = zodParams.parse(params)
   const data = await queryDTSIPeopleByCongressionalDistrict({
-    stateCode,
     districtNumber,
+    stateCode,
   })
   return NextResponse.json(data)
 }

@@ -24,7 +24,7 @@ export const InitialsAvatar: React.FC<InitialsAvatarProps> = ({ size, className,
   return (
     <span
       className={cn('inline-flex items-center justify-center rounded-full bg-gray-800', className)}
-      style={{ width: size, height: size }}
+      style={{ height: size, width: size }}
     >
       <span className={cn('font-medium leading-none text-white', getFontSize(size))}>
         {props.firstInitial}

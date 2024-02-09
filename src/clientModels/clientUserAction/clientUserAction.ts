@@ -98,9 +98,9 @@ export const getClientUserAction = ({
   const peopleBySlug = _.keyBy(dtsiPeople, x => x.slug)
   const { id, datetimeCreated, actionType, nftMint } = record
   const sharedProps = {
-    id,
-    datetimeCreated: datetimeCreated.toISOString(),
     actionType,
+    datetimeCreated: datetimeCreated.toISOString(),
+    id,
     nftMint: nftMint
       ? {
           ...getClientNFTMint(nftMint),
@@ -110,14 +110,14 @@ export const getClientUserAction = ({
   switch (actionType) {
     case UserActionType.OPT_IN: {
       const { optInType } = getRelatedModel(record, 'userActionOptIn')
-      const callFields: ClientUserActionOptIn = { optInType, actionType }
+      const callFields: ClientUserActionOptIn = { actionType, optInType }
       return getClientModel({ ...sharedProps, ...callFields })
     }
     case UserActionType.CALL: {
       const { recipientDtsiSlug } = getRelatedModel(record, 'userActionCall')
       const callFields: ClientUserActionCall = {
-        person: peopleBySlug[recipientDtsiSlug],
         actionType,
+        person: peopleBySlug[recipientDtsiSlug],
       }
       return getClientModel({ ...sharedProps, ...callFields })
     }
@@ -127,11 +127,11 @@ export const getClientUserAction = ({
         'userActionDonation',
       )
       const donationFields: ClientUserActionDonation = {
-        amount: amount.toNumber(),
-        amountUsd: amountUsd.toNumber(),
-        amountCurrencyCode,
-        recipient,
         actionType,
+        amount: amount.toNumber(),
+        amountCurrencyCode,
+        amountUsd: amountUsd.toNumber(),
+        recipient,
       }
       return getClientModel({ ...sharedProps, ...donationFields })
     }

@@ -9,8 +9,8 @@ import { useCallback } from 'react'
 export function ErrorPagesContent({ reset }: { reset: () => void }) {
   const onPress = useCallback(() => {
     trackClientAnalytic('ErrorPagesContent Try Again Pressed', {
-      component: AnalyticComponentType.button,
       action: AnalyticActionType.click,
+      component: AnalyticComponentType.button,
     })
     reset()
   }, [reset])

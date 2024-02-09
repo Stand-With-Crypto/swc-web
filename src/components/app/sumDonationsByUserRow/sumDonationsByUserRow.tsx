@@ -31,7 +31,7 @@ export function SumDonationsByUserRow({ locale, sumDonations, index }: SumDonati
               className="absolute"
               height={24}
               src={INDEX_SHIELD_IMAGE_MAP[index]}
-              style={{ zIndex: -1, top: '1px' }}
+              style={{ top: '1px', zIndex: -1 }}
               width={24}
             />
           )}

@@ -43,25 +43,25 @@ export async function triggerServerActionForForm<
       trackFormSubmitErrored(formName, { 'Error Type': 'Unknown', ...analyticsProps })
       onError(GENERIC_FORM_ERROR_KEY, { message: error })
       Sentry.captureMessage(`triggerServerActionForForm returned unexpected form response`, {
-        tags: { formName, domain: 'triggerServerActionForForm', path: 'Unexpected' },
         extra: { analyticsProps, error, formName },
+        tags: { domain: 'triggerServerActionForForm', formName, path: 'Unexpected' },
       })
     } else if (error instanceof FetchReqError) {
       const formattedErrorStatus = formatErrorStatus(error.response.status)
       trackFormSubmitErrored(formName, { 'Error Type': error.response.status, ...analyticsProps })
       onError(GENERIC_FORM_ERROR_KEY, { message: formattedErrorStatus })
       Sentry.captureException(error, {
-        fingerprint: [formName, 'FetchReqError', `${error.response.status}`],
-        tags: { formName, domain: 'triggerServerActionForForm', path: 'FetchReqError' },
         extra: { analyticsProps, error, formName },
+        fingerprint: [formName, 'FetchReqError', `${error.response.status}`],
+        tags: { domain: 'triggerServerActionForForm', formName, path: 'FetchReqError' },
       })
     } else {
       trackFormSubmitErrored(formName, { 'Error Type': 'Unexpected', ...analyticsProps })
       onError(GENERIC_FORM_ERROR_KEY, { message: error.message })
       Sentry.captureException(error, {
-        fingerprint: [formName, 'Error', error.message],
-        tags: { formName, domain: 'triggerServerActionForForm', path: 'Error' },
         extra: { analyticsProps, error, formName },
+        fingerprint: [formName, 'Error', error.message],
+        tags: { domain: 'triggerServerActionForForm', formName, path: 'Error' },
       })
     }
     return { status: 'error' as const }
@@ -78,13 +78,13 @@ export async function triggerServerActionForForm<
       })
     })
     Sentry.captureMessage('Field errors returned from action', {
-      tags: { formName, domain: 'triggerServerActionForForm', path: 'Error' },
-      extra: { analyticsProps, response, formName },
+      extra: { analyticsProps, formName, response },
+      tags: { domain: 'triggerServerActionForForm', formName, path: 'Error' },
     })
     return { status: 'error' as const }
   }
   trackFormSubmitSucceeded(formName, analyticsProps)
-  return { status: 'success' as const, response }
+  return { response, status: 'success' as const }
 }
 
 export const trackFormSubmissionSyncErrors =

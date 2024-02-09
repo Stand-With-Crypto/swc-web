@@ -4,15 +4,15 @@ import { Button, buttonVariantsConfig } from '.'
 import { PageTitle } from '@/components/ui/pageTitleText'
 
 const meta = {
-  title: 'UI/Button',
+  args: {
+    children: 'Sample Button',
+  },
   component: Button,
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
-  args: {
-    children: 'Sample Button',
-  },
+  title: 'UI/Button',
 } satisfies Meta<typeof Button>
 
 export default meta

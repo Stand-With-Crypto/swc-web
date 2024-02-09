@@ -113,13 +113,6 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
           }
         }
         return {
-          onFocusContent: hasSignedUp
-            ? undefined
-            : () => (
-                <ThirdwebLoginDialog>
-                  <Button>Join</Button>
-                </ThirdwebLoginDialog>
-              ),
           children: (
             <>
               <MainText>
@@ -127,31 +120,31 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
               </MainText>
             </>
           ),
+          onFocusContent: hasSignedUp
+            ? undefined
+            : () => (
+                <ThirdwebLoginDialog>
+                  <Button>Join</Button>
+                </ThirdwebLoginDialog>
+              ),
         }
       }
       case UserActionType.CALL:
         return {
-          onFocusContent: () => (
-            <UserActionFormCallCongresspersonDialog>
-              <Button>Call yours</Button>
-            </UserActionFormCallCongresspersonDialog>
-          ),
           children: (
             <>
               <MainText>{userDisplayName} called their representative</MainText>
               <SubText>{formatDTSIPerson(action.person)}</SubText>
             </>
           ),
+          onFocusContent: () => (
+            <UserActionFormCallCongresspersonDialog>
+              <Button>Call yours</Button>
+            </UserActionFormCallCongresspersonDialog>
+          ),
         }
       case UserActionType.DONATION:
         return {
-          onFocusContent: () => {
-            return (
-              <InternalLink className="block" href={getIntlUrls(locale).donate()}>
-                <Button>Donate</Button>
-              </InternalLink>
-            )
-          },
           children: (
             <>
               <MainText>{userDisplayName} donated</MainText>
@@ -165,14 +158,16 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
               </SubText>
             </>
           ),
+          onFocusContent: () => {
+            return (
+              <InternalLink className="block" href={getIntlUrls(locale).donate()}>
+                <Button>Donate</Button>
+              </InternalLink>
+            )
+          },
         }
       case UserActionType.EMAIL:
         return {
-          onFocusContent: () => (
-            <UserActionFormEmailCongresspersonDialog>
-              <Button>Email yours</Button>
-            </UserActionFormEmailCongresspersonDialog>
-          ),
           children: (
             <>
               <MainText>
@@ -184,38 +179,44 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
               </SubText>
             </>
           ),
+          onFocusContent: () => (
+            <UserActionFormEmailCongresspersonDialog>
+              <Button>Email yours</Button>
+            </UserActionFormEmailCongresspersonDialog>
+          ),
         }
       case UserActionType.NFT_MINT: {
         return {
+          children: <MainText>{userDisplayName} donated by minting an NFT</MainText>,
           onFocusContent: () => (
             <UserActionFormNFTMintDialog>
               <Button>Mint yours</Button>
             </UserActionFormNFTMintDialog>
           ),
-          children: <MainText>{userDisplayName} donated by minting an NFT</MainText>,
         }
       }
       case UserActionType.TWEET: {
         return {
-          onFocusContent: () => <UserActionTweetLink>Tweet</UserActionTweetLink>,
           children: <MainText>{userDisplayName} tweeted in support of crypto</MainText>,
+          onFocusContent: () => <UserActionTweetLink>Tweet</UserActionTweetLink>,
         }
       }
       case UserActionType.VOTER_REGISTRATION: {
         return {
+          children: <MainText>{userDisplayName} registered to vote</MainText>,
           onFocusContent: () => (
             <UserActionFormVoterRegistrationDialog>
               <Button>Register</Button>
             </UserActionFormVoterRegistrationDialog>
           ),
-          children: <MainText>{userDisplayName} registered to vote</MainText>,
         }
       }
     }
     return gracefullyError({
-      // @ts-ignore
-      msg: `Unknown action type in RecentActivityRow for action ${action.id}: ${action.actionType}`,
+      
       fallback: 'helped crypto',
+      // @ts-ignore
+msg: `Unknown action type in RecentActivityRow for action ${action.id}: ${action.actionType}`,
     })
   }
   return <RecentActivityRowBase action={action} locale={locale} {...getActionSpecificProps()} />

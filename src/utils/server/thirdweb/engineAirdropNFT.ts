@@ -20,17 +20,17 @@ export async function engineAirdropNFT(
       contractAddress,
       THIRDWEB_BACKEND_WALLET,
       {
-        receiver: walletAddress,
         quantity: quantity.toString(),
+        receiver: walletAddress,
       },
     )
     return result.result.queueId
   } catch (e) {
     logger.error('error airdropping NFT:' + e)
     Sentry.captureException(e, {
+      extra: { contractAddress, quantity, walletAddress },
       level: 'error',
       tags: { domain: 'engineAirdropNFT' },
-      extra: { contractAddress, walletAddress, quantity },
     })
     throw e
   }

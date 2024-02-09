@@ -25,8 +25,8 @@ export const getDTSIClientPersonDataTableColumns = ({
   locale: SupportedLocale
 }): ColumnDef<Person>[] => [
   {
-    accessorKey: 'fullName',
     accessorFn: row => dtsiPersonFullName(row),
+    accessorKey: 'fullName',
     cell: ({ row }) => (
       <LinkBox className="flex items-center gap-3">
         <DTSIAvatar person={row.original} size={40} />
@@ -43,15 +43,8 @@ export const getDTSIClientPersonDataTableColumns = ({
     },
   },
   {
-    accessorKey: 'swcStanceScore',
     accessorFn: row => row.manuallyOverriddenStanceScore || row.computedStanceScore,
-    header: ({ column }) => {
-      return (
-        <SortableHeader column={column}>
-          Stance <span className="hidden md:inline">on crypto</span>
-        </SortableHeader>
-      )
-    },
+    accessorKey: 'swcStanceScore',
     cell: ({ row }) => (
       <div className="flex items-center gap-2">
         <DTSIFormattedLetterGrade person={row.original} size={30} />
@@ -60,15 +53,18 @@ export const getDTSIClientPersonDataTableColumns = ({
         </span>
       </div>
     ),
+    header: ({ column }) => {
+      return (
+        <SortableHeader column={column}>
+          Stance <span className="hidden md:inline">on crypto</span>
+        </SortableHeader>
+      )
+    },
   },
   {
-    accessorKey: 'personRoleCategoryDisplayName',
     accessorFn: row =>
       row.primaryRole ? getDTSIPersonRoleCategoryDisplayName(row.primaryRole) : '-',
-    header: ({ column }) => {
-      return <SortableHeader column={column}>Title</SortableHeader>
-    },
-
+    accessorKey: 'personRoleCategoryDisplayName',
     cell: ({ row }) => (
       <>
         {row.original.primaryRole
@@ -76,28 +72,29 @@ export const getDTSIClientPersonDataTableColumns = ({
           : '-'}
       </>
     ),
+
+    header: ({ column }) => {
+      return <SortableHeader column={column}>Title</SortableHeader>
+    },
   },
   {
-    accessorKey: 'primaryStateCodeWithDisplayName',
     accessorFn: row =>
       row.primaryRole?.primaryState
         ? `${getUSStateNameFromStateCode(row.primaryRole.primaryState)} ${
             row.primaryRole.primaryState
           }`
         : '-',
-    header: ({ column }) => {
-      return <SortableHeader column={column}>Location</SortableHeader>
-    },
+    accessorKey: 'primaryStateCodeWithDisplayName',
     cell: ({ row }) =>
       row.original.primaryRole?.primaryState
         ? getUSStateNameFromStateCode(row.original.primaryRole.primaryState)
         : '-',
+    header: ({ column }) => {
+      return <SortableHeader column={column}>Location</SortableHeader>
+    },
   },
   {
     accessorKey: 'politicalAffiliationCategory',
-    header: ({ column }) => {
-      return <SortableHeader column={column}>Party</SortableHeader>
-    },
     cell: ({ row }) => (
       <>
         {row.original.politicalAffiliationCategory
@@ -107,5 +104,8 @@ export const getDTSIClientPersonDataTableColumns = ({
           : '-'}
       </>
     ),
+    header: ({ column }) => {
+      return <SortableHeader column={column}>Party</SortableHeader>
+    },
   },
 ]

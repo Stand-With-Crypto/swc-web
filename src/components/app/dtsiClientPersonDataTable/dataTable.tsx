@@ -73,17 +73,17 @@ export function DataTable<TData extends Person, TValue>({
     return filterDataViaGlobalFilters<TData>(passedData, globalFilter)
   }, [globalFilter, passedData])
   const table = useReactTable({
-    data,
     columns,
+    data,
     getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-    onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
     onColumnFiltersChange: setColumnFilters,
-    getFilteredRowModel: getFilteredRowModel(),
+    onSortingChange: setSorting,
     state: {
-      sorting,
       columnFilters,
+      sorting,
     },
   })
   return (

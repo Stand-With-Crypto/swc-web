@@ -26,8 +26,8 @@ export function mapPersistedLocalUserToAnalyticsProperties(
   persisted: PersistedLocalUser,
 ): Record<string, string | undefined> {
   return {
-    'Initial Referer': persisted.initialReferer,
     'Datetime First Seen': persisted.datetimeFirstSeen,
+    'Initial Referer': persisted.initialReferer,
     ...Object.entries(persisted.initialSearchParams).reduce(
       (accum, [key, val]) => {
         accum[`Initial Search Param ${key}`] = val
@@ -42,8 +42,8 @@ export function mapCurrentSessionLocalUserToAnalyticsProperties(
   currentSession: CurrentSessionLocalUser,
 ): Record<string, string | undefined> {
   return {
-    'Referer On Load': currentSession.refererOnLoad,
     'Datetime On Load': currentSession.datetimeOnLoad,
+    'Referer On Load': currentSession.refererOnLoad,
     ...Object.entries(currentSession.searchParamsOnLoad).reduce(
       (accum, [key, val]) => {
         accum[`Search Param On Load ${key}`] = val

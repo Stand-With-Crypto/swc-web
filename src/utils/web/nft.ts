@@ -6,21 +6,21 @@ export interface NFTClientMetadata {
 }
 export const NFT_CLIENT_METADATA: Record<NFTSlug, NFTClientMetadata> = {
   [NFTSlug.SWC_SHIELD]: {
-    name: 'SWC Shield',
     image: {
+      alt: 'SWC Shield',
+      height: 512,
       url: '/images/nft/swc-shield.png',
       width: 512,
-      height: 512,
-      alt: 'SWC Shield',
     },
+    name: 'SWC Shield',
   },
   [NFTSlug.CALL_REPRESENTATIVE_SEPT_11]: {
-    name: 'Call Representative Sept 11',
     image: {
+      alt: 'A rotating phone with the text "I called congress" below it',
+      height: 160,
       url: '/nfts/call.gif',
       width: 160,
-      height: 160,
-      alt: 'A rotating phone with the text "I called congress" below it',
     },
+    name: 'Call Representative Sept 11',
   },
 }

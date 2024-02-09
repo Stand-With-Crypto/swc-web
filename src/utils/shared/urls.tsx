@@ -17,12 +17,10 @@ export const getIntlUrls = (
 ) => {
   const localePrefix = locale === DEFAULT_LOCALE && !actualPaths ? '' : `/${locale}`
   return {
-    home: () => `${locale === DEFAULT_LOCALE ? '/' : localePrefix}`,
-    termsOfService: () => `${localePrefix}/terms-of-service`,
-    privacyPolicy: () => `${localePrefix}/privacy`,
     about: () => `${localePrefix}/about`,
-    resources: () => `${localePrefix}/resources`,
     donate: () => `${localePrefix}/donate`,
+    home: () => `${locale === DEFAULT_LOCALE ? '/' : localePrefix}`,
+    internalHomepage: () => `${localePrefix}/internal`,
     leaderboard: (params?: { pageNum?: number; tab: RecentActivityAndLeaderboardTabs }) => {
       if (!params) {
         return `${localePrefix}/leaderboard`
@@ -32,10 +30,12 @@ export const getIntlUrls = (
         params.tab === RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY ? '' : `/${params.tab}`
       return `${localePrefix}/leaderboard${pageNum !== 1 || tabPath ? `/${pageNum}${tabPath}` : ''}`
     },
-    politiciansHomepage: () => `${localePrefix}/politicians`,
     politicianDetails: (dtsiSlug: string) => `${localePrefix}/politicians/person/${dtsiSlug}`,
+    politiciansHomepage: () => `${localePrefix}/politicians`,
+    privacyPolicy: () => `${localePrefix}/privacy`,
     profile: () => `${localePrefix}/profile`,
-    internalHomepage: () => `${localePrefix}/internal`,
+    resources: () => `${localePrefix}/resources`,
+    termsOfService: () => `${localePrefix}/terms-of-service`,
   }
 }
 
@@ -57,7 +57,8 @@ export const externalUrls = {
 }
 
 export const apiUrls = {
-  mockLeaderboard: (offset: number) => `/api/mock/leaderboard/${offset}`,
+  detectWipedDatabase: () => `/api/identified-user/detect-wiped-database`,
+  dtsiAllPeople: () => `/api/public/dtsi/all-people`,
   dtsiPeopleByCongressionalDistrict: ({
     stateCode,
     districtNumber,
@@ -65,14 +66,13 @@ export const apiUrls = {
     stateCode: string
     districtNumber: number
   }) => `/api/public/dtsi/by-geography/usa/${stateCode}/${districtNumber}`,
-  totalDonations: (locale: SupportedLocale) => `/api/public/total-donations/${locale}`,
-  mockTotalDonations: (locale: SupportedLocale) => `/api/mock/total-donations/${locale}`,
-  userPerformedUserActionTypes: () => `/api/identified-user/performed-user-action-types`,
-  userFullProfileInfo: () => `/api/identified-user/full-profile-info`,
-  detectWipedDatabase: () => `/api/identified-user/detect-wiped-database`,
-  dtsiAllPeople: () => `/api/public/dtsi/all-people`,
-  recentActivity: ({ limit }: { limit: number }) => `/api/public/recent-activity/${limit}`,
   homepageTopLevelMetrics: () => `/api/public/homepage/top-level-metrics`,
+  mockLeaderboard: (offset: number) => `/api/mock/leaderboard/${offset}`,
+  mockTotalDonations: (locale: SupportedLocale) => `/api/mock/total-donations/${locale}`,
+  recentActivity: ({ limit }: { limit: number }) => `/api/public/recent-activity/${limit}`,
+  totalDonations: (locale: SupportedLocale) => `/api/public/total-donations/${locale}`,
+  userFullProfileInfo: () => `/api/identified-user/full-profile-info`,
+  userPerformedUserActionTypes: () => `/api/identified-user/performed-user-action-types`,
 }
 
 const NEXT_PUBLIC_VERCEL_URL = requiredOutsideLocalEnv(

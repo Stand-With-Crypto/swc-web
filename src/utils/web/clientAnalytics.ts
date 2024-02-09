@@ -16,8 +16,8 @@ const environmentHasAnalyticsEnabled = !isStorybook && !isCypress
 
 export function initClientAnalytics() {
   mixpanel.init(NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN, {
-    track_pageview: false,
     persistence: 'localStorage',
+    track_pageview: false,
   })
 }
 export function identifyClientAnalyticsUser(userId: string) {

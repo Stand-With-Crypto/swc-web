@@ -13,9 +13,9 @@ export async function getHomepageTopLevelMetrics() {
     getCountPolicymakerContacts(),
   ])
   return {
-    sumDonations,
-    countUsers,
     countPolicymakerContacts,
+    countUsers,
+    sumDonations,
   }
 }
 export type GetHomepageTopLevelMetricsResponse = Awaited<
@@ -35,11 +35,11 @@ export async function getHomepageData() {
     getSumDonationsByUser({ limit: 10 }),
   ])
   return {
-    sumDonations,
-    countUsers,
-    countPolicymakerContacts,
     actions,
-    sumDonationsByUser,
+    countPolicymakerContacts,
+    countUsers,
     dtsiHomepagePeople,
+    sumDonations,
+    sumDonationsByUser,
   }
 }

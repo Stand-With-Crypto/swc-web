@@ -52,8 +52,8 @@ export default function ManageCookiesModal({ onSubmit, children }: ManageCookies
         </ContainerHeader>
         <div
           className={cn('space-y-6', {
-            'px-8': isMobile,
             'pb-8': isMobile,
+            'px-8': isMobile,
           })}
         >
           <p className="text-xs sm:text-sm">
@@ -78,14 +78,14 @@ function useParentComponent() {
 
   return React.useMemo(
     () => ({
-      isMobile,
       Container: isMobile ? Drawer : Dialog,
-      ContainerTrigger: isMobile ? DrawerTrigger : DialogTrigger,
       ContainerContent: isMobile
         ? DrawerContent
         : (props: DialogProps) => <DialogContent {...props} className="max-w-lg" />,
       ContainerHeader: isMobile ? DrawerHeader : DialogHeader,
       ContainerTitle: isMobile ? DrawerTitle : DialogTitle,
+      ContainerTrigger: isMobile ? DrawerTrigger : DialogTrigger,
+      isMobile,
     }),
     [isMobile],
   )

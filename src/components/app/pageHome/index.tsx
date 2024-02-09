@@ -50,7 +50,7 @@ export function PageHome({
         </div>
         <div className="order-0 md:container lg:order-1 lg:px-0">
           <Dialog
-            analytics={{ Category: 'Homepage Hero Section', CTA: '2023-12-11 Presidential Forum' }}
+            analytics={{ CTA: '2023-12-11 Presidential Forum', Category: 'Homepage Hero Section' }}
           >
             <DialogTrigger asChild>
               <LinkBox className="relative h-[320px] cursor-pointer overflow-hidden md:rounded-xl lg:h-[400px]">
@@ -94,7 +94,7 @@ export function PageHome({
         </div>
       </section>
       <div className="container">
-        <TopLevelMetrics {...{ sumDonations, locale, countUsers, countPolicymakerContacts }} />
+        <TopLevelMetrics {...{ countPolicymakerContacts, countUsers, locale, sumDonations }} />
         <section className="mb-16 text-center md:mb-24">
           <PageTitle as="h3" className="mb-7" size="md">
             Our mission

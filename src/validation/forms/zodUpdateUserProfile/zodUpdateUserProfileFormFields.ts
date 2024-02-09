@@ -5,8 +5,8 @@ import { zodUpdateUserProfileBase, zodUpdateUserProfileBaseSuperRefine } from '.
 
 export const zodUpdateUserProfileFormFields = zodUpdateUserProfileBase
   .extend({
+    address: zodGooglePlacesAutocompletePrediction.nullable(),
     firstName: zodOptionalEmptyString(zodFirstName),
     lastName: zodOptionalEmptyString(zodLastName),
-    address: zodGooglePlacesAutocompletePrediction.nullable(),
   })
   .superRefine(zodUpdateUserProfileBaseSuperRefine)

@@ -32,8 +32,8 @@ export function PolicyCard({
         <Button asChild>
           <TrackedExternalLink
             eventProperties={{
-              component: AnalyticComponentType.button,
               action: AnalyticActionType.click,
+              component: AnalyticComponentType.button,
               link: primaryCtaUrl,
               page: 'Resources',
               surface: 'Policy Card',
@@ -47,8 +47,8 @@ export function PolicyCard({
           <Button asChild variant="secondary">
             <TrackedExternalLink
               eventProperties={{
-                component: AnalyticComponentType.button,
                 action: AnalyticActionType.click,
+                component: AnalyticComponentType.button,
                 link: secondaryCtaUrl,
                 page: 'Resources',
                 surface: 'Policy Card',

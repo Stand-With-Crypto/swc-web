@@ -22,9 +22,9 @@ export function UpdateUserProfileFormContainer({
   onSuccess: () => void
 }) {
   const sections = useSections({
-    sections: [Sections.Profile, Sections.InformationVisibility],
-    initialSectionId: Sections.Profile,
     analyticsName: ANALYTICS_NAME_UPDATE_USER_PROFILE_FORM,
+    initialSectionId: Sections.Profile,
+    sections: [Sections.Profile, Sections.InformationVisibility],
   })
   // we need to leverage the data submitted in the first step in the second step (whether we show the option to use first/last name)
   const [statefulUser, setStatefulUser] = useState(user)

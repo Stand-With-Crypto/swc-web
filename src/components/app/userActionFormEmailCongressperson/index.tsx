@@ -55,27 +55,27 @@ const getDefaultValues = ({
 }): Partial<FormValues> => {
   if (user) {
     return {
-      campaignName: UserActionEmailCampaignName.DEFAULT,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      emailAddress: user.primaryUserEmailAddress?.emailAddress || '',
-      message: getDefaultText(),
       address: user.address
         ? {
             description: user.address.formattedDescription,
             place_id: user.address.googlePlaceId,
           }
         : undefined,
+      campaignName: UserActionEmailCampaignName.DEFAULT,
+      emailAddress: user.primaryUserEmailAddress?.emailAddress || '',
+      firstName: user.firstName,
+      lastName: user.lastName,
+      message: getDefaultText(),
     }
   }
   return {
+    address: undefined,
     campaignName: UserActionEmailCampaignName.DEFAULT,
+    dtsiSlug,
+    emailAddress: '',
     firstName: '',
     lastName: '',
-    emailAddress: '',
     message: getDefaultText(),
-    address: undefined,
-    dtsiSlug,
   }
 }
 
@@ -89,10 +89,10 @@ export function UserActionFormEmailCongressperson({
 }) {
   const router = useRouter()
   const urls = useIntlUrls()
-  const defaultValues = useMemo(() => getDefaultValues({ user, dtsiSlug: undefined }), [user])
+  const defaultValues = useMemo(() => getDefaultValues({ dtsiSlug: undefined, user }), [user])
   const form = useForm<FormValues>({
-    resolver: zodResolver(zodUserActionFormEmailCongresspersonFields),
     defaultValues,
+    resolver: zodResolver(zodUserActionFormEmailCongresspersonFields),
   })
   React.useEffect(() => {
     form.setFocus('firstName')
@@ -114,14 +114,14 @@ export function UserActionFormEmailCongressperson({
           }
           const result = await triggerServerActionForForm(
             {
-              form,
-              formName: ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON,
               analyticsProps: {
                 ...(address ? convertAddressToAnalyticsProperties(address) : {}),
                 'Campaign Name': values.campaignName,
-                'User Action Type': UserActionType.EMAIL,
                 'DTSI Slug': values.dtsiSlug,
+                'User Action Type': UserActionType.EMAIL,
               },
+              form,
+              formName: ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON,
             },
             () =>
               actionCreateUserActionEmailCongressperson({ ...values, address }).then(

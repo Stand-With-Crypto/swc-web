@@ -11,9 +11,9 @@ import { useMemo } from 'react'
 
 export function UserActionFormVoterRegistration({ onClose }: { onClose: () => void }) {
   const sectionProps = useSections<SectionNames>({
-    sections: Object.values(SectionNames),
-    initialSectionId: SectionNames.SURVEY,
     analyticsName: ANALYTICS_NAME_USER_ACTION_FORM_VOTER_REGISTRATION,
+    initialSectionId: SectionNames.SURVEY,
+    sections: Object.values(SectionNames),
   })
   const { currentSection: currentTab, onSectionNotFound: onTabNotFound } = sectionProps
 

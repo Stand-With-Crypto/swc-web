@@ -17,12 +17,6 @@ type Props = Pick<
 const mockDecreaseInValuesOnInitialLoadSoWeCanAnimateIncrease = (
   initial: Omit<Props, 'locale'>,
 ): Omit<Props, 'locale'> => ({
-  sumDonations: {
-    amountUsd: roundDownNumberToAnimateIn(initial.sumDonations.amountUsd, 10000),
-  },
-  countUsers: {
-    count: roundDownNumberToAnimateIn(initial.countUsers.count, 100),
-  },
   countPolicymakerContacts: {
     countUserActionCalls: roundDownNumberToAnimateIn(
       initial.countPolicymakerContacts.countUserActionCalls,
@@ -32,6 +26,12 @@ const mockDecreaseInValuesOnInitialLoadSoWeCanAnimateIncrease = (
       initial.countPolicymakerContacts.countUserActionEmailRecipients,
       100,
     ),
+  },
+  countUsers: {
+    count: roundDownNumberToAnimateIn(initial.countUsers.count, 100),
+  },
+  sumDonations: {
+    amountUsd: roundDownNumberToAnimateIn(initial.sumDonations.amountUsd, 10000),
   },
 })
 
@@ -43,21 +43,21 @@ export function TopLevelMetrics({ locale, ...data }: Props & { locale: Supported
   const values = useApiHomepageTopLevelMetrics(decreasedInitialValues).data
   const formatted = useMemo(() => {
     return {
-      sumDonations: {
-        amountUsd: new Intl.NumberFormat(locale, {
-          style: 'currency',
-          currency: SupportedFiatCurrencyCodes.USD,
-          maximumFractionDigits: 0,
-        }).format(values.sumDonations.amountUsd),
-      },
-      countUsers: {
-        count: new Intl.NumberFormat(locale).format(values.countUsers.count),
-      },
       countPolicymakerContacts: {
         count: new Intl.NumberFormat(locale).format(
           values.countPolicymakerContacts.countUserActionCalls +
             values.countPolicymakerContacts.countUserActionCalls,
         ),
+      },
+      countUsers: {
+        count: new Intl.NumberFormat(locale).format(values.countUsers.count),
+      },
+      sumDonations: {
+        amountUsd: new Intl.NumberFormat(locale, {
+          currency: SupportedFiatCurrencyCodes.USD,
+          maximumFractionDigits: 0,
+          style: 'currency',
+        }).format(values.sumDonations.amountUsd),
       },
     }
   }, [values, locale])

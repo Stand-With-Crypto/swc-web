@@ -16,9 +16,9 @@ const EDGE_CASES: [number, string[]][] = [
 
 function formatCurrency(value: number, locale: SupportedLocale = SupportedLocale.EN_US) {
   return new Intl.NumberFormat(locale, {
-    style: 'currency',
     currency: SupportedFiatCurrencyCodes.USD,
     maximumFractionDigits: 0,
+    style: 'currency',
   }).format(value)
 }
 

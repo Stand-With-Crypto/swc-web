@@ -44,11 +44,11 @@ async function _actionCreateUserActionTweet() {
   await throwIfRateLimited()
   const { user, userState } = await maybeUpsertUser({
     existingUser: userMatch.user,
-    sessionId,
     localUser,
+    sessionId,
   })
-  const analytics = getServerAnalytics({ userId: user.id, localUser })
-  const peopleAnalytics = getServerPeopleAnalytics({ userId: user.id, localUser })
+  const analytics = getServerAnalytics({ localUser, userId: user.id })
+  const peopleAnalytics = getServerPeopleAnalytics({ localUser, userId: user.id })
   if (localUser) {
     peopleAnalytics.setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
   }
@@ -67,8 +67,8 @@ async function _actionCreateUserActionTweet() {
     analytics.trackUserActionCreatedIgnored({
       actionType,
       campaignName,
-      reason: 'Too Many Recent',
       creationMethod: 'On Site',
+      reason: 'Too Many Recent',
       userState,
     })
     Sentry.captureMessage(
@@ -80,9 +80,9 @@ async function _actionCreateUserActionTweet() {
 
   userAction = await prismaClient.userAction.create({
     data: {
-      user: { connect: { id: user.id } },
       actionType,
       campaignName,
+      user: { connect: { id: user.id } },
       ...('userCryptoAddress' in userMatch
         ? {
             userCryptoAddress: { connect: { id: userMatch.userCryptoAddress.id } },
@@ -114,17 +114,17 @@ async function maybeUpsertUser({
     return { user: existingUser, userState: 'Existing' }
   }
   const user = await prismaClient.user.create({
-    include: {
-      primaryUserCryptoAddress: true,
-    },
     data: {
       ...mapLocalUserToUserDatabaseFields(localUser),
 
-      informationVisibility: UserInformationVisibility.ANONYMOUS,
-      userSessions: { create: { id: sessionId } },
       hasOptedInToEmails: false,
       hasOptedInToMembership: false,
       hasOptedInToSms: false,
+      informationVisibility: UserInformationVisibility.ANONYMOUS,
+      userSessions: { create: { id: sessionId } },
+    },
+    include: {
+      primaryUserCryptoAddress: true,
     },
   })
   return { user, userState: 'New' }

@@ -58,7 +58,7 @@ export const actionCreateUserActionEmailCongressperson = withServerActionMiddlew
 async function _actionCreateUserActionEmailCongressperson(input: Input) {
   logger.info('triggered')
   const userMatch = await getMaybeUserAndMethodOfMatch({
-    include: { primaryUserCryptoAddress: true, userEmailAddresses: true, address: true },
+    include: { address: true, primaryUserCryptoAddress: true, userEmailAddresses: true },
   })
   logger.info(userMatch.user ? 'found user' : 'no user found')
   const sessionId = getUserSessionId()
@@ -74,11 +74,11 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
   const { user, userState } = await maybeUpsertUser({
     existingUser: userMatch.user,
     input: validatedFields.data,
-    sessionId,
     localUser,
+    sessionId,
   })
-  const analytics = getServerAnalytics({ userId: user.id, localUser })
-  const peopleAnalytics = getServerPeopleAnalytics({ userId: user.id, localUser })
+  const analytics = getServerAnalytics({ localUser, userId: user.id })
+  const peopleAnalytics = getServerPeopleAnalytics({ localUser, userId: user.id })
   if (localUser) {
     peopleAnalytics.setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
   }
@@ -86,36 +86,36 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
   const campaignName = validatedFields.data.campaignName
   const actionType = UserActionType.EMAIL
   let userAction = await prismaClient.userAction.findFirst({
+    include: {
+      userActionEmail: true,
+    },
     where: {
       actionType,
       campaignName,
       userId: user.id,
-    },
-    include: {
-      userActionEmail: true,
     },
   })
   if (userAction) {
     analytics.trackUserActionCreatedIgnored({
       actionType,
       campaignName,
-      reason: 'Too Many Recent',
       creationMethod: 'On Site',
+      reason: 'Too Many Recent',
       userState,
       ...convertAddressToAnalyticsProperties(validatedFields.data.address),
     })
     Sentry.captureMessage(
       `duplicate ${actionType} user action for campaign ${campaignName} submitted`,
-      { extra: { validatedFields, userAction }, user: { id: user.id } },
+      { extra: { userAction, validatedFields }, user: { id: user.id } },
     )
     return { user: getClientUser(user) }
   }
 
   userAction = await prismaClient.userAction.create({
     data: {
-      user: { connect: { id: user.id } },
       actionType,
       campaignName: validatedFields.data.campaignName,
+      user: { connect: { id: user.id } },
       ...('userCryptoAddress' in userMatch
         ? {
             userCryptoAddress: { connect: { id: userMatch.userCryptoAddress.id } },
@@ -123,15 +123,15 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
         : { userSession: { connect: { id: sessionId } } }),
       userActionEmail: {
         create: {
-          senderEmail: validatedFields.data.emailAddress,
-          firstName: validatedFields.data.firstName,
-          lastName: validatedFields.data.lastName,
           address: {
             connectOrCreate: {
-              where: { googlePlaceId: validatedFields.data.address.googlePlaceId },
               create: validatedFields.data.address,
+              where: { googlePlaceId: validatedFields.data.address.googlePlaceId },
             },
           },
+          firstName: validatedFields.data.firstName,
+          lastName: validatedFields.data.lastName,
+          senderEmail: validatedFields.data.emailAddress,
           userActionEmailRecipients: {
             createMany: {
               data: [
@@ -169,22 +169,26 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
    */
   const payload: EmailRepViaCapitolCanaryPayloadRequirements = {
     campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_EMAIL_REPRESENTATIVE),
-    user: {
+    // This does not particularly matter for now as subject is currently overridden in the Capitol Canary admin settings.
+emailMessage: validatedFields.data.message,
+    
+emailSubject: 'Support Crypto',
+    
+opts: {
+      isEmailOptin: true,
+    },
+    
+user: {
       ...user,
       address: user.address!,
-    },
+    }, 
     userEmailAddress: user.userEmailAddresses.find(
       emailAddr => emailAddr.emailAddress === validatedFields.data.emailAddress,
     ),
-    opts: {
-      isEmailOptin: true,
-    },
-    emailSubject: 'Support Crypto', // This does not particularly matter for now as subject is currently overridden in the Capitol Canary admin settings.
-    emailMessage: validatedFields.data.message,
   }
   await inngest.send({
-    name: CAPITOL_CANARY_EMAIL_REP_INNGEST_EVENT_NAME,
     data: payload,
+    name: CAPITOL_CANARY_EMAIL_REP_INNGEST_EVENT_NAME,
   })
 
   logger.info('updated user')
@@ -223,8 +227,8 @@ async function maybeUpsertUser({
         existingUser.address?.googlePlaceId !== address.googlePlaceId && {
           address: {
             connectOrCreate: {
-              where: { googlePlaceId: address.googlePlaceId },
               create: address,
+              where: { googlePlaceId: address.googlePlaceId },
             },
           },
         }),
@@ -235,40 +239,40 @@ async function maybeUpsertUser({
     }
     logger.info(`updating the following user fields ${keysToUpdate.join(', ')}`)
     const user = await prismaClient.user.update({
-      where: { id: existingUser.id },
       data: updatePayload,
       include: {
+        address: true,
         primaryUserCryptoAddress: true,
         userEmailAddresses: true,
-        address: true,
       },
+      where: { id: existingUser.id },
     })
 
     if (!user.primaryUserEmailAddressId && emailAddress) {
       const newEmail = user.userEmailAddresses.find(addr => addr.emailAddress === emailAddress)!
       logger.info(`updating primary email`)
       await prismaClient.user.update({
-        where: { id: user.id },
         data: { primaryUserEmailAddressId: newEmail.id },
+        where: { id: user.id },
       })
       user.primaryUserEmailAddressId = newEmail.id
     }
     return { user, userState: 'Existing With Updates' }
   }
   const user = await prismaClient.user.create({
-    include: {
-      primaryUserCryptoAddress: true,
-      userEmailAddresses: true,
-      address: true,
-    },
     data: {
       ...mapLocalUserToUserDatabaseFields(localUser),
-      informationVisibility: UserInformationVisibility.ANONYMOUS,
-      userSessions: { create: { id: sessionId } },
+      address: {
+        connectOrCreate: {
+          create: address,
+          where: { googlePlaceId: address.googlePlaceId },
+        },
+      },
+      firstName,
       hasOptedInToEmails: true,
       hasOptedInToMembership: false,
       hasOptedInToSms: false,
-      firstName,
+      informationVisibility: UserInformationVisibility.ANONYMOUS,
       lastName,
       userEmailAddresses: {
         create: {
@@ -277,20 +281,20 @@ async function maybeUpsertUser({
           source: UserEmailAddressSource.USER_ENTERED,
         },
       },
-      address: {
-        connectOrCreate: {
-          where: { googlePlaceId: address.googlePlaceId },
-          create: address,
-        },
-      },
+      userSessions: { create: { id: sessionId } },
+    },
+    include: {
+      address: true,
+      primaryUserCryptoAddress: true,
+      userEmailAddresses: true,
     },
   })
   const primaryUserEmailAddressId = user.userEmailAddresses[0].id
   await prismaClient.user.update({
-    where: { id: user.id },
     data: {
       primaryUserEmailAddressId,
     },
+    where: { id: user.id },
   })
   user.primaryUserEmailAddressId = primaryUserEmailAddressId
   return { user, userState: 'New' }

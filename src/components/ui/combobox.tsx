@@ -59,7 +59,7 @@ export function Combobox<T>({
             ...properties,
           })
         },
-        { args: newOpen, analytics },
+        { analytics, args: newOpen },
       ),
     [analytics],
   )
@@ -73,12 +73,12 @@ export function Combobox<T>({
             <StatusList
               setOpen={setOpen}
               {...{
-                value,
+                getOptionKey,
+                getOptionLabel,
                 isLoading,
                 onChange,
                 options,
-                getOptionLabel,
-                getOptionKey,
+                value,
                 ...inputProps,
               }}
             />
@@ -101,7 +101,7 @@ export function Combobox<T>({
       >
         <StatusList
           setOpen={setOpen}
-          {...{ value, isLoading, onChange, options, getOptionLabel, getOptionKey, ...inputProps }}
+          {...{ getOptionKey, getOptionLabel, isLoading, onChange, options, value, ...inputProps }}
         />
       </PopoverContent>
     </Popover>

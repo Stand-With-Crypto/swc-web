@@ -24,8 +24,8 @@ export const getDTSIFormattedShortPersonRole = (
     return role.title
   }
   return gracefullyError({
-    msg: `getDTSIFormattedPersonRole returned no role for ${JSON.stringify(role)}`,
     fallback: role.title,
+    msg: `getDTSIFormattedPersonRole returned no role for ${JSON.stringify(role)}`,
   })
 }
 
@@ -127,5 +127,5 @@ export const orderDTSIPersonRolesByImportance = <
     }
     return 0
   })
-  return { byImportance, byDateStart }
+  return { byDateStart, byImportance }
 }

@@ -7,7 +7,6 @@ import { queryDTSIMockSchema } from '@/mocks/dtsi/queryDTSIMockSchema'
 import type { Meta } from '@storybook/react'
 
 const meta = {
-  title: 'App/DTSIStanceDetails',
   component: DTSIStanceDetails,
   parameters: {
     options: { showPanel: false },
@@ -17,6 +16,7 @@ const meta = {
       <DTSIStanceDetails {...args} {...loaded} />
     </div>
   ),
+  title: 'App/DTSIStanceDetails',
 } satisfies Meta<typeof DTSIStanceDetails>
 
 export default meta
@@ -27,7 +27,7 @@ const getProps =
     queryDTSIMockSchema<DTSI_PersonDetailsQuery>(dtsiPersonDetailsQueryString).then(data => {
       const person = data.people[0]
       const stance = person.stances[0]
-      return transform({ person, stance, locale: SupportedLocale.EN_US })
+      return transform({ locale: SupportedLocale.EN_US, person, stance })
     })
 
 export const Quote = {

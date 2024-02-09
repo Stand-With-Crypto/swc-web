@@ -18,8 +18,8 @@ export function UserActionFormEmailCongresspersonDialog({
   defaultOpen?: boolean
 }) {
   const dialogProps = useDialog({
-    initialOpen: defaultOpen,
     analytics: ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON,
+    initialOpen: defaultOpen,
   })
   const locale = useLocale()
   const fetchUser = useApiResponseForUserFullProfileInfo()

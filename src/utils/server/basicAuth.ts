@@ -17,7 +17,7 @@ export function decodeBasicAuthHeader(basicAuthHeader: string) {
     const [username, password] = Buffer.from(encodedAuthSecret, 'base64')
       .toString('utf-8')
       .split(':')
-    return { username, password }
+    return { password, username }
   } catch (e) {
     return { failReason: 'Could not decode' }
   }

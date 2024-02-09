@@ -19,8 +19,8 @@ export function FormattedCurrency({
   maximumSignificantDigits?: number | undefined
 }) {
   const response = new Intl.NumberFormat(locale, {
-    style: 'currency',
     currency: currencyCode,
+    style: 'currency',
     ...otherProps,
   }).format(amount)
   return response

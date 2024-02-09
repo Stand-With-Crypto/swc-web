@@ -45,8 +45,8 @@ export async function fetchWithLocalCache<T>({
     cacheFilePath,
     JSON.stringify(
       {
-        datetimeCreated: new Date().toISOString(),
         data: result,
+        datetimeCreated: new Date().toISOString(),
       },
       null,
       4,

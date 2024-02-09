@@ -70,9 +70,9 @@ export function getServerAnalytics(config: ServerAnalyticsConfig) {
   } & AnalyticProperties) {
     trackAnalytic(config, 'User Action Created', {
       ...currentSessionAnalytics,
-      'User Action Type': actionType,
       'Campaign Name': campaignName,
       'Creation Method': creationMethod,
+      'User Action Type': actionType,
       'User State': userState,
       ...other,
     })
@@ -93,11 +93,11 @@ export function getServerAnalytics(config: ServerAnalyticsConfig) {
   } & AnalyticProperties) {
     trackAnalytic(config, ' Type Creation Ignored', {
       ...currentSessionAnalytics,
-      'User Action Type': actionType,
       'Campaign Name': campaignName,
       'Creation Method': creationMethod,
-      'User State': userState,
       Reason: reason,
+      'User Action Type': actionType,
+      'User State': userState,
       ...other,
     })
   }
@@ -116,7 +116,7 @@ export function getServerAnalytics(config: ServerAnalyticsConfig) {
     })
   }
 
-  return { trackUserActionCreated, trackUserActionCreatedIgnored, track }
+  return { track, trackUserActionCreated, trackUserActionCreatedIgnored }
 }
 
 export function getServerPeopleAnalytics(config: ServerAnalyticsConfig) {
@@ -149,5 +149,5 @@ export function getServerPeopleAnalytics(config: ServerAnalyticsConfig) {
     })
   }
 
-  return { setOnce, set }
+  return { set, setOnce }
 }

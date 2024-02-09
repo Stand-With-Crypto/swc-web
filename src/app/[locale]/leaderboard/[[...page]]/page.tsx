@@ -21,8 +21,8 @@ type Props = PageProps<{ page: string[] }>
 
 export async function generateMetadata(_props: Props): Promise<Metadata> {
   return generateMetadataDetails({
-    title: PAGE_LEADERBOARD_TITLE,
     description: PAGE_LEADERBOARD_DESCRIPTION,
+    title: PAGE_LEADERBOARD_TITLE,
   })
 }
 
@@ -71,5 +71,5 @@ export default async function Leaderboard({ params }: Props) {
   }
   const offset = (pageNum - 1) * 20
   const { actions, sumDonationsByUser } = await getDataForPageLeaderboard(offset)
-  return <PageLeaderboard {...{ tab, actions, locale, sumDonationsByUser, offset, pageNum }} />
+  return <PageLeaderboard {...{ actions, locale, offset, pageNum, sumDonationsByUser, tab }} />
 }

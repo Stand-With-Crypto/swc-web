@@ -14,29 +14,29 @@ interface RecentActivityConfig {
 
 const fetchFromPrisma = async (config: RecentActivityConfig) => {
   return prismaClient.userAction.findMany({
-    orderBy: {
-      datetimeCreated: 'desc',
-    },
-    take: config.limit,
-    skip: config.offset,
-    where: {
-      user: {
-        internalStatus: UserInternalStatus.VISIBLE,
-      },
-    },
     include: {
+      nftMint: true,
       user: {
         include: { primaryUserCryptoAddress: true },
       },
+      userActionCall: true,
+      userActionDonation: true,
       userActionEmail: {
         include: {
           userActionEmailRecipients: true,
         },
       },
-      nftMint: true,
-      userActionCall: true,
-      userActionDonation: true,
       userActionOptIn: true,
+    },
+    orderBy: {
+      datetimeCreated: 'desc',
+    },
+    skip: config.offset,
+    take: config.limit,
+    where: {
+      user: {
+        internalStatus: UserInternalStatus.VISIBLE,
+      },
     },
   })
 }
@@ -60,7 +60,7 @@ export const getPublicRecentActivity = async (config: RecentActivityConfig) => {
     _.compact(data.map(({ user }) => user.primaryUserCryptoAddress?.cryptoAddress)),
   )
   return data.map(({ user, ...record }) => ({
-    ...getClientUserAction({ record, dtsiPeople }),
+    ...getClientUserAction({ dtsiPeople, record }),
     user: {
       ...getClientUserWithENSData(
         user,

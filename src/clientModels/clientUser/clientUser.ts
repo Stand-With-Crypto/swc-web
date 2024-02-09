@@ -22,13 +22,13 @@ export const getClientUser = (
   const { firstName, lastName, primaryUserCryptoAddress, id, informationVisibility } = record
   return getClientModel({
     firstName: informationVisibility === UserInformationVisibility.ALL_INFO ? firstName : null,
+    id,
+    informationVisibility,
     lastName: informationVisibility === UserInformationVisibility.ALL_INFO ? lastName : null,
     primaryUserCryptoAddress:
       informationVisibility !== UserInformationVisibility.ANONYMOUS && primaryUserCryptoAddress
         ? getClientUserCryptoAddress(primaryUserCryptoAddress)
         : null,
-    id,
-    informationVisibility,
   })
 }
 

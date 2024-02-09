@@ -20,9 +20,9 @@ export enum StanceOnCryptoOptions {
   ALL = 'All',
 }
 export const PARTY_OPTIONS = {
-  REPUBLICAN: DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN,
-  DEMOCRAT: DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT,
   ALL: 'All',
+  DEMOCRAT: DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT,
+  REPUBLICAN: DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN,
 }
 export function getPartyOptionDisplayName(party: string) {
   switch (party) {
@@ -35,10 +35,10 @@ export function getPartyOptionDisplayName(party: string) {
   }
 }
 export const ROLE_OPTIONS = {
+  ALL: 'All',
+  CONGRESS: DTSI_PersonRoleCategory.CONGRESS,
   PRESIDENT: DTSI_PersonRoleCategory.PRESIDENT,
   SENATE: DTSI_PersonRoleCategory.SENATE,
-  CONGRESS: DTSI_PersonRoleCategory.CONGRESS,
-  ALL: 'All',
 }
 export function getRoleOptionDisplayName(role: string) {
   switch (role) {
@@ -60,8 +60,8 @@ export interface GlobalFilters {
 }
 
 export const getGlobalFilterDefaults = (): GlobalFilters => ({
-  role: ROLE_OPTIONS.ALL,
   party: PARTY_OPTIONS.ALL,
+  role: ROLE_OPTIONS.ALL,
   stance: StanceOnCryptoOptions.ALL,
   state: 'All',
 })

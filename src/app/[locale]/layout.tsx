@@ -36,30 +36,34 @@ const description = `Stand with Crypto Alliance is a non-profit organization ded
 const ogImage = getOpenGraphImageUrl({ title: description })
 
 export const viewport: Viewport = {
-  viewportFit: 'cover',
-  width: 'device-width',
   initialScale: 1,
   maximumScale: 1,
   themeColor: '#272d3f',
+  viewportFit: 'cover',
+  width: 'device-width',
 }
 
 export const metadata: Metadata = {
-  ...generateMetadataDetails({ description, title, ogImage }),
+  ...generateMetadataDetails({ description, ogImage, title }),
+  // manifest: '/site.webmanifest', // LATER-TASK figure out why we get 401s when we uncomment this
+appleWebApp: {
+    startupImage: ['/logo/apple-touch-icon.png'],
+    statusBarStyle: 'black-translucent',
+    title: 'Stand With Crypto',
+  },
+  
+applicationName: 'Stand With Crypto',
+  
+icons: [
+    { sizes: '16x16', url: '/logo/favicon-16x16.png' },
+    { sizes: '32x32', url: '/logo/favicon-32x32.png' },
+  ],
+  
+metadataBase: new URL('https://www.standwithcrypto.org'),
+  
   title: {
     default: title,
     template: '%s | Stand With Crypto',
-  },
-  metadataBase: new URL('https://www.standwithcrypto.org'),
-  applicationName: 'Stand With Crypto',
-  icons: [
-    { url: '/logo/favicon-16x16.png', sizes: '16x16' },
-    { url: '/logo/favicon-32x32.png', sizes: '32x32' },
-  ],
-  // manifest: '/site.webmanifest', // LATER-TASK figure out why we get 401s when we uncomment this
-  appleWebApp: {
-    title: 'Stand With Crypto',
-    statusBarStyle: 'black-translucent',
-    startupImage: ['/logo/apple-touch-icon.png'],
   },
 }
 
