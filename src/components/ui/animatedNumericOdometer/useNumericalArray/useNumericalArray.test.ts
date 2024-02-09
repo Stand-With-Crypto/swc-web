@@ -1,7 +1,8 @@
-import { renderHook } from '@testing-library/react'
 import { expect, it } from '@jest/globals'
+import { renderHook } from '@testing-library/react'
 
 import { useNumeralArray } from '.'
+
 import { SupportedLocale } from '@/intl/locales'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 

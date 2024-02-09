@@ -3,10 +3,11 @@
 // Note that this config is unrelated to the Vercel Edge Runtime and is also required when running locally.
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/
 
-import * as Sentry from '@sentry/nextjs'
 import { ExtraErrorData } from '@sentry/integrations'
-import { toBool } from '@/utils/shared/toBool'
+import * as Sentry from '@sentry/nextjs'
+
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
+import { toBool } from '@/utils/shared/toBool'
 
 const dsn = process.env.NEXT_PUBLIC_SENTRY_DSN
 

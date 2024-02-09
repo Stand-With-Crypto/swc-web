@@ -1,10 +1,11 @@
-import { User, Address, UserEmailAddress } from '@prisma/client'
+import { Address, User, UserEmailAddress } from '@prisma/client'
+
 import {
   CapitolCanaryCampaignId,
   SandboxCapitolCanaryCampaignId,
 } from '@/utils/server/capitolCanary/campaigns'
-import { CapitolCanaryOpts } from '@/utils/server/capitolCanary/opts'
 import { CapitolCanaryMetadata } from '@/utils/server/capitolCanary/metadata'
+import { CapitolCanaryOpts } from '@/utils/server/capitolCanary/opts'
 
 export interface UpsertAdvocateInCapitolCanaryPayloadRequirements {
   campaignId: CapitolCanaryCampaignId | SandboxCapitolCanaryCampaignId

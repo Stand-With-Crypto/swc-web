@@ -1,4 +1,5 @@
 import '@/globals.css'
+
 import { PageProps } from '@/types'
 
 // This file is needed otherwise the top level not-found will not work

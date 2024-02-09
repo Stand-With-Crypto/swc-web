@@ -1,10 +1,10 @@
+import { UserInformationVisibility } from '@prisma/client'
+
 import { ClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
 import { SensitiveDataClientUserWithENSData } from '@/clientModels/clientUser/sensitiveDataClientUser'
 import { NextImage } from '@/components/ui/image'
 import { ImageAvatarProps } from '@/components/ui/imageAvatar'
-
 import { deterministicArraySelection } from '@/utils/shared/deterministicArraySelection'
-import { UserInformationVisibility } from '@prisma/client'
 
 const genericImages = [
   '/userAvatars/blue.svg',

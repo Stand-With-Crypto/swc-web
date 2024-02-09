@@ -1,19 +1,29 @@
 'use client'
+import React, { useMemo } from 'react'
 import {
   Column,
   ColumnDef,
   ColumnFiltersState,
-  SortingState,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
+  SortingState,
   useReactTable,
 } from '@tanstack/react-table'
+import { ArrowUpDown, Search } from 'lucide-react'
 
 import { Person } from '@/components/app/dtsiClientPersonDataTable/columns'
 import { DataTablePagination } from '@/components/app/dtsiClientPersonDataTable/dataTablePagination'
+import {
+  filterDataViaGlobalFilters,
+  getGlobalFilterDefaults,
+  GlobalFilters,
+  PARTY_OPTIONS,
+  ROLE_OPTIONS,
+  StanceOnCryptoOptions,
+} from '@/components/app/dtsiClientPersonDataTable/globalFiltersUtils'
 import { Button } from '@/components/ui/button'
 import { InputWithIcons } from '@/components/ui/inputWithIcons'
 import { PageTitle } from '@/components/ui/pageTitleText'
@@ -25,16 +35,6 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { ArrowUpDown, Search } from 'lucide-react'
-import React, { useMemo } from 'react'
-import {
-  GlobalFilters,
-  PARTY_OPTIONS,
-  ROLE_OPTIONS,
-  StanceOnCryptoOptions,
-  filterDataViaGlobalFilters,
-  getGlobalFilterDefaults,
-} from '@/components/app/dtsiClientPersonDataTable/globalFiltersUtils'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]

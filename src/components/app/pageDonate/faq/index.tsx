@@ -1,12 +1,12 @@
-import { PageTitle } from '@/components/ui/pageTitleText'
+import { FAQ_DATA } from './faqData'
+
 import {
   Accordion,
+  AccordionContent,
   AccordionItem,
   AccordionTrigger,
-  AccordionContent,
 } from '@/components/ui/accordion'
-
-import { FAQ_DATA } from './faqData'
+import { PageTitle } from '@/components/ui/pageTitleText'
 
 export function FAQ() {
   return (

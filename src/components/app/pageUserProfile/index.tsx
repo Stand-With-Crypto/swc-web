@@ -1,6 +1,8 @@
+import { UserActionType } from '@prisma/client'
+import _ from 'lodash'
+
 import { PageUserProfileUser } from '@/components/app/pageUserProfile/getAuthenticatedData'
 import { UpdateUserProfileFormDialog } from '@/components/app/updateUserProfileForm/dialog'
-import { hasCompleteUserProfile } from '@/utils/web/hasCompleteUserProfile'
 import { UserActionRowCTAsList } from '@/components/app/userActionRowCTA/userActionRowCTAsList'
 import { SensitiveDataUserAvatar } from '@/components/app/userAvatar'
 import { Button } from '@/components/ui/button'
@@ -12,9 +14,8 @@ import { PageTitle } from '@/components/ui/pageTitleText'
 import { Progress } from '@/components/ui/progress'
 import { PageProps } from '@/types'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
+import { hasCompleteUserProfile } from '@/utils/web/hasCompleteUserProfile'
 import { getSensitiveDataUserDisplayName } from '@/utils/web/userUtils'
-import { UserActionType } from '@prisma/client'
-import _ from 'lodash'
 
 export function PageUserProfile({
   params,

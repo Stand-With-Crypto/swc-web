@@ -1,5 +1,6 @@
-import { DialogProps } from '@/components/ui/dialog'
 import { useState } from 'react'
+
+import { DialogProps } from '@/components/ui/dialog'
 
 interface UseDialogOptions {
   initialOpen?: boolean

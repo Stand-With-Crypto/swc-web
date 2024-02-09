@@ -1,8 +1,9 @@
+import { Metadata } from 'next'
+
 import { PageUserProfile } from '@/components/app/pageUserProfile'
 import { getAuthenticatedData } from '@/components/app/pageUserProfile/getAuthenticatedData'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { Metadata } from 'next'
 
 export const dynamic = 'force-dynamic'
 

@@ -1,8 +1,9 @@
+import { zodUpdateUserProfileBase, zodUpdateUserProfileBaseSuperRefine } from './base'
+
 import { hasBadWord } from '@/utils/server/obscenityMatcher'
 import { zodAddress } from '@/validation/fields/zodAddress'
 import { zodFirstName, zodLastName } from '@/validation/fields/zodName'
 import { zodOptionalEmptyString } from '@/validation/utils'
-import { zodUpdateUserProfileBase, zodUpdateUserProfileBaseSuperRefine } from './base'
 
 export const zodUpdateUserProfileFormAction = zodUpdateUserProfileBase
   .extend({

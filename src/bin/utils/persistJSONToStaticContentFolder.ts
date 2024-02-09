@@ -1,6 +1,6 @@
-import prettier from 'prettier'
-import path from 'path'
 import fs from 'fs-extra'
+import path from 'path'
+import prettier from 'prettier'
 
 export const persistJSONToStaticContentFolder = async (restOfPath: string, json: object) => {
   const filePath = path.join(__dirname, '../../staticContent', restOfPath)

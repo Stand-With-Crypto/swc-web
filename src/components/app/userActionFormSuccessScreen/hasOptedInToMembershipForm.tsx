@@ -1,11 +1,12 @@
 'use client'
+import { useState } from 'react'
+
 import { actionUpdateUserHasOptedInToMembership } from '@/actions/actionUpdateUserHasOptedInToMembership'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
-import { useState } from 'react'
 
 export function HasOptedInToMembershipForm({
   onCancel,

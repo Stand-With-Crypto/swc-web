@@ -1,5 +1,6 @@
-import { fakerFields } from '@/mocks/fakerUtils'
 import { AuthenticationNonce, Prisma } from '@prisma/client'
+
+import { fakerFields } from '@/mocks/fakerUtils'
 
 export function mockCreateAuthenticationNonceInput() {
   return {

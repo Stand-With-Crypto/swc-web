@@ -1,10 +1,12 @@
-import { toBool } from '@/utils/shared/toBool'
+import 'server-only'
+
+import pRetry from 'p-retry'
+
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { getLogger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
-import pRetry from 'p-retry'
-import 'server-only'
+import { toBool } from '@/utils/shared/toBool'
 
 const logger = getLogger('fetchDTSI')
 /*

@@ -1,4 +1,12 @@
 'use client'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { UserEmailAddressSource } from '@prisma/client'
+import * as Sentry from '@sentry/nextjs'
+import { useRouter } from 'next/navigation'
+import { toast } from 'sonner'
+import { z } from 'zod'
+
 import { actionUpdateUserProfile } from '@/actions/actionUpdateUserProfile'
 import { ClientAddress } from '@/clientModels/clientAddress'
 import { SensitiveDataClientUserWithENSData } from '@/clientModels/clientUser/sensitiveDataClientUser'
@@ -31,13 +39,6 @@ import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/goo
 import { hasCompleteUserProfile } from '@/utils/web/hasCompleteUserProfile'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
 import { zodUpdateUserProfileFormFields } from '@/validation/forms/zodUpdateUserProfile/zodUpdateUserProfileFormFields'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { UserEmailAddressSource } from '@prisma/client'
-import * as Sentry from '@sentry/nextjs'
-import { useRouter } from 'next/navigation'
-import { useForm } from 'react-hook-form'
-import { toast } from 'sonner'
-import { z } from 'zod'
 
 const FORM_NAME = 'User Profile'
 type FormValues = z.infer<typeof zodUpdateUserProfileFormFields> & GenericErrorFormValues

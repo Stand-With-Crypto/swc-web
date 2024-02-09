@@ -1,3 +1,5 @@
+import _ from 'lodash'
+
 import { UserAvatar } from '@/components/app/userAvatar'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
 import { NextImage } from '@/components/ui/image'
@@ -6,7 +8,6 @@ import { SupportedLocale } from '@/intl/locales'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { cn } from '@/utils/web/cn'
 import { getUserDisplayName } from '@/utils/web/userUtils'
-import _ from 'lodash'
 
 interface SumDonationsRowProps {
   sumDonations: SumDonationsByUser[0]

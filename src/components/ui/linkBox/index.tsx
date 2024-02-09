@@ -1,5 +1,7 @@
 import React from 'react'
+
 import styles from './linkBox.module.css'
+
 import { cn } from '@/utils/web/cn'
 
 export const LinkBox = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(

@@ -1,8 +1,8 @@
 import { ChevronLeftIcon, ChevronRightIcon, DotsHorizontalIcon } from '@radix-ui/react-icons'
+import _ from 'lodash'
 
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
-import _ from 'lodash'
 
 export function PaginationLinks({
   getPageUrl,

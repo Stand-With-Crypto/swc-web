@@ -1,14 +1,15 @@
-import { prismaClient } from '@/utils/server/prismaClient'
 import { $Enums, NFTCurrency, UserAction, UserActionType, UserCryptoAddress } from '@prisma/client'
-import { getLogger } from '@/utils/shared/logger'
-import { inngest } from '@/inngest/inngest'
-import { AIRDROP_NFT_INNGEST_EVENT_NAME } from '@/inngest/functions/airdropNFT'
-import { AirdropPayload } from '@/utils/server/nft/payload'
-import { NFT_CONTRACT_ADDRESS } from '@/utils/server/nft/contractAddress'
-import { NFTSlug } from '@/utils/shared/nft'
-import NFTMintStatus = $Enums.NFTMintStatus
 import { Decimal } from '@prisma/client/runtime/library'
 import { error } from 'winston'
+
+import { AIRDROP_NFT_INNGEST_EVENT_NAME } from '@/inngest/functions/airdropNFT'
+import { inngest } from '@/inngest/inngest'
+import { NFT_CONTRACT_ADDRESS } from '@/utils/server/nft/contractAddress'
+import { AirdropPayload } from '@/utils/server/nft/payload'
+import { prismaClient } from '@/utils/server/prismaClient'
+import { getLogger } from '@/utils/shared/logger'
+import { NFTSlug } from '@/utils/shared/nft'
+import NFTMintStatus = $Enums.NFTMintStatus
 
 export const ACTION_NFT_SLUG: Record<UserActionType, NFTSlug | null> = {
   [UserActionType.OPT_IN]: NFTSlug.SWC_SHIELD,

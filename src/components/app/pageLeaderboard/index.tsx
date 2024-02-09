@@ -1,3 +1,5 @@
+import { PAGE_LEADERBOARD_TOTAL_PAGES } from './constants'
+
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
 import { DynamicRecentActivity } from '@/components/app/pageLeaderboard/dynamicRecentActivity'
 import { getDataForPageLeaderboard } from '@/components/app/pageLeaderboard/getData'
@@ -11,7 +13,6 @@ import { tabListStyles, tabTriggerStyles } from '@/components/ui/tabs/styles'
 import { SupportedLocale } from '@/intl/locales'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
-import { PAGE_LEADERBOARD_TOTAL_PAGES } from './constants'
 
 export const PAGE_LEADERBOARD_TITLE = 'Our community'
 export const PAGE_LEADERBOARD_DESCRIPTION = `See how our community is taking a stand to safeguard the future of crypto in America.`

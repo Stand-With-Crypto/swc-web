@@ -1,9 +1,11 @@
+import 'server-only'
+
+import Sentry from '@sentry/nextjs'
+import { NextResponse } from 'next/server'
+
 import { prismaClient } from '@/utils/server/prismaClient'
 import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
-import { NextResponse } from 'next/server'
-import Sentry from '@sentry/nextjs'
-import 'server-only'
 
 export const dynamic = 'force-dynamic'
 

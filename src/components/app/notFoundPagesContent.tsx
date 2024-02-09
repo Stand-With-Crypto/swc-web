@@ -1,11 +1,12 @@
 'use client'
+import { useCallback } from 'react'
+
 import { Button } from '@/components/ui/button'
 import { MaybeNextImg } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
 import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
-import { useCallback } from 'react'
 
 export function NotFoundPagesContent() {
   const onPress = useCallback(() => {

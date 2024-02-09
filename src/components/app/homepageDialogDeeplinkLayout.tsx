@@ -1,5 +1,7 @@
 import 'server-only'
+
 import React from 'react'
+import { X } from 'lucide-react'
 
 import { PageHome } from '@/components/app/pageHome'
 import {
@@ -9,10 +11,9 @@ import {
 } from '@/components/ui/dialog/styles'
 import { InternalLink } from '@/components/ui/link'
 import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
+import { PageProps } from '@/types'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
-import { X } from 'lucide-react'
-import { PageProps } from '@/types'
 
 interface HomepageDialogDeeplinkLayoutProps extends React.PropsWithChildren {
   size?: 'sm' | 'md'

@@ -1,7 +1,8 @@
+import { Metadata } from 'next'
+
 import { PageUserProfileSkeleton } from '@/components/app/pageUserProfile/skeleton'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { Metadata } from 'next'
 
 export const dynamic = 'error'
 

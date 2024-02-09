@@ -1,5 +1,6 @@
-import { getCryptoToFiatConversion } from '@/utils/shared/getCryptoToFiatConversion'
 import useSWR from 'swr'
+
+import { getCryptoToFiatConversion } from '@/utils/shared/getCryptoToFiatConversion'
 
 export type UseGetCryptoToFiatConversionResponse = Awaited<
   ReturnType<typeof getCryptoToFiatConversion>

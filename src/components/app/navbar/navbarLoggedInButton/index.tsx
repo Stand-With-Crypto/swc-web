@@ -1,15 +1,16 @@
 'use client'
 
 import React from 'react'
+import { useENS } from '@thirdweb-dev/react'
+
+import { NavbarLoggedInPopoverContent } from './navbarLoggedInPopoverContent'
 
 import { Button } from '@/components/ui/button'
-import { NavbarLoggedInPopoverContent } from './navbarLoggedInPopoverContent'
 import { useResponsivePopover } from '@/components/ui/responsivePopover'
-import { getSensitiveDataUserDisplayName } from '@/utils/web/userUtils'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useDialog } from '@/hooks/useDialog'
-import { useENS } from '@thirdweb-dev/react'
 import { appendENSHookDataToUser } from '@/utils/web/appendENSHookDataToUser'
+import { getSensitiveDataUserDisplayName } from '@/utils/web/userUtils'
 
 export function NavbarLoggedInButton({ onOpenChange }: { onOpenChange: (open: boolean) => void }) {
   const { Popover, PopoverContent, PopoverTrigger } = useResponsivePopover()

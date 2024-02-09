@@ -1,9 +1,11 @@
+import * as Sentry from '@sentry/nextjs'
+import _ from 'lodash'
+
+import { UserENSData } from './types'
+
 import { formatENSAvatar } from '@/utils/server/formatENSAvatar'
 import { thirdwebRPCClient } from '@/utils/server/thirdweb/thirdwebRPCClient'
 import { stringToEthereumAddress } from '@/utils/shared/stringToEthereumAddress'
-import * as Sentry from '@sentry/nextjs'
-import _ from 'lodash'
-import { UserENSData } from './types'
 
 const client = thirdwebRPCClient
 

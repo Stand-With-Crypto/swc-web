@@ -1,5 +1,6 @@
-import { cn, twNoop } from '@/utils/web/cn'
 import { PropsWithChildren } from 'react'
+
+import { cn, twNoop } from '@/utils/web/cn'
 
 export const cardClassNames = twNoop('bg-secondary px-4 py-6 rounded-3xl')
 

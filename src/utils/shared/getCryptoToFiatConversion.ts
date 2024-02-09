@@ -1,6 +1,7 @@
-import { fetchReq } from '@/utils/shared/fetchReq'
 import { Decimal } from '@prisma/client/runtime/library'
 import * as Sentry from '@sentry/nextjs'
+
+import { fetchReq } from '@/utils/shared/fetchReq'
 
 type CryptoToFiatConversionResult = {
   data: {

@@ -1,4 +1,7 @@
 import React from 'react'
+import { DialogProps } from '@radix-ui/react-dialog'
+
+import { CookiePreferencesForm } from './cookiePreferencesForm'
 
 import {
   Dialog,
@@ -16,11 +19,8 @@ import {
 } from '@/components/ui/drawer'
 import { useDialog } from '@/hooks/useDialog'
 import { useIsMobile } from '@/hooks/useIsMobile'
-import { cn } from '@/utils/web/cn'
-
 import { CookieConsentPermissions } from '@/utils/shared/cookieConsent'
-import { DialogProps } from '@radix-ui/react-dialog'
-import { CookiePreferencesForm } from './cookiePreferencesForm'
+import { cn } from '@/utils/web/cn'
 
 export interface ManageCookiesModalProps {
   onSubmit: (accepted: CookieConsentPermissions) => void

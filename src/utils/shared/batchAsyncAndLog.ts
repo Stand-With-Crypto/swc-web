@@ -1,5 +1,6 @@
-import { logger } from '@/utils/shared/logger'
 import _ from 'lodash'
+
+import { logger } from '@/utils/shared/logger'
 
 export const batchAsyncAndLog = async <T, A extends (items: T[]) => Promise<any>>(
   items: T[],

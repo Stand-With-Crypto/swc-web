@@ -3,13 +3,13 @@
 import * as React from 'react'
 import * as PopoverPrimitive from '@radix-ui/react-popover'
 
+import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
+import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
 import { cn } from '@/utils/web/cn'
 import {
   PrimitiveComponentAnalytics,
   trackPrimitiveComponentAnalytics,
 } from '@/utils/web/primitiveComponentAnalytics'
-import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
-import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
 
 const Popover = ({
   analytics,
@@ -55,4 +55,4 @@ const PopoverContent = React.forwardRef<
 ))
 PopoverContent.displayName = PopoverPrimitive.Content.displayName
 
-export { Popover, PopoverTrigger, PopoverContent }
+export { Popover, PopoverContent,PopoverTrigger }

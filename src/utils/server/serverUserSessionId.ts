@@ -1,7 +1,8 @@
 import * as Sentry from '@sentry/nextjs'
-import { USER_SESSION_ID_COOKIE_NAME } from '@/utils/shared/userSessionId'
 import { NextApiRequest } from 'next'
 import { cookies, headers } from 'next/headers'
+
+import { USER_SESSION_ID_COOKIE_NAME } from '@/utils/shared/userSessionId'
 
 export function getUserSessionIdOnPageRouter(req: NextApiRequest) {
   const value = req.cookies[USER_SESSION_ID_COOKIE_NAME]

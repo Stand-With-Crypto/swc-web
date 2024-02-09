@@ -1,10 +1,11 @@
+import * as Sentry from '@sentry/nextjs'
+
 import {
   CHAIN_ID,
   THIRDWEB_BACKEND_WALLET,
   thirdwebEngine,
 } from '@/utils/server/thirdweb/thirdwebEngine'
 import { getLogger } from '@/utils/shared/logger'
-import * as Sentry from '@sentry/nextjs'
 
 const logger = getLogger(`engineAirdropNFT`)
 

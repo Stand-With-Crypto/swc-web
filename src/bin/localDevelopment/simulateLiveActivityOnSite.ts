@@ -1,3 +1,7 @@
+import { faker } from '@faker-js/faker'
+import { Prisma, UserActionType } from '@prisma/client'
+import _ from 'lodash'
+
 import { runBin } from '@/bin/runBin'
 import { mockCreateAddressInput } from '@/mocks/models/mockAddress'
 import { mockCreateNFTMintInput } from '@/mocks/models/mockNFTMint'
@@ -13,9 +17,6 @@ import { mockCreateUserEmailAddressInput } from '@/mocks/models/mockUserEmailAdd
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getLogger } from '@/utils/shared/logger'
 import { sleep } from '@/utils/shared/sleep'
-import { faker } from '@faker-js/faker'
-import { Prisma, UserActionType } from '@prisma/client'
-import _ from 'lodash'
 
 const logger = getLogger('simulateLiveActivityOnSite')
 
