@@ -9,12 +9,14 @@ type Status = 'idle' | 'loading' | 'completed' | 'canceled' | 'error'
 type UseSendMintNFTTransactionOptions = {
   contractAddress: string
   quantity: number
+  isUSResident?: boolean
   onStatusChange?: (status: Status) => void
 }
 
 export function useSendMintNFTTransaction({
   contractAddress,
   quantity,
+  isUSResident = false,
   onStatusChange = noop,
 }: UseSendMintNFTTransactionOptions) {
   const sdk = useSDK()
@@ -44,8 +46,8 @@ export function useSendMintNFTTransaction({
       const transaction = await contract.erc721.claim.prepare(quantity)
 
       const callData = transaction.encode()
-      const metadata = keccak256(toHex('US')).slice(2, 10)
-      const callDataWithMetadata = callData + metadata
+      const usResidencyMetadata = keccak256(toHex('US')).slice(2, 10)
+      const callDataWithMetadata = callData + (isUSResident ? usResidencyMetadata : '')
 
       const claimData = await sdk.wallet.sendRawTransaction({
         to: contractAddress,
@@ -68,7 +70,7 @@ export function useSendMintNFTTransaction({
       handleChangeStatus('error')
       return 'error'
     }
-  }, [contract, contractAddress, contractMetadata, handleChangeStatus, quantity, sdk])
+  }, [contract, contractAddress, contractMetadata, handleChangeStatus, isUSResident, quantity, sdk])
 
   return {
     mintNFT,

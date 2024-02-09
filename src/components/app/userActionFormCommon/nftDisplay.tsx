@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { NextImage } from '@/components/ui/image'
+import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { Skeleton } from '@/components/ui/skeleton'
 import { cva } from 'class-variance-authority'
 
@@ -11,6 +12,7 @@ interface NFTDisplayProps {
   size?: NFTDisplaySize
   className?: string
   raw?: boolean
+  loading?: boolean
 }
 
 const nftDisplayVariants = cva('overflow-hidden', {
@@ -37,24 +39,22 @@ export function NFTDisplay({
   className,
   raw = false,
   alt,
+  loading,
   ...props
 }: NFTDisplayProps) {
-  if (raw) {
-    return (
-      <div className={nftDisplayVariants({ size, className })}>
-        <img alt={alt} {...props} />
-      </div>
-    )
-  }
-
   return (
     <div className={nftDisplayVariants({ size, className })}>
-      <NextImage
-        alt={alt}
-        {...props}
-        width={NFT_IMAGE_SIZE_BY_VARIANT[size]}
-        height={NFT_IMAGE_SIZE_BY_VARIANT[size]}
-      />
+      {loading && <LoadingOverlay />}
+      {raw ? (
+        <img alt={alt} {...props} />
+      ) : (
+        <NextImage
+          alt={alt}
+          {...props}
+          width={NFT_IMAGE_SIZE_BY_VARIANT[size]}
+          height={NFT_IMAGE_SIZE_BY_VARIANT[size]}
+        />
+      )}
     </div>
   )
 }

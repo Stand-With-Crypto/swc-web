@@ -1,4 +1,6 @@
 import { useSections } from '@/hooks/useSections'
+import { toast } from 'sonner'
+import React from 'react'
 
 import { UserActionFormNFTMintIntro } from './sections/intro'
 import { UserActionFormNFTMintCheckout } from './sections/checkout'
@@ -7,7 +9,6 @@ import { useCheckoutController } from './useCheckoutController'
 import { MINT_NFT_CONTRACT_ADDRESS } from '@/components/app/userActionFormNFTMint/constants'
 import { useSendMintNFTTransaction } from '@/hooks/useSendMintNFTTransaction'
 import { toastGenericError } from '@/utils/web/toastUtils'
-import { toast } from 'sonner'
 
 export enum UserActionFormNFTMintSectionNames {
   INTRO = 'intro',
@@ -23,7 +24,7 @@ export function UserActionFormNFTMint(_props: { onCancel: () => void; onSuccess:
 
   const checkoutController = useCheckoutController()
 
-  const { mintNFT, status: sendNFTTransactionStatus } = useSendMintNFTTransaction({
+  const { mintNFT, status: _sendNFTTransactionStatus } = useSendMintNFTTransaction({
     contractAddress: MINT_NFT_CONTRACT_ADDRESS,
     quantity: checkoutController.quantity,
     onStatusChange: status => {
@@ -50,8 +51,8 @@ export function UserActionFormNFTMint(_props: { onCancel: () => void; onSuccess:
         <UserActionFormNFTMintCheckout
           {...sectionProps}
           {...checkoutController}
-          onMint={() => {
-            mintNFT()
+          onMint={async () => {
+            await mintNFT()
             sectionProps.goToSection(UserActionFormNFTMintSectionNames.SUCCESS)
           }}
         />

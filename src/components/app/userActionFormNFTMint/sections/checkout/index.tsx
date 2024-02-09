@@ -47,7 +47,7 @@ export function UserActionFormNFTMintCheckout({
   const address = useAddress()
   const checkoutError = useCheckoutError({ totalFee: totalFee ?? toBigNumber('0') })
 
-  console.log({ checkoutError })
+  console.log({ checkoutError, contractMetadata, isLoadingMetadata })
 
   if (!contractMetadata || isLoadingMetadata || !address) {
     return (
@@ -64,6 +64,7 @@ export function UserActionFormNFTMintCheckout({
       <UserActionFormLayout.Container>
         <div className="flex gap-6">
           <NFTDisplay
+            loading
             size="sm"
             src={contractMetadata?.image ?? ''}
             alt={contractMetadata.name}
