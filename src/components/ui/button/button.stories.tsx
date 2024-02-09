@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { Button, buttonVariantsConfig } from '.'
+import { PageTitle } from '@/components/ui/pageTitleText'
 
 const meta = {
   title: 'UI/Button',
@@ -24,13 +25,25 @@ export const Single: Story = {
 export const AllOptions: Story = {
   render: () => {
     const variants: any[] = Object.keys(buttonVariantsConfig.variant)
+    const sizes: any[] = ['sm', 'default', 'lg']
     return (
-      <div className="space-y-4">
+      <div className="space-y-8">
         {variants.map(variant => (
-          <div key={variant}>
-            <p className="text-xs">{variant}</p>
-            <div>
-              <Button variant={variant}>Sample Button</Button>
+          <div className="w-full max-w-xl" key={variant}>
+            <PageTitle className="mb-4" size="sm">
+              {variant}
+            </PageTitle>
+            <div className="flex flex-col gap-4 md:flex-row">
+              {sizes.map(size => (
+                <div key={size}>
+                  <p className="mb-1 text-xs">{size}</p>
+                  <div>
+                    <Button size={size} variant={variant}>
+                      Sample Button
+                    </Button>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         ))}

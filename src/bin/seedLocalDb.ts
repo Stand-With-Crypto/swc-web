@@ -70,8 +70,23 @@ async function seed() {
   /*
   user
   */
+  const topDonorCryptoAddressStrings = [
+    PopularCryptoAddress.BRIAN_ARMSTRONG,
+    PopularCryptoAddress.CHRIS_DIXON,
+  ]
+  const initialCryptoAddresses = [...topDonorCryptoAddressStrings, LOCAL_USER_CRYPTO_ADDRESS]
   await batchAsyncAndLog(
-    _.times(seedSizes([10, 100, 1000])).map(() => mockCreateUserInput()),
+    _.times(seedSizes([12, 98, 987])).map((_num, index) => {
+      // This ensures that no matter how many users we create, we include our initial crypto addresses
+      const shouldBeAssociatedWithInitialCryptoAddress = index < initialCryptoAddresses.length
+      const mocks = mockCreateUserInput()
+      return {
+        ...mocks,
+        informationVisibility: shouldBeAssociatedWithInitialCryptoAddress
+          ? UserInformationVisibility.CRYPTO_INFO_ONLY
+          : mocks.informationVisibility,
+      }
+    }),
     data =>
       prismaClient.user.createMany({
         data,
@@ -93,7 +108,6 @@ async function seed() {
   )
   const userSession = await prismaClient.userSession.findMany()
   logEntity({ userSession })
-  const usersUnusedOnCryptoAddress = [...user]
 
   /*
   userEmailAddress
@@ -114,11 +128,7 @@ async function seed() {
   /*
   userCryptoAddress
   */
-  const topDonorCryptoAddressStrings = [
-    PopularCryptoAddress.BRIAN_ARMSTRONG,
-    PopularCryptoAddress.CHRIS_DIXON,
-  ]
-  const initialCryptoAddresses = [...topDonorCryptoAddressStrings, LOCAL_USER_CRYPTO_ADDRESS]
+  const usersUnusedOnCryptoAddress = [...user]
   const emailAddressesToRelateToEmbeddedWallets = userEmailAddress.filter(
     x => x.source === UserEmailAddressSource.THIRDWEB_EMBEDDED_AUTH,
   )
@@ -133,7 +143,6 @@ async function seed() {
       // in the testing environment. This lets us verify our onchain integrations are working easily
       const shouldUseInitialCryptoAddress =
         initialCryptoAddresses.length &&
-        !selectedUser.firstName &&
         selectedUser.informationVisibility === UserInformationVisibility.CRYPTO_INFO_ONLY
       return {
         ...mockCreateUserCryptoAddressInput(),
@@ -237,11 +246,11 @@ async function seed() {
         if (actionType === UserActionType.OPT_IN) {
           return faker.helpers.arrayElement(userEmailAddress)
         }
-        if (index < 10) {
-          return localUserCryptoAddress
-        }
         if (actionType === UserActionType.DONATION && topDonorsLeftToAssign.length) {
           return topDonorsLeftToAssign.pop()!
+        }
+        if (seedSize !== SeedSize.SM && index < 10) {
+          return localUserCryptoAddress
         }
         if (index % 4 === 1) {
           return faker.helpers.arrayElement(userSession)

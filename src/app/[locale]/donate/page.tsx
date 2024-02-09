@@ -15,14 +15,14 @@ export const metadata: Metadata = {
 }
 
 export default async function DonatePage({ params: { locale } }: PageProps) {
-  const sumDonations = await getSumDonations()
+  const sumDonations = await getSumDonations({ includeFairshake: true })
 
   return (
     <PageDonate
-      title="Protect the future of crypto"
       description={description}
-      sumDonations={sumDonations}
       locale={locale}
+      sumDonations={sumDonations}
+      title="Protect the future of crypto"
     />
   )
 }

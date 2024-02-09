@@ -1,6 +1,8 @@
-import { AccountAuthDialogWrapper } from '@/components/app/accountAuth'
 import { DTSIPersonCard } from '@/components/app/dtsiPersonCard'
 import { DelayedRecentActivity } from '@/components/app/pageHome/delayedRecentActivity'
+import { HeroCTA } from '@/components/app/pageHome/heroCTA'
+import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
+import { SumDonationsByUserRow } from '@/components/app/sumDonationsByUserRow/sumDonationsByUserRow'
 import { UserActionRowCTAsListWithApi } from '@/components/app/userActionRowCTA/userActionRowCTAsListWithApi'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
@@ -11,6 +13,7 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { LazyResponsiveYoutube } from '@/components/ui/responsiveYoutube/lazyLoad'
 import { Skeleton } from '@/components/ui/skeleton'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
 import { PageProps } from '@/types'
 import { groupAndSortDTSIPeopleByCryptoStance } from '@/utils/dtsi/dtsiPersonUtils'
@@ -18,9 +21,6 @@ import { getIntlUrls } from '@/utils/shared/urls'
 import { ArrowUpRight, ThumbsDown, ThumbsUp } from 'lucide-react'
 import { Suspense } from 'react'
 import { TopLevelMetrics } from './topLevelMetrics'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
-import { SumDonationsByUserRow } from '@/components/app/sumDonationsByUserRow/sumDonationsByUserRow'
 
 export function PageHome({
   params,
@@ -36,19 +36,17 @@ export function PageHome({
   const groupedDTSIHomepagePeople = groupAndSortDTSIPeopleByCryptoStance(dtsiHomepagePeople.people)
   return (
     <>
-      <section className="grid-fl mb-6 grid grid-cols-1 items-center gap-4 lg:container lg:grid-cols-2">
-        <div className="lg:order-0 container order-1 space-y-6 text-center lg:px-0 lg:text-left">
-          <PageTitle className={'text-left'} withoutBalancer>
+      <section className="grid-fl mb-6 grid grid-cols-1 items-center gap-4 lg:container lg:grid-cols-2 lg:gap-8">
+        <div className="lg:order-0 container order-1 mx-auto max-w-xl space-y-6 text-center md:max-w-3xl lg:px-0 lg:text-left">
+          <PageTitle className={'lg:text-left'} withoutBalancer>
             If you care about crypto, it's time to prove it
           </PageTitle>
-          <PageSubTitle className="max-w-xl text-left" withoutBalancer>
+          <PageSubTitle className="lg:max-w-xl lg:text-left" withoutBalancer>
             52 million Americans own crypto. And yet, crypto's future in America remains uncertain.
             Congress is writing the rules as we speak - but they won't vote YES until they've heard
             from you.
           </PageSubTitle>
-          <AccountAuthDialogWrapper>
-            <Button size="lg">Join the fight</Button>
-          </AccountAuthDialogWrapper>
+          <HeroCTA />
         </div>
         <div className="order-0 md:container lg:order-1 lg:px-0">
           <Dialog
@@ -57,21 +55,21 @@ export function PageHome({
             <DialogTrigger asChild>
               <LinkBox className="relative h-[320px] cursor-pointer overflow-hidden md:rounded-xl lg:h-[400px]">
                 <NextImage
-                  priority
                   alt="First in the Nation Crypto Presidential Forum December 11th 2023 St. Anselm College"
-                  src="/homepageHero.jpg"
+                  className="h-full w-full object-cover"
                   fill
+                  priority
                   // width={1046}
                   // height={892}
-                  className="h-full w-full object-cover"
                   sizes={'(max-width: 768px) 500px, 1046px'}
+                  src="/homepageHero.jpg"
                 />
                 <div
+                  className="absolute bottom-0 flex w-full items-center justify-between gap-4 p-4 text-sm text-white"
                   style={{
                     background:
                       'linear-gradient(to top, hsla(0, 0%, 0%, 0.8) 10%, hsla(0, 0%, 0%, 0.4) 70%,  transparent 100%)',
                   }}
-                  className="absolute bottom-0 flex w-full items-center justify-between gap-4 p-4 text-sm text-white"
                 >
                   <p>
                     First in the Nation Crypto Presidential Forum December 11th 2023 St. Anselm
@@ -98,7 +96,7 @@ export function PageHome({
       <div className="container">
         <TopLevelMetrics {...{ sumDonations, locale, countUsers, countPolicymakerContacts }} />
         <section className="mb-16 text-center md:mb-24">
-          <PageTitle as="h3" size="md" className="mb-7">
+          <PageTitle as="h3" className="mb-7" size="md">
             Our mission
           </PageTitle>
           <PageSubTitle as="h4" className="mb-7">
@@ -109,7 +107,7 @@ export function PageHome({
             potential and foster greater economic freedom.
           </PageSubTitle>
           <div>
-            <Button variant="secondary" asChild>
+            <Button asChild variant="secondary">
               <InternalLink href={urls.about()}>Learn more</InternalLink>
             </Button>
           </div>
@@ -124,7 +122,6 @@ export function PageHome({
           <Tabs
             analytics={'Homepage Our Community Tabs'}
             defaultValue={RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY}
-            className="mx-auto w-full max-w-2xl"
           >
             <div className="text-center">
               <TabsList className="mx-auto">
@@ -137,7 +134,7 @@ export function PageHome({
               </TabsList>
             </div>
             <DelayedRecentActivity actions={actions} />
-            <TabsContent value={RecentActivityAndLeaderboardTabs.LEADERBOARD} className="space-y-7">
+            <TabsContent className="space-y-7" value={RecentActivityAndLeaderboardTabs.LEADERBOARD}>
               <p className="mt-2 h-7 text-center text-xs text-gray-500">
                 Donations to{' '}
                 <ExternalLink
@@ -151,10 +148,10 @@ export function PageHome({
               </p>
               {sumDonationsByUser.map((donor, index) => (
                 <SumDonationsByUserRow
-                  key={index}
                   index={index}
-                  sumDonations={donor}
+                  key={index}
                   locale={locale}
+                  sumDonations={donor}
                 />
               ))}
             </TabsContent>
@@ -163,7 +160,7 @@ export function PageHome({
             <Button asChild>
               <InternalLink href={urls.donate()}>Donate</InternalLink>
             </Button>
-            <Button variant="secondary" asChild>
+            <Button asChild variant="secondary">
               <InternalLink href={urls.leaderboard()}>View all</InternalLink>
             </Button>
           </div>
@@ -195,7 +192,7 @@ export function PageHome({
               </div>
               <div className="space-y-3">
                 {groupedDTSIHomepagePeople.proCrypto.map(person => (
-                  <DTSIPersonCard locale={locale} key={person.id} person={person} />
+                  <DTSIPersonCard key={person.id} locale={locale} person={person} />
                 ))}
               </div>
             </div>
@@ -208,13 +205,13 @@ export function PageHome({
               </div>
               <div className="space-y-3">
                 {groupedDTSIHomepagePeople.antiCrypto.map(person => (
-                  <DTSIPersonCard locale={locale} key={person.id} person={person} />
+                  <DTSIPersonCard key={person.id} locale={locale} person={person} />
                 ))}
               </div>
             </div>
           </div>
           <div className="space-x-4 text-center">
-            <Button variant="secondary" asChild>
+            <Button asChild variant="secondary">
               <InternalLink href={urls.politiciansHomepage()}>View all</InternalLink>
             </Button>
           </div>

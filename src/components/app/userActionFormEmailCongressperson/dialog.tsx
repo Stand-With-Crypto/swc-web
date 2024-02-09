@@ -20,7 +20,10 @@ export function UserActionFormEmailCongresspersonDialog({
   defaultOpen?: boolean
   rnParams: RnParams
 }) {
-  const dialogProps = useDialog(defaultOpen)
+  const dialogProps = useDialog({
+    initialOpen: defaultOpen,
+    analytics: ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON,
+  })
   const locale = useLocale()
   const fetchUser = useApiResponseForUserFullProfileInfo()
   const [state, setState] = useState<'form' | 'success'>('form')
@@ -31,7 +34,7 @@ export function UserActionFormEmailCongresspersonDialog({
     }
   }, [dialogProps.open, state])
   return (
-    <Dialog analytics={ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON} {...dialogProps}>
+    <Dialog {...dialogProps}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="max-w-3xl" padding={false}>
         <Suspense fallback={<UserActionFormEmailCongresspersonSkeleton locale={locale} />}>
@@ -39,10 +42,10 @@ export function UserActionFormEmailCongresspersonDialog({
             <UserActionFormEmailCongresspersonSkeleton locale={locale} />
           ) : state === 'form' ? (
             <LazyUserActionFormEmailCongressperson
-              user={user}
-              rnParams={rnParams}
               onCancel={() => dialogProps.onOpenChange(false)}
               onSuccess={() => setState('success')}
+              rnParams={rnParams}
+              user={user}
             />
           ) : (
             <div className="px-6">

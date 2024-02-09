@@ -50,7 +50,7 @@ export const US_STATE_CODE_TO_DISPLAY_NAME_MAP = {
   WV: 'West Virginia',
   WI: 'Wisconsin',
   WY: 'Wyoming',
-}
+} as const
 
 export const getUSStateNameFromStateCode = (stateCode: string) => {
   // @ts-ignore

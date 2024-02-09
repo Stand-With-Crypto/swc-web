@@ -118,8 +118,8 @@ model User {
   userMergeAlertUserA UserMergeAlert[] @relation("userAMergeAttempt")
   userMergeEvents     UserMergeEvent[]
 
-  capitolCanaryAdvocateId Int? @map("capitol_canary_advocate_id")
-  capitolCanaryInstance  CapitolCanaryInstance? @map("capitol_canary_instance")
+  capitolCanaryAdvocateId Int?                   @map("capitol_canary_advocate_id")
+  capitolCanaryInstance   CapitolCanaryInstance? @map("capitol_canary_instance")
 
   @@index([addressId])
   @@index([internalStatus])
@@ -226,6 +226,7 @@ enum UserActionType {
   OPT_IN
   TWEET
   NFT_MINT
+  VOTER_REGISTRATION
 }
 
 model UserAction {
@@ -255,7 +256,8 @@ model UserAction {
   userActionOptIn    UserActionOptIn?
 
   @@index([datetimeCreated])
-  @@index([userId, campaignName])
+  @@index([userId, actionType, campaignName])
+  @@index([actionType, campaignName])
   @@index([userCryptoAddressId])
   @@index([userSessionId])
   @@index([nftMintId])
@@ -322,11 +324,12 @@ enum DonationOrganization {
 model UserActionDonation {
   id                 String               @id @default(uuid())
   userAction         UserAction           @relation(fields: [id], references: [id])
-  // TODO determine if these need to be nullable in the future
   amount             Decimal              @map("amount")
   amountCurrencyCode String               @map("amount_currency_code")
   amountUsd          Decimal              @map("amount_usd")
   recipient          DonationOrganization
+
+  coinbaseCommerceDonationId String? @map("coinbase_commerce_donation_id")
 
   @@index([id])
   @@map("user_action_donation")
@@ -346,7 +349,7 @@ model NFTMint {
   id                     String        @id @default(uuid())
   nftSlug                String        @map("nft_slug")
   contractAddress        String        @map("contract_address")
-  transactionHash        String        @map("transaction_hash")
+  transactionHash        String?       @map("transaction_hash")
   status                 NFTMintStatus @map("status")
   datetimeUpdated        DateTime      @updatedAt @map("datetime_updated")
   datetimeCreated        DateTime      @default(now()) @map("datetime_created")

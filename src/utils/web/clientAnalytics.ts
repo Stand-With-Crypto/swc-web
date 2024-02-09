@@ -5,6 +5,7 @@ import mixpanel from 'mixpanel-browser'
 import { track as vercelTrack } from '@vercel/analytics'
 import { formatVercelAnalyticsEventProperties } from '@/utils/shared/vercelAnalytics'
 import { isCypress, isStorybook } from '@/utils/shared/executionEnvironment'
+import { getClientCookieConsent } from '@/utils/web/clientCookieConsent'
 
 const NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN = requiredEnv(
   process.env.NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN,
@@ -35,7 +36,9 @@ export function trackClientAnalytic(eventName: string, eventProperties?: Analyti
     ['color: #00aaff', 'color: #FCFDFB'],
     eventProperties,
   )
-  if (environmentHasAnalyticsEnabled) {
+
+  const hasTargetingEnabled = getClientCookieConsent().targeting
+  if (environmentHasAnalyticsEnabled && hasTargetingEnabled) {
     mixpanel.track(eventName, {
       eventProperties,
     })

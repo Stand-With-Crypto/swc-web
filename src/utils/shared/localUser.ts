@@ -1,7 +1,10 @@
+import { ClientAddress } from '@/clientModels/clientAddress'
+
 export interface PersistedLocalUser {
   initialSearchParams: Record<string, string>
   initialReferer?: string
   datetimeFirstSeen: string
+  recentlyUsedAddress?: Pick<ClientAddress, 'googlePlaceId' | 'formattedDescription'>
 }
 
 export interface CurrentSessionLocalUser {

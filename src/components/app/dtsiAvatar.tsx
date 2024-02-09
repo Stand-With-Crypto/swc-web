@@ -20,8 +20,8 @@ export const DTSIAvatar: React.FC<
   if (person.profilePictureUrl) {
     return (
       <ImageAvatar
-        className="rounded-md"
         alt={`Profile picture of ${dtsiPersonFullName(person)}`}
+        className="rounded-md"
         src={person.profilePictureUrl}
         {...props}
       />

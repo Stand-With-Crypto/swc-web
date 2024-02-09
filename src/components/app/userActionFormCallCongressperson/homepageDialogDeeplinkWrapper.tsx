@@ -18,9 +18,9 @@ export function UserActionFormCallCongresspersonDeeplinkWrapper() {
     <UserActionFormCallCongresspersonSkeleton />
   ) : (
     <UserActionFormCallCongressperson
+      onClose={() => router.push(urls.home())}
       rnAddress={rnAddress}
       user={user}
-      onClose={() => router.push(urls.home())}
     />
   )
 }

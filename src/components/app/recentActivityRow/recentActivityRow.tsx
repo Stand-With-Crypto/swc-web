@@ -1,15 +1,16 @@
 'use client'
 import { ClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
 import { ClientUserAction } from '@/clientModels/clientUserAction/clientUserAction'
+import { ThirdwebLoginDialog } from '@/components/app/authentication/thirdwebLoginContent'
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
-import { UserActionFormDonateDialog } from '@/components/app/userActionFormDonate/dialog'
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
-import { UserActionFormOptInSWCDialog } from '@/components/app/userActionFormOptInSWC/dialog'
+import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
 import { UserAvatar } from '@/components/app/userAvatar'
 import { Button } from '@/components/ui/button'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
 import { FormattedRelativeDatetimeWithClientHydration } from '@/components/ui/formattedRelativeDatetimeWithClientHydration'
+import { InternalLink } from '@/components/ui/link'
 import { UserActionTweetLink } from '@/components/ui/userActionTweetLink'
 import { DTSIPersonForUserActions } from '@/data/dtsi/queries/queryDTSIPeopleBySlugForUserActions'
 import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
@@ -20,6 +21,7 @@ import {
   dtsiPersonPoliticalAffiliationCategoryAbbreviation,
 } from '@/utils/dtsi/dtsiPersonUtils'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
+import { getIntlUrls } from '@/utils/shared/urls'
 import { formatDonationOrganization } from '@/utils/web/donationUtils'
 import { getUserDisplayName } from '@/utils/web/userUtils'
 import { UserActionOptInType, UserActionType } from '@prisma/client'
@@ -45,13 +47,13 @@ function RecentActivityRowBase({
       onMouseEnter={() => isMobile || setHasFocus(true)}
       onMouseLeave={() => isMobile || setHasFocus(false)}
     >
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-4">
         <div>
-          <UserAvatar size={30} user={action.user} />
+          <UserAvatar size={40} user={action.user} />
         </div>
         <div>{children}</div>
       </div>
-      <div className="shrink-0 text-xs text-gray-500">
+      <div className="shrink-0 text-xs text-gray-500 lg:text-base">
         {/* TODO add animation */}
         {hasFocus && onFocusContent ? (
           onFocusContent?.()
@@ -65,9 +67,9 @@ function RecentActivityRowBase({
             </span>
             <span className="inline md:hidden">
               <FormattedRelativeDatetimeWithClientHydration
-                timeFormatStyle="narrow"
                 date={new Date(action.datetimeCreated)}
                 locale={locale}
+                timeFormatStyle="narrow"
               />
             </span>
           </>
@@ -78,14 +80,13 @@ function RecentActivityRowBase({
 }
 
 const MainText = ({ children }: { children: React.ReactNode }) => (
-  <div className="text-sm font-bold text-gray-900">{children}</div>
+  <div className="text-sm font-semibold text-gray-900 lg:text-xl">{children}</div>
 )
 const SubText = ({ children }: { children: React.ReactNode }) => (
-  <div className="hidden text-xs text-gray-500 md:block">{children}</div>
+  <div className="hidden text-xs text-gray-500 md:block lg:text-base">{children}</div>
 )
 
 const formatDTSIPerson = (person: DTSIPersonForUserActions) => {
-  // TODO add their current role
   const politicalAffiliation = person.politicalAffiliationCategory
     ? `(${dtsiPersonPoliticalAffiliationCategoryAbbreviation(person.politicalAffiliationCategory)})`
     : ''
@@ -115,9 +116,9 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
           onFocusContent: hasSignedUp
             ? undefined
             : () => (
-                <UserActionFormOptInSWCDialog>
+                <ThirdwebLoginDialog>
                   <Button>Join</Button>
-                </UserActionFormOptInSWCDialog>
+                </ThirdwebLoginDialog>
               ),
           children: (
             <>
@@ -144,11 +145,13 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
         }
       case UserActionType.DONATION:
         return {
-          onFocusContent: () => (
-            <UserActionFormDonateDialog>
-              <Button>Donate</Button>
-            </UserActionFormDonateDialog>
-          ),
+          onFocusContent: () => {
+            return (
+              <InternalLink className="block" href={getIntlUrls(locale).donate()}>
+                <Button>Donate</Button>
+              </InternalLink>
+            )
+          },
           children: (
             <>
               <MainText>{userDisplayName} donated</MainText>
@@ -196,6 +199,16 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
         return {
           onFocusContent: () => <UserActionTweetLink>Tweet</UserActionTweetLink>,
           children: <MainText>{userDisplayName} tweeted in support of crypto</MainText>,
+        }
+      }
+      case UserActionType.VOTER_REGISTRATION: {
+        return {
+          onFocusContent: () => (
+            <UserActionFormVoterRegistrationDialog>
+              <Button>Register</Button>
+            </UserActionFormVoterRegistrationDialog>
+          ),
+          children: <MainText>{userDisplayName} registered to vote</MainText>,
         }
       }
     }

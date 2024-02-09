@@ -26,10 +26,10 @@ export function UserActionFormEmailCongresspersonDeeplinkWrapper() {
     <UserActionFormEmailCongresspersonSkeleton locale={locale} />
   ) : state === 'form' ? (
     <UserActionFormEmailCongressperson
-      user={user}
-      rnParams={rnParams}
       onCancel={() => router.replace(urls.home())}
       onSuccess={() => setState('success')}
+      rnParams={rnParams}
+      user={user}
     />
   ) : (
     <UserActionFormSuccessScreen onClose={() => router.replace(urls.home())} />

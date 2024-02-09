@@ -55,6 +55,7 @@ type ClientUserActionOptIn = Pick<UserActionOptIn, 'optInType'> & {
 }
 // Added here as a placeholder for type inference until we have some tweet-specific fields
 type ClientUserActionTweet = { actionType: typeof UserActionType.TWEET }
+type ClientUserActionVoterRegistration = { actionType: typeof UserActionType.VOTER_REGISTRATION }
 
 /*
 At the database schema level we can't enforce that a single action only has one "type" FK, but at the client level we can and should
@@ -70,6 +71,7 @@ export type ClientUserAction = ClientModel<
       | ClientUserActionCall
       | ClientUserActionDonation
       | ClientUserActionNFTMint
+      | ClientUserActionVoterRegistration
     )
 >
 
@@ -152,6 +154,9 @@ export const getClientUserAction = ({
       return getClientModel({ ...sharedProps, ...mintFields })
     }
     case UserActionType.TWEET: {
+      return getClientModel({ ...sharedProps, actionType })
+    }
+    case UserActionType.VOTER_REGISTRATION: {
       return getClientModel({ ...sharedProps, actionType })
     }
   }

@@ -19,14 +19,14 @@ export function DTSIPersonCard({
   locale: SupportedLocale
 }) {
   return (
-    <LinkBox className="flex items-center justify-between rounded-md border bg-gray-100 p-5">
+    <LinkBox className="flex items-center justify-between rounded-3xl bg-gray-100 p-5">
       <div className="flex flex-row items-center gap-3">
         <DTSIAvatar person={person} size={60} />
         <div>
           <div className="font-bold">
             <InternalLink
-              href={getIntlUrls(locale).politicianDetails(person.slug)}
               className={linkBoxLinkClassName}
+              href={getIntlUrls(locale).politicianDetails(person.slug)}
             >
               {dtsiPersonFullName(person)}{' '}
               {person.politicalAffiliationCategory
@@ -40,7 +40,7 @@ export function DTSIPersonCard({
         </div>
       </div>
       <div>
-        <DTSIFormattedLetterGrade size={40} person={person} />
+        <DTSIFormattedLetterGrade person={person} size={40} />
       </div>
     </LinkBox>
   )

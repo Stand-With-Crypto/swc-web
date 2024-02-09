@@ -9,7 +9,7 @@ export const USER_ACTION_DEEPLINK_MAP: {
 } = {
   [UserActionType.OPT_IN]: {
     getDeeplinkUrl: ({ locale }) => {
-      return `${getIntlPrefix(locale)}/action/opt-in`
+      return `${getIntlPrefix(locale)}/action/sign-up`
     },
   },
   [UserActionType.CALL]: {
@@ -24,7 +24,7 @@ export const USER_ACTION_DEEPLINK_MAP: {
   },
   [UserActionType.DONATION]: {
     getDeeplinkUrl: ({ locale }) => {
-      return `${getIntlPrefix(locale)}/action/donate`
+      return `${getIntlPrefix(locale)}/donate`
     },
   },
   [UserActionType.TWEET]: {
@@ -35,6 +35,11 @@ export const USER_ACTION_DEEPLINK_MAP: {
   [UserActionType.NFT_MINT]: {
     getDeeplinkUrl: ({ locale }) => {
       return `${getIntlPrefix(locale)}/action/nft-mint`
+    },
+  },
+  VOTER_REGISTRATION: {
+    getDeeplinkUrl: ({ locale }) => {
+      return `${getIntlPrefix(locale)}/action/voter-registration`
     },
   },
 }

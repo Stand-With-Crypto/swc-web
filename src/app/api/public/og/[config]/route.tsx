@@ -13,7 +13,7 @@ export async function GET(_request: NextRequest, { params }: { params: { config:
   const config = decodeObjectForUrl<OpenGraphImageOptions>(params.config)
   return new ImageResponse(
     (
-      // TODO style this based off design guidance
+      // LATER-TASK style this based off design guidance
       <div
         style={{
           fontSize: 40,

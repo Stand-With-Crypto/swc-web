@@ -53,7 +53,9 @@ export function SuggestedScript({
     return official.phones[0]
   }, [dtsiPerson, civicData])
 
-  const [isCalling, setIsCalling] = useState(false)
+  const [callingState, setCallingState] = useState<
+    'not-calling' | 'pressed-called' | 'loading-call-complete' | 'call-complete' | 'error'
+  >('not-calling')
 
   const handleCallAction = React.useCallback(
     async (phoneNumberToCall: string) => {
@@ -63,6 +65,7 @@ export function SuggestedScript({
         phoneNumber: phoneNumberToCall,
         address: addressSchema,
       }
+      setCallingState('loading-call-complete')
 
       const result = await triggerServerActionForForm(
         {
@@ -85,8 +88,11 @@ export function SuggestedScript({
       )
 
       if (result.status === 'success') {
+        setCallingState('call-complete')
         router.refresh()
         gotoTab(SectionNames.SUCCESS_MESSAGE)
+      } else {
+        setCallingState('error')
       }
     },
     [addressSchema, dtsiPerson.slug, gotoTab, router],
@@ -97,8 +103,8 @@ export function SuggestedScript({
       <UserActionFormCallCongresspersonLayout onBack={() => gotoTab(SectionNames.ADDRESS)}>
         <UserActionFormCallCongresspersonLayout.Container>
           <UserActionFormCallCongresspersonLayout.Heading
-            title="Call your representative"
             subtitle="You may not get a human on the line, but can leave a message to ensure that your voice will be heard."
+            title="Call your representative"
           />
 
           <div className="prose mx-auto">
@@ -129,17 +135,20 @@ export function SuggestedScript({
         congressperson={dtsiPerson}
       >
         {phoneNumber ? (
-          isCalling ? (
-            <Button onClick={() => handleCallAction(phoneNumber)}>
+          callingState !== 'not-calling' ? (
+            <Button
+              disabled={callingState === 'loading-call-complete'}
+              onClick={() => handleCallAction(phoneNumber)}
+            >
               <span className="mr-1 inline-block">Call complete</span>{' '}
               <ArrowRight className="h-5 w-5" />
             </Button>
           ) : (
             <Button asChild>
               <TrackedExternalLink
-                ref={ref}
                 href={`tel:${phoneNumber}`}
-                onClick={() => setIsCalling(true)}
+                onClick={() => setCallingState('pressed-called')}
+                ref={ref}
                 target="_self"
               >
                 Call

@@ -72,7 +72,7 @@ export function Combobox<T>({
 
   if (isMobile) {
     return (
-      <Drawer analytics={wrappedAnalytics} open={open} onOpenChange={setOpen}>
+      <Drawer analytics={wrappedAnalytics} onOpenChange={setOpen} open={open}>
         <DrawerTrigger asChild>{formatPopoverTrigger(value)}</DrawerTrigger>
         <DrawerContent>
           <div className="mt-4 min-h-[260px] border-t">
@@ -95,14 +95,14 @@ export function Combobox<T>({
   }
 
   return (
-    <Popover analytics={wrappedAnalytics} open={open} onOpenChange={setOpen}>
-      <PopoverTrigger ref={parentRef} asChild>
+    <Popover analytics={wrappedAnalytics} onOpenChange={setOpen} open={open}>
+      <PopoverTrigger asChild ref={parentRef}>
         {formatPopoverTrigger(value)}
       </PopoverTrigger>
       <PopoverContent
+        align="start"
         avoidCollisions={false}
         className={cn('p-0', popoverContentClassName)}
-        align="start"
         style={{ width: size.width }}
       >
         <StatusList
@@ -141,14 +141,14 @@ function StatusList<T>({
   return (
     <Command shouldFilter={false}>
       <CommandInput
+        autoFocus
         commandValue={value}
         onClear={() => {
           onChange(null)
           onChangeInputValue('')
         }}
-        autoFocus
-        placeholder="Filter status..."
         onValueChange={onChangeInputValue}
+        placeholder="Filter status..."
         value={inputValue}
         {...inputProps}
       />
@@ -166,11 +166,11 @@ function StatusList<T>({
               <CommandItem
                 className={cn(isSelected && 'border border-blue-500')}
                 key={key}
-                value={key}
                 onSelect={() => {
                   onChange(options.find(x => getOptionKey(x) === key) || null)
                   setOpen(false)
                 }}
+                value={key}
               >
                 {getOptionLabel(option)}
               </CommandItem>

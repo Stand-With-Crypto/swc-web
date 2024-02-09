@@ -1,10 +1,10 @@
 import { UserActionType } from '@prisma/client'
 
 export enum UserActionEmailCampaignName {
-  DEFAULT = 'DEFAULT',
+  DEFAULT = 'EMAIL_YOUR_CONGRESSPERSON_FIT21',
 }
 export enum UserActionCallCampaignName {
-  DEFAULT = 'DEFAULT',
+  DEFAULT = 'CALL_YOUR_CONGRESSPERSON_FIT21',
 }
 export enum UserActionDonationCampaignName {
   DEFAULT = 'DEFAULT',
@@ -18,6 +18,9 @@ export enum UserActionTweetCampaignName {
 export enum UserActionNftMintCampaignName {
   DEFAULT = 'DEFAULT',
 }
+export enum UserActionVoterRegistrationCampaignName {
+  DEFAULT = 'DEFAULT',
+}
 
 export const USER_ACTION_TO_CAMPAIGN_NAME_MAP = {
   [UserActionType.EMAIL]: UserActionEmailCampaignName,
@@ -26,6 +29,7 @@ export const USER_ACTION_TO_CAMPAIGN_NAME_MAP = {
   [UserActionType.OPT_IN]: UserActionOptInCampaignName,
   [UserActionType.TWEET]: UserActionTweetCampaignName,
   [UserActionType.NFT_MINT]: UserActionNftMintCampaignName,
+  [UserActionType.VOTER_REGISTRATION]: UserActionVoterRegistrationCampaignName,
 } satisfies Record<UserActionType, any>
 
 export const USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
@@ -35,4 +39,5 @@ export const USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
   [UserActionType.OPT_IN]: UserActionOptInCampaignName.DEFAULT,
   [UserActionType.TWEET]: UserActionTweetCampaignName.DEFAULT,
   [UserActionType.NFT_MINT]: UserActionNftMintCampaignName.DEFAULT,
+  [UserActionType.VOTER_REGISTRATION]: UserActionVoterRegistrationCampaignName.DEFAULT,
 } satisfies Record<UserActionType, string>

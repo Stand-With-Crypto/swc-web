@@ -189,26 +189,26 @@ export function OTPInput({
     <div className="flex gap-2">
       {Array.from({ length: numInputs }, (_, index) => index).map(i => (
         <Input
-          key={i}
+          autoComplete="off"
+          className={cn('text-center font-bold', className)}
           id={`${id ?? ''}-${i}`}
+          key={i}
+          maxLength={1}
           name={`${name ?? ''}-${i}`}
-          value={otpValueArray[i] ?? ''}
-          placeholder={placeholder}
-          ref={element => (inputRefs.current[i] = element)}
+          onBlur={handleBlur}
           onChange={handleChange}
           onFocus={event => handleFocus(event)(i)}
-          onBlur={handleBlur}
           onKeyDown={handleKeyDown}
           onPaste={handlePaste}
-          autoComplete="off"
-          maxLength={1}
-          size={1}
-          className={cn('text-center font-bold', className)}
           pattern={pattern}
+          placeholder={placeholder}
+          ref={element => (inputRefs.current[i] = element)}
+          size={1}
+          value={otpValueArray[i] ?? ''}
           {...rest}
         />
       ))}
-      <input type="hidden" id={id} name={name} value={otpValue} />
+      <input id={id} name={name} type="hidden" value={otpValue} />
     </div>
   )
 }

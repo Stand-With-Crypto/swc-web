@@ -1,36 +1,76 @@
 'use client'
-import { FormattedCurrency } from '@/components/ui/formattedCurrency'
-import { FormattedNumber } from '@/components/ui/formattedNumber'
+import { AnimatedNumericOdometer } from '@/components/ui/animatedNumericOdometer'
+import { roundDownNumberToAnimateIn } from '@/components/ui/animatedNumericOdometer/roundDownNumberToAnimateIn'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
 import { useApiHomepageTopLevelMetrics } from '@/hooks/useApiHomepageTopLevelMetrics'
 import { SupportedLocale } from '@/intl/locales'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { cn } from '@/utils/web/cn'
+import { useMemo } from 'react'
 
-export function TopLevelMetrics({
-  locale,
-  ...data
-}: Pick<
+type Props = Pick<
   Awaited<ReturnType<typeof getHomepageData>>,
   'countPolicymakerContacts' | 'countUsers' | 'sumDonations'
-> & { locale: SupportedLocale }) {
-  const { sumDonations, countPolicymakerContacts, countUsers } =
-    useApiHomepageTopLevelMetrics(data).data
+> & { locale: SupportedLocale }
+
+const mockDecreaseInValuesOnInitialLoadSoWeCanAnimateIncrease = (
+  initial: Omit<Props, 'locale'>,
+): Omit<Props, 'locale'> => ({
+  sumDonations: {
+    amountUsd: roundDownNumberToAnimateIn(initial.sumDonations.amountUsd, 10000),
+  },
+  countUsers: {
+    count: roundDownNumberToAnimateIn(initial.countUsers.count, 100),
+  },
+  countPolicymakerContacts: {
+    countUserActionCalls: roundDownNumberToAnimateIn(
+      initial.countPolicymakerContacts.countUserActionCalls,
+      100,
+    ),
+    countUserActionEmailRecipients: roundDownNumberToAnimateIn(
+      initial.countPolicymakerContacts.countUserActionEmailRecipients,
+      100,
+    ),
+  },
+})
+
+export function TopLevelMetrics({ locale, ...data }: Props & { locale: SupportedLocale }) {
+  const decreasedInitialValues = useMemo(
+    () => mockDecreaseInValuesOnInitialLoadSoWeCanAnimateIncrease(data),
+    [data],
+  )
+  const values = useApiHomepageTopLevelMetrics(decreasedInitialValues).data
+  const formatted = useMemo(() => {
+    return {
+      sumDonations: {
+        amountUsd: new Intl.NumberFormat(locale, {
+          style: 'currency',
+          currency: SupportedFiatCurrencyCodes.USD,
+          maximumFractionDigits: 0,
+        }).format(values.sumDonations.amountUsd),
+      },
+      countUsers: {
+        count: new Intl.NumberFormat(locale).format(values.countUsers.count),
+      },
+      countPolicymakerContacts: {
+        count: new Intl.NumberFormat(locale).format(
+          values.countPolicymakerContacts.countUserActionCalls +
+            values.countPolicymakerContacts.countUserActionCalls,
+        ),
+      },
+    }
+  }, [values, locale])
   return (
-    <section className="mb-16 flex flex-col gap-3 rounded-lg text-center sm:flex-row sm:gap-0 md:mb-24">
+    <section className="mb-16 flex flex-col gap-3 text-center md:mb-24 md:flex-row md:gap-0">
       {[
         {
           label: 'Donated by crypto advocates',
           value: (
             <TooltipProvider>
               <Tooltip>
-                <TooltipTrigger>
-                  <FormattedCurrency
-                    amount={sumDonations.amountUsd + 78000000}
-                    currencyCode={SupportedFiatCurrencyCodes.USD}
-                    locale={locale}
-                  />
+                <TooltipTrigger className="mx-auto block" style={{ height: 35 }}>
+                  <AnimatedNumericOdometer size={35} value={formatted.sumDonations.amountUsd} />
                 </TooltipTrigger>
                 <TooltipContent className="max-w-xs">
                   <p className="text-sm font-normal tracking-normal">
@@ -44,33 +84,27 @@ export function TopLevelMetrics({
         },
         {
           label: 'Crypto advocates',
-          value: <FormattedNumber locale={locale} amount={countUsers.count} />,
+          value: <AnimatedNumericOdometer size={35} value={formatted.countUsers.count} />,
         },
         {
           label: 'Policymaker contacts',
           value: (
-            <FormattedNumber
-              locale={locale}
-              amount={
-                countPolicymakerContacts.countUserActionCalls +
-                countPolicymakerContacts.countUserActionEmailRecipients
-              }
-            />
+            <AnimatedNumericOdometer size={35} value={formatted.countPolicymakerContacts.count} />
           ),
         },
       ].map(({ label, value }, index) => (
         <div
           className={cn(
-            'w-full flex-shrink-0 rounded-lg bg-blue-50 p-6 sm:w-1/3',
+            'w-full flex-shrink-0 rounded-3xl bg-blue-50 p-6 md:w-1/3',
             index === 0
-              ? 'rounded-none sm:rounded-l-lg'
+              ? 'md:rounded-none md:rounded-l-3xl'
               : index === 2
-                ? 'rounded-none sm:rounded-r-lg'
-                : 'rounded-none',
+                ? 'md:rounded-none md:rounded-r-3xl'
+                : 'md:rounded-none',
           )}
           key={label}
         >
-          <div className="text-2xl font-bold tracking-wider">{value}</div>
+          <div>{value}</div>
           <div className="text-gray-500">{label}</div>
         </div>
       ))}

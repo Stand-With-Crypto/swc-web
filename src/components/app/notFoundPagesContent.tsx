@@ -16,9 +16,9 @@ export function NotFoundPagesContent() {
   }, [])
   return (
     <div className="container flex flex-grow flex-col items-center justify-center space-y-7">
-      <MaybeNextImg src="/error_shield.svg" width={120} height={120} alt="" />
+      <MaybeNextImg alt="" height={120} src="/error_shield.svg" width={120} />
       <PageTitle size="sm">Page not found.</PageTitle>
-      <Button className="mr-3" asChild onClick={onPress}>
+      <Button asChild className="mr-3" onClick={onPress}>
         <InternalLink href="/">Go home</InternalLink>
       </Button>
     </div>

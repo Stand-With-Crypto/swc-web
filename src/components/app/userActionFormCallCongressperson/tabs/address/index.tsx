@@ -101,8 +101,8 @@ export function Address({
         <UserActionFormCallCongresspersonLayout onBack={() => goToSection(SectionNames.INTRO)}>
           <UserActionFormCallCongresspersonLayout.Container>
             <UserActionFormCallCongresspersonLayout.Heading
-              title="Find your representative"
               subtitle="Your address will be used to connect you with your representative. Stand With Crypto will never share your data with any third-parties."
+              title="Find your representative"
             />
 
             <FormField
@@ -115,9 +115,9 @@ export function Address({
                     <GooglePlacesSelect
                       {...field}
                       defaultValue={rnAddress}
-                      value={field.value}
                       onChange={field.onChange}
                       placeholder="Your full address"
+                      value={field.value}
                     />
                   </FormControl>
                   <FormErrorMessage />
@@ -127,13 +127,13 @@ export function Address({
           </UserActionFormCallCongresspersonLayout.Container>
           <UserActionFormCallCongresspersonLayout.Footer>
             <SubmitButton
-              isLoading={form.formState.isSubmitting || isLoadingLiveCongressPersonData}
               disabled={!congressPersonData}
+              isLoading={form.formState.isSubmitting || isLoadingLiveCongressPersonData}
             />
 
             <p className="text-sm">
               Learn more about our{' '}
-              <InternalLink href={urls.privacyPolicy()} tabIndex={-1} className="underline">
+              <InternalLink className="underline" href={urls.privacyPolicy()} tabIndex={-1}>
                 privacy policy
               </InternalLink>
             </p>
@@ -146,7 +146,7 @@ export function Address({
 
 function SubmitButton({ isLoading, disabled }: { isLoading: boolean; disabled: boolean }) {
   return (
-    <Button type="submit" disabled={isLoading || disabled}>
+    <Button disabled={isLoading || disabled} type="submit">
       {isLoading ? 'Loading...' : 'Continue'}
     </Button>
   )

@@ -30,23 +30,23 @@ export const UserActionRowCTAButton = React.forwardRef<
       switch (state) {
         case 'unknown':
           // we add a div to take up this space so if the answer to complete/incomplete is unknown, the UI doesn't jump once we fetch that data
-          return <div style={{ width: 20, height: 20 }} />
+          return <div style={{ width: 24, height: 24 }} />
         case 'complete':
           return (
             <NextImage
-              width={20}
-              height={20}
-              src={'/misc/checkedCircle.svg'}
               alt={'Action complete'}
+              height={24}
+              src={'/misc/checkedCircle.svg'}
+              width={24}
             />
           )
         case 'incomplete':
           return (
             <NextImage
-              width={20}
-              height={20}
-              src={'/misc/uncheckedCircle.svg'}
               alt={'Action not complete'}
+              height={24}
+              src={'/misc/uncheckedCircle.svg'}
+              width={24}
             />
           )
       }
@@ -54,28 +54,27 @@ export const UserActionRowCTAButton = React.forwardRef<
     return (
       <button
         {...props}
-        ref={ref}
-        data-test-id={`user-action-cta-${actionType}`}
-        disabled={!canBeActionedOn}
         className={cn(
-          'flex w-full items-center justify-between gap-4 rounded-xl bg-gray-100 p-4 text-left',
+          'flex w-full items-center justify-between gap-4 rounded-3xl bg-gray-100 p-4 text-left lg:p-8',
           className,
         )}
+        data-test-id={`user-action-cta-${actionType}`}
+        disabled={!canBeActionedOn}
+        ref={ref}
       >
         <div className="flex items-center gap-4">
-          <div>{getStateUI()}</div>
+          <div className="flex-shrink-0">{getStateUI()}</div>
           <div className="hidden md:block">
-            {/* TODO alt */}
-            <NextImage width={100} height={100} src={image} alt={text} />
+            <NextImage alt={text} height={100} src={image} width={100} />
           </div>
           <div>
-            <div className="mb-1 text-xl font-bold">{text}</div>
-            <div className="text-sm text-gray-500">{subtext}</div>
+            <div className="mb-1 text-base font-bold lg:text-2xl">{text}</div>
+            <div className="text-sm text-gray-500 lg:text-xl">{subtext}</div>
           </div>
         </div>
         {canBeActionedOn ? (
           <div>
-            <ChevronRight />
+            <ChevronRight className="h-6 w-6 lg:h-8 lg:w-8" />
           </div>
         ) : null}
       </button>

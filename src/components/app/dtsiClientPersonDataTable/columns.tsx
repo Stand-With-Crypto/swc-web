@@ -31,8 +31,8 @@ export const getDTSIClientPersonDataTableColumns = ({
       <LinkBox className="flex items-center gap-3">
         <DTSIAvatar person={row.original} size={40} />
         <InternalLink
-          href={getIntlUrls(locale).politicianDetails(row.original.slug)}
           className={linkBoxLinkClassName}
+          href={getIntlUrls(locale).politicianDetails(row.original.slug)}
         >
           {dtsiPersonFullName(row.original)}
         </InternalLink>
@@ -54,7 +54,7 @@ export const getDTSIClientPersonDataTableColumns = ({
     },
     cell: ({ row }) => (
       <div className="flex items-center gap-2">
-        <DTSIFormattedLetterGrade size={30} person={row.original} />
+        <DTSIFormattedLetterGrade person={row.original} size={30} />
         <span className="hidden md:inline">
           {convertDTSIStanceScoreToCryptoSupportLanguage(row.original)}
         </span>
