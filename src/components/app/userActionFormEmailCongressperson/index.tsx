@@ -88,7 +88,7 @@ export function UserActionFormEmailCongressperson({
   user: GetUserFullProfileInfoResponse['user']
   onCancel: () => void
   onSuccess: () => void
-  rnParams: RnParams
+  rnParams?: RnParams
 }) {
   const router = useRouter()
   const urls = useIntlUrls()
@@ -109,12 +109,14 @@ export function UserActionFormEmailCongressperson({
   }, [form])
 
   React.useEffect(() => {
-    const splitFullName = rnParams.fullName.split(' ')
-    form.setValue('address', { description: rnParams.address, place_id: '' })
-    form.setValue('emailAddress', rnParams.email)
-    form.setValue('firstName', splitFullName[0])
-    form.setValue('lastName', splitFullName.splice(1).join(' '))
-  }, [form, rnParams.address, rnParams.email, rnParams.fullName])
+    if (rnParams) {
+      const splitFullName = rnParams.fullName.split(' ')
+      form.setValue('address', { description: rnParams.address, place_id: '' })
+      form.setValue('emailAddress', rnParams.email)
+      form.setValue('firstName', splitFullName[0])
+      form.setValue('lastName', splitFullName.splice(1).join(' '))
+    }
+  }, [form, rnParams])
 
   return (
     <Form {...form}>
@@ -216,10 +218,9 @@ export function UserActionFormEmailCongressperson({
                     <FormControl>
                       <GooglePlacesSelect
                         {...field}
-                        defaultValue={rnParams.address}
+                        defaultValue={rnParams?.address}
                         onChange={field.onChange}
                         placeholder="Your full address"
-                        value={field.value}
                         value={field.value}
                       />
                     </FormControl>

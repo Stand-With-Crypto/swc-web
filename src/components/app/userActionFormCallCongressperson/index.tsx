@@ -33,7 +33,7 @@ export function UserActionFormCallCongressperson({
 }: {
   user: GetUserFullProfileInfoResponse['user']
   onClose: () => void
-  rnAddress: string
+  rnAddress?: string
 }) {
   const sectionProps = useSections<SectionNames>({
     sections: Object.values(SectionNames),
@@ -52,7 +52,7 @@ export function UserActionFormCallCongressperson({
         <Address
           congressPersonData={congressPersonData}
           onFindCongressperson={setCongresspersonData}
-          rnAddress={rnAddress}
+          rnAddress={rnAddress ?? ''}
           user={user}
           {...sectionProps}
         />

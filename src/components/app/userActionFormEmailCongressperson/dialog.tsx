@@ -18,7 +18,7 @@ export function UserActionFormEmailCongresspersonDialog({
 }: {
   children: React.ReactNode
   defaultOpen?: boolean
-  rnParams: RnParams
+  rnParams?: RnParams
 }) {
   const dialogProps = useDialog({
     initialOpen: defaultOpen,

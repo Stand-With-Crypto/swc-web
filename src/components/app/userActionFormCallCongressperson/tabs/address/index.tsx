@@ -41,7 +41,7 @@ interface AddressProps
     'user' | 'onFindCongressperson' | 'goToSection'
   > {
   congressPersonData?: UserActionFormCallCongresspersonProps['congressPersonData']
-  rnAddress: string
+  rnAddress?: string
 }
 
 export function Address({
@@ -62,7 +62,9 @@ export function Address({
   }, [form])
 
   useEffect(() => {
-    form.setValue('address', { description: rnAddress, place_id: '' })
+    if (rnAddress) {
+      form.setValue('address', { description: rnAddress, place_id: '' })
+    }
   }, [form, rnAddress])
 
   const address = useWatch({
