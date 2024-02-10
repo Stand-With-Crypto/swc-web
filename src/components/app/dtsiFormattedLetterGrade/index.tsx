@@ -39,7 +39,15 @@ export const DTSIFormattedLetterGrade: React.FC<
       )}
       style={{ width: size, height: size }}
     >
-      <div className="font-extrabold text-white" style={{ fontSize: size * 0.66, lineHeight: 1 }}>
+      <div
+        className="font-extrabold text-white"
+        style={{
+          fontSize: size * 0.66,
+          lineHeight: 1,
+          paddingLeft:
+            letterGrade === 'D' || letterGrade === 'F' || letterGrade === 'B' ? size * 0.05 : 0,
+        }}
+      >
         {letterGrade || '?'}
       </div>
     </div>
