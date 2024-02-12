@@ -1,3 +1,8 @@
+import { UserActionType } from '@prisma/client'
+import * as Sentry from '@sentry/nextjs'
+import { track as vercelTrack } from '@vercel/analytics/server'
+import mixpanelLib from 'mixpanel'
+
 import {
   LocalUser,
   mapCurrentSessionLocalUserToAnalyticsProperties,
@@ -6,10 +11,6 @@ import { getLogger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { AnalyticProperties, AnalyticsPeopleProperties } from '@/utils/shared/sharedAnalytics'
 import { formatVercelAnalyticsEventProperties } from '@/utils/shared/vercelAnalytics'
-import { UserActionType } from '@prisma/client'
-import * as Sentry from '@sentry/nextjs'
-import { track as vercelTrack } from '@vercel/analytics/server'
-import mixpanelLib from 'mixpanel'
 
 const NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN = requiredEnv(
   process.env.NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN,

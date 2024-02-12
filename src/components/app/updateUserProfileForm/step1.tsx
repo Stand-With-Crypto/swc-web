@@ -1,4 +1,13 @@
 'use client'
+import { useRef } from 'react'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { UserEmailAddressSource } from '@prisma/client'
+import * as Sentry from '@sentry/nextjs'
+import { useRouter } from 'next/navigation'
+import { toast } from 'sonner'
+import { z } from 'zod'
+
 import { actionUpdateUserProfile } from '@/actions/actionUpdateUserProfile'
 import { ClientAddress } from '@/clientModels/clientAddress'
 import { SensitiveDataClientUserWithENSData } from '@/clientModels/clientUser/sensitiveDataClientUser'
@@ -31,46 +40,38 @@ import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/goo
 import { hasCompleteUserProfile } from '@/utils/web/hasCompleteUserProfile'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
 import { zodUpdateUserProfileFormFields } from '@/validation/forms/zodUpdateUserProfile/zodUpdateUserProfileFormFields'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { UserEmailAddressSource } from '@prisma/client'
-import * as Sentry from '@sentry/nextjs'
-import { useRouter } from 'next/navigation'
-import { useForm } from 'react-hook-form'
-import { toast } from 'sonner'
-import { z } from 'zod'
 
 const FORM_NAME = 'User Profile'
 type FormValues = z.infer<typeof zodUpdateUserProfileFormFields> & GenericErrorFormValues
 
 export function UpdateUserProfileForm({
   user,
-  onCancel,
   onSuccess,
 }: {
   user: SensitiveDataClientUserWithENSData & { address: ClientAddress | null }
-  onCancel: () => void
   onSuccess: (updatedUserFields: { firstName: string; lastName: string }) => void
 }) {
   const router = useRouter()
   const isEmbeddedWalletUser =
     user.primaryUserEmailAddress?.source === UserEmailAddressSource.THIRDWEB_EMBEDDED_AUTH
+  const defaultValues = useRef({
+    isEmbeddedWalletUser,
+    firstName: user.firstName || '',
+    lastName: user.lastName || '',
+    emailAddress: user.primaryUserEmailAddress?.emailAddress || '',
+    phoneNumber: user.phoneNumber || '',
+    hasOptedInToMembership: user.hasOptedInToMembership,
+    hasOptedInToSms: user.hasOptedInToSms,
+    address: user.address
+      ? {
+          description: user.address.formattedDescription,
+          place_id: user.address.googlePlaceId,
+        }
+      : null,
+  })
   const form = useForm<FormValues>({
     resolver: zodResolver(zodUpdateUserProfileFormFields),
-    defaultValues: {
-      isEmbeddedWalletUser,
-      firstName: user.firstName || '',
-      lastName: user.lastName || '',
-      emailAddress: user.primaryUserEmailAddress?.emailAddress || '',
-      phoneNumber: user.phoneNumber || '',
-      hasOptedInToMembership: user.hasOptedInToMembership,
-      hasOptedInToSms: user.hasOptedInToSms,
-      address: user.address
-        ? {
-            description: user.address.formattedDescription,
-            place_id: user.address.googlePlaceId,
-          }
-        : null,
-    },
+    defaultValues: defaultValues.current,
   })
   const phoneNumberValue = form.watch('phoneNumber')
   return (
@@ -199,26 +200,28 @@ export function UpdateUserProfileForm({
               </FormItem>
             )}
           />
-          <FormField
-            control={form.control}
-            name="hasOptedInToMembership"
-            render={({ field }) => (
-              <label className="block">
-                <FormItem className="flex flex-row items-center space-x-3 space-y-0">
-                  <FormControl>
-                    <Checkbox checked={field.value} onCheckedChange={field.onChange} />
-                  </FormControl>
-                  <FormDescription>
-                    By checking this box, I agree to become a Stand With Crypto Alliance member.{' '}
-                    <SWCMembershipDialog>
-                      <button className="text-blue-600">Learn More</button>
-                    </SWCMembershipDialog>
-                    .
-                  </FormDescription>
-                </FormItem>
-              </label>
-            )}
-          />
+          {!defaultValues.current.hasOptedInToMembership && (
+            <FormField
+              control={form.control}
+              name="hasOptedInToMembership"
+              render={({ field }) => (
+                <label className="block">
+                  <FormItem className="flex flex-row items-center space-x-3 space-y-0">
+                    <FormControl>
+                      <Checkbox checked={field.value} onCheckedChange={field.onChange} />
+                    </FormControl>
+                    <FormDescription>
+                      By checking this box, I agree to become a Stand With Crypto Alliance member.{' '}
+                      <SWCMembershipDialog>
+                        <button className="text-blue-600">Learn More</button>
+                      </SWCMembershipDialog>
+                      .
+                    </FormDescription>
+                  </FormItem>
+                </label>
+              )}
+            />
+          )}
           <Collapsible open={!!phoneNumberValue}>
             <CollapsibleContent className="AnimateCollapsibleContent">
               <FormField
@@ -247,18 +250,14 @@ export function UpdateUserProfileForm({
           </Collapsible>
           <FormGeneralErrorMessage control={form.control} />
         </div>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="text-center">
           <Button
-            className="w-full"
+            className="w-full md:w-1/2"
             disabled={form.formState.isSubmitting}
-            onClick={onCancel}
             size="lg"
-            variant="secondary"
+            type="submit"
           >
-            Skip
-          </Button>
-          <Button className="w-full" disabled={form.formState.isSubmitting} size="lg" type="submit">
-            Submit
+            Next
           </Button>
         </div>
       </form>

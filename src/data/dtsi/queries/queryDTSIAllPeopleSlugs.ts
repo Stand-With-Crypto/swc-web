@@ -1,6 +1,7 @@
+import * as Sentry from '@sentry/nextjs'
+
 import { fetchDTSI } from '@/data/dtsi/fetchDTSI'
 import { DTSI_AllPeopleSlugsQuery, DTSI_AllPeopleSlugsQueryVariables } from '@/data/dtsi/generated'
-import * as Sentry from '@sentry/nextjs'
 
 export const query = /* GraphQL */ `
   query AllPeopleSlugs {

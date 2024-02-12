@@ -1,13 +1,13 @@
 'use client'
 
-import { zodResolver } from '@hookform/resolvers/zod'
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
 import useSWR from 'swr'
 
 import type { UserActionFormCallCongresspersonProps } from '@/components/app/userActionFormCallCongressperson'
-import { UserActionFormCallCongresspersonLayout } from '@/components/app/userActionFormCallCongressperson/tabs/layout'
 import { SectionNames } from '@/components/app/userActionFormCallCongressperson/constants'
+import { UserActionFormCallCongresspersonLayout } from '@/components/app/userActionFormCallCongressperson/tabs/layout'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -24,15 +24,16 @@ import {
   getDTSIPeopleFromAddress,
 } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
+import { useIsMobile } from '@/hooks/useIsMobile'
 import { getGoogleCivicDataFromAddress } from '@/utils/shared/googleCivicInfo'
 import { trackFormSubmissionSyncErrors } from '@/utils/web/formUtils'
 import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
 
 import {
-  FORM_NAME,
   findRepresentativeCallFormValidationSchema,
-  getDefaultValues,
   type FindRepresentativeCallFormValues,
+  FORM_NAME,
+  getDefaultValues,
 } from './formConfig'
 
 interface AddressProps
@@ -50,14 +51,20 @@ export function Address({
   goToSection,
 }: AddressProps) {
   const urls = useIntlUrls()
-
   const form = useForm<FindRepresentativeCallFormValues>({
     defaultValues: getDefaultValues({ user }),
     resolver: zodResolver(findRepresentativeCallFormValidationSchema),
   })
+  const isMobile = useIsMobile({ defaultState: true })
+  const initialAddressOnLoad = useRef(user?.address?.googlePlaceId)
+  const inputRef = useRef<HTMLInputElement | null>(null)
   useEffect(() => {
     form.setFocus('address')
-  }, [form])
+    // we only want the input to auto-open on desktop
+    if (!isMobile) {
+      inputRef.current?.click()
+    }
+  }, [form, isMobile])
   const address = useWatch({
     control: form.control,
     name: 'address',
@@ -77,10 +84,23 @@ export function Address({
         message: formatGetDTSIPeopleFromAddressNotFoundReason(dtsiPerson),
       })
       return
+    } else {
+      form.clearErrors('address')
     }
 
     onFindCongressperson({ ...liveCongressPersonData, dtsiPerson })
-  }, [liveCongressPersonData, onFindCongressperson, form])
+    // request from exec - form should auto-advance once the address is filled in
+    if (address?.place_id !== initialAddressOnLoad.current) {
+      goToSection(SectionNames.SUGGESTED_SCRIPT)
+    }
+  }, [
+    liveCongressPersonData,
+    onFindCongressperson,
+    form,
+    goToSection,
+    address,
+    initialAddressOnLoad,
+  ])
 
   return (
     <Form {...form}>
@@ -108,6 +128,7 @@ export function Address({
                       {...field}
                       onChange={field.onChange}
                       placeholder="Your full address"
+                      ref={inputRef}
                       value={field.value}
                     />
                   </FormControl>
@@ -117,10 +138,18 @@ export function Address({
             />
           </UserActionFormCallCongresspersonLayout.Container>
           <UserActionFormCallCongresspersonLayout.Footer>
-            <SubmitButton
-              disabled={!congressPersonData}
-              isLoading={form.formState.isSubmitting || isLoadingLiveCongressPersonData}
-            />
+            <Button
+              disabled={
+                form.formState.isSubmitting ||
+                isLoadingLiveCongressPersonData ||
+                !congressPersonData
+              }
+              type="submit"
+            >
+              {form.formState.isSubmitting || isLoadingLiveCongressPersonData
+                ? 'Loading...'
+                : 'Continue'}
+            </Button>
 
             <p className="text-sm">
               Learn more about our{' '}
@@ -132,14 +161,6 @@ export function Address({
         </UserActionFormCallCongresspersonLayout>
       </form>
     </Form>
-  )
-}
-
-function SubmitButton({ isLoading, disabled }: { isLoading: boolean; disabled: boolean }) {
-  return (
-    <Button disabled={isLoading || disabled} type="submit">
-      {isLoading ? 'Loading...' : 'Continue'}
-    </Button>
   )
 }
 

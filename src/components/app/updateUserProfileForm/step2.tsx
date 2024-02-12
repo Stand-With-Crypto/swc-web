@@ -1,4 +1,14 @@
 'use client'
+import { useMemo } from 'react'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { UserEmailAddressSource, UserInformationVisibility } from '@prisma/client'
+import { RadioGroup, RadioGroupIndicator, RadioGroupItem } from '@radix-ui/react-radio-group'
+import { Check } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import { toast } from 'sonner'
+import { z } from 'zod'
+
 import { actionUpdateUserInformationVisibility } from '@/actions/actionUpdateUserInformationVisibility'
 import { ClientAddress } from '@/clientModels/clientAddress'
 import { SensitiveDataClientUserWithENSData } from '@/clientModels/clientUser/sensitiveDataClientUser'
@@ -13,17 +23,8 @@ import {
   trackFormSubmissionSyncErrors,
   triggerServerActionForForm,
 } from '@/utils/web/formUtils'
-import { USER_INFORMATION_VISIBILITY_ORDERED_LIST, getUserDisplayName } from '@/utils/web/userUtils'
+import { getUserDisplayName, USER_INFORMATION_VISIBILITY_ORDERED_LIST } from '@/utils/web/userUtils'
 import { zodUpdateUserInformationVisibility } from '@/validation/forms/zodUpdateUserInformationVisibility'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { UserEmailAddressSource, UserInformationVisibility } from '@prisma/client'
-import { RadioGroup, RadioGroupIndicator, RadioGroupItem } from '@radix-ui/react-radio-group'
-import { Check } from 'lucide-react'
-import { useRouter } from 'next/navigation'
-import { useMemo } from 'react'
-import { useForm } from 'react-hook-form'
-import { toast } from 'sonner'
-import { z } from 'zod'
 
 const FORM_NAME = 'User Information Visibility'
 type FormValues = z.infer<typeof zodUpdateUserInformationVisibility> & GenericErrorFormValues
@@ -124,14 +125,14 @@ export function UpdateUserInformationVisibilityForm({
             )}
           />
           <FormGeneralErrorMessage control={form.control} />
-          <div className="space-y-4">
+          <div className="text-center">
             <Button
-              className="w-full"
+              className="w-full md:w-1/2"
               disabled={form.formState.isSubmitting}
               size="lg"
               type="submit"
             >
-              Next
+              Submit
             </Button>
           </div>
         </form>

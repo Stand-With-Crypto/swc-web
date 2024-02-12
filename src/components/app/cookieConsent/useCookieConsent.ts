@@ -1,7 +1,7 @@
-import Cookies from 'js-cookie'
-
 import React from 'react'
+import Cookies from 'js-cookie'
 import mixpanel from 'mixpanel-browser'
+
 import {
   COOKIE_CONSENT_COOKIE_NAME,
   CookieConsentPermissions,

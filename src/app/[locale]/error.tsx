@@ -1,8 +1,9 @@
 'use client'
-import { ErrorPagesContent } from '@/components/app/errorPagesContent'
-import { logger } from '@/utils/shared/logger'
 import { useEffect } from 'react'
 import * as Sentry from '@sentry/nextjs'
+
+import { ErrorPagesContent } from '@/components/app/errorPagesContent'
+import { logger } from '@/utils/shared/logger'
 
 export default function RootErrorPage({
   error,

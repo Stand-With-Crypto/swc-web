@@ -1,5 +1,8 @@
-import { FormattedUserTweet, TweetEntityOptionsWithType } from '@/types/twitter'
+import sanitizeHtml from 'sanitize-html'
 import twemoji from 'twemoji'
+// @ts-ignore
+import { parse as twemojiParser } from 'twemoji-parser'
+
 import {
   DTSIStanceDetailsStanceProp,
   DTSIStanceDetailsTweetProp,
@@ -7,18 +10,15 @@ import {
 } from '@/components/app/dtsiStanceDetails/types'
 import { FormattedDatetime } from '@/components/ui/formattedDatetime'
 import { MaybeNextImg, NextImage } from '@/components/ui/image'
+import { InitialsAvatar } from '@/components/ui/initialsAvatar'
 import { ExternalLink } from '@/components/ui/link'
+import { FormattedUserTweet, TweetEntityOptionsWithType } from '@/types/twitter'
 import {
   dtsiPersonFullName,
   getDTSIPersonProfilePictureUrlDimensions,
 } from '@/utils/dtsi/dtsiPersonUtils'
 import { dtsiTweetUrl } from '@/utils/dtsi/dtsiTweetUtils'
 import { cn } from '@/utils/web/cn'
-import sanitizeHtml from 'sanitize-html'
-
-// @ts-ignore
-import { parse as twemojiParser } from 'twemoji-parser'
-import { InitialsAvatar } from '@/components/ui/initialsAvatar'
 
 export const getEmojiIndexes = (tweet: DTSIStanceDetailsTweetProp['tweet']) => {
   // define a regular expression to match all Unicode emoji characters

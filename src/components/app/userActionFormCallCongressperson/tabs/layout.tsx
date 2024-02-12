@@ -1,5 +1,5 @@
-import { ArrowLeft } from 'lucide-react'
 import React from 'react'
+import { ArrowLeft } from 'lucide-react'
 
 import { DtsiCongresspersonDisplay } from '@/components/app/dtsiCongresspersonDisplay'
 import { dialogButtonStyles } from '@/components/ui/dialog/styles'
@@ -48,7 +48,7 @@ UserActionFormCallCongresspersonLayout.Container = Container
 function GoBackButton({ onClick }: { onClick: () => void }) {
   return (
     <div className={cn('left-2', dialogButtonStyles)} onClick={onClick} role="button">
-      <ArrowLeft size={16} />
+      <ArrowLeft size={20} />
     </div>
   )
 }

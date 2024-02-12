@@ -1,22 +1,25 @@
+import { cache } from 'react'
+import { Metadata } from 'next'
+import { notFound } from 'next/navigation'
+
 import { PagePoliticianDetails } from '@/components/app/pagePoliticianDetails'
 import { queryDTSIAllPeopleSlugs } from '@/data/dtsi/queries/queryDTSIAllPeopleSlugs'
 import {
   DTSIPersonDetails,
   queryDTSIPersonDetails,
 } from '@/data/dtsi/queries/queryDTSIPersonDetails'
-import { PageProps } from '@/types'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import {
-  DTSILetterGrade,
   convertDTSIStanceScoreToLetterGrade,
+  DTSILetterGrade,
 } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
+import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { toBool } from '@/utils/shared/toBool'
-import { Metadata } from 'next'
-import { notFound } from 'next/navigation'
-import { cache } from 'react'
 
-export const revalidate = 60 * 24 * 7
+import { PageProps } from '@/types'
+
+export const revalidate = SECONDS_DURATION.WEEK
 export const dynamic = 'error'
 export const dynamicParams = true
 

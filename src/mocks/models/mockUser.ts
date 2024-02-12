@@ -1,5 +1,3 @@
-import { fakerFields } from '@/mocks/fakerUtils'
-import { mockCommonDatetimes } from '@/mocks/mockCommonDatetimes'
 import { faker } from '@faker-js/faker'
 import {
   DataCreationMethod,
@@ -8,6 +6,9 @@ import {
   UserInformationVisibility,
   UserInternalStatus,
 } from '@prisma/client'
+
+import { fakerFields } from '@/mocks/fakerUtils'
+import { mockCommonDatetimes } from '@/mocks/mockCommonDatetimes'
 
 export function mockCreateUserInput({
   withData = faker.helpers.maybe(() => true, { probability: 0.5 }),

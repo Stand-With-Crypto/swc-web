@@ -1,11 +1,13 @@
 'use server'
+import 'server-only'
+
+import { z } from 'zod'
+
 import { mergeUsers } from '@/utils/server/mergeUsers/mergeUsers'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
 import { getLogger } from '@/utils/shared/logger'
-import 'server-only'
-import { z } from 'zod'
 
 const schema = z.object({
   userMergeAlertId: z.string(),

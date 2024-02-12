@@ -1,9 +1,10 @@
+import { UserActionType } from '@prisma/client'
+
 import { EventCard } from '@/components/app/pageResources/eventCard'
 import { PolicyCard } from '@/components/app/pageResources/policyCard'
 import { UserActionRowCTAsListWithApi } from '@/components/app/userActionRowCTA/userActionRowCTAsListWithApi'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { UserActionType } from '@prisma/client'
 
 const EXCLUDE_USER_ACTION_TYPES: UserActionType[] = ['NFT_MINT']
 
@@ -23,11 +24,13 @@ export function PageResources() {
         </PageSubTitle>
       </section>
 
-      <section className="mb-16 space-y-4 text-center">
-        <PageTitle as="h2" size="sm">
+      <section className="mb-16 text-center">
+        <PageTitle as="h2" size="md">
           Events
         </PageTitle>
-        <p>Learn more about recent and upcoming events to mobilize the crypto community.</p>
+        <PageSubTitle className="mb-8 mt-4">
+          Learn more about recent and upcoming events to mobilize the crypto community.
+        </PageSubTitle>
         <div className="grid grid-flow-col grid-rows-3 gap-4 lg:grid-rows-1">
           <EventCard
             cta="Watch"
@@ -53,13 +56,13 @@ export function PageResources() {
         </div>
       </section>
 
-      <section className="mb-16 space-y-4 text-center">
-        <PageTitle as="h2" size="sm">
+      <section className="mb-16 text-center">
+        <PageTitle as="h2" size="md">
           Policy
         </PageTitle>
-        <p>
+        <PageSubTitle className="mb-8 mt-4">
           Learn more about the pending bills and resolutions that can shape the industry’s future.
-        </p>
+        </PageSubTitle>
         <div className="flex flex-col gap-4">
           <PolicyCard
             description="Setting the foundational rules for crypto that are pro-consumer and pro-job creation"
@@ -76,11 +79,13 @@ export function PageResources() {
         </div>
       </section>
 
-      <section className="mb-16 space-y-4 text-center">
-        <PageTitle as="h2" size="sm">
+      <section className="mb-16 text-center">
+        <PageTitle as="h2" size="md">
           Get involved
         </PageTitle>
-        <p>The future of crypto is in your hands. Here’s how you can help.</p>
+        <PageSubTitle className="mb-8 mt-4">
+          The future of crypto is in your hands. Here’s how you can help.
+        </PageSubTitle>
         <UserActionRowCTAsListWithApi excludeUserActionTypes={EXCLUDE_USER_ACTION_TYPES} />
       </section>
     </div>

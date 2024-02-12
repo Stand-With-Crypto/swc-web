@@ -1,3 +1,15 @@
+import {
+ Address,   CapitolCanaryInstance,
+Prisma,   User,
+  UserActionOptInType,
+  UserActionType,
+  UserCryptoAddress,
+UserEmailAddress,  UserEmailAddressSource,
+  UserInformationVisibility } from '@prisma/client'
+import * as Sentry from '@sentry/nextjs'
+import _ from 'lodash'
+import { NextApiRequest } from 'next'
+
 import { CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/upsertAdvocateInCapitolCanary'
 import { inngest } from '@/inngest/inngest'
 import {
@@ -15,34 +27,32 @@ import {
   getServerPeopleAnalytics,
 } from '@/utils/server/serverAnalytics'
 import {
-  ServerLocalUser,
   mapLocalUserToUserDatabaseFields,
   parseLocalUserFromCookiesForPageRouter,
+  ServerLocalUser,
 } from '@/utils/server/serverLocalUser'
 import { getUserSessionIdOnPageRouter } from '@/utils/server/serverUserSessionId'
 import {
-  ThirdwebEmbeddedWalletMetadata,
   fetchEmbeddedWalletMetadataFromThirdweb,
+  ThirdwebEmbeddedWalletMetadata,
 } from '@/utils/server/thirdweb/fetchEmbeddedWalletMetadataFromThirdweb'
 import { AuthSessionMetadata } from '@/utils/server/thirdweb/types'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
-import {
-  Address,
-  CapitolCanaryInstance,
-  Prisma,
-  User,
-  UserActionOptInType,
-  UserActionType,
-  UserCryptoAddress,
-  UserEmailAddress,
-  UserEmailAddressSource,
-  UserInformationVisibility,
-} from '@prisma/client'
-import * as Sentry from '@sentry/nextjs'
-import _ from 'lodash'
-import { NextApiRequest } from 'next'
+
+/*
+The desired behavior of this function:
+- If there is a user associated with this crypto address, return that user
+- If not, we want to find any existing user in our system that has a session with the same id as the session id that was passed in the headers
+  OR we want to find any existing user in our system that has a verified email address that matches the email address of the crypto address, if the address 
+  is associated with a thirdweb embedded wallet.
+    - This embedded wallet use cases is necessary for the scenario where a user signs up on the coinbase app, and then "signs in" on the SWC website later on.
+      In this case, because we have confidence that coinbase verified the email, and TW verified the email, we can link the users
+- If we find a user using the method above, create the crypto address and link it to the user
+  If we don't find a user, create a new one and link the crypto address to it
+- If there was an embedded wallet email address, link it to the existing user or the newly created user
+*/
 
 const logger = getLogger('onLogin')
 const getLog = (address: string) => (message: string) =>

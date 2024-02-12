@@ -1,4 +1,5 @@
 import 'dotenv/config'
+
 import type { CodegenConfig } from '@graphql-codegen/cli'
 
 function requiredEnv(value: string | undefined, name: string) {

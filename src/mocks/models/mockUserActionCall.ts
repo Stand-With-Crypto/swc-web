@@ -1,5 +1,6 @@
-import { fakerFields } from '@/mocks/fakerUtils'
 import { Prisma, UserActionCall } from '@prisma/client'
+
+import { fakerFields } from '@/mocks/fakerUtils'
 
 export function mockCreateUserActionCallInput() {
   return {

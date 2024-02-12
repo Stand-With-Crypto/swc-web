@@ -1,5 +1,7 @@
 'use client'
 
+import { Suspense } from 'react'
+
 import { UserActionFormCallCongressperson } from '@/components/app/userActionFormCallCongressperson'
 import { ANALYTICS_NAME_USER_ACTION_FORM_CALL_CONGRESSPERSON } from '@/components/app/userActionFormCallCongressperson/constants'
 import { LazyUserActionFormCallCongressperson } from '@/components/app/userActionFormCallCongressperson/lazyLoad'
@@ -7,7 +9,6 @@ import { UserActionFormCallCongresspersonSkeleton } from '@/components/app/userA
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useDialog } from '@/hooks/useDialog'
-import { Suspense } from 'react'
 
 export function UserActionFormCallCongresspersonDialog({
   children,

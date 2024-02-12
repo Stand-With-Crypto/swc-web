@@ -1,5 +1,3 @@
-import { fakerFields } from '@/mocks/fakerUtils'
-import { mockCommonDatetimes } from '@/mocks/mockCommonDatetimes'
 import { faker } from '@faker-js/faker'
 import {
   DataCreationMethod,
@@ -7,6 +5,9 @@ import {
   SupportedUserCryptoNetwork,
   UserCryptoAddress,
 } from '@prisma/client'
+
+import { fakerFields } from '@/mocks/fakerUtils'
+import { mockCommonDatetimes } from '@/mocks/mockCommonDatetimes'
 
 export enum PopularCryptoAddress {
   CHRIS_DIXON = '0xe11bfcbdd43745d4aa6f4f18e24ad24f4623af04',

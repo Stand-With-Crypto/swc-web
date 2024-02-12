@@ -1,6 +1,6 @@
+import { useCallback } from 'react'
 import _ from 'lodash'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { useCallback } from 'react'
 
 export const useQueryParamState = ({
   queryParamKey,

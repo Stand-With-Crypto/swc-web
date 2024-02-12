@@ -1,7 +1,8 @@
-import { PrismaClient } from '@prisma/client'
 import { Client } from '@planetscale/database'
 import { PrismaPlanetScale } from '@prisma/adapter-planetscale'
+import { PrismaClient } from '@prisma/client'
 import { fetch as undiciFetch } from 'undici'
+
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 
 const DATABASE_URL = requiredEnv(process.env.DATABASE_URL, 'process.env.DATABASE_URL')

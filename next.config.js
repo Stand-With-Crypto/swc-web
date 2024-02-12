@@ -34,6 +34,7 @@ const contentSecurityPolicy = {
     'https://*.rpc.thirdweb.com/',
     'https://api-js.mixpanel.com/',
     'https://vercel.live/_next-live/feedback/feedback.js',
+    'https://vitals.vercel-insights.com/',
   ],
   'img-src': [
     "'self'",
@@ -60,8 +61,9 @@ const contentSecurityPolicy = {
     'https://api-js.mixpanel.com/',
     '*.google.com',
     'https://vercel.live/api/event/tick',
-    'https://vitals.vercel-insights.com/v1/vitals',
+    'https://vitals.vercel-insights.com/',
     'https://api-js.mixpanel.com/',
+    'https://*.rpc.thirdweb.com/',
   ],
   'frame-src': [
     '*.google.com',

@@ -1,5 +1,6 @@
-import { getOpenGraphImageUrl } from '@/utils/server/generateOpenGraphImageUrl'
 import { Metadata } from 'next'
+
+import { getOpenGraphImageUrl } from '@/utils/server/generateOpenGraphImageUrl'
 
 export const sharedOpenGraphMetadata = {
   siteName: 'Stand With Crypto',

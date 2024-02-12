@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { useInterval } from 'react-use'
 import * as Sentry from '@sentry/nextjs'
+
 import { logger } from '@/utils/shared/logger'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 

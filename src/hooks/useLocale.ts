@@ -7,9 +7,9 @@ This hook should only be used as a convenience for components
 that are going to be client components no matter what.
 */
 
+import React, { useContext } from 'react'
+
 import { SupportedLocale } from '@/intl/locales'
-import React from 'react'
-import { useContext } from 'react'
 
 export const LocaleContext = React.createContext(SupportedLocale.EN_US)
 export const useLocale = () => {

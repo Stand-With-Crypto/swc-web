@@ -1,4 +1,5 @@
 import { PageResources } from '@/components/app/pageResources'
+
 import { PageProps } from '@/types'
 
 export const dynamic = 'error'

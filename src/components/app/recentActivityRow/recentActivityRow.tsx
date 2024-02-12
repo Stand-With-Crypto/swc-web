@@ -1,4 +1,7 @@
 'use client'
+import React from 'react'
+import { UserActionOptInType, UserActionType } from '@prisma/client'
+
 import { ClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
 import { ClientUserAction } from '@/clientModels/clientUserAction/clientUserAction'
 import { ThirdwebLoginDialog } from '@/components/app/authentication/thirdwebLoginContent'
@@ -24,8 +27,6 @@ import { gracefullyError } from '@/utils/shared/gracefullyError'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { formatDonationOrganization } from '@/utils/web/donationUtils'
 import { getUserDisplayName } from '@/utils/web/userUtils'
-import { UserActionOptInType, UserActionType } from '@prisma/client'
-import React from 'react'
 
 export interface RecentActivityRowProps {
   action: ClientUserAction & { user: ClientUserWithENSData }

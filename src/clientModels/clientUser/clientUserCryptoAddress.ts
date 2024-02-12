@@ -1,7 +1,8 @@
+import { UserCryptoAddress } from '@prisma/client'
+
 import { ClientModel, getClientModel } from '@/clientModels/utils'
 import { UserENSData } from '@/data/web3/types'
 import { censorWord } from '@/utils/server/obscenityMatcher'
-import { UserCryptoAddress } from '@prisma/client'
 
 export type ClientUserCryptoAddress = ClientModel<
   Pick<UserCryptoAddress, 'id' | 'cryptoAddress' | 'cryptoNetwork'>

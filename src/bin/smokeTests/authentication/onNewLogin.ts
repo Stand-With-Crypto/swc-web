@@ -1,4 +1,6 @@
-import { UserEmailAddressSource } from '.prisma/client'
+import { faker } from '@faker-js/faker'
+import _ from 'lodash'
+
 import { runBin } from '@/bin/runBin'
 import { fakerFields } from '@/mocks/fakerUtils'
 import { mockCreateUserInput } from '@/mocks/models/mockUser'
@@ -7,8 +9,8 @@ import { prismaClient } from '@/utils/server/prismaClient'
 import { ThirdwebEmbeddedWalletMetadata } from '@/utils/server/thirdweb/fetchEmbeddedWalletMetadataFromThirdweb'
 import { onNewLogin } from '@/utils/server/thirdweb/onLogin'
 import { logger } from '@/utils/shared/logger'
-import { faker } from '@faker-js/faker'
-import _ from 'lodash'
+
+import { UserEmailAddressSource } from '.prisma/client'
 /**
  * Run this script only after you have the server AND Inngest running locally and you've wiped your database.
  */

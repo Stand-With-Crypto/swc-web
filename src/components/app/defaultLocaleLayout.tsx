@@ -1,15 +1,17 @@
 import '@/globals.css'
-import { TopLevelClientLogic } from '@/app/[locale]/topLevelClientLogic'
-import { CookieConsent } from '@/components/app/cookieConsent'
-import { FullHeight } from '@/components/ui/fullHeight'
-import { DEFAULT_LOCALE } from '@/intl/locales'
+
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Inter } from 'next/font/google'
 import NextTopLoader from 'nextjs-toploader'
 import { Toaster } from 'sonner'
-import { Navbar } from '@/components/app/navbar'
+
+import { TopLevelClientLogic } from '@/app/[locale]/topLevelClientLogic'
+import { CookieConsent } from '@/components/app/cookieConsent'
 import { Footer } from '@/components/app/footer'
+import { Navbar } from '@/components/app/navbar'
+import { FullHeight } from '@/components/ui/fullHeight'
+import { DEFAULT_LOCALE } from '@/intl/locales'
 
 const inter = Inter({ subsets: ['latin'] })
 export const dynamic = 'error'

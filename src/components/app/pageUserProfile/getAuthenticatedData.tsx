@@ -1,14 +1,15 @@
+import 'server-only'
+
+import { UserInformationVisibility } from '@prisma/client'
+
 import { getClientAddress } from '@/clientModels/clientAddress'
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
 import { getClientUserCryptoAddress } from '@/clientModels/clientUser/clientUserCryptoAddress'
 import { getSensitiveDataClientUserWithENSData } from '@/clientModels/clientUser/sensitiveDataClientUser'
 import { getSensitiveDataClientUserAction } from '@/clientModels/clientUserAction/sensitiveDataClientUserAction'
-import { queryDTSIPeopleBySlugForUserActions } from '@/data/dtsi/queries/queryDTSIPeopleBySlugForUserActions'
 import { getENSDataFromCryptoAddressAndFailGracefully } from '@/data/web3/getENSDataFromCryptoAddress'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
-import { UserInformationVisibility } from '@prisma/client'
-import 'server-only'
 
 export async function getAuthenticatedData() {
   const authUser = await appRouterGetAuthUser()
@@ -52,10 +53,9 @@ export async function getAuthenticatedData() {
       })
     }
   })
-  const [dtsiPeople, ensData] = await Promise.all([
-    queryDTSIPeopleBySlugForUserActions(Array.from(dtsiSlugs)).then(x => x.people),
-    getENSDataFromCryptoAddressAndFailGracefully(user.primaryUserCryptoAddress!.cryptoAddress),
-  ])
+  const ensData = await getENSDataFromCryptoAddressAndFailGracefully(
+    user.primaryUserCryptoAddress!.cryptoAddress,
+  )
   const { userActions, address, ...rest } = user
   const currentlyAuthenticatedUserCryptoAddress = user.userCryptoAddresses.find(
     x => x.cryptoAddress === authUser.address,
@@ -71,9 +71,7 @@ export async function getAuthenticatedData() {
     ),
 
     address: address && getClientAddress(address),
-    userActions: userActions.map(record =>
-      getSensitiveDataClientUserAction({ record, dtsiPeople }),
-    ),
+    userActions: userActions.map(record => getSensitiveDataClientUserAction({ record })),
     mergeAlerts: [
       ...user.userMergeAlertUserA.map(
         ({

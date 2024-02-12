@@ -1,7 +1,9 @@
-import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
+import 'server-only'
+
 import _ from 'lodash'
 import { NextResponse } from 'next/server'
-import 'server-only'
+
+import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
 
 export const dynamic = 'force-dynamic'
 
