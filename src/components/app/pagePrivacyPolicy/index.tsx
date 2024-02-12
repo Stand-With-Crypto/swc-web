@@ -190,16 +190,38 @@ export function PagePrivacyPolicy() {
 
       <p>
         You may also manage your preferences for individual third parties by contacting them
-        directly, including{' '}
+        directly, including as directed at{' '}
         <a href="https://tools.google.com/dlpage/gaoptout" target="_blank">
           Google Analytics Choices
         </a>{' '}
-        and{' '}
+        and privacy/ad choice pages on{' '}
+        <a href="https://www.facebook.com/help/1075880512458213" target="_blank">
+          Facebook
+        </a>
+        ,{' '}
+        <a href="https://help.instagram.com/911879456838933" target="_blank">
+          Instagram
+        </a>
+        ,{' '}
+        <a
+          href="https://support.tiktok.com/en/account-and-privacy/personalized-ads-and-data/advertiser-settings"
+          target="_blank"
+        >
+          TikTok
+        </a>
+        ,{' '}
+        <a
+          href="https://support.discord.com/hc/en-us/articles/360004109911-Data-Privacy-Controls#:~:text=You%20can%20toggle%20your%20Data,then%20tap%20on%20Privacy%20%26%20Safety."
+          target="_blank"
+        >
+          Discord
+        </a>
+        , and{' '}
         <a
           href="https://help.twitter.com/en/safety-and-security/privacy-controls-for-tailored-ads"
           target="_blank"
         >
-          Twitter/X's Privacy Controls for Tailored Ads
+          Twitter/X
         </a>
         .
       </p>

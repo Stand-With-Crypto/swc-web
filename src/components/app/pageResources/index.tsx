@@ -25,7 +25,7 @@ export function PageResources() {
       </section>
 
       <section className="mb-16 text-center">
-        <PageTitle as="h2" size="sm">
+        <PageTitle as="h2" size="md">
           Events
         </PageTitle>
         <PageSubTitle className="mb-8 mt-4">
@@ -57,7 +57,7 @@ export function PageResources() {
       </section>
 
       <section className="mb-16 text-center">
-        <PageTitle as="h2" size="sm">
+        <PageTitle as="h2" size="md">
           Policy
         </PageTitle>
         <PageSubTitle className="mb-8 mt-4">
@@ -80,7 +80,7 @@ export function PageResources() {
       </section>
 
       <section className="mb-16 text-center">
-        <PageTitle as="h2" size="sm">
+        <PageTitle as="h2" size="md">
           Get involved
         </PageTitle>
         <PageSubTitle className="mb-8 mt-4">

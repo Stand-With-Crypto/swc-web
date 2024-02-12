@@ -87,14 +87,14 @@ export function PagePoliticianDetails({
             </>
           )}
         </PageSubTitle>
-        <div className="flex justify-center gap-3">
+        <div className="flex items-center justify-center gap-3">
           {person.donationUrl && (
-            <Button asChild>
+            <Button asChild size="lg">
               <ExternalLink href={person.donationUrl}>Donate</ExternalLink>
             </Button>
           )}
           {Boolean(person.officialUrl) && (
-            <Button asChild className="h-12 w-12 rounded-full px-3 py-3" variant="secondary">
+            <Button asChild className="h-11 w-11 rounded-full p-3" variant="secondary">
               <ExternalLink href={person.officialUrl}>
                 <Globe className="h-6 w-6" />
                 <span className="sr-only">{person.officialUrl}</span>
@@ -105,12 +105,13 @@ export function PagePoliticianDetails({
           {person.twitterAccounts.slice(0, 1).map(account => (
             <Button
               asChild
-              className="h-12 w-12 rounded-full px-3 py-3"
+              // we want the X to look the same size as the globe, so we're adding a bit more padding to make it appear the same
+              className="h-11 w-11 rounded-full p-[14px]"
               key={account.id}
               variant="secondary"
             >
               <ExternalLink href={dtsiTwitterAccountUrl(account)}>
-                <NextImage alt="x.com logo" height={24} src={'/misc/xDotComLogo.svg'} width={24} />
+                <NextImage alt="x.com logo" height={20} src={'/misc/xDotComLogo.svg'} width={20} />
                 <span className="sr-only">{dtsiTwitterAccountUrl(account)}</span>
               </ExternalLink>
             </Button>

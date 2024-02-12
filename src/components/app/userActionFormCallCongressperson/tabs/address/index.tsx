@@ -24,6 +24,7 @@ import {
   getDTSIPeopleFromAddress,
 } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
+import { useIsMobile } from '@/hooks/useIsMobile'
 import { getGoogleCivicDataFromAddress } from '@/utils/shared/googleCivicInfo'
 import { trackFormSubmissionSyncErrors } from '@/utils/web/formUtils'
 import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
@@ -50,15 +51,20 @@ export function Address({
   goToSection,
 }: AddressProps) {
   const urls = useIntlUrls()
-  const submitButtonRef = useRef<HTMLButtonElement>(null)
   const form = useForm<FindRepresentativeCallFormValues>({
     defaultValues: getDefaultValues({ user }),
     resolver: zodResolver(findRepresentativeCallFormValidationSchema),
   })
+  const isMobile = useIsMobile({ defaultState: true })
   const initialAddressOnLoad = useRef(user?.address?.googlePlaceId)
+  const inputRef = useRef<HTMLInputElement | null>(null)
   useEffect(() => {
     form.setFocus('address')
-  }, [form])
+    // we only want the input to auto-open on desktop
+    if (!isMobile) {
+      inputRef.current?.click()
+    }
+  }, [form, isMobile])
   const address = useWatch({
     control: form.control,
     name: 'address',
@@ -122,6 +128,7 @@ export function Address({
                       {...field}
                       onChange={field.onChange}
                       placeholder="Your full address"
+                      ref={inputRef}
                       value={field.value}
                     />
                   </FormControl>
@@ -137,7 +144,6 @@ export function Address({
                 isLoadingLiveCongressPersonData ||
                 !congressPersonData
               }
-              ref={submitButtonRef}
               type="submit"
             >
               {form.formState.isSubmitting || isLoadingLiveCongressPersonData

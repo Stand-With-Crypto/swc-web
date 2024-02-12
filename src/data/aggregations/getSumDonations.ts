@@ -13,7 +13,7 @@ export const getSumDonations = async ({ includeFairshake }: { includeFairshake: 
     FROM user_action_donation
   `
   const amountUsd = result[0].amountUsd?.toNumber() || 0
-  return { amountUsd: amountUsd + (includeFairshake ? 85_000_000 : 0) }
+  return { amountUsd: amountUsd + (includeFairshake ? 85_718_453.63 : 0) }
 }
 
 export type SumDonations = Awaited<ReturnType<typeof getSumDonations>>
