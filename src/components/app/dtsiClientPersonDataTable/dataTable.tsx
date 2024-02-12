@@ -1,19 +1,30 @@
 'use client'
+import React, { useMemo } from 'react'
 import {
   Column,
   ColumnDef,
   ColumnFiltersState,
-  SortingState,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
+  SortingState,
   useReactTable,
 } from '@tanstack/react-table'
+import { ArrowUpDown, Search } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 
 import { Person } from '@/components/app/dtsiClientPersonDataTable/columns'
 import { DataTablePagination } from '@/components/app/dtsiClientPersonDataTable/dataTablePagination'
+import {
+  filterDataViaGlobalFilters,
+  getGlobalFilterDefaults,
+  GlobalFilters,
+  PARTY_OPTIONS,
+  ROLE_OPTIONS,
+  StanceOnCryptoOptions,
+} from '@/components/app/dtsiClientPersonDataTable/globalFiltersUtils'
 import { Button } from '@/components/ui/button'
 import { InputWithIcons } from '@/components/ui/inputWithIcons'
 import { PageTitle } from '@/components/ui/pageTitleText'
@@ -25,16 +36,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { ArrowUpDown, Search } from 'lucide-react'
-import React, { useMemo } from 'react'
-import {
-  GlobalFilters,
-  PARTY_OPTIONS,
-  ROLE_OPTIONS,
-  StanceOnCryptoOptions,
-  filterDataViaGlobalFilters,
-  getGlobalFilterDefaults,
-} from '@/components/app/dtsiClientPersonDataTable/globalFiltersUtils'
+import { useIntlUrls } from '@/hooks/useIntlUrls'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -52,8 +54,8 @@ export const SortableHeader = <TData, TValue>({
   return (
     <Button
       className="p-0"
-      variant="ghost"
       onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+      variant="ghost"
     >
       {children}
       <ArrowUpDown className="ml-2 h-4 w-4" />
@@ -69,6 +71,8 @@ export function DataTable<TData extends Person, TValue>({
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
   const [globalFilter, setGlobalFilter] = React.useState<GlobalFilters>(getGlobalFilterDefaults())
+  const urls = useIntlUrls()
+  const router = useRouter()
   const data = useMemo(() => {
     return filterDataViaGlobalFilters<TData>(passedData, globalFilter)
   }, [globalFilter, passedData])
@@ -101,7 +105,6 @@ export function DataTable<TData extends Person, TValue>({
             <InputWithIcons
               className="rounded-full bg-gray-100 text-gray-600"
               leftIcon={<Search className="h-4 w-4 text-gray-500" />}
-              value={(table.getColumn('fullName')?.getFilterValue() as string) ?? ''}
               onChange={event => {
                 table.getColumn('fullName')?.setFilterValue(event.target.value)
                 if (
@@ -114,6 +117,7 @@ export function DataTable<TData extends Person, TValue>({
                 }
               }}
               placeholder="Search by name"
+              value={(table.getColumn('fullName')?.getFilterValue() as string) ?? ''}
             />
           </div>
         </div>
@@ -145,7 +149,13 @@ export function DataTable<TData extends Person, TValue>({
             <TableBody>
               {table.getRowModel().rows?.length ? (
                 table.getRowModel().rows.map(row => (
-                  <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
+                  <TableRow
+                    className="cursor-pointer"
+                    data-state={row.getIsSelected() && 'selected'}
+                    key={row.id}
+                    onClick={() => router.push(urls.politicianDetails(row.original.slug))}
+                    role="button"
+                  >
                     {row.getVisibleCells().map(cell => (
                       <TableCell key={cell.id}>
                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -155,7 +165,7 @@ export function DataTable<TData extends Person, TValue>({
                 ))
               ) : (
                 <TableRow>
-                  <TableCell colSpan={columns.length} className="h-24 text-center">
+                  <TableCell className="h-24 text-center" colSpan={columns.length}>
                     No results.
                   </TableCell>
                 </TableRow>

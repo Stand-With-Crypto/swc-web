@@ -3,14 +3,13 @@
 import { useMemo } from 'react'
 import { X } from 'lucide-react'
 
-import { cn } from '@/utils/web/cn'
+import ManageCookiesModal from '@/components/app/cookieConsent/cookieConsentManageModal'
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
-import { getIntlUrls } from '@/utils/shared/urls'
 import { SupportedLocale } from '@/intl/locales'
-
-import ManageCookiesModal from '@/components/app/cookieConsent/cookieConsentManageModal'
 import { CookieConsentPermissions } from '@/utils/shared/cookieConsent'
+import { getIntlUrls } from '@/utils/shared/urls'
+import { cn } from '@/utils/web/cn'
 
 interface CookieConsentBannerProps {
   locale: SupportedLocale
@@ -34,8 +33,8 @@ export function CookieConsentBanner({
       <div className="flex flex-col md:container md:flex-row md:justify-between md:gap-5">
         <div className="relative">
           <button
-            onClick={onRejectAll}
             className="relative right-[-4px] top-[-4px] float-right h-auto px-1 md:static md:hidden"
+            onClick={onRejectAll}
           >
             <div className="rounded-full bg-gray-300 p-1 text-white transition-all hover:bg-gray-400">
               <X className="h-4 w-4" />
@@ -56,19 +55,19 @@ export function CookieConsentBanner({
         <div className={cn('flex items-center justify-between gap-4 md:justify-end')}>
           <div className="flex gap-4">
             <ManageCookiesModal onSubmit={onAcceptSpecificCookies}>
-              <Button variant="link" className="p-0">
+              <Button className="p-0" variant="link">
                 Manage cookies
               </Button>
             </ManageCookiesModal>
-            <Button variant="link" className="p-0" onClick={onRejectAll}>
+            <Button className="p-0" onClick={onRejectAll} variant="link">
               Reject all
             </Button>
           </div>
           {/* TODO: Change this to primary color once tailwind is configured properly */}
-          <Button variant="link" className="p-0 px-4 text-blue-500 md:px-0" onClick={onAcceptAll}>
+          <Button className="p-0 px-4 text-blue-500 md:px-0" onClick={onAcceptAll} variant="link">
             Accept all
           </Button>
-          <button onClick={onRejectAll} className="hidden md:block">
+          <button className="hidden md:block" onClick={onRejectAll}>
             <div className="rounded-full bg-gray-300 p-1 text-white transition-all hover:bg-gray-400">
               <X className="h-4 w-4" />
             </div>

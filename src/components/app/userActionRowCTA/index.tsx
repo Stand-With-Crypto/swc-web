@@ -1,9 +1,10 @@
 'use client'
-import { NextImage } from '@/components/ui/image'
-import { cn } from '@/utils/web/cn'
+import React from 'react'
 import { UserActionType } from '@prisma/client'
 import { ChevronRight } from 'lucide-react'
-import React from 'react'
+
+import { NextImage } from '@/components/ui/image'
+import { cn } from '@/utils/web/cn'
 
 export interface UserActionRowCTAProps {
   actionType: UserActionType
@@ -34,19 +35,19 @@ export const UserActionRowCTAButton = React.forwardRef<
         case 'complete':
           return (
             <NextImage
-              width={24}
+              alt={'Action complete'}
               height={24}
               src={'/misc/checkedCircle.svg'}
-              alt={'Action complete'}
+              width={24}
             />
           )
         case 'incomplete':
           return (
             <NextImage
-              width={24}
+              alt={'Action not complete'}
               height={24}
               src={'/misc/uncheckedCircle.svg'}
-              alt={'Action not complete'}
+              width={24}
             />
           )
       }
@@ -54,18 +55,18 @@ export const UserActionRowCTAButton = React.forwardRef<
     return (
       <button
         {...props}
-        ref={ref}
-        data-test-id={`user-action-cta-${actionType}`}
-        disabled={!canBeActionedOn}
         className={cn(
           'flex w-full items-center justify-between gap-4 rounded-3xl bg-gray-100 p-4 text-left lg:p-8',
           className,
         )}
+        data-test-id={`user-action-cta-${actionType}`}
+        disabled={!canBeActionedOn}
+        ref={ref}
       >
         <div className="flex items-center gap-4">
           <div className="flex-shrink-0">{getStateUI()}</div>
           <div className="hidden md:block">
-            <NextImage width={100} height={100} src={image} alt={text} />
+            <NextImage alt={text} height={100} src={image} width={100} />
           </div>
           <div>
             <div className="mb-1 text-base font-bold lg:text-2xl">{text}</div>

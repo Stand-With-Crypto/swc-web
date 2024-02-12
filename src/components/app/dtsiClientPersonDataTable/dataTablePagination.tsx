@@ -1,8 +1,8 @@
 import { ChevronLeftIcon, ChevronRightIcon, DotsHorizontalIcon } from '@radix-ui/react-icons'
 import { Table } from '@tanstack/react-table'
+import _ from 'lodash'
 
 import { Button } from '@/components/ui/button'
-import _ from 'lodash'
 
 interface DataTablePaginationProps<TData> {
   table: Table<TData>
@@ -19,10 +19,10 @@ export function DataTablePagination<TData>({ table }: DataTablePaginationProps<T
   return (
     <div className="flex items-center gap-2">
       <Button
-        variant="secondary"
         className="hidden h-8 w-8 p-0 lg:flex"
-        onClick={() => table.setPageIndex(currentPageNumber - 2)}
         disabled={!table.getCanPreviousPage()}
+        onClick={() => table.setPageIndex(currentPageNumber - 2)}
+        variant="secondary"
       >
         <span className="sr-only">Go to previous page</span>
         <ChevronLeftIcon className="h-4 w-4" />
@@ -30,9 +30,9 @@ export function DataTablePagination<TData>({ table }: DataTablePaginationProps<T
       {visiblePageNumbers[0] > 1 && (
         <>
           <Button
-            variant={1 === currentPageNumber ? 'default' : 'outline'}
             className="hidden h-8 w-8 p-0 lg:flex"
             onClick={() => table.setPageIndex(0)}
+            variant={1 === currentPageNumber ? 'default' : 'outline'}
           >
             <span className="sr-only">Go to page {1}</span>
             {1}
@@ -43,10 +43,10 @@ export function DataTablePagination<TData>({ table }: DataTablePaginationProps<T
 
       {visiblePageNumbers.map(pageNumber => (
         <Button
-          key={pageNumber}
-          variant={pageNumber === currentPageNumber ? 'default' : 'outline'}
           className="hidden h-8 w-8 p-0 lg:flex"
+          key={pageNumber}
           onClick={() => table.setPageIndex(pageNumber - 1)}
+          variant={pageNumber === currentPageNumber ? 'default' : 'outline'}
         >
           <span className="sr-only">Go to page {pageNumber}</span>
           {pageNumber}
@@ -56,9 +56,9 @@ export function DataTablePagination<TData>({ table }: DataTablePaginationProps<T
         <>
           {visiblePageNumbers[visiblePageNumbers.length - 1] + 1 < pages && <DotsHorizontalIcon />}
           <Button
-            variant={pages === currentPageNumber ? 'default' : 'outline'}
             className="hidden h-8 w-8 p-0 lg:flex"
             onClick={() => table.setPageIndex(pages - 1)}
+            variant={pages === currentPageNumber ? 'default' : 'outline'}
           >
             <span className="sr-only">Go to page {pages}</span>
             {pages}
@@ -66,10 +66,10 @@ export function DataTablePagination<TData>({ table }: DataTablePaginationProps<T
         </>
       )}
       <Button
-        variant="secondary"
         className="hidden h-8 w-8 p-0 lg:flex"
-        onClick={() => table.setPageIndex(currentPageNumber)}
         disabled={!table.getCanNextPage()}
+        onClick={() => table.setPageIndex(currentPageNumber)}
+        variant="secondary"
       >
         <span className="sr-only">Go to next page</span>
         <ChevronRightIcon className="h-4 w-4" />

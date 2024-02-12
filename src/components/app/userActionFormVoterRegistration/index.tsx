@@ -1,3 +1,5 @@
+import { memo, useMemo } from 'react'
+
 import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
 import {
   ANALYTICS_NAME_USER_ACTION_FORM_VOTER_REGISTRATION,
@@ -7,7 +9,6 @@ import { ClaimNft } from '@/components/app/userActionFormVoterRegistration/secti
 import { Survey } from '@/components/app/userActionFormVoterRegistration/sections/survey'
 import { VoterRegistrationForm } from '@/components/app/userActionFormVoterRegistration/sections/voterRegistrationForm'
 import { useSections } from '@/hooks/useSections'
-import { memo, useMemo } from 'react'
 
 export const UserActionFormVoterRegistration = memo(function UserActionFormVoterRegistration({
   onClose,

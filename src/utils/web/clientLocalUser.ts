@@ -1,3 +1,5 @@
+import Cookies from 'js-cookie'
+
 import {
   CurrentSessionLocalUser,
   LOCAL_USER_CURRENT_SESSION_KEY,
@@ -6,7 +8,6 @@ import {
   PersistedLocalUser,
 } from '@/utils/shared/localUser'
 import { getClientCookieConsent } from '@/utils/web/clientCookieConsent'
-import Cookies from 'js-cookie'
 
 const getPersistedLocalUser = () => {
   const val = Cookies.get(LOCAL_USER_PERSISTED_KEY)
@@ -41,7 +42,8 @@ export const bootstrapLocalUser = () => {
 }
 
 export const getLocalUser = (): LocalUser => {
-  const canUsePersistedData = getClientCookieConsent().targeting
+  const canUsePersistedData =
+    getClientCookieConsent().targeting && getClientCookieConsent().functional
   if (localUser) {
     if (!canUsePersistedData) {
       if (localUser.persisted) {
@@ -70,4 +72,16 @@ export const getLocalUser = (): LocalUser => {
   })
   localUser = { currentSession, persisted: newPersisted }
   return localUser
+}
+
+export function setLocalUserPersistedValues(values: Partial<PersistedLocalUser>) {
+  const canUsePersistedData =
+    getClientCookieConsent().targeting && getClientCookieConsent().functional
+  if (!canUsePersistedData) {
+    return
+  }
+  const newPersisted = { ...getLocalUser().persisted, ...values }
+  Cookies.set(LOCAL_USER_PERSISTED_KEY, JSON.stringify(newPersisted), {
+    expires: 365,
+  })
 }

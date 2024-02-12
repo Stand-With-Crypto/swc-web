@@ -1,13 +1,13 @@
 'use client'
 
-import { zodResolver } from '@hookform/resolvers/zod'
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
 import useSWR from 'swr'
 
 import type { UserActionFormCallCongresspersonProps } from '@/components/app/userActionFormCallCongressperson'
-import { UserActionFormCallCongresspersonLayout } from '@/components/app/userActionFormCallCongressperson/tabs/layout'
 import { SectionNames } from '@/components/app/userActionFormCallCongressperson/constants'
+import { UserActionFormCallCongresspersonLayout } from '@/components/app/userActionFormCallCongressperson/tabs/layout'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -29,10 +29,10 @@ import { trackFormSubmissionSyncErrors } from '@/utils/web/formUtils'
 import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
 
 import {
-  FORM_NAME,
   findRepresentativeCallFormValidationSchema,
-  getDefaultValues,
   type FindRepresentativeCallFormValues,
+  FORM_NAME,
+  getDefaultValues,
 } from './formConfig'
 
 interface AddressProps
@@ -50,11 +50,12 @@ export function Address({
   goToSection,
 }: AddressProps) {
   const urls = useIntlUrls()
-
+  const submitButtonRef = useRef<HTMLButtonElement>(null)
   const form = useForm<FindRepresentativeCallFormValues>({
     defaultValues: getDefaultValues({ user }),
     resolver: zodResolver(findRepresentativeCallFormValidationSchema),
   })
+  const initialAddressOnLoad = useRef(user?.address?.googlePlaceId)
   useEffect(() => {
     form.setFocus('address')
   }, [form])
@@ -77,10 +78,23 @@ export function Address({
         message: formatGetDTSIPeopleFromAddressNotFoundReason(dtsiPerson),
       })
       return
+    } else {
+      form.clearErrors('address')
     }
 
     onFindCongressperson({ ...liveCongressPersonData, dtsiPerson })
-  }, [liveCongressPersonData, onFindCongressperson, form])
+    // request from exec - form should auto-advance once the address is filled in
+    if (address?.place_id !== initialAddressOnLoad.current) {
+      goToSection(SectionNames.SUGGESTED_SCRIPT)
+    }
+  }, [
+    liveCongressPersonData,
+    onFindCongressperson,
+    form,
+    goToSection,
+    address,
+    initialAddressOnLoad,
+  ])
 
   return (
     <Form {...form}>
@@ -93,8 +107,8 @@ export function Address({
         <UserActionFormCallCongresspersonLayout onBack={() => goToSection(SectionNames.INTRO)}>
           <UserActionFormCallCongresspersonLayout.Container>
             <UserActionFormCallCongresspersonLayout.Heading
-              title="Find your representative"
               subtitle="Your address will be used to connect you with your representative. Stand With Crypto will never share your data with any third-parties."
+              title="Find your representative"
             />
 
             <FormField
@@ -106,9 +120,9 @@ export function Address({
                   <FormControl>
                     <GooglePlacesSelect
                       {...field}
-                      value={field.value}
                       onChange={field.onChange}
                       placeholder="Your full address"
+                      value={field.value}
                     />
                   </FormControl>
                   <FormErrorMessage />
@@ -117,14 +131,23 @@ export function Address({
             />
           </UserActionFormCallCongresspersonLayout.Container>
           <UserActionFormCallCongresspersonLayout.Footer>
-            <SubmitButton
-              isLoading={form.formState.isSubmitting || isLoadingLiveCongressPersonData}
-              disabled={!congressPersonData}
-            />
+            <Button
+              disabled={
+                form.formState.isSubmitting ||
+                isLoadingLiveCongressPersonData ||
+                !congressPersonData
+              }
+              ref={submitButtonRef}
+              type="submit"
+            >
+              {form.formState.isSubmitting || isLoadingLiveCongressPersonData
+                ? 'Loading...'
+                : 'Continue'}
+            </Button>
 
             <p className="text-sm">
               Learn more about our{' '}
-              <InternalLink href={urls.privacyPolicy()} tabIndex={-1} className="underline">
+              <InternalLink className="underline" href={urls.privacyPolicy()} tabIndex={-1}>
                 privacy policy
               </InternalLink>
             </p>
@@ -132,14 +155,6 @@ export function Address({
         </UserActionFormCallCongresspersonLayout>
       </form>
     </Form>
-  )
-}
-
-function SubmitButton({ isLoading, disabled }: { isLoading: boolean; disabled: boolean }) {
-  return (
-    <Button type="submit" disabled={isLoading || disabled}>
-      {isLoading ? 'Loading...' : 'Continue'}
-    </Button>
   )
 }
 

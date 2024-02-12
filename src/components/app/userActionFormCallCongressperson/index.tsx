@@ -1,14 +1,14 @@
-import * as Sentry from '@sentry/nextjs'
 import React from 'react'
+import * as Sentry from '@sentry/nextjs'
 import { z } from 'zod'
 
 import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
+import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
 import { DTSIPeopleByCongressionalDistrictQueryResult } from '@/data/dtsi/queries/queryDTSIPeopleByCongressionalDistrict'
-import { UseSectionsReturn, useSections } from '@/hooks/useSections'
+import { useSections, UseSectionsReturn } from '@/hooks/useSections'
 import { GoogleCivicInfoResponse } from '@/utils/shared/googleCivicInfo'
 import { zodAddress } from '@/validation/fields/zodAddress'
 
-import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
 import { Address } from './tabs/address'
 import { Intro } from './tabs/intro'
 import { SuggestedScript } from './tabs/suggestedScript'
@@ -48,9 +48,9 @@ export function UserActionFormCallCongressperson({
     case SectionNames.ADDRESS:
       return (
         <Address
-          user={user}
-          onFindCongressperson={setCongresspersonData}
           congressPersonData={congressPersonData}
+          onFindCongressperson={setCongresspersonData}
+          user={user}
           {...sectionProps}
         />
       )
@@ -65,7 +65,7 @@ export function UserActionFormCallCongressperson({
       }
 
       return (
-        <SuggestedScript user={user} congressPersonData={congressPersonData} {...sectionProps} />
+        <SuggestedScript congressPersonData={congressPersonData} user={user} {...sectionProps} />
       )
     case SectionNames.SUCCESS_MESSAGE:
       return <UserActionFormSuccessScreen onClose={onClose} />

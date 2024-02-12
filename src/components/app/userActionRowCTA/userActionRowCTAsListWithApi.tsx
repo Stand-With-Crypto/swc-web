@@ -1,8 +1,9 @@
 'use client'
 
+import { UserActionType } from '@prisma/client'
+
 import { UserActionRowCTAsList } from '@/components/app/userActionRowCTA/userActionRowCTAsList'
 import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
-import { UserActionType } from '@prisma/client'
 
 type UserActionRowCTAsListWithApiProps = {
   excludeUserActionTypes?: UserActionType[]

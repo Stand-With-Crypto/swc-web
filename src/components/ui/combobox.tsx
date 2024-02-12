@@ -12,13 +12,13 @@ import {
 import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/drawer'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { useIsMobile } from '@/hooks/useIsMobile'
-import { cn } from '@/utils/web/cn'
 import { useResizeObserver } from '@/hooks/useResizeObserver'
+import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
+import { cn } from '@/utils/web/cn'
 import {
   PrimitiveComponentAnalytics,
   trackPrimitiveComponentAnalytics,
 } from '@/utils/web/primitiveComponentAnalytics'
-import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
 
 export interface ComboBoxProps<T>
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange' | 'type'>,
@@ -66,7 +66,7 @@ export function Combobox<T>({
 
   if (isMobile) {
     return (
-      <Drawer analytics={wrappedAnalytics} open={open} onOpenChange={setOpen}>
+      <Drawer analytics={wrappedAnalytics} onOpenChange={setOpen} open={open}>
         <DrawerTrigger asChild>{formatPopoverTrigger(value)}</DrawerTrigger>
         <DrawerContent>
           <div className="mt-4 min-h-[260px] border-t">
@@ -89,14 +89,14 @@ export function Combobox<T>({
   }
 
   return (
-    <Popover analytics={wrappedAnalytics} open={open} onOpenChange={setOpen}>
-      <PopoverTrigger ref={parentRef} asChild>
+    <Popover analytics={wrappedAnalytics} onOpenChange={setOpen} open={open}>
+      <PopoverTrigger asChild ref={parentRef}>
         {formatPopoverTrigger(value)}
       </PopoverTrigger>
       <PopoverContent
+        align="start"
         avoidCollisions={false}
         className={cn('p-0', popoverContentClassName)}
-        align="start"
         style={{ width: size.width }}
       >
         <StatusList
@@ -135,14 +135,14 @@ function StatusList<T>({
   return (
     <Command shouldFilter={false}>
       <CommandInput
+        autoFocus
         commandValue={value}
         onClear={() => {
           onChange(null)
           onChangeInputValue('')
         }}
-        autoFocus
-        placeholder="Filter status..."
         onValueChange={onChangeInputValue}
+        placeholder="Filter status..."
         value={inputValue}
         {...inputProps}
       />
@@ -160,11 +160,11 @@ function StatusList<T>({
               <CommandItem
                 className={cn(isSelected && 'border border-blue-500')}
                 key={key}
-                value={key}
                 onSelect={() => {
                   onChange(options.find(x => getOptionKey(x) === key) || null)
                   setOpen(false)
                 }}
+                value={key}
               >
                 {getOptionLabel(option)}
               </CommandItem>

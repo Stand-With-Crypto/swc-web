@@ -1,3 +1,9 @@
+import _ from 'lodash'
+import { Metadata } from 'next'
+import { notFound } from 'next/navigation'
+import { z } from 'zod'
+
+import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
 import {
   PAGE_LEADERBOARD_DESCRIPTION,
   PAGE_LEADERBOARD_TITLE,
@@ -5,15 +11,12 @@ import {
 } from '@/components/app/pageLeaderboard'
 import { PAGE_LEADERBOARD_TOTAL_PRE_GENERATED_PAGES } from '@/components/app/pageLeaderboard/constants'
 import { getDataForPageLeaderboard } from '@/components/app/pageLeaderboard/getData'
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
-import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import _ from 'lodash'
-import { Metadata } from 'next'
-import { notFound } from 'next/navigation'
-import { z } from 'zod'
+import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
-export const revalidate = 5
+import { PageProps } from '@/types'
+
+export const revalidate = SECONDS_DURATION.SECOND * 30
 export const dynamic = 'error'
 export const dynamicParams = true
 

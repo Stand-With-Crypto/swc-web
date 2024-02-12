@@ -1,10 +1,10 @@
+import { UserInformationVisibility } from '@prisma/client'
+
 import { ClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
 import { SensitiveDataClientUserWithENSData } from '@/clientModels/clientUser/sensitiveDataClientUser'
 import { NextImage } from '@/components/ui/image'
 import { ImageAvatarProps } from '@/components/ui/imageAvatar'
-
 import { deterministicArraySelection } from '@/utils/shared/deterministicArraySelection'
-import { UserInformationVisibility } from '@prisma/client'
 
 const genericImages = [
   '/userAvatars/blue.svg',
@@ -24,10 +24,10 @@ function DefaultUserAvatar({ size, ...props }: Pick<ImageAvatarProps, 'size' | '
     <Container>
       <NextImage
         {...props}
-        src={'/userAvatars/grey.svg'}
         alt="Generic profile picture for anonymous user"
-        width={size}
         height={size}
+        src={'/userAvatars/grey.svg'}
+        width={size}
       />
     </Container>
   )
@@ -52,10 +52,10 @@ export const UserAvatar: React.FC<
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           {...props}
-          src={primaryUserCryptoAddress.ensAvatarUrl}
           alt={`ENS avatar for ${
             primaryUserCryptoAddress.ensName || primaryUserCryptoAddress.cryptoAddress
           }`}
+          src={primaryUserCryptoAddress.ensAvatarUrl}
           style={{
             width: size,
             height: size,
@@ -68,13 +68,13 @@ export const UserAvatar: React.FC<
     <Container>
       <NextImage
         {...props}
+        alt="Generic profile picture for anonymous user"
+        height={size}
         src={deterministicArraySelection(
           genericImages,
           user.primaryUserCryptoAddress.cryptoAddress,
         )}
-        alt="Generic profile picture for anonymous user"
         width={size}
-        height={size}
       />
     </Container>
   )
@@ -99,10 +99,10 @@ export const SensitiveDataUserAvatar: React.FC<
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           {...props}
-          src={primaryUserCryptoAddress.ensAvatarUrl}
           alt={`ENS avatar for ${
             primaryUserCryptoAddress.ensName || primaryUserCryptoAddress.cryptoAddress
           }`}
+          src={primaryUserCryptoAddress.ensAvatarUrl}
           style={{
             width: size,
             height: size,
@@ -116,13 +116,13 @@ export const SensitiveDataUserAvatar: React.FC<
     <Container>
       <NextImage
         {...props}
+        alt="Generic profile picture for anonymous user"
+        height={size}
         src={deterministicArraySelection(
           genericImages,
           user.primaryUserCryptoAddress.cryptoAddress,
         )}
-        alt="Generic profile picture for anonymous user"
         width={size}
-        height={size}
       />
     </Container>
   )

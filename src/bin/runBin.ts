@@ -1,7 +1,9 @@
-import { prismaClient } from '@/utils/server/prismaClient'
-import * as Sentry from '@sentry/nextjs'
 // eslint-disable-next-line
 import '../../sentry.server.config'
+
+import * as Sentry from '@sentry/nextjs'
+
+import { prismaClient } from '@/utils/server/prismaClient'
 
 export const runBin = async (fn: (...args: any[]) => Promise<any>) => {
   return fn()

@@ -1,8 +1,9 @@
 import React from 'react'
 import * as Sentry from '@sentry/nextjs'
 
-import { UseSectionsProps, UseSectionsReturn } from './useSections.types'
 import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
+
+import { UseSectionsProps, UseSectionsReturn } from './useSections.types'
 
 export function useSections<SectionKey extends string>({
   sections,

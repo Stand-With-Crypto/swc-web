@@ -1,20 +1,20 @@
-import { PageTitle } from '@/components/ui/pageTitleText'
 import {
   Accordion,
+  AccordionContent,
   AccordionItem,
   AccordionTrigger,
-  AccordionContent,
 } from '@/components/ui/accordion'
+import { PageTitle } from '@/components/ui/pageTitleText'
 
 import { FAQ_DATA } from './faqData'
 
 export function FAQ() {
   return (
     <section className="space-y-7">
-      <PageTitle size="sm" as="h2">
+      <PageTitle as="h2" size="sm">
         Frequently asked questions
       </PageTitle>
-      <Accordion type="single" collapsible>
+      <Accordion collapsible type="single">
         {FAQ_DATA.map(({ title, content: Content }) => (
           <AccordionItem key={title} value={title}>
             <AccordionTrigger>{title}</AccordionTrigger>

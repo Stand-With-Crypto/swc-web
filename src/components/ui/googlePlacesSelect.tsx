@@ -1,12 +1,14 @@
+import React, { useEffect } from 'react'
+import { MapPin } from 'lucide-react'
+import usePlacesAutocomplete from 'use-places-autocomplete'
+
 import { Combobox } from '@/components/ui/combobox'
 import { InputWithIcons } from '@/components/ui/inputWithIcons'
 import { useScript } from '@/hooks/useScript'
+import { isBrowser } from '@/utils/shared/executionEnvironment'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { cn } from '@/utils/web/cn'
 import { GooglePlaceAutocompletePrediction } from '@/utils/web/googlePlaceUtils'
-import { MapPin } from 'lucide-react'
-import React, { useEffect } from 'react'
-import usePlacesAutocomplete from 'use-places-autocomplete'
 
 const CALLBACK_NAME = 'PLACES_AUTOCOMPLETE'
 
@@ -15,6 +17,12 @@ const NEXT_PUBLIC_GOOGLE_PLACES_API_KEY = requiredEnv(
   'NEXT_PUBLIC_GOOGLE_PLACES_API_KEY',
 )
 
+/*
+We don't want to request people share their location but we want the results to be US-centric
+Adding a bias towards the center of the US to ensure the top results make sense
+*/
+const LAT_LONG_FOR_CENTER_OF_US = { lat: 38.363422, lng: -98.764471 }
+const WIDTH_OF_US_METERS = 4654223
 type Props = {
   value: GooglePlaceAutocompletePrediction | null
   onChange: (val: GooglePlaceAutocompletePrediction | null) => void
@@ -22,15 +30,26 @@ type Props = {
 
 export const GooglePlacesSelect = React.forwardRef<React.ElementRef<'input'>, Props>(
   (props, ref) => {
-    const { value: propsValue, onChange: propsOnChange, ...inputProps } = props
+    const { value: propsValue, onChange: propsOnChange, className, ...inputProps } = props
     const {
       ready,
       value,
       suggestions: { data },
       setValue,
       init,
-    } = usePlacesAutocomplete({ callbackName: CALLBACK_NAME })
-
+    } = usePlacesAutocomplete({
+      callbackName: CALLBACK_NAME,
+      // note on why we aren't restricting to just addresses https://stackoverflow.com/a/65206036
+      requestOptions: {
+        locationBias:
+          isBrowser && window.google
+            ? new google.maps.Circle({
+                center: LAT_LONG_FOR_CENTER_OF_US,
+                radius: WIDTH_OF_US_METERS / 2,
+              })
+            : undefined,
+      },
+    })
     const scriptStatus = useScript(
       `https://maps.googleapis.com/maps/api/js?key=${NEXT_PUBLIC_GOOGLE_PLACES_API_KEY}&libraries=places&callback=${CALLBACK_NAME}`,
     )
@@ -43,16 +62,12 @@ export const GooglePlacesSelect = React.forwardRef<React.ElementRef<'input'>, Pr
     return (
       <Combobox
         analytics={'Google Place Select'}
-        isLoading={!ready}
-        inputValue={value}
-        onChangeInputValue={setValue}
-        value={propsValue}
-        onChange={propsOnChange}
         formatPopoverTrigger={val => (
           <InputWithIcons
-            ref={ref}
+            className={cn(val || 'text-gray-500', 'cursor-pointer', className)}
             leftIcon={<MapPin className="h-4 w-4 text-gray-500" />}
-            className={cn('', val || 'text-gray-500')}
+            placeholder="select a location"
+            ref={ref}
             value={
               val?.description
                 ? // There's a weird bug where, because the input is type="button", on mobile a long address string will overflow the entire page
@@ -62,14 +77,18 @@ export const GooglePlacesSelect = React.forwardRef<React.ElementRef<'input'>, Pr
                   : val.description
                 : inputProps.placeholder || 'select a location'
             }
-            placeholder="select a location"
             {...inputProps}
           />
         )}
-        placeholder="Type your address..."
-        options={data}
-        getOptionLabel={val => val.description}
         getOptionKey={val => val.place_id}
+        getOptionLabel={val => val.description}
+        inputValue={value}
+        isLoading={!ready}
+        onChange={propsOnChange}
+        onChangeInputValue={setValue}
+        options={data}
+        placeholder="Type your address..."
+        value={propsValue}
       />
     )
   },

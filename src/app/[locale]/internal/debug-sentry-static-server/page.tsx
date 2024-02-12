@@ -1,10 +1,11 @@
 import { prismaClient } from '@/utils/server/prismaClient'
 import { logger } from '@/utils/shared/logger'
+import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { sleep } from '@/utils/shared/sleep'
 
 export const dynamic = 'error'
-export const revalidate = 1
+export const revalidate = SECONDS_DURATION.SECOND
 
 const mockError = () =>
   sleep(1000).then(() => {

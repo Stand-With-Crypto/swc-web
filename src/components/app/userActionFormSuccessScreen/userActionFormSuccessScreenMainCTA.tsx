@@ -1,6 +1,10 @@
 'use client'
+import { useState } from 'react'
+import { Check } from 'lucide-react'
+
 import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
 import { GetUserPerformedUserActionTypesResponse } from '@/app/api/identified-user/performed-user-action-types/route'
+import { ThirdwebLoginDialog } from '@/components/app/authentication/thirdwebLoginContent'
 import { OPEN_UPDATE_USER_PROFILE_FORM_QUERY_PARAM_KEY } from '@/components/app/updateUserProfileForm/queryParamConfig'
 import { getNextAction } from '@/components/app/userActionFormSuccessScreen/getNextAction'
 import { HasOptedInToMembershipForm } from '@/components/app/userActionFormSuccessScreen/hasOptedInToMembershipForm'
@@ -13,17 +17,15 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { hasCompleteUserProfile } from '@/utils/web/hasCompleteUserProfile'
 import { NFTClientMetadata } from '@/utils/web/nft'
-import { Check } from 'lucide-react'
-import { useState } from 'react'
 
 const NFTImage = ({ nft }: { nft: NFTClientMetadata }) => (
   <NextImage
-    className="inline-block rounded-lg"
     alt={nft.image.alt}
-    width={nft.image.width}
+    className="inline-block rounded-lg"
     height={nft.image.height}
-    src={nft.image.url}
     sizes="300px"
+    src={nft.image.url}
+    width={nft.image.width}
   />
 )
 
@@ -82,7 +84,9 @@ export function UserActionFormSuccessScreenMainCTA({
             You've earned an NFT for completing this action. Join Stand With Crypto to claim your
             NFT, see your activities, and get personalized content.
           </PageSubTitle>
-          <Button variant="secondary">Join Stand with Crypto TODO</Button>
+          <ThirdwebLoginDialog>
+            <Button variant="secondary">Join Stand with Crypto</Button>
+          </ThirdwebLoginDialog>
         </Container>
       )
     }
@@ -93,7 +97,9 @@ export function UserActionFormSuccessScreenMainCTA({
           Join Stand With Crypto to claim exclusive NFTs, see your activity, and get personalized
           content.
         </PageSubTitle>
-        <Button variant="secondary">Join Stand with Crypto TODO</Button>
+        <ThirdwebLoginDialog>
+          <Button variant="secondary">Join Stand with Crypto</Button>
+        </ThirdwebLoginDialog>
       </Container>
     )
   }
@@ -129,7 +135,7 @@ export function UserActionFormSuccessScreenMainCTA({
               Become a member of our nonprofit. It's free to join and you'll receive exclusive
               benefits that normal Stand With Crypto members won't get.
             </PageSubTitle>
-            <Button variant="secondary" onClick={() => setHasOptedInToMembershipState('visible')}>
+            <Button onClick={() => setHasOptedInToMembershipState('visible')} variant="secondary">
               Learn More
             </Button>
           </Container>
@@ -137,8 +143,8 @@ export function UserActionFormSuccessScreenMainCTA({
       case 'visible':
         return (
           <HasOptedInToMembershipForm
-            onSuccess={() => setHasOptedInToMembershipState('submitted')}
             onCancel={() => setHasOptedInToMembershipState('hidden')}
+            onSuccess={() => setHasOptedInToMembershipState('submitted')}
           />
         )
       case 'submitted':
@@ -179,7 +185,7 @@ export function UserActionFormSuccessScreenMainCTA({
         You’ve done your part to save crypto, but the fight isn’t over yet. We'll be in touch when
         there's more actions to complete.
       </PageSubTitle>
-      <Button variant="secondary" onClick={() => onClose()}>
+      <Button onClick={() => onClose()} variant="secondary">
         Done
       </Button>
     </Container>

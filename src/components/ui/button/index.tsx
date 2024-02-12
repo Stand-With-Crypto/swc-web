@@ -2,9 +2,9 @@
 import * as React from 'react'
 import { Slot } from '@radix-ui/react-slot'
 import { cva, type VariantProps } from 'class-variance-authority'
+import { ClassValue } from 'clsx'
 
 import { cn } from '@/utils/web/cn'
-import { ClassValue } from 'clsx'
 
 export const buttonVariantsConfig = {
   variant: {

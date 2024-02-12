@@ -1,6 +1,5 @@
 import { ImageAvatar, ImageAvatarProps } from '@/components/ui/imageAvatar'
 import { InitialsAvatar } from '@/components/ui/initialsAvatar'
-
 import { DTSI_Person } from '@/data/dtsi/generated'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 
@@ -20,8 +19,8 @@ export const DTSIAvatar: React.FC<
   if (person.profilePictureUrl) {
     return (
       <ImageAvatar
-        className="rounded-md"
         alt={`Profile picture of ${dtsiPersonFullName(person)}`}
+        className="rounded-md"
         src={person.profilePictureUrl}
         {...props}
       />

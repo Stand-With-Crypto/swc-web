@@ -1,5 +1,6 @@
-import { fakerFields } from '@/mocks/fakerUtils'
 import { Prisma, UserActionEmailRecipient } from '@prisma/client'
+
+import { fakerFields } from '@/mocks/fakerUtils'
 
 export function mockCreateUserActionEmailRecipientInput() {
   return {

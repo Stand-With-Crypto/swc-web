@@ -1,7 +1,7 @@
 import '@/globals.css'
 
-import { NotFoundPagesContent } from '@/components/app/notFoundPagesContent'
 import { DefaultLocaleLayout } from '@/components/app/defaultLocaleLayout'
+import { NotFoundPagesContent } from '@/components/app/notFoundPagesContent'
 
 export const dynamic = 'error'
 

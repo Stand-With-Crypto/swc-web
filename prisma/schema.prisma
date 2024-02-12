@@ -324,7 +324,6 @@ enum DonationOrganization {
 model UserActionDonation {
   id                 String               @id @default(uuid())
   userAction         UserAction           @relation(fields: [id], references: [id])
-  // TODO determine if these need to be nullable in the future
   amount             Decimal              @map("amount")
   amountCurrencyCode String               @map("amount_currency_code")
   amountUsd          Decimal              @map("amount_usd")

@@ -40,8 +40,8 @@ export async function Footer({ locale }: { locale: SupportedLocale }) {
               })}
             </ExternalLink>
             <CookieConsentFooterButton
-              variant={'link'}
               className={cn(footerLinkStyles, 'h-auto p-0 text-base')}
+              variant={'link'}
             />
           </div>
           <div className="space-y-3 sm:space-y-9">
@@ -93,7 +93,7 @@ export async function Footer({ locale }: { locale: SupportedLocale }) {
         </div>
         <div className="mb-2 text-xs text-fontcolor-muted">
           Information about people's stances on crypto sourced from{' '}
-          <a target="_blank" href="https://www.dotheysupportit.com/" className={'hover:underline'}>
+          <a className={'hover:underline'} href="https://www.dotheysupportit.com/" target="_blank">
             DoTheySupportIt.com
           </a>
         </div>

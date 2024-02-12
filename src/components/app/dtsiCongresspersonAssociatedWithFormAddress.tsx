@@ -1,4 +1,7 @@
 'use client'
+import { useEffect } from 'react'
+import { z } from 'zod'
+
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -9,8 +12,6 @@ import {
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { convertDTSIStanceScoreToCryptoSupportLanguageSentence } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { zodGooglePlacesAutocompletePrediction } from '@/validation/fields/zodGooglePlacesAutocompletePrediction'
-import { useEffect } from 'react'
-import { z } from 'zod'
 
 export function DTSICongresspersonAssociatedWithFormAddress({
   address,
@@ -51,7 +52,7 @@ export function DTSICongresspersonAssociatedWithFormAddress({
       <div className="relative">
         <DTSIAvatar person={person} size={60} />
         <div className="absolute bottom-[-8px] right-[-8px]">
-          <DTSIFormattedLetterGrade size={25} person={person} />
+          <DTSIFormattedLetterGrade person={person} size={25} />
         </div>
       </div>
       <div>

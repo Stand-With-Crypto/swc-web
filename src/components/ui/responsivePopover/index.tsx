@@ -45,6 +45,7 @@ export function useResponsivePopover() {
   const isMobile = useIsMobile()
   return React.useMemo(
     () => ({
+      isMobile,
       Popover: isMobile ? ResponsivePopoverDrawerRoot : Popover,
       PopoverTrigger: isMobile ? DrawerTrigger : PopoverTrigger,
       PopoverContent: isMobile ? DrawerContent : PopoverContent,

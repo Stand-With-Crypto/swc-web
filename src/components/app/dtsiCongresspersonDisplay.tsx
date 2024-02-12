@@ -2,8 +2,8 @@
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import {
-  UseGetDTSIPeopleFromAddressResponse,
   formatGetDTSIPeopleFromAddressNotFoundReason,
+  UseGetDTSIPeopleFromAddressResponse,
 } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { convertDTSIStanceScoreToCryptoSupportLanguageSentence } from '@/utils/dtsi/dtsiStanceScoreUtils'
@@ -22,7 +22,7 @@ export function DtsiCongresspersonDisplay({
       <div className="relative">
         <DTSIAvatar person={congressperson} size={60} />
         <div className="absolute bottom-[-8px] right-[-8px]">
-          <DTSIFormattedLetterGrade size={25} person={congressperson} />
+          <DTSIFormattedLetterGrade person={congressperson} size={25} />
         </div>
       </div>
       <div>

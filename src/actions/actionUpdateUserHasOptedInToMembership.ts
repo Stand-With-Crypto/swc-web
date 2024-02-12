@@ -1,10 +1,11 @@
 'use server'
+import 'server-only'
+
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
-import 'server-only'
 
 export async function actionUpdateUserHasOptedInToMembership() {
   const authUser = await appRouterGetAuthUser()

@@ -1,29 +1,28 @@
 'use client'
-import { requiredEnv } from '@/utils/shared/requiredEnv'
-import { NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN } from '@/utils/shared/sharedEnv'
+import { Suspense, useEffect } from 'react'
 import * as Sentry from '@sentry/nextjs'
 import { Base } from '@thirdweb-dev/chains'
 import {
-  ThirdwebProvider,
   coinbaseWallet,
   embeddedWallet,
   en,
   metamaskWallet,
+  ThirdwebProvider,
   walletConnect,
 } from '@thirdweb-dev/react'
+import { usePathname, useSearchParams } from 'next/navigation'
 
 import { useAuthUser } from '@/hooks/useAuthUser'
+import { useDetectWipedDatabaseAndLogOutUser } from '@/hooks/useDetectWipedDatabaseAndLogOutUser'
 import { LocaleContext } from '@/hooks/useLocale'
 import { SupportedLocale } from '@/intl/locales'
+import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
+import { NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN } from '@/utils/shared/sharedEnv'
 import { initClientAnalytics, trackClientAnalytic } from '@/utils/web/clientAnalytics'
 import { bootstrapLocalUser } from '@/utils/web/clientLocalUser'
 import { getUserSessionIdOnClient } from '@/utils/web/clientUserSessionId'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
-import { usePathname, useSearchParams } from 'next/navigation'
-import { Suspense, useEffect } from 'react'
-import { useDetectWipedDatabaseAndLogOutUser } from '@/hooks/useDetectWipedDatabaseAndLogOutUser'
-import { ACCOUNT_AUTH_CONFIG } from '@/components/app/accountAuth/constants'
 
 const NEXT_PUBLIC_THIRDWEB_CLIENT_ID = requiredEnv(
   process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID,
@@ -80,9 +79,13 @@ export function TopLevelClientLogic({
   return (
     <LocaleContext.Provider value={locale}>
       <ThirdwebProvider
-        locale={en()}
-        theme={ACCOUNT_AUTH_CONFIG.theme}
         activeChain={Base}
+        authConfig={{
+          domain: NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN,
+          authUrl: '/api/auth',
+        }}
+        clientId={NEXT_PUBLIC_THIRDWEB_CLIENT_ID}
+        locale={en()}
         supportedWallets={[
           metamaskWallet(),
           coinbaseWallet({ recommended: true }),
@@ -93,11 +96,6 @@ export function TopLevelClientLogic({
             },
           }),
         ]}
-        clientId={NEXT_PUBLIC_THIRDWEB_CLIENT_ID}
-        authConfig={{
-          domain: NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN,
-          authUrl: '/api/auth',
-        }}
       >
         {/* https://nextjs.org/docs/messages/missing-suspense-with-csr-bailout */}
         <Suspense>

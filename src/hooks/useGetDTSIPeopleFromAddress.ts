@@ -1,9 +1,10 @@
+import useSWR from 'swr'
+
 import { DTSIPeopleByCongressionalDistrictQueryResult } from '@/data/dtsi/queries/queryDTSIPeopleByCongressionalDistrict'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { getCongressionalDistrictFromAddress } from '@/utils/shared/getCongressionalDistrictFromAddress'
 import { apiUrls } from '@/utils/shared/urls'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
-import useSWR from 'swr'
 
 async function getDTSIPeopleFromCongressionalDistrict(
   result: Awaited<ReturnType<typeof getCongressionalDistrictFromAddress>>,
@@ -48,6 +49,8 @@ export function formatGetDTSIPeopleFromAddressNotFoundReason(
   switch (data?.notFoundReason) {
     case 'NOT_USA_ADDRESS':
       return 'Please enter a US-based address.'
+    case 'NO_REPS_IN_STATE':
+      return 'No representatives in your state.'
     case 'NOT_SPECIFIC_ENOUGH':
       return 'Please enter a specific address that includes street-level information.'
     case 'MISSING_FROM_DTSI':

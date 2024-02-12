@@ -1,3 +1,7 @@
+import React from 'react'
+import { format, parseISO } from 'date-fns'
+import { Quote } from 'lucide-react'
+
 import { RichTextFormatter } from '@/components/app/dtsiRichText/dtsiRichTextFormatter'
 import {
   DTSIStanceDetailsQuoteProp,
@@ -6,9 +10,6 @@ import {
 } from '@/components/app/dtsiStanceDetails/types'
 import { ExternalLink } from '@/components/ui/link'
 import { cn } from '@/utils/web/cn'
-import { format, parseISO } from 'date-fns'
-import { Quote } from 'lucide-react'
-import React from 'react'
 
 type IDTSIStanceDetailsQuoteProps = Omit<IStanceDetailsProps, 'stance'> & {
   stance: DTSIStanceDetailsStanceProp<DTSIStanceDetailsQuoteProp>
@@ -41,8 +42,8 @@ export const DTSIStanceDetailsQuote: React.FC<IDTSIStanceDetailsQuoteProps> = pr
         Quoted from{' '}
         <ExternalLink
           className="font-bold text-blue-500"
-          style={{ overflowWrap: 'anywhere' }}
           href={stance.quote.sourceUrl}
+          style={{ overflowWrap: 'anywhere' }}
         >
           {new URL(stance.quote.sourceUrl).hostname}
         </ExternalLink>{' '}

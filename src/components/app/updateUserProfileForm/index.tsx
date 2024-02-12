@@ -1,11 +1,12 @@
 'use client'
+import { useState } from 'react'
+
 import { ClientAddress } from '@/clientModels/clientAddress'
 import { SensitiveDataClientUserWithENSData } from '@/clientModels/clientUser/sensitiveDataClientUser'
 import { ANALYTICS_NAME_UPDATE_USER_PROFILE_FORM } from '@/components/app/updateUserProfileForm/constants'
 import { UpdateUserProfileForm } from '@/components/app/updateUserProfileForm/step1'
 import { UpdateUserInformationVisibilityForm } from '@/components/app/updateUserProfileForm/step2'
 import { useSections } from '@/hooks/useSections'
-import { useState } from 'react'
 
 enum Sections {
   Profile = 'Profile',
@@ -32,21 +33,20 @@ export function UpdateUserProfileFormContainer({
   if (sections.currentSection === Sections.Profile) {
     return (
       <UpdateUserProfileForm
-        user={user}
-        onCancel={() => sections.goToSection(Sections.InformationVisibility)}
         onSuccess={newFields => {
           setStatefulUser({ ...user, ...newFields })
           sections.goToSection(Sections.InformationVisibility)
         }}
+        user={user}
       />
     )
   }
   if (sections.currentSection === Sections.InformationVisibility) {
     return (
       <UpdateUserInformationVisibilityForm
-        user={statefulUser}
         onCancel={onCancel}
         onSuccess={onSuccess}
+        user={statefulUser}
       />
     )
   }

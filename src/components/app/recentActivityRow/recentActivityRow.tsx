@@ -1,9 +1,11 @@
 'use client'
+import React from 'react'
+import { UserActionOptInType, UserActionType } from '@prisma/client'
+
 import { ClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
 import { ClientUserAction } from '@/clientModels/clientUserAction/clientUserAction'
-import { AccountAuthDialogWrapper } from '@/components/app/accountAuth'
+import { ThirdwebLoginDialog } from '@/components/app/authentication/thirdwebLoginContent'
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
-import { UserActionFormDonateDialog } from '@/components/app/userActionFormDonate/dialog'
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
@@ -11,6 +13,7 @@ import { UserAvatar } from '@/components/app/userAvatar'
 import { Button } from '@/components/ui/button'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
 import { FormattedRelativeDatetimeWithClientHydration } from '@/components/ui/formattedRelativeDatetimeWithClientHydration'
+import { InternalLink } from '@/components/ui/link'
 import { UserActionTweetLink } from '@/components/ui/userActionTweetLink'
 import { DTSIPersonForUserActions } from '@/data/dtsi/queries/queryDTSIPeopleBySlugForUserActions'
 import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
@@ -21,10 +24,9 @@ import {
   dtsiPersonPoliticalAffiliationCategoryAbbreviation,
 } from '@/utils/dtsi/dtsiPersonUtils'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
+import { getIntlUrls } from '@/utils/shared/urls'
 import { formatDonationOrganization } from '@/utils/web/donationUtils'
 import { getUserDisplayName } from '@/utils/web/userUtils'
-import { UserActionOptInType, UserActionType } from '@prisma/client'
-import React from 'react'
 
 export interface RecentActivityRowProps {
   action: ClientUserAction & { user: ClientUserWithENSData }
@@ -66,9 +68,9 @@ function RecentActivityRowBase({
             </span>
             <span className="inline md:hidden">
               <FormattedRelativeDatetimeWithClientHydration
-                timeFormatStyle="narrow"
                 date={new Date(action.datetimeCreated)}
                 locale={locale}
+                timeFormatStyle="narrow"
               />
             </span>
           </>
@@ -86,7 +88,6 @@ const SubText = ({ children }: { children: React.ReactNode }) => (
 )
 
 const formatDTSIPerson = (person: DTSIPersonForUserActions) => {
-  // TODO add their current role
   const politicalAffiliation = person.politicalAffiliationCategory
     ? `(${dtsiPersonPoliticalAffiliationCategoryAbbreviation(person.politicalAffiliationCategory)})`
     : ''
@@ -116,9 +117,9 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
           onFocusContent: hasSignedUp
             ? undefined
             : () => (
-                <AccountAuthDialogWrapper>
+                <ThirdwebLoginDialog>
                   <Button>Join</Button>
-                </AccountAuthDialogWrapper>
+                </ThirdwebLoginDialog>
               ),
           children: (
             <>
@@ -145,11 +146,13 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
         }
       case UserActionType.DONATION:
         return {
-          onFocusContent: () => (
-            <UserActionFormDonateDialog>
-              <Button>Donate</Button>
-            </UserActionFormDonateDialog>
-          ),
+          onFocusContent: () => {
+            return (
+              <InternalLink className="block" href={getIntlUrls(locale).donate()}>
+                <Button>Donate</Button>
+              </InternalLink>
+            )
+          },
           children: (
             <>
               <MainText>{userDisplayName} donated</MainText>

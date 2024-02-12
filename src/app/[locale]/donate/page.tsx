@@ -1,8 +1,10 @@
 import { Metadata } from 'next'
-import { getSumDonations } from '@/data/aggregations/getSumDonations'
+
 import { PageDonate } from '@/components/app/pageDonate'
-import { PageProps } from '@/types'
+import { getSumDonations } from '@/data/aggregations/getSumDonations'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
+
+import { PageProps } from '@/types'
 
 export const dynamic = 'error'
 
@@ -19,10 +21,10 @@ export default async function DonatePage({ params: { locale } }: PageProps) {
 
   return (
     <PageDonate
-      title="Protect the future of crypto"
       description={description}
-      sumDonations={sumDonations}
       locale={locale}
+      sumDonations={sumDonations}
+      title="Protect the future of crypto"
     />
   )
 }

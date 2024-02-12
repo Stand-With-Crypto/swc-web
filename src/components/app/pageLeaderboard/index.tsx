@@ -11,6 +11,7 @@ import { tabListStyles, tabTriggerStyles } from '@/components/ui/tabs/styles'
 import { SupportedLocale } from '@/intl/locales'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
+
 import { PAGE_LEADERBOARD_TOTAL_PAGES } from './constants'
 
 export const PAGE_LEADERBOARD_TITLE = 'Our community'
@@ -33,7 +34,13 @@ export function PageLeaderboard({
   return (
     <div className="container space-y-7">
       <PageTitle>{PAGE_LEADERBOARD_TITLE}</PageTitle>
-      <PageSubTitle>{PAGE_LEADERBOARD_DESCRIPTION}</PageSubTitle>
+      <PageSubTitle>
+        {PAGE_LEADERBOARD_DESCRIPTION} Donations to{' '}
+        <ExternalLink className="underline" href={'https://www.fec.gov/data/committee/C00835959/'}>
+          Fairshake
+        </ExternalLink>
+        , a pro-crypto Super PAC, are not included on the leaderboard.
+      </PageSubTitle>
       <div className="text-center">
         <div className={cn(tabListStyles, 'mx-auto')}>
           <InternalLink
@@ -64,30 +71,20 @@ export function PageLeaderboard({
             <DynamicRecentActivity actions={actions} />
           ) : (
             <>
-              <div className="mt-2 h-7" />
               {actions.map(action => (
-                <RecentActivityRow locale={locale} action={action} key={action.id} />
+                <RecentActivityRow action={action} key={action.id} locale={locale} />
               ))}
             </>
           )
         ) : null}
         {tab === RecentActivityAndLeaderboardTabs.LEADERBOARD && (
           <>
-            <p className="mt-2 h-7 text-center text-xs text-gray-500">
-              Donations to{' '}
-              <ExternalLink
-                href={'https://www.axios.com/2023/12/18/crypto-super-pac-fairshake-2024-elections'}
-              >
-                Fairshake
-              </ExternalLink>
-              , a pro-crypto Super PAC, are not included on the leaderboard.
-            </p>
             {sumDonationsByUser.map((donor, index) => (
               <SumDonationsByUserRow
-                key={index}
                 index={offset + index}
-                sumDonations={donor}
+                key={index}
                 locale={locale}
+                sumDonations={donor}
               />
             ))}
           </>
@@ -95,12 +92,12 @@ export function PageLeaderboard({
       </div>
       <div className="flex justify-center">
         <PaginationLinks
+          currentPageNumber={pageNum}
           getPageUrl={pageNumber =>
             pageNumber < 1 || pageNumber > PAGE_LEADERBOARD_TOTAL_PAGES
               ? ''
               : urls.leaderboard({ pageNum: pageNumber, tab })
           }
-          currentPageNumber={pageNum}
           totalPages={PAGE_LEADERBOARD_TOTAL_PAGES}
         />
       </div>

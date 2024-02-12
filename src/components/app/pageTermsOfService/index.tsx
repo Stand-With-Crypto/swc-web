@@ -1,7 +1,7 @@
 export function PageTermsOfService() {
   return (
     <article className="prose max-w-full">
-      <h1>[STAND WITH CRYPTO ALLIANCE] TERMS OF SERVICE</h1>
+      <h1>STAND WITH CRYPTO ALLIANCE TERMS OF SERVICE</h1>
       <p>Effective as of August 14, 2023</p>
 
       <p>
@@ -196,7 +196,7 @@ export function PageTermsOfService() {
           information about yourself with others. All information we collect through or in
           connection with this Application is governed by and subject to our Privacy Policy
           available at{' '}
-          <a target="_blank" href="https://www.standwithcrypto.org/privacy">
+          <a href="https://www.standwithcrypto.org/privacy" target="_blank">
             www.standwithcrypto.org/privacy
           </a>{' '}
           (<b>“Privacy Policy”</b>). By downloading, installing, using, and providing information to

@@ -1,7 +1,8 @@
-import { getLogger } from '@/utils/shared/logger'
-import { zodAddress } from '@/validation/fields/zodAddress'
 import { getDetails } from 'use-places-autocomplete'
 import { z } from 'zod'
+
+import { getLogger } from '@/utils/shared/logger'
+import { zodAddress } from '@/validation/fields/zodAddress'
 
 const logger = getLogger('formatGooglePlacesResultToAddress')
 

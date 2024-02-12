@@ -1,17 +1,18 @@
 'use client'
 
-import { UserActionType } from '@prisma/client'
 import { useMemo } from 'react'
+import { UserActionType } from '@prisma/client'
 
-import { UserActionRowCTA } from '@/components/app/userActionRowCTA'
+import { ThirdwebLoginDialog } from '@/components/app/authentication/thirdwebLoginContent'
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
-import { UserActionFormDonateDialog } from '@/components/app/userActionFormDonate/dialog'
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
-import { UserActionRowCTAProps } from '@/components/app/userActionRowCTA'
+import { UserActionRowCTA, UserActionRowCTAProps } from '@/components/app/userActionRowCTA'
+import { InternalLink } from '@/components/ui/link'
 import { UserActionTweetLink } from '@/components/ui/userActionTweetLink'
+import { useLocale } from '@/hooks/useLocale'
+import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
-import { AccountAuthDialogWrapper } from '@/components/app/accountAuth'
 
 export const ORDERED_USER_ACTION_ROW_CTA_INFO: ReadonlyArray<Omit<UserActionRowCTAProps, 'state'>> =
   [
@@ -21,7 +22,7 @@ export const ORDERED_USER_ACTION_ROW_CTA_INFO: ReadonlyArray<Omit<UserActionRowC
       text: 'Join Stand With Crypto',
       subtext: 'Join over 100,000 advocates fighting to keep crypto in America.',
       canBeTriggeredMultipleTimes: false,
-      WrapperComponent: AccountAuthDialogWrapper,
+      WrapperComponent: ({ children }) => <ThirdwebLoginDialog>{children}</ThirdwebLoginDialog>,
     },
     {
       actionType: UserActionType.CALL,
@@ -45,7 +46,14 @@ export const ORDERED_USER_ACTION_ROW_CTA_INFO: ReadonlyArray<Omit<UserActionRowC
       text: 'Donate to Stand With Crypto',
       subtext: 'Support our aim to mobilize 52 million crypto advocates in the U.S.',
       canBeTriggeredMultipleTimes: true,
-      WrapperComponent: UserActionFormDonateDialog,
+      WrapperComponent: ({ children }) => {
+        const locale = useLocale()
+        return (
+          <InternalLink className="block" href={getIntlUrls(locale).donate()}>
+            {children}
+          </InternalLink>
+        )
+      },
     },
     {
       actionType: UserActionType.TWEET,

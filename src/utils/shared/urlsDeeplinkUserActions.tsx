@@ -1,6 +1,7 @@
+import { UserActionType } from '@prisma/client'
+
 import { SupportedLocale } from '@/intl/locales'
 import { getIntlPrefix } from '@/utils/shared/urls'
-import { UserActionType } from '@prisma/client'
 
 export const USER_ACTION_DEEPLINK_MAP: {
   [key in UserActionType]: {
@@ -24,7 +25,7 @@ export const USER_ACTION_DEEPLINK_MAP: {
   },
   [UserActionType.DONATION]: {
     getDeeplinkUrl: ({ locale }) => {
-      return `${getIntlPrefix(locale)}/action/donate`
+      return `${getIntlPrefix(locale)}/donate`
     },
   },
   [UserActionType.TWEET]: {

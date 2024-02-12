@@ -1,9 +1,10 @@
 'use client'
+import { useRouter } from 'next/navigation'
+
 import { UserActionRowCTAButton } from '@/components/app/userActionRowCTA'
 import { ORDERED_USER_ACTION_ROW_CTA_INFO } from '@/components/app/userActionRowCTA/userActionRowCTAsList'
 import { useLocale } from '@/hooks/useLocale'
 import { USER_ACTION_DEEPLINK_MAP } from '@/utils/shared/urlsDeeplinkUserActions'
-import { useRouter } from 'next/navigation'
 
 export const dynamic = 'error'
 

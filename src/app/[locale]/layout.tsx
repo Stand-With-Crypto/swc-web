@@ -1,20 +1,23 @@
+import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/next'
+import _ from 'lodash'
 import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import { notFound } from 'next/navigation'
 import NextTopLoader from 'nextjs-toploader'
-import { SpeedInsights } from '@vercel/speed-insights/next'
 
-import { Footer } from '@/components/app/footer'
-import { FullHeight } from '@/components/ui/fullHeight'
-import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { getOpenGraphImageUrl } from '@/utils/server/generateOpenGraphImageUrl'
-import { Navbar } from '@/components/app/navbar'
-import { ORDERED_SUPPORTED_LOCALES } from '@/intl/locales'
-import { PageProps } from '@/types'
-import { Toaster } from '@/components/ui/sonner'
 import { TopLevelClientLogic } from '@/app/[locale]/topLevelClientLogic'
 import { CookieConsent } from '@/components/app/cookieConsent'
-import { Analytics } from '@vercel/analytics/react'
+import { Footer } from '@/components/app/footer'
+import { Navbar } from '@/components/app/navbar'
+import { FullHeight } from '@/components/ui/fullHeight'
+import { Toaster } from '@/components/ui/sonner'
+import { ORDERED_SUPPORTED_LOCALES } from '@/intl/locales'
+import { getOpenGraphImageUrl } from '@/utils/server/generateOpenGraphImageUrl'
+import { generateMetadataDetails } from '@/utils/server/metadataUtils'
+import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
+
+import { PageProps } from '@/types'
 
 // we want dynamicParams to be false for this top level layout, but we also want to ensure that subpages can have dynamic params
 // Next.js doesn't allow this so we allow dynamic params in the config here, and then trigger a notFound in the layout if one is passed
@@ -25,7 +28,11 @@ export async function generateStaticParams() {
 
 const inter = Inter({ subsets: ['latin'] })
 
-const title = `Stand With Crypto`
+const title = `${
+  NEXT_PUBLIC_ENVIRONMENT === 'production'
+    ? ''
+    : `${_.capitalize(NEXT_PUBLIC_ENVIRONMENT.toLowerCase())} Env - `
+}Stand With Crypto`
 const description = `Stand with Crypto Alliance is a non-profit organization dedicated to uniting global crypto advocates.`
 const ogImage = getOpenGraphImageUrl({ title: description })
 
@@ -71,7 +78,7 @@ export default function Layout({ children, params }: PageProps & { children: Rea
           <FullHeight.Container>
             <FullHeight.Content>
               <Navbar locale={locale} />
-              {children}
+              <div className="lg:mt-10">{children}</div>
             </FullHeight.Content>
             <Footer locale={locale} />
           </FullHeight.Container>

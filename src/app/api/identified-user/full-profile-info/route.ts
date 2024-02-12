@@ -1,8 +1,10 @@
+import 'server-only'
+
+import { NextResponse } from 'next/server'
+
 import { getClientAddress } from '@/clientModels/clientAddress'
 import { getSensitiveDataClientUser } from '@/clientModels/clientUser/sensitiveDataClientUser'
 import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
-import { NextResponse } from 'next/server'
-import 'server-only'
 
 export const dynamic = 'force-dynamic'
 

@@ -1,5 +1,6 @@
-import { VerifiedSWCPartner } from '@/utils/server/verifiedSWCPartner/constants'
 import { User } from '@prisma/client'
+
+import { VerifiedSWCPartner } from '@/utils/server/verifiedSWCPartner/constants'
 
 export function getUserAttributionFieldsForVerifiedSWCPartner({
   partner,

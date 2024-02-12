@@ -1,5 +1,7 @@
 'use client'
 
+import { Suspense, useEffect, useState } from 'react'
+
 import { ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON } from '@/components/app/userActionFormEmailCongressperson/constants'
 import { LazyUserActionFormEmailCongressperson } from '@/components/app/userActionFormEmailCongressperson/lazyLoad'
 import { UserActionFormEmailCongresspersonSkeleton } from '@/components/app/userActionFormEmailCongressperson/skeleton'
@@ -8,7 +10,6 @@ import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useDialog } from '@/hooks/useDialog'
 import { useLocale } from '@/hooks/useLocale'
-import { Suspense, useEffect, useState } from 'react'
 
 export function UserActionFormEmailCongresspersonDialog({
   children,
@@ -39,9 +40,9 @@ export function UserActionFormEmailCongresspersonDialog({
             <UserActionFormEmailCongresspersonSkeleton locale={locale} />
           ) : state === 'form' ? (
             <LazyUserActionFormEmailCongressperson
-              user={user}
               onCancel={() => dialogProps.onOpenChange(false)}
               onSuccess={() => setState('success')}
+              user={user}
             />
           ) : (
             <div className="px-6">

@@ -1,3 +1,5 @@
+import _ from 'lodash'
+
 import { UserAvatar } from '@/components/app/userAvatar'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
 import { NextImage } from '@/components/ui/image'
@@ -6,7 +8,6 @@ import { SupportedLocale } from '@/intl/locales'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { cn } from '@/utils/web/cn'
 import { getUserDisplayName } from '@/utils/web/userUtils'
-import _ from 'lodash'
 
 interface SumDonationsRowProps {
   sumDonations: SumDonationsByUser[0]
@@ -27,12 +28,12 @@ export function SumDonationsByUserRow({ locale, sumDonations, index }: SumDonati
           </div>
           {!_.isNil(INDEX_SHIELD_IMAGE_MAP[index]) && (
             <NextImage
+              alt={`position ${index + 1} medal`}
               className="absolute"
-              style={{ zIndex: -1, top: '1px' }}
-              width={24}
               height={24}
               src={INDEX_SHIELD_IMAGE_MAP[index]}
-              alt={`position ${index + 1} medal`}
+              style={{ zIndex: -1, top: '1px' }}
+              width={24}
             />
           )}
         </div>
@@ -44,9 +45,9 @@ export function SumDonationsByUserRow({ locale, sumDonations, index }: SumDonati
       <div className="shrink-0 text-sm lg:text-base">
         <FormattedCurrency
           amount={sumDonations.totalAmountUsd}
+          currencyCode={SupportedFiatCurrencyCodes.USD}
           locale={locale}
           maximumFractionDigits={0}
-          currencyCode={SupportedFiatCurrencyCodes.USD}
         />
       </div>
     </div>

@@ -1,13 +1,13 @@
-import { ThirdwebAuthConfig } from '@thirdweb-dev/auth/next'
 import { PrivateKeyWallet } from '@thirdweb-dev/auth/evm'
+import { ThirdwebAuthConfig } from '@thirdweb-dev/auth/next'
 
-import { requiredEnv } from '@/utils/shared/requiredEnv'
-import { NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN } from '@/utils/shared/sharedEnv'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getServerAnalytics } from '@/utils/server/serverAnalytics'
 import { parseLocalUserFromCookiesForPageRouter } from '@/utils/server/serverLocalUser'
 import { onLogin } from '@/utils/server/thirdweb/onLogin'
 import { AuthSessionMetadata } from '@/utils/server/thirdweb/types'
+import { requiredEnv } from '@/utils/shared/requiredEnv'
+import { NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN } from '@/utils/shared/sharedEnv'
 
 // LATER-TASK migrate this logic from page router to app router once thirdweb supports it
 
@@ -22,7 +22,7 @@ export const thirdwebAuthConfig: ThirdwebAuthConfig = {
   wallet: new PrivateKeyWallet(THIRDWEB_AUTH_PRIVATE_KEY),
   authOptions: {
     // TODO check what should be the message with product
-    statement: 'Hello World',
+    // statement: 'Hello World',
     tokenDurationInSeconds: 60 * 60 * 24 * 7, // 1 week
     validateNonce: async (nonce: string) => {
       const nonceExists = await prismaClient.authenticationNonce.findUnique({

@@ -1,4 +1,6 @@
 'use client'
+import { useMemo } from 'react'
+
 import { AnimatedNumericOdometer } from '@/components/ui/animatedNumericOdometer'
 import { roundDownNumberToAnimateIn } from '@/components/ui/animatedNumericOdometer/roundDownNumberToAnimateIn'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
@@ -7,7 +9,6 @@ import { useApiHomepageTopLevelMetrics } from '@/hooks/useApiHomepageTopLevelMet
 import { SupportedLocale } from '@/intl/locales'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { cn } from '@/utils/web/cn'
-import { useMemo } from 'react'
 
 type Props = Pick<
   Awaited<ReturnType<typeof getHomepageData>>,
@@ -69,7 +70,7 @@ export function TopLevelMetrics({ locale, ...data }: Props & { locale: Supported
           value: (
             <TooltipProvider>
               <Tooltip>
-                <TooltipTrigger style={{ height: 35 }} className="mx-auto block">
+                <TooltipTrigger className="mx-auto block" style={{ height: 35 }}>
                   <AnimatedNumericOdometer size={35} value={formatted.sumDonations.amountUsd} />
                 </TooltipTrigger>
                 <TooltipContent className="max-w-xs">

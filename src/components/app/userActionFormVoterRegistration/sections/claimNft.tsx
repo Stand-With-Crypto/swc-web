@@ -17,12 +17,12 @@ export const ClaimNft = memo(function ClaimNft({ goToSection }: ClaimNftProps) {
     <UserActionFormVoterRegistrationLayout onBack={() => handleOnBack}>
       <UserActionFormVoterRegistrationLayout.Container>
         <UserActionFormVoterRegistrationLayout.Heading
-          title="Get your “I Registered” NFT"
           subtitle='You can get get a free "I Registered" NFT'
+          title="Get your “I Registered” NFT"
         />
       </UserActionFormVoterRegistrationLayout.Container>
       <UserActionFormVoterRegistrationLayout.Footer>
-        <Button size="lg" onClick={() => goToSection(SectionNames.SUCCESS)}>
+        <Button onClick={() => goToSection(SectionNames.SUCCESS)} size="lg">
           Claim NFT
         </Button>
       </UserActionFormVoterRegistrationLayout.Footer>

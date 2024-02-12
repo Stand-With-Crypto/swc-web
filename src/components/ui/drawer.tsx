@@ -3,13 +3,13 @@
 import * as React from 'react'
 import { Drawer as DrawerPrimitive } from 'vaul'
 
+import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
+import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
 import { cn } from '@/utils/web/cn'
 import {
   PrimitiveComponentAnalytics,
   trackPrimitiveComponentAnalytics,
 } from '@/utils/web/primitiveComponentAnalytics'
-import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
-import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
 
 const Drawer = ({
   shouldScaleBackground = true,
@@ -35,8 +35,8 @@ const Drawer = ({
   )
   return (
     <DrawerPrimitive.Root
-      shouldScaleBackground={shouldScaleBackground}
       onOpenChange={wrappedOnChangeOpen}
+      shouldScaleBackground={shouldScaleBackground}
       {...props}
     />
   )
@@ -54,8 +54,8 @@ const DrawerOverlay = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Overlay>
 >(({ className, ...props }, ref) => (
   <DrawerPrimitive.Overlay
-    ref={ref}
     className={cn('fixed inset-0 z-50 bg-black/80', className)}
+    ref={ref}
     {...props}
   />
 ))
@@ -77,12 +77,12 @@ const DrawerContent = React.forwardRef<
     <DrawerPortal>
       <DrawerOverlay />
       <DrawerPrimitive.Content
-        ref={ref}
         className={cn(
           'fixed inset-x-0 z-50 flex h-auto flex-col border bg-background',
           direction === 'top' ? 'top-0 mb-24 rounded-b-[10px]' : 'bottom-0 mt-24 rounded-t-[10px]',
           className,
         )}
+        ref={ref}
         {...props}
       >
         {direction === 'bottom' && (
@@ -118,8 +118,8 @@ const DrawerTitle = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Title>
 >(({ className, ...props }, ref) => (
   <DrawerPrimitive.Title
-    ref={ref}
     className={cn('text-lg font-semibold leading-none tracking-tight', className)}
+    ref={ref}
     {...props}
   />
 ))
@@ -130,8 +130,8 @@ const DrawerDescription = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Description>
 >(({ className, ...props }, ref) => (
   <DrawerPrimitive.Description
-    ref={ref}
     className={cn('text-sm text-muted-foreground', className)}
+    ref={ref}
     {...props}
   />
 ))
@@ -139,13 +139,13 @@ DrawerDescription.displayName = DrawerPrimitive.Description.displayName
 
 export {
   Drawer,
-  DrawerPortal,
-  DrawerOverlay,
-  DrawerTrigger,
   DrawerClose,
   DrawerContent,
-  DrawerHeader,
-  DrawerFooter,
-  DrawerTitle,
   DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerPortal,
+  DrawerTitle,
+  DrawerTrigger,
 }

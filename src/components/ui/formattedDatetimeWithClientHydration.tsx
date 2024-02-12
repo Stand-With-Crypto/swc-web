@@ -1,6 +1,6 @@
 import { FormattedDatetime } from '@/components/ui/formattedDatetime'
 import { Skeleton } from '@/components/ui/skeleton'
-import { useHasHydrated } from '@/hooks/useHasMounted'
+import { useHasHydrated } from '@/hooks/useHasHydrated'
 
 export function FormattedDatetimeWithClientHydration(
   props: React.ComponentPropsWithoutRef<typeof FormattedDatetime>,

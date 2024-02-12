@@ -1,31 +1,31 @@
 'use client'
-import { AccountAuth } from '@/components/app/accountAuth'
-import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
-import { useIntlUrls } from '@/hooks/useIntlUrls'
-import { UserActionType } from '@prisma/client'
-import { useRouter } from 'next/navigation'
 import React from 'react'
+import { useRouter } from 'next/navigation'
+
+import { ThirdwebLoginContent } from '@/components/app/authentication/thirdwebLoginContent'
+import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
+import { LoadingOverlay } from '@/components/ui/loadingOverlay'
+import { useIntlUrls } from '@/hooks/useIntlUrls'
+import { useThirdwebData } from '@/hooks/useThirdwebData'
+import { cn } from '@/utils/web/cn'
 
 export default function UserActionOptInSWCDeepLink() {
   const urls = useIntlUrls()
   const router = useRouter()
-  const { data } = useApiResponseForUserPerformedUserActionTypes()
+  const { session } = useThirdwebData()
 
   React.useEffect(() => {
-    if (data?.performedUserActionTypes.includes(UserActionType.OPT_IN)) {
+    if (session.isLoggedIn) {
       router.replace(urls.profile())
     }
-  }, [data, router, urls])
+  }, [session.isLoggedIn, router, urls])
 
+  if (session.isLoading || session.isLoggedIn) {
+    return <LoadingOverlay />
+  }
   return (
-    <AccountAuth
-      isLoading={
-        typeof data === 'undefined' ||
-        data?.performedUserActionTypes.includes(UserActionType.OPT_IN)
-      }
-      onClose={() => {
-        router.replace(urls.home())
-      }}
-    />
+    <div className={cn('flex items-center justify-center', dialogContentPaddingStyles)}>
+      <ThirdwebLoginContent auth={{ onLogin: () => router.replace(urls.profile()) }} />
+    </div>
   )
 }

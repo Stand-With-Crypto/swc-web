@@ -1,5 +1,7 @@
 'use client'
 
+import { ColumnDef } from '@tanstack/react-table'
+
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
 import { SortableHeader } from '@/components/app/dtsiClientPersonDataTable/dataTable'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
@@ -15,7 +17,6 @@ import {
 import { convertDTSIStanceScoreToCryptoSupportLanguage } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { getUSStateNameFromStateCode } from '@/utils/shared/usStateUtils'
-import { ColumnDef } from '@tanstack/react-table'
 
 export type Person = Awaited<ReturnType<typeof queryDTSIAllPeople>>['people'][0]
 
@@ -31,8 +32,8 @@ export const getDTSIClientPersonDataTableColumns = ({
       <LinkBox className="flex items-center gap-3">
         <DTSIAvatar person={row.original} size={40} />
         <InternalLink
-          href={getIntlUrls(locale).politicianDetails(row.original.slug)}
           className={linkBoxLinkClassName}
+          href={getIntlUrls(locale).politicianDetails(row.original.slug)}
         >
           {dtsiPersonFullName(row.original)}
         </InternalLink>
@@ -48,13 +49,13 @@ export const getDTSIClientPersonDataTableColumns = ({
     header: ({ column }) => {
       return (
         <SortableHeader column={column}>
-          Stance <span className="hidden md:inline">on crypto</span>
+          <span>Stance</span> <span className="ml-1 hidden md:inline-block">on crypto</span>
         </SortableHeader>
       )
     },
     cell: ({ row }) => (
       <div className="flex items-center gap-2">
-        <DTSIFormattedLetterGrade size={30} person={row.original} />
+        <DTSIFormattedLetterGrade person={row.original} size={30} />
         <span className="hidden md:inline">
           {convertDTSIStanceScoreToCryptoSupportLanguage(row.original)}
         </span>
@@ -66,7 +67,7 @@ export const getDTSIClientPersonDataTableColumns = ({
     accessorFn: row =>
       row.primaryRole ? getDTSIPersonRoleCategoryDisplayName(row.primaryRole) : '-',
     header: ({ column }) => {
-      return <SortableHeader column={column}>Title</SortableHeader>
+      return <SortableHeader column={column}>Role</SortableHeader>
     },
 
     cell: ({ row }) => (

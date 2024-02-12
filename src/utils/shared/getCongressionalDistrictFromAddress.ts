@@ -1,15 +1,20 @@
-import {
-  GoogleCivicInfoResponse,
-  getGoogleCivicDataFromAddress,
-} from '@/utils/shared/googleCivicInfo'
 import * as Sentry from '@sentry/nextjs'
 import _ from 'lodash'
+
+import {
+  getGoogleCivicDataFromAddress,
+  GoogleCivicInfoResponse,
+} from '@/utils/shared/googleCivicInfo'
 
 const findCongressionalDistrictString = (response: GoogleCivicInfoResponse, address: string) => {
   if (Object.keys(response.divisions).every(key => key !== 'ocd-division/country:us')) {
     return { notFoundReason: 'NOT_USA_ADDRESS' as const }
   }
-  const district = Object.keys(response.divisions).filter(key => key.includes('/cd:'))
+  const districtKeys = Object.keys(response.divisions)
+  if (districtKeys.find(key => key.includes('ocd-division/country:us/district:dc'))) {
+    return { notFoundReason: 'NO_REPS_IN_STATE' as const }
+  }
+  const district = districtKeys.filter(key => key.includes('/cd:'))
   if (!district.length) {
     Sentry.captureMessage('No districts returned for address', {
       tags: { domain: 'getCongressionalDistrictFromAddress' },

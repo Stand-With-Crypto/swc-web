@@ -1,5 +1,6 @@
+import { object, string } from 'zod'
+
 import { zodFirstAndLastNames } from '@/validation/fields/zodName'
-import { string, object } from 'zod'
 
 // you don't want to use z. syntax in client-side components because it messes with tree shaking
 export const zodEmailYourCongressperson = object({

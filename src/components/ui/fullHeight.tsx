@@ -1,5 +1,6 @@
-import { cn } from '@/utils/web/cn'
 import React from 'react'
+
+import { cn } from '@/utils/web/cn'
 
 const Container = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => {
@@ -13,8 +14,8 @@ const Content = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivEle
     return (
       <main
         className={cn('flex flex-col', className)}
-        style={{ flex: '1 0 auto' }}
         ref={ref}
+        style={{ flex: '1 0 auto' }}
         {...props}
       />
     )

@@ -1,13 +1,3 @@
-import { prismaClient } from '@/utils/server/prismaClient'
-import { getUserSessionIdOnPageRouter } from '@/utils/server/serverUserSessionId'
-import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
-import * as Sentry from '@sentry/nextjs'
-import {
-  ServerLocalUser,
-  mapLocalUserToUserDatabaseFields,
-  parseLocalUserFromCookiesForPageRouter,
-} from '@/utils/server/serverLocalUser'
-import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import {
   CapitolCanaryInstance,
   User,
@@ -17,25 +7,36 @@ import {
   UserEmailAddressSource,
   UserInformationVisibility,
 } from '@prisma/client'
-import {
-  ThirdwebEmbeddedWalletMetadata,
-  fetchEmbeddedWalletMetadataFromThirdweb,
-} from '@/utils/server/thirdweb/fetchEmbeddedWalletMetadataFromThirdweb'
-import { NextApiRequest } from 'next'
-import { AuthSessionMetadata } from '@/utils/server/thirdweb/types'
-import { AnalyticProperties } from '@/utils/shared/sharedAnalytics'
+import * as Sentry from '@sentry/nextjs'
 import _ from 'lodash'
-import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
+import { NextApiRequest } from 'next'
+
+import { CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/upsertAdvocateInCapitolCanary'
+import { inngest } from '@/inngest/inngest'
 import {
   CapitolCanaryCampaignName,
   getCapitolCanaryCampaignID,
 } from '@/utils/server/capitolCanary/campaigns'
 import { UpsertAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
-import { inngest } from '@/inngest/inngest'
-import { CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/upsertAdvocateInCapitolCanary'
-import { getLogger } from '@/utils/shared/logger'
 import { claimNFT } from '@/utils/server/nft/claimNFT'
 import { mintPastActions } from '@/utils/server/nft/mintPastActions'
+import { prismaClient } from '@/utils/server/prismaClient'
+import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
+import {
+  mapLocalUserToUserDatabaseFields,
+  parseLocalUserFromCookiesForPageRouter,
+  ServerLocalUser,
+} from '@/utils/server/serverLocalUser'
+import { getUserSessionIdOnPageRouter } from '@/utils/server/serverUserSessionId'
+import {
+  fetchEmbeddedWalletMetadataFromThirdweb,
+  ThirdwebEmbeddedWalletMetadata,
+} from '@/utils/server/thirdweb/fetchEmbeddedWalletMetadataFromThirdweb'
+import { AuthSessionMetadata } from '@/utils/server/thirdweb/types'
+import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
+import { getLogger } from '@/utils/shared/logger'
+import { AnalyticProperties } from '@/utils/shared/sharedAnalytics'
+import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
 
 /*
 The desired behavior of this function:

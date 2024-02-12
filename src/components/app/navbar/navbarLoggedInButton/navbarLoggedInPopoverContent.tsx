@@ -1,33 +1,33 @@
 'use client'
 
 import React from 'react'
-import { toast } from 'sonner'
-import { Copy } from 'lucide-react'
 import { useCopyToClipboard } from 'react-use'
 import * as Sentry from '@sentry/nextjs'
+import { useENS } from '@thirdweb-dev/react'
+import { Copy } from 'lucide-react'
+import { toast } from 'sonner'
 
-import { Button } from '@/components/ui/button'
-import { useThirdwebData } from '@/hooks/useThirdwebData'
-import { InternalLink } from '@/components/ui/link'
-import { useIntlUrls } from '@/hooks/useIntlUrls'
+import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
+import { ClientUserCryptoAddressWithENSData } from '@/clientModels/clientUser/clientUserCryptoAddress'
 import { UserAvatar } from '@/components/app/userAvatar'
+import { Button } from '@/components/ui/button'
+import { InternalLink } from '@/components/ui/link'
+import { Skeleton } from '@/components/ui/skeleton'
+import { useIntlUrls } from '@/hooks/useIntlUrls'
+import { useThirdwebData } from '@/hooks/useThirdwebData'
+import { appendENSHookDataToUser } from '@/utils/web/appendENSHookDataToUser'
+import { maybeEllipsisText } from '@/utils/web/maybeEllipsisText'
 import {
   getFullSensitiveDataUserDisplayName,
   getSensitiveDataUserDisplayName,
 } from '@/utils/web/userUtils'
-import { Skeleton } from '@/components/ui/skeleton'
-import { maybeEllipsisText } from '@/utils/web/maybeEllipsisText'
-import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
-import { useENS } from '@thirdweb-dev/react'
-import { ClientUserCryptoAddressWithENSData } from '@/clientModels/clientUser/clientUserCryptoAddress'
-import { appendENSHookDataToUser } from '@/utils/web/appendENSHookDataToUser'
 
 interface NavbarLoggedInSessionPopoverContentProps {
   onClose: () => void
   user?: GetUserFullProfileInfoResponse['user']
 }
 
-export function NavbarLoggedInSessionPopoverContent({
+export function NavbarLoggedInPopoverContent({
   onClose,
   user,
 }: NavbarLoggedInSessionPopoverContentProps) {
@@ -36,7 +36,7 @@ export function NavbarLoggedInSessionPopoverContent({
   const ensData = useENS()
 
   return (
-    <div className="space-y-2">
+    <div className="space-y-2 text-left">
       <div className="flex flex-col gap-6 p-4">
         <div className="flex items-center gap-4">
           {user && !ensData.isLoading ? (
@@ -47,7 +47,7 @@ export function NavbarLoggedInSessionPopoverContent({
         </div>
 
         <div className="space-y-1">
-          <Button className="w-full" asChild>
+          <Button asChild className="w-full">
             <InternalLink href={urls.profile()} onClick={onClose}>
               View profile
             </InternalLink>
@@ -59,7 +59,7 @@ export function NavbarLoggedInSessionPopoverContent({
       </div>
 
       <hr />
-      <Button variant="link" onClick={logoutAndDisconnect}>
+      <Button onClick={logoutAndDisconnect} variant="link">
         Log out
       </Button>
     </div>
@@ -103,13 +103,13 @@ function UserHeading(props: {
   return (
     <>
       <div className="min-w-[36px]">
-        <UserAvatar user={user} size={36} />
+        <UserAvatar size={36} user={user} />
       </div>
       <div className="flex-1">
         <div className="flex w-full items-center justify-between">
           <p>{getSensitiveDataUserDisplayName(user)}</p>
-          <Button className="h-auto p-1" variant="ghost" onClick={handleCopyNameToClipboard}>
-            <Copy width={16} height={16} />
+          <Button className="h-auto p-1" onClick={handleCopyNameToClipboard} variant="ghost">
+            <Copy height={16} width={16} />
           </Button>
         </div>
         {user.primaryUserEmailAddress?.emailAddress && (

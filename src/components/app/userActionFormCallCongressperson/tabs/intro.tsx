@@ -1,11 +1,10 @@
 'use client'
-import { Check } from 'lucide-react'
 import React, { useEffect } from 'react'
-
-import { Button } from '@/components/ui/button'
-import { UseSectionsReturn } from '@/hooks/useSections'
+import { Check } from 'lucide-react'
 
 import { SectionNames } from '@/components/app/userActionFormCallCongressperson/constants'
+import { Button } from '@/components/ui/button'
+import { UseSectionsReturn } from '@/hooks/useSections'
 
 import { UserActionFormCallCongresspersonLayout } from './layout'
 
@@ -16,7 +15,7 @@ export function Intro({ goToSection: gotoTab }: UseSectionsReturn<SectionNames>)
   }, [ref])
   return (
     <IntroStaticContent>
-      <Button ref={ref} onClick={() => gotoTab(SectionNames.ADDRESS)}>
+      <Button onClick={() => gotoTab(SectionNames.ADDRESS)} ref={ref}>
         Continue
       </Button>
     </IntroStaticContent>
@@ -28,8 +27,8 @@ export function IntroStaticContent({ children }: React.PropsWithChildren) {
     <UserActionFormCallCongresspersonLayout>
       <UserActionFormCallCongresspersonLayout.Container>
         <UserActionFormCallCongresspersonLayout.Heading
-          title="It's time to fight to keep crypto in America"
           subtitle="Call your Congressperson and tell them to vote YES on the FIT21 bill. Calling your representative is the most effective way to influence legislation."
+          title="It's time to fight to keep crypto in America"
         />
         <div className="space-y-2">
           <h2 className="text-base font-semibold">Here's what you need to know:</h2>

@@ -1,9 +1,16 @@
 'use client'
+import { useEffect, useMemo, useState } from 'react'
+import * as Sentry from '@sentry/nextjs'
+import { AlertCircle } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import { toast } from 'sonner'
+
 import { actionConfirmUserMergeAlert } from '@/actions/actionConfirmUserMergeAlert'
 import { PageUserProfileUser } from '@/components/app/pageUserProfile/getAuthenticatedData'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import { FormItemSkeleton } from '@/components/ui/form'
+import { ExternalLink } from '@/components/ui/link'
 import {
   Select,
   SelectContent,
@@ -14,11 +21,6 @@ import {
 import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
 import { getUserDisplayNameWithoutENS } from '@/utils/web/userUtils'
-import * as Sentry from '@sentry/nextjs'
-import { AlertCircle } from 'lucide-react'
-import { useRouter } from 'next/navigation'
-import { useEffect, useMemo, useState } from 'react'
-import { toast } from 'sonner'
 
 export function MergeAlertCTA({
   mergeAlert,
@@ -72,7 +74,7 @@ export function MergeAlertCTA({
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end">
         <FormItemSkeleton>
           <label className="text-sm">Account to delete</label>
-          <Select value={userToDeleteId} onValueChange={setUserToDeleteId}>
+          <Select onValueChange={setUserToDeleteId} value={userToDeleteId}>
             <SelectTrigger className="sm:w-[180px]">
               <SelectValue />
             </SelectTrigger>
@@ -113,8 +115,12 @@ export function MergeAlertCTA({
           )
         })()}
       </div>
-      {/* LATER-TASK add distribution email for tech support */}
-      <div className="mt-3 text-sm text-fontcolor-muted">Questions? Send an email to TODO</div>
+      <div className="mt-3 text-sm text-fontcolor-muted">
+        Questions? Send an email to{' '}
+        <ExternalLink href={'mailto:info@standwithcrypto.org'}>
+          info@standwithcrypto.org
+        </ExternalLink>
+      </div>
     </Alert>
   )
 }

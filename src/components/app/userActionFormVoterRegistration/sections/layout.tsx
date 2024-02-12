@@ -1,5 +1,5 @@
-import { ArrowLeft } from 'lucide-react'
 import React from 'react'
+import { ArrowLeft } from 'lucide-react'
 
 import { dialogButtonStyles } from '@/components/ui/dialog/styles'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
@@ -43,8 +43,8 @@ UserActionFormVoterRegistrationLayout.Container = Container
 
 function GoBackButton({ onClick }: { onClick: () => void }) {
   return (
-    <div role="button" onClick={onClick} className={cn('left-2', dialogButtonStyles)}>
-      <ArrowLeft size={16} />
+    <div className={cn('left-2', dialogButtonStyles)} onClick={onClick} role="button">
+      <ArrowLeft size={20} />
     </div>
   )
 }

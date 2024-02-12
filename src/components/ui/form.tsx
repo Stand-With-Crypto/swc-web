@@ -1,7 +1,5 @@
 'use client'
 
-import * as LabelPrimitive from '@radix-ui/react-label'
-import { Slot } from '@radix-ui/react-slot'
 import * as React from 'react'
 import {
   Control,
@@ -12,6 +10,8 @@ import {
   FormProvider,
   useFormContext,
 } from 'react-hook-form'
+import * as LabelPrimitive from '@radix-ui/react-label'
+import { Slot } from '@radix-ui/react-slot'
 
 import { Label } from '@/components/ui/label'
 import { cn } from '@/utils/web/cn'
@@ -87,7 +87,7 @@ const FormItemContext = React.createContext<FormItemContextValue>({} as FormItem
 
 const FormItemSkeleton = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => {
-    return <div ref={ref} className={cn('space-y-2', className)} {...props} />
+    return <div className={cn('space-y-2', className)} ref={ref} {...props} />
   },
 )
 FormItemSkeleton.displayName = 'FormItemSkeleton'
@@ -97,7 +97,7 @@ const FormItem = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivEl
 
     return (
       <FormItemContext.Provider value={{ id }}>
-        <FormItemSkeleton ref={ref} className={className} {...props} />
+        <FormItemSkeleton className={className} ref={ref} {...props} />
       </FormItemContext.Provider>
     )
   },
@@ -112,9 +112,9 @@ const FormLabel = React.forwardRef<
 
   return (
     <Label
-      ref={ref}
       className={cn(error && 'text-destructive', className)}
       htmlFor={formItemId}
+      ref={ref}
       {...props}
     />
   )
@@ -129,10 +129,10 @@ const FormControl = React.forwardRef<
 
   return (
     <Slot
-      ref={ref}
-      id={formItemId}
       aria-describedby={!error ? `${formDescriptionId}` : `${formDescriptionId} ${formMessageId}`}
       aria-invalid={!!error}
+      id={formItemId}
+      ref={ref}
       {...props}
     />
   )
@@ -147,9 +147,9 @@ const FormDescription = React.forwardRef<
 
   return (
     <p
-      ref={ref}
-      id={formDescriptionId}
       className={cn('text-sm text-muted-foreground', className)}
+      id={formDescriptionId}
+      ref={ref}
       {...props}
     />
   )
@@ -169,9 +169,9 @@ const FormErrorMessage = React.forwardRef<
 
   return (
     <p
-      ref={ref}
-      id={formMessageId}
       className={cn('text-sm font-medium text-destructive', className)}
+      id={formMessageId}
+      ref={ref}
       {...props}
     >
       {body}
@@ -184,7 +184,7 @@ const FormSuccessMessage = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLParagraphElement>
 >(({ className, ...props }, ref) => {
-  return <p ref={ref} className={cn('text-sm font-medium text-primary', className)} {...props} />
+  return <p className={cn('text-sm font-medium text-primary', className)} ref={ref} {...props} />
 })
 FormSuccessMessage.displayName = 'FormSuccessMessage'
 

@@ -1,5 +1,8 @@
-import { FormattedUserTweet, TweetEntityOptionsWithType } from '@/types/twitter'
+import sanitizeHtml from 'sanitize-html'
 import twemoji from 'twemoji'
+// @ts-ignore
+import { parse as twemojiParser } from 'twemoji-parser'
+
 import {
   DTSIStanceDetailsStanceProp,
   DTSIStanceDetailsTweetProp,
@@ -7,18 +10,15 @@ import {
 } from '@/components/app/dtsiStanceDetails/types'
 import { FormattedDatetime } from '@/components/ui/formattedDatetime'
 import { MaybeNextImg, NextImage } from '@/components/ui/image'
+import { InitialsAvatar } from '@/components/ui/initialsAvatar'
 import { ExternalLink } from '@/components/ui/link'
+import { FormattedUserTweet, TweetEntityOptionsWithType } from '@/types/twitter'
 import {
   dtsiPersonFullName,
   getDTSIPersonProfilePictureUrlDimensions,
 } from '@/utils/dtsi/dtsiPersonUtils'
 import { dtsiTweetUrl } from '@/utils/dtsi/dtsiTweetUtils'
 import { cn } from '@/utils/web/cn'
-import sanitizeHtml from 'sanitize-html'
-
-// @ts-ignore
-import { parse as twemojiParser } from 'twemoji-parser'
-import { InitialsAvatar } from '@/components/ui/initialsAvatar'
 
 export const getEmojiIndexes = (tweet: DTSIStanceDetailsTweetProp['tweet']) => {
   // define a regular expression to match all Unicode emoji characters
@@ -113,8 +113,8 @@ function getEntities(tweet: DTSIStanceDetailsTweetProp['tweet']) {
 const TweetLink: React.FC<React.ComponentPropsWithoutRef<typeof ExternalLink>> = props => (
   <ExternalLink
     className="font-semibold text-blue-400"
-    style={{ wordWrap: 'break-word', overflowWrap: 'anywhere' }}
     rel="nofollow"
+    style={{ wordWrap: 'break-word', overflowWrap: 'anywhere' }}
     {...props}
   />
 )
@@ -131,7 +131,6 @@ const TweetBody: React.FC<{ tweet: DTSIStanceDetailsTweetProp['tweet'] }> = ({ t
           case 'text':
             return (
               <span
-                key={i}
                 dangerouslySetInnerHTML={{
                   __html: sanitizeHtml(twemoji.parse(text), {
                     allowedTags: ['b', 'i', 'em', 'strong', 'img'],
@@ -142,6 +141,7 @@ const TweetBody: React.FC<{ tweet: DTSIStanceDetailsTweetProp['tweet'] }> = ({ t
                     },
                   }),
                 }}
+                key={i}
               />
             )
           case 'urls':
@@ -190,8 +190,8 @@ export const DTSIStanceDetailsTweet: React.FC<
             {person.profilePictureUrl ? (
               <div className="h-12 w-12 overflow-hidden rounded-full">
                 <MaybeNextImg
-                  sizes="48px"
                   alt={`profile picture of ${dtsiPersonFullName(person)}`}
+                  sizes="48px"
                   {...(getDTSIPersonProfilePictureUrlDimensions(person) || {})}
                   src={person.profilePictureUrl}
                 />
@@ -199,9 +199,9 @@ export const DTSIStanceDetailsTweet: React.FC<
             ) : (
               <div>
                 <InitialsAvatar
-                  size={48}
                   firstInitial={(person.firstNickname || person.firstName).slice(0, 1)}
                   lastInitial={person.lastName.slice(0, 1)}
+                  size={48}
                 />
               </div>
             )}
@@ -218,7 +218,7 @@ export const DTSIStanceDetailsTweet: React.FC<
             {dtsiPersonFullName(person)}
           </div>
         )}
-        <NextImage alt="x.com logo" src={'/misc/xDotComLogo.svg'} width={24} height={24} />
+        <NextImage alt="x.com logo" height={24} src={'/misc/xDotComLogo.svg'} width={24} />
       </div>
 
       <div className="mb-3 whitespace-pre-line " style={{ lineHeight: 1.2 }}>
@@ -237,10 +237,10 @@ export const DTSIStanceDetailsTweet: React.FC<
             >
               <NextImage
                 alt={`tweet image`}
-                width={media.width!}
                 height={media.height!}
                 sizes="300px"
                 src={media.url}
+                width={media.width!}
               />
             </div>
           ))}
@@ -253,8 +253,8 @@ export const DTSIStanceDetailsTweet: React.FC<
         >
           @{stance.tweet.twitterAccount.username}{' '}
           <FormattedDatetime
-            dateStyle="medium"
             date={new Date(stance.tweet.datetimeCreatedOnTwitter)}
+            dateStyle="medium"
             locale={locale}
           />{' '}
           on X

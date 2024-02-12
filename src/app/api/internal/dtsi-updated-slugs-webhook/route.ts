@@ -1,11 +1,12 @@
-import { ORDERED_SUPPORTED_LOCALES } from '@/intl/locales'
-import { getLogger } from '@/utils/shared/logger'
-import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
-import { getIntlUrls } from '@/utils/shared/urls'
 import _ from 'lodash'
 import { revalidatePath } from 'next/cache'
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
+
+import { ORDERED_SUPPORTED_LOCALES } from '@/intl/locales'
+import { getLogger } from '@/utils/shared/logger'
+import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
+import { getIntlUrls } from '@/utils/shared/urls'
 
 const logger = getLogger('/api/internal/dtsi-updated-slugs-webhook')
 
@@ -19,7 +20,7 @@ const DTSI_WEBHOOK_SECRET = requiredOutsideLocalEnv(
   'DTSI_WEBHOOK_SECRET',
 )
 
-// TODO debounce this endpoint with inngest
+// LATER-TASK debounce this endpoint with inngest
 
 export async function POST(request: NextRequest) {
   if (!request.headers.get('authorization')) {

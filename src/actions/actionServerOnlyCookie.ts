@@ -1,7 +1,9 @@
 'use server'
-import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
-import { cookies } from 'next/headers'
 import 'server-only'
+
+import { cookies } from 'next/headers'
+
+import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
 
 export const actionServerOnlyCookie = withServerActionMiddleware(
   'actionServerOnlyCookie',
