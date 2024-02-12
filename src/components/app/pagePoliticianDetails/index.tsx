@@ -49,7 +49,7 @@ export function PagePoliticianDetails({
             />
           </div>
         ) : (
-          <div className="mx-auto mb-6" style={{ maxWidth: 100 }}>
+          <div className="mx-auto mb-6 max-w-[100px]">
             <InitialsAvatar
               firstInitial={(person.firstNickname || person.firstName).slice(0, 1)}
               lastInitial={person.lastName.slice(0, 1)}
