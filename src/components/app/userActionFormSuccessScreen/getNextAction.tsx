@@ -1,6 +1,7 @@
 'use client'
+
 import { GetUserPerformedUserActionTypesResponse } from '@/app/api/identified-user/performed-user-action-types/route'
-import { ORDERED_USER_ACTION_ROW_CTA_INFO } from '@/components/app/userActionRowCTA/userActionRowCTAsList'
+import { ORDERED_USER_ACTION_ROW_CTA_INFO } from '@/components/app/userActionRowCTA/constants'
 
 export function getNextAction(
   performedUserActionTypes: GetUserPerformedUserActionTypesResponse['performedUserActionTypes'],

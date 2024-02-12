@@ -61,7 +61,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
       )}
       <nav className={cn('sticky top-0 z-10 w-full bg-white py-3 md:py-5')}>
         <div className="container flex justify-between">
-          <div className="flex items-center gap-8">
+          <div className="flex items-center gap-4">
             <InternalLink className="flex-shrink-0" href={urls.home()}>
               <NextImage
                 alt={'Stand With Crypto Logo'}
@@ -73,9 +73,9 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
             </InternalLink>
             {leftLinks.map(({ href, text }) => {
               return (
-                <InternalLink className="hidden text-gray-800 md:block" href={href} key={href}>
-                  {text}
-                </InternalLink>
+                <Button asChild className="hidden md:block" key={href} variant="ghost">
+                  <InternalLink href={href}>{text}</InternalLink>
+                </Button>
               )
             })}
           </div>
@@ -87,25 +87,22 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
               </button>
             </DrawerTrigger>
             <DrawerContent direction="top">
-              <div className="space-y-6 px-6 pb-6 pt-3 text-center md:space-y-8">
+              <div className="px-6 pb-6 pt-3 text-center">
                 {leftLinks.map(({ href, text }) => {
                   return (
-                    <InternalLink
-                      className="block font-bold text-gray-800"
-                      href={href}
-                      key={href}
-                      onClick={maybeCloseAfterNavigating}
-                    >
-                      {text}
-                    </InternalLink>
+                    <Button asChild className="block" key={href} variant="ghost">
+                      <InternalLink href={href} onClick={maybeCloseAfterNavigating}>
+                        {text}
+                      </InternalLink>
+                    </Button>
                   )
                 })}
-                <div>
-                  <Button asChild className="mr-3" onClick={maybeCloseAfterNavigating}>
+                <div className="mt-2">
+                  <Button asChild onClick={maybeCloseAfterNavigating}>
                     <InternalLink href={urls.donate()}>Donate</InternalLink>
                   </Button>
                 </div>
-                <div>
+                <div className="mt-4">
                   <MaybeAuthenticatedContent
                     authenticatedContent={
                       <NavbarLoggedInButton

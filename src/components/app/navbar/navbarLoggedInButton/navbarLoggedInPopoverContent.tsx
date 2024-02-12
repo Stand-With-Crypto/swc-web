@@ -58,16 +58,15 @@ export function NavbarLoggedInPopoverContent({
         </div>
       </div>
 
-      <hr />
-      <Button
+      <button
+        className="block w-full border-t p-4 text-left text-sm font-medium hover:bg-secondary"
         onClick={() => {
           logoutAndDisconnect()
           onClose()
         }}
-        variant="link"
       >
         Log out
-      </Button>
+      </button>
     </div>
   )
 }
