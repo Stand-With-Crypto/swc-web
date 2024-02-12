@@ -134,7 +134,7 @@ export function PageHome({
             analytics={'Homepage Our Community Tabs'}
             defaultValue={RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY}
           >
-            <div className="text-center">
+            <div className="mb-8 text-center lg:mb-10">
               <TabsList className="mx-auto">
                 <TabsTrigger value={RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY}>
                   Recent activity
@@ -155,18 +155,21 @@ export function PageHome({
                     sumDonations={donor}
                   />
                 ))}
+              </div>{' '}
+              <div className="mt-7 space-x-4 text-center">
+                <Button asChild>
+                  <InternalLink href={urls.donate()}>Donate</InternalLink>
+                </Button>
+                <Button asChild variant="secondary">
+                  <InternalLink
+                    href={urls.leaderboard({ tab: RecentActivityAndLeaderboardTabs.LEADERBOARD })}
+                  >
+                    View all
+                  </InternalLink>
+                </Button>
               </div>
             </TabsContent>
           </Tabs>
-          <div className="space-x-4 text-center">
-            <Button asChild>
-              <InternalLink href={urls.donate()}>Donate</InternalLink>
-            </Button>
-            <Button asChild variant="secondary">
-              <InternalLink href={urls.leaderboard()}>View all</InternalLink>
-            </Button>
-          </div>
-          <div></div>
         </section>
         <section className="mb-16 space-y-7 md:mb-24">
           <PageTitle as="h3" size="md">
