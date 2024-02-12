@@ -19,7 +19,7 @@ export type ClientUser = ClientModel<
 
 export type GetClientProps = User & {
   primaryUserCryptoAddress: null | UserCryptoAddress
-  address: Address | null
+  address?: Address | null
 }
 
 export const getClientUser = (record: GetClientProps): ClientUser => {
