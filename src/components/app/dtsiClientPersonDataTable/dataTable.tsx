@@ -150,11 +150,11 @@ export function DataTable<TData extends Person, TValue>({
               {table.getRowModel().rows?.length ? (
                 table.getRowModel().rows.map(row => (
                   <TableRow
-                    role="button"
                     className="cursor-pointer"
                     data-state={row.getIsSelected() && 'selected'}
                     key={row.id}
                     onClick={() => router.push(urls.politicianDetails(row.original.slug))}
+                    role="button"
                   >
                     {row.getVisibleCells().map(cell => (
                       <TableCell key={cell.id}>
