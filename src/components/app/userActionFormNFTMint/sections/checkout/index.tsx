@@ -1,5 +1,4 @@
 import Balancer from 'react-wrap-balancer'
-import { Minus, Plus } from 'lucide-react'
 import React from 'react'
 import {
   Web3Button,
@@ -34,13 +33,17 @@ import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { MintStatus } from '@/hooks/useSendMintNFTTransaction'
 import { ErrorMessage } from '@/components/ui/errorMessage'
 
-import styles from './checkout.module.css'
+import { QuantityInput } from './quantityInput'
+import { noop } from 'lodash'
+import { Checkbox } from '@/components/ui/checkbox'
 
 interface UserActionFormNFTMintCheckoutProps
   extends UseSectionsReturn<UserActionFormNFTMintSectionNames>,
     UseCheckoutControllerReturn {
   onMint: () => void
   mintStatus: MintStatus
+  isUSResident: boolean
+  onIsUSResidentChange: (newValue: boolean) => void
 }
 
 const CHECKOUT_ERROR_TO_MESSAGE: Record<CheckoutError, string> = {
@@ -48,7 +51,6 @@ const CHECKOUT_ERROR_TO_MESSAGE: Record<CheckoutError, string> = {
   networkSwitch: 'Please switch to the Base Network',
 }
 
-// TODO add checkbox for US citizen
 export function UserActionFormNFTMintCheckout({
   goToSection,
   quantity,
@@ -61,6 +63,8 @@ export function UserActionFormNFTMintCheckout({
   gasFeeDisplay,
   onMint,
   mintStatus,
+  isUSResident,
+  onIsUSResidentChange,
 }: UserActionFormNFTMintCheckoutProps) {
   const { contract } = useContract(MINT_NFT_CONTRACT_ADDRESS)
   const { data: contractMetadata, isLoading: isLoadingMetadata } = useContractMetadata(contract)
@@ -69,13 +73,7 @@ export function UserActionFormNFTMintCheckout({
   const connectionStatus = useConnectionStatus()
 
   if (!contractMetadata || isLoadingMetadata || !address) {
-    return (
-      <UserActionFormLayout>
-        <UserActionFormLayout.Container>
-          <NFTDisplaySkeleton size="sm" />
-        </UserActionFormLayout.Container>
-      </UserActionFormLayout>
-    )
+    return <UserActionFormNFTMintCheckoutSkeleton />
   }
 
   const isLoading =
@@ -146,6 +144,20 @@ export function UserActionFormNFTMintCheckout({
           </div>
         </Card>
 
+        {!checkoutError && (
+          <label className="flex cursor-pointer items-center gap-4">
+            <Checkbox
+              checked={isUSResident}
+              onCheckedChange={val => onIsUSResidentChange(val as boolean)}
+            />
+            <p className="leading-4 text-fontcolor-muted">
+              I am a US citizen or lawful permanent resident (i.e. a green card holder). Checking
+              this box will append data to your onchain transaction to comply with US regulation.
+              Donations from non-US residents cannot be used for electioneering purposes.
+            </p>
+          </label>
+        )}
+
         <UserActionFormLayout.Footer>
           <Web3Button
             action={onMint}
@@ -157,9 +169,66 @@ export function UserActionFormNFTMintCheckout({
             Mint now
           </Web3Button>
 
-          {!!checkoutError && (
+          {!!checkoutError && !isLoading && (
             <ErrorMessage>{CHECKOUT_ERROR_TO_MESSAGE[checkoutError]}</ErrorMessage>
           )}
+        </UserActionFormLayout.Footer>
+      </UserActionFormLayout.Container>
+    </UserActionFormLayout>
+  )
+}
+
+function UserActionFormNFTMintCheckoutSkeleton() {
+  return (
+    <UserActionFormLayout>
+      <UserActionFormLayout.Container>
+        <div className="flex gap-6">
+          <NFTDisplaySkeleton size="sm" />
+
+          <div>
+            <Skeleton>
+              <PageTitle className="text-start" size="sm">
+                Stand With Crypto Supporter
+              </PageTitle>
+            </Skeleton>
+
+            <Skeleton>
+              <PageSubTitle className="text-start">on Base Network</PageSubTitle>
+            </Skeleton>
+          </div>
+        </div>
+
+        <Skeleton className="rounded-3xl">
+          <Card>
+            <div className="flex items-center justify-between">
+              <p>Quantity</p>
+              <QuantityInput onChange={noop} onDecrement={noop} onIncrement={noop} value={0} />
+            </div>
+          </Card>
+        </Skeleton>
+
+        <Skeleton className="rounded-3xl">
+          <Card>
+            <div className="space-y-8">
+              {Array.from({ length: 3 }, (_, i) => (
+                <div className="flex items-center justify-between" key={i}>
+                  <div className="max-w-96">
+                    <p>Donation</p>
+                    <p className="text-xs text-muted-foreground">
+                      <Balancer>Lorem ipsum dolor sit amet consectetur adipisicing elit.</Balancer>
+                    </p>
+                  </div>
+                  <CurrencyDisplay value="0.00435" />
+                </div>
+              ))}
+            </div>
+          </Card>
+        </Skeleton>
+
+        <UserActionFormLayout.Footer>
+          <Skeleton>
+            <Button size="lg">Mint now</Button>
+          </Skeleton>
         </UserActionFormLayout.Footer>
       </UserActionFormLayout.Container>
     </UserActionFormLayout>
@@ -175,57 +244,5 @@ function CurrencyDisplay({ value }: { value?: string }) {
     <p className="min-w-max">
       {value} {SupportedCryptoCurrencyCodes.ETH}
     </p>
-  )
-}
-
-function QuantityInput({
-  value,
-  onChange,
-  onIncrement,
-  onDecrement,
-}: {
-  value: number
-  onChange: (value: number) => void
-  onIncrement: () => void
-  onDecrement: () => void
-}) {
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = Number(event.target.value)
-    if (newValue > 0 && newValue <= 1000) {
-      onChange(newValue)
-    }
-  }
-
-  return (
-    <div className="flex items-center gap-2">
-      <Button
-        className="h-8 w-8 bg-white p-0 hover:bg-white/80"
-        disabled={value <= 1}
-        onClick={onDecrement}
-        size="sm"
-        variant="secondary"
-      >
-        <Minus className="h-4 w-4" />
-      </Button>
-
-      <div>
-        <input
-          className={styles.numberInput}
-          onChange={handleInputChange}
-          onFocus={event => event.target.select()}
-          type="number"
-          value={value}
-        />
-      </div>
-
-      <Button
-        className="h-8 w-8 bg-white p-0 hover:bg-white/80"
-        onClick={onIncrement}
-        size="sm"
-        variant="secondary"
-      >
-        <Plus className="h-4 w-4" />
-      </Button>
-    </div>
   )
 }

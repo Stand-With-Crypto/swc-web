@@ -25,7 +25,7 @@ module.exports = {
       { allowAny: true, allowNumber: true, allowBoolean: false, allowNullish: false },
     ],
     'no-empty': ['error', { allowEmptyCatch: true }],
-    'react/jsx-sort-props': 'error',
+    'react/jsx-sort-props': 'warn',
     'react/no-unescaped-entities': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/ban-ts-comment': 'off',

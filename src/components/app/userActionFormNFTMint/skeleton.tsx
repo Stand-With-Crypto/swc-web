@@ -1,26 +1,17 @@
-'use client'
-
 import { UserActionFormLayout } from '@/components/app/userActionFormCommon'
-import { ContractMetadataDisplaySkeleton } from '@/components/app/userActionFormNFTMint/sections/intro'
-import { Button } from '@/components/ui/button'
-import { LoadingOverlay } from '@/components/ui/loadingOverlay'
-import { Skeleton } from '@/components/ui/skeleton'
+import {
+  ContractMetadataDisplaySkeleton,
+  FooterSkeleton,
+} from '@/components/app/userActionFormNFTMint/sections/intro'
 
 export function UserActionFormNFTMintSkeleton() {
   return (
     <UserActionFormLayout>
-      <LoadingOverlay />
       <UserActionFormLayout.Container>
         <ContractMetadataDisplaySkeleton />
 
         <UserActionFormLayout.Footer>
-          <Button>
-            <Skeleton>Login</Skeleton>
-          </Button>
-
-          <p className="text-sm text-muted-foreground">
-            You will need to login first to mint the NFT
-          </p>
+          <FooterSkeleton />
         </UserActionFormLayout.Footer>
       </UserActionFormLayout.Container>
     </UserActionFormLayout>

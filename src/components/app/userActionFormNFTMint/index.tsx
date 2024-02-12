@@ -2,21 +2,22 @@ import { useSections } from '@/hooks/useSections'
 import { toast } from 'sonner'
 import React from 'react'
 
-import { UserActionFormNFTMintIntro } from './sections/intro'
-import { UserActionFormNFTMintCheckout } from './sections/checkout'
-import {
-  UserActionFormNFTMintSuccess,
-  UserActionFormNFTMintSuccessSkeleton,
-} from './sections/success'
-import { useCheckoutController } from './useCheckoutController'
 import { MINT_NFT_CONTRACT_ADDRESS } from '@/components/app/userActionFormNFTMint/constants'
 import { useSendMintNFTTransaction } from '@/hooks/useSendMintNFTTransaction'
 import { toastGenericError } from '@/utils/web/toastUtils'
 
+import { UserActionFormNFTMintIntro } from './sections/intro'
+import { UserActionFormNFTMintCheckout } from './sections/checkout'
+import {
+  UserActionFormNFTMintTransactionWatch,
+  UserActionFormNFTMintTransactionWatchSkeleton,
+} from './sections/transactionWatch'
+import { useCheckoutController } from './useCheckoutController'
+
 export enum UserActionFormNFTMintSectionNames {
   INTRO = 'intro',
   CHECKOUT = 'checkout',
-  SUCCESS = 'success',
+  TRANSACTION_WATCH = 'transactionWatch',
 }
 export function UserActionFormNFTMint(_props: { onCancel: () => void; onSuccess: () => void }) {
   const sectionProps = useSections({
@@ -27,6 +28,7 @@ export function UserActionFormNFTMint(_props: { onCancel: () => void; onSuccess:
 
   const checkoutController = useCheckoutController()
 
+  const [isUSResident, setIsUSResident] = React.useState(false)
   const {
     mintNFT,
     status: sendNFTTransactionStatus,
@@ -44,9 +46,10 @@ export function UserActionFormNFTMint(_props: { onCancel: () => void; onSuccess:
       }
 
       if (status === 'completed') {
-        sectionProps.goToSection(UserActionFormNFTMintSectionNames.SUCCESS)
+        sectionProps.goToSection(UserActionFormNFTMintSectionNames.TRANSACTION_WATCH)
       }
     },
+    isUSResident,
   })
 
   switch (sectionProps.currentSection) {
@@ -58,21 +61,25 @@ export function UserActionFormNFTMint(_props: { onCancel: () => void; onSuccess:
         <UserActionFormNFTMintCheckout
           {...sectionProps}
           {...checkoutController}
+          isUSResident={isUSResident}
           mintStatus={sendNFTTransactionStatus}
+          onIsUSResidentChange={setIsUSResident}
           onMint={async () => {
             const result = await mintNFT()
             if (result === 'completed') {
-              sectionProps.goToSection(UserActionFormNFTMintSectionNames.SUCCESS)
+              sectionProps.goToSection(UserActionFormNFTMintSectionNames.TRANSACTION_WATCH)
             }
           }}
         />
       )
 
-    case UserActionFormNFTMintSectionNames.SUCCESS: {
+    case UserActionFormNFTMintSectionNames.TRANSACTION_WATCH: {
       if (!sendTransactionResponse) {
-        return <UserActionFormNFTMintSuccessSkeleton />
+        return <UserActionFormNFTMintTransactionWatchSkeleton />
       }
-      return <UserActionFormNFTMintSuccess sendTransactionResponse={sendTransactionResponse} />
+      return (
+        <UserActionFormNFTMintTransactionWatch sendTransactionResponse={sendTransactionResponse} />
+      )
     }
 
     default:

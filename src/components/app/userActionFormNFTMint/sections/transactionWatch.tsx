@@ -29,7 +29,7 @@ import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { UserActionType } from '@prisma/client'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
 
-export function UserActionFormNFTMintSuccess({
+export function UserActionFormNFTMintTransactionWatch({
   sendTransactionResponse,
 }: {
   sendTransactionResponse: TransactionResponse
@@ -76,7 +76,7 @@ export function UserActionFormNFTMintSuccess({
   })
 
   if (!contractMetadata || isLoadingContractMetadata) {
-    return <UserActionFormNFTMintSuccessSkeleton />
+    return <UserActionFormNFTMintTransactionWatchSkeleton />
   }
 
   return (
@@ -107,7 +107,7 @@ export function UserActionFormNFTMintSuccess({
   )
 }
 
-export function UserActionFormNFTMintSuccessSkeleton() {
+export function UserActionFormNFTMintTransactionWatchSkeleton() {
   return (
     <UserActionFormLayout>
       <UserActionFormLayout.Container>

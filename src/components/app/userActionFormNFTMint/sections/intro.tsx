@@ -7,10 +7,8 @@ import {
   NFTDisplay,
   NFTDisplaySkeleton,
 } from '@/components/app/userActionFormCommon'
-import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { useThirdwebData } from '@/hooks/useThirdwebData'
 import { UseSectionsReturn } from '@/hooks/useSections'
 import { UserActionFormNFTMintSectionNames } from '@/components/app/userActionFormNFTMint'
 import { Button } from '@/components/ui/button'
@@ -28,42 +26,48 @@ import { ThirdwebLoginDialog } from '@/components/app/authentication/thirdwebLog
 export function UserActionFormNFTMintIntro({
   goToSection,
 }: UseSectionsReturn<UserActionFormNFTMintSectionNames>) {
-  const { session } = useThirdwebData()
   const { data: contractMetadata, isLoading: isLoadingContractMetadata } =
     useThirdwebContractMetadata(MINT_NFT_CONTRACT_ADDRESS)
 
   return (
     <UserActionFormLayout>
-      {(session.isLoading || isLoadingContractMetadata) && <LoadingOverlay />}
       <UserActionFormLayout.Container>
         <div className="flex h-full flex-col gap-6">
           <ContractMetadataDisplay contractMetadata={contractMetadata} />
 
           <UserActionFormLayout.Footer>
-            <MaybeAuthenticatedContent
-              authenticatedContent={
-                <Button
-                  onClick={() => goToSection(UserActionFormNFTMintSectionNames.CHECKOUT)}
-                  size="lg"
-                >
-                  Continue
-                </Button>
-              }
-              loadingFallback={<Skeleton className="h-12 w-full" />}
-            >
-              <ThirdwebLoginDialog>
-                <Button size="lg">Log In</Button>
-              </ThirdwebLoginDialog>
+            {isLoadingContractMetadata ? (
+              <FooterSkeleton />
+            ) : (
+              <MaybeAuthenticatedContent
+                authenticatedContent={
+                  <Button
+                    onClick={() => goToSection(UserActionFormNFTMintSectionNames.CHECKOUT)}
+                    size="lg"
+                  >
+                    Continue
+                  </Button>
+                }
+                loadingFallback={<FooterSkeleton />}
+              >
+                <ThirdwebLoginDialog>
+                  <Button size="lg">Log In</Button>
+                </ThirdwebLoginDialog>
 
-              <p className="text-sm text-muted-foreground">
-                You will need to login first to mint the NFT
-              </p>
-            </MaybeAuthenticatedContent>
+                <p className="text-sm text-muted-foreground">
+                  You will need to login first to mint the NFT
+                </p>
+              </MaybeAuthenticatedContent>
+            )}
           </UserActionFormLayout.Footer>
         </div>
       </UserActionFormLayout.Container>
     </UserActionFormLayout>
   )
+}
+
+export function FooterSkeleton() {
+  return <Skeleton className="h-12 w-full" />
 }
 
 const ETH_NFT_DONATION_AMOUNT_DISPLAY = `${fromBigNumber(ETH_NFT_DONATION_AMOUNT)} ${
