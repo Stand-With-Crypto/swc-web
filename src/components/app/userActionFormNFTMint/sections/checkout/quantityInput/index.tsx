@@ -1,8 +1,9 @@
 import { Minus, Plus } from 'lucide-react'
 import React from 'react'
 
-import styles from './quantityInput.module.css'
 import { Button, ButtonProps } from '@/components/ui/button'
+
+import styles from './quantityInput.module.css'
 
 interface QuantityInputProps {
   value: number
@@ -11,10 +12,13 @@ interface QuantityInputProps {
   onDecrement: () => void
 }
 
+// TODO UI to show the user what is the max quantity
+const MAX_QUANTITY = 36
+
 export function QuantityInput({ value, onChange, onIncrement, onDecrement }: QuantityInputProps) {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = Number(event.target.value)
-    if (newValue > 0 && newValue <= 1000) {
+    if (newValue > 0 && newValue < MAX_QUANTITY) {
       onChange(newValue)
     }
   }
@@ -35,7 +39,7 @@ export function QuantityInput({ value, onChange, onIncrement, onDecrement }: Qua
         />
       </div>
 
-      <ControlButton disabled={value > 1000} onClick={onIncrement}>
+      <ControlButton disabled={value >= MAX_QUANTITY} onClick={onIncrement}>
         <Plus className="h-4 w-4" />
       </ControlButton>
     </div>

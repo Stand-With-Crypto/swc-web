@@ -144,6 +144,7 @@ export function UserActionFormNFTMintCheckout({
           </div>
         </Card>
 
+        {/* TODO review UI */}
         {!checkoutError && (
           <label className="flex cursor-pointer items-center gap-4">
             <Checkbox
