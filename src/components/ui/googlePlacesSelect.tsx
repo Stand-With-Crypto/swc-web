@@ -5,10 +5,10 @@ import usePlacesAutocomplete from 'use-places-autocomplete'
 import { Combobox } from '@/components/ui/combobox'
 import { InputWithIcons } from '@/components/ui/inputWithIcons'
 import { useScript } from '@/hooks/useScript'
+import { isBrowser } from '@/utils/shared/executionEnvironment'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { cn } from '@/utils/web/cn'
 import { GooglePlaceAutocompletePrediction } from '@/utils/web/googlePlaceUtils'
-import { isBrowser } from '@/utils/shared/executionEnvironment'
 
 const CALLBACK_NAME = 'PLACES_AUTOCOMPLETE'
 
