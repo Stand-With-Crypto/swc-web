@@ -1,7 +1,8 @@
 import 'server-only'
 
-import { getSumDonations } from '@/data/aggregations/getSumDonations'
 import { NextResponse } from 'next/server'
+
+import { getSumDonations } from '@/data/aggregations/getSumDonations'
 
 export const dynamic = 'error'
 export const revalidate = 1

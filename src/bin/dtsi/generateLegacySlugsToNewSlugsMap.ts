@@ -1,11 +1,12 @@
-process.env.USE_DTSI_PRODUCTION_API_ON_LOCAL = 'true'
 import { runBin } from '@/bin/runBin'
 import { fetchWithLocalCache } from '@/bin/utils/fetchWithLocalCache'
+import { persistJSONToStaticContentFolder } from '@/bin/utils/persistJSONToStaticContentFolder'
 import { queryDTSIAllPeople } from '@/data/dtsi/queries/queryDTSIAllPeople'
 import legacyPoliticianSlugs from '@/staticContent/dtsi/legacyPoliticianSlugs.json'
-import { getLogger } from '@/utils/shared/logger'
 import _manuallyModifiedLegacyPoliticianToDTSIMap from '@/staticContent/dtsi/manuallyModifiedLegacyPoliticianToDTSIMap.json'
-import { persistJSONToStaticContentFolder } from '@/bin/utils/persistJSONToStaticContentFolder'
+import { getLogger } from '@/utils/shared/logger'
+
+process.env.USE_DTSI_PRODUCTION_API_ON_LOCAL = 'true'
 
 const logger = getLogger('dtsi/generateLegacySlugsToNewSlugsMap')
 const manuallyModifiedLegacyPoliticianToDTSIMap: Record<string, string> =

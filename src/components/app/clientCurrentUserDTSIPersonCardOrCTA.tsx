@@ -1,5 +1,7 @@
 'use client'
+import { useCallback, useEffect, useState } from 'react'
 import _ from 'lodash'
+
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
@@ -18,7 +20,6 @@ import { possessive } from '@/utils/shared/possessive'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { getLocalUser, setLocalUserPersistedValues } from '@/utils/web/clientLocalUser'
 import { GooglePlaceAutocompletePrediction } from '@/utils/web/googlePlaceUtils'
-import { useCallback, useEffect, useState } from 'react'
 
 export function ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: SupportedLocale }) {
   const user = useApiResponseForUserFullProfileInfo()

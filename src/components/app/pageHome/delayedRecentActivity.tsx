@@ -1,11 +1,12 @@
 'use client'
+import { useRef } from 'react'
+import { TabsContent } from '@radix-ui/react-tabs'
+import { useInView } from 'framer-motion'
+
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
 import { RecentActivityRowAnimatedContainer } from '@/components/app/recentActivityRow/recentActivityRowAnimatedContainer'
 import { PublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 import { useApiRecentActivity } from '@/hooks/useApiRecentActivity'
-import { TabsContent } from '@radix-ui/react-tabs'
-import { useInView } from 'framer-motion'
-import { useRef } from 'react'
 
 export function DelayedRecentActivity(props: { actions: PublicRecentActivity }) {
   const actions = useApiRecentActivity(props.actions, { limit: 10 }).data

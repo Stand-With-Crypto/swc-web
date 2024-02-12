@@ -5,8 +5,8 @@ import { type DialogProps } from '@radix-ui/react-dialog'
 import { Command as CommandPrimitive } from 'cmdk'
 import { Search, X } from 'lucide-react'
 
-import { cn } from '@/utils/web/cn'
 import { Dialog, DialogContent } from '@/components/ui/dialog'
+import { cn } from '@/utils/web/cn'
 import { PrimitiveComponentAnalytics } from '@/utils/web/primitiveComponentAnalytics'
 
 const Command = React.forwardRef<
@@ -145,11 +145,11 @@ CommandShortcut.displayName = 'CommandShortcut'
 export {
   Command,
   CommandDialog,
-  CommandInput,
-  CommandList,
   CommandEmpty,
   CommandGroup,
+  CommandInput,
   CommandItem,
-  CommandShortcut,
+  CommandList,
   CommandSeparator,
+  CommandShortcut,
 }

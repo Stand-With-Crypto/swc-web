@@ -1,6 +1,3 @@
-import { ClientAddress, getClientAddress } from '@/clientModels/clientAddress'
-import { ClientNFTMint, getClientNFTMint } from '@/clientModels/clientNFTMint'
-import { ClientModel, getClientModel } from '@/clientModels/utils'
 import {
   Address,
   NFTMint,
@@ -12,6 +9,10 @@ import {
   UserActionOptIn,
   UserActionType,
 } from '@prisma/client'
+
+import { ClientAddress, getClientAddress } from '@/clientModels/clientAddress'
+import { ClientNFTMint, getClientNFTMint } from '@/clientModels/clientNFTMint'
+import { ClientModel, getClientModel } from '@/clientModels/utils'
 
 /*
 Assumption: we will always want to interact with the user actions and their related type joins together

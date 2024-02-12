@@ -1,3 +1,5 @@
+import React from 'react'
+
 import { DTSIStanceDetailsBillRelationship } from '@/components/app/dtsiStanceDetails/dtsiStanceDetailsBillRelationship'
 import { DTSIStanceDetailsQuote } from '@/components/app/dtsiStanceDetails/dtsiStanceDetailsQuote'
 import { DTSIStanceDetailsTweet } from '@/components/app/dtsiStanceDetails/dtsiStanceDetailsTweet'
@@ -6,7 +8,6 @@ import {
   IStanceDetailsProps,
 } from '@/components/app/dtsiStanceDetails/types'
 import { DTSI_PersonStanceType } from '@/data/dtsi/generated'
-import React from 'react'
 
 export const DTSIStanceDetails: React.FC<IStanceDetailsProps> = ({
   stance: passedStance,

@@ -1,10 +1,11 @@
+import { UserInformationVisibility } from '@prisma/client'
+
 import { ClientUser, ClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
 import {
   SensitiveDataClientUser,
   SensitiveDataClientUserWithENSData,
 } from '@/clientModels/clientUser/sensitiveDataClientUser'
 import { userFullName } from '@/utils/shared/userFullName'
-import { UserInformationVisibility } from '@prisma/client'
 
 export const getUserDisplayName = (user: ClientUserWithENSData | null) => {
   if (user?.informationVisibility === UserInformationVisibility.ANONYMOUS) {

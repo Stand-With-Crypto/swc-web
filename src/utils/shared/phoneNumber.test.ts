@@ -1,6 +1,7 @@
-import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
-import _ from 'lodash'
 import { expect } from '@jest/globals'
+import _ from 'lodash'
+
+import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
 
 it('Correctly parses phone number strings', () => {
   expect(

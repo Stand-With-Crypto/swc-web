@@ -1,10 +1,11 @@
+import Cookies from 'js-cookie'
+
 import {
   COOKIE_CONSENT_COOKIE_NAME,
   CookieConsentPermissions,
   DEFAULT_COOKIE_CONSENT,
   deserializeCookieConsent,
 } from '@/utils/shared/cookieConsent'
-import Cookies from 'js-cookie'
 
 export let mutableClientCookieConsent: CookieConsentPermissions | null | undefined = undefined
 export function setClientCookieConsent(val: CookieConsentPermissions | null) {

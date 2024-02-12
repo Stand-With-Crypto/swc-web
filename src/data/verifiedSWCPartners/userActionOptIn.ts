@@ -1,3 +1,17 @@
+import {
+  Address,
+  Prisma,
+  User,
+  UserActionOptInType,
+  UserActionType,
+  UserEmailAddress,
+  UserEmailAddressSource,
+  UserInformationVisibility,
+  UserSession,
+} from '@prisma/client'
+import * as Sentry from '@sentry/nextjs'
+import { z } from 'zod'
+
 import { CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/upsertAdvocateInCapitolCanary'
 import { inngest } from '@/inngest/inngest'
 import {
@@ -24,19 +38,6 @@ import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
 import { zodFirstName, zodLastName } from '@/validation/fields/zodName'
 import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
-import {
-  Address,
-  Prisma,
-  User,
-  UserActionOptInType,
-  UserActionType,
-  UserEmailAddress,
-  UserEmailAddressSource,
-  UserInformationVisibility,
-  UserSession,
-} from '@prisma/client'
-import * as Sentry from '@sentry/nextjs'
-import { z } from 'zod'
 
 export const zodVerifiedSWCPartnersUserActionOptIn = z.object({
   emailAddress: z.string().email().toLowerCase().trim(),

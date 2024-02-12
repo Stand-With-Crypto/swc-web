@@ -1,5 +1,5 @@
-import NextLink from 'next/link'
 import React from 'react'
+import NextLink from 'next/link'
 
 export const InternalLink = React.forwardRef<
   HTMLAnchorElement,

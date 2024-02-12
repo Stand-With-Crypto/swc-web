@@ -1,4 +1,9 @@
 'use server'
+import 'server-only'
+
+import { User, UserActionType, UserCryptoAddress, UserInformationVisibility } from '@prisma/client'
+import * as Sentry from '@sentry/nextjs'
+
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
 import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
 import { prismaClient } from '@/utils/server/prismaClient'
@@ -9,18 +14,15 @@ import {
   getServerPeopleAnalytics,
 } from '@/utils/server/serverAnalytics'
 import {
-  ServerLocalUser,
   mapLocalUserToUserDatabaseFields,
   parseLocalUserFromCookies,
+  ServerLocalUser,
 } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { UserActionTweetCampaignName } from '@/utils/shared/userActionCampaigns'
-import { User, UserActionType, UserCryptoAddress, UserInformationVisibility } from '@prisma/client'
-import * as Sentry from '@sentry/nextjs'
-import 'server-only'
 
 const logger = getLogger(`actionCreateUserActionTweet`)
 

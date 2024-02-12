@@ -1,11 +1,13 @@
+import 'server-only'
+
+import { UserInternalStatus } from '@prisma/client'
+import _ from 'lodash'
+
 import { getClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
 import { getClientUserAction } from '@/clientModels/clientUserAction/clientUserAction'
 import { queryDTSIPeopleBySlugForUserActions } from '@/data/dtsi/queries/queryDTSIPeopleBySlugForUserActions'
 import { getENSDataMapFromCryptoAddressesAndFailGracefully } from '@/data/web3/getENSDataFromCryptoAddress'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { UserInternalStatus } from '@prisma/client'
-import _ from 'lodash'
-import 'server-only'
 
 interface RecentActivityConfig {
   limit: number

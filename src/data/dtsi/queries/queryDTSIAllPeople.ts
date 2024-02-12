@@ -1,7 +1,8 @@
+import * as Sentry from '@sentry/nextjs'
+
 import { fetchDTSI } from '@/data/dtsi/fetchDTSI'
 import { fragmentDTSIPersonCard } from '@/data/dtsi/fragments/fragmentDTSIPersonCard'
 import { DTSI_AllPeopleQuery, DTSI_AllPeopleQueryVariables } from '@/data/dtsi/generated'
-import * as Sentry from '@sentry/nextjs'
 
 export const query = /* GraphQL */ `
   query AllPeople($limit: Int!) {

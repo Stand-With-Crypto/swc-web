@@ -1,4 +1,5 @@
 import * as Sentry from '@sentry/nextjs'
+
 import { isBrowser } from '@/utils/shared/executionEnvironment'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 

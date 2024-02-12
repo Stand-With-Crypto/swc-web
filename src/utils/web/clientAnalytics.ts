@@ -1,10 +1,11 @@
+import { track as vercelTrack } from '@vercel/analytics'
+import mixpanel from 'mixpanel-browser'
+
+import { isCypress, isStorybook } from '@/utils/shared/executionEnvironment'
 import { customLogger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { AnalyticProperties } from '@/utils/shared/sharedAnalytics'
-import mixpanel from 'mixpanel-browser'
-import { track as vercelTrack } from '@vercel/analytics'
 import { formatVercelAnalyticsEventProperties } from '@/utils/shared/vercelAnalytics'
-import { isCypress, isStorybook } from '@/utils/shared/executionEnvironment'
 import { getClientCookieConsent } from '@/utils/web/clientCookieConsent'
 
 const NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN = requiredEnv(

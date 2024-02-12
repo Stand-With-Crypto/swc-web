@@ -1,12 +1,13 @@
 'use client'
 
+import { Suspense } from 'react'
+
 import { UserActionFormVoterRegistration } from '@/components/app/userActionFormVoterRegistration'
 import { ANALYTICS_NAME_USER_ACTION_FORM_VOTER_REGISTRATION } from '@/components/app/userActionFormVoterRegistration/constants'
 import { LazyUserActionFormVoterRegistration } from '@/components/app/userActionFormVoterRegistration/lazyLoad'
 import { UserActionFormVoterRegistrationSkeleton } from '@/components/app/userActionFormVoterRegistration/skeleton'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { useDialog } from '@/hooks/useDialog'
-import { Suspense } from 'react'
 
 export function UserActionFormVoterRegistrationDialog({
   children,

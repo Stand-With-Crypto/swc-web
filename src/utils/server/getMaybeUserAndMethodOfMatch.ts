@@ -1,11 +1,12 @@
 'use server'
-import * as Sentry from '@sentry/nextjs'
-import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
-import { getUserSessionId } from '@/utils/server/serverUserSessionId'
-import { prismaClient } from '@/utils/server/prismaClient'
 import { Prisma, UserCryptoAddress } from '@prisma/client'
-import _ from 'lodash'
 import { GetFindResult } from '@prisma/client/runtime/library'
+import * as Sentry from '@sentry/nextjs'
+import _ from 'lodash'
+
+import { prismaClient } from '@/utils/server/prismaClient'
+import { getUserSessionId } from '@/utils/server/serverUserSessionId'
+import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
 
 export type UserAndMethodOfMatch<
   I extends Omit<Prisma.UserFindFirstArgs, 'where'> = Omit<Prisma.UserFindFirstArgs, 'where'>,

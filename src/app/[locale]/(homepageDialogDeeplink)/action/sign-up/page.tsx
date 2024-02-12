@@ -1,12 +1,13 @@
 'use client'
+import React from 'react'
+import { useRouter } from 'next/navigation'
+
 import { ThirdwebLoginContent } from '@/components/app/authentication/thirdwebLoginContent'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useThirdwebData } from '@/hooks/useThirdwebData'
 import { cn } from '@/utils/web/cn'
-import { useRouter } from 'next/navigation'
-import React from 'react'
 
 export default function UserActionOptInSWCDeepLink() {
   const urls = useIntlUrls()

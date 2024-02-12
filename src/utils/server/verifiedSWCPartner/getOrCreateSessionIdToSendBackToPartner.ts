@@ -1,6 +1,7 @@
-import { prismaClient } from '@/utils/server/prismaClient'
 import { User, UserSession } from '@prisma/client'
 import _ from 'lodash'
+
+import { prismaClient } from '@/utils/server/prismaClient'
 
 export async function getOrCreateSessionIdToSendBackToPartner(
   user: User & { userSessions: Array<UserSession> },

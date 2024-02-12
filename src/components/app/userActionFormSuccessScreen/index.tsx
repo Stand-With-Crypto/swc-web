@@ -1,9 +1,10 @@
 'use client'
+import { useMemo } from 'react'
+
 import { UserActionFormSuccessScreenMainCTA } from '@/components/app/userActionFormSuccessScreen/userActionFormSuccessScreenMainCTA'
 import { UserActionFormSuccessScreenNextAction } from '@/components/app/userActionFormSuccessScreen/userActionFormSuccessScreenNextAction'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
-import { useMemo } from 'react'
 
 type Props = React.ComponentPropsWithoutRef<typeof UserActionFormSuccessScreenMainCTA>
 

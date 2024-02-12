@@ -1,5 +1,7 @@
 'use client'
 
+import { ColumnDef } from '@tanstack/react-table'
+
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
 import { SortableHeader } from '@/components/app/dtsiClientPersonDataTable/dataTable'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
@@ -15,7 +17,6 @@ import {
 import { convertDTSIStanceScoreToCryptoSupportLanguage } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { getUSStateNameFromStateCode } from '@/utils/shared/usStateUtils'
-import { ColumnDef } from '@tanstack/react-table'
 
 export type Person = Awaited<ReturnType<typeof queryDTSIAllPeople>>['people'][0]
 
@@ -48,7 +49,7 @@ export const getDTSIClientPersonDataTableColumns = ({
     header: ({ column }) => {
       return (
         <SortableHeader column={column}>
-          Stance <span className="hidden md:inline">on crypto</span>
+          <span>Stance</span> <span className="ml-1 hidden md:inline-block">on crypto</span>
         </SortableHeader>
       )
     },

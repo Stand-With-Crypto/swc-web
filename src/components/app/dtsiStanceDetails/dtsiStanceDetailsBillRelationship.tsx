@@ -1,3 +1,6 @@
+import React from 'react'
+import _ from 'lodash'
+
 import {
   DTSIStanceDetailsBillRelationshipProp,
   DTSIStanceDetailsStanceProp,
@@ -5,8 +8,6 @@ import {
 } from '@/components/app/dtsiStanceDetails/types'
 import { Badge } from '@/components/ui/badge'
 import { dtsiPersonBillRelationshipTypeAsVerb } from '@/utils/dtsi/dtsiPersonBillRelationshipUtils'
-import _ from 'lodash'
-import React from 'react'
 
 type IStanceDetailsBillRelationshipProps = Omit<IStanceDetailsProps, 'stance'> & {
   stance: DTSIStanceDetailsStanceProp<DTSIStanceDetailsBillRelationshipProp>

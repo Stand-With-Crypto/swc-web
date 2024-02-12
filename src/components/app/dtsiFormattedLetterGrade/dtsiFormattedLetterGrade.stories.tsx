@@ -1,6 +1,7 @@
+import type { Meta } from '@storybook/react'
+
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { DTSILetterGrade } from '@/utils/dtsi/dtsiStanceScoreUtils'
-import type { Meta } from '@storybook/react'
 
 const meta = {
   title: 'App/DTSIFormattedLetterGrade',
