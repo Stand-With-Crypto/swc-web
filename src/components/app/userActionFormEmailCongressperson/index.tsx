@@ -97,14 +97,12 @@ export function UserActionFormEmailCongressperson({
     const userDefaultValues = getDefaultValues({ user, dtsiSlug: undefined })
 
     if (initialValues) {
-      const splitFullName = initialValues.fullName.split(' ')
-
       return {
         ...userDefaultValues,
         address: userDefaultValues.address || { description: initialValues?.address, place_id: '' },
         emailAddress: userDefaultValues.emailAddress || initialValues?.email,
-        firstName: userDefaultValues.firstName || splitFullName[0],
-        lastName: userDefaultValues.lastName || splitFullName.splice(1).join(' '),
+        firstName: userDefaultValues.firstName || initialValues.firstName,
+        lastName: userDefaultValues.lastName || initialValues.lastName,
       }
     }
 

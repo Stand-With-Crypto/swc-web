@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 import * as Sentry from '@sentry/nextjs'
 import { useSearchParams } from 'next/navigation'
 
-type Field = 'address' | 'email' | 'fullName' | 'zipCode'
+type Field = 'address' | 'email' | 'fullName' | 'zipCode' | 'firstName' | 'lastName'
 type RnParams = Partial<Record<Field, string>>
 
 /**
@@ -22,11 +22,24 @@ export function useEncodedInitialValuesQueryParam<T extends RnParams>(initialVal
         const decoded = atob(encodedRn)
         const userData = JSON.parse(decoded) as T
 
-        Object.keys(initialValues).forEach(key => {
+        const keys = Object.keys(initialValues)
+        keys.forEach(key => {
           if (userData[key as Field]) {
             initialValues[key as Field] = userData[key as Field]
           }
         })
+
+        // RN does not pass in firstName and lastName, so derive from full name
+        if (userData.fullName) {
+          const splitFullName = userData.fullName.split(' ')
+
+          if (keys.includes('firstName')) {
+            initialValues.firstName = splitFullName[0]
+          }
+          if (keys.includes('lastName')) {
+            initialValues.lastName = splitFullName.splice(1).join(' ')
+          }
+        }
 
         return initialValues
       } catch (e) {

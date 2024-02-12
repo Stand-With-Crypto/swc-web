@@ -22,7 +22,8 @@ function UserActionFormEmailCongresspersonDeeplinkWrapperContent() {
   const initialValues = useEncodedInitialValuesQueryParam<FormFields>({
     address: '',
     email: '',
-    fullName: '',
+    firstName: '',
+    lastName: '',
   })
 
   return fetchUser.isLoading ? (
