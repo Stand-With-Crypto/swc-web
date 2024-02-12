@@ -137,8 +137,8 @@ export function PageHome({
               </TabsList>
             </div>
             <DelayedRecentActivity actions={actions} />
-            <TabsContent className="space-y-7" value={RecentActivityAndLeaderboardTabs.LEADERBOARD}>
-              <p className="mt-2 h-7 text-center text-xs text-gray-500">
+            <TabsContent value={RecentActivityAndLeaderboardTabs.LEADERBOARD}>
+              <p className="mt-2 h-8 text-center text-xs text-gray-500 lg:h-10">
                 Donations to{' '}
                 <ExternalLink
                   href={
@@ -149,14 +149,16 @@ export function PageHome({
                 </ExternalLink>
                 , a pro-crypto Super PAC, are not included on the leaderboard.
               </p>
-              {sumDonationsByUser.map((donor, index) => (
-                <SumDonationsByUserRow
-                  index={index}
-                  key={index}
-                  locale={locale}
-                  sumDonations={donor}
-                />
-              ))}
+              <div className="space-y-8 lg:space-y-10">
+                {sumDonationsByUser.map((donor, index) => (
+                  <SumDonationsByUserRow
+                    index={index}
+                    key={index}
+                    locale={locale}
+                    sumDonations={donor}
+                  />
+                ))}
+              </div>
             </TabsContent>
           </Tabs>
           <div className="space-x-4 text-center">
