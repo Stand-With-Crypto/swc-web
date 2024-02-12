@@ -14,8 +14,10 @@ import {
   NFTDisplaySkeleton,
   UserActionFormLayout,
 } from '@/components/app/userActionFormCommon'
-import { UserActionFormNFTMintSectionNames } from '@/components/app/userActionFormNFTMint'
-import { MINT_NFT_CONTRACT_ADDRESS } from '@/components/app/userActionFormNFTMint/constants'
+import {
+  MINT_NFT_CONTRACT_ADDRESS,
+  UserActionFormNFTMintSectionNames,
+} from '@/components/app/userActionFormNFTMint/constants'
 import {
   CheckoutError,
   useCheckoutError,

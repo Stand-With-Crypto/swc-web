@@ -1,7 +1,11 @@
 import React from 'react'
 import { toast } from 'sonner'
 
-import { MINT_NFT_CONTRACT_ADDRESS } from '@/components/app/userActionFormNFTMint/constants'
+import {
+  ANALYTICS_NAME_USER_ACTION_FORM_NFT_MINT,
+  MINT_NFT_CONTRACT_ADDRESS,
+  UserActionFormNFTMintSectionNames,
+} from '@/components/app/userActionFormNFTMint/constants'
 import { useSections } from '@/hooks/useSections'
 import { useSendMintNFTTransaction } from '@/hooks/useSendMintNFTTransaction'
 import { toastGenericError } from '@/utils/web/toastUtils'
@@ -14,16 +18,11 @@ import {
 } from './sections/transactionWatch'
 import { useCheckoutController } from './useCheckoutController'
 
-export enum UserActionFormNFTMintSectionNames {
-  INTRO = 'intro',
-  CHECKOUT = 'checkout',
-  TRANSACTION_WATCH = 'transactionWatch',
-}
 export function UserActionFormNFTMint(_props: { onCancel: () => void; onSuccess: () => void }) {
   const sectionProps = useSections({
     sections: Object.values(UserActionFormNFTMintSectionNames),
     initialSectionId: UserActionFormNFTMintSectionNames.INTRO,
-    analyticsName: 'User Action Form NFT Mint',
+    analyticsName: ANALYTICS_NAME_USER_ACTION_FORM_NFT_MINT,
   })
 
   const checkoutController = useCheckoutController()

@@ -9,10 +9,10 @@ import {
   NFTDisplaySkeleton,
   UserActionFormLayout,
 } from '@/components/app/userActionFormCommon'
-import { UserActionFormNFTMintSectionNames } from '@/components/app/userActionFormNFTMint'
 import {
   ETH_NFT_DONATION_AMOUNT,
   MINT_NFT_CONTRACT_ADDRESS,
+  UserActionFormNFTMintSectionNames,
 } from '@/components/app/userActionFormNFTMint/constants'
 import { Button } from '@/components/ui/button'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
