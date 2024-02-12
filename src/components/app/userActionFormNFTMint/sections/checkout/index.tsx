@@ -1,12 +1,13 @@
-import Balancer from 'react-wrap-balancer'
 import React from 'react'
+import Balancer from 'react-wrap-balancer'
 import {
-  Web3Button,
   useAddress,
   useConnectionStatus,
   useContract,
   useContractMetadata,
+  Web3Button,
 } from '@thirdweb-dev/react'
+import { noop } from 'lodash'
 
 import {
   NFTDisplay,
@@ -15,27 +16,26 @@ import {
 } from '@/components/app/userActionFormCommon'
 import { UserActionFormNFTMintSectionNames } from '@/components/app/userActionFormNFTMint'
 import { MINT_NFT_CONTRACT_ADDRESS } from '@/components/app/userActionFormNFTMint/constants'
+import {
+  CheckoutError,
+  useCheckoutError,
+} from '@/components/app/userActionFormNFTMint/sections/checkout/useCheckoutError'
+import { UseCheckoutControllerReturn } from '@/components/app/userActionFormNFTMint/useCheckoutController'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
-import { UseSectionsReturn } from '@/hooks/useSections'
-import { SupportedCryptoCurrencyCodes } from '@/utils/shared/currency'
-import { PageTitle } from '@/components/ui/pageTitleText'
-import { PageSubTitle } from '@/components/ui/pageSubTitle'
-import { UseCheckoutControllerReturn } from '@/components/app/userActionFormNFTMint/useCheckoutController'
-import { Skeleton } from '@/components/ui/skeleton'
-import {
-  useCheckoutError,
-  CheckoutError,
-} from '@/components/app/userActionFormNFTMint/sections/checkout/useCheckoutError'
-import { toBigNumber } from '@/utils/shared/bigNumber'
-import { theme } from '@/utils/web/thirdweb/theme'
-import { LoadingOverlay } from '@/components/ui/loadingOverlay'
-import { MintStatus } from '@/hooks/useSendMintNFTTransaction'
+import { Checkbox } from '@/components/ui/checkbox'
 import { ErrorMessage } from '@/components/ui/errorMessage'
+import { LoadingOverlay } from '@/components/ui/loadingOverlay'
+import { PageSubTitle } from '@/components/ui/pageSubTitle'
+import { PageTitle } from '@/components/ui/pageTitleText'
+import { Skeleton } from '@/components/ui/skeleton'
+import { UseSectionsReturn } from '@/hooks/useSections'
+import { MintStatus } from '@/hooks/useSendMintNFTTransaction'
+import { toBigNumber } from '@/utils/shared/bigNumber'
+import { SupportedCryptoCurrencyCodes } from '@/utils/shared/currency'
+import { theme } from '@/utils/web/thirdweb/theme'
 
 import { QuantityInput } from './quantityInput'
-import { noop } from 'lodash'
-import { Checkbox } from '@/components/ui/checkbox'
 
 interface UserActionFormNFTMintCheckoutProps
   extends UseSectionsReturn<UserActionFormNFTMintSectionNames>,

@@ -1,7 +1,7 @@
+import React from 'react'
 import { Base } from '@thirdweb-dev/chains'
 import { useBalance, useChainId } from '@thirdweb-dev/react'
 import { BigNumber } from 'ethers'
-import React from 'react'
 
 export type CheckoutError = 'insufficientFunds' | 'networkSwitch'
 

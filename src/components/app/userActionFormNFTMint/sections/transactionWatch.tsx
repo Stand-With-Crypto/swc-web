@@ -1,33 +1,33 @@
 'use client'
 
 import React from 'react'
+import { UserActionType } from '@prisma/client'
 
+import {
+  actionCreateUserActionMintNFT,
+  CreateActionMintNFTInput,
+} from '@/actions/actionCreateUserActionNFTMint'
 import {
   NFTDisplay,
   NFTDisplaySkeleton,
   UserActionFormLayout,
 } from '@/components/app/userActionFormCommon'
 import { MINT_NFT_CONTRACT_ADDRESS } from '@/components/app/userActionFormNFTMint/constants'
-import { useThirdwebContractMetadata } from '@/hooks/useThirdwebContractMetadata'
-import { TransactionResponse } from '@/hooks/useSendMintNFTTransaction'
-import { PageTitle } from '@/components/ui/pageTitleText'
-import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import {
   UserActionFormSuccessScreenNextAction,
   UserActionFormSuccessScreenNextActionSkeleton,
 } from '@/components/app/userActionFormSuccessScreen/userActionFormSuccessScreenNextAction'
-import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
+import { PageSubTitle } from '@/components/ui/pageSubTitle'
+import { PageTitle } from '@/components/ui/pageTitleText'
 import { Skeleton } from '@/components/ui/skeleton'
+import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
 import { useEffectOnce } from '@/hooks/useEffectOnce'
-import { toastGenericError } from '@/utils/web/toastUtils'
-import {
-  CreateActionMintNFTInput,
-  actionCreateUserActionMintNFT,
-} from '@/actions/actionCreateUserActionNFTMint'
+import { TransactionResponse } from '@/hooks/useSendMintNFTTransaction'
+import { useThirdwebContractMetadata } from '@/hooks/useThirdwebContractMetadata'
 import { UserActionNftMintCampaignName } from '@/utils/shared/userActionCampaigns'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
-import { UserActionType } from '@prisma/client'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
+import { toastGenericError } from '@/utils/web/toastUtils'
 
 export function UserActionFormNFTMintTransactionWatch({
   sendTransactionResponse,

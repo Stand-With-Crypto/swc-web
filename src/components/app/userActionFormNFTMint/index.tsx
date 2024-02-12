@@ -1,13 +1,13 @@
-import { useSections } from '@/hooks/useSections'
-import { toast } from 'sonner'
 import React from 'react'
+import { toast } from 'sonner'
 
 import { MINT_NFT_CONTRACT_ADDRESS } from '@/components/app/userActionFormNFTMint/constants'
+import { useSections } from '@/hooks/useSections'
 import { useSendMintNFTTransaction } from '@/hooks/useSendMintNFTTransaction'
 import { toastGenericError } from '@/utils/web/toastUtils'
 
-import { UserActionFormNFTMintIntro } from './sections/intro'
 import { UserActionFormNFTMintCheckout } from './sections/checkout'
+import { UserActionFormNFTMintIntro } from './sections/intro'
 import {
   UserActionFormNFTMintTransactionWatch,
   UserActionFormNFTMintTransactionWatchSkeleton,

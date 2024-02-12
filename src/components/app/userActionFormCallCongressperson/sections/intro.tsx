@@ -3,10 +3,9 @@ import React, { useEffect } from 'react'
 import { Check } from 'lucide-react'
 
 import { SectionNames } from '@/components/app/userActionFormCallCongressperson/constants'
+import { UserActionFormLayout } from '@/components/app/userActionFormCommon/layout'
 import { Button } from '@/components/ui/button'
 import { UseSectionsReturn } from '@/hooks/useSections'
-
-import { UserActionFormLayout } from '@/components/app/userActionFormCommon/layout'
 
 export function Intro({ goToSection }: UseSectionsReturn<SectionNames>) {
   const ref = React.useRef<HTMLButtonElement>(null)

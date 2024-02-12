@@ -2,26 +2,26 @@
 
 import { ValidContractInstance } from '@thirdweb-dev/react'
 
+import { MaybeAuthenticatedContent } from '@/components/app/authentication/maybeAuthenticatedContent'
+import { ThirdwebLoginDialog } from '@/components/app/authentication/thirdwebLoginContent'
 import {
-  UserActionFormLayout,
   NFTDisplay,
   NFTDisplaySkeleton,
+  UserActionFormLayout,
 } from '@/components/app/userActionFormCommon'
-import { PageSubTitle } from '@/components/ui/pageSubTitle'
-import { PageTitle } from '@/components/ui/pageTitleText'
-import { UseSectionsReturn } from '@/hooks/useSections'
 import { UserActionFormNFTMintSectionNames } from '@/components/app/userActionFormNFTMint'
-import { Button } from '@/components/ui/button'
 import {
   ETH_NFT_DONATION_AMOUNT,
   MINT_NFT_CONTRACT_ADDRESS,
 } from '@/components/app/userActionFormNFTMint/constants'
-import { SupportedCryptoCurrencyCodes } from '@/utils/shared/currency'
+import { Button } from '@/components/ui/button'
+import { PageSubTitle } from '@/components/ui/pageSubTitle'
+import { PageTitle } from '@/components/ui/pageTitleText'
 import { Skeleton } from '@/components/ui/skeleton'
+import { UseSectionsReturn } from '@/hooks/useSections'
 import { useThirdwebContractMetadata } from '@/hooks/useThirdwebContractMetadata'
 import { fromBigNumber } from '@/utils/shared/bigNumber'
-import { MaybeAuthenticatedContent } from '@/components/app/authentication/maybeAuthenticatedContent'
-import { ThirdwebLoginDialog } from '@/components/app/authentication/thirdwebLoginContent'
+import { SupportedCryptoCurrencyCodes } from '@/utils/shared/currency'
 
 export function UserActionFormNFTMintIntro({
   goToSection,

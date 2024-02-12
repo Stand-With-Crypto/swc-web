@@ -1,8 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
+import { cva } from 'class-variance-authority'
+
 import { NextImage } from '@/components/ui/image'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { Skeleton } from '@/components/ui/skeleton'
-import { cva } from 'class-variance-authority'
 
 type NFTDisplaySize = 'sm' | 'md' | 'lg'
 

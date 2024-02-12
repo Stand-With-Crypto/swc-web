@@ -1,4 +1,4 @@
-import { ValidContractInstance, useContract, useContractMetadata } from '@thirdweb-dev/react'
+import { useContract, useContractMetadata, ValidContractInstance } from '@thirdweb-dev/react'
 
 export type ThirdwebContractMetadata = Awaited<ReturnType<ValidContractInstance['metadata']['get']>>
 

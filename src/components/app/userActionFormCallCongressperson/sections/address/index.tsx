@@ -7,6 +7,7 @@ import useSWR from 'swr'
 
 import type { UserActionFormCallCongresspersonProps } from '@/components/app/userActionFormCallCongressperson'
 import { SectionNames } from '@/components/app/userActionFormCallCongressperson/constants'
+import { UserActionFormLayout } from '@/components/app/userActionFormCommon/layout'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -27,7 +28,6 @@ import { useIsMobile } from '@/hooks/useIsMobile'
 import { getGoogleCivicDataFromAddress } from '@/utils/shared/googleCivicInfo'
 import { trackFormSubmissionSyncErrors } from '@/utils/web/formUtils'
 import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
-import { UserActionFormLayout } from '@/components/app/userActionFormCommon/layout'
 
 import {
   findRepresentativeCallFormValidationSchema,

@@ -1,2 +1,2 @@
-export * from './toBigNumber'
 export * from './fromBigNumber'
+export * from './toBigNumber'

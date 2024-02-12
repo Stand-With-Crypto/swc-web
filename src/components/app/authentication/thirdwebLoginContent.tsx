@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import { ConnectEmbed, ConnectEmbedProps, lightTheme } from '@thirdweb-dev/react'
+import { ConnectEmbed, ConnectEmbedProps } from '@thirdweb-dev/react'
 import { useRouter } from 'next/navigation'
 
 import { Dialog, DialogContent, DialogProps, DialogTrigger } from '@/components/ui/dialog'
@@ -10,8 +10,8 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useDialog } from '@/hooks/useDialog'
-import { theme } from '@/utils/web/thirdweb/theme'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
+import { theme } from '@/utils/web/thirdweb/theme'
 
 export function ThirdwebLoginDialog({
   children,

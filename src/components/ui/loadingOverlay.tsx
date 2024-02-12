@@ -1,6 +1,7 @@
-import { cn } from '@/utils/web/cn'
-import { VariantProps, cva } from 'class-variance-authority'
+import { cva, VariantProps } from 'class-variance-authority'
 import { Dot } from 'lucide-react'
+
+import { cn } from '@/utils/web/cn'
 
 const loadingOverlayVariants = cva('', {
   variants: {

@@ -1,8 +1,8 @@
-import * as Sentry from '@sentry/nextjs'
-import { UserWallet, useContract, useContractMetadata, useSDK } from '@thirdweb-dev/react'
 import React from 'react'
-import { keccak256, toHex } from 'viem'
+import * as Sentry from '@sentry/nextjs'
+import { useContract, useContractMetadata, UserWallet, useSDK } from '@thirdweb-dev/react'
 import { noop } from 'lodash'
+import { keccak256, toHex } from 'viem'
 
 import { logger } from '@/utils/shared/logger'
 

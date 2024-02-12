@@ -4,6 +4,7 @@ import { UserActionType } from '@prisma/client'
 import { ChevronRight } from 'lucide-react'
 
 import { NextImage } from '@/components/ui/image'
+import { Skeleton } from '@/components/ui/skeleton'
 import { cn } from '@/utils/web/cn'
 
 export interface UserActionRowCTAProps {
