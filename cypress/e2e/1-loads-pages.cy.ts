@@ -5,7 +5,7 @@ it('sanity checks that all the pages loaded as expected', () => {
   cy.get('h1').contains('If you care')
   // verify the mission page loads
   cy.visit('/about')
-  cy.get('h1').contains('Join the fight')
+  cy.get('h1').contains('Our mission')
 
   cy.visit('/leaderboard')
   cy.get('h1').contains('Our community')
