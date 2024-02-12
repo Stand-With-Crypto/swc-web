@@ -1,1 +1,1 @@
-export type RnParams = { address: string; email: string; fullName: string }
+export type FormFields = { address: string; email: string; fullName: string }

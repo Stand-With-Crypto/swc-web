@@ -12,7 +12,7 @@ import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-p
 import { DTSICongresspersonAssociatedWithFormAddress } from '@/components/app/dtsiCongresspersonAssociatedWithFormAddress'
 import { ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON } from '@/components/app/userActionFormEmailCongressperson/constants'
 import { getDefaultText } from '@/components/app/userActionFormEmailCongressperson/getDefaultText'
-import { RnParams } from '@/components/app/userActionFormEmailCongressperson/types'
+import { FormFields } from '@/components/app/userActionFormEmailCongressperson/types'
 import { Button } from '@/components/ui/button'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import {
@@ -84,40 +84,46 @@ const getDefaultValues = ({
 export function UserActionFormEmailCongressperson({
   onSuccess,
   user,
-  rnParams,
+  initialValues,
 }: {
   user: GetUserFullProfileInfoResponse['user']
   onCancel: () => void
   onSuccess: () => void
-  rnParams?: RnParams
+  initialValues?: FormFields
 }) {
   const router = useRouter()
   const urls = useIntlUrls()
-  const defaultValues = useMemo(() => getDefaultValues({ user, dtsiSlug: undefined }), [user])
+  const defaultValues = useMemo(() => {
+    const userDefaultValues = getDefaultValues({ user, dtsiSlug: undefined })
+
+    if (initialValues) {
+      const splitFullName = initialValues.fullName.split(' ')
+
+      return {
+        ...userDefaultValues,
+        address: userDefaultValues.address || { description: initialValues?.address, place_id: '' },
+        emailAddress: userDefaultValues.emailAddress || initialValues?.email,
+        firstName: userDefaultValues.firstName || splitFullName[0],
+        lastName: userDefaultValues.lastName || splitFullName.splice(1).join(' '),
+      }
+    }
+
+    return userDefaultValues
+  }, [initialValues, user])
+
   const form = useForm<FormValues>({
     resolver: zodResolver(zodUserActionFormEmailCongresspersonFields),
     defaultValues,
   })
 
-  const formAddressValue = useWatch({
+  const formAddressField = useWatch({
     control: form.control,
     name: 'address',
-    defaultValue: { description: '', place_id: '' },
   })
 
   React.useEffect(() => {
     form.setFocus('firstName')
   }, [form])
-
-  React.useEffect(() => {
-    if (rnParams) {
-      const splitFullName = rnParams.fullName.split(' ')
-      form.setValue('address', { description: rnParams.address, place_id: '' })
-      form.setValue('emailAddress', rnParams.email)
-      form.setValue('firstName', splitFullName[0])
-      form.setValue('lastName', splitFullName.splice(1).join(' '))
-    }
-  }, [form, rnParams])
 
   return (
     <Form {...form}>
@@ -219,7 +225,7 @@ export function UserActionFormEmailCongressperson({
                     <FormControl>
                       <GooglePlacesSelect
                         {...field}
-                        defaultValue={rnParams?.address}
+                        defaultValue={formAddressField.description}
                         onChange={field.onChange}
                         placeholder="Your full address"
                         value={field.value}
@@ -289,7 +295,7 @@ export function UserActionFormEmailCongressperson({
           <div className="w-full sm:w-auto">
             <Button
               className="w-full sm:w-auto"
-              disabled={form.formState.isSubmitting || !formAddressValue.place_id}
+              disabled={form.formState.isSubmitting || !formAddressField.place_id}
               size="lg"
               type="submit"
             >

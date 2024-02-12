@@ -3,6 +3,7 @@ import * as Sentry from '@sentry/nextjs'
 import { z } from 'zod'
 
 import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
+import { FormFields } from '@/components/app/userActionFormCallCongressperson/types'
 import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
 import { DTSIPeopleByCongressionalDistrictQueryResult } from '@/data/dtsi/queries/queryDTSIPeopleByCongressionalDistrict'
 import { useSections, UseSectionsReturn } from '@/hooks/useSections'
@@ -29,11 +30,11 @@ export interface UserActionFormCallCongresspersonProps extends UseSectionsReturn
 export function UserActionFormCallCongressperson({
   user,
   onClose,
-  rnAddress,
+  initialValues,
 }: {
   user: GetUserFullProfileInfoResponse['user']
   onClose: () => void
-  rnAddress?: string
+  initialValues?: FormFields
 }) {
   const sectionProps = useSections<SectionNames>({
     sections: Object.values(SectionNames),
@@ -51,8 +52,8 @@ export function UserActionFormCallCongressperson({
       return (
         <Address
           congressPersonData={congressPersonData}
+          initialValues={initialValues}
           onFindCongressperson={setCongresspersonData}
-          rnAddress={rnAddress ?? ''}
           user={user}
           {...sectionProps}
         />

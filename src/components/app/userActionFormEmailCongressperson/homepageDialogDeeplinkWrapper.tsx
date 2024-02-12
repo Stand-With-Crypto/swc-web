@@ -5,10 +5,11 @@ import { useRouter } from 'next/navigation'
 
 import { UserActionFormEmailCongressperson } from '@/components/app/userActionFormEmailCongressperson'
 import { UserActionFormEmailCongresspersonSkeleton } from '@/components/app/userActionFormEmailCongressperson/skeleton'
+import { FormFields } from '@/components/app/userActionFormEmailCongressperson/types'
 import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
+import { useEncodedInitialValuesQueryParam } from '@/hooks/useEncodedInitialValuesQueryParam'
 import { useLocale } from '@/hooks/useLocale'
-import { useParseRnQueryParam } from '@/hooks/useRnQueryParams'
 import { getIntlUrls } from '@/utils/shared/urls'
 
 function UserActionFormEmailCongresspersonDeeplinkWrapperContent() {
@@ -18,17 +19,19 @@ function UserActionFormEmailCongresspersonDeeplinkWrapperContent() {
   const urls = getIntlUrls(locale)
   const [state, setState] = useState<'form' | 'success'>('form')
   const { user } = fetchUser.data || { user: null }
-  const { address, email, fullName, loading: loadingRnQueryParam } = useParseRnQueryParam()
+  const initialValues = useEncodedInitialValuesQueryParam<FormFields>({
+    address: '',
+    email: '',
+    fullName: '',
+  })
 
-  const rnParams = React.useMemo(() => ({ address, email, fullName }), [address, email, fullName])
-
-  return fetchUser.isLoading || loadingRnQueryParam ? (
+  return fetchUser.isLoading ? (
     <UserActionFormEmailCongresspersonSkeleton locale={locale} />
   ) : state === 'form' ? (
     <UserActionFormEmailCongressperson
+      initialValues={initialValues}
       onCancel={() => router.replace(urls.home())}
       onSuccess={() => setState('success')}
-      rnParams={rnParams}
       user={user}
     />
   ) : (

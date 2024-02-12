@@ -8,6 +8,7 @@ import useSWR from 'swr'
 import type { UserActionFormCallCongresspersonProps } from '@/components/app/userActionFormCallCongressperson'
 import { SectionNames } from '@/components/app/userActionFormCallCongressperson/constants'
 import { UserActionFormCallCongresspersonLayout } from '@/components/app/userActionFormCallCongressperson/tabs/layout'
+import { FormFields } from '@/components/app/userActionFormCallCongressperson/types'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -41,7 +42,7 @@ interface AddressProps
     'user' | 'onFindCongressperson' | 'goToSection'
   > {
   congressPersonData?: UserActionFormCallCongresspersonProps['congressPersonData']
-  rnAddress?: string
+  initialValues?: FormFields
 }
 
 export function Address({
@@ -49,23 +50,22 @@ export function Address({
   onFindCongressperson,
   congressPersonData,
   goToSection,
-  rnAddress,
+  initialValues,
 }: AddressProps) {
   const urls = useIntlUrls()
+  const userDefaultValues = getDefaultValues({ user })
 
   const form = useForm<FindRepresentativeCallFormValues>({
-    defaultValues: getDefaultValues({ user }),
+    defaultValues: {
+      ...userDefaultValues,
+      address: userDefaultValues.address || { description: initialValues?.address, place_id: '' },
+    },
     resolver: zodResolver(findRepresentativeCallFormValidationSchema),
   })
+
   useEffect(() => {
     form.setFocus('address')
   }, [form])
-
-  useEffect(() => {
-    if (rnAddress) {
-      form.setValue('address', { description: rnAddress, place_id: '' })
-    }
-  }, [form, rnAddress])
 
   const address = useWatch({
     control: form.control,
@@ -116,7 +116,7 @@ export function Address({
                   <FormControl>
                     <GooglePlacesSelect
                       {...field}
-                      defaultValue={rnAddress}
+                      defaultValue={address.description}
                       onChange={field.onChange}
                       placeholder="Your full address"
                       value={field.value}
