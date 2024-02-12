@@ -35,10 +35,10 @@ export const getClientUser = (record: GetClientProps): ClientUser => {
         : null,
     id,
     informationVisibility,
-    userLocationDetails: record.address
+    userLocationDetails: address
       ? {
-          administrativeAreaLevel1: address?.administrativeAreaLevel1,
-          countryCode: address?.countryCode,
+          administrativeAreaLevel1: address.administrativeAreaLevel1,
+          countryCode: address.countryCode,
         }
       : null,
   })
