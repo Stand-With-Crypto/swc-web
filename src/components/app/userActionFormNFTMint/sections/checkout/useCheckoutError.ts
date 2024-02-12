@@ -3,13 +3,11 @@ import { useBalance, useChainId } from '@thirdweb-dev/react'
 import { BigNumber } from 'ethers'
 import React from 'react'
 
-type CheckoutError = 'insufficientFunds' | 'networkSwitch'
+export type CheckoutError = 'insufficientFunds' | 'networkSwitch'
 
 export function useCheckoutError({ totalFee }: { totalFee: BigNumber }): CheckoutError | void {
   const chainId = useChainId()
   const { data: walletBalance } = useBalance()
-
-  console.log({ walletBalance })
 
   const hasInsufficientFunds = React.useMemo(() => {
     if (!walletBalance) {

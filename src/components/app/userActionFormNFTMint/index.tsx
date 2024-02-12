@@ -4,7 +4,10 @@ import React from 'react'
 
 import { UserActionFormNFTMintIntro } from './sections/intro'
 import { UserActionFormNFTMintCheckout } from './sections/checkout'
-import { UserActionFormNFTMintSuccess } from './sections/success'
+import {
+  UserActionFormNFTMintSuccess,
+  UserActionFormNFTMintSuccessSkeleton,
+} from './sections/success'
 import { useCheckoutController } from './useCheckoutController'
 import { MINT_NFT_CONTRACT_ADDRESS } from '@/components/app/userActionFormNFTMint/constants'
 import { useSendMintNFTTransaction } from '@/hooks/useSendMintNFTTransaction'
@@ -24,7 +27,11 @@ export function UserActionFormNFTMint(_props: { onCancel: () => void; onSuccess:
 
   const checkoutController = useCheckoutController()
 
-  const { mintNFT, status: _sendNFTTransactionStatus } = useSendMintNFTTransaction({
+  const {
+    mintNFT,
+    status: sendNFTTransactionStatus,
+    sendTransactionResponse,
+  } = useSendMintNFTTransaction({
     contractAddress: MINT_NFT_CONTRACT_ADDRESS,
     quantity: checkoutController.quantity,
     onStatusChange: status => {
@@ -51,6 +58,7 @@ export function UserActionFormNFTMint(_props: { onCancel: () => void; onSuccess:
         <UserActionFormNFTMintCheckout
           {...sectionProps}
           {...checkoutController}
+          mintStatus={sendNFTTransactionStatus}
           onMint={async () => {
             const result = await mintNFT()
             if (result === 'completed') {
@@ -60,13 +68,12 @@ export function UserActionFormNFTMint(_props: { onCancel: () => void; onSuccess:
         />
       )
 
-    case UserActionFormNFTMintSectionNames.SUCCESS:
-      return (
-        <UserActionFormNFTMintSuccess
-          {...sectionProps}
-          totalFeeDisplay={checkoutController.totalFeeDisplay}
-        />
-      )
+    case UserActionFormNFTMintSectionNames.SUCCESS: {
+      if (!sendTransactionResponse) {
+        return <UserActionFormNFTMintSuccessSkeleton />
+      }
+      return <UserActionFormNFTMintSuccess sendTransactionResponse={sendTransactionResponse} />
+    }
 
     default:
       sectionProps.onSectionNotFound()

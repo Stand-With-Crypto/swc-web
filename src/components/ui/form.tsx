@@ -16,6 +16,7 @@ import {
 import { Label } from '@/components/ui/label'
 import { cn } from '@/utils/web/cn'
 import { GENERIC_FORM_ERROR_KEY } from '@/utils/web/formUtils'
+import { ErrorMessage } from '@/components/ui/errorMessage'
 
 const Form = FormProvider
 
@@ -168,14 +169,9 @@ const FormErrorMessage = React.forwardRef<
   }
 
   return (
-    <p
-      className={cn('text-sm font-medium text-destructive', className)}
-      id={formMessageId}
-      ref={ref}
-      {...props}
-    >
+    <ErrorMessage className={className} id={formMessageId} ref={ref} {...props}>
       {body}
-    </p>
+    </ErrorMessage>
   )
 })
 FormErrorMessage.displayName = 'FormErrorMessage'

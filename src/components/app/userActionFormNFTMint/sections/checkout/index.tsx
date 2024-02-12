@@ -1,6 +1,13 @@
 import Balancer from 'react-wrap-balancer'
 import { Minus, Plus } from 'lucide-react'
 import React from 'react'
+import {
+  Web3Button,
+  useAddress,
+  useConnectionStatus,
+  useContract,
+  useContractMetadata,
+} from '@thirdweb-dev/react'
 
 import {
   NFTDisplay,
@@ -16,18 +23,29 @@ import { SupportedCryptoCurrencyCodes } from '@/utils/shared/currency'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { UseCheckoutControllerReturn } from '@/components/app/userActionFormNFTMint/useCheckoutController'
-
-import styles from './checkout.module.css'
 import { Skeleton } from '@/components/ui/skeleton'
-import { Web3Button, useAddress, useContract, useContractMetadata } from '@thirdweb-dev/react'
-import { useCheckoutError } from '@/components/app/userActionFormNFTMint/sections/checkout/useCheckoutError'
+import {
+  useCheckoutError,
+  CheckoutError,
+} from '@/components/app/userActionFormNFTMint/sections/checkout/useCheckoutError'
 import { toBigNumber } from '@/utils/shared/bigNumber'
 import { theme } from '@/utils/web/thirdweb/theme'
+import { LoadingOverlay } from '@/components/ui/loadingOverlay'
+import { MintStatus } from '@/hooks/useSendMintNFTTransaction'
+import { ErrorMessage } from '@/components/ui/errorMessage'
+
+import styles from './checkout.module.css'
 
 interface UserActionFormNFTMintCheckoutProps
   extends UseSectionsReturn<UserActionFormNFTMintSectionNames>,
     UseCheckoutControllerReturn {
   onMint: () => void
+  mintStatus: MintStatus
+}
+
+const CHECKOUT_ERROR_TO_MESSAGE: Record<CheckoutError, string> = {
+  insufficientFunds: 'Insufficient funds',
+  networkSwitch: 'Please switch to the Base Network',
 }
 
 export function UserActionFormNFTMintCheckout({
@@ -41,13 +59,13 @@ export function UserActionFormNFTMintCheckout({
   totalFee,
   gasFeeDisplay,
   onMint,
+  mintStatus,
 }: UserActionFormNFTMintCheckoutProps) {
   const { contract } = useContract(MINT_NFT_CONTRACT_ADDRESS)
   const { data: contractMetadata, isLoading: isLoadingMetadata } = useContractMetadata(contract)
   const address = useAddress()
   const checkoutError = useCheckoutError({ totalFee: totalFee ?? toBigNumber('0') })
-
-  console.log({ checkoutError, contractMetadata, isLoadingMetadata })
+  const connectionStatus = useConnectionStatus()
 
   if (!contractMetadata || isLoadingMetadata || !address) {
     return (
@@ -59,8 +77,14 @@ export function UserActionFormNFTMintCheckout({
     )
   }
 
+  const isLoading =
+    mintStatus === 'loading' ||
+    !contract ||
+    connectionStatus === 'connecting' ||
+    connectionStatus === 'unknown'
   return (
     <UserActionFormLayout onBack={() => goToSection(UserActionFormNFTMintSectionNames.INTRO)}>
+      {isLoading && <LoadingOverlay />}
       <UserActionFormLayout.Container>
         <div className="flex gap-6">
           <NFTDisplay
@@ -124,12 +148,17 @@ export function UserActionFormNFTMintCheckout({
         <UserActionFormLayout.Footer>
           <Web3Button
             action={onMint}
-            className="!rounded-full"
+            className="!rounded-full disabled:pointer-events-none disabled:opacity-50"
             contractAddress={MINT_NFT_CONTRACT_ADDRESS}
+            isDisabled={isLoading || (!!checkoutError && checkoutError !== 'networkSwitch')}
             theme={theme}
           >
             Mint now
           </Web3Button>
+
+          {!!checkoutError && (
+            <ErrorMessage>{CHECKOUT_ERROR_TO_MESSAGE[checkoutError]}</ErrorMessage>
+          )}
         </UserActionFormLayout.Footer>
       </UserActionFormLayout.Container>
     </UserActionFormLayout>
