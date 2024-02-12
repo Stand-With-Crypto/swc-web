@@ -1,6 +1,5 @@
 import { ImageAvatar, ImageAvatarProps } from '@/components/ui/imageAvatar'
 import { InitialsAvatar } from '@/components/ui/initialsAvatar'
-
 import { DTSI_Person } from '@/data/dtsi/generated'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 

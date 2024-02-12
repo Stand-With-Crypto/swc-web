@@ -2,11 +2,12 @@
 // The config you add here will be used whenever the server handles a request.
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/
 
-import * as Sentry from '@sentry/nextjs'
 import { ExtraErrorData } from '@sentry/integrations'
+import * as Sentry from '@sentry/nextjs'
+
 import { prismaClient } from '@/utils/server/prismaClient'
-import { toBool } from '@/utils/shared/toBool'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
+import { toBool } from '@/utils/shared/toBool'
 
 const dsn = process.env.NEXT_PUBLIC_SENTRY_DSN
 

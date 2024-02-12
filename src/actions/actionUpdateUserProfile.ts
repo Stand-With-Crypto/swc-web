@@ -1,4 +1,16 @@
 'use server'
+import 'server-only'
+
+import {
+  Address,
+  CapitolCanaryInstance,
+  User,
+  UserCryptoAddress,
+  UserEmailAddress,
+  UserEmailAddressSource,
+} from '@prisma/client'
+import { z } from 'zod'
+
 import { getClientAddress } from '@/clientModels/clientAddress'
 import { getClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
 import { getENSDataFromCryptoAddressAndFailGracefully } from '@/data/web3/getENSDataFromCryptoAddress'
@@ -17,16 +29,6 @@ import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddl
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { userFullName } from '@/utils/shared/userFullName'
 import { zodUpdateUserProfileFormAction } from '@/validation/forms/zodUpdateUserProfile/zodUpdateUserProfileFormAction'
-import {
-  Address,
-  CapitolCanaryInstance,
-  User,
-  UserCryptoAddress,
-  UserEmailAddress,
-  UserEmailAddressSource,
-} from '@prisma/client'
-import 'server-only'
-import { z } from 'zod'
 
 export const actionUpdateUserProfile = withServerActionMiddleware(
   'actionUpdateUserProfile',

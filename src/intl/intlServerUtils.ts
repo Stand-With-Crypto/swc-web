@@ -1,4 +1,5 @@
 import 'server-only'
+
 import { MessageDescriptor } from 'react-intl'
 import { IntlShape } from '@formatjs/intl'
 // Copy pasting this fn from react-intl to prevent getting context errors when importing in the server environment

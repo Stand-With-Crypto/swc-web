@@ -1,3 +1,6 @@
+import { faker } from '@faker-js/faker'
+import { expect } from '@jest/globals'
+
 import { mockAddress } from '@/mocks/models/mockAddress'
 import { mockUser } from '@/mocks/models/mockUser'
 import { mockUserEmailAddress } from '@/mocks/models/mockUserEmailAddress'
@@ -7,8 +10,6 @@ import {
 } from '@/utils/server/capitolCanary/campaigns'
 import { formatCapitolCanaryAdvocateCreationRequest } from '@/utils/server/capitolCanary/createAdvocate'
 import { UpsertAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
-import { faker } from '@faker-js/faker'
-import { expect } from '@jest/globals'
 
 it('formats the "create capitol canary advocate" request correctly', () => {
   // Set the seed so that the mocked output is deterministic.

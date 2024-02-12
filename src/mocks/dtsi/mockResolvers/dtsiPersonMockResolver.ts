@@ -1,10 +1,11 @@
+import { faker } from '@faker-js/faker'
+
 import {
   DTSI_Gender,
   DTSI_PersonPoliticalAffiliationCategory,
   DTSI_PersonResolvers,
 } from '@/data/dtsi/generated'
 import { fakerFields } from '@/mocks/fakerUtils'
-import { faker } from '@faker-js/faker'
 
 export const dtsiPersonMockResolver = (): Partial<DTSI_PersonResolvers> => {
   const firstName = faker.person.firstName()

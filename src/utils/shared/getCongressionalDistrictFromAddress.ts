@@ -1,9 +1,10 @@
-import {
-  GoogleCivicInfoResponse,
-  getGoogleCivicDataFromAddress,
-} from '@/utils/shared/googleCivicInfo'
 import * as Sentry from '@sentry/nextjs'
 import _ from 'lodash'
+
+import {
+  getGoogleCivicDataFromAddress,
+  GoogleCivicInfoResponse,
+} from '@/utils/shared/googleCivicInfo'
 
 const findCongressionalDistrictString = (response: GoogleCivicInfoResponse, address: string) => {
   if (Object.keys(response.divisions).every(key => key !== 'ocd-division/country:us')) {

@@ -1,6 +1,7 @@
+import { Metadata } from 'next'
+
 import { PagePrivacyPolicy } from '@/components/app/pagePrivacyPolicy'
 import { StaticPagesCTA } from '@/components/app/staticPagesCTA'
-import { Metadata } from 'next'
 
 export const dynamic = 'error'
 

@@ -1,11 +1,12 @@
 'use client'
+import { AnimatePresence, motion } from 'framer-motion'
+
 import {
   RecentActivityRow,
   RecentActivityRowProps,
 } from '@/components/app/recentActivityRow/recentActivityRow'
 import { useLocale } from '@/hooks/useLocale'
 import { cn } from '@/utils/web/cn'
-import { AnimatePresence, motion } from 'framer-motion'
 
 export function RecentActivityRowAnimatedContainer({
   actions,

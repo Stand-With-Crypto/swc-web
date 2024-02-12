@@ -1,8 +1,8 @@
 import { ChevronLeftIcon, ChevronRightIcon, DotsHorizontalIcon } from '@radix-ui/react-icons'
 import { Table } from '@tanstack/react-table'
+import _ from 'lodash'
 
 import { Button } from '@/components/ui/button'
-import _ from 'lodash'
 
 interface DataTablePaginationProps<TData> {
   table: Table<TData>

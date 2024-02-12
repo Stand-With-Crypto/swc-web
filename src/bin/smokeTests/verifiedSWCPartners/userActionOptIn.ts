@@ -1,11 +1,12 @@
+import { faker } from '@faker-js/faker'
+import { UserActionOptInType } from '@prisma/client'
+
 import { runBin } from '@/bin/runBin'
 import { verifiedSWCPartnersUserActionOptIn } from '@/data/verifiedSWCPartners/userActionOptIn'
 import { createBasicAuthHeader } from '@/utils/server/basicAuth'
 import { VerifiedSWCPartner } from '@/utils/server/verifiedSWCPartner/constants'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
-import { faker } from '@faker-js/faker'
-import { UserActionOptInType } from '@prisma/client'
 
 /*
 Run this script only after you have the app running on localhost:3000

@@ -1,18 +1,18 @@
+import _ from 'lodash'
+
 import { DTSICongresspersonAssociatedWithFormAddress } from '@/components/app/dtsiCongresspersonAssociatedWithFormAddress'
 import { getDefaultText } from '@/components/app/userActionFormEmailCongressperson/getDefaultText'
 import { Button } from '@/components/ui/button'
 import { FormItemSkeleton } from '@/components/ui/form'
-
 import { Input } from '@/components/ui/input'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
+import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Textarea } from '@/components/ui/textarea'
 import { SupportedLocale } from '@/intl/locales'
 import { getIntlUrls } from '@/utils/shared/urls'
-import _ from 'lodash'
-import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 
 export function UserActionFormEmailCongresspersonSkeleton({ locale }: { locale: SupportedLocale }) {
   const urls = getIntlUrls(locale)

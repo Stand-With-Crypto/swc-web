@@ -1,10 +1,11 @@
 'use client'
+import { useEffect } from 'react'
+import * as Sentry from '@sentry/nextjs'
+import { Inter } from 'next/font/google'
+
 import { ErrorPagesContent } from '@/components/app/errorPagesContent'
 import { logger } from '@/utils/shared/logger'
 import { cn } from '@/utils/web/cn'
-import * as Sentry from '@sentry/nextjs'
-import { Inter } from 'next/font/google'
-import { useEffect } from 'react'
 
 const inter = Inter({ subsets: ['latin'] })
 export const dynamic = 'error'

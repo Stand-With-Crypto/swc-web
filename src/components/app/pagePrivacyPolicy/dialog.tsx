@@ -1,10 +1,10 @@
+import { lazy, Suspense } from 'react'
+
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogClose, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Skeleton } from '@/components/ui/skeleton'
-import { Suspense } from 'react'
-import { lazy } from 'react'
 
 export const LazyPagePrivacyPolicy = lazy(() =>
   import('@/components/app/pagePrivacyPolicy').then(m => ({

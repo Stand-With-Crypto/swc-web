@@ -1,7 +1,9 @@
+import 'server-only'
+
+import { UserActionType } from '@prisma/client'
+
 import { prismaClient } from '@/utils/server/prismaClient'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
-import { UserActionType } from '@prisma/client'
-import 'server-only'
 
 export const getCountPolicymakerContacts = async () => {
   // TODO verify what we mean when we say "policymaker contacts".

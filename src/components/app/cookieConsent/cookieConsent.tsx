@@ -3,10 +3,10 @@
 import React from 'react'
 
 import { SupportedLocale } from '@/intl/locales'
-
-import { useCookieConsent } from './useCookieConsent'
-import { CookieConsentBanner } from './banner'
 import { CookieConsentPermissions } from '@/utils/shared/cookieConsent'
+
+import { CookieConsentBanner } from './banner'
+import { useCookieConsent } from './useCookieConsent'
 
 interface CookieConsentProps {
   locale: SupportedLocale

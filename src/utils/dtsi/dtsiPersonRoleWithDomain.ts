@@ -1,10 +1,11 @@
+import { parseISO } from 'date-fns'
+
 import {
   DTSI_PersonRole,
   DTSI_PersonRoleCategory,
   DTSI_PersonRoleGroup,
   DTSI_PersonRoleGroupCategory,
 } from '@/data/dtsi/generated'
-import { parseISO } from 'date-fns'
 
 type PartialGroup = Pick<DTSI_PersonRoleGroup, 'id' | 'category'>
 type PartialRole = Pick<DTSI_PersonRole, 'dateStart' | 'roleCategory'>

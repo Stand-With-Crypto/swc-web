@@ -1,4 +1,8 @@
 'use server'
+import 'server-only'
+
+import { z } from 'zod'
+
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
@@ -6,8 +10,6 @@ import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
 import { zodUpdateUserInformationVisibility } from '@/validation/forms/zodUpdateUserInformationVisibility'
-import 'server-only'
-import { z } from 'zod'
 
 export const actionUpdateUserInformationVisibility = withServerActionMiddleware(
   'actionUpdateUserInformationVisibility',

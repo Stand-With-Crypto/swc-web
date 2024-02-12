@@ -1,8 +1,9 @@
 import 'server-only'
 
-import { queryDTSIPeopleByCongressionalDistrict } from '@/data/dtsi/queries/queryDTSIPeopleByCongressionalDistrict'
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
+
+import { queryDTSIPeopleByCongressionalDistrict } from '@/data/dtsi/queries/queryDTSIPeopleByCongressionalDistrict'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
 export const dynamic = 'error'

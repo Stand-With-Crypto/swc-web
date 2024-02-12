@@ -1,11 +1,12 @@
+import { ImageResponse } from 'next/og'
+import { NextRequest } from 'next/server'
+
 import {
   OPEN_GRAPH_IMAGE_DIMENSIONS,
   OpenGraphImageOptions,
 } from '@/utils/server/generateOpenGraphImageUrl'
 import { decodeObjectForUrl } from '@/utils/shared/encodeObjectForUrl'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
-import { ImageResponse } from 'next/og'
-import { NextRequest } from 'next/server'
 
 export const dynamic = 'error'
 export const revalidate = SECONDS_DURATION.HOUR

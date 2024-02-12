@@ -1,4 +1,9 @@
 import React from 'react'
+import * as Sentry from '@sentry/nextjs'
+
+import { ExternalLink } from '@/components/ui/link'
+import { cn } from '@/utils/web/cn'
+
 import {
   MyInlineDescendant,
   MyInlineElement,
@@ -6,9 +11,6 @@ import {
   RichTextEditorRootBlock,
   RichTextEditorValue,
 } from './types'
-import { ExternalLink } from '@/components/ui/link'
-import * as Sentry from '@sentry/nextjs'
-import { cn } from '@/utils/web/cn'
 
 const getRichTextComponent = (node: RichText) => {
   return (

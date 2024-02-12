@@ -1,5 +1,6 @@
-import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { Engine } from '@thirdweb-dev/engine'
+
+import { requiredEnv } from '@/utils/shared/requiredEnv'
 
 const THIRDWEB_ENGINE_URL = requiredEnv(process.env.THIRDWEB_ENGINE_URL, 'THIRDWEB_ENGINE_URL')
 

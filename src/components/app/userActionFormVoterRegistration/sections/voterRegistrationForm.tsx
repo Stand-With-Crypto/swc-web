@@ -1,3 +1,6 @@
+import { useCallback, useMemo, useState } from 'react'
+import { ArrowUpRight } from 'lucide-react'
+
 import { SectionNames } from '@/components/app/userActionFormVoterRegistration/constants'
 import { UserActionFormVoterRegistrationLayout } from '@/components/app/userActionFormVoterRegistration/sections/layout'
 import { Button } from '@/components/ui/button'
@@ -11,8 +14,6 @@ import {
 } from '@/components/ui/select'
 import { UseSectionsReturn } from '@/hooks/useSections'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
-import { ArrowUpRight } from 'lucide-react'
-import { useCallback, useMemo, useState } from 'react'
 
 const STATES = Object.values(US_STATE_CODE_TO_DISPLAY_NAME_MAP)
 type State = (typeof STATES)[number]

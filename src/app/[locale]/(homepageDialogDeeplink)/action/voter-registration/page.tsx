@@ -1,7 +1,8 @@
 import { HomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogDeeplinkLayout'
 import { UserActionFormVoterRegistrationDeeplinkWrapper } from '@/components/app/userActionFormVoterRegistration/homepageDialogDeeplinkWrapper'
-import { PageProps } from '@/types'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
+
+import { PageProps } from '@/types'
 
 export const revalidate = SECONDS_DURATION.HOUR
 export const dynamic = 'error'

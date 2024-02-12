@@ -11,6 +11,7 @@ import { tabListStyles, tabTriggerStyles } from '@/components/ui/tabs/styles'
 import { SupportedLocale } from '@/intl/locales'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
+
 import { PAGE_LEADERBOARD_TOTAL_PAGES } from './constants'
 
 export const PAGE_LEADERBOARD_TITLE = 'Our community'

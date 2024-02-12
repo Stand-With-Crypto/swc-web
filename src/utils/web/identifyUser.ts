@@ -2,6 +2,7 @@
 Call this function anywhere we might first be discovering the user who's using the app.
 */
 import * as Sentry from '@sentry/nextjs'
+
 import { ClientUser } from '@/clientModels/clientUser/clientUser'
 import { identifyClientAnalyticsUser } from '@/utils/web/clientAnalytics'
 

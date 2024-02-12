@@ -1,3 +1,7 @@
+import { faker } from '@faker-js/faker'
+import { addMocksToSchema } from '@graphql-tools/mock'
+import { buildClientSchema, graphql } from 'graphql'
+
 import introspectionResult from '@/data/dtsi/introspection.json'
 import { dtsiBillMockResolver } from '@/mocks/dtsi/mockResolvers/dtsiBillMockResolver'
 import { dtsiPersonMockResolver } from '@/mocks/dtsi/mockResolvers/dtsiPersonMockResolver'
@@ -7,9 +11,6 @@ import { dtsiTweetMediaMockResolver } from '@/mocks/dtsi/mockResolvers/dtsiTweet
 import { dtsiTweetMockResolver } from '@/mocks/dtsi/mockResolvers/dtsiTweetMockResolver'
 import { dtsiTwitterAccountMockResolver } from '@/mocks/dtsi/mockResolvers/dtsiTwitterAccountMockResolver'
 import { fakerFields } from '@/mocks/fakerUtils'
-import { faker } from '@faker-js/faker'
-import { addMocksToSchema } from '@graphql-tools/mock'
-import { buildClientSchema, graphql } from 'graphql'
 
 // see https://the-guild.dev/graphql/tools/docs/mocking for details
 

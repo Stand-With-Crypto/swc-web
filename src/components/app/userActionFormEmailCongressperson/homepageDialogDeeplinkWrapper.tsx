@@ -1,13 +1,14 @@
 'use client'
 
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+
 import { UserActionFormEmailCongressperson } from '@/components/app/userActionFormEmailCongressperson'
 import { UserActionFormEmailCongresspersonSkeleton } from '@/components/app/userActionFormEmailCongressperson/skeleton'
 import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useLocale } from '@/hooks/useLocale'
 import { getIntlUrls } from '@/utils/shared/urls'
-import { useRouter } from 'next/navigation'
-import { useState } from 'react'
 
 export function UserActionFormEmailCongresspersonDeeplinkWrapper() {
   const fetchUser = useApiResponseForUserFullProfileInfo()

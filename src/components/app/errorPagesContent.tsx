@@ -1,10 +1,11 @@
 'use client'
+import { useCallback } from 'react'
+
 import { Button } from '@/components/ui/button'
 import { MaybeNextImg } from '@/components/ui/image'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
 import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
-import { useCallback } from 'react'
 
 export function ErrorPagesContent({ reset }: { reset: () => void }) {
   const onPress = useCallback(() => {

@@ -1,9 +1,10 @@
 'use client'
 
+import React from 'react'
+import { Info } from 'lucide-react'
+
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { PrimitiveComponentAnalytics } from '@/utils/web/primitiveComponentAnalytics'
-import { Info } from 'lucide-react'
-import React from 'react'
 
 // This is not using Tooltip because it has some issues with autoFocus when inside modals and popovers
 // See https://github.com/radix-ui/primitives/issues/2248

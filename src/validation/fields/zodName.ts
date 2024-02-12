@@ -1,4 +1,4 @@
-import { string, object } from 'zod'
+import { object, string } from 'zod'
 
 export const zodFirstName = string()
   .trim()

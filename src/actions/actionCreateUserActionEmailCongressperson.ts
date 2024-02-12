@@ -1,4 +1,19 @@
 'use server'
+import 'server-only'
+
+import {
+  Address,
+  Prisma,
+  User,
+  UserActionType,
+  UserCryptoAddress,
+  UserEmailAddress,
+  UserEmailAddressSource,
+  UserInformationVisibility,
+} from '@prisma/client'
+import * as Sentry from '@sentry/nextjs'
+import { z } from 'zod'
+
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
 import { CAPITOL_CANARY_EMAIL_REP_INNGEST_EVENT_NAME } from '@/inngest/functions/emailRepViaCapitolCanary'
 import { inngest } from '@/inngest/inngest'
@@ -16,9 +31,9 @@ import {
   getServerPeopleAnalytics,
 } from '@/utils/server/serverAnalytics'
 import {
-  ServerLocalUser,
   mapLocalUserToUserDatabaseFields,
   parseLocalUserFromCookies,
+  ServerLocalUser,
 } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
@@ -27,19 +42,6 @@ import { getLogger } from '@/utils/shared/logger'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { userFullName } from '@/utils/shared/userFullName'
 import { zodUserActionFormEmailCongresspersonAction } from '@/validation/forms/zodUserActionFormEmailCongressperson'
-import {
-  Address,
-  Prisma,
-  User,
-  UserActionType,
-  UserCryptoAddress,
-  UserEmailAddress,
-  UserEmailAddressSource,
-  UserInformationVisibility,
-} from '@prisma/client'
-import * as Sentry from '@sentry/nextjs'
-import 'server-only'
-import { z } from 'zod'
 
 const logger = getLogger(`actionCreateUserActionEmailCongressperson`)
 

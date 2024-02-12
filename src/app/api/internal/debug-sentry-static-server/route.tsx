@@ -1,8 +1,9 @@
+import { NextResponse } from 'next/server'
+
 import { prismaClient } from '@/utils/server/prismaClient'
 import { logger } from '@/utils/shared/logger'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
-import { NextResponse } from 'next/server'
 
 export const dynamic = 'error'
 export const revalidate = SECONDS_DURATION.SECOND
