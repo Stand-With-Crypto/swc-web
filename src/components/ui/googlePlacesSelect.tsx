@@ -8,6 +8,7 @@ import { useScript } from '@/hooks/useScript'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { cn } from '@/utils/web/cn'
 import { GooglePlaceAutocompletePrediction } from '@/utils/web/googlePlaceUtils'
+import { isBrowser } from '@/utils/shared/executionEnvironment'
 
 const CALLBACK_NAME = 'PLACES_AUTOCOMPLETE'
 
@@ -40,12 +41,13 @@ export const GooglePlacesSelect = React.forwardRef<React.ElementRef<'input'>, Pr
       callbackName: CALLBACK_NAME,
       // note on why we aren't restricting to just addresses https://stackoverflow.com/a/65206036
       requestOptions: {
-        locationBias: window.google
-          ? new google.maps.Circle({
-              center: LAT_LONG_FOR_CENTER_OF_US,
-              radius: WIDTH_OF_US_METERS / 2,
-            })
-          : undefined,
+        locationBias:
+          isBrowser && window.google
+            ? new google.maps.Circle({
+                center: LAT_LONG_FOR_CENTER_OF_US,
+                radius: WIDTH_OF_US_METERS / 2,
+              })
+            : undefined,
       },
     })
     const scriptStatus = useScript(
