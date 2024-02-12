@@ -121,6 +121,14 @@ export function PageHome({
           </PageTitle>
           <PageSubTitle as="h4">
             See how our community is taking a stand to safeguard the future of crypto in America.
+            Donations to{' '}
+            <ExternalLink
+              className="underline"
+              href={'https://www.fec.gov/data/committee/C00835959/'}
+            >
+              Fairshake
+            </ExternalLink>
+            , a pro-crypto Super PAC, are not included on the leaderboard.
           </PageSubTitle>
           <Tabs
             analytics={'Homepage Our Community Tabs'}
@@ -138,17 +146,6 @@ export function PageHome({
             </div>
             <DelayedRecentActivity actions={actions} />
             <TabsContent value={RecentActivityAndLeaderboardTabs.LEADERBOARD}>
-              <p className="mt-2 h-8 text-center text-xs text-gray-500 lg:h-10">
-                Donations to{' '}
-                <ExternalLink
-                  href={
-                    'https://www.axios.com/2023/12/18/crypto-super-pac-fairshake-2024-elections'
-                  }
-                >
-                  Fairshake
-                </ExternalLink>
-                , a pro-crypto Super PAC, are not included on the leaderboard.
-              </p>
               <div className="space-y-8 lg:space-y-10">
                 {sumDonationsByUser.map((donor, index) => (
                   <SumDonationsByUserRow

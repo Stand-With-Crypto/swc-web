@@ -15,7 +15,6 @@ export function DelayedRecentActivity(props: { actions: PublicRecentActivity }) 
   const visibleActions = actions.slice(isInVew ? 0 : 1, actions.length)
   return (
     <TabsContent ref={ref} value={RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY}>
-      <div className="mt-2 h-8 lg:h-10" />
       <RecentActivityRowAnimatedContainer actions={visibleActions} />
     </TabsContent>
   )
