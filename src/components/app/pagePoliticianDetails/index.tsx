@@ -89,7 +89,7 @@ export function PagePoliticianDetails({
         </PageSubTitle>
         <div className="flex items-center justify-center gap-3">
           {person.donationUrl && (
-            <Button size="lg" asChild>
+            <Button asChild size="lg">
               <ExternalLink href={person.donationUrl}>Donate</ExternalLink>
             </Button>
           )}
