@@ -48,6 +48,7 @@ const CHECKOUT_ERROR_TO_MESSAGE: Record<CheckoutError, string> = {
   networkSwitch: 'Please switch to the Base Network',
 }
 
+// TODO add checkbox for US citizen
 export function UserActionFormNFTMintCheckout({
   goToSection,
   quantity,
