@@ -125,14 +125,14 @@ export function UpdateUserInformationVisibilityForm({
             )}
           />
           <FormGeneralErrorMessage control={form.control} />
-          <div className="space-y-4">
+          <div className="text-center">
             <Button
-              className="w-full"
+              className="w-full md:w-1/2"
               disabled={form.formState.isSubmitting}
               size="lg"
               type="submit"
             >
-              Next
+              Submit
             </Button>
           </div>
         </form>

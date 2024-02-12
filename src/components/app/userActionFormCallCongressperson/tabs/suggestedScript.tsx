@@ -37,13 +37,7 @@ export function SuggestedScript({
     ref.current?.focus()
   }, [ref])
   const phoneNumber = React.useMemo(() => {
-    const official = getGoogleCivicOfficialByDTSIName(
-      {
-        firstName: dtsiPerson.firstName,
-        lastName: dtsiPerson.lastName,
-      },
-      civicData,
-    )
+    const official = getGoogleCivicOfficialByDTSIName(dtsiPerson, civicData)
 
     if (!official) {
       toastGenericError()

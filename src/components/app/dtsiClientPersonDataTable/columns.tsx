@@ -49,7 +49,7 @@ export const getDTSIClientPersonDataTableColumns = ({
     header: ({ column }) => {
       return (
         <SortableHeader column={column}>
-          Stance <span className="hidden md:inline">on crypto</span>
+          <span>Stance</span> <span className="ml-1 hidden md:inline-block">on crypto</span>
         </SortableHeader>
       )
     },
@@ -67,7 +67,7 @@ export const getDTSIClientPersonDataTableColumns = ({
     accessorFn: row =>
       row.primaryRole ? getDTSIPersonRoleCategoryDisplayName(row.primaryRole) : '-',
     header: ({ column }) => {
-      return <SortableHeader column={column}>Title</SortableHeader>
+      return <SortableHeader column={column}>Role</SortableHeader>
     },
 
     cell: ({ row }) => (

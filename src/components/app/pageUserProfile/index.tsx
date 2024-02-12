@@ -65,7 +65,7 @@ export function PageUserProfile({
           </UpdateUserProfileFormDialog>
         </div>
       </div>
-      <div className="mb-14 grid grid-cols-4 rounded-lg bg-blue-50 p-3 text-center sm:p-6">
+      <div className="mb-14 grid grid-cols-4 rounded-3xl bg-blue-50 p-3 text-center sm:p-6">
         {[
           {
             label: 'Actions',
@@ -106,12 +106,14 @@ export function PageUserProfile({
           </div>
         ))}
       </div>
-      <PageTitle className="mb-4">Your advocacy progress</PageTitle>
+      <PageTitle className="mb-4" size="sm">
+        Your advocacy progress
+      </PageTitle>
       <PageSubTitle className="mb-5">
         You've completed {performedUserActionTypes.length} out of{' '}
         {Object.values(UserActionType).length} actions. Keep going!
       </PageSubTitle>
-      <div className="mx-auto mb-5 max-w-xl">
+      <div className="mx-auto mb-10 max-w-xl">
         <Progress
           value={(performedUserActionTypes.length / Object.values(UserActionType).length) * 100}
         />

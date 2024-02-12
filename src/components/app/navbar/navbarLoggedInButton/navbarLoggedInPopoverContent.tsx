@@ -36,7 +36,7 @@ export function NavbarLoggedInPopoverContent({
   const ensData = useENS()
 
   return (
-    <div className="space-y-2">
+    <div className="space-y-2 text-left">
       <div className="flex flex-col gap-6 p-4">
         <div className="flex items-center gap-4">
           {user && !ensData.isLoading ? (

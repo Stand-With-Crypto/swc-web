@@ -29,7 +29,7 @@ function UserActionFormSuccessScreenStory(props: Props) {
       <div className={cn(dialogContentStyles, dialogContentPaddingStyles, 'max-w-3xl')}>
         <UserActionFormSuccessScreenContent {...props} />
         <div className={dialogCloseStyles}>
-          <X className="h-4 w-4" />
+          <X size={20} />
           <span className="sr-only">Close</span>
         </div>
       </div>
