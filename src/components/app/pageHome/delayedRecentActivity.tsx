@@ -5,10 +5,10 @@ import { useInView } from 'framer-motion'
 
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
 import { RecentActivityRowAnimatedContainer } from '@/components/app/recentActivityRow/recentActivityRowAnimatedContainer'
-import { PublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
-import { useApiRecentActivity } from '@/hooks/useApiRecentActivity'
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
+import { PublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
+import { useApiRecentActivity } from '@/hooks/useApiRecentActivity'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 
 export function DelayedRecentActivity(props: { actions: PublicRecentActivity }) {
