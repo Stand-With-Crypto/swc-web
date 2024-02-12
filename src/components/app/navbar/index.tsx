@@ -101,7 +101,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
                   )
                 })}
                 <div>
-                  <Button asChild className="mr-3">
+                  <Button asChild className="mr-3" onClick={maybeCloseAfterNavigating}>
                     <InternalLink href={urls.donate()}>Donate</InternalLink>
                   </Button>
                 </div>

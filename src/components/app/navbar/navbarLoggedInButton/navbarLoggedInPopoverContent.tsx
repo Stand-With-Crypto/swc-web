@@ -59,7 +59,13 @@ export function NavbarLoggedInPopoverContent({
       </div>
 
       <hr />
-      <Button onClick={logoutAndDisconnect} variant="link">
+      <Button
+        onClick={() => {
+          logoutAndDisconnect()
+          onClose()
+        }}
+        variant="link"
+      >
         Log out
       </Button>
     </div>

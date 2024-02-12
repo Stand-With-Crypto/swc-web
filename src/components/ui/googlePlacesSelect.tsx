@@ -62,19 +62,24 @@ export const GooglePlacesSelect = React.forwardRef<React.ElementRef<'input'>, Pr
     return (
       <Combobox
         analytics={'Google Place Select'}
-        formatPopoverTrigger={val => (
+        formatPopoverTrigger={({ value, open }) => (
           <InputWithIcons
-            className={cn(val || 'text-gray-500', 'cursor-pointer', className)}
+            className={cn(
+              value || 'text-gray-500',
+              'cursor-pointer',
+              open && 'outline-none ring-2 ring-ring ring-offset-2',
+              className,
+            )}
             leftIcon={<MapPin className="h-4 w-4 text-gray-500" />}
             placeholder="select a location"
             ref={ref}
             value={
-              val?.description
+              value?.description
                 ? // There's a weird bug where, because the input is type="button", on mobile a long address string will overflow the entire page
                   // this is a hack to prevent that, but ideally we could fix with CSS (all the usual suspects didn't work)
-                  val.description.length > 45
-                  ? `${val.description.slice(0, 42)}...`
-                  : val.description
+                  value.description.length > 45
+                  ? `${value.description.slice(0, 42)}...`
+                  : value.description
                 : inputProps.placeholder || 'select a location'
             }
             {...inputProps}

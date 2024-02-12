@@ -51,13 +51,13 @@ export function ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: Suppo
   )
   const res = useGetDTSIPeopleFromAddress(address?.description || '')
   useEffect(() => {
-    if (!address && userAddress) {
+    if (userAddress) {
       _setAddress({
         place_id: userAddress.googlePlaceId,
         description: userAddress.formattedDescription,
       })
     }
-  }, [userAddress, address])
+  }, [userAddress])
 
   if (!address || !res.data) {
     return (
@@ -68,9 +68,6 @@ export function ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: Suppo
           placeholder="Enter your address"
           value={address}
         />
-        <p className="mt-2 text-xs text-fontcolor-muted">
-          Enter your address to find your representatives
-        </p>
       </div>
     )
   }
