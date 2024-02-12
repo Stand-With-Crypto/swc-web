@@ -12,10 +12,11 @@ import {
 import { PAGE_LEADERBOARD_TOTAL_PRE_GENERATED_PAGES } from '@/components/app/pageLeaderboard/constants'
 import { getDataForPageLeaderboard } from '@/components/app/pageLeaderboard/getData'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
+import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
 import { PageProps } from '@/types'
 
-export const revalidate = 30
+export const revalidate = SECONDS_DURATION.SECOND * 30
 export const dynamic = 'error'
 export const dynamicParams = true
 
