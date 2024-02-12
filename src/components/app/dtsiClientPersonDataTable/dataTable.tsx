@@ -13,6 +13,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 import { ArrowUpDown, Search } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 
 import { Person } from '@/components/app/dtsiClientPersonDataTable/columns'
 import { DataTablePagination } from '@/components/app/dtsiClientPersonDataTable/dataTablePagination'
@@ -35,6 +36,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { useIntlUrls } from '@/hooks/useIntlUrls'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -69,6 +71,8 @@ export function DataTable<TData extends Person, TValue>({
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
   const [globalFilter, setGlobalFilter] = React.useState<GlobalFilters>(getGlobalFilterDefaults())
+  const urls = useIntlUrls()
+  const router = useRouter()
   const data = useMemo(() => {
     return filterDataViaGlobalFilters<TData>(passedData, globalFilter)
   }, [globalFilter, passedData])
@@ -145,7 +149,12 @@ export function DataTable<TData extends Person, TValue>({
             <TableBody>
               {table.getRowModel().rows?.length ? (
                 table.getRowModel().rows.map(row => (
-                  <TableRow data-state={row.getIsSelected() && 'selected'} key={row.id}>
+                  <TableRow
+                    className="cursor-pointer"
+                    data-state={row.getIsSelected() && 'selected'}
+                    key={row.id}
+                    onClick={() => router.push(urls.politicianDetails(row.original.slug))}
+                  >
                     {row.getVisibleCells().map(cell => (
                       <TableCell key={cell.id}>
                         {flexRender(cell.column.columnDef.cell, cell.getContext())}

@@ -33,7 +33,6 @@ export function UpdateUserProfileFormContainer({
   if (sections.currentSection === Sections.Profile) {
     return (
       <UpdateUserProfileForm
-        onCancel={() => sections.goToSection(Sections.InformationVisibility)}
         onSuccess={newFields => {
           setStatefulUser({ ...user, ...newFields })
           sections.goToSection(Sections.InformationVisibility)

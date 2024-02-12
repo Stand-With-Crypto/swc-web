@@ -39,7 +39,7 @@ export async function HomepageDialogDeeplinkLayout({
       <div className={cn(dialogContentStyles, size === 'md' && 'max-w-3xl', 'min-h-[400px]')}>
         {children}
         <InternalLink className={dialogCloseStyles} href={urls.home()} replace>
-          <X className="h-4 w-4" />
+          <X size={20} />
           <span className="sr-only">Close</span>
         </InternalLink>
       </div>
