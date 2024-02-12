@@ -1,6 +1,3 @@
-import { CoinbaseCommercePayment } from '@/utils/server/coinbaseCommerce/paymentRequest'
-import { prismaClient } from '@/utils/server/prismaClient'
-import { UserActionDonationCampaignName } from '@/utils/shared/userActionCampaigns'
 import {
   DonationOrganization,
   User,
@@ -8,6 +5,10 @@ import {
   UserInformationVisibility,
 } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
+
+import { CoinbaseCommercePayment } from '@/utils/server/coinbaseCommerce/paymentRequest'
+import { prismaClient } from '@/utils/server/prismaClient'
+import { UserActionDonationCampaignName } from '@/utils/shared/userActionCampaigns'
 
 /**
  * NOTE: All the fields reference below will be found in the `metadata` field.

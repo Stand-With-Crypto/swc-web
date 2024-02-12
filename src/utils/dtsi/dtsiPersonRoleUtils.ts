@@ -1,3 +1,6 @@
+import { format as dateFormat, isBefore, parseISO } from 'date-fns'
+import _ from 'lodash'
+
 import {
   DTSI_PersonRole,
   DTSI_PersonRoleCategory,
@@ -5,8 +8,6 @@ import {
 } from '@/data/dtsi/generated'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
 import { getUSStateNameFromStateCode } from '@/utils/shared/usStateUtils'
-import _ from 'lodash'
-import { format as dateFormat, isBefore, parseISO } from 'date-fns'
 
 export const getDTSIFormattedShortPersonRole = (
   role: Pick<

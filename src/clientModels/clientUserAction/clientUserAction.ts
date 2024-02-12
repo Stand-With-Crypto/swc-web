@@ -1,6 +1,3 @@
-import { ClientNFTMint, getClientNFTMint } from '@/clientModels/clientNFTMint'
-import { ClientModel, getClientModel } from '@/clientModels/utils'
-import { DTSIPersonForUserActions } from '@/data/dtsi/queries/queryDTSIPeopleBySlugForUserActions'
 import {
   NFTMint,
   UserAction,
@@ -12,6 +9,10 @@ import {
   UserActionType,
 } from '@prisma/client'
 import _ from 'lodash'
+
+import { ClientNFTMint, getClientNFTMint } from '@/clientModels/clientNFTMint'
+import { ClientModel, getClientModel } from '@/clientModels/utils'
+import { DTSIPersonForUserActions } from '@/data/dtsi/queries/queryDTSIPeopleBySlugForUserActions'
 
 /*
 Assumption: we will always want to interact with the user actions and their related type joins together

@@ -1,26 +1,26 @@
 'use client'
 
 import React from 'react'
-import { toast } from 'sonner'
-import { Copy } from 'lucide-react'
 import { useCopyToClipboard } from 'react-use'
 import * as Sentry from '@sentry/nextjs'
+import { useENS } from '@thirdweb-dev/react'
+import { Copy } from 'lucide-react'
+import { toast } from 'sonner'
 
-import { Button } from '@/components/ui/button'
-import { useThirdwebData } from '@/hooks/useThirdwebData'
-import { InternalLink } from '@/components/ui/link'
-import { useIntlUrls } from '@/hooks/useIntlUrls'
+import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
+import { ClientUserCryptoAddressWithENSData } from '@/clientModels/clientUser/clientUserCryptoAddress'
 import { UserAvatar } from '@/components/app/userAvatar'
+import { Button } from '@/components/ui/button'
+import { InternalLink } from '@/components/ui/link'
+import { Skeleton } from '@/components/ui/skeleton'
+import { useIntlUrls } from '@/hooks/useIntlUrls'
+import { useThirdwebData } from '@/hooks/useThirdwebData'
+import { appendENSHookDataToUser } from '@/utils/web/appendENSHookDataToUser'
+import { maybeEllipsisText } from '@/utils/web/maybeEllipsisText'
 import {
   getFullSensitiveDataUserDisplayName,
   getSensitiveDataUserDisplayName,
 } from '@/utils/web/userUtils'
-import { Skeleton } from '@/components/ui/skeleton'
-import { maybeEllipsisText } from '@/utils/web/maybeEllipsisText'
-import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
-import { useENS } from '@thirdweb-dev/react'
-import { ClientUserCryptoAddressWithENSData } from '@/clientModels/clientUser/clientUserCryptoAddress'
-import { appendENSHookDataToUser } from '@/utils/web/appendENSHookDataToUser'
 
 interface NavbarLoggedInSessionPopoverContentProps {
   onClose: () => void
@@ -36,7 +36,7 @@ export function NavbarLoggedInPopoverContent({
   const ensData = useENS()
 
   return (
-    <div className="space-y-2">
+    <div className="space-y-2 text-left">
       <div className="flex flex-col gap-6 p-4">
         <div className="flex items-center gap-4">
           {user && !ensData.isLoading ? (

@@ -1,3 +1,7 @@
+import { faker } from '@faker-js/faker'
+import type { Meta, StoryObj } from '@storybook/react'
+import { X } from 'lucide-react'
+
 import { getClientAddress } from '@/clientModels/clientAddress'
 import { getSensitiveDataClientUser } from '@/clientModels/clientUser/sensitiveDataClientUser'
 import { UserActionFormSuccessScreenContent } from '@/components/app/userActionFormSuccessScreen'
@@ -16,9 +20,6 @@ import { mockUserEmailAddress } from '@/mocks/models/mockUserEmailAddress'
 import { NFTSlug } from '@/utils/shared/nft'
 import { cn } from '@/utils/web/cn'
 import { NFT_CLIENT_METADATA } from '@/utils/web/nft'
-import { faker } from '@faker-js/faker'
-import type { Meta, StoryObj } from '@storybook/react'
-import { X } from 'lucide-react'
 
 export type Props = React.ComponentPropsWithoutRef<typeof UserActionFormSuccessScreenMainCTA>
 
@@ -28,7 +29,7 @@ function UserActionFormSuccessScreenStory(props: Props) {
       <div className={cn(dialogContentStyles, dialogContentPaddingStyles, 'max-w-3xl')}>
         <UserActionFormSuccessScreenContent {...props} />
         <div className={dialogCloseStyles}>
-          <X className="h-4 w-4" />
+          <X size={20} />
           <span className="sr-only">Close</span>
         </div>
       </div>

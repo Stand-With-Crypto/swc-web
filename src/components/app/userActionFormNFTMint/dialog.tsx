@@ -1,11 +1,12 @@
 'use client'
 
+import { Suspense } from 'react'
+
 import { UserActionFormNFTMint } from '@/components/app/userActionFormNFTMint'
 import { LazyUserActionFormNFTMint } from '@/components/app/userActionFormNFTMint/lazyLoad'
 import { UserActionFormNFTMintSkeleton } from '@/components/app/userActionFormNFTMint/skeleton'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { useDialog } from '@/hooks/useDialog'
-import { Suspense } from 'react'
 
 export function UserActionFormNFTMintDialog({
   children,

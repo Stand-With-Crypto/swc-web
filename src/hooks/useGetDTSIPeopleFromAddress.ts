@@ -1,9 +1,10 @@
+import useSWR from 'swr'
+
 import { DTSIPeopleByCongressionalDistrictQueryResult } from '@/data/dtsi/queries/queryDTSIPeopleByCongressionalDistrict'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { getCongressionalDistrictFromAddress } from '@/utils/shared/getCongressionalDistrictFromAddress'
 import { apiUrls } from '@/utils/shared/urls'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
-import useSWR from 'swr'
 
 async function getDTSIPeopleFromCongressionalDistrict(
   result: Awaited<ReturnType<typeof getCongressionalDistrictFromAddress>>,

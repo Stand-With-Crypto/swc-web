@@ -1,5 +1,7 @@
 'use client'
 
+import { Suspense } from 'react'
+
 import { UpdateUserProfileFormContainer } from '@/components/app/updateUserProfileForm'
 import { ANALYTICS_NAME_UPDATE_USER_PROFILE_FORM } from '@/components/app/updateUserProfileForm/constants'
 import { LazyUpdateUserProfileForm } from '@/components/app/updateUserProfileForm/lazyLoad'
@@ -7,7 +9,6 @@ import { OPEN_UPDATE_USER_PROFILE_FORM_QUERY_PARAM_KEY } from '@/components/app/
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useQueryParamDialog } from '@/hooks/useQueryParamDialog'
-import { Suspense } from 'react'
 
 export function UpdateUserProfileFormDialog({
   children,

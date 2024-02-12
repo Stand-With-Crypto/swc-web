@@ -1,11 +1,10 @@
-import { useDisconnect, useLogout, useUser, useWallet } from '@thirdweb-dev/react'
-import { usePathname, useRouter } from 'next/navigation'
+import { useDisconnect, useLogout } from '@thirdweb-dev/react'
 import Cookies from 'js-cookie'
-import useSWR from 'swr'
+import { usePathname, useRouter } from 'next/navigation'
 
 import { useAuthUser } from '@/hooks/useAuthUser'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
-import { USER_SESSION_ID_COOKIE_NAME, generateUserSessionId } from '@/utils/shared/userSessionId'
+import { generateUserSessionId, USER_SESSION_ID_COOKIE_NAME } from '@/utils/shared/userSessionId'
 
 export function useThirdwebData() {
   const session = useAuthUser()
@@ -32,18 +31,4 @@ export function useThirdwebData() {
       handleLogoutSuccess()
     },
   }
-}
-
-export function useWalletBalance() {
-  const session = useUser()
-  const wallet = useWallet()
-
-  const key =
-    session.user?.address && wallet?.getBalance
-      ? `useWalletBallance-${session.user?.address}`
-      : null
-
-  return useSWR(key, async () => {
-    return wallet?.getBalance()
-  })
 }

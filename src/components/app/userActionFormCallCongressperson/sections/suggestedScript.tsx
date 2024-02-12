@@ -1,26 +1,26 @@
-import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
+import { UserActionType } from '@prisma/client'
+import { ArrowRight } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 
 import {
-  CreateActionCallCongresspersonInput,
   actionCreateUserActionCallCongressperson,
+  CreateActionCallCongresspersonInput,
 } from '@/actions/actionCreateUserActionCallCongressperson'
 import { UserActionFormCallCongresspersonProps } from '@/components/app/userActionFormCallCongressperson'
 import { SectionNames } from '@/components/app/userActionFormCallCongressperson/constants'
 import { Button } from '@/components/ui/button'
+import { TrackedExternalLink } from '@/components/ui/trackedExternalLink'
 import { UseSectionsReturn } from '@/hooks/useSections'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { getGoogleCivicOfficialByDTSIName } from '@/utils/shared/googleCivicInfo'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { UserActionCallCampaignName } from '@/utils/shared/userActionCampaigns'
-import { triggerServerActionForForm } from '@/utils/web/formUtils'
-import { toastGenericError } from '@/utils/web/toastUtils'
-import { UserActionType } from '@prisma/client'
-import { TrackedExternalLink } from '@/components/ui/trackedExternalLink'
 import { userFullName } from '@/utils/shared/userFullName'
+import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
-import { ArrowRight } from 'lucide-react'
 import { UserActionFormLayout } from '@/components/app/userActionFormCommon/layout'
+import { toastGenericError } from '@/utils/web/toastUtils'
 
 export function SuggestedScript({
   user,
@@ -36,13 +36,7 @@ export function SuggestedScript({
     ref.current?.focus()
   }, [ref])
   const phoneNumber = React.useMemo(() => {
-    const official = getGoogleCivicOfficialByDTSIName(
-      {
-        firstName: dtsiPerson.firstName,
-        lastName: dtsiPerson.lastName,
-      },
-      civicData,
-    )
+    const official = getGoogleCivicOfficialByDTSIName(dtsiPerson, civicData)
 
     if (!official) {
       toastGenericError()

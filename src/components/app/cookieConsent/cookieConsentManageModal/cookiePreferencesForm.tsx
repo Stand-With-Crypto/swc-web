@@ -1,15 +1,16 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
-import { GenericErrorFormValues } from '@/utils/web/formUtils'
-import { zodManageCookieConsent } from '@/components/app/cookieConsent/cookieConsentSchema'
-import { Form, FormControl, FormField, FormItem } from '@/components/ui/form'
-import { Checkbox } from '@/components/ui/checkbox'
 import { CheckboxProps } from '@radix-ui/react-checkbox'
-import { InfoBadge } from '@/components/ui/infoBadge'
+import { z } from 'zod'
+
+import { zodManageCookieConsent } from '@/components/app/cookieConsent/cookieConsentSchema'
 import { Button } from '@/components/ui/button'
+import { Checkbox } from '@/components/ui/checkbox'
+import { Form, FormControl, FormField, FormItem } from '@/components/ui/form'
+import { InfoBadge } from '@/components/ui/infoBadge'
 import { CookieConsentPermissions, OptionalCookieConsentTypes } from '@/utils/shared/cookieConsent'
+import { GenericErrorFormValues } from '@/utils/web/formUtils'
 
 export interface CookiePreferencesFormProps {
   onSubmit: (accepted: CookieConsentPermissions) => void

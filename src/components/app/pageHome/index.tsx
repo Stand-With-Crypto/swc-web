@@ -1,3 +1,6 @@
+import { Suspense } from 'react'
+import { ArrowUpRight, ThumbsDown, ThumbsUp } from 'lucide-react'
+
 import { DTSIPersonCard } from '@/components/app/dtsiPersonCard'
 import { DelayedRecentActivity } from '@/components/app/pageHome/delayedRecentActivity'
 import { HeroCTA } from '@/components/app/pageHome/heroCTA'
@@ -15,12 +18,12 @@ import { LazyResponsiveYoutube } from '@/components/ui/responsiveYoutube/lazyLoa
 import { Skeleton } from '@/components/ui/skeleton'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
-import { PageProps } from '@/types'
 import { groupAndSortDTSIPeopleByCryptoStance } from '@/utils/dtsi/dtsiPersonUtils'
 import { getIntlUrls } from '@/utils/shared/urls'
-import { ArrowUpRight, ThumbsDown, ThumbsUp } from 'lucide-react'
-import { Suspense } from 'react'
+
 import { TopLevelMetrics } from './topLevelMetrics'
+
+import { PageProps } from '@/types'
 
 export function PageHome({
   params,
@@ -118,12 +121,20 @@ export function PageHome({
           </PageTitle>
           <PageSubTitle as="h4">
             See how our community is taking a stand to safeguard the future of crypto in America.
+            Donations to{' '}
+            <ExternalLink
+              className="underline"
+              href={'https://www.fec.gov/data/committee/C00835959/'}
+            >
+              Fairshake
+            </ExternalLink>
+            , a pro-crypto Super PAC, are not included on the leaderboard.
           </PageSubTitle>
           <Tabs
             analytics={'Homepage Our Community Tabs'}
             defaultValue={RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY}
           >
-            <div className="text-center">
+            <div className="mb-8 text-center lg:mb-10">
               <TabsList className="mx-auto">
                 <TabsTrigger value={RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY}>
                   Recent activity
@@ -134,37 +145,31 @@ export function PageHome({
               </TabsList>
             </div>
             <DelayedRecentActivity actions={actions} />
-            <TabsContent className="space-y-7" value={RecentActivityAndLeaderboardTabs.LEADERBOARD}>
-              <p className="mt-2 h-7 text-center text-xs text-gray-500">
-                Donations to{' '}
-                <ExternalLink
-                  href={
-                    'https://www.axios.com/2023/12/18/crypto-super-pac-fairshake-2024-elections'
-                  }
-                >
-                  Fairshake
-                </ExternalLink>
-                , a pro-crypto Super PAC, are not included on the leaderboard.
-              </p>
-              {sumDonationsByUser.map((donor, index) => (
-                <SumDonationsByUserRow
-                  index={index}
-                  key={index}
-                  locale={locale}
-                  sumDonations={donor}
-                />
-              ))}
+            <TabsContent value={RecentActivityAndLeaderboardTabs.LEADERBOARD}>
+              <div className="space-y-8 lg:space-y-10">
+                {sumDonationsByUser.map((donor, index) => (
+                  <SumDonationsByUserRow
+                    index={index}
+                    key={index}
+                    locale={locale}
+                    sumDonations={donor}
+                  />
+                ))}
+              </div>{' '}
+              <div className="mt-7 space-x-4 text-center">
+                <Button asChild>
+                  <InternalLink href={urls.donate()}>Donate</InternalLink>
+                </Button>
+                <Button asChild variant="secondary">
+                  <InternalLink
+                    href={urls.leaderboard({ tab: RecentActivityAndLeaderboardTabs.LEADERBOARD })}
+                  >
+                    View all
+                  </InternalLink>
+                </Button>
+              </div>
             </TabsContent>
           </Tabs>
-          <div className="space-x-4 text-center">
-            <Button asChild>
-              <InternalLink href={urls.donate()}>Donate</InternalLink>
-            </Button>
-            <Button asChild variant="secondary">
-              <InternalLink href={urls.leaderboard()}>View all</InternalLink>
-            </Button>
-          </div>
-          <div></div>
         </section>
         <section className="mb-16 space-y-7 md:mb-24">
           <PageTitle as="h3" size="md">

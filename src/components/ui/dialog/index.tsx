@@ -1,7 +1,8 @@
 'use client'
 
-import * as DialogPrimitive from '@radix-ui/react-dialog'
 import * as React from 'react'
+import * as DialogPrimitive from '@radix-ui/react-dialog'
+import { X } from 'lucide-react'
 
 import {
   dialogCloseStyles,
@@ -12,7 +13,6 @@ import {
 import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
 import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
 import { cn } from '@/utils/web/cn'
-import { X } from 'lucide-react'
 import {
   PrimitiveComponentAnalytics,
   trackPrimitiveComponentAnalytics,
@@ -72,7 +72,7 @@ const DialogContent = React.forwardRef<
     >
       {children}
       <DialogPrimitive.Close className={cn(dialogCloseStyles, closeClassName)} tabIndex={-1}>
-        <X className="h-4 w-4" />
+        <X size={20} />
         <span className="sr-only">Close</span>
       </DialogPrimitive.Close>
     </DialogPrimitive.Content>

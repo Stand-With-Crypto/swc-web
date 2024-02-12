@@ -1,7 +1,7 @@
 import * as React from 'react'
 
-import { cn } from '@/utils/web/cn'
 import { Input, InputProps } from '@/components/ui/input'
+import { cn } from '@/utils/web/cn'
 
 const InputWithIcons = React.forwardRef<
   HTMLInputElement,

@@ -1,6 +1,7 @@
+import _ from 'lodash'
+
 import { DTSI_Person } from '@/data/dtsi/generated'
 import { twNoop } from '@/utils/web/cn'
-import _ from 'lodash'
 
 export enum DTSILetterGrade {
   A = 'A',

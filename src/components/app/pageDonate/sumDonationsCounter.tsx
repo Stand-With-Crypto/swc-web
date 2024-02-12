@@ -1,5 +1,8 @@
 'use client'
 
+import { useMemo } from 'react'
+import useSWR from 'swr'
+
 import { AnimatedNumericOdometer } from '@/components/ui/animatedNumericOdometer'
 import { roundDownNumberToAnimateIn } from '@/components/ui/animatedNumericOdometer/roundDownNumberToAnimateIn'
 import { SumDonations } from '@/data/aggregations/getSumDonations'
@@ -7,8 +10,6 @@ import { SupportedLocale } from '@/intl/locales'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { apiUrls } from '@/utils/shared/urls'
-import { useMemo } from 'react'
-import useSWR from 'swr'
 
 interface SumDonationsCounterProps {
   initialData: SumDonations

@@ -1,12 +1,13 @@
 'use client'
 
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+
 import { UserActionFormNFTMint } from '@/components/app/userActionFormNFTMint'
 import { UserActionFormNFTMintSkeleton } from '@/components/app/userActionFormNFTMint/skeleton'
 import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
-import { useRouter } from 'next/navigation'
-import { useState } from 'react'
 
 export function UserActionFormNFTMintDeeplinkWrapper() {
   const fetchUser = useApiResponseForUserFullProfileInfo()

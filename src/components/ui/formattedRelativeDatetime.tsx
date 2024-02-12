@@ -1,5 +1,6 @@
-import { SupportedLocale } from '@/intl/locales'
 import { differenceInMinutes } from 'date-fns'
+
+import { SupportedLocale } from '@/intl/locales'
 
 export function FormattedRelativeDatetime({
   date,

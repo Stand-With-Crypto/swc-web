@@ -1,4 +1,5 @@
 import React from 'react'
+import { DialogProps } from '@radix-ui/react-dialog'
 
 import {
   Dialog,
@@ -16,10 +17,9 @@ import {
 } from '@/components/ui/drawer'
 import { useDialog } from '@/hooks/useDialog'
 import { useIsMobile } from '@/hooks/useIsMobile'
+import { CookieConsentPermissions } from '@/utils/shared/cookieConsent'
 import { cn } from '@/utils/web/cn'
 
-import { CookieConsentPermissions } from '@/utils/shared/cookieConsent'
-import { DialogProps } from '@radix-ui/react-dialog'
 import { CookiePreferencesForm } from './cookiePreferencesForm'
 
 export interface ManageCookiesModalProps {

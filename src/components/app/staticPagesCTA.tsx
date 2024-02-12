@@ -20,7 +20,7 @@ export function StaticPagesCTA() {
         <MaybeAuthenticatedContent
           authenticatedContent={
             <Button asChild size="lg">
-              <InternalLink href={urls.profile()}>View Your Profile</InternalLink>
+              <InternalLink href={urls.profile()}>View Profile</InternalLink>
             </Button>
           }
         >

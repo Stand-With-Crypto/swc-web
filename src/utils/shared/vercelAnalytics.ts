@@ -1,6 +1,7 @@
-import { AnalyticProperties } from '@/utils/shared/sharedAnalytics'
 import { track } from '@vercel/analytics'
 import _ from 'lodash'
+
+import { AnalyticProperties } from '@/utils/shared/sharedAnalytics'
 
 // vercel has a stricter type definition of what is an acceptable event property. Transforming our broader list of values to something more narrow
 export function formatVercelAnalyticsEventProperties(eventProperties: AnalyticProperties) {

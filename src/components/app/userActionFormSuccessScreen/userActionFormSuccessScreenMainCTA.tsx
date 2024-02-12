@@ -1,4 +1,7 @@
 'use client'
+import { useState } from 'react'
+import { Check } from 'lucide-react'
+
 import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
 import { GetUserPerformedUserActionTypesResponse } from '@/app/api/identified-user/performed-user-action-types/route'
 import { ThirdwebLoginDialog } from '@/components/app/authentication/thirdwebLoginContent'
@@ -14,8 +17,6 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { hasCompleteUserProfile } from '@/utils/web/hasCompleteUserProfile'
 import { NFTClientMetadata } from '@/utils/web/nft'
-import { Check } from 'lucide-react'
-import { useState } from 'react'
 
 const NFTImage = ({ nft }: { nft: NFTClientMetadata }) => (
   <NextImage

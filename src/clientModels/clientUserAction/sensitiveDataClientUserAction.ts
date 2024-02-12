@@ -1,7 +1,3 @@
-import { ClientAddress, getClientAddress } from '@/clientModels/clientAddress'
-import { ClientNFTMint, getClientNFTMint } from '@/clientModels/clientNFTMint'
-import { ClientModel, getClientModel } from '@/clientModels/utils'
-import { DTSIPersonForUserActions } from '@/data/dtsi/queries/queryDTSIPeopleBySlugForUserActions'
 import {
   Address,
   NFTMint,
@@ -13,7 +9,10 @@ import {
   UserActionOptIn,
   UserActionType,
 } from '@prisma/client'
-import _ from 'lodash'
+
+import { ClientAddress, getClientAddress } from '@/clientModels/clientAddress'
+import { ClientNFTMint, getClientNFTMint } from '@/clientModels/clientNFTMint'
+import { ClientModel, getClientModel } from '@/clientModels/utils'
 
 /*
 Assumption: we will always want to interact with the user actions and their related type joins together
@@ -33,9 +32,7 @@ type SensitiveDataClientUserActionDatabaseQuery = UserAction & {
   userActionOptIn: UserActionOptIn | null
 }
 
-type SensitiveDataClientUserActionEmailRecipient = Pick<UserActionEmailRecipient, 'id'> & {
-  person: DTSIPersonForUserActions
-}
+type SensitiveDataClientUserActionEmailRecipient = Pick<UserActionEmailRecipient, 'id'>
 type SensitiveDataClientUserActionEmail = Pick<
   UserActionEmail,
   'senderEmail' | 'firstName' | 'lastName'
@@ -45,7 +42,6 @@ type SensitiveDataClientUserActionEmail = Pick<
   actionType: typeof UserActionType.EMAIL
 }
 type SensitiveDataClientUserActionCall = Pick<UserActionCall, 'recipientPhoneNumber'> & {
-  person: DTSIPersonForUserActions
   actionType: typeof UserActionType.CALL
 }
 type SensitiveDataClientUserActionDonation = Pick<
@@ -98,12 +94,9 @@ const getRelatedModel = <K extends keyof SensitiveDataClientUserActionDatabaseQu
 
 export const getSensitiveDataClientUserAction = ({
   record,
-  dtsiPeople,
 }: {
   record: SensitiveDataClientUserActionDatabaseQuery
-  dtsiPeople: DTSIPersonForUserActions[]
 }): SensitiveDataClientUserAction => {
-  const peopleBySlug = _.keyBy(dtsiPeople, x => x.slug)
   const { id, datetimeCreated, actionType, nftMint } = record
   const sharedProps = {
     id,
@@ -122,10 +115,9 @@ export const getSensitiveDataClientUserAction = ({
       return getClientModel({ ...sharedProps, ...callFields })
     }
     case UserActionType.CALL: {
-      const { recipientPhoneNumber, recipientDtsiSlug } = getRelatedModel(record, 'userActionCall')
+      const { recipientPhoneNumber } = getRelatedModel(record, 'userActionCall')
       const callFields: SensitiveDataClientUserActionCall = {
         recipientPhoneNumber,
-        person: peopleBySlug[recipientDtsiSlug],
         actionType,
       }
       return getClientModel({ ...sharedProps, ...callFields })
@@ -155,7 +147,6 @@ export const getSensitiveDataClientUserAction = ({
         address: getClientAddress(address),
         userActionEmailRecipients: userActionEmailRecipients.map(x => ({
           id: x.id,
-          person: peopleBySlug[x.dtsiSlug],
         })),
       }
       return getClientModel({ ...sharedProps, ...emailFields })
