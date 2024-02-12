@@ -4,9 +4,10 @@ import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 
 import { queryDTSIPeopleByCongressionalDistrict } from '@/data/dtsi/queries/queryDTSIPeopleByCongressionalDistrict'
+import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
 export const dynamic = 'error'
-export const revalidate = 60 * 24
+export const revalidate = SECONDS_DURATION.WEEK
 
 const zodParams = z.object({
   districtNumber: z.string().pipe(z.coerce.number().int().gte(0).lt(1000)),
