@@ -21,7 +21,7 @@ export type GenericErrorFormValues = {
 export type FormValues<T extends z.ZodType<any, any, any>> = z.infer<T> & GenericErrorFormValues
 
 export async function triggerServerActionForForm<
-  F extends UseFormReturn<any, any, undefined>,
+  F extends UseFormReturn<any, any, any>,
   Fn extends () => Promise<{ errors: Record<string, string[]> } | object>,
 >(
   {
