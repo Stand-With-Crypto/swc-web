@@ -93,26 +93,17 @@ export function UserActionFormEmailCongressperson({
 }) {
   const router = useRouter()
   const urls = useIntlUrls()
-
-  const defaultValues = useMemo(() => {
-    const userDefaultValues = getDefaultValues({ user, dtsiSlug: undefined })
-
-    if (initialValues) {
-      return {
-        ...userDefaultValues,
-        address: userDefaultValues.address || initialValues.address,
-        emailAddress: userDefaultValues.emailAddress || initialValues?.email,
-        firstName: userDefaultValues.firstName || initialValues.firstName,
-        lastName: userDefaultValues.lastName || initialValues.lastName,
-      }
-    }
-
-    return userDefaultValues
-  }, [initialValues, user])
+  const userDefaultValues = getDefaultValues({ user, dtsiSlug: undefined })
 
   const form = useForm<FormValues>({
     resolver: zodResolver(zodUserActionFormEmailCongresspersonFields),
-    defaultValues,
+    defaultValues: {
+      ...userDefaultValues,
+      address: userDefaultValues.address || initialValues?.address,
+      emailAddress: userDefaultValues.emailAddress || initialValues?.email,
+      firstName: userDefaultValues.firstName || initialValues?.firstName,
+      lastName: userDefaultValues.lastName || initialValues?.lastName,
+    },
   })
 
   React.useEffect(() => {
