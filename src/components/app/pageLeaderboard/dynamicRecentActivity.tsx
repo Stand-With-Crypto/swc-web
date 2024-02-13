@@ -8,10 +8,5 @@ export function DynamicRecentActivity(props: { actions: PublicRecentActivity }) 
   const actions = useApiRecentActivity(props.actions, {
     limit: PAGE_LEADERBOARD_ITEMS_PER_PAGE,
   }).data
-  return (
-    <div>
-      <div className="mt-2 h-7" />
-      <RecentActivityRowAnimatedContainer actions={actions} />
-    </div>
-  )
+  return <RecentActivityRowAnimatedContainer actions={actions} />
 }

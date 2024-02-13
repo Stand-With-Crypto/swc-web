@@ -22,10 +22,10 @@ export function ScoreExplainer({ person }: { person: DTSIPersonDetails }) {
           <DTSIFormattedLetterGrade person={person} size={60} />
         </div>
         <div>
-          <h3 className="mb-1 text-xl font-bold">
+          <h3 className="mb-1 font-bold md:text-xl">
             {convertDTSIStanceScoreToCryptoSupportLanguageSentence(person)}
           </h3>
-          <h4 className="text-fontcolor-muted">
+          <h4 className="text-sm text-fontcolor-muted md:text-base">
             {person.firstNickname || person.firstName} has made{' '}
             <FormattedNumber amount={person.stances.length} locale={locale} />{' '}
             {pluralize({ singular: 'stance', count: person.stances.length })} about crypto.
