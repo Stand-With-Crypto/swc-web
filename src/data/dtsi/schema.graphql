@@ -423,7 +423,7 @@ enum TwitterAccountType {
 Any Object Type with a datetimeUpdated
 """
 union UpdatableUnion =
-    Bill
+  | Bill
   | BillAnalysis
   | BillPersonRelationship
   | Person
