@@ -24,8 +24,9 @@ import {
 } from '@/components/app/userActionFormNFTMint/sections/checkout/useCheckoutError'
 import { UseCheckoutControllerReturn } from '@/components/app/userActionFormNFTMint/useCheckoutController'
 import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
+import { Card, CardSkeleton } from '@/components/ui/card'
 import { Checkbox } from '@/components/ui/checkbox'
+import { Collapsible, CollapsibleContent } from '@/components/ui/collapsible'
 import { ErrorMessage } from '@/components/ui/errorMessage'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
@@ -33,7 +34,6 @@ import { PageTitle } from '@/components/ui/pageTitleText'
 import { Skeleton } from '@/components/ui/skeleton'
 import { UseSectionsReturn } from '@/hooks/useSections'
 import { MintStatus } from '@/hooks/useSendMintNFTTransaction'
-import { toBigNumber } from '@/utils/shared/bigNumber'
 import { SupportedCryptoCurrencyCodes } from '@/utils/shared/currency'
 import { theme } from '@/utils/web/thirdweb/theme'
 
@@ -48,6 +48,7 @@ interface UserActionFormNFTMintCheckoutProps
   onIsUSResidentChange: (newValue: boolean) => void
 }
 
+// TODO review copy
 const CHECKOUT_ERROR_TO_MESSAGE: Record<CheckoutError, string> = {
   insufficientFunds: 'You need ETH on Base to mint',
   networkSwitch: 'Please switch to the Base Network',
@@ -71,7 +72,11 @@ export function UserActionFormNFTMintCheckout({
   const { contract } = useContract(MINT_NFT_CONTRACT_ADDRESS)
   const { data: contractMetadata, isLoading: isLoadingMetadata } = useContractMetadata(contract)
   const address = useAddress()
-  const checkoutError = useCheckoutError({ totalFee: totalFee ?? toBigNumber('0') })
+  console.log({ 'contract?.chainId': contract?.chainId })
+  const checkoutError = useCheckoutError({
+    totalFee: totalFee,
+    contractChainId: contract?.chainId,
+  })
   const connectionStatus = useConnectionStatus()
 
   if (!contractMetadata || isLoadingMetadata || !address) {
@@ -146,20 +151,21 @@ export function UserActionFormNFTMintCheckout({
           </div>
         </Card>
 
-        {/* TODO review UI */}
-        {!checkoutError && (
-          <label className="flex cursor-pointer items-center gap-4">
-            <Checkbox
-              checked={isUSResident}
-              onCheckedChange={val => onIsUSResidentChange(val as boolean)}
-            />
-            <p className="leading-4 text-fontcolor-muted">
-              I am a US citizen or lawful permanent resident (i.e. a green card holder). Checking
-              this box will append data to your onchain transaction to comply with US regulation.
-              Donations from non-US residents cannot be used for electioneering purposes.
-            </p>
-          </label>
-        )}
+        <Collapsible open={!checkoutError}>
+          <CollapsibleContent className="AnimateCollapsibleContent">
+            <label className="flex cursor-pointer items-center gap-4">
+              <Checkbox
+                checked={isUSResident}
+                onCheckedChange={val => onIsUSResidentChange(val as boolean)}
+              />
+              <p className="leading-4 text-fontcolor-muted">
+                I am a US citizen or lawful permanent resident (i.e. a green card holder). Checking
+                this box will append data to your onchain transaction to comply with US regulation.
+                Donations from non-US residents cannot be used for electioneering purposes.
+              </p>
+            </label>
+          </CollapsibleContent>
+        </Collapsible>
 
         <UserActionFormLayout.Footer>
           <Web3Button
@@ -201,32 +207,28 @@ function UserActionFormNFTMintCheckoutSkeleton() {
           </div>
         </div>
 
-        <Skeleton className="rounded-3xl">
-          <Card>
-            <div className="flex items-center justify-between">
-              <p>Quantity</p>
-              <QuantityInput onChange={noop} onDecrement={noop} onIncrement={noop} value={0} />
-            </div>
-          </Card>
-        </Skeleton>
+        <CardSkeleton>
+          <div className="flex items-center justify-between">
+            <p>Quantity</p>
+            <QuantityInput onChange={noop} onDecrement={noop} onIncrement={noop} value={0} />
+          </div>
+        </CardSkeleton>
 
-        <Skeleton className="rounded-3xl">
-          <Card>
-            <div className="space-y-8">
-              {Array.from({ length: 3 }, (_, i) => (
-                <div className="flex items-center justify-between" key={i}>
-                  <div className="max-w-96">
-                    <p>Donation</p>
-                    <p className="text-xs text-muted-foreground">
-                      <Balancer>Lorem ipsum dolor sit amet consectetur adipisicing elit.</Balancer>
-                    </p>
-                  </div>
-                  <CurrencyDisplay value="0.00435" />
+        <CardSkeleton>
+          <div className="space-y-8">
+            {Array.from({ length: 3 }, (_, i) => (
+              <div className="flex items-center justify-between" key={i}>
+                <div className="max-w-96">
+                  <p>Donation</p>
+                  <p className="text-xs text-muted-foreground">
+                    <Balancer>Lorem ipsum dolor sit amet consectetur adipisicing elit.</Balancer>
+                  </p>
                 </div>
-              ))}
-            </div>
-          </Card>
-        </Skeleton>
+                <CurrencyDisplay value="0.00435" />
+              </div>
+            ))}
+          </div>
+        </CardSkeleton>
 
         <UserActionFormLayout.Footer>
           <Skeleton>
