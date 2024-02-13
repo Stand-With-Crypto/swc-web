@@ -100,23 +100,24 @@ export function UpdateUserInformationVisibilityForm({
                   value={field.value}
                 >
                   {options.map(option => (
-                    <RadioGroupItem
-                      className={cn(
-                        'flex w-full items-center justify-between rounded-lg bg-blue-50 p-6',
-                        option === field.value && 'ring-2 ring-blue-600 ring-offset-4',
-                      )}
-                      key={option}
-                      value={option}
-                    >
-                      <div className="flex items-center gap-3">
-                        <UserAvatar size={60} user={{ ...user, informationVisibility: option }} />
-                        <p className="text-xl font-bold">
-                          {getUserDisplayName({ ...user, informationVisibility: option })}
-                        </p>
+                    <RadioGroupItem className={'w-full'} key={option} value={option}>
+                      <div
+                        // if we apply these styles to the radio group item directly, radix injected input does weird things and causes the form to have scroll issues
+                        className={cn(
+                          'flex w-full items-center justify-between rounded-lg bg-blue-50 p-6',
+                          option === field.value && 'ring-2 ring-blue-600 ring-offset-4',
+                        )}
+                      >
+                        <div className="flex items-center gap-3">
+                          <UserAvatar size={60} user={{ ...user, informationVisibility: option }} />
+                          <p className="text-xl font-bold">
+                            {getUserDisplayName({ ...user, informationVisibility: option })}
+                          </p>
+                        </div>
+                        <RadioGroupIndicator className="block rounded-full bg-blue-600 p-1 text-white">
+                          <Check className="h-4 w-4" />
+                        </RadioGroupIndicator>
                       </div>
-                      <RadioGroupIndicator className="block rounded-full bg-blue-600 p-1 text-white">
-                        <Check className="h-4 w-4" />
-                      </RadioGroupIndicator>
                     </RadioGroupItem>
                   ))}
                 </RadioGroup>
