@@ -93,13 +93,14 @@ export function UserActionFormEmailCongressperson({
 }) {
   const router = useRouter()
   const urls = useIntlUrls()
+
   const defaultValues = useMemo(() => {
     const userDefaultValues = getDefaultValues({ user, dtsiSlug: undefined })
 
     if (initialValues) {
       return {
         ...userDefaultValues,
-        address: userDefaultValues.address || { description: initialValues?.address, place_id: '' },
+        address: userDefaultValues.address || initialValues.address,
         emailAddress: userDefaultValues.emailAddress || initialValues?.email,
         firstName: userDefaultValues.firstName || initialValues.firstName,
         lastName: userDefaultValues.lastName || initialValues.lastName,
@@ -223,7 +224,6 @@ export function UserActionFormEmailCongressperson({
                     <FormControl>
                       <GooglePlacesSelect
                         {...field}
-                        defaultValue={formAddressField.description}
                         onChange={field.onChange}
                         placeholder="Your full address"
                         value={field.value}

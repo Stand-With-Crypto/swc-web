@@ -2,17 +2,19 @@ import { useMemo } from 'react'
 import * as Sentry from '@sentry/nextjs'
 import { useSearchParams } from 'next/navigation'
 
-type Field = 'address' | 'email' | 'fullName' | 'zipCode' | 'firstName' | 'lastName'
-type RnParams = Partial<Record<Field, string>>
+import { usePlacesAutocompleteAddress } from '@/hooks/usePlacesAutocompleteAddress'
 
-/**
- * RN app encodes the rn query param using btoa.
- *
- * This hook decodes the rn query param and returns the decoded values.
- *
- * Components using this hook must be wrapped in a Suspense boundary since it uses `useSearchParams`
- */
-export function useEncodedInitialValuesQueryParam<T extends RnParams>(initialValues: Required<T>) {
+type Field = 'address' | 'email' | 'fullName' | 'zipCode' | 'firstName' | 'lastName'
+type FormFields = {
+  address?: {
+    description: string
+    place_id: string
+  }
+} & Partial<Record<Exclude<Field, 'address'>, string>>
+
+type RnParams = Partial<Record<Exclude<Field, 'address'>, string>> & { address?: string }
+
+function useEncodedInitialValuesQueryParamRaw<T extends FormFields>(initialValues: Required<T>) {
   const searchParams = useSearchParams()
 
   return useMemo(() => {
@@ -20,12 +22,20 @@ export function useEncodedInitialValuesQueryParam<T extends RnParams>(initialVal
     if (encodedRn) {
       try {
         const decoded = atob(encodedRn)
-        const userData = JSON.parse(decoded) as T
+        const userData = JSON.parse(decoded) as RnParams
 
         const keys = Object.keys(initialValues)
         keys.forEach(key => {
-          if (userData[key as Field]) {
-            initialValues[key as Field] = userData[key as Field]
+          if ((key as Field) in userData) {
+            const index = key as Field
+            if (index === 'address') {
+              initialValues[index] = {
+                description: userData.address ?? '',
+                place_id: '',
+              }
+            } else {
+              initialValues[index] = userData[index]
+            }
           }
         })
 
@@ -57,4 +67,37 @@ export function useEncodedInitialValuesQueryParam<T extends RnParams>(initialVal
 
     return undefined
   }, [initialValues, searchParams])
+}
+
+/**
+ * RN app encodes the rn query param using btoa.
+ *
+ * This hook decodes the rn query param and returns the decoded values.
+ *
+ * Components using this hook must be wrapped in a Suspense boundary since it uses `useSearchParams`
+ */
+export function useEncodedInitialValuesQueryParam<T extends FormFields>(
+  initialValues: Required<T>,
+): [T | undefined, boolean] {
+  const decodedInitialValues = useEncodedInitialValuesQueryParamRaw(initialValues)
+  const { ready, addressSuggestions } = usePlacesAutocompleteAddress(
+    decodedInitialValues?.address?.description ?? '',
+  )
+
+  return useMemo(() => {
+    if (decodedInitialValues?.address) {
+      return [
+        {
+          ...decodedInitialValues,
+          address: {
+            description: addressSuggestions?.[0]?.description ?? '',
+            place_id: addressSuggestions?.[0]?.place_id ?? '',
+          },
+        },
+        !ready,
+      ]
+    }
+
+    return [decodedInitialValues, !ready]
+  }, [addressSuggestions, decodedInitialValues, ready])
 }

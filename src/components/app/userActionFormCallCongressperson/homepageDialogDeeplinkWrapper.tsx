@@ -15,9 +15,14 @@ function UserActionFormCallCongresspersonDeeplinkWrapperContent() {
   const urls = useIntlUrls()
   const router = useRouter()
   const { user } = fetchUser.data || { user: null }
-  const initialValues = useEncodedInitialValuesQueryParam<FormFields>({ address: '' })
+  const [initialValues, loadingParams] = useEncodedInitialValuesQueryParam<FormFields>({
+    address: {
+      description: '',
+      place_id: '',
+    },
+  })
 
-  return fetchUser.isLoading ? (
+  return fetchUser.isLoading || loadingParams ? (
     <UserActionFormCallCongresspersonSkeleton />
   ) : (
     <UserActionFormCallCongressperson

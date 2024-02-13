@@ -59,10 +59,11 @@ export function Address({
   const form = useForm<FindRepresentativeCallFormValues>({
     defaultValues: {
       ...userDefaultValues,
-      address: userDefaultValues.address || { description: initialValues?.address, place_id: '' },
+      address: userDefaultValues.address || initialValues?.address,
     },
     resolver: zodResolver(findRepresentativeCallFormValidationSchema),
   })
+
   const isMobile = useIsMobile({ defaultState: true })
   const initialAddressOnLoad = useRef(user?.address?.googlePlaceId)
   const inputRef = useRef<HTMLInputElement | null>(null)
@@ -79,6 +80,7 @@ export function Address({
     control: form.control,
     name: 'address',
   })
+  console.log(address)
 
   const { data: liveCongressPersonData, isLoading: isLoadingLiveCongressPersonData } =
     useCongresspersonData({ address })
@@ -137,7 +139,6 @@ export function Address({
                   <FormControl>
                     <GooglePlacesSelect
                       {...field}
-                      defaultValue={address.description}
                       onChange={field.onChange}
                       placeholder="Your full address"
                       ref={inputRef}

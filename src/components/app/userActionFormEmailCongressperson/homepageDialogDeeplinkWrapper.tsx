@@ -19,14 +19,17 @@ function UserActionFormEmailCongresspersonDeeplinkWrapperContent() {
   const urls = getIntlUrls(locale)
   const [state, setState] = useState<'form' | 'success'>('form')
   const { user } = fetchUser.data || { user: null }
-  const initialValues = useEncodedInitialValuesQueryParam<FormFields>({
-    address: '',
+  const [initialValues, loadingParams] = useEncodedInitialValuesQueryParam<FormFields>({
+    address: {
+      description: '',
+      place_id: '',
+    },
     email: '',
     firstName: '',
     lastName: '',
   })
 
-  return fetchUser.isLoading ? (
+  return fetchUser.isLoading || loadingParams ? (
     <UserActionFormEmailCongresspersonSkeleton locale={locale} />
   ) : state === 'form' ? (
     <UserActionFormEmailCongressperson
