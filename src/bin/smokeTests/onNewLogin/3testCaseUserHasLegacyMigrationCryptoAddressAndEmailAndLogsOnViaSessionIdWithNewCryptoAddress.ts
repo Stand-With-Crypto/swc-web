@@ -52,7 +52,6 @@ export const testCaseUserHasLegacyMigrationCryptoAddressAndEmailAndLogsOnViaSess
     },
     validateResults: (
       {
-        user,
         existingUsersWithSource,
         embeddedWalletEmailAddress,
         merge,

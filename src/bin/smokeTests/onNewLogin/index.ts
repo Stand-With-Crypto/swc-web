@@ -6,6 +6,7 @@ import { TestCase, Issue } from './utils'
 import { testCaseNewUser } from './1testCaseNewUser'
 import { testCaseUserPreviouslySignedUpOnCoinbaseAndThenLoggedInWithEmbeddedWalletWithSameEmail } from './2testCaseUserPreviouslySignedUpOnCoinbaseAndThenLoggedInWithEmbeddedWalletWithSameEmail'
 import { testCaseUserHasLegacyMigrationCryptoAddressAndEmailAndLogsOnViaSessionIdWithNewCryptoAddress } from '@/bin/smokeTests/onNewLogin/3testCaseUserHasLegacyMigrationCryptoAddressAndEmailAndLogsOnViaSessionIdWithNewCryptoAddress'
+import { testCaseUserHasLegacyMigrationCryptoAddressAndLogsOnViaSameCryptoAddress } from '@/bin/smokeTests/onNewLogin/4testCaseUserHasLegacyMigrationCryptoAddressAndEmailAndLogsOnViaSameCryptoAddress'
 
 async function runTestCase({ validateResults, parameters, name }: TestCase) {
   logger.info(`------TEST CASE STARTED------: ${name}`)
@@ -23,7 +24,8 @@ async function smokeTestOnLogin() {
   const tests = [
     // testCaseNewUser,
     // testCaseUserPreviouslySignedUpOnCoinbaseAndThenLoggedInWithEmbeddedWalletWithSameEmail,
-    testCaseUserHasLegacyMigrationCryptoAddressAndEmailAndLogsOnViaSessionIdWithNewCryptoAddress,
+    // testCaseUserHasLegacyMigrationCryptoAddressAndEmailAndLogsOnViaSessionIdWithNewCryptoAddress,
+    testCaseUserHasLegacyMigrationCryptoAddressAndLogsOnViaSameCryptoAddress,
   ]
   for (const test of tests) {
     await runTestCase(test)
