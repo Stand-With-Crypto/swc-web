@@ -250,10 +250,11 @@ model UserAction {
   actionType          UserActionType     @map("action_type")
 
   // We'll need in-memory logic to validate and verify only one action type is every associated with a UserAction
-  userActionEmail    UserActionEmail?
-  userActionCall     UserActionCall?
-  userActionDonation UserActionDonation?
-  userActionOptIn    UserActionOptIn?
+  userActionEmail             UserActionEmail?
+  userActionCall              UserActionCall?
+  userActionDonation          UserActionDonation?
+  userActionOptIn             UserActionOptIn?
+  userActionVoterRegistration UserActionVoterRegistration?
 
   @@index([datetimeCreated])
   @@index([userId, actionType, campaignName])
@@ -362,4 +363,13 @@ model NFTMint {
   @@index([id])
   @@index([nftSlug])
   @@map("nft_mint")
+}
+
+model UserActionVoterRegistration {
+  id         String     @id @default(uuid())
+  userAction UserAction @relation(fields: [id], references: [id])
+  state      String     @map("state")
+
+  @@index([id])
+  @@map("user_action_voter_registration")
 }

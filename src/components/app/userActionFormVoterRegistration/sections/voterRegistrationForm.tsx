@@ -1,6 +1,12 @@
 import { memo, useCallback, useMemo, useState } from 'react'
+import { UserActionType } from '@prisma/client'
 import { ArrowUpRight } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 
+import {
+  actionCreateUserActionVoterRegistration,
+  CreateActionVoterRegistrationInput,
+} from '@/actions/actionCreateUserActionVoterRegistration'
 import {
   REGISTRATION_URLS_BY_STATE,
   SectionNames,
@@ -17,10 +23,14 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { UseSectionsReturn } from '@/hooks/useSections'
+import { UserActionVoterRegistrationCampaignName } from '@/utils/shared/userActionCampaigns'
 import {
   getUSStateNameFromStateCode,
   US_STATE_CODE_TO_DISPLAY_NAME_MAP,
 } from '@/utils/shared/usStateUtils'
+import { triggerServerActionForForm } from '@/utils/web/formUtils'
+import { identifyUserOnClient } from '@/utils/web/identifyUser'
+import { toastGenericError } from '@/utils/web/toastUtils'
 
 const STATE_CODES = Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP)
 
@@ -89,6 +99,7 @@ export const VoterRegistrationForm = memo(function VoterRegistrationForm({
 }: VoterRegistrationFormProps) {
   const [stateCode, setStateCode] = useState<StateCode>()
   const [completeStep2, setCompleteStep2] = useState(false)
+  const router = useRouter()
 
   const { title, subtitle, step2, step2Cta } = useMemo(
     () => COPY[checkRegistration ? 'checkRegistration' : 'register'],
@@ -123,12 +134,42 @@ export const VoterRegistrationForm = memo(function VoterRegistrationForm({
     setCompleteStep2(true)
   }, [])
 
-  const handleClaimNft = useCallback(() => {
-    // Replace with server action
-    goToSection(SectionNames.SUCCESS)
-  }, [goToSection])
-
   const handleOnBack = useCallback(() => goToSection(SectionNames.SURVEY), [goToSection])
+
+  const handleClaimNft = useCallback(async () => {
+    if (!stateCode) return
+
+    const data: CreateActionVoterRegistrationInput = {
+      campaignName: UserActionVoterRegistrationCampaignName.DEFAULT,
+      state: getUSStateNameFromStateCode(stateCode),
+    }
+
+    const result = await triggerServerActionForForm(
+      {
+        formName: 'User Action Form Voter Registration',
+        onError: toastGenericError,
+        analyticsProps: {
+          'Campaign Name': data.campaignName,
+          'User Action Type': UserActionType.VOTER_REGISTRATION,
+          State: data.state,
+        },
+      },
+      () =>
+        actionCreateUserActionVoterRegistration(data).then(actionResult => {
+          if (actionResult.user) {
+            identifyUserOnClient(actionResult.user)
+          }
+          return actionResult
+        }),
+    )
+
+    if (result.status === 'success') {
+      router.refresh()
+      goToSection(SectionNames.SUCCESS)
+    } else {
+      // Display error
+    }
+  }, [goToSection, router, stateCode])
 
   return (
     <UserActionFormVoterRegistrationLayout onBack={handleOnBack}>
