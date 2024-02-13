@@ -6,15 +6,12 @@ import * as Sentry from '@sentry/nextjs'
 import { nativeEnum, object, z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
-import {
-  getMaybeUserAndMethodOfMatch,
-  UserAndMethodOfMatch,
-} from '@/utils/server/getMaybeUserAndMethodOfMatch'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerAnalytics } from '@/utils/server/serverAnalytics'
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
+import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
 import { getLogger } from '@/utils/shared/logger'
 import { UserActionNftMintCampaignName } from '@/utils/shared/userActionCampaigns'
@@ -51,12 +48,10 @@ async function _actionCreateUserActionMintNFT(input: CreateActionMintNFTInput) {
 
   const localUser = parseLocalUserFromCookies()
   const sessionId = getUserSessionId()
+  await throwIfRateLimited()
 
-  const userMatch = await getMaybeUserAndMethodOfMatch({
-    include: { primaryUserCryptoAddress: true },
-  })
-  const user = userMatch.user
-  if (!user) {
+  const authUser = await appRouterGetAuthUser()
+  if (!authUser) {
     const error = new Error('Create User Action NFT Mint - Not authenticated')
     Sentry.captureException(error, {
       tags: { domain: 'actionCreateUserActionMintNFT' },
@@ -68,7 +63,14 @@ async function _actionCreateUserActionMintNFT(input: CreateActionMintNFTInput) {
     throw error
   }
 
-  await throwIfRateLimited()
+  const user = await prismaClient.user.findFirstOrThrow({
+    where: {
+      id: authUser.userId,
+    },
+    include: {
+      primaryUserCryptoAddress: true,
+    },
+  })
 
   const analytics = getServerAnalytics({
     userId: user.id,
@@ -87,7 +89,6 @@ async function _actionCreateUserActionMintNFT(input: CreateActionMintNFTInput) {
   await createAction({
     user,
     validatedInput: validatedInput.data,
-    userMatch,
     sharedDependencies: { sessionId, analytics },
   })
 
@@ -97,12 +98,10 @@ async function _actionCreateUserActionMintNFT(input: CreateActionMintNFTInput) {
 async function createAction<U extends User>({
   user,
   validatedInput,
-  userMatch,
   sharedDependencies,
 }: {
   user: U
   validatedInput: z.infer<typeof createActionMintNFTInputValidationSchema>
-  userMatch: UserAndMethodOfMatch
   sharedDependencies: Pick<SharedDependencies, 'sessionId' | 'analytics'>
 }) {
   await prismaClient.userAction.create({
@@ -110,11 +109,7 @@ async function createAction<U extends User>({
       user: { connect: { id: user.id } },
       actionType: UserActionType.NFT_MINT,
       campaignName: validatedInput.campaignName,
-      ...('userCryptoAddress' in userMatch
-        ? {
-            userCryptoAddress: { connect: { id: userMatch.userCryptoAddress.id } },
-          }
-        : { userSession: { connect: { id: sharedDependencies.sessionId } } }),
+      userCryptoAddress: { connect: { id: user.primaryUserCryptoAddressId! } },
     },
   })
 
