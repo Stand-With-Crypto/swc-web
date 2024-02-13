@@ -1,7 +1,7 @@
 'use server'
 import 'server-only'
 
-import { User, UserAction, UserActionType } from '@prisma/client'
+import { User, UserActionType } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { nativeEnum, object, z } from 'zod'
 
@@ -75,23 +75,17 @@ async function _actionCreateUserActionMintNFT(input: CreateActionMintNFTInput) {
     localUser,
   })
 
-  const recentUserAction = await getRecentUserActionForCampaignByUserId(
-    user.id,
-    validatedInput.data.campaignName,
-  )
-  if (recentUserAction) {
-    logSpamActionSubmissions({
-      validatedInput,
-      userAction: recentUserAction,
-      userId: user.id,
-      sharedDependencies: { analytics },
-    })
-    return { user: getClientUser(user) }
-  }
+  /**
+   * LATER-TASK validate that:
+   * - the transaction is valid
+   * - the transaction hash is not already in the database (create a new field to store the hash if necessary)
+   * - the transaction is related to the Shield NFT contract
+   *
+   * If any of there conditions fail, return an error
+   */
 
   await createAction({
     user,
-    isNewUser: !userMatch.user,
     validatedInput: validatedInput.data,
     userMatch,
     sharedDependencies: { sessionId, analytics },
@@ -100,56 +94,13 @@ async function _actionCreateUserActionMintNFT(input: CreateActionMintNFTInput) {
   return { user: getClientUser(user) }
 }
 
-async function getRecentUserActionForCampaignByUserId(
-  userId: User['id'],
-  campaignName: UserActionNftMintCampaignName,
-) {
-  return prismaClient.userAction.findFirst({
-    where: {
-      actionType: UserActionType.NFT_MINT,
-      campaignName,
-      userId: userId,
-    },
-  })
-}
-
-function logSpamActionSubmissions({
-  validatedInput,
-  userAction,
-  userId,
-  sharedDependencies,
-}: {
-  validatedInput: z.SafeParseSuccess<z.infer<typeof createActionMintNFTInputValidationSchema>>
-  userAction: UserAction
-  userId: User['id']
-  sharedDependencies: Pick<SharedDependencies, 'analytics'>
-}) {
-  const { campaignName } = validatedInput.data
-
-  sharedDependencies.analytics.trackUserActionCreatedIgnored({
-    actionType: UserActionType.NFT_MINT,
-    campaignName,
-    reason: 'Too Many Recent',
-    userState: 'Existing',
-  })
-  Sentry.captureMessage(
-    `duplicate ${UserActionType.NFT_MINT} user action for campaign ${campaignName} submitted`,
-    {
-      extra: { validatedInput: validatedInput.data, userAction },
-      user: { id: userId },
-    },
-  )
-}
-
 async function createAction<U extends User>({
   user,
   validatedInput,
   userMatch,
   sharedDependencies,
-  isNewUser,
 }: {
   user: U
-  isNewUser: boolean
   validatedInput: z.infer<typeof createActionMintNFTInputValidationSchema>
   userMatch: UserAndMethodOfMatch
   sharedDependencies: Pick<SharedDependencies, 'sessionId' | 'analytics'>
@@ -172,6 +123,6 @@ async function createAction<U extends User>({
   sharedDependencies.analytics.trackUserActionCreated({
     actionType: UserActionType.NFT_MINT,
     campaignName: validatedInput.campaignName,
-    userState: isNewUser ? 'New' : 'Existing',
+    userState: 'Existing',
   })
 }
