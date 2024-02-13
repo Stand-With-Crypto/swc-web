@@ -19,13 +19,12 @@ export type ClientUser = ClientModel<
 
 export type GetClientProps = User & {
   primaryUserCryptoAddress: null | UserCryptoAddress
-  address?: Address | null
+  address: Address | null
 }
 
 export const getClientUser = (record: GetClientProps): ClientUser => {
   const { firstName, lastName, primaryUserCryptoAddress, id, informationVisibility, address } =
     record
-
   return getClientModel({
     firstName: informationVisibility === UserInformationVisibility.ALL_INFO ? firstName : null,
     lastName: informationVisibility === UserInformationVisibility.ALL_INFO ? lastName : null,
@@ -35,7 +34,7 @@ export const getClientUser = (record: GetClientProps): ClientUser => {
         : null,
     id,
     informationVisibility,
-    userLocationDetails: address
+    generaAddressInformation: address
       ? {
           administrativeAreaLevel1: address.administrativeAreaLevel1,
           countryCode: address.countryCode,
