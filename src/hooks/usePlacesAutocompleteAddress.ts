@@ -34,7 +34,6 @@ export function usePlacesAutocompleteAddress(address: string) {
             })
           : undefined,
     },
-    defaultValue: address,
   })
 
   const scriptStatus = useScript(
@@ -45,6 +44,7 @@ export function usePlacesAutocompleteAddress(address: string) {
     if (scriptStatus === 'ready') {
       init()
       if (address) {
+        // Setting the value will trigger fetching the address suggestions
         setValue(address)
       }
     }
