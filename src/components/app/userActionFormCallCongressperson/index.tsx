@@ -11,6 +11,8 @@ import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSucc
 import { DTSIPeopleByCongressionalDistrictQueryResult } from '@/data/dtsi/queries/queryDTSIPeopleByCongressionalDistrict'
 import { useSections, UseSectionsReturn } from '@/hooks/useSections'
 import { GoogleCivicInfoResponse } from '@/utils/shared/googleCivicInfo'
+import { NFTSlug } from '@/utils/shared/nft'
+import { NFT_CLIENT_METADATA } from '@/utils/web/nft'
 import { zodAddress } from '@/validation/fields/zodAddress'
 
 import { Address } from './sections/address'
@@ -71,7 +73,12 @@ export function UserActionFormCallCongressperson({
         <SuggestedScript congressPersonData={congressPersonData} user={user} {...sectionProps} />
       )
     case SectionNames.SUCCESS_MESSAGE:
-      return <UserActionFormSuccessScreen onClose={onClose} />
+      return (
+        <UserActionFormSuccessScreen
+          nftWhenAuthenticated={NFT_CLIENT_METADATA[NFTSlug.CALL_REPRESENTATIVE_SEPT_11]}
+          onClose={onClose}
+        />
+      )
     default:
       onTabNotFound()
       return null

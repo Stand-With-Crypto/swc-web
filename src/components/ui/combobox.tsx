@@ -28,7 +28,7 @@ export interface ComboBoxProps<T>
   options: T[]
   value: T | null
   onChange: (val: T | null) => void
-  formatPopoverTrigger: (val: T | null) => React.ReactNode
+  formatPopoverTrigger: (args: { value: T | null; open: boolean }) => React.ReactNode
   getOptionLabel: (val: T) => string
   getOptionKey: (val: T) => string
   popoverContentClassName?: string
@@ -67,7 +67,7 @@ export function Combobox<T>({
   if (isMobile) {
     return (
       <Drawer analytics={wrappedAnalytics} onOpenChange={setOpen} open={open}>
-        <DrawerTrigger asChild>{formatPopoverTrigger(value)}</DrawerTrigger>
+        <DrawerTrigger asChild>{formatPopoverTrigger({ value, open })}</DrawerTrigger>
         <DrawerContent>
           <div className="mt-4 min-h-[260px] border-t">
             <StatusList
@@ -91,7 +91,7 @@ export function Combobox<T>({
   return (
     <Popover analytics={wrappedAnalytics} onOpenChange={setOpen} open={open}>
       <PopoverTrigger asChild ref={parentRef}>
-        {formatPopoverTrigger(value)}
+        {formatPopoverTrigger({ value, open })}
       </PopoverTrigger>
       <PopoverContent
         align="start"

@@ -6,7 +6,7 @@ import { getClientAddress } from '@/clientModels/clientAddress'
 import { getSensitiveDataClientUser } from '@/clientModels/clientUser/sensitiveDataClientUser'
 import { UserActionFormSuccessScreenContent } from '@/components/app/userActionFormSuccessScreen'
 import { UserActionFormSuccessScreenMainCTA } from '@/components/app/userActionFormSuccessScreen/userActionFormSuccessScreenMainCTA'
-import { ORDERED_USER_ACTION_ROW_CTA_INFO } from '@/components/app/userActionRowCTA/userActionRowCTAsList'
+import { ORDERED_USER_ACTION_ROW_CTA_INFO } from '@/components/app/userActionRowCTA/constants'
 import {
   dialogCloseStyles,
   dialogContentPaddingStyles,
