@@ -46,9 +46,9 @@ export function getRoleOptionDisplayName(role: string) {
     case ROLE_OPTIONS.PRESIDENT:
       return 'National Political Figure'
     case ROLE_OPTIONS.SENATE:
-      return 'Senate'
+      return 'Senator'
     case ROLE_OPTIONS.CONGRESS:
-      return 'House of Representatives'
+      return 'Representative'
     default:
       return 'All'
   }
