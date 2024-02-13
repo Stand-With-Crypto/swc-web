@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker'
-import { DataCreationMethod,Prisma, UserAction, UserActionType  } from '@prisma/client'
+import { DataCreationMethod, Prisma, UserAction, UserActionType } from '@prisma/client'
 
 import { fakerFields } from '@/mocks/fakerUtils'
 import { mockCommonDatetimes } from '@/mocks/mockCommonDatetimes'

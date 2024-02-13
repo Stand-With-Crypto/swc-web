@@ -1,5 +1,6 @@
 import { faker } from '@faker-js/faker'
 import _ from 'lodash'
+
 import { fakerFields } from '@/mocks/fakerUtils'
 import { ThirdwebEmbeddedWalletMetadata } from '@/utils/server/thirdweb/fetchEmbeddedWalletMetadataFromThirdweb'
 import { onNewLogin } from '@/utils/server/thirdweb/onLogin'

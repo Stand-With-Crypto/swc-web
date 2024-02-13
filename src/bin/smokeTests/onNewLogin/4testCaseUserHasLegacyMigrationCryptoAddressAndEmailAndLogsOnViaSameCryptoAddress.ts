@@ -1,30 +1,22 @@
-import { mockCreateUserInput } from '@/mocks/models/mockUser'
-import { mockCreateUserEmailAddressInput } from '@/mocks/models/mockUserEmailAddress'
-import { prismaClient } from '@/utils/server/prismaClient'
-import { UserEmailAddressSource } from '.prisma/client'
-import { mockCreateUserCryptoAddressInput } from '@/mocks/models/mockUserCryptoAddress'
 import { DataCreationMethod } from '@prisma/client'
-import { TestCase, getDefaultParameters, verify } from './utils'
+
+import { mockCreateUserInput } from '@/mocks/models/mockUser'
+import { mockCreateUserCryptoAddressInput } from '@/mocks/models/mockUserCryptoAddress'
+import { prismaClient } from '@/utils/server/prismaClient'
+
+import { getDefaultParameters, TestCase, verify } from './utils'
 
 export const testCaseUserHasLegacyMigrationCryptoAddressAndLogsOnViaSameCryptoAddress: TestCase = {
-  name: 'Test Case User Has Legacy Migration Crypto Address And Logs On Via Same Crypto Address',
+  name: 'User Has Legacy Migration Crypto Address And Logs On Via Same Crypto Address',
   parameters: async () => {
     const existingUser = await prismaClient.user.create({
       data: {
         ...mockCreateUserInput({ withData: true }),
-        userEmailAddresses: {
-          create: {
-            ...mockCreateUserEmailAddressInput(),
-            isVerified: false,
-            source: UserEmailAddressSource.USER_ENTERED,
-            dataCreationMethod: DataCreationMethod.INITIAL_BACKFULL,
-          },
-        },
         userCryptoAddresses: {
           create: {
             ...mockCreateUserCryptoAddressInput(),
             hasBeenVerifiedViaAuth: false,
-            dataCreationMethod: DataCreationMethod.INITIAL_BACKFULL,
+            dataCreationMethod: DataCreationMethod.INITIAL_BACKFILL,
           },
         },
         userSessions: {
@@ -40,7 +32,6 @@ export const testCaseUserHasLegacyMigrationCryptoAddressAndLogsOnViaSameCryptoAd
     await prismaClient.user.update({
       where: { id: existingUser.id },
       data: {
-        primaryUserEmailAddressId: existingUser.userEmailAddresses[0].id,
         primaryUserCryptoAddressId: existingUser.userCryptoAddresses[0].id,
       },
     })

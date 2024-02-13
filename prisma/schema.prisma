@@ -65,7 +65,7 @@ enum CapitolCanaryInstance {
 }
 
 enum DataCreationMethod {
-  INITIAL_BACKFULL
+  INITIAL_BACKFILL
   BY_USER
 }
 

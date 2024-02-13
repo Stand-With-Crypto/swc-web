@@ -1,6 +1,7 @@
 import {
   Address,
   CapitolCanaryInstance,
+  DataCreationMethod,
   Prisma,
   User,
   UserActionOptInType,
@@ -43,20 +44,8 @@ import {
 import { AuthSessionMetadata } from '@/utils/server/thirdweb/types'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
+import { prettyLog } from '@/utils/shared/prettyLog'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
-
-/*
-The desired behavior of this function:
-- If there is a user associated with this crypto address, return that user
-- If not, we want to find any existing user in our system that has a session with the same id as the session id that was passed in the headers
-  OR we want to find any existing user in our system that has a verified email address that matches the email address of the crypto address, if the address 
-  is associated with a thirdweb embedded wallet.
-    - This embedded wallet use cases is necessary for the scenario where a user signs up on the coinbase app, and then "signs in" on the SWC website later on.
-      In this case, because we have confidence that coinbase verified the email, and TW verified the email, we can link the users
-- If we find a user using the method above, create the crypto address and link it to the user
-  If we don't find a user, create a new one and link the crypto address to it
-- If there was an embedded wallet email address, link it to the existing user or the newly created user
-*/
 
 const logger = getLogger('onLogin')
 const getLog = (address: string) => (message: string) =>
@@ -112,9 +101,18 @@ interface Params {
 }
 
 /*
+*****************************
+*****************************
 ********* IMPORTANT *********
-IF YOU MODIFY THIS FUNCTION, PLEASE VERIFY THE SMOKE TESTS IN src/bin/smokeTests/authentication/onNewLogin.ts PASS
+*****************************
+*****************************
+IF YOU MODIFY THIS FUNCTION, PLEASE VERIFY THE SMOKE TESTS IN "npm run ts src/bin/smokeTests/onNewLogin" PASS
+*****************************
+*****************************
 ********* IMPORTANT *********
+*****************************
+*****************************
+
 This logic governs all the user matching/creation/updating/merge logic that may occur when a user logs in to our website. Below is the desired behavior of this function:
 
 @function queryMatchingUsers:
@@ -171,7 +169,7 @@ export async function onNewLogin(props: Params) {
   const { existingUsersWithSource, embeddedWalletEmailAddress } = await queryMatchingUsers(props)
   if (existingUsersWithSource.length) {
     log(
-      `found existing users:${Object.entries(
+      `queryMatchingUsers: found existing users:\n${Object.entries(
         _.groupBy(existingUsersWithSource, x => x.sourceOfExistingUser),
       )
         .map(([key, val]) => `- ${key}: ${val.length}`)
@@ -183,9 +181,11 @@ export async function onNewLogin(props: Params) {
   const merge = findUsersToMerge(existingUsersWithSource)
   let maybeUser: UpsertedUser | null = merge?.userToKeep?.user || null
   if (merge?.usersToDelete.length) {
-    log(`${merge.usersToDelete.length} users to merge`)
+    log(`findUsersToMerge: ${merge.usersToDelete.length} users to merge`)
     for (const userToDelete of merge.usersToDelete) {
-      log(`merging user ${userToDelete.user.id} into user ${merge.userToKeep.user.id}`)
+      log(
+        `findUsersToMerge: merging user ${userToDelete.user.id} into user ${merge.userToKeep.user.id}`,
+      )
       await mergeUsers({
         persist: true,
         userToDeleteId: userToDelete.user.id,
@@ -202,17 +202,17 @@ export async function onNewLogin(props: Params) {
       },
     })
   } else {
-    log(`no users to merge`)
+    log(`findUsersToMerge: no users to merge`)
   }
 
   // createUser logic
   let wasUserCreated = false
   if (!maybeUser) {
-    log(`creating user`)
+    log(`createUser: creating user`)
     maybeUser = await createUser({ localUser })
     wasUserCreated = true
   } else {
-    log(`no users to create`)
+    log(`createUser: no users to create`)
   }
   let user: UpsertedUser = maybeUser
 
@@ -305,15 +305,16 @@ export async function onNewLogin(props: Params) {
 }
 
 async function queryMatchingUsers({
-  cryptoAddress: address,
+  cryptoAddress,
   getUserSessionId,
   injectedFetchEmbeddedWalletMetadataFromThirdweb,
 }: Params) {
-  const log = getLog(address)
+  const log = getLog(cryptoAddress)
   const userSessionId = getUserSessionId()
-  const embeddedWalletEmailAddress = await injectedFetchEmbeddedWalletMetadataFromThirdweb(address)
+  const embeddedWalletEmailAddress =
+    await injectedFetchEmbeddedWalletMetadataFromThirdweb(cryptoAddress)
   if (embeddedWalletEmailAddress) {
-    log(`found embedded wallet email address`)
+    log(`queryMatchingUsers: found embedded wallet email address`)
   }
   const existingUsers: UpsertedUser[] = await prismaClient.user.findMany({
     include: {
@@ -325,7 +326,9 @@ async function queryMatchingUsers({
     where: {
       OR: _.compact([
         {
-          userCryptoAddresses: { some: { cryptoAddress: address, hasBeenVerifiedViaAuth: false } },
+          userCryptoAddresses: {
+            some: { cryptoAddress, hasBeenVerifiedViaAuth: false },
+          },
         },
         { userSessions: { some: { id: userSessionId } } },
         embeddedWalletEmailAddress && {
@@ -333,12 +336,22 @@ async function queryMatchingUsers({
             some: { emailAddress: embeddedWalletEmailAddress.email, isVerified: true },
           },
         },
+        embeddedWalletEmailAddress && {
+          userEmailAddresses: {
+            some: {
+              emailAddress: embeddedWalletEmailAddress.email,
+              isVerified: false,
+              dataCreationMethod: DataCreationMethod.INITIAL_BACKFILL,
+            },
+          },
+        },
       ]),
     },
   })
+  prettyLog(existingUsers)
   const existingUsersWithSource = existingUsers.map(user => {
     const existingUnverifiedUserCryptoAddress = user.userCryptoAddresses.find(
-      addr => addr.cryptoAddress === address && !addr.hasBeenVerifiedViaAuth,
+      addr => addr.cryptoAddress === cryptoAddress && !addr.hasBeenVerifiedViaAuth,
     )
     if (existingUnverifiedUserCryptoAddress) {
       return {
@@ -426,17 +439,17 @@ async function maybeUpsertCryptoAddress({
   if (existingUserCryptoAddress) {
     if (existingUserCryptoAddress.hasBeenVerifiedViaAuth) {
       Sentry.captureMessage(
-        'maybeCreateUserAndUpsertCryptoAddress invalid logic, we should only hit this point if the crypto address is unverified',
+        'maybeUpsertCryptoAddress: invalid logic, we should only hit this point if the crypto address is unverified',
         { extra: { cryptoAddress, user, localUser } },
       )
     }
     if (user?.primaryUserCryptoAddressId) {
       Sentry.captureMessage(
-        'maybeCreateUserAndUpsertCryptoAddress note: User had different primary primaryUserCryptoAddressId',
+        'maybeUpsertCryptoAddress: User had different primary primaryUserCryptoAddressId',
         { extra: { cryptoAddress, user, localUser } },
       )
     }
-    log(`updating existing crypto address to be verified`)
+    log(`maybeUpsertCryptoAddress: updating existing crypto address to be verified`)
     await prismaClient.userCryptoAddress.update({
       where: { id: existingUserCryptoAddress.id },
       data: {
@@ -451,7 +464,7 @@ async function maybeUpsertCryptoAddress({
       user.primaryUserCryptoAddressId || existingUserCryptoAddress.id
     return { user, updatedCryptoAddress: existingUserCryptoAddress }
   }
-  log(`creating new crypto address`)
+  log(`maybeUpsertCryptoAddress: creating new crypto address`)
   const newCryptoAddress = await prismaClient.userCryptoAddress.create({
     data: {
       cryptoAddress,
@@ -499,10 +512,12 @@ async function maybeUpsertEmbeddedWalletEmailAddress({
         asPrimaryUserEmailAddress: { connect: { id: user.id } },
       },
     })
-    log(`user email address created from embedded wallet`)
+    log(`maybeUpsertEmbeddedWalletEmailAddress: user email address created from embedded wallet`)
     wasCreated = true
   } else {
-    log(`user email address already existed for embedded wallet`)
+    log(
+      `maybeUpsertEmbeddedWalletEmailAddress: user email address already existed for embedded wallet`,
+    )
     if (user.primaryUserEmailAddressId !== email.id) {
       updatedFields.asPrimaryUserEmailAddress = { connect: { id: user.id } }
     }
@@ -511,9 +526,9 @@ async function maybeUpsertEmbeddedWalletEmailAddress({
     }
     if (Object.keys(updatedFields).length) {
       log(
-        `user email address updated with the following fields: ${Object.keys(updatedFields).join(
-          ', ',
-        )}`,
+        `maybeUpsertEmbeddedWalletEmailAddress: user email address updated with the following fields: ${Object.keys(
+          updatedFields,
+        ).join(', ')}`,
       )
       email = await prismaClient.userEmailAddress.update({
         where: { id: email.id },
@@ -581,7 +596,7 @@ async function upsertCapitalCanaryAdvocate({
     name: CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME,
     data: payload,
   })
-  getLog(cryptoAddress)(`metadata added to capital canary`)
+  getLog(cryptoAddress)(`upsertCapitalCanaryAdvocate: metadata added to capital canary`)
   return true
 }
 
@@ -623,10 +638,10 @@ async function triggerPostLoginUserActionSteps({
         },
       },
     })
-    log(`opt in user action created`)
+    log(`triggerPostLoginUserActionSteps: opt in user action created`)
     await claimNFT(optInUserAction, userCryptoAddress)
   } else {
-    log(`opt in user action previously existed`)
+    log(`triggerPostLoginUserActionSteps: opt in user action previously existed`)
   }
   const pastActionsMinted = await mintPastActions(user.id, userCryptoAddress, localUser)
   return { pastActionsMinted, hadOptInUserAction, optInUserAction }

@@ -1,4 +1,4 @@
-import { TestCase, getDefaultParameters, verify } from './utils'
+import { getDefaultParameters, TestCase, verify } from './utils'
 
 export const testCaseNewUser: TestCase = {
   name: 'New User',

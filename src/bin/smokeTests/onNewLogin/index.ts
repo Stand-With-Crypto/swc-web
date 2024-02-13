@@ -1,12 +1,13 @@
 import { runBin } from '@/bin/runBin'
+import { testCaseUserHasLegacyMigrationCryptoAddressAndEmailAndLogsOnViaSessionIdWithNewCryptoAddress } from '@/bin/smokeTests/onNewLogin/3testCaseUserHasLegacyMigrationCryptoAddressAndEmailAndLogsOnViaSessionIdWithNewCryptoAddress'
+import { testCaseUserHasLegacyMigrationCryptoAddressAndLogsOnViaSameCryptoAddress } from '@/bin/smokeTests/onNewLogin/4testCaseUserHasLegacyMigrationCryptoAddressAndEmailAndLogsOnViaSameCryptoAddress'
+import { testCaseUserHasLegacyMigrationCryptoAndEmailAddressAndLogsOnViaSameCryptoAndEmailAddressButAlreadyHasCreatedUsers } from '@/bin/smokeTests/onNewLogin/5testCaseUserHasLegacyMigrationCryptoAndEmailAddressAndLogsOnViaSameCryptoAndEmailAddressButAlreadyHasCreatedUsers'
 import { onNewLogin } from '@/utils/server/thirdweb/onLogin'
 import { logger } from '@/utils/shared/logger'
 
-import { TestCase, Issue } from './utils'
 import { testCaseNewUser } from './1testCaseNewUser'
 import { testCaseUserPreviouslySignedUpOnCoinbaseAndThenLoggedInWithEmbeddedWalletWithSameEmail } from './2testCaseUserPreviouslySignedUpOnCoinbaseAndThenLoggedInWithEmbeddedWalletWithSameEmail'
-import { testCaseUserHasLegacyMigrationCryptoAddressAndEmailAndLogsOnViaSessionIdWithNewCryptoAddress } from '@/bin/smokeTests/onNewLogin/3testCaseUserHasLegacyMigrationCryptoAddressAndEmailAndLogsOnViaSessionIdWithNewCryptoAddress'
-import { testCaseUserHasLegacyMigrationCryptoAddressAndLogsOnViaSameCryptoAddress } from '@/bin/smokeTests/onNewLogin/4testCaseUserHasLegacyMigrationCryptoAddressAndEmailAndLogsOnViaSameCryptoAddress'
+import { Issue, TestCase } from './utils'
 
 async function runTestCase({ validateResults, parameters, name }: TestCase) {
   logger.info(`------TEST CASE STARTED------: ${name}`)
@@ -22,10 +23,11 @@ async function runTestCase({ validateResults, parameters, name }: TestCase) {
 
 async function smokeTestOnLogin() {
   const tests = [
-    // testCaseNewUser,
-    // testCaseUserPreviouslySignedUpOnCoinbaseAndThenLoggedInWithEmbeddedWalletWithSameEmail,
-    // testCaseUserHasLegacyMigrationCryptoAddressAndEmailAndLogsOnViaSessionIdWithNewCryptoAddress,
+    testCaseNewUser,
+    testCaseUserPreviouslySignedUpOnCoinbaseAndThenLoggedInWithEmbeddedWalletWithSameEmail,
+    testCaseUserHasLegacyMigrationCryptoAddressAndEmailAndLogsOnViaSessionIdWithNewCryptoAddress,
     testCaseUserHasLegacyMigrationCryptoAddressAndLogsOnViaSameCryptoAddress,
+    testCaseUserHasLegacyMigrationCryptoAndEmailAddressAndLogsOnViaSameCryptoAndEmailAddressButAlreadyHasCreatedUsers,
   ]
   for (const test of tests) {
     await runTestCase(test)

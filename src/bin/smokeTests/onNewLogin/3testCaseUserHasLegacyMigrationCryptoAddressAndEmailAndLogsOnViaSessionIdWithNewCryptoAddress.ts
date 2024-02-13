@@ -1,10 +1,12 @@
+import { DataCreationMethod } from '@prisma/client'
+
 import { mockCreateUserInput } from '@/mocks/models/mockUser'
+import { mockCreateUserCryptoAddressInput } from '@/mocks/models/mockUserCryptoAddress'
 import { mockCreateUserEmailAddressInput } from '@/mocks/models/mockUserEmailAddress'
 import { prismaClient } from '@/utils/server/prismaClient'
+
+import { getDefaultParameters, TestCase, verify } from './utils'
 import { UserEmailAddressSource } from '.prisma/client'
-import { mockCreateUserCryptoAddressInput } from '@/mocks/models/mockUserCryptoAddress'
-import { DataCreationMethod } from '@prisma/client'
-import { TestCase, getDefaultParameters, verify } from './utils'
 
 export const testCaseUserHasLegacyMigrationCryptoAddressAndEmailAndLogsOnViaSessionIdWithNewCryptoAddress: TestCase =
   {
@@ -18,14 +20,14 @@ export const testCaseUserHasLegacyMigrationCryptoAddressAndEmailAndLogsOnViaSess
               ...mockCreateUserEmailAddressInput(),
               isVerified: false,
               source: UserEmailAddressSource.USER_ENTERED,
-              dataCreationMethod: DataCreationMethod.INITIAL_BACKFULL,
+              dataCreationMethod: DataCreationMethod.INITIAL_BACKFILL,
             },
           },
           userCryptoAddresses: {
             create: {
               ...mockCreateUserCryptoAddressInput(),
               hasBeenVerifiedViaAuth: false,
-              dataCreationMethod: DataCreationMethod.INITIAL_BACKFULL,
+              dataCreationMethod: DataCreationMethod.INITIAL_BACKFILL,
             },
           },
           userSessions: {

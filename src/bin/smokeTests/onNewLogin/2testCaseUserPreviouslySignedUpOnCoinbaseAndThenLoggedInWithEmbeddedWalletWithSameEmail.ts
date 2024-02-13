@@ -1,8 +1,12 @@
+import { UserActionOptInType, UserActionType } from '@prisma/client'
+
 import { mockCreateUserInput } from '@/mocks/models/mockUser'
 import { mockCreateUserEmailAddressInput } from '@/mocks/models/mockUserEmailAddress'
 import { prismaClient } from '@/utils/server/prismaClient'
+import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
+
+import { getDefaultParameters, mockEmbeddedWalletMetadata, TestCase, verify } from './utils'
 import { UserEmailAddressSource } from '.prisma/client'
-import { TestCase, getDefaultParameters, verify, mockEmbeddedWalletMetadata } from './utils'
 
 export const testCaseUserPreviouslySignedUpOnCoinbaseAndThenLoggedInWithEmbeddedWalletWithSameEmail: TestCase =
   {
@@ -16,6 +20,17 @@ export const testCaseUserPreviouslySignedUpOnCoinbaseAndThenLoggedInWithEmbedded
               ...mockCreateUserEmailAddressInput(),
               isVerified: true,
               source: UserEmailAddressSource.VERIFIED_THIRD_PARTY,
+            },
+          },
+          userActions: {
+            create: {
+              actionType: UserActionType.OPT_IN,
+              campaignName: UserActionOptInCampaignName.DEFAULT,
+              userActionOptIn: {
+                create: {
+                  optInType: UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER,
+                },
+              },
             },
           },
         },
@@ -81,15 +96,17 @@ export const testCaseUserPreviouslySignedUpOnCoinbaseAndThenLoggedInWithEmbedded
       )
       //changed
       verify(didCapitalCanaryUpsert, true, 'didCapitalCanaryUpsert', issues)
+      // changed
       verify(
         postLoginUserActionSteps.hadOptInUserAction,
-        false,
+        true,
         'postLoginUserActionSteps.hadOptInUserAction',
         issues,
       )
+      // changed
       verify(
         postLoginUserActionSteps.pastActionsMinted.length,
-        false,
+        true,
         'postLoginUserActionSteps.pastActionsMinted.length',
         issues,
       )
