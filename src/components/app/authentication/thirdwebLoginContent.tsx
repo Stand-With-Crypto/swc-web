@@ -92,6 +92,7 @@ export function ThirdwebLoginContent(props: ConnectEmbedProps) {
 function ThirdwebLoginEmbedded(props: ConnectEmbedProps) {
   return (
     <ConnectEmbed
+      showThirdwebBranding={false}
       style={{ border: 'none', maxWidth: 'unset' }}
       theme={lightTheme({
         colors: {
