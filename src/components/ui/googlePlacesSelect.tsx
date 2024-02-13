@@ -8,6 +8,7 @@ import { useScript } from '@/hooks/useScript'
 import { isBrowser } from '@/utils/shared/executionEnvironment'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { cn } from '@/utils/web/cn'
+import { LAT_LONG_FOR_CENTER_OF_US, WIDTH_OF_US_METERS } from '@/utils/web/googlePlaceConstants'
 import { GooglePlaceAutocompletePrediction } from '@/utils/web/googlePlaceUtils'
 
 const CALLBACK_NAME = 'PLACES_AUTOCOMPLETE'
@@ -17,12 +18,6 @@ const NEXT_PUBLIC_GOOGLE_PLACES_API_KEY = requiredEnv(
   'NEXT_PUBLIC_GOOGLE_PLACES_API_KEY',
 )
 
-/*
-We don't want to request people share their location but we want the results to be US-centric
-Adding a bias towards the center of the US to ensure the top results make sense
-*/
-const LAT_LONG_FOR_CENTER_OF_US = { lat: 38.363422, lng: -98.764471 }
-const WIDTH_OF_US_METERS = 4654223
 type Props = {
   value: GooglePlaceAutocompletePrediction | null
   onChange: (val: GooglePlaceAutocompletePrediction | null) => void
