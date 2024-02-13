@@ -1,7 +1,7 @@
 'use server'
 import 'server-only'
 
-import { User, UserAction, UserActionType, UserInformationVisibility } from '@prisma/client'
+import { User, UserAction, UserActionType } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { nativeEnum, object, z } from 'zod'
 
@@ -12,14 +12,10 @@ import {
 } from '@/utils/server/getMaybeUserAndMethodOfMatch'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
-import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
-import {
-  mapLocalUserToUserDatabaseFields,
-  parseLocalUserFromCookies,
-} from '@/utils/server/serverLocalUser'
+import { getServerAnalytics } from '@/utils/server/serverAnalytics'
+import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
-import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { UserActionNftMintCampaignName } from '@/utils/shared/userActionCampaigns'
 

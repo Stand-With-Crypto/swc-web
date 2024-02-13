@@ -46,6 +46,7 @@ interface UserActionFormNFTMintCheckoutProps
   mintStatus: MintStatus
   isUSResident: boolean
   onIsUSResidentChange: (newValue: boolean) => void
+  debug?: boolean
 }
 
 // TODO review copy
@@ -68,6 +69,7 @@ export function UserActionFormNFTMintCheckout({
   mintStatus,
   isUSResident,
   onIsUSResidentChange,
+  debug = false,
 }: UserActionFormNFTMintCheckoutProps) {
   const { contract } = useContract(MINT_NFT_CONTRACT_ADDRESS)
   const { data: contractMetadata, isLoading: isLoadingMetadata } = useContractMetadata(contract)
@@ -77,6 +79,7 @@ export function UserActionFormNFTMintCheckout({
     totalFee: totalFee,
     contractChainId: contract?.chainId,
   })
+  const maybeOverriddenCheckoutError = debug ? null : checkoutError
   const connectionStatus = useConnectionStatus()
 
   if (!contractMetadata || isLoadingMetadata || !address) {
@@ -151,7 +154,7 @@ export function UserActionFormNFTMintCheckout({
           </div>
         </Card>
 
-        <Collapsible open={!checkoutError}>
+        <Collapsible open={!maybeOverriddenCheckoutError}>
           <CollapsibleContent className="AnimateCollapsibleContent">
             <label className="flex cursor-pointer items-center gap-4">
               <Checkbox
@@ -168,18 +171,30 @@ export function UserActionFormNFTMintCheckout({
         </Collapsible>
 
         <UserActionFormLayout.Footer>
-          <Web3Button
-            action={onMint}
-            className="!rounded-full disabled:pointer-events-none disabled:opacity-50"
-            contractAddress={MINT_NFT_CONTRACT_ADDRESS}
-            isDisabled={isLoading || (!!checkoutError && checkoutError !== 'networkSwitch')}
-            theme={theme}
-          >
-            Mint now
-          </Web3Button>
+          {debug ? (
+            <Button
+              onClick={() => goToSection(UserActionFormNFTMintSectionNames.TRANSACTION_WATCH)}
+              size="lg"
+            >
+              Mint now - Mocked
+            </Button>
+          ) : (
+            <Web3Button
+              action={onMint}
+              className="!rounded-full disabled:pointer-events-none disabled:opacity-50"
+              contractAddress={MINT_NFT_CONTRACT_ADDRESS}
+              isDisabled={
+                isLoading ||
+                (!!maybeOverriddenCheckoutError && maybeOverriddenCheckoutError !== 'networkSwitch')
+              }
+              theme={theme}
+            >
+              Mint now
+            </Web3Button>
+          )}
 
-          {!!checkoutError && !isLoading && (
-            <ErrorMessage>{CHECKOUT_ERROR_TO_MESSAGE[checkoutError]}</ErrorMessage>
+          {!!maybeOverriddenCheckoutError && !isLoading && (
+            <ErrorMessage>{CHECKOUT_ERROR_TO_MESSAGE[maybeOverriddenCheckoutError]}</ErrorMessage>
           )}
         </UserActionFormLayout.Footer>
       </UserActionFormLayout.Container>

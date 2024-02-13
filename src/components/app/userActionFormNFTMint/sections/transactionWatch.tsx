@@ -29,20 +29,30 @@ import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
 import { toastGenericError } from '@/utils/web/toastUtils'
 
+export type UserActionFormNFTMintTransactionWatchProps =
+  | {
+      debug: true
+      sendTransactionResponse: null
+    }
+  | {
+      debug?: false
+      sendTransactionResponse: TransactionResponse
+    }
+
 export function UserActionFormNFTMintTransactionWatch({
   sendTransactionResponse,
-}: {
-  sendTransactionResponse: TransactionResponse
-}) {
+  debug,
+}: UserActionFormNFTMintTransactionWatchProps) {
   const { data: contractMetadata, isLoading: isLoadingContractMetadata } =
     useThirdwebContractMetadata(MINT_NFT_CONTRACT_ADDRESS)
   const { data: performedUserActionTypesResponse } = useApiResponseForUserPerformedUserActionTypes()
 
   const [isMined, setIsMined] = React.useState(false)
 
-  const createAction = async () => {
+  const createAction = async (transaction: TransactionResponse) => {
     const input: CreateActionMintNFTInput = {
       campaignName: UserActionNftMintCampaignName.DEFAULT,
+      transactionHash: transaction.hash,
     }
 
     return await triggerServerActionForForm(
@@ -65,7 +75,14 @@ export function UserActionFormNFTMintTransactionWatch({
   }
 
   useEffectOnce(() => {
-    Promise.all([sendTransactionResponse.wait(), createAction()]).finally(() => setIsMined(true))
+    if (debug) {
+      setIsMined(true)
+      return
+    }
+
+    Promise.all([sendTransactionResponse.wait(), createAction(sendTransactionResponse)]).finally(
+      () => setIsMined(true),
+    )
   })
 
   if (!contractMetadata || isLoadingContractMetadata) {

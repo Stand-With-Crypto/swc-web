@@ -1,4 +1,5 @@
 import React from 'react'
+import { capitalize } from 'lodash'
 import { toast } from 'sonner'
 
 import {
@@ -6,14 +7,17 @@ import {
   MINT_NFT_CONTRACT_ADDRESS,
   UserActionFormNFTMintSectionNames,
 } from '@/components/app/userActionFormNFTMint/constants'
+import { Checkbox } from '@/components/ui/checkbox'
 import { useSections } from '@/hooks/useSections'
 import { useSendMintNFTTransaction } from '@/hooks/useSendMintNFTTransaction'
+import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { toastGenericError } from '@/utils/web/toastUtils'
 
 import { UserActionFormNFTMintCheckout } from './sections/checkout'
 import { UserActionFormNFTMintIntro } from './sections/intro'
 import {
   UserActionFormNFTMintTransactionWatch,
+  UserActionFormNFTMintTransactionWatchProps,
   UserActionFormNFTMintTransactionWatchSkeleton,
 } from './sections/transactionWatch'
 import { useCheckoutController } from './useCheckoutController'
@@ -28,6 +32,8 @@ export function UserActionFormNFTMint() {
   const checkoutController = useCheckoutController()
 
   const [isUSResident, setIsUSResident] = React.useState(false)
+  const [isDebug, setIsDebug] = React.useState(false)
+
   const {
     mintNFT,
     status: sendNFTTransactionStatus,
@@ -55,30 +61,51 @@ export function UserActionFormNFTMint() {
     case UserActionFormNFTMintSectionNames.INTRO:
       return <UserActionFormNFTMintIntro {...sectionProps} />
 
-    case UserActionFormNFTMintSectionNames.CHECKOUT:
+    case UserActionFormNFTMintSectionNames.CHECKOUT: {
+      const hasEnvironmentBar = NEXT_PUBLIC_ENVIRONMENT !== 'production'
+
       return (
-        <UserActionFormNFTMintCheckout
-          {...sectionProps}
-          {...checkoutController}
-          isUSResident={isUSResident}
-          mintStatus={sendNFTTransactionStatus}
-          onIsUSResidentChange={setIsUSResident}
-          onMint={async () => {
-            const result = await mintNFT()
-            if (result === 'completed') {
-              sectionProps.goToSection(UserActionFormNFTMintSectionNames.TRANSACTION_WATCH)
-            }
-          }}
-        />
+        <>
+          {hasEnvironmentBar && (
+            <div className="flex h-10 items-center bg-yellow-300 text-center">
+              <div className="container flex justify-between">
+                <p className="flex-shrink-0 font-bold">
+                  {capitalize(NEXT_PUBLIC_ENVIRONMENT.toLowerCase())} Environment
+                </p>
+                <label className="flex cursor-pointer items-center gap-2">
+                  <Checkbox checked={isDebug} onCheckedChange={val => setIsDebug(val as boolean)} />
+                  <p className="leading-4">Mock the minting transaction</p>
+                </label>
+              </div>
+            </div>
+          )}
+          <UserActionFormNFTMintCheckout
+            {...sectionProps}
+            {...checkoutController}
+            debug={isDebug}
+            isUSResident={isUSResident}
+            mintStatus={sendNFTTransactionStatus}
+            onIsUSResidentChange={setIsUSResident}
+            onMint={async () => {
+              const result = await mintNFT()
+              if (result === 'completed') {
+                sectionProps.goToSection(UserActionFormNFTMintSectionNames.TRANSACTION_WATCH)
+              }
+            }}
+          />
+        </>
       )
+    }
 
     case UserActionFormNFTMintSectionNames.TRANSACTION_WATCH: {
-      if (!sendTransactionResponse) {
-        return <UserActionFormNFTMintTransactionWatchSkeleton />
+      if (sendTransactionResponse || isDebug) {
+        const params: UserActionFormNFTMintTransactionWatchProps = sendTransactionResponse
+          ? { sendTransactionResponse }
+          : { debug: true, sendTransactionResponse: null }
+        return <UserActionFormNFTMintTransactionWatch {...params} />
       }
-      return (
-        <UserActionFormNFTMintTransactionWatch sendTransactionResponse={sendTransactionResponse} />
-      )
+
+      return <UserActionFormNFTMintTransactionWatchSkeleton />
     }
 
     default:

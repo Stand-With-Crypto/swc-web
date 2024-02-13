@@ -12,7 +12,7 @@ interface UseCheckoutErrorConfig {
 export function useCheckoutError({
   totalFee,
   contractChainId,
-}: UseCheckoutErrorConfig): CheckoutError | void {
+}: UseCheckoutErrorConfig): CheckoutError | null {
   const chainId = useChainId()
   const { data: walletBalance, isLoading: isLoadingWalletBallance } = useBalance()
 
@@ -35,4 +35,6 @@ export function useCheckoutError({
   if (hasInsufficientFunds) {
     return 'insufficientFunds'
   }
+
+  return null
 }
