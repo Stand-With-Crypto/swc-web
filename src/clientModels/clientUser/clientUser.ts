@@ -14,6 +14,10 @@ export type ClientUser = ClientModel<
     firstName: string | null
     lastName: string | null
     primaryUserCryptoAddress: ClientUserCryptoAddress | null
+    userLocationDetails: {
+      administrativeAreaLevel1: string | null
+      countryCode: string | null
+    } | null
   }
 >
 

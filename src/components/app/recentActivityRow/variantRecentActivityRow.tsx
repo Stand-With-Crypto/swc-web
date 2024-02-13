@@ -40,24 +40,28 @@ const formatDTSIPerson = (person: DTSIPersonForUserActions) => {
   return `${dtsiPersonFullName(person)} ${politicalAffiliation}`
 }
 
-export const VariantRecentActivityRow = memo(function VariantRecentActivityRow(
-  props: RecentActivityRowProps,
-) {
-  const { action, locale } = props
+export const VariantRecentActivityRow = memo(function VariantRecentActivityRow({
+  action,
+  locale,
+}: RecentActivityRowProps) {
   console.log('Action: ', action)
-  const userDisplayName = getUserDisplayName(props.action.user)
+  const { userLocationDetails } = action.user
+  const userDisplayName = getUserDisplayName(action.user)
   const { data } = useApiResponseForUserPerformedUserActionTypes()
   const hasSignedUp = data?.performedUserActionTypes.includes(UserActionType.OPT_IN)
   const getActionSpecificProps = () => {
     switch (action.actionType) {
       case UserActionType.OPT_IN: {
         const getTypeDisplayText = () => {
+          const possibleUserState = userLocationDetails?.administrativeAreaLevel1
+            ? `from ${userLocationDetails.administrativeAreaLevel1}`
+            : `joined Stand With Crypto`
           switch (action.optInType) {
             case UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER:
               return (
                 <>
-                  joined <span className="hidden sm:inline">poop</span>
-                  <span className="sm:hidden">poopie</span>
+                  <span className="hidden sm:inline">{possibleUserState}</span>
+                  <span className="sm:hidden">SWC</span>
                 </>
               )
           }
@@ -72,9 +76,7 @@ export const VariantRecentActivityRow = memo(function VariantRecentActivityRow(
               ),
           children: (
             <>
-              <MainText>
-                {userDisplayName} {getTypeDisplayText()}
-              </MainText>
+              <MainText>New member {getTypeDisplayText()}</MainText>
             </>
           ),
         }
@@ -88,7 +90,7 @@ export const VariantRecentActivityRow = memo(function VariantRecentActivityRow(
           ),
           children: (
             <>
-              <MainText>{userDisplayName} poops</MainText>
+              <MainText>{userDisplayName} called their representative</MainText>
               <SubText>{formatDTSIPerson(action.person)}</SubText>
             </>
           ),
@@ -104,7 +106,7 @@ export const VariantRecentActivityRow = memo(function VariantRecentActivityRow(
           },
           children: (
             <>
-              <MainText>{userDisplayName} poops</MainText>
+              <MainText>{userDisplayName} donated</MainText>
               <SubText>
                 <FormattedCurrency
                   amount={action.amount}
@@ -126,7 +128,7 @@ export const VariantRecentActivityRow = memo(function VariantRecentActivityRow(
           children: (
             <>
               <MainText>
-                {userDisplayName} emailed their pooperson
+                {userDisplayName} emailed their representative
                 {action.userActionEmailRecipients.length > 1 ? 's' : ''}
               </MainText>
               <SubText>
@@ -142,13 +144,13 @@ export const VariantRecentActivityRow = memo(function VariantRecentActivityRow(
               <Button>Mint yours</Button>
             </UserActionFormNFTMintDialog>
           ),
-          children: <MainText>{userDisplayName} donated by minting an dookie</MainText>,
+          children: <MainText>{userDisplayName} donated by minting an NFT</MainText>,
         }
       }
       case UserActionType.TWEET: {
         return {
           onFocusContent: () => <UserActionTweetLink>Tweet</UserActionTweetLink>,
-          children: <MainText>{userDisplayName} tweeted in support of biological waste</MainText>,
+          children: <MainText>{userDisplayName} tweeted in support of crypto</MainText>,
         }
       }
       case UserActionType.VOTER_REGISTRATION: {
@@ -158,7 +160,7 @@ export const VariantRecentActivityRow = memo(function VariantRecentActivityRow(
               <Button>Register</Button>
             </UserActionFormVoterRegistrationDialog>
           ),
-          children: <MainText>{userDisplayName} registered to poo poo</MainText>,
+          children: <MainText>{userDisplayName} registered to vote</MainText>,
         }
       }
     }

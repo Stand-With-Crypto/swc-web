@@ -9,7 +9,7 @@ import { userFullName } from '@/utils/shared/userFullName'
 
 export const getUserDisplayName = (user: ClientUserWithENSData | null) => {
   if (user?.informationVisibility === UserInformationVisibility.ANONYMOUS) {
-    return 'Anonymous'
+    return 'New member'
   }
   if (user?.firstName && user?.informationVisibility === UserInformationVisibility.ALL_INFO) {
     return userFullName(user)
@@ -23,12 +23,12 @@ export const getUserDisplayName = (user: ClientUserWithENSData | null) => {
       )}...${user.primaryUserCryptoAddress.cryptoAddress.slice(-5)}`
     )
   }
-  return 'Anonymous'
+  return 'New member'
 }
 
 export const getUserDisplayNameWithoutENS = (user: ClientUser | null) => {
   if (user?.informationVisibility === UserInformationVisibility.ANONYMOUS) {
-    return 'Anonymous'
+    return 'New member'
   }
   if (user?.firstName && user?.informationVisibility === UserInformationVisibility.ALL_INFO) {
     return userFullName(user)
@@ -39,7 +39,7 @@ export const getUserDisplayNameWithoutENS = (user: ClientUser | null) => {
       2,
     )}...${user.primaryUserCryptoAddress.cryptoAddress.slice(-5)}`
   }
-  return 'Anonymous'
+  return 'New member'
 }
 
 export const getSensitiveDataUserDisplayName = (
@@ -63,7 +63,7 @@ export const getSensitiveDataUserDisplayName = (
       )}...${user.primaryUserCryptoAddress.cryptoAddress.slice(-5)}`
     )
   }
-  return 'Anonymous'
+  return 'New member'
 }
 
 export const getFullSensitiveDataUserDisplayName = (user: SensitiveDataClientUser | null) => {
