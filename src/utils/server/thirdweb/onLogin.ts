@@ -69,15 +69,15 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
     },
     where: { userCryptoAddresses: { some: { cryptoAddress: address } } },
   })
-  logWithAddress(`existing user found`)
   // If a proper user already exists (e.g. has a crypto address associated with it), return the user.
   if (existingUser) {
+    logWithAddress(`existing user found`)
     trackUserLogin({
       existingUser,
       localUser,
       isNewlyCreatedUser: false,
     })
-    return { userId: existingUser.id }
+    return { userId: existingUser.id, isNewlyCreatedUser: false }
   }
 
   const userSessionId = getUserSessionIdOnPageRouter(req)
@@ -242,7 +242,7 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
     isNewlyCreatedUser: !existingUser,
   })
 
-  return { userId: userCryptoAddress.user.id }
+  return { userId: userCryptoAddress.user.id, isNewlyCreatedUser: !existingUser }
 }
 
 function trackUserLogin({

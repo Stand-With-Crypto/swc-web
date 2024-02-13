@@ -9,6 +9,7 @@ import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
+import { useAuthUser } from '@/hooks/useAuthUser'
 import { useDialog } from '@/hooks/useDialog'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 
@@ -21,18 +22,22 @@ export function ThirdwebLoginDialog({
 }) {
   const dialogProps = useDialog({ analytics: 'Login' })
   const router = useRouter()
+
+  const user = useAuthUser()
+  console.log({})
+
   return (
     <Dialog {...dialogProps} {...props}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="max-w-l w-full">
         <ThirdwebLoginContent
-          auth={{
-            onLogin: () => {
-              // ensure that any server components on the page that's being used are refreshed with the context the user is now logged in
-              router.refresh()
-              dialogProps.onOpenChange(false)
-            },
-          }}
+        // auth={
+        //     onLogin: () => {
+        //       // ensure that any server components on the page that's being used are refreshed with the context the user is now logged in
+        //       router.refresh()
+        //       dialogProps.onOpenChange(false)
+        //     },
+        // }
         />
       </DialogContent>
     </Dialog>
