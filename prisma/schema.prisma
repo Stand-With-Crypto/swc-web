@@ -212,7 +212,7 @@ model UserCryptoAddress {
   cryptoAddress                    String                     @map("crypto_address")
   datetimeUpdated                  DateTime                   @updatedAt @map("datetime_updated")
   datetimeCreated                  DateTime                   @default(now()) @map("datetime_created")
-  userId                           String                     @unique @map("user_id")
+  userId                           String                     @map("user_id")
   user                             User                       @relation("userCryptoAddresses", map: "userCryptoAddresses", fields: [userId], references: [id])
   dataCreationMethod               DataCreationMethod         @default(BY_USER) @map("data_creation_method")
   // because we are populating this table using historical data where we didn't have the auth flow, we need to differentiate between 
@@ -224,7 +224,8 @@ model UserCryptoAddress {
   userActions                UserAction[]
   asPrimaryUserCryptoAddress User?        @relation("asPrimaryUserCryptoAddress")
 
-  @@unique([cryptoAddress, cryptoNetwork])
+  @@unique([cryptoAddress, cryptoNetwork, userId])
+  @@index([userId])
   @@index([cryptoAddress])
   @@index([embeddedWalletUserEmailAddressId])
   @@map("user_crypto_address")

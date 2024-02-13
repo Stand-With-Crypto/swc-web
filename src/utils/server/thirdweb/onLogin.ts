@@ -1,11 +1,15 @@
 import {
- Address,   CapitolCanaryInstance,
-Prisma,   User,
+  Address,
+  CapitolCanaryInstance,
+  Prisma,
+  User,
   UserActionOptInType,
   UserActionType,
   UserCryptoAddress,
-UserEmailAddress,  UserEmailAddressSource,
-  UserInformationVisibility } from '@prisma/client'
+  UserEmailAddress,
+  UserEmailAddressSource,
+  UserInformationVisibility,
+} from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import _ from 'lodash'
 import { NextApiRequest } from 'next'
@@ -176,9 +180,9 @@ export async function onNewLogin(props: Params) {
   }
 
   // findUsersToMerge logic
-  let maybeUser: UpsertedUser | null = null
   const merge = findUsersToMerge(existingUsersWithSource)
-  if (merge.userToKeep) {
+  let maybeUser: UpsertedUser | null = merge?.userToKeep?.user || null
+  if (merge?.usersToDelete.length) {
     log(`${merge.usersToDelete.length} users to merge`)
     for (const userToDelete of merge.usersToDelete) {
       log(`merging user ${userToDelete.user.id} into user ${merge.userToKeep.user.id}`)
@@ -197,6 +201,8 @@ export async function onNewLogin(props: Params) {
         userCryptoAddresses: true,
       },
     })
+  } else {
+    log(`no users to merge`)
   }
 
   // createUser logic
@@ -205,6 +211,8 @@ export async function onNewLogin(props: Params) {
     log(`creating user`)
     maybeUser = await createUser({ localUser })
     wasUserCreated = true
+  } else {
+    log(`no users to create`)
   }
   let user: UpsertedUser = maybeUser
 
@@ -263,7 +271,7 @@ export async function onNewLogin(props: Params) {
       'Existing Users Found Ids': existingUsersWithSource.map(x => x.user.id),
       'Existing Users Found Sources': existingUsersWithSource.map(x => x.sourceOfExistingUser),
       'Has Embedded Wallet Email Address': !!embeddedWalletEmailAddress,
-      'Users Deleted Ids': merge.usersToDelete.map(x => x.user.id),
+      'Users Deleted Ids': merge?.usersToDelete.map(x => x.user.id),
       'Was User Created': wasUserCreated,
       'User Crypto Address Result': maybeUpsertCryptoAddressResult.newCryptoAddress
         ? 'Created'
@@ -360,7 +368,7 @@ function findUsersToMerge(
   >['existingUsersWithSource'],
 ) {
   if (!existingUsersWithSource.length) {
-    return { userToKeep: null, usersToDelete: [] }
+    return null
   }
   if (existingUsersWithSource.length === 1) {
     return { userToKeep: existingUsersWithSource[0], usersToDelete: [] }
