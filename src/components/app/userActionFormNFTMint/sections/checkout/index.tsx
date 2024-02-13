@@ -50,7 +50,7 @@ interface UserActionFormNFTMintCheckoutProps
 
 // TODO review copy
 const CHECKOUT_ERROR_TO_MESSAGE: Record<CheckoutError, string> = {
-  insufficientFunds: 'You need ETH on Base to mint',
+  insufficientFunds: 'Insufficient funds. You need ETH on Base to mint',
   networkSwitch: 'Please switch to the Base Network',
 }
 
@@ -72,7 +72,7 @@ export function UserActionFormNFTMintCheckout({
   const { contract } = useContract(MINT_NFT_CONTRACT_ADDRESS)
   const { data: contractMetadata, isLoading: isLoadingMetadata } = useContractMetadata(contract)
   const address = useAddress()
-  console.log({ 'contract?.chainId': contract?.chainId })
+
   const checkoutError = useCheckoutError({
     totalFee: totalFee,
     contractChainId: contract?.chainId,
