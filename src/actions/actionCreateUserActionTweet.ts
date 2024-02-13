@@ -1,7 +1,13 @@
 'use server'
 import 'server-only'
 
-import { User, UserActionType, UserCryptoAddress, UserInformationVisibility } from '@prisma/client'
+import {
+  Address,
+  User,
+  UserActionType,
+  UserCryptoAddress,
+  UserInformationVisibility,
+} from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
@@ -28,6 +34,7 @@ const logger = getLogger(`actionCreateUserActionTweet`)
 
 type UserWithRelations = User & {
   primaryUserCryptoAddress: UserCryptoAddress | null
+  address: Address | null
 }
 
 export const actionCreateUserActionTweet = withServerActionMiddleware(
@@ -38,7 +45,7 @@ export const actionCreateUserActionTweet = withServerActionMiddleware(
 async function _actionCreateUserActionTweet() {
   logger.info('triggered')
   const userMatch = await getMaybeUserAndMethodOfMatch({
-    include: { primaryUserCryptoAddress: true },
+    include: { primaryUserCryptoAddress: true, address: true },
   })
   logger.info(userMatch.user ? 'found user' : 'no user found')
   const sessionId = getUserSessionId()
@@ -118,6 +125,7 @@ async function maybeUpsertUser({
   const user = await prismaClient.user.create({
     include: {
       primaryUserCryptoAddress: true,
+      address: true,
     },
     data: {
       ...mapLocalUserToUserDatabaseFields(localUser),
