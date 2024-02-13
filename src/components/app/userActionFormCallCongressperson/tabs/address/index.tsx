@@ -80,7 +80,6 @@ export function Address({
     control: form.control,
     name: 'address',
   })
-  console.log(address)
 
   const { data: liveCongressPersonData, isLoading: isLoadingLiveCongressPersonData } =
     useCongresspersonData({ address })
