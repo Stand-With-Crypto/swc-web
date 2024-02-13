@@ -1,6 +1,16 @@
 import React from 'react'
 import * as Sentry from '@sentry/nextjs'
-import { useContract, useContractMetadata, UserWallet, useSDK } from '@thirdweb-dev/react'
+import {
+  NFT,
+  SmartContract,
+  Transaction,
+  TransactionResultWithId,
+  useContract,
+  useContractMetadata,
+  UserWallet,
+  useSDK,
+} from '@thirdweb-dev/react'
+import { BaseContract } from 'ethers'
 import { noop } from 'lodash'
 import { keccak256, toHex } from 'viem'
 
@@ -38,56 +48,61 @@ export function useSendMintNFTTransaction({
     [onStatusChange],
   )
 
-  const mintNFT = React.useCallback(async (): Promise<MintStatus> => {
-    if (!sdk || !contractMetadata || !contract) {
-      return 'idle'
-    }
+  const handleException = React.useCallback(
+    (e: unknown, extra: Record<string, unknown>): MintStatus => {
+      const error = getErrorInstance(e)
+      Sentry.captureException(error, {
+        extra,
+        tags: { domain: 'useSendMintNFTTransaction' },
+      })
+      logger.error('Error minting NFT', error)
 
-    handleChangeStatus('loading')
-    try {
-      const transaction = await contract.erc721.claim.prepare(quantity)
+      if (error.message.includes('user rejected transaction')) {
+        handleChangeStatus('canceled')
+        return 'canceled'
+      }
+
+      handleChangeStatus('error')
+      return 'error'
+    },
+    [handleChangeStatus],
+  )
+
+  const prepareMint = React.useCallback(
+    async (smartContract: SmartContract<BaseContract>) => {
+      const transaction = await smartContract.erc721.claim.prepare(quantity)
       const callData = transaction.encode()
       const usResidencyMetadata = keccak256(toHex('US')).slice(2, 10)
       const callDataWithMetadata = callData + (isUSResident ? usResidencyMetadata : '')
 
-      //   {
-      //     "hash": "0xf59196bc781856e26d79178a004f3fd09c08091318265e6bbb47b182c68b860b",
-      //     "type": 2,
-      //     "accessList": [],
-      //     "blockHash": "0x958a80d298c5f365763d7dba50295dc50c287f820e4b04438ab7e0488dd0a698",
-      //     "blockNumber": 10484570,
-      //     "transactionIndex": 2,
-      //     "confirmations": 1,
-      //     "from": "0xc5e11d2CaFBb8CA1b3F387b954fe6E1c97e07F97",
-      //     "gasPrice": {
-      //         "type": "BigNumber",
-      //         "hex": "0x0f438d"
-      //     },
-      //     "maxPriorityFeePerGas": {
-      //         "type": "BigNumber",
-      //         "hex": "0x0f4240"
-      //     },
-      //     "maxFeePerGas": {
-      //         "type": "BigNumber",
-      //         "hex": "0x0f4399"
-      //     },
-      //     "gasLimit": {
-      //         "type": "BigNumber",
-      //         "hex": "0x025c3e"
-      //     },
-      //     "to": "0x34E2377911fFEF18fB611Bd877D46390908fca19",
-      //     "value": {
-      //         "type": "BigNumber",
-      //         "hex": "0xb5e620f48000"
-      //     },
-      //     "nonce": 131,
-      //     "data": "0x84bb1e42000000000000000000000000c5e11d2cafbb8ca1b3f387b954fe6e1c97e07f970000000000000000000000000000000000000000000000000000000000000001000000000000000000000000eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee0000000000000000000000000000000000000000000000000000b5e620f4800000000000000000000000000000000000000000000000000000000000000000c00000000000000000000000000000000000000000000000000000000000000180000000000000000000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000f42400000000000000000000000000000000000000000000000000000b5e620f48000000000000000000000000000eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-      //     "r": "0x434b8f99a041f0c1b4665a9868fd17d3973b1ffd1f822665336688c73920fc5e",
-      //     "s": "0x2c034a937092f197d1fadbdad6ff7c3df67b77495873d65fd3422afb56e06d71",
-      //     "v": 0,
-      //     "creates": null,
-      //     "chainId": 8453
-      // }
+      return {
+        transaction,
+        callDataWithMetadata,
+      }
+    },
+    [isUSResident, quantity],
+  )
+
+  const mintNFT = React.useCallback(async (): Promise<MintStatus> => {
+    if (!sdk || !contractMetadata || !contract) {
+      return 'idle'
+    }
+    handleChangeStatus('loading')
+
+    let transaction: Transaction<TransactionResultWithId<NFT>[]>
+    let callDataWithMetadata: string
+    try {
+      const result = await prepareMint(contract)
+      transaction = result.transaction
+      callDataWithMetadata = result.callDataWithMetadata
+    } catch (e) {
+      return handleException(e, {
+        contractMetadata,
+        contractAddress,
+      })
+    }
+
+    try {
       const claimData = await sdk.wallet.sendRawTransaction({
         to: contractAddress,
         data: callDataWithMetadata,
@@ -98,19 +113,20 @@ export function useSendMintNFTTransaction({
       handleChangeStatus('completed')
       return 'completed'
     } catch (e) {
-      const error = getErrorInstance(e)
-      Sentry.captureException(error)
-      logger.error('Error minting NFT', error)
-
-      if (error.message.includes('user rejected transaction')) {
-        handleChangeStatus('canceled')
-        return 'canceled'
-      }
-
-      handleChangeStatus('error')
-      return 'error'
+      return handleException(e, {
+        transaction,
+        callDataWithMetadata,
+      })
     }
-  }, [contract, contractAddress, contractMetadata, handleChangeStatus, isUSResident, quantity, sdk])
+  }, [
+    contract,
+    contractAddress,
+    contractMetadata,
+    handleChangeStatus,
+    handleException,
+    prepareMint,
+    sdk,
+  ])
 
   return {
     mintNFT,

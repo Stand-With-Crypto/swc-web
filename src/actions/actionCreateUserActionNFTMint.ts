@@ -25,6 +25,7 @@ import { UserActionNftMintCampaignName } from '@/utils/shared/userActionCampaign
 
 const createActionMintNFTInputValidationSchema = object({
   campaignName: nativeEnum(UserActionNftMintCampaignName),
+  transactionHash: z.string(),
 })
 
 export type CreateActionMintNFTInput = z.infer<typeof createActionMintNFTInputValidationSchema>
@@ -58,9 +59,20 @@ async function _actionCreateUserActionMintNFT(input: CreateActionMintNFTInput) {
   const userMatch = await getMaybeUserAndMethodOfMatch({
     include: { primaryUserCryptoAddress: true },
   })
-  await throwIfRateLimited()
+  const user = userMatch.user
+  if (!user) {
+    const error = new Error('Create User Action NFT Mint - Not authenticated')
+    Sentry.captureException(error, {
+      tags: { domain: 'actionCreateUserActionMintNFT' },
+      extra: {
+        sessionId,
+      },
+    })
 
-  const user = userMatch.user || (await createUser({ localUser, sessionId }))
+    throw error
+  }
+
+  await throwIfRateLimited()
 
   const analytics = getServerAnalytics({
     userId: user.id,
@@ -90,32 +102,6 @@ async function _actionCreateUserActionMintNFT(input: CreateActionMintNFTInput) {
   })
 
   return { user: getClientUser(user) }
-}
-
-async function createUser(sharedDependencies: Pick<SharedDependencies, 'localUser' | 'sessionId'>) {
-  const { localUser, sessionId } = sharedDependencies
-  const createdUser = await prismaClient.user.create({
-    data: {
-      informationVisibility: UserInformationVisibility.ANONYMOUS,
-      userSessions: { create: { id: sessionId } },
-      hasOptedInToEmails: false,
-      hasOptedInToMembership: false,
-      hasOptedInToSms: false,
-      ...mapLocalUserToUserDatabaseFields(localUser),
-    },
-    include: {
-      primaryUserCryptoAddress: true,
-    },
-  })
-  logger.info('created user')
-
-  if (localUser?.persisted) {
-    getServerPeopleAnalytics({ localUser, userId: createdUser.id }).setOnce(
-      mapPersistedLocalUserToAnalyticsProperties(localUser.persisted),
-    )
-  }
-
-  return createdUser
 }
 
 async function getRecentUserActionForCampaignByUserId(
