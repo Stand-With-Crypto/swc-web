@@ -56,7 +56,6 @@ function RecentActivityRowBase({
         <div>{children}</div>
       </div>
       <div className="shrink-0 text-xs text-gray-500 lg:text-base">
-        {/* TODO add animation */}
         {hasFocus && onFocusContent ? (
           <motion.div
             animate={{ opacity: 1, transform: 'translateX(0)' }}
