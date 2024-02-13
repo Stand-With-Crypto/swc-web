@@ -1,25 +1,22 @@
 'use client'
-import React from 'react'
+import React, { memo } from 'react'
 import { UserActionOptInType, UserActionType } from '@prisma/client'
-import { motion } from 'framer-motion'
 
-import { ClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
-import { ClientUserAction } from '@/clientModels/clientUserAction/clientUserAction'
 import { ThirdwebLoginDialog } from '@/components/app/authentication/thirdwebLoginContent'
+import {
+  RecentActivityRowBase,
+  RecentActivityRowProps,
+} from '@/components/app/recentActivityRow/recentActivityRow'
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
-import { UserAvatar } from '@/components/app/userAvatar'
 import { Button } from '@/components/ui/button'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
-import { FormattedRelativeDatetimeWithClientHydration } from '@/components/ui/formattedRelativeDatetimeWithClientHydration'
 import { InternalLink } from '@/components/ui/link'
 import { UserActionTweetLink } from '@/components/ui/userActionTweetLink'
 import { DTSIPersonForUserActions } from '@/data/dtsi/queries/queryDTSIPeopleBySlugForUserActions'
 import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
-import { useIsMobile } from '@/hooks/useIsMobile'
-import { SupportedLocale } from '@/intl/locales'
 import {
   dtsiPersonFullName,
   dtsiPersonPoliticalAffiliationCategoryAbbreviation,
@@ -28,63 +25,6 @@ import { gracefullyError } from '@/utils/shared/gracefullyError'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { formatDonationOrganization } from '@/utils/web/donationUtils'
 import { getUserDisplayName } from '@/utils/web/userUtils'
-
-export interface RecentActivityRowProps {
-  action: ClientUserAction & { user: ClientUserWithENSData }
-  locale: SupportedLocale
-}
-
-export function RecentActivityRowBase({
-  locale,
-  action,
-  children,
-  onFocusContent,
-}: RecentActivityRowProps & { children: React.ReactNode; onFocusContent?: () => React.ReactNode }) {
-  const [hasFocus, setHasFocus] = React.useState(false)
-  const isMobile = useIsMobile({ defaultState: true })
-  return (
-    <div
-      // added min height to prevent height shifting on hover
-      className="flex min-h-[41px] items-center justify-between gap-5"
-      onMouseEnter={() => isMobile || setHasFocus(true)}
-      onMouseLeave={() => isMobile || setHasFocus(false)}
-    >
-      <div className="flex items-center gap-4">
-        <div>
-          <UserAvatar size={40} user={action.user} />
-        </div>
-        <div>{children}</div>
-      </div>
-      <div className="shrink-0 text-xs text-gray-500 lg:text-base">
-        {hasFocus && onFocusContent ? (
-          <motion.div
-            animate={{ opacity: 1, transform: 'translateX(0)' }}
-            initial={{ opacity: 0, transform: 'translateX(10px)' }}
-            transition={{ duration: 0.5 }}
-          >
-            {onFocusContent()}
-          </motion.div>
-        ) : (
-          <>
-            <span className="hidden md:inline">
-              <FormattedRelativeDatetimeWithClientHydration
-                date={new Date(action.datetimeCreated)}
-                locale={locale}
-              />
-            </span>
-            <span className="inline md:hidden">
-              <FormattedRelativeDatetimeWithClientHydration
-                date={new Date(action.datetimeCreated)}
-                locale={locale}
-                timeFormatStyle="narrow"
-              />
-            </span>
-          </>
-        )}
-      </div>
-    </div>
-  )
-}
 
 const MainText = ({ children }: { children: React.ReactNode }) => (
   <div className="text-sm font-semibold text-gray-900 lg:text-xl">{children}</div>
@@ -100,8 +40,11 @@ const formatDTSIPerson = (person: DTSIPersonForUserActions) => {
   return `${dtsiPersonFullName(person)} ${politicalAffiliation}`
 }
 
-export function RecentActivityRow(props: RecentActivityRowProps) {
+export const VariantRecentActivityRow = memo(function VariantRecentActivityRow(
+  props: RecentActivityRowProps,
+) {
   const { action, locale } = props
+  console.log('Action: ', action)
   const userDisplayName = getUserDisplayName(props.action.user)
   const { data } = useApiResponseForUserPerformedUserActionTypes()
   const hasSignedUp = data?.performedUserActionTypes.includes(UserActionType.OPT_IN)
@@ -113,8 +56,8 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
             case UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER:
               return (
                 <>
-                  joined <span className="hidden sm:inline">Stand With Crypto</span>
-                  <span className="sm:hidden">SWC</span>
+                  joined <span className="hidden sm:inline">poop</span>
+                  <span className="sm:hidden">poopie</span>
                 </>
               )
           }
@@ -145,7 +88,7 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
           ),
           children: (
             <>
-              <MainText>{userDisplayName} called their representative</MainText>
+              <MainText>{userDisplayName} poops</MainText>
               <SubText>{formatDTSIPerson(action.person)}</SubText>
             </>
           ),
@@ -161,7 +104,7 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
           },
           children: (
             <>
-              <MainText>{userDisplayName} donated</MainText>
+              <MainText>{userDisplayName} poops</MainText>
               <SubText>
                 <FormattedCurrency
                   amount={action.amount}
@@ -183,7 +126,7 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
           children: (
             <>
               <MainText>
-                {userDisplayName} emailed their representative
+                {userDisplayName} emailed their pooperson
                 {action.userActionEmailRecipients.length > 1 ? 's' : ''}
               </MainText>
               <SubText>
@@ -199,13 +142,13 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
               <Button>Mint yours</Button>
             </UserActionFormNFTMintDialog>
           ),
-          children: <MainText>{userDisplayName} donated by minting an NFT</MainText>,
+          children: <MainText>{userDisplayName} donated by minting an dookie</MainText>,
         }
       }
       case UserActionType.TWEET: {
         return {
           onFocusContent: () => <UserActionTweetLink>Tweet</UserActionTweetLink>,
-          children: <MainText>{userDisplayName} tweeted in support of crypto</MainText>,
+          children: <MainText>{userDisplayName} tweeted in support of biological waste</MainText>,
         }
       }
       case UserActionType.VOTER_REGISTRATION: {
@@ -215,7 +158,7 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
               <Button>Register</Button>
             </UserActionFormVoterRegistrationDialog>
           ),
-          children: <MainText>{userDisplayName} registered to vote</MainText>,
+          children: <MainText>{userDisplayName} registered to poo poo</MainText>,
         }
       }
     }
@@ -226,4 +169,4 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
     })
   }
   return <RecentActivityRowBase action={action} locale={locale} {...getActionSpecificProps()} />
-}
+})
