@@ -14,7 +14,7 @@ export const ClaimNft = memo(function ClaimNft({ goToSection }: ClaimNftProps) {
   }, [goToSection])
 
   return (
-    <UserActionFormVoterRegistrationLayout onBack={() => handleOnBack}>
+    <UserActionFormVoterRegistrationLayout onBack={handleOnBack}>
       <UserActionFormVoterRegistrationLayout.Container>
         <UserActionFormVoterRegistrationLayout.Heading
           subtitle='You can get get a free "I Registered" NFT'
