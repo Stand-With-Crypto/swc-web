@@ -21,18 +21,11 @@ const NEXT_PUBLIC_GOOGLE_PLACES_API_KEY = requiredEnv(
 type Props = {
   value: GooglePlaceAutocompletePrediction | null
   onChange: (val: GooglePlaceAutocompletePrediction | null) => void
-  defaultValue?: string
 } & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange' | 'type'>
 
 export const GooglePlacesSelect = React.forwardRef<React.ElementRef<'input'>, Props>(
   (props, ref) => {
-    const {
-      value: propsValue,
-      onChange: propsOnChange,
-      className,
-      defaultValue,
-      ...inputProps
-    } = props
+    const { value: propsValue, onChange: propsOnChange, className, ...inputProps } = props
 
     const {
       ready,
@@ -60,11 +53,9 @@ export const GooglePlacesSelect = React.forwardRef<React.ElementRef<'input'>, Pr
     useEffect(() => {
       if (scriptStatus === 'ready') {
         init()
-        if (defaultValue) {
-          setValue(defaultValue)
-        }
       }
-    }, [defaultValue, init, scriptStatus, setValue])
+    }, [init, scriptStatus, setValue])
+
     return (
       <Combobox
         analytics={'Google Place Select'}

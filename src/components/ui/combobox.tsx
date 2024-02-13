@@ -64,12 +64,6 @@ export function Combobox<T>({
     [analytics],
   )
 
-  React.useEffect(() => {
-    if (options.length) {
-      setOpen(true)
-    }
-  }, [options.length])
-
   if (isMobile) {
     return (
       <Drawer analytics={wrappedAnalytics} onOpenChange={setOpen} open={open}>
