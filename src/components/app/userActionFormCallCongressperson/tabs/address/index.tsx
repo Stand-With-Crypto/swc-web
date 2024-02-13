@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useMemo, useRef } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import useSWR from 'swr'
@@ -54,7 +54,7 @@ export function Address({
   initialValues,
 }: AddressProps) {
   const urls = useIntlUrls()
-  const userDefaultValues = getDefaultValues({ user })
+  const userDefaultValues = useMemo(() => getDefaultValues({ user }), [user])
 
   const form = useForm<FindRepresentativeCallFormValues>({
     defaultValues: {

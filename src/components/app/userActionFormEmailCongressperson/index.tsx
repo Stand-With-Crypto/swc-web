@@ -93,7 +93,7 @@ export function UserActionFormEmailCongressperson({
 }) {
   const router = useRouter()
   const urls = useIntlUrls()
-  const userDefaultValues = getDefaultValues({ user, dtsiSlug: undefined })
+  const userDefaultValues = useMemo(() => getDefaultValues({ user, dtsiSlug: undefined }), [user])
 
   const form = useForm<FormValues>({
     resolver: zodResolver(zodUserActionFormEmailCongresspersonFields),
