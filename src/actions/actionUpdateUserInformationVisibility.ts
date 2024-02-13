@@ -50,6 +50,7 @@ async function _actionUpdateUserInformationVisibility(
     },
     include: {
       primaryUserCryptoAddress: true,
+      address: true,
     },
   })
 

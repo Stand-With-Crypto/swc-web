@@ -28,8 +28,7 @@ export function middleware(request: NextRequest) {
       value: urlSessionId,
       httpOnly: false,
     })
-  }
-  if (!existingSessionId) {
+  } else if (!existingSessionId) {
     const sessionId = generateUserSessionId()
     if (!isCypress) {
       logger.info(`setting initial session id: ${sessionId}`)

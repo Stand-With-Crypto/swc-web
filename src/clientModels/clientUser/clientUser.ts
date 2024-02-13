@@ -1,4 +1,4 @@
-import { User, UserCryptoAddress, UserInformationVisibility } from '@prisma/client'
+import { Address, User, UserCryptoAddress, UserInformationVisibility } from '@prisma/client'
 
 import {
   ClientUserCryptoAddress,
@@ -17,10 +17,14 @@ export type ClientUser = ClientModel<
   }
 >
 
-export const getClientUser = (
-  record: User & { primaryUserCryptoAddress: null | UserCryptoAddress },
-): ClientUser => {
-  const { firstName, lastName, primaryUserCryptoAddress, id, informationVisibility } = record
+export type GetClientProps = User & {
+  primaryUserCryptoAddress: null | UserCryptoAddress
+  address: Address | null
+}
+
+export const getClientUser = (record: GetClientProps): ClientUser => {
+  const { firstName, lastName, primaryUserCryptoAddress, id, informationVisibility, address } =
+    record
   return getClientModel({
     firstName: informationVisibility === UserInformationVisibility.ALL_INFO ? firstName : null,
     lastName: informationVisibility === UserInformationVisibility.ALL_INFO ? lastName : null,
@@ -30,6 +34,12 @@ export const getClientUser = (
         : null,
     id,
     informationVisibility,
+    userLocationDetails: address
+      ? {
+          administrativeAreaLevel1: address.administrativeAreaLevel1,
+          countryCode: address.countryCode,
+        }
+      : null,
   })
 }
 
@@ -38,7 +48,7 @@ export type ClientUserWithENSData = Omit<ClientUser, 'primaryUserCryptoAddress'>
 }
 
 export const getClientUserWithENSData = (
-  record: User & { primaryUserCryptoAddress: null | UserCryptoAddress },
+  record: GetClientProps,
   ensData: UserENSData | null | undefined,
 ): ClientUserWithENSData => {
   const initial = getClientUser(record)

@@ -1,6 +1,7 @@
 'use client'
 import React from 'react'
 import { UserActionOptInType, UserActionType } from '@prisma/client'
+import { motion } from 'framer-motion'
 
 import { ClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
 import { ClientUserAction } from '@/clientModels/clientUserAction/clientUserAction'
@@ -55,9 +56,14 @@ function RecentActivityRowBase({
         <div>{children}</div>
       </div>
       <div className="shrink-0 text-xs text-gray-500 lg:text-base">
-        {/* TODO add animation */}
         {hasFocus && onFocusContent ? (
-          onFocusContent?.()
+          <motion.div
+            animate={{ opacity: 1, transform: 'translateX(0)' }}
+            initial={{ opacity: 0, transform: 'translateX(10px)' }}
+            transition={{ duration: 0.5 }}
+          >
+            {onFocusContent()}
+          </motion.div>
         ) : (
           <>
             <span className="hidden md:inline">

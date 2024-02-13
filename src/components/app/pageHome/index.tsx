@@ -6,7 +6,7 @@ import { DelayedRecentActivity } from '@/components/app/pageHome/delayedRecentAc
 import { HeroCTA } from '@/components/app/pageHome/heroCTA'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
 import { SumDonationsByUserRow } from '@/components/app/sumDonationsByUserRow/sumDonationsByUserRow'
-import { UserActionRowCTAsListWithApi } from '@/components/app/userActionRowCTA/userActionRowCTAsListWithApi'
+import { UserActionRowCTAsAnimatedListWithApi } from '@/components/app/userActionRowCTA/userActionRowCTAsAnimatedListWithApi'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { NextImage } from '@/components/ui/image'
@@ -178,7 +178,7 @@ export function PageHome({
           <PageSubTitle as="h4">
             The future of crypto is in your hands. Here's how you can help.
           </PageSubTitle>
-          <UserActionRowCTAsListWithApi />
+          <UserActionRowCTAsAnimatedListWithApi />
         </section>
         <section className="mb-16 space-y-7 md:mb-24">
           <PageTitle as="h3" size="md">

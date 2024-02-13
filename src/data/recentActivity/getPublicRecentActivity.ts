@@ -28,7 +28,7 @@ const fetchFromPrisma = async (config: RecentActivityConfig) => {
     },
     include: {
       user: {
-        include: { primaryUserCryptoAddress: true },
+        include: { primaryUserCryptoAddress: true, address: true },
       },
       userActionEmail: {
         include: {
@@ -47,6 +47,7 @@ const fetchFromPrisma = async (config: RecentActivityConfig) => {
 export const getPublicRecentActivity = async (config: RecentActivityConfig) => {
   const data = await fetchFromPrisma(config)
   const dtsiSlugs = new Set<string>()
+
   data.forEach(userAction => {
     if (userAction.userActionCall) {
       dtsiSlugs.add(userAction.userActionCall.recipientDtsiSlug)
@@ -56,9 +57,11 @@ export const getPublicRecentActivity = async (config: RecentActivityConfig) => {
       })
     }
   })
+
   const dtsiPeople = await queryDTSIPeopleBySlugForUserActions(Array.from(dtsiSlugs)).then(
     x => x.people,
   )
+
   const ensDataMap = await getENSDataMapFromCryptoAddressesAndFailGracefully(
     _.compact(data.map(({ user }) => user.primaryUserCryptoAddress?.cryptoAddress)),
   )

@@ -8,17 +8,17 @@ import { cn } from '@/utils/web/cn'
 
 export const buttonVariantsConfig = {
   variant: {
-    default: 'bg-primary text-primary-foreground hover:bg-primary/90',
-    destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
+    default: 'bg-primary text-primary-foreground hover:bg-primary/80',
+    destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/80',
     outline: 'border border-input bg-background hover:bg-accent hover:text-accent-foreground',
-    secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
-    ghost: 'hover:bg-accent hover:text-accent-foreground',
+    secondary: 'bg-secondary text-secondary-foreground hover:bg-slate-300',
+    ghost: 'hover:bg-secondary hover:text-accent-foreground',
     link: 'text-primary underline-offset-4 hover:underline',
   },
   size: {
-    default: 'h-10 px-4 py-2',
-    sm: 'h-9 px-3',
-    lg: 'h-11 text-base px-8',
+    default: 'px-4 py-3',
+    sm: 'py-2 px-3',
+    lg: 'py-4 text-base px-8',
   },
 } satisfies Record<string, Record<string, ClassValue>>
 const buttonVariants = cva(
