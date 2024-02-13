@@ -70,7 +70,7 @@ async function _actionCreateUserActionCallCongressperson(
   const sessionId = getUserSessionId()
 
   const userMatch = await getMaybeUserAndMethodOfMatch({
-    include: { primaryUserCryptoAddress: true },
+    include: { primaryUserCryptoAddress: true, address: true },
   })
   await throwIfRateLimited()
 
@@ -124,6 +124,7 @@ async function createUser(sharedDependencies: Pick<SharedDependencies, 'localUse
     },
     include: {
       primaryUserCryptoAddress: true,
+      address: true,
     },
   })
   logger.info('created user')
@@ -228,6 +229,7 @@ async function createActionAndUpdateUser<U extends User>({
     },
     include: {
       primaryUserCryptoAddress: true,
+      address: true,
     },
   })
   logger.info('created user action and updated user')

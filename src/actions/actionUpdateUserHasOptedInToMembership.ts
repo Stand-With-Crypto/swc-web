@@ -32,6 +32,7 @@ export async function actionUpdateUserHasOptedInToMembership() {
     },
     include: {
       primaryUserCryptoAddress: true,
+      address: true,
     },
   })
 
