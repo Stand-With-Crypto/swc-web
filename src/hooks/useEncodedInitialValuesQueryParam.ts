@@ -19,53 +19,53 @@ function useEncodedInitialValuesQueryParamRaw<T extends FormFields>(initialValue
 
   return useMemo(() => {
     const encodedRn = searchParams?.get('rn')
-    if (encodedRn) {
-      try {
-        const decoded = atob(encodedRn)
-        const userData = JSON.parse(decoded) as RnParams
-
-        const keys = Object.keys(initialValues)
-        keys.forEach(key => {
-          if ((key as Field) in userData) {
-            const index = key as Field
-            if (index === 'address') {
-              initialValues[index] = {
-                description: userData.address ?? '',
-                place_id: '',
-              }
-            } else {
-              initialValues[index] = userData[index]
-            }
-          }
-        })
-
-        // RN does not pass in firstName and lastName, so derive from full name
-        if (userData.fullName) {
-          const splitFullName = userData.fullName.split(' ')
-
-          if (keys.includes('firstName')) {
-            initialValues.firstName = splitFullName[0]
-          }
-          if (keys.includes('lastName')) {
-            initialValues.lastName = splitFullName.splice(1).join(' ')
-          }
-        }
-
-        return initialValues
-      } catch (e) {
-        if (e instanceof Error) {
-          Sentry.captureException(e, {
-            tags: {
-              domain: 'useEncodedInitialValuesQueryParam',
-            },
-            extra: { encodedRn },
-          })
-        }
-        return undefined
-      }
+    if (!encodedRn) {
+      return undefined
     }
 
-    return undefined
+    try {
+      const decoded = atob(encodedRn)
+      const userData = JSON.parse(decoded) as RnParams
+
+      const keys = Object.keys(initialValues)
+      keys.forEach(key => {
+        if ((key as Field) in userData) {
+          const index = key as Field
+          if (index === 'address') {
+            initialValues[index] = {
+              description: userData.address ?? '',
+              place_id: '',
+            }
+          } else {
+            initialValues[index] = userData[index]
+          }
+        }
+      })
+
+      // RN does not pass in firstName and lastName, so derive from full name
+      if (userData.fullName) {
+        const splitFullName = userData.fullName.split(' ')
+
+        if (keys.includes('firstName')) {
+          initialValues.firstName = splitFullName[0]
+        }
+        if (keys.includes('lastName')) {
+          initialValues.lastName = splitFullName.splice(1).join(' ')
+        }
+      }
+
+      return initialValues
+    } catch (e) {
+      if (e instanceof Error) {
+        Sentry.captureException(e, {
+          tags: {
+            domain: 'useEncodedInitialValuesQueryParam',
+          },
+          extra: { encodedRn },
+        })
+      }
+      return undefined
+    }
   }, [initialValues, searchParams])
 }
 

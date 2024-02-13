@@ -19,6 +19,9 @@ Adding a bias towards the center of the US to ensure the top results make sense
 const LAT_LONG_FOR_CENTER_OF_US = { lat: 38.363422, lng: -98.764471 }
 const WIDTH_OF_US_METERS = 4654223
 
+/**
+ * Wraps `usePlacesAutocomplete` to fetch the suggestions for a given address without relying on user input
+ */
 export function usePlacesAutocompleteAddress(address: string) {
   const {
     suggestions: { data: addressSuggestions },

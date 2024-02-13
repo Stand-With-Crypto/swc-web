@@ -115,11 +115,6 @@ export function UserActionFormEmailCongressperson({
     defaultValues,
   })
 
-  const formAddressField = useWatch({
-    control: form.control,
-    name: 'address',
-  })
-
   React.useEffect(() => {
     form.setFocus('firstName')
   }, [form])
@@ -293,7 +288,7 @@ export function UserActionFormEmailCongressperson({
           <div className="w-full sm:w-auto">
             <Button
               className="w-full sm:w-auto"
-              disabled={form.formState.isSubmitting || !formAddressField.place_id}
+              disabled={form.formState.isSubmitting}
               size="lg"
               type="submit"
             >
