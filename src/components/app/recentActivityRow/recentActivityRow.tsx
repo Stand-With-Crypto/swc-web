@@ -209,7 +209,11 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
               <Button>Register</Button>
             </UserActionFormVoterRegistrationDialog>
           ),
-          children: <MainText>{userDisplayName} registered to vote</MainText>,
+          children: (
+            <MainText>{`${userDisplayName} confirmed to vote ${
+              action.state ? `in ${action.state}` : ''
+            }`}</MainText>
+          ),
         }
       }
     }
