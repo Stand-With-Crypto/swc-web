@@ -18,7 +18,7 @@ import {
 } from './sections/transactionWatch'
 import { useCheckoutController } from './useCheckoutController'
 
-export function UserActionFormNFTMint(_props: { onCancel: () => void; onSuccess: () => void }) {
+export function UserActionFormNFTMint() {
   const sectionProps = useSections({
     sections: Object.values(UserActionFormNFTMintSectionNames),
     initialSectionId: UserActionFormNFTMintSectionNames.INTRO,

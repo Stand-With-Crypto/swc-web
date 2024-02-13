@@ -9,7 +9,7 @@ const sortImports = {
     ['^:.*'],
     // Root level and App specific imports
     [
-      '^@/(actions|app|bin|clientModels|components|data|hooks|inngest|intl|mocks|pages|staticContent|types|utils|validation)(/.*)',
+      '^@/(actions|app|bin|clientModels|components|data|hooks|inngest|intl|mocks|pages|staticContent|types|utils|validation)(/.*)?',
     ],
     // Parent imports. Put `..` last.
     ['^\\.\\.(?!/?$)', '^\\.\\./?$'],

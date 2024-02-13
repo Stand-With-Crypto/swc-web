@@ -2,10 +2,9 @@ import * as Sentry from '@sentry/nextjs'
 import { permanentRedirect } from 'next/navigation'
 
 import _legacyPoliticianToDTSIMap from '@/staticContent/dtsi/legacyPoliticianToDTSIMap.json'
+import { PageProps } from '@/types'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { getIntlUrls } from '@/utils/shared/urls'
-
-import { PageProps } from '@/types'
 
 const legacyPoliticianToDTSIMap: Record<string, string> = _legacyPoliticianToDTSIMap
 export const revalidate = SECONDS_DURATION.WEEK

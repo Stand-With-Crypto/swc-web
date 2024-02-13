@@ -11,10 +11,9 @@ import {
 } from '@/components/ui/dialog/styles'
 import { InternalLink } from '@/components/ui/link'
 import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
+import { PageProps } from '@/types'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
-
-import { PageProps } from '@/types'
 
 interface HomepageDialogDeeplinkLayoutProps extends React.PropsWithChildren {
   size?: 'sm' | 'md'

@@ -2,7 +2,6 @@
 
 import { Suspense } from 'react'
 
-import { UserActionFormNFTMint } from '@/components/app/userActionFormNFTMint'
 import { LazyUserActionFormNFTMint } from '@/components/app/userActionFormNFTMint/lazyLoad'
 import { UserActionFormNFTMintSkeleton } from '@/components/app/userActionFormNFTMint/skeleton'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
@@ -11,8 +10,7 @@ import { useDialog } from '@/hooks/useDialog'
 export function UserActionFormNFTMintDialog({
   children,
   defaultOpen = false,
-  ...formProps
-}: Omit<React.ComponentProps<typeof UserActionFormNFTMint>, 'onCancel' | 'onSuccess'> & {
+}: {
   children: React.ReactNode
   defaultOpen?: boolean
 }) {
@@ -25,11 +23,7 @@ export function UserActionFormNFTMintDialog({
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="max-w-3xl">
         <Suspense fallback={<UserActionFormNFTMintSkeleton />}>
-          <LazyUserActionFormNFTMint
-            {...formProps}
-            onCancel={() => dialogProps.onOpenChange(false)}
-            onSuccess={() => dialogProps.onOpenChange(false)}
-          />
+          <LazyUserActionFormNFTMint />
         </Suspense>
       </DialogContent>
     </Dialog>
