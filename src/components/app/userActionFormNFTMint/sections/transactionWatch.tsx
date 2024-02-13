@@ -59,20 +59,13 @@ export function UserActionFormNFTMintTransactionWatch({
           if (actionResult.user) {
             identifyUserOnClient(actionResult.user)
           }
-
-          console.log({ actionResult })
           return actionResult
         }),
     )
   }
 
   useEffectOnce(() => {
-    Promise.all([
-      sendTransactionResponse.wait().then(res => {
-        console.log({ res })
-      }),
-      createAction(),
-    ]).finally(() => setIsMined(true))
+    Promise.all([sendTransactionResponse.wait(), createAction()]).finally(() => setIsMined(true))
   })
 
   if (!contractMetadata || isLoadingContractMetadata) {

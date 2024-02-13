@@ -46,8 +46,6 @@ export function useSendMintNFTTransaction({
     handleChangeStatus('loading')
     try {
       const transaction = await contract.erc721.claim.prepare(quantity)
-      console.log({ transaction })
-
       const callData = transaction.encode()
       const usResidencyMetadata = keccak256(toHex('US')).slice(2, 10)
       const callDataWithMetadata = callData + (isUSResident ? usResidencyMetadata : '')
@@ -96,7 +94,6 @@ export function useSendMintNFTTransaction({
         value: await transaction.getValue(),
       })
 
-      console.log({ claimData })
       setSendTransactionResponse(claimData)
       handleChangeStatus('completed')
       return 'completed'

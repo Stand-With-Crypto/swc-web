@@ -33,7 +33,6 @@ interface SharedDependencies {
   localUser: ReturnType<typeof parseLocalUserFromCookies>
   sessionId: ReturnType<typeof getUserSessionId>
   analytics: ReturnType<typeof getServerAnalytics>
-  peopleAnalytics: ReturnType<typeof getServerPeopleAnalytics>
 }
 
 const logger = getLogger(`actionCreateUserActionMintNFT`)

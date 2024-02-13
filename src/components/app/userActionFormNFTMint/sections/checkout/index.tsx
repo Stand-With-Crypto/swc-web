@@ -49,7 +49,7 @@ interface UserActionFormNFTMintCheckoutProps
 }
 
 const CHECKOUT_ERROR_TO_MESSAGE: Record<CheckoutError, string> = {
-  insufficientFunds: 'Insufficient funds',
+  insufficientFunds: 'You need ETH on Base to mint',
   networkSwitch: 'Please switch to the Base Network',
 }
 
