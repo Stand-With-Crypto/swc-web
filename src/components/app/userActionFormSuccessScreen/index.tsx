@@ -20,8 +20,10 @@ export function UserActionFormSuccessScreenContent(props: Props) {
 }
 
 export function UserActionFormSuccessScreen(props: Omit<Props, 'data'>) {
-  const userData = useApiResponseForUserFullProfileInfo()
-  const performedActionsData = useApiResponseForUserPerformedUserActionTypes()
+  const userData = useApiResponseForUserFullProfileInfo({ revalidateOnMount: true })
+  const performedActionsData = useApiResponseForUserPerformedUserActionTypes({
+    revalidateOnMount: true,
+  })
 
   const data = useMemo(() => {
     if (!userData.data || !performedActionsData.data) {

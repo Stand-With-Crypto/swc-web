@@ -21,8 +21,12 @@ export async function getAuthenticatedData() {
       id: authUser.userId,
     },
     include: {
-      userMergeAlertUserA: { include: { userB: { include: { primaryUserCryptoAddress: true } } } },
-      userMergeAlertUserB: { include: { userA: { include: { primaryUserCryptoAddress: true } } } },
+      userMergeAlertUserA: {
+        include: { userB: { include: { primaryUserCryptoAddress: true, address: true } } },
+      },
+      userMergeAlertUserB: {
+        include: { userA: { include: { primaryUserCryptoAddress: true, address: true } } },
+      },
       primaryUserCryptoAddress: true,
       userCryptoAddresses: true,
       address: true,
