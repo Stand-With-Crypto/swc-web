@@ -33,7 +33,7 @@ export function DTSICongresspersonAssociatedWithFormAddress({
   if (!address || res.isLoading) {
     return (
       <div className="flex gap-4">
-        <Skeleton className="h-10 w-10" />
+        <Skeleton className="h-10 w-10 flex-shrink-0" />
         <div className="text-sm md:text-base">
           <p className="bold">Your representative</p>
           <p className="text-fontcolor-muted">
@@ -49,7 +49,7 @@ export function DTSICongresspersonAssociatedWithFormAddress({
   const person = res.data
   return (
     <div className="flex flex-row items-center gap-4 text-sm md:text-base">
-      <div className="relative">
+      <div className="relative flex-shrink-0">
         <DTSIAvatar person={person} size={60} />
         <div className="absolute bottom-[-8px] right-[-8px]">
           <DTSIFormattedLetterGrade person={person} size={25} />
