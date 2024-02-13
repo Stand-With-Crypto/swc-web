@@ -20,7 +20,6 @@ export function DataTablePagination<TData>({ table }: DataTablePaginationProps<T
         ? Math.max(pages - 2, 1)
         : currentPageNumber - 1
   const visiblePageNumbers = _.times(Math.min(3, pages), i => i + leftMostVisiblePageNumber)
-  console.log({ pages, currentPageNumber, leftMostVisiblePageNumber, visiblePageNumbers })
   return (
     <div className="flex items-center gap-2">
       <Button
