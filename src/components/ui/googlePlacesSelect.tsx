@@ -54,7 +54,7 @@ export const GooglePlacesSelect = React.forwardRef<React.ElementRef<'input'>, Pr
       if (scriptStatus === 'ready') {
         init()
       }
-    }, [init, scriptStatus, setValue])
+    }, [init, scriptStatus])
 
     return (
       <Combobox
