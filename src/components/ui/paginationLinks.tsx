@@ -17,7 +17,7 @@ export function PaginationLinks({
     currentPageNumber === 1
       ? 1
       : currentPageNumber + 2 > totalPages
-        ? totalPages - 2
+        ? Math.max(totalPages - 2, 1)
         : currentPageNumber - 1
   const visiblePageNumbers = _.times(Math.min(3, totalPages), i => i + leftMostVisiblePageNumber)
   return (
