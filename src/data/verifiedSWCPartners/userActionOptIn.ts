@@ -207,8 +207,7 @@ async function maybeUpsertUser({
       ...(!existingUser.hasOptedInToEmails && { hasOptedInToEmails: true }),
       ...(hasOptedInToMembership &&
         !existingUser.hasOptedInToMembership && { hasOptedInToMembership }),
-      ...(hasOptedInToReceiveSMSFromSWC &&
-        !existingUser.hasOptedInToSms && { hasOptedInToReceiveSMSFromSWC }),
+      ...{ hasOptedInToSms: hasOptedInToReceiveSMSFromSWC },
       ...(emailAddress &&
         existingUser.userEmailAddresses.every(addr => addr.emailAddress !== emailAddress) && {
           userEmailAddresses: {
