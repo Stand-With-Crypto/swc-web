@@ -37,7 +37,7 @@ export function UserActionFormSuccessScreenNextAction({
     return null
   }
   return (
-    <div>
+    <div className="mt-8">
       <div className="mb-2 font-bold">Up next</div>
       {/*
         We can't open a modal within a modal, and so we redirect the user to our deeplink modal pages.
