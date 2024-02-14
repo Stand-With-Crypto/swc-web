@@ -52,19 +52,19 @@ export function CookieConsentBanner({
           </p>
         </div>
 
-        <div className={cn('flex items-center justify-between gap-4 md:justify-end')}>
+        <div className={cn('mb-2 flex items-center justify-between gap-4 md:mb-0 md:justify-end')}>
           <div className="flex gap-4">
             <ManageCookiesModal onSubmit={onAcceptSpecificCookies}>
-              <Button className="p-0" variant="link">
+              <Button className="px-0 py-4" variant="link">
                 Manage cookies
               </Button>
             </ManageCookiesModal>
-            <Button className="p-0" onClick={onRejectAll} variant="link">
+            <Button className="px-0 py-4" onClick={onRejectAll} variant="link">
               Reject all
             </Button>
           </div>
           {/* TODO: Change this to primary color once tailwind is configured properly */}
-          <Button className="p-0 px-4 text-blue-500 md:px-0" onClick={onAcceptAll} variant="link">
+          <Button className="px-4 py-4 text-blue-500 md:px-0" onClick={onAcceptAll} variant="link">
             Accept all
           </Button>
           <button className="hidden md:block" onClick={onRejectAll}>
