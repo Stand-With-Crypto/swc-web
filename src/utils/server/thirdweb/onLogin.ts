@@ -26,11 +26,7 @@ import { mergeUsers } from '@/utils/server/mergeUsers/mergeUsers'
 import { claimNFT } from '@/utils/server/nft/claimNFT'
 import { mintPastActions } from '@/utils/server/nft/mintPastActions'
 import { prismaClient } from '@/utils/server/prismaClient'
-import {
-  forceServerAnalyticsConfig,
-  getServerAnalytics,
-  getServerPeopleAnalytics,
-} from '@/utils/server/serverAnalytics'
+import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import {
   mapLocalUserToUserDatabaseFields,
   parseLocalUserFromCookiesForPageRouter,
@@ -264,28 +260,25 @@ export async function onNewLogin(props: Params) {
     )
   }
 
-  getServerAnalytics(forceServerAnalyticsConfig({ userId: user.id, localUser })).track(
-    'User Logged In',
-    {
-      'Is First Time': true,
-      'Existing Users Found Ids': existingUsersWithSource.map(x => x.user.id),
-      'Existing Users Found Sources': existingUsersWithSource.map(x => x.sourceOfExistingUser),
-      'Has Embedded Wallet Email Address': !!embeddedWalletEmailAddress,
-      'Users Deleted Ids': merge?.usersToDelete.map(x => x.user.id),
-      'Was User Created': wasUserCreated,
-      'User Crypto Address Result': maybeUpsertCryptoAddressResult.newCryptoAddress
-        ? 'Created'
-        : 'Updated',
-      'User Email Address Result': maybeUpsertEmbeddedWalletEmailAddressResult?.wasCreated
-        ? 'Created'
-        : maybeUpsertEmbeddedWalletEmailAddressResult?.updatedFields
-          ? 'Updated'
-          : undefined,
-      'Did Capital Canary Upsert': !!didCapitalCanaryUpsert,
-      'Had Opt In User Action': postLoginUserActionSteps.hadOptInUserAction,
-      'Count Past Actions Minted': postLoginUserActionSteps.pastActionsMinted.length,
-    },
-  )
+  getServerAnalytics({ userId: user.id, localUser }).track('User Logged In', {
+    'Is First Time': true,
+    'Existing Users Found Ids': existingUsersWithSource.map(x => x.user.id),
+    'Existing Users Found Sources': existingUsersWithSource.map(x => x.sourceOfExistingUser),
+    'Has Embedded Wallet Email Address': !!embeddedWalletEmailAddress,
+    'Users Deleted Ids': merge?.usersToDelete.map(x => x.user.id),
+    'Was User Created': wasUserCreated,
+    'User Crypto Address Result': maybeUpsertCryptoAddressResult.newCryptoAddress
+      ? 'Created'
+      : 'Updated',
+    'User Email Address Result': maybeUpsertEmbeddedWalletEmailAddressResult?.wasCreated
+      ? 'Created'
+      : maybeUpsertEmbeddedWalletEmailAddressResult?.updatedFields
+        ? 'Updated'
+        : undefined,
+    'Did Capital Canary Upsert': !!didCapitalCanaryUpsert,
+    'Had Opt In User Action': postLoginUserActionSteps.hadOptInUserAction,
+    'Count Past Actions Minted': postLoginUserActionSteps.pastActionsMinted.length,
+  })
   getServerPeopleAnalytics({ userId: user.id, localUser }).set({
     'Datetime of Last Login': new Date(),
   })

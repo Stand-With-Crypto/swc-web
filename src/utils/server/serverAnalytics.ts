@@ -23,34 +23,24 @@ const logger = getLogger('serverAnalytics')
 
 type ServerAnalyticsConfig = { localUser: LocalUser | null; userId: string }
 
-/*
-There are some events that are critical to our debugging, regardless of whether the user has opted out of tracking.
-In this case, we anonymize the user's data but still trigger the analytics events using a dummy user profile
-*/
-export function forceServerAnalyticsConfig(config: ServerAnalyticsConfig): ServerAnalyticsConfig {
-  if (config.localUser) {
-    return config
-  }
-  return {
-    userId: 'ANONYMOUS_USER_TRACKING_ID',
-    localUser: {
-      currentSession: {
-        datetimeOnLoad: new Date().toISOString(),
-        searchParamsOnLoad: {},
-      },
-    },
-  }
-}
-
 function trackAnalytic(
-  config: ServerAnalyticsConfig,
+  _config: ServerAnalyticsConfig,
   eventName: string,
   eventProperties?: AnalyticProperties,
 ) {
+  let config = _config
   // a local user will not exist if the user has disabled tracking
   if (!config.localUser) {
-    logger.info(`Skipped Event Name: "${eventName}"`, eventProperties)
-    return
+    logger.info(`Anonymizing Event: "${eventName}"`, eventProperties)
+    config = {
+      userId: 'ANONYMOUS_USER_TRACKING_ID',
+      localUser: {
+        currentSession: {
+          datetimeOnLoad: new Date().toISOString(),
+          searchParamsOnLoad: {},
+        },
+      },
+    }
   }
   logger.info(`Event Name: "${eventName}"`, eventProperties)
   if (process.env.VERCEL_URL) {
