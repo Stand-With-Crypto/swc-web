@@ -8,14 +8,11 @@ import { PageTitle } from '@/components/ui/pageTitleText'
 import { UseGetDTSIPeopleFromAddressResponse } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { cn } from '@/utils/web/cn'
 
-interface UserActionFormCallCongresspersonLayoutProps extends React.PropsWithChildren {
+interface UserActionFormLayoutProps extends React.PropsWithChildren {
   onBack?: () => void
 }
 
-export function UserActionFormCallCongresspersonLayout({
-  onBack,
-  children,
-}: UserActionFormCallCongresspersonLayoutProps) {
+export function UserActionFormLayout({ onBack, children }: UserActionFormLayoutProps) {
   return (
     <>
       {onBack && <GoBackButton onClick={onBack} />}
@@ -34,16 +31,17 @@ function Heading({ title, subtitle }: { title: string; subtitle: string }) {
     </div>
   )
 }
-UserActionFormCallCongresspersonLayout.Heading = Heading
+UserActionFormLayout.Heading = Heading
 
 function Container({ children }: React.PropsWithChildren) {
   return (
     <div className="flex flex-grow">
-      <div className="space-y-4 md:space-y-8">{children}</div>
+      {/* without w-full, on iOS, this won't take up the full width of the parent ¯\_(ツ)_/¯ */}
+      <div className="w-full space-y-4 md:space-y-8">{children}</div>
     </div>
   )
 }
-UserActionFormCallCongresspersonLayout.Container = Container
+UserActionFormLayout.Container = Container
 
 function GoBackButton({ onClick }: { onClick: () => void }) {
   return (
@@ -66,9 +64,9 @@ function CongresspersonDisplayFooter({
     </div>
   )
 }
-UserActionFormCallCongresspersonLayout.CongresspersonDisplayFooter = CongresspersonDisplayFooter
+UserActionFormLayout.CongresspersonDisplayFooter = CongresspersonDisplayFooter
 
 function Footer({ children }: React.PropsWithChildren) {
   return <div className="flex w-full flex-row-reverse items-center justify-between">{children}</div>
 }
-UserActionFormCallCongresspersonLayout.Footer = Footer
+UserActionFormLayout.Footer = Footer

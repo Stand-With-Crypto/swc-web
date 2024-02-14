@@ -1,4 +1,4 @@
-import { IntroStaticContent } from '@/components/app/userActionFormCallCongressperson/tabs/intro'
+import { IntroStaticContent } from '@/components/app/userActionFormCallCongressperson/sections/intro'
 import { Button } from '@/components/ui/button'
 
 export function UserActionFormCallCongresspersonSkeleton() {

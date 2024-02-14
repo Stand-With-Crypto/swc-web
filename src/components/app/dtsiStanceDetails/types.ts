@@ -10,7 +10,6 @@ import {
   DTSI_TwitterAccount,
 } from '@/data/dtsi/generated'
 import { SupportedLocale } from '@/intl/locales'
-
 import { PartialButDefined } from '@/types'
 
 export type DTSIStanceDetailsQuoteProp = {

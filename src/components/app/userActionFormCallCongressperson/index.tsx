@@ -3,16 +3,21 @@ import * as Sentry from '@sentry/nextjs'
 import { z } from 'zod'
 
 import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
+import {
+  ANALYTICS_NAME_USER_ACTION_FORM_CALL_CONGRESSPERSON,
+  SectionNames,
+} from '@/components/app/userActionFormCallCongressperson/constants'
 import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
 import { DTSIPeopleByCongressionalDistrictQueryResult } from '@/data/dtsi/queries/queryDTSIPeopleByCongressionalDistrict'
 import { useSections, UseSectionsReturn } from '@/hooks/useSections'
 import { GoogleCivicInfoResponse } from '@/utils/shared/googleCivicInfo'
+import { NFTSlug } from '@/utils/shared/nft'
+import { NFT_CLIENT_METADATA } from '@/utils/web/nft'
 import { zodAddress } from '@/validation/fields/zodAddress'
 
-import { Address } from './tabs/address'
-import { Intro } from './tabs/intro'
-import { SuggestedScript } from './tabs/suggestedScript'
-import { ANALYTICS_NAME_USER_ACTION_FORM_CALL_CONGRESSPERSON, SectionNames } from './constants'
+import { Address } from './sections/address'
+import { Intro } from './sections/intro'
+import { SuggestedScript } from './sections/suggestedScript'
 
 interface OnFindCongressPersonPayload {
   dtsiPerson: DTSIPeopleByCongressionalDistrictQueryResult
@@ -68,7 +73,12 @@ export function UserActionFormCallCongressperson({
         <SuggestedScript congressPersonData={congressPersonData} user={user} {...sectionProps} />
       )
     case SectionNames.SUCCESS_MESSAGE:
-      return <UserActionFormSuccessScreen onClose={onClose} />
+      return (
+        <UserActionFormSuccessScreen
+          nftWhenAuthenticated={NFT_CLIENT_METADATA[NFTSlug.CALL_REPRESENTATIVE_SEPT_11]}
+          onClose={onClose}
+        />
+      )
     default:
       onTabNotFound()
       return null

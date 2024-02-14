@@ -1,7 +1,8 @@
 'use client'
 import React from 'react'
-import { ConnectEmbed, ConnectEmbedProps, lightTheme } from '@thirdweb-dev/react'
+import { ConnectEmbed, ConnectEmbedProps } from '@thirdweb-dev/react'
 import { useRouter } from 'next/navigation'
+import { useSWRConfig } from 'swr'
 
 import { Dialog, DialogContent, DialogProps, DialogTrigger } from '@/components/ui/dialog'
 import { NextImage } from '@/components/ui/image'
@@ -11,6 +12,7 @@ import { PageTitle } from '@/components/ui/pageTitleText'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useDialog } from '@/hooks/useDialog'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
+import { theme } from '@/utils/web/thirdweb/theme'
 
 export function ThirdwebLoginDialog({
   children,
@@ -21,6 +23,8 @@ export function ThirdwebLoginDialog({
 }) {
   const dialogProps = useDialog({ analytics: 'Login' })
   const router = useRouter()
+  const { mutate } = useSWRConfig()
+
   return (
     <Dialog {...dialogProps} {...props}>
       <DialogTrigger asChild>{children}</DialogTrigger>
@@ -31,6 +35,10 @@ export function ThirdwebLoginDialog({
               // ensure that any server components on the page that's being used are refreshed with the context the user is now logged in
               router.refresh()
               dialogProps.onOpenChange(false)
+              // There are a bunch of SWR queries that might show stale unauthenticated data unless we clear the cache.
+              // This ensures we refetch using the users authenticated state
+              // https://swr.vercel.app/docs/advanced/cache#modify-the-cache-data
+              mutate(() => true, undefined, { revalidate: true })
             },
           }}
         />
@@ -90,26 +98,5 @@ export function ThirdwebLoginContent(props: ConnectEmbedProps) {
 }
 
 function ThirdwebLoginEmbedded(props: ConnectEmbedProps) {
-  return (
-    <ConnectEmbed
-      style={{ border: 'none', maxWidth: 'unset' }}
-      theme={lightTheme({
-        colors: {
-          accentText: '#0f172a',
-          accentButtonBg: '#0f172a',
-          borderColor: '#e2e8f0',
-          separatorLine: '#e2e8f0',
-          primaryText: '#020817',
-          secondaryText: '#64748b',
-          secondaryButtonText: '#0f172a',
-          secondaryButtonBg: '#f1f5f9',
-          connectedButtonBg: '#f1f5f9',
-          connectedButtonBgHover: '#e4e2e4',
-          walletSelectorButtonHoverBg: '#e4e2e4',
-          secondaryIconColor: '#706f78',
-        },
-      })}
-      {...props}
-    />
-  )
+  return <ConnectEmbed style={{ border: 'none', maxWidth: 'unset' }} theme={theme} {...props} />
 }

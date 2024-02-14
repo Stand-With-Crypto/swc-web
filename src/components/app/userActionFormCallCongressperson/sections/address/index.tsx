@@ -7,7 +7,7 @@ import useSWR from 'swr'
 
 import type { UserActionFormCallCongresspersonProps } from '@/components/app/userActionFormCallCongressperson'
 import { SectionNames } from '@/components/app/userActionFormCallCongressperson/constants'
-import { UserActionFormCallCongresspersonLayout } from '@/components/app/userActionFormCallCongressperson/tabs/layout'
+import { UserActionFormLayout } from '@/components/app/userActionFormCommon/layout'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -24,6 +24,7 @@ import {
   getDTSIPeopleFromAddress,
 } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
+import { useIsMobile } from '@/hooks/useIsMobile'
 import { getGoogleCivicDataFromAddress } from '@/utils/shared/googleCivicInfo'
 import { trackFormSubmissionSyncErrors } from '@/utils/web/formUtils'
 import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
@@ -50,15 +51,20 @@ export function Address({
   goToSection,
 }: AddressProps) {
   const urls = useIntlUrls()
-  const submitButtonRef = useRef<HTMLButtonElement>(null)
   const form = useForm<FindRepresentativeCallFormValues>({
     defaultValues: getDefaultValues({ user }),
     resolver: zodResolver(findRepresentativeCallFormValidationSchema),
   })
+  const isMobile = useIsMobile({ defaultState: true })
   const initialAddressOnLoad = useRef(user?.address?.googlePlaceId)
+  const inputRef = useRef<HTMLInputElement | null>(null)
   useEffect(() => {
     form.setFocus('address')
-  }, [form])
+    // we only want the input to auto-open on desktop
+    if (!isMobile) {
+      inputRef.current?.click()
+    }
+  }, [form, isMobile])
   const address = useWatch({
     control: form.control,
     name: 'address',
@@ -104,9 +110,9 @@ export function Address({
           trackFormSubmissionSyncErrors(FORM_NAME),
         )}
       >
-        <UserActionFormCallCongresspersonLayout onBack={() => goToSection(SectionNames.INTRO)}>
-          <UserActionFormCallCongresspersonLayout.Container>
-            <UserActionFormCallCongresspersonLayout.Heading
+        <UserActionFormLayout onBack={() => goToSection(SectionNames.INTRO)}>
+          <UserActionFormLayout.Container>
+            <UserActionFormLayout.Heading
               subtitle="Your address will be used to connect you with your representative. Stand With Crypto will never share your data with any third-parties."
               title="Find your representative"
             />
@@ -122,6 +128,7 @@ export function Address({
                       {...field}
                       onChange={field.onChange}
                       placeholder="Your full address"
+                      ref={inputRef}
                       value={field.value}
                     />
                   </FormControl>
@@ -129,15 +136,14 @@ export function Address({
                 </FormItem>
               )}
             />
-          </UserActionFormCallCongresspersonLayout.Container>
-          <UserActionFormCallCongresspersonLayout.Footer>
+          </UserActionFormLayout.Container>
+          <UserActionFormLayout.Footer>
             <Button
               disabled={
                 form.formState.isSubmitting ||
                 isLoadingLiveCongressPersonData ||
                 !congressPersonData
               }
-              ref={submitButtonRef}
               type="submit"
             >
               {form.formState.isSubmitting || isLoadingLiveCongressPersonData
@@ -151,8 +157,8 @@ export function Address({
                 privacy policy
               </InternalLink>
             </p>
-          </UserActionFormCallCongresspersonLayout.Footer>
-        </UserActionFormCallCongresspersonLayout>
+          </UserActionFormLayout.Footer>
+        </UserActionFormLayout>
       </form>
     </Form>
   )

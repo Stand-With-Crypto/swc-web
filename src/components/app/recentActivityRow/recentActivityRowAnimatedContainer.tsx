@@ -16,7 +16,7 @@ export function RecentActivityRowAnimatedContainer({
   const locale = useLocale()
   return (
     <AnimatePresence initial={false}>
-      <motion.div>
+      <div>
         {actions.map((action, index) => (
           <motion.div
             // we apply individual pb to the elements instead of space-y-7 to ensure that there's no jank in the animation as the height transitions in
@@ -29,7 +29,7 @@ export function RecentActivityRowAnimatedContainer({
             <RecentActivityRow action={action} locale={locale} />
           </motion.div>
         ))}
-      </motion.div>
+      </div>
     </AnimatePresence>
   )
 }

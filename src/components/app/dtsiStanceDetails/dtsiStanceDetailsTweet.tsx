@@ -28,7 +28,7 @@ export const getEmojiIndexes = (tweet: DTSIStanceDetailsTweetProp['tweet']) => {
   // map the matches to an array of their indexes
   const indexes = matches.map(match => match.indices[0])
 
-  // return the indexes to match the fact that twitter api start/end doesnt account for emoji length
+  // return the indexes to match the fact that twitter api start/end doesn't account for emoji length
   const indexesWithOffsite = indexes.map((indexInStr, indexInArray) => indexInStr - indexInArray)
   return indexesWithOffsite
 }
@@ -88,7 +88,12 @@ function getEntities(tweet: DTSIStanceDetailsTweetProp['tweet']) {
 
   const emojiIndexes = getEmojiIndexes(tweet)
   const entities = tweet.entities as FormattedUserTweet['entities']
-  addEntities(tweet, emojiIndexes, result, entities.urls?.map(x => ({ ...x, type: 'urls' })))
+  addEntities(
+    tweet,
+    emojiIndexes,
+    result,
+    entities.urls?.map(x => ({ ...x, type: 'urls' })),
+  )
   addEntities(
     tweet,
     emojiIndexes,

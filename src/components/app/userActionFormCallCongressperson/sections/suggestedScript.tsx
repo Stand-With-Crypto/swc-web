@@ -9,6 +9,7 @@ import {
 } from '@/actions/actionCreateUserActionCallCongressperson'
 import { UserActionFormCallCongresspersonProps } from '@/components/app/userActionFormCallCongressperson'
 import { SectionNames } from '@/components/app/userActionFormCallCongressperson/constants'
+import { UserActionFormLayout } from '@/components/app/userActionFormCommon/layout'
 import { Button } from '@/components/ui/button'
 import { TrackedExternalLink } from '@/components/ui/trackedExternalLink'
 import { UseSectionsReturn } from '@/hooks/useSections'
@@ -21,12 +22,10 @@ import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
 import { toastGenericError } from '@/utils/web/toastUtils'
 
-import { UserActionFormCallCongresspersonLayout } from './layout'
-
 export function SuggestedScript({
   user,
   congressPersonData: { dtsiPerson, civicData, addressSchema },
-  goToSection: gotoTab,
+  goToSection,
 }: Pick<
   UserActionFormCallCongresspersonProps,
   'user' | 'congressPersonData' | keyof UseSectionsReturn<SectionNames>
@@ -84,19 +83,19 @@ export function SuggestedScript({
       if (result.status === 'success') {
         setCallingState('call-complete')
         router.refresh()
-        gotoTab(SectionNames.SUCCESS_MESSAGE)
+        goToSection(SectionNames.SUCCESS_MESSAGE)
       } else {
         setCallingState('error')
       }
     },
-    [addressSchema, dtsiPerson.slug, gotoTab, router],
+    [addressSchema, dtsiPerson.slug, goToSection, router],
   )
 
   return (
     <>
-      <UserActionFormCallCongresspersonLayout onBack={() => gotoTab(SectionNames.ADDRESS)}>
-        <UserActionFormCallCongresspersonLayout.Container>
-          <UserActionFormCallCongresspersonLayout.Heading
+      <UserActionFormLayout onBack={() => goToSection(SectionNames.ADDRESS)}>
+        <UserActionFormLayout.Container>
+          <UserActionFormLayout.Heading
             subtitle="You may not get a human on the line, but can leave a message to ensure that your voice will be heard."
             title="Call your representative"
           />
@@ -122,12 +121,10 @@ export function SuggestedScript({
               <p>Thank you and have a nice day!</p>
             </div>
           </div>
-        </UserActionFormCallCongresspersonLayout.Container>
-      </UserActionFormCallCongresspersonLayout>
+        </UserActionFormLayout.Container>
+      </UserActionFormLayout>
 
-      <UserActionFormCallCongresspersonLayout.CongresspersonDisplayFooter
-        congressperson={dtsiPerson}
-      >
+      <UserActionFormLayout.CongresspersonDisplayFooter congressperson={dtsiPerson}>
         {phoneNumber ? (
           callingState !== 'not-calling' ? (
             <Button
@@ -150,7 +147,7 @@ export function SuggestedScript({
             </Button>
           )
         ) : null}
-      </UserActionFormCallCongresspersonLayout.CongresspersonDisplayFooter>
+      </UserActionFormLayout.CongresspersonDisplayFooter>
     </>
   )
 }
