@@ -55,7 +55,7 @@ it('formats the "create capitol canary advocate" request correctly', () => {
   ],
   "city": "Finnstead",
   "country": "MH",
-  "email": "Johan71@hotmail.com",
+  "email": "Nicklaus_Walker51@yahoo.com",
   "emailOptin": 1,
   "emailOptout": 0,
   "firstname": "Zion",

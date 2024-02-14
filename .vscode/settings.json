@@ -50,6 +50,7 @@
     "hookform",
     "inngest",
     "jank",
+    "keccak",
     "Leaderboard",
     "nextjs",
     "precheck",
@@ -64,8 +65,9 @@
     "typecheck",
     "undici",
     "unoptimized",
-    "Upserted",
-    "vaul"
+    "upserted",
+    "vaul",
+    "viem"
   ],
   "typescript.tsdk": "node_modules/typescript/lib"
 }

@@ -4,6 +4,7 @@ import { UserActionType } from '@prisma/client'
 import { ChevronRight } from 'lucide-react'
 
 import { NextImage } from '@/components/ui/image'
+import { Skeleton } from '@/components/ui/skeleton'
 import { cn } from '@/utils/web/cn'
 
 export interface UserActionRowCTAProps {
@@ -83,6 +84,10 @@ export const UserActionRowCTAButton = React.forwardRef<
   },
 )
 UserActionRowCTAButton.displayName = 'UserActionRowCTAButton'
+
+export function UserActionRowCTAButtonSkeleton() {
+  return <Skeleton className="h-40 w-full" />
+}
 
 export function UserActionRowCTA({ WrapperComponent, ...props }: UserActionRowCTAProps) {
   return (

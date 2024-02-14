@@ -46,14 +46,20 @@ const contentSecurityPolicy = {
     'https://*.gstatic.com',
     '*.google.com',
     'https://ipfs.io/ipfs/',
+    // Thirdweb contract images
+    'https://*.ipfscdn.io/',
   ],
   'connect-src': [
     "'self'",
     'ws: wss:',
     'https://cloudflare-eth.com',
     'https://c.thirdweb.com/',
+    // Thirdweb contract metadata
+    'https://contract.thirdweb.com/',
     'https://*.rpc.thirdweb.com/',
     'https://ipfs.io/ipfs/',
+    // Thirdweb contract data
+    'https://*.ipfscdn.io/',
     'https://*.walletconnect.com/',
     'https://developer-access-mainnet.base.org/',
     'https://*.googleapis.com',
@@ -63,7 +69,8 @@ const contentSecurityPolicy = {
     'https://vercel.live/api/event/tick',
     'https://vitals.vercel-insights.com/',
     'https://api-js.mixpanel.com/',
-    'https://*.rpc.thirdweb.com/',
+    // Mint endpoint
+    'https://*.coinbase.com/',
   ],
   'frame-src': [
     '*.google.com',

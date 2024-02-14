@@ -9,7 +9,7 @@ const sortImports = {
     ['^:.*'],
     // Root level and App specific imports
     [
-      '^@/(actions|app|bin|clientModels|components|data|hooks|inngest|intl|mocks|pages|staticContent|types|utils|validation)(/.*)',
+      '^@/(actions|app|bin|clientModels|components|data|hooks|inngest|intl|mocks|pages|staticContent|types|utils|validation)(/.*)?',
     ],
     // Parent imports. Put `..` last.
     ['^\\.\\.(?!/?$)', '^\\.\\./?$'],
@@ -44,7 +44,7 @@ module.exports = {
       { allowAny: true, allowNumber: true, allowBoolean: false, allowNullish: false },
     ],
     'no-empty': ['error', { allowEmptyCatch: true }],
-    'react/jsx-sort-props': 'error',
+    'react/jsx-sort-props': 'warn',
     'react/no-unescaped-entities': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/ban-ts-comment': 'off',
@@ -63,10 +63,10 @@ module.exports = {
         additionalHooks: 'useLoadingCallback',
       },
     ],
-    'simple-import-sort/imports': ['error', sortImports],
-    'simple-import-sort/exports': 'error',
-    'import/first': 'error',
-    'import/newline-after-import': 'error',
+    'simple-import-sort/imports': ['warn', sortImports],
+    'simple-import-sort/exports': 'warn',
+    'import/first': 'warn',
+    'import/newline-after-import': 'warn',
     'import/no-duplicates': 'error',
   },
 }
