@@ -33,7 +33,7 @@ const contentSecurityPolicy = {
     'https://c.thirdweb.com/',
     'https://*.rpc.thirdweb.com/',
     'https://api-js.mixpanel.com/',
-    'https://vercel.live/_next-live/feedback/feedback.js',
+    'https://vercel.live/',
     'https://vitals.vercel-insights.com/',
   ],
   'img-src': [
@@ -66,7 +66,7 @@ const contentSecurityPolicy = {
     'https://*.gstatic.com',
     'https://api-js.mixpanel.com/',
     '*.google.com',
-    'https://vercel.live/api/event/tick',
+    'https://vercel.live/',
     'https://vitals.vercel-insights.com/',
     'https://api-js.mixpanel.com/',
     // Mint endpoint
