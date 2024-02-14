@@ -2,6 +2,8 @@ import { useCallback } from 'react'
 import _ from 'lodash'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
+import { useHasHydrated } from '@/hooks/useHasHydrated'
+
 export const useQueryParamState = ({
   queryParamKey,
   defaultValue,
@@ -15,7 +17,9 @@ export const useQueryParamState = ({
   const searchParams = useSearchParams()
   const router = useRouter()
   const pathname = usePathname()
-  const value = searchParams ? searchParams.get(queryParamKey) : defaultValue
+  // without this, if we immediately change UI based off query params, we'll get a hydration error
+  const hasHydrated = useHasHydrated()
+  const value = searchParams && hasHydrated ? searchParams.get(queryParamKey) : defaultValue
   const setValue = useCallback(
     (newValue: string | null) => {
       if (!searchParams || !pathname) {

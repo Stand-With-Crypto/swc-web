@@ -35,7 +35,8 @@ UserActionFormVoterRegistrationLayout.Heading = Heading
 function Container({ children }: React.PropsWithChildren) {
   return (
     <div className="flex flex-grow items-center justify-center">
-      <div className="space-y-4 p-8 md:space-y-8">{children}</div>
+      {/* without w-full, on iOS, this won't take up the full width of the parent ¯\_(ツ)_/¯ */}
+      <div className="w-full space-y-4 p-8 md:space-y-8">{children}</div>
     </div>
   )
 }

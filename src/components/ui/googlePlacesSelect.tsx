@@ -5,7 +5,6 @@ import usePlacesAutocomplete from 'use-places-autocomplete'
 import { Combobox } from '@/components/ui/combobox'
 import { InputWithIcons } from '@/components/ui/inputWithIcons'
 import { useScript } from '@/hooks/useScript'
-import { isBrowser } from '@/utils/shared/executionEnvironment'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { cn } from '@/utils/web/cn'
 import { GooglePlaceAutocompletePrediction } from '@/utils/web/googlePlaceUtils'
@@ -17,12 +16,6 @@ const NEXT_PUBLIC_GOOGLE_PLACES_API_KEY = requiredEnv(
   'NEXT_PUBLIC_GOOGLE_PLACES_API_KEY',
 )
 
-/*
-We don't want to request people share their location but we want the results to be US-centric
-Adding a bias towards the center of the US to ensure the top results make sense
-*/
-const LAT_LONG_FOR_CENTER_OF_US = { lat: 38.363422, lng: -98.764471 }
-const WIDTH_OF_US_METERS = 4654223
 type Props = {
   value: GooglePlaceAutocompletePrediction | null
   onChange: (val: GooglePlaceAutocompletePrediction | null) => void
@@ -41,13 +34,7 @@ export const GooglePlacesSelect = React.forwardRef<React.ElementRef<'input'>, Pr
       callbackName: CALLBACK_NAME,
       // note on why we aren't restricting to just addresses https://stackoverflow.com/a/65206036
       requestOptions: {
-        locationBias:
-          isBrowser && window.google
-            ? new google.maps.Circle({
-                center: LAT_LONG_FOR_CENTER_OF_US,
-                radius: WIDTH_OF_US_METERS / 2,
-              })
-            : undefined,
+        locationBias: 'IP_BIAS',
       },
     })
     const scriptStatus = useScript(
@@ -64,9 +51,11 @@ export const GooglePlacesSelect = React.forwardRef<React.ElementRef<'input'>, Pr
         analytics={'Google Place Select'}
         formatPopoverTrigger={triggerProps => (
           <InputWithIcons
+            // There's a weird bug where, because the input is type="button", on mobile a long address string will overflow the entire page
+            // whitespace-normal prevents that bug
             className={cn(
-              value || 'text-gray-500',
-              'cursor-pointer',
+              triggerProps.value || 'text-gray-500',
+              'cursor-pointer whitespace-normal',
               triggerProps.open && 'outline-none ring-2 ring-ring ring-offset-2',
               className,
             )}
