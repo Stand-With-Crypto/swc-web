@@ -12,6 +12,7 @@ import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-p
 import { DTSICongresspersonAssociatedWithFormAddress } from '@/components/app/dtsiCongresspersonAssociatedWithFormAddress'
 import { ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON } from '@/components/app/userActionFormEmailCongressperson/constants'
 import { getDefaultText } from '@/components/app/userActionFormEmailCongressperson/getDefaultText'
+import { FormFields } from '@/components/app/userActionFormEmailCongressperson/types'
 import { Button } from '@/components/ui/button'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import {
@@ -83,21 +84,32 @@ const getDefaultValues = ({
 export function UserActionFormEmailCongressperson({
   onSuccess,
   user,
+  initialValues,
 }: {
   user: GetUserFullProfileInfoResponse['user']
   onCancel: () => void
   onSuccess: () => void
+  initialValues?: FormFields
 }) {
   const router = useRouter()
   const urls = useIntlUrls()
-  const defaultValues = useMemo(() => getDefaultValues({ user, dtsiSlug: undefined }), [user])
+  const userDefaultValues = useMemo(() => getDefaultValues({ user, dtsiSlug: undefined }), [user])
+
   const form = useForm<FormValues>({
     resolver: zodResolver(zodUserActionFormEmailCongresspersonFields),
-    defaultValues,
+    defaultValues: {
+      ...userDefaultValues,
+      address: initialValues?.address || userDefaultValues.address,
+      emailAddress: initialValues?.email || userDefaultValues.emailAddress,
+      firstName: initialValues?.firstName || userDefaultValues.firstName,
+      lastName: initialValues?.lastName || userDefaultValues.lastName,
+    },
   })
+
   React.useEffect(() => {
     form.setFocus('firstName')
   }, [form])
+
   return (
     <Form {...form}>
       <form
