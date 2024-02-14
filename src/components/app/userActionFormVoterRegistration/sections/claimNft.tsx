@@ -1,6 +1,6 @@
 'use client'
 
-import { memo, useCallback } from 'react'
+import { useCallback } from 'react'
 
 import { SectionNames } from '@/components/app/userActionFormVoterRegistration/constants'
 import { UserActionFormVoterRegistrationLayout } from '@/components/app/userActionFormVoterRegistration/sections/layout'
@@ -9,7 +9,7 @@ import { UseSectionsReturn } from '@/hooks/useSections'
 
 interface ClaimNftProps extends UseSectionsReturn<SectionNames> {}
 
-export const ClaimNft = memo(function ClaimNft({ goToSection }: ClaimNftProps) {
+export function ClaimNft({ goToSection }: ClaimNftProps) {
   const handleOnBack = useCallback(() => {
     goToSection(SectionNames.SURVEY)
   }, [goToSection])
@@ -29,4 +29,4 @@ export const ClaimNft = memo(function ClaimNft({ goToSection }: ClaimNftProps) {
       </UserActionFormVoterRegistrationLayout.Footer>
     </UserActionFormVoterRegistrationLayout>
   )
-})
+}

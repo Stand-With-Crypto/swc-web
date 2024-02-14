@@ -1,4 +1,4 @@
-import { memo, useCallback, useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { ArrowUpRight } from 'lucide-react'
 
 import {
@@ -83,7 +83,7 @@ interface VoterRegistrationFormProps extends UseSectionsReturn<SectionNames> {
   checkRegistration?: boolean
 }
 
-export const VoterRegistrationForm = memo(function VoterRegistrationForm({
+export function VoterRegistrationForm({
   checkRegistration,
   goToSection,
 }: VoterRegistrationFormProps) {
@@ -94,6 +94,7 @@ export const VoterRegistrationForm = memo(function VoterRegistrationForm({
     () => COPY[checkRegistration ? 'checkRegistration' : 'register'],
     [checkRegistration],
   )
+
   const disclaimer = useMemo(() => {
     if (stateCode === 'ND') return ND_DISCLAIMER
     if (stateCode === 'WY') return WY_DISCLAIMER
@@ -107,10 +108,6 @@ export const VoterRegistrationForm = memo(function VoterRegistrationForm({
         ]
       : undefined
   }, [checkRegistration, stateCode])
-
-  const disabledClaimNft = useMemo(() => {
-    return stateCode !== 'WY' && stateCode !== 'ND' && !completeStep2
-  }, [completeStep2, stateCode])
 
   const handleOnValueChange = useCallback((value: string) => {
     if (STATE_CODES.includes(value)) {
@@ -180,11 +177,14 @@ export const VoterRegistrationForm = memo(function VoterRegistrationForm({
       <UserActionFormVoterRegistrationLayout.Footer>
         <div className="flex flex-grow flex-row items-center justify-between gap-8">
           <span className="w-2/3 text-sm text-fontcolor-muted">{disclaimer}</span>
-          <Button disabled={disabledClaimNft} onClick={handleClaimNft}>
+          <Button
+            disabled={stateCode !== 'WY' && stateCode !== 'ND' && !completeStep2}
+            onClick={handleClaimNft}
+          >
             Claim NFT
           </Button>
         </div>
       </UserActionFormVoterRegistrationLayout.Footer>
     </UserActionFormVoterRegistrationLayout>
   )
-})
+}
