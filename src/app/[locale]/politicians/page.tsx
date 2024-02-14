@@ -6,10 +6,9 @@ import {
   PagePoliticians,
 } from '@/components/app/pagePoliticians'
 import { queryDTSIHomepagePeople } from '@/data/dtsi/queries/queryDTSIHomepagePeople'
+import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
-
-import { PageProps } from '@/types'
 
 export const revalidate = SECONDS_DURATION.HOUR
 export const dynamic = 'error'

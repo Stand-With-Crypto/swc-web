@@ -1,5 +1,6 @@
 import { PropsWithChildren } from 'react'
 
+import { Skeleton } from '@/components/ui/skeleton'
 import { cn, twNoop } from '@/utils/web/cn'
 
 export const cardClassNames = twNoop('bg-secondary px-4 py-6 rounded-3xl')
@@ -23,7 +24,14 @@ export function Card({ children, className }: PropsWithChildren<{ className?: st
     </div>
   )
 }
-
 Card.Heading = CardHeading
 Card.Description = CardDescription
 Card.Group = CardGroup
+
+export function CardSkeleton({ children, className }: PropsWithChildren<{ className?: string }>) {
+  return (
+    <Skeleton className={cn('flex min-w-[256px] flex-1 flex-col gap-4', cardClassNames, className)}>
+      {children}
+    </Skeleton>
+  )
+}

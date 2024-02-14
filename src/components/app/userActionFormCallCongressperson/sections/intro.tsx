@@ -3,19 +3,18 @@ import React, { useEffect } from 'react'
 import { Check } from 'lucide-react'
 
 import { SectionNames } from '@/components/app/userActionFormCallCongressperson/constants'
+import { UserActionFormLayout } from '@/components/app/userActionFormCommon/layout'
 import { Button } from '@/components/ui/button'
 import { UseSectionsReturn } from '@/hooks/useSections'
 
-import { UserActionFormCallCongresspersonLayout } from './layout'
-
-export function Intro({ goToSection: gotoTab }: UseSectionsReturn<SectionNames>) {
+export function Intro({ goToSection }: UseSectionsReturn<SectionNames>) {
   const ref = React.useRef<HTMLButtonElement>(null)
   useEffect(() => {
     ref.current?.focus()
   }, [ref])
   return (
     <IntroStaticContent>
-      <Button onClick={() => gotoTab(SectionNames.ADDRESS)} ref={ref}>
+      <Button onClick={() => goToSection(SectionNames.ADDRESS)} ref={ref}>
         Continue
       </Button>
     </IntroStaticContent>
@@ -24,9 +23,9 @@ export function Intro({ goToSection: gotoTab }: UseSectionsReturn<SectionNames>)
 
 export function IntroStaticContent({ children }: React.PropsWithChildren) {
   return (
-    <UserActionFormCallCongresspersonLayout>
-      <UserActionFormCallCongresspersonLayout.Container>
-        <UserActionFormCallCongresspersonLayout.Heading
+    <UserActionFormLayout>
+      <UserActionFormLayout.Container>
+        <UserActionFormLayout.Heading
           subtitle="Call your Congressperson and tell them to vote YES on the FIT21 bill. Calling your representative is the most effective way to influence legislation."
           title="It's time to fight to keep crypto in America"
         />
@@ -43,11 +42,9 @@ export function IntroStaticContent({ children }: React.PropsWithChildren) {
             </ChecklistItem>
           </ul>
         </div>
-      </UserActionFormCallCongresspersonLayout.Container>
-      <UserActionFormCallCongresspersonLayout.Footer>
-        {children}
-      </UserActionFormCallCongresspersonLayout.Footer>
-    </UserActionFormCallCongresspersonLayout>
+      </UserActionFormLayout.Container>
+      <UserActionFormLayout.Footer>{children}</UserActionFormLayout.Footer>
+    </UserActionFormLayout>
   )
 }
 

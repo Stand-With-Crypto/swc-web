@@ -54,6 +54,7 @@ export const externalUrls = {
   linkedin: () => 'https://www.linkedin.com/company/standwithcrypto/',
   twitter: () => 'https://twitter.com/standwithcrypto',
   youtube: () => 'https://www.youtube.com/@StandWithCryptoAlliance/featured',
+  swcOnChainSummer: () => 'https://onchainsummer.xyz/standwithcrypto',
 }
 
 export const apiUrls = {

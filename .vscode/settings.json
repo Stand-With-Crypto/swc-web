@@ -47,8 +47,10 @@
     "dotheysupportit",
     "DTSI",
     "FAIRSHAKE",
+    "hookform",
     "inngest",
     "jank",
+    "keccak",
     "Leaderboard",
     "nextjs",
     "precheck",
@@ -63,8 +65,8 @@
     "typecheck",
     "undici",
     "unoptimized",
-    "hookform",
-    "vaul"
+    "vaul",
+    "viem"
   ],
   "typescript.tsdk": "node_modules/typescript/lib"
 }
