@@ -123,6 +123,7 @@ model User {
 
   @@index([addressId])
   @@index([internalStatus])
+  @@index([capitolCanaryAdvocateId])
   @@map("user")
 }
 
