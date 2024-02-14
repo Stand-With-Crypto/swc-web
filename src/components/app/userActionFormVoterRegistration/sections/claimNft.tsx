@@ -1,10 +1,11 @@
 'use client'
 
+import { memo, useCallback } from 'react'
+
 import { SectionNames } from '@/components/app/userActionFormVoterRegistration/constants'
 import { UserActionFormVoterRegistrationLayout } from '@/components/app/userActionFormVoterRegistration/sections/layout'
 import { Button } from '@/components/ui/button'
 import { UseSectionsReturn } from '@/hooks/useSections'
-import { memo, useCallback } from 'react'
 
 interface ClaimNftProps extends UseSectionsReturn<SectionNames> {}
 
