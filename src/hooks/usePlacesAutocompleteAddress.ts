@@ -2,9 +2,7 @@ import { useEffect, useMemo } from 'react'
 import usePlacesAutocomplete from 'use-places-autocomplete'
 
 import { useScript } from '@/hooks/useScript'
-import { isBrowser } from '@/utils/shared/executionEnvironment'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
-import { LAT_LONG_FOR_CENTER_OF_US, WIDTH_OF_US_METERS } from '@/utils/web/googlePlaceConstants'
 
 const CALLBACK_NAME = 'PLACES_AUTOCOMPLETE'
 
@@ -26,13 +24,7 @@ export function usePlacesAutocompleteAddress(address: string) {
     callbackName: CALLBACK_NAME,
     // note on why we aren't restricting to just addresses https://stackoverflow.com/a/65206036
     requestOptions: {
-      locationBias:
-        isBrowser && window.google
-          ? new google.maps.Circle({
-              center: LAT_LONG_FOR_CENTER_OF_US,
-              radius: WIDTH_OF_US_METERS / 2,
-            })
-          : undefined,
+      locationBias: 'IP_BIAS',
     },
   })
 

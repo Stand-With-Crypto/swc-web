@@ -7,7 +7,6 @@ import { InputWithIcons } from '@/components/ui/inputWithIcons'
 import { useScript } from '@/hooks/useScript'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { cn } from '@/utils/web/cn'
-import { LAT_LONG_FOR_CENTER_OF_US, WIDTH_OF_US_METERS } from '@/utils/web/googlePlaceConstants'
 import { GooglePlaceAutocompletePrediction } from '@/utils/web/googlePlaceUtils'
 
 const CALLBACK_NAME = 'PLACES_AUTOCOMPLETE'
