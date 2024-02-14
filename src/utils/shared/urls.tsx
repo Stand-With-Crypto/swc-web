@@ -39,6 +39,24 @@ export const getIntlUrls = (
   }
 }
 
+const NEXT_PUBLIC_VERCEL_URL = requiredOutsideLocalEnv(
+  process.env.NEXT_PUBLIC_VERCEL_URL,
+  'NEXT_PUBLIC_VERCEL_URL',
+)
+
+export const fullUrl = (path: string) => {
+  switch (NEXT_PUBLIC_ENVIRONMENT) {
+    case 'local':
+      return `http://localhost:3000${path}`
+    case 'testing':
+      return `https://swc-web-testing.vercel.app${path}`
+    case 'preview':
+      return `${NEXT_PUBLIC_VERCEL_URL!}${path}`
+    case 'production':
+      return `https://www.standwithcrypto.org${path}`
+  }
+}
+
 export const externalUrls = {
   discord: () => 'https://discord.com/invite/standwithcrypto',
   donate: () =>
@@ -55,6 +73,7 @@ export const externalUrls = {
   twitter: () => 'https://twitter.com/standwithcrypto',
   youtube: () => 'https://www.youtube.com/@StandWithCryptoAlliance/featured',
   swcOnChainSummer: () => 'https://onchainsummer.xyz/standwithcrypto',
+  swcReferralUrl: ({ referralId }: { referralId: string }) => fullUrl(`/join/${referralId}`),
 }
 
 export const apiUrls = {
@@ -74,22 +93,4 @@ export const apiUrls = {
   dtsiAllPeople: () => `/api/public/dtsi/all-people`,
   recentActivity: ({ limit }: { limit: number }) => `/api/public/recent-activity/${limit}`,
   homepageTopLevelMetrics: () => `/api/public/homepage/top-level-metrics`,
-}
-
-const NEXT_PUBLIC_VERCEL_URL = requiredOutsideLocalEnv(
-  process.env.NEXT_PUBLIC_VERCEL_URL,
-  'NEXT_PUBLIC_VERCEL_URL',
-)
-
-export const fullUrl = (path: string) => {
-  switch (NEXT_PUBLIC_ENVIRONMENT) {
-    case 'local':
-      return `http://localhost:3000${path}`
-    case 'testing':
-      return `https://swc-web-testing.vercel.app${path}`
-    case 'preview':
-      return `${NEXT_PUBLIC_VERCEL_URL!}${path}`
-    case 'production':
-      return `https://www.standwithcrypto.org${path}`
-  }
 }

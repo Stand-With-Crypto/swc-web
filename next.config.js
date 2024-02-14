@@ -166,7 +166,7 @@ const ACTION_REDIRECTS = [
     queryValue: 'member-join',
   },
 ]
-const V1_REDIRECTS = ACTION_REDIRECTS.map(({ destination, queryKey, queryValue }) => ({
+const V1_ACTION_REDIRECTS = ACTION_REDIRECTS.map(({ destination, queryKey, queryValue }) => ({
   permanent: true,
   source: '/',
   destination,
@@ -202,7 +202,8 @@ const nextConfig = {
   },
   async redirects() {
     return [
-      ...V1_REDIRECTS,
+      // redirects from v1 -> v2
+      ...V1_ACTION_REDIRECTS,
       {
         permanent: true,
         destination: '/action/call',
@@ -222,6 +223,13 @@ const nextConfig = {
         source: '/politicians/house',
         destination: '/politicians',
         permanent: true,
+      },
+
+      // vanity urls
+      {
+        source: '/join/:referralId',
+        destination: '/action/sign-up?utm_campaign=:referralId&utm_source=swc&utm_medium=referral',
+        permanent: false,
       },
     ]
   },

@@ -25,7 +25,7 @@ const schemaWithMocks = addMocksToSchema({
     Json: () => ({}),
     Int: () => faker.number.int({ min: 0, max: 100 }),
     Boolean: () => faker.datatype.boolean(),
-    Float: () => faker.number.float({ min: 0, max: 100, precision: 0.001 }),
+    Float: () => faker.number.float({ min: 0, max: 100, multipleOf: 0.001 }),
     ID: () => fakerFields.id(),
     Person: dtsiPersonMockResolver,
     PersonStanceQuote: dtsiPersonStanceQuoteMockResolver,

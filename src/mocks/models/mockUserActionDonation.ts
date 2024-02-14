@@ -6,7 +6,7 @@ import { fakerFields } from '@/mocks/fakerUtils'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 
 export function mockCreateUserActionDonationInput() {
-  const amount = new Decimal(faker.number.float({ min: 0, max: 1000, precision: 0.01 }))
+  const amount = new Decimal(faker.number.float({ min: 0, max: 1000, multipleOf: 0.01 }))
   const amountCurrencyCode = SupportedFiatCurrencyCodes.USD
   return {
     amount,
