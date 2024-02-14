@@ -81,10 +81,10 @@ export function PageAbout({ title, description }: { title: string; description: 
             <PageTitle as="h3" className="text-start text-foreground" size="sm">
               Crypto drives American innovation
             </PageTitle>
-            <P>
+            <p>
               While 130 countries (98% of the global economy) are exploring digital currencies, the
               US is falling behind. Yet, the desire for American leadership is clear:
-            </P>
+            </p>
             <ul className="ml-4 mt-4 list-disc">
               <li>53% of Americans want crypto companies to be US-based.</li>
               <li>
