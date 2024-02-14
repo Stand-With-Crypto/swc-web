@@ -40,7 +40,7 @@ const formatDTSIPerson = (person: DTSIPersonForUserActions) => {
   return `${dtsiPersonFullName(person)} ${politicalAffiliation}`
 }
 
-export const VariantRecentActivityRow = memo(function VariantRecentActivityRow({
+export const VariantRecentActivityRow = function VariantRecentActivityRow({
   action,
   locale,
 }: RecentActivityRowProps) {
@@ -54,12 +54,12 @@ export const VariantRecentActivityRow = memo(function VariantRecentActivityRow({
         const getTypeDisplayText = () => {
           const possibleUserState = userLocationDetails?.administrativeAreaLevel1
             ? `from ${userLocationDetails.administrativeAreaLevel1}`
-            : `joined Stand With Crypto`
+            : `joined`
           switch (action.optInType) {
             case UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER:
               return (
                 <>
-                  <span className="hidden sm:inline">{possibleUserState}</span>
+                  <span className="hidden sm:inline"> {possibleUserState} Stand With Crypto</span>
                   <span className="sm:hidden">SWC</span>
                 </>
               )
@@ -170,4 +170,4 @@ export const VariantRecentActivityRow = memo(function VariantRecentActivityRow({
     })
   }
   return <RecentActivityRowBase action={action} locale={locale} {...getActionSpecificProps()} />
-})
+}
