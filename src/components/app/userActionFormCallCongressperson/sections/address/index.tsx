@@ -7,7 +7,7 @@ import useSWR from 'swr'
 
 import type { UserActionFormCallCongresspersonProps } from '@/components/app/userActionFormCallCongressperson'
 import { SectionNames } from '@/components/app/userActionFormCallCongressperson/constants'
-import { UserActionFormCallCongresspersonLayout } from '@/components/app/userActionFormCallCongressperson/tabs/layout'
+import { UserActionFormLayout } from '@/components/app/userActionFormCommon/layout'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -110,9 +110,9 @@ export function Address({
           trackFormSubmissionSyncErrors(FORM_NAME),
         )}
       >
-        <UserActionFormCallCongresspersonLayout onBack={() => goToSection(SectionNames.INTRO)}>
-          <UserActionFormCallCongresspersonLayout.Container>
-            <UserActionFormCallCongresspersonLayout.Heading
+        <UserActionFormLayout onBack={() => goToSection(SectionNames.INTRO)}>
+          <UserActionFormLayout.Container>
+            <UserActionFormLayout.Heading
               subtitle="Your address will be used to connect you with your representative. Stand With Crypto will never share your data with any third-parties."
               title="Find your representative"
             />
@@ -136,8 +136,8 @@ export function Address({
                 </FormItem>
               )}
             />
-          </UserActionFormCallCongresspersonLayout.Container>
-          <UserActionFormCallCongresspersonLayout.Footer>
+          </UserActionFormLayout.Container>
+          <UserActionFormLayout.Footer>
             <Button
               disabled={
                 form.formState.isSubmitting ||
@@ -157,8 +157,8 @@ export function Address({
                 privacy policy
               </InternalLink>
             </p>
-          </UserActionFormCallCongresspersonLayout.Footer>
-        </UserActionFormCallCongresspersonLayout>
+          </UserActionFormLayout.Footer>
+        </UserActionFormLayout>
       </form>
     </Form>
   )

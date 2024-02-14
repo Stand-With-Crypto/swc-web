@@ -2,7 +2,10 @@
 import { useRouter } from 'next/navigation'
 
 import { GetUserPerformedUserActionTypesResponse } from '@/app/api/identified-user/performed-user-action-types/route'
-import { UserActionRowCTAButton } from '@/components/app/userActionRowCTA'
+import {
+  UserActionRowCTAButton,
+  UserActionRowCTAButtonSkeleton,
+} from '@/components/app/userActionRowCTA'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useLocale } from '@/hooks/useLocale'
 import { USER_ACTION_DEEPLINK_MAP } from '@/utils/shared/urlsDeeplinkUserActions'
@@ -36,9 +39,9 @@ export function UserActionFormSuccessScreenNextAction({
   return (
     <div>
       <div className="mb-2 font-bold">Up next</div>
-      {/* 
-        We can't open a modal within a modal, and so we redirect the user to our deeplink modal pages. 
-        There might be better options but this seems like the path of least resistance with minimal UX downside ¯\_(ツ)_/¯ 
+      {/*
+        We can't open a modal within a modal, and so we redirect the user to our deeplink modal pages.
+        There might be better options but this seems like the path of least resistance with minimal UX downside ¯\_(ツ)_/¯
         */}
       <UserActionRowCTAButton
         {...nextAction}
@@ -47,6 +50,17 @@ export function UserActionFormSuccessScreenNextAction({
         }
         state="unknown"
       />
+    </div>
+  )
+}
+
+export function UserActionFormSuccessScreenNextActionSkeleton() {
+  return (
+    <div>
+      <Skeleton>
+        <div className="mb-2 font-bold">Up next</div>
+      </Skeleton>
+      <UserActionRowCTAButtonSkeleton />
     </div>
   )
 }

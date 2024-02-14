@@ -13,11 +13,10 @@ import { Navbar } from '@/components/app/navbar'
 import { FullHeight } from '@/components/ui/fullHeight'
 import { Toaster } from '@/components/ui/sonner'
 import { ORDERED_SUPPORTED_LOCALES } from '@/intl/locales'
+import { PageProps } from '@/types'
 import { getOpenGraphImageUrl } from '@/utils/server/generateOpenGraphImageUrl'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
-
-import { PageProps } from '@/types'
 
 // we want dynamicParams to be false for this top level layout, but we also want to ensure that subpages can have dynamic params
 // Next.js doesn't allow this so we allow dynamic params in the config here, and then trigger a notFound in the layout if one is passed

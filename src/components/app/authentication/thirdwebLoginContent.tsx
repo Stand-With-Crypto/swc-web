@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import { ConnectEmbed, ConnectEmbedProps, lightTheme } from '@thirdweb-dev/react'
+import { ConnectEmbed, ConnectEmbedProps } from '@thirdweb-dev/react'
 import { useRouter } from 'next/navigation'
 import { useSWRConfig } from 'swr'
 
@@ -12,6 +12,7 @@ import { PageTitle } from '@/components/ui/pageTitleText'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useDialog } from '@/hooks/useDialog'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
+import { theme } from '@/utils/web/thirdweb/theme'
 
 export function ThirdwebLoginDialog({
   children,
@@ -97,26 +98,5 @@ export function ThirdwebLoginContent(props: ConnectEmbedProps) {
 }
 
 function ThirdwebLoginEmbedded(props: ConnectEmbedProps) {
-  return (
-    <ConnectEmbed
-      style={{ border: 'none', maxWidth: 'unset' }}
-      theme={lightTheme({
-        colors: {
-          accentText: '#0f172a',
-          accentButtonBg: '#0f172a',
-          borderColor: '#e2e8f0',
-          separatorLine: '#e2e8f0',
-          primaryText: '#020817',
-          secondaryText: '#64748b',
-          secondaryButtonText: '#0f172a',
-          secondaryButtonBg: '#f1f5f9',
-          connectedButtonBg: '#f1f5f9',
-          connectedButtonBgHover: '#e4e2e4',
-          walletSelectorButtonHoverBg: '#e4e2e4',
-          secondaryIconColor: '#706f78',
-        },
-      })}
-      {...props}
-    />
-  )
+  return <ConnectEmbed style={{ border: 'none', maxWidth: 'unset' }} theme={theme} {...props} />
 }
