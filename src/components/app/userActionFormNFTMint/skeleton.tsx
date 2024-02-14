@@ -1,5 +1,19 @@
-import { SupportedLocale } from '@/intl/locales'
+import { UserActionFormLayout } from '@/components/app/userActionFormCommon'
+import {
+  ContractMetadataDisplaySkeleton,
+  FooterSkeleton,
+} from '@/components/app/userActionFormNFTMint/sections/intro'
 
-export function UserActionFormNFTMintSkeleton(_props: { locale: SupportedLocale }) {
-  return <div>TODO NFT Mint</div>
+export function UserActionFormNFTMintSkeleton() {
+  return (
+    <UserActionFormLayout>
+      <UserActionFormLayout.Container>
+        <ContractMetadataDisplaySkeleton />
+
+        <UserActionFormLayout.Footer>
+          <FooterSkeleton />
+        </UserActionFormLayout.Footer>
+      </UserActionFormLayout.Container>
+    </UserActionFormLayout>
+  )
 }
