@@ -23,6 +23,7 @@ Below is a non-exhaustive list of coding conventions that we try to follow. This
 - When using zod for client-side validation, do not import `z` from the library as this prevents tree-shaking from removing unused portions of the library. Instead import the individual methods (`object`, `string`, etc) from the package.
 - when you need field-level errors to be returned to the client, make sure to return them in an object structure as `{ errors: validatedFields.error.flatten().fieldErrors }` so they can successfully be used by client side functions like `triggerServerActionForForm`
 - make sure we normalize values in our validators before persisting. For example, all emails should be `.toLowerCase()` before persisting
+- Root level functions must be defined with the `function` keyword and arrow functions should be used on nested contexts (this applies for components and methods)
 
 ## UI Development
 

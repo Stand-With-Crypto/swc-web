@@ -57,6 +57,23 @@ async function seed() {
         throw new Error(`Invalid seed size passed: ${seedSize}`)
     }
   }
+
+  /*
+  address
+  */
+  await batchAsyncAndLog(
+    _.times(seedSizes([10, 100, 1000])).map(() => {
+      const address = mockCreateAddressInput()
+      return address
+    }),
+    data =>
+      prismaClient.address.createMany({
+        data,
+      }),
+  )
+
+  const address = await prismaClient.address.findMany()
+  logEntity({ address })
   /*
   authenticationNonce
   */
@@ -77,16 +94,25 @@ async function seed() {
     PopularCryptoAddress.CHRIS_DIXON,
   ]
   const initialCryptoAddresses = [...topDonorCryptoAddressStrings, LOCAL_USER_CRYPTO_ADDRESS]
+  const addressesUnusedOnUsers = [...address]
   await batchAsyncAndLog(
     _.times(seedSizes([12, 98, 987])).map((_num, index) => {
       // This ensures that no matter how many users we create, we include our initial crypto addresses
       const shouldBeAssociatedWithInitialCryptoAddress = index < initialCryptoAddresses.length
       const mocks = mockCreateUserInput()
+      const selectedAddress =
+        addressesUnusedOnUsers.length > 1
+          ? addressesUnusedOnUsers.splice(
+              faker.number.int({ min: 0, max: addressesUnusedOnUsers.length - 1 }),
+              1,
+            )[0]
+          : addressesUnusedOnUsers[0]
       return {
         ...mocks,
         informationVisibility: shouldBeAssociatedWithInitialCryptoAddress
           ? UserInformationVisibility.CRYPTO_INFO_ONLY
           : mocks.informationVisibility,
+        addressId: selectedAddress.id,
       }
     }),
     data =>
@@ -298,18 +324,6 @@ async function seed() {
     UserActionType,
     typeof userAction
   >
-  /*
-  address
-  */
-  await batchAsyncAndLog(
-    userActionsByType[UserActionType.EMAIL].map(() => mockCreateAddressInput()),
-    data =>
-      prismaClient.address.createMany({
-        data,
-      }),
-  )
-  const address = await prismaClient.address.findMany()
-  logEntity({ address })
 
   /*
   userActionEmail

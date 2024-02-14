@@ -1,5 +1,6 @@
 import { UserActionType } from '@prisma/client'
 import _ from 'lodash'
+import { redirect, RedirectType } from 'next/navigation'
 
 import { PageUserProfileUser } from '@/components/app/pageUserProfile/getAuthenticatedData'
 import { UpdateUserProfileFormDialog } from '@/components/app/updateUserProfileForm/dialog'
@@ -12,11 +13,11 @@ import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { Progress } from '@/components/ui/progress'
+import { PageProps } from '@/types'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
+import { USER_ACTION_DEEPLINK_MAP } from '@/utils/shared/urlsDeeplinkUserActions'
 import { hasCompleteUserProfile } from '@/utils/web/hasCompleteUserProfile'
 import { getSensitiveDataUserDisplayName } from '@/utils/web/userUtils'
-
-import { PageProps } from '@/types'
 
 export function PageUserProfile({
   params,
@@ -24,8 +25,15 @@ export function PageUserProfile({
 }: PageProps & { user: PageUserProfileUser | null }) {
   const { locale } = params
   if (!user) {
-    // TODO UX
-    return <div>Not logged in</div>
+    // For now the only authenticated page we have is /profile,
+    // so we don't need to dynamically pass the redirect path to login
+    // If we add more authenticated pages, we'll need to make this dynamic
+    redirect(
+      USER_ACTION_DEEPLINK_MAP[UserActionType.OPT_IN].getDeeplinkUrl({
+        locale,
+      }),
+      RedirectType.replace,
+    )
   }
   const { userActions } = user
   const performedUserActionTypes = _.uniq(userActions.map(x => x.actionType))

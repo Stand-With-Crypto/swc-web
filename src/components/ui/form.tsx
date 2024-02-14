@@ -13,6 +13,7 @@ import {
 import * as LabelPrimitive from '@radix-ui/react-label'
 import { Slot } from '@radix-ui/react-slot'
 
+import { ErrorMessage } from '@/components/ui/errorMessage'
 import { Label } from '@/components/ui/label'
 import { cn } from '@/utils/web/cn'
 import { GENERIC_FORM_ERROR_KEY } from '@/utils/web/formUtils'
@@ -168,14 +169,9 @@ const FormErrorMessage = React.forwardRef<
   }
 
   return (
-    <p
-      className={cn('text-sm font-medium text-destructive', className)}
-      id={formMessageId}
-      ref={ref}
-      {...props}
-    >
+    <ErrorMessage className={className} id={formMessageId} ref={ref} {...props}>
       {body}
-    </p>
+    </ErrorMessage>
   )
 })
 FormErrorMessage.displayName = 'FormErrorMessage'
