@@ -10,16 +10,16 @@ import { Button } from '@/components/ui/button'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
 import { FormattedDatetime } from '@/components/ui/formattedDatetime'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
-import { Input } from '@/components/ui/input'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { Progress } from '@/components/ui/progress'
 import { PageProps } from '@/types'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
-import { externalUrls } from '@/utils/shared/urls'
 import { USER_ACTION_DEEPLINK_MAP } from '@/utils/shared/urlsDeeplinkUserActions'
 import { hasCompleteUserProfile } from '@/utils/web/hasCompleteUserProfile'
 import { getSensitiveDataUserDisplayName } from '@/utils/web/userUtils'
+
+import { UserReferralUrl } from './userReferralUrl'
 
 export function PageUserProfile({
   params,
@@ -149,15 +149,7 @@ export function PageUserProfile({
         <PageSubTitle className="mb-5">
           Send friends your unique referral code to encourage them to sign up and take action.
         </PageSubTitle>
-        <div>
-          <Input
-            className="mx-auto w-[305px] !opacity-95"
-            disabled
-            value={externalUrls
-              .swcReferralUrl({ referralId: user.referralId })
-              .replace('https://www.', '')}
-          />
-        </div>
+        <UserReferralUrl referralId={user.referralId} />
       </section>
     </div>
   )
