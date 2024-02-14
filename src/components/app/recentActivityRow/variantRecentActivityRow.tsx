@@ -53,8 +53,8 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
       case UserActionType.OPT_IN: {
         const getTypeDisplayText = () => {
           const possibleUserState = userLocationDetails?.administrativeAreaLevel1
-            ? `from ${userLocationDetails.administrativeAreaLevel1}`
-            : `joined`
+            ? `from ${userLocationDetails.administrativeAreaLevel1} joined`
+            : 'joined';
           switch (action.optInType) {
             case UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER:
               return (
