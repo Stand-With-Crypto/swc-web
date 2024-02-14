@@ -87,7 +87,7 @@ async function _actionCreateUserActionVoterRegistration(input: CreateActionVoter
     return { user: getClientUser(user) }
   }
 
-  const { userAction, updatedUser } = await createActionAndUpdateUser({
+  const { userAction } = await createAction({
     user,
     isNewUser: !userMatch.user,
     validatedInput: validatedInput.data,
@@ -99,7 +99,7 @@ async function _actionCreateUserActionVoterRegistration(input: CreateActionVoter
     await claimNFT(userAction, user.primaryUserCryptoAddress)
   }
 
-  return { user: getClientUser(updatedUser) }
+  return { user: getClientUser(user) }
 }
 
 async function createUser(sharedDependencies: Pick<SharedDependencies, 'localUser' | 'sessionId'>) {
@@ -168,7 +168,7 @@ function logSpamActionSubmissions({
   )
 }
 
-async function createActionAndUpdateUser<U extends User>({
+async function createAction<U extends User>({
   user,
   validatedInput,
   userMatch,
@@ -202,15 +202,7 @@ async function createActionAndUpdateUser<U extends User>({
     },
   })
 
-  const updatedUser = await prismaClient.user.update({
-    where: { id: user.id },
-    data: {},
-    include: {
-      primaryUserCryptoAddress: true,
-      address: true,
-    },
-  })
-  logger.info('created user action and updated user')
+  logger.info('created user action')
 
   sharedDependencies.analytics.trackUserActionCreated({
     actionType: UserActionType.VOTER_REGISTRATION,
@@ -222,5 +214,5 @@ async function createActionAndUpdateUser<U extends User>({
     state: validatedInput.state,
   })
 
-  return { userAction, updatedUser }
+  return { userAction }
 }

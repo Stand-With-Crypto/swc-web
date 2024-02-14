@@ -88,12 +88,7 @@ function getEntities(tweet: DTSIStanceDetailsTweetProp['tweet']) {
 
   const emojiIndexes = getEmojiIndexes(tweet)
   const entities = tweet.entities as FormattedUserTweet['entities']
-  addEntities(
-    tweet,
-    emojiIndexes,
-    result,
-    entities.urls?.map(x => ({ ...x, type: 'urls' })),
-  )
+  addEntities(tweet, emojiIndexes, result, entities.urls?.map(x => ({ ...x, type: 'urls' })))
   addEntities(
     tweet,
     emojiIndexes,
