@@ -59,7 +59,7 @@ export function Address({
   const form = useForm<FindRepresentativeCallFormValues>({
     defaultValues: {
       ...userDefaultValues,
-      address: userDefaultValues.address || initialValues?.address,
+      address: initialValues?.address || userDefaultValues.address,
     },
     resolver: zodResolver(findRepresentativeCallFormValidationSchema),
   })

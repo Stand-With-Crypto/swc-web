@@ -99,10 +99,10 @@ export function UserActionFormEmailCongressperson({
     resolver: zodResolver(zodUserActionFormEmailCongresspersonFields),
     defaultValues: {
       ...userDefaultValues,
-      address: userDefaultValues.address || initialValues?.address,
-      emailAddress: userDefaultValues.emailAddress || initialValues?.email,
-      firstName: userDefaultValues.firstName || initialValues?.firstName,
-      lastName: userDefaultValues.lastName || initialValues?.lastName,
+      address: initialValues?.address || userDefaultValues.address,
+      emailAddress: initialValues?.email || userDefaultValues.emailAddress,
+      firstName: initialValues?.firstName || userDefaultValues.firstName,
+      lastName: initialValues?.lastName || userDefaultValues.lastName,
     },
   })
 
