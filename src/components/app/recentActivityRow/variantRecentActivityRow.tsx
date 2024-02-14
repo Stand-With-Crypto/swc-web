@@ -1,5 +1,5 @@
 'use client'
-import React, { memo } from 'react'
+import React from 'react'
 import { UserActionOptInType, UserActionType } from '@prisma/client'
 
 import { ThirdwebLoginDialog } from '@/components/app/authentication/thirdwebLoginContent'
