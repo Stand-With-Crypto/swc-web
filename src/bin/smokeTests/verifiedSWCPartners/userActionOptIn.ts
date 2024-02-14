@@ -30,6 +30,7 @@ async function smokeTestUserActionOptIn() {
       optInType: UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER,
       isVerifiedEmailAddress: true,
       campaignName: 'foobar',
+      hasOptedInToEmails: true,
     } satisfies Omit<Parameters<typeof verifiedSWCPartnersUserActionOptIn>[0], 'partner'>),
   }).catch(e => {
     console.error(e)
