@@ -27,6 +27,10 @@ export type SensitiveDataClientUser = ClientModel<
     datetimeUpdated: string
     primaryUserCryptoAddress: ClientUserCryptoAddress | null
     primaryUserEmailAddress: Pick<UserEmailAddress, 'emailAddress'> | null
+    userLocationDetails: {
+      administrativeAreaLevel1: string | null
+      countryCode: string | null
+    } | null
   }
 >
 
@@ -71,6 +75,7 @@ export const getSensitiveDataClientUser = (
     phoneNumber: phoneNumber ? formatPhoneNumber(phoneNumber) : '',
     hasOptedInToMembership,
     hasOptedInToSms,
+    userLocationDetails: null,
   })
 }
 
