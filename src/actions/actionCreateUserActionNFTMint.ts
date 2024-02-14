@@ -69,6 +69,7 @@ async function _actionCreateUserActionMintNFT(input: CreateActionMintNFTInput) {
     },
     include: {
       primaryUserCryptoAddress: true,
+      address: true,
     },
   })
 
