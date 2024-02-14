@@ -44,7 +44,6 @@ export const VariantRecentActivityRow = memo(function VariantRecentActivityRow({
   action,
   locale,
 }: RecentActivityRowProps) {
-  console.log('Action: ', action)
   const { userLocationDetails } = action.user
   const userDisplayName = getUserDisplayName(action.user)
   const { data } = useApiResponseForUserPerformedUserActionTypes()
@@ -166,7 +165,7 @@ export const VariantRecentActivityRow = memo(function VariantRecentActivityRow({
     }
     return gracefullyError({
       // @ts-ignore
-      msg: `Unknown action type in RecentActivityRow for action ${action.id}: ${action.actionType}`,
+      msg: `Unknown action type in VariantRecentActivityRow for action ${action.id}: ${action.actionType}`,
       fallback: 'helped crypto',
     })
   }
