@@ -1,4 +1,6 @@
 'use client'
+import { useCallback } from 'react'
+
 import { PrivacyPolicyDialog } from '@/components/app/pagePrivacyPolicy/dialog'
 import { SectionNames } from '@/components/app/userActionFormVoterRegistration/constants'
 import { UserActionFormVoterRegistrationLayout } from '@/components/app/userActionFormVoterRegistration/sections/layout'
@@ -8,6 +10,15 @@ import { UseSectionsReturn } from '@/hooks/useSections'
 interface SurveyProps extends UseSectionsReturn<SectionNames> {}
 
 export function Survey({ goToSection }: SurveyProps) {
+  const createSelectionHandler = useCallback(
+    (step: SectionNames) => {
+      return () => {
+        goToSection(step)
+      }
+    },
+    [goToSection],
+  )
+
   return (
     <UserActionFormVoterRegistrationLayout>
       <UserActionFormVoterRegistrationLayout.Container>
@@ -19,7 +30,7 @@ export function Survey({ goToSection }: SurveyProps) {
           <div className="flex flex-grow flex-col items-center justify-center gap-3 lg:flex-row">
             <Button
               className="w-full lg:w-auto"
-              onClick={() => goToSection(SectionNames.CLAIM_NFT)}
+              onClick={createSelectionHandler(SectionNames.CLAIM_NFT)}
               size="lg"
               variant="secondary"
             >
@@ -27,7 +38,7 @@ export function Survey({ goToSection }: SurveyProps) {
             </Button>
             <Button
               className="w-full lg:w-auto"
-              onClick={() => goToSection(SectionNames.VOTER_REGISTRATION_FORM)}
+              onClick={createSelectionHandler(SectionNames.VOTER_REGISTRATION_FORM)}
               size="lg"
               variant="secondary"
             >
@@ -35,7 +46,7 @@ export function Survey({ goToSection }: SurveyProps) {
             </Button>
             <Button
               className="w-full lg:w-auto"
-              onClick={() => goToSection(SectionNames.CHECK_REGISTRATION_FORM)}
+              onClick={createSelectionHandler(SectionNames.CHECK_REGISTRATION_FORM)}
               size="lg"
               variant="secondary"
             >
