@@ -1,4 +1,4 @@
-import { User, UserCryptoAddress, UserEmailAddress } from '@prisma/client'
+import { Address, User, UserCryptoAddress, UserEmailAddress } from '@prisma/client'
 
 import {
   ClientUserCryptoAddress,
@@ -28,14 +28,15 @@ export type SensitiveDataClientUser = ClientModel<
     primaryUserCryptoAddress: ClientUserCryptoAddress | null
     primaryUserEmailAddress: Pick<UserEmailAddress, 'emailAddress'> | null
     userLocationDetails: {
-      administrativeAreaLevel1: string | null
-      countryCode: string | null
+      administrativeAreaLevel1: string
+      countryCode: string
     } | null
   }
 >
 
 export const getSensitiveDataClientUser = (
   record: User & {
+    address: Address | null
     primaryUserCryptoAddress: null | UserCryptoAddress
     primaryUserEmailAddress: UserEmailAddress | null
   },
@@ -53,7 +54,14 @@ export const getSensitiveDataClientUser = (
     hasOptedInToMembership,
     hasOptedInToSms,
     referralId,
+    address,
   } = record
+  const userLocationDetails = address
+    ? {
+        administrativeAreaLevel1: address.administrativeAreaLevel1,
+        countryCode: address.countryCode,
+      }
+    : null
 
   return getClientModel({
     firstName,
@@ -75,7 +83,7 @@ export const getSensitiveDataClientUser = (
     phoneNumber: phoneNumber ? formatPhoneNumber(phoneNumber) : '',
     hasOptedInToMembership,
     hasOptedInToSms,
-    userLocationDetails: null,
+    userLocationDetails,
   })
 }
 
