@@ -28,7 +28,7 @@ export async function GET(_request: NextRequest, { params }: { params: { config:
           {/* eslint-disable-next-line */}
           <img height="256" src={imageData as any} width="256" />
           <div tw="text-5xl mb-2 mt-8">{title}</div>
-          <div tw="text-2xl max-w-3xl text-gray-400">{description}</div>
+          <div tw="text-2xl text-gray-400">{description}</div>
         </div>
         <div tw="text-gray-400">standwithcrypto.org</div>
       </div>
