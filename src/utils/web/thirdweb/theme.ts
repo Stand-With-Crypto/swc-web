@@ -14,5 +14,6 @@ export const theme = lightTheme({
     connectedButtonBgHover: '#e4e2e4',
     walletSelectorButtonHoverBg: '#e4e2e4',
     secondaryIconColor: '#706f78',
+    modalBg: '#fff',
   },
 })
