@@ -48,6 +48,7 @@ export function LoginDialogWrapper({ children, authenticatedContent }: LoginDial
     }
 
     const localUser = getLocalUser()
+    console.log(user.session, localUser.persisted)
 
     // TODO invert
     if (!user.session?.isNewlyCreatedUser && !localUser.persisted?.hasSeenCompleteProfilePrompt) {
