@@ -75,7 +75,7 @@ export async function onLogin(
     },
   })
   if (existingVerifiedUser) {
-    log(`existing user found`)
+    log('existing user found')
     getServerAnalytics({ userId: existingVerifiedUser.id, localUser }).track('User Logged In')
     getServerPeopleAnalytics({ userId: existingVerifiedUser.id, localUser }).set({
       'Datetime of Last Login': new Date(),
@@ -90,7 +90,7 @@ export async function onLogin(
   }).then(res => ({ userId: res.userId }))
 }
 
-interface Params {
+interface NewLoginParams {
   cryptoAddress: string
   localUser: ServerLocalUser | null
   getUserSessionId: () => string
@@ -111,10 +111,12 @@ IF YOU MODIFY THIS FUNCTION, PLEASE VERIFY THE SMOKE TESTS IN "npm run ts src/bi
 *****************************
 *****************************
 
-This logic governs all the user matching/creation/updating/merge logic that may occur when a user logs in to our website. Below is the desired behavior of this function:
+This logic governs all the user matching/creation/updating/merge logic that may occur when a user logs in to our website. 
+This logic only runs when a user logs in and we can't find a verified cryptoAddress to match the thirdweb-authenticated crypto address to
+Below is the desired behavior of this function:
 
 @function queryMatchingUsers:
-If not, we want to find any existing users in our system that
+find any existing users in our system that
 - has a session with the same id as the session id that was passed in the headers
 - OR has a verified email address that matches the embedded wallet email address of the crypto address (if the address is associated with a thirdweb embedded wallet)
   - This embedded wallet use case is necessary for the scenario where a user signs up on the coinbase app, and then "signs in" on the SWC website later on.
@@ -159,7 +161,7 @@ If the user isn't already in capital canary, or is but now has a new email addre
 This function will ensure we create a user opt-in action if one does not already exist and will trigger any nft mints that need to occur
 */
 
-export async function onNewLogin(props: Params) {
+export async function onNewLogin(props: NewLoginParams) {
   const { cryptoAddress, localUser } = props
   const log = getLog(cryptoAddress)
 
@@ -303,7 +305,7 @@ async function queryMatchingUsers({
   cryptoAddress,
   getUserSessionId,
   injectedFetchEmbeddedWalletMetadataFromThirdweb,
-}: Params) {
+}: NewLoginParams) {
   const log = getLog(cryptoAddress)
   const userSessionId = getUserSessionId()
   const embeddedWalletEmailAddress =
