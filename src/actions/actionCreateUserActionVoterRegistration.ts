@@ -22,6 +22,7 @@ import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
+import { generateReferralId } from '@/utils/shared/referralId'
 import { UserActionVoterRegistrationCampaignName } from '@/utils/shared/userActionCampaigns'
 
 const logger = getLogger(`actionCreateUserActionVoterRegistration`)
@@ -111,6 +112,7 @@ async function createUser(sharedDependencies: Pick<SharedDependencies, 'localUse
       hasOptedInToEmails: false,
       hasOptedInToMembership: false,
       hasOptedInToSms: false,
+      referralId: generateReferralId(),
       ...mapLocalUserToUserDatabaseFields(localUser),
     },
     include: {
