@@ -35,6 +35,7 @@ import { getOrCreateSessionIdToSendBackToPartner } from '@/utils/server/verified
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
+import { generateReferralId } from '@/utils/shared/referralId'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
 import { zodFirstName, zodLastName } from '@/validation/fields/zodName'
 import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
@@ -262,6 +263,7 @@ async function maybeUpsertUser({
     },
     data: {
       ...getUserAttributionFieldsForVerifiedSWCPartner({ partner, campaignName }),
+      referralId: generateReferralId(),
       userSessions: {
         create: {},
       },

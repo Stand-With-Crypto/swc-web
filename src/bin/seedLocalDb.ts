@@ -387,7 +387,7 @@ async function seed() {
       const initialMockValues = mockCreateUserActionDonationInput()
       const isTopDonor = topDonorUserIdMap[action.userId]
       const amount = isTopDonor
-        ? faker.number.float({ min: 100000, max: 200000, precision: 0.01 })
+        ? faker.number.float({ min: 100000, max: 200000, multipleOf: 0.01 })
         : initialMockValues.amount
       return {
         ...initialMockValues,

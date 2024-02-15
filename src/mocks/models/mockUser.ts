@@ -10,6 +10,7 @@ export function mockCreateUserInput({
   withData?: boolean
 } = {}) {
   return {
+    referralId: fakerFields.generateReferralId(),
     acquisitionCampaign: '',
     acquisitionMedium: '',
     acquisitionSource: '',
