@@ -7,6 +7,7 @@ import _ from 'lodash'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
+import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
 export type UserAndMethodOfMatch<
   I extends Omit<Prisma.UserFindFirstArgs, 'where'> = Omit<Prisma.UserFindFirstArgs, 'where'>,
@@ -48,9 +49,15 @@ export async function getMaybeUserAndMethodOfMatch<
   const user = userWithoutReturnTypes as GetFindResult<Prisma.$UserPayload, I> | null
   if (authUser) {
     if (!user) {
-      throw new Error(
-        `unexpectedly didn't return a user for an authenticated address ${authUser.address}`,
-      )
+      if (NEXT_PUBLIC_ENVIRONMENT === 'production') {
+        throw new Error(
+          `unexpectedly didn't return a user for an authenticated address ${authUser.address}`,
+        )
+      } else {
+        throw new Error(
+          `Didn't return a user for an authenticated address ${authUser.address}. This is most likely because the database was just wiped in testing/local`,
+        )
+      }
     }
     const authedCryptoAddress = userWithoutReturnTypes!.userCryptoAddresses.find(
       x => x.cryptoAddress === authUser.address,

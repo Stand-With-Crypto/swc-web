@@ -41,6 +41,8 @@ import { AuthSessionMetadata } from '@/utils/server/thirdweb/types'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { prettyLog } from '@/utils/shared/prettyLog'
+import { generateReferralId } from '@/utils/shared/referralId'
+import { AnalyticProperties } from '@/utils/shared/sharedAnalytics'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
 
 const logger = getLogger('onLogin')
@@ -411,6 +413,7 @@ async function createUser({ localUser }: { localUser: ServerLocalUser | null }) 
       hasOptedInToEmails: true,
       hasOptedInToMembership: false,
       hasOptedInToSms: false,
+      referralId: generateReferralId(),
       ...mapLocalUserToUserDatabaseFields(localUser),
     },
   })

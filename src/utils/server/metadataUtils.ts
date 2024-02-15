@@ -31,7 +31,7 @@ export const generateMetadataDetails = ({
     height?: string | number
   }
 }) => {
-  const useImage = ogImage || getOpenGraphImageUrl({ title })
+  const useImage = ogImage || getOpenGraphImageUrl({ title, description })
   return {
     title,
     description,

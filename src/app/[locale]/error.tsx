@@ -13,9 +13,16 @@ export default function RootErrorPage({
   reset: () => void
 }) {
   useEffect(() => {
+    const isIntentionalError = window.location.pathname.includes('debug-sentry')
     logger.info('Root Error Page rendered with:', error)
-    Sentry.captureException(error)
-    Sentry.captureException(new Error('Root Error Page Displayed'))
+    Sentry.captureException(error, { tags: { domain: 'rootErrorPage' } })
+    Sentry.captureException(
+      new Error(
+        isIntentionalError
+          ? 'Testing Sentry Triggered Root Error Page'
+          : 'Root Error Page Displayed',
+      ),
+    )
   }, [error])
   return <ErrorPagesContent reset={reset} />
 }

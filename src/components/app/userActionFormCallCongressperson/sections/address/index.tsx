@@ -1,12 +1,13 @@
 'use client'
 
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useMemo, useRef } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import useSWR from 'swr'
 
 import type { UserActionFormCallCongresspersonProps } from '@/components/app/userActionFormCallCongressperson'
 import { SectionNames } from '@/components/app/userActionFormCallCongressperson/constants'
+import { FormFields } from '@/components/app/userActionFormCallCongressperson/types'
 import { UserActionFormLayout } from '@/components/app/userActionFormCommon/layout'
 import { Button } from '@/components/ui/button'
 import {
@@ -42,6 +43,7 @@ interface AddressProps
     'user' | 'onFindCongressperson' | 'goToSection'
   > {
   congressPersonData?: UserActionFormCallCongresspersonProps['congressPersonData']
+  initialValues?: FormFields
 }
 
 export function Address({
@@ -49,15 +51,23 @@ export function Address({
   onFindCongressperson,
   congressPersonData,
   goToSection,
+  initialValues,
 }: AddressProps) {
   const urls = useIntlUrls()
+  const userDefaultValues = useMemo(() => getDefaultValues({ user }), [user])
+
   const form = useForm<FindRepresentativeCallFormValues>({
-    defaultValues: getDefaultValues({ user }),
+    defaultValues: {
+      ...userDefaultValues,
+      address: initialValues?.address || userDefaultValues.address,
+    },
     resolver: zodResolver(findRepresentativeCallFormValidationSchema),
   })
+
   const isMobile = useIsMobile({ defaultState: true })
   const initialAddressOnLoad = useRef(user?.address?.googlePlaceId)
   const inputRef = useRef<HTMLInputElement | null>(null)
+
   useEffect(() => {
     form.setFocus('address')
     // we only want the input to auto-open on desktop
@@ -65,10 +75,12 @@ export function Address({
       inputRef.current?.click()
     }
   }, [form, isMobile])
+
   const address = useWatch({
     control: form.control,
     name: 'address',
   })
+
   const { data: liveCongressPersonData, isLoading: isLoadingLiveCongressPersonData } =
     useCongresspersonData({ address })
 

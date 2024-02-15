@@ -24,6 +24,7 @@ type Props = {
 export const GooglePlacesSelect = React.forwardRef<React.ElementRef<'input'>, Props>(
   (props, ref) => {
     const { value: propsValue, onChange: propsOnChange, className, ...inputProps } = props
+
     const {
       ready,
       value,
@@ -46,6 +47,7 @@ export const GooglePlacesSelect = React.forwardRef<React.ElementRef<'input'>, Pr
         init()
       }
     }, [init, scriptStatus])
+
     return (
       <Combobox
         analytics={'Google Place Select'}

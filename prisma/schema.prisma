@@ -106,6 +106,9 @@ model User {
   hasOptedInToMembership     Boolean                   @map("has_opted_in_to_membership")
   internalStatus             UserInternalStatus        @default(VISIBLE) @map("internal_status")
   dataCreationMethod         DataCreationMethod        @default(BY_USER) @map("data_creation_method")
+  // a short, user-friendly id we're comfortable having the user share to track referrals
+  // because ids/session ids could potentially be used to access sensitive information, we want a decoupled ID for sharing purposes
+  referralId                 String                   @map("referral_id")
   // We'll collect and capture this information in our product analytics tools, but we'll also want to be able to
   // use this metadata to query our relationship database. This information will only be populated if users
   // opt in to our cookies
@@ -129,6 +132,7 @@ model User {
 
   @@index([addressId])
   @@index([internalStatus])
+  @@index([capitolCanaryAdvocateId])
   @@map("user")
 }
 
