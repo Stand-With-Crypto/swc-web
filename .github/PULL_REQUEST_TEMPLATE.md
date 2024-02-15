@@ -1,19 +1,6 @@
 **What changed? Why?**
 
-<!-- screenshots if visual change
 **UI changes**
-
-_iOS_
-
-| Old 👴         | New 👶         |
-| -------------- | -------------- |
-| old screenshot | new screenshot |
-
-_Android_
-
-| Old 👴         | New 👶         |
-| -------------- | -------------- |
-| old screenshot | new screenshot |
 
 _Web_
 
@@ -26,7 +13,6 @@ _Mobile Web_
 | Old 👴         | New 👶         |
 | -------------- | -------------- |
 | old screenshot | new screenshot |
--->
 
 **Notes to reviewers**
 
