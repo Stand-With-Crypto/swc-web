@@ -58,7 +58,7 @@ type ClientUserActionOptIn = Pick<UserActionOptIn, 'optInType'> & {
 }
 // Added here as a placeholder for type inference until we have some tweet-specific fields
 type ClientUserActionTweet = { actionType: typeof UserActionType.TWEET }
-type ClientUserActionVoterRegistration = Pick<UserActionVoterRegistration, 'state'> & {
+type ClientUserActionVoterRegistration = Pick<UserActionVoterRegistration, 'usaState'> & {
   actionType: typeof UserActionType.VOTER_REGISTRATION
 }
 
@@ -162,8 +162,8 @@ export const getClientUserAction = ({
       return getClientModel({ ...sharedProps, actionType })
     }
     case UserActionType.VOTER_REGISTRATION: {
-      const { state } = getRelatedModel(record, 'userActionVoterRegistration')
-      const voterRegistrationFields: ClientUserActionVoterRegistration = { state, actionType }
+      const { usaState } = getRelatedModel(record, 'userActionVoterRegistration')
+      const voterRegistrationFields: ClientUserActionVoterRegistration = { usaState, actionType }
       return getClientModel({ ...sharedProps, ...voterRegistrationFields })
     }
   }

@@ -64,7 +64,10 @@ type SensitiveDataClientUserActionOptIn = Pick<UserActionOptIn, 'optInType'> & {
 // Added here as a placeholder for type inference until we have some tweet-specific fields
 type SensitiveDataClientUserActionTweet = { actionType: typeof UserActionType.TWEET }
 
-type SensitiveDataClientUserActionVoterRegistration = Pick<UserActionVoterRegistration, 'state'> & {
+type SensitiveDataClientUserActionVoterRegistration = Pick<
+  UserActionVoterRegistration,
+  'usaState'
+> & {
   actionType: typeof UserActionType.VOTER_REGISTRATION
 }
 
@@ -169,9 +172,9 @@ export const getSensitiveDataClientUserAction = ({
       return getClientModel({ ...sharedProps, actionType })
     }
     case UserActionType.VOTER_REGISTRATION: {
-      const { state } = getRelatedModel(record, 'userActionVoterRegistration')
+      const { usaState } = getRelatedModel(record, 'userActionVoterRegistration')
       const voterRegistrationFields: SensitiveDataClientUserActionVoterRegistration = {
-        state,
+        usaState,
         actionType,
       }
       return getClientModel({ ...sharedProps, ...voterRegistrationFields })

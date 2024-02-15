@@ -217,7 +217,7 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
           ),
           children: (
             <MainText>{`${userDisplayName} confirmed to vote ${
-              action.state ? `in ${action.state}` : ''
+              action.usaState ? `in ${action.usaState}` : ''
             }`}</MainText>
           ),
         }

@@ -12,6 +12,6 @@ export const fakerFields = {
   supportedCryptoCurrencyCode: () =>
     faker.helpers.arrayElement(Object.values(SupportedCryptoCurrencyCodes)),
   phoneNumber: () => faker.helpers.fromRegExp('+1[0-9]{10}'),
-  state: () => faker.location.state(),
+  usaState: () => faker.location.state(),
   generateReferralId: () => faker.string.uuid().slice(0, 12),
 }

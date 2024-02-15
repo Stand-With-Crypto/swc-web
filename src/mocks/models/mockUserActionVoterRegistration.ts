@@ -4,7 +4,7 @@ import { fakerFields } from '@/mocks/fakerUtils'
 
 export function mockCreateUserActionVoterRegistrationInput() {
   return {
-    state: fakerFields.state(),
+    usaState: fakerFields.usaState(),
   } satisfies Prisma.UserActionVoterRegistrationCreateInput
 }
 

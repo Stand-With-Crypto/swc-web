@@ -28,7 +28,7 @@ const logger = getLogger(`actionCreateUserActionVoterRegistration`)
 
 const createActionVoterRegistrationInputValidationSchema = object({
   campaignName: nativeEnum(UserActionVoterRegistrationCampaignName),
-  state: string(),
+  usaState: string(),
 })
 
 export type CreateActionVoterRegistrationInput = z.infer<
@@ -157,7 +157,7 @@ function logSpamActionSubmissions({
     campaignName: UserActionVoterRegistrationCampaignName.DEFAULT,
     reason: 'Too Many Recent',
     userState: 'Existing',
-    state: validatedInput.data.state,
+    usaState: validatedInput.data.usaState,
   })
   Sentry.captureMessage(
     `duplicate ${UserActionType.VOTER_REGISTRATION} user action for campaign ${UserActionVoterRegistrationCampaignName.DEFAULT} submitted`,
@@ -193,7 +193,7 @@ async function createAction<U extends User>({
         : { userSession: { connect: { id: sharedDependencies.sessionId } } }),
       userActionVoterRegistration: {
         create: {
-          state: validatedInput.state,
+          usaState: validatedInput.usaState,
         },
       },
     },
@@ -207,11 +207,11 @@ async function createAction<U extends User>({
   sharedDependencies.analytics.trackUserActionCreated({
     actionType: UserActionType.VOTER_REGISTRATION,
     campaignName: validatedInput.campaignName,
-    state: validatedInput.state,
+    usaState: validatedInput.usaState,
     userState: isNewUser ? 'New' : 'Existing',
   })
   sharedDependencies.peopleAnalytics.set({
-    state: validatedInput.state,
+    usaState: validatedInput.usaState,
   })
 
   return { userAction }
