@@ -7,7 +7,7 @@ import {
   UserActionRowCTAButton,
   UserActionRowCTAButtonSkeleton,
 } from '@/components/app/userActionRowCTA'
-import { ORDERED_USER_ACTION_ROW_CTA_INFO } from '@/components/app/userActionRowCTA/constants'
+import { USER_ACTION_ROW_CTA_INFO } from '@/components/app/userActionRowCTA/constants'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useLocale } from '@/hooks/useLocale'
 import {
@@ -64,10 +64,7 @@ export function UserActionFormSuccessScreenNextAction({
         <UserActionRowCTA
           state="unknown"
           {...nextAction}
-          WrapperComponent={
-            ORDERED_USER_ACTION_ROW_CTA_INFO.find(x => x.actionType === nextAction.actionType)!
-              .WrapperComponent
-          }
+          WrapperComponent={USER_ACTION_ROW_CTA_INFO[nextAction.actionType].WrapperComponent}
         />
       )}
     </div>

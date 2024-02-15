@@ -6,7 +6,6 @@ import { getClientAddress } from '@/clientModels/clientAddress'
 import { getSensitiveDataClientUser } from '@/clientModels/clientUser/sensitiveDataClientUser'
 import { UserActionFormSuccessScreenContent } from '@/components/app/userActionFormSuccessScreen'
 import { UserActionFormSuccessScreenMainCTA } from '@/components/app/userActionFormSuccessScreen/userActionFormSuccessScreenMainCTA'
-import { ORDERED_USER_ACTION_ROW_CTA_INFO } from '@/components/app/userActionRowCTA/constants'
 import {
   dialogCloseStyles,
   dialogContentPaddingStyles,
@@ -20,6 +19,7 @@ import { mockUserEmailAddress } from '@/mocks/models/mockUserEmailAddress'
 import { NFTSlug } from '@/utils/shared/nft'
 import { cn } from '@/utils/web/cn'
 import { NFT_CLIENT_METADATA } from '@/utils/web/nft'
+import { USER_ACTION_TYPE_PRIORITY_ORDER } from '@/utils/web/userActionUtils'
 
 export type Props = React.ComponentPropsWithoutRef<typeof UserActionFormSuccessScreenMainCTA>
 
@@ -137,7 +137,7 @@ export const WithoutAdditionalActionsToTake: Story = {
     ...props,
     data: {
       ...props.data,
-      performedUserActionTypes: ORDERED_USER_ACTION_ROW_CTA_INFO.map(x => x.actionType),
+      performedUserActionTypes: [...USER_ACTION_TYPE_PRIORITY_ORDER],
     },
   })),
 }
