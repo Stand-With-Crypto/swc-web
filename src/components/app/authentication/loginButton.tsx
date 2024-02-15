@@ -39,6 +39,7 @@ export function LoginDialogWrapper({ children, authenticatedContent }: LoginDial
   )
 
   React.useEffect(() => {
+    console.log({ hasLoggedIn, user, hasCompletedProfile })
     if (hasLoggedIn && !user) {
       setHasLoggedIn(false)
     }
@@ -48,7 +49,7 @@ export function LoginDialogWrapper({ children, authenticatedContent }: LoginDial
     }
 
     const localUser = getLocalUser()
-    console.log(user.session, localUser.persisted)
+    console.log({ 'user.session': user.session, 'localUser.persisted': localUser.persisted })
 
     // TODO invert
     if (!user.session?.isNewlyCreatedUser && !localUser.persisted?.hasSeenCompleteProfilePrompt) {
