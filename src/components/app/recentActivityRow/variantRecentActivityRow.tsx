@@ -51,16 +51,16 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
   const getActionSpecificProps = () => {
     switch (action.actionType) {
       case UserActionType.OPT_IN: {
+        const possibleUserState = userLocationDetails?.administrativeAreaLevel1
+          ? `from ${userLocationDetails.administrativeAreaLevel1} joined`
+          : 'joined'
         const getTypeDisplayText = () => {
-          const possibleUserState = userLocationDetails?.administrativeAreaLevel1
-            ? `from ${userLocationDetails.administrativeAreaLevel1} joined`
-            : 'joined'
           switch (action.optInType) {
             case UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER:
               return (
                 <>
-                  <span className="hidden sm:inline"> {possibleUserState} Stand With Crypto</span>
-                  <span className="sm:hidden">SWC</span>
+                  <span className="hidden sm:inline"> Stand With Crypto</span>
+                  <span className="sm:hidden"> SWC </span>
                 </>
               )
           }
@@ -75,7 +75,10 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
               ),
           children: (
             <>
-              <MainText>New member {getTypeDisplayText()}</MainText>
+              <MainText>
+                New member {possibleUserState}
+                {getTypeDisplayText()}
+              </MainText>
             </>
           ),
         }
