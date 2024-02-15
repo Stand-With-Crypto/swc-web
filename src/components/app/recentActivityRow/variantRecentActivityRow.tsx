@@ -46,14 +46,19 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
 }: RecentActivityRowProps) {
   const { userLocationDetails } = action.user
   const userDisplayName = getUserDisplayName(action.user)
+  const isStateAvailable = userLocationDetails?.administrativeAreaLevel1
   const { data } = useApiResponseForUserPerformedUserActionTypes()
   const hasSignedUp = data?.performedUserActionTypes.includes(UserActionType.OPT_IN)
+  const newUserStateOrJoin = isStateAvailable
+    ? `from ${userLocationDetails.administrativeAreaLevel1} joined`
+    : 'joined'
+  const voterStateOrEmpty = isStateAvailable
+    ? `in ${userLocationDetails.administrativeAreaLevel1}`
+    : ''
+
   const getActionSpecificProps = () => {
     switch (action.actionType) {
       case UserActionType.OPT_IN: {
-        const possibleUserState = userLocationDetails?.administrativeAreaLevel1
-          ? `from ${userLocationDetails.administrativeAreaLevel1} joined`
-          : 'joined'
         const getTypeDisplayText = () => {
           switch (action.optInType) {
             case UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER:
@@ -76,7 +81,7 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
           children: (
             <>
               <MainText>
-                New member {possibleUserState}
+                New member {newUserStateOrJoin}
                 {getTypeDisplayText()}
               </MainText>
             </>
@@ -162,7 +167,7 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
               <Button>Register</Button>
             </UserActionFormVoterRegistrationDialog>
           ),
-          children: <MainText>{userDisplayName} registered to vote</MainText>,
+          children: <MainText>Voter registration confirmed {voterStateOrEmpty}</MainText>,
         }
       }
     }
