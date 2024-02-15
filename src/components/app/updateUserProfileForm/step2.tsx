@@ -32,9 +32,10 @@ type FormValues = z.infer<typeof zodUpdateUserInformationVisibility> & GenericEr
 export function UpdateUserInformationVisibilityForm({
   user,
   onSuccess,
+  onSkip,
 }: {
   user: SensitiveDataClientUserWithENSData & { address: ClientAddress | null }
-  onCancel: () => void
+  onSkip?: () => void
   onSuccess: () => void
 }) {
   const router = useRouter()
@@ -126,7 +127,12 @@ export function UpdateUserInformationVisibilityForm({
             )}
           />
           <FormGeneralErrorMessage control={form.control} />
-          <div className="text-center">
+          <div className={cn('flex gap-6', !onSkip && 'justify-center')}>
+            {onSkip && (
+              <Button className="w-full md:w-1/2" onClick={onSkip} variant="secondary">
+                Skip
+              </Button>
+            )}
             <Button
               className="w-full md:w-1/2"
               disabled={form.formState.isSubmitting}

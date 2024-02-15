@@ -31,6 +31,7 @@ import { Input } from '@/components/ui/input'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
+import { cn } from '@/utils/web/cn'
 import {
   GenericErrorFormValues,
   trackFormSubmissionSyncErrors,
@@ -47,13 +48,17 @@ type FormValues = z.infer<typeof zodUpdateUserProfileFormFields> & GenericErrorF
 export function UpdateUserProfileForm({
   user,
   onSuccess,
+  onSkip,
 }: {
   user: SensitiveDataClientUserWithENSData & { address: ClientAddress | null }
   onSuccess: (updatedUserFields: { firstName: string; lastName: string }) => void
+  onSkip?: () => void
 }) {
   const router = useRouter()
   const isEmbeddedWalletUser =
     user.primaryUserEmailAddress?.source === UserEmailAddressSource.THIRDWEB_EMBEDDED_AUTH
+
+  console.log({ user })
   const defaultValues = useRef({
     isEmbeddedWalletUser,
     firstName: user.firstName || '',
@@ -250,7 +255,12 @@ export function UpdateUserProfileForm({
           </Collapsible>
           <FormGeneralErrorMessage control={form.control} />
         </div>
-        <div className="text-center">
+        <div className={cn('flex gap-6', !onSkip && 'justify-center')}>
+          {onSkip && (
+            <Button className="w-full md:w-1/2" onClick={onSkip} variant="secondary">
+              Skip
+            </Button>
+          )}
           <Button
             className="w-full md:w-1/2"
             disabled={form.formState.isSubmitting}

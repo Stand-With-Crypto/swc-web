@@ -5,6 +5,7 @@ export interface PersistedLocalUser {
   initialReferer?: string
   datetimeFirstSeen: string
   recentlyUsedAddress?: Pick<ClientAddress, 'googlePlaceId' | 'formattedDescription'>
+  hasSeenCompleteProfilePrompt: boolean
 }
 
 export interface CurrentSessionLocalUser {

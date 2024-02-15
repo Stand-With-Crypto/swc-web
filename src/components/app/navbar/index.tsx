@@ -1,8 +1,9 @@
 'use client'
-import { useCallback } from 'react'
+import React, { useCallback } from 'react'
 import _ from 'lodash'
 import { Menu } from 'lucide-react'
 
+import { LoginDialogWrapper } from '@/components/app/authentication/loginButton'
 import { MaybeAuthenticatedContent } from '@/components/app/authentication/maybeAuthenticatedContent'
 import { ThirdwebLoginDialog } from '@/components/app/authentication/thirdwebLoginContent'
 import { NavbarLoggedInButton } from '@/components/app/navbar/navbarLoggedInButton'
@@ -42,6 +43,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
       dialogProps.onOpenChange(false)
     }
   }, [dialogProps])
+
   const hasEnvironmentBar = NEXT_PUBLIC_ENVIRONMENT !== 'production'
   return (
     <>
@@ -123,15 +125,14 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
             <Button asChild className="mr-3">
               <InternalLink href={urls.donate()}>Donate</InternalLink>
             </Button>
-            <MaybeAuthenticatedContent
+
+            <LoginDialogWrapper
               authenticatedContent={
                 <NavbarLoggedInButton onOpenChange={open => open || maybeCloseAfterNavigating()} />
               }
             >
-              <ThirdwebLoginDialog>
-                <Button variant="secondary">Log In</Button>
-              </ThirdwebLoginDialog>
-            </MaybeAuthenticatedContent>
+              <Button variant="secondary">Log In</Button>
+            </LoginDialogWrapper>
           </div>
         </div>
       </nav>

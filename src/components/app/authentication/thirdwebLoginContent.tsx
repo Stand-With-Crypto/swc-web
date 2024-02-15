@@ -1,6 +1,7 @@
 'use client'
 import React from 'react'
 import { ConnectEmbed, ConnectEmbedProps } from '@thirdweb-dev/react'
+import { noop } from 'lodash'
 import { useRouter } from 'next/navigation'
 import { useSWRConfig } from 'swr'
 
@@ -9,24 +10,21 @@ import { NextImage } from '@/components/ui/image'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
-import { useAuthUser } from '@/hooks/useAuthUser'
 import { useDialog } from '@/hooks/useDialog'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { theme } from '@/utils/web/thirdweb/theme'
 
 export function ThirdwebLoginDialog({
   children,
+  onLogin = noop,
   ...props
 }: Omit<DialogProps, 'analytics'> & {
   analytics?: DialogProps['analytics']
   children: React.ReactNode
+  onLogin?: () => void
 }) {
   const dialogProps = useDialog({ analytics: 'Login' })
   const router = useRouter()
-
-  const user = useAuthUser()
-  console.log({ user })
   const { mutate } = useSWRConfig()
 
   return (
@@ -36,9 +34,11 @@ export function ThirdwebLoginDialog({
         <ThirdwebLoginContent
           auth={{
             onLogin: () => {
+              console.log('onLogin')
               // ensure that any server components on the page that's being used are refreshed with the context the user is now logged in
-              // router.refresh()
-              // dialogProps.onOpenChange(false)
+              router.refresh()
+              dialogProps.onOpenChange(false)
+              onLogin()
 
               // There are a bunch of SWR queries that might show stale unauthenticated data unless we clear the cache.
               // This ensures we refetch using the users authenticated state
@@ -54,7 +54,7 @@ export function ThirdwebLoginDialog({
 
 export function ThirdwebLoginContent(props: ConnectEmbedProps) {
   const urls = useIntlUrls()
-  const profileReq = useApiResponseForUserFullProfileInfo()
+
   return (
     <div>
       <div className="mx-auto flex max-w-[460px] flex-col items-center gap-8">
@@ -68,11 +68,7 @@ export function ThirdwebLoginContent(props: ConnectEmbedProps) {
           />
 
           <div className="space-y-4">
-            <PageTitle size="sm">
-              {profileReq?.data?.user && !profileReq.data.user.primaryUserCryptoAddress
-                ? 'Complete your profile'
-                : 'Join Stand With Crypto'}
-            </PageTitle>
+            <PageTitle size="sm">Join Stand With Crypto</PageTitle>
             <PageSubTitle size="sm">
               Lawmakers and regulators are threatening the crypto industry. You can fight back and
               ask for sensible rules. Join the Stand with Crypto movement to make your voice heard

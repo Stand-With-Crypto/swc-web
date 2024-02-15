@@ -15,11 +15,11 @@ enum Sections {
 
 export function UpdateUserProfileFormContainer({
   user,
-  onCancel,
+  onSkip,
   onSuccess,
 }: {
   user: SensitiveDataClientUserWithENSData & { address: ClientAddress | null }
-  onCancel: () => void
+  onSkip?: () => void
   onSuccess: () => void
 }) {
   const sections = useSections({
@@ -33,6 +33,7 @@ export function UpdateUserProfileFormContainer({
   if (sections.currentSection === Sections.Profile) {
     return (
       <UpdateUserProfileForm
+        onSkip={onSkip}
         onSuccess={newFields => {
           setStatefulUser({ ...user, ...newFields })
           sections.goToSection(Sections.InformationVisibility)
@@ -44,7 +45,7 @@ export function UpdateUserProfileFormContainer({
   if (sections.currentSection === Sections.InformationVisibility) {
     return (
       <UpdateUserInformationVisibilityForm
-        onCancel={onCancel}
+        onSkip={onSkip}
         onSuccess={onSuccess}
         user={statefulUser}
       />
