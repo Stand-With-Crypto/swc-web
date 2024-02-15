@@ -95,6 +95,7 @@ export const getSensitiveDataClientUserWithENSData = (
   record: User & {
     primaryUserCryptoAddress: null | UserCryptoAddress
     primaryUserEmailAddress: UserEmailAddress | null
+    address: Address | null
   },
   ensData: UserENSData | null | undefined,
 ): SensitiveDataClientUserWithENSData => {
