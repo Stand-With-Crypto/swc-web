@@ -10,27 +10,27 @@ import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
 export const dynamic = 'error'
 export const revalidate = SECONDS_DURATION.HOUR
+export const runtime = 'edge'
 
 export async function GET(_request: NextRequest, { params }: { params: { config: string } }) {
-  const config = decodeObjectForUrl<OpenGraphImageOptions>(params.config)
+  const imageData = await fetch(new URL('./shield.png', import.meta.url)).then(res =>
+    res.arrayBuffer(),
+  )
+  const { title, description } = decodeObjectForUrl<OpenGraphImageOptions>(params.config)
   return new ImageResponse(
     (
-      // LATER-TASK style this based off design guidance
       <div
-        style={{
-          fontSize: 40,
-          color: 'black',
-          background: 'white',
-          width: '100%',
-          height: '100%',
-          padding: '50px 200px',
-          textAlign: 'center',
-          justifyContent: 'center',
-          alignItems: 'center',
-          display: 'flex',
-        }}
+        style={{ background: 'linear-gradient(180deg, #001C56 0%, #000 100%)' }}
+        tw="flex text-white p-8 w-full h-full flex-col justify-between items-center"
       >
-        {config.title} - {config.description}
+        <div />
+        <div tw="flex flex-col items-center text-center">
+          {/* eslint-disable-next-line */}
+          <img height="256" src={imageData as any} width="256" />
+          <div tw="text-5xl mb-2 mt-8">{title}</div>
+          <div tw="text-2xl text-gray-400">{description}</div>
+        </div>
+        <div tw="text-gray-400">standwithcrypto.org</div>
       </div>
     ),
     OPEN_GRAPH_IMAGE_DIMENSIONS,
