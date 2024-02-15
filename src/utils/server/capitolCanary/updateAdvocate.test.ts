@@ -51,25 +51,25 @@ it('formats the "update capitol canary advocate" request correctly', () => {
 
   expect(formattedRequest).toMatchInlineSnapshot(`
 {
-  "address1": "906 Mueller Centers",
-  "address2": "Apt. 890",
+  "address1": "734 St George's Road",
+  "address2": "Suite 502",
   "advocateid": 68251920,
   "campaigns": [
     142628,
   ],
-  "city": "Finnstead",
-  "country": "MH",
-  "email": "Nicklaus_Walker51@yahoo.com",
+  "city": "Smyrna",
+  "country": "KG",
+  "email": "Fredy23@yahoo.com",
   "emailOptin": 1,
   "emailOptout": 0,
-  "firstname": "Zion",
-  "lastname": "Watsica",
+  "firstname": "Haylie",
+  "lastname": "Macejkovic",
   "p2aSource": "source",
-  "phone": "+13912031336",
+  "phone": "+19178798306",
   "smsOptin": 1,
   "smsOptinConfirmed": 1,
   "smsOptout": 0,
-  "state": "West Virginia",
+  "state": "Ohio",
   "tags": [
     "tag1",
     "tag2",
@@ -79,7 +79,7 @@ it('formats the "update capitol canary advocate" request correctly', () => {
   "utm_medium": "utmMedium",
   "utm_source": "utmSource",
   "utm_term": "utmTerm",
-  "zip5": "32797",
+  "zip5": "90141-7916",
 }
 `)
 })

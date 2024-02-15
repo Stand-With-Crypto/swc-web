@@ -18,9 +18,16 @@ export default function GlobalErrorPage({
   reset: () => void
 }) {
   useEffect(() => {
+    const isIntentionalError = window.location.pathname.includes('debug-sentry')
     logger.info('Global Error Page rendered with:', error)
-    Sentry.captureException(error)
-    Sentry.captureException(new Error('Global Error Page Displayed'))
+    Sentry.captureException(error, { tags: { domain: 'rootErrorPage' } })
+    Sentry.captureException(
+      new Error(
+        isIntentionalError
+          ? 'Testing Sentry Triggered Global Error Page'
+          : 'Global Error Page Displayed',
+      ),
+    )
   }, [error])
   return (
     <html lang="en">

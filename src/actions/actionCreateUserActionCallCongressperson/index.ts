@@ -23,6 +23,7 @@ import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddl
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
+import { generateReferralId } from '@/utils/shared/referralId'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { UserActionCallCampaignName } from '@/utils/shared/userActionCampaigns'
 import { zodAddress } from '@/validation/fields/zodAddress'
@@ -115,6 +116,7 @@ async function createUser(sharedDependencies: Pick<SharedDependencies, 'localUse
   const { localUser, sessionId } = sharedDependencies
   const createdUser = await prismaClient.user.create({
     data: {
+      referralId: generateReferralId(),
       informationVisibility: UserInformationVisibility.ANONYMOUS,
       userSessions: { create: { id: sessionId } },
       hasOptedInToEmails: false,

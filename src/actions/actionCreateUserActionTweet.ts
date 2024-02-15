@@ -28,6 +28,7 @@ import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
+import { generateReferralId } from '@/utils/shared/referralId'
 import { UserActionTweetCampaignName } from '@/utils/shared/userActionCampaigns'
 
 const logger = getLogger(`actionCreateUserActionTweet`)
@@ -129,7 +130,7 @@ async function maybeUpsertUser({
     },
     data: {
       ...mapLocalUserToUserDatabaseFields(localUser),
-
+      referralId: generateReferralId(),
       informationVisibility: UserInformationVisibility.ANONYMOUS,
       userSessions: { create: { id: sessionId } },
       hasOptedInToEmails: false,

@@ -12,7 +12,7 @@ export function mockCreateNFTMintInput() {
   const status = faker.helpers.arrayElement(Object.values(NFTMintStatus))
   const transactionHash = status === NFTMintStatus.CLAIMED ? faker.git.commitSha() : ''
   const nftSlug = faker.helpers.arrayElement(Object.values(NFTSlug))
-  const costAtMint = new Decimal(faker.number.float({ min: 0.01, max: 0.2, precision: 0.01 }))
+  const costAtMint = new Decimal(faker.number.float({ min: 0.01, max: 0.2, multipleOf: 0.01 }))
   return {
     nftSlug,
     transactionHash,

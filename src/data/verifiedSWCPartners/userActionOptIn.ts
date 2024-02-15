@@ -35,6 +35,7 @@ import { getOrCreateSessionIdToSendBackToPartner } from '@/utils/server/verified
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
+import { generateReferralId } from '@/utils/shared/referralId'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
 import { zodFirstName, zodLastName } from '@/validation/fields/zodName'
 import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
@@ -48,7 +49,7 @@ export const zodVerifiedSWCPartnersUserActionOptIn = z.object({
   lastName: zodLastName.optional(),
   phoneNumber: zodPhoneNumber.optional().transform(str => str && normalizePhoneNumber(str)),
   hasOptedInToReceiveSMSFromSWC: z.boolean().optional(),
-  hasOptedInToSms: z.boolean().optional(),
+  hasOptedInToEmails: z.boolean().optional(),
   hasOptedInToMembership: z.boolean().optional(),
 })
 
@@ -162,7 +163,7 @@ export async function verifiedSWCPartnersUserActionOptIn(
     ),
     opts: {
       isEmailOptin: true,
-      isSmsOptin: input.hasOptedInToSms,
+      isSmsOptin: input.hasOptedInToReceiveSMSFromSWC,
       shouldSendSmsOptinConfirmation: false,
     },
   }
@@ -195,7 +196,7 @@ async function maybeUpsertUser({
     lastName,
     phoneNumber,
     hasOptedInToMembership,
-    hasOptedInToSms,
+    hasOptedInToReceiveSMSFromSWC,
   } = input
 
   if (existingUser) {
@@ -207,7 +208,8 @@ async function maybeUpsertUser({
       ...(!existingUser.hasOptedInToEmails && { hasOptedInToEmails: true }),
       ...(hasOptedInToMembership &&
         !existingUser.hasOptedInToMembership && { hasOptedInToMembership }),
-      ...(hasOptedInToSms && !existingUser.hasOptedInToSms && { hasOptedInToSms }),
+      ...(hasOptedInToReceiveSMSFromSWC &&
+        !existingUser.hasOptedInToSms && { hasOptedInToSms: hasOptedInToReceiveSMSFromSWC }),
       ...(emailAddress &&
         existingUser.userEmailAddresses.every(addr => addr.emailAddress !== emailAddress) && {
           userEmailAddresses: {
@@ -261,6 +263,7 @@ async function maybeUpsertUser({
     },
     data: {
       ...getUserAttributionFieldsForVerifiedSWCPartner({ partner, campaignName }),
+      referralId: generateReferralId(),
       userSessions: {
         create: {},
       },
@@ -270,7 +273,7 @@ async function maybeUpsertUser({
       phoneNumber,
       hasOptedInToEmails: true,
       hasOptedInToMembership: hasOptedInToMembership || false,
-      hasOptedInToSms: hasOptedInToSms || false,
+      hasOptedInToSms: hasOptedInToReceiveSMSFromSWC || false,
       userEmailAddresses: {
         create: {
           emailAddress,
