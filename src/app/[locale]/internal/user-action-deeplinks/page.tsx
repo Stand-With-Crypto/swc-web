@@ -32,7 +32,7 @@ export default function UserActionDeepLinks() {
               <UserActionRowCTAButton
                 {...userAction}
                 onClick={() => router.push(url)}
-                state="unknown"
+                state="hidden"
               />
             </div>
           )

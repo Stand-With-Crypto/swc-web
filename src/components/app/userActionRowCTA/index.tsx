@@ -9,7 +9,7 @@ import { cn } from '@/utils/web/cn'
 
 export interface UserActionRowCTAProps {
   actionType: UserActionType
-  state: 'unknown' | 'complete' | 'incomplete'
+  state: 'unknown' | 'complete' | 'incomplete' | 'hidden'
   image: string
   text: string
   subtext: string
@@ -65,7 +65,7 @@ export const UserActionRowCTAButton = React.forwardRef<
         ref={ref}
       >
         <div className="flex items-center gap-4">
-          <div className="flex-shrink-0">{getStateUI()}</div>
+          {state !== 'hidden' && <div className="flex-shrink-0">{getStateUI()}</div>}
           <div className="hidden md:block">
             <NextImage alt={text} height={100} src={image} width={100} />
           </div>
