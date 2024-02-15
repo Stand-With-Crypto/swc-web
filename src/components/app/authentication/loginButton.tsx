@@ -19,7 +19,6 @@ interface LoginDialogWrapperProps extends React.PropsWithChildren {
 
 export function LoginDialogWrapper({ children, authenticatedContent }: LoginDialogWrapperProps) {
   const dialogProps = useDialog({ analytics: 'Finish Profile' })
-  const [hasLoggedIn, setHasLoggedIn] = React.useState(false)
   const [hasCompletedProfile, setHasCompletedProfile] = React.useState(false)
 
   const { user } = useAuthUser()
@@ -39,12 +38,8 @@ export function LoginDialogWrapper({ children, authenticatedContent }: LoginDial
   )
 
   React.useEffect(() => {
-    console.log({ hasLoggedIn, user, hasCompletedProfile })
-    if (hasLoggedIn && !user) {
-      setHasLoggedIn(false)
-    }
-
-    if (!hasLoggedIn || !user || hasCompletedProfile) {
+    console.log({ user, hasCompletedProfile })
+    if (!user || hasCompletedProfile) {
       return
     }
 
@@ -55,18 +50,12 @@ export function LoginDialogWrapper({ children, authenticatedContent }: LoginDial
     if (!user.session?.isNewlyCreatedUser && !localUser.persisted?.hasSeenCompleteProfilePrompt) {
       handleFinishProfileDialogOpenChange(true)
     }
-  }, [user, hasLoggedIn, dialogProps, hasCompletedProfile, handleFinishProfileDialogOpenChange])
+  }, [user, dialogProps, hasCompletedProfile, handleFinishProfileDialogOpenChange])
 
   return (
     <>
       <MaybeAuthenticatedContent authenticatedContent={authenticatedContent}>
-        <ThirdwebLoginDialog
-          onLogin={() => {
-            setHasLoggedIn(true)
-          }}
-        >
-          {children}
-        </ThirdwebLoginDialog>
+        <ThirdwebLoginDialog>{children}</ThirdwebLoginDialog>
       </MaybeAuthenticatedContent>
       <Dialog {...dialogProps} onOpenChange={handleFinishProfileDialogOpenChange}>
         <DialogContent className="max-w-l w-full">
