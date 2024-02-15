@@ -42,7 +42,6 @@ import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/local
 import { getLogger } from '@/utils/shared/logger'
 import { prettyLog } from '@/utils/shared/prettyLog'
 import { generateReferralId } from '@/utils/shared/referralId'
-import { AnalyticProperties } from '@/utils/shared/sharedAnalytics'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
 
 const logger = getLogger('onLogin')
