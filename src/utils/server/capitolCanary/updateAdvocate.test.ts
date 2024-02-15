@@ -51,15 +51,15 @@ it('formats the "update capitol canary advocate" request correctly', () => {
 
   expect(formattedRequest).toMatchInlineSnapshot(`
 {
-  "address1": "734 St George's Road",
-  "address2": "Suite 502",
+  "address1": "67056 Brayan Centers",
+  "address2": "Apt. 935",
   "advocateid": 68251920,
   "campaigns": [
     142628,
   ],
-  "city": "Smyrna",
-  "country": "KG",
-  "email": "Fredy23@yahoo.com",
+  "city": "East April",
+  "country": "GW",
+  "email": "Jakob_Cole37@hotmail.com",
   "emailOptin": 1,
   "emailOptout": 0,
   "firstname": "Haylie",
@@ -69,7 +69,7 @@ it('formats the "update capitol canary advocate" request correctly', () => {
   "smsOptin": 1,
   "smsOptinConfirmed": 1,
   "smsOptout": 0,
-  "state": "Ohio",
+  "state": "Illinois",
   "tags": [
     "tag1",
     "tag2",
@@ -79,7 +79,7 @@ it('formats the "update capitol canary advocate" request correctly', () => {
   "utm_medium": "utmMedium",
   "utm_source": "utmSource",
   "utm_term": "utmTerm",
-  "zip5": "90141-7916",
+  "zip5": "71195",
 }
 `)
 })
