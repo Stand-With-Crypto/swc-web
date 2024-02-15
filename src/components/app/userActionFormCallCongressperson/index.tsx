@@ -7,6 +7,7 @@ import {
   ANALYTICS_NAME_USER_ACTION_FORM_CALL_CONGRESSPERSON,
   SectionNames,
 } from '@/components/app/userActionFormCallCongressperson/constants'
+import { FormFields } from '@/components/app/userActionFormCallCongressperson/types'
 import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
 import { DTSIPeopleByCongressionalDistrictQueryResult } from '@/data/dtsi/queries/queryDTSIPeopleByCongressionalDistrict'
 import { useSections, UseSectionsReturn } from '@/hooks/useSections'
@@ -34,9 +35,11 @@ export interface UserActionFormCallCongresspersonProps extends UseSectionsReturn
 export function UserActionFormCallCongressperson({
   user,
   onClose,
+  initialValues,
 }: {
   user: GetUserFullProfileInfoResponse['user']
   onClose: () => void
+  initialValues?: FormFields
 }) {
   const sectionProps = useSections<SectionNames>({
     sections: Object.values(SectionNames),
@@ -54,6 +57,7 @@ export function UserActionFormCallCongressperson({
       return (
         <Address
           congressPersonData={congressPersonData}
+          initialValues={initialValues}
           onFindCongressperson={setCongresspersonData}
           user={user}
           {...sectionProps}

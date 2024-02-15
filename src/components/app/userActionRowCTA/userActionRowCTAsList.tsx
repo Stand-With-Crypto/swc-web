@@ -4,9 +4,9 @@ import { useMemo } from 'react'
 import { UserActionType } from '@prisma/client'
 
 import { UserActionRowCTA } from '@/components/app/userActionRowCTA'
+import { USER_ACTION_ROW_CTA_INFO } from '@/components/app/userActionRowCTA/constants'
 import { cn } from '@/utils/web/cn'
-
-import { ORDERED_USER_ACTION_ROW_CTA_INFO } from './constants'
+import { USER_ACTION_TYPE_PRIORITY_ORDER } from '@/utils/web/userActionUtils'
 
 export function UserActionRowCTAsList({
   performedUserActionTypes,
@@ -20,27 +20,30 @@ export function UserActionRowCTAsList({
   const filteredActions = useMemo(
     () =>
       !excludeUserActionTypes
-        ? ORDERED_USER_ACTION_ROW_CTA_INFO
-        : ORDERED_USER_ACTION_ROW_CTA_INFO.filter(
-            action => !excludeUserActionTypes.includes(action.actionType),
+        ? USER_ACTION_TYPE_PRIORITY_ORDER
+        : USER_ACTION_TYPE_PRIORITY_ORDER.filter(
+            actionType => !excludeUserActionTypes.includes(actionType),
           ),
     [excludeUserActionTypes],
   )
   return (
     <div className={cn('space-y-4', className)}>
-      {filteredActions.map(({ actionType, ...rest }) => (
-        <UserActionRowCTA
-          key={actionType}
-          state={
-            !performedUserActionTypes
-              ? 'unknown'
-              : performedUserActionTypes.includes(actionType)
-                ? 'complete'
-                : 'incomplete'
-          }
-          {...{ actionType, ...rest }}
-        />
-      ))}
+      {filteredActions.map(actionType => {
+        const props = USER_ACTION_ROW_CTA_INFO[actionType]
+        return (
+          <UserActionRowCTA
+            key={actionType}
+            state={
+              !performedUserActionTypes
+                ? 'unknown'
+                : performedUserActionTypes.includes(actionType)
+                  ? 'complete'
+                  : 'incomplete'
+            }
+            {...props}
+          />
+        )
+      })}
     </div>
   )
 }

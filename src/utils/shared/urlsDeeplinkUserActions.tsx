@@ -3,11 +3,14 @@ import { UserActionType } from '@prisma/client'
 import { SupportedLocale } from '@/intl/locales'
 import { getIntlPrefix } from '@/utils/shared/urls'
 
-export const USER_ACTION_DEEPLINK_MAP: {
-  [key in UserActionType]: {
-    getDeeplinkUrl: (config: { locale: SupportedLocale }) => string
-  }
-} = {
+export const USER_ACTION_DEEPLINK_MAP: Omit<
+  {
+    [key in UserActionType]: {
+      getDeeplinkUrl: (config: { locale: SupportedLocale }) => string
+    }
+  },
+  typeof UserActionType.TWEET
+> = {
   [UserActionType.OPT_IN]: {
     getDeeplinkUrl: ({ locale }) => {
       return `${getIntlPrefix(locale)}/action/sign-up`
@@ -28,11 +31,6 @@ export const USER_ACTION_DEEPLINK_MAP: {
       return `${getIntlPrefix(locale)}/donate`
     },
   },
-  [UserActionType.TWEET]: {
-    getDeeplinkUrl: ({ locale }) => {
-      return `${getIntlPrefix(locale)}/action/tweet`
-    },
-  },
   [UserActionType.NFT_MINT]: {
     getDeeplinkUrl: ({ locale }) => {
       return `${getIntlPrefix(locale)}/action/nft-mint`
@@ -44,3 +42,5 @@ export const USER_ACTION_DEEPLINK_MAP: {
     },
   },
 }
+
+export type UserActionTypesWithDeeplink = keyof typeof USER_ACTION_DEEPLINK_MAP

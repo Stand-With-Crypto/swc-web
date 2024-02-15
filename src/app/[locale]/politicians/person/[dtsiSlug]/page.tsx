@@ -1,33 +1,25 @@
-import { cache } from 'react'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 import { PagePoliticianDetails } from '@/components/app/pagePoliticianDetails'
 import { queryDTSIAllPeopleSlugs } from '@/data/dtsi/queries/queryDTSIAllPeopleSlugs'
-import {
-  DTSIPersonDetails,
-  queryDTSIPersonDetails,
-} from '@/data/dtsi/queries/queryDTSIPersonDetails'
+import { DTSIPersonDetails } from '@/data/dtsi/queries/queryDTSIPersonDetails'
 import { PageProps } from '@/types'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import {
   convertDTSIStanceScoreToLetterGrade,
   DTSILetterGrade,
 } from '@/utils/dtsi/dtsiStanceScoreUtils'
-import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { toBool } from '@/utils/shared/toBool'
+
+import { getData } from './getData'
 
 export const revalidate = SECONDS_DURATION.WEEK
 export const dynamic = 'error'
 export const dynamicParams = true
 
 type Props = PageProps<{ dtsiSlug: string }>
-
-const getData = cache(async (dtsiSlug: string) => {
-  const person = await queryDTSIPersonDetails(dtsiSlug).catch(() => null)
-  return person
-})
 
 const getDescription = (person: DTSIPersonDetails) => {
   const fullName = dtsiPersonFullName(person)
@@ -57,10 +49,10 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     return {}
   }
   const title = `${dtsiPersonFullName(person)} Crypto Policy Stance`
-  return generateMetadataDetails({
+  return {
     title,
     description: getDescription(person),
-  })
+  }
 }
 export async function generateStaticParams() {
   const slugs = await queryDTSIAllPeopleSlugs().then(x =>

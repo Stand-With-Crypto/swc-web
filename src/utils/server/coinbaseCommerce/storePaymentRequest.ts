@@ -8,6 +8,7 @@ import * as Sentry from '@sentry/nextjs'
 
 import { CoinbaseCommercePayment } from '@/utils/server/coinbaseCommerce/paymentRequest'
 import { prismaClient } from '@/utils/server/prismaClient'
+import { generateReferralId } from '@/utils/shared/referralId'
 import { UserActionDonationCampaignName } from '@/utils/shared/userActionCampaigns'
 
 /**
@@ -159,6 +160,7 @@ async function createNewUser(payment: CoinbaseCommercePayment) {
       primaryUserEmailAddress: true,
     },
     data: {
+      referralId: generateReferralId(),
       hasOptedInToEmails: false,
       hasOptedInToSms: false,
       hasOptedInToMembership: false,

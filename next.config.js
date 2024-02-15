@@ -33,7 +33,7 @@ const contentSecurityPolicy = {
     'https://c.thirdweb.com/',
     'https://*.rpc.thirdweb.com/',
     'https://api-js.mixpanel.com/',
-    'https://vercel.live/_next-live/feedback/feedback.js',
+    'https://vercel.live/',
     'https://vitals.vercel-insights.com/',
   ],
   'img-src': [
@@ -66,7 +66,7 @@ const contentSecurityPolicy = {
     'https://*.gstatic.com',
     'https://api-js.mixpanel.com/',
     '*.google.com',
-    'https://vercel.live/api/event/tick',
+    'https://vercel.live/',
     'https://vitals.vercel-insights.com/',
     'https://api-js.mixpanel.com/',
     // Mint endpoint
@@ -166,7 +166,7 @@ const ACTION_REDIRECTS = [
     queryValue: 'member-join',
   },
 ]
-const V1_REDIRECTS = ACTION_REDIRECTS.map(({ destination, queryKey, queryValue }) => ({
+const V1_ACTION_REDIRECTS = ACTION_REDIRECTS.map(({ destination, queryKey, queryValue }) => ({
   permanent: true,
   source: '/',
   destination,
@@ -202,7 +202,8 @@ const nextConfig = {
   },
   async redirects() {
     return [
-      ...V1_REDIRECTS,
+      // redirects from v1 -> v2
+      ...V1_ACTION_REDIRECTS,
       {
         permanent: true,
         destination: '/action/call',
@@ -222,6 +223,13 @@ const nextConfig = {
         source: '/politicians/house',
         destination: '/politicians',
         permanent: true,
+      },
+
+      // vanity urls
+      {
+        source: '/join/:referralId',
+        destination: '/action/sign-up?utm_campaign=:referralId&utm_source=swc&utm_medium=referral',
+        permanent: false,
       },
     ]
   },

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 BRANCH="$(git branch --show-current)"
-DATABASE_URL=$(cat .env | grep -e "^DATABASE_URL=" | tail -1 | sed -e "s/^DATABASE_URL=//g")
+DATABASE_URL=$(cat .env | grep -e "^DATABASE_URL=" | tail -1 | sed -e "s/^DATABASE_URL=//g" | tr -d '\n' | tr -d '"' | tr -d "'")
 bold=$(tput bold)
 normal=$(tput sgr0)
 

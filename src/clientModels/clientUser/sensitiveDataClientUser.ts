@@ -20,6 +20,7 @@ export type SensitiveDataClientUser = ClientModel<
     | 'phoneNumber'
     | 'hasOptedInToMembership'
     | 'hasOptedInToSms'
+    | 'referralId'
   > & {
     datetimeCreated: string
     datetimeUpdated: string
@@ -46,11 +47,13 @@ export const getSensitiveDataClientUser = (
     phoneNumber,
     hasOptedInToMembership,
     hasOptedInToSms,
+    referralId,
   } = record
 
   return getClientModel({
     firstName,
     lastName,
+    referralId,
     primaryUserEmailAddress: primaryUserEmailAddress
       ? {
           emailAddress: primaryUserEmailAddress.emailAddress,

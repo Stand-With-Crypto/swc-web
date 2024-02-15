@@ -1,5 +1,5 @@
 'use client'
-import { memo, useCallback } from 'react'
+import { useCallback } from 'react'
 
 import { PrivacyPolicyDialog } from '@/components/app/pagePrivacyPolicy/dialog'
 import { SectionNames } from '@/components/app/userActionFormVoterRegistration/constants'
@@ -9,7 +9,7 @@ import { UseSectionsReturn } from '@/hooks/useSections'
 
 interface SurveyProps extends UseSectionsReturn<SectionNames> {}
 
-export const Survey = memo(function Survey({ goToSection }: SurveyProps) {
+export function Survey({ goToSection }: SurveyProps) {
   const createSelectionHandler = useCallback(
     (step: SectionNames) => {
       return () => {
@@ -64,4 +64,4 @@ export const Survey = memo(function Survey({ goToSection }: SurveyProps) {
       </UserActionFormVoterRegistrationLayout.Container>
     </UserActionFormVoterRegistrationLayout>
   )
-})
+}

@@ -35,6 +35,7 @@ import {
 import { AuthSessionMetadata } from '@/utils/server/thirdweb/types'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
+import { generateReferralId } from '@/utils/shared/referralId'
 import { AnalyticProperties } from '@/utils/shared/sharedAnalytics'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
 
@@ -140,6 +141,7 @@ export async function onLogin(address: string, req: NextApiRequest): Promise<Aut
               hasOptedInToEmails: true,
               hasOptedInToMembership: false,
               hasOptedInToSms: false,
+              referralId: generateReferralId(),
               ...mapLocalUserToUserDatabaseFields(localUser),
             },
           },

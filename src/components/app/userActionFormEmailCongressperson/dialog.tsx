@@ -5,6 +5,7 @@ import { Suspense, useEffect, useState } from 'react'
 import { ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON } from '@/components/app/userActionFormEmailCongressperson/constants'
 import { LazyUserActionFormEmailCongressperson } from '@/components/app/userActionFormEmailCongressperson/lazyLoad'
 import { UserActionFormEmailCongresspersonSkeleton } from '@/components/app/userActionFormEmailCongressperson/skeleton'
+import { FormFields } from '@/components/app/userActionFormEmailCongressperson/types'
 import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
@@ -14,9 +15,11 @@ import { useLocale } from '@/hooks/useLocale'
 export function UserActionFormEmailCongresspersonDialog({
   children,
   defaultOpen = false,
+  initialValues,
 }: {
   children: React.ReactNode
   defaultOpen?: boolean
+  initialValues?: FormFields
 }) {
   const dialogProps = useDialog({
     initialOpen: defaultOpen,
@@ -40,6 +43,7 @@ export function UserActionFormEmailCongresspersonDialog({
             <UserActionFormEmailCongresspersonSkeleton locale={locale} />
           ) : state === 'form' ? (
             <LazyUserActionFormEmailCongressperson
+              initialValues={initialValues}
               onCancel={() => dialogProps.onOpenChange(false)}
               onSuccess={() => setState('success')}
               user={user}
