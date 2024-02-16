@@ -19,7 +19,7 @@ export function NFTDisplay({ userActions }: NFTDisplayProps) {
   //display the NFT images in a grid
   //if there is not an NFT, render a empty grey div
 
-  const userNFTSlugs: string[][] = userActions.reduce(
+  const _userNFTSlugs: string[][] = userActions.reduce(
     (acc: string[][], action: SensitiveDataClientUserAction): string[][] => {
       const nftSlug = action.nftMint?.nftSlug
 
@@ -35,6 +35,5 @@ export function NFTDisplay({ userActions }: NFTDisplayProps) {
     [],
   )
 
-  console.log(userNFTSlugs)
   return <div></div>
 }
