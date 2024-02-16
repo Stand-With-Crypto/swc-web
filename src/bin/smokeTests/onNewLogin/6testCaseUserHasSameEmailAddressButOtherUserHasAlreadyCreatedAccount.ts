@@ -48,7 +48,6 @@ export const testCaseUserHasSameEmailAddressButOtherUserHasAlreadyCreatedAccount
   },
   validateResults: (
     {
-      user,
       existingUsersWithSource,
       embeddedWalletEmailAddress,
       merge,
