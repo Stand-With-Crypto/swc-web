@@ -58,7 +58,6 @@ export function UpdateUserProfileForm({
   const isEmbeddedWalletUser =
     user.primaryUserEmailAddress?.source === UserEmailAddressSource.THIRDWEB_EMBEDDED_AUTH
 
-  console.log({ user })
   const defaultValues = useRef({
     isEmbeddedWalletUser,
     firstName: user.firstName || '',

@@ -34,7 +34,6 @@ export function ThirdwebLoginDialog({
         <ThirdwebLoginContent
           auth={{
             onLogin: () => {
-              console.log('onLogin')
               // ensure that any server components on the page that's being used are refreshed with the context the user is now logged in
               router.refresh()
               dialogProps.onOpenChange(false)
