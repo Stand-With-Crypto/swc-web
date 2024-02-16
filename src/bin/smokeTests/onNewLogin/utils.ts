@@ -43,7 +43,7 @@ export function verify(
   const conditionResult = _.isFunction(condition) ? condition() : condition
   if (!!conditionResult !== expectedCondition) {
     issues.push(
-      `${label} was ${conditionResult} but expected to be ${
+      `${label} was ${JSON.stringify(conditionResult)} but expected to be ${
         expectedCondition ? 'truthy' : 'falsy'
       }`,
     )
