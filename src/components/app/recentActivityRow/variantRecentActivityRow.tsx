@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import { UserActionOptInType, UserActionType } from '@prisma/client'
+import { UserActionType } from '@prisma/client'
 
 import { ThirdwebLoginDialog } from '@/components/app/authentication/thirdwebLoginContent'
 import {
@@ -17,27 +17,20 @@ import { InternalLink } from '@/components/ui/link'
 import { UserActionTweetLink } from '@/components/ui/userActionTweetLink'
 import { DTSIPersonForUserActions } from '@/data/dtsi/queries/queryDTSIPeopleBySlugForUserActions'
 import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
-import {
-  dtsiPersonFullName,
-  dtsiPersonPoliticalAffiliationCategoryAbbreviation,
-} from '@/utils/dtsi/dtsiPersonUtils'
+import { getDTSIPersonRoleCategoryDisplayName } from '@/utils/dtsi/dtsiPersonRoleUtils'
+import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
 import { getIntlUrls } from '@/utils/shared/urls'
-import { formatDonationOrganization } from '@/utils/web/donationUtils'
-import { getUserDisplayName } from '@/utils/web/userUtils'
 
 const MainText = ({ children }: { children: React.ReactNode }) => (
   <div className="text-sm font-semibold text-gray-900 lg:text-xl">{children}</div>
 )
-const SubText = ({ children }: { children: React.ReactNode }) => (
-  <div className="hidden text-xs text-gray-500 md:block lg:text-base">{children}</div>
-)
 
 const formatDTSIPerson = (person: DTSIPersonForUserActions) => {
-  const politicalAffiliation = person.politicalAffiliationCategory
-    ? `(${dtsiPersonPoliticalAffiliationCategoryAbbreviation(person.politicalAffiliationCategory)})`
-    : ''
-  return `${dtsiPersonFullName(person)} ${politicalAffiliation}`
+  if (person.primaryRole) {
+    return `${getDTSIPersonRoleCategoryDisplayName(person.primaryRole)} ${dtsiPersonFullName(person)}`
+  }
+  return dtsiPersonFullName(person)
 }
 
 export const VariantRecentActivityRow = function VariantRecentActivityRow({
@@ -45,31 +38,26 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
   locale,
 }: RecentActivityRowProps) {
   const { userLocationDetails } = action.user
-  const userDisplayName = getUserDisplayName(action.user)
   const isStateAvailable = userLocationDetails?.administrativeAreaLevel1
   const { data } = useApiResponseForUserPerformedUserActionTypes()
   const hasSignedUp = data?.performedUserActionTypes.includes(UserActionType.OPT_IN)
   const newUserStateOrJoin = isStateAvailable
-    ? `from ${userLocationDetails.administrativeAreaLevel1} joined!`
-    : 'joined!'
+    ? `from ${userLocationDetails.administrativeAreaLevel1} joined`
+    : 'joined'
   const voterStateOrEmpty = isStateAvailable
     ? `in ${userLocationDetails.administrativeAreaLevel1}`
     : ''
 
+  const getSWCDisplayText = () => (
+    <>
+      <span className="hidden sm:inline"> Stand With Crypto</span>
+      <span className="sm:hidden"> SWC </span>
+    </>
+  )
+
   const getActionSpecificProps = () => {
     switch (action.actionType) {
       case UserActionType.OPT_IN: {
-        const getTypeDisplayText = () => {
-          switch (action.optInType) {
-            case UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER:
-              return (
-                <>
-                  <span className="hidden sm:inline"> Stand With Crypto</span>
-                  <span className="sm:hidden"> SWC </span>
-                </>
-              )
-          }
-        }
         return {
           onFocusContent: hasSignedUp
             ? undefined
@@ -82,7 +70,7 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
             <>
               <MainText>
                 New member {newUserStateOrJoin}
-                {getTypeDisplayText()}
+                {getSWCDisplayText()}
               </MainText>
             </>
           ),
@@ -97,7 +85,7 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
           ),
           children: (
             <>
-              <MainText>Call to representative {formatDTSIPerson(action.person)}</MainText>
+              <MainText>Call to {formatDTSIPerson(action.person)}</MainText>
             </>
           ),
         }
@@ -133,8 +121,7 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
           children: (
             <>
               <MainText>
-                Email to{' '}
-                {action.userActionEmailRecipients.map(x => formatDTSIPerson(x.person)).join(', ')}
+                Email to {action.userActionEmailRecipients.map(x => formatDTSIPerson(x.person))}
               </MainText>
             </>
           ),
@@ -146,13 +133,13 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
               <Button>Mint yours</Button>
             </UserActionFormNFTMintDialog>
           ),
-          children: <MainText>{userDisplayName} donated by minting an NFT</MainText>,
+          children: <MainText>NFT minted to donate to {getSWCDisplayText()}</MainText>,
         }
       }
       case UserActionType.TWEET: {
         return {
           onFocusContent: () => <UserActionTweetLink>Tweet</UserActionTweetLink>,
-          children: <MainText>{userDisplayName} tweeted in support of crypto</MainText>,
+          children: <MainText> Tweet sent in support of {getSWCDisplayText()}</MainText>,
         }
       }
       case UserActionType.VOTER_REGISTRATION: {
