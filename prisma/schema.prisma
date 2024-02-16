@@ -202,6 +202,7 @@ model UserEmailAddress {
 
   @@unique(map: "user_email_address_unique_constraint", [emailAddress, userId])
   @@index([userId])
+  @@index([emailAddress])
   @@map("user_email_address")
 }
 
@@ -349,6 +350,7 @@ model UserActionDonation {
   coinbaseCommerceDonationId String? @map("coinbase_commerce_donation_id")
 
   @@index([id])
+  @@index([amountUsd])
   @@map("user_action_donation")
 }
 
