@@ -7,10 +7,8 @@ import {
   UserInternalStatus,
 } from '@prisma/client'
 
-import { ClientAddress, getClientAddress } from '@/clientModels/clientAddress'
 import { fakerFields } from '@/mocks/fakerUtils'
 import { mockCommonDatetimes } from '@/mocks/mockCommonDatetimes'
-import { mockAddress } from '@/mocks/models/mockAddress'
 
 export function mockCreateUserInput({
   withData = faker.helpers.maybe(() => true, { probability: 0.5 }),
@@ -44,7 +42,7 @@ export function mockCreateUserInput({
   } satisfies Prisma.UserCreateInput
 }
 
-export function mockUser(): User & { address: ClientAddress } {
+export function mockUser(): User {
   const withData = faker.helpers.maybe(() => true, { probability: 0.5 })
   return {
     ...mockCreateUserInput({ withData }),
@@ -54,6 +52,5 @@ export function mockUser(): User & { address: ClientAddress } {
     primaryUserCryptoAddressId: fakerFields.id(),
     dataCreationMethod: DataCreationMethod.BY_USER,
     addressId: withData ? fakerFields.id() : null,
-    address: getClientAddress(mockAddress()),
   }
 }
