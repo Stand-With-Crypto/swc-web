@@ -27,7 +27,6 @@ import {
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { getGoogleCivicDataFromAddress } from '@/utils/shared/googleCivicInfo'
-import { sleep } from '@/utils/shared/sleep'
 import { trackFormSubmissionSyncErrors } from '@/utils/web/formUtils'
 import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
 
