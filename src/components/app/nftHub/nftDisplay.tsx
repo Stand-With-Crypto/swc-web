@@ -15,7 +15,6 @@ const retrieveNFTEnumKey = (nftSlug: string) => {
 }
 
 export function NFTDisplay({ userActions }: NFTDisplayProps) {
-  console.log('USER: ', userActions)
   //iterate through userActions and find the ones that are NFTs
   //display the NFT images in a grid
   //if there is not an NFT, render a empty grey div
