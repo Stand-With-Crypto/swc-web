@@ -33,6 +33,8 @@ export interface ComboBoxProps<T>
   getOptionKey: (val: T) => string
   popoverContentClassName?: string
   isLoading: boolean
+  open: boolean
+  setOpen: (open: boolean) => void
 }
 
 export function Combobox<T>({
@@ -45,10 +47,11 @@ export function Combobox<T>({
   popoverContentClassName,
   isLoading,
   analytics,
+  open,
+  setOpen,
   ...inputProps
 }: ComboBoxProps<T>) {
   const parentRef = React.useRef<HTMLButtonElement>(null)
-  const [open, setOpen] = React.useState(false)
   const isMobile = useIsMobile({ defaultState: false })
   const size = useResizeObserver(parentRef)
   const wrappedAnalytics = React.useCallback(

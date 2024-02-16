@@ -1,5 +1,6 @@
 'use client'
 import { useMemo } from 'react'
+import _ from 'lodash'
 
 import { Person } from '@/components/app/dtsiClientPersonDataTable/columns'
 import {
@@ -18,6 +19,8 @@ import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
 export enum StanceOnCryptoOptions {
   PRO_CRYPTO = 'Pro-crypto',
   ANTI_CRYPTO = 'Anti-crypto',
+  NEUTRAL = 'Neutral',
+  PENDING = 'Pending',
   ALL = 'All',
 }
 export const PARTY_OPTIONS = {
@@ -160,9 +163,15 @@ export function filterDataViaGlobalFilters<TData extends Person>(
   return passedData.filter(x => {
     if (globalFilter.stance !== StanceOnCryptoOptions.ALL) {
       const scoreToUse = x.manuallyOverriddenStanceScore ?? x.computedStanceScore
+      if (globalFilter.stance === StanceOnCryptoOptions.PENDING) {
+        return _.isNil(scoreToUse)
+      }
+      if (globalFilter.stance === StanceOnCryptoOptions.NEUTRAL) {
+        return scoreToUse === 50
+      }
       const stance =
         !scoreToUse || scoreToUse === 50
-          ? StanceOnCryptoOptions.ALL
+          ? null
           : scoreToUse > 50
             ? StanceOnCryptoOptions.PRO_CRYPTO
             : StanceOnCryptoOptions.ANTI_CRYPTO
