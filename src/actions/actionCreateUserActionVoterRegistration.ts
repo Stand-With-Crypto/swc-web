@@ -30,7 +30,7 @@ const logger = getLogger(`actionCreateUserActionVoterRegistration`)
 
 const createActionVoterRegistrationInputValidationSchema = object({
   campaignName: nativeEnum(UserActionVoterRegistrationCampaignName),
-  usaState: zodUsaState,
+  usaState: zodUsaState.optional(),
 })
 
 export type CreateActionVoterRegistrationInput = z.infer<
