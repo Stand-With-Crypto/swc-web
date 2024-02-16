@@ -4,7 +4,6 @@ import _ from 'lodash'
 import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import { notFound } from 'next/navigation'
-import NextTopLoader from 'nextjs-toploader'
 
 import { TopLevelClientLogic } from '@/app/[locale]/topLevelClientLogic'
 import { CookieConsent } from '@/components/app/cookieConsent'
@@ -72,7 +71,8 @@ export default function Layout({ children, params }: PageProps & { children: Rea
   return (
     <html lang={locale}>
       <body className={inter.className}>
-        <NextTopLoader />
+        {/* LATER-TASK add back once https://github.com/TheSGJ/nextjs-toploader/issues/66 is resolved */}
+        {/* <NextTopLoader /> */}
         <TopLevelClientLogic locale={locale}>
           <FullHeight.Container>
             <FullHeight.Content>
