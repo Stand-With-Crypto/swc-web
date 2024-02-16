@@ -65,6 +65,7 @@
     "typecheck",
     "undici",
     "unoptimized",
+    "upserted",
     "vaul",
     "viem"
   ],

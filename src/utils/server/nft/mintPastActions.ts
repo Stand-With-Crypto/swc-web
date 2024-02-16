@@ -34,4 +34,5 @@ export async function mintPastActions(
     })
     await claimNFT(action, userCryptoAddress)
   }
+  return actions
 }

@@ -1,5 +1,10 @@
 import { faker } from '@faker-js/faker'
-import { Prisma, SupportedUserCryptoNetwork, UserCryptoAddress } from '@prisma/client'
+import {
+  DataCreationMethod,
+  Prisma,
+  SupportedUserCryptoNetwork,
+  UserCryptoAddress,
+} from '@prisma/client'
 
 import { fakerFields } from '@/mocks/fakerUtils'
 import { mockCommonDatetimes } from '@/mocks/mockCommonDatetimes'
@@ -23,5 +28,7 @@ export function mockUserCryptoAddress(): UserCryptoAddress {
     id: fakerFields.id(),
     embeddedWalletUserEmailAddressId: null,
     userId: fakerFields.id(),
+    dataCreationMethod: DataCreationMethod.BY_USER,
+    hasBeenVerifiedViaAuth: true,
   }
 }
