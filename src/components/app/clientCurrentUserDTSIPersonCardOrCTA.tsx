@@ -51,12 +51,14 @@ export function ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: Suppo
   )
   const res = useGetDTSIPeopleFromAddress(address?.description || '')
   useEffect(() => {
-    if (userAddress) {
+    if (!address && userAddress) {
       _setAddress({
         place_id: userAddress.googlePlaceId,
         description: userAddress.formattedDescription,
       })
     }
+    // we don't want to add address to the effect deps here or we'll have trouble deleting
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userAddress])
 
   if (!address || !res.data) {

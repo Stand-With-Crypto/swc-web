@@ -20,7 +20,7 @@ export const USER_ACTION_ROW_CTA_INFO: Record<
     actionType: UserActionType.OPT_IN,
     image: '/actionTypeIcons/optIn.svg',
     text: 'Join Stand With Crypto',
-    subtext: 'Join over 100,000 advocates fighting to keep crypto in America.',
+    subtext: 'Join over 300,000 advocates fighting to keep crypto in America.',
     canBeTriggeredMultipleTimes: false,
     WrapperComponent: ({ children }) => <ThirdwebLoginDialog>{children}</ThirdwebLoginDialog>,
   },
