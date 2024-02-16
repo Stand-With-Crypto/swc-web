@@ -26,6 +26,7 @@ import {
 } from '@/utils/dtsi/dtsiPersonUtils'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
 import { getIntlUrls } from '@/utils/shared/urls'
+import { getUSStateNameFromStateCode } from '@/utils/shared/usStateUtils'
 import { formatDonationOrganization } from '@/utils/web/donationUtils'
 import { getUserDisplayName } from '@/utils/web/userUtils'
 
@@ -217,7 +218,7 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
           ),
           children: (
             <MainText>{`${userDisplayName} confirmed to vote ${
-              action.usaState ? `in ${action.usaState}` : ''
+              action.usaState ? `in ${getUSStateNameFromStateCode(action.usaState)}` : ''
             }`}</MainText>
           ),
         }

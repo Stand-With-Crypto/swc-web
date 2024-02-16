@@ -134,7 +134,7 @@ export function VoterRegistrationForm({
 
     const data: CreateActionVoterRegistrationInput = {
       campaignName: UserActionVoterRegistrationCampaignName.DEFAULT,
-      usaState: getUSStateNameFromStateCode(stateCode),
+      usaState: stateCode,
     }
 
     const result = await triggerServerActionForForm(

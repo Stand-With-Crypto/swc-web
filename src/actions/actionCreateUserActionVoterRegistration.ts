@@ -3,7 +3,7 @@ import 'server-only'
 
 import { User, UserAction, UserActionType, UserInformationVisibility } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
-import { nativeEnum, object, string, z } from 'zod'
+import { nativeEnum, object, z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
 import {
@@ -24,12 +24,13 @@ import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/local
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
 import { UserActionVoterRegistrationCampaignName } from '@/utils/shared/userActionCampaigns'
+import { zodUsaState } from '@/validation/fields/zodUsaState'
 
 const logger = getLogger(`actionCreateUserActionVoterRegistration`)
 
 const createActionVoterRegistrationInputValidationSchema = object({
   campaignName: nativeEnum(UserActionVoterRegistrationCampaignName),
-  usaState: string(),
+  usaState: zodUsaState,
 })
 
 export type CreateActionVoterRegistrationInput = z.infer<
@@ -147,9 +148,7 @@ function logSpamActionSubmissions({
   userId,
   sharedDependencies,
 }: {
-  validatedInput: z.SafeParseSuccess<
-    z.infer<typeof createActionVoterRegistrationInputValidationSchema>
-  >
+  validatedInput: z.SafeParseSuccess<CreateActionVoterRegistrationInput>
   userAction: UserAction
   userId: User['id']
   sharedDependencies: Pick<SharedDependencies, 'analytics'>
@@ -179,7 +178,7 @@ async function createAction<U extends User>({
 }: {
   user: U
   isNewUser: boolean
-  validatedInput: z.infer<typeof createActionVoterRegistrationInputValidationSchema>
+  validatedInput: CreateActionVoterRegistrationInput
   userMatch: UserAndMethodOfMatch
   sharedDependencies: Pick<SharedDependencies, 'sessionId' | 'analytics' | 'peopleAnalytics'>
 }) {
