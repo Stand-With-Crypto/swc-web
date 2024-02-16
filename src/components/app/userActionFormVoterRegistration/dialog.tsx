@@ -1,6 +1,6 @@
 'use client'
 
-import { memo, Suspense } from 'react'
+import { Suspense } from 'react'
 
 import { UserActionFormVoterRegistration } from '@/components/app/userActionFormVoterRegistration'
 import { ANALYTICS_NAME_USER_ACTION_FORM_VOTER_REGISTRATION } from '@/components/app/userActionFormVoterRegistration/constants'
@@ -9,32 +9,30 @@ import { UserActionFormVoterRegistrationSkeleton } from '@/components/app/userAc
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { useDialog } from '@/hooks/useDialog'
 
-export const UserActionFormVoterRegistrationDialog = memo(
-  function UserActionFormVoterRegistrationDialog({
-    children,
-    defaultOpen = false,
-    ...formProps
-  }: Omit<React.ComponentProps<typeof UserActionFormVoterRegistration>, 'onClose'> & {
-    children: React.ReactNode
-    defaultOpen?: boolean
-  }) {
-    const dialogProps = useDialog({
-      initialOpen: defaultOpen,
-      analytics: ANALYTICS_NAME_USER_ACTION_FORM_VOTER_REGISTRATION,
-    })
+export function UserActionFormVoterRegistrationDialog({
+  children,
+  defaultOpen = false,
+  ...formProps
+}: Omit<React.ComponentProps<typeof UserActionFormVoterRegistration>, 'onClose'> & {
+  children: React.ReactNode
+  defaultOpen?: boolean
+}) {
+  const dialogProps = useDialog({
+    initialOpen: defaultOpen,
+    analytics: ANALYTICS_NAME_USER_ACTION_FORM_VOTER_REGISTRATION,
+  })
 
-    return (
-      <Dialog {...dialogProps}>
-        <DialogTrigger asChild>{children}</DialogTrigger>
-        <DialogContent className="max-w-3xl">
-          <Suspense fallback={<UserActionFormVoterRegistrationSkeleton />}>
-            <LazyUserActionFormVoterRegistration
-              {...formProps}
-              onClose={() => dialogProps.onOpenChange(false)}
-            />
-          </Suspense>
-        </DialogContent>
-      </Dialog>
-    )
-  },
-)
+  return (
+    <Dialog {...dialogProps}>
+      <DialogTrigger asChild>{children}</DialogTrigger>
+      <DialogContent className="max-w-3xl">
+        <Suspense fallback={<UserActionFormVoterRegistrationSkeleton />}>
+          <LazyUserActionFormVoterRegistration
+            {...formProps}
+            onClose={() => dialogProps.onOpenChange(false)}
+          />
+        </Suspense>
+      </DialogContent>
+    </Dialog>
+  )
+}

@@ -10,11 +10,7 @@ import { Survey } from '@/components/app/userActionFormVoterRegistration/section
 import { VoterRegistrationForm } from '@/components/app/userActionFormVoterRegistration/sections/voterRegistrationForm'
 import { useSections } from '@/hooks/useSections'
 
-export const UserActionFormVoterRegistration = memo(function UserActionFormVoterRegistration({
-  onClose,
-}: {
-  onClose: () => void
-}) {
+export function UserActionFormVoterRegistration({ onClose }: { onClose: () => void }) {
   const sectionProps = useSections<SectionNames>({
     sections: Object.values(SectionNames),
     initialSectionId: SectionNames.SURVEY,
@@ -47,4 +43,4 @@ export const UserActionFormVoterRegistration = memo(function UserActionFormVoter
   }, [currentTab, onClose, onTabNotFound, sectionProps])
 
   return content
-})
+}
