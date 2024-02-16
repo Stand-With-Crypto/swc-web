@@ -66,10 +66,10 @@ export function Address({
 
   const isMobile = useIsMobile({ defaultState: true })
   const initialAddressOnLoad = useRef(user?.address?.googlePlaceId)
-
+  const inputRef = useRef<HTMLInputElement | null>(null)
   useEffect(() => {
     if (!isMobile) {
-      form.setFocus('address')
+      inputRef.current?.click()
     }
   }, [form, isMobile])
 
@@ -137,6 +137,7 @@ export function Address({
                       {...field}
                       onChange={field.onChange}
                       placeholder="Your full address"
+                      ref={inputRef}
                       value={field.value}
                     />
                   </FormControl>
