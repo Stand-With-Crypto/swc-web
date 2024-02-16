@@ -40,7 +40,7 @@ export function PagePoliticianDetails({
     <div className="container max-w-3xl">
       <section>
         {person.profilePictureUrl ? (
-          <div className="mx-auto mb-6 overflow-hidden rounded-3xl" style={{ maxWidth: 100 }}>
+          <div className="mx-auto mb-6 overflow-hidden rounded-xl" style={{ maxWidth: 100 }}>
             <MaybeNextImg
               alt={`profile picture of ${dtsiPersonFullName(person)}`}
               sizes="100px"

@@ -18,7 +18,7 @@ export function ClaimNft({ goToSection }: ClaimNftProps) {
     <UserActionFormVoterRegistrationLayout onBack={handleOnBack}>
       <UserActionFormVoterRegistrationLayout.Container>
         <UserActionFormVoterRegistrationLayout.Heading
-          subtitle='You can get get a free "I Registered" NFT'
+          subtitle='You can get a free "I Registered" NFT'
           title="Get your “I Registered” NFT"
         />
       </UserActionFormVoterRegistrationLayout.Container>

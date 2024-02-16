@@ -5,7 +5,7 @@ import { redirect, RedirectType } from 'next/navigation'
 import { PageUserProfileUser } from '@/components/app/pageUserProfile/getAuthenticatedData'
 import { UpdateUserProfileFormDialog } from '@/components/app/updateUserProfileForm/dialog'
 import { UserActionRowCTAsList } from '@/components/app/userActionRowCTA/userActionRowCTAsList'
-import { SensitiveDataUserAvatar } from '@/components/app/userAvatar'
+import { UserAvatar } from '@/components/app/userAvatar'
 import { Button } from '@/components/ui/button'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
 import { FormattedDatetime } from '@/components/ui/formattedDatetime'
@@ -53,7 +53,7 @@ export function PageUserProfile({
       <section>
         <div className="mb-6 flex items-center justify-between md:mx-4">
           <div className="flex items-center gap-2">
-            <SensitiveDataUserAvatar size={48} user={user} />
+            <UserAvatar size={48} user={user} />
             <div>
               <div className="text-lg font-bold">{getSensitiveDataUserDisplayName(user)}</div>
               <div className="text-sm text-gray-500">

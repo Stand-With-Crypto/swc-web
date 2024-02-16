@@ -45,7 +45,7 @@ export const convertDTSIStanceScoreToCryptoSupportLanguage = (entity: EntityWith
     return 'Pending'
   }
   if (score >= 90) {
-    return 'Very supportive'
+    return 'Strongly supportive'
   }
   if (score >= 70) {
     return 'Supportive'
@@ -56,7 +56,7 @@ export const convertDTSIStanceScoreToCryptoSupportLanguage = (entity: EntityWith
   if (score >= 30) {
     return 'Against'
   }
-  return 'Very against'
+  return 'Strongly against'
 }
 
 export const convertDTSIStanceScoreToCryptoSupportLanguageSentence = (

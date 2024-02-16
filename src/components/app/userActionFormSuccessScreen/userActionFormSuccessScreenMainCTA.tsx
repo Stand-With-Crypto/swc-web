@@ -32,7 +32,7 @@ const NFTImage = ({ nft }: { nft: NFTClientMetadata }) => (
 const RedeemedNFTImage = ({ nft }: { nft: NFTClientMetadata }) => (
   <div>
     <NFTImage nft={nft} />
-    <p className="mt-2 font-bold">You've earn a new NFT</p>
+    <p className="mt-2 font-bold">You've earned a new NFT</p>
   </div>
 )
 

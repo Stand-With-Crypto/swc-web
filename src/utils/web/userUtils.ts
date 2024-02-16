@@ -48,6 +48,12 @@ export const getSensitiveDataUserDisplayName = (
   if (user?.firstName) {
     return userFullName(user)
   }
+  if (user?.hasEmbeddedWallet && user.primaryUserEmailAddress) {
+    if (user.primaryUserEmailAddress.emailAddress.length > 13) {
+      return `${user.primaryUserEmailAddress.emailAddress.slice(0, 10)}...`
+    }
+    return user.primaryUserEmailAddress.emailAddress
+  }
   if (user?.primaryUserCryptoAddress) {
     return (
       user.primaryUserCryptoAddress.ensName ||

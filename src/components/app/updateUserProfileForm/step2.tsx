@@ -2,7 +2,7 @@
 import { useMemo } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { UserEmailAddressSource, UserInformationVisibility } from '@prisma/client'
+import { UserInformationVisibility } from '@prisma/client'
 import { RadioGroup, RadioGroupIndicator, RadioGroupItem } from '@radix-ui/react-radio-group'
 import { Check } from 'lucide-react'
 import { useRouter } from 'next/navigation'
@@ -49,9 +49,7 @@ export function UpdateUserInformationVisibilityForm({
       USER_INFORMATION_VISIBILITY_ORDERED_LIST.filter(x => {
         switch (x) {
           case UserInformationVisibility.CRYPTO_INFO_ONLY:
-            return (
-              user.primaryUserEmailAddress?.source !== UserEmailAddressSource.THIRDWEB_EMBEDDED_AUTH
-            )
+            return user.hasEmbeddedWallet
           case UserInformationVisibility.ALL_INFO:
             return user.firstName || user.lastName
           default:

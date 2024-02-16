@@ -40,6 +40,8 @@ const contentSecurityPolicy = {
     "'self'",
     'blob: data:',
     'https://res.cloudinary.com/',
+    'https://twemoji.maxcdn.com/',
+    'https://cdn.jsdelivr.net/gh/twitter/',
     'https://*.walletconnect.com/',
     'https://euc.li/',
     'https://*.googleapis.com',
