@@ -1,5 +1,5 @@
 'use client'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import _ from 'lodash'
 
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
@@ -50,15 +50,19 @@ export function ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: Suppo
     [_setAddress],
   )
   const res = useGetDTSIPeopleFromAddress(address?.description || '')
+
+  // setting this as an auto-updating ref so that eslint doesn't complain
+  // when we don't add address as a dependency to the useEffect below
+  const addressRef = useRef(address)
+  addressRef.current = address
+
   useEffect(() => {
-    if (!address && userAddress) {
+    if (!addressRef.current && userAddress) {
       _setAddress({
         place_id: userAddress.googlePlaceId,
         description: userAddress.formattedDescription,
       })
     }
-    // we don't want to add address to the effect deps here or we'll have trouble deleting
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userAddress])
 
   if (!address || !res.data) {
