@@ -23,13 +23,4 @@ export const NFT_CLIENT_METADATA: Record<NFTSlug, NFTClientMetadata> = {
       alt: 'A rotating phone with the text "I called congress" below it',
     },
   },
-  [NFTSlug.I_AM_A_VOTER]: {
-    name: 'I am a voter',
-    image: {
-      url: '/nfts/i-am-a-voter-nft.png',
-      width: 160,
-      height: 160,
-      alt: 'a woman pointing at a computer with the text "i\'m a voter" in the center of the image',
-    },
-  },
 }
