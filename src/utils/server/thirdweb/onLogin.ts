@@ -511,6 +511,7 @@ async function maybeUpsertEmbeddedWalletEmailAddress({
     })
     log(`maybeUpsertEmbeddedWalletEmailAddress: user email address created from embedded wallet`)
     wasCreated = true
+    updatedFields = null
   } else {
     log(
       `maybeUpsertEmbeddedWalletEmailAddress: user email address already existed for embedded wallet`,

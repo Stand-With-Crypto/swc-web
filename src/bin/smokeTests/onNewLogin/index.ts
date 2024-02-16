@@ -2,6 +2,7 @@ import { runBin } from '@/bin/runBin'
 import { testCaseUserHasLegacyMigrationCryptoAddressAndEmailAndLogsOnViaSessionIdWithNewCryptoAddress } from '@/bin/smokeTests/onNewLogin/3testCaseUserHasLegacyMigrationCryptoAddressAndEmailAndLogsOnViaSessionIdWithNewCryptoAddress'
 import { testCaseUserHasLegacyMigrationCryptoAddressAndLogsOnViaSameCryptoAddress } from '@/bin/smokeTests/onNewLogin/4testCaseUserHasLegacyMigrationCryptoAddressAndEmailAndLogsOnViaSameCryptoAddress'
 import { testCaseUserHasLegacyMigrationCryptoAndEmailAddressAndLogsOnViaSameCryptoAndEmailAddressButAlreadyHasCreatedUsers } from '@/bin/smokeTests/onNewLogin/5testCaseUserHasLegacyMigrationCryptoAndEmailAddressAndLogsOnViaSameCryptoAndEmailAddressButAlreadyHasCreatedUsers'
+import { testCaseUserHasSameEmailAddressButOtherUserHasAlreadyCreatedAccount } from '@/bin/smokeTests/onNewLogin/6testCaseUserHasSameEmailAddressButOtherUserHasAlreadyCreatedAccount'
 import { onNewLogin } from '@/utils/server/thirdweb/onLogin'
 import { logger } from '@/utils/shared/logger'
 
@@ -28,6 +29,7 @@ async function smokeTestOnLogin() {
     testCaseUserHasLegacyMigrationCryptoAddressAndEmailAndLogsOnViaSessionIdWithNewCryptoAddress,
     testCaseUserHasLegacyMigrationCryptoAddressAndLogsOnViaSameCryptoAddress,
     testCaseUserHasLegacyMigrationCryptoAndEmailAddressAndLogsOnViaSameCryptoAndEmailAddressButAlreadyHasCreatedUsers,
+    testCaseUserHasSameEmailAddressButOtherUserHasAlreadyCreatedAccount,
   ]
   for (const test of tests) {
     await runTestCase(test)
