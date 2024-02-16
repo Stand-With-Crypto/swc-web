@@ -78,7 +78,7 @@ async function _actionCreateUserActionVoterRegistration(input: CreateActionVoter
     localUser,
   })
 
-  const recentUserAction = await getRecentUserActionByUserId(user.id)
+  const recentUserAction = await getRecentUserActionByUserId(user.id, validatedInput)
   if (recentUserAction) {
     logSpamActionSubmissions({
       validatedInput,
@@ -132,11 +132,14 @@ async function createUser(sharedDependencies: Pick<SharedDependencies, 'localUse
   return createdUser
 }
 
-async function getRecentUserActionByUserId(userId: User['id']) {
+async function getRecentUserActionByUserId(
+  userId: User['id'],
+  validatedInput: z.SafeParseSuccess<CreateActionVoterRegistrationInput>,
+) {
   return prismaClient.userAction.findFirst({
     where: {
       actionType: UserActionType.VOTER_REGISTRATION,
-      campaignName: UserActionVoterRegistrationCampaignName.DEFAULT,
+      campaignName: validatedInput.data.campaignName,
       userId: userId,
     },
   })
@@ -155,13 +158,13 @@ function logSpamActionSubmissions({
 }) {
   sharedDependencies.analytics.trackUserActionCreatedIgnored({
     actionType: UserActionType.VOTER_REGISTRATION,
-    campaignName: UserActionVoterRegistrationCampaignName.DEFAULT,
+    campaignName: validatedInput.data.campaignName,
     reason: 'Too Many Recent',
     userState: 'Existing',
     usaState: validatedInput.data.usaState,
   })
   Sentry.captureMessage(
-    `duplicate ${UserActionType.VOTER_REGISTRATION} user action for campaign ${UserActionVoterRegistrationCampaignName.DEFAULT} submitted`,
+    `duplicate ${UserActionType.VOTER_REGISTRATION} user action for campaign ${validatedInput.data.campaignName} submitted`,
     {
       extra: { validatedInput: validatedInput.data, userAction },
       user: { id: userId },
