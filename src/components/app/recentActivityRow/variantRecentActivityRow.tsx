@@ -50,8 +50,8 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
   const { data } = useApiResponseForUserPerformedUserActionTypes()
   const hasSignedUp = data?.performedUserActionTypes.includes(UserActionType.OPT_IN)
   const newUserStateOrJoin = isStateAvailable
-    ? `from ${userLocationDetails.administrativeAreaLevel1} joined`
-    : 'joined'
+    ? `from ${userLocationDetails.administrativeAreaLevel1} joined!`
+    : 'joined!'
   const voterStateOrEmpty = isStateAvailable
     ? `in ${userLocationDetails.administrativeAreaLevel1}`
     : ''
@@ -97,8 +97,7 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
           ),
           children: (
             <>
-              <MainText>{userDisplayName} called their representative</MainText>
-              <SubText>{formatDTSIPerson(action.person)}</SubText>
+              <MainText>Call to representative {formatDTSIPerson(action.person)}</MainText>
             </>
           ),
         }
@@ -113,15 +112,14 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
           },
           children: (
             <>
-              <MainText>{userDisplayName} donated</MainText>
-              <SubText>
+              <MainText>
                 <FormattedCurrency
                   amount={action.amount}
                   currencyCode={action.amountCurrencyCode}
                   locale={locale}
                 />{' '}
-                to {formatDonationOrganization(action.recipient)}
-              </SubText>
+                donation
+              </MainText>
             </>
           ),
         }
@@ -135,12 +133,9 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
           children: (
             <>
               <MainText>
-                {userDisplayName} emailed their representative
-                {action.userActionEmailRecipients.length > 1 ? 's' : ''}
-              </MainText>
-              <SubText>
+                Email to{' '}
                 {action.userActionEmailRecipients.map(x => formatDTSIPerson(x.person)).join(', ')}
-              </SubText>
+              </MainText>
             </>
           ),
         }
