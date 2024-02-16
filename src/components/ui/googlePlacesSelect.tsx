@@ -24,7 +24,7 @@ type Props = {
 export const GooglePlacesSelect = React.forwardRef<React.ElementRef<'input'>, Props>(
   (props, ref) => {
     const { value: propsValue, onChange: propsOnChange, className, ...inputProps } = props
-
+    const [open, setOpen] = React.useState(false)
     const {
       ready,
       value,
@@ -74,8 +74,10 @@ export const GooglePlacesSelect = React.forwardRef<React.ElementRef<'input'>, Pr
         isLoading={!ready}
         onChange={propsOnChange}
         onChangeInputValue={setValue}
+        open={open}
         options={data}
         placeholder="Type your address..."
+        setOpen={setOpen}
         value={propsValue}
       />
     )

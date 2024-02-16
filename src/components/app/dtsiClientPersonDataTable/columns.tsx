@@ -1,6 +1,7 @@
 'use client'
 
 import { ColumnDef } from '@tanstack/react-table'
+import _ from 'lodash'
 
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
 import { SortableHeader } from '@/components/app/dtsiClientPersonDataTable/dataTable'
@@ -45,7 +46,13 @@ export const getDTSIClientPersonDataTableColumns = ({
   },
   {
     accessorKey: 'swcStanceScore',
-    accessorFn: row => row.manuallyOverriddenStanceScore || row.computedStanceScore,
+    accessorFn: row => {
+      const score = row.manuallyOverriddenStanceScore || row.computedStanceScore
+      if (_.isNil(score)) {
+        return -1
+      }
+      return score
+    },
     header: ({ column }) => {
       return (
         <SortableHeader column={column}>

@@ -27,6 +27,7 @@ import {
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { getGoogleCivicDataFromAddress } from '@/utils/shared/googleCivicInfo'
+import { sleep } from '@/utils/shared/sleep'
 import { trackFormSubmissionSyncErrors } from '@/utils/web/formUtils'
 import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
 
@@ -66,13 +67,10 @@ export function Address({
 
   const isMobile = useIsMobile({ defaultState: true })
   const initialAddressOnLoad = useRef(user?.address?.googlePlaceId)
-  const inputRef = useRef<HTMLInputElement | null>(null)
 
   useEffect(() => {
-    form.setFocus('address')
-    // we only want the input to auto-open on desktop
     if (!isMobile) {
-      inputRef.current?.click()
+      form.setFocus('address')
     }
   }, [form, isMobile])
 
@@ -140,7 +138,6 @@ export function Address({
                       {...field}
                       onChange={field.onChange}
                       placeholder="Your full address"
-                      ref={inputRef}
                       value={field.value}
                     />
                   </FormControl>

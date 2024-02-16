@@ -23,7 +23,7 @@ export function DataTablePagination<TData>({ table }: DataTablePaginationProps<T
   return (
     <div className="flex items-center gap-2">
       <Button
-        className="hidden h-8 w-8 p-0 lg:flex"
+        className="flex h-8 w-8 p-0"
         disabled={!table.getCanPreviousPage()}
         onClick={() => table.setPageIndex(currentPageNumber - 2)}
         variant="secondary"
@@ -34,7 +34,7 @@ export function DataTablePagination<TData>({ table }: DataTablePaginationProps<T
       {visiblePageNumbers[0] > 1 && (
         <>
           <Button
-            className="hidden h-8 w-8 p-0 lg:flex"
+            className="h-8 w-8 p-0"
             onClick={() => table.setPageIndex(0)}
             variant={1 === currentPageNumber ? 'default' : 'outline'}
           >
@@ -47,7 +47,7 @@ export function DataTablePagination<TData>({ table }: DataTablePaginationProps<T
 
       {visiblePageNumbers.map(pageNumber => (
         <Button
-          className="hidden h-8 w-8 p-0 lg:flex"
+          className="h-8 w-8 p-0"
           key={pageNumber}
           onClick={() => table.setPageIndex(pageNumber - 1)}
           variant={pageNumber === currentPageNumber ? 'default' : 'outline'}
@@ -60,7 +60,7 @@ export function DataTablePagination<TData>({ table }: DataTablePaginationProps<T
         <>
           {visiblePageNumbers[visiblePageNumbers.length - 1] + 1 < pages && <DotsHorizontalIcon />}
           <Button
-            className="hidden h-8 w-8 p-0 lg:flex"
+            className="h-8 w-8 p-0"
             onClick={() => table.setPageIndex(pages - 1)}
             variant={pages === currentPageNumber ? 'default' : 'outline'}
           >
@@ -70,7 +70,7 @@ export function DataTablePagination<TData>({ table }: DataTablePaginationProps<T
         </>
       )}
       <Button
-        className="hidden h-8 w-8 p-0 lg:flex"
+        className="h-8 w-8 p-0"
         disabled={!table.getCanNextPage()}
         onClick={() => table.setPageIndex(currentPageNumber)}
         variant="secondary"
