@@ -31,11 +31,7 @@ export function UserActionFormVoterRegistration({ onClose }: { onClose: () => vo
       case SectionNames.ACCOUNT_REGISTRATION:
         return null
       case SectionNames.SUCCESS:
-        return (
-          <div className="p-6">
-            <UserActionFormSuccessScreen {...sectionProps} onClose={onClose} />
-          </div>
-        )
+        return <UserActionFormSuccessScreen {...sectionProps} onClose={onClose} />
       default:
         onTabNotFound()
         return null

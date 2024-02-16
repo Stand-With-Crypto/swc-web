@@ -49,9 +49,7 @@ export function UserActionFormEmailCongresspersonDialog({
               user={user}
             />
           ) : (
-            <div className="px-6">
-              <UserActionFormSuccessScreen onClose={() => dialogProps.onOpenChange(false)} />
-            </div>
+            <UserActionFormSuccessScreen onClose={() => dialogProps.onOpenChange(false)} />
           )}
         </Suspense>
       </DialogContent>
