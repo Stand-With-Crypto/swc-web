@@ -33,6 +33,12 @@ const formatDTSIPerson = (person: DTSIPersonForUserActions) => {
   return dtsiPersonFullName(person)
 }
 
+const getSWCDisplayText = () => (
+  <>
+    <span className="hidden sm:inline"> Stand With Crypto</span>
+    <span className="sm:hidden"> SWC </span>
+  </>
+)
 export const VariantRecentActivityRow = function VariantRecentActivityRow({
   action,
   locale,
@@ -48,13 +54,6 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
     ? `in ${userLocationDetails.administrativeAreaLevel1}`
     : ''
 
-  const getSWCDisplayText = () => (
-    <>
-      <span className="hidden sm:inline"> Stand With Crypto</span>
-      <span className="sm:hidden"> SWC </span>
-    </>
-  )
-
   const getActionSpecificProps = () => {
     switch (action.actionType) {
       case UserActionType.OPT_IN: {
@@ -67,12 +66,10 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
                 </ThirdwebLoginDialog>
               ),
           children: (
-            <>
-              <MainText>
-                New member {newUserStateOrJoin}
-                {getSWCDisplayText()}
-              </MainText>
-            </>
+            <MainText>
+              New member {newUserStateOrJoin}
+              {getSWCDisplayText()}
+            </MainText>
           ),
         }
       }
@@ -83,11 +80,7 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
               <Button>Call yours</Button>
             </UserActionFormCallCongresspersonDialog>
           ),
-          children: (
-            <>
-              <MainText>Call to {formatDTSIPerson(action.person)}</MainText>
-            </>
-          ),
+          children: <MainText>Call to {formatDTSIPerson(action.person)}</MainText>,
         }
       case UserActionType.DONATION:
         return {
@@ -99,16 +92,14 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
             )
           },
           children: (
-            <>
-              <MainText>
-                <FormattedCurrency
-                  amount={action.amount}
-                  currencyCode={action.amountCurrencyCode}
-                  locale={locale}
-                />{' '}
-                donation
-              </MainText>
-            </>
+            <MainText>
+              <FormattedCurrency
+                amount={action.amount}
+                currencyCode={action.amountCurrencyCode}
+                locale={locale}
+              />{' '}
+              donation
+            </MainText>
           ),
         }
       case UserActionType.EMAIL:
@@ -119,11 +110,9 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
             </UserActionFormEmailCongresspersonDialog>
           ),
           children: (
-            <>
-              <MainText>
-                Email to {action.userActionEmailRecipients.map(x => formatDTSIPerson(x.person))}
-              </MainText>
-            </>
+            <MainText>
+              Email to {action.userActionEmailRecipients.map(x => formatDTSIPerson(x.person))}
+            </MainText>
           ),
         }
       case UserActionType.NFT_MINT: {
