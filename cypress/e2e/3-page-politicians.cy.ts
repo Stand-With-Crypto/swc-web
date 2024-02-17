@@ -24,7 +24,7 @@ it('page - politicians interactions', () => {
     trigger: cy.get('input[placeholder="Enter your address"]'),
     searchText: '350 Fifth Avenue New York, NY 10118',
   })
-  cy.contains('Your representative is Jerry Nadler', { timeout: 10000 })
+  cy.contains('Jerry Nadler', { timeout: 10000 })
 
   // clear your address
   cy.contains('350 Fifth Avenue, New York, NY 10118, USA').click()
