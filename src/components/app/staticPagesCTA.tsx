@@ -1,7 +1,7 @@
 'use client'
 
+import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { MaybeAuthenticatedContent } from '@/components/app/authentication/maybeAuthenticatedContent'
-import { ThirdwebLoginDialog } from '@/components/app/authentication/thirdwebLoginContent'
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
@@ -24,9 +24,9 @@ export function StaticPagesCTA() {
             </Button>
           }
         >
-          <ThirdwebLoginDialog>
+          <LoginDialogWrapper>
             <Button>GET STARTED</Button>
-          </ThirdwebLoginDialog>
+          </LoginDialogWrapper>
         </MaybeAuthenticatedContent>
       </div>
     </div>
