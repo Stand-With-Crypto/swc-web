@@ -37,7 +37,8 @@ type SensitiveDataClientUserActionEmail = Pick<
   UserActionEmail,
   'senderEmail' | 'firstName' | 'lastName'
 > & {
-  address: ClientAddress
+  // all SensitiveDataClientUserActionEmail should have addresses, but we want to gracefully fail if google starts hard-capping us for some reason
+  address: ClientAddress | null
   userActionEmailRecipients: SensitiveDataClientUserActionEmailRecipient[]
   actionType: typeof UserActionType.EMAIL
 }
