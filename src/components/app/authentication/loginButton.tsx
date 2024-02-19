@@ -23,12 +23,11 @@ export function LoginDialogWrapper({ children, authenticatedContent }: LoginDial
   const [hasCompletedProfile, setHasCompletedProfile] = React.useState(false)
 
   const { user } = useAuthUser()
-  const { data } = useApiResponseForUserFullProfileInfo({
+  const { data, mutate } = useApiResponseForUserFullProfileInfo({
     keepPreviousData: true,
   })
   const { user: userProfile } = data ?? {}
 
-  console.log({ userProfile })
   const handleFinishProfileDialogOpenChange = React.useCallback(
     (open: boolean) => {
       dialogProps.onOpenChange(open)
@@ -47,7 +46,6 @@ export function LoginDialogWrapper({ children, authenticatedContent }: LoginDial
     if (hasCompletedProfile || !userProfile?.primaryUserCryptoAddress) {
       return
     }
-    console.log({ userProfile })
 
     const localUser = getLocalUser()
 
@@ -71,7 +69,10 @@ export function LoginDialogWrapper({ children, authenticatedContent }: LoginDial
         <DialogContent className="max-w-l w-full">
           <FinishProfileDialog
             onSkip={() => handleFinishProfileDialogOpenChange(false)}
-            onSuccess={() => handleFinishProfileDialogOpenChange(false)}
+            onSuccess={() => {
+              mutate()
+              handleFinishProfileDialogOpenChange(false)
+            }}
           />
         </DialogContent>
       </Dialog>
