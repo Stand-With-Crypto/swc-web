@@ -7,7 +7,7 @@ import { fetchReq } from '@/utils/shared/fetchReq'
 import { apiUrls } from '@/utils/shared/urls'
 
 export function useApiResponseForUserFullProfileInfo(
-  config?: Pick<FullConfiguration, 'revalidateOnMount'>,
+  config?: Pick<FullConfiguration, 'revalidateOnMount' | 'keepPreviousData'>,
 ) {
   return useSWR(
     apiUrls.userFullProfileInfo(),

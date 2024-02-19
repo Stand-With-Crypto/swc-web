@@ -3,7 +3,7 @@ import React from 'react'
 import { ConnectEmbed, ConnectEmbedProps } from '@thirdweb-dev/react'
 import { noop } from 'lodash'
 import { useRouter } from 'next/navigation'
-import { useSWRConfig } from 'swr'
+import { Arguments, useSWRConfig } from 'swr'
 
 import { Dialog, DialogContent, DialogProps, DialogTrigger } from '@/components/ui/dialog'
 import { NextImage } from '@/components/ui/image'
@@ -12,6 +12,7 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { useDialog } from '@/hooks/useDialog'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
+import { apiUrls } from '@/utils/shared/urls'
 import { theme } from '@/utils/web/thirdweb/theme'
 
 export function ThirdwebLoginDialog({
@@ -39,10 +40,16 @@ export function ThirdwebLoginDialog({
               dialogProps.onOpenChange(false)
               onLogin()
 
+              // These are keys which the mutation occurs on login
+              // If we reset the cache we can have a situation where the value goes from `value => undefined => value`
+              const excludedKeysFromCacheReset: Arguments[] = [apiUrls.userFullProfileInfo()]
+
               // There are a bunch of SWR queries that might show stale unauthenticated data unless we clear the cache.
               // This ensures we refetch using the users authenticated state
               // https://swr.vercel.app/docs/advanced/cache#modify-the-cache-data
-              mutate(() => true, undefined, { revalidate: true })
+              mutate(arg => !excludedKeysFromCacheReset.includes(arg), undefined, {
+                revalidate: true,
+              })
             },
           }}
         />

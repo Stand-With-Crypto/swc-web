@@ -5,20 +5,22 @@ import { UserENSData } from '@/data/web3/types'
 import { censorWord } from '@/utils/server/obscenityMatcher'
 
 export type ClientUserCryptoAddress = ClientModel<
-  Pick<UserCryptoAddress, 'id' | 'cryptoAddress' | 'cryptoNetwork'>
+  Pick<UserCryptoAddress, 'id' | 'cryptoAddress' | 'cryptoNetwork' | 'datetimeUpdated'>
 >
 
 export const getClientUserCryptoAddress = (record: UserCryptoAddress): ClientUserCryptoAddress => {
-  const { id, cryptoAddress, cryptoNetwork } = record
+  const { id, cryptoAddress, cryptoNetwork, datetimeUpdated } = record
   return getClientModel({
     id,
     cryptoAddress,
     cryptoNetwork,
+    datetimeUpdated,
   })
 }
 
 export type ClientUserCryptoAddressWithENSData = ClientModel<
-  Pick<UserCryptoAddress, 'id' | 'cryptoAddress' | 'cryptoNetwork'> & UserENSData
+  Pick<UserCryptoAddress, 'id' | 'cryptoAddress' | 'cryptoNetwork' | 'datetimeUpdated'> &
+    UserENSData
 >
 
 export const getClientUserCryptoAddressWithENSData = (

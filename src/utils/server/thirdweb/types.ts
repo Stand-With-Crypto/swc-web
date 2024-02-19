@@ -1,1 +1,1 @@
-export type AuthSessionMetadata = { userId: string; isNewlyCreatedUser: boolean }
+export type AuthSessionMetadata = { userId: string }

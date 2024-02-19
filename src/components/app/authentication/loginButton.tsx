@@ -1,5 +1,6 @@
 import React from 'react'
 import { useENS } from '@thirdweb-dev/react'
+import { isAfter, subMinutes } from 'date-fns'
 
 import { LazyUpdateUserProfileForm } from '@/components/app/updateUserProfileForm/lazyLoad'
 import { Dialog, DialogContent } from '@/components/ui/dialog'
@@ -22,7 +23,12 @@ export function LoginDialogWrapper({ children, authenticatedContent }: LoginDial
   const [hasCompletedProfile, setHasCompletedProfile] = React.useState(false)
 
   const { user } = useAuthUser()
+  const { data } = useApiResponseForUserFullProfileInfo({
+    keepPreviousData: true,
+  })
+  const { user: userProfile } = data ?? {}
 
+  console.log({ userProfile })
   const handleFinishProfileDialogOpenChange = React.useCallback(
     (open: boolean) => {
       dialogProps.onOpenChange(open)
@@ -38,16 +44,23 @@ export function LoginDialogWrapper({ children, authenticatedContent }: LoginDial
   )
 
   React.useEffect(() => {
-    if (!user || hasCompletedProfile) {
+    if (hasCompletedProfile || !userProfile?.primaryUserCryptoAddress) {
       return
     }
+    console.log({ userProfile })
 
     const localUser = getLocalUser()
 
-    if (!!user.session?.isNewlyCreatedUser && !localUser.persisted?.hasSeenCompleteProfilePrompt) {
+    const { datetimeUpdated } = userProfile.primaryUserCryptoAddress
+    const cryptoAddressHasBeenUpdatedRecently = isAfter(
+      new Date(datetimeUpdated),
+      subMinutes(new Date(), 1),
+    )
+
+    if (cryptoAddressHasBeenUpdatedRecently && !localUser.persisted?.hasSeenCompleteProfilePrompt) {
       handleFinishProfileDialogOpenChange(true)
     }
-  }, [user, dialogProps, hasCompletedProfile, handleFinishProfileDialogOpenChange])
+  }, [user, dialogProps, hasCompletedProfile, handleFinishProfileDialogOpenChange, userProfile])
 
   return (
     <>
