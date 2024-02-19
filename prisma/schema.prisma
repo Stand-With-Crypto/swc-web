@@ -223,7 +223,7 @@ model UserCryptoAddress {
   dataCreationMethod               DataCreationMethod         @default(BY_USER) @map("data_creation_method")
   // because we are populating this table using historical data where we didn't have the auth flow, we need to differentiate between 
   // addresses that exist but haven't been verified vs. addresses that have been verified via the auth flow
-  hasBeenVerifiedViaAuth           Boolean                    @default(true)
+  hasBeenVerifiedViaAuth           Boolean                    @default(true) @map("has_been_verified_via_auth")
   embeddedWalletUserEmailAddressId String?                    @unique @map("embedded_wallet_user_email_address_id")
   embeddedWalletUserEmailAddress   UserEmailAddress?          @relation(fields: [embeddedWalletUserEmailAddressId], references: [id])
 
