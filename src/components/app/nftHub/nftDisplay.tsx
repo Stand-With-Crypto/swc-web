@@ -24,7 +24,8 @@ const retrieveNFTEnumKey = (nftSlug: string) => {
   }
   return nftEnumKey
 }
-const size = '330px'
+const height = '335px'
+const width = '335px'
 
 const ButtonWrapper = USER_ACTION_ROW_CTA_INFO[UserActionType.NFT_MINT].WrapperComponent
 
@@ -50,13 +51,13 @@ export function NFTDisplay({ userActions }: NFTDisplayProps) {
   const renderNfts = () => {
     return userNfts.map(nft => {
       return (
-        <div className="overflow-hidden rounded-3xl" key={nft.name}>
+        <div className="overflow-hidden rounded-3xl bg-gray-100" key={nft.name}>
           <NextImage
             alt={nft.name}
-            height={330}
-            src={'/nfts/call.gif'}
+            height={335}
+            src={nft.image}
             style={{ borderRadius: '24px' }}
-            width={330}
+            width={335}
           />
         </div>
       )
@@ -67,16 +68,16 @@ export function NFTDisplay({ userActions }: NFTDisplayProps) {
     const emptySpots = 3 - (numNfts % 3)
     return Array.from({ length: emptySpots }, (_, index) => (
       <div
-        className="rounded-3xl bg-gray-50"
+        className="rounded-3xl bg-gray-100"
         key={index}
-        style={{ height: `${size}`, width: `${size}` }}
+        style={{ height: `${height}`, width: `${width}` }}
       ></div>
     ))
   }
 
   return (
     <>
-      <div className="flex w-full flex-wrap items-center justify-between gap-4  sm:flex-col md:flex-col lg:flex-row xl:flex-row">
+      <div className="flex w-full flex-row flex-wrap items-center justify-center gap-4 sm:flex-col md:flex-col lg:flex-row lg:justify-between xl:flex-row xl:justify-between">
         {renderNfts()}
         {renderEmptySpots()}
       </div>
