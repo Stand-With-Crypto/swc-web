@@ -15,17 +15,19 @@ type NFTDisplayProps = {
 type NFTImages = {
   name: string
   image: string
+  width: number
+  height: number
 }
 
-const retrieveNFTEnumKey = (nftSlug: string) => {
-  const nftEnumKey = null
-  for (const key in NFTSlug) {
-    return NFTSlug[key as keyof typeof NFTSlug] === nftSlug ? key : null
-  }
-  return nftEnumKey
-}
-const height = '335px'
-const width = '335px'
+// const retrieveNFTEnumKey = (nftSlug: string) => {
+//   const nftEnumKey = null
+//   for (const key in NFTSlug) {
+//     return NFTSlug[key as keyof typeof NFTSlug] === nftSlug ? key : null
+//   }
+//   return nftEnumKey
+// }
+const HEIGHT = '335px'
+const WIDTH = '335px'
 
 const ButtonWrapper = USER_ACTION_ROW_CTA_INFO[UserActionType.NFT_MINT].WrapperComponent
 
@@ -33,14 +35,10 @@ export function NFTDisplay({ userActions }: NFTDisplayProps) {
   const userNfts: NFTImages[] = userActions.reduce(
     (acc: NFTImages[], action: SensitiveDataClientUserAction): NFTImages[] => {
       const nftSlug = action.nftMint?.nftSlug
-
+      console.log('nftSlug', nftSlug)
       if (nftSlug) {
-        const enumKey = retrieveNFTEnumKey(nftSlug)
-
-        if (enumKey) {
-          const { name, image } = NFT_CLIENT_METADATA[NFTSlug[enumKey as keyof typeof NFTSlug]]
-          acc.push({ name, image: image.url })
-        }
+        const { name, image } = NFT_CLIENT_METADATA[nftSlug as keyof typeof NFT_CLIENT_METADATA]
+        acc.push({ name, image: image.url, width: image.width, height: image.height })
       }
       return acc
     },
@@ -50,15 +48,13 @@ export function NFTDisplay({ userActions }: NFTDisplayProps) {
 
   const renderNfts = () => {
     return userNfts.map(nft => {
+      const { name, height, width, image } = nft
       return (
-        <div className="overflow-hidden rounded-3xl bg-gray-100" key={nft.name}>
-          <NextImage
-            alt={nft.name}
-            height={335}
-            src={nft.image}
-            style={{ borderRadius: '24px' }}
-            width={335}
-          />
+        <div
+          className="max-w-355 overflow-hidden rounded-3xl rounded-3xl bg-gray-100"
+          key={nft.name}
+        >
+          <NextImage alt={name} height={height} src={image} width={width} />
         </div>
       )
     })
@@ -70,14 +66,14 @@ export function NFTDisplay({ userActions }: NFTDisplayProps) {
       <div
         className="rounded-3xl bg-gray-100"
         key={index}
-        style={{ height: `${height}`, width: `${width}` }}
+        style={{ height: `${HEIGHT}`, width: `${WIDTH}` }}
       ></div>
     ))
   }
 
   return (
     <>
-      <div className="flex w-full flex-row flex-wrap items-center justify-center gap-4 sm:flex-col md:flex-col lg:flex-row lg:justify-between xl:flex-row xl:justify-between">
+      <div className=" w-full flex-wrap items-center justify-center gap-4 lg:flex-row lg:justify-between xl:flex-row xl:justify-between">
         {renderNfts()}
         {renderEmptySpots()}
       </div>

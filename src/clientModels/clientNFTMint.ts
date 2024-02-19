@@ -3,10 +3,9 @@ import { NFTMint } from '@prisma/client'
 import { ClientModel, getClientModel } from '@/clientModels/utils'
 
 export type ClientNFTMint = ClientModel<
-  Pick<NFTMint, 'id' | 'costAtMintCurrencyCode'> & {
+  Pick<NFTMint, 'id' | 'costAtMintCurrencyCode' | 'nftSlug'> & {
     costAtMint: number
     costAtMintUsd: number
-    nftSlug: string
   }
 >
 
