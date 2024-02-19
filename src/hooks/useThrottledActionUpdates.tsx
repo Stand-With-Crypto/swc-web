@@ -1,6 +1,7 @@
-import { useEffect, useState, useRef } from 'react'
-import { sleep } from '@/utils/shared/sleep'
+import { useEffect, useRef, useState } from 'react'
+
 import { RecentActivityRowProps } from '@/components/app/recentActivityRow/recentActivityRow'
+import { sleep } from '@/utils/shared/sleep'
 
 export function useThrottledActionUpdates(actions: RecentActivityRowProps['action'][]) {
   const [throttledActions, setThrottledActions] = useState(actions)
