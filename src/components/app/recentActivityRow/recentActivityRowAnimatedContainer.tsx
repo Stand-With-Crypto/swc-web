@@ -6,8 +6,8 @@ import {
   RecentActivityRowProps,
 } from '@/components/app/recentActivityRow/recentActivityRow'
 import { useLocale } from '@/hooks/useLocale'
-import { SupportedLocale } from '@/intl/locales'
 import { useThrottledActionUpdates } from '@/hooks/useThrottledActionUpdates'
+import { SupportedLocale } from '@/intl/locales'
 import { cn } from '@/utils/web/cn'
 
 type AnimatedActivityRowProps = React.HTMLAttributes<HTMLDivElement> & {
@@ -44,10 +44,10 @@ function AnimatedActivityRow({ action, locale, className }: AnimatedActivityRowP
   return (
     <motion.div
       {...rowAnimation}
-      style={{ position: isPresent ? 'static' : 'absolute' }}
+      className={cn('relative', className)}
       key={action.id}
       layout
-      className={cn('relative', className)}
+      style={{ position: isPresent ? 'static' : 'absolute' }}
     >
       <RecentActivityRow action={action} locale={locale} />
       <motion.div {...glowAnimation} className="absolute -mt-6 h-4 w-full blur-2xl" />
@@ -68,10 +68,10 @@ export function RecentActivityRowAnimatedContainer({
       <div className="relative">
         {throttledActions.map((action, index) => (
           <AnimatedActivityRow
-            key={action.id}
             action={action}
-            locale={locale}
             className={cn(index !== 0 && 'pt-8 lg:pt-10')}
+            key={action.id}
+            locale={locale}
           />
         ))}
       </div>
