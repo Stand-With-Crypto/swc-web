@@ -58,11 +58,11 @@ export function UserActionFormSuccessScreenNextAction({
               ].getDeeplinkUrl({ locale }),
             )
           }
-          state="unknown"
+          state="hidden"
         />
       ) : (
         <UserActionRowCTA
-          state="unknown"
+          state="hidden"
           {...nextAction}
           WrapperComponent={USER_ACTION_ROW_CTA_INFO[nextAction.actionType].WrapperComponent}
         />

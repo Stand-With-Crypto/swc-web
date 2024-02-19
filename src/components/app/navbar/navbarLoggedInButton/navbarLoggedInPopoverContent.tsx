@@ -92,7 +92,7 @@ function UserHeading(props: {
       toast.success('Copied to clipboard')
     }
   }, [error, value, handleClipboardError])
-
+  const shouldDisplayCryptoAddress = !user.hasEmbeddedWallet
   const handleCopyNameToClipboard = React.useCallback(() => {
     const dataToWrite = getFullSensitiveDataUserDisplayName(user)
     if (!dataToWrite) {
@@ -107,22 +107,26 @@ function UserHeading(props: {
 
   return (
     <>
-      <div className="min-w-[36px]">
+      <div className="flex-shrink-0">
         <UserAvatar size={36} user={user} />
       </div>
-      <div className="flex-1">
-        <div className="flex w-full items-center justify-between">
-          <p>{getSensitiveDataUserDisplayName(user)}</p>
-          <Button className="h-auto p-1" onClick={handleCopyNameToClipboard} variant="ghost">
-            <Copy height={16} width={16} />
-          </Button>
+      {shouldDisplayCryptoAddress || !user.primaryUserEmailAddress ? (
+        <div className="flex-1">
+          <div className="flex w-full items-center justify-between">
+            <p>{getSensitiveDataUserDisplayName(user)}</p>
+            <Button className="h-auto p-1" onClick={handleCopyNameToClipboard} variant="ghost">
+              <Copy height={16} width={16} />
+            </Button>
+          </div>
+          {user.primaryUserEmailAddress?.emailAddress && (
+            <p className="text-ellipsis text-xs text-muted-foreground">
+              {maybeEllipsisText(user.primaryUserEmailAddress?.emailAddress, 30)}
+            </p>
+          )}
         </div>
-        {user.primaryUserEmailAddress?.emailAddress && (
-          <p className="text-ellipsis text-xs text-muted-foreground">
-            {maybeEllipsisText(user.primaryUserEmailAddress?.emailAddress, 30)}
-          </p>
-        )}
-      </div>
+      ) : (
+        <p className="truncate">{user.primaryUserEmailAddress.emailAddress}</p>
+      )}
     </>
   )
 }

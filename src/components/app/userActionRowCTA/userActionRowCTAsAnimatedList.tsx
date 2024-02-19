@@ -6,7 +6,6 @@ import { motion } from 'framer-motion'
 
 import { UserActionRowCTA } from '@/components/app/userActionRowCTA'
 import { USER_ACTION_ROW_CTA_INFO } from '@/components/app/userActionRowCTA/constants'
-import { useIsDesktop } from '@/hooks/useIsDesktop'
 import { cn } from '@/utils/web/cn'
 import { USER_ACTION_TYPE_PRIORITY_ORDER } from '@/utils/web/userActionUtils'
 
@@ -19,7 +18,6 @@ export function UserActionRowCTAsAnimatedList({
   performedUserActionTypes?: UserActionType[]
   excludeUserActionTypes?: UserActionType[]
 }) {
-  const isDesktop = useIsDesktop({ defaultState: false })
   const filteredActions = useMemo(
     () =>
       !excludeUserActionTypes
@@ -39,20 +37,12 @@ export function UserActionRowCTAsAnimatedList({
             className={cn(index !== 0 && 'pt-4')}
             initial={{
               opacity: 0,
-              /*
-            On iOS mobile, if we do the sideways animation the entire viewport will have an overscroll (because the content if past the screen until it animates in)
-            To prevent this, we want a simpler, vertical animation on screen sizes smaller than desktop
-            */
-              transform: isDesktop
-                ? index % 2
-                  ? `translateX(-60px)`
-                  : `translateX(60px)`
-                : `translateY(60px)`,
+              transform: `translateY(60px)`,
             }}
-            key={`${actionType}-${isDesktop.toString()}`}
+            key={actionType}
             transition={{ duration: 0.8 }}
             viewport={{ once: true, margin: '-150px' }}
-            whileInView={{ opacity: 1, transform: isDesktop ? `translateX(0)` : `translateY(0)` }}
+            whileInView={{ opacity: 1, transform: 'translateY(0)' }}
           >
             <UserActionRowCTA
               state={

@@ -67,10 +67,7 @@ export function Address({
   const isMobile = useIsMobile({ defaultState: true })
   const initialAddressOnLoad = useRef(user?.address?.googlePlaceId)
   const inputRef = useRef<HTMLInputElement | null>(null)
-
   useEffect(() => {
-    form.setFocus('address')
-    // we only want the input to auto-open on desktop
     if (!isMobile) {
       inputRef.current?.click()
     }

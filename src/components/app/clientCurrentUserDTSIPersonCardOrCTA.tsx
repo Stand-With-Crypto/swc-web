@@ -1,6 +1,5 @@
 'use client'
-import { useCallback, useEffect, useState } from 'react'
-import _ from 'lodash'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
@@ -15,8 +14,11 @@ import {
 } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { useHasHydrated } from '@/hooks/useHasHydrated'
 import { SupportedLocale } from '@/intl/locales'
-import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
-import { possessive } from '@/utils/shared/possessive'
+import { getDTSIFormattedShortPersonRole } from '@/utils/dtsi/dtsiPersonRoleUtils'
+import {
+  dtsiPersonFullName,
+  dtsiPersonPoliticalAffiliationCategoryAbbreviation,
+} from '@/utils/dtsi/dtsiPersonUtils'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { getLocalUser, setLocalUserPersistedValues } from '@/utils/web/clientLocalUser'
 import { GooglePlaceAutocompletePrediction } from '@/utils/web/googlePlaceUtils'
@@ -50,8 +52,14 @@ export function ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: Suppo
     [_setAddress],
   )
   const res = useGetDTSIPeopleFromAddress(address?.description || '')
+
+  // setting this as an auto-updating ref so that eslint doesn't complain
+  // when we don't add address as a dependency to the useEffect below
+  const addressRef = useRef(address)
+  addressRef.current = address
+
   useEffect(() => {
-    if (userAddress) {
+    if (!addressRef.current && userAddress) {
       _setAddress({
         place_id: userAddress.googlePlaceId,
         description: userAddress.formattedDescription,
@@ -82,7 +90,6 @@ export function ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: Suppo
     )
   }
   const person = res.data
-  const score = person.manuallyOverriddenStanceScore || person.computedStanceScore
   return (
     <div>
       <p className="mb-3 text-xl font-bold">Your representative</p>
@@ -92,36 +99,35 @@ export function ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: Suppo
           {address.description}
         </button>
       </p>
-      <div className="flex flex-col items-center justify-between gap-4 rounded-3xl bg-blue-50 p-5 text-left md:flex-row md:gap-10">
-        <div className="flex flex-row items-center gap-4 text-sm md:text-base">
+      <div className="mx-auto flex max-w-xl flex-col justify-between gap-4 rounded-3xl bg-gray-100 p-5 text-left sm:flex-row sm:items-center sm:gap-10">
+        <div className="flex flex-row items-center gap-4 text-sm sm:text-base">
           <div className="relative">
             <DTSIAvatar person={person} size={60} />
-            <div className="absolute bottom-[-8px] right-[-8px]">
+            <div className="absolute bottom-[5px] right-[-8px]">
               <DTSIFormattedLetterGrade person={person} size={25} />
             </div>
           </div>
           <div>
-            <div className="font-bold">Your representative is {dtsiPersonFullName(person)}</div>
-            <div className="text-fontcolor-muted">
-              {_.isNil(score) || score < 60 ? (
-                <>
-                  Learn how to change {possessive(person.firstNickname || person.firstName)} stance
-                  on crypto.
-                </>
-              ) : (
-                <>
-                  Let {possessive(person.firstNickname || person.firstName)} know how important
-                  pro-crypto politicians are to you.
-                </>
-              )}
+            <div className="text-xl font-bold">
+              {dtsiPersonFullName(person)}{' '}
+              {person.politicalAffiliationCategory
+                ? `(${dtsiPersonPoliticalAffiliationCategoryAbbreviation(
+                    person.politicalAffiliationCategory,
+                  )})`
+                : ''}
             </div>
+            {person.primaryRole && (
+              <div className="text-fontcolor-muted">
+                {getDTSIFormattedShortPersonRole(person.primaryRole)}
+              </div>
+            )}
           </div>
         </div>
-        <div className="flex items-center gap-5 md:gap-2">
+        <div className="flex items-center gap-5">
           <UserActionFormCallCongresspersonDialog>
-            <Button size="lg">Call</Button>
+            <Button>Call</Button>
           </UserActionFormCallCongresspersonDialog>
-          <Button asChild variant="link">
+          <Button asChild>
             <InternalLink href={getIntlUrls(locale).politicianDetails(person.slug)}>
               View profile
             </InternalLink>

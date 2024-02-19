@@ -1,7 +1,11 @@
 import { useCallback, useMemo, useState } from 'react'
 import { ArrowUpRight } from 'lucide-react'
 
-import { SectionNames } from '@/components/app/userActionFormVoterRegistration/constants'
+import {
+  REGISTRATION_URLS_BY_STATE,
+  SectionNames,
+  StateCode,
+} from '@/components/app/userActionFormVoterRegistration/constants'
 import { UserActionFormVoterRegistrationLayout } from '@/components/app/userActionFormVoterRegistration/sections/layout'
 import { Button } from '@/components/ui/button'
 import { ExternalLink } from '@/components/ui/link'
@@ -13,10 +17,12 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { UseSectionsReturn } from '@/hooks/useSections'
-import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
+import {
+  getUSStateNameFromStateCode,
+  US_STATE_CODE_TO_DISPLAY_NAME_MAP,
+} from '@/utils/shared/usStateUtils'
 
-const STATES = Object.values(US_STATE_CODE_TO_DISPLAY_NAME_MAP)
-type State = (typeof STATES)[number]
+const STATE_CODES = Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP)
 
 const COPY = {
   register: {
@@ -32,6 +38,11 @@ const COPY = {
     step2Cta: 'Check',
   },
 } as const
+
+const WY_DISCLAIMER =
+  'Wyoming does not provide online voter registration checks. But you can still get the free NFT.'
+const ND_DISCLAIMER =
+  'North Dakota does not require voter registration. But you can still get the free NFT.'
 
 const LIST_ITEM_STYLE = 'flex flex-row items-center gap-4 py-4'
 
@@ -68,6 +79,12 @@ function Step3Svg() {
   )
 }
 
+function disclaimer(stateCode: StateCode | undefined) {
+  if (stateCode === 'ND') return ND_DISCLAIMER
+  if (stateCode === 'WY') return WY_DISCLAIMER
+  return 'Complete registration at step 2 to claim NFT'
+}
+
 interface VoterRegistrationFormProps extends UseSectionsReturn<SectionNames> {
   checkRegistration?: boolean
 }
@@ -76,21 +93,40 @@ export function VoterRegistrationForm({
   checkRegistration,
   goToSection,
 }: VoterRegistrationFormProps) {
-  const [state, setState] = useState<State>()
+  const [stateCode, setStateCode] = useState<StateCode>()
+  const [completeStep2, setCompleteStep2] = useState(false)
 
   const { title, subtitle, step2, step2Cta } = useMemo(
     () => COPY[checkRegistration ? 'checkRegistration' : 'register'],
     [checkRegistration],
   )
 
+  const link = stateCode
+    ? REGISTRATION_URLS_BY_STATE[stateCode][
+        checkRegistration ? 'checkRegistrationUrl' : 'registerUrl'
+      ]
+    : undefined
+
   const handleOnValueChange = useCallback((value: string) => {
-    if (STATES.includes(value)) {
-      setState(value as State)
+    if (STATE_CODES.includes(value)) {
+      setCompleteStep2(false)
+      setStateCode(value as StateCode)
     }
   }, [])
 
+  const handleStep2Cta = useCallback(() => {
+    setCompleteStep2(true)
+  }, [])
+
+  const handleClaimNft = useCallback(() => {
+    // Replace with server action
+    goToSection(SectionNames.SUCCESS)
+  }, [goToSection])
+
+  const handleOnBack = useCallback(() => goToSection(SectionNames.SURVEY), [goToSection])
+
   return (
-    <UserActionFormVoterRegistrationLayout onBack={() => goToSection(SectionNames.SURVEY)}>
+    <UserActionFormVoterRegistrationLayout onBack={handleOnBack}>
       <UserActionFormVoterRegistrationLayout.Container>
         <UserActionFormVoterRegistrationLayout.Heading subtitle={subtitle} title={title} />
         <ol className="flex flex-col gap-2 justify-self-center">
@@ -98,7 +134,7 @@ export function VoterRegistrationForm({
             <Step1Svg />
             <div className="flex flex-grow flex-row items-center justify-between">
               Choose your state
-              <Select onValueChange={handleOnValueChange} value={state}>
+              <Select onValueChange={handleOnValueChange} value={stateCode}>
                 <SelectTrigger
                   className="w-[195px] flex-shrink-0"
                   data-testid="state-filter-trigger"
@@ -106,40 +142,45 @@ export function VoterRegistrationForm({
                   <SelectValue placeholder="State" />
                 </SelectTrigger>
                 <SelectContent>
-                  {STATES.map(stateName => (
-                    <SelectItem key={stateName} value={stateName}>
-                      {stateName}
+                  {Object.entries(US_STATE_CODE_TO_DISPLAY_NAME_MAP).map(([key]) => (
+                    <SelectItem key={key} value={key}>
+                      {getUSStateNameFromStateCode(key)}
                     </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
             </div>
           </li>
-          <li className={LIST_ITEM_STYLE}>
-            <Step2Svg />
-            <div className="flex flex-grow flex-row items-center justify-between">
-              {step2}
-              <Button asChild variant="secondary">
-                <ExternalLink href="https://www.google.com/">
-                  <div className="flex flex-row items-center justify-center gap-2">
-                    {step2Cta} <ArrowUpRight />
-                  </div>
-                </ExternalLink>
-              </Button>
-            </div>
-          </li>
-          <li className={LIST_ITEM_STYLE}>
-            <Step3Svg />
-            Return here to claim your free NFT
-          </li>
+          <div className={stateCode === 'ND' || stateCode === 'WY' ? 'invisible' : ''}>
+            <li className={LIST_ITEM_STYLE}>
+              <Step2Svg />
+              <div className="flex flex-grow flex-row items-center justify-between">
+                {step2}
+                <Button asChild disabled={!link} onClick={handleStep2Cta} variant="secondary">
+                  <ExternalLink href={link}>
+                    <div className="flex flex-row items-center justify-center gap-2">
+                      {step2Cta} <ArrowUpRight />
+                    </div>
+                  </ExternalLink>
+                </Button>
+              </div>
+            </li>
+            <li className={LIST_ITEM_STYLE}>
+              <Step3Svg />
+              Return here to claim your free NFT
+            </li>
+          </div>
         </ol>
       </UserActionFormVoterRegistrationLayout.Container>
       <UserActionFormVoterRegistrationLayout.Footer>
-        <div className="flex flex-grow flex-row items-center justify-between">
-          <span className="text-sm text-fontcolor-muted">
-            Complete registration at step 2 to claim NFT
-          </span>
-          <Button onClick={() => goToSection(SectionNames.SUCCESS)}>Claim NFT</Button>
+        <div className="flex flex-grow flex-row items-center justify-between gap-8">
+          <span className="w-2/3 text-sm text-fontcolor-muted">{disclaimer(stateCode)}</span>
+          <Button
+            disabled={stateCode !== 'WY' && stateCode !== 'ND' && !completeStep2}
+            onClick={handleClaimNft}
+          >
+            Claim NFT
+          </Button>
         </div>
       </UserActionFormVoterRegistrationLayout.Footer>
     </UserActionFormVoterRegistrationLayout>

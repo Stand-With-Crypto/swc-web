@@ -26,6 +26,7 @@
     "newbranch": "npm i && npx prisma generate && npm run codegen",
     "initial": "npx prisma generate && npm run codegen && npm run intl:extract-compile && npm run db:seed",
     "e2e:run": "NEXT_PUBLIC_IS_CYPRESS=true start-server-and-test 'npm run dev -- -p 3001 & npx inngest-cli@latest dev --no-discovery -u http://localhost:3001/api/inngest' http://localhost:3001 \"cypress open --e2e --config baseUrl=http://localhost:3001\"",
+    "e2e:run-headless-built": "NEXT_PUBLIC_IS_CYPRESS=true start-server-and-test 'npm run start -- -p 3001 & npx inngest-cli@latest dev --no-discovery -u http://localhost:3001/api/inngest' http://localhost:3001 \"cypress run --e2e --config baseUrl=http://localhost:3001\"",
     "e2e:run-headless": "NEXT_PUBLIC_IS_CYPRESS=true start-server-and-test 'npm run dev -- -p 3001 & npx inngest-cli@latest dev --no-discovery -u http://localhost:3001/api/inngest' http://localhost:3001 \"cypress run --e2e --config baseUrl=http://localhost:3001\""
   },
   "prisma": {

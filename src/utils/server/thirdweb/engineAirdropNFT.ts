@@ -6,6 +6,7 @@ import {
   thirdwebEngine,
 } from '@/utils/server/thirdweb/thirdwebEngine'
 import { getLogger } from '@/utils/shared/logger'
+import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
 const logger = getLogger(`engineAirdropNFT`)
 
@@ -16,6 +17,12 @@ export async function engineAirdropNFT(
 ) {
   logger.info('Triggered')
   try {
+    if (NEXT_PUBLIC_ENVIRONMENT === 'local' && !process.env.TRIGGER_AIRDROPS_ON_LOCAL) {
+      logger.info(
+        "Skipping airdrop on local environment. If you'd like to trigger airdrops on local, set TRIGGER_AIRDROPS_ON_LOCAL=true in your .env file.",
+      )
+      return 'local'
+    }
     const result = await thirdwebEngine.erc721.claimTo(
       CHAIN_ID,
       contractAddress,

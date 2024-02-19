@@ -22,7 +22,7 @@ export function PaginationLinks({
   const visiblePageNumbers = _.times(Math.min(3, totalPages), i => i + leftMostVisiblePageNumber)
   return (
     <div className="flex items-center gap-2">
-      <Button asChild className="hidden h-8 w-8 p-0 lg:flex" variant="secondary">
+      <Button asChild className="h-8 w-8 p-0" variant="secondary">
         <InternalLink href={getPageUrl(currentPageNumber - 1) || '#'}>
           <span className="sr-only">Go to previous page</span>
           <ChevronLeftIcon className="h-4 w-4" />
@@ -32,7 +32,7 @@ export function PaginationLinks({
         <>
           <Button
             asChild
-            className="hidden h-8 w-8 p-0 lg:flex"
+            className="h-8 w-8 p-0"
             variant={1 === currentPageNumber ? 'default' : 'outline'}
           >
             <InternalLink href={getPageUrl(1)}>
@@ -47,7 +47,7 @@ export function PaginationLinks({
       {visiblePageNumbers.map(pageNumber => (
         <Button
           asChild
-          className="hidden h-8 w-8 p-0 lg:flex"
+          className="h-8 w-8 p-0"
           key={pageNumber}
           variant={pageNumber === currentPageNumber ? 'default' : 'outline'}
         >
@@ -64,7 +64,7 @@ export function PaginationLinks({
           )}
           <Button
             asChild
-            className="hidden h-8 w-8 p-0 lg:flex"
+            className="h-8 w-8 p-0"
             variant={totalPages === currentPageNumber ? 'default' : 'outline'}
           >
             <InternalLink href={getPageUrl(totalPages) || '#'}>
@@ -74,7 +74,7 @@ export function PaginationLinks({
           </Button>
         </>
       )}
-      <Button asChild className="hidden h-8 w-8 p-0 lg:flex" variant="secondary">
+      <Button asChild className="h-8 w-8 p-0" variant="secondary">
         <InternalLink href={getPageUrl(currentPageNumber + 1)}>
           <span className="sr-only">Go to next page</span>
           <ChevronRightIcon className="h-4 w-4" />

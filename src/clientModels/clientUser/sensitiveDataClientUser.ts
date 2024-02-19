@@ -22,10 +22,11 @@ export type SensitiveDataClientUser = ClientModel<
     | 'hasOptedInToSms'
     | 'referralId'
   > & {
+    hasEmbeddedWallet: boolean
     datetimeCreated: string
     datetimeUpdated: string
     primaryUserCryptoAddress: ClientUserCryptoAddress | null
-    primaryUserEmailAddress: Pick<UserEmailAddress, 'emailAddress' | 'source'> | null
+    primaryUserEmailAddress: Pick<UserEmailAddress, 'emailAddress'> | null
   }
 >
 
@@ -54,10 +55,10 @@ export const getSensitiveDataClientUser = (
     firstName,
     lastName,
     referralId,
+    hasEmbeddedWallet: Boolean(primaryUserCryptoAddress?.embeddedWalletUserEmailAddressId),
     primaryUserEmailAddress: primaryUserEmailAddress
       ? {
           emailAddress: primaryUserEmailAddress.emailAddress,
-          source: primaryUserEmailAddress.source,
         }
       : null,
     primaryUserCryptoAddress: primaryUserCryptoAddress

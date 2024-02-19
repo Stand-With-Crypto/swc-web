@@ -2,7 +2,6 @@
 import { useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { UserEmailAddressSource } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
@@ -55,11 +54,8 @@ export function UpdateUserProfileForm({
   onSkip?: () => void
 }) {
   const router = useRouter()
-  const isEmbeddedWalletUser =
-    user.primaryUserEmailAddress?.source === UserEmailAddressSource.THIRDWEB_EMBEDDED_AUTH
-
   const defaultValues = useRef({
-    isEmbeddedWalletUser,
+    isEmbeddedWalletUser: user.hasEmbeddedWallet,
     firstName: user.firstName || '',
     lastName: user.lastName || '',
     emailAddress: user.primaryUserEmailAddress?.emailAddress || '',
@@ -120,7 +116,7 @@ export function UpdateUserProfileForm({
         </div>
 
         <div className="space-y-4">
-          {isEmbeddedWalletUser || (
+          {user.hasEmbeddedWallet || (
             <FormField
               control={form.control}
               name="emailAddress"

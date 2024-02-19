@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker'
-import { Prisma, UserAction, UserActionType } from '@prisma/client'
+import { DataCreationMethod, Prisma, UserAction, UserActionType } from '@prisma/client'
 
 import { fakerFields } from '@/mocks/fakerUtils'
 import { mockCommonDatetimes } from '@/mocks/mockCommonDatetimes'
@@ -26,5 +26,6 @@ export function mockUserAction(): UserAction {
     nftMintId: null,
     id: fakerFields.id(),
     userId: fakerFields.id(),
+    dataCreationMethod: DataCreationMethod.BY_USER,
   }
 }

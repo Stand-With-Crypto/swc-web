@@ -1,5 +1,11 @@
 import { faker } from '@faker-js/faker'
-import { Prisma, User, UserInformationVisibility, UserInternalStatus } from '@prisma/client'
+import {
+  DataCreationMethod,
+  Prisma,
+  User,
+  UserInformationVisibility,
+  UserInternalStatus,
+} from '@prisma/client'
 
 import { fakerFields } from '@/mocks/fakerUtils'
 import { mockCommonDatetimes } from '@/mocks/mockCommonDatetimes'
@@ -44,6 +50,7 @@ export function mockUser(): User {
     id: fakerFields.id(),
     primaryUserEmailAddressId: fakerFields.id(),
     primaryUserCryptoAddressId: fakerFields.id(),
+    dataCreationMethod: DataCreationMethod.BY_USER,
     addressId: withData ? fakerFields.id() : null,
   }
 }

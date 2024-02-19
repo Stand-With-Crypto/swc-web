@@ -144,7 +144,6 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
   }
 }
 
-// TODO (Benson): Handle CC membership toggling options: https://github.com/Stand-With-Crypto/swc-web/issues/173
 async function handleCapitolCanaryAdvocateUpsert(
   updatedUser: User & { address: Address | null } & {
     primaryUserCryptoAddress: UserCryptoAddress | null
@@ -189,7 +188,7 @@ async function handleCapitolCanaryAdvocateUpsert(
   }
 
   // Only send updating payload if we do not have an SwC advocate ID
-  // or there has been a changed field (name, address, email address, phone number, and opt-ins/outs),
+  // or there has been a changed field (name, address, email address, phone number, opt-ins/outs, and joining C4 Member),
   // and we at least have email or phone number.
   // Breaking early if nothing has been changed.
   if (
@@ -200,7 +199,8 @@ async function handleCapitolCanaryAdvocateUpsert(
       oldUser.address?.googlePlaceId !== updatedUser.address?.googlePlaceId ||
       oldUser.primaryUserEmailAddress?.emailAddress !== primaryUserEmailAddress?.emailAddress ||
       oldUser.phoneNumber !== updatedUser.phoneNumber ||
-      oldUser.hasOptedInToSms !== updatedUser.hasOptedInToSms) &&
+      oldUser.hasOptedInToSms !== updatedUser.hasOptedInToSms ||
+      (!oldUser.hasOptedInToMembership && updatedUser.hasOptedInToMembership)) &&
     (primaryUserEmailAddress || updatedUser.phoneNumber)
   ) {
     const payload: UpsertAdvocateInCapitolCanaryPayloadRequirements = {
@@ -215,6 +215,11 @@ async function handleCapitolCanaryAdvocateUpsert(
         isSmsOptin: hasOptedInToSms,
         isSmsOptout: oldUser.hasOptedInToSms && !hasOptedInToSms, // Only opt-out of SMS if the user has opted in before and now they are opting out.
       },
+    }
+    if (!oldUser.hasOptedInToMembership && updatedUser.hasOptedInToMembership) {
+      payload.metadata = {
+        tags: ['C4 Member'],
+      }
     }
     await inngest.send({
       name: CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME,

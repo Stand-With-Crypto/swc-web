@@ -24,17 +24,28 @@ const logger = getLogger('serverAnalytics')
 type ServerAnalyticsConfig = { localUser: LocalUser | null; userId: string }
 
 function trackAnalytic(
-  config: ServerAnalyticsConfig,
+  _config: ServerAnalyticsConfig,
   eventName: string,
   eventProperties?: AnalyticProperties,
 ) {
+  let config = _config
   // a local user will not exist if the user has disabled tracking
   if (!config.localUser) {
-    logger.info(`Skipped Event Name: "${eventName}"`, eventProperties)
-    return
+    logger.info(`Anonymizing Event: "${eventName}"`, eventProperties)
+    config = {
+      userId: 'ANONYMOUS_USER_TRACKING_ID',
+      localUser: {
+        currentSession: {
+          datetimeOnLoad: new Date().toISOString(),
+          searchParamsOnLoad: {},
+        },
+      },
+    }
   }
   logger.info(`Event Name: "${eventName}"`, eventProperties)
-  vercelTrack(eventName, eventProperties && formatVercelAnalyticsEventProperties(eventProperties))
+  if (process.env.VERCEL_URL) {
+    vercelTrack(eventName, eventProperties && formatVercelAnalyticsEventProperties(eventProperties))
+  }
   // we could wrap this in a promise and await it, but we don't want to block the request
   mixpanel.track(
     eventName,
