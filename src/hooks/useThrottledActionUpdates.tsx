@@ -4,15 +4,19 @@ import { RecentActivityRowProps } from '@/components/app/recentActivityRow/recen
 
 export function useThrottledActionUpdates(actions: RecentActivityRowProps['action'][]) {
   const [throttledActions, setThrottledActions] = useState(actions)
-  const isMounted = useRef(true)
+
+  // Adding throttledActions as a useEffect dependency can lead to an infinite loop,
+  // so we use a ref to get the current value without causing re-renders.
+  const throttledActionsRef = useRef(throttledActions)
+  useEffect(() => {
+    throttledActionsRef.current = throttledActions
+  }, [throttledActions])
 
   useEffect(() => {
     async function throttleUpdates() {
-      if (!isMounted) {
-        return
-      }
-
-      const newActions = actions.filter(action => !throttledActions.some(a => a.id === action.id))
+      const newActions = actions.filter(
+        action => !throttledActionsRef.current.some(a => a.id === action.id),
+      )
 
       for (const action of newActions) {
         const delayMs = Math.floor(Math.random() * (2000 - 750)) + 750
@@ -22,10 +26,6 @@ export function useThrottledActionUpdates(actions: RecentActivityRowProps['actio
     }
 
     throttleUpdates()
-
-    return () => {
-      isMounted.current = false
-    }
   }, [actions])
 
   return throttledActions
