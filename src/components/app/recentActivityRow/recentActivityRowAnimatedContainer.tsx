@@ -8,14 +8,14 @@ import {
 import { useLocale } from '@/hooks/useLocale'
 import { SupportedLocale } from '@/intl/locales'
 import { useThrottledActionUpdates } from '@/hooks/useThrottledActionUpdates'
+import { cn } from '@/utils/web/cn'
 
-function AnimatedActivityRow({
-  action,
-  locale,
-}: {
-  action: RecentActivityRowProps['action']
+type AnimatedActivityRowProps = React.HTMLAttributes<HTMLDivElement> & {
   locale: SupportedLocale
-}) {
+  action: RecentActivityRowProps['action']
+}
+
+function AnimatedActivityRow({ action, locale, className }: AnimatedActivityRowProps) {
   const isPresent = useIsPresent()
 
   const rowAnimation = {
@@ -47,7 +47,7 @@ function AnimatedActivityRow({
       style={{ position: isPresent ? 'static' : 'absolute' }}
       key={action.id}
       layout
-      className="relative pt-8 lg:pt-10"
+      className={cn('relative', className)}
     >
       <RecentActivityRow action={action} locale={locale} />
       <motion.div {...glowAnimation} className="absolute -mt-6 h-4 w-full blur-2xl" />
@@ -66,8 +66,13 @@ export function RecentActivityRowAnimatedContainer({
   return (
     <AnimatePresence initial={false}>
       <div className="relative">
-        {throttledActions.map(action => (
-          <AnimatedActivityRow key={action.id} action={action} locale={locale} />
+        {throttledActions.map((action, index) => (
+          <AnimatedActivityRow
+            key={action.id}
+            action={action}
+            locale={locale}
+            className={cn(index !== 0 && 'pt-8 lg:pt-10')}
+          />
         ))}
       </div>
     </AnimatePresence>
