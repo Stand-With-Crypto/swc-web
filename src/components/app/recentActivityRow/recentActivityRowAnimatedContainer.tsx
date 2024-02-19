@@ -1,5 +1,5 @@
 'use client'
-import { AnimatePresence, motion, stagger, useIsPresent } from 'framer-motion'
+import { AnimatePresence, motion, useIsPresent } from 'framer-motion'
 
 import {
   RecentActivityRow,
