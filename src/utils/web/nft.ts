@@ -29,7 +29,7 @@ export const NFT_CLIENT_METADATA: Record<NFTSlug, NFTClientMetadata> = {
       url: '/nfts/i-voted-nft.png',
       width: 160,
       height: 160,
-      alt: 'A rotating phone with the text "I called congress" below it',
+      alt: 'circular image with a robotic woman with the text "I\'m a voter" on top of it',
     },
   },
 }
