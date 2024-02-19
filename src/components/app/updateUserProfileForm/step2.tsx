@@ -49,7 +49,7 @@ export function UpdateUserInformationVisibilityForm({
       USER_INFORMATION_VISIBILITY_ORDERED_LIST.filter(x => {
         switch (x) {
           case UserInformationVisibility.CRYPTO_INFO_ONLY:
-            return user.hasEmbeddedWallet
+            return !user.hasEmbeddedWallet
           case UserInformationVisibility.ALL_INFO:
             return user.firstName || user.lastName
           default:
