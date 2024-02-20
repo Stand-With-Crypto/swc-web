@@ -20,7 +20,7 @@ Assumption: we will always want to interact with the user actions and their rela
 If this ever changes, we may need to export the SensitiveDataClientUserActionEmail, SensitiveDataClientUserActionCall, etc fns
 */
 
-type SensitiveDataClientUserActionDatabaseQuery = UserAction & {
+export type SensitiveDataClientUserActionDatabaseQuery = UserAction & {
   userActionEmail:
     | (UserActionEmail & {
         address: Address
@@ -65,10 +65,14 @@ type SensitiveDataClientUserActionOptIn = Pick<UserActionOptIn, 'optInType'> & {
 // Added here as a placeholder for type inference until we have some tweet-specific fields
 type SensitiveDataClientUserActionTweet = { actionType: typeof UserActionType.TWEET }
 
+<<<<<<< Updated upstream
 type SensitiveDataClientUserActionVoterRegistration = Pick<
   UserActionVoterRegistration,
   'usaState'
 > & {
+=======
+type SensitiveDataClientUserActionVoterRegistration = {
+>>>>>>> Stashed changes
   actionType: typeof UserActionType.VOTER_REGISTRATION
 }
 
@@ -173,12 +177,16 @@ export const getSensitiveDataClientUserAction = ({
       return getClientModel({ ...sharedProps, actionType })
     }
     case UserActionType.VOTER_REGISTRATION: {
+<<<<<<< Updated upstream
       const { usaState } = getRelatedModel(record, 'userActionVoterRegistration')
       const voterRegistrationFields: SensitiveDataClientUserActionVoterRegistration = {
         usaState,
         actionType,
       }
       return getClientModel({ ...sharedProps, ...voterRegistrationFields })
+=======
+      return getClientModel({ ...sharedProps, actionType })
+>>>>>>> Stashed changes
     }
   }
 
