@@ -5,6 +5,7 @@ import { SensitiveDataClientUserAction } from '@/clientModels/clientUserAction/s
 import { USER_ACTION_ROW_CTA_INFO } from '@/components/app/userActionRowCTA/constants'
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
+import { NFTSlug } from '@/utils/shared/nft'
 import { NFT_CLIENT_METADATA } from '@/utils/web/nft'
 
 type NFTDisplayProps = {
@@ -24,13 +25,14 @@ const WIDTH = '335px'
 const ButtonWrapper = USER_ACTION_ROW_CTA_INFO[UserActionType.NFT_MINT].WrapperComponent
 
 export function NFTDisplay({ userActions }: NFTDisplayProps) {
+  console.log(userActions)
   let optInNftButton = true
   const userNfts: NFTImages[] = userActions.reduce(
     (acc: NFTImages[], action: SensitiveDataClientUserAction): NFTImages[] => {
       const nftSlug = action.nftMint?.nftSlug
 
       if (nftSlug) {
-        const { name, image } = NFT_CLIENT_METADATA[nftSlug as keyof typeof NFT_CLIENT_METADATA]
+        const { name, image } = NFT_CLIENT_METADATA[nftSlug as NFTSlug]
         acc.push({ name, image: image.url, width: image.width, height: image.height })
       }
 
@@ -42,38 +44,30 @@ export function NFTDisplay({ userActions }: NFTDisplayProps) {
   )
   const numNfts = userNfts.length
 
-  const renderNfts = () => {
-    return userNfts.map(nft => {
-      const { name, height, width, image } = nft
-      return (
-        <NextImage
-          alt={name}
-          height={height}
-          key={name}
-          src={image}
-          style={{ borderRadius: '24px' }}
-          width={width}
-        />
-      )
-    })
-  }
-
-  const renderEmptySpots = () => {
-    const emptySpots = 3 - (numNfts % 3)
-    return Array.from({ length: emptySpots }, (_, index) => (
-      <div
-        className="shrink rounded-3xl bg-gray-100"
-        key={index}
-        style={{ width: `${WIDTH}`, height: `${HEIGHT}` }}
-      ></div>
-    ))
-  }
+  const emptySpots = 3 - (numNfts % 3)
 
   return (
     <>
-      <div className="w-full flex-wrap items-center justify-center gap-4 sm:flex-col lg:max-h-[335px] lg:flex-row lg:justify-between">
-        {renderNfts()}
-        {renderEmptySpots()}
+      <div className="flex w-full flex-col items-center justify-between gap-4 sm:h-[992px] lg:h-[340px] lg:flex-row">
+        {userNfts.map(nft => {
+          const { name, image } = nft
+          return (
+            <NextImage
+              alt={name}
+              height={335}
+              key={name}
+              src={image}
+              style={{ borderRadius: '24px' }}
+              width={335}
+            />
+          )
+        })}
+        {Array.from({ length: emptySpots }, (_, index) => (
+          <div
+            className="box-content h-[335px] w-[335px] rounded-3xl bg-gray-100"
+            key={index}
+          ></div>
+        ))}
       </div>
       {optInNftButton ?? (
         <div className="m-4 flex justify-center">
