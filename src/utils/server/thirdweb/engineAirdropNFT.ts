@@ -1,21 +1,16 @@
 import * as Sentry from '@sentry/nextjs'
 
-import {
-  CHAIN_ID,
-  THIRDWEB_BACKEND_WALLET,
-  thirdwebEngine,
-} from '@/utils/server/thirdweb/thirdwebEngine'
+import { NFT_SLUG_BACKEND_METADATA } from '@/utils/server/nft/constants'
+import { CHAIN_ID, thirdwebEngine } from '@/utils/server/thirdweb/thirdwebEngine'
 import { getLogger } from '@/utils/shared/logger'
+import { NFTSlug } from '@/utils/shared/nft'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
 const logger = getLogger(`engineAirdropNFT`)
 
-export async function engineAirdropNFT(
-  contractAddress: string,
-  walletAddress: string,
-  quantity: number,
-) {
+export async function engineAirdropNFT(nftSlug: NFTSlug, walletAddress: string, quantity: number) {
   logger.info('Triggered')
+  const { contractAddress, associatedWallet } = NFT_SLUG_BACKEND_METADATA[nftSlug]
   try {
     if (NEXT_PUBLIC_ENVIRONMENT === 'local' && !process.env.TRIGGER_AIRDROPS_ON_LOCAL) {
       logger.info(
@@ -26,7 +21,7 @@ export async function engineAirdropNFT(
     const result = await thirdwebEngine.erc721.claimTo(
       CHAIN_ID,
       contractAddress,
-      THIRDWEB_BACKEND_WALLET,
+      associatedWallet,
       {
         receiver: walletAddress,
         quantity: quantity.toString(),
@@ -38,7 +33,7 @@ export async function engineAirdropNFT(
     Sentry.captureException(e, {
       level: 'error',
       tags: { domain: 'engineAirdropNFT' },
-      extra: { contractAddress, walletAddress, quantity },
+      extra: { contractAddress, associatedWallet, walletAddress, quantity },
     })
     throw e
   }

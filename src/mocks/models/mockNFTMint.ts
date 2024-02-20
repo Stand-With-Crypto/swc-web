@@ -4,7 +4,7 @@ import { Decimal } from '@prisma/client/runtime/library'
 
 import { fakerFields } from '@/mocks/fakerUtils'
 import { mockCommonDatetimes } from '@/mocks/mockCommonDatetimes'
-import { NFT_CONTRACT_ADDRESS } from '@/utils/server/nft/contractAddress'
+import { NFT_SLUG_BACKEND_METADATA } from '@/utils/server/nft/constants'
 import { MOCK_CURRENT_ETH_USD_EXCHANGE_RATE } from '@/utils/shared/exchangeRate'
 import { NFTSlug } from '@/utils/shared/nft'
 
@@ -19,7 +19,7 @@ export function mockCreateNFTMintInput() {
     status: status,
     costAtMint: costAtMint,
     costAtMintCurrencyCode: NFTCurrency.ETH,
-    contractAddress: NFT_CONTRACT_ADDRESS[nftSlug],
+    contractAddress: NFT_SLUG_BACKEND_METADATA[nftSlug].contractAddress,
     costAtMintUsd: costAtMint.times(MOCK_CURRENT_ETH_USD_EXCHANGE_RATE),
   } satisfies Prisma.NFTMintCreateInput
 }

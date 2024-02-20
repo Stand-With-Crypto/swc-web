@@ -9,11 +9,6 @@ const THIRDWEB_ENGINE_ACCESS_TOKEN = requiredEnv(
   'THIRDWEB_ENGINE_ACCESS_TOKEN',
 )
 
-export const THIRDWEB_BACKEND_WALLET = requiredEnv(
-  process.env.THIRDWEB_BACKEND_WALLET,
-  'THIRDWEB_BACKEND_WALLET',
-)
-
 export const CHAIN_ID = 'base'
 
 export const thirdwebEngine = new Engine({

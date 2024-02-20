@@ -1,10 +1,8 @@
 'use client'
 import { AnimatePresence, motion } from 'framer-motion'
 
-import {
-  RecentActivityRow,
-  RecentActivityRowProps,
-} from '@/components/app/recentActivityRow/recentActivityRow'
+import { RecentActivityRowProps } from '@/components/app/recentActivityRow/recentActivityRow'
+import { VariantRecentActivityRow } from '@/components/app/recentActivityRow/variantRecentActivityRow'
 import { useLocale } from '@/hooks/useLocale'
 import { cn } from '@/utils/web/cn'
 
@@ -26,7 +24,7 @@ export function RecentActivityRowAnimatedContainer({
             key={action.id}
             transition={{ duration: 0.8 }}
           >
-            <RecentActivityRow action={action} locale={locale} />
+            <VariantRecentActivityRow action={action} locale={locale} />
           </motion.div>
         ))}
       </div>
