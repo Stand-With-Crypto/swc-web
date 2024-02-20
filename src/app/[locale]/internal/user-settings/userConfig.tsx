@@ -51,8 +51,6 @@ export function UserConfig() {
           onClick={() => {
             logoutAndDisconnect()
             setHasSeenCompleteProfilePrompt(false)
-
-            // This is a hack to force the cookie consent banner to re-render from the layout
             window.location.reload()
           }}
         >
