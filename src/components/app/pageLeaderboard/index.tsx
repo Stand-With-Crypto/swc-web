@@ -1,7 +1,7 @@
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
 import { DynamicRecentActivity } from '@/components/app/pageLeaderboard/dynamicRecentActivity'
 import { getDataForPageLeaderboard } from '@/components/app/pageLeaderboard/getData'
-import { RecentActivityRow } from '@/components/app/recentActivityRow/recentActivityRow'
+import { VariantRecentActivityRow } from '@/components/app/recentActivityRow/variantRecentActivityRow'
 import { SumDonationsByUserRow } from '@/components/app/sumDonationsByUserRow/sumDonationsByUserRow'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
@@ -72,7 +72,7 @@ export function PageLeaderboard({
           ) : (
             <>
               {actions.map(action => (
-                <RecentActivityRow action={action} key={action.id} locale={locale} />
+                <VariantRecentActivityRow action={action} key={action.id} locale={locale} />
               ))}
             </>
           )

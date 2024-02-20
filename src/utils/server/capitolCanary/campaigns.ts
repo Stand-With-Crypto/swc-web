@@ -1,3 +1,4 @@
+import { isJest } from '@/utils/shared/executionEnvironment'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
 // Campaign IDs representing the different campaigns in the sandbox Capitol Canary.
@@ -56,7 +57,7 @@ export function getCapitolCanaryCampaignID(campaignName: CapitolCanaryCampaignNa
     },
   }
 
-  const environment = NEXT_PUBLIC_ENVIRONMENT === 'production' ? 'production' : 'sandbox'
+  const environment = NEXT_PUBLIC_ENVIRONMENT === 'production' && !isJest ? 'production' : 'sandbox'
 
   if (!campaignIdMap[campaignName]) {
     throw new Error(`unhandled campaign name`)

@@ -34,7 +34,7 @@ export interface RecentActivityRowProps {
   locale: SupportedLocale
 }
 
-function RecentActivityRowBase({
+export function RecentActivityRowBase({
   locale,
   action,
   children,

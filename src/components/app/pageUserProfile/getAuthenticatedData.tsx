@@ -68,7 +68,7 @@ export async function getAuthenticatedData() {
     throw new Error('Primary user crypto address not found')
   }
   return {
-    ...getSensitiveDataClientUserWithENSData(rest, ensData),
+    ...getSensitiveDataClientUserWithENSData({ ...rest, address }, ensData),
     // LATER-TASK show UX if this address is not the primary address
     currentlyAuthenticatedUserCryptoAddress: getClientUserCryptoAddress(
       currentlyAuthenticatedUserCryptoAddress,
