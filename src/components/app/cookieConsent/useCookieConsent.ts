@@ -5,6 +5,7 @@ import mixpanel from 'mixpanel-browser'
 import {
   COOKIE_CONSENT_COOKIE_NAME,
   CookieConsentPermissions,
+  deserializeCookieConsent,
   serializeCookieConsent,
 } from '@/utils/shared/cookieConsent'
 import { setClientCookieConsent } from '@/utils/web/clientCookieConsent'
@@ -12,6 +13,11 @@ import { setClientCookieConsent } from '@/utils/web/clientCookieConsent'
 export function useCookieConsent() {
   const [cookieConsentCookie, setCookieConsentCookie, removeCookieConsentCookie] = useCookieState(
     COOKIE_CONSENT_COOKIE_NAME,
+  )
+
+  const currentConsent = React.useMemo(
+    () => (cookieConsentCookie ? deserializeCookieConsent(cookieConsentCookie) : null),
+    [cookieConsentCookie],
   )
 
   const toggleProviders = React.useCallback((permissions: CookieConsentPermissions) => {
@@ -54,6 +60,7 @@ export function useCookieConsent() {
     acceptAllCookies,
     resetCookieConsent: removeCookieConsentCookie,
     acceptedCookies: !!cookieConsentCookie,
+    currentConsent,
   }
 }
 

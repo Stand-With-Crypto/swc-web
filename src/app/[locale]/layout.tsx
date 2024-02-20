@@ -8,6 +8,7 @@ import { notFound } from 'next/navigation'
 import { TopLevelClientLogic } from '@/app/[locale]/topLevelClientLogic'
 import { CookieConsent } from '@/components/app/cookieConsent'
 import { Footer } from '@/components/app/footer'
+import { MaybeRenderGoogleTagManager } from '@/components/app/maybeRenderGoogleTagManager'
 import { Navbar } from '@/components/app/navbar'
 import { FullHeight } from '@/components/ui/fullHeight'
 import { Toaster } from '@/components/ui/sonner'
@@ -86,6 +87,7 @@ export default function Layout({ children, params }: PageProps & { children: Rea
         <CookieConsent locale={locale} />
         <Analytics debug={false} />
         <SpeedInsights debug={false} />
+        <MaybeRenderGoogleTagManager />
       </body>
     </html>
   )

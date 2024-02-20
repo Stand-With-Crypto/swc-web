@@ -35,6 +35,7 @@ const contentSecurityPolicy = {
     'https://api-js.mixpanel.com/',
     'https://vercel.live/',
     'https://vitals.vercel-insights.com/',
+    'https://www.googletagmanager.com/',
   ],
   'img-src': [
     "'self'",

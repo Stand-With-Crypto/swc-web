@@ -41,7 +41,11 @@ export default function CookieConsent({
       locale={locale}
       onAcceptAll={handleActionThenClose(acceptAllCookies)}
       onAcceptSpecificCookies={handleActionThenClose(acceptSpecificCookies)}
-      onRejectAll={handleActionThenClose(rejectAllOptionalCookies)}
+      onRejectAll={() => {
+        rejectAllOptionalCookies()
+        // to prevent any scripts loaded via google tag manager from being loaded, we need to reset the page
+        window.location.reload()
+      }}
     />
   )
 }
