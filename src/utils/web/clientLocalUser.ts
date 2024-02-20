@@ -32,7 +32,6 @@ const getDefaultPersistedLocalUser = (): PersistedLocalUser => ({
   initialReferer: window.document.referrer || undefined,
   datetimeFirstSeen: new Date().toISOString(),
   initialSearchParams: Object.fromEntries(new URLSearchParams(window.location.search)),
-  hasSeenCompleteProfilePrompt: false,
 })
 
 let localUser: LocalUser | null = null
