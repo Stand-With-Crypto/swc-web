@@ -34,7 +34,7 @@ export function NFTDisplay({ userActions }: NFTDisplayProps) {
         acc.push({ name, image: image.url, width: image.width, height: image.height })
       }
 
-      if (nftSlug === 'swc-shield') !optInNftButton
+      if (nftSlug === 'swc-shield' && optInNftButton) !optInNftButton
 
       return acc
     },
@@ -44,11 +44,16 @@ export function NFTDisplay({ userActions }: NFTDisplayProps) {
 
   const renderNfts = () => {
     return userNfts.map(nft => {
-      const { name, height, width, image } = nft
+      const { name, image } = nft
       return (
-        <div className="overflow-hidden rounded-3xl rounded-3xl bg-gray-100" key={nft.name}>
-          <NextImage alt={name} height={height} src={image} width={width} />
-        </div>
+        <NextImage
+          alt={name}
+          height={335}
+          key={name}
+          src={image}
+          style={{ borderRadius: '24px' }}
+          width={335}
+        />
       )
     })
   }
@@ -57,26 +62,26 @@ export function NFTDisplay({ userActions }: NFTDisplayProps) {
     const emptySpots = 3 - (numNfts % 3)
     return Array.from({ length: emptySpots }, (_, index) => (
       <div
-        className="rounded-3xl bg-gray-100"
+        className="shrink rounded-3xl bg-gray-100"
         key={index}
-        style={{ height: `${HEIGHT}`, width: `${WIDTH}` }}
+        style={{ width: `${WIDTH}`, height: `${HEIGHT}` }}
       ></div>
     ))
   }
 
   return (
     <>
-      <div className="max-w-355 flex-wrap items-center justify-center gap-4 lg:justify-between xl:justify-between">
+      <div className="w-full flex-wrap items-center justify-center gap-4 sm:flex-col lg:max-h-[335px] lg:flex-row lg:justify-between">
         {renderNfts()}
         {renderEmptySpots()}
       </div>
-      <div className="m-4 flex justify-center">
-        {optInNftButton ?? (
+      {optInNftButton ?? (
+        <div className="m-4 flex justify-center">
           <ButtonWrapper>
             <Button>Mint Stand With Crypto Supporter NFT</Button>
           </ButtonWrapper>
-        )}
-      </div>
+        </div>
+      )}
     </>
   )
 }
