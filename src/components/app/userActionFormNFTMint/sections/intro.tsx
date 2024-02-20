@@ -3,6 +3,7 @@
 import { ValidContractInstance } from '@thirdweb-dev/react'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
+import { MaybeAuthenticatedContent } from '@/components/app/authentication/maybeAuthenticatedContent'
 import {
   NFTDisplay,
   NFTDisplaySkeleton,
@@ -38,23 +39,26 @@ export function UserActionFormNFTMintIntro({
             {isLoadingContractMetadata ? (
               <FooterSkeleton />
             ) : (
-              <LoginDialogWrapper
-                authenticatedContent={
-                  <Button
-                    onClick={() => goToSection(UserActionFormNFTMintSectionNames.CHECKOUT)}
-                    size="lg"
-                  >
-                    Continue
-                  </Button>
-                }
-                loadingFallback={<FooterSkeleton />}
-              >
-                <Button size="lg">Log In</Button>
-
-                <p className="text-sm text-muted-foreground">
-                  You will need to login first to mint the NFT
-                </p>
-              </LoginDialogWrapper>
+              <>
+                <LoginDialogWrapper
+                  authenticatedContent={
+                    <Button
+                      onClick={() => goToSection(UserActionFormNFTMintSectionNames.CHECKOUT)}
+                      size="lg"
+                    >
+                      Continue
+                    </Button>
+                  }
+                  loadingFallback={<FooterSkeleton />}
+                >
+                  <Button size="lg">Log In</Button>
+                </LoginDialogWrapper>
+                <MaybeAuthenticatedContent authenticatedContent={null}>
+                  <p className="text-sm text-muted-foreground">
+                    You will need to login first to mint the NFT
+                  </p>
+                </MaybeAuthenticatedContent>
+              </>
             )}
           </UserActionFormLayout.Footer>
         </div>

@@ -41,11 +41,11 @@ export function LoginDialogWrapper({
     useHasSeenCompleteProfilePrompt()
 
   if (session.isLoading && isLoadingHasSeenProfilePrompt && loadingFallback) {
-    return loadingFallback
+    return <>{loadingFallback}</>
   }
 
   if (session.isLoggedIn && hasSeenCompleteProfilePrompt) {
-    return authenticatedContent
+    return <>{authenticatedContent}</>
   }
 
   return <UnauthenticatedSection>{children}</UnauthenticatedSection>
