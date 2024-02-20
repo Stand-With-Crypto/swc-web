@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback } from 'react'
+import { useCallback, useState } from 'react'
 import { UserActionType } from '@prisma/client'
 import { useRouter } from 'next/navigation'
 
@@ -24,12 +24,14 @@ interface ClaimNftProps extends UseSectionsReturn<SectionNames> {}
 
 export function ClaimNft({ goToSection }: ClaimNftProps) {
   const router = useRouter()
+  const [loading, setLoading] = useState(false)
 
   const handleOnBack = useCallback(() => {
     goToSection(SectionNames.SURVEY)
   }, [goToSection])
 
   const handleClaimNft = useCallback(async () => {
+    setLoading(true)
     const data: CreateActionVoterRegistrationInput = {
       campaignName: UserActionVoterRegistrationCampaignName.DEFAULT,
       usaState: undefined,
@@ -58,6 +60,7 @@ export function ClaimNft({ goToSection }: ClaimNftProps) {
       router.refresh()
       goToSection(SectionNames.SUCCESS)
     }
+    setLoading(false)
   }, [goToSection, router])
 
   return (
@@ -67,7 +70,7 @@ export function ClaimNft({ goToSection }: ClaimNftProps) {
           subtitle=""
           title={`Claim "I'm a Voter" NFT`}
         />
-        <div className="flex flex-row gap-8">
+        <div className="flex w-full gap-8 md:flex-row">
           <NextImage
             alt={NFT_CLIENT_METADATA['i-am-a-voter'].image.alt}
             height={NFT_CLIENT_METADATA['i-am-a-voter'].image.height}
@@ -86,7 +89,7 @@ export function ClaimNft({ goToSection }: ClaimNftProps) {
         </div>
       </UserActionFormVoterRegistrationLayout.Container>
       <UserActionFormVoterRegistrationLayout.Footer>
-        <Button onClick={handleClaimNft} size="lg">
+        <Button loading={loading} onClick={handleClaimNft} size="lg">
           Claim NFT
         </Button>
       </UserActionFormVoterRegistrationLayout.Footer>
