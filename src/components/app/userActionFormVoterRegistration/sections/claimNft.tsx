@@ -20,6 +20,8 @@ import { identifyUserOnClient } from '@/utils/web/identifyUser'
 import { NFT_CLIENT_METADATA } from '@/utils/web/nft'
 import { toastGenericError } from '@/utils/web/toastUtils'
 
+const I_AM_A_VOTER_NFT_IMAGE = NFT_CLIENT_METADATA['i-am-a-voter'].image
+
 interface ClaimNftProps extends UseSectionsReturn<SectionNames> {
   stateCode?: StateCode
 }
@@ -74,10 +76,10 @@ export function ClaimNft({ goToSection, stateCode }: ClaimNftProps) {
         />
         <div className="flex w-full gap-8 md:flex-row">
           <NextImage
-            alt={NFT_CLIENT_METADATA['i-am-a-voter'].image.alt}
-            height={NFT_CLIENT_METADATA['i-am-a-voter'].image.height}
-            src={NFT_CLIENT_METADATA['i-am-a-voter'].image.url}
-            width={NFT_CLIENT_METADATA['i-am-a-voter'].image.width}
+            alt={I_AM_A_VOTER_NFT_IMAGE.alt}
+            height={I_AM_A_VOTER_NFT_IMAGE.height}
+            src={I_AM_A_VOTER_NFT_IMAGE.url}
+            width={I_AM_A_VOTER_NFT_IMAGE.width}
           />
           <p className="text-fontcolor-muted">
             The “I'm a Voter” NFT was created by{' '}
