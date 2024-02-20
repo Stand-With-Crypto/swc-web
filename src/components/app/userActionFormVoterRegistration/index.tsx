@@ -1,9 +1,10 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 
 import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
 import {
   ANALYTICS_NAME_USER_ACTION_FORM_VOTER_REGISTRATION,
   SectionNames,
+  StateCode,
 } from '@/components/app/userActionFormVoterRegistration/constants'
 import { ClaimNft } from '@/components/app/userActionFormVoterRegistration/sections/claimNft'
 import { Survey } from '@/components/app/userActionFormVoterRegistration/sections/survey'
@@ -18,16 +19,31 @@ export function UserActionFormVoterRegistration({ onClose }: { onClose: () => vo
   })
   const { currentSection: currentTab, onSectionNotFound: onTabNotFound } = sectionProps
 
+  const [stateCode, setStateCode] = useState<StateCode | undefined>(undefined)
+
   const content = useMemo(() => {
     switch (currentTab) {
       case SectionNames.SURVEY:
         return <Survey {...sectionProps} />
       case SectionNames.VOTER_REGISTRATION_FORM:
-        return <VoterRegistrationForm {...sectionProps} />
+        return (
+          <VoterRegistrationForm
+            setStateCode={setStateCode}
+            stateCode={stateCode}
+            {...sectionProps}
+          />
+        )
       case SectionNames.CHECK_REGISTRATION_FORM:
-        return <VoterRegistrationForm checkRegistration {...sectionProps} />
+        return (
+          <VoterRegistrationForm
+            checkRegistration
+            setStateCode={setStateCode}
+            stateCode={stateCode}
+            {...sectionProps}
+          />
+        )
       case SectionNames.CLAIM_NFT:
-        return <ClaimNft {...sectionProps} />
+        return <ClaimNft stateCode={stateCode} {...sectionProps} />
       case SectionNames.ACCOUNT_REGISTRATION:
         return null
       case SectionNames.SUCCESS:
@@ -36,7 +52,7 @@ export function UserActionFormVoterRegistration({ onClose }: { onClose: () => vo
         onTabNotFound()
         return null
     }
-  }, [currentTab, onClose, onTabNotFound, sectionProps])
+  }, [currentTab, onClose, onTabNotFound, sectionProps, stateCode])
 
   return content
 }

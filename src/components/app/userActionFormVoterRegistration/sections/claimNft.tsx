@@ -8,7 +8,7 @@ import {
   actionCreateUserActionVoterRegistration,
   CreateActionVoterRegistrationInput,
 } from '@/actions/actionCreateUserActionVoterRegistration'
-import { SectionNames } from '@/components/app/userActionFormVoterRegistration/constants'
+import { SectionNames, StateCode } from '@/components/app/userActionFormVoterRegistration/constants'
 import { UserActionFormVoterRegistrationLayout } from '@/components/app/userActionFormVoterRegistration/sections/layout'
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
@@ -20,9 +20,11 @@ import { identifyUserOnClient } from '@/utils/web/identifyUser'
 import { NFT_CLIENT_METADATA } from '@/utils/web/nft'
 import { toastGenericError } from '@/utils/web/toastUtils'
 
-interface ClaimNftProps extends UseSectionsReturn<SectionNames> {}
+interface ClaimNftProps extends UseSectionsReturn<SectionNames> {
+  stateCode?: StateCode
+}
 
-export function ClaimNft({ goToSection }: ClaimNftProps) {
+export function ClaimNft({ goToSection, stateCode }: ClaimNftProps) {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
 
@@ -34,7 +36,7 @@ export function ClaimNft({ goToSection }: ClaimNftProps) {
     setLoading(true)
     const data: CreateActionVoterRegistrationInput = {
       campaignName: UserActionVoterRegistrationCampaignName.DEFAULT,
-      usaState: undefined,
+      usaState: stateCode,
     }
 
     const result = await triggerServerActionForForm(
@@ -61,7 +63,7 @@ export function ClaimNft({ goToSection }: ClaimNftProps) {
       goToSection(SectionNames.SUCCESS)
     }
     setLoading(false)
-  }, [goToSection, router])
+  }, [goToSection, router, stateCode])
 
   return (
     <UserActionFormVoterRegistrationLayout onBack={handleOnBack}>
