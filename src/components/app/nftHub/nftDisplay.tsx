@@ -24,7 +24,7 @@ const WIDTH = '335px'
 const ButtonWrapper = USER_ACTION_ROW_CTA_INFO[UserActionType.NFT_MINT].WrapperComponent
 
 export function NFTDisplay({ userActions }: NFTDisplayProps) {
-  const optInNftButton = true
+  let optInNftButton = true
   const userNfts: NFTImages[] = userActions.reduce(
     (acc: NFTImages[], action: SensitiveDataClientUserAction): NFTImages[] => {
       const nftSlug = action.nftMint?.nftSlug
@@ -34,7 +34,7 @@ export function NFTDisplay({ userActions }: NFTDisplayProps) {
         acc.push({ name, image: image.url, width: image.width, height: image.height })
       }
 
-      if (nftSlug === 'swc-shield' && optInNftButton) !optInNftButton
+      if (nftSlug === 'swc-shield' && optInNftButton) optInNftButton = false
 
       return acc
     },
@@ -44,15 +44,15 @@ export function NFTDisplay({ userActions }: NFTDisplayProps) {
 
   const renderNfts = () => {
     return userNfts.map(nft => {
-      const { name, image } = nft
+      const { name, height, width, image } = nft
       return (
         <NextImage
           alt={name}
-          height={335}
+          height={height}
           key={name}
           src={image}
           style={{ borderRadius: '24px' }}
-          width={335}
+          width={width}
         />
       )
     })
