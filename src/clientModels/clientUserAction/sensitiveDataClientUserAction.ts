@@ -8,6 +8,7 @@ import {
   UserActionEmailRecipient,
   UserActionOptIn,
   UserActionType,
+  UserActionVoterRegistration,
 } from '@prisma/client'
 
 import { ClientAddress, getClientAddress } from '@/clientModels/clientAddress'
@@ -30,6 +31,7 @@ type SensitiveDataClientUserActionDatabaseQuery = UserAction & {
   userActionCall: UserActionCall | null
   userActionDonation: UserActionDonation | null
   userActionOptIn: UserActionOptIn | null
+  userActionVoterRegistration: UserActionVoterRegistration | null
 }
 
 type SensitiveDataClientUserActionEmailRecipient = Pick<UserActionEmailRecipient, 'id'>
@@ -63,6 +65,13 @@ type SensitiveDataClientUserActionOptIn = Pick<UserActionOptIn, 'optInType'> & {
 // Added here as a placeholder for type inference until we have some tweet-specific fields
 type SensitiveDataClientUserActionTweet = { actionType: typeof UserActionType.TWEET }
 
+type SensitiveDataClientUserActionVoterRegistration = Pick<
+  UserActionVoterRegistration,
+  'usaState'
+> & {
+  actionType: typeof UserActionType.VOTER_REGISTRATION
+}
+
 /*
 At the database schema level we can't enforce that a single action only has one "type" FK, but at the client level we can and should
 */
@@ -77,6 +86,7 @@ export type SensitiveDataClientUserAction = ClientModel<
       | SensitiveDataClientUserActionCall
       | SensitiveDataClientUserActionDonation
       | SensitiveDataClientUserActionNFTMint
+      | SensitiveDataClientUserActionVoterRegistration
     )
 >
 
@@ -161,6 +171,14 @@ export const getSensitiveDataClientUserAction = ({
     }
     case UserActionType.TWEET: {
       return getClientModel({ ...sharedProps, actionType })
+    }
+    case UserActionType.VOTER_REGISTRATION: {
+      const { usaState } = getRelatedModel(record, 'userActionVoterRegistration')
+      const voterRegistrationFields: SensitiveDataClientUserActionVoterRegistration = {
+        usaState,
+        actionType,
+      }
+      return getClientModel({ ...sharedProps, ...voterRegistrationFields })
     }
   }
 

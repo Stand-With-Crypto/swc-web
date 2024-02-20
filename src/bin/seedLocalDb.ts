@@ -15,6 +15,7 @@ import { mockCreateUserActionDonationInput } from '@/mocks/models/mockUserAction
 import { mockCreateUserActionEmailInput } from '@/mocks/models/mockUserActionEmail'
 import { mockCreateUserActionEmailRecipientInput } from '@/mocks/models/mockUserActionEmailRecipient'
 import { mockCreateUserActionOptInInput } from '@/mocks/models/mockUserActionOptIn'
+import { mockCreateUserActionVoterRegistrationInput } from '@/mocks/models/mockUserActionVoterRegistration'
 import {
   mockCreateUserCryptoAddressInput,
   PopularCryptoAddress,
@@ -422,6 +423,24 @@ async function seed() {
   )
   const userActionOptIn = await prismaClient.userActionOptIn.findMany()
   logEntity({ userActionOptIn })
+
+  /*
+  userActionVoterRegistration
+  */
+  await batchAsyncAndLog(
+    userActionsByType[UserActionType.VOTER_REGISTRATION].map(action => {
+      return {
+        ...mockCreateUserActionVoterRegistrationInput(),
+        id: action.id,
+      }
+    }),
+    data =>
+      prismaClient.userActionVoterRegistration.createMany({
+        data,
+      }),
+  )
+  const userActionVoterRegistration = await prismaClient.userActionVoterRegistration.findMany()
+  logEntity({ userActionVoterRegistration })
 }
 
 runBin(seed)
