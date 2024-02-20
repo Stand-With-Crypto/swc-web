@@ -19,13 +19,9 @@ type NFTImages = {
   height: number
 }
 
-const HEIGHT = '335px'
-const WIDTH = '335px'
-
 const ButtonWrapper = USER_ACTION_ROW_CTA_INFO[UserActionType.NFT_MINT].WrapperComponent
 
 export function NFTDisplay({ userActions }: NFTDisplayProps) {
-  console.log(userActions)
   let optInNftButton = true
   const userNfts: NFTImages[] = userActions.reduce(
     (acc: NFTImages[], action: SensitiveDataClientUserAction): NFTImages[] => {
@@ -64,7 +60,7 @@ export function NFTDisplay({ userActions }: NFTDisplayProps) {
         })}
         {Array.from({ length: emptySpots }, (_, index) => (
           <div
-            className="box-content h-[335px] w-[335px] rounded-3xl bg-gray-100"
+            className="box-content h-[320px] w-[320px] rounded-3xl bg-gray-100 md:h-[335px] md:w-[335px]"
             key={index}
           ></div>
         ))}
