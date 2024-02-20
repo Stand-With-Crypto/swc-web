@@ -43,7 +43,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
   }, [dialogProps])
 
   const hasEnvironmentBar = NEXT_PUBLIC_ENVIRONMENT !== 'production'
-  const loginButtonRender = (
+  const loginButton = (
     <LoginDialogWrapper
       authenticatedContent={
         <NavbarLoggedInButton onOpenChange={open => open || maybeCloseAfterNavigating()} />
@@ -111,7 +111,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
                     <InternalLink href={urls.donate()}>Donate</InternalLink>
                   </Button>
                 </div>
-                <div className="mt-4">{loginButtonRender}</div>
+                <div className="mt-4">{loginButton}</div>
               </div>
             </DrawerContent>
           </Drawer>
@@ -121,7 +121,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
               <InternalLink href={urls.donate()}>Donate</InternalLink>
             </Button>
 
-            {loginButtonRender}
+            {loginButton}
           </div>
         </div>
       </nav>

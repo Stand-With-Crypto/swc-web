@@ -75,7 +75,7 @@ export function UserActionFormSuccessScreenMainCTA({
   }
   const { user, performedUserActionTypes } = data
   if (!user) {
-    const loginButtonRender = (
+    const loginButton = (
       <LoginDialogWrapper>
         <Button variant="secondary">Join Stand with Crypto</Button>
       </LoginDialogWrapper>
@@ -90,7 +90,7 @@ export function UserActionFormSuccessScreenMainCTA({
             You've earned an NFT for completing this action. Join Stand With Crypto to claim your
             NFT, see your activities, and get personalized content.
           </PageSubTitle>
-          {loginButtonRender}
+          {loginButton}
         </Container>
       )
     }
@@ -101,7 +101,7 @@ export function UserActionFormSuccessScreenMainCTA({
           Join Stand With Crypto to claim exclusive NFTs, see your activity, and get personalized
           content.
         </PageSubTitle>
-        {loginButtonRender}
+        {loginButton}
       </Container>
     )
   }
