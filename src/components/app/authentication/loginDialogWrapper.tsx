@@ -1,4 +1,5 @@
 import React from 'react'
+import * as Sentry from '@sentry/nextjs'
 import { useENS } from '@thirdweb-dev/react'
 import { isAfter, subMinutes } from 'date-fns'
 import { useRouter } from 'next/navigation'
@@ -75,7 +76,14 @@ function UnauthenticatedSection({ children }: React.PropsWithChildren) {
     const { user } = (await mutate()) ?? {}
 
     if (!user?.primaryUserCryptoAddress) {
-      // TODO handle this case
+      Sentry.captureMessage(
+        'Login - `useApiResponseForUserFullProfileInfo` did not return `primaryUserCryptoAddress` for a logged in user.',
+        {
+          extra: { user },
+          tags: { domain: 'LoginDialogWrapper/UnauthenticatedSection/handleLoginSuccess' },
+        },
+      )
+      setDialogOpen(false)
       return
     }
 
