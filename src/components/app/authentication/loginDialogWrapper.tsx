@@ -9,6 +9,7 @@ import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useDialog } from '@/hooks/useDialog'
+import { useEffectOnce } from '@/hooks/useEffectOnce'
 import { useSections } from '@/hooks/useSections'
 import { useThirdwebData } from '@/hooks/useThirdwebData'
 import { apiUrls } from '@/utils/shared/urls'
@@ -60,17 +61,6 @@ function UnauthenticatedSection({ children }: React.PropsWithChildren) {
 
   const { mutate } = useApiResponseForUserFullProfileInfo()
 
-  const setDialogOpen = React.useCallback(
-    (open: boolean) => {
-      dialogProps.onOpenChange(open)
-
-      if (!open) {
-        setHasSeenCompleteProfilePrompt(true)
-      }
-    },
-    [dialogProps],
-  )
-
   const handleLoginSuccess = React.useCallback(async () => {
     const { user } = (await mutate()) ?? {}
 
@@ -82,7 +72,7 @@ function UnauthenticatedSection({ children }: React.PropsWithChildren) {
           tags: { domain: 'LoginDialogWrapper/UnauthenticatedSection/handleLoginSuccess' },
         },
       )
-      setDialogOpen(false)
+      dialogProps.onOpenChange(false)
       return
     }
 
@@ -90,12 +80,12 @@ function UnauthenticatedSection({ children }: React.PropsWithChildren) {
     if (wasRecentlyUpdated) {
       goToSection(LoginSections.FINISH_PROFILE)
     } else {
-      setDialogOpen(false)
+      dialogProps.onOpenChange(false)
     }
-  }, [goToSection, mutate, setDialogOpen])
+  }, [dialogProps, goToSection, mutate])
 
   return (
-    <Dialog {...dialogProps} onOpenChange={setDialogOpen}>
+    <Dialog {...dialogProps}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="max-w-l w-full">
         {currentSection === LoginSections.LOGIN ? (
@@ -103,7 +93,7 @@ function UnauthenticatedSection({ children }: React.PropsWithChildren) {
         ) : (
           <FinishProfileSection
             onSuccess={() => {
-              setDialogOpen(false)
+              dialogProps.onOpenChange(false)
               mutate()
             }}
           />
@@ -145,6 +135,10 @@ function LoginSection({ onLogin }: { onLogin: () => void | Promise<void> }) {
 function FinishProfileSection({ onSuccess }: { onSuccess: () => void }) {
   const { data: userData } = useApiResponseForUserFullProfileInfo()
   const { data: ensData, isLoading: isLoadingEnsData } = useENS()
+
+  useEffectOnce(() => {
+    setHasSeenCompleteProfilePrompt(true)
+  })
 
   const user = React.useMemo(() => {
     if (!userData?.user || isLoadingEnsData) {
