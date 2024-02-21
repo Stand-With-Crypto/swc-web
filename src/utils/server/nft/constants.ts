@@ -37,6 +37,6 @@ export const NFT_SLUG_BACKEND_METADATA: Record<
   },
   [NFTSlug.I_AM_A_VOTER]: {
     contractAddress: I_AM_A_VOTER_NFT_CONTRACT_ADDRESS,
-    associatedWallet: LEGACY_NFT_DEPLOYER_WALLET,
+    associatedWallet: SWC_DOT_ETH_WALLET,
   },
 }
