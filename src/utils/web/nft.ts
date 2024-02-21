@@ -8,7 +8,7 @@ export const NFT_CLIENT_METADATA: Record<NFTSlug, NFTClientMetadata> = {
   [NFTSlug.SWC_SHIELD]: {
     name: 'SWC Shield',
     image: {
-      url: '/images/nft/swc-shield.png',
+      url: '/nfts/membership-shield-nft.png',
       width: 512,
       height: 512,
       alt: 'SWC Shield',
@@ -21,6 +21,15 @@ export const NFT_CLIENT_METADATA: Record<NFTSlug, NFTClientMetadata> = {
       width: 160,
       height: 160,
       alt: 'A rotating phone with the text "I called congress" below it',
+    },
+  },
+  [NFTSlug.I_VOTED]: {
+    name: 'I Voted',
+    image: {
+      url: '/nfts/i-voted-nft.png',
+      width: 160,
+      height: 160,
+      alt: 'circular image with a robotic woman with the text "I\'m a voter" on top of it',
     },
   },
 }
