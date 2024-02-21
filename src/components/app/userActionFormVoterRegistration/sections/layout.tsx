@@ -17,7 +17,7 @@ export function UserActionFormVoterRegistrationLayout({
   return (
     <>
       {onBack && <GoBackButton onClick={onBack} />}
-      <div className="flex min-h-[400px] flex-col p-6">{children}</div>
+      <div className="flex min-h-[400px] flex-col">{children}</div>
     </>
   )
 }
