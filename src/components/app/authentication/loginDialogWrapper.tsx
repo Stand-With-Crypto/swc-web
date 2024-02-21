@@ -1,7 +1,6 @@
 import React from 'react'
 import * as Sentry from '@sentry/nextjs'
 import { useENS } from '@thirdweb-dev/react'
-import { isAfter, subMinutes } from 'date-fns'
 import { useRouter } from 'next/navigation'
 import { Arguments, useSWRConfig } from 'swr'
 
@@ -87,13 +86,8 @@ function UnauthenticatedSection({ children }: React.PropsWithChildren) {
       return
     }
 
-    const { datetimeUpdated } = user.primaryUserCryptoAddress
-    const cryptoAddressHasBeenUpdatedRecently = isAfter(
-      new Date(datetimeUpdated),
-      subMinutes(new Date(), 1),
-    )
-
-    if (cryptoAddressHasBeenUpdatedRecently) {
+    const { isRecentlyUpdated } = user.primaryUserCryptoAddress
+    if (isRecentlyUpdated) {
       goToSection(LoginSections.FINISH_PROFILE)
     } else {
       setDialogOpen(false)

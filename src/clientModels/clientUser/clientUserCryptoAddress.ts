@@ -1,26 +1,29 @@
 import { UserCryptoAddress } from '@prisma/client'
+import { isAfter, subMinutes } from 'date-fns'
 
 import { ClientModel, getClientModel } from '@/clientModels/utils'
 import { UserENSData } from '@/data/web3/types'
 import { censorWord } from '@/utils/server/obscenityMatcher'
 
 export type ClientUserCryptoAddress = ClientModel<
-  Pick<UserCryptoAddress, 'id' | 'cryptoAddress' | 'cryptoNetwork' | 'datetimeUpdated'>
+  Pick<UserCryptoAddress, 'id' | 'cryptoAddress' | 'cryptoNetwork'> & { isRecentlyUpdated: boolean }
 >
 
 export const getClientUserCryptoAddress = (record: UserCryptoAddress): ClientUserCryptoAddress => {
   const { id, cryptoAddress, cryptoNetwork, datetimeUpdated } = record
+  const isRecentlyUpdated = isAfter(new Date(datetimeUpdated), subMinutes(new Date(), 1))
+
   return getClientModel({
     id,
     cryptoAddress,
     cryptoNetwork,
-    datetimeUpdated,
+    isRecentlyUpdated,
   })
 }
 
 export type ClientUserCryptoAddressWithENSData = ClientModel<
-  Pick<UserCryptoAddress, 'id' | 'cryptoAddress' | 'cryptoNetwork' | 'datetimeUpdated'> &
-    UserENSData
+  Pick<UserCryptoAddress, 'id' | 'cryptoAddress' | 'cryptoNetwork'> &
+    UserENSData & { isRecentlyUpdated: boolean }
 >
 
 export const getClientUserCryptoAddressWithENSData = (
