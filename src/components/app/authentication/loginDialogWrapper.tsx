@@ -108,9 +108,6 @@ function UnauthenticatedSection({ children }: React.PropsWithChildren) {
           <LoginSection onLogin={handleLoginSuccess} />
         ) : (
           <FinishProfileSection
-            onSkip={() => {
-              setDialogOpen(false)
-            }}
             onSuccess={() => {
               setDialogOpen(false)
               mutate()
@@ -151,13 +148,7 @@ function LoginSection({ onLogin }: { onLogin: () => void | Promise<void> }) {
   )
 }
 
-function FinishProfileSection({
-  onSkip,
-  onSuccess,
-}: {
-  onSkip: () => void
-  onSuccess: () => void
-}) {
+function FinishProfileSection({ onSuccess }: { onSuccess: () => void }) {
   const { data: userData } = useApiResponseForUserFullProfileInfo()
   const { data: ensData, isLoading: isLoadingEnsData } = useENS()
 
@@ -176,7 +167,7 @@ function FinishProfileSection({
 
   return (
     <React.Suspense fallback={loadingRender}>
-      <LazyUpdateUserProfileForm onSkip={onSkip} onSuccess={onSuccess} user={user} />
+      <LazyUpdateUserProfileForm onSuccess={onSuccess} user={user} />
     </React.Suspense>
   )
 }

@@ -47,11 +47,9 @@ type FormValues = z.infer<typeof zodUpdateUserProfileFormFields> & GenericErrorF
 export function UpdateUserProfileForm({
   user,
   onSuccess,
-  onSkip,
 }: {
   user: SensitiveDataClientUserWithENSData & { address: ClientAddress | null }
   onSuccess: (updatedUserFields: { firstName: string; lastName: string }) => void
-  onSkip?: () => void
 }) {
   const router = useRouter()
   const defaultValues = useRef({
@@ -250,12 +248,7 @@ export function UpdateUserProfileForm({
           </Collapsible>
           <FormGeneralErrorMessage control={form.control} />
         </div>
-        <div className={cn('flex gap-6', !onSkip && 'justify-center')}>
-          {onSkip && (
-            <Button className="w-full md:w-1/2" onClick={onSkip} variant="secondary">
-              Skip
-            </Button>
-          )}
+        <div className="flex justify-center gap-6">
           <Button
             className="w-full md:w-1/2"
             disabled={form.formState.isSubmitting}
