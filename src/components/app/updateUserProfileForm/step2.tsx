@@ -34,7 +34,6 @@ export function UpdateUserInformationVisibilityForm({
   onSuccess,
 }: {
   user: SensitiveDataClientUserWithENSData & { address: ClientAddress | null }
-  onCancel: () => void
   onSuccess: () => void
 }) {
   const router = useRouter()
@@ -124,7 +123,7 @@ export function UpdateUserInformationVisibilityForm({
             )}
           />
           <FormGeneralErrorMessage control={form.control} />
-          <div className="text-center">
+          <div className="flex justify-center gap-6">
             <Button
               className="w-full md:w-1/2"
               disabled={form.formState.isSubmitting}

@@ -26,7 +26,6 @@ export function UpdateUserProfileFormDialog({
         <Suspense fallback={<Skeleton className="h-80 w-full" />}>
           <LazyUpdateUserProfileForm
             {...formProps}
-            onCancel={() => dialogProps.onOpenChange?.(false)}
             onSuccess={() => dialogProps.onOpenChange?.(false)}
           />
         </Suspense>

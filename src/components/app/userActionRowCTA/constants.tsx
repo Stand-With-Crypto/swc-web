@@ -1,7 +1,7 @@
 'use client'
 import { UserActionType } from '@prisma/client'
 
-import { ThirdwebLoginDialog } from '@/components/app/authentication/thirdwebLoginContent'
+import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
@@ -22,7 +22,7 @@ export const USER_ACTION_ROW_CTA_INFO: Record<
     text: 'Join Stand With Crypto',
     subtext: 'Join over 300,000 advocates fighting to keep crypto in America.',
     canBeTriggeredMultipleTimes: false,
-    WrapperComponent: ({ children }) => <ThirdwebLoginDialog>{children}</ThirdwebLoginDialog>,
+    WrapperComponent: ({ children }) => <LoginDialogWrapper>{children}</LoginDialogWrapper>,
   },
   [UserActionType.VOTER_REGISTRATION]: {
     actionType: UserActionType.VOTER_REGISTRATION,

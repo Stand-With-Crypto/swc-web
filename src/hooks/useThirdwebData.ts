@@ -2,6 +2,7 @@ import { useDisconnect, useLogout } from '@thirdweb-dev/react'
 import Cookies from 'js-cookie'
 import { usePathname, useRouter } from 'next/navigation'
 
+import { setHasSeenCompleteProfilePrompt } from '@/components/app/authentication/hasSeenCompleteProfilePrompt'
 import { useAuthUser } from '@/hooks/useAuthUser'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { generateUserSessionId, USER_SESSION_ID_COOKIE_NAME } from '@/utils/shared/userSessionId'
@@ -28,6 +29,7 @@ export function useThirdwebData() {
     logoutAndDisconnect: async () => {
       await Promise.all([logout(), disconnect()])
       Cookies.set(USER_SESSION_ID_COOKIE_NAME, generateUserSessionId())
+      setHasSeenCompleteProfilePrompt(false)
       handleLogoutSuccess()
     },
   }

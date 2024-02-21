@@ -1,6 +1,5 @@
 'use client'
-import { MaybeAuthenticatedContent } from '@/components/app/authentication/maybeAuthenticatedContent'
-import { ThirdwebLoginDialog } from '@/components/app/authentication/thirdwebLoginContent'
+import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
@@ -11,20 +10,18 @@ export function HeroCTA() {
   const urls = useIntlUrls()
 
   return (
-    <MaybeAuthenticatedContent
+    <LoginDialogWrapper
       authenticatedContent={
         <Button asChild size="lg">
           <InternalLink href={urls.profile()}>View Profile</InternalLink>
         </Button>
       }
     >
-      <ThirdwebLoginDialog>
-        <Button size="lg">
-          {profileReq?.data?.user && !profileReq.data.user.primaryUserCryptoAddress
-            ? 'Complete your profile'
-            : 'Join the fight'}
-        </Button>
-      </ThirdwebLoginDialog>
-    </MaybeAuthenticatedContent>
+      <Button size="lg">
+        {profileReq?.data?.user && !profileReq.data.user.primaryUserCryptoAddress
+          ? 'Complete your profile'
+          : 'Join the fight'}
+      </Button>
+    </LoginDialogWrapper>
   )
 }

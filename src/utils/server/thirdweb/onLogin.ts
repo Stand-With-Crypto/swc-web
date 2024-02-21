@@ -110,7 +110,7 @@ IF YOU MODIFY THIS FUNCTION, PLEASE VERIFY THE SMOKE TESTS IN "npm run ts src/bi
 *****************************
 *****************************
 
-This logic governs all the user matching/creation/updating/merge logic that may occur when a user logs in to our website. 
+This logic governs all the user matching/creation/updating/merge logic that may occur when a user logs in to our website.
 This logic only runs when a user logs in and we can't find a verified cryptoAddress to match the thirdweb-authenticated crypto address to
 Below is the desired behavior of this function:
 
@@ -125,7 +125,7 @@ find any existing users in our system that
     (users previously requested a wallet to airdrop to)
 
 @function findUsersToMerge:
-If we find any users using the method above 
+If we find any users using the method above
 - we should merge them using the following logic:
   - any users found that match the unverified crypto address should be merged
   - any users found that match via verified email should be merged UNLESS the user already has a verified crypto address
@@ -133,7 +133,7 @@ If we find any users using the method above
 - situations we want to avoid merging (which is why we check for verified crypto address) because it would be confusing for the user and it's unclear whether that's their intent:
   - a user logs in to multiple crypto wallets with the same session id
   - a user creates a web3 wallet with a verified email from CB and then creates an embedded wallet with the same email
-  
+
 @function mergeUsers:
 This function gets trigger if there are users to merge, and will:
 - reassign all the actions to a single user

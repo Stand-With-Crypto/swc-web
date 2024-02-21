@@ -1,10 +1,10 @@
 'use client'
+
 import { useCallback } from 'react'
 import { capitalize } from 'lodash-es'
 import { Menu } from 'lucide-react'
 
-import { MaybeAuthenticatedContent } from '@/components/app/authentication/maybeAuthenticatedContent'
-import { ThirdwebLoginDialog } from '@/components/app/authentication/thirdwebLoginContent'
+import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { NavbarLoggedInButton } from '@/components/app/navbar/navbarLoggedInButton'
 import { Button } from '@/components/ui/button'
 import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/drawer'
@@ -42,7 +42,17 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
       dialogProps.onOpenChange(false)
     }
   }, [dialogProps])
+
   const hasEnvironmentBar = NEXT_PUBLIC_ENVIRONMENT !== 'production'
+  const loginButton = (
+    <LoginDialogWrapper
+      authenticatedContent={
+        <NavbarLoggedInButton onOpenChange={open => open || maybeCloseAfterNavigating()} />
+      }
+    >
+      <Button variant="secondary">Log In</Button>
+    </LoginDialogWrapper>
+  )
   return (
     <>
       {hasEnvironmentBar && (
@@ -102,19 +112,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
                     <InternalLink href={urls.donate()}>Donate</InternalLink>
                   </Button>
                 </div>
-                <div className="mt-4">
-                  <MaybeAuthenticatedContent
-                    authenticatedContent={
-                      <NavbarLoggedInButton
-                        onOpenChange={open => open || maybeCloseAfterNavigating()}
-                      />
-                    }
-                  >
-                    <ThirdwebLoginDialog>
-                      <Button variant="secondary">Log In</Button>
-                    </ThirdwebLoginDialog>
-                  </MaybeAuthenticatedContent>
-                </div>
+                <div className="mt-4">{loginButton}</div>
               </div>
             </DrawerContent>
           </Drawer>
@@ -123,15 +121,8 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
             <Button asChild className="mr-3">
               <InternalLink href={urls.donate()}>Donate</InternalLink>
             </Button>
-            <MaybeAuthenticatedContent
-              authenticatedContent={
-                <NavbarLoggedInButton onOpenChange={open => open || maybeCloseAfterNavigating()} />
-              }
-            >
-              <ThirdwebLoginDialog>
-                <Button variant="secondary">Log In</Button>
-              </ThirdwebLoginDialog>
-            </MaybeAuthenticatedContent>
+
+            {loginButton}
           </div>
         </div>
       </nav>
