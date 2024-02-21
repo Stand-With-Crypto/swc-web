@@ -4,9 +4,11 @@ import { ConnectEmbed, ConnectEmbedProps } from '@thirdweb-dev/react'
 
 import { NextImage } from '@/components/ui/image'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
+import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
+import { useThirdwebData } from '@/hooks/useThirdwebData'
 import { theme } from '@/utils/web/thirdweb/theme'
 
 export function ThirdwebLoginContent(props: ConnectEmbedProps) {
@@ -56,6 +58,16 @@ export function ThirdwebLoginContent(props: ConnectEmbedProps) {
 }
 
 function ThirdwebLoginEmbedded(props: ConnectEmbedProps) {
+  const { session } = useThirdwebData()
+
+  if (session.isLoggedIn) {
+    return (
+      <div className="h-80">
+        <LoadingOverlay />
+      </div>
+    )
+  }
+
   return (
     <ConnectEmbed
       showThirdwebBranding={false}
