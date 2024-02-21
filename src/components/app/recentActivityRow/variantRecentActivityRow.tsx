@@ -19,6 +19,7 @@ import { DTSIPersonForUserActions } from '@/data/dtsi/queries/queryDTSIPeopleByS
 import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
 import { getDTSIPersonRoleCategoryDisplayName } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
+import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
 import { getIntlUrls } from '@/utils/shared/urls'
 
@@ -94,8 +95,8 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
           children: (
             <MainText>
               <FormattedCurrency
-                amount={action.amount}
-                currencyCode={action.amountCurrencyCode}
+                amount={action.amountUsd}
+                currencyCode={SupportedFiatCurrencyCodes.USD}
                 locale={locale}
               />{' '}
               donation
