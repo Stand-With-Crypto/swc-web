@@ -50,11 +50,13 @@ export async function getAuthenticatedData() {
   })
   const dtsiSlugs = new Set<string>()
   user.userActions.forEach(userAction => {
-    if (userAction.userActionCall) {
+    if (userAction.userActionCall?.recipientDtsiSlug) {
       dtsiSlugs.add(userAction.userActionCall.recipientDtsiSlug)
     } else if (userAction.userActionEmail) {
       userAction.userActionEmail.userActionEmailRecipients.forEach(userActionEmailRecipient => {
-        dtsiSlugs.add(userActionEmailRecipient.dtsiSlug)
+        if (userActionEmailRecipient.dtsiSlug) {
+          dtsiSlugs.add(userActionEmailRecipient.dtsiSlug)
+        }
       })
     }
   })

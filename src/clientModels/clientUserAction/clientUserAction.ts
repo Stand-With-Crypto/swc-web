@@ -34,14 +34,14 @@ type ClientUserActionDatabaseQuery = UserAction & {
 }
 
 type ClientUserActionEmailRecipient = Pick<UserActionEmailRecipient, 'id'> & {
-  person: DTSIPersonForUserActions
+  person: DTSIPersonForUserActions | null
 }
 type ClientUserActionEmail = {
   userActionEmailRecipients: ClientUserActionEmailRecipient[]
   actionType: typeof UserActionType.EMAIL
 }
 type ClientUserActionCall = {
-  person: DTSIPersonForUserActions
+  person: DTSIPersonForUserActions | null
   actionType: typeof UserActionType.CALL
 }
 type ClientUserActionDonation = Pick<UserActionDonation, 'amountCurrencyCode' | 'recipient'> & {
@@ -121,7 +121,7 @@ export const getClientUserAction = ({
     case UserActionType.CALL: {
       const { recipientDtsiSlug } = getRelatedModel(record, 'userActionCall')
       const callFields: ClientUserActionCall = {
-        person: peopleBySlug[recipientDtsiSlug],
+        person: recipientDtsiSlug ? peopleBySlug[recipientDtsiSlug] : null,
         actionType,
       }
       return getClientModel({ ...sharedProps, ...callFields })
@@ -146,7 +146,7 @@ export const getClientUserAction = ({
         actionType,
         userActionEmailRecipients: userActionEmailRecipients.map(x => ({
           id: x.id,
-          person: peopleBySlug[x.dtsiSlug],
+          person: x.dtsiSlug ? peopleBySlug[x.dtsiSlug] : null,
         })),
       }
       return getClientModel({ ...sharedProps, ...emailFields })

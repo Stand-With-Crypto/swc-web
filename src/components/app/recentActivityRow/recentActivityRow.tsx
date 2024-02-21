@@ -148,7 +148,7 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
           children: (
             <>
               <MainText>{userDisplayName} called their representative</MainText>
-              <SubText>{formatDTSIPerson(action.person)}</SubText>
+              {action.person && <SubText>{formatDTSIPerson(action.person)}</SubText>}
             </>
           ),
         }
@@ -189,7 +189,10 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
                 {action.userActionEmailRecipients.length > 1 ? 's' : ''}
               </MainText>
               <SubText>
-                {action.userActionEmailRecipients.map(x => formatDTSIPerson(x.person)).join(', ')}
+                {action.userActionEmailRecipients
+                  .filter(x => x.person)
+                  .map(x => formatDTSIPerson(x.person!))
+                  .join(', ')}
               </SubText>
             </>
           ),
