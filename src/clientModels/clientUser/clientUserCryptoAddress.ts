@@ -6,24 +6,26 @@ import { UserENSData } from '@/data/web3/types'
 import { censorWord } from '@/utils/server/obscenityMatcher'
 
 export type ClientUserCryptoAddress = ClientModel<
-  Pick<UserCryptoAddress, 'id' | 'cryptoAddress' | 'cryptoNetwork'> & { isRecentlyUpdated: boolean }
+  Pick<UserCryptoAddress, 'id' | 'cryptoAddress' | 'cryptoNetwork'> & {
+    wasRecentlyUpdated: boolean
+  }
 >
 
 export const getClientUserCryptoAddress = (record: UserCryptoAddress): ClientUserCryptoAddress => {
   const { id, cryptoAddress, cryptoNetwork, datetimeUpdated } = record
-  const isRecentlyUpdated = isAfter(new Date(datetimeUpdated), subMinutes(new Date(), 1))
+  const wasRecentlyUpdated = isAfter(new Date(datetimeUpdated), subMinutes(new Date(), 1))
 
   return getClientModel({
     id,
     cryptoAddress,
     cryptoNetwork,
-    isRecentlyUpdated,
+    wasRecentlyUpdated,
   })
 }
 
 export type ClientUserCryptoAddressWithENSData = ClientModel<
   Pick<UserCryptoAddress, 'id' | 'cryptoAddress' | 'cryptoNetwork'> &
-    UserENSData & { isRecentlyUpdated: boolean }
+    UserENSData & { wasRecentlyUpdated: boolean }
 >
 
 export const getClientUserCryptoAddressWithENSData = (

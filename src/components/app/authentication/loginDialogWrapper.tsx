@@ -86,8 +86,8 @@ function UnauthenticatedSection({ children }: React.PropsWithChildren) {
       return
     }
 
-    const { isRecentlyUpdated } = user.primaryUserCryptoAddress
-    if (isRecentlyUpdated) {
+    const { wasRecentlyUpdated } = user.primaryUserCryptoAddress
+    if (wasRecentlyUpdated) {
       goToSection(LoginSections.FINISH_PROFILE)
     } else {
       setDialogOpen(false)
