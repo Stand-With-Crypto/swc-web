@@ -19,20 +19,41 @@ export const getSumDonationsByUser = async ({ limit, offset }: SumDonationsByUse
     userId: string
     totalAmountUsd: Decimal
   }[] = await prismaClient.$queryRaw`
-    SELECT 
-      user_action.user_id as userId, 
-      SUM(amount_usd) AS totalAmountUsd
-    FROM user_action_donation
-    JOIN user_action ON user_action.id = user_action_donation.id
-    JOIN user ON user.id = user_action.user_id
-    WHERE user.internal_status = 'VISIBLE'
-    GROUP BY userId
+    SELECT  
+      u.id AS userId,
+      COALESCE(donation_total, 0) + COALESCE(mint_total, 0) AS totalAmountUsd
+    FROM (
+      SELECT id 
+      FROM user
+      WHERE internal_status = 'VISIBLE'
+    ) u
+
+    LEFT JOIN (
+      SELECT  
+        ua.user_id,
+        SUM(amount_usd) AS donation_total
+      FROM user_action_donation
+      JOIN user_action ua USING(id)  
+      GROUP BY ua.user_id
+    ) donation_totals ON u.id = donation_totals.user_id
+
+    LEFT JOIN (
+      SELECT  
+        ua.user_id,
+        SUM(cost_at_mint_usd) AS mint_total
+      FROM nft_mint
+      JOIN user_action ua ON ua.nft_mint_id = nft_mint.id
+      WHERE ua.action_type = 'NFT_MINT' 
+      GROUP BY ua.user_id
+    ) mint_totals ON u.id = mint_totals.user_id
+
+    GROUP BY u.id
     ORDER BY totalAmountUsd DESC
+
     -- don't worry, prisma $queryRaw sanitizes the input
     LIMIT ${limit}
     OFFSET ${offset || 0}
   `
-
   const users = await prismaClient.user.findMany({
     where: {
       id: {
@@ -51,6 +72,9 @@ export const getSumDonationsByUser = async ({ limit, offset }: SumDonationsByUse
   )
   return total.map(({ userId, totalAmountUsd }) => {
     const user = usersById[userId]
+    if (!user) {
+      return null
+    }
     return {
       totalAmountUsd: totalAmountUsd.toNumber(),
       user: {
