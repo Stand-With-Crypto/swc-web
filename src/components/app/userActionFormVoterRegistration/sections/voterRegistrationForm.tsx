@@ -136,7 +136,7 @@ export function VoterRegistrationForm({
     <UserActionFormVoterRegistrationLayout onBack={handleOnBack}>
       <UserActionFormVoterRegistrationLayout.Container>
         <UserActionFormVoterRegistrationLayout.Heading subtitle={subtitle} title={title} />
-        <ol className="flex flex-col gap-2 justify-self-center">
+        <ol className="flex flex-col justify-self-center">
           <li className={LIST_ITEM_STYLE}>
             <Step1Svg />
             <div className="flex flex-grow flex-row items-center justify-between">
