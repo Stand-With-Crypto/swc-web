@@ -1,5 +1,5 @@
 import React from 'react'
-import _ from 'lodash'
+import { upperFirst } from 'lodash-es'
 
 import {
   DTSIStanceDetailsBillRelationshipProp,
@@ -23,7 +23,7 @@ export const DTSIStanceDetailsBillRelationship: React.FC<
       <h4 className="mb-1 font-bold">{bill.shortTitle}</h4>
       <div className="mb-2">
         <Badge>
-          {_.upperFirst(
+          {upperFirst(
             dtsiPersonBillRelationshipTypeAsVerb(stance.billRelationship.relationshipType),
           )}
         </Badge>

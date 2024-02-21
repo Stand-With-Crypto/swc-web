@@ -2,7 +2,7 @@
 import { Prisma, UserCryptoAddress } from '@prisma/client'
 import { GetFindResult } from '@prisma/client/runtime/library'
 import * as Sentry from '@sentry/nextjs'
-import _ from 'lodash'
+import { compact } from 'lodash-es'
 
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
@@ -35,7 +35,7 @@ export async function getMaybeUserAndMethodOfMatch<
   const sessionId = getUserSessionId()
   const userWithoutReturnTypes = await prismaClient.user.findFirst({
     where: {
-      OR: _.compact([
+      OR: compact([
         authUser && { id: authUser.userId },
         { userSessions: { some: { id: sessionId } } },
       ]),

@@ -1,4 +1,4 @@
-import _ from 'lodash'
+import { isNil } from 'lodash-es'
 
 import { UserAvatar } from '@/components/app/userAvatar'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
@@ -23,10 +23,10 @@ export function SumDonationsByUserRow({ locale, sumDonations, index }: SumDonati
     <div className="flex items-center justify-between gap-5">
       <div className="flex items-center gap-2">
         <div className={cn('relative text-center', index < 1000 ? 'w-6' : 'w-8')}>
-          <div className={cn('z-1', !_.isNil(INDEX_SHIELD_IMAGE_MAP[index]) && 'text-white')}>
+          <div className={cn('z-1', !isNil(INDEX_SHIELD_IMAGE_MAP[index]) && 'text-white')}>
             {index + 1}
           </div>
-          {!_.isNil(INDEX_SHIELD_IMAGE_MAP[index]) && (
+          {!isNil(INDEX_SHIELD_IMAGE_MAP[index]) && (
             <NextImage
               alt={`position ${index + 1} medal`}
               className="absolute"

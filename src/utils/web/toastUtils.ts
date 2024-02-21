@@ -1,5 +1,5 @@
 import * as Sentry from '@sentry/nextjs'
-import _ from 'lodash'
+import { isError } from 'lodash-es'
 import { toast } from 'sonner'
 
 import { FetchReqError } from '@/utils/shared/fetchReq'
@@ -10,7 +10,7 @@ import {
 } from '@/utils/web/errorUtils'
 
 export const catchUnexpectedServerErrorAndTriggerToast = (error: unknown) => {
-  if (!_.isError(error)) {
+  if (!isError(error)) {
     Sentry.captureMessage(
       'Unexpected error type passed to catchUnexpectedServerErrorAndTriggerToast',
       {

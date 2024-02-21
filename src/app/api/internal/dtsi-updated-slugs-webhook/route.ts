@@ -1,4 +1,4 @@
-import _ from 'lodash'
+import { flatten } from 'lodash-es'
 import { revalidatePath } from 'next/cache'
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
@@ -37,7 +37,7 @@ export async function POST(request: NextRequest) {
   }
   const validatedFields = zodPayload.parse(await request.json())
   logger.info('Received webhook with updated slugs', validatedFields)
-  const pathsToUpdate = _.flatten(
+  const pathsToUpdate = flatten(
     ORDERED_SUPPORTED_LOCALES.map(locale => {
       const urls = getIntlUrls(locale, { actualPaths: true })
       return [

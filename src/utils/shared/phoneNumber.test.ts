@@ -1,11 +1,11 @@
 import { expect } from '@jest/globals'
-import _ from 'lodash'
+import { uniq } from 'lodash-es'
 
 import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
 
 it('Correctly parses phone number strings', () => {
   expect(
-    _.uniq(
+    uniq(
       [
         '222 888 3333',
         '(222) 888 3333',
@@ -18,7 +18,7 @@ it('Correctly parses phone number strings', () => {
     ),
   ).toEqual(['+12228883333'])
 
-  expect(_.uniq(['222 888 3333 x61835', '222 888 3333x61835'].map(normalizePhoneNumber))).toEqual([
+  expect(uniq(['222 888 3333 x61835', '222 888 3333x61835'].map(normalizePhoneNumber))).toEqual([
     '+12228883333x61835',
   ])
 })

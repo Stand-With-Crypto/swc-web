@@ -1,7 +1,7 @@
 import 'server-only'
 
 import { UserInternalStatus } from '@prisma/client'
-import _ from 'lodash'
+import { compact } from 'lodash-es'
 
 import { getClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
 import { getClientUserAction } from '@/clientModels/clientUserAction/clientUserAction'
@@ -63,7 +63,7 @@ export const getPublicRecentActivity = async (config: RecentActivityConfig) => {
   )
 
   const ensDataMap = await getENSDataMapFromCryptoAddressesAndFailGracefully(
-    _.compact(data.map(({ user }) => user.primaryUserCryptoAddress?.cryptoAddress)),
+    compact(data.map(({ user }) => user.primaryUserCryptoAddress?.cryptoAddress)),
   )
   return data.map(({ user, ...record }) => ({
     ...getClientUserAction({ record, dtsiPeople }),

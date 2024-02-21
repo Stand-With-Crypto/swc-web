@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker'
 import { Prisma, UserActionType } from '@prisma/client'
-import _ from 'lodash'
+import { omit } from 'lodash-es'
 
 import { runBin } from '@/bin/runBin'
 import { mockCreateAddressInput } from '@/mocks/models/mockAddress'
@@ -149,7 +149,7 @@ async function createAction(user: Awaited<ReturnType<typeof createUser>>) {
               address: { create: mockCreateAddressInput() },
               userActionEmailRecipients: {
                 create: {
-                  ..._.omit(mockCreateUserActionEmailRecipientInput(), 'userActionEmailId'),
+                  ...omit(mockCreateUserActionEmailRecipientInput(), 'userActionEmailId'),
                 },
               },
             },

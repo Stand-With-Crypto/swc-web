@@ -1,5 +1,5 @@
 import { UserActionType } from '@prisma/client'
-import _ from 'lodash'
+import { sumBy, uniq } from 'lodash-es'
 import { redirect, RedirectType } from 'next/navigation'
 
 import { NFTDisplay } from '@/components/app/nftHub/nftDisplay'
@@ -39,8 +39,7 @@ export function PageUserProfile({
     )
   }
   const { userActions } = user
-
-  const performedUserActionTypes = _.uniq(userActions.map(x => x.actionType))
+  const performedUserActionTypes = uniq(userActions.map(x => x.actionType))
   return (
     <div className="container space-y-10 lg:space-y-16">
       {/* LATER-TASK enable this feature */}
@@ -88,7 +87,7 @@ export function PageUserProfile({
               label: 'Donated',
               value: (
                 <FormattedCurrency
-                  amount={_.sumBy(userActions, x => {
+                  amount={sumBy(userActions, x => {
                     if (x.actionType === UserActionType.DONATION) {
                       return x.amountUsd
                     }

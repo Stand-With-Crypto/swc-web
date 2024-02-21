@@ -1,6 +1,6 @@
 // we want to stable stringify the object so that the url is cached by next.js
 import stringify from 'fast-json-stable-stringify'
-import _ from 'lodash'
+import { isString } from 'lodash-es'
 
 type EncodedObject = { [key: string]: string | number | boolean | null | undefined }
 
@@ -11,7 +11,7 @@ base64 encoding does not accept non-standard unicode characters and seo we encod
 export function encodeObjectForUrl(obj: EncodedObject) {
   // Encode object values with encodeURIComponent
   const encodedObj = Object.entries(obj).reduce((acc, [key, value]) => {
-    if (_.isString(value)) {
+    if (isString(value)) {
       acc[key] = encodeURIComponent(value)
     } else {
       acc[key] = value
@@ -29,7 +29,7 @@ export function decodeObjectForUrl<T extends EncodedObject>(str: string) {
 
   // Decode values with decodeURIComponent
   return Object.entries(decodedStr).reduce((acc, [key, value]) => {
-    if (_.isString(value)) {
+    if (isString(value)) {
       acc[key] = decodeURIComponent(value)
     } else {
       acc[key] = value

@@ -1,4 +1,4 @@
-import _ from 'lodash'
+import { isNil, sortBy } from 'lodash-es'
 
 import { DTSI_Person, DTSI_PersonPoliticalAffiliationCategory } from '@/data/dtsi/generated'
 
@@ -60,7 +60,7 @@ export const groupAndSortDTSIPeopleByCryptoStance = <
   const neutralCrypto: P[] = []
   people.forEach(person => {
     const { computedStanceScore } = person
-    if (_.isNil(computedStanceScore) || computedStanceScore === 50) {
+    if (isNil(computedStanceScore) || computedStanceScore === 50) {
       neutralCrypto.push(person)
     } else if (computedStanceScore > 50) {
       proCrypto.push({ ...person, computedStanceScore })
@@ -69,8 +69,8 @@ export const groupAndSortDTSIPeopleByCryptoStance = <
     }
   })
   return {
-    proCrypto: _.sortBy(proCrypto, x => x.computedStanceScore),
-    antiCrypto: _.sortBy(antiCrypto, x => -1 * x.computedStanceScore),
+    proCrypto: sortBy(proCrypto, x => x.computedStanceScore),
+    antiCrypto: sortBy(antiCrypto, x => -1 * x.computedStanceScore),
     neutralCrypto: neutralCrypto,
   }
 }
