@@ -12,7 +12,7 @@ const client = thirdwebRPCClient
 async function _getENSDataMapFromCryptoAddresses(
   _addresses: string[],
 ): Promise<Record<string, UserENSData>> {
-  const addresses = _addresses.map(addr => stringToEthereumAddress(addr))
+  const addresses = _.compact(_addresses.map(addr => stringToEthereumAddress(addr)))
   const nameResult = await Promise.all(addresses.map(address => client.getEnsName({ address })))
   const addressesWithENS = nameResult
     .map((result, index) => ({

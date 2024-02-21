@@ -24,6 +24,7 @@ import {
   dtsiPersonFullName,
   dtsiPersonPoliticalAffiliationCategoryAbbreviation,
 } from '@/utils/dtsi/dtsiPersonUtils'
+import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { getUSStateNameFromStateCode } from '@/utils/shared/usStateUtils'
@@ -165,8 +166,8 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
               <MainText>{userDisplayName} donated</MainText>
               <SubText>
                 <FormattedCurrency
-                  amount={action.amount}
-                  currencyCode={action.amountCurrencyCode}
+                  amount={action.amountUsd}
+                  currencyCode={SupportedFiatCurrencyCodes.USD}
                   locale={locale}
                 />{' '}
                 to {formatDonationOrganization(action.recipient)}
