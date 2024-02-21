@@ -30,7 +30,6 @@ import { Input } from '@/components/ui/input'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
-import { cn } from '@/utils/web/cn'
 import {
   GenericErrorFormValues,
   trackFormSubmissionSyncErrors,
