@@ -27,7 +27,7 @@ export const fetchDTSI = async <R, V = object>(query: string, variables?: V) => 
   const API_ENDPOINT = USE_DTSI_PRODUCTION_API
     ? 'https://www.dotheysupportit.com/api/graphql'
     : 'https://testing.dotheysupportit.com/api/graphql'
-  if (USE_DTSI_PRODUCTION_API && NEXT_PUBLIC_ENVIRONMENT !== 'local') {
+  if (USE_DTSI_PRODUCTION_API && NEXT_PUBLIC_ENVIRONMENT !== 'production') {
     logger.info(`OVERRIDE: production DTSI API`)
   }
   logger.debug(`fetchDTSI called`)
