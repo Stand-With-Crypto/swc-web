@@ -1,4 +1,4 @@
-import _ from 'lodash'
+import { flatten, times } from 'lodash-es'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { z } from 'zod'
@@ -51,8 +51,8 @@ const validateTab = ([_page, tab]: (string | undefined)[]) => {
 
 // // pre-generate the first 10 pages. If people want to go further, we'll generate them on the fly
 export async function generateStaticParams() {
-  return _.flatten(
-    _.times(PAGE_LEADERBOARD_TOTAL_PRE_GENERATED_PAGES).map(i =>
+  return flatten(
+    times(PAGE_LEADERBOARD_TOTAL_PRE_GENERATED_PAGES).map(i =>
       Object.values(RecentActivityAndLeaderboardTabs).map(tab => {
         const tabPath = tab === RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY ? '' : tab
         if (i) {

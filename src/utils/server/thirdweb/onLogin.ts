@@ -12,7 +12,7 @@ import {
   UserInformationVisibility,
 } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
-import _ from 'lodash'
+import { compact, groupBy } from 'lodash-es'
 import { NextApiRequest } from 'next'
 
 import { CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/upsertAdvocateInCapitolCanary'
@@ -169,7 +169,7 @@ export async function onNewLogin(props: NewLoginParams) {
   if (existingUsersWithSource.length) {
     log(
       `queryMatchingUsers: found existing users:\n${Object.entries(
-        _.groupBy(existingUsersWithSource, x => x.sourceOfExistingUser),
+        groupBy(existingUsersWithSource, x => x.sourceOfExistingUser),
       )
         .map(([key, val]) => `- ${key}: ${val.length}`)
         .join('\n')}`,
@@ -320,7 +320,7 @@ async function queryMatchingUsers({
       userCryptoAddresses: true,
     },
     where: {
-      OR: _.compact([
+      OR: compact([
         {
           userCryptoAddresses: {
             some: { cryptoAddress, hasBeenVerifiedViaAuth: false },

@@ -1,6 +1,6 @@
 'use client'
 import { useMemo } from 'react'
-import _ from 'lodash'
+import { isNil } from 'lodash-es'
 
 import { Person } from '@/components/app/dtsiClientPersonDataTable/columns'
 import {
@@ -164,7 +164,7 @@ export function filterDataViaGlobalFilters<TData extends Person>(
     if (globalFilter.stance !== StanceOnCryptoOptions.ALL) {
       const scoreToUse = x.manuallyOverriddenStanceScore ?? x.computedStanceScore
       if (globalFilter.stance === StanceOnCryptoOptions.PENDING) {
-        return _.isNil(scoreToUse)
+        return isNil(scoreToUse)
       }
       if (globalFilter.stance === StanceOnCryptoOptions.NEUTRAL) {
         return scoreToUse === 50

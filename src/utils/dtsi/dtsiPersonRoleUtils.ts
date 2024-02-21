@@ -1,5 +1,5 @@
 import { format as dateFormat, isBefore, parseISO } from 'date-fns'
-import _ from 'lodash'
+import { compact, sortBy } from 'lodash-es'
 
 import {
   DTSI_PersonRole,
@@ -46,7 +46,7 @@ export const getFormattedDTSIPersonRoleDateRange = ({
   dateEnd: string | null | undefined
   format?: string
 }) => {
-  return _.compact([dateStart, dateEnd])
+  return compact([dateStart, dateEnd])
     .map(date => dateFormat(parseISO(date), format))
     .join(' - ')
 }
@@ -80,7 +80,7 @@ export const getDTSIPersonRoleLocation = (
     'primaryCity' | 'primaryCountryCode' | 'primaryDistrict' | 'primaryState'
   >,
 ) => {
-  return _.compact([
+  return compact([
     role.primaryCity,
     role.primaryState && getUSStateNameFromStateCode(role.primaryState),
     role.primaryDistrict,
@@ -109,7 +109,7 @@ export const orderDTSIPersonRolesByImportance = <
 >(
   roles: Array<T>,
 ) => {
-  const byDateStart = _.sortBy([...roles], x => -1 * new Date(x.dateStart).getTime())
+  const byDateStart = sortBy([...roles], x => -1 * new Date(x.dateStart).getTime())
   const byImportance = [...byDateStart]
   byImportance.sort((role1, role2) => {
     if (role1.roleCategory === role2.roleCategory) {

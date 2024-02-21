@@ -11,7 +11,7 @@ import {
   useSDK,
 } from '@thirdweb-dev/react'
 import { BaseContract } from 'ethers'
-import { noop } from 'lodash'
+import { noop } from 'lodash-es'
 import { keccak256, toHex } from 'viem'
 
 import { logger } from '@/utils/shared/logger'

@@ -1,6 +1,6 @@
 'use client'
 import { useMemo } from 'react'
-import _ from 'lodash'
+import { sortBy } from 'lodash-es'
 import useSWR from 'swr'
 
 import { getDTSIClientPersonDataTableColumns } from '@/components/app/dtsiClientPersonDataTable/columns'
@@ -36,7 +36,7 @@ export function DTSIClientPersonDataTable({
   const { data } = useGetAllPeople()
   const memoizedColumns = useMemo(() => getDTSIClientPersonDataTableColumns({ locale }), [locale])
   const passedData = useMemo(
-    () => _.sortBy(data?.people || initialData, person => person.promotedPositioning),
+    () => sortBy(data?.people || initialData, person => person.promotedPositioning),
     [data, initialData],
   )
   return (

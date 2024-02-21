@@ -1,6 +1,6 @@
 import { ChevronLeftIcon, ChevronRightIcon, DotsHorizontalIcon } from '@radix-ui/react-icons'
 import { Table } from '@tanstack/react-table'
-import _ from 'lodash'
+import { times } from 'lodash-es'
 
 import { Button } from '@/components/ui/button'
 
@@ -19,7 +19,7 @@ export function DataTablePagination<TData>({ table }: DataTablePaginationProps<T
       : currentPageNumber + 2 > pages
         ? Math.max(pages - 2, 1)
         : currentPageNumber - 1
-  const visiblePageNumbers = _.times(Math.min(3, pages), i => i + leftMostVisiblePageNumber)
+  const visiblePageNumbers = times(Math.min(3, pages), i => i + leftMostVisiblePageNumber)
   return (
     <div className="flex items-center gap-2">
       <Button

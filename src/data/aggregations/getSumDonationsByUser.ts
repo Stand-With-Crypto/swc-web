@@ -1,7 +1,7 @@
 import 'server-only'
 
 import { Decimal } from '@prisma/client/runtime/library'
-import _ from 'lodash'
+import { compact, keyBy } from 'lodash-es'
 
 import { getClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
 import { getENSDataMapFromCryptoAddressesAndFailGracefully } from '@/data/web3/getENSDataFromCryptoAddress'
@@ -36,7 +36,7 @@ export const getSumDonationsByUser = async ({ limit, offset }: SumDonationsByUse
   const users = await prismaClient.user.findMany({
     where: {
       id: {
-        in: _.compact(total.map(t => t.userId)),
+        in: compact(total.map(t => t.userId)),
       },
     },
     include: {
@@ -45,9 +45,9 @@ export const getSumDonationsByUser = async ({ limit, offset }: SumDonationsByUse
     },
   })
 
-  const usersById = _.keyBy(users, 'id')
+  const usersById = keyBy(users, 'id')
   const ensDataMap = await getENSDataMapFromCryptoAddressesAndFailGracefully(
-    _.compact(users.map(user => user.primaryUserCryptoAddress?.cryptoAddress)),
+    compact(users.map(user => user.primaryUserCryptoAddress?.cryptoAddress)),
   )
   return total.map(({ userId, totalAmountUsd }) => {
     const user = usersById[userId]

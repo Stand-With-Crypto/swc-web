@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker'
-import _ from 'lodash'
+import { isFunction } from 'lodash-es'
 
 import { fakerFields } from '@/mocks/fakerUtils'
 import { ThirdwebEmbeddedWalletMetadata } from '@/utils/server/thirdweb/fetchEmbeddedWalletMetadataFromThirdweb'
@@ -40,7 +40,7 @@ export function verify(
   label: string,
   issues: Issue[],
 ) {
-  const conditionResult = _.isFunction(condition) ? condition() : condition
+  const conditionResult = isFunction(condition) ? condition() : condition
   if (!!conditionResult !== expectedCondition) {
     issues.push(
       `${label} was ${JSON.stringify(conditionResult)} but expected to be ${

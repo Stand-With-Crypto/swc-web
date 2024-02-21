@@ -1,4 +1,4 @@
-import _ from 'lodash'
+import { noop } from 'lodash-es'
 
 import { DTSICongresspersonAssociatedWithFormAddress } from '@/components/app/dtsiCongresspersonAssociatedWithFormAddress'
 import { getDefaultText } from '@/components/app/userActionFormEmailCongressperson/getDefaultText'
@@ -70,7 +70,7 @@ export function UserActionFormEmailCongresspersonSkeleton({ locale }: { locale: 
         <div className="w-full">
           <DTSICongresspersonAssociatedWithFormAddress
             currentDTSISlugValue={''}
-            onChangeDTSISlug={_.noop}
+            onChangeDTSISlug={noop}
           />
         </div>
 

@@ -1,5 +1,5 @@
 import { track } from '@vercel/analytics'
-import _ from 'lodash'
+import { isArray, isDate } from 'lodash-es'
 
 import { AnalyticProperties } from '@/utils/shared/sharedAnalytics'
 
@@ -7,9 +7,9 @@ import { AnalyticProperties } from '@/utils/shared/sharedAnalytics'
 export function formatVercelAnalyticsEventProperties(eventProperties: AnalyticProperties) {
   return Object.entries(eventProperties).reduce(
     (acc, [key, value]) => {
-      if (_.isDate(value)) {
+      if (isDate(value)) {
         acc[key] = value.toISOString()
-      } else if (_.isArray(value)) {
+      } else if (isArray(value)) {
         acc[key] = value.join(', ')
       } else if (value !== undefined) {
         acc[key] = value

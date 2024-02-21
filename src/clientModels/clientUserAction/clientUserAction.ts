@@ -9,7 +9,7 @@ import {
   UserActionType,
   UserActionVoterRegistration,
 } from '@prisma/client'
-import _ from 'lodash'
+import { keyBy } from 'lodash-es'
 
 import { ClientNFTMint, getClientNFTMint } from '@/clientModels/clientNFTMint'
 import { ClientModel, getClientModel } from '@/clientModels/utils'
@@ -100,7 +100,7 @@ export const getClientUserAction = ({
   record: ClientUserActionDatabaseQuery
   dtsiPeople: DTSIPersonForUserActions[]
 }): ClientUserAction => {
-  const peopleBySlug = _.keyBy(dtsiPeople, x => x.slug)
+  const peopleBySlug = keyBy(dtsiPeople, x => x.slug)
   const { id, datetimeCreated, actionType, nftMint } = record
   const sharedProps = {
     id,
