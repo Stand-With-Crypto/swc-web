@@ -70,10 +70,7 @@ export function ClaimNft({ goToSection, stateCode }: ClaimNftProps) {
   return (
     <UserActionFormVoterRegistrationLayout onBack={handleOnBack}>
       <UserActionFormVoterRegistrationLayout.Container>
-        <UserActionFormVoterRegistrationLayout.Heading
-          subtitle=""
-          title={`Claim "I'm a Voter" NFT`}
-        />
+        <UserActionFormVoterRegistrationLayout.Heading title="Claim “I'm a Voter” NFT" />
         <div className="flex w-full gap-8 md:flex-row">
           <NextImage
             alt={I_AM_A_VOTER_NFT_IMAGE.alt}

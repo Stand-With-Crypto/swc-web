@@ -22,11 +22,11 @@ export function UserActionFormVoterRegistrationLayout({
   )
 }
 
-function Heading({ title, subtitle }: { title: string; subtitle: string }) {
+function Heading({ title, subtitle }: { title: string; subtitle?: string }) {
   return (
     <div className="space-y-2">
       <PageTitle size="sm">{title}</PageTitle>
-      <PageSubTitle>{subtitle}</PageSubTitle>
+      {subtitle && <PageSubTitle>{subtitle}</PageSubTitle>}
     </div>
   )
 }
