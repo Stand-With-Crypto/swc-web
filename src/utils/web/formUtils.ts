@@ -1,6 +1,6 @@
 import { UseFormReturn } from 'react-hook-form'
 import * as Sentry from '@sentry/nextjs'
-import _ from 'lodash'
+import { isError, noop } from 'lodash-es'
 import { z } from 'zod'
 
 import { FetchReqError } from '@/utils/shared/fetchReq'
@@ -28,7 +28,7 @@ export async function triggerServerActionForForm<
     form,
     formName,
     analyticsProps,
-    onError = form?.setError ?? _.noop,
+    onError = form?.setError ?? noop,
   }: {
     form?: F
     formName: string
@@ -40,7 +40,7 @@ export async function triggerServerActionForForm<
   trackFormSubmitted(formName, analyticsProps)
 
   const response = await fn().catch(error => {
-    if (!_.isError(error)) {
+    if (!isError(error)) {
       trackFormSubmitErrored(formName, { 'Error Type': 'Unknown', ...analyticsProps })
       onError(GENERIC_FORM_ERROR_KEY, { message: error })
       Sentry.captureMessage(`triggerServerActionForForm returned unexpected form response`, {

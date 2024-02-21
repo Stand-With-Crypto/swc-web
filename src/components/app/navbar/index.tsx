@@ -1,6 +1,7 @@
 'use client'
-import React, { useCallback } from 'react'
-import _ from 'lodash'
+
+import { useCallback } from 'react'
+import { capitalize } from 'lodash-es'
 import { Menu } from 'lucide-react'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
@@ -58,7 +59,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
         <div className="flex h-10 items-center bg-yellow-300 text-center">
           <div className="container flex justify-between">
             <p className="flex-shrink-0 font-bold">
-              {_.capitalize(NEXT_PUBLIC_ENVIRONMENT.toLowerCase())} Environment
+              {capitalize(NEXT_PUBLIC_ENVIRONMENT.toLowerCase())} Environment
             </p>
             <div className="xs:text-xs space-x-3 text-sm">
               <InternalLink className="underline" href={urls.internalHomepage()}>

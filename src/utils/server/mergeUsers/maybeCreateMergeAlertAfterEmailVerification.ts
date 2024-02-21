@@ -1,4 +1,4 @@
-import _ from 'lodash'
+import { uniq } from 'lodash-es'
 
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getLogger } from '@/utils/shared/logger'
@@ -42,7 +42,7 @@ export async function maybeCreateMergeAlertAfterEmailVerification(userEmailAddre
   logger.info(
     `found ${maybeMatchUsers.length} users with verified email address ${userEmailAddress.emailAddress}`,
   )
-  const existingMatchUserIds = _.uniq([
+  const existingMatchUserIds = uniq([
     ...user.userMergeAlertUserA.map(x => x.userBId),
     ...user.userMergeAlertUserB.map(x => x.userAId),
   ])

@@ -1,6 +1,6 @@
 import 'server-only'
 
-import _ from 'lodash'
+import { uniq } from 'lodash-es'
 import { NextResponse } from 'next/server'
 
 import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
@@ -16,7 +16,7 @@ async function apiResponseForUserPerformedUserActionTypes() {
     },
   })
 
-  const performedUserActionTypes = _.uniq(user?.userActions.map(({ actionType }) => actionType))
+  const performedUserActionTypes = uniq(user?.userActions.map(({ actionType }) => actionType))
   return { performedUserActionTypes }
 }
 

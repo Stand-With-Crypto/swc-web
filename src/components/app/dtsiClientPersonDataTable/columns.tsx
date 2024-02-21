@@ -1,7 +1,7 @@
 'use client'
 
 import { ColumnDef } from '@tanstack/react-table'
-import _ from 'lodash'
+import { isNil } from 'lodash-es'
 
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
 import { SortableHeader } from '@/components/app/dtsiClientPersonDataTable/dataTable'
@@ -48,7 +48,7 @@ export const getDTSIClientPersonDataTableColumns = ({
     accessorKey: 'swcStanceScore',
     accessorFn: row => {
       const score = row.manuallyOverriddenStanceScore || row.computedStanceScore
-      if (_.isNil(score)) {
+      if (isNil(score)) {
         return -1
       }
       return score

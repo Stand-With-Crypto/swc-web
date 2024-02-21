@@ -1,4 +1,4 @@
-import _ from 'lodash'
+import { chunk } from 'lodash-es'
 
 import { logger } from '@/utils/shared/logger'
 
@@ -7,7 +7,7 @@ export const batchAsyncAndLog = async <T, A extends (items: T[]) => Promise<any>
   action: A,
   { chunkSize }: { chunkSize?: number } = {},
 ) => {
-  const batches = _.chunk(items, chunkSize || 100)
+  const batches = chunk(items, chunkSize || 100)
   const total = batches.reduce((acc, batch) => acc + batch.length, 0)
   let count = 0
   const results: Awaited<ReturnType<A>>[] = []

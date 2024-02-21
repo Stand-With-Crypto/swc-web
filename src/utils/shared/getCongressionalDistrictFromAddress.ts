@@ -1,5 +1,5 @@
 import * as Sentry from '@sentry/nextjs'
-import _ from 'lodash'
+import { isInteger, isObject } from 'lodash-es'
 
 import {
   getGoogleCivicDataFromAddress,
@@ -36,7 +36,7 @@ const parseCongressionalDistrictString = (districtString: string) => {
   const slashParts = districtString.split('/')
   const [cdStr, districtNumString] = slashParts[slashParts.length - 1].split(':')
   const districtNum = parseInt(districtNumString, 10)
-  if (cdStr !== 'cd' || !_.isInteger(districtNum)) {
+  if (cdStr !== 'cd' || !isInteger(districtNum)) {
     Sentry.captureMessage('unexpected district string structure', {
       tags: { domain: 'getCongressionalDistrictFromAddress' },
       extra: { districtString, cdStr, districtNumString },
@@ -63,15 +63,15 @@ const parseStateString = (districtString: string) => {
 export async function getCongressionalDistrictFromAddress(address: string) {
   const result = await getGoogleCivicDataFromAddress(address)
   const districtString = findCongressionalDistrictString(result, address)
-  if (_.isObject(districtString)) {
+  if (isObject(districtString)) {
     return districtString
   }
   const districtNumber = parseCongressionalDistrictString(districtString)
-  if (_.isObject(districtNumber)) {
+  if (isObject(districtNumber)) {
     return districtNumber
   }
   const stateCode = parseStateString(districtString)
-  if (_.isObject(stateCode)) {
+  if (isObject(stateCode)) {
     return stateCode
   }
   return { stateCode, districtNumber }
