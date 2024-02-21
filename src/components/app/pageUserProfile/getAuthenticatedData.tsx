@@ -43,6 +43,7 @@ export async function getAuthenticatedData() {
           userActionCall: true,
           nftMint: true,
           userActionOptIn: true,
+          userActionVoterRegistration: true,
         },
       },
     },

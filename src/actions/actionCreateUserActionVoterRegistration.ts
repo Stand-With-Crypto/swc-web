@@ -22,23 +22,19 @@ import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
-import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
 import { generateReferralId } from '@/utils/shared/referralId'
-import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
-import { UserActionCallCampaignName } from '@/utils/shared/userActionCampaigns'
-import { zodAddress } from '@/validation/fields/zodAddress'
-import { zodDTSISlug } from '@/validation/fields/zodDTSISlug'
-import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
+import { UserActionVoterRegistrationCampaignName } from '@/utils/shared/userActionCampaigns'
+import { zodUsaState } from '@/validation/fields/zodUsaState'
 
-const createActionCallCongresspersonInputValidationSchema = object({
-  phoneNumber: zodPhoneNumber.transform(str => str && normalizePhoneNumber(str)),
-  campaignName: nativeEnum(UserActionCallCampaignName),
-  dtsiSlug: zodDTSISlug,
-  address: zodAddress,
+const logger = getLogger(`actionCreateUserActionVoterRegistration`)
+
+const createActionVoterRegistrationInputValidationSchema = object({
+  campaignName: nativeEnum(UserActionVoterRegistrationCampaignName),
+  usaState: zodUsaState.optional(),
 })
 
-export type CreateActionCallCongresspersonInput = z.infer<
-  typeof createActionCallCongresspersonInputValidationSchema
+export type CreateActionVoterRegistrationInput = z.infer<
+  typeof createActionVoterRegistrationInputValidationSchema
 >
 
 interface SharedDependencies {
@@ -48,19 +44,15 @@ interface SharedDependencies {
   peopleAnalytics: ReturnType<typeof getServerPeopleAnalytics>
 }
 
-const logger = getLogger(`actionCreateUserActionCallCongressperson`)
-
-export const actionCreateUserActionCallCongressperson = withServerActionMiddleware(
-  'actionCreateUserActionCallCongressperson',
-  _actionCreateUserActionCallCongressperson,
+export const actionCreateUserActionVoterRegistration = withServerActionMiddleware(
+  'actionCreateUserActionVoterRegistration',
+  _actionCreateUserActionVoterRegistration,
 )
 
-async function _actionCreateUserActionCallCongressperson(
-  input: CreateActionCallCongresspersonInput,
-) {
+async function _actionCreateUserActionVoterRegistration(input: CreateActionVoterRegistrationInput) {
   logger.info('triggered')
 
-  const validatedInput = createActionCallCongresspersonInputValidationSchema.safeParse(input)
+  const validatedInput = createActionVoterRegistrationInputValidationSchema.safeParse(input)
   if (!validatedInput.success) {
     return {
       errors: validatedInput.error.flatten().fieldErrors,
@@ -97,7 +89,7 @@ async function _actionCreateUserActionCallCongressperson(
     return { user: getClientUser(user) }
   }
 
-  const { userAction, updatedUser } = await createActionAndUpdateUser({
+  const { userAction } = await createAction({
     user,
     isNewUser: !userMatch.user,
     validatedInput: validatedInput.data,
@@ -109,19 +101,19 @@ async function _actionCreateUserActionCallCongressperson(
     await claimNFT(userAction, user.primaryUserCryptoAddress)
   }
 
-  return { user: getClientUser(updatedUser) }
+  return { user: getClientUser(user) }
 }
 
 async function createUser(sharedDependencies: Pick<SharedDependencies, 'localUser' | 'sessionId'>) {
   const { localUser, sessionId } = sharedDependencies
   const createdUser = await prismaClient.user.create({
     data: {
-      referralId: generateReferralId(),
       informationVisibility: UserInformationVisibility.ANONYMOUS,
       userSessions: { create: { id: sessionId } },
       hasOptedInToEmails: false,
       hasOptedInToMembership: false,
       hasOptedInToSms: false,
+      referralId: generateReferralId(),
       ...mapLocalUserToUserDatabaseFields(localUser),
     },
     include: {
@@ -142,11 +134,11 @@ async function createUser(sharedDependencies: Pick<SharedDependencies, 'localUse
 
 async function getRecentUserActionByUserId(
   userId: User['id'],
-  validatedInput: z.SafeParseSuccess<CreateActionCallCongresspersonInput>,
+  validatedInput: z.SafeParseSuccess<CreateActionVoterRegistrationInput>,
 ) {
   return prismaClient.userAction.findFirst({
     where: {
-      actionType: UserActionType.CALL,
+      actionType: UserActionType.VOTER_REGISTRATION,
       campaignName: validatedInput.data.campaignName,
       userId: userId,
     },
@@ -159,20 +151,20 @@ function logSpamActionSubmissions({
   userId,
   sharedDependencies,
 }: {
-  validatedInput: z.SafeParseSuccess<CreateActionCallCongresspersonInput>
+  validatedInput: z.SafeParseSuccess<CreateActionVoterRegistrationInput>
   userAction: UserAction
   userId: User['id']
   sharedDependencies: Pick<SharedDependencies, 'analytics'>
 }) {
   sharedDependencies.analytics.trackUserActionCreatedIgnored({
-    actionType: UserActionType.CALL,
+    actionType: UserActionType.VOTER_REGISTRATION,
     campaignName: validatedInput.data.campaignName,
     reason: 'Too Many Recent',
     userState: 'Existing',
-    ...convertAddressToAnalyticsProperties(validatedInput.data.address),
+    usaState: validatedInput.data.usaState,
   })
   Sentry.captureMessage(
-    `duplicate ${UserActionType.CALL} user action for campaign ${validatedInput.data.campaignName} submitted`,
+    `duplicate ${UserActionType.VOTER_REGISTRATION} user action for campaign ${validatedInput.data.campaignName} submitted`,
     {
       extra: { validatedInput: validatedInput.data, userAction },
       user: { id: userId },
@@ -180,7 +172,7 @@ function logSpamActionSubmissions({
   )
 }
 
-async function createActionAndUpdateUser<U extends User>({
+async function createAction<U extends User>({
   user,
   validatedInput,
   userMatch,
@@ -189,65 +181,42 @@ async function createActionAndUpdateUser<U extends User>({
 }: {
   user: U
   isNewUser: boolean
-  validatedInput: CreateActionCallCongresspersonInput
+  validatedInput: CreateActionVoterRegistrationInput
   userMatch: UserAndMethodOfMatch
   sharedDependencies: Pick<SharedDependencies, 'sessionId' | 'analytics' | 'peopleAnalytics'>
 }) {
   const userAction = await prismaClient.userAction.create({
     data: {
       user: { connect: { id: user.id } },
-      actionType: UserActionType.CALL,
+      actionType: UserActionType.VOTER_REGISTRATION,
       campaignName: validatedInput.campaignName,
       ...('userCryptoAddress' in userMatch
         ? {
             userCryptoAddress: { connect: { id: userMatch.userCryptoAddress.id } },
           }
         : { userSession: { connect: { id: sharedDependencies.sessionId } } }),
-      userActionCall: {
+      userActionVoterRegistration: {
         create: {
-          recipientDtsiSlug: validatedInput.dtsiSlug,
-          recipientPhoneNumber: validatedInput.phoneNumber,
-          address: {
-            connectOrCreate: {
-              where: { googlePlaceId: validatedInput.address.googlePlaceId },
-              create: validatedInput.address,
-            },
-          },
+          usaState: validatedInput.usaState,
         },
       },
     },
     include: {
-      userActionCall: true,
+      userActionVoterRegistration: true,
     },
   })
 
-  const updatedUser = await prismaClient.user.update({
-    where: { id: user.id },
-    data: {
-      address: {
-        connect: {
-          id: userAction.userActionCall!.addressId,
-        },
-      },
-    },
-    include: {
-      primaryUserCryptoAddress: true,
-      address: true,
-    },
-  })
-  logger.info('created user action and updated user')
+  logger.info('created user action')
 
   sharedDependencies.analytics.trackUserActionCreated({
-    actionType: UserActionType.CALL,
+    actionType: UserActionType.VOTER_REGISTRATION,
     campaignName: validatedInput.campaignName,
-    'Recipient DTSI Slug': validatedInput.dtsiSlug,
-    'Recipient Phone Number': validatedInput.phoneNumber,
-    ...convertAddressToAnalyticsProperties(validatedInput.address),
+    usaState: validatedInput.usaState,
     userState: isNewUser ? 'New' : 'Existing',
   })
   sharedDependencies.peopleAnalytics.set({
-    ...convertAddressToAnalyticsProperties(validatedInput.address),
+    usaState: validatedInput.usaState,
   })
 
-  return { userAction, updatedUser }
+  return { userAction }
 }

@@ -7,6 +7,7 @@ import {
   UserActionEmailRecipient,
   UserActionOptIn,
   UserActionType,
+  UserActionVoterRegistration,
 } from '@prisma/client'
 import _ from 'lodash'
 
@@ -29,6 +30,7 @@ type ClientUserActionDatabaseQuery = UserAction & {
   userActionCall: UserActionCall | null
   userActionDonation: UserActionDonation | null
   userActionOptIn: UserActionOptIn | null
+  userActionVoterRegistration: UserActionVoterRegistration | null
 }
 
 type ClientUserActionEmailRecipient = Pick<UserActionEmailRecipient, 'id'> & {
@@ -56,7 +58,9 @@ type ClientUserActionOptIn = Pick<UserActionOptIn, 'optInType'> & {
 }
 // Added here as a placeholder for type inference until we have some tweet-specific fields
 type ClientUserActionTweet = { actionType: typeof UserActionType.TWEET }
-type ClientUserActionVoterRegistration = { actionType: typeof UserActionType.VOTER_REGISTRATION }
+type ClientUserActionVoterRegistration = Pick<UserActionVoterRegistration, 'usaState'> & {
+  actionType: typeof UserActionType.VOTER_REGISTRATION
+}
 
 /*
 At the database schema level we can't enforce that a single action only has one "type" FK, but at the client level we can and should
@@ -111,8 +115,8 @@ export const getClientUserAction = ({
   switch (actionType) {
     case UserActionType.OPT_IN: {
       const { optInType } = getRelatedModel(record, 'userActionOptIn')
-      const callFields: ClientUserActionOptIn = { optInType, actionType }
-      return getClientModel({ ...sharedProps, ...callFields })
+      const optInFields: ClientUserActionOptIn = { optInType, actionType }
+      return getClientModel({ ...sharedProps, ...optInFields })
     }
     case UserActionType.CALL: {
       const { recipientDtsiSlug } = getRelatedModel(record, 'userActionCall')
@@ -158,7 +162,9 @@ export const getClientUserAction = ({
       return getClientModel({ ...sharedProps, actionType })
     }
     case UserActionType.VOTER_REGISTRATION: {
-      return getClientModel({ ...sharedProps, actionType })
+      const { usaState } = getRelatedModel(record, 'userActionVoterRegistration')
+      const voterRegistrationFields: ClientUserActionVoterRegistration = { usaState, actionType }
+      return getClientModel({ ...sharedProps, ...voterRegistrationFields })
     }
   }
   throw new Error(`getClientUserAction: no user action fk found for id ${id}`)
