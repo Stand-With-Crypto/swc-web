@@ -2,7 +2,7 @@
 import React from 'react'
 import { UserActionType } from '@prisma/client'
 
-import { ThirdwebLoginDialog } from '@/components/app/authentication/thirdwebLoginContent'
+import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import {
   RecentActivityRowBase,
   RecentActivityRowProps,
@@ -62,9 +62,9 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
           onFocusContent: hasSignedUp
             ? undefined
             : () => (
-                <ThirdwebLoginDialog>
+                <LoginDialogWrapper>
                   <Button>Join</Button>
-                </ThirdwebLoginDialog>
+                </LoginDialogWrapper>
               ),
           children: (
             <MainText>
