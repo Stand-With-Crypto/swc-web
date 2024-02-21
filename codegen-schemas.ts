@@ -20,7 +20,7 @@ const config: CodegenConfig = {
     'src/data/dtsi/schema.graphql': {
       plugins: ['schema-ast'],
       schema: {
-        [process.env.USE_DTSI_PRODUCTION_API_ON_LOCAL === 'true'
+        [process.env.USE_DTSI_PRODUCTION_API === 'true'
           ? 'https://www.dotheysupportit.com/api/graphql'
           : 'https://testing.dotheysupportit.com/api/graphql']: {
           headers: {

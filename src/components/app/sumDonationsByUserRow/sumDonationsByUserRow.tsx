@@ -22,7 +22,7 @@ export function SumDonationsByUserRow({ locale, sumDonations, index }: SumDonati
   return (
     <div className="flex items-center justify-between gap-5">
       <div className="flex items-center gap-2">
-        <div className="relative w-6 text-center">
+        <div className={cn('relative text-center', index < 1000 ? 'w-6' : 'w-8')}>
           <div className={cn('z-1', !_.isNil(INDEX_SHIELD_IMAGE_MAP[index]) && 'text-white')}>
             {index + 1}
           </div>
@@ -47,7 +47,7 @@ export function SumDonationsByUserRow({ locale, sumDonations, index }: SumDonati
           amount={sumDonations.totalAmountUsd}
           currencyCode={SupportedFiatCurrencyCodes.USD}
           locale={locale}
-          maximumFractionDigits={0}
+          maximumFractionDigits={2}
         />
       </div>
     </div>
