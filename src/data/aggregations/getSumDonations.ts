@@ -13,10 +13,13 @@ export const getSumDonations = async ({ includeFairshake }: { includeFairshake: 
       SUM(amount_usd) AS amountUsd
     FROM user_action_donation
   `,
+    // If we ever have an nft mint action that is not a "donation", we'll need to refactor this logic
     prismaClient.$queryRaw`
     SELECT 
       SUM(cost_at_mint_usd) AS amountUsd
     FROM nft_mint
+    JOIN user_action ua ON ua.nft_mint_id = nft_mint.id
+    WHERE ua.action_type = 'NFT_MINT'
   `,
   ])
   const donationsResult = donations as { amountUsd?: Decimal }[]
