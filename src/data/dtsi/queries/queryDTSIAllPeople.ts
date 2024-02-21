@@ -6,7 +6,16 @@ import { DTSI_AllPeopleQuery, DTSI_AllPeopleQueryVariables } from '@/data/dtsi/g
 
 export const query = /* GraphQL */ `
   query AllPeople($limit: Int!) {
-    people(limit: $limit, offset: 0) {
+    people(
+      limit: $limit
+      offset: 0
+      personRoleGroupingOr: [
+        CURRENT_US_HOUSE_OF_REPS
+        CURRENT_US_SENATE
+        RUNNING_FOR_PRESIDENT
+        US_PRESIDENT
+      ]
+    ) {
       ...PersonCard
     }
   }
