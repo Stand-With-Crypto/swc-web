@@ -2,6 +2,7 @@ import { UserActionType } from '@prisma/client'
 import _ from 'lodash'
 import { redirect, RedirectType } from 'next/navigation'
 
+import { NFTDisplay } from '@/components/app/nftHub/nftDisplay'
 import { PageUserProfileUser } from '@/components/app/pageUserProfile/getAuthenticatedData'
 import { UpdateUserProfileFormDialog } from '@/components/app/updateUserProfileForm/dialog'
 import { UserActionRowCTAsList } from '@/components/app/userActionRowCTA/userActionRowCTAsList'
@@ -38,6 +39,7 @@ export function PageUserProfile({
     )
   }
   const { userActions } = user
+
   const performedUserActionTypes = _.uniq(userActions.map(x => x.actionType))
   return (
     <div className="container space-y-10 lg:space-y-16">
@@ -140,7 +142,9 @@ export function PageUserProfile({
         <PageSubTitle className="mb-5">
           You will receive free NFTs for completing advocacy-related actions.
         </PageSubTitle>
-        <p className="text-center">TODO</p>
+        <div>
+          <NFTDisplay userActions={userActions} />
+        </div>
       </section>
       <section>
         <PageTitle className="mb-4" size="sm">

@@ -61,8 +61,10 @@ export const getClientUserWithENSData = (
   const initial = getClientUser(record)
   return {
     ...initial,
-    primaryUserCryptoAddress: record.primaryUserCryptoAddress
-      ? getClientUserCryptoAddressWithENSData(record.primaryUserCryptoAddress, ensData)
-      : null,
+    primaryUserCryptoAddress:
+      record.informationVisibility !== UserInformationVisibility.ANONYMOUS &&
+      record.primaryUserCryptoAddress
+        ? getClientUserCryptoAddressWithENSData(record.primaryUserCryptoAddress, ensData)
+        : null,
   }
 }
