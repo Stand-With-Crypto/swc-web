@@ -10,8 +10,8 @@ import { ClaimNft } from '@/components/app/userActionFormVoterRegistration/secti
 import { Survey } from '@/components/app/userActionFormVoterRegistration/sections/survey'
 import { VoterRegistrationForm } from '@/components/app/userActionFormVoterRegistration/sections/voterRegistrationForm'
 import { useSections } from '@/hooks/useSections'
-import { NFT_CLIENT_METADATA } from '@/utils/web/nft'
 import { NFTSlug } from '@/utils/shared/nft'
+import { NFT_CLIENT_METADATA } from '@/utils/web/nft'
 
 export function UserActionFormVoterRegistration({ onClose }: { onClose: () => void }) {
   const sectionProps = useSections<SectionNames>({

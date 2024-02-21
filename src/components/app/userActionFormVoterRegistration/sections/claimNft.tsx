@@ -14,12 +14,12 @@ import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { ExternalLink } from '@/components/ui/link'
 import { UseSectionsReturn } from '@/hooks/useSections'
+import { NFTSlug } from '@/utils/shared/nft'
 import { UserActionVoterRegistrationCampaignName } from '@/utils/shared/userActionCampaigns'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
 import { NFT_CLIENT_METADATA } from '@/utils/web/nft'
 import { toastGenericError } from '@/utils/web/toastUtils'
-import { NFTSlug } from '@/utils/shared/nft'
 
 const I_AM_A_VOTER_NFT_IMAGE = NFT_CLIENT_METADATA[NFTSlug.I_AM_A_VOTER].image
 
