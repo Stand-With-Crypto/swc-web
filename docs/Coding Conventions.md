@@ -15,6 +15,7 @@ Below is a non-exhaustive list of coding conventions that we try to follow. This
   - When defining a constant array, add `readonly` to prevent unexpected mutations
 - variables that are booleans should be prefixed with a descriptor that implies a yes or no answer. Examples of prefixes include `has`, `is`, `should`, `can`, etc
 - If a parameter or prop is required by a component, function or method it should never be defined as optional
+- Type definitions should use the `interface` keyword unless in specific cases where it's not possible due to a type assignment or something else (e.g.: `type T = Pick<...>`)
 
 ## Validation
 

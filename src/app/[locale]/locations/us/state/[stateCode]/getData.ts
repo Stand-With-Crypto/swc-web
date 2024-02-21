@@ -21,40 +21,40 @@ export interface Statement {
   positions: StatementPosition[]
 }
 
+const steveGarvey: Person = {
+  id: '1',
+  firstName: 'Steve',
+  lastName: 'Garvey',
+  firstNickname: '',
+  nameSuffix: '',
+  profilePictureUrl: '/politicians/steve-garvey.png',
+  profilePictureUrlDimensions: { width: 272, height: 272 },
+}
+
+const adamSchiff: Person = {
+  id: '2',
+  firstName: 'Adam',
+  lastName: 'Schiff',
+  firstNickname: '',
+  nameSuffix: '',
+  profilePictureUrl: '/politicians/adam-schiff.png',
+  profilePictureUrlDimensions: { width: 272, height: 272 },
+}
+
+const katiePorter: Person = {
+  id: '3',
+  firstName: 'Katie',
+  lastName: 'Porter',
+  firstNickname: '',
+  nameSuffix: '',
+  profilePictureUrl: '/politicians/katie-porter.png',
+  profilePictureUrlDimensions: { width: 272, height: 272 },
+}
+
 // LATER-TASK remove data mocks
 export function getData(stateCode: string): Statement[] | null {
   if (stateCode !== 'ca') {
     return null
-  }
-
-  const steveGarvey: Person = {
-    id: '1',
-    firstName: 'Steve',
-    lastName: 'Garvey',
-    firstNickname: '',
-    nameSuffix: '',
-    profilePictureUrl: '/politicians/steve-garvey.png',
-    profilePictureUrlDimensions: { width: 272, height: 272 },
-  }
-
-  const adamSchiff: Person = {
-    id: '2',
-    firstName: 'Adam',
-    lastName: 'Schiff',
-    firstNickname: '',
-    nameSuffix: '',
-    profilePictureUrl: '/politicians/adam-schiff.png',
-    profilePictureUrlDimensions: { width: 272, height: 272 },
-  }
-
-  const katiePorter: Person = {
-    id: '3',
-    firstName: 'Katie',
-    lastName: 'Porter',
-    firstNickname: '',
-    nameSuffix: '',
-    profilePictureUrl: '/politicians/katie-porter.png',
-    profilePictureUrlDimensions: { width: 272, height: 272 },
   }
 
   return [
