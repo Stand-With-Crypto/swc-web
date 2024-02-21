@@ -49,7 +49,7 @@ export const fullUrl = (path: string) => {
     case 'local':
       return `http://localhost:3000${path}`
     case 'testing':
-      return `https://swc-web-testing.vercel.app${path}`
+      return `https://testing.standwithcrypto.org${path}`
     case 'preview':
       return `${NEXT_PUBLIC_VERCEL_URL!}${path}`
     case 'production':

@@ -23,7 +23,13 @@ const config: StorybookConfig = {
     if (config.resolve) {
       config.resolve.alias = {
         ...config.resolve.alias,
+        'server-only': path.resolve(__dirname, '../node_modules/server-only/empty.js'),
+        '@/utils/server/obscenityMatcher': path.resolve(__dirname, './mockObscenityMatcher.ts'),
         '@/actions/actionCreateUserActionTweet': path.resolve(__dirname, './serverActionMocks.ts'),
+        '@/actions/actionCreateUserActionNFTMint': path.resolve(
+          __dirname,
+          './serverActionMocks.ts',
+        ),
         '@/actions/actionCreateUserActionCallCongressperson': path.resolve(
           __dirname,
           './serverActionMocks.ts',

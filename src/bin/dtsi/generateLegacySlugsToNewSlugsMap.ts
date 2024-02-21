@@ -6,7 +6,7 @@ import legacyPoliticianSlugs from '@/staticContent/dtsi/legacyPoliticianSlugs.js
 import _manuallyModifiedLegacyPoliticianToDTSIMap from '@/staticContent/dtsi/manuallyModifiedLegacyPoliticianToDTSIMap.json'
 import { getLogger } from '@/utils/shared/logger'
 
-process.env.USE_DTSI_PRODUCTION_API_ON_LOCAL = 'true'
+process.env.USE_DTSI_PRODUCTION_API = 'true'
 
 const logger = getLogger('dtsi/generateLegacySlugsToNewSlugsMap')
 const manuallyModifiedLegacyPoliticianToDTSIMap: Record<string, string> =
