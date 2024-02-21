@@ -19,8 +19,9 @@ import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
 import { NFT_CLIENT_METADATA } from '@/utils/web/nft'
 import { toastGenericError } from '@/utils/web/toastUtils'
+import { NFTSlug } from '@/utils/shared/nft'
 
-const I_AM_A_VOTER_NFT_IMAGE = NFT_CLIENT_METADATA['i-am-a-voter'].image
+const I_AM_A_VOTER_NFT_IMAGE = NFT_CLIENT_METADATA[NFTSlug.I_AM_A_VOTER].image
 
 interface ClaimNftProps extends UseSectionsReturn<SectionNames> {
   stateCode?: StateCode

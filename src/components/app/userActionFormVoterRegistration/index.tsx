@@ -11,6 +11,7 @@ import { Survey } from '@/components/app/userActionFormVoterRegistration/section
 import { VoterRegistrationForm } from '@/components/app/userActionFormVoterRegistration/sections/voterRegistrationForm'
 import { useSections } from '@/hooks/useSections'
 import { NFT_CLIENT_METADATA } from '@/utils/web/nft'
+import { NFTSlug } from '@/utils/shared/nft'
 
 export function UserActionFormVoterRegistration({ onClose }: { onClose: () => void }) {
   const sectionProps = useSections<SectionNames>({
@@ -51,7 +52,7 @@ export function UserActionFormVoterRegistration({ onClose }: { onClose: () => vo
         return (
           <UserActionFormSuccessScreen
             {...sectionProps}
-            nftWhenAuthenticated={NFT_CLIENT_METADATA['i-am-a-voter']}
+            nftWhenAuthenticated={NFT_CLIENT_METADATA[NFTSlug.I_AM_A_VOTER]}
             onClose={onClose}
           />
         )
