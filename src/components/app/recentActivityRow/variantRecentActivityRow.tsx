@@ -81,7 +81,11 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
               <Button>Call yours</Button>
             </UserActionFormCallCongresspersonDialog>
           ),
-          children: <MainText>Call to {formatDTSIPerson(action.person)}</MainText>,
+          children: (
+            <MainText>
+              Call to {action.person ? formatDTSIPerson(action.person) : 'Representative'}
+            </MainText>
+          ),
         }
       case UserActionType.DONATION:
         return {
@@ -103,7 +107,8 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
             </MainText>
           ),
         }
-      case UserActionType.EMAIL:
+      case UserActionType.EMAIL: {
+        const dtsiRecipients = action.userActionEmailRecipients.filter(x => x.person)
         return {
           onFocusContent: () => (
             <UserActionFormEmailCongresspersonDialog>
@@ -112,10 +117,14 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
           ),
           children: (
             <MainText>
-              Email to {action.userActionEmailRecipients.map(x => formatDTSIPerson(x.person))}
+              Email to{' '}
+              {dtsiRecipients.length
+                ? dtsiRecipients.map(x => formatDTSIPerson(x.person!)).join(', ')
+                : 'Representative'}
             </MainText>
           ),
         }
+      }
       case UserActionType.NFT_MINT: {
         return {
           onFocusContent: () => (
@@ -129,7 +138,7 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
       case UserActionType.TWEET: {
         return {
           onFocusContent: () => <UserActionTweetLink>Tweet</UserActionTweetLink>,
-          children: <MainText> Tweet sent in support of {getSWCDisplayText()}</MainText>,
+          children: <MainText>Tweet sent in support of {getSWCDisplayText()}</MainText>,
         }
       }
       case UserActionType.VOTER_REGISTRATION: {

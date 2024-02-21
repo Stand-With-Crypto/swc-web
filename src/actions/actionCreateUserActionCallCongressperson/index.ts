@@ -220,21 +220,22 @@ async function createActionAndUpdateUser<U extends User>({
       userActionCall: true,
     },
   })
-
-  const updatedUser = await prismaClient.user.update({
-    where: { id: user.id },
-    data: {
-      address: {
-        connect: {
-          id: userAction.userActionCall!.addressId,
+  const updatedUser = userAction.userActionCall!.addressId
+    ? await prismaClient.user.update({
+        where: { id: user.id },
+        data: {
+          address: {
+            connect: {
+              id: userAction.userActionCall!.addressId,
+            },
+          },
         },
-      },
-    },
-    include: {
-      primaryUserCryptoAddress: true,
-      address: true,
-    },
-  })
+        include: {
+          primaryUserCryptoAddress: true,
+          address: true,
+        },
+      })
+    : user
   logger.info('created user action and updated user')
 
   sharedDependencies.analytics.trackUserActionCreated({
