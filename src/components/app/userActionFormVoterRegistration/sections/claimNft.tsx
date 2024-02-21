@@ -90,7 +90,7 @@ export function ClaimNft({ goToSection, stateCode }: ClaimNftProps) {
         </div>
       </UserActionFormVoterRegistrationLayout.Container>
       <UserActionFormVoterRegistrationLayout.Footer>
-        <Button loading={loading} onClick={handleClaimNft} size="lg">
+        <Button disabled={loading} onClick={handleClaimNft} size="lg">
           Claim NFT
         </Button>
       </UserActionFormVoterRegistrationLayout.Footer>
