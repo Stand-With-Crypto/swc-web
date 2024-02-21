@@ -86,6 +86,7 @@
     "install": "^0.13.0",
     "js-cookie": "^3.0.5",
     "lodash": "^4.17.21",
+    "lodash-es": "^4.17.21",
     "lucide-react": "^0.294.0",
     "mixpanel": "^0.18.0",
     "mixpanel-browser": "^2.48.1",
