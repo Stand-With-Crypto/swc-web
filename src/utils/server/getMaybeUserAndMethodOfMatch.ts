@@ -2,7 +2,6 @@
 import { Prisma, UserCryptoAddress } from '@prisma/client'
 import { GetFindResult } from '@prisma/client/runtime/library'
 import * as Sentry from '@sentry/nextjs'
-import { compact } from 'lodash-es'
 
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
