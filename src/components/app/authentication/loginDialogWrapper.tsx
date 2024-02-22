@@ -22,7 +22,7 @@ interface LoginDialogWrapperProps extends React.PropsWithChildren {
 }
 
 enum LoginSections {
-  UNKNOWN = 'unknown',
+  LOADING = 'loading',
   AUTHENTICATED = 'authenticated',
   LOGIN = 'login',
   FINISH_PROFILE = 'finishProfile',
@@ -36,25 +36,38 @@ export function LoginDialogWrapper({
   const { session } = useThirdwebData()
   const { goToSection, currentSection } = useSections({
     sections: Object.values(LoginSections),
-    initialSectionId: LoginSections.UNKNOWN,
+    initialSectionId: LoginSections.LOADING,
     analyticsName: 'Login Button',
   })
 
+  /**
+   * This is not pretty, but we need to both sync the session state with the current section
+   * and also be able to programmatically change the section. The edge cases we're handling here are:
+   * 1. When the user logs in we should not send him directly to the authed content, we should let
+   *    `handleLoginSuccess` decide to sent him to finish profile or to the authed content
+   * 2. When the user refreshes the page we should verify, based on the session, if we should show
+   *    the authed or unauthed content
+   * 3. When the user logs in and out without refreshing the page we should change the current section manually
+   */
   React.useEffect(() => {
-    if (session.isLoading || currentSection !== LoginSections.UNKNOWN) {
+    if (session.isLoading) {
       return
     }
 
-    if (!session.isLoggedIn) {
+    if (!session.isLoggedIn && currentSection === LoginSections.LOADING) {
       goToSection(LoginSections.LOGIN, { disableAnalytics: true })
     }
 
-    if (session.isLoggedIn) {
+    if (session.isLoggedIn && currentSection === LoginSections.LOADING) {
       goToSection(LoginSections.AUTHENTICATED, { disableAnalytics: true })
+    }
+
+    if (!session.isLoggedIn && currentSection === LoginSections.AUTHENTICATED) {
+      goToSection(LoginSections.LOGIN, { disableAnalytics: true })
     }
   }, [currentSection, goToSection, session])
 
-  const shouldShowLoadingState = session.isLoading || currentSection === LoginSections.UNKNOWN
+  const shouldShowLoadingState = session.isLoading || currentSection === LoginSections.LOADING
   if (shouldShowLoadingState && loadingFallback) {
     return loadingFallback
   }
