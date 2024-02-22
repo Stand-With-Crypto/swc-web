@@ -13,15 +13,16 @@ export function HeroCTA() {
     <LoginDialogWrapper
       authenticatedContent={
         <Button asChild size="lg">
-          <InternalLink href={urls.profile()}>View Profile</InternalLink>
+          <InternalLink href={urls.profile()}>
+            {profileReq?.data?.user && !profileReq.data.user.primaryUserCryptoAddress
+              ? 'View Profile'
+              : 'Finish your profile'}
+          </InternalLink>
         </Button>
       }
+      loadingFallback={<Button size="lg">Join the fight</Button>}
     >
-      <Button size="lg">
-        {profileReq?.data?.user && !profileReq.data.user.primaryUserCryptoAddress
-          ? 'Complete your profile'
-          : 'Join the fight'}
-      </Button>
+      <Button size="lg">Join the fight</Button>
     </LoginDialogWrapper>
   )
 }
