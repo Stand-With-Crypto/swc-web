@@ -33,7 +33,7 @@ export const getUserDisplayName = (
 
 export const getUserDisplayNameWithoutENS = (
   user: Pick<
-    ClientUserWithENSData,
+    ClientUser,
     'firstName' | 'lastName' | 'informationVisibility' | 'primaryUserCryptoAddress'
   > | null,
 ) => {
