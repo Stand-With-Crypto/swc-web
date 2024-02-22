@@ -7,7 +7,7 @@ npm run codegen
 npm run lint
 NODE_ENV=test npm run test
 # If the branch is a db changes branch, we're going to skip building the preview because it's pointing to a database without the changes (testing)
-if [[ $VERCEL_GIT_COMMIT_REF == "main" || $VERCEL_GIT_COMMIT_REF == "deploy-web-production" ]]; then
+if [[ $VERCEL_GIT_COMMIT_REF == "main" ]]; then
     echo "pushing database changes"
     npx prisma db push --skip-generate
 else
