@@ -3,10 +3,7 @@ import 'server-only'
 import { getCountPolicymakerContacts } from '@/data/aggregations/getCountPolicymakerContacts'
 import { getCountUsers } from '@/data/aggregations/getCountUsers'
 import { getSumDonations } from '@/data/aggregations/getSumDonations'
-import {
-  getSumDonationsByUser,
-  getSumDonationsByUserWithBuildCache,
-} from '@/data/aggregations/getSumDonationsByUser'
+import { getSumDonationsByUserWithBuildCache } from '@/data/aggregations/getSumDonationsByUser'
 import { queryDTSIHomepagePeople } from '@/data/dtsi/queries/queryDTSIHomepagePeople'
 import { getPublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 
