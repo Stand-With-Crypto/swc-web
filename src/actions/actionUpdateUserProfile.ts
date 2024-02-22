@@ -170,15 +170,14 @@ async function handleCapitolCanaryAdvocateUpsert(
       userEmailAddress: oldUser.primaryUserEmailAddress, // Using old email here.
       opts: {
         isEmailOptout:
-          oldUser.primaryUserEmailAddress?.emailAddress !== primaryUserEmailAddress?.emailAddress ||
-          primaryUserEmailAddress === null
-            ? true
-            : false,
-        isSmsOptout:
+          (oldUser.primaryUserEmailAddress?.emailAddress !== undefined &&
+            oldUser.primaryUserEmailAddress.emailAddress !==
+              primaryUserEmailAddress?.emailAddress) ||
+          primaryUserEmailAddress === null,
+        isSmsOptout: !!(
           oldUser.phoneNumber !== updatedUser.phoneNumber ||
           (oldUser.phoneNumber && !updatedUser.phoneNumber)
-            ? true
-            : false,
+        ),
       },
     }
     await inngest.send({
