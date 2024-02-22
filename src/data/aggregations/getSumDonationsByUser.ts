@@ -3,7 +3,7 @@ import 'server-only'
 import { Decimal } from '@prisma/client/runtime/library'
 import { compact, keyBy } from 'lodash-es'
 
-import { getClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
+import { getClientLeaderboardUser } from '@/clientModels/clientUser/clientLeaderboardUser'
 import { getENSDataMapFromCryptoAddressesAndFailGracefully } from '@/data/web3/getENSDataFromCryptoAddress'
 import { prismaClient } from '@/utils/server/prismaClient'
 
@@ -75,7 +75,7 @@ export const getSumDonationsByUser = async ({ limit, offset }: SumDonationsByUse
     return {
       totalAmountUsd: totalAmountUsd.toNumber(),
       user: {
-        ...getClientUserWithENSData(
+        ...getClientLeaderboardUser(
           user,
           user.primaryUserCryptoAddress?.cryptoAddress
             ? ensDataMap[user.primaryUserCryptoAddress?.cryptoAddress]
