@@ -366,6 +366,7 @@ enum NFTMintStatus {
   REQUESTED
   CLAIMED
   FAILED
+  TIMEDOUT
 }
 
 model NFTMint {
