@@ -179,7 +179,7 @@
     "postcss": "^8",
     "prettier": "^3.1.1",
     "prettier-plugin-tailwindcss": "^0.5.11",
-    "prisma": "^5.7.0",
+    "prisma": "^5.10.2",
     "prisma-erd-generator": "^1.11.2",
     "start-server-and-test": "^2.0.3",
     "storybook": "^7.6.4",

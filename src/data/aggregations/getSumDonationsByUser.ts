@@ -17,7 +17,7 @@ export type SumDonationsByUserConfig = {
   offset?: number
 }
 // If we ever have an nft mint action that is not a "donation", we'll need to refactor this logic
-const getSumDonationsByUser = async ({ limit, offset }: SumDonationsByUserConfig) => {
+export const getSumDonationsByUser = async ({ limit, offset }: SumDonationsByUserConfig) => {
   // there might be a way of doing this better with https://www.prisma.io/docs/orm/prisma-client/queries/aggregation-grouping-summarizing
   // but nothing wrong with some raw sql for custom aggregations
   const total: {

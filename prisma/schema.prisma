@@ -318,7 +318,7 @@ model UserActionEmailRecipient {
   userActionEmailId String          @map("user_action_email_id")
   userActionEmail   UserActionEmail @relation(fields: [userActionEmailId], references: [id])
   // unfortunately some of our legacy data doesn't include this info so it needs to be optional
-  dtsiSlug          String?          @map("dtsi_slug")
+  dtsiSlug          String?         @map("dtsi_slug")
 
   @@index([userActionEmailId])
   @@map("user_action_email_recipient")
@@ -328,10 +328,10 @@ model UserActionCall {
   id                   String     @id @default(uuid())
   userAction           UserAction @relation(fields: [id], references: [id])
   // unfortunately some of our legacy data doesn't include this info so it needs to be optional
-  recipientDtsiSlug    String?     @map("recipient_dtsi_slug")
-  recipientPhoneNumber String?     @map("recipient_phone_number")
-  address              Address?    @relation(fields: [addressId], references: [id])
-  addressId            String?     @map("address_id")
+  recipientDtsiSlug    String?    @map("recipient_dtsi_slug")
+  recipientPhoneNumber String?    @map("recipient_phone_number")
+  address              Address?   @relation(fields: [addressId], references: [id])
+  addressId            String?    @map("address_id")
 
   @@index([id])
   @@index([addressId])
