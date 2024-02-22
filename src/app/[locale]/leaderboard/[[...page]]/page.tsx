@@ -9,7 +9,10 @@ import {
   PAGE_LEADERBOARD_TITLE,
   PageLeaderboard,
 } from '@/components/app/pageLeaderboard'
-import { PAGE_LEADERBOARD_TOTAL_PRE_GENERATED_PAGES } from '@/components/app/pageLeaderboard/constants'
+import {
+  PAGE_LEADERBOARD_ITEMS_PER_PAGE,
+  PAGE_LEADERBOARD_TOTAL_PRE_GENERATED_PAGES,
+} from '@/components/app/pageLeaderboard/constants'
 import { getDataForPageLeaderboard } from '@/components/app/pageLeaderboard/getData'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
@@ -71,7 +74,7 @@ export default async function Leaderboard({ params }: Props) {
   if (!pageNum || !tab) {
     notFound()
   }
-  const offset = (pageNum - 1) * 20
+  const offset = (pageNum - 1) * PAGE_LEADERBOARD_ITEMS_PER_PAGE
   const { actions, sumDonationsByUser } = await getDataForPageLeaderboard(offset)
   return <PageLeaderboard {...{ tab, actions, locale, sumDonationsByUser, offset, pageNum }} />
 }
