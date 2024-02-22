@@ -3,7 +3,10 @@ import 'server-only'
 import { getCountPolicymakerContacts } from '@/data/aggregations/getCountPolicymakerContacts'
 import { getCountUsers } from '@/data/aggregations/getCountUsers'
 import { getSumDonations } from '@/data/aggregations/getSumDonations'
-import { getSumDonationsByUser } from '@/data/aggregations/getSumDonationsByUser'
+import {
+  getSumDonationsByUser,
+  getSumDonationsByUserWithBuildCache,
+} from '@/data/aggregations/getSumDonationsByUser'
 import { queryDTSIHomepagePeople } from '@/data/dtsi/queries/queryDTSIHomepagePeople'
 import { getPublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 
@@ -33,7 +36,7 @@ export async function getHomepageData() {
     getHomepageTopLevelMetrics(),
     getPublicRecentActivity({ limit: 10 }),
     queryDTSIHomepagePeople(),
-    getSumDonationsByUser({ limit: 10 }),
+    getSumDonationsByUserWithBuildCache({ limit: 10 }),
   ])
   return {
     sumDonations,
