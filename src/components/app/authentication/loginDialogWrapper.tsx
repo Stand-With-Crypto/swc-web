@@ -14,10 +14,6 @@ import { useThirdwebData } from '@/hooks/useThirdwebData'
 import { apiUrls } from '@/utils/shared/urls'
 import { appendENSHookDataToUser } from '@/utils/web/appendENSHookDataToUser'
 
-import {
-  setHasSeenCompleteProfilePrompt,
-  useHasSeenCompleteProfilePrompt,
-} from './hasSeenCompleteProfilePrompt'
 import { ThirdwebLoginContent } from './thirdwebLoginContent'
 
 interface LoginDialogWrapperProps extends React.PropsWithChildren {
@@ -30,27 +26,38 @@ enum LoginSections {
   FINISH_PROFILE = 'finishProfile',
 }
 
+type LoginDialogStatus = 'idle' | 'loggingIn' | 'finishingProfile' | 'completed'
+type OnStatusChange = (status: LoginDialogStatus) => void
+
 export function LoginDialogWrapper({
   children,
   authenticatedContent,
   loadingFallback,
 }: LoginDialogWrapperProps) {
   const { session } = useThirdwebData()
-  const { data: hasSeenCompleteProfilePrompt, isLoading: isLoadingHasSeenProfilePrompt } =
-    useHasSeenCompleteProfilePrompt()
+  const [status, setStatus] = React.useState<LoginDialogStatus>('idle')
 
-  if (session.isLoading && isLoadingHasSeenProfilePrompt && loadingFallback) {
+  React.useEffect(() => {
+    if (session.isLoggedIn && status === 'idle') {
+      setStatus('completed')
+    }
+  }, [session, status])
+
+  if (session.isLoading && loadingFallback) {
     return loadingFallback
   }
 
-  if (session.isLoggedIn && hasSeenCompleteProfilePrompt) {
+  if (session.isLoggedIn && status === 'completed') {
     return authenticatedContent
   }
 
-  return <UnauthenticatedSection>{children}</UnauthenticatedSection>
+  return <UnauthenticatedSection onStatusChange={setStatus}>{children}</UnauthenticatedSection>
 }
 
-function UnauthenticatedSection({ children }: React.PropsWithChildren) {
+function UnauthenticatedSection({
+  children,
+  onStatusChange,
+}: React.PropsWithChildren<{ onStatusChange: OnStatusChange }>) {
   const dialogProps = useDialog({ analytics: 'Login' })
   const { goToSection, currentSection } = useSections({
     sections: Object.values(LoginSections),
@@ -65,13 +72,15 @@ function UnauthenticatedSection({ children }: React.PropsWithChildren) {
       dialogProps.onOpenChange(open)
 
       if (!open) {
-        setHasSeenCompleteProfilePrompt(true)
+        onStatusChange('completed')
       }
     },
-    [dialogProps],
+    [dialogProps, onStatusChange],
   )
 
   const handleLoginSuccess = React.useCallback(async () => {
+    onStatusChange('loggingIn')
+
     const { user } = (await mutate()) ?? {}
 
     if (!user?.primaryUserCryptoAddress) {
@@ -88,11 +97,12 @@ function UnauthenticatedSection({ children }: React.PropsWithChildren) {
 
     const { wasRecentlyUpdated } = user.primaryUserCryptoAddress
     if (wasRecentlyUpdated) {
+      onStatusChange('finishingProfile')
       goToSection(LoginSections.FINISH_PROFILE)
     } else {
       setDialogOpen(false)
     }
-  }, [goToSection, mutate, setDialogOpen])
+  }, [goToSection, mutate, onStatusChange, setDialogOpen])
 
   return (
     <Dialog {...dialogProps} onOpenChange={setDialogOpen}>
@@ -145,17 +155,6 @@ function LoginSection({ onLogin }: { onLogin: () => void | Promise<void> }) {
 function FinishProfileSection({ onSuccess }: { onSuccess: () => void }) {
   const { data: userData } = useApiResponseForUserFullProfileInfo()
   const { data: ensData, isLoading: isLoadingEnsData } = useENS()
-
-  React.useEffect(() => {
-    const beforeUnload = () => {
-      setHasSeenCompleteProfilePrompt(true)
-      console.log('beforeunload UnauthenticatedSection')
-    }
-    window.addEventListener('beforeunload', beforeUnload)
-    return () => {
-      window.removeEventListener('beforeunload', beforeUnload)
-    }
-  }, [])
 
   const user = React.useMemo(() => {
     if (!userData?.user || isLoadingEnsData) {
