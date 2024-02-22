@@ -5,7 +5,7 @@ import {
   SensitiveDataClientUser,
   SensitiveDataClientUserWithENSData,
 } from '@/clientModels/clientUser/sensitiveDataClientUser'
-import { userFullName } from '@/utils/shared/userFullName'
+import { userFirstNameWithLastInitial } from '@/utils/shared/userFullName'
 
 export const getUserDisplayName = (
   user: Pick<
@@ -17,7 +17,7 @@ export const getUserDisplayName = (
     return 'Anonymous'
   }
   if (user?.firstName && user?.informationVisibility === UserInformationVisibility.ALL_INFO) {
-    return userFullName(user)
+    return userFirstNameWithLastInitial(user)
   }
   if (user?.primaryUserCryptoAddress) {
     return (
@@ -41,7 +41,7 @@ export const getUserDisplayNameWithoutENS = (
     return 'Anonymous'
   }
   if (user?.firstName && user?.informationVisibility === UserInformationVisibility.ALL_INFO) {
-    return userFullName(user)
+    return userFirstNameWithLastInitial(user)
   }
   if (user?.primaryUserCryptoAddress) {
     return `${user.primaryUserCryptoAddress.cryptoAddress.slice(
@@ -56,7 +56,7 @@ export const getSensitiveDataUserDisplayName = (
   user: SensitiveDataClientUserWithENSData | null,
 ) => {
   if (user?.firstName) {
-    return userFullName(user)
+    return userFirstNameWithLastInitial(user)
   }
   if (user?.hasEmbeddedWallet && user.primaryUserEmailAddress) {
     if (user.primaryUserEmailAddress.emailAddress.length > 13) {
@@ -78,7 +78,7 @@ export const getSensitiveDataUserDisplayName = (
 
 export const getFullSensitiveDataUserDisplayName = (user: SensitiveDataClientUser | null) => {
   if (user?.firstName) {
-    return userFullName(user)
+    return userFirstNameWithLastInitial(user)
   }
   if (user?.primaryUserCryptoAddress) {
     return user.primaryUserCryptoAddress.cryptoAddress

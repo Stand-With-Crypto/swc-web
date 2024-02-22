@@ -16,13 +16,12 @@ export async function POST(request: NextRequest) {
   const body = rawRequestBody as CoinbaseCommercePayment
   const zodResult = zodCoinbaseCommercePayment.safeParse(body)
   if (!zodResult.success) {
-    Sentry.captureMessage('unexpected Coinbase Commerce payment request format'),
-      {
-        extra: {
-          body,
-          errors: zodResult.error.flatten(),
-        },
-      }
+    Sentry.captureMessage('unexpected Coinbase Commerce payment request format', {
+      extra: {
+        body,
+        errors: zodResult.error.flatten(),
+      },
+    })
   }
 
   try {
