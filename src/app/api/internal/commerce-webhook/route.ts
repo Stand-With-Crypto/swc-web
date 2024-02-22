@@ -11,6 +11,7 @@ import {
   storePaymentRequest,
 } from '@/utils/server/coinbaseCommerce/storePaymentRequest'
 import { getServerAnalytics } from '@/utils/server/serverAnalytics'
+import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 
 export async function POST(request: NextRequest) {
   const rawRequestBody = await request.json()
@@ -35,7 +36,7 @@ export async function POST(request: NextRequest) {
     }).track('Coinbase Commerce Payment', {
       paymentExpire: body.event.data.expires_at,
       paymentId: body.id,
-      paymentPrice: `${pricingValues.amountUsd} USD`,
+      paymentPrice: `${pricingValues.amountUsd} ${SupportedFiatCurrencyCodes.USD}`,
       paymentType: body.event.type,
       sessionId: body.event.data.metadata.sessionId,
       userId: body.event.data.metadata.userId,

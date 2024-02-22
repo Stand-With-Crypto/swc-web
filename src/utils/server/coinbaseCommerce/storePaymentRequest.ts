@@ -8,6 +8,7 @@ import * as Sentry from '@sentry/nextjs'
 
 import { CoinbaseCommercePayment } from '@/utils/server/coinbaseCommerce/paymentRequest'
 import { prismaClient } from '@/utils/server/prismaClient'
+import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { generateReferralId } from '@/utils/shared/referralId'
 import { UserActionDonationCampaignName } from '@/utils/shared/userActionCampaigns'
 
@@ -35,7 +36,7 @@ export function extractPricingValues(payment: CoinbaseCommercePayment) {
     // We should not throw an error for these cases.
     return {
       amount: 0,
-      amountCurrencyCode: 'USD',
+      amountCurrencyCode: SupportedFiatCurrencyCodes.USD,
       amountUsd: 0,
     }
   }
