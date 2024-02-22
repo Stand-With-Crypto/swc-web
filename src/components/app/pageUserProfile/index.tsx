@@ -77,7 +77,7 @@ export function PageUserProfile({
             </UpdateUserProfileFormDialog>
           </div>
         </div>
-        <div className="grid grid-cols-4 rounded-3xl bg-blue-50 p-3 text-center sm:p-6">
+        <div className="grid grid-cols-3 rounded-3xl bg-blue-50 p-3 text-center sm:p-6">
           {[
             {
               label: 'Actions',
@@ -97,10 +97,6 @@ export function PageUserProfile({
                   locale={locale}
                 />
               ),
-            },
-            {
-              label: 'Leaderboard',
-              value: <>TODO</>,
             },
             {
               label: 'NFTs',
