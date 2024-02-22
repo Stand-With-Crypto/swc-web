@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import * as Sentry from '@sentry/nextjs'
 import { useENS } from '@thirdweb-dev/react'
@@ -32,6 +34,7 @@ export function LoginDialogWrapper({
   children,
   authenticatedContent,
   loadingFallback,
+  debug,
 }: LoginDialogWrapperProps) {
   const { session } = useThirdwebData()
   const { goToSection, currentSection } = useSections({
@@ -39,6 +42,7 @@ export function LoginDialogWrapper({
     initialSectionId: LoginSections.LOADING,
     analyticsName: 'Login Button',
   })
+  const dialogProps = useDialog({ analytics: 'Login' })
 
   /**
    * This is not pretty, but we need to both sync the session state with the current section
@@ -48,24 +52,27 @@ export function LoginDialogWrapper({
    * 2. When the user refreshes the page we should verify, based on the session, if we should show
    *    the authed or unauthed content
    * 3. When the user logs in and out without refreshing the page we should change the current section manually
+   * 4. If the user logs out through other instance of this component, we should change the current section manually
    */
   React.useEffect(() => {
     if (session.isLoading) {
       return
     }
 
-    if (!session.isLoggedIn && currentSection === LoginSections.LOADING) {
-      goToSection(LoginSections.LOGIN, { disableAnalytics: true })
-    }
-
-    if (session.isLoggedIn && currentSection === LoginSections.LOADING) {
-      goToSection(LoginSections.AUTHENTICATED, { disableAnalytics: true })
+    if (debug) {
+      console.log({ session, currentSection })
     }
 
     if (!session.isLoggedIn && currentSection === LoginSections.AUTHENTICATED) {
       goToSection(LoginSections.LOGIN, { disableAnalytics: true })
     }
-  }, [currentSection, goToSection, session])
+
+    if (!dialogProps.open || currentSection === LoginSections.LOADING) {
+      goToSection(session.isLoggedIn ? LoginSections.AUTHENTICATED : LoginSections.LOGIN, {
+        disableAnalytics: true,
+      })
+    }
+  }, [currentSection, debug, dialogProps.open, goToSection, session])
 
   const shouldShowLoadingState = session.isLoading || currentSection === LoginSections.LOADING
   if (shouldShowLoadingState && loadingFallback) {
@@ -77,7 +84,11 @@ export function LoginDialogWrapper({
   }
 
   return (
-    <UnauthenticatedSection currentSection={currentSection} goToSection={goToSection}>
+    <UnauthenticatedSection
+      currentSection={currentSection}
+      dialogProps={dialogProps}
+      goToSection={goToSection}
+    >
       {children}
     </UnauthenticatedSection>
   )
@@ -87,11 +98,13 @@ function UnauthenticatedSection({
   children,
   goToSection,
   currentSection,
+  dialogProps,
 }: React.PropsWithChildren<{
   goToSection: (section: LoginSections) => void
   currentSection: LoginSections
+  dialogProps: ReturnType<typeof useDialog>
 }>) {
-  const dialogProps = useDialog({ analytics: 'Login' })
+  const { session } = useThirdwebData()
 
   const { mutate } = useApiResponseForUserFullProfileInfo()
 
@@ -99,11 +112,11 @@ function UnauthenticatedSection({
     (open: boolean) => {
       dialogProps.onOpenChange(open)
 
-      if (!open) {
+      if (!open && session.isLoggedIn) {
         goToSection(LoginSections.AUTHENTICATED)
       }
     },
-    [dialogProps, goToSection],
+    [dialogProps, goToSection, session.isLoggedIn],
   )
 
   const handleLoginSuccess = React.useCallback(async () => {
