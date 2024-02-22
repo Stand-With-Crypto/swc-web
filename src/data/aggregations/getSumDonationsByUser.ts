@@ -4,7 +4,7 @@ import { cache } from 'react'
 import { Decimal } from '@prisma/client/runtime/library'
 import { compact, keyBy } from 'lodash-es'
 
-import { getClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
+import { getClientLeaderboardUser } from '@/clientModels/clientUser/clientLeaderboardUser'
 import {
   PAGE_LEADERBOARD_ITEMS_PER_PAGE,
   PAGE_LEADERBOARD_TOTAL_PAGES,
@@ -80,7 +80,7 @@ const getSumDonationsByUser = async ({ limit, offset }: SumDonationsByUserConfig
     return {
       totalAmountUsd: totalAmountUsd.toNumber(),
       user: {
-        ...getClientUserWithENSData(
+        ...getClientLeaderboardUser(
           user,
           user.primaryUserCryptoAddress?.cryptoAddress
             ? ensDataMap[user.primaryUserCryptoAddress?.cryptoAddress]

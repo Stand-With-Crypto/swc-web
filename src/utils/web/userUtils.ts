@@ -7,7 +7,12 @@ import {
 } from '@/clientModels/clientUser/sensitiveDataClientUser'
 import { userFullName } from '@/utils/shared/userFullName'
 
-export const getUserDisplayName = (user: ClientUserWithENSData | null) => {
+export const getUserDisplayName = (
+  user: Pick<
+    ClientUserWithENSData,
+    'firstName' | 'lastName' | 'informationVisibility' | 'primaryUserCryptoAddress'
+  > | null,
+) => {
   if (user?.informationVisibility === UserInformationVisibility.ANONYMOUS) {
     return 'Anonymous'
   }
@@ -26,7 +31,12 @@ export const getUserDisplayName = (user: ClientUserWithENSData | null) => {
   return 'Anonymous'
 }
 
-export const getUserDisplayNameWithoutENS = (user: ClientUser | null) => {
+export const getUserDisplayNameWithoutENS = (
+  user: Pick<
+    ClientUser,
+    'firstName' | 'lastName' | 'informationVisibility' | 'primaryUserCryptoAddress'
+  > | null,
+) => {
   if (user?.informationVisibility === UserInformationVisibility.ANONYMOUS) {
     return 'Anonymous'
   }

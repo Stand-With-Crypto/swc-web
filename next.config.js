@@ -36,21 +36,7 @@ const contentSecurityPolicy = {
     'https://vercel.live/',
     'https://vitals.vercel-insights.com/',
   ],
-  'img-src': [
-    "'self'",
-    'blob: data:',
-    'https://res.cloudinary.com/',
-    'https://twemoji.maxcdn.com/',
-    'https://cdn.jsdelivr.net/gh/twitter/',
-    'https://*.walletconnect.com/',
-    'https://euc.li/',
-    'https://*.googleapis.com',
-    'https://*.gstatic.com',
-    '*.google.com',
-    'https://ipfs.io/ipfs/',
-    // Thirdweb contract images
-    'https://*.ipfscdn.io/',
-  ],
+  'img-src': ["'self'", 'https: data:', 'blob: data:'],
   'connect-src': [
     "'self'",
     'ws: wss:',
