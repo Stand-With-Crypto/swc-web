@@ -459,14 +459,11 @@ async function maybeUpsertCryptoAddress({
       where: { id: existingUserCryptoAddress.id },
       data: {
         hasBeenVerifiedViaAuth: true,
-        ...(user.primaryUserCryptoAddressId
-          ? {}
-          : { asPrimaryUserCryptoAddress: { connect: { id: user.id } } }),
+        asPrimaryUserCryptoAddress: { connect: { id: user.id } },
       },
     })
     existingUserCryptoAddress.hasBeenVerifiedViaAuth = true
-    user.primaryUserCryptoAddressId =
-      user.primaryUserCryptoAddressId || existingUserCryptoAddress.id
+    user.primaryUserCryptoAddressId = existingUserCryptoAddress.id
     return { user, updatedCryptoAddress: existingUserCryptoAddress }
   }
   log(`maybeUpsertCryptoAddress: creating new crypto address`)
