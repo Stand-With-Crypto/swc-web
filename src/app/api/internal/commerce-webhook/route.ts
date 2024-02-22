@@ -6,7 +6,10 @@ import {
   CoinbaseCommercePayment,
   zodCoinbaseCommercePayment,
 } from '@/utils/server/coinbaseCommerce/paymentRequest'
-import { storePaymentRequest } from '@/utils/server/coinbaseCommerce/storePaymentRequest'
+import {
+  extractPricingValues,
+  storePaymentRequest,
+} from '@/utils/server/coinbaseCommerce/storePaymentRequest'
 import { getServerAnalytics } from '@/utils/server/serverAnalytics'
 
 export async function POST(request: NextRequest) {
@@ -21,16 +24,18 @@ export async function POST(request: NextRequest) {
         errors: zodResult.error.flatten(),
       },
     })
+    return new NextResponse('internal error', { status: 500 })
   }
 
   try {
+    const pricingValues = extractPricingValues(body)
     getServerAnalytics({
       localUser: null,
       userId: body.event.data.metadata.userId,
     }).track('Coinbase Commerce Payment', {
       paymentExpire: body.event.data.expires_at,
       paymentId: body.id,
-      paymentPrice: `${body.event.data.pricing.local.amount} ${body.event.data.pricing.local.currency}`,
+      paymentPrice: `${pricingValues.amountUsd} USD`,
       paymentType: body.event.type,
       sessionId: body.event.data.metadata.sessionId,
       userId: body.event.data.metadata.userId,
