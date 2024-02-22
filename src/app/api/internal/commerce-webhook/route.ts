@@ -47,11 +47,7 @@ export async function POST(request: NextRequest) {
     }
   } catch (error) {
     Sentry.captureException(error, {
-      extra: {
-        id: body.id,
-        pricing: body.event.data.pricing,
-        sessionId: body.event.data.metadata.sessionId,
-      },
+      extra: { body },
     })
     return new NextResponse('internal error', { status: 500 })
   }
