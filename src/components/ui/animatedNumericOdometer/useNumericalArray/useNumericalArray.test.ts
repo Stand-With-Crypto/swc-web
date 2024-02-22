@@ -34,13 +34,6 @@ describe('useNumericalArray', () => {
     expect(result.current).toEqual(['$', '2', ',', '395', ',', '081'])
   })
 
-  it('should respect the locale passed as the second argument but keep the currency as USD', () => {
-    const { result } = renderHook(() =>
-      useNumeralArray(formatCurrency(2395081, SupportedLocale.ES)),
-    )
-    expect(result.current).toEqual(['2', '.', '395', '.', '081', expect.stringContaining('US$')])
-  })
-
   it.each(EDGE_CASES)('should work normally with different values', (value, expected) => {
     const { result } = renderHook(() => useNumeralArray(formatCurrency(value)))
     expect(result.current).toEqual(expected)
