@@ -21,13 +21,17 @@ interface LoginDialogWrapperProps extends React.PropsWithChildren {
   loadingFallback?: React.ReactNode
 }
 
+// enum LoginSections {
+//   LOGIN = 'login',
+//   FINISH_PROFILE = 'finishProfile',
+// }
+
 enum LoginSections {
+  UNKNOWN = 'unknown',
+  AUTHENTICATED = 'authenticated',
   LOGIN = 'login',
   FINISH_PROFILE = 'finishProfile',
 }
-
-type LoginDialogStatus = 'idle' | 'loggingIn' | 'finishingProfile' | 'completed'
-type OnStatusChange = (status: LoginDialogStatus) => void
 
 export function LoginDialogWrapper({
   children,
@@ -35,35 +39,51 @@ export function LoginDialogWrapper({
   loadingFallback,
 }: LoginDialogWrapperProps) {
   const { session } = useThirdwebData()
-  const [status, setStatus] = React.useState<LoginDialogStatus>('idle')
+  const { goToSection, currentSection } = useSections({
+    sections: Object.values(LoginSections),
+    initialSectionId: LoginSections.UNKNOWN,
+    analyticsName: 'Login Button',
+  })
 
   React.useEffect(() => {
-    if (session.isLoggedIn && status === 'idle') {
-      setStatus('completed')
+    if (session.isLoading || currentSection !== LoginSections.UNKNOWN) {
+      return
     }
-  }, [session, status])
 
-  if (session.isLoading && loadingFallback) {
+    if (!session.isLoggedIn) {
+      goToSection(LoginSections.LOGIN, { disableAnalytics: true })
+    }
+
+    if (session.isLoggedIn) {
+      goToSection(LoginSections.AUTHENTICATED, { disableAnalytics: true })
+    }
+  }, [currentSection, goToSection, session])
+
+  const shouldShowLoadingState = session.isLoading || currentSection === LoginSections.UNKNOWN
+  if (shouldShowLoadingState && loadingFallback) {
     return loadingFallback
   }
 
-  if (session.isLoggedIn && status === 'completed') {
+  if (session.isLoggedIn && currentSection === LoginSections.AUTHENTICATED) {
     return authenticatedContent
   }
 
-  return <UnauthenticatedSection onStatusChange={setStatus}>{children}</UnauthenticatedSection>
+  return (
+    <UnauthenticatedSection currentSection={currentSection} goToSection={goToSection}>
+      {children}
+    </UnauthenticatedSection>
+  )
 }
 
 function UnauthenticatedSection({
   children,
-  onStatusChange,
-}: React.PropsWithChildren<{ onStatusChange: OnStatusChange }>) {
+  goToSection,
+  currentSection,
+}: React.PropsWithChildren<{
+  goToSection: (section: LoginSections) => void
+  currentSection: LoginSections
+}>) {
   const dialogProps = useDialog({ analytics: 'Login' })
-  const { goToSection, currentSection } = useSections({
-    sections: Object.values(LoginSections),
-    initialSectionId: LoginSections.LOGIN,
-    analyticsName: 'Login',
-  })
 
   const { mutate } = useApiResponseForUserFullProfileInfo()
 
@@ -72,15 +92,13 @@ function UnauthenticatedSection({
       dialogProps.onOpenChange(open)
 
       if (!open) {
-        onStatusChange('completed')
+        goToSection(LoginSections.AUTHENTICATED)
       }
     },
-    [dialogProps, onStatusChange],
+    [dialogProps, goToSection],
   )
 
   const handleLoginSuccess = React.useCallback(async () => {
-    onStatusChange('loggingIn')
-
     const { user } = (await mutate()) ?? {}
 
     if (!user?.primaryUserCryptoAddress) {
@@ -97,12 +115,11 @@ function UnauthenticatedSection({
 
     const { wasRecentlyUpdated } = user.primaryUserCryptoAddress
     if (wasRecentlyUpdated) {
-      onStatusChange('finishingProfile')
       goToSection(LoginSections.FINISH_PROFILE)
     } else {
       setDialogOpen(false)
     }
-  }, [goToSection, mutate, onStatusChange, setDialogOpen])
+  }, [goToSection, mutate, setDialogOpen])
 
   return (
     <Dialog {...dialogProps} onOpenChange={setDialogOpen}>

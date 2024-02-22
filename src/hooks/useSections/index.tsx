@@ -20,15 +20,22 @@ export function useSections<SectionKey extends string>({
     initialSectionId ?? sections[0],
   )
 
-  const goToSection = React.useCallback(
-    (section: SectionKey) => {
+  const goToSection: UseSectionsReturn<SectionKey>['goToSection'] = React.useCallback(
+    (section, options = {}) => {
+      if (section === currentSection) {
+        return
+      }
+
       setCurrentSection(section)
-      trackClientAnalytic(`New Section Visible`, {
-        Section: section,
-        'Section Group': analyticsName,
-      })
+
+      if (!options.disableAnalytics) {
+        trackClientAnalytic(`New Section Visible`, {
+          Section: section,
+          'Section Group': analyticsName,
+        })
+      }
     },
-    [setCurrentSection, analyticsName],
+    [currentSection, analyticsName],
   )
 
   const handleSectionNotFound = React.useCallback(() => {
