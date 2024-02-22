@@ -8,9 +8,11 @@ import { UserActionFormEmailCongresspersonSkeleton } from '@/components/app/user
 import { FormFields } from '@/components/app/userActionFormEmailCongressperson/types'
 import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
+import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useDialog } from '@/hooks/useDialog'
 import { useLocale } from '@/hooks/useLocale'
+import { cn } from '@/utils/web/cn'
 
 export function UserActionFormEmailCongresspersonDialog({
   children,
@@ -49,7 +51,7 @@ export function UserActionFormEmailCongresspersonDialog({
               user={user}
             />
           ) : (
-            <div className="px-6">
+            <div className={cn(dialogContentPaddingStyles)}>
               <UserActionFormSuccessScreen onClose={() => dialogProps.onOpenChange(false)} />
             </div>
           )}
