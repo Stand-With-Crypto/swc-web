@@ -49,7 +49,6 @@ interface UserActionFormNFTMintCheckoutProps
   debug?: boolean
 }
 
-// TODO review copy
 const CHECKOUT_ERROR_TO_MESSAGE: Record<CheckoutError, string> = {
   insufficientFunds: 'Insufficient funds. You need ETH on Base to mint',
   networkSwitch: 'Please switch to the Base Network',
