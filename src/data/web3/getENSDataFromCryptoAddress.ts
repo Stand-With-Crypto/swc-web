@@ -13,7 +13,16 @@ async function _getENSDataMapFromCryptoAddresses(
   _addresses: string[],
 ): Promise<Record<string, UserENSData>> {
   const addresses = compact(_addresses.map(addr => stringToEthereumAddress(addr)))
-  const nameResult = await Promise.all(addresses.map(address => client.getEnsName({ address })))
+  const nameResult = compact(
+    await Promise.all(
+      addresses.map(address =>
+        client.getEnsName({ address }).catch(e => {
+          Sentry.captureException(e, { extra: { address } })
+          return null
+        }),
+      ),
+    ),
+  )
   const addressesWithENS = nameResult
     .map((result, index) => ({
       cryptoAddress: addresses[index],
