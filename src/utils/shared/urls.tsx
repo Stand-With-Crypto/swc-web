@@ -4,6 +4,7 @@ import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
 export const getIntlPrefix = (locale: SupportedLocale) =>
+  // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
   locale === DEFAULT_LOCALE ? '' : `/${locale}`
 
 export const getIntlUrls = (
