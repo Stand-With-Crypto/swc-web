@@ -2,9 +2,9 @@
 
 ## Create UI
 
-- Create a new folder in src/components/app called userActionForm[insertActionName]
-- All UI should be contained in this folder
-- Create a dialog.tsx, homepageDialogDeeplinkWrapper.tsx, index.tsx, lazyLoad.tsx, skeleton.tsx
+- Create a new folder in `src/components/app` called userActionForm[actionName]. All UI should be contained in this folder.
+- Typical files in this folder include dialog.tsx, homepageDialogDeeplinkWrapper.tsx, index.tsx, lazyLoad.tsx, skeleton.tsx
+- dialog.tsx -
 
 ## Update database
 
@@ -23,3 +23,21 @@
 - Update ACTION_NFT_SLUG in the claimNFT function
 - Update the NFT_SLUG_BACKEND_METADATA
 - Update the NFT_CLIENT_METADATA
+
+## Create `/action/actionName` deeplink
+
+1. Create a folder in `src/swc-web/src/app/[locale]/(homepageDialogDeeplink)/action/` called the action name
+2. Create a `page.tsx` file in the folder with the following
+
+```javascript
+export const revalidate = SECONDS_DURATION.HOUR
+export const dynamic = 'error'
+
+export default function UserActionActionNameDeepLink({ params }: PageProps) {
+  return (
+    <HomepageDialogDeeplinkLayout pageParams={params}>
+        <UserActionActionNameDeeplinkWrapper />
+    </HomepageDialogDeeplinkLayout>
+  )
+}
+```
