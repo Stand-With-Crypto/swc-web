@@ -29,8 +29,12 @@ const mockDecreaseInValuesOnInitialLoadSoWeCanAnimateIncrease = (
       initial.countPolicymakerContacts.countUserActionCalls,
       100,
     ),
-    countUserActionEmailRecipients: roundDownNumberToAnimateIn(
-      initial.countPolicymakerContacts.countUserActionEmailRecipients,
+    countUserActionEmails: roundDownNumberToAnimateIn(
+      initial.countPolicymakerContacts.countUserActionEmails,
+      100,
+    ),
+    hardcodedCountSum: roundDownNumberToAnimateIn(
+      initial.countPolicymakerContacts.hardcodedCountSum,
       100,
     ),
   },
@@ -56,8 +60,9 @@ export function TopLevelMetrics({ locale, ...data }: Props & { locale: Supported
       },
       countPolicymakerContacts: {
         count: new Intl.NumberFormat(locale).format(
-          values.countPolicymakerContacts.countUserActionCalls +
-            values.countPolicymakerContacts.countUserActionCalls,
+          values.countPolicymakerContacts.countUserActionEmails +
+            values.countPolicymakerContacts.countUserActionCalls +
+            values.countPolicymakerContacts.hardcodedCountSum,
         ),
       },
     }
