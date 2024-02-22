@@ -39,7 +39,9 @@ export function extractPricingValues(payment: CoinbaseCommercePayment) {
       amountUsd: 0,
     }
   }
-  throw new Error('no payment amount or pricing found in Coinbase Commerce payment request')
+  throw new Error(
+    'no expected payment amount or pricing found in Coinbase Commerce payment request',
+  )
 }
 
 /**
