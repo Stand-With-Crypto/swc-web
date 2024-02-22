@@ -8,7 +8,6 @@ import {
 } from '@/utils/server/coinbaseCommerce/paymentRequest'
 import { storePaymentRequest } from '@/utils/server/coinbaseCommerce/storePaymentRequest'
 import { getServerAnalytics } from '@/utils/server/serverAnalytics'
-import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 
 export async function POST(request: NextRequest) {
   const rawRequestBody = await request.json()
@@ -26,7 +25,7 @@ export async function POST(request: NextRequest) {
 
   try {
     getServerAnalytics({
-      localUser: parseLocalUserFromCookies(),
+      localUser: null,
       userId: body.event.data.metadata.userId,
     }).track('Coinbase Commerce Payment', {
       paymentExpire: body.event.data.expires_at,

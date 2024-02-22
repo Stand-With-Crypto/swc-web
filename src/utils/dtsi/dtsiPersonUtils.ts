@@ -51,7 +51,7 @@ type WithComputedStanceScore<P extends Pick<DTSI_Person, 'id' | 'computedStanceS
 > & { computedStanceScore: number }
 
 export const groupAndSortDTSIPeopleByCryptoStance = <
-  P extends Pick<DTSI_Person, 'id' | 'computedStanceScore'>,
+  P extends Pick<DTSI_Person, 'id' | 'computedStanceScore' | 'promotedPositioning'>,
 >(
   people: P[],
 ) => {
@@ -69,8 +69,8 @@ export const groupAndSortDTSIPeopleByCryptoStance = <
     }
   })
   return {
-    proCrypto: sortBy(proCrypto, x => x.computedStanceScore),
-    antiCrypto: sortBy(antiCrypto, x => -1 * x.computedStanceScore),
+    proCrypto: sortBy(proCrypto, x => x.promotedPositioning),
+    antiCrypto: sortBy(antiCrypto, x => x.promotedPositioning),
     neutralCrypto: neutralCrypto,
   }
 }
