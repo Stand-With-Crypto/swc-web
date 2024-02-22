@@ -2,7 +2,6 @@
 import { Prisma, UserCryptoAddress } from '@prisma/client'
 import { GetFindResult } from '@prisma/client/runtime/library'
 import * as Sentry from '@sentry/nextjs'
-import { compact } from 'lodash-es'
 
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
@@ -33,19 +32,34 @@ export async function getMaybeUserAndMethodOfMatch<
 }: Prisma.SelectSubset<I, Prisma.UserFindFirstArgs>): Promise<UserAndMethodOfMatch<I>> {
   const authUser = await appRouterGetAuthUser()
   const sessionId = getUserSessionId()
-  const userWithoutReturnTypes = await prismaClient.user.findFirst({
-    where: {
-      OR: compact([
-        authUser && { id: authUser.userId },
-        { userSessions: { some: { id: sessionId } } },
-      ]),
-    },
-    include: {
-      ...((include || {}) as object),
-      userCryptoAddresses: true,
-    },
-    ...other,
-  })
+  // PlanetScale currently has index issues when we query for both session and id in the same SQL statement
+  // running them separately to make sure we hit our indexes.
+  // if we can do this in a single query AND leverage the right indexes in the future this would be ideal.
+  const [authFoundUser, sessionUser] = await Promise.all([
+    authUser
+      ? prismaClient.user.findFirst({
+          where: {
+            id: authUser.userId,
+          },
+          include: {
+            ...((include || {}) as object),
+            userCryptoAddresses: true,
+          },
+          ...other,
+        })
+      : Promise.resolve(null),
+    prismaClient.user.findFirst({
+      where: {
+        userSessions: { some: { id: sessionId } },
+      },
+      include: {
+        ...((include || {}) as object),
+        userCryptoAddresses: true,
+      },
+      ...other,
+    }),
+  ])
+  const userWithoutReturnTypes = authFoundUser || sessionUser
   const user = userWithoutReturnTypes as GetFindResult<Prisma.$UserPayload, I> | null
   if (authUser) {
     if (!user) {
