@@ -34,7 +34,6 @@ export function LoginDialogWrapper({
   children,
   authenticatedContent,
   loadingFallback,
-  debug,
 }: LoginDialogWrapperProps) {
   const { session } = useThirdwebData()
   const { goToSection, currentSection } = useSections({
@@ -59,10 +58,6 @@ export function LoginDialogWrapper({
       return
     }
 
-    if (debug) {
-      console.log({ session, currentSection })
-    }
-
     if (!session.isLoggedIn && currentSection === LoginSections.AUTHENTICATED) {
       goToSection(LoginSections.LOGIN, { disableAnalytics: true })
     }
@@ -72,7 +67,7 @@ export function LoginDialogWrapper({
         disableAnalytics: true,
       })
     }
-  }, [currentSection, debug, dialogProps.open, goToSection, session])
+  }, [currentSection, dialogProps.open, goToSection, session])
 
   const shouldShowLoadingState = session.isLoading || currentSection === LoginSections.LOADING
   if (shouldShowLoadingState && loadingFallback) {

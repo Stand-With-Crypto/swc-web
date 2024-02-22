@@ -49,7 +49,6 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
       authenticatedContent={
         <NavbarLoggedInButton onOpenChange={open => open || maybeCloseAfterNavigating()} />
       }
-      debug
     >
       <Button variant="secondary">Log In</Button>
     </LoginDialogWrapper>
