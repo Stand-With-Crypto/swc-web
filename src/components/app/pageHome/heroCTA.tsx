@@ -20,11 +20,7 @@ export function HeroCTA() {
           </InternalLink>
         </Button>
       }
-      loadingFallback={
-        <Button disabled size="lg">
-          Join the fight
-        </Button>
-      }
+      loadingFallback={<Button size="lg">Join the fight</Button>}
     >
       <Button size="lg">Join the fight</Button>
     </LoginDialogWrapper>
