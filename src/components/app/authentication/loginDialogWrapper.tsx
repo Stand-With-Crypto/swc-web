@@ -21,11 +21,6 @@ interface LoginDialogWrapperProps extends React.PropsWithChildren {
   loadingFallback?: React.ReactNode
 }
 
-// enum LoginSections {
-//   LOGIN = 'login',
-//   FINISH_PROFILE = 'finishProfile',
-// }
-
 enum LoginSections {
   UNKNOWN = 'unknown',
   AUTHENTICATED = 'authenticated',
