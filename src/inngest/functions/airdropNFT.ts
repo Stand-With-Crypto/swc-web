@@ -55,7 +55,7 @@ export const airdropNFTWithInngest = inngest.createFunction(
     if (!mintStatus || !THIRDWEB_FINAL_TRANSACTION_STATUSES.includes(mintStatus)) {
       await updateMintNFTStatus(
         payload.nftMintId,
-        NFTMintStatus.FAILED,
+        NFTMintStatus.TIMEDOUT,
         transactionHash!,
         gasPrice!,
       )
