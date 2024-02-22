@@ -86,7 +86,15 @@ export async function onLogin(
     localUser,
     getUserSessionId: () => getUserSessionIdOnPageRouter(req),
     injectedFetchEmbeddedWalletMetadataFromThirdweb: fetchEmbeddedWalletMetadataFromThirdweb,
-  }).then(res => ({ userId: res.userId }))
+  })
+    .then(res => ({ userId: res.userId }))
+    .catch(e => {
+      Sentry.captureException(e, {
+        tags: { domain: 'onLogin' },
+        extra: { cryptoAddress, localUser },
+      })
+      throw e
+    })
 }
 
 interface NewLoginParams {
