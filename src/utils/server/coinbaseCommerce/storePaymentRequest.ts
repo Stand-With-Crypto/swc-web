@@ -30,6 +30,14 @@ export function extractPricingValues(payment: CoinbaseCommercePayment) {
       amountCurrencyCode: payment.event.data.pricing.settlement.currency,
       amountUsd: payment.event.data.pricing.local.amount,
     }
+  } else if (payment.event.type !== 'charge:pending' && payment.event.type !== 'charge:confirmed') {
+    // Some charges (such as `charge:created` and `charge:failed`) will not have a payment amount or pricing.
+    // We should not throw an error for these cases.
+    return {
+      amount: 0,
+      amountCurrencyCode: 'USD',
+      amountUsd: 0,
+    }
   }
   throw new Error('no payment amount or pricing found in Coinbase Commerce payment request')
 }
