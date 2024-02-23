@@ -1,5 +1,6 @@
 'use client'
 
+// eslint-disable-next-line no-restricted-imports
 import { useAddress } from '@thirdweb-dev/react'
 
 import { parseThirdwebAddress } from './parseThirdwebAddress'
