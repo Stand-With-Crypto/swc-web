@@ -25,8 +25,6 @@ const ButtonWrapper = USER_ACTION_ROW_CTA_INFO[UserActionType.NFT_MINT].WrapperC
 export function NFTDisplay({ userActions }: NFTDisplayProps) {
   let optInNftButton = true
 
-  console.log({ userActions, NFT_CLIENT_METADATA })
-
   const userNfts: NFTImages[] = userActions.reduce(
     (acc: NFTImages[], action: SensitiveDataClientUserAction): NFTImages[] => {
       const nftSlug = action.nftMint?.nftSlug

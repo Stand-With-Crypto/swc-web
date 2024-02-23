@@ -6,6 +6,7 @@ import useSWR from 'swr'
 import { getDTSIClientPersonDataTableColumns } from '@/components/app/dtsiClientPersonDataTable/columns'
 import { DataTable } from '@/components/app/dtsiClientPersonDataTable/dataTable'
 import { queryDTSIAllPeople } from '@/data/dtsi/queries/queryDTSIAllPeople'
+import { useLocale } from '@/hooks/useLocale'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { apiUrls } from '@/utils/shared/urls'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
@@ -27,7 +28,8 @@ export function useGetAllPeople() {
 }
 export function DTSIClientPersonDataTable({ initialData }: { initialData: People }) {
   const { data } = useGetAllPeople()
-  const memoizedColumns = useMemo(getDTSIClientPersonDataTableColumns, [])
+  const locale = useLocale()
+  const memoizedColumns = useMemo(() => getDTSIClientPersonDataTableColumns({ locale }), [locale])
   const passedData = useMemo(
     () => sortBy(data?.people || initialData, person => person.promotedPositioning),
     [data, initialData],
