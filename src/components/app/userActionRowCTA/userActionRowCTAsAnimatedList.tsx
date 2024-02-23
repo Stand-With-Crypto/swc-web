@@ -20,7 +20,7 @@ export function UserActionRowCTAsAnimatedList({
 }) {
   const filteredActions = useMemo(
     () =>
-      !excludeUserActionTypes?.length
+      !excludeUserActionTypes
         ? USER_ACTION_TYPE_PRIORITY_ORDER
         : USER_ACTION_TYPE_PRIORITY_ORDER.filter(
             actionType => !excludeUserActionTypes.includes(actionType),
@@ -31,7 +31,6 @@ export function UserActionRowCTAsAnimatedList({
     <div className={className}>
       {filteredActions.map((actionType, index) => {
         const props = USER_ACTION_ROW_CTA_INFO[actionType]
-        console.log({ actionType, props })
         return (
           <motion.div
             // we apply individual pb to the elements instead of space-y-7 to ensure that there's no jank in the animation as the height transitions in
