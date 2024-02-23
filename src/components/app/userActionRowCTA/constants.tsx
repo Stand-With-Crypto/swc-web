@@ -22,7 +22,9 @@ export const USER_ACTION_ROW_CTA_INFO: Record<
     text: 'Join Stand With Crypto',
     subtext: 'Join over 300,000 advocates fighting to keep crypto in America.',
     canBeTriggeredMultipleTimes: false,
-    WrapperComponent: ({ children }) => <LoginDialogWrapper>{children}</LoginDialogWrapper>,
+    WrapperComponent: ({ children }) => (
+      <LoginDialogWrapper forceUnauthenticated>{children}</LoginDialogWrapper>
+    ),
   },
   [UserActionType.VOTER_REGISTRATION]: {
     actionType: UserActionType.VOTER_REGISTRATION,

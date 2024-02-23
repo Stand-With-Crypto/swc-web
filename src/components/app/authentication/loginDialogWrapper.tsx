@@ -21,6 +21,7 @@ import { ThirdwebLoginContent } from './thirdwebLoginContent'
 interface LoginDialogWrapperProps extends React.PropsWithChildren {
   authenticatedContent?: React.ReactNode
   loadingFallback?: React.ReactNode
+  forceUnauthenticated?: boolean
 }
 
 enum LoginSections {
@@ -34,6 +35,7 @@ export function LoginDialogWrapper({
   children,
   authenticatedContent,
   loadingFallback,
+  forceUnauthenticated,
 }: LoginDialogWrapperProps) {
   const { session } = useThirdwebData()
   const { goToSection, currentSection } = useSections({
@@ -74,7 +76,11 @@ export function LoginDialogWrapper({
     return loadingFallback
   }
 
-  if (session.isLoggedIn && currentSection === LoginSections.AUTHENTICATED) {
+  if (
+    session.isLoggedIn &&
+    currentSection === LoginSections.AUTHENTICATED &&
+    !forceUnauthenticated
+  ) {
     return authenticatedContent
   }
 
@@ -89,7 +95,7 @@ export function LoginDialogWrapper({
   )
 }
 
-function UnauthenticatedSection({
+export function UnauthenticatedSection({
   children,
   goToSection,
   currentSection,
