@@ -2,7 +2,6 @@ import * as Sentry from '@sentry/nextjs'
 import crypto from 'crypto'
 import { headers } from 'next/headers'
 
-import { CoinbaseCommercePayment } from '@/utils/server/coinbaseCommerce/paymentRequest'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 
 const COINBASE_COMMERCE_WEBHOOK_SECRET = requiredEnv(
@@ -23,9 +22,9 @@ export function authenticatePaymentRequest(rawRequestBody: any) {
   const headerSignature = headers().get('x-cc-webhook-signature')
   if (!headerSignature) {
     Sentry.captureMessage('missing signature within request header', {
-      extra: { id: (rawRequestBody as CoinbaseCommercePayment).id },
+      extra: { body: rawRequestBody },
     })
-    throw new Error('unauthorized')
+    return false
   }
   const constructedSignature = crypto
     .createHmac('sha256', COINBASE_COMMERCE_WEBHOOK_SECRET)
@@ -33,9 +32,9 @@ export function authenticatePaymentRequest(rawRequestBody: any) {
     .digest('hex')
   if (!areSignaturesEqual(constructedSignature, headerSignature)) {
     Sentry.captureMessage('invalid signature within request header', {
-      extra: { id: (rawRequestBody as CoinbaseCommercePayment).id, headerSignature },
+      extra: { body: rawRequestBody },
     })
-    throw new Error('unauthorized')
+    return false
   }
   return true
 }
