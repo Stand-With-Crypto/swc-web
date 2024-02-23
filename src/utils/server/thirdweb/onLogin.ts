@@ -394,11 +394,14 @@ function findUsersToMerge(
     if (user.sourceOfExistingUser === 'Unverified User Crypto Address') {
       return true
     }
+    if (user.user.userCryptoAddresses.some(addr => addr.hasBeenVerifiedViaAuth)) {
+      return false
+    }
     if (user.sourceOfExistingUser === 'Embedded Wallet Email Address') {
-      return !user.user.primaryUserCryptoAddressId
+      return true
     }
     if (user.sourceOfExistingUser === 'Session Id') {
-      return !user.user.primaryUserCryptoAddressId
+      return true
     }
   })
   const userToKeep =
