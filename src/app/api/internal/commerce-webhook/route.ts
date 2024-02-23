@@ -15,7 +15,11 @@ import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 
 export async function POST(request: NextRequest) {
   const rawRequestBody = await request.json()
-  authenticatePaymentRequest(rawRequestBody)
+
+  if (!authenticatePaymentRequest(rawRequestBody)) {
+    return new NextResponse('unauthorized', { status: 401 })
+  }
+
   const body = rawRequestBody as CoinbaseCommercePayment
   const zodResult = zodCoinbaseCommercePayment.safeParse(body)
   if (!zodResult.success) {
