@@ -19,13 +19,13 @@ export async function POST(request: NextRequest) {
   const body = rawRequestBody as CoinbaseCommercePayment
   const zodResult = zodCoinbaseCommercePayment.safeParse(body)
   if (!zodResult.success) {
+    // Only capture message, but still attempt to proceed with the request.
     Sentry.captureMessage('unexpected Coinbase Commerce payment request format', {
       extra: {
         body,
         errors: zodResult.error.flatten(),
       },
     })
-    return new NextResponse('internal error', { status: 500 })
   }
 
   try {
