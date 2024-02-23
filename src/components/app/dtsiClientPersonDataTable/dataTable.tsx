@@ -13,6 +13,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 import { ArrowUpDown, Search } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 
 import { Person } from '@/components/app/dtsiClientPersonDataTable/columns'
 import { DataTablePagination } from '@/components/app/dtsiClientPersonDataTable/dataTablePagination'
@@ -35,6 +36,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { useIntlUrls } from '@/hooks/useIntlUrls'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -69,6 +71,8 @@ export function DataTable<TData extends Person, TValue>({
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
   const [globalFilter, setGlobalFilter] = React.useState<GlobalFilters>(getGlobalFilterDefaults())
+  const router = useRouter()
+  const urls = useIntlUrls()
 
   const data = useMemo(() => {
     return filterDataViaGlobalFilters<TData>(passedData, globalFilter)
@@ -150,8 +154,7 @@ export function DataTable<TData extends Person, TValue>({
                     className="cursor-pointer"
                     data-state={row.getIsSelected() && 'selected'}
                     key={row.id}
-                    // adding this causes a weird issue where the page will randomly redirect. Needs more investigation
-                    // onClick={() => router.push(urls.politicianDetails(row.original.slug))}
+                    onClick={() => router.push(urls.politicianDetails(row.original.slug))}
                     role="button"
                   >
                     {row.getVisibleCells().map(cell => (

@@ -51,7 +51,9 @@ export function IntroStaticContent({ children }: React.PropsWithChildren) {
 function ChecklistItem({ children }: { children: React.ReactNode }) {
   return (
     <li className="flex items-center gap-4 py-2">
-      <Check size={16} />
+      <div className="min-w-4">
+        <Check size={16} />
+      </div>
 
       <p>{children}</p>
     </li>

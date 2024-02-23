@@ -203,17 +203,20 @@ export function UpdateUserProfileForm({
               name="hasOptedInToMembership"
               render={({ field }) => (
                 <label className="block">
-                  <FormItem className="flex flex-row items-center space-x-3 space-y-0">
-                    <FormControl>
-                      <Checkbox checked={field.value} onCheckedChange={field.onChange} />
-                    </FormControl>
-                    <FormDescription>
-                      By checking this box, I agree to become a Stand With Crypto Alliance member.{' '}
-                      <SWCMembershipDialog>
-                        <button className="text-blue-600">Learn More</button>
-                      </SWCMembershipDialog>
-                      .
-                    </FormDescription>
+                  <FormItem>
+                    <div className="flex flex-row items-center space-x-3 space-y-0">
+                      <FormControl>
+                        <Checkbox checked={field.value} onCheckedChange={field.onChange} />
+                      </FormControl>
+                      <FormDescription>
+                        By checking this box, I agree to become a Stand With Crypto Alliance member.{' '}
+                        <SWCMembershipDialog>
+                          <button className="text-blue-600">Learn More</button>
+                        </SWCMembershipDialog>
+                        .
+                      </FormDescription>
+                    </div>
+                    <FormErrorMessage />
                   </FormItem>
                 </label>
               )}
