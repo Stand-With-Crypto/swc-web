@@ -31,7 +31,7 @@ const title = `${
     ? ''
     : `${capitalize(NEXT_PUBLIC_ENVIRONMENT.toLowerCase())} Env - `
 }Stand With Crypto`
-const description = `Stand with Crypto Alliance is a non-profit organization dedicated to uniting global crypto advocates.`
+const description = `Stand With Crypto Alliance is a non-profit organization dedicated to uniting global crypto advocates.`
 const ogImage = getOpenGraphImageUrl({ title: description })
 
 export const viewport: Viewport = {

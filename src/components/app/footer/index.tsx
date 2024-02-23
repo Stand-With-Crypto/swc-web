@@ -100,7 +100,7 @@ export async function Footer({ locale }: { locale: SupportedLocale }) {
         <div className="text-sm text-fontcolor-muted">
           {intl.formatMessage({
             id: `${i18nKey}.copyright`,
-            defaultMessage: 'Stand with Crypto ©️ All rights reserved 2023',
+            defaultMessage: 'Stand With Crypto ©️ All rights reserved 2024',
             description: 'Copyright text',
           })}
         </div>

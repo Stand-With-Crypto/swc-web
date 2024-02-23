@@ -68,7 +68,7 @@ export function UserActionFormSuccessScreenMainCTA({
           </Skeleton>
         </PageSubTitle>
         <Button variant="secondary">
-          <Skeleton>Join Stand with Crypto</Skeleton>
+          <Skeleton>Join Stand With Crypto</Skeleton>
         </Button>
       </Container>
     )
@@ -77,7 +77,7 @@ export function UserActionFormSuccessScreenMainCTA({
   if (!user) {
     const loginButton = (
       <LoginDialogWrapper>
-        <Button variant="secondary">Join Stand with Crypto</Button>
+        <Button variant="secondary">Join Stand With Crypto</Button>
       </LoginDialogWrapper>
     )
 
