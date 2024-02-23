@@ -1,4 +1,3 @@
-import { Suspense } from 'react'
 import { ArrowUpRight, ThumbsDown, ThumbsUp } from 'lucide-react'
 
 import { DTSIPersonCard } from '@/components/app/dtsiPersonCard'
@@ -16,7 +15,6 @@ import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { Skeleton } from '@/components/ui/skeleton'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
 import { PageProps } from '@/types'
