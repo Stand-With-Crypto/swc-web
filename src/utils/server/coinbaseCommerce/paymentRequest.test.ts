@@ -367,7 +367,7 @@ it('JSON object from V1 Coinbase Commerce webhook matches expected format', () =
     zodCoinbaseCommercePayment.parse(v1ResponseJson)
   } catch (error) {
     if (error instanceof z.ZodError) {
-      throw new Error('Validation errors: ' + error.errors)
+      throw new Error('Validation errors: ' + JSON.stringify(error.errors, null, 2))
     } else {
       throw new Error('Unexpected error: ' + error)
     }
@@ -381,7 +381,7 @@ it('JSON object from V2 Coinbase Commerce webhook matches expected format', () =
     zodCoinbaseCommercePayment.parse(v2ResponseJson)
   } catch (error) {
     if (error instanceof z.ZodError) {
-      throw new Error('Validation errors: ' + error.errors)
+      throw new Error('Validation errors: ' + JSON.stringify(error.errors, null, 2))
     } else {
       throw new Error('Unexpected error: ' + error)
     }
