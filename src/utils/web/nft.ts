@@ -8,7 +8,7 @@ export const NFT_CLIENT_METADATA: Record<NFTSlug, NFTClientMetadata> = {
   [NFTSlug.SWC_SHIELD]: {
     name: 'SWC Shield',
     image: {
-      url: '/nfts/membership-shield-nft.png',
+      url: '/nfts/membership-swc-shield.gif',
       width: 512,
       height: 512,
       alt: 'SWC Shield',
