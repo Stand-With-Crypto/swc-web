@@ -15,6 +15,7 @@ import * as Sentry from '@sentry/nextjs'
 import { compact, groupBy } from 'lodash-es'
 import { NextApiRequest } from 'next'
 
+import { parseThirdwebAddress } from '@/hooks/useThirdwebAddress'
 import { CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/upsertAdvocateInCapitolCanary'
 import { inngest } from '@/inngest/inngest'
 import {
@@ -56,9 +57,11 @@ type UpsertedUser = User & {
 }
 
 export async function onLogin(
-  cryptoAddress: string,
+  _cryptoAddress: string,
   req: NextApiRequest,
 ): Promise<AuthSessionMetadata> {
+  const cryptoAddress = parseThirdwebAddress(_cryptoAddress)
+
   const localUser = parseLocalUserFromCookiesForPageRouter(req)
   const log = getLog(cryptoAddress)
 
@@ -169,7 +172,8 @@ This function will ensure we create a user opt-in action if one does not already
 */
 
 export async function onNewLogin(props: NewLoginParams) {
-  const { cryptoAddress, localUser } = props
+  const { cryptoAddress: _cryptoAddress, localUser } = props
+  const cryptoAddress = parseThirdwebAddress(_cryptoAddress)
   const log = getLog(cryptoAddress)
 
   // queryMatchingUsers logic
@@ -442,7 +446,7 @@ async function maybeUpsertCryptoAddress({
 }) {
   const log = getLog(cryptoAddress)
   const existingUserCryptoAddress = user.userCryptoAddresses.find(
-    addr => addr.cryptoAddress === cryptoAddress,
+    addr => parseThirdwebAddress(addr.cryptoAddress) === cryptoAddress,
   )
   if (existingUserCryptoAddress) {
     if (existingUserCryptoAddress.hasBeenVerifiedViaAuth) {

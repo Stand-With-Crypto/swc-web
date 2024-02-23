@@ -29,7 +29,7 @@ import { requiredEnv } from '@/utils/shared/requiredEnv'
 const LOCAL_USER_CRYPTO_ADDRESS = requiredEnv(
   process.env.LOCAL_USER_CRYPTO_ADDRESS,
   'process.env.LOCAL_USER_CRYPTO_ADDRESS',
-)
+).toLowerCase()
 
 enum SeedSize {
   SM = 'SM',
