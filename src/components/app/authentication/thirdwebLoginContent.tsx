@@ -30,7 +30,7 @@ export function ThirdwebLoginContent(props: ConnectEmbedProps) {
             <PageTitle size="sm">Join Stand With Crypto</PageTitle>
             <PageSubTitle size="sm">
               Lawmakers and regulators are threatening the crypto industry. You can fight back and
-              ask for sensible rules. Join the Stand with Crypto movement to make your voice heard
+              ask for sensible rules. Join the Stand With Crypto movement to make your voice heard
               in Washington D.C.
             </PageSubTitle>
           </div>

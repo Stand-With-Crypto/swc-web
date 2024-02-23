@@ -8,6 +8,7 @@ import { ExternalLink } from '@/components/ui/link'
 import { useResponsivePopover } from '@/components/ui/responsivePopover'
 import { DTSIPersonDetails } from '@/data/dtsi/queries/queryDTSIPersonDetails'
 import { useLocale } from '@/hooks/useLocale'
+import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { convertDTSIStanceScoreToCryptoSupportLanguageSentence } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { pluralize } from '@/utils/shared/pluralize'
 import { externalUrls } from '@/utils/shared/urls'
@@ -26,7 +27,7 @@ export function ScoreExplainer({ person }: { person: DTSIPersonDetails }) {
             {convertDTSIStanceScoreToCryptoSupportLanguageSentence(person)}
           </h3>
           <h4 className="text-sm text-fontcolor-muted md:text-base">
-            {person.firstNickname || person.firstName} has made{' '}
+            {dtsiPersonFullName(person)} has made{' '}
             <FormattedNumber amount={person.stances.length} locale={locale} />{' '}
             {pluralize({ singular: 'stance', count: person.stances.length })} about crypto.
           </h4>

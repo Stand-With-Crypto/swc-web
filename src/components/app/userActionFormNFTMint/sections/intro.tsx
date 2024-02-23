@@ -88,7 +88,7 @@ function ContractMetadataDisplay({
     <div className="flex flex-grow flex-col gap-6">
       <div className="flex gap-6">
         <NFTDisplay
-          alt="Stand with Crypto supporter NFT"
+          alt="Stand With Crypto supporter NFT"
           raw
           size="lg"
           src={contractMetadata?.image ?? ''}

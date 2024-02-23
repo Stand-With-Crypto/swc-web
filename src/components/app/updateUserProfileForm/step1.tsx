@@ -232,7 +232,7 @@ export function UpdateUserProfileForm({
                       </FormControl>
                       <FormDescription>
                         (Optional) Check this box to consent to receive recurring automated text
-                        messages about Stand with Crypto at the phone number provided. Reply STOP to
+                        messages about Stand With Crypto at the phone number provided. Reply STOP to
                         stop. Msg and data rates may apply. See{' '}
                         <PrivacyPolicyDialog>
                           <button className="text-blue-600">Privacy Policy</button>

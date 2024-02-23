@@ -80,7 +80,7 @@ export function TopLevelMetrics({ locale, ...data }: Props & { locale: Supported
                 </TooltipTrigger>
                 <TooltipContent className="max-w-xs">
                   <p className="text-sm font-normal tracking-normal">
-                    Total includes donations to Stand with Crypto Alliance and to Fairshake, a
+                    Total includes donations to Stand With Crypto Alliance and to Fairshake, a
                     pro-crypto Super PAC.
                   </p>
                 </TooltipContent>
