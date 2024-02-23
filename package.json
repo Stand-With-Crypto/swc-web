@@ -30,7 +30,7 @@
     "e2e:run-headless": "NEXT_PUBLIC_IS_CYPRESS=true start-server-and-test 'npm run dev -- -p 3001 & npx inngest-cli@latest dev --no-discovery -u http://localhost:3001/api/inngest' http://localhost:3001 \"cypress run --e2e --config baseUrl=http://localhost:3001\""
   },
   "prisma": {
-    "seed": "npm run ts --transpile-only src/bin/seedLocalDb.ts"
+    "seed": "npm run ts --transpile-only src/bin/seed/seedLocalDb.ts"
   },
   "dependencies": {
     "@graphql-tools/mock": "^9.0.0",
