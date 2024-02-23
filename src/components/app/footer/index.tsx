@@ -1,3 +1,5 @@
+import { getYear } from 'date-fns'
+
 import { CookieConsentFooterButton } from '@/components/app/cookieConsent/cookieConsentFooterButton'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
 import getIntl from '@/intl/intlMessages'
@@ -98,11 +100,7 @@ export async function Footer({ locale }: { locale: SupportedLocale }) {
           </a>
         </div>
         <div className="text-sm text-fontcolor-muted">
-          {intl.formatMessage({
-            id: `${i18nKey}.copyright`,
-            defaultMessage: 'Stand With Crypto ©️ All rights reserved 2024',
-            description: 'Copyright text',
-          })}
+          Stand With Crypto ©️ All rights reserved {getYear(new Date())}
         </div>
       </div>
     </footer>
