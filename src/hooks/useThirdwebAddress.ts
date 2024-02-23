@@ -7,5 +7,5 @@ export function useThirdwebAddress() {
 }
 
 export function parseThirdwebAddress(address: string) {
-  return address?.toLocaleLowerCase()
+  return address.toLocaleLowerCase()
 }
