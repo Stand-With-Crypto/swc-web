@@ -1,6 +1,7 @@
 'use client'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
+import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
@@ -95,7 +96,7 @@ export function ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: Suppo
       <p className="mb-3 text-xl font-bold">Your representative</p>
       <p className="mb-3 text-sm text-fontcolor-muted">
         Showing representative for{' '}
-        <button className="font-bold text-fontcolor underline">{address.description}</button>
+        <span className="font-bold text-fontcolor underline">{address.description}</span>
       </p>
       <div className="mx-auto flex max-w-xl flex-col justify-between gap-4 rounded-3xl bg-gray-100 p-5 text-left sm:flex-row sm:items-center sm:gap-10">
         <div className="flex flex-row items-center gap-4 text-sm sm:text-base">
