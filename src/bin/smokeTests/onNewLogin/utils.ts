@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker'
 import { isFunction } from 'lodash-es'
 
-import { parseThirdwebAddress } from '@/hooks/useThirdwebAddress'
+import { parseThirdwebAddress } from '@/hooks/useThirdwebAddress/parseThirdwebAddress'
 import { fakerFields } from '@/mocks/fakerUtils'
 import { ThirdwebEmbeddedWalletMetadata } from '@/utils/server/thirdweb/fetchEmbeddedWalletMetadataFromThirdweb'
 import { onNewLogin } from '@/utils/server/thirdweb/onLogin'

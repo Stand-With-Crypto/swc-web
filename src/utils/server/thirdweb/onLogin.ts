@@ -15,7 +15,7 @@ import * as Sentry from '@sentry/nextjs'
 import { compact, groupBy } from 'lodash-es'
 import { NextApiRequest } from 'next'
 
-import { parseThirdwebAddress } from '@/hooks/useThirdwebAddress'
+import { parseThirdwebAddress } from '@/hooks/useThirdwebAddress/parseThirdwebAddress'
 import { CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/upsertAdvocateInCapitolCanary'
 import { inngest } from '@/inngest/inngest'
 import {

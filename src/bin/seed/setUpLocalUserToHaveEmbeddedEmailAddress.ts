@@ -4,7 +4,7 @@ import { faker } from '@faker-js/faker'
 import { DataCreationMethod } from '@prisma/client'
 
 import { runBin } from '@/bin/runBin'
-import { parseThirdwebAddress } from '@/hooks/useThirdwebAddress'
+import { parseThirdwebAddress } from '@/hooks/useThirdwebAddress/parseThirdwebAddress'
 import { mockCreateUserInput } from '@/mocks/models/mockUser'
 import { mockCreateUserCryptoAddressInput } from '@/mocks/models/mockUserCryptoAddress'
 import { mockCreateUserEmailAddressInput } from '@/mocks/models/mockUserEmailAddress'

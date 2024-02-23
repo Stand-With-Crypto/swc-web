@@ -6,7 +6,7 @@ import {
   UserCryptoAddress,
 } from '@prisma/client'
 
-import { parseThirdwebAddress } from '@/hooks/useThirdwebAddress'
+import { parseThirdwebAddress } from '@/hooks/useThirdwebAddress/parseThirdwebAddress'
 import { fakerFields } from '@/mocks/fakerUtils'
 import { mockCommonDatetimes } from '@/mocks/mockCommonDatetimes'
 

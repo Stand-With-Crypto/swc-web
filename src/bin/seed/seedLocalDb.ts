@@ -5,7 +5,7 @@ import { UserActionType, UserEmailAddressSource, UserInformationVisibility } fro
 import { flatten, groupBy, keyBy, times } from 'lodash-es'
 
 import { runBin } from '@/bin/runBin'
-import { parseThirdwebAddress } from '@/hooks/useThirdwebAddress'
+import { parseThirdwebAddress } from '@/hooks/useThirdwebAddress/parseThirdwebAddress'
 import { mockCreateAddressInput } from '@/mocks/models/mockAddress'
 import { mockCreateAuthenticationNonceInput } from '@/mocks/models/mockAuthenticationNonce'
 import { mockCreateNFTMintInput } from '@/mocks/models/mockNFTMint'
