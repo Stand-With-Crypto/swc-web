@@ -6,11 +6,11 @@ import { motion } from 'framer-motion'
 import { ClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
 import { ClientUserAction } from '@/clientModels/clientUserAction/clientUserAction'
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
+import { ActivityAvatar } from '@/components/app/recentActivityRow/activityAvatar'
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
-import { UserAvatar } from '@/components/app/userAvatar'
 import { Button } from '@/components/ui/button'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
 import { FormattedRelativeDatetimeWithClientHydration } from '@/components/ui/formattedRelativeDatetimeWithClientHydration'
@@ -53,7 +53,7 @@ export function RecentActivityRowBase({
     >
       <div className="flex items-center gap-4">
         <div>
-          <UserAvatar size={40} user={action.user} />
+          <ActivityAvatar actionType={action.actionType} size={40} />
         </div>
         <div>{children}</div>
       </div>
