@@ -56,7 +56,9 @@ export function PageUserProfile({
           <div className="flex items-center gap-2">
             <UserAvatar size={48} user={user} />
             <div>
-              <div className="text-lg font-bold">{getSensitiveDataUserDisplayName(user)}</div>
+              <div className="max-w-[120px] truncate text-lg font-bold md:max-w-md">
+                {getSensitiveDataUserDisplayName(user)}
+              </div>
               <div className="text-sm text-gray-500">
                 Joined{' '}
                 <FormattedDatetime
@@ -70,9 +72,13 @@ export function PageUserProfile({
           <div>
             <UpdateUserProfileFormDialog user={user}>
               {hasCompleteUserProfile(user) ? (
-                <Button variant="secondary">Edit your profile</Button>
+                <Button variant="secondary">
+                  Edit <span className="mx-1 hidden sm:inline-block">your</span> profile
+                </Button>
               ) : (
-                <Button>Finish your profile</Button>
+                <Button>
+                  Finish <span className="mx-1 hidden sm:inline-block">your</span> profile
+                </Button>
               )}
             </UpdateUserProfileFormDialog>
           </div>

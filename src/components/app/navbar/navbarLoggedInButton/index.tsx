@@ -46,7 +46,9 @@ export function NavbarLoggedInButton({ onOpenChange }: { onOpenChange: (open: bo
       }}
     >
       <PopoverTrigger asChild>
-        <Button variant="secondary">{displayName ?? <>Log In</>}</Button>
+        <Button variant="secondary">
+          <div className="max-w-[150px] truncate">{displayName ?? <>Log In</>}</div>
+        </Button>
       </PopoverTrigger>
       <PopoverContent align="end" className="p-0">
         <NavbarLoggedInPopoverContent onClose={() => dialogProps.onOpenChange(false)} user={user} />

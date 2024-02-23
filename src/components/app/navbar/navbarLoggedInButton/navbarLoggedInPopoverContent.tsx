@@ -113,7 +113,7 @@ function UserHeading(props: {
       {shouldDisplayCryptoAddress || !user.primaryUserEmailAddress ? (
         <div className="flex-1">
           <div className="flex w-full items-center justify-between">
-            <p>{getSensitiveDataUserDisplayName(user)}</p>
+            <p className="max-w-24 truncate">{getSensitiveDataUserDisplayName(user)}</p>
             <Button className="h-auto p-1" onClick={handleCopyNameToClipboard} variant="ghost">
               <Copy height={16} width={16} />
             </Button>
