@@ -13,8 +13,11 @@ describe('stringToEthereumAddress', () => {
   it.each([
     ['0x52908400098527886E0F7030069857D2E4169E7'],
     ['0y52908400098527886E0F7030069857D2E4169EE7'],
+    ['x052908400098527886E0F7030069857D2E4169EE7'],
     ['0x52908400098527886E0F7030069857D2E4169EEE7'],
     ['0052908400098527886E0F7030069857D2E4169EE7'],
+    [''],
+    [';fhdjks'],
   ])('Invalid address %p should return null', input => {
     expect(stringToEthereumAddress(input)).toEqual(null)
   })
