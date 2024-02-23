@@ -1,5 +1,7 @@
 'use client'
 
+import React from 'react'
+import { UserInformationVisibility } from '@prisma/client'
 import { useENS } from '@thirdweb-dev/react'
 
 import { Button } from '@/components/ui/button'
@@ -17,6 +19,24 @@ export function NavbarLoggedInButton({ onOpenChange }: { onOpenChange: (open: bo
   const ensData = useENS()
   const { data } = useApiResponseForUserFullProfileInfo()
   const user = data?.user
+
+  const displayName = React.useMemo(() => {
+    const shouldWaitForEnsData =
+      user?.informationVisibility === UserInformationVisibility.CRYPTO_INFO_ONLY
+
+    if (!user) {
+      return
+    }
+
+    if (shouldWaitForEnsData && ensData.isLoading) {
+      return
+    }
+
+    return getSensitiveDataUserDisplayName(
+      appendENSHookDataToUser(user, shouldWaitForEnsData ? ensData.data : null),
+    )
+  }, [ensData.data, ensData.isLoading, user])
+
   return (
     <Popover
       {...dialogProps}
@@ -26,15 +46,7 @@ export function NavbarLoggedInButton({ onOpenChange }: { onOpenChange: (open: bo
       }}
     >
       <PopoverTrigger asChild>
-        <Button variant="secondary">
-          {user && !ensData.isLoading ? (
-            getSensitiveDataUserDisplayName(appendENSHookDataToUser(user, ensData.data))
-          ) : (
-            // we don't want to show any jank from the default "Log In" state until our auth data is fully loaded
-            // this ensures theres a single state change from "Log In" to the user's name
-            <>Log In</>
-          )}
-        </Button>
+        <Button variant="secondary">{displayName ?? <>Log In</>}</Button>
       </PopoverTrigger>
       <PopoverContent align="end" className="p-0">
         <NavbarLoggedInPopoverContent onClose={() => dialogProps.onOpenChange(false)} user={user} />
