@@ -7,12 +7,25 @@ import {
 } from '@/clientModels/clientUser/sensitiveDataClientUser'
 import { userFirstNameWithLastInitial } from '@/utils/shared/userFullName'
 
+/*
+Some high profile organizations had donations that aren't linked to their actual
+ENS but want the ENS displayed on the website. This hardcode fixes that issue.
+*/
+const HARDCODED_USER_DISPLAY_NAME: Record<string, { displayName: string }> = {
+  '21143cb6-edce-4f42-b51a-c014e7f8363b': {
+    displayName: 'geminifrontierfund.eth',
+  },
+}
+
 export const getUserDisplayName = (
   user: Pick<
     ClientUserWithENSData,
-    'firstName' | 'lastName' | 'informationVisibility' | 'primaryUserCryptoAddress'
+    'firstName' | 'lastName' | 'informationVisibility' | 'primaryUserCryptoAddress' | 'id'
   > | null,
 ) => {
+  if (user?.id && HARDCODED_USER_DISPLAY_NAME[user.id]) {
+    return HARDCODED_USER_DISPLAY_NAME[user.id].displayName
+  }
   if (user?.informationVisibility === UserInformationVisibility.ANONYMOUS) {
     return 'Anonymous'
   }
