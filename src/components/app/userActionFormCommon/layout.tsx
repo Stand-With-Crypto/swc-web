@@ -17,7 +17,7 @@ export function UserActionFormLayout({ onBack, children }: UserActionFormLayoutP
     <>
       {onBack && <GoBackButton onClick={onBack} />}
 
-      <div className="flex min-h-[400px] flex-col">{children}</div>
+      <div className="flex h-full min-h-[400px] flex-col">{children}</div>
     </>
   )
 }
