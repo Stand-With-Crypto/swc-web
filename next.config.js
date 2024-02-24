@@ -181,10 +181,6 @@ const nextConfig = {
       { protocol: 'https', hostname: 'db0prh5pvbqwd.cloudfront.net' },
     ],
   },
-  experimental: {
-    workerThreads: false,
-    cpus: 1,
-  },
   async headers() {
     return [
       {
