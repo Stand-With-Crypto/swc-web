@@ -91,11 +91,8 @@ async function getSumDonationsByUserData(total: QueryResult) {
   return total.map(({ userId, totalAmountUsd }) => {
     const user = usersById[userId]
     return {
-      totalAmountUsd: totalAmountUsd
-        ? typeof totalAmountUsd === 'number'
-          ? totalAmountUsd
-          : totalAmountUsd.toNumber()
-        : 0,
+      // @ts-ignore
+      totalAmountUsd: totalAmountUsd.notARealThing(),
       user: {
         ...getClientLeaderboardUser(
           user,
