@@ -199,6 +199,11 @@ const nextConfig = {
       },
       {
         permanent: true,
+        destination: '/community',
+        source: '/leaderboard',
+      },
+      {
+        permanent: true,
         destination: '/action/sign-up',
         source: '/member-join',
       },

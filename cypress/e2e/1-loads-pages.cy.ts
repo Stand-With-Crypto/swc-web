@@ -7,7 +7,7 @@ it('sanity checks that all the pages loaded as expected', () => {
   cy.visit('/about')
   cy.get('h1').contains('Our mission')
 
-  cy.visit('/leaderboard')
+  cy.visit('/community')
   cy.get('h1').contains('Our community')
 
   cy.visit('/politicians')

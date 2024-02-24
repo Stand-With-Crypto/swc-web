@@ -28,7 +28,7 @@ async function getSumDonationsByUserQuery({ limit, offset }: SumDonationsByUserC
   // but nothing wrong with some raw sql for custom aggregations
   const total: {
     userId: string
-    totalAmountUsd?: number | Decimal
+    totalAmountUsd: Decimal
   }[] = await prismaClient.$queryRaw`
     SELECT  
       u.id AS userId,
@@ -65,7 +65,10 @@ async function getSumDonationsByUserQuery({ limit, offset }: SumDonationsByUserC
     LIMIT ${limit}
     OFFSET ${offset || 0}
   `
-  return total
+  return total.map(({ userId, totalAmountUsd }) => ({
+    userId,
+    totalAmountUsd: totalAmountUsd.toNumber(),
+  }))
 }
 
 type QueryResult = Awaited<ReturnType<typeof getSumDonationsByUserQuery>>
@@ -83,7 +86,6 @@ async function getSumDonationsByUserData(total: QueryResult) {
       address: true,
     },
   })
-
   const usersById = keyBy(users, 'id')
   const ensDataMap = await getENSDataMapFromCryptoAddressesAndFailGracefully(
     compact(users.map(user => user.primaryUserCryptoAddress?.cryptoAddress)),
@@ -107,7 +109,7 @@ async function getSumDonationsByUserData(total: QueryResult) {
 
 export type SumDonationsByUser = Awaited<ReturnType<typeof getSumDonationsByUserData>>
 
-const CACHE_KEY = 'GET_SUM_DONATIONS_BY_USER_CACHE_V4'
+const CACHE_KEY = 'GET_SUM_DONATIONS_BY_USER_CACHE_V6'
 
 export async function buildGetSumDonationsByUserCache() {
   const result = await getSumDonationsByUserQuery({
@@ -130,4 +132,9 @@ export async function getSumDonationsByUserWithBuildCache(config: SumDonationsBy
   }
   const results = await buildGetSumDonationsByUserCache()
   return getSumDonationsByUserData(results.slice(offset, offset + config.limit))
+}
+
+export async function getSumDonationsByUser(config: SumDonationsByUserConfig) {
+  const result = await getSumDonationsByUserQuery(config)
+  return getSumDonationsByUserData(result)
 }
