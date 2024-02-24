@@ -13,6 +13,7 @@ import { prismaClient } from '@/utils/server/prismaClient'
 import { redis } from '@/utils/server/redis'
 import { getLogger } from '@/utils/shared/logger'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
+import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
 export type SumDonationsByUserConfig = {
   limit: number
@@ -106,7 +107,10 @@ export async function buildGetSumDonationsByUserCache() {
     limit: PAGE_LEADERBOARD_TOTAL_PAGES * PAGE_LEADERBOARD_ITEMS_PER_PAGE,
     offset: 0,
   })
-  await redis.set(CACHE_KEY, result, { ex: SECONDS_DURATION.MINUTE * 10 })
+  await redis.set(CACHE_KEY, result, {
+    ex:
+      NEXT_PUBLIC_ENVIRONMENT === 'local' ? SECONDS_DURATION.SECOND : SECONDS_DURATION.MINUTE * 10,
+  })
   return result
 }
 
