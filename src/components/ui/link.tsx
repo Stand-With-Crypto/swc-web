@@ -1,6 +1,8 @@
 import React from 'react'
 import NextLink from 'next/link'
 
+import { cn } from '@/utils/web/cn'
+
 export const InternalLink = React.forwardRef<
   HTMLAnchorElement,
   React.ComponentProps<typeof NextLink>
@@ -15,7 +17,7 @@ export const ExternalLink = React.forwardRef<
 >(({ className, ...props }, ref) => {
   return (
     <a
-      className={`${className ? className + ' ' : ''}text-[#0052FF] hover:underline`}
+      className={cn(className, 'text-[blue-600]', 'hover:underline')}
       ref={ref}
       target="_blank"
       {...props}
