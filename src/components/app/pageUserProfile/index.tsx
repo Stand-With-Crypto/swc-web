@@ -2,7 +2,6 @@ import { UserActionType } from '@prisma/client'
 import { sumBy, uniq } from 'lodash-es'
 import { redirect, RedirectType } from 'next/navigation'
 
-import { NFTDisplay } from '@/components/app/nftHub/nftDisplay'
 import { PageUserProfileUser } from '@/components/app/pageUserProfile/getAuthenticatedData'
 import { UpdateUserProfileFormDialog } from '@/components/app/updateUserProfileForm/dialog'
 import { UserActionRowCTAsList } from '@/components/app/userActionRowCTA/userActionRowCTAsList'
