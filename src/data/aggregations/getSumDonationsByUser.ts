@@ -4,15 +4,27 @@ import { Decimal } from '@prisma/client/runtime/library'
 import { compact, keyBy } from 'lodash-es'
 
 import { getClientLeaderboardUser } from '@/clientModels/clientUser/clientLeaderboardUser'
+import {
+  PAGE_LEADERBOARD_ITEMS_PER_PAGE,
+  PAGE_LEADERBOARD_TOTAL_PAGES,
+} from '@/components/app/pageLeaderboard/constants'
 import { getENSDataMapFromCryptoAddressesAndFailGracefully } from '@/data/web3/getENSDataFromCryptoAddress'
 import { prismaClient } from '@/utils/server/prismaClient'
+import { redis } from '@/utils/server/redis'
+import { getLogger } from '@/utils/shared/logger'
+import { SECONDS_DURATION } from '@/utils/shared/seconds'
+import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
 export type SumDonationsByUserConfig = {
   limit: number
   offset?: number
 }
+
+const logger = getLogger('getSumDonationsByUser')
+
 // If we ever have an nft mint action that is not a "donation", we'll need to refactor this logic
-export const getSumDonationsByUser = async ({ limit, offset }: SumDonationsByUserConfig) => {
+const getSumDonationsByUser = async ({ limit, offset }: SumDonationsByUserConfig) => {
+  logger.info('triggering getSumDonationsByUser directly without cache')
   // there might be a way of doing this better with https://www.prisma.io/docs/orm/prisma-client/queries/aggregation-grouping-summarizing
   // but nothing wrong with some raw sql for custom aggregations
   const total: {
@@ -88,3 +100,28 @@ export const getSumDonationsByUser = async ({ limit, offset }: SumDonationsByUse
 }
 
 export type SumDonationsByUser = Awaited<ReturnType<typeof getSumDonationsByUser>>
+
+const CACHE_KEY = 'GET_SUM_DONATIONS_BY_USER_CACHE_V2'
+
+export async function buildGetSumDonationsByUserCache() {
+  const result = await getSumDonationsByUser({
+    limit: PAGE_LEADERBOARD_TOTAL_PAGES * PAGE_LEADERBOARD_ITEMS_PER_PAGE,
+    offset: 0,
+  })
+  await redis.set(CACHE_KEY, result, {
+    ex:
+      NEXT_PUBLIC_ENVIRONMENT === 'local' ? SECONDS_DURATION.SECOND : SECONDS_DURATION.MINUTE * 10,
+  })
+  return result
+}
+
+export async function getSumDonationsByUserWithBuildCache(config: SumDonationsByUserConfig) {
+  const offset = config.offset || 0
+  const maybeCache = await redis.get(CACHE_KEY)
+  if (maybeCache) {
+    const results = maybeCache as SumDonationsByUser
+    return results.slice(offset, offset + config.limit)
+  }
+  const results = await buildGetSumDonationsByUserCache()
+  return results.slice(offset, offset + config.limit)
+}

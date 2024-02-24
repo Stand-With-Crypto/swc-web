@@ -16,6 +16,7 @@ else
     echo "Skip pushing database changes on preview branches to prevent accidently overridding the testing db schema with branch changes before they're ready to merge. You should be running npx prisma db push against your developer branch as needed locally."
 fi
 echo "Running build"
+npm run ts src/bin/vercelPrebuild.ts
 npm run build
 wait
 echo "frontend assets built"
