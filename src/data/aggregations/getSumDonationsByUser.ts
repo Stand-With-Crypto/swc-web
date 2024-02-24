@@ -1,18 +1,30 @@
 import 'server-only'
 
+import { cache } from 'react'
 import { Decimal } from '@prisma/client/runtime/library'
 import { compact, keyBy } from 'lodash-es'
+import { unstable_cache } from 'next/cache'
 
 import { getClientLeaderboardUser } from '@/clientModels/clientUser/clientLeaderboardUser'
+import {
+  PAGE_LEADERBOARD_ITEMS_PER_PAGE,
+  PAGE_LEADERBOARD_TOTAL_PAGES,
+} from '@/components/app/pageLeaderboard/constants'
 import { getENSDataMapFromCryptoAddressesAndFailGracefully } from '@/data/web3/getENSDataFromCryptoAddress'
 import { prismaClient } from '@/utils/server/prismaClient'
+import { getLogger } from '@/utils/shared/logger'
+import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
 export type SumDonationsByUserConfig = {
   limit: number
   offset?: number
 }
+
+const logger = getLogger('getSumDonationsByUser')
+
 // If we ever have an nft mint action that is not a "donation", we'll need to refactor this logic
 export const getSumDonationsByUser = async ({ limit, offset }: SumDonationsByUserConfig) => {
+  logger.info('triggering getSumDonationsByUser directly without cache')
   // there might be a way of doing this better with https://www.prisma.io/docs/orm/prisma-client/queries/aggregation-grouping-summarizing
   // but nothing wrong with some raw sql for custom aggregations
   const total: {
@@ -84,6 +96,21 @@ export const getSumDonationsByUser = async ({ limit, offset }: SumDonationsByUse
       },
     }
   })
+}
+
+const getSumDonationsByUserCache = unstable_cache(
+  getSumDonationsByUser,
+  ['getSumDonationsByUserCache'],
+  { revalidate: SECONDS_DURATION.MINUTE * 5 },
+)
+
+export async function getSumDonationsByUserWithBuildCache(config: SumDonationsByUserConfig) {
+  const results = await getSumDonationsByUserCache({
+    offset: 0,
+    limit: PAGE_LEADERBOARD_TOTAL_PAGES * PAGE_LEADERBOARD_ITEMS_PER_PAGE,
+  })
+  const offset = config.offset || 0
+  return results.slice(offset, offset + config.limit)
 }
 
 export type SumDonationsByUser = Awaited<ReturnType<typeof getSumDonationsByUser>>
