@@ -13,6 +13,13 @@ export const ExternalLink = React.forwardRef<
   HTMLAnchorElement,
   React.AnchorHTMLAttributes<HTMLAnchorElement>
 >(({ className, ...props }, ref) => {
-  return <a className={className} ref={ref} target="_blank" {...props} />
+  return (
+    <a
+      className={`${className ? className + ' ' : ''}text-[#0052FF] hover:underline`}
+      ref={ref}
+      target="_blank"
+      {...props}
+    />
+  )
 })
 ExternalLink.displayName = 'ExternalLink'
