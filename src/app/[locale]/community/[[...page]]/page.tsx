@@ -8,12 +8,15 @@ import {
   PAGE_LEADERBOARD_DESCRIPTION,
   PAGE_LEADERBOARD_TITLE,
   PageLeaderboard,
+  PageLeaderboardInferredProps,
 } from '@/components/app/pageLeaderboard'
 import {
   PAGE_LEADERBOARD_ITEMS_PER_PAGE,
   PAGE_LEADERBOARD_TOTAL_PRE_GENERATED_PAGES,
 } from '@/components/app/pageLeaderboard/constants'
 import { getDataForPageLeaderboard } from '@/components/app/pageLeaderboard/getData'
+import { SumDonationsByUser } from '@/data/aggregations/getSumDonationsByUser'
+import { PublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
@@ -75,6 +78,21 @@ export default async function Leaderboard({ params }: Props) {
     notFound()
   }
   const offset = (pageNum - 1) * PAGE_LEADERBOARD_ITEMS_PER_PAGE
-  const { actions, sumDonationsByUser } = await getDataForPageLeaderboard(offset)
-  return <PageLeaderboard {...{ tab, actions, locale, sumDonationsByUser, offset, pageNum }} />
+
+  const data = await getDataForPageLeaderboard(tab, offset)
+
+  const dataProps: PageLeaderboardInferredProps =
+    tab === RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY
+      ? {
+          tab: RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
+          publicRecentActivity: data as PublicRecentActivity,
+          sumDonationsByUser: undefined,
+        }
+      : {
+          tab: RecentActivityAndLeaderboardTabs.LEADERBOARD,
+          sumDonationsByUser: data as SumDonationsByUser,
+          publicRecentActivity: undefined,
+        }
+
+  return <PageLeaderboard {...dataProps} locale={locale} offset={offset} pageNum={pageNum} />
 }

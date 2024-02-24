@@ -1,6 +1,5 @@
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
 import { DynamicRecentActivity } from '@/components/app/pageLeaderboard/dynamicRecentActivity'
-import { getDataForPageLeaderboard } from '@/components/app/pageLeaderboard/getData'
 import { VariantRecentActivityRow } from '@/components/app/recentActivityRow/variantRecentActivityRow'
 import { SumDonationsByUserRow } from '@/components/app/sumDonationsByUserRow/sumDonationsByUserRow'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
@@ -8,6 +7,8 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { PaginationLinks } from '@/components/ui/paginationLinks'
 import { tabListStyles, tabTriggerStyles } from '@/components/ui/tabs/styles'
+import type { SumDonationsByUser } from '@/data/aggregations/getSumDonationsByUser'
+import type { PublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 import { SupportedLocale } from '@/intl/locales'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
@@ -17,19 +18,32 @@ import { PAGE_LEADERBOARD_TOTAL_PAGES } from './constants'
 export const PAGE_LEADERBOARD_TITLE = 'Our community'
 export const PAGE_LEADERBOARD_DESCRIPTION = `See how our community is taking a stand to safeguard the future of crypto in America.`
 
+export type PageLeaderboardInferredProps =
+  | {
+      tab: RecentActivityAndLeaderboardTabs.LEADERBOARD
+      sumDonationsByUser: SumDonationsByUser
+      publicRecentActivity: undefined
+    }
+  | {
+      tab: RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY
+      sumDonationsByUser: undefined
+      publicRecentActivity: PublicRecentActivity
+    }
+
+type PageLeaderboardProps = PageLeaderboardInferredProps & {
+  locale: SupportedLocale
+  offset: number
+  pageNum: number
+}
+
 export function PageLeaderboard({
   tab,
   locale,
   offset,
   pageNum,
-  actions,
   sumDonationsByUser,
-}: {
-  tab: RecentActivityAndLeaderboardTabs
-  locale: SupportedLocale
-  offset: number
-  pageNum: number
-} & Awaited<ReturnType<typeof getDataForPageLeaderboard>>) {
+  publicRecentActivity,
+}: PageLeaderboardProps) {
   const urls = getIntlUrls(locale)
   return (
     <div className="container space-y-7">
@@ -68,10 +82,10 @@ export function PageLeaderboard({
       <div className="space-y-8 lg:space-y-10">
         {tab === RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY ? (
           pageNum === 1 ? (
-            <DynamicRecentActivity actions={actions} />
+            <DynamicRecentActivity actions={publicRecentActivity} />
           ) : (
             <>
-              {actions.map(action => (
+              {publicRecentActivity.map(action => (
                 <VariantRecentActivityRow action={action} key={action.id} locale={locale} />
               ))}
             </>

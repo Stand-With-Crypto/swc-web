@@ -134,7 +134,5 @@ export async function getSumDonationsByUserWithBuildCache(config: SumDonationsBy
 }
 
 export async function getSumDonationsByUser(config: SumDonationsByUserConfig) {
-  // const result = await getSumDonationsByUserQuery(config)
-  // return getSumDonationsByUserData(result)
   return await getSumDonationsByUserWithBuildCache(config)
 }
