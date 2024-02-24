@@ -22,7 +22,7 @@ export type SumDonationsByUserConfig = {
 const logger = getLogger('getSumDonationsByUser')
 
 // If we ever have an nft mint action that is not a "donation", we'll need to refactor this logic
-export const getSumDonationsByUser = async ({ limit, offset }: SumDonationsByUserConfig) => {
+const getSumDonationsByUser = async (limit: number, offset: number) => {
   logger.info('triggering getSumDonationsByUser directly without cache')
   // there might be a way of doing this better with https://www.prisma.io/docs/orm/prisma-client/queries/aggregation-grouping-summarizing
   // but nothing wrong with some raw sql for custom aggregations
@@ -98,16 +98,16 @@ export const getSumDonationsByUser = async ({ limit, offset }: SumDonationsByUse
 }
 
 const getSumDonationsByUserCache = unstable_cache(
-  getSumDonationsByUser,
+  (limit: number, offset: number) => getSumDonationsByUser(limit, offset),
   ['getSumDonationsByUserCache'],
   { revalidate: SECONDS_DURATION.MINUTE * 5 },
 )
 
 export async function getSumDonationsByUserWithBuildCache(config: SumDonationsByUserConfig) {
-  const results = await getSumDonationsByUserCache({
-    offset: 0,
-    limit: PAGE_LEADERBOARD_TOTAL_PAGES * PAGE_LEADERBOARD_ITEMS_PER_PAGE,
-  })
+  const results = await getSumDonationsByUserCache(
+    PAGE_LEADERBOARD_TOTAL_PAGES * PAGE_LEADERBOARD_ITEMS_PER_PAGE,
+    0,
+  )
   const offset = config.offset || 0
   return results.slice(offset, offset + config.limit)
 }
