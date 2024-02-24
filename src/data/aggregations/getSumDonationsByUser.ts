@@ -1,6 +1,5 @@
 import 'server-only'
 
-import { cache } from 'react'
 import { Decimal } from '@prisma/client/runtime/library'
 import { compact, keyBy } from 'lodash-es'
 import { unstable_cache } from 'next/cache'
