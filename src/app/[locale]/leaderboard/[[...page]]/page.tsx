@@ -11,9 +11,11 @@ import {
 } from '@/components/app/pageLeaderboard'
 import {
   PAGE_LEADERBOARD_ITEMS_PER_PAGE,
+  PAGE_LEADERBOARD_TOTAL_PAGES,
   PAGE_LEADERBOARD_TOTAL_PRE_GENERATED_PAGES,
 } from '@/components/app/pageLeaderboard/constants'
 import { getDataForPageLeaderboard } from '@/components/app/pageLeaderboard/getData'
+import { getSumDonationsByUserCache } from '@/data/aggregations/getSumDonationsByUser'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
@@ -75,6 +77,14 @@ export default async function Leaderboard({ params }: Props) {
     notFound()
   }
   const offset = (pageNum - 1) * PAGE_LEADERBOARD_ITEMS_PER_PAGE
-  const { actions, sumDonationsByUser } = await getDataForPageLeaderboard(offset)
+  const { actions } = await getDataForPageLeaderboard(offset)
+  const results = await getSumDonationsByUserCache(
+    PAGE_LEADERBOARD_TOTAL_PAGES * PAGE_LEADERBOARD_ITEMS_PER_PAGE,
+    0,
+  )
+  const sumDonationsByUser = results.slice(
+    offset,
+    offset + PAGE_LEADERBOARD_TOTAL_PAGES * PAGE_LEADERBOARD_ITEMS_PER_PAGE,
+  )
   return <PageLeaderboard {...{ tab, actions, locale, sumDonationsByUser, offset, pageNum }} />
 }

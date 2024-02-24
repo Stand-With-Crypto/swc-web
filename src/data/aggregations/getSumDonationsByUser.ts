@@ -95,7 +95,7 @@ export const getSumDonationsByUser = async (
   })
 }
 
-const getSumDonationsByUserCache = cache(getSumDonationsByUser)
+export const getSumDonationsByUserCache = cache(getSumDonationsByUser)
 
 export async function getSumDonationsByUserWithBuildCache(config: SumDonationsByUserConfig) {
   const results = await getSumDonationsByUserCache(
