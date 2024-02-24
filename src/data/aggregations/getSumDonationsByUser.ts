@@ -2,7 +2,6 @@ import 'server-only'
 
 import { Decimal } from '@prisma/client/runtime/library'
 import { compact, keyBy } from 'lodash-es'
-import { unstable_cache } from 'next/cache'
 
 import { getClientLeaderboardUser } from '@/clientModels/clientUser/clientLeaderboardUser'
 import {
