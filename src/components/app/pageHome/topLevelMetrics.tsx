@@ -78,7 +78,7 @@ export function TopLevelMetrics({ locale, ...data }: Props & { locale: Supported
                 <TooltipTrigger className="mx-auto block" style={{ height: 35 }}>
                   <AnimatedNumericOdometer size={35} value={formatted.sumDonations.amountUsd} />
                 </TooltipTrigger>
-                <TooltipContent className="max-w-xs">
+                <TooltipContent className="max-w-xs" side="bottom">
                   <p className="text-sm font-normal tracking-normal">
                     Total includes donations to Stand With Crypto Alliance and to Fairshake, a
                     pro-crypto Super PAC.

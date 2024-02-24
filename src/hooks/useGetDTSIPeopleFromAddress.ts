@@ -56,6 +56,6 @@ export function formatGetDTSIPeopleFromAddressNotFoundReason(
     case 'MISSING_FROM_DTSI':
     case 'UNEXPECTED_ERROR':
     default:
-      return `We can't find your representative right now, we're working on a fix :)`
+      return `We can't find your representative right now, we're working on a fix`
   }
 }

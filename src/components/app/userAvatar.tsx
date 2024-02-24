@@ -1,6 +1,9 @@
+import React from 'react'
+
 import { ClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
 import { NextImage } from '@/components/ui/image'
 import { ImageAvatarProps } from '@/components/ui/imageAvatar'
+import { ImageWithFallbackOnError } from '@/components/ui/imageWithFallbackOnError'
 import { deterministicArraySelection } from '@/utils/shared/deterministicArraySelection'
 
 const genericImages = [
@@ -25,17 +28,14 @@ export const UserAvatar: React.FC<
   if (primaryUserCryptoAddress?.ensAvatarUrl) {
     return (
       <Container>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <ImageWithFallbackOnError
           {...props}
           alt={`ENS avatar for ${
             primaryUserCryptoAddress.ensName || primaryUserCryptoAddress.cryptoAddress
           }`}
+          fallbackSrc={deterministicArraySelection(genericImages, user.id)}
           src={primaryUserCryptoAddress.ensAvatarUrl}
-          style={{
-            width: size,
-            height: size,
-          }}
+          style={{ width: size, height: size }}
         />
       </Container>
     )

@@ -30,10 +30,13 @@ export const userFirstNameWithLastInitial = (
 ): string => {
   const firstNameTrimmed = firstName?.trim()
   const lastNameTrimmed = lastName?.trim()
-
-  return (
-    `${firstNameTrimmed ? firstNameTrimmed : ''} ${
-      lastNameTrimmed ? `${lastNameTrimmed.slice(0, 1)}.` : ''
-    }`.trim() || fallback
-  )
+  if (firstNameTrimmed) {
+    return (
+      `${firstNameTrimmed ? firstNameTrimmed : ''} ${
+        lastNameTrimmed ? `${lastNameTrimmed.slice(0, 1)}.` : ''
+      }`.trim() || fallback
+    )
+  }
+  // if a user doesn't have a first name at all we should just return the last name
+  return lastNameTrimmed?.trim() || fallback
 }

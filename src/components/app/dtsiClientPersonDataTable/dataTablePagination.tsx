@@ -23,7 +23,7 @@ export function DataTablePagination<TData>({ table }: DataTablePaginationProps<T
   return (
     <div className="flex items-center gap-2">
       <Button
-        className="flex h-8 w-8 p-0"
+        className="flex h-8 w-8 p-0 disabled:opacity-30"
         disabled={!table.getCanPreviousPage()}
         onClick={() => table.setPageIndex(currentPageNumber - 2)}
         variant="secondary"
@@ -70,7 +70,7 @@ export function DataTablePagination<TData>({ table }: DataTablePaginationProps<T
         </>
       )}
       <Button
-        className="h-8 w-8 p-0"
+        className="h-8 w-8 p-0 disabled:opacity-30"
         disabled={!table.getCanNextPage()}
         onClick={() => table.setPageIndex(currentPageNumber)}
         variant="secondary"
