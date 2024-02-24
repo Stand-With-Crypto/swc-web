@@ -22,8 +22,7 @@ export type SumDonationsByUserConfig = {
 
 const logger = getLogger('getSumDonationsByUser')
 
-// If we ever have an nft mint action that is not a "donation", we'll need to refactor this logic
-const getSumDonationsByUser = async ({ limit, offset }: SumDonationsByUserConfig) => {
+async function getSumDonationsByUserQuery({ limit, offset }: SumDonationsByUserConfig) {
   logger.info('triggering getSumDonationsByUser directly without cache')
   // there might be a way of doing this better with https://www.prisma.io/docs/orm/prisma-client/queries/aggregation-grouping-summarizing
   // but nothing wrong with some raw sql for custom aggregations
@@ -56,7 +55,6 @@ const getSumDonationsByUser = async ({ limit, offset }: SumDonationsByUserConfig
       FROM nft_mint
       JOIN user_action ua ON ua.nft_mint_id = nft_mint.id
       WHERE ua.action_type = 'NFT_MINT' 
-      AND cost_at_mint_usd > 0
       GROUP BY ua.user_id
     ) mint_totals ON u.id = mint_totals.user_id
 
@@ -67,6 +65,13 @@ const getSumDonationsByUser = async ({ limit, offset }: SumDonationsByUserConfig
     LIMIT ${limit}
     OFFSET ${offset || 0}
   `
+  return total
+}
+
+type QueryResult = Awaited<ReturnType<typeof getSumDonationsByUserQuery>>
+
+// If we ever have an nft mint action that is not a "donation", we'll need to refactor this logic
+async function getSumDonationsByUserData(total: QueryResult) {
   const users = await prismaClient.user.findMany({
     where: {
       id: {
@@ -99,12 +104,12 @@ const getSumDonationsByUser = async ({ limit, offset }: SumDonationsByUserConfig
   })
 }
 
-export type SumDonationsByUser = Awaited<ReturnType<typeof getSumDonationsByUser>>
+export type SumDonationsByUser = Awaited<ReturnType<typeof getSumDonationsByUserData>>
 
-const CACHE_KEY = 'GET_SUM_DONATIONS_BY_USER_CACHE_V2'
+const CACHE_KEY = 'GET_SUM_DONATIONS_BY_USER_CACHE_V3'
 
 export async function buildGetSumDonationsByUserCache() {
-  const result = await getSumDonationsByUser({
+  const result = await getSumDonationsByUserQuery({
     limit: PAGE_LEADERBOARD_TOTAL_PAGES * PAGE_LEADERBOARD_ITEMS_PER_PAGE,
     offset: 0,
   })
@@ -119,9 +124,9 @@ export async function getSumDonationsByUserWithBuildCache(config: SumDonationsBy
   const offset = config.offset || 0
   const maybeCache = await redis.get(CACHE_KEY)
   if (maybeCache) {
-    const results = maybeCache as SumDonationsByUser
-    return results.slice(offset, offset + config.limit)
+    const results = maybeCache as QueryResult
+    return getSumDonationsByUserData(results.slice(offset, offset + config.limit))
   }
   const results = await buildGetSumDonationsByUserCache()
-  return results.slice(offset, offset + config.limit)
+  return getSumDonationsByUserData(results.slice(offset, offset + config.limit))
 }
