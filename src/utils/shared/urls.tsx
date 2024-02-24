@@ -69,7 +69,7 @@ export const externalUrls = {
     `https://www.dotheysupportit.com/people/${slug}/create-stance`,
   emailFeedback: () => 'mailto:info@standwithcrypto.org',
   facebook: () => 'https://www.facebook.com/standwithcrypto',
-  instagram: () => 'https://www.instagram.com/standwithcrypto',
+  instagram: () => 'https://www.instagram.com/standwithcrypto/',
   linkedin: () => 'https://www.linkedin.com/company/standwithcrypto/',
   twitter: () => 'https://twitter.com/standwithcrypto',
   youtube: () => 'https://www.youtube.com/@StandWithCryptoAlliance/featured',

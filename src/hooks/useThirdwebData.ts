@@ -1,3 +1,4 @@
+'use client'
 import { useDisconnect, useLogout } from '@thirdweb-dev/react'
 import Cookies from 'js-cookie'
 import { usePathname, useRouter } from 'next/navigation'

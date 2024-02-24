@@ -99,7 +99,7 @@ export function ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: Suppo
           {address.description}
         </button>
       </p>
-      <div className="mx-auto flex max-w-xl flex-col justify-between gap-4 rounded-3xl bg-gray-100 p-5 text-left sm:flex-row sm:items-center sm:gap-10">
+      <div className="mx-auto flex max-w-2xl flex-col justify-between gap-4 rounded-3xl bg-gray-100 p-5 text-left sm:flex-row sm:items-center sm:gap-10">
         <div className="flex flex-row items-center gap-4 text-sm sm:text-base">
           <div className="relative">
             <DTSIAvatar person={person} size={60} />

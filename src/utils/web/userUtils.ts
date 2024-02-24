@@ -29,7 +29,10 @@ export const getUserDisplayName = (
   if (user?.informationVisibility === UserInformationVisibility.ANONYMOUS) {
     return 'Anonymous'
   }
-  if (user?.firstName && user?.informationVisibility === UserInformationVisibility.ALL_INFO) {
+  if (
+    (user?.firstName || user?.lastName) &&
+    user?.informationVisibility === UserInformationVisibility.ALL_INFO
+  ) {
     return userFirstNameWithLastInitial(user)
   }
   if (user?.primaryUserCryptoAddress) {

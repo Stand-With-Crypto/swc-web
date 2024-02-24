@@ -29,7 +29,7 @@ export function ScoreExplainer({ person }: { person: DTSIPersonDetails }) {
           <h4 className="text-sm text-fontcolor-muted md:text-base">
             {dtsiPersonFullName(person)} has made{' '}
             <FormattedNumber amount={person.stances.length} locale={locale} />{' '}
-            {pluralize({ singular: 'stance', count: person.stances.length })} about crypto.
+            {pluralize({ singular: 'statement', count: person.stances.length })} about crypto.
           </h4>
         </div>
       </PopoverTrigger>
