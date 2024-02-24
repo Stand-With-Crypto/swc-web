@@ -19,7 +19,7 @@ import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
 export const revalidate = SECONDS_DURATION.SECOND * 30
-export const dynamic = 'force-static'
+export const dynamic = 'error'
 export const dynamicParams = true
 
 type Props = PageProps<{ page: string[] }>
