@@ -1,14 +1,9 @@
 import 'server-only'
 
-import { cache } from 'react'
 import { Decimal } from '@prisma/client/runtime/library'
 import { compact, keyBy } from 'lodash-es'
 
 import { getClientLeaderboardUser } from '@/clientModels/clientUser/clientLeaderboardUser'
-import {
-  PAGE_LEADERBOARD_ITEMS_PER_PAGE,
-  PAGE_LEADERBOARD_TOTAL_PAGES,
-} from '@/components/app/pageLeaderboard/constants'
 import { getENSDataMapFromCryptoAddressesAndFailGracefully } from '@/data/web3/getENSDataFromCryptoAddress'
 import { prismaClient } from '@/utils/server/prismaClient'
 
@@ -89,17 +84,6 @@ export const getSumDonationsByUser = async ({ limit, offset }: SumDonationsByUse
       },
     }
   })
-}
-
-const getSumDonationsByUserCache = cache(getSumDonationsByUser)
-
-export async function getSumDonationsByUserWithBuildCache(config: SumDonationsByUserConfig) {
-  const results = await getSumDonationsByUserCache({
-    offset: 0,
-    limit: PAGE_LEADERBOARD_TOTAL_PAGES * PAGE_LEADERBOARD_ITEMS_PER_PAGE,
-  })
-  const offset = config.offset || 0
-  return results.slice(offset, offset + config.limit)
 }
 
 export type SumDonationsByUser = Awaited<ReturnType<typeof getSumDonationsByUser>>
