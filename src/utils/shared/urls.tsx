@@ -26,12 +26,12 @@ export const getIntlUrls = (
     donate: () => `${localePrefix}/donate`,
     leaderboard: (params?: { pageNum?: number; tab: RecentActivityAndLeaderboardTabs }) => {
       if (!params) {
-        return `${localePrefix}/leaderboard`
+        return `${localePrefix}/community`
       }
       const pageNum = params.pageNum ?? 1
       const tabPath =
         params.tab === RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY ? '' : `/${params.tab}`
-      return `${localePrefix}/leaderboard${pageNum !== 1 || tabPath ? `/${pageNum}${tabPath}` : ''}`
+      return `${localePrefix}/community${pageNum !== 1 || tabPath ? `/${pageNum}${tabPath}` : ''}`
     },
     politiciansHomepage: () => `${localePrefix}/politicians`,
     politicianDetails: (dtsiSlug: string) => `${localePrefix}/politicians/person/${dtsiSlug}`,
@@ -79,7 +79,6 @@ export const externalUrls = {
 }
 
 export const apiUrls = {
-  mockLeaderboard: (offset: number) => `/api/mock/leaderboard/${offset}`,
   dtsiPeopleByCongressionalDistrict: ({
     stateCode,
     districtNumber,
@@ -88,7 +87,6 @@ export const apiUrls = {
     districtNumber: number
   }) => `/api/public/dtsi/by-geography/usa/${stateCode}/${districtNumber}`,
   totalDonations: (locale: SupportedLocale) => `/api/public/total-donations/${locale}`,
-  mockTotalDonations: (locale: SupportedLocale) => `/api/mock/total-donations/${locale}`,
   userPerformedUserActionTypes: () => `/api/identified-user/performed-user-action-types`,
   userFullProfileInfo: () => `/api/identified-user/full-profile-info`,
   detectWipedDatabase: () => `/api/identified-user/detect-wiped-database`,
