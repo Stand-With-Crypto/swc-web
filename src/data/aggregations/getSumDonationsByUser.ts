@@ -44,6 +44,7 @@ export const getSumDonationsByUser = async ({ limit, offset }: SumDonationsByUse
       FROM nft_mint
       JOIN user_action ua ON ua.nft_mint_id = nft_mint.id
       WHERE ua.action_type = 'NFT_MINT' 
+      AND cost_at_mint_usd > 0
       GROUP BY ua.user_id
     ) mint_totals ON u.id = mint_totals.user_id
 
