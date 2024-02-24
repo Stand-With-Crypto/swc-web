@@ -103,11 +103,15 @@ const getSumDonationsByUserCache = unstable_cache(
   { revalidate: SECONDS_DURATION.MINUTE * 5 },
 )
 
-export async function getSumDonationsByUserWithBuildCache(config: SumDonationsByUserConfig) {
-  const results = await getSumDonationsByUserCache(
+export function buildGetSumDonationsByUserCache() {
+  return getSumDonationsByUserCache(
     PAGE_LEADERBOARD_TOTAL_PAGES * PAGE_LEADERBOARD_ITEMS_PER_PAGE,
     0,
   )
+}
+
+export async function getSumDonationsByUserWithBuildCache(config: SumDonationsByUserConfig) {
+  const results = await buildGetSumDonationsByUserCache()
   const offset = config.offset || 0
   return results.slice(offset, offset + config.limit)
 }
