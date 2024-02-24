@@ -99,14 +99,14 @@ const getSumDonationsByUser = async ({ limit, offset }: SumDonationsByUserConfig
 
 export type SumDonationsByUser = Awaited<ReturnType<typeof getSumDonationsByUser>>
 
-const CACHE_KEY = 'GET_SUM_DONATIONS_BY_USER_CACHE'
+const CACHE_KEY = 'GET_SUM_DONATIONS_BY_USER_CACHE_V2'
 
 export async function buildGetSumDonationsByUserCache() {
   const result = await getSumDonationsByUser({
     limit: PAGE_LEADERBOARD_TOTAL_PAGES * PAGE_LEADERBOARD_ITEMS_PER_PAGE,
     offset: 0,
   })
-  await redis.set(CACHE_KEY, JSON.stringify(result), { ex: SECONDS_DURATION.MINUTE * 10 })
+  await redis.set(CACHE_KEY, result, { ex: SECONDS_DURATION.MINUTE * 10 })
   return result
 }
 
@@ -114,7 +114,7 @@ export async function getSumDonationsByUserWithBuildCache(config: SumDonationsBy
   const offset = config.offset || 0
   const maybeCache = await redis.get(CACHE_KEY)
   if (maybeCache) {
-    const results = JSON.parse(maybeCache as string) as SumDonationsByUser
+    const results = maybeCache as SumDonationsByUser
     return results.slice(offset, offset + config.limit)
   }
   const results = await buildGetSumDonationsByUserCache()
