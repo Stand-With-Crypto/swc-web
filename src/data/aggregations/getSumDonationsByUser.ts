@@ -28,7 +28,7 @@ async function getSumDonationsByUserQuery({ limit, offset }: SumDonationsByUserC
   // but nothing wrong with some raw sql for custom aggregations
   const total: {
     userId: string
-    totalAmountUsd: Decimal
+    totalAmountUsd?: number | Decimal
   }[] = await prismaClient.$queryRaw`
     SELECT  
       u.id AS userId,
@@ -91,7 +91,11 @@ async function getSumDonationsByUserData(total: QueryResult) {
   return total.map(({ userId, totalAmountUsd }) => {
     const user = usersById[userId]
     return {
-      totalAmountUsd: totalAmountUsd.toNumber(),
+      totalAmountUsd: totalAmountUsd
+        ? typeof totalAmountUsd === 'number'
+          ? totalAmountUsd
+          : totalAmountUsd.toNumber()
+        : 0,
       user: {
         ...getClientLeaderboardUser(
           user,
@@ -106,7 +110,7 @@ async function getSumDonationsByUserData(total: QueryResult) {
 
 export type SumDonationsByUser = Awaited<ReturnType<typeof getSumDonationsByUserData>>
 
-const CACHE_KEY = 'GET_SUM_DONATIONS_BY_USER_CACHE_V3'
+const CACHE_KEY = 'GET_SUM_DONATIONS_BY_USER_CACHE_V4'
 
 export async function buildGetSumDonationsByUserCache() {
   const result = await getSumDonationsByUserQuery({
