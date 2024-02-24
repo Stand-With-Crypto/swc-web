@@ -86,7 +86,6 @@ async function getSumDonationsByUserData(total: QueryResult) {
       address: true,
     },
   })
-
   const usersById = keyBy(users, 'id')
   const ensDataMap = await getENSDataMapFromCryptoAddressesAndFailGracefully(
     compact(users.map(user => user.primaryUserCryptoAddress?.cryptoAddress)),
@@ -109,7 +108,7 @@ async function getSumDonationsByUserData(total: QueryResult) {
 
 export type SumDonationsByUser = Awaited<ReturnType<typeof getSumDonationsByUserData>>
 
-const CACHE_KEY = 'GET_SUM_DONATIONS_BY_USER_CACHE_V5'
+const CACHE_KEY = 'GET_SUM_DONATIONS_BY_USER_CACHE_V6'
 
 export async function buildGetSumDonationsByUserCache() {
   const result = await getSumDonationsByUserQuery({
@@ -132,4 +131,9 @@ export async function getSumDonationsByUserWithBuildCache(config: SumDonationsBy
   }
   const results = await buildGetSumDonationsByUserCache()
   return getSumDonationsByUserData(results.slice(offset, offset + config.limit))
+}
+
+export async function getSumDonationsByUser(config: SumDonationsByUserConfig) {
+  const result = await getSumDonationsByUserQuery(config)
+  return getSumDonationsByUserData(result)
 }
