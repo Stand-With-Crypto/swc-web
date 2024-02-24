@@ -4,7 +4,7 @@ lots of APIs will start failing in unpredictable ways because we expect every au
 This hook resets the user to logged out if we detect that the database has been wiped.
 */
 
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import useSWR from 'swr'
 
 import { DetectWipedDatabaseResponse } from '@/app/api/identified-user/detect-wiped-database/route'
@@ -25,10 +25,14 @@ export function useDetectWipedDatabaseAndLogOutUser() {
       .then(data => data as DetectWipedDatabaseResponse),
   )
   const state = wipedDatabaseCheck.data?.state
+  // setting this as an auto-updating ref so that eslint doesn't complain
+  // when we don't add address as a dependency to the useEffect below
+  const logoutAndDisconnectRef = useRef(logoutAndDisconnect)
+  logoutAndDisconnectRef.current = logoutAndDisconnect
   useEffect(() => {
     if (state === 'wiped-database') {
       logger.info('Detected wiped database. Logging out user.')
-      logoutAndDisconnect()
+      logoutAndDisconnectRef.current()
     }
-  }, [state, logoutAndDisconnect])
+  }, [state])
 }

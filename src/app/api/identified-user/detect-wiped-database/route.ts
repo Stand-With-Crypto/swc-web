@@ -18,8 +18,14 @@ async function apiResponse() {
   if (!authUser) {
     return { state: 'unauthenticated' as const }
   }
-  const correspondingUser = await prismaClient.user.findFirst({ where: { id: authUser.userId } })
+  const correspondingUser = await prismaClient.user.findFirst({
+    where: { id: authUser.userId },
+    include: { userCryptoAddresses: true },
+  })
   if (!correspondingUser) {
+    return { state: 'wiped-database' as const }
+  }
+  if (!correspondingUser.userCryptoAddresses.find(x => x.cryptoAddress === authUser.address)) {
     return { state: 'wiped-database' as const }
   }
   return { state: 'ok' as const }

@@ -131,7 +131,7 @@ export function DataTable<TData extends Person, TValue>({
             </PageTitle>
             <GlobalFilters {...{ globalFilter, setGlobalFilter }} />
           </div>
-          <Table>
+          <Table className="lg:table-fixed">
             <TableHeader className="bg-gray-100 text-gray-400">
               {table.getHeaderGroups().map(headerGroup => (
                 <TableRow key={headerGroup.id}>

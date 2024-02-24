@@ -136,7 +136,8 @@ export function PageUserProfile({
         </div>
         <UserActionRowCTAsList performedUserActionTypes={performedUserActionTypes} />
       </section>
-      <section>
+      {/* hiding nft section until bugs are resolved */}
+      {/* <section>
         <PageTitle className="mb-4" size="sm">
           Your NFTs
         </PageTitle>
@@ -146,7 +147,7 @@ export function PageUserProfile({
         <div>
           <NFTDisplay userActions={userActions} />
         </div>
-      </section>
+      </section> */}
       <section>
         <PageTitle className="mb-4" size="sm">
           Refer Your Friends
