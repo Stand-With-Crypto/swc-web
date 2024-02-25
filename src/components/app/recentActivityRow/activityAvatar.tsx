@@ -25,6 +25,7 @@ export const ActivityAvatar = ({ size, actionType }: ActivityAvatarProps) => {
       alt={actionType}
       height={size}
       src={ACTIVITY_TYPE_TO_ICON_URL[actionType]}
+      style={{ width: size, height: size }}
       width={size}
     />
   )

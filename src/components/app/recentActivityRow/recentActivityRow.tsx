@@ -52,7 +52,7 @@ export function RecentActivityRowBase({
       onMouseLeave={() => isMobile || setHasFocus(false)}
     >
       <div className="flex items-center gap-4">
-        <div>
+        <div className="flex-shrink-0">
           <ActivityAvatar actionType={action.actionType} size={44} />
         </div>
         <div>{children}</div>
