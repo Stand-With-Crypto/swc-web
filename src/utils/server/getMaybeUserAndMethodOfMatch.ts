@@ -138,5 +138,5 @@ export async function getMaybeUserAndMethodOfMatchWithMaybeSession<I extends Pri
     prisma?: Prisma.SelectSubset<I, Prisma.UserFindFirstArgs>
   } = {},
 ): Promise<BaseUserAndMethodOfMatch<string | undefined, I>> {
-  return baseGetMaybeUserAndMethodOfMatch({ ...args, shouldThrowWithoutSession: true })
+  return baseGetMaybeUserAndMethodOfMatch({ ...args, shouldThrowWithoutSession: false })
 }
