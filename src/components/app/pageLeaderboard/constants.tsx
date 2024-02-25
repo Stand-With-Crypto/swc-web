@@ -15,7 +15,7 @@ export const COMMUNITY_PAGINATION_DATA: Record<
   },
   [RecentActivityAndLeaderboardTabs.LEADERBOARD]: {
     totalPages: 10,
-    itemsPerPage: 30,
-    totalPregeneratedPages: maybeIgnorePreGeneration(10),
+    itemsPerPage: 200,
+    totalPregeneratedPages: maybeIgnorePreGeneration(2),
   },
 }

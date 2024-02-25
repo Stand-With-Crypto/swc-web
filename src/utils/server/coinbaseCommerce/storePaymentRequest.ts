@@ -210,37 +210,37 @@ async function createNewUser(payment: CoinbaseCommercePayment) {
         : {}),
     },
   })
+  // If there `metadata.sessionId` is available, then we should upsert a session.
   // If there is a user session, then we should update the user ID.
-  // Otherwise, if that metadata is provided, then we should create a new session.
-  const userSession = await prismaClient.userSession.findFirst({
-    include: {
-      user: true,
-    },
-    where: {
-      id: payment.event.data.metadata.sessionId,
-    },
-  })
-  if (userSession) {
-    Sentry.captureMessage('updating existing session to new user', {
-      extra: {
-        payment,
-        userSession,
+  // Otherwise, then we should create a new session.
+  if (payment.event.data.metadata.sessionId) {
+    const userSession = await prismaClient.userSession.findFirst({
+      include: {
+        user: true,
+      },
+      where: {
+        id: payment.event.data.metadata.sessionId,
       },
     })
-    await prismaClient.userSession.update({
-      where: { id: userSession.id },
-      data: { userId: newUser.id },
-    })
-  } else if (payment.event.data.metadata.sessionId) {
-    Sentry.captureMessage('creating new session for new user', {
-      extra: {
-        payment,
-        userSession,
-      },
-    })
-    await prismaClient.userSession.create({
-      data: { userId: newUser.id, id: payment.event.data.metadata.sessionId },
-    })
+    if (userSession) {
+      Sentry.captureMessage(
+        'updating existing session to new user - existing user should have been found',
+        {
+          extra: {
+            payment,
+            userSession,
+          },
+        },
+      )
+      await prismaClient.userSession.update({
+        where: { id: userSession.id },
+        data: { userId: newUser.id },
+      })
+    } else {
+      await prismaClient.userSession.create({
+        data: { userId: newUser.id, id: payment.event.data.metadata.sessionId },
+      })
+    }
   }
   return newUser
 }
