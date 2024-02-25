@@ -14,8 +14,7 @@ import {
   PAGE_LEADERBOARD_ITEMS_PER_PAGE,
   PAGE_LEADERBOARD_TOTAL_PRE_GENERATED_PAGES,
 } from '@/components/app/pageLeaderboard/constants'
-import { getDataForPageLeaderboard } from '@/components/app/pageLeaderboard/getData'
-import { PublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
+import { getPublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
@@ -60,14 +59,14 @@ export default async function CommunityRecentActivityPage({ params }: Props) {
   }
   const offset = (pageNum - 1) * PAGE_LEADERBOARD_ITEMS_PER_PAGE
 
-  const data = await getDataForPageLeaderboard(
-    RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
+  const publicRecentActivity = await getPublicRecentActivity({
+    limit: PAGE_LEADERBOARD_ITEMS_PER_PAGE,
     offset,
-  )
+  })
 
   const dataProps: PageLeaderboardInferredProps = {
     tab: RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
-    publicRecentActivity: data as PublicRecentActivity,
+    publicRecentActivity,
     sumDonationsByUser: undefined,
   }
 

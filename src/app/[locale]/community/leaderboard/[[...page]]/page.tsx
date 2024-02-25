@@ -14,14 +14,13 @@ import {
   PAGE_LEADERBOARD_ITEMS_PER_PAGE,
   PAGE_LEADERBOARD_TOTAL_PRE_GENERATED_PAGES,
 } from '@/components/app/pageLeaderboard/constants'
-import { getDataForPageLeaderboard } from '@/components/app/pageLeaderboard/getData'
-import { SumDonationsByUser } from '@/data/aggregations/getSumDonationsByUser'
+import { getSumDonationsByUser } from '@/data/aggregations/getSumDonationsByUser'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
-export const revalidate = SECONDS_DURATION.SECOND * 30
-export const dynamic = 'force-static'
+export const revalidate = SECONDS_DURATION.MINUTE * 30
+export const dynamic = 'error'
 export const dynamicParams = true
 
 type Props = PageProps<{ page: string[] }>
@@ -60,11 +59,14 @@ export default async function CommunityLeaderboardPage({ params }: Props) {
   }
   const offset = (pageNum - 1) * PAGE_LEADERBOARD_ITEMS_PER_PAGE
 
-  const data = await getDataForPageLeaderboard(RecentActivityAndLeaderboardTabs.LEADERBOARD, offset)
+  const sumDonationsByUser = await getSumDonationsByUser({
+    limit: PAGE_LEADERBOARD_ITEMS_PER_PAGE,
+    offset,
+  })
 
   const dataProps: PageLeaderboardInferredProps = {
     tab: RecentActivityAndLeaderboardTabs.LEADERBOARD,
-    sumDonationsByUser: data as SumDonationsByUser,
+    sumDonationsByUser,
     publicRecentActivity: undefined,
   }
 
