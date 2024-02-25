@@ -36,7 +36,7 @@ export function PageLeaderboard({
       <PageTitle>{PAGE_LEADERBOARD_TITLE}</PageTitle>
       <PageSubTitle>
         {PAGE_LEADERBOARD_DESCRIPTION} Donations to{' '}
-        <ExternalLink className="underline" href={'https://www.fec.gov/data/committee/C00835959/'}>
+        <ExternalLink href={'https://www.fec.gov/data/committee/C00835959/'}>
           Fairshake
         </ExternalLink>
         , a pro-crypto Super PAC, are not included on the leaderboard.
