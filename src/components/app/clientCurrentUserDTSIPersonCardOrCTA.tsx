@@ -89,7 +89,7 @@ export function ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: Suppo
       </div>
     )
   }
-  const person = res.data
+  const person = res.data.dtsiPerson
   return (
     <div>
       <p className="mb-3 text-xl font-bold">Your representative</p>
