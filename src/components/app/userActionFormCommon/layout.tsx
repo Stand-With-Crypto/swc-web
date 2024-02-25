@@ -5,7 +5,7 @@ import { DtsiCongresspersonDisplay } from '@/components/app/dtsiCongresspersonDi
 import { dialogButtonStyles } from '@/components/ui/dialog/styles'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { UseGetDTSIPeopleFromAddressResponse } from '@/hooks/useGetDTSIPeopleFromAddress'
+import { DTSIPeopleFromCongressionalDistrict } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { cn } from '@/utils/web/cn'
 
 interface UserActionFormLayoutProps extends React.PropsWithChildren {
@@ -53,13 +53,13 @@ function GoBackButton({ onClick }: { onClick: () => void }) {
 
 function CongresspersonDisplayFooter({
   children,
-  dtsiPersonResponse,
+  dtsiPerson,
 }: React.PropsWithChildren<{
-  dtsiPersonResponse?: UseGetDTSIPeopleFromAddressResponse
+  dtsiPerson?: DTSIPeopleFromCongressionalDistrict
 }>) {
   return (
     <div className="flex w-full flex-col gap-4 border-t p-6 pt-3 md:flex-row md:items-center md:justify-between md:px-12">
-      <DtsiCongresspersonDisplay dtsiPersonResponse={dtsiPersonResponse} />
+      <DtsiCongresspersonDisplay dtsiPersonResponse={dtsiPerson} />
       {children}
     </div>
   )

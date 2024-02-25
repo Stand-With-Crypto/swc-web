@@ -2,7 +2,6 @@ import * as Sentry from '@sentry/nextjs'
 
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { logger } from '@/utils/shared/logger'
-import { prettyLog } from '@/utils/shared/prettyLog'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 
 /*

@@ -60,6 +60,16 @@ const parseStateString = (districtString: string) => {
   return stateCode.toUpperCase()
 }
 
+export interface GetCongressionalDistrictFromAddressSuccess {
+  stateCode: string
+  districtNumber: number
+  googleCivicData: GoogleCivicInfoResponse
+}
+
+export type CongressionalDistrictFromAddress = Awaited<
+  ReturnType<typeof getCongressionalDistrictFromAddress>
+>
+
 export async function getCongressionalDistrictFromAddress(address: string) {
   const result = await getGoogleCivicDataFromAddress(address)
   if ('error' in result) {
@@ -78,5 +88,9 @@ export async function getCongressionalDistrictFromAddress(address: string) {
   if (isObject(stateCode)) {
     return stateCode
   }
-  return { stateCode, districtNumber, googleCivicData: result }
+  return {
+    stateCode,
+    districtNumber,
+    googleCivicData: result,
+  } as GetCongressionalDistrictFromAddressSuccess
 }

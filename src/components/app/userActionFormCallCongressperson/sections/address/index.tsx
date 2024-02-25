@@ -26,7 +26,6 @@ import {
 } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useIsMobile } from '@/hooks/useIsMobile'
-import { getGoogleCivicDataFromAddress } from '@/utils/shared/googleCivicInfo'
 import { trackFormSubmissionSyncErrors } from '@/utils/web/formUtils'
 import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
 
@@ -175,7 +174,7 @@ export function Address({
 function useCongresspersonData({ address }: FindRepresentativeCallFormValues) {
   return useSWR(address ? `useCongresspersonData-${address.description}` : null, async () => {
     const dtsiResponse = await getDTSIPeopleFromAddress(address.description)
-    if (dtsiResponse.notFoundReason) {
+    if ('notFoundReason' in dtsiResponse) {
       return { notFoundReason: dtsiResponse.notFoundReason }
     }
     const addressSchema = await convertGooglePlaceAutoPredictionToAddressSchema(address)

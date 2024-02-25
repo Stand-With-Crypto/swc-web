@@ -30,14 +30,15 @@ export function SuggestedScript({
   UserActionFormCallCongresspersonProps,
   'user' | 'congressPersonData' | keyof UseSectionsReturn<SectionNames>
 >) {
-  const { dtsiPerson, addressSchema, civicData } = congressPersonData
+  const { dtsiPerson, addressSchema, googleCivicData } = congressPersonData
+
   const router = useRouter()
   const ref = React.useRef<HTMLAnchorElement>(null)
   useEffect(() => {
     ref.current?.focus()
   }, [ref])
   const phoneNumber = React.useMemo(() => {
-    const official = getGoogleCivicOfficialByDTSIName(dtsiPerson, civicData)
+    const official = getGoogleCivicOfficialByDTSIName(dtsiPerson, googleCivicData)
 
     if (!official) {
       toastGenericError()
@@ -45,7 +46,7 @@ export function SuggestedScript({
     }
 
     return official.phones[0]
-  }, [congressPersonData])
+  }, [dtsiPerson, googleCivicData])
 
   const [callingState, setCallingState] = useState<
     'not-calling' | 'pressed-called' | 'loading-call-complete' | 'call-complete' | 'error'
@@ -125,7 +126,7 @@ export function SuggestedScript({
         </UserActionFormLayout.Container>
       </UserActionFormLayout>
 
-      <UserActionFormLayout.CongresspersonDisplayFooter dtsiPersonResponse={dtsiPerson}>
+      <UserActionFormLayout.CongresspersonDisplayFooter dtsiPerson={congressPersonData}>
         {phoneNumber ? (
           callingState !== 'not-calling' ? (
             <Button

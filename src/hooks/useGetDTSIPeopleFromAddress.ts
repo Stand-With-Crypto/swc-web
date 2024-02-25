@@ -2,13 +2,20 @@ import useSWR from 'swr'
 
 import { DTSIPeopleByCongressionalDistrictQueryResult } from '@/data/dtsi/queries/queryDTSIPeopleByCongressionalDistrict'
 import { fetchReq } from '@/utils/shared/fetchReq'
-import { getCongressionalDistrictFromAddress } from '@/utils/shared/getCongressionalDistrictFromAddress'
+import {
+  CongressionalDistrictFromAddress,
+  getCongressionalDistrictFromAddress,
+  GetCongressionalDistrictFromAddressSuccess,
+} from '@/utils/shared/getCongressionalDistrictFromAddress'
 import { apiUrls } from '@/utils/shared/urls'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
 
-async function getDTSIPeopleFromCongressionalDistrict(
-  result: Awaited<ReturnType<typeof getCongressionalDistrictFromAddress>>,
-) {
+export interface DTSIPeopleFromCongressionalDistrict
+  extends GetCongressionalDistrictFromAddressSuccess {
+  dtsiPerson: DTSIPeopleByCongressionalDistrictQueryResult
+}
+
+async function getDTSIPeopleFromCongressionalDistrict(result: CongressionalDistrictFromAddress) {
   if ('notFoundReason' in result) {
     return result
   }
@@ -25,7 +32,7 @@ async function getDTSIPeopleFromCongressionalDistrict(
   }
 
   const dtsiPerson = data as DTSIPeopleByCongressionalDistrictQueryResult
-  return { ...result, dtsiPerson }
+  return { ...result, dtsiPerson } as DTSIPeopleFromCongressionalDistrict
 }
 
 export async function getDTSIPeopleFromAddress(address: string) {
@@ -47,7 +54,12 @@ export function useGetDTSIPeopleFromAddress(address: string) {
 export function formatGetDTSIPeopleFromAddressNotFoundReason(
   data: Exclude<UseGetDTSIPeopleFromAddressResponse, { id: string }> | undefined | null,
 ) {
-  switch (data?.notFoundReason) {
+  const defaultError = "We can't find your representative right now, we're working on a fix"
+  if (!data || !('notFoundReason' in data)) {
+    return defaultError
+  }
+
+  switch (data.notFoundReason) {
     case 'NOT_USA_ADDRESS':
       return 'Please enter a US-based address.'
     case 'NO_REPS_IN_STATE':
@@ -57,6 +69,6 @@ export function formatGetDTSIPeopleFromAddressNotFoundReason(
     case 'MISSING_FROM_DTSI':
     case 'UNEXPECTED_ERROR':
     default:
-      return `We can't find your representative right now, we're working on a fix`
+      return defaultError
   }
 }
