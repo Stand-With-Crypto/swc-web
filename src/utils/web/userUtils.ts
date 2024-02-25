@@ -12,7 +12,7 @@ Some high profile organizations had donations that aren't linked to their actual
 ENS but want the ENS displayed on the website. This hardcode fixes that issue.
 */
 const HARDCODED_USER_DISPLAY_NAME: Record<string, { displayName: string }> = {
-  '21143cb6-edce-4f42-b51a-c014e7f8363b': {
+  '70087263-eabb-4200-93ac-e5856648f73d': {
     displayName: 'geminifrontierfund.eth',
   },
 }
