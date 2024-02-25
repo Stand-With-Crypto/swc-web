@@ -10,9 +10,9 @@ export const actionCreateCoinbaseCommerceCharge = withServerActionMiddleware(
 )
 
 async function _actionCreateCoinbaseCommerceCharge() {
-  const user = await getMaybeUserAndMethodOfMatch({})
+  const userMatch = await getMaybeUserAndMethodOfMatch()
   const hostedUrl = (
-    await createCharge({ sessionId: getUserSessionId(), userId: user.user?.id ?? '' })
+    await createCharge({ sessionId: getUserSessionId(), userId: userMatch.user?.id ?? '' })
   ).data.hosted_url
   return { hostedUrl }
 }

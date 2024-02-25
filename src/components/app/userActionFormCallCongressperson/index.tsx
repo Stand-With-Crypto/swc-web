@@ -9,9 +9,8 @@ import {
 } from '@/components/app/userActionFormCallCongressperson/constants'
 import { FormFields } from '@/components/app/userActionFormCallCongressperson/types'
 import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
-import { DTSIPeopleByCongressionalDistrictQueryResult } from '@/data/dtsi/queries/queryDTSIPeopleByCongressionalDistrict'
+import { DTSIPeopleFromCongressionalDistrict } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { useSections, UseSectionsReturn } from '@/hooks/useSections'
-import { GoogleCivicInfoResponse } from '@/utils/shared/googleCivicInfo'
 import { NFTSlug } from '@/utils/shared/nft'
 import { NFT_CLIENT_METADATA } from '@/utils/web/nft'
 import { zodAddress } from '@/validation/fields/zodAddress'
@@ -20,9 +19,7 @@ import { Address } from './sections/address'
 import { Intro } from './sections/intro'
 import { SuggestedScript } from './sections/suggestedScript'
 
-interface OnFindCongressPersonPayload {
-  dtsiPerson: DTSIPeopleByCongressionalDistrictQueryResult
-  civicData: GoogleCivicInfoResponse
+type OnFindCongressPersonPayload = DTSIPeopleFromCongressionalDistrict & {
   addressSchema: z.infer<typeof zodAddress>
 }
 
@@ -65,7 +62,7 @@ export function UserActionFormCallCongressperson({
       )
     case SectionNames.SUGGESTED_SCRIPT:
       // This should never happen in the normal tab flow, but if it does, we want to know about it
-      if (!congressPersonData) {
+      if (!congressPersonData || 'notFoundReason' in congressPersonData) {
         const err = new Error('Call Action - Missing congressPersonData')
         Sentry.captureException(err, {
           user: { id: user?.id },

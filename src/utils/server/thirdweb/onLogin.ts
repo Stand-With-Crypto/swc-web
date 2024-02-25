@@ -103,7 +103,7 @@ export async function onLogin(
 interface NewLoginParams {
   cryptoAddress: string
   localUser: ServerLocalUser | null
-  getUserSessionId: () => string
+  getUserSessionId: () => string | null
   // dependency injecting this in to the function so we can mock it in tests
   injectedFetchEmbeddedWalletMetadataFromThirdweb: typeof fetchEmbeddedWalletMetadataFromThirdweb
 }
@@ -339,7 +339,7 @@ async function queryMatchingUsers({
             some: { cryptoAddress, hasBeenVerifiedViaAuth: false },
           },
         },
-        { userSessions: { some: { id: userSessionId } } },
+        userSessionId && { userSessions: { some: { id: userSessionId } } },
         embeddedWalletEmailAddress && {
           userEmailAddresses: {
             some: { emailAddress: embeddedWalletEmailAddress.email, isVerified: true },
