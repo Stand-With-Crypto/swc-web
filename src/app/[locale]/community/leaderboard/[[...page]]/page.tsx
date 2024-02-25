@@ -45,7 +45,8 @@ const validatePageNum = ([page]: (string | undefined)[]) => {
 export async function generateStaticParams() {
   const { totalPregeneratedPages } =
     COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.LEADERBOARD]
-  return flatten(times(totalPregeneratedPages).map(i => ({ page: i ? [`${i + 1}`] : [] })))
+  const results = flatten(times(totalPregeneratedPages).map(i => ({ page: i ? [`${i + 1}`] : [] })))
+  return results
 }
 
 export default async function CommunityLeaderboardPage({ params }: Props) {
@@ -56,7 +57,6 @@ export default async function CommunityLeaderboardPage({ params }: Props) {
     notFound()
   }
   const offset = (pageNum - 1) * itemsPerPage
-
   const sumDonationsByUser = await getSumDonationsByUser({
     limit: itemsPerPage,
     offset,

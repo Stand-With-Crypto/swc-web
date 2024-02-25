@@ -21,7 +21,9 @@ export type SumDonationsByUserConfig = {
 const logger = getLogger('getSumDonationsByUser')
 
 async function getSumDonationsByUserQuery({ limit, offset }: SumDonationsByUserConfig) {
-  logger.info('triggering getSumDonationsByUser directly without cache')
+  logger.info(
+    `triggering getSumDonationsByUser directly without cache: limit=${limit}, offset=${offset || 'undefined'}`,
+  )
   // there might be a way of doing this better with https://www.prisma.io/docs/orm/prisma-client/queries/aggregation-grouping-summarizing
   // but nothing wrong with some raw sql for custom aggregations
   const total: {
