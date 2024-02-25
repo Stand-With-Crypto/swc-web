@@ -11,7 +11,7 @@ type Entity = { id: string; datetimeCreated: Date; datetimeUpdated: Date }
 
 // prevent fetching entities that were created post-migration
 const MAX_DATETIME_CREATED = new Date() // TODO: set this to the date of the migration
-const HOURS_OFFSET_TO_CHANGE = 0 // TODO
+const HOURS_OFFSET_TO_CHANGE = -5 // TODO
 
 function fixDate(date: Date) {
   return addHours(date, HOURS_OFFSET_TO_CHANGE)
@@ -26,7 +26,7 @@ async function fixEntity({
   paginateRows: (config: { skip: number; take: number }) => Promise<Array<Entity>>
   updateEntity: (entity: Entity) => Promise<void>
 }) {
-  const limit = 50
+  const limit = 500
   let hasGoneThroughAllRecords = false
   logger.info(`starting ${label}`)
   let count = 0
@@ -38,7 +38,7 @@ async function fixEntity({
     logger.info(
       `processing ${label} ${(count + 1) * limit} - ${(count + 2) * limit}. length returned: ${entities.length}`,
     )
-    const chunks = chunk(entities, 10)
+    const chunks = chunk(entities, 100)
     for (let i = 0; i < chunks.length; i++) {
       await Promise.all(
         chunks[i].map(async u => {
