@@ -24,12 +24,13 @@ import { toastGenericError } from '@/utils/web/toastUtils'
 
 export function SuggestedScript({
   user,
-  congressPersonData: { dtsiPerson, civicData, addressSchema },
+  congressPersonData,
   goToSection,
 }: Pick<
   UserActionFormCallCongresspersonProps,
   'user' | 'congressPersonData' | keyof UseSectionsReturn<SectionNames>
 >) {
+  const { dtsiPerson, addressSchema, civicData } = congressPersonData
   const router = useRouter()
   const ref = React.useRef<HTMLAnchorElement>(null)
   useEffect(() => {
@@ -44,7 +45,7 @@ export function SuggestedScript({
     }
 
     return official.phones[0]
-  }, [dtsiPerson, civicData])
+  }, [congressPersonData])
 
   const [callingState, setCallingState] = useState<
     'not-calling' | 'pressed-called' | 'loading-call-complete' | 'call-complete' | 'error'
@@ -124,7 +125,7 @@ export function SuggestedScript({
         </UserActionFormLayout.Container>
       </UserActionFormLayout>
 
-      <UserActionFormLayout.CongresspersonDisplayFooter congressperson={dtsiPerson}>
+      <UserActionFormLayout.CongresspersonDisplayFooter dtsiPersonResponse={dtsiPerson}>
         {phoneNumber ? (
           callingState !== 'not-calling' ? (
             <Button

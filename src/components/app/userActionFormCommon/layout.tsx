@@ -53,13 +53,13 @@ function GoBackButton({ onClick }: { onClick: () => void }) {
 
 function CongresspersonDisplayFooter({
   children,
-  congressperson,
+  dtsiPersonResponse,
 }: React.PropsWithChildren<{
-  congressperson?: UseGetDTSIPeopleFromAddressResponse
+  dtsiPersonResponse?: UseGetDTSIPeopleFromAddressResponse
 }>) {
   return (
     <div className="flex w-full flex-col gap-4 border-t p-6 pt-3 md:flex-row md:items-center md:justify-between md:px-12">
-      <DtsiCongresspersonDisplay congressperson={congressperson} />
+      <DtsiCongresspersonDisplay dtsiPersonResponse={dtsiPersonResponse} />
       {children}
     </div>
   )

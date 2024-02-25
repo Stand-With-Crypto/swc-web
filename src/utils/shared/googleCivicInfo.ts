@@ -2,6 +2,7 @@ import * as Sentry from '@sentry/nextjs'
 
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { logger } from '@/utils/shared/logger'
+import { prettyLog } from '@/utils/shared/prettyLog'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 
 /*
@@ -107,7 +108,18 @@ export interface GoogleCivicInfoResponse {
   officials: GoogleCivicInfoOfficial[]
 }
 
-const civicDataByAddressCache = new Map<string, GoogleCivicInfoResponse>()
+interface GoogleCivicErrorResponse {
+  error: {
+    code: 404
+    errors: object[]
+    message: string
+  }
+}
+
+const civicDataByAddressCache = new Map<
+  string,
+  GoogleCivicInfoResponse | GoogleCivicErrorResponse
+>()
 
 const NEXT_PUBLIC_GOOGLE_CIVIC_API_KEY = requiredEnv(
   process.env.NEXT_PUBLIC_GOOGLE_CIVIC_API_KEY,
@@ -126,11 +138,15 @@ export function getGoogleCivicDataFromAddress(address: string) {
     return Promise.resolve(cached)
   }
 
-  return fetchReq(apiUrl.toString())
+  return fetchReq(apiUrl.toString(), undefined, {
+    isValidRequest: (response: Response) =>
+      (response.status >= 200 && response.status < 300) || response.status === 404,
+  })
     .then(res => res.json())
     .then(res => {
-      civicDataByAddressCache.set(apiUrl.toString(), res as GoogleCivicInfoResponse)
-      return res as GoogleCivicInfoResponse
+      const response = res as GoogleCivicInfoResponse | GoogleCivicErrorResponse
+      civicDataByAddressCache.set(apiUrl.toString(), response)
+      return response
     })
 }
 

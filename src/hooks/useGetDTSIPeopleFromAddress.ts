@@ -24,7 +24,8 @@ async function getDTSIPeopleFromCongressionalDistrict(
     return { notFoundReason: 'MISSING_FROM_DTSI' as const }
   }
 
-  return data as DTSIPeopleByCongressionalDistrictQueryResult
+  const dtsiPerson = data as DTSIPeopleByCongressionalDistrictQueryResult
+  return { ...result, dtsiPerson }
 }
 
 export async function getDTSIPeopleFromAddress(address: string) {

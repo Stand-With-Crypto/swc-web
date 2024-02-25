@@ -86,18 +86,17 @@ export function Address({
       return
     }
 
-    const { dtsiPerson } = liveCongressPersonData
-    if (!dtsiPerson || 'notFoundReason' in dtsiPerson) {
+    if (!('dtsiPerson' in liveCongressPersonData)) {
       form.setError('address', {
         type: 'manual',
-        message: formatGetDTSIPeopleFromAddressNotFoundReason(dtsiPerson),
+        message: formatGetDTSIPeopleFromAddressNotFoundReason(liveCongressPersonData),
       })
       return
     } else {
       form.clearErrors('address')
     }
 
-    onFindCongressperson({ ...liveCongressPersonData, dtsiPerson })
+    onFindCongressperson(liveCongressPersonData)
     // request from exec - form should auto-advance once the address is filled in
     if (address?.place_id !== initialAddressOnLoad.current) {
       goToSection(SectionNames.SUGGESTED_SCRIPT)
@@ -175,10 +174,11 @@ export function Address({
 
 function useCongresspersonData({ address }: FindRepresentativeCallFormValues) {
   return useSWR(address ? `useCongresspersonData-${address.description}` : null, async () => {
-    const dtsiPerson = await getDTSIPeopleFromAddress(address.description)
-    const civicData = await getGoogleCivicDataFromAddress(address.description)
+    const dtsiResponse = await getDTSIPeopleFromAddress(address.description)
+    if (dtsiResponse.notFoundReason) {
+      return { notFoundReason: dtsiResponse.notFoundReason }
+    }
     const addressSchema = await convertGooglePlaceAutoPredictionToAddressSchema(address)
-
-    return { dtsiPerson, civicData, addressSchema }
+    return { ...dtsiResponse, addressSchema }
   })
 }

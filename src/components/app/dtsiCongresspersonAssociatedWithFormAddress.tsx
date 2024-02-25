@@ -24,8 +24,12 @@ export function DTSICongresspersonAssociatedWithFormAddress({
 }) {
   const res = useGetDTSIPeopleFromAddress(address?.description || '')
   useEffect(() => {
-    if (res.data && 'slug' in res.data && res.data.slug !== currentDTSISlugValue) {
-      onChangeDTSISlug(res.data.slug)
+    if (
+      res.data &&
+      'dtsiPerson' in res.data &&
+      res.data.dtsiPerson?.slug !== currentDTSISlugValue
+    ) {
+      onChangeDTSISlug(res.data.dtsiPerson.slug)
     } else if (currentDTSISlugValue && !res.data) {
       onChangeDTSISlug('')
     }
@@ -46,7 +50,7 @@ export function DTSICongresspersonAssociatedWithFormAddress({
   if (!res.data || 'notFoundReason' in res.data) {
     return <div>{formatGetDTSIPeopleFromAddressNotFoundReason(res.data)}</div>
   }
-  const person = res.data
+  const person = res.data.dtsiPerson
   return (
     <div className="flex flex-row items-center gap-4 text-sm md:text-base">
       <div className="relative flex-shrink-0">

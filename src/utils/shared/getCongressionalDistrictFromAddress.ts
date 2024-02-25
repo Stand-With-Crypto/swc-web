@@ -62,6 +62,10 @@ const parseStateString = (districtString: string) => {
 
 export async function getCongressionalDistrictFromAddress(address: string) {
   const result = await getGoogleCivicDataFromAddress(address)
+  if ('error' in result) {
+    const returned = { notFoundReason: 'NOT_USA_ADDRESS' as const }
+    return returned
+  }
   const districtString = findCongressionalDistrictString(result, address)
   if (isObject(districtString)) {
     return districtString
@@ -74,5 +78,5 @@ export async function getCongressionalDistrictFromAddress(address: string) {
   if (isObject(stateCode)) {
     return stateCode
   }
-  return { stateCode, districtNumber }
+  return { stateCode, districtNumber, googleCivicData: result }
 }

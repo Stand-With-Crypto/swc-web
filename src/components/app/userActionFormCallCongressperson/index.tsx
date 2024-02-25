@@ -9,9 +9,8 @@ import {
 } from '@/components/app/userActionFormCallCongressperson/constants'
 import { FormFields } from '@/components/app/userActionFormCallCongressperson/types'
 import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
-import { DTSIPeopleByCongressionalDistrictQueryResult } from '@/data/dtsi/queries/queryDTSIPeopleByCongressionalDistrict'
+import { UseGetDTSIPeopleFromAddressResponse } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { useSections, UseSectionsReturn } from '@/hooks/useSections'
-import { GoogleCivicInfoResponse } from '@/utils/shared/googleCivicInfo'
 import { NFTSlug } from '@/utils/shared/nft'
 import { NFT_CLIENT_METADATA } from '@/utils/web/nft'
 import { zodAddress } from '@/validation/fields/zodAddress'
@@ -20,9 +19,7 @@ import { Address } from './sections/address'
 import { Intro } from './sections/intro'
 import { SuggestedScript } from './sections/suggestedScript'
 
-interface OnFindCongressPersonPayload {
-  dtsiPerson: DTSIPeopleByCongressionalDistrictQueryResult
-  civicData: GoogleCivicInfoResponse
+type OnFindCongressPersonPayload = UseGetDTSIPeopleFromAddressResponse & {
   addressSchema: z.infer<typeof zodAddress>
 }
 
