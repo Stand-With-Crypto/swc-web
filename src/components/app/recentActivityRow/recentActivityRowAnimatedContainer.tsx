@@ -1,5 +1,5 @@
 'use client'
-import { AnimatePresence, motion, useIsPresent } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 
 import { RecentActivityRowProps } from '@/components/app/recentActivityRow/recentActivityRow'
 import { VariantRecentActivityRow } from '@/components/app/recentActivityRow/variantRecentActivityRow'
@@ -14,8 +14,6 @@ type AnimatedActivityRowProps = React.HTMLAttributes<HTMLDivElement> & {
 }
 
 function AnimatedActivityRow({ action, locale, className }: AnimatedActivityRowProps) {
-  const isPresent = useIsPresent()
-
   const rowAnimation = {
     initial: { scale: 0.75, opacity: 0 },
     animate: { scale: 1, opacity: 1 },
@@ -35,20 +33,14 @@ function AnimatedActivityRow({ action, locale, className }: AnimatedActivityRowP
       type: 'spring',
       stiffness: 900,
       damping: 40,
-      opacity: { duration: 1.15 },
+      opacity: { duration: 1.75 },
     },
   }
 
   return (
-    <motion.div
-      {...rowAnimation}
-      className={cn('relative', className)}
-      key={action.id}
-      layout
-      style={{ position: isPresent ? 'static' : 'absolute' }}
-    >
-      <VariantRecentActivityRow action={action} locale={locale} />
-      <motion.div {...glowAnimation} className="absolute -mt-6 h-4 w-full blur-2xl" />
+    <motion.div {...rowAnimation} className={cn('relative', className)} layout>
+      <VariantRecentActivityRow action={action} locale={locale} key={action.id} />
+      <motion.div {...glowAnimation} className="absolute -mt-6 h-3 w-full blur-2xl lg:h-4" />
     </motion.div>
   )
 }
