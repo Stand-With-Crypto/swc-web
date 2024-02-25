@@ -14,8 +14,9 @@ export const COMMUNITY_PAGINATION_DATA: Record<
     totalPregeneratedPages: maybeIgnorePreGeneration(10),
   },
   [RecentActivityAndLeaderboardTabs.LEADERBOARD]: {
-    totalPages: 10,
-    itemsPerPage: 200,
-    totalPregeneratedPages: maybeIgnorePreGeneration(2),
+    // TODO enable more pages after we debug why builds are so sluggish when generating leaderboard content
+    totalPages: 1,
+    itemsPerPage: 400,
+    totalPregeneratedPages: maybeIgnorePreGeneration(1),
   },
 }

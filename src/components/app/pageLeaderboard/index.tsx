@@ -104,17 +104,19 @@ export function PageLeaderboard({
           </>
         )}
       </div>
-      <div className="flex justify-center">
-        <PaginationLinks
-          currentPageNumber={pageNum}
-          getPageUrl={pageNumber =>
-            pageNumber < 1 || pageNumber > totalPages
-              ? ''
-              : urls.leaderboard({ pageNum: pageNumber, tab })
-          }
-          totalPages={totalPages}
-        />
-      </div>
+      {totalPages > 1 && (
+        <div className="flex justify-center">
+          <PaginationLinks
+            currentPageNumber={pageNum}
+            getPageUrl={pageNumber =>
+              pageNumber < 1 || pageNumber > totalPages
+                ? ''
+                : urls.leaderboard({ pageNum: pageNumber, tab })
+            }
+            totalPages={totalPages}
+          />
+        </div>
+      )}
     </div>
   )
 }
