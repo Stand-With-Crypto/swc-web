@@ -1,7 +1,6 @@
 import { DataCreationMethod } from '@prisma/client'
 
 import { mockCreateUserInput } from '@/mocks/models/mockUser'
-import { mockCreateUserCryptoAddressInput } from '@/mocks/models/mockUserCryptoAddress'
 import { mockCreateUserEmailAddressInput } from '@/mocks/models/mockUserEmailAddress'
 import { prismaClient } from '@/utils/server/prismaClient'
 

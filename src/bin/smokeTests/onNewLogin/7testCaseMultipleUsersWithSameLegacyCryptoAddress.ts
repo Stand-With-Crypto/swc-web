@@ -2,10 +2,9 @@ import { DataCreationMethod } from '@prisma/client'
 
 import { mockCreateUserInput } from '@/mocks/models/mockUser'
 import { mockCreateUserCryptoAddressInput } from '@/mocks/models/mockUserCryptoAddress'
-import { mockCreateUserEmailAddressInput } from '@/mocks/models/mockUserEmailAddress'
 import { prismaClient } from '@/utils/server/prismaClient'
 
-import { getDefaultParameters, mockEmbeddedWalletMetadata, TestCase, verify } from './utils'
+import { getDefaultParameters, TestCase, verify } from './utils'
 
 export const testCaseMultipleUsersWithSameLegacyCryptoAddress: TestCase = {
   name: 'Test Case Multiple Users With Same Legacy Crypto Address',
