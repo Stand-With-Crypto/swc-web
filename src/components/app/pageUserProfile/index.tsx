@@ -39,6 +39,7 @@ export function PageUserProfile({
   }
   const { userActions } = user
   const performedUserActionTypes = uniq(userActions.map(x => x.actionType))
+  const excludeUserActionTypes = user.hasEmbeddedWallet ? [UserActionType.NFT_MINT] : []
   return (
     <div className="container space-y-10 lg:space-y-16">
       {/* LATER-TASK enable this feature */}
@@ -126,14 +127,18 @@ export function PageUserProfile({
         </PageTitle>
         <PageSubTitle className="mb-5">
           You've completed {performedUserActionTypes.length} out of{' '}
-          {Object.values(UserActionType).length} actions. Keep going!
+          {Object.values(UserActionType).length - excludeUserActionTypes.length} actions. Keep
+          going!
         </PageSubTitle>
         <div className="mx-auto mb-10 max-w-xl">
           <Progress
             value={(performedUserActionTypes.length / Object.values(UserActionType).length) * 100}
           />
         </div>
-        <UserActionRowCTAsList performedUserActionTypes={performedUserActionTypes} />
+        <UserActionRowCTAsList
+          excludeUserActionTypes={excludeUserActionTypes}
+          performedUserActionTypes={performedUserActionTypes}
+        />
       </section>
       {/* hiding nft section until bugs are resolved */}
       {/* <section>
