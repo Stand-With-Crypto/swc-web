@@ -26,9 +26,9 @@ export const getIntlUrls = (
     donate: () => `${localePrefix}/donate`,
     leaderboard: (params?: { pageNum?: number; tab: RecentActivityAndLeaderboardTabs }) => {
       const tabPrefix =
-        params?.tab === RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY
-          ? '/community'
-          : '/community/leaderboard'
+        params?.tab === RecentActivityAndLeaderboardTabs.LEADERBOARD
+          ? '/community/leaderboard'
+          : '/community'
 
       if (!params) {
         return `${localePrefix}${tabPrefix}`
