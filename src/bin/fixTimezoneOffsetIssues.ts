@@ -1,19 +1,21 @@
+import { addHours } from 'date-fns'
 import { chunk } from 'lodash-es'
 
 import { runBin } from '@/bin/runBin'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getLogger } from '@/utils/shared/logger'
 
-function fixDate(date: Date) {
-  return date
-}
+const logger = getLogger('fixTimezoneOffsetIssues')
 
 type Entity = { id: string; datetimeCreated: Date; datetimeUpdated: Date }
 
-const logger = getLogger('fixTimezoneOffsetIssues')
-
 // prevent fetching entities that were created post-migration
 const MAX_DATETIME_CREATED = new Date() // TODO: set this to the date of the migration
+const HOURS_OFFSET_TO_CHANGE = 0 // TODO
+
+function fixDate(date: Date) {
+  return addHours(date, HOURS_OFFSET_TO_CHANGE)
+}
 
 async function fixEntity({
   paginateRows,
