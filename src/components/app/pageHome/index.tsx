@@ -35,7 +35,7 @@ export function PageHome({
 }: PageProps & Awaited<ReturnType<typeof getHomepageData>>) {
   const { locale } = params
   const urls = getIntlUrls(locale)
-  const groupedDTSIHomepagePeople = groupAndSortDTSIPeopleByCryptoStance(dtsiHomepagePeople.people)
+  const groupedDTSIHomepagePeople = groupAndSortDTSIPeopleByCryptoStance(dtsiHomepagePeople)
   return (
     <>
       <section className="grid-fl mb-6 grid grid-cols-1 items-center gap-4 lg:container lg:grid-cols-2 lg:gap-8">

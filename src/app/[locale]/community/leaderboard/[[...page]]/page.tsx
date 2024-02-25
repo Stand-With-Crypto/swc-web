@@ -11,12 +11,12 @@ import {
   PageLeaderboardInferredProps,
 } from '@/components/app/pageLeaderboard'
 import { COMMUNITY_PAGINATION_DATA } from '@/components/app/pageLeaderboard/constants'
-import { getPublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
+import { getSumDonationsByUser } from '@/data/aggregations/getSumDonationsByUser'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
-export const revalidate = SECONDS_DURATION.SECOND * 30
+export const revalidate = SECONDS_DURATION.MINUTE * 30
 export const dynamic = 'error'
 export const dynamicParams = true
 
@@ -44,29 +44,28 @@ const validatePageNum = ([page]: (string | undefined)[]) => {
 // pre-generate the first 10 pages. If people want to go further, we'll generate them on the fly
 export async function generateStaticParams() {
   const { totalPregeneratedPages } =
-    COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY]
-  return flatten(times(totalPregeneratedPages).map(i => ({ page: i ? [`${i + 1}`] : [] })))
+    COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.LEADERBOARD]
+  const results = flatten(times(totalPregeneratedPages).map(i => ({ page: i ? [`${i + 1}`] : [] })))
+  return results
 }
 
-export default async function CommunityRecentActivityPage({ params }: Props) {
-  const { itemsPerPage } =
-    COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY]
+export default async function CommunityLeaderboardPage({ params }: Props) {
+  const { itemsPerPage } = COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.LEADERBOARD]
   const { locale, page } = params
   const pageNum = validatePageNum(page ?? [])
   if (!pageNum) {
     notFound()
   }
   const offset = (pageNum - 1) * itemsPerPage
-
-  const publicRecentActivity = await getPublicRecentActivity({
+  const sumDonationsByUser = await getSumDonationsByUser({
     limit: itemsPerPage,
     offset,
   })
 
   const dataProps: PageLeaderboardInferredProps = {
-    tab: RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY,
-    publicRecentActivity,
-    sumDonationsByUser: undefined,
+    tab: RecentActivityAndLeaderboardTabs.LEADERBOARD,
+    sumDonationsByUser,
+    publicRecentActivity: undefined,
   }
 
   return <PageLeaderboard {...dataProps} locale={locale} offset={offset} pageNum={pageNum} />
