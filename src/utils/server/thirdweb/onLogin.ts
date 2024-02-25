@@ -268,6 +268,7 @@ export async function onNewLogin(props: NewLoginParams) {
     user,
     userCryptoAddress,
     localUser,
+    wasUserCreated,
   })
   if (localUser) {
     getServerPeopleAnalytics({ userId: user.id, localUser }).setOnce(
@@ -614,7 +615,9 @@ async function triggerPostLoginUserActionSteps({
   user,
   userCryptoAddress,
   localUser,
+  wasUserCreated,
 }: {
+  wasUserCreated: boolean
   user: UpsertedUser
   userCryptoAddress: UserCryptoAddress
   localUser: ServerLocalUser | null
@@ -650,6 +653,12 @@ async function triggerPostLoginUserActionSteps({
     })
     log(`triggerPostLoginUserActionSteps: opt in user action created`)
     await claimNFT(optInUserAction, userCryptoAddress)
+    getServerAnalytics({ userId: user.id, localUser }).trackUserActionCreated({
+      actionType: UserActionType.OPT_IN,
+      campaignName: UserActionOptInCampaignName.DEFAULT,
+      creationMethod: 'On Site',
+      userState: wasUserCreated ? 'New' : 'Existing',
+    })
   } else {
     log(`triggerPostLoginUserActionSteps: opt in user action previously existed`)
   }
