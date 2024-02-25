@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react'
+import { Dispatch, SetStateAction, useCallback, useMemo, useState } from 'react'
 import { ArrowUpRight } from 'lucide-react'
 
 import {
@@ -26,14 +26,14 @@ const STATE_CODES = Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP)
 
 const COPY = {
   register: {
-    title: 'Register to vote and get a free "I Registered" NFT',
+    title: "Register to vote and get a free “I'm a Voter” NFT",
     subtitle: 'Register now to be ready to vote in your state this year.',
     step2: 'Go and register to vote',
     step2Cta: 'Register',
   },
   checkRegistration: {
-    title: 'Check your registration and get a free "I Registered" NFT',
-    subtitle: 'Check your voter registration in your state this year. ',
+    title: "Check your registration and get a free “I'm a Voter” NFT",
+    subtitle: 'Check your voter registration in your state this year.',
     step2: 'Check voter registration',
     step2Cta: 'Check',
   },
@@ -87,13 +87,16 @@ function disclaimer(stateCode: StateCode | undefined) {
 
 interface VoterRegistrationFormProps extends UseSectionsReturn<SectionNames> {
   checkRegistration?: boolean
+  stateCode?: StateCode
+  setStateCode: Dispatch<SetStateAction<StateCode | undefined>>
 }
 
 export function VoterRegistrationForm({
   checkRegistration,
   goToSection,
+  stateCode,
+  setStateCode,
 }: VoterRegistrationFormProps) {
-  const [stateCode, setStateCode] = useState<StateCode>()
   const [completeStep2, setCompleteStep2] = useState(false)
 
   const { title, subtitle, step2, step2Cta } = useMemo(
@@ -107,21 +110,25 @@ export function VoterRegistrationForm({
       ]
     : undefined
 
-  const handleOnValueChange = useCallback((value: string) => {
-    if (STATE_CODES.includes(value)) {
-      setCompleteStep2(false)
-      setStateCode(value as StateCode)
-    }
-  }, [])
+  const handleOnValueChange = useCallback(
+    (value: string) => {
+      if (STATE_CODES.includes(value)) {
+        setCompleteStep2(false)
+        setStateCode(value as StateCode)
+      }
+    },
+    [setStateCode],
+  )
 
   const handleStep2Cta = useCallback(() => {
     setCompleteStep2(true)
   }, [])
 
-  const handleClaimNft = useCallback(() => {
-    // Replace with server action
-    goToSection(SectionNames.SUCCESS)
-  }, [goToSection])
+  const handleClaimNft = useCallback(async () => {
+    if (!stateCode) return
+
+    goToSection(SectionNames.CLAIM_NFT)
+  }, [goToSection, stateCode])
 
   const handleOnBack = useCallback(() => goToSection(SectionNames.SURVEY), [goToSection])
 
@@ -129,7 +136,7 @@ export function VoterRegistrationForm({
     <UserActionFormVoterRegistrationLayout onBack={handleOnBack}>
       <UserActionFormVoterRegistrationLayout.Container>
         <UserActionFormVoterRegistrationLayout.Heading subtitle={subtitle} title={title} />
-        <ol className="flex flex-col gap-2 justify-self-center">
+        <ol className="flex flex-col justify-self-center">
           <li className={LIST_ITEM_STYLE}>
             <Step1Svg />
             <div className="flex flex-grow flex-row items-center justify-between">

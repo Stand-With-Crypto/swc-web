@@ -4,7 +4,7 @@ import { error } from 'winston'
 
 import { AIRDROP_NFT_INNGEST_EVENT_NAME } from '@/inngest/functions/airdropNFT'
 import { inngest } from '@/inngest/inngest'
-import { NFT_CONTRACT_ADDRESS } from '@/utils/server/nft/contractAddress'
+import { NFT_SLUG_BACKEND_METADATA } from '@/utils/server/nft/constants'
 import { AirdropPayload } from '@/utils/server/nft/payload'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getLogger } from '@/utils/shared/logger'
@@ -19,7 +19,7 @@ export const ACTION_NFT_SLUG: Record<UserActionType, NFTSlug | null> = {
   [UserActionType.DONATION]: null,
   [UserActionType.NFT_MINT]: null,
   [UserActionType.TWEET]: null,
-  [UserActionType.VOTER_REGISTRATION]: null, // Add NFTSlug.VOTER_REGISTRATION later
+  [UserActionType.VOTER_REGISTRATION]: NFTSlug.I_AM_A_VOTER,
 }
 
 const logger = getLogger('claimNft')
@@ -43,7 +43,7 @@ export async function claimNFT(userAction: UserAction, userCryptoAddress: UserCr
           nftSlug: nftSlug,
           status: NFTMintStatus.REQUESTED,
           costAtMint: 0.0,
-          contractAddress: NFT_CONTRACT_ADDRESS[nftSlug],
+          contractAddress: NFT_SLUG_BACKEND_METADATA[nftSlug].contractAddress,
           costAtMintCurrencyCode: NFTCurrency.ETH,
           costAtMintUsd: new Decimal(0),
         },
@@ -57,7 +57,7 @@ export async function claimNFT(userAction: UserAction, userCryptoAddress: UserCr
   const payload: AirdropPayload = {
     nftMintId: action.nftMintId!,
     recipientWalletAddress: userCryptoAddress.cryptoAddress,
-    contractAddress: NFT_CONTRACT_ADDRESS[nftSlug],
+    nftSlug,
   }
 
   return inngest.send({

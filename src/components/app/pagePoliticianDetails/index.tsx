@@ -1,4 +1,4 @@
-import _ from 'lodash'
+import { orderBy } from 'lodash-es'
 import { Globe } from 'lucide-react'
 
 import { DTSIStanceDetails } from '@/components/app/dtsiStanceDetails'
@@ -35,7 +35,7 @@ export function PagePoliticianDetails({
 }) {
   const orderedRoles = orderDTSIPersonRolesByImportance(person.roles)
   const primaryRole = orderedRoles.byImportance[0]
-  const stances = _.orderBy(person.stances, x => -1 * new Date(x.dateStanceMade).getTime())
+  const stances = orderBy(person.stances, x => -1 * new Date(x.dateStanceMade).getTime())
   return (
     <div className="container max-w-3xl">
       <section>
@@ -89,7 +89,7 @@ export function PagePoliticianDetails({
         </PageSubTitle>
         <div className="flex items-center justify-center gap-3">
           {person.donationUrl && (
-            <Button asChild size="lg">
+            <Button asChild>
               <ExternalLink href={person.donationUrl}>Donate</ExternalLink>
             </Button>
           )}

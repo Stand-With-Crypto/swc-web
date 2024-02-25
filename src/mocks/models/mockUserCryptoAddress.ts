@@ -6,6 +6,7 @@ import {
   UserCryptoAddress,
 } from '@prisma/client'
 
+import { parseThirdwebAddress } from '@/hooks/useThirdwebAddress/parseThirdwebAddress'
 import { fakerFields } from '@/mocks/fakerUtils'
 import { mockCommonDatetimes } from '@/mocks/mockCommonDatetimes'
 
@@ -16,7 +17,7 @@ export enum PopularCryptoAddress {
 
 export function mockCreateUserCryptoAddressInput() {
   return {
-    cryptoAddress: faker.finance.ethereumAddress(),
+    cryptoAddress: parseThirdwebAddress(faker.finance.ethereumAddress()),
     cryptoNetwork: faker.helpers.arrayElement(Object.values(SupportedUserCryptoNetwork)),
   } satisfies Omit<Prisma.UserCryptoAddressCreateInput, 'userId' | 'user'>
 }

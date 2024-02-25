@@ -1,12 +1,15 @@
 'use client'
 import { useState } from 'react'
+import { ArrowLeft } from 'lucide-react'
 
 import { ClientAddress } from '@/clientModels/clientAddress'
 import { SensitiveDataClientUserWithENSData } from '@/clientModels/clientUser/sensitiveDataClientUser'
 import { ANALYTICS_NAME_UPDATE_USER_PROFILE_FORM } from '@/components/app/updateUserProfileForm/constants'
 import { UpdateUserProfileForm } from '@/components/app/updateUserProfileForm/step1'
 import { UpdateUserInformationVisibilityForm } from '@/components/app/updateUserProfileForm/step2'
+import { dialogButtonStyles } from '@/components/ui/dialog/styles'
 import { useSections } from '@/hooks/useSections'
+import { cn } from '@/utils/web/cn'
 
 enum Sections {
   Profile = 'Profile',
@@ -15,11 +18,9 @@ enum Sections {
 
 export function UpdateUserProfileFormContainer({
   user,
-  onCancel,
   onSuccess,
 }: {
   user: SensitiveDataClientUserWithENSData & { address: ClientAddress | null }
-  onCancel: () => void
   onSuccess: () => void
 }) {
   const sections = useSections({
@@ -43,11 +44,16 @@ export function UpdateUserProfileFormContainer({
   }
   if (sections.currentSection === Sections.InformationVisibility) {
     return (
-      <UpdateUserInformationVisibilityForm
-        onCancel={onCancel}
-        onSuccess={onSuccess}
-        user={statefulUser}
-      />
+      <>
+        <div
+          className={cn('left-2', dialogButtonStyles)}
+          onClick={() => sections.goToSection(Sections.Profile)}
+          role="button"
+        >
+          <ArrowLeft size={20} />
+        </div>
+        <UpdateUserInformationVisibilityForm onSuccess={onSuccess} user={statefulUser} />
+      </>
     )
   }
 }

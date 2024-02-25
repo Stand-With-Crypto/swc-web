@@ -4,7 +4,7 @@ import { Check } from 'lucide-react'
 
 import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
 import { GetUserPerformedUserActionTypesResponse } from '@/app/api/identified-user/performed-user-action-types/route'
-import { ThirdwebLoginDialog } from '@/components/app/authentication/thirdwebLoginContent'
+import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { OPEN_UPDATE_USER_PROFILE_FORM_QUERY_PARAM_KEY } from '@/components/app/updateUserProfileForm/queryParamConfig'
 import { getNextAction } from '@/components/app/userActionFormSuccessScreen/getNextAction'
 import { HasOptedInToMembershipForm } from '@/components/app/userActionFormSuccessScreen/hasOptedInToMembershipForm'
@@ -68,13 +68,19 @@ export function UserActionFormSuccessScreenMainCTA({
           </Skeleton>
         </PageSubTitle>
         <Button variant="secondary">
-          <Skeleton>Join Stand with Crypto</Skeleton>
+          <Skeleton>Join Stand With Crypto</Skeleton>
         </Button>
       </Container>
     )
   }
   const { user, performedUserActionTypes } = data
   if (!user) {
+    const loginButton = (
+      <LoginDialogWrapper>
+        <Button variant="secondary">Join Stand With Crypto</Button>
+      </LoginDialogWrapper>
+    )
+
     if (nftWhenAuthenticated) {
       return (
         <Container>
@@ -84,9 +90,7 @@ export function UserActionFormSuccessScreenMainCTA({
             You've earned an NFT for completing this action. Join Stand With Crypto to claim your
             NFT, see your activities, and get personalized content.
           </PageSubTitle>
-          <ThirdwebLoginDialog>
-            <Button variant="secondary">Join Stand with Crypto</Button>
-          </ThirdwebLoginDialog>
+          {loginButton}
         </Container>
       )
     }
@@ -97,9 +101,7 @@ export function UserActionFormSuccessScreenMainCTA({
           Join Stand With Crypto to claim exclusive NFTs, see your activity, and get personalized
           content.
         </PageSubTitle>
-        <ThirdwebLoginDialog>
-          <Button variant="secondary">Join Stand with Crypto</Button>
-        </ThirdwebLoginDialog>
+        {loginButton}
       </Container>
     )
   }

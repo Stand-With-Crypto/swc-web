@@ -14,6 +14,10 @@ export type ClientUser = ClientModel<
     firstName: string | null
     lastName: string | null
     primaryUserCryptoAddress: ClientUserCryptoAddress | null
+    userLocationDetails: {
+      administrativeAreaLevel1: string
+      countryCode: string
+    } | null
   }
 >
 
@@ -25,6 +29,14 @@ export type GetClientProps = User & {
 export const getClientUser = (record: GetClientProps): ClientUser => {
   const { firstName, lastName, primaryUserCryptoAddress, id, informationVisibility, address } =
     record
+
+  const userLocationDetails = address
+    ? {
+        administrativeAreaLevel1: address.administrativeAreaLevel1,
+        countryCode: address.countryCode,
+      }
+    : null
+
   return getClientModel({
     firstName: informationVisibility === UserInformationVisibility.ALL_INFO ? firstName : null,
     lastName: informationVisibility === UserInformationVisibility.ALL_INFO ? lastName : null,
@@ -34,12 +46,7 @@ export const getClientUser = (record: GetClientProps): ClientUser => {
         : null,
     id,
     informationVisibility,
-    userLocationDetails: address
-      ? {
-          administrativeAreaLevel1: address.administrativeAreaLevel1,
-          countryCode: address.countryCode,
-        }
-      : null,
+    userLocationDetails,
   })
 }
 
@@ -54,8 +61,10 @@ export const getClientUserWithENSData = (
   const initial = getClientUser(record)
   return {
     ...initial,
-    primaryUserCryptoAddress: record.primaryUserCryptoAddress
-      ? getClientUserCryptoAddressWithENSData(record.primaryUserCryptoAddress, ensData)
-      : null,
+    primaryUserCryptoAddress:
+      record.informationVisibility !== UserInformationVisibility.ANONYMOUS &&
+      record.primaryUserCryptoAddress
+        ? getClientUserCryptoAddressWithENSData(record.primaryUserCryptoAddress, ensData)
+        : null,
   }
 }

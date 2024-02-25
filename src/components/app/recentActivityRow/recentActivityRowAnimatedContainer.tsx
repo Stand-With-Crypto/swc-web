@@ -1,10 +1,8 @@
 'use client'
 import { AnimatePresence, motion, useIsPresent } from 'framer-motion'
 
-import {
-  RecentActivityRow,
-  RecentActivityRowProps,
-} from '@/components/app/recentActivityRow/recentActivityRow'
+import { RecentActivityRowProps } from '@/components/app/recentActivityRow/recentActivityRow'
+import { VariantRecentActivityRow } from '@/components/app/recentActivityRow/variantRecentActivityRow'
 import { useLocale } from '@/hooks/useLocale'
 import { useThrottledActionUpdates } from '@/hooks/useThrottledActionUpdates'
 import { SupportedLocale } from '@/intl/locales'
@@ -49,7 +47,7 @@ function AnimatedActivityRow({ action, locale, className }: AnimatedActivityRowP
       layout
       style={{ position: isPresent ? 'static' : 'absolute' }}
     >
-      <RecentActivityRow action={action} locale={locale} />
+      <VariantRecentActivityRow action={action} locale={locale} />
       <motion.div {...glowAnimation} className="absolute -mt-6 h-4 w-full blur-2xl" />
     </motion.div>
   )

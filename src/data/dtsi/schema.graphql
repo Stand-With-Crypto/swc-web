@@ -67,6 +67,8 @@ type BillPersonRelationship {
 enum BillPersonRelationshipType {
   COSPONSOR
   SPONSOR
+  VOTED_AGAINST
+  VOTED_FOR
 }
 
 enum BillStatus {
@@ -177,6 +179,9 @@ enum PersonGrouping {
   CURRENT_US_HOUSE_OF_REPS
   CURRENT_US_SENATE
   RUNNING_FOR_PRESIDENT
+  RUNNING_FOR_US_HOUSE_OF_REPS
+  RUNNING_FOR_US_SENATE
+  US_PRESIDENT
 }
 
 enum PersonPoliticalAffiliationCategory {
@@ -253,6 +258,7 @@ enum PersonRoleStatus {
   HELD
   LOST
   RUNNING_FOR
+  STEPPED_DOWN
 }
 
 type PersonStance {
@@ -345,9 +351,14 @@ type Query {
     hasPromotedPositioning: Boolean
     limit: Int!
     offset: Int!
+    personRoleGroupingOr: [PersonGrouping!]
+    personRolePrimaryCity: String
+    personRolePrimaryCountryCode: String
+    personRolePrimaryDistrict: String
+    personRolePrimaryState: String
     slugIn: [String!]
   ): [Person!]!
-  peopleByUSCongressionalDistrict(congressionalDistrict: Int!, stateCode: String!): [Person!]!
+  peopleByUSCongressionalDistrict(congressionalDistrict: Int, stateCode: String!): [Person!]!
 
   """
   Returns all objects that have been updated since the given date

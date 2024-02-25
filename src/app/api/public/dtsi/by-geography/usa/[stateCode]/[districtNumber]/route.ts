@@ -7,7 +7,7 @@ import { queryDTSIPeopleByCongressionalDistrict } from '@/data/dtsi/queries/quer
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
 export const dynamic = 'error'
-export const revalidate = SECONDS_DURATION.WEEK
+export const revalidate = SECONDS_DURATION.DAY
 
 const zodParams = z.object({
   districtNumber: z.string().pipe(z.coerce.number().int().gte(0).lt(1000)),

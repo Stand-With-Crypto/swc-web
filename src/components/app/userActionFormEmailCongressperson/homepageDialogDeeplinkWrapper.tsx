@@ -7,10 +7,12 @@ import { UserActionFormEmailCongressperson } from '@/components/app/userActionFo
 import { UserActionFormEmailCongresspersonSkeleton } from '@/components/app/userActionFormEmailCongressperson/skeleton'
 import { FormFields } from '@/components/app/userActionFormEmailCongressperson/types'
 import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
+import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useEncodedInitialValuesQueryParam } from '@/hooks/useEncodedInitialValuesQueryParam'
 import { useLocale } from '@/hooks/useLocale'
 import { getIntlUrls } from '@/utils/shared/urls'
+import { cn } from '@/utils/web/cn'
 
 function UserActionFormEmailCongresspersonDeeplinkWrapperContent() {
   const fetchUser = useApiResponseForUserFullProfileInfo()
@@ -39,7 +41,9 @@ function UserActionFormEmailCongresspersonDeeplinkWrapperContent() {
       user={user}
     />
   ) : (
-    <UserActionFormSuccessScreen onClose={() => router.replace(urls.home())} />
+    <div className={cn(dialogContentPaddingStyles)}>
+      <UserActionFormSuccessScreen onClose={() => router.replace(urls.home())} />
+    </div>
   )
 }
 

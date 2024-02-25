@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker'
 import { Prisma, UserActionType } from '@prisma/client'
-import _ from 'lodash'
+import { omit } from 'lodash-es'
 
 import { runBin } from '@/bin/runBin'
 import { mockCreateAddressInput } from '@/mocks/models/mockAddress'
@@ -12,6 +12,7 @@ import { mockCreateUserActionDonationInput } from '@/mocks/models/mockUserAction
 import { mockCreateUserActionEmailInput } from '@/mocks/models/mockUserActionEmail'
 import { mockCreateUserActionEmailRecipientInput } from '@/mocks/models/mockUserActionEmailRecipient'
 import { mockCreateUserActionOptInInput } from '@/mocks/models/mockUserActionOptIn'
+import { mockCreateUserActionVoterRegistrationInput } from '@/mocks/models/mockUserActionVoterRegistration'
 import { mockCreateUserCryptoAddressInput } from '@/mocks/models/mockUserCryptoAddress'
 import { mockCreateUserEmailAddressInput } from '@/mocks/models/mockUserEmailAddress'
 import { prismaClient } from '@/utils/server/prismaClient'
@@ -148,7 +149,7 @@ async function createAction(user: Awaited<ReturnType<typeof createUser>>) {
               address: { create: mockCreateAddressInput() },
               userActionEmailRecipients: {
                 create: {
-                  ..._.omit(mockCreateUserActionEmailRecipientInput(), 'userActionEmailId'),
+                  ...omit(mockCreateUserActionEmailRecipientInput(), 'userActionEmailId'),
                 },
               },
             },
@@ -184,6 +185,17 @@ async function createAction(user: Awaited<ReturnType<typeof createUser>>) {
           nftMint: {
             create: {
               ...mockCreateNFTMintInput(),
+            },
+          },
+        },
+      })
+    case UserActionType.VOTER_REGISTRATION:
+      return prismaClient.userAction.create({
+        data: {
+          ...mockAction,
+          userActionVoterRegistration: {
+            create: {
+              ...mockCreateUserActionVoterRegistrationInput(),
             },
           },
         },

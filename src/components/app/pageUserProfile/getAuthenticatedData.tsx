@@ -43,17 +43,20 @@ export async function getAuthenticatedData() {
           userActionCall: true,
           nftMint: true,
           userActionOptIn: true,
+          userActionVoterRegistration: true,
         },
       },
     },
   })
   const dtsiSlugs = new Set<string>()
   user.userActions.forEach(userAction => {
-    if (userAction.userActionCall) {
+    if (userAction.userActionCall?.recipientDtsiSlug) {
       dtsiSlugs.add(userAction.userActionCall.recipientDtsiSlug)
     } else if (userAction.userActionEmail) {
       userAction.userActionEmail.userActionEmailRecipients.forEach(userActionEmailRecipient => {
-        dtsiSlugs.add(userActionEmailRecipient.dtsiSlug)
+        if (userActionEmailRecipient.dtsiSlug) {
+          dtsiSlugs.add(userActionEmailRecipient.dtsiSlug)
+        }
       })
     }
   })
@@ -68,7 +71,7 @@ export async function getAuthenticatedData() {
     throw new Error('Primary user crypto address not found')
   }
   return {
-    ...getSensitiveDataClientUserWithENSData(rest, ensData),
+    ...getSensitiveDataClientUserWithENSData({ ...rest, address }, ensData),
     // LATER-TASK show UX if this address is not the primary address
     currentlyAuthenticatedUserCryptoAddress: getClientUserCryptoAddress(
       currentlyAuthenticatedUserCryptoAddress,

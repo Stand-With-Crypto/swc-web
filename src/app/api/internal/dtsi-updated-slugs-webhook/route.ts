@@ -1,4 +1,4 @@
-import _ from 'lodash'
+import { flatten } from 'lodash-es'
 import { revalidatePath } from 'next/cache'
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
@@ -6,7 +6,7 @@ import { z } from 'zod'
 import { ORDERED_SUPPORTED_LOCALES } from '@/intl/locales'
 import { getLogger } from '@/utils/shared/logger'
 import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
-import { getIntlUrls } from '@/utils/shared/urls'
+import { apiUrls, getIntlUrls } from '@/utils/shared/urls'
 
 const logger = getLogger('/api/internal/dtsi-updated-slugs-webhook')
 
@@ -37,12 +37,13 @@ export async function POST(request: NextRequest) {
   }
   const validatedFields = zodPayload.parse(await request.json())
   logger.info('Received webhook with updated slugs', validatedFields)
-  const pathsToUpdate = _.flatten(
+  const pathsToUpdate = flatten(
     ORDERED_SUPPORTED_LOCALES.map(locale => {
       const urls = getIntlUrls(locale, { actualPaths: true })
       return [
         urls.home(),
         urls.politiciansHomepage(),
+        apiUrls.dtsiAllPeople(),
         ...validatedFields.personSlugs.map(slug => urls.politicianDetails(slug)),
       ]
     }),

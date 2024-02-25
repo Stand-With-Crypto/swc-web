@@ -26,8 +26,9 @@ model AuthenticationNonce {
 // these names are based on the google places api
 model Address {
   id                       String   @id @default(uuid())
-  // For now all our addresses will be persisted via google place so this is required. This may change in the future
-  googlePlaceId            String   @unique @map("google_place_id")
+  // Ensures we can prepopulate the address field with a user's previous address
+  // this field is optional to ensure if google rate limits us the site doesn't break
+  googlePlaceId            String?  @unique @map("google_place_id") @db.VarChar(680)
   formattedDescription     String   @map("formatted_description") // We could compute this from the fields, but in the interest of matching the user selection exactly let's persist for now. ex: 123 East 86th St, Apt 13a, New York, NY 06890
   streetNumber             String   @map("street_number") // ex: 123
   route                    String   @map("route") // ex: East 86th St
@@ -108,7 +109,7 @@ model User {
   dataCreationMethod         DataCreationMethod        @default(BY_USER) @map("data_creation_method")
   // a short, user-friendly id we're comfortable having the user share to track referrals
   // because ids/session ids could potentially be used to access sensitive information, we want a decoupled ID for sharing purposes
-  referralId                 String                   @map("referral_id")
+  referralId                 String                    @map("referral_id")
   // We'll collect and capture this information in our product analytics tools, but we'll also want to be able to
   // use this metadata to query our relationship database. This information will only be populated if users
   // opt in to our cookies
@@ -222,7 +223,7 @@ model UserCryptoAddress {
   dataCreationMethod               DataCreationMethod         @default(BY_USER) @map("data_creation_method")
   // because we are populating this table using historical data where we didn't have the auth flow, we need to differentiate between 
   // addresses that exist but haven't been verified vs. addresses that have been verified via the auth flow
-  hasBeenVerifiedViaAuth           Boolean                    @default(true)
+  hasBeenVerifiedViaAuth           Boolean                    @default(true) @map("has_been_verified_via_auth")
   embeddedWalletUserEmailAddressId String?                    @unique @map("embedded_wallet_user_email_address_id")
   embeddedWalletUserEmailAddress   UserEmailAddress?          @relation(fields: [embeddedWalletUserEmailAddressId], references: [id])
 
@@ -268,10 +269,11 @@ model UserAction {
   actionType          UserActionType     @map("action_type")
 
   // We'll need in-memory logic to validate and verify only one action type is every associated with a UserAction
-  userActionEmail    UserActionEmail?
-  userActionCall     UserActionCall?
-  userActionDonation UserActionDonation?
-  userActionOptIn    UserActionOptIn?
+  userActionEmail             UserActionEmail?
+  userActionCall              UserActionCall?
+  userActionDonation          UserActionDonation?
+  userActionOptIn             UserActionOptIn?
+  userActionVoterRegistration UserActionVoterRegistration?
 
   @@index([datetimeCreated])
   @@index([userId, actionType, campaignName])
@@ -315,7 +317,8 @@ model UserActionEmailRecipient {
   id                String          @id @default(uuid())
   userActionEmailId String          @map("user_action_email_id")
   userActionEmail   UserActionEmail @relation(fields: [userActionEmailId], references: [id])
-  dtsiSlug          String          @map("dtsi_slug")
+  // unfortunately some of our legacy data doesn't include this info so it needs to be optional
+  dtsiSlug          String?         @map("dtsi_slug")
 
   @@index([userActionEmailId])
   @@map("user_action_email_recipient")
@@ -324,10 +327,11 @@ model UserActionEmailRecipient {
 model UserActionCall {
   id                   String     @id @default(uuid())
   userAction           UserAction @relation(fields: [id], references: [id])
-  recipientDtsiSlug    String     @map("recipient_dtsi_slug")
-  recipientPhoneNumber String     @map("recipient_phone_number")
-  address              Address    @relation(fields: [addressId], references: [id])
-  addressId            String     @map("address_id")
+  // unfortunately some of our legacy data doesn't include this info so it needs to be optional
+  recipientDtsiSlug    String?    @map("recipient_dtsi_slug")
+  recipientPhoneNumber String?    @map("recipient_phone_number")
+  address              Address?   @relation(fields: [addressId], references: [id])
+  addressId            String?    @map("address_id")
 
   @@index([id])
   @@index([addressId])
@@ -362,13 +366,14 @@ enum NFTMintStatus {
   REQUESTED
   CLAIMED
   FAILED
+  TIMEDOUT
 }
 
 model NFTMint {
   id                     String        @id @default(uuid())
   nftSlug                String        @map("nft_slug")
-  contractAddress        String        @map("contract_address")
-  transactionHash        String?       @map("transaction_hash")
+  contractAddress        String        @map("contract_address") @db.VarChar(680)
+  transactionHash        String?       @map("transaction_hash") @db.VarChar(680)
   status                 NFTMintStatus @map("status")
   datetimeUpdated        DateTime      @updatedAt @map("datetime_updated")
   datetimeCreated        DateTime      @default(now()) @map("datetime_created")
@@ -381,4 +386,13 @@ model NFTMint {
   @@index([id])
   @@index([nftSlug])
   @@map("nft_mint")
+}
+
+model UserActionVoterRegistration {
+  id         String     @id @default(uuid())
+  userAction UserAction @relation(fields: [id], references: [id])
+  usaState   String?    @map("usa_state")
+
+  @@index([id])
+  @@map("user_action_voter_registration")
 }

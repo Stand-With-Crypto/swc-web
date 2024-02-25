@@ -13,3 +13,7 @@ export async function actionCreateUserActionEmailCongressperson() {
 export async function actionCreateUserActionCallCongressperson() {
   return {}
 }
+
+export async function actionCreateUserActionMintNFT() {
+  return {}
+}

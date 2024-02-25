@@ -32,7 +32,7 @@ export async function getHomepageData() {
   ] = await Promise.all([
     getHomepageTopLevelMetrics(),
     getPublicRecentActivity({ limit: 10 }),
-    queryDTSIHomepagePeople(),
+    queryDTSIHomepagePeople({ limit: 10 }).then(x => x.people),
     getSumDonationsByUser({ limit: 10 }),
   ])
   return {

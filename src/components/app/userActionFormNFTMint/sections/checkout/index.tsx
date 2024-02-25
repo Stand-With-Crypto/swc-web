@@ -1,13 +1,12 @@
 import React from 'react'
 import Balancer from 'react-wrap-balancer'
 import {
-  useAddress,
   useConnectionStatus,
   useContract,
   useContractMetadata,
   Web3Button,
 } from '@thirdweb-dev/react'
-import { noop } from 'lodash'
+import { noop } from 'lodash-es'
 
 import {
   NFTDisplay,
@@ -34,6 +33,7 @@ import { PageTitle } from '@/components/ui/pageTitleText'
 import { Skeleton } from '@/components/ui/skeleton'
 import { UseSectionsReturn } from '@/hooks/useSections'
 import { MintStatus } from '@/hooks/useSendMintNFTTransaction'
+import { useThirdwebAddress } from '@/hooks/useThirdwebAddress'
 import { SupportedCryptoCurrencyCodes } from '@/utils/shared/currency'
 import { theme } from '@/utils/web/thirdweb/theme'
 
@@ -49,7 +49,6 @@ interface UserActionFormNFTMintCheckoutProps
   debug?: boolean
 }
 
-// TODO review copy
 const CHECKOUT_ERROR_TO_MESSAGE: Record<CheckoutError, string> = {
   insufficientFunds: 'Insufficient funds. You need ETH on Base to mint',
   networkSwitch: 'Please switch to the Base Network',
@@ -73,7 +72,7 @@ export function UserActionFormNFTMintCheckout({
 }: UserActionFormNFTMintCheckoutProps) {
   const { contract } = useContract(MINT_NFT_CONTRACT_ADDRESS)
   const { data: contractMetadata, isLoading: isLoadingMetadata } = useContractMetadata(contract)
-  const address = useAddress()
+  const address = useThirdwebAddress()
 
   const checkoutError = useCheckoutError({
     totalFee: totalFee,

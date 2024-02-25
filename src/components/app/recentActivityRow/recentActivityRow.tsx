@@ -5,12 +5,12 @@ import { motion } from 'framer-motion'
 
 import { ClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
 import { ClientUserAction } from '@/clientModels/clientUserAction/clientUserAction'
-import { ThirdwebLoginDialog } from '@/components/app/authentication/thirdwebLoginContent'
+import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
+import { ActivityAvatar } from '@/components/app/recentActivityRow/activityAvatar'
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
-import { UserAvatar } from '@/components/app/userAvatar'
 import { Button } from '@/components/ui/button'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
 import { FormattedRelativeDatetimeWithClientHydration } from '@/components/ui/formattedRelativeDatetimeWithClientHydration'
@@ -24,8 +24,10 @@ import {
   dtsiPersonFullName,
   dtsiPersonPoliticalAffiliationCategoryAbbreviation,
 } from '@/utils/dtsi/dtsiPersonUtils'
+import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
 import { getIntlUrls } from '@/utils/shared/urls'
+import { getUSStateNameFromStateCode } from '@/utils/shared/usStateUtils'
 import { formatDonationOrganization } from '@/utils/web/donationUtils'
 import { getUserDisplayName } from '@/utils/web/userUtils'
 
@@ -34,7 +36,7 @@ export interface RecentActivityRowProps {
   locale: SupportedLocale
 }
 
-function RecentActivityRowBase({
+export function RecentActivityRowBase({
   locale,
   action,
   children,
@@ -50,8 +52,8 @@ function RecentActivityRowBase({
       onMouseLeave={() => isMobile || setHasFocus(false)}
     >
       <div className="flex items-center gap-4">
-        <div>
-          <UserAvatar size={40} user={action.user} />
+        <div className="flex-shrink-0">
+          <ActivityAvatar actionType={action.actionType} size={44} />
         </div>
         <div>{children}</div>
       </div>
@@ -123,9 +125,9 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
           onFocusContent: hasSignedUp
             ? undefined
             : () => (
-                <ThirdwebLoginDialog>
+                <LoginDialogWrapper>
                   <Button>Join</Button>
-                </ThirdwebLoginDialog>
+                </LoginDialogWrapper>
               ),
           children: (
             <>
@@ -146,7 +148,7 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
           children: (
             <>
               <MainText>{userDisplayName} called their representative</MainText>
-              <SubText>{formatDTSIPerson(action.person)}</SubText>
+              {action.person && <SubText>{formatDTSIPerson(action.person)}</SubText>}
             </>
           ),
         }
@@ -164,8 +166,8 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
               <MainText>{userDisplayName} donated</MainText>
               <SubText>
                 <FormattedCurrency
-                  amount={action.amount}
-                  currencyCode={action.amountCurrencyCode}
+                  amount={action.amountUsd}
+                  currencyCode={SupportedFiatCurrencyCodes.USD}
                   locale={locale}
                 />{' '}
                 to {formatDonationOrganization(action.recipient)}
@@ -187,7 +189,10 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
                 {action.userActionEmailRecipients.length > 1 ? 's' : ''}
               </MainText>
               <SubText>
-                {action.userActionEmailRecipients.map(x => formatDTSIPerson(x.person)).join(', ')}
+                {action.userActionEmailRecipients
+                  .filter(x => x.person)
+                  .map(x => formatDTSIPerson(x.person!))
+                  .join(', ')}
               </SubText>
             </>
           ),
@@ -215,7 +220,11 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
               <Button>Register</Button>
             </UserActionFormVoterRegistrationDialog>
           ),
-          children: <MainText>{userDisplayName} registered to vote</MainText>,
+          children: (
+            <MainText>{`${userDisplayName} confirmed to vote ${
+              action.usaState ? `in ${getUSStateNameFromStateCode(action.usaState)}` : ''
+            }`}</MainText>
+          ),
         }
       }
     }

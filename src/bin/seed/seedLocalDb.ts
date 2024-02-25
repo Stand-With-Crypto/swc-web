@@ -2,9 +2,10 @@ import 'dotenv/config'
 
 import { faker } from '@faker-js/faker'
 import { UserActionType, UserEmailAddressSource, UserInformationVisibility } from '@prisma/client'
-import _ from 'lodash'
+import { flatten, groupBy, keyBy, times } from 'lodash-es'
 
 import { runBin } from '@/bin/runBin'
+import { parseThirdwebAddress } from '@/hooks/useThirdwebAddress/parseThirdwebAddress'
 import { mockCreateAddressInput } from '@/mocks/models/mockAddress'
 import { mockCreateAuthenticationNonceInput } from '@/mocks/models/mockAuthenticationNonce'
 import { mockCreateNFTMintInput } from '@/mocks/models/mockNFTMint'
@@ -15,6 +16,7 @@ import { mockCreateUserActionDonationInput } from '@/mocks/models/mockUserAction
 import { mockCreateUserActionEmailInput } from '@/mocks/models/mockUserActionEmail'
 import { mockCreateUserActionEmailRecipientInput } from '@/mocks/models/mockUserActionEmailRecipient'
 import { mockCreateUserActionOptInInput } from '@/mocks/models/mockUserActionOptIn'
+import { mockCreateUserActionVoterRegistrationInput } from '@/mocks/models/mockUserActionVoterRegistration'
 import {
   mockCreateUserCryptoAddressInput,
   PopularCryptoAddress,
@@ -25,9 +27,8 @@ import { batchAsyncAndLog } from '@/utils/shared/batchAsyncAndLog'
 import { getLogger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 
-const LOCAL_USER_CRYPTO_ADDRESS = requiredEnv(
-  process.env.LOCAL_USER_CRYPTO_ADDRESS,
-  'process.env.LOCAL_USER_CRYPTO_ADDRESS',
+const LOCAL_USER_CRYPTO_ADDRESS = parseThirdwebAddress(
+  requiredEnv(process.env.LOCAL_USER_CRYPTO_ADDRESS, 'process.env.LOCAL_USER_CRYPTO_ADDRESS'),
 )
 
 enum SeedSize {
@@ -62,7 +63,7 @@ async function seed() {
   address
   */
   await batchAsyncAndLog(
-    _.times(seedSizes([10, 100, 1000])).map(() => {
+    times(seedSizes([10, 100, 1000])).map(() => {
       const address = mockCreateAddressInput()
       return address
     }),
@@ -78,7 +79,7 @@ async function seed() {
   authenticationNonce
   */
   await batchAsyncAndLog(
-    _.times(seedSizes([10, 100, 1000])).map(() => mockCreateAuthenticationNonceInput()),
+    times(seedSizes([10, 100, 1000])).map(() => mockCreateAuthenticationNonceInput()),
     data =>
       prismaClient.authenticationNonce.createMany({
         data,
@@ -96,7 +97,7 @@ async function seed() {
   const initialCryptoAddresses = [...topDonorCryptoAddressStrings, LOCAL_USER_CRYPTO_ADDRESS]
   const addressesUnusedOnUsers = [...address]
   await batchAsyncAndLog(
-    _.times(seedSizes([12, 98, 987])).map((_num, index) => {
+    times(seedSizes([12, 98, 987])).map((_num, index) => {
       // This ensures that no matter how many users we create, we include our initial crypto addresses
       const shouldBeAssociatedWithInitialCryptoAddress = index < initialCryptoAddresses.length
       const mocks = mockCreateUserInput()
@@ -126,7 +127,7 @@ async function seed() {
   userSession
   */
   await batchAsyncAndLog(
-    _.times(user.length * 2).map(() => ({
+    times(user.length * 2).map(() => ({
       userId: faker.helpers.arrayElement(user).id,
     })),
     data =>
@@ -141,7 +142,7 @@ async function seed() {
   userEmailAddress
   */
   await batchAsyncAndLog(
-    _.times(user.length / 2).map(() => ({
+    times(user.length / 2).map(() => ({
       ...mockCreateUserEmailAddressInput(),
       userId: faker.helpers.arrayElement(user).id,
     })),
@@ -161,7 +162,7 @@ async function seed() {
     x => x.source === UserEmailAddressSource.THIRDWEB_EMBEDDED_AUTH,
   )
   await batchAsyncAndLog(
-    _.times(user.length / 2).map(() => {
+    times(user.length / 2).map(() => {
       // a crypto user address must only ever be associated with one user so we use splice here to ensure we can randomly assign these models to users without any duplicates
       const selectedUser = usersUnusedOnCryptoAddress.splice(
         faker.number.int({ min: 0, max: usersUnusedOnCryptoAddress.length - 1 }),
@@ -186,7 +187,7 @@ async function seed() {
             : null,
         cryptoAddress: shouldUseInitialCryptoAddress
           ? initialCryptoAddresses.pop()!
-          : faker.finance.ethereumAddress(),
+          : parseThirdwebAddress(faker.finance.ethereumAddress()),
         userId: selectedUser.id,
       }
     }),
@@ -244,7 +245,7 @@ async function seed() {
   userAction
   */
   const userActionTypes = Object.values(UserActionType)
-  const userActionTypesToPersist = _.times(seedSizes([400, 4000, 40000])).map(index => {
+  const userActionTypesToPersist = times(seedSizes([400, 4000, 40000])).map(index => {
     return userActionTypes[index % userActionTypes.length]
   })
 
@@ -320,7 +321,7 @@ async function seed() {
   const userAction = await prismaClient.userAction.findMany()
   logEntity({ userAction })
 
-  const userActionsByType = _.groupBy(userAction, x => x.actionType) as Record<
+  const userActionsByType = groupBy(userAction, x => x.actionType) as Record<
     UserActionType,
     typeof userAction
   >
@@ -345,10 +346,10 @@ async function seed() {
   userActionEmailRecipient
   */
   await batchAsyncAndLog(
-    _.flatten(
+    flatten(
       userActionsByType[UserActionType.EMAIL].map(actionEmail =>
         // LATER-TASK expand this to be more than 1 recipient once we have UX
-        _.times(faker.helpers.arrayElement([1])).map(() => ({
+        times(faker.helpers.arrayElement([1])).map(() => ({
           ...mockCreateUserActionEmailRecipientInput(),
           userActionEmailId: actionEmail.id,
         })),
@@ -381,7 +382,7 @@ async function seed() {
   /*
   userActionDonation
   */
-  const topDonorUserIdMap = _.keyBy(topDonorCryptoAddresses, x => x.userId)
+  const topDonorUserIdMap = keyBy(topDonorCryptoAddresses, x => x.userId)
   await batchAsyncAndLog(
     userActionsByType[UserActionType.DONATION].map(action => {
       const initialMockValues = mockCreateUserActionDonationInput()
@@ -422,6 +423,24 @@ async function seed() {
   )
   const userActionOptIn = await prismaClient.userActionOptIn.findMany()
   logEntity({ userActionOptIn })
+
+  /*
+  userActionVoterRegistration
+  */
+  await batchAsyncAndLog(
+    userActionsByType[UserActionType.VOTER_REGISTRATION].map(action => {
+      return {
+        ...mockCreateUserActionVoterRegistrationInput(),
+        id: action.id,
+      }
+    }),
+    data =>
+      prismaClient.userActionVoterRegistration.createMany({
+        data,
+      }),
+  )
+  const userActionVoterRegistration = await prismaClient.userActionVoterRegistration.findMany()
+  logEntity({ userActionVoterRegistration })
 }
 
 runBin(seed)

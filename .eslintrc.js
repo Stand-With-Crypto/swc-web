@@ -68,5 +68,26 @@ module.exports = {
     'import/first': 'warn',
     'import/newline-after-import': 'warn',
     'import/no-duplicates': 'error',
+    'no-restricted-imports': [
+      'error',
+      {
+        paths: [
+          {
+            name: 'lodash',
+            message: 'Please use lodash-es instead.',
+          },
+          {
+            name: '@thirdweb-dev/react',
+            importNames: ['useAddress'],
+            message: 'Please use `useThirdwebAddress` instead.',
+          },
+          {
+            name: 'react-use',
+            importNames: ['useEffectOnce'],
+            message: 'Please use the version of this hook defined in `@/hooks`',
+          },
+        ],
+      },
+    ],
   },
 }

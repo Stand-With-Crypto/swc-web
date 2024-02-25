@@ -1,7 +1,6 @@
 'use client'
 
-import { MaybeAuthenticatedContent } from '@/components/app/authentication/maybeAuthenticatedContent'
-import { ThirdwebLoginDialog } from '@/components/app/authentication/thirdwebLoginContent'
+import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
@@ -17,17 +16,16 @@ export function StaticPagesCTA() {
           </p>
           <p className="m-0 text-muted-foreground">Don't worry, we'll show you how</p>
         </div>
-        <MaybeAuthenticatedContent
+        <LoginDialogWrapper
           authenticatedContent={
             <Button asChild size="lg">
               <InternalLink href={urls.profile()}>View Profile</InternalLink>
             </Button>
           }
+          loadingFallback={<Button disabled>GET STARTED</Button>}
         >
-          <ThirdwebLoginDialog>
-            <Button>GET STARTED</Button>
-          </ThirdwebLoginDialog>
-        </MaybeAuthenticatedContent>
+          <Button>GET STARTED</Button>
+        </LoginDialogWrapper>
       </div>
     </div>
   )

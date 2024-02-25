@@ -61,6 +61,7 @@ const getDefault = () => {
       user: {
         ...getSensitiveDataClientUser({
           ...mockUser(),
+          address: mockAddress(),
           primaryUserCryptoAddress: mockUserCryptoAddress(),
           primaryUserEmailAddress: mockUserEmailAddress(),
           hasOptedInToMembership: true,

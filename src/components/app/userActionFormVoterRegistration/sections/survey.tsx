@@ -24,7 +24,7 @@ export function Survey({ goToSection }: SurveyProps) {
       <UserActionFormVoterRegistrationLayout.Container>
         <div className="flex flex-col gap-24">
           <UserActionFormVoterRegistrationLayout.Heading
-            subtitle='Register to vote or check your voter registration and get a free "I Registered" NFT'
+            subtitle="Register to vote or check your voter registration and get a free “I'm a Voter” NFT"
             title="Are you registered to vote?"
           />
           <div className="flex flex-grow flex-col items-center justify-center gap-3 lg:flex-row">
@@ -56,7 +56,7 @@ export function Survey({ goToSection }: SurveyProps) {
           <p className="text-center">
             Personal information subject to{' '}
             <PrivacyPolicyDialog>
-              <span className="cursor-pointer text-blue-600">Stand with Crypto Privacy Policy</span>
+              <span className="cursor-pointer text-blue-600">Stand With Crypto Privacy Policy</span>
             </PrivacyPolicyDialog>
             .
           </p>

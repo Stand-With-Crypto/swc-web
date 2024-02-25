@@ -5,7 +5,16 @@ import { DTSI_AllPeopleSlugsQuery, DTSI_AllPeopleSlugsQueryVariables } from '@/d
 
 export const query = /* GraphQL */ `
   query AllPeopleSlugs {
-    people(limit: 1500, offset: 0) {
+    people(
+      limit: 1500
+      offset: 0
+      personRoleGroupingOr: [
+        CURRENT_US_HOUSE_OF_REPS
+        CURRENT_US_SENATE
+        RUNNING_FOR_PRESIDENT
+        US_PRESIDENT
+      ]
+    ) {
       slug
     }
   }

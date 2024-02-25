@@ -1,5 +1,5 @@
 import { ChevronLeftIcon, ChevronRightIcon, DotsHorizontalIcon } from '@radix-ui/react-icons'
-import _ from 'lodash'
+import { times } from 'lodash-es'
 
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
@@ -19,7 +19,7 @@ export function PaginationLinks({
       : currentPageNumber + 2 > totalPages
         ? Math.max(totalPages - 2, 1)
         : currentPageNumber - 1
-  const visiblePageNumbers = _.times(Math.min(3, totalPages), i => i + leftMostVisiblePageNumber)
+  const visiblePageNumbers = times(Math.min(3, totalPages), i => i + leftMostVisiblePageNumber)
   return (
     <div className="flex items-center gap-2">
       <Button asChild className="h-8 w-8 p-0" variant="secondary">
@@ -35,7 +35,7 @@ export function PaginationLinks({
             className="h-8 w-8 p-0"
             variant={1 === currentPageNumber ? 'default' : 'outline'}
           >
-            <InternalLink href={getPageUrl(1)}>
+            <InternalLink href={getPageUrl(1)} prefetch={false}>
               <span className="sr-only">Go to page {1}</span>
               {1}
             </InternalLink>
@@ -51,7 +51,7 @@ export function PaginationLinks({
           key={pageNumber}
           variant={pageNumber === currentPageNumber ? 'default' : 'outline'}
         >
-          <InternalLink href={getPageUrl(pageNumber)}>
+          <InternalLink href={getPageUrl(pageNumber)} prefetch={false}>
             <span className="sr-only">Go to page {pageNumber}</span>
             {pageNumber}
           </InternalLink>
@@ -67,7 +67,7 @@ export function PaginationLinks({
             className="h-8 w-8 p-0"
             variant={totalPages === currentPageNumber ? 'default' : 'outline'}
           >
-            <InternalLink href={getPageUrl(totalPages) || '#'}>
+            <InternalLink href={getPageUrl(totalPages) || '#'} prefetch={false}>
               <span className="sr-only">Go to page {totalPages}</span>
               {totalPages}
             </InternalLink>

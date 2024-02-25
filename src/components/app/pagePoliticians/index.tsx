@@ -23,7 +23,7 @@ export function PagePoliticians({
         <ClientCurrentUserDTSIPersonCardOrCTA locale={locale} />
       </section>
       <section>
-        <DTSIClientPersonDataTable initialData={dtsiHomepagePeople.people} locale={locale} />
+        <DTSIClientPersonDataTable initialData={dtsiHomepagePeople.people} />
       </section>
     </>
   )

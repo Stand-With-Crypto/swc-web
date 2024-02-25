@@ -12,9 +12,10 @@ import {
   UserInformationVisibility,
 } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
-import _ from 'lodash'
+import { compact, groupBy } from 'lodash-es'
 import { NextApiRequest } from 'next'
 
+import { parseThirdwebAddress } from '@/hooks/useThirdwebAddress/parseThirdwebAddress'
 import { CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/upsertAdvocateInCapitolCanary'
 import { inngest } from '@/inngest/inngest'
 import {
@@ -56,9 +57,11 @@ type UpsertedUser = User & {
 }
 
 export async function onLogin(
-  cryptoAddress: string,
+  _cryptoAddress: string,
   req: NextApiRequest,
 ): Promise<AuthSessionMetadata> {
+  const cryptoAddress = parseThirdwebAddress(_cryptoAddress)
+
   const localUser = parseLocalUserFromCookiesForPageRouter(req)
   const log = getLog(cryptoAddress)
 
@@ -86,7 +89,15 @@ export async function onLogin(
     localUser,
     getUserSessionId: () => getUserSessionIdOnPageRouter(req),
     injectedFetchEmbeddedWalletMetadataFromThirdweb: fetchEmbeddedWalletMetadataFromThirdweb,
-  }).then(res => ({ userId: res.userId }))
+  })
+    .then(res => ({ userId: res.userId }))
+    .catch(e => {
+      Sentry.captureException(e, {
+        tags: { domain: 'onLogin' },
+        extra: { cryptoAddress, localUser },
+      })
+      throw e
+    })
 }
 
 interface NewLoginParams {
@@ -110,7 +121,7 @@ IF YOU MODIFY THIS FUNCTION, PLEASE VERIFY THE SMOKE TESTS IN "npm run ts src/bi
 *****************************
 *****************************
 
-This logic governs all the user matching/creation/updating/merge logic that may occur when a user logs in to our website. 
+This logic governs all the user matching/creation/updating/merge logic that may occur when a user logs in to our website.
 This logic only runs when a user logs in and we can't find a verified cryptoAddress to match the thirdweb-authenticated crypto address to
 Below is the desired behavior of this function:
 
@@ -125,7 +136,7 @@ find any existing users in our system that
     (users previously requested a wallet to airdrop to)
 
 @function findUsersToMerge:
-If we find any users using the method above 
+If we find any users using the method above
 - we should merge them using the following logic:
   - any users found that match the unverified crypto address should be merged
   - any users found that match via verified email should be merged UNLESS the user already has a verified crypto address
@@ -133,7 +144,7 @@ If we find any users using the method above
 - situations we want to avoid merging (which is why we check for verified crypto address) because it would be confusing for the user and it's unclear whether that's their intent:
   - a user logs in to multiple crypto wallets with the same session id
   - a user creates a web3 wallet with a verified email from CB and then creates an embedded wallet with the same email
-  
+
 @function mergeUsers:
 This function gets trigger if there are users to merge, and will:
 - reassign all the actions to a single user
@@ -161,7 +172,8 @@ This function will ensure we create a user opt-in action if one does not already
 */
 
 export async function onNewLogin(props: NewLoginParams) {
-  const { cryptoAddress, localUser } = props
+  const { cryptoAddress: _cryptoAddress, localUser } = props
+  const cryptoAddress = parseThirdwebAddress(_cryptoAddress)
   const log = getLog(cryptoAddress)
 
   // queryMatchingUsers logic
@@ -169,7 +181,7 @@ export async function onNewLogin(props: NewLoginParams) {
   if (existingUsersWithSource.length) {
     log(
       `queryMatchingUsers: found existing users:\n${Object.entries(
-        _.groupBy(existingUsersWithSource, x => x.sourceOfExistingUser),
+        groupBy(existingUsersWithSource, x => x.sourceOfExistingUser),
       )
         .map(([key, val]) => `- ${key}: ${val.length}`)
         .join('\n')}`,
@@ -256,6 +268,7 @@ export async function onNewLogin(props: NewLoginParams) {
     user,
     userCryptoAddress,
     localUser,
+    wasUserCreated,
   })
   if (localUser) {
     getServerPeopleAnalytics({ userId: user.id, localUser }).setOnce(
@@ -320,7 +333,7 @@ async function queryMatchingUsers({
       userCryptoAddresses: true,
     },
     where: {
-      OR: _.compact([
+      OR: compact([
         {
           userCryptoAddresses: {
             some: { cryptoAddress, hasBeenVerifiedViaAuth: false },
@@ -386,11 +399,14 @@ function findUsersToMerge(
     if (user.sourceOfExistingUser === 'Unverified User Crypto Address') {
       return true
     }
+    if (user.user.userCryptoAddresses.some(addr => addr.hasBeenVerifiedViaAuth)) {
+      return false
+    }
     if (user.sourceOfExistingUser === 'Embedded Wallet Email Address') {
-      return !user.user.primaryUserCryptoAddressId
+      return true
     }
     if (user.sourceOfExistingUser === 'Session Id') {
-      return !user.user.primaryUserCryptoAddressId
+      return true
     }
   })
   const userToKeep =
@@ -431,7 +447,7 @@ async function maybeUpsertCryptoAddress({
 }) {
   const log = getLog(cryptoAddress)
   const existingUserCryptoAddress = user.userCryptoAddresses.find(
-    addr => addr.cryptoAddress === cryptoAddress,
+    addr => parseThirdwebAddress(addr.cryptoAddress) === cryptoAddress,
   )
   if (existingUserCryptoAddress) {
     if (existingUserCryptoAddress.hasBeenVerifiedViaAuth) {
@@ -451,14 +467,11 @@ async function maybeUpsertCryptoAddress({
       where: { id: existingUserCryptoAddress.id },
       data: {
         hasBeenVerifiedViaAuth: true,
-        ...(user.primaryUserCryptoAddressId
-          ? {}
-          : { asPrimaryUserCryptoAddress: { connect: { id: user.id } } }),
+        asPrimaryUserCryptoAddress: { connect: { id: user.id } },
       },
     })
     existingUserCryptoAddress.hasBeenVerifiedViaAuth = true
-    user.primaryUserCryptoAddressId =
-      user.primaryUserCryptoAddressId || existingUserCryptoAddress.id
+    user.primaryUserCryptoAddressId = existingUserCryptoAddress.id
     return { user, updatedCryptoAddress: existingUserCryptoAddress }
   }
   log(`maybeUpsertCryptoAddress: creating new crypto address`)
@@ -602,7 +615,9 @@ async function triggerPostLoginUserActionSteps({
   user,
   userCryptoAddress,
   localUser,
+  wasUserCreated,
 }: {
+  wasUserCreated: boolean
   user: UpsertedUser
   userCryptoAddress: UserCryptoAddress
   localUser: ServerLocalUser | null
@@ -638,6 +653,12 @@ async function triggerPostLoginUserActionSteps({
     })
     log(`triggerPostLoginUserActionSteps: opt in user action created`)
     await claimNFT(optInUserAction, userCryptoAddress)
+    getServerAnalytics({ userId: user.id, localUser }).trackUserActionCreated({
+      actionType: UserActionType.OPT_IN,
+      campaignName: UserActionOptInCampaignName.DEFAULT,
+      creationMethod: 'On Site',
+      userState: wasUserCreated ? 'New' : 'Existing',
+    })
   } else {
     log(`triggerPostLoginUserActionSteps: opt in user action previously existed`)
   }

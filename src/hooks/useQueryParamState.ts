@@ -1,5 +1,7 @@
+'use client'
+
 import { useCallback } from 'react'
-import _ from 'lodash'
+import { isNil } from 'lodash-es'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
 import { useHasHydrated } from '@/hooks/useHasHydrated'
@@ -26,7 +28,7 @@ export const useQueryParamState = ({
         throw new Error('not possible state for useQueryParamState')
       }
       const params = new URLSearchParams(searchParams.toString())
-      if (_.isNil(newValue)) {
+      if (isNil(newValue)) {
         params.delete(queryParamKey)
       } else {
         params.set(queryParamKey, newValue)

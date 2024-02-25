@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { capitalize } from 'lodash'
+import { capitalize } from 'lodash-es'
 import { toast } from 'sonner'
 
 import {

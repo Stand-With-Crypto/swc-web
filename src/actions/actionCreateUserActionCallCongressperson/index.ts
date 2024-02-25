@@ -86,7 +86,7 @@ async function _actionCreateUserActionCallCongressperson(
     localUser,
   })
 
-  const recentUserAction = await getRecentUserActionByUserId(user.id)
+  const recentUserAction = await getRecentUserActionByUserId(user.id, validatedInput)
   if (recentUserAction) {
     logSpamActionSubmissions({
       validatedInput,
@@ -140,11 +140,14 @@ async function createUser(sharedDependencies: Pick<SharedDependencies, 'localUse
   return createdUser
 }
 
-async function getRecentUserActionByUserId(userId: User['id']) {
+async function getRecentUserActionByUserId(
+  userId: User['id'],
+  validatedInput: z.SafeParseSuccess<CreateActionCallCongresspersonInput>,
+) {
   return prismaClient.userAction.findFirst({
     where: {
       actionType: UserActionType.CALL,
-      campaignName: UserActionCallCampaignName.DEFAULT,
+      campaignName: validatedInput.data.campaignName,
       userId: userId,
     },
   })
@@ -156,22 +159,20 @@ function logSpamActionSubmissions({
   userId,
   sharedDependencies,
 }: {
-  validatedInput: z.SafeParseSuccess<
-    z.infer<typeof createActionCallCongresspersonInputValidationSchema>
-  >
+  validatedInput: z.SafeParseSuccess<CreateActionCallCongresspersonInput>
   userAction: UserAction
   userId: User['id']
   sharedDependencies: Pick<SharedDependencies, 'analytics'>
 }) {
   sharedDependencies.analytics.trackUserActionCreatedIgnored({
     actionType: UserActionType.CALL,
-    campaignName: UserActionCallCampaignName.DEFAULT,
+    campaignName: validatedInput.data.campaignName,
     reason: 'Too Many Recent',
     userState: 'Existing',
     ...convertAddressToAnalyticsProperties(validatedInput.data.address),
   })
   Sentry.captureMessage(
-    `duplicate ${UserActionType.CALL} user action for campaign ${UserActionCallCampaignName.DEFAULT} submitted`,
+    `duplicate ${UserActionType.CALL} user action for campaign ${validatedInput.data.campaignName} submitted`,
     {
       extra: { validatedInput: validatedInput.data, userAction },
       user: { id: userId },
@@ -188,7 +189,7 @@ async function createActionAndUpdateUser<U extends User>({
 }: {
   user: U
   isNewUser: boolean
-  validatedInput: z.infer<typeof createActionCallCongresspersonInputValidationSchema>
+  validatedInput: CreateActionCallCongresspersonInput
   userMatch: UserAndMethodOfMatch
   sharedDependencies: Pick<SharedDependencies, 'sessionId' | 'analytics' | 'peopleAnalytics'>
 }) {
@@ -219,21 +220,22 @@ async function createActionAndUpdateUser<U extends User>({
       userActionCall: true,
     },
   })
-
-  const updatedUser = await prismaClient.user.update({
-    where: { id: user.id },
-    data: {
-      address: {
-        connect: {
-          id: userAction.userActionCall!.addressId,
+  const updatedUser = userAction.userActionCall!.addressId
+    ? await prismaClient.user.update({
+        where: { id: user.id },
+        data: {
+          address: {
+            connect: {
+              id: userAction.userActionCall!.addressId,
+            },
+          },
         },
-      },
-    },
-    include: {
-      primaryUserCryptoAddress: true,
-      address: true,
-    },
-  })
+        include: {
+          primaryUserCryptoAddress: true,
+          address: true,
+        },
+      })
+    : user
   logger.info('created user action and updated user')
 
   sharedDependencies.analytics.trackUserActionCreated({

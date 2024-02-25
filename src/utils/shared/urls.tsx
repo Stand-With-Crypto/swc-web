@@ -4,6 +4,7 @@ import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
 export const getIntlPrefix = (locale: SupportedLocale) =>
+  // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
   locale === DEFAULT_LOCALE ? '' : `/${locale}`
 
 export const getIntlUrls = (
@@ -24,13 +25,18 @@ export const getIntlUrls = (
     resources: () => `${localePrefix}/resources`,
     donate: () => `${localePrefix}/donate`,
     leaderboard: (params?: { pageNum?: number; tab: RecentActivityAndLeaderboardTabs }) => {
+      const tabPrefix =
+        params?.tab === RecentActivityAndLeaderboardTabs.LEADERBOARD
+          ? '/community/leaderboard'
+          : '/community'
+
       if (!params) {
-        return `${localePrefix}/leaderboard`
+        return `${localePrefix}${tabPrefix}`
       }
       const pageNum = params.pageNum ?? 1
-      const tabPath =
-        params.tab === RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY ? '' : `/${params.tab}`
-      return `${localePrefix}/leaderboard${pageNum !== 1 || tabPath ? `/${pageNum}${tabPath}` : ''}`
+      const shouldSuppressPageNum = pageNum === 1
+      const tabSuffix = shouldSuppressPageNum ? '' : `/${pageNum}`
+      return `${localePrefix}${tabPrefix}${tabSuffix}`
     },
     politiciansHomepage: () => `${localePrefix}/politicians`,
     politicianDetails: (dtsiSlug: string) => `${localePrefix}/politicians/person/${dtsiSlug}`,
@@ -49,7 +55,7 @@ export const fullUrl = (path: string) => {
     case 'local':
       return `http://localhost:3000${path}`
     case 'testing':
-      return `https://swc-web-testing.vercel.app${path}`
+      return `https://testing.standwithcrypto.org${path}`
     case 'preview':
       return `${NEXT_PUBLIC_VERCEL_URL!}${path}`
     case 'production':
@@ -68,7 +74,7 @@ export const externalUrls = {
     `https://www.dotheysupportit.com/people/${slug}/create-stance`,
   emailFeedback: () => 'mailto:info@standwithcrypto.org',
   facebook: () => 'https://www.facebook.com/standwithcrypto',
-  instagram: () => 'https://www.instagram.com/standwithcrypto',
+  instagram: () => 'https://www.instagram.com/standwithcrypto/',
   linkedin: () => 'https://www.linkedin.com/company/standwithcrypto/',
   twitter: () => 'https://twitter.com/standwithcrypto',
   youtube: () => 'https://www.youtube.com/@StandWithCryptoAlliance/featured',
@@ -78,7 +84,6 @@ export const externalUrls = {
 }
 
 export const apiUrls = {
-  mockLeaderboard: (offset: number) => `/api/mock/leaderboard/${offset}`,
   dtsiPeopleByCongressionalDistrict: ({
     stateCode,
     districtNumber,
@@ -87,7 +92,6 @@ export const apiUrls = {
     districtNumber: number
   }) => `/api/public/dtsi/by-geography/usa/${stateCode}/${districtNumber}`,
   totalDonations: (locale: SupportedLocale) => `/api/public/total-donations/${locale}`,
-  mockTotalDonations: (locale: SupportedLocale) => `/api/mock/total-donations/${locale}`,
   userPerformedUserActionTypes: () => `/api/identified-user/performed-user-action-types`,
   userFullProfileInfo: () => `/api/identified-user/full-profile-info`,
   detectWipedDatabase: () => `/api/identified-user/detect-wiped-database`,

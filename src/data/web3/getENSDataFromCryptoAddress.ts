@@ -1,5 +1,5 @@
 import * as Sentry from '@sentry/nextjs'
-import _ from 'lodash'
+import { compact } from 'lodash-es'
 
 import { formatENSAvatar } from '@/utils/server/formatENSAvatar'
 import { thirdwebRPCClient } from '@/utils/server/thirdweb/thirdwebRPCClient'
@@ -12,8 +12,15 @@ const client = thirdwebRPCClient
 async function _getENSDataMapFromCryptoAddresses(
   _addresses: string[],
 ): Promise<Record<string, UserENSData>> {
-  const addresses = _addresses.map(addr => stringToEthereumAddress(addr))
-  const nameResult = await Promise.all(addresses.map(address => client.getEnsName({ address })))
+  const addresses = compact(_addresses.map(addr => stringToEthereumAddress(addr)))
+  const nameResult = await Promise.all(
+    addresses.map(address =>
+      client.getEnsName({ address }).catch(e => {
+        Sentry.captureException(e, { extra: { address } })
+        return null
+      }),
+    ),
+  )
   const addressesWithENS = nameResult
     .map((result, index) => ({
       cryptoAddress: addresses[index],

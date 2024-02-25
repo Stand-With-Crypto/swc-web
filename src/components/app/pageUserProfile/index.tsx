@@ -1,5 +1,5 @@
 import { UserActionType } from '@prisma/client'
-import _ from 'lodash'
+import { sumBy, uniq } from 'lodash-es'
 import { redirect, RedirectType } from 'next/navigation'
 
 import { PageUserProfileUser } from '@/components/app/pageUserProfile/getAuthenticatedData'
@@ -38,7 +38,8 @@ export function PageUserProfile({
     )
   }
   const { userActions } = user
-  const performedUserActionTypes = _.uniq(userActions.map(x => x.actionType))
+  const performedUserActionTypes = uniq(userActions.map(x => x.actionType))
+  const excludeUserActionTypes = user.hasEmbeddedWallet ? [UserActionType.NFT_MINT] : []
   return (
     <div className="container space-y-10 lg:space-y-16">
       {/* LATER-TASK enable this feature */}
@@ -55,7 +56,9 @@ export function PageUserProfile({
           <div className="flex items-center gap-2">
             <UserAvatar size={48} user={user} />
             <div>
-              <div className="text-lg font-bold">{getSensitiveDataUserDisplayName(user)}</div>
+              <div className="max-w-[120px] truncate text-lg font-bold md:max-w-md">
+                {getSensitiveDataUserDisplayName(user)}
+              </div>
               <div className="text-sm text-gray-500">
                 Joined{' '}
                 <FormattedDatetime
@@ -69,14 +72,18 @@ export function PageUserProfile({
           <div>
             <UpdateUserProfileFormDialog user={user}>
               {hasCompleteUserProfile(user) ? (
-                <Button variant="secondary">Edit your profile</Button>
+                <Button variant="secondary">
+                  Edit <span className="mx-1 hidden sm:inline-block">your</span> profile
+                </Button>
               ) : (
-                <Button>Finish your profile</Button>
+                <Button>
+                  Finish <span className="mx-1 hidden sm:inline-block">your</span> profile
+                </Button>
               )}
             </UpdateUserProfileFormDialog>
           </div>
         </div>
-        <div className="grid grid-cols-4 rounded-3xl bg-blue-50 p-3 text-center sm:p-6">
+        <div className="grid grid-cols-3 rounded-3xl bg-blue-50 p-3 text-center sm:p-6">
           {[
             {
               label: 'Actions',
@@ -86,7 +93,7 @@ export function PageUserProfile({
               label: 'Donated',
               value: (
                 <FormattedCurrency
-                  amount={_.sumBy(userActions, x => {
+                  amount={sumBy(userActions, x => {
                     if (x.actionType === UserActionType.DONATION) {
                       return x.amountUsd
                     }
@@ -96,10 +103,6 @@ export function PageUserProfile({
                   locale={locale}
                 />
               ),
-            },
-            {
-              label: 'Leaderboard',
-              value: <>TODO</>,
             },
             {
               label: 'NFTs',
@@ -124,24 +127,31 @@ export function PageUserProfile({
         </PageTitle>
         <PageSubTitle className="mb-5">
           You've completed {performedUserActionTypes.length} out of{' '}
-          {Object.values(UserActionType).length} actions. Keep going!
+          {Object.values(UserActionType).length - excludeUserActionTypes.length} actions. Keep
+          going!
         </PageSubTitle>
         <div className="mx-auto mb-10 max-w-xl">
           <Progress
             value={(performedUserActionTypes.length / Object.values(UserActionType).length) * 100}
           />
         </div>
-        <UserActionRowCTAsList performedUserActionTypes={performedUserActionTypes} />
+        <UserActionRowCTAsList
+          excludeUserActionTypes={excludeUserActionTypes}
+          performedUserActionTypes={performedUserActionTypes}
+        />
       </section>
-      <section>
+      {/* hiding nft section until bugs are resolved */}
+      {/* <section>
         <PageTitle className="mb-4" size="sm">
           Your NFTs
         </PageTitle>
         <PageSubTitle className="mb-5">
           You will receive free NFTs for completing advocacy-related actions.
         </PageSubTitle>
-        <p className="text-center">TODO</p>
-      </section>
+        <div>
+          <NFTDisplay userActions={userActions} />
+        </div>
+      </section> */}
       <section>
         <PageTitle className="mb-4" size="sm">
           Refer Your Friends

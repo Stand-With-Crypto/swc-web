@@ -7,6 +7,7 @@ interface CoinbaseCommercePaymentDetails {
   status?: string
   detected_at?: string
   value?: {
+    // Emitted from legacy Commerce API and new (web3) Commerce API.
     local: { amount: string; currency: string }
     crypto: { amount: string; currency: string }
   }
@@ -44,7 +45,8 @@ interface CoinbaseCommercePaymentEventData {
     underpayment_absolute_threshold: { amount: string; currency: string }
     underpayment_relative_threshold: string
   }
-  pricing: {
+  pricing?: {
+    // Emitted from new (web3) Commerce API.
     local: { amount: string; currency: string }
     settlement: { amount: string; currency: string }
   }
@@ -82,13 +84,35 @@ export const zodCoinbaseCommercePayment = z.object({
     type: z.string(),
     data: z.object({
       expires_at: z.string(),
-      pricing: z.object({
-        local: z.object({
-          amount: z.string(),
-          currency: z.string(),
-        }),
-      }),
-      metadata: z.record(z.string(), z.string()),
+      payments: z
+        .array(
+          z
+            .object({
+              value: z
+                .object({
+                  local: z.object({
+                    amount: z.string(),
+                    currency: z.string(),
+                  }),
+                  crypto: z.object({
+                    amount: z.string(),
+                    currency: z.string(),
+                  }),
+                })
+                .optional(),
+            })
+            .optional(),
+        )
+        .optional(),
+      pricing: z
+        .object({
+          local: z.object({
+            amount: z.string(),
+            currency: z.string(),
+          }),
+        })
+        .optional(),
+      metadata: z.record(z.string().or(z.null()).optional()),
     }),
   }),
 })

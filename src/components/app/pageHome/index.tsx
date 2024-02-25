@@ -1,4 +1,3 @@
-import { Suspense } from 'react'
 import { ArrowUpRight, ThumbsDown, ThumbsUp } from 'lucide-react'
 
 import { DTSIPersonCard } from '@/components/app/dtsiPersonCard'
@@ -6,21 +5,22 @@ import { DelayedRecentActivity } from '@/components/app/pageHome/delayedRecentAc
 import { HeroCTA } from '@/components/app/pageHome/heroCTA'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
 import { SumDonationsByUserRow } from '@/components/app/sumDonationsByUserRow/sumDonationsByUserRow'
+import { UserActionFormVoterRegistrationDeeplinkWrapper } from '@/components/app/userActionFormVoterRegistration/homepageDialogDeeplinkWrapper'
 import { UserActionRowCTAsAnimatedListWithApi } from '@/components/app/userActionRowCTA/userActionRowCTAsAnimatedListWithApi'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
+import { dialogContentStyles } from '@/components/ui/dialog/styles'
 import { NextImage } from '@/components/ui/image'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { LazyResponsiveYoutube } from '@/components/ui/responsiveYoutube/lazyLoad'
-import { Skeleton } from '@/components/ui/skeleton'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
 import { PageProps } from '@/types'
 import { groupAndSortDTSIPeopleByCryptoStance } from '@/utils/dtsi/dtsiPersonUtils'
 import { getIntlUrls } from '@/utils/shared/urls'
+import { cn } from '@/utils/web/cn'
 
 import { TopLevelMetrics } from './topLevelMetrics'
 
@@ -35,7 +35,7 @@ export function PageHome({
 }: PageProps & Awaited<ReturnType<typeof getHomepageData>>) {
   const { locale } = params
   const urls = getIntlUrls(locale)
-  const groupedDTSIHomepagePeople = groupAndSortDTSIPeopleByCryptoStance(dtsiHomepagePeople.people)
+  const groupedDTSIHomepagePeople = groupAndSortDTSIPeopleByCryptoStance(dtsiHomepagePeople)
   return (
     <>
       <section className="grid-fl mb-6 grid grid-cols-1 items-center gap-4 lg:container lg:grid-cols-2 lg:gap-8">
@@ -51,9 +51,7 @@ export function PageHome({
           <HeroCTA />
         </div>
         <div className="order-0 md:container lg:order-1 lg:px-0">
-          <Dialog
-            analytics={{ Category: 'Homepage Hero Section', CTA: '2023-12-11 Presidential Forum' }}
-          >
+          <Dialog analytics={{ Category: 'Homepage Hero Section', CTA: 'Register to vote' }}>
             <DialogTrigger asChild>
               <LinkBox className="relative h-[320px] cursor-pointer overflow-hidden md:rounded-xl lg:h-[400px]">
                 <NextImage
@@ -74,23 +72,21 @@ export function PageHome({
                   }}
                 >
                   <p>
-                    First in the Nation Crypto Presidential Forum December 11th 2023 St. Anselm
-                    College
+                    Register to vote or check your voter registration and get a free “I’m a Voter”
+                    NFT
                   </p>
                   <Button
                     className={linkBoxLinkClassName}
                     data-link-box-subject
                     variant="secondary"
                   >
-                    Watch <ArrowUpRight />
+                    Register <ArrowUpRight />
                   </Button>
                 </div>
               </LinkBox>
             </DialogTrigger>
-            <DialogContent className="w-full max-w-7xl md:p-14">
-              <Suspense fallback={<Skeleton className="h-20 w-full" />}>
-                <LazyResponsiveYoutube videoId="uETMq54w45Y" />
-              </Suspense>
+            <DialogContent className={cn(dialogContentStyles, 'max-w-3xl')}>
+              <UserActionFormVoterRegistrationDeeplinkWrapper />
             </DialogContent>
           </Dialog>
         </div>

@@ -7,8 +7,9 @@ import {
   UserActionEmailRecipient,
   UserActionOptIn,
   UserActionType,
+  UserActionVoterRegistration,
 } from '@prisma/client'
-import _ from 'lodash'
+import { keyBy } from 'lodash-es'
 
 import { ClientNFTMint, getClientNFTMint } from '@/clientModels/clientNFTMint'
 import { ClientModel, getClientModel } from '@/clientModels/utils'
@@ -29,17 +30,18 @@ type ClientUserActionDatabaseQuery = UserAction & {
   userActionCall: UserActionCall | null
   userActionDonation: UserActionDonation | null
   userActionOptIn: UserActionOptIn | null
+  userActionVoterRegistration: UserActionVoterRegistration | null
 }
 
 type ClientUserActionEmailRecipient = Pick<UserActionEmailRecipient, 'id'> & {
-  person: DTSIPersonForUserActions
+  person: DTSIPersonForUserActions | null
 }
 type ClientUserActionEmail = {
   userActionEmailRecipients: ClientUserActionEmailRecipient[]
   actionType: typeof UserActionType.EMAIL
 }
 type ClientUserActionCall = {
-  person: DTSIPersonForUserActions
+  person: DTSIPersonForUserActions | null
   actionType: typeof UserActionType.CALL
 }
 type ClientUserActionDonation = Pick<UserActionDonation, 'amountCurrencyCode' | 'recipient'> & {
@@ -56,7 +58,9 @@ type ClientUserActionOptIn = Pick<UserActionOptIn, 'optInType'> & {
 }
 // Added here as a placeholder for type inference until we have some tweet-specific fields
 type ClientUserActionTweet = { actionType: typeof UserActionType.TWEET }
-type ClientUserActionVoterRegistration = { actionType: typeof UserActionType.VOTER_REGISTRATION }
+type ClientUserActionVoterRegistration = Pick<UserActionVoterRegistration, 'usaState'> & {
+  actionType: typeof UserActionType.VOTER_REGISTRATION
+}
 
 /*
 At the database schema level we can't enforce that a single action only has one "type" FK, but at the client level we can and should
@@ -96,7 +100,7 @@ export const getClientUserAction = ({
   record: ClientUserActionDatabaseQuery
   dtsiPeople: DTSIPersonForUserActions[]
 }): ClientUserAction => {
-  const peopleBySlug = _.keyBy(dtsiPeople, x => x.slug)
+  const peopleBySlug = keyBy(dtsiPeople, x => x.slug)
   const { id, datetimeCreated, actionType, nftMint } = record
   const sharedProps = {
     id,
@@ -111,13 +115,13 @@ export const getClientUserAction = ({
   switch (actionType) {
     case UserActionType.OPT_IN: {
       const { optInType } = getRelatedModel(record, 'userActionOptIn')
-      const callFields: ClientUserActionOptIn = { optInType, actionType }
-      return getClientModel({ ...sharedProps, ...callFields })
+      const optInFields: ClientUserActionOptIn = { optInType, actionType }
+      return getClientModel({ ...sharedProps, ...optInFields })
     }
     case UserActionType.CALL: {
       const { recipientDtsiSlug } = getRelatedModel(record, 'userActionCall')
       const callFields: ClientUserActionCall = {
-        person: peopleBySlug[recipientDtsiSlug],
+        person: recipientDtsiSlug ? peopleBySlug[recipientDtsiSlug] : null,
         actionType,
       }
       return getClientModel({ ...sharedProps, ...callFields })
@@ -142,7 +146,7 @@ export const getClientUserAction = ({
         actionType,
         userActionEmailRecipients: userActionEmailRecipients.map(x => ({
           id: x.id,
-          person: peopleBySlug[x.dtsiSlug],
+          person: x.dtsiSlug ? peopleBySlug[x.dtsiSlug] : null,
         })),
       }
       return getClientModel({ ...sharedProps, ...emailFields })
@@ -158,7 +162,9 @@ export const getClientUserAction = ({
       return getClientModel({ ...sharedProps, actionType })
     }
     case UserActionType.VOTER_REGISTRATION: {
-      return getClientModel({ ...sharedProps, actionType })
+      const { usaState } = getRelatedModel(record, 'userActionVoterRegistration')
+      const voterRegistrationFields: ClientUserActionVoterRegistration = { usaState, actionType }
+      return getClientModel({ ...sharedProps, ...voterRegistrationFields })
     }
   }
   throw new Error(`getClientUserAction: no user action fk found for id ${id}`)

@@ -11,3 +11,5 @@ export const isCypress = Boolean(
 )
 
 export const isStorybook = Boolean(process.env.STORYBOOK)
+
+export const isJest = typeof jest !== 'undefined'

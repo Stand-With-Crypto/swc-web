@@ -20,15 +20,15 @@ const DO_THEY_SUPPORT_IT_API_KEY = requiredEnv(
 )
 
 export const fetchDTSI = async <R, V = object>(query: string, variables?: V) => {
-  // we set USE_DTSI_PRODUCTION_API_ON_LOCAL in code in some of out bin files.
+  // we set USE_DTSI_PRODUCTION_API in code in some of out bin files.
   // To ensure that logic gets picked up, we check the process.env dynamically within the function itself
-  const USE_DTSI_PRODUCTION_API_ON_LOCAL = toBool(process.env.USE_DTSI_PRODUCTION_API_ON_LOCAL)
-  const API_ENDPOINT =
-    USE_DTSI_PRODUCTION_API_ON_LOCAL || NEXT_PUBLIC_ENVIRONMENT !== 'local'
-      ? 'https://www.dotheysupportit.com/api/graphql'
-      : 'https://testing.dotheysupportit.com/api/graphql'
-  if (USE_DTSI_PRODUCTION_API_ON_LOCAL) {
-    logger.info(`using production DTSI API on local`)
+  const USE_DTSI_PRODUCTION_API =
+    toBool(process.env.USE_DTSI_PRODUCTION_API) || NEXT_PUBLIC_ENVIRONMENT === 'production'
+  const API_ENDPOINT = USE_DTSI_PRODUCTION_API
+    ? 'https://www.dotheysupportit.com/api/graphql'
+    : 'https://testing.dotheysupportit.com/api/graphql'
+  if (USE_DTSI_PRODUCTION_API && NEXT_PUBLIC_ENVIRONMENT !== 'production') {
+    logger.info(`OVERRIDE: production DTSI API`)
   }
   logger.debug(`fetchDTSI called`)
   const response = await pRetry(

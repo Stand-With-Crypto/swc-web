@@ -9,7 +9,7 @@ it('page - politicians interactions', () => {
   // find the element with the data-e2e attribute of "state-filter-trigger"
   cy.get('[data-testid="state-filter-trigger"]').click()
   cy.get('[role="option"]').contains('AK').click()
-  cy.get('tbody').find('tr').should('have.length', 4)
+  cy.get('tbody').find('tr').should('have.length', 3)
   cy.get('[data-testid="state-filter-trigger"]').click()
   cy.get('[role="option"]').contains('All').click()
   cy.get('tbody').find('tr').should('have.length', 10)

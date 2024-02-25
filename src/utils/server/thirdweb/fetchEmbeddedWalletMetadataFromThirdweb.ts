@@ -42,5 +42,11 @@ export async function fetchEmbeddedWalletMetadataFromThirdweb(cryptoAddress: str
   }
 
   const data = (await resp.json()) as ThirdwebEmbeddedWalletMetadata[]
-  return data[0] || null
+  const metadata = data?.[0]
+  return metadata
+    ? {
+        ...metadata,
+        email: metadata.email.toLowerCase(),
+      }
+    : null
 }

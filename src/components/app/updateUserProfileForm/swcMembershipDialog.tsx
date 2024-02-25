@@ -20,7 +20,7 @@ export function SWCMembershipDialog({ children }: { children: React.ReactNode })
               future of crypto in America
             </li>
             <li>
-              Make your voice heard and ensure Stand with Crypto will advocate for issues you care
+              Make your voice heard and ensure Stand With Crypto will advocate for issues you care
               about
             </li>
             <li>

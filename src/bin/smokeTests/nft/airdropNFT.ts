@@ -2,18 +2,18 @@ import { NFTCurrency, NFTMintStatus, UserActionOptInType, UserActionType } from 
 import { Decimal } from '@prisma/client/runtime/library'
 
 import { runBin } from '@/bin/runBin'
+import { parseThirdwebAddress } from '@/hooks/useThirdwebAddress/parseThirdwebAddress'
 import { AIRDROP_NFT_INNGEST_EVENT_NAME } from '@/inngest/functions/airdropNFT'
 import { inngest } from '@/inngest/inngest'
-import { NFT_CONTRACT_ADDRESS } from '@/utils/server/nft/contractAddress'
+import { NFT_SLUG_BACKEND_METADATA } from '@/utils/server/nft/constants'
 import { AirdropPayload } from '@/utils/server/nft/payload'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { NFTSlug } from '@/utils/shared/nft'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
 
-const LOCAL_USER_CRYPTO_ADDRESS = requiredEnv(
-  process.env.LOCAL_USER_CRYPTO_ADDRESS,
-  'process.env.LOCAL_USER_CRYPTO_ADDRESS',
+const LOCAL_USER_CRYPTO_ADDRESS = parseThirdwebAddress(
+  requiredEnv(process.env.LOCAL_USER_CRYPTO_ADDRESS, 'process.env.LOCAL_USER_CRYPTO_ADDRESS'),
 )
 
 /*
@@ -32,7 +32,7 @@ async function smokeTestAirdropNFTWithInngest() {
           nftSlug: NFTSlug.SWC_SHIELD,
           status: NFTMintStatus.REQUESTED,
           costAtMint: 0.0,
-          contractAddress: NFT_CONTRACT_ADDRESS[NFTSlug.SWC_SHIELD],
+          contractAddress: NFT_SLUG_BACKEND_METADATA[NFTSlug.SWC_SHIELD].contractAddress,
           costAtMintCurrencyCode: NFTCurrency.ETH,
           costAtMintUsd: new Decimal(0),
         },
@@ -49,7 +49,7 @@ async function smokeTestAirdropNFTWithInngest() {
 
   const payload: AirdropPayload = {
     nftMintId: action.nftMintId!,
-    contractAddress: NFT_CONTRACT_ADDRESS[NFTSlug.SWC_SHIELD],
+    nftSlug: NFTSlug.SWC_SHIELD,
     recipientWalletAddress: LOCAL_USER_CRYPTO_ADDRESS,
   }
 

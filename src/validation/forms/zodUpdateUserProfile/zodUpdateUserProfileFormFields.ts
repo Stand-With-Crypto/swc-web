@@ -11,3 +11,6 @@ export const zodUpdateUserProfileFormFields = zodUpdateUserProfileBase
     address: zodGooglePlacesAutocompletePrediction.nullable(),
   })
   .superRefine(zodUpdateUserProfileBaseSuperRefine)
+// previously there was a requirement that we don't allow users to become members if
+// they dont fill out their first/last name, but this causes issues because we stop showing the checkbox
+// but a user can still modify their profile and remove their first/last name, causing the form to break (wont submit but no errors are displayed)

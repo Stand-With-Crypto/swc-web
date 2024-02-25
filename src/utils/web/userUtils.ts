@@ -5,14 +5,35 @@ import {
   SensitiveDataClientUser,
   SensitiveDataClientUserWithENSData,
 } from '@/clientModels/clientUser/sensitiveDataClientUser'
-import { userFullName } from '@/utils/shared/userFullName'
+import { userFirstNameWithLastInitial } from '@/utils/shared/userFullName'
 
-export const getUserDisplayName = (user: ClientUserWithENSData | null) => {
+/*
+Some high profile organizations had donations that aren't linked to their actual
+ENS but want the ENS displayed on the website. This hardcode fixes that issue.
+*/
+const HARDCODED_USER_DISPLAY_NAME: Record<string, { displayName: string }> = {
+  '70087263-eabb-4200-93ac-e5856648f73d': {
+    displayName: 'geminifrontierfund.eth',
+  },
+}
+
+export const getUserDisplayName = (
+  user: Pick<
+    ClientUserWithENSData,
+    'firstName' | 'lastName' | 'informationVisibility' | 'primaryUserCryptoAddress' | 'id'
+  > | null,
+) => {
+  if (user?.id && HARDCODED_USER_DISPLAY_NAME[user.id]) {
+    return HARDCODED_USER_DISPLAY_NAME[user.id].displayName
+  }
   if (user?.informationVisibility === UserInformationVisibility.ANONYMOUS) {
     return 'Anonymous'
   }
-  if (user?.firstName && user?.informationVisibility === UserInformationVisibility.ALL_INFO) {
-    return userFullName(user)
+  if (
+    (user?.firstName || user?.lastName) &&
+    user?.informationVisibility === UserInformationVisibility.ALL_INFO
+  ) {
+    return userFirstNameWithLastInitial(user)
   }
   if (user?.primaryUserCryptoAddress) {
     return (
@@ -26,12 +47,17 @@ export const getUserDisplayName = (user: ClientUserWithENSData | null) => {
   return 'Anonymous'
 }
 
-export const getUserDisplayNameWithoutENS = (user: ClientUser | null) => {
+export const getUserDisplayNameWithoutENS = (
+  user: Pick<
+    ClientUser,
+    'firstName' | 'lastName' | 'informationVisibility' | 'primaryUserCryptoAddress'
+  > | null,
+) => {
   if (user?.informationVisibility === UserInformationVisibility.ANONYMOUS) {
     return 'Anonymous'
   }
   if (user?.firstName && user?.informationVisibility === UserInformationVisibility.ALL_INFO) {
-    return userFullName(user)
+    return userFirstNameWithLastInitial(user)
   }
   if (user?.primaryUserCryptoAddress) {
     return `${user.primaryUserCryptoAddress.cryptoAddress.slice(
@@ -46,12 +72,9 @@ export const getSensitiveDataUserDisplayName = (
   user: SensitiveDataClientUserWithENSData | null,
 ) => {
   if (user?.firstName) {
-    return userFullName(user)
+    return userFirstNameWithLastInitial(user)
   }
   if (user?.hasEmbeddedWallet && user.primaryUserEmailAddress) {
-    if (user.primaryUserEmailAddress.emailAddress.length > 13) {
-      return `${user.primaryUserEmailAddress.emailAddress.slice(0, 10)}...`
-    }
     return user.primaryUserEmailAddress.emailAddress
   }
   if (user?.primaryUserCryptoAddress) {
@@ -68,7 +91,7 @@ export const getSensitiveDataUserDisplayName = (
 
 export const getFullSensitiveDataUserDisplayName = (user: SensitiveDataClientUser | null) => {
   if (user?.firstName) {
-    return userFullName(user)
+    return userFirstNameWithLastInitial(user)
   }
   if (user?.primaryUserCryptoAddress) {
     return user.primaryUserCryptoAddress.cryptoAddress

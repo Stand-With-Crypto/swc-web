@@ -1,4 +1,4 @@
-import _ from 'lodash'
+import { isFunction, isString } from 'lodash-es'
 
 import { AnalyticProperties } from '@/utils/shared/sharedAnalytics'
 
@@ -15,11 +15,11 @@ export function trackPrimitiveComponentAnalytics<A>(
   defaultTrack: AnalyticsFnCall<A>,
   { args, analytics }: { args: A } & PrimitiveComponentAnalytics<A>,
 ) {
-  if (_.isString(analytics)) {
+  if (isString(analytics)) {
     defaultTrack({ args, properties: { Category: analytics } })
     return
   }
-  if (_.isFunction(analytics)) {
+  if (isFunction(analytics)) {
     analytics(args)
     return
   }

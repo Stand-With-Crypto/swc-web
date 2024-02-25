@@ -17,16 +17,16 @@ export function UserActionFormVoterRegistrationLayout({
   return (
     <>
       {onBack && <GoBackButton onClick={onBack} />}
-      <div className="flex min-h-[400px] flex-col p-6">{children}</div>
+      <div className="flex min-h-[400px] flex-col">{children}</div>
     </>
   )
 }
 
-function Heading({ title, subtitle }: { title: string; subtitle: string }) {
+function Heading({ title, subtitle }: { title: string; subtitle?: string }) {
   return (
     <div className="space-y-2">
       <PageTitle size="sm">{title}</PageTitle>
-      <PageSubTitle>{subtitle}</PageSubTitle>
+      {subtitle && <PageSubTitle>{subtitle}</PageSubTitle>}
     </div>
   )
 }
@@ -36,7 +36,7 @@ function Container({ children }: React.PropsWithChildren) {
   return (
     <div className="flex flex-grow items-center justify-center">
       {/* without w-full, on iOS, this won't take up the full width of the parent ¯\_(ツ)_/¯ */}
-      <div className="w-full space-y-4 p-8 md:space-y-8">{children}</div>
+      <div className="w-full space-y-4 md:space-y-8">{children}</div>
     </div>
   )
 }
@@ -52,7 +52,7 @@ function GoBackButton({ onClick }: { onClick: () => void }) {
 
 function Footer({ children }: React.PropsWithChildren) {
   return (
-    <div className="flex flex-row-reverse items-center justify-between space-y-4 px-8 md:space-y-8">
+    <div className="mt-4 flex flex-row-reverse items-center justify-between space-y-4 md:space-y-8">
       {children}
     </div>
   )
