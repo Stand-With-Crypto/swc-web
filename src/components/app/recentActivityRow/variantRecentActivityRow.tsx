@@ -134,11 +134,13 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
           ),
           children: (
             <MainText>
-              <FormattedCurrency
-                amount={action.nftMint.costAtMintUsd}
-                currencyCode={SupportedFiatCurrencyCodes.USD}
-                locale={locale}
-              />{' '}
+              {action.nftMint && (
+                <FormattedCurrency
+                  amount={action.nftMint.costAtMintUsd}
+                  currencyCode={SupportedFiatCurrencyCodes.USD}
+                  locale={locale}
+                />
+              )}{' '}
               donation
             </MainText>
           ),
