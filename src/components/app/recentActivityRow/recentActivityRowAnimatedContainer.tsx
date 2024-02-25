@@ -9,11 +9,11 @@ import { SupportedLocale } from '@/intl/locales'
 import { cn } from '@/utils/web/cn'
 
 type AnimatedActivityRowProps = React.HTMLAttributes<HTMLDivElement> & {
-  locale: SupportedLocale
   action: RecentActivityRowProps['action']
+  locale: SupportedLocale
 }
 
-function AnimatedActivityRow({ action, locale, className }: AnimatedActivityRowProps) {
+function AnimatedActivityRow({ action, className, locale }: AnimatedActivityRowProps) {
   const rowAnimation = {
     initial: { scale: 0.75, opacity: 0 },
     animate: { scale: 1, opacity: 1 },
@@ -39,7 +39,7 @@ function AnimatedActivityRow({ action, locale, className }: AnimatedActivityRowP
 
   return (
     <motion.div {...rowAnimation} className={cn('relative', className)} layout>
-      <VariantRecentActivityRow action={action} locale={locale} key={action.id} />
+      <VariantRecentActivityRow action={action} key={action.id} locale={locale} />
       <motion.div {...glowAnimation} className="absolute -mt-6 h-3 w-full blur-2xl lg:h-4" />
     </motion.div>
   )

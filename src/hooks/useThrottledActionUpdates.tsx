@@ -11,6 +11,13 @@ export function useThrottledActionUpdates(
   maxListSize = 10,
 ) {
   const [visibleActions, setVisibleActions] = useState(actions.slice(0, maxListSize))
+  const visibleActionsRef = useRef(visibleActions)
+
+  // Adding visibleActions to the dependency array will cause the effect
+  // to re-run every time visibleActions changes, which is not what we want.
+  useEffect(() => {
+    visibleActionsRef.current = visibleActions
+  }, [visibleActions])
 
   useEffect(() => {
     let isCancelled = false
@@ -29,7 +36,7 @@ export function useThrottledActionUpdates(
     }
 
     const newActions = actions.filter(
-      action => !visibleActions.some(visibleAction => visibleAction.id === action.id),
+      action => !visibleActionsRef.current.some(visibleAction => visibleAction.id === action.id),
     )
 
     processAction([...newActions])
