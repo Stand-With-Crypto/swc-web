@@ -7,12 +7,13 @@ import { ClientUserAction } from '@/clientModels/clientUserAction/clientUserActi
 import { NextImage } from '@/components/ui/image'
 
 export const ACTIVITY_TYPE_TO_ICON_URL: Record<string, string> = {
-  [UserActionType.NFT_MINT]: '/activityFeedIcons/public/actionTypeIcons/mintNFT.svg',
   [UserActionType.DONATION]: '/activityFeedIcons/donate.svg',
+  [UserActionType.NFT_MINT]: '/activityFeedIcons/donate.svg',
   [UserActionType.CALL]: '/activityFeedIcons/call.svg',
   [UserActionType.EMAIL]: '/activityFeedIcons/email.svg',
   [UserActionType.OPT_IN]: '/activityFeedIcons/join.svg',
   [UserActionType.VOTER_REGISTRATION]: '/activityFeedIcons/vote.svg',
+  [UserActionType.TWEET]: '/activityFeedIcons/share-x.svg',
 }
 
 type ActivityAvatarProps = {
