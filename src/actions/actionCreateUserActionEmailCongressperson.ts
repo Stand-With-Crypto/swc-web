@@ -61,7 +61,9 @@ export const actionCreateUserActionEmailCongressperson = withServerActionMiddlew
 async function _actionCreateUserActionEmailCongressperson(input: Input) {
   logger.info('triggered')
   const userMatch = await getMaybeUserAndMethodOfMatch({
-    include: { primaryUserCryptoAddress: true, userEmailAddresses: true, address: true },
+    prisma: {
+      include: { primaryUserCryptoAddress: true, userEmailAddresses: true, address: true },
+    },
   })
   logger.info(userMatch.user ? 'found user' : 'no user found')
   const sessionId = getUserSessionId()

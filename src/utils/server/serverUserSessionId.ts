@@ -10,7 +10,7 @@ export function getUserSessionIdOnPageRouter(req: NextApiRequest) {
     // this should be getting set in middleware so we want to trigger some analytics errors if its not set
     Sentry.captureMessage(`getUserSessionIdOnPageRouter: cookie not set`)
   }
-  return value!
+  return value || null
 }
 
 export function getUserSessionIdThatMightNotExist() {
@@ -21,12 +21,12 @@ export function getUserSessionIdThatMightNotExist() {
 
 export function getUserSessionId() {
   const userCookies = cookies()
-  const sessionId = userCookies.get(USER_SESSION_ID_COOKIE_NAME)
+  const sessionId = getUserSessionIdThatMightNotExist()
   if (!sessionId) {
     Sentry.captureMessage(`getUserSessionIdOnAppRouter: cookie not set`, {
       extra: { headers: headers(), cookies: userCookies.getAll() },
     })
     throw new Error('user session cookie not set')
   }
-  return sessionId.value
+  return sessionId
 }

@@ -71,7 +71,9 @@ async function _actionCreateUserActionCallCongressperson(
   const sessionId = getUserSessionId()
 
   const userMatch = await getMaybeUserAndMethodOfMatch({
-    include: { primaryUserCryptoAddress: true, address: true },
+    prisma: {
+      include: { primaryUserCryptoAddress: true, address: true },
+    },
   })
   await throwIfRateLimited()
 
