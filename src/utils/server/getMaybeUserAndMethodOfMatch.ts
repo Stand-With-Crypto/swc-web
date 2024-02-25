@@ -46,9 +46,17 @@ async function baseGetMaybeUserAndMethodOfMatch<
 }): Promise<BaseUserAndMethodOfMatch<S, I>> {
   const { include, ...other } = prismaConfig || {}
   const authUser = await appRouterGetAuthUser()
-  const sessionId = shouldThrowWithoutSession
-    ? getUserSessionId()
-    : getUserSessionIdThatMightNotExist()
+  const sessionId =
+    // if we got back an auth user, don't throw even if we should because we're gonna match to
+    // the auth cookies. I don't know how often this will happen if the root cause is the user blocking cookies
+    !authUser && shouldThrowWithoutSession
+      ? getUserSessionId()
+      : getUserSessionIdThatMightNotExist()
+  if (authUser && !sessionId) {
+    Sentry.captureMessage('Auth user found but no session id returned, unexpected', {
+      extra: { authUser, sessionId },
+    })
+  }
   // PlanetScale currently has index issues when we query for both session and id in the same SQL statement
   // running them separately to make sure we hit our indexes.
   // if we can do this in a single query AND leverage the right indexes in the future this would be ideal.
