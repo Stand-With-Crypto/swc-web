@@ -8,11 +8,9 @@ import { RecentActivityRowAnimatedContainer } from '@/components/app/recentActiv
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
 import { PublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
-import { useApiRecentActivity } from '@/hooks/useApiRecentActivity'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 
-export function DelayedRecentActivity(props: { actions: PublicRecentActivity }) {
-  const actions = useApiRecentActivity(props.actions, { limit: 10 }).data
+export function DelayedRecentActivity({ actions }: { actions: PublicRecentActivity }) {
   const ref = useRef(null)
   const isInVew = useInView(ref, { margin: '-50%', once: true })
   const visibleActions = actions.slice(isInVew ? 0 : 1, actions.length)
