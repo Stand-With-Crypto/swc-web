@@ -9,7 +9,7 @@ export const COMMUNITY_PAGINATION_DATA: Record<
   { totalPages: number; itemsPerPage: number; totalPregeneratedPages: number }
 > = {
   [RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY]: {
-    totalPages: 50,
+    totalPages: 10,
     itemsPerPage: 30,
     totalPregeneratedPages: maybeIgnorePreGeneration(10),
   },
