@@ -50,7 +50,7 @@ type ClientUserActionDonation = Pick<UserActionDonation, 'amountCurrencyCode' | 
   amountUsd: number
 }
 type ClientUserActionNFTMint = {
-  nftMint: ClientNFTMint
+  nftMint: ClientNFTMint | null
   actionType: typeof UserActionType.NFT_MINT
 }
 type ClientUserActionOptIn = Pick<UserActionOptIn, 'optInType'> & {

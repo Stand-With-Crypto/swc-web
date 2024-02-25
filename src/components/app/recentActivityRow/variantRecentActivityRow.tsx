@@ -132,7 +132,18 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
               <Button>Mint yours</Button>
             </UserActionFormNFTMintDialog>
           ),
-          children: <MainText>donation made</MainText>,
+          children: (
+            <MainText>
+              {action.nftMint && (
+                <FormattedCurrency
+                  amount={action.nftMint.costAtMintUsd}
+                  currencyCode={SupportedFiatCurrencyCodes.USD}
+                  locale={locale}
+                />
+              )}{' '}
+              donation
+            </MainText>
+          ),
         }
       }
       case UserActionType.TWEET: {
