@@ -2,10 +2,8 @@ import { runBin } from '@/bin/runBin'
 import { testCaseUserHasLegacyMigrationCryptoAddressAndEmailAndLogsOnViaSessionIdWithNewCryptoAddress } from '@/bin/smokeTests/onNewLogin/3testCaseUserHasLegacyMigrationCryptoAddressAndEmailAndLogsOnViaSessionIdWithNewCryptoAddress'
 import { testCaseUserHasLegacyMigrationCryptoAddressAndLogsOnViaSameCryptoAddress } from '@/bin/smokeTests/onNewLogin/4testCaseUserHasLegacyMigrationCryptoAddressAndEmailAndLogsOnViaSameCryptoAddress'
 import { testCaseUserHasLegacyMigrationCryptoAndEmailAddressAndLogsOnViaSameCryptoAndEmailAddressButAlreadyHasCreatedUsers } from '@/bin/smokeTests/onNewLogin/5testCaseUserHasLegacyMigrationCryptoAndEmailAddressAndLogsOnViaSameCryptoAndEmailAddressButAlreadyHasCreatedUsers'
-import {
-  testCaseMultipleUsersWithSameLegacyCryptoAddress,
-  testCaseUserHasSameEmailAddressButOtherUserHasAlreadyCreatedAccount,
-} from '@/bin/smokeTests/onNewLogin/7testCaseMultipleUsersWithSameLegacyCryptoAddress'
+import { testCaseUserHasSameEmailAddressButOtherUserHasAlreadyCreatedAccount } from '@/bin/smokeTests/onNewLogin/6testCaseUserHasSameEmailAddressButOtherUserHasAlreadyCreatedAccount'
+import { testCaseMultipleUsersWithSameLegacyCryptoAddress } from '@/bin/smokeTests/onNewLogin/7testCaseMultipleUsersWithSameLegacyCryptoAddress'
 import { testCaseMultipleUsersWithSameLegacyEmail } from '@/bin/smokeTests/onNewLogin/8testCaseMultipleUsersWithSameLegacyEmail'
 import { onNewLogin } from '@/utils/server/thirdweb/onLogin'
 import { logger } from '@/utils/shared/logger'
