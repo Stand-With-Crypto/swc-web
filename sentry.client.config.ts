@@ -9,6 +9,14 @@ import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { toBool } from '@/utils/shared/toBool'
 
 const dsn = process.env.NEXT_PUBLIC_SENTRY_DSN
+
+const COMMON_ERROR_MESSAGES_TO_GROUP: string[] = [
+  'No internet connection detected',
+  "Failed to execute 'removeChild",
+  'bytecode', // Can't find variable: bytecode
+  'ResizeObserver loop', // ResizeObserver loop completed with undelivered notifications.
+]
+
 Sentry.init({
   environment: NEXT_PUBLIC_ENVIRONMENT,
   dsn,
@@ -50,6 +58,23 @@ Sentry.init({
         return null
       }
     }
+    try {
+      const error = hint.originalException as Error
+      const errorMessage = error?.message
+      if (errorMessage) {
+        COMMON_ERROR_MESSAGES_TO_GROUP.forEach(message => {
+          if (errorMessage.indexOf(message) !== -1) {
+            event.fingerprint = [`forceGroupErrorMessage-${message}`]
+            console.log(`Sentry: Forced fingerprint to "${message}"`)
+          }
+        })
+      }
+    } catch (e) {
+      console.error(e)
+      console.log('Sentry: Failed to force fingerprint')
+      return event
+    }
+
     return event
   },
 })
