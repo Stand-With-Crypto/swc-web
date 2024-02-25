@@ -1,4 +1,5 @@
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
+import { COMMUNITY_PAGINATION_DATA } from '@/components/app/pageLeaderboard/constants'
 import { DynamicRecentActivity } from '@/components/app/pageLeaderboard/dynamicRecentActivity'
 import { VariantRecentActivityRow } from '@/components/app/recentActivityRow/variantRecentActivityRow'
 import { SumDonationsByUserRow } from '@/components/app/sumDonationsByUserRow/sumDonationsByUserRow'
@@ -12,8 +13,6 @@ import type { PublicRecentActivity } from '@/data/recentActivity/getPublicRecent
 import { SupportedLocale } from '@/intl/locales'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
-
-import { PAGE_LEADERBOARD_TOTAL_PAGES } from './constants'
 
 export const PAGE_LEADERBOARD_TITLE = 'Our community'
 export const PAGE_LEADERBOARD_DESCRIPTION = `See how our community is taking a stand to safeguard the future of crypto in America.`
@@ -45,6 +44,7 @@ export function PageLeaderboard({
   publicRecentActivity,
 }: PageLeaderboardProps) {
   const urls = getIntlUrls(locale)
+  const { totalPages } = COMMUNITY_PAGINATION_DATA[tab]
   return (
     <div className="container space-y-7">
       <PageTitle>{PAGE_LEADERBOARD_TITLE}</PageTitle>
@@ -108,11 +108,11 @@ export function PageLeaderboard({
         <PaginationLinks
           currentPageNumber={pageNum}
           getPageUrl={pageNumber =>
-            pageNumber < 1 || pageNumber > PAGE_LEADERBOARD_TOTAL_PAGES
+            pageNumber < 1 || pageNumber > totalPages
               ? ''
               : urls.leaderboard({ pageNum: pageNumber, tab })
           }
-          totalPages={PAGE_LEADERBOARD_TOTAL_PAGES}
+          totalPages={totalPages}
         />
       </div>
     </div>

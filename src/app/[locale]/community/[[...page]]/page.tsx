@@ -10,10 +10,7 @@ import {
   PageLeaderboard,
   PageLeaderboardInferredProps,
 } from '@/components/app/pageLeaderboard'
-import {
-  PAGE_LEADERBOARD_ITEMS_PER_PAGE,
-  PAGE_LEADERBOARD_TOTAL_PRE_GENERATED_PAGES,
-} from '@/components/app/pageLeaderboard/constants'
+import { COMMUNITY_PAGINATION_DATA } from '@/components/app/pageLeaderboard/constants'
 import { getPublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
@@ -46,21 +43,23 @@ const validatePageNum = ([page]: (string | undefined)[]) => {
 
 // pre-generate the first 10 pages. If people want to go further, we'll generate them on the fly
 export async function generateStaticParams() {
-  return flatten(
-    times(PAGE_LEADERBOARD_TOTAL_PRE_GENERATED_PAGES).map(i => ({ page: i ? [`${i + 1}`] : [] })),
-  )
+  const { totalPregeneratedPages } =
+    COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY]
+  return flatten(times(totalPregeneratedPages).map(i => ({ page: i ? [`${i + 1}`] : [] })))
 }
 
 export default async function CommunityRecentActivityPage({ params }: Props) {
+  const { itemsPerPage } =
+    COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY]
   const { locale, page } = params
   const pageNum = validatePageNum(page ?? [])
   if (!pageNum) {
     notFound()
   }
-  const offset = (pageNum - 1) * PAGE_LEADERBOARD_ITEMS_PER_PAGE
+  const offset = (pageNum - 1) * itemsPerPage
 
   const publicRecentActivity = await getPublicRecentActivity({
-    limit: PAGE_LEADERBOARD_ITEMS_PER_PAGE,
+    limit: itemsPerPage,
     offset,
   })
 

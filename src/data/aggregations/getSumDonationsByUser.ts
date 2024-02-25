@@ -4,10 +4,8 @@ import { Decimal } from '@prisma/client/runtime/library'
 import { compact, keyBy } from 'lodash-es'
 
 import { getClientLeaderboardUser } from '@/clientModels/clientUser/clientLeaderboardUser'
-import {
-  PAGE_LEADERBOARD_ITEMS_PER_PAGE,
-  PAGE_LEADERBOARD_TOTAL_PAGES,
-} from '@/components/app/pageLeaderboard/constants'
+import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
+import { COMMUNITY_PAGINATION_DATA } from '@/components/app/pageLeaderboard/constants'
 import { getENSDataMapFromCryptoAddressesAndFailGracefully } from '@/data/web3/getENSDataFromCryptoAddress'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { redis } from '@/utils/server/redis'
@@ -111,8 +109,10 @@ export type SumDonationsByUser = Awaited<ReturnType<typeof getSumDonationsByUser
 const CACHE_KEY = 'GET_SUM_DONATIONS_BY_USER_CACHE_V6'
 
 export async function buildGetSumDonationsByUserCache() {
+  const { totalPages, itemsPerPage } =
+    COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.LEADERBOARD]
   const result = await getSumDonationsByUserQuery({
-    limit: PAGE_LEADERBOARD_TOTAL_PAGES * PAGE_LEADERBOARD_ITEMS_PER_PAGE,
+    limit: totalPages * itemsPerPage,
     offset: 0,
   })
   await redis.set(CACHE_KEY, result, {
