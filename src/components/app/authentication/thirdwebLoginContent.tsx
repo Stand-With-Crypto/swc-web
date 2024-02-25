@@ -1,7 +1,10 @@
 'use client'
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { ConnectEmbed, ConnectEmbedProps } from '@thirdweb-dev/react'
 
+import { ANALYTICS_NAME_LOGIN } from '@/components/app/authentication/constants'
+import { ANALYTICS_NAME_USER_ACTION_FORM_VOTER_REGISTRATION } from '@/components/app/userActionFormVoterRegistration/constants'
+import { trackDialogOpen } from '@/components/ui/dialog/trackDialogOpen'
 import { NextImage } from '@/components/ui/image'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
@@ -9,6 +12,7 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useThirdwebData } from '@/hooks/useThirdwebData'
+import { trackSectionVisible } from '@/utils/web/clientAnalytics'
 import { theme } from '@/utils/web/thirdweb/theme'
 
 export function ThirdwebLoginContent(props: ConnectEmbedProps) {
@@ -59,6 +63,13 @@ export function ThirdwebLoginContent(props: ConnectEmbedProps) {
 
 function ThirdwebLoginEmbedded(props: ConnectEmbedProps) {
   const { session } = useThirdwebData()
+  const hasTracked = useRef(false)
+  useEffect(() => {
+    if (!session.isLoggedIn && !session.isLoading && !hasTracked.current) {
+      trackSectionVisible({ sectionGroup: ANALYTICS_NAME_LOGIN, section: 'Login' })
+      hasTracked.current = true
+    }
+  }, [session.isLoading, session.isLoggedIn])
 
   if (session.isLoggedIn) {
     return (

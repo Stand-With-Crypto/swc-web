@@ -67,6 +67,16 @@ export function trackExternalLink(eventProperties?: AnalyticProperties) {
   trackClientAnalytic('External Link clicked', { ...eventProperties })
 }
 
+export function trackSectionVisible(
+  { section, sectionGroup }: { section: string; sectionGroup: string },
+  eventProperties?: AnalyticProperties,
+) {
+  trackClientAnalytic(`New Section Visible`, {
+    Section: section,
+    'Section Group': sectionGroup,
+    ...eventProperties,
+  })
+}
 export type LoginProvider = 'email' | 'google' | 'wallet'
 export function trackLoginAttempt({
   method,
