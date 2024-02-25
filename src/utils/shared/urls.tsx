@@ -25,13 +25,18 @@ export const getIntlUrls = (
     resources: () => `${localePrefix}/resources`,
     donate: () => `${localePrefix}/donate`,
     leaderboard: (params?: { pageNum?: number; tab: RecentActivityAndLeaderboardTabs }) => {
+      const tabPrefix =
+        params?.tab === RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY
+          ? '/community'
+          : '/community/leaderboard'
+
       if (!params) {
-        return `${localePrefix}/community`
+        return `${localePrefix}${tabPrefix}`
       }
       const pageNum = params.pageNum ?? 1
-      const tabPath =
-        params.tab === RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY ? '' : `/${params.tab}`
-      return `${localePrefix}/community${pageNum !== 1 || tabPath ? `/${pageNum}${tabPath}` : ''}`
+      const shouldSuppressPageNum = pageNum === 1
+      const tabSuffix = shouldSuppressPageNum ? '' : `/${pageNum}`
+      return `${localePrefix}${tabPrefix}${tabSuffix}`
     },
     politiciansHomepage: () => `${localePrefix}/politicians`,
     politicianDetails: (dtsiSlug: string) => `${localePrefix}/politicians/person/${dtsiSlug}`,
