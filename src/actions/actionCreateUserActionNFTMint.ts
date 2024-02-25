@@ -15,6 +15,7 @@ import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
+import { getCryptoToFiatConversion } from '@/utils/shared/getCryptoToFiatConversion'
 import { getLogger } from '@/utils/shared/logger'
 import { NFTSlug } from '@/utils/shared/nft'
 import { UserActionNftMintCampaignName } from '@/utils/shared/userActionCampaigns'
@@ -108,6 +109,15 @@ async function createAction<U extends User>({
   validatedInput: z.infer<typeof createActionMintNFTInputValidationSchema>
   sharedDependencies: Pick<SharedDependencies, 'sessionId' | 'analytics'>
 }) {
+  const ratio = await getCryptoToFiatConversion(NFTCurrency.ETH)
+    .then(res => {
+      return res?.data.amount ? res?.data.amount : new Decimal(0)
+    })
+    .catch(e => {
+      logger.error(e)
+      return new Decimal(0)
+    })
+
   await prismaClient.userAction.create({
     data: {
       user: { connect: { id: user.id } },
@@ -122,7 +132,7 @@ async function createAction<U extends User>({
           costAtMint: 0.00435,
           contractAddress: NFT_SLUG_BACKEND_METADATA[NFTSlug.SWC_SHIELD].contractAddress,
           costAtMintCurrencyCode: NFTCurrency.ETH,
-          costAtMintUsd: new Decimal(0.00435),
+          costAtMintUsd: new Decimal(0.00435).mul(ratio),
         },
       },
     },
