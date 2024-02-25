@@ -119,6 +119,11 @@ const ACTION_REDIRECTS = [
     queryValue: 'email-senator',
   },
   {
+    destination: '/action/voter-registration',
+    queryKey: 'modal',
+    queryValue: 'register-to-vote',
+  },
+  {
     destination: '/action/nft-mint',
     queryKey: 'modal',
     queryValue: 'mintNFT',
