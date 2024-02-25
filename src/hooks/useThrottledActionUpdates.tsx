@@ -1,33 +1,43 @@
 import { useEffect, useRef, useState } from 'react'
 
 import { RecentActivityRowProps } from '@/components/app/recentActivityRow/recentActivityRow'
-import { sleep } from '@/utils/shared/sleep'
 
-export function useThrottledActionUpdates(actions: RecentActivityRowProps['action'][]) {
-  const [throttledActions, setThrottledActions] = useState(actions)
+function getRandomDelay(min = 750, max = 1550) {
+  return Math.random() * (max - min) + min
+}
 
-  // Adding throttledActions as a useEffect dependency can lead to an infinite loop,
-  // so we use a ref to get the current value without causing re-renders.
-  const throttledActionsRef = useRef(throttledActions)
+export function useThrottledActionUpdates(
+  actions: RecentActivityRowProps['action'][],
+  maxListSize = 10,
+) {
+  const [visibleActions, setVisibleActions] = useState(actions.slice(0, maxListSize))
+
   useEffect(() => {
-    throttledActionsRef.current = throttledActions
-  }, [throttledActions])
+    let isCancelled = false
 
-  useEffect(() => {
-    async function throttleUpdates() {
-      const newActions = actions.filter(
-        action => !throttledActionsRef.current.some(a => a.id === action.id),
-      )
+    const processAction = (actionQueue: RecentActivityRowProps['action'][]) => {
+      if (isCancelled || actionQueue.length === 0) return
 
-      for (const action of newActions) {
-        const delayMs = Math.floor(Math.random() * (2000 - 750)) + 750
-        await sleep(delayMs)
-        setThrottledActions(prevActions => [action, ...prevActions].slice(0, prevActions.length))
-      }
+      setVisibleActions(prevVisibleActions => {
+        const nextAction = actionQueue.shift()
+        return nextAction
+          ? [nextAction, ...prevVisibleActions].slice(0, maxListSize)
+          : prevVisibleActions
+      })
+
+      setTimeout(() => processAction(actionQueue), getRandomDelay())
     }
 
-    throttleUpdates()
-  }, [actions])
+    const newActions = actions.filter(
+      action => !visibleActions.some(visibleAction => visibleAction.id === action.id),
+    )
 
-  return throttledActions
+    processAction([...newActions])
+
+    return () => {
+      isCancelled = true
+    }
+  }, [actions, maxListSize])
+
+  return visibleActions
 }
