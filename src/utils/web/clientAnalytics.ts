@@ -40,9 +40,7 @@ export function trackClientAnalytic(eventName: string, eventProperties?: Analyti
 
   const hasTargetingEnabled = getClientCookieConsent().targeting
   if (environmentHasAnalyticsEnabled && hasTargetingEnabled) {
-    mixpanel.track(eventName, {
-      eventProperties,
-    })
+    mixpanel.track(eventName, eventProperties)
     vercelTrack(eventName, eventProperties && formatVercelAnalyticsEventProperties(eventProperties))
   }
 }
