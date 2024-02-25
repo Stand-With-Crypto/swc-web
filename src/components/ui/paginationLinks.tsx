@@ -35,7 +35,7 @@ export function PaginationLinks({
             className="h-8 w-8 p-0"
             variant={1 === currentPageNumber ? 'default' : 'outline'}
           >
-            <InternalLink href={getPageUrl(1)}>
+            <InternalLink href={getPageUrl(1)} prefetch={false}>
               <span className="sr-only">Go to page {1}</span>
               {1}
             </InternalLink>
@@ -51,7 +51,7 @@ export function PaginationLinks({
           key={pageNumber}
           variant={pageNumber === currentPageNumber ? 'default' : 'outline'}
         >
-          <InternalLink href={getPageUrl(pageNumber)}>
+          <InternalLink href={getPageUrl(pageNumber)} prefetch={false}>
             <span className="sr-only">Go to page {pageNumber}</span>
             {pageNumber}
           </InternalLink>
@@ -67,7 +67,7 @@ export function PaginationLinks({
             className="h-8 w-8 p-0"
             variant={totalPages === currentPageNumber ? 'default' : 'outline'}
           >
-            <InternalLink href={getPageUrl(totalPages) || '#'}>
+            <InternalLink href={getPageUrl(totalPages) || '#'} prefetch={false}>
               <span className="sr-only">Go to page {totalPages}</span>
               {totalPages}
             </InternalLink>
