@@ -53,7 +53,7 @@ export function RecentActivityRowBase({
     >
       <div className="flex items-center gap-4">
         <div>
-          <ActivityAvatar actionType={action.actionType} size={40} />
+          <ActivityAvatar actionType={action.actionType} size={44} />
         </div>
         <div>{children}</div>
       </div>
