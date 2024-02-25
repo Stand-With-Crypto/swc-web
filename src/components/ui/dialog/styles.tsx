@@ -18,4 +18,4 @@ export const dialogButtonStyles = twNoop(
   'absolute top-2 rounded-sm p-2 opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground',
 )
 
-export const dialogCloseStyles = cn('right-2', dialogButtonStyles)
+export const dialogCloseStyles = cn(dialogButtonStyles, 'right-2 rounded-full')
