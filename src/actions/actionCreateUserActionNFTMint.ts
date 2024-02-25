@@ -1,11 +1,13 @@
 'use server'
 import 'server-only'
 
-import { User, UserActionType } from '@prisma/client'
+import { NFTCurrency, NFTMintStatus, User, UserActionType } from '@prisma/client'
+import { Decimal } from '@prisma/client/runtime/library'
 import * as Sentry from '@sentry/nextjs'
 import { nativeEnum, object, z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
+import { NFT_SLUG_BACKEND_METADATA } from '@/utils/server/nft/constants'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerAnalytics } from '@/utils/server/serverAnalytics'
@@ -14,6 +16,7 @@ import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
 import { getLogger } from '@/utils/shared/logger'
+import { NFTSlug } from '@/utils/shared/nft'
 import { UserActionNftMintCampaignName } from '@/utils/shared/userActionCampaigns'
 
 const createActionMintNFTInputValidationSchema = object({
@@ -111,6 +114,16 @@ async function createAction<U extends User>({
       actionType: UserActionType.NFT_MINT,
       campaignName: validatedInput.campaignName,
       userCryptoAddress: { connect: { id: user.primaryUserCryptoAddressId! } },
+      nftMint: {
+        create: {
+          nftSlug: NFTSlug.SWC_SHIELD,
+          status: NFTMintStatus.CLAIMED,
+          costAtMint: 0.00435,
+          contractAddress: NFT_SLUG_BACKEND_METADATA[NFTSlug.SWC_SHIELD].contractAddress,
+          costAtMintCurrencyCode: NFTCurrency.ETH,
+          costAtMintUsd: new Decimal(0.00435),
+        },
+      },
     },
   })
 
