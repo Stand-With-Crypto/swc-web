@@ -19,7 +19,7 @@ import { SupportedLocale } from '@/intl/locales'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
 import { NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN } from '@/utils/shared/sharedEnv'
-import { initClientAnalytics, trackClientAnalytic } from '@/utils/web/clientAnalytics'
+import { maybeInitClientAnalytics, trackClientAnalytic } from '@/utils/web/clientAnalytics'
 import { bootstrapLocalUser } from '@/utils/web/clientLocalUser'
 import { getUserSessionIdOnClient } from '@/utils/web/clientUserSessionId'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
@@ -37,7 +37,7 @@ const InitialOrchestration = () => {
   // Note, in local dev this component will double render. It doesn't do this after it is built (verify in testing)
   useEffect(() => {
     bootstrapLocalUser()
-    initClientAnalytics()
+    maybeInitClientAnalytics()
     const sessionId = getUserSessionIdOnClient()
     Sentry.setUser({ id: sessionId, idType: 'session' })
   }, [])

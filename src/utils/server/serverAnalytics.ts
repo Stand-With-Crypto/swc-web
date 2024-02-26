@@ -46,23 +46,19 @@ function trackAnalytic(
   if (process.env.VERCEL_URL) {
     vercelTrack(eventName, eventProperties && formatVercelAnalyticsEventProperties(eventProperties))
   }
-  try {
-    // we could wrap this in a promise and await it, but we don't want to block the request
-    mixpanel.track(
-      eventName,
-      {
-        ...eventProperties,
-        distinct_id: config.userId,
-      },
-      err => {
-        if (err) {
-          Sentry.captureException(err, { tags: { domain: 'trackAnalytic' } })
-        }
-      },
-    )
-  } catch (e) {
-    Sentry.captureException(e, { tags: { domain: 'trackAnalytic' } })
-  }
+  // we could wrap this in a promise and await it, but we don't want to block the request
+  mixpanel.track(
+    eventName,
+    {
+      ...eventProperties,
+      distinct_id: config.userId,
+    },
+    err => {
+      if (err) {
+        Sentry.captureException(err, { tags: { domain: 'trackAnalytic' } })
+      }
+    },
+  )
 }
 
 type CreationMethod = 'On Site' | 'Verified SWC Partner'

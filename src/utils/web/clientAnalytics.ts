@@ -15,14 +15,19 @@ const NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN = requiredEnv(
 
 const environmentHasAnalyticsEnabled = !isStorybook && !isCypress
 
-export function initClientAnalytics() {
-  mixpanel.init(NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN, {
-    track_pageview: false,
-    persistence: 'localStorage',
-  })
+let init = false
+export function maybeInitClientAnalytics() {
+  if (!init) {
+    mixpanel.init(NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN, {
+      track_pageview: false,
+      persistence: 'localStorage',
+    })
+    init = true
+  }
 }
 export function identifyClientAnalyticsUser(userId: string) {
   if (environmentHasAnalyticsEnabled) {
+    maybeInitClientAnalytics()
     mixpanel.identify(userId)
   }
 }
@@ -38,6 +43,7 @@ export function trackClientAnalytic(eventName: string, eventProperties?: Analyti
     eventProperties,
   )
 
+  maybeInitClientAnalytics()
   const hasTargetingEnabled = getClientCookieConsent().targeting
   if (environmentHasAnalyticsEnabled && hasTargetingEnabled) {
     mixpanel.track(eventName, eventProperties)
@@ -47,6 +53,7 @@ export function trackClientAnalytic(eventName: string, eventProperties?: Analyti
 
 export function setClientAnalyticsUserProperties(userProperties: object) {
   if (environmentHasAnalyticsEnabled) {
+    maybeInitClientAnalytics()
     mixpanel.people.set(userProperties)
   }
 }
