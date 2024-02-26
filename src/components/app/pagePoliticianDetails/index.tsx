@@ -26,8 +26,7 @@ import {
 import { dtsiTwitterAccountUrl } from '@/utils/dtsi/dtsiTwitterAccountUtils'
 import { cn } from '@/utils/web/cn'
 
-const PROFILE_PICTURE_HEIGHT = 300
-const PROFILE_PICTURE_WIDTH = 230
+const POLITICIAN_IMAGE_SIZE_PX = 230
 
 export function PagePoliticianDetails({
   person,
@@ -45,14 +44,13 @@ export function PagePoliticianDetails({
         {person.profilePictureUrl ? (
           <div
             className="mx-auto mb-6 overflow-hidden rounded-xl"
-            style={{ maxWidth: PROFILE_PICTURE_WIDTH }}
+            style={{ maxWidth: POLITICIAN_IMAGE_SIZE_PX }}
           >
             <MaybeNextImg
               alt={`profile picture of ${dtsiPersonFullName(person)}`}
+              sizes={`${POLITICIAN_IMAGE_SIZE_PX}px`}
               {...(getDTSIPersonProfilePictureUrlDimensions(person) || {})}
-              height={PROFILE_PICTURE_HEIGHT}
               src={person.profilePictureUrl}
-              width={PROFILE_PICTURE_WIDTH}
             />
           </div>
         ) : (
