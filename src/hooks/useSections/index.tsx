@@ -1,7 +1,7 @@
 import React from 'react'
 import * as Sentry from '@sentry/nextjs'
 
-import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
+import { trackSectionVisible } from '@/utils/web/clientAnalytics'
 
 import { UseSectionsProps, UseSectionsReturn } from './useSections.types'
 
@@ -29,10 +29,7 @@ export function useSections<SectionKey extends string>({
       setCurrentSection(section)
 
       if (!options.disableAnalytics) {
-        trackClientAnalytic(`New Section Visible`, {
-          Section: section,
-          'Section Group': analyticsName,
-        })
+        trackSectionVisible({ section, sectionGroup: analyticsName })
       }
     },
     [currentSection, analyticsName],

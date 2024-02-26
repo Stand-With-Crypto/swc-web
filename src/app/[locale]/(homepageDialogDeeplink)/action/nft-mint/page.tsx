@@ -11,7 +11,7 @@ export default function UserActionNFTMintDeepLink({ params }: PageProps) {
   return (
     <HomepageDialogDeeplinkLayout pageParams={params}>
       <div className={dialogContentPaddingStyles}>
-        <UserActionFormNFTMint />
+        <UserActionFormNFTMint trackMount />
       </div>
     </HomepageDialogDeeplinkLayout>
   )

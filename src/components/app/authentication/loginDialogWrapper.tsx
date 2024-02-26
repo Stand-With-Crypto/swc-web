@@ -6,6 +6,7 @@ import { useENS } from '@thirdweb-dev/react'
 import { useRouter } from 'next/navigation'
 import { Arguments, useSWRConfig } from 'swr'
 
+import { ANALYTICS_NAME_LOGIN } from '@/components/app/authentication/constants'
 import { LazyUpdateUserProfileForm } from '@/components/app/updateUserProfileForm/lazyLoad'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -43,7 +44,7 @@ export function LoginDialogWrapper({
     initialSectionId: LoginSections.LOADING,
     analyticsName: 'Login Button',
   })
-  const dialogProps = useDialog({ analytics: 'Login' })
+  const dialogProps = useDialog({ analytics: ANALYTICS_NAME_LOGIN })
 
   /**
    * This is not pretty, but we need to both sync the session state with the current section
