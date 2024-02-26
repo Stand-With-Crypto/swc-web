@@ -8,6 +8,8 @@ import * as Sentry from '@sentry/nextjs'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { toBool } from '@/utils/shared/toBool'
 
+import { getIsSupportedBrowser, maybeDetectBrowser } from './maybeDetectBrowser'
+
 const dsn = process.env.NEXT_PUBLIC_SENTRY_DSN
 
 const COMMON_ERROR_MESSAGES_TO_GROUP: string[] = [
@@ -22,6 +24,8 @@ const COMMON_ERROR_MESSAGES_TO_GROUP: string[] = [
   "Cannot read properties of undefined (reading 'call')",
   'JSON.stringify cannot serialize cyclic structures',
 ]
+
+const isSupportedBrowser = getIsSupportedBrowser(maybeDetectBrowser())
 
 Sentry.init({
   environment: NEXT_PUBLIC_ENVIRONMENT,
@@ -48,7 +52,6 @@ Sentry.init({
   ],
   replaysSessionSampleRate: 0,
   replaysOnErrorSampleRate: 1.0,
-  ignoreErrors: ['globalThis is not defined'],
   beforeSend: (event, hint) => {
     if (NEXT_PUBLIC_ENVIRONMENT === 'local') {
       const shouldSuppress = toBool(process.env.SUPPRESS_SENTRY_ERRORS_ON_LOCAL) || !dsn
@@ -59,6 +62,9 @@ Sentry.init({
       if (shouldSuppress) {
         return null
       }
+    }
+    if (!isSupportedBrowser) {
+      return null
     }
     try {
       const error = hint.originalException as Error
