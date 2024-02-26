@@ -4,12 +4,13 @@ import { Json, ThirdwebAuth as ThirdwebAuthSDK } from '@thirdweb-dev/auth'
 import { ThirdwebAuthUser } from '@thirdweb-dev/auth/next'
 import { cookies } from 'next/headers'
 
+import { parseThirdwebAddress } from '@/hooks/useThirdwebAddress/parseThirdwebAddress'
 import { thirdwebAuthConfig } from '@/utils/server/thirdweb/thirdwebAuthConfig'
 import { AuthSessionMetadata } from '@/utils/server/thirdweb/types'
 
 /*
  Below is a version of getUser from Thirdweb, modified to support the app router.
- We should delete this code once they formally support the NextRequest object with their SDK, 
+ We should delete this code once they formally support the NextRequest object with their SDK,
  which will be "soon" https://github.com/thirdweb-dev/js/issues/2022#issuecomment-1854071399
 */
 
@@ -72,5 +73,6 @@ export async function appRouterGetAuthUser(): Promise<ServerAuthUser | null> {
     ...authUser,
     // see https://portal.thirdweb.com/wallets/auth/server-frameworks/next#enhancing-session-data
     userId: sessionData.userId,
+    address: parseThirdwebAddress(authUser.address),
   }
 }

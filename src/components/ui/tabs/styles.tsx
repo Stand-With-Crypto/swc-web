@@ -1,7 +1,7 @@
 import { twNoop } from '@/utils/web/cn'
 
 export const tabListStyles = twNoop(
-  'inline-flex items-center p-1 justify-center rounded-full bg-muted text-muted-foreground',
+  'inline-flex items-center justify-center rounded-full bg-muted p-1 text-muted-foreground',
 )
 
 export const tabTriggerStyles = twNoop(

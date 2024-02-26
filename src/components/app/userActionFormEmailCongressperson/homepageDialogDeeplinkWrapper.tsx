@@ -1,13 +1,15 @@
 'use client'
 
-import React, { Suspense, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 import { UserActionFormEmailCongressperson } from '@/components/app/userActionFormEmailCongressperson'
+import { ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON } from '@/components/app/userActionFormEmailCongressperson/constants'
 import { UserActionFormEmailCongresspersonSkeleton } from '@/components/app/userActionFormEmailCongressperson/skeleton'
 import { FormFields } from '@/components/app/userActionFormEmailCongressperson/types'
 import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
+import { trackDialogOpen } from '@/components/ui/dialog/trackDialogOpen'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useEncodedInitialValuesQueryParam } from '@/hooks/useEncodedInitialValuesQueryParam'
 import { useLocale } from '@/hooks/useLocale'
@@ -30,6 +32,9 @@ function UserActionFormEmailCongresspersonDeeplinkWrapperContent() {
     firstName: '',
     lastName: '',
   })
+  useEffect(() => {
+    trackDialogOpen({ open: true, analytics: ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON })
+  }, [])
 
   return fetchUser.isLoading || loadingParams ? (
     <UserActionFormEmailCongresspersonSkeleton locale={locale} />

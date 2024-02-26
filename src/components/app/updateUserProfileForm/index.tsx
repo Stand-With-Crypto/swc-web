@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ArrowLeft } from 'lucide-react'
 
 import { ClientAddress } from '@/clientModels/clientAddress'
@@ -9,6 +9,7 @@ import { UpdateUserProfileForm } from '@/components/app/updateUserProfileForm/st
 import { UpdateUserInformationVisibilityForm } from '@/components/app/updateUserProfileForm/step2'
 import { dialogButtonStyles } from '@/components/ui/dialog/styles'
 import { useSections } from '@/hooks/useSections'
+import { trackSectionVisible } from '@/utils/web/clientAnalytics'
 import { cn } from '@/utils/web/cn'
 
 enum Sections {
@@ -28,6 +29,13 @@ export function UpdateUserProfileFormContainer({
     initialSectionId: Sections.Profile,
     analyticsName: ANALYTICS_NAME_UPDATE_USER_PROFILE_FORM,
   })
+  useEffect(() => {
+    trackSectionVisible({
+      sectionGroup: ANALYTICS_NAME_UPDATE_USER_PROFILE_FORM,
+      section: Sections.Profile,
+    })
+  }, [])
+
   // we need to leverage the data submitted in the first step in the second step (whether we show the option to use first/last name)
   const [statefulUser, setStatefulUser] = useState(user)
 

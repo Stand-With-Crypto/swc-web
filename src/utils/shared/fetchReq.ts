@@ -50,10 +50,17 @@ const formatErrorNameWithBody = (val: Awaited<ReturnType<typeof maybeParseBody>>
 export const fetchReq = async (
   url: string,
   options?: RequestInit,
-  config?: { withScope?: (scope: Sentry.Scope) => void },
+  config?: {
+    withScope?: (scope: Sentry.Scope) => void
+    isValidRequest?: (response: Response) => boolean
+  },
 ) => {
   const response = await fetch(url, options)
-  if (response.status >= 200 && response.status < 300) {
+  if (
+    config?.isValidRequest
+      ? config.isValidRequest(response)
+      : response.status >= 200 && response.status < 300
+  ) {
     return response
   }
   const maybeBody = await maybeParseBody(response)

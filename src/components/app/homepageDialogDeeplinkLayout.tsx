@@ -10,7 +10,7 @@ import {
   dialogOverlayStyles,
 } from '@/components/ui/dialog/styles'
 import { InternalLink } from '@/components/ui/link'
-import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
+import { getHomepageTopLevelMetrics } from '@/data/pageSpecific/getHomepageData'
 import { PageProps } from '@/types'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
@@ -27,7 +27,10 @@ export async function HomepageDialogDeeplinkLayout({
   pageParams,
 }: HomepageDialogDeeplinkLayoutProps) {
   const urls = getIntlUrls(pageParams.locale)
-  const asyncProps = await getHomepageData()
+  const [{ sumDonations, countUsers, countPolicymakerContacts }] = await Promise.all([
+    getHomepageTopLevelMetrics(),
+  ])
+
   return (
     <>
       <InternalLink
@@ -43,7 +46,17 @@ export async function HomepageDialogDeeplinkLayout({
         </InternalLink>
       </div>
 
-      <PageHome params={pageParams} {...asyncProps} />
+      <PageHome
+        actions={[]}
+        dtsiHomepagePeople={[]}
+        params={pageParams}
+        sumDonationsByUser={[]}
+        {...{
+          sumDonations,
+          countUsers,
+          countPolicymakerContacts,
+        }}
+      />
     </>
   )
 }

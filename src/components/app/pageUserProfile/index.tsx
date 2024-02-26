@@ -2,7 +2,6 @@ import { UserActionType } from '@prisma/client'
 import { sumBy, uniq } from 'lodash-es'
 import { redirect, RedirectType } from 'next/navigation'
 
-import { NFTDisplay } from '@/components/app/nftHub/nftDisplay'
 import { PageUserProfileUser } from '@/components/app/pageUserProfile/getAuthenticatedData'
 import { UpdateUserProfileFormDialog } from '@/components/app/updateUserProfileForm/dialog'
 import { UserActionRowCTAsList } from '@/components/app/userActionRowCTA/userActionRowCTAsList'
@@ -40,6 +39,7 @@ export function PageUserProfile({
   }
   const { userActions } = user
   const performedUserActionTypes = uniq(userActions.map(x => x.actionType))
+  const excludeUserActionTypes = user.hasEmbeddedWallet ? [UserActionType.NFT_MINT] : []
   return (
     <div className="container space-y-10 lg:space-y-16">
       {/* LATER-TASK enable this feature */}
@@ -127,16 +127,21 @@ export function PageUserProfile({
         </PageTitle>
         <PageSubTitle className="mb-5">
           You've completed {performedUserActionTypes.length} out of{' '}
-          {Object.values(UserActionType).length} actions. Keep going!
+          {Object.values(UserActionType).length - excludeUserActionTypes.length} actions. Keep
+          going!
         </PageSubTitle>
         <div className="mx-auto mb-10 max-w-xl">
           <Progress
             value={(performedUserActionTypes.length / Object.values(UserActionType).length) * 100}
           />
         </div>
-        <UserActionRowCTAsList performedUserActionTypes={performedUserActionTypes} />
+        <UserActionRowCTAsList
+          excludeUserActionTypes={excludeUserActionTypes}
+          performedUserActionTypes={performedUserActionTypes}
+        />
       </section>
-      <section>
+      {/* hiding nft section until bugs are resolved */}
+      {/* <section>
         <PageTitle className="mb-4" size="sm">
           Your NFTs
         </PageTitle>
@@ -146,7 +151,7 @@ export function PageUserProfile({
         <div>
           <NFTDisplay userActions={userActions} />
         </div>
-      </section>
+      </section> */}
       <section>
         <PageTitle className="mb-4" size="sm">
           Refer Your Friends

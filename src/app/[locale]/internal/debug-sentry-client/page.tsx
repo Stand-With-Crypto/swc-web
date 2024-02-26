@@ -11,6 +11,9 @@ export const dynamic = 'error'
 export default function DebugClientSentry() {
   const [val, setVal] = useState<any>(false)
   useEffect(() => {
+    const scope = Sentry.getCurrentScope()
+    scope.setExtras({ debugSentry: 'debug-sentry-client-value', now: new Date().toISOString() })
+    scope.setTags({ debugSentry: 'debug-sentry-client-value' })
     if (NEXT_PUBLIC_ENVIRONMENT === 'production') {
       return
     }

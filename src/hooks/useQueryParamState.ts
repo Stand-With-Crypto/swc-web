@@ -1,3 +1,5 @@
+'use client'
+
 import { useCallback } from 'react'
 import { isNil } from 'lodash-es'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'

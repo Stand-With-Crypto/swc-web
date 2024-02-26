@@ -31,6 +31,7 @@ export function SumDonationsByUserRow({ locale, sumDonations, index }: SumDonati
               alt={`position ${index + 1} medal`}
               className="absolute"
               height={24}
+              priority
               src={INDEX_SHIELD_IMAGE_MAP[index]}
               style={{ zIndex: -1, top: '1px' }}
               width={24}

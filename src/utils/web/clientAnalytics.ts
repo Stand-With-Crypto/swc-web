@@ -15,14 +15,19 @@ const NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN = requiredEnv(
 
 const environmentHasAnalyticsEnabled = !isStorybook && !isCypress
 
-export function initClientAnalytics() {
-  mixpanel.init(NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN, {
-    track_pageview: false,
-    persistence: 'localStorage',
-  })
+let init = false
+export function maybeInitClientAnalytics() {
+  if (!init) {
+    mixpanel.init(NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN, {
+      track_pageview: false,
+      persistence: 'localStorage',
+    })
+    init = true
+  }
 }
 export function identifyClientAnalyticsUser(userId: string) {
   if (environmentHasAnalyticsEnabled) {
+    maybeInitClientAnalytics()
     mixpanel.identify(userId)
   }
 }
@@ -38,17 +43,17 @@ export function trackClientAnalytic(eventName: string, eventProperties?: Analyti
     eventProperties,
   )
 
+  maybeInitClientAnalytics()
   const hasTargetingEnabled = getClientCookieConsent().targeting
   if (environmentHasAnalyticsEnabled && hasTargetingEnabled) {
-    mixpanel.track(eventName, {
-      eventProperties,
-    })
+    mixpanel.track(eventName, eventProperties)
     vercelTrack(eventName, eventProperties && formatVercelAnalyticsEventProperties(eventProperties))
   }
 }
 
 export function setClientAnalyticsUserProperties(userProperties: object) {
   if (environmentHasAnalyticsEnabled) {
+    maybeInitClientAnalytics()
     mixpanel.people.set(userProperties)
   }
 }
@@ -69,6 +74,16 @@ export function trackExternalLink(eventProperties?: AnalyticProperties) {
   trackClientAnalytic('External Link clicked', { ...eventProperties })
 }
 
+export function trackSectionVisible(
+  { section, sectionGroup }: { section: string; sectionGroup: string },
+  eventProperties?: AnalyticProperties,
+) {
+  trackClientAnalytic(`New Section Visible`, {
+    Section: section,
+    'Section Group': sectionGroup,
+    ...eventProperties,
+  })
+}
 export type LoginProvider = 'email' | 'google' | 'wallet'
 export function trackLoginAttempt({
   method,

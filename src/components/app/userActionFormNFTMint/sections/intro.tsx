@@ -54,7 +54,7 @@ export function UserActionFormNFTMintIntro({
                   <Button size="lg">Log In</Button>
                 </LoginDialogWrapper>
                 <MaybeAuthenticatedContent authenticatedContent={null}>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-xs text-muted-foreground md:text-sm">
                     You will need to login first to mint the NFT
                   </p>
                 </MaybeAuthenticatedContent>
@@ -86,7 +86,7 @@ function ContractMetadataDisplay({
 
   return (
     <div className="flex flex-grow flex-col gap-6">
-      <div className="flex gap-6">
+      <div className="flex flex-col gap-6 md:flex-row">
         <NFTDisplay
           alt="Stand With Crypto supporter NFT"
           raw
@@ -118,7 +118,7 @@ function ContractMetadataDisplay({
 export function ContractMetadataDisplaySkeleton() {
   return (
     <>
-      <div className="flex gap-6">
+      <div className="flex flex-col gap-6 md:flex-row">
         <NFTDisplaySkeleton size="lg" />
         <div className="space-y-2">
           <Skeleton>

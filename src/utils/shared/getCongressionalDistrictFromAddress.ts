@@ -60,8 +60,22 @@ const parseStateString = (districtString: string) => {
   return stateCode.toUpperCase()
 }
 
+export interface GetCongressionalDistrictFromAddressSuccess {
+  stateCode: string
+  districtNumber: number
+  googleCivicData: GoogleCivicInfoResponse
+}
+
+export type CongressionalDistrictFromAddress = Awaited<
+  ReturnType<typeof getCongressionalDistrictFromAddress>
+>
+
 export async function getCongressionalDistrictFromAddress(address: string) {
   const result = await getGoogleCivicDataFromAddress(address)
+  if ('error' in result) {
+    const returned = { notFoundReason: 'NOT_USA_ADDRESS' as const }
+    return returned
+  }
   const districtString = findCongressionalDistrictString(result, address)
   if (isObject(districtString)) {
     return districtString
@@ -74,5 +88,9 @@ export async function getCongressionalDistrictFromAddress(address: string) {
   if (isObject(stateCode)) {
     return stateCode
   }
-  return { stateCode, districtNumber }
+  return {
+    stateCode,
+    districtNumber,
+    googleCivicData: result,
+  } as GetCongressionalDistrictFromAddressSuccess
 }

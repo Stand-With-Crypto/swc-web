@@ -4,6 +4,7 @@ import { faker } from '@faker-js/faker'
 import { DataCreationMethod } from '@prisma/client'
 
 import { runBin } from '@/bin/runBin'
+import { parseThirdwebAddress } from '@/hooks/useThirdwebAddress/parseThirdwebAddress'
 import { mockCreateUserInput } from '@/mocks/models/mockUser'
 import { mockCreateUserCryptoAddressInput } from '@/mocks/models/mockUserCryptoAddress'
 import { mockCreateUserEmailAddressInput } from '@/mocks/models/mockUserEmailAddress'
@@ -11,9 +12,8 @@ import { prismaClient } from '@/utils/server/prismaClient'
 import { getLogger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 
-const LOCAL_USER_CRYPTO_ADDRESS = requiredEnv(
-  process.env.LOCAL_USER_CRYPTO_ADDRESS,
-  'process.env.LOCAL_USER_CRYPTO_ADDRESS',
+const LOCAL_USER_CRYPTO_ADDRESS = parseThirdwebAddress(
+  requiredEnv(process.env.LOCAL_USER_CRYPTO_ADDRESS, 'process.env.LOCAL_USER_CRYPTO_ADDRESS'),
 )
 
 const LOCAL_USER_EMAIL_ADDRESS = requiredEnv(
@@ -36,7 +36,7 @@ async function setUpLocalUserToHaveEmbeddedEmailAddress() {
         id: address.id,
       },
       data: {
-        cryptoAddress: faker.finance.ethereumAddress(),
+        cryptoAddress: parseThirdwebAddress(faker.finance.ethereumAddress()),
       },
     })
   }

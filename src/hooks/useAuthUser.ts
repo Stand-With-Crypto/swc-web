@@ -7,12 +7,19 @@ and https://github.com/Stand-With-Crypto/swc-web/blob/a99648eb4097dffb335155375b
 import { Json } from '@thirdweb-dev/auth'
 import { useUser } from '@thirdweb-dev/react'
 
+import { parseThirdwebAddress } from '@/hooks/useThirdwebAddress/parseThirdwebAddress'
 import { AuthSessionMetadata } from '@/utils/server/thirdweb/types'
 
 export function useAuthUser() {
   const data = useUser<Json, AuthSessionMetadata>()
   return {
     ...data,
-    user: data.user ? { ...data.user, userId: data.user.session!.userId } : undefined,
+    user: data.user
+      ? {
+          ...data.user,
+          userId: data.user.session!.userId,
+          address: parseThirdwebAddress(data.user.address),
+        }
+      : undefined,
   }
 }

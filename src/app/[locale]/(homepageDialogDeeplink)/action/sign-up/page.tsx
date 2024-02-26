@@ -12,7 +12,6 @@ export default function UserActionOptInSWCDeepLink() {
   const urls = useIntlUrls()
   const router = useRouter()
   const { session } = useThirdwebData()
-
   React.useEffect(() => {
     if (session.isLoggedIn) {
       router.replace(urls.profile())

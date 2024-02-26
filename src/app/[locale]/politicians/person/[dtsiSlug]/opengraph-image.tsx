@@ -56,8 +56,8 @@ export default async function Image({ params }: { params: { dtsiSlug: string } }
             />
           ) : null}
           <div tw="text-5xl mb-2 mt-8 flex text-gray-400">
-            See where <span tw="text-white inline-block mx-2">{dtsiPersonFullName(person)}</span>{' '}
-            stands on crypto
+            See where <span tw="text-white mx-2">{dtsiPersonFullName(person)}</span> stands on
+            crypto
           </div>
         </div>
         <div tw="text-gray-400">standwithcrypto.org</div>

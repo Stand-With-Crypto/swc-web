@@ -9,6 +9,20 @@ import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { toBool } from '@/utils/shared/toBool'
 
 const dsn = process.env.NEXT_PUBLIC_SENTRY_DSN
+
+const COMMON_ERROR_MESSAGES_TO_GROUP: string[] = [
+  'No internet connection detected',
+  "Failed to execute 'removeChild",
+  'bytecode', // Can't find variable: bytecode
+  'ResizeObserver loop', // ResizeObserver loop completed with undelivered notifications.
+  'Load failed',
+  'Failed to fetch',
+  "Failed to read the 'localStorage'",
+  'Converting circular structure to JSON',
+  "Cannot read properties of undefined (reading 'call')",
+  'JSON.stringify cannot serialize cyclic structures',
+]
+
 Sentry.init({
   environment: NEXT_PUBLIC_ENVIRONMENT,
   dsn,
@@ -24,14 +38,7 @@ Sentry.init({
   // replaysSessionSampleRate: 0.001,
 
   // You can remove this option if you're not planning to use the Sentry Session Replay feature:
-  integrations: [
-    new ExtraErrorData({ depth: 10 }),
-    // new Sentry.Replay({
-    //   // Additional Replay configuration goes in here, for example:
-    //   maskAllText: true,
-    //   blockAllMedia: true,
-    // }),
-  ],
+  integrations: [new ExtraErrorData({ depth: 10 }), Sentry.replayIntegration()],
   denyUrls: [
     /vitals\.vercel-analytics\.com/i,
     // Chrome extensions
@@ -39,6 +46,9 @@ Sentry.init({
     /extensions\//i,
     /^chrome:\/\//i,
   ],
+  replaysSessionSampleRate: 0,
+  replaysOnErrorSampleRate: 1.0,
+  ignoreErrors: ['globalThis is not defined'],
   beforeSend: (event, hint) => {
     if (NEXT_PUBLIC_ENVIRONMENT === 'local') {
       const shouldSuppress = toBool(process.env.SUPPRESS_SENTRY_ERRORS_ON_LOCAL) || !dsn
@@ -50,6 +60,23 @@ Sentry.init({
         return null
       }
     }
+    try {
+      const error = hint.originalException as Error
+      const errorMessage = error?.message
+      if (errorMessage) {
+        COMMON_ERROR_MESSAGES_TO_GROUP.forEach(message => {
+          if (errorMessage.indexOf(message) !== -1) {
+            event.fingerprint = [`forceGroupErrorMessage-${message}`]
+            console.log(`Sentry: Forced fingerprint to "${message}"`)
+          }
+        })
+      }
+    } catch (e) {
+      console.error(e)
+      console.log('Sentry: Failed to force fingerprint')
+      return event
+    }
+
     return event
   },
 })
