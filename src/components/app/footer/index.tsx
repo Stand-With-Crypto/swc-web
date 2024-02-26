@@ -9,7 +9,7 @@ import { cn } from '@/utils/web/cn'
 
 const i18nKey = 'FooterLinks'
 
-const footerLinkStyles = 'font-bold block text-black'
+const footerLinkStyles = cn('font-bold block text-black')
 
 export async function Footer({ locale }: { locale: SupportedLocale }) {
   const intl = await getIntl(locale)

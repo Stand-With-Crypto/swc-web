@@ -17,7 +17,7 @@ export const ExternalLink = React.forwardRef<
 >(({ className, ...props }, ref) => {
   return (
     <a
-      className={cn('text-blue-600', 'hover:underline', className)}
+      className={cn('text-blue-600 hover:underline', className)}
       ref={ref}
       target="_blank"
       {...props}
