@@ -20,7 +20,7 @@ export function DonateButton() {
       },
       () =>
         actionCreateCoinbaseCommerceCharge().then(res => {
-          const windowReference = window.open(res.hostedUrl, '_blank')
+          const windowReference = openWindow(res.hostedUrl)
           if (!windowReference) {
             openWindow(res.hostedUrl, '_self')
           }
