@@ -16,7 +16,11 @@ const COMMON_ERROR_MESSAGES_TO_GROUP: string[] = [
   'bytecode', // Can't find variable: bytecode
   'ResizeObserver loop', // ResizeObserver loop completed with undelivered notifications.
   'Load failed',
+  'Failed to fetch',
   "Failed to read the 'localStorage'",
+  'Converting circular structure to JSON',
+  "Cannot read properties of undefined (reading 'call')",
+  'JSON.stringify cannot serialize cyclic structures',
 ]
 
 Sentry.init({

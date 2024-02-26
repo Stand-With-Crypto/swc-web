@@ -1,4 +1,5 @@
 import { SupportedLocale } from '@/intl/locales'
+import { intlNumberFormat } from '@/utils/web/intlNumberFormat'
 
 export function FormattedNumber({
   amount,
@@ -14,7 +15,7 @@ export function FormattedNumber({
   minimumSignificantDigits?: number | undefined
   maximumSignificantDigits?: number | undefined
 }) {
-  const response = new Intl.NumberFormat(locale, {
+  const response = intlNumberFormat(locale, {
     ...otherProps,
   }).format(amount)
   return response
