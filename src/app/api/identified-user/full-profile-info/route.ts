@@ -4,16 +4,18 @@ import { NextResponse } from 'next/server'
 
 import { getClientAddress } from '@/clientModels/clientAddress'
 import { getSensitiveDataClientUser } from '@/clientModels/clientUser/sensitiveDataClientUser'
-import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
+import { getMaybeUserAndMethodOfMatchWithMaybeSession } from '@/utils/server/getMaybeUserAndMethodOfMatch'
 
 export const dynamic = 'force-dynamic'
 
 async function apiResponseForUserFullProfileInfo() {
-  const { user } = await getMaybeUserAndMethodOfMatch({
-    include: {
-      primaryUserCryptoAddress: true,
-      primaryUserEmailAddress: true,
-      address: true,
+  const { user } = await getMaybeUserAndMethodOfMatchWithMaybeSession({
+    prisma: {
+      include: {
+        primaryUserCryptoAddress: true,
+        primaryUserEmailAddress: true,
+        address: true,
+      },
     },
   })
 

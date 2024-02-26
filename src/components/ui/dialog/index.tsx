@@ -10,29 +10,17 @@ import {
   dialogContentStyles,
   dialogOverlayStyles,
 } from '@/components/ui/dialog/styles'
-import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
-import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
 import { cn } from '@/utils/web/cn'
-import {
-  PrimitiveComponentAnalytics,
-  trackPrimitiveComponentAnalytics,
-} from '@/utils/web/primitiveComponentAnalytics'
+import { PrimitiveComponentAnalytics } from '@/utils/web/primitiveComponentAnalytics'
+
+import { trackDialogOpen } from './trackDialogOpen'
 
 export type DialogProps = DialogPrimitive.DialogProps & PrimitiveComponentAnalytics<boolean>
 
 function Dialog({ onOpenChange, analytics, ...props }: DialogProps) {
   const wrappedOnChangeOpen = React.useCallback(
     (open: boolean) => {
-      trackPrimitiveComponentAnalytics(
-        ({ properties }) => {
-          trackClientAnalytic(`Dialog ${open ? 'Opened' : 'Closed'}`, {
-            component: AnalyticComponentType.modal,
-            action: AnalyticActionType.view,
-            ...properties,
-          })
-        },
-        { args: open, analytics },
-      )
+      trackDialogOpen({ open, analytics })
       onOpenChange?.(open)
     },
     [onOpenChange, analytics],

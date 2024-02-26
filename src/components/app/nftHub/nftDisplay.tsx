@@ -1,5 +1,6 @@
 'use client'
 import { UserActionType } from '@prisma/client'
+import * as Sentry from '@sentry/nextjs'
 
 import { SensitiveDataClientUserAction } from '@/clientModels/clientUserAction/sensitiveDataClientUserAction'
 import { USER_ACTION_ROW_CTA_INFO } from '@/components/app/userActionRowCTA/constants'
@@ -23,16 +24,28 @@ const ButtonWrapper = USER_ACTION_ROW_CTA_INFO[UserActionType.NFT_MINT].WrapperC
 
 export function NFTDisplay({ userActions }: NFTDisplayProps) {
   let optInNftButton = true
+
   const userNfts: NFTImages[] = userActions.reduce(
     (acc: NFTImages[], action: SensitiveDataClientUserAction): NFTImages[] => {
       const nftSlug = action.nftMint?.nftSlug
 
-      if (nftSlug) {
+      if (nftSlug && !NFT_CLIENT_METADATA[nftSlug as NFTSlug]) {
+        Sentry.captureMessage(
+          `NFTDisplay - nftSlug \`${nftSlug}\` doesn't have an associated \`NFT_CLIENT_METADATA\``,
+          {
+            extra: { nftSlug, configuredNfts: Object.keys(NFT_CLIENT_METADATA) },
+          },
+        )
+      }
+
+      if (nftSlug && NFT_CLIENT_METADATA[nftSlug as NFTSlug]) {
         const { name, image } = NFT_CLIENT_METADATA[nftSlug as NFTSlug]
         acc.push({ name, image: image.url, width: image.width, height: image.height })
       }
 
-      if (nftSlug === 'swc-shield' && optInNftButton) optInNftButton = false
+      if (nftSlug === 'swc-shield' && optInNftButton) {
+        optInNftButton = false
+      }
 
       return acc
     },

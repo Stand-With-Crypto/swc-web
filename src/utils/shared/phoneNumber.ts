@@ -1,4 +1,3 @@
-import * as Sentry from '@sentry/nextjs'
 // https://stackoverflow.com/a/43687969
 export function normalizePhoneNumber(passed: string) {
   // Split number and extension
@@ -23,6 +22,5 @@ export function formatPhoneNumber(phoneNumber: string) {
     const intlCode = match[1] ? '+1 ' : ''
     return [intlCode, '(', match[2], ') ', match[3], '-', match[4]].join('')
   }
-  Sentry.captureMessage("Couldn't correctly format formatPhoneNumber", { extra: { phoneNumber } })
   return phoneNumber
 }

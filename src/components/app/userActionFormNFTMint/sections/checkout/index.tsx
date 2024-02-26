@@ -1,7 +1,6 @@
 import React from 'react'
 import Balancer from 'react-wrap-balancer'
 import {
-  useAddress,
   useConnectionStatus,
   useContract,
   useContractMetadata,
@@ -34,6 +33,7 @@ import { PageTitle } from '@/components/ui/pageTitleText'
 import { Skeleton } from '@/components/ui/skeleton'
 import { UseSectionsReturn } from '@/hooks/useSections'
 import { MintStatus } from '@/hooks/useSendMintNFTTransaction'
+import { useThirdwebAddress } from '@/hooks/useThirdwebAddress'
 import { SupportedCryptoCurrencyCodes } from '@/utils/shared/currency'
 import { theme } from '@/utils/web/thirdweb/theme'
 
@@ -72,7 +72,7 @@ export function UserActionFormNFTMintCheckout({
 }: UserActionFormNFTMintCheckoutProps) {
   const { contract } = useContract(MINT_NFT_CONTRACT_ADDRESS)
   const { data: contractMetadata, isLoading: isLoadingMetadata } = useContractMetadata(contract)
-  const address = useAddress()
+  const address = useThirdwebAddress()
 
   const checkoutError = useCheckoutError({
     totalFee: totalFee,
@@ -112,7 +112,7 @@ export function UserActionFormNFTMintCheckout({
         </div>
 
         <Card>
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between gap-2">
             <p>Quantity</p>
             <QuantityInput
               onChange={setQuantity}
@@ -125,7 +125,7 @@ export function UserActionFormNFTMintCheckout({
 
         <Card className="w-full">
           <div className="space-y-8">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between gap-2 text-sm md:text-base">
               <div className="max-w-96">
                 <p>Donation</p>
                 <p className="text-xs text-muted-foreground">
@@ -141,12 +141,12 @@ export function UserActionFormNFTMintCheckout({
               <CurrencyDisplay value={mintFeeDisplay} />
             </div>
 
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between gap-2 text-sm md:text-base">
               <p>Gas fee</p>
               <CurrencyDisplay value={gasFeeDisplay} />
             </div>
 
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between gap-2 text-sm md:text-base">
               <p>Total</p>
               <CurrencyDisplay value={totalFeeDisplay} />
             </div>
@@ -160,7 +160,7 @@ export function UserActionFormNFTMintCheckout({
                 checked={isUSResident}
                 onCheckedChange={val => onIsUSResidentChange(val as boolean)}
               />
-              <p className="leading-4 text-fontcolor-muted">
+              <p className="text-sm leading-4 text-fontcolor-muted md:text-base">
                 I am a US citizen or lawful permanent resident (i.e. a green card holder). Checking
                 this box will append data to your onchain transaction to comply with US regulation.
                 Donations from non-US residents cannot be used for electioneering purposes.
@@ -222,7 +222,7 @@ function UserActionFormNFTMintCheckoutSkeleton() {
         </div>
 
         <CardSkeleton>
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between gap-2">
             <p>Quantity</p>
             <QuantityInput onChange={noop} onDecrement={noop} onIncrement={noop} value={0} />
           </div>
@@ -231,8 +231,8 @@ function UserActionFormNFTMintCheckoutSkeleton() {
         <CardSkeleton>
           <div className="space-y-8">
             {Array.from({ length: 3 }, (_, i) => (
-              <div className="flex items-center justify-between" key={i}>
-                <div className="max-w-96">
+              <div className="flex items-center justify-between gap-2" key={i}>
+                <div className="max-w-96 text-sm md:text-base">
                   <p>Donation</p>
                   <p className="text-xs text-muted-foreground">
                     <Balancer>Lorem ipsum dolor sit amet consectetur adipisicing elit.</Balancer>

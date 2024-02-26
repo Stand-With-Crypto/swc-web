@@ -1,6 +1,7 @@
 import { faker } from '@faker-js/faker'
 import { isFunction } from 'lodash-es'
 
+import { parseThirdwebAddress } from '@/hooks/useThirdwebAddress/parseThirdwebAddress'
 import { fakerFields } from '@/mocks/fakerUtils'
 import { ThirdwebEmbeddedWalletMetadata } from '@/utils/server/thirdweb/fetchEmbeddedWalletMetadataFromThirdweb'
 import { onNewLogin } from '@/utils/server/thirdweb/onLogin'
@@ -17,7 +18,7 @@ export type TestCase = {
 }
 export function getDefaultParameters(): Params {
   return {
-    cryptoAddress: faker.finance.ethereumAddress(),
+    cryptoAddress: parseThirdwebAddress(faker.finance.ethereumAddress()),
     localUser: null,
     getUserSessionId: () => fakerFields.id(),
     // dependency injecting this in to the function so we can mock it in tests

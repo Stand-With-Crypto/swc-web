@@ -24,6 +24,6 @@ export async function generateMetadata(_props: Props): Promise<Metadata> {
 
 export default async function PoliticiansHomepage({ params }: PageProps) {
   const { locale } = params
-  const dtsiHomepagePeople = await queryDTSIHomepagePeople()
+  const dtsiHomepagePeople = await queryDTSIHomepagePeople({ limit: 10 })
   return <PagePoliticians {...{ dtsiHomepagePeople, locale }} />
 }

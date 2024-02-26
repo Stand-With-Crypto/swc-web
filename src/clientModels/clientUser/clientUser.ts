@@ -30,12 +30,13 @@ export const getClientUser = (record: GetClientProps): ClientUser => {
   const { firstName, lastName, primaryUserCryptoAddress, id, informationVisibility, address } =
     record
 
-  const userLocationDetails = address
-    ? {
-        administrativeAreaLevel1: address.administrativeAreaLevel1,
-        countryCode: address.countryCode,
-      }
-    : null
+  const userLocationDetails =
+    address && address.countryCode === 'US'
+      ? {
+          administrativeAreaLevel1: address.administrativeAreaLevel1,
+          countryCode: address.countryCode,
+        }
+      : null
 
   return getClientModel({
     firstName: informationVisibility === UserInformationVisibility.ALL_INFO ? firstName : null,

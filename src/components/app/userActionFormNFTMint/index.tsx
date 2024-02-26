@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import { capitalize } from 'lodash-es'
 import { toast } from 'sonner'
 
@@ -10,6 +10,7 @@ import {
   UserActionFormNFTMintSectionNames,
 } from '@/components/app/userActionFormNFTMint/constants'
 import { Checkbox } from '@/components/ui/checkbox'
+import { trackDialogOpen } from '@/components/ui/dialog/trackDialogOpen'
 import { useSections } from '@/hooks/useSections'
 import { useSendMintNFTTransaction } from '@/hooks/useSendMintNFTTransaction'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
@@ -24,12 +25,17 @@ import {
 } from './sections/transactionWatch'
 import { useCheckoutController } from './useCheckoutController'
 
-export function UserActionFormNFTMint() {
+export function UserActionFormNFTMint({ trackMount }: { trackMount?: boolean }) {
   const sectionProps = useSections({
     sections: Object.values(UserActionFormNFTMintSectionNames),
     initialSectionId: UserActionFormNFTMintSectionNames.INTRO,
     analyticsName: ANALYTICS_NAME_USER_ACTION_FORM_NFT_MINT,
   })
+  useEffect(() => {
+    if (trackMount) {
+      trackDialogOpen({ open: true, analytics: ANALYTICS_NAME_USER_ACTION_FORM_NFT_MINT })
+    }
+  }, [trackMount])
 
   const checkoutController = useCheckoutController()
 

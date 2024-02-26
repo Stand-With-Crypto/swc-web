@@ -31,7 +31,7 @@ export function HasOptedInToMembershipForm({
             future of crypto in America
           </li>
           <li>
-            Making your voice heard and ensure Stand with Crypto will advocate for issues you care
+            Making your voice heard and ensure Stand With Crypto will advocate for issues you care
             about
           </li>
           <li>

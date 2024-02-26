@@ -17,16 +17,16 @@ import {
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
 
 export enum StanceOnCryptoOptions {
+  ALL = 'All',
   PRO_CRYPTO = 'Pro-crypto',
   ANTI_CRYPTO = 'Anti-crypto',
   NEUTRAL = 'Neutral',
   PENDING = 'Pending',
-  ALL = 'All',
 }
 export const PARTY_OPTIONS = {
+  ALL: 'All',
   REPUBLICAN: DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN,
   DEMOCRAT: DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT,
-  ALL: 'All',
 }
 export function getPartyOptionDisplayName(party: string) {
   switch (party) {
@@ -39,10 +39,10 @@ export function getPartyOptionDisplayName(party: string) {
   }
 }
 export const ROLE_OPTIONS = {
+  ALL: 'All',
   PRESIDENT: DTSI_PersonRoleCategory.PRESIDENT,
   SENATE: DTSI_PersonRoleCategory.SENATE,
   CONGRESS: DTSI_PersonRoleCategory.CONGRESS,
-  ALL: 'All',
 }
 export function getRoleOptionDisplayName(role: string) {
   switch (role) {

@@ -5,6 +5,7 @@ import { UserActionType, UserEmailAddressSource, UserInformationVisibility } fro
 import { flatten, groupBy, keyBy, times } from 'lodash-es'
 
 import { runBin } from '@/bin/runBin'
+import { parseThirdwebAddress } from '@/hooks/useThirdwebAddress/parseThirdwebAddress'
 import { mockCreateAddressInput } from '@/mocks/models/mockAddress'
 import { mockCreateAuthenticationNonceInput } from '@/mocks/models/mockAuthenticationNonce'
 import { mockCreateNFTMintInput } from '@/mocks/models/mockNFTMint'
@@ -26,9 +27,8 @@ import { batchAsyncAndLog } from '@/utils/shared/batchAsyncAndLog'
 import { getLogger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 
-const LOCAL_USER_CRYPTO_ADDRESS = requiredEnv(
-  process.env.LOCAL_USER_CRYPTO_ADDRESS,
-  'process.env.LOCAL_USER_CRYPTO_ADDRESS',
+const LOCAL_USER_CRYPTO_ADDRESS = parseThirdwebAddress(
+  requiredEnv(process.env.LOCAL_USER_CRYPTO_ADDRESS, 'process.env.LOCAL_USER_CRYPTO_ADDRESS'),
 )
 
 enum SeedSize {
@@ -187,7 +187,7 @@ async function seed() {
             : null,
         cryptoAddress: shouldUseInitialCryptoAddress
           ? initialCryptoAddresses.pop()!
-          : faker.finance.ethereumAddress(),
+          : parseThirdwebAddress(faker.finance.ethereumAddress()),
         userId: selectedUser.id,
       }
     }),

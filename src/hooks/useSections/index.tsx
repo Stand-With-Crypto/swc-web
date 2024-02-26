@@ -1,7 +1,7 @@
 import React from 'react'
 import * as Sentry from '@sentry/nextjs'
 
-import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
+import { trackSectionVisible } from '@/utils/web/clientAnalytics'
 
 import { UseSectionsProps, UseSectionsReturn } from './useSections.types'
 
@@ -20,15 +20,19 @@ export function useSections<SectionKey extends string>({
     initialSectionId ?? sections[0],
   )
 
-  const goToSection = React.useCallback(
-    (section: SectionKey) => {
+  const goToSection: UseSectionsReturn<SectionKey>['goToSection'] = React.useCallback(
+    (section, options = {}) => {
+      if (section === currentSection) {
+        return
+      }
+
       setCurrentSection(section)
-      trackClientAnalytic(`New Section Visible`, {
-        Section: section,
-        'Section Group': analyticsName,
-      })
+
+      if (!options.disableAnalytics) {
+        trackSectionVisible({ section, sectionGroup: analyticsName })
+      }
     },
-    [setCurrentSection, analyticsName],
+    [currentSection, analyticsName],
   )
 
   const handleSectionNotFound = React.useCallback(() => {

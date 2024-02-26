@@ -3,6 +3,7 @@ import { renderHook } from '@testing-library/react'
 
 import { SupportedLocale } from '@/intl/locales'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
+import { intlNumberFormat } from '@/utils/web/intlNumberFormat'
 
 import { useNumeralArray } from '.'
 
@@ -16,7 +17,7 @@ const EDGE_CASES: [number, string[]][] = [
 ]
 
 function formatCurrency(value: number, locale: SupportedLocale = SupportedLocale.EN_US) {
-  return new Intl.NumberFormat(locale, {
+  return intlNumberFormat(locale, {
     style: 'currency',
     currency: SupportedFiatCurrencyCodes.USD,
     maximumFractionDigits: 0,

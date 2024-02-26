@@ -1,9 +1,12 @@
+'use client'
+
 import React from 'react'
 import * as Sentry from '@sentry/nextjs'
 import { useENS } from '@thirdweb-dev/react'
 import { useRouter } from 'next/navigation'
 import { Arguments, useSWRConfig } from 'swr'
 
+import { ANALYTICS_NAME_LOGIN } from '@/components/app/authentication/constants'
 import { LazyUpdateUserProfileForm } from '@/components/app/updateUserProfileForm/lazyLoad'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -14,18 +17,17 @@ import { useThirdwebData } from '@/hooks/useThirdwebData'
 import { apiUrls } from '@/utils/shared/urls'
 import { appendENSHookDataToUser } from '@/utils/web/appendENSHookDataToUser'
 
-import {
-  setHasSeenCompleteProfilePrompt,
-  useHasSeenCompleteProfilePrompt,
-} from './hasSeenCompleteProfilePrompt'
 import { ThirdwebLoginContent } from './thirdwebLoginContent'
 
 interface LoginDialogWrapperProps extends React.PropsWithChildren {
   authenticatedContent?: React.ReactNode
   loadingFallback?: React.ReactNode
+  forceUnauthenticated?: boolean
 }
 
 enum LoginSections {
+  LOADING = 'loading',
+  AUTHENTICATED = 'authenticated',
   LOGIN = 'login',
   FINISH_PROFILE = 'finishProfile',
 }
@@ -34,29 +36,77 @@ export function LoginDialogWrapper({
   children,
   authenticatedContent,
   loadingFallback,
+  forceUnauthenticated,
 }: LoginDialogWrapperProps) {
   const { session } = useThirdwebData()
-  const { data: hasSeenCompleteProfilePrompt, isLoading: isLoadingHasSeenProfilePrompt } =
-    useHasSeenCompleteProfilePrompt()
+  const { goToSection, currentSection } = useSections({
+    sections: Object.values(LoginSections),
+    initialSectionId: LoginSections.LOADING,
+    analyticsName: 'Login Button',
+  })
+  const dialogProps = useDialog({ analytics: ANALYTICS_NAME_LOGIN })
 
-  if (session.isLoading && isLoadingHasSeenProfilePrompt && loadingFallback) {
+  /**
+   * This is not pretty, but we need to both sync the session state with the current section
+   * and also be able to programmatically change the section. The edge cases we're handling here are:
+   * 1. When the user logs in we should not send him directly to the authed content, we should let
+   *    `handleLoginSuccess` decide to sent him to finish profile or to the authed content
+   * 2. When the user refreshes the page we should verify, based on the session, if we should show
+   *    the authed or unauthed content
+   * 3. When the user logs in and out without refreshing the page we should change the current section manually
+   * 4. If the user logs out through other instance of this component, we should change the current section manually
+   */
+  React.useEffect(() => {
+    if (session.isLoading) {
+      return
+    }
+
+    if (!session.isLoggedIn && currentSection === LoginSections.AUTHENTICATED) {
+      goToSection(LoginSections.LOGIN, { disableAnalytics: true })
+    }
+
+    if (!dialogProps.open || currentSection === LoginSections.LOADING) {
+      goToSection(session.isLoggedIn ? LoginSections.AUTHENTICATED : LoginSections.LOGIN, {
+        disableAnalytics: true,
+      })
+    }
+  }, [currentSection, dialogProps.open, goToSection, session])
+
+  const shouldShowLoadingState = session.isLoading || currentSection === LoginSections.LOADING
+  if (shouldShowLoadingState && loadingFallback) {
     return loadingFallback
   }
 
-  if (session.isLoggedIn && hasSeenCompleteProfilePrompt) {
+  if (
+    session.isLoggedIn &&
+    currentSection === LoginSections.AUTHENTICATED &&
+    !forceUnauthenticated
+  ) {
     return authenticatedContent
   }
 
-  return <UnauthenticatedSection>{children}</UnauthenticatedSection>
+  return (
+    <UnauthenticatedSection
+      currentSection={currentSection}
+      dialogProps={dialogProps}
+      goToSection={goToSection}
+    >
+      {children}
+    </UnauthenticatedSection>
+  )
 }
 
-function UnauthenticatedSection({ children }: React.PropsWithChildren) {
-  const dialogProps = useDialog({ analytics: 'Login' })
-  const { goToSection, currentSection } = useSections({
-    sections: Object.values(LoginSections),
-    initialSectionId: LoginSections.LOGIN,
-    analyticsName: 'Login',
-  })
+export function UnauthenticatedSection({
+  children,
+  goToSection,
+  currentSection,
+  dialogProps,
+}: React.PropsWithChildren<{
+  goToSection: (section: LoginSections) => void
+  currentSection: LoginSections
+  dialogProps: ReturnType<typeof useDialog>
+}>) {
+  const { session } = useThirdwebData()
 
   const { mutate } = useApiResponseForUserFullProfileInfo()
 
@@ -64,11 +114,11 @@ function UnauthenticatedSection({ children }: React.PropsWithChildren) {
     (open: boolean) => {
       dialogProps.onOpenChange(open)
 
-      if (!open) {
-        setHasSeenCompleteProfilePrompt(true)
+      if (!open && session.isLoggedIn) {
+        goToSection(LoginSections.AUTHENTICATED)
       }
     },
-    [dialogProps],
+    [dialogProps, goToSection, session.isLoggedIn],
   )
 
   const handleLoginSuccess = React.useCallback(async () => {
@@ -145,17 +195,6 @@ function LoginSection({ onLogin }: { onLogin: () => void | Promise<void> }) {
 function FinishProfileSection({ onSuccess }: { onSuccess: () => void }) {
   const { data: userData } = useApiResponseForUserFullProfileInfo()
   const { data: ensData, isLoading: isLoadingEnsData } = useENS()
-
-  React.useEffect(() => {
-    const beforeUnload = () => {
-      setHasSeenCompleteProfilePrompt(true)
-      console.log('beforeunload UnauthenticatedSection')
-    }
-    window.addEventListener('beforeunload', beforeUnload)
-    return () => {
-      window.removeEventListener('beforeunload', beforeUnload)
-    }
-  }, [])
 
   const user = React.useMemo(() => {
     if (!userData?.user || isLoadingEnsData) {

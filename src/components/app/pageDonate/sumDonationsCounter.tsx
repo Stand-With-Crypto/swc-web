@@ -10,6 +10,7 @@ import { SupportedLocale } from '@/intl/locales'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { apiUrls } from '@/utils/shared/urls'
+import { intlNumberFormat } from '@/utils/web/intlNumberFormat'
 
 interface SumDonationsCounterProps {
   initialData: SumDonations
@@ -19,7 +20,7 @@ interface SumDonationsCounterProps {
 export function SumDonationsCounter(props: SumDonationsCounterProps) {
   const { data } = useLiveSumDonations(props)
   const formatted = useMemo(() => {
-    return new Intl.NumberFormat(props.locale, {
+    return intlNumberFormat(props.locale, {
       style: 'currency',
       currency: SupportedFiatCurrencyCodes.USD,
       maximumFractionDigits: 0,

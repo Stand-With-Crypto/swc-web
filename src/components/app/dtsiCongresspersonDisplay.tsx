@@ -9,29 +9,31 @@ import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { convertDTSIStanceScoreToCryptoSupportLanguageSentence } from '@/utils/dtsi/dtsiStanceScoreUtils'
 
 export function DtsiCongresspersonDisplay({
-  congressperson,
+  dtsiPersonResponse,
 }: {
-  congressperson?: UseGetDTSIPeopleFromAddressResponse
+  dtsiPersonResponse?: UseGetDTSIPeopleFromAddressResponse
 }) {
-  if (!congressperson || 'notFoundReason' in congressperson) {
-    return <div>{formatGetDTSIPeopleFromAddressNotFoundReason(congressperson)}</div>
+  if (!dtsiPersonResponse || 'notFoundReason' in dtsiPersonResponse) {
+    return <div>{formatGetDTSIPeopleFromAddressNotFoundReason(dtsiPersonResponse)}</div>
   }
+
+  const { dtsiPerson } = dtsiPersonResponse
 
   return (
     <div className="flex flex-row items-center gap-4 text-sm md:text-base">
       <div className="relative">
-        <DTSIAvatar person={congressperson} size={60} />
+        <DTSIAvatar person={dtsiPerson} size={60} />
         <div className="absolute bottom-[-8px] right-[-8px]">
-          <DTSIFormattedLetterGrade person={congressperson} size={25} />
+          <DTSIFormattedLetterGrade person={dtsiPerson} size={25} />
         </div>
       </div>
       <div>
         <div className="font-bold">
           Your representative is{' '}
-          <span className="text-nowrap">{dtsiPersonFullName(congressperson)}</span>
+          <span className="text-nowrap">{dtsiPersonFullName(dtsiPerson)}</span>
         </div>
         <div className="text-fontcolor-muted">
-          {convertDTSIStanceScoreToCryptoSupportLanguageSentence(congressperson)}
+          {convertDTSIStanceScoreToCryptoSupportLanguageSentence(dtsiPerson)}
         </div>
       </div>
     </div>

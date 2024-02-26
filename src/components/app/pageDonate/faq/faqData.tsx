@@ -11,7 +11,7 @@ export const FAQ_DATA: FAQEntry[] = [
     content: () => (
       <>
         <p>
-          Stand with Crypto is a grassroots organization dedicated to giving voice to the millions
+          Stand With Crypto is a grassroots organization dedicated to giving voice to the millions
           of Americans who own crypto and want smart crypto policies that protect consumers and
           promote innovation. Your funds will be used to support that mission, including:
         </p>
@@ -49,7 +49,7 @@ export const FAQ_DATA: FAQEntry[] = [
     ),
   },
   {
-    title: 'What does it mean to Stand with Crypto?',
+    title: 'What does it mean to Stand With Crypto?',
     content: () => (
       <>
         <p>By Standing With Crypto you choose to:</p>

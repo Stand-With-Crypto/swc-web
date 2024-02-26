@@ -19,7 +19,7 @@ export default async function LegacyPoliticianDetails({ params }: Props) {
   const maybeLegacySlug = legacyParams[legacyParams.length - 1]
   const maybeDTSISlug = legacyPoliticianToDTSIMap[maybeLegacySlug]
   if (!maybeDTSISlug) {
-    Sentry.captureMessage(`Unexpected legacy politician url /${legacyParams.join('/')}`, {
+    Sentry.captureMessage(`Unexpected legacy politician url`, {
       tags: { legacyParams: legacyParams.join('/') },
     })
     permanentRedirect(intlUrls.politiciansHomepage())

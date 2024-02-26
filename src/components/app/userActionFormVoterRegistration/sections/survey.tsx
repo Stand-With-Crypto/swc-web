@@ -56,7 +56,7 @@ export function Survey({ goToSection }: SurveyProps) {
           <p className="text-center">
             Personal information subject to{' '}
             <PrivacyPolicyDialog>
-              <span className="cursor-pointer text-blue-600">Stand with Crypto Privacy Policy</span>
+              <span className="cursor-pointer text-blue-600">Stand With Crypto Privacy Policy</span>
             </PrivacyPolicyDialog>
             .
           </p>

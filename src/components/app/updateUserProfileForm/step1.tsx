@@ -203,17 +203,20 @@ export function UpdateUserProfileForm({
               name="hasOptedInToMembership"
               render={({ field }) => (
                 <label className="block">
-                  <FormItem className="flex flex-row items-center space-x-3 space-y-0">
-                    <FormControl>
-                      <Checkbox checked={field.value} onCheckedChange={field.onChange} />
-                    </FormControl>
-                    <FormDescription>
-                      By checking this box, I agree to become a Stand With Crypto Alliance member.{' '}
-                      <SWCMembershipDialog>
-                        <button className="text-blue-600">Learn More</button>
-                      </SWCMembershipDialog>
-                      .
-                    </FormDescription>
+                  <FormItem>
+                    <div className="flex flex-row items-center space-x-3 space-y-0">
+                      <FormControl>
+                        <Checkbox checked={field.value} onCheckedChange={field.onChange} />
+                      </FormControl>
+                      <FormDescription>
+                        By checking this box, I agree to become a Stand With Crypto Alliance member.{' '}
+                        <SWCMembershipDialog>
+                          <button className="text-blue-600">Learn More</button>
+                        </SWCMembershipDialog>
+                        .
+                      </FormDescription>
+                    </div>
+                    <FormErrorMessage />
                   </FormItem>
                 </label>
               )}
@@ -232,7 +235,7 @@ export function UpdateUserProfileForm({
                       </FormControl>
                       <FormDescription>
                         (Optional) Check this box to consent to receive recurring automated text
-                        messages about Stand with Crypto at the phone number provided. Reply STOP to
+                        messages about Stand With Crypto at the phone number provided. Reply STOP to
                         stop. Msg and data rates may apply. See{' '}
                         <PrivacyPolicyDialog>
                           <button className="text-blue-600">Privacy Policy</button>

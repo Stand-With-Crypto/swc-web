@@ -84,7 +84,7 @@ export function ClaimNft({ goToSection, stateCode }: ClaimNftProps) {
             <ExternalLink className="text-fontcolor underline" href="https://pplplsr.com/About">
               pplpleasr
             </ExternalLink>
-            , in parternship with Stand with Crytpo, to highlight the power of the crypto community
+            , in partnership with Stand with Crytpo, to highlight the power of the crypto community
             to mobilize and vote in the 2024 elections.
             <br /> <br /> Limited to one mint per person.
           </p>

@@ -19,7 +19,7 @@ export const ACTION_NFT_SLUG: Record<UserActionType, NFTSlug | null> = {
   [UserActionType.DONATION]: null,
   [UserActionType.NFT_MINT]: null,
   [UserActionType.TWEET]: null,
-  [UserActionType.VOTER_REGISTRATION]: null, // Add NFTSlug.VOTER_REGISTRATION later
+  [UserActionType.VOTER_REGISTRATION]: NFTSlug.I_AM_A_VOTER,
 }
 
 const logger = getLogger('claimNft')

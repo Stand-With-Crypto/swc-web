@@ -37,11 +37,12 @@ import { getLogger } from '@/utils/shared/logger'
 import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
 import { generateReferralId } from '@/utils/shared/referralId'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
+import { zodEmailAddress } from '@/validation/fields/zodEmailAddress'
 import { zodFirstName, zodLastName } from '@/validation/fields/zodName'
 import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
 
 export const zodVerifiedSWCPartnersUserActionOptIn = z.object({
-  emailAddress: z.string().email().toLowerCase().trim(),
+  emailAddress: zodEmailAddress,
   optInType: z.nativeEnum(UserActionOptInType),
   campaignName: z.string(),
   isVerifiedEmailAddress: z.boolean(),

@@ -30,7 +30,7 @@
     "e2e:run-headless": "NEXT_PUBLIC_IS_CYPRESS=true start-server-and-test 'npm run dev -- -p 3001 & npx inngest-cli@latest dev --no-discovery -u http://localhost:3001/api/inngest' http://localhost:3001 \"cypress run --e2e --config baseUrl=http://localhost:3001\""
   },
   "prisma": {
-    "seed": "npm run ts --transpile-only src/bin/seedLocalDb.ts"
+    "seed": "npm run ts --transpile-only src/bin/seed/seedLocalDb.ts"
   },
   "dependencies": {
     "@graphql-tools/mock": "^9.0.0",
@@ -64,7 +64,7 @@
     "@thirdweb-dev/wallets": "^2.4.8",
     "@udecode/plate": "^29.0.1",
     "@upstash/ratelimit": "^1.0.0",
-    "@upstash/redis": "^1.28.2",
+    "@upstash/redis": "^1.28.4",
     "@vercel/analytics": "^1.1.2",
     "@vercel/og": "^0.6.1",
     "@vercel/speed-insights": "^1.0.5",
@@ -73,6 +73,7 @@
     "cmdk": "^0.2.0",
     "date-fns": "^2.30.0",
     "decimal.js": "^10.4.3",
+    "detect-browser": "^5.3.0",
     "dotenv": "^16.3.1",
     "dotenv-cli": "^7.3.0",
     "ethers": "^5.7.2",

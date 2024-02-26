@@ -46,7 +46,9 @@ export const actionCreateUserActionTweet = withServerActionMiddleware(
 async function _actionCreateUserActionTweet() {
   logger.info('triggered')
   const userMatch = await getMaybeUserAndMethodOfMatch({
-    include: { primaryUserCryptoAddress: true, address: true },
+    prisma: {
+      include: { primaryUserCryptoAddress: true, address: true },
+    },
   })
   logger.info(userMatch.user ? 'found user' : 'no user found')
   const sessionId = getUserSessionId()

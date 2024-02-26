@@ -8,8 +8,42 @@ import * as Sentry from '@sentry/nextjs'
 
 import { CoinbaseCommercePayment } from '@/utils/server/coinbaseCommerce/paymentRequest'
 import { prismaClient } from '@/utils/server/prismaClient'
+import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { generateReferralId } from '@/utils/shared/referralId'
 import { UserActionDonationCampaignName } from '@/utils/shared/userActionCampaigns'
+
+export function extractPricingValues(payment: CoinbaseCommercePayment) {
+  if (payment.event.data.payments && payment.event.data.payments.length > 0) {
+    // `payments` is an array, but should contain only one payment for our donation use case.
+    for (const p of payment.event.data.payments) {
+      if (p.value?.local.amount && p.value?.local.currency) {
+        return {
+          amount: p.value.crypto.amount,
+          amountCurrencyCode: p.value.crypto.currency,
+          amountUsd: p.value.local.amount,
+        }
+      }
+    }
+  } else if (payment.event.data.pricing) {
+    // V2-only Commerce response.
+    return {
+      amount: payment.event.data.pricing.settlement.amount,
+      amountCurrencyCode: payment.event.data.pricing.settlement.currency,
+      amountUsd: payment.event.data.pricing.local.amount,
+    }
+  } else if (payment.event.type !== 'charge:pending' && payment.event.type !== 'charge:confirmed') {
+    // Some charges (such as `charge:created` and `charge:failed`) will not have a payment amount or pricing.
+    // We should not throw an error for these cases.
+    return {
+      amount: 0,
+      amountCurrencyCode: SupportedFiatCurrencyCodes.USD,
+      amountUsd: 0,
+    }
+  }
+  throw new Error(
+    'no expected payment amount or pricing found in Coinbase Commerce payment request',
+  )
+}
 
 /**
  * NOTE: All the fields reference below will be found in the `metadata` field.
@@ -55,8 +89,7 @@ export async function storePaymentRequest(payment: CoinbaseCommercePayment) {
     // Log if the Commerce payment contained a user ID but we have no corresponding user.
     Sentry.captureMessage('no user found for user ID provided in Coinbase Commerce payment', {
       extra: {
-        paymentId: payment.id,
-        pricing: payment.event.data.pricing,
+        payment,
         userId: payment.event.data.metadata.userId,
       },
     })
@@ -80,7 +113,7 @@ export async function storePaymentRequest(payment: CoinbaseCommercePayment) {
   } else {
     // Log if we have no session ID.
     Sentry.captureMessage('no session ID provided in Coinbase Commerce payment', {
-      extra: { paymentId: payment.id, pricing: payment.event.data.pricing },
+      extra: { payment },
     })
   }
 
@@ -103,8 +136,7 @@ export async function storePaymentRequest(payment: CoinbaseCommercePayment) {
     if (userEmailAddress?.user) {
       Sentry.captureMessage('creating user action donation based on primary email address', {
         extra: {
-          paymentId: payment.id,
-          pricing: payment.event.data.pricing,
+          payment,
           userId: userEmailAddress.user.id,
         },
       })
@@ -124,8 +156,7 @@ export async function storePaymentRequest(payment: CoinbaseCommercePayment) {
     if (userEmailAddress?.user) {
       Sentry.captureMessage('creating user action donation based on secondary email address', {
         extra: {
-          paymentId: payment.id,
-          pricing: payment.event.data.pricing,
+          payment,
           userId: userEmailAddress.user.id,
         },
       })
@@ -148,10 +179,7 @@ export async function storePaymentRequest(payment: CoinbaseCommercePayment) {
  */
 async function createNewUser(payment: CoinbaseCommercePayment) {
   Sentry.captureMessage('no user found for session ID or user ID - creating new user', {
-    extra: {
-      paymentId: payment.id,
-      pricing: payment.event.data.pricing,
-    },
+    extra: { payment },
   })
 
   // Create new user and also new email if available.
@@ -182,39 +210,37 @@ async function createNewUser(payment: CoinbaseCommercePayment) {
         : {}),
     },
   })
+  // If there `metadata.sessionId` is available, then we should upsert a session.
   // If there is a user session, then we should update the user ID.
-  // Otherwise, if that metadata is provided, then we should create a new session.
-  const userSession = await prismaClient.userSession.findFirst({
-    include: {
-      user: true,
-    },
-    where: {
-      id: payment.event.data.metadata.sessionId,
-    },
-  })
-  if (userSession) {
-    Sentry.captureMessage('updating existing session to new user', {
-      extra: {
-        paymentId: payment.id,
-        pricing: payment.event.data.pricing,
-        userSession,
+  // Otherwise, then we should create a new session.
+  if (payment.event.data.metadata.sessionId) {
+    const userSession = await prismaClient.userSession.findFirst({
+      include: {
+        user: true,
+      },
+      where: {
+        id: payment.event.data.metadata.sessionId,
       },
     })
-    await prismaClient.userSession.update({
-      where: { id: userSession.id },
-      data: { userId: newUser.id },
-    })
-  } else if (payment.event.data.metadata.sessionId) {
-    Sentry.captureMessage('creating new session for new user', {
-      extra: {
-        paymentId: payment.id,
-        pricing: payment.event.data.pricing,
-        userSession,
-      },
-    })
-    await prismaClient.userSession.create({
-      data: { userId: newUser.id, id: payment.event.data.metadata.sessionId },
-    })
+    if (userSession) {
+      Sentry.captureMessage(
+        'updating existing session to new user - existing user should have been found',
+        {
+          extra: {
+            payment,
+            userSession,
+          },
+        },
+      )
+      await prismaClient.userSession.update({
+        where: { id: userSession.id },
+        data: { userId: newUser.id },
+      })
+    } else {
+      await prismaClient.userSession.create({
+        data: { userId: newUser.id, id: payment.event.data.metadata.sessionId },
+      })
+    }
   }
   return newUser
 }
@@ -225,6 +251,8 @@ async function createNewUser(payment: CoinbaseCommercePayment) {
  * @param payment
  */
 async function createUserActionDonation(user: User, payment: CoinbaseCommercePayment) {
+  const pricingValues = extractPricingValues(payment)
+
   return prismaClient.userAction.create({
     data: {
       user: {
@@ -236,9 +264,9 @@ async function createUserActionDonation(user: User, payment: CoinbaseCommercePay
       actionType: UserActionType.DONATION,
       userActionDonation: {
         create: {
-          amount: payment.event.data.pricing.local.amount, // NOTE: `local` is based on the Coinbase Commerce settings. This should be set to USD.
-          amountCurrencyCode: payment.event.data.pricing.local.currency,
-          amountUsd: payment.event.data.pricing.local.amount,
+          amount: pricingValues.amount,
+          amountCurrencyCode: pricingValues.amountCurrencyCode,
+          amountUsd: pricingValues.amountUsd,
           recipient: DonationOrganization.STAND_WITH_CRYPTO,
           coinbaseCommerceDonationId: payment.id,
         },

@@ -1,12 +1,16 @@
 'use client'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { ArrowLeft } from 'lucide-react'
 
 import { ClientAddress } from '@/clientModels/clientAddress'
 import { SensitiveDataClientUserWithENSData } from '@/clientModels/clientUser/sensitiveDataClientUser'
 import { ANALYTICS_NAME_UPDATE_USER_PROFILE_FORM } from '@/components/app/updateUserProfileForm/constants'
 import { UpdateUserProfileForm } from '@/components/app/updateUserProfileForm/step1'
 import { UpdateUserInformationVisibilityForm } from '@/components/app/updateUserProfileForm/step2'
+import { dialogButtonStyles } from '@/components/ui/dialog/styles'
 import { useSections } from '@/hooks/useSections'
+import { trackSectionVisible } from '@/utils/web/clientAnalytics'
+import { cn } from '@/utils/web/cn'
 
 enum Sections {
   Profile = 'Profile',
@@ -25,6 +29,13 @@ export function UpdateUserProfileFormContainer({
     initialSectionId: Sections.Profile,
     analyticsName: ANALYTICS_NAME_UPDATE_USER_PROFILE_FORM,
   })
+  useEffect(() => {
+    trackSectionVisible({
+      sectionGroup: ANALYTICS_NAME_UPDATE_USER_PROFILE_FORM,
+      section: Sections.Profile,
+    })
+  }, [])
+
   // we need to leverage the data submitted in the first step in the second step (whether we show the option to use first/last name)
   const [statefulUser, setStatefulUser] = useState(user)
 
@@ -40,6 +51,17 @@ export function UpdateUserProfileFormContainer({
     )
   }
   if (sections.currentSection === Sections.InformationVisibility) {
-    return <UpdateUserInformationVisibilityForm onSuccess={onSuccess} user={statefulUser} />
+    return (
+      <>
+        <div
+          className={cn('left-2', dialogButtonStyles)}
+          onClick={() => sections.goToSection(Sections.Profile)}
+          role="button"
+        >
+          <ArrowLeft size={20} />
+        </div>
+        <UpdateUserInformationVisibilityForm onSuccess={onSuccess} user={statefulUser} />
+      </>
+    )
   }
 }

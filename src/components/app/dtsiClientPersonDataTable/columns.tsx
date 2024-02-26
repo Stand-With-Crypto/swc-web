@@ -18,6 +18,7 @@ import {
 import { convertDTSIStanceScoreToCryptoSupportLanguage } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { getUSStateNameFromStateCode } from '@/utils/shared/usStateUtils'
+import { cn } from '@/utils/web/cn'
 
 export type Person = Awaited<ReturnType<typeof queryDTSIAllPeople>>['people'][0]
 
@@ -33,7 +34,7 @@ export const getDTSIClientPersonDataTableColumns = ({
       <LinkBox className="flex items-center gap-3">
         <DTSIAvatar person={row.original} size={40} />
         <InternalLink
-          className={linkBoxLinkClassName}
+          className={cn(linkBoxLinkClassName, 'pointer-events-none')}
           href={getIntlUrls(locale).politicianDetails(row.original.slug)}
         >
           {dtsiPersonFullName(row.original)}

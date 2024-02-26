@@ -15,7 +15,7 @@ const contentSecurityPolicy = {
     "'self'",
     isDev
       ? // NextJS requires 'unsafe-eval' in dev (faster source maps)
-        "'unsafe-eval' 'unsafe-inline'"
+        "'unsafe-eval' 'unsafe-inline' blob:"
       : /*
         Streaming react server components within next.js relies on adding inline scripts to the page as content
         is progressively streamed in. https://github.com/vercel/next.js/discussions/42170#discussioncomment-8137079
@@ -119,6 +119,11 @@ const ACTION_REDIRECTS = [
     queryValue: 'email-senator',
   },
   {
+    destination: '/action/voter-registration',
+    queryKey: 'modal',
+    queryValue: 'register-to-vote',
+  },
+  {
     destination: '/action/nft-mint',
     queryKey: 'modal',
     queryValue: 'mintNFT',
@@ -196,6 +201,11 @@ const nextConfig = {
         permanent: true,
         destination: '/action/call',
         source: '/call',
+      },
+      {
+        permanent: true,
+        destination: '/community',
+        source: '/leaderboard',
       },
       {
         permanent: true,

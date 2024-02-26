@@ -9,6 +9,7 @@ import { useApiHomepageTopLevelMetrics } from '@/hooks/useApiHomepageTopLevelMet
 import { SupportedLocale } from '@/intl/locales'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { cn } from '@/utils/web/cn'
+import { intlNumberFormat } from '@/utils/web/intlNumberFormat'
 
 type Props = Pick<
   Awaited<ReturnType<typeof getHomepageData>>,
@@ -29,8 +30,12 @@ const mockDecreaseInValuesOnInitialLoadSoWeCanAnimateIncrease = (
       initial.countPolicymakerContacts.countUserActionCalls,
       100,
     ),
-    countUserActionEmailRecipients: roundDownNumberToAnimateIn(
-      initial.countPolicymakerContacts.countUserActionEmailRecipients,
+    countUserActionEmails: roundDownNumberToAnimateIn(
+      initial.countPolicymakerContacts.countUserActionEmails,
+      100,
+    ),
+    hardcodedCountSum: roundDownNumberToAnimateIn(
+      initial.countPolicymakerContacts.hardcodedCountSum,
       100,
     ),
   },
@@ -45,19 +50,20 @@ export function TopLevelMetrics({ locale, ...data }: Props & { locale: Supported
   const formatted = useMemo(() => {
     return {
       sumDonations: {
-        amountUsd: new Intl.NumberFormat(locale, {
+        amountUsd: intlNumberFormat(locale, {
           style: 'currency',
           currency: SupportedFiatCurrencyCodes.USD,
           maximumFractionDigits: 0,
         }).format(values.sumDonations.amountUsd),
       },
       countUsers: {
-        count: new Intl.NumberFormat(locale).format(values.countUsers.count),
+        count: intlNumberFormat(locale).format(values.countUsers.count),
       },
       countPolicymakerContacts: {
-        count: new Intl.NumberFormat(locale).format(
-          values.countPolicymakerContacts.countUserActionCalls +
-            values.countPolicymakerContacts.countUserActionCalls,
+        count: intlNumberFormat(locale).format(
+          values.countPolicymakerContacts.countUserActionEmails +
+            values.countPolicymakerContacts.countUserActionCalls +
+            values.countPolicymakerContacts.hardcodedCountSum,
         ),
       },
     }
@@ -73,9 +79,9 @@ export function TopLevelMetrics({ locale, ...data }: Props & { locale: Supported
                 <TooltipTrigger className="mx-auto block" style={{ height: 35 }}>
                   <AnimatedNumericOdometer size={35} value={formatted.sumDonations.amountUsd} />
                 </TooltipTrigger>
-                <TooltipContent className="max-w-xs">
+                <TooltipContent className="max-w-xs" side="bottom">
                   <p className="text-sm font-normal tracking-normal">
-                    Total includes donations to Stand with Crypto Alliance and to Fairshake, a
+                    Total includes donations to Stand With Crypto Alliance and to Fairshake, a
                     pro-crypto Super PAC.
                   </p>
                 </TooltipContent>

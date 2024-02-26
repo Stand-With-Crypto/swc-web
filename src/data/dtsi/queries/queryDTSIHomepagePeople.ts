@@ -3,14 +3,14 @@ import { fragmentDTSIPersonCard } from '@/data/dtsi/fragments/fragmentDTSIPerson
 import { DTSI_HomepagePeopleQuery, DTSI_HomepagePeopleQueryVariables } from '@/data/dtsi/generated'
 
 export const query = /* GraphQL */ `
-  query HomepagePeople {
-    people(limit: 100, offset: 0, hasPromotedPositioning: true) {
+  query HomepagePeople($limit: Int!) {
+    people(limit: $limit, offset: 0, hasPromotedPositioning: true) {
       ...PersonCard
     }
   }
   ${fragmentDTSIPersonCard}
 `
 
-export const queryDTSIHomepagePeople = () => {
-  return fetchDTSI<DTSI_HomepagePeopleQuery, DTSI_HomepagePeopleQueryVariables>(query)
+export const queryDTSIHomepagePeople = (args: { limit: number }) => {
+  return fetchDTSI<DTSI_HomepagePeopleQuery, DTSI_HomepagePeopleQueryVariables>(query, args)
 }

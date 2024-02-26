@@ -21,9 +21,9 @@ export function PageUserProfileSkeleton() {
           </div>
         </div>
         <div>
-          <Button>
-            <Skeleton>Finish your profile</Skeleton>
-          </Button>
+          <Skeleton>
+            <Button>Finish your profile</Button>
+          </Skeleton>
         </div>
       </div>
       <div className="mb-14 grid grid-cols-4 rounded-lg bg-blue-50 p-3 text-center sm:p-6">

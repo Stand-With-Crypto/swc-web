@@ -1,3 +1,4 @@
+import { NFTMintStatus } from '@prisma/client'
 import { NonRetriableError } from 'inngest'
 
 import { inngest } from '@/inngest/inngest'
@@ -33,18 +34,21 @@ export const airdropNFTWithInngest = inngest.createFunction(
     })
 
     let attempt = 1
-
     let mintStatus: ThirdwebTransactionStatus | null = null
     let transactionHash: string | null
     let gasPrice: string | null
+
     while (
-      (attempt <= 5 && mintStatus === null) ||
-      (attempt <= 5 &&
+      (attempt <= 6 && mintStatus === null) ||
+      (attempt <= 6 &&
         mintStatus !== null &&
         !THIRDWEB_FINAL_TRANSACTION_STATUSES.includes(mintStatus))
     ) {
-      await step.sleep(`wait-before-checking-status-${attempt}`, `${attempt * 20}s`)
-      const transactionStatus = await engineGetMintStatus(queryId)
+      await step.sleep(`wait-before-checking-status`, `${attempt * 20}s`)
+      const transactionStatus = await step.run(`fetch-mint-status`, async () => {
+        return await engineGetMintStatus(queryId)
+      })
+
       mintStatus = transactionStatus.status
       gasPrice = transactionStatus.gasPrice
       transactionHash = transactionStatus.transactionHash
@@ -52,10 +56,19 @@ export const airdropNFTWithInngest = inngest.createFunction(
     }
 
     if (!mintStatus || !THIRDWEB_FINAL_TRANSACTION_STATUSES.includes(mintStatus)) {
-      throw new NonRetriableError('cannot get final states of minting request')
+      await updateMintNFTStatus(
+        payload.nftMintId,
+        NFTMintStatus.TIMEDOUT,
+        transactionHash!,
+        gasPrice!,
+      )
+      throw new NonRetriableError('cannot get final states of minting request', {
+        cause: mintStatus,
+      })
     }
 
     const status = mintStatus! as ThirdwebTransactionStatus
+
     await step.run('update-mintNFT-Status', async () => {
       return await updateMintNFTStatus(
         payload.nftMintId,
@@ -64,5 +77,11 @@ export const airdropNFTWithInngest = inngest.createFunction(
         gasPrice,
       )
     })
+
+    if (status === 'errored' || status === 'cancelled') {
+      throw new NonRetriableError(
+        `airdrop NFT transaction ${transactionHash!} failed with status ${status}`,
+      )
+    }
   },
 )

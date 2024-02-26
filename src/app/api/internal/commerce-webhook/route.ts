@@ -6,33 +6,41 @@ import {
   CoinbaseCommercePayment,
   zodCoinbaseCommercePayment,
 } from '@/utils/server/coinbaseCommerce/paymentRequest'
-import { storePaymentRequest } from '@/utils/server/coinbaseCommerce/storePaymentRequest'
+import {
+  extractPricingValues,
+  storePaymentRequest,
+} from '@/utils/server/coinbaseCommerce/storePaymentRequest'
 import { getServerAnalytics } from '@/utils/server/serverAnalytics'
-import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
+import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 
 export async function POST(request: NextRequest) {
   const rawRequestBody = await request.json()
-  authenticatePaymentRequest(rawRequestBody)
+
+  if (!authenticatePaymentRequest(rawRequestBody)) {
+    return new NextResponse('unauthorized', { status: 401 })
+  }
+
   const body = rawRequestBody as CoinbaseCommercePayment
   const zodResult = zodCoinbaseCommercePayment.safeParse(body)
   if (!zodResult.success) {
-    Sentry.captureMessage('unexpected Coinbase Commerce payment request format'),
-      {
-        extra: {
-          body,
-          errors: zodResult.error.flatten(),
-        },
-      }
+    // Only capture message, but still attempt to proceed with the request.
+    Sentry.captureMessage('unexpected Coinbase Commerce payment request format', {
+      extra: {
+        body,
+        errors: zodResult.error.flatten(),
+      },
+    })
   }
 
   try {
+    const pricingValues = extractPricingValues(body)
     getServerAnalytics({
-      localUser: parseLocalUserFromCookies(),
+      localUser: null,
       userId: body.event.data.metadata.userId,
     }).track('Coinbase Commerce Payment', {
       paymentExpire: body.event.data.expires_at,
       paymentId: body.id,
-      paymentPrice: `${body.event.data.pricing.local.amount} ${body.event.data.pricing.local.currency}`,
+      paymentPrice: `${pricingValues.amountUsd} ${SupportedFiatCurrencyCodes.USD}`,
       paymentType: body.event.type,
       sessionId: body.event.data.metadata.sessionId,
       userId: body.event.data.metadata.userId,
@@ -44,11 +52,7 @@ export async function POST(request: NextRequest) {
     }
   } catch (error) {
     Sentry.captureException(error, {
-      extra: {
-        id: body.id,
-        pricing: body.event.data.pricing,
-        sessionId: body.event.data.metadata.sessionId,
-      },
+      extra: { body },
     })
     return new NextResponse('internal error', { status: 500 })
   }

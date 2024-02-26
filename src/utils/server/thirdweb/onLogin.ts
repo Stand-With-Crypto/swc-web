@@ -15,6 +15,7 @@ import * as Sentry from '@sentry/nextjs'
 import { compact, groupBy } from 'lodash-es'
 import { NextApiRequest } from 'next'
 
+import { parseThirdwebAddress } from '@/hooks/useThirdwebAddress/parseThirdwebAddress'
 import { CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/upsertAdvocateInCapitolCanary'
 import { inngest } from '@/inngest/inngest'
 import {
@@ -56,9 +57,11 @@ type UpsertedUser = User & {
 }
 
 export async function onLogin(
-  cryptoAddress: string,
+  _cryptoAddress: string,
   req: NextApiRequest,
 ): Promise<AuthSessionMetadata> {
+  const cryptoAddress = parseThirdwebAddress(_cryptoAddress)
+
   const localUser = parseLocalUserFromCookiesForPageRouter(req)
   const log = getLog(cryptoAddress)
 
@@ -86,13 +89,21 @@ export async function onLogin(
     localUser,
     getUserSessionId: () => getUserSessionIdOnPageRouter(req),
     injectedFetchEmbeddedWalletMetadataFromThirdweb: fetchEmbeddedWalletMetadataFromThirdweb,
-  }).then(res => ({ userId: res.userId }))
+  })
+    .then(res => ({ userId: res.userId }))
+    .catch(e => {
+      Sentry.captureException(e, {
+        tags: { domain: 'onLogin' },
+        extra: { cryptoAddress, localUser },
+      })
+      throw e
+    })
 }
 
 interface NewLoginParams {
   cryptoAddress: string
   localUser: ServerLocalUser | null
-  getUserSessionId: () => string
+  getUserSessionId: () => string | null
   // dependency injecting this in to the function so we can mock it in tests
   injectedFetchEmbeddedWalletMetadataFromThirdweb: typeof fetchEmbeddedWalletMetadataFromThirdweb
 }
@@ -161,7 +172,8 @@ This function will ensure we create a user opt-in action if one does not already
 */
 
 export async function onNewLogin(props: NewLoginParams) {
-  const { cryptoAddress, localUser } = props
+  const { cryptoAddress: _cryptoAddress, localUser } = props
+  const cryptoAddress = parseThirdwebAddress(_cryptoAddress)
   const log = getLog(cryptoAddress)
 
   // queryMatchingUsers logic
@@ -256,6 +268,7 @@ export async function onNewLogin(props: NewLoginParams) {
     user,
     userCryptoAddress,
     localUser,
+    wasUserCreated,
   })
   if (localUser) {
     getServerPeopleAnalytics({ userId: user.id, localUser }).setOnce(
@@ -326,7 +339,7 @@ async function queryMatchingUsers({
             some: { cryptoAddress, hasBeenVerifiedViaAuth: false },
           },
         },
-        { userSessions: { some: { id: userSessionId } } },
+        userSessionId && { userSessions: { some: { id: userSessionId } } },
         embeddedWalletEmailAddress && {
           userEmailAddresses: {
             some: { emailAddress: embeddedWalletEmailAddress.email, isVerified: true },
@@ -386,11 +399,14 @@ function findUsersToMerge(
     if (user.sourceOfExistingUser === 'Unverified User Crypto Address') {
       return true
     }
+    if (user.user.userCryptoAddresses.some(addr => addr.hasBeenVerifiedViaAuth)) {
+      return false
+    }
     if (user.sourceOfExistingUser === 'Embedded Wallet Email Address') {
-      return !user.user.primaryUserCryptoAddressId
+      return true
     }
     if (user.sourceOfExistingUser === 'Session Id') {
-      return !user.user.primaryUserCryptoAddressId
+      return true
     }
   })
   const userToKeep =
@@ -431,7 +447,7 @@ async function maybeUpsertCryptoAddress({
 }) {
   const log = getLog(cryptoAddress)
   const existingUserCryptoAddress = user.userCryptoAddresses.find(
-    addr => addr.cryptoAddress === cryptoAddress,
+    addr => parseThirdwebAddress(addr.cryptoAddress) === cryptoAddress,
   )
   if (existingUserCryptoAddress) {
     if (existingUserCryptoAddress.hasBeenVerifiedViaAuth) {
@@ -451,14 +467,11 @@ async function maybeUpsertCryptoAddress({
       where: { id: existingUserCryptoAddress.id },
       data: {
         hasBeenVerifiedViaAuth: true,
-        ...(user.primaryUserCryptoAddressId
-          ? {}
-          : { asPrimaryUserCryptoAddress: { connect: { id: user.id } } }),
+        asPrimaryUserCryptoAddress: { connect: { id: user.id } },
       },
     })
     existingUserCryptoAddress.hasBeenVerifiedViaAuth = true
-    user.primaryUserCryptoAddressId =
-      user.primaryUserCryptoAddressId || existingUserCryptoAddress.id
+    user.primaryUserCryptoAddressId = existingUserCryptoAddress.id
     return { user, updatedCryptoAddress: existingUserCryptoAddress }
   }
   log(`maybeUpsertCryptoAddress: creating new crypto address`)
@@ -602,7 +615,9 @@ async function triggerPostLoginUserActionSteps({
   user,
   userCryptoAddress,
   localUser,
+  wasUserCreated,
 }: {
+  wasUserCreated: boolean
   user: UpsertedUser
   userCryptoAddress: UserCryptoAddress
   localUser: ServerLocalUser | null
@@ -638,6 +653,12 @@ async function triggerPostLoginUserActionSteps({
     })
     log(`triggerPostLoginUserActionSteps: opt in user action created`)
     await claimNFT(optInUserAction, userCryptoAddress)
+    getServerAnalytics({ userId: user.id, localUser }).trackUserActionCreated({
+      actionType: UserActionType.OPT_IN,
+      campaignName: UserActionOptInCampaignName.DEFAULT,
+      creationMethod: 'On Site',
+      userState: wasUserCreated ? 'New' : 'Existing',
+    })
   } else {
     log(`triggerPostLoginUserActionSteps: opt in user action previously existed`)
   }
