@@ -28,7 +28,7 @@ export function PolicyCard({
           <span>{description}</span>
         </div>
       </div>
-      <div className="flex flex-row gap-4 max-md:w-full">
+      <div className="flex flex-col gap-4 max-md:w-full md:flex-row">
         <Button asChild className="max-md:w-full">
           <TrackedExternalLink
             eventProperties={{
@@ -44,7 +44,7 @@ export function PolicyCard({
           </TrackedExternalLink>
         </Button>
         {secondaryCta && secondaryCtaUrl && (
-          <Button asChild variant="secondary" className="max-md:w-full">
+          <Button asChild className="bg-neutral-50 max-md:w-full" variant="secondary">
             <TrackedExternalLink
               eventProperties={{
                 component: AnalyticComponentType.button,
