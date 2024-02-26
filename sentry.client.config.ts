@@ -32,14 +32,7 @@ Sentry.init({
   // replaysSessionSampleRate: 0.001,
 
   // You can remove this option if you're not planning to use the Sentry Session Replay feature:
-  integrations: [
-    new ExtraErrorData({ depth: 10 }),
-    // new Sentry.Replay({
-    //   // Additional Replay configuration goes in here, for example:
-    //   maskAllText: true,
-    //   blockAllMedia: true,
-    // }),
-  ],
+  integrations: [new ExtraErrorData({ depth: 10 }), Sentry.replayIntegration()],
   denyUrls: [
     /vitals\.vercel-analytics\.com/i,
     // Chrome extensions
@@ -47,6 +40,9 @@ Sentry.init({
     /extensions\//i,
     /^chrome:\/\//i,
   ],
+  replaysSessionSampleRate: 0,
+  replaysOnErrorSampleRate: 1.0,
+  ignoreErrors: ['globalThis is not defined'],
   beforeSend: (event, hint) => {
     if (NEXT_PUBLIC_ENVIRONMENT === 'local') {
       const shouldSuppress = toBool(process.env.SUPPRESS_SENTRY_ERRORS_ON_LOCAL) || !dsn
