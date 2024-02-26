@@ -51,16 +51,14 @@ export function NFTDisplay({ userActions }: NFTDisplayProps) {
     },
     [],
   )
-  const testNfts = [...userNfts, ...userNfts, ...userNfts.slice(0, 2)]
-  const numNfts = testNfts.length
-  console.log('numNfts', numNfts % 3)
-  //const emptySpots = Math.abs((numNfts % 3) - 3)
+  const numNfts = userNfts.length
+
   const emptySpots = numNfts % 3 === 0 ? 0 : 3 - (numNfts % 3)
-  console.log(emptySpots)
+
   return (
     <>
       <div className="flex w-full flex-col flex-wrap items-center gap-4 sm:justify-center lg:h-full lg:flex-row lg:justify-between">
-        {testNfts.map(nft => {
+        {userNfts.map(nft => {
           const { name, image } = nft
           return (
             <NextImage
