@@ -34,29 +34,27 @@ export function DTSIClientPersonDataTable({ initialData }: { initialData: People
     const results = [...(data?.people || initialData)]
     results.sort((personA, personB) => {
       if (personA.promotedPositioning) {
-        if (personB.promotedPositioning) {
-          return personA.promotedPositioning - personB.promotedPositioning
-        }
-        return -1
-      } else if (personB.promotedPositioning) {
-        return -1
+        return personB.promotedPositioning
+          ? personA.promotedPositioning - personB.promotedPositioning
+          : -1
       }
-      if (personA.promotedPositioning === personB.promotedPositioning) {
-        const aScore = personA.manuallyOverriddenStanceScore || personA.computedStanceScore
-        const bScore = personB.manuallyOverriddenStanceScore || personB.computedStanceScore
-        if (aScore === bScore) {
-          return 0
-        }
-        if (isNil(aScore)) {
-          return isNil(bScore) ? 0 : 1
-        }
-        if (isNil(bScore)) {
-          return -1
-        }
-        return bScore - aScore
+      if (personB.promotedPositioning) {
+        return -1
       }
 
-      return 0
+      // At this point you already verified that neither personA or personB have `promotedPositioning`
+      const aScore = personA.manuallyOverriddenStanceScore || personA.computedStanceScore
+      const bScore = personB.manuallyOverriddenStanceScore || personB.computedStanceScore
+      if (aScore === bScore || (isNil(aScore) && isNil(bScore))) {
+        return 0
+      }
+      if (isNil(aScore)) {
+        return 1
+      }
+      if (isNil(bScore)) {
+        return -1
+      }
+      return bScore - aScore
     })
     return results
   }, [data, initialData])
