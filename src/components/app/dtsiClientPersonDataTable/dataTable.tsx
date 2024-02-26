@@ -98,6 +98,11 @@ export function DataTable<TData extends Person, TValue>({
     getSortedRowModel: getSortedRowModel(),
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
+    initialState: {
+      pagination: {
+        pageSize: 100,
+      },
+    },
     state: {
       sorting,
       columnFilters,
@@ -136,8 +141,8 @@ export function DataTable<TData extends Person, TValue>({
         </div>
       </div>
       <div className="md:container">
-        <div className="md:min-h-[578px] md:rounded-md md:border">
-          <div className="flex flex-col justify-between pl-3 md:flex-row md:p-6">
+        <div className="md:min-h-[578px] md:rounded-md md:border-b md:border-l md:border-r">
+          <div className="sticky top-[72px] z-10 flex flex-col justify-between border-b border-t bg-white p-3 pl-3 md:top-[84px] md:flex-row md:p-6">
             <PageTitle className="text-left" size="sm">
               Politicians
             </PageTitle>
