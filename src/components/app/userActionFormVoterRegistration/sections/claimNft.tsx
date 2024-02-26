@@ -51,9 +51,10 @@ export function ClaimNft({ goToSection, stateCode }: ClaimNftProps) {
           'User Action Type': UserActionType.VOTER_REGISTRATION,
           State: data.usaState,
         },
+        payload: data,
       },
-      () =>
-        actionCreateUserActionVoterRegistration(data).then(actionResult => {
+      payload =>
+        actionCreateUserActionVoterRegistration(payload).then(actionResult => {
           if (actionResult.user) {
             identifyUserOnClient(actionResult.user)
           }

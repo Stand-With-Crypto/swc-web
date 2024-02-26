@@ -135,16 +135,15 @@ export function UserActionFormEmailCongressperson({
                 'User Action Type': UserActionType.EMAIL,
                 'DTSI Slug': values.dtsiSlug,
               },
+              payload: { ...values, address },
             },
-            () =>
-              actionCreateUserActionEmailCongressperson({ ...values, address }).then(
-                actionResult => {
-                  if (actionResult.user) {
-                    identifyUserOnClient(actionResult.user)
-                  }
-                  return actionResult
-                },
-              ),
+            payload =>
+              actionCreateUserActionEmailCongressperson(payload).then(actionResult => {
+                if (actionResult.user) {
+                  identifyUserOnClient(actionResult.user)
+                }
+                return actionResult
+              }),
           )
           if (result.status === 'success') {
             router.refresh()

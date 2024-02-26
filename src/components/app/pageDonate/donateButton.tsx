@@ -15,6 +15,7 @@ export function DonateButton() {
       {
         formName: 'Donate Button',
         onError: toastGenericError,
+        payload: undefined,
       },
       () =>
         actionCreateCoinbaseCommerceCharge().then(res => {
