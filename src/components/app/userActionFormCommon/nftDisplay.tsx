@@ -19,9 +19,9 @@ interface NFTDisplayProps {
 const nftDisplayVariants = cva('overflow-hidden relative', {
   variants: {
     size: {
-      sm: 'w-20 h-20 rounded-xl',
-      md: 'w-40 h-40 rounded-xl',
-      lg: 'w-40 h-40 md:w-60 md:h-60 rounded-lg',
+      sm: 'max-w-20 max-h-20 rounded-xl',
+      md: 'max-w-40 max-h-40 rounded-xl',
+      lg: 'max-w-40 max-h-40 md:max-w-60 md:max-h-60 rounded-lg',
     },
   },
   defaultVariants: {
