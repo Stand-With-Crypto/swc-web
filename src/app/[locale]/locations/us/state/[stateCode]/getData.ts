@@ -64,7 +64,7 @@ export function getData(stateCode: string): Statement[] | null {
       positions: [
         {
           politician: steveGarvey,
-          position: 'agrees',
+          position: 'neutral',
         },
         {
           politician: adamSchiff,
@@ -82,7 +82,7 @@ export function getData(stateCode: string): Statement[] | null {
       positions: [
         {
           politician: steveGarvey,
-          position: 'agrees',
+          position: 'neutral',
         },
         {
           politician: adamSchiff,
@@ -100,7 +100,7 @@ export function getData(stateCode: string): Statement[] | null {
       positions: [
         {
           politician: steveGarvey,
-          position: 'agrees',
+          position: 'neutral',
         },
         {
           politician: adamSchiff,
@@ -117,7 +117,7 @@ export function getData(stateCode: string): Statement[] | null {
       positions: [
         {
           politician: steveGarvey,
-          position: 'agrees',
+          position: 'neutral',
         },
         {
           politician: adamSchiff,
