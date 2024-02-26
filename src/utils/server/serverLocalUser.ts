@@ -88,10 +88,6 @@ function parseFromCookieStrings({
     return null
   }
   if (!currentSessionStr || !persistedStr) {
-    Sentry.captureMessage('serverLocalUser: cookie missing currentSession or persisted', {
-      extra: { currentSessionStr, persistedStr, cookieConsentStr },
-      tags: { source },
-    })
     return null
   }
   try {

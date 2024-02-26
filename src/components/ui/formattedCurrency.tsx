@@ -1,4 +1,5 @@
 import { SupportedLocale } from '@/intl/locales'
+import { intlNumberFormat } from '@/utils/web/intlNumberFormat'
 
 export function FormattedCurrency({
   amount,
@@ -18,14 +19,7 @@ export function FormattedCurrency({
   minimumSignificantDigits?: number | undefined
   maximumSignificantDigits?: number | undefined
 }) {
-  // https://stackoverflow.com/a/41045289
-  if (
-    otherProps.maximumFractionDigits !== undefined &&
-    otherProps.minimumFractionDigits === undefined
-  ) {
-    otherProps.minimumFractionDigits = otherProps.maximumFractionDigits
-  }
-  const response = new Intl.NumberFormat(locale, {
+  const response = intlNumberFormat(locale, {
     style: 'currency',
     currency: currencyCode,
     ...otherProps,
