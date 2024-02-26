@@ -39,7 +39,9 @@ const InitialOrchestration = () => {
     bootstrapLocalUser()
     maybeInitClientAnalytics()
     const sessionId = getUserSessionIdOnClient()
-    Sentry.setUser({ id: sessionId, idType: 'session' })
+    if (sessionId) {
+      Sentry.setUser({ id: sessionId, idType: 'session' })
+    }
   }, [])
   const searchParamsUserId = searchParams?.get('userId')
   useEffect(() => {

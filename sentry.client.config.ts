@@ -15,6 +15,8 @@ const COMMON_ERROR_MESSAGES_TO_GROUP: string[] = [
   "Failed to execute 'removeChild",
   'bytecode', // Can't find variable: bytecode
   'ResizeObserver loop', // ResizeObserver loop completed with undelivered notifications.
+  'Load failed',
+  "Failed to read the 'localStorage'",
 ]
 
 Sentry.init({
