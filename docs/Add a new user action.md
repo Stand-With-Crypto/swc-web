@@ -4,7 +4,132 @@
 
 - Create a new folder in `src/components/app` called userActionForm[actionName]. All UI should be contained in this folder.
 - Typical files in this folder include dialog.tsx, homepageDialogDeeplinkWrapper.tsx, index.tsx, lazyLoad.tsx, skeleton.tsx
-- dialog.tsx -
+
+```javascript
+dialog.tsx
+
+export function UserActionActionNameFormDialog({
+  children,
+  ...formProps
+}: Omit<React.ComponentProps<typeof UserActionFormActionName>, 'onCancel' | 'onSuccess'> & {
+  children: React.ReactNode
+}) {
+ const dialogProps = useDialog({
+    initialOpen: defaultOpen,
+    analytics: ANALYTICS_NAME_USER_ACTION_FORM_ACTION_NAME,
+  })
+  const { data, isLoading } = useApiResponseForUserFullProfileInfo()
+  const { user } = data ?? { user: null }
+
+  return (
+    <Dialog {...dialogProps}>
+      <DialogTrigger asChild>{children}</DialogTrigger>
+      <DialogContent className="max-w-3xl">
+        {isLoading ? (
+          <UserActionFormActionNameSkeleton />
+        ) : (
+          <Suspense fallback={<UserActionFormActionNameSkeleton />}>
+            <LazyUserActionFormActionName
+              {...formProps}
+              onClose={() => dialogProps.onOpenChange(false)}
+              user={user}
+            />
+          </Suspense>
+        )}
+      </DialogContent>
+    </Dialog>
+  )
+}
+```
+
+```javascript
+homepageDialogDeeplinkWrapper.tsx
+
+function UserActionFormActionNameDeeplinkWrapperContent() {
+  const fetchUser = useApiResponseForUserFullProfileInfo()
+  const urls = useIntlUrls()
+  const router = useRouter()
+  const { user } = fetchUser.data || { user: null }
+
+  return fetchUser.isLoading || loadingParams ? (
+    <UserActionFormActionNameSkeleton />
+  ) : (
+    <UserActionFormActionName onClose={() => router.push(urls.home())} user={user} />
+  )
+}
+
+export function UserActionFormActionNameDeeplinkWrapper() {
+  return (
+    <Suspense fallback={<UserActionFormActionNameSkeleton />}>
+      <UserActionFormActionNameDeeplinkWrapperContent />
+    </Suspense>
+  )
+}
+```
+
+```javascript
+index.tsx
+
+export function UserActionFormActionName({ onClose }: { onClose: () => void }) {
+  const sectionProps = useSections<SectionNames>({
+    sections: Object.values(SectionNames),
+    initialSectionId: SectionNames.INITIAL_SECTION,
+    analyticsName: ANALYTICS_NAME_USER_ACTION_FORM_ACTION_NAME,
+  })
+  const { currentSection: currentTab, onSectionNotFound: onTabNotFound } = sectionProps
+
+  const content = useMemo(() => {
+    switch (currentTab) {
+      case SectionNames.SECTION_ONE:
+        return <SectionOne {...sectionProps} />
+      case SectionNames.SECTION_TWO:
+        return (
+          <SectionTwo {...sectionProps} />
+        )
+      case SectionNames.SUCCESS:
+        return (
+          <UserActionFormSuccessScreen
+            {...sectionProps}
+            nftWhenAuthenticated={NFT_CLIENT_METADATA[NFTSlug.NFT_NAME]}
+            onClose={onClose}
+          />
+        )
+      default:
+        onTabNotFound()
+        return null
+    }
+  }, [currentTab, onClose, onTabNotFound, sectionProps, stateCode])
+
+  return content
+}
+```
+
+```javascript
+lazyLoad.tsx
+
+import { lazy } from 'react'
+
+export const LazyUserActionFormActionName = lazy(() =>
+  import('@/components/app/userActionFormActionName').then(m => ({
+    default: m.UserActionFormActionName,
+  })),
+)
+```
+
+```javascript
+skeleton.tsx
+
+import { Skeleton } from '@/components/ui/skeleton'
+
+export function UserActionFormActionNameSkeleton() {
+  return (
+    <div className="p-6">
+      // Use Skeleton to create a loading component for the user action
+      <Skeleton className="h-[400px] w-full" />
+    </div>
+  )
+}
+```
 
 ## Update database schema
 
