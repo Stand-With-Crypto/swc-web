@@ -47,7 +47,7 @@ export const testCaseMultipleUsersWithSameLegacyEmail: TestCase = {
             emailAddress: legacyUser.userEmailAddresses[0].emailAddress,
             isVerified: false,
             dataCreationMethod: DataCreationMethod.INITIAL_BACKFILL,
-            source: UserEmailAddressSource.THIRDWEB_EMBEDDED_AUTH,
+            source: UserEmailAddressSource.USER_ENTERED,
           },
         },
       },
