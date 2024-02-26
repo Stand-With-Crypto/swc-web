@@ -3,6 +3,7 @@ import React from 'react'
 
 import { actionCreateCoinbaseCommerceCharge } from '@/actions/actionCreateCoinbaseCommerceCharge'
 import { Button } from '@/components/ui/button'
+import { openWindow } from '@/utils/shared/openWindow'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { toastGenericError } from '@/utils/web/toastUtils'
 
@@ -18,7 +19,7 @@ export function DonateButton() {
       },
       () =>
         actionCreateCoinbaseCommerceCharge().then(res => {
-          window.open(res.hostedUrl, '_blank')
+          openWindow(res.hostedUrl, '_blank')
           return res
         }),
     )
