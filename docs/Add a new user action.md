@@ -2,8 +2,8 @@
 
 ## Create UI
 
-- Create a new folder in `src/components/app` called userActionForm[actionName]. All UI should be contained in this folder.
-- Typical files in this folder include dialog.tsx, homepageDialogDeeplinkWrapper.tsx, index.tsx, lazyLoad.tsx, skeleton.tsx
+- Create a new folder in `src/components/app` called `userActionFormActionName`. All UI should be contained in this folder.
+- Typical files in this folder include `dialog.tsx`, `homepageDialogDeeplinkWrapper.tsx`, `index.tsx`, `lazyLoad.tsx`, `skeleton.tsx`
 
 ```javascript
 dialog.tsx
