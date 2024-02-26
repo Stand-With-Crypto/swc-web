@@ -41,6 +41,7 @@ export const UserActionTweetLink = React.forwardRef<
                 ...eventProperties,
                 'User Action Type': UserActionType.TWEET,
               },
+              payload: undefined,
             },
             () => actionCreateUserActionTweet(),
           )

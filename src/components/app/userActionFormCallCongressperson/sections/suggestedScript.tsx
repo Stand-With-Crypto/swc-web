@@ -72,9 +72,10 @@ export function SuggestedScript({
             'User Action Type': UserActionType.CALL,
             'DTSI Slug': data.dtsiSlug,
           },
+          payload: data,
         },
-        () =>
-          actionCreateUserActionCallCongressperson(data).then(actionResult => {
+        payload =>
+          actionCreateUserActionCallCongressperson(payload).then(actionResult => {
             if (actionResult.user) {
               identifyUserOnClient(actionResult.user)
             }

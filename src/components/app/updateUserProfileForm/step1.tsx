@@ -91,8 +91,9 @@ export function UpdateUserProfileForm({
               analyticsProps: {
                 ...(address ? convertAddressToAnalyticsProperties(address) : {}),
               },
+              payload: { ...values, address },
             },
-            () => actionUpdateUserProfile({ ...values, address }),
+            payload => actionUpdateUserProfile(payload),
           )
           if (result.status === 'success') {
             router.refresh()
