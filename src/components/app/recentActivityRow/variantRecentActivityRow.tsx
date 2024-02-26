@@ -22,6 +22,7 @@ import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
 import { getIntlUrls } from '@/utils/shared/urls'
+import { getUSStateNameFromStateCode } from '@/utils/shared/usStateUtils'
 
 const MainText = ({ children }: { children: React.ReactNode }) => (
   <div className="text-sm font-semibold text-gray-900 lg:text-xl">{children}</div>
@@ -40,20 +41,19 @@ const getSWCDisplayText = () => (
     <span className="sm:hidden"> SWC </span>
   </>
 )
+
+const getStateName = (stateCode?: string) =>
+  stateCode ? getUSStateNameFromStateCode(stateCode) : null
+
 export const VariantRecentActivityRow = function VariantRecentActivityRow({
   action,
   locale,
 }: RecentActivityRowProps) {
   const { userLocationDetails } = action.user
-  const isStateAvailable = userLocationDetails?.administrativeAreaLevel1
+  const isStateAvailable = getStateName(userLocationDetails?.administrativeAreaLevel1)
   const { data } = useApiResponseForUserPerformedUserActionTypes()
   const hasSignedUp = data?.performedUserActionTypes.includes(UserActionType.OPT_IN)
-  const newUserStateOrJoin = isStateAvailable
-    ? `from ${userLocationDetails.administrativeAreaLevel1} joined`
-    : 'joined'
-  const voterStateOrEmpty = isStateAvailable
-    ? `in ${userLocationDetails.administrativeAreaLevel1}`
-    : ''
+  const newUserStateOrJoin = isStateAvailable ? `from ${isStateAvailable} joined` : 'joined'
 
   const getActionSpecificProps = () => {
     switch (action.actionType) {
@@ -66,12 +66,7 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
                   <Button>Join</Button>
                 </LoginDialogWrapper>
               ),
-          children: (
-            <MainText>
-              New member {newUserStateOrJoin}
-              {getSWCDisplayText()}
-            </MainText>
-          ),
+          children: <MainText>New member {newUserStateOrJoin}</MainText>,
         }
       }
       case UserActionType.CALL:
@@ -151,6 +146,7 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
         }
       }
       case UserActionType.VOTER_REGISTRATION: {
+        const voterStateOrEmpty = action.usaState ? `in ${action.usaState}` : ''
         return {
           onFocusContent: () => (
             <UserActionFormVoterRegistrationDialog>
