@@ -31,7 +31,7 @@ async function simulateLiveActivityOnSite() {
     const user = await createUser()
     await createAction(user)
     logger.info('waiting 3 seconds')
-    await sleep(3000)
+    await sleep(1)
   }
 }
 runBin(simulateLiveActivityOnSite)
