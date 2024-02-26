@@ -1,5 +1,4 @@
 import { Prisma } from '@prisma/client'
-import { isNil } from 'lodash-es'
 
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getLogger } from '@/utils/shared/logger'
@@ -30,11 +29,6 @@ export async function mergeUsers({
   })
   const userToKeep = usersWithData.find(x => x.id === userToKeepId)!
   const userToDelete = usersWithData.find(x => x.id === userToDeleteId)!
-
-  console.log({
-    'userToKeep.id': userToKeep.id,
-    'userToDelete.id': userToDelete.id,
-  })
 
   const emailsToTransfer = userToDelete.userEmailAddresses.filter(userToDeleteEmail => {
     const correspondingEmail = userToKeep.userEmailAddresses.find(
@@ -161,82 +155,6 @@ export async function mergeUsers({
     return
   }
 
-  // SUCCESS
-  // {
-  //   emailsToTransfer: [],
-  //   emailsToDelete: [
-  //     {
-  //       id: '4a8ced76-5f31-4878-a068-fe63fad0fd15',
-  //       isVerified: false,
-  //       emailAddress: 'Enola_Mayer@gmail.com',
-  //       userId: '3dab1e71-8858-479d-a833-d3748dacb8a4',
-  //       source: 'USER_ENTERED',
-  //       dataCreationMethod: 'INITIAL_BACKFILL',
-  //       datetimeUpdated: 2024-02-26T19:10:56.419Z,
-  //       datetimeCreated: 2024-02-26T19:10:56.419Z
-  //     }
-  //   ],
-  //   'userToKeep.userEmailAddresses': [
-  //     {
-  //       id: '0bbf39e2-459b-4139-a81f-42a01dcd7841',
-  //       isVerified: false,
-  //       emailAddress: 'Enola_Mayer@gmail.com',
-  //       userId: '21fee83a-af2c-4e77-876d-0f0b2fc73991',
-  //       source: 'USER_ENTERED',
-  //       dataCreationMethod: 'INITIAL_BACKFILL',
-  //       datetimeUpdated: 2024-02-26T19:10:58.415Z,
-  //       datetimeCreated: 2024-02-26T19:10:58.415Z
-  //     }
-  //   ]
-  // }
-
-  // ERROR
-  // {
-  //   emailsToTransfer: [
-  //     {
-  //       id: '39940b64-605c-4fe5-803f-37986942e572',
-  //       isVerified: false,
-  //       emailAddress: 'Carlos_Watsica@yahoo.com',
-  //       userId: 'fc88d774-6c92-486b-85db-4d61625759b1',
-  //       source: 'VERIFIED_THIRD_PARTY',
-  //       dataCreationMethod: 'INITIAL_BACKFILL',
-  //       datetimeUpdated: 2024-02-26T19:09:43.645Z,
-  //       datetimeCreated: 2024-02-26T19:09:43.645Z
-  //     }
-  //   ],
-  //   emailsToDelete: [
-  //     {
-  //       id: 'ce5e81fe-3929-427c-9d72-d637b8fa7c8f',
-  //       isVerified: false,
-  //       emailAddress: 'Carlos_Watsica@yahoo.com',
-  //       userId: 'acb32d7a-08be-4796-be18-1e28d9bf8c8b',
-  //       source: 'USER_ENTERED',
-  //       dataCreationMethod: 'INITIAL_BACKFILL',
-  //       datetimeUpdated: 2024-02-26T19:09:45.624Z,
-  //       datetimeCreated: 2024-02-26T19:09:45.624Z
-  //     }
-  //   ],
-  //   'userToKeep.userEmailAddresses': [
-  //     {
-  //       id: 'ce5e81fe-3929-427c-9d72-d637b8fa7c8f',
-  //       isVerified: false,
-  //       emailAddress: 'Carlos_Watsica@yahoo.com',
-  //       userId: 'acb32d7a-08be-4796-be18-1e28d9bf8c8b',
-  //       source: 'USER_ENTERED',
-  //       dataCreationMethod: 'INITIAL_BACKFILL',
-  //       datetimeUpdated: 2024-02-26T19:09:45.624Z,
-  //       datetimeCreated: 2024-02-26T19:09:45.624Z
-  //     }
-  //   ]
-  // }
-  console.log({
-    'userToKeep.primaryUserEmailAddressId': userToKeep.primaryUserEmailAddressId,
-    emailsToTransfer,
-    emailsToDelete,
-    'userToKeep.userEmailAddresses': userToKeep.userEmailAddresses,
-    'userToDelete.userEmailAddresses': userToDelete.userEmailAddresses,
-  })
-
   await prismaClient.$transaction(async client => {
     if (userToDelete.userSessions.length) {
       await client.userSession.updateMany({
@@ -269,7 +187,6 @@ export async function mergeUsers({
         email => email.emailAddress === userToKeepPrimaryEmailAddress.emailAddress,
       )
 
-      console.log({ newPrimaryEmailAddress })
       if (newPrimaryEmailAddress) {
         await client.user.update({
           where: { id: userToKeep.id },
@@ -328,54 +245,5 @@ export async function mergeUsers({
     })
   })
 
-  // await prismaClient.$transaction([
-  //   ...emailsToTransfer.map(email => {
-  //     return prismaClient.userEmailAddress.update({
-  //       where: { id: email.id },
-  //       data: {
-  //         userId: userToKeep.id,
-  //       },
-  //     })
-  //   }),
-  //   ...userSessionsUpdatePayloads.map(x => {
-  //     return prismaClient.userSession.update(x)
-  //   }),
-  //   ...userActionUpdatePayloads.map(x => {
-  //     return prismaClient.userAction.update(x)
-  //   }),
-  //   prismaClient.user.update({
-  //     where: { id: userToDelete.id },
-  //     data: {
-  //       primaryUserCryptoAddressId: null,
-  //       primaryUserEmailAddressId: null,
-  //     },
-  //   }),
-  //   ...emailsToDelete.map(email => {
-  //     return prismaClient.userEmailAddress.delete({
-  //       where: { id: email.id },
-  //     })
-  //   }),
-  //   ...cryptoAddressesToDelete.map(addr => {
-  //     return prismaClient.userCryptoAddress.delete({
-  //       where: { id: addr.id },
-  //     })
-  //   }),
-  //   ...userCryptoAddressesUpdatePayloads.map(x => {
-  //     return prismaClient.userCryptoAddress.update(x)
-  //   }),
-  //   prismaClient.userMergeAlert.deleteMany({
-  //     where: {
-  //       OR: [{ userBId: userToDelete.id }, { userAId: userToDelete.id }],
-  //     },
-  //   }),
-  //   prismaClient.user.delete({
-  //     where: { id: userToDelete.id },
-  //   }),
-  //   prismaClient.userMergeEvent.create({
-  //     data: {
-  //       userId: userToKeep.id,
-  //     },
-  //   }),
-  // ])
   logger.info(`merge of user ${userToDelete.id} into user ${userToKeep.id} complete`)
 }

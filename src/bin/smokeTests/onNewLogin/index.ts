@@ -26,13 +26,13 @@ async function runTestCase({ validateResults, parameters, name }: TestCase) {
 
 async function smokeTestOnLogin() {
   const tests = [
-    // testCaseNewUser,
-    // testCaseUserPreviouslySignedUpOnCoinbaseAndThenLoggedInWithEmbeddedWalletWithSameEmail,
-    // testCaseUserHasLegacyMigrationCryptoAddressAndEmailAndLogsOnViaSessionIdWithNewCryptoAddress,
-    // testCaseUserHasLegacyMigrationCryptoAddressAndLogsOnViaSameCryptoAddress,
-    // testCaseUserHasLegacyMigrationCryptoAndEmailAddressAndLogsOnViaSameCryptoAndEmailAddressButAlreadyHasCreatedUsers,
-    // testCaseUserHasSameEmailAddressButOtherUserHasAlreadyCreatedAccount,
-    // testCaseMultipleUsersWithSameLegacyCryptoAddress,
+    testCaseNewUser,
+    testCaseUserPreviouslySignedUpOnCoinbaseAndThenLoggedInWithEmbeddedWalletWithSameEmail,
+    testCaseUserHasLegacyMigrationCryptoAddressAndEmailAndLogsOnViaSessionIdWithNewCryptoAddress,
+    testCaseUserHasLegacyMigrationCryptoAddressAndLogsOnViaSameCryptoAddress,
+    testCaseUserHasLegacyMigrationCryptoAndEmailAddressAndLogsOnViaSameCryptoAndEmailAddressButAlreadyHasCreatedUsers,
+    testCaseUserHasSameEmailAddressButOtherUserHasAlreadyCreatedAccount,
+    testCaseMultipleUsersWithSameLegacyCryptoAddress,
     testCaseMultipleUsersWithSameLegacyEmail,
   ]
   for (const test of tests) {

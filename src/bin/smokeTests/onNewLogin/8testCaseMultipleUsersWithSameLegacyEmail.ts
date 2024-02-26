@@ -83,7 +83,7 @@ export const testCaseMultipleUsersWithSameLegacyEmail: TestCase = {
   ) => {
     // changed
     verify(existingUsersWithSource.length, true, 'existingUsersWithSource.length', issues)
-    verify(embeddedWalletEmailAddress, false, 'embeddedWalletEmailAddress', issues)
+    verify(embeddedWalletEmailAddress, true, 'embeddedWalletEmailAddress', issues)
     // changed
     verify(merge?.usersToDelete.length, true, 'merge?.usersToDelete.length', issues)
     // changed
