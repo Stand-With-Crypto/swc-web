@@ -10,7 +10,7 @@ type Props = React.ComponentPropsWithoutRef<typeof UserActionFormSuccessScreenMa
 
 export function UserActionFormSuccessScreenContent(props: Props) {
   return (
-    <div className="flex h-full min-h-[400px] flex-col">
+    <div className="flex min-h-[400px] flex-col">
       <div className="flex flex-grow items-center">
         <UserActionFormSuccessScreenMainCTA {...props} />
       </div>
