@@ -117,7 +117,7 @@ function getEntities(tweet: DTSIStanceDetailsTweetProp['tweet']) {
 
 const TweetLink: React.FC<React.ComponentPropsWithoutRef<typeof ExternalLink>> = props => (
   <ExternalLink
-    className="font-semibold text-blue-400"
+    className="font-semibold"
     rel="nofollow"
     style={{ wordWrap: 'break-word', overflowWrap: 'anywhere' }}
     {...props}
@@ -157,19 +157,19 @@ const TweetBody: React.FC<{ tweet: DTSIStanceDetailsTweetProp['tweet'] }> = ({ t
             )
           case 'hashtags':
             return (
-              <span className="font-semibold text-blue-400" key={i}>
+              <span className="font-semibold text-blue-600" key={i}>
                 {text}
               </span>
             )
           case 'cashtags':
             return (
-              <span className="font-semibold text-blue-400" key={i}>
+              <span className="font-semibold text-blue-600" key={i}>
                 {text}
               </span>
             )
           case 'mentions':
             return (
-              <span className="font-semibold text-blue-400" key={i}>
+              <span className="font-semibold text-blue-600" key={i}>
                 {text}
               </span>
             )
@@ -253,7 +253,7 @@ export const DTSIStanceDetailsTweet: React.FC<
       ) : null}
       <div>
         <ExternalLink
-          className="text-sm underline"
+          className="text-sm"
           href={dtsiTweetUrl(stance.tweet, stance.tweet.twitterAccount)}
         >
           @{stance.tweet.twitterAccount.username}{' '}
