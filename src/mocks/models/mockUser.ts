@@ -17,10 +17,10 @@ export function mockCreateUserInput({
 } = {}) {
   return {
     referralId: fakerFields.generateReferralId(),
-    acquisitionCampaign: '',
-    acquisitionMedium: '',
-    acquisitionSource: '',
-    acquisitionReferer: '',
+    acquisitionCampaign: 'MOCK_ACQUISITION_CAMPAIGN',
+    acquisitionMedium: 'MOCK_ACQUISITION_MEDIUM',
+    acquisitionSource: 'MOCK_ACQUISITION_SOURCE',
+    acquisitionReferer: 'MOCK_ACQUISITION_REFERER',
     firstName: withData ? faker.person.firstName() : '',
     lastName: withData ? faker.person.lastName() : '',
     informationVisibility:
