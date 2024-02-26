@@ -1,7 +1,6 @@
 'use client'
 import { useCallback } from 'react'
 
-import { PrivacyPolicyDialog } from '@/components/app/pagePrivacyPolicy/dialog'
 import { SectionNames } from '@/components/app/userActionFormVoterRegistration/constants'
 import { UserActionFormVoterRegistrationLayout } from '@/components/app/userActionFormVoterRegistration/sections/layout'
 import { Button } from '@/components/ui/button'
