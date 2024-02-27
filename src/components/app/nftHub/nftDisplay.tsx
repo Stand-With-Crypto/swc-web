@@ -53,11 +53,11 @@ export function NFTDisplay({ userActions }: NFTDisplayProps) {
   )
   const numNfts = userNfts.length
 
-  const emptySpots = 3 - (numNfts % 3)
+  const emptySpots = numNfts % 3 === 0 ? 0 : 3 - (numNfts % 3)
 
   return (
     <>
-      <div className="flex w-full flex-col items-center justify-between gap-4 sm:h-[992px] lg:h-[340px] lg:flex-row">
+      <div className="flex w-full flex-col flex-wrap items-center gap-4 sm:justify-center lg:h-full lg:flex-row lg:justify-between">
         {userNfts.map(nft => {
           const { name, image } = nft
           return (
@@ -71,12 +71,13 @@ export function NFTDisplay({ userActions }: NFTDisplayProps) {
             />
           )
         })}
-        {Array.from({ length: emptySpots }, (_, index) => (
-          <div
-            className="box-content h-[320px] w-[320px] rounded-3xl bg-gray-100 md:h-[335px] md:w-[335px]"
-            key={index}
-          ></div>
-        ))}
+        {emptySpots > 0 &&
+          Array.from({ length: emptySpots }, (_, index) => (
+            <div
+              className="box-content h-[320px] w-[320px] rounded-3xl bg-gray-100 md:h-[335px] md:w-[335px]"
+              key={index}
+            ></div>
+          ))}
       </div>
       {optInNftButton ?? (
         <div className="m-4 flex justify-center">

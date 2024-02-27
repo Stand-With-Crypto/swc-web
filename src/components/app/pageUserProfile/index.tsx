@@ -2,6 +2,7 @@ import { UserActionType } from '@prisma/client'
 import { sumBy, uniq } from 'lodash-es'
 import { redirect, RedirectType } from 'next/navigation'
 
+import { NFTDisplay } from '@/components/app/nftHub/nftDisplay'
 import { PageUserProfileUser } from '@/components/app/pageUserProfile/getAuthenticatedData'
 import { UpdateUserProfileFormDialog } from '@/components/app/updateUserProfileForm/dialog'
 import { UserActionRowCTAsList } from '@/components/app/userActionRowCTA/userActionRowCTAsList'
@@ -140,8 +141,7 @@ export function PageUserProfile({
           performedUserActionTypes={performedUserActionTypes}
         />
       </section>
-      {/* hiding nft section until bugs are resolved */}
-      {/* <section>
+      <section>
         <PageTitle className="mb-4" size="sm">
           Your NFTs
         </PageTitle>
@@ -151,7 +151,7 @@ export function PageUserProfile({
         <div>
           <NFTDisplay userActions={userActions} />
         </div>
-      </section> */}
+      </section>
       <section>
         <PageTitle className="mb-4" size="sm">
           Refer Your Friends
