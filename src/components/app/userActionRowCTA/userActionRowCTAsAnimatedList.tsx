@@ -18,15 +18,16 @@ export function UserActionRowCTAsAnimatedList({
   performedUserActionTypes?: UserActionType[]
   excludeUserActionTypes?: UserActionType[]
 }) {
-  const filteredActions = useMemo(
-    () =>
-      !excludeUserActionTypes
-        ? USER_ACTION_TYPE_PRIORITY_ORDER
-        : USER_ACTION_TYPE_PRIORITY_ORDER.filter(
-            actionType => !excludeUserActionTypes.includes(actionType),
-          ),
-    [excludeUserActionTypes],
-  )
+  const filteredActions = useMemo(() => {
+    const filteredPriorityOrder = USER_ACTION_TYPE_PRIORITY_ORDER.filter(
+      action => action !== 'LIVE_EVENT',
+    )
+
+    return !excludeUserActionTypes
+      ? filteredPriorityOrder
+      : filteredPriorityOrder.filter(actionType => !excludeUserActionTypes.includes(actionType))
+  }, [excludeUserActionTypes])
+
   return (
     <div className={className}>
       {filteredActions.map((actionType, index) => {

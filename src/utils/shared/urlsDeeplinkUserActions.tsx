@@ -6,7 +6,7 @@ import { getIntlPrefix } from '@/utils/shared/urls'
 export const USER_ACTION_DEEPLINK_MAP: Omit<
   {
     [key in UserActionType]: {
-      getDeeplinkUrl: (config: { locale: SupportedLocale }) => string
+      getDeeplinkUrl: (config: { locale: SupportedLocale; slug?: string }) => string
     }
   },
   typeof UserActionType.TWEET
@@ -36,9 +36,14 @@ export const USER_ACTION_DEEPLINK_MAP: Omit<
       return `${getIntlPrefix(locale)}/action/nft-mint`
     },
   },
-  VOTER_REGISTRATION: {
+  [UserActionType.VOTER_REGISTRATION]: {
     getDeeplinkUrl: ({ locale }) => {
       return `${getIntlPrefix(locale)}/action/voter-registration`
+    },
+  },
+  [UserActionType.LIVE_EVENT]: {
+    getDeeplinkUrl: ({ locale, slug }) => {
+      return `${getIntlPrefix(locale)}/action/live-event/${slug ?? ''}`
     },
   },
 }

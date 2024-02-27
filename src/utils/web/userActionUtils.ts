@@ -8,4 +8,5 @@ export const USER_ACTION_TYPE_PRIORITY_ORDER: ReadonlyArray<UserActionType> = [
   UserActionType.DONATION,
   UserActionType.TWEET,
   UserActionType.NFT_MINT,
+  UserActionType.LIVE_EVENT,
 ]

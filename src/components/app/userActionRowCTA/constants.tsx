@@ -84,4 +84,12 @@ export const USER_ACTION_ROW_CTA_INFO: Record<
     canBeTriggeredMultipleTimes: true,
     WrapperComponent: UserActionFormNFTMintDialog,
   },
+  [UserActionType.LIVE_EVENT]: {
+    actionType: UserActionType.LIVE_EVENT,
+    image: '',
+    text: 'Live event',
+    subtext: '',
+    canBeTriggeredMultipleTimes: true,
+    WrapperComponent: ({ children }) => <>{children}</>,
+  },
 }
