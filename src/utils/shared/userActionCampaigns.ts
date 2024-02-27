@@ -22,7 +22,7 @@ export enum UserActionVoterRegistrationCampaignName {
   DEFAULT = 'DEFAULT',
 }
 export enum UserActionLiveEventCampaignName {
-  LA_CRYPTO_VOTES = '2024-03-04-LA',
+  DEFAULT = '2024-03-04-LA',
 }
 
 export const USER_ACTION_TO_CAMPAIGN_NAME_MAP = {
@@ -44,5 +44,5 @@ export const USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
   [UserActionType.TWEET]: UserActionTweetCampaignName.DEFAULT,
   [UserActionType.NFT_MINT]: UserActionNftMintCampaignName.DEFAULT,
   [UserActionType.VOTER_REGISTRATION]: UserActionVoterRegistrationCampaignName.DEFAULT,
-  [UserActionType.LIVE_EVENT]: UserActionLiveEventCampaignName.LA_CRYPTO_VOTES,
+  [UserActionType.LIVE_EVENT]: UserActionLiveEventCampaignName.DEFAULT,
 } satisfies Record<UserActionType, string>
