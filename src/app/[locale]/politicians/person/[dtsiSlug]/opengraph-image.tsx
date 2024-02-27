@@ -2,8 +2,10 @@ import { ImageResponse } from 'next/og'
 
 import { getData } from '@/app/[locale]/politicians/person/[dtsiSlug]/getData'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
+import { convertDTSIStanceScoreToCryptoSupportLanguageSentence } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { OPEN_GRAPH_IMAGE_DIMENSIONS } from '@/utils/server/generateOpenGraphImageUrl'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
+import { cn } from '@/utils/web/cn'
 
 export const dynamic = 'error'
 export const revalidate = SECONDS_DURATION.HOUR
@@ -18,6 +20,7 @@ export const contentType = 'image/png'
 
 export default async function Image({ params }: { params: { dtsiSlug: string } }) {
   const person = await getData(params.dtsiSlug)
+  console.log('person', person)
   if (!person) {
     return new ImageResponse(
       (
@@ -35,9 +38,12 @@ export default async function Image({ params }: { params: { dtsiSlug: string } }
       OPEN_GRAPH_IMAGE_DIMENSIONS,
     )
   }
+
+  const scoreLanguage = convertDTSIStanceScoreToCryptoSupportLanguageSentence(person)
   const dimensions = person.profilePictureUrlDimensions as
     | { width: number; height: number }
     | undefined
+
   return new ImageResponse(
     (
       <div
@@ -51,13 +57,16 @@ export default async function Image({ params }: { params: { dtsiSlug: string } }
             <img
               height="256"
               src={person.profilePictureUrl}
-              tw="rounded-3xl"
-              width={`${256 * (dimensions.width / dimensions.height)}`}
+              tw={cn('rounded-full object-none')}
+              width="256"
             />
           ) : null}
-          <div tw="text-5xl mb-2 mt-8 flex text-gray-400">
-            See where <span tw="text-white mx-2">{dtsiPersonFullName(person)}</span> stands on
-            crypto
+          <div tw="flex-col text-xl mb-2 mt-8 flex text-gray-400">
+            <span tw="text-white mx-2 text-[40px] leading-[48px] pb-4">
+              {dtsiPersonFullName(person)}
+            </span>
+            <br />
+            {scoreLanguage}
           </div>
         </div>
         <div tw="text-gray-400">standwithcrypto.org</div>
