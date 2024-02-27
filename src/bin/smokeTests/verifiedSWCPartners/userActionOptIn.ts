@@ -38,7 +38,6 @@ async function smokeTestUserActionOptIn() {
         countryCode: faker.location.countryCode(),
         formattedDescription: '',
       },
-      // address: mockCreateAddressInput(),
       emailAddress: faker.internet.email(),
       optInType: UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER,
       isVerifiedEmailAddress: true,
