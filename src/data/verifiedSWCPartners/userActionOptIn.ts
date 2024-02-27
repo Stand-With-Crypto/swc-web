@@ -110,7 +110,7 @@ export async function verifiedSWCPartnersUserActionOptIn(
       extra: { emailAddress, isVerifiedEmailAddress },
       tags: { optInType, actionType },
     })
-    analytics.trackUserActionCreatedIgnored({
+    await analytics.trackUserActionCreatedIgnored({
       actionType,
       campaignName,
       creationMethod: 'Verified SWC Partner',
@@ -144,7 +144,7 @@ export async function verifiedSWCPartnersUserActionOptIn(
     },
   })
 
-  analytics.trackUserActionCreated({
+  await analytics.trackUserActionCreated({
     actionType,
     campaignName,
     creationMethod: 'Verified SWC Partner',

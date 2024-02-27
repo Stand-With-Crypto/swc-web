@@ -76,7 +76,7 @@ async function _actionCreateUserActionTweet() {
   })
 
   if (userAction) {
-    analytics.trackUserActionCreatedIgnored({
+    await analytics.trackUserActionCreatedIgnored({
       actionType,
       campaignName,
       reason: 'Too Many Recent',
@@ -102,7 +102,7 @@ async function _actionCreateUserActionTweet() {
         : { userSession: { connect: { id: sessionId } } }),
     },
   })
-  analytics.trackUserActionCreated({
+  await analytics.trackUserActionCreated({
     actionType,
     campaignName,
     creationMethod: 'On Site',

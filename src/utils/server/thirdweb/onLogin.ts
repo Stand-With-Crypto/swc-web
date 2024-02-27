@@ -78,7 +78,7 @@ export async function onLogin(
   })
   if (existingVerifiedUser) {
     log('existing user found')
-    getServerAnalytics({ userId: existingVerifiedUser.id, localUser }).track('User Logged In')
+    await getServerAnalytics({ userId: existingVerifiedUser.id, localUser }).track('User Logged In')
     getServerPeopleAnalytics({ userId: existingVerifiedUser.id, localUser }).set({
       'Datetime of Last Login': new Date(),
     })
@@ -276,7 +276,7 @@ export async function onNewLogin(props: NewLoginParams) {
     )
   }
 
-  getServerAnalytics({ userId: user.id, localUser }).track('User Logged In', {
+  await getServerAnalytics({ userId: user.id, localUser }).track('User Logged In', {
     'Is First Time': true,
     'Existing Users Found Ids': existingUsersWithSource.map(x => x.user.id),
     'Existing Users Found Sources': existingUsersWithSource.map(x => x.sourceOfExistingUser),
@@ -653,7 +653,7 @@ async function triggerPostLoginUserActionSteps({
     })
     log(`triggerPostLoginUserActionSteps: opt in user action created`)
     await claimNFT(optInUserAction, userCryptoAddress)
-    getServerAnalytics({ userId: user.id, localUser }).trackUserActionCreated({
+    await getServerAnalytics({ userId: user.id, localUser }).trackUserActionCreated({
       actionType: UserActionType.OPT_IN,
       campaignName: UserActionOptInCampaignName.DEFAULT,
       creationMethod: 'On Site',

@@ -101,7 +101,7 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
     },
   })
   if (userAction) {
-    analytics.trackUserActionCreatedIgnored({
+    await analytics.trackUserActionCreatedIgnored({
       actionType,
       campaignName,
       reason: 'Too Many Recent',
@@ -153,7 +153,7 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
       userActionEmail: true,
     },
   })
-  analytics.trackUserActionCreated({
+  await analytics.trackUserActionCreated({
     actionType,
     campaignName,
     creationMethod: 'On Site',

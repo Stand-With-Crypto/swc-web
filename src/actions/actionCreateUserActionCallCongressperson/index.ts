@@ -90,7 +90,7 @@ async function _actionCreateUserActionCallCongressperson(
 
   const recentUserAction = await getRecentUserActionByUserId(user.id, validatedInput)
   if (recentUserAction) {
-    logSpamActionSubmissions({
+    await logSpamActionSubmissions({
       validatedInput,
       userAction: recentUserAction,
       userId: user.id,
@@ -155,7 +155,7 @@ async function getRecentUserActionByUserId(
   })
 }
 
-function logSpamActionSubmissions({
+async function logSpamActionSubmissions({
   validatedInput,
   userAction,
   userId,
@@ -166,7 +166,7 @@ function logSpamActionSubmissions({
   userId: User['id']
   sharedDependencies: Pick<SharedDependencies, 'analytics'>
 }) {
-  sharedDependencies.analytics.trackUserActionCreatedIgnored({
+  await sharedDependencies.analytics.trackUserActionCreatedIgnored({
     actionType: UserActionType.CALL,
     campaignName: validatedInput.data.campaignName,
     reason: 'Too Many Recent',
@@ -240,7 +240,7 @@ async function createActionAndUpdateUser<U extends User>({
     : user
   logger.info('created user action and updated user')
 
-  sharedDependencies.analytics.trackUserActionCreated({
+  await sharedDependencies.analytics.trackUserActionCreated({
     actionType: UserActionType.CALL,
     campaignName: validatedInput.campaignName,
     'Recipient DTSI Slug': validatedInput.dtsiSlug,

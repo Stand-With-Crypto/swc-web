@@ -1,7 +1,7 @@
 import { UserActionType } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { track as vercelTrack } from '@vercel/analytics/server'
-import mixpanelLib from 'mixpanel'
+import mixpanelLib, { PropertyDict } from 'mixpanel'
 
 import {
   LocalUser,
@@ -10,6 +10,7 @@ import {
 import { getLogger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { AnalyticProperties, AnalyticsPeopleProperties } from '@/utils/shared/sharedAnalytics'
+import { sleep } from '@/utils/shared/sleep'
 import { formatVercelAnalyticsEventProperties } from '@/utils/shared/vercelAnalytics'
 
 const NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN = requiredEnv(
@@ -23,7 +24,14 @@ const logger = getLogger('serverAnalytics')
 
 type ServerAnalyticsConfig = { localUser: LocalUser | null; userId: string }
 
-function trackAnalytic(
+// Can't use nodejs `promisify`, the type definitions broke when used with `mixpanel.track`
+const promisifiedMixpanelTrack = (eventName: string, properties: PropertyDict) =>
+  new Promise<void>((resolve, reject) => {
+    mixpanel.track(eventName, properties, err => (err ? reject(err) : resolve()))
+  })
+
+const TIMEOUT_STATUS_CODE = 'timeout' as const
+async function trackAnalytic(
   _config: ServerAnalyticsConfig,
   eventName: string,
   eventProperties?: AnalyticProperties,
@@ -42,33 +50,43 @@ function trackAnalytic(
       },
     }
   }
+
   logger.info(`Event Name: "${eventName}"`, eventProperties)
-  if (process.env.VERCEL_URL) {
-    vercelTrack(eventName, eventProperties && formatVercelAnalyticsEventProperties(eventProperties))
-  }
-  // we could wrap this in a promise and await it, but we don't want to block the request
-  mixpanel.track(
-    eventName,
-    {
-      ...eventProperties,
-      distinct_id: config.userId,
-    },
-    err => {
-      if (err) {
-        Sentry.captureException(err, { tags: { domain: 'trackAnalytic' } })
+  await Promise.any([
+    sleep(1500).then(() => TIMEOUT_STATUS_CODE),
+    Promise.all([
+      process.env.VERCEL_URL &&
+        vercelTrack(
+          eventName,
+          eventProperties && formatVercelAnalyticsEventProperties(eventProperties),
+        ),
+      promisifiedMixpanelTrack(eventName, {
+        ...eventProperties,
+        distinct_id: config.userId,
+      }),
+    ]),
+  ])
+    .then(res => {
+      if (res === TIMEOUT_STATUS_CODE) {
+        throw new Error('Request timeout')
       }
-    },
-  )
+    })
+    .catch(err =>
+      Sentry.captureException(err, {
+        tags: { domain: 'trackAnalytic' },
+        extra: { eventName, eventProperties, isTrackingInVercel: !!process.env.VERCEL_URL },
+      }),
+    )
 }
 
 type CreationMethod = 'On Site' | 'Verified SWC Partner'
 export type AnalyticsUserActionUserState = 'New' | 'Existing' | 'Existing With Updates'
-// TODO determine if we need to be awaiting this
+
 export function getServerAnalytics(config: ServerAnalyticsConfig) {
   const currentSessionAnalytics =
     config.localUser?.currentSession &&
     mapCurrentSessionLocalUserToAnalyticsProperties(config.localUser.currentSession)
-  function trackUserActionCreated({
+  const trackUserActionCreated = async ({
     actionType,
     campaignName,
     creationMethod = 'On Site',
@@ -79,7 +97,7 @@ export function getServerAnalytics(config: ServerAnalyticsConfig) {
     creationMethod?: CreationMethod
     campaignName: string
     userState: AnalyticsUserActionUserState
-  } & AnalyticProperties) {
+  } & AnalyticProperties) =>
     trackAnalytic(config, 'User Action Created', {
       ...currentSessionAnalytics,
       'User Action Type': actionType,
@@ -88,8 +106,8 @@ export function getServerAnalytics(config: ServerAnalyticsConfig) {
       'User State': userState,
       ...other,
     })
-  }
-  function trackUserActionCreatedIgnored({
+
+  const trackUserActionCreatedIgnored = async ({
     actionType,
     campaignName,
     reason,
@@ -102,7 +120,7 @@ export function getServerAnalytics(config: ServerAnalyticsConfig) {
     creationMethod?: CreationMethod
     reason: 'Too Many Recent' | 'Already Exists'
     userState: AnalyticsUserActionUserState
-  } & AnalyticProperties) {
+  } & AnalyticProperties) =>
     trackAnalytic(config, ' Type Creation Ignored', {
       ...currentSessionAnalytics,
       'User Action Type': actionType,
@@ -112,21 +130,19 @@ export function getServerAnalytics(config: ServerAnalyticsConfig) {
       Reason: reason,
       ...other,
     })
-  }
 
-  function track(
+  const track = async (
     eventName: string,
     {
       creationMethod = 'On Site',
       ...eventProperties
     }: AnalyticProperties & { creationMethod?: CreationMethod } = {},
-  ) {
+  ) =>
     trackAnalytic(config, eventName, {
       'Creation Method': creationMethod,
       ...currentSessionAnalytics,
       ...eventProperties,
     })
-  }
 
   return { trackUserActionCreated, trackUserActionCreatedIgnored, track }
 }

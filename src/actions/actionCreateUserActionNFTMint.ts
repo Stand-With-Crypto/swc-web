@@ -140,7 +140,7 @@ async function createAction<U extends User>({
 
   logger.info('created user action')
 
-  sharedDependencies.analytics.trackUserActionCreated({
+  await sharedDependencies.analytics.trackUserActionCreated({
     actionType: UserActionType.NFT_MINT,
     campaignName: validatedInput.campaignName,
     userState: 'Existing',
