@@ -47,7 +47,7 @@ export function getIsSupportedBrowser(browser: ReturnType<typeof detect>) {
       if (!version) {
         return true
       }
-      return version >= 13
+      return version >= 14
     }
   }
   return true

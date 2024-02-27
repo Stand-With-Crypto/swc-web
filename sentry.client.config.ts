@@ -30,8 +30,8 @@ const COMMON_ERROR_MESSAGES_TO_GROUP = [
   'Properties can only be defined on Objects',
   'network error',
   'localStorage',
-  'Unexpected end of input',
   'TLS connection',
+  'Unexpected end of',
 ]
 
 const COMMON_TRANSACTION_NAMES_TO_GROUP = ['node_modules/@thirdweb-dev', 'maps/api/js']
