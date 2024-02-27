@@ -45,7 +45,7 @@ export function EventCard({
         </PageTitle>
         <div className="w-full">
           <TrackedExternalLink
-            className={linkBoxLinkClassName}
+            className={`${linkBoxLinkClassName} text-white`}
             data-link-box-subject
             eventProperties={{
               component: AnalyticComponentType.card,

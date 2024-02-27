@@ -63,9 +63,10 @@ export function UserActionFormNFTMintTransactionWatch({
           'Campaign Name': input.campaignName,
           'User Action Type': UserActionType.NFT_MINT,
         },
+        payload: input,
       },
-      () =>
-        actionCreateUserActionMintNFT(input).then(actionResult => {
+      payload =>
+        actionCreateUserActionMintNFT(payload).then(actionResult => {
           if (actionResult.user) {
             identifyUserOnClient(actionResult.user)
           }

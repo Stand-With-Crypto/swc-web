@@ -26,6 +26,8 @@ import {
 import { dtsiTwitterAccountUrl } from '@/utils/dtsi/dtsiTwitterAccountUtils'
 import { cn } from '@/utils/web/cn'
 
+const POLITICIAN_IMAGE_SIZE_PX = 230
+
 export function PagePoliticianDetails({
   person,
   locale,
@@ -40,10 +42,13 @@ export function PagePoliticianDetails({
     <div className="container max-w-3xl">
       <section>
         {person.profilePictureUrl ? (
-          <div className="mx-auto mb-6 overflow-hidden rounded-xl" style={{ maxWidth: 100 }}>
+          <div
+            className="mx-auto mb-6 overflow-hidden rounded-xl"
+            style={{ maxWidth: POLITICIAN_IMAGE_SIZE_PX }}
+          >
             <MaybeNextImg
               alt={`profile picture of ${dtsiPersonFullName(person)}`}
-              sizes="100px"
+              sizes={`${POLITICIAN_IMAGE_SIZE_PX}px`}
               {...(getDTSIPersonProfilePictureUrlDimensions(person) || {})}
               src={person.profilePictureUrl}
             />

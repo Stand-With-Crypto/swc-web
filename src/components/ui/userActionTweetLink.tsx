@@ -5,6 +5,7 @@ import { Slot } from '@radix-ui/react-slot'
 
 import { actionCreateUserActionTweet } from '@/actions/actionCreateUserActionTweet'
 import { Button } from '@/components/ui/button'
+import { openWindow } from '@/utils/shared/openWindow'
 import { AnalyticProperties } from '@/utils/shared/sharedAnalytics'
 import { fullUrl } from '@/utils/shared/urls'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
@@ -41,11 +42,12 @@ export const UserActionTweetLink = React.forwardRef<
                 ...eventProperties,
                 'User Action Type': UserActionType.TWEET,
               },
+              payload: undefined,
             },
             () => actionCreateUserActionTweet(),
           )
 
-          window.open(
+          openWindow(
             `https://twitter.com/intent/tweet?url=${encodeURIComponent(
               url,
             )}&text=${encodeURIComponent(message)}`,

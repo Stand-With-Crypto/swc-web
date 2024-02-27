@@ -117,10 +117,7 @@ export function PageHome({
           <PageSubTitle as="h4">
             See how our community is taking a stand to safeguard the future of crypto in America.
             Donations to{' '}
-            <ExternalLink
-              className="underline"
-              href={'https://www.fec.gov/data/committee/C00835959/'}
-            >
+            <ExternalLink href={'https://www.fec.gov/data/committee/C00835959/'}>
               Fairshake
             </ExternalLink>
             , a pro-crypto Super PAC, are not included on the leaderboard.

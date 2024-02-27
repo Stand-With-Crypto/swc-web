@@ -107,7 +107,7 @@ export function UserActionFormNFTMintCheckout({
               {contractMetadata.name}
             </PageTitle>
 
-            <PageSubTitle className="text-start">on Base Network</PageSubTitle>
+            <PageSubTitle className="text-start">on Base</PageSubTitle>
           </div>
         </div>
 
@@ -216,7 +216,7 @@ function UserActionFormNFTMintCheckoutSkeleton() {
             </Skeleton>
 
             <Skeleton>
-              <PageSubTitle className="text-start">on Base Network</PageSubTitle>
+              <PageSubTitle className="text-start">on Base</PageSubTitle>
             </Skeleton>
           </div>
         </div>

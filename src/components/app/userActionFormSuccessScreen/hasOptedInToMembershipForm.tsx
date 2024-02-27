@@ -55,6 +55,7 @@ export function HasOptedInToMembershipForm({
             await triggerServerActionForForm(
               {
                 formName: 'Update User Has Opted In To Membership',
+                payload: undefined,
               },
               () => actionUpdateUserHasOptedInToMembership(),
             )
