@@ -159,7 +159,7 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
       case UserActionType.LIVE_EVENT: {
         return {
           onFocusContent: () => null,
-          children: <MainText>Claimed an NFT</MainText>,
+          children: <MainText>Attended an in-person event in CA</MainText>,
         }
       }
     }
