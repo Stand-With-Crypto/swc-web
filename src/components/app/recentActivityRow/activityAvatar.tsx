@@ -13,7 +13,7 @@ export const ACTIVITY_TYPE_TO_ICON_URL: Record<UserActionType, string> = {
   [UserActionType.OPT_IN]: '/activityFeedIcons/join.svg',
   [UserActionType.VOTER_REGISTRATION]: '/activityFeedIcons/vote.svg',
   [UserActionType.TWEET]: '/activityFeedIcons/share-x.svg',
-  [UserActionType.LIVE_EVENT]: '/activityFeedIcons/join.svg',
+  [UserActionType.LIVE_EVENT]: '/activityFeedIcons/event.svg',
 }
 
 type ActivityAvatarProps = {
