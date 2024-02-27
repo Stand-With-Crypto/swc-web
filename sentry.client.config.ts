@@ -23,6 +23,9 @@ const COMMON_ERROR_MESSAGES_TO_GROUP: string[] = [
   'Converting circular structure to JSON',
   "Cannot read properties of undefined (reading 'call')",
   'JSON.stringify cannot serialize cyclic structures',
+  "Cannot read properties of null (reading 'getItem')",
+  'The operation is insecure',
+  'The object can not be found here',
 ]
 
 const isSupportedBrowser = getIsSupportedBrowser(maybeDetectBrowser())

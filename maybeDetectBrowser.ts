@@ -42,6 +42,13 @@ export function getIsSupportedBrowser(browser: ReturnType<typeof detect>) {
       }
       return version > 90
     }
+    case 'ios': {
+      const version = maybeParseNumber(browser.version)
+      if (!version) {
+        return true
+      }
+      return version >= 13
+    }
   }
   return true
 }
