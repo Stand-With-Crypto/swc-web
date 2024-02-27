@@ -227,6 +227,12 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
           ),
         }
       }
+      case UserActionType.LIVE_EVENT: {
+        return {
+          onFocusContent: undefined,
+          children: <MainText>{userDisplayName} attended an in-person event in CA</MainText>,
+        }
+      }
     }
     return gracefullyError({
       // @ts-ignore
