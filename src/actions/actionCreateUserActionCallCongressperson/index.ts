@@ -19,6 +19,7 @@ import {
   parseLocalUserFromCookies,
 } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
+import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
@@ -46,6 +47,7 @@ interface SharedDependencies {
   sessionId: ReturnType<typeof getUserSessionId>
   analytics: ReturnType<typeof getServerAnalytics>
   peopleAnalytics: ReturnType<typeof getServerPeopleAnalytics>
+  hasRegisteredRatelimit: boolean
 }
 
 const logger = getLogger(`actionCreateUserActionCallCongressperson`)
@@ -59,6 +61,7 @@ async function _actionCreateUserActionCallCongressperson(
   input: CreateActionCallCongresspersonInput,
 ) {
   logger.info('triggered')
+  let hasRegisteredRatelimit = false
 
   const validatedInput = createActionCallCongresspersonInputValidationSchema.safeParse(input)
   if (!validatedInput.success) {
@@ -75,7 +78,11 @@ async function _actionCreateUserActionCallCongressperson(
       include: { primaryUserCryptoAddress: true, address: true },
     },
   })
-  await throwIfRateLimited()
+
+  if (!userMatch.user && !hasRegisteredRatelimit) {
+    await throwIfRateLimited({ context: 'unauthenticated' })
+    hasRegisteredRatelimit = true
+  }
 
   const user = userMatch.user || (await createUser({ localUser, sessionId }))
 
@@ -97,6 +104,11 @@ async function _actionCreateUserActionCallCongressperson(
       sharedDependencies: { analytics },
     })
     return { user: getClientUser(user) }
+  }
+
+  if (!hasRegisteredRatelimit) {
+    const authUser = await appRouterGetAuthUser()
+    await throwIfRateLimited({ context: authUser ? 'authenticated' : 'unauthenticated' })
   }
 
   const { userAction, updatedUser } = await createActionAndUpdateUser({

@@ -19,6 +19,7 @@ import {
   parseLocalUserFromCookies,
 } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
+import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
@@ -51,6 +52,7 @@ export const actionCreateUserActionVoterRegistration = withServerActionMiddlewar
 
 async function _actionCreateUserActionVoterRegistration(input: CreateActionVoterRegistrationInput) {
   logger.info('triggered')
+  let hasRegisteredRatelimit = false
 
   const validatedInput = createActionVoterRegistrationInputValidationSchema.safeParse(input)
   if (!validatedInput.success) {
@@ -65,8 +67,11 @@ async function _actionCreateUserActionVoterRegistration(input: CreateActionVoter
   const userMatch = await getMaybeUserAndMethodOfMatch({
     prisma: { include: { primaryUserCryptoAddress: true, address: true } },
   })
-  await throwIfRateLimited()
 
+  if (!hasRegisteredRatelimit && !userMatch.user) {
+    await throwIfRateLimited({ context: 'unauthenticated' })
+    hasRegisteredRatelimit = true
+  }
   const user = userMatch.user || (await createUser({ localUser, sessionId }))
 
   const peopleAnalytics = getServerPeopleAnalytics({
@@ -89,6 +94,11 @@ async function _actionCreateUserActionVoterRegistration(input: CreateActionVoter
     return { user: getClientUser(user) }
   }
 
+  if (!hasRegisteredRatelimit) {
+    const authUser = await appRouterGetAuthUser()
+    await throwIfRateLimited({ context: authUser ? 'authenticated' : 'unauthenticated' })
+    hasRegisteredRatelimit = true
+  }
   const { userAction } = await createAction({
     user,
     isNewUser: !userMatch.user,

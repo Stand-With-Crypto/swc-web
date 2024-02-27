@@ -25,6 +25,7 @@ import {
   ServerLocalUser,
 } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
+import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
@@ -45,6 +46,8 @@ export const actionCreateUserActionTweet = withServerActionMiddleware(
 
 async function _actionCreateUserActionTweet() {
   logger.info('triggered')
+  let hasRegisteredRatelimit = false
+
   const userMatch = await getMaybeUserAndMethodOfMatch({
     prisma: {
       include: { primaryUserCryptoAddress: true, address: true },
@@ -53,7 +56,11 @@ async function _actionCreateUserActionTweet() {
   logger.info(userMatch.user ? 'found user' : 'no user found')
   const sessionId = getUserSessionId()
   const localUser = parseLocalUserFromCookies()
-  await throwIfRateLimited()
+
+  if (!hasRegisteredRatelimit && !userMatch.user) {
+    await throwIfRateLimited({ context: 'unauthenticated' })
+    hasRegisteredRatelimit = true
+  }
   const { user, userState } = await maybeUpsertUser({
     existingUser: userMatch.user,
     sessionId,
@@ -90,6 +97,11 @@ async function _actionCreateUserActionTweet() {
     return { user: getClientUser(user) }
   }
 
+  if (!hasRegisteredRatelimit) {
+    const authUser = await appRouterGetAuthUser()
+    await throwIfRateLimited({ context: authUser ? 'authenticated' : 'unauthenticated' })
+    hasRegisteredRatelimit = true
+  }
   userAction = await prismaClient.userAction.create({
     data: {
       user: { connect: { id: user.id } },

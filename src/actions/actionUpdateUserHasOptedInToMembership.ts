@@ -3,6 +3,7 @@ import 'server-only'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
 import { prismaClient } from '@/utils/server/prismaClient'
+import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
@@ -23,6 +24,7 @@ export async function actionUpdateUserHasOptedInToMembership() {
     'Has Opted In To Membership': true,
   })
 
+  await throwIfRateLimited({ context: 'authenticated' })
   const updatedUser = await prismaClient.user.update({
     where: {
       id: user.id,

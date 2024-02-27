@@ -22,6 +22,7 @@ import {
 } from '@/utils/server/capitolCanary/campaigns'
 import { UpsertAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { prismaClient } from '@/utils/server/prismaClient'
+import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
@@ -46,6 +47,9 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
       errors: validatedFields.error.flatten().fieldErrors,
     }
   }
+
+  await throwIfRateLimited({ context: 'authenticated' })
+
   const user = await prismaClient.user.findFirstOrThrow({
     where: {
       id: authUser.userId,

@@ -36,6 +36,7 @@ import {
   ServerLocalUser,
 } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
+import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
@@ -60,6 +61,8 @@ export const actionCreateUserActionEmailCongressperson = withServerActionMiddlew
 
 async function _actionCreateUserActionEmailCongressperson(input: Input) {
   logger.info('triggered')
+  let hasRegisteredRatelimit = false
+
   const userMatch = await getMaybeUserAndMethodOfMatch({
     prisma: {
       include: { primaryUserCryptoAddress: true, userEmailAddresses: true, address: true },
@@ -74,13 +77,16 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
     }
   }
   logger.info('validated fields')
-  await throwIfRateLimited()
+
   const localUser = parseLocalUserFromCookies()
   const { user, userState } = await maybeUpsertUser({
     existingUser: userMatch.user,
     input: validatedFields.data,
     sessionId,
     localUser,
+    onRegisterRateLimit: () => {
+      hasRegisteredRatelimit = true
+    },
   })
   const analytics = getServerAnalytics({ userId: user.id, localUser })
   const peopleAnalytics = getServerPeopleAnalytics({ userId: user.id, localUser })
@@ -114,6 +120,12 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
       { extra: { validatedFields, userAction }, user: { id: user.id } },
     )
     return { user: getClientUser(user) }
+  }
+
+  if (!hasRegisteredRatelimit) {
+    const authUser = await appRouterGetAuthUser()
+    await throwIfRateLimited({ context: authUser ? 'authenticated' : 'unauthenticated' })
+    hasRegisteredRatelimit = true
   }
 
   userAction = await prismaClient.userAction.create({
@@ -201,11 +213,13 @@ async function maybeUpsertUser({
   input,
   sessionId,
   localUser,
+  onRegisterRateLimit = () => {},
 }: {
   existingUser: UserWithRelations | null
   input: Input
   sessionId: string
   localUser: ServerLocalUser | null
+  onRegisterRateLimit?: () => void
 }): Promise<{ user: UserWithRelations; userState: AnalyticsUserActionUserState }> {
   const { firstName, lastName, emailAddress, address } = input
 
@@ -239,6 +253,7 @@ async function maybeUpsertUser({
       return { user: existingUser, userState: 'Existing' }
     }
     logger.info(`updating the following user fields ${keysToUpdate.join(', ')}`)
+    await throwIfRateLimited({ context: 'unauthenticated' }).then(onRegisterRateLimit)
     const user = await prismaClient.user.update({
       where: { id: existingUser.id },
       data: updatePayload,
@@ -260,6 +275,7 @@ async function maybeUpsertUser({
     }
     return { user, userState: 'Existing With Updates' }
   }
+  await throwIfRateLimited({ context: 'unauthenticated' }).then(onRegisterRateLimit)
   const user = await prismaClient.user.create({
     include: {
       primaryUserCryptoAddress: true,

@@ -5,6 +5,7 @@ import { z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
 import { prismaClient } from '@/utils/server/prismaClient'
+import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
@@ -29,6 +30,8 @@ async function _actionUpdateUserInformationVisibility(
       errors: validatedFields.error.flatten().fieldErrors,
     }
   }
+
+  await throwIfRateLimited({ context: 'authenticated' })
   const { informationVisibility } = validatedFields.data
   const user = await prismaClient.user.findFirstOrThrow({
     where: {
