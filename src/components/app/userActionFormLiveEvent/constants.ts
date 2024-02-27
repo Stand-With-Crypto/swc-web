@@ -1,5 +1,12 @@
 import { UserActionLiveEventCampaignName } from '@/utils/shared/userActionCampaigns'
 
+export const ANALYTICS_NAME_USER_ACTION_FORM_LIVE_EVENT = 'User Action Form Live Event'
+
+export enum SectionNames {
+  LANDING = 'Landing',
+  SUCCESS = 'Success',
+}
+
 export const MESSAGES: Record<UserActionLiveEventCampaignName, Record<string, string>> = {
   [UserActionLiveEventCampaignName.DEFAULT]: {
     title: 'Los Angeles Crypto Votes',

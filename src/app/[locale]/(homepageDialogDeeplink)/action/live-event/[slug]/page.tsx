@@ -2,7 +2,8 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 import { HomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogDeeplinkLayout'
-import { UserActionLiveEvent } from '@/components/app/userActionLiveEvent'
+import { UserActionFormLiveEvent } from '@/components/app/userActionFormLiveEvent'
+import { UserActionFormLiveEventDeeplinkWrapper } from '@/components/app/userActionFormLiveEvent/homepageDialogDeeplinkWrapper.tsx'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
@@ -33,7 +34,7 @@ export default async function UserActionLiveEventDeepLink({ params }: Props) {
   return (
     <HomepageDialogDeeplinkLayout pageParams={params}>
       <div className={dialogContentPaddingStyles}>
-        <UserActionLiveEvent slug={slug} />
+        <UserActionFormLiveEventDeeplinkWrapper slug={slug} />
       </div>
     </HomepageDialogDeeplinkLayout>
   )
