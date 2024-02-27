@@ -1,13 +1,11 @@
 'use client'
 
-import { UserActionFormLayout } from '@/components/app/userActionFormCommon'
+import { ClaimNft } from '@/components/app/userActionFormLiveEvent/claimNft'
 import {
   ANALYTICS_NAME_USER_ACTION_FORM_LIVE_EVENT,
-  MESSAGES,
   SectionNames,
 } from '@/components/app/userActionFormLiveEvent/constants'
 import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
-import { Button } from '@/components/ui/button'
 import { useSections } from '@/hooks/useSections'
 import { NFTSlug } from '@/utils/shared/nft'
 import { UserActionLiveEventCampaignName } from '@/utils/shared/userActionCampaigns'
@@ -33,21 +31,7 @@ export function UserActionFormLiveEvent({
 
   switch (currentTab) {
     case SectionNames.LANDING:
-      return (
-        <UserActionFormLayout>
-          <UserActionFormLayout.Container>
-            <div className="flex h-full  flex-col items-center justify-center gap-4">
-              <UserActionFormLayout.Heading
-                subtitle={MESSAGES[slug][isLoggedIn ? 'signedInSubtitle' : 'signedOutSubtitle']}
-                title={MESSAGES[slug].title}
-              />
-              <Button onClick={() => sectionProps.goToSection(SectionNames.SUCCESS)}>
-                {isLoggedIn ? 'Claim NFT' : 'Sign in to claim'}
-              </Button>
-            </div>
-          </UserActionFormLayout.Container>
-        </UserActionFormLayout>
-      )
+      return <ClaimNft {...sectionProps} isLoggedIn={isLoggedIn} slug={slug} />
     case SectionNames.SUCCESS:
       return (
         <UserActionFormSuccessScreen

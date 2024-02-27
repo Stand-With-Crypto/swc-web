@@ -13,7 +13,9 @@ import { trackDialogOpen } from '@/components/ui/dialog/trackDialogOpen'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useThirdwebData } from '@/hooks/useThirdwebData'
 
-export function UserActionFormLiveEventDeeplinkWrapper({ slug }: UserActionFormLiveEventProps) {
+export function UserActionFormLiveEventDeeplinkWrapper({
+  slug,
+}: Pick<UserActionFormLiveEventProps, 'slug'>) {
   const urls = useIntlUrls()
   const router = useRouter()
   const { session } = useThirdwebData()
