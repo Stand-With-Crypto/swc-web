@@ -79,7 +79,7 @@ export async function onLogin(
   if (existingVerifiedUser) {
     log('existing user found')
     await getServerAnalytics({ userId: existingVerifiedUser.id, localUser }).track('User Logged In')
-    getServerPeopleAnalytics({ userId: existingVerifiedUser.id, localUser }).set({
+    await getServerPeopleAnalytics({ userId: existingVerifiedUser.id, localUser }).set({
       'Datetime of Last Login': new Date(),
     })
     return { userId: existingVerifiedUser.id }
@@ -271,7 +271,7 @@ export async function onNewLogin(props: NewLoginParams) {
     wasUserCreated,
   })
   if (localUser) {
-    getServerPeopleAnalytics({ userId: user.id, localUser }).setOnce(
+    await getServerPeopleAnalytics({ userId: user.id, localUser }).setOnce(
       mapPersistedLocalUserToAnalyticsProperties(localUser.persisted),
     )
   }
@@ -295,7 +295,7 @@ export async function onNewLogin(props: NewLoginParams) {
     'Had Opt In User Action': postLoginUserActionSteps.hadOptInUserAction,
     'Count Past Actions Minted': postLoginUserActionSteps.pastActionsMinted.length,
   })
-  getServerPeopleAnalytics({ userId: user.id, localUser }).set({
+  await getServerPeopleAnalytics({ userId: user.id, localUser }).set({
     'Datetime of Last Login': new Date(),
   })
 

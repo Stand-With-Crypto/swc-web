@@ -124,7 +124,7 @@ async function createUser(sharedDependencies: Pick<SharedDependencies, 'localUse
   logger.info('created user')
 
   if (localUser?.persisted) {
-    getServerPeopleAnalytics({ localUser, userId: createdUser.id }).setOnce(
+    await getServerPeopleAnalytics({ localUser, userId: createdUser.id }).setOnce(
       mapPersistedLocalUserToAnalyticsProperties(localUser.persisted),
     )
   }
@@ -214,7 +214,7 @@ async function createAction<U extends User>({
     usaState: validatedInput.usaState,
     userState: isNewUser ? 'New' : 'Existing',
   })
-  sharedDependencies.peopleAnalytics.set({
+  await sharedDependencies.peopleAnalytics.set({
     usaState: validatedInput.usaState,
   })
 

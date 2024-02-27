@@ -35,9 +35,10 @@ async function _actionUpdateUserInformationVisibility(
       id: authUser.userId,
     },
   })
-  const localUser = parseLocalUserFromCookies()
-  const peopleAnalytics = getServerPeopleAnalytics({ userId: authUser.userId, localUser })
-  peopleAnalytics.set({
+  await getServerPeopleAnalytics({
+    userId: authUser.userId,
+    localUser: parseLocalUserFromCookies(),
+  }).set({
     'Information Visibility': informationVisibility,
   })
 
