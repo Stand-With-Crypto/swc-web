@@ -13,7 +13,7 @@ import * as Sentry from '@sentry/nextjs'
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
 import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
+import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
 import {
   AnalyticsUserActionUserState,
   getServerAnalytics,
@@ -25,7 +25,6 @@ import {
   ServerLocalUser,
 } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
-import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
@@ -46,7 +45,7 @@ export const actionCreateUserActionTweet = withServerActionMiddleware(
 
 async function _actionCreateUserActionTweet() {
   logger.info('triggered')
-  let hasRegisteredRatelimit = false
+  const { throwIfRateLimited } = getRequestRateLimiter({ context: 'unauthenticated' })
 
   const userMatch = await getMaybeUserAndMethodOfMatch({
     prisma: {
@@ -57,9 +56,8 @@ async function _actionCreateUserActionTweet() {
   const sessionId = getUserSessionId()
   const localUser = parseLocalUserFromCookies()
 
-  if (!hasRegisteredRatelimit && !userMatch.user) {
-    await throwIfRateLimited({ context: 'unauthenticated' })
-    hasRegisteredRatelimit = true
+  if (!userMatch.user) {
+    await throwIfRateLimited()
   }
   const { user, userState } = await maybeUpsertUser({
     existingUser: userMatch.user,
@@ -97,11 +95,8 @@ async function _actionCreateUserActionTweet() {
     return { user: getClientUser(user) }
   }
 
-  if (!hasRegisteredRatelimit) {
-    const authUser = await appRouterGetAuthUser()
-    await throwIfRateLimited({ context: authUser ? 'authenticated' : 'unauthenticated' })
-    hasRegisteredRatelimit = true
-  }
+  await throwIfRateLimited()
+
   userAction = await prismaClient.userAction.create({
     data: {
       user: { connect: { id: user.id } },

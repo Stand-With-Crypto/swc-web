@@ -4,11 +4,13 @@ import {
   unauthenticatedRatelimiter,
 } from '@/utils/server/ratelimit/ratelimiter'
 
+interface ThrowIfRateLimitedProps {
+  context?: 'unauthenticated' | 'authenticated'
+}
+
 export async function throwIfRateLimited({
   context = 'unauthenticated',
-}: {
-  context?: 'unauthenticated' | 'authenticated'
-} = {}) {
+}: ThrowIfRateLimitedProps = {}) {
   const ip = getIPFromHeaders()
   if (!ip) {
     throw new Error('no ip')
@@ -20,5 +22,22 @@ export async function throwIfRateLimited({
   const result = await ratelimiter.limit(ip)
   if (!result.success) {
     throw new Error('Invalid request')
+  }
+}
+
+export function getRequestRateLimiter({
+  context = 'unauthenticated',
+}: ThrowIfRateLimitedProps = {}) {
+  let hasRegisteredTry = false
+
+  return {
+    throwIfRateLimited: async () => {
+      if (hasRegisteredTry) {
+        return
+      }
+
+      await throwIfRateLimited({ context })
+      hasRegisteredTry = true
+    },
   }
 }

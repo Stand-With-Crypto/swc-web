@@ -12,14 +12,13 @@ import {
 } from '@/utils/server/getMaybeUserAndMethodOfMatch'
 import { claimNFT } from '@/utils/server/nft/claimNFT'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
+import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import {
   mapLocalUserToUserDatabaseFields,
   parseLocalUserFromCookies,
 } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
-import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
@@ -61,7 +60,7 @@ async function _actionCreateUserActionCallCongressperson(
   input: CreateActionCallCongresspersonInput,
 ) {
   logger.info('triggered')
-  let hasRegisteredRatelimit = false
+  const { throwIfRateLimited } = getRequestRateLimiter({ context: 'unauthenticated' })
 
   const validatedInput = createActionCallCongresspersonInputValidationSchema.safeParse(input)
   if (!validatedInput.success) {
@@ -79,9 +78,8 @@ async function _actionCreateUserActionCallCongressperson(
     },
   })
 
-  if (!userMatch.user && !hasRegisteredRatelimit) {
-    await throwIfRateLimited({ context: 'unauthenticated' })
-    hasRegisteredRatelimit = true
+  if (!userMatch.user) {
+    await throwIfRateLimited()
   }
 
   const user = userMatch.user || (await createUser({ localUser, sessionId }))
@@ -106,11 +104,7 @@ async function _actionCreateUserActionCallCongressperson(
     return { user: getClientUser(user) }
   }
 
-  if (!hasRegisteredRatelimit) {
-    const authUser = await appRouterGetAuthUser()
-    await throwIfRateLimited({ context: authUser ? 'authenticated' : 'unauthenticated' })
-  }
-
+  await throwIfRateLimited()
   const { userAction, updatedUser } = await createActionAndUpdateUser({
     user,
     isNewUser: !userMatch.user,
