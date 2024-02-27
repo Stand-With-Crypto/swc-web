@@ -214,9 +214,12 @@ async function createAction<U extends User>({
     usaState: validatedInput.usaState,
     userState: isNewUser ? 'New' : 'Existing',
   })
-  await sharedDependencies.peopleAnalytics.set({
-    usaState: validatedInput.usaState,
-  })
+
+  if (validatedInput.usaState) {
+    await sharedDependencies.peopleAnalytics.set({
+      usaState: validatedInput.usaState,
+    })
+  }
 
   return { userAction }
 }
