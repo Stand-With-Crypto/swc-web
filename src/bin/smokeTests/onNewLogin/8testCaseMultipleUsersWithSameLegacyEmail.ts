@@ -1,4 +1,5 @@
-import { DataCreationMethod } from '@prisma/client'
+import { faker } from '@faker-js/faker'
+import { DataCreationMethod, UserEmailAddressSource } from '@prisma/client'
 
 import { mockCreateUserInput } from '@/mocks/models/mockUser'
 import { mockCreateUserEmailAddressInput } from '@/mocks/models/mockUserEmailAddress'
@@ -9,14 +10,19 @@ import { getDefaultParameters, mockEmbeddedWalletMetadata, TestCase, verify } fr
 export const testCaseMultipleUsersWithSameLegacyEmail: TestCase = {
   name: 'Test Case Multiple Users With Same Legacy Email',
   parameters: async () => {
+    // `onLogin` uses the first found user as the user to keep. To make this deterministic we need to set the id manually
+    const [idToKeep, idToDelete] = [faker.string.uuid(), faker.string.uuid()].sort()
+
     const legacyUser = await prismaClient.user.create({
       data: {
         ...mockCreateUserInput({ withData: true }),
+        id: idToKeep,
         userEmailAddresses: {
           create: {
             ...mockCreateUserEmailAddressInput(),
             isVerified: false,
             dataCreationMethod: DataCreationMethod.INITIAL_BACKFILL,
+            source: UserEmailAddressSource.USER_ENTERED,
           },
         },
       },
@@ -34,12 +40,14 @@ export const testCaseMultipleUsersWithSameLegacyEmail: TestCase = {
     const legacyUser2 = await prismaClient.user.create({
       data: {
         ...mockCreateUserInput({ withData: true }),
+        id: idToDelete,
         userEmailAddresses: {
           create: {
             ...mockCreateUserEmailAddressInput(),
             emailAddress: legacyUser.userEmailAddresses[0].emailAddress,
             isVerified: false,
             dataCreationMethod: DataCreationMethod.INITIAL_BACKFILL,
+            source: UserEmailAddressSource.USER_ENTERED,
           },
         },
       },
@@ -75,7 +83,7 @@ export const testCaseMultipleUsersWithSameLegacyEmail: TestCase = {
   ) => {
     // changed
     verify(existingUsersWithSource.length, true, 'existingUsersWithSource.length', issues)
-    verify(embeddedWalletEmailAddress, false, 'embeddedWalletEmailAddress', issues)
+    verify(embeddedWalletEmailAddress, true, 'embeddedWalletEmailAddress', issues)
     // changed
     verify(merge?.usersToDelete.length, true, 'merge?.usersToDelete.length', issues)
     // changed
