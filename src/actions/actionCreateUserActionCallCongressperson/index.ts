@@ -60,7 +60,9 @@ async function _actionCreateUserActionCallCongressperson(
   input: CreateActionCallCongresspersonInput,
 ) {
   logger.info('triggered')
-  const { throwIfRateLimited } = getRequestRateLimiter({ context: 'unauthenticated' })
+  const { triggerRateLimiterAtMostOnce } = getRequestRateLimiter({
+    context: 'unauthenticated',
+  })
 
   const validatedInput = createActionCallCongresspersonInputValidationSchema.safeParse(input)
   if (!validatedInput.success) {
@@ -79,7 +81,7 @@ async function _actionCreateUserActionCallCongressperson(
   })
 
   if (!userMatch.user) {
-    await throwIfRateLimited()
+    await triggerRateLimiterAtMostOnce()
   }
 
   const user = userMatch.user || (await createUser({ localUser, sessionId }))
@@ -104,7 +106,7 @@ async function _actionCreateUserActionCallCongressperson(
     return { user: getClientUser(user) }
   }
 
-  await throwIfRateLimited()
+  await triggerRateLimiterAtMostOnce()
   const { userAction, updatedUser } = await createActionAndUpdateUser({
     user,
     isNewUser: !userMatch.user,

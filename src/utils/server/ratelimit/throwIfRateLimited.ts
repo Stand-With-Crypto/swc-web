@@ -31,7 +31,7 @@ export function getRequestRateLimiter({
   let hasRegisteredTry = false
 
   return {
-    throwIfRateLimited: async () => {
+    triggerRateLimiterAtMostOnce: async () => {
       if (hasRegisteredTry) {
         return
       }

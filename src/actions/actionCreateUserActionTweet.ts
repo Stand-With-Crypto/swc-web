@@ -45,7 +45,9 @@ export const actionCreateUserActionTweet = withServerActionMiddleware(
 
 async function _actionCreateUserActionTweet() {
   logger.info('triggered')
-  const { throwIfRateLimited } = getRequestRateLimiter({ context: 'unauthenticated' })
+  const { triggerRateLimiterAtMostOnce } = getRequestRateLimiter({
+    context: 'unauthenticated',
+  })
 
   const userMatch = await getMaybeUserAndMethodOfMatch({
     prisma: {
@@ -57,7 +59,7 @@ async function _actionCreateUserActionTweet() {
   const localUser = parseLocalUserFromCookies()
 
   if (!userMatch.user) {
-    await throwIfRateLimited()
+    await triggerRateLimiterAtMostOnce()
   }
   const { user, userState } = await maybeUpsertUser({
     existingUser: userMatch.user,
@@ -95,7 +97,7 @@ async function _actionCreateUserActionTweet() {
     return { user: getClientUser(user) }
   }
 
-  await throwIfRateLimited()
+  await triggerRateLimiterAtMostOnce()
 
   userAction = await prismaClient.userAction.create({
     data: {

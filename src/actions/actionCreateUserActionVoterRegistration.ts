@@ -51,7 +51,9 @@ export const actionCreateUserActionVoterRegistration = withServerActionMiddlewar
 
 async function _actionCreateUserActionVoterRegistration(input: CreateActionVoterRegistrationInput) {
   logger.info('triggered')
-  const { throwIfRateLimited } = getRequestRateLimiter({ context: 'unauthenticated' })
+  const { triggerRateLimiterAtMostOnce } = getRequestRateLimiter({
+    context: 'unauthenticated',
+  })
 
   const validatedInput = createActionVoterRegistrationInputValidationSchema.safeParse(input)
   if (!validatedInput.success) {
@@ -68,7 +70,7 @@ async function _actionCreateUserActionVoterRegistration(input: CreateActionVoter
   })
 
   if (!userMatch.user) {
-    await throwIfRateLimited()
+    await triggerRateLimiterAtMostOnce()
   }
   const user = userMatch.user || (await createUser({ localUser, sessionId }))
 
@@ -92,7 +94,7 @@ async function _actionCreateUserActionVoterRegistration(input: CreateActionVoter
     return { user: getClientUser(user) }
   }
 
-  await throwIfRateLimited()
+  await triggerRateLimiterAtMostOnce()
   const { userAction } = await createAction({
     user,
     isNewUser: !userMatch.user,

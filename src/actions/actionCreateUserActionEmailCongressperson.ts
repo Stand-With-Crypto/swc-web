@@ -60,7 +60,9 @@ export const actionCreateUserActionEmailCongressperson = withServerActionMiddlew
 
 async function _actionCreateUserActionEmailCongressperson(input: Input) {
   logger.info('triggered')
-  const { throwIfRateLimited } = getRequestRateLimiter({ context: 'unauthenticated' })
+  const { triggerRateLimiterAtMostOnce } = getRequestRateLimiter({
+    context: 'unauthenticated',
+  })
 
   const userMatch = await getMaybeUserAndMethodOfMatch({
     prisma: {
@@ -83,7 +85,7 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
     input: validatedFields.data,
     sessionId,
     localUser,
-    onUpsertUser: throwIfRateLimited,
+    onUpsertUser: triggerRateLimiterAtMostOnce,
   })
   const analytics = getServerAnalytics({ userId: user.id, localUser })
   const peopleAnalytics = getServerPeopleAnalytics({ userId: user.id, localUser })
@@ -119,7 +121,7 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
     return { user: getClientUser(user) }
   }
 
-  await throwIfRateLimited()
+  await triggerRateLimiterAtMostOnce()
 
   userAction = await prismaClient.userAction.create({
     data: {
