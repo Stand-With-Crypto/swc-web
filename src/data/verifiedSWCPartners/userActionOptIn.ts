@@ -37,6 +37,7 @@ import { getLogger } from '@/utils/shared/logger'
 import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
 import { generateReferralId } from '@/utils/shared/referralId'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
+import { zodAddress } from '@/validation/fields/zodAddress'
 import { zodEmailAddress } from '@/validation/fields/zodEmailAddress'
 import { zodFirstName, zodLastName } from '@/validation/fields/zodName'
 import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
@@ -48,6 +49,7 @@ export const zodVerifiedSWCPartnersUserActionOptIn = z.object({
   isVerifiedEmailAddress: z.boolean(),
   firstName: zodFirstName.optional(),
   lastName: zodLastName.optional(),
+  address: zodAddress.optional(),
   phoneNumber: zodPhoneNumber.optional().transform(str => str && normalizePhoneNumber(str)),
   hasOptedInToReceiveSMSFromSWC: z.boolean().optional(),
   hasOptedInToEmails: z.boolean().optional(),
@@ -198,6 +200,7 @@ async function maybeUpsertUser({
     phoneNumber,
     hasOptedInToMembership,
     hasOptedInToReceiveSMSFromSWC,
+    address,
   } = input
 
   if (existingUser) {
@@ -218,6 +221,15 @@ async function maybeUpsertUser({
               emailAddress,
               isVerified: isVerifiedEmailAddress,
               source: UserEmailAddressSource.VERIFIED_THIRD_PARTY,
+            },
+          },
+        }),
+      ...(address &&
+        existingUser.address?.googlePlaceId !== address.googlePlaceId && {
+          address: {
+            connectOrCreate: {
+              where: { googlePlaceId: address.googlePlaceId },
+              create: address,
             },
           },
         }),
@@ -282,6 +294,14 @@ async function maybeUpsertUser({
           source: UserEmailAddressSource.VERIFIED_THIRD_PARTY,
         },
       },
+      ...(address && {
+        address: {
+          connectOrCreate: {
+            where: { googlePlaceId: address.googlePlaceId },
+            create: address,
+          },
+        },
+      }),
     },
   })
   user = await prismaClient.user.update({

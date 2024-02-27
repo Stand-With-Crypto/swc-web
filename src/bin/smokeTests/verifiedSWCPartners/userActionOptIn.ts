@@ -3,6 +3,7 @@ import { UserActionOptInType } from '@prisma/client'
 
 import { runBin } from '@/bin/runBin'
 import { verifiedSWCPartnersUserActionOptIn } from '@/data/verifiedSWCPartners/userActionOptIn'
+import { mockCreateAddressInput } from '@/mocks/models/mockAddress'
 import { createBasicAuthHeader } from '@/utils/server/basicAuth'
 import { VerifiedSWCPartner } from '@/utils/server/verifiedSWCPartner/constants'
 import { fetchReq } from '@/utils/shared/fetchReq'
@@ -26,6 +27,7 @@ async function smokeTestUserActionOptIn() {
       }),
     },
     body: JSON.stringify({
+      address: mockCreateAddressInput(),
       emailAddress: faker.internet.email(),
       optInType: UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER,
       isVerifiedEmailAddress: true,
