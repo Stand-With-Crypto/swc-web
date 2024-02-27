@@ -1,9 +1,13 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
+import { HomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogDeeplinkLayout'
+import { UserActionLiveEvent } from '@/components/app/userActionLiveEvent'
+import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
+import { UserActionLiveEventCampaignName } from '@/utils/shared/userActionCampaigns'
 
 export const revalidate = SECONDS_DURATION.SECOND * 30
 export const dynamic = 'error'
@@ -20,11 +24,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   })
 }
 
-export default async function LiveEventPage({ params }: Props) {
+export default async function UserActionLiveEventDeepLink({ params }: Props) {
   const { slug } = params
-  if (!slug) {
+  if (!slug || slug !== UserActionLiveEventCampaignName.DEFAULT) {
     notFound()
   }
 
-  return <div>Hello world</div>
+  return (
+    <HomepageDialogDeeplinkLayout pageParams={params}>
+      <div className={dialogContentPaddingStyles}>
+        <UserActionLiveEvent slug={slug} />
+      </div>
+    </HomepageDialogDeeplinkLayout>
+  )
 }
