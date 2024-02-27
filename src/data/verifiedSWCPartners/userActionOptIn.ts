@@ -10,7 +10,7 @@ import {
   UserSession,
 } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
-import { z } from 'zod'
+import { object, string, z } from 'zod'
 
 import { CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/upsertAdvocateInCapitolCanary'
 import { inngest } from '@/inngest/inngest'
@@ -37,10 +37,23 @@ import { getLogger } from '@/utils/shared/logger'
 import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
 import { generateReferralId } from '@/utils/shared/referralId'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
-import { zodAddress } from '@/validation/fields/zodAddress'
 import { zodEmailAddress } from '@/validation/fields/zodEmailAddress'
 import { zodFirstName, zodLastName } from '@/validation/fields/zodName'
 import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
+
+const zodVerifiedSWCPartnersUserAddress = object({
+  googlePlaceId: string().optional(),
+  formattedDescription: string(),
+  streetNumber: string(),
+  route: string(),
+  subpremise: string(),
+  locality: string(),
+  administrativeAreaLevel1: string(),
+  administrativeAreaLevel2: string(),
+  postalCode: string(),
+  postalCodeSuffix: string(),
+  countryCode: string().length(2),
+})
 
 export const zodVerifiedSWCPartnersUserActionOptIn = z.object({
   emailAddress: zodEmailAddress,
@@ -49,7 +62,7 @@ export const zodVerifiedSWCPartnersUserActionOptIn = z.object({
   isVerifiedEmailAddress: z.boolean(),
   firstName: zodFirstName.optional(),
   lastName: zodLastName.optional(),
-  address: zodAddress.optional(),
+  address: zodVerifiedSWCPartnersUserAddress.optional(),
   phoneNumber: zodPhoneNumber.optional().transform(str => str && normalizePhoneNumber(str)),
   hasOptedInToReceiveSMSFromSWC: z.boolean().optional(),
   hasOptedInToEmails: z.boolean().optional(),
@@ -224,15 +237,11 @@ async function maybeUpsertUser({
             },
           },
         }),
-      ...(address &&
-        existingUser.address?.googlePlaceId !== address.googlePlaceId && {
-          address: {
-            connectOrCreate: {
-              where: { googlePlaceId: address.googlePlaceId },
-              create: address,
-            },
-          },
-        }),
+      ...(address && {
+        address: {
+          update: address,
+        },
+      }),
     }
     const keysToUpdate = Object.keys(updatePayload)
     if (!keysToUpdate.length) {
@@ -296,10 +305,7 @@ async function maybeUpsertUser({
       },
       ...(address && {
         address: {
-          connectOrCreate: {
-            where: { googlePlaceId: address.googlePlaceId },
-            create: address,
-          },
+          create: address,
         },
       }),
     },
