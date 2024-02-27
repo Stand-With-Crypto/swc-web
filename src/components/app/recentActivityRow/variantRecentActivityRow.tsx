@@ -156,6 +156,12 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
           children: <MainText>Voter registration confirmed {voterStateOrEmpty}</MainText>,
         }
       }
+      case UserActionType.LIVE_EVENT: {
+        return {
+          onFocusContent: () => null,
+          children: <MainText>Claimed an NFT</MainText>,
+        }
+      }
     }
     return gracefullyError({
       // @ts-ignore

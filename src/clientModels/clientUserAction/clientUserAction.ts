@@ -61,6 +61,9 @@ type ClientUserActionTweet = { actionType: typeof UserActionType.TWEET }
 type ClientUserActionVoterRegistration = Pick<UserActionVoterRegistration, 'usaState'> & {
   actionType: typeof UserActionType.VOTER_REGISTRATION
 }
+type ClientUserActionLiveEvent = {
+  actionType: typeof UserActionType.LIVE_EVENT
+}
 
 /*
 At the database schema level we can't enforce that a single action only has one "type" FK, but at the client level we can and should
@@ -77,6 +80,7 @@ export type ClientUserAction = ClientModel<
       | ClientUserActionDonation
       | ClientUserActionNFTMint
       | ClientUserActionVoterRegistration
+      | ClientUserActionLiveEvent
     )
 >
 
@@ -165,6 +169,9 @@ export const getClientUserAction = ({
       const { usaState } = getRelatedModel(record, 'userActionVoterRegistration')
       const voterRegistrationFields: ClientUserActionVoterRegistration = { usaState, actionType }
       return getClientModel({ ...sharedProps, ...voterRegistrationFields })
+    }
+    case UserActionType.LIVE_EVENT: {
+      return getClientModel({ ...sharedProps, actionType })
     }
   }
   throw new Error(`getClientUserAction: no user action fk found for id ${id}`)
