@@ -1,2 +1,2 @@
-export const openWindow = (url: string, target = '_blank', features = 'noopener') =>
+export const openWindow = (url: string, target = '_blank', features = '') =>
   window.open(url, target, features)
