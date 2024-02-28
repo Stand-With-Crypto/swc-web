@@ -22,7 +22,7 @@ export enum UserActionVoterRegistrationCampaignName {
   DEFAULT = 'DEFAULT',
 }
 export enum UserActionLiveEventCampaignName {
-  '2024_03_04_LA' = '2024-03-04-LA',
+  '2024_03_04_LA' = '2024_03_04_LA',
 }
 
 export const USER_ACTION_TO_CAMPAIGN_NAME_MAP = {
