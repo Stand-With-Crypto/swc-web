@@ -7,6 +7,7 @@ import { ClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
 import { ClientUserAction } from '@/clientModels/clientUserAction/clientUserAction'
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { ActivityAvatar } from '@/components/app/recentActivityRow/activityAvatar'
+import { USER_ACTION_LIVE_EVENT_LOCATION } from '@/components/app/recentActivityRow/constants'
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
@@ -230,7 +231,9 @@ export function RecentActivityRow(props: RecentActivityRowProps) {
       case UserActionType.LIVE_EVENT: {
         return {
           onFocusContent: undefined,
-          children: <MainText>{userDisplayName} attended an in-person event in CA</MainText>,
+          children: (
+            <MainText>{`${userDisplayName} attended an in-person crypto event in ${USER_ACTION_LIVE_EVENT_LOCATION[action.campaignName] ? `in ${USER_ACTION_LIVE_EVENT_LOCATION[action.campaignName]}` : ''}`}</MainText>
+          ),
         }
       }
     }
