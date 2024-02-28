@@ -20,6 +20,9 @@ const promisifiedMixpanelPeopleSetOnce = promisify<string, PropertyDict, void>(
 
 export type ServerPeopleAnalytics = ReturnType<typeof getServerPeopleAnalytics>
 
+/**
+ * @remarks — Remember to always call and wait `flush()` at the end of the scope
+ */
 export function getServerPeopleAnalytics(config: ServerAnalyticsConfig) {
   const trackingRequests: Promise<void>[] = []
 

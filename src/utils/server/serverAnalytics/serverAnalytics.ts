@@ -26,7 +26,7 @@ export type AnalyticsUserActionUserState = 'New' | 'Existing' | 'Existing With U
 export type ServerAnalytics = ReturnType<typeof getServerAnalytics>
 
 /**
- * @remarks — To cache the ABI of the smart contract, use thirdweb generate. This is recommended to improve performance and provide type-safety when interacting with your smart contract.
+ * @remarks — Remember to always call and wait `flush()` at the end of the scope
  */
 export function getServerAnalytics(config: ServerAnalyticsConfig) {
   const trackingRequests: Promise<void>[] = []
