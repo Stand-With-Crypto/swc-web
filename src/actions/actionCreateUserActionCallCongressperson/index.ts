@@ -12,7 +12,7 @@ import {
 } from '@/utils/server/getMaybeUserAndMethodOfMatch'
 import { claimNFT } from '@/utils/server/nft/claimNFT'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
+import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import {
   mapLocalUserToUserDatabaseFields,
@@ -46,6 +46,7 @@ interface SharedDependencies {
   sessionId: ReturnType<typeof getUserSessionId>
   analytics: ReturnType<typeof getServerAnalytics>
   peopleAnalytics: ReturnType<typeof getServerPeopleAnalytics>
+  hasRegisteredRatelimit: boolean
 }
 
 const logger = getLogger(`actionCreateUserActionCallCongressperson`)
@@ -59,6 +60,9 @@ async function _actionCreateUserActionCallCongressperson(
   input: CreateActionCallCongresspersonInput,
 ) {
   logger.info('triggered')
+  const { triggerRateLimiterAtMostOnce } = getRequestRateLimiter({
+    context: 'unauthenticated',
+  })
 
   const validatedInput = createActionCallCongresspersonInputValidationSchema.safeParse(input)
   if (!validatedInput.success) {
@@ -75,7 +79,10 @@ async function _actionCreateUserActionCallCongressperson(
       include: { primaryUserCryptoAddress: true, address: true },
     },
   })
-  await throwIfRateLimited()
+
+  if (!userMatch.user) {
+    await triggerRateLimiterAtMostOnce()
+  }
 
   const user = userMatch.user || (await createUser({ localUser, sessionId }))
 
@@ -99,6 +106,7 @@ async function _actionCreateUserActionCallCongressperson(
     return { user: getClientUser(user) }
   }
 
+  await triggerRateLimiterAtMostOnce()
   const { userAction, updatedUser } = await createActionAndUpdateUser({
     user,
     isNewUser: !userMatch.user,

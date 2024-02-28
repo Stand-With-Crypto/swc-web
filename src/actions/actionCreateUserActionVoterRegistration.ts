@@ -12,7 +12,7 @@ import {
 } from '@/utils/server/getMaybeUserAndMethodOfMatch'
 import { claimNFT } from '@/utils/server/nft/claimNFT'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
+import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import {
   mapLocalUserToUserDatabaseFields,
@@ -51,6 +51,9 @@ export const actionCreateUserActionVoterRegistration = withServerActionMiddlewar
 
 async function _actionCreateUserActionVoterRegistration(input: CreateActionVoterRegistrationInput) {
   logger.info('triggered')
+  const { triggerRateLimiterAtMostOnce } = getRequestRateLimiter({
+    context: 'unauthenticated',
+  })
 
   const validatedInput = createActionVoterRegistrationInputValidationSchema.safeParse(input)
   if (!validatedInput.success) {
@@ -65,8 +68,10 @@ async function _actionCreateUserActionVoterRegistration(input: CreateActionVoter
   const userMatch = await getMaybeUserAndMethodOfMatch({
     prisma: { include: { primaryUserCryptoAddress: true, address: true } },
   })
-  await throwIfRateLimited()
 
+  if (!userMatch.user) {
+    await triggerRateLimiterAtMostOnce()
+  }
   const user = userMatch.user || (await createUser({ localUser, sessionId }))
 
   const peopleAnalytics = getServerPeopleAnalytics({
@@ -89,6 +94,7 @@ async function _actionCreateUserActionVoterRegistration(input: CreateActionVoter
     return { user: getClientUser(user) }
   }
 
+  await triggerRateLimiterAtMostOnce()
   const { userAction } = await createAction({
     user,
     isNewUser: !userMatch.user,

@@ -52,7 +52,6 @@ async function _actionCreateUserActionMintNFT(input: CreateActionMintNFTInput) {
 
   const localUser = parseLocalUserFromCookies()
   const sessionId = getUserSessionId()
-  await throwIfRateLimited()
 
   const authUser = await appRouterGetAuthUser()
   if (!authUser) {
@@ -91,6 +90,7 @@ async function _actionCreateUserActionMintNFT(input: CreateActionMintNFTInput) {
    * If any of there conditions fail, return an error
    */
 
+  await throwIfRateLimited({ context: 'authenticated' })
   await createAction({
     user,
     validatedInput: validatedInput.data,

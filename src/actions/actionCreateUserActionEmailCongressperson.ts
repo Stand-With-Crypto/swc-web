@@ -24,7 +24,7 @@ import {
 import { EmailRepViaCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
+import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
 import {
   AnalyticsUserActionUserState,
   getServerAnalytics,
@@ -60,6 +60,10 @@ export const actionCreateUserActionEmailCongressperson = withServerActionMiddlew
 
 async function _actionCreateUserActionEmailCongressperson(input: Input) {
   logger.info('triggered')
+  const { triggerRateLimiterAtMostOnce } = getRequestRateLimiter({
+    context: 'unauthenticated',
+  })
+
   const userMatch = await getMaybeUserAndMethodOfMatch({
     prisma: {
       include: { primaryUserCryptoAddress: true, userEmailAddresses: true, address: true },
@@ -74,13 +78,14 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
     }
   }
   logger.info('validated fields')
-  await throwIfRateLimited()
+
   const localUser = parseLocalUserFromCookies()
   const { user, userState } = await maybeUpsertUser({
     existingUser: userMatch.user,
     input: validatedFields.data,
     sessionId,
     localUser,
+    onUpsertUser: triggerRateLimiterAtMostOnce,
   })
   const analytics = getServerAnalytics({ userId: user.id, localUser })
   const peopleAnalytics = getServerPeopleAnalytics({ userId: user.id, localUser })
@@ -115,6 +120,8 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
     )
     return { user: getClientUser(user) }
   }
+
+  await triggerRateLimiterAtMostOnce()
 
   userAction = await prismaClient.userAction.create({
     data: {
@@ -201,11 +208,13 @@ async function maybeUpsertUser({
   input,
   sessionId,
   localUser,
+  onUpsertUser,
 }: {
   existingUser: UserWithRelations | null
   input: Input
   sessionId: string
   localUser: ServerLocalUser | null
+  onUpsertUser: () => Promise<void> | void
 }): Promise<{ user: UserWithRelations; userState: AnalyticsUserActionUserState }> {
   const { firstName, lastName, emailAddress, address } = input
 
@@ -239,6 +248,7 @@ async function maybeUpsertUser({
       return { user: existingUser, userState: 'Existing' }
     }
     logger.info(`updating the following user fields ${keysToUpdate.join(', ')}`)
+    await onUpsertUser()
     const user = await prismaClient.user.update({
       where: { id: existingUser.id },
       data: updatePayload,
@@ -260,6 +270,7 @@ async function maybeUpsertUser({
     }
     return { user, userState: 'Existing With Updates' }
   }
+  await onUpsertUser()
   const user = await prismaClient.user.create({
     include: {
       primaryUserCryptoAddress: true,
