@@ -39,7 +39,7 @@ All features should be deployed to production by the engineer that merged the fe
 - First, if there are database schema changes, open another PlanetScale deploy request against production
   - verify the schema updates mirror the schema updates from your local branch -> testing
   - Merge the deploy request to update production database (see "Updating the PlanetScale schema" section for details on backwards compatibility and why schema changes are always merged before code)
-- Run `bash bin/deploy_web_production.sh` to deploy your code changes to Vercel
+- Run `bin/deploy_web_production.sh` to deploy your code changes to Vercel
 
 ## I need to make database schema changes/migrations as part of my PR - what now?
 
