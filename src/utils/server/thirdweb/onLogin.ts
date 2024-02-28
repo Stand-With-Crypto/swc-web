@@ -456,12 +456,6 @@ async function maybeUpsertCryptoAddress({
         { extra: { cryptoAddress, user, localUser } },
       )
     }
-    if (user?.primaryUserCryptoAddressId) {
-      Sentry.captureMessage(
-        'maybeUpsertCryptoAddress: User had different primary primaryUserCryptoAddressId',
-        { extra: { cryptoAddress, user, localUser } },
-      )
-    }
     log(`maybeUpsertCryptoAddress: updating existing crypto address to be verified`)
     await prismaClient.userCryptoAddress.update({
       where: { id: existingUserCryptoAddress.id },
