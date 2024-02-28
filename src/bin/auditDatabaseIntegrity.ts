@@ -59,7 +59,7 @@ async function auditDatabaseIntegrity() {
     }),
   ])
   const log = (incompleteRelations: any[], actionType: UserActionType) => {
-    logger.info(`${incompleteCallRelations.length} incomplete ${actionType} relations:`)
+    logger.info(`${incompleteRelations.length} incomplete ${actionType} relations:`)
     for (const relation of incompleteRelations) {
       logger.info(`-- ${relation.id}`)
     }
