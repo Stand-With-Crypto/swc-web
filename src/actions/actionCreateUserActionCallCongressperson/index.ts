@@ -94,15 +94,17 @@ async function _actionCreateUserActionCallCongressperson(
     userId: user.id,
     localUser,
   })
+  const beforeFinish = () => Promise.all([analytics.flush(), peopleAnalytics.flush()])
 
   const recentUserAction = await getRecentUserActionByUserId(user.id, validatedInput)
   if (recentUserAction) {
-    await logSpamActionSubmissions({
+    logSpamActionSubmissions({
       validatedInput,
       userAction: recentUserAction,
       userId: user.id,
       sharedDependencies: { analytics },
     })
+    await beforeFinish()
     return { user: getClientUser(user) }
   }
 
@@ -119,6 +121,7 @@ async function _actionCreateUserActionCallCongressperson(
     await claimNFT(userAction, user.primaryUserCryptoAddress)
   }
 
+  await beforeFinish()
   return { user: getClientUser(updatedUser) }
 }
 
@@ -163,7 +166,7 @@ async function getRecentUserActionByUserId(
   })
 }
 
-async function logSpamActionSubmissions({
+function logSpamActionSubmissions({
   validatedInput,
   userAction,
   userId,
@@ -174,7 +177,7 @@ async function logSpamActionSubmissions({
   userId: User['id']
   sharedDependencies: Pick<SharedDependencies, 'analytics'>
 }) {
-  await sharedDependencies.analytics.trackUserActionCreatedIgnored({
+  sharedDependencies.analytics.trackUserActionCreatedIgnored({
     actionType: UserActionType.CALL,
     campaignName: validatedInput.data.campaignName,
     reason: 'Too Many Recent',
@@ -248,7 +251,7 @@ async function createActionAndUpdateUser<U extends User>({
     : user
   logger.info('created user action and updated user')
 
-  await sharedDependencies.analytics.trackUserActionCreated({
+  sharedDependencies.analytics.trackUserActionCreated({
     actionType: UserActionType.CALL,
     campaignName: validatedInput.campaignName,
     'Recipient DTSI Slug': validatedInput.dtsiSlug,
@@ -256,7 +259,7 @@ async function createActionAndUpdateUser<U extends User>({
     ...convertAddressToAnalyticsProperties(validatedInput.address),
     userState: isNewUser ? 'New' : 'Existing',
   })
-  await sharedDependencies.peopleAnalytics.set({
+  sharedDependencies.peopleAnalytics.set({
     ...convertAddressToAnalyticsProperties(validatedInput.address),
   })
 

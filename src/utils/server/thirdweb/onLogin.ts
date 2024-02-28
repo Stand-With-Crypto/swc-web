@@ -76,12 +76,17 @@ export async function onLogin(
       userCryptoAddresses: { some: { cryptoAddress, hasBeenVerifiedViaAuth: true } },
     },
   })
+
   if (existingVerifiedUser) {
     log('existing user found')
-    await getServerAnalytics({ userId: existingVerifiedUser.id, localUser }).track('User Logged In')
-    await getServerPeopleAnalytics({ userId: existingVerifiedUser.id, localUser }).set({
-      'Datetime of Last Login': new Date(),
-    })
+    await getServerAnalytics({ userId: existingVerifiedUser.id, localUser })
+      .track('User Logged In')
+      .flush()
+    await getServerPeopleAnalytics({ userId: existingVerifiedUser.id, localUser })
+      .set({
+        'Datetime of Last Login': new Date(),
+      })
+      .flush()
     return { userId: existingVerifiedUser.id }
   }
   return onNewLogin({
@@ -652,7 +657,7 @@ async function triggerPostLoginUserActionSteps({
       campaignName: UserActionOptInCampaignName.DEFAULT,
       creationMethod: 'On Site',
       userState: wasUserCreated ? 'New' : 'Existing',
-    })
+    }).flush()
   } else {
     log(`triggerPostLoginUserActionSteps: opt in user action previously existed`)
   }

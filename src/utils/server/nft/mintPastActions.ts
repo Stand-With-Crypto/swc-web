@@ -26,13 +26,16 @@ export async function mintPastActions(
     },
   })
 
+  const analytics = getServerAnalytics({ userId: userId, localUser })
   for (const action of actions) {
     logger.info('mint past actions:' + action.actionType)
-    await getServerAnalytics({ userId: userId, localUser }).track('NFT Mint Backfill Triggered', {
+    analytics.track('NFT Mint Backfill Triggered', {
       'User Action Type': action.actionType,
       'User Action Id': action.id,
     })
     await claimNFT(action, userCryptoAddress)
   }
+
+  await analytics.flush()
   return actions
 }
