@@ -14,6 +14,7 @@ import { keyBy } from 'lodash-es'
 import { ClientNFTMint, getClientNFTMint } from '@/clientModels/clientNFTMint'
 import { ClientModel, getClientModel } from '@/clientModels/utils'
 import { DTSIPersonForUserActions } from '@/data/dtsi/queries/queryDTSIPeopleBySlugForUserActions'
+import { UserActionLiveEventCampaignName } from '@/utils/shared/userActionCampaigns'
 
 /*
 Assumption: we will always want to interact with the user actions and their related type joins together
@@ -63,6 +64,7 @@ type ClientUserActionVoterRegistration = Pick<UserActionVoterRegistration, 'usaS
 }
 type ClientUserActionLiveEvent = {
   actionType: typeof UserActionType.LIVE_EVENT
+  campaignName: UserActionLiveEventCampaignName
 }
 
 /*
@@ -171,7 +173,8 @@ export const getClientUserAction = ({
       return getClientModel({ ...sharedProps, ...voterRegistrationFields })
     }
     case UserActionType.LIVE_EVENT: {
-      return getClientModel({ ...sharedProps, actionType })
+      const campaignName = record.campaignName as UserActionLiveEventCampaignName
+      return getClientModel({ ...sharedProps, actionType, campaignName })
     }
   }
   throw new Error(`getClientUserAction: no user action fk found for id ${id}`)
