@@ -19,6 +19,7 @@ import {
   getCapitolCanaryCampaignID,
 } from '@/utils/server/capitolCanary/campaigns'
 import { UpsertAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
+import { getGooglePlaceIdFromAddress } from '@/utils/server/getGooglePlaceIdFromAddress'
 import { prismaClient } from '@/utils/server/prismaClient'
 import {
   AnalyticsUserActionUserState,
@@ -40,7 +41,6 @@ import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
 import { zodEmailAddress } from '@/validation/fields/zodEmailAddress'
 import { zodFirstName, zodLastName } from '@/validation/fields/zodName'
 import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
-import { getGooglePlaceIdFromAddress } from '@/utils/server/getGooglePlaceIdFromAddress'
 
 const zodVerifiedSWCPartnersUserAddress = object({
   googlePlaceId: string().optional(),
