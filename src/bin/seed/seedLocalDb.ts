@@ -204,7 +204,7 @@ async function seed() {
     topDonorCryptoAddressStrings.includes(x.cryptoAddress),
   )!
   logEntity({ userCryptoAddress })
-  batchAsyncAndLog(userCryptoAddress, addresses =>
+  void batchAsyncAndLog(userCryptoAddress, addresses =>
     Promise.all(
       addresses.map(x =>
         prismaClient.user.update({
@@ -443,4 +443,4 @@ async function seed() {
   logEntity({ userActionVoterRegistration })
 }
 
-runBin(seed)
+void runBin(seed)

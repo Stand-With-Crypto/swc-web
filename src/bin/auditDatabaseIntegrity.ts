@@ -72,4 +72,4 @@ async function auditDatabaseIntegrity() {
   log(incompleteVoterRegistrationRelations, UserActionType.VOTER_REGISTRATION)
 }
 
-runBin(auditDatabaseIntegrity)
+void runBin(auditDatabaseIntegrity)

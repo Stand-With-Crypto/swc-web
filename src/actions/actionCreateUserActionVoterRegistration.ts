@@ -12,7 +12,7 @@ import {
 } from '@/utils/server/getMaybeUserAndMethodOfMatch'
 import { claimNFT } from '@/utils/server/nft/claimNFT'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
+import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import {
   mapLocalUserToUserDatabaseFields,
@@ -51,6 +51,9 @@ export const actionCreateUserActionVoterRegistration = withServerActionMiddlewar
 
 async function _actionCreateUserActionVoterRegistration(input: CreateActionVoterRegistrationInput) {
   logger.info('triggered')
+  const { triggerRateLimiterAtMostOnce } = getRequestRateLimiter({
+    context: 'unauthenticated',
+  })
 
   const validatedInput = createActionVoterRegistrationInputValidationSchema.safeParse(input)
   if (!validatedInput.success) {
@@ -65,8 +68,10 @@ async function _actionCreateUserActionVoterRegistration(input: CreateActionVoter
   const userMatch = await getMaybeUserAndMethodOfMatch({
     prisma: { include: { primaryUserCryptoAddress: true, address: true } },
   })
-  await throwIfRateLimited()
 
+  if (!userMatch.user) {
+    await triggerRateLimiterAtMostOnce()
+  }
   const user = userMatch.user || (await createUser({ localUser, sessionId }))
 
   const peopleAnalytics = getServerPeopleAnalytics({
@@ -80,7 +85,7 @@ async function _actionCreateUserActionVoterRegistration(input: CreateActionVoter
 
   const recentUserAction = await getRecentUserActionByUserId(user.id, validatedInput)
   if (recentUserAction) {
-    logSpamActionSubmissions({
+    await logSpamActionSubmissions({
       validatedInput,
       userAction: recentUserAction,
       userId: user.id,
@@ -89,6 +94,7 @@ async function _actionCreateUserActionVoterRegistration(input: CreateActionVoter
     return { user: getClientUser(user) }
   }
 
+  await triggerRateLimiterAtMostOnce()
   const { userAction } = await createAction({
     user,
     isNewUser: !userMatch.user,
@@ -124,7 +130,7 @@ async function createUser(sharedDependencies: Pick<SharedDependencies, 'localUse
   logger.info('created user')
 
   if (localUser?.persisted) {
-    getServerPeopleAnalytics({ localUser, userId: createdUser.id }).setOnce(
+    await getServerPeopleAnalytics({ localUser, userId: createdUser.id }).setOnce(
       mapPersistedLocalUserToAnalyticsProperties(localUser.persisted),
     )
   }
@@ -145,7 +151,7 @@ async function getRecentUserActionByUserId(
   })
 }
 
-function logSpamActionSubmissions({
+async function logSpamActionSubmissions({
   validatedInput,
   userAction,
   userId,
@@ -156,7 +162,7 @@ function logSpamActionSubmissions({
   userId: User['id']
   sharedDependencies: Pick<SharedDependencies, 'analytics'>
 }) {
-  sharedDependencies.analytics.trackUserActionCreatedIgnored({
+  await sharedDependencies.analytics.trackUserActionCreatedIgnored({
     actionType: UserActionType.VOTER_REGISTRATION,
     campaignName: validatedInput.data.campaignName,
     reason: 'Too Many Recent',
@@ -208,15 +214,18 @@ async function createAction<U extends User>({
 
   logger.info('created user action')
 
-  sharedDependencies.analytics.trackUserActionCreated({
+  await sharedDependencies.analytics.trackUserActionCreated({
     actionType: UserActionType.VOTER_REGISTRATION,
     campaignName: validatedInput.campaignName,
     usaState: validatedInput.usaState,
     userState: isNewUser ? 'New' : 'Existing',
   })
-  sharedDependencies.peopleAnalytics.set({
-    usaState: validatedInput.usaState,
-  })
+
+  if (validatedInput.usaState) {
+    await sharedDependencies.peopleAnalytics.set({
+      usaState: validatedInput.usaState,
+    })
+  }
 
   return { userAction }
 }

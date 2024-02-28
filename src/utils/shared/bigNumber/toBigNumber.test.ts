@@ -2,7 +2,7 @@ import { expect, it } from '@jest/globals'
 
 import { toBigNumber } from './toBigNumber'
 
-describe('toBigNumber', () => {
+describe('utils/bigNumber/toBigNumber', () => {
   it.each([undefined, null, true, 2.71, Math.PI, { x: 100 }, () => {}])(
     'when %p is not a string',
     x => {

@@ -154,7 +154,7 @@ export function UnauthenticatedSection({
           <FinishProfileSection
             onSuccess={() => {
               setDialogOpen(false)
-              mutate()
+              void mutate()
             }}
           />
         )}
@@ -183,7 +183,7 @@ function LoginSection({ onLogin }: { onLogin: () => void | Promise<void> }) {
           // There are a bunch of SWR queries that might show stale unauthenticated data unless we clear the cache.
           // This ensures we refetch using the users authenticated state
           // https://swr.vercel.app/docs/advanced/cache#modify-the-cache-data
-          mutate(arg => !excludedKeysFromCacheReset.includes(arg), undefined, {
+          void mutate(arg => !excludedKeysFromCacheReset.includes(arg), undefined, {
             revalidate: true,
           })
         },

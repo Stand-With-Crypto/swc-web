@@ -50,6 +50,7 @@ export function PagePoliticianDetails({
               alt={`profile picture of ${dtsiPersonFullName(person)}`}
               sizes={`${POLITICIAN_IMAGE_SIZE_PX}px`}
               {...(getDTSIPersonProfilePictureUrlDimensions(person) || {})}
+              className="w-full"
               src={person.profilePictureUrl}
             />
           </div>

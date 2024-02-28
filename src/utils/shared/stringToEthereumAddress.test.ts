@@ -2,7 +2,7 @@ import { expect, it } from '@jest/globals'
 
 import { stringToEthereumAddress } from '@/utils/shared/stringToEthereumAddress'
 
-describe('stringToEthereumAddress', () => {
+describe('utils/stringToEthereumAddress', () => {
   it.each([
     ['0x52908400098527886E0F7030069857D2E4169EE7'],
     ['0x52908400098527886e0f7030069857d2e4169ee7'],
