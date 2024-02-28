@@ -26,14 +26,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function UserActionLiveEventDeepLink({ params }: Props) {
   const { slug } = params
-  if (!slug || slug !== UserActionLiveEventCampaignName.DEFAULT) {
+  if (!slug || !(slug in UserActionLiveEventCampaignName)) {
     notFound()
   }
 
   return (
     <HomepageDialogDeeplinkLayout pageParams={params}>
       <div className={dialogContentPaddingStyles}>
-        <UserActionFormLiveEventDeeplinkWrapper slug={slug} />
+        <UserActionFormLiveEventDeeplinkWrapper slug={slug as UserActionLiveEventCampaignName} />
       </div>
     </HomepageDialogDeeplinkLayout>
   )

@@ -7,8 +7,10 @@ export enum SectionNames {
   SUCCESS = 'Success',
 }
 
-export const MESSAGES: Record<UserActionLiveEventCampaignName, Record<string, string>> = {
-  [UserActionLiveEventCampaignName.DEFAULT]: {
+type Message = 'title' | 'signedOutSubtitle' | 'signedInSubtitle'
+
+export const MESSAGES: Record<UserActionLiveEventCampaignName, Record<Message, string>> = {
+  [UserActionLiveEventCampaignName['2024_03_04_LA']]: {
     title: 'Los Angeles Crypto Votes',
     signedOutSubtitle:
       'Thanks for attending our Los Angeles Crypto Votes event! Sign in to Stand With Crypto in order to claim your free “Proof of Attendance” NFT.',
