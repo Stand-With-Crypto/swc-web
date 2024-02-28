@@ -7,4 +7,4 @@ async function run() {
     */
 }
 
-runBin(run)
+void runBin(run)

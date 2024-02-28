@@ -11,4 +11,4 @@ async function smokeTestGetCryptoToFiatConversion() {
     })
 }
 
-runBin(smokeTestGetCryptoToFiatConversion)
+void runBin(smokeTestGetCryptoToFiatConversion)

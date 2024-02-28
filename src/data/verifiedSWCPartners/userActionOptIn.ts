@@ -100,9 +100,10 @@ export async function verifiedSWCPartnersUserActionOptIn(
   const { user, userState } = await maybeUpsertUser({ existingUser: existingAction?.user, input })
   const localUser = getLocalUserFromUser(user)
   const analytics = getServerAnalytics({ userId: user.id, localUser })
-  const peopleAnalytics = getServerPeopleAnalytics({ userId: user.id, localUser })
   if (!existingAction?.user) {
-    peopleAnalytics.setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
+    await getServerPeopleAnalytics({ userId: user.id, localUser }).setOnce(
+      mapPersistedLocalUserToAnalyticsProperties(localUser.persisted),
+    )
   }
 
   if (existingAction) {
@@ -110,7 +111,7 @@ export async function verifiedSWCPartnersUserActionOptIn(
       extra: { emailAddress, isVerifiedEmailAddress },
       tags: { optInType, actionType },
     })
-    analytics.trackUserActionCreatedIgnored({
+    await analytics.trackUserActionCreatedIgnored({
       actionType,
       campaignName,
       creationMethod: 'Verified SWC Partner',
@@ -144,7 +145,7 @@ export async function verifiedSWCPartnersUserActionOptIn(
     },
   })
 
-  analytics.trackUserActionCreated({
+  await analytics.trackUserActionCreated({
     actionType,
     campaignName,
     creationMethod: 'Verified SWC Partner',

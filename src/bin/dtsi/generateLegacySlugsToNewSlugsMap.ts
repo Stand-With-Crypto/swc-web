@@ -76,4 +76,4 @@ async function generateLegacySlugsToNewSlugsMap() {
   )
 }
 
-runBin(generateLegacySlugsToNewSlugsMap)
+void runBin(generateLegacySlugsToNewSlugsMap)

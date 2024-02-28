@@ -35,7 +35,7 @@ export const UserActionTweetLink = React.forwardRef<
     return (
       <Comp
         onClick={() => {
-          triggerServerActionForForm(
+          void triggerServerActionForForm(
             {
               formName: 'User Action Tweet',
               analyticsProps: {

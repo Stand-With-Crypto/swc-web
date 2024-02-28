@@ -62,7 +62,7 @@ async function _actionCreateUserActionTweet() {
   const analytics = getServerAnalytics({ userId: user.id, localUser })
   const peopleAnalytics = getServerPeopleAnalytics({ userId: user.id, localUser })
   if (localUser) {
-    peopleAnalytics.setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
+    await peopleAnalytics.setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
   }
   logger.info('fetched/created user')
   const campaignName = UserActionTweetCampaignName.DEFAULT
@@ -76,7 +76,7 @@ async function _actionCreateUserActionTweet() {
   })
 
   if (userAction) {
-    analytics.trackUserActionCreatedIgnored({
+    await analytics.trackUserActionCreatedIgnored({
       actionType,
       campaignName,
       reason: 'Too Many Recent',
@@ -102,7 +102,7 @@ async function _actionCreateUserActionTweet() {
         : { userSession: { connect: { id: sessionId } } }),
     },
   })
-  analytics.trackUserActionCreated({
+  await analytics.trackUserActionCreated({
     actionType,
     campaignName,
     creationMethod: 'On Site',

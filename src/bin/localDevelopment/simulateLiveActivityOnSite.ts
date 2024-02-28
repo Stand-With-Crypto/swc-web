@@ -34,7 +34,7 @@ async function simulateLiveActivityOnSite() {
     await sleep(3000)
   }
 }
-runBin(simulateLiveActivityOnSite)
+void runBin(simulateLiveActivityOnSite)
 
 async function createUser() {
   const user = await prismaClient.user.create({ data: mockCreateUserInput() })

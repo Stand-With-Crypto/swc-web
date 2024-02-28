@@ -49,4 +49,4 @@ async function smokeTestUpdateAdvocateWithInngest() {
   })
 }
 
-runBin(smokeTestUpdateAdvocateWithInngest)
+void runBin(smokeTestUpdateAdvocateWithInngest)
