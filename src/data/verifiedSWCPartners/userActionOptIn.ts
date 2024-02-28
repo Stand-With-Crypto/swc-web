@@ -41,10 +41,9 @@ import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
 import { zodEmailAddress } from '@/validation/fields/zodEmailAddress'
 import { zodFirstName, zodLastName } from '@/validation/fields/zodName'
 import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
+import { zodAddress } from '@/validation/fields/zodAddress'
 
 const zodVerifiedSWCPartnersUserAddress = object({
-  googlePlaceId: string().optional(),
-  formattedDescription: string(),
   streetNumber: string(),
   route: string(),
   subpremise: string(),
@@ -217,10 +216,12 @@ async function maybeUpsertUser({
     address,
   } = input
 
+  let dbAddress: z.infer<typeof zodAddress> | undefined = undefined
   if (address) {
-    address.formattedDescription = `${address.streetNumber} ${address.route}, ${address.subpremise}, ${address.locality} ${address.administrativeAreaLevel1}, ${address.postalCode} ${address.countryCode}`
+    const formattedDescription = `${address.streetNumber} ${address.route}, ${address.subpremise}, ${address.locality} ${address.administrativeAreaLevel1}, ${address.postalCode} ${address.countryCode}`
+    dbAddress = { ...address, formattedDescription: formattedDescription, googlePlaceId: undefined }
     try {
-      address.googlePlaceId = await getGooglePlaceIdFromAddress(address.formattedDescription)
+      dbAddress.googlePlaceId = await getGooglePlaceIdFromAddress(dbAddress.formattedDescription)
     } catch (e) {
       logger.error('error getting googlePlaceID:' + e)
     }
@@ -247,22 +248,20 @@ async function maybeUpsertUser({
             },
           },
         }),
-      ...(address &&
-        address.googlePlaceId &&
-        existingUser.address?.googlePlaceId !== address.googlePlaceId && {
-          address: {
-            connectOrCreate: {
-              where: { googlePlaceId: address.googlePlaceId },
-              create: address,
-            },
-          },
-        }),
-      ...(address &&
-        !address.googlePlaceId && {
-          address: {
-            create: address,
-          },
-        }),
+      ...(dbAddress && {
+        address: {
+          ...(dbAddress.googlePlaceId
+            ? {
+                connectOrCreate: {
+                  where: { googlePlaceId: dbAddress.googlePlaceId },
+                  create: dbAddress,
+                },
+              }
+            : {
+                create: dbAddress,
+              }),
+        },
+      }),
     }
     const keysToUpdate = Object.keys(updatePayload)
     if (!keysToUpdate.length) {
@@ -324,21 +323,20 @@ async function maybeUpsertUser({
           source: UserEmailAddressSource.VERIFIED_THIRD_PARTY,
         },
       },
-      ...(address &&
-        address.googlePlaceId && {
-          address: {
-            connectOrCreate: {
-              where: { googlePlaceId: address.googlePlaceId },
-              create: address,
-            },
-          },
-        }),
-      ...(address &&
-        !address.googlePlaceId && {
-          address: {
-            create: address,
-          },
-        }),
+      ...(dbAddress && {
+        address: {
+          ...(dbAddress.googlePlaceId
+            ? {
+                connectOrCreate: {
+                  where: { googlePlaceId: dbAddress.googlePlaceId },
+                  create: dbAddress,
+                },
+              }
+            : {
+                create: dbAddress,
+              }),
+        },
+      }),
     },
   })
   user = await prismaClient.user.update({
