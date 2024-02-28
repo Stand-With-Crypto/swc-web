@@ -1,7 +1,7 @@
 import { object, string } from 'zod'
 
 export const zodAddress = object({
-  googlePlaceId: string(),
+  googlePlaceId: string().optional(),
   formattedDescription: string(),
   streetNumber: string(),
   route: string(),
