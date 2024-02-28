@@ -32,7 +32,7 @@ Once you've gone through the PR, adding any comments/questions you might have, y
 
 ## My code has been approved - what now?
 
-The author of the PR can merge (squash if appropriate), close the PR, and delete the branch after they have approval from reviewers. Please ensure you merge any PlanetScale deploy requests to testing before merging the code (see "Updating the PlanetScale schema" section for more details).
+The author of the PR can merge, close the PR, and delete the branch after they have approval from reviewers. Please ensure you merge any PlanetScale deploy requests to testing before merging the code (see "Updating the PlanetScale schema" section for more details).
 
 All features should be deployed to production by the engineer that merged the feature in to testing:
 
@@ -69,11 +69,12 @@ At any point, if you want an additional sanity check for the existence of your e
 
 ### Updating the PlanetScale schema
 
-- All schema changes made should be [backwards compatible](https://planetscale.com/blog/safely-making-database-schema-changes#backwards-compatible-changes). If you're unsure of whether a change is backwards compatible, you can set up your local dev branch schema to reflect the testing environment, and then run `npx prisma db push` against your local dev branch with the schema changes you plan on making. The CLI will warn you of potential issues
+- All schema changes made should be [backwards compatible](https://planetscale.com/blog/safely-making-database-schema-changes#backwards-compatible-changes)
+  - If you're unsure of whether a change is backwards compatible:
+    - Checkout `main` and `npx prisma db push` to ensure your local dev branch reflects the latest in testing
+    - Checkout your feature branch with the schema changes and run `npx prisma db push`. The CLI will warn you of potential issues
   - Because you can't have vercel update at the exact same time as database migrations, you want to ensure that you ship code in a way where the database can be updated before any code is updated, and nothing breaks. This generally means merging code to testing,
 - To update the testing/production database schema, open a [deploy request](https://planetscale.com/docs/concepts/deploy-requests) against testing, [select the database branch](https://app.planetscale.com/stand-with-crypto/swc-web/branches) with the new schema updates and open a "deploy request" against testing. Please make sure to follow the same step of opening a deploy request from testing --> production before deploying from testing to production.
-
-For now, we aren't deploying any changes to production in PlanetScale, so you can stop here.
 
 ## Adding Environment Variables
 
