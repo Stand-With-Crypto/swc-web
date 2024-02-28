@@ -40,6 +40,7 @@ import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
 import { zodEmailAddress } from '@/validation/fields/zodEmailAddress'
 import { zodFirstName, zodLastName } from '@/validation/fields/zodName'
 import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
+import { getGooglePlaceIdFromAddress } from '@/utils/server/getGooglePlaceIdFromAddress'
 
 const zodVerifiedSWCPartnersUserAddress = object({
   googlePlaceId: string().optional(),
@@ -216,6 +217,15 @@ async function maybeUpsertUser({
     address,
   } = input
 
+  if (address) {
+    address.formattedDescription = `${address.streetNumber} ${address.route}, ${address.subpremise}, ${address.locality} ${address.administrativeAreaLevel1}, ${address.postalCode} ${address.countryCode}`
+    try {
+      address.googlePlaceId = await getGooglePlaceIdFromAddress(address.formattedDescription)
+    } catch (e) {
+      logger.error('error getting googlePlaceID:' + e)
+    }
+  }
+
   if (existingUser) {
     const updatePayload: Prisma.UserUpdateInput = {
       // TODO typesafe against invalid fields
@@ -237,11 +247,22 @@ async function maybeUpsertUser({
             },
           },
         }),
-      ...(address && {
-        address: {
-          update: address,
-        },
-      }),
+      ...(address &&
+        address.googlePlaceId &&
+        existingUser.address?.googlePlaceId !== address.googlePlaceId && {
+          address: {
+            connectOrCreate: {
+              where: { googlePlaceId: address.googlePlaceId },
+              create: address,
+            },
+          },
+        }),
+      ...(address &&
+        !address.googlePlaceId && {
+          address: {
+            create: address,
+          },
+        }),
     }
     const keysToUpdate = Object.keys(updatePayload)
     if (!keysToUpdate.length) {
@@ -303,11 +324,21 @@ async function maybeUpsertUser({
           source: UserEmailAddressSource.VERIFIED_THIRD_PARTY,
         },
       },
-      ...(address && {
-        address: {
-          create: address,
-        },
-      }),
+      ...(address &&
+        address.googlePlaceId && {
+          address: {
+            connectOrCreate: {
+              where: { googlePlaceId: address.googlePlaceId },
+              create: address,
+            },
+          },
+        }),
+      ...(address &&
+        !address.googlePlaceId && {
+          address: {
+            create: address,
+          },
+        }),
     },
   })
   user = await prismaClient.user.update({
