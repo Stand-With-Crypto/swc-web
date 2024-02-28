@@ -183,13 +183,10 @@ function logSpamActionSubmissions({
     reason: 'Too Many Recent',
     userState: 'Existing',
   })
-  Sentry.captureMessage(
-    `duplicate ${UserActionType.LIVE_EVENT} user action for campaign ${validatedInput.data.campaignName} submitted`,
-    {
-      extra: { validatedInput: validatedInput.data, userAction },
-      user: { id: userId },
-    },
-  )
+  Sentry.captureMessage(`duplicate ${UserActionType.LIVE_EVENT} user action submitted`, {
+    extra: { validatedInput: validatedInput.data, userAction },
+    user: { id: userId },
+  })
 }
 
 async function createAction<U extends User>({
