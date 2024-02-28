@@ -13,6 +13,8 @@ export const revalidate = SECONDS_DURATION.SECOND * 30
 export const dynamic = 'error'
 export const dynamicParams = true
 
+const LIVE_EVENT_CAMPAIGN_SLUGS = Object.values(UserActionLiveEventCampaignName)
+
 type Props = PageProps<{ slug: string }>
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -26,7 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function UserActionLiveEventDeepLink({ params }: Props) {
   const { slug } = params
-  if (!slug || !(slug in UserActionLiveEventCampaignName)) {
+  if (!slug || !LIVE_EVENT_CAMPAIGN_SLUGS.includes(slug)) {
     notFound()
   }
 

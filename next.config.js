@@ -222,12 +222,18 @@ const nextConfig = {
         destination: '/politicians',
         permanent: true,
       },
-
       // vanity urls
       {
         source: '/join/:referralId',
         destination: '/action/sign-up?utm_campaign=:referralId&utm_source=swc&utm_medium=referral',
         permanent: false,
+      },
+      // Live event campaigns
+      {
+        source: '/la',
+        destination:
+          '/action/live-event/2024-03-04-LA?utm_source=coinbase&utm_medium=live-event&utm_campaign=2024-03-04-LA',
+        permanent: true,
       },
     ]
   },
