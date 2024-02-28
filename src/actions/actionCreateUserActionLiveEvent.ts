@@ -45,7 +45,17 @@ export const actionCreateUserActionLiveEvent = withServerActionMiddleware(
   _actionCreateUserActionLiveEvent,
 )
 
-const LA_CRYPTO_VOTES_START_TIME = new Date('2024-03-04')
+type EventDuration = {
+  START_TIME: Date
+  END_TIME: Date
+}
+
+const EVENT_DURATION: Record<UserActionLiveEventCampaignName, EventDuration> = {
+  [UserActionLiveEventCampaignName['2024_03_04_LA']]: {
+    START_TIME: new Date('2024-03-04'),
+    END_TIME: new Date('2024-03-06'),
+  },
+}
 
 async function _actionCreateUserActionLiveEvent(input: CreateActionLiveEventInput) {
   logger.info('triggered')
@@ -58,7 +68,11 @@ async function _actionCreateUserActionLiveEvent(input: CreateActionLiveEventInpu
   }
 
   const currentTime = Date.now()
-  if (currentTime < LA_CRYPTO_VOTES_START_TIME.getTime()) {
+  const eventDuration = EVENT_DURATION[validatedInput.data.campaignName]
+  if (
+    currentTime < eventDuration.START_TIME.getTime() ||
+    currentTime > eventDuration.END_TIME.getTime()
+  ) {
     return {
       errors: {
         campaignName: ['The campaign is not active'],
