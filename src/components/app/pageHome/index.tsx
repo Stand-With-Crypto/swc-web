@@ -1,5 +1,6 @@
 import { ArrowUpRight, ThumbsDown, ThumbsUp } from 'lucide-react'
 
+import { sortDTSIPersonDataTable } from '@/components/app/dtsiClientPersonDataTable/sortPeople'
 import { DTSIPersonCard } from '@/components/app/dtsiPersonCard'
 import { DelayedRecentActivity } from '@/components/app/pageHome/delayedRecentActivity'
 import { HeroCTA } from '@/components/app/pageHome/heroCTA'
@@ -18,7 +19,6 @@ import { PageTitle } from '@/components/ui/pageTitleText'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
 import { PageProps } from '@/types'
-import { groupAndSortDTSIPeopleByCryptoStance } from '@/utils/dtsi/dtsiPersonUtils'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
@@ -35,7 +35,8 @@ export function PageHome({
 }: PageProps & Awaited<ReturnType<typeof getHomepageData>>) {
   const { locale } = params
   const urls = getIntlUrls(locale)
-  const groupedDTSIHomepagePeople = groupAndSortDTSIPeopleByCryptoStance(dtsiHomepagePeople)
+  const lowestScores = sortDTSIPersonDataTable(dtsiHomepagePeople.lowestScores)
+  const highestScores = sortDTSIPersonDataTable(dtsiHomepagePeople.highestScores)
   return (
     <>
       <section className="grid-fl mb-6 grid grid-cols-1 items-center gap-4 lg:container lg:grid-cols-2 lg:gap-8">
@@ -188,7 +189,7 @@ export function PageHome({
                 </h5>
               </div>
               <div className="space-y-3">
-                {groupedDTSIHomepagePeople.proCrypto.map(person => (
+                {highestScores.map(person => (
                   <DTSIPersonCard key={person.id} locale={locale} person={person} />
                 ))}
               </div>
@@ -201,7 +202,7 @@ export function PageHome({
                 </h5>
               </div>
               <div className="space-y-3">
-                {groupedDTSIHomepagePeople.antiCrypto.map(person => (
+                {lowestScores.map(person => (
                   <DTSIPersonCard key={person.id} locale={locale} person={person} />
                 ))}
               </div>

@@ -1,11 +1,12 @@
 import { Metadata } from 'next'
 
+import { sortDTSIPersonDataTable } from '@/components/app/dtsiClientPersonDataTable/sortPeople'
 import {
   PAGE_POLITICIANS_DESCRIPTION,
   PAGE_POLITICIANS_TITLE,
   PagePoliticians,
 } from '@/components/app/pagePoliticians'
-import { queryDTSIHomepagePeople } from '@/data/dtsi/queries/queryDTSIHomepagePeople'
+import { queryDTSIAllPeople } from '@/data/dtsi/queries/queryDTSIAllPeople'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
@@ -24,6 +25,7 @@ export async function generateMetadata(_props: Props): Promise<Metadata> {
 
 export default async function PoliticiansHomepage({ params }: PageProps) {
   const { locale } = params
-  const dtsiHomepagePeople = await queryDTSIHomepagePeople({ limit: 100 })
-  return <PagePoliticians {...{ dtsiHomepagePeople, locale }} />
+  const results = await queryDTSIAllPeople()
+  const people = sortDTSIPersonDataTable(results.people)
+  return <PagePoliticians {...{ people, locale }} />
 }
