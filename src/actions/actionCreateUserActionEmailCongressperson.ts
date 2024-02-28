@@ -208,13 +208,13 @@ async function maybeUpsertUser({
   input,
   sessionId,
   localUser,
-  onUpsertUser = () => {},
+  onUpsertUser,
 }: {
   existingUser: UserWithRelations | null
   input: Input
   sessionId: string
   localUser: ServerLocalUser | null
-  onUpsertUser?: () => Promise<void> | void
+  onUpsertUser: () => Promise<void> | void
 }): Promise<{ user: UserWithRelations; userState: AnalyticsUserActionUserState }> {
   const { firstName, lastName, emailAddress, address } = input
 
