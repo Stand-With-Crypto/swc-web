@@ -201,12 +201,6 @@ async function createAction<U extends User>({
             userCryptoAddress: { connect: { id: userMatch.userCryptoAddress.id } },
           }
         : { userSession: { connect: { id: sharedDependencies.sessionId } } }),
-      userActionLiveEvent: {
-        create: {},
-      },
-    },
-    include: {
-      userActionLiveEvent: true,
     },
   })
 
