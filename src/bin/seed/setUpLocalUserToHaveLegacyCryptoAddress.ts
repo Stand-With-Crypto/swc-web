@@ -49,4 +49,4 @@ async function setUpLocalUserToHaveLegacyCryptoAddress() {
   })
 }
 
-runBin(setUpLocalUserToHaveLegacyCryptoAddress)
+void runBin(setUpLocalUserToHaveLegacyCryptoAddress)

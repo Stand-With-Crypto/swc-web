@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import { beforeAll, describe, expect, it, jest } from '@jest/globals'
 
 import { sleep } from '@/utils/shared/sleep'

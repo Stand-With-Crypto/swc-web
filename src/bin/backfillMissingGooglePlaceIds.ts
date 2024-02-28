@@ -42,4 +42,4 @@ async function backfillMissingGooglePlaceIds() {
   }
 }
 
-runBin(backfillMissingGooglePlaceIds)
+void runBin(backfillMissingGooglePlaceIds)
