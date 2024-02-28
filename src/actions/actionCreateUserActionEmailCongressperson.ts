@@ -90,7 +90,7 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
   const analytics = getServerAnalytics({ userId: user.id, localUser })
   const peopleAnalytics = getServerPeopleAnalytics({ userId: user.id, localUser })
   if (localUser) {
-    peopleAnalytics.setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
+    await peopleAnalytics.setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
   }
   logger.info('fetched/created user')
   const campaignName = validatedFields.data.campaignName
@@ -106,7 +106,7 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
     },
   })
   if (userAction) {
-    analytics.trackUserActionCreatedIgnored({
+    await analytics.trackUserActionCreatedIgnored({
       actionType,
       campaignName,
       reason: 'Too Many Recent',
@@ -160,14 +160,14 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
       userActionEmail: true,
     },
   })
-  analytics.trackUserActionCreated({
+  await analytics.trackUserActionCreated({
     actionType,
     campaignName,
     creationMethod: 'On Site',
     userState,
     ...convertAddressToAnalyticsProperties(validatedFields.data.address),
   })
-  peopleAnalytics.set({
+  await peopleAnalytics.set({
     ...convertAddressToAnalyticsProperties(validatedFields.data.address),
     // https://docs.mixpanel.com/docs/data-structure/user-profiles#reserved-user-properties
     $email: validatedFields.data.emailAddress,

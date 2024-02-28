@@ -85,7 +85,7 @@ async function _actionCreateUserActionVoterRegistration(input: CreateActionVoter
 
   const recentUserAction = await getRecentUserActionByUserId(user.id, validatedInput)
   if (recentUserAction) {
-    logSpamActionSubmissions({
+    await logSpamActionSubmissions({
       validatedInput,
       userAction: recentUserAction,
       userId: user.id,
@@ -130,7 +130,7 @@ async function createUser(sharedDependencies: Pick<SharedDependencies, 'localUse
   logger.info('created user')
 
   if (localUser?.persisted) {
-    getServerPeopleAnalytics({ localUser, userId: createdUser.id }).setOnce(
+    await getServerPeopleAnalytics({ localUser, userId: createdUser.id }).setOnce(
       mapPersistedLocalUserToAnalyticsProperties(localUser.persisted),
     )
   }
@@ -151,7 +151,7 @@ async function getRecentUserActionByUserId(
   })
 }
 
-function logSpamActionSubmissions({
+async function logSpamActionSubmissions({
   validatedInput,
   userAction,
   userId,
@@ -162,7 +162,7 @@ function logSpamActionSubmissions({
   userId: User['id']
   sharedDependencies: Pick<SharedDependencies, 'analytics'>
 }) {
-  sharedDependencies.analytics.trackUserActionCreatedIgnored({
+  await sharedDependencies.analytics.trackUserActionCreatedIgnored({
     actionType: UserActionType.VOTER_REGISTRATION,
     campaignName: validatedInput.data.campaignName,
     reason: 'Too Many Recent',
@@ -214,15 +214,18 @@ async function createAction<U extends User>({
 
   logger.info('created user action')
 
-  sharedDependencies.analytics.trackUserActionCreated({
+  await sharedDependencies.analytics.trackUserActionCreated({
     actionType: UserActionType.VOTER_REGISTRATION,
     campaignName: validatedInput.campaignName,
     usaState: validatedInput.usaState,
     userState: isNewUser ? 'New' : 'Existing',
   })
-  sharedDependencies.peopleAnalytics.set({
-    usaState: validatedInput.usaState,
-  })
+
+  if (validatedInput.usaState) {
+    await sharedDependencies.peopleAnalytics.set({
+      usaState: validatedInput.usaState,
+    })
+  }
 
   return { userAction }
 }

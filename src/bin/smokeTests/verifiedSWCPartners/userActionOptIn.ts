@@ -38,4 +38,4 @@ async function smokeTestUserActionOptIn() {
   })
 }
 
-runBin(smokeTestUserActionOptIn)
+void runBin(smokeTestUserActionOptIn)

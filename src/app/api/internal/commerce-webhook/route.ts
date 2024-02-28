@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
 
   try {
     const pricingValues = extractPricingValues(body)
-    getServerAnalytics({
+    await getServerAnalytics({
       localUser: null,
       userId: body.event.data.metadata.userId,
     }).track('Coinbase Commerce Payment', {

@@ -48,4 +48,4 @@ async function smokeTestEmailRepWithInngest() {
   })
 }
 
-runBin(smokeTestEmailRepWithInngest)
+void runBin(smokeTestEmailRepWithInngest)

@@ -97,9 +97,10 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
           },
         })
       : existingUserEmailAddress
-  const localUser = parseLocalUserFromCookies()
-  const peopleAnalytics = getServerPeopleAnalytics({ userId: authUser.userId, localUser })
-  peopleAnalytics.set({
+  await getServerPeopleAnalytics({
+    userId: authUser.userId,
+    localUser: parseLocalUserFromCookies(),
+  }).set({
     ...(address ? convertAddressToAnalyticsProperties(address) : {}),
     // https://docs.mixpanel.com/docs/data-structure/user-profiles#reserved-user-properties
     $email: emailAddress,

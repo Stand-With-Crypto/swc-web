@@ -100,9 +100,10 @@ export async function verifiedSWCPartnersUserActionOptIn(
   const { user, userState } = await maybeUpsertUser({ existingUser: existingAction?.user, input })
   const localUser = getLocalUserFromUser(user)
   const analytics = getServerAnalytics({ userId: user.id, localUser })
-  const peopleAnalytics = getServerPeopleAnalytics({ userId: user.id, localUser })
   if (!existingAction?.user) {
-    peopleAnalytics.setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
+    await getServerPeopleAnalytics({ userId: user.id, localUser }).setOnce(
+      mapPersistedLocalUserToAnalyticsProperties(localUser.persisted),
+    )
   }
 
   if (existingAction) {
@@ -110,7 +111,7 @@ export async function verifiedSWCPartnersUserActionOptIn(
       extra: { emailAddress, isVerifiedEmailAddress },
       tags: { optInType, actionType },
     })
-    analytics.trackUserActionCreatedIgnored({
+    await analytics.trackUserActionCreatedIgnored({
       actionType,
       campaignName,
       creationMethod: 'Verified SWC Partner',
@@ -144,7 +145,7 @@ export async function verifiedSWCPartnersUserActionOptIn(
     },
   })
 
-  analytics.trackUserActionCreated({
+  await analytics.trackUserActionCreated({
     actionType,
     campaignName,
     creationMethod: 'Verified SWC Partner',
@@ -154,7 +155,7 @@ export async function verifiedSWCPartnersUserActionOptIn(
   // TODO (Benson): Handle CC membership toggling options: https://github.com/Stand-With-Crypto/swc-web/issues/173
   // TODO (Benson): Include p2a source in Capitol Canary payload to know which 3P is sending this request.
   const payload: UpsertAdvocateInCapitolCanaryPayloadRequirements = {
-    campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
+    campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.ONE_CLICK_NATIVE_SUBSCRIBER),
     user: {
       ...user,
       address: user.address || null,

@@ -40,4 +40,4 @@ async function smokeTestOnLogin() {
   }
 }
 
-runBin(smokeTestOnLogin)
+void runBin(smokeTestOnLogin)
