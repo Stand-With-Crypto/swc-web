@@ -66,8 +66,14 @@ export const UserActionRowCTAButton = React.forwardRef<
       >
         <div className="flex items-center gap-4">
           {state !== 'hidden' && <div className="flex-shrink-0">{getStateUI()}</div>}
-          <div className="hidden md:block">
-            <NextImage alt={text} height={100} src={image} width={100} />
+          <div className="hidden flex-shrink-0 md:block">
+            <NextImage
+              alt={text}
+              height={100}
+              src={image}
+              style={{ height: 100, width: 100 }}
+              width={100}
+            />
           </div>
           <div>
             <div className="mb-1 text-base font-bold lg:text-2xl">{text}</div>
