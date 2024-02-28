@@ -55,8 +55,6 @@ export async function claimNFT(userAction: UserAction, userCryptoAddress: UserCr
   const { actionType, campaignName } = userAction
 
   const nftSlug: NFTSlug | null = ACTION_NFT_SLUG[actionType][campaignName]
-  console.log('campaignName', campaignName)
-  console.log('nftSlug', nftSlug)
   if (nftSlug === null) {
     throw error(`Action ${actionType} for campaign ${campaignName} doesn't have an NFT slug.`)
   }
