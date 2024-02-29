@@ -17,3 +17,15 @@ export async function actionCreateUserActionCallCongressperson() {
 export async function actionCreateUserActionMintNFT() {
   return {}
 }
+
+export async function actionUpdateUserInformationVisibility() {
+  return {}
+}
+
+export async function actionUpdateUserProfile() {
+  return {}
+}
+
+export async function actionCreateUserActionVoterRegistration() {
+  return {}
+}
