@@ -7,7 +7,7 @@ import { getLogger } from '@/utils/shared/logger'
 import { resolveWithTimeout } from '@/utils/shared/resolveWithTimeout'
 import { AnalyticsPeopleProperties } from '@/utils/shared/sharedAnalytics'
 
-import { mixpanel } from './shared'
+import { mixpanel, MS_TIMEOUT } from './shared'
 
 const logger = getLogger('serverPeopleAnalytics')
 
@@ -27,7 +27,7 @@ export function getServerPeopleAnalytics(config: ServerAnalyticsConfig) {
   const trackingRequests: Promise<void>[] = []
 
   const flush = async () => {
-    return resolveWithTimeout(Promise.all(trackingRequests), 2500)
+    return resolveWithTimeout(Promise.all(trackingRequests), MS_TIMEOUT)
   }
 
   // this allows for one line calls (e.g.: `await getServerPeopleAnalytics().set().flush()`)

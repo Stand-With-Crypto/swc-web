@@ -8,3 +8,5 @@ const NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN = requiredEnv(
 )
 
 export const mixpanel = mixpanelLib.init(NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN)
+
+export const MS_TIMEOUT = 2500

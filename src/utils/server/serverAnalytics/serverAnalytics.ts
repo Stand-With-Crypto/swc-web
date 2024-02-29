@@ -13,7 +13,7 @@ import { resolveWithTimeout } from '@/utils/shared/resolveWithTimeout'
 import { AnalyticProperties } from '@/utils/shared/sharedAnalytics'
 import { formatVercelAnalyticsEventProperties } from '@/utils/shared/vercelAnalytics'
 
-import { mixpanel } from './shared'
+import { mixpanel, MS_TIMEOUT } from './shared'
 
 const logger = getLogger('serverAnalytics')
 
@@ -35,7 +35,7 @@ export function getServerAnalytics(config: ServerAnalyticsConfig) {
     mapCurrentSessionLocalUserToAnalyticsProperties(config.localUser.currentSession)
 
   const flush = async () => {
-    return resolveWithTimeout(Promise.all(trackingRequests), 2500)
+    return resolveWithTimeout(Promise.all(trackingRequests), MS_TIMEOUT)
   }
 
   const onError =
