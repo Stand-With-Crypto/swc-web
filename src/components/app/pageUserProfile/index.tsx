@@ -98,6 +98,9 @@ export function PageUserProfile({
                     if (x.actionType === UserActionType.DONATION) {
                       return x.amountUsd
                     }
+                    if (x.actionType === UserActionType.NFT_MINT) {
+                      return x.nftMint.costAtMintUsd
+                    }
                     return 0
                   })}
                   currencyCode={SupportedFiatCurrencyCodes.USD}

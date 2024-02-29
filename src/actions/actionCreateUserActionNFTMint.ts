@@ -127,11 +127,12 @@ async function createAction<U extends User>({
       userCryptoAddress: { connect: { id: user.primaryUserCryptoAddressId! } },
       nftMint: {
         create: {
-          nftSlug: NFTSlug.SWC_SHIELD,
+          nftSlug: NFTSlug.STAND_WITH_CRYPTO_SUPPORTER,
           // LATER-TASK get data from the related transaction
           status: NFTMintStatus.CLAIMED,
           costAtMint: 0.00435,
-          contractAddress: NFT_SLUG_BACKEND_METADATA[NFTSlug.SWC_SHIELD].contractAddress,
+          contractAddress:
+            NFT_SLUG_BACKEND_METADATA[NFTSlug.STAND_WITH_CRYPTO_SUPPORTER].contractAddress,
           costAtMintCurrencyCode: NFTCurrency.ETH,
           costAtMintUsd: new Decimal(0.00435).mul(ratio),
         },
