@@ -77,12 +77,12 @@ export function UserActionFormNFTMintTransactionWatch({
   }
 
   useEffectOnce(() => {
-    // if (debug) {
-    //   setIsMined(true)
-    //   return
-    // }
+    if (debug) {
+      setIsMined(true)
+      return
+    }
 
-    Promise.all([createAction({hash: '0xacb98176878ddc23a5d262263ab5f9684f907a39890908e3eb32610e7e33e844'})])
+    Promise.all([sendTransactionResponse.wait(), createAction(sendTransactionResponse)])
       .catch(err => Sentry.captureException(err, { tags: { domain: 'nftMint/transactionWatch' } }))
       .finally(() => setIsMined(true))
   })
