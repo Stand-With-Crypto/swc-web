@@ -48,7 +48,7 @@ export async function HomepageDialogDeeplinkLayout({
 
       <PageHome
         actions={[]}
-        dtsiHomepagePeople={[]}
+        dtsiHomepagePeople={{ lowestScores: [], highestScores: [] }}
         params={pageParams}
         sumDonationsByUser={[]}
         {...{

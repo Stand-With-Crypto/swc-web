@@ -1,6 +1,7 @@
 import { NextRequest } from 'next/server'
 import { i18nRouter } from 'next-i18n-router'
 
+import { localeDetector } from '@/intl/localeDetector'
 import { DEFAULT_LOCALE, ORDERED_SUPPORTED_LOCALES } from '@/intl/locales'
 import { isCypress } from '@/utils/shared/executionEnvironment'
 import { getLogger } from '@/utils/shared/logger'
@@ -18,6 +19,7 @@ export function middleware(request: NextRequest) {
   const i18nParsedResponse = i18nRouter(request, {
     locales: ORDERED_SUPPORTED_LOCALES as string[],
     defaultLocale: DEFAULT_LOCALE,
+    localeDetector,
   })
   const urlSessionId = request.nextUrl.searchParams.get('sessionId')
   const existingSessionId = request.cookies.get(USER_SESSION_ID_COOKIE_NAME)?.value

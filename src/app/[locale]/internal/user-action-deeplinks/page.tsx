@@ -10,7 +10,7 @@ import {
   USER_ACTION_DEEPLINK_MAP,
   UserActionTypesWithDeeplink,
 } from '@/utils/shared/urlsDeeplinkUserActions'
-import { USER_ACTION_TYPE_PRIORITY_ORDER } from '@/utils/web/userActionUtils'
+import { USER_ACTION_TYPE_CTA_PRIORITY_ORDER } from '@/utils/web/userActionUtils'
 
 export const dynamic = 'error'
 
@@ -20,7 +20,7 @@ export default function UserActionDeepLinks() {
   return (
     <div className="container mx-auto mt-10">
       <div className="space-y-7">
-        {USER_ACTION_TYPE_PRIORITY_ORDER.filter(
+        {USER_ACTION_TYPE_CTA_PRIORITY_ORDER.filter(
           actionType => USER_ACTION_DEEPLINK_MAP[actionType as UserActionTypesWithDeeplink],
         ).map(actionType => {
           const props = USER_ACTION_ROW_CTA_INFO[actionType]
