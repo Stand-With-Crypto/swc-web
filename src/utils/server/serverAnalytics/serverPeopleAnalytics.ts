@@ -20,7 +20,9 @@ export function getServerPeopleAnalytics(config: ServerAnalyticsConfig) {
   const trackingRequests: Promise<void>[] = []
 
   const flush = async () => {
-    return resolveWithTimeout(Promise.all(trackingRequests), ANALYTICS_FLUSH_TIMEOUT_MS)
+    return resolveWithTimeout(Promise.all(trackingRequests), ANALYTICS_FLUSH_TIMEOUT_MS).catch(
+      () => {},
+    )
   }
 
   // this allows for one line calls (e.g.: `await getServerPeopleAnalytics().set().flush()`)

@@ -276,6 +276,7 @@ export async function onNewLogin(props: NewLoginParams) {
 
   const peopleAnalytics = getServerPeopleAnalytics({ userId: user.id, localUser })
   const analytics = getServerAnalytics({ userId: user.id, localUser })
+  const beforeFinish = () => Promise.all([analytics.flush(), peopleAnalytics.flush()])
 
   // triggerPostLoginUserActionSteps logic
   const postLoginUserActionSteps = await triggerPostLoginUserActionSteps({
@@ -313,6 +314,7 @@ export async function onNewLogin(props: NewLoginParams) {
     'Datetime of Last Login': new Date(),
   })
 
+  await beforeFinish()
   return {
     userId: user.id,
     user,

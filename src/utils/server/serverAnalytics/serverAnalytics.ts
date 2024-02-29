@@ -35,7 +35,9 @@ export function getServerAnalytics(config: ServerAnalyticsConfig) {
     mapCurrentSessionLocalUserToAnalyticsProperties(config.localUser.currentSession)
 
   const flush = async () => {
-    return resolveWithTimeout(Promise.all(trackingRequests), ANALYTICS_FLUSH_TIMEOUT_MS)
+    return resolveWithTimeout(Promise.all(trackingRequests), ANALYTICS_FLUSH_TIMEOUT_MS).catch(
+      () => {},
+    )
   }
 
   const onError =
