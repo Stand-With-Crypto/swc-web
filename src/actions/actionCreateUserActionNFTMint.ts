@@ -5,7 +5,6 @@ import { NFTCurrency, NFTMintStatus, User, UserActionType } from '@prisma/client
 import { Decimal } from '@prisma/client/runtime/library'
 import * as Sentry from '@sentry/nextjs'
 import { BigNumber } from 'ethers'
-import { getContract, parseAbi } from 'viem'
 import { nativeEnum, object, z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
@@ -16,9 +15,9 @@ import { getServerAnalytics } from '@/utils/server/serverAnalytics'
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
-import { thirdwebBaseRPCClient, thirdwebRPCClient } from '@/utils/server/thirdweb/thirdwebRPCClient'
+import { thirdwebBaseRPCClient } from '@/utils/server/thirdweb/thirdwebRPCClient'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
-import { fromBigNumber, toBigNumber } from '@/utils/shared/bigNumber'
+import { fromBigNumber } from '@/utils/shared/bigNumber'
 import { getCryptoToFiatConversion } from '@/utils/shared/getCryptoToFiatConversion'
 import { getLogger } from '@/utils/shared/logger'
 import { NFTSlug } from '@/utils/shared/nft'
@@ -26,10 +25,7 @@ import { UserActionNftMintCampaignName } from '@/utils/shared/userActionCampaign
 
 const createActionMintNFTInputValidationSchema = object({
   campaignName: nativeEnum(UserActionNftMintCampaignName),
-  transactionHash: z
-    .string()
-    .regex(/0x.*/, 'Transaction hash must be an hex value')
-    .transform(hash => hash as `0x${string}`),
+  transactionHash: z.string().transform(hash => hash as `0x${string}`),
 })
 
 export type CreateActionMintNFTInput = z.infer<typeof createActionMintNFTInputValidationSchema>
@@ -88,21 +84,29 @@ async function _actionCreateUserActionMintNFT(input: CreateActionMintNFTInput) {
     localUser,
   })
 
-  /**
-   * LATER-TASK validate that:
-   * - the transaction is valid
-   * - the transaction hash is not already in the database (create a new field to store the hash if necessary)
-   * - the transaction is related to the Shield NFT contract
-   *
-   * If any of there conditions fail, return an error
-   */
-  await validateTransaction(validatedInput.data.transactionHash)
+  const transaction = await thirdwebBaseRPCClient.getTransaction({
+    hash: validatedInput.data.transactionHash,
+  })
 
+  await validateTransaction(transaction).catch(err => {
+    Sentry.captureException(err, {
+      extra: {
+        transactionHash: validatedInput.data.transactionHash,
+        transactionTo: transaction.to,
+        transactionFrom: transaction.from,
+      },
+      tags: { domain: 'validateTransaction' },
+    })
+    throw new Error('Invalid transaction')
+  })
+
+  const ethTransactionValue = fromBigNumber(BigNumber.from(transaction.value.toString()))
   await throwIfRateLimited({ context: 'authenticated' })
   await createAction({
     user,
     validatedInput: validatedInput.data,
     sharedDependencies: { sessionId, analytics },
+    ethTransactionValue,
   })
 
   return { user: getClientUser(user) }
@@ -112,10 +116,12 @@ async function createAction<U extends User>({
   user,
   validatedInput,
   sharedDependencies,
+  ethTransactionValue,
 }: {
   user: U
   validatedInput: z.infer<typeof createActionMintNFTInputValidationSchema>
   sharedDependencies: Pick<SharedDependencies, 'sessionId' | 'analytics'>
+  ethTransactionValue: string
 }) {
   const ratio = await getCryptoToFiatConversion(NFTCurrency.ETH)
     .then(res => {
@@ -126,6 +132,7 @@ async function createAction<U extends User>({
       return new Decimal(0)
     })
 
+  const decimalEthTransactionValue = new Decimal(ethTransactionValue)
   await prismaClient.userAction.create({
     data: {
       user: { connect: { id: user.id } },
@@ -137,10 +144,10 @@ async function createAction<U extends User>({
           nftSlug: NFTSlug.SWC_SHIELD,
           // LATER-TASK get data from the related transaction
           status: NFTMintStatus.CLAIMED,
-          costAtMint: 0.00435,
+          costAtMint: decimalEthTransactionValue,
           contractAddress: NFT_SLUG_BACKEND_METADATA[NFTSlug.SWC_SHIELD].contractAddress,
           costAtMintCurrencyCode: NFTCurrency.ETH,
-          costAtMintUsd: new Decimal(0.00435).mul(ratio),
+          costAtMintUsd: decimalEthTransactionValue.mul(ratio),
           transactionHash: validatedInput.transactionHash,
         },
       },
@@ -156,58 +163,30 @@ async function createAction<U extends User>({
   })
 }
 
-async function validateTransaction(hash: `0x${string}`) {
-  debugger
-
-  const transaction = await thirdwebBaseRPCClient.getTransaction({
-    hash,
-  })
-
-  const confirmations = await thirdwebBaseRPCClient.getTransactionConfirmations({
-    hash,
-  })
-
-  thirdwebBaseRPCClient.getContractEvents
-  if (!Number(confirmations)) {
-    throw new Error('Transaction not processed yet')
-  }
-
+async function validateTransaction(
+  transaction: Awaited<ReturnType<typeof thirdwebBaseRPCClient.getTransaction>>,
+) {
   const contractMetadata = NFT_SLUG_BACKEND_METADATA[NFTSlug.SWC_SHIELD]
 
   if (transaction.from !== contractMetadata.associatedWallet) {
     throw new Error('Invalid transaction origin wallet')
   }
 
-  // * const contract = getContract({
-  // *   address: '0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2',
-  // *   abi: parseAbi([
-  // *     'function balanceOf(address owner) view returns (uint256)',
-  // *     'function ownerOf(uint256 tokenId) view returns (address)',
-  // *     'function totalSupply() view returns (uint256)',
-  // *   ]),
-  // *   publicClient,
-  // * })
+  if (transaction.to !== contractMetadata.contractAddress) {
+    throw new Error('Invalid associated contract')
+  }
 
-  const contract = getContract({
-    address: contractMetadata.contractAddress as `0x${string}`,
-    abi: parseAbi([
-      'function balanceOf(address owner) view returns (uint256)',
-      'function ownerOf(uint256 tokenId) view returns (address)',
-      'function totalSupply() view returns (uint256)',
-    ]),
-    publicClient: thirdwebBaseRPCClient,
+  const registeredTransaction = await prismaClient.nFTMint.findFirst({
+    where: { transactionHash: transaction.hash },
   })
+  if (registeredTransaction) {
+    throw new Error('Transaction already registered')
+  }
 
-  const contractEvents = await thirdwebBaseRPCClient.getContractEvents({
-    address: contractMetadata.contractAddress as `0x${string}`,
-    abi: parseAbi([
-      'function balanceOf(address owner) view returns (uint256)',
-      'function ownerOf(uint256 tokenId) view returns (address)',
-      'function totalSupply() view returns (uint256)',
-    ]),
+  const confirmations = await thirdwebBaseRPCClient.getTransactionConfirmations({
+    hash: transaction.hash,
   })
-
-  const bigNumber = BigNumber.from(transaction.value.toString())
-  const ethValue = fromBigNumber(bigNumber)
-  console.log({ ethValue, transaction, contract, contractEvents })
+  if (!Number(confirmations)) {
+    throw new Error('Transaction not processed yet')
+  }
 }

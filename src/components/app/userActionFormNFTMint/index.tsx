@@ -28,8 +28,7 @@ import { useCheckoutController } from './useCheckoutController'
 export function UserActionFormNFTMint({ trackMount }: { trackMount?: boolean }) {
   const sectionProps = useSections({
     sections: Object.values(UserActionFormNFTMintSectionNames),
-    // TODO revert
-    initialSectionId: UserActionFormNFTMintSectionNames.TRANSACTION_WATCH,
+    initialSectionId: UserActionFormNFTMintSectionNames.INTRO,
     analyticsName: ANALYTICS_NAME_USER_ACTION_FORM_NFT_MINT,
   })
   useEffect(() => {
@@ -41,8 +40,7 @@ export function UserActionFormNFTMint({ trackMount }: { trackMount?: boolean }) 
   const checkoutController = useCheckoutController()
 
   const [isUSResident, setIsUSResident] = React.useState(false)
-  // TODO revert
-  const [isDebug, setIsDebug] = React.useState(true)
+  const [isDebug, setIsDebug] = React.useState(false)
 
   const {
     mintNFT,

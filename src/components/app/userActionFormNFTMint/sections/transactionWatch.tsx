@@ -53,7 +53,7 @@ export function UserActionFormNFTMintTransactionWatch({
   const createAction = async (transaction: TransactionResponse) => {
     const input: CreateActionMintNFTInput = {
       campaignName: UserActionNftMintCampaignName.DEFAULT,
-      transactionHash: transaction.hash,
+      transactionHash: transaction.hash as `0x${string}`,
     }
 
     return await triggerServerActionForForm(
@@ -77,15 +77,12 @@ export function UserActionFormNFTMintTransactionWatch({
   }
 
   useEffectOnce(() => {
-    // if (debug) {
-    //   setIsMined(true)
-    //   return
-    // }
+    if (debug) {
+      setIsMined(true)
+      return
+    }
 
-    Promise.all([
-      createAction({ hash: '0x055e32d2173602fe4b224f2dc977bd7448bff934d1f5b88199aec3f5a40f0d75' }),
-    ])
-      // Promise.all([sendTransactionResponse.wait(), createAction(sendTransactionResponse)])
+    Promise.all([sendTransactionResponse.wait(), createAction(sendTransactionResponse)])
       .catch(err => Sentry.captureException(err, { tags: { domain: 'nftMint/transactionWatch' } }))
       .finally(() => setIsMined(true))
   })
