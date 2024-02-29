@@ -1,6 +1,4 @@
 import * as Sentry from '@sentry/nextjs'
-import { PropertyDict } from 'mixpanel'
-import { promisify } from 'util'
 
 import { LocalUser } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
@@ -12,11 +10,6 @@ import { ANALYTICS_FLUSH_TIMEOUT_MS, mixpanel } from './shared'
 const logger = getLogger('serverPeopleAnalytics')
 
 type ServerAnalyticsConfig = { localUser: LocalUser | null; userId: string }
-
-const promisifiedMixpanelPeopleSet = promisify<string, PropertyDict, void>(mixpanel.people.set)
-const promisifiedMixpanelPeopleSetOnce = promisify<string, PropertyDict, void>(
-  mixpanel.people.set_once,
-)
 
 export type ServerPeopleAnalytics = ReturnType<typeof getServerPeopleAnalytics>
 
@@ -55,9 +48,11 @@ export function getServerPeopleAnalytics(config: ServerAnalyticsConfig) {
     logger.info(`People Properties Set Once`, peopleProperties)
 
     void trackingRequests.push(
-      promisifiedMixpanelPeopleSetOnce(config.userId, peopleProperties).catch(
-        onError({ method: 'setOnce', userId: config.userId, peopleProperties }),
-      ),
+      new Promise<void>((resolve, reject) =>
+        mixpanel.people.set_once(config.userId, peopleProperties, err =>
+          err ? reject(err) : resolve(),
+        ),
+      ).catch(onError({ method: 'setOnce', userId: config.userId, peopleProperties })),
     )
 
     return returnValue
@@ -71,9 +66,11 @@ export function getServerPeopleAnalytics(config: ServerAnalyticsConfig) {
     logger.info(`People Properties Set`, peopleProperties)
 
     void trackingRequests.push(
-      promisifiedMixpanelPeopleSet(config.userId, peopleProperties).catch(
-        onError({ method: 'set', userId: config.userId, peopleProperties }),
-      ),
+      new Promise<void>((resolve, reject) =>
+        mixpanel.people.set(config.userId, peopleProperties, err =>
+          err ? reject(err) : resolve(),
+        ),
+      ).catch(onError({ method: 'set', userId: config.userId, peopleProperties })),
     )
 
     return returnValue
