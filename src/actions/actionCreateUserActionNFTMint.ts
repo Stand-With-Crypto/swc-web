@@ -37,6 +37,7 @@ interface SharedDependencies {
 }
 
 const logger = getLogger(`actionCreateUserActionMintNFT`)
+const contractMetadata = NFT_SLUG_BACKEND_METADATA[NFTSlug.SWC_SHIELD]
 
 export const actionCreateUserActionMintNFT = withServerActionMiddleware(
   'actionCreateUserActionMintNFT',
@@ -93,7 +94,9 @@ async function _actionCreateUserActionMintNFT(input: CreateActionMintNFTInput) {
       extra: {
         transactionHash: validatedInput.data.transactionHash,
         transactionTo: transaction.to,
+        expectedTo: contractMetadata.contractAddress,
         transactionFrom: transaction.from,
+        expectedFrom: contractMetadata.associatedWallet,
       },
       tags: { domain: 'validateTransaction' },
     })
@@ -165,8 +168,6 @@ async function createAction<U extends User>({
 async function validateTransaction(
   transaction: Awaited<ReturnType<typeof thirdwebBaseRPCClient.getTransaction>>,
 ) {
-  const contractMetadata = NFT_SLUG_BACKEND_METADATA[NFTSlug.SWC_SHIELD]
-
   if (transaction.from !== contractMetadata.associatedWallet) {
     throw new Error('Invalid transaction origin wallet')
   }
