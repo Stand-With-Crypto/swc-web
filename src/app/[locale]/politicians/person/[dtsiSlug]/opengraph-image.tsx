@@ -54,29 +54,47 @@ export default async function Image({ params }: { params: { dtsiSlug: string } }
   const circleColor = getBgHexColor(letterGrade)
   const isLetterGrade = letterGrade ?? '?'
 
+  let letterPadding = {}
+  switch (isLetterGrade) {
+    case 'A':
+      letterPadding = { paddingBottom: '10px' }
+      break
+    case 'B':
+      break
+    case 'C':
+      letterPadding = { paddingBottom: '3px', paddingRight: '5px' }
+      break
+    case 'D':
+      letterPadding = { paddingBottom: '3px', paddingLeft: '3px' }
+      break
+    case 'F':
+      letterPadding = { paddingRight: '3px' }
+      break
+    case '?':
+      letterPadding = { paddingLeft: '3px' }
+  }
+
   return new ImageResponse(
     (
       <div
         style={{ background: '#000' }}
-        tw="flex text-white p-8 w-full h-full flex-col justify-between items-center border border-solid border-gray-500"
+        tw="flex text-white p-8 w-full h-full flex-col justify-between items-center"
       >
-        <div tw="flex p-8 w-full flex-col justify-between items-center border border-solid border-pink-500">
+        <div tw="flex p-8 w-full flex-col justify-between items-center">
           <img
             src={imageData as any}
             style={{ position: 'absolute', top: 0, right: 0 }}
-            tw="border border-solid border-orange-500"
             width="48px"
           />
         </div>
         <div />
-        <div tw="w-full flex flex-col text-center justify-center items-center border border-solid border-yellow-500">
+        <div tw="w-full flex flex-col text-center justify-center items-center">
           {person.profilePictureUrl && dimensions ? (
             <div
               style={{
                 display: 'flex',
                 paddingLeft: '60px',
               }}
-              tw="border border-solid border-blue-500"
             >
               <img
                 alt={dtsiPersonFullName(person)}
@@ -88,7 +106,6 @@ export default async function Image({ params }: { params: { dtsiSlug: string } }
                   width: '200px',
                   height: '200px',
                 }}
-                tw="border border-solid border-orange-500"
               />
               <div
                 style={{
@@ -103,7 +120,6 @@ export default async function Image({ params }: { params: { dtsiSlug: string } }
                   alignItems: 'center',
                   justifyContent: 'center',
                 }}
-                tw="border border-solid border-purple-500"
               >
                 <p
                   style={{
@@ -111,11 +127,11 @@ export default async function Image({ params }: { params: { dtsiSlug: string } }
                     alignItems: 'center',
                     position: 'absolute',
                     fontSize: '50px',
-                    fontWeight: 'bold',
+                    fontWeight: 900,
                     lineHeight: 1,
                     color: 'white',
+                    ...letterPadding,
                   }}
-                  tw="border border-solid border-orange-500"
                 >
                   {isLetterGrade}
                 </p>
