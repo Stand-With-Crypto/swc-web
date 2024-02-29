@@ -142,7 +142,6 @@ async function createAction<U extends User>({
       nftMint: {
         create: {
           nftSlug: NFTSlug.SWC_SHIELD,
-          // LATER-TASK get data from the related transaction
           status: NFTMintStatus.CLAIMED,
           costAtMint: decimalEthTransactionValue,
           contractAddress: NFT_SLUG_BACKEND_METADATA[NFTSlug.SWC_SHIELD].contractAddress,
