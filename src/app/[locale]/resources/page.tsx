@@ -11,6 +11,6 @@ export const metadata: Metadata = {
   title: 'Resources',
 }
 
-export default async function ResourcesPage(_props: Props) {
-  return <PageResources />
+export default async function ResourcesPage(props: Props) {
+  return <PageResources locale={props.params.locale} />
 }

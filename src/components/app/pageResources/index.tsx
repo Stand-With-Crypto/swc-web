@@ -1,14 +1,14 @@
-import { UserActionType } from '@prisma/client'
-
 import { EventCard } from '@/components/app/pageResources/eventCard'
 import { PolicyCard } from '@/components/app/pageResources/policyCard'
-import { UserActionRowCTAsListWithApi } from '@/components/app/userActionRowCTA/userActionRowCTAsListWithApi'
+import { Button } from '@/components/ui/button'
+import { InternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
+import { SupportedLocale } from '@/intl/locales'
+import { getIntlUrls } from '@/utils/shared/urls'
 
-const EXCLUDE_USER_ACTION_TYPES: UserActionType[] = ['NFT_MINT']
-
-export function PageResources() {
+export function PageResources({ locale }: { locale: SupportedLocale }) {
+  const urls = getIntlUrls(locale)
   return (
     <div className="container">
       <section className="mb-16 space-y-7 text-center">
@@ -84,9 +84,13 @@ export function PageResources() {
           Get involved
         </PageTitle>
         <PageSubTitle className="mb-8 mt-4">
-          The future of crypto is in your hands. Here’s how you can help.
+          Stand With Crypto is an open source initiative built by people who believe crypto belongs
+          in America. Help us safeguard the future of crypto by contributing to our open source repo
+          or promoting Stand With Crypto on your website or app.
         </PageSubTitle>
-        <UserActionRowCTAsListWithApi excludeUserActionTypes={EXCLUDE_USER_ACTION_TYPES} />
+        <Button asChild size="lg">
+          <InternalLink href={urls.contribute()}>Contribute to Stand With Crypto</InternalLink>
+        </Button>
       </section>
     </div>
   )

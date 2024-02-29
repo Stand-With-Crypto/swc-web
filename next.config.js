@@ -65,6 +65,7 @@ const contentSecurityPolicy = {
     'https://embedded-wallet.thirdweb.com/',
     'https://www.youtube.com/embed/',
     'https://vercel.live/',
+    'https://www.figma.com/embed',
   ],
   'font-src': ["'self'"],
   'object-src': ['none'],
