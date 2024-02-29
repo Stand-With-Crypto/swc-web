@@ -1,13 +1,14 @@
+import { UserActionType } from '@prisma/client'
+
 import { UserActionRowCTAsListWithApi } from '@/components/app/userActionRowCTA/userActionRowCTAsListWithApi'
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { PageProps } from '@/types'
-import { ActiveClientUserActionType } from '@/utils/shared/activeUserAction'
 import { getIntlUrls } from '@/utils/shared/urls'
 
-const EXCLUDE_USER_ACTION_TYPES: ActiveClientUserActionType[] = ['NFT_MINT', 'CALL', 'EMAIL']
+const EXCLUDE_USER_ACTION_TYPES: UserActionType[] = ['NFT_MINT', 'CALL', 'EMAIL']
 
 export function PageVote({ params }: PageProps) {
   const { locale } = params
