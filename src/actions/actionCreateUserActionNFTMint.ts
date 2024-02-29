@@ -4,6 +4,8 @@ import 'server-only'
 import { NFTCurrency, NFTMintStatus, User, UserActionType } from '@prisma/client'
 import { Decimal } from '@prisma/client/runtime/library'
 import * as Sentry from '@sentry/nextjs'
+import { BigNumber } from 'ethers'
+import { getContract, parseAbi } from 'viem'
 import { nativeEnum, object, z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
@@ -14,7 +16,9 @@ import { getServerAnalytics } from '@/utils/server/serverAnalytics'
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
+import { thirdwebBaseRPCClient, thirdwebRPCClient } from '@/utils/server/thirdweb/thirdwebRPCClient'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
+import { fromBigNumber, toBigNumber } from '@/utils/shared/bigNumber'
 import { getCryptoToFiatConversion } from '@/utils/shared/getCryptoToFiatConversion'
 import { getLogger } from '@/utils/shared/logger'
 import { NFTSlug } from '@/utils/shared/nft'
@@ -22,7 +26,10 @@ import { UserActionNftMintCampaignName } from '@/utils/shared/userActionCampaign
 
 const createActionMintNFTInputValidationSchema = object({
   campaignName: nativeEnum(UserActionNftMintCampaignName),
-  transactionHash: z.string(),
+  transactionHash: z
+    .string()
+    .regex(/0x.*/, 'Transaction hash must be an hex value')
+    .transform(hash => hash as `0x${string}`),
 })
 
 export type CreateActionMintNFTInput = z.infer<typeof createActionMintNFTInputValidationSchema>
@@ -89,6 +96,7 @@ async function _actionCreateUserActionMintNFT(input: CreateActionMintNFTInput) {
    *
    * If any of there conditions fail, return an error
    */
+  await validateTransaction(validatedInput.data.transactionHash)
 
   await throwIfRateLimited({ context: 'authenticated' })
   await createAction({
@@ -133,6 +141,7 @@ async function createAction<U extends User>({
           contractAddress: NFT_SLUG_BACKEND_METADATA[NFTSlug.SWC_SHIELD].contractAddress,
           costAtMintCurrencyCode: NFTCurrency.ETH,
           costAtMintUsd: new Decimal(0.00435).mul(ratio),
+          transactionHash: validatedInput.transactionHash,
         },
       },
     },
@@ -145,4 +154,60 @@ async function createAction<U extends User>({
     campaignName: validatedInput.campaignName,
     userState: 'Existing',
   })
+}
+
+async function validateTransaction(hash: `0x${string}`) {
+  debugger
+
+  const transaction = await thirdwebBaseRPCClient.getTransaction({
+    hash,
+  })
+
+  const confirmations = await thirdwebBaseRPCClient.getTransactionConfirmations({
+    hash,
+  })
+
+  thirdwebBaseRPCClient.getContractEvents
+  if (!Number(confirmations)) {
+    throw new Error('Transaction not processed yet')
+  }
+
+  const contractMetadata = NFT_SLUG_BACKEND_METADATA[NFTSlug.SWC_SHIELD]
+
+  if (transaction.from !== contractMetadata.associatedWallet) {
+    throw new Error('Invalid transaction origin wallet')
+  }
+
+  // * const contract = getContract({
+  // *   address: '0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2',
+  // *   abi: parseAbi([
+  // *     'function balanceOf(address owner) view returns (uint256)',
+  // *     'function ownerOf(uint256 tokenId) view returns (address)',
+  // *     'function totalSupply() view returns (uint256)',
+  // *   ]),
+  // *   publicClient,
+  // * })
+
+  const contract = getContract({
+    address: contractMetadata.contractAddress as `0x${string}`,
+    abi: parseAbi([
+      'function balanceOf(address owner) view returns (uint256)',
+      'function ownerOf(uint256 tokenId) view returns (address)',
+      'function totalSupply() view returns (uint256)',
+    ]),
+    publicClient: thirdwebBaseRPCClient,
+  })
+
+  const contractEvents = await thirdwebBaseRPCClient.getContractEvents({
+    address: contractMetadata.contractAddress as `0x${string}`,
+    abi: parseAbi([
+      'function balanceOf(address owner) view returns (uint256)',
+      'function ownerOf(uint256 tokenId) view returns (address)',
+      'function totalSupply() view returns (uint256)',
+    ]),
+  })
+
+  const bigNumber = BigNumber.from(transaction.value.toString())
+  const ethValue = fromBigNumber(bigNumber)
+  console.log({ ethValue, transaction, contract, contractEvents })
 }
