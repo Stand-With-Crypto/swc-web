@@ -1,14 +1,14 @@
 'use client'
 import React from 'react'
-import { UserActionType } from '@prisma/client'
 import { ChevronRight } from 'lucide-react'
 
 import { NextImage } from '@/components/ui/image'
 import { Skeleton } from '@/components/ui/skeleton'
+import { ActiveClientUserActionType } from '@/utils/shared/activeUserAction'
 import { cn } from '@/utils/web/cn'
 
 export interface UserActionRowCTAProps {
-  actionType: UserActionType
+  actionType: ActiveClientUserActionType
   state: 'unknown' | 'complete' | 'incomplete' | 'hidden'
   image: string
   text: string
