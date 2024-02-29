@@ -48,9 +48,6 @@ export default async function Image({ params }: { params: { dtsiSlug: string } }
 
   const scoreLanguage = convertDTSIStanceScoreToCryptoSupportLanguageSentence(person)
   const letterGrade = convertDTSIStanceScoreToLetterGrade(person)
-  const dimensions = person.profilePictureUrlDimensions as
-    | { width: number; height: number }
-    | undefined
   const circleColor = getBgHexColor(letterGrade)
   const isLetterGrade = letterGrade ?? '?'
 
@@ -73,7 +70,7 @@ export default async function Image({ params }: { params: { dtsiSlug: string } }
     case '?':
       letterPadding = { paddingLeft: '3px' }
   }
-
+  console.log('picture: ', person.profilePictureUrl.length)
   return new ImageResponse(
     (
       <div
@@ -89,7 +86,7 @@ export default async function Image({ params }: { params: { dtsiSlug: string } }
         </div>
         <div />
         <div tw="w-full flex flex-col text-center justify-center items-center">
-          {person.profilePictureUrl && dimensions ? (
+          {person.profilePictureUrl ? (
             <div
               style={{
                 display: 'flex',
