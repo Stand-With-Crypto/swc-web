@@ -27,7 +27,11 @@ import { mergeUsers } from '@/utils/server/mergeUsers/mergeUsers'
 import { claimNFT } from '@/utils/server/nft/claimNFT'
 import { mintPastActions } from '@/utils/server/nft/mintPastActions'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
+import {
+  getServerAnalytics,
+  getServerPeopleAnalytics,
+  ServerAnalytics,
+} from '@/utils/server/serverAnalytics'
 import {
   mapLocalUserToUserDatabaseFields,
   parseLocalUserFromCookiesForPageRouter,
@@ -270,20 +274,23 @@ export async function onNewLogin(props: NewLoginParams) {
       ),
     }))
 
+  const peopleAnalytics = getServerPeopleAnalytics({ userId: user.id, localUser })
+  const analytics = getServerAnalytics({ userId: user.id, localUser })
+
   // triggerPostLoginUserActionSteps logic
   const postLoginUserActionSteps = await triggerPostLoginUserActionSteps({
     user,
     userCryptoAddress,
     localUser,
     wasUserCreated,
+    analytics,
   })
+
   if (localUser) {
-    await getServerPeopleAnalytics({ userId: user.id, localUser }).setOnce(
-      mapPersistedLocalUserToAnalyticsProperties(localUser.persisted),
-    )
+    peopleAnalytics.setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
   }
 
-  await getServerAnalytics({ userId: user.id, localUser }).track('User Logged In', {
+  analytics.track('User Logged In', {
     'Is First Time': true,
     'Existing Users Found Ids': existingUsersWithSource.map(x => x.user.id),
     'Existing Users Found Sources': existingUsersWithSource.map(x => x.sourceOfExistingUser),
@@ -302,7 +309,7 @@ export async function onNewLogin(props: NewLoginParams) {
     'Had Opt In User Action': postLoginUserActionSteps.hadOptInUserAction,
     'Count Past Actions Minted': postLoginUserActionSteps.pastActionsMinted.length,
   })
-  await getServerPeopleAnalytics({ userId: user.id, localUser }).set({
+  peopleAnalytics.set({
     'Datetime of Last Login': new Date(),
   })
 
@@ -617,11 +624,13 @@ async function triggerPostLoginUserActionSteps({
   userCryptoAddress,
   localUser,
   wasUserCreated,
+  analytics,
 }: {
   wasUserCreated: boolean
   user: UpsertedUser
   userCryptoAddress: UserCryptoAddress
   localUser: ServerLocalUser | null
+  analytics: ServerAnalytics
 }) {
   const log = getLog(userCryptoAddress.cryptoAddress)
   /**
@@ -654,14 +663,12 @@ async function triggerPostLoginUserActionSteps({
     })
     log(`triggerPostLoginUserActionSteps: opt in user action created`)
     await claimNFT(optInUserAction, userCryptoAddress)
-    await getServerAnalytics({ userId: user.id, localUser })
-      .trackUserActionCreated({
-        actionType: UserActionType.OPT_IN,
-        campaignName: UserActionOptInCampaignName.DEFAULT,
-        creationMethod: 'On Site',
-        userState: wasUserCreated ? 'New' : 'Existing',
-      })
-      .flush()
+    analytics.trackUserActionCreated({
+      actionType: UserActionType.OPT_IN,
+      campaignName: UserActionOptInCampaignName.DEFAULT,
+      creationMethod: 'On Site',
+      userState: wasUserCreated ? 'New' : 'Existing',
+    })
   } else {
     log(`triggerPostLoginUserActionSteps: opt in user action previously existed`)
   }

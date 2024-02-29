@@ -7,7 +7,7 @@ import { getLogger } from '@/utils/shared/logger'
 import { resolveWithTimeout } from '@/utils/shared/resolveWithTimeout'
 import { AnalyticsPeopleProperties } from '@/utils/shared/sharedAnalytics'
 
-import { mixpanel, MS_TIMEOUT } from './shared'
+import { ANALYTICS_FLUSH_TIMEOUT_MS, mixpanel } from './shared'
 
 const logger = getLogger('serverPeopleAnalytics')
 
@@ -27,7 +27,7 @@ export function getServerPeopleAnalytics(config: ServerAnalyticsConfig) {
   const trackingRequests: Promise<void>[] = []
 
   const flush = async () => {
-    return resolveWithTimeout(Promise.all(trackingRequests), MS_TIMEOUT)
+    return resolveWithTimeout(Promise.all(trackingRequests), ANALYTICS_FLUSH_TIMEOUT_MS)
   }
 
   // this allows for one line calls (e.g.: `await getServerPeopleAnalytics().set().flush()`)
@@ -46,7 +46,7 @@ export function getServerPeopleAnalytics(config: ServerAnalyticsConfig) {
       })
     }
 
-  const setOnce = (peopleProperties: AnalyticsPeopleProperties) => {
+  const setOnce = (peopleProperties: AnalyticsPeopleProperties): typeof returnValue => {
     if (!config.localUser) {
       logger.info(`Skipped People Properties Set Once`, peopleProperties)
       return returnValue
@@ -54,7 +54,7 @@ export function getServerPeopleAnalytics(config: ServerAnalyticsConfig) {
 
     logger.info(`People Properties Set Once`, peopleProperties)
 
-    trackingRequests.push(
+    void trackingRequests.push(
       promisifiedMixpanelPeopleSetOnce(config.userId, peopleProperties).catch(
         onError({ method: 'setOnce', userId: config.userId, peopleProperties }),
       ),
@@ -70,7 +70,7 @@ export function getServerPeopleAnalytics(config: ServerAnalyticsConfig) {
     }
     logger.info(`People Properties Set`, peopleProperties)
 
-    trackingRequests.push(
+    void trackingRequests.push(
       promisifiedMixpanelPeopleSet(config.userId, peopleProperties).catch(
         onError({ method: 'set', userId: config.userId, peopleProperties }),
       ),

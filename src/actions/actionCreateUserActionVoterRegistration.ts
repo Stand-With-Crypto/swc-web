@@ -13,7 +13,11 @@ import {
 import { claimNFT } from '@/utils/server/nft/claimNFT'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
-import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
+import {
+  getServerAnalytics,
+  getServerPeopleAnalytics,
+  ServerPeopleAnalytics,
+} from '@/utils/server/serverAnalytics'
 import {
   mapLocalUserToUserDatabaseFields,
   parseLocalUserFromCookies,
@@ -72,12 +76,16 @@ async function _actionCreateUserActionVoterRegistration(input: CreateActionVoter
   if (!userMatch.user) {
     await triggerRateLimiterAtMostOnce()
   }
-  const user = userMatch.user || (await createUser({ localUser, sessionId }))
+  const { user, peopleAnalytics } = userMatch.user
+    ? {
+        user: userMatch.user,
+        peopleAnalytics: getServerPeopleAnalytics({
+          localUser,
+          userId: userMatch.user.id,
+        }),
+      }
+    : await createUser({ localUser, sessionId })
 
-  const peopleAnalytics = getServerPeopleAnalytics({
-    localUser,
-    userId: user.id,
-  })
   const analytics = getServerAnalytics({
     userId: user.id,
     localUser,
@@ -132,13 +140,15 @@ async function createUser(sharedDependencies: Pick<SharedDependencies, 'localUse
   })
   logger.info('created user')
 
+  const peopleAnalytics: ServerPeopleAnalytics = getServerPeopleAnalytics({
+    localUser,
+    userId: createdUser.id,
+  })
   if (localUser?.persisted) {
-    await getServerPeopleAnalytics({ localUser, userId: createdUser.id })
-      .setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
-      .flush()
+    peopleAnalytics.setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
   }
 
-  return createdUser
+  return { user: createdUser, peopleAnalytics }
 }
 
 async function getRecentUserActionByUserId(
