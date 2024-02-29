@@ -1,10 +1,9 @@
-import { UserActionType } from '@prisma/client'
-
 import { UserActionRowCTAsListWithApi } from '@/components/app/userActionRowCTA/userActionRowCTAsListWithApi'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
+import { ActiveClientUserActionType } from '@/utils/shared/activeUserAction'
 
-const EXCLUDE_USER_ACTION_TYPES: UserActionType[] = ['NFT_MINT', 'DONATION']
+const EXCLUDE_USER_ACTION_TYPES: ActiveClientUserActionType[] = ['NFT_MINT', 'DONATION']
 
 export function CTAs() {
   return (
