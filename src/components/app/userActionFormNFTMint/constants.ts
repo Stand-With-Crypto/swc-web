@@ -1,12 +1,10 @@
-import { NFT_SLUG_BACKEND_METADATA } from '@/utils/server/nft/constants'
 import { toBigNumber } from '@/utils/shared/bigNumber'
-import { NFTSlug } from '@/utils/shared/nft'
 
 export const ETH_NFT_DONATION_AMOUNT = toBigNumber('0.00435')
 
 export const MINT_NFT_CONTRACT_ADDRESS =
   process.env.NEXT_PUBLIC_OVERRIDE_MINT_NFT_CONTRACT_ADDRESS ??
-  NFT_SLUG_BACKEND_METADATA[NFTSlug.SWC_SHIELD].contractAddress
+  '0x741B334b0690de44Bce6c926a1F74Ca69C95c80c'
 
 export enum UserActionFormNFTMintSectionNames {
   INTRO = 'intro',
