@@ -9,7 +9,10 @@ import { AirdropPayload } from '@/utils/server/nft/payload'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getLogger } from '@/utils/shared/logger'
 import { NFTSlug } from '@/utils/shared/nft'
-import { ActiveClientUserActionWithCampaignType } from '@/utils/shared/userActionCampaigns'
+import {
+  ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
+  ActiveClientUserActionWithCampaignType,
+} from '@/utils/shared/userActionCampaigns'
 
 import NFTMintStatus = $Enums.NFTMintStatus
 
@@ -27,9 +30,9 @@ const logger = getLogger('claimNft')
 
 export async function claimNFT(userAction: UserAction, userCryptoAddress: UserCryptoAddress) {
   logger.info('Triggered')
-  const activeClientUserActionTypeWithCampaign = (
-    Object.keys(ACTION_NFT_SLUG) as Array<ActiveClientUserActionWithCampaignType>
-  ).find(key => key === userAction.actionType)
+  const activeClientUserActionTypeWithCampaign = ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN.find(
+    key => key === userAction.actionType,
+  )
 
   if (!activeClientUserActionTypeWithCampaign) {
     throw error(`Action ${userAction.actionType} doesn't have an active campaign.`)
