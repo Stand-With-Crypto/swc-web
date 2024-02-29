@@ -32,7 +32,6 @@ const NFTImage = ({ nft }: { nft: NFTClientMetadata }) => (
 const RedeemedNFTImage = ({ nft }: { nft: NFTClientMetadata }) => (
   <div>
     <NFTImage nft={nft} />
-    <p className="mt-2 font-bold">You've earned a new NFT</p>
   </div>
 )
 
@@ -85,7 +84,7 @@ export function UserActionFormSuccessScreenMainCTA({
       return (
         <Container>
           <NFTImage nft={nftWhenAuthenticated} />
-          <PageTitle size="sm">Nice work!</PageTitle>
+          <PageTitle size="sm">Nice work! You earned a new NFT.</PageTitle>
           <PageSubTitle size={'md'}>
             You've earned an NFT for completing this action. Join Stand With Crypto to claim your
             NFT, see your activities, and get personalized content.
@@ -109,7 +108,7 @@ export function UserActionFormSuccessScreenMainCTA({
     return (
       <Container>
         {nftWhenAuthenticated && <RedeemedNFTImage nft={nftWhenAuthenticated} />}
-        <PageTitle size="sm">Nice work!</PageTitle>
+        <PageTitle size="sm">Nice work! You earned a new NFT.</PageTitle>
         <PageSubTitle size={'md'}>
           Finish setting up your profile to unlock rewards, see your activities, and get
           personalized content.
