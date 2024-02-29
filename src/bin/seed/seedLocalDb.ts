@@ -245,7 +245,7 @@ async function seed() {
   /*
   userAction
   */
-  const userActionTypes = Object.values(ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN)
+  const userActionTypes = ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN
   const userActionTypesToPersist = times(seedSizes([400, 4000, 40000])).map(index => {
     return userActionTypes[index % userActionTypes.length]
   })

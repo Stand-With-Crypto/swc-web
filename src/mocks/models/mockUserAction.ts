@@ -9,9 +9,7 @@ import {
 } from '@/utils/shared/userActionCampaigns'
 
 export function mockCreateUserActionInput() {
-  const actionType = faker.helpers.arrayElement(
-    Object.values(ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN),
-  )
+  const actionType = faker.helpers.arrayElement(ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN)
   return {
     actionType,
     campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[actionType],
