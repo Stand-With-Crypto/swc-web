@@ -6,7 +6,7 @@ export const ETH_NFT_DONATION_AMOUNT = toBigNumber('0.00435')
 
 export const MINT_NFT_CONTRACT_ADDRESS =
   process.env.NEXT_PUBLIC_OVERRIDE_MINT_NFT_CONTRACT_ADDRESS ??
-  NFT_SLUG_BACKEND_METADATA[NFTSlug.SWC_SHIELD]
+  NFT_SLUG_BACKEND_METADATA[NFTSlug.SWC_SHIELD].contractAddress
 
 export enum UserActionFormNFTMintSectionNames {
   INTRO = 'intro',
