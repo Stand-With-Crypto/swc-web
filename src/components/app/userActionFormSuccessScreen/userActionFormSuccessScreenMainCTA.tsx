@@ -32,7 +32,7 @@ const NFTImage = ({ nft }: { nft: NFTClientMetadata }) => (
 const RedeemedNFTImage = ({ nft }: { nft: NFTClientMetadata }) => (
   <div>
     <NFTImage nft={nft} />
-    <p className="mt-2 font-bold">You've earned a new NFT</p>
+    <p className="mt-2 font-bold">You’ve earned a new NFT</p>
   </div>
 )
 
@@ -87,7 +87,7 @@ export function UserActionFormSuccessScreenMainCTA({
           <NFTImage nft={nftWhenAuthenticated} />
           <PageTitle size="sm">Nice work!</PageTitle>
           <PageSubTitle size={'md'}>
-            You've earned an NFT for completing this action. Join Stand With Crypto to claim your
+            You’ve earned an NFT for completing this action. Join Stand With Crypto to claim your
             NFT, see your activities, and get personalized content.
           </PageSubTitle>
           {loginButton}
@@ -134,8 +134,8 @@ export function UserActionFormSuccessScreenMainCTA({
               Nice work! Continue the fight - become a {'501(c)4'} member.
             </PageTitle>
             <PageSubTitle size={'md'}>
-              Become a member of our nonprofit. It's free to join and you'll receive exclusive
-              benefits that normal Stand With Crypto members won't get.
+              Become a member of our nonprofit. It’s free to join and you’ll receive exclusive
+              benefits that normal Stand With Crypto members won’t get.
             </PageSubTitle>
             <Button onClick={() => setHasOptedInToMembershipState('visible')} variant="secondary">
               Learn More
@@ -159,7 +159,7 @@ export function UserActionFormSuccessScreenMainCTA({
             </div>
             <PageTitle size="sm">You’re now a 501(c)4 member of Stand With Crypto.</PageTitle>
             <PageSubTitle size={'md'}>
-              You made history by joining the largest pro-crypto organization in the U.S. Don't stop
+              You made history by joining the largest pro-crypto organization in the U.S. Don’t stop
               here - continue the fight for crypto.
             </PageSubTitle>
           </Container>
@@ -184,8 +184,8 @@ export function UserActionFormSuccessScreenMainCTA({
       {nftWhenAuthenticated && <RedeemedNFTImage nft={nftWhenAuthenticated} />}
       <PageTitle size="sm">Nice work!</PageTitle>
       <PageSubTitle size={'md'}>
-        You’ve done your part to save crypto, but the fight isn’t over yet. We'll be in touch when
-        there's more actions to complete.
+        You’ve done your part to save crypto, but the fight isn’t over yet. We’ll be in touch when
+        there’s more actions to complete.
       </PageSubTitle>
       <Button onClick={() => onClose()} variant="secondary">
         Done
