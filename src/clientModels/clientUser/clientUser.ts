@@ -1,4 +1,10 @@
-import { Address, User, UserCryptoAddress, UserInformationVisibility } from '@prisma/client'
+import {
+  Address,
+  User,
+  UserCryptoAddress,
+  UserEmailAddress,
+  UserInformationVisibility,
+} from '@prisma/client'
 
 import {
   ClientUserCryptoAddress,
@@ -48,6 +54,17 @@ export const getClientUser = (record: GetClientProps): ClientUser => {
     id,
     informationVisibility,
     userLocationDetails,
+  })
+}
+
+export type ClientUnidentifiedUser = ClientModel<{
+  emailAddress: string | null
+}>
+export const getClientUnidentifiedUser = (
+  record: User & { primaryUserEmailAddress: UserEmailAddress | null },
+): ClientUnidentifiedUser => {
+  return getClientModel({
+    emailAddress: record.primaryUserEmailAddress?.emailAddress ?? null,
   })
 }
 
