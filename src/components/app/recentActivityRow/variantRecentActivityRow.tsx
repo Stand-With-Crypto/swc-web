@@ -3,6 +3,7 @@ import React from 'react'
 import { UserActionType } from '@prisma/client'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
+import { USER_ACTION_LIVE_EVENT_LOCATION } from '@/components/app/recentActivityRow/constants'
 import {
   RecentActivityRowBase,
   RecentActivityRowProps,
@@ -158,6 +159,14 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
             </UserActionFormVoterRegistrationDialog>
           ),
           children: <MainText>Voter registration confirmed {voterStateOrEmpty}</MainText>,
+        }
+      }
+      case UserActionType.LIVE_EVENT: {
+        return {
+          onFocusContent: () => null,
+          children: (
+            <MainText>{`Attended an in-person crypto event ${USER_ACTION_LIVE_EVENT_LOCATION[action.campaignName] ? `in ${USER_ACTION_LIVE_EVENT_LOCATION[action.campaignName]}` : ''}`}</MainText>
+          ),
         }
       }
     }

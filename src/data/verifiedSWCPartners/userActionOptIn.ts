@@ -33,6 +33,7 @@ import {
   VerifiedSWCPartnerApiResponse,
 } from '@/utils/server/verifiedSWCPartner/constants'
 import { getOrCreateSessionIdToSendBackToPartner } from '@/utils/server/verifiedSWCPartner/getOrCreateSessionIdToSendBackToPartner'
+import { getFormattedDescription } from '@/utils/shared/address'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
@@ -43,7 +44,7 @@ import { zodEmailAddress } from '@/validation/fields/zodEmailAddress'
 import { zodFirstName, zodLastName } from '@/validation/fields/zodName'
 import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
 
-const zodVerifiedSWCPartnersUserAddress = object({
+export const zodVerifiedSWCPartnersUserAddress = object({
   streetNumber: string(),
   route: string(),
   subpremise: string(),
@@ -116,7 +117,7 @@ export async function verifiedSWCPartnersUserActionOptIn(
   const localUser = getLocalUserFromUser(user)
   const analytics = getServerAnalytics({ userId: user.id, localUser })
   if (!existingAction?.user) {
-    await getServerPeopleAnalytics({ userId: user.id, localUser }).setOnce(
+    getServerPeopleAnalytics({ userId: user.id, localUser }).setOnce(
       mapPersistedLocalUserToAnalyticsProperties(localUser.persisted),
     )
   }
@@ -126,13 +127,14 @@ export async function verifiedSWCPartnersUserActionOptIn(
       extra: { emailAddress, isVerifiedEmailAddress },
       tags: { optInType, actionType },
     })
-    await analytics.trackUserActionCreatedIgnored({
+    analytics.trackUserActionCreatedIgnored({
       actionType,
       campaignName,
       creationMethod: 'Verified SWC Partner',
       reason: 'Already Exists',
       userState,
     })
+    await analytics.flush()
     return {
       result: VerifiedSWCPartnersUserActionOptInResult.EXISTING_ACTION,
       resultOptions: Object.values(VerifiedSWCPartnersUserActionOptInResult),
@@ -160,7 +162,7 @@ export async function verifiedSWCPartnersUserActionOptIn(
     },
   })
 
-  await analytics.trackUserActionCreated({
+  analytics.trackUserActionCreated({
     actionType,
     campaignName,
     creationMethod: 'Verified SWC Partner',
@@ -189,6 +191,7 @@ export async function verifiedSWCPartnersUserActionOptIn(
     data: payload,
   })
 
+  await analytics.flush()
   return {
     result: VerifiedSWCPartnersUserActionOptInResult.NEW_ACTION,
     resultOptions: Object.values(VerifiedSWCPartnersUserActionOptInResult),
@@ -219,7 +222,7 @@ async function maybeUpsertUser({
 
   let dbAddress: z.infer<typeof zodAddress> | undefined = undefined
   if (address) {
-    const formattedDescription = `${address.streetNumber} ${address.route}, ${address.subpremise}, ${address.locality} ${address.administrativeAreaLevel1}, ${address.postalCode} ${address.countryCode}`
+    const formattedDescription = getFormattedDescription(address)
     dbAddress = { ...address, formattedDescription: formattedDescription, googlePlaceId: undefined }
     try {
       dbAddress.googlePlaceId = await getGooglePlaceIdFromAddress(dbAddress.formattedDescription)

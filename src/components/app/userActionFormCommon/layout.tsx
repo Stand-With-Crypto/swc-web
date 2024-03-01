@@ -5,6 +5,7 @@ import { DtsiCongresspersonDisplay } from '@/components/app/dtsiCongresspersonDi
 import { dialogButtonStyles } from '@/components/ui/dialog/styles'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
+import { Skeleton } from '@/components/ui/skeleton'
 import { DTSIPeopleFromCongressionalDistrict } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { cn } from '@/utils/web/cn'
 
@@ -32,6 +33,20 @@ function Heading({ title, subtitle }: { title: string; subtitle: string }) {
   )
 }
 UserActionFormLayout.Heading = Heading
+
+function HeadingSkeleton({ title, subtitle }: { title: string; subtitle: string }) {
+  return (
+    <div className="space-y-2">
+      <Skeleton>
+        <PageTitle size="sm">{title}</PageTitle>
+      </Skeleton>
+      <Skeleton>
+        <PageSubTitle>{subtitle}</PageSubTitle>
+      </Skeleton>
+    </div>
+  )
+}
+UserActionFormLayout.HeadingSkeleton = HeadingSkeleton
 
 function Container({ children }: React.PropsWithChildren) {
   return (

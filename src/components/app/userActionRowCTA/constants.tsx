@@ -1,4 +1,5 @@
 'use client'
+
 import { UserActionType } from '@prisma/client'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
@@ -10,10 +11,11 @@ import { UserActionRowCTAProps } from '@/components/app/userActionRowCTA'
 import { InternalLink } from '@/components/ui/link'
 import { UserActionTweetLink } from '@/components/ui/userActionTweetLink'
 import { useLocale } from '@/hooks/useLocale'
+import { ActiveClientUserActionType } from '@/utils/shared/activeUserAction'
 import { getIntlUrls } from '@/utils/shared/urls'
 
 export const USER_ACTION_ROW_CTA_INFO: Record<
-  UserActionType,
+  ActiveClientUserActionType,
   Omit<UserActionRowCTAProps, 'state'>
 > = {
   [UserActionType.OPT_IN]: {

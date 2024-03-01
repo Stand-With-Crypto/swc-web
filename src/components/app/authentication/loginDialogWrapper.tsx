@@ -4,8 +4,9 @@ import React from 'react'
 import * as Sentry from '@sentry/nextjs'
 import { useENS } from '@thirdweb-dev/react'
 import { useRouter } from 'next/navigation'
-import { Arguments, useSWRConfig } from 'swr'
+import useSWR, { Arguments, useSWRConfig } from 'swr'
 
+import { ClientUnidentifiedUser } from '@/clientModels/clientUser/clientUser'
 import { ANALYTICS_NAME_LOGIN } from '@/components/app/authentication/constants'
 import { LazyUpdateUserProfileForm } from '@/components/app/updateUserProfileForm/lazyLoad'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
@@ -14,8 +15,10 @@ import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForU
 import { useDialog } from '@/hooks/useDialog'
 import { useSections } from '@/hooks/useSections'
 import { useThirdwebData } from '@/hooks/useThirdwebData'
+import { fetchReq } from '@/utils/shared/fetchReq'
 import { apiUrls } from '@/utils/shared/urls'
 import { appendENSHookDataToUser } from '@/utils/web/appendENSHookDataToUser'
+import { getUserSessionIdOnClient } from '@/utils/web/clientUserSessionId'
 
 import { ThirdwebLoginContent } from './thirdwebLoginContent'
 
@@ -166,6 +169,7 @@ export function UnauthenticatedSection({
 function LoginSection({ onLogin }: { onLogin: () => void | Promise<void> }) {
   const router = useRouter()
   const { mutate } = useSWRConfig()
+  const { data } = useInitialEmail()
 
   return (
     <ThirdwebLoginContent
@@ -188,7 +192,18 @@ function LoginSection({ onLogin }: { onLogin: () => void | Promise<void> }) {
           })
         },
       }}
+      initialEmailAddress={data?.user?.emailAddress}
     />
+  )
+}
+
+function useInitialEmail() {
+  const localSessionId = getUserSessionIdOnClient()
+  return useSWR(
+    localSessionId ? apiUrls.unidentifiedUser({ sessionId: localSessionId }) : null,
+    async url => {
+      return fetchReq(url).then(res => res.json() as Promise<{ user: ClientUnidentifiedUser }>)
+    },
   )
 }
 

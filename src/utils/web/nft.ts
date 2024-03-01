@@ -11,7 +11,7 @@ export const NFT_CLIENT_METADATA: Record<NFTSlug, NFTClientMetadata> = {
       url: '/nfts/membership-swc-shield.gif',
       width: 512,
       height: 512,
-      alt: 'SWC Shield',
+      alt: 'a rotating SWC shield with the text "STAND WITH CRYPTO" on the top-left and the text "MEMBER" on the bottom right',
     },
   },
   [NFTSlug.CALL_REPRESENTATIVE_SEPT_11]: {
@@ -20,7 +20,7 @@ export const NFT_CLIENT_METADATA: Record<NFTSlug, NFTClientMetadata> = {
       url: '/nfts/call.gif',
       width: 160,
       height: 160,
-      alt: 'A rotating phone with the text "I called congress" below it',
+      alt: 'a rotating phone with the text "I CALLED CONGRESS" below it',
     },
   },
   [NFTSlug.I_AM_A_VOTER]: {
@@ -29,7 +29,34 @@ export const NFT_CLIENT_METADATA: Record<NFTSlug, NFTClientMetadata> = {
       url: '/nfts/i-am-a-voter.jpg',
       width: 160,
       height: 160,
-      alt: 'circular image with a robotic woman with the text "I\'m a voter" on top of it',
+      alt: 'circular image with a robotic woman with the text "I\'M A VOTER" overlaid top of it',
+    },
+  },
+  [NFTSlug.STAND_WITH_CRYPTO_LEGACY]: {
+    name: 'Stand With Crypto Legacy',
+    image: {
+      url: '/nfts/swc-legacy.jpg',
+      width: 160,
+      height: 160,
+      alt: 'a square image of a QR code with a blue shield in the middle',
+    },
+  },
+  [NFTSlug.STAND_WITH_CRYPTO_SUPPORTER]: {
+    name: 'Stand With Crypto Supporter',
+    image: {
+      url: '/nfts/swc-supporter.gif',
+      width: 160,
+      height: 160,
+      alt: 'a square gif of the SWC shield that changes color over time',
+    },
+  },
+  [NFTSlug.LA_CRYPTO_EVENT_2024_03_04]: {
+    name: '2024-03-04 LA Crypto Event',
+    image: {
+      url: '/nfts/2024-03-04-la-crypto-event.jpg',
+      width: 160,
+      height: 160,
+      alt: 'a square image of the SWC shield with the california state shape inside of it',
     },
   },
 }

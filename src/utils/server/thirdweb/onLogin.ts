@@ -27,7 +27,11 @@ import { mergeUsers } from '@/utils/server/mergeUsers/mergeUsers'
 import { claimNFT } from '@/utils/server/nft/claimNFT'
 import { mintPastActions } from '@/utils/server/nft/mintPastActions'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
+import {
+  getServerAnalytics,
+  getServerPeopleAnalytics,
+  ServerAnalytics,
+} from '@/utils/server/serverAnalytics'
 import {
   mapLocalUserToUserDatabaseFields,
   parseLocalUserFromCookiesForPageRouter,
@@ -76,12 +80,19 @@ export async function onLogin(
       userCryptoAddresses: { some: { cryptoAddress, hasBeenVerifiedViaAuth: true } },
     },
   })
+
   if (existingVerifiedUser) {
     log('existing user found')
-    await getServerAnalytics({ userId: existingVerifiedUser.id, localUser }).track('User Logged In')
-    await getServerPeopleAnalytics({ userId: existingVerifiedUser.id, localUser }).set({
-      'Datetime of Last Login': new Date(),
-    })
+    await Promise.all([
+      getServerAnalytics({ userId: existingVerifiedUser.id, localUser })
+        .track('User Logged In')
+        .flush(),
+      getServerPeopleAnalytics({ userId: existingVerifiedUser.id, localUser })
+        .set({
+          'Datetime of Last Login': new Date(),
+        })
+        .flush(),
+    ])
     return { userId: existingVerifiedUser.id }
   }
   return onNewLogin({
@@ -263,20 +274,24 @@ export async function onNewLogin(props: NewLoginParams) {
       ),
     }))
 
+  const peopleAnalytics = getServerPeopleAnalytics({ userId: user.id, localUser })
+  const analytics = getServerAnalytics({ userId: user.id, localUser })
+  const beforeFinish = () => Promise.all([analytics.flush(), peopleAnalytics.flush()])
+
   // triggerPostLoginUserActionSteps logic
   const postLoginUserActionSteps = await triggerPostLoginUserActionSteps({
     user,
     userCryptoAddress,
     localUser,
     wasUserCreated,
+    analytics,
   })
+
   if (localUser) {
-    await getServerPeopleAnalytics({ userId: user.id, localUser }).setOnce(
-      mapPersistedLocalUserToAnalyticsProperties(localUser.persisted),
-    )
+    peopleAnalytics.setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
   }
 
-  await getServerAnalytics({ userId: user.id, localUser }).track('User Logged In', {
+  analytics.track('User Logged In', {
     'Is First Time': true,
     'Existing Users Found Ids': existingUsersWithSource.map(x => x.user.id),
     'Existing Users Found Sources': existingUsersWithSource.map(x => x.sourceOfExistingUser),
@@ -295,10 +310,11 @@ export async function onNewLogin(props: NewLoginParams) {
     'Had Opt In User Action': postLoginUserActionSteps.hadOptInUserAction,
     'Count Past Actions Minted': postLoginUserActionSteps.pastActionsMinted.length,
   })
-  await getServerPeopleAnalytics({ userId: user.id, localUser }).set({
+  peopleAnalytics.set({
     'Datetime of Last Login': new Date(),
   })
 
+  await beforeFinish()
   return {
     userId: user.id,
     user,
@@ -610,11 +626,13 @@ async function triggerPostLoginUserActionSteps({
   userCryptoAddress,
   localUser,
   wasUserCreated,
+  analytics,
 }: {
   wasUserCreated: boolean
   user: UpsertedUser
   userCryptoAddress: UserCryptoAddress
   localUser: ServerLocalUser | null
+  analytics: ServerAnalytics
 }) {
   const log = getLog(userCryptoAddress.cryptoAddress)
   /**
@@ -647,7 +665,7 @@ async function triggerPostLoginUserActionSteps({
     })
     log(`triggerPostLoginUserActionSteps: opt in user action created`)
     await claimNFT(optInUserAction, userCryptoAddress)
-    await getServerAnalytics({ userId: user.id, localUser }).trackUserActionCreated({
+    analytics.trackUserActionCreated({
       actionType: UserActionType.OPT_IN,
       campaignName: UserActionOptInCampaignName.DEFAULT,
       creationMethod: 'On Site',

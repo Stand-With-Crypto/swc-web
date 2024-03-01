@@ -14,6 +14,7 @@ import { keyBy } from 'lodash-es'
 import { ClientNFTMint, getClientNFTMint } from '@/clientModels/clientNFTMint'
 import { ClientModel, getClientModel } from '@/clientModels/utils'
 import { DTSIPersonForUserActions } from '@/data/dtsi/queries/queryDTSIPeopleBySlugForUserActions'
+import { UserActionLiveEventCampaignName } from '@/utils/shared/userActionCampaigns'
 
 /*
 Assumption: we will always want to interact with the user actions and their related type joins together
@@ -61,6 +62,10 @@ type ClientUserActionTweet = { actionType: typeof UserActionType.TWEET }
 type ClientUserActionVoterRegistration = Pick<UserActionVoterRegistration, 'usaState'> & {
   actionType: typeof UserActionType.VOTER_REGISTRATION
 }
+type ClientUserActionLiveEvent = {
+  actionType: typeof UserActionType.LIVE_EVENT
+  campaignName: UserActionLiveEventCampaignName
+}
 
 /*
 At the database schema level we can't enforce that a single action only has one "type" FK, but at the client level we can and should
@@ -77,6 +82,7 @@ export type ClientUserAction = ClientModel<
       | ClientUserActionDonation
       | ClientUserActionNFTMint
       | ClientUserActionVoterRegistration
+      | ClientUserActionLiveEvent
     )
 >
 
@@ -165,6 +171,10 @@ export const getClientUserAction = ({
       const { usaState } = getRelatedModel(record, 'userActionVoterRegistration')
       const voterRegistrationFields: ClientUserActionVoterRegistration = { usaState, actionType }
       return getClientModel({ ...sharedProps, ...voterRegistrationFields })
+    }
+    case UserActionType.LIVE_EVENT: {
+      const campaignName = record.campaignName as UserActionLiveEventCampaignName
+      return getClientModel({ ...sharedProps, actionType, campaignName })
     }
   }
   throw new Error(`getClientUserAction: no user action fk found for id ${id}`)

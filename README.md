@@ -1,5 +1,7 @@
 # Stand With Crypto
 
+**NOTE**: the team is [actively working torwards](https://github.com/Stand-With-Crypto/swc-web/milestone/3) getting the repo in a state where anyone can run the app locally without requiring specific permissions.
+
 ## Local Development
 
 ### Knowledge pre-requisites
@@ -82,3 +84,7 @@ Before proceeding with anything, **PLEASE** take time to review the [Knowledge p
 - Watch [this YouTube video](https://www.youtube.com/watch?v=CQuTF-bkOgc) for a great overview of the tradeoffs between the UI library/framework options that exist for frontend development, and why we decided to use TailwindCSS + Radix UI as our template
 - Read Vercel's guide on ["Connection Pooling with Serverless Functions"](https://vercel.com/guides/connection-pooling-with-serverless-functions#modern-databases-with-high-connection-limits) to learn about the architecture tradeoffs of connecting to SQL database in serverless environments, and why we decided to leverage the robust scalability architecture inherent in [PlanetScale](https://planetscale.com/features)
 - Read the [Inngest docs](https://www.inngest.com/docs/quick-start) to learn more about how to leverage the tool to build resilient workflows
+
+## Licenses
+
+Software source code, documentation source, and configuration files are licensed under Apache 2.0. Non-code documentation is licensed under CC-BY-4.0.

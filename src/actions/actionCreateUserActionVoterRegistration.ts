@@ -13,7 +13,11 @@ import {
 import { claimNFT } from '@/utils/server/nft/claimNFT'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
-import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
+import {
+  getServerAnalytics,
+  getServerPeopleAnalytics,
+  ServerPeopleAnalytics,
+} from '@/utils/server/serverAnalytics'
 import {
   mapLocalUserToUserDatabaseFields,
   parseLocalUserFromCookies,
@@ -72,25 +76,31 @@ async function _actionCreateUserActionVoterRegistration(input: CreateActionVoter
   if (!userMatch.user) {
     await triggerRateLimiterAtMostOnce()
   }
-  const user = userMatch.user || (await createUser({ localUser, sessionId }))
+  const { user, peopleAnalytics } = userMatch.user
+    ? {
+        user: userMatch.user,
+        peopleAnalytics: getServerPeopleAnalytics({
+          localUser,
+          userId: userMatch.user.id,
+        }),
+      }
+    : await createUser({ localUser, sessionId })
 
-  const peopleAnalytics = getServerPeopleAnalytics({
-    localUser,
-    userId: user.id,
-  })
   const analytics = getServerAnalytics({
     userId: user.id,
     localUser,
   })
+  const beforeFinish = () => Promise.all([analytics.flush(), peopleAnalytics.flush()])
 
   const recentUserAction = await getRecentUserActionByUserId(user.id, validatedInput)
   if (recentUserAction) {
-    await logSpamActionSubmissions({
+    logSpamActionSubmissions({
       validatedInput,
       userAction: recentUserAction,
       userId: user.id,
       sharedDependencies: { analytics },
     })
+    await beforeFinish()
     return { user: getClientUser(user) }
   }
 
@@ -107,6 +117,7 @@ async function _actionCreateUserActionVoterRegistration(input: CreateActionVoter
     await claimNFT(userAction, user.primaryUserCryptoAddress)
   }
 
+  await beforeFinish()
   return { user: getClientUser(user) }
 }
 
@@ -129,13 +140,15 @@ async function createUser(sharedDependencies: Pick<SharedDependencies, 'localUse
   })
   logger.info('created user')
 
+  const peopleAnalytics: ServerPeopleAnalytics = getServerPeopleAnalytics({
+    localUser,
+    userId: createdUser.id,
+  })
   if (localUser?.persisted) {
-    await getServerPeopleAnalytics({ localUser, userId: createdUser.id }).setOnce(
-      mapPersistedLocalUserToAnalyticsProperties(localUser.persisted),
-    )
+    peopleAnalytics.setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
   }
 
-  return createdUser
+  return { user: createdUser, peopleAnalytics }
 }
 
 async function getRecentUserActionByUserId(
@@ -151,7 +164,7 @@ async function getRecentUserActionByUserId(
   })
 }
 
-async function logSpamActionSubmissions({
+function logSpamActionSubmissions({
   validatedInput,
   userAction,
   userId,
@@ -162,7 +175,7 @@ async function logSpamActionSubmissions({
   userId: User['id']
   sharedDependencies: Pick<SharedDependencies, 'analytics'>
 }) {
-  await sharedDependencies.analytics.trackUserActionCreatedIgnored({
+  sharedDependencies.analytics.trackUserActionCreatedIgnored({
     actionType: UserActionType.VOTER_REGISTRATION,
     campaignName: validatedInput.data.campaignName,
     reason: 'Too Many Recent',
@@ -214,7 +227,7 @@ async function createAction<U extends User>({
 
   logger.info('created user action')
 
-  await sharedDependencies.analytics.trackUserActionCreated({
+  sharedDependencies.analytics.trackUserActionCreated({
     actionType: UserActionType.VOTER_REGISTRATION,
     campaignName: validatedInput.campaignName,
     usaState: validatedInput.usaState,
@@ -222,7 +235,7 @@ async function createAction<U extends User>({
   })
 
   if (validatedInput.usaState) {
-    await sharedDependencies.peopleAnalytics.set({
+    sharedDependencies.peopleAnalytics.set({
       usaState: validatedInput.usaState,
     })
   }

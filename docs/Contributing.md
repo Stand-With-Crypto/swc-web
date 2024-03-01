@@ -6,11 +6,11 @@ To ensure we continue to ship maintainable, performant, and bug-free code, all n
 
 Generally, you'll want to request a code review once your branch is feature-complete and has passed all CI checks. If the feature you're working on has architectural complexity, and if you would like feedback before finishing the work, then you can also request a review sooner to get additional guidance.
 
-If you're working on a change that is time sensitive (_e.g._ production is down) and/or you have a very high degree of confidence in what your shipping (_e.g._ there's a misspelled word, or you're adding logs), core contributors can merge without review. _However, this should be an exception, not the norm_.
+If you're working on a change that is time sensitive (_e.g._ production is down) and/or you have a very high degree of confidence in what you're shipping (_e.g._ there's a misspelled word, or you're adding logs), core contributors can merge without review. _However, this should be an exception, not the norm_.
 
 ## Who do I request a review from?
 
-You'll generally want to try to solicit a review from whoever has the most context about the domain your working on. If you're unsure who has the most context, you can check the Git history or ask one of the core contributors for assistance. You can include others on the PR as "assignees" to solicit additional feedback and encourage others working on the codebase to learn by reviewing your code.
+You'll generally want to try to solicit a review from whoever has the most context about the domain you're working on. If you're unsure who has the most context, you can check the Git history or ask one of the core contributors for assistance. You can include others on the PR as "assignees" to solicit additional feedback and encourage others working on the codebase to learn by reviewing your code.
 
 If you've been requested as a reviewer, but you don't think you have sufficient context or you think there's someone else on the team that would provide more value, feel free to reassign to someone else with an explanation.
 
@@ -21,7 +21,7 @@ Outside the obvious bits (you need to include the actual code changes), the main
 - If the PR is related to a GitHub issue, make sure you reference that issue in the PR.
 - If there are specific sections you have concerns about, include commentary describing the things you'd like the reviewers to consider.
 - If there are areas that don't need review (large whitespace diffs, file structure refactors), feel free to call that out as well to guide the reviewer.
-  - HINT: if you're code involves a bunch of cosmetic refactors (renames, pulling code in to new files, folder structure updates), you might want to merge a separate PR that does all those changes first, so that it's clear what logic changes you made in the actual final PR.
+  - HINT: if your code involves a bunch of cosmetic refactors (renames, pulling code in to new files, folder structure updates), you might want to merge a separate PR that does all those changes first, so that it's clear what logic changes you made in the actual final PR.
 
 ## I've been assigned code to review - what now?
 

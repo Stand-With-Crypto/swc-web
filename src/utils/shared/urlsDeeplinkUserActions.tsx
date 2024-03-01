@@ -1,11 +1,12 @@
 import { UserActionType } from '@prisma/client'
 
 import { SupportedLocale } from '@/intl/locales'
+import { ActiveClientUserActionType } from '@/utils/shared/activeUserAction'
 import { getIntlPrefix } from '@/utils/shared/urls'
 
 export const USER_ACTION_DEEPLINK_MAP: Omit<
   {
-    [key in UserActionType]: {
+    [key in ActiveClientUserActionType]: {
       getDeeplinkUrl: (config: { locale: SupportedLocale }) => string
     }
   },
@@ -36,7 +37,7 @@ export const USER_ACTION_DEEPLINK_MAP: Omit<
       return `${getIntlPrefix(locale)}/action/nft-mint`
     },
   },
-  VOTER_REGISTRATION: {
+  [UserActionType.VOTER_REGISTRATION]: {
     getDeeplinkUrl: ({ locale }) => {
       return `${getIntlPrefix(locale)}/action/voter-registration`
     },

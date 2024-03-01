@@ -1,5 +1,6 @@
 'use client'
 import { useMemo } from 'react'
+import { filterFns } from '@tanstack/react-table'
 import useSWR from 'swr'
 
 import { getDTSIClientPersonDataTableColumns } from '@/components/app/dtsiClientPersonDataTable/columns'
@@ -12,6 +13,7 @@ import { queryDTSIAllPeople } from '@/data/dtsi/queries/queryDTSIAllPeople'
 import { useLocale } from '@/hooks/useLocale'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { apiUrls } from '@/utils/shared/urls'
+import { getUSStateNameFromStateCode } from '@/utils/shared/usStateUtils'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
 
 /*
@@ -38,10 +40,30 @@ export function DTSIClientPersonDataTable({
   const passedData = useMemo(() => {
     return sortDTSIPersonDataTable(data?.people || initialData)
   }, [data?.people, initialData])
+
+  const parseString = (str: string) => str.toLowerCase().trim()
   return (
     <DataTable
       columns={memoizedColumns}
       data={passedData}
+      globalFilterFn={(row, _, filterValue, addMeta) => {
+        const matchesFullName = filterFns.includesString(row, 'fullName', filterValue, addMeta)
+        if (matchesFullName) {
+          return true
+        }
+
+        const state = row.original.primaryRole?.primaryState ?? ''
+        if (!state) {
+          return false
+        }
+
+        const parsedState = parseString(state)
+        const parsedFilterValue = parseString(filterValue)
+        return (
+          parsedState.includes(parsedFilterValue) ||
+          getUSStateNameFromStateCode(state)?.toLowerCase().includes(parsedFilterValue)
+        )
+      }}
       key={data?.people ? 'loaded' : 'static'}
       loadState={data?.people ? 'loaded' : 'static'}
     />
