@@ -1,5 +1,5 @@
 /*
-Some APIs we work with will return only return english characters. This function normalizes a string to only contain english characters so we can do comparisons
+Some APIs we work with will only return english characters. This function normalizes a string to only contain english characters so we can do comparisons
 */
 
 export function convertToOnlyEnglishCharacters(word: string) {
