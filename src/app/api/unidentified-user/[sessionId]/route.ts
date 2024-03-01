@@ -26,7 +26,9 @@ export async function GET(_: Request, { params }: RequestContext) {
   })
 
   if (!user) {
-    return { user: null }
+    return NextResponse.json({
+      user: null,
+    })
   }
 
   return NextResponse.json({
