@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react'
+import { UserActionType } from '@prisma/client'
 import { Check } from 'lucide-react'
 
 import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
@@ -74,13 +75,10 @@ export function UserActionFormSuccessScreenMainCTA({
     )
   }
   const { user, performedUserActionTypes } = data
-  if (!user) {
-    const loginButton = (
-      <LoginDialogWrapper>
-        <Button variant="secondary">Join Stand With Crypto</Button>
-      </LoginDialogWrapper>
-    )
-
+  const hasOptedInToMembership = performedUserActionTypes.find(
+    action => action === UserActionType.OPT_IN,
+  )
+  if (!user || !hasOptedInToMembership) {
     if (nftWhenAuthenticated) {
       return (
         <Container>
@@ -90,7 +88,9 @@ export function UserActionFormSuccessScreenMainCTA({
             You've earned an NFT for completing this action. Join Stand With Crypto to claim your
             NFT, see your activities, and get personalized content.
           </PageSubTitle>
-          {loginButton}
+          <LoginDialogWrapper>
+            <Button variant="secondary">Join To Claim NFT</Button>
+          </LoginDialogWrapper>
         </Container>
       )
     }
@@ -101,7 +101,9 @@ export function UserActionFormSuccessScreenMainCTA({
           Join Stand With Crypto to claim exclusive NFTs, see your activity, and get personalized
           content.
         </PageSubTitle>
-        {loginButton}
+        <LoginDialogWrapper>
+          <Button variant="secondary">Join Stand With Crypto</Button>
+        </LoginDialogWrapper>
       </Container>
     )
   }
