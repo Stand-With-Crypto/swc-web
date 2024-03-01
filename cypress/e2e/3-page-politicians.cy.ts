@@ -19,6 +19,8 @@ it('page - politicians interactions', () => {
   cy.get('input[placeholder=""Search by name or state"]').clear()
   cy.get('tbody').find('tr').should('have.length', 100)
 
+  // TODO filter table by state
+
   // enter your address and see your rep
   cy.selectFromComboBox({
     trigger: cy.get('input[placeholder="Enter your address"]'),
