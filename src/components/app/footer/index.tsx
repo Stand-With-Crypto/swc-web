@@ -16,9 +16,9 @@ export async function Footer({ locale }: { locale: SupportedLocale }) {
   const urls = getIntlUrls(locale)
 
   return (
-    <footer className="my-10 border-t py-10">
+    <footer className="mb-10 mt-36 border-t py-10">
       <div className="container">
-        <div className="grids-col-1 mb-10 grid gap-4 sm:grid-cols-3">
+        <div className="grids-col-1 mb-10 grid gap-3 sm:grid-cols-3 sm:gap-4">
           <div className="space-y-3 sm:space-y-9">
             <InternalLink className={footerLinkStyles} href={urls.termsOfService()}>
               {intl.formatMessage({
@@ -45,6 +45,9 @@ export async function Footer({ locale }: { locale: SupportedLocale }) {
               className={cn(footerLinkStyles, 'h-auto p-0 text-base')}
               variant={'link'}
             />
+            <InternalLink className={footerLinkStyles} href={urls.contribute()}>
+              Contribute
+            </InternalLink>
           </div>
           <div className="space-y-3 sm:space-y-9">
             <ExternalLink className={footerLinkStyles} href={externalUrls.twitter()}>

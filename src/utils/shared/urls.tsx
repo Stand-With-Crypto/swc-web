@@ -23,6 +23,7 @@ export const getIntlUrls = (
     privacyPolicy: () => `${localePrefix}/privacy`,
     about: () => `${localePrefix}/about`,
     resources: () => `${localePrefix}/resources`,
+    contribute: () => `${localePrefix}/contribute`,
     donate: () => `${localePrefix}/donate`,
     leaderboard: (params?: { pageNum?: number; tab: RecentActivityAndLeaderboardTabs }) => {
       const tabPrefix =
@@ -98,4 +99,5 @@ export const apiUrls = {
   dtsiAllPeople: () => `/api/public/dtsi/all-people`,
   recentActivity: ({ limit }: { limit: number }) => `/api/public/recent-activity/${limit}`,
   homepageTopLevelMetrics: () => `/api/public/homepage/top-level-metrics`,
+  unidentifiedUser: ({ sessionId }: { sessionId: string }) => `/api/unidentified-user/${sessionId}`,
 }
