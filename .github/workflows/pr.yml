@@ -9,7 +9,7 @@ jobs:
   build:
     if: github.event.pull_request.draft == false
     runs-on: ubuntu-latest
-
+    name: Lint, tests, typechecking
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -28,11 +28,8 @@ jobs:
       - name: Generate Prisma client
         run: npx prisma generate
 
-      - name: Extract messages
-        run: npm run intl:extract
-
-      - name: Compile messages
-        run: npm run intl:compile
+      - name: Extract intl messages
+        run: npm run intl:extract-compile
 
       - name: Run codegen
         run: npm run codegen
@@ -41,6 +38,7 @@ jobs:
         run: npm run lint
 
       - name: Test
-        run: |
-          NODE_ENV=test
-          npm run test
+        run: NODE_ENV=test npm run test
+
+      - name: Typecheck
+        run: npm run typecheck
