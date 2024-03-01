@@ -69,6 +69,7 @@ export function ClaimNft({ isLoggedIn, slug, goToSection }: Props) {
         <div className="flex h-full  flex-col items-center justify-center gap-4">
           <NextImage
             alt={nftImageMetadata.alt}
+            className="rounded-lg"
             height={nftImageMetadata.height}
             src={nftImageMetadata.url}
             width={nftImageMetadata.width}
