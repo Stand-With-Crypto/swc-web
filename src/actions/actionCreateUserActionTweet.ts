@@ -68,8 +68,10 @@ async function _actionCreateUserActionTweet() {
   })
   const analytics = getServerAnalytics({ userId: user.id, localUser })
   const peopleAnalytics = getServerPeopleAnalytics({ userId: user.id, localUser })
+  const beforeFinish = () => Promise.all([analytics.flush(), peopleAnalytics.flush()])
+
   if (localUser) {
-    await peopleAnalytics.setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
+    peopleAnalytics.setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
   }
   logger.info('fetched/created user')
   const campaignName = UserActionTweetCampaignName.DEFAULT
@@ -83,7 +85,7 @@ async function _actionCreateUserActionTweet() {
   })
 
   if (userAction) {
-    await analytics.trackUserActionCreatedIgnored({
+    analytics.trackUserActionCreatedIgnored({
       actionType,
       campaignName,
       reason: 'Too Many Recent',
@@ -94,6 +96,7 @@ async function _actionCreateUserActionTweet() {
       `duplicate ${actionType} user action for campaign ${campaignName} submitted`,
       { extra: { userAction }, user: { id: user.id } },
     )
+    await beforeFinish()
     return { user: getClientUser(user) }
   }
 
@@ -111,13 +114,14 @@ async function _actionCreateUserActionTweet() {
         : { userSession: { connect: { id: sessionId } } }),
     },
   })
-  await analytics.trackUserActionCreated({
+  analytics.trackUserActionCreated({
     actionType,
     campaignName,
     creationMethod: 'On Site',
     userState,
   })
 
+  await beforeFinish()
   logger.info('created action')
   return { user: getClientUser(user) }
 }

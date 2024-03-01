@@ -97,6 +97,7 @@ async function _actionCreateUserActionMintNFT(input: CreateActionMintNFTInput) {
     sharedDependencies: { sessionId, analytics },
   })
 
+  await analytics.flush()
   return { user: getClientUser(user) }
 }
 
@@ -140,7 +141,7 @@ async function createAction<U extends User>({
 
   logger.info('created user action')
 
-  await sharedDependencies.analytics.trackUserActionCreated({
+  sharedDependencies.analytics.trackUserActionCreated({
     actionType: UserActionType.NFT_MINT,
     campaignName: validatedInput.campaignName,
     userState: 'Existing',

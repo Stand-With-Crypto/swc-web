@@ -32,12 +32,13 @@ export async function POST(request: NextRequest) {
     })
   }
 
+  const analytics = getServerAnalytics({
+    localUser: null,
+    userId: body.event.data.metadata.userId,
+  })
   try {
     const pricingValues = extractPricingValues(body)
-    await getServerAnalytics({
-      localUser: null,
-      userId: body.event.data.metadata.userId,
-    }).track('Coinbase Commerce Payment', {
+    analytics.track('Coinbase Commerce Payment', {
       paymentExpire: body.event.data.expires_at,
       paymentId: body.id,
       paymentPrice: `${pricingValues.amountUsd} ${SupportedFiatCurrencyCodes.USD}`,
@@ -55,6 +56,8 @@ export async function POST(request: NextRequest) {
       extra: { body },
     })
     return new NextResponse('internal error', { status: 500 })
+  } finally {
+    await analytics.flush()
   }
   return new NextResponse('success', { status: 200 })
 }
