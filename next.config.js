@@ -232,8 +232,8 @@ const nextConfig = {
       {
         source: '/la',
         destination:
-          '/action/live-event/2024-03-04-LA?utm_source=coinbase&utm_medium=live-event&utm_campaign=2024-03-04-LA',
-        permanent: true,
+          '/action/live-event/2024_03_04_LA?utm_source=coinbase&utm_medium=live-event&utm_campaign=2024-03-04-LA',
+        permanent: false,
       },
     ]
   },
