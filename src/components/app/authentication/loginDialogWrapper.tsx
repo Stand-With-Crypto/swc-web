@@ -203,7 +203,7 @@ function useInitialEmail() {
     localSessionId ? apiUrls.unidentifiedUser({ sessionId: localSessionId }) : null,
     async url => {
       return fetchReq(url)
-        .then(res => res.json() as Promise<{ user: ClientUnidentifiedUser }>)
+        .then(res => res.json() as Promise<{ user: ClientUnidentifiedUser | null }>)
         .catch(err => {
           Sentry.captureException(err, {
             tags: { domain: 'useInitialEmail' },
