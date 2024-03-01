@@ -13,8 +13,8 @@ export async function generateOgImage({ params }: { params: { dtsiSlug: string }
   const shieldData = await fetch(new URL('./images/shield.png', import.meta.url)).then(res =>
     res.arrayBuffer(),
   )
-  const placeholderData = await fetch(new URL('./images/placeholder.png', import.meta.url)).then(
-    res => res.arrayBuffer(),
+  const placeholderData = await fetch(new URL('./images/profile.png', import.meta.url)).then(res =>
+    res.arrayBuffer(),
   )
   if (!person) {
     return new ImageResponse(
@@ -114,22 +114,33 @@ export async function generateOgImage({ params }: { params: { dtsiSlug: string }
               />
             </div>
           ) : (
-            <div
-              style={{
-                display: 'flex',
-              }}
-            >
-              <img
-                alt={dtsiPersonFullName(person)}
-                src={placeholderData as any}
+            <div tw="flex">
+              <div
                 style={{
+                  display: 'flex',
                   borderRadius: '50%',
+                  backgroundColor: 'white',
                   overflow: 'hidden',
                   objectFit: 'cover',
                   width: '200px',
                   height: '200px',
+                  justifyContent: 'center',
+                  alignItems: 'center',
                 }}
-              />
+              >
+                <img
+                  alt={dtsiPersonFullName(person)}
+                  src={placeholderData as any}
+                  style={{
+                    borderRadius: '50%',
+                    backgroundColor: 'white',
+                    overflow: 'hidden',
+                    objectFit: 'cover',
+                    width: '100px',
+                    height: '100px',
+                  }}
+                />
+              </div>
               <img
                 alt="politician stance on crypto"
                 src={letterImage as any}
