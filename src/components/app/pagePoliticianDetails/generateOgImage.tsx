@@ -1,12 +1,14 @@
+/* eslint-disable @next/next/no-img-element */
+// the above eslint rule is disabled because the img elements are required for the og image to work
 import { ImageResponse } from 'next/og'
 
 import { getData } from '@/app/[locale]/politicians/person/[dtsiSlug]/getData'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
-import { OPEN_GRAPH_IMAGE_DIMENSIONS } from '@/utils/server/generateOpenGraphImageUrl'
 import {
   convertDTSIStanceScoreToCryptoSupportLanguageSentence,
   convertDTSIStanceScoreToLetterGrade,
 } from '@/utils/dtsi/dtsiStanceScoreUtils'
+import { OPEN_GRAPH_IMAGE_DIMENSIONS } from '@/utils/server/generateOpenGraphImageUrl'
 
 export async function generateOgImage({ params }: { params: { dtsiSlug: string } }) {
   const person = await getData(params.dtsiSlug)
@@ -78,6 +80,7 @@ export async function generateOgImage({ params }: { params: { dtsiSlug: string }
       >
         <div tw="flex p-8 w-full flex-col justify-between items-center">
           <img
+            alt="stand with crypto shield logo"
             src={shieldData as any}
             style={{ position: 'absolute', top: 0, right: 0 }}
             width="48px"
