@@ -58,7 +58,7 @@ export function NFTDisplay({ userActions }: NFTDisplayProps) {
   console.log(emptySpots)
   return (
     <>
-      <div className="flex w-full flex-col flex-wrap items-center gap-4 sm:justify-center  lg:h-full lg:flex-row xl:justify-between">
+      <div className="flex w-full flex-col flex-wrap items-center gap-4 sm:justify-center  md:flex-row lg:h-full xl:justify-between">
         {userNfts.map(nft => {
           const { name, image } = nft
           return (
