@@ -72,6 +72,8 @@ type SensitiveDataClientUserActionVoterRegistration = Pick<
   actionType: typeof UserActionType.VOTER_REGISTRATION
 }
 
+type SensitiveDataClientUserActionLiveEvent = { actionType: typeof UserActionType.LIVE_EVENT }
+
 /*
 At the database schema level we can't enforce that a single action only has one "type" FK, but at the client level we can and should
 */
@@ -87,6 +89,7 @@ export type SensitiveDataClientUserAction = ClientModel<
       | SensitiveDataClientUserActionDonation
       | SensitiveDataClientUserActionNFTMint
       | SensitiveDataClientUserActionVoterRegistration
+      | SensitiveDataClientUserActionLiveEvent
     )
 >
 
@@ -179,6 +182,9 @@ export const getSensitiveDataClientUserAction = ({
         actionType,
       }
       return getClientModel({ ...sharedProps, ...voterRegistrationFields })
+    }
+    case UserActionType.LIVE_EVENT: {
+      return getClientModel({ ...sharedProps, actionType })
     }
   }
 

@@ -22,6 +22,8 @@ import { getSensitiveDataUserDisplayName } from '@/utils/web/userUtils'
 
 import { UserReferralUrl } from './userReferralUrl'
 
+const EXCLUDE_USER_ACTION_TYPES = [UserActionType.LIVE_EVENT]
+
 export function PageUserProfile({
   params,
   user,
@@ -40,7 +42,14 @@ export function PageUserProfile({
   }
   const { userActions } = user
   const performedUserActionTypes = uniq(userActions.map(x => x.actionType))
-  const excludeUserActionTypes = user.hasEmbeddedWallet ? [UserActionType.NFT_MINT] : []
+  const excludeUserActionTypes = user.hasEmbeddedWallet
+    ? [UserActionType.NFT_MINT, ...EXCLUDE_USER_ACTION_TYPES]
+    : EXCLUDE_USER_ACTION_TYPES
+  const numActionsCompleted = performedUserActionTypes.filter(
+    action => !excludeUserActionTypes.includes(action),
+  ).length
+  const numActionsAvailable = Object.values(UserActionType).length - excludeUserActionTypes.length
+
   return (
     <div className="container space-y-10 lg:space-y-16">
       {/* LATER-TASK enable this feature */}
@@ -130,14 +139,10 @@ export function PageUserProfile({
           Your advocacy progress
         </PageTitle>
         <PageSubTitle className="mb-5">
-          You've completed {performedUserActionTypes.length} out of{' '}
-          {Object.values(UserActionType).length - excludeUserActionTypes.length} actions. Keep
-          going!
+          You've completed {numActionsCompleted} out of {numActionsAvailable} actions. Keep going!
         </PageSubTitle>
         <div className="mx-auto mb-10 max-w-xl">
-          <Progress
-            value={(performedUserActionTypes.length / Object.values(UserActionType).length) * 100}
-          />
+          <Progress value={(numActionsCompleted / numActionsAvailable) * 100} />
         </div>
         <UserActionRowCTAsList
           excludeUserActionTypes={excludeUserActionTypes}
