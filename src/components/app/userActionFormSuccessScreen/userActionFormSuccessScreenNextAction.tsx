@@ -1,4 +1,5 @@
 'use client'
+import { UserActionType } from '@prisma/client'
 import { useRouter } from 'next/navigation'
 
 import { GetUserPerformedUserActionTypesResponse } from '@/app/api/identified-user/performed-user-action-types/route'
