@@ -23,6 +23,7 @@ import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddl
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
+import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { UserActionLiveEventCampaignName } from '@/utils/shared/userActionCampaigns'
 
 const logger = getLogger(`actionCreateUserActionLiveEvent`)
@@ -67,16 +68,18 @@ async function _actionCreateUserActionLiveEvent(input: CreateActionLiveEventInpu
     }
   }
 
-  const currentTime = Date.now()
-  const eventDuration = EVENT_DURATION[validatedInput.data.campaignName]
-  if (
-    currentTime < eventDuration.START_TIME.getTime() ||
-    currentTime > eventDuration.END_TIME.getTime()
-  ) {
-    return {
-      errors: {
-        campaignName: ['The campaign is not active'],
-      },
+  if (NEXT_PUBLIC_ENVIRONMENT === 'production') {
+    const currentTime = Date.now()
+    const eventDuration = EVENT_DURATION[validatedInput.data.campaignName]
+    if (
+      currentTime < eventDuration.START_TIME.getTime() ||
+      currentTime > eventDuration.END_TIME.getTime()
+    ) {
+      return {
+        errors: {
+          campaignName: ['The campaign is not active'],
+        },
+      }
     }
   }
 
