@@ -16,8 +16,8 @@ done < "$users_file"
 
 if $author_found; then
   echo "Author $author found in $users_file"
-  exit 0
+  exit 1
 else
   echo "Author $author not found in $users_file"
-  exit 1 
+  exit 0 
 fi
