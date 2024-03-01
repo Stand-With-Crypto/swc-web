@@ -16,7 +16,7 @@ export function PageContribute() {
       </section>
       {[
         {
-          imageSrc: '/pagesContent/contribute/promote.png',
+          imageSrc: '/pagesContent/contribute/promote.svg',
           title: 'Promote Stand With Crypto on your website, app, or dApp',
           subtitle: (
             <>
@@ -46,7 +46,7 @@ export function PageContribute() {
           ),
         },
         {
-          imageSrc: '/pagesContent/contribute/code.png',
+          imageSrc: '/pagesContent/contribute/code.svg',
           title: 'Contribute to our open source repo',
           subtitle: (
             <>
@@ -64,13 +64,13 @@ export function PageContribute() {
           ),
         },
         {
-          imageSrc: '/pagesContent/contribute/stances.png',
+          imageSrc: '/pagesContent/contribute/stances.svg',
           title: 'Contribute to our politician scoring system',
           subtitle: (
             <>
               Help us build a transparent politician scoring system by submitting public statements
               or tweets that a politician has made about crypto to{' '}
-              <ExternalLink href={'https://www.dotheysupportit.com'}>
+              <ExternalLink href={'https://www.dotheysupportit.com/faq'}>
                 DoTheySupportIt.com
               </ExternalLink>
               .
@@ -78,7 +78,9 @@ export function PageContribute() {
           ),
           content: (
             <Button asChild size="lg">
-              <ExternalLink href={'https://dotheysupportit.com'}>Add a position</ExternalLink>
+              <ExternalLink href={'https://www.dotheysupportit.com/faq'}>
+                Add a position
+              </ExternalLink>
             </Button>
           ),
         },
