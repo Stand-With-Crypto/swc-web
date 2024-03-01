@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 'use client'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
@@ -100,7 +101,7 @@ export function ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: Suppo
         </button>
       </p>
       <div className="mx-auto flex max-w-2xl flex-col justify-between gap-4 rounded-3xl bg-gray-100 p-5 text-left sm:flex-row sm:items-center sm:gap-10">
-        <div className="flex flex-row items-center gap-4 text-sm sm:text-base">
+        <div className="flex flex-row gap-4 text-sm sm:text-base lg:items-center">
           <div className="relative">
             <DTSIAvatar person={person} size={60} />
             <div className="absolute bottom-[5px] right-[-8px]">
@@ -125,9 +126,11 @@ export function ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: Suppo
         </div>
         <div className="flex items-center gap-5">
           <UserActionFormCallCongresspersonDialog>
-            <Button>Call</Button>
+            <button style={{ width: '100%' }}>
+              <img alt="call button" className="h-[44px] w-[44px]" src="/misc/call-icon.svg" />
+            </button>
           </UserActionFormCallCongresspersonDialog>
-          <Button asChild>
+          <Button asChild className="w-full">
             <InternalLink href={getIntlUrls(locale).politicianDetails(person.slug)}>
               View profile
             </InternalLink>
