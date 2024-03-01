@@ -170,7 +170,6 @@ function LoginSection({ onLogin }: { onLogin: () => void | Promise<void> }) {
   const router = useRouter()
   const { mutate } = useSWRConfig()
   const { data } = useInitialEmail()
-  console.log({ data })
 
   return (
     <ThirdwebLoginContent
@@ -200,12 +199,12 @@ function LoginSection({ onLogin }: { onLogin: () => void | Promise<void> }) {
 
 function useInitialEmail() {
   const localSessionId = getUserSessionIdOnClient()
-  console.log({ localSessionId })
-
-  return useSWR(localSessionId ? `/api/unidentified-user/${localSessionId}` : null, async url => {
-    console.log({ url })
-    return fetchReq(url).then(res => res.json() as Promise<{ user: ClientUnidentifiedUser }>)
-  })
+  return useSWR(
+    localSessionId ? apiUrls.unidentifiedUser({ sessionId: localSessionId }) : null,
+    async url => {
+      return fetchReq(url).then(res => res.json() as Promise<{ user: ClientUnidentifiedUser }>)
+    },
+  )
 }
 
 function FinishProfileSection({ onSuccess }: { onSuccess: () => void }) {

@@ -25,10 +25,8 @@ export function ThirdwebLoginContent({
       return
     }
 
-    console.log({ initialEmailAddress })
-    const input = thirdwebEmbeddedAuthContainer.current?.querySelector(
-      'input[type="email"]',
-    ) as HTMLInputElement
+    const input =
+      thirdwebEmbeddedAuthContainer.current?.querySelector<HTMLInputElement>('input[type="email"]')
     if (input && !input.getAttribute('value')) {
       input.setAttribute('value', initialEmailAddress)
     }
