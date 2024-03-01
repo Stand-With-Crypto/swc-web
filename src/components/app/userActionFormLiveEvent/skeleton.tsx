@@ -12,7 +12,7 @@ export function UserActionFormLiveEventSkeleton() {
           <Skeleton className={`h-[${NFT_IMAGE_SIZE_PX}px] w-[${NFT_IMAGE_SIZE_PX}px]`} />
           <UserActionFormLayout.HeadingSkeleton subtitle="dummy title" title="dummy subtitle" />
           <Skeleton>
-            <Button>Sign in to claim</Button>
+            <Button>Continue</Button>
           </Skeleton>
         </div>
       </UserActionFormLayout.Container>

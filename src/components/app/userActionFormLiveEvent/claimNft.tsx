@@ -79,7 +79,7 @@ export function ClaimNft({ isLoggedIn, slug, goToSection }: Props) {
             title={MESSAGES[slug].title}
           />
           <Button disabled={loading} onClick={handleClaimNft}>
-            {isLoggedIn ? 'Claim NFT' : 'Sign in to claim'}
+            Continue
           </Button>
         </div>
       </UserActionFormLayout.Container>

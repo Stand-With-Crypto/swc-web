@@ -18,7 +18,7 @@ export const MESSAGES: Record<UserActionLiveEventCampaignName, Record<Message, s
   [UserActionLiveEventCampaignName['2024_03_04_LA']]: {
     title: 'Los Angeles Crypto Votes',
     signedOutSubtitle:
-      'Thanks for attending our Los Angeles Crypto Votes event! Sign in to Stand With Crypto in order to claim your free “Proof of Attendance” NFT.',
+      'Thanks for attending our Los Angeles Crypto Votes event! Press continue in order to claim your free “Proof of Attendance” NFT.',
     signedInSubtitle:
       'Thanks for attending our Los Angeles Crypto Votes event! Claim your free “Proof of Attendance” NFT.',
   },
