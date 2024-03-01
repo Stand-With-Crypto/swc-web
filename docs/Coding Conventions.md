@@ -9,7 +9,7 @@ Below is a non-exhaustive list of coding conventions that we try to follow. This
 
 ## TypeScript
 
-- Avoid using `any`. if it's needed, add a comment explaining why if it's not self-evident
+- Avoid using `any`. If it's needed, add a comment explaining why if it's not self-evident
 - Code should be camelCase by default
 - Constants should be ALL_UPPER_SNAKE_CASE
   - When defining a constant array, add `readonly` to prevent unexpected mutations
