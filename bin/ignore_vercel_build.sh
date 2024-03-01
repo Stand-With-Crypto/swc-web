@@ -7,7 +7,6 @@ users_file="./bin/vercel-users.txt"
 author_found=false
 
 while IFS= read -r line; do
-  echo "Checking $author against $line"
   if [[ "$line" == "$author" ]]; then
     author_found=true
     break
