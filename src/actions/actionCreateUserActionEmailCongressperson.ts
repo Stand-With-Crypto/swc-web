@@ -89,8 +89,10 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
   })
   const analytics = getServerAnalytics({ userId: user.id, localUser })
   const peopleAnalytics = getServerPeopleAnalytics({ userId: user.id, localUser })
+  const beforeFinish = () => Promise.all([analytics.flush(), peopleAnalytics.flush()])
+
   if (localUser) {
-    await peopleAnalytics.setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
+    peopleAnalytics.setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
   }
   logger.info('fetched/created user')
   const campaignName = validatedFields.data.campaignName
@@ -106,7 +108,7 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
     },
   })
   if (userAction) {
-    await analytics.trackUserActionCreatedIgnored({
+    analytics.trackUserActionCreatedIgnored({
       actionType,
       campaignName,
       reason: 'Too Many Recent',
@@ -118,6 +120,7 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
       `duplicate ${actionType} user action for campaign ${campaignName} submitted`,
       { extra: { validatedFields, userAction }, user: { id: user.id } },
     )
+    await beforeFinish()
     return { user: getClientUser(user) }
   }
 
@@ -160,14 +163,14 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
       userActionEmail: true,
     },
   })
-  await analytics.trackUserActionCreated({
+  analytics.trackUserActionCreated({
     actionType,
     campaignName,
     creationMethod: 'On Site',
     userState,
     ...convertAddressToAnalyticsProperties(validatedFields.data.address),
   })
-  await peopleAnalytics.set({
+  peopleAnalytics.set({
     ...convertAddressToAnalyticsProperties(validatedFields.data.address),
     // https://docs.mixpanel.com/docs/data-structure/user-profiles#reserved-user-properties
     $email: validatedFields.data.emailAddress,
@@ -199,6 +202,7 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
     data: payload,
   })
 
+  await beforeFinish()
   logger.info('updated user')
   return { user: getClientUser(user) }
 }

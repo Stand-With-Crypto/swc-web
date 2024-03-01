@@ -1,5 +1,7 @@
 # Stand With Crypto
 
+**NOTE**: the team is [actively working torwards](https://github.com/Stand-With-Crypto/swc-web/milestone/3) getting the repo in a state where anyone can run the app locally without requiring specific permissions.
+
 ## Local Development
 
 ### Knowledge pre-requisites

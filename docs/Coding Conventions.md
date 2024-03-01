@@ -28,7 +28,7 @@ Below is a non-exhaustive list of coding conventions that we try to follow. This
 
 ## UI Development
 
-- Whenever possible, try and use TailwindCSS and Radix UI as the core primitives for building UI
+- Whenever possible, try and use [TailwindCSS](https://tailwindcss.com/) and [Radix UI](https://www.radix-ui.com/) as the core primitives for building UI
 - When tasked with building out a new base-level UI primitive (a checkbox component for example), consider checking [shadcn](https://ui.shadcn.com/docs/components/), a CLI tool that aides in the rapid development of TailwindCSS/Radix UI components, to see if there's any prebuilt examples that we can use as a starting point. Because shadcn [is not a component library](https://ui.shadcn.com/docs), we get all the benefits of bootstrapping the UI with some best practices, and none of the downsides of getting locked in to opinionated component libraries that are hard to customize.
 - When building forms that require best-in-class UX practices (field-level error validation for example), consider leveraging `react-hook-form` and the corresponding pre-built components in `src/components/ui/form`.
 - For standalone header text, consider using [react-wrap-balancer](https://react-wrap-balancer.vercel.app/) to aide it's responsiveness. See our `PageTitleText` and `PageSubtitle` components

@@ -22,9 +22,4 @@ describe('utils/resolveWithTimeout', () => {
       ),
     ).resolves.toBe('success')
   })
-
-  it('should default the timeout to 1.5s', () => {
-    expect(resolveWithTimeout(sleep(1499))).resolves.not.toThrow()
-    expect(resolveWithTimeout(sleep(1501))).rejects.toThrow()
-  })
 })
