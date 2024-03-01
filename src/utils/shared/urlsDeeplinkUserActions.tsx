@@ -1,11 +1,12 @@
 import { UserActionType } from '@prisma/client'
 
 import { SupportedLocale } from '@/intl/locales'
+import { ActiveClientUserActionType } from '@/utils/shared/activeUserAction'
 import { getIntlPrefix } from '@/utils/shared/urls'
 
 export const USER_ACTION_DEEPLINK_MAP: Omit<
   {
-    [key in UserActionType]: {
+    [key in ActiveClientUserActionType]: {
       getDeeplinkUrl: (config: { locale: SupportedLocale }) => string
     }
   },

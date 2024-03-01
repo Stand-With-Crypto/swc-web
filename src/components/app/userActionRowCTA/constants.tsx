@@ -1,4 +1,5 @@
 'use client'
+
 import { UserActionType } from '@prisma/client'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
@@ -10,15 +11,16 @@ import { UserActionRowCTAProps } from '@/components/app/userActionRowCTA'
 import { InternalLink } from '@/components/ui/link'
 import { UserActionTweetLink } from '@/components/ui/userActionTweetLink'
 import { useLocale } from '@/hooks/useLocale'
+import { ActiveClientUserActionType } from '@/utils/shared/activeUserAction'
 import { getIntlUrls } from '@/utils/shared/urls'
 
 export const USER_ACTION_ROW_CTA_INFO: Record<
-  UserActionType,
+  ActiveClientUserActionType,
   Omit<UserActionRowCTAProps, 'state'>
 > = {
   [UserActionType.OPT_IN]: {
     actionType: UserActionType.OPT_IN,
-    image: '/actionTypeIcons/optIn.svg',
+    image: '/actionTypeIcons/optIn.png',
     text: 'Join Stand With Crypto',
     subtext: 'Join over 300,000 advocates fighting to keep crypto in America.',
     canBeTriggeredMultipleTimes: false,
@@ -28,7 +30,7 @@ export const USER_ACTION_ROW_CTA_INFO: Record<
   },
   [UserActionType.VOTER_REGISTRATION]: {
     actionType: UserActionType.VOTER_REGISTRATION,
-    image: '/actionTypeIcons/registerToVote.svg',
+    image: '/actionTypeIcons/registerToVote.png',
     text: 'Check your voter registration and get a free NFT',
     subtext:
       'You can make a difference this year. Register to vote and get a free "I\'m a Voter" NFT',
@@ -37,7 +39,7 @@ export const USER_ACTION_ROW_CTA_INFO: Record<
   },
   [UserActionType.CALL]: {
     actionType: UserActionType.CALL,
-    image: '/actionTypeIcons/call.svg',
+    image: '/actionTypeIcons/call.png',
     text: 'Call your Congressperson',
     subtext: 'The most effective way to make your voice heard.',
     canBeTriggeredMultipleTimes: true,
@@ -45,7 +47,7 @@ export const USER_ACTION_ROW_CTA_INFO: Record<
   },
   [UserActionType.EMAIL]: {
     actionType: UserActionType.EMAIL,
-    image: '/actionTypeIcons/email.svg',
+    image: '/actionTypeIcons/email.png',
     text: 'Email your Congressperson',
     subtext: 'We drafted an email for you. All you have to do is hit send.',
     canBeTriggeredMultipleTimes: true,
@@ -53,7 +55,7 @@ export const USER_ACTION_ROW_CTA_INFO: Record<
   },
   [UserActionType.DONATION]: {
     actionType: UserActionType.DONATION,
-    image: '/actionTypeIcons/donate.svg',
+    image: '/actionTypeIcons/donate.png',
     text: 'Donate to Stand With Crypto',
     subtext: 'Support our aim to mobilize 52 million crypto advocates in the U.S.',
     canBeTriggeredMultipleTimes: true,
@@ -68,7 +70,7 @@ export const USER_ACTION_ROW_CTA_INFO: Record<
   },
   [UserActionType.TWEET]: {
     actionType: UserActionType.TWEET,
-    image: '/actionTypeIcons/tweet.svg',
+    image: '/actionTypeIcons/tweet.png',
     text: 'Share on Twitter/X',
     subtext: 'Bring more people to the movement.',
     canBeTriggeredMultipleTimes: true,
@@ -78,7 +80,7 @@ export const USER_ACTION_ROW_CTA_INFO: Record<
   },
   [UserActionType.NFT_MINT]: {
     actionType: UserActionType.NFT_MINT,
-    image: '/actionTypeIcons/mintNFT.svg',
+    image: '/actionTypeIcons/mintNFT.png',
     text: 'Mint your Supporter NFT',
     subtext: 'All mint proceeds are donated to the movement.',
     canBeTriggeredMultipleTimes: true,

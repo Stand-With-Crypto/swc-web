@@ -59,6 +59,7 @@ async function getSumDonationsByUserQuery({ limit, offset }: SumDonationsByUserC
     ) mint_totals ON u.id = mint_totals.user_id
 
     GROUP BY u.id
+    HAVING totalAmountUsd > 0
     ORDER BY totalAmountUsd DESC
 
     -- don't worry, prisma $queryRaw sanitizes the input

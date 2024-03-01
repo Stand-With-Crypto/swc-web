@@ -76,8 +76,9 @@ export function UpdateUserInformationVisibilityForm({
                 analyticsProps: {
                   'Information Visibility': values.informationVisibility,
                 },
+                payload: values,
               },
-              () => actionUpdateUserInformationVisibility(values),
+              payload => actionUpdateUserInformationVisibility(payload),
             )
             if (result.status === 'success') {
               router.refresh()

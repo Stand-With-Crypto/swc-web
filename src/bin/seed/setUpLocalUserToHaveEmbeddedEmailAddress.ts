@@ -79,4 +79,4 @@ async function setUpLocalUserToHaveEmbeddedEmailAddress() {
   })
 }
 
-runBin(setUpLocalUserToHaveEmbeddedEmailAddress)
+void runBin(setUpLocalUserToHaveEmbeddedEmailAddress)

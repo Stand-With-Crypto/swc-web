@@ -1,15 +1,13 @@
 import { ArrowUpRight, ThumbsDown, ThumbsUp } from 'lucide-react'
 
+import { sortDTSIPersonDataTable } from '@/components/app/dtsiClientPersonDataTable/sortPeople'
 import { DTSIPersonCard } from '@/components/app/dtsiPersonCard'
 import { DelayedRecentActivity } from '@/components/app/pageHome/delayedRecentActivity'
 import { HeroCTA } from '@/components/app/pageHome/heroCTA'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
 import { SumDonationsByUserRow } from '@/components/app/sumDonationsByUserRow/sumDonationsByUserRow'
-import { UserActionFormVoterRegistrationDeeplinkWrapper } from '@/components/app/userActionFormVoterRegistration/homepageDialogDeeplinkWrapper'
 import { UserActionRowCTAsAnimatedListWithApi } from '@/components/app/userActionRowCTA/userActionRowCTAsAnimatedListWithApi'
 import { Button } from '@/components/ui/button'
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
-import { dialogContentStyles } from '@/components/ui/dialog/styles'
 import { NextImage } from '@/components/ui/image'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
@@ -18,9 +16,7 @@ import { PageTitle } from '@/components/ui/pageTitleText'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
 import { PageProps } from '@/types'
-import { groupAndSortDTSIPeopleByCryptoStance } from '@/utils/dtsi/dtsiPersonUtils'
 import { getIntlUrls } from '@/utils/shared/urls'
-import { cn } from '@/utils/web/cn'
 
 import { TopLevelMetrics } from './topLevelMetrics'
 
@@ -35,7 +31,8 @@ export function PageHome({
 }: PageProps & Awaited<ReturnType<typeof getHomepageData>>) {
   const { locale } = params
   const urls = getIntlUrls(locale)
-  const groupedDTSIHomepagePeople = groupAndSortDTSIPeopleByCryptoStance(dtsiHomepagePeople)
+  const lowestScores = sortDTSIPersonDataTable(dtsiHomepagePeople.lowestScores)
+  const highestScores = sortDTSIPersonDataTable(dtsiHomepagePeople.highestScores)
   return (
     <>
       <section className="grid-fl mb-6 grid grid-cols-1 items-center gap-4 lg:container lg:grid-cols-2 lg:gap-8">
@@ -51,44 +48,42 @@ export function PageHome({
           <HeroCTA />
         </div>
         <div className="order-0 md:container lg:order-1 lg:px-0">
-          <Dialog analytics={{ Category: 'Homepage Hero Section', CTA: 'Register to vote' }}>
-            <DialogTrigger asChild>
-              <LinkBox className="relative h-[320px] cursor-pointer overflow-hidden md:rounded-xl lg:h-[400px]">
-                <NextImage
-                  alt="First in the Nation Crypto Presidential Forum December 11th 2023 St. Anselm College"
-                  className="h-full w-full object-cover"
-                  fill
-                  priority
-                  // width={1046}
-                  // height={892}
-                  sizes={'(max-width: 768px) 500px, 1046px'}
-                  src="/homepageHero.jpg"
-                />
-                <div
-                  className="absolute bottom-0 flex w-full items-center justify-between gap-4 p-4 text-sm text-white"
-                  style={{
-                    background:
-                      'linear-gradient(to top, hsla(0, 0%, 0%, 0.8) 10%, hsla(0, 0%, 0%, 0.4) 70%,  transparent 100%)',
-                  }}
+          <div className="relative h-[320px] overflow-hidden md:rounded-xl lg:h-[400px]">
+            <NextImage
+              alt="NFT For Stand With Crypto's GOTV Rally March 4th, 2024 in Los Angeles, CA"
+              className="h-full w-full object-cover"
+              fill
+              priority
+              // width={1046}
+              // height={892}
+              sizes={'(max-width: 768px) 500px, 1046px'}
+              src="/homepageHero/2024-03-LA-event-nft.png"
+            />
+            <div className="absolute bottom-0 w-full">
+              <LinkBox
+                className="flex items-center justify-between gap-4 p-4 text-sm text-white"
+                style={{
+                  background:
+                    'linear-gradient(to top, hsla(0, 0%, 0%, 0.8) 10%, hsla(0, 0%, 0%, 0.4) 70%,  transparent 100%)',
+                }}
+              >
+                <p>
+                  Join Nas and Coinbase CEO Brian Armstrong for an exclusive Crypto Votes rally in
+                  Los Angeles. RSVP for free.
+                </p>
+                <Button
+                  asChild
+                  className={linkBoxLinkClassName}
+                  data-link-box-subject
+                  variant="secondary"
                 >
-                  <p>
-                    Register to vote or check your voter registration and get a free “I’m a Voter”
-                    NFT
-                  </p>
-                  <Button
-                    className={linkBoxLinkClassName}
-                    data-link-box-subject
-                    variant="secondary"
-                  >
-                    Register <ArrowUpRight />
-                  </Button>
-                </div>
+                  <ExternalLink href={'https://cryptovotes.splashthat.com/'}>
+                    RSVP <ArrowUpRight />
+                  </ExternalLink>
+                </Button>
               </LinkBox>
-            </DialogTrigger>
-            <DialogContent className={cn(dialogContentStyles, 'max-w-3xl')}>
-              <UserActionFormVoterRegistrationDeeplinkWrapper />
-            </DialogContent>
-          </Dialog>
+            </div>
+          </div>
         </div>
       </section>
       <div className="container">
@@ -117,10 +112,7 @@ export function PageHome({
           <PageSubTitle as="h4">
             See how our community is taking a stand to safeguard the future of crypto in America.
             Donations to{' '}
-            <ExternalLink
-              className="underline"
-              href={'https://www.fec.gov/data/committee/C00835959/'}
-            >
+            <ExternalLink href={'https://www.fec.gov/data/committee/C00835959/'}>
               Fairshake
             </ExternalLink>
             , a pro-crypto Super PAC, are not included on the leaderboard.
@@ -191,7 +183,7 @@ export function PageHome({
                 </h5>
               </div>
               <div className="space-y-3">
-                {groupedDTSIHomepagePeople.proCrypto.map(person => (
+                {highestScores.map(person => (
                   <DTSIPersonCard key={person.id} locale={locale} person={person} />
                 ))}
               </div>
@@ -204,7 +196,7 @@ export function PageHome({
                 </h5>
               </div>
               <div className="space-y-3">
-                {groupedDTSIHomepagePeople.antiCrypto.map(person => (
+                {lowestScores.map(person => (
                   <DTSIPersonCard key={person.id} locale={locale} person={person} />
                 ))}
               </div>

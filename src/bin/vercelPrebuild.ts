@@ -5,4 +5,4 @@ async function vercelPrebuild() {
   await buildGetSumDonationsByUserCache()
 }
 
-runBin(vercelPrebuild)
+void runBin(vercelPrebuild)

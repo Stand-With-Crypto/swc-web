@@ -1,15 +1,19 @@
 'use client'
 import { useCallback } from 'react'
 
-import { PrivacyPolicyDialog } from '@/components/app/pagePrivacyPolicy/dialog'
 import { SectionNames } from '@/components/app/userActionFormVoterRegistration/constants'
 import { UserActionFormVoterRegistrationLayout } from '@/components/app/userActionFormVoterRegistration/sections/layout'
 import { Button } from '@/components/ui/button'
+import { ExternalLink } from '@/components/ui/link'
+import { useLocale } from '@/hooks/useLocale'
 import { UseSectionsReturn } from '@/hooks/useSections'
+import { getIntlUrls } from '@/utils/shared/urls'
 
 interface SurveyProps extends UseSectionsReturn<SectionNames> {}
 
 export function Survey({ goToSection }: SurveyProps) {
+  const locale = useLocale()
+  const urls = getIntlUrls(locale)
   const createSelectionHandler = useCallback(
     (step: SectionNames) => {
       return () => {
@@ -55,9 +59,12 @@ export function Survey({ goToSection }: SurveyProps) {
           </div>
           <p className="text-center">
             Personal information subject to{' '}
-            <PrivacyPolicyDialog>
-              <span className="cursor-pointer text-blue-600">Stand With Crypto Privacy Policy</span>
-            </PrivacyPolicyDialog>
+            <ExternalLink
+              className="cursor-pointer text-blue-600 hover:underline"
+              href={urls.privacyPolicy()}
+            >
+              Stand With Crypto Privacy Policy
+            </ExternalLink>
             .
           </p>
         </div>

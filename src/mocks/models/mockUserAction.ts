@@ -1,12 +1,15 @@
 import { faker } from '@faker-js/faker'
-import { DataCreationMethod, Prisma, UserAction, UserActionType } from '@prisma/client'
+import { DataCreationMethod, Prisma, UserAction } from '@prisma/client'
 
 import { fakerFields } from '@/mocks/fakerUtils'
 import { mockCommonDatetimes } from '@/mocks/mockCommonDatetimes'
-import { USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns'
+import {
+  ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
+  USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
+} from '@/utils/shared/userActionCampaigns'
 
 export function mockCreateUserActionInput() {
-  const actionType = faker.helpers.arrayElement(Object.values(UserActionType))
+  const actionType = faker.helpers.arrayElement(ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN)
   return {
     actionType,
     campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[actionType],

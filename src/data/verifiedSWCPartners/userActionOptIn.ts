@@ -10,7 +10,7 @@ import {
   UserSession,
 } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
-import { z } from 'zod'
+import { object, string, z } from 'zod'
 
 import { CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/upsertAdvocateInCapitolCanary'
 import { inngest } from '@/inngest/inngest'
@@ -19,6 +19,7 @@ import {
   getCapitolCanaryCampaignID,
 } from '@/utils/server/capitolCanary/campaigns'
 import { UpsertAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
+import { getGooglePlaceIdFromAddress } from '@/utils/server/getGooglePlaceIdFromAddress'
 import { prismaClient } from '@/utils/server/prismaClient'
 import {
   AnalyticsUserActionUserState,
@@ -37,9 +38,22 @@ import { getLogger } from '@/utils/shared/logger'
 import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
 import { generateReferralId } from '@/utils/shared/referralId'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
+import { zodAddress } from '@/validation/fields/zodAddress'
 import { zodEmailAddress } from '@/validation/fields/zodEmailAddress'
 import { zodFirstName, zodLastName } from '@/validation/fields/zodName'
 import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
+
+const zodVerifiedSWCPartnersUserAddress = object({
+  streetNumber: string(),
+  route: string(),
+  subpremise: string(),
+  locality: string(),
+  administrativeAreaLevel1: string(),
+  administrativeAreaLevel2: string(),
+  postalCode: string(),
+  postalCodeSuffix: string(),
+  countryCode: string().length(2),
+})
 
 export const zodVerifiedSWCPartnersUserActionOptIn = z.object({
   emailAddress: zodEmailAddress,
@@ -48,6 +62,7 @@ export const zodVerifiedSWCPartnersUserActionOptIn = z.object({
   isVerifiedEmailAddress: z.boolean(),
   firstName: zodFirstName.optional(),
   lastName: zodLastName.optional(),
+  address: zodVerifiedSWCPartnersUserAddress.optional(),
   phoneNumber: zodPhoneNumber.optional().transform(str => str && normalizePhoneNumber(str)),
   hasOptedInToReceiveSMSFromSWC: z.boolean().optional(),
   hasOptedInToEmails: z.boolean().optional(),
@@ -100,9 +115,10 @@ export async function verifiedSWCPartnersUserActionOptIn(
   const { user, userState } = await maybeUpsertUser({ existingUser: existingAction?.user, input })
   const localUser = getLocalUserFromUser(user)
   const analytics = getServerAnalytics({ userId: user.id, localUser })
-  const peopleAnalytics = getServerPeopleAnalytics({ userId: user.id, localUser })
   if (!existingAction?.user) {
-    peopleAnalytics.setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
+    getServerPeopleAnalytics({ userId: user.id, localUser }).setOnce(
+      mapPersistedLocalUserToAnalyticsProperties(localUser.persisted),
+    )
   }
 
   if (existingAction) {
@@ -117,6 +133,7 @@ export async function verifiedSWCPartnersUserActionOptIn(
       reason: 'Already Exists',
       userState,
     })
+    await analytics.flush()
     return {
       result: VerifiedSWCPartnersUserActionOptInResult.EXISTING_ACTION,
       resultOptions: Object.values(VerifiedSWCPartnersUserActionOptInResult),
@@ -154,7 +171,7 @@ export async function verifiedSWCPartnersUserActionOptIn(
   // TODO (Benson): Handle CC membership toggling options: https://github.com/Stand-With-Crypto/swc-web/issues/173
   // TODO (Benson): Include p2a source in Capitol Canary payload to know which 3P is sending this request.
   const payload: UpsertAdvocateInCapitolCanaryPayloadRequirements = {
-    campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
+    campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.ONE_CLICK_NATIVE_SUBSCRIBER),
     user: {
       ...user,
       address: user.address || null,
@@ -173,6 +190,7 @@ export async function verifiedSWCPartnersUserActionOptIn(
     data: payload,
   })
 
+  await analytics.flush()
   return {
     result: VerifiedSWCPartnersUserActionOptInResult.NEW_ACTION,
     resultOptions: Object.values(VerifiedSWCPartnersUserActionOptInResult),
@@ -198,7 +216,19 @@ async function maybeUpsertUser({
     phoneNumber,
     hasOptedInToMembership,
     hasOptedInToReceiveSMSFromSWC,
+    address,
   } = input
+
+  let dbAddress: z.infer<typeof zodAddress> | undefined = undefined
+  if (address) {
+    const formattedDescription = `${address.streetNumber} ${address.route}, ${address.subpremise}, ${address.locality} ${address.administrativeAreaLevel1}, ${address.postalCode} ${address.countryCode}`
+    dbAddress = { ...address, formattedDescription: formattedDescription, googlePlaceId: undefined }
+    try {
+      dbAddress.googlePlaceId = await getGooglePlaceIdFromAddress(dbAddress.formattedDescription)
+    } catch (e) {
+      logger.error('error getting googlePlaceID:' + e)
+    }
+  }
 
   if (existingUser) {
     const updatePayload: Prisma.UserUpdateInput = {
@@ -221,6 +251,20 @@ async function maybeUpsertUser({
             },
           },
         }),
+      ...(dbAddress && {
+        address: {
+          ...(dbAddress.googlePlaceId
+            ? {
+                connectOrCreate: {
+                  where: { googlePlaceId: dbAddress.googlePlaceId },
+                  create: dbAddress,
+                },
+              }
+            : {
+                create: dbAddress,
+              }),
+        },
+      }),
     }
     const keysToUpdate = Object.keys(updatePayload)
     if (!keysToUpdate.length) {
@@ -282,6 +326,20 @@ async function maybeUpsertUser({
           source: UserEmailAddressSource.VERIFIED_THIRD_PARTY,
         },
       },
+      ...(dbAddress && {
+        address: {
+          ...(dbAddress.googlePlaceId
+            ? {
+                connectOrCreate: {
+                  where: { googlePlaceId: dbAddress.googlePlaceId },
+                  create: dbAddress,
+                },
+              }
+            : {
+                create: dbAddress,
+              }),
+        },
+      }),
     },
   })
   user = await prismaClient.user.update({

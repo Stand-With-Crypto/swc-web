@@ -4,6 +4,7 @@ import { ImageResponse } from 'next/og'
 
 import { getData } from '@/app/[locale]/politicians/person/[dtsiSlug]/getData'
 import { getBgHexColor } from '@/components/app/dtsiFormattedLetterGrade'
+import { generateOgImage } from '@/components/app/pagePoliticianDetails/generateOgImage'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import {
   convertDTSIStanceScoreToCryptoSupportLanguageSentence,

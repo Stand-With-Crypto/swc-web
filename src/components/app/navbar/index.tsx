@@ -69,7 +69,19 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
           </div>
         </div>
       )}
-      <nav className={cn('sticky top-0 z-10 w-full bg-white py-3 md:py-5')}>
+      <nav
+        className={
+          /*
+          if a user has their font sizes set to something other than the browser default
+          the size of our div'ws can shift which breaks UX that makes assumptions about how large these elements are
+          like when we have a sub sticky header on the politician home page
+          We need to hardcode the height of the navbar in different environments
+          */
+          cn(
+            'sticky top-0 z-10 flex h-[72px] w-full items-center bg-white py-3 md:h-[84px] md:py-5',
+          )
+        }
+      >
         <div className="container flex justify-between">
           <div className="flex items-center gap-4">
             <InternalLink className="flex-shrink-0" href={urls.home()}>

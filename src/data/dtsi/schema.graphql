@@ -357,6 +357,8 @@ type Query {
     personRolePrimaryDistrict: String
     personRolePrimaryState: String
     slugIn: [String!]
+    stanceScoreGte: Int
+    stanceScoreLte: Int
   ): [Person!]!
   peopleByUSCongressionalDistrict(congressionalDistrict: Int, stateCode: String!): [Person!]!
 

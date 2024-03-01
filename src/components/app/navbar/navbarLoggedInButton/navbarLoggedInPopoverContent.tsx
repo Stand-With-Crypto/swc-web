@@ -60,8 +60,8 @@ export function NavbarLoggedInPopoverContent({
 
       <button
         className="block w-full border-t p-4 text-left text-sm font-medium hover:bg-secondary"
-        onClick={() => {
-          logoutAndDisconnect()
+        onClick={async () => {
+          await logoutAndDisconnect()
           onClose()
         }}
       >

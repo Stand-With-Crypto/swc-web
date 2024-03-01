@@ -3,7 +3,7 @@ import { BigNumber } from 'ethers'
 
 import { fromBigNumber } from './fromBigNumber'
 
-describe('fromBigNumber', () => {
+describe('utils/bigNumber/fromBigNumber', () => {
   it('should throw an error when x is undefined', () => {
     expect(() => fromBigNumber(undefined as any)).toThrow('Input must not be undefined')
   })

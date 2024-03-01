@@ -59,4 +59,4 @@ async function smokeTestAirdropNFTWithInngest() {
   })
 }
 
-runBin(smokeTestAirdropNFTWithInngest)
+void runBin(smokeTestAirdropNFTWithInngest)

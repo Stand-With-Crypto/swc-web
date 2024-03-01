@@ -172,4 +172,4 @@ async function detectAndRemoveMockData() {
   ])
 }
 
-runBin(detectAndRemoveMockData)
+void runBin(detectAndRemoveMockData)

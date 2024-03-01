@@ -4,6 +4,7 @@ import {
   Column,
   ColumnDef,
   ColumnFiltersState,
+  FilterFnOption,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
@@ -12,6 +13,7 @@ import {
   SortingState,
   useReactTable,
 } from '@tanstack/react-table'
+import { debounce } from 'lodash-es'
 import { ArrowDown, ArrowUp, ArrowUpDown, Search } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 
@@ -21,9 +23,6 @@ import {
   filterDataViaGlobalFilters,
   getGlobalFilterDefaults,
   GlobalFilters,
-  PARTY_OPTIONS,
-  ROLE_OPTIONS,
-  StanceOnCryptoOptions,
 } from '@/components/app/dtsiClientPersonDataTable/globalFiltersUtils'
 import { Button } from '@/components/ui/button'
 import { InputWithIcons } from '@/components/ui/inputWithIcons'
@@ -42,6 +41,7 @@ interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
   loadState: 'loaded' | 'static'
+  globalFilterFn?: FilterFnOption<TData>
 }
 
 export const SortableHeader = <TData, TValue>({
@@ -79,6 +79,7 @@ export function DataTable<TData extends Person, TValue>({
   columns,
   data: passedData,
   loadState,
+  globalFilterFn,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
@@ -86,9 +87,11 @@ export function DataTable<TData extends Person, TValue>({
   const router = useRouter()
   const urls = useIntlUrls()
 
-  const data = useMemo(() => {
-    return filterDataViaGlobalFilters<TData>(passedData, globalFilter)
-  }, [globalFilter, passedData])
+  const data = useMemo(
+    () => filterDataViaGlobalFilters(passedData, globalFilter),
+    [globalFilter, passedData],
+  )
+
   const table = useReactTable({
     data,
     columns,
@@ -107,7 +110,14 @@ export function DataTable<TData extends Person, TValue>({
       sorting,
       columnFilters,
     },
+    globalFilterFn,
   })
+
+  const debouncedSetGlobalFilter = useMemo(
+    () => debounce(table.setGlobalFilter, 300),
+    [table.setGlobalFilter],
+  )
+
   return (
     <div className="space-y-6">
       <div className="container ">
@@ -124,18 +134,9 @@ export function DataTable<TData extends Person, TValue>({
               className="rounded-full bg-gray-100 text-gray-600"
               leftIcon={<Search className="h-4 w-4 text-gray-500" />}
               onChange={event => {
-                table.getColumn('fullName')?.setFilterValue(event.target.value)
-                if (
-                  globalFilter.party !== PARTY_OPTIONS.ALL ||
-                  globalFilter.role !== ROLE_OPTIONS.ALL ||
-                  globalFilter.stance !== StanceOnCryptoOptions.ALL ||
-                  globalFilter.state !== 'All'
-                ) {
-                  setGlobalFilter(getGlobalFilterDefaults())
-                }
+                debouncedSetGlobalFilter(event.target.value)
               }}
-              placeholder="Search by name"
-              value={(table.getColumn('fullName')?.getFilterValue() as string) ?? ''}
+              placeholder="Search by name or state"
             />
           </div>
         </div>
