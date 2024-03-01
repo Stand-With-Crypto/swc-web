@@ -1,5 +1,18 @@
 import { UserActionType } from '@prisma/client'
 
+export const ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN = [
+  UserActionType.OPT_IN,
+  UserActionType.VOTER_REGISTRATION,
+  UserActionType.CALL,
+  UserActionType.EMAIL,
+  UserActionType.DONATION,
+  UserActionType.TWEET,
+  UserActionType.NFT_MINT,
+  UserActionType.LIVE_EVENT,
+] as const
+export type ActiveClientUserActionWithCampaignType =
+  (typeof ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN)[number]
+
 export enum UserActionEmailCampaignName {
   DEFAULT = 'EMAIL_YOUR_CONGRESSPERSON_FIT21',
 }
@@ -34,7 +47,7 @@ export const USER_ACTION_TO_CAMPAIGN_NAME_MAP = {
   [UserActionType.NFT_MINT]: UserActionNftMintCampaignName,
   [UserActionType.VOTER_REGISTRATION]: UserActionVoterRegistrationCampaignName,
   [UserActionType.LIVE_EVENT]: UserActionLiveEventCampaignName,
-} satisfies Record<UserActionType, any>
+} satisfies Record<ActiveClientUserActionWithCampaignType, any>
 
 export const USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
   [UserActionType.EMAIL]: UserActionEmailCampaignName.DEFAULT,
@@ -45,4 +58,4 @@ export const USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
   [UserActionType.NFT_MINT]: UserActionNftMintCampaignName.DEFAULT,
   [UserActionType.VOTER_REGISTRATION]: UserActionVoterRegistrationCampaignName.DEFAULT,
   [UserActionType.LIVE_EVENT]: UserActionLiveEventCampaignName['2024_03_04_LA'],
-} satisfies Record<UserActionType, string>
+} satisfies Record<ActiveClientUserActionWithCampaignType, string>

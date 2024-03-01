@@ -13,7 +13,7 @@ import * as Sentry from '@sentry/nextjs'
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
 import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
+import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
 import {
   AnalyticsUserActionUserState,
   getServerAnalytics,
@@ -45,6 +45,10 @@ export const actionCreateUserActionTweet = withServerActionMiddleware(
 
 async function _actionCreateUserActionTweet() {
   logger.info('triggered')
+  const { triggerRateLimiterAtMostOnce } = getRequestRateLimiter({
+    context: 'unauthenticated',
+  })
+
   const userMatch = await getMaybeUserAndMethodOfMatch({
     prisma: {
       include: { primaryUserCryptoAddress: true, address: true },
@@ -53,7 +57,10 @@ async function _actionCreateUserActionTweet() {
   logger.info(userMatch.user ? 'found user' : 'no user found')
   const sessionId = getUserSessionId()
   const localUser = parseLocalUserFromCookies()
-  await throwIfRateLimited()
+
+  if (!userMatch.user) {
+    await triggerRateLimiterAtMostOnce()
+  }
   const { user, userState } = await maybeUpsertUser({
     existingUser: userMatch.user,
     sessionId,
@@ -62,7 +69,7 @@ async function _actionCreateUserActionTweet() {
   const analytics = getServerAnalytics({ userId: user.id, localUser })
   const peopleAnalytics = getServerPeopleAnalytics({ userId: user.id, localUser })
   if (localUser) {
-    peopleAnalytics.setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
+    await peopleAnalytics.setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
   }
   logger.info('fetched/created user')
   const campaignName = UserActionTweetCampaignName.DEFAULT
@@ -76,7 +83,7 @@ async function _actionCreateUserActionTweet() {
   })
 
   if (userAction) {
-    analytics.trackUserActionCreatedIgnored({
+    await analytics.trackUserActionCreatedIgnored({
       actionType,
       campaignName,
       reason: 'Too Many Recent',
@@ -90,6 +97,8 @@ async function _actionCreateUserActionTweet() {
     return { user: getClientUser(user) }
   }
 
+  await triggerRateLimiterAtMostOnce()
+
   userAction = await prismaClient.userAction.create({
     data: {
       user: { connect: { id: user.id } },
@@ -102,7 +111,7 @@ async function _actionCreateUserActionTweet() {
         : { userSession: { connect: { id: sessionId } } }),
     },
   })
-  analytics.trackUserActionCreated({
+  await analytics.trackUserActionCreated({
     actionType,
     campaignName,
     creationMethod: 'On Site',

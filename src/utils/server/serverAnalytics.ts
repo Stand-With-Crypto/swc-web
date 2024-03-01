@@ -1,7 +1,8 @@
 import { UserActionType } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { track as vercelTrack } from '@vercel/analytics/server'
-import mixpanelLib from 'mixpanel'
+import mixpanelLib, { PropertyDict } from 'mixpanel'
+import { promisify } from 'util'
 
 import {
   LocalUser,
@@ -9,6 +10,7 @@ import {
 } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
+import { resolveWithTimeout } from '@/utils/shared/resolveWithTimeout'
 import { AnalyticProperties, AnalyticsPeopleProperties } from '@/utils/shared/sharedAnalytics'
 import { formatVercelAnalyticsEventProperties } from '@/utils/shared/vercelAnalytics'
 
@@ -23,7 +25,13 @@ const logger = getLogger('serverAnalytics')
 
 type ServerAnalyticsConfig = { localUser: LocalUser | null; userId: string }
 
-function trackAnalytic(
+const promisifiedMixpanelTrack = promisify<string, PropertyDict, void>(mixpanel.track)
+const promisifiedMixpanelPeopleSet = promisify<string, PropertyDict, void>(mixpanel.people.set)
+const promisifiedMixpanelPeopleSetOnce = promisify<string, PropertyDict, void>(
+  mixpanel.people.set_once,
+)
+
+async function trackAnalytic(
   _config: ServerAnalyticsConfig,
   eventName: string,
   eventProperties?: AnalyticProperties,
@@ -42,33 +50,36 @@ function trackAnalytic(
       },
     }
   }
+
   logger.info(`Event Name: "${eventName}"`, eventProperties)
-  if (process.env.VERCEL_URL) {
-    vercelTrack(eventName, eventProperties && formatVercelAnalyticsEventProperties(eventProperties))
-  }
-  // we could wrap this in a promise and await it, but we don't want to block the request
-  mixpanel.track(
-    eventName,
-    {
-      ...eventProperties,
-      distinct_id: config.userId,
-    },
-    err => {
-      if (err) {
-        Sentry.captureException(err, { tags: { domain: 'trackAnalytic' } })
-      }
-    },
+  await resolveWithTimeout(
+    Promise.all([
+      process.env.VERCEL_URL &&
+        vercelTrack(
+          eventName,
+          eventProperties && formatVercelAnalyticsEventProperties(eventProperties),
+        ),
+      promisifiedMixpanelTrack(eventName, {
+        ...eventProperties,
+        distinct_id: config.userId,
+      }),
+    ]),
+  ).catch(err =>
+    Sentry.captureException(err, {
+      tags: { domain: 'trackAnalytic' },
+      extra: { eventName, eventProperties, isTrackingInVercel: !!process.env.VERCEL_URL },
+    }),
   )
 }
 
 type CreationMethod = 'On Site' | 'Verified SWC Partner'
 export type AnalyticsUserActionUserState = 'New' | 'Existing' | 'Existing With Updates'
-// TODO determine if we need to be awaiting this
+
 export function getServerAnalytics(config: ServerAnalyticsConfig) {
   const currentSessionAnalytics =
     config.localUser?.currentSession &&
     mapCurrentSessionLocalUserToAnalyticsProperties(config.localUser.currentSession)
-  function trackUserActionCreated({
+  const trackUserActionCreated = async ({
     actionType,
     campaignName,
     creationMethod = 'On Site',
@@ -79,7 +90,7 @@ export function getServerAnalytics(config: ServerAnalyticsConfig) {
     creationMethod?: CreationMethod
     campaignName: string
     userState: AnalyticsUserActionUserState
-  } & AnalyticProperties) {
+  } & AnalyticProperties) =>
     trackAnalytic(config, 'User Action Created', {
       ...currentSessionAnalytics,
       'User Action Type': actionType,
@@ -88,8 +99,8 @@ export function getServerAnalytics(config: ServerAnalyticsConfig) {
       'User State': userState,
       ...other,
     })
-  }
-  function trackUserActionCreatedIgnored({
+
+  const trackUserActionCreatedIgnored = async ({
     actionType,
     campaignName,
     reason,
@@ -102,7 +113,7 @@ export function getServerAnalytics(config: ServerAnalyticsConfig) {
     creationMethod?: CreationMethod
     reason: 'Too Many Recent' | 'Already Exists'
     userState: AnalyticsUserActionUserState
-  } & AnalyticProperties) {
+  } & AnalyticProperties) =>
     trackAnalytic(config, ' Type Creation Ignored', {
       ...currentSessionAnalytics,
       'User Action Type': actionType,
@@ -112,53 +123,55 @@ export function getServerAnalytics(config: ServerAnalyticsConfig) {
       Reason: reason,
       ...other,
     })
-  }
 
-  function track(
+  const track = async (
     eventName: string,
     {
       creationMethod = 'On Site',
       ...eventProperties
     }: AnalyticProperties & { creationMethod?: CreationMethod } = {},
-  ) {
+  ) =>
     trackAnalytic(config, eventName, {
       'Creation Method': creationMethod,
       ...currentSessionAnalytics,
       ...eventProperties,
     })
-  }
 
   return { trackUserActionCreated, trackUserActionCreatedIgnored, track }
 }
 
 export function getServerPeopleAnalytics(config: ServerAnalyticsConfig) {
-  function setOnce(peopleProperties: AnalyticsPeopleProperties) {
+  async function setOnce(peopleProperties: AnalyticsPeopleProperties) {
     if (!config.localUser) {
       logger.info(`Skipped People Properties Set Once`, peopleProperties)
       return
     }
 
     logger.info(`People Properties Set Once`, peopleProperties)
-    // we could wrap this in a promise and await it, but we don't want to block the request
-    mixpanel.people.set_once(config.userId, peopleProperties, err => {
-      if (err) {
-        Sentry.captureException(err, { tags: { domain: 'trackPeopleAnalyticOnce' } })
-      }
-    })
+
+    await resolveWithTimeout(
+      promisifiedMixpanelPeopleSetOnce(config.userId, peopleProperties),
+    ).catch(err =>
+      Sentry.captureException(err, {
+        tags: { domain: 'trackPeopleAnalyticOnce' },
+        user: { id: config.userId },
+      }),
+    )
   }
 
-  function set(peopleProperties: AnalyticsPeopleProperties) {
+  async function set(peopleProperties: AnalyticsPeopleProperties) {
     if (!config.localUser) {
       logger.info(`Skipped People Properties Set`, peopleProperties)
       return
     }
     logger.info(`People Properties Set`, peopleProperties)
-    // we could wrap this in a promise and await it, but we don't want to block the request
-    mixpanel.people.set(config.userId, peopleProperties, err => {
-      if (err) {
-        Sentry.captureException(err, { tags: { domain: 'trackPeopleAnalytic' } })
-      }
-    })
+    await resolveWithTimeout(promisifiedMixpanelPeopleSet(config.userId, peopleProperties)).catch(
+      err =>
+        Sentry.captureException(err, {
+          tags: { domain: 'trackPeopleAnalytic' },
+          user: { id: config.userId },
+        }),
+    )
   }
 
   return { setOnce, set }

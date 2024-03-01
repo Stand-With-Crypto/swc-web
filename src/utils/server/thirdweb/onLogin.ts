@@ -78,8 +78,8 @@ export async function onLogin(
   })
   if (existingVerifiedUser) {
     log('existing user found')
-    getServerAnalytics({ userId: existingVerifiedUser.id, localUser }).track('User Logged In')
-    getServerPeopleAnalytics({ userId: existingVerifiedUser.id, localUser }).set({
+    await getServerAnalytics({ userId: existingVerifiedUser.id, localUser }).track('User Logged In')
+    await getServerPeopleAnalytics({ userId: existingVerifiedUser.id, localUser }).set({
       'Datetime of Last Login': new Date(),
     })
     return { userId: existingVerifiedUser.id }
@@ -271,12 +271,12 @@ export async function onNewLogin(props: NewLoginParams) {
     wasUserCreated,
   })
   if (localUser) {
-    getServerPeopleAnalytics({ userId: user.id, localUser }).setOnce(
+    await getServerPeopleAnalytics({ userId: user.id, localUser }).setOnce(
       mapPersistedLocalUserToAnalyticsProperties(localUser.persisted),
     )
   }
 
-  getServerAnalytics({ userId: user.id, localUser }).track('User Logged In', {
+  await getServerAnalytics({ userId: user.id, localUser }).track('User Logged In', {
     'Is First Time': true,
     'Existing Users Found Ids': existingUsersWithSource.map(x => x.user.id),
     'Existing Users Found Sources': existingUsersWithSource.map(x => x.sourceOfExistingUser),
@@ -295,7 +295,7 @@ export async function onNewLogin(props: NewLoginParams) {
     'Had Opt In User Action': postLoginUserActionSteps.hadOptInUserAction,
     'Count Past Actions Minted': postLoginUserActionSteps.pastActionsMinted.length,
   })
-  getServerPeopleAnalytics({ userId: user.id, localUser }).set({
+  await getServerPeopleAnalytics({ userId: user.id, localUser }).set({
     'Datetime of Last Login': new Date(),
   })
 
@@ -453,12 +453,6 @@ async function maybeUpsertCryptoAddress({
     if (existingUserCryptoAddress.hasBeenVerifiedViaAuth) {
       Sentry.captureMessage(
         'maybeUpsertCryptoAddress: invalid logic, we should only hit this point if the crypto address is unverified',
-        { extra: { cryptoAddress, user, localUser } },
-      )
-    }
-    if (user?.primaryUserCryptoAddressId) {
-      Sentry.captureMessage(
-        'maybeUpsertCryptoAddress: User had different primary primaryUserCryptoAddressId',
         { extra: { cryptoAddress, user, localUser } },
       )
     }
@@ -653,7 +647,7 @@ async function triggerPostLoginUserActionSteps({
     })
     log(`triggerPostLoginUserActionSteps: opt in user action created`)
     await claimNFT(optInUserAction, userCryptoAddress)
-    getServerAnalytics({ userId: user.id, localUser }).trackUserActionCreated({
+    await getServerAnalytics({ userId: user.id, localUser }).trackUserActionCreated({
       actionType: UserActionType.OPT_IN,
       campaignName: UserActionOptInCampaignName.DEFAULT,
       creationMethod: 'On Site',

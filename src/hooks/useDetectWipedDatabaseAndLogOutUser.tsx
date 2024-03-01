@@ -32,7 +32,7 @@ export function useDetectWipedDatabaseAndLogOutUser() {
   useEffect(() => {
     if (state === 'wiped-database') {
       logger.info('Detected wiped database. Logging out user.')
-      logoutAndDisconnectRef.current()
+      void logoutAndDisconnectRef.current()
     }
   }, [state])
 }

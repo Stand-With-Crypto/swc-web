@@ -10,6 +10,8 @@ import { prismaClient } from '@/utils/server/prismaClient'
 import { getLogger } from '@/utils/shared/logger'
 import { NFTSlug } from '@/utils/shared/nft'
 import {
+  ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
+  ActiveClientUserActionWithCampaignType,
   UserActionCallCampaignName,
   UserActionDonationCampaignName,
   UserActionEmailCampaignName,
@@ -22,7 +24,10 @@ import {
 
 import NFTMintStatus = $Enums.NFTMintStatus
 
-export const ACTION_NFT_SLUG: Record<UserActionType, Record<string, NFTSlug | null>> = {
+export const ACTION_NFT_SLUG: Record<
+  ActiveClientUserActionWithCampaignType,
+  Record<string, NFTSlug | null>
+> = {
   [UserActionType.OPT_IN]: {
     [UserActionOptInCampaignName.DEFAULT]: NFTSlug.SWC_SHIELD,
   },
@@ -53,8 +58,15 @@ const logger = getLogger('claimNft')
 export async function claimNFT(userAction: UserAction, userCryptoAddress: UserCryptoAddress) {
   logger.info('Triggered')
   const { actionType, campaignName } = userAction
+  const activeClientUserActionTypeWithCampaign = ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN.find(
+    key => key === userAction.actionType,
+  )
 
-  const nftSlug: NFTSlug | null = ACTION_NFT_SLUG[actionType][campaignName]
+  if (!activeClientUserActionTypeWithCampaign) {
+    throw error(`Action ${userAction.actionType} doesn't have an active campaign.`)
+  }
+
+  const nftSlug = ACTION_NFT_SLUG[activeClientUserActionTypeWithCampaign][campaignName]
   if (nftSlug === null) {
     throw error(`Action ${actionType} for campaign ${campaignName} doesn't have an NFT slug.`)
   }

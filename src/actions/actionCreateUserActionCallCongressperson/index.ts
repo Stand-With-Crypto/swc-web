@@ -12,7 +12,7 @@ import {
 } from '@/utils/server/getMaybeUserAndMethodOfMatch'
 import { claimNFT } from '@/utils/server/nft/claimNFT'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
+import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import {
   mapLocalUserToUserDatabaseFields,
@@ -46,6 +46,7 @@ interface SharedDependencies {
   sessionId: ReturnType<typeof getUserSessionId>
   analytics: ReturnType<typeof getServerAnalytics>
   peopleAnalytics: ReturnType<typeof getServerPeopleAnalytics>
+  hasRegisteredRatelimit: boolean
 }
 
 const logger = getLogger(`actionCreateUserActionCallCongressperson`)
@@ -59,6 +60,9 @@ async function _actionCreateUserActionCallCongressperson(
   input: CreateActionCallCongresspersonInput,
 ) {
   logger.info('triggered')
+  const { triggerRateLimiterAtMostOnce } = getRequestRateLimiter({
+    context: 'unauthenticated',
+  })
 
   const validatedInput = createActionCallCongresspersonInputValidationSchema.safeParse(input)
   if (!validatedInput.success) {
@@ -75,7 +79,10 @@ async function _actionCreateUserActionCallCongressperson(
       include: { primaryUserCryptoAddress: true, address: true },
     },
   })
-  await throwIfRateLimited()
+
+  if (!userMatch.user) {
+    await triggerRateLimiterAtMostOnce()
+  }
 
   const user = userMatch.user || (await createUser({ localUser, sessionId }))
 
@@ -90,7 +97,7 @@ async function _actionCreateUserActionCallCongressperson(
 
   const recentUserAction = await getRecentUserActionByUserId(user.id, validatedInput)
   if (recentUserAction) {
-    logSpamActionSubmissions({
+    await logSpamActionSubmissions({
       validatedInput,
       userAction: recentUserAction,
       userId: user.id,
@@ -99,6 +106,7 @@ async function _actionCreateUserActionCallCongressperson(
     return { user: getClientUser(user) }
   }
 
+  await triggerRateLimiterAtMostOnce()
   const { userAction, updatedUser } = await createActionAndUpdateUser({
     user,
     isNewUser: !userMatch.user,
@@ -134,7 +142,7 @@ async function createUser(sharedDependencies: Pick<SharedDependencies, 'localUse
   logger.info('created user')
 
   if (localUser?.persisted) {
-    getServerPeopleAnalytics({ localUser, userId: createdUser.id }).setOnce(
+    await getServerPeopleAnalytics({ localUser, userId: createdUser.id }).setOnce(
       mapPersistedLocalUserToAnalyticsProperties(localUser.persisted),
     )
   }
@@ -155,7 +163,7 @@ async function getRecentUserActionByUserId(
   })
 }
 
-function logSpamActionSubmissions({
+async function logSpamActionSubmissions({
   validatedInput,
   userAction,
   userId,
@@ -166,7 +174,7 @@ function logSpamActionSubmissions({
   userId: User['id']
   sharedDependencies: Pick<SharedDependencies, 'analytics'>
 }) {
-  sharedDependencies.analytics.trackUserActionCreatedIgnored({
+  await sharedDependencies.analytics.trackUserActionCreatedIgnored({
     actionType: UserActionType.CALL,
     campaignName: validatedInput.data.campaignName,
     reason: 'Too Many Recent',
@@ -240,7 +248,7 @@ async function createActionAndUpdateUser<U extends User>({
     : user
   logger.info('created user action and updated user')
 
-  sharedDependencies.analytics.trackUserActionCreated({
+  await sharedDependencies.analytics.trackUserActionCreated({
     actionType: UserActionType.CALL,
     campaignName: validatedInput.campaignName,
     'Recipient DTSI Slug': validatedInput.dtsiSlug,
@@ -248,7 +256,7 @@ async function createActionAndUpdateUser<U extends User>({
     ...convertAddressToAnalyticsProperties(validatedInput.address),
     userState: isNewUser ? 'New' : 'Existing',
   })
-  sharedDependencies.peopleAnalytics.set({
+  await sharedDependencies.peopleAnalytics.set({
     ...convertAddressToAnalyticsProperties(validatedInput.address),
   })
 

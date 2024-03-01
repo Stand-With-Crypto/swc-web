@@ -53,8 +53,6 @@ export const GooglePlacesSelect = React.forwardRef<React.ElementRef<'input'>, Pr
         analytics={'Google Place Select'}
         formatPopoverTrigger={triggerProps => (
           <InputWithIcons
-            // There's a weird bug where, because the input is type="button", on mobile a long address string will overflow the entire page
-            // whitespace-normal prevents that bug
             className={cn(
               triggerProps.value || 'text-gray-500',
               'cursor-pointer whitespace-normal',
@@ -66,6 +64,8 @@ export const GooglePlacesSelect = React.forwardRef<React.ElementRef<'input'>, Pr
             ref={ref}
             value={triggerProps.value?.description || inputProps.placeholder || 'select a location'}
             {...inputProps}
+            // There's a weird bug where, because the input is type="button", on mobile a long address string will overflow the entire page
+            type="input"
           />
         )}
         getOptionKey={val => val.place_id}

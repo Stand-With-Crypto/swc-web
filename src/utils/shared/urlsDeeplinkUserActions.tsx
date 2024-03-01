@@ -1,12 +1,13 @@
 import { UserActionType } from '@prisma/client'
 
 import { SupportedLocale } from '@/intl/locales'
+import { ActiveClientUserActionType } from '@/utils/shared/activeUserAction'
 import { getIntlPrefix } from '@/utils/shared/urls'
 
 export const USER_ACTION_DEEPLINK_MAP: Omit<
   {
-    [key in UserActionType]: {
-      getDeeplinkUrl: (config: { locale: SupportedLocale; slug?: string }) => string
+    [key in ActiveClientUserActionType]: {
+      getDeeplinkUrl: (config: { locale: SupportedLocale }) => string
     }
   },
   typeof UserActionType.TWEET
@@ -39,11 +40,6 @@ export const USER_ACTION_DEEPLINK_MAP: Omit<
   [UserActionType.VOTER_REGISTRATION]: {
     getDeeplinkUrl: ({ locale }) => {
       return `${getIntlPrefix(locale)}/action/voter-registration`
-    },
-  },
-  [UserActionType.LIVE_EVENT]: {
-    getDeeplinkUrl: ({ locale, slug }) => {
-      return `${getIntlPrefix(locale)}/action/live-event/${slug ?? ''}`
     },
   },
 }

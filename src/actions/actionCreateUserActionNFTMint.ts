@@ -52,7 +52,6 @@ async function _actionCreateUserActionMintNFT(input: CreateActionMintNFTInput) {
 
   const localUser = parseLocalUserFromCookies()
   const sessionId = getUserSessionId()
-  await throwIfRateLimited()
 
   const authUser = await appRouterGetAuthUser()
   if (!authUser) {
@@ -91,6 +90,7 @@ async function _actionCreateUserActionMintNFT(input: CreateActionMintNFTInput) {
    * If any of there conditions fail, return an error
    */
 
+  await throwIfRateLimited({ context: 'authenticated' })
   await createAction({
     user,
     validatedInput: validatedInput.data,
@@ -140,7 +140,7 @@ async function createAction<U extends User>({
 
   logger.info('created user action')
 
-  sharedDependencies.analytics.trackUserActionCreated({
+  await sharedDependencies.analytics.trackUserActionCreated({
     actionType: UserActionType.NFT_MINT,
     campaignName: validatedInput.campaignName,
     userState: 'Existing',

@@ -33,13 +33,13 @@ async function generateDatabaseMetrics() {
     prismaClient.user.count({ where: { hasOptedInToEmails: true } }),
     prismaClient.user.count({ where: { hasOptedInToSms: true } }),
     prismaClient.$queryRaw`
-    SELECT 
+    SELECT
         STR_TO_DATE(CONCAT(YEARWEEK(datetime_created), ' Sunday'), '%X%V %W') AS datetimeCreatedWeek,
-        acquisition_source as acquisitionSource, 
+        acquisition_source as acquisitionSource,
         COUNT(*) AS totalCount
     FROM user
     WHERE datetime_created >= ${gteDate} AND datetime_created <= ${lteDate}
-    GROUP BY  
+    GROUP BY
         datetimeCreatedWeek,
         acquisitionSource
     ORDER BY
@@ -47,13 +47,13 @@ async function generateDatabaseMetrics() {
         acquisitionSource
     `,
     prismaClient.$queryRaw`
-    SELECT 
+    SELECT
         STR_TO_DATE(CONCAT(YEARWEEK(datetime_created), ' Sunday'), '%X%V %W') AS datetimeCreatedWeek,
-        action_type as actionType, 
+        action_type as actionType,
         COUNT(*) AS totalCount
     FROM user_action
     WHERE datetime_created >= ${gteDate} AND datetime_created <= ${lteDate}
-    GROUP BY  
+    GROUP BY
         datetimeCreatedWeek,
         actionType
     ORDER BY
@@ -106,4 +106,4 @@ async function generateDatabaseMetrics() {
   await xlsx.writeFile(workbook, './src/bin/localCache/userActionsByWeekByActionType.xlsx')
 }
 
-runBin(generateDatabaseMetrics)
+void runBin(generateDatabaseMetrics)
