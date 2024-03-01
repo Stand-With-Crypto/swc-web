@@ -3,7 +3,6 @@
 author=$(echo $VERCEL_GIT_COMMIT_AUTHOR_LOGIN)
 
 users_file="./bin/vercel-users.txt"
-
 author_found=false
 
 while IFS= read -r line; do
