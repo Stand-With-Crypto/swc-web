@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { ConnectEmbed, ConnectEmbedProps } from '@thirdweb-dev/react'
 
 import { ANALYTICS_NAME_LOGIN } from '@/components/app/authentication/constants'
@@ -18,9 +18,9 @@ export function ThirdwebLoginContent({
   ...props
 }: ConnectEmbedProps & { initialEmailAddress?: string | null }) {
   const urls = useIntlUrls()
-  const thirdwebEmbeddedAuthContainer = React.useRef<HTMLDivElement>(null)
+  const thirdwebEmbeddedAuthContainer = useRef<HTMLDivElement>(null)
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!initialEmailAddress) {
       return
     }
