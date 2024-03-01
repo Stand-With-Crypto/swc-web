@@ -10,7 +10,7 @@ export function PageContribute() {
       <section>
         <PageTitle className="mb-4">Contribute to Stand With Crypto</PageTitle>
         <PageSubTitle>
-          We're calling on passionate developers, innovators, and enthusiasts to contribute to our
+          We’re calling on passionate developers, innovators, and enthusiasts to contribute to our
           open source project aimed at safeguarding and advancing the crypto ecosystem.
         </PageSubTitle>
       </section>
@@ -26,11 +26,23 @@ export function PageContribute() {
             </>
           ),
           content: (
-            <iframe
-              allowFullScreen
-              className="aspect-auto min-h-[50vh] w-full border"
-              src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2F0UVwglzDupzR0hwTnZWGe9%2FOpen-Source-SWC%3Ftype%3Ddesign%26node-id%3D0%253A1%26mode%3Ddesign%26t%3D7XXRxL4bSW1HNARp-1"
-            ></iframe>
+            <>
+              <iframe
+                allowFullScreen
+                className="aspect-auto min-h-[50vh] w-full border"
+                src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2F0UVwglzDupzR0hwTnZWGe9%2FOpen-Source-SWC%3Ftype%3Ddesign%26node-id%3D0%253A1%26mode%3Ddesign%26t%3D7XXRxL4bSW1HNARp-1"
+              ></iframe>
+              <div className="mt-8 flex items-center justify-between gap-3 rounded-xl bg-gray-100 p-6 text-left">
+                <p className="font-semibold">Download all logos and assets</p>
+                <div>
+                  <Button asChild>
+                    <a href="https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/public/Stand%20With%20Crypto%20Brand%20Assets-Z17GHwhQoTBCbSQSPjovITDc78V3wr.zip">
+                      Download
+                    </a>
+                  </Button>
+                </div>
+              </div>
+            </>
           ),
         },
         {
