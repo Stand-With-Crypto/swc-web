@@ -53,7 +53,7 @@ export function UserActionFormNFTMintTransactionWatch({
   const createAction = async (transaction: TransactionResponse) => {
     const input: CreateActionMintNFTInput = {
       campaignName: UserActionNftMintCampaignName.DEFAULT,
-      transactionHash: transaction.hash,
+      transactionHash: transaction.hash as `0x${string}`,
     }
 
     return await triggerServerActionForForm(
