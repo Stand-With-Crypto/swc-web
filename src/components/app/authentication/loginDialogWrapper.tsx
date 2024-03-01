@@ -202,7 +202,15 @@ function useInitialEmail() {
   return useSWR(
     localSessionId ? apiUrls.unidentifiedUser({ sessionId: localSessionId }) : null,
     async url => {
-      return fetchReq(url).then(res => res.json() as Promise<{ user: ClientUnidentifiedUser }>)
+      return fetchReq(url)
+        .then(res => res.json() as Promise<{ user: ClientUnidentifiedUser }>)
+        .catch(err => {
+          Sentry.captureException(err, {
+            tags: { domain: 'useInitialEmail' },
+            extra: { url },
+          })
+          return null
+        })
     },
   )
 }
