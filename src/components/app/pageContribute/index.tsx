@@ -45,24 +45,24 @@ export function PageContribute() {
             </>
           ),
         },
-        {
-          imageSrc: '/pagesContent/contribute/code.svg',
-          title: 'Contribute to our open source repo',
-          subtitle: (
-            <>
-              We’re calling all software engineers to join us in the fight to keep crypto in
-              America. Contribute directly to StandWithCrypto.org through our open source GitHub
-              repo.
-            </>
-          ),
-          content: (
-            <Button asChild size="lg">
-              <ExternalLink href={'https://github.com/Stand-With-Crypto/swc-web/'}>
-                View Github
-              </ExternalLink>
-            </Button>
-          ),
-        },
+        // {
+        //   imageSrc: '/pagesContent/contribute/code.svg',
+        //   title: 'Contribute to our open source repo',
+        //   subtitle: (
+        //     <>
+        //       We’re calling all software engineers to join us in the fight to keep crypto in
+        //       America. Contribute directly to StandWithCrypto.org through our open source GitHub
+        //       repo.
+        //     </>
+        //   ),
+        //   content: (
+        //     <Button asChild size="lg">
+        //       <ExternalLink href={'https://github.com/Stand-With-Crypto/swc-web/'}>
+        //         View Github
+        //       </ExternalLink>
+        //     </Button>
+        //   ),
+        // },
         {
           imageSrc: '/pagesContent/contribute/stances.svg',
           title: 'Contribute to our politician scoring system',
