@@ -37,7 +37,7 @@ interface SharedDependencies {
 }
 
 const logger = getLogger(`actionCreateUserActionMintNFT`)
-const contractMetadata = NFT_SLUG_BACKEND_METADATA[NFTSlug.SWC_SHIELD]
+const contractMetadata = NFT_SLUG_BACKEND_METADATA[NFTSlug.STAND_WITH_CRYPTO_SUPPORTER]
 
 export const actionCreateUserActionMintNFT = withServerActionMiddleware(
   'actionCreateUserActionMintNFT',
@@ -147,7 +147,7 @@ async function createAction<U extends User>({
           nftSlug: NFTSlug.SWC_SHIELD,
           status: NFTMintStatus.CLAIMED,
           costAtMint: decimalEthTransactionValue,
-          contractAddress: NFT_SLUG_BACKEND_METADATA[NFTSlug.SWC_SHIELD].contractAddress,
+          contractAddress: contractMetadata.contractAddress,
           costAtMintCurrencyCode: NFTCurrency.ETH,
           costAtMintUsd: decimalEthTransactionValue.mul(ratio),
           transactionHash: validatedInput.transactionHash,

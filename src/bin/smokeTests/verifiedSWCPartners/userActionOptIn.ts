@@ -26,6 +26,17 @@ async function smokeTestUserActionOptIn() {
       }),
     },
     body: JSON.stringify({
+      address: {
+        streetNumber: faker.location.buildingNumber(),
+        route: faker.location.street(),
+        subpremise: '',
+        locality: faker.location.city(),
+        administrativeAreaLevel1: faker.location.state(),
+        administrativeAreaLevel2: '',
+        postalCode: faker.location.zipCode(),
+        postalCodeSuffix: '',
+        countryCode: 'US',
+      },
       emailAddress: faker.internet.email(),
       optInType: UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER,
       isVerifiedEmailAddress: true,
