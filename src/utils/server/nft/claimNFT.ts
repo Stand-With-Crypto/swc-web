@@ -48,8 +48,7 @@ export const ACTION_NFT_SLUG: Record<
     [UserActionVoterRegistrationCampaignName.DEFAULT]: NFTSlug.I_AM_A_VOTER,
   },
   [UserActionType.LIVE_EVENT]: {
-    // Add NFT slugs for live event in a follow-up
-    [UserActionLiveEventCampaignName['2024_03_04_LA']]: null,
+    [UserActionLiveEventCampaignName['2024_03_04_LA']]: NFTSlug.LA_CRYPTO_EVENT_2024_03_04,
   },
 }
 

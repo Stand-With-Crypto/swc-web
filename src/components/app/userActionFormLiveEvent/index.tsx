@@ -35,8 +35,7 @@ export function UserActionFormLiveEvent({
     case SectionNames.SUCCESS:
       return (
         <UserActionFormSuccessScreen
-          // Replace with real NFT
-          nftWhenAuthenticated={NFT_CLIENT_METADATA[NFTSlug.CALL_REPRESENTATIVE_SEPT_11]}
+          nftWhenAuthenticated={NFT_CLIENT_METADATA[NFTSlug.LA_CRYPTO_EVENT_2024_03_04]}
           onClose={onClose}
         />
       )
