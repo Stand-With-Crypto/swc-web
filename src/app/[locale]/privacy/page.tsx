@@ -2,11 +2,14 @@ import { Metadata } from 'next'
 
 import { PagePrivacyPolicy } from '@/components/app/pagePrivacyPolicy'
 import { StaticPagesCTA } from '@/components/app/staticPagesCTA'
+import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 
 export const dynamic = 'error'
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy',
+  ...generateMetadataDetails({
+    title: 'Privacy Policy',
+  }),
 }
 
 export default async function TermsOfServicePage() {

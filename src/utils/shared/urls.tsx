@@ -23,6 +23,7 @@ export const getIntlUrls = (
     privacyPolicy: () => `${localePrefix}/privacy`,
     about: () => `${localePrefix}/about`,
     resources: () => `${localePrefix}/resources`,
+    contribute: () => `${localePrefix}/contribute`,
     donate: () => `${localePrefix}/donate`,
     leaderboard: (params?: { pageNum?: number; tab: RecentActivityAndLeaderboardTabs }) => {
       const tabPrefix =
