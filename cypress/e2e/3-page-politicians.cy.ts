@@ -14,9 +14,9 @@ it('page - politicians interactions', () => {
   cy.get('[role="option"]').contains('All').click()
   cy.get('tbody').find('tr').should('have.length', 100)
   // filter the table by name
-  cy.get('input[placeholder="Search by name"]').type('Cynthia Lummis')
+  cy.get('input[placeholder="Search by name or state"]').type('Cynthia Lummis')
   cy.get('tbody').find('tr').should('have.length', 1)
-  cy.get('input[placeholder="Search by name"]').clear()
+  cy.get('input[placeholder=""Search by name or state"]').clear()
   cy.get('tbody').find('tr').should('have.length', 100)
 
   // enter your address and see your rep
