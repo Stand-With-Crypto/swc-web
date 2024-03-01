@@ -104,7 +104,7 @@ async function _actionCreateUserActionLiveEvent(input: CreateActionLiveEventInpu
 
   const recentUserAction = await getRecentUserActionByUserId(user.id, validatedInput)
   if (recentUserAction) {
-    logSpamActionSubmissions({
+    await logSpamActionSubmissions({
       validatedInput,
       userAction: recentUserAction,
       userId: user.id,
@@ -169,7 +169,7 @@ async function getRecentUserActionByUserId(
   })
 }
 
-function logSpamActionSubmissions({
+async function logSpamActionSubmissions({
   validatedInput,
   userAction,
   userId,
