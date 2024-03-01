@@ -85,4 +85,4 @@ Before proceeding with anything, **PLEASE** take time to review the [Knowledge p
 
 ## Licenses
 
-Software source code, documentation source, and configuration files are licensed under Apache 2.0. Non-code documentation, including but not limited to [insert names of some example documents], is licensed under CC-BY-4.0.
+Software source code, documentation source, and configuration files are licensed under Apache 2.0. Non-code documentation is licensed under CC-BY-4.0.
