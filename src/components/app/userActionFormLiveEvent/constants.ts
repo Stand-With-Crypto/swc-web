@@ -1,3 +1,4 @@
+import { NFTSlug } from '@/utils/shared/nft'
 import { UserActionLiveEventCampaignName } from '@/utils/shared/userActionCampaigns'
 
 export const ANALYTICS_NAME_USER_ACTION_FORM_LIVE_EVENT = 'User Action Form Live Event'
@@ -8,6 +9,10 @@ export enum SectionNames {
 }
 
 type Message = 'title' | 'signedOutSubtitle' | 'signedInSubtitle'
+
+export const LIVE_EVENT_SLUG_NFT_METADATA: Record<UserActionLiveEventCampaignName, NFTSlug> = {
+  [UserActionLiveEventCampaignName['2024_03_04_LA']]: NFTSlug.LA_CRYPTO_EVENT_2024_03_04,
+}
 
 export const MESSAGES: Record<UserActionLiveEventCampaignName, Record<Message, string>> = {
   [UserActionLiveEventCampaignName['2024_03_04_LA']]: {

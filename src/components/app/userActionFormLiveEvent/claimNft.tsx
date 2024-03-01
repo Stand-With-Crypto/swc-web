@@ -7,12 +7,18 @@ import {
   CreateActionLiveEventInput,
 } from '@/actions/actionCreateUserActionLiveEvent'
 import { UserActionFormLayout } from '@/components/app/userActionFormCommon'
-import { MESSAGES, SectionNames } from '@/components/app/userActionFormLiveEvent/constants'
+import {
+  LIVE_EVENT_SLUG_NFT_METADATA,
+  MESSAGES,
+  SectionNames,
+} from '@/components/app/userActionFormLiveEvent/constants'
 import { Button } from '@/components/ui/button'
+import { NextImage } from '@/components/ui/image'
 import { UseSectionsReturn } from '@/hooks/useSections'
 import { UserActionLiveEventCampaignName } from '@/utils/shared/userActionCampaigns'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
+import { NFT_CLIENT_METADATA } from '@/utils/web/nft'
 import { toastGenericError } from '@/utils/web/toastUtils'
 
 interface Props extends UseSectionsReturn<SectionNames> {
@@ -23,6 +29,7 @@ interface Props extends UseSectionsReturn<SectionNames> {
 export function ClaimNft({ isLoggedIn, slug, goToSection }: Props) {
   const [loading, setLoading] = useState(false)
   const router = useRouter()
+  const nftImageMetadata = NFT_CLIENT_METADATA[LIVE_EVENT_SLUG_NFT_METADATA[slug]].image
 
   const handleClaimNft = useCallback(async () => {
     setLoading(true)
@@ -60,6 +67,12 @@ export function ClaimNft({ isLoggedIn, slug, goToSection }: Props) {
     <UserActionFormLayout>
       <UserActionFormLayout.Container>
         <div className="flex h-full  flex-col items-center justify-center gap-4">
+          <NextImage
+            alt={nftImageMetadata.alt}
+            height={nftImageMetadata.height}
+            src={nftImageMetadata.url}
+            width={nftImageMetadata.width}
+          />
           <UserActionFormLayout.Heading
             subtitle={MESSAGES[slug][isLoggedIn ? 'signedInSubtitle' : 'signedOutSubtitle']}
             title={MESSAGES[slug].title}
