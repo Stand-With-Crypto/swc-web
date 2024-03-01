@@ -10,5 +10,4 @@ export const USER_ACTION_TYPE_CTA_PRIORITY_ORDER: ReadonlyArray<ActiveClientUser
   UserActionType.DONATION,
   UserActionType.TWEET,
   UserActionType.NFT_MINT,
-  UserActionType.LIVE_EVENT,
 ]

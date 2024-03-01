@@ -145,7 +145,7 @@ async function createUser(sharedDependencies: Pick<SharedDependencies, 'localUse
   logger.info('created user')
 
   if (localUser?.persisted) {
-    getServerPeopleAnalytics({ localUser, userId: createdUser.id }).setOnce(
+    await getServerPeopleAnalytics({ localUser, userId: createdUser.id }).setOnce(
       mapPersistedLocalUserToAnalyticsProperties(localUser.persisted),
     )
   }
@@ -177,7 +177,7 @@ function logSpamActionSubmissions({
   userId: User['id']
   sharedDependencies: Pick<SharedDependencies, 'analytics'>
 }) {
-  sharedDependencies.analytics.trackUserActionCreatedIgnored({
+  await sharedDependencies.analytics.trackUserActionCreatedIgnored({
     actionType: UserActionType.LIVE_EVENT,
     campaignName: validatedInput.data.campaignName,
     reason: 'Too Many Recent',
@@ -217,7 +217,7 @@ async function createAction<U extends User>({
 
   logger.info('created user action')
 
-  sharedDependencies.analytics.trackUserActionCreated({
+  await sharedDependencies.analytics.trackUserActionCreated({
     actionType: UserActionType.LIVE_EVENT,
     campaignName: validatedInput.campaignName,
     userState: isNewUser ? 'New' : 'Existing',
