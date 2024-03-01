@@ -8,6 +8,7 @@ on:
 jobs:
   build:
     if: github.event.pull_request.draft == false
+    environment: preview
     runs-on: ubuntu-latest
     name: Lint, tests, typechecking
     env:
