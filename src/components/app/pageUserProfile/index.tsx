@@ -22,6 +22,8 @@ import { getSensitiveDataUserDisplayName } from '@/utils/web/userUtils'
 
 import { UserReferralUrl } from './userReferralUrl'
 
+const EXCLUDE_USER_ACTION_TYPES = [UserActionType.LIVE_EVENT]
+
 export function PageUserProfile({
   params,
   user,
@@ -40,7 +42,9 @@ export function PageUserProfile({
   }
   const { userActions } = user
   const performedUserActionTypes = uniq(userActions.map(x => x.actionType))
-  const excludeUserActionTypes = user.hasEmbeddedWallet ? [UserActionType.NFT_MINT] : []
+  const excludeUserActionTypes = user.hasEmbeddedWallet
+    ? [UserActionType.NFT_MINT, ...EXCLUDE_USER_ACTION_TYPES]
+    : EXCLUDE_USER_ACTION_TYPES
   return (
     <div className="container space-y-10 lg:space-y-16">
       {/* LATER-TASK enable this feature */}
