@@ -60,7 +60,7 @@
     "@tanstack/react-table": "^8.11.2",
     "@thirdweb-dev/auth": "^4.1.30",
     "@thirdweb-dev/engine": "^0.0.4",
-    "@thirdweb-dev/react": "^4.4.6",
+    "@thirdweb-dev/react": "^4.4.11",
     "@thirdweb-dev/wallets": "^2.4.8",
     "@udecode/plate": "^29.0.1",
     "@upstash/ratelimit": "^1.0.0",
@@ -121,7 +121,7 @@
     "utility-types": "^3.10.0",
     "uuid": "^9.0.1",
     "vaul": "^0.8.9",
-    "viem": "^1.21.4",
+    "viem": "^2.7.16",
     "winston": "^3.11.0",
     "xlsx": "^0.18.5",
     "zod": "^3.22.4"

@@ -38,7 +38,14 @@ export function ThirdwebLoginContent(props: ConnectEmbedProps) {
           </div>
         </div>
 
-        <ThirdwebLoginEmbedded {...props} />
+        <div
+          className="w-full"
+          // if someone enters a super long email, the component will overflow on the "enter confirmation code" screen
+          // this prevents that bug
+          style={{ maxWidth: 'calc(100vw - 56px)' }}
+        >
+          <ThirdwebLoginEmbedded {...props} />
+        </div>
 
         <p className="text-center text-xs text-muted-foreground">
           By signing up, I understand that Stand With Crypto and its vendors may collect and use my

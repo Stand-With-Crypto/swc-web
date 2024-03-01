@@ -6,7 +6,7 @@ import { UserActionType } from '@prisma/client'
 import { UserActionRowCTA } from '@/components/app/userActionRowCTA'
 import { USER_ACTION_ROW_CTA_INFO } from '@/components/app/userActionRowCTA/constants'
 import { cn } from '@/utils/web/cn'
-import { USER_ACTION_TYPE_PRIORITY_ORDER } from '@/utils/web/userActionUtils'
+import { USER_ACTION_TYPE_CTA_PRIORITY_ORDER } from '@/utils/web/userActionUtils'
 
 export function UserActionRowCTAsList({
   performedUserActionTypes,
@@ -20,8 +20,8 @@ export function UserActionRowCTAsList({
   const filteredActions = useMemo(
     () =>
       !excludeUserActionTypes
-        ? USER_ACTION_TYPE_PRIORITY_ORDER
-        : USER_ACTION_TYPE_PRIORITY_ORDER.filter(
+        ? USER_ACTION_TYPE_CTA_PRIORITY_ORDER
+        : USER_ACTION_TYPE_CTA_PRIORITY_ORDER.filter(
             actionType => !excludeUserActionTypes.includes(actionType),
           ),
     [excludeUserActionTypes],

@@ -42,6 +42,15 @@ const config: StorybookConfig = {
           __dirname,
           './serverActionMocks.ts',
         ),
+        '@/actions/actionUpdateUserInformationVisibility': path.resolve(
+          __dirname,
+          './serverActionMocks.ts',
+        ),
+        '@/actions/actionUpdateUserProfile': path.resolve(__dirname, './serverActionMocks.ts'),
+        '@/actions/actionCreateUserActionVoterRegistration': path.resolve(
+          __dirname,
+          './serverActionMocks.ts',
+        ),
         '@': path.resolve(__dirname, '../src'),
       }
     }

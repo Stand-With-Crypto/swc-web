@@ -1,10 +1,11 @@
-import { UserActionType, UserCryptoAddress } from '@prisma/client'
+import { UserCryptoAddress } from '@prisma/client'
 
 import { ACTION_NFT_SLUG, claimNFT } from '@/utils/server/nft/claimNFT'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getServerAnalytics } from '@/utils/server/serverAnalytics'
 import { ServerLocalUser } from '@/utils/server/serverLocalUser'
 import { getLogger } from '@/utils/shared/logger'
+import { ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN } from '@/utils/shared/userActionCampaigns'
 
 const logger = getLogger('mintPastActions')
 
@@ -14,7 +15,7 @@ export async function mintPastActions(
   localUser: ServerLocalUser | null,
 ) {
   logger.info('Triggered')
-  const actionWithNFT = (Object.keys(ACTION_NFT_SLUG) as Array<UserActionType>).filter(
+  const actionWithNFT = ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN.filter(
     key => ACTION_NFT_SLUG[key] !== null,
   )
 
