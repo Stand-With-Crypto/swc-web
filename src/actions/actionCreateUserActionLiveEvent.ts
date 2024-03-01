@@ -68,7 +68,10 @@ async function _actionCreateUserActionLiveEvent(input: CreateActionLiveEventInpu
     }
   }
 
-  if (NEXT_PUBLIC_ENVIRONMENT === 'production') {
+  if (
+    !process.env.NEXT_PUBLIC_BYPASS_LIVE_EVENT_DURATION_CHECK &&
+    NEXT_PUBLIC_ENVIRONMENT === 'production'
+  ) {
     const currentTime = Date.now()
     const eventDuration = EVENT_DURATION[validatedInput.data.campaignName]
     if (
