@@ -4,8 +4,8 @@ Below is a non-exhaustive list of coding conventions that we follow. This list i
 
 ## General
 
-- If a convention can be programmatically audited/enforced with a tool like eslint and prettier, we should leverage that tool.
-- Avoid export default unless required by the framework (for example Next.js App Router pages). Named exports make auto-importing in IDEs like VSCode easier.
+- If a convention can be programmatically audited or enforced with a tool like eslint and prettier, we should leverage that tool.
+- Avoid `export default` unless required by the framework (for example Next.js App Router pages). Named exports make auto-importing in IDEs like VSCode easier.
 
 ## TypeScript
 
@@ -13,8 +13,8 @@ Below is a non-exhaustive list of coding conventions that we follow. This list i
 - Code should be camelCase by default
 - Constants should be ALL_UPPER_SNAKE_CASE
   - When defining a constant array, add `readonly` to prevent unexpected mutations
-- Variables that are booleans should be prefixed with a descriptor that implies a yes or no answer. Examples of prefixes include `has`, `is`, `should`, `can`, etc
-- If a parameter or prop is required by a component, function or method it should never be defined as optional
+- Boolean variables should be prefixed with a descriptor that implies a yes or no answer. Examples of prefixes include `has`, `is`, `should`, `can`, etc.
+- If a parameter or prop is required by a component, function, or method, it should never be defined as optional
 - Type definitions should use the `interface` keyword unless in specific cases where it's not possible due to a type assignment or something else (e.g.: `type T = Pick<...>`)
 
 ## Validation
