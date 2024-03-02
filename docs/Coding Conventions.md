@@ -1,6 +1,6 @@
 # Coding Conventions
 
-Below is a non-exhaustive list of coding conventions that we try to follow. This list is ever evolving and suggestions submitted via PR are highly encouraged!
+Below is a non-exhaustive list of coding conventions that we follow. This list is ever evolving and suggestions submitted via PR are highly encouraged!
 
 ## General
 
@@ -22,13 +22,13 @@ Below is a non-exhaustive list of coding conventions that we try to follow. This
 - Always validate/sanitize server-side input
 - For client-side and server-side input validation, leverage [zod](https://github.com/colinhacks/zod)
 - When using zod for client-side validation, do not import `z` from the library as this prevents tree-shaking from removing unused portions of the library. Instead import the individual methods (`object`, `string`, etc) from the package.
-- when you need field-level errors to be returned to the client, make sure to return them in an object structure as `{ errors: validatedFields.error.flatten().fieldErrors }` so they can successfully be used by client side functions like `triggerServerActionForForm`
-- make sure we normalize values in our validators before persisting. For example, all emails should be `.toLowerCase()` before persisting
+- When you need field-level errors to be returned to the client, make sure to return them in an object structure as `{ errors: validatedFields.error.flatten().fieldErrors }` so they can successfully be used by client side functions like `triggerServerActionForForm`
+- Make sure we normalize values in our validators before persisting. For example, all emails should be `.toLowerCase()` before persisting
 - Root level functions must be defined with the `function` keyword and arrow functions should be used on nested contexts (this applies for components and methods)
 
 ## UI Development
 
-- Whenever possible, try and use [TailwindCSS](https://tailwindcss.com/) and [Radix UI](https://www.radix-ui.com/) as the core primitives for building UI
+- Whenever possible, try to use [TailwindCSS](https://tailwindcss.com/) and [Radix UI](https://www.radix-ui.com/) as the core primitives for building UI
 - When tasked with building out a new base-level UI primitive (a checkbox component for example), consider checking [shadcn](https://ui.shadcn.com/docs/components/), a CLI tool that aides in the rapid development of TailwindCSS/Radix UI components, to see if there's any prebuilt examples that we can use as a starting point. Because shadcn [is not a component library](https://ui.shadcn.com/docs), we get all the benefits of bootstrapping the UI with some best practices, and none of the downsides of getting locked in to opinionated component libraries that are hard to customize.
 - When building forms that require best-in-class UX practices (field-level error validation for example), consider leveraging `react-hook-form` and the corresponding pre-built components in `src/components/ui/form`.
 - For standalone header text, consider using [react-wrap-balancer](https://react-wrap-balancer.vercel.app/) to aide it's responsiveness. See our `PageTitleText` and `PageSubtitle` components
