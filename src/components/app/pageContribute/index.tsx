@@ -98,7 +98,11 @@ export function PageContribute() {
             <div className="flex flex-col items-center gap-12">
               <div className="flex justify-center">
                 <Button asChild size="lg">
-                  <ExternalLink href={'https://www.dotheysupportit.com/faq'}>
+                  <ExternalLink
+                    href={
+                      'mailto:info@standwithcrypto.org?subject=Stand%20With%20Crypto%20Partner%20Inquiry'
+                    }
+                  >
                     Become a Partner
                   </ExternalLink>
                 </Button>
