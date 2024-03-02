@@ -14,7 +14,7 @@ const partnersWithPlaceholders = Array.from(
 
 export function PartnerGrid() {
   return (
-    <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
+    <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 md:grid-cols-4">
       {partnersWithPlaceholders.map(({ title, imageSrc }, index) => (
         <NextImage
           alt={`${title} logo`}
