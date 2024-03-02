@@ -1,20 +1,20 @@
 # Stand With Crypto
 
-**NOTE**: the team is [actively working torwards](https://github.com/Stand-With-Crypto/swc-web/milestone/3) getting the repo in a state where anyone can run the app locally without requiring specific permissions.
+**NOTE**: the team is [actively working towards](https://github.com/Stand-With-Crypto/swc-web/milestone/3) getting the repo in a state where anyone can run the app locally without requiring specific permissions.
 
 ## Local Development
 
 ### Knowledge pre-requisites
 
 - Read `docs/Leveraging Modern NextJS Features.md` for an overview on the new Next.js features and React Server Components + Server Actions being leveraged in this repo
-  - If you this is your first time working with these technologies, please take the time to read the linked-to blog posts
+  - If this is your first time working with these technologies, please take the time to read the linked-to blog posts
 - Read `docs/Coding Conventions.md` for an overview of coding conventions encouraged for this project
 
 ### Development pre-requisites
 
 - Install [Node](https://nodejs.org/en) v20.10.0 ([nvm](https://github.com/nvm-sh/nvm) is recommended for installing Node)
 - Clone this repository to your local machine (forking is disabled)
-  - If you using SSH to clone, but you do not have a public SSH key for your GitHub account (which will prevent cloning), follow the [GitHub SSH guide](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) to set up SSH authentication and signing
+  - If you are using SSH to clone, but you do not have a public SSH key for your GitHub account (which will prevent cloning), follow the [GitHub SSH guide](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) to set up SSH authentication and signing
 - `cd` into your local swc-web repository
 - Run `npm install`
 - Run `cp .env.example .env`
