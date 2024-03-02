@@ -37,7 +37,7 @@ export const USER_ACTION_DEEPLINK_MAP: Omit<
       return `${getIntlPrefix(locale)}/action/nft-mint`
     },
   },
-  VOTER_REGISTRATION: {
+  [UserActionType.VOTER_REGISTRATION]: {
     getDeeplinkUrl: ({ locale }) => {
       return `${getIntlPrefix(locale)}/action/voter-registration`
     },

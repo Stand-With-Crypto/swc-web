@@ -4,14 +4,14 @@ For verified partners, Stand With Crypto provides APIs that allow you to program
 
 ## API Response Structure
 
-All successful API response will return a `VerifiedSWCPartnerApiResponse` that has the following shape:
+All successful API responses will return a `VerifiedSWCPartnerApiResponse` that has the following shape:
 
 ```
-export type VerifiedSWCPartnerApiResponse = {
-  result: string
-  resultOptions: ResultOptions[]
-  sessionId: string
-  userId: string
+export type VerifiedSWCPartnerApiResponse<ResultOptions extends string> = {
+  result: ResultOptions;
+  resultOptions: ResultOptions[];
+  sessionId: string;
+  userId: string;
 }
 ```
 

@@ -50,4 +50,13 @@ export const NFT_CLIENT_METADATA: Record<NFTSlug, NFTClientMetadata> = {
       alt: 'a square gif of the SWC shield that changes color over time',
     },
   },
+  [NFTSlug.LA_CRYPTO_EVENT_2024_03_04]: {
+    name: '2024-03-04 LA Crypto Event',
+    image: {
+      url: '/nfts/2024-03-04-la-crypto-event.jpg',
+      width: 160,
+      height: 160,
+      alt: 'a square image of the SWC shield with the california state shape inside of it',
+    },
+  },
 }
