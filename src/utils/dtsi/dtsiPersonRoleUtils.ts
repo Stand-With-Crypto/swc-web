@@ -16,7 +16,10 @@ export const getDTSIFormattedShortPersonRole = (
   >,
 ) => {
   if (role.status !== DTSI_PersonRoleStatus.HELD) {
-    return 'National Political Figure'
+    if (!role.primaryState) {
+      return 'National Political Figure'
+    }
+    return 'Key Political Figure'
   }
   if (role.primaryState && role.primaryCountryCode === 'US') {
     return getUSStateNameFromStateCode(role.primaryState)
