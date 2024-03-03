@@ -55,10 +55,13 @@ export const getFormattedDTSIPersonRoleDateRange = ({
 }
 
 export const getDTSIPersonRoleCategoryDisplayName = (
-  role: Pick<DTSI_PersonRole, 'roleCategory' | 'title' | 'status'>,
+  role: Pick<DTSI_PersonRole, 'roleCategory' | 'title' | 'status' | 'primaryState'>,
 ) => {
   if (role.status !== DTSI_PersonRoleStatus.HELD) {
-    return 'National Political Figure'
+    if (!role.primaryState) {
+      return 'National Political Figure'
+    }
+    return 'Key Political Figure'
   }
   switch (role.roleCategory) {
     case DTSI_PersonRoleCategory.CONGRESS:
