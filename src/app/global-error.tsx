@@ -1,12 +1,12 @@
 'use client'
 
-import { Inter } from 'next/font/google'
+import { Raleway } from 'next/font/google'
 
 import { ErrorPagesContent } from '@/components/app/errorPagesContent'
 import { useHandlePageError } from '@/hooks/useHandlePageError'
 import { cn } from '@/utils/web/cn'
 
-const inter = Inter({ subsets: ['latin'] })
+const fonts = Raleway({ subsets: ['latin'] })
 export const dynamic = 'error'
 
 export default function GlobalErrorPage({
@@ -24,7 +24,7 @@ export default function GlobalErrorPage({
 
   return (
     <html lang="en">
-      <body className={cn(inter.className, 'flex h-screen content-center items-center')}>
+      <body className={cn(fonts.className, 'flex h-screen content-center items-center')}>
         <ErrorPagesContent reset={reset} />
       </body>
     </html>

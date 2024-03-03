@@ -2,7 +2,7 @@ import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { capitalize } from 'lodash-es'
 import type { Metadata, Viewport } from 'next'
-import { Inter } from 'next/font/google'
+import { Raleway } from 'next/font/google'
 import { notFound } from 'next/navigation'
 
 import { TopLevelClientLogic } from '@/app/[locale]/topLevelClientLogic'
@@ -24,7 +24,7 @@ export async function generateStaticParams() {
   return ORDERED_SUPPORTED_LOCALES.map(locale => ({ locale }))
 }
 
-const inter = Inter({ subsets: ['latin'] })
+const fonts = Raleway({ subsets: ['latin'] })
 
 const title = `${
   NEXT_PUBLIC_ENVIRONMENT === 'production'
@@ -70,7 +70,7 @@ export default function Layout({ children, params }: PageProps & { children: Rea
   }
   return (
     <html lang={locale}>
-      <body className={inter.className}>
+      <body className={fonts.className}>
         {/* LATER-TASK add back once https://github.com/TheSGJ/nextjs-toploader/issues/66 is resolved */}
         {/* <NextTopLoader /> */}
         <TopLevelClientLogic locale={locale}>
