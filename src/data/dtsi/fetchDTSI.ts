@@ -2,7 +2,6 @@ import 'server-only'
 
 import pRetry from 'p-retry'
 
-import { queryDTSIMockSchema } from '@/mocks/dtsi/queryDTSIMockSchema'
 import { IS_DEVELOPING_OFFLINE } from '@/utils/shared/executionEnvironment'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { getLogger } from '@/utils/shared/logger'
@@ -22,7 +21,10 @@ export const fetchDTSI = async <R, V = object>(query: string, variables?: V) => 
     IS_DEVELOPING_OFFLINE ||
     (!DO_THEY_SUPPORT_IT_API_KEY && NEXT_PUBLIC_ENVIRONMENT === 'local')
   ) {
-    return queryDTSIMockSchema<R>(query, variables)
+    // because this file will import faker, we want to avoid loading it in our serverless environments
+    return import('@/mocks/dtsi/queryDTSIMockSchema').then(x =>
+      x.queryDTSIMockSchema<R>(query, variables),
+    )
   }
   if (!DO_THEY_SUPPORT_IT_API_KEY) {
     throw new Error('DO_THEY_SUPPORT_IT_API_KEY is not set')
