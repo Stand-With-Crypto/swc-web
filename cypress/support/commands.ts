@@ -27,6 +27,8 @@
 //
 
 Cypress.Commands.add('selectFromComboBox', ({ trigger, searchText }) => {
+  // wait for dom to be ready
+  cy.wait(1000)
   trigger.click()
   // wait for combo box to be fully ready
   cy.wait(1000)
