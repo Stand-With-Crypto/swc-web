@@ -164,7 +164,7 @@ export async function generateOgImage({ params }: { params: { dtsiSlug: string }
             {scoreLanguage}
           </div>
         </div>
-        <div tw="text-gray-400">standwithcrypto.org</div>
+        <div tw="text-gray-400 pt-9">standwithcrypto.org</div>
       </div>
     ),
     OPEN_GRAPH_IMAGE_DIMENSIONS,
