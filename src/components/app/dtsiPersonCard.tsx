@@ -19,7 +19,7 @@ export function DTSIPersonCard({
   locale: SupportedLocale
 }) {
   return (
-    <LinkBox className="flex items-center justify-between gap-3 rounded-3xl bg-gray-100 p-5 transition hover:drop-shadow-lg">
+    <LinkBox className="flex items-center justify-between gap-3 rounded-3xl bg-secondary p-5 transition hover:drop-shadow-lg">
       <div className="flex flex-row items-center gap-3">
         <DTSIAvatar person={person} size={60} />
         <div>

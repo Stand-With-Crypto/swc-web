@@ -5,8 +5,10 @@ import { buildClientSchema, graphql } from 'graphql'
 import introspectionResult from '@/data/dtsi/introspection.json'
 import { dtsiBillMockResolver } from '@/mocks/dtsi/mockResolvers/dtsiBillMockResolver'
 import { dtsiPersonMockResolver } from '@/mocks/dtsi/mockResolvers/dtsiPersonMockResolver'
+import { dtsiPersonRoleMockResolver } from '@/mocks/dtsi/mockResolvers/dtsiPersonRoleResolver'
 import { dtsiPersonStanceMockResolver } from '@/mocks/dtsi/mockResolvers/dtsiPersonStanceMockResolver'
 import { dtsiPersonStanceQuoteMockResolver } from '@/mocks/dtsi/mockResolvers/dtsiPersonStanceQuoteMockResolver'
+import { dtsiQueryResolver } from '@/mocks/dtsi/mockResolvers/dtsiQueryResolver'
 import { dtsiTweetMediaMockResolver } from '@/mocks/dtsi/mockResolvers/dtsiTweetMediaMockResolver'
 import { dtsiTweetMockResolver } from '@/mocks/dtsi/mockResolvers/dtsiTweetMockResolver'
 import { dtsiTwitterAccountMockResolver } from '@/mocks/dtsi/mockResolvers/dtsiTwitterAccountMockResolver'
@@ -28,12 +30,14 @@ const schemaWithMocks = addMocksToSchema({
     Float: () => faker.number.float({ min: 0, max: 100, multipleOf: 0.001 }),
     ID: () => fakerFields.id(),
     Person: dtsiPersonMockResolver,
+    PersonRole: dtsiPersonRoleMockResolver,
     PersonStanceQuote: dtsiPersonStanceQuoteMockResolver,
     PersonStance: dtsiPersonStanceMockResolver,
     Tweet: dtsiTweetMockResolver,
     TweetMedia: dtsiTweetMediaMockResolver,
     TwitterAccount: dtsiTwitterAccountMockResolver,
     Bill: dtsiBillMockResolver,
+    Query: dtsiQueryResolver,
   },
 })
 
@@ -47,6 +51,8 @@ export const queryDTSIMockSchema = <R>(query: string, variables?: any) => {
     if (result.errors) {
       throw new Error(`queryDTSIMockSchema threw with \n${JSON.stringify(result.errors, null, 4)}`)
     }
-    return result.data as R
+    // results.data is a null prototype object, which is not supported
+    // by RSC server -> client props. JSON.parse(JSON.stringify... solves this problem
+    return JSON.parse(JSON.stringify(result.data)) as R
   })
 }

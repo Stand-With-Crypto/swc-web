@@ -102,7 +102,7 @@ export function TopLevelMetrics({ locale, ...data }: Props & { locale: Supported
       ].map(({ label, value }, index) => (
         <div
           className={cn(
-            'w-full flex-shrink-0 rounded-3xl bg-blue-50 p-6 md:w-1/3',
+            'w-full flex-shrink-0 rounded-3xl bg-secondary p-6 md:w-1/3',
             index === 0
               ? 'md:rounded-none md:rounded-l-3xl'
               : index === 2

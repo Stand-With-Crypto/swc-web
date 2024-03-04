@@ -57,7 +57,7 @@ export const UserActionRowCTAButton = React.forwardRef<
       <button
         {...props}
         className={cn(
-          'flex w-full items-center justify-between gap-4 rounded-3xl bg-gray-100 p-4 text-left transition hover:drop-shadow-lg lg:p-8',
+          'flex w-full items-center justify-between gap-4 rounded-3xl bg-secondary p-4 text-left transition hover:drop-shadow-lg lg:p-8',
           className,
         )}
         data-test-id={`user-action-cta-${actionType}`}
@@ -69,6 +69,7 @@ export const UserActionRowCTAButton = React.forwardRef<
           <div className="hidden flex-shrink-0 md:block">
             <NextImage
               alt={text}
+              className="rounded-xl"
               height={100}
               src={image}
               style={{ height: 100, width: 100 }}

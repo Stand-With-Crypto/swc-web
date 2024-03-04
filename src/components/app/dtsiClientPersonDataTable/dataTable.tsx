@@ -150,7 +150,7 @@ export function DataTable<TData extends Person, TValue>({
             <GlobalFilters {...{ globalFilter, setGlobalFilter }} />
           </div>
           <Table className="lg:table-fixed">
-            <TableHeader className="bg-gray-100 text-gray-400">
+            <TableHeader className="bg-secondary text-gray-400">
               {table.getHeaderGroups().map(headerGroup => (
                 <TableRow key={headerGroup.id}>
                   {headerGroup.headers.map(header => {

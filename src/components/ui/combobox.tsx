@@ -161,7 +161,7 @@ function StatusList<T>({
             const isSelected = value && getOptionKey(value) === key
             return (
               <CommandItem
-                className={cn(isSelected && 'border border-blue-500')}
+                className={cn(isSelected && 'border border-purple-500')}
                 key={key}
                 onSelect={() => {
                   onChange(options.find(x => getOptionKey(x) === key) || null)

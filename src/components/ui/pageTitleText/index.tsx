@@ -12,7 +12,7 @@ const titleVariantsConfig = {
   },
 }
 
-const pageTitleVariants = cva('text-center text-3xl font-bold md:text-4xl lg:text-5xl', {
+const pageTitleVariants = cva('font-sans text-center text-3xl font-bold md:text-4xl lg:text-5xl', {
   variants: titleVariantsConfig,
   defaultVariants: {
     size: 'lg',

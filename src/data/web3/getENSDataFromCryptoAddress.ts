@@ -3,6 +3,7 @@ import { compact } from 'lodash-es'
 
 import { formatENSAvatar } from '@/utils/server/formatENSAvatar'
 import { thirdwebRPCClient } from '@/utils/server/thirdweb/thirdwebRPCClient'
+import { IS_DEVELOPING_OFFLINE } from '@/utils/shared/executionEnvironment'
 import { stringToEthereumAddress } from '@/utils/shared/stringToEthereumAddress'
 
 import { UserENSData } from './types'
@@ -49,6 +50,9 @@ async function _getENSDataMapFromCryptoAddresses(
 }
 
 export async function getENSDataMapFromCryptoAddressesAndFailGracefully(addresses: string[]) {
+  if (IS_DEVELOPING_OFFLINE) {
+    return {}
+  }
   /*
   For now we always want to fail gracefully if we can't fetch the ENS data
   This may change in the future

@@ -11,6 +11,10 @@ const config: Config = {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ['var(--font-raleway)'],
+        mono: ['var(--font-open-sans)'],
+      },
       // https://tailwindcss.com/docs/customizing-colors default colors
       colors: {
         // shadcn-added variables
@@ -19,6 +23,10 @@ const config: Config = {
         ring: 'hsl(var(--ring))',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
+        'primary-cta': {
+          DEFAULT: 'hsl(var(--primary-cta))',
+          foreground: 'hsl(var(--primary-foreground))',
+        },
         primary: {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))',
