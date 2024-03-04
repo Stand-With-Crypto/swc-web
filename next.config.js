@@ -233,7 +233,7 @@ const nextConfig = {
       {
         source: '/la',
         destination:
-          '/action/live-event/2024_03_04_LA?utm_source=coinbase&utm_medium=live-event&utm_campaign=2024-03-04-LA',
+          'https://docs.google.com/forms/d/e/1FAIpQLSdx6pUZA2jkQUQSmyhB62m-CbpMkUJ3MipUfnNu2wpMxiTLow/viewform',
         permanent: false,
       },
     ]
