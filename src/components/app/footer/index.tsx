@@ -12,7 +12,7 @@ import { cn } from '@/utils/web/cn'
 
 const i18nKey = 'FooterLinks'
 
-const footerLinkStyles = cn('font-bold block text-gray-400')
+const footerLinkStyles = cn('block text-gray-400')
 
 export async function Footer({ locale }: { locale: SupportedLocale }) {
   const intl = await getIntl(locale)
@@ -118,7 +118,7 @@ export async function Footer({ locale }: { locale: SupportedLocale }) {
           </div>
         </div>
         <div className="mb-2 text-xs text-muted">
-          Information about people's stances on crypto sourced from{' '}
+          Information about people's position on crypto sourced from{' '}
           <a className={'hover:underline'} href="https://www.dotheysupportit.com/" target="_blank">
             DoTheySupportIt.com
           </a>
