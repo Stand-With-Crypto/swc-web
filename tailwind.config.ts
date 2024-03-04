@@ -11,6 +11,10 @@ const config: Config = {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ['var(--font-raleway)'],
+        mono: ['var(--font-open-sans)'],
+      },
       // https://tailwindcss.com/docs/customizing-colors default colors
       colors: {
         // shadcn-added variables

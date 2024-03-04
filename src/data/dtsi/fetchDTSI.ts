@@ -2,9 +2,10 @@ import 'server-only'
 
 import pRetry from 'p-retry'
 
+import { queryDTSIMockSchema } from '@/mocks/dtsi/queryDTSIMockSchema'
+import { IS_DEVELOPING_OFFLINE } from '@/utils/shared/executionEnvironment'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { getLogger } from '@/utils/shared/logger'
-import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { toBool } from '@/utils/shared/toBool'
 
@@ -14,12 +15,18 @@ const logger = getLogger('fetchDTSI')
  make sure to enter your API key in the headers tab at the bottom
 */
 
-const DO_THEY_SUPPORT_IT_API_KEY = requiredEnv(
-  process.env.DO_THEY_SUPPORT_IT_API_KEY,
-  'DO_THEY_SUPPORT_IT_API_KEY',
-)
+const DO_THEY_SUPPORT_IT_API_KEY = process.env.DO_THEY_SUPPORT_IT_API_KEY!
 
 export const fetchDTSI = async <R, V = object>(query: string, variables?: V) => {
+  if (
+    IS_DEVELOPING_OFFLINE ||
+    (!DO_THEY_SUPPORT_IT_API_KEY && NEXT_PUBLIC_ENVIRONMENT === 'local')
+  ) {
+    return queryDTSIMockSchema<R>(query, variables)
+  }
+  if (!DO_THEY_SUPPORT_IT_API_KEY) {
+    throw new Error('DO_THEY_SUPPORT_IT_API_KEY is not set')
+  }
   // we set USE_DTSI_PRODUCTION_API in code in some of out bin files.
   // To ensure that logic gets picked up, we check the process.env dynamically within the function itself
   const USE_DTSI_PRODUCTION_API =

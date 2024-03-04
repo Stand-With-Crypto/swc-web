@@ -20,7 +20,7 @@ export async function GET(_request: NextRequest, { params }: { params: { config:
   return new ImageResponse(
     (
       <div
-        style={{ background: 'linear-gradient(180deg, #001C56 0%, #000 100%)' }}
+        style={{ background: 'linear-gradient(180deg, #2d0075 0%, #000 100%)' }}
         tw="flex text-white p-8 w-full h-full flex-col justify-between items-center"
       >
         <div />

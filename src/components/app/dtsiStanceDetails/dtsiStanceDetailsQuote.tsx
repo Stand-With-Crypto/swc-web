@@ -41,7 +41,7 @@ export const DTSIStanceDetailsQuote: React.FC<IDTSIStanceDetailsQuoteProps> = pr
       <div>
         Quoted from{' '}
         <ExternalLink
-          className="font-bold text-blue-500"
+          className="font-bold"
           href={stance.quote.sourceUrl}
           style={{ overflowWrap: 'anywhere' }}
         >
