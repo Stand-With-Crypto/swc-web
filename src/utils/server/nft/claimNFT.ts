@@ -1,6 +1,5 @@
 import { $Enums, NFTCurrency, UserAction, UserActionType, UserCryptoAddress } from '@prisma/client'
 import { Decimal } from '@prisma/client/runtime/library'
-import { error } from 'winston'
 
 import { AIRDROP_NFT_INNGEST_EVENT_NAME } from '@/inngest/functions/airdropNFT'
 import { inngest } from '@/inngest/inngest'
@@ -62,16 +61,16 @@ export async function claimNFT(userAction: UserAction, userCryptoAddress: UserCr
   )
 
   if (!activeClientUserActionTypeWithCampaign) {
-    throw error(`Action ${userAction.actionType} doesn't have an active campaign.`)
+    throw Error(`Action ${userAction.actionType} doesn't have an active campaign.`)
   }
 
   const nftSlug = ACTION_NFT_SLUG[activeClientUserActionTypeWithCampaign][campaignName]
   if (nftSlug === null) {
-    throw error(`Action ${actionType} for campaign ${campaignName} doesn't have an NFT slug.`)
+    throw Error(`Action ${actionType} for campaign ${campaignName} doesn't have an NFT slug.`)
   }
 
   if (userAction.nftMintId !== null) {
-    throw error(`Action ${userAction.id} for campaign ${campaignName} already has an NFT mint.`)
+    throw Error(`Action ${userAction.id} for campaign ${campaignName} already has an NFT mint.`)
   }
 
   const action = await prismaClient.userAction.update({
