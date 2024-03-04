@@ -32,7 +32,7 @@ export function PageContribute() {
                 className="aspect-auto min-h-[50vh] w-full border"
                 src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2F0UVwglzDupzR0hwTnZWGe9%2FOpen-Source-SWC%3Ftype%3Ddesign%26node-id%3D0%253A1%26mode%3Ddesign%26t%3D7XXRxL4bSW1HNARp-1"
               ></iframe>
-              <div className="mt-8 flex items-center justify-between gap-3 rounded-xl bg-gray-100 p-6 text-left">
+              <div className="mt-8 flex items-center justify-between gap-3 rounded-xl bg-secondary p-6 text-left">
                 <p className="font-semibold">Download all logos and assets</p>
                 <div>
                   <Button asChild>

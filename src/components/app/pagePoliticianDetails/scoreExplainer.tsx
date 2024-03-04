@@ -18,7 +18,7 @@ export function ScoreExplainer({ person }: { person: DTSIPersonDetails }) {
   const locale = useLocale()
   return (
     <Popover analytics="Person Score Explainer">
-      <PopoverTrigger className="my-8 flex w-full items-center gap-4 rounded-3xl bg-gray-100 p-3 text-left md:my-12">
+      <PopoverTrigger className="my-8 flex w-full items-center gap-4 rounded-3xl bg-secondary p-3 text-left md:my-12">
         <div>
           <DTSIFormattedLetterGrade person={person} size={60} />
         </div>

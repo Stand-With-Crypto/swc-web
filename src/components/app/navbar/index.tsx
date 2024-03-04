@@ -97,7 +97,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
             />
           </InternalLink>
           <div className="flex gap-4">
-            <div className="flex gap-4 rounded-full bg-gray-100">
+            <div className="flex gap-4 rounded-full bg-secondary">
               {leftLinks.map(({ href, text }) => {
                 return (
                   <Button

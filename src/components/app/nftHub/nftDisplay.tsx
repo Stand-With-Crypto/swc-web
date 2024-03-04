@@ -74,7 +74,7 @@ export function NFTDisplay({ userActions }: NFTDisplayProps) {
         {emptySpots > 0 &&
           Array.from({ length: emptySpots }, (_, index) => (
             <div
-              className="box-content h-[320px] w-[320px] rounded-3xl bg-gray-100 md:h-[335px] md:w-[335px]"
+              className="box-content h-[320px] w-[320px] rounded-3xl bg-secondary md:h-[335px] md:w-[335px]"
               key={index}
             ></div>
           ))}
