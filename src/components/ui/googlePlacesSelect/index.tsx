@@ -64,6 +64,7 @@ export const GooglePlacesSelect = React.forwardRef<React.ElementRef<'input'>, Pr
             ref={ref}
             value={triggerProps.value?.description || inputProps.placeholder || 'select a location'}
             {...inputProps}
+            readOnly
             // There's a weird bug where, because the input is type="button", on mobile a long address string will overflow the entire page
             type="input"
           />
