@@ -69,6 +69,7 @@ export const UserActionRowCTAButton = React.forwardRef<
           <div className="hidden flex-shrink-0 md:block">
             <NextImage
               alt={text}
+              className="rounded-xl"
               height={100}
               src={image}
               style={{ height: 100, width: 100 }}
