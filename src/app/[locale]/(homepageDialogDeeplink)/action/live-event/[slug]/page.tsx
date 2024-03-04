@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 import { HomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogDeeplinkLayout'
+import { MESSAGES } from '@/components/app/userActionFormLiveEvent/constants'
 import { UserActionFormLiveEventDeeplinkWrapper } from '@/components/app/userActionFormLiveEvent/homepageDialogDeeplinkWrapper.tsx'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { PageProps } from '@/types'
@@ -19,7 +20,13 @@ type Props = PageProps<{ slug: string }>
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = params
-  const title = `Live event ${slug}`
+  const content = MESSAGES[slug as UserActionLiveEventCampaignName]
+  if (content) {
+    return generateMetadataDetails({
+      title: `Live Event - ${content.title}`,
+    })
+  }
+  const title = `Live Event`
 
   return generateMetadataDetails({
     title,

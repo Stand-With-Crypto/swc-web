@@ -8,6 +8,11 @@ const THIRD_WEB_CLIENT_SECRET = requiredEnv(
   'process.env.THIRD_WEB_CLIENT_SECRET',
 )
 
+const NEXT_PUBLIC_THIRDWEB_CLIENT_ID = requiredEnv(
+  process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID,
+  'process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID',
+)
+
 export interface ThirdwebEmbeddedWalletMetadata {
   userId: string
   walletAddress: string
@@ -27,6 +32,13 @@ export async function fetchEmbeddedWalletMetadataFromThirdweb(cryptoAddress: str
 
   const resp = await fetchReq(url.href, {
     headers: {
+      /*
+      TW API used to always use the client ID associated with the client secret
+      We have a use case where we no longer have the old client secret, but we can't update the client id
+      without creating new embedded wallets for existing users. This new config they added 
+      allows us to use any client secret to query any client id associated with our account
+      */
+      'x-client-id-override': NEXT_PUBLIC_THIRDWEB_CLIENT_ID,
       Authorization: `Bearer ${THIRD_WEB_CLIENT_SECRET}`,
     },
   }).catch(error => {

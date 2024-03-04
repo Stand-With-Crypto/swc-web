@@ -13,6 +13,7 @@ import {
 import {
   DTSI_PersonPoliticalAffiliationCategory,
   DTSI_PersonRoleCategory,
+  DTSI_PersonRoleStatus,
 } from '@/data/dtsi/generated'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
 
@@ -40,14 +41,14 @@ export function getPartyOptionDisplayName(party: string) {
 }
 export const ROLE_OPTIONS = {
   ALL: 'All',
-  PRESIDENT: DTSI_PersonRoleCategory.PRESIDENT,
   SENATE: DTSI_PersonRoleCategory.SENATE,
   CONGRESS: DTSI_PersonRoleCategory.CONGRESS,
+  ALL_OTHER: 'ALL_OTHER',
 }
 export function getRoleOptionDisplayName(role: string) {
   switch (role) {
-    case ROLE_OPTIONS.PRESIDENT:
-      return 'National Political Figure'
+    case ROLE_OPTIONS.ALL_OTHER:
+      return 'Other Political Figure'
     case ROLE_OPTIONS.SENATE:
       return 'Senator'
     case ROLE_OPTIONS.CONGRESS:
@@ -179,11 +180,20 @@ export function filterDataViaGlobalFilters<TData extends Person>(
         return false
       }
     }
-    if (
-      globalFilter.role !== ROLE_OPTIONS.ALL &&
-      globalFilter.role !== x.primaryRole?.roleCategory
-    ) {
-      return false
+    if (globalFilter.role !== ROLE_OPTIONS.ALL) {
+      if ([ROLE_OPTIONS.SENATE, ROLE_OPTIONS.CONGRESS].includes(globalFilter.role)) {
+        return (
+          globalFilter.role === x.primaryRole?.roleCategory &&
+          x.primaryRole?.status === DTSI_PersonRoleStatus.HELD
+        )
+      }
+      return (
+        !x.primaryRole?.roleCategory ||
+        ![DTSI_PersonRoleCategory.SENATE, DTSI_PersonRoleCategory.CONGRESS].includes(
+          x.primaryRole?.roleCategory,
+        ) ||
+        x.primaryRole?.status !== DTSI_PersonRoleStatus.HELD
+      )
     }
     if (
       globalFilter.party !== PARTY_OPTIONS.ALL &&
