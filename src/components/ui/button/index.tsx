@@ -9,6 +9,7 @@ import { cn } from '@/utils/web/cn'
 export const buttonVariantsConfig = {
   variant: {
     default: 'bg-primary text-primary-foreground hover:bg-primary/80',
+    'primary-cta': 'bg-primary-cta text-primary-cta-foreground hover:bg-primary-cta/80',
     destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/80',
     outline:
       'border text-fontcolor border-input bg-background hover:bg-accent hover:text-accent-foreground',

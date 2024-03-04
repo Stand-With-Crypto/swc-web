@@ -32,12 +32,14 @@ export async function Footer({ locale }: { locale: SupportedLocale }) {
             </p>
             <LoginDialogWrapper
               authenticatedContent={
-                <Button asChild size="lg">
+                <Button asChild size="lg" variant="primary-cta">
                   <InternalLink href={urls.profile()}>View your profile</InternalLink>
                 </Button>
               }
             >
-              <Button size="lg">Join the movement</Button>
+              <Button size="lg" variant="primary-cta">
+                Join the movement
+              </Button>
             </LoginDialogWrapper>
           </div>
           <div className="mb-10 grid max-w-xl flex-shrink-0 grid-cols-2 gap-3 sm:gap-4">
