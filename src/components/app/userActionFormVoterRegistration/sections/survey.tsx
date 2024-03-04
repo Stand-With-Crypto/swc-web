@@ -59,10 +59,7 @@ export function Survey({ goToSection }: SurveyProps) {
           </div>
           <p className="text-center">
             Personal information subject to{' '}
-            <ExternalLink
-              className="cursor-pointer text-blue-600 hover:underline"
-              href={urls.privacyPolicy()}
-            >
+            <ExternalLink className="cursor-pointer hover:underline" href={urls.privacyPolicy()}>
               Stand With Crypto Privacy Policy
             </ExternalLink>
             .

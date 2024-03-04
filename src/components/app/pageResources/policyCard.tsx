@@ -19,7 +19,7 @@ export function PolicyCard({
 }) {
   return (
     <div
-      className="flex flex-col content-center items-center gap-4 rounded-3xl bg-gray-100  p-6  md:flex-row"
+      className="flex flex-col content-center items-center gap-4 rounded-3xl bg-secondary  p-6  md:flex-row"
       data-test-id="policy-card"
     >
       <div className="flex w-full flex-row items-center justify-start gap-4 ">

@@ -2,7 +2,6 @@ import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { capitalize } from 'lodash-es'
 import type { Metadata, Viewport } from 'next'
-import { Inter } from 'next/font/google'
 import { notFound } from 'next/navigation'
 
 import { TopLevelClientLogic } from '@/app/[locale]/topLevelClientLogic'
@@ -16,6 +15,7 @@ import { PageProps } from '@/types'
 import { getOpenGraphImageUrl } from '@/utils/server/generateOpenGraphImageUrl'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
+import { fontClassName } from '@/utils/web/fonts'
 
 // we want dynamicParams to be false for this top level layout, but we also want to ensure that subpages can have dynamic params
 // Next.js doesn't allow this so we allow dynamic params in the config here, and then trigger a notFound in the layout if one is passed
@@ -23,8 +23,6 @@ import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 export async function generateStaticParams() {
   return ORDERED_SUPPORTED_LOCALES.map(locale => ({ locale }))
 }
-
-const inter = Inter({ subsets: ['latin'] })
 
 const title = `${
   NEXT_PUBLIC_ENVIRONMENT === 'production'
@@ -70,13 +68,13 @@ export default function Layout({ children, params }: PageProps & { children: Rea
   }
   return (
     <html lang={locale}>
-      <body className={inter.className}>
+      <body className={fontClassName}>
         {/* LATER-TASK add back once https://github.com/TheSGJ/nextjs-toploader/issues/66 is resolved */}
         {/* <NextTopLoader /> */}
         <TopLevelClientLogic locale={locale}>
           <FullHeight.Container>
+            <Navbar locale={locale} />
             <FullHeight.Content>
-              <Navbar locale={locale} />
               <div className="lg:mt-10">{children}</div>
             </FullHeight.Content>
             <Footer locale={locale} />

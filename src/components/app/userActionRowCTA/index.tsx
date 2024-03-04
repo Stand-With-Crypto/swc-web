@@ -57,7 +57,7 @@ export const UserActionRowCTAButton = React.forwardRef<
       <button
         {...props}
         className={cn(
-          'flex w-full items-center justify-between gap-4 rounded-3xl bg-gray-100 p-4 text-left transition hover:drop-shadow-lg lg:p-8',
+          'flex w-full items-center justify-between gap-4 rounded-3xl bg-secondary p-4 text-left transition hover:drop-shadow-lg lg:p-8',
           className,
         )}
         data-test-id={`user-action-cta-${actionType}`}
