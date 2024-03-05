@@ -126,7 +126,7 @@ export function ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: Suppo
         </div>
         <div className="flex items-center gap-5">
           <UserActionFormCallCongresspersonDialog>
-            <Button className="w-full p-3" variant="secondary">
+            <Button className="w-full p-1">
               <img alt="call button" src="/misc/call-icon.svg" />
             </Button>
           </UserActionFormCallCongresspersonDialog>
