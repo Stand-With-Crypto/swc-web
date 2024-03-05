@@ -2,15 +2,18 @@
 
 import { useEffect, useMemo, useRef } from 'react'
 
+import { cn } from '@/utils/web/cn'
+
 import styles from './odometer.module.css'
 import { useNumeralArray } from './useNumericalArray'
 
 export interface AnimatedNumericOdometerProps {
   value: string
   size: number
+  className?: string
 }
 
-export function AnimatedNumericOdometer({ value, size }: AnimatedNumericOdometerProps) {
+export function AnimatedNumericOdometer({ value, size, className }: AnimatedNumericOdometerProps) {
   const spanArray = useRef<(HTMLSpanElement | null)[]>([])
 
   const valueNumericalLength = useMemo(() => {
@@ -30,7 +33,7 @@ export function AnimatedNumericOdometer({ value, size }: AnimatedNumericOdometer
 
   return (
     <h1
-      className={styles.odometer}
+      className={cn(styles.odometer, className)}
       style={{
         fontFeatureSettings: `'tnum', 'lnum'`,
         height: size,

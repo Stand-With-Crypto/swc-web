@@ -102,8 +102,8 @@ export function UpdateUserInformationVisibilityForm({
                       <div
                         // if we apply these styles to the radio group item directly, radix injected input does weird things and causes the form to have scroll issues
                         className={cn(
-                          'flex w-full items-center justify-between rounded-lg bg-blue-50 p-6',
-                          option === field.value && 'ring-2 ring-blue-600 ring-offset-4',
+                          'flex w-full items-center justify-between rounded-lg bg-purple-50 p-6',
+                          option === field.value && 'ring-2 ring-purple-600 ring-offset-4',
                         )}
                       >
                         <div className="flex items-center gap-3">
@@ -112,7 +112,7 @@ export function UpdateUserInformationVisibilityForm({
                             {getUserDisplayName({ ...user, informationVisibility: option })}
                           </p>
                         </div>
-                        <RadioGroupIndicator className="block rounded-full bg-blue-600 p-1 text-white">
+                        <RadioGroupIndicator className="block rounded-full bg-purple-600 p-1 text-white">
                           <Check className="h-4 w-4" />
                         </RadioGroupIndicator>
                       </div>

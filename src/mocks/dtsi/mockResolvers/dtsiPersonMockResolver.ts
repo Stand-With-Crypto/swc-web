@@ -1,4 +1,5 @@
 import { faker } from '@faker-js/faker'
+import { times } from 'lodash-es'
 
 import {
   DTSI_Gender,
@@ -35,5 +36,6 @@ export const dtsiPersonMockResolver = (): Partial<DTSI_PersonResolvers> => {
     }),
     slug: () => `${firstName}---${lastName}`,
     suffixName: () => faker.person.suffix(),
+    stances: () => times(20).map(() => ({})) as any,
   }
 }

@@ -51,7 +51,7 @@ export function UserActionFormNFTMintIntro({
                   }
                   loadingFallback={<FooterSkeleton />}
                 >
-                  <Button size="lg">Log In</Button>
+                  <Button size="lg">Sign In</Button>
                 </LoginDialogWrapper>
                 <MaybeAuthenticatedContent authenticatedContent={null}>
                   <p className="text-xs text-muted-foreground md:text-sm">

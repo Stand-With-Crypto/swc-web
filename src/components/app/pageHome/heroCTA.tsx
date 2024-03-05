@@ -11,12 +11,16 @@ export function HeroCTA() {
   const profileReq = useApiResponseForUserFullProfileInfo()
   const urls = useIntlUrls()
 
-  const unauthenticatedContent = <Button size="lg">Join the fight</Button>
+  const unauthenticatedContent = (
+    <Button size="lg" variant="primary-cta">
+      Join the fight
+    </Button>
+  )
   return (
     <LoginDialogWrapper
       authenticatedContent={
         profileReq.data?.user ? (
-          <Button asChild size="lg">
+          <Button asChild size="lg" variant="primary-cta">
             {hasCompleteUserProfile(profileReq?.data?.user) ? (
               <InternalLink href={urls.profile()}>View Profile</InternalLink>
             ) : (

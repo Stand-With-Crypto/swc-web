@@ -67,14 +67,11 @@ export function ThirdwebLoginContent({
         <p className="text-center text-xs text-muted-foreground">
           By signing up, I understand that Stand With Crypto and its vendors may collect and use my
           Personal Information. To learn more, visit the{' '}
-          <InternalLink className="text-blue-600" href={urls.privacyPolicy()} target="_blank">
+          <InternalLink href={urls.privacyPolicy()} target="_blank">
             Stand With Crypto Alliance Privacy Policy
           </InternalLink>{' '}
           and{' '}
-          <ExternalLink
-            className="text-blue-600"
-            href="https://www.quorum.us/static/Privacy-Policy.pdf"
-          >
+          <ExternalLink href="https://www.quorum.us/static/Privacy-Policy.pdf">
             Quorum Privacy Policy
           </ExternalLink>
         </p>

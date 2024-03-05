@@ -34,7 +34,7 @@ export const getDTSIClientPersonDataTableColumns = ({
       <LinkBox className="flex items-center gap-3">
         <DTSIAvatar person={row.original} size={40} />
         <InternalLink
-          className={cn(linkBoxLinkClassName, 'pointer-events-none')}
+          className={cn(linkBoxLinkClassName, 'cursor-pointer')}
           href={getIntlUrls(locale).politicianDetails(row.original.slug)}
         >
           {dtsiPersonFullName(row.original)}

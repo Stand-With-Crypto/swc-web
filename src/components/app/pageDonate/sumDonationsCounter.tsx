@@ -26,7 +26,7 @@ export function SumDonationsCounter(props: SumDonationsCounterProps) {
       maximumFractionDigits: 0,
     }).format(data.amountUsd)
   }, [props.locale, data.amountUsd])
-  return <AnimatedNumericOdometer size={60} value={formatted} />
+  return <AnimatedNumericOdometer className="text-primary-cta" size={60} value={formatted} />
 }
 
 function useLiveSumDonations({ locale, initialData }: SumDonationsCounterProps) {
