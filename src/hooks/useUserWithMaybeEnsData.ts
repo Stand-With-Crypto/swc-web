@@ -19,6 +19,12 @@ export function useUserWithMaybeENSData<U extends ClientUser>({ user }: { user?:
     if (shouldWaitForEnsData && ensData.isLoading) {
       return null
     }
+    console.log({
+      user,
+      shouldWaitForEnsData,
+      ensData,
+      data: appendENSHookDataToUser(user, shouldWaitForEnsData ? ensData.data : null),
+    })
 
     return appendENSHookDataToUser(user, shouldWaitForEnsData ? ensData.data : null)
   }, [ensData, user])
