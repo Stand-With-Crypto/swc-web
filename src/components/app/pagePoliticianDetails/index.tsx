@@ -133,7 +133,7 @@ export function PagePoliticianDetails({
           {!stances.length && <div>No recent statements.</div>}
           {stances.map(stance => {
             return (
-              <article className={cn('rounded-3xl bg-gray-100 p-4 md:p-6')} key={stance.id}>
+              <article className={cn('rounded-3xl bg-secondary p-4 md:p-6')} key={stance.id}>
                 <DTSIStanceDetails locale={locale} person={person} stance={stance} />
               </article>
             )

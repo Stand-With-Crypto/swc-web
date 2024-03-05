@@ -212,7 +212,7 @@ export function UpdateUserProfileForm({
                       <FormDescription>
                         By checking this box, I agree to become a Stand With Crypto Alliance member.{' '}
                         <SWCMembershipDialog>
-                          <button className="text-blue-600">Learn More</button>
+                          <button>Learn More</button>
                         </SWCMembershipDialog>
                         .
                       </FormDescription>
@@ -239,7 +239,7 @@ export function UpdateUserProfileForm({
                         messages about Stand With Crypto at the phone number provided. Reply STOP to
                         stop. Msg and data rates may apply. See{' '}
                         <PrivacyPolicyDialog>
-                          <button className="text-blue-600">Privacy Policy</button>
+                          <button>Privacy Policy</button>
                         </PrivacyPolicyDialog>
                         .
                       </FormDescription>

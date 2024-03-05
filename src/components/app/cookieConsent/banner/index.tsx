@@ -63,7 +63,7 @@ export function CookieConsentBanner({
               Reject all
             </Button>
           </div>
-          <Button className="px-4 py-4 text-blue-500 md:px-0" onClick={onAcceptAll} variant="link">
+          <Button className="px-4 py-4 md:px-0" onClick={onAcceptAll} variant="link">
             Accept all
           </Button>
           <button className="hidden md:block" onClick={onRejectAll}>

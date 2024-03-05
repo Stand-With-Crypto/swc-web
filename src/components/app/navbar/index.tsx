@@ -4,6 +4,7 @@ import { useCallback } from 'react'
 import { capitalize } from 'lodash-es'
 import { Menu } from 'lucide-react'
 
+import { DefaultLoginButton } from '@/components/app/authentication/defaultLoginButton'
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { NavbarLoggedInButton } from '@/components/app/navbar/navbarLoggedInButton'
 import { Button } from '@/components/ui/button'
@@ -36,6 +37,10 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
       href: urls.resources(),
       text: 'Resources',
     },
+    {
+      href: urls.donate(),
+      text: 'Donate',
+    },
   ]
   const maybeCloseAfterNavigating = useCallback(() => {
     if (dialogProps.open) {
@@ -50,7 +55,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
         <NavbarLoggedInButton onOpenChange={open => open || maybeCloseAfterNavigating()} />
       }
     >
-      <Button variant="secondary">Log In</Button>
+      <DefaultLoginButton />
     </LoginDialogWrapper>
   )
   return (
@@ -62,7 +67,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
               {capitalize(NEXT_PUBLIC_ENVIRONMENT.toLowerCase())} Environment
             </p>
             <div className="xs:text-xs space-x-3 text-sm">
-              <InternalLink className="underline" href={urls.internalHomepage()}>
+              <InternalLink className="text-fontcolor underline" href={urls.internalHomepage()}>
                 Internal Pages
               </InternalLink>
             </div>
@@ -82,61 +87,51 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
           )
         }
       >
-        <div className="container flex justify-between">
-          <div className="flex items-center gap-4">
-            <InternalLink className="flex-shrink-0" href={urls.home()}>
-              <NextImage
-                alt={'Stand With Crypto Logo'}
-                height={40}
-                priority
-                src="/logo/shield.svg"
-                width={41}
-              />
-            </InternalLink>
-            {leftLinks.map(({ href, text }) => {
-              return (
-                <Button asChild className="hidden md:block" key={href} variant="ghost">
-                  <InternalLink href={href}>{text}</InternalLink>
-                </Button>
-              )
-            })}
-          </div>
-          <Drawer {...dialogProps} direction="top">
-            <DrawerTrigger asChild>
-              <button className="py-3 pl-3 md:hidden">
-                <span className="sr-only">Open navigation menu</span>
-                <Menu />
-              </button>
-            </DrawerTrigger>
-            <DrawerContent direction="top">
-              <div className="px-6 pb-6 pt-3 text-center">
-                {leftLinks.map(({ href, text }) => {
-                  return (
-                    <Button asChild className="block" key={href} variant="ghost">
-                      <InternalLink href={href} onClick={maybeCloseAfterNavigating}>
-                        {text}
-                      </InternalLink>
-                    </Button>
-                  )
-                })}
-                <div className="mt-2">
-                  <Button asChild onClick={maybeCloseAfterNavigating}>
-                    <InternalLink href={urls.donate()}>Donate</InternalLink>
+        <div className="container flex items-center justify-between">
+          <InternalLink className="flex-shrink-0" href={urls.home()}>
+            <NextImage
+              alt={'Stand With Crypto Logo'}
+              height={40}
+              priority
+              src="/logo/shield.svg"
+              width={41}
+            />
+          </InternalLink>
+          <div className="flex gap-4">
+            <div className="flex gap-4 rounded-full bg-secondary">
+              {leftLinks.map(({ href, text }) => {
+                return (
+                  <Button asChild className="hidden md:block" key={href} variant="secondary">
+                    <InternalLink href={href}>{text}</InternalLink>
                   </Button>
-                </div>
-                <div className="mt-4">{loginButton}</div>
-              </div>
-            </DrawerContent>
-          </Drawer>
-
-          <div className="hidden md:flex">
-            <Button asChild className="mr-3">
-              <InternalLink href={urls.donate()}>Donate</InternalLink>
-            </Button>
-
-            {loginButton}
+                )
+              })}
+            </div>
+            <div className="hidden md:flex">{loginButton}</div>
           </div>
         </div>
+        <Drawer {...dialogProps} direction="top">
+          <DrawerTrigger asChild>
+            <button className="p-3 md:hidden">
+              <span className="sr-only">Open navigation menu</span>
+              <Menu />
+            </button>
+          </DrawerTrigger>
+          <DrawerContent direction="top">
+            <div className="px-6 pb-6 pt-3 text-center">
+              {leftLinks.map(({ href, text }) => {
+                return (
+                  <Button asChild className="block" key={href} variant="ghost">
+                    <InternalLink href={href} onClick={maybeCloseAfterNavigating}>
+                      {text}
+                    </InternalLink>
+                  </Button>
+                )
+              })}
+              <div className="mt-4">{loginButton}</div>
+            </div>
+          </DrawerContent>
+        </Drawer>
       </nav>
     </>
   )

@@ -1,18 +1,28 @@
 import { Client } from '@planetscale/database'
 import { PrismaPlanetScale } from '@prisma/adapter-planetscale'
 import { PrismaClient } from '@prisma/client'
+import { PrismaClientOptions } from '@prisma/client/runtime/library'
 import { fetch as undiciFetch } from 'undici'
 
+import { IS_DEVELOPING_OFFLINE } from '@/utils/shared/executionEnvironment'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 
 const DATABASE_URL = requiredEnv(process.env.DATABASE_URL, 'process.env.DATABASE_URL')
 
 const createPrisma = () => {
+  const log: PrismaClientOptions['log'] = process.env.LOG_DATABASE
+    ? ['query', 'info', 'warn', 'error']
+    : ['info', 'warn', 'error']
+  if (IS_DEVELOPING_OFFLINE) {
+    return new PrismaClient({
+      log,
+    })
+  }
   const client = new Client({ url: DATABASE_URL, fetch: undiciFetch })
   const adapter = new PrismaPlanetScale(client)
   return new PrismaClient({
     adapter,
-    log: process.env.LOG_DATABASE ? ['query', 'info', 'warn', 'error'] : ['info', 'warn', 'error'],
+    log,
   })
 }
 
