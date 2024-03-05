@@ -1,4 +1,7 @@
 /// <reference types="cypress" />
+
+import { Prisma } from '@prisma/client'
+
 // ***********************************************
 // This example commands.ts shows you how to
 // create various custom commands and overwrite
@@ -57,22 +60,27 @@ Cypress.Commands.add('queryDb', (query: string) => {
 })
 
 Cypress.Commands.add('clearDb', () => {
-  cy.task('queryDb', 'DELETE FROM address')
-  cy.task('queryDb', 'DELETE FROM authentication_nonce')
-  cy.task('queryDb', 'DELETE FROM nft_mint')
-  cy.task('queryDb', 'DELETE FROM user')
-  cy.task('queryDb', 'DELETE FROM user_action')
-  cy.task('queryDb', 'DELETE FROM user_action_call')
-  cy.task('queryDb', 'DELETE FROM user_action_donation')
-  cy.task('queryDb', 'DELETE FROM user_action_email')
-  cy.task('queryDb', 'DELETE FROM user_action_email_recipient')
-  cy.task('queryDb', 'DELETE FROM user_action_opt_in')
-  cy.task('queryDb', 'DELETE FROM user_action_voter_registration')
-  cy.task('queryDb', 'DELETE FROM user_crypto_address')
-  cy.task('queryDb', 'DELETE FROM user_email_address')
-  cy.task('queryDb', 'DELETE FROM user_merge_alert')
-  cy.task('queryDb', 'DELETE FROM user_merge_event')
-  cy.task('queryDb', 'DELETE FROM user_session')
+  const tableNames = [
+    'address',
+    'authentication_nonce',
+    'nft_mint',
+    'user',
+    'user_action',
+    'user_action_call',
+    'user_action_donation',
+    'user_action_email',
+    'user_action_email_recipient',
+    'user_action_opt_in',
+    'user_action_voter_registration',
+    'user_crypto_address',
+    'user_email_address',
+    'user_merge_alert',
+    'user_merge_event',
+    'user_session',
+  ]
+  tableNames.forEach(tableName => {
+    cy.task('queryDb', `DELETE FROM ${tableName}`)
+  })
 })
 
 Cypress.Commands.add('seedDb', () => {
