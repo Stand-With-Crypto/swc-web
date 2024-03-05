@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useEffect } from 'react'
 import { MapPin } from 'lucide-react'
 import usePlacesAutocomplete from 'use-places-autocomplete'
