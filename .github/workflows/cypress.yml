@@ -71,6 +71,7 @@ jobs:
       # database
       DATABASE_URL: mysql://root:root@localhost:3306/swc-web
       SEED_SIZE: SM
+      IS_DEVELOPING_OFFLINE: true
 
     steps:
       - name: Checkout
