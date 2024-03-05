@@ -73,7 +73,7 @@ Cypress.Commands.add('clearDb', () => {
 
 Cypress.Commands.add('seedDb', () => {
   cy.exec('SEED_SIZE=SM')
-  cy.exec('npx prisma db seed')
+  cy.exec('npm run ts --transpile-only src/bin/seed/seedLocalDb.ts')
 })
 
 export {}
