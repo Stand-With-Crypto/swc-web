@@ -57,14 +57,22 @@ export function getRoleOptionDisplayName(role: string) {
       return 'All'
   }
 }
-export interface GlobalFilters {
-  role: (typeof ROLE_OPTIONS)[keyof typeof ROLE_OPTIONS]
-  party: (typeof PARTY_OPTIONS)[keyof typeof PARTY_OPTIONS]
-  stance: StanceOnCryptoOptions
-  state: 'All' | keyof typeof US_STATE_CODE_TO_DISPLAY_NAME_MAP
+
+enum GlobalFilterKeys {
+  Role = 'role',
+  Party = 'party',
+  Stance = 'stance',
+  State = 'state',
 }
 
-export const getGlobalFilterDefaults = (): GlobalFilters => ({
+export interface IGlobalFilters {
+  [GlobalFilterKeys.Role]: (typeof ROLE_OPTIONS)[keyof typeof ROLE_OPTIONS]
+  [GlobalFilterKeys.Party]: (typeof PARTY_OPTIONS)[keyof typeof PARTY_OPTIONS]
+  [GlobalFilterKeys.Stance]: StanceOnCryptoOptions
+  [GlobalFilterKeys.State]: 'All' | keyof typeof US_STATE_CODE_TO_DISPLAY_NAME_MAP
+}
+
+export const getGlobalFilterDefaults = (): IGlobalFilters => ({
   role: ROLE_OPTIONS.ALL,
   party: PARTY_OPTIONS.ALL,
   stance: StanceOnCryptoOptions.ALL,
@@ -75,18 +83,18 @@ export function GlobalFilters({
   globalFilter,
   setGlobalFilter,
 }: {
-  globalFilter: GlobalFilters
-  setGlobalFilter: React.Dispatch<React.SetStateAction<GlobalFilters>>
+  globalFilter: IGlobalFilters
+  setGlobalFilter: React.Dispatch<React.SetStateAction<IGlobalFilters>>
 }) {
   const stateOptions = useMemo(() => {
     return ['All', ...Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP).sort()]
   }, [])
 
-  const onChangeGlobalFilter = (patch: Partial<GlobalFilters>) => {
-    setGlobalFilter({
-      ...getGlobalFilterDefaults(),
+  const onChangeGlobalFilter = (patch: Partial<IGlobalFilters>) => {
+    setGlobalFilter(prev => ({
+      ...prev,
       ...patch,
-    })
+    }))
   }
 
   // Styles get a little funky here so we can responsively support sideways scroll with the proper padding on mobile
@@ -157,15 +165,21 @@ export function GlobalFilters({
 
 export function filterDataViaGlobalFilters<TData extends Person>(
   passedData: TData[],
-  globalFilter: GlobalFilters,
+  globalFilter: IGlobalFilters,
 ) {
-  return passedData.filter(x => {
-    if (globalFilter.stance !== StanceOnCryptoOptions.ALL) {
-      const scoreToUse = x.manuallyOverriddenStanceScore ?? x.computedStanceScore
-      if (globalFilter.stance === StanceOnCryptoOptions.PENDING) {
+  const FILTER_FN_BY_FIELD = {
+    [GlobalFilterKeys.Stance]: (
+      record: TData,
+      filterValue: IGlobalFilters[GlobalFilterKeys.Stance],
+    ) => {
+      if (filterValue === StanceOnCryptoOptions.ALL) {
+        return true
+      }
+      const scoreToUse = record.manuallyOverriddenStanceScore ?? record.computedStanceScore
+      if (filterValue === StanceOnCryptoOptions.PENDING) {
         return isNil(scoreToUse)
       }
-      if (globalFilter.stance === StanceOnCryptoOptions.NEUTRAL) {
+      if (filterValue === StanceOnCryptoOptions.NEUTRAL) {
         return scoreToUse === 50
       }
       const stance =
@@ -174,32 +188,58 @@ export function filterDataViaGlobalFilters<TData extends Person>(
           : scoreToUse > 50
             ? StanceOnCryptoOptions.PRO_CRYPTO
             : StanceOnCryptoOptions.ANTI_CRYPTO
-      if (stance !== globalFilter.stance) {
-        return false
+      return stance === filterValue
+    },
+    [GlobalFilterKeys.Role]: (
+      record: TData,
+      filterValue: IGlobalFilters[GlobalFilterKeys.Role],
+    ) => {
+      if (filterValue === ROLE_OPTIONS.ALL) {
+        return true
       }
-    }
-    if (globalFilter.role !== ROLE_OPTIONS.ALL) {
-      if ([ROLE_OPTIONS.SENATE, ROLE_OPTIONS.CONGRESS].includes(globalFilter.role)) {
+      if ([ROLE_OPTIONS.SENATE, ROLE_OPTIONS.CONGRESS].includes(filterValue)) {
         return (
-          globalFilter.role === x.primaryRole?.roleCategory &&
-          x.primaryRole?.status === DTSI_PersonRoleStatus.HELD
+          filterValue === record.primaryRole?.roleCategory &&
+          record.primaryRole?.status === DTSI_PersonRoleStatus.HELD
         )
       }
       return (
-        !x.primaryRole?.roleCategory ||
+        !record.primaryRole?.roleCategory ||
         ![DTSI_PersonRoleCategory.SENATE, DTSI_PersonRoleCategory.CONGRESS].includes(
-          x.primaryRole?.roleCategory,
+          record.primaryRole?.roleCategory,
         ) ||
-        x.primaryRole?.status !== DTSI_PersonRoleStatus.HELD
+        record.primaryRole?.status !== DTSI_PersonRoleStatus.HELD
       )
-    }
+    },
+    [GlobalFilterKeys.Party]: (
+      record: TData,
+      filterValue: IGlobalFilters[GlobalFilterKeys.Party],
+    ) => {
+      return (
+        filterValue === PARTY_OPTIONS.ALL || filterValue === record.politicalAffiliationCategory
+      )
+    },
+    [GlobalFilterKeys.State]: (
+      record: TData,
+      filterValue: IGlobalFilters[GlobalFilterKeys.State],
+    ) => {
+      return filterValue === 'All' || record.primaryRole?.primaryState === filterValue
+    },
+  }
+
+  return passedData.filter(record => {
     if (
-      globalFilter.party !== PARTY_OPTIONS.ALL &&
-      globalFilter.party !== x.politicalAffiliationCategory
+      !FILTER_FN_BY_FIELD[GlobalFilterKeys.Stance](record, globalFilter[GlobalFilterKeys.Stance])
     ) {
       return false
     }
-    if (globalFilter.state !== 'All' && globalFilter.state !== x.primaryRole?.primaryState) {
+    if (!FILTER_FN_BY_FIELD[GlobalFilterKeys.Role](record, globalFilter[GlobalFilterKeys.Role])) {
+      return false
+    }
+    if (!FILTER_FN_BY_FIELD[GlobalFilterKeys.Party](record, globalFilter[GlobalFilterKeys.Party])) {
+      return false
+    }
+    if (!FILTER_FN_BY_FIELD[GlobalFilterKeys.State](record, globalFilter[GlobalFilterKeys.State])) {
       return false
     }
     return true

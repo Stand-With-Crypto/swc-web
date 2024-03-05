@@ -22,6 +22,7 @@ import {
   filterDataViaGlobalFilters,
   getGlobalFilterDefaults,
   GlobalFilters,
+  IGlobalFilters,
 } from '@/components/app/dtsiClientPersonDataTable/globalFiltersUtils'
 import { Button } from '@/components/ui/button'
 import { InputWithIcons } from '@/components/ui/inputWithIcons'
@@ -81,7 +82,7 @@ export function DataTable<TData extends Person, TValue>({
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
-  const [globalFilter, setGlobalFilter] = React.useState<GlobalFilters>(getGlobalFilterDefaults())
+  const [globalFilter, setGlobalFilter] = React.useState<IGlobalFilters>(getGlobalFilterDefaults())
 
   const data = useMemo(
     () => filterDataViaGlobalFilters(passedData, globalFilter),
