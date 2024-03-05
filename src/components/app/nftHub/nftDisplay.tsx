@@ -39,13 +39,15 @@ export function NFTDisplay({ userActions }: NFTDisplayProps) {
         )
       }
 
-      if (
-        nftSlug &&
-        NFT_CLIENT_METADATA[nftSlug as NFTSlug] &&
-        !acc.find(nftImage => nftImage.key === nftSlug)
-      ) {
+      if (nftSlug && NFT_CLIENT_METADATA[nftSlug as NFTSlug]) {
         const { name, image } = NFT_CLIENT_METADATA[nftSlug as NFTSlug]
-        acc.push({ name, image: image.url, width: image.width, height: image.height, key: nftSlug })
+        acc.push({
+          name,
+          image: image.url,
+          width: image.width,
+          height: image.height,
+          key: action.id,
+        })
       }
 
       if (nftSlug === 'swc-shield' && optInNftButton) {
