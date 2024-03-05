@@ -26,7 +26,7 @@ export function PageUserProfileSkeleton() {
           </Skeleton>
         </div>
       </div>
-      <div className="mb-14 grid grid-cols-4 rounded-lg bg-purple-50 p-3 text-center sm:p-6">
+      <div className="mb-14 grid grid-cols-4 rounded-lg bg-secondary p-3 text-center sm:p-6">
         {[
           {
             label: 'Actions',

@@ -15,7 +15,6 @@ import {
 } from '@tanstack/react-table'
 import { debounce } from 'lodash-es'
 import { ArrowDown, ArrowUp, ArrowUpDown, Search } from 'lucide-react'
-import { useRouter } from 'next/navigation'
 
 import { Person } from '@/components/app/dtsiClientPersonDataTable/columns'
 import { DataTablePagination } from '@/components/app/dtsiClientPersonDataTable/dataTablePagination'
@@ -23,6 +22,7 @@ import {
   filterDataViaGlobalFilters,
   getGlobalFilterDefaults,
   GlobalFilters,
+  IGlobalFilters,
 } from '@/components/app/dtsiClientPersonDataTable/globalFiltersUtils'
 import { Button } from '@/components/ui/button'
 import { InputWithIcons } from '@/components/ui/inputWithIcons'
@@ -35,7 +35,6 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { useIntlUrls } from '@/hooks/useIntlUrls'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -83,9 +82,7 @@ export function DataTable<TData extends Person, TValue>({
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
-  const [globalFilter, setGlobalFilter] = React.useState<GlobalFilters>(getGlobalFilterDefaults())
-  const router = useRouter()
-  const urls = useIntlUrls()
+  const [globalFilter, setGlobalFilter] = React.useState<IGlobalFilters>(getGlobalFilterDefaults())
 
   const data = useMemo(
     () => filterDataViaGlobalFilters(passedData, globalFilter),
@@ -172,7 +169,6 @@ export function DataTable<TData extends Person, TValue>({
                     className="cursor-pointer"
                     data-state={row.getIsSelected() && 'selected'}
                     key={row.id}
-                    onClick={() => router.push(urls.politicianDetails(row.original.slug))}
                     role="button"
                   >
                     {row.getVisibleCells().map(cell => (
