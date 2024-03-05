@@ -81,13 +81,19 @@ export function GlobalFilters({
   const stateOptions = useMemo(() => {
     return ['All', ...Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP).sort()]
   }, [])
+
+  const onChangeGlobalFilter = (patch: Partial<GlobalFilters>) => {
+    setGlobalFilter({
+      ...getGlobalFilterDefaults(),
+      ...patch,
+    })
+  }
+
   // Styles get a little funky here so we can responsively support sideways scroll with the proper padding on mobile
   return (
     <div className="flex gap-2 overflow-x-auto pb-3 pl-1 pr-3 pt-3 md:overflow-x-visible md:pb-0 md:pr-0 md:pt-0">
       <Select
-        onValueChange={(stance: StanceOnCryptoOptions) =>
-          setGlobalFilter({ ...globalFilter, stance })
-        }
+        onValueChange={(stance: StanceOnCryptoOptions) => onChangeGlobalFilter({ stance })}
         value={globalFilter.stance}
       >
         <SelectTrigger className="w-[195px] flex-shrink-0" data-testid="stance-filter-trigger">
@@ -103,10 +109,7 @@ export function GlobalFilters({
         </SelectContent>
       </Select>
 
-      <Select
-        onValueChange={role => setGlobalFilter({ ...globalFilter, role })}
-        value={globalFilter.role}
-      >
+      <Select onValueChange={role => onChangeGlobalFilter({ role })} value={globalFilter.role}>
         <SelectTrigger className="w-[130px] flex-shrink-0" data-testid="role-filter-trigger">
           <span className="mr-2 inline-block flex-shrink-0 font-bold">Role</span>
           <SelectValue />
@@ -119,10 +122,7 @@ export function GlobalFilters({
           ))}
         </SelectContent>
       </Select>
-      <Select
-        onValueChange={party => setGlobalFilter({ ...globalFilter, party })}
-        value={globalFilter.party}
-      >
+      <Select onValueChange={party => onChangeGlobalFilter({ party })} value={globalFilter.party}>
         <SelectTrigger className="w-[120px] flex-shrink-0" data-testid="party-filter-trigger">
           <span className="mr-2 inline-block flex-shrink-0 font-bold">Party</span>
           <SelectValue />
@@ -136,9 +136,7 @@ export function GlobalFilters({
         </SelectContent>
       </Select>
       <Select
-        onValueChange={(state: typeof globalFilter.state) =>
-          setGlobalFilter({ ...globalFilter, state })
-        }
+        onValueChange={(state: typeof globalFilter.state) => onChangeGlobalFilter({ state })}
         value={globalFilter.state}
       >
         <SelectTrigger className="w-[110px] flex-shrink-0" data-testid="state-filter-trigger">
