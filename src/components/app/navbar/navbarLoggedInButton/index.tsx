@@ -2,6 +2,7 @@
 
 import React from 'react'
 
+import { DefaultLoginButton } from '@/components/app/authentication/defaultLoginButton'
 import { Button } from '@/components/ui/button'
 import { useResponsivePopover } from '@/components/ui/responsivePopover'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
@@ -34,9 +35,13 @@ export function NavbarLoggedInButton({ onOpenChange }: { onOpenChange: (open: bo
       }}
     >
       <PopoverTrigger asChild>
-        <Button variant="secondary">
-          <div className="max-w-[150px] truncate">{displayName ?? <>Log In</>}</div>
-        </Button>
+        {displayName ? (
+          <Button variant="secondary">
+            <div className="max-w-[150px] truncate">{displayName}</div>
+          </Button>
+        ) : (
+          <DefaultLoginButton />
+        )}
       </PopoverTrigger>
       <PopoverContent align="end" className="p-0">
         <NavbarLoggedInPopoverContent onClose={() => dialogProps.onOpenChange(false)} user={user} />
