@@ -4,7 +4,7 @@ import { zodVerifiedSWCPartnersUserAddress } from '@/data/verifiedSWCPartners/us
 
 export function getFormattedDescription(
   address: z.infer<typeof zodVerifiedSWCPartnersUserAddress>,
-  includePostalSuffix: boolean,
+  includePostalCodeSuffix: boolean,
 ) {
   let result = ''
   const addElementToAddress = function (element: string) {
@@ -30,7 +30,7 @@ export function getFormattedDescription(
     result += ','
   }
   addElementToAddress(address.postalCode)
-  if (address.postalCode && address.postalCodeSuffix && includePostalSuffix) {
+  if (address.postalCode && address.postalCodeSuffix && includePostalCodeSuffix) {
     result += `-${address.postalCodeSuffix}`
   }
   addElementToAddress(address.countryCode)
