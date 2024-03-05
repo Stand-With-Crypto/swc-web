@@ -2,7 +2,9 @@
 
 describe('page - homepage interactions', () => {
   beforeEach(() => {
-    cy.seedDb()
+    cy.seedDb().then(() => {
+      cy.visit('/')
+    })
   })
 
   it('checking for top donor existence', () => {
