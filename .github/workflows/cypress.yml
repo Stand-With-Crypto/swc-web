@@ -69,6 +69,7 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.CYPRESS_GITHUB_WORKFLOW_TOKEN_TRAVIS }}
       # database
       DATABASE_URL: mysql://root:root@localhost:3306/swc-web
+      SEED_SIZE: SM
 
     steps:
       - name: Checkout
@@ -76,16 +77,16 @@ jobs:
 
       - name: Wait for MySQL
         run: |
-          until mysql -h 127.0.0.1 -P 3306 -u root --password=root -e "SELECT 1"; do
-            echo "Waiting for MySQL to be ready..."
-            sleep 5
+          until mysql -h 127.0.0.1 -P 3306 -u root --password=root --database=swc-web -e "SELECT 1"; do
+            echo "Waiting for MySQL to be ready...";
+            sleep 4;
           done
 
-      - name: Initialize MySQL database credentials
+      - name: Properly initialize MySQL database credentials
         run: |
           mysql -h 127.0.0.1 -P 3306 -u root --password=root -e "ALTER USER 'root' IDENTIFIED WITH mysql_native_password BY 'root'; FLUSH PRIVILEGES;"
 
-      - name: Cypress run
+      - name: Run Cypress
         # Uses the official Cypress GitHub action https://github.com/cypress-io/github-action
         uses: cypress-io/github-action@1b70233146622b69e789ccdd4f9452adc638d25a # v6.6.1
         with:

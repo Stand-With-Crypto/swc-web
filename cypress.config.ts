@@ -3,7 +3,7 @@ import mysql from 'mysql'
 
 export default defineConfig({
   projectId: process.env.CYPRESS_PROJECT_ID,
-  // iPhone 12 Pro
+  // iPhone 12 Pro resolution
   viewportWidth: 390,
   viewportHeight: 844,
   defaultCommandTimeout: 10000,
@@ -27,6 +27,13 @@ export default defineConfig({
   },
 })
 
+/**
+ * Query the test database using the provided query.
+ *
+ * @param query
+ * @param config
+ * @returns
+ */
 function queryTestDb(query: string | mysql.QueryOptions, config: Cypress.PluginConfigOptions) {
   const connection = mysql.createConnection(config.env.db)
   connection.connect()

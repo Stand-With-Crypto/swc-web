@@ -52,6 +52,30 @@ Cypress.Commands.add('selectFromComboBox', ({ trigger, searchText }) => {
     })
 })
 
+Cypress.Commands.add('clearDb', () => {
+  cy.task('queryDb', 'DELETE FROM address')
+  cy.task('queryDb', 'DELETE FROM authentication_nonce')
+  cy.task('queryDb', 'DELETE FROM nft_mint')
+  cy.task('queryDb', 'DELETE FROM user')
+  cy.task('queryDb', 'DELETE FROM user_action')
+  cy.task('queryDb', 'DELETE FROM user_action_call')
+  cy.task('queryDb', 'DELETE FROM user_action_donation')
+  cy.task('queryDb', 'DELETE FROM user_action_email')
+  cy.task('queryDb', 'DELETE FROM user_action_email_recipient')
+  cy.task('queryDb', 'DELETE FROM user_action_opt_in')
+  cy.task('queryDb', 'DELETE FROM user_action_voter_registration')
+  cy.task('queryDb', 'DELETE FROM user_crypto_address')
+  cy.task('queryDb', 'DELETE FROM user_email_address')
+  cy.task('queryDb', 'DELETE FROM user_merge_alert')
+  cy.task('queryDb', 'DELETE FROM user_merge_event')
+  cy.task('queryDb', 'DELETE FROM user_session')
+})
+
+Cypress.Commands.add('seedDb', () => {
+  cy.exec('SEED_SIZE=SM')
+  cy.exec('npx prisma db seed')
+})
+
 export {}
 
 declare global {
@@ -61,6 +85,9 @@ declare global {
         trigger: Chainable<JQuery<Node>>
         searchText: string
       }): Chainable<void>
+      clearDb(): Chainable<void>
+      seedDb(): Chainable<void>
+
       //   drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
       //   dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
       //   visit(originalFn: CommandOriginalFn, url: string, options: Partial<VisitOptions>): Chainable<Element>
