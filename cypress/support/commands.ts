@@ -73,12 +73,12 @@ Cypress.Commands.add('clearDb', () => {
 
 Cypress.Commands.add('seedDb', () => {
   cy.exec('SEED_SIZE=SM').then(result => {
-    cy.log(result.stdout)
-    cy.log(result.stderr)
+    cy.log('stdout:' + result.stdout)
+    cy.log('stderr:' + result.stderr)
   })
   cy.exec('npm run ts --transpile-only src/bin/seed/seedLocalDb.ts').then(result => {
-    cy.log(result.stdout)
-    cy.log(result.stderr)
+    cy.log('stdout:' + result.stdout)
+    cy.log('stderr:' + result.stderr)
   })
 })
 
