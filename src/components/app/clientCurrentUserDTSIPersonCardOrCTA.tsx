@@ -126,9 +126,9 @@ export function ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: Suppo
         </div>
         <div className="flex items-center gap-5">
           <UserActionFormCallCongresspersonDialog>
-            <button style={{ width: '100%' }}>
-              <img alt="call button" className="h-[44px] w-[44px]" src="/misc/call-icon.svg" />
-            </button>
+            <Button className="w-full p-3" variant="secondary">
+              <img alt="call button" src="/misc/call-icon.svg" />
+            </Button>
           </UserActionFormCallCongresspersonDialog>
           <Button asChild className="w-full">
             <InternalLink href={getIntlUrls(locale).politicianDetails(person.slug)}>
