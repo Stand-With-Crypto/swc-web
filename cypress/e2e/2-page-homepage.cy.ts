@@ -4,6 +4,11 @@ describe('page - homepage interactions', () => {
   beforeEach(() => {
     cy.seedDb().then(() => {
       cy.visit('/')
+      cy.queryDb('SELECT COUNT(*) AS "row_count" FROM user').then((result: any) => {
+        expect(result[0].row_count, 'users to exist in database').to.greaterThan(0)
+      })
+      cy.clearAllCookies()
+      cy.clearAllLocalStorage()
     })
   })
 

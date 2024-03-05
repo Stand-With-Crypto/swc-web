@@ -52,6 +52,10 @@ Cypress.Commands.add('selectFromComboBox', ({ trigger, searchText }) => {
     })
 })
 
+Cypress.Commands.add('queryDb', (query: string) => {
+  return cy.task('queryDb', query)
+})
+
 Cypress.Commands.add('clearDb', () => {
   cy.task('queryDb', 'DELETE FROM address')
   cy.task('queryDb', 'DELETE FROM authentication_nonce')
@@ -91,6 +95,7 @@ declare global {
         trigger: Chainable<JQuery<Node>>
         searchText: string
       }): Chainable<void>
+      queryDb(query: string): Chainable<any>
       clearDb(): Chainable<void>
       seedDb(): Chainable<void>
 
