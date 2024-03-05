@@ -35,7 +35,6 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { useIntlUrls } from '@/hooks/useIntlUrls'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -84,8 +83,6 @@ export function DataTable<TData extends Person, TValue>({
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
   const [globalFilter, setGlobalFilter] = React.useState<GlobalFilters>(getGlobalFilterDefaults())
-  const router = useRouter()
-  const urls = useIntlUrls()
 
   const data = useMemo(
     () => filterDataViaGlobalFilters(passedData, globalFilter),
