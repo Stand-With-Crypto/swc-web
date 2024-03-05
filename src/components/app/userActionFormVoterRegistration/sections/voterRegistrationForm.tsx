@@ -1,12 +1,12 @@
 import { Dispatch, SetStateAction, useCallback, useMemo, useState } from 'react'
 import { ArrowUpRight } from 'lucide-react'
 
+import { UserActionFormLayout } from '@/components/app/userActionFormCommon'
 import {
   REGISTRATION_URLS_BY_STATE,
   SectionNames,
   StateCode,
 } from '@/components/app/userActionFormVoterRegistration/constants'
-import { UserActionFormVoterRegistrationLayout } from '@/components/app/userActionFormVoterRegistration/sections/layout'
 import { Button } from '@/components/ui/button'
 import { ExternalLink } from '@/components/ui/link'
 import {
@@ -133,13 +133,13 @@ export function VoterRegistrationForm({
   const handleOnBack = useCallback(() => goToSection(SectionNames.SURVEY), [goToSection])
 
   return (
-    <UserActionFormVoterRegistrationLayout onBack={handleOnBack}>
-      <UserActionFormVoterRegistrationLayout.Container>
-        <UserActionFormVoterRegistrationLayout.Heading subtitle={subtitle} title={title} />
+    <UserActionFormLayout onBack={handleOnBack}>
+      <UserActionFormLayout.Container>
+        <UserActionFormLayout.Heading subtitle={subtitle} title={title} />
         <ol className="flex flex-col justify-self-center">
           <li className={LIST_ITEM_STYLE}>
             <Step1Svg />
-            <div className="flex flex-grow flex-row items-center justify-between">
+            <div className="flex flex-grow flex-row items-center justify-between gap-2">
               Choose your state
               <Select onValueChange={handleOnValueChange} value={stateCode}>
                 <SelectTrigger
@@ -161,7 +161,7 @@ export function VoterRegistrationForm({
           <div className={stateCode === 'ND' || stateCode === 'WY' ? 'invisible' : ''}>
             <li className={LIST_ITEM_STYLE}>
               <Step2Svg />
-              <div className="flex flex-grow flex-row items-center justify-between">
+              <div className="flex flex-grow flex-row items-center justify-between gap-2">
                 {step2}
                 <Button asChild disabled={!link} onClick={handleStep2Cta} variant="secondary">
                   <ExternalLink href={link}>
@@ -178,8 +178,8 @@ export function VoterRegistrationForm({
             </li>
           </div>
         </ol>
-      </UserActionFormVoterRegistrationLayout.Container>
-      <UserActionFormVoterRegistrationLayout.Footer>
+      </UserActionFormLayout.Container>
+      <UserActionFormLayout.Footer>
         <div className="flex flex-grow flex-row items-center justify-between gap-8">
           <span className="w-2/3 text-sm text-fontcolor-muted">{disclaimer(stateCode)}</span>
           <Button
@@ -189,7 +189,7 @@ export function VoterRegistrationForm({
             Claim NFT
           </Button>
         </div>
-      </UserActionFormVoterRegistrationLayout.Footer>
-    </UserActionFormVoterRegistrationLayout>
+      </UserActionFormLayout.Footer>
+    </UserActionFormLayout>
   )
 }
