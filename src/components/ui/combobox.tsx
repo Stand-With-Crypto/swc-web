@@ -70,7 +70,9 @@ export function Combobox<T>({
   if (isMobile) {
     return (
       <Drawer analytics={wrappedAnalytics} onOpenChange={setOpen} open={open}>
-        <DrawerTrigger asChild>{formatPopoverTrigger({ value, open })}</DrawerTrigger>
+        <DrawerTrigger asChild ref={parentRef}>
+          {formatPopoverTrigger({ value, open })}
+        </DrawerTrigger>
         <DrawerContent>
           <div className="mt-4 min-h-[260px] border-t">
             <StatusList
