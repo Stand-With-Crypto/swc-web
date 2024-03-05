@@ -222,10 +222,12 @@ async function maybeUpsertUser({
 
   let dbAddress: z.infer<typeof zodAddress> | undefined = undefined
   if (address) {
-    const formattedDescription = getFormattedDescription(address)
+    const formattedDescription = getFormattedDescription(address, true)
     dbAddress = { ...address, formattedDescription: formattedDescription, googlePlaceId: undefined }
     try {
-      dbAddress.googlePlaceId = await getGooglePlaceIdFromAddress(dbAddress.formattedDescription)
+      dbAddress.googlePlaceId = await getGooglePlaceIdFromAddress(
+        getFormattedDescription(address, false),
+      )
     } catch (e) {
       logger.error('error getting googlePlaceID:' + e)
     }
