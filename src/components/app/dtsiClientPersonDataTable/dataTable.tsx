@@ -172,7 +172,6 @@ export function DataTable<TData extends Person, TValue>({
                     className="cursor-pointer"
                     data-state={row.getIsSelected() && 'selected'}
                     key={row.id}
-                    onClick={() => router.push(urls.politicianDetails(row.original.slug))}
                     role="button"
                   >
                     {row.getVisibleCells().map(cell => (
