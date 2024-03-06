@@ -11,7 +11,7 @@ import {
   useSDK,
 } from '@thirdweb-dev/react'
 import { BaseContract } from 'ethers'
-import { noop } from 'lodash-es'
+import { isPlainObject, noop } from 'lodash-es'
 import { keccak256, toHex } from 'viem'
 
 import { logger } from '@/utils/shared/logger'
@@ -150,6 +150,10 @@ export function getErrorInstance(maybeError: unknown): Error {
 
   if (maybeError instanceof Error) {
     return maybeError
+  }
+
+  if (isPlainObject(maybeError)) {
+    return new Error(`Unknown error: ${JSON.stringify(maybeError)}`)
   }
 
   return new Error(`Unknown error: ${String(maybeError)}`)
