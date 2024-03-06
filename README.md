@@ -30,10 +30,6 @@
   - Both the development server AND Inngest are required for a fully functional website
 - Open [http://localhost:3000](http://localhost:3000) with your browser to see the results
 
-### Deployment
-
-- Navigate to main branch and run `./bin/deploy_web_production.sh`
-
 ### Useful development tips
 
 - `npx prisma generate` - generates [Prisma ORM](https://www.prisma.io/) TypeScript definitions (_i.e._ DB client code) based on `prisma/prisma.schema`
@@ -75,6 +71,10 @@ Whenever you make Prisma schema changes (or pulling commits from `main` that inc
   - `npm run e2e:run-headless` - runs all our E2E tests consecutively via Cypress CLI
     - Currently, this command only executes when new comments are made to main branch because of database dependencies - this may change in the future
   - Refer to `docs/Coding Conventions.md/Testing` for more information
+
+### Deployment
+
+- Navigate to main branch and run `./bin/deploy_web_production.sh`
 
 ### Contribution guide
 
