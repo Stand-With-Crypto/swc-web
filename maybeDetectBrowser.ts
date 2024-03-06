@@ -1,4 +1,4 @@
-import * as Bowser from 'bowser' // TypeScript
+import * as Bowser from 'bowser'
 
 export function maybeDetectBrowser() {
   try {
@@ -49,13 +49,6 @@ export function getIsSupportedBrowser(data: Bowser.Parser.ParsedResult | null) {
       }
       return version >= 13
     }
-    // case 'chromium-webview': {
-    //   const version = maybeParseNumber(browser.version)
-    //   if (!version) {
-    //     return true
-    //   }
-    //   return version > 71
-    // }
     case 'Safari': {
       const version = maybeParseNumber(data.browser.version)
       if (!version) {

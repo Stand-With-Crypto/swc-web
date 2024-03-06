@@ -1,5 +1,5 @@
 import { expect } from '@jest/globals'
-import * as Bowser from 'bowser' // TypeScript
+import * as Bowser from 'bowser'
 import { uniq } from 'lodash-es'
 
 import { getIsSupportedBrowser } from './maybeDetectBrowser'
