@@ -1,8 +1,5 @@
 'use client'
 
-import React from 'react'
-
-import { DefaultLoginButton } from '@/components/app/authentication/defaultLoginButton'
 import { Button } from '@/components/ui/button'
 import { useResponsivePopover } from '@/components/ui/responsivePopover'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
@@ -40,7 +37,7 @@ export function NavbarLoggedInButton({ onOpenChange }: { onOpenChange: (open: bo
             <div className="max-w-[150px] truncate">{displayName}</div>
           </Button>
         ) : (
-          <DefaultLoginButton />
+          <Button>Sign In</Button>
         )}
       </PopoverTrigger>
       <PopoverContent align="end" className="p-0">
