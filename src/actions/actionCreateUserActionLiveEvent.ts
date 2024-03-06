@@ -77,7 +77,7 @@ async function _actionCreateUserActionLiveEvent(input: CreateActionLiveEventInpu
     if (currentTime < eventDuration.START_TIME.getTime()) {
       return {
         errors: {
-          campaignName: ['The event is not live yet.'],
+          campaignName: ['This event is not live yet.'],
         },
       }
     }
