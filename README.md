@@ -14,7 +14,7 @@
 
 - Install [Node](https://nodejs.org/en) v20.10.0 ([nvm](https://github.com/nvm-sh/nvm) is recommended for installing Node)
 - Install [Docker Desktop + CLI](https://www.docker.com/products/docker-desktop/)
-- Install [Homebrew](https://brew.sh/)
+- Install MySQL (on Mac you can install [Homebrew](https://brew.sh/) and run `brew install mysql`)
 - Clone this repository to your local machine (forking is disabled)
   - If you are using SSH to clone, but you do not have a public SSH key for your GitHub account (which will prevent cloning), follow the [GitHub SSH guide](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) to set up SSH authentication and signing
 - `cd` into your local swc-web repository
