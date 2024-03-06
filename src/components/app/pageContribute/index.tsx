@@ -100,7 +100,7 @@ export function PageContribute() {
                 <Button asChild size="lg">
                   <ExternalLink
                     href={
-                      'mailto:info@standwithcrypto.org?subject=Stand%20With%20Crypto%20Partner%20Inquiry'
+                      'https://docs.google.com/forms/d/e/1FAIpQLSf4T51k9InqKQKW2911_HVWm11wz_dOcpoDj8QuyF7cxU5MHw/viewform'
                     }
                   >
                     Become a Partner
