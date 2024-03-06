@@ -16,6 +16,7 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
+import { TURN_OFF_NFT_MINT } from '@/utils/shared/killSwitches'
 import { hasCompleteUserProfile } from '@/utils/web/hasCompleteUserProfile'
 import { NFTClientMetadata } from '@/utils/web/nft'
 
@@ -33,6 +34,10 @@ const NFTImage = ({ nft }: { nft: NFTClientMetadata }) => (
 const RedeemedNFTImage = ({ nft }: { nft: NFTClientMetadata }) => (
   <div>
     <NFTImage nft={nft} />
+    <p className="mt-2 font-bold">
+      You’ve earned a new NFT
+      {TURN_OFF_NFT_MINT ? '. It will be sent to your connected wallet in the next few days.' : ''}
+    </p>
   </div>
 )
 

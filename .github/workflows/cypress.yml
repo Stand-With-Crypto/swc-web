@@ -2,6 +2,7 @@ name: Cypress Tests
 on:
   push:
     branches:
+      - feature/enable-local-mysql-for-cypress
       - node-version-workflow
       - main
 # Ideally we run this on every PR. Currently the CI flow wipes the testing database to ensure that each run is deterministic
@@ -14,12 +15,24 @@ jobs:
     # if: github.event.pull_request.draft == false
     environment: preview
     runs-on: ubuntu-latest-8core
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: swc-web
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
     strategy:
       fail-fast: false # https://github.com/cypress-io/github-action/issues/48
     env:
       # environment secrets
       VERIFIED_SWC_PARTNER_SECRET_COINBASE: ${{ secrets.VERIFIED_SWC_PARTNER_SECRET_COINBASE }}
-      DATABASE_URL: ${{ secrets.DATABASE_URL }}
       DO_THEY_SUPPORT_IT_API_KEY: ${{ secrets.DO_THEY_SUPPORT_IT_API_KEY }}
       THIRD_WEB_CLIENT_SECRET: ${{ secrets.THIRD_WEB_CLIENT_SECRET }}
       THIRDWEB_AUTH_PRIVATE_KEY: ${{ secrets.THIRDWEB_AUTH_PRIVATE_KEY }}
@@ -55,11 +68,23 @@ jobs:
       # org level secrets
       CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
       GITHUB_TOKEN: ${{ secrets.CYPRESS_GITHUB_WORKFLOW_TOKEN_TRAVIS }}
+      # database
+      DATABASE_URL: mysql://root:root@localhost:3306/swc-web
+      SEED_SIZE: SM
+      IS_DEVELOPING_OFFLINE: true
 
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Cypress run
+
+      - name: Wait for MySQL
+        run: |
+          until mysql -h 127.0.0.1 -P 3306 -u root --password=root --database=swc-web -e "SELECT 1"; do
+            echo "Waiting for MySQL to be ready...";
+            sleep 4;
+          done
+
+      - name: Run Cypress
         # Uses the official Cypress GitHub action https://github.com/cypress-io/github-action
         uses: cypress-io/github-action@1b70233146622b69e789ccdd4f9452adc638d25a # v6.6.1
         with:

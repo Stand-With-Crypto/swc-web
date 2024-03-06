@@ -9,15 +9,26 @@ import {
   TextCensor,
 } from 'obscenity'
 
+const dataset = englishDataset
+  .addPhrase(phrase => phrase.setMetadata({ originalWord: 'fuck' }).addWhitelistedTerm('fickes'))
+  .addPhrase(phrase =>
+    phrase
+      .setMetadata({ originalWord: 'dick' })
+      .addWhitelistedTerm('murdock')
+      .addWhitelistedTerm('dickerson')
+      .addWhitelistedTerm('haydock')
+      .addWhitelistedTerm('dock'),
+  )
+
 export const obscenityMatcher = new RegExpMatcher({
-  ...englishDataset.build(),
+  ...dataset.build(),
   ...englishRecommendedTransformers,
 })
 
 export const hasBadWord = (input: string) => {
   const matches = obscenityMatcher.hasMatch(input)
   if (matches) {
-    Sentry.captureMessage('Detected obscenity', { extra: { input } })
+    Sentry.captureMessage(`Detected obscenity: ${input}`, { extra: { input } })
   }
   return matches
 }
