@@ -1,9 +1,12 @@
 import React from 'react'
-import { getGasPrice, toEther, useSDK } from '@thirdweb-dev/react'
+import { getGasPrice, toEther, useContract, useSDK } from '@thirdweb-dev/react'
 import { BigNumber } from 'ethers'
 import useSWR from 'swr'
 
-import { ETH_NFT_DONATION_AMOUNT } from '@/components/app/userActionFormNFTMint/constants'
+import {
+  ETH_NFT_DONATION_AMOUNT,
+  MINT_NFT_CONTRACT_ADDRESS,
+} from '@/components/app/userActionFormNFTMint/constants'
 import { fromBigNumber, toBigNumber } from '@/utils/shared/bigNumber'
 
 export interface UseCheckoutControllerReturn {
@@ -21,7 +24,7 @@ export function useCheckoutController({
   mintUnitFee = ETH_NFT_DONATION_AMOUNT,
 } = {}): UseCheckoutControllerReturn {
   const [quantity, setQuantity] = React.useState(1)
-  const { data: gasUnitFee } = useGasFee()
+  const { data: gasUnitFee } = useGasFee(quantity)
 
   const values = React.useMemo<
     Pick<
@@ -54,15 +57,28 @@ export function useCheckoutController({
   }
 }
 
-function useGasFee() {
+function useGasFee(quantity: number) {
   const contextSDK = useSDK()
+  const { contract } = useContract(MINT_NFT_CONTRACT_ADDRESS)
 
-  return useSWR(contextSDK, async sdk => {
+  return useSWR({ sdk: contextSDK, ct: contract }, async ({ sdk, ct }) => {
     if (!sdk) {
       return
     }
+    if (!ct) {
+      return
+    }
 
-    const gasPrice = await getGasPrice(sdk.getProvider())
-    return toBigNumber(toEther(gasPrice))
+    console.log('network', sdk.network.toString())
+
+    const prepareTx = await ct.erc721.claim.prepare(quantity)
+    const gasFee = await prepareTx.estimateGasCost()
+    console.log('gasFee', gasFee)
+    const gasLimit = await prepareTx.estimateGasLimit()
+    console.log('gasLimit', toEther(gasLimit))
+    const contractGasPrice = await prepareTx.getGasPrice()
+    console.log('gasPrice', toEther(contractGasPrice))
+
+    return toBigNumber(gasFee.ether)
   })
 }
