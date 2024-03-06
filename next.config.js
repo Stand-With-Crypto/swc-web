@@ -36,6 +36,7 @@ const contentSecurityPolicy = {
     'https://vercel.live/',
     'https://vitals.vercel-insights.com/',
   ],
+  'media-src': ["'self'", 'https: data:', 'blob: data:'],
   'img-src': ["'self'", 'https: data:', 'blob: data:'],
   'connect-src': [
     "'self'",
