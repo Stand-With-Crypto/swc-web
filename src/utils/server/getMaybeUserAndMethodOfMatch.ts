@@ -1,5 +1,5 @@
 'use server'
-import { Prisma, UserCryptoAddress, UserEmailAddress } from '@prisma/client'
+import { Prisma, UserCryptoAddress } from '@prisma/client'
 import { GetFindResult } from '@prisma/client/runtime/library'
 import * as Sentry from '@sentry/nextjs'
 
