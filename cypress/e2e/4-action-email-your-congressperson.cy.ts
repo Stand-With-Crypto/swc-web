@@ -39,19 +39,15 @@ it('action - email your congressperson', () => {
   cy.contains('Nice work!')
 
   // validate database
-  cy.queryDb('SELECT COUNT(*) AS "row_count" FROM user WHERE first_name="John"').then(
-    (result: any) => {
-      expect(result[0].row_count, 'user to exist in database').to.equal(1)
-    },
-  )
-  cy.queryDb('SELECT COUNT(*) AS "row_count" FROM user_action WHERE action_type="EMAIL"').then(
-    (result: any) => {
-      expect(result[0].row_count, 'user_action to exist in database').to.equal(1)
-    },
-  )
-  cy.queryDb(
-    'SELECT COUNT(*) AS "row_count" FROM user_action_email WHERE sender_email="johndoe@gmail.com"',
-  ).then((result: any) => {
-    expect(result[0].row_count, 'user_action_email to exist in database').to.equal(1)
+  cy.queryDb('SELECT * FROM user WHERE first_name="John"').then((result: any) => {
+    expect(result.length, 'user to exist in database').to.equal(1)
   })
+  cy.queryDb('SELECT * FROM user_action WHERE action_type="EMAIL"').then((result: any) => {
+    expect(result.length, 'user_action to exist in database').to.equal(1)
+  })
+  cy.queryDb('SELECT * FROM user_action_email WHERE sender_email="johndoe@gmail.com"').then(
+    (result: any) => {
+      expect(result.length, 'user_action_email to exist in database').to.equal(1)
+    },
+  )
 })

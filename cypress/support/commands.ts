@@ -59,6 +59,10 @@ Cypress.Commands.add('queryDb', (query: string) => {
   return cy.task('queryDb', query)
 })
 
+Cypress.Commands.add('executeDb', (query: string) => {
+  return cy.task('executeDb', query)
+})
+
 Cypress.Commands.add('clearDb', () => {
   const tableNames = [
     'address',
@@ -79,19 +83,13 @@ Cypress.Commands.add('clearDb', () => {
     'user_session',
   ]
   tableNames.forEach(tableName => {
-    cy.task('queryDb', `DELETE FROM ${tableName}`)
+    cy.task('executeDb', `DELETE FROM ${tableName}`)
   })
 })
 
 Cypress.Commands.add('seedDb', () => {
-  cy.exec('SEED_SIZE=SM').then(result => {
-    cy.log('stdout:' + result.stdout)
-    cy.log('stderr:' + result.stderr)
-  })
-  cy.exec('npm run ts --transpile-only src/bin/seed/seedLocalDb.ts').then(result => {
-    cy.log('stdout:' + result.stdout)
-    cy.log('stderr:' + result.stderr)
-  })
+  cy.exec('SEED_SIZE=SM')
+  cy.exec('npm run ts --transpile-only src/bin/seed/seedLocalDb.ts')
 })
 
 export {}
@@ -104,6 +102,7 @@ declare global {
         searchText: string
       }): Chainable<void>
       queryDb(query: string): Chainable<any>
+      executeDb(query: string): Chainable<any>
       clearDb(): Chainable<void>
       seedDb(): Chainable<void>
 

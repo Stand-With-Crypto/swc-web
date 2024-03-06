@@ -1,5 +1,6 @@
 import { defineConfig } from 'cypress'
-import mysql from 'mysql'
+
+import { prismaClient } from '@/utils/server/prismaClient'
 
 export default defineConfig({
   projectId: process.env.CYPRESS_PROJECT_ID,
@@ -9,41 +10,35 @@ export default defineConfig({
   defaultCommandTimeout: 10000,
   e2e: {
     baseUrl: 'http://localhost:3000',
-    setupNodeEvents(on, config) {
+    setupNodeEvents(on) {
       on('task', {
+        executeDb: query => {
+          return executeDbWithPrisma(query)
+        },
         queryDb: query => {
-          return queryTestDb(query, config)
+          return queryDbWithPrisma(query)
         },
       })
-    },
-  },
-  env: {
-    db: {
-      host: '127.0.0.1',
-      user: 'root',
-      password: 'root',
-      database: 'swc-web',
     },
   },
 })
 
 /**
- * Query the test database using the provided query.
+ * Use this function for mutations (INSERT, UPDATE, DELETE, etc.).
  *
  * @param query
- * @param config
  * @returns
  */
-function queryTestDb(query: string | mysql.QueryOptions, config: Cypress.PluginConfigOptions) {
-  const connection = mysql.createConnection(config.env.db)
-  connection.connect()
-  return new Promise((resolve, reject) => {
-    connection.query(query, (error, results) => {
-      if (error) reject(error)
-      else {
-        connection.end()
-        return resolve(results)
-      }
-    })
-  })
+async function executeDbWithPrisma(query: string) {
+  return await prismaClient.$executeRawUnsafe(query)
+}
+
+/**
+ * Use this function for SELECT.
+ *
+ * @param query
+ * @returns
+ */
+async function queryDbWithPrisma(query: string) {
+  return await prismaClient.$queryRawUnsafe(query)
 }

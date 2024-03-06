@@ -12,7 +12,6 @@ services:
       - '3306:3306'
     volumes:
       - swc_data:/var/lib/mysql
-      - ./cypress/mysql:/docker-entrypoint-initdb.d
 
 volumes:
   swc_data:
