@@ -77,13 +77,17 @@ async function _actionCreateUserActionLiveEvent(input: CreateActionLiveEventInpu
   ) {
     const currentTime = Date.now()
     const eventDuration = EVENT_DURATION[validatedInput.data.campaignName]
-    if (
-      currentTime < eventDuration.START_TIME.getTime() ||
-      currentTime > eventDuration.END_TIME.getTime()
-    ) {
+    if (currentTime < eventDuration.START_TIME.getTime()) {
       return {
         errors: {
-          campaignName: ['The campaign is not active'],
+          campaignName: ['This event is not live yet.'],
+        },
+      }
+    }
+    if (currentTime > eventDuration.END_TIME.getTime()) {
+      return {
+        errors: {
+          campaignName: ['This event is no longer live.'],
         },
       }
     }
