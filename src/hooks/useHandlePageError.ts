@@ -21,6 +21,6 @@ export function useHandlePageError({
       ? `Testing Sentry Triggered ${humanReadablePageName} Error Page`
       : `${humanReadablePageName} Error Page Displayed`
     trackClientAnalytic('Error Page Visible', { Category: humanReadablePageName })
-    Sentry.captureException(message, { fingerprint: [`fingerprint-${message}`] })
+    Sentry.captureMessage(message, { fingerprint: [`fingerprint-${message}`] })
   }, [domain, error, humanReadablePageName])
 }
