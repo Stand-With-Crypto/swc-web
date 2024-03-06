@@ -3,6 +3,7 @@
 import React from 'react'
 import { useCopyToClipboard } from 'react-use'
 import * as Sentry from '@sentry/nextjs'
+import { useENS } from '@thirdweb-dev/react'
 import { Copy } from 'lucide-react'
 import { toast } from 'sonner'
 
@@ -14,7 +15,7 @@ import { InternalLink } from '@/components/ui/link'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useThirdwebData } from '@/hooks/useThirdwebData'
-import { useUserWithMaybeENSData } from '@/hooks/useUserWithMaybeEnsData'
+import { appendENSHookDataToUser } from '@/utils/web/appendENSHookDataToUser'
 import { maybeEllipsisText } from '@/utils/web/maybeEllipsisText'
 import {
   getFullSensitiveDataUserDisplayName,
@@ -32,15 +33,14 @@ export function NavbarLoggedInPopoverContent({
 }: NavbarLoggedInSessionPopoverContentProps) {
   const urls = useIntlUrls()
   const { logoutAndDisconnect } = useThirdwebData()
-
-  const userWithMaybeEnsData = useUserWithMaybeENSData({ user })
+  const ensData = useENS()
 
   return (
     <div className="space-y-2 text-left">
       <div className="flex flex-col gap-6 p-4">
         <div className="flex items-center gap-4">
-          {userWithMaybeEnsData ? (
-            <UserHeading user={userWithMaybeEnsData} />
+          {user && !ensData.isLoading ? (
+            <UserHeading user={appendENSHookDataToUser(user, ensData.data)} />
           ) : (
             <UserHeadingSkeleton />
           )}

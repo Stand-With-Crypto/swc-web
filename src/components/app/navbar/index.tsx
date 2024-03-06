@@ -4,7 +4,6 @@ import { useCallback } from 'react'
 import { capitalize } from 'lodash-es'
 import { Menu } from 'lucide-react'
 
-import { DefaultLoginButton } from '@/components/app/authentication/defaultLoginButton'
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { NavbarLoggedInButton } from '@/components/app/navbar/navbarLoggedInButton'
 import { Button } from '@/components/ui/button'
@@ -55,7 +54,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
         <NavbarLoggedInButton onOpenChange={open => open || maybeCloseAfterNavigating()} />
       }
     >
-      <DefaultLoginButton />
+      <Button>Sign In</Button>
     </LoginDialogWrapper>
   )
   return (
@@ -101,7 +100,12 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
             <div className="flex gap-4 rounded-full bg-secondary">
               {leftLinks.map(({ href, text }) => {
                 return (
-                  <Button asChild className="hidden md:block" key={href} variant="secondary">
+                  <Button
+                    asChild
+                    className="hidden hover:bg-gray-200 md:block"
+                    key={href}
+                    variant="ghost"
+                  >
                     <InternalLink href={href}>{text}</InternalLink>
                   </Button>
                 )
