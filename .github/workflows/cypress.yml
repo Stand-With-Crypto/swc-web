@@ -9,7 +9,7 @@ jobs:
   cypress-run:
     # if: github.event.pull_request.draft == false
     environment: preview
-    runs-on: ubuntu-latest-8core
+    runs-on: ubuntu-latest
     services:
       mysql:
         image: mysql:8.0
