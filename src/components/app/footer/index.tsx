@@ -120,10 +120,27 @@ export async function Footer({ locale }: { locale: SupportedLocale }) {
           </div>
         </div>
         <div className="mb-2 text-xs text-muted">
-          Information about people's position on crypto sourced from{' '}
+          Information about people’s stances on crypto sourced from{' '}
           <a className={'hover:underline'} href="https://www.dotheysupportit.com/" target="_blank">
             DoTheySupportIt.com
+          </a>{' '}
+          For more information, visit DoTheySupportIt’s{' '}
+          <a
+            className={'hover:underline'}
+            href="https://www.dotheysupportit.com/privacy-policy"
+            target="_blank"
+          >
+            privacy policy
+          </a>{' '}
+          and{' '}
+          <a
+            className={'hover:underline'}
+            href="https://www.dotheysupportit.com/terms-and-conditions"
+            target="_blank"
+          >
+            terms and conditions
           </a>
+          .
         </div>
         <div className="text-sm text-muted">
           Stand With Crypto ©️ All rights reserved {getYear(new Date())}
