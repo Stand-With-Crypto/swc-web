@@ -56,6 +56,8 @@ export function UserActionFormSuccessScreenMainCTA({
   const [hasOptedInToMembershipState, setHasOptedInToMembershipState] = useState<
     'hidden' | 'visible' | 'submitted'
   >('hidden')
+  const receivedAnNft = nftWhenAuthenticated ? 'Nice work! You earned a new NFT.' : 'Nice work!'
+
   if (!data) {
     return (
       <Container>
@@ -82,7 +84,7 @@ export function UserActionFormSuccessScreenMainCTA({
       return (
         <Container>
           <NFTImage nft={nftWhenAuthenticated} />
-          <PageTitle size="sm">Nice work! You earned a new NFT.</PageTitle>
+          <PageTitle size="sm">{receivedAnNft}</PageTitle>
           <PageSubTitle size={'md'}>
             You’ve earned an NFT for completing this action. Join Stand With Crypto to claim your
             NFT, see your activities, and get personalized content.
@@ -110,7 +112,7 @@ export function UserActionFormSuccessScreenMainCTA({
     return (
       <Container>
         {nftWhenAuthenticated && <RedeemedNFTImage nft={nftWhenAuthenticated} />}
-        <PageTitle size="sm">Nice work! You earned a new NFT.</PageTitle>
+        <PageTitle size="sm">{receivedAnNft}</PageTitle>
         <PageSubTitle size={'md'}>
           Finish setting up your profile to unlock rewards, see your activities, and get
           personalized content.
@@ -132,7 +134,7 @@ export function UserActionFormSuccessScreenMainCTA({
           <Container>
             {nftWhenAuthenticated && <RedeemedNFTImage nft={nftWhenAuthenticated} />}
             <PageTitle size="sm">
-              Nice work! Continue the fight - become a {'501(c)4'} member.
+              {receivedAnNft} Continue the fight - become a {'501(c)4'} member.
             </PageTitle>
             <PageSubTitle size={'md'}>
               Become a member of our nonprofit. It’s free to join and you’ll receive exclusive
@@ -172,7 +174,7 @@ export function UserActionFormSuccessScreenMainCTA({
     return (
       <Container>
         {nftWhenAuthenticated && <RedeemedNFTImage nft={nftWhenAuthenticated} />}
-        <PageTitle size="sm">Nice work!</PageTitle>
+        <PageTitle size="sm">{receivedAnNft}</PageTitle>
         <PageSubTitle size={'md'}>
           You’ve done your part to save crypto, but the fight isn’t over yet. Keep the momentum
           going by completing the next action below.
@@ -183,7 +185,7 @@ export function UserActionFormSuccessScreenMainCTA({
   return (
     <Container>
       {nftWhenAuthenticated && <RedeemedNFTImage nft={nftWhenAuthenticated} />}
-      <PageTitle size="sm">Nice work!</PageTitle>
+      <PageTitle size="sm">{receivedAnNft}</PageTitle>
       <PageSubTitle size={'md'}>
         You’ve done your part to save crypto, but the fight isn’t over yet. We’ll be in touch when
         there’s more actions to complete.
