@@ -96,8 +96,11 @@ async function _actionCreateUserActionLiveEvent(input: CreateActionLiveEventInpu
     prisma: { include: { primaryUserCryptoAddress: true, address: true } },
   })
 
-  await triggerRateLimiterAtMostOnce()
-  const user = userMatch.user || (await createUser({ localUser, sessionId }))
+  let user = userMatch.user
+  if (!user) {
+    await triggerRateLimiterAtMostOnce()
+    user = await createUser({ localUser, sessionId })
+  }
 
   const peopleAnalytics = getServerPeopleAnalytics({
     localUser,
