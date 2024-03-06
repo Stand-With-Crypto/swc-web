@@ -9,13 +9,13 @@ export default function ShieldCampaign() {
       <Head>
         <title>Stand With Crypto</title>
 
-        <meta property="og:title" content="Stand With Cyrpto" />
-        <meta property="og:type" content="video" />
-        <meta property="og:url" content="https://standwithcrypto.org/campaign/shield" />
-        <meta property="og:video" content={videoUrl} />
-        <meta property="og:video:secure_url" content={videoUrl} />
-        <meta property="og:video:type" content="video/mp4" />
-        <meta property="og:description" content="Stand with Crypto" />
+        <meta content="Stand With Cyrpto" property="og:title" />
+        <meta content="video" property="og:type" />
+        <meta content="https://standwithcrypto.org/campaign/shield" property="og:url" />
+        <meta content={videoUrl} property="og:video" />
+        <meta content={videoUrl} property="og:video:secure_url" />
+        <meta content="video/mp4" property="og:video:type" />
+        <meta content="Stand with Crypto" property="og:description" />
       </Head>
 
       <video controls src={videoUrl} />
