@@ -110,49 +110,49 @@ export function UserActionFormNFTMintCheckout({
             <PageSubTitle className="text-start">on Base</PageSubTitle>
           </div>
         </div>
+        <div className="flex flex-col gap-4">
+          <Card>
+            <div className="flex items-center justify-between gap-2">
+              <p>Quantity</p>
+              <QuantityInput
+                onChange={setQuantity}
+                onDecrement={decrementQuantity}
+                onIncrement={incrementQuantity}
+                value={quantity}
+              />
+            </div>
+          </Card>
 
-        <Card>
-          <div className="flex items-center justify-between gap-2">
-            <p>Quantity</p>
-            <QuantityInput
-              onChange={setQuantity}
-              onDecrement={decrementQuantity}
-              onIncrement={incrementQuantity}
-              value={quantity}
-            />
-          </div>
-        </Card>
+          <Card className="w-full">
+            <div className="space-y-8">
+              <div className="flex items-center justify-between gap-2 text-sm md:text-base">
+                <div className="max-w-96">
+                  <p>Donation</p>
+                  <p className="text-xs text-muted-foreground">
+                    <Balancer>
+                      {mintFeeDisplay}
+                      {SupportedCryptoCurrencyCodes.ETH} of the mint fee will be donated to Stand
+                      With Crypto Alliance, Inc. (SWCA). Donations from foreign nationals and
+                      government contractors are prohibited.
+                    </Balancer>
+                  </p>
+                </div>
 
-        <Card className="w-full">
-          <div className="space-y-8">
-            <div className="flex items-center justify-between gap-2 text-sm md:text-base">
-              <div className="max-w-96">
-                <p>Donation</p>
-                <p className="text-xs text-muted-foreground">
-                  <Balancer>
-                    {mintFeeDisplay}
-                    {SupportedCryptoCurrencyCodes.ETH} of the mint fee will be donated to Stand With
-                    Crypto Alliance, Inc. (SWCA). Donations from foreign nationals and government
-                    contractors are prohibited.
-                  </Balancer>
-                </p>
+                <CurrencyDisplay value={mintFeeDisplay} />
               </div>
 
-              <CurrencyDisplay value={mintFeeDisplay} />
-            </div>
+              <div className="flex items-center justify-between gap-2 text-sm md:text-base">
+                <p>Gas fee</p>
+                <CurrencyDisplay value={gasFeeDisplay} />
+              </div>
 
-            <div className="flex items-center justify-between gap-2 text-sm md:text-base">
-              <p>Gas fee</p>
-              <CurrencyDisplay value={gasFeeDisplay} />
+              <div className="flex items-center justify-between gap-2 text-sm md:text-base">
+                <p>Total</p>
+                <CurrencyDisplay value={totalFeeDisplay} />
+              </div>
             </div>
-
-            <div className="flex items-center justify-between gap-2 text-sm md:text-base">
-              <p>Total</p>
-              <CurrencyDisplay value={totalFeeDisplay} />
-            </div>
-          </div>
-        </Card>
-
+          </Card>
+        </div>
         <Collapsible open={!maybeOverriddenCheckoutError}>
           <CollapsibleContent className="AnimateCollapsibleContent">
             <label className="flex cursor-pointer items-center gap-4">
