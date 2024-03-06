@@ -30,6 +30,10 @@
   - Both the development server AND Inngest are required for a fully functional website
 - Open [http://localhost:3000](http://localhost:3000) with your browser to see the results
 
+### Deployment
+
+- Navigate to main branch and run `./bin/deploy_web_production.sh`
+
 ### Useful development tips
 
 - `npx prisma generate` - generates [Prisma ORM](https://www.prisma.io/) TypeScript definitions (_i.e._ DB client code) based on `prisma/prisma.schema`
