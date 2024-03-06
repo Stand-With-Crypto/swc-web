@@ -103,16 +103,6 @@ async function baseGetMaybeUserAndMethodOfMatch<
     const authedCryptoAddress = userWithoutReturnTypes!.userCryptoAddresses.find(
       x => x.cryptoAddress === authUser.address,
     )!
-    if (authedCryptoAddress.id !== user.primaryUserCryptoAddressId) {
-      // @ts-ignore
-      const primaryUserEmailAddress = user.primaryUserEmailAddress as UserEmailAddress | undefined
-      const isCoinbaseEmployee = primaryUserEmailAddress?.emailAddress?.includes('coinbase.com')
-      // This will happen, but should be relatively infrequent
-      Sentry.captureMessage(
-        `${isCoinbaseEmployee ? 'Coinbase ' : ''}User logged in with a crypto address that is not their primary address`,
-        { extra: { user, address: authUser.address } },
-      )
-    }
     return {
       user,
       userCryptoAddress: authedCryptoAddress,

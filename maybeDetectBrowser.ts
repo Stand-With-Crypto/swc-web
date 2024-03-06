@@ -1,8 +1,8 @@
-import { detect } from 'detect-browser'
+import * as Bowser from 'bowser' // TypeScript
 
 export function maybeDetectBrowser() {
   try {
-    return detect()
+    return Bowser.parse(window.navigator.userAgent)
   } catch (e) {
     console.error(e)
     console.warn('maybeDetectBrowser crashed')
@@ -10,7 +10,10 @@ export function maybeDetectBrowser() {
   }
 }
 
-function maybeParseNumber(str: string) {
+function maybeParseNumber(str?: string) {
+  if (!str) {
+    return null
+  }
   try {
     return parseInt(str.split('.')[0], 10)
   } catch (e) {
@@ -27,23 +30,44 @@ A few notes about this function
 - this function will be expanded as we get sentry errors for additional legacy browsers
 - sentry ignores a lot of legacy browsers by default so this list just includes the ones that aren't getting blocked by sentry
 */
-export function getIsSupportedBrowser(browser: ReturnType<typeof detect>) {
-  if (!browser) {
+export function getIsSupportedBrowser(data: Bowser.Parser.ParsedResult | null) {
+  if (!data) {
     return true
   }
-  switch (browser.name) {
-    case 'phantomjs':
-    case 'curl':
-      return false
-    case 'chrome': {
-      const version = maybeParseNumber(browser.version)
+  switch (data.browser.name) {
+    case 'Chrome': {
+      const version = maybeParseNumber(data.browser.version)
       if (!version) {
         return true
       }
-      return version > 90
+      return version > 106
     }
-    case 'ios': {
-      const version = maybeParseNumber(browser.version)
+    case 'Samsung Internet for Android': {
+      const version = maybeParseNumber(data.browser.version)
+      if (!version) {
+        return true
+      }
+      return version >= 13
+    }
+    // case 'chromium-webview': {
+    //   const version = maybeParseNumber(browser.version)
+    //   if (!version) {
+    //     return true
+    //   }
+    //   return version > 71
+    // }
+    case 'Safari': {
+      const version = maybeParseNumber(data.browser.version)
+      if (!version) {
+        return true
+      }
+      return version >= 14
+    }
+  }
+  switch (data.os.name) {
+    case 'iOS': {
+      const version = maybeParseNumber(data.os.version)
+
       if (!version) {
         return true
       }
