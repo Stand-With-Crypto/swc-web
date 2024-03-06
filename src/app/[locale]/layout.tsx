@@ -2,7 +2,6 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import { capitalize } from 'lodash-es'
 import type { Metadata, Viewport } from 'next'
 import { notFound } from 'next/navigation'
-import { useRouter } from 'next/router'
 
 import { TopLevelClientLogic } from '@/app/[locale]/topLevelClientLogic'
 import { CookieConsent } from '@/components/app/cookieConsent'
@@ -62,18 +61,9 @@ export const metadata: Metadata = {
 
 export default function Layout({ children, params }: PageProps & { children: React.ReactNode }) {
   const { locale } = params
-  const router = useRouter()
 
   if (!ORDERED_SUPPORTED_LOCALES.includes(locale)) {
     notFound()
-  }
-
-  if (router.pathname === 'campaign/shield') {
-    return (
-      <html lang={locale}>
-        <body>{children}</body>
-      </html>
-    )
   }
 
   return (

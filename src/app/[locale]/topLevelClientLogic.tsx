@@ -11,6 +11,7 @@ import {
   walletConnect,
 } from '@thirdweb-dev/react'
 import { usePathname, useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/router'
 
 import { useAuthUser } from '@/hooks/useAuthUser'
 import { useDetectWipedDatabaseAndLogOutUser } from '@/hooks/useDetectWipedDatabaseAndLogOutUser'
@@ -78,6 +79,12 @@ export function TopLevelClientLogic({
   children: React.ReactNode
   locale: SupportedLocale
 }) {
+  const router = useRouter()
+
+  if (router.pathname === 'campaign/shield') {
+    return children
+  }
+
   return (
     <LocaleContext.Provider value={locale}>
       <ThirdwebProvider
