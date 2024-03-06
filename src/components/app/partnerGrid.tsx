@@ -3,6 +3,7 @@ import { NextImage } from '@/components/ui/image'
 const partners = [
   { title: 'Coinbase', imageSrc: '/pagesContent/contribute/coinbase.png' },
   // { title: 'Boost', imageSrc: '/pagesContent/contribute/boost.png' },
+  { title: 'thirdweb', imageSrc: '/pagesContent/contribute/thirdweb.png' },
 ]
 
 const placeholderPartner = { title: 'Your Logo', imageSrc: '/pagesContent/contribute/yourlogo.svg' }
