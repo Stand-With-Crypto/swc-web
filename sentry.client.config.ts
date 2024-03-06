@@ -4,7 +4,6 @@
 
 import { ExtraErrorData } from '@sentry/integrations'
 import * as Sentry from '@sentry/nextjs'
-import { createSearchParamsBailoutProxy } from 'next/dist/client/components/searchparams-bailout-proxy'
 
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { toBool } from '@/utils/shared/toBool'
@@ -32,6 +31,7 @@ const COMMON_ERROR_MESSAGES_TO_GROUP = [
   'localStorage',
   'TLS connection',
   'Unexpected end of',
+  'Unknown root exit status',
 ]
 
 const COMMON_TRANSACTION_NAMES_TO_GROUP = ['node_modules/@thirdweb-dev', 'maps/api/js']
@@ -63,6 +63,11 @@ Sentry.init({
   ],
   replaysSessionSampleRate: 0,
   replaysOnErrorSampleRate: 1.0,
+  ignoreErrors: [
+    `Can't find variable: bytecode`,
+    'ResizeObserver loop limit exceeded',
+    'ResizeObserver loop completed with undelivered notifications',
+  ],
   beforeSend: (event, hint) => {
     // prevent local errors from triggering sentry
     if (NEXT_PUBLIC_ENVIRONMENT === 'local') {
@@ -84,6 +89,7 @@ Sentry.init({
     // force group common transaction names
     try {
       const transaction = event.transaction
+      console.log('transaction name match against COMMON_TRANSACTION_NAMES_TO_GROUP', transaction)
       if (transaction) {
         COMMON_TRANSACTION_NAMES_TO_GROUP.forEach(message => {
           if (transaction.indexOf(message) !== -1) {
@@ -104,6 +110,7 @@ Sentry.init({
     try {
       const error = hint.originalException as Error
       const errorMessage = error?.message
+      console.log('error message to match against COMMON_ERROR_MESSAGES_TO_GROUP', errorMessage)
       if (errorMessage) {
         COMMON_ERROR_MESSAGES_TO_GROUP.forEach(message => {
           if (errorMessage.indexOf(message) !== -1) {
