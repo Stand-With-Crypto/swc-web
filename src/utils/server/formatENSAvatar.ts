@@ -3,6 +3,9 @@ import * as Sentry from '@sentry/nextjs'
 export function formatENSAvatar(avatar: string) {
   avatar = avatar.trim()
 
+  if (avatar.startsWith('http://')) {
+    return avatar
+  }
   if (avatar.startsWith('https://')) {
     return avatar
   }
