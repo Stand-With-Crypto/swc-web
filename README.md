@@ -76,6 +76,10 @@ Whenever you make Prisma schema changes (or pulling commits from `main` that inc
     - Use tools like [DataGrip](https://www.jetbrains.com/datagrip/) or [DBeaver](https://dbeaver.io/) to analyze local MySQL data if necessary
   - Refer to `docs/Coding Conventions.md/Testing` for more information
 
+### Deployment
+
+- Navigate to main branch and run `./bin/deploy_web_production.sh`
+
 ### Contribution guide
 
 - Read `docs/Contributing.md` for information on submitting PRs, including database migration steps related to your PR
