@@ -18,7 +18,7 @@ export function useSession() {
   const isLoggedIn = thirdwebSession.isLoggedIn || !!emailAddress?.isVerified
   const isLoggedInThirdweb = thirdwebSession.isLoggedIn
   return {
-    isLoading,
+    isLoading: !isLoggedIn && isLoading,
     isLoggedIn,
     isLoggedInThirdweb,
     user: fullProfileRequest.data?.user,
