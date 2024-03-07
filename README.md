@@ -55,6 +55,22 @@ Whenever you make Prisma schema changes (or pulling commits from `main` that inc
   - `npx prisma db push` - if your changes are _not_ breaking and you want to maintain the values in your database, then run this command; this will simply push the schema changes to the database instance you are connected to
   - `npm run db:seed` - if you do have breaking changes, or if you just want to reset your database values, then run this command; this command force-pushes the schema updates to the database instance you are connected to, wiping all existing information and freshly populating the database with seed data
 
+### Running One Time Scripts
+
+#### Locally
+
+When you need to run a one time script on your local machine, you can run it manually with the command:
+` npm run ts path/to/your/script.ts -- --flags`
+
+#### On Testing or Production Environment
+
+On a testing or production environment, it is recommended to run the script through Inngest admin dashboard:
+
+- Select the function you want to run
+- Click the invoke button in the right corner
+- Update the data fields to pass any data needed by the script
+- Click "Invoke Function"
+
 ## Contributing to this project
 
 ### Pre-commit audits & testing
