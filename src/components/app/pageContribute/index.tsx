@@ -59,7 +59,7 @@ export function PageContribute() {
                     ),
                   },
                   {
-                    title: 'Send an email to your customers',
+                    title: 'Send an email to your customers and employees',
                     subtitle: 'We’ve prepared one for you',
                     cta: (
                       <Dialog analytics={'Contribute Email CTA'}>
