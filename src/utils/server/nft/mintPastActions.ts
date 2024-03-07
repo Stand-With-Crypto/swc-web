@@ -15,20 +15,23 @@ export async function mintPastActions(
   localUser: ServerLocalUser | null,
 ) {
   logger.info('Triggered')
-  const actionWithNFT = ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN.filter(
-    key => ACTION_NFT_SLUG[key] !== null,
-  )
 
   const actions = await prismaClient.userAction.findMany({
     where: {
       userId: userId,
-      actionType: { in: actionWithNFT },
       nftMintId: null,
     },
   })
 
   const analytics = getServerAnalytics({ userId: userId, localUser })
   for (const action of actions) {
+    const nftSlug = ACTION_NFT_SLUG[action.actionType]?.[action.campaignName]
+    if (!nftSlug) {
+      logger.info(
+        `no nft for action type ${action.actionType}, campaignName ${action.campaignName}`,
+      )
+      continue
+    }
     logger.info('mint past actions:' + action.actionType)
     analytics.track('NFT Mint Backfill Triggered', {
       'User Action Type': action.actionType,
