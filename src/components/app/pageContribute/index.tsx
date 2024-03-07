@@ -248,32 +248,33 @@ export function PageContribute() {
             </Button>
           ),
         },
-        {
-          imageSrc: '/pagesContent/contribute/partners.svg',
-          title: 'Our Partners',
-          subtitle: (
-            <>
-              Stand With Crypto is an open source initiative built by people who believe crypto
-              belongs in America.
-            </>
-          ),
-          content: (
-            <div className="flex flex-col items-center gap-12">
-              <div className="flex justify-center">
-                <Button asChild size="lg">
-                  <ExternalLink
-                    href={
-                      'https://docs.google.com/forms/d/e/1FAIpQLSf4T51k9InqKQKW2911_HVWm11wz_dOcpoDj8QuyF7cxU5MHw/viewform'
-                    }
-                  >
-                    Become an industry partner
-                  </ExternalLink>
-                </Button>
-              </div>
-              <PartnerGrid />
-            </div>
-          ),
-        },
+        // uncomment once we onboard our initial partners
+        // {
+        //   imageSrc: '/pagesContent/contribute/partners.svg',
+        //   title: 'Our Partners',
+        //   subtitle: (
+        //     <>
+        //       Stand With Crypto is an open source initiative built by people who believe crypto
+        //       belongs in America.
+        //     </>
+        //   ),
+        //   content: (
+        //     <div className="flex flex-col items-center gap-12">
+        //       <div className="flex justify-center">
+        //         <Button asChild size="lg">
+        //           <ExternalLink
+        //             href={
+        //               'https://docs.google.com/forms/d/e/1FAIpQLSf4T51k9InqKQKW2911_HVWm11wz_dOcpoDj8QuyF7cxU5MHw/viewform'
+        //             }
+        //           >
+        //             Become an industry partner
+        //           </ExternalLink>
+        //         </Button>
+        //       </div>
+        //       <PartnerGrid />
+        //     </div>
+        //   ),
+        // },
       ].map(({ title, subtitle, imageSrc, content }, index) => (
         <section className="text-center" key={index}>
           <div className="mx-auto mb-6 inline-block">
