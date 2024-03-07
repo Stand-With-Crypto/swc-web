@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button'
 import { openWindow } from '@/utils/shared/openWindow'
 import { AnalyticProperties } from '@/utils/shared/sharedAnalytics'
 import { fullUrl } from '@/utils/shared/urls'
+import { createTweetLink } from '@/utils/web/createTweetLink'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 
 export const UserActionTweetLink = React.forwardRef<
@@ -47,13 +48,7 @@ export const UserActionTweetLink = React.forwardRef<
             () => actionCreateUserActionTweet(),
           )
 
-          openWindow(
-            `https://twitter.com/intent/tweet?url=${encodeURIComponent(
-              url,
-            )}&text=${encodeURIComponent(message)}`,
-            'Twitter',
-            `noopener, width=550,height=400`,
-          )
+          openWindow(createTweetLink({ url, message }), 'Twitter', `noopener, width=550,height=400`)
         }}
         ref={ref}
         {...props}
