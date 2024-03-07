@@ -9,7 +9,6 @@ import {
   UserInformationVisibility,
   UserSession,
 } from '@prisma/client'
-import * as Sentry from '@sentry/nextjs'
 import { object, string, z } from 'zod'
 
 import { CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/upsertAdvocateInCapitolCanary'
@@ -90,7 +89,7 @@ type Input = z.infer<typeof zodVerifiedSWCPartnersUserActionOptIn> & {
 export async function verifiedSWCPartnersUserActionOptIn(
   input: Input,
 ): Promise<VerifiedSWCPartnerApiResponse<VerifiedSWCPartnersUserActionOptInResult>> {
-  const { emailAddress, optInType, isVerifiedEmailAddress, campaignName } = input
+  const { emailAddress, optInType, campaignName } = input
   const actionType = UserActionType.OPT_IN
   const existingAction = await prismaClient.userAction.findFirst({
     include: {
@@ -123,10 +122,6 @@ export async function verifiedSWCPartnersUserActionOptIn(
   }
 
   if (existingAction) {
-    Sentry.captureMessage('verifiedSWCPartnersUserActionOptIn action already exists', {
-      extra: { emailAddress, isVerifiedEmailAddress },
-      tags: { optInType, actionType },
-    })
     analytics.trackUserActionCreatedIgnored({
       actionType,
       campaignName,

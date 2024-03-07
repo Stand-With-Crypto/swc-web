@@ -11,7 +11,6 @@ import {
   UserEmailAddressSource,
   UserInformationVisibility,
 } from '@prisma/client'
-import * as Sentry from '@sentry/nextjs'
 import { z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
@@ -116,10 +115,6 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
       userState,
       ...convertAddressToAnalyticsProperties(validatedFields.data.address),
     })
-    Sentry.captureMessage(
-      `duplicate ${actionType} user action for campaign ${campaignName} submitted`,
-      { extra: { validatedFields, userAction }, user: { id: user.id } },
-    )
     await beforeFinish()
     return { user: getClientUser(user) }
   }
