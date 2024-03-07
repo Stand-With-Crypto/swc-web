@@ -33,49 +33,47 @@ export function ThirdwebLoginContent({
   }, [initialEmailAddress])
 
   return (
-    <div>
-      <div className="mx-auto flex max-w-[460px] flex-col items-center gap-8">
-        <div className="flex flex-col items-center space-y-6">
-          <NextImage
-            alt="Stand With Crypto Logo"
-            height={80}
-            priority
-            src="/logo/shield.svg"
-            width={80}
-          />
+    <div className="flex max-w-[460px] flex-col items-center gap-8">
+      <div className="flex flex-col items-center space-y-6">
+        <NextImage
+          alt="Stand With Crypto Logo"
+          height={80}
+          priority
+          src="/logo/shield.svg"
+          width={80}
+        />
 
-          <div className="space-y-4">
-            <PageTitle size="sm">Join Stand With Crypto</PageTitle>
-            <PageSubTitle size="sm">
-              Lawmakers and regulators are threatening the crypto industry. You can fight back and
-              ask for sensible rules. Join the Stand With Crypto movement to make your voice heard
-              in Washington D.C.
-            </PageSubTitle>
-          </div>
+        <div className="space-y-4">
+          <PageTitle size="sm">Join Stand With Crypto</PageTitle>
+          <PageSubTitle size="sm">
+            Lawmakers and regulators are threatening the crypto industry. You can fight back and ask
+            for sensible rules. Join the Stand With Crypto movement to make your voice heard in
+            Washington D.C.
+          </PageSubTitle>
         </div>
-
-        <div
-          className="w-full"
-          ref={thirdwebEmbeddedAuthContainer}
-          // if someone enters a super long email, the component will overflow on the "enter confirmation code" screen
-          // this prevents that bug
-          style={{ maxWidth: 'calc(100vw - 56px)' }}
-        >
-          <ThirdwebLoginEmbedded {...props} />
-        </div>
-
-        <p className="text-center text-xs text-muted-foreground">
-          By signing up, I understand that Stand With Crypto and its vendors may collect and use my
-          Personal Information. To learn more, visit the{' '}
-          <InternalLink href={urls.privacyPolicy()} target="_blank">
-            Stand With Crypto Alliance Privacy Policy
-          </InternalLink>{' '}
-          and{' '}
-          <ExternalLink href="https://www.quorum.us/static/Privacy-Policy.pdf">
-            Quorum Privacy Policy
-          </ExternalLink>
-        </p>
       </div>
+
+      <div
+        className="w-full"
+        ref={thirdwebEmbeddedAuthContainer}
+        // if someone enters a super long email, the component will overflow on the "enter confirmation code" screen
+        // this prevents that bug
+        style={{ maxWidth: 'calc(100vw - 56px)', translate: 'transform(0' }}
+      >
+        <ThirdwebLoginEmbedded {...props} />
+      </div>
+
+      <p className="text-center text-xs text-muted-foreground">
+        By signing up, I understand that Stand With Crypto and its vendors may collect and use my
+        Personal Information. To learn more, visit the{' '}
+        <InternalLink href={urls.privacyPolicy()} target="_blank">
+          Stand With Crypto Alliance Privacy Policy
+        </InternalLink>{' '}
+        and{' '}
+        <ExternalLink href="https://www.quorum.us/static/Privacy-Policy.pdf">
+          Quorum Privacy Policy
+        </ExternalLink>
+      </p>
     </div>
   )
 }
