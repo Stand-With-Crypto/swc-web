@@ -58,15 +58,18 @@ Whenever you make Prisma schema changes (or pulling commits from `main` that inc
 ### Running One Time Scripts
 
 #### Locally
+
 When you need to run a one time script on your local machine, you can run it manually with the command:
 ` npm run ts path/to/your/script.ts -- --flags`
 
 #### On Testing or Production Environment
+
 On a testing or production environment, it is recommended to run the script through Inngest admin dashboard:
+
 - Select the function you want to run
 - Click the invoke button in the right corner
 - Update the data fields to pass any data needed by the script
-- Click "Invoke Function" 
+- Click "Invoke Function"
 
 ## Contributing to this project
 
