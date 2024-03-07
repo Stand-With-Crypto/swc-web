@@ -34,9 +34,6 @@ const NFTImage = ({ nft }: { nft: NFTClientMetadata }) => (
 const RedeemedNFTImage = ({ nft }: { nft: NFTClientMetadata }) => (
   <div>
     <NFTImage nft={nft} />
-    <p className="mt-2 font-bold">
-      {TURN_OFF_NFT_MINT ? '. It will be sent to your connected wallet in the next few days.' : ''}
-    </p>
   </div>
 )
 
@@ -60,7 +57,16 @@ export function UserActionFormSuccessScreenMainCTA({
   const [hasOptedInToMembershipState, setHasOptedInToMembershipState] = useState<
     'hidden' | 'visible' | 'submitted'
   >('hidden')
-  const receivedAnNft = nftWhenAuthenticated ? 'Nice work! You earned a new NFT.' : 'Nice work!'
+  const receivedAnNft = nftWhenAuthenticated ? (
+    <>
+      <PageTitle size="sm">Nice work! You earned a new NFT.</PageTitle>
+      <p className="mt-2 font-bold">
+        {TURN_OFF_NFT_MINT ? 'It will be sent to your connected wallet in the next few days.' : ''}
+      </p>
+    </>
+  ) : (
+    <PageTitle size="sm">Nice work!</PageTitle>
+  )
 
   if (!data) {
     return (
@@ -88,7 +94,12 @@ export function UserActionFormSuccessScreenMainCTA({
       return (
         <Container>
           <NFTImage nft={nftWhenAuthenticated} />
-          <PageTitle size="sm">{receivedAnNft}</PageTitle>
+          {receivedAnNft}
+          <p className="mt-2 font-bold">
+            {TURN_OFF_NFT_MINT
+              ? 'It will be sent to your connected wallet in the next few days.'
+              : ''}
+          </p>
           <PageSubTitle size={'md'}>
             You’ve earned an NFT for completing this action. Join Stand With Crypto to claim your
             NFT, see your activities, and get personalized content.
@@ -116,7 +127,7 @@ export function UserActionFormSuccessScreenMainCTA({
     return (
       <Container>
         {nftWhenAuthenticated && <RedeemedNFTImage nft={nftWhenAuthenticated} />}
-        <PageTitle size="sm">{receivedAnNft}</PageTitle>
+        {receivedAnNft}
         <PageSubTitle size={'md'}>
           Finish setting up your profile to unlock rewards, see your activities, and get
           personalized content.
@@ -137,9 +148,8 @@ export function UserActionFormSuccessScreenMainCTA({
         return (
           <Container>
             {nftWhenAuthenticated && <RedeemedNFTImage nft={nftWhenAuthenticated} />}
-            <PageTitle size="sm">
-              {receivedAnNft} Continue the fight - become a {'501(c)4'} member.
-            </PageTitle>
+            {receivedAnNft}
+            <PageTitle size="sm">Continue the fight - become a {'501(c)4'} member.</PageTitle>
             <PageSubTitle size={'md'}>
               Become a member of our nonprofit. It’s free to join and you’ll receive exclusive
               benefits that normal Stand With Crypto members won’t get.
