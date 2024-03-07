@@ -1,7 +1,4 @@
-'use client'
-
 import { getYear } from 'date-fns'
-import { useRouter } from 'next/router'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { CookieConsentFooterButton } from '@/components/app/cookieConsent/cookieConsentFooterButton'
@@ -20,12 +17,6 @@ const footerLinkStyles = cn('block text-gray-400')
 export async function Footer({ locale }: { locale: SupportedLocale }) {
   const intl = await getIntl(locale)
   const urls = getIntlUrls(locale)
-
-  const router = useRouter()
-
-  if (router.pathname === 'campaign/shield') {
-    return null
-  }
 
   return (
     <footer className="mt-36 border-t bg-black py-24 text-muted antialiased">

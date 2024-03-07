@@ -3,7 +3,6 @@
 import { useCallback } from 'react'
 import { capitalize } from 'lodash-es'
 import { Menu } from 'lucide-react'
-import { useRouter } from 'next/router'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { NavbarLoggedInButton } from '@/components/app/navbar/navbarLoggedInButton'
@@ -19,7 +18,7 @@ import { cn } from '@/utils/web/cn'
 
 export function Navbar({ locale }: { locale: SupportedLocale }) {
   const dialogProps = useDialog({ analytics: 'Mobile Navbar' })
-  const router = useRouter()
+
   const urls = getIntlUrls(locale)
   const leftLinks = [
     {
@@ -59,10 +58,6 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
       <Button>Sign In</Button>
     </LoginDialogWrapper>
   )
-
-  if (router.pathname === 'campaign/shield') {
-    return null
-  }
 
   return (
     <>
