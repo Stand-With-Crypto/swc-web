@@ -33,7 +33,7 @@ export function ThirdwebLoginContent({
   }, [initialEmailAddress])
 
   return (
-    <div className="flex max-w-[460px] flex-col items-center gap-8">
+    <div className="mx-auto flex max-w-[460px] flex-col items-center gap-8">
       <div className="flex flex-col items-center space-y-6">
         <NextImage
           alt="Stand With Crypto Logo"
@@ -58,7 +58,7 @@ export function ThirdwebLoginContent({
         ref={thirdwebEmbeddedAuthContainer}
         // if someone enters a super long email, the component will overflow on the "enter confirmation code" screen
         // this prevents that bug
-        style={{ maxWidth: 'calc(100vw - 56px)', translate: 'transform(0' }}
+        style={{ maxWidth: 'calc(100vw - 56px)' }}
       >
         <ThirdwebLoginEmbedded {...props} />
       </div>
@@ -99,7 +99,7 @@ function ThirdwebLoginEmbedded(props: ConnectEmbedProps) {
   return (
     <ConnectEmbed
       showThirdwebBranding={false}
-      style={{ border: 'none', maxWidth: 'unset' }}
+      style={{ border: 'none', maxWidth: 'unset', translate: 'transform(0)' }}
       theme={theme}
       {...props}
     />
