@@ -12,7 +12,7 @@ const CRYPTO_ADDRESSES = [
   '0x4B0e6c1f66cA950B22e9Eaa8f075F0944a705B03',
 ]
 
-const LOW_BALANCE_ETH_THRESHOLD = 0.25
+const LOW_ETH_BALANCE_THRESHOLD = Number(process.env.LOW_ETH_BALANCE_THRESHOLD) ?? 0.25
 
 export const monitorBaseETHBalances = inngest.createFunction(
   {
@@ -32,7 +32,7 @@ export const monitorBaseETHBalances = inngest.createFunction(
       // Divide by 10^18 to get the balance in ETH.
       const ethBalance = Number(cryptoAddress.balance) / 10 ** 18
       prettyLog(`Base ETH balance for ${cryptoAddress.account} - ${ethBalance} ETH`)
-      if (ethBalance < LOW_BALANCE_ETH_THRESHOLD) {
+      if (ethBalance < LOW_ETH_BALANCE_THRESHOLD) {
         // Trigger Sentry alert.
         Sentry.captureMessage(
           `Low Base ETH balance detected for ${cryptoAddress.account} - ${ethBalance} ETH. Please fund as soon as possible.`,
