@@ -1,4 +1,3 @@
-import { PartnerGrid } from '@/components/app/partnerGrid'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogClose, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
