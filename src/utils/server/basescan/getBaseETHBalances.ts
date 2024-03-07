@@ -5,7 +5,7 @@ import { requiredEnv } from '@/utils/shared/requiredEnv'
 
 const BASESCAN_API_KEY = requiredEnv(process.env.BASESCAN_API_KEY, 'process.env.BASESCAN_API_KEY')
 
-type GetBaseETHBalancesResponse = {
+export type GetBaseETHBalancesResponse = {
   status: string
   message: string
   result: Array<{
