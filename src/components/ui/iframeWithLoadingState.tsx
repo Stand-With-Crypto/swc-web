@@ -8,7 +8,6 @@ export function IFrameWithLoadingState(
   props: React.DetailedHTMLProps<IframeHTMLAttributes<HTMLIFrameElement>, HTMLIFrameElement>,
 ) {
   const [hasLoaded, setHasLoaded] = React.useState(false)
-  console.log({ hasLoaded })
   return (
     <div className="relative">
       {hasLoaded || <LoadingOverlay />}
