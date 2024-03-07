@@ -135,7 +135,10 @@ export function PageContribute() {
                               [For companies]
                               <br />
                               But we need to do more and need your help. Learn how your company can
-                              support our efforts here. {'<link to partner page>'}
+                              support our efforts{' '}
+                              <ExternalLink href={'https://www.standwithcrypto.org/contribute'}>
+                                standwithcrypto.org/contribute
+                              </ExternalLink>
                             </p>
                             <p>It's time to make our voices heard. Let’s keep crypto in America.</p>
                             <p>
