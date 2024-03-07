@@ -1,8 +1,7 @@
 'use server'
 import 'server-only'
 
-import { User, UserAction, UserActionType, UserInformationVisibility } from '@prisma/client'
-import * as Sentry from '@sentry/nextjs'
+import { User, UserActionType, UserInformationVisibility } from '@prisma/client'
 import { nativeEnum, object, z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
@@ -77,13 +76,17 @@ async function _actionCreateUserActionLiveEvent(input: CreateActionLiveEventInpu
   ) {
     const currentTime = Date.now()
     const eventDuration = EVENT_DURATION[validatedInput.data.campaignName]
-    if (
-      currentTime < eventDuration.START_TIME.getTime() ||
-      currentTime > eventDuration.END_TIME.getTime()
-    ) {
+    if (currentTime < eventDuration.START_TIME.getTime()) {
       return {
         errors: {
-          campaignName: ['The campaign is not active'],
+          campaignName: ['This event is not live yet.'],
+        },
+      }
+    }
+    if (currentTime > eventDuration.END_TIME.getTime()) {
+      return {
+        errors: {
+          campaignName: ['This event is no longer live.'],
         },
       }
     }
@@ -115,8 +118,6 @@ async function _actionCreateUserActionLiveEvent(input: CreateActionLiveEventInpu
   if (recentUserAction) {
     await logSpamActionSubmissions({
       validatedInput,
-      userAction: recentUserAction,
-      userId: user.id,
       sharedDependencies: { analytics },
     })
     return { user: getClientUser(user) }
@@ -181,13 +182,9 @@ async function getRecentUserActionByUserId(
 
 async function logSpamActionSubmissions({
   validatedInput,
-  userAction,
-  userId,
   sharedDependencies,
 }: {
   validatedInput: z.SafeParseSuccess<CreateActionLiveEventInput>
-  userAction: UserAction
-  userId: User['id']
   sharedDependencies: Pick<SharedDependencies, 'analytics'>
 }) {
   await sharedDependencies.analytics.trackUserActionCreatedIgnored({
@@ -195,10 +192,6 @@ async function logSpamActionSubmissions({
     campaignName: validatedInput.data.campaignName,
     reason: 'Too Many Recent',
     userState: 'Existing',
-  })
-  Sentry.captureMessage(`duplicate ${UserActionType.LIVE_EVENT} user action submitted`, {
-    extra: { validatedInput: validatedInput.data, userAction },
-    user: { id: userId },
   })
 }
 

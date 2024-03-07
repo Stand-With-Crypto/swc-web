@@ -8,7 +8,6 @@ import {
   UserCryptoAddress,
   UserInformationVisibility,
 } from '@prisma/client'
-import * as Sentry from '@sentry/nextjs'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
 import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
@@ -92,10 +91,6 @@ async function _actionCreateUserActionTweet() {
       creationMethod: 'On Site',
       userState,
     })
-    Sentry.captureMessage(
-      `duplicate ${actionType} user action for campaign ${campaignName} submitted`,
-      { extra: { userAction }, user: { id: user.id } },
-    )
     await beforeFinish()
     return { user: getClientUser(user) }
   }

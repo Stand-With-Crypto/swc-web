@@ -25,6 +25,7 @@ export function usePlacesAutocompleteAddress(address: string) {
     // note on why we aren't restricting to just addresses https://stackoverflow.com/a/65206036
     requestOptions: {
       locationBias: 'IP_BIAS',
+      language: 'en',
     },
   })
 

@@ -1,8 +1,7 @@
 'use server'
 import 'server-only'
 
-import { User, UserAction, UserActionType, UserInformationVisibility } from '@prisma/client'
-import * as Sentry from '@sentry/nextjs'
+import { User, UserActionType, UserInformationVisibility } from '@prisma/client'
 import { nativeEnum, object, z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
@@ -100,8 +99,6 @@ async function _actionCreateUserActionCallCongressperson(
   if (recentUserAction) {
     logSpamActionSubmissions({
       validatedInput,
-      userAction: recentUserAction,
-      userId: user.id,
       sharedDependencies: { analytics },
     })
     await beforeFinish()
@@ -168,13 +165,9 @@ async function getRecentUserActionByUserId(
 
 function logSpamActionSubmissions({
   validatedInput,
-  userAction,
-  userId,
   sharedDependencies,
 }: {
   validatedInput: z.SafeParseSuccess<CreateActionCallCongresspersonInput>
-  userAction: UserAction
-  userId: User['id']
   sharedDependencies: Pick<SharedDependencies, 'analytics'>
 }) {
   sharedDependencies.analytics.trackUserActionCreatedIgnored({
@@ -184,13 +177,6 @@ function logSpamActionSubmissions({
     userState: 'Existing',
     ...convertAddressToAnalyticsProperties(validatedInput.data.address),
   })
-  Sentry.captureMessage(
-    `duplicate ${UserActionType.CALL} user action for campaign ${validatedInput.data.campaignName} submitted`,
-    {
-      extra: { validatedInput: validatedInput.data, userAction },
-      user: { id: userId },
-    },
-  )
 }
 
 async function createActionAndUpdateUser<U extends User>({
