@@ -100,12 +100,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
             <div className="flex gap-4 rounded-full bg-secondary">
               {leftLinks.map(({ href, text }) => {
                 return (
-                  <Button
-                    asChild
-                    className="hidden hover:bg-gray-200 md:block"
-                    key={href}
-                    variant="ghost"
-                  >
+                  <Button asChild className="hidden md:block" key={href} variant="secondary">
                     <InternalLink href={href}>{text}</InternalLink>
                   </Button>
                 )

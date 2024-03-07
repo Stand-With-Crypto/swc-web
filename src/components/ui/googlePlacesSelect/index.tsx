@@ -38,6 +38,7 @@ export const GooglePlacesSelect = React.forwardRef<React.ElementRef<'input'>, Pr
       // note on why we aren't restricting to just addresses https://stackoverflow.com/a/65206036
       requestOptions: {
         locationBias: 'IP_BIAS',
+        language: 'en',
       },
     })
     const scriptStatus = useScript(

@@ -14,6 +14,10 @@ _Mobile Web_
 | -------------- | -------------- |
 | old screenshot | new screenshot |
 
+**PlanetScale Deploy Request**
+
+<!-- See "Updating the PlanetScale schema" section in docs/Contributing.md -->
+
 **Notes to reviewers**
 
 <!-- Here’s where you can give brief guidance on how to review the PR.
@@ -24,7 +28,7 @@ You can also highlight anything to which you’d like to draw reviewers’ atten
 **How has it been tested?**
 
 - [ ] Locally
-- [ ] Development
+- [ ] Vercel Preview Branch
 - [ ] Unit test
 - [ ] Functional test
 

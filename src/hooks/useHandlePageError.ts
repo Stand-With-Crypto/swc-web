@@ -2,6 +2,8 @@ import { useEffect } from 'react'
 import * as Sentry from '@sentry/nextjs'
 import { logger } from 'ethers'
 
+import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
+
 export function useHandlePageError({
   domain,
   humanReadablePageName,
@@ -15,12 +17,10 @@ export function useHandlePageError({
     const isIntentionalError = window.location.pathname.includes('debug-sentry')
     logger.info(`${humanReadablePageName} Error Page rendered with:`, error)
     Sentry.captureException(error, { tags: { domain } })
-    Sentry.captureException(
-      new Error(
-        isIntentionalError
-          ? `Testing Sentry Triggered ${humanReadablePageName} Error Page`
-          : `${humanReadablePageName} Error Page Displayed`,
-      ),
-    )
+    const message = isIntentionalError
+      ? `Testing Sentry Triggered ${humanReadablePageName} Error Page`
+      : `${humanReadablePageName} Error Page Displayed`
+    Sentry.captureMessage(message, { fingerprint: [`fingerprint-${message}`] })
+    trackClientAnalytic('Error Page Visible', { Category: humanReadablePageName })
   }, [domain, error, humanReadablePageName])
 }

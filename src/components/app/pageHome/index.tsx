@@ -6,8 +6,11 @@ import { DelayedRecentActivity } from '@/components/app/pageHome/delayedRecentAc
 import { HeroCTA } from '@/components/app/pageHome/heroCTA'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
 import { SumDonationsByUserRow } from '@/components/app/sumDonationsByUserRow/sumDonationsByUserRow'
+import { UserActionFormVoterRegistrationDeeplinkWrapper } from '@/components/app/userActionFormVoterRegistration/homepageDialogDeeplinkWrapper'
 import { UserActionRowCTAsAnimatedListWithApi } from '@/components/app/userActionRowCTA/userActionRowCTAsAnimatedListWithApi'
 import { Button } from '@/components/ui/button'
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
+import { dialogContentStyles } from '@/components/ui/dialog/styles'
 import { NextImage } from '@/components/ui/image'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
@@ -17,6 +20,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
 import { PageProps } from '@/types'
 import { getIntlUrls } from '@/utils/shared/urls'
+import { cn } from '@/utils/web/cn'
 
 import { TopLevelMetrics } from './topLevelMetrics'
 
@@ -36,7 +40,7 @@ export function PageHome({
   return (
     <>
       <section className="grid-fl mb-6 grid grid-cols-1 items-center gap-4 lg:container lg:grid-cols-2 lg:gap-8">
-        <div className="lg:order-0 container order-1 mx-auto max-w-xl space-y-6 text-center md:max-w-3xl lg:px-0 lg:text-left">
+        <div className="lg:order-0 container order-1 mx-auto max-w-xl space-y-6 pt-4 text-center md:max-w-3xl lg:px-0 lg:pt-0 lg:text-left">
           <PageTitle className={'lg:text-left'} withoutBalancer>
             If you care about crypto, it's time to prove it
           </PageTitle>
@@ -48,42 +52,44 @@ export function PageHome({
           <HeroCTA />
         </div>
         <div className="order-0 md:container lg:order-1 lg:px-0">
-          <div className="relative h-[320px] overflow-hidden md:rounded-xl lg:h-[400px]">
-            <NextImage
-              alt="NFT For Stand With Crypto's GOTV Rally March 4th, 2024 in Los Angeles, CA"
-              className="h-full w-full object-cover"
-              fill
-              priority
-              // width={1046}
-              // height={892}
-              sizes={'(max-width: 768px) 500px, 1046px'}
-              src="/homepageHero/2024-03-LA-event-nft.png"
-            />
-            <div className="absolute bottom-0 w-full">
-              <LinkBox
-                className="flex items-center justify-between gap-4 p-4 text-sm text-white"
-                style={{
-                  background:
-                    'linear-gradient(to top, hsla(0, 0%, 0%, 0.8) 10%, hsla(0, 0%, 0%, 0.4) 70%,  transparent 100%)',
-                }}
-              >
-                <p>
-                  Join Nas and Coinbase CEO Brian Armstrong for an exclusive Crypto Votes rally in
-                  Los Angeles. RSVP for free.
-                </p>
-                <Button
-                  asChild
-                  className={linkBoxLinkClassName}
-                  data-link-box-subject
-                  variant="secondary"
+          <Dialog analytics={{ Category: 'Homepage Hero Section', CTA: 'Register to vote' }}>
+            <DialogTrigger asChild>
+              <LinkBox className="relative h-[320px] cursor-pointer overflow-hidden md:rounded-xl lg:h-[400px]">
+                <NextImage
+                  alt="First in the Nation Crypto Presidential Forum December 11th 2023 St. Anselm College"
+                  className="h-full w-full object-cover"
+                  fill
+                  priority
+                  // width={1046}
+                  // height={892}
+                  sizes={'(max-width: 768px) 500px, 1046px'}
+                  src="/homepageHero.jpg"
+                />
+                <div
+                  className="absolute bottom-0 flex w-full items-center justify-between gap-4 p-4 text-sm text-white"
+                  style={{
+                    background:
+                      'linear-gradient(to top, hsla(0, 0%, 0%, 0.8) 10%, hsla(0, 0%, 0%, 0.4) 70%,  transparent 100%)',
+                  }}
                 >
-                  <ExternalLink href={'https://cryptovotes.splashthat.com/'}>
-                    RSVP <ArrowUpRight />
-                  </ExternalLink>
-                </Button>
+                  <p>
+                    Register to vote or check your voter registration and get a free “I’m a Voter”
+                    NFT
+                  </p>
+                  <Button
+                    className={linkBoxLinkClassName}
+                    data-link-box-subject
+                    variant="secondary"
+                  >
+                    Register <ArrowUpRight />
+                  </Button>
+                </div>
               </LinkBox>
-            </div>
-          </div>
+            </DialogTrigger>
+            <DialogContent className={cn(dialogContentStyles, 'max-w-3xl')}>
+              <UserActionFormVoterRegistrationDeeplinkWrapper />
+            </DialogContent>
+          </Dialog>
         </div>
       </section>
       <div className="container">

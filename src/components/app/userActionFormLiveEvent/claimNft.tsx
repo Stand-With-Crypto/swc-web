@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react'
 import { UserActionType } from '@prisma/client'
 import { useRouter } from 'next/navigation'
+import { toast } from 'sonner'
 
 import {
   actionCreateUserActionLiveEvent,
@@ -19,7 +20,6 @@ import { UserActionLiveEventCampaignName } from '@/utils/shared/userActionCampai
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
 import { NFT_CLIENT_METADATA } from '@/utils/web/nft'
-import { toastGenericError } from '@/utils/web/toastUtils'
 
 interface Props extends UseSectionsReturn<SectionNames> {
   isLoggedIn: boolean
@@ -40,7 +40,11 @@ export function ClaimNft({ isLoggedIn, slug, goToSection }: Props) {
     const result = await triggerServerActionForForm(
       {
         formName: 'User Action Form Live Event',
-        onError: toastGenericError,
+        onError: (_, error) => {
+          toast.error(error.message, {
+            duration: 5000,
+          })
+        },
         analyticsProps: {
           'Campaign Name': data.campaignName,
           'User Action Type': UserActionType.LIVE_EVENT,

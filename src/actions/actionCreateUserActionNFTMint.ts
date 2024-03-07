@@ -171,10 +171,6 @@ const parseHex = (hex: string) => hex.toLowerCase().trim()
 async function validateTransaction(
   transaction: Awaited<ReturnType<typeof thirdwebBaseRPCClient.getTransaction>>,
 ) {
-  if (parseHex(transaction.from) !== parseHex(contractMetadata.associatedWallet)) {
-    throw new Error('Invalid transaction origin wallet')
-  }
-
   if (!transaction.to || parseHex(transaction.to) !== parseHex(contractMetadata.contractAddress)) {
     throw new Error('Invalid associated contract')
   }

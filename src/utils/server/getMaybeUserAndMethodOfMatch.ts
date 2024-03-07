@@ -1,5 +1,5 @@
 'use server'
-import { Prisma, UserCryptoAddress, UserEmailAddress } from '@prisma/client'
+import { Prisma, UserCryptoAddress } from '@prisma/client'
 import { GetFindResult } from '@prisma/client/runtime/library'
 import * as Sentry from '@sentry/nextjs'
 
@@ -103,16 +103,6 @@ async function baseGetMaybeUserAndMethodOfMatch<
     const authedCryptoAddress = userWithoutReturnTypes!.userCryptoAddresses.find(
       x => x.cryptoAddress === authUser.address,
     )!
-    if (authedCryptoAddress.id !== user.primaryUserCryptoAddressId) {
-      // @ts-ignore
-      const primaryUserEmailAddress = user.primaryUserEmailAddress as UserEmailAddress | undefined
-      const isCoinbaseEmployee = primaryUserEmailAddress?.emailAddress?.includes('coinbase.com')
-      // This will happen, but should be relatively infrequent
-      Sentry.captureMessage(
-        `${isCoinbaseEmployee ? 'Coinbase ' : ''}User logged in with a crypto address that is not their primary address`,
-        { extra: { user, address: authUser.address } },
-      )
-    }
     return {
       user,
       userCryptoAddress: authedCryptoAddress,

@@ -6,7 +6,9 @@ it('page - politicians interactions', () => {
   cy.get('h1').contains('politicians')
   cy.get('tbody').find('tr').should('have.length', 100)
   // filter the table by state
-  // find the element with the data-e2e attribute of "state-filter-trigger"
+
+  // TODO: fix this test
+  // // find the element with the data-e2e attribute of "state-filter-trigger"
   // cy.get('[data-testid="state-filter-trigger"]').click()
   // cy.get('[role="option"]').contains('AK').click()
   // cy.get('tbody').find('tr').should('have.length', 3)
