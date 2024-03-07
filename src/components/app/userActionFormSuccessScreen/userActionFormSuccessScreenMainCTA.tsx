@@ -60,9 +60,13 @@ export function UserActionFormSuccessScreenMainCTA({
   const receivedAnNft = nftWhenAuthenticated ? (
     <>
       <PageTitle size="sm">Nice work! You earned a new NFT.</PageTitle>
-      <p className="mt-2 font-bold">
-        {TURN_OFF_NFT_MINT ? 'It will be sent to your connected wallet in the next few days.' : ''}
-      </p>
+      {TURN_OFF_NFT_MINT ? (
+        <p className="mt-2 text-sm font-bold">
+          'It will be sent to your connected wallet in the next few days.'
+        </p>
+      ) : (
+        ''
+      )}
     </>
   ) : (
     <PageTitle size="sm">Nice work!</PageTitle>
@@ -95,11 +99,6 @@ export function UserActionFormSuccessScreenMainCTA({
         <Container>
           <NFTImage nft={nftWhenAuthenticated} />
           {receivedAnNft}
-          <p className="mt-2 font-bold">
-            {TURN_OFF_NFT_MINT
-              ? 'It will be sent to your connected wallet in the next few days.'
-              : ''}
-          </p>
           <PageSubTitle size={'md'}>
             You’ve earned an NFT for completing this action. Join Stand With Crypto to claim your
             NFT, see your activities, and get personalized content.
@@ -188,7 +187,7 @@ export function UserActionFormSuccessScreenMainCTA({
     return (
       <Container>
         {nftWhenAuthenticated && <RedeemedNFTImage nft={nftWhenAuthenticated} />}
-        <PageTitle size="sm">{receivedAnNft}</PageTitle>
+        {receivedAnNft}
         <PageSubTitle size={'md'}>
           You’ve done your part to save crypto, but the fight isn’t over yet. Keep the momentum
           going by completing the next action below.
@@ -199,7 +198,7 @@ export function UserActionFormSuccessScreenMainCTA({
   return (
     <Container>
       {nftWhenAuthenticated && <RedeemedNFTImage nft={nftWhenAuthenticated} />}
-      <PageTitle size="sm">{receivedAnNft}</PageTitle>
+      {receivedAnNft}
       <PageSubTitle size={'md'}>
         You’ve done your part to save crypto, but the fight isn’t over yet. We’ll be in touch when
         there’s more actions to complete.
