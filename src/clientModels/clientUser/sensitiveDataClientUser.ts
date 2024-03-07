@@ -6,6 +6,10 @@ import {
   getClientUserCryptoAddress,
   getClientUserCryptoAddressWithENSData,
 } from '@/clientModels/clientUser/clientUserCryptoAddress'
+import {
+  getSensitiveClientUserEmailAddress,
+  SensitiveClientUserEmailAddress,
+} from '@/clientModels/clientUser/clientUserEmailAddress'
 import { ClientModel, getClientModel } from '@/clientModels/utils'
 import { UserENSData } from '@/data/web3/types'
 import { formatPhoneNumber } from '@/utils/shared/phoneNumber'
@@ -26,7 +30,7 @@ export type SensitiveDataClientUser = ClientModel<
     datetimeCreated: string
     datetimeUpdated: string
     primaryUserCryptoAddress: ClientUserCryptoAddress | null
-    primaryUserEmailAddress: Pick<UserEmailAddress, 'emailAddress'> | null
+    primaryUserEmailAddress: SensitiveClientUserEmailAddress | null
     userLocationDetails: {
       administrativeAreaLevel1: string
       countryCode: string
@@ -69,9 +73,7 @@ export const getSensitiveDataClientUser = (
     referralId,
     hasEmbeddedWallet: Boolean(primaryUserCryptoAddress?.embeddedWalletUserEmailAddressId),
     primaryUserEmailAddress: primaryUserEmailAddress
-      ? {
-          emailAddress: primaryUserEmailAddress.emailAddress,
-        }
+      ? getSensitiveClientUserEmailAddress(primaryUserEmailAddress)
       : null,
     primaryUserCryptoAddress: primaryUserCryptoAddress
       ? getClientUserCryptoAddress(primaryUserCryptoAddress)

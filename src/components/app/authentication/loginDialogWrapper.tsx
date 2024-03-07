@@ -14,6 +14,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useDialog } from '@/hooks/useDialog'
 import { useSections } from '@/hooks/useSections'
+import { useSession } from '@/hooks/useSession'
 import { useThirdwebData } from '@/hooks/useThirdwebData'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { apiUrls } from '@/utils/shared/urls'
@@ -41,7 +42,7 @@ export function LoginDialogWrapper({
   loadingFallback,
   forceUnauthenticated,
 }: LoginDialogWrapperProps) {
-  const { session } = useThirdwebData()
+  const session = useSession()
   const { goToSection, currentSection } = useSections({
     sections: Object.values(LoginSections),
     initialSectionId: LoginSections.LOADING,
