@@ -8,6 +8,8 @@ import * as Sentry from '@sentry/nextjs'
 
 import { CoinbaseCommercePayment } from '@/utils/server/coinbaseCommerce/paymentRequest'
 import { prismaClient } from '@/utils/server/prismaClient'
+import { getServerAnalytics } from '@/utils/server/serverAnalytics'
+import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { generateReferralId } from '@/utils/shared/referralId'
 import { UserActionDonationCampaignName } from '@/utils/shared/userActionCampaigns'
@@ -16,7 +18,7 @@ export function extractPricingValues(payment: CoinbaseCommercePayment) {
   if (payment.event.data.payments && payment.event.data.payments.length > 0) {
     // `payments` is an array, but should contain only one payment for our donation use case.
     for (const p of payment.event.data.payments) {
-      if (p.value?.local.amount && p.value?.local.currency) {
+      if (p.value?.crypto && p.value?.local) {
         return {
           amount: p.value.crypto.amount,
           amountCurrencyCode: p.value.crypto.currency,
@@ -24,7 +26,7 @@ export function extractPricingValues(payment: CoinbaseCommercePayment) {
         }
       }
     }
-  } else if (payment.event.data.pricing) {
+  } else if (payment.event.data.pricing?.settlement && payment.event.data.pricing?.local) {
     // V2-only Commerce response.
     return {
       amount: payment.event.data.pricing.settlement.amount,
@@ -35,9 +37,9 @@ export function extractPricingValues(payment: CoinbaseCommercePayment) {
     // Some charges (such as `charge:created` and `charge:failed`) will not have a payment amount or pricing.
     // We should not throw an error for these cases.
     return {
-      amount: 0,
+      amount: '0',
       amountCurrencyCode: SupportedFiatCurrencyCodes.USD,
-      amountUsd: 0,
+      amountUsd: '0',
     }
   }
   throw new Error(
@@ -83,7 +85,7 @@ export async function storePaymentRequest(payment: CoinbaseCommercePayment) {
       },
     })
     if (user) {
-      return createUserActionDonation(user, payment)
+      return createUserActionDonation(user, false, payment)
     }
 
     // Log if the Commerce payment contained a user ID but we have no corresponding user.
@@ -108,7 +110,7 @@ export async function storePaymentRequest(payment: CoinbaseCommercePayment) {
 
     // If we have a user for the given session, then we can store.
     if (userSession?.user) {
-      return createUserActionDonation(userSession.user, payment)
+      return createUserActionDonation(userSession.user, false, payment)
     }
   } else {
     // Log if we have no session ID.
@@ -140,7 +142,7 @@ export async function storePaymentRequest(payment: CoinbaseCommercePayment) {
           userId: userEmailAddress.user.id,
         },
       })
-      return await createUserActionDonation(userEmailAddress.user, payment)
+      return await createUserActionDonation(userEmailAddress.user, false, payment)
     }
 
     // Falling back to secondary email address instead of primary.
@@ -160,14 +162,14 @@ export async function storePaymentRequest(payment: CoinbaseCommercePayment) {
           userId: userEmailAddress.user.id,
         },
       })
-      return await createUserActionDonation(userEmailAddress.user, payment)
+      return await createUserActionDonation(userEmailAddress.user, false, payment)
     }
   }
 
   // If we have not returned at this point, then we were unable to find a user based on session ID or email address.
   // We should create the user based on whatever information we have.
   const newUser = await createNewUser(payment)
-  return createUserActionDonation(newUser, payment)
+  return createUserActionDonation(newUser, true, payment)
 }
 
 /**
@@ -250,10 +252,14 @@ async function createNewUser(payment: CoinbaseCommercePayment) {
  * @param user
  * @param payment
  */
-async function createUserActionDonation(user: User, payment: CoinbaseCommercePayment) {
+async function createUserActionDonation(
+  user: User,
+  isNewUser: boolean,
+  payment: CoinbaseCommercePayment,
+) {
   const pricingValues = extractPricingValues(payment)
 
-  return prismaClient.userAction.create({
+  const donationAction = prismaClient.userAction.create({
     data: {
       user: {
         connect: {
@@ -273,4 +279,16 @@ async function createUserActionDonation(user: User, payment: CoinbaseCommercePay
       },
     },
   })
+
+  // Track user action created analytics.
+  const localUser = getLocalUserFromUser(user)
+  const analytics = getServerAnalytics({ userId: user.id, localUser })
+  analytics.trackUserActionCreated({
+    actionType: UserActionType.DONATION,
+    campaignName: UserActionDonationCampaignName.DEFAULT,
+    creationMethod: 'On Site',
+    userState: isNewUser ? 'New' : 'Existing',
+  })
+
+  return donationAction
 }
