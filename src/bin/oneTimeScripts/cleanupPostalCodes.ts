@@ -11,7 +11,7 @@ const params = yargs(hideBin(process.argv)).option('persist', {
 
 const logger = getLogger('cleanPostalCodes')
 
-export async function cleanPostalCodes(persist: boolean) {
+export async function cleanupPostalCodes(persist: boolean) {
   const postalCodesWithSuffix = await prismaClient.address.findMany({
     where: {
       postalCode: {
@@ -40,12 +40,12 @@ export async function cleanPostalCodes(persist: boolean) {
   return { found: postalCodesWithSuffix.length, updated: affectedRows }
 }
 
-async function runCleanPostalCodes() {
+async function runCleanupPostalCodes() {
   const { persist } = await params.argv
   logger.info(`started with persist=${persist as any}`)
-  const result = await cleanPostalCodes(persist ? persist : false)
+  const result = await cleanupPostalCodes(persist ? persist : false)
   logger.info(`updated ${result.updated} postal codes`)
   return result
 }
 
-void runBin(runCleanPostalCodes)
+void runBin(runCleanupPostalCodes)

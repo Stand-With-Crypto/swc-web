@@ -1,7 +1,7 @@
 import * as Sentry from '@sentry/nextjs'
 import { FailureEventArgs } from 'inngest'
 
-import { cleanPostalCodes } from '@/bin/oneTimeScripts/cleanPostalCodes'
+import { cleanupPostalCodes } from '@/bin/oneTimeScripts/cleanupPostalCodes'
 import { inngest } from '@/inngest/inngest'
 
 export interface ScriptPayload {
@@ -17,20 +17,20 @@ async function onFailureCleanPostalCodes(failureEventArgs: FailureEventArgs) {
   })
 }
 
-const CLEAN_POSTAL_CODES_INNGEST_EVENT_NAME = 'script/clean-postal-codes'
-const CLEAN_POSTAL_CODES_INNGEST_FUNCTION_ID = 'script.clean-postal-codes'
-export const cleanPostalCodesWithInngest = inngest.createFunction(
+const CLEANUP_POSTAL_CODES_INNGEST_EVENT_NAME = 'script/cleanup-postal-codes'
+const CLEANUP_POSTAL_CODES_INNGEST_FUNCTION_ID = 'script.cleanup-postal-codes'
+export const cleanupPostalCodesWithInngest = inngest.createFunction(
   {
-    id: CLEAN_POSTAL_CODES_INNGEST_FUNCTION_ID,
+    id: CLEANUP_POSTAL_CODES_INNGEST_FUNCTION_ID,
     retries: 0,
     onFailure: onFailureCleanPostalCodes,
   },
-  { event: CLEAN_POSTAL_CODES_INNGEST_EVENT_NAME },
+  { event: CLEANUP_POSTAL_CODES_INNGEST_EVENT_NAME },
   async ({ event, step }) => {
     const payload = event.data as ScriptPayload
 
     const { found, updated } = await step.run('execute-script', async () => {
-      return await cleanPostalCodes(payload.persist)
+      return await cleanupPostalCodes(payload.persist)
     })
 
     return {
