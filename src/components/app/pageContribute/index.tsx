@@ -37,7 +37,7 @@ export function PageContribute() {
                 <p className="font-semibold">Download all logos and assets</p>
                 <div>
                   <Button asChild>
-                    <a href="https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/public/Stand%20With%20Crypto%20Brand%20Assets-Z17GHwhQoTBCbSQSPjovITDc78V3wr.zip">
+                    <a href="https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/public/Stand%20With%20Crypto%20Brand%20Assets%20-%202024-03-06-aZAtYP6BCFbgYNUcnQnvu4vLmmn0JT.zip">
                       Download
                     </a>
                   </Button>
