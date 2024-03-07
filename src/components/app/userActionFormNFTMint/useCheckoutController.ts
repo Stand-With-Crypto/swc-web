@@ -1,5 +1,5 @@
 import React from 'react'
-import { getGasPrice, toEther, useContract, useSDK } from '@thirdweb-dev/react'
+import { toEther, useContract, useSDK } from '@thirdweb-dev/react'
 import { BigNumber } from 'ethers'
 import useSWR from 'swr'
 
@@ -69,15 +69,16 @@ function useGasFee(quantity: number) {
       return
     }
 
-    console.log('network', sdk.network.toString())
-
     const prepareTx = await ct.erc721.claim.prepare(quantity)
     const gasFee = await prepareTx.estimateGasCost()
     console.log('gasFee', gasFee)
+    const value = await prepareTx.getValue()
+    console.log('value', toEther(value))
     const gasLimit = await prepareTx.estimateGasLimit()
     console.log('gasLimit', toEther(gasLimit))
     const contractGasPrice = await prepareTx.getGasPrice()
     console.log('gasPrice', toEther(contractGasPrice))
+    console.log('gasLimit * gasPrice', toEther(gasLimit.mul(contractGasPrice)))
 
     return toBigNumber(gasFee.ether)
   })
