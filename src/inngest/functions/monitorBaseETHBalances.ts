@@ -1,4 +1,5 @@
 import * as Sentry from '@sentry/nextjs'
+import { FailureEventArgs } from 'inngest'
 
 import { inngest } from '@/inngest/inngest'
 import { getBaseETHBalances } from '@/utils/server/basescan/getBaseETHBalances'
@@ -14,10 +15,20 @@ const CRYPTO_ADDRESSES = [
 
 const LOW_ETH_BALANCE_THRESHOLD = Number(process.env.LOW_ETH_BALANCE_THRESHOLD) ?? 0.25
 
+export async function onFailureMonitorBaseETHBalances(failureEventArgs: FailureEventArgs) {
+  Sentry.captureException(failureEventArgs.error, {
+    level: 'error',
+    tags: {
+      functionId: failureEventArgs.event.data.function_id,
+    },
+  })
+}
+
 export const monitorBaseETHBalances = inngest.createFunction(
   {
     id: MONITOR_BASE_ETH_BALANCES_INNGEST_FUNCTION_ID,
     retries: MONITOR_BASE_ETH_BALANCES_INNGEST_RETRY_LIMIT,
+    onFailure: onFailureMonitorBaseETHBalances,
   },
   { cron: '*/10 * * * *' }, // Every 10 minutes.
   async ({ step }) => {
