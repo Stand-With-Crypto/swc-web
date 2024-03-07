@@ -42,7 +42,7 @@ export function PageContribute() {
                 {[
                   {
                     title: 'Share Stand With Crypto on X',
-                    subtitle: 'Bring more people to the movement',
+                    subtitle: 'We’ve drafted a post for you',
                     cta: (
                       <Button asChild variant="primary-cta">
                         {/* TODO */}
