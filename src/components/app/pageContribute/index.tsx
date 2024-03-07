@@ -87,7 +87,7 @@ export function PageContribute() {
                             </p>
                             <p>
                               To do our part, [Company Name] has become an industry partner of Stand
-                              with Crypto, an independent grassroots movement that has made
+                              With Crypto, an independent grassroots movement that has made
                               tremendous progress in fighting back.
                             </p>
                             <ul>
@@ -95,7 +95,7 @@ export function PageContribute() {
                               <li>150K contacts with Congress</li>
                               <li>
                                 $86M+ donated to organizations defending crypto, including Stand
-                                with Crypto
+                                With Crypto
                               </li>
                             </ul>
                             <p>
@@ -110,7 +110,7 @@ export function PageContribute() {
                                     'https://www.standwithcrypto.org/action/sign-up?utm_source=partner&utm_medium=email&utm_campaign=partner-share'
                                   }
                                 >
-                                  Join Stand with Crypto
+                                  Join Stand With Crypto
                                 </ExternalLink>
                               </li>
                               <li>
