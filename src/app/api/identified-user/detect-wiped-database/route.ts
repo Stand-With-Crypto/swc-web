@@ -4,7 +4,7 @@ import Sentry from '@sentry/nextjs'
 import { NextResponse } from 'next/server'
 
 import { prismaClient } from '@/utils/server/prismaClient'
-import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
+import { appRouterGetAuthUser } from '@/utils/server/authentication/appRouterGetAuthUser'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
 export const dynamic = 'force-dynamic'

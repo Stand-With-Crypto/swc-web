@@ -16,6 +16,7 @@ import { getClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
 import { getENSDataFromCryptoAddressAndFailGracefully } from '@/data/web3/getENSDataFromCryptoAddress'
 import { CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/upsertAdvocateInCapitolCanary'
 import { inngest } from '@/inngest/inngest'
+import { appRouterGetAuthUser } from '@/utils/server/authentication/appRouterGetAuthUser'
 import {
   CapitolCanaryCampaignName,
   getCapitolCanaryCampaignID,
@@ -25,7 +26,6 @@ import { prismaClient } from '@/utils/server/prismaClient'
 import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
-import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { userFullName } from '@/utils/shared/userFullName'

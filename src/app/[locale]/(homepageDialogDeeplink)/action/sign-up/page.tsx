@@ -5,13 +5,13 @@ import { useRouter } from 'next/navigation'
 import { ThirdwebLoginContent } from '@/components/app/authentication/thirdwebLoginContent'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
-import { useThirdwebData } from '@/hooks/useThirdwebData'
+import { useSession } from '@/hooks/useSession'
 import { cn } from '@/utils/web/cn'
 
 export default function UserActionOptInSWCDeepLink() {
   const urls = useIntlUrls()
   const router = useRouter()
-  const { session } = useThirdwebData()
+  const session = useSession()
   React.useEffect(() => {
     if (session.isLoggedIn) {
       router.replace(urls.profile())

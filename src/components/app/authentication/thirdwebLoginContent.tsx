@@ -8,8 +8,8 @@ import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
+import { useThirdwebAuthUser } from '@/hooks/useAuthUser'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
-import { useThirdwebData } from '@/hooks/useThirdwebData'
 import { trackSectionVisible } from '@/utils/web/clientAnalytics'
 import { theme } from '@/utils/web/thirdweb/theme'
 
@@ -81,7 +81,7 @@ export function ThirdwebLoginContent({
 }
 
 function ThirdwebLoginEmbedded(props: ConnectEmbedProps) {
-  const { session } = useThirdwebData()
+  const session = useThirdwebAuthUser()
   const hasTracked = useRef(false)
   useEffect(() => {
     if (!session.isLoggedIn && !session.isLoading && !hasTracked.current) {

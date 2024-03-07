@@ -1,6 +1,6 @@
 'use client'
 
-import { useThirdwebData } from '@/hooks/useThirdwebData'
+import { useSession } from '@/hooks/useSession'
 
 export function MaybeAuthenticatedContent({
   children,
@@ -11,7 +11,7 @@ export function MaybeAuthenticatedContent({
   authenticatedContent: React.ReactNode
   loadingFallback?: React.ReactNode
 }) {
-  const { session } = useThirdwebData()
+  const session = useSession()
 
   if (session.isLoading && loadingFallback) {
     return loadingFallback

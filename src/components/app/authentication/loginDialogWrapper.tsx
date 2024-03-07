@@ -15,7 +15,6 @@ import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForU
 import { useDialog } from '@/hooks/useDialog'
 import { useSections } from '@/hooks/useSections'
 import { useSession } from '@/hooks/useSession'
-import { useThirdwebData } from '@/hooks/useThirdwebData'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { apiUrls } from '@/utils/shared/urls'
 import { appendENSHookDataToUser } from '@/utils/web/appendENSHookDataToUser'
@@ -110,7 +109,7 @@ export function UnauthenticatedSection({
   currentSection: LoginSections
   dialogProps: ReturnType<typeof useDialog>
 }>) {
-  const { session } = useThirdwebData()
+  const session = useSession()
 
   const { mutate } = useApiResponseForUserFullProfileInfo()
 
