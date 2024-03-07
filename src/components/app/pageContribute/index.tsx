@@ -1,3 +1,4 @@
+import { PartnerGrid } from '@/components/app/partnerGrid'
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { ExternalLink } from '@/components/ui/link'
@@ -36,7 +37,7 @@ export function PageContribute() {
                 <p className="font-semibold">Download all logos and assets</p>
                 <div>
                   <Button asChild>
-                    <a href="https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/public/Stand%20With%20Crypto%20Brand%20Assets-Z17GHwhQoTBCbSQSPjovITDc78V3wr.zip">
+                    <a href="https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/public/Stand%20With%20Crypto%20Brand%20Assets%20-%202024-03-06-aZAtYP6BCFbgYNUcnQnvu4vLmmn0JT.zip">
                       Download
                     </a>
                   </Button>
@@ -82,6 +83,32 @@ export function PageContribute() {
                 Add a position
               </ExternalLink>
             </Button>
+          ),
+        },
+        {
+          imageSrc: '/pagesContent/contribute/partners.svg',
+          title: 'Our Partners',
+          subtitle: (
+            <>
+              Stand With Crypto is an open source initiative built by people who believe crypto
+              belongs in America.
+            </>
+          ),
+          content: (
+            <div className="flex flex-col items-center gap-12">
+              <div className="flex justify-center">
+                <Button asChild size="lg">
+                  <ExternalLink
+                    href={
+                      'https://docs.google.com/forms/d/e/1FAIpQLSf4T51k9InqKQKW2911_HVWm11wz_dOcpoDj8QuyF7cxU5MHw/viewform'
+                    }
+                  >
+                    Become a Partner
+                  </ExternalLink>
+                </Button>
+              </div>
+              <PartnerGrid />
+            </div>
           ),
         },
       ].map(({ title, subtitle, imageSrc, content }, index) => (

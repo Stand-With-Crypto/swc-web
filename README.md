@@ -13,6 +13,8 @@
 ### Development pre-requisites
 
 - Install [Node](https://nodejs.org/en) v20.10.0 ([nvm](https://github.com/nvm-sh/nvm) is recommended for installing Node)
+- Install [Docker Desktop + CLI](https://www.docker.com/products/docker-desktop/)
+- Install MySQL (on Mac you can install [Homebrew](https://brew.sh/) and run `brew install mysql`)
 - Clone this repository to your local machine (forking is disabled)
   - If you are using SSH to clone, but you do not have a public SSH key for your GitHub account (which will prevent cloning), follow the [GitHub SSH guide](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) to set up SSH authentication and signing
 - `cd` into your local swc-web repository
@@ -70,7 +72,13 @@ Whenever you make Prisma schema changes (or pulling commits from `main` that inc
     - With the UI, you can run individual E2E tests under "Specs" and visually follow the flows
   - `npm run e2e:run-headless` - runs all our E2E tests consecutively via Cypress CLI
     - Currently, this command only executes when new comments are made to main branch because of database dependencies - this may change in the future
+  - NOTE: the E2E testing suite connects to a local MySQL database, _not_ your PlanetScale database - it will live on `localhost:3306`
+    - Use tools like [DataGrip](https://www.jetbrains.com/datagrip/) or [DBeaver](https://dbeaver.io/) to analyze local MySQL data if necessary
   - Refer to `docs/Coding Conventions.md/Testing` for more information
+
+### Deployment
+
+- Navigate to main branch and run `./bin/deploy_web_production.sh`
 
 ### Contribution guide
 

@@ -6,6 +6,7 @@ import { inngest } from '@/inngest/inngest'
 import { NFT_SLUG_BACKEND_METADATA } from '@/utils/server/nft/constants'
 import { AirdropPayload } from '@/utils/server/nft/payload'
 import { prismaClient } from '@/utils/server/prismaClient'
+import { TURN_OFF_NFT_MINT } from '@/utils/shared/killSwitches'
 import { getLogger } from '@/utils/shared/logger'
 import { NFTSlug } from '@/utils/shared/nft'
 import {
@@ -54,6 +55,10 @@ export const ACTION_NFT_SLUG: Record<
 const logger = getLogger('claimNft')
 
 export async function claimNFT(userAction: UserAction, userCryptoAddress: UserCryptoAddress) {
+  if (TURN_OFF_NFT_MINT) {
+    logger.info('TURN_OFF_NFT_MINT is on, preventing mint for now')
+    return null
+  }
   logger.info('Triggered')
   const { actionType, campaignName } = userAction
   const activeClientUserActionTypeWithCampaign = ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN.find(

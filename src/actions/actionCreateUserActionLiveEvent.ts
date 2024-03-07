@@ -12,7 +12,7 @@ import {
 } from '@/utils/server/getMaybeUserAndMethodOfMatch'
 import { claimNFT } from '@/utils/server/nft/claimNFT'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
+import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import {
   mapLocalUserToUserDatabaseFields,
@@ -60,6 +60,9 @@ const EVENT_DURATION: Record<UserActionLiveEventCampaignName, EventDuration> = {
 
 async function _actionCreateUserActionLiveEvent(input: CreateActionLiveEventInput) {
   logger.info('triggered')
+  const { triggerRateLimiterAtMostOnce } = getRequestRateLimiter({
+    context: 'unauthenticated',
+  })
 
   const validatedInput = createActionLiveEventInputValidationSchema.safeParse(input)
   if (!validatedInput.success) {
@@ -74,13 +77,17 @@ async function _actionCreateUserActionLiveEvent(input: CreateActionLiveEventInpu
   ) {
     const currentTime = Date.now()
     const eventDuration = EVENT_DURATION[validatedInput.data.campaignName]
-    if (
-      currentTime < eventDuration.START_TIME.getTime() ||
-      currentTime > eventDuration.END_TIME.getTime()
-    ) {
+    if (currentTime < eventDuration.START_TIME.getTime()) {
       return {
         errors: {
-          campaignName: ['The campaign is not active'],
+          campaignName: ['This event is not live yet.'],
+        },
+      }
+    }
+    if (currentTime > eventDuration.END_TIME.getTime()) {
+      return {
+        errors: {
+          campaignName: ['This event is no longer live.'],
         },
       }
     }
@@ -92,9 +99,12 @@ async function _actionCreateUserActionLiveEvent(input: CreateActionLiveEventInpu
   const userMatch = await getMaybeUserAndMethodOfMatch({
     prisma: { include: { primaryUserCryptoAddress: true, address: true } },
   })
-  await throwIfRateLimited()
 
-  const user = userMatch.user || (await createUser({ localUser, sessionId }))
+  let user = userMatch.user
+  if (!user) {
+    await triggerRateLimiterAtMostOnce()
+    user = await createUser({ localUser, sessionId })
+  }
 
   const peopleAnalytics = getServerPeopleAnalytics({
     localUser,
@@ -116,6 +126,7 @@ async function _actionCreateUserActionLiveEvent(input: CreateActionLiveEventInpu
     return { user: getClientUser(user) }
   }
 
+  await triggerRateLimiterAtMostOnce()
   const { userAction } = await createAction({
     user,
     isNewUser: !userMatch.user,
