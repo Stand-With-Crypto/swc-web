@@ -11,11 +11,8 @@ const params = yargs(hideBin(process.argv)).option('persist', {
 
 const logger = getLogger('cleanPostalCodes')
 
-async function cleanPostalCodes() {
-  const { persist } = await params.argv
-  logger.info(`started with persist=${persist as any}`)
-
-  const postalCodesWithSuffixe = await prismaClient.address.findMany({
+export async function cleanPostalCodes(persist: boolean) {
+  const postalCodesWithSuffix = await prismaClient.address.findMany({
     where: {
       postalCode: {
         contains: '-',
@@ -24,12 +21,12 @@ async function cleanPostalCodes() {
   })
 
   logger.info(
-    `Found ${postalCodesWithSuffixe.length} addresses with postal code containing postal code suffix`,
+    `Found ${postalCodesWithSuffix.length} addresses with postal code containing postal code suffix`,
   )
 
   if (!persist) {
     logger.info('Dry run, exiting')
-    return
+    return { found: postalCodesWithSuffix.length, updated: 0 }
   }
 
   const sql = `
@@ -39,7 +36,16 @@ async function cleanPostalCodes() {
   WHERE postal_code LIKE '%-%';
   `
 
-  await prismaClient.$executeRawUnsafe(sql)
+  const affectedRows = await prismaClient.$executeRawUnsafe(sql)
+  return { found: postalCodesWithSuffix.length, updated: affectedRows }
 }
 
-void runBin(cleanPostalCodes)
+async function runCleanPostalCodes() {
+  const { persist } = await params.argv
+  logger.info(`started with persist=${persist as any}`)
+  const result = await cleanPostalCodes(persist ? persist : false)
+  logger.info(`updated ${result.updated} postal codes`)
+  return result
+}
+
+void runBin(runCleanPostalCodes)
