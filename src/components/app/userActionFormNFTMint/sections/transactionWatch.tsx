@@ -82,7 +82,9 @@ export function UserActionFormNFTMintTransactionWatch({
       return
     }
 
-    Promise.all([sendTransactionResponse.wait(), createAction(sendTransactionResponse)])
+    sendTransactionResponse
+      .wait()
+      .then(() => createAction(sendTransactionResponse))
       .catch(err => Sentry.captureException(err, { tags: { domain: 'nftMint/transactionWatch' } }))
       .finally(() => setIsMined(true))
   })
