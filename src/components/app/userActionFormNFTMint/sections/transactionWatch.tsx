@@ -82,11 +82,18 @@ export function UserActionFormNFTMintTransactionWatch({
       return
     }
 
-    sendTransactionResponse
-      .wait()
-      .then(() => createAction(sendTransactionResponse))
-      .catch(err => Sentry.captureException(err, { tags: { domain: 'nftMint/transactionWatch' } }))
-      .finally(() => setIsMined(true))
+    const processTransaction = async () => {
+      try {
+        await sendTransactionResponse.wait()
+        await createAction(sendTransactionResponse)
+      } catch (err) {
+        Sentry.captureException(err, { tags: { domain: 'nftMint/transactionWatch' } })
+      } finally {
+        setIsMined(true)
+      }
+    }
+
+    void processTransaction()
   })
 
   if (!contractMetadata || isLoadingContractMetadata) {
