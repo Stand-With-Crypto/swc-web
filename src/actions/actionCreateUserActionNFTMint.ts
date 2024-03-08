@@ -8,13 +8,13 @@ import { BigNumber } from 'ethers'
 import { nativeEnum, object, z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
-import { appRouterGetAuthUser } from '@/utils/server/authentication/appRouterGetAuthUser'
 import { NFT_SLUG_BACKEND_METADATA } from '@/utils/server/nft/constants'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerAnalytics } from '@/utils/server/serverAnalytics'
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
+import { appRouterGetThirdwebAuthUser } from '@/utils/server/thirdweb/appRouterGetThirdwebAuthUser'
 import { thirdwebBaseRPCClient } from '@/utils/server/thirdweb/thirdwebRPCClient'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
 import { fromBigNumber } from '@/utils/shared/bigNumber'
@@ -57,7 +57,7 @@ async function _actionCreateUserActionMintNFT(input: CreateActionMintNFTInput) {
   const localUser = parseLocalUserFromCookies()
   const sessionId = getUserSessionId()
 
-  const authUser = await appRouterGetAuthUser()
+  const authUser = await appRouterGetThirdwebAuthUser()
   if (!authUser) {
     const error = new Error('Create User Action NFT Mint - Not authenticated')
     Sentry.captureException(error, {
