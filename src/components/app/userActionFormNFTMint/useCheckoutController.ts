@@ -69,11 +69,13 @@ function useGasFee(quantity: number) {
       return
     }
 
-    const prepareTx = await ct.erc721.claim.prepare(quantity)
+    const providerGasPrice = await sdk.getProvider().getGasPrice()
+    console.log('providerGasPrice', toEther(providerGasPrice))
+
+    const tempCt = await sdk.getContract(MINT_NFT_CONTRACT_ADDRESS)
+    const prepareTx = await tempCt.erc721.claim.prepare(quantity)
     const gasFee = await prepareTx.estimateGasCost()
     console.log('gasFee', gasFee)
-    const value = await prepareTx.getValue()
-    console.log('value', toEther(value))
     const gasLimit = await prepareTx.estimateGasLimit()
     console.log('gasLimit', toEther(gasLimit))
     const contractGasPrice = await prepareTx.getGasPrice()
