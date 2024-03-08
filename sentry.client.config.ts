@@ -60,6 +60,7 @@ Sentry.init({
     /chrome-extension:\//i,
     /extensions\//i,
     /^chrome:\/\//i,
+    /inject/i,
   ],
   replaysSessionSampleRate: 0,
   replaysOnErrorSampleRate: 1.0,
