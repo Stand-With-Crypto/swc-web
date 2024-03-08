@@ -140,9 +140,11 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
     user: {
       ...getClientUserWithENSData(
         updatedUser,
-        await getENSDataFromCryptoAddressAndFailGracefully(
-          updatedUser.primaryUserCryptoAddress!.cryptoAddress,
-        ),
+        updatedUser.primaryUserCryptoAddress
+          ? await getENSDataFromCryptoAddressAndFailGracefully(
+              updatedUser.primaryUserCryptoAddress.cryptoAddress,
+            )
+          : null,
       ),
       address: updatedUser.address && getClientAddress(updatedUser.address),
     },

@@ -60,22 +60,22 @@ export async function getAuthenticatedData() {
       })
     }
   })
-  const ensData = await getENSDataFromCryptoAddressAndFailGracefully(
-    user.primaryUserCryptoAddress!.cryptoAddress,
-  )
+  const ensData = user.primaryUserCryptoAddress
+    ? await getENSDataFromCryptoAddressAndFailGracefully(
+        user.primaryUserCryptoAddress.cryptoAddress,
+      )
+    : null
   const { userActions, address, ...rest } = user
   const currentlyAuthenticatedUserCryptoAddress = user.userCryptoAddresses.find(
     x => x.cryptoAddress === authUser.address,
   )
-  if (!currentlyAuthenticatedUserCryptoAddress) {
-    throw new Error('Primary user crypto address not found')
-  }
+
   return {
     ...getSensitiveDataClientUserWithENSData({ ...rest, address }, ensData),
     // LATER-TASK show UX if this address is not the primary address
-    currentlyAuthenticatedUserCryptoAddress: getClientUserCryptoAddress(
-      currentlyAuthenticatedUserCryptoAddress,
-    ),
+    currentlyAuthenticatedUserCryptoAddress: currentlyAuthenticatedUserCryptoAddress
+      ? getClientUserCryptoAddress(currentlyAuthenticatedUserCryptoAddress)
+      : null,
 
     address: address && getClientAddress(address),
     userActions: userActions.map(record => getSensitiveDataClientUserAction({ record })),
