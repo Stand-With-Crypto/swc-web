@@ -164,7 +164,7 @@ export function VoterRegistrationForm({
               <div className="flex flex-grow flex-row items-center justify-between">
                 {step2}
                 <Button asChild disabled={!link} onClick={handleStep2Cta} variant="secondary">
-                  <ExternalLink data-testid="voter-registration-link" href={link}>
+                  <ExternalLink href={link}>
                     <div className="flex flex-row items-center justify-center gap-2">
                       {step2Cta} <ArrowUpRight />
                     </div>
