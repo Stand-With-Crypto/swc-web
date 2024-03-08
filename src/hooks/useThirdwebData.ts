@@ -1,4 +1,5 @@
 'use client'
+import * as Sentry from '@sentry/nextjs'
 import { useDisconnect, useLogout } from '@thirdweb-dev/react'
 import Cookies from 'js-cookie'
 import { usePathname, useRouter } from 'next/navigation'
@@ -27,7 +28,9 @@ export function useThirdwebData() {
   return {
     session,
     logoutAndDisconnect: async () => {
-      await Promise.all([logout(), disconnect()])
+      await Promise.all([logout(), disconnect()]).catch(e =>
+        Sentry.captureException(e, { tags: { domain: 'logoutAndDisconnect' } }),
+      )
       Cookies.set(USER_SESSION_ID_COOKIE_NAME, generateUserSessionId())
       handleLogoutSuccess()
     },
