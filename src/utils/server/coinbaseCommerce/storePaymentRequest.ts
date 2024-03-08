@@ -3,6 +3,7 @@ import {
   User,
   UserActionType,
   UserInformationVisibility,
+  UserSession,
 } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 
@@ -128,7 +129,7 @@ export async function storePaymentRequest(payment: CoinbaseCommercePayment) {
       where: {
         emailAddress: payment.event.data.metadata.email,
         asPrimaryUserEmailAddress: {
-          NOT: null || undefined,
+          isNot: null,
         },
         isVerified: true,
       },
@@ -199,17 +200,15 @@ async function createNewUser(payment: CoinbaseCommercePayment) {
       acquisitionSource: 'coinbase-commerce-webhook',
       acquisitionMedium: '',
       acquisitionCampaign: '',
-      ...(payment.event.data.metadata.email
-        ? {
-            userEmailAddresses: {
-              create: {
-                isVerified: false,
-                emailAddress: payment.event.data.metadata.email,
-                source: 'USER_ENTERED',
-              },
-            },
-          }
-        : {}),
+      ...(payment.event.data.metadata.email && {
+        userEmailAddresses: {
+          create: {
+            isVerified: false,
+            emailAddress: payment.event.data.metadata.email,
+            source: 'USER_ENTERED',
+          },
+        },
+      }),
     },
   })
   // If there `metadata.sessionId` is available, then we should upsert a session.
@@ -259,6 +258,15 @@ async function createUserActionDonation(
 ) {
   const pricingValues = extractPricingValues(payment)
 
+  let userSession: UserSession | null = null
+  if (payment.event.data.metadata.sessionId) {
+    userSession = await prismaClient.userSession.findFirst({
+      where: {
+        id: payment.event.data.metadata.sessionId,
+      },
+    })
+  }
+
   const donationAction = prismaClient.userAction.create({
     data: {
       user: {
@@ -266,6 +274,30 @@ async function createUserActionDonation(
           id: user.id,
         },
       },
+      // Link the user's primary crypto address if available.
+      ...(user.primaryUserCryptoAddressId && {
+        userCryptoAddress: {
+          connect: {
+            id: user.primaryUserCryptoAddressId,
+          },
+        },
+      }),
+      // Link the user's session if available.
+      ...(userSession && {
+        userSession: {
+          connect: {
+            id: userSession.id,
+          },
+        },
+      }),
+      // Link the user's primary email address if available.
+      ...(user.primaryUserEmailAddressId && {
+        userEmailAddress: {
+          connect: {
+            id: user.primaryUserEmailAddressId,
+          },
+        },
+      }),
       campaignName: UserActionDonationCampaignName.DEFAULT,
       actionType: UserActionType.DONATION,
       userActionDonation: {

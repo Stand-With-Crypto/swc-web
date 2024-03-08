@@ -35,10 +35,19 @@ export async function POST(request: NextRequest) {
   }
 
   let localUser: ServerLocalUser | null = null
-  if (body.event.data.metadata.userId) {
+  if (body.event.data.metadata.userId || body.event.data.metadata.sessionId) {
     const user = await prismaClient.user.findFirst({
       where: {
-        id: body.event.data.metadata.userId,
+        // Use the `userId` first if the field exists. Otherwise, use the `sessionId`.
+        ...(body.event.data.metadata.userId
+          ? { id: body.event.data.metadata.userId }
+          : body.event.data.metadata.sessionId && {
+              userSessions: {
+                some: {
+                  id: body.event.data.metadata.sessionId,
+                },
+              },
+            }),
       },
     })
     if (user) {
