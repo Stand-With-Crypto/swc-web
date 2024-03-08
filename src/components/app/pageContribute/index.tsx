@@ -48,7 +48,7 @@ export function PageContribute() {
                         <ExternalLink
                           href={createTweetLink({
                             message:
-                              'I #standwithcrypto. More than 300,000 people are already advocating for better crypto policy in America. Join the fight to receive email updates on crypto policy, invites to local events, and more.',
+                              'I #StandWithCrypto. More than 300,000 people are already advocating for better crypto policy in America. Join the fight to receive email updates on crypto policy, invites to local events, and more.',
                             url: 'https://www.standwithcrypto.org/action/sign-up?utm_source=twitter&utm_medium=social&utm_campaign=partner-share',
                           })}
                         >
@@ -135,7 +135,10 @@ export function PageContribute() {
                               [For companies]
                               <br />
                               But we need to do more and need your help. Learn how your company can
-                              support our efforts here. {'<link to partner page>'}
+                              support our efforts{' '}
+                              <ExternalLink href={'https://www.standwithcrypto.org/contribute'}>
+                                standwithcrypto.org/contribute
+                              </ExternalLink>
                             </p>
                             <p>It's time to make our voices heard. Let’s keep crypto in America.</p>
                             <p>

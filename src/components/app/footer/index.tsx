@@ -28,7 +28,7 @@ export async function Footer({ locale }: { locale: SupportedLocale }) {
             </PageTitle>
             <p className="text-xl">
               Join to show your support, collect advocacy NFTs, and protect the future of crypto.
-              #standwithcrypto
+              #StandWithCrypto
             </p>
             <LoginDialogWrapper
               authenticatedContent={
