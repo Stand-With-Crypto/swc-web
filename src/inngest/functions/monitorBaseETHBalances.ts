@@ -11,9 +11,7 @@ const MONITOR_BASE_ETH_BALANCES_INNGEST_RETRY_LIMIT = 5
 
 const ETH_BASE_UNIT_WEI = 10 ** 18
 
-const LOW_ETH_BALANCE_THRESHOLD = process.env.LOW_ETH_BALANCE_THRESHOLD
-  ? Number(process.env.LOW_ETH_BALANCE_THRESHOLD)
-  : 0.25
+const LOW_ETH_BALANCE_THRESHOLD = Number(process.env.LOW_ETH_BALANCE_THRESHOLD) || 0.25
 
 export async function onFailureMonitorBaseETHBalances(failureEventArgs: FailureEventArgs) {
   Sentry.captureException(failureEventArgs.error, {
