@@ -9,7 +9,6 @@ import { hasCompleteUserProfile } from '@/utils/web/hasCompleteUserProfile'
 
 export function HeroCTA() {
   const profileReq = useApiResponseForUserFullProfileInfo()
-  console.log(profileReq.data)
   const urls = useIntlUrls()
 
   const unauthenticatedContent = (
