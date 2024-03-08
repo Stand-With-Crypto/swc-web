@@ -35,12 +35,16 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { SupportedLocale } from '@/intl/locales'
+import { openWindow } from '@/utils/shared/openWindow'
+import { getIntlUrls } from '@/utils/shared/urls'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
   loadState: 'loaded' | 'static'
   globalFilterFn?: FilterFnOption<TData>
+  locale: SupportedLocale
 }
 
 export const SortableHeader = <TData, TValue>({
@@ -79,6 +83,7 @@ export function DataTable<TData extends Person, TValue>({
   data: passedData,
   loadState,
   globalFilterFn,
+  locale,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
@@ -169,6 +174,9 @@ export function DataTable<TData extends Person, TValue>({
                     className="cursor-pointer"
                     data-state={row.getIsSelected() && 'selected'}
                     key={row.id}
+                    onClick={() => {
+                      openWindow(getIntlUrls(locale).politicianDetails(row.original.slug))
+                    }}
                     role="button"
                   >
                     {row.getVisibleCells().map(cell => (

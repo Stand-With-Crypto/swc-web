@@ -36,7 +36,7 @@ export function DTSIClientPersonDataTable({
 }) {
   const { data } = useGetAllPeople()
   const locale = useLocale()
-  const memoizedColumns = useMemo(() => getDTSIClientPersonDataTableColumns({ locale }), [locale])
+  const memoizedColumns = useMemo(() => getDTSIClientPersonDataTableColumns(), [])
   const passedData = useMemo(() => {
     return sortDTSIPersonDataTable(data?.people || initialData)
   }, [data?.people, initialData])
@@ -66,6 +66,7 @@ export function DTSIClientPersonDataTable({
       }}
       key={data?.people ? 'loaded' : 'static'}
       loadState={data?.people ? 'loaded' : 'static'}
+      locale={locale}
     />
   )
 }
