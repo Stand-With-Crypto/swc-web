@@ -29,10 +29,7 @@ interface PageUserProfile extends PageProps {
   user: PageUserProfileUser | null
 }
 
-export function PageUserProfile({
-  params,
-  user,
-}: PageUserProfile) {
+export function PageUserProfile({ params, user }: PageUserProfile) {
   const { locale } = params
   if (!user) {
     // For now the only authenticated page we have is /profile,
@@ -91,9 +88,7 @@ export function PageUserProfile({
               title="Claim your free NFT"
               useThirdwebSession
             >
-              <Button>
-                Claim my NFTs
-              </Button>
+              <Button>Claim my NFTs</Button>
             </LoginDialogWrapper>
           </div>
         </div>

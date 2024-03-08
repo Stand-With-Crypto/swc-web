@@ -61,8 +61,8 @@ export function LoginDialogWrapper({
   const dialogProps = useDialog({ analytics: ANALYTICS_NAME_LOGIN })
 
   const isLoggedIn = React.useMemo(
-    () => useThirdwebSession ? session.isLoggedInThirdweb : session.isLoggedIn,
-    [session.isLoggedIn, session.isLoggedInThirdweb, useThirdwebSession]
+    () => (useThirdwebSession ? session.isLoggedInThirdweb : session.isLoggedIn),
+    [session.isLoggedIn, session.isLoggedInThirdweb, useThirdwebSession],
   )
 
   /**
@@ -96,11 +96,7 @@ export function LoginDialogWrapper({
     return loadingFallback
   }
 
-  if (
-    isLoggedIn &&
-    currentSection === LoginSections.AUTHENTICATED &&
-    !forceUnauthenticated
-  ) {
+  if (isLoggedIn && currentSection === LoginSections.AUTHENTICATED && !forceUnauthenticated) {
     return authenticatedContent
   }
 

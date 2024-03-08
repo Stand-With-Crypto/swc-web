@@ -20,7 +20,8 @@ export interface ThirdwebLoginContentProps extends ConnectEmbedProps {
 }
 
 const DEFAULT_TITLE = 'Join Stand With Crypto'
-const DEFAULT_SUBTITLE = 'Lawmakers and regulators are threatening the crypto industry. You can fight back and ask for sensible rules. Join the Stand With Crypto movement to make your voice heard in Washington D.C.'
+const DEFAULT_SUBTITLE =
+  'Lawmakers and regulators are threatening the crypto industry. You can fight back and ask for sensible rules. Join the Stand With Crypto movement to make your voice heard in Washington D.C.'
 
 export function ThirdwebLoginContent({
   initialEmailAddress,
@@ -57,9 +58,7 @@ export function ThirdwebLoginContent({
 
           <div className="space-y-4">
             <PageTitle size="sm">{title}</PageTitle>
-            <PageSubTitle size="sm">
-              {subtitle}
-            </PageSubTitle>
+            <PageSubTitle size="sm">{subtitle}</PageSubTitle>
           </div>
         </div>
 
@@ -117,7 +116,9 @@ function ThirdwebLoginEmbedded(props: ConnectEmbedProps) {
   )
 }
 
-export function ThirdwebLoginContentForNFTMint(props: Omit<ThirdwebLoginContentProps, 'title' | 'subtitle'>) {
+export function ThirdwebLoginContentForNFTMint(
+  props: Omit<ThirdwebLoginContentProps, 'title' | 'subtitle'>,
+) {
   return (
     <ThirdwebLoginContent
       {...props}
