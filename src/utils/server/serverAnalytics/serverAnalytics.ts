@@ -129,15 +129,20 @@ export function getServerAnalytics(config: ServerAnalyticsConfig) {
     reason: 'Too Many Recent' | 'Already Exists'
     userState: AnalyticsUserActionUserState
   } & AnalyticProperties) => {
-    return trackAnalytic(config, ' Type Creation Ignored', {
-      ...currentSessionAnalytics,
-      'User Action Type': actionType,
-      'Campaign Name': campaignName,
-      'Creation Method': creationMethod,
-      'User State': userState,
-      Reason: reason,
-      ...other,
-    })
+    return trackAnalytic(
+      config,
+      // typo'ed this initially, do not change so we retain historical trend data
+      ' Type Creation Ignored',
+      {
+        ...currentSessionAnalytics,
+        'User Action Type': actionType,
+        'Campaign Name': campaignName,
+        'Creation Method': creationMethod,
+        'User State': userState,
+        Reason: reason,
+        ...other,
+      },
+    )
   }
 
   const track = (

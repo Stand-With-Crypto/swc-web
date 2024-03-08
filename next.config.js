@@ -248,7 +248,8 @@ const sentryWebpackPluginOptions = {
   // Suppresses source map uploading logs during build
   silent: true,
   org: 'stand-with-crypto',
-  project: 'javascript-nextjs',
+  project:
+    process.env.NEXT_PUBLIC_ENVIRONMENT === 'production' ? 'prod-swc-web' : 'testing-swc-web',
 }
 /** @type {import('@sentry/nextjs/types/config/types').UserSentryOptions} */
 const userSentryOptions = {
