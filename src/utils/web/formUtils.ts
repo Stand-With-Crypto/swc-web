@@ -70,6 +70,18 @@ export async function triggerServerActionForForm<
     }
     return { status: 'error' as const }
   })
+  if (!response) {
+    /*
+      There's a weird bug where we are sometimes returning undefined here for situations where the type signature says that should be impossible.
+      Adding some additional logging here to debug whats going on
+      https://stand-with-crypto.sentry.io/issues/5018950536/?environment=production&project=4506490717470720&query=is%3Aunresolved+timesSeen%3A%3E%3D10&referrer=issue-stream&statsPeriod=30d&stream_index=4
+      */
+    Sentry.captureMessage(
+      'triggerServerActionForForm unexpectedly successfully returned undefined',
+      { extra: { payload, response, formName } },
+    )
+    return { status: 'error' as const }
+  }
   if ('status' in response) {
     return { status: response.status }
   }

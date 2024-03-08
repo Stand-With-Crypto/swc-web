@@ -15,6 +15,7 @@ import { isPlainObject, noop } from 'lodash-es'
 import { keccak256, toHex } from 'viem'
 
 import { logger } from '@/utils/shared/logger'
+import { safeStringify } from '@/utils/web/safeStringify'
 
 export type MintStatus = 'idle' | 'loading' | 'completed' | 'canceled' | 'error'
 
@@ -153,7 +154,7 @@ export function getErrorInstance(maybeError: unknown): Error {
   }
 
   if (isPlainObject(maybeError)) {
-    return new Error(`Unknown error: ${JSON.stringify(maybeError)}`)
+    return new Error(`Unknown error: ${safeStringify(maybeError)}`)
   }
 
   return new Error(`Unknown error: ${String(maybeError)}`)

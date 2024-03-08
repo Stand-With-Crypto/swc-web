@@ -66,6 +66,14 @@ export function getIsSupportedBrowser(data: Bowser.Parser.ParsedResult | null) {
       }
       return version >= 14
     }
+    case 'Android': {
+      const version = maybeParseNumber(data.os.version)
+
+      if (!version) {
+        return true
+      }
+      return version >= 11
+    }
   }
   return true
 }
