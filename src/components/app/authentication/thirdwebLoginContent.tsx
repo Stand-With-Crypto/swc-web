@@ -13,10 +13,21 @@ import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { trackSectionVisible } from '@/utils/web/clientAnalytics'
 import { theme } from '@/utils/web/thirdweb/theme'
 
+export interface ThirdwebLoginContentProps extends ConnectEmbedProps {
+  initialEmailAddress?: string | null
+  title?: React.ReactNode
+  subtitle?: React.ReactNode
+}
+
+const DEFAULT_TITLE = 'Join Stand With Crypto'
+const DEFAULT_SUBTITLE = 'Lawmakers and regulators are threatening the crypto industry. You can fight back and ask for sensible rules. Join the Stand With Crypto movement to make your voice heard in Washington D.C.'
+
 export function ThirdwebLoginContent({
   initialEmailAddress,
+  title = DEFAULT_TITLE,
+  subtitle = DEFAULT_SUBTITLE,
   ...props
-}: ConnectEmbedProps & { initialEmailAddress?: string | null }) {
+}: ThirdwebLoginContentProps) {
   const urls = useIntlUrls()
   const thirdwebEmbeddedAuthContainer = useRef<HTMLDivElement>(null)
 
@@ -45,11 +56,9 @@ export function ThirdwebLoginContent({
           />
 
           <div className="space-y-4">
-            <PageTitle size="sm">Join Stand With Crypto</PageTitle>
+            <PageTitle size="sm">{title}</PageTitle>
             <PageSubTitle size="sm">
-              Lawmakers and regulators are threatening the crypto industry. You can fight back and
-              ask for sensible rules. Join the Stand With Crypto movement to make your voice heard
-              in Washington D.C.
+              {subtitle}
             </PageSubTitle>
           </div>
         </div>
@@ -104,6 +113,16 @@ function ThirdwebLoginEmbedded(props: ConnectEmbedProps) {
       style={{ border: 'none', maxWidth: 'unset' }}
       theme={theme}
       {...props}
+    />
+  )
+}
+
+export function ThirdwebLoginContentForNFTMint(props: Omit<ThirdwebLoginContentProps, 'title' | 'subtitle'>) {
+  return (
+    <ThirdwebLoginContent
+      {...props}
+      subtitle="Confirm your email address or connect a wallet to receive your NFT."
+      title="Claim your free NFT"
     />
   )
 }
