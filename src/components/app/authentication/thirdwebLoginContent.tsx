@@ -115,15 +115,3 @@ function ThirdwebLoginEmbedded(props: ConnectEmbedProps) {
     />
   )
 }
-
-export function ThirdwebLoginContentForNFTMint(
-  props: Omit<ThirdwebLoginContentProps, 'title' | 'subtitle'>,
-) {
-  return (
-    <ThirdwebLoginContent
-      {...props}
-      subtitle="Confirm your email address or connect a wallet to receive your NFT."
-      title="Claim your free NFT"
-    />
-  )
-}

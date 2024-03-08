@@ -25,9 +25,9 @@ async function apiResponse() {
   if (!correspondingUser) {
     return { state: 'wiped-database' as const }
   }
-  if (!correspondingUser.userCryptoAddresses.find(x => x.cryptoAddress === authUser.address)) {
-    return { state: 'wiped-database' as const }
-  }
+  // if (!correspondingUser.userCryptoAddresses.find(x => x.cryptoAddress === authUser.address)) {
+  //   return { state: 'wiped-database' as const }
+  // }
   return { state: 'ok' as const }
 }
 
