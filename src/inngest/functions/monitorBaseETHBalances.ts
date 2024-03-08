@@ -5,8 +5,10 @@ import { inngest } from '@/inngest/inngest'
 import { getBaseETHBalances } from '@/utils/server/basescan/getBaseETHBalances'
 import { LEGACY_NFT_DEPLOYER_WALLET, SWC_DOT_ETH_WALLET } from '@/utils/server/nft/constants'
 import { prettyLog } from '@/utils/shared/prettyLog'
+import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
 export const MONITOR_BASE_ETH_BALANCES_INNGEST_FUNCTION_ID = 'monitor-base-eth-balances'
+const MONITOR_BASE_ETH_BALANCES_INNGEST_EVENT_NAME = 'monitor.base.eth.balances'
 const MONITOR_BASE_ETH_BALANCES_INNGEST_RETRY_LIMIT = 5
 
 const ETH_BASE_UNIT_WEI = 10 ** 18
@@ -28,7 +30,11 @@ export const monitorBaseETHBalances = inngest.createFunction(
     retries: MONITOR_BASE_ETH_BALANCES_INNGEST_RETRY_LIMIT,
     onFailure: onFailureMonitorBaseETHBalances,
   },
-  { cron: '*/10 * * * *' }, // Every 10 minutes.
+  {
+    ...(NEXT_PUBLIC_ENVIRONMENT === 'production'
+      ? { cron: '*/10 * * * *' }
+      : { event: MONITOR_BASE_ETH_BALANCES_INNGEST_EVENT_NAME }),
+  }, // Every 10 minutes.
   async () => {
     try {
       const baseETHBalances = await getBaseETHBalances([

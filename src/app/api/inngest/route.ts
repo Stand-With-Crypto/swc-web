@@ -6,7 +6,6 @@ import { emailRepViaCapitolCanaryWithInngest } from '@/inngest/functions/emailRe
 import { monitorBaseETHBalances } from '@/inngest/functions/monitorBaseETHBalances'
 import { upsertAdvocateInCapitolCanaryWithInngest } from '@/inngest/functions/upsertAdvocateInCapitolCanary'
 import { inngest } from '@/inngest/inngest'
-import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
 export const { GET, POST, PUT } = serve({
   client: inngest,
@@ -15,6 +14,6 @@ export const { GET, POST, PUT } = serve({
     emailRepViaCapitolCanaryWithInngest,
     airdropNFTWithInngest,
     cleanupPostalCodesWithInngest,
-    ...(NEXT_PUBLIC_ENVIRONMENT === 'production' ? [monitorBaseETHBalances] : []),
+    monitorBaseETHBalances,
   ],
 })
