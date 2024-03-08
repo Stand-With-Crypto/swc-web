@@ -96,7 +96,6 @@ export function UserActionFormSuccessScreenMainCTA({
     action => action === UserActionType.OPT_IN,
   )
 
-  console.log({ user, hasOptedInToMembership, session })
   if (session.isLoggedIn && !session.isLoggedInThirdweb) {
     return (
       <Container>
