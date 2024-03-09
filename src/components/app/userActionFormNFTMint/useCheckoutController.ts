@@ -37,7 +37,7 @@ export function useCheckoutController({
     }
 
     const mintFee = mintUnitFee.mul(quantity)
-    const gasFee = gasUnitFee.mul(quantity)
+    const gasFee = gasUnitFee // Do not multiply by `quantity`.
     const totalFee = mintFee.add(gasFee)
 
     return {
