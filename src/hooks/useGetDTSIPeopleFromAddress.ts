@@ -66,6 +66,8 @@ export function formatGetDTSIPeopleFromAddressNotFoundReason(
       return 'No representatives in your state.'
     case 'NOT_SPECIFIC_ENOUGH':
       return 'Please enter a specific address that includes street-level information.'
+    case 'CIVIC_API_DOWN':
+      return "Looks like we're having some issues finding your representative right now. Please come back later and try again."
     case 'MISSING_FROM_DTSI':
     case 'UNEXPECTED_ERROR':
     default:

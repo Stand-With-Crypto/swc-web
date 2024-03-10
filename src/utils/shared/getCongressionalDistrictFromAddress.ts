@@ -73,7 +73,7 @@ export type CongressionalDistrictFromAddress = Awaited<
 export async function getCongressionalDistrictFromAddress(address: string) {
   const result = await getGoogleCivicDataFromAddress(address).catch(() => null)
   if (!result) {
-    return { notFoundReason: 'UNEXPECTED_ERROR' as const }
+    return { notFoundReason: 'CIVIC_API_DOWN' as const }
   }
   if ('error' in result) {
     const returned = { notFoundReason: 'NOT_USA_ADDRESS' as const }
