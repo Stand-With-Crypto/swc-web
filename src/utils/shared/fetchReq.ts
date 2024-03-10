@@ -69,7 +69,7 @@ export const fetchReq = async (
   const error = new FetchReqError(response, errorName, maybeBody?.value)
   Sentry.withScope(scope => {
     scope.setTransactionName(errorName)
-    scope.setFingerprint([urlWithoutQueryParams])
+    scope.setFingerprint([errorName])
     scope.setTags({ domain: 'fetchReq' })
     scope.setExtras({ options, url })
     config?.withScope?.(scope)
