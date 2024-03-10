@@ -64,13 +64,12 @@ export const fetchReq = async (
     return response
   }
   const maybeBody = await maybeParseBody(response)
-  const errorName = `${response.status} from ${options?.method || 'GET'} ${maybeWithoutQueryParams(
-    url,
-  )}${formatErrorNameWithBody(maybeBody)}`
+  const urlWithoutQueryParams = maybeWithoutQueryParams(url)
+  const errorName = `${response.status} from ${options?.method || 'GET'} ${urlWithoutQueryParams}${formatErrorNameWithBody(maybeBody)}`
   const error = new FetchReqError(response, errorName, maybeBody?.value)
   Sentry.withScope(scope => {
     scope.setTransactionName(errorName)
-    scope.setFingerprint([url])
+    scope.setFingerprint([urlWithoutQueryParams])
     scope.setTags({ domain: 'fetchReq' })
     scope.setExtras({ options, url })
     config?.withScope?.(scope)
