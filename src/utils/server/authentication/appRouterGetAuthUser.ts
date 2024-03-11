@@ -6,8 +6,9 @@ import { prismaClient } from '@/utils/server/prismaClient'
 import { appRouterGetThirdwebAuthUser } from '@/utils/server/thirdweb/appRouterGetThirdwebAuthUser'
 import { USER_SESSION_ID_COOKIE_NAME } from '@/utils/shared/userSessionId'
 
-export interface ServerAuthUser extends ThirdwebAuthUser {
+export interface ServerAuthUser extends Omit<ThirdwebAuthUser, 'address'> {
   userId: string
+  address: string | null
 }
 
 export async function appRouterGetAuthUser(): Promise<ServerAuthUser | null> {
@@ -49,6 +50,6 @@ export async function appRouterGetAuthUser(): Promise<ServerAuthUser | null> {
   const cryptoAddress = user.primaryUserCryptoAddress
   return {
     userId: user.id,
-    address: cryptoAddress ? parseThirdwebAddress(cryptoAddress.cryptoAddress) : '',
+    address: cryptoAddress ? parseThirdwebAddress(cryptoAddress.cryptoAddress) : null,
   }
 }

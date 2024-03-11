@@ -92,11 +92,11 @@ async function baseGetMaybeUserAndMethodOfMatch<
     if (!user) {
       if (NEXT_PUBLIC_ENVIRONMENT === 'production') {
         throw new Error(
-          `unexpectedly didn't return a user for an authenticated address ${authUser.address}`,
+          `unexpectedly didn't return a user for an authenticated address ${authUser.address!}`,
         )
       } else {
         throw new Error(
-          `Didn't return a user for an authenticated address ${authUser.address}. This is most likely because the database was just wiped in testing/local`,
+          `Didn't return a user for an authenticated address ${authUser.address!}. This is most likely because the database was just wiped in testing/local`,
         )
       }
     }
