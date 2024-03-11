@@ -109,6 +109,8 @@ export function GlobalFilters({
           <SelectValue />
         </SelectTrigger>
         <SelectContent
+          // Short term fix to prevent clicking on the politician table row when user selects an option from the select menu.
+          // Issue is from radix-ui https://github.com/radix-ui/primitives/issues/1658
           ref={ref => {
             if (!ref) return
             ref.ontouchend = e => {
@@ -130,6 +132,8 @@ export function GlobalFilters({
           <SelectValue />
         </SelectTrigger>
         <SelectContent
+          // Short term fix to prevent clicking on the politician table row when user selects an option from the select menu.
+          // Issue is from radix-ui https://github.com/radix-ui/primitives/issues/1658
           ref={ref => {
             if (!ref) return
             ref.ontouchend = e => {
@@ -150,6 +154,8 @@ export function GlobalFilters({
           <SelectValue />
         </SelectTrigger>
         <SelectContent
+          // Short term fix to prevent clicking on the politician table row when user selects an option from the select menu.
+          // Issue is from radix-ui https://github.com/radix-ui/primitives/issues/1658
           ref={ref => {
             if (!ref) return
             ref.ontouchend = e => {
@@ -173,6 +179,8 @@ export function GlobalFilters({
           <SelectValue />
         </SelectTrigger>
         <SelectContent
+          // Short term fix to prevent clicking on the politician table row when user selects an option from the select menu.
+          // Issue is from radix-ui https://github.com/radix-ui/primitives/issues/1658
           ref={ref => {
             if (!ref) return
             ref.ontouchend = e => {
