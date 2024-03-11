@@ -133,7 +133,6 @@ export function UserActionFormNFTMintCheckout({
                       <Balancer>Loading...</Balancer>
                     </p>
                   </div>
-                  <CurrencyDisplay value="0.00435" />
                 </div>
               ))}
             </div>
