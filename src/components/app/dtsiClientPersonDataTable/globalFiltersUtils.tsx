@@ -111,7 +111,7 @@ export function GlobalFilters({
         <SelectContent
           ref={ref => {
             if (!ref) return
-            ref.ontouchstart = e => {
+            ref.ontouchend = e => {
               e.preventDefault()
             }
           }}
@@ -132,7 +132,7 @@ export function GlobalFilters({
         <SelectContent
           ref={ref => {
             if (!ref) return
-            ref.ontouchstart = e => {
+            ref.ontouchend = e => {
               e.preventDefault()
             }
           }}
@@ -152,7 +152,7 @@ export function GlobalFilters({
         <SelectContent
           ref={ref => {
             if (!ref) return
-            ref.ontouchstart = e => {
+            ref.ontouchend = e => {
               e.preventDefault()
             }
           }}
@@ -175,7 +175,7 @@ export function GlobalFilters({
         <SelectContent
           ref={ref => {
             if (!ref) return
-            ref.ontouchstart = e => {
+            ref.ontouchend = e => {
               e.preventDefault()
             }
           }}
