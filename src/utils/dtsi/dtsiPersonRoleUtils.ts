@@ -8,6 +8,7 @@ import {
 } from '@/data/dtsi/generated'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
 import { getUSStateNameFromStateCode } from '@/utils/shared/usStateUtils'
+import { safeStringify } from '@/utils/web/safeStringify'
 
 export const getDTSIFormattedShortPersonRole = (
   role: Pick<
@@ -28,7 +29,7 @@ export const getDTSIFormattedShortPersonRole = (
     return role.title
   }
   return gracefullyError({
-    msg: `getDTSIFormattedPersonRole returned no role for ${JSON.stringify(role)}`,
+    msg: `getDTSIFormattedPersonRole returned no role for ${safeStringify(role)}`,
     fallback: role.title,
   })
 }

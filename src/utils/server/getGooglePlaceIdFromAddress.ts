@@ -18,14 +18,20 @@ export async function getGooglePlaceIdFromAddress(address: string) {
     },
   )
   const data = (await response.json()) as {
+    error_message?: string
     predictions: google.maps.places.AutocompletePrediction[]
+    status?: string
   }
   if (data.predictions.length > 0) {
     return data.predictions[0].place_id
-  } else {
-    Sentry.captureMessage('getGooglePlaceIdFromAddress returned no google place id', {
+  } else if (data.status) {
+    Sentry.captureMessage(`getGooglePlaceIdFromAddress no results with status ${data.status}`, {
       extra: { address, data },
     })
-    throw new Error('No place ID found for address')
+  } else {
+    Sentry.captureMessage('getGooglePlaceIdFromAddress no results', {
+      extra: { address, data },
+    })
   }
+  throw new Error('No place ID found for address')
 }

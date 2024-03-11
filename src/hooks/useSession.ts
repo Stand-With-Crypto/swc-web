@@ -1,4 +1,5 @@
 import React from 'react'
+import * as Sentry from '@sentry/nextjs'
 import { useDisconnect, useLogout } from '@thirdweb-dev/react'
 import Cookies from 'js-cookie'
 import { usePathname, useRouter } from 'next/navigation'
@@ -60,7 +61,9 @@ function useThirdwebSession() {
   return {
     session,
     logoutAndDisconnect: React.useCallback(async () => {
-      await Promise.all([logout(), disconnect()])
+      await Promise.all([logout(), disconnect()]).catch(e =>
+        Sentry.captureException(e, { tags: { domain: 'logoutAndDisconnect' } }),
+      )
     }, [disconnect, logout]),
   }
 }
