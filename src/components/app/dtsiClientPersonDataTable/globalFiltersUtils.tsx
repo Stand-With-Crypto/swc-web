@@ -110,7 +110,7 @@ export function GlobalFilters({
         </SelectTrigger>
         <SelectContent>
           {Object.values(StanceOnCryptoOptions).map(stance => (
-            <SelectItem key={stance} value={stance}>
+            <SelectItem key={stance} onClick={event => event.stopPropagation()} value={stance}>
               {stance}
             </SelectItem>
           ))}
@@ -124,7 +124,7 @@ export function GlobalFilters({
         </SelectTrigger>
         <SelectContent>
           {Object.values(ROLE_OPTIONS).map(role => (
-            <SelectItem key={role} value={role}>
+            <SelectItem key={role} onClick={event => event.stopPropagation()} value={role}>
               {getRoleOptionDisplayName(role)}
             </SelectItem>
           ))}
@@ -137,7 +137,7 @@ export function GlobalFilters({
         </SelectTrigger>
         <SelectContent>
           {Object.values(PARTY_OPTIONS).map(party => (
-            <SelectItem key={party} value={party}>
+            <SelectItem key={party} onClick={event => event.stopPropagation()} value={party}>
               {getPartyOptionDisplayName(party)}
             </SelectItem>
           ))}
@@ -153,7 +153,7 @@ export function GlobalFilters({
         </SelectTrigger>
         <SelectContent>
           {stateOptions.map(state => (
-            <SelectItem key={state} value={state}>
+            <SelectItem key={state} onClick={event => event.stopPropagation()} value={state}>
               {state}
             </SelectItem>
           ))}
