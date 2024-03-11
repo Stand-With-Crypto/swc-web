@@ -25,7 +25,7 @@ export function StateHeadsUp({ statements, stateCode }: StateHeadsUpProps) {
       <div className="space-y-6">
         <PageTitle size="md">See where {stateName} politicians stand on crypto</PageTitle>
         <PageSubTitle>
-          We asked {stateName} politicians for their thoughts on crypto. Here's what they said..
+          We asked {stateName} politicians for their thoughts on crypto. Here's what they said.
         </PageSubTitle>
       </div>
 
