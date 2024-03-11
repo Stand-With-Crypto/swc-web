@@ -89,7 +89,8 @@ export function UserActionFormNFTMintCheckout({
     mintStatus === 'loading' ||
     !contract ||
     connectionStatus === 'connecting' ||
-    connectionStatus === 'unknown'
+    connectionStatus === 'unknown' ||
+    gasFeeDisplay === undefined
   return (
     <UserActionFormLayout onBack={() => goToSection(UserActionFormNFTMintSectionNames.INTRO)}>
       {isLoading && <LoadingOverlay />}
