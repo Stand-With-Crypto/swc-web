@@ -1,8 +1,8 @@
 'use client'
 import { useCallback } from 'react'
 
+import { UserActionFormLayout } from '@/components/app/userActionFormCommon'
 import { SectionNames } from '@/components/app/userActionFormVoterRegistration/constants'
-import { UserActionFormVoterRegistrationLayout } from '@/components/app/userActionFormVoterRegistration/sections/layout'
 import { Button } from '@/components/ui/button'
 import { ExternalLink } from '@/components/ui/link'
 import { useLocale } from '@/hooks/useLocale'
@@ -24,10 +24,10 @@ export function Survey({ goToSection }: SurveyProps) {
   )
 
   return (
-    <UserActionFormVoterRegistrationLayout>
-      <UserActionFormVoterRegistrationLayout.Container>
+    <UserActionFormLayout>
+      <UserActionFormLayout.Container>
         <div className="flex flex-col gap-24">
-          <UserActionFormVoterRegistrationLayout.Heading
+          <UserActionFormLayout.Heading
             subtitle="Register to vote or check your voter registration and get a free “I'm a Voter” NFT"
             title="Are you registered to vote?"
           />
@@ -65,7 +65,7 @@ export function Survey({ goToSection }: SurveyProps) {
             .
           </p>
         </div>
-      </UserActionFormVoterRegistrationLayout.Container>
-    </UserActionFormVoterRegistrationLayout>
+      </UserActionFormLayout.Container>
+    </UserActionFormLayout>
   )
 }

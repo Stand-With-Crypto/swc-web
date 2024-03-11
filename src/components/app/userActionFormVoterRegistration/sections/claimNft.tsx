@@ -8,8 +8,8 @@ import {
   actionCreateUserActionVoterRegistration,
   CreateActionVoterRegistrationInput,
 } from '@/actions/actionCreateUserActionVoterRegistration'
+import { UserActionFormLayout } from '@/components/app/userActionFormCommon'
 import { SectionNames, StateCode } from '@/components/app/userActionFormVoterRegistration/constants'
-import { UserActionFormVoterRegistrationLayout } from '@/components/app/userActionFormVoterRegistration/sections/layout'
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { ExternalLink } from '@/components/ui/link'
@@ -70,9 +70,9 @@ export function ClaimNft({ goToSection, stateCode }: ClaimNftProps) {
   }, [goToSection, router, stateCode])
 
   return (
-    <UserActionFormVoterRegistrationLayout onBack={handleOnBack}>
-      <UserActionFormVoterRegistrationLayout.Container>
-        <UserActionFormVoterRegistrationLayout.Heading title="Claim “I'm a Voter” NFT" />
+    <UserActionFormLayout onBack={handleOnBack}>
+      <UserActionFormLayout.Container>
+        <UserActionFormLayout.Heading title="Claim “I'm a Voter” NFT" />
         <div className="flex w-full flex-col items-center gap-8 md:flex-row">
           <NextImage
             alt={I_AM_A_VOTER_NFT_IMAGE.alt}
@@ -88,12 +88,12 @@ export function ClaimNft({ goToSection, stateCode }: ClaimNftProps) {
             <br /> <br /> Limited to one mint per person.
           </p>
         </div>
-      </UserActionFormVoterRegistrationLayout.Container>
-      <UserActionFormVoterRegistrationLayout.Footer>
+      </UserActionFormLayout.Container>
+      <UserActionFormLayout.Footer>
         <Button disabled={loading} onClick={handleClaimNft} size="lg">
           Claim NFT
         </Button>
-      </UserActionFormVoterRegistrationLayout.Footer>
-    </UserActionFormVoterRegistrationLayout>
+      </UserActionFormLayout.Footer>
+    </UserActionFormLayout>
   )
 }

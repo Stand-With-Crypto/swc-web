@@ -151,7 +151,7 @@ export function UserActionFormEmailCongressperson({
           }
         }, trackFormSubmissionSyncErrors(ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON))}
       >
-        <ScrollArea>
+        <ScrollArea className="overflow-auto">
           <div className={cn(dialogContentPaddingStyles, 'space-y-4 md:space-y-8')}>
             <PageTitle className="mb-3" size="sm">
               Email your congressperson

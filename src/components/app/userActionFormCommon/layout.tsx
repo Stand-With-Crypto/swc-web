@@ -18,17 +18,17 @@ export function UserActionFormLayout({ onBack, children }: UserActionFormLayoutP
     <>
       {onBack && <GoBackButton onClick={onBack} />}
 
-      <div className="flex min-h-[400px] flex-col">{children}</div>
+      <div className="flex min-h-[400px] flex-col max-md:h-full">{children}</div>
     </>
   )
 }
 
-function Heading({ title, subtitle }: { title: string; subtitle: string }) {
+function Heading({ title, subtitle }: { title: string; subtitle?: string }) {
   return (
     <div className="space-y-2">
       <PageTitle size="sm">{title}</PageTitle>
 
-      <PageSubTitle>{subtitle}</PageSubTitle>
+      {subtitle && <PageSubTitle>{subtitle}</PageSubTitle>}
     </div>
   )
 }
@@ -52,7 +52,7 @@ function Container({ children }: React.PropsWithChildren) {
   return (
     <div className="flex flex-grow">
       {/* without w-full, on iOS, this won't take up the full width of the parent ¯\_(ツ)_/¯ */}
-      <div className="w-full space-y-4 md:space-y-8">{children}</div>
+      <div className="flex w-full flex-col space-y-4 md:space-y-8">{children}</div>
     </div>
   )
 }
@@ -73,7 +73,7 @@ function CongresspersonDisplayFooter({
   dtsiPerson?: DTSIPeopleFromCongressionalDistrict
 }>) {
   return (
-    <div className="flex w-full flex-col gap-4 border-t p-6 pt-3 md:flex-row md:items-center md:justify-between md:px-12">
+    <div className="mt-3 flex w-full flex-col gap-4 border-t p-6 pt-3 md:flex-row md:items-center md:justify-between md:px-12">
       <DtsiCongresspersonDisplay dtsiPersonResponse={dtsiPerson} />
       {children}
     </div>
