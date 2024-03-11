@@ -1,9 +1,12 @@
 import React from 'react'
-import { getGasPrice, toEther, useSDK } from '@thirdweb-dev/react'
+import { useContract, useSDK } from '@thirdweb-dev/react'
 import { BigNumber } from 'ethers'
 import useSWR from 'swr'
 
-import { ETH_NFT_DONATION_AMOUNT } from '@/components/app/userActionFormNFTMint/constants'
+import {
+  ETH_NFT_DONATION_AMOUNT,
+  MINT_NFT_CONTRACT_ADDRESS,
+} from '@/components/app/userActionFormNFTMint/constants'
 import { fromBigNumber, toBigNumber } from '@/utils/shared/bigNumber'
 
 export interface UseCheckoutControllerReturn {
@@ -21,7 +24,7 @@ export function useCheckoutController({
   mintUnitFee = ETH_NFT_DONATION_AMOUNT,
 } = {}): UseCheckoutControllerReturn {
   const [quantity, setQuantity] = React.useState(1)
-  const { data: gasUnitFee } = useGasFee()
+  const { data: gasFee } = useGasFee(quantity)
 
   const values = React.useMemo<
     Pick<
@@ -29,12 +32,11 @@ export function useCheckoutController({
       'mintFeeDisplay' | 'gasFeeDisplay' | 'totalFeeDisplay' | 'totalFee'
     >
   >(() => {
-    if (!gasUnitFee) {
+    if (!gasFee) {
       return {}
     }
 
     const mintFee = mintUnitFee.mul(quantity)
-    const gasFee = gasUnitFee.mul(quantity)
     const totalFee = mintFee.add(gasFee)
 
     return {
@@ -43,7 +45,7 @@ export function useCheckoutController({
       totalFeeDisplay: fromBigNumber(totalFee),
       totalFee,
     }
-  }, [gasUnitFee, mintUnitFee, quantity])
+  }, [gasFee, mintUnitFee, quantity])
 
   return {
     ...values,
@@ -54,15 +56,17 @@ export function useCheckoutController({
   }
 }
 
-function useGasFee() {
+function useGasFee(quantity: number) {
   const contextSDK = useSDK()
+  const { contract: contextContract } = useContract(MINT_NFT_CONTRACT_ADDRESS)
 
-  return useSWR(contextSDK, async sdk => {
-    if (!sdk) {
+  return useSWR({ sdk: contextSDK, contract: contextContract }, async ({ sdk, contract }) => {
+    if (!sdk || !contract) {
       return
     }
 
-    const gasPrice = await getGasPrice(sdk.getProvider())
-    return toBigNumber(toEther(gasPrice))
+    const prepareTx = await contract.erc721.claim.prepare(quantity)
+    const gasFee = await prepareTx.estimateGasCost()
+    return toBigNumber(gasFee.ether)
   })
 }
