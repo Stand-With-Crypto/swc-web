@@ -153,7 +153,14 @@ export function GlobalFilters({
         </SelectTrigger>
         <SelectContent>
           {stateOptions.map(state => (
-            <SelectItem key={state} onClick={event => event.stopPropagation()} value={state}>
+            <SelectItem
+              key={state}
+              onClick={event => {
+                event.preventDefault()
+                event.stopPropagation()
+              }}
+              value={state}
+            >
               {state}
             </SelectItem>
           ))}
