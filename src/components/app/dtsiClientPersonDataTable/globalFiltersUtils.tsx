@@ -108,7 +108,14 @@ export function GlobalFilters({
           <span className="mr-2 inline-block flex-shrink-0 font-bold">Stance on crypto</span>
           <SelectValue />
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent
+          ref={ref => {
+            if (!ref) return
+            ref.ontouchstart = e => {
+              e.preventDefault()
+            }
+          }}
+        >
           {Object.values(StanceOnCryptoOptions).map(stance => (
             <SelectItem key={stance} onClick={event => event.stopPropagation()} value={stance}>
               {stance}
@@ -122,7 +129,14 @@ export function GlobalFilters({
           <span className="mr-2 inline-block flex-shrink-0 font-bold">Role</span>
           <SelectValue />
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent
+          ref={ref => {
+            if (!ref) return
+            ref.ontouchstart = e => {
+              e.preventDefault()
+            }
+          }}
+        >
           {Object.values(ROLE_OPTIONS).map(role => (
             <SelectItem key={role} onClick={event => event.stopPropagation()} value={role}>
               {getRoleOptionDisplayName(role)}
@@ -135,7 +149,14 @@ export function GlobalFilters({
           <span className="mr-2 inline-block flex-shrink-0 font-bold">Party</span>
           <SelectValue />
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent
+          ref={ref => {
+            if (!ref) return
+            ref.ontouchstart = e => {
+              e.preventDefault()
+            }
+          }}
+        >
           {Object.values(PARTY_OPTIONS).map(party => (
             <SelectItem key={party} onClick={event => event.stopPropagation()} value={party}>
               {getPartyOptionDisplayName(party)}
@@ -151,16 +172,16 @@ export function GlobalFilters({
           <span className="mr-2 inline-block flex-shrink-0 font-bold">State</span>
           <SelectValue />
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent
+          ref={ref => {
+            if (!ref) return
+            ref.ontouchstart = e => {
+              e.preventDefault()
+            }
+          }}
+        >
           {stateOptions.map(state => (
-            <SelectItem
-              key={state}
-              onClick={event => {
-                event.preventDefault()
-                event.stopPropagation()
-              }}
-              value={state}
-            >
+            <SelectItem key={state} value={state}>
               {state}
             </SelectItem>
           ))}
