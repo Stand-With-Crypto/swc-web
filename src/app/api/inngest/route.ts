@@ -6,6 +6,7 @@ import { emailRepViaCapitolCanaryWithInngest } from '@/inngest/functions/emailRe
 import { monitorBaseETHBalances } from '@/inngest/functions/monitorBaseETHBalances'
 import { upsertAdvocateInCapitolCanaryWithInngest } from '@/inngest/functions/upsertAdvocateInCapitolCanary'
 import { inngest } from '@/inngest/inngest'
+import { setPrimaryCryptoAddressOfUserWithInngest } from '@/inngest/functions/setPrimaryCryptoAddressOfUser'
 
 export const { GET, POST, PUT } = serve({
   client: inngest,
@@ -15,5 +16,6 @@ export const { GET, POST, PUT } = serve({
     airdropNFTWithInngest,
     cleanupPostalCodesWithInngest,
     monitorBaseETHBalances,
+    setPrimaryCryptoAddressOfUserWithInngest,
   ],
 })
