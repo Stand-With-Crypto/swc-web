@@ -6,26 +6,40 @@ import { isNil } from 'lodash-es'
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
 import { SortableHeader } from '@/components/app/dtsiClientPersonDataTable/dataTable'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
+import { InternalLink } from '@/components/ui/link'
+import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
 import { queryDTSIAllPeople } from '@/data/dtsi/queries/queryDTSIAllPeople'
+import { SupportedLocale } from '@/intl/locales'
 import { getDTSIPersonRoleCategoryDisplayName } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import {
   dtsiPersonFullName,
   dtsiPersonPoliticalAffiliationCategoryDisplayName,
 } from '@/utils/dtsi/dtsiPersonUtils'
 import { convertDTSIStanceScoreToCryptoSupportLanguage } from '@/utils/dtsi/dtsiStanceScoreUtils'
+import { getIntlUrls } from '@/utils/shared/urls'
 import { getUSStateNameFromStateCode } from '@/utils/shared/usStateUtils'
+import { cn } from '@/utils/web/cn'
 
 export type Person = Awaited<ReturnType<typeof queryDTSIAllPeople>>['people'][0]
 
-export const getDTSIClientPersonDataTableColumns = (): ColumnDef<Person>[] => [
+export const getDTSIClientPersonDataTableColumns = ({
+  locale,
+}: {
+  locale: SupportedLocale
+}): ColumnDef<Person>[] => [
   {
     accessorKey: 'fullName',
     accessorFn: row => dtsiPersonFullName(row),
     cell: ({ row }) => (
-      <div className="flex items-center gap-3">
+      <LinkBox className="flex items-center gap-3">
         <DTSIAvatar person={row.original} size={40} />
-        {dtsiPersonFullName(row.original)}
-      </div>
+        <InternalLink
+          className={cn(linkBoxLinkClassName, 'cursor-pointer')}
+          href={getIntlUrls(locale).politicianDetails(row.original.slug)}
+        >
+          {dtsiPersonFullName(row.original)}
+        </InternalLink>
+      </LinkBox>
     ),
     header: ({ column }) => {
       return <SortableHeader column={column}>Name</SortableHeader>
