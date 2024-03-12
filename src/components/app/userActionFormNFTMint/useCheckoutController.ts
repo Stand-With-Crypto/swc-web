@@ -1,11 +1,13 @@
 import React from 'react'
-import { getGasPrice, toEther, useSDK } from '@thirdweb-dev/react'
+import { useContract, useSDK } from '@thirdweb-dev/react'
+import { ThirdwebSDK } from '@thirdweb-dev/sdk'
 import { BigNumber } from 'ethers'
 import useSWR from 'swr'
 
 import { ETH_NFT_DONATION_AMOUNT } from '@/components/app/userActionFormNFTMint/constants'
 import { fromBigNumber, toBigNumber } from '@/utils/shared/bigNumber'
 
+const CLAIM_GAS_LIMIT_OE721_CONTRACT = 231086
 export interface UseCheckoutControllerReturn {
   mintFeeDisplay?: string
   gasFeeDisplay?: string
@@ -54,15 +56,15 @@ export function useCheckoutController({
   }
 }
 
-function useGasFee() {
-  const contextSDK = useSDK()
-
-  return useSWR(contextSDK, async sdk => {
-    if (!sdk) {
+function useGasFee(quantity: number) {
+  const { contract: contextContract } = useContract(MINT_NFT_CONTRACT_ADDRESS)
+  return useSWR({ contract: contextContract }, async ({ contract }) => {
+    if (!contract) {
       return
     }
-
-    const gasPrice = await getGasPrice(sdk.getProvider())
-    return toBigNumber(toEther(gasPrice))
+    const prepareTx = await contract.erc721.claim.prepare(quantity)
+    prepareTx.updateOverrides({ gasLimit: CLAIM_GAS_LIMIT_OE721_CONTRACT })
+    const gasFee = await prepareTx.estimateGasCost()
+    return gasFee.wei
   })
 }
