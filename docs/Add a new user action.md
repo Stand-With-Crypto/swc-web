@@ -1,12 +1,14 @@
 # Add a new user action
 
+**NOTE: Replace `ActionName` in variable/folder names with the name of the new user action**
+
 ## Create UI
 
 - Create a new folder in `src/components/app` called `userActionFormActionName`. All UI should be contained in this folder.
 - Typical files in this folder include `dialog.tsx`, `homepageDialogDeeplinkWrapper.tsx`, `index.tsx`, `lazyLoad.tsx`, `skeleton.tsx`
 
 ```javascript
-dialog.tsx
+/// dialog.tsx
 
 export function UserActionActionNameFormDialog({
   children,
@@ -43,7 +45,8 @@ export function UserActionActionNameFormDialog({
 ```
 
 ```javascript
-homepageDialogDeeplinkWrapper.tsx
+/// homepageDialogDeeplinkWrapper.tsx
+/// Used in app/[locale]/(homepageDialogDeeplink)/action folder
 
 function UserActionFormActionNameDeeplinkWrapperContent() {
   const fetchUser = useApiResponseForUserFullProfileInfo()
@@ -51,7 +54,7 @@ function UserActionFormActionNameDeeplinkWrapperContent() {
   const router = useRouter()
   const { user } = fetchUser.data || { user: null }
 
-  return fetchUser.isLoading || loadingParams ? (
+  return fetchUser.isLoading ? (
     <UserActionFormActionNameSkeleton />
   ) : (
     <UserActionFormActionName onClose={() => router.push(urls.home())} user={user} />
@@ -68,7 +71,7 @@ export function UserActionFormActionNameDeeplinkWrapper() {
 ```
 
 ```javascript
-index.tsx
+/// index.tsx
 
 export function UserActionFormActionName({ onClose }: { onClose: () => void }) {
   const sectionProps = useSections<SectionNames>({
@@ -105,7 +108,7 @@ export function UserActionFormActionName({ onClose }: { onClose: () => void }) {
 ```
 
 ```javascript
-lazyLoad.tsx
+/// lazyLoad.tsx
 
 import { lazy } from 'react'
 
@@ -117,7 +120,7 @@ export const LazyUserActionFormActionName = lazy(() =>
 ```
 
 ```javascript
-skeleton.tsx
+/// skeleton.tsx
 
 import { Skeleton } from '@/components/ui/skeleton'
 
@@ -133,9 +136,12 @@ export function UserActionFormActionNameSkeleton() {
 
 ## Update database schema
 
-1. Add new model for the user action with formatting `UserActionActionName`, replacing `ActionName` with the name of the action.
-2. Add a new field to the [UserAction](https://github.com/Stand-With-Crypto/swc-web/blob/main/prisma/schema.prisma#L271) model to reference the new user action model
-3. Run `npm run initial` after making changes to the schema.
+**NOTE: All changes to schema should be made in its own PR, and before any UI changes. Follow guide [here](https://github.com/Stand-With-Crypto/swc-web/blob/main/docs/Contributing.md#updating-the-planetscale-schema) to update PlanetScale DB.**
+
+1. Update UserActionType enum with the new user action.
+2. If your user action requires some associated metadata to be stored, then add new model for the user action with name `UserActionActionName`, replacing `ActionName` with the name of the action.
+3. Add a new field to the [UserAction](https://github.com/Stand-With-Crypto/swc-web/blob/main/prisma/schema.prisma#L271) model to reference the new user action model if you added a new model.
+4. Run `npm run initial` after making changes to the schema.
 
 ## Create a new server action
 
@@ -159,6 +165,8 @@ export function UserActionFormActionNameSkeleton() {
 2. Create a `page.tsx` file in the folder with content similar to the following. Replace `ActionName` with the name of the new action.
 
 ```javascript
+/// page.tsx
+
 export const revalidate = SECONDS_DURATION.HOUR
 export const dynamic = 'error'
 
