@@ -25,7 +25,7 @@ export function useCheckoutController({
   mintUnitFee = ETH_NFT_DONATION_AMOUNT,
 } = {}): UseCheckoutControllerReturn {
   const [quantity, setQuantity] = React.useState(1)
-  const { data: gasUnitFee } = useGasFee()
+  const { data: gasUnitFee } = useGasFee(quantity)
 
   const values = React.useMemo<
     Pick<
