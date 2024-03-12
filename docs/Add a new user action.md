@@ -178,3 +178,7 @@ export default function UserActionActionNameDeepLink({ params }: PageProps) {
   )
 }
 ```
+
+### Unit tests / E2E tests
+
+Unit tests can be added in the same folder as where new UI components are created, and E2E tests are stored in the `cypress` folder.
