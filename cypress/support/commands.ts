@@ -1,4 +1,7 @@
 /// <reference types="cypress" />
+
+import { Prisma } from '@prisma/client'
+
 // ***********************************************
 // This example commands.ts shows you how to
 // create various custom commands and overwrite
@@ -27,6 +30,8 @@
 //
 
 Cypress.Commands.add('selectFromComboBox', ({ trigger, searchText }) => {
+  // wait for dom to be ready
+  cy.wait(1000)
   trigger.click()
   // wait for combo box to be fully ready
   cy.wait(1000)
@@ -50,6 +55,43 @@ Cypress.Commands.add('selectFromComboBox', ({ trigger, searchText }) => {
     })
 })
 
+Cypress.Commands.add('queryDb', (query: string) => {
+  return cy.task('queryDb', query)
+})
+
+Cypress.Commands.add('executeDb', (query: string) => {
+  return cy.task('executeDb', query)
+})
+
+Cypress.Commands.add('clearDb', () => {
+  const tableNames = [
+    'address',
+    'authentication_nonce',
+    'nft_mint',
+    'user',
+    'user_action',
+    'user_action_call',
+    'user_action_donation',
+    'user_action_email',
+    'user_action_email_recipient',
+    'user_action_opt_in',
+    'user_action_voter_registration',
+    'user_crypto_address',
+    'user_email_address',
+    'user_merge_alert',
+    'user_merge_event',
+    'user_session',
+  ]
+  tableNames.forEach(tableName => {
+    cy.task('executeDb', `DELETE FROM ${tableName}`)
+  })
+})
+
+Cypress.Commands.add('seedDb', () => {
+  cy.exec('SEED_SIZE=SM')
+  cy.exec('npm run ts --transpile-only src/bin/seed/seedLocalDb.ts')
+})
+
 export {}
 
 declare global {
@@ -59,6 +101,11 @@ declare global {
         trigger: Chainable<JQuery<Node>>
         searchText: string
       }): Chainable<void>
+      queryDb(query: string): Chainable<any>
+      executeDb(query: string): Chainable<any>
+      clearDb(): Chainable<void>
+      seedDb(): Chainable<void>
+
       //   drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
       //   dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
       //   visit(originalFn: CommandOriginalFn, url: string, options: Partial<VisitOptions>): Chainable<Element>

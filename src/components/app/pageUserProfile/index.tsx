@@ -2,6 +2,8 @@ import { UserActionType } from '@prisma/client'
 import { sumBy, uniq } from 'lodash-es'
 import { redirect, RedirectType } from 'next/navigation'
 
+import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
+import { NFTDisplay } from '@/components/app/nftHub/nftDisplay'
 import { PageUserProfileUser } from '@/components/app/pageUserProfile/getAuthenticatedData'
 import { UpdateUserProfileFormDialog } from '@/components/app/updateUserProfileForm/dialog'
 import { UserActionRowCTAsList } from '@/components/app/userActionRowCTA/userActionRowCTAsList'
@@ -21,10 +23,13 @@ import { getSensitiveDataUserDisplayName } from '@/utils/web/userUtils'
 
 import { UserReferralUrl } from './userReferralUrl'
 
-export function PageUserProfile({
-  params,
-  user,
-}: PageProps & { user: PageUserProfileUser | null }) {
+const EXCLUDE_USER_ACTION_TYPES = [UserActionType.LIVE_EVENT]
+
+interface PageUserProfile extends PageProps {
+  user: PageUserProfileUser | null
+}
+
+export function PageUserProfile({ params, user }: PageUserProfile) {
   const { locale } = params
   if (!user) {
     // For now the only authenticated page we have is /profile,
@@ -39,7 +44,14 @@ export function PageUserProfile({
   }
   const { userActions } = user
   const performedUserActionTypes = uniq(userActions.map(x => x.actionType))
-  const excludeUserActionTypes = user.hasEmbeddedWallet ? [UserActionType.NFT_MINT] : []
+  const excludeUserActionTypes = user.hasEmbeddedWallet
+    ? [UserActionType.NFT_MINT, ...EXCLUDE_USER_ACTION_TYPES]
+    : EXCLUDE_USER_ACTION_TYPES
+  const numActionsCompleted = performedUserActionTypes.filter(
+    action => !excludeUserActionTypes.includes(action),
+  ).length
+  const numActionsAvailable = Object.values(UserActionType).length - excludeUserActionTypes.length
+
   return (
     <div className="container space-y-10 lg:space-y-16">
       {/* LATER-TASK enable this feature */}
@@ -70,20 +82,17 @@ export function PageUserProfile({
             </div>
           </div>
           <div>
-            <UpdateUserProfileFormDialog user={user}>
-              {hasCompleteUserProfile(user) ? (
-                <Button variant="secondary">
-                  Edit <span className="mx-1 hidden sm:inline-block">your</span> profile
-                </Button>
-              ) : (
-                <Button>
-                  Finish <span className="mx-1 hidden sm:inline-block">your</span> profile
-                </Button>
-              )}
-            </UpdateUserProfileFormDialog>
+            <LoginDialogWrapper
+              authenticatedContent={<EditProfileButton user={user} />}
+              subtitle="Confirm your email address or connect a wallet to receive your NFT."
+              title="Claim your free NFT"
+              useThirdwebSession
+            >
+              <Button>Claim my NFTs</Button>
+            </LoginDialogWrapper>
           </div>
         </div>
-        <div className="grid grid-cols-3 rounded-3xl bg-blue-50 p-3 text-center sm:p-6">
+        <div className="grid grid-cols-3 rounded-3xl bg-secondary p-3 text-center sm:p-6">
           {[
             {
               label: 'Actions',
@@ -96,6 +105,9 @@ export function PageUserProfile({
                   amount={sumBy(userActions, x => {
                     if (x.actionType === UserActionType.DONATION) {
                       return x.amountUsd
+                    }
+                    if (x.actionType === UserActionType.NFT_MINT) {
+                      return x.nftMint.costAtMintUsd
                     }
                     return 0
                   })}
@@ -126,22 +138,17 @@ export function PageUserProfile({
           Your advocacy progress
         </PageTitle>
         <PageSubTitle className="mb-5">
-          You've completed {performedUserActionTypes.length} out of{' '}
-          {Object.values(UserActionType).length - excludeUserActionTypes.length} actions. Keep
-          going!
+          You've completed {numActionsCompleted} out of {numActionsAvailable} actions. Keep going!
         </PageSubTitle>
         <div className="mx-auto mb-10 max-w-xl">
-          <Progress
-            value={(performedUserActionTypes.length / Object.values(UserActionType).length) * 100}
-          />
+          <Progress value={(numActionsCompleted / numActionsAvailable) * 100} />
         </div>
         <UserActionRowCTAsList
           excludeUserActionTypes={excludeUserActionTypes}
           performedUserActionTypes={performedUserActionTypes}
         />
       </section>
-      {/* hiding nft section until bugs are resolved */}
-      {/* <section>
+      <section>
         <PageTitle className="mb-4" size="sm">
           Your NFTs
         </PageTitle>
@@ -151,7 +158,7 @@ export function PageUserProfile({
         <div>
           <NFTDisplay userActions={userActions} />
         </div>
-      </section> */}
+      </section>
       <section>
         <PageTitle className="mb-4" size="sm">
           Refer Your Friends
@@ -162,5 +169,21 @@ export function PageUserProfile({
         <UserReferralUrl referralId={user.referralId} />
       </section>
     </div>
+  )
+}
+
+function EditProfileButton({ user }: { user: PageUserProfileUser }) {
+  return (
+    <UpdateUserProfileFormDialog user={user}>
+      {hasCompleteUserProfile(user) ? (
+        <Button variant="secondary">
+          Edit <span className="mx-1 hidden sm:inline-block">your</span> profile
+        </Button>
+      ) : (
+        <Button>
+          Finish <span className="mx-1 hidden sm:inline-block">your</span> profile
+        </Button>
+      )}
+    </UpdateUserProfileFormDialog>
   )
 }

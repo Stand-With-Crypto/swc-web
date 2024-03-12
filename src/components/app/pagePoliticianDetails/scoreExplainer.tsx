@@ -18,7 +18,7 @@ export function ScoreExplainer({ person }: { person: DTSIPersonDetails }) {
   const locale = useLocale()
   return (
     <Popover analytics="Person Score Explainer">
-      <PopoverTrigger className="my-8 flex w-full items-center gap-4 rounded-3xl bg-gray-100 p-3 text-left md:my-12">
+      <PopoverTrigger className="my-8 flex w-full items-center gap-4 rounded-3xl bg-secondary p-3 text-left md:my-12">
         <div>
           <DTSIFormattedLetterGrade person={person} size={60} />
         </div>
@@ -33,14 +33,25 @@ export function ScoreExplainer({ person }: { person: DTSIPersonDetails }) {
           </h4>
         </div>
       </PopoverTrigger>
-      <PopoverContent align="start">
-        <div className="p-6 text-center sm:p-0">
+      <PopoverContent align="start" className="md:w-full md:max-w-sm">
+        <div className="p-6 md:p-0">
           <p className="mb-3 text-sm">
-            <ExternalLink href={externalUrls.dtsi()}>DoTheySupportIt</ExternalLink> generates the
-            score from the member’s public statements. You can change the score by contributing more
-            statements.
+            <ExternalLink href={externalUrls.dtsi()}>DoTheySupportIt</ExternalLink> calculates
+            scores based on members' public statements or actions. Press "Add Position" to
+            contribute more statements.
           </p>
-          <Button asChild variant="secondary">
+          <p className="mb-3 text-xs">
+            Subject to DoTheySupportIt’s{' '}
+            <ExternalLink href={'https://www.dotheysupportit.com/terms-and-conditions'}>
+              terms
+            </ExternalLink>{' '}
+            and{' '}
+            <ExternalLink href="https://www.dotheysupportit.com/privacy-policy">
+              privacy policy
+            </ExternalLink>
+            .
+          </p>
+          <Button asChild className="w-full">
             <ExternalLink href={externalUrls.dtsiCreateStance(person.slug)}>
               Add Position <MoveUpRight className="ml-2" />
             </ExternalLink>

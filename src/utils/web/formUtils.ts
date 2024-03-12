@@ -22,14 +22,17 @@ export type FormValues<T extends z.ZodType<any, any, any>> = z.infer<T> & Generi
 
 export async function triggerServerActionForForm<
   F extends UseFormReturn<any, any, any>,
-  Fn extends () => Promise<{ errors: Record<string, string[]> } | object>,
+  P,
+  Fn extends (args: P) => Promise<{ errors: Record<string, string[]> } | object>,
 >(
   {
     form,
     formName,
     analyticsProps,
     onError = form?.setError ?? noop,
+    payload,
   }: {
+    payload: P
     form?: F
     formName: string
     analyticsProps?: AnalyticProperties
@@ -39,13 +42,13 @@ export async function triggerServerActionForForm<
 ) {
   trackFormSubmitted(formName, analyticsProps)
 
-  const response = await fn().catch(error => {
+  const response = await fn(payload).catch(error => {
     if (!isError(error)) {
       trackFormSubmitErrored(formName, { 'Error Type': 'Unknown', ...analyticsProps })
       onError(GENERIC_FORM_ERROR_KEY, { message: error })
       Sentry.captureMessage(`triggerServerActionForForm returned unexpected form response`, {
         tags: { formName, domain: 'triggerServerActionForForm', path: 'Unexpected' },
-        extra: { analyticsProps, error, formName },
+        extra: { analyticsProps, error, formName, payload },
       })
     } else if (error instanceof FetchReqError) {
       const formattedErrorStatus = formatErrorStatus(error.response.status)
@@ -54,7 +57,7 @@ export async function triggerServerActionForForm<
       Sentry.captureException(error, {
         fingerprint: [formName, 'FetchReqError', `${error.response.status}`],
         tags: { formName, domain: 'triggerServerActionForForm', path: 'FetchReqError' },
-        extra: { analyticsProps, error, formName },
+        extra: { analyticsProps, error, formName, payload },
       })
     } else {
       trackFormSubmitErrored(formName, { 'Error Type': 'Unexpected', ...analyticsProps })
@@ -62,11 +65,23 @@ export async function triggerServerActionForForm<
       Sentry.captureException(error, {
         fingerprint: [formName, 'Error', error.message],
         tags: { formName, domain: 'triggerServerActionForForm', path: 'Error' },
-        extra: { analyticsProps, error, formName },
+        extra: { analyticsProps, error, formName, payload },
       })
     }
     return { status: 'error' as const }
   })
+  if (!response) {
+    /*
+      There's a weird bug where we are sometimes returning undefined here for situations where the type signature says that should be impossible.
+      Adding some additional logging here to debug whats going on
+      https://stand-with-crypto.sentry.io/issues/5018950536/?environment=production&project=4506490717470720&query=is%3Aunresolved+timesSeen%3A%3E%3D10&referrer=issue-stream&statsPeriod=30d&stream_index=4
+      */
+    Sentry.captureMessage(
+      'triggerServerActionForForm unexpectedly successfully returned undefined',
+      { extra: { payload, response, formName } },
+    )
+    return { status: 'error' as const }
+  }
   if ('status' in response) {
     return { status: response.status }
   }
@@ -80,7 +95,7 @@ export async function triggerServerActionForForm<
     })
     Sentry.captureMessage('Field errors returned from action', {
       tags: { formName, domain: 'triggerServerActionForForm', path: 'Error' },
-      extra: { analyticsProps, response, formName },
+      extra: { analyticsProps, response, formName, payload },
     })
     return { status: 'error' as const }
   }

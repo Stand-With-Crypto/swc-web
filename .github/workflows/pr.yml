@@ -1,0 +1,82 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: ['opened', 'edited', 'reopened', 'synchronize', 'ready_for_review']
+
+jobs:
+  build:
+    if: github.event.pull_request.draft == false
+    environment: preview
+    runs-on: ubuntu-latest
+    name: Lint, tests, typechecking
+    env:
+      # environment secrets
+      VERIFIED_SWC_PARTNER_SECRET_COINBASE: ${{ secrets.VERIFIED_SWC_PARTNER_SECRET_COINBASE }}
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      DO_THEY_SUPPORT_IT_API_KEY: ${{ secrets.DO_THEY_SUPPORT_IT_API_KEY }}
+      THIRD_WEB_CLIENT_SECRET: ${{ secrets.THIRD_WEB_CLIENT_SECRET }}
+      THIRDWEB_AUTH_PRIVATE_KEY: ${{ secrets.THIRDWEB_AUTH_PRIVATE_KEY }}
+      CAPITOL_CANARY_API_KEY: ${{ secrets.CAPITOL_CANARY_API_KEY }}
+      CAPITOL_CANARY_API_SECRET: ${{ secrets.CAPITOL_CANARY_API_SECRET }}
+      CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
+      SWC_SHIELD_NFT_CONTRACT_ADDRESS: ${{ secrets.SWC_SHIELD_NFT_CONTRACT_ADDRESS }}
+      CALL_REPRESENTATIVE_NFT_CONTRACT_ADDRESS: ${{ secrets.CALL_REPRESENTATIVE_NFT_CONTRACT_ADDRESS }}
+      I_AM_A_VOTER_CONTRACT_ADDRESS: ${{ secrets.I_AM_A_VOTER_CONTRACT_ADDRESS }}
+      UPSTASH_REDIS_REST_URL: ${{ secrets.UPSTASH_REDIS_REST_URL }}
+      UPSTASH_REDIS_REST_TOKEN: ${{ secrets.UPSTASH_REDIS_REST_TOKEN }}
+      INNGEST_EVENT_KEY: ${{ secrets.INNGEST_EVENT_KEY }}
+      INNGEST_SIGNING_KEY: ${{ secrets.INNGEST_SIGNING_KEY }}
+      COINBASE_COMMERCE_WEBHOOK_SECRET: ${{ secrets.COINBASE_COMMERCE_WEBHOOK_SECRET }}
+      THIRDWEB_ENGINE_ACCESS_TOKEN: ${{ secrets.THIRDWEB_ENGINE_ACCESS_TOKEN }}
+      GOOGLE_PLACES_BACKEND_API_KEY: ${{ secrets.GOOGLE_PLACES_BACKEND_API_KEY }}
+      # environment variables
+      LOCAL_USER_CRYPTO_ADDRESS: ${{vars.LOCAL_USER_CRYPTO_ADDRESS}}
+      NEXT_PUBLIC_ENVIRONMENT: ${{vars.NEXT_PUBLIC_ENVIRONMENT}}
+      NEXT_PUBLIC_GOOGLE_CIVIC_API_KEY: ${{vars.NEXT_PUBLIC_GOOGLE_CIVIC_API_KEY}}
+      NEXT_PUBLIC_GOOGLE_PLACES_API_KEY: ${{vars.NEXT_PUBLIC_GOOGLE_PLACES_API_KEY}}
+      NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN: ${{vars.NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN}}
+      NEXT_PUBLIC_SENTRY_DSN: ${{vars.NEXT_PUBLIC_SENTRY_DSN}}
+      NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN: ${{vars.NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN}}
+      NEXT_PUBLIC_THIRDWEB_CLIENT_ID: ${{vars.NEXT_PUBLIC_THIRDWEB_CLIENT_ID}}
+      MINIMIZE_PAGE_PRE_GENERATION: ${{vars.MINIMIZE_PAGE_PRE_GENERATION}}
+      THIRDWEB_ENGINE_URL: ${{vars.THIRDWEB_ENGINE_URL}}
+      SWC_DOT_ETH_WALLET: ${{vars.SWC_DOT_ETH_WALLET}}
+      LEGACY_NFT_DEPLOYER_WALLET: ${{vars.LEGACY_NFT_DEPLOYER_WALLET}}
+      I_AM_A_VOTER_NFT_CONTRACT_ADDRESS: ${{ vars.I_AM_A_VOTER_NFT_CONTRACT_ADDRESS }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Cache node modules
+        uses: actions/cache@v3
+        id: cache
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm install
+
+      - name: Generate Prisma client
+        run: npx prisma generate
+
+      - name: Extract intl messages
+        run: npm run intl:extract-compile
+
+      - name: Run codegen
+        run: npm run codegen
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Test
+        run: NODE_ENV=test npm run test
+
+      - name: Typecheck
+        run: npm run typecheck

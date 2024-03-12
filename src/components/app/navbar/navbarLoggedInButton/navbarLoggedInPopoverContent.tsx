@@ -3,7 +3,6 @@
 import React from 'react'
 import { useCopyToClipboard } from 'react-use'
 import * as Sentry from '@sentry/nextjs'
-import { useENS } from '@thirdweb-dev/react'
 import { Copy } from 'lucide-react'
 import { toast } from 'sonner'
 
@@ -14,8 +13,8 @@ import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
-import { useThirdwebData } from '@/hooks/useThirdwebData'
-import { appendENSHookDataToUser } from '@/utils/web/appendENSHookDataToUser'
+import { useSessionControl } from '@/hooks/useSession'
+import { useUserWithMaybeENSData } from '@/hooks/useUserWithMaybeEnsData'
 import { maybeEllipsisText } from '@/utils/web/maybeEllipsisText'
 import {
   getFullSensitiveDataUserDisplayName,
@@ -24,23 +23,22 @@ import {
 
 interface NavbarLoggedInSessionPopoverContentProps {
   onClose: () => void
-  user?: GetUserFullProfileInfoResponse['user']
 }
 
 export function NavbarLoggedInPopoverContent({
   onClose,
-  user,
 }: NavbarLoggedInSessionPopoverContentProps) {
   const urls = useIntlUrls()
-  const { logoutAndDisconnect } = useThirdwebData()
-  const ensData = useENS()
+  const { logout } = useSessionControl()
+
+  const userWithMaybeEnsData = useUserWithMaybeENSData()
 
   return (
     <div className="space-y-2 text-left">
       <div className="flex flex-col gap-6 p-4">
         <div className="flex items-center gap-4">
-          {user && !ensData.isLoading ? (
-            <UserHeading user={appendENSHookDataToUser(user, ensData.data)} />
+          {userWithMaybeEnsData ? (
+            <UserHeading user={userWithMaybeEnsData} />
           ) : (
             <UserHeadingSkeleton />
           )}
@@ -60,8 +58,8 @@ export function NavbarLoggedInPopoverContent({
 
       <button
         className="block w-full border-t p-4 text-left text-sm font-medium hover:bg-secondary"
-        onClick={() => {
-          logoutAndDisconnect()
+        onClick={async () => {
+          await logout()
           onClose()
         }}
       >

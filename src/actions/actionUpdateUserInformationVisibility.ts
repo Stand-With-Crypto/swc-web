@@ -4,10 +4,11 @@ import 'server-only'
 import { z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
+import { appRouterGetAuthUser } from '@/utils/server/authentication/appRouterGetAuthUser'
 import { prismaClient } from '@/utils/server/prismaClient'
+import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
-import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
 import { zodUpdateUserInformationVisibility } from '@/validation/forms/zodUpdateUserInformationVisibility'
 
@@ -29,15 +30,18 @@ async function _actionUpdateUserInformationVisibility(
       errors: validatedFields.error.flatten().fieldErrors,
     }
   }
+
+  await throwIfRateLimited({ context: 'authenticated' })
   const { informationVisibility } = validatedFields.data
   const user = await prismaClient.user.findFirstOrThrow({
     where: {
       id: authUser.userId,
     },
   })
-  const localUser = parseLocalUserFromCookies()
-  const peopleAnalytics = getServerPeopleAnalytics({ userId: authUser.userId, localUser })
-  peopleAnalytics.set({
+  await getServerPeopleAnalytics({
+    userId: authUser.userId,
+    localUser: parseLocalUserFromCookies(),
+  }).set({
     'Information Visibility': informationVisibility,
   })
 

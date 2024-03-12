@@ -26,6 +26,10 @@ import { prismaClient } from '@/utils/server/prismaClient'
 import { batchAsyncAndLog } from '@/utils/shared/batchAsyncAndLog'
 import { getLogger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
+import {
+  ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
+  USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
+} from '@/utils/shared/userActionCampaigns'
 
 const LOCAL_USER_CRYPTO_ADDRESS = parseThirdwebAddress(
   requiredEnv(process.env.LOCAL_USER_CRYPTO_ADDRESS, 'process.env.LOCAL_USER_CRYPTO_ADDRESS'),
@@ -204,7 +208,7 @@ async function seed() {
     topDonorCryptoAddressStrings.includes(x.cryptoAddress),
   )!
   logEntity({ userCryptoAddress })
-  batchAsyncAndLog(userCryptoAddress, addresses =>
+  void batchAsyncAndLog(userCryptoAddress, addresses =>
     Promise.all(
       addresses.map(x =>
         prismaClient.user.update({
@@ -244,7 +248,7 @@ async function seed() {
   /*
   userAction
   */
-  const userActionTypes = Object.values(UserActionType)
+  const userActionTypes = ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN
   const userActionTypesToPersist = times(seedSizes([400, 4000, 40000])).map(index => {
     return userActionTypes[index % userActionTypes.length]
   })
@@ -311,6 +315,7 @@ async function seed() {
             ? usedNftMints.splice(faker.number.int({ min: 0, max: usedNftMints.length - 1 }), 1)[0]
                 .id
             : null,
+        campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[actionType],
       }
     }),
     data =>
@@ -443,4 +448,4 @@ async function seed() {
   logEntity({ userActionVoterRegistration })
 }
 
-runBin(seed)
+void runBin(seed)

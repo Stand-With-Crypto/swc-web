@@ -1,14 +1,14 @@
 'use client'
 import React from 'react'
-import { UserActionType } from '@prisma/client'
 import { ChevronRight } from 'lucide-react'
 
 import { NextImage } from '@/components/ui/image'
 import { Skeleton } from '@/components/ui/skeleton'
+import { ActiveClientUserActionType } from '@/utils/shared/activeUserAction'
 import { cn } from '@/utils/web/cn'
 
 export interface UserActionRowCTAProps {
-  actionType: UserActionType
+  actionType: ActiveClientUserActionType
   state: 'unknown' | 'complete' | 'incomplete' | 'hidden'
   image: string
   text: string
@@ -57,7 +57,7 @@ export const UserActionRowCTAButton = React.forwardRef<
       <button
         {...props}
         className={cn(
-          'flex w-full items-center justify-between gap-4 rounded-3xl bg-gray-100 p-4 text-left transition hover:drop-shadow-lg lg:p-8',
+          'flex w-full items-center justify-between gap-4 rounded-3xl bg-secondary p-4 text-left transition hover:drop-shadow-lg lg:p-8',
           className,
         )}
         data-test-id={`user-action-cta-${actionType}`}
@@ -66,8 +66,15 @@ export const UserActionRowCTAButton = React.forwardRef<
       >
         <div className="flex items-center gap-4">
           {state !== 'hidden' && <div className="flex-shrink-0">{getStateUI()}</div>}
-          <div className="hidden md:block">
-            <NextImage alt={text} height={100} src={image} width={100} />
+          <div className="hidden flex-shrink-0 md:block">
+            <NextImage
+              alt={text}
+              className="rounded-xl"
+              height={100}
+              src={image}
+              style={{ height: 100, width: 100 }}
+              width={100}
+            />
           </div>
           <div>
             <div className="mb-1 text-base font-bold lg:text-2xl">{text}</div>

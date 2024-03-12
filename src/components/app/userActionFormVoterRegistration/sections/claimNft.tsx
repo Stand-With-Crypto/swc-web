@@ -51,9 +51,10 @@ export function ClaimNft({ goToSection, stateCode }: ClaimNftProps) {
           'User Action Type': UserActionType.VOTER_REGISTRATION,
           State: data.usaState,
         },
+        payload: data,
       },
-      () =>
-        actionCreateUserActionVoterRegistration(data).then(actionResult => {
+      payload =>
+        actionCreateUserActionVoterRegistration(payload).then(actionResult => {
           if (actionResult.user) {
             identifyUserOnClient(actionResult.user)
           }
@@ -81,10 +82,8 @@ export function ClaimNft({ goToSection, stateCode }: ClaimNftProps) {
           />
           <p className="text-fontcolor-muted">
             The “I'm a Voter” NFT was created by{' '}
-            <ExternalLink className="text-fontcolor underline" href="https://pplplsr.com/About">
-              pplpleasr
-            </ExternalLink>
-            , in partnership with Stand with Crytpo, to highlight the power of the crypto community
+            <ExternalLink href="https://pplplsr.com/About">pplpleasr</ExternalLink>
+            , in partnership with Stand With Crypto, to highlight the power of the crypto community
             to mobilize and vote in the 2024 elections.
             <br /> <br /> Limited to one mint per person.
           </p>

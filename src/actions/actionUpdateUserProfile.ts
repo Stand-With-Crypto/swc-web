@@ -16,15 +16,16 @@ import { getClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
 import { getENSDataFromCryptoAddressAndFailGracefully } from '@/data/web3/getENSDataFromCryptoAddress'
 import { CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/upsertAdvocateInCapitolCanary'
 import { inngest } from '@/inngest/inngest'
+import { appRouterGetAuthUser } from '@/utils/server/authentication/appRouterGetAuthUser'
 import {
   CapitolCanaryCampaignName,
   getCapitolCanaryCampaignID,
 } from '@/utils/server/capitolCanary/campaigns'
 import { UpsertAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { prismaClient } from '@/utils/server/prismaClient'
+import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
-import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { userFullName } from '@/utils/shared/userFullName'
@@ -46,6 +47,9 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
       errors: validatedFields.error.flatten().fieldErrors,
     }
   }
+
+  await throwIfRateLimited({ context: 'authenticated' })
+
   const user = await prismaClient.user.findFirstOrThrow({
     where: {
       id: authUser.userId,
@@ -93,9 +97,10 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
           },
         })
       : existingUserEmailAddress
-  const localUser = parseLocalUserFromCookies()
-  const peopleAnalytics = getServerPeopleAnalytics({ userId: authUser.userId, localUser })
-  peopleAnalytics.set({
+  await getServerPeopleAnalytics({
+    userId: authUser.userId,
+    localUser: parseLocalUserFromCookies(),
+  }).set({
     ...(address ? convertAddressToAnalyticsProperties(address) : {}),
     // https://docs.mixpanel.com/docs/data-structure/user-profiles#reserved-user-properties
     $email: emailAddress,
@@ -135,9 +140,11 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
     user: {
       ...getClientUserWithENSData(
         updatedUser,
-        await getENSDataFromCryptoAddressAndFailGracefully(
-          updatedUser.primaryUserCryptoAddress!.cryptoAddress,
-        ),
+        updatedUser.primaryUserCryptoAddress
+          ? await getENSDataFromCryptoAddressAndFailGracefully(
+              updatedUser.primaryUserCryptoAddress.cryptoAddress,
+            )
+          : null,
       ),
       address: updatedUser.address && getClientAddress(updatedUser.address),
     },

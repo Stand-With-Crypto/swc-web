@@ -1,5 +1,6 @@
 import * as Sentry from '@sentry/nextjs'
 
+import { convertToOnlyEnglishCharacters } from '@/utils/shared/convertToOnlyEnglishCharacters'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { logger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
@@ -153,7 +154,7 @@ export function getGoogleCivicOfficialByDTSIName(
   dtsiPersonName: { firstName: string; lastName: string; firstNickname: string },
   googleCivicInfoResponse: GoogleCivicInfoResponse,
 ) {
-  const normalizeName = (name: string) => name.toLowerCase().trim()
+  const normalizeName = (name: string) => convertToOnlyEnglishCharacters(name.toLowerCase().trim())
   const normalizedDTSIFirstNickname = normalizeName(dtsiPersonName.firstNickname)
   const normalizedDTSIFirstName = normalizeName(dtsiPersonName.firstName)
   const normalizedDTSILastName = normalizeName(dtsiPersonName.lastName)

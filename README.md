@@ -1,18 +1,22 @@
 # Stand With Crypto
 
+**NOTE**: the team is [actively working towards](https://github.com/Stand-With-Crypto/swc-web/milestone/3) getting the repo in a state where anyone can run the app locally without requiring specific permissions.
+
 ## Local Development
 
 ### Knowledge pre-requisites
 
 - Read `docs/Leveraging Modern NextJS Features.md` for an overview on the new Next.js features and React Server Components + Server Actions being leveraged in this repo
-  - If you this is your first time working with these technologies, please take the time to read the linked-to blog posts
+  - If this is your first time working with these technologies, please take the time to read the linked-to blog posts
 - Read `docs/Coding Conventions.md` for an overview of coding conventions encouraged for this project
 
 ### Development pre-requisites
 
 - Install [Node](https://nodejs.org/en) v20.10.0 ([nvm](https://github.com/nvm-sh/nvm) is recommended for installing Node)
+- Install [Docker Desktop + CLI](https://www.docker.com/products/docker-desktop/)
+- Install MySQL (on Mac you can install [Homebrew](https://brew.sh/) and run `brew install mysql`)
 - Clone this repository to your local machine (forking is disabled)
-  - If you using SSH to clone, but you do not have a public SSH key for your GitHub account (which will prevent cloning), follow the [GitHub SSH guide](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) to set up SSH authentication and signing
+  - If you are using SSH to clone, but you do not have a public SSH key for your GitHub account (which will prevent cloning), follow the [GitHub SSH guide](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) to set up SSH authentication and signing
 - `cd` into your local swc-web repository
 - Run `npm install`
 - Run `cp .env.example .env`
@@ -51,6 +55,22 @@ Whenever you make Prisma schema changes (or pulling commits from `main` that inc
   - `npx prisma db push` - if your changes are _not_ breaking and you want to maintain the values in your database, then run this command; this will simply push the schema changes to the database instance you are connected to
   - `npm run db:seed` - if you do have breaking changes, or if you just want to reset your database values, then run this command; this command force-pushes the schema updates to the database instance you are connected to, wiping all existing information and freshly populating the database with seed data
 
+### Running One Time Scripts
+
+#### Locally
+
+When you need to run a one time script on your local machine, you can run it manually with the command:
+` npm run ts path/to/your/script.ts -- --flags`
+
+#### On Testing or Production Environment
+
+On a testing or production environment, it is recommended to run the script through Inngest admin dashboard:
+
+- Select the function you want to run
+- Click the invoke button in the right corner
+- Update the data fields to pass any data needed by the script
+- Click "Invoke Function"
+
 ## Contributing to this project
 
 ### Pre-commit audits & testing
@@ -68,7 +88,13 @@ Whenever you make Prisma schema changes (or pulling commits from `main` that inc
     - With the UI, you can run individual E2E tests under "Specs" and visually follow the flows
   - `npm run e2e:run-headless` - runs all our E2E tests consecutively via Cypress CLI
     - Currently, this command only executes when new comments are made to main branch because of database dependencies - this may change in the future
+  - NOTE: the E2E testing suite connects to a local MySQL database, _not_ your PlanetScale database - it will live on `localhost:3306`
+    - Use tools like [DataGrip](https://www.jetbrains.com/datagrip/) or [DBeaver](https://dbeaver.io/) to analyze local MySQL data if necessary
   - Refer to `docs/Coding Conventions.md/Testing` for more information
+
+### Deployment
+
+- Navigate to main branch and run `./bin/deploy_web_production.sh`
 
 ### Contribution guide
 
@@ -82,3 +108,7 @@ Before proceeding with anything, **PLEASE** take time to review the [Knowledge p
 - Watch [this YouTube video](https://www.youtube.com/watch?v=CQuTF-bkOgc) for a great overview of the tradeoffs between the UI library/framework options that exist for frontend development, and why we decided to use TailwindCSS + Radix UI as our template
 - Read Vercel's guide on ["Connection Pooling with Serverless Functions"](https://vercel.com/guides/connection-pooling-with-serverless-functions#modern-databases-with-high-connection-limits) to learn about the architecture tradeoffs of connecting to SQL database in serverless environments, and why we decided to leverage the robust scalability architecture inherent in [PlanetScale](https://planetscale.com/features)
 - Read the [Inngest docs](https://www.inngest.com/docs/quick-start) to learn more about how to leverage the tool to build resilient workflows
+
+## Licenses
+
+Software source code, documentation source, and configuration files are licensed under Apache 2.0. Non-code documentation is licensed under CC-BY-4.0.

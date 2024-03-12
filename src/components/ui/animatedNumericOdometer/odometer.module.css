@@ -12,11 +12,7 @@
 
 .odometer,
 .odometer span {
-  /* TODO: Replace by theme colors once we have tailwind theme configured properly */
-  background: linear-gradient(180deg, #2560f6 0%, #89b4fc 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  @apply font-sans;
 }
 
 .odometer > span {

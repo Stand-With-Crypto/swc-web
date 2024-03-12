@@ -51,7 +51,7 @@ export function UserActionFormNFTMintIntro({
                   }
                   loadingFallback={<FooterSkeleton />}
                 >
-                  <Button size="lg">Log In</Button>
+                  <Button size="lg">Sign In</Button>
                 </LoginDialogWrapper>
                 <MaybeAuthenticatedContent authenticatedContent={null}>
                   <p className="text-xs text-muted-foreground md:text-sm">
@@ -102,7 +102,7 @@ function ContractMetadataDisplay({
             <PageSubTitle className="text-start">
               <strong className="text-primary">{ETH_NFT_DONATION_AMOUNT_DISPLAY}</strong>
               <br />
-              on Base Network
+              on Base
             </PageSubTitle>
           </div>
         </div>
@@ -132,7 +132,7 @@ export function ContractMetadataDisplaySkeleton() {
               <PageSubTitle className="text-start">
                 <strong className="text-primary">{ETH_NFT_DONATION_AMOUNT_DISPLAY}</strong>
                 <br />
-                on Base Network
+                on Base
               </PageSubTitle>
             </Skeleton>
           </div>

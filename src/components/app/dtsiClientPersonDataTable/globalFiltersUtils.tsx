@@ -13,6 +13,7 @@ import {
 import {
   DTSI_PersonPoliticalAffiliationCategory,
   DTSI_PersonRoleCategory,
+  DTSI_PersonRoleStatus,
 } from '@/data/dtsi/generated'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
 
@@ -40,14 +41,14 @@ export function getPartyOptionDisplayName(party: string) {
 }
 export const ROLE_OPTIONS = {
   ALL: 'All',
-  PRESIDENT: DTSI_PersonRoleCategory.PRESIDENT,
   SENATE: DTSI_PersonRoleCategory.SENATE,
   CONGRESS: DTSI_PersonRoleCategory.CONGRESS,
+  ALL_OTHER: 'ALL_OTHER',
 }
 export function getRoleOptionDisplayName(role: string) {
   switch (role) {
-    case ROLE_OPTIONS.PRESIDENT:
-      return 'National Political Figure'
+    case ROLE_OPTIONS.ALL_OTHER:
+      return 'Other Political Figure'
     case ROLE_OPTIONS.SENATE:
       return 'Senator'
     case ROLE_OPTIONS.CONGRESS:
@@ -56,14 +57,22 @@ export function getRoleOptionDisplayName(role: string) {
       return 'All'
   }
 }
-export interface GlobalFilters {
-  role: (typeof ROLE_OPTIONS)[keyof typeof ROLE_OPTIONS]
-  party: (typeof PARTY_OPTIONS)[keyof typeof PARTY_OPTIONS]
-  stance: StanceOnCryptoOptions
-  state: 'All' | keyof typeof US_STATE_CODE_TO_DISPLAY_NAME_MAP
+
+enum GlobalFilterKeys {
+  Role = 'role',
+  Party = 'party',
+  Stance = 'stance',
+  State = 'state',
 }
 
-export const getGlobalFilterDefaults = (): GlobalFilters => ({
+export interface IGlobalFilters {
+  [GlobalFilterKeys.Role]: (typeof ROLE_OPTIONS)[keyof typeof ROLE_OPTIONS]
+  [GlobalFilterKeys.Party]: (typeof PARTY_OPTIONS)[keyof typeof PARTY_OPTIONS]
+  [GlobalFilterKeys.Stance]: StanceOnCryptoOptions
+  [GlobalFilterKeys.State]: 'All' | keyof typeof US_STATE_CODE_TO_DISPLAY_NAME_MAP
+}
+
+export const getGlobalFilterDefaults = (): IGlobalFilters => ({
   role: ROLE_OPTIONS.ALL,
   party: PARTY_OPTIONS.ALL,
   stance: StanceOnCryptoOptions.ALL,
@@ -74,19 +83,25 @@ export function GlobalFilters({
   globalFilter,
   setGlobalFilter,
 }: {
-  globalFilter: GlobalFilters
-  setGlobalFilter: React.Dispatch<React.SetStateAction<GlobalFilters>>
+  globalFilter: IGlobalFilters
+  setGlobalFilter: React.Dispatch<React.SetStateAction<IGlobalFilters>>
 }) {
   const stateOptions = useMemo(() => {
     return ['All', ...Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP).sort()]
   }, [])
+
+  const onChangeGlobalFilter = (patch: Partial<IGlobalFilters>) => {
+    setGlobalFilter(prev => ({
+      ...prev,
+      ...patch,
+    }))
+  }
+
   // Styles get a little funky here so we can responsively support sideways scroll with the proper padding on mobile
   return (
     <div className="flex gap-2 overflow-x-auto pb-3 pl-1 pr-3 pt-3 md:overflow-x-visible md:pb-0 md:pr-0 md:pt-0">
       <Select
-        onValueChange={(stance: StanceOnCryptoOptions) =>
-          setGlobalFilter({ ...globalFilter, stance })
-        }
+        onValueChange={(stance: StanceOnCryptoOptions) => onChangeGlobalFilter({ stance })}
         value={globalFilter.stance}
       >
         <SelectTrigger className="w-[195px] flex-shrink-0" data-testid="stance-filter-trigger">
@@ -102,10 +117,7 @@ export function GlobalFilters({
         </SelectContent>
       </Select>
 
-      <Select
-        onValueChange={role => setGlobalFilter({ ...globalFilter, role })}
-        value={globalFilter.role}
-      >
+      <Select onValueChange={role => onChangeGlobalFilter({ role })} value={globalFilter.role}>
         <SelectTrigger className="w-[130px] flex-shrink-0" data-testid="role-filter-trigger">
           <span className="mr-2 inline-block flex-shrink-0 font-bold">Role</span>
           <SelectValue />
@@ -118,10 +130,7 @@ export function GlobalFilters({
           ))}
         </SelectContent>
       </Select>
-      <Select
-        onValueChange={party => setGlobalFilter({ ...globalFilter, party })}
-        value={globalFilter.party}
-      >
+      <Select onValueChange={party => onChangeGlobalFilter({ party })} value={globalFilter.party}>
         <SelectTrigger className="w-[120px] flex-shrink-0" data-testid="party-filter-trigger">
           <span className="mr-2 inline-block flex-shrink-0 font-bold">Party</span>
           <SelectValue />
@@ -135,9 +144,7 @@ export function GlobalFilters({
         </SelectContent>
       </Select>
       <Select
-        onValueChange={(state: typeof globalFilter.state) =>
-          setGlobalFilter({ ...globalFilter, state })
-        }
+        onValueChange={(state: typeof globalFilter.state) => onChangeGlobalFilter({ state })}
         value={globalFilter.state}
       >
         <SelectTrigger className="w-[110px] flex-shrink-0" data-testid="state-filter-trigger">
@@ -158,15 +165,21 @@ export function GlobalFilters({
 
 export function filterDataViaGlobalFilters<TData extends Person>(
   passedData: TData[],
-  globalFilter: GlobalFilters,
+  globalFilter: IGlobalFilters,
 ) {
-  return passedData.filter(x => {
-    if (globalFilter.stance !== StanceOnCryptoOptions.ALL) {
-      const scoreToUse = x.manuallyOverriddenStanceScore ?? x.computedStanceScore
-      if (globalFilter.stance === StanceOnCryptoOptions.PENDING) {
+  const FILTER_FN_BY_FIELD = {
+    [GlobalFilterKeys.Stance]: (
+      record: TData,
+      filterValue: IGlobalFilters[GlobalFilterKeys.Stance],
+    ) => {
+      if (filterValue === StanceOnCryptoOptions.ALL) {
+        return true
+      }
+      const scoreToUse = record.manuallyOverriddenStanceScore ?? record.computedStanceScore
+      if (filterValue === StanceOnCryptoOptions.PENDING) {
         return isNil(scoreToUse)
       }
-      if (globalFilter.stance === StanceOnCryptoOptions.NEUTRAL) {
+      if (filterValue === StanceOnCryptoOptions.NEUTRAL) {
         return scoreToUse === 50
       }
       const stance =
@@ -175,23 +188,58 @@ export function filterDataViaGlobalFilters<TData extends Person>(
           : scoreToUse > 50
             ? StanceOnCryptoOptions.PRO_CRYPTO
             : StanceOnCryptoOptions.ANTI_CRYPTO
-      if (stance !== globalFilter.stance) {
-        return false
+      return stance === filterValue
+    },
+    [GlobalFilterKeys.Role]: (
+      record: TData,
+      filterValue: IGlobalFilters[GlobalFilterKeys.Role],
+    ) => {
+      if (filterValue === ROLE_OPTIONS.ALL) {
+        return true
       }
-    }
+      if ([ROLE_OPTIONS.SENATE, ROLE_OPTIONS.CONGRESS].includes(filterValue)) {
+        return (
+          filterValue === record.primaryRole?.roleCategory &&
+          record.primaryRole?.status === DTSI_PersonRoleStatus.HELD
+        )
+      }
+      return (
+        !record.primaryRole?.roleCategory ||
+        ![DTSI_PersonRoleCategory.SENATE, DTSI_PersonRoleCategory.CONGRESS].includes(
+          record.primaryRole?.roleCategory,
+        ) ||
+        record.primaryRole?.status !== DTSI_PersonRoleStatus.HELD
+      )
+    },
+    [GlobalFilterKeys.Party]: (
+      record: TData,
+      filterValue: IGlobalFilters[GlobalFilterKeys.Party],
+    ) => {
+      return (
+        filterValue === PARTY_OPTIONS.ALL || filterValue === record.politicalAffiliationCategory
+      )
+    },
+    [GlobalFilterKeys.State]: (
+      record: TData,
+      filterValue: IGlobalFilters[GlobalFilterKeys.State],
+    ) => {
+      return filterValue === 'All' || record.primaryRole?.primaryState === filterValue
+    },
+  }
+
+  return passedData.filter(record => {
     if (
-      globalFilter.role !== ROLE_OPTIONS.ALL &&
-      globalFilter.role !== x.primaryRole?.roleCategory
+      !FILTER_FN_BY_FIELD[GlobalFilterKeys.Stance](record, globalFilter[GlobalFilterKeys.Stance])
     ) {
       return false
     }
-    if (
-      globalFilter.party !== PARTY_OPTIONS.ALL &&
-      globalFilter.party !== x.politicalAffiliationCategory
-    ) {
+    if (!FILTER_FN_BY_FIELD[GlobalFilterKeys.Role](record, globalFilter[GlobalFilterKeys.Role])) {
       return false
     }
-    if (globalFilter.state !== 'All' && globalFilter.state !== x.primaryRole?.primaryState) {
+    if (!FILTER_FN_BY_FIELD[GlobalFilterKeys.Party](record, globalFilter[GlobalFilterKeys.Party])) {
+      return false
+    }
+    if (!FILTER_FN_BY_FIELD[GlobalFilterKeys.State](record, globalFilter[GlobalFilterKeys.State])) {
       return false
     }
     return true

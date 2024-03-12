@@ -4,6 +4,7 @@ import {
   Column,
   ColumnDef,
   ColumnFiltersState,
+  FilterFnOption,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
@@ -12,8 +13,8 @@ import {
   SortingState,
   useReactTable,
 } from '@tanstack/react-table'
+import { debounce } from 'lodash-es'
 import { ArrowDown, ArrowUp, ArrowUpDown, Search } from 'lucide-react'
-import { useRouter } from 'next/navigation'
 
 import { Person } from '@/components/app/dtsiClientPersonDataTable/columns'
 import { DataTablePagination } from '@/components/app/dtsiClientPersonDataTable/dataTablePagination'
@@ -21,9 +22,7 @@ import {
   filterDataViaGlobalFilters,
   getGlobalFilterDefaults,
   GlobalFilters,
-  PARTY_OPTIONS,
-  ROLE_OPTIONS,
-  StanceOnCryptoOptions,
+  IGlobalFilters,
 } from '@/components/app/dtsiClientPersonDataTable/globalFiltersUtils'
 import { Button } from '@/components/ui/button'
 import { InputWithIcons } from '@/components/ui/inputWithIcons'
@@ -36,12 +35,12 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { useIntlUrls } from '@/hooks/useIntlUrls'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
   loadState: 'loaded' | 'static'
+  globalFilterFn?: FilterFnOption<TData>
 }
 
 export const SortableHeader = <TData, TValue>({
@@ -79,16 +78,17 @@ export function DataTable<TData extends Person, TValue>({
   columns,
   data: passedData,
   loadState,
+  globalFilterFn,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
-  const [globalFilter, setGlobalFilter] = React.useState<GlobalFilters>(getGlobalFilterDefaults())
-  const router = useRouter()
-  const urls = useIntlUrls()
+  const [globalFilter, setGlobalFilter] = React.useState<IGlobalFilters>(getGlobalFilterDefaults())
 
-  const data = useMemo(() => {
-    return filterDataViaGlobalFilters<TData>(passedData, globalFilter)
-  }, [globalFilter, passedData])
+  const data = useMemo(
+    () => filterDataViaGlobalFilters(passedData, globalFilter),
+    [globalFilter, passedData],
+  )
+
   const table = useReactTable({
     data,
     columns,
@@ -98,11 +98,23 @@ export function DataTable<TData extends Person, TValue>({
     getSortedRowModel: getSortedRowModel(),
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
+    initialState: {
+      pagination: {
+        pageSize: 100,
+      },
+    },
     state: {
       sorting,
       columnFilters,
     },
+    globalFilterFn,
   })
+
+  const debouncedSetGlobalFilter = useMemo(
+    () => debounce(table.setGlobalFilter, 300),
+    [table.setGlobalFilter],
+  )
+
   return (
     <div className="space-y-6">
       <div className="container ">
@@ -119,32 +131,23 @@ export function DataTable<TData extends Person, TValue>({
               className="rounded-full bg-gray-100 text-gray-600"
               leftIcon={<Search className="h-4 w-4 text-gray-500" />}
               onChange={event => {
-                table.getColumn('fullName')?.setFilterValue(event.target.value)
-                if (
-                  globalFilter.party !== PARTY_OPTIONS.ALL ||
-                  globalFilter.role !== ROLE_OPTIONS.ALL ||
-                  globalFilter.stance !== StanceOnCryptoOptions.ALL ||
-                  globalFilter.state !== 'All'
-                ) {
-                  setGlobalFilter(getGlobalFilterDefaults())
-                }
+                debouncedSetGlobalFilter(event.target.value)
               }}
-              placeholder="Search by name"
-              value={(table.getColumn('fullName')?.getFilterValue() as string) ?? ''}
+              placeholder="Search by name or state"
             />
           </div>
         </div>
       </div>
       <div className="md:container">
-        <div className="md:min-h-[578px] md:rounded-md md:border">
-          <div className="flex flex-col justify-between pl-3 md:flex-row md:p-6">
+        <div className="md:min-h-[578px] md:rounded-md md:border-b md:border-l md:border-r">
+          <div className="sticky top-[72px] z-10 flex flex-col justify-between border-b border-t bg-white p-3 pl-3 md:top-[84px] md:flex-row md:p-6">
             <PageTitle className="text-left" size="sm">
               Politicians
             </PageTitle>
             <GlobalFilters {...{ globalFilter, setGlobalFilter }} />
           </div>
           <Table className="lg:table-fixed">
-            <TableHeader className="bg-gray-100 text-gray-400">
+            <TableHeader className="bg-secondary text-gray-400">
               {table.getHeaderGroups().map(headerGroup => (
                 <TableRow key={headerGroup.id}>
                   {headerGroup.headers.map(header => {
@@ -166,7 +169,6 @@ export function DataTable<TData extends Person, TValue>({
                     className="cursor-pointer"
                     data-state={row.getIsSelected() && 'selected'}
                     key={row.id}
-                    onClick={() => router.push(urls.politicianDetails(row.original.slug))}
                     role="button"
                   >
                     {row.getVisibleCells().map(cell => (

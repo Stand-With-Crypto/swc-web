@@ -1,4 +1,4 @@
-import { UserActionType, UserCryptoAddress } from '@prisma/client'
+import { UserCryptoAddress } from '@prisma/client'
 
 import { ACTION_NFT_SLUG, claimNFT } from '@/utils/server/nft/claimNFT'
 import { prismaClient } from '@/utils/server/prismaClient'
@@ -14,25 +14,31 @@ export async function mintPastActions(
   localUser: ServerLocalUser | null,
 ) {
   logger.info('Triggered')
-  const actionWithNFT = (Object.keys(ACTION_NFT_SLUG) as Array<UserActionType>).filter(
-    key => ACTION_NFT_SLUG[key] !== null,
-  )
 
   const actions = await prismaClient.userAction.findMany({
     where: {
       userId: userId,
-      actionType: { in: actionWithNFT },
       nftMintId: null,
     },
   })
 
+  const analytics = getServerAnalytics({ userId: userId, localUser })
   for (const action of actions) {
+    const nftSlug = ACTION_NFT_SLUG[action.actionType]?.[action.campaignName]
+    if (!nftSlug) {
+      logger.info(
+        `no nft for action type ${action.actionType}, campaignName ${action.campaignName}`,
+      )
+      continue
+    }
     logger.info('mint past actions:' + action.actionType)
-    getServerAnalytics({ userId: userId, localUser }).track('NFT Mint Backfill Triggered', {
+    analytics.track('NFT Mint Backfill Triggered', {
       'User Action Type': action.actionType,
       'User Action Id': action.id,
     })
     await claimNFT(action, userCryptoAddress)
   }
+
+  await analytics.flush()
   return actions
 }

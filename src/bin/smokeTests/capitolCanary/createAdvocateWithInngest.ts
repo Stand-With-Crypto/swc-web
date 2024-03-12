@@ -45,4 +45,4 @@ async function smokeTestCreateAdvocateWithInngest() {
   })
 }
 
-runBin(smokeTestCreateAdvocateWithInngest)
+void runBin(smokeTestCreateAdvocateWithInngest)

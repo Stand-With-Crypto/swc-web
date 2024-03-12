@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { UserActionType } from '@prisma/client'
+import * as Sentry from '@sentry/nextjs'
 
 import {
   actionCreateUserActionMintNFT,
@@ -52,7 +53,7 @@ export function UserActionFormNFTMintTransactionWatch({
   const createAction = async (transaction: TransactionResponse) => {
     const input: CreateActionMintNFTInput = {
       campaignName: UserActionNftMintCampaignName.DEFAULT,
-      transactionHash: transaction.hash,
+      transactionHash: transaction.hash as `0x${string}`,
     }
 
     return await triggerServerActionForForm(
@@ -63,9 +64,10 @@ export function UserActionFormNFTMintTransactionWatch({
           'Campaign Name': input.campaignName,
           'User Action Type': UserActionType.NFT_MINT,
         },
+        payload: input,
       },
-      () =>
-        actionCreateUserActionMintNFT(input).then(actionResult => {
+      payload =>
+        actionCreateUserActionMintNFT(payload).then(actionResult => {
           if (actionResult.user) {
             identifyUserOnClient(actionResult.user)
           }
@@ -80,9 +82,18 @@ export function UserActionFormNFTMintTransactionWatch({
       return
     }
 
-    Promise.all([sendTransactionResponse.wait(), createAction(sendTransactionResponse)]).finally(
-      () => setIsMined(true),
-    )
+    const processTransaction = async () => {
+      try {
+        await sendTransactionResponse.wait()
+        await createAction(sendTransactionResponse)
+      } catch (err) {
+        Sentry.captureException(err, { tags: { domain: 'nftMint/transactionWatch' } })
+      } finally {
+        setIsMined(true)
+      }
+    }
+
+    void processTransaction()
   })
 
   if (!contractMetadata || isLoadingContractMetadata) {

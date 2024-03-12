@@ -20,8 +20,8 @@ export function PageVote({ params }: PageProps) {
         <PageTitle>Voter guide</PageTitle>
         <PageSubTitle>
           With the future of crypto in America uncertain, it's up to us to take action, as the fate
-          of crypto lies in our hands. Explore these resources to make informed decisions at the
-          ballot box and support candidates who advocate for crypto policies.
+          of crypto lies in our hands. Explore these resources to learn what our leaders are saying
+          about crypto and to help you make informed decisions at the ballot box.
         </PageSubTitle>
       </div>
 

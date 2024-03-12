@@ -5,7 +5,7 @@ import {
 } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { cn, twNoop } from '@/utils/web/cn'
 
-const getBgColor = (letterGrade: DTSILetterGrade | null) => {
+export const getBgColor = (letterGrade: DTSILetterGrade | null) => {
   switch (letterGrade) {
     case 'A':
     case 'B':
@@ -18,6 +18,21 @@ const getBgColor = (letterGrade: DTSILetterGrade | null) => {
       return twNoop('bg-red-600')
   }
   return twNoop('bg-gray-600')
+}
+
+export const getBgHexColor = (letterGrade: DTSILetterGrade | null) => {
+  switch (letterGrade) {
+    case 'A':
+    case 'B':
+      return '#00af47'
+
+    case 'C':
+      return '#c4ae00'
+    case 'D':
+    case 'F':
+      return '#e10000'
+  }
+  return '#4b5563'
 }
 
 export const DTSIFormattedLetterGrade: React.FC<

@@ -8,6 +8,7 @@ import {
 } from '@/data/dtsi/generated'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
 import { getUSStateNameFromStateCode } from '@/utils/shared/usStateUtils'
+import { safeStringify } from '@/utils/web/safeStringify'
 
 export const getDTSIFormattedShortPersonRole = (
   role: Pick<
@@ -16,7 +17,10 @@ export const getDTSIFormattedShortPersonRole = (
   >,
 ) => {
   if (role.status !== DTSI_PersonRoleStatus.HELD) {
-    return 'National Political Figure'
+    if (!role.primaryState) {
+      return 'National Political Figure'
+    }
+    return 'Key Political Figure'
   }
   if (role.primaryState && role.primaryCountryCode === 'US') {
     return getUSStateNameFromStateCode(role.primaryState)
@@ -25,7 +29,7 @@ export const getDTSIFormattedShortPersonRole = (
     return role.title
   }
   return gracefullyError({
-    msg: `getDTSIFormattedPersonRole returned no role for ${JSON.stringify(role)}`,
+    msg: `getDTSIFormattedPersonRole returned no role for ${safeStringify(role)}`,
     fallback: role.title,
   })
 }
@@ -52,10 +56,13 @@ export const getFormattedDTSIPersonRoleDateRange = ({
 }
 
 export const getDTSIPersonRoleCategoryDisplayName = (
-  role: Pick<DTSI_PersonRole, 'roleCategory' | 'title' | 'status'>,
+  role: Pick<DTSI_PersonRole, 'roleCategory' | 'title' | 'status' | 'primaryState'>,
 ) => {
   if (role.status !== DTSI_PersonRoleStatus.HELD) {
-    return 'National Political Figure'
+    if (!role.primaryState) {
+      return 'National Political Figure'
+    }
+    return 'Key Political Figure'
   }
   switch (role.roleCategory) {
     case DTSI_PersonRoleCategory.CONGRESS:

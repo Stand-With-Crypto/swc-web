@@ -14,4 +14,4 @@ async function fetchDTSISlugs() {
   await persistJSONToStaticContentFolder('dtsi/testingDtsiSlugs.json', slugs)
 }
 
-runBin(fetchDTSISlugs)
+void runBin(fetchDTSISlugs)

@@ -65,6 +65,7 @@ const contentSecurityPolicy = {
     'https://embedded-wallet.thirdweb.com/',
     'https://www.youtube.com/embed/',
     'https://vercel.live/',
+    'https://www.figma.com/embed',
   ],
   'font-src': ["'self'"],
   'object-src': ['none'],
@@ -222,11 +223,17 @@ const nextConfig = {
         destination: '/politicians',
         permanent: true,
       },
-
       // vanity urls
       {
         source: '/join/:referralId',
         destination: '/action/sign-up?utm_campaign=:referralId&utm_source=swc&utm_medium=referral',
+        permanent: false,
+      },
+      // Live event campaigns
+      {
+        source: '/la',
+        destination:
+          '/action/live-event/2024_03_04_LA?utm_source=coinbase&utm_medium=live-event&utm_campaign=2024-03-04-LA',
         permanent: false,
       },
     ]
@@ -241,7 +248,8 @@ const sentryWebpackPluginOptions = {
   // Suppresses source map uploading logs during build
   silent: true,
   org: 'stand-with-crypto',
-  project: 'javascript-nextjs',
+  project:
+    process.env.NEXT_PUBLIC_ENVIRONMENT === 'production' ? 'prod-swc-web' : 'testing-swc-web',
 }
 /** @type {import('@sentry/nextjs/types/config/types').UserSentryOptions} */
 const userSentryOptions = {

@@ -8,13 +8,41 @@ import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
+import { useThirdwebAuthUser } from '@/hooks/useAuthUser'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
-import { useThirdwebData } from '@/hooks/useThirdwebData'
 import { trackSectionVisible } from '@/utils/web/clientAnalytics'
 import { theme } from '@/utils/web/thirdweb/theme'
 
-export function ThirdwebLoginContent(props: ConnectEmbedProps) {
+export interface ThirdwebLoginContentProps extends ConnectEmbedProps {
+  initialEmailAddress?: string | null
+  title?: React.ReactNode
+  subtitle?: React.ReactNode
+}
+
+const DEFAULT_TITLE = 'Join Stand With Crypto'
+const DEFAULT_SUBTITLE =
+  'Lawmakers and regulators are threatening the crypto industry. You can fight back and ask for sensible rules. Join the Stand With Crypto movement to make your voice heard in Washington D.C.'
+
+export function ThirdwebLoginContent({
+  initialEmailAddress,
+  title = DEFAULT_TITLE,
+  subtitle = DEFAULT_SUBTITLE,
+  ...props
+}: ThirdwebLoginContentProps) {
   const urls = useIntlUrls()
+  const thirdwebEmbeddedAuthContainer = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!initialEmailAddress) {
+      return
+    }
+
+    const input =
+      thirdwebEmbeddedAuthContainer.current?.querySelector<HTMLInputElement>('input[type="email"]')
+    if (input && !input.getAttribute('value')) {
+      input.setAttribute('value', initialEmailAddress)
+    }
+  }, [initialEmailAddress])
 
   return (
     <div>
@@ -29,28 +57,29 @@ export function ThirdwebLoginContent(props: ConnectEmbedProps) {
           />
 
           <div className="space-y-4">
-            <PageTitle size="sm">Join Stand With Crypto</PageTitle>
-            <PageSubTitle size="sm">
-              Lawmakers and regulators are threatening the crypto industry. You can fight back and
-              ask for sensible rules. Join the Stand With Crypto movement to make your voice heard
-              in Washington D.C.
-            </PageSubTitle>
+            <PageTitle size="sm">{title}</PageTitle>
+            <PageSubTitle size="sm">{subtitle}</PageSubTitle>
           </div>
         </div>
 
-        <ThirdwebLoginEmbedded {...props} />
+        <div
+          className="w-full"
+          ref={thirdwebEmbeddedAuthContainer}
+          // if someone enters a super long email, the component will overflow on the "enter confirmation code" screen
+          // this prevents that bug
+          style={{ maxWidth: 'calc(100vw - 56px)' }}
+        >
+          <ThirdwebLoginEmbedded {...props} />
+        </div>
 
         <p className="text-center text-xs text-muted-foreground">
           By signing up, I understand that Stand With Crypto and its vendors may collect and use my
           Personal Information. To learn more, visit the{' '}
-          <InternalLink className="text-blue-600" href={urls.privacyPolicy()} target="_blank">
+          <InternalLink href={urls.privacyPolicy()} target="_blank">
             Stand With Crypto Alliance Privacy Policy
           </InternalLink>{' '}
           and{' '}
-          <ExternalLink
-            className="text-blue-600"
-            href="https://www.quorum.us/static/Privacy-Policy.pdf"
-          >
+          <ExternalLink href="https://www.quorum.us/static/Privacy-Policy.pdf">
             Quorum Privacy Policy
           </ExternalLink>
         </p>
@@ -60,7 +89,7 @@ export function ThirdwebLoginContent(props: ConnectEmbedProps) {
 }
 
 function ThirdwebLoginEmbedded(props: ConnectEmbedProps) {
-  const { session } = useThirdwebData()
+  const session = useThirdwebAuthUser()
   const hasTracked = useRef(false)
   useEffect(() => {
     if (!session.isLoggedIn && !session.isLoading && !hasTracked.current) {

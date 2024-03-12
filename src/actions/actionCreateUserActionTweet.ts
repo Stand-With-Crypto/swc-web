@@ -8,12 +8,11 @@ import {
   UserCryptoAddress,
   UserInformationVisibility,
 } from '@prisma/client'
-import * as Sentry from '@sentry/nextjs'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
 import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
+import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
 import {
   AnalyticsUserActionUserState,
   getServerAnalytics,
@@ -45,6 +44,10 @@ export const actionCreateUserActionTweet = withServerActionMiddleware(
 
 async function _actionCreateUserActionTweet() {
   logger.info('triggered')
+  const { triggerRateLimiterAtMostOnce } = getRequestRateLimiter({
+    context: 'unauthenticated',
+  })
+
   const userMatch = await getMaybeUserAndMethodOfMatch({
     prisma: {
       include: { primaryUserCryptoAddress: true, address: true },
@@ -53,7 +56,10 @@ async function _actionCreateUserActionTweet() {
   logger.info(userMatch.user ? 'found user' : 'no user found')
   const sessionId = getUserSessionId()
   const localUser = parseLocalUserFromCookies()
-  await throwIfRateLimited()
+
+  if (!userMatch.user) {
+    await triggerRateLimiterAtMostOnce()
+  }
   const { user, userState } = await maybeUpsertUser({
     existingUser: userMatch.user,
     sessionId,
@@ -61,6 +67,8 @@ async function _actionCreateUserActionTweet() {
   })
   const analytics = getServerAnalytics({ userId: user.id, localUser })
   const peopleAnalytics = getServerPeopleAnalytics({ userId: user.id, localUser })
+  const beforeFinish = () => Promise.all([analytics.flush(), peopleAnalytics.flush()])
+
   if (localUser) {
     peopleAnalytics.setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
   }
@@ -83,12 +91,11 @@ async function _actionCreateUserActionTweet() {
       creationMethod: 'On Site',
       userState,
     })
-    Sentry.captureMessage(
-      `duplicate ${actionType} user action for campaign ${campaignName} submitted`,
-      { extra: { userAction }, user: { id: user.id } },
-    )
+    await beforeFinish()
     return { user: getClientUser(user) }
   }
+
+  await triggerRateLimiterAtMostOnce()
 
   userAction = await prismaClient.userAction.create({
     data: {
@@ -109,6 +116,7 @@ async function _actionCreateUserActionTweet() {
     userState,
   })
 
+  await beforeFinish()
   logger.info('created action')
   return { user: getClientUser(user) }
 }

@@ -6,6 +6,9 @@ export function formatENSAvatar(avatar: string) {
   if (avatar.startsWith('https://')) {
     return avatar
   }
+  if (avatar.startsWith('http://')) {
+    return null
+  }
   if (avatar.startsWith('ipfs://')) {
     avatar = `https://ipfs.io/ipfs/${avatar.slice(7)}`
     return avatar

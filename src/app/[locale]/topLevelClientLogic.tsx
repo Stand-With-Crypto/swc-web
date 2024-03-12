@@ -12,7 +12,7 @@ import {
 } from '@thirdweb-dev/react'
 import { usePathname, useSearchParams } from 'next/navigation'
 
-import { useAuthUser } from '@/hooks/useAuthUser'
+import { useThirdwebAuthUser } from '@/hooks/useAuthUser'
 import { useDetectWipedDatabaseAndLogOutUser } from '@/hooks/useDetectWipedDatabaseAndLogOutUser'
 import { LocaleContext } from '@/hooks/useLocale'
 import { SupportedLocale } from '@/intl/locales'
@@ -32,7 +32,7 @@ const NEXT_PUBLIC_THIRDWEB_CLIENT_ID = requiredEnv(
 const InitialOrchestration = () => {
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  const authUser = useAuthUser()
+  const authUser = useThirdwebAuthUser()
   useDetectWipedDatabaseAndLogOutUser()
   // Note, in local dev this component will double render. It doesn't do this after it is built (verify in testing)
   useEffect(() => {

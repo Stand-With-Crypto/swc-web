@@ -11,7 +11,6 @@ import {
   UserEmailAddressSource,
   UserInformationVisibility,
 } from '@prisma/client'
-import * as Sentry from '@sentry/nextjs'
 import { z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
@@ -24,7 +23,7 @@ import {
 import { EmailRepViaCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
+import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
 import {
   AnalyticsUserActionUserState,
   getServerAnalytics,
@@ -60,6 +59,10 @@ export const actionCreateUserActionEmailCongressperson = withServerActionMiddlew
 
 async function _actionCreateUserActionEmailCongressperson(input: Input) {
   logger.info('triggered')
+  const { triggerRateLimiterAtMostOnce } = getRequestRateLimiter({
+    context: 'unauthenticated',
+  })
+
   const userMatch = await getMaybeUserAndMethodOfMatch({
     prisma: {
       include: { primaryUserCryptoAddress: true, userEmailAddresses: true, address: true },
@@ -74,16 +77,19 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
     }
   }
   logger.info('validated fields')
-  await throwIfRateLimited()
+
   const localUser = parseLocalUserFromCookies()
   const { user, userState } = await maybeUpsertUser({
     existingUser: userMatch.user,
     input: validatedFields.data,
     sessionId,
     localUser,
+    onUpsertUser: triggerRateLimiterAtMostOnce,
   })
   const analytics = getServerAnalytics({ userId: user.id, localUser })
   const peopleAnalytics = getServerPeopleAnalytics({ userId: user.id, localUser })
+  const beforeFinish = () => Promise.all([analytics.flush(), peopleAnalytics.flush()])
+
   if (localUser) {
     peopleAnalytics.setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
   }
@@ -109,12 +115,11 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
       userState,
       ...convertAddressToAnalyticsProperties(validatedFields.data.address),
     })
-    Sentry.captureMessage(
-      `duplicate ${actionType} user action for campaign ${campaignName} submitted`,
-      { extra: { validatedFields, userAction }, user: { id: user.id } },
-    )
+    await beforeFinish()
     return { user: getClientUser(user) }
   }
+
+  await triggerRateLimiterAtMostOnce()
 
   userAction = await prismaClient.userAction.create({
     data: {
@@ -192,6 +197,7 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
     data: payload,
   })
 
+  await beforeFinish()
   logger.info('updated user')
   return { user: getClientUser(user) }
 }
@@ -201,11 +207,13 @@ async function maybeUpsertUser({
   input,
   sessionId,
   localUser,
+  onUpsertUser,
 }: {
   existingUser: UserWithRelations | null
   input: Input
   sessionId: string
   localUser: ServerLocalUser | null
+  onUpsertUser: () => Promise<void> | void
 }): Promise<{ user: UserWithRelations; userState: AnalyticsUserActionUserState }> {
   const { firstName, lastName, emailAddress, address } = input
 
@@ -239,6 +247,7 @@ async function maybeUpsertUser({
       return { user: existingUser, userState: 'Existing' }
     }
     logger.info(`updating the following user fields ${keysToUpdate.join(', ')}`)
+    await onUpsertUser()
     const user = await prismaClient.user.update({
       where: { id: existingUser.id },
       data: updatePayload,
@@ -260,6 +269,7 @@ async function maybeUpsertUser({
     }
     return { user, userState: 'Existing With Updates' }
   }
+  await onUpsertUser()
   const user = await prismaClient.user.create({
     include: {
       primaryUserCryptoAddress: true,
