@@ -2,6 +2,7 @@ import { UserActionType } from '@prisma/client'
 import { sumBy, uniq } from 'lodash-es'
 import { redirect, RedirectType } from 'next/navigation'
 
+import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { NFTDisplay } from '@/components/app/nftHub/nftDisplay'
 import { PageUserProfileUser } from '@/components/app/pageUserProfile/getAuthenticatedData'
 import { UpdateUserProfileFormDialog } from '@/components/app/updateUserProfileForm/dialog'
@@ -24,10 +25,11 @@ import { UserReferralUrl } from './userReferralUrl'
 
 const EXCLUDE_USER_ACTION_TYPES = [UserActionType.LIVE_EVENT]
 
-export function PageUserProfile({
-  params,
-  user,
-}: PageProps & { user: PageUserProfileUser | null }) {
+interface PageUserProfile extends PageProps {
+  user: PageUserProfileUser | null
+}
+
+export function PageUserProfile({ params, user }: PageUserProfile) {
   const { locale } = params
   if (!user) {
     // For now the only authenticated page we have is /profile,
@@ -80,17 +82,14 @@ export function PageUserProfile({
             </div>
           </div>
           <div>
-            <UpdateUserProfileFormDialog user={user}>
-              {hasCompleteUserProfile(user) ? (
-                <Button variant="secondary">
-                  Edit <span className="mx-1 hidden sm:inline-block">your</span> profile
-                </Button>
-              ) : (
-                <Button>
-                  Finish <span className="mx-1 hidden sm:inline-block">your</span> profile
-                </Button>
-              )}
-            </UpdateUserProfileFormDialog>
+            <LoginDialogWrapper
+              authenticatedContent={<EditProfileButton user={user} />}
+              subtitle="Confirm your email address or connect a wallet to receive your NFT."
+              title="Claim your free NFT"
+              useThirdwebSession
+            >
+              <Button>Claim my NFTs</Button>
+            </LoginDialogWrapper>
           </div>
         </div>
         <div className="grid grid-cols-3 rounded-3xl bg-secondary p-3 text-center sm:p-6">
@@ -170,5 +169,21 @@ export function PageUserProfile({
         <UserReferralUrl referralId={user.referralId} />
       </section>
     </div>
+  )
+}
+
+function EditProfileButton({ user }: { user: PageUserProfileUser }) {
+  return (
+    <UpdateUserProfileFormDialog user={user}>
+      {hasCompleteUserProfile(user) ? (
+        <Button variant="secondary">
+          Edit <span className="mx-1 hidden sm:inline-block">your</span> profile
+        </Button>
+      ) : (
+        <Button>
+          Finish <span className="mx-1 hidden sm:inline-block">your</span> profile
+        </Button>
+      )}
+    </UpdateUserProfileFormDialog>
   )
 }

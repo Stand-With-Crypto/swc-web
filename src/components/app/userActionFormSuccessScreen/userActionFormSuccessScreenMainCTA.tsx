@@ -16,6 +16,7 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
+import { useSession } from '@/hooks/useSession'
 import { TURN_OFF_NFT_MINT } from '@/utils/shared/killSwitches'
 import { hasCompleteUserProfile } from '@/utils/web/hasCompleteUserProfile'
 import { NFTClientMetadata } from '@/utils/web/nft'
@@ -53,26 +54,13 @@ export function UserActionFormSuccessScreenMainCTA({
   }
   onClose: () => void
 }) {
+  const session = useSession()
   const urls = useIntlUrls()
   const [hasOptedInToMembershipState, setHasOptedInToMembershipState] = useState<
     'hidden' | 'visible' | 'submitted'
   >('hidden')
-  const receivedAnNft = nftWhenAuthenticated ? (
-    <>
-      <PageTitle size="sm">Nice work! You earned a new NFT.</PageTitle>
-      {TURN_OFF_NFT_MINT ? (
-        <p className="mt-2 text-sm font-bold">
-          'It will be sent to your connected wallet in the next few days.'
-        </p>
-      ) : (
-        ''
-      )}
-    </>
-  ) : (
-    <PageTitle size="sm">Nice work!</PageTitle>
-  )
 
-  if (!data) {
+  if (!data || session.isLoading) {
     return (
       <Container>
         <PageTitle size="sm">
@@ -89,10 +77,44 @@ export function UserActionFormSuccessScreenMainCTA({
       </Container>
     )
   }
+
+  const receivedAnNft = nftWhenAuthenticated ? (
+    <>
+      <PageTitle size="sm">Nice work! You earned a new NFT.</PageTitle>
+      {TURN_OFF_NFT_MINT && session.isLoggedInThirdweb ? (
+        <p className="mt-2 text-sm font-bold">
+          It will be sent to your connected wallet in the next few days.
+        </p>
+      ) : null}
+    </>
+  ) : (
+    <PageTitle size="sm">Nice work!</PageTitle>
+  )
+
   const { user, performedUserActionTypes } = data
   const hasOptedInToMembership = performedUserActionTypes.find(
     action => action === UserActionType.OPT_IN,
   )
+
+  if (session.isLoggedIn && !session.isLoggedInThirdweb) {
+    return (
+      <Container>
+        {nftWhenAuthenticated && <RedeemedNFTImage nft={nftWhenAuthenticated} />}
+        {receivedAnNft}
+        <PageSubTitle size={'md'}>You’ve earned an NFT for completing this action.</PageSubTitle>
+
+        <LoginDialogWrapper
+          forceUnauthenticated
+          subtitle="Confirm your email address or connect a wallet to receive your NFT."
+          title="Claim your free NFT"
+          useThirdwebSession
+        >
+          <Button>Claim free NFT</Button>
+        </LoginDialogWrapper>
+      </Container>
+    )
+  }
+
   if (!user || !hasOptedInToMembership) {
     if (nftWhenAuthenticated) {
       return (
@@ -122,6 +144,7 @@ export function UserActionFormSuccessScreenMainCTA({
       </Container>
     )
   }
+
   if (!hasCompleteUserProfile(user)) {
     return (
       <Container>

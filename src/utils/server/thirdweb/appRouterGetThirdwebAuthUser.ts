@@ -46,7 +46,7 @@ export interface ServerAuthUser extends ThirdwebAuthUser {
   userId: string
 }
 
-export async function appRouterGetAuthUser(): Promise<ServerAuthUser | null> {
+export async function appRouterGetThirdwebAuthUser(): Promise<ServerAuthUser | null> {
   const token = getToken()
   if (!token) {
     return null
