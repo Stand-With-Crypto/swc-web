@@ -38,8 +38,7 @@ export function ClientCurrentUserDTSIPersonCardOrCTAWithQueryParam({
     decodeURIComponent(addressParam),
   )
 
-  console.log('ready', ready, 'addressSuggestions', addressSuggestions)
-  if (!ready) {
+  if (!ready && addressParam) {
     return <Skeleton className="h-[120px] w-full" />
   }
 
