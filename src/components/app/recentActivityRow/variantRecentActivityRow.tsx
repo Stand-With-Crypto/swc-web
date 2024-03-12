@@ -18,6 +18,7 @@ import { InternalLink } from '@/components/ui/link'
 import { UserActionTweetLink } from '@/components/ui/userActionTweetLink'
 import { DTSIPersonForUserActions } from '@/data/dtsi/queries/queryDTSIPeopleBySlugForUserActions'
 import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
+import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { getDTSIPersonRoleCategoryDisplayName } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
@@ -28,11 +29,16 @@ const MainText = ({ children }: { children: React.ReactNode }) => (
   <div className="text-sm font-semibold text-gray-900 lg:text-xl">{children}</div>
 )
 
-const formatDTSIPerson = (person: DTSIPersonForUserActions) => {
+const DTSIPersonName = ({ person, href }: { person: DTSIPersonForUserActions; href: string }) => {
+  const link = <InternalLink href={href}>{dtsiPersonFullName(person)}</InternalLink>
   if (person.primaryRole) {
-    return `${getDTSIPersonRoleCategoryDisplayName(person.primaryRole)} ${dtsiPersonFullName(person)}`
+    return (
+      <>
+        {getDTSIPersonRoleCategoryDisplayName(person.primaryRole)} {link}
+      </>
+    )
   }
-  return dtsiPersonFullName(person)
+  return link
 }
 
 const getSWCDisplayText = () => (
@@ -45,6 +51,8 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
   action,
   locale,
 }: RecentActivityRowProps) {
+  const urls = useIntlUrls()
+
   const { userLocationDetails } = action.user
   const isStateAvailable = userLocationDetails?.administrativeAreaLevel1
   const { data } = useApiResponseForUserPerformedUserActionTypes()
@@ -84,7 +92,15 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
           ),
           children: (
             <MainText>
-              Call to {action.person ? formatDTSIPerson(action.person) : 'Representative'}
+              Call to{' '}
+              {action.person ? (
+                <DTSIPersonName
+                  href={urls.politicianDetails(action.person.slug)}
+                  person={action.person}
+                />
+              ) : (
+                'Representative'
+              )}
             </MainText>
           ),
         }
@@ -120,7 +136,15 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
             <MainText>
               Email to{' '}
               {dtsiRecipients.length
-                ? dtsiRecipients.map(x => formatDTSIPerson(x.person!)).join(', ')
+                ? dtsiRecipients.map((actionEmailRecipient, idx) => (
+                    <React.Fragment key={actionEmailRecipient.id}>
+                      {idx > 0 && <>, </>}
+                      <DTSIPersonName
+                        href={urls.politicianDetails(actionEmailRecipient.person!.slug)}
+                        person={actionEmailRecipient.person!}
+                      />
+                    </React.Fragment>
+                  ))
                 : 'Representative'}
             </MainText>
           ),
