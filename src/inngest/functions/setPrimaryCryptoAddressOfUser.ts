@@ -1,8 +1,8 @@
 import * as Sentry from '@sentry/nextjs'
 import { FailureEventArgs } from 'inngest'
 
-import { inngest } from '@/inngest/inngest'
 import { setPrimaryCryptoAddressOfUser } from '@/bin/oneTimeScripts/setPrimaryCryptoAddressOfUser'
+import { inngest } from '@/inngest/inngest'
 
 export interface ScriptPayload {
   userId: string

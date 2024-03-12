@@ -1,5 +1,5 @@
-import { getLogger } from '@/utils/shared/logger'
 import { prismaClient } from '@/utils/server/prismaClient'
+import { getLogger } from '@/utils/shared/logger'
 
 const logger = getLogger('setPrimaryCryptoAddressOfUser')
 
@@ -32,7 +32,7 @@ export async function setPrimaryCryptoAddressOfUser(
   const userWithAddress = await prismaClient.user.findFirst({
     where: { primaryUserCryptoAddressId: cryptoAddressId, id: { not: userId } },
   })
-  if (userWithAddress != null) {
+  if (userWithAddress !== null) {
     throw new Error('a user with the same primaryUserCryptoAddressId already exist')
   }
   if (!persist) {
