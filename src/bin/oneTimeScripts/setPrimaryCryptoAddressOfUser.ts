@@ -4,24 +4,15 @@ import { getLogger } from '@/utils/shared/logger'
 const logger = getLogger('setPrimaryCryptoAddressOfUser')
 
 export async function setPrimaryCryptoAddressOfUser(
-  userId: string | undefined,
-  cryptoAddressId: string | undefined,
+  userId: string,
+  cryptoAddressId: string,
   persist: boolean,
 ) {
-  if (userId === undefined) {
-    throw new Error('userId cannot be undefined')
-  }
-  if (cryptoAddressId === undefined) {
-    throw new Error('cryptoAddressId cannot be undefined')
-  }
-
   const user = await prismaClient.user.findFirst({ where: { id: userId } })
-
   if (user === null) {
     throw new Error('No user found')
   }
 
-  logger.info('addressId ' + cryptoAddressId)
   const cryptoAddress = await prismaClient.userCryptoAddress.findFirst({
     where: { id: cryptoAddressId, userId: userId },
   })
