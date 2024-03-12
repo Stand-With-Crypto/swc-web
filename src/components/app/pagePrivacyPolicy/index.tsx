@@ -33,6 +33,12 @@ export function PagePrivacyPolicy() {
 
       <ul>
         <li>
+          We may collect your personal information when you sign up to be a member or subscriber of
+          SWC, donate money to SWC, or otherwise engage with and provide information to SWC. This
+          information may include your name, email address, phone number, physical address, and any
+          other personal information you choose to share with us.
+        </li>
+        <li>
           We may collect your personal information when you or your organization requests to be a
           SWC Open Source Partner. This information may include your name, email address, title,
           information about your organization (including website and social media handles), and any
