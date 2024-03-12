@@ -38,6 +38,7 @@ export function ClientCurrentUserDTSIPersonCardOrCTAWithQueryParam({
     decodeURIComponent(addressParam),
   )
 
+  console.log('ready', ready, 'addressSuggestions', addressSuggestions)
   if (!ready) {
     return <Skeleton className="h-[120px] w-full" />
   }
@@ -123,7 +124,7 @@ export function ClientCurrentUserDTSIPersonCardOrCTA({
   }, [formattedInitialAddress, userAddress])
 
   useEffect(() => {
-    if (!addressRef.current && formattedInitialAddress) {
+    if (formattedInitialAddress) {
       _setAddress({
         place_id: formattedInitialAddress.place_id,
         description: formattedInitialAddress.description,
