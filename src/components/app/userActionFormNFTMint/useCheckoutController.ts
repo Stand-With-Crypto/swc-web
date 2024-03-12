@@ -25,7 +25,7 @@ export function useCheckoutController({
   mintUnitFee = ETH_NFT_DONATION_AMOUNT,
 } = {}): UseCheckoutControllerReturn {
   const [quantity, setQuantity] = React.useState(1)
-  const { data: gasUnitFee } = useGasFee(quantity)
+  const { data: gasFee } = useGasFee(quantity)
 
   const values = React.useMemo<
     Pick<
@@ -33,12 +33,11 @@ export function useCheckoutController({
       'mintFeeDisplay' | 'gasFeeDisplay' | 'totalFeeDisplay' | 'totalFee'
     >
   >(() => {
-    if (!gasUnitFee) {
+    if (!gasFee) {
       return {}
     }
 
     const mintFee = mintUnitFee.mul(quantity)
-    const gasFee = gasUnitFee.mul(quantity)
     const totalFee = mintFee.add(gasFee)
 
     return {
@@ -47,7 +46,7 @@ export function useCheckoutController({
       totalFeeDisplay: fromBigNumber(totalFee),
       totalFee,
     }
-  }, [gasUnitFee, mintUnitFee, quantity])
+  }, [gasFee, mintUnitFee, quantity])
 
   return {
     ...values,
