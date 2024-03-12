@@ -1,11 +1,13 @@
 import React from 'react'
-import { useContract, useSDK } from '@thirdweb-dev/react'
-import { ThirdwebSDK } from '@thirdweb-dev/sdk'
+import { useContract } from '@thirdweb-dev/react'
 import { BigNumber } from 'ethers'
 import useSWR from 'swr'
 
-import { ETH_NFT_DONATION_AMOUNT } from '@/components/app/userActionFormNFTMint/constants'
-import { fromBigNumber, toBigNumber } from '@/utils/shared/bigNumber'
+import {
+  ETH_NFT_DONATION_AMOUNT,
+  MINT_NFT_CONTRACT_ADDRESS,
+} from '@/components/app/userActionFormNFTMint/constants'
+import { fromBigNumber } from '@/utils/shared/bigNumber'
 
 const CLAIM_GAS_LIMIT_OE721_CONTRACT = 231086
 export interface UseCheckoutControllerReturn {
