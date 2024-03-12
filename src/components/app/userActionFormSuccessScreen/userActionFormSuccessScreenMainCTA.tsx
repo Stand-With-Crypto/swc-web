@@ -96,10 +96,10 @@ export function UserActionFormSuccessScreenMainCTA({
     action => action === UserActionType.OPT_IN,
   )
 
-  if (session.isLoggedIn && !session.isLoggedInThirdweb) {
+  if (nftWhenAuthenticated && session.isLoggedIn && !session.isLoggedInThirdweb) {
     return (
       <Container>
-        {nftWhenAuthenticated && <RedeemedNFTImage nft={nftWhenAuthenticated} />}
+        <RedeemedNFTImage nft={nftWhenAuthenticated} />
         {receivedAnNft}
         <PageSubTitle size={'md'}>You’ve earned an NFT for completing this action.</PageSubTitle>
 
