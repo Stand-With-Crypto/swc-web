@@ -1,4 +1,5 @@
 'use client'
+
 import React, { useMemo } from 'react'
 import {
   Column,
@@ -15,6 +16,7 @@ import {
 } from '@tanstack/react-table'
 import { debounce } from 'lodash-es'
 import { ArrowDown, ArrowUp, ArrowUpDown, Search } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 
 import { Person } from '@/components/app/dtsiClientPersonDataTable/columns'
 import { DataTablePagination } from '@/components/app/dtsiClientPersonDataTable/dataTablePagination'
@@ -35,12 +37,15 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { SupportedLocale } from '@/intl/locales'
+import { getIntlUrls } from '@/utils/shared/urls'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
   loadState: 'loaded' | 'static'
   globalFilterFn?: FilterFnOption<TData>
+  locale: SupportedLocale
 }
 
 export const SortableHeader = <TData, TValue>({
@@ -79,10 +84,12 @@ export function DataTable<TData extends Person, TValue>({
   data: passedData,
   loadState,
   globalFilterFn,
+  locale,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
   const [globalFilter, setGlobalFilter] = React.useState<IGlobalFilters>(getGlobalFilterDefaults())
+  const router = useRouter()
 
   const data = useMemo(
     () => filterDataViaGlobalFilters(passedData, globalFilter),
@@ -169,6 +176,9 @@ export function DataTable<TData extends Person, TValue>({
                     className="cursor-pointer"
                     data-state={row.getIsSelected() && 'selected'}
                     key={row.id}
+                    onClick={() => {
+                      router.push(getIntlUrls(locale).politicianDetails(row.original.slug))
+                    }}
                     role="button"
                   >
                     {row.getVisibleCells().map(cell => (

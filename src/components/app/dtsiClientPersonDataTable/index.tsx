@@ -66,6 +66,7 @@ export function DTSIClientPersonDataTable({
       }}
       key={data?.people ? 'loaded' : 'static'}
       loadState={data?.people ? 'loaded' : 'static'}
+      locale={locale}
     />
   )
 }
