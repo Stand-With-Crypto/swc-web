@@ -45,7 +45,7 @@ export function ClientCurrentUserDTSIPersonCardOrCTAWithQueryParam({
   return (
     <ClientCurrentUserDTSIPersonCardOrCTA
       initialAddress={
-        addressSuggestions
+        addressSuggestions.length
           ? {
               description: addressSuggestions[0]?.description,
               place_id: addressSuggestions[0]?.place_id,
