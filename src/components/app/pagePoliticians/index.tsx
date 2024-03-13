@@ -1,6 +1,9 @@
 import { Suspense } from 'react'
 
-import { ClientCurrentUserDTSIPersonCardOrCTAWithQueryParam } from '@/components/app/clientCurrentUserDTSIPersonCardOrCTA'
+import {
+  ClientCurrentUserDTSIPersonCardOrCTA,
+  ClientCurrentUserDTSIPersonCardOrCTAWithQueryParam,
+} from '@/components/app/clientCurrentUserDTSIPersonCardOrCTA'
 import { DTSIClientPersonDataTable } from '@/components/app/dtsiClientPersonDataTable'
 import { DTSIPersonDataTablePeople } from '@/components/app/dtsiClientPersonDataTable/sortPeople'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
@@ -22,7 +25,7 @@ export function PagePoliticians({
       <section className="container mb-16 space-y-7 text-center">
         <PageTitle>{PAGE_POLITICIANS_TITLE}</PageTitle>
         <PageSubTitle>{PAGE_POLITICIANS_DESCRIPTION}</PageSubTitle>
-        <Suspense>
+        <Suspense fallback={<ClientCurrentUserDTSIPersonCardOrCTA locale={locale} />}>
           <ClientCurrentUserDTSIPersonCardOrCTAWithQueryParam locale={locale} />
         </Suspense>
       </section>
