@@ -82,6 +82,7 @@ export const externalUrls = {
   swcOnChainSummer: () => 'https://onchainsummer.xyz/standwithcrypto',
   swcReferralUrl: ({ referralId }: { referralId: string }) =>
     `https://www.standwithcrypto.org/join/${referralId}`,
+  swcQuestionnaire: () => 'https://standwithcrypto.typeform.com/questionnaire',
 }
 
 export const apiUrls = {
