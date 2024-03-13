@@ -7,6 +7,7 @@ import { monitorBaseETHBalances } from '@/inngest/functions/monitorBaseETHBalanc
 import { setPrimaryCryptoAddressOfUserWithInngest } from '@/inngest/functions/setPrimaryCryptoAddressOfUser'
 import { upsertAdvocateInCapitolCanaryWithInngest } from '@/inngest/functions/upsertAdvocateInCapitolCanary'
 import { inngest } from '@/inngest/inngest'
+import { backfillNFTWithInngest } from '@/inngest/functions/backfillNT'
 
 export const { GET, POST, PUT } = serve({
   client: inngest,
@@ -17,5 +18,6 @@ export const { GET, POST, PUT } = serve({
     cleanupPostalCodesWithInngest,
     monitorBaseETHBalances,
     setPrimaryCryptoAddressOfUserWithInngest,
+    backfillNFTWithInngest,
   ],
 })

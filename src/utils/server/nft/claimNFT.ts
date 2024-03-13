@@ -54,12 +54,17 @@ export const ACTION_NFT_SLUG: Record<
 
 const logger = getLogger('claimNft')
 
-export async function claimNFT(userAction: UserAction, userCryptoAddress: UserCryptoAddress) {
-  if (TURN_OFF_NFT_MINT) {
+export async function claimNFT(
+  userAction: UserAction,
+  userCryptoAddress: UserCryptoAddress,
+  ignoreTurnOffNFTMintFlag: boolean = false,
+) {
+  if (TURN_OFF_NFT_MINT && !ignoreTurnOffNFTMintFlag) {
     logger.info('TURN_OFF_NFT_MINT is on, preventing mint for now')
     return null
   }
   logger.info('Triggered')
+
   const { actionType, campaignName } = userAction
   const activeClientUserActionTypeWithCampaign = ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN.find(
     key => key === userAction.actionType,
