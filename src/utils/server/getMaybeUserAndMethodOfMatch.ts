@@ -16,7 +16,7 @@ type PrismaBase = Omit<Prisma.UserFindFirstArgs, 'where'>
 type BaseUserAndMethodOfMatch<S extends string | undefined, I extends PrismaBase = PrismaBase> =
   | {
       user: GetFindResult<Prisma.$UserPayload, I>
-      userCryptoAddress: UserCryptoAddress
+      userCryptoAddress: UserCryptoAddress | null
     }
   | {
       user: GetFindResult<Prisma.$UserPayload, I> | null
@@ -102,10 +102,10 @@ async function baseGetMaybeUserAndMethodOfMatch<
     }
     const authedCryptoAddress = userWithoutReturnTypes!.userCryptoAddresses.find(
       x => x.cryptoAddress === authUser.address,
-    )!
+    )
     return {
       user,
-      userCryptoAddress: authedCryptoAddress,
+      userCryptoAddress: authedCryptoAddress ?? null,
     }
   }
   return {

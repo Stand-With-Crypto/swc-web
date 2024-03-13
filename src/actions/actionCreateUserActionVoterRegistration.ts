@@ -195,7 +195,7 @@ async function createAction<U extends User>({
       user: { connect: { id: user.id } },
       actionType: UserActionType.VOTER_REGISTRATION,
       campaignName: validatedInput.campaignName,
-      ...('userCryptoAddress' in userMatch
+      ...('userCryptoAddress' in userMatch && userMatch.userCryptoAddress
         ? {
             userCryptoAddress: { connect: { id: userMatch.userCryptoAddress.id } },
           }
