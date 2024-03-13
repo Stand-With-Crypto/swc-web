@@ -89,8 +89,7 @@ export function UserActionFormNFTMintCheckout({
     mintStatus === 'loading' ||
     !contract ||
     connectionStatus === 'connecting' ||
-    connectionStatus === 'unknown' ||
-    gasFeeDisplay === undefined
+    connectionStatus === 'unknown'
   return (
     <UserActionFormLayout onBack={() => goToSection(UserActionFormNFTMintSectionNames.INTRO)}>
       {isLoading && <LoadingOverlay />}
@@ -124,35 +123,51 @@ export function UserActionFormNFTMintCheckout({
           </div>
         </Card>
 
-        <Card className="w-full">
-          <div className="space-y-8">
-            <div className="flex items-center justify-between gap-2 text-sm md:text-base">
-              <div className="max-w-96">
-                <p>Donation</p>
-                <p className="text-xs text-muted-foreground">
-                  <Balancer>
-                    {mintFeeDisplay}
-                    {SupportedCryptoCurrencyCodes.ETH} of the mint fee will be donated to Stand With
-                    Crypto Alliance, Inc. (SWCA). Donations from foreign nationals and government
-                    contractors are prohibited.
-                  </Balancer>
-                </p>
+        {!totalFeeDisplay ? (
+          <CardSkeleton>
+            <div className="space-y-8">
+              {Array.from({ length: 3 }, (_, i) => (
+                <div className="flex items-center justify-between gap-2" key={i}>
+                  <div className="max-w-96 text-sm md:text-base">
+                    <p className="text-xs text-muted-foreground">
+                      <Balancer>Loading...</Balancer>
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardSkeleton>
+        ) : (
+          <Card className="w-full">
+            <div className="space-y-8">
+              <div className="flex items-center justify-between gap-2 text-sm md:text-base">
+                <div className="max-w-96">
+                  <p>Donation</p>
+                  <p className="text-xs text-muted-foreground">
+                    <Balancer>
+                      {mintFeeDisplay}
+                      {SupportedCryptoCurrencyCodes.ETH} of the mint fee will be donated to Stand
+                      With Crypto Alliance, Inc. (SWCA). Donations from foreign nationals and
+                      government contractors are prohibited.
+                    </Balancer>
+                  </p>
+                </div>
+
+                <CurrencyDisplay value={mintFeeDisplay} />
               </div>
 
-              <CurrencyDisplay value={mintFeeDisplay} />
-            </div>
+              <div className="flex items-center justify-between gap-2 text-sm md:text-base">
+                <p>Gas fee</p>
+                <CurrencyDisplay value={gasFeeDisplay} />
+              </div>
 
-            <div className="flex items-center justify-between gap-2 text-sm md:text-base">
-              <p>Gas fee</p>
-              <CurrencyDisplay value={gasFeeDisplay} />
+              <div className="flex items-center justify-between gap-2 text-sm md:text-base">
+                <p>Total</p>
+                <CurrencyDisplay value={totalFeeDisplay} />
+              </div>
             </div>
-
-            <div className="flex items-center justify-between gap-2 text-sm md:text-base">
-              <p>Total</p>
-              <CurrencyDisplay value={totalFeeDisplay} />
-            </div>
-          </div>
-        </Card>
+          </Card>
+        )}
 
         <Collapsible open={!maybeOverriddenCheckoutError}>
           <CollapsibleContent className="AnimateCollapsibleContent">
@@ -185,7 +200,9 @@ export function UserActionFormNFTMintCheckout({
               contractAddress={MINT_NFT_CONTRACT_ADDRESS}
               isDisabled={
                 isLoading ||
-                (!!maybeOverriddenCheckoutError && maybeOverriddenCheckoutError !== 'networkSwitch')
+                (!!maybeOverriddenCheckoutError &&
+                  maybeOverriddenCheckoutError !== 'networkSwitch') ||
+                (!isLoading && !maybeOverriddenCheckoutError && !totalFeeDisplay)
               }
               theme={theme}
             >

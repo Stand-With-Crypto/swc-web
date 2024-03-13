@@ -1,16 +1,22 @@
+'use client'
 import React from 'react'
 import { UserInformationVisibility } from '@prisma/client'
 import { useENS } from '@thirdweb-dev/react'
 
-import { ClientUser } from '@/clientModels/clientUser/clientUser'
+import { useSession } from '@/hooks/useSession'
 import { appendENSHookDataToUser } from '@/utils/web/appendENSHookDataToUser'
 
-export function useUserWithMaybeENSData<U extends ClientUser>({ user }: { user?: U | null }) {
+export function useUserWithMaybeENSData() {
   const ensData = useENS()
+  const { user, isLoggedInThirdweb } = useSession()
 
   return React.useMemo(() => {
     if (!user) {
       return null
+    }
+
+    if (!isLoggedInThirdweb) {
+      return appendENSHookDataToUser(user, null)
     }
 
     const shouldWaitForEnsData =
@@ -21,5 +27,5 @@ export function useUserWithMaybeENSData<U extends ClientUser>({ user }: { user?:
     }
 
     return appendENSHookDataToUser(user, shouldWaitForEnsData ? ensData.data : null)
-  }, [ensData, user])
+  }, [ensData, user, isLoggedInThirdweb])
 }

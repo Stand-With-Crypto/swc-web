@@ -3,12 +3,12 @@ import { Prisma, UserCryptoAddress } from '@prisma/client'
 import { GetFindResult } from '@prisma/client/runtime/library'
 import * as Sentry from '@sentry/nextjs'
 
+import { appRouterGetAuthUser } from '@/utils/server/authentication/appRouterGetAuthUser'
 import { prismaClient } from '@/utils/server/prismaClient'
 import {
   getUserSessionId,
   getUserSessionIdThatMightNotExist,
 } from '@/utils/server/serverUserSessionId'
-import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
 type PrismaBase = Omit<Prisma.UserFindFirstArgs, 'where'>
@@ -16,7 +16,7 @@ type PrismaBase = Omit<Prisma.UserFindFirstArgs, 'where'>
 type BaseUserAndMethodOfMatch<S extends string | undefined, I extends PrismaBase = PrismaBase> =
   | {
       user: GetFindResult<Prisma.$UserPayload, I>
-      userCryptoAddress: UserCryptoAddress
+      userCryptoAddress: UserCryptoAddress | null
     }
   | {
       user: GetFindResult<Prisma.$UserPayload, I> | null
@@ -32,7 +32,7 @@ export type UserAndMethodOfMatchWithMaybeSession<I extends PrismaBase = PrismaBa
   BaseUserAndMethodOfMatch<string | undefined, I>
 /*
 If you're wondering what all the prisma type signatures are for, this allows people to pass additional prismaClient.user.findFirst arguments in
-These arguments change the actual shape of the returned result (select and include for example) so we need to use generics to ensure we get the full type-safe result back 
+These arguments change the actual shape of the returned result (select and include for example) so we need to use generics to ensure we get the full type-safe result back
 */
 async function baseGetMaybeUserAndMethodOfMatch<
   S extends string | undefined,
@@ -92,20 +92,20 @@ async function baseGetMaybeUserAndMethodOfMatch<
     if (!user) {
       if (NEXT_PUBLIC_ENVIRONMENT === 'production') {
         throw new Error(
-          `unexpectedly didn't return a user for an authenticated address ${authUser.address}`,
+          `unexpectedly didn't return a user for an authenticated address ${authUser.address!}`,
         )
       } else {
         throw new Error(
-          `Didn't return a user for an authenticated address ${authUser.address}. This is most likely because the database was just wiped in testing/local`,
+          `Didn't return a user for an authenticated address ${authUser.address!}. This is most likely because the database was just wiped in testing/local`,
         )
       }
     }
     const authedCryptoAddress = userWithoutReturnTypes!.userCryptoAddresses.find(
       x => x.cryptoAddress === authUser.address,
-    )!
+    )
     return {
       user,
-      userCryptoAddress: authedCryptoAddress,
+      userCryptoAddress: authedCryptoAddress ?? null,
     }
   }
   return {

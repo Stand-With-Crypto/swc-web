@@ -11,14 +11,14 @@ import { ANALYTICS_NAME_USER_ACTION_FORM_LIVE_EVENT } from '@/components/app/use
 import { UserActionFormLiveEventSkeleton } from '@/components/app/userActionFormLiveEvent/skeleton'
 import { trackDialogOpen } from '@/components/ui/dialog/trackDialogOpen'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
-import { useThirdwebData } from '@/hooks/useThirdwebData'
+import { useSession } from '@/hooks/useSession'
 
 export function UserActionFormLiveEventDeeplinkWrapper({
   slug,
 }: Pick<UserActionFormLiveEventProps, 'slug'>) {
   const urls = useIntlUrls()
   const router = useRouter()
-  const { session } = useThirdwebData()
+  const session = useSession()
   const { isLoggedIn, isLoading } = session
 
   useEffect(() => {

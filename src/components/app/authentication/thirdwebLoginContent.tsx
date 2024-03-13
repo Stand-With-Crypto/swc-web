@@ -8,15 +8,27 @@ import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
+import { useThirdwebAuthUser } from '@/hooks/useAuthUser'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
-import { useThirdwebData } from '@/hooks/useThirdwebData'
 import { trackSectionVisible } from '@/utils/web/clientAnalytics'
 import { theme } from '@/utils/web/thirdweb/theme'
 
+export interface ThirdwebLoginContentProps extends ConnectEmbedProps {
+  initialEmailAddress?: string | null
+  title?: React.ReactNode
+  subtitle?: React.ReactNode
+}
+
+const DEFAULT_TITLE = 'Join Stand With Crypto'
+const DEFAULT_SUBTITLE =
+  'Lawmakers and regulators are threatening the crypto industry. You can fight back and ask for sensible rules. Join the Stand With Crypto movement to make your voice heard in Washington D.C.'
+
 export function ThirdwebLoginContent({
   initialEmailAddress,
+  title = DEFAULT_TITLE,
+  subtitle = DEFAULT_SUBTITLE,
   ...props
-}: ConnectEmbedProps & { initialEmailAddress?: string | null }) {
+}: ThirdwebLoginContentProps) {
   const urls = useIntlUrls()
   const thirdwebEmbeddedAuthContainer = useRef<HTMLDivElement>(null)
 
@@ -45,12 +57,8 @@ export function ThirdwebLoginContent({
           />
 
           <div className="space-y-4">
-            <PageTitle size="sm">Join Stand With Crypto</PageTitle>
-            <PageSubTitle size="sm">
-              Lawmakers and regulators are threatening the crypto industry. You can fight back and
-              ask for sensible rules. Join the Stand With Crypto movement to make your voice heard
-              in Washington D.C.
-            </PageSubTitle>
+            <PageTitle size="sm">{title}</PageTitle>
+            <PageSubTitle size="sm">{subtitle}</PageSubTitle>
           </div>
         </div>
 
@@ -81,7 +89,7 @@ export function ThirdwebLoginContent({
 }
 
 function ThirdwebLoginEmbedded(props: ConnectEmbedProps) {
-  const { session } = useThirdwebData()
+  const session = useThirdwebAuthUser()
   const hasTracked = useRef(false)
   useEffect(() => {
     if (!session.isLoggedIn && !session.isLoading && !hasTracked.current) {

@@ -126,7 +126,7 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
       user: { connect: { id: user.id } },
       actionType,
       campaignName: validatedFields.data.campaignName,
-      ...('userCryptoAddress' in userMatch
+      ...('userCryptoAddress' in userMatch && userMatch.userCryptoAddress
         ? {
             userCryptoAddress: { connect: { id: userMatch.userCryptoAddress.id } },
           }

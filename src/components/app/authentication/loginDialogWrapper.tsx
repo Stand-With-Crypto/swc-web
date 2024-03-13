@@ -14,18 +14,27 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useDialog } from '@/hooks/useDialog'
 import { useSections } from '@/hooks/useSections'
-import { useThirdwebData } from '@/hooks/useThirdwebData'
+import { useSession } from '@/hooks/useSession'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { apiUrls } from '@/utils/shared/urls'
 import { appendENSHookDataToUser } from '@/utils/web/appendENSHookDataToUser'
 import { getUserSessionIdOnClient } from '@/utils/web/clientUserSessionId'
 
-import { ThirdwebLoginContent } from './thirdwebLoginContent'
+import { ThirdwebLoginContent, ThirdwebLoginContentProps } from './thirdwebLoginContent'
 
-interface LoginDialogWrapperProps extends React.PropsWithChildren {
+interface LoginDialogWrapperProps extends React.PropsWithChildren<ThirdwebLoginContentProps> {
   authenticatedContent?: React.ReactNode
   loadingFallback?: React.ReactNode
+  /**
+   * If this is true the component will show the unauthenticated content
+   * regardless if the user is authenticated or not
+   */
   forceUnauthenticated?: boolean
+  /**
+   * If this is true than the component will use thirdweb's session
+   * instead of our internal authentication
+   */
+  useThirdwebSession?: boolean
 }
 
 enum LoginSections {
@@ -40,14 +49,21 @@ export function LoginDialogWrapper({
   authenticatedContent,
   loadingFallback,
   forceUnauthenticated,
+  useThirdwebSession = false,
+  ...props
 }: LoginDialogWrapperProps) {
-  const { session } = useThirdwebData()
+  const session = useSession()
   const { goToSection, currentSection } = useSections({
     sections: Object.values(LoginSections),
     initialSectionId: LoginSections.LOADING,
     analyticsName: 'Login Button',
   })
   const dialogProps = useDialog({ analytics: ANALYTICS_NAME_LOGIN })
+
+  const isLoggedIn = React.useMemo(
+    () => (useThirdwebSession ? session.isLoggedInThirdweb : session.isLoggedIn),
+    [session.isLoggedIn, session.isLoggedInThirdweb, useThirdwebSession],
+  )
 
   /**
    * This is not pretty, but we need to both sync the session state with the current section
@@ -64,27 +80,23 @@ export function LoginDialogWrapper({
       return
     }
 
-    if (!session.isLoggedIn && currentSection === LoginSections.AUTHENTICATED) {
+    if (!isLoggedIn && currentSection === LoginSections.AUTHENTICATED) {
       goToSection(LoginSections.LOGIN, { disableAnalytics: true })
     }
 
     if (!dialogProps.open || currentSection === LoginSections.LOADING) {
-      goToSection(session.isLoggedIn ? LoginSections.AUTHENTICATED : LoginSections.LOGIN, {
+      goToSection(isLoggedIn ? LoginSections.AUTHENTICATED : LoginSections.LOGIN, {
         disableAnalytics: true,
       })
     }
-  }, [currentSection, dialogProps.open, goToSection, session])
+  }, [currentSection, dialogProps.open, goToSection, isLoggedIn, session])
 
   const shouldShowLoadingState = session.isLoading || currentSection === LoginSections.LOADING
   if (shouldShowLoadingState && loadingFallback) {
     return loadingFallback
   }
 
-  if (
-    session.isLoggedIn &&
-    currentSection === LoginSections.AUTHENTICATED &&
-    !forceUnauthenticated
-  ) {
+  if (isLoggedIn && currentSection === LoginSections.AUTHENTICATED && !forceUnauthenticated) {
     return authenticatedContent
   }
 
@@ -93,10 +105,19 @@ export function LoginDialogWrapper({
       currentSection={currentSection}
       dialogProps={dialogProps}
       goToSection={goToSection}
+      isLoggedIn={isLoggedIn}
+      {...props}
     >
       {children}
     </UnauthenticatedSection>
   )
+}
+
+interface UnauthenticatedSectionProps extends React.PropsWithChildren<ThirdwebLoginContentProps> {
+  goToSection: (section: LoginSections) => void
+  currentSection: LoginSections
+  dialogProps: ReturnType<typeof useDialog>
+  isLoggedIn: boolean
 }
 
 export function UnauthenticatedSection({
@@ -104,24 +125,20 @@ export function UnauthenticatedSection({
   goToSection,
   currentSection,
   dialogProps,
-}: React.PropsWithChildren<{
-  goToSection: (section: LoginSections) => void
-  currentSection: LoginSections
-  dialogProps: ReturnType<typeof useDialog>
-}>) {
-  const { session } = useThirdwebData()
-
+  isLoggedIn,
+  ...props
+}: UnauthenticatedSectionProps) {
   const { mutate } = useApiResponseForUserFullProfileInfo()
 
   const setDialogOpen = React.useCallback(
     (open: boolean) => {
       dialogProps.onOpenChange(open)
 
-      if (!open && session.isLoggedIn) {
+      if (!open && isLoggedIn) {
         goToSection(LoginSections.AUTHENTICATED)
       }
     },
-    [dialogProps, goToSection, session.isLoggedIn],
+    [dialogProps, goToSection, isLoggedIn],
   )
 
   const handleLoginSuccess = React.useCallback(async () => {
@@ -152,7 +169,7 @@ export function UnauthenticatedSection({
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="max-w-l w-full">
         {currentSection === LoginSections.LOGIN ? (
-          <LoginSection onLogin={handleLoginSuccess} />
+          <LoginSection onLogin={handleLoginSuccess} {...props} />
         ) : (
           <FinishProfileSection
             onSuccess={() => {
@@ -166,7 +183,11 @@ export function UnauthenticatedSection({
   )
 }
 
-function LoginSection({ onLogin }: { onLogin: () => void | Promise<void> }) {
+interface LoginSectionProps extends ThirdwebLoginContentProps {
+  onLogin: () => void | Promise<void>
+}
+
+function LoginSection({ onLogin, ...props }: LoginSectionProps) {
   const router = useRouter()
   const { mutate } = useSWRConfig()
   const { data } = useInitialEmail()
@@ -193,6 +214,7 @@ function LoginSection({ onLogin }: { onLogin: () => void | Promise<void> }) {
         },
       }}
       initialEmailAddress={data?.user?.emailAddress}
+      {...props}
     />
   )
 }

@@ -1,3 +1,6 @@
+closes <!-- GITHUB issue (e.g.: #123) -->
+fixes <!-- SENTRY issue (e.g.: PROD-SWC-WEB-1JE) -->
+
 **What changed? Why?**
 
 **UI changes**

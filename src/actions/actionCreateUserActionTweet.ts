@@ -102,7 +102,7 @@ async function _actionCreateUserActionTweet() {
       user: { connect: { id: user.id } },
       actionType,
       campaignName,
-      ...('userCryptoAddress' in userMatch
+      ...('userCryptoAddress' in userMatch && userMatch.userCryptoAddress
         ? {
             userCryptoAddress: { connect: { id: userMatch.userCryptoAddress.id } },
           }

@@ -197,7 +197,7 @@ async function createActionAndUpdateUser<U extends User>({
       user: { connect: { id: user.id } },
       actionType: UserActionType.CALL,
       campaignName: validatedInput.campaignName,
-      ...('userCryptoAddress' in userMatch
+      ...('userCryptoAddress' in userMatch && userMatch.userCryptoAddress
         ? {
             userCryptoAddress: { connect: { id: userMatch.userCryptoAddress.id } },
           }
