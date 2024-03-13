@@ -1,8 +1,9 @@
 import { UserActionType } from '@prisma/client'
 import { boolean, number, object, z } from 'zod'
 
-import { claimNFT } from '@/utils/server/nft/claimNFT'
+import { ACTION_NFT_SLUG, claimNFT } from '@/utils/server/nft/claimNFT'
 import { prismaClient } from '@/utils/server/prismaClient'
+import { batchAsyncAndLog } from '@/utils/shared/batchAsyncAndLog'
 import { getLogger } from '@/utils/shared/logger'
 
 const logger = getLogger('backfillNFT')
@@ -13,12 +14,6 @@ export const zodBackfillNFParameters = object({
 })
 
 const GO_LIVE_DATE = new Date('2024-02-25 00:00:00.000')
-const ACTION_WITH_NFT: UserActionType[] = [
-  UserActionType.CALL,
-  UserActionType.OPT_IN,
-  UserActionType.LIVE_EVENT,
-  UserActionType.VOTER_REGISTRATION,
-]
 
 interface BackfillNFTResponse {
   dryRun: boolean
@@ -30,11 +25,21 @@ export async function backfillNFT(parameters: z.infer<typeof zodBackfillNFParame
   zodBackfillNFParameters.parse(parameters)
   const { limit, persist } = parameters
 
+  const actionsWithNFT: UserActionType[] = []
+  for (const key in ACTION_NFT_SLUG) {
+    const actionType = UserActionType[key as keyof typeof UserActionType]
+    if (ACTION_NFT_SLUG[actionType]) {
+      actionsWithNFT.push(UserActionType[actionType])
+    }
+  }
+
+  logger.info(actionsWithNFT)
+
   const userActions = await prismaClient.userAction.findMany({
     where: {
       datetimeCreated: { gte: GO_LIVE_DATE },
       nftMint: null,
-      actionType: { in: ACTION_WITH_NFT },
+      actionType: { in: actionsWithNFT },
       user: { primaryUserCryptoAddress: { isNot: null } },
     },
     take: limit,
@@ -45,8 +50,6 @@ export async function backfillNFT(parameters: z.infer<typeof zodBackfillNFParame
     },
   })
 
-  logger.info(userActions.length)
-
   if (persist === undefined || !persist) {
     logger.info('Dry run, exiting')
     return {
@@ -56,11 +59,11 @@ export async function backfillNFT(parameters: z.infer<typeof zodBackfillNFParame
     } as BackfillNFTResponse
   }
 
-  const promises = []
-  for (const userAction of userActions) {
-    promises.push(claimNFT(userAction, userAction.user.primaryUserCryptoAddress!, true))
-  }
-  await Promise.all(promises)
+  await batchAsyncAndLog(userActions, actions =>
+    Promise.all(
+      actions.map(action => claimNFT(action, action.user.primaryUserCryptoAddress!, false)),
+    ),
+  )
 
   return {
     dryRun: false,

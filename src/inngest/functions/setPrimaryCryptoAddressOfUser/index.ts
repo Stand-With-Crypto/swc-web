@@ -1,6 +1,6 @@
-import { setPrimaryCryptoAddressOfUser } from '@/bin/oneTimeScripts/setPrimaryCryptoAddressOfUser'
+import { setPrimaryCryptoAddressOfUser } from '@/inngest/functions/setPrimaryCryptoAddressOfUser/logic'
 import { inngest } from '@/inngest/inngest'
-import { onScriptFailure } from '@/inngest/onScriptFaillure'
+import { onScriptFailure } from '@/inngest/onScriptFailure'
 
 export interface ScriptPayload {
   userId: string

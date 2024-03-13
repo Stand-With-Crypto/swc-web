@@ -1,6 +1,6 @@
-import { backfillNFT } from '@/bin/oneTimeScripts/backfillNFT'
+import { backfillNFT } from '@/inngest/functions/backfillNFT/logic'
 import { inngest } from '@/inngest/inngest'
-import { onScriptFailure } from '@/inngest/onScriptFaillure'
+import { onScriptFailure } from '@/inngest/onScriptFailure'
 
 interface ScriptPayload {
   limit: number

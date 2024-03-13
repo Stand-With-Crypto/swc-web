@@ -3,7 +3,7 @@ import { boolean, object, string, z } from 'zod'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getLogger } from '@/utils/shared/logger'
 
-const logger = getLogger('setPrimaryCryptoAddressOfUser')
+const logger = getLogger('setPrimaryCryptoAddressOfUse')
 
 export const zodPrimaryCryptoAddressOfUserParameters = object({
   userId: string(),

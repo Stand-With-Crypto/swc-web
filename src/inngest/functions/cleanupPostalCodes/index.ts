@@ -1,6 +1,6 @@
-import { cleanupPostalCodes } from '@/bin/oneTimeScripts/cleanupPostalCodes'
+import { cleanupPostalCodes } from '@/inngest/functions/cleanupPostalCodes/cleanupPostalCodes'
 import { inngest } from '@/inngest/inngest'
-import { onScriptFailure } from '@/inngest/onScriptFaillure'
+import { onScriptFailure } from '@/inngest/onScriptFailure'
 
 export interface ScriptPayload {
   persist: boolean
