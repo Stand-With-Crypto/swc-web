@@ -1,6 +1,6 @@
-import { cleanupPostalCodes } from '@/bin/oneTimeScripts/cleanupPostalCodes'
+import { cleanPostalCodes } from '@/inngest/functions/cleanupPostalCodes/logic'
 import { inngest } from '@/inngest/inngest'
-import { onScriptFailure } from '@/inngest/onScriptFaillure'
+import { onScriptFailure } from '@/inngest/onScriptFailure'
 
 export interface ScriptPayload {
   persist: boolean
@@ -19,7 +19,7 @@ export const cleanupPostalCodesWithInngest = inngest.createFunction(
     const payload = event.data as ScriptPayload
 
     const { found, updated } = await step.run('execute-script', async () => {
-      return await cleanupPostalCodes(payload.persist)
+      return await cleanPostalCodes(payload.persist)
     })
 
     return {
