@@ -61,7 +61,9 @@ export async function backfillNFT(parameters: z.infer<typeof zodBackfillNFParame
 
   await batchAsyncAndLog(userActions, actions =>
     Promise.all(
-      actions.map(action => claimNFT(action, action.user.primaryUserCryptoAddress!, false)),
+      actions.map(action =>
+        claimNFT(action, action.user.primaryUserCryptoAddress!, { ignoreTurnOffNFTMintFlag: true }),
+      ),
     ),
   )
 

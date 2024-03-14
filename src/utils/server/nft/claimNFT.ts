@@ -54,12 +54,16 @@ export const ACTION_NFT_SLUG: Record<
 
 const logger = getLogger('claimNft')
 
+interface Config {
+  ignoreTurnOffNFTMintFlag: boolean
+}
+
 export async function claimNFT(
   userAction: UserAction,
   userCryptoAddress: UserCryptoAddress,
-  ignoreTurnOffNFTMintFlag: boolean = false,
+  config: Config = { ignoreTurnOffNFTMintFlag: false },
 ) {
-  if (TURN_OFF_NFT_MINT && !ignoreTurnOffNFTMintFlag) {
+  if (TURN_OFF_NFT_MINT && !config.ignoreTurnOffNFTMintFlag) {
     logger.info('TURN_OFF_NFT_MINT is on, preventing mint for now')
     return null
   }
