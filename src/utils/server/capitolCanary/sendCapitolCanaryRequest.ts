@@ -1,17 +1,17 @@
 import * as Sentry from '@sentry/nextjs'
 
 import { fetchReq, FetchReqError } from '@/utils/shared/fetchReq'
-import { requiredEnv } from '@/utils/shared/requiredEnv'
+import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
 
-const CAPITOL_CANARY_API_KEY = requiredEnv(
+const CAPITOL_CANARY_API_KEY = requiredOutsideLocalEnv(
   process.env.CAPITOL_CANARY_API_KEY,
   'process.env.CAPITOL_CANARY_API_KEY',
-)
+)!
 
-const CAPITOL_CANARY_API_SECRET = requiredEnv(
+const CAPITOL_CANARY_API_SECRET = requiredOutsideLocalEnv(
   process.env.CAPITOL_CANARY_API_SECRET,
   'process.env.CAPITOL_CANARY_API_SECRET',
-)
+)!
 
 export async function sendCapitolCanaryRequest<T, R>(
   request: T,

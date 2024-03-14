@@ -13,7 +13,7 @@ const createPrisma = () => {
   const log: PrismaClientOptions['log'] = process.env.LOG_DATABASE
     ? ['query', 'info', 'warn', 'error']
     : ['info', 'warn', 'error']
-  if (IS_DEVELOPING_OFFLINE) {
+  if (IS_DEVELOPING_OFFLINE || DATABASE_URL.includes('localhost')) {
     return new PrismaClient({
       log,
     })

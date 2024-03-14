@@ -12,10 +12,10 @@
 
 ### Development pre-requisites
 
-- Install [Node](https://nodejs.org/en) v20.10.0 ([nvm](https://github.com/nvm-sh/nvm) is recommended for installing Node)
+- Install [Node](https://nodejs.org/en)'s version defined in `.nvmrc` (if you have [nvm](https://github.com/nvm-sh/nvm) installed, just run `nvm install` at the root of the project)
 - Install [Docker Desktop + CLI](https://www.docker.com/products/docker-desktop/)
 - Install MySQL (on Mac you can install [Homebrew](https://brew.sh/) and run `brew install mysql`)
-- Clone this repository to your local machine (forking is disabled)
+- Fork and clone this repository to your local machine (forking is disabled)
   - If you are using SSH to clone, but you do not have a public SSH key for your GitHub account (which will prevent cloning), follow the [GitHub SSH guide](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) to set up SSH authentication and signing
 - `cd` into your local swc-web repository
 - Run `npm install`
@@ -80,8 +80,8 @@ On a testing or production environment, it is recommended to run the script thro
   - `npm run lint` - audits code against ESLint and Prettier
   - `npm run typecheck` - audits code against TypeScript
   - `npm run test` - execute Jest tests
-  - `npm run precheck` - executes all 3 commands above concurrently
-    - If `precheck` fails, then it is very likely that your PR will not pass GitHub CI
+  - `npm run audit` - executes all 3 commands above concurrently
+    - If `audit` fails, then it is very likely that your PR will not pass GitHub CI
 
 - Likewise, test E2E flows as necessary:
   - `npm run e2e:run` - starts up [Cypress](https://www.cypress.io/) UI
