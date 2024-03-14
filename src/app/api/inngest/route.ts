@@ -5,6 +5,7 @@ import { backfillNFTInngestCronJob } from '@/inngest/functions/airdropNFTCronJob
 import { backfillNFTWithInngest } from '@/inngest/functions/backfillNFT'
 import { cleanupPostalCodesWithInngest } from '@/inngest/functions/cleanupPostalCodes'
 import { emailRepViaCapitolCanaryWithInngest } from '@/inngest/functions/emailRepViaCapitolCanary'
+import { mergeBackfilledUsersWithInngest } from '@/inngest/functions/mergeBackfilledUsers'
 import { monitorBaseETHBalances } from '@/inngest/functions/monitorBaseETHBalances'
 import { setPrimaryCryptoAddressOfUserWithInngest } from '@/inngest/functions/setPrimaryCryptoAddressOfUser'
 import { upsertAdvocateInCapitolCanaryWithInngest } from '@/inngest/functions/upsertAdvocateInCapitolCanary'
@@ -21,5 +22,6 @@ export const { GET, POST, PUT } = serve({
     setPrimaryCryptoAddressOfUserWithInngest,
     backfillNFTWithInngest,
     backfillNFTInngestCronJob,
+    mergeBackfilledUsersWithInngest,
   ],
 })
