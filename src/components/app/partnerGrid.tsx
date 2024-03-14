@@ -32,7 +32,7 @@ export function PartnerGrid({ highlightedOnly, variant }: PartnerGridProps) {
     : partners
 
   return (
-    <div className="flex flex-wrap justify-center gap-8">
+    <div className="flex flex-col flex-wrap justify-center gap-8 md:flex-row">
       {visiblePartners.map(({ title, imageSrc }) => (
         <div className={containerVariants({ variant })} key={title}>
           <NextImage alt={`${title} logo`} className="object-contain" fill src={imageSrc} />
