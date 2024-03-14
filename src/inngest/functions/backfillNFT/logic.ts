@@ -28,12 +28,11 @@ export async function backfillNFT(parameters: z.infer<typeof zodBackfillNFParame
   const actionsWithNFT: UserActionType[] = []
   for (const key in ACTION_NFT_SLUG) {
     const actionType = UserActionType[key as keyof typeof UserActionType]
-    if (ACTION_NFT_SLUG[actionType]) {
+    const record = ACTION_NFT_SLUG[actionType]
+    if (record[Object.keys(record)[0]]) {
       actionsWithNFT.push(UserActionType[actionType])
     }
   }
-
-  logger.info(actionsWithNFT)
 
   const userActions = await prismaClient.userAction.findMany({
     where: {
