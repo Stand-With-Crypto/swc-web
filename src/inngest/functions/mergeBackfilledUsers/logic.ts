@@ -38,6 +38,8 @@ export async function mergeBackfilledUsers(parameters: z.infer<typeof zodMergeBa
    * By my investigation, if there are any duplicate crypto addresses, then that actually means that there are 2+ users
    *   that use the same crypto address but use different email addresses. A common case for this is for couples who
    *   share the same crypto address in SWC V1. I believe that this is not a problem and that we should not merge these users.
+   *   Also, if there is a case there are duplicate users that have the same email address and the same crypto address, the query
+   *   below will still catch those duplicate users anyways.
    */
   const userEmailAddressGroupings = await prismaClient.userEmailAddress.groupBy({
     by: ['emailAddress'],
