@@ -1,4 +1,4 @@
-import { cleanupPostalCodes } from '@/inngest/functions/cleanupPostalCodes/cleanupPostalCodes'
+import { cleanPostalCodes } from '@/inngest/functions/cleanupPostalCodes/logic'
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 
@@ -19,7 +19,7 @@ export const cleanupPostalCodesWithInngest = inngest.createFunction(
     const payload = event.data as ScriptPayload
 
     const { found, updated } = await step.run('execute-script', async () => {
-      return await cleanupPostalCodes(payload.persist)
+      return await cleanPostalCodes(payload.persist)
     })
 
     return {

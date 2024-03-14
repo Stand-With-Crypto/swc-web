@@ -3,7 +3,7 @@ import { getLogger } from '@/utils/shared/logger'
 
 const logger = getLogger('cleanPostalCodes')
 
-export async function cleanupPostalCodes(persist: boolean) {
+export async function cleanPostalCodes(persist: boolean) {
   const postalCodesWithSuffix = await prismaClient.address.findMany({
     where: {
       postalCode: {
