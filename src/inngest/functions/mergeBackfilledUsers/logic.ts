@@ -23,12 +23,11 @@ export async function mergeBackfilledUsers(parameters: z.infer<typeof zodMergeBa
    * Find all duplicate email groups where none of the emails were inputted by a user.
    * This implies that the emails were all from the V1 --> V2 backfill and that there has been no log-in attempt from that user.
    * (The data creation would be `BY_USER` if the user had inputted the email in V2. In those cases, we ignore those duplicate emails).
-   * Because there has been no log-in attempt, those users have not been merged.
    *
    * "Why are you using the email addresses to determine duplicate users instead of user rows themselves?"
    * - There is no good way to determine duplicate users from the backfill from the users table:
    *   - Email addresses can be the same, but have different row IDs - the users table will show different IDs for different users.
-   * - Email addresses can tell us if a user has attempted to log in or not.
+   * - By my investigation, the email addresses can easily tell us if a user has attempted to log in or not.
    *   - If they have not logged in at all, then the email addresses are left unmerged.
    *   - If they have logged in with email, then the email addresses should have already been merged (and hence no duplicate users).
    *   - If they have logged in with a crypto address, then there might still be duplicate email addresses.
@@ -87,8 +86,23 @@ export async function mergeBackfilledUsers(parameters: z.infer<typeof zodMergeBa
     const userIdToKeep = usersForEmailAddress[0].userId
     const userIdsToDelete = usersForEmailAddress.slice(1).map(({ userId }) => userId)
 
-    // Merge the users if persist is true.
     for (const userIdToDelete of userIdsToDelete) {
+      // Double-check that we have not already merged these users.
+      const userToKeep = await prismaClient.user.findUnique({
+        where: {
+          id: userIdToKeep,
+        },
+      })
+      const userToDelete = await prismaClient.user.findUnique({
+        where: {
+          id: userIdToDelete,
+        },
+      })
+      if (!userToKeep || !userToDelete) {
+        continue
+      }
+
+      // Merge the users if persist is true.
       await mergeUsers({
         userToDeleteId: userIdToDelete,
         userToKeepId: userIdToKeep,
