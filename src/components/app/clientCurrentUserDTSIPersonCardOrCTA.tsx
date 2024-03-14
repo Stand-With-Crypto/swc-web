@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 'use client'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useSearchParams } from 'next/navigation'
 
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
@@ -8,12 +9,14 @@ import { UserActionFormCallCongresspersonDialog } from '@/components/app/userAct
 import { Button } from '@/components/ui/button'
 import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { InternalLink } from '@/components/ui/link'
+import { Skeleton } from '@/components/ui/skeleton'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import {
   formatGetDTSIPeopleFromAddressNotFoundReason,
   useGetDTSIPeopleFromAddress,
 } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { useHasHydrated } from '@/hooks/useHasHydrated'
+import { usePlacesAutocompleteAddress } from '@/hooks/usePlacesAutocompleteAddress'
 import { SupportedLocale } from '@/intl/locales'
 import { getDTSIFormattedShortPersonRole } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import {
@@ -24,20 +27,71 @@ import { getIntlUrls } from '@/utils/shared/urls'
 import { getLocalUser, setLocalUserPersistedValues } from '@/utils/web/clientLocalUser'
 import { GooglePlaceAutocompletePrediction } from '@/utils/web/googlePlaceUtils'
 
-export function ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: SupportedLocale }) {
+export function ClientCurrentUserDTSIPersonCardOrCTAWithQueryParam({
+  locale,
+}: {
+  locale: SupportedLocale
+}) {
+  const searchParams = useSearchParams()
+  const addressParam = searchParams?.get('address') ?? ''
+  const { ready, addressSuggestions } = usePlacesAutocompleteAddress(
+    decodeURIComponent(addressParam),
+  )
+
+  if (!ready && addressParam) {
+    return <Skeleton className="h-[120px] w-full" />
+  }
+
+  return (
+    <ClientCurrentUserDTSIPersonCardOrCTA
+      initialAddress={
+        addressSuggestions.length
+          ? {
+              description: addressSuggestions[0]?.description,
+              place_id: addressSuggestions[0]?.place_id,
+            }
+          : undefined
+      }
+      locale={locale}
+    />
+  )
+}
+
+export function ClientCurrentUserDTSIPersonCardOrCTA({
+  locale,
+  initialAddress,
+}: {
+  locale: SupportedLocale
+  initialAddress?: GooglePlaceAutocompletePrediction
+}) {
   const user = useApiResponseForUserFullProfileInfo()
   const hasHydrated = useHasHydrated()
   const userAddress = hasHydrated
     ? user.data?.user?.address || getLocalUser().persisted?.recentlyUsedAddress
     : null
-  const [address, _setAddress] = useState<GooglePlaceAutocompletePrediction | null>(
-    userAddress
-      ? {
-          place_id: userAddress.googlePlaceId,
-          description: userAddress.formattedDescription,
-        }
-      : null,
+
+  const formattedInitialAddress = useMemo(
+    () =>
+      initialAddress
+        ? {
+            place_id: initialAddress.place_id,
+            description: initialAddress.description,
+          }
+        : null,
+    [initialAddress],
   )
+
+  const formattedUserAddress = userAddress
+    ? {
+        place_id: userAddress.googlePlaceId,
+        description: userAddress.formattedDescription,
+      }
+    : null
+
+  const [address, _setAddress] = useState<GooglePlaceAutocompletePrediction | null>(
+    formattedInitialAddress || formattedUserAddress,
+  )
+
   const setAddress = useCallback(
     (addr: GooglePlaceAutocompletePrediction | null) => {
       setLocalUserPersistedValues({
@@ -60,13 +114,22 @@ export function ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: Suppo
   addressRef.current = address
 
   useEffect(() => {
-    if (!addressRef.current && userAddress) {
+    if (!addressRef.current && userAddress && !formattedInitialAddress) {
       _setAddress({
         place_id: userAddress.googlePlaceId,
         description: userAddress.formattedDescription,
       })
     }
-  }, [userAddress])
+  }, [formattedInitialAddress, userAddress])
+
+  useEffect(() => {
+    if (formattedInitialAddress) {
+      _setAddress({
+        place_id: formattedInitialAddress.place_id,
+        description: formattedInitialAddress.description,
+      })
+    }
+  }, [formattedInitialAddress])
 
   if (!address || !res.data) {
     return (
