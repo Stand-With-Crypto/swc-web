@@ -26,7 +26,9 @@ export async function mergeBackfilledUsers(parameters: z.infer<typeof zodMergeBa
    *
    * "Why are you using the email addresses to determine duplicate users instead of user rows themselves?"
    * - There is no good way to determine duplicate users from the backfill from the users table:
-   *   - Email addresses can be the same, but have different row IDs - the users table will show different IDs for different users.
+   *   - Email addresses can be the same, but have different IDs - the users table will show different IDs for different users, so that does not help.
+   *   - Folks can have the same name and address, but not necessarily be duplicates of each other.
+   *   - Somehow, because of Capitol Canary's inconsistencies, the same user can have different Capitol Canary IDs, making that field unreliable.
    * - By my investigation, the email addresses can easily tell us if a user has attempted to log in or not.
    *   - If they have not logged in at all, then the email addresses are left unmerged.
    *   - If they have logged in with email, then the email addresses should have already been merged (and hence no duplicate users).
