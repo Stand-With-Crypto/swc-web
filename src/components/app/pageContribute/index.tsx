@@ -1,3 +1,4 @@
+import { PartnerGrid } from '@/components/app/partnerGrid'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogClose, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
@@ -250,35 +251,35 @@ export function PageContribute() {
             </Button>
           ),
         },
-        // uncomment once we onboard our initial partners
-        // {
-        //   imageSrc: '/pagesContent/contribute/partners.svg',
-        //   title: 'Our Partners',
-        //   subtitle: (
-        //     <>
-        //       Stand With Crypto is an open source initiative built by people who believe crypto
-        //       belongs in America.
-        //     </>
-        //   ),
-        //   content: (
-        //     <div className="flex flex-col items-center gap-12">
-        //       <div className="flex justify-center">
-        //         <Button asChild size="lg">
-        //           <ExternalLink
-        //             href={
-        //               'https://docs.google.com/forms/d/e/1FAIpQLSf4T51k9InqKQKW2911_HVWm11wz_dOcpoDj8QuyF7cxU5MHw/viewform'
-        //             }
-        //           >
-        //             Become an industry partner
-        //           </ExternalLink>
-        //         </Button>
-        //       </div>
-        //       <PartnerGrid />
-        //     </div>
-        //   ),
-        // },
-      ].map(({ title, subtitle, imageSrc, content }, index) => (
-        <section className="text-center" key={index}>
+        {
+          id: 'partners',
+          imageSrc: '/pagesContent/contribute/partners.svg',
+          title: 'Our Partners',
+          subtitle: (
+            <>
+              Stand With Crypto is an open source initiative built by people who believe crypto
+              belongs in America.
+            </>
+          ),
+          content: (
+            <div className="flex flex-col items-center gap-12">
+              <PartnerGrid variant="contained" />
+              <div className="flex justify-center">
+                <Button asChild size="lg">
+                  <ExternalLink
+                    href={
+                      'https://docs.google.com/forms/d/e/1FAIpQLSf4T51k9InqKQKW2911_HVWm11wz_dOcpoDj8QuyF7cxU5MHw/viewform'
+                    }
+                  >
+                    Become a partner
+                  </ExternalLink>
+                </Button>
+              </div>
+            </div>
+          ),
+        },
+      ].map(({ title, subtitle, imageSrc, content, id }, index) => (
+        <section className="text-center" id={id} key={index}>
           <div className="mx-auto mb-6 inline-block">
             <NextImage
               alt={`Icon signifying "${title}"`}
