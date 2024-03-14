@@ -37,5 +37,6 @@ export const dtsiPersonMockResolver = (): Partial<DTSI_PersonResolvers> => {
     slug: () => `${firstName}---${lastName}`,
     suffixName: () => faker.person.suffix(),
     stances: () => times(20).map(() => ({})) as any,
+    primaryRole: () => ({}) as any,
   }
 }
