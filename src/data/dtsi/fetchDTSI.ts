@@ -17,6 +17,7 @@ const logger = getLogger('fetchDTSI')
 const DO_THEY_SUPPORT_IT_API_KEY = process.env.DO_THEY_SUPPORT_IT_API_KEY!
 
 export const fetchDTSI = async <R, V = object>(query: string, variables?: V) => {
+  // console.log(query)
   if (
     IS_DEVELOPING_OFFLINE ||
     (!DO_THEY_SUPPORT_IT_API_KEY && NEXT_PUBLIC_ENVIRONMENT === 'local')

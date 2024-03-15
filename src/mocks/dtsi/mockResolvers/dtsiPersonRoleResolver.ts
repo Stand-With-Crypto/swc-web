@@ -7,7 +7,9 @@ import {
 } from '@/data/dtsi/generated'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
 
-export const dtsiPersonRoleMockResolver = (): Partial<DTSI_PersonRoleResolvers> => {
+export const dtsiPersonRoleMockResolver = (
+  overrides: Partial<DTSI_PersonRoleResolvers> = {},
+): Partial<DTSI_PersonRoleResolvers> => {
   return {
     primaryCountryCode: () => 'US',
     primaryState: () =>
@@ -22,5 +24,6 @@ export const dtsiPersonRoleMockResolver = (): Partial<DTSI_PersonRoleResolvers> 
         DTSI_PersonRoleCategory.PRESIDENT,
         DTSI_PersonRoleCategory.SENATE,
       ]),
+    ...overrides,
   }
 }
