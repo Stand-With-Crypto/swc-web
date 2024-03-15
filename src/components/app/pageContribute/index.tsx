@@ -254,7 +254,7 @@ export function PageContribute() {
         {
           id: 'partners',
           imageSrc: '/pagesContent/contribute/partners.svg',
-          title: 'Our Partners',
+          title: 'Our partners',
           subtitle: (
             <>
               Stand With Crypto is an open source initiative built by people who believe crypto
