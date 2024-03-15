@@ -71,6 +71,7 @@ export function PartnerGrid({ highlightedOnly, disableLinks, variant }: PartnerG
               className="object-contain"
               fill
               priority
+              quality={100}
               src={imageSrc}
             />
           </div>
