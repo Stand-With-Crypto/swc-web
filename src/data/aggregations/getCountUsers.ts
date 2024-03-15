@@ -5,7 +5,7 @@ import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
 export const getCountUsers = async () => {
   const count = await prismaClient.user.count()
-  if (NEXT_PUBLIC_ENVIRONMENT === 'production') {
+  if (NEXT_PUBLIC_ENVIRONMENT === 'production' || NEXT_PUBLIC_ENVIRONMENT === 'local') {
     return { count }
   }
   /*

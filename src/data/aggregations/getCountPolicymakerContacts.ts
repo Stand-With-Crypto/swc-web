@@ -30,7 +30,7 @@ export const getCountPolicymakerContacts = async () => {
   const hardcodedCountSum =
     hardcodedCountCapitolCanaryEmails + hardcodedCountCalls + hardcodedCountIrsContacts
 
-  if (NEXT_PUBLIC_ENVIRONMENT === 'production') {
+  if (NEXT_PUBLIC_ENVIRONMENT === 'production' || NEXT_PUBLIC_ENVIRONMENT === 'local') {
     return { countUserActionEmails, countUserActionCalls, hardcodedCountSum }
   }
   /*
