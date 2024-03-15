@@ -26,7 +26,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
     },
     {
       href: urls.leaderboard(),
-      text: 'Our Community',
+      text: 'Community',
     },
     {
       href: urls.politiciansHomepage(),
@@ -39,6 +39,10 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
     {
       href: urls.donate(),
       text: 'Donate',
+    },
+    {
+      href: urls.partners(),
+      text: 'Partners',
     },
   ]
   const maybeCloseAfterNavigating = useCallback(() => {
