@@ -179,9 +179,12 @@ export function getGoogleCivicOfficialByDTSIName(
       officials,
     }
     logger.info('returned people', extra)
-    Sentry.captureMessage('getGoogleCivicOfficialByDTSIName - Official not found', {
-      extra,
-    })
+    const vacantResult = officials.find(official => official.name.toLocaleLowerCase() === 'vacant')
+    if (!vacantResult) {
+      Sentry.captureMessage('getGoogleCivicOfficialByDTSIName - Official not found', {
+        extra,
+      })
+    }
     return null
   }
 
