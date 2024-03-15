@@ -39,6 +39,7 @@ export const getIntlUrls = (
       const tabSuffix = shouldSuppressPageNum ? '' : `/${pageNum}`
       return `${localePrefix}${tabPrefix}${tabSuffix}`
     },
+    partners: () => `${localePrefix}/contribute#partners`,
     politiciansHomepage: () => `${localePrefix}/politicians`,
     politicianDetails: (dtsiSlug: string) => `${localePrefix}/politicians/person/${dtsiSlug}`,
     profile: () => `${localePrefix}/profile`,
