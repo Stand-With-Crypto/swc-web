@@ -63,6 +63,8 @@ export async function claimNFT(
   userCryptoAddress: UserCryptoAddress,
   config: Config = { ignoreTurnOffNFTMintFlag: false },
 ) {
+  // TODO (benson): check current transaction fee here via `fetchAirdropTransactionFee`.
+
   if (TURN_OFF_NFT_MINT && !config.ignoreTurnOffNFTMintFlag) {
     logger.info('TURN_OFF_NFT_MINT is on, preventing mint for now')
     return null
