@@ -1,5 +1,6 @@
 import { ThirdwebSDK } from '@thirdweb-dev/sdk'
 
+import { getLogger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 
 const THIRD_WEB_CLIENT_SECRET = requiredEnv(
@@ -21,7 +22,15 @@ const AIRDROP_FEE_ESTIMATION_CONTRACT_ADDRESS = '0xd9c77be238f858b3d08ef87202c62
 
 const CLAIM_GAS_LIMIT_OE721_CONTRACT = 231086
 
+const logger = getLogger('fetchAirdropTransactionFee')
+
 export async function fetchAirdropTransactionFee(): Promise<string> {
+  logger.info('Fetching airdrop transaction fee')
+  logger.info(
+    'AIRDROP_FEE_ESTIMATION_WALLET_PRIVATE_KEY',
+    AIRDROP_FEE_ESTIMATION_WALLET_PRIVATE_KEY,
+  )
+  logger.info('AIRDROP_FEE_ESTIMATION_CONTRACT_ADDRESS', AIRDROP_FEE_ESTIMATION_CONTRACT_ADDRESS)
   globalThis.TW_SKIP_FETCH_SETUP = true
   const sdk = ThirdwebSDK.fromPrivateKey(AIRDROP_FEE_ESTIMATION_WALLET_PRIVATE_KEY, 'base', {
     secretKey: THIRD_WEB_CLIENT_SECRET,
