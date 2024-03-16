@@ -108,7 +108,7 @@ export async function mergeBackfilledUsers(
   }
 
   logger.info(
-    `Found ${parameters.calculateMode ? 'next' : ''} ${userEmailAddressGroupings.length} duplicate email addresses`,
+    `Found ${parameters.calculateMode ? 'next' : 'total'} ${userEmailAddressGroupings.length} duplicate email addresses`,
   )
 
   // Get the full rows for the email addresses and for the users.
@@ -121,7 +121,7 @@ export async function mergeBackfilledUsers(
     },
   })
   logger.info(
-    `Found ${parameters.calculateMode ? 'next' : ''} ${userEmailAddresses.length} email address rows`,
+    `Found ${parameters.calculateMode ? 'next' : 'total'} ${userEmailAddresses.length} email address rows`,
   )
 
   if (parameters.calculateMode) {
