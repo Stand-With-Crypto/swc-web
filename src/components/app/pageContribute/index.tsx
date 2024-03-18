@@ -7,6 +7,7 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { cn } from '@/utils/web/cn'
 import { createTweetLink } from '@/utils/web/createTweetLink'
+import { createWarpcastLink } from '@/utils/web/createWarpcastLink'
 
 export function PageContribute() {
   return (
@@ -40,21 +41,33 @@ export function PageContribute() {
               <div className="space-y-14 text-left">
                 {[
                   {
-                    title: 'Share Stand With Crypto on X',
+                    title: 'Share Stand With Crypto on Social',
                     subtitle: 'We’ve drafted a post for you',
                     cta: (
-                      <Button asChild variant="primary-cta">
-                        {/* TODO */}
-                        <ExternalLink
-                          href={createTweetLink({
-                            message:
-                              'I #StandWithCrypto. More than 300,000 people are already advocating for better crypto policy in America. Join the fight to receive email updates on crypto policy, invites to local events, and more.',
-                            url: 'https://www.standwithcrypto.org/action/sign-up?utm_source=twitter&utm_medium=social&utm_campaign=partner-share',
-                          })}
-                        >
-                          Share on X
-                        </ExternalLink>
-                      </Button>
+                      <div className="space-x-3">
+                        <Button asChild variant="primary-cta">
+                          <ExternalLink
+                            href={createTweetLink({
+                              message:
+                                'I #StandWithCrypto. More than 300,000 people are already advocating for better crypto policy in America. Join the fight to receive email updates on crypto policy, invites to local events, and more.',
+                              url: 'https://www.standwithcrypto.org/action/sign-up?utm_source=twitter&utm_medium=social&utm_campaign=partner-share',
+                            })}
+                          >
+                            Share on X
+                          </ExternalLink>
+                        </Button>
+                        <Button asChild variant="primary-cta">
+                          <ExternalLink
+                            href={createWarpcastLink({
+                              message:
+                                'I #StandWithCrypto. More than 300,000 people are already advocating for better crypto policy in America. Join the fight to receive email updates on crypto policy, invites to local events, and more.',
+                              url: 'https://www.standwithcrypto.org/action/sign-up?utm_source=warpcast&utm_medium=social&utm_campaign=partner-share',
+                            })}
+                          >
+                            Share on Warpcast
+                          </ExternalLink>
+                        </Button>
+                      </div>
                     ),
                   },
                   {
@@ -185,10 +198,10 @@ export function PageContribute() {
                   },
                 ].map((props, index) => (
                   <div
-                    className="item-center flex flex-col justify-between gap-4 sm:flex-row sm:gap-6"
+                    className="item-center flex flex-col justify-between gap-4 md:flex-row md:gap-6"
                     key={index}
                   >
-                    <div className="flex flex-col items-center gap-4 text-center sm:flex-row sm:text-left">
+                    <div className="flex flex-col items-center gap-4 text-center md:flex-row md:text-left">
                       <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-secondary text-xl font-bold sm:h-14 sm:w-14 sm:text-2xl">
                         <div>{index + 1}</div>
                       </div>
