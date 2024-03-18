@@ -1,10 +1,8 @@
-# Stand With Crypto
-
 ![Stand With Crypto Image](./.github/images/stand-with-crypto.png)
 
 ### Contribution guide
 
-- Read `docs/Contributing.md` for information on submitting PRs, including database migration steps related to your PR
+- Read [Contribution guidelines for this project](docs/Contributing.md) for information on submitting PRs, including database migration steps related to your PR
 
 ## Licenses
 
