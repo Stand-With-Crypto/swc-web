@@ -1,8 +1,8 @@
 import { serve } from 'inngest/next'
 
 import { airdropNFTWithInngest } from '@/inngest/functions/airdropNFT'
-import { backfillNFTInngestCronJob } from '@/inngest/functions/airdropNFTCronJob'
 import { backfillNFTWithInngest } from '@/inngest/functions/backfillNFT'
+import { backfillNFTInngestCronJob } from '@/inngest/functions/backfillNFTCronJob'
 import { cleanupPostalCodesWithInngest } from '@/inngest/functions/cleanupPostalCodes'
 import { emailRepViaCapitolCanaryWithInngest } from '@/inngest/functions/emailRepViaCapitolCanary'
 import { monitorBaseETHBalances } from '@/inngest/functions/monitorBaseETHBalances'
