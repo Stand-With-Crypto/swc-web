@@ -100,7 +100,7 @@ export async function mergeBackfilledUsers(parameters: z.infer<typeof zodMergeBa
     return 0
   }
   logger.info(
-    `${parameters.calculateMode ? 'Counted' : 'Found next'} ${userEmailAddressGroupings.length}${parameters.calculateMode ? ' total' : ''} duplicate email addresses`,
+    `${parameters.calculateMode ? 'Counted' : 'Found next'}${userEmailAddressGroupings.length}${parameters.calculateMode ? ' total' : ''} duplicate email addresses`,
   )
   if (parameters.calculateMode) {
     return 0
@@ -110,7 +110,7 @@ export async function mergeBackfilledUsers(parameters: z.infer<typeof zodMergeBa
   const newUserIdsToSkip: string[] = []
   for (const emailAddress of userEmailAddressGroupings) {
     // For each email address, find all email address rows that match the email address.
-    // We will use the rows to get the user ID.
+    // We will use the rows to get the user ID, then we will use the user ID to merge users.
     // Also filter out the specific attributes again here just to make sure.
     const userEmailAddresses = await prismaClient.userEmailAddress.findMany({
       where: {
@@ -137,8 +137,9 @@ export async function mergeBackfilledUsers(parameters: z.infer<typeof zodMergeBa
     })
     logger.info(`Found next' ${userEmailAddresses.length} email address rows`)
 
-    // This may happen if the user has been already merged by the user before being caught by this portion of the script,
-    // so we should skip this user if the length is less than or equal to 1.
+    // If the user has been already merged by the user before being caught by this portion of the script, then we can expect
+    //   the length of `userEmailAddresses` to be 1.
+    // As such, we should skip the user.
     if (userEmailAddresses.length <= 1) {
       continue
     }
