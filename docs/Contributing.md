@@ -14,6 +14,20 @@ If you are here to suggest a feature, first [create an issue](https://github.com
 
 ## Development
 
+### Knowledge pre-requisites
+
+Before proceeding with anything, **PLEASE** take time to review the [Knowledge pre-requisites](#knowledge-pre-requisites).
+
+- Read `docs/Leveraging Modern NextJS Features.md` for an overview on the new Next.js features and React Server Components + Server Actions being leveraged in this repo
+  - If this is your first time working with these technologies, please take the time to read the linked-to blog posts
+- Read `docs/Coding Conventions.md` for an overview of coding conventions encouraged for this project
+- Read ["What is Prisma"](https://www.prisma.io/docs/orm/overview/introduction/what-is-prisma) and ["Why Prisma"](https://www.prisma.io/docs/orm/overview/introduction/why-prisma) to learn about the ORM we use to query our database
+- Watch [this YouTube video](https://www.youtube.com/watch?v=CQuTF-bkOgc) for a great overview of the tradeoffs between the UI library/framework options that exist for frontend development, and why we decided to use TailwindCSS + Radix UI as our template
+- Read Vercel's guide on ["Connection Pooling with Serverless Functions"](https://vercel.com/guides/connection-pooling-with-serverless-functions#modern-databases-with-high-connection-limits) to learn about the architecture tradeoffs of connecting to SQL database in serverless environments, and why we decided to leverage the robust scalability architecture inherent in [PlanetScale](https://planetscale.com/features)
+- Read the [Inngest docs](https://www.inngest.com/docs/quick-start) to learn more about how to leverage the tool to build resilient workflows
+
+### Developing your feature/fix
+
 If you have been assigned to fix an issue or develop a new feature, please follow these steps to get started:
 
 - Fork this repository
@@ -33,3 +47,58 @@ If you have been assigned to fix an issue or develop a new feature, please follo
 - Implement your changes, tests and documentations
 - Commit your changes
 - Submit your PR for review
+
+### Pre-commit audits & testing
+
+- Before committing changes, please audit your code locally:
+
+  - `npm run lint` - audits code against ESLint and Prettier
+  - `npm run typecheck` - audits code against TypeScript
+  - `npm run test` - execute Jest tests
+  - `npm run audit` - executes all 3 commands above concurrently
+    - If `audit` fails, then it is very likely that your PR will not pass GitHub CI
+
+- Likewise, test E2E flows as necessary:
+  - `npm run e2e:run` - starts up [Cypress](https://www.cypress.io/) UI
+    - With the UI, you can run individual E2E tests under "Specs" and visually follow the flows
+  - `npm run e2e:run-headless` - runs all our E2E tests consecutively via Cypress CLI
+    - Currently, this command only executes when new comments are made to main branch because of database dependencies - this may change in the future
+  - NOTE: the E2E testing suite connects to a local MySQL database, _not_ your PlanetScale database - it will live on `localhost:3306`
+    - Use tools like [DataGrip](https://www.jetbrains.com/datagrip/) or [DBeaver](https://dbeaver.io/) to analyze local MySQL data if necessary
+  - Refer to `docs/Coding Conventions.md/Testing` for more information
+
+### Useful development tips
+
+- `npx prisma generate` - generates [Prisma ORM](https://www.prisma.io/) TypeScript definitions (_i.e._ DB client code) based on `prisma/prisma.schema`
+  - Whenever you make Prisma schema changes, you should run the generate command
+- `npx prisma studio` - spins up a full database UI for the database you are connected to
+- `npm run db:seed` - resets the database you are connected to, then populates it with seed data
+  - The database will be based on the `DATABASE_URL` provided in your local `.env` file - we will refer to this as "the database you are connected to"
+- `npm run codegen` - generates TypeScript definitions for any GraphQL operations we have defined in our codebase
+  - Whenever you make GraphQL query updates (_e.g._ our DTSI integration), you should run this command to update your TypeScript definitions
+- `npm run codegen:schemas` - if any of the GraphQL schemas changed for our 3rd-party API partners (_e.g._ https://www.dotheysupportit.com/), run this command to pull in the latest schemas
+- `npm run intl:extract-compile` - generates initial translation files
+- `npm run storybook` - view isolated [storybook stories](https://storybook.js.org/)
+- When checking out someone else's branch with changes - if you encounter TypeScript errors, run `npm run newbranch` to execute several common commands that may fix these errors
+
+### Updating the database schema
+
+If you are not a core contributor, reach out to one to make any DB schema updates your PR needs. If you're a core contributor, follow this steps whenever you need to make Prisma Schema changes
+
+- `npx prisma generate` - updates your Prisma TypeScript definitions
+- Then, depending on your situation, run either of the following:
+  - `npx prisma db push` - if your changes are _not_ breaking and you want to maintain the values in your database, then run this command; this will simply push the schema changes to the database instance you are connected to
+  - `npm run db:seed` - if you do have breaking changes, or if you just want to reset your database values, then run this command; this command force-pushes the schema updates to the database instance you are connected to, wiping all existing information and freshly populating the database with seed data
+
+### Running One Time Scripts On Testing or Production Environment
+
+On a testing or production environment, it is recommended to run the script through Inngest admin dashboard:
+
+- Select the function you want to run
+- Click the invoke button in the right corner
+- Update the data fields to pass any data needed by the script
+- Click "Invoke Function"
+
+## Pull requests
+
+Maintainers merge pull requests by squashing all commits and editing the commit message if necessary using the GitHub user interface.
