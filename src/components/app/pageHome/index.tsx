@@ -123,7 +123,7 @@ export function PageHome({
             us.
           </PageSubTitle>
           <div className="space-y-6">
-            <PartnerGrid highlightedOnly />
+            <PartnerGrid disableLinks highlightedOnly />
             <Button asChild variant="secondary">
               <InternalLink href={urls.partners()}>View all</InternalLink>
             </Button>
