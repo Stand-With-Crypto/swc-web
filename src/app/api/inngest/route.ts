@@ -1,6 +1,7 @@
 import { serve } from 'inngest/next'
 
 import { airdropNFTWithInngest } from '@/inngest/functions/airdropNFT'
+import { backfillNFTInngestCronJob } from '@/inngest/functions/airdropNFTCronJob'
 import { backfillNFTWithInngest } from '@/inngest/functions/backfillNFT'
 import { cleanupPostalCodesWithInngest } from '@/inngest/functions/cleanupPostalCodes'
 import { emailRepViaCapitolCanaryWithInngest } from '@/inngest/functions/emailRepViaCapitolCanary'
@@ -19,5 +20,6 @@ export const { GET, POST, PUT } = serve({
     monitorBaseETHBalances,
     setPrimaryCryptoAddressOfUserWithInngest,
     backfillNFTWithInngest,
+    backfillNFTInngestCronJob,
   ],
 })
