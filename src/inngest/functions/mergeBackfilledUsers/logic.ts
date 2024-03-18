@@ -12,16 +12,13 @@ export const zodMergeBackfilledUsers = object({
   limit: number().optional(),
   persist: boolean().optional(),
   calculateMode: boolean().optional(),
-  userIdsToSkip: z.array(z.string()).optional(),
 })
 
 export async function calculateAndLogDuplicateUserCounts() {
   await mergeBackfilledUsers({ calculateMode: true })
 }
 
-export async function mergeBackfilledUsers(
-  parameters: z.infer<typeof zodMergeBackfilledUsers>,
-): Promise<{ mergedUsersCount: number; newUserIdsToSkip: string[] }> {
+export async function mergeBackfilledUsers(parameters: z.infer<typeof zodMergeBackfilledUsers>) {
   zodMergeBackfilledUsers.parse(parameters)
   let persist = parameters.persist
   if (!persist) {
@@ -43,7 +40,7 @@ export async function mergeBackfilledUsers(
    *   - If they have not logged in at all, then the email addresses are left unmerged.
    *   - If they have logged in with email, then the email addresses should have already been merged (and hence no duplicate users).
    *   - If they have logged in with a crypto address, then there might still be duplicate email addresses.
-   *     - However, we should not touch those users because it is intentional that email users are different than crypto users.
+   *     - However, we should not touch those two distinguishable users because it is intentional that email users are different than crypto users.
    *       - There are only about a few hundred of these cases as far as I can tell. We should still consider them as separate users.
    *
    * "What about crypto addresses?"
@@ -63,6 +60,7 @@ export async function mergeBackfilledUsers(
    * - all actions are created from the initial backfill
    * - all crypto addresses are created from initial backfill
    */
+  logger.info('Finding duplicate email addresses...', { parameters })
   const userEmailAddressGroupings = await prismaClient.userEmailAddress.groupBy({
     by: ['emailAddress'],
     where: {
@@ -84,11 +82,6 @@ export async function mergeBackfilledUsers(
           },
         },
       },
-      ...(parameters.userIdsToSkip && {
-        userId: {
-          notIn: parameters.userIdsToSkip,
-        },
-      }),
     },
     having: {
       emailAddress: {
@@ -104,46 +97,55 @@ export async function mergeBackfilledUsers(
   })
   if (userEmailAddressGroupings.length === 0) {
     logger.info('No duplicate email addresses found')
-    return { mergedUsersCount: 0, newUserIdsToSkip: [] }
+    return 0
   }
-
   logger.info(
-    `Found ${parameters.calculateMode ? 'next' : 'total'} ${userEmailAddressGroupings.length} duplicate email addresses`,
+    `${parameters.calculateMode ? 'Counted' : 'Found next'} ${userEmailAddressGroupings.length}${parameters.calculateMode ? ' total' : ''} duplicate email addresses`,
   )
-
-  // Get the full rows for the email addresses and for the users.
-
-  const userEmailAddresses = await prismaClient.userEmailAddress.findMany({
-    where: {
-      emailAddress: {
-        in: userEmailAddressGroupings.map(({ emailAddress }) => emailAddress),
-      },
-    },
-  })
-  logger.info(
-    `Found ${parameters.calculateMode ? 'next' : 'total'} ${userEmailAddresses.length} email address rows`,
-  )
-
   if (parameters.calculateMode) {
-    return { mergedUsersCount: 0, newUserIdsToSkip: [] }
+    return 0
   }
 
-  const newUserIdsToSkip: string[] = []
   let mergedUsersCount = 0
-  // Iterate through the email address groupings and merge the users.
+  const newUserIdsToSkip: string[] = []
   for (const emailAddress of userEmailAddressGroupings) {
-    // Get all users for this email address.
-    const usersForEmailAddress = userEmailAddresses.filter(
-      emailAddressRow => emailAddressRow.emailAddress === emailAddress.emailAddress,
-    )
-    // This should not happen, but let's be safe.
-    if (usersForEmailAddress.length <= 1) {
+    // For each email address, find all email address rows that match the email address.
+    // We will use the rows to get the user ID.
+    // Also filter out the specific attributes again here just to make sure.
+    const userEmailAddresses = await prismaClient.userEmailAddress.findMany({
+      where: {
+        emailAddress: emailAddress.emailAddress,
+        user: {
+          informationVisibility: UserInformationVisibility.ANONYMOUS,
+          dataCreationMethod: DataCreationMethod.INITIAL_BACKFILL,
+          acquisitionSource: 'capital-canary-initial-backfill',
+          userActions: {
+            every: {
+              dataCreationMethod: DataCreationMethod.INITIAL_BACKFILL,
+            },
+          },
+          userCryptoAddresses: {
+            every: {
+              dataCreationMethod: DataCreationMethod.INITIAL_BACKFILL,
+            },
+          },
+        },
+      },
+      orderBy: {
+        userId: 'asc',
+      },
+    })
+    logger.info(`Found next' ${userEmailAddresses.length} email address rows`)
+
+    // This may happen if the user has been already merged by the user before being caught by this portion of the script,
+    // so we should skip this user if the length is less than or equal to 1.
+    if (userEmailAddresses.length <= 1) {
       continue
     }
 
     // Choose a user to keep - the rest will be deleted.
-    const userIdToKeep = usersForEmailAddress[0].userId
-    const userIdsToDelete = usersForEmailAddress.slice(1).map(({ userId }) => userId)
+    const userIdToKeep = userEmailAddresses[0].userId
+    const userIdsToDelete = userEmailAddresses.slice(1).map(({ userId }) => userId)
 
     for (const userIdToDelete of userIdsToDelete) {
       // Double-check that we have not already merged these users.
@@ -191,5 +193,5 @@ export async function mergeBackfilledUsers(
     }
   }
 
-  return { mergedUsersCount, newUserIdsToSkip }
+  return mergedUsersCount
 }
