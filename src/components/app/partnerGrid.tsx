@@ -66,11 +66,6 @@ const partners = [
     url: 'https://www.haun.co/',
   },
   {
-    title: 'Union Square Ventures',
-    imageSrc: '/partners/usv_logo.jpg',
-    url: 'https://www.usv.com/',
-  },
-  {
     title: 'Electric Capital',
     imageSrc: '/partners/electric_capital.png',
     url: 'https://www.electriccapital.com/',
