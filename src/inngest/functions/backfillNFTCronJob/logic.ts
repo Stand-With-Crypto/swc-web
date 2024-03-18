@@ -12,7 +12,7 @@ const GO_LIVE_DATE = new Date('2024-02-25 00:00:00.000')
 
 // This is the number of records to process in a single run.
 const BACKFILL_NFT_INNGEST_CRON_JOB_PROCESS_SIZE =
-  Number(process.env.BACKFILL_NFT_INNGEST_CRON_JOB_BATCH_SIZE) || 1000
+  Number(process.env.BACKFILL_NFT_INNGEST_CRON_JOB_PROCESS_SIZE) || 1000
 
 // This is the threshold in which we will stop the cron job if the current transaction fee exceeds the threshold.
 const AIRDROP_NFT_TRANSACTION_FEE_THRESHOLD =
