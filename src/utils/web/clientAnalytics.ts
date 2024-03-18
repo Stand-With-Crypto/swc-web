@@ -3,17 +3,18 @@ import mixpanel from 'mixpanel-browser'
 
 import { isCypress, isStorybook } from '@/utils/shared/executionEnvironment'
 import { customLogger } from '@/utils/shared/logger'
-import { requiredEnv } from '@/utils/shared/requiredEnv'
+import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
 import { AnalyticProperties } from '@/utils/shared/sharedAnalytics'
 import { formatVercelAnalyticsEventProperties } from '@/utils/shared/vercelAnalytics'
 import { getClientCookieConsent } from '@/utils/web/clientCookieConsent'
 
-const NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN = requiredEnv(
+const NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN = requiredOutsideLocalEnv(
   process.env.NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN,
   'process.env.NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN',
-)
+)!
 
-const environmentHasAnalyticsEnabled = !isStorybook && !isCypress
+const environmentHasAnalyticsEnabled =
+  !isStorybook && !isCypress && !!NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN
 
 let init = false
 export function maybeInitClientAnalytics() {

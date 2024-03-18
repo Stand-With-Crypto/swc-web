@@ -3,7 +3,7 @@ version: '3.8'
 services:
   mysql:
     image: mysql:8.0
-    container_name: swc_mysql
+    container_name: swc_dev_mysql
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -12,11 +12,3 @@ services:
       - '3306:3306'
     volumes:
       - ./.docker/dbdata:/var/lib/mysql
-
-  redis:
-    container_name: swc_redis
-    image: redis:alpine
-    command: ['redis-server', '--appendonly', 'yes']
-    ports:
-      - '6379:6379'
-    restart: unless-stopped

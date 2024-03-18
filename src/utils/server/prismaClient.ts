@@ -10,9 +10,10 @@ import { requiredEnv } from '@/utils/shared/requiredEnv'
 const DATABASE_URL = requiredEnv(process.env.DATABASE_URL, 'process.env.DATABASE_URL')
 
 const createPrisma = () => {
-  const log: PrismaClientOptions['log'] = process.env.LOG_DATABASE
-    ? ['query', 'info', 'warn', 'error']
-    : ['info', 'warn', 'error']
+  const log: PrismaClientOptions['log'] =
+    process.env.LOG_DATABASE === 'true'
+      ? ['query', 'info', 'warn', 'error']
+      : ['info', 'warn', 'error']
   if (IS_DEVELOPING_OFFLINE || DATABASE_URL.includes('localhost')) {
     return new PrismaClient({
       log,

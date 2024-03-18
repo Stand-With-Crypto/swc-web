@@ -16,11 +16,11 @@ If you are here to suggest a feature, first [create an issue](https://github.com
 
 ### Knowledge pre-requisites
 
-Before proceeding with anything, **PLEASE** take time to review the [Knowledge pre-requisites](#knowledge-pre-requisites).
+Before proceeding with anything, **PLEASE** check out this following resources.
 
-- Read `docs/Leveraging Modern NextJS Features.md` for an overview on the new Next.js features and React Server Components + Server Actions being leveraged in this repo
+- Read [Leveraging Modern NextJS Features](<docs/Leveraging Modern NextJS Features.md>) for an overview on the new Next.js features and React Server Components + Server Actions being leveraged in this repo
   - If this is your first time working with these technologies, please take the time to read the linked-to blog posts
-- Read `docs/Coding Conventions.md` for an overview of coding conventions encouraged for this project
+- Read [Coding Conventions](<docs/Coding Conventions.md>) for an overview of coding conventions encouraged for this project
 - Read ["What is Prisma"](https://www.prisma.io/docs/orm/overview/introduction/what-is-prisma) and ["Why Prisma"](https://www.prisma.io/docs/orm/overview/introduction/why-prisma) to learn about the ORM we use to query our database
 - Watch [this YouTube video](https://www.youtube.com/watch?v=CQuTF-bkOgc) for a great overview of the tradeoffs between the UI library/framework options that exist for frontend development, and why we decided to use TailwindCSS + Radix UI as our template
 - Read Vercel's guide on ["Connection Pooling with Serverless Functions"](https://vercel.com/guides/connection-pooling-with-serverless-functions#modern-databases-with-high-connection-limits) to learn about the architecture tradeoffs of connecting to SQL database in serverless environments, and why we decided to leverage the robust scalability architecture inherent in [PlanetScale](https://planetscale.com/features)
@@ -59,6 +59,7 @@ If you have been assigned to fix an issue or develop a new feature, please follo
     - If `audit` fails, then it is very likely that your PR will not pass GitHub CI
 
 - Likewise, test E2E flows as necessary:
+  - Make sure to stop your dev docker compose before running tests, we use a different instance of mysql for cypress and it will cause port conflicts
   - `npm run e2e:run` - starts up [Cypress](https://www.cypress.io/) UI
     - With the UI, you can run individual E2E tests under "Specs" and visually follow the flows
   - `npm run e2e:run-headless` - runs all our E2E tests consecutively via Cypress CLI
