@@ -4,8 +4,8 @@ import { sortDTSIPersonDataTable } from '@/components/app/dtsiClientPersonDataTa
 import { DTSIPersonCard } from '@/components/app/dtsiPersonCard'
 import { DelayedRecentActivity } from '@/components/app/pageHome/delayedRecentActivity'
 import { HeroCTA } from '@/components/app/pageHome/heroCTA'
+import { PartnerGrid } from '@/components/app/pageHome/partnerGrid'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
-import { PartnerGrid } from '@/components/app/partnerGrid'
 import { SumDonationsByUserRow } from '@/components/app/sumDonationsByUserRow/sumDonationsByUserRow'
 import { UserActionFormVoterRegistrationDeeplinkWrapper } from '@/components/app/userActionFormVoterRegistration/homepageDialogDeeplinkWrapper'
 import { UserActionRowCTAsAnimatedListWithApi } from '@/components/app/userActionRowCTA/userActionRowCTAsAnimatedListWithApi'
@@ -123,7 +123,7 @@ export function PageHome({
             us.
           </PageSubTitle>
           <div className="space-y-6">
-            <PartnerGrid disableLinks highlightedOnly />
+            <PartnerGrid />
             <Button asChild variant="secondary">
               <InternalLink href={urls.partners()}>View all</InternalLink>
             </Button>
