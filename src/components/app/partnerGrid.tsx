@@ -81,7 +81,8 @@ const containerVariants = cva('flex items-center relative', {
   variants: {
     variant: {
       default: 'w-44 h-20',
-      contained: 'bg-secondary h-56 w-56 rounded-lg border-secondary border-[36px]',
+      contained:
+        'bg-secondary h-40 w-40 sm:h-56 sm:w-56 rounded-lg border-secondary border-[12px] sm:border-[36px]',
     },
   },
   defaultVariants: {
@@ -99,11 +100,10 @@ export function PartnerGrid({ highlightedOnly, disableLinks, variant }: PartnerG
     ? partners.filter(partner => partner.highlighted)
     : partners
 
-  const Container = disableLinks ? React.Fragment : ExternalLink
   return (
     <div className="flex flex-row flex-wrap items-center justify-center gap-3 sm:gap-8">
-      {visiblePartners.map(({ title, url, imageSrc }) => (
-        <Container href={url} key={title}>
+      {visiblePartners.map(({ title, url, imageSrc }) => {
+        const img = (
           <div className={containerVariants({ variant })}>
             <NextImage
               alt={`${title} logo`}
@@ -111,11 +111,19 @@ export function PartnerGrid({ highlightedOnly, disableLinks, variant }: PartnerG
               fill
               priority
               quality={100}
+              sizes={'(max-width: 768px) 160px, 224px'}
               src={imageSrc}
             />
           </div>
-        </Container>
-      ))}
+        )
+        return disableLinks ? (
+          <React.Fragment key={title}>{img}</React.Fragment>
+        ) : (
+          <ExternalLink href={url} key={title}>
+            {img}
+          </ExternalLink>
+        )
+      })}
     </div>
   )
 }
