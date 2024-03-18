@@ -5,6 +5,7 @@ import { DTSIPersonCard } from '@/components/app/dtsiPersonCard'
 import { DelayedRecentActivity } from '@/components/app/pageHome/delayedRecentActivity'
 import { HeroCTA } from '@/components/app/pageHome/heroCTA'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
+import { PartnerGrid } from '@/components/app/partnerGrid'
 import { SumDonationsByUserRow } from '@/components/app/sumDonationsByUserRow/sumDonationsByUserRow'
 import { UserActionFormVoterRegistrationDeeplinkWrapper } from '@/components/app/userActionFormVoterRegistration/homepageDialogDeeplinkWrapper'
 import { UserActionRowCTAsAnimatedListWithApi } from '@/components/app/userActionRowCTA/userActionRowCTAsAnimatedListWithApi'
@@ -94,7 +95,7 @@ export function PageHome({
       </section>
       <div className="container">
         <TopLevelMetrics {...{ sumDonations, locale, countUsers, countPolicymakerContacts }} />
-        <section className="mb-16 text-center md:mb-24">
+        <section className="mb-16 text-center md:mb-36">
           <PageTitle as="h3" className="mb-7" size="md">
             Our mission
           </PageTitle>
@@ -111,7 +112,25 @@ export function PageHome({
             </Button>
           </div>
         </section>
-        <section className="mb-16 space-y-7 md:mb-24">
+
+        <section className="mb-16 text-center md:mb-36">
+          <PageTitle as="h3" className="mb-7" size="md">
+            Our partners
+          </PageTitle>
+          <PageSubTitle as="h4" className="mb-7">
+            Stand With Crypto is first and foremost the result of 300,000+ people fighting to keep
+            crypto in America. We’ve also partnered with a number of companies to fight alongside
+            us.
+          </PageSubTitle>
+          <div className="space-y-6">
+            <PartnerGrid disableLinks highlightedOnly />
+            <Button asChild variant="secondary">
+              <InternalLink href={urls.partners()}>View all</InternalLink>
+            </Button>
+          </div>
+        </section>
+
+        <section className="mb-16 space-y-7 md:mb-36">
           <PageTitle as="h3" size="md">
             Our community
           </PageTitle>
@@ -164,7 +183,7 @@ export function PageHome({
             </TabsContent>
           </Tabs>
         </section>
-        <section className="mb-16 space-y-7 md:mb-24">
+        <section className="mb-16 space-y-7 md:mb-36">
           <PageTitle as="h3" size="md">
             Get involved
           </PageTitle>
@@ -173,7 +192,7 @@ export function PageHome({
           </PageSubTitle>
           <UserActionRowCTAsAnimatedListWithApi />
         </section>
-        <section className="mb-16 space-y-7 md:mb-24">
+        <section className="mb-16 space-y-7 md:mb-36">
           <PageTitle as="h3" size="md">
             Where politicians stand on crypto
           </PageTitle>
