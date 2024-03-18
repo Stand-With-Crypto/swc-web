@@ -86,7 +86,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
           We need to hardcode the height of the navbar in different environments
           */
           cn(
-            'sticky top-0 z-10 flex h-[72px] w-full items-center bg-white py-3 md:h-[84px] md:py-5',
+            'sticky top-0 z-10 flex h-[72px] w-full items-center bg-white py-3 lg:h-[84px] lg:py-5',
           )
         }
       >
@@ -104,18 +104,18 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
             <div className="flex gap-4 rounded-full bg-secondary">
               {leftLinks.map(({ href, text }) => {
                 return (
-                  <Button asChild className="hidden md:block" key={href} variant="secondary">
+                  <Button asChild className="hidden lg:block" key={href} variant="secondary">
                     <InternalLink href={href}>{text}</InternalLink>
                   </Button>
                 )
               })}
             </div>
-            <div className="hidden md:flex">{loginButton}</div>
+            <div className="hidden lg:flex">{loginButton}</div>
           </div>
         </div>
         <Drawer {...dialogProps} direction="top">
           <DrawerTrigger asChild>
-            <button className="p-3 md:hidden">
+            <button className="p-3 lg:hidden">
               <span className="sr-only">Open navigation menu</span>
               <Menu />
             </button>

@@ -147,7 +147,7 @@ export function DataTable<TData extends Person, TValue>({
       </div>
       <div className="md:container">
         <div className="md:min-h-[578px] md:rounded-md md:border-b md:border-l md:border-r">
-          <div className="sticky top-[72px] z-10 flex flex-col justify-between border-b border-t bg-white p-3 pl-3 md:top-[84px] md:flex-row md:p-6">
+          <div className="sticky top-[72px] z-10 flex flex-col justify-between border-b border-t bg-white p-3 pl-3 lg:top-[84px] lg:flex-row lg:p-6">
             <PageTitle className="text-left" size="sm">
               Politicians
             </PageTitle>

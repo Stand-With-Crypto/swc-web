@@ -6,13 +6,13 @@ import { ExternalLink } from '@/components/ui/link'
 
 const partners = [
   {
-    title: 'paradigm',
+    title: 'Paradigm',
     imageSrc: '/partners/paradigm.png',
     url: 'https://www.paradigm.xyz/',
     highlighted: true,
   },
   {
-    title: 'coinbase',
+    title: 'Coinbase',
     imageSrc: '/partners/coinbase.png',
     url: 'https://www.coinbase.com/',
     highlighted: true,
@@ -24,17 +24,56 @@ const partners = [
     highlighted: true,
   },
   {
-    title: 'lightspark',
+    title: 'Lightspark',
     imageSrc: '/partners/lightspark.png',
     url: 'https://www.lightspark.com/',
     highlighted: true,
   },
-  { title: 'paxos', imageSrc: '/partners/paxos.png', url: 'https://paxos.com/', highlighted: true },
+  { title: 'Paxos', imageSrc: '/partners/paxos.png', url: 'https://paxos.com/', highlighted: true },
   {
-    title: 'dtsi',
+    title: 'DoTheySupportIt',
     imageSrc: '/partners/dtsi.png',
     url: 'https://www.dotheysupportit.com/',
-    highlighted: false,
+  },
+  {
+    title: 'Privy',
+    imageSrc: '/partners/privy_coral.png',
+    url: 'https://www.privy.io/',
+  },
+  {
+    title: 'Gemini',
+    imageSrc: '/partners/gemini.svg',
+    url: 'https://www.gemini.com/',
+  },
+  {
+    title: 'dYdX',
+    imageSrc: '/partners/dydx.png',
+    url: 'https://dydx.exchange/',
+  },
+  {
+    title: 'Anchorage Digital',
+    imageSrc: '/partners/anchorage.png',
+    url: 'https://www.anchorage.com/',
+  },
+  {
+    title: 'Blockchain.com',
+    imageSrc: '/partners/blockchaindotcom.png',
+    url: 'https://www.blockchain.com/',
+  },
+  {
+    title: 'Haun Ventures',
+    imageSrc: '/partners/haun.png',
+    url: 'https://www.haun.co/',
+  },
+  {
+    title: 'Union Square Ventures',
+    imageSrc: '/partners/usv_logo.jpg',
+    url: 'https://www.usv.com/',
+  },
+  {
+    title: 'Electric Capital',
+    imageSrc: '/partners/electric_capital.png',
+    url: 'https://www.electriccapital.com/',
   },
 ]
 
