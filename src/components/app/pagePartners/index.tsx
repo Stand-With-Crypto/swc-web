@@ -19,7 +19,7 @@ export function PagePartners({ title, description, locale }: PagePartnersProps) 
         <PageTitle>{title}</PageTitle>
         <PageSubTitle>{description}</PageSubTitle>
 
-        <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
+        <div className="flex flex-col-reverse items-center justify-center gap-4 sm:flex-row">
           <Button asChild className="w-full sm:w-auto" variant="secondary">
             <InternalLink href={getIntlUrls(locale).contribute()}>Contribute</InternalLink>
           </Button>
