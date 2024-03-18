@@ -1,4 +1,4 @@
-import { PartnerGrid } from '@/components/app/partnerGrid'
+import { PartnerGrid } from '@/components/app/pagePartners/partnerGrid'
 import { Button } from '@/components/ui/button'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
@@ -36,7 +36,7 @@ export function PagePartners({ title, description, locale }: PagePartnersProps) 
       </section>
 
       <section>
-        <PartnerGrid variant="contained" />
+        <PartnerGrid />
       </section>
     </div>
   )
