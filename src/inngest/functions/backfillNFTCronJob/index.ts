@@ -10,6 +10,7 @@ import { prismaClient } from '@/utils/server/prismaClient'
 import { fetchAirdropTransactionFee } from '@/utils/server/thirdweb/fetchCurrentClaimTransactionFee'
 import { getLogger } from '@/utils/shared/logger'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
+import { sleep } from '@/utils/shared/sleep'
 
 const logger = getLogger('backfillNFTCronJob')
 
@@ -38,7 +39,6 @@ const BACKFILL_NFT_INNGEST_CRON_JOB_EVENT_NAME = 'script/backfill.nft.cron.job'
 
 /**
  * This Inngest function is a cron job responsible for backfilling the NFTs for the user actions that were skipped/missed.
- * The code is written in a fashion to support Inngest multi-step functions and memoize states.
  */
 export const backfillNFTInngestCronJob = inngest.createFunction(
   {
@@ -52,37 +52,31 @@ export const backfillNFTInngestCronJob = inngest.createFunction(
       ? { cron: BACKFILL_NFT_INNGEST_CRON_JOB_SCHEDULE }
       : { event: BACKFILL_NFT_INNGEST_CRON_JOB_EVENT_NAME }),
   },
-  async ({ step }) => {
+  async () => {
     // Initialize variables.
-    // The initialization of variables using `step.run` might seem silly, but see this doc for why this is needed: https://www.inngest.com/docs/functions/multi-step#my-variable-isn-t-updating
-    const currentTime = await step.run('script.initialize-constant-variables', async () => {
-      return new Date().getTime()
-    })
+    const currentTime = new Date().getTime()
     const maxBackfillCount =
       (BACKFILL_NFT_INNGEST_CRON_JOB_AIRDROP_TIMEFRAME /
         BACKFILL_NFT_INNGEST_CRON_JOB_AIRDROP_SLEEP_INTERVAL) *
       BACKFILL_NFT_INNGEST_CRON_JOB_AIRDROP_BATCH_SIZE
-    let batchNum = 1
+    let totalBackfilled = 0
 
     // Fetch the user action batches that need to be backfilled.
-    const userActionBatches = await step.run('script.get-user-actions', async () => {
-      const userActions = await prismaClient.userAction.findMany({
-        where: {
-          datetimeCreated: { gte: GO_LIVE_DATE },
-          nftMint: null,
-          actionType: { in: actionsWithNFT },
-          user: { primaryUserCryptoAddress: { isNot: null } },
+    const userActions = await prismaClient.userAction.findMany({
+      where: {
+        datetimeCreated: { gte: GO_LIVE_DATE },
+        nftMint: null,
+        actionType: { in: actionsWithNFT },
+        user: { primaryUserCryptoAddress: { isNot: null } },
+      },
+      take: maxBackfillCount,
+      include: {
+        user: {
+          include: { primaryUserCryptoAddress: true },
         },
-        take: maxBackfillCount,
-        include: {
-          user: {
-            include: { primaryUserCryptoAddress: true },
-          },
-        },
-      })
-      logger.info(`Fetched ${userActions.length} user actions to backfill`)
-      return chunk(userActions, BACKFILL_NFT_INNGEST_CRON_JOB_AIRDROP_BATCH_SIZE)
+      },
     })
+    const userActionBatches = chunk(userActions, BACKFILL_NFT_INNGEST_CRON_JOB_AIRDROP_BATCH_SIZE)
 
     // Process the user action batches.
     for (const userActionBatch of userActionBatches) {
@@ -99,22 +93,17 @@ export const backfillNFTInngestCronJob = inngest.createFunction(
       }
 
       // Check if the current wallet balances are low.
-      const walletsWithLowBalances = await step.run(
-        `script.fetch-current-wallet-balances-${batchNum}`,
-        async () => {
-          const baseETHBalances = await getBaseETHBalances([
-            SWC_DOT_ETH_WALLET,
-            LEGACY_NFT_DEPLOYER_WALLET,
-          ])
-          return baseETHBalances.result.filter(
-            cryptoAddress =>
-              Number(cryptoAddress.balance) / ETH_BASE_UNIT_WEI < LOW_ETH_BALANCE_THRESHOLD,
-          )
-        },
+      const baseETHBalances = await getBaseETHBalances([
+        SWC_DOT_ETH_WALLET,
+        LEGACY_NFT_DEPLOYER_WALLET,
+      ])
+      const walletsWithLowETHBalances = baseETHBalances.result.filter(
+        cryptoAddress =>
+          Number(cryptoAddress.balance) / ETH_BASE_UNIT_WEI < LOW_ETH_BALANCE_THRESHOLD,
       )
-      if (walletsWithLowBalances && walletsWithLowBalances.length > 0) {
+      if (walletsWithLowETHBalances && walletsWithLowETHBalances.length > 0) {
         logger.warn(
-          `Low Base ETH balance detected for ${walletsWithLowBalances
+          `Low Base ETH balance detected for ${walletsWithLowETHBalances
             .map(wallet => wallet.account)
             .join(', ')} - please fund as soon as possible - stopping the cron job`,
         )
@@ -122,14 +111,8 @@ export const backfillNFTInngestCronJob = inngest.createFunction(
       }
 
       // Check if the current airdrop transaction fee exceeds the threshold.
-      const currentAirdropTransactionFee = await step.run(
-        `script.fetch-airdrop-transaction-fee-${batchNum}`,
-        async () => {
-          const fee = await fetchAirdropTransactionFee()
-          logger.info(`Current airdrop transaction fee: ${fee}`)
-          return fee
-        },
-      )
+      const currentAirdropTransactionFee = await fetchAirdropTransactionFee()
+      logger.info(`Current airdrop transaction fee: ${currentAirdropTransactionFee}`)
       if (currentAirdropTransactionFee > AIRDROP_NFT_ETH_TRANSACTION_FEE_THRESHOLD) {
         logger.info(
           `Current airdrop transaction fee (${currentAirdropTransactionFee}) exceeds the threshold (${AIRDROP_NFT_ETH_TRANSACTION_FEE_THRESHOLD}) - stopping the cron job`,
@@ -138,22 +121,21 @@ export const backfillNFTInngestCronJob = inngest.createFunction(
       }
 
       // Claim the NFT for the user actions.
-      await step.run(`script.claim-nfts-${batchNum}`, async () => {
-        await Promise.all(
-          userActionBatch.map(userAction =>
-            claimNFT(userAction, userAction.user.primaryUserCryptoAddress!, {
-              ignoreTurnOffNFTMintFlag: true,
-            }),
-          ),
-        )
-      })
-      batchNum += 1
+      await Promise.all(
+        userActionBatch.map(userAction =>
+          claimNFT(userAction, userAction.user.primaryUserCryptoAddress!, {
+            ignoreTurnOffNFTMintFlag: true,
+          }),
+        ),
+      )
+      totalBackfilled += userActionBatch.length
 
       // Sleep for the interval duration.
-      await step.sleep(
-        `script.sleep-${batchNum}`,
-        BACKFILL_NFT_INNGEST_CRON_JOB_AIRDROP_SLEEP_INTERVAL,
-      )
+      await sleep(BACKFILL_NFT_INNGEST_CRON_JOB_AIRDROP_SLEEP_INTERVAL)
+    }
+
+    return {
+      totalBackfilled,
     }
   },
 )
