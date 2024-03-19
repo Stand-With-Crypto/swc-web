@@ -94,6 +94,7 @@ export async function triggerServerActionForForm<
       })
     })
     Sentry.captureMessage('Field errors returned from action', {
+      fingerprint: [`Field errors returned from action ${formName}`],
       tags: { formName, domain: 'triggerServerActionForForm', path: 'Error' },
       extra: { analyticsProps, response, formName, payload },
     })

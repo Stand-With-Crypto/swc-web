@@ -6,6 +6,8 @@ import {
   GoogleCivicInfoResponse,
 } from '@/utils/shared/googleCivicInfo'
 
+const SINGLE_MEMBER_STATES = ['AK', 'DE', 'ND', 'SD', 'VT', 'WY']
+
 const findCongressionalDistrictString = (response: GoogleCivicInfoResponse, address: string) => {
   if (Object.keys(response.divisions).every(key => key !== 'ocd-division/country:us')) {
     return { notFoundReason: 'NOT_USA_ADDRESS' as const }
@@ -79,6 +81,22 @@ export async function getCongressionalDistrictFromAddress(address: string) {
     const returned = { notFoundReason: 'NOT_USA_ADDRESS' as const }
     return returned
   }
+
+  // Explicit check if the address is in a state with no congressional districts since Civic API
+  // does not return a cd division for these states
+  let stateCode:
+    | string
+    | {
+        notFoundReason: 'UNEXPECTED_ERROR'
+      } = result.normalizedInput.state
+  if (SINGLE_MEMBER_STATES.includes(stateCode)) {
+    return {
+      stateCode,
+      districtNumber: 1,
+      googleCivicData: result,
+    } as GetCongressionalDistrictFromAddressSuccess
+  }
+
   const districtString = findCongressionalDistrictString(result, address)
   if (isObject(districtString)) {
     return districtString
@@ -87,7 +105,7 @@ export async function getCongressionalDistrictFromAddress(address: string) {
   if (isObject(districtNumber)) {
     return districtNumber
   }
-  const stateCode = parseStateString(districtString)
+  stateCode = parseStateString(districtString)
   if (isObject(stateCode)) {
     return stateCode
   }

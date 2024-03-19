@@ -2,6 +2,7 @@ import { faker } from '@faker-js/faker'
 import { addMocksToSchema } from '@graphql-tools/mock'
 import { buildClientSchema, graphql } from 'graphql'
 
+import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
 import introspectionResult from '@/data/dtsi/introspection.json'
 import { dtsiBillMockResolver } from '@/mocks/dtsi/mockResolvers/dtsiBillMockResolver'
 import { dtsiPersonMockResolver } from '@/mocks/dtsi/mockResolvers/dtsiPersonMockResolver'
@@ -39,6 +40,18 @@ const schemaWithMocks = addMocksToSchema({
     Bill: dtsiBillMockResolver,
     Query: dtsiQueryResolver,
   },
+  resolvers: () => ({
+    Query: {
+      peopleByUSCongressionalDistrict: () => {
+        return Object.values(DTSI_PersonRoleCategory).map(category => ({
+          ...dtsiPersonMockResolver(),
+          primaryRole: dtsiPersonRoleMockResolver({
+            roleCategory: () => category,
+          }),
+        }))
+      },
+    },
+  }),
 })
 
 export const queryDTSIMockSchema = <R>(query: string, variables?: any) => {

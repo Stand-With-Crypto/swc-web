@@ -31,7 +31,7 @@ it('action - email your congressperson', () => {
     trigger: cy.get('input[placeholder="Your full address"]'),
     searchText: '350 Fifth Avenue New York, NY 10118',
   })
-  cy.contains('Your representative is Jerry Nadler')
+  cy.contains('Your representative is Zola Feil Sr')
   cy.get('textarea').type('test message')
   cy.get('button[type="submit"]').click()
 

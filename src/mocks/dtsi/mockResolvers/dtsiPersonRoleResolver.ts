@@ -7,7 +7,9 @@ import {
 } from '@/data/dtsi/generated'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
 
-export const dtsiPersonRoleMockResolver = (): Partial<DTSI_PersonRoleResolvers> => {
+export const dtsiPersonRoleMockResolver = (
+  overrides: Partial<DTSI_PersonRoleResolvers> = {},
+): Partial<DTSI_PersonRoleResolvers> => {
   const roleCategory = faker.helpers.arrayElement([
     DTSI_PersonRoleCategory.CONGRESS,
     DTSI_PersonRoleCategory.PRESIDENT,
@@ -24,5 +26,6 @@ export const dtsiPersonRoleMockResolver = (): Partial<DTSI_PersonRoleResolvers> 
     status: () =>
       faker.helpers.arrayElement([DTSI_PersonRoleStatus.RUNNING_FOR, DTSI_PersonRoleStatus.HELD]),
     roleCategory: () => roleCategory,
+    ...overrides,
   }
 }
