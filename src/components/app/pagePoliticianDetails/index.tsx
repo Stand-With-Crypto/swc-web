@@ -16,7 +16,6 @@ import {
   getDTSIPersonRoleLocation,
   getFormattedDTSIPersonRoleDateRange,
   getHasDTSIPersonRoleEnded,
-  orderDTSIPersonRolesByImportance,
 } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import {
   dtsiPersonFullName,
@@ -35,8 +34,6 @@ export function PagePoliticianDetails({
   person: DTSIPersonDetails
   locale: SupportedLocale
 }) {
-  const orderedRoles = orderDTSIPersonRolesByImportance(person.roles)
-  const primaryRole = orderedRoles.byImportance[0]
   const stances = orderBy(person.stances, x => -1 * new Date(x.dateStanceMade).getTime())
   return (
     <div className="container max-w-3xl">
@@ -67,7 +64,7 @@ export function PagePoliticianDetails({
           {dtsiPersonFullName(person)}
         </PageTitle>
         <PageSubTitle className="mb-3">
-          {primaryRole && (
+          {person.primaryRole && (
             <>
               <PageSubTitle>
                 {person.politicalAffiliationCategory && (
@@ -77,17 +74,17 @@ export function PagePoliticianDetails({
                     )}{' '}
                   </>
                 )}
-                {getDTSIPersonRoleCategoryDisplayName(primaryRole)}
-                {getDTSIPersonRoleLocation(primaryRole) && (
+                {getDTSIPersonRoleCategoryDisplayName(person.primaryRole)}
+                {getDTSIPersonRoleLocation(person.primaryRole) && (
                   <span className="font-normal text-gray-500">
                     {' '}
-                    from {getDTSIPersonRoleLocation(primaryRole)}
+                    from {getDTSIPersonRoleLocation(person.primaryRole)}
                   </span>
                 )}
               </PageSubTitle>
-              {getHasDTSIPersonRoleEnded(primaryRole) && (
+              {getHasDTSIPersonRoleEnded(person.primaryRole) && (
                 <div className="text-gray-500">
-                  {getFormattedDTSIPersonRoleDateRange(primaryRole)}
+                  {getFormattedDTSIPersonRoleDateRange(person.primaryRole)}
                 </div>
               )}
             </>
