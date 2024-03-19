@@ -57,7 +57,7 @@ export function mapLocalUserToUserDatabaseFields(
   'acquisitionReferer' | 'acquisitionSource' | 'acquisitionMedium' | 'acquisitionCampaign'
 > {
   return {
-    acquisitionReferer: localUser?.persisted?.initialReferer || '',
+    acquisitionReferer: localUser?.persisted?.initialReferer?.slice(0, 191) || '',
     acquisitionSource:
       localUser?.persisted?.initialSearchParams.utm_source ||
       localUser?.currentSession.searchParamsOnLoad.utm_source ||

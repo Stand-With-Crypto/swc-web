@@ -5,6 +5,7 @@ import { testCaseUserHasLegacyMigrationCryptoAndEmailAddressAndLogsOnViaSameCryp
 import { testCaseUserHasSameEmailAddressButOtherUserHasAlreadyCreatedAccount } from '@/bin/smokeTests/onNewLogin/6testCaseUserHasSameEmailAddressButOtherUserHasAlreadyCreatedAccount'
 import { testCaseMultipleUsersWithSameLegacyCryptoAddress } from '@/bin/smokeTests/onNewLogin/7testCaseMultipleUsersWithSameLegacyCryptoAddress'
 import { testCaseMultipleUsersWithSameLegacyEmail } from '@/bin/smokeTests/onNewLogin/8testCaseMultipleUsersWithSameLegacyEmail'
+import { testCaseWithLongAcquisitionReferer } from '@/bin/smokeTests/onNewLogin/9testCaseWithLongAcquisitionReferrer'
 import { onNewLogin } from '@/utils/server/thirdweb/onLogin'
 import { logger } from '@/utils/shared/logger'
 
@@ -34,6 +35,7 @@ async function smokeTestOnLogin() {
     testCaseUserHasSameEmailAddressButOtherUserHasAlreadyCreatedAccount,
     testCaseMultipleUsersWithSameLegacyCryptoAddress,
     testCaseMultipleUsersWithSameLegacyEmail,
+    testCaseWithLongAcquisitionReferer,
   ]
   for (const test of tests) {
     await runTestCase(test)
