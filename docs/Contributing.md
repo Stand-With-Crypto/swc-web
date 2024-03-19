@@ -31,7 +31,8 @@ Before proceeding with anything, **PLEASE** check out this following resources.
 Make sure you have the following tools installed before proceeding:
 
 - [nvm](https://github.com/nvm-sh/nvm)
-- [docker](https://docs.docker.com/compose/install/) with [docker-compose](https://docs.docker.com/compose/install/#scenario-two-install-the-compose-plugin)
+- [docker](https://docs.docker.com/compose/install/)
+- [docker-compose](https://docs.docker.com/compose/install/#scenario-two-install-the-compose-plugin)
 
 ### Developing your feature/fix
 
