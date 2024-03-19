@@ -26,6 +26,13 @@ Before proceeding with anything, **PLEASE** check out this following resources.
 - Read Vercel's guide on ["Connection Pooling with Serverless Functions"](https://vercel.com/guides/connection-pooling-with-serverless-functions#modern-databases-with-high-connection-limits) to learn about the architecture tradeoffs of connecting to SQL database in serverless environments, and why we decided to leverage the robust scalability architecture inherent in [PlanetScale](https://planetscale.com/features)
 - Read the [Inngest docs](https://www.inngest.com/docs/quick-start) to learn more about how to leverage the tool to build resilient workflows
 
+### Required tools
+
+Make sure you have the following tools installed before proceeding:
+
+- [nvm](https://github.com/nvm-sh/nvm)
+- [docker](https://docs.docker.com/compose/install/) with [docker-compose](https://docs.docker.com/compose/install/#scenario-two-install-the-compose-plugin)
+
 ### Developing your feature/fix
 
 If you have been assigned to fix an issue or develop a new feature, please follow these steps to get started:
