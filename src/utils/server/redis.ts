@@ -14,5 +14,5 @@ const UPSTASH_REDIS_REST_TOKEN = requiredEnv(
 
 export const redis = new Redis({
   url: UPSTASH_REDIS_REST_URL,
-  token: UPSTASH_REDIS_REST_TOKEN ?? 'UPSTASH_REDIS_REST_TOKEN',
+  token: UPSTASH_REDIS_REST_TOKEN,
 })

@@ -1,5 +1,5 @@
-closes <!-- GITHUB issue (e.g.: #123) -->
-fixes <!-- SENTRY issue (e.g.: PROD-SWC-WEB-1JE) -->
+closes <!-- GITHUB issue: Adding the github issue number here (e.g.: #123) will auto-close the issue when this PR is merged -->
+fixes <!-- SENTRY issue: Adding the sentry issue number here (e.g.: PROD-SWC-WEB-1JE) will auto-close the issue when this PR is merged -->
 
 ## What changed? Why?
 

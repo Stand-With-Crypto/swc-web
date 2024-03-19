@@ -16,7 +16,7 @@ If you are here to suggest a feature, first [create an issue](https://github.com
 
 ### Knowledge pre-requisites
 
-Before proceeding with anything, **PLEASE** check out this following resources.
+Below is a list of suggested documentation to read through if you aren't already familiar with the technologies used in this repository:
 
 - Read [Leveraging Modern NextJS Features](<docs/Leveraging Modern NextJS Features.md>) for an overview on the new Next.js features and React Server Components + Server Actions being leveraged in this repo
   - If this is your first time working with these technologies, please take the time to read the linked-to blog posts
@@ -48,7 +48,7 @@ If you have been assigned to fix an issue or develop a new feature, please follo
 - Open the `.env` file and update the values if needed based on the commented instructions
 - Start the local db by running `$ docker-compose -f dev.docker-compose.yml up -d`
   - We use docker-compose to run services both in local dev and in e2e testing
-- Run `$ npm run initial`, that includes all setup commands for first-time local development
+- Run `$ npm run initial`, this includes all setup commands for first-time local development
 - In different terminal tabs, run `$ npm run dev` and `$ npm run inngest`
   - Both the development server AND Inngest are required for a fully functional website
 - Open [http://localhost:3000](http://localhost:3000) with your browser to see the results
@@ -62,18 +62,15 @@ If you have been assigned to fix an issue or develop a new feature, please follo
 
   - `npm run lint` - audits code against ESLint and Prettier
   - `npm run typecheck` - audits code against TypeScript
-  - `npm run test` - execute Jest tests
+  - `npm run test` - executes Jest tests
   - `npm run audit` - executes all 3 commands above concurrently
-    - If `audit` fails, then it is very likely that your PR will not pass GitHub CI
+    - If `audit` fails, your PR will not pass GitHub CI
 
 - Likewise, test E2E flows as necessary:
   - Make sure to stop your dev docker compose before running tests, we use a different instance of mysql for cypress and it will cause port conflicts
   - `npm run e2e:run` - starts up [Cypress](https://www.cypress.io/) UI
     - With the UI, you can run individual E2E tests under "Specs" and visually follow the flows
   - `npm run e2e:run-headless` - runs all our E2E tests consecutively via Cypress CLI
-    - Currently, this command only executes when new comments are made to main branch because of database dependencies - this may change in the future
-  - NOTE: the E2E testing suite connects to a local MySQL database, _not_ your PlanetScale database - it will live on `localhost:3306`
-    - Use tools like [DataGrip](https://www.jetbrains.com/datagrip/) or [DBeaver](https://dbeaver.io/) to analyze local MySQL data if necessary
   - Refer to `docs/Coding Conventions.md/Testing` for more information
 
 ### Useful development tips
@@ -85,26 +82,25 @@ If you have been assigned to fix an issue or develop a new feature, please follo
   - The database will be based on the `DATABASE_URL` provided in your local `.env` file - we will refer to this as "the database you are connected to"
 - `npm run codegen` - generates TypeScript definitions for any GraphQL operations we have defined in our codebase
   - Whenever you make GraphQL query updates (_e.g._ our DTSI integration), you should run this command to update your TypeScript definitions
-- `npm run codegen:schemas` - if any of the GraphQL schemas changed for our 3rd-party API partners (_e.g._ https://www.dotheysupportit.com/), run this command to pull in the latest schemas
+- `npm run codegen:schemas` - if any of the GraphQL schemas change for our 3rd-party API partners (_e.g._ https://www.dotheysupportit.com/), run this command to pull in the latest updates
 - `npm run intl:extract-compile` - generates initial translation files
 - `npm run storybook` - view isolated [storybook stories](https://storybook.js.org/)
-- When checking out someone else's branch with changes - if you encounter TypeScript errors, run `npm run newbranch` to execute several common commands that may fix these errors
+- `npm run newbranch` - A useful command to run after checking out a newbranch or pulling the latest from `main` to ensure your local environment is configured correctly
 
 ### Updating the database schema
 
-If you are not a core contributor, reach out to one to make any DB schema updates your PR needs. If you're a core contributor, follow this steps whenever you need to make Prisma Schema changes
+If you are not a core contributor, reach out to one to make any DB schema updates your PR needs. If you're a core contributor, follow these steps whenever you need to make Prisma Schema changes
 
 - `npx prisma generate` - updates your Prisma TypeScript definitions
 - Then, depending on your situation, run either of the following:
   - `npx prisma db push` - if your changes are _not_ breaking and you want to maintain the values in your database, then run this command; this will simply push the schema changes to the database instance you are connected to
-  - `npm run db:seed` - if you do have breaking changes, or if you just want to reset your database values, then run this command; this command force-pushes the schema updates to the database instance you are connected to, wiping all existing information and freshly populating the database with seed data
 
-### Running One Time Scripts On Testing or Production Environment
+### Running One Time Scripts in Testing or Production Environment
 
-On a testing or production environment, it is recommended to run the script through Inngest admin dashboard:
+In our testing or production environment, it is recommended to run a script through the Inngest admin dashboard:
 
 - Select the function you want to run
-- Click the invoke button in the right corner
+- Click the invoke button in the top right corner
 - Update the data fields to pass any data needed by the script
 - Click "Invoke Function"
 
