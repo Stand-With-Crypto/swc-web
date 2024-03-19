@@ -26,7 +26,7 @@ const BACKFILL_NFT_INNGEST_CRON_JOB_AIRDROP_BATCH_SIZE =
 const AIRDROP_NFT_ETH_TRANSACTION_FEE_THRESHOLD =
   Number(process.env.AIRDROP_NFT_ETH_TRANSACTION_FEE_THRESHOLD) || 0.00005
 
-const BACKFILL_NFT_INNGEST_CRON_JOB_AIRDROP_TIMEFRAME = 0.5 * 60 * 1000 // 9 minutes timeframe to backfill the records, leaving 1 minute before the next run.
+const BACKFILL_NFT_INNGEST_CRON_JOB_AIRDROP_TIMEFRAME = 9 * 60 * 1000 // 9 minutes timeframe to backfill the records, leaving 1 minute before the next run.
 
 const BACKFILL_NFT_INNGEST_CRON_JOB_SCHEDULE = '*/10 * * * *' // Every 10 minutes.
 const BACKFILL_NFT_INNGEST_CRON_JOB_FUNCTION_ID = 'script.backfill-nft-cron-job'
@@ -45,7 +45,7 @@ export const backfillNFTInngestCronJob = inngest.createFunction(
   },
   async ({ step }) => {
     // Initialize variables.
-    // The initialization of variables using `step.run` might seem goofy, but see this doc for why this is needed: https://www.inngest.com/docs/functions/multi-step#my-variable-isn-t-updating
+    // The initialization of variables using `step.run` might seem sillly, but see this doc for why this is needed: https://www.inngest.com/docs/functions/multi-step#my-variable-isn-t-updating
     const currentTime = await step.run('script.initialize-constant-variables', async () => {
       return new Date().getTime()
     })
