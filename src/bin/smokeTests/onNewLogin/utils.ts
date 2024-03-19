@@ -16,6 +16,7 @@ export type TestCase = {
   parameters: () => Promise<Params>
   validateResults: (data: Awaited<ReturnType<typeof onNewLogin>>, issues: Issue[]) => void
 }
+
 export function getDefaultParameters(): Params {
   return {
     cryptoAddress: parseThirdwebAddress(faker.finance.ethereumAddress()),
@@ -25,6 +26,7 @@ export function getDefaultParameters(): Params {
     injectedFetchEmbeddedWalletMetadataFromThirdweb: () => Promise.resolve(null),
   }
 }
+
 export async function mockEmbeddedWalletMetadata(
   email: string,
 ): Promise<ThirdwebEmbeddedWalletMetadata> {
@@ -35,6 +37,7 @@ export async function mockEmbeddedWalletMetadata(
     createdAt: new Date().toISOString(),
   }
 }
+
 export function verify(
   condition: any | (() => any),
   expectedCondition: boolean,
