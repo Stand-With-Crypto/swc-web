@@ -57,6 +57,7 @@ export function mapLocalUserToUserDatabaseFields(
   'acquisitionReferer' | 'acquisitionSource' | 'acquisitionMedium' | 'acquisitionCampaign'
 > {
   return {
+    // We are trimming the char input in case it is greater that the DB limit (191 characters)
     acquisitionReferer: localUser?.persisted?.initialReferer?.slice(0, 191) || '',
     acquisitionSource:
       localUser?.persisted?.initialSearchParams.utm_source?.slice(0, 191) ||
