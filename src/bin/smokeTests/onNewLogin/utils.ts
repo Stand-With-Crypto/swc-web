@@ -27,29 +27,6 @@ export function getDefaultParameters(): Params {
   }
 }
 
-export function getParametersWithLocalUser(option?: {
-  initialRefererOption?: { length: number }
-}): Params {
-  return {
-    cryptoAddress: parseThirdwebAddress(faker.finance.ethereumAddress()),
-    localUser: {
-      persisted: {
-        initialSearchParams: {},
-        initialReferer: faker.string.alphanumeric({ length: option?.initialRefererOption?.length }),
-        datetimeFirstSeen: new Date().toISOString(),
-      },
-      currentSession: {
-        datetimeOnLoad: new Date().toISOString(),
-        refererOnLoad: '',
-        searchParamsOnLoad: {},
-      },
-    },
-    getUserSessionId: () => fakerFields.id(),
-    // dependency injecting this in to the function so we can mock it in tests
-    injectedFetchEmbeddedWalletMetadataFromThirdweb: () => Promise.resolve(null),
-  }
-}
-
 export async function mockEmbeddedWalletMetadata(
   email: string,
 ): Promise<ThirdwebEmbeddedWalletMetadata> {

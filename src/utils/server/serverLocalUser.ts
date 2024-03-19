@@ -59,8 +59,8 @@ export function mapLocalUserToUserDatabaseFields(
   return {
     acquisitionReferer: localUser?.persisted?.initialReferer?.slice(0, 191) || '',
     acquisitionSource:
-      localUser?.persisted?.initialSearchParams.utm_source ||
-      localUser?.currentSession.searchParamsOnLoad.utm_source ||
+      localUser?.persisted?.initialSearchParams.utm_source?.slice(0, 191) ||
+      localUser?.currentSession.searchParamsOnLoad.utm_source?.slice(0, 191) ||
       '',
     acquisitionMedium:
       localUser?.persisted?.initialSearchParams.utm_medium ||

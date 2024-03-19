@@ -1,8 +1,32 @@
-import { getParametersWithLocalUser, TestCase, verify } from './utils'
+import { faker } from '@faker-js/faker'
+
+import { parseThirdwebAddress } from '@/hooks/useThirdwebAddress/parseThirdwebAddress'
+import { fakerFields } from '@/mocks/fakerUtils'
+
+import { TestCase, verify } from './utils'
 
 export const testCaseWithLongAcquisitionReferer: TestCase = {
   name: 'Test Case with long Acquisition referer',
-  parameters: async () => getParametersWithLocalUser({ initialRefererOption: { length: 192 } }),
+  parameters: async () => {
+    return {
+      cryptoAddress: parseThirdwebAddress(faker.finance.ethereumAddress()),
+      localUser: {
+        persisted: {
+          initialSearchParams: { utm_source: faker.string.alphanumeric({ length: 200 }) },
+          initialReferer: faker.string.alphanumeric({ length: 200 }),
+          datetimeFirstSeen: new Date().toISOString(),
+        },
+        currentSession: {
+          datetimeOnLoad: new Date().toISOString(),
+          refererOnLoad: '',
+          searchParamsOnLoad: { utm_source: faker.string.alphanumeric({ length: 200 }) },
+        },
+      },
+      getUserSessionId: () => fakerFields.id(),
+      // dependency injecting this in to the function so we can mock it in tests
+      injectedFetchEmbeddedWalletMetadataFromThirdweb: () => Promise.resolve(null),
+    }
+  },
   validateResults: (
     {
       existingUsersWithSource,
