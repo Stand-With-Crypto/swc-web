@@ -59,8 +59,8 @@ interface Config {
 }
 
 export async function claimNFT(
-  userAction: UserAction,
-  userCryptoAddress: UserCryptoAddress,
+  userAction: Pick<UserAction, 'id' | 'actionType' | 'campaignName' | 'nftMintId'>,
+  userCryptoAddress: Pick<UserCryptoAddress, 'cryptoAddress'>,
   config: Config = { ignoreTurnOffNFTMintFlag: false },
 ) {
   // TODO (benson): check current transaction fee here via `fetchAirdropTransactionFee`.

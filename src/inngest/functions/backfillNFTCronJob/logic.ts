@@ -1,14 +1,14 @@
-import { UserActionType } from '@prisma/client'
 import { chunk } from 'lodash-es'
 
-import { ACTION_NFT_SLUG, claimNFT } from '@/utils/server/nft/claimNFT'
+import { actionsWithNFT } from '@/utils/server/nft/actionsWithNFT'
+import { claimNFT } from '@/utils/server/nft/claimNFT'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { fetchAirdropTransactionFee } from '@/utils/server/thirdweb/fetchCurrentClaimTransactionFee'
 import { getLogger } from '@/utils/shared/logger'
 
 const logger = getLogger('backfillNFTCronJob')
 
-// This is the date when SWC went live. We don't want to backfill anything before this date.
+// This is the date when SWC went live. We do not care about user actions before this date.
 const GO_LIVE_DATE = new Date('2024-02-25 00:00:00.000')
 
 // This is the milliseconds to wait before processing the next batch of user actions.
@@ -19,9 +19,9 @@ const BACKFILL_NFT_INNGEST_CRON_JOB_AIRDROP_SLEEP_INTERVAL =
 const BACKFILL_NFT_INNGEST_CRON_JOB_AIRDROP_BATCH_SIZE =
   Number(process.env.BACKFILL_NFT_INNGEST_CRON_JOB_AIRDROP_BATCH_SIZE) || 20
 
-// This is the threshold in which we will stop the cron job if the current transaction fee exceeds the threshold.
-const AIRDROP_NFT_TRANSACTION_FEE_THRESHOLD =
-  Number(process.env.AIRDROP_NFT_TRANSACTION_FEE_THRESHOLD) || 0.00005
+// This is the ETH threshold in which we will stop the cron job if the current transaction fee exceeds the threshold.
+const AIRDROP_NFT_ETH_TRANSACTION_FEE_THRESHOLD =
+  Number(process.env.AIRDROP_NFT_ETH_TRANSACTION_FEE_THRESHOLD) || 0.00005
 
 const BACKFILL_NFT_INNGEST_CRON_JOB_AIRDROP_TIMEFRAME = 4.5 * 60 * 1000 // 4.5 minutes timeframe to backfill the records, leaving 30 seconds before the next run.
 
@@ -49,10 +49,6 @@ export async function executeBackfillNFTCronJobLogic() {
     BACKFILL_NFT_INNGEST_CRON_JOB_AIRDROP_BATCH_SIZE
 
   // Fetch the user actions that need to be backfilled.
-  const actionsWithNFT: UserActionType[] = Object.entries(ACTION_NFT_SLUG)
-    .filter(([_, record]) => record[Object.keys(record)[0]])
-    .map(([key]) => UserActionType[key as keyof typeof UserActionType])
-  logger.info(`Actions with NFT: ${actionsWithNFT.toString()}`)
   const userActions = await prismaClient.userAction.findMany({
     where: {
       datetimeCreated: { gte: GO_LIVE_DATE },
@@ -87,9 +83,9 @@ export async function executeBackfillNFTCronJobLogic() {
     // Fetch the current transaction fee and compare the fee with the threshold.
     const currentAirdropTransactionFee = await fetchAirdropTransactionFee()
     logger.info(`Current airdrop transaction fee: ${currentAirdropTransactionFee}`)
-    if (currentAirdropTransactionFee > AIRDROP_NFT_TRANSACTION_FEE_THRESHOLD) {
+    if (currentAirdropTransactionFee > AIRDROP_NFT_ETH_TRANSACTION_FEE_THRESHOLD) {
       logger.info(
-        `Current airdrop transaction fee (${currentAirdropTransactionFee}) exceeds the threshold (${AIRDROP_NFT_TRANSACTION_FEE_THRESHOLD}) - stopping the cron job`,
+        `Current airdrop transaction fee (${currentAirdropTransactionFee}) exceeds the threshold (${AIRDROP_NFT_ETH_TRANSACTION_FEE_THRESHOLD}) - stopping the cron job`,
       )
       break
     }

@@ -1,7 +1,7 @@
-import { UserActionType } from '@prisma/client'
 import { boolean, number, object, z } from 'zod'
 
-import { ACTION_NFT_SLUG, claimNFT } from '@/utils/server/nft/claimNFT'
+import { actionsWithNFT } from '@/utils/server/nft/actionsWithNFT'
+import { claimNFT } from '@/utils/server/nft/claimNFT'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { batchAsyncAndLog } from '@/utils/shared/batchAsyncAndLog'
 import { getLogger } from '@/utils/shared/logger'
@@ -25,15 +25,6 @@ export async function backfillNFT(parameters: z.infer<typeof zodBackfillNFParame
   zodBackfillNFParameters.parse(parameters)
   const { limit, persist } = parameters
 
-  const actionsWithNFT: UserActionType[] = []
-  for (const key in ACTION_NFT_SLUG) {
-    const actionType = UserActionType[key as keyof typeof UserActionType]
-    const record = ACTION_NFT_SLUG[actionType]
-    if (record[Object.keys(record)[0]]) {
-      actionsWithNFT.push(UserActionType[actionType])
-    }
-  }
-
   const userActions = await prismaClient.userAction.findMany({
     where: {
       datetimeCreated: { gte: GO_LIVE_DATE },
@@ -41,7 +32,7 @@ export async function backfillNFT(parameters: z.infer<typeof zodBackfillNFParame
       actionType: { in: actionsWithNFT },
       user: { primaryUserCryptoAddress: { isNot: null } },
     },
-    take: limit,
+    ...(limit && { take: limit }),
     include: {
       user: {
         include: { primaryUserCryptoAddress: true },
