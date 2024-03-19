@@ -16,7 +16,7 @@ export const dtsiPersonRoleMockResolver = (
     DTSI_PersonRoleCategory.SENATE,
   ])
   const primaryState =
-    roleCategory === DTSI_PersonRoleCategory.PRESIDENT
+    roleCategory === DTSI_PersonRoleCategory.PRESIDENT && !overrides.roleCategory
       ? ''
       : faker.helpers.arrayElement(Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP))
 
