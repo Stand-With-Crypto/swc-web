@@ -116,6 +116,9 @@ export async function Footer({ locale }: { locale: SupportedLocale }) {
               <InternalLink className={footerLinkStyles} href={urls.contribute()}>
                 Contribute
               </InternalLink>
+              <InternalLink className={footerLinkStyles} href={urls.questionnaire()}>
+                Questionnaire
+              </InternalLink>
             </div>
           </div>
         </div>

@@ -24,6 +24,7 @@ export const getIntlUrls = (
     about: () => `${localePrefix}/about`,
     resources: () => `${localePrefix}/resources`,
     contribute: () => `${localePrefix}/contribute`,
+    questionnaire: () => `${localePrefix}/questionnaire`,
     donate: () => `${localePrefix}/donate`,
     leaderboard: (params?: { pageNum?: number; tab: RecentActivityAndLeaderboardTabs }) => {
       const tabPrefix =
