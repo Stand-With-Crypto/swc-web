@@ -5,7 +5,8 @@ import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
 
 const BASESCAN_API_KEY = requiredOutsideLocalEnv(
   process.env.BASESCAN_API_KEY,
-  'process.env.BASESCAN_API_KEY',
+  'BASESCAN_API_KEY',
+  'ETH balance check',
 )!
 
 export type GetBaseETHBalancesResponse = {

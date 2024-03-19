@@ -16,11 +16,15 @@ export function requiredEnv(value: string | undefined, name: string) {
   return value!
 }
 
-export function requiredOutsideLocalEnv(value: string | undefined, name: string) {
+export function requiredOutsideLocalEnv(
+  value: string | undefined,
+  name: string,
+  possiblyBrokenFeature: string,
+) {
   if (NEXT_PUBLIC_ENVIRONMENT === 'local') {
     if (!value) {
       logger.warn(
-        `Environment variable ${name} is missing. Some functionalities may not work properly`,
+        `Environment variable ${name} is missing. The following feature might not work properly: ${possiblyBrokenFeature}`,
       )
     }
 

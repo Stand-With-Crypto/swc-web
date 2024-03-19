@@ -5,12 +5,14 @@ import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
 
 const CAPITOL_CANARY_API_KEY = requiredOutsideLocalEnv(
   process.env.CAPITOL_CANARY_API_KEY,
-  'process.env.CAPITOL_CANARY_API_KEY',
+  'CAPITOL_CANARY_API_KEY',
+  'Capitol Canary integration',
 )!
 
 const CAPITOL_CANARY_API_SECRET = requiredOutsideLocalEnv(
   process.env.CAPITOL_CANARY_API_SECRET,
-  'process.env.CAPITOL_CANARY_API_SECRET',
+  'CAPITOL_CANARY_API_SECRET',
+  'Capitol Canary integration',
 )!
 
 export async function sendCapitolCanaryRequest<T, R>(

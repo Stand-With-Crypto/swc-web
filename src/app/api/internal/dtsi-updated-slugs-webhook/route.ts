@@ -18,6 +18,7 @@ const zodPayload = z.object({
 const DTSI_WEBHOOK_SECRET = requiredOutsideLocalEnv(
   process.env.DTSI_WEBHOOK_SECRET,
   'DTSI_WEBHOOK_SECRET',
+  'DTSI webhook to regenerate static politician pages',
 )
 
 // LATER-TASK debounce this endpoint with inngest

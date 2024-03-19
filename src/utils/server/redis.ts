@@ -10,6 +10,7 @@ const UPSTASH_REDIS_REST_URL = requiredEnv(
 const UPSTASH_REDIS_REST_TOKEN = requiredOutsideLocalEnv(
   process.env.UPSTASH_REDIS_REST_TOKEN,
   'UPSTASH_REDIS_REST_TOKEN',
+  'Manual sql query caching',
 )
 
 export const redis = new Redis({

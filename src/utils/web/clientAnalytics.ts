@@ -10,7 +10,8 @@ import { getClientCookieConsent } from '@/utils/web/clientCookieConsent'
 
 const NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN = requiredOutsideLocalEnv(
   process.env.NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN,
-  'process.env.NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN',
+  'NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN',
+  'Analytics and people analytics',
 )!
 
 const environmentHasAnalyticsEnabled =
