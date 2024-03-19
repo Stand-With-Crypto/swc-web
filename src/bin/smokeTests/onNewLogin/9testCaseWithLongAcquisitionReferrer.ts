@@ -12,14 +12,22 @@ export const testCaseWithLongAcquisitionReferer: TestCase = {
       cryptoAddress: parseThirdwebAddress(faker.finance.ethereumAddress()),
       localUser: {
         persisted: {
-          initialSearchParams: { utm_source: faker.string.alphanumeric({ length: 200 }) },
+          initialSearchParams: {
+            utm_source: faker.string.alphanumeric({ length: 200 }),
+            utm_medium: faker.string.alphanumeric({ length: 200 }),
+            utm_campaign: faker.string.alphanumeric({ length: 200 }),
+          },
           initialReferer: faker.string.alphanumeric({ length: 200 }),
           datetimeFirstSeen: new Date().toISOString(),
         },
         currentSession: {
           datetimeOnLoad: new Date().toISOString(),
           refererOnLoad: '',
-          searchParamsOnLoad: { utm_source: faker.string.alphanumeric({ length: 200 }) },
+          searchParamsOnLoad: {
+            utm_source: faker.string.alphanumeric({ length: 200 }),
+            utm_medium: faker.string.alphanumeric({ length: 200 }),
+            utm_campaign: faker.string.alphanumeric({ length: 200 }),
+          },
         },
       },
       getUserSessionId: () => fakerFields.id(),

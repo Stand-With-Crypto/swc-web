@@ -63,12 +63,12 @@ export function mapLocalUserToUserDatabaseFields(
       localUser?.currentSession.searchParamsOnLoad.utm_source?.slice(0, 191) ||
       '',
     acquisitionMedium:
-      localUser?.persisted?.initialSearchParams.utm_medium ||
-      localUser?.currentSession.searchParamsOnLoad.utm_medium ||
+      localUser?.persisted?.initialSearchParams.utm_medium?.slice(0, 191) ||
+      localUser?.currentSession.searchParamsOnLoad.utm_medium?.slice(0, 191) ||
       '',
     acquisitionCampaign:
-      localUser?.persisted?.initialSearchParams.utm_campaign ||
-      localUser?.currentSession.searchParamsOnLoad.utm_campaign ||
+      localUser?.persisted?.initialSearchParams.utm_campaign?.slice(0, 191) ||
+      localUser?.currentSession.searchParamsOnLoad.utm_campaign?.slice(0, 191) ||
       '',
   }
 }
