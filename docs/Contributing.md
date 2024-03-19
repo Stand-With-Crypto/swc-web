@@ -45,7 +45,7 @@ If you have been assigned to fix an issue or develop a new feature, please follo
   - We use [nvm](https://github.com/nvm-sh/nvm) to manage node versions - please use the version mentioned in `.nvmrc` (run `$ nvm use`)
 - Create a `.env` file based on `.env.example` (run `$ cp .env.example .env`)
   - If you are a core contributor you can install [Vercel CLI](https://vercel.com/docs/cli) and run `$ vercel link` and then `$ vercel env pull .env`
-- Open the `.env` file and update the values if needed based on the commented instructions
+- Open the `.env` file and fill all the blank values that are not bellow the `OPTIONAL` title. Follow the commented instructions for each one
 - Start the local db by running `$ docker-compose -f dev.docker-compose.yml up -d`
   - We use docker-compose to run services both in local dev and in e2e testing
 - Run `$ npm run initial`, this includes all setup commands for first-time local development
