@@ -31,6 +31,11 @@ const BACKFILL_NFT_INNGEST_CRON_JOB_AIRDROP_TIMEFRAME = 9 * 60 * 1000 // 9 minut
 const BACKFILL_NFT_INNGEST_CRON_JOB_SCHEDULE = '*/10 * * * *' // Every 10 minutes.
 const BACKFILL_NFT_INNGEST_CRON_JOB_FUNCTION_ID = 'script.backfill-nft-cron-job'
 const BACKFILL_NFT_INNGEST_CRON_JOB_EVENT_NAME = 'script/backfill.nft.cron.job'
+
+/**
+ * This Inngest function is a cron job responsible for backfilling the NFTs for the user actions that were skipped/missed.
+ * The code is written in a fashion to support Inngest multi-step functions and memoize states.
+ */
 export const backfillNFTInngestCronJob = inngest.createFunction(
   {
     id: BACKFILL_NFT_INNGEST_CRON_JOB_FUNCTION_ID,
@@ -45,7 +50,7 @@ export const backfillNFTInngestCronJob = inngest.createFunction(
   },
   async ({ step }) => {
     // Initialize variables.
-    // The initialization of variables using `step.run` might seem sillly, but see this doc for why this is needed: https://www.inngest.com/docs/functions/multi-step#my-variable-isn-t-updating
+    // The initialization of variables using `step.run` might seem silly, but see this doc for why this is needed: https://www.inngest.com/docs/functions/multi-step#my-variable-isn-t-updating
     const currentTime = await step.run('script.initialize-constant-variables', async () => {
       return new Date().getTime()
     })
