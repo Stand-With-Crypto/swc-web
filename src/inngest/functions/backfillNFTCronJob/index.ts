@@ -3,7 +3,7 @@ import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
-const BACKFILL_NFT_INNGEST_CRON_JOB_SCHEDULE = '*/20 * * * *' // Every 20 minutes.
+const BACKFILL_NFT_INNGEST_CRON_JOB_SCHEDULE = '*/5 * * * *' // Every 5 minutes.
 const BACKFILL_NFT_INNGEST_CRON_JOB_FUNCTION_ID = 'script.backfill-nft-cron-job'
 const BACKFILL_NFT_INNGEST_CRON_JOB_EVENT_NAME = 'script/backfill.nft.cron.job'
 export const backfillNFTInngestCronJob = inngest.createFunction(

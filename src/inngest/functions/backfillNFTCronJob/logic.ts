@@ -12,13 +12,13 @@ const GO_LIVE_DATE = new Date('2024-02-25 00:00:00.000')
 
 // This is the number of records to process in a single run.
 const BACKFILL_NFT_INNGEST_CRON_JOB_PROCESS_SIZE =
-  Number(process.env.BACKFILL_NFT_INNGEST_CRON_JOB_PROCESS_SIZE) || 1000
+  Number(process.env.BACKFILL_NFT_INNGEST_CRON_JOB_PROCESS_SIZE) || 500
 
 // This is the threshold in which we will stop the cron job if the current transaction fee exceeds the threshold.
 const AIRDROP_NFT_TRANSACTION_FEE_THRESHOLD =
   Number(process.env.AIRDROP_NFT_TRANSACTION_FEE_THRESHOLD) || 0.00005
 
-const BACKFILL_NFT_INNGEST_CRON_JOB_AIRDROP_TIMEFRAME = 18 * 60 * 1000 // 18 minute timeframe to backfill the records, leaving 2 minutes for the network to settle.
+const BACKFILL_NFT_INNGEST_CRON_JOB_AIRDROP_TIMEFRAME = 1 * 60 * 1000 // 4 minute timeframe to backfill the records, leaving 1 minute for the network to decongest.
 
 /**
  * This function is the main logic for the backfill NFT cron job.
@@ -63,6 +63,7 @@ export async function executeBackfillNFTCronJobLogic() {
     BACKFILL_NFT_INNGEST_CRON_JOB_AIRDROP_TIMEFRAME / BACKFILL_NFT_INNGEST_CRON_JOB_PROCESS_SIZE
   logger.info(`Airdropping NFTs with an interval of ${interval} milliseconds`)
 
+  let currentBackfillCount = 0
   // Loop through the user actions and claim the NFTs, one by one, with a delay.
   for (const userAction of userActions) {
     // If the current time has already passed the timeframe, then break.
@@ -85,11 +86,12 @@ export async function executeBackfillNFTCronJobLogic() {
     await claimNFT(userAction, userAction.user.primaryUserCryptoAddress!, {
       ignoreTurnOffNFTMintFlag: true,
     })
+    currentBackfillCount += 1
 
     // Sleep for the interval duration.
     await new Promise(resolve => setTimeout(resolve, interval))
   }
 
-  logger.info(`Backfilled ${userActions.length} user actions`)
-  return userActions.length
+  logger.info(`Backfilled ${currentBackfillCount} user actions`)
+  return currentBackfillCount
 }
