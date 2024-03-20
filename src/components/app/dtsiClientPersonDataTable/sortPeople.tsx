@@ -13,14 +13,17 @@ export function sortDTSIPersonDataTable(data: DTSIPersonDataTablePeople) {
         : 1
     }
     if (personB.promotedPositioning) {
-      return 1
+      return -1
     }
 
     // At this point you already verified that neither personA or personB have `promotedPositioning`
     const aScore = personA.manuallyOverriddenStanceScore || personA.computedStanceScore
     const bScore = personB.manuallyOverriddenStanceScore || personB.computedStanceScore
     if (aScore === bScore || (isNil(aScore) && isNil(bScore))) {
-      return 0
+      if (personA.lastName < personB.lastName) {
+        return -1
+      }
+      return 1
     }
     if (isNil(aScore)) {
       return 1
