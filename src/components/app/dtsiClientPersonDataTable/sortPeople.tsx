@@ -10,7 +10,7 @@ export function sortDTSIPersonDataTable(data: DTSIPersonDataTablePeople) {
     if (personA.promotedPositioning) {
       return personB.promotedPositioning
         ? personA.promotedPositioning - personB.promotedPositioning
-        : 1
+        : -1
     }
     if (personB.promotedPositioning) {
       return 1
