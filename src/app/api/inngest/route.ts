@@ -11,6 +11,8 @@ import { setPrimaryCryptoAddressOfUserWithInngest } from '@/inngest/functions/se
 import { upsertAdvocateInCapitolCanaryWithInngest } from '@/inngest/functions/upsertAdvocateInCapitolCanary'
 import { inngest } from '@/inngest/inngest'
 
+export const maxDuration = 300 // 5 minutes - maximum duration for a Vercel serverless function to run
+
 export const { GET, POST, PUT } = serve({
   client: inngest,
   functions: [
