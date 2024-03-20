@@ -1,5 +1,6 @@
 import * as Sentry from '@sentry/nextjs'
 import { headers } from 'next/headers'
+
 import { getLogger } from '@/utils/shared/logger'
 
 // sentry only allows form data to be passed but we want to support json objects as well so we need to make it form data
