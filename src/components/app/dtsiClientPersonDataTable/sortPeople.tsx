@@ -20,10 +20,7 @@ export function sortDTSIPersonDataTable(data: DTSIPersonDataTablePeople) {
     const aScore = personA.manuallyOverriddenStanceScore || personA.computedStanceScore
     const bScore = personB.manuallyOverriddenStanceScore || personB.computedStanceScore
     if (aScore === bScore || (isNil(aScore) && isNil(bScore))) {
-      if (personA.lastName < personB.lastName) {
-        return -1
-      }
-      return 1
+      return personA.lastName < personB.lastName ? -1 : 1
     }
     if (isNil(aScore)) {
       return 1
