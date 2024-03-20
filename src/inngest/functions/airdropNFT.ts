@@ -36,7 +36,6 @@ export const airdropNFTWithInngest = inngest.createFunction(
     let attempt = 1
     let mintStatus: ThirdwebTransactionStatus | null = null
     let transactionHash: string | null
-    let gasPrice: string | null
 
     while (
       (attempt <= 6 && mintStatus === null) ||
@@ -50,18 +49,12 @@ export const airdropNFTWithInngest = inngest.createFunction(
       })
 
       mintStatus = transactionStatus.status
-      gasPrice = transactionStatus.gasPrice
       transactionHash = transactionStatus.transactionHash
       attempt += 1
     }
 
     if (!mintStatus || !THIRDWEB_FINAL_TRANSACTION_STATUSES.includes(mintStatus)) {
-      await updateMintNFTStatus(
-        payload.nftMintId,
-        NFTMintStatus.TIMEDOUT,
-        transactionHash!,
-        gasPrice!,
-      )
+      await updateMintNFTStatus(payload.nftMintId, NFTMintStatus.TIMEDOUT, transactionHash!)
       throw new NonRetriableError('cannot get final states of minting request', {
         cause: mintStatus,
       })
@@ -74,9 +67,12 @@ export const airdropNFTWithInngest = inngest.createFunction(
         payload.nftMintId,
         THIRDWEB_TRANSACTION_STATUS_TO_NFT_MINT_STATUS[status],
         transactionHash,
-        gasPrice,
       )
     })
+
+    // TODO (benson or yann):
+    // if the mint was successful, then we should probably emit an analytics event to Mixpanel or a counter metric to Sentry indicating that this specific NFT was airdropped.
+    // similarly, we might want to consider emitting a gauge metric to visualize the transaction fee trend of airdropping NFTs for each NFT.
 
     if (status === 'errored' || status === 'cancelled') {
       throw new NonRetriableError(
