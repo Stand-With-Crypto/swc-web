@@ -89,10 +89,10 @@ export function PagePrivacyPolicy() {
       <p>SWC may use the information described above for a variety of purposes, including to:</p>
 
       <ul>
-        <li>Provide our website and its content to you;</li>
+        <li>Provide our website and its content;</li>
         <li>
-          Provide you with information or content related to SWC's mission, initiatives, advocacy,
-          and business;
+          Provide information or content related to SWC's mission, initiatives, advocacy, and
+          business;
         </li>
         <li>
           Facilitate your advocacy efforts, including helping you contact elected officials and
