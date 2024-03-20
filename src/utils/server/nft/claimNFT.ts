@@ -59,17 +59,17 @@ interface Config {
 }
 
 export async function claimNFT(
-  userAction: UserAction,
-  userCryptoAddress: UserCryptoAddress,
+  userAction: Pick<UserAction, 'id' | 'actionType' | 'campaignName' | 'nftMintId'>,
+  userCryptoAddress: Pick<UserCryptoAddress, 'cryptoAddress'>,
   config: Config = { ignoreTurnOffNFTMintFlag: false },
 ) {
   // TODO (benson): check current transaction fee here via `fetchAirdropTransactionFee`.
 
   if (TURN_OFF_NFT_MINT && !config.ignoreTurnOffNFTMintFlag) {
-    logger.info('TURN_OFF_NFT_MINT is on, preventing mint for now')
+    logger.info('TURN_OFF_NFT_MINT is on - preventing live airdrop for now')
     return null
   }
-  logger.info('Triggered')
+  logger.info('Function triggered')
 
   const { actionType, campaignName } = userAction
   const activeClientUserActionTypeWithCampaign = ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN.find(
