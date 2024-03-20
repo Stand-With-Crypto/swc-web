@@ -13,7 +13,7 @@ export function sortDTSIPersonDataTable(data: DTSIPersonDataTablePeople) {
         : 1
     }
     if (personB.promotedPositioning) {
-      return -1
+      return 1
     }
 
     // At this point you already verified that neither personA or personB have `promotedPositioning`
