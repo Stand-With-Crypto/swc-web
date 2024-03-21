@@ -8,4 +8,5 @@ export interface UseSectionsReturn<TabKey extends string = string> {
   currentSection: TabKey
   goToSection: (tabId: TabKey, options?: { disableAnalytics?: boolean }) => void
   onSectionNotFound: () => void
+  goBackSection: () => void
 }

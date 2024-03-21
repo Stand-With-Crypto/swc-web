@@ -23,12 +23,12 @@ export function UserActionFormLayout({ onBack, children }: UserActionFormLayoutP
   )
 }
 
-function Heading({ title, subtitle }: { title: string; subtitle: string }) {
+function Heading({ title, subtitle }: { title: string; subtitle?: React.ReactNode }) {
   return (
     <div className="space-y-2">
       <PageTitle size="sm">{title}</PageTitle>
 
-      <PageSubTitle>{subtitle}</PageSubTitle>
+      {subtitle && <PageSubTitle>{subtitle}</PageSubTitle>}
     </div>
   )
 }

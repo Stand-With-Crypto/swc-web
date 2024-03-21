@@ -5,7 +5,7 @@ import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import useSWR from 'swr'
 
-import type { UserActionFormCallCongresspersonProps } from '@/components/app/userActionFormCallCongressperson'
+import type { CallCongresspersonActionSharedData } from '@/components/app/userActionFormCallCongressperson'
 import { SectionNames } from '@/components/app/userActionFormCallCongressperson/constants'
 import { FormFields } from '@/components/app/userActionFormCallCongressperson/types'
 import { UserActionFormLayout } from '@/components/app/userActionFormCommon/layout'
@@ -38,11 +38,13 @@ import {
 
 interface AddressProps
   extends Pick<
-    UserActionFormCallCongresspersonProps,
-    'user' | 'onFindCongressperson' | 'goToSection'
+    CallCongresspersonActionSharedData,
+    'user' | 'onFindCongressperson' | 'goToSection' | 'goBackSection'
   > {
-  congressPersonData?: UserActionFormCallCongresspersonProps['congressPersonData']
+  congressPersonData?: CallCongresspersonActionSharedData['congressPersonData']
   initialValues?: FormFields
+  heading?: React.ReactNode
+  submitButtonText?: string
 }
 
 export function Address({
@@ -50,7 +52,15 @@ export function Address({
   onFindCongressperson,
   congressPersonData,
   goToSection,
+  goBackSection,
   initialValues,
+  heading = (
+    <UserActionFormLayout.Heading
+      subtitle="Your address will be used to connect you with your representative. Stand With Crypto will never share your data with any third-parties."
+      title="Find your representative"
+    />
+  ),
+  submitButtonText = 'Continue',
 }: AddressProps) {
   const urls = useIntlUrls()
   const userDefaultValues = useMemo(() => getDefaultValues({ user }), [user])
@@ -117,12 +127,9 @@ export function Address({
           trackFormSubmissionSyncErrors(FORM_NAME),
         )}
       >
-        <UserActionFormLayout onBack={() => goToSection(SectionNames.INTRO)}>
+        <UserActionFormLayout onBack={goBackSection}>
           <UserActionFormLayout.Container>
-            <UserActionFormLayout.Heading
-              subtitle="Your address will be used to connect you with your representative. Stand With Crypto will never share your data with any third-parties."
-              title="Find your representative"
-            />
+            {heading}
 
             <FormField
               control={form.control}
@@ -155,7 +162,7 @@ export function Address({
             >
               {form.formState.isSubmitting || isLoadingLiveCongressPersonData
                 ? 'Loading...'
-                : 'Continue'}
+                : submitButtonText}
             </Button>
 
             <p className="text-sm">
@@ -171,8 +178,26 @@ export function Address({
   )
 }
 
-function useCongresspersonData({ address }: FindRepresentativeCallFormValues) {
+export function ChangeAddress(props: Omit<AddressProps, 'initialValues'>) {
+  return (
+    <Address
+      {...props}
+      heading={<UserActionFormLayout.Heading title="Update your address" />}
+      submitButtonText="Update"
+    />
+  )
+}
+
+export function useCongresspersonData({
+  address,
+}: {
+  address?: FindRepresentativeCallFormValues['address']
+}) {
   return useSWR(address ? `useCongresspersonData-${address.description}` : null, async () => {
+    if (!address) {
+      return null
+    }
+
     const dtsiResponse = await getDTSIPeopleFromAddress(address.description)
     if ('notFoundReason' in dtsiResponse) {
       return { notFoundReason: dtsiResponse.notFoundReason }

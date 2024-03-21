@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import * as Sentry from '@sentry/nextjs'
 import { z } from 'zod'
@@ -15,7 +17,7 @@ import { NFTSlug } from '@/utils/shared/nft'
 import { NFT_CLIENT_METADATA } from '@/utils/web/nft'
 import { zodAddress } from '@/validation/fields/zodAddress'
 
-import { Address } from './sections/address'
+import { Address, ChangeAddress, useCongresspersonData } from './sections/address'
 import { Intro } from './sections/intro'
 import { SuggestedScript } from './sections/suggestedScript'
 
@@ -23,21 +25,25 @@ type OnFindCongressPersonPayload = DTSIPeopleFromCongressionalDistrict & {
   addressSchema: z.infer<typeof zodAddress>
 }
 
-export interface UserActionFormCallCongresspersonProps extends UseSectionsReturn<SectionNames> {
+export interface CallCongresspersonActionSharedData extends UseSectionsReturn<SectionNames> {
   user: GetUserFullProfileInfoResponse['user']
   onFindCongressperson: (payload: OnFindCongressPersonPayload) => void
   congressPersonData: OnFindCongressPersonPayload
+}
+
+interface UserActionFormCallCongresspersonProps {
+  user: GetUserFullProfileInfoResponse['user']
+  onClose: () => void
+  initialValues?: FormFields
 }
 
 export function UserActionFormCallCongressperson({
   user,
   onClose,
   initialValues,
-}: {
-  user: GetUserFullProfileInfoResponse['user']
-  onClose: () => void
-  initialValues?: FormFields
-}) {
+}: UserActionFormCallCongresspersonProps) {
+  const hasDefaultAddress = !!user?.address || !!initialValues
+
   const sectionProps = useSections<SectionNames>({
     sections: Object.values(SectionNames),
     initialSectionId: SectionNames.INTRO,
@@ -47,19 +53,45 @@ export function UserActionFormCallCongressperson({
 
   const [congressPersonData, setCongresspersonData] = React.useState<OnFindCongressPersonPayload>()
 
+  const initialAddress = initialValues?.address
+    ? initialValues.address
+    : user?.address
+      ? { place_id: user.address.googlePlaceId, description: user.address.formattedDescription }
+      : undefined
+  const { data: resolvedCongressPersonData, isLoading: isLoadingInitialCongresspersonData } =
+    useCongresspersonData({ address: initialAddress })
+
+  React.useEffect(() => {
+    if (resolvedCongressPersonData && 'dtsiPerson' in resolvedCongressPersonData) {
+      setCongresspersonData(resolvedCongressPersonData)
+    }
+  }, [resolvedCongressPersonData])
+
+  const addressProps = {
+    congressPersonData,
+    initialValues,
+    user,
+    onFindCongressperson: setCongresspersonData,
+    ...sectionProps,
+  }
   switch (currentTab) {
     case SectionNames.INTRO:
-      return <Intro {...sectionProps} />
-    case SectionNames.ADDRESS:
       return (
-        <Address
-          congressPersonData={congressPersonData}
-          initialValues={initialValues}
-          onFindCongressperson={setCongresspersonData}
-          user={user}
-          {...sectionProps}
+        <Intro
+          loading={isLoadingInitialCongresspersonData}
+          onContinue={() =>
+            sectionProps.goToSection(
+              hasDefaultAddress && congressPersonData
+                ? SectionNames.SUGGESTED_SCRIPT
+                : SectionNames.ADDRESS,
+            )
+          }
         />
       )
+    case SectionNames.ADDRESS:
+      return <Address {...addressProps} />
+    case SectionNames.CHANGE_ADDRESS:
+      return <ChangeAddress {...addressProps} />
     case SectionNames.SUGGESTED_SCRIPT:
       // This should never happen in the normal tab flow, but if it does, we want to know about it
       if (!congressPersonData || 'notFoundReason' in congressPersonData) {
