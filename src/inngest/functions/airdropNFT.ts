@@ -1,6 +1,5 @@
 import { NFTCurrency, NFTMintStatus } from '@prisma/client'
 import { Decimal } from '@prisma/client/runtime/library'
-import * as Sentry from '@sentry/nextjs'
 import { NonRetriableError } from 'inngest'
 
 import { inngest } from '@/inngest/inngest'
@@ -95,19 +94,11 @@ export const airdropNFTWithInngest = inngest.createFunction(
 
     if (status === 'mined') {
       await step.run('emit-analytics-event', async () => {
-        const user = await prismaClient.user.findFirst({
+        const user = await prismaClient.user.findFirstOrThrow({
           where: {
             id: payload.userId,
           },
         })
-        if (!user) {
-          Sentry.captureMessage('user not found for user ID', {
-            extra: {
-              payload,
-            },
-          })
-          return
-        }
         const localUser = getLocalUserFromUser(user)
         const analytics = getServerAnalytics({
           localUser,
@@ -122,10 +113,10 @@ export const airdropNFTWithInngest = inngest.createFunction(
             return new Decimal(0)
           })
         analytics.track('NFT Successfully Airdropped', {
-          nftSlug: payload.nftSlug,
-          transactionFeeUSD: transactionFee.mul(ratio).toNumber(),
-          gasLimit,
-          gasPrice,
+          'NFT Slug': payload.nftSlug,
+          'Transaction Fee In USD': transactionFee.mul(ratio).toNumber(),
+          'Gas Limit': gasLimit,
+          'Gas Price': gasPrice,
         })
       })
     }
