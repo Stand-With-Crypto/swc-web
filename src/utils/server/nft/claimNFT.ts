@@ -115,8 +115,9 @@ export async function claimNFT(
 
   const payload: AirdropPayload = {
     nftMintId: action.nftMintId!,
-    recipientWalletAddress: userCryptoAddress.cryptoAddress,
     nftSlug,
+    recipientWalletAddress: userCryptoAddress.cryptoAddress,
+    userId: action.userId,
   }
 
   return inngest.send({

@@ -62,7 +62,7 @@ export async function POST(request: NextRequest) {
     const pricingValues = extractPricingValues(body)
 
     // Tracking the payment event regardless of type - the donation action is not created here.
-    analytics.track('Coinbase Commerce webhook event received', {
+    analytics.track('Coinbase Commerce Webhook Event Received', {
       creationMethod: 'On Site',
       paymentExpire: body.event.data.expires_at,
       paymentId: body.id,

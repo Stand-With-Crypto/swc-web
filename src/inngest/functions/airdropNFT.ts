@@ -48,6 +48,8 @@ export const airdropNFTWithInngest = inngest.createFunction(
     let mintStatus: ThirdwebTransactionStatus | null = null
     let transactionHash: string | null
     let transactionFee: Decimal
+    let gasLimit = 0
+    let gasPrice = 0
 
     while (
       (attempt <= 6 && mintStatus === null) ||
@@ -62,9 +64,9 @@ export const airdropNFTWithInngest = inngest.createFunction(
 
       mintStatus = transactionStatus.status
       transactionHash = transactionStatus.transactionHash
-      transactionFee = new Decimal(
-        Number(transactionStatus.gasLimit) * +Number(transactionStatus.gasPrice) * WEI_TO_ETH_UNIT, // Gas price is in wei, so we need to convert it to ETH.
-      )
+      gasLimit = Number(transactionStatus.gasLimit)
+      gasPrice = Number(transactionStatus.gasPrice) * WEI_TO_ETH_UNIT // Gas price is in wei, so we need to convert it to ETH.
+      transactionFee = new Decimal(gasLimit * gasPrice)
       attempt += 1
     }
 
@@ -93,23 +95,17 @@ export const airdropNFTWithInngest = inngest.createFunction(
 
     if (status === 'mined') {
       await step.run('emit-analytics-event', async () => {
-        // All flows to this Inngest function should have passed in the user's primary crypto address.
         const user = await prismaClient.user.findFirst({
           where: {
-            primaryUserCryptoAddress: {
-              cryptoAddress: payload.recipientWalletAddress,
-            },
+            id: payload.userId,
           },
         })
         if (!user) {
-          Sentry.captureMessage(
-            'user not found by primary user crypto address - skipping emitting analytics',
-            {
-              extra: {
-                payload,
-              },
+          Sentry.captureMessage('user not found for user ID', {
+            extra: {
+              payload,
             },
-          )
+          })
           return
         }
         const localUser = getLocalUserFromUser(user)
@@ -125,9 +121,11 @@ export const airdropNFTWithInngest = inngest.createFunction(
             logger.error(e)
             return new Decimal(0)
           })
-        analytics.track('NFT successfully airdropped', {
+        analytics.track('NFT Successfully Airdropped', {
           nftSlug: payload.nftSlug,
           transactionFeeUSD: transactionFee.mul(ratio).toNumber(),
+          gasLimit,
+          gasPrice,
         })
       })
     }

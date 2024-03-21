@@ -51,6 +51,7 @@ async function smokeTestAirdropNFTWithInngest() {
     nftMintId: action.nftMintId!,
     nftSlug: NFTSlug.SWC_SHIELD,
     recipientWalletAddress: LOCAL_USER_CRYPTO_ADDRESS,
+    userId: user.id,
   }
 
   await inngest.send({
