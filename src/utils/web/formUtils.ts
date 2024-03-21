@@ -23,7 +23,7 @@ export type FormValues<T extends z.ZodType<any, any, any>> = z.infer<T> & Generi
 export async function triggerServerActionForForm<
   F extends UseFormReturn<any, any, any>,
   P,
-  Fn extends (args: P) => Promise<{ errors: Record<string, string[]> } | object>,
+  Fn extends (args: P) => Promise<{ errors: Record<string, string[]> } | object | undefined>,
 >(
   {
     form,

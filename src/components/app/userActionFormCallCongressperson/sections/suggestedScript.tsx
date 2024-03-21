@@ -76,7 +76,7 @@ export function SuggestedScript({
         },
         payload =>
           actionCreateUserActionCallCongressperson(payload).then(actionResult => {
-            if (actionResult.user) {
+            if (actionResult?.user) {
               identifyUserOnClient(actionResult.user)
             }
             return actionResult
@@ -89,6 +89,7 @@ export function SuggestedScript({
         goToSection(SectionNames.SUCCESS_MESSAGE)
       } else {
         setCallingState('error')
+        toastGenericError()
       }
     },
     [addressSchema, dtsiPerson.slug, goToSection, router],
