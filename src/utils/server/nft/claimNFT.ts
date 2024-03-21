@@ -6,7 +6,8 @@ import { inngest } from '@/inngest/inngest'
 import { NFT_SLUG_BACKEND_METADATA } from '@/utils/server/nft/constants'
 import { AirdropPayload } from '@/utils/server/nft/payload'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { TURN_OFF_NFT_MINT } from '@/utils/shared/killSwitches'
+import { fetchAirdropTransactionFee } from '@/utils/server/thirdweb/fetchCurrentClaimTransactionFee'
+import { AIRDROP_NFT_ETH_TRANSACTION_FEE_THRESHOLD } from '@/utils/shared/airdropNFTETHTransactionFeeThreshold'
 import { getLogger } from '@/utils/shared/logger'
 import { NFTSlug } from '@/utils/shared/nft'
 import {
@@ -55,20 +56,24 @@ export const ACTION_NFT_SLUG: Record<
 const logger = getLogger('claimNft')
 
 interface Config {
-  ignoreTurnOffNFTMintFlag: boolean
+  skipTransactionFeeCheck: boolean
 }
 
 export async function claimNFT(
   userAction: Pick<UserAction, 'id' | 'actionType' | 'campaignName' | 'nftMintId'>,
   userCryptoAddress: Pick<UserCryptoAddress, 'cryptoAddress'>,
-  config: Config = { ignoreTurnOffNFTMintFlag: false },
+  config: Config = { skipTransactionFeeCheck: false },
 ) {
-  // TODO (benson): check current transaction fee here via `fetchAirdropTransactionFee`.
-
-  if (TURN_OFF_NFT_MINT && !config.ignoreTurnOffNFTMintFlag) {
-    logger.info('TURN_OFF_NFT_MINT is on - preventing live airdrop for now')
-    return null
+  if (!config.skipTransactionFeeCheck) {
+    const currentTransactionFee = await fetchAirdropTransactionFee()
+    if (currentTransactionFee > AIRDROP_NFT_ETH_TRANSACTION_FEE_THRESHOLD) {
+      logger.info(
+        `Current transaction fee (${currentTransactionFee}) exceeds threshold (${AIRDROP_NFT_ETH_TRANSACTION_FEE_THRESHOLD}) - skipping live NFT airdrop for now.`,
+      )
+      return null
+    }
   }
+
   logger.info('Function triggered')
 
   const { actionType, campaignName } = userAction
