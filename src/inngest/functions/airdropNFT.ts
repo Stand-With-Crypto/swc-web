@@ -1,4 +1,5 @@
 import { NFTMintStatus } from '@prisma/client'
+import * as Sentry from '@sentry/nextjs'
 import { NonRetriableError } from 'inngest'
 
 import { inngest } from '@/inngest/inngest'
@@ -8,6 +9,9 @@ import {
   THIRDWEB_TRANSACTION_STATUS_TO_NFT_MINT_STATUS,
   updateMintNFTStatus,
 } from '@/utils/server/nft/updateMintNFTStatus'
+import { prismaClient } from '@/utils/server/prismaClient'
+import { getServerAnalytics } from '@/utils/server/serverAnalytics'
+import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
 import { engineAirdropNFT } from '@/utils/server/thirdweb/engineAirdropNFT'
 import {
   engineGetMintStatus,
@@ -36,6 +40,7 @@ export const airdropNFTWithInngest = inngest.createFunction(
     let attempt = 1
     let mintStatus: ThirdwebTransactionStatus | null = null
     let transactionHash: string | null
+    let transactionFee: number | null
 
     while (
       (attempt <= 6 && mintStatus === null) ||
@@ -50,6 +55,7 @@ export const airdropNFTWithInngest = inngest.createFunction(
 
       mintStatus = transactionStatus.status
       transactionHash = transactionStatus.transactionHash
+      transactionFee = Number(transactionStatus.gasLimit) * Number(transactionStatus.gasPrice)
       attempt += 1
     }
 
@@ -62,7 +68,7 @@ export const airdropNFTWithInngest = inngest.createFunction(
 
     const status = mintStatus! as ThirdwebTransactionStatus
 
-    await step.run('update-mintNFT-Status', async () => {
+    await step.run('update-nft-status', async () => {
       return await updateMintNFTStatus(
         payload.nftMintId,
         THIRDWEB_TRANSACTION_STATUS_TO_NFT_MINT_STATUS[status],
@@ -70,14 +76,43 @@ export const airdropNFTWithInngest = inngest.createFunction(
       )
     })
 
-    // TODO (benson or yann):
-    // if the mint was successful, then we should probably emit an analytics event to Mixpanel or a counter metric to Sentry indicating that this specific NFT was airdropped.
-    // similarly, we might want to consider emitting a gauge metric to visualize the transaction fee trend of airdropping NFTs for each NFT.
-
     if (status === 'errored' || status === 'cancelled') {
       throw new NonRetriableError(
         `airdrop NFT transaction ${transactionHash!} failed with status ${status}`,
       )
+    }
+
+    if (status === 'mined') {
+      await step.run('emit-analytics-event', async () => {
+        // All flows to this Inngest function should have passed in the user's primary crypto address.
+        const user = await prismaClient.user.findFirst({
+          where: {
+            primaryUserCryptoAddress: {
+              cryptoAddress: payload.recipientWalletAddress,
+            },
+          },
+        })
+        if (!user) {
+          Sentry.captureMessage(
+            'user not found by primary user crypto address - skipping emitting analytics',
+            {
+              extra: {
+                payload,
+              },
+            },
+          )
+          return
+        }
+        const localUser = getLocalUserFromUser(user)
+        const analytics = getServerAnalytics({
+          localUser,
+          userId: user.id,
+        })
+        analytics.track('NFT successfully airdropped', {
+          nftSlug: payload.nftSlug,
+          costUSD: transactionFee ?? 0,
+        })
+      })
     }
   },
 )
