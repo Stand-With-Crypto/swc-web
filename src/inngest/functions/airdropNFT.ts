@@ -28,6 +28,8 @@ const AIRDROP_NFT_RETRY = 2
 
 const logger = getLogger('airdropNFTWithInngest')
 
+const WEI_TO_ETH_UNIT = 1e-18
+
 export const airdropNFTWithInngest = inngest.createFunction(
   {
     id: AIRDROP_NFT_INNGEST_FUNCTION_ID,
@@ -61,7 +63,7 @@ export const airdropNFTWithInngest = inngest.createFunction(
       mintStatus = transactionStatus.status
       transactionHash = transactionStatus.transactionHash
       transactionFee = new Decimal(
-        Number(transactionStatus.gasLimit) * Number(transactionStatus.gasPrice),
+        Number(transactionStatus.gasLimit) * +Number(transactionStatus.gasPrice) * WEI_TO_ETH_UNIT, // Gas price is in wei, so we need to convert it to ETH.
       )
       attempt += 1
     }
