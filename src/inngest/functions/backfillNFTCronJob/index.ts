@@ -77,6 +77,7 @@ export const backfillNFTInngestCronJob = inngest.createFunction(
             include: { primaryUserCryptoAddress: true },
           },
         },
+        orderBy: { datetimeCreated: 'asc' }, // Fetch the oldest user actions first.
       })
       logger.info(`Fetched ${userActions.length} user actions to backfill`)
       return chunk(userActions, BACKFILL_NFT_INNGEST_CRON_JOB_AIRDROP_BATCH_SIZE)
