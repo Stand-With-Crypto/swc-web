@@ -1,4 +1,5 @@
-import { NFTMintStatus } from '@prisma/client'
+import { NFTCurrency, NFTMintStatus } from '@prisma/client'
+import { Decimal } from '@prisma/client/runtime/library'
 import * as Sentry from '@sentry/nextjs'
 import { NonRetriableError } from 'inngest'
 
@@ -18,10 +19,14 @@ import {
   THIRDWEB_FINAL_TRANSACTION_STATUSES,
   ThirdwebTransactionStatus,
 } from '@/utils/server/thirdweb/engineGetMintStatus'
+import { getCryptoToFiatConversion } from '@/utils/shared/getCryptoToFiatConversion'
+import { getLogger } from '@/utils/shared/logger'
 
 export const AIRDROP_NFT_INNGEST_EVENT_NAME = 'app/airdrop.request'
 const AIRDROP_NFT_INNGEST_FUNCTION_ID = 'airdrop-nft'
 const AIRDROP_NFT_RETRY = 2
+
+const logger = getLogger('airdropNFTWithInngest')
 
 export const airdropNFTWithInngest = inngest.createFunction(
   {
@@ -40,7 +45,7 @@ export const airdropNFTWithInngest = inngest.createFunction(
     let attempt = 1
     let mintStatus: ThirdwebTransactionStatus | null = null
     let transactionHash: string | null
-    let transactionFee: number | null
+    let transactionFee: Decimal
 
     while (
       (attempt <= 6 && mintStatus === null) ||
@@ -55,7 +60,9 @@ export const airdropNFTWithInngest = inngest.createFunction(
 
       mintStatus = transactionStatus.status
       transactionHash = transactionStatus.transactionHash
-      transactionFee = Number(transactionStatus.gasLimit) * Number(transactionStatus.gasPrice)
+      transactionFee = new Decimal(
+        Number(transactionStatus.gasLimit) * Number(transactionStatus.gasPrice),
+      )
       attempt += 1
     }
 
@@ -108,9 +115,17 @@ export const airdropNFTWithInngest = inngest.createFunction(
           localUser,
           userId: user.id,
         })
+        const ratio = await getCryptoToFiatConversion(NFTCurrency.ETH)
+          .then(res => {
+            return res?.data.amount ? res?.data.amount : new Decimal(0)
+          })
+          .catch(e => {
+            logger.error(e)
+            return new Decimal(0)
+          })
         analytics.track('NFT successfully airdropped', {
           nftSlug: payload.nftSlug,
-          costUSD: transactionFee ?? 0,
+          transactionFeeUSD: transactionFee.mul(ratio).toNumber(),
         })
       })
     }
