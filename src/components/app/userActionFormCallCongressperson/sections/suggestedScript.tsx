@@ -104,7 +104,10 @@ export function SuggestedScript({
             subtitle={
               <>
                 Showing the representative for your address in{' '}
-                <ExternalLink onClick={() => goToSection(SectionNames.CHANGE_ADDRESS)}>
+                <ExternalLink
+                  className="cursor-pointer"
+                  onClick={() => goToSection(SectionNames.CHANGE_ADDRESS)}
+                >
                   {addressSchema.locality}
                 </ExternalLink>
                 .
