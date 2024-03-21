@@ -23,7 +23,7 @@ export function withServerActionMiddleware<T extends (...args: any) => any>(
   action: T,
 ) {
   return function orchestratedLogic(...args: Parameters<T>) {
-    return Sentry.withServerActionInstrumentation<() => Awaited<ReturnType<T>>>(
+    return Sentry.withServerActionInstrumentation<() => Awaited<ReturnType<T>> | undefined>(
       name,
       {
         recordResponse: true,

@@ -55,7 +55,7 @@ export function ClaimNft({ goToSection, stateCode }: ClaimNftProps) {
       },
       payload =>
         actionCreateUserActionVoterRegistration(payload).then(actionResult => {
-          if (actionResult.user) {
+          if (actionResult?.user) {
             identifyUserOnClient(actionResult.user)
           }
           return actionResult
@@ -65,6 +65,8 @@ export function ClaimNft({ goToSection, stateCode }: ClaimNftProps) {
     if (result.status === 'success') {
       router.refresh()
       goToSection(SectionNames.SUCCESS)
+    } else {
+      toastGenericError()
     }
     setLoading(false)
   }, [goToSection, router, stateCode])

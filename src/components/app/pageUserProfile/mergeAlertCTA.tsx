@@ -48,8 +48,8 @@ export function MergeAlertCTA({
       userMergeAlertId: mergeAlert.id,
       userToDeleteId,
     })
-      .then(({ status }) => {
-        if (status === 'complete') {
+      .then(result => {
+        if (result?.status === 'complete') {
           toast.success('Your accounts have been successfully merged!')
           router.refresh()
         } else {
