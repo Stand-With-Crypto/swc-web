@@ -56,6 +56,8 @@ export const US_STATE_CODE_TO_DISPLAY_NAME_MAP = {
   WY: 'Wyoming',
 } as const
 
+export type USStateCode = keyof typeof US_STATE_CODE_TO_DISPLAY_NAME_MAP
+
 export const getUSStateNameFromStateCode = (stateCode: string) => {
   // @ts-ignore
   const name: string = US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode.toUpperCase()]

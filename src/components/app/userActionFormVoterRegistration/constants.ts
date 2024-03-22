@@ -1,4 +1,4 @@
-import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
+import { USStateCode } from '@/utils/shared/usStateUtils'
 
 export enum SectionNames {
   SURVEY = 'Survey',
@@ -13,7 +13,7 @@ export const ANALYTICS_NAME_USER_ACTION_FORM_VOTER_REGISTRATION =
   'User Action Form Voter Registration'
 
 type RegistrationUrlType = 'registerUrl' | 'checkRegistrationUrl'
-export type StateCode = keyof typeof US_STATE_CODE_TO_DISPLAY_NAME_MAP
+export type StateCode = USStateCode
 type RegistrationByState = Record<RegistrationUrlType, string>
 
 export const REGISTRATION_URLS_BY_STATE: Record<StateCode, RegistrationByState> = {
