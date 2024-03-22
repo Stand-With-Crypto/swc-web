@@ -2,6 +2,7 @@ import * as Sentry from '@sentry/nextjs'
 
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
+import { z } from 'zod'
 
 const COINBASE_COMMERCE_CREATE_CHARGE_URL = 'https://api.commerce.coinbase.com/charges'
 
@@ -32,9 +33,31 @@ interface CreateChargeResponseTimeline {
   time: string
 }
 
+interface TransferIntent {
+  call_data: TransferIntentCallData
+  metadata: Record<string, string>
+}
+
+interface TransferIntentCallData {
+  deadline: string
+  fee_amount: string
+  id: string
+  operator: string
+  prefix: string
+  recipient: string
+  recipent_amount: string
+  recipient_currency: string
+  refund_destination: string
+  signature: string
+}
+
 interface CreateChargeResponseWeb3Data {
   contract_addresses: Record<string, string>
   settlement_currency_addresses: Record<string, string>
+  subsidized_payments_chain_to_tokens: Record<string, string>
+  failure_events: Record<string, string>[]
+  success_events: Record<string, string>[]
+  transfer_intent?: TransferIntent
 }
 
 interface CreateChargeResponseData {
@@ -68,20 +91,50 @@ interface CreateChargeRequest {
   buyer_locale?: string
   cancel_url?: string
   checkout_id?: string
+  description?: string
   local_price?: {
     amount?: string
     currency?: string
   }
-  metadata?: Record<string, string> // Pass session ID, email, name, and other fields through here.
+  metadata?: Record<string, string | boolean> // Pass session ID, email, and other fields through here.
+  name?: string
   pricing_type: 'fixed_price' | 'no_price'
   redirect_url?: string
 }
 
-export async function createCharge({ sessionId, userId }: { sessionId: string; userId: string }) {
+// mini-dApps donation flow
+export interface CoinbaseCommerceDonation {
+  address: string
+  email: string
+  employer: string
+  full_name: string
+  is_citizen: boolean
+  occupation: string
+}
+
+export const zodCoinbaseCommerceDonation = z.object({
+  address: z.string(),
+  email: z.string(),
+  employer: z.string(),
+  full_name: z.string(),
+  is_citizen: z.boolean(),
+  occupation: z.string(),
+})
+
+export interface CreateChargeParams {
+  address: string
+  email: string
+  employer: string
+  full_name: string
+  is_citizen: boolean
+  occupation: string
+}
+
+export async function createCharge({sessionId, userId}: { sessionId: string; userId: string}) {
   const payload: CreateChargeRequest = {
-    pricing_type: 'no_price',
-    metadata: { sessionId, userId },
     cancel_url: `https://www.standwithcrypto.org?sessionId=${sessionId}`,
+    metadata: { sessionId, userId },
+    pricing_type: 'no_price',
   }
 
   try {
@@ -100,6 +153,36 @@ export async function createCharge({ sessionId, userId }: { sessionId: string; u
     Sentry.captureException(error, {
       level: 'error',
       extra: { sessionId },
+    })
+    throw error
+  }
+}
+
+export async function createInAppCharge({createChargeParams}: {createChargeParams: CreateChargeParams}) {
+  const payload: CreateChargeRequest = {
+    cancel_url: 'https://www.standwithcrypto.org',
+    description: 'Donate to Crypto',
+    metadata: { ...createChargeParams },
+    name: createChargeParams.full_name,
+    pricing_type: 'no_price',
+  }
+
+  try {
+    const httpResp = await fetchReq(COINBASE_COMMERCE_CREATE_CHARGE_URL, {
+      method: 'POST',
+      mode: 'cors' as RequestMode,
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'X-CC-Api-Key': COINBASE_COMMERCE_API_KEY,
+      },
+      body: JSON.stringify(payload),
+    })
+    return (await httpResp.json()) as CreateChargeResponse
+  } catch (error) {
+    Sentry.captureException(error, {
+      level: 'error',
+      extra: { payload },
     })
     throw error
   }
