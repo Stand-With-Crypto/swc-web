@@ -8,6 +8,7 @@ import { claimNFT } from '@/utils/server/nft/claimNFT'
 import { LEGACY_NFT_DEPLOYER_WALLET, SWC_DOT_ETH_WALLET } from '@/utils/server/nft/constants'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { fetchAirdropTransactionFee } from '@/utils/server/thirdweb/fetchCurrentClaimTransactionFee'
+import { AIRDROP_NFT_ETH_TRANSACTION_FEE_THRESHOLD } from '@/utils/shared/airdropNFTETHTransactionFeeThreshold'
 import { getLogger } from '@/utils/shared/logger'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
@@ -20,10 +21,6 @@ const BACKFILL_NFT_INNGEST_CRON_JOB_AIRDROP_SLEEP_INTERVAL =
 // This is the number of user actions to process in a single batch.
 const BACKFILL_NFT_INNGEST_CRON_JOB_AIRDROP_BATCH_SIZE =
   Number(process.env.BACKFILL_NFT_INNGEST_CRON_JOB_AIRDROP_BATCH_SIZE) || 20
-
-// This is the ETH threshold in which we will stop the cron job if the current transaction fee exceeds the threshold.
-const AIRDROP_NFT_ETH_TRANSACTION_FEE_THRESHOLD =
-  Number(process.env.AIRDROP_NFT_ETH_TRANSACTION_FEE_THRESHOLD) || 0.00006
 
 // This is the date when SWC went live. We do not care about user actions before this date.
 const GO_LIVE_DATE = new Date('2024-02-25 00:00:00.000')
@@ -63,6 +60,7 @@ export const backfillNFTInngestCronJob = inngest.createFunction(
         BACKFILL_NFT_INNGEST_CRON_JOB_AIRDROP_SLEEP_INTERVAL) *
       BACKFILL_NFT_INNGEST_CRON_JOB_AIRDROP_BATCH_SIZE
     let batchNum = 1
+    let stopMessage = ''
 
     // Fetch the user action batches that need to be backfilled.
     const userActionBatches = await step.run('script.get-user-actions', async () => {
@@ -79,6 +77,7 @@ export const backfillNFTInngestCronJob = inngest.createFunction(
             include: { primaryUserCryptoAddress: true },
           },
         },
+        orderBy: { datetimeCreated: 'asc' }, // Fetch the oldest user actions first.
       })
       logger.info(`Fetched ${userActions.length} user actions to backfill`)
       return chunk(userActions, BACKFILL_NFT_INNGEST_CRON_JOB_AIRDROP_BATCH_SIZE)
@@ -88,13 +87,15 @@ export const backfillNFTInngestCronJob = inngest.createFunction(
     for (const userActionBatch of userActionBatches) {
       // If there are no more user actions to backfill, stop the cron job.
       if (userActionBatch.length === 0) {
-        logger.info(`No more user actions to backfill - stopping the cron job`)
+        stopMessage = 'No more user actions to backfill'
+        logger.info(`${stopMessage} - stopping the cron job`)
         break
       }
 
       // Check if the current timestamp has passed the timeframe.
       if (new Date().getTime() > currentTime + BACKFILL_NFT_INNGEST_CRON_JOB_AIRDROP_TIMEFRAME) {
-        logger.info(`Current timestamp has passed the timeframe - stopping the cron job`)
+        stopMessage = 'Current timestamp has passed the timeframe'
+        logger.info(`${stopMessage} - stopping the cron job`)
         break
       }
 
@@ -113,11 +114,10 @@ export const backfillNFTInngestCronJob = inngest.createFunction(
         },
       )
       if (walletsWithLowBalances && walletsWithLowBalances.length > 0) {
-        logger.warn(
-          `Low Base ETH balance detected for ${walletsWithLowBalances
-            .map(wallet => wallet.account)
-            .join(', ')} - please fund as soon as possible - stopping the cron job`,
-        )
+        stopMessage = `Critically low Base ETH balance detected for ${walletsWithLowBalances
+          .map(wallet => wallet.account)
+          .join(', ')}`
+        logger.warn(`${stopMessage} - please fund as soon as possible - stopping the cron job`)
         break
       }
 
@@ -131,9 +131,8 @@ export const backfillNFTInngestCronJob = inngest.createFunction(
         },
       )
       if (currentAirdropTransactionFee > AIRDROP_NFT_ETH_TRANSACTION_FEE_THRESHOLD) {
-        logger.info(
-          `Current airdrop transaction fee (${currentAirdropTransactionFee}) exceeds the threshold (${AIRDROP_NFT_ETH_TRANSACTION_FEE_THRESHOLD}) - stopping the cron job`,
-        )
+        stopMessage = `Current airdrop transaction fee (${currentAirdropTransactionFee}) exceeds the threshold (${AIRDROP_NFT_ETH_TRANSACTION_FEE_THRESHOLD})`
+        logger.info(`${stopMessage} - stopping the cron job`)
         break
       }
 
@@ -142,7 +141,7 @@ export const backfillNFTInngestCronJob = inngest.createFunction(
         await Promise.all(
           userActionBatch.map(userAction =>
             claimNFT(userAction, userAction.user.primaryUserCryptoAddress!, {
-              ignoreTurnOffNFTMintFlag: true,
+              skipTransactionFeeCheck: true,
             }),
           ),
         )
@@ -154,6 +153,23 @@ export const backfillNFTInngestCronJob = inngest.createFunction(
         `script.sleep-${batchNum}`,
         BACKFILL_NFT_INNGEST_CRON_JOB_AIRDROP_SLEEP_INTERVAL,
       )
+    }
+
+    // Fetch the remaining user actions that are in the backlog.
+    const userActionsRemaining = await step.run('script.get-user-actions-remaining', async () => {
+      return await prismaClient.userAction.count({
+        where: {
+          datetimeCreated: { gte: GO_LIVE_DATE },
+          nftMint: null,
+          actionType: { in: actionsWithNFT },
+          user: { primaryUserCryptoAddress: { isNot: null } },
+        },
+      })
+    })
+
+    return {
+      stopMessage,
+      userActionsRemaining: userActionsRemaining,
     }
   },
 )

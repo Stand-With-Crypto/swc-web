@@ -13,7 +13,7 @@ import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
 
 const LOCAL_USER_CRYPTO_ADDRESS = parseThirdwebAddress(
-  requiredEnv(process.env.LOCAL_USER_CRYPTO_ADDRESS, 'process.env.LOCAL_USER_CRYPTO_ADDRESS'),
+  requiredEnv(process.env.LOCAL_USER_CRYPTO_ADDRESS, 'LOCAL_USER_CRYPTO_ADDRESS'),
 )
 
 /*
@@ -51,6 +51,7 @@ async function smokeTestAirdropNFTWithInngest() {
     nftMintId: action.nftMintId!,
     nftSlug: NFTSlug.SWC_SHIELD,
     recipientWalletAddress: LOCAL_USER_CRYPTO_ADDRESS,
+    userId: user.id,
   }
 
   await inngest.send({

@@ -4,4 +4,5 @@ export interface AirdropPayload {
   nftMintId: string
   nftSlug: NFTSlug
   recipientWalletAddress: string
+  userId: string
 }

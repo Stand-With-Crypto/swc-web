@@ -5,7 +5,7 @@ import { requiredEnv } from '@/utils/shared/requiredEnv'
 
 const GOOGLE_PLACES_BACKEND_API_KEY = requiredEnv(
   process.env.GOOGLE_PLACES_BACKEND_API_KEY,
-  'process.env.GOOGLE_PLACES_BACKEND_API_KEY',
+  'GOOGLE_PLACES_BACKEND_API_KEY',
 )
 
 export async function getGooglePlaceIdFromAddress(address: string) {

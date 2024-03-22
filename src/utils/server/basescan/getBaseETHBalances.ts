@@ -1,9 +1,13 @@
 import * as Sentry from '@sentry/nextjs'
 
 import { fetchReq } from '@/utils/shared/fetchReq'
-import { requiredEnv } from '@/utils/shared/requiredEnv'
+import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
 
-const BASESCAN_API_KEY = requiredEnv(process.env.BASESCAN_API_KEY, 'process.env.BASESCAN_API_KEY')
+const BASESCAN_API_KEY = requiredOutsideLocalEnv(
+  process.env.BASESCAN_API_KEY,
+  'BASESCAN_API_KEY',
+  'ETH balance check',
+)!
 
 export type GetBaseETHBalancesResponse = {
   status: string
