@@ -26,7 +26,7 @@ import { identifyUserOnClient } from '@/utils/web/identifyUser'
 
 const NEXT_PUBLIC_THIRDWEB_CLIENT_ID = requiredEnv(
   process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID,
-  'process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID',
+  'NEXT_PUBLIC_THIRDWEB_CLIENT_ID',
 )
 
 const InitialOrchestration = () => {
