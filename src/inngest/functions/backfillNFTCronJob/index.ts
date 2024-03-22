@@ -196,6 +196,7 @@ export const backfillNFTInngestCronJob = inngest.createFunction(
           {
             level: 'error',
             extra: {
+              currentAirdropTransactionFee: await fetchAirdropTransactionFee(),
               missingNFTDaysAlertThreshold: MISSING_NFT_DAYS_ALERT_THRESHOLD,
               userActionDatetimeCreated: userAction.datetimeCreated,
               userActionId: userAction.id,
