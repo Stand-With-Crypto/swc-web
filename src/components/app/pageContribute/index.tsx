@@ -177,7 +177,7 @@ export function PageContribute() {
                       <Button asChild variant="primary-cta">
                         <ExternalLink
                           href={
-                            'https://docs.google.com/forms/d/e/1FAIpQLSf4T51k9InqKQKW2911_HVWm11wz_dOcpoDj8QuyF7cxU5MHw/viewform'
+                            'https://docs.google.com/forms/d/e/1FAIpQLSdVp_dkj3sOIq0mBpFcSp96wsUz8w4aEBvJuLWJcLumrVadcA/viewform'
                           }
                         >
                           Get in touch
