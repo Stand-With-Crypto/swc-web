@@ -1,6 +1,6 @@
 import { PartnerGrid } from '@/components/app/pagePartners/partnerGrid'
 import { Button } from '@/components/ui/button'
-import { ExternalLink, InternalLink } from '@/components/ui/link'
+import { InternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { SupportedLocale } from '@/intl/locales'
