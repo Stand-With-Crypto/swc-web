@@ -10,7 +10,7 @@ import { UseSectionsReturn } from '@/hooks/useSections'
 export function Intro({ goToSection }: UseSectionsReturn<SectionNames>) {
   const ref = React.useRef<HTMLButtonElement>(null)
   useEffect(() => {
-    ref.current?.focus()
+    ref.current?.focus({ preventScroll: true })
   }, [ref])
   return (
     <IntroStaticContent>
