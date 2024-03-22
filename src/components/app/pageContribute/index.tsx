@@ -26,7 +26,7 @@ export function PageContribute() {
                 'https://docs.google.com/forms/d/e/1FAIpQLSf4T51k9InqKQKW2911_HVWm11wz_dOcpoDj8QuyF7cxU5MHw/viewform'
               }
             >
-              Become an industry partner
+              Get in touch
             </ExternalLink>
           </Button>
         </div>
@@ -180,7 +180,7 @@ export function PageContribute() {
                             'https://docs.google.com/forms/d/e/1FAIpQLSdVp_dkj3sOIq0mBpFcSp96wsUz8w4aEBvJuLWJcLumrVadcA/viewform'
                           }
                         >
-                          Get in touch
+                          Sponsor an event
                         </ExternalLink>
                       </Button>
                     ),
