@@ -2,6 +2,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import { capitalize } from 'lodash-es'
 import type { Metadata, Viewport } from 'next'
 import { notFound } from 'next/navigation'
+import Script from 'next/script'
 
 import { TopLevelClientLogic } from '@/app/[locale]/topLevelClientLogic'
 import { CookieConsent } from '@/components/app/cookieConsent'
@@ -75,14 +76,6 @@ export default function Layout({ children, params }: PageProps & { children: Rea
 
   return (
     <html lang={locale}>
-      <head>
-        <script
-          defer
-          key="maps-api-script"
-          src={`https://maps.googleapis.com/maps/api/js?key=${NEXT_PUBLIC_GOOGLE_PLACES_API_KEY}&libraries=places&callback=${CALLBACK_NAME}`}
-        ></script>
-      </head>
-
       <body className={fontClassName}>
         {/* LATER-TASK add back once https://github.com/TheSGJ/nextjs-toploader/issues/66 is resolved */}
         {/* <NextTopLoader /> */}
@@ -99,6 +92,10 @@ export default function Layout({ children, params }: PageProps & { children: Rea
         <CookieConsent locale={locale} />
         {/* <Analytics debug={false} /> */}
         <SpeedInsights debug={false} sampleRate={0.005} />
+        <Script
+          key="maps-api-script"
+          src={`https://maps.googleapis.com/maps/api/js?key=${NEXT_PUBLIC_GOOGLE_PLACES_API_KEY}&libraries=places&callback=${CALLBACK_NAME}`}
+        />
       </body>
     </html>
   )
