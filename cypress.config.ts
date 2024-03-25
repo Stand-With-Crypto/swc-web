@@ -7,7 +7,7 @@ export default defineConfig({
   // iPhone 12 Pro resolution
   viewportWidth: 390,
   viewportHeight: 844,
-  defaultCommandTimeout: 20000,
+  defaultCommandTimeout: 10000,
   e2e: {
     baseUrl: 'http://localhost:3000',
     setupNodeEvents(on) {
