@@ -11,9 +11,13 @@ interface IntroProps {
 }
 
 export function Intro({ onContinue, loading }: IntroProps) {
+  const ref = React.useRef<HTMLButtonElement>(null)
+  React.useEffect(() => {
+    ref.current?.focus({ preventScroll: true })
+  }, [ref])
   return (
     <IntroStaticContent>
-      <Button autoFocus disabled={loading} onClick={onContinue}>
+      <Button disabled={loading} onClick={onContinue} ref={ref}>
         {loading ? 'Loading...' : 'Continue'}
       </Button>
     </IntroStaticContent>

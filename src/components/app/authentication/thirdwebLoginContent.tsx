@@ -37,11 +37,11 @@ export function ThirdwebLoginContent({
       return
     }
 
-    const input =
-      thirdwebEmbeddedAuthContainer.current?.querySelector<HTMLInputElement>('input[type="email"]')
-    if (input && !input.getAttribute('value')) {
-      input.setAttribute('value', initialEmailAddress)
-    }
+    // const input =
+    //   thirdwebEmbeddedAuthContainer.current?.querySelector<HTMLInputElement>('input[type="email"]')
+    // if (input && !input.getAttribute('value')) {
+    //   input.setAttribute('value', initialEmailAddress)
+    // }
   }, [initialEmailAddress])
 
   return (

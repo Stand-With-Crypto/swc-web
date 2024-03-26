@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/nextjs'
 import { chunk } from 'lodash-es'
 
 import { inngest } from '@/inngest/inngest'
@@ -21,6 +22,9 @@ const BACKFILL_NFT_INNGEST_CRON_JOB_AIRDROP_SLEEP_INTERVAL =
 // This is the number of user actions to process in a single batch.
 const BACKFILL_NFT_INNGEST_CRON_JOB_AIRDROP_BATCH_SIZE =
   Number(process.env.BACKFILL_NFT_INNGEST_CRON_JOB_AIRDROP_BATCH_SIZE) || 20
+
+// This is the threshold to trigger an alert if there are user actions missing NFTs in which the action's created time is greater than the threshold.
+const MISSING_NFT_DAYS_ALERT_THRESHOLD = 3 * 24 * 60 * 60 * 1000 // 3 days.
 
 // This is the date when SWC went live. We do not care about user actions before this date.
 const GO_LIVE_DATE = new Date('2024-02-25 00:00:00.000')
@@ -165,6 +169,41 @@ export const backfillNFTInngestCronJob = inngest.createFunction(
           user: { primaryUserCryptoAddress: { isNot: null } },
         },
       })
+    })
+
+    // Trigger alert if we have user actions missing NFTs whose creation time is greater than `MISSING_NFT_DAYS_ALERT_THRESHOLD`.
+    await step.run('script.trigger-alert', async () => {
+      const userAction = await prismaClient.userAction.findFirst({
+        where: {
+          datetimeCreated: { gte: GO_LIVE_DATE },
+          nftMint: null,
+          actionType: { in: actionsWithNFT },
+          user: { primaryUserCryptoAddress: { isNot: null } },
+        },
+        orderBy: { datetimeCreated: 'asc' }, // Fetch the oldest user action.
+      })
+      if (!userAction) {
+        return
+      }
+
+      if (
+        currentTime - new Date(userAction.datetimeCreated).getTime() >
+        MISSING_NFT_DAYS_ALERT_THRESHOLD
+      ) {
+        // Trigger Sentry alert.
+        Sentry.captureMessage(
+          `Detected old user action that is missing NFT. Please check for Base network congestion and incidents, and adjust variables if needed.`,
+          {
+            level: 'error',
+            extra: {
+              currentAirdropTransactionFee: await fetchAirdropTransactionFee(),
+              missingNFTDaysAlertThreshold: MISSING_NFT_DAYS_ALERT_THRESHOLD,
+              userActionDatetimeCreated: userAction.datetimeCreated,
+              userActionId: userAction.id,
+            },
+          },
+        )
+      }
     })
 
     return {

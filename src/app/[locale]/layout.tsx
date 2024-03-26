@@ -91,7 +91,7 @@ export default function Layout({ children, params }: PageProps & { children: Rea
         <Toaster />
         <CookieConsent locale={locale} />
         {/* <Analytics debug={false} /> */}
-        <SpeedInsights debug={false} sampleRate={0.005} />
+        <SpeedInsights debug={false} sampleRate={0.01} />
         <Script
           key="maps-api-script"
           src={`https://maps.googleapis.com/maps/api/js?key=${NEXT_PUBLIC_GOOGLE_PLACES_API_KEY}&libraries=places&callback=${CALLBACK_NAME}`}
