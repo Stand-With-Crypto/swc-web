@@ -1,4 +1,5 @@
-import { NFTMintStatus } from '@prisma/client'
+import { NFTCurrency, NFTMintStatus } from '@prisma/client'
+import { Decimal } from '@prisma/client/runtime/library'
 import { NonRetriableError } from 'inngest'
 
 import { inngest } from '@/inngest/inngest'
@@ -8,16 +9,25 @@ import {
   THIRDWEB_TRANSACTION_STATUS_TO_NFT_MINT_STATUS,
   updateMintNFTStatus,
 } from '@/utils/server/nft/updateMintNFTStatus'
+import { prismaClient } from '@/utils/server/prismaClient'
+import { getServerAnalytics } from '@/utils/server/serverAnalytics'
+import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
 import { engineAirdropNFT } from '@/utils/server/thirdweb/engineAirdropNFT'
 import {
   engineGetMintStatus,
   THIRDWEB_FINAL_TRANSACTION_STATUSES,
   ThirdwebTransactionStatus,
 } from '@/utils/server/thirdweb/engineGetMintStatus'
+import { getCryptoToFiatConversion } from '@/utils/shared/getCryptoToFiatConversion'
+import { getLogger } from '@/utils/shared/logger'
 
 export const AIRDROP_NFT_INNGEST_EVENT_NAME = 'app/airdrop.request'
 const AIRDROP_NFT_INNGEST_FUNCTION_ID = 'airdrop-nft'
 const AIRDROP_NFT_RETRY = 2
+
+const logger = getLogger('airdropNFTWithInngest')
+
+const WEI_TO_ETH_UNIT = 1e-18
 
 export const airdropNFTWithInngest = inngest.createFunction(
   {
@@ -36,7 +46,9 @@ export const airdropNFTWithInngest = inngest.createFunction(
     let attempt = 1
     let mintStatus: ThirdwebTransactionStatus | null = null
     let transactionHash: string | null
-    let gasPrice: string | null
+    let transactionFee: Decimal
+    let gasLimit = 0
+    let gasPrice = 0
 
     while (
       (attempt <= 6 && mintStatus === null) ||
@@ -50,18 +62,15 @@ export const airdropNFTWithInngest = inngest.createFunction(
       })
 
       mintStatus = transactionStatus.status
-      gasPrice = transactionStatus.gasPrice
       transactionHash = transactionStatus.transactionHash
+      gasLimit = Number(transactionStatus.gasLimit)
+      gasPrice = Number(transactionStatus.gasPrice) * WEI_TO_ETH_UNIT // Gas price is in wei, so we need to convert it to ETH.
+      transactionFee = new Decimal(gasLimit * gasPrice)
       attempt += 1
     }
 
     if (!mintStatus || !THIRDWEB_FINAL_TRANSACTION_STATUSES.includes(mintStatus)) {
-      await updateMintNFTStatus(
-        payload.nftMintId,
-        NFTMintStatus.TIMEDOUT,
-        transactionHash!,
-        gasPrice!,
-      )
+      await updateMintNFTStatus(payload.nftMintId, NFTMintStatus.TIMEDOUT, transactionHash!)
       throw new NonRetriableError('cannot get final states of minting request', {
         cause: mintStatus,
       })
@@ -69,12 +78,11 @@ export const airdropNFTWithInngest = inngest.createFunction(
 
     const status = mintStatus! as ThirdwebTransactionStatus
 
-    await step.run('update-mintNFT-Status', async () => {
+    await step.run('update-nft-status', async () => {
       return await updateMintNFTStatus(
         payload.nftMintId,
         THIRDWEB_TRANSACTION_STATUS_TO_NFT_MINT_STATUS[status],
         transactionHash,
-        gasPrice,
       )
     })
 
@@ -82,6 +90,35 @@ export const airdropNFTWithInngest = inngest.createFunction(
       throw new NonRetriableError(
         `airdrop NFT transaction ${transactionHash!} failed with status ${status}`,
       )
+    }
+
+    if (status === 'mined') {
+      await step.run('emit-analytics-event', async () => {
+        const user = await prismaClient.user.findFirstOrThrow({
+          where: {
+            id: payload.userId,
+          },
+        })
+        const localUser = getLocalUserFromUser(user)
+        const analytics = getServerAnalytics({
+          localUser,
+          userId: user.id,
+        })
+        const ratio = await getCryptoToFiatConversion(NFTCurrency.ETH)
+          .then(res => {
+            return res?.data.amount ? res?.data.amount : new Decimal(0)
+          })
+          .catch(e => {
+            logger.error(e)
+            return new Decimal(0)
+          })
+        analytics.track('NFT Successfully Airdropped', {
+          'NFT Slug': payload.nftSlug,
+          'Transaction Fee In USD': transactionFee.mul(ratio).toNumber(),
+          'Gas Limit': gasLimit,
+          'Gas Price': gasPrice,
+        })
+      })
     }
   },
 )

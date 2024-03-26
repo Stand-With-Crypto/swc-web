@@ -1,6 +1,6 @@
 import { PartnerGrid } from '@/components/app/pagePartners/partnerGrid'
 import { Button } from '@/components/ui/button'
-import { ExternalLink, InternalLink } from '@/components/ui/link'
+import { InternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { SupportedLocale } from '@/intl/locales'
@@ -20,17 +20,10 @@ export function PagePartners({ title, description, locale }: PagePartnersProps) 
         <PageSubTitle>{description}</PageSubTitle>
 
         <div className="flex flex-col-reverse items-center justify-center gap-4 sm:flex-row">
-          <Button asChild className="w-full sm:w-auto" variant="secondary">
-            <InternalLink href={getIntlUrls(locale).contribute()}>Contribute</InternalLink>
-          </Button>
           <Button asChild className="w-full sm:w-auto">
-            <ExternalLink
-              href={
-                'https://docs.google.com/forms/d/e/1FAIpQLSf4T51k9InqKQKW2911_HVWm11wz_dOcpoDj8QuyF7cxU5MHw/viewform'
-              }
-            >
+            <InternalLink href={getIntlUrls(locale).contribute()}>
               Become an industry partner
-            </ExternalLink>
+            </InternalLink>
           </Button>
         </div>
       </section>

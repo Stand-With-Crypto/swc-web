@@ -42,7 +42,10 @@ import {
 } from '@/utils/web/formUtils'
 import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
-import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
+import {
+  catchUnexpectedServerErrorAndTriggerToast,
+  toastGenericError,
+} from '@/utils/web/toastUtils'
 import { zodUserActionFormEmailCongresspersonFields } from '@/validation/forms/zodUserActionFormEmailCongressperson'
 
 type FormValues = z.infer<typeof zodUserActionFormEmailCongresspersonFields> &
@@ -139,7 +142,7 @@ export function UserActionFormEmailCongressperson({
             },
             payload =>
               actionCreateUserActionEmailCongressperson(payload).then(actionResult => {
-                if (actionResult.user) {
+                if (actionResult?.user) {
                   identifyUserOnClient(actionResult.user)
                 }
                 return actionResult
@@ -148,6 +151,8 @@ export function UserActionFormEmailCongressperson({
           if (result.status === 'success') {
             router.refresh()
             onSuccess()
+          } else {
+            toastGenericError()
           }
         }, trackFormSubmissionSyncErrors(ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON))}
       >

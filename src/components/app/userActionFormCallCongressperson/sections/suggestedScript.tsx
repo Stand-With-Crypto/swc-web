@@ -35,7 +35,7 @@ export function SuggestedScript({
   const router = useRouter()
   const ref = React.useRef<HTMLAnchorElement>(null)
   useEffect(() => {
-    ref.current?.focus()
+    ref.current?.focus({ preventScroll: true })
   }, [ref])
   const phoneNumber = React.useMemo(() => {
     const official = getGoogleCivicOfficialByDTSIName(dtsiPerson, googleCivicData)
@@ -76,7 +76,7 @@ export function SuggestedScript({
         },
         payload =>
           actionCreateUserActionCallCongressperson(payload).then(actionResult => {
-            if (actionResult.user) {
+            if (actionResult?.user) {
               identifyUserOnClient(actionResult.user)
             }
             return actionResult
@@ -89,6 +89,7 @@ export function SuggestedScript({
         goToSection(SectionNames.SUCCESS_MESSAGE)
       } else {
         setCallingState('error')
+        toastGenericError()
       }
     },
     [addressSchema, dtsiPerson.slug, goToSection, router],

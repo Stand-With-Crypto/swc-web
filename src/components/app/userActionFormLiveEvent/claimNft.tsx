@@ -20,6 +20,7 @@ import { UserActionLiveEventCampaignName } from '@/utils/shared/userActionCampai
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
 import { NFT_CLIENT_METADATA } from '@/utils/web/nft'
+import { toastGenericError } from '@/utils/web/toastUtils'
 
 interface Props extends UseSectionsReturn<SectionNames> {
   isLoggedIn: boolean
@@ -53,7 +54,7 @@ export function ClaimNft({ isLoggedIn, slug, goToSection }: Props) {
       },
       payload =>
         actionCreateUserActionLiveEvent(payload).then(actionResult => {
-          if (actionResult.user) {
+          if (actionResult?.user) {
             identifyUserOnClient(actionResult.user)
           }
           return actionResult
@@ -63,6 +64,8 @@ export function ClaimNft({ isLoggedIn, slug, goToSection }: Props) {
     if (result.status === 'success') {
       router.refresh()
       goToSection(SectionNames.SUCCESS)
+    } else {
+      toastGenericError()
     }
     setLoading(false)
   }, [goToSection, router, slug])

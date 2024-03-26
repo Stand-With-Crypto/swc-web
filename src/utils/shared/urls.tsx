@@ -25,6 +25,7 @@ export const getIntlUrls = (
     about: () => `${localePrefix}/about`,
     resources: () => `${localePrefix}/resources`,
     contribute: () => `${localePrefix}/contribute`,
+    questionnaire: () => `${localePrefix}/questionnaire`,
     donate: () => `${localePrefix}/donate`,
     leaderboard: (params?: { pageNum?: number; tab: RecentActivityAndLeaderboardTabs }) => {
       const tabPrefix =
@@ -59,6 +60,7 @@ export const getIntlUrls = (
 const NEXT_PUBLIC_VERCEL_URL = requiredOutsideLocalEnv(
   process.env.NEXT_PUBLIC_VERCEL_URL,
   'NEXT_PUBLIC_VERCEL_URL',
+  'Getting app full url (preview only)',
 )
 
 export const fullUrl = (path: string) => {

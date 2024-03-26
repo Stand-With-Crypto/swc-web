@@ -3,15 +3,12 @@ version: '3.8'
 services:
   mysql:
     image: mysql:8.0
-    container_name: swc_testing_mysql
+    container_name: swc_dev_mysql
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: swc-web
     ports:
-      - '3307:3306'
+      - '3306:3306'
     volumes:
-      - swc_data:/var/lib/mysql
-
-volumes:
-  swc_data:
+      - ./.docker/dbdata:/var/lib/mysql

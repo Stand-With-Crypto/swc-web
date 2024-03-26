@@ -9,44 +9,10 @@ export const dtsiPersonDetailsQueryString = /* GraphQL */ `
       }
       suffixName
       slug
-      roles {
+      primaryRole {
         dateEnd
         dateStart
-        group {
-          id
-          category
-          displayName
-          dateStart
-          dateEnd
-          primaryCity
-          primaryCountryCode
-          primaryDistrict
-          primaryState
-          parentGroup {
-            id
-            category
-            displayName
-            dateStart
-            dateEnd
-            primaryCity
-            primaryCountryCode
-            primaryDistrict
-            primaryState
-            parentGroup {
-              id
-              displayName
-              dateStart
-              dateEnd
-              primaryCity
-              primaryCountryCode
-              primaryDistrict
-              primaryState
-              category
-            }
-          }
-        }
         id
-        isPubliclyVisible
         primaryCity
         primaryCountryCode
         primaryDistrict
