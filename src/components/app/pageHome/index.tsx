@@ -57,14 +57,14 @@ export function PageHome({
             <DialogTrigger asChild>
               <LinkBox className="relative h-[320px] cursor-pointer overflow-hidden md:rounded-xl lg:h-[400px]">
                 <NextImage
-                  alt="First in the Nation Crypto Presidential Forum December 11th 2023 St. Anselm College"
+                  alt="Free NFT given out when you register to vote."
                   className="h-full w-full object-cover"
                   fill
                   priority
                   // width={1046}
                   // height={892}
-                  sizes={'(max-width: 768px) 500px, 1046px'}
-                  src="/homepageHero.jpg"
+                  sizes={'500px'}
+                  src="/homepageHero.png"
                 />
                 <div
                   className="absolute bottom-0 flex w-full items-center justify-between gap-4 p-4 text-sm text-white"
