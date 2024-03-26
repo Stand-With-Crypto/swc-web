@@ -1,10 +1,11 @@
 import * as Sentry from '@sentry/nextjs'
 import { NextRequest, NextResponse } from 'next/server'
+
 import {
-  createInAppCharge,
-  CreateChargeParams,
   CoinbaseCommerceDonation,
-  zodCoinbaseCommerceDonation
+  createInAppCharge,
+  CreateInAppChargeParams,
+  zodCoinbaseCommerceDonation,
 } from '@/utils/server/coinbaseCommerce/createCharge'
 
 export async function POST(request: NextRequest) {
@@ -21,7 +22,7 @@ export async function POST(request: NextRequest) {
       },
     })
   }
-  const params: CreateChargeParams = {
+  const params: CreateInAppChargeParams = {
     address: body.address,
     email: body.email,
     employer: body.employer,
@@ -29,11 +30,7 @@ export async function POST(request: NextRequest) {
     is_citizen: body.is_citizen,
     occupation: body.occupation,
   }
-  const hostedUrl = (
-    await createInAppCharge({
-      createChargeParams: params,
-    })
-  ).data.hosted_url
+  const hostedUrl = (await createInAppCharge(params)).data.hosted_url
 
   return new NextResponse(JSON.stringify({ charge_url: hostedUrl }), { status: 200 })
 }

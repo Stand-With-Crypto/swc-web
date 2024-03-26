@@ -1,14 +1,15 @@
 import * as Sentry from '@sentry/nextjs'
+import { z } from 'zod'
 
 import { fetchReq } from '@/utils/shared/fetchReq'
-import { requiredEnv } from '@/utils/shared/requiredEnv'
-import { z } from 'zod'
+import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
 
 const COINBASE_COMMERCE_CREATE_CHARGE_URL = 'https://api.commerce.coinbase.com/charges'
 
-const COINBASE_COMMERCE_API_KEY = requiredEnv(
+const COINBASE_COMMERCE_API_KEY = requiredOutsideLocalEnv(
   process.env.COINBASE_COMMERCE_API_KEY,
   'process.env.COINBASE_COMMERCE_API_KEY',
+  'COINBASE COMMERCE API KEY to integrate with Coinbase Commerce API',
 )
 
 interface CreateChargeResponsePricing {
@@ -33,12 +34,12 @@ interface CreateChargeResponseTimeline {
   time: string
 }
 
-interface TransferIntent {
-  call_data: TransferIntentCallData
+interface CreateChargeResponseTransferIntent {
+  call_data: CreateChargeResponseTransferIntentCallData
   metadata: Record<string, string>
 }
 
-interface TransferIntentCallData {
+interface CreateChargeResponseTransferIntentCallData {
   deadline: string
   fee_amount: string
   id: string
@@ -57,7 +58,7 @@ interface CreateChargeResponseWeb3Data {
   subsidized_payments_chain_to_tokens: Record<string, string>
   failure_events: Record<string, string>[]
   success_events: Record<string, string>[]
-  transfer_intent?: TransferIntent
+  transfer_intent?: CreateChargeResponseTransferIntent
 }
 
 interface CreateChargeResponseData {
@@ -121,7 +122,7 @@ export const zodCoinbaseCommerceDonation = z.object({
   occupation: z.string(),
 })
 
-export interface CreateChargeParams {
+export interface CreateInAppChargeParams {
   address: string
   email: string
   employer: string
@@ -130,7 +131,7 @@ export interface CreateChargeParams {
   occupation: string
 }
 
-export async function createCharge({sessionId, userId}: { sessionId: string; userId: string}) {
+export async function createCharge({ sessionId, userId }: { sessionId: string; userId: string }) {
   const payload: CreateChargeRequest = {
     cancel_url: `https://www.standwithcrypto.org?sessionId=${sessionId}`,
     metadata: { sessionId, userId },
@@ -144,7 +145,7 @@ export async function createCharge({sessionId, userId}: { sessionId: string; use
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        'X-CC-Api-Key': COINBASE_COMMERCE_API_KEY,
+        'X-CC-Api-Key': String(COINBASE_COMMERCE_API_KEY),
       },
       body: JSON.stringify(payload),
     })
@@ -158,12 +159,12 @@ export async function createCharge({sessionId, userId}: { sessionId: string; use
   }
 }
 
-export async function createInAppCharge({createChargeParams}: {createChargeParams: CreateChargeParams}) {
+export async function createInAppCharge(createInAppChargeParams: CreateInAppChargeParams) {
   const payload: CreateChargeRequest = {
     cancel_url: 'https://www.standwithcrypto.org',
     description: 'Donate to Crypto',
-    metadata: { ...createChargeParams },
-    name: createChargeParams.full_name,
+    metadata: { ...createInAppChargeParams },
+    name: createInAppChargeParams.full_name,
     pricing_type: 'no_price',
   }
 
@@ -174,7 +175,7 @@ export async function createInAppCharge({createChargeParams}: {createChargeParam
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        'X-CC-Api-Key': COINBASE_COMMERCE_API_KEY,
+        'X-CC-Api-Key': String(COINBASE_COMMERCE_API_KEY),
       },
       body: JSON.stringify(payload),
     })
