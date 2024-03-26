@@ -95,6 +95,7 @@ export default function Layout({ children, params }: PageProps & { children: Rea
         <Script
           key="maps-api-script"
           src={`https://maps.googleapis.com/maps/api/js?key=${NEXT_PUBLIC_GOOGLE_PLACES_API_KEY}&libraries=places&callback=${CALLBACK_NAME}`}
+          strategy="lazyOnload"
         />
       </body>
     </html>
