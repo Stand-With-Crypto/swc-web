@@ -1,6 +1,7 @@
 import { serve } from 'inngest/next'
 
 import { airdropNFTWithInngest } from '@/inngest/functions/airdropNFT'
+import { auditUsersTotalDonationAmountUsdCronJob } from '@/inngest/functions/auditUsersTotalDonationAmountUsdCronJob'
 import { backfillNFTWithInngest } from '@/inngest/functions/backfillNFT'
 import { backfillNFTInngestCronJob } from '@/inngest/functions/backfillNFTCronJob'
 import { cleanupNFTMintsWithInngest } from '@/inngest/functions/cleanupNFTMints'
@@ -23,5 +24,6 @@ export const { GET, POST, PUT } = serve({
     backfillNFTWithInngest,
     backfillNFTInngestCronJob,
     cleanupNFTMintsWithInngest,
+    auditUsersTotalDonationAmountUsdCronJob,
   ],
 })

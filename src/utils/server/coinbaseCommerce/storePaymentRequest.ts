@@ -248,6 +248,7 @@ async function createNewUser(payment: CoinbaseCommercePayment) {
 
 /**
  * Helper function to create user action donation in database.
+ * Also increments the total USD donation amount for the user.
  * @param user
  * @param payment
  */
@@ -308,6 +309,16 @@ async function createUserActionDonation(
           recipient: DonationOrganization.STAND_WITH_CRYPTO,
           coinbaseCommerceDonationId: payment.id,
         },
+      },
+    },
+  })
+
+  // Increment total USD user donation amount for user.
+  await prismaClient.user.update({
+    where: { id: user.id },
+    data: {
+      totalDonationAmountUsd: {
+        increment: pricingValues.amountUsd,
       },
     },
   })

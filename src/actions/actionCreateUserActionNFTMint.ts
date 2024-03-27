@@ -135,7 +135,6 @@ async function createAction<U extends User>({
       logger.error(e)
       return new Decimal(0)
     })
-
   const decimalEthTransactionValue = new Decimal(ethTransactionValue)
   await prismaClient.userAction.create({
     data: {
@@ -157,8 +156,17 @@ async function createAction<U extends User>({
     },
   })
 
-  logger.info('created user action')
+  // Also increment user's total donation USD amount.
+  await prismaClient.user.update({
+    where: { id: user.id },
+    data: {
+      totalDonationAmountUsd: {
+        increment: decimalEthTransactionValue.mul(ratio),
+      },
+    },
+  })
 
+  logger.info('created user action')
   sharedDependencies.analytics.trackUserActionCreated({
     actionType: UserActionType.NFT_MINT,
     campaignName: validatedInput.campaignName,
