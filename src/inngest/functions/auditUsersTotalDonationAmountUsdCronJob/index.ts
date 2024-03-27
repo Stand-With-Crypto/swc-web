@@ -6,7 +6,7 @@ import { prismaClient } from '@/utils/server/prismaClient'
 import { USD_DECIMAL_PLACES } from '@/utils/shared/usdDecimalPlaces'
 
 const AUDIT_USERS_TOTAL_DONATION_AMOUNT_USD_BATCH_SIZE =
-  Number(process.env.AUDIT_USERS_TOTAL_DONATION_AMOUNT_USD_BATCH_SIZE) || 1000
+  Number(process.env.AUDIT_USERS_TOTAL_DONATION_AMOUNT_USD_BATCH_SIZE) || 2000
 
 const AUDIT_USERS_TOTAL_DONATION_AMOUNT_USD_FUNCTION_ID =
   'script.audit-users-total-donation-amount-usd'
@@ -19,57 +19,33 @@ export const auditUsersTotalDonationAmountUsdCronJob = inngest.createFunction(
     onFailure: onScriptFailure,
   },
   {
-    cron: '0 4 * * *', // Run at 4:00 AM UTC.
+    // cron: '0 4 * * *', // Run at 4:00 AM UTC.
+    event: 'script/audit.users.total.donation.amount.usd',
   },
   async ({ step }) => {
     const usersCount = await step.run('get-users-count', async () => {
-      return prismaClient.user.count({
-        where: {
-          userActions: {
-            some: {
-              OR: [
-                { nftMint: { costAtMintUsd: { gt: 0 } } },
-                { userActionDonation: { amountUsd: { gt: 0 } } },
-              ],
-            },
-          },
-        },
-        orderBy: { datetimeCreated: 'asc' },
-      })
+      return prismaClient.user.count()
     })
 
-    const userCursors = await step.run('get-user-cursors', async () => {
-      const userCursors = []
-      for (let i = 0; i < usersCount; i += AUDIT_USERS_TOTAL_DONATION_AMOUNT_USD_BATCH_SIZE) {
-        const row = await prismaClient.user.findFirst({
+    const userCursors = []
+    let userCursor = ''
+    for (let i = 0; i < usersCount; i += AUDIT_USERS_TOTAL_DONATION_AMOUNT_USD_BATCH_SIZE) {
+      const row = await step.run(`get-user-cursor-${i}`, async () => {
+        return prismaClient.user.findFirst({
           select: { id: true },
-          where: {
-            userActions: {
-              some: {
-                OR: [
-                  { nftMint: { costAtMintUsd: { gt: 0 } } },
-                  { userActionDonation: { amountUsd: { gt: 0 } } },
-                ],
-              },
-            },
-          },
-          skip: i,
-          orderBy: { datetimeCreated: 'asc' },
+          orderBy: { datetimeCreated: 'asc' }, // BETTER IF WE DO BY DATE TIME CREATED.
+          ...(userCursor.length > 0 && {
+            cursor: { id: userCursor },
+            skip: AUDIT_USERS_TOTAL_DONATION_AMOUNT_USD_BATCH_SIZE,
+          }),
         })
-        if (row) {
-          userCursors.push(row.id)
-        }
-      }
-      return userCursors
-    })
-
-    for (const userCursor of userCursors) {
-      await step.sendEvent(`send-batch-of-users-${userCursor}`, {
-        name: UPDATE_USER_BATCH_EVENT_NAME,
-        data: {
-          userCursor,
-        },
       })
+      if (row) {
+        userCursors.push(row.id)
+        userCursor = row.id
+      } else {
+        break
+      }
     }
   },
 )
@@ -92,10 +68,10 @@ export const auditUsersTotalDonationAmountUsdCronJobUpdateBatchOfUsers = inngest
     event: UPDATE_USER_BATCH_EVENT_NAME,
   },
   async ({ event, step }) => {
-    if (!event.data.userCursor) {
+    if (!event.data.startingUserCursor) {
       throw new NonRetriableError('missing user cursor in event data')
     }
-    const userCursor = event.data.userCursor
+    const userCursor = event.data.endingUserCursor
     const numMiniBatches = Math.ceil(
       AUDIT_USERS_TOTAL_DONATION_AMOUNT_USD_BATCH_SIZE /
         AUDIT_USERS_TOTAL_DONATION_AMOUNT_USD_MINI_BATCH_SIZE,
@@ -126,7 +102,7 @@ export const auditUsersTotalDonationAmountUsdCronJobUpdateBatchOfUsers = inngest
           cursor: { id: userCursor },
           skip: (i - 1) * AUDIT_USERS_TOTAL_DONATION_AMOUNT_USD_MINI_BATCH_SIZE,
           take: AUDIT_USERS_TOTAL_DONATION_AMOUNT_USD_MINI_BATCH_SIZE,
-          orderBy: { datetimeCreated: 'asc' },
+          orderBy: { id: 'asc' },
         })
         if (relevantUsers.length === 0) {
           return {
