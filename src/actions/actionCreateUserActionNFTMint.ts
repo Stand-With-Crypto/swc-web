@@ -145,7 +145,7 @@ async function createAction<U extends User>({
       userCryptoAddress: { connect: { id: user.primaryUserCryptoAddressId! } },
       nftMint: {
         create: {
-          nftSlug: NFTSlug.SWC_SHIELD,
+          nftSlug: NFTSlug.STAND_WITH_CRYPTO_SUPPORTER,
           status: NFTMintStatus.CLAIMED,
           costAtMint: decimalEthTransactionValue,
           contractAddress: contractMetadata.contractAddress,
