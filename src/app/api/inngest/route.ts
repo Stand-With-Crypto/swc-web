@@ -15,6 +15,8 @@ import { setPrimaryCryptoAddressOfUserWithInngest } from '@/inngest/functions/se
 import { upsertAdvocateInCapitolCanaryWithInngest } from '@/inngest/functions/upsertAdvocateInCapitolCanary'
 import { inngest } from '@/inngest/inngest'
 
+export const maxDuration = 180 // 3 minutes
+
 export const { GET, POST, PUT } = serve({
   client: inngest,
   functions: [
