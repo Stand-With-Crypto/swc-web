@@ -175,6 +175,7 @@ const V1_ACTION_REDIRECTS = ACTION_REDIRECTS.map(({ destination, queryKey, query
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  staticPageGenerationTimeout: 1000, // 1000 seconds, 16 minutes - REMOVE THIS WHEN DONE
   images: {
     unoptimized: false,
     remotePatterns: [
