@@ -136,6 +136,7 @@ model User {
   @@index([internalStatus])
   @@index([capitolCanaryAdvocateId])
   @@index([totalDonationAmountUsd(sort: Desc)])
+  @@index([datetimeCreated])
   @@map("user")
 }
 
