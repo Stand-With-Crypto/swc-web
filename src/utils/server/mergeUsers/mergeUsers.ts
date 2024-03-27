@@ -2,6 +2,7 @@ import { Prisma } from '@prisma/client'
 
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getLogger } from '@/utils/shared/logger'
+import { USD_DECIMAL_PLACES } from '@/utils/shared/usdDecimalPlaces'
 
 import { MERGE_EMAIL_SOURCE_PRIORITY } from './constants'
 
@@ -238,7 +239,7 @@ export async function mergeUsers({
       where: { id: userToKeep.id },
       data: {
         totalDonationAmountUsd: {
-          increment: userToDelete.totalDonationAmountUsd,
+          increment: userToDelete.totalDonationAmountUsd.toFixed(USD_DECIMAL_PLACES),
         },
       },
     })

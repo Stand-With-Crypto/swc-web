@@ -13,6 +13,7 @@ import { getServerAnalytics } from '@/utils/server/serverAnalytics'
 import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { generateReferralId } from '@/utils/shared/referralId'
+import { USD_DECIMAL_PLACES } from '@/utils/shared/usdDecimalPlaces'
 import { UserActionDonationCampaignName } from '@/utils/shared/userActionCampaigns'
 
 export function extractPricingValues(payment: CoinbaseCommercePayment) {
@@ -318,7 +319,7 @@ async function createUserActionDonation(
     where: { id: user.id },
     data: {
       totalDonationAmountUsd: {
-        increment: pricingValues.amountUsd,
+        increment: Number(pricingValues.amountUsd).toFixed(USD_DECIMAL_PLACES),
       },
     },
   })

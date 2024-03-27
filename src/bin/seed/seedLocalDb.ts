@@ -26,6 +26,7 @@ import { prismaClient } from '@/utils/server/prismaClient'
 import { batchAsyncAndLog } from '@/utils/shared/batchAsyncAndLog'
 import { getLogger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
+import { USD_DECIMAL_PLACES } from '@/utils/shared/usdDecimalPlaces'
 import {
   ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
   USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
@@ -341,7 +342,7 @@ async function seed() {
           where: { id: userActionNftMint.userId },
           data: {
             totalDonationAmountUsd: {
-              increment: userActionNftMint.nftMint.costAtMintUsd,
+              increment: userActionNftMint.nftMint.costAtMintUsd.toFixed(USD_DECIMAL_PLACES),
             },
           },
         })
@@ -450,7 +451,8 @@ async function seed() {
           where: { id: userActionWithDonation.userId },
           data: {
             totalDonationAmountUsd: {
-              increment: userActionWithDonation.userActionDonation.amountUsd,
+              increment:
+                userActionWithDonation.userActionDonation.amountUsd.toFixed(USD_DECIMAL_PLACES),
             },
           },
         })

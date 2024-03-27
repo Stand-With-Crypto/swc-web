@@ -21,6 +21,7 @@ import { fromBigNumber } from '@/utils/shared/bigNumber'
 import { getCryptoToFiatConversion } from '@/utils/shared/getCryptoToFiatConversion'
 import { getLogger } from '@/utils/shared/logger'
 import { NFTSlug } from '@/utils/shared/nft'
+import { USD_DECIMAL_PLACES } from '@/utils/shared/usdDecimalPlaces'
 import { UserActionNftMintCampaignName } from '@/utils/shared/userActionCampaigns'
 
 const createActionMintNFTInputValidationSchema = object({
@@ -161,7 +162,7 @@ async function createAction<U extends User>({
     where: { id: user.id },
     data: {
       totalDonationAmountUsd: {
-        increment: decimalEthTransactionValue.mul(ratio),
+        increment: decimalEthTransactionValue.mul(ratio).toFixed(USD_DECIMAL_PLACES),
       },
     },
   })
