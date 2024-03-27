@@ -107,6 +107,7 @@ model User {
   hasOptedInToMembership     Boolean                   @map("has_opted_in_to_membership")
   internalStatus             UserInternalStatus        @default(VISIBLE) @map("internal_status")
   dataCreationMethod         DataCreationMethod        @default(BY_USER) @map("data_creation_method")
+  totalDonationAmountUsd     Decimal                   @default(0) @map("total_donation_amount_usd")
   // a short, user-friendly id we're comfortable having the user share to track referrals
   // because ids/session ids could potentially be used to access sensitive information, we want a decoupled ID for sharing purposes
   referralId                 String                    @map("referral_id")
@@ -134,6 +135,8 @@ model User {
   @@index([addressId])
   @@index([internalStatus])
   @@index([capitolCanaryAdvocateId])
+  @@index([totalDonationAmountUsd(sort: Desc)])
+  @@index([datetimeCreated])
   @@map("user")
 }
 
