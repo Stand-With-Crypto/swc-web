@@ -326,6 +326,31 @@ async function seed() {
   const userAction = await prismaClient.userAction.findMany()
   logEntity({ userAction })
 
+  const userActionsWithNftMint = await prismaClient.userAction.findMany({
+    where: {
+      actionType: UserActionType.NFT_MINT,
+      nftMintId: { not: null },
+      nftMint: { costAtMint: { gt: 0 } },
+    },
+    include: { nftMint: true },
+  })
+  await batchAsyncAndLog(userActionsWithNftMint, async function (data) {
+    const updatePromises = data.map(userActionNftMint => {
+      if (userActionNftMint.nftMint?.costAtMintUsd.isPositive()) {
+        return prismaClient.user.update({
+          where: { id: userActionNftMint.userId },
+          data: {
+            totalDonationAmountUsd: {
+              increment: userActionNftMint.nftMint.costAtMintUsd,
+            },
+          },
+        })
+      }
+    })
+    await Promise.all(updatePromises)
+  })
+  logger.info("updated users' total donation USD amount based on NFT mint cost")
+
   const userActionsByType = groupBy(userAction, x => x.actionType) as Record<
     UserActionType,
     typeof userAction
@@ -410,6 +435,30 @@ async function seed() {
   )
   const userActionDonation = await prismaClient.userActionDonation.findMany()
   logEntity({ userActionDonation })
+
+  const userActionsWithDonation = await prismaClient.userAction.findMany({
+    where: {
+      actionType: UserActionType.DONATION,
+      userActionDonation: { amountUsd: { gt: 0 } },
+    },
+    include: { userActionDonation: true },
+  })
+  await batchAsyncAndLog(userActionsWithDonation, async function (data) {
+    const updatePromises = data.map(userActionWithDonation => {
+      if (userActionWithDonation.userActionDonation?.amountUsd.isPositive()) {
+        return prismaClient.user.update({
+          where: { id: userActionWithDonation.userId },
+          data: {
+            totalDonationAmountUsd: {
+              increment: userActionWithDonation.userActionDonation.amountUsd,
+            },
+          },
+        })
+      }
+    })
+    await Promise.all(updatePromises)
+  })
+  logger.info("updated users' total donation USD amount based on donation amount")
 
   /*
   userActionOptIn

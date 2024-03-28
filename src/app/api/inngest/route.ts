@@ -1,6 +1,10 @@
 import { serve } from 'inngest/next'
 
 import { airdropNFTWithInngest } from '@/inngest/functions/airdropNFT'
+import {
+  auditUsersTotalDonationAmountUsdInngestCronJob,
+  auditUsersTotalDonationAmountUsdInngestCronJobUpdateBatchOfUsers,
+} from '@/inngest/functions/auditUsersTotalDonationAmountUsdCronJob'
 import { backfillNFTWithInngest } from '@/inngest/functions/backfillNFT'
 import { backfillNFTInngestCronJob } from '@/inngest/functions/backfillNFTCronJob'
 import { cleanupNFTMintsWithInngest } from '@/inngest/functions/cleanupNFTMints'
@@ -10,6 +14,8 @@ import { monitorBaseETHBalances } from '@/inngest/functions/monitorBaseETHBalanc
 import { setPrimaryCryptoAddressOfUserWithInngest } from '@/inngest/functions/setPrimaryCryptoAddressOfUser'
 import { upsertAdvocateInCapitolCanaryWithInngest } from '@/inngest/functions/upsertAdvocateInCapitolCanary'
 import { inngest } from '@/inngest/inngest'
+
+export const maxDuration = 180 // 3 minutes
 
 export const { GET, POST, PUT } = serve({
   client: inngest,
@@ -23,5 +29,7 @@ export const { GET, POST, PUT } = serve({
     backfillNFTWithInngest,
     backfillNFTInngestCronJob,
     cleanupNFTMintsWithInngest,
+    auditUsersTotalDonationAmountUsdInngestCronJob,
+    auditUsersTotalDonationAmountUsdInngestCronJobUpdateBatchOfUsers,
   ],
 })

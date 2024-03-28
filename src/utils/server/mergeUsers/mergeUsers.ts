@@ -234,6 +234,15 @@ export async function mergeUsers({
       },
     })
 
+    await client.user.update({
+      where: { id: userToKeep.id },
+      data: {
+        totalDonationAmountUsd: {
+          increment: userToDelete.totalDonationAmountUsd,
+        },
+      },
+    })
+
     await client.user.delete({
       where: { id: userToDelete.id },
     })
