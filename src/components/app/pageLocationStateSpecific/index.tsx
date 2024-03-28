@@ -1,6 +1,6 @@
 import { compact, times } from 'lodash-es'
 
-import { UserLocationRaceInfo } from '@/components/app/pageLocationStateSpecific/UserLocationRaceInfo'
+import { UserLocationRaceInfo } from '@/components/app/pageLocationStateSpecific/userLocationRaceInfo'
 import { REGISTRATION_URLS_BY_STATE } from '@/components/app/userActionFormVoterRegistration/constants'
 import { Button } from '@/components/ui/button'
 import { uppercaseSectionHeader } from '@/components/ui/classUtils'
@@ -15,7 +15,7 @@ import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/usStateDistr
 import { getUSStateNameFromStateCode, USStateCode } from '@/utils/shared/usStateUtils'
 import { cn } from '@/utils/web/cn'
 
-import { LocationSpecificRaceInfo } from './locationSpecificRaceInfox'
+import { LocationSpecificRaceInfo } from './locationSpecificRaceInfo'
 import { organizeStateSpecificPeople } from './organizeStateSpecificPeople'
 
 interface LocationStateSpecificProps extends DTSI_StateSpecificInformationQuery {

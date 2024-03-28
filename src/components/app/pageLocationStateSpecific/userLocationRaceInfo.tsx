@@ -1,12 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 'use client'
 
+import { Suspense } from 'react'
 import { compact, noop } from 'lodash-es'
 
 import {
   LocationSpecificRaceInfo,
   LocationSpecificRaceInfoContainer,
-} from '@/components/app/pageLocationStateSpecific/locationSpecificRaceInfox'
+} from '@/components/app/pageLocationStateSpecific/locationSpecificRaceInfo'
 import { organizeStateSpecificPeople } from '@/components/app/pageLocationStateSpecific/organizeStateSpecificPeople'
 import { uppercaseSectionHeader } from '@/components/ui/classUtils'
 import { GooglePlacesSelect, GooglePlacesSelectProps } from '@/components/ui/googlePlacesSelect'
@@ -17,7 +18,6 @@ import { formatGetCongressionalDistrictFromAddressNotFoundReason } from '@/utils
 import { pluralize } from '@/utils/shared/pluralize'
 import { USStateCode } from '@/utils/shared/usStateUtils'
 import { cn } from '@/utils/web/cn'
-import { Suspense } from 'react'
 
 type UserLocationRaceInfoProps = {
   groups: ReturnType<typeof organizeStateSpecificPeople>

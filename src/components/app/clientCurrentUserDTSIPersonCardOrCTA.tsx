@@ -1,11 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
 'use client'
 
+import { Suspense } from 'react'
+import { noop } from 'lodash-es'
+
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
 import { Button } from '@/components/ui/button'
-import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
+import { GooglePlacesSelect, GooglePlacesSelectProps } from '@/components/ui/googlePlacesSelect'
 import { InternalLink } from '@/components/ui/link'
 import { useMutableCurrentUserAddress } from '@/hooks/useCurrentUserAddress'
 import {
@@ -19,23 +22,21 @@ import {
   dtsiPersonPoliticalAffiliationCategoryAbbreviation,
 } from '@/utils/dtsi/dtsiPersonUtils'
 import { getIntlUrls } from '@/utils/shared/urls'
-import { noop } from 'lodash-es'
-import { Suspense } from 'react'
 
+function DefaultPlacesSelect(props: Pick<GooglePlacesSelectProps, 'onChange' | 'value'>) {
+  return (
+    <div className="mx-auto max-w-md">
+      <GooglePlacesSelect
+        className="rounded-full bg-gray-100 text-gray-600"
+        placeholder="Enter your address"
+        {...props}
+      />
+    </div>
+  )
+}
 export function ClientCurrentUserDTSIPersonCardOrCTA(props: { locale: SupportedLocale }) {
   return (
-    <Suspense
-      fallback={
-        <div className="mx-auto max-w-md">
-          <GooglePlacesSelect
-            className="rounded-full bg-gray-100 text-gray-600"
-            onChange={noop}
-            placeholder="Enter your address"
-            value={null}
-          />
-        </div>
-      }
-    >
+    <Suspense fallback={<DefaultPlacesSelect onChange={noop} value={null} />}>
       <_ClientCurrentUserDTSIPersonCardOrCTA {...props} />
     </Suspense>
   )
@@ -46,14 +47,7 @@ function _ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: SupportedLo
   const res = useGetDTSIPeopleFromAddress(address === 'loading' ? '' : address?.description || '')
   if (!address || address === 'loading' || !res.data) {
     return (
-      <div className="mx-auto max-w-md">
-        <GooglePlacesSelect
-          className="rounded-full bg-gray-100 text-gray-600"
-          onChange={setAddress}
-          placeholder="Enter your address"
-          value={address === 'loading' ? null : address}
-        />
-      </div>
+      <DefaultPlacesSelect onChange={setAddress} value={address === 'loading' ? null : address} />
     )
   }
   if ('notFoundReason' in res.data) {
