@@ -34,7 +34,7 @@ export const auditUsersTotalDonationAmountUsdInngestCronJob = inngest.createFunc
     onFailure: onScriptFailure,
   },
   {
-    cron: '0 4 * * *', // Run at 4:00 AM UTC.
+    cron: '0 4 */2 * *', // Every 2 days at 4:00 AM UTC
   },
   async ({ step }) => {
     const usersCount = await step.run('get-users-count', async () => {
