@@ -15,7 +15,7 @@ import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/usStateDistr
 import { getUSStateNameFromStateCode, USStateCode } from '@/utils/shared/usStateUtils'
 import { cn } from '@/utils/web/cn'
 
-import { LocationSpecificRaceInfo } from './LocationSpecificRaceInfo'
+import { LocationSpecificRaceInfo } from './locationSpecificRaceInfox'
 import { organizeStateSpecificPeople } from './organizeStateSpecificPeople'
 
 interface LocationStateSpecificProps extends DTSI_StateSpecificInformationQuery {

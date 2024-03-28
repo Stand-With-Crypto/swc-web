@@ -1,15 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
 'use client'
 
-import { compact } from 'lodash-es'
+import { compact, noop } from 'lodash-es'
 
 import {
   LocationSpecificRaceInfo,
   LocationSpecificRaceInfoContainer,
-} from '@/components/app/pageLocationStateSpecific/LocationSpecificRaceInfo'
+} from '@/components/app/pageLocationStateSpecific/locationSpecificRaceInfox'
 import { organizeStateSpecificPeople } from '@/components/app/pageLocationStateSpecific/organizeStateSpecificPeople'
 import { uppercaseSectionHeader } from '@/components/ui/classUtils'
-import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
+import { GooglePlacesSelect, GooglePlacesSelectProps } from '@/components/ui/googlePlacesSelect'
 import { useMutableCurrentUserAddress } from '@/hooks/useCurrentUserAddress'
 import { useGetDistrictFromAddress } from '@/hooks/useGetDistrictFromAddress'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
@@ -17,14 +17,37 @@ import { formatGetCongressionalDistrictFromAddressNotFoundReason } from '@/utils
 import { pluralize } from '@/utils/shared/pluralize'
 import { USStateCode } from '@/utils/shared/usStateUtils'
 import { cn } from '@/utils/web/cn'
+import { Suspense } from 'react'
 
-export function UserLocationRaceInfo({
-  groups,
-  stateCode,
-}: {
+type UserLocationRaceInfoProps = {
   groups: ReturnType<typeof organizeStateSpecificPeople>
   stateCode: USStateCode
-}) {
+}
+
+function DefaultPlacesSelect(props: Pick<GooglePlacesSelectProps, 'onChange' | 'value'>) {
+  return (
+    <LocationSpecificRaceInfoContainer>
+      <h3 className={cn(uppercaseSectionHeader, 'mb-3 text-primary-cta')}>Your District</h3>
+      <div className="max-w-md">
+        <GooglePlacesSelect
+          className="rounded-full bg-gray-100 text-gray-600"
+          placeholder="Enter your address"
+          {...props}
+        />
+      </div>
+    </LocationSpecificRaceInfoContainer>
+  )
+}
+
+export function UserLocationRaceInfo(props: UserLocationRaceInfoProps) {
+  return (
+    <Suspense fallback={<DefaultPlacesSelect onChange={noop} value={null} />}>
+      <_UserLocationRaceInfo {...props} />
+    </Suspense>
+  )
+}
+
+function _UserLocationRaceInfo({ groups, stateCode }: UserLocationRaceInfoProps) {
   const urls = useIntlUrls()
   const { setAddress, address } = useMutableCurrentUserAddress()
   const res = useGetDistrictFromAddress(address === 'loading' ? '' : address?.description || '', {
@@ -32,17 +55,7 @@ export function UserLocationRaceInfo({
   })
   if (!address || address === 'loading' || !res.data) {
     return (
-      <LocationSpecificRaceInfoContainer>
-        <h3 className={cn(uppercaseSectionHeader, 'mb-3 text-primary-cta')}>Your District</h3>
-        <div className="max-w-md">
-          <GooglePlacesSelect
-            className="rounded-full bg-gray-100 text-gray-600"
-            onChange={setAddress}
-            placeholder="Enter your address"
-            value={address === 'loading' ? null : address}
-          />
-        </div>
-      </LocationSpecificRaceInfoContainer>
+      <DefaultPlacesSelect onChange={setAddress} value={address === 'loading' ? null : address} />
     )
   }
   if ('notFoundReason' in res.data) {

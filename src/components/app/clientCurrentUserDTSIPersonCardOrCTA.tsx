@@ -19,8 +19,29 @@ import {
   dtsiPersonPoliticalAffiliationCategoryAbbreviation,
 } from '@/utils/dtsi/dtsiPersonUtils'
 import { getIntlUrls } from '@/utils/shared/urls'
+import { noop } from 'lodash-es'
+import { Suspense } from 'react'
 
-export function ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: SupportedLocale }) {
+export function ClientCurrentUserDTSIPersonCardOrCTA(props: { locale: SupportedLocale }) {
+  return (
+    <Suspense
+      fallback={
+        <div className="mx-auto max-w-md">
+          <GooglePlacesSelect
+            className="rounded-full bg-gray-100 text-gray-600"
+            onChange={noop}
+            placeholder="Enter your address"
+            value={null}
+          />
+        </div>
+      }
+    >
+      <_ClientCurrentUserDTSIPersonCardOrCTA {...props} />
+    </Suspense>
+  )
+}
+
+function _ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: SupportedLocale }) {
   const { setAddress, address } = useMutableCurrentUserAddress()
   const res = useGetDTSIPeopleFromAddress(address === 'loading' ? '' : address?.description || '')
   if (!address || address === 'loading' || !res.data) {
