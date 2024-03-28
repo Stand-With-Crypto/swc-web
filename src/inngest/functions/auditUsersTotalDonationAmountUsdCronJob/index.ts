@@ -185,7 +185,7 @@ async function updateRelevantUsers(
       newUserDonationAmounts.push({
         id: relevantUser.id,
         totalDonationAmountUsd:
-          Math.trunc(Number(totalDonationAmountUsd) * TWO_DECIMAL_PLACES) / TWO_DECIMAL_PLACES,
+          Math.trunc(totalDonationAmountUsd * TWO_DECIMAL_PLACES) / TWO_DECIMAL_PLACES,
       })
     }
   }
