@@ -342,7 +342,7 @@ async function seed() {
           where: { id: userActionNftMint.userId },
           data: {
             totalDonationAmountUsd: {
-              increment: userActionNftMint.nftMint.costAtMintUsd.toFixed(USD_DECIMAL_PLACES),
+              increment: userActionNftMint.nftMint.costAtMintUsd,
             },
           },
         })
@@ -451,8 +451,7 @@ async function seed() {
           where: { id: userActionWithDonation.userId },
           data: {
             totalDonationAmountUsd: {
-              increment:
-                userActionWithDonation.userActionDonation.amountUsd.toFixed(USD_DECIMAL_PLACES),
+              increment: userActionWithDonation.userActionDonation.amountUsd,
             },
           },
         })

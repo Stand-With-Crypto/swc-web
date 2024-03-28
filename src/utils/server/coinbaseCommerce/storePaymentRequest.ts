@@ -319,7 +319,7 @@ async function createUserActionDonation(
     where: { id: user.id },
     data: {
       totalDonationAmountUsd: {
-        increment: Number(pricingValues.amountUsd).toFixed(USD_DECIMAL_PLACES),
+        increment: Number(pricingValues.amountUsd),
       },
     },
   })

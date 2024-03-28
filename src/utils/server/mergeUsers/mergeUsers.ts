@@ -239,7 +239,7 @@ export async function mergeUsers({
       where: { id: userToKeep.id },
       data: {
         totalDonationAmountUsd: {
-          increment: userToDelete.totalDonationAmountUsd.toFixed(USD_DECIMAL_PLACES),
+          increment: userToDelete.totalDonationAmountUsd,
         },
       },
     })

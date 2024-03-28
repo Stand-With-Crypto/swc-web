@@ -162,7 +162,7 @@ async function createAction<U extends User>({
     where: { id: user.id },
     data: {
       totalDonationAmountUsd: {
-        increment: decimalEthTransactionValue.mul(ratio).toFixed(USD_DECIMAL_PLACES),
+        increment: decimalEthTransactionValue.mul(ratio),
       },
     },
   })
