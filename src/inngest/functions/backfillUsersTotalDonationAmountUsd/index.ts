@@ -16,9 +16,6 @@ const BACKFILL_USERS_TOTAL_DONATION_AMOUNT_USD_EVENT_NAME =
 const BACKFILL_USERS_TOTAL_DONATION_AMOUNT_USD_RETRY_LIMIT = 5
 
 const BATCH_BUFFER = 1.15
-const HUNDREDTHS_PLACE = 100
-const TWO_DECIMAL_PLACES = 2
-
 /**
  * This function is used to backfill the total donation amount in USD for all users. This is purposed as a one-time script.
  * Notes:
@@ -178,25 +175,15 @@ async function updateRelevantUsers(
         acc +
         (userAction.nftMint?.nftSlug === NFTSlug.STAND_WITH_CRYPTO_LEGACY ||
         userAction.nftMint?.nftSlug === NFTSlug.STAND_WITH_CRYPTO_SUPPORTER
-          ? Number(userAction.nftMint?.costAtMintUsd) || 0
+          ? userAction.nftMint?.costAtMintUsd.toNumber() || 0
           : 0) +
-        (Number(userAction.userActionDonation?.amountUsd) || 0)
+        (userAction.userActionDonation?.amountUsd.toNumber() || 0)
       )
     }, 0)
-    if (
-      ((
-        Math.trunc(relevantUser.totalDonationAmountUsd.toNumber() * HUNDREDTHS_PLACE) /
-        HUNDREDTHS_PLACE
-      ).toFixed(TWO_DECIMAL_PLACES) || 0) !==
-      (Math.trunc(totalDonationAmountUsd * HUNDREDTHS_PLACE) / HUNDREDTHS_PLACE).toFixed(
-        TWO_DECIMAL_PLACES,
-      )
-    ) {
+    if (relevantUser.totalDonationAmountUsd.toNumber() !== totalDonationAmountUsd) {
       newUserDonationAmounts.push({
         id: relevantUser.id,
-        totalDonationAmountUsd: (
-          Math.trunc(totalDonationAmountUsd * HUNDREDTHS_PLACE) / HUNDREDTHS_PLACE
-        ).toFixed(TWO_DECIMAL_PLACES),
+        totalDonationAmountUsd: totalDonationAmountUsd,
       })
     }
   }
