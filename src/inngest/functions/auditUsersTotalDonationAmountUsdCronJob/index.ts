@@ -27,7 +27,7 @@ const BATCH_BUFFER = 1.15
  * - We use `step.invoke` (asynchronous) instead of `step.sendEvent` (synchronous) to avoid inadvertent connection pooling exhaustion.
  * - We include a buffer when fetching users in case more users get added in the middle during the auditing process. It is safe to reprocess.
  */
-export const auditUsersTotalDonationAmountUsdCronJob = inngest.createFunction(
+export const auditUsersTotalDonationAmountUsdInngestCronJob = inngest.createFunction(
   {
     id: AUDIT_USERS_TOTAL_DONATION_AMOUNT_USD_FUNCTION_ID,
     retries: AUDIT_USERS_TOTAL_DONATION_AMOUNT_USD_RETRY_LIMIT,
@@ -68,7 +68,7 @@ export const auditUsersTotalDonationAmountUsdCronJob = inngest.createFunction(
 
     for (const cursor of userCursors) {
       await step.invoke(`send-batch-of-users-${cursor}`, {
-        function: auditUsersTotalDonationAmountUsdCronJobUpdateBatchOfUsers,
+        function: auditUsersTotalDonationAmountUsdInngestCronJobUpdateBatchOfUsers,
         data: {
           userCursor: cursor,
         },
@@ -85,69 +85,70 @@ const UPDATE_USER_BATCH_FUNCTION_ID =
 const UPDATE_USER_BATCH_EVENT_NAME =
   'script/audit.users.total.donation.amount.usd/update.batch.of.users'
 
-export const auditUsersTotalDonationAmountUsdCronJobUpdateBatchOfUsers = inngest.createFunction(
-  {
-    id: UPDATE_USER_BATCH_FUNCTION_ID,
-    retries: AUDIT_USERS_TOTAL_DONATION_AMOUNT_USD_RETRY_LIMIT,
-    onFailure: onScriptFailure,
-  },
-  {
-    event: UPDATE_USER_BATCH_EVENT_NAME,
-  },
-  async ({ event, step }) => {
-    if (!event.data.userCursor) {
-      throw new NonRetriableError('missing user cursor in event data')
-    }
-    const currentCursor = event.data.userCursor
-    const numMiniBatches =
-      Math.ceil(
-        AUDIT_USERS_TOTAL_DONATION_AMOUNT_USD_BATCH_SIZE /
-          AUDIT_USERS_TOTAL_DONATION_AMOUNT_USD_MINI_BATCH_SIZE,
-      ) * BATCH_BUFFER
-    let totalUsersCount = 0
-    let totalUsersUpdate = 0
-    for (let i = 1; i <= numMiniBatches; i++) {
-      const { usersCount, usersUpdate } = await step.run(
-        `update-users-total-donation-amount-usd-with-for-loop-${i}`,
-        async () => {
-          const relevantUsers = await prismaClient.user.findMany({
-            select: {
-              id: true,
-              totalDonationAmountUsd: true,
-              userActions: {
-                select: {
-                  nftMint: { select: { nftSlug: true, costAtMintUsd: true } },
-                  userActionDonation: { select: { amountUsd: true } },
+export const auditUsersTotalDonationAmountUsdInngestCronJobUpdateBatchOfUsers =
+  inngest.createFunction(
+    {
+      id: UPDATE_USER_BATCH_FUNCTION_ID,
+      retries: AUDIT_USERS_TOTAL_DONATION_AMOUNT_USD_RETRY_LIMIT,
+      onFailure: onScriptFailure,
+    },
+    {
+      event: UPDATE_USER_BATCH_EVENT_NAME,
+    },
+    async ({ event, step }) => {
+      if (!event.data.userCursor) {
+        throw new NonRetriableError('missing user cursor in event data')
+      }
+      const currentCursor = event.data.userCursor
+      const numMiniBatches =
+        Math.ceil(
+          AUDIT_USERS_TOTAL_DONATION_AMOUNT_USD_BATCH_SIZE /
+            AUDIT_USERS_TOTAL_DONATION_AMOUNT_USD_MINI_BATCH_SIZE,
+        ) * BATCH_BUFFER
+      let totalUsersCount = 0
+      let totalUsersUpdate = 0
+      for (let i = 1; i <= numMiniBatches; i++) {
+        const { usersCount, usersUpdate } = await step.run(
+          `update-users-total-donation-amount-usd-with-for-loop-${i}`,
+          async () => {
+            const relevantUsers = await prismaClient.user.findMany({
+              select: {
+                id: true,
+                totalDonationAmountUsd: true,
+                userActions: {
+                  select: {
+                    nftMint: { select: { nftSlug: true, costAtMintUsd: true } },
+                    userActionDonation: { select: { amountUsd: true } },
+                  },
                 },
               },
-            },
-            cursor: { id: currentCursor },
-            skip: (i - 1) * AUDIT_USERS_TOTAL_DONATION_AMOUNT_USD_MINI_BATCH_SIZE,
-            take: AUDIT_USERS_TOTAL_DONATION_AMOUNT_USD_MINI_BATCH_SIZE,
-            orderBy: { id: 'asc' },
-          })
-          if (relevantUsers.length === 0) {
-            return {
-              usersCount: 0,
-              usersUpdate: 0,
+              cursor: { id: currentCursor },
+              skip: (i - 1) * AUDIT_USERS_TOTAL_DONATION_AMOUNT_USD_MINI_BATCH_SIZE,
+              take: AUDIT_USERS_TOTAL_DONATION_AMOUNT_USD_MINI_BATCH_SIZE,
+              orderBy: { id: 'asc' },
+            })
+            if (relevantUsers.length === 0) {
+              return {
+                usersCount: 0,
+                usersUpdate: 0,
+              }
             }
-          }
-          const updateResult = await updateRelevantUsers(relevantUsers)
-          return {
-            usersCount: updateResult.usersCount,
-            usersUpdate: updateResult.usersUpdate,
-          }
-        },
-      )
-      totalUsersCount += usersCount
-      totalUsersUpdate += usersUpdate
-    }
-    return {
-      totalUsersCount,
-      totalUsersUpdate,
-    }
-  },
-)
+            const updateResult = await updateRelevantUsers(relevantUsers)
+            return {
+              usersCount: updateResult.usersCount,
+              usersUpdate: updateResult.usersUpdate,
+            }
+          },
+        )
+        totalUsersCount += usersCount
+        totalUsersUpdate += usersUpdate
+      }
+      return {
+        totalUsersCount,
+        totalUsersUpdate,
+      }
+    },
+  )
 
 async function updateRelevantUsers(
   relevantUsers: {
