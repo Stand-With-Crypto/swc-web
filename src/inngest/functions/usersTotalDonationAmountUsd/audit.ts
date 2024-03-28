@@ -12,8 +12,6 @@ const AUDIT_USERS_TOTAL_DONATION_AMOUNT_USD_BATCH_SIZE =
 
 const AUDIT_USERS_TOTAL_DONATION_AMOUNT_USD_FUNCTION_ID =
   'script.audit-users-total-donation-amount-usd'
-const AUDIT_USERS_TOTAL_DONATION_AMOUNT_USD_EVENT_NAME =
-  'script/audit.users.total.donation.amount.usd'
 const AUDIT_USERS_TOTAL_DONATION_AMOUNT_USD_RETRY_LIMIT = 5
 
 const BATCH_BUFFER = 1.15
@@ -107,7 +105,7 @@ export const auditUsersTotalDonationAmountUsdInngestAuditBatchOfUsers = inngest.
           AUDIT_USERS_TOTAL_DONATION_AMOUNT_USD_MINI_BATCH_SIZE,
       ) * BATCH_BUFFER
     for (let i = 1; i <= numMiniBatches; i++) {
-      await step.run(`update-users-total-donation-amount-usd-${i}`, async () => {
+      await step.run(`audit-users-total-donation-amount-usd-${i}`, async () => {
         const relevantUsers = await prismaClient.user.findMany({
           select: {
             id: true,
