@@ -1,7 +1,6 @@
 import { flatten, times } from 'lodash-es'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { z } from 'zod'
 
 import { LocationRaceSpecific } from '@/components/app/pageLocationRaceSpecific'
 import { queryDTSILocationStateSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationDistrictSpecificInformation'
@@ -21,10 +20,6 @@ import { zodUsaState } from '@/validation/fields/zodUsaState'
 export const dynamic = 'error'
 export const dynamicParams = toBool(process.env.MINIMIZE_PAGE_PRE_GENERATION)
 
-const zDistrictParse = z
-  .string()
-  .pipe(z.coerce.number().int().gte(1).lte(US_STATE_CODE_TO_DISTRICT_COUNT_MAP.CA))
-
 type LocationDistrictSpecificPageProps = PageProps<{
   stateCode: string
   district: string
@@ -33,7 +28,7 @@ type LocationDistrictSpecificPageProps = PageProps<{
 export async function generateMetadata({
   params,
 }: LocationDistrictSpecificPageProps): Promise<Metadata> {
-  const district = zDistrictParse.parse(params.district)
+  const district = zodNormalizedDTSIDistrictId.parse(params.district)
   const stateCode = zodUsaState.parse(params.stateCode.toUpperCase())
   const stateName = getUSStateNameFromStateCode(stateCode)
   const title = `See where politicians in the ${formatDTSIDistrictId(district)} of ${stateName} stand on crypto`
@@ -53,7 +48,7 @@ export async function generateStaticParams() {
               district:
                 US_STATE_CODE_TO_DISTRICT_COUNT_MAP[state as USStateCode] === 1 ? 'at-large' : `1`,
             }
-          : { stateCode: state.stateCode, district: `${state.districts[0]}` },
+          : { stateCode: state.stateCode.toLowerCase(), district: `${state.districts[0]}` },
       )
     : flatten(
         Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP).map(stateCode =>
@@ -75,7 +70,7 @@ export default async function LocationDistrictSpecificPage({
 }: LocationDistrictSpecificPageProps) {
   const { locale } = params
   const district = zodNormalizedDTSIDistrictId.parse(params.district)
-  const stateCode = zodUsaState.parse(params.stateCode)
+  const stateCode = zodUsaState.parse(params.stateCode.toUpperCase())
 
   const data = await queryDTSILocationStateSpecificInformation({
     stateCode,

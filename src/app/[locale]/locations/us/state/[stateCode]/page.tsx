@@ -36,10 +36,12 @@ export async function generateMetadata({
 export async function generateStaticParams() {
   return toBool(process.env.MINIMIZE_PAGE_PRE_GENERATION)
     ? US_LOCATION_PAGES_LIVE.slice(0, 1).map(state =>
-        typeof state === 'string' ? { stateCode: state } : { stateCode: state.stateCode },
+        typeof state === 'string'
+          ? { stateCode: state }
+          : { stateCode: state.stateCode.toLowerCase() },
       )
     : Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP).map(stateCode => ({
-        stateCode,
+        stateCode: stateCode.toLowerCase(),
       }))
 }
 
