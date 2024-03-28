@@ -1,5 +1,4 @@
 import { Metadata } from 'next'
-import { notFound } from 'next/navigation'
 
 import { LocationRaceSpecific } from '@/components/app/pageLocationRaceSpecific'
 import { queryDTSILocationSenateSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationSenateSpecificInformation'
@@ -37,7 +36,7 @@ export default async function LocationSenateSpecificPage({
   })
 
   if (!data) {
-    notFound()
+    throw new Error(`Invalid params for LocationSenateSpecificPage: ${JSON.stringify(params)}`)
   }
 
   return <LocationRaceSpecific {...data} {...{ stateCode, locale }} />

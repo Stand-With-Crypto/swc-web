@@ -1,10 +1,8 @@
 import { Metadata } from 'next'
-import { notFound } from 'next/navigation'
 
 import { LocationStateSpecific } from '@/components/app/pageLocationStateSpecific'
 import { queryDTSILocationStateSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationStateSpecificInformation'
 import { PageProps } from '@/types'
-import { US_LOCATION_PAGES_LIVE } from '@/utils/shared/locationSpecificPages'
 import { toBool } from '@/utils/shared/toBool'
 import {
   getUSStateNameFromStateCode,
@@ -34,15 +32,11 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams() {
-  return toBool(process.env.MINIMIZE_PAGE_PRE_GENERATION)
-    ? US_LOCATION_PAGES_LIVE.slice(0, 1).map(state =>
-        typeof state === 'string'
-          ? { stateCode: state }
-          : { stateCode: state.stateCode.toLowerCase() },
-      )
-    : Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP).map(stateCode => ({
-        stateCode: stateCode.toLowerCase(),
-      }))
+  return Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP)
+    .slice(0, toBool(process.env.MINIMIZE_PAGE_PRE_GENERATION) ? 1 : 99999)
+    .map(stateCode => ({
+      stateCode: stateCode.toLowerCase(),
+    }))
 }
 
 export default async function LocationStateSpecificPage({
@@ -53,7 +47,7 @@ export default async function LocationStateSpecificPage({
   const data = await queryDTSILocationStateSpecificInformation({ stateCode })
 
   if (!data) {
-    notFound()
+    throw new Error(`Invalid params for LocationStateSpecificPage: ${JSON.stringify(params)}`)
   }
 
   return <LocationStateSpecific {...data} {...{ stateCode, locale }} />

@@ -1,10 +1,5 @@
 import { USStateCode } from '@/utils/shared/usStateUtils'
 
-// this will be manually modified as we go-live with additional state pages
-export const US_LOCATION_PAGES_LIVE: Array<
-  USStateCode | { stateCode: USStateCode; districts: number[] }
-> = ['WY']
-
 export const US_LOCATION_PAGES_LIVE_KEY_DISTRICTS_MAP: Partial<Record<USStateCode, number[]>> = {
   AL: [2],
   CA: [3, 9, 13, 22, 27, 41, 40, 47],

@@ -1,12 +1,10 @@
 import { flatten, times } from 'lodash-es'
 import { Metadata } from 'next'
-import { notFound } from 'next/navigation'
 
 import { LocationRaceSpecific } from '@/components/app/pageLocationRaceSpecific'
 import { queryDTSILocationStateSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationDistrictSpecificInformation'
 import { PageProps } from '@/types'
 import { formatDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
-import { US_LOCATION_PAGES_LIVE } from '@/utils/shared/locationSpecificPages'
 import { toBool } from '@/utils/shared/toBool'
 import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/usStateDistrictUtils'
 import {
@@ -40,29 +38,17 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams() {
-  return toBool(process.env.MINIMIZE_PAGE_PRE_GENERATION)
-    ? US_LOCATION_PAGES_LIVE.slice(0, 1).map(state =>
-        typeof state === 'string'
-          ? {
-              stateCode: state,
-              district:
-                US_STATE_CODE_TO_DISTRICT_COUNT_MAP[state as USStateCode] === 1 ? 'at-large' : `1`,
-            }
-          : { stateCode: state.stateCode.toLowerCase(), district: `${state.districts[0]}` },
-      )
-    : flatten(
-        Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP).map(stateCode =>
-          times(US_STATE_CODE_TO_DISTRICT_COUNT_MAP[stateCode as USStateCode]).map(
-            districtIndex => ({
-              stateCode: stateCode.toLowerCase(),
-              district:
-                US_STATE_CODE_TO_DISTRICT_COUNT_MAP[stateCode as USStateCode] === 1
-                  ? 'at-large'
-                  : `${districtIndex + 1}`,
-            }),
-          ),
-        ),
-      )
+  return flatten(
+    Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP).map(stateCode =>
+      times(US_STATE_CODE_TO_DISTRICT_COUNT_MAP[stateCode as USStateCode]).map(districtIndex => ({
+        stateCode: stateCode.toLowerCase(),
+        district:
+          US_STATE_CODE_TO_DISTRICT_COUNT_MAP[stateCode as USStateCode] === 1
+            ? 'at-large'
+            : `${districtIndex + 1}`,
+      })),
+    ),
+  ).slice(0, toBool(process.env.MINIMIZE_PAGE_PRE_GENERATION) ? 1 : 9999999)
 }
 
 export default async function LocationDistrictSpecificPage({
@@ -78,7 +64,7 @@ export default async function LocationDistrictSpecificPage({
   })
 
   if (!data) {
-    notFound()
+    throw new Error(`Invalid params for LocationDistrictSpecificPage: ${JSON.stringify(params)}`)
   }
 
   return <LocationRaceSpecific {...data} {...{ stateCode, district, locale }} />
