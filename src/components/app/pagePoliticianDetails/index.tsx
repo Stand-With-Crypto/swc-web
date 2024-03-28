@@ -124,6 +124,12 @@ export function PagePoliticianDetails({
       </section>
       <section>
         <PageTitle as="h2" className="mb-4 text-left" size="sm">
+          SWC Candidate Questionnaire
+        </PageTitle>
+      </section>
+      <article className={cn('rounded-3xl bg-secondary p-4 md:p-6')}>Responses</article>
+      <section>
+        <PageTitle as="h2" className="mb-4 text-left" size="sm">
           Notable statements
         </PageTitle>
         <div className="flex flex-col space-y-4">

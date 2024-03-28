@@ -14,6 +14,7 @@ import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { toBool } from '@/utils/shared/toBool'
 
 import { getData } from './getData'
+import { getQuestionnaire } from '@/utils/server/contentful/questionnaire'
 
 export const revalidate = SECONDS_DURATION.WEEK
 export const dynamic = 'error'
@@ -70,5 +71,6 @@ export default async function PoliticianDetails({ params }: Props) {
   if (!person) {
     notFound()
   }
+  const questionnaire = await getQuestionnaire(params.dtsiSlug)
   return <PagePoliticianDetails {...{ person, locale }} />
 }
