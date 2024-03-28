@@ -323,17 +323,17 @@ async function seed() {
         data,
       }),
   )
-  const userAction = await prismaClient.userAction.findMany()
-  logEntity({ userAction })
-
-  const userActionsWithNftMint = await prismaClient.userAction.findMany({
-    where: {
-      actionType: UserActionType.NFT_MINT,
-      nftMintId: { not: null },
-      nftMint: { costAtMint: { gt: 0 } },
-    },
+  const userAction = await prismaClient.userAction.findMany({
     include: { nftMint: true },
   })
+  logEntity({ userAction })
+
+  const userActionsWithNftMint = userAction.filter(
+    action =>
+      action.actionType === UserActionType.NFT_MINT &&
+      action.nftMintId &&
+      action.nftMint?.costAtMint.isPositive(),
+  )
   await batchAsyncAndLog(userActionsWithNftMint, async function (data) {
     const updatePromises = data.map(userActionNftMint => {
       if (userActionNftMint.nftMint?.costAtMintUsd.isPositive()) {
@@ -433,24 +433,19 @@ async function seed() {
         data,
       }),
   )
-  const userActionDonation = await prismaClient.userActionDonation.findMany()
+  const userActionDonation = await prismaClient.userActionDonation.findMany({
+    include: { userAction: true },
+  })
   logEntity({ userActionDonation })
 
-  const userActionsWithDonation = await prismaClient.userAction.findMany({
-    where: {
-      actionType: UserActionType.DONATION,
-      userActionDonation: { amountUsd: { gt: 0 } },
-    },
-    include: { userActionDonation: true },
-  })
-  await batchAsyncAndLog(userActionsWithDonation, async function (data) {
-    const updatePromises = data.map(userActionWithDonation => {
-      if (userActionWithDonation.userActionDonation?.amountUsd.isPositive()) {
+  await batchAsyncAndLog(userActionDonation, async function (data) {
+    const updatePromises = data.map(donation => {
+      if (donation.amountUsd.isPositive()) {
         return prismaClient.user.update({
-          where: { id: userActionWithDonation.userId },
+          where: { id: donation.userAction.userId },
           data: {
             totalDonationAmountUsd: {
-              increment: userActionWithDonation.userActionDonation.amountUsd,
+              increment: donation.amountUsd,
             },
           },
         })
