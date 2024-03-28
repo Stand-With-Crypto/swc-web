@@ -21,11 +21,15 @@ const TWO_DECIMAL_PLACES = 100
  * Notes:
  * - In general, this function was written with the cost implications and limitations of PlanetScale, Inngest, and Vercel serverless functions in mind.
  * - We do not use `datetime_created` when fetching users because the query ends violates the 100000 row query limit.
- * - We do not use a WHERE clause to only fetch donated users because that query is very slow.
+ * - We do not use a WHERE clause to only fetch donated users (or only donation-related actions) because that query ends up being very slow with a large dataset.
  * - We do not return a full list of users from the different step functions because of Inngest payload size limitations/issues.
  * - We use a fan-out pattern to process all users in batches because Inngest has a 1000 step call limit per function.
  * - We use `step.invoke` (asynchronous) instead of `step.sendEvent` (synchronous) to avoid inadvertent connection pooling exhaustion.
  * - We include a buffer when fetching users in case more users get added in the middle during the auditing process. It is safe to reprocess.
+ * - "Why not iterate through the UserActionDonation and NFTMints tables instead of users? That would only fetch users who have actually donated."
+ *   - If we had to process the tables separately, then there might be a period of time where the user's total donation amount is not accurate.
+ *   - We should update the users' total donation amount in a single transaction to avoid this issue.
+ * - With ~380000 rows in the users table, this job takes ~1 hour to complete.
  */
 export const auditUsersTotalDonationAmountUsdInngestCronJob = inngest.createFunction(
   {
