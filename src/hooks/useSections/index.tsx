@@ -19,6 +19,7 @@ export function useSections<SectionKey extends string>({
   const [currentSection, setCurrentSection] = React.useState<SectionKey>(
     initialSectionId ?? sections[0],
   )
+  const [history, setHistory] = React.useState<SectionKey[]>([currentSection])
 
   const goToSection: UseSectionsReturn<SectionKey>['goToSection'] = React.useCallback(
     (section, options = {}) => {
@@ -27,6 +28,7 @@ export function useSections<SectionKey extends string>({
       }
 
       setCurrentSection(section)
+      setHistory(prev => [section, ...prev])
 
       if (!options.disableAnalytics) {
         trackSectionVisible({ section, sectionGroup: analyticsName })
@@ -35,20 +37,30 @@ export function useSections<SectionKey extends string>({
     [currentSection, analyticsName],
   )
 
+  const goBackSection: UseSectionsReturn<SectionKey>['goBackSection'] = React.useCallback(() => {
+    if (!history.length) {
+      return
+    }
+    const newHistory = history.slice(1)
+
+    const initialSection = initialSectionId ?? sections[0]
+
+    setCurrentSection(newHistory[0] ?? initialSection)
+    setHistory(newHistory)
+  }, [history, initialSectionId, sections])
+
   const handleSectionNotFound = React.useCallback(() => {
     const err = new Error(`useSections: section not found: ${currentSection}`)
     Sentry.captureException(err)
     throw err
   }, [currentSection])
 
-  return React.useMemo<UseSectionsReturn<SectionKey>>(
-    () => ({
-      currentSection,
-      goToSection,
-      onSectionNotFound: handleSectionNotFound,
-    }),
-    [currentSection, goToSection, handleSectionNotFound],
-  )
+  return {
+    currentSection,
+    goToSection,
+    onSectionNotFound: handleSectionNotFound,
+    goBackSection,
+  }
 }
 
 export * from './useSections.types'
