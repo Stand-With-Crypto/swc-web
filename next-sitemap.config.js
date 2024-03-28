@@ -10,7 +10,10 @@ module.exports = {
     const parts = url.split('/')
     let changefreq = config.changefreq
     let priority = config.priority
-    if (excludePaths.indexOf(`/${parts[1]}`) !== -1) {
+    if (parts[1] === 'api') {
+      return null
+    }
+    if (excludePaths.indexOf(`/${parts[2]}`) !== -1) {
       return null
     }
     if (url.includes('/locations/us/state/')) {
