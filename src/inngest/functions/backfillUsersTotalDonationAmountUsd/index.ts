@@ -16,7 +16,8 @@ const BACKFILL_USERS_TOTAL_DONATION_AMOUNT_USD_EVENT_NAME =
 const BACKFILL_USERS_TOTAL_DONATION_AMOUNT_USD_RETRY_LIMIT = 5
 
 const BATCH_BUFFER = 1.15
-const TWO_DECIMAL_PLACES = 100
+const HUNDREDTHS_PLACE = 100
+const TWO_DECIMAL_PLACES = 2
 
 /**
  * This function is used to backfill the total donation amount in USD for all users. This is purposed as a one-time script.
@@ -183,14 +184,19 @@ async function updateRelevantUsers(
       )
     }, 0)
     if (
-      (Math.trunc(relevantUser.totalDonationAmountUsd.toNumber() * TWO_DECIMAL_PLACES) /
-        TWO_DECIMAL_PLACES || 0) !==
-      Math.trunc(totalDonationAmountUsd * TWO_DECIMAL_PLACES) / TWO_DECIMAL_PLACES
+      ((
+        Math.trunc(relevantUser.totalDonationAmountUsd.toNumber() * HUNDREDTHS_PLACE) /
+        HUNDREDTHS_PLACE
+      ).toFixed(TWO_DECIMAL_PLACES) || 0) !==
+      (Math.trunc(totalDonationAmountUsd * HUNDREDTHS_PLACE) / HUNDREDTHS_PLACE).toFixed(
+        TWO_DECIMAL_PLACES,
+      )
     ) {
       newUserDonationAmounts.push({
         id: relevantUser.id,
-        totalDonationAmountUsd:
-          Math.trunc(totalDonationAmountUsd * TWO_DECIMAL_PLACES) / TWO_DECIMAL_PLACES,
+        totalDonationAmountUsd: (
+          Math.trunc(totalDonationAmountUsd * HUNDREDTHS_PLACE) / HUNDREDTHS_PLACE
+        ).toFixed(TWO_DECIMAL_PLACES),
       })
     }
   }
