@@ -26,7 +26,6 @@ import { prismaClient } from '@/utils/server/prismaClient'
 import { batchAsyncAndLog } from '@/utils/shared/batchAsyncAndLog'
 import { getLogger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
-import { USD_DECIMAL_PLACES } from '@/utils/shared/usdDecimalPlaces'
 import {
   ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN,
   USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,

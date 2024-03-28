@@ -21,7 +21,6 @@ import { fromBigNumber } from '@/utils/shared/bigNumber'
 import { getCryptoToFiatConversion } from '@/utils/shared/getCryptoToFiatConversion'
 import { getLogger } from '@/utils/shared/logger'
 import { NFTSlug } from '@/utils/shared/nft'
-import { USD_DECIMAL_PLACES } from '@/utils/shared/usdDecimalPlaces'
 import { UserActionNftMintCampaignName } from '@/utils/shared/userActionCampaigns'
 
 const createActionMintNFTInputValidationSchema = object({

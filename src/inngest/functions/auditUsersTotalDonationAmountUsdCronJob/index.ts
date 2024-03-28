@@ -5,7 +5,6 @@ import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { NFTSlug } from '@/utils/shared/nft'
-import { USD_DECIMAL_PLACES } from '@/utils/shared/usdDecimalPlaces'
 
 const AUDIT_USERS_TOTAL_DONATION_AMOUNT_USD_BATCH_SIZE =
   Number(process.env.AUDIT_USERS_TOTAL_DONATION_AMOUNT_USD_BATCH_SIZE) || 2000
@@ -15,6 +14,7 @@ const AUDIT_USERS_TOTAL_DONATION_AMOUNT_USD_FUNCTION_ID =
 const AUDIT_USERS_TOTAL_DONATION_AMOUNT_USD_RETRY_LIMIT = 5
 
 const BATCH_BUFFER = 1.15
+const TWO_DECIMAL_PLACES = 100
 
 /**
  * This function is used to audit the total donation amount in USD for all users.
@@ -178,12 +178,14 @@ async function updateRelevantUsers(
       )
     }, 0)
     if (
-      (Number(relevantUser.totalDonationAmountUsd.toFixed(USD_DECIMAL_PLACES)) || 0) !==
-      Number(totalDonationAmountUsd.toFixed(USD_DECIMAL_PLACES))
+      (Math.trunc(relevantUser.totalDonationAmountUsd.toNumber() * TWO_DECIMAL_PLACES) /
+        TWO_DECIMAL_PLACES || 0) !==
+      Math.trunc(totalDonationAmountUsd * TWO_DECIMAL_PLACES) / TWO_DECIMAL_PLACES
     ) {
       newUserDonationAmounts.push({
         id: relevantUser.id,
-        totalDonationAmountUsd: totalDonationAmountUsd.toFixed(USD_DECIMAL_PLACES),
+        totalDonationAmountUsd:
+          Math.trunc(Number(totalDonationAmountUsd) * TWO_DECIMAL_PLACES) / TWO_DECIMAL_PLACES,
       })
     }
   }
