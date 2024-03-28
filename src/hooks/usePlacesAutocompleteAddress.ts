@@ -16,7 +16,7 @@ const NEXT_PUBLIC_GOOGLE_PLACES_API_KEY = requiredEnv(
  */
 export function usePlacesAutocompleteAddress(address: string) {
   const {
-    suggestions: { data: addressSuggestions },
+    suggestions: { data: addressSuggestions, status },
     init,
     setValue,
     ready,
@@ -28,6 +28,8 @@ export function usePlacesAutocompleteAddress(address: string) {
       language: 'en',
     },
   })
+  // the library returns a loading prop but it appears to always be false. Status will be an empty string unless it returns something
+  const loading = !status
 
   const scriptStatus = useScript(
     `https://maps.googleapis.com/maps/api/js?key=${NEXT_PUBLIC_GOOGLE_PLACES_API_KEY}&libraries=places&callback=${CALLBACK_NAME}`,
@@ -43,5 +45,8 @@ export function usePlacesAutocompleteAddress(address: string) {
     }
   }, [address, init, scriptStatus, setValue])
 
-  return useMemo(() => ({ addressSuggestions, ready }), [addressSuggestions, ready])
+  return useMemo(
+    () => ({ addressSuggestions, ready, loading }),
+    [addressSuggestions, loading, ready],
+  )
 }

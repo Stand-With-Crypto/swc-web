@@ -1,12 +1,12 @@
 import { fetchDTSI } from '@/data/dtsi/fetchDTSI'
-import { fragmentDTSIPersonCard } from '@/data/dtsi/fragments/fragmentDTSIPersonCard'
+import { fragmentRaceSpecificPersonInfo } from '@/data/dtsi/fragments/fragmentRaceSpecificPersonInfo'
 import {
   DTSI_DistrictSpecificInformationQuery,
   DTSI_DistrictSpecificInformationQueryVariables,
 } from '@/data/dtsi/generated'
-import { NormalizedDTSIPersonRoleId } from '@/utils/dtsi/dtsiPersonRoleUtils'
+import { NormalizedDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 
-function convertDistrictNumberToDTSIFormat(districtNumber: NormalizedDTSIPersonRoleId) {
+function convertDistrictNumberToDTSIFormat(districtNumber: NormalizedDTSIDistrictId) {
   return districtNumber === 'at-large' ? 'At-Large' : `${districtNumber}`
 }
 
@@ -15,33 +15,21 @@ export const query = /* GraphQL */ `
     people(
       limit: 1000
       offset: 0
-      personRoleGroupingOr: [CURRENT_US_HOUSE_OF_REPS, RUNNING_FOR_US_HOUSE_OF_REPS]
+      personRoleGroupingOr: [RUNNING_FOR_US_HOUSE_OF_REPS]
       personRolePrimaryState: $stateCode
       personRolePrimaryDistrict: $district
     ) {
-      ...PersonCard
-      roles {
-        id
-        primaryDistrict
-        primaryState
-        roleCategory
-        status
-        group {
-          id
-          category
-          groupInstance
-        }
-      }
+      ...RaceSpecificPersonInfo
     }
   }
-  ${fragmentDTSIPersonCard}
+  ${fragmentRaceSpecificPersonInfo}
 `
-export const queryDTSIDistrictSpecificInformation = async ({
+export const queryDTSILocationStateSpecificInformation = async ({
   stateCode,
   district,
 }: {
   stateCode: string
-  district: NormalizedDTSIPersonRoleId
+  district: NormalizedDTSIDistrictId
 }) => {
   const results = await fetchDTSI<
     DTSI_DistrictSpecificInformationQuery,

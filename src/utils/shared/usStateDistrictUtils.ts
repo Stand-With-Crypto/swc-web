@@ -57,3 +57,5 @@ export const US_STATE_CODE_TO_DISTRICT_COUNT_MAP: Record<USStateCode, number> = 
   WI: 8,
   WY: 1,
 }
+
+export const MAX_DISTRICT_COUNT = US_STATE_CODE_TO_DISTRICT_COUNT_MAP.CA

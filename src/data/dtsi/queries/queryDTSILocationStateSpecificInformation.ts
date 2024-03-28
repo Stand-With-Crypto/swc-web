@@ -4,18 +4,14 @@ import {
   DTSI_StateSpecificInformationQuery,
   DTSI_StateSpecificInformationQueryVariables,
 } from '@/data/dtsi/generated'
+import { USStateCode } from '@/utils/shared/usStateUtils'
 
 export const query = /* GraphQL */ `
   query StateSpecificInformation($stateCode: String!) {
     people(
       limit: 1000
       offset: 0
-      personRoleGroupingOr: [
-        CURRENT_US_HOUSE_OF_REPS
-        CURRENT_US_SENATE
-        RUNNING_FOR_US_HOUSE_OF_REPS
-        RUNNING_FOR_US_SENATE
-      ]
+      personRoleGroupingOr: [RUNNING_FOR_US_HOUSE_OF_REPS, RUNNING_FOR_US_SENATE]
       personRolePrimaryState: $stateCode
     ) {
       ...PersonCard
@@ -35,7 +31,11 @@ export const query = /* GraphQL */ `
   }
   ${fragmentDTSIPersonCard}
 `
-export const queryDTSIStateSpecificInformation = async ({ stateCode }: { stateCode: string }) => {
+export const queryDTSILocationStateSpecificInformation = async ({
+  stateCode,
+}: {
+  stateCode: USStateCode
+}) => {
   const results = await fetchDTSI<
     DTSI_StateSpecificInformationQuery,
     DTSI_StateSpecificInformationQueryVariables

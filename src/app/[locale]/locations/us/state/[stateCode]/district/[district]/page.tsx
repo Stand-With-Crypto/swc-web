@@ -3,13 +3,20 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { z } from 'zod'
 
-import { LocationDistrictSpecific } from '@/components/app/pageLocationDistrictSpecific'
-import { queryDTSIDistrictSpecificInformation } from '@/data/dtsi/queries/queryDTSIDistrictSpecificInformation'
+import { LocationRaceSpecific } from '@/components/app/pageLocationRaceSpecific'
+import { queryDTSILocationStateSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationDistrictSpecificInformation'
 import { PageProps } from '@/types'
+import { formatDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { US_LOCATION_PAGES_LIVE } from '@/utils/shared/locationSpecificPages'
 import { toBool } from '@/utils/shared/toBool'
 import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/usStateDistrictUtils'
-import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
+import {
+  getUSStateNameFromStateCode,
+  US_STATE_CODE_TO_DISPLAY_NAME_MAP,
+  USStateCode,
+} from '@/utils/shared/usStateUtils'
+import { zodNormalizedDTSIDistrictId } from '@/validation/fields/zodNormalizedDTSIDistrictId'
+import { zodUsaState } from '@/validation/fields/zodUsaState'
 
 export const dynamic = 'error'
 export const dynamicParams = toBool(process.env.MINIMIZE_PAGE_PRE_GENERATION)
@@ -27,9 +34,10 @@ export async function generateMetadata({
   params,
 }: LocationDistrictSpecificPageProps): Promise<Metadata> {
   const district = zDistrictParse.parse(params.district)
-  const { stateCode } = params
-  const title = LocationDistrictSpecific.getTitle({ district, stateCode })
-  const description = LocationDistrictSpecific.getDescription({ district, stateCode })
+  const stateCode = zodUsaState.parse(params.stateCode.toUpperCase())
+  const stateName = getUSStateNameFromStateCode(stateCode)
+  const title = `See where politicians in the ${formatDTSIDistrictId(district)} of ${stateName} stand on crypto`
+  const description = `We asked politicians in the ${formatDTSIDistrictId(district)} of ${stateName} for their thoughts on crypto. Here's what they said.`
   return {
     title,
     description,
@@ -65,17 +73,18 @@ export async function generateStaticParams() {
 export default async function LocationDistrictSpecificPage({
   params,
 }: LocationDistrictSpecificPageProps) {
-  const { stateCode, locale } = params
-  const district = zDistrictParse.parse(params.district)
+  const { locale } = params
+  const district = zodNormalizedDTSIDistrictId.parse(params.district)
+  const stateCode = zodUsaState.parse(params.stateCode)
 
-  const data = await queryDTSIDistrictSpecificInformation({
+  const data = await queryDTSILocationStateSpecificInformation({
     stateCode,
-    district: params.district,
+    district,
   })
 
   if (!data) {
     notFound()
   }
 
-  return <LocationDistrictSpecific {...data} {...{ stateCode, district, locale }} />
+  return <LocationRaceSpecific {...data} {...{ stateCode, district, locale }} />
 }

@@ -1,6 +1,6 @@
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
 import { DEFAULT_LOCALE, SupportedLocale } from '@/intl/locales'
-import { NormalizedDTSIPersonRoleId } from '@/utils/dtsi/dtsiPersonRoleUtils'
+import { NormalizedDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
@@ -47,12 +47,14 @@ export const getIntlUrls = (
     profile: () => `${localePrefix}/profile`,
     internalHomepage: () => `${localePrefix}/internal`,
     locationStateSpecific: (stateCode: string) => `${localePrefix}/locations/us/state/${stateCode}`,
+    locationStateSpecificSenateRace: (stateCode: string) =>
+      `${localePrefix}/locations/us/state/${stateCode}/senate`,
     locationDistrictSpecific: ({
       stateCode,
       district,
     }: {
       stateCode: string
-      district: NormalizedDTSIPersonRoleId
+      district: NormalizedDTSIDistrictId
     }) => `${localePrefix}/locations/us/state/${stateCode}/district/${district}`,
   }
 }

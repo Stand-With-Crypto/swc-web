@@ -1,148 +1,167 @@
-import { DTSIPersonCard } from '@/components/app/dtsiPersonCard'
-import { InternalLink } from '@/components/ui/link'
-import { PageSubTitle } from '@/components/ui/pageSubTitle'
+import { compact, times } from 'lodash-es'
+
+import { UserLocationRaceInfo } from '@/components/app/pageLocationStateSpecific/UserLocationRaceInfo'
+import { REGISTRATION_URLS_BY_STATE } from '@/components/app/userActionFormVoterRegistration/constants'
+import { Button } from '@/components/ui/button'
+import { uppercaseSectionHeader } from '@/components/ui/classUtils'
+import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { DTSI_PersonRoleCategory, DTSI_StateSpecificInformationQuery } from '@/data/dtsi/generated'
+import { DTSI_StateSpecificInformationQuery } from '@/data/dtsi/generated'
 import { SupportedLocale } from '@/intl/locales'
-import {
-  formatDTSIPersonRoleId,
-  NormalizedDTSIPersonRoleId,
-  normalizeDistrictFromDTSIPersonRoleToId,
-} from '@/utils/dtsi/dtsiPersonRoleUtils'
-import {
-  formatStateSpecificDTSIPerson,
-  StateSpecificDTSIPerson,
-} from '@/utils/dtsi/stateSpecificDTSIPerson'
-import { gracefullyError } from '@/utils/shared/gracefullyError'
+import { US_LOCATION_PAGES_LIVE_KEY_DISTRICTS_MAP } from '@/utils/shared/locationSpecificPages'
+import { pluralize } from '@/utils/shared/pluralize'
 import { getIntlUrls } from '@/utils/shared/urls'
-import { getUSStateNameFromStateCode } from '@/utils/shared/usStateUtils'
-import { maybeWithOrdinalSuffix } from '@/utils/web/withOrdinalSuffix'
+import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/usStateDistrictUtils'
+import { getUSStateNameFromStateCode, USStateCode } from '@/utils/shared/usStateUtils'
+import { cn } from '@/utils/web/cn'
+
+import { LocationSpecificRaceInfo } from './LocationSpecificRaceInfo'
+import { organizeStateSpecificPeople } from './organizeStateSpecificPeople'
 
 interface LocationStateSpecificProps extends DTSI_StateSpecificInformationQuery {
-  stateCode: string
+  stateCode: USStateCode
   locale: SupportedLocale
-}
-
-function getTitle({ stateCode }: { stateCode: string }) {
-  const stateName = getUSStateNameFromStateCode(stateCode)
-  return `See where ${stateName} politicians stand on crypto`
-}
-function getDescription({ stateCode }: { stateCode: string }) {
-  const stateName = getUSStateNameFromStateCode(stateCode)
-  return `We asked ${stateName} politicians for their thoughts on crypto. Here's what they said.`
-}
-
-function organizeStateSpecificPeople(people: DTSI_StateSpecificInformationQuery['people']) {
-  const formatted = people.map(formatStateSpecificDTSIPerson)
-  const grouped = {
-    current: {
-      senators: [] as StateSpecificDTSIPerson[],
-      congresspeople: [] as StateSpecificDTSIPerson[],
-    },
-    runningFor: {
-      senators: [] as StateSpecificDTSIPerson[],
-      congresspeople: {} as Record<
-        string,
-        { district: NormalizedDTSIPersonRoleId; people: StateSpecificDTSIPerson[] }
-      >,
-    },
-  }
-  formatted.forEach(person => {
-    if (person.currentStateSpecificRole) {
-      if (person.currentStateSpecificRole.roleCategory === DTSI_PersonRoleCategory.SENATE) {
-        grouped.current.senators.push(person)
-      } else if (
-        person.currentStateSpecificRole.roleCategory === DTSI_PersonRoleCategory.CONGRESS
-      ) {
-        grouped.current.congresspeople.push(person)
-      } else {
-        gracefullyError({
-          msg: 'Unexpected currentStateSpecificRole',
-          fallback: null,
-          hint: { extra: { person } },
-        })
-      }
-    }
-    if (person.runningForStateSpecificRole) {
-      if (person.runningForStateSpecificRole.roleCategory === DTSI_PersonRoleCategory.SENATE) {
-        grouped.runningFor.senators.push(person)
-      } else if (
-        person.runningForStateSpecificRole.roleCategory === DTSI_PersonRoleCategory.CONGRESS
-      ) {
-        const district = normalizeDistrictFromDTSIPersonRoleToId(person.runningForStateSpecificRole)
-        if (district) {
-          if (!grouped.runningFor.congresspeople[district]) {
-            grouped.runningFor.congresspeople[district] = { district, people: [] }
-          }
-          grouped.runningFor.congresspeople[district].people.push(person)
-        }
-      } else {
-        gracefullyError({
-          msg: 'Unexpected runningForStateSpecificRole',
-          fallback: null,
-          hint: { extra: { person } },
-        })
-      }
-    }
-  })
-  return grouped
 }
 
 export function LocationStateSpecific({ stateCode, people, locale }: LocationStateSpecificProps) {
   const groups = organizeStateSpecificPeople(people)
   const urls = getIntlUrls(locale)
+  const stateName = getUSStateNameFromStateCode(stateCode)
   return (
     <div className="container space-y-20">
-      <div className="space-y-6">
-        <PageTitle>{getTitle({ stateCode })}</PageTitle>
-        <PageSubTitle>{getDescription({ stateCode })}</PageSubTitle>
+      <div className="text-center">
+        <h1 className={cn(uppercaseSectionHeader, 'mb-4')}>Crypto Voter Guide</h1>
+        <PageTitle as="h2" className="mb-6">
+          {stateName}
+        </PageTitle>
+        <Button asChild>
+          <ExternalLink href={REGISTRATION_URLS_BY_STATE[stateCode].registerUrl}>
+            Register to vote
+          </ExternalLink>
+        </Button>
       </div>
-      <section className="space-y-10">
-        <PageTitle as="h3" size="md">
-          Current Senators
-        </PageTitle>
-        {groups.current.senators.map(person => (
-          <DTSIPersonCard key={person.id} locale={locale} person={person} />
-        ))}
-      </section>
-      <section className="space-y-10">
-        <PageTitle as="h3" size="md">
-          Current Congresspeople
-        </PageTitle>
-        {groups.current.congresspeople.map(person => (
-          <DTSIPersonCard key={person.id} locale={locale} person={person} />
-        ))}
-      </section>
-      <section className="space-y-10">
-        <PageTitle as="h3" size="md">
-          Running for Senate
-        </PageTitle>
-        {groups.runningFor.senators.map(person => (
-          <DTSIPersonCard key={person.id} locale={locale} person={person} />
-        ))}
-      </section>
+      <div className="divide-y-2 *:py-20 first:*:pt-0 last:*:pb-0">
+        {(!!groups.runningFor.senators.incumbents.length ||
+          !!groups.runningFor.senators.candidates.length) && (
+          <LocationSpecificRaceInfo
+            candidateSections={compact([
+              groups.runningFor.senators.incumbents.length
+                ? {
+                    title: pluralize({
+                      count: groups.runningFor.senators.incumbents.length,
+                      singular: 'Incumbent',
+                      plural: 'Incumbents',
+                    }),
+                    people: groups.runningFor.senators.incumbents,
+                  }
+                : null,
+              groups.runningFor.senators.candidates.length
+                ? {
+                    title: pluralize({
+                      count: groups.runningFor.senators.candidates.length,
+                      singular: 'Candidate',
+                      plural: 'Candidates',
+                    }),
+                    people: groups.runningFor.senators.candidates,
+                  }
+                : null,
+            ])}
+            subtitle="Key Race"
+            title={<>U.S Senate ({stateCode})</>}
+            url={urls.locationStateSpecificSenateRace(stateCode)}
+          />
+        )}
 
-      <section className="space-y-10">
-        <PageTitle as="h3" size="md">
-          Running for Congress
-        </PageTitle>
-        {Object.values(groups.runningFor.congresspeople).map(group => (
-          <div className="space-y-10" key={group.district}>
-            <PageSubTitle as="h4">
-              <InternalLink
-                href={urls.locationDistrictSpecific({ stateCode, district: group.district })}
-              >
-                {`${formatDTSIPersonRoleId(group.district)} District`}
-              </InternalLink>
-            </PageSubTitle>
-            {group.people.map(person => (
-              <DTSIPersonCard key={person.id} locale={locale} person={person} />
-            ))}
-          </div>
+        {!!groups.runningFor.congresspeople['at-large']?.incumbents.length ||
+        !!groups.runningFor.congresspeople['at-large']?.candidates.length ? (
+          <LocationSpecificRaceInfo
+            candidateSections={compact([
+              groups.runningFor.congresspeople['at-large']?.incumbents.length
+                ? {
+                    title: pluralize({
+                      count: groups.runningFor.congresspeople['at-large']?.incumbents.length,
+                      singular: 'Incumbent',
+                      plural: 'Incumbents',
+                    }),
+                    people: groups.runningFor.congresspeople['at-large']?.incumbents,
+                  }
+                : null,
+              groups.runningFor.congresspeople['at-large']?.candidates.length
+                ? {
+                    title: pluralize({
+                      count: groups.runningFor.congresspeople['at-large']?.candidates.length,
+                      singular: 'Candidate',
+                      plural: 'Candidates',
+                    }),
+                    people: groups.runningFor.congresspeople['at-large']?.candidates,
+                  }
+                : null,
+            ])}
+            subtitle="Congressional Race"
+            title={<>At-Large District</>}
+            url={urls.locationDistrictSpecific({ stateCode, district: 'at-large' })}
+          />
+        ) : (
+          <UserLocationRaceInfo groups={groups} stateCode={stateCode} />
+        )}
+        {US_LOCATION_PAGES_LIVE_KEY_DISTRICTS_MAP[stateCode]?.map(district => (
+          <LocationSpecificRaceInfo
+            candidateSections={compact([
+              groups.runningFor.congresspeople[district]?.incumbents.length
+                ? {
+                    title: pluralize({
+                      count: groups.runningFor.congresspeople[district]?.incumbents.length,
+                      singular: 'Incumbent',
+                      plural: 'Incumbents',
+                    }),
+                    people: groups.runningFor.congresspeople[district]?.incumbents,
+                  }
+                : null,
+              groups.runningFor.congresspeople[district]?.candidates.length
+                ? {
+                    title: pluralize({
+                      count: groups.runningFor.congresspeople[district]?.candidates.length,
+                      singular: 'Candidate',
+                      plural: 'Candidates',
+                    }),
+                    people: groups.runningFor.congresspeople[district]?.candidates,
+                  }
+                : null,
+            ])}
+            key={district}
+            subtitle="Key Race"
+            title={<>Congressional District {district}</>}
+            url={urls.locationDistrictSpecific({ stateCode, district })}
+          />
         ))}
-      </section>
+        {US_STATE_CODE_TO_DISTRICT_COUNT_MAP[stateCode] > 1 && (
+          <div>
+            <section className="mx-auto max-w-2xl space-y-10">
+              <h3 className={cn(uppercaseSectionHeader, 'mb-3')}>Other races in {stateName}</h3>
+              <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
+                {compact(
+                  times(US_STATE_CODE_TO_DISTRICT_COUNT_MAP[stateCode]).map(districtIndex => {
+                    const district = districtIndex + 1
+
+                    return (
+                      <InternalLink
+                        className="block"
+                        href={urls.locationDistrictSpecific({
+                          stateCode,
+                          district,
+                        })}
+                        key={districtIndex}
+                      >
+                        District {district}
+                      </InternalLink>
+                    )
+                  }),
+                )}
+              </div>
+            </section>
+          </div>
+        )}
+      </div>
     </div>
   )
 }
-LocationStateSpecific.getTitle = getTitle
-LocationStateSpecific.getDescription = getTitle

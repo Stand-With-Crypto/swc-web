@@ -142,10 +142,10 @@ export const orderDTSIPersonRolesByImportance = <
 export const CURRENT_SESSION_OF_CONGRESS = 118
 export const NEXT_SESSION_OF_CONGRESS = 119
 
-export type NormalizedDTSIPersonRoleId = number | 'at-large'
-export const normalizeDistrictFromDTSIPersonRoleToId = (
+export type NormalizedDTSIDistrictId = number | 'at-large'
+export const normalizeDTSIDistrictId = (
   role: Pick<DTSI_PersonRole, 'primaryDistrict'>,
-): NormalizedDTSIPersonRoleId => {
+): NormalizedDTSIDistrictId => {
   if (!role.primaryDistrict) {
     return gracefullyError({
       msg: `Unexpected primaryDistrict ${role.primaryDistrict}`,
@@ -167,7 +167,7 @@ export const normalizeDistrictFromDTSIPersonRoleToId = (
   })
 }
 
-export const formatDTSIPersonRoleId = (district: NormalizedDTSIPersonRoleId) => {
+export const formatDTSIDistrictId = (district: NormalizedDTSIDistrictId) => {
   if (district === 'at-large') {
     return 'At-Large'
   }
