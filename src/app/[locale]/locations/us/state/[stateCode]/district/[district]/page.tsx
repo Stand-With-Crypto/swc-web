@@ -5,6 +5,7 @@ import { LocationRaceSpecific } from '@/components/app/pageLocationRaceSpecific'
 import { queryDTSILocationDistrictSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationDistrictSpecificInformation'
 import { PageProps } from '@/types'
 import { formatDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
+import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { toBool } from '@/utils/shared/toBool'
 import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/usStateDistrictUtils'
 import {
@@ -31,10 +32,10 @@ export async function generateMetadata({
   const stateName = getUSStateNameFromStateCode(stateCode)
   const title = `See where politicians in the ${formatDTSIDistrictId(district)} district of ${stateName} stand on crypto`
   const description = `We asked politicians in the ${formatDTSIDistrictId(district)} district of ${stateName} for their thoughts on crypto. Here's what they said.`
-  return {
+  return generateMetadataDetails({
     title,
     description,
-  }
+  })
 }
 
 export async function generateStaticParams() {

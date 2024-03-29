@@ -3,6 +3,7 @@ import { Metadata } from 'next'
 import { LocationStateSpecific } from '@/components/app/pageLocationStateSpecific'
 import { queryDTSILocationStateSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationStateSpecificInformation'
 import { PageProps } from '@/types'
+import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { toBool } from '@/utils/shared/toBool'
 import {
   getUSStateNameFromStateCode,
@@ -25,10 +26,10 @@ export async function generateMetadata({
 
   const title = `See where ${stateName} politicians stand on crypto`
   const description = `We asked ${stateName} politicians for their thoughts on crypto. Here's what they said.`
-  return {
+  return generateMetadataDetails({
     title,
     description,
-  }
+  })
 }
 
 export async function generateStaticParams() {
