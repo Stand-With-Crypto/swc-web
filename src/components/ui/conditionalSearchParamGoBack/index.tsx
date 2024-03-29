@@ -1,4 +1,5 @@
 'use client'
+import { Suspense } from 'react'
 import { ArrowLeft } from 'lucide-react'
 import { useSearchParams } from 'next/navigation'
 
@@ -18,7 +19,7 @@ export function GoBack({ url }: { url: string }) {
   )
 }
 
-export function ConditionalSearchParamGoBack({ className }: { className?: string }) {
+function _ConditionalSearchParamGoBack({ className }: { className?: string }) {
   const params = useSearchParams()
   const backUrl = params?.get(BACK_URL_PARAM)
   if (!backUrl) {
@@ -30,5 +31,13 @@ export function ConditionalSearchParamGoBack({ className }: { className?: string
     <div className={cn('absolute top-[-30px] w-full', className)}>
       <GoBack url={decodeURIComponent(base64Decode(backUrl))} />
     </div>
+  )
+}
+
+export function ConditionalSearchParamGoBack(props: { className?: string }) {
+  return (
+    <Suspense>
+      <_ConditionalSearchParamGoBack {...props} />
+    </Suspense>
   )
 }

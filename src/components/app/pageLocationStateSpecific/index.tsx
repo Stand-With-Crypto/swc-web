@@ -5,7 +5,7 @@ import { REGISTRATION_URLS_BY_STATE } from '@/components/app/userActionFormVoter
 import { Button } from '@/components/ui/button'
 import { uppercaseSectionHeader } from '@/components/ui/classUtils'
 import { InternalLinkWihSearchParamGoBack } from '@/components/ui/conditionalSearchParamGoBack/internalLinkWihSearchParamGoBack'
-import { ExternalLink, InternalLink } from '@/components/ui/link'
+import { ExternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { DTSI_StateSpecificInformationQuery } from '@/data/dtsi/generated'
 import { SupportedLocale } from '@/intl/locales'
