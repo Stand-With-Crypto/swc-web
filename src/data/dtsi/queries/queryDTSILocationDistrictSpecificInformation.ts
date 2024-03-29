@@ -24,7 +24,7 @@ export const query = /* GraphQL */ `
   }
   ${fragmentRaceSpecificPersonInfo}
 `
-export const queryDTSILocationStateSpecificInformation = async ({
+export const queryDTSILocationDistrictSpecificInformation = async ({
   stateCode,
   district,
 }: {

@@ -2,7 +2,7 @@ import { flatten, times } from 'lodash-es'
 import { Metadata } from 'next'
 
 import { LocationRaceSpecific } from '@/components/app/pageLocationRaceSpecific'
-import { queryDTSILocationStateSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationDistrictSpecificInformation'
+import { queryDTSILocationDistrictSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationDistrictSpecificInformation'
 import { PageProps } from '@/types'
 import { formatDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { toBool } from '@/utils/shared/toBool'
@@ -29,8 +29,8 @@ export async function generateMetadata({
   const district = zodNormalizedDTSIDistrictId.parse(params.district)
   const stateCode = zodUsaState.parse(params.stateCode.toUpperCase())
   const stateName = getUSStateNameFromStateCode(stateCode)
-  const title = `See where politicians in the ${formatDTSIDistrictId(district)} of ${stateName} stand on crypto`
-  const description = `We asked politicians in the ${formatDTSIDistrictId(district)} of ${stateName} for their thoughts on crypto. Here's what they said.`
+  const title = `See where politicians in the ${formatDTSIDistrictId(district)} district of ${stateName} stand on crypto`
+  const description = `We asked politicians in the ${formatDTSIDistrictId(district)} district of ${stateName} for their thoughts on crypto. Here's what they said.`
   return {
     title,
     description,
@@ -58,7 +58,7 @@ export default async function LocationDistrictSpecificPage({
   const district = zodNormalizedDTSIDistrictId.parse(params.district)
   const stateCode = zodUsaState.parse(params.stateCode.toUpperCase())
 
-  const data = await queryDTSILocationStateSpecificInformation({
+  const data = await queryDTSILocationDistrictSpecificInformation({
     stateCode,
     district,
   })

@@ -74,41 +74,39 @@ function _UserLocationRaceInfo({ groups, stateCode }: UserLocationRaceInfoProps)
   const { districtNumber } = res.data
   const group = groups.runningFor.congresspeople[districtNumber]
   return (
-    <>
-      <LocationSpecificRaceInfo
-        candidateSections={compact([
-          group?.incumbents.length
-            ? {
-                title: pluralize({
-                  count: group?.incumbents.length,
-                  singular: 'Incumbent',
-                  plural: 'Incumbents',
-                }),
-                people: group?.incumbents,
-              }
-            : null,
-          group?.candidates.length
-            ? {
-                title: pluralize({
-                  count: group?.candidates.length,
-                  singular: 'Candidate',
-                  plural: 'Candidates',
-                }),
-                people: group?.candidates,
-              }
-            : null,
-        ])}
-        subtitle={<span className="text-primary-cta">Your District</span>}
-        title={<>Congressional District {districtNumber}</>}
-        url={urls.locationDistrictSpecific({ stateCode, district: districtNumber })}
-      >
-        <p className="mb-3 text-sm text-fontcolor-muted">
-          Showing district for{' '}
-          <button className="font-bold text-fontcolor underline" onClick={() => setAddress(null)}>
-            {address.description}
-          </button>
-        </p>
-      </LocationSpecificRaceInfo>
-    </>
+    <LocationSpecificRaceInfo
+      candidateSections={compact([
+        group?.incumbents.length
+          ? {
+              title: pluralize({
+                count: group?.incumbents.length,
+                singular: 'Incumbent',
+                plural: 'Incumbents',
+              }),
+              people: group?.incumbents,
+            }
+          : null,
+        group?.candidates.length
+          ? {
+              title: pluralize({
+                count: group?.candidates.length,
+                singular: 'Candidate',
+                plural: 'Candidates',
+              }),
+              people: group?.candidates,
+            }
+          : null,
+      ])}
+      subtitle={<span className="text-primary-cta">Your District</span>}
+      title={<>Congressional District {districtNumber}</>}
+      url={urls.locationDistrictSpecific({ stateCode, district: districtNumber })}
+    >
+      <p className="mb-3 text-sm text-fontcolor-muted">
+        Showing district for{' '}
+        <button className="font-bold text-fontcolor underline" onClick={() => setAddress(null)}>
+          {address.description}
+        </button>
+      </p>
+    </LocationSpecificRaceInfo>
   )
 }
