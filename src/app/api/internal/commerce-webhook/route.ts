@@ -87,6 +87,7 @@ export async function POST(request: NextRequest) {
       paymentType: body.event.type,
       sessionId: body.event.data.metadata.sessionId,
       userId: body.event.data.metadata.userId,
+      email: body.event.data.metadata.email,
     })
 
     // Only store the payment request if the charge has been confirmed.
