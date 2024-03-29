@@ -24,15 +24,19 @@ import {
 } from '@/utils/dtsi/dtsiPersonUtils'
 import { dtsiTwitterAccountUrl } from '@/utils/dtsi/dtsiTwitterAccountUtils'
 import { cn } from '@/utils/web/cn'
+import { Questionnaire } from '@/utils/server/contentful/questionnaire'
+import { Entry } from 'contentful'
 
 const POLITICIAN_IMAGE_SIZE_PX = 230
 
 export function PagePoliticianDetails({
   person,
   locale,
+  questionnaire,
 }: {
   person: DTSIPersonDetails
   locale: SupportedLocale
+  questionnaire: Entry<Questionnaire, undefined>
 }) {
   const stances = orderBy(person.stances, x => -1 * new Date(x.dateStanceMade).getTime())
   return (
@@ -127,7 +131,11 @@ export function PagePoliticianDetails({
           SWC Candidate Questionnaire
         </PageTitle>
       </section>
-      <article className={cn('rounded-3xl bg-secondary p-4 md:p-6')}>Responses</article>
+      <article className={cn('rounded-3xl bg-secondary p-4 md:p-6')}>
+        Responses
+        {!questionnaire.fields && <div>No recent statements.</div>}
+        <div className="flex flex-col space-y-4">xxx</div>
+      </article>
       <section>
         <PageTitle as="h2" className="mb-4 text-left" size="sm">
           Notable statements

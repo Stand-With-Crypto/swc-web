@@ -8,6 +8,12 @@ const CONTENTFUL_API_URL = requiredOutsideLocalEnv(
   'all contentful related',
 )!
 
+const CONTENTFUL_ENVIRONMENT = requiredOutsideLocalEnv(
+  process.env.CONTENTFUL_ENVIRONMENT,
+  'CONTENTFUL_ENVIRONMENT',
+  'all contentful related',
+)!
+
 const CONTENTFUL_ACCESS_TOKEN = requiredOutsideLocalEnv(
   process.env.CONTENTFUL_ACCESS_TOKEN,
   'CONTENTFUL_ACCESS_TOKEN',
@@ -24,4 +30,5 @@ export const contentfulClient = createClient({
   accessToken: CONTENTFUL_ACCESS_TOKEN,
   space: CONTENTFUL_SPACE_ID,
   host: CONTENTFUL_API_URL,
+  environment: CONTENTFUL_ENVIRONMENT,
 })
