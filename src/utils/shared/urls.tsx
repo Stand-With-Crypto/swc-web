@@ -74,7 +74,7 @@ export const fullUrl = (path: string) => {
     case 'testing':
       return `https://testing.standwithcrypto.org${path}`
     case 'preview':
-      return `${NEXT_PUBLIC_VERCEL_URL!}${path}`
+      return `https://${NEXT_PUBLIC_VERCEL_URL!}${path}`
     case 'production':
       return `https://www.standwithcrypto.org${path}`
   }
