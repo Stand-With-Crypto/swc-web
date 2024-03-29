@@ -34,7 +34,7 @@ export const auditUsersTotalDonationAmountUsdInngest = inngest.createFunction(
     onFailure: onScriptFailure,
   },
   {
-    cron: '0 4 */2 * *', // Every 2 days at 4:00 AM UTC
+    cron: '0 4 */3 * *', // Every 3 days at 4:00 AM
   },
   async ({ step }) => {
     const usersCount = await step.run('get-users-count', async () => {
@@ -158,7 +158,7 @@ async function auditUsers(
       )
     }, 0)
     if (
-      // We round to 2 decimal places to avoid floating point errors and because we only care about cents.
+      // We round to 2 decimal places to avoid floating point false alarms and because we only care about cents.
       relevantUser.totalDonationAmountUsd.toNumber().toFixed(TWO_DECIMALS) !==
       totalDonationAmountUsd.toFixed(TWO_DECIMALS)
     ) {
