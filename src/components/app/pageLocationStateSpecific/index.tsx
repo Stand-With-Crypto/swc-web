@@ -4,6 +4,7 @@ import { UserLocationRaceInfo } from '@/components/app/pageLocationStateSpecific
 import { REGISTRATION_URLS_BY_STATE } from '@/components/app/userActionFormVoterRegistration/constants'
 import { Button } from '@/components/ui/button'
 import { uppercaseSectionHeader } from '@/components/ui/classUtils'
+import { InternalLinkWihSearchParamGoBack } from '@/components/ui/conditionalSearchParamGoBack/internalLinkWihSearchParamGoBack'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { DTSI_StateSpecificInformationQuery } from '@/data/dtsi/generated'
@@ -144,7 +145,7 @@ export function LocationStateSpecific({ stateCode, people, locale }: LocationSta
                     const district = districtIndex + 1
 
                     return (
-                      <InternalLink
+                      <InternalLinkWihSearchParamGoBack
                         className="block font-semibold"
                         href={urls.locationDistrictSpecific({
                           stateCode,
@@ -153,7 +154,7 @@ export function LocationStateSpecific({ stateCode, people, locale }: LocationSta
                         key={districtIndex}
                       >
                         District {district}
-                      </InternalLink>
+                      </InternalLinkWihSearchParamGoBack>
                     )
                   }),
                 )}
