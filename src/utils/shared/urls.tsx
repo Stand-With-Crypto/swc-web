@@ -3,6 +3,7 @@ import { DEFAULT_LOCALE, SupportedLocale } from '@/intl/locales'
 import { NormalizedDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
+import { USStateCode } from '@/utils/shared/usStateUtils'
 
 export const getIntlPrefix = (locale: SupportedLocale) =>
   // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
@@ -46,16 +47,17 @@ export const getIntlUrls = (
     politicianDetails: (dtsiSlug: string) => `${localePrefix}/politicians/person/${dtsiSlug}`,
     profile: () => `${localePrefix}/profile`,
     internalHomepage: () => `${localePrefix}/internal`,
-    locationStateSpecific: (stateCode: string) => `${localePrefix}/locations/us/state/${stateCode}`,
-    locationStateSpecificSenateRace: (stateCode: string) =>
-      `${localePrefix}/locations/us/state/${stateCode}/senate`,
+    locationStateSpecific: (stateCode: USStateCode) =>
+      `${localePrefix}/locations/us/state/${stateCode.toLowerCase()}`,
+    locationStateSpecificSenateRace: (stateCode: USStateCode) =>
+      `${localePrefix}/locations/us/state/${stateCode.toLowerCase()}/senate`,
     locationDistrictSpecific: ({
       stateCode,
       district,
     }: {
-      stateCode: string
+      stateCode: USStateCode
       district: NormalizedDTSIDistrictId
-    }) => `${localePrefix}/locations/us/state/${stateCode}/district/${district}`,
+    }) => `${localePrefix}/locations/us/state/${stateCode.toLowerCase()}/district/${district}`,
   }
 }
 
