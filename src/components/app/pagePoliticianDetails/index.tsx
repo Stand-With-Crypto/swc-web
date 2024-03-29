@@ -4,6 +4,7 @@ import { Globe } from 'lucide-react'
 import { DTSIStanceDetails } from '@/components/app/dtsiStanceDetails'
 import { ScoreExplainer } from '@/components/app/pagePoliticianDetails/scoreExplainer'
 import { Button } from '@/components/ui/button'
+import { ConditionalSearchParamGoBack } from '@/components/ui/conditionalSearchParamGoBack'
 import { MaybeNextImg, NextImage } from '@/components/ui/image'
 import { InitialsAvatar } from '@/components/ui/initialsAvatar'
 import { ExternalLink } from '@/components/ui/link'
@@ -36,7 +37,8 @@ export function PagePoliticianDetails({
 }) {
   const stances = orderBy(person.stances, x => -1 * new Date(x.dateStanceMade).getTime())
   return (
-    <div className="container max-w-3xl">
+    <div className="container relative max-w-3xl">
+      <ConditionalSearchParamGoBack className="text-left sm:text-center" />
       <section>
         {person.profilePictureUrl ? (
           <div

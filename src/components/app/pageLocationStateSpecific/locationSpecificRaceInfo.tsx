@@ -1,8 +1,8 @@
-import { DTSIPersonCardForLocation } from '@/components/app/dtsiPersonWithinRoleContext'
+import { DTSIPersonCardForLocation } from '@/components/app/pageLocationStateSpecific/dtsiPersonWithinRoleContext'
 import { FormattedPerson } from '@/components/app/pageLocationStateSpecific/types'
 import { Button } from '@/components/ui/button'
 import { uppercaseSectionHeader } from '@/components/ui/classUtils'
-import { InternalLink } from '@/components/ui/link'
+import { InternalLinkWihSearchParamGoBack } from '@/components/ui/conditionalSearchParamGoBack/internalLinkWihSearchParamGoBack'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { cn } from '@/utils/web/cn'
 
@@ -39,7 +39,9 @@ export function LocationSpecificRaceInfo({
         </div>
         <div className="hidden md:inline">
           <Button asChild variant="secondary">
-            <InternalLink href={url}>View race</InternalLink>
+            <InternalLinkWihSearchParamGoBack href={url}>
+              View race
+            </InternalLinkWihSearchParamGoBack>
           </Button>
         </div>
       </div>
@@ -53,7 +55,7 @@ export function LocationSpecificRaceInfo({
       ))}
       <div className="md:hidden">
         <Button asChild className="w-full" variant="secondary">
-          <InternalLink href={url}>View race</InternalLink>
+          <InternalLinkWihSearchParamGoBack href={url}>View race</InternalLinkWihSearchParamGoBack>
         </Button>
       </div>
       {children}

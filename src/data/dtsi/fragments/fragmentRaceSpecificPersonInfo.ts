@@ -12,6 +12,7 @@ export const fragmentRaceSpecificPersonInfo = /* GraphQL */ `
     profilePictureUrl
     profilePictureUrlDimensions
     promotedPositioning
+    stanceCount(verificationStatusIn: APPROVED)
     roles {
       id
       primaryDistrict

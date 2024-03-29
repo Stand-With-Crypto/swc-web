@@ -29,12 +29,12 @@ export function LocationStateSpecific({ stateCode, people, locale }: LocationSta
   const stateName = getUSStateNameFromStateCode(stateCode)
   return (
     <div className="container space-y-20">
-      <div className="text-center">
+      <div className="text-left sm:text-center">
         <h1 className={cn(uppercaseSectionHeader, 'mb-4')}>Crypto Voter Guide</h1>
-        <PageTitle as="h2" className="mb-6">
+        <PageTitle as="h2" className="mb-6 text-left sm:text-center" size="md">
           {stateName}
         </PageTitle>
-        <Button asChild>
+        <Button asChild className="w-full max-w-sm">
           <ExternalLink href={REGISTRATION_URLS_BY_STATE[stateCode].registerUrl}>
             Register to vote
           </ExternalLink>
@@ -145,7 +145,7 @@ export function LocationStateSpecific({ stateCode, people, locale }: LocationSta
 
                     return (
                       <InternalLink
-                        className="block"
+                        className="block font-semibold"
                         href={urls.locationDistrictSpecific({
                           stateCode,
                           district,

@@ -2,6 +2,8 @@ import { FormattedPerson } from '@/components/app/pageLocationRaceSpecific/types
 import { REGISTRATION_URLS_BY_STATE } from '@/components/app/userActionFormVoterRegistration/constants'
 import { Button } from '@/components/ui/button'
 import { uppercaseSectionHeader } from '@/components/ui/classUtils'
+import { ConditionalSearchParamGoBack } from '@/components/ui/conditionalSearchParamGoBack'
+import { InternalLinkWihSearchParamGoBack } from '@/components/ui/conditionalSearchParamGoBack/internalLinkWihSearchParamGoBack'
 import { MaybeNextImg } from '@/components/ui/image'
 import { InitialsAvatar } from '@/components/ui/initialsAvatar'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
@@ -14,7 +16,6 @@ import { SupportedLocale } from '@/intl/locales'
 import { NormalizedDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import {
   dtsiPersonFullName,
-  dtsiPersonPoliticalAffiliationCategoryDisplayName,
   getDTSIPersonProfilePictureUrlDimensions,
 } from '@/utils/dtsi/dtsiPersonUtils'
 import { formatStateSpecificDTSIPerson } from '@/utils/dtsi/stateSpecificDTSIPerson'
@@ -73,12 +74,16 @@ function organizeRaceSpecificPeople(
   return grouped
 }
 
-function CandidateInfo({ person, locale }: { person: FormattedPerson; locale: SupportedLocale }) {
+function CandidateInfo({
+  person,
+  locale,
+}: { person: FormattedPerson } & Pick<LocationRaceSpecificProps, 'locale'>) {
+  const urls = getIntlUrls(locale)
   return (
-    <div className="flex flex-col md:flex-row md:items-center md:gap-5">
+    <div className="flex flex-col sm:flex-row sm:items-center sm:gap-5">
       <div className="sm:w-[230px]">
         {person.profilePictureUrl ? (
-          <div className="mx-auto mb-6 overflow-hidden rounded-xl sm:max-w-[230px] md:mb-0">
+          <div className="mb-6 max-w-[230px] overflow-hidden rounded-xl sm:mb-0">
             <MaybeNextImg
               alt={`profile picture of ${dtsiPersonFullName(person)}`}
               sizes={`${230}px`}
@@ -88,7 +93,7 @@ function CandidateInfo({ person, locale }: { person: FormattedPerson; locale: Su
             />
           </div>
         ) : (
-          <div className="mx-auto mb-6 max-w-[100px] md:mb-0">
+          <div className="mx-auto mb-6 max-w-[100px] sm:mb-0">
             <InitialsAvatar
               firstInitial={(person.firstNickname || person.firstName).slice(0, 1)}
               lastInitial={person.lastName.slice(0, 1)}
@@ -101,16 +106,19 @@ function CandidateInfo({ person, locale }: { person: FormattedPerson; locale: Su
         <PageTitle as="h4" className="text-left" size="sm">
           {dtsiPersonFullName(person)}
         </PageTitle>
-        {person.politicalAffiliationCategory && (
-          <div className="mt-2 text-fontcolor-muted">
-            {dtsiPersonPoliticalAffiliationCategoryDisplayName(person.politicalAffiliationCategory)}
-          </div>
-        )}
+        <div className="mt-2 text-fontcolor-muted">
+          {person.stanceCount || 0} crypto{' '}
+          {pluralize({
+            singular: 'statement',
+            plural: 'statements',
+            count: person.stanceCount || 0,
+          })}
+        </div>
         <div className="mt-6">
           <Button asChild className="w-full" variant="secondary">
-            <InternalLink href={getIntlUrls(locale).politicianDetails(person.slug)}>
+            <InternalLinkWihSearchParamGoBack href={urls.politicianDetails(person.slug)}>
               View profile
-            </InternalLink>
+            </InternalLinkWihSearchParamGoBack>
           </Button>
         </div>
       </div>
@@ -127,23 +135,24 @@ export function LocationRaceSpecific({
   const urls = getIntlUrls(locale)
   const groups = organizeRaceSpecificPeople(people, { district })
   return (
-    <div className="container space-y-20">
-      <section className="text-center">
+    <div className="container max-w-sm space-y-20 sm:max-w-4xl">
+      <div className="relative text-left sm:text-center">
+        <ConditionalSearchParamGoBack />
         <h1 className={cn(uppercaseSectionHeader, 'mb-4')}>
           Crypto Voter Guide{' > '}
           <InternalLink href={urls.locationStateSpecific(stateCode)}>{stateCode}</InternalLink>
         </h1>
-        <PageTitle as="h2" className="mb-6">
+        <PageTitle as="h2" className="mb-6 text-left sm:text-center" size="md">
           {district
             ? `${stateCode} Congressional District ${district}`
             : `U.S. Senate (${stateCode})`}
         </PageTitle>
-        <Button asChild>
+        <Button asChild className="w-full max-w-sm">
           <ExternalLink href={REGISTRATION_URLS_BY_STATE[stateCode].registerUrl}>
             Register to vote
           </ExternalLink>
         </Button>
-      </section>
+      </div>
       <div className="divide-y-2 *:py-20 first:*:pt-0 last:*:pb-0">
         {!!groups.current.length && (
           <section className="mx-auto max-w-2xl space-y-5">
@@ -155,7 +164,7 @@ export function LocationRaceSpecific({
               })}
             </h3>
             {groups.current.map(person => (
-              <CandidateInfo key={person.id} locale={locale} person={person} />
+              <CandidateInfo key={person.id} {...{ locale, person }} />
             ))}
           </section>
         )}
@@ -169,7 +178,7 @@ export function LocationRaceSpecific({
               })}
             </h3>
             {groups.runningFor.map(person => (
-              <CandidateInfo key={person.id} locale={locale} person={person} />
+              <CandidateInfo key={person.id} {...{ locale, person }} />
             ))}
           </section>
         )}
