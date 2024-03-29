@@ -9,7 +9,6 @@ import { COMMUNITY_PAGINATION_DATA } from '@/components/app/pageLeaderboard/cons
 import { getENSDataMapFromCryptoAddressesAndFailGracefully } from '@/data/web3/getENSDataFromCryptoAddress'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { redis } from '@/utils/server/redis'
-import { getLogger } from '@/utils/shared/logger'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
@@ -18,10 +17,7 @@ export type SumDonationsByUserConfig = {
   offset?: number
 }
 
-const logger = getLogger('getSumDonationsByUser')
-
 async function getSumDonationsByUserQuery({ limit, offset }: SumDonationsByUserConfig) {
-  logger.info(`triggering directly without cache: limit=${limit}, offset=${offset || 'undefined'}`)
   const total: {
     id: string
     totalDonationAmountUsd: Decimal
@@ -42,7 +38,6 @@ async function getSumDonationsByUserQuery({ limit, offset }: SumDonationsByUserC
     take: limit,
     ...(offset ? { skip: offset } : {}),
   })
-  logger.info(`found ${total.length} users`)
   return total.map(({ id, totalDonationAmountUsd }) => ({
     userId: id,
     totalAmountUsd: totalDonationAmountUsd.toNumber(),
