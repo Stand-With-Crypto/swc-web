@@ -163,28 +163,29 @@ async function handleCapitolCanaryAdvocateUpsert(
 ) {
   // Send unsubscribe payload if the old email address or phone number has changed, or if the user removed their old email or phone number.
   if (
-    (oldUser.primaryUserEmailAddress !== null &&
-      oldUser.primaryUserEmailAddress.emailAddress !== primaryUserEmailAddress?.emailAddress) ||
-    oldUser.phoneNumber !== updatedUser.phoneNumber ||
-    (primaryUserEmailAddress === null && oldUser.primaryUserEmailAddress !== null) ||
-    (oldUser.phoneNumber && !updatedUser.phoneNumber)
+    (oldUser.primaryUserEmailAddress &&
+      (oldUser.primaryUserEmailAddress.emailAddress !== primaryUserEmailAddress?.emailAddress ||
+        !primaryUserEmailAddress)) ||
+    (oldUser.phoneNumber &&
+      (oldUser.phoneNumber !== updatedUser.phoneNumber || !updatedUser.phoneNumber))
   ) {
     const unsubscribePayload: UpsertAdvocateInCapitolCanaryPayloadRequirements = {
       campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
       user: {
-        ...updatedUser, // Always use new user information.
-        address: updatedUser.address, // Always use new user information.
+        ...updatedUser, // Use new user information EXCEPT for the phone number.
+        phoneNumber: oldUser.phoneNumber, // Using old phone number here.
+        address: updatedUser.address,
       },
       userEmailAddress: oldUser.primaryUserEmailAddress, // Using old email here.
       opts: {
-        isEmailOptout:
-          (oldUser.primaryUserEmailAddress?.emailAddress !== undefined &&
-            oldUser.primaryUserEmailAddress.emailAddress !==
-              primaryUserEmailAddress?.emailAddress) ||
-          primaryUserEmailAddress === null,
+        isEmailOptout: !!(
+          oldUser.primaryUserEmailAddress &&
+          (oldUser.primaryUserEmailAddress.emailAddress !== primaryUserEmailAddress?.emailAddress ||
+            !primaryUserEmailAddress)
+        ),
         isSmsOptout: !!(
-          oldUser.phoneNumber !== updatedUser.phoneNumber ||
-          (oldUser.phoneNumber && !updatedUser.phoneNumber)
+          oldUser.phoneNumber &&
+          (oldUser.phoneNumber !== updatedUser.phoneNumber || !updatedUser.phoneNumber)
         ),
       },
     }
@@ -213,10 +214,10 @@ async function handleCapitolCanaryAdvocateUpsert(
     const payload: UpsertAdvocateInCapitolCanaryPayloadRequirements = {
       campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
       user: {
-        ...updatedUser,
+        ...updatedUser, // Using new user information (including new phone number).
         address: updatedUser.address,
       },
-      userEmailAddress: primaryUserEmailAddress,
+      userEmailAddress: primaryUserEmailAddress, // Using new email here.
       opts: {
         isEmailOptin: true,
         isSmsOptin: hasOptedInToSms,

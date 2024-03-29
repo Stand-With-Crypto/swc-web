@@ -148,6 +148,7 @@ async function createUser(sharedDependencies: Pick<SharedDependencies, 'localUse
       hasOptedInToEmails: false,
       hasOptedInToMembership: false,
       hasOptedInToSms: false,
+      hasRepliedToOptInSms: false,
       referralId: generateReferralId(),
       ...mapLocalUserToUserDatabaseFields(localUser),
     },

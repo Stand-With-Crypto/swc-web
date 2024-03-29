@@ -446,6 +446,7 @@ async function createUser({ localUser }: { localUser: ServerLocalUser | null }) 
       hasOptedInToEmails: true,
       hasOptedInToMembership: false,
       hasOptedInToSms: false,
+      hasRepliedToOptInSms: false,
       referralId: generateReferralId(),
       ...mapLocalUserToUserDatabaseFields(localUser),
     },
