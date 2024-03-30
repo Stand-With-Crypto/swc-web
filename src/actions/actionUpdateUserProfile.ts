@@ -162,10 +162,12 @@ async function handleCapitolCanaryAdvocateUpsert(
   } & { userEmailAddresses: UserEmailAddress[] },
 ) {
   // Send unsubscribe payload if the old email address or phone number has changed, or if the user removed their old email or phone number.
+  // `hasChangedEmail` is true if an old email address exists and the new email address is different from the old email address.
   const hasChangedEmail =
     !!oldUser.primaryUserEmailAddress &&
     (!primaryUserEmailAddress ||
       oldUser.primaryUserEmailAddress.emailAddress !== primaryUserEmailAddress.emailAddress)
+  // `hasChangedPhone` is true if an old phone number exists and the new phone number is different from the old phone number.
   const hasChangedPhone =
     !!oldUser.phoneNumber &&
     (!updatedUser.phoneNumber || oldUser.phoneNumber !== updatedUser.phoneNumber)
