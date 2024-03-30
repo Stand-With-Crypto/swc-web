@@ -284,6 +284,7 @@ async function maybeUpsertUser({
       hasOptedInToEmails: true,
       hasOptedInToMembership: false,
       hasOptedInToSms: false,
+      hasRepliedToOptInSms: false,
       firstName,
       lastName,
       userEmailAddresses: {
