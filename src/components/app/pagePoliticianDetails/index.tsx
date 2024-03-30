@@ -24,8 +24,9 @@ import {
 } from '@/utils/dtsi/dtsiPersonUtils'
 import { dtsiTwitterAccountUrl } from '@/utils/dtsi/dtsiTwitterAccountUtils'
 import { cn } from '@/utils/web/cn'
-import { Questionnaire } from '@/utils/server/contentful/questionnaire'
+import { QuestionnaireEntrySkeleton } from '@/utils/server/contentful/questionnaire'
 import { Entry } from 'contentful'
+import React from 'react'
 
 const POLITICIAN_IMAGE_SIZE_PX = 230
 
@@ -36,7 +37,7 @@ export function PagePoliticianDetails({
 }: {
   person: DTSIPersonDetails
   locale: SupportedLocale
-  questionnaire: Entry<Questionnaire, undefined>
+  questionnaire: Entry<QuestionnaireEntrySkeleton, undefined> | null
 }) {
   const stances = orderBy(person.stances, x => -1 * new Date(x.dateStanceMade).getTime())
   return (
@@ -126,16 +127,109 @@ export function PagePoliticianDetails({
         </div>
         <ScoreExplainer person={person} />
       </section>
-      <section>
-        <PageTitle as="h2" className="mb-4 text-left" size="sm">
-          SWC Candidate Questionnaire
-        </PageTitle>
-      </section>
-      <article className={cn('rounded-3xl bg-secondary p-4 md:p-6')}>
-        Responses
-        {!questionnaire.fields && <div>No recent statements.</div>}
-        <div className="flex flex-col space-y-4">xxx</div>
-      </article>
+
+      {questionnaire && (
+        <div>
+          <section>
+            <PageTitle as="h2" className="mb-4 text-left" size="sm">
+              SWC Candidate Questionnaire
+            </PageTitle>
+          </section>
+          <article className="space-y-7 rounded-3xl bg-secondary p-4 md:p-6">
+            <p className="font-bold">Responses</p>
+            {questionnaire.fields.q1 !== undefined && (
+              <div>
+                <p>
+                  <span className="font-bold">Q: </span>Do you have experience buying, selling, or
+                  using blockchain technology assets or investment tools?
+                </p>
+                <p className="space-y-7 font-bold">A: {questionnaire.fields.q1 ? 'yes' : 'no'}</p>
+                <hr className="my-4 border" style={{ width: '100%' }} />
+              </div>
+            )}
+            {questionnaire.fields.q2 !== undefined && (
+              <div>
+                <p>
+                  <span className="font-bold">Q: </span>Do you believe blockchain technology and
+                  digital assets, including cryptocurrency like Bitcoin, will play a major role in
+                  the next wave of technological innovation globally?
+                </p>
+                <p className="space-y-7 font-bold">A: {questionnaire.fields.q2 ? 'yes' : 'no'}</p>
+                <hr className="my-4 border" style={{ width: '100%' }} />
+              </div>
+            )}
+            {questionnaire.fields.q3 !== undefined && (
+              <div>
+                <p>
+                  <span className="font-bold">Q: </span>Do you believe the American cryptocurrency
+                  and digital asset industry is driving economic growth and supporting millions of
+                  jobs across the country?
+                </p>
+                <p className="space-y-7 font-bold">A: {questionnaire.fields.q3 ? 'yes' : 'no'}</p>
+                <hr className="my-4 border" style={{ width: '100%' }} />
+              </div>
+            )}
+            {questionnaire.fields.q4 !== undefined && (
+              <div>
+                <p>
+                  <span className="font-bold">Q: </span>Do you believe US competitiveness and
+                  American national security are at risk if the digital asset industry is pushed
+                  overseas?
+                </p>
+                <p className="space-y-7 font-bold">A: {questionnaire.fields.q4 ? 'yes' : 'no'}</p>
+                <hr className="my-4 border" style={{ width: '100%' }} />
+              </div>
+            )}
+            {questionnaire.fields.q5 !== undefined && (
+              <div>
+                <p>
+                  <span className="font-bold">Q: </span>Do you believe it is important for the
+                  United States to modernize the regulatory environment for crypto and digital
+                  assets to ensure proper consumer protection while also fostering responsible
+                  innovation?
+                </p>
+                <p className="space-y-7 font-bold">A: {questionnaire.fields.q5 ? 'yes' : 'no'}</p>
+                <hr className="my-4 border" style={{ width: '100%' }} />
+              </div>
+            )}
+            {questionnaire.fields.q6 !== undefined && (
+              <div>
+                <p>
+                  <span className="font-bold">Q: </span>If you are currently a Member of Congress or
+                  are elected to Congress, would you vote in favor of legislation that creates a
+                  comprehensive regulatory framework for digital assets like HR 4763, the “Financial
+                  Innovation and Technology for the 21st Century Act”, a bipartisan bill?
+                </p>
+                <p className="space-y-7 font-bold">A: {questionnaire.fields.q6 ? 'yes' : 'no'}</p>
+                <hr className="my-4 border" style={{ width: '100%' }} />
+              </div>
+            )}
+            {questionnaire.fields.q7 !== undefined && (
+              <div>
+                <p>
+                  <span className="font-bold">Q: </span>If you are currently a Member of Congress or
+                  are elected to Congress, would you vote in favor of legislation to create clear
+                  rules for payment stablecoins (i.e., digital assets that are redeemable for U.S.
+                  dollars 1:1) like HR 4766, “Clarity for Payment Stablecoins Act of 2023”, a
+                  bipartisan bill?
+                </p>
+                <p className="space-y-7 font-bold">A: {questionnaire.fields.q7 ? 'yes' : 'no'}</p>
+                <hr className="my-4 border" style={{ width: '100%' }} />
+              </div>
+            )}
+            {questionnaire.fields.q8 !== undefined && (
+              <div>
+                <p>
+                  <span className="font-bold">Q: </span>Please share any other positions or opinions
+                  that you have on how crypto and digital assets should be regulated?
+                </p>
+                <p className="space-y-7 font-bold">A: {questionnaire.fields.q8}</p>
+                <hr className="my-4 border" style={{ width: '100%' }} />
+              </div>
+            )}
+          </article>
+        </div>
+      )}
       <section>
         <PageTitle as="h2" className="mb-4 text-left" size="sm">
           Notable statements

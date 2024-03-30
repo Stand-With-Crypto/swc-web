@@ -72,6 +72,6 @@ export default async function PoliticianDetails({ params }: Props) {
     notFound()
   }
   const questionnaire = await getQuestionnaire(params.dtsiSlug)
-  console.log(questionnaire.fields.questions)
+  console.log(questionnaire)
   return <PagePoliticianDetails {...{ person, locale, questionnaire }} />
 }

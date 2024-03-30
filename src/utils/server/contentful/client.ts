@@ -31,4 +31,5 @@ export const contentfulClient = createClient({
   space: CONTENTFUL_SPACE_ID,
   host: CONTENTFUL_API_URL,
   environment: CONTENTFUL_ENVIRONMENT,
+  retryOnError: false,
 })

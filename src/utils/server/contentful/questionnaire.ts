@@ -2,7 +2,7 @@ import { getLogger } from '@/utils/shared/logger'
 import { contentfulClient } from '@/utils/server/contentful/client'
 import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
 import * as Sentry from '@sentry/nextjs'
-import { Entry } from 'contentful'
+import { EntryFieldTypes } from 'contentful'
 
 const CONTENTFUL_QUESTIONNAIRE_ENTRY_ID = requiredOutsideLocalEnv(
   process.env.CONTENTFUL_QUESTIONNAIRE_ENTRY_ID,
@@ -10,35 +10,37 @@ const CONTENTFUL_QUESTIONNAIRE_ENTRY_ID = requiredOutsideLocalEnv(
   'all contentful related',
 )!
 
-export interface Questionnaire {
-  contentTypeId: string
+export type QuestionnaireEntrySkeleton = {
+  contentTypeId: 'swcQuestionnaire'
   fields: {
-    questions: Entry<Question>[]
-    header: string
-  }
-}
-
-export interface Question {
-  contentTypeId: string
-  fields: {
-    question: string
-    answers: Entry<Answer>
-  }
-}
-
-export interface Answer {
-  contentTypeId: string
-  fields: {
-    slug: string
-    answer: boolean
+    slug: EntryFieldTypes.Text
+    q1: EntryFieldTypes.Boolean
+    q2: EntryFieldTypes.Boolean
+    q3: EntryFieldTypes.Boolean
+    q4: EntryFieldTypes.Boolean
+    q5: EntryFieldTypes.Boolean
+    q6: EntryFieldTypes.Boolean
+    q7: EntryFieldTypes.Boolean
+    q8: EntryFieldTypes.Text
   }
 }
 
 const logger = getLogger(`contentfulQuestionnaire`)
 export async function getQuestionnaire(DTSISlug: string) {
   try {
-    const entry = await contentfulClient.getEntry<Questionnaire>(CONTENTFUL_QUESTIONNAIRE_ENTRY_ID)
-    return entry
+    // const entry = await contentfulClient.getEntry<QuestionnaireEntrySkeleton>(
+    //   CONTENTFUL_QUESTIONNAIRE_ENTRY_ID,
+    // )
+    const entries = await contentfulClient.getEntries<QuestionnaireEntrySkeleton>({
+      content_type: 'swcQuestionnaire',
+      'fields.slug': DTSISlug,
+    })
+    console.log(DTSISlug)
+    if (entries.total > 0) {
+      return entries.items[0]
+    } else {
+      return null
+    }
   } catch (e) {
     logger.error('error getting questionnaire entry:' + e)
     Sentry.captureException(e, {
@@ -46,6 +48,6 @@ export async function getQuestionnaire(DTSISlug: string) {
       tags: { domain: 'getQuestionnaire' },
       extra: { DTSISlug },
     })
-    throw e
+    return null
   }
 }
