@@ -162,13 +162,14 @@ async function handleCapitolCanaryAdvocateUpsert(
   } & { userEmailAddresses: UserEmailAddress[] },
 ) {
   // Send unsubscribe payload if the old email address or phone number has changed, or if the user removed their old email or phone number.
-  if (
-    (oldUser.primaryUserEmailAddress &&
-      (oldUser.primaryUserEmailAddress.emailAddress !== primaryUserEmailAddress?.emailAddress ||
-        !primaryUserEmailAddress)) ||
-    (oldUser.phoneNumber &&
-      (oldUser.phoneNumber !== updatedUser.phoneNumber || !updatedUser.phoneNumber))
-  ) {
+  const hasChangedEmail =
+    !!oldUser.primaryUserEmailAddress &&
+    (!primaryUserEmailAddress ||
+      oldUser.primaryUserEmailAddress.emailAddress !== primaryUserEmailAddress.emailAddress)
+  const hasChangedPhone =
+    !!oldUser.phoneNumber &&
+    (!updatedUser.phoneNumber || oldUser.phoneNumber !== updatedUser.phoneNumber)
+  if (hasChangedEmail || hasChangedPhone) {
     const unsubscribePayload: UpsertAdvocateInCapitolCanaryPayloadRequirements = {
       campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
       user: {
@@ -178,15 +179,8 @@ async function handleCapitolCanaryAdvocateUpsert(
       },
       userEmailAddress: oldUser.primaryUserEmailAddress, // Using old email here.
       opts: {
-        // Opt out if there is an old email address and either there is no new email address or the new email address is different.
-        isEmailOptout:
-          oldUser.primaryUserEmailAddress !== null &&
-          (!primaryUserEmailAddress ||
-            oldUser.primaryUserEmailAddress.emailAddress !== primaryUserEmailAddress.emailAddress),
-        // Opt out if there is an old phone number and either there is no new phone number or the new phone number is different.
-        isSmsOptout:
-          oldUser.phoneNumber !== '' &&
-          (!updatedUser.phoneNumber || oldUser.phoneNumber !== updatedUser.phoneNumber),
+        isEmailOptout: hasChangedEmail,
+        isSmsOptout: hasChangedPhone,
       },
     }
     await inngest.send({
