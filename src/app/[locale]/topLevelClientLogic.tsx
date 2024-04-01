@@ -78,6 +78,63 @@ export function TopLevelClientLogic({
   children: React.ReactNode
   locale: SupportedLocale
 }) {
+  if (typeof window !== 'undefined') {
+    console.log('Checking if localStorage is available')
+    const isLocalStorageAvailable = () => {
+      try {
+        const testKey = '__test__'
+        window.localStorage.setItem(testKey, testKey)
+        window.localStorage.removeItem(testKey)
+        return true
+      } catch (e) {
+        return false
+      }
+    }
+
+    if (isLocalStorageAvailable()) {
+      console.log('localStorage is available')
+      // Safely overriding localStorage methods
+      const originalGetItem = Storage.prototype.getItem
+      const originalSetItem = Storage.prototype.setItem
+      const originalRemoveItem = Storage.prototype.removeItem
+
+      Storage.prototype.getItem = function (key) {
+        try {
+          console.log('Getting item from localStorage:', key)
+          return originalGetItem.call(localStorage, key)
+        } catch (e) {
+          console.error('Failed to retrieve item from localStorage:', e)
+          return null // Fallback value or error handling
+        }
+      }
+
+      Storage.prototype.setItem = function (key, value) {
+        try {
+          console.log('Storing item in localStorage:', key, value)
+          originalSetItem.call(localStorage, key, value)
+        } catch (e) {
+          console.error('Failed to store item in localStorage:', e)
+          // Fallback or error handling
+        }
+      }
+
+      Storage.prototype.removeItem = function (key) {
+        try {
+          console.log('Removing item from localStorage:', key)
+          originalRemoveItem.call(localStorage, key)
+        } catch (e) {
+          console.error('Failed to remove item from localStorage:', e)
+          // Fallback or error handling
+        }
+      }
+    } else {
+      console.warn(
+        'localStorage is not available. Modifications to localStorage methods will be no-ops.',
+      )
+      // Here you could define no-op functions or implement a fallback storage solution.
+    }
+  }
+
   return (
     <LocaleContext.Provider value={locale}>
       <ThirdwebProvider
