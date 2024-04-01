@@ -73,15 +73,14 @@ export default function Layout({ children, params }: PageProps & { children: Rea
         {/* <NextTopLoader /> */}
         <Script id="localStorageOverride" strategy="beforeInteractive">
           {`
-            console.log('overriding localStorage methods')
-            console.log('localStorage:', localStorage)
+            console.log('Overriding localStorage methods')
             try {
               const clear = localStorage.clear
               const getItem = localStorage.getItem
               const key = localStorage.key
               const removeItem = localStorage.removeItem
               const setItem = localStorage.setItem
-          
+
               localStorage.clear = function () {
                 try {
                   clear.call(this)
@@ -89,7 +88,7 @@ export default function Layout({ children, params }: PageProps & { children: Rea
                   console.error('Failed to clear localStorage:', e)
                 }
               }
-          
+
               localStorage.getItem = function (keyString) {
                 try {
                   console.log('Getting item from localStorage:', keyString)
@@ -99,7 +98,7 @@ export default function Layout({ children, params }: PageProps & { children: Rea
                   return null
                 }
               }
-          
+
               localStorage.key = function (index) {
                 try {
                   console.log('Getting key from localStorage:', index)
@@ -109,7 +108,7 @@ export default function Layout({ children, params }: PageProps & { children: Rea
                   return null
                 }
               }
-          
+
               localStorage.removeItem = function (keyString) {
                 try {
                   console.log('Removing item from localStorage:', keyString)
@@ -118,7 +117,7 @@ export default function Layout({ children, params }: PageProps & { children: Rea
                   console.error('Failed to remove item from localStorage:', e)
                 }
               }
-          
+
               localStorage.setItem = function (keyString, value) {
                 try {
                   console.log('Storing item in localStorage:', keyString, value)
@@ -129,6 +128,15 @@ export default function Layout({ children, params }: PageProps & { children: Rea
               }
             } catch (e) {
               console.error('Failed to override localStorage methods:', e)
+              window.localStorage = {
+                getItem: () => null,
+                setItem: () => {},
+                removeItem: () => {},
+                clear: () => {},
+                key: () => null,
+                length: 0,
+              }
+              console.log('Initialized no-op localStorage')
             }
           `}
         </Script>
