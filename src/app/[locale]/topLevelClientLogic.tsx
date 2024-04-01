@@ -84,9 +84,20 @@ export function TopLevelClientLogic({
 
     // Cannot override `window.localStorage` methods directly because it is read-only.
 
+    const originalClear = Storage.prototype.clear
     const originalGetItem = Storage.prototype.getItem
+    const originalKey = Storage.prototype.key
     const originalSetItem = Storage.prototype.setItem
     const originalRemoveItem = Storage.prototype.removeItem
+
+    Storage.prototype.clear = function () {
+      try {
+        console.log('Clearing localStorage')
+        originalClear.call(localStorage)
+      } catch (e) {
+        console.error('Failed to clear localStorage:', e)
+      }
+    }
 
     Storage.prototype.getItem = function (key) {
       try {
@@ -95,6 +106,25 @@ export function TopLevelClientLogic({
       } catch (e) {
         console.error('Failed to retrieve item from localStorage:', e)
         return null
+      }
+    }
+
+    Storage.prototype.key = function (index) {
+      try {
+        console.log('Getting key from localStorage:', index)
+        return originalKey.call(localStorage, index)
+      } catch (e) {
+        console.error('Failed to retrieve key from localStorage:', e)
+        return null
+      }
+    }
+
+    Storage.prototype.removeItem = function (key) {
+      try {
+        console.log('Removing item from localStorage:', key)
+        originalRemoveItem.call(localStorage, key)
+      } catch (e) {
+        console.error('Failed to remove item from localStorage:', e)
       }
     }
 
@@ -107,14 +137,11 @@ export function TopLevelClientLogic({
       }
     }
 
-    Storage.prototype.removeItem = function (key) {
-      try {
-        console.log('Removing item from localStorage:', key)
-        originalRemoveItem.call(localStorage, key)
-      } catch (e) {
-        console.error('Failed to remove item from localStorage:', e)
-      }
-    }
+    localStorage.clear = Storage.prototype.clear
+    localStorage.getItem = Storage.prototype.getItem
+    localStorage.key = Storage.prototype.key
+    localStorage.removeItem = Storage.prototype.removeItem
+    localStorage.setItem = Storage.prototype.setItem
   }
 
   return (
