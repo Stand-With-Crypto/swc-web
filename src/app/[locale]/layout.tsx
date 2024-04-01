@@ -65,11 +65,50 @@ export default function Layout({ children, params }: PageProps & { children: Rea
   if (!ORDERED_SUPPORTED_LOCALES.includes(locale)) {
     notFound()
   }
+
   return (
     <html lang={locale}>
       <body className={fontClassName}>
         {/* LATER-TASK add back once https://github.com/TheSGJ/nextjs-toploader/issues/66 is resolved */}
         {/* <NextTopLoader /> */}
+        <script>
+          {`
+            const originalLocalStorage = window.localStorage
+            const wrappedLocalStorage = {
+              getItem: function (key: string) {
+                try {
+                  return originalLocalStorage.getItem(key)
+                } catch (error) {
+                  return null
+                }
+              },
+              setItem: function (key: string, value: string) {
+                try {
+                  originalLocalStorage.setItem(key, value)
+                } catch (error) {}
+              },
+              removeItem: function (key: string) {
+                try {
+                  originalLocalStorage.removeItem(key)
+                } catch (error) {}
+              },
+              clear: function () {
+                try {
+                  originalLocalStorage.clear()
+                } catch (error) {}
+              },
+              length: originalLocalStorage.length,
+              key: function (index: number) {
+                try {
+                  return originalLocalStorage.key(index)
+                } catch (error) {
+                  return null
+                }
+              },
+            }
+            window.localStorage = wrappedLocalStorage
+          `}
+        </script>
         <TopLevelClientLogic locale={locale}>
           <FullHeight.Container>
             <Navbar locale={locale} />
