@@ -168,9 +168,11 @@ async function handleCapitolCanaryAdvocateUpsert(
     (!primaryUserEmailAddress ||
       oldUser.primaryUserEmailAddress.emailAddress !== primaryUserEmailAddress.emailAddress)
   // `hasChangedPhone` is true if an old phone number exists and the new phone number is different from the old phone number.
+  // However, we only want to explicitly opt-out if the old number was opted in to work around Capitol Canary limitations.
   const hasChangedPhone =
     !!oldUser.phoneNumber &&
-    (!updatedUser.phoneNumber || oldUser.phoneNumber !== updatedUser.phoneNumber)
+    (!updatedUser.phoneNumber || oldUser.phoneNumber !== updatedUser.phoneNumber) &&
+    oldUser.hasOptedInToSms
   if (hasChangedEmail || hasChangedPhone) {
     const unsubscribePayload: UpsertAdvocateInCapitolCanaryPayloadRequirements = {
       campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
