@@ -1,6 +1,7 @@
 import { noop } from 'lodash-es'
 
 import { DTSICongresspersonAssociatedWithFormAddress } from '@/components/app/dtsiCongresspersonAssociatedWithFormAddress'
+import { EMAIL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormEmailCongressperson/constants'
 import { getDefaultText } from '@/components/app/userActionFormEmailCongressperson/getDefaultText'
 import { Button } from '@/components/ui/button'
 import { FormItemSkeleton } from '@/components/ui/form'
@@ -13,8 +14,15 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import { Textarea } from '@/components/ui/textarea'
 import { SupportedLocale } from '@/intl/locales'
 import { getIntlUrls } from '@/utils/shared/urls'
+import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory'
 
-export function UserActionFormEmailCongresspersonSkeleton({ locale }: { locale: SupportedLocale }) {
+export function UserActionFormEmailCongresspersonSkeleton({
+  locale,
+  politicianCategory = EMAIL_FLOW_POLITICIANS_CATEGORY,
+}: {
+  locale: SupportedLocale
+  politicianCategory?: YourPoliticianCategory
+}) {
   const urls = getIntlUrls(locale)
   return (
     <form className="flex max-h-dvh flex-col">
@@ -50,16 +58,12 @@ export function UserActionFormEmailCongresspersonSkeleton({ locale }: { locale: 
           <FormItemSkeleton>
             <Textarea defaultValue={getDefaultText()} placeholder="Your message..." rows={10} />
           </FormItemSkeleton>
-          <div>
-            <p className="text-xs text-fontcolor-muted">
-              By submitting, I understand that Stand With Crypto and its vendors may collect and use
-              my Personal Information. To learn more, visit the Stand With Crypto Alliance{' '}
-              <InternalLink href={urls.privacyPolicy()}>Privacy Policy</InternalLink> and{' '}
-              <ExternalLink href={'https://www.quorum.us/static/Privacy-Policy.pdf'}>
-                Quorum Privacy Policy
-              </ExternalLink>
-              .
-            </p>
+          <div className="w-full">
+            <DTSICongresspersonAssociatedWithFormAddress
+              currentDTSISlugValue={[]}
+              onChangeDTSISlug={noop}
+              politicianCategory={politicianCategory}
+            />
           </div>
         </div>
       </ScrollArea>
@@ -67,11 +71,16 @@ export function UserActionFormEmailCongresspersonSkeleton({ locale }: { locale: 
         className="z-10 flex flex-1 flex-col items-center justify-between gap-4 border border-t p-6 sm:flex-row md:px-12"
         style={{ boxShadow: 'rgba(0, 0, 0, 0.2) 0px 1px 6px 0px' }}
       >
-        <div className="w-full">
-          <DTSICongresspersonAssociatedWithFormAddress
-            currentDTSISlugValue={''}
-            onChangeDTSISlug={noop}
-          />
+        <div>
+          <p className="text-xs text-fontcolor-muted">
+            By submitting, I understand that Stand With Crypto and its vendors may collect and use
+            my Personal Information. To learn more, visit the Stand With Crypto Alliance{' '}
+            <InternalLink href={urls.privacyPolicy()}>Privacy Policy</InternalLink> and{' '}
+            <ExternalLink href={'https://www.quorum.us/static/Privacy-Policy.pdf'}>
+              Quorum Privacy Policy
+            </ExternalLink>
+            .
+          </p>
         </div>
 
         <div className="w-full sm:w-auto">

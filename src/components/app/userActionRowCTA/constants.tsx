@@ -40,7 +40,7 @@ export const USER_ACTION_ROW_CTA_INFO: Record<
   [UserActionType.CALL]: {
     actionType: UserActionType.CALL,
     image: '/actionTypeIcons/call.png',
-    text: 'Call your Congressperson',
+    text: 'Call your politician',
     subtext: 'The most effective way to make your voice heard.',
     canBeTriggeredMultipleTimes: true,
     WrapperComponent: UserActionFormCallCongresspersonDialog,
@@ -48,7 +48,7 @@ export const USER_ACTION_ROW_CTA_INFO: Record<
   [UserActionType.EMAIL]: {
     actionType: UserActionType.EMAIL,
     image: '/actionTypeIcons/email.png',
-    text: 'Email your Congressperson',
+    text: 'Email your politician',
     subtext: 'We drafted an email for you. All you have to do is hit send.',
     canBeTriggeredMultipleTimes: true,
     WrapperComponent: UserActionFormEmailCongresspersonDialog,
