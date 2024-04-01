@@ -1,6 +1,6 @@
 import { expect, it } from '@jest/globals'
 
-import { orderSenatorsByImportanceForOutreach } from './orderSenatorsByImportanceForOutreach'
+import { orderSenatorsByImportanceForOutreach } from '@/utils/shared/orderSenatorsByImportanceForOutreach'
 
 it('correctly orders list', () => {
   const results = [
@@ -12,8 +12,8 @@ it('correctly orders list', () => {
     'not---in-priority-list-2',
   ]
   expect(
-  orderSenatorsByImportanceForOutreach(results.map((slug) => ({ slug }))).map(({ slug }) => slug)
-).toMatchInlineSnapshot(`
+    orderSenatorsByImportanceForOutreach(results.map(slug => ({ slug }))).map(({ slug }) => slug),
+  ).toMatchInlineSnapshot(`
 [
   "tim---scott",
   "sherrod---brown",

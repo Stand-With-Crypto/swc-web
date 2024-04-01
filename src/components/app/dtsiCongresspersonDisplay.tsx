@@ -1,7 +1,7 @@
 'use client'
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
-import { DTSI_Person, DTSI_PersonRole, DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
+import { DTSI_PersonRole, DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
 import {
   formatGetDTSIPeopleFromAddressNotFoundReason,
   UseGetDTSIPeopleFromAddressResponse,

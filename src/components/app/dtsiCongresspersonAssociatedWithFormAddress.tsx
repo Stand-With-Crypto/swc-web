@@ -3,7 +3,6 @@ import { useEffect } from 'react'
 import { z } from 'zod'
 
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
-import { getRoleOptionDisplayName } from '@/components/app/dtsiClientPersonDataTable/globalFiltersUtils'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { Skeleton } from '@/components/ui/skeleton'
 import {
@@ -12,7 +11,6 @@ import {
 } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { getDTSIPersonRoleCategoryDisplayName } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
-import { convertDTSIStanceScoreToCryptoSupportLanguageSentence } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
 import {
   getYourPoliticianCategoryDisplayName,
