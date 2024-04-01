@@ -74,6 +74,7 @@ export default function Layout({ children, params }: PageProps & { children: Rea
         <Script id="localStorageOverride" strategy="beforeInteractive">
           {`
             console.log('overriding localStorage methods')
+            console.log('localStorage:', localStorage)
             try {
               const clear = localStorage.clear
               const getItem = localStorage.getItem
