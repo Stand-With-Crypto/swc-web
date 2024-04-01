@@ -78,69 +78,63 @@ export function TopLevelClientLogic({
   children: React.ReactNode
   locale: SupportedLocale
 }) {
-  // console.log('TopLevelClientLogic')
-  // if (false) {
-  // console.log('overriding localStorage methods')
+  console.log('TopLevelClientLogic')
 
-  // const originalClear = Storage.prototype.clear
-  // const originalGetItem = Storage.prototype.getItem
-  // const originalKey = Storage.prototype.key
-  // const originalSetItem = Storage.prototype.setItem
-  // const originalRemoveItem = Storage.prototype.removeItem
+  try {
+    const clear = localStorage.clear
+    const getItem = localStorage.getItem
+    const key = localStorage.key
+    const removeItem = localStorage.removeItem
+    const setItem = localStorage.setItem
 
-  // Storage.prototype.clear = function () {
-  //   try {
-  //     console.log('Clearing localStorage')
-  //     originalClear.call(localStorage)
-  //   } catch (e) {
-  //     console.error('Failed to clear localStorage:', e)
-  //   }
-  // }
+    localStorage.clear = function () {
+      try {
+        clear.call(this)
+      } catch (e) {
+        console.error('Failed to clear localStorage:', e)
+      }
+    }
 
-  // Storage.prototype.getItem = function (key) {
-  //   try {
-  //     console.log('Getting item from localStorage:', key)
-  //     return originalGetItem.call(localStorage, key)
-  //   } catch (e) {
-  //     console.error('Failed to retrieve item from localStorage:', e)
-  //     return null
-  //   }
-  // }
+    localStorage.getItem = function (keyString) {
+      try {
+        console.log('Getting item from localStorage:', keyString)
+        return getItem.call(this, keyString)
+      } catch (e) {
+        console.error('Failed to retrieve item from localStorage:', e)
+        return null
+      }
+    }
 
-  // Storage.prototype.key = function (index) {
-  //   try {
-  //     console.log('Getting key from localStorage:', index)
-  //     return originalKey.call(localStorage, index)
-  //   } catch (e) {
-  //     console.error('Failed to retrieve key from localStorage:', e)
-  //     return null
-  //   }
-  // }
+    localStorage.key = function (index) {
+      try {
+        console.log('Getting key from localStorage:', index)
+        return key.call(this, index)
+      } catch (e) {
+        console.error('Failed to retrieve key from localStorage:', e)
+        return null
+      }
+    }
 
-  // Storage.prototype.removeItem = function (key) {
-  //   try {
-  //     console.log('Removing item from localStorage:', key)
-  //     originalRemoveItem.call(localStorage, key)
-  //   } catch (e) {
-  //     console.error('Failed to remove item from localStorage:', e)
-  //   }
-  // }
+    localStorage.removeItem = function (keyString) {
+      try {
+        console.log('Removing item from localStorage:', keyString)
+        removeItem.call(this, keyString)
+      } catch (e) {
+        console.error('Failed to remove item from localStorage:', e)
+      }
+    }
 
-  // Storage.prototype.setItem = function (key, value) {
-  //   try {
-  //     console.log('Storing item in localStorage:', key, value)
-  //     originalSetItem.call(localStorage, key, value)
-  //   } catch (e) {
-  //     console.error('Failed to store item in localStorage:', e)
-  //   }
-  // }
-
-  // localStorage.clear = Storage.prototype.clear
-  // localStorage.getItem = Storage.prototype.getItem
-  // localStorage.key = Storage.prototype.key
-  // localStorage.removeItem = Storage.prototype.removeItem
-  // localStorage.setItem = Storage.prototype.setItem
-  // }
+    localStorage.setItem = function (keyString, value) {
+      try {
+        console.log('Storing item in localStorage:', keyString, value)
+        setItem.call(this, keyString, value)
+      } catch (e) {
+        console.error('Failed to store item in localStorage:', e)
+      }
+    }
+  } catch (e) {
+    console.error('Failed to override localStorage methods:', e)
+  }
 
   return (
     <LocaleContext.Provider value={locale}>
