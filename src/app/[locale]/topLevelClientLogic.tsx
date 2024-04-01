@@ -78,7 +78,7 @@ export function TopLevelClientLogic({
   children: React.ReactNode
   locale: SupportedLocale
 }) {
-  console.log('TopLevelClientLogic')
+  // console.log('TopLevelClientLogic')
   // if (false) {
   // console.log('overriding localStorage methods')
 
