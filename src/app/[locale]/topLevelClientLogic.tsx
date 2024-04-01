@@ -82,8 +82,6 @@ export function TopLevelClientLogic({
   if (typeof window !== 'undefined') {
     console.log('overriding localStorage methods')
 
-    // Cannot override `window.localStorage` methods directly because it is read-only.
-
     const originalClear = Storage.prototype.clear
     const originalGetItem = Storage.prototype.getItem
     const originalKey = Storage.prototype.key
