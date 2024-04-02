@@ -14,6 +14,7 @@ import { GooglePlacesSelect, GooglePlacesSelectProps } from '@/components/ui/goo
 import { useMutableCurrentUserAddress } from '@/hooks/useCurrentUserAddress'
 import { useGetDistrictFromAddress } from '@/hooks/useGetDistrictFromAddress'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
+import { SupportedLocale } from '@/intl/locales'
 import { formatGetCongressionalDistrictFromAddressNotFoundReason } from '@/utils/shared/getCongressionalDistrictFromAddress'
 import { pluralize } from '@/utils/shared/pluralize'
 import { USStateCode } from '@/utils/shared/usStateUtils'
@@ -22,6 +23,7 @@ import { cn } from '@/utils/web/cn'
 type UserLocationRaceInfoProps = {
   groups: ReturnType<typeof organizeStateSpecificPeople>
   stateCode: USStateCode
+  locale: SupportedLocale
 }
 
 function DefaultPlacesSelect(props: Pick<GooglePlacesSelectProps, 'onChange' | 'value'>) {
@@ -97,6 +99,7 @@ function _UserLocationRaceInfo({ groups, stateCode }: UserLocationRaceInfoProps)
             }
           : null,
       ])}
+      locale={locale}
       subtitle={<span className="text-primary-cta">Your District</span>}
       title={<>Congressional District {districtNumber}</>}
       url={urls.locationDistrictSpecific({ stateCode, district: districtNumber })}

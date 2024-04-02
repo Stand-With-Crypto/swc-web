@@ -131,7 +131,7 @@ export async function getCongressionalDistrictFromAddress(
 export function formatGetCongressionalDistrictFromAddressNotFoundReason(
   data: Exclude<CongressionalDistrictFromAddress, { stateCode: string }> | undefined | null,
 ) {
-  const defaultError = "We can't find your district right now, we're working on a fix"
+  const defaultError = "We can't find your district right now, we're working on a fix."
   if (!data || !('notFoundReason' in data)) {
     return defaultError
   }

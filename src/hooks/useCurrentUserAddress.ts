@@ -41,7 +41,6 @@ function useCurrentUserAddress() {
   if (searchParamAddressData === 'loading' || user.isLoading || !hasHydrated) {
     return 'loading' as const
   }
-  // console.log({ searchParamAddressData, persistedUserAddress, localUserAddress })
   const address = searchParamAddressData || persistedUserAddress || localUserAddress || null
   return address
 }

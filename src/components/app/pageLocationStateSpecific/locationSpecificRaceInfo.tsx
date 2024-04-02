@@ -4,13 +4,14 @@ import { Button } from '@/components/ui/button'
 import { uppercaseSectionHeader } from '@/components/ui/classUtils'
 import { InternalLinkWihSearchParamGoBack } from '@/components/ui/conditionalSearchParamGoBack/internalLinkWihSearchParamGoBack'
 import { PageTitle } from '@/components/ui/pageTitleText'
+import { SupportedLocale } from '@/intl/locales'
 import { cn } from '@/utils/web/cn'
 
 export function LocationSpecificRaceInfoContainer({ children }: { children: React.ReactNode }) {
   return (
     // div ensures the spacing divider is full width
     <div>
-      <section className="mx-auto max-w-2xl space-y-10">{children}</section>
+      <section className="space-y-10">{children}</section>
     </div>
   )
 }
@@ -21,7 +22,9 @@ export function LocationSpecificRaceInfo({
   url,
   candidateSections,
   children,
+  locale,
 }: {
+  locale: SupportedLocale
   subtitle: React.ReactNode
   title: React.ReactNode
   children?: React.ReactNode
@@ -49,7 +52,7 @@ export function LocationSpecificRaceInfo({
         <div className="space-y-5" key={section.title}>
           <h4 className={uppercaseSectionHeader}>{section.title}</h4>
           {section.people.map(person => (
-            <DTSIPersonCardForLocation key={person.id} person={person} />
+            <DTSIPersonCardForLocation key={person.id} locale={locale} person={person} />
           ))}
         </div>
       ))}

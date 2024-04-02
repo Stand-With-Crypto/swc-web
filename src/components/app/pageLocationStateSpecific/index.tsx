@@ -5,8 +5,8 @@ import { REGISTRATION_URLS_BY_STATE } from '@/components/app/userActionFormVoter
 import { Button } from '@/components/ui/button'
 import { uppercaseSectionHeader } from '@/components/ui/classUtils'
 import { InternalLinkWihSearchParamGoBack } from '@/components/ui/conditionalSearchParamGoBack/internalLinkWihSearchParamGoBack'
-import { ExternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
+import { TrackedExternalLink } from '@/components/ui/trackedExternalLink'
 import { DTSI_StateSpecificInformationQuery } from '@/data/dtsi/generated'
 import { SupportedLocale } from '@/intl/locales'
 import { US_LOCATION_PAGES_LIVE_KEY_DISTRICTS_MAP } from '@/utils/shared/locationSpecificPages'
@@ -28,17 +28,31 @@ export function LocationStateSpecific({ stateCode, people, locale }: LocationSta
   const groups = organizeStateSpecificPeople(people)
   const urls = getIntlUrls(locale)
   const stateName = getUSStateNameFromStateCode(stateCode)
+  const otherDistricts = compact(
+    times(US_STATE_CODE_TO_DISTRICT_COUNT_MAP[stateCode]).map(districtIndex => {
+      const district = districtIndex + 1
+      if (US_LOCATION_PAGES_LIVE_KEY_DISTRICTS_MAP[stateCode]?.includes(district)) {
+        return null
+      }
+      return district
+    }),
+  )
   return (
     <div className="container space-y-20">
-      <div className="text-left sm:text-center">
-        <h1 className={cn(uppercaseSectionHeader, 'mb-4')}>Crypto Voter Guide</h1>
-        <PageTitle as="h2" className="mb-6 text-left sm:text-center" size="md">
-          {stateName}
-        </PageTitle>
-        <Button asChild className="w-full max-w-sm">
-          <ExternalLink href={REGISTRATION_URLS_BY_STATE[stateCode].registerUrl}>
+      <div className="flex flex-col text-left sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <h1 className={cn(uppercaseSectionHeader, 'mb-4')}>Crypto Voter Guide</h1>
+          <PageTitle as="h2" className="mb-6 text-left sm:text-center" size="md">
+            {stateName}
+          </PageTitle>
+        </div>
+        <Button asChild className="w-full max-w-sm sm:w-fit">
+          <TrackedExternalLink
+            eventProperties={{ Category: 'Register To Vote' }}
+            href={REGISTRATION_URLS_BY_STATE[stateCode].registerUrl}
+          >
             Register to vote
-          </ExternalLink>
+          </TrackedExternalLink>
         </Button>
       </div>
       <div className="divide-y-2 *:py-20 first:*:pt-0 last:*:pb-0">
@@ -67,6 +81,7 @@ export function LocationStateSpecific({ stateCode, people, locale }: LocationSta
                   }
                 : null,
             ])}
+            locale={locale}
             subtitle="Key Race"
             title={<>U.S Senate ({stateCode})</>}
             url={urls.locationStateSpecificSenateRace(stateCode)}
@@ -98,12 +113,13 @@ export function LocationStateSpecific({ stateCode, people, locale }: LocationSta
                   }
                 : null,
             ])}
+            locale={locale}
             subtitle="Congressional Race"
             title={<>At-Large District</>}
             url={urls.locationDistrictSpecific({ stateCode, district: 'at-large' })}
           />
         ) : (
-          <UserLocationRaceInfo groups={groups} stateCode={stateCode} />
+          <UserLocationRaceInfo groups={groups} locale={locale} stateCode={stateCode} />
         )}
         {US_LOCATION_PAGES_LIVE_KEY_DISTRICTS_MAP[stateCode]?.map(district => (
           <LocationSpecificRaceInfo
@@ -130,6 +146,7 @@ export function LocationStateSpecific({ stateCode, people, locale }: LocationSta
                 : null,
             ])}
             key={district}
+            locale={locale}
             subtitle="Key Race"
             title={<>Congressional District {district}</>}
             url={urls.locationDistrictSpecific({ stateCode, district })}
@@ -137,27 +154,21 @@ export function LocationStateSpecific({ stateCode, people, locale }: LocationSta
         ))}
         {US_STATE_CODE_TO_DISTRICT_COUNT_MAP[stateCode] > 1 && (
           <div>
-            <section className="mx-auto max-w-2xl space-y-10">
+            <section className="space-y-10">
               <h3 className={cn(uppercaseSectionHeader, 'mb-3')}>Other races in {stateName}</h3>
-              <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
-                {compact(
-                  times(US_STATE_CODE_TO_DISTRICT_COUNT_MAP[stateCode]).map(districtIndex => {
-                    const district = districtIndex + 1
-
-                    return (
-                      <InternalLinkWihSearchParamGoBack
-                        className="block font-semibold"
-                        href={urls.locationDistrictSpecific({
-                          stateCode,
-                          district,
-                        })}
-                        key={districtIndex}
-                      >
-                        District {district}
-                      </InternalLinkWihSearchParamGoBack>
-                    )
-                  }),
-                )}
+              <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
+                {otherDistricts.map(district => (
+                  <InternalLinkWihSearchParamGoBack
+                    className={cn('mb-4 block w-1/3 flex-shrink-0 font-semibold')}
+                    href={urls.locationDistrictSpecific({
+                      stateCode,
+                      district,
+                    })}
+                    key={district}
+                  >
+                    District {district}
+                  </InternalLinkWihSearchParamGoBack>
+                ))}
               </div>
             </section>
           </div>
