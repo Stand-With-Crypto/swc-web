@@ -22,16 +22,19 @@ async function getDTSIPeopleFromCongressionalDistrict(result: CongressionalDistr
 
   const data = await fetchReq(apiUrls.dtsiPeopleByCongressionalDistrict(result))
     .then(res => res.json())
+    .then(data => data as DTSIPeopleByCongressionalDistrictQueryResult)
     .catch(e => {
       catchUnexpectedServerErrorAndTriggerToast(e)
       return { notFoundReason: 'UNEXPECTED_ERROR' as const }
     })
-
+  if ('notFoundReason' in data) {
+    return data
+  }
   if (!data) {
     return { notFoundReason: 'MISSING_FROM_DTSI' as const }
   }
 
-  const dtsiPerson = data as DTSIPeopleByCongressionalDistrictQueryResult
+  const dtsiPerson = data
   return { ...result, dtsiPerson } as DTSIPeopleFromCongressionalDistrict
 }
 
