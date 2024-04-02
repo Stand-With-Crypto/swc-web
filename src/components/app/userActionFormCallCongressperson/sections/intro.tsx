@@ -30,7 +30,7 @@ export function IntroStaticContent({ children }: React.PropsWithChildren) {
     <UserActionFormLayout>
       <UserActionFormLayout.Container>
         <UserActionFormLayout.Heading
-          subtitle={`Call your ${getYourPoliticianCategoryDisplayName(CALL_FLOW_POLITICIANS_CATEGORY)} and tell them to vote YES on the FIT21 bill.`}
+          subtitle={`Call your ${getYourPoliticianCategoryDisplayName(CALL_FLOW_POLITICIANS_CATEGORY, { maxCount: 1 })} and tell them to vote YES on the FIT21 bill.`}
           title="It's time to fight to keep crypto in America"
         />
         <div className="space-y-2">
@@ -42,8 +42,11 @@ export function IntroStaticContent({ children }: React.PropsWithChildren) {
             </ChecklistItem>
             <ChecklistItem>It won't pass without your help</ChecklistItem>
             <ChecklistItem>
-              Calling your {getYourPoliticianCategoryDisplayName(CALL_FLOW_POLITICIANS_CATEGORY)} is
-              the most effective action you can take
+              Calling your{' '}
+              {getYourPoliticianCategoryDisplayName(CALL_FLOW_POLITICIANS_CATEGORY, {
+                maxCount: 1,
+              })}{' '}
+              is the most effective action you can take
             </ChecklistItem>
           </ul>
         </div>

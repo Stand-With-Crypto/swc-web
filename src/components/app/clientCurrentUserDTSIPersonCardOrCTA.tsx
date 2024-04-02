@@ -5,7 +5,6 @@ import { useSearchParams } from 'next/navigation'
 
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
-import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
 import { Button } from '@/components/ui/button'
 import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { InternalLink } from '@/components/ui/link'
@@ -165,7 +164,7 @@ export function ClientCurrentUserDTSIPersonCardOrCTA({
     <div>
       <p className="mb-3 text-xl font-bold">Your {categoryDisplayName}</p>
       <p className="mb-3 text-sm text-fontcolor-muted">
-        Show politicians for{' '}
+        Showing politicians for{' '}
         <button className="font-bold text-fontcolor underline" onClick={() => setAddress(null)}>
           {address.description}
         </button>
@@ -200,11 +199,6 @@ export function ClientCurrentUserDTSIPersonCardOrCTA({
               </div>
             </div>
             <div className="flex items-center gap-5">
-              <UserActionFormCallCongresspersonDialog>
-                <Button className="w-full p-1">
-                  <img alt="call button" src="/misc/call-icon.svg" />
-                </Button>
-              </UserActionFormCallCongresspersonDialog>
               <Button asChild className="w-full">
                 <InternalLink href={getIntlUrls(locale).politicianDetails(person.slug)}>
                   View profile

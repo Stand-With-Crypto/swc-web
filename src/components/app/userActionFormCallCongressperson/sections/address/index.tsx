@@ -29,7 +29,10 @@ import {
 } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useIsMobile } from '@/hooks/useIsMobile'
-import { getYourPoliticianCategoryDisplayName } from '@/utils/shared/yourPoliticianCategory'
+import {
+  getYourPoliticianCategoryDisplayName,
+  getYourPoliticianCategoryShortDisplayName,
+} from '@/utils/shared/yourPoliticianCategory'
 import { trackFormSubmissionSyncErrors } from '@/utils/web/formUtils'
 import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
 
@@ -124,8 +127,8 @@ export function Address({
         <UserActionFormLayout onBack={() => goToSection(SectionNames.INTRO)}>
           <UserActionFormLayout.Container>
             <UserActionFormLayout.Heading
-              subtitle={`Your address will be used to connect you with your ${getYourPoliticianCategoryDisplayName(CALL_FLOW_POLITICIANS_CATEGORY)}. Stand With Crypto will never share your data with any third-parties.`}
-              title={`Find your ${getYourPoliticianCategoryDisplayName(CALL_FLOW_POLITICIANS_CATEGORY)}`}
+              subtitle={`Your address will be used to connect you with your ${getYourPoliticianCategoryDisplayName(CALL_FLOW_POLITICIANS_CATEGORY, { maxCount: 1 })}. Stand With Crypto will never share your data with any third-parties.`}
+              title={`Find your ${getYourPoliticianCategoryShortDisplayName(CALL_FLOW_POLITICIANS_CATEGORY, { maxCount: 1 })}`}
             />
 
             <FormField

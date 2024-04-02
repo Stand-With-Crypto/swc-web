@@ -8,13 +8,37 @@ export const YOUR_POLITICIAN_CATEGORY_OPTIONS: readonly YourPoliticianCategory[]
 
 export const DEFAULT_YOUR_POLITICIAN_CATEGORY: YourPoliticianCategory = 'senate'
 
-export function getYourPoliticianCategoryDisplayName(category: YourPoliticianCategory) {
+export function getYourPoliticianCategoryDisplayName(
+  category: YourPoliticianCategory,
+  {
+    maxCount,
+  }: {
+    maxCount?: number
+  } = {},
+) {
   switch (category) {
     case 'house':
       return 'congressperson'
     case 'senate':
-      return 'senators'
+      return maxCount === 1 ? 'senator' : 'senators'
     case 'senate-and-house':
-      return 'senators and congressperson'
+      return maxCount === 1 ? 'politician' : 'senators and congressperson'
+  }
+}
+export function getYourPoliticianCategoryShortDisplayName(
+  category: YourPoliticianCategory,
+  {
+    maxCount,
+  }: {
+    maxCount?: number
+  } = {},
+) {
+  switch (category) {
+    case 'house':
+      return 'congressperson'
+    case 'senate':
+      return maxCount === 1 ? 'senator' : 'senators'
+    case 'senate-and-house':
+      return maxCount === 1 ? 'politician' : 'politicians'
   }
 }

@@ -39,6 +39,7 @@ import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalyt
 import { UserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns'
 import {
   getYourPoliticianCategoryDisplayName,
+  getYourPoliticianCategoryShortDisplayName,
   YourPoliticianCategory,
 } from '@/utils/shared/yourPoliticianCategory'
 import { cn } from '@/utils/web/cn'
@@ -107,7 +108,6 @@ export function UserActionFormEmailCongressperson({
   const router = useRouter()
   const urls = useIntlUrls()
   const userDefaultValues = useMemo(() => getDefaultValues({ user, dtsiSlugs: [] }), [user])
-  const isShowingMultiplePeople = politicianCategory !== 'house'
   const politicianCategoryDisplayName = getYourPoliticianCategoryDisplayName(politicianCategory)
   const form = useForm<FormValues>({
     resolver: zodResolver(zodUserActionFormEmailCongresspersonFields),
@@ -172,11 +172,11 @@ export function UserActionFormEmailCongressperson({
         <ScrollArea>
           <div className={cn(dialogContentPaddingStyles, 'space-y-4 md:space-y-8')}>
             <PageTitle className="mb-3" size="sm">
-              Email your politician{isShowingMultiplePeople ? 's' : ''}
+              Email your {getYourPoliticianCategoryShortDisplayName(politicianCategory)}
             </PageTitle>
             <PageSubTitle className="mb-7">
               Email your {politicianCategoryDisplayName} and tell them to support crypto. Enter the
-              following information and we will generate a personalized email for you to send them.
+              following information and we will generate a personalized email for you to send.
             </PageSubTitle>
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <FormField

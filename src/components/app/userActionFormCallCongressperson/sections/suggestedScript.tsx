@@ -21,7 +21,7 @@ import { getGoogleCivicOfficialByDTSIName } from '@/utils/shared/googleCivicInfo
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { UserActionCallCampaignName } from '@/utils/shared/userActionCampaigns'
 import { userFullName } from '@/utils/shared/userFullName'
-import { getYourPoliticianCategoryDisplayName } from '@/utils/shared/yourPoliticianCategory'
+import { getYourPoliticianCategoryShortDisplayName } from '@/utils/shared/yourPoliticianCategory'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
 import { toastGenericError } from '@/utils/web/toastUtils'
@@ -106,7 +106,7 @@ export function SuggestedScript({
         <UserActionFormLayout.Container>
           <UserActionFormLayout.Heading
             subtitle="You may not get a human on the line, but can leave a message to ensure that your voice will be heard."
-            title={`Call your ${getYourPoliticianCategoryDisplayName(CALL_FLOW_POLITICIANS_CATEGORY)}`}
+            title={`Call your ${getYourPoliticianCategoryShortDisplayName(CALL_FLOW_POLITICIANS_CATEGORY, { maxCount: 1 })}`}
           />
 
           <div className="prose mx-auto">

@@ -138,7 +138,7 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
               {dtsiRecipients.length
                 ? dtsiRecipients.map((actionEmailRecipient, idx) => (
                     <React.Fragment key={actionEmailRecipient.id}>
-                      {idx > 0 && <>, </>}
+                      {idx > 0 ? idx === dtsiRecipients.length - 1 ? <> and </> : <>, </> : null}
                       <DTSIPersonName
                         href={urls.politicianDetails(actionEmailRecipient.person!.slug)}
                         person={actionEmailRecipient.person!}
