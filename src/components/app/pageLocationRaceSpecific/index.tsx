@@ -3,8 +3,6 @@ import { FormattedPerson } from '@/components/app/pageLocationRaceSpecific/types
 import { REGISTRATION_URLS_BY_STATE } from '@/components/app/userActionFormVoterRegistration/constants'
 import { Button } from '@/components/ui/button'
 import { uppercaseSectionHeader } from '@/components/ui/classUtils'
-import { ConditionalSearchParamGoBack } from '@/components/ui/conditionalSearchParamGoBack'
-import { InternalLinkWihSearchParamGoBack } from '@/components/ui/conditionalSearchParamGoBack/internalLinkWihSearchParamGoBack'
 import { InternalLink } from '@/components/ui/link'
 import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
 import { PageTitle } from '@/components/ui/pageTitleText'
@@ -96,9 +94,7 @@ function CandidateInfo({
         </div>
         <div className="mt-6">
           <Button asChild className={cn('w-full', linkBoxLinkClassName)} variant="secondary">
-            <InternalLinkWihSearchParamGoBack href={urls.politicianDetails(person.slug)}>
-              View profile
-            </InternalLinkWihSearchParamGoBack>
+            <InternalLink href={urls.politicianDetails(person.slug)}>View profile</InternalLink>
           </Button>
         </div>
       </div>
@@ -116,14 +112,18 @@ export function LocationRaceSpecific({
   const groups = organizeRaceSpecificPeople(people, { district })
   return (
     <div className="container space-y-20">
-      <div className="relative flex flex-col text-left sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col text-left sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <ConditionalSearchParamGoBack />
-          <h1 className={cn(uppercaseSectionHeader, 'mb-4')}>
-            Crypto Voter Guide{' > '}
-            <InternalLink href={urls.locationStateSpecific(stateCode)}>{stateCode}</InternalLink>
+          <h1 className={cn(uppercaseSectionHeader, 'mb-6 md:mb-10')}>
+            <InternalLink href={urls.locationStateSpecific(stateCode)}>
+              CA Crypto Voter Guide
+            </InternalLink>
+            {' > '}{' '}
+            {district
+              ? `${stateCode} Congressional District ${district}`
+              : `U.S. Senate (${stateCode})`}
           </h1>
-          <PageTitle as="h2" className="mb-6 text-left sm:text-center" size="md">
+          <PageTitle as="h2" className="mb-6 text-left sm:mb-0 sm:text-center" size="md">
             {district
               ? `${stateCode} Congressional District ${district}`
               : `U.S. Senate (${stateCode})`}

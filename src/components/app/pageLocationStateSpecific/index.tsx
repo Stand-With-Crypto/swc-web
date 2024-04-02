@@ -4,7 +4,7 @@ import { UserLocationRaceInfo } from '@/components/app/pageLocationStateSpecific
 import { REGISTRATION_URLS_BY_STATE } from '@/components/app/userActionFormVoterRegistration/constants'
 import { Button } from '@/components/ui/button'
 import { uppercaseSectionHeader } from '@/components/ui/classUtils'
-import { InternalLinkWihSearchParamGoBack } from '@/components/ui/conditionalSearchParamGoBack/internalLinkWihSearchParamGoBack'
+import { InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { TrackedExternalLink } from '@/components/ui/trackedExternalLink'
 import { DTSI_StateSpecificInformationQuery } from '@/data/dtsi/generated'
@@ -39,10 +39,10 @@ export function LocationStateSpecific({ stateCode, people, locale }: LocationSta
   )
   return (
     <div className="container space-y-20">
-      <div className="flex flex-col text-left sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col text-left sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <h1 className={cn(uppercaseSectionHeader, 'mb-4')}>Crypto Voter Guide</h1>
-          <PageTitle as="h2" className="mb-6 text-left sm:text-center" size="md">
+          <h1 className={cn(uppercaseSectionHeader, 'mb-6 md:mb-10')}>Crypto Voter Guide</h1>
+          <PageTitle as="h2" className="mb-6 text-left sm:mb-0 sm:text-center" size="md">
             {stateName}
           </PageTitle>
         </div>
@@ -158,7 +158,7 @@ export function LocationStateSpecific({ stateCode, people, locale }: LocationSta
               <h3 className={cn(uppercaseSectionHeader, 'mb-3')}>Other races in {stateName}</h3>
               <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
                 {otherDistricts.map(district => (
-                  <InternalLinkWihSearchParamGoBack
+                  <InternalLink
                     className={cn('mb-4 block w-1/3 flex-shrink-0 font-semibold')}
                     href={urls.locationDistrictSpecific({
                       stateCode,
@@ -167,7 +167,7 @@ export function LocationStateSpecific({ stateCode, people, locale }: LocationSta
                     key={district}
                   >
                     District {district}
-                  </InternalLinkWihSearchParamGoBack>
+                  </InternalLink>
                 ))}
               </div>
             </section>
