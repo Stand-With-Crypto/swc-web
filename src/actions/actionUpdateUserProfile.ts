@@ -120,6 +120,9 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
       phoneNumber,
       hasOptedInToMembership,
       hasOptedInToSms,
+      ...(phoneNumber &&
+        user.phoneNumber !== phoneNumber &&
+        user.hasRepliedToOptInSms && { hasRepliedToOptInSms: false }), // Resetting the SMS reply flag if the phone number has changed.
       addressId: address?.id || null,
       primaryUserEmailAddressId: primaryUserEmailAddress?.id || null,
     },
