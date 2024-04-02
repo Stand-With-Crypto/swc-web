@@ -18,7 +18,7 @@ export const CAPITOL_CANARY_CHECK_SMS_OPT_IN_REPLY_FUNCTION_ID =
 export const CAPITOL_CANARY_CHECK_SMS_OPT_IN_REPLY_EVENT_NAME =
   'capitol.canary/check.sms.opt.in.reply'
 
-const SLEEP_SCHEDULE = ['2m', '5m', '10m', '1h', '1d', '1d', '2d']
+const SLEEP_SCHEDULE = ['3m', '6m', '20m', '1h', '12h', '1d', '1d', '2d']
 
 export const checkSMSOptInReplyWithInngest = inngest.createFunction(
   {
