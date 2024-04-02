@@ -88,17 +88,15 @@ export const checkSMSOptInReplyWithInngest = inngest.createFunction(
         }
         for (const phone of advocate.phones) {
           if (phone.address === data.user.phoneNumber && phone.subscribed) {
-            await step.run('capitol-canary.check-sms-opt-in-reply.update-user', async () => {
-              await prismaClient.user.update({
-                where: { id: data.user.id },
-                data: {
-                  hasRepliedToOptInSms: true,
-                },
-              })
-            })
             await step.run(
-              'capitol-canary.check-sms-opt-in-reply.track-user-opt-in-reply',
+              'capitol-canary.check-sms-opt-in-reply.update-user-and-track-reply',
               async () => {
+                await prismaClient.user.update({
+                  where: { id: data.user.id },
+                  data: {
+                    hasRepliedToOptInSms: true,
+                  },
+                })
                 // There is a bug where `getLocalUserFromUser` cannot use the date from the payload user, hence the refetch here.
                 const user = await prismaClient.user.findUniqueOrThrow({
                   where: {

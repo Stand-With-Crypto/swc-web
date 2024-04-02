@@ -252,9 +252,6 @@ async function maybeUpsertUser({
         !existingUser.hasOptedInToMembership && { hasOptedInToMembership }),
       ...(hasOptedInToReceiveSMSFromSWC &&
         !existingUser.hasOptedInToSms && { hasOptedInToSms: hasOptedInToReceiveSMSFromSWC }),
-      ...(phoneNumber &&
-        existingUser.phoneNumber !== phoneNumber &&
-        existingUser.hasRepliedToOptInSms && { hasRepliedToOptInSms: false }), // Resetting the SMS reply flag if the phone number has changed.
       ...(emailAddress &&
         existingUser.userEmailAddresses.every(addr => addr.emailAddress !== emailAddress) && {
           userEmailAddresses: {
