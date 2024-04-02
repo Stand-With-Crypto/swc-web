@@ -1,4 +1,7 @@
-import { CheckSMSOptInReplyPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
+import {
+  BackfillSMSOptInReplyPayloadRequirements,
+  CheckSMSOptInReplyPayloadRequirements,
+} from '@/utils/server/capitolCanary/payloadRequirements'
 import { sendCapitolCanaryRequest } from '@/utils/server/capitolCanary/sendCapitolCanaryRequest'
 
 const CAPITOL_CANARY_CREATE_ADVOCATE_API_URL = 'https://api.phone2action.com/2.0/advocates'
@@ -80,6 +83,20 @@ export function formatCheckSMSOptInReplyRequest(request: CheckSMSOptInReplyPaylo
   if (request.campaignId) {
     formattedRequest.campaignid = request.campaignId
   }
+  return formattedRequest
+}
+
+export function backfillCheckSMSOptInReplyRequest(
+  request: BackfillSMSOptInReplyPayloadRequirements,
+) {
+  if (!request.page) {
+    return new Error('page number is required')
+  }
+
+  const formattedRequest: FetchAdvocatesFromCapitolCanaryRequest = {
+    page: request.page,
+  }
+
   return formattedRequest
 }
 
