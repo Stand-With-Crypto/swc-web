@@ -3,8 +3,8 @@ import { NonRetriableError } from 'inngest'
 import { onFailureCapitolCanary } from '@/inngest/functions/capitolCanary/onFailureCapitolCanary'
 import { inngest } from '@/inngest/inngest'
 import {
-  backfillCheckSMSOptInReplyRequest,
   fetchAdvocatesFromCapitolCanary,
+  formatBackfillSMSOptInReplyRequest,
 } from '@/utils/server/capitolCanary/fetchAdvocates'
 import { prismaClient } from '@/utils/server/prismaClient'
 
@@ -23,14 +23,14 @@ export const backfillSMSOptInReplyWithInngest = inngest.createFunction(
   },
   { event: CAPITOL_CANARY_BACKFILL_SMS_OPT_IN_REPLY_EVENT_NAME },
   async ({ step }) => {
-    const fetchRequest = backfillCheckSMSOptInReplyRequest({ page: 1 })
+    const fetchRequest = formatBackfillSMSOptInReplyRequest({ page: 1 })
     if (fetchRequest instanceof Error) {
       throw new NonRetriableError(fetchRequest.message, {
         cause: fetchRequest,
       })
     }
     let advocates = await step.run(
-      `capitol-canary.check-sms-opt-in-reply.fetch-advocates-${fetchRequest.page!}`,
+      `capitol-canary.backfill-sms-opt-in-reply.fetch-advocates-${fetchRequest.page!}`,
       async () => {
         return fetchAdvocatesFromCapitolCanary(fetchRequest)
       },
@@ -40,7 +40,7 @@ export const backfillSMSOptInReplyWithInngest = inngest.createFunction(
     // Break condition.
     while (advocates.data.length > 0) {
       totalUsersProcessed += await step.run(
-        `capitol-canary.check-sms-opt-in-reply.process-advocates-${fetchRequest.page!}`,
+        `capitol-canary.backfill-sms-opt-in-reply.process-advocates-${fetchRequest.page!}`,
         async () => {
           let numUsersProcessed = 0
           for (const advocate of advocates.data) {
@@ -83,7 +83,7 @@ export const backfillSMSOptInReplyWithInngest = inngest.createFunction(
       // Fetch next page.
       fetchRequest.page! += 1
       advocates = await step.run(
-        `capitol-canary.check-sms-opt-in-reply.fetch-advocates-${fetchRequest.page!}`,
+        `capitol-canary.backfill-sms-opt-in-reply.fetch-advocates-${fetchRequest.page!}`,
         async () => {
           return fetchAdvocatesFromCapitolCanary(fetchRequest)
         },

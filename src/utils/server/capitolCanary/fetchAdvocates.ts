@@ -86,7 +86,7 @@ export function formatCheckSMSOptInReplyRequest(request: CheckSMSOptInReplyPaylo
   return formattedRequest
 }
 
-export function backfillCheckSMSOptInReplyRequest(
+export function formatBackfillSMSOptInReplyRequest(
   request: BackfillSMSOptInReplyPayloadRequirements,
 ) {
   if (!request.page) {
