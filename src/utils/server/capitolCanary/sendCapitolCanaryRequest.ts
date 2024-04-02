@@ -20,6 +20,10 @@ export async function sendCapitolCanaryRequest<T, R>(
   httpMethod: 'GET' | 'POST',
   url: string,
 ): Promise<R> {
+  if (httpMethod === 'GET') {
+    const urlParams = new URLSearchParams(request as Record<string, string>)
+    url = `${url}?${urlParams.toString()}`
+  }
   try {
     const httpResp = await fetchReq(url, {
       method: httpMethod,
@@ -27,7 +31,7 @@ export async function sendCapitolCanaryRequest<T, R>(
         Authorization: `Basic ${btoa(`${CAPITOL_CANARY_API_KEY}:${CAPITOL_CANARY_API_SECRET}`)}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(request),
+      ...(httpMethod === 'POST' && { body: JSON.stringify(request) }),
     })
     return (await httpResp.json()) as R
   } catch (error) {

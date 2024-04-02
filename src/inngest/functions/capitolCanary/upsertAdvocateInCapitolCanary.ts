@@ -1,8 +1,9 @@
-import { CapitolCanaryInstance } from '@prisma/client'
+import { CapitolCanaryInstance, User } from '@prisma/client'
 import { NonRetriableError } from 'inngest'
 
+import { CAPITOL_CANARY_CHECK_SMS_OPT_IN_REPLY_EVENT_NAME } from '@/inngest/functions/capitolCanary/checkSMSOptInReply'
+import { onFailureCapitolCanary } from '@/inngest/functions/capitolCanary/onFailureCapitolCanary'
 import { inngest } from '@/inngest/inngest'
-import { onFailureCapitolCanary } from '@/inngest/onFailureCapitolCanary'
 import {
   createAdvocateInCapitolCanary,
   formatCapitolCanaryAdvocateCreationRequest,
@@ -74,6 +75,21 @@ export const upsertAdvocateInCapitolCanaryWithInngest = inngest.createFunction(
         })
       })
 
+      // Call SMS reply Inngest function if the user requested to be opted in to SMS but we do not have their reply yet.
+      if (
+        formattedCreateRequest.smsOptin === 1 &&
+        data.user.phoneNumber.length > 0 &&
+        !data.user.hasRepliedToOptInSms
+      ) {
+        await step.sendEvent('capitol-canary.upsert-advocate.send-sms-reply-event', {
+          name: CAPITOL_CANARY_CHECK_SMS_OPT_IN_REPLY_EVENT_NAME,
+          data: {
+            campaignId: data.campaignId,
+            user: data.user as User,
+          },
+        })
+      }
+
       return createAdvocateStepResponse
     }
 
@@ -104,6 +120,21 @@ export const upsertAdvocateInCapitolCanaryWithInngest = inngest.createFunction(
     )
 
     // No need to update advocate ID in database since it already exists.
+
+    // Call SMS reply Inngest function if the user requested to be opted in to SMS but we do not have their reply yet.
+    if (
+      formattedUpdateRequest.smsOptin === 1 &&
+      data.user.phoneNumber.length > 0 &&
+      !data.user.hasRepliedToOptInSms
+    ) {
+      await step.sendEvent('capitol-canary.upsert-advocate.send-sms-reply-event', {
+        name: CAPITOL_CANARY_CHECK_SMS_OPT_IN_REPLY_EVENT_NAME,
+        data: {
+          campaignId: data.campaignId,
+          user: data.user as User,
+        },
+      })
+    }
 
     return updateAdvocateStepResponse
   },
