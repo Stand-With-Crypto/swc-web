@@ -14,7 +14,6 @@ import { z } from 'zod'
 import { getClientAddress } from '@/clientModels/clientAddress'
 import { getClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
 import { getENSDataFromCryptoAddressAndFailGracefully } from '@/data/web3/getENSDataFromCryptoAddress'
-import { CAPITOL_CANARY_CHECK_SMS_OPT_IN_REPLY_EVENT_NAME } from '@/inngest/functions/capitolCanary/checkSMSOptInReply'
 import { CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/capitolCanary/upsertAdvocateInCapitolCanary'
 import { inngest } from '@/inngest/inngest'
 import { appRouterGetAuthUser } from '@/utils/server/authentication/appRouterGetAuthUser'
@@ -162,24 +161,16 @@ async function handleCapitolCanaryAdvocateUpsert(
     !!oldUser.primaryUserEmailAddress &&
     (!primaryUserEmailAddress ||
       oldUser.primaryUserEmailAddress.emailAddress !== primaryUserEmailAddress.emailAddress)
-  // `hasChangedPhone` is true if an old phone number exists and the new phone number is different from the old phone number.
-  // However, we only want to explicitly opt-out if the old number was opted in to work around Capitol Canary limitations.
-  const hasChangedPhone =
-    !!oldUser.phoneNumber &&
-    (!updatedUser.phoneNumber || oldUser.phoneNumber !== updatedUser.phoneNumber) &&
-    oldUser.hasOptedInToSms
-  if (hasChangedEmail || hasChangedPhone) {
+  if (hasChangedEmail) {
     const unsubscribePayload: UpsertAdvocateInCapitolCanaryPayloadRequirements = {
       campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
       user: {
         ...updatedUser, // Use new user information EXCEPT for the phone number.
-        phoneNumber: oldUser.phoneNumber, // Using old phone number here.
         address: updatedUser.address,
       },
       userEmailAddress: oldUser.primaryUserEmailAddress, // Using old email here.
       opts: {
         isEmailOptout: hasChangedEmail,
-        isSmsOptout: hasChangedPhone,
       },
     }
     await inngest.send({
@@ -214,7 +205,6 @@ async function handleCapitolCanaryAdvocateUpsert(
       opts: {
         isEmailOptin: true,
         isSmsOptin: updatedUser.hasOptedInToSms,
-        isSmsOptout: oldUser.hasOptedInToSms && !updatedUser.hasOptedInToSms, // Only opt-out of SMS if the user has opted in before and now they are opting out.
       },
     }
     if (!oldUser.hasOptedInToMembership && updatedUser.hasOptedInToMembership) {
@@ -226,15 +216,5 @@ async function handleCapitolCanaryAdvocateUpsert(
       name: CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME,
       data: payload,
     })
-
-    if (updatedUser.hasOptedInToSms && !updatedUser.hasRepliedToOptInSms) {
-      await inngest.send({
-        name: CAPITOL_CANARY_CHECK_SMS_OPT_IN_REPLY_EVENT_NAME,
-        data: {
-          campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
-          user: updatedUser,
-        },
-      })
-    }
   }
 }

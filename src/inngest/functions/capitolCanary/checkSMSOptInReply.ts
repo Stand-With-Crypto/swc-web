@@ -18,7 +18,7 @@ export const CAPITOL_CANARY_CHECK_SMS_OPT_IN_REPLY_FUNCTION_ID =
 export const CAPITOL_CANARY_CHECK_SMS_OPT_IN_REPLY_EVENT_NAME =
   'capitol.canary/check.sms.opt.in.reply'
 
-const SLEEP_SCHEDULE = ['3m', '6m', '20m', '1h', '12h', '1d', '1d', '2d']
+const SLEEP_SCHEDULE = ['3m', '6m', '20m', '1h', '12h', '1d', '1d', '2d', '2d']
 
 export const checkSMSOptInReplyWithInngest = inngest.createFunction(
   {
@@ -38,7 +38,7 @@ export const checkSMSOptInReplyWithInngest = inngest.createFunction(
     }
 
     // Surround this in a step so that Inngest does not randomly re-emit the event.
-    // There is a bug where `getLocalUserFromUser` cannot use date from the payload user, hence the refetch here.
+    // There is a bug where `getLocalUserFromUser` cannot use the date from the payload user, hence the refetch here.
     await step.run('capitol-canary.check-sms-opt-in-reply.track-user-opt-in', async () => {
       const user = await prismaClient.user.findUniqueOrThrow({
         where: {
@@ -50,13 +50,13 @@ export const checkSMSOptInReplyWithInngest = inngest.createFunction(
         localUser,
         userId: data.user.id,
       })
-      analytics.track('User SMS Opt-In')
+      await analytics.track('User SMS Opt-In').flush()
     })
 
     for (const sleepTime of SLEEP_SCHEDULE) {
       await step.sleep(`sleep-${sleepTime}`, sleepTime)
 
-      // In case the user does not have an advocate ID yet (e.g. the upsert Inngest function is having issues with Capitol Canary), we need to fetch it.
+      // In case the user does not have an advocate ID yet for some reason, we need to fetch it.
       if (!data.user.capitolCanaryAdvocateId) {
         const updatedUser = await step.run(
           `capitol-canary.check-sms-opt-in-reply.fetch-user-${sleepTime}`,
@@ -75,60 +75,45 @@ export const checkSMSOptInReplyWithInngest = inngest.createFunction(
         }
       }
 
-      let pageNum = 1
-      let advocates = await step.run(
-        `capitol-canary.check-sms-opt-in-reply.fetch-advocates-page-${pageNum}-${sleepTime}`,
+      const advocates = await step.run(
+        `capitol-canary.check-sms-opt-in-reply.fetch-advocates-${sleepTime}`,
         async () => {
           return fetchAdvocatesFromCapitolCanary(formattedRequest)
         },
       )
-      while (advocates.data.length > 0) {
-        for (const advocate of advocates.data) {
-          // Multiple advocates can use the same phone number, so we are checking advocate ID.
-          if (advocate.id !== data.user.capitolCanaryAdvocateId) {
-            continue
-          }
-          for (const phone of advocate.phones) {
-            if (phone.address === data.user.phoneNumber && phone.subscribed) {
-              await step.run('capitol-canary.check-sms-opt-in-reply.update-user', async () => {
-                await prismaClient.user.update({
-                  where: { id: data.user.id },
-                  data: {
-                    hasRepliedToOptInSms: true,
+      for (const advocate of advocates.data) {
+        // Multiple advocates can use the same phone number, so we are checking advocate ID.
+        if (advocate.id !== data.user.capitolCanaryAdvocateId) {
+          continue
+        }
+        for (const phone of advocate.phones) {
+          if (phone.address === data.user.phoneNumber && phone.subscribed) {
+            await step.run('capitol-canary.check-sms-opt-in-reply.update-user', async () => {
+              await prismaClient.user.update({
+                where: { id: data.user.id },
+                data: {
+                  hasRepliedToOptInSms: true,
+                },
+              })
+            })
+            await step.run(
+              'capitol-canary.check-sms-opt-in-reply.track-user-opt-in-reply',
+              async () => {
+                // There is a bug where `getLocalUserFromUser` cannot use the date from the payload user, hence the refetch here.
+                const user = await prismaClient.user.findUniqueOrThrow({
+                  where: {
+                    id: data.user.id,
                   },
                 })
-              })
-              await step.run(
-                'capitol-canary.check-sms-opt-in-reply.track-user-opt-in-reply',
-                async () => {
-                  const user = await prismaClient.user.findUniqueOrThrow({
-                    where: {
-                      id: data.user.id,
-                    },
-                  })
-                  const localUser = getLocalUserFromUser(user)
-                  const analytics = getServerAnalytics({
-                    localUser,
-                    userId: data.user.id,
-                  })
-                  analytics.track('User Replied To SMS Opt-In')
-                },
-              )
-              return
-            }
-          }
-
-          if (advocates.pagination.next_url.length > 0) {
-            pageNum += 1
-            advocates = await step.run(
-              `capitol-canary.check-sms-opt-in-reply.fetch-advocates-page-${pageNum}-${sleepTime}`,
-              async () => {
-                return fetchAdvocatesFromCapitolCanary({
-                  ...formattedRequest,
-                  page: pageNum,
+                const localUser = getLocalUserFromUser(user)
+                const analytics = getServerAnalytics({
+                  localUser,
+                  userId: data.user.id,
                 })
+                await analytics.track('User Replied To SMS Opt-In').flush()
               },
             )
+            return
           }
         }
       }
