@@ -49,7 +49,7 @@ export function UserLocationRaceInfo(props: UserLocationRaceInfoProps) {
   )
 }
 
-function _UserLocationRaceInfo({ groups, stateCode }: UserLocationRaceInfoProps) {
+function _UserLocationRaceInfo({ groups, stateCode, locale }: UserLocationRaceInfoProps) {
   const urls = useIntlUrls()
   const { setAddress, address } = useMutableCurrentUserAddress()
   const res = useGetDistrictFromAddress(address === 'loading' ? '' : address?.description || '', {
