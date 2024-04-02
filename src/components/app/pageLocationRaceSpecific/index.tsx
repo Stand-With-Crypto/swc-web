@@ -5,8 +5,6 @@ import { Button } from '@/components/ui/button'
 import { uppercaseSectionHeader } from '@/components/ui/classUtils'
 import { ConditionalSearchParamGoBack } from '@/components/ui/conditionalSearchParamGoBack'
 import { InternalLinkWihSearchParamGoBack } from '@/components/ui/conditionalSearchParamGoBack/internalLinkWihSearchParamGoBack'
-import { MaybeNextImg } from '@/components/ui/image'
-import { InitialsAvatar } from '@/components/ui/initialsAvatar'
 import { InternalLink } from '@/components/ui/link'
 import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
 import { PageTitle } from '@/components/ui/pageTitleText'
@@ -17,10 +15,7 @@ import {
 } from '@/data/dtsi/generated'
 import { SupportedLocale } from '@/intl/locales'
 import { NormalizedDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
-import {
-  dtsiPersonFullName,
-  getDTSIPersonProfilePictureUrlDimensions,
-} from '@/utils/dtsi/dtsiPersonUtils'
+import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { formatStateSpecificDTSIPerson } from '@/utils/dtsi/stateSpecificDTSIPerson'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
 import { pluralize } from '@/utils/shared/pluralize'
