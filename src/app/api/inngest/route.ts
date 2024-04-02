@@ -9,7 +9,17 @@ import { emailRepViaCapitolCanaryWithInngest } from '@/inngest/functions/emailRe
 import { monitorBaseETHBalances } from '@/inngest/functions/monitorBaseETHBalances'
 import { setPrimaryCryptoAddressOfUserWithInngest } from '@/inngest/functions/setPrimaryCryptoAddressOfUser'
 import { upsertAdvocateInCapitolCanaryWithInngest } from '@/inngest/functions/upsertAdvocateInCapitolCanary'
+import {
+  auditUsersTotalDonationAmountUsdInngest,
+  auditUsersTotalDonationAmountUsdInngestAuditBatchOfUsers,
+} from '@/inngest/functions/usersTotalDonationAmountUsd/audit'
+import {
+  backfillUsersTotalDonationAmountUsdInngest,
+  backfillUsersTotalDonationAmountUsdInngestUpdateBatchOfUsers,
+} from '@/inngest/functions/usersTotalDonationAmountUsd/backfill'
 import { inngest } from '@/inngest/inngest'
+
+export const maxDuration = 180 // 3 minutes
 
 export const { GET, POST, PUT } = serve({
   client: inngest,
@@ -23,5 +33,9 @@ export const { GET, POST, PUT } = serve({
     backfillNFTWithInngest,
     backfillNFTInngestCronJob,
     cleanupNFTMintsWithInngest,
+    backfillUsersTotalDonationAmountUsdInngest,
+    backfillUsersTotalDonationAmountUsdInngestUpdateBatchOfUsers,
+    auditUsersTotalDonationAmountUsdInngest,
+    auditUsersTotalDonationAmountUsdInngestAuditBatchOfUsers,
   ],
 })

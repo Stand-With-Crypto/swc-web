@@ -317,6 +317,7 @@ async function maybeUpsertUser({
       hasOptedInToEmails: true,
       hasOptedInToMembership: hasOptedInToMembership || false,
       hasOptedInToSms: hasOptedInToReceiveSMSFromSWC || false,
+      hasRepliedToOptInSms: false,
       userEmailAddresses: {
         create: {
           emailAddress,
