@@ -3,7 +3,7 @@ import { Decimal } from '@prisma/client/runtime/library'
 
 import { runBin } from '@/bin/runBin'
 import { parseThirdwebAddress } from '@/hooks/useThirdwebAddress/parseThirdwebAddress'
-import { AIRDROP_NFT_INNGEST_EVENT_NAME } from '@/inngest/functions/airdropNFT'
+import { AIRDROP_NFT_INNGEST_EVENT_NAME } from '@/inngest/functions/airdropNFT/airdropNFT'
 import { inngest } from '@/inngest/inngest'
 import { NFT_SLUG_BACKEND_METADATA } from '@/utils/server/nft/constants'
 import { AirdropPayload } from '@/utils/server/nft/payload'

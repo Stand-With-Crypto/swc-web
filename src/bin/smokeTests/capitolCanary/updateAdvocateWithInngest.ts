@@ -1,5 +1,5 @@
 import { runBin } from '@/bin/runBin'
-import { CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/upsertAdvocateInCapitolCanary'
+import { CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/capitolCanary/upsertAdvocateInCapitolCanary'
 import { inngest } from '@/inngest/inngest'
 import { mockAddress } from '@/mocks/models/mockAddress'
 import { mockUser } from '@/mocks/models/mockUser'

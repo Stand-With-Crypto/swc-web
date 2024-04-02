@@ -1,8 +1,8 @@
 import { CapitolCanaryInstance } from '@prisma/client'
 import { NonRetriableError } from 'inngest'
 
+import { onFailureCapitolCanary } from '@/inngest/functions/capitolCanary/onFailureCapitolCanary'
 import { inngest } from '@/inngest/inngest'
-import { onFailureCapitolCanary } from '@/inngest/onFailureCapitolCanary'
 import {
   createAdvocateInCapitolCanary,
   formatCapitolCanaryAdvocateCreationRequest,
