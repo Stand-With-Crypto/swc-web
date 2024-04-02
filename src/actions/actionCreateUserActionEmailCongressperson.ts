@@ -202,7 +202,14 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
 
 function getCapitalCanaryCampaignId(politicianCategory: YourPoliticianCategory) {
   if (NEXT_PUBLIC_ENVIRONMENT !== 'production') {
-    return SandboxCapitolCanaryCampaignId.DEFAULT_EMAIL_REPRESENTATIVE
+    switch (politicianCategory) {
+      case 'senate':
+        return SandboxCapitolCanaryCampaignId.DEFAULT_EMAIL_SENATORS
+      case 'house':
+        return SandboxCapitolCanaryCampaignId.DEFAULT_EMAIL_REPRESENTATIVE
+      case 'senate-and-house':
+        return SandboxCapitolCanaryCampaignId.DEFAULT_EMAIL_REPRESENTATIVE_AND_SENATORS
+    }
   }
 
   switch (politicianCategory) {

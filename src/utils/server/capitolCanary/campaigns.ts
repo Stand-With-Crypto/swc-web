@@ -12,6 +12,8 @@ export const enum SandboxCapitolCanaryCampaignId {
 
   // Campaign IDS to use when sending emails to representatives.
   DEFAULT_EMAIL_REPRESENTATIVE = 142630,
+  DEFAULT_EMAIL_REPRESENTATIVE_AND_SENATORS = 145354,
+  DEFAULT_EMAIL_SENATORS = 145353,
 }
 
 // Campaign IDs representing the different campaigns in the production Capitol Canary.
