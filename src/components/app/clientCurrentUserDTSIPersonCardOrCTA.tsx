@@ -6,7 +6,6 @@ import { noop } from 'lodash-es'
 
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
-import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
 import { Button } from '@/components/ui/button'
 import { GooglePlacesSelect, GooglePlacesSelectProps } from '@/components/ui/googlePlacesSelect'
 import { InternalLink } from '@/components/ui/link'
@@ -16,12 +15,16 @@ import {
   useGetDTSIPeopleFromAddress,
 } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { SupportedLocale } from '@/intl/locales'
-import { getDTSIFormattedShortPersonRole } from '@/utils/dtsi/dtsiPersonRoleUtils'
+import { getDTSIPersonRoleCategoryDisplayName } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import {
   dtsiPersonFullName,
   dtsiPersonPoliticalAffiliationCategoryAbbreviation,
 } from '@/utils/dtsi/dtsiPersonUtils'
 import { getIntlUrls } from '@/utils/shared/urls'
+import {
+  getYourPoliticianCategoryDisplayName,
+  YourPoliticianCategory,
+} from '@/utils/shared/yourPoliticianCategory'
 
 function DefaultPlacesSelect(props: Pick<GooglePlacesSelectProps, 'onChange' | 'value'>) {
   return (
@@ -42,9 +45,14 @@ export function ClientCurrentUserDTSIPersonCardOrCTA(props: { locale: SupportedL
   )
 }
 
+const POLITICIAN_CATEGORY: YourPoliticianCategory = 'senate-and-house'
+
 function _ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: SupportedLocale }) {
   const { setAddress, address } = useMutableCurrentUserAddress()
-  const res = useGetDTSIPeopleFromAddress(address === 'loading' ? '' : address?.description || '')
+  const res = useGetDTSIPeopleFromAddress(
+    address === 'loading' ? '' : address?.description || '',
+    POLITICIAN_CATEGORY,
+  )
   if (!address || address === 'loading' || !res.data) {
     return (
       <DefaultPlacesSelect onChange={setAddress} value={address === 'loading' ? null : address} />
@@ -60,52 +68,55 @@ function _ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: SupportedLo
       </div>
     )
   }
-  const person = res.data.dtsiPerson
+  const people = res.data.dtsiPeople
+  const categoryDisplayName = getYourPoliticianCategoryDisplayName(POLITICIAN_CATEGORY)
   return (
     <div>
-      <p className="mb-3 text-xl font-bold">Your representative</p>
+      <p className="mb-3 text-xl font-bold">Your {categoryDisplayName}</p>
       <p className="mb-3 text-sm text-fontcolor-muted">
-        Show representative for{' '}
+        Showing politicians for{' '}
         <button className="font-bold text-fontcolor underline" onClick={() => setAddress(null)}>
           {address.description}
         </button>
       </p>
-      <div className="mx-auto flex max-w-2xl flex-col justify-between gap-4 rounded-3xl bg-gray-100 p-5 text-left sm:flex-row sm:items-center sm:gap-10">
-        <div className="flex flex-row gap-4 text-sm sm:text-base lg:items-center">
-          <div className="relative">
-            <DTSIAvatar person={person} size={60} />
-            <div className="absolute bottom-[5px] right-[-8px]">
-              <DTSIFormattedLetterGrade person={person} size={25} />
-            </div>
-          </div>
-          <div>
-            <div className="text-xl font-bold">
-              {dtsiPersonFullName(person)}{' '}
-              {person.politicalAffiliationCategory
-                ? `(${dtsiPersonPoliticalAffiliationCategoryAbbreviation(
-                    person.politicalAffiliationCategory,
-                  )})`
-                : ''}
-            </div>
-            {person.primaryRole && (
-              <div className="text-fontcolor-muted">
-                {getDTSIFormattedShortPersonRole(person.primaryRole)}
+      <div className="space-y-5">
+        {people.map(person => (
+          <div
+            className="mx-auto flex max-w-2xl flex-col justify-between gap-4 rounded-3xl bg-gray-100 p-5 text-left sm:flex-row sm:items-center sm:gap-10"
+            key={person.id}
+          >
+            <div className="flex flex-row gap-4 text-sm sm:text-base lg:items-center">
+              <div className="relative">
+                <DTSIAvatar person={person} size={60} />
+                <div className="absolute bottom-[5px] right-[-8px]">
+                  <DTSIFormattedLetterGrade person={person} size={25} />
+                </div>
               </div>
-            )}
+              <div>
+                <div className="text-xl font-bold">
+                  {dtsiPersonFullName(person)}{' '}
+                  {person.politicalAffiliationCategory
+                    ? `(${dtsiPersonPoliticalAffiliationCategoryAbbreviation(
+                        person.politicalAffiliationCategory,
+                      )})`
+                    : ''}
+                </div>
+                {person.primaryRole && (
+                  <div className="text-fontcolor-muted">
+                    {getDTSIPersonRoleCategoryDisplayName(person.primaryRole)}
+                  </div>
+                )}
+              </div>
+            </div>
+            <div className="flex items-center gap-5">
+              <Button asChild className="w-full">
+                <InternalLink href={getIntlUrls(locale).politicianDetails(person.slug)}>
+                  View profile
+                </InternalLink>
+              </Button>
+            </div>
           </div>
-        </div>
-        <div className="flex items-center gap-5">
-          <UserActionFormCallCongresspersonDialog>
-            <Button className="w-full p-1">
-              <img alt="call button" src="/misc/call-icon.svg" />
-            </Button>
-          </UserActionFormCallCongresspersonDialog>
-          <Button asChild className="w-full">
-            <InternalLink href={getIntlUrls(locale).politicianDetails(person.slug)}>
-              View profile
-            </InternalLink>
-          </Button>
-        </div>
+        ))}
       </div>
     </div>
   )

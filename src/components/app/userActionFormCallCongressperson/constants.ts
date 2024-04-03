@@ -1,3 +1,5 @@
+import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory'
+
 export enum SectionNames {
   INTRO = 'Intro',
   ADDRESS = 'Address',
@@ -7,3 +9,5 @@ export enum SectionNames {
 
 export const ANALYTICS_NAME_USER_ACTION_FORM_CALL_CONGRESSPERSON =
   'User Action Form Call Congressperson'
+
+export const CALL_FLOW_POLITICIANS_CATEGORY: YourPoliticianCategory = 'house'
