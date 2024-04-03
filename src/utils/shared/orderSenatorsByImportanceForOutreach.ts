@@ -11,7 +11,7 @@ const HIGH_PRIORITY_SENATOR_DTSI_SLUGS_FOR_OUTREACH = [
   'jon---tester',
   'john---kennedy',
   'bill---hagerty',
-  'elizabeth---wareen',
+  'elizabeth---warren',
   'cynthia---lummis',
   'tina---smith',
   'katie---britt',
