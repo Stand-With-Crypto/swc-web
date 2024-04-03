@@ -27,6 +27,7 @@ async function getDTSIPeopleFromCongressionalDistrict(
 
   const data = await fetchReq(apiUrls.dtsiPeopleByCongressionalDistrict(result))
     .then(res => res.json())
+    .then(data => data as DTSIPeopleByCongressionalDistrictQueryResult)
     .catch(e => {
       catchUnexpectedServerErrorAndTriggerToast(e)
       return { notFoundReason: 'UNEXPECTED_ERROR' as const }
@@ -44,11 +45,15 @@ async function getDTSIPeopleFromCongressionalDistrict(
               : DTSI_PersonRoleCategory.CONGRESS),
         )
 
+  if ('notFoundReason' in data) {
+    return data
+  }
+
   if (!filteredData.length) {
     return { notFoundReason: 'MISSING_FROM_DTSI' as const }
   }
 
-  return { ...result, dtsiPeople: filteredData } as DTSIPeopleFromCongressionalDistrict
+  return { ...result, dtsiPeople: filteredData }
 }
 
 export async function getDTSIPeopleFromAddress(address: string, category: YourPoliticianCategory) {
@@ -67,7 +72,7 @@ export function useGetDTSIPeopleFromAddress(address: string, category: YourPolit
   )
 }
 export function formatGetDTSIPeopleFromAddressNotFoundReason(
-  data: Exclude<UseGetDTSIPeopleFromAddressResponse, { id: string }> | undefined | null,
+  data: Pick<UseGetDTSIPeopleFromAddressResponse, 'notFoundReason'> | undefined | null,
 ) {
   const defaultError = "We can't find your representative right now, we're working on a fix"
   if (!data || !('notFoundReason' in data)) {
