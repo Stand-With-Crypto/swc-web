@@ -58,7 +58,7 @@ type FetchAdvocatesFromCapitolCanaryMembership = {
   source: string
 }
 
-export type FetchAdvocatesFromCapitolCanaryContact = {
+type FetchAdvocatesFromCapitolCanaryContact = {
   id: number
   address: string
   subscribed: boolean
