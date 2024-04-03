@@ -4,7 +4,7 @@ import {
   DTSI_PeopleByUsCongressionalDistrictQuery,
   DTSI_PeopleByUsCongressionalDistrictQueryVariables,
 } from '@/data/dtsi/generated'
-import { orderSenatorsByImportanceForOutreach } from '@/utils/shared/orderSenatorsByImportanceForOutreach'
+import { orderDTSICongressionalDistrictResults } from '@/utils/shared/orderSenatorsByImportanceForOutreach'
 
 const query = /* GraphQL */ `
   query PeopleByUSCongressionalDistrict($congressionalDistrict: Int!, $stateCode: String!) {
@@ -34,7 +34,7 @@ export const queryDTSIPeopleByCongressionalDistrict = async ({
     stateCode,
     congressionalDistrict: districtNumber,
   })
-  return orderSenatorsByImportanceForOutreach(data.peopleByUSCongressionalDistrict)
+  return orderDTSICongressionalDistrictResults(data.peopleByUSCongressionalDistrict)
 }
 
 export type DTSIPeopleByCongressionalDistrictQueryResult = NonNullable<

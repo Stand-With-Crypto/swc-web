@@ -1,3 +1,5 @@
+import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
+
 const HIGH_PRIORITY_SENATOR_DTSI_SLUGS_FOR_OUTREACH = [
   'tim---scott',
   'sherrod---brown',
@@ -22,22 +24,50 @@ const HIGH_PRIORITY_SENATOR_DTSI_SLUGS_FOR_OUTREACH = [
   'chris---vanhollen',
 ]
 
-// there are some domains that use this logic where we must select one senator. This function ensures that senators are ordered by importance to us
-export function orderSenatorsByImportanceForOutreach<T extends { slug: string }>(list: T[]) {
+const ROLE_PRIORITY = [DTSI_PersonRoleCategory.CONGRESS, DTSI_PersonRoleCategory.SENATE]
+
+/*
+
+*/
+export function orderDTSICongressionalDistrictResults<
+  T extends {
+    slug: string
+    primaryRole: { roleCategory: DTSI_PersonRoleCategory | null | undefined } | null | undefined
+    lastName: string
+  },
+>(list: T[]) {
   const orderedList = [...list]
   orderedList.sort((a, b) => {
-    const indexA = HIGH_PRIORITY_SENATOR_DTSI_SLUGS_FOR_OUTREACH.indexOf(a.slug)
-    const indexB = HIGH_PRIORITY_SENATOR_DTSI_SLUGS_FOR_OUTREACH.indexOf(b.slug)
-    if (indexA === -1) {
-      if (indexB === -1) {
-        return 0
+    const roleIndexA = a.primaryRole?.roleCategory
+      ? ROLE_PRIORITY.indexOf(a.primaryRole.roleCategory)
+      : -1
+    const roleIndexB = b.primaryRole?.roleCategory
+      ? ROLE_PRIORITY.indexOf(b.primaryRole.roleCategory)
+      : -1
+    if (roleIndexA !== roleIndexB) {
+      if (roleIndexA !== -1) {
+        if (roleIndexB !== -1) {
+          return roleIndexA - roleIndexB
+        }
+        return -1
       }
-      return 1
+      if (roleIndexB !== -1) {
+        return 1
+      }
     }
-    if (indexB === -1) {
+
+    const slugIndexA = HIGH_PRIORITY_SENATOR_DTSI_SLUGS_FOR_OUTREACH.indexOf(a.slug)
+    const slugIndexB = HIGH_PRIORITY_SENATOR_DTSI_SLUGS_FOR_OUTREACH.indexOf(b.slug)
+    if (slugIndexA !== -1) {
+      if (slugIndexB !== -1) {
+        return slugIndexA - slugIndexB
+      }
       return -1
     }
-    return indexA - indexB
+    if (slugIndexB !== -1) {
+      return 1
+    }
+    return a.lastName.localeCompare(b.lastName)
   })
   return orderedList
 }
