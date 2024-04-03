@@ -15,6 +15,7 @@ export const CAPITOL_CANARY_BACKFILL_SMS_OPT_IN_REPLY_FUNCTION_ID =
 export const CAPITOL_CANARY_BACKFILL_SMS_OPT_IN_REPLY_EVENT_NAME =
   'capitol.canary/backfill.sms.opt.in.reply'
 
+// TODO: fan-out.
 export const backfillSMSOptInReplyWithInngest = inngest.createFunction(
   {
     id: CAPITOL_CANARY_BACKFILL_SMS_OPT_IN_REPLY_FUNCTION_ID,
