@@ -10,4 +10,4 @@ export enum SectionNames {
 export const ANALYTICS_NAME_USER_ACTION_FORM_CALL_CONGRESSPERSON =
   'User Action Form Call Congressperson'
 
-export const CALL_FLOW_POLITICIANS_CATEGORY: YourPoliticianCategory = 'senate'
+export const CALL_FLOW_POLITICIANS_CATEGORY: YourPoliticianCategory = 'house'
