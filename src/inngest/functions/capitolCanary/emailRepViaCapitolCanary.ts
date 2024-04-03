@@ -2,8 +2,8 @@ import { CapitolCanaryInstance } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { NonRetriableError } from 'inngest'
 
+import { onFailureCapitolCanary } from '@/inngest/functions/capitolCanary/onFailureCapitolCanary'
 import { inngest } from '@/inngest/inngest'
-import { onFailureCapitolCanary } from '@/inngest/onFailureCapitolCanary'
 import {
   createAdvocateInCapitolCanary,
   formatCapitolCanaryAdvocateCreationRequest,

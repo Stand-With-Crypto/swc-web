@@ -55,7 +55,7 @@ export function PageHome({
         <div className="order-0 md:container lg:order-1 lg:px-0">
           <Dialog analytics={{ Category: 'Homepage Hero Section', CTA: 'Register to vote' }}>
             <DialogTrigger asChild>
-              <LinkBox className="relative h-[320px] cursor-pointer overflow-hidden md:rounded-xl lg:h-[400px]">
+              <LinkBox className="relative h-[320px] overflow-hidden md:rounded-xl lg:h-[400px]">
                 <NextImage
                   alt="Free NFT given out when you register to vote."
                   className="h-full w-full object-cover"

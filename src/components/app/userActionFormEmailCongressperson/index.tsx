@@ -285,7 +285,7 @@ export function UserActionFormEmailCongressperson({
                 Privacy Policy
               </InternalLink>{' '}
               and{' '}
-              <ExternalLink href={'https://www.quorum.us/static/Privacy-Policy.pdf'} tabIndex={-1}>
+              <ExternalLink href={'https://www.quorum.us/privacy-policy/'} tabIndex={-1}>
                 Quorum Privacy Policy
               </ExternalLink>
               .

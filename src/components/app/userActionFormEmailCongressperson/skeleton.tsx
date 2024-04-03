@@ -76,7 +76,7 @@ export function UserActionFormEmailCongresspersonSkeleton({
             By submitting, I understand that Stand With Crypto and its vendors may collect and use
             my Personal Information. To learn more, visit the Stand With Crypto Alliance{' '}
             <InternalLink href={urls.privacyPolicy()}>Privacy Policy</InternalLink> and{' '}
-            <ExternalLink href={'https://www.quorum.us/static/Privacy-Policy.pdf'}>
+            <ExternalLink href={'https://www.quorum.us/privacy-policy/'}>
               Quorum Privacy Policy
             </ExternalLink>
             .

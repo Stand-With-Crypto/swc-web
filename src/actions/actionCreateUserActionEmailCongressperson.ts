@@ -14,7 +14,7 @@ import {
 import { z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
-import { CAPITOL_CANARY_EMAIL_REP_INNGEST_EVENT_NAME } from '@/inngest/functions/emailRepViaCapitolCanary'
+import { CAPITOL_CANARY_EMAIL_REP_INNGEST_EVENT_NAME } from '@/inngest/functions/capitolCanary/emailRepViaCapitolCanary'
 import { inngest } from '@/inngest/inngest'
 import {
   CapitolCanaryCampaignId,

@@ -14,7 +14,7 @@ import { z } from 'zod'
 import { getClientAddress } from '@/clientModels/clientAddress'
 import { getClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
 import { getENSDataFromCryptoAddressAndFailGracefully } from '@/data/web3/getENSDataFromCryptoAddress'
-import { CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/upsertAdvocateInCapitolCanary'
+import { CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/capitolCanary/upsertAdvocateInCapitolCanary'
 import { inngest } from '@/inngest/inngest'
 import { appRouterGetAuthUser } from '@/utils/server/authentication/appRouterGetAuthUser'
 import {
@@ -129,12 +129,7 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
     },
   })
 
-  await handleCapitolCanaryAdvocateUpsert(
-    updatedUser,
-    primaryUserEmailAddress,
-    hasOptedInToSms,
-    user,
-  )
+  await handleCapitolCanaryAdvocateUpsert(updatedUser, primaryUserEmailAddress, user)
 
   return {
     user: {
@@ -156,7 +151,6 @@ async function handleCapitolCanaryAdvocateUpsert(
     primaryUserCryptoAddress: UserCryptoAddress | null
   },
   primaryUserEmailAddress: UserEmailAddress | null | undefined,
-  hasOptedInToSms: boolean,
   oldUser: User & { address: Address | null } & {
     primaryUserEmailAddress: UserEmailAddress | null
   } & { userEmailAddresses: UserEmailAddress[] },
@@ -167,22 +161,16 @@ async function handleCapitolCanaryAdvocateUpsert(
     !!oldUser.primaryUserEmailAddress &&
     (!primaryUserEmailAddress ||
       oldUser.primaryUserEmailAddress.emailAddress !== primaryUserEmailAddress.emailAddress)
-  // `hasChangedPhone` is true if an old phone number exists and the new phone number is different from the old phone number.
-  const hasChangedPhone =
-    !!oldUser.phoneNumber &&
-    (!updatedUser.phoneNumber || oldUser.phoneNumber !== updatedUser.phoneNumber)
-  if (hasChangedEmail || hasChangedPhone) {
+  if (hasChangedEmail) {
     const unsubscribePayload: UpsertAdvocateInCapitolCanaryPayloadRequirements = {
       campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
       user: {
         ...updatedUser, // Use new user information EXCEPT for the phone number.
-        phoneNumber: oldUser.phoneNumber, // Using old phone number here.
         address: updatedUser.address,
       },
       userEmailAddress: oldUser.primaryUserEmailAddress, // Using old email here.
       opts: {
         isEmailOptout: hasChangedEmail,
-        isSmsOptout: hasChangedPhone,
       },
     }
     await inngest.send({
@@ -216,8 +204,7 @@ async function handleCapitolCanaryAdvocateUpsert(
       userEmailAddress: primaryUserEmailAddress, // Using new email here.
       opts: {
         isEmailOptin: true,
-        isSmsOptin: hasOptedInToSms,
-        isSmsOptout: oldUser.hasOptedInToSms && !hasOptedInToSms, // Only opt-out of SMS if the user has opted in before and now they are opting out.
+        isSmsOptin: updatedUser.hasOptedInToSms,
       },
     }
     if (!oldUser.hasOptedInToMembership && updatedUser.hasOptedInToMembership) {

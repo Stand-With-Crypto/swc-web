@@ -19,3 +19,9 @@ export interface EmailRepViaCapitolCanaryPayloadRequirements
   emailSubject: string
   emailMessage: string
 }
+
+// We at least need phone number from user.
+export interface CheckSMSOptInReplyPayloadRequirements {
+  campaignId?: CapitolCanaryCampaignId | SandboxCapitolCanaryCampaignId
+  user: User
+}

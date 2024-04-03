@@ -62,9 +62,8 @@ export type UseGetDTSIPeopleFromAddressResponse = Awaited<
 >
 
 export function useGetDTSIPeopleFromAddress(address: string, category: YourPoliticianCategory) {
-  return useSWR<UseGetDTSIPeopleFromAddressResponse>(
-    address ? `useGetDTSIPeopleFromAddress-${address}` : null,
-    () => getDTSIPeopleFromAddress(address, category),
+  return useSWR(address ? `useGetDTSIPeopleFromAddress-${address}` : null, () =>
+    getDTSIPeopleFromAddress(address, category),
   )
 }
 export function formatGetDTSIPeopleFromAddressNotFoundReason(
@@ -78,6 +77,8 @@ export function formatGetDTSIPeopleFromAddressNotFoundReason(
   switch (data.notFoundReason) {
     case 'NOT_USA_ADDRESS':
       return 'Please enter a US-based address.'
+    case 'NOT_SAME_STATE':
+      return "Looks like you entered an address that's not in this state."
     case 'NO_REPS_IN_STATE':
       return 'No representatives in your state.'
     case 'NOT_SPECIFIC_ENOUGH':
