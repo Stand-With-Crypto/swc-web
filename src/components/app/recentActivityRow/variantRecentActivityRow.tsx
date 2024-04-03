@@ -146,7 +146,7 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
                         />
                       </React.Fragment>
                     )),
-                  )
+                  ).map((content, index) => <React.Fragment key={index}>{content}</React.Fragment>)
                 : 'Representative'}
             </MainText>
           ),
