@@ -6,7 +6,7 @@ import { sendCapitolCanaryRequest } from '@/utils/server/capitolCanary/sendCapit
 
 const CAPITOL_CANARY_CREATE_ADVOCATE_API_URL = 'https://api.phone2action.com/2.0/advocates'
 
-type FetchAdvocatesFromCapitolCanaryRequest = {
+export type FetchAdvocatesFromCapitolCanaryRequest = {
   updatedSince?: number
   page?: number
   campaignid?: number
@@ -58,7 +58,7 @@ type FetchAdvocatesFromCapitolCanaryMembership = {
   source: string
 }
 
-type FetchAdvocatesFromCapitolCanaryContact = {
+export type FetchAdvocatesFromCapitolCanaryContact = {
   id: number
   address: string
   subscribed: boolean
