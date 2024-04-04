@@ -3,6 +3,10 @@ import { serve } from 'inngest/next'
 import { airdropNFTWithInngest } from '@/inngest/functions/airdropNFT/airdropNFT'
 import { backfillNFTWithInngest } from '@/inngest/functions/backfillNFT'
 import { backfillNFTInngestCronJob } from '@/inngest/functions/backfillNFTCronJob'
+import {
+  backfillSMSOptInReplyWithInngest,
+  backfillSMSOptInReplyWithInngestUpdateBatchOfUsers,
+} from '@/inngest/functions/capitolCanary/backfillSMSOptInReply'
 import { checkSMSOptInReplyWithInngest } from '@/inngest/functions/capitolCanary/checkSMSOptInReply'
 import { emailRepViaCapitolCanaryWithInngest } from '@/inngest/functions/capitolCanary/emailRepViaCapitolCanary'
 import { upsertAdvocateInCapitolCanaryWithInngest } from '@/inngest/functions/capitolCanary/upsertAdvocateInCapitolCanary'
@@ -28,6 +32,8 @@ export const { GET, POST, PUT } = serve({
     upsertAdvocateInCapitolCanaryWithInngest,
     emailRepViaCapitolCanaryWithInngest,
     checkSMSOptInReplyWithInngest,
+    backfillSMSOptInReplyWithInngest,
+    backfillSMSOptInReplyWithInngestUpdateBatchOfUsers,
     airdropNFTWithInngest,
     cleanupPostalCodesWithInngest,
     monitorBaseETHBalances,

@@ -25,3 +25,7 @@ export interface CheckSMSOptInReplyPayloadRequirements {
   campaignId?: CapitolCanaryCampaignId | SandboxCapitolCanaryCampaignId
   user: User
 }
+
+export interface BackfillSMSOptInReplyPayloadRequirements {
+  page: number
+}
