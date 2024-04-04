@@ -4,17 +4,11 @@ import usePlacesAutocomplete from 'use-places-autocomplete'
 
 import { Combobox } from '@/components/ui/combobox'
 import { InputWithIcons } from '@/components/ui/inputWithIcons'
-import { useScript } from '@/hooks/useScript'
-import { requiredEnv } from '@/utils/shared/requiredEnv'
+import { useGoogleMapsScript } from '@/hooks/useGoogleMapsScript'
 import { cn } from '@/utils/web/cn'
 import { GooglePlaceAutocompletePrediction } from '@/utils/web/googlePlaceUtils'
 
 const CALLBACK_NAME = 'PLACES_AUTOCOMPLETE'
-
-const NEXT_PUBLIC_GOOGLE_PLACES_API_KEY = requiredEnv(
-  process.env.NEXT_PUBLIC_GOOGLE_PLACES_API_KEY,
-  'NEXT_PUBLIC_GOOGLE_PLACES_API_KEY',
-)
 
 export type GooglePlacesSelectProps = {
   value: GooglePlaceAutocompletePrediction | null
@@ -41,9 +35,7 @@ export const GooglePlacesSelect = React.forwardRef<
       language: 'en',
     },
   })
-  const scriptStatus = useScript(
-    `https://maps.googleapis.com/maps/api/js?key=${NEXT_PUBLIC_GOOGLE_PLACES_API_KEY}&libraries=places&callback=${CALLBACK_NAME}`,
-  )
+  const scriptStatus = useGoogleMapsScript(CALLBACK_NAME)
 
   useEffect(() => {
     if (scriptStatus === 'ready') {

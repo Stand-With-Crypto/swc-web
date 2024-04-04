@@ -1,25 +1,26 @@
 'use client'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Check } from 'lucide-react'
 
-import {
-  CALL_FLOW_POLITICIANS_CATEGORY,
-  SectionNames,
-} from '@/components/app/userActionFormCallCongressperson/constants'
+import { CALL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormCallCongressperson/constants'
 import { UserActionFormLayout } from '@/components/app/userActionFormCommon/layout'
 import { Button } from '@/components/ui/button'
-import { UseSectionsReturn } from '@/hooks/useSections'
 import { getYourPoliticianCategoryDisplayName } from '@/utils/shared/yourPoliticianCategory'
 
-export function Intro({ goToSection }: UseSectionsReturn<SectionNames>) {
+interface IntroProps {
+  onContinue: () => void
+  loading?: boolean
+}
+
+export function Intro({ onContinue, loading }: IntroProps) {
   const ref = React.useRef<HTMLButtonElement>(null)
-  useEffect(() => {
+  React.useEffect(() => {
     ref.current?.focus({ preventScroll: true })
   }, [ref])
   return (
     <IntroStaticContent>
-      <Button onClick={() => goToSection(SectionNames.ADDRESS)} ref={ref}>
-        Continue
+      <Button disabled={loading} onClick={onContinue} ref={ref}>
+        {loading ? 'Loading...' : 'Continue'}
       </Button>
     </IntroStaticContent>
   )

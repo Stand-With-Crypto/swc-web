@@ -3,6 +3,7 @@ import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory'
 export enum SectionNames {
   INTRO = 'Intro',
   ADDRESS = 'Address',
+  CHANGE_ADDRESS = 'Change Address',
   SUGGESTED_SCRIPT = 'Suggested Script',
   SUCCESS_MESSAGE = 'Success Message',
 }

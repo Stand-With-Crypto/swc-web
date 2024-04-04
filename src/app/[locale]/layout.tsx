@@ -65,6 +65,7 @@ export default function Layout({ children, params }: PageProps & { children: Rea
   if (!ORDERED_SUPPORTED_LOCALES.includes(locale)) {
     notFound()
   }
+
   return (
     <html lang={locale}>
       <body className={fontClassName}>

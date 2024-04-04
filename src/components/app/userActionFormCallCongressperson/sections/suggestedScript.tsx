@@ -7,13 +7,14 @@ import {
   actionCreateUserActionCallCongressperson,
   CreateActionCallCongresspersonInput,
 } from '@/actions/actionCreateUserActionCallCongressperson'
-import { UserActionFormCallCongresspersonProps } from '@/components/app/userActionFormCallCongressperson'
+import { CallCongresspersonActionSharedData } from '@/components/app/userActionFormCallCongressperson'
 import {
   CALL_FLOW_POLITICIANS_CATEGORY,
   SectionNames,
 } from '@/components/app/userActionFormCallCongressperson/constants'
 import { UserActionFormLayout } from '@/components/app/userActionFormCommon/layout'
 import { Button } from '@/components/ui/button'
+import { ExternalLink } from '@/components/ui/link'
 import { TrackedExternalLink } from '@/components/ui/trackedExternalLink'
 import { UseSectionsReturn } from '@/hooks/useSections'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
@@ -30,8 +31,9 @@ export function SuggestedScript({
   user,
   congressPersonData,
   goToSection,
+  goBackSection,
 }: Pick<
-  UserActionFormCallCongresspersonProps,
+  CallCongresspersonActionSharedData,
   'user' | 'congressPersonData' | keyof UseSectionsReturn<SectionNames>
 >) {
   const { dtsiPeople, addressSchema, googleCivicData } = congressPersonData
@@ -102,10 +104,21 @@ export function SuggestedScript({
 
   return (
     <>
-      <UserActionFormLayout onBack={() => goToSection(SectionNames.ADDRESS)}>
+      <UserActionFormLayout onBack={goBackSection}>
         <UserActionFormLayout.Container>
           <UserActionFormLayout.Heading
-            subtitle="You may not get a human on the line, but can leave a message to ensure that your voice will be heard."
+            subtitle={
+              <>
+                Showing the representative for your address in{' '}
+                <ExternalLink
+                  className="cursor-pointer"
+                  onClick={() => goToSection(SectionNames.CHANGE_ADDRESS)}
+                >
+                  {addressSchema.locality}
+                </ExternalLink>
+                .
+              </>
+            }
             title={`Call your ${getYourPoliticianCategoryShortDisplayName(CALL_FLOW_POLITICIANS_CATEGORY, { maxCount: 1 })}`}
           />
 
