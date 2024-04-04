@@ -10,7 +10,7 @@ import { GooglePlaceAutocompletePrediction } from '@/utils/web/googlePlaceUtils'
 
 const CALLBACK_NAME = 'PLACES_AUTOCOMPLETE'
 
-type GooglePlacesSelectProps = {
+export type GooglePlacesSelectProps = {
   value: GooglePlaceAutocompletePrediction | null
   onChange: (val: GooglePlaceAutocompletePrediction | null) => void
 } & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange' | 'type'>
