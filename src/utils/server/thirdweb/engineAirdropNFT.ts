@@ -22,6 +22,7 @@ export async function engineAirdropNFT(nftSlug: NFTSlug, walletAddress: string, 
       )
       return 'local'
     }
+
     const result = await thirdwebEngine.erc721.claimTo(
       CHAIN_ID,
       contractAddress,

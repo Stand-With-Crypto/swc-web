@@ -68,13 +68,18 @@ function GoBackButton({ onClick }: { onClick: () => void }) {
 
 function CongresspersonDisplayFooter({
   children,
-  dtsiPerson,
+  dtsiPeopleResponse,
+  maxPeopleDisplayed,
 }: React.PropsWithChildren<{
-  dtsiPerson?: DTSIPeopleFromCongressionalDistrict
+  maxPeopleDisplayed?: number
+  dtsiPeopleResponse?: DTSIPeopleFromCongressionalDistrict
 }>) {
   return (
     <div className="flex w-full flex-col gap-4 border-t p-6 pt-3 md:flex-row md:items-center md:justify-between md:px-12">
-      <DtsiCongresspersonDisplay dtsiPersonResponse={dtsiPerson} />
+      <DtsiCongresspersonDisplay
+        dtsiPeopleResponse={dtsiPeopleResponse}
+        maxPeopleDisplayed={maxPeopleDisplayed}
+      />
       {children}
     </div>
   )

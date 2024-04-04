@@ -10,7 +10,10 @@ import { z } from 'zod'
 import { actionCreateUserActionEmailCongressperson } from '@/actions/actionCreateUserActionEmailCongressperson'
 import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
 import { DTSICongresspersonAssociatedWithFormAddress } from '@/components/app/dtsiCongresspersonAssociatedWithFormAddress'
-import { ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON } from '@/components/app/userActionFormEmailCongressperson/constants'
+import {
+  ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON,
+  EMAIL_FLOW_POLITICIANS_CATEGORY,
+} from '@/components/app/userActionFormEmailCongressperson/constants'
 import { getDefaultText } from '@/components/app/userActionFormEmailCongressperson/getDefaultText'
 import { FormFields } from '@/components/app/userActionFormEmailCongressperson/types'
 import { Button } from '@/components/ui/button'
@@ -34,6 +37,11 @@ import { Textarea } from '@/components/ui/textarea'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { UserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns'
+import {
+  getYourPoliticianCategoryDisplayName,
+  getYourPoliticianCategoryShortDisplayName,
+  YourPoliticianCategory,
+} from '@/utils/shared/yourPoliticianCategory'
 import { cn } from '@/utils/web/cn'
 import {
   GenericErrorFormValues,
@@ -53,10 +61,10 @@ type FormValues = z.infer<typeof zodUserActionFormEmailCongresspersonFields> &
 
 const getDefaultValues = ({
   user,
-  dtsiSlug,
+  dtsiSlugs,
 }: {
   user: GetUserFullProfileInfoResponse['user']
-  dtsiSlug: string | undefined
+  dtsiSlugs: string[]
 }): Partial<FormValues> => {
   if (user) {
     return {
@@ -71,6 +79,7 @@ const getDefaultValues = ({
             place_id: user.address.googlePlaceId,
           }
         : undefined,
+      dtsiSlugs,
     }
   }
   return {
@@ -80,7 +89,7 @@ const getDefaultValues = ({
     emailAddress: '',
     message: getDefaultText(),
     address: undefined,
-    dtsiSlug,
+    dtsiSlugs,
   }
 }
 
@@ -88,16 +97,18 @@ export function UserActionFormEmailCongressperson({
   onSuccess,
   user,
   initialValues,
+  politicianCategory = EMAIL_FLOW_POLITICIANS_CATEGORY,
 }: {
   user: GetUserFullProfileInfoResponse['user']
   onCancel: () => void
   onSuccess: () => void
   initialValues?: FormFields
+  politicianCategory?: YourPoliticianCategory
 }) {
   const router = useRouter()
   const urls = useIntlUrls()
-  const userDefaultValues = useMemo(() => getDefaultValues({ user, dtsiSlug: undefined }), [user])
-
+  const userDefaultValues = useMemo(() => getDefaultValues({ user, dtsiSlugs: [] }), [user])
+  const politicianCategoryDisplayName = getYourPoliticianCategoryDisplayName(politicianCategory)
   const form = useForm<FormValues>({
     resolver: zodResolver(zodUserActionFormEmailCongresspersonFields),
     defaultValues: {
@@ -106,6 +117,7 @@ export function UserActionFormEmailCongressperson({
       emailAddress: initialValues?.email || userDefaultValues.emailAddress,
       firstName: initialValues?.firstName || userDefaultValues.firstName,
       lastName: initialValues?.lastName || userDefaultValues.lastName,
+      politicianCategory,
     },
   })
 
@@ -136,7 +148,8 @@ export function UserActionFormEmailCongressperson({
                 ...(address ? convertAddressToAnalyticsProperties(address) : {}),
                 'Campaign Name': values.campaignName,
                 'User Action Type': UserActionType.EMAIL,
-                'DTSI Slug': values.dtsiSlug,
+                'DTSI Slug': values.dtsiSlugs[0],
+                'DTSI Slugs': values.dtsiSlugs,
               },
               payload: { ...values, address },
             },
@@ -159,11 +172,11 @@ export function UserActionFormEmailCongressperson({
         <ScrollArea>
           <div className={cn(dialogContentPaddingStyles, 'space-y-4 md:space-y-8')}>
             <PageTitle className="mb-3" size="sm">
-              Email your congressperson
+              Email your {getYourPoliticianCategoryShortDisplayName(politicianCategory)}
             </PageTitle>
             <PageSubTitle className="mb-7">
-              Email your Congressperson and tell them to support crypto. Enter following information
-              and we will generate a personalized email for you to send to your representative.
+              Email your {politicianCategoryDisplayName} and tell them to support crypto. Enter the
+              following information and we will generate a personalized email for you to send.
             </PageSubTitle>
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <FormField
@@ -237,49 +250,48 @@ export function UserActionFormEmailCongressperson({
               )}
             />
             <FormGeneralErrorMessage control={form.control} />
-            <div>
-              <p className="text-xs text-fontcolor-muted">
-                By submitting, I understand that Stand With Crypto and its vendors may collect and
-                use my Personal Information. To learn more, visit the Stand With Crypto Alliance{' '}
-                <InternalLink href={urls.privacyPolicy()} tabIndex={-1}>
-                  Privacy Policy
-                </InternalLink>{' '}
-                and{' '}
-                <ExternalLink
-                  href={'https://www.quorum.us/static/Privacy-Policy.pdf'}
-                  tabIndex={-1}
-                >
-                  Quorum Privacy Policy
-                </ExternalLink>
-                .
-              </p>
-            </div>
+            <FormField
+              control={form.control}
+              name="address"
+              render={addressProps => (
+                <FormField
+                  control={form.control}
+                  name="dtsiSlugs"
+                  render={dtsiSlugProps => (
+                    <div className="w-full">
+                      <DTSICongresspersonAssociatedWithFormAddress
+                        address={addressProps.field.value}
+                        currentDTSISlugValue={dtsiSlugProps.field.value}
+                        onChangeDTSISlug={dtsiSlugProps.field.onChange}
+                        politicianCategory={politicianCategory}
+                      />
+                      <FormErrorMessage />
+                    </div>
+                  )}
+                />
+              )}
+            />
           </div>
         </ScrollArea>
         <div
           className="z-10 flex flex-1 flex-col items-center justify-between gap-4 border border-t p-6 sm:flex-row md:px-12"
           style={{ boxShadow: 'rgba(0, 0, 0, 0.2) 0px 1px 6px 0px' }}
         >
-          <FormField
-            control={form.control}
-            name="address"
-            render={addressProps => (
-              <FormField
-                control={form.control}
-                name="dtsiSlug"
-                render={dtsiSlugProps => (
-                  <div className="w-full">
-                    <DTSICongresspersonAssociatedWithFormAddress
-                      address={addressProps.field.value}
-                      currentDTSISlugValue={dtsiSlugProps.field.value}
-                      onChangeDTSISlug={dtsiSlugProps.field.onChange}
-                    />
-                    <FormErrorMessage />
-                  </div>
-                )}
-              />
-            )}
-          />
+          <div>
+            <p className="text-xs text-fontcolor-muted">
+              By submitting, I understand that Stand With Crypto and its vendors may collect and use
+              my Personal Information. To learn more, visit the Stand With Crypto Alliance{' '}
+              <InternalLink href={urls.privacyPolicy()} tabIndex={-1}>
+                Privacy Policy
+              </InternalLink>{' '}
+              and{' '}
+              <ExternalLink href={'https://www.quorum.us/privacy-policy/'} tabIndex={-1}>
+                Quorum Privacy Policy
+              </ExternalLink>
+              .
+            </p>
+          </div>
+
           <div className="w-full sm:w-auto">
             <Button
               className="w-full sm:w-auto"

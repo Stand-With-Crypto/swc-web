@@ -146,6 +146,7 @@ async function maybeUpsertUser({
       hasOptedInToEmails: false,
       hasOptedInToMembership: false,
       hasOptedInToSms: false,
+      hasRepliedToOptInSms: false,
     },
   })
   return { user, userState: 'New' }

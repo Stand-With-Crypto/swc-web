@@ -6,7 +6,10 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import useSWR from 'swr'
 
 import type { CallCongresspersonActionSharedData } from '@/components/app/userActionFormCallCongressperson'
-import { SectionNames } from '@/components/app/userActionFormCallCongressperson/constants'
+import {
+  CALL_FLOW_POLITICIANS_CATEGORY,
+  SectionNames,
+} from '@/components/app/userActionFormCallCongressperson/constants'
 import { FormFields } from '@/components/app/userActionFormCallCongressperson/types'
 import { UserActionFormLayout } from '@/components/app/userActionFormCommon/layout'
 import { Button } from '@/components/ui/button'
@@ -27,6 +30,10 @@ import {
 import { useGoogleMapsScript } from '@/hooks/useGoogleMapsScript'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useIsMobile } from '@/hooks/useIsMobile'
+import {
+  getYourPoliticianCategoryDisplayName,
+  getYourPoliticianCategoryShortDisplayName,
+} from '@/utils/shared/yourPoliticianCategory'
 import { trackFormSubmissionSyncErrors } from '@/utils/web/formUtils'
 import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
 
@@ -57,8 +64,8 @@ export function Address({
   initialValues,
   heading = (
     <UserActionFormLayout.Heading
-      subtitle="Your address will be used to connect you with your representative. Stand With Crypto will never share your data with any third-parties."
-      title="Find your representative"
+      subtitle={`Your address will be used to connect you with your ${getYourPoliticianCategoryDisplayName(CALL_FLOW_POLITICIANS_CATEGORY, { maxCount: 1 })}. Stand With Crypto will never share your data with any third-parties.`}
+      title={`Find your ${getYourPoliticianCategoryShortDisplayName(CALL_FLOW_POLITICIANS_CATEGORY, { maxCount: 1 })}`}
     />
   ),
   submitButtonText = 'Continue',
@@ -96,7 +103,7 @@ export function Address({
       return
     }
 
-    if (!('dtsiPerson' in liveCongressPersonData)) {
+    if (!('dtsiPeople' in liveCongressPersonData)) {
       form.setError('address', {
         type: 'manual',
         message: formatGetDTSIPeopleFromAddressNotFoundReason(liveCongressPersonData),
@@ -203,7 +210,10 @@ export function useCongresspersonData({
         return null
       }
 
-      const dtsiResponse = await getDTSIPeopleFromAddress(address.description)
+      const dtsiResponse = await getDTSIPeopleFromAddress(
+        address.description,
+        CALL_FLOW_POLITICIANS_CATEGORY,
+      )
       if ('notFoundReason' in dtsiResponse) {
         return { notFoundReason: dtsiResponse.notFoundReason }
       }

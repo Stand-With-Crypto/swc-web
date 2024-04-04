@@ -10,71 +10,72 @@ import { GooglePlaceAutocompletePrediction } from '@/utils/web/googlePlaceUtils'
 
 const CALLBACK_NAME = 'PLACES_AUTOCOMPLETE'
 
-type Props = {
+type GooglePlacesSelectProps = {
   value: GooglePlaceAutocompletePrediction | null
   onChange: (val: GooglePlaceAutocompletePrediction | null) => void
 } & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange' | 'type'>
 
-export const GooglePlacesSelect = React.forwardRef<React.ElementRef<'input'>, Props>(
-  (props, ref) => {
-    const { value: propsValue, onChange: propsOnChange, className, ...inputProps } = props
-    const [open, setOpen] = React.useState(false)
-    const {
-      ready,
-      value,
-      suggestions: { data },
-      setValue,
-      init,
-    } = usePlacesAutocomplete({
-      callbackName: CALLBACK_NAME,
-      // note on why we aren't restricting to just addresses https://stackoverflow.com/a/65206036
-      requestOptions: {
-        locationBias: 'IP_BIAS',
-        language: 'en',
-      },
-    })
-    const scriptStatus = useGoogleMapsScript(CALLBACK_NAME)
+export const GooglePlacesSelect = React.forwardRef<
+  React.ElementRef<'input'>,
+  GooglePlacesSelectProps
+>((props, ref) => {
+  const { value: propsValue, onChange: propsOnChange, className, ...inputProps } = props
+  const [open, setOpen] = React.useState(false)
+  const {
+    ready,
+    value,
+    suggestions: { data },
+    setValue,
+    init,
+  } = usePlacesAutocomplete({
+    callbackName: CALLBACK_NAME,
+    // note on why we aren't restricting to just addresses https://stackoverflow.com/a/65206036
+    requestOptions: {
+      locationBias: 'IP_BIAS',
+      language: 'en',
+    },
+  })
+  const scriptStatus = useGoogleMapsScript(CALLBACK_NAME)
 
-    useEffect(() => {
-      if (scriptStatus === 'ready') {
-        init()
-      }
-    }, [init, scriptStatus])
+  useEffect(() => {
+    if (scriptStatus === 'ready') {
+      init()
+    }
+  }, [init, scriptStatus])
 
-    return (
-      <Combobox
-        analytics={'Google Place Select'}
-        formatPopoverTrigger={triggerProps => (
-          <InputWithIcons
-            className={cn(
-              triggerProps.value || 'text-gray-500',
-              'cursor-pointer whitespace-normal',
-              triggerProps.open && 'outline-none ring-2 ring-ring ring-offset-2',
-              className,
-            )}
-            leftIcon={<MapPin className="h-4 w-4 text-gray-500" />}
-            placeholder="select a location"
-            ref={ref}
-            value={triggerProps.value?.description || inputProps.placeholder || 'select a location'}
-            {...inputProps}
-            readOnly
-            // There's a weird bug where, because the input is type="button", on mobile a long address string will overflow the entire page
-            type="input"
-          />
-        )}
-        getOptionKey={val => val.place_id}
-        getOptionLabel={val => val.description}
-        inputValue={value}
-        isLoading={!ready}
-        onChange={propsOnChange}
-        onChangeInputValue={setValue}
-        open={open}
-        options={data}
-        placeholder="Type your address..."
-        setOpen={setOpen}
-        value={propsValue}
-      />
-    )
-  },
-)
+  return (
+    <Combobox
+      analytics={'Google Place Select'}
+      formatPopoverTrigger={triggerProps => (
+        <InputWithIcons
+          className={cn(
+            triggerProps.value || 'text-gray-500',
+            'cursor-pointer whitespace-normal',
+            triggerProps.open && 'outline-none ring-2 ring-ring ring-offset-2',
+            className,
+          )}
+          leftIcon={<MapPin className="h-4 w-4 text-gray-500" />}
+          placeholder="select a location"
+          ref={ref}
+          value={triggerProps.value?.description || inputProps.placeholder || 'select a location'}
+          {...inputProps}
+          readOnly
+          // There's a weird bug where, because the input is type="button", on mobile a long address string will overflow the entire page
+          type="input"
+        />
+      )}
+      getOptionKey={val => val.place_id}
+      getOptionLabel={val => val.description}
+      inputValue={value}
+      isLoading={!ready}
+      onChange={propsOnChange}
+      onChangeInputValue={setValue}
+      open={open}
+      options={data}
+      placeholder="Type your address..."
+      setOpen={setOpen}
+      value={propsValue}
+    />
+  )
+})
 GooglePlacesSelect.displayName = 'GooglePlacesSelect'

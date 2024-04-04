@@ -323,8 +323,33 @@ async function seed() {
         data,
       }),
   )
-  const userAction = await prismaClient.userAction.findMany()
+  const userAction = await prismaClient.userAction.findMany({
+    include: { nftMint: true },
+  })
   logEntity({ userAction })
+
+  const userActionsWithNftMint = userAction.filter(
+    action =>
+      action.actionType === UserActionType.NFT_MINT &&
+      action.nftMintId &&
+      action.nftMint?.costAtMint.isPositive(),
+  )
+  await batchAsyncAndLog(userActionsWithNftMint, async function (data) {
+    const updatePromises = data.map(userActionNftMint => {
+      if (userActionNftMint.nftMint?.costAtMintUsd.isPositive()) {
+        return prismaClient.user.update({
+          where: { id: userActionNftMint.userId },
+          data: {
+            totalDonationAmountUsd: {
+              increment: userActionNftMint.nftMint.costAtMintUsd,
+            },
+          },
+        })
+      }
+    })
+    await Promise.all(updatePromises)
+  })
+  logger.info("updated users' total donation USD amount based on NFT mint cost")
 
   const userActionsByType = groupBy(userAction, x => x.actionType) as Record<
     UserActionType,
@@ -408,8 +433,27 @@ async function seed() {
         data,
       }),
   )
-  const userActionDonation = await prismaClient.userActionDonation.findMany()
+  const userActionDonation = await prismaClient.userActionDonation.findMany({
+    include: { userAction: true },
+  })
   logEntity({ userActionDonation })
+
+  await batchAsyncAndLog(userActionDonation, async function (data) {
+    const updatePromises = data.map(donation => {
+      if (donation.amountUsd.isPositive()) {
+        return prismaClient.user.update({
+          where: { id: donation.userAction.userId },
+          data: {
+            totalDonationAmountUsd: {
+              increment: donation.amountUsd,
+            },
+          },
+        })
+      }
+    })
+    await Promise.all(updatePromises)
+  })
+  logger.info("updated users' total donation USD amount based on donation amount")
 
   /*
   userActionOptIn

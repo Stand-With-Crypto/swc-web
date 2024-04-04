@@ -1,5 +1,6 @@
 import Cookies from 'js-cookie'
 
+import { isBrowser } from '@/utils/shared/executionEnvironment'
 import {
   CurrentSessionLocalUser,
   LOCAL_USER_CURRENT_SESSION_KEY,
@@ -42,6 +43,16 @@ export const bootstrapLocalUser = () => {
 }
 
 export const getLocalUser = (): LocalUser => {
+  if (!isBrowser) {
+    return {
+      currentSession: {
+        refererOnLoad: undefined,
+        datetimeOnLoad: new Date().toISOString(),
+        searchParamsOnLoad: {},
+      },
+      persisted: undefined,
+    }
+  }
   const canUsePersistedData =
     getClientCookieConsent().targeting && getClientCookieConsent().functional
   if (localUser) {

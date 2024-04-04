@@ -8,7 +8,10 @@ import {
   CreateActionCallCongresspersonInput,
 } from '@/actions/actionCreateUserActionCallCongressperson'
 import { CallCongresspersonActionSharedData } from '@/components/app/userActionFormCallCongressperson'
-import { SectionNames } from '@/components/app/userActionFormCallCongressperson/constants'
+import {
+  CALL_FLOW_POLITICIANS_CATEGORY,
+  SectionNames,
+} from '@/components/app/userActionFormCallCongressperson/constants'
 import { UserActionFormLayout } from '@/components/app/userActionFormCommon/layout'
 import { Button } from '@/components/ui/button'
 import { ExternalLink } from '@/components/ui/link'
@@ -19,6 +22,7 @@ import { getGoogleCivicOfficialByDTSIName } from '@/utils/shared/googleCivicInfo
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { UserActionCallCampaignName } from '@/utils/shared/userActionCampaigns'
 import { userFullName } from '@/utils/shared/userFullName'
+import { getYourPoliticianCategoryShortDisplayName } from '@/utils/shared/yourPoliticianCategory'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
 import { toastGenericError } from '@/utils/web/toastUtils'
@@ -32,13 +36,14 @@ export function SuggestedScript({
   CallCongresspersonActionSharedData,
   'user' | 'congressPersonData' | keyof UseSectionsReturn<SectionNames>
 >) {
-  const { dtsiPerson, addressSchema, googleCivicData } = congressPersonData
+  const { dtsiPeople, addressSchema, googleCivicData } = congressPersonData
 
   const router = useRouter()
   const ref = React.useRef<HTMLAnchorElement>(null)
   useEffect(() => {
     ref.current?.focus({ preventScroll: true })
   }, [ref])
+  const dtsiPerson = dtsiPeople[0]
   const phoneNumber = React.useMemo(() => {
     const official = getGoogleCivicOfficialByDTSIName(dtsiPerson, googleCivicData)
 
@@ -114,7 +119,7 @@ export function SuggestedScript({
                 .
               </>
             }
-            title="Call your representative"
+            title={`Call your ${getYourPoliticianCategoryShortDisplayName(CALL_FLOW_POLITICIANS_CATEGORY, { maxCount: 1 })}`}
           />
 
           <div className="prose mx-auto">
@@ -141,7 +146,10 @@ export function SuggestedScript({
         </UserActionFormLayout.Container>
       </UserActionFormLayout>
 
-      <UserActionFormLayout.CongresspersonDisplayFooter dtsiPerson={congressPersonData}>
+      <UserActionFormLayout.CongresspersonDisplayFooter
+        dtsiPeopleResponse={congressPersonData}
+        maxPeopleDisplayed={1}
+      >
         {phoneNumber ? (
           callingState !== 'not-calling' ? (
             <Button

@@ -62,7 +62,7 @@ export function UserActionFormCallCongressperson({
     useCongresspersonData({ address: initialAddress })
 
   React.useEffect(() => {
-    if (resolvedCongressPersonData && 'dtsiPerson' in resolvedCongressPersonData) {
+    if (resolvedCongressPersonData && 'dtsiPeople' in resolvedCongressPersonData) {
       setCongresspersonData(resolvedCongressPersonData)
     }
   }, [resolvedCongressPersonData])

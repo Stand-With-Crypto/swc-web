@@ -17,6 +17,7 @@
 
 .base {
   position: relative;
+  cursor: pointer;
 }
 
 .base a[href]:not(.overlay),

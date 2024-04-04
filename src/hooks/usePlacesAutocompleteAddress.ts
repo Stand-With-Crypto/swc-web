@@ -10,7 +10,7 @@ const CALLBACK_NAME = 'PLACES_AUTOCOMPLETE'
  */
 export function usePlacesAutocompleteAddress(address: string) {
   const {
-    suggestions: { data: addressSuggestions },
+    suggestions: { data: addressSuggestions, status },
     init,
     setValue,
     ready,
@@ -22,6 +22,8 @@ export function usePlacesAutocompleteAddress(address: string) {
       language: 'en',
     },
   })
+  // the library returns a loading prop but it appears to always be false. Status will be an empty string unless it returns something
+  const loading = !status
 
   const scriptStatus = useGoogleMapsScript(CALLBACK_NAME)
 
@@ -35,5 +37,8 @@ export function usePlacesAutocompleteAddress(address: string) {
     }
   }, [address, init, scriptStatus, setValue])
 
-  return useMemo(() => ({ addressSuggestions, ready }), [addressSuggestions, ready])
+  return useMemo(
+    () => ({ addressSuggestions, ready, loading }),
+    [addressSuggestions, loading, ready],
+  )
 }

@@ -2,8 +2,8 @@ import { NFTCurrency, NFTMintStatus } from '@prisma/client'
 import { Decimal } from '@prisma/client/runtime/library'
 import { NonRetriableError } from 'inngest'
 
+import { onFailureAirdropNFT } from '@/inngest/functions/airdropNFT/onFailureAirdropNFT'
 import { inngest } from '@/inngest/inngest'
-import { onFailureAirdropNFT } from '@/inngest/onFailureAirdropNFT'
 import { AirdropPayload } from '@/utils/server/nft/payload'
 import {
   THIRDWEB_TRANSACTION_STATUS_TO_NFT_MINT_STATUS,

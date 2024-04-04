@@ -5,6 +5,7 @@ import {
   getGoogleCivicDataFromAddress,
   GoogleCivicInfoResponse,
 } from '@/utils/shared/googleCivicInfo'
+import { USStateCode } from '@/utils/shared/usStateUtils'
 
 const SINGLE_MEMBER_STATES = ['AK', 'DE', 'ND', 'SD', 'VT', 'WY']
 
@@ -72,7 +73,14 @@ export type CongressionalDistrictFromAddress = Awaited<
   ReturnType<typeof getCongressionalDistrictFromAddress>
 >
 
-export async function getCongressionalDistrictFromAddress(address: string) {
+export type GetCongressionalDistrictFromAddressParams = {
+  stateCode?: USStateCode
+}
+
+export async function getCongressionalDistrictFromAddress(
+  address: string,
+  { stateCode: passedStateCode }: GetCongressionalDistrictFromAddressParams = {},
+) {
   const result = await getGoogleCivicDataFromAddress(address).catch(() => null)
   if (!result) {
     return { notFoundReason: 'CIVIC_API_DOWN' as const }
@@ -97,6 +105,10 @@ export async function getCongressionalDistrictFromAddress(address: string) {
     } as GetCongressionalDistrictFromAddressSuccess
   }
 
+  if (passedStateCode && passedStateCode !== stateCode) {
+    return { notFoundReason: 'NOT_SAME_STATE' as const }
+  }
+
   const districtString = findCongressionalDistrictString(result, address)
   if (isObject(districtString)) {
     return districtString
@@ -114,4 +126,29 @@ export async function getCongressionalDistrictFromAddress(address: string) {
     districtNumber,
     googleCivicData: result,
   } as GetCongressionalDistrictFromAddressSuccess
+}
+
+export function formatGetCongressionalDistrictFromAddressNotFoundReason(
+  data: Exclude<CongressionalDistrictFromAddress, { stateCode: string }> | undefined | null,
+) {
+  const defaultError = "We can't find your district right now, we're working on a fix."
+  if (!data || !('notFoundReason' in data)) {
+    return defaultError
+  }
+
+  switch (data.notFoundReason) {
+    case 'NOT_USA_ADDRESS':
+      return 'Please enter a US-based address.'
+    case 'NOT_SAME_STATE':
+      return 'Looks like your address is not in this state.'
+    case 'NO_REPS_IN_STATE':
+      return 'No representatives in your state.'
+    case 'NOT_SPECIFIC_ENOUGH':
+      return 'Please enter a specific address that includes street-level information.'
+    case 'CIVIC_API_DOWN':
+      return "Looks like we're having some issues finding your representative right now. Please come back later and try again."
+    case 'UNEXPECTED_ERROR':
+    default:
+      return defaultError
+  }
 }

@@ -1,8 +1,9 @@
 import { CapitolCanaryInstance } from '@prisma/client'
+import * as Sentry from '@sentry/nextjs'
 import { NonRetriableError } from 'inngest'
 
+import { onFailureCapitolCanary } from '@/inngest/functions/capitolCanary/onFailureCapitolCanary'
 import { inngest } from '@/inngest/inngest'
-import { onFailureCapitolCanary } from '@/inngest/onFailureCapitolCanary'
 import {
   createAdvocateInCapitolCanary,
   formatCapitolCanaryAdvocateCreationRequest,
@@ -121,6 +122,14 @@ export const emailRepViaCapitolCanaryWithInngest = inngest.createFunction(
       async () => {
         const emailRepResp = await emailRepViaCapitolCanary(formattedEmailRepRequest)
         if (emailRepResp.success !== 1) {
+          if (emailRepResp.error) {
+            Sentry.captureMessage(`emailRepViaCapitolCanary error: ${emailRepResp.error}`, {
+              extra: { formattedEmailRepRequest, data },
+              tags: {
+                administrativeAreaLevel1: data.user.address?.administrativeAreaLevel1,
+              },
+            })
+          }
           throw new NonRetriableError(
             `client error for emailing rep via capitol canary: ${JSON.stringify(emailRepResp)}`,
           )

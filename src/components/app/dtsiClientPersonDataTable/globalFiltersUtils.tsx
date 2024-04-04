@@ -15,7 +15,7 @@ import {
   DTSI_PersonRoleCategory,
   DTSI_PersonRoleStatus,
 } from '@/data/dtsi/generated'
-import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
+import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 
 export enum StanceOnCryptoOptions {
   ALL = 'All',
@@ -69,7 +69,7 @@ export interface IGlobalFilters {
   [GlobalFilterKeys.Role]: (typeof ROLE_OPTIONS)[keyof typeof ROLE_OPTIONS]
   [GlobalFilterKeys.Party]: (typeof PARTY_OPTIONS)[keyof typeof PARTY_OPTIONS]
   [GlobalFilterKeys.Stance]: StanceOnCryptoOptions
-  [GlobalFilterKeys.State]: 'All' | keyof typeof US_STATE_CODE_TO_DISPLAY_NAME_MAP
+  [GlobalFilterKeys.State]: 'All' | USStateCode
 }
 
 export const getGlobalFilterDefaults = (): IGlobalFilters => ({
