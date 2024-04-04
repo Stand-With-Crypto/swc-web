@@ -2,7 +2,6 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import { capitalize } from 'lodash-es'
 import type { Metadata, Viewport } from 'next'
 import { notFound } from 'next/navigation'
-import Script from 'next/script'
 
 import { TopLevelClientLogic } from '@/app/[locale]/topLevelClientLogic'
 import { CookieConsent } from '@/components/app/cookieConsent'
@@ -14,15 +13,8 @@ import { ORDERED_SUPPORTED_LOCALES } from '@/intl/locales'
 import { PageProps } from '@/types'
 import { getOpenGraphImageUrl } from '@/utils/server/generateOpenGraphImageUrl'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { fontClassName } from '@/utils/web/fonts'
-
-const NEXT_PUBLIC_GOOGLE_PLACES_API_KEY = requiredEnv(
-  process.env.NEXT_PUBLIC_GOOGLE_PLACES_API_KEY,
-  'NEXT_PUBLIC_GOOGLE_PLACES_API_KEY',
-)
-const CALLBACK_NAME = 'PLACES_AUTOCOMPLETE'
 
 // we want dynamicParams to be false for this top level layout, but we also want to ensure that subpages can have dynamic params
 // Next.js doesn't allow this so we allow dynamic params in the config here, and then trigger a notFound in the layout if one is passed
@@ -92,11 +84,6 @@ export default function Layout({ children, params }: PageProps & { children: Rea
         <CookieConsent locale={locale} />
         {/* <Analytics debug={false} /> */}
         <SpeedInsights debug={false} sampleRate={0.01} />
-        <Script
-          key="maps-api-script"
-          src={`https://maps.googleapis.com/maps/api/js?key=${NEXT_PUBLIC_GOOGLE_PLACES_API_KEY}&libraries=places&callback=${CALLBACK_NAME}`}
-          strategy="lazyOnload"
-        />
       </body>
     </html>
   )

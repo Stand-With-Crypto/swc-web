@@ -24,6 +24,7 @@ import {
   formatGetDTSIPeopleFromAddressNotFoundReason,
   getDTSIPeopleFromAddress,
 } from '@/hooks/useGetDTSIPeopleFromAddress'
+import { useGoogleMapsScript } from '@/hooks/useGoogleMapsScript'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { trackFormSubmissionSyncErrors } from '@/utils/web/formUtils'
@@ -193,16 +194,26 @@ export function useCongresspersonData({
 }: {
   address?: FindRepresentativeCallFormValues['address']
 }) {
-  return useSWR(address ? `useCongresspersonData-${address.description}` : null, async () => {
-    if (!address) {
-      return null
-    }
+  const scriptStatus = useGoogleMapsScript()
 
-    const dtsiResponse = await getDTSIPeopleFromAddress(address.description)
-    if ('notFoundReason' in dtsiResponse) {
-      return { notFoundReason: dtsiResponse.notFoundReason }
-    }
-    const addressSchema = await convertGooglePlaceAutoPredictionToAddressSchema(address)
-    return { ...dtsiResponse, addressSchema }
-  })
+  const result = useSWR(
+    address && scriptStatus === 'ready' ? `useCongresspersonData-${address.description}` : null,
+    async () => {
+      if (!address) {
+        return null
+      }
+
+      const dtsiResponse = await getDTSIPeopleFromAddress(address.description)
+      if ('notFoundReason' in dtsiResponse) {
+        return { notFoundReason: dtsiResponse.notFoundReason }
+      }
+      const addressSchema = await convertGooglePlaceAutoPredictionToAddressSchema(address)
+      return { ...dtsiResponse, addressSchema }
+    },
+  )
+
+  return {
+    ...result,
+    isLoading: scriptStatus === 'loading' || result.isLoading,
+  }
 }

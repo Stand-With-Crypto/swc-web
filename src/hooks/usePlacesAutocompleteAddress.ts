@@ -1,6 +1,8 @@
 import { useEffect, useMemo } from 'react'
 import usePlacesAutocomplete from 'use-places-autocomplete'
 
+import { useGoogleMapsScript } from '@/hooks/useGoogleMapsScript'
+
 const CALLBACK_NAME = 'PLACES_AUTOCOMPLETE'
 
 /**
@@ -21,13 +23,17 @@ export function usePlacesAutocompleteAddress(address: string) {
     },
   })
 
+  const scriptStatus = useGoogleMapsScript(CALLBACK_NAME)
+
   useEffect(() => {
-    init()
-    if (address) {
-      // Setting the value will trigger fetching the address suggestions
-      setValue(address)
+    if (scriptStatus === 'ready') {
+      init()
+      if (address) {
+        // Setting the value will trigger fetching the address suggestions
+        setValue(address)
+      }
     }
-  }, [address, init, setValue])
+  }, [address, init, scriptStatus, setValue])
 
   return useMemo(() => ({ addressSuggestions, ready }), [addressSuggestions, ready])
 }
