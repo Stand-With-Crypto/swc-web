@@ -50,7 +50,8 @@ export const backfillNFTInngestCronJob = inngest.createFunction(
   },
   {
     ...(NEXT_PUBLIC_ENVIRONMENT === 'production'
-      ? { cron: BACKFILL_NFT_INNGEST_CRON_JOB_SCHEDULE }
+      ? // ? { cron: BACKFILL_NFT_INNGEST_CRON_JOB_SCHEDULE }
+        { event: BACKFILL_NFT_INNGEST_CRON_JOB_EVENT_NAME }
       : { event: BACKFILL_NFT_INNGEST_CRON_JOB_EVENT_NAME }),
   },
   async ({ step }) => {
