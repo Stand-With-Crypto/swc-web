@@ -1,43 +1,41 @@
-import { ImageResponse } from "@vercel/og";
+import { ImageResponse } from '@vercel/og'
 
 export const FRAME_IMAGE_DIMENSIONS = {
-    width: 1200,
-    height: 630,
+  width: 1200,
+  height: 630,
 }
 
 export const generateFrameImage = async (content: React.ReactNode) => {
-    const imageResponse = new ImageResponse(
-      (
+  const imageResponse = new ImageResponse(
+    (
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'stretch',
+          width: '100%',
+          height: '100vh',
+          backgroundColor: 'white',
+        }}
+      >
         <div
           style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "stretch",
-            width: "100%",
-            height: "100vh",
-            backgroundColor: "white",
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            lineHeight: 1.2,
+            fontSize: 36,
+            color: 'black',
+            flex: 1,
+            overflow: 'hidden',
           }}
         >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-              lineHeight: 1.2,
-              fontSize: 36,
-              color: "black",
-              flex: 1,
-              overflow: "hidden",
-            }}
-          >
-            {content}
-          </div>
+          {content}
         </div>
-      ),
-      FRAME_IMAGE_DIMENSIONS
-    )
-    return imageResponse
-    // const imgBuffer = await imageResponse?.arrayBuffer()
-    // return `data:image/png;base64,${Buffer.from(imgBuffer).toString("base64")}`
+      </div>
+    ),
+    FRAME_IMAGE_DIMENSIONS,
+  )
+  return imageResponse
 }
