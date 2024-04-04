@@ -1,4 +1,3 @@
-import { getFarcasterUserAddress } from '@coinbase/onchainkit/farcaster'
 import { FrameMetadataType, FrameRequest, getFrameHtmlResponse } from '@coinbase/onchainkit/frame'
 import { NextRequest, NextResponse } from 'next/server'
 
@@ -161,25 +160,30 @@ export async function POST(req: NextRequest): Promise<Response> {
   const body: FrameRequest = (await req.json()) as FrameRequest
 
   const buttonIndex = body.untrustedData?.buttonIndex
-  const inputText = body.untrustedData?.inputText as USStateCode
+  const stateInput = body.untrustedData?.inputText as USStateCode
 
-  const userAddress = await getFarcasterUserAddress(body.untrustedData?.fid)
-
-  console.log('FRAME INDEX:', frameIndex)
-  console.log('USER ADDRESS:', userAddress)
-  console.log('TRUSTED DATA', body.trustedData)
-  console.log('BUTTON INDEX:', buttonIndex)
-  console.log('INPUT TEXT:', inputText)
-
-  let link
-  let dynamicFrameData: FrameMetadataType
+  let link: string | undefined
 
   switch (frameIndex) {
     case 0: // Intro screen.
       return new NextResponse(getFrameHtmlResponse(frameData[frameIndex]))
-    case 1 || 2: // Email input and phone number input screen.
-      // TODO: hook up email and phone number input to SWC registration API.
-      // TODO: also determine if it's also possible to tie email <> phone number together... `getUserSessionId` doesn't seem to work.
+    case 1: // Email input screen.
+      // TODO: Hook up email input to SWC user registration.
+      /*
+      return new NextResponse(
+        getFrameHtmlResponse({
+          ...frameData[frameIndex],
+          state: { emailAddress: body.untrustedData?.inputText },
+        }),
+      )
+      */
+      return new NextResponse(getFrameHtmlResponse(frameData[frameIndex]))
+    case 2: // Email input and phone number input screen.
+      // TODO: Determine if it's possible to tie email <> phone number together across frames.
+      // Why is it necessary to tie the two fields across frames?
+      // - Each frame can only have one text field, so we cannot gather email and phone number within the same frame.
+      // - `getUserSessionId` doesn't seem to work as there no SWC user cookies for the frame.
+      // - Attempting to use the frame state to store information does not work.
       return new NextResponse(getFrameHtmlResponse(frameData[frameIndex]))
     case 3: // "Are you registered to vote" screen.
       switch (buttonIndex) {
@@ -192,31 +196,38 @@ export async function POST(req: NextRequest): Promise<Response> {
       }
       break
     case 4: // Register state screen.
+      // TODO: Validate state.
       link =
-        inputText && REGISTRATION_URLS_BY_STATE[inputText]
-          ? REGISTRATION_URLS_BY_STATE[inputText]['registerUrl']
+        stateInput && REGISTRATION_URLS_BY_STATE[stateInput]
+          ? REGISTRATION_URLS_BY_STATE[stateInput]['registerUrl']
           : undefined
       if (!link) return new NextResponse(getFrameHtmlResponse(frameData[frameIndex - 1])) // Same screen.
-
-      dynamicFrameData = frameData[frameIndex] // Register screen.
-      if (dynamicFrameData.buttons) {
-        dynamicFrameData.buttons[0].target = link
-      }
-      return new NextResponse(getFrameHtmlResponse(dynamicFrameData))
+      return new NextResponse(
+        getFrameHtmlResponse({
+          ...frameData[frameIndex],
+          buttons: [
+            { ...frameData[frameIndex].buttons![0], target: link },
+            frameData[frameIndex].buttons![1],
+          ],
+        }),
+      ) // Registration screen with updated link.
     case 5: // Register screen.
       return new NextResponse(getFrameHtmlResponse(frameData[7])) // Mint screen.
     case 6: // Check registration state screen.
       link =
-        inputText && REGISTRATION_URLS_BY_STATE[inputText]
-          ? REGISTRATION_URLS_BY_STATE[inputText]['checkRegistrationUrl']
+        stateInput && REGISTRATION_URLS_BY_STATE[stateInput]
+          ? REGISTRATION_URLS_BY_STATE[stateInput]['checkRegistrationUrl']
           : undefined
       if (!link) return new NextResponse(getFrameHtmlResponse(frameData[frameIndex - 1])) // Same screen.
-
-      dynamicFrameData = frameData[frameIndex] // Check registration screen.
-      if (dynamicFrameData.buttons) {
-        dynamicFrameData.buttons[0].target = link
-      }
-      return new NextResponse(getFrameHtmlResponse(dynamicFrameData))
+      return new NextResponse(
+        getFrameHtmlResponse({
+          ...frameData[frameIndex],
+          buttons: [
+            { ...frameData[frameIndex].buttons![0], target: link },
+            frameData[frameIndex].buttons![1],
+          ],
+        }),
+      ) // Registration screen with updated link.
     case 7: // Check registration screen.
       return new NextResponse(getFrameHtmlResponse(frameData[7])) // Mint screen.
     case 8: // Mint screen.
