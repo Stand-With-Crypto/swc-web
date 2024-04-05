@@ -10,7 +10,7 @@ import { useUser } from '@thirdweb-dev/react'
 import { parseThirdwebAddress } from '@/hooks/useThirdwebAddress/parseThirdwebAddress'
 import { AuthSessionMetadata } from '@/utils/server/thirdweb/types'
 
-export function useAuthUser() {
+export function useThirdwebAuthUser() {
   const data = useUser<Json, AuthSessionMetadata>()
   return {
     ...data,

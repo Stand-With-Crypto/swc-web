@@ -13,12 +13,12 @@ import { getLogger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 
 const LOCAL_USER_CRYPTO_ADDRESS = parseThirdwebAddress(
-  requiredEnv(process.env.LOCAL_USER_CRYPTO_ADDRESS, 'process.env.LOCAL_USER_CRYPTO_ADDRESS'),
+  requiredEnv(process.env.LOCAL_USER_CRYPTO_ADDRESS, 'LOCAL_USER_CRYPTO_ADDRESS'),
 )
 
 const LOCAL_USER_EMAIL_ADDRESS = requiredEnv(
   process.env.LOCAL_USER_EMAIL_ADDRESS,
-  'process.env.LOCAL_USER_EMAIL_ADDRESS',
+  'LOCAL_USER_EMAIL_ADDRESS',
 )
 
 const logger = getLogger('setUpLocalUserToHaveEmbeddedEmailAddress')

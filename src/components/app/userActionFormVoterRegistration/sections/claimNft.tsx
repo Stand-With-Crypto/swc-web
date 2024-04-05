@@ -8,14 +8,15 @@ import {
   actionCreateUserActionVoterRegistration,
   CreateActionVoterRegistrationInput,
 } from '@/actions/actionCreateUserActionVoterRegistration'
-import { UserActionFormLayout } from '@/components/app/userActionFormCommon'
-import { SectionNames, StateCode } from '@/components/app/userActionFormVoterRegistration/constants'
+import { SectionNames } from '@/components/app/userActionFormVoterRegistration/constants'
+import { UserActionFormVoterRegistrationLayout } from '@/components/app/userActionFormVoterRegistration/sections/layout'
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { ExternalLink } from '@/components/ui/link'
 import { UseSectionsReturn } from '@/hooks/useSections'
 import { NFTSlug } from '@/utils/shared/nft'
 import { UserActionVoterRegistrationCampaignName } from '@/utils/shared/userActionCampaigns'
+import { USStateCode } from '@/utils/shared/usStateUtils'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
 import { NFT_CLIENT_METADATA } from '@/utils/web/nft'
@@ -24,7 +25,7 @@ import { toastGenericError } from '@/utils/web/toastUtils'
 const I_AM_A_VOTER_NFT_IMAGE = NFT_CLIENT_METADATA[NFTSlug.I_AM_A_VOTER].image
 
 interface ClaimNftProps extends UseSectionsReturn<SectionNames> {
-  stateCode?: StateCode
+  stateCode?: USStateCode
 }
 
 export function ClaimNft({ goToSection, stateCode }: ClaimNftProps) {
@@ -55,7 +56,7 @@ export function ClaimNft({ goToSection, stateCode }: ClaimNftProps) {
       },
       payload =>
         actionCreateUserActionVoterRegistration(payload).then(actionResult => {
-          if (actionResult.user) {
+          if (actionResult?.user) {
             identifyUserOnClient(actionResult.user)
           }
           return actionResult
@@ -65,14 +66,16 @@ export function ClaimNft({ goToSection, stateCode }: ClaimNftProps) {
     if (result.status === 'success') {
       router.refresh()
       goToSection(SectionNames.SUCCESS)
+    } else {
+      toastGenericError()
     }
     setLoading(false)
   }, [goToSection, router, stateCode])
 
   return (
-    <UserActionFormLayout onBack={handleOnBack}>
-      <UserActionFormLayout.Container>
-        <UserActionFormLayout.Heading title="Claim “I'm a Voter” NFT" />
+    <UserActionFormVoterRegistrationLayout onBack={handleOnBack}>
+      <UserActionFormVoterRegistrationLayout.Container>
+        <UserActionFormVoterRegistrationLayout.Heading title="Claim “I'm a Voter” NFT" />
         <div className="flex w-full flex-col items-center gap-8 md:flex-row">
           <NextImage
             alt={I_AM_A_VOTER_NFT_IMAGE.alt}
@@ -83,17 +86,17 @@ export function ClaimNft({ goToSection, stateCode }: ClaimNftProps) {
           <p className="text-fontcolor-muted">
             The “I'm a Voter” NFT was created by{' '}
             <ExternalLink href="https://pplplsr.com/About">pplpleasr</ExternalLink>
-            , in partnership with Stand with Crypto, to highlight the power of the crypto community
+            , in partnership with Stand With Crypto, to highlight the power of the crypto community
             to mobilize and vote in the 2024 elections.
             <br /> <br /> Limited to one mint per person.
           </p>
         </div>
-      </UserActionFormLayout.Container>
-      <UserActionFormLayout.Footer>
+      </UserActionFormVoterRegistrationLayout.Container>
+      <UserActionFormVoterRegistrationLayout.Footer>
         <Button disabled={loading} onClick={handleClaimNft} size="lg">
           Claim NFT
         </Button>
-      </UserActionFormLayout.Footer>
-    </UserActionFormLayout>
+      </UserActionFormVoterRegistrationLayout.Footer>
+    </UserActionFormVoterRegistrationLayout>
   )
 }

@@ -1,5 +1,5 @@
 import { format as dateFormat, isBefore, parseISO } from 'date-fns'
-import { compact, sortBy } from 'lodash-es'
+import { compact, isNumber, sortBy } from 'lodash-es'
 
 import {
   DTSI_PersonRole,
@@ -8,6 +8,8 @@ import {
 } from '@/data/dtsi/generated'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
 import { getUSStateNameFromStateCode } from '@/utils/shared/usStateUtils'
+import { safeStringify } from '@/utils/web/safeStringify'
+import { withOrdinalSuffix } from '@/utils/web/withOrdinalSuffix'
 
 export const getDTSIFormattedShortPersonRole = (
   role: Pick<
@@ -28,7 +30,7 @@ export const getDTSIFormattedShortPersonRole = (
     return role.title
   }
   return gracefullyError({
-    msg: `getDTSIFormattedPersonRole returned no role for ${JSON.stringify(role)}`,
+    msg: `getDTSIFormattedPersonRole returned no role for ${safeStringify(role)}`,
     fallback: role.title,
   })
 }
@@ -135,4 +137,39 @@ export const orderDTSIPersonRolesByImportance = <
     return 0
   })
   return { byImportance, byDateStart }
+}
+
+export const CURRENT_SESSION_OF_CONGRESS = 118
+export const NEXT_SESSION_OF_CONGRESS = 119
+
+export type NormalizedDTSIDistrictId = number | 'at-large'
+export const normalizeDTSIDistrictId = (
+  role: Pick<DTSI_PersonRole, 'primaryDistrict'>,
+): NormalizedDTSIDistrictId => {
+  if (!role.primaryDistrict) {
+    return gracefullyError({
+      msg: `Unexpected primaryDistrict ${role.primaryDistrict}`,
+      fallback: 1,
+      hint: { extra: { role } },
+    })
+  }
+  if (role.primaryDistrict.toLowerCase() === 'at-large') {
+    return 'at-large'
+  }
+  const asNumber = parseInt(role.primaryDistrict, 10)
+  if (isNumber(asNumber)) {
+    return asNumber
+  }
+  return gracefullyError({
+    msg: `Unexpected primaryDistrict ${role.primaryDistrict}`,
+    fallback: 1,
+    hint: { extra: { role } },
+  })
+}
+
+export const formatDTSIDistrictId = (district: NormalizedDTSIDistrictId) => {
+  if (district === 'at-large') {
+    return 'At-Large'
+  }
+  return withOrdinalSuffix(district)
 }

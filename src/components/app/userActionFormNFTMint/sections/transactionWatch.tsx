@@ -68,7 +68,7 @@ export function UserActionFormNFTMintTransactionWatch({
       },
       payload =>
         actionCreateUserActionMintNFT(payload).then(actionResult => {
-          if (actionResult.user) {
+          if (actionResult?.user) {
             identifyUserOnClient(actionResult.user)
           }
           return actionResult
@@ -82,9 +82,18 @@ export function UserActionFormNFTMintTransactionWatch({
       return
     }
 
-    Promise.all([sendTransactionResponse.wait(), createAction(sendTransactionResponse)])
-      .catch(err => Sentry.captureException(err, { tags: { domain: 'nftMint/transactionWatch' } }))
-      .finally(() => setIsMined(true))
+    const processTransaction = async () => {
+      try {
+        await sendTransactionResponse.wait()
+        await createAction(sendTransactionResponse)
+      } catch (err) {
+        Sentry.captureException(err, { tags: { domain: 'nftMint/transactionWatch' } })
+      } finally {
+        setIsMined(true)
+      }
+    }
+
+    void processTransaction()
   })
 
   if (!contractMetadata || isLoadingContractMetadata) {

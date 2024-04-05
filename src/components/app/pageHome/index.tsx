@@ -4,6 +4,7 @@ import { sortDTSIPersonDataTable } from '@/components/app/dtsiClientPersonDataTa
 import { DTSIPersonCard } from '@/components/app/dtsiPersonCard'
 import { DelayedRecentActivity } from '@/components/app/pageHome/delayedRecentActivity'
 import { HeroCTA } from '@/components/app/pageHome/heroCTA'
+import { PartnerGrid } from '@/components/app/pageHome/partnerGrid'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
 import { SumDonationsByUserRow } from '@/components/app/sumDonationsByUserRow/sumDonationsByUserRow'
 import { UserActionFormVoterRegistrationDeeplinkWrapper } from '@/components/app/userActionFormVoterRegistration/homepageDialogDeeplinkWrapper'
@@ -40,7 +41,7 @@ export function PageHome({
   return (
     <>
       <section className="grid-fl mb-6 grid grid-cols-1 items-center gap-4 lg:container lg:grid-cols-2 lg:gap-8">
-        <div className="lg:order-0 container order-1 mx-auto max-w-xl space-y-6 text-center md:max-w-3xl lg:px-0 lg:text-left">
+        <div className="lg:order-0 container order-1 mx-auto max-w-xl space-y-6 pt-4 text-center md:max-w-3xl lg:px-0 lg:pt-0 lg:text-left">
           <PageTitle className={'lg:text-left'} withoutBalancer>
             If you care about crypto, it's time to prove it
           </PageTitle>
@@ -54,16 +55,16 @@ export function PageHome({
         <div className="order-0 md:container lg:order-1 lg:px-0">
           <Dialog analytics={{ Category: 'Homepage Hero Section', CTA: 'Register to vote' }}>
             <DialogTrigger asChild>
-              <LinkBox className="relative h-[320px] cursor-pointer overflow-hidden md:rounded-xl lg:h-[400px]">
+              <LinkBox className="relative h-[320px] overflow-hidden md:rounded-xl lg:h-[400px]">
                 <NextImage
-                  alt="First in the Nation Crypto Presidential Forum December 11th 2023 St. Anselm College"
+                  alt="Free NFT given out when you register to vote."
                   className="h-full w-full object-cover"
                   fill
                   priority
                   // width={1046}
                   // height={892}
-                  sizes={'(max-width: 768px) 500px, 1046px'}
-                  src="/homepageHero.jpg"
+                  sizes={'500px'}
+                  src="/homepageHero.png"
                 />
                 <div
                   className="absolute bottom-0 flex w-full items-center justify-between gap-4 p-4 text-sm text-white"
@@ -94,7 +95,7 @@ export function PageHome({
       </section>
       <div className="container">
         <TopLevelMetrics {...{ sumDonations, locale, countUsers, countPolicymakerContacts }} />
-        <section className="mb-16 text-center md:mb-24">
+        <section className="mb-16 text-center md:mb-36">
           <PageTitle as="h3" className="mb-7" size="md">
             Our mission
           </PageTitle>
@@ -111,7 +112,25 @@ export function PageHome({
             </Button>
           </div>
         </section>
-        <section className="mb-16 space-y-7 md:mb-24">
+
+        <section className="mb-16 text-center md:mb-36">
+          <PageTitle as="h3" className="mb-7" size="md">
+            Our partners
+          </PageTitle>
+          <PageSubTitle as="h4" className="mb-7">
+            Stand With Crypto is first and foremost the result of 300,000+ people fighting to keep
+            crypto in America. We’ve also partnered with a number of companies to fight alongside
+            us.
+          </PageSubTitle>
+          <div className="space-y-6">
+            <PartnerGrid />
+            <Button asChild variant="secondary">
+              <InternalLink href={urls.partners()}>View all</InternalLink>
+            </Button>
+          </div>
+        </section>
+
+        <section className="mb-16 space-y-7 md:mb-36">
           <PageTitle as="h3" size="md">
             Our community
           </PageTitle>
@@ -164,7 +183,7 @@ export function PageHome({
             </TabsContent>
           </Tabs>
         </section>
-        <section className="mb-16 space-y-7 md:mb-24">
+        <section className="mb-16 space-y-7 md:mb-36">
           <PageTitle as="h3" size="md">
             Get involved
           </PageTitle>
@@ -173,7 +192,7 @@ export function PageHome({
           </PageSubTitle>
           <UserActionRowCTAsAnimatedListWithApi />
         </section>
-        <section className="mb-16 space-y-7 md:mb-24">
+        <section className="mb-16 space-y-7 md:mb-36">
           <PageTitle as="h3" size="md">
             Where politicians stand on crypto
           </PageTitle>

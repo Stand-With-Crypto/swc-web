@@ -39,6 +39,12 @@ export function PagePrivacyPolicy() {
           other personal information you choose to share with us.
         </li>
         <li>
+          We may collect your personal information when you or your organization requests to be a
+          SWC Open Source Partner. This information may include your name, email address, title,
+          information about your organization (including website and social media handles), and any
+          other personal information you choose to share with us.
+        </li>
+        <li>
           We may also request and collect—at your direction—your crypto wallet address for various
           transactions, including to mint NFTs. Providing your crypto wallet address is voluntary.
         </li>
@@ -83,15 +89,16 @@ export function PagePrivacyPolicy() {
       <p>SWC may use the information described above for a variety of purposes, including to:</p>
 
       <ul>
-        <li>Provide our website and its content to you;</li>
+        <li>Provide our website and its content;</li>
         <li>
-          Provide you with information or content related to SWC's mission, initiatives, advocacy,
-          and business;
+          Provide information or content related to SWC's mission, initiatives, advocacy, and
+          business;
         </li>
         <li>
           Facilitate your advocacy efforts, including helping you contact elected officials and
           policymakers;
         </li>
+        <li>Coordinate with you as a SWC Open Source Partner;</li>
         <li>
           Send you texts, newsletters, updates, and/or opportunities for engagement related to SWC's
           mission, initiatives, advocacy, and business;

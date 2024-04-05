@@ -19,13 +19,16 @@ const SAMPLE_UNSUPPORTED_BROWSERS = [
   'Mozilla/5.0 (Linux; Android 8.1.0; S23 Ultra Build/O11019; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/70.0.3538.110 Mobile Safari/537.36 Instagram 320.0.0.42.101 Android (27/8.1.0; 320dpi; 720x1544; alps; S23 Ultra; S23_Ultra; mt6735; es_MX; 570684018)',
   'Mozilla/5.0 (Linux; Android 8.1.0; LM-Q710(FGN) Build/OPM1.171019.019; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/70.0.3538.110 Mobile Safari/537.36 [FB_IAB/FB4A;FBAV/439.0.0.44.117;]',
   'Mozilla/5.0 (Linux; Android 10; SAMSUNG SM-A505FN) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/12.1 Chrome/79.0.3945.136 Mobile Safari/537.36',
+  'Mozilla/5.0 (Android 9; Mobile; rv:122.0) Gecko/122.0 Firefox/122.0 DatadogSynthetics',
 ]
 
+function parseOption(str: string) {
+  const parsed = Bowser.parse(str)
+  // console.log(parsed)
+  return getIsSupportedBrowser(parsed)
+}
+
 it('supports the right browsers', () => {
-  expect(uniq(SAMPLE_SUPPORTED_BROWSERS.map(x => getIsSupportedBrowser(Bowser.parse(x))))).toEqual([
-    true,
-  ])
-  expect(
-    uniq(SAMPLE_UNSUPPORTED_BROWSERS.map(x => getIsSupportedBrowser(Bowser.parse(x)))),
-  ).toEqual([false])
+  expect(uniq(SAMPLE_SUPPORTED_BROWSERS.map(parseOption))).toEqual([true])
+  expect(uniq(SAMPLE_UNSUPPORTED_BROWSERS.map(parseOption))).toEqual([false])
 })

@@ -1,8 +1,7 @@
 'use server'
 import 'server-only'
 
-import { User, UserAction, UserActionType, UserInformationVisibility } from '@prisma/client'
-import * as Sentry from '@sentry/nextjs'
+import { User, UserActionType, UserInformationVisibility } from '@prisma/client'
 import { nativeEnum, object, z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
@@ -96,8 +95,6 @@ async function _actionCreateUserActionVoterRegistration(input: CreateActionVoter
   if (recentUserAction) {
     logSpamActionSubmissions({
       validatedInput,
-      userAction: recentUserAction,
-      userId: user.id,
       sharedDependencies: { analytics },
     })
     await beforeFinish()
@@ -130,6 +127,7 @@ async function createUser(sharedDependencies: Pick<SharedDependencies, 'localUse
       hasOptedInToEmails: false,
       hasOptedInToMembership: false,
       hasOptedInToSms: false,
+      hasRepliedToOptInSms: false,
       referralId: generateReferralId(),
       ...mapLocalUserToUserDatabaseFields(localUser),
     },
@@ -166,13 +164,9 @@ async function getRecentUserActionByUserId(
 
 function logSpamActionSubmissions({
   validatedInput,
-  userAction,
-  userId,
   sharedDependencies,
 }: {
   validatedInput: z.SafeParseSuccess<CreateActionVoterRegistrationInput>
-  userAction: UserAction
-  userId: User['id']
   sharedDependencies: Pick<SharedDependencies, 'analytics'>
 }) {
   sharedDependencies.analytics.trackUserActionCreatedIgnored({
@@ -182,13 +176,6 @@ function logSpamActionSubmissions({
     userState: 'Existing',
     usaState: validatedInput.data.usaState,
   })
-  Sentry.captureMessage(
-    `duplicate ${UserActionType.VOTER_REGISTRATION} user action for campaign ${validatedInput.data.campaignName} submitted`,
-    {
-      extra: { validatedInput: validatedInput.data, userAction },
-      user: { id: userId },
-    },
-  )
 }
 
 async function createAction<U extends User>({
@@ -209,7 +196,7 @@ async function createAction<U extends User>({
       user: { connect: { id: user.id } },
       actionType: UserActionType.VOTER_REGISTRATION,
       campaignName: validatedInput.campaignName,
-      ...('userCryptoAddress' in userMatch
+      ...('userCryptoAddress' in userMatch && userMatch.userCryptoAddress
         ? {
             userCryptoAddress: { connect: { id: userMatch.userCryptoAddress.id } },
           }

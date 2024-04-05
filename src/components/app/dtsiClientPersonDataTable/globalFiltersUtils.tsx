@@ -15,7 +15,7 @@ import {
   DTSI_PersonRoleCategory,
   DTSI_PersonRoleStatus,
 } from '@/data/dtsi/generated'
-import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
+import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 
 export enum StanceOnCryptoOptions {
   ALL = 'All',
@@ -69,7 +69,7 @@ export interface IGlobalFilters {
   [GlobalFilterKeys.Role]: (typeof ROLE_OPTIONS)[keyof typeof ROLE_OPTIONS]
   [GlobalFilterKeys.Party]: (typeof PARTY_OPTIONS)[keyof typeof PARTY_OPTIONS]
   [GlobalFilterKeys.Stance]: StanceOnCryptoOptions
-  [GlobalFilterKeys.State]: 'All' | keyof typeof US_STATE_CODE_TO_DISPLAY_NAME_MAP
+  [GlobalFilterKeys.State]: 'All' | USStateCode
 }
 
 export const getGlobalFilterDefaults = (): IGlobalFilters => ({
@@ -108,9 +108,18 @@ export function GlobalFilters({
           <span className="mr-2 inline-block flex-shrink-0 font-bold">Stance on crypto</span>
           <SelectValue />
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent
+          // Short term fix to prevent clicking on the politician table row when user selects an option from the select menu.
+          // Issue is from radix-ui https://github.com/radix-ui/primitives/issues/1658
+          ref={ref => {
+            if (!ref) return
+            ref.ontouchend = e => {
+              e.preventDefault()
+            }
+          }}
+        >
           {Object.values(StanceOnCryptoOptions).map(stance => (
-            <SelectItem key={stance} value={stance}>
+            <SelectItem key={stance} onClick={event => event.stopPropagation()} value={stance}>
               {stance}
             </SelectItem>
           ))}
@@ -122,9 +131,18 @@ export function GlobalFilters({
           <span className="mr-2 inline-block flex-shrink-0 font-bold">Role</span>
           <SelectValue />
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent
+          // Short term fix to prevent clicking on the politician table row when user selects an option from the select menu.
+          // Issue is from radix-ui https://github.com/radix-ui/primitives/issues/1658
+          ref={ref => {
+            if (!ref) return
+            ref.ontouchend = e => {
+              e.preventDefault()
+            }
+          }}
+        >
           {Object.values(ROLE_OPTIONS).map(role => (
-            <SelectItem key={role} value={role}>
+            <SelectItem key={role} onClick={event => event.stopPropagation()} value={role}>
               {getRoleOptionDisplayName(role)}
             </SelectItem>
           ))}
@@ -135,9 +153,18 @@ export function GlobalFilters({
           <span className="mr-2 inline-block flex-shrink-0 font-bold">Party</span>
           <SelectValue />
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent
+          // Short term fix to prevent clicking on the politician table row when user selects an option from the select menu.
+          // Issue is from radix-ui https://github.com/radix-ui/primitives/issues/1658
+          ref={ref => {
+            if (!ref) return
+            ref.ontouchend = e => {
+              e.preventDefault()
+            }
+          }}
+        >
           {Object.values(PARTY_OPTIONS).map(party => (
-            <SelectItem key={party} value={party}>
+            <SelectItem key={party} onClick={event => event.stopPropagation()} value={party}>
               {getPartyOptionDisplayName(party)}
             </SelectItem>
           ))}
@@ -151,7 +178,16 @@ export function GlobalFilters({
           <span className="mr-2 inline-block flex-shrink-0 font-bold">State</span>
           <SelectValue />
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent
+          // Short term fix to prevent clicking on the politician table row when user selects an option from the select menu.
+          // Issue is from radix-ui https://github.com/radix-ui/primitives/issues/1658
+          ref={ref => {
+            if (!ref) return
+            ref.ontouchend = e => {
+              e.preventDefault()
+            }
+          }}
+        >
           {stateOptions.map(state => (
             <SelectItem key={state} value={state}>
               {state}

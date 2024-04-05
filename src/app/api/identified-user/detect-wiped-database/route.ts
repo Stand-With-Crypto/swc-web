@@ -3,8 +3,8 @@ import 'server-only'
 import Sentry from '@sentry/nextjs'
 import { NextResponse } from 'next/server'
 
+import { appRouterGetAuthUser } from '@/utils/server/authentication/appRouterGetAuthUser'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
 export const dynamic = 'force-dynamic'
@@ -23,9 +23,6 @@ async function apiResponse() {
     include: { userCryptoAddresses: true },
   })
   if (!correspondingUser) {
-    return { state: 'wiped-database' as const }
-  }
-  if (!correspondingUser.userCryptoAddresses.find(x => x.cryptoAddress === authUser.address)) {
     return { state: 'wiped-database' as const }
   }
   return { state: 'ok' as const }

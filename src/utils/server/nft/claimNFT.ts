@@ -1,12 +1,13 @@
 import { $Enums, NFTCurrency, UserAction, UserActionType, UserCryptoAddress } from '@prisma/client'
 import { Decimal } from '@prisma/client/runtime/library'
 
-import { AIRDROP_NFT_INNGEST_EVENT_NAME } from '@/inngest/functions/airdropNFT'
+import { AIRDROP_NFT_INNGEST_EVENT_NAME } from '@/inngest/functions/airdropNFT/airdropNFT'
 import { inngest } from '@/inngest/inngest'
 import { NFT_SLUG_BACKEND_METADATA } from '@/utils/server/nft/constants'
 import { AirdropPayload } from '@/utils/server/nft/payload'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { TURN_OFF_NFT_MINT } from '@/utils/shared/killSwitches'
+import { fetchAirdropTransactionFee } from '@/utils/server/thirdweb/fetchCurrentClaimTransactionFee'
+import { AIRDROP_NFT_ETH_TRANSACTION_FEE_THRESHOLD } from '@/utils/shared/airdropNFTETHTransactionFeeThreshold'
 import { getLogger } from '@/utils/shared/logger'
 import { NFTSlug } from '@/utils/shared/nft'
 import {
@@ -54,12 +55,27 @@ export const ACTION_NFT_SLUG: Record<
 
 const logger = getLogger('claimNft')
 
-export async function claimNFT(userAction: UserAction, userCryptoAddress: UserCryptoAddress) {
-  if (TURN_OFF_NFT_MINT) {
-    logger.info('TURN_OFF_NFT_MINT is on, preventing mint for now')
-    return null
+interface Config {
+  skipTransactionFeeCheck: boolean
+}
+
+export async function claimNFT(
+  userAction: Pick<UserAction, 'id' | 'actionType' | 'campaignName' | 'nftMintId'>,
+  userCryptoAddress: Pick<UserCryptoAddress, 'cryptoAddress'>,
+  config: Config = { skipTransactionFeeCheck: false },
+) {
+  if (!config.skipTransactionFeeCheck) {
+    const currentTransactionFee = await fetchAirdropTransactionFee()
+    if (currentTransactionFee > AIRDROP_NFT_ETH_TRANSACTION_FEE_THRESHOLD) {
+      logger.info(
+        `Current transaction fee (${currentTransactionFee}) exceeds threshold (${AIRDROP_NFT_ETH_TRANSACTION_FEE_THRESHOLD}) - skipping live NFT airdrop for now.`,
+      )
+      return null
+    }
   }
-  logger.info('Triggered')
+
+  logger.info('Function triggered')
+
   const { actionType, campaignName } = userAction
   const activeClientUserActionTypeWithCampaign = ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN.find(
     key => key === userAction.actionType,
@@ -99,8 +115,9 @@ export async function claimNFT(userAction: UserAction, userCryptoAddress: UserCr
 
   const payload: AirdropPayload = {
     nftMintId: action.nftMintId!,
-    recipientWalletAddress: userCryptoAddress.cryptoAddress,
     nftSlug,
+    recipientWalletAddress: userCryptoAddress.cryptoAddress,
+    userId: action.userId,
   }
 
   return inngest.send({

@@ -236,6 +236,21 @@ const nextConfig = {
           '/action/live-event/2024_03_04_LA?utm_source=coinbase&utm_medium=live-event&utm_campaign=2024-03-04-LA',
         permanent: false,
       },
+      {
+        source: '/locations',
+        destination: '/politicians',
+        permanent: false,
+      },
+      {
+        source: '/locations/us',
+        destination: '/politicians',
+        permanent: false,
+      },
+      {
+        source: '/locations/us/state',
+        destination: '/politicians',
+        permanent: false,
+      },
     ]
   },
 }
@@ -248,7 +263,8 @@ const sentryWebpackPluginOptions = {
   // Suppresses source map uploading logs during build
   silent: true,
   org: 'stand-with-crypto',
-  project: 'javascript-nextjs',
+  project:
+    process.env.NEXT_PUBLIC_ENVIRONMENT === 'production' ? 'prod-swc-web' : 'testing-swc-web',
 }
 /** @type {import('@sentry/nextjs/types/config/types').UserSentryOptions} */
 const userSentryOptions = {

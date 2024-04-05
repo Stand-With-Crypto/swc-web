@@ -162,7 +162,7 @@ export function getGoogleCivicOfficialByDTSIName(
 
   // This is necessary since the Google Civic API return the middle initial (e.g. "John F. Kennedy")
   // While the DTSI data does not (e.g. "John Kennedy")
-  const matchOfficial = officials.find(official => {
+  let matchOfficial = officials.find(official => {
     const normalizedOfficialName = normalizeName(official.name)
     return (
       (normalizedOfficialName.startsWith(normalizedDTSIFirstName) ||
@@ -172,6 +172,13 @@ export function getGoogleCivicOfficialByDTSIName(
   })
 
   if (!matchOfficial) {
+    matchOfficial = officials.find(official => {
+      const normalizedOfficialName = normalizeName(official.name)
+      return normalizedOfficialName.includes(normalizedDTSILastName)
+    })
+  }
+
+  if (!matchOfficial) {
     const extra = {
       dtsiPersonName,
       normalizedDTSIFirstName,
@@ -179,9 +186,12 @@ export function getGoogleCivicOfficialByDTSIName(
       officials,
     }
     logger.info('returned people', extra)
-    Sentry.captureMessage('getGoogleCivicOfficialByDTSIName - Official not found', {
-      extra,
-    })
+    const vacantResult = officials.find(official => official.name.toLocaleLowerCase() === 'vacant')
+    if (!vacantResult) {
+      Sentry.captureMessage('getGoogleCivicOfficialByDTSIName - Official not found', {
+        extra,
+      })
+    }
     return null
   }
 

@@ -1,7 +1,9 @@
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
 import { DEFAULT_LOCALE, SupportedLocale } from '@/intl/locales'
+import { NormalizedDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
+import { USStateCode } from '@/utils/shared/usStateUtils'
 
 export const getIntlPrefix = (locale: SupportedLocale) =>
   // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
@@ -24,6 +26,7 @@ export const getIntlUrls = (
     about: () => `${localePrefix}/about`,
     resources: () => `${localePrefix}/resources`,
     contribute: () => `${localePrefix}/contribute`,
+    questionnaire: () => `${localePrefix}/questionnaire`,
     donate: () => `${localePrefix}/donate`,
     leaderboard: (params?: { pageNum?: number; tab: RecentActivityAndLeaderboardTabs }) => {
       const tabPrefix =
@@ -39,16 +42,29 @@ export const getIntlUrls = (
       const tabSuffix = shouldSuppressPageNum ? '' : `/${pageNum}`
       return `${localePrefix}${tabPrefix}${tabSuffix}`
     },
+    partners: () => `${localePrefix}/partners`,
     politiciansHomepage: () => `${localePrefix}/politicians`,
     politicianDetails: (dtsiSlug: string) => `${localePrefix}/politicians/person/${dtsiSlug}`,
     profile: () => `${localePrefix}/profile`,
     internalHomepage: () => `${localePrefix}/internal`,
+    locationStateSpecific: (stateCode: USStateCode) =>
+      `${localePrefix}/locations/us/state/${stateCode.toLowerCase()}`,
+    locationStateSpecificSenateRace: (stateCode: USStateCode) =>
+      `${localePrefix}/locations/us/state/${stateCode.toLowerCase()}/senate`,
+    locationDistrictSpecific: ({
+      stateCode,
+      district,
+    }: {
+      stateCode: USStateCode
+      district: NormalizedDTSIDistrictId
+    }) => `${localePrefix}/locations/us/state/${stateCode.toLowerCase()}/district/${district}`,
   }
 }
 
 const NEXT_PUBLIC_VERCEL_URL = requiredOutsideLocalEnv(
   process.env.NEXT_PUBLIC_VERCEL_URL,
   'NEXT_PUBLIC_VERCEL_URL',
+  'Getting app full url (preview only)',
 )
 
 export const fullUrl = (path: string) => {
@@ -58,7 +74,7 @@ export const fullUrl = (path: string) => {
     case 'testing':
       return `https://testing.standwithcrypto.org${path}`
     case 'preview':
-      return `${NEXT_PUBLIC_VERCEL_URL!}${path}`
+      return `https://${NEXT_PUBLIC_VERCEL_URL!}${path}`
     case 'production':
       return `https://www.standwithcrypto.org${path}`
   }
@@ -82,6 +98,7 @@ export const externalUrls = {
   swcOnChainSummer: () => 'https://onchainsummer.xyz/standwithcrypto',
   swcReferralUrl: ({ referralId }: { referralId: string }) =>
     `https://www.standwithcrypto.org/join/${referralId}`,
+  swcQuestionnaire: () => 'https://standwithcrypto.typeform.com/questionnaire',
 }
 
 export const apiUrls = {

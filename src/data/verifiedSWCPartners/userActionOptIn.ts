@@ -9,10 +9,9 @@ import {
   UserInformationVisibility,
   UserSession,
 } from '@prisma/client'
-import * as Sentry from '@sentry/nextjs'
 import { object, string, z } from 'zod'
 
-import { CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/upsertAdvocateInCapitolCanary'
+import { CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/capitolCanary/upsertAdvocateInCapitolCanary'
 import { inngest } from '@/inngest/inngest'
 import {
   CapitolCanaryCampaignName,
@@ -90,7 +89,7 @@ type Input = z.infer<typeof zodVerifiedSWCPartnersUserActionOptIn> & {
 export async function verifiedSWCPartnersUserActionOptIn(
   input: Input,
 ): Promise<VerifiedSWCPartnerApiResponse<VerifiedSWCPartnersUserActionOptInResult>> {
-  const { emailAddress, optInType, isVerifiedEmailAddress, campaignName } = input
+  const { emailAddress, optInType, campaignName } = input
   const actionType = UserActionType.OPT_IN
   const existingAction = await prismaClient.userAction.findFirst({
     include: {
@@ -122,11 +121,32 @@ export async function verifiedSWCPartnersUserActionOptIn(
     )
   }
 
+  const capitolCanaryPayload: UpsertAdvocateInCapitolCanaryPayloadRequirements = {
+    campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.ONE_CLICK_NATIVE_SUBSCRIBER),
+    user: {
+      ...user,
+      address: user.address || null,
+    },
+    userEmailAddress: user.userEmailAddresses.find(
+      emailAddr => emailAddr.id === user.primaryUserEmailAddressId,
+    ),
+    opts: {
+      isSmsOptin: input.hasOptedInToReceiveSMSFromSWC,
+      shouldSendSmsOptinConfirmation: false,
+    },
+  }
+
   if (existingAction) {
-    Sentry.captureMessage('verifiedSWCPartnersUserActionOptIn action already exists', {
-      extra: { emailAddress, isVerifiedEmailAddress },
-      tags: { optInType, actionType },
-    })
+    if (!existingAction.user.hasOptedInToSms && input.hasOptedInToReceiveSMSFromSWC) {
+      await prismaClient.user.update({
+        where: { id: existingAction.user.id },
+        data: { hasOptedInToSms: true },
+      })
+      await inngest.send({
+        name: CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME,
+        data: capitolCanaryPayload,
+      })
+    }
     analytics.trackUserActionCreatedIgnored({
       actionType,
       campaignName,
@@ -169,26 +189,14 @@ export async function verifiedSWCPartnersUserActionOptIn(
     userState,
   })
 
-  // TODO (Benson): Handle CC membership toggling options: https://github.com/Stand-With-Crypto/swc-web/issues/173
   // TODO (Benson): Include p2a source in Capitol Canary payload to know which 3P is sending this request.
-  const payload: UpsertAdvocateInCapitolCanaryPayloadRequirements = {
-    campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.ONE_CLICK_NATIVE_SUBSCRIBER),
-    user: {
-      ...user,
-      address: user.address || null,
-    },
-    userEmailAddress: user.userEmailAddresses.find(
-      emailAddr => emailAddr.id === user.primaryUserEmailAddressId,
-    ),
-    opts: {
-      isEmailOptin: true,
-      isSmsOptin: input.hasOptedInToReceiveSMSFromSWC,
-      shouldSendSmsOptinConfirmation: false,
-    },
+  if (!capitolCanaryPayload.opts) {
+    capitolCanaryPayload.opts = {}
   }
+  capitolCanaryPayload.opts.isEmailOptin = true
   await inngest.send({
     name: CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME,
-    data: payload,
+    data: capitolCanaryPayload,
   })
 
   await analytics.flush()
@@ -322,6 +330,7 @@ async function maybeUpsertUser({
       hasOptedInToEmails: true,
       hasOptedInToMembership: hasOptedInToMembership || false,
       hasOptedInToSms: hasOptedInToReceiveSMSFromSWC || false,
+      hasRepliedToOptInSms: false,
       userEmailAddresses: {
         create: {
           emailAddress,

@@ -110,19 +110,34 @@ export function UserActionFormNFTMintCheckout({
             <PageSubTitle className="text-start">on Base</PageSubTitle>
           </div>
         </div>
-        <div className="flex flex-col gap-4">
-          <Card>
-            <div className="flex items-center justify-between gap-2">
-              <p>Quantity</p>
-              <QuantityInput
-                onChange={setQuantity}
-                onDecrement={decrementQuantity}
-                onIncrement={incrementQuantity}
-                value={quantity}
-              />
-            </div>
-          </Card>
 
+        <Card>
+          <div className="flex items-center justify-between gap-2">
+            <p>Quantity</p>
+            <QuantityInput
+              onChange={setQuantity}
+              onDecrement={decrementQuantity}
+              onIncrement={incrementQuantity}
+              value={quantity}
+            />
+          </div>
+        </Card>
+
+        {!totalFeeDisplay ? (
+          <CardSkeleton>
+            <div className="space-y-8">
+              {Array.from({ length: 3 }, (_, i) => (
+                <div className="flex items-center justify-between gap-2" key={i}>
+                  <div className="max-w-96 text-sm md:text-base">
+                    <p className="text-xs text-muted-foreground">
+                      <Balancer>Loading...</Balancer>
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardSkeleton>
+        ) : (
           <Card className="w-full">
             <div className="space-y-8">
               <div className="flex items-center justify-between gap-2 text-sm md:text-base">
@@ -152,7 +167,8 @@ export function UserActionFormNFTMintCheckout({
               </div>
             </div>
           </Card>
-        </div>
+        )}
+
         <Collapsible open={!maybeOverriddenCheckoutError}>
           <CollapsibleContent className="AnimateCollapsibleContent">
             <label className="flex cursor-pointer items-center gap-4">
@@ -184,7 +200,9 @@ export function UserActionFormNFTMintCheckout({
               contractAddress={MINT_NFT_CONTRACT_ADDRESS}
               isDisabled={
                 isLoading ||
-                (!!maybeOverriddenCheckoutError && maybeOverriddenCheckoutError !== 'networkSwitch')
+                (!!maybeOverriddenCheckoutError &&
+                  maybeOverriddenCheckoutError !== 'networkSwitch') ||
+                (!isLoading && !maybeOverriddenCheckoutError && !totalFeeDisplay)
               }
               theme={theme}
             >

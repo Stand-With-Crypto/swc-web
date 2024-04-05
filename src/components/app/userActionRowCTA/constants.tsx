@@ -3,7 +3,9 @@
 import { UserActionType } from '@prisma/client'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
+import { CALL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormCallCongressperson/constants'
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
+import { EMAIL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormEmailCongressperson/constants'
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
@@ -13,6 +15,7 @@ import { UserActionTweetLink } from '@/components/ui/userActionTweetLink'
 import { useLocale } from '@/hooks/useLocale'
 import { ActiveClientUserActionType } from '@/utils/shared/activeUserAction'
 import { getIntlUrls } from '@/utils/shared/urls'
+import { getYourPoliticianCategoryShortDisplayName } from '@/utils/shared/yourPoliticianCategory'
 
 export const USER_ACTION_ROW_CTA_INFO: Record<
   ActiveClientUserActionType,
@@ -40,7 +43,7 @@ export const USER_ACTION_ROW_CTA_INFO: Record<
   [UserActionType.CALL]: {
     actionType: UserActionType.CALL,
     image: '/actionTypeIcons/call.png',
-    text: 'Call your Congressperson',
+    text: `Call your ${getYourPoliticianCategoryShortDisplayName(CALL_FLOW_POLITICIANS_CATEGORY, { maxCount: 1 })}`,
     subtext: 'The most effective way to make your voice heard.',
     canBeTriggeredMultipleTimes: true,
     WrapperComponent: UserActionFormCallCongresspersonDialog,
@@ -48,7 +51,7 @@ export const USER_ACTION_ROW_CTA_INFO: Record<
   [UserActionType.EMAIL]: {
     actionType: UserActionType.EMAIL,
     image: '/actionTypeIcons/email.png',
-    text: 'Email your Congressperson',
+    text: `Email your ${getYourPoliticianCategoryShortDisplayName(EMAIL_FLOW_POLITICIANS_CATEGORY)}`,
     subtext: 'We drafted an email for you. All you have to do is hit send.',
     canBeTriggeredMultipleTimes: true,
     WrapperComponent: UserActionFormEmailCongresspersonDialog,

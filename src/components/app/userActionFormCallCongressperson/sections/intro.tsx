@@ -1,21 +1,26 @@
 'use client'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Check } from 'lucide-react'
 
-import { SectionNames } from '@/components/app/userActionFormCallCongressperson/constants'
+import { CALL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormCallCongressperson/constants'
 import { UserActionFormLayout } from '@/components/app/userActionFormCommon/layout'
 import { Button } from '@/components/ui/button'
-import { UseSectionsReturn } from '@/hooks/useSections'
+import { getYourPoliticianCategoryDisplayName } from '@/utils/shared/yourPoliticianCategory'
 
-export function Intro({ goToSection }: UseSectionsReturn<SectionNames>) {
+interface IntroProps {
+  onContinue: () => void
+  loading?: boolean
+}
+
+export function Intro({ onContinue, loading }: IntroProps) {
   const ref = React.useRef<HTMLButtonElement>(null)
-  useEffect(() => {
-    ref.current?.focus()
+  React.useEffect(() => {
+    ref.current?.focus({ preventScroll: true })
   }, [ref])
   return (
     <IntroStaticContent>
-      <Button onClick={() => goToSection(SectionNames.ADDRESS)} ref={ref}>
-        Continue
+      <Button disabled={loading} onClick={onContinue} ref={ref}>
+        {loading ? 'Loading...' : 'Continue'}
       </Button>
     </IntroStaticContent>
   )
@@ -26,7 +31,7 @@ export function IntroStaticContent({ children }: React.PropsWithChildren) {
     <UserActionFormLayout>
       <UserActionFormLayout.Container>
         <UserActionFormLayout.Heading
-          subtitle="Call your Congressperson and tell them to vote YES on the FIT21 bill. Calling your representative is the most effective way to influence legislation."
+          subtitle={`Call your ${getYourPoliticianCategoryDisplayName(CALL_FLOW_POLITICIANS_CATEGORY, { maxCount: 1 })} and tell them to vote YES on the FIT21 bill.`}
           title="It's time to fight to keep crypto in America"
         />
         <div className="space-y-2">
@@ -38,7 +43,11 @@ export function IntroStaticContent({ children }: React.PropsWithChildren) {
             </ChecklistItem>
             <ChecklistItem>It won't pass without your help</ChecklistItem>
             <ChecklistItem>
-              Calling your representative is the most effective action you can take
+              Calling your{' '}
+              {getYourPoliticianCategoryDisplayName(CALL_FLOW_POLITICIANS_CATEGORY, {
+                maxCount: 1,
+              })}{' '}
+              is the most effective action you can take
             </ChecklistItem>
           </ul>
         </div>

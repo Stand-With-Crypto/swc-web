@@ -41,7 +41,7 @@ const isSupportedBrowser = getIsSupportedBrowser(maybeDetectBrowser())
 Sentry.init({
   environment: NEXT_PUBLIC_ENVIRONMENT,
   dsn,
-  tracesSampleRate: NEXT_PUBLIC_ENVIRONMENT === 'production' ? 0.02 : 1.0,
+  tracesSampleRate: NEXT_PUBLIC_ENVIRONMENT === 'production' ? 0.1 : 1.0,
   // Setting this option to true will print useful information to the console while you're setting up Sentry.
   debug: false,
   normalizeDepth: 10,
@@ -60,6 +60,7 @@ Sentry.init({
     /chrome-extension:\//i,
     /extensions\//i,
     /^chrome:\/\//i,
+    /inject/i,
   ],
   replaysSessionSampleRate: 0,
   replaysOnErrorSampleRate: 1.0,

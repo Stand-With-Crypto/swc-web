@@ -1,5 +1,6 @@
 import * as Sentry from '@sentry/nextjs'
 
+import { logger } from '@/utils/shared/logger'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
 export function requiredEnv(value: string | undefined, name: string) {
@@ -15,8 +16,18 @@ export function requiredEnv(value: string | undefined, name: string) {
   return value!
 }
 
-export function requiredOutsideLocalEnv(value: string | undefined, name: string) {
+export function requiredOutsideLocalEnv(
+  value: string | undefined,
+  name: string,
+  possiblyBrokenFeature: string,
+) {
   if (NEXT_PUBLIC_ENVIRONMENT === 'local') {
+    if (!value) {
+      logger.warn(
+        `Environment variable ${name} is missing. The following feature might not work properly: ${possiblyBrokenFeature}`,
+      )
+    }
+
     return value
   }
   return requiredEnv(value, name)

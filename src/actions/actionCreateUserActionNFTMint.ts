@@ -14,7 +14,7 @@ import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerAnalytics } from '@/utils/server/serverAnalytics'
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
-import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
+import { appRouterGetThirdwebAuthUser } from '@/utils/server/thirdweb/appRouterGetThirdwebAuthUser'
 import { thirdwebBaseRPCClient } from '@/utils/server/thirdweb/thirdwebRPCClient'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
 import { fromBigNumber } from '@/utils/shared/bigNumber'
@@ -57,7 +57,7 @@ async function _actionCreateUserActionMintNFT(input: CreateActionMintNFTInput) {
   const localUser = parseLocalUserFromCookies()
   const sessionId = getUserSessionId()
 
-  const authUser = await appRouterGetAuthUser()
+  const authUser = await appRouterGetThirdwebAuthUser()
   if (!authUser) {
     const error = new Error('Create User Action NFT Mint - Not authenticated')
     Sentry.captureException(error, {
@@ -135,7 +135,6 @@ async function createAction<U extends User>({
       logger.error(e)
       return new Decimal(0)
     })
-
   const decimalEthTransactionValue = new Decimal(ethTransactionValue)
   await prismaClient.userAction.create({
     data: {
@@ -145,7 +144,7 @@ async function createAction<U extends User>({
       userCryptoAddress: { connect: { id: user.primaryUserCryptoAddressId! } },
       nftMint: {
         create: {
-          nftSlug: NFTSlug.SWC_SHIELD,
+          nftSlug: NFTSlug.STAND_WITH_CRYPTO_SUPPORTER,
           status: NFTMintStatus.CLAIMED,
           costAtMint: decimalEthTransactionValue,
           contractAddress: contractMetadata.contractAddress,
@@ -157,8 +156,17 @@ async function createAction<U extends User>({
     },
   })
 
-  logger.info('created user action')
+  // Also increment user's total donation USD amount.
+  await prismaClient.user.update({
+    where: { id: user.id },
+    data: {
+      totalDonationAmountUsd: {
+        increment: decimalEthTransactionValue.mul(ratio),
+      },
+    },
+  })
 
+  logger.info('created user action')
   sharedDependencies.analytics.trackUserActionCreated({
     actionType: UserActionType.NFT_MINT,
     campaignName: validatedInput.campaignName,
@@ -171,10 +179,6 @@ const parseHex = (hex: string) => hex.toLowerCase().trim()
 async function validateTransaction(
   transaction: Awaited<ReturnType<typeof thirdwebBaseRPCClient.getTransaction>>,
 ) {
-  if (parseHex(transaction.from) !== parseHex(contractMetadata.associatedWallet)) {
-    throw new Error('Invalid transaction origin wallet')
-  }
-
   if (!transaction.to || parseHex(transaction.to) !== parseHex(contractMetadata.contractAddress)) {
     throw new Error('Invalid associated contract')
   }

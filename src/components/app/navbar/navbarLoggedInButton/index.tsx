@@ -2,7 +2,6 @@
 
 import { Button } from '@/components/ui/button'
 import { useResponsivePopover } from '@/components/ui/responsivePopover'
-import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useDialog } from '@/hooks/useDialog'
 import { useUserWithMaybeENSData } from '@/hooks/useUserWithMaybeEnsData'
 import { getSensitiveDataUserDisplayName } from '@/utils/web/userUtils'
@@ -12,10 +11,8 @@ import { NavbarLoggedInPopoverContent } from './navbarLoggedInPopoverContent'
 export function NavbarLoggedInButton({ onOpenChange }: { onOpenChange: (open: boolean) => void }) {
   const { Popover, PopoverContent, PopoverTrigger } = useResponsivePopover()
   const dialogProps = useDialog({ analytics: 'Navbar Logged In Button' })
-  const { data } = useApiResponseForUserFullProfileInfo()
-  const user = data?.user
 
-  const userWithMaybeEnsData = useUserWithMaybeENSData({ user: data?.user })
+  const userWithMaybeEnsData = useUserWithMaybeENSData()
   const displayName = userWithMaybeEnsData
     ? getSensitiveDataUserDisplayName(userWithMaybeEnsData)
     : null
@@ -41,7 +38,7 @@ export function NavbarLoggedInButton({ onOpenChange }: { onOpenChange: (open: bo
         )}
       </PopoverTrigger>
       <PopoverContent align="end" className="p-0">
-        <NavbarLoggedInPopoverContent onClose={() => dialogProps.onOpenChange(false)} user={user} />
+        <NavbarLoggedInPopoverContent onClose={() => dialogProps.onOpenChange(false)} />
       </PopoverContent>
     </Popover>
   )

@@ -10,7 +10,9 @@ import {
   extractPricingValues,
   storePaymentRequest,
 } from '@/utils/server/coinbaseCommerce/storePaymentRequest'
+import { prismaClient } from '@/utils/server/prismaClient'
 import { getServerAnalytics } from '@/utils/server/serverAnalytics'
+import { getLocalUserFromUser, ServerLocalUser } from '@/utils/server/serverLocalUser'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 
 export async function POST(request: NextRequest) {
@@ -32,13 +34,36 @@ export async function POST(request: NextRequest) {
     })
   }
 
+  let localUser: ServerLocalUser | null = null
+  if (body.event.data.metadata.userId || body.event.data.metadata.sessionId) {
+    const user = await prismaClient.user.findFirst({
+      where: {
+        // Use the `userId` first if the field exists. Otherwise, use the `sessionId`.
+        ...(body.event.data.metadata.userId
+          ? { id: body.event.data.metadata.userId }
+          : body.event.data.metadata.sessionId && {
+              userSessions: {
+                some: {
+                  id: body.event.data.metadata.sessionId,
+                },
+              },
+            }),
+      },
+    })
+    if (user) {
+      localUser = getLocalUserFromUser(user)
+    }
+  }
   const analytics = getServerAnalytics({
-    localUser: null,
+    localUser,
     userId: body.event.data.metadata.userId,
   })
   try {
     const pricingValues = extractPricingValues(body)
-    analytics.track('Coinbase Commerce Payment', {
+
+    // Tracking the payment event regardless of type - the donation action is not created here.
+    analytics.track('Coinbase Commerce webhook event received', {
+      creationMethod: 'On Site',
       paymentExpire: body.event.data.expires_at,
       paymentId: body.id,
       paymentPrice: `${pricingValues.amountUsd} ${SupportedFiatCurrencyCodes.USD}`,

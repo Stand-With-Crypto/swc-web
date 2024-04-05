@@ -1,6 +1,5 @@
 import '@/globals.css'
 
-import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Toaster } from 'sonner'
 
@@ -29,8 +28,8 @@ export function DefaultLocaleLayout({ children }: { children: React.ReactNode })
         </TopLevelClientLogic>
         <Toaster />
         <CookieConsent locale={DEFAULT_LOCALE} />
-        <Analytics debug={false} />
-        <SpeedInsights debug={false} />
+        {/* <Analytics debug={false} /> */}
+        <SpeedInsights debug={false} sampleRate={0.01} />
       </body>
     </html>
   )

@@ -13,7 +13,7 @@ import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
-import { useThirdwebData } from '@/hooks/useThirdwebData'
+import { useSessionControl } from '@/hooks/useSession'
 import { useUserWithMaybeENSData } from '@/hooks/useUserWithMaybeEnsData'
 import { maybeEllipsisText } from '@/utils/web/maybeEllipsisText'
 import {
@@ -23,17 +23,15 @@ import {
 
 interface NavbarLoggedInSessionPopoverContentProps {
   onClose: () => void
-  user?: GetUserFullProfileInfoResponse['user']
 }
 
 export function NavbarLoggedInPopoverContent({
   onClose,
-  user,
 }: NavbarLoggedInSessionPopoverContentProps) {
   const urls = useIntlUrls()
-  const { logoutAndDisconnect } = useThirdwebData()
+  const { logout } = useSessionControl()
 
-  const userWithMaybeEnsData = useUserWithMaybeENSData({ user })
+  const userWithMaybeEnsData = useUserWithMaybeENSData()
 
   return (
     <div className="space-y-2 text-left">
@@ -61,7 +59,7 @@ export function NavbarLoggedInPopoverContent({
       <button
         className="block w-full border-t p-4 text-left text-sm font-medium hover:bg-secondary"
         onClick={async () => {
-          await logoutAndDisconnect()
+          await logout()
           onClose()
         }}
       >

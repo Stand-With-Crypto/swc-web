@@ -10,10 +10,11 @@ import { getClientCookieConsent } from '@/utils/web/clientCookieConsent'
 
 const NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN = requiredEnv(
   process.env.NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN,
-  'process.env.NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN',
-)
+  'NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN',
+)!
 
-const environmentHasAnalyticsEnabled = !isStorybook && !isCypress
+const environmentHasAnalyticsEnabled =
+  !isStorybook && !isCypress && !!NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN
 
 let init = false
 export function maybeInitClientAnalytics() {

@@ -6,6 +6,7 @@ import {
   UserInformationVisibility,
   UserInternalStatus,
 } from '@prisma/client'
+import { Decimal } from '@prisma/client/runtime/library'
 
 import { fakerFields } from '@/mocks/fakerUtils'
 import { mockCommonDatetimes } from '@/mocks/mockCommonDatetimes'
@@ -36,6 +37,7 @@ export function mockCreateUserInput({
     hasOptedInToEmails: true,
     hasOptedInToMembership: false,
     hasOptedInToSms: false,
+    hasRepliedToOptInSms: false,
     internalStatus: UserInternalStatus.VISIBLE,
     capitolCanaryAdvocateId: null,
     capitolCanaryInstance: null,
@@ -52,5 +54,8 @@ export function mockUser(): User {
     primaryUserCryptoAddressId: fakerFields.id(),
     dataCreationMethod: DataCreationMethod.BY_USER,
     addressId: withData ? fakerFields.id() : null,
+    totalDonationAmountUsd: new Decimal(
+      faker.number.float({ min: 0, max: 30000, multipleOf: 0.01 }),
+    ),
   }
 }

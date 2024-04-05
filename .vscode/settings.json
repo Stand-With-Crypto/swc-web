@@ -70,7 +70,8 @@
     "upserted",
     "UPSTASH",
     "vaul",
-    "viem"
+    "viem",
+    "Warpcast"
   ],
   "typescript.tsdk": "node_modules/typescript/lib"
 }

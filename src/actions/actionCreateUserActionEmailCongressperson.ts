@@ -11,15 +11,14 @@ import {
   UserEmailAddressSource,
   UserInformationVisibility,
 } from '@prisma/client'
-import * as Sentry from '@sentry/nextjs'
 import { z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
-import { CAPITOL_CANARY_EMAIL_REP_INNGEST_EVENT_NAME } from '@/inngest/functions/emailRepViaCapitolCanary'
+import { CAPITOL_CANARY_EMAIL_REP_INNGEST_EVENT_NAME } from '@/inngest/functions/capitolCanary/emailRepViaCapitolCanary'
 import { inngest } from '@/inngest/inngest'
 import {
-  CapitolCanaryCampaignName,
-  getCapitolCanaryCampaignID,
+  CapitolCanaryCampaignId,
+  SandboxCapitolCanaryCampaignId,
 } from '@/utils/server/capitolCanary/campaigns'
 import { EmailRepViaCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
@@ -41,7 +40,9 @@ import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/local
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
+import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { userFullName } from '@/utils/shared/userFullName'
+import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory'
 import { zodUserActionFormEmailCongresspersonAction } from '@/validation/forms/zodUserActionFormEmailCongressperson'
 
 const logger = getLogger(`actionCreateUserActionEmailCongressperson`)
@@ -116,10 +117,6 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
       userState,
       ...convertAddressToAnalyticsProperties(validatedFields.data.address),
     })
-    Sentry.captureMessage(
-      `duplicate ${actionType} user action for campaign ${campaignName} submitted`,
-      { extra: { validatedFields, userAction }, user: { id: user.id } },
-    )
     await beforeFinish()
     return { user: getClientUser(user) }
   }
@@ -131,7 +128,7 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
       user: { connect: { id: user.id } },
       actionType,
       campaignName: validatedFields.data.campaignName,
-      ...('userCryptoAddress' in userMatch
+      ...('userCryptoAddress' in userMatch && userMatch.userCryptoAddress
         ? {
             userCryptoAddress: { connect: { id: userMatch.userCryptoAddress.id } },
           }
@@ -149,11 +146,7 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
           },
           userActionEmailRecipients: {
             createMany: {
-              data: [
-                {
-                  dtsiSlug: validatedFields.data.dtsiSlug,
-                },
-              ],
+              data: validatedFields.data.dtsiSlugs.map(dtsiSlug => ({ dtsiSlug })),
             },
           },
         },
@@ -183,7 +176,7 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
    * By this point, the email address and physical address should have been added to our database.
    */
   const payload: EmailRepViaCapitolCanaryPayloadRequirements = {
-    campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_EMAIL_REPRESENTATIVE),
+    campaignId: getCapitalCanaryCampaignId(validatedFields.data.politicianCategory),
     user: {
       ...user,
       address: user.address!,
@@ -194,7 +187,7 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
     opts: {
       isEmailOptin: true,
     },
-    emailSubject: 'Support Crypto', // This does not particularly matter for now as subject is currently overridden in the Capitol Canary admin settings.
+    emailSubject: 'Support FIT21',
     emailMessage: validatedFields.data.message,
   }
   await inngest.send({
@@ -205,6 +198,28 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
   await beforeFinish()
   logger.info('updated user')
   return { user: getClientUser(user) }
+}
+
+function getCapitalCanaryCampaignId(politicianCategory: YourPoliticianCategory) {
+  if (NEXT_PUBLIC_ENVIRONMENT !== 'production') {
+    switch (politicianCategory) {
+      case 'senate':
+        return SandboxCapitolCanaryCampaignId.DEFAULT_EMAIL_SENATORS
+      case 'house':
+        return SandboxCapitolCanaryCampaignId.DEFAULT_EMAIL_REPRESENTATIVE
+      case 'senate-and-house':
+        return SandboxCapitolCanaryCampaignId.DEFAULT_EMAIL_REPRESENTATIVE_AND_SENATORS
+    }
+  }
+
+  switch (politicianCategory) {
+    case 'senate':
+      return CapitolCanaryCampaignId.DEFAULT_EMAIL_SENATORS
+    case 'house':
+      return CapitolCanaryCampaignId.DEFAULT_EMAIL_REPRESENTATIVE
+    case 'senate-and-house':
+      return CapitolCanaryCampaignId.DEFAULT_EMAIL_REPRESENTATIVE_AND_SENATORS
+  }
 }
 
 async function maybeUpsertUser({
@@ -289,6 +304,7 @@ async function maybeUpsertUser({
       hasOptedInToEmails: true,
       hasOptedInToMembership: false,
       hasOptedInToSms: false,
+      hasRepliedToOptInSms: false,
       firstName,
       lastName,
       userEmailAddresses: {

@@ -8,8 +8,8 @@ import { getClientUserCryptoAddress } from '@/clientModels/clientUser/clientUser
 import { getSensitiveDataClientUserWithENSData } from '@/clientModels/clientUser/sensitiveDataClientUser'
 import { getSensitiveDataClientUserAction } from '@/clientModels/clientUserAction/sensitiveDataClientUserAction'
 import { getENSDataFromCryptoAddressAndFailGracefully } from '@/data/web3/getENSDataFromCryptoAddress'
+import { appRouterGetAuthUser } from '@/utils/server/authentication/appRouterGetAuthUser'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { appRouterGetAuthUser } from '@/utils/server/thirdweb/appRouterGetAuthUser'
 
 export async function getAuthenticatedData() {
   const authUser = await appRouterGetAuthUser()
@@ -60,22 +60,22 @@ export async function getAuthenticatedData() {
       })
     }
   })
-  const ensData = await getENSDataFromCryptoAddressAndFailGracefully(
-    user.primaryUserCryptoAddress!.cryptoAddress,
-  )
+  const ensData = user.primaryUserCryptoAddress
+    ? await getENSDataFromCryptoAddressAndFailGracefully(
+        user.primaryUserCryptoAddress.cryptoAddress,
+      )
+    : null
   const { userActions, address, ...rest } = user
   const currentlyAuthenticatedUserCryptoAddress = user.userCryptoAddresses.find(
     x => x.cryptoAddress === authUser.address,
   )
-  if (!currentlyAuthenticatedUserCryptoAddress) {
-    throw new Error('Primary user crypto address not found')
-  }
+
   return {
     ...getSensitiveDataClientUserWithENSData({ ...rest, address }, ensData),
     // LATER-TASK show UX if this address is not the primary address
-    currentlyAuthenticatedUserCryptoAddress: getClientUserCryptoAddress(
-      currentlyAuthenticatedUserCryptoAddress,
-    ),
+    currentlyAuthenticatedUserCryptoAddress: currentlyAuthenticatedUserCryptoAddress
+      ? getClientUserCryptoAddress(currentlyAuthenticatedUserCryptoAddress)
+      : null,
 
     address: address && getClientAddress(address),
     userActions: userActions.map(record => getSensitiveDataClientUserAction({ record })),

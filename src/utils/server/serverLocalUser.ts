@@ -57,18 +57,19 @@ export function mapLocalUserToUserDatabaseFields(
   'acquisitionReferer' | 'acquisitionSource' | 'acquisitionMedium' | 'acquisitionCampaign'
 > {
   return {
-    acquisitionReferer: localUser?.persisted?.initialReferer || '',
+    // We are trimming the char input in case it is greater than the DB limit (191 characters)
+    acquisitionReferer: localUser?.persisted?.initialReferer?.slice(0, 191) || '',
     acquisitionSource:
-      localUser?.persisted?.initialSearchParams.utm_source ||
-      localUser?.currentSession.searchParamsOnLoad.utm_source ||
+      localUser?.persisted?.initialSearchParams.utm_source?.slice(0, 191) ||
+      localUser?.currentSession.searchParamsOnLoad.utm_source?.slice(0, 191) ||
       '',
     acquisitionMedium:
-      localUser?.persisted?.initialSearchParams.utm_medium ||
-      localUser?.currentSession.searchParamsOnLoad.utm_medium ||
+      localUser?.persisted?.initialSearchParams.utm_medium?.slice(0, 191) ||
+      localUser?.currentSession.searchParamsOnLoad.utm_medium?.slice(0, 191) ||
       '',
     acquisitionCampaign:
-      localUser?.persisted?.initialSearchParams.utm_campaign ||
-      localUser?.currentSession.searchParamsOnLoad.utm_campaign ||
+      localUser?.persisted?.initialSearchParams.utm_campaign?.slice(0, 191) ||
+      localUser?.currentSession.searchParamsOnLoad.utm_campaign?.slice(0, 191) ||
       '',
   }
 }

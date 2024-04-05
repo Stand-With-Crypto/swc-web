@@ -8,8 +8,8 @@ interface CoinbaseCommercePaymentDetails {
   detected_at?: string
   value?: {
     // Emitted from legacy Commerce API and new (web3) Commerce API.
-    local: { amount: string; currency: string }
-    crypto: { amount: string; currency: string }
+    local?: { amount: string; currency: string }
+    crypto?: { amount: string; currency: string }
   }
   block?: {
     height: number
@@ -47,8 +47,8 @@ interface CoinbaseCommercePaymentEventData {
   }
   pricing?: {
     // Emitted from new (web3) Commerce API.
-    local: { amount: string; currency: string }
-    settlement: { amount: string; currency: string }
+    local?: { amount: string; currency: string }
+    settlement?: { amount: string; currency: string }
   }
   pricing_type: string
   payments: CoinbaseCommercePaymentDetails[]

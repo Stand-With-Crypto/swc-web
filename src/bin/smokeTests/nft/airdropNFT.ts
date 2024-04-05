@@ -3,7 +3,7 @@ import { Decimal } from '@prisma/client/runtime/library'
 
 import { runBin } from '@/bin/runBin'
 import { parseThirdwebAddress } from '@/hooks/useThirdwebAddress/parseThirdwebAddress'
-import { AIRDROP_NFT_INNGEST_EVENT_NAME } from '@/inngest/functions/airdropNFT'
+import { AIRDROP_NFT_INNGEST_EVENT_NAME } from '@/inngest/functions/airdropNFT/airdropNFT'
 import { inngest } from '@/inngest/inngest'
 import { NFT_SLUG_BACKEND_METADATA } from '@/utils/server/nft/constants'
 import { AirdropPayload } from '@/utils/server/nft/payload'
@@ -13,7 +13,7 @@ import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
 
 const LOCAL_USER_CRYPTO_ADDRESS = parseThirdwebAddress(
-  requiredEnv(process.env.LOCAL_USER_CRYPTO_ADDRESS, 'process.env.LOCAL_USER_CRYPTO_ADDRESS'),
+  requiredEnv(process.env.LOCAL_USER_CRYPTO_ADDRESS, 'LOCAL_USER_CRYPTO_ADDRESS'),
 )
 
 /*
@@ -51,6 +51,7 @@ async function smokeTestAirdropNFTWithInngest() {
     nftMintId: action.nftMintId!,
     nftSlug: NFTSlug.SWC_SHIELD,
     recipientWalletAddress: LOCAL_USER_CRYPTO_ADDRESS,
+    userId: user.id,
   }
 
   await inngest.send({

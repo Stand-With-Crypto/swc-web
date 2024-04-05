@@ -10,7 +10,7 @@ export function sortDTSIPersonDataTable(data: DTSIPersonDataTablePeople) {
     if (personA.promotedPositioning) {
       return personB.promotedPositioning
         ? personA.promotedPositioning - personB.promotedPositioning
-        : 1
+        : -1
     }
     if (personB.promotedPositioning) {
       return 1
@@ -20,7 +20,7 @@ export function sortDTSIPersonDataTable(data: DTSIPersonDataTablePeople) {
     const aScore = personA.manuallyOverriddenStanceScore || personA.computedStanceScore
     const bScore = personB.manuallyOverriddenStanceScore || personB.computedStanceScore
     if (aScore === bScore || (isNil(aScore) && isNil(bScore))) {
-      return 0
+      return personA.lastName < personB.lastName ? -1 : 1
     }
     if (isNil(aScore)) {
       return 1

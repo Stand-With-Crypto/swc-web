@@ -31,10 +31,23 @@ it('action - email your congressperson', () => {
     trigger: cy.get('input[placeholder="Your full address"]'),
     searchText: '350 Fifth Avenue New York, NY 10118',
   })
-  cy.contains('Your representative is Jerry Nadler')
+  cy.contains('Your representative is Christy Hegmann')
   cy.get('textarea').type('test message')
   cy.get('button[type="submit"]').click()
 
   // waiting for Inngest to consume job
   cy.contains('Nice work!')
+
+  // validate database
+  cy.queryDb('SELECT * FROM user WHERE first_name="John"').then((result: any) => {
+    expect(result.length, 'user to exist in database').to.equal(1)
+  })
+  cy.queryDb('SELECT * FROM user_action WHERE action_type="EMAIL"').then((result: any) => {
+    expect(result.length, 'user_action to exist in database').to.equal(1)
+  })
+  cy.queryDb('SELECT * FROM user_action_email WHERE sender_email="johndoe@gmail.com"').then(
+    (result: any) => {
+      expect(result.length, 'user_action_email to exist in database').to.equal(1)
+    },
+  )
 })

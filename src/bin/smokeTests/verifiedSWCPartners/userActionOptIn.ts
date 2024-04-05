@@ -21,7 +21,7 @@ async function smokeTestUserActionOptIn() {
         username: VerifiedSWCPartner.COINBASE,
         password: requiredEnv(
           process.env.VERIFIED_SWC_PARTNER_SECRET_COINBASE,
-          'process.env.VERIFIED_SWC_PARTNER_SECRET_COINBASE',
+          'VERIFIED_SWC_PARTNER_SECRET_COINBASE',
         ),
       }),
     },
