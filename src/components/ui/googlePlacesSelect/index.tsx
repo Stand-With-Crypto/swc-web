@@ -8,8 +8,6 @@ import { useGoogleMapsScript } from '@/hooks/useGoogleMapsScript'
 import { cn } from '@/utils/web/cn'
 import { GooglePlaceAutocompletePrediction } from '@/utils/web/googlePlaceUtils'
 
-const CALLBACK_NAME = 'PLACES_AUTOCOMPLETE'
-
 export type GooglePlacesSelectProps = {
   value: GooglePlaceAutocompletePrediction | null
   onChange: (val: GooglePlaceAutocompletePrediction | null) => void
@@ -28,14 +26,13 @@ export const GooglePlacesSelect = React.forwardRef<
     setValue,
     init,
   } = usePlacesAutocomplete({
-    callbackName: CALLBACK_NAME,
     // note on why we aren't restricting to just addresses https://stackoverflow.com/a/65206036
     requestOptions: {
       locationBias: 'IP_BIAS',
       language: 'en',
     },
   })
-  const scriptStatus = useGoogleMapsScript(CALLBACK_NAME)
+  const scriptStatus = useGoogleMapsScript()
 
   useEffect(() => {
     if (scriptStatus === 'ready') {
