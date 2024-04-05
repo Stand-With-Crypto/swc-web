@@ -2,6 +2,7 @@ import { FrameMetadataType, FrameRequest, getFrameHtmlResponse } from '@coinbase
 import { NextRequest, NextResponse } from 'next/server'
 
 import { REGISTRATION_URLS_BY_STATE } from '@/components/app/userActionFormVoterRegistration/constants'
+import { getLogger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { fullUrl } from '@/utils/shared/urls'
 import { USStateCode } from '@/utils/shared/usStateUtils'
@@ -152,6 +153,8 @@ const frameData = [
   },
 ] as FrameMetadataType[]
 
+const logger = getLogger('framesRegisterToVote')
+
 export async function POST(req: NextRequest): Promise<Response> {
   const url = new URL(req.url)
   const queryParams = url.searchParams
@@ -161,6 +164,9 @@ export async function POST(req: NextRequest): Promise<Response> {
 
   const buttonIndex = body.untrustedData?.buttonIndex
   const stateInput = body.untrustedData?.inputText as USStateCode
+
+  // Debugging logs
+  logger.info('FID', body.untrustedData?.fid)
 
   let link: string | undefined
 
@@ -183,10 +189,9 @@ export async function POST(req: NextRequest): Promise<Response> {
       // Why is it necessary to tie the two fields across frames?
       // - Each frame can only have one text field, so we cannot gather email and phone number within the same frame.
       // - `getUserSessionId` doesn't seem to work as there no SWC user cookies for the frame.
-      // - Attempting to use the frame state to store information does not work.
+      // - Attempting to store the email address within the next frame's state does not work.
       // Ideas:
       // - We will have the user's FID, so we store that in the database to tie the two fields together.
-      // - Browser storage?
       return new NextResponse(getFrameHtmlResponse(frameData[frameIndex]))
     case 3: // "Are you registered to vote" screen.
       switch (buttonIndex) {
@@ -199,7 +204,6 @@ export async function POST(req: NextRequest): Promise<Response> {
       }
       break
     case 4: // Register state screen.
-      // TODO: Validate state.
       link =
         stateInput && REGISTRATION_URLS_BY_STATE[stateInput]
           ? REGISTRATION_URLS_BY_STATE[stateInput]['registerUrl']
@@ -213,7 +217,7 @@ export async function POST(req: NextRequest): Promise<Response> {
             frameData[frameIndex].buttons![1],
           ],
         }),
-      ) // Registration screen with updated link.
+      ) // Registration screen with respective link.
     case 5: // Register screen.
       return new NextResponse(getFrameHtmlResponse(frameData[7])) // Mint screen.
     case 6: // Check registration state screen.
@@ -230,7 +234,7 @@ export async function POST(req: NextRequest): Promise<Response> {
             frameData[frameIndex].buttons![1],
           ],
         }),
-      ) // Registration screen with updated link.
+      ) // Registration screen with respective link.
     case 7: // Check registration screen.
       return new NextResponse(getFrameHtmlResponse(frameData[7])) // Mint screen.
     case 8: // Mint screen.
