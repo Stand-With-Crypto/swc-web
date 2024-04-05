@@ -136,7 +136,7 @@ const frameData = [
       {
         label: `Mint`,
         action: 'mint',
-        target: `eip155:${BASE_CHAIN_ID}:${I_AM_A_VOTER_NFT_CONTRACT_ADDRESS}`,
+        target: `eip155:${BASE_CHAIN_ID}:${I_AM_A_VOTER_NFT_CONTRACT_ADDRESS}:1`,
       },
     ],
     image: {
@@ -184,6 +184,9 @@ export async function POST(req: NextRequest): Promise<Response> {
       // - Each frame can only have one text field, so we cannot gather email and phone number within the same frame.
       // - `getUserSessionId` doesn't seem to work as there no SWC user cookies for the frame.
       // - Attempting to use the frame state to store information does not work.
+      // Ideas:
+      // - We will have the user's FID, so we store that in the database to tie the two fields together.
+      // - Browser storage?
       return new NextResponse(getFrameHtmlResponse(frameData[frameIndex]))
     case 3: // "Are you registered to vote" screen.
       switch (buttonIndex) {
