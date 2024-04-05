@@ -2,8 +2,6 @@ import {
   Address,
   Prisma,
   User,
-  UserActionOptInType,
-  UserActionType,
   UserEmailAddress,
   UserEmailAddressSource,
   UserInformationVisibility,
@@ -15,7 +13,6 @@ import { NextRequest, NextResponse } from 'next/server'
 import {
   CoinbaseCommerceDonation,
   createInAppCharge,
-  CreateInAppChargeParams,
   zodCoinbaseCommerceDonation,
 } from '@/utils/server/coinbaseCommerce/createCharge'
 import { prismaClient } from '@/utils/server/prismaClient'
@@ -45,51 +42,32 @@ export async function POST(request: NextRequest) {
         errors: zodResult.error.flatten(),
       },
     })
-  }
-  const params: CreateInAppChargeParams = {
-    address: body.address,
-    email: body.email,
-    employer: body.employer,
-    full_name: body.full_name,
-    is_citizen: body.is_citizen,
-    occupation: body.occupation,
-  }
-  const hostedUrl = (await createInAppCharge(params)).data.hosted_url
-
-  const actionType = UserActionType.DONATION
-  const existingAction = await prismaClient.userAction.findFirst({
-    include: {
-      user: {
-        include: {
-          userEmailAddresses: true,
-          userSessions: true,
-        },
+  } else {
+    const hostedUrl = (await createInAppCharge(zodResult.data)).data.hosted_url
+    const user = await prismaClient.user.findFirst({
+      include: {
+        userEmailAddresses: true,
+        userSessions: true,
       },
-    },
-    where: {
-      actionType,
-      userActionOptIn: {
-        optInType: UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER,
-      },
-      user: {
+      where: {
         userEmailAddresses: {
-          some: { emailAddress: body.email },
+          some: { emailAddress: zodResult.data.email },
         },
       },
-    },
-  })
+    })
 
-  await maybeUpsertUser({ existingUser: existingAction?.user, input: params })
+    await maybeUpsertUser({ existingUser: user, input: zodResult.data })
 
-  return new NextResponse(JSON.stringify({ charge_url: hostedUrl }), { status: 200 })
+    return new NextResponse(JSON.stringify({ charge_url: hostedUrl }), { status: 200 })
+  }
 }
 
 async function maybeUpsertUser({
   existingUser,
   input,
 }: {
-  existingUser: UserWithRelations | undefined
-  input: CreateInAppChargeParams
+  existingUser: UserWithRelations | null
+  input: CoinbaseCommerceDonation
 }): Promise<{ user: UserWithRelations; userState: AnalyticsUserActionUserState }> {
   const { email, full_name } = input
 
@@ -99,7 +77,6 @@ async function maybeUpsertUser({
 
   if (existingUser) {
     const updatePayload: Prisma.UserUpdateInput = {
-      // TODO typesafe against invalid fields
       ...(firstName && !existingUser.firstName && { firstName: firstName }),
       ...(lastName && !existingUser.lastName && { lastName: lastName }),
       ...(email &&
@@ -107,7 +84,7 @@ async function maybeUpsertUser({
           userEmailAddresses: {
             create: {
               emailAddress: email,
-              isVerified: true,
+              isVerified: false,
               source: UserEmailAddressSource.VERIFIED_THIRD_PARTY,
             },
           },
@@ -127,14 +104,6 @@ async function maybeUpsertUser({
         address: true,
       },
     })
-    const existingEmail = user.userEmailAddresses.find(e => e.emailAddress === email)
-    if (existingEmail && !existingEmail.isVerified) {
-      logger.info(`verifying previously unverified email`)
-      await prismaClient.userEmailAddress.update({
-        where: { id: existingEmail.id },
-        data: { isVerified: true },
-      })
-    }
 
     if (!user.primaryUserEmailAddressId && email) {
       const newEmail = user.userEmailAddresses.find(addr => addr.emailAddress === email)!
@@ -171,7 +140,7 @@ async function maybeUpsertUser({
       userEmailAddresses: {
         create: {
           emailAddress: email,
-          isVerified: true,
+          isVerified: false,
           source: UserEmailAddressSource.VERIFIED_THIRD_PARTY,
         },
       },

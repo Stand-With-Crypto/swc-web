@@ -103,16 +103,6 @@ interface CreateChargeRequest {
   redirect_url?: string
 }
 
-// mini-dApps donation flow
-export interface CoinbaseCommerceDonation {
-  address: string
-  email: string
-  employer: string
-  full_name: string
-  is_citizen: boolean
-  occupation: string
-}
-
 export const zodCoinbaseCommerceDonation = z.object({
   address: z.string(),
   email: z.string(),
@@ -122,14 +112,8 @@ export const zodCoinbaseCommerceDonation = z.object({
   occupation: z.string(),
 })
 
-export interface CreateInAppChargeParams {
-  address: string
-  email: string
-  employer: string
-  full_name: string
-  is_citizen: boolean
-  occupation: string
-}
+// mini-dApps donation flow
+export type CoinbaseCommerceDonation = z.infer<typeof zodCoinbaseCommerceDonation>
 
 export async function createCharge({ sessionId, userId }: { sessionId: string; userId: string }) {
   const payload: CreateChargeRequest = {
@@ -159,7 +143,7 @@ export async function createCharge({ sessionId, userId }: { sessionId: string; u
   }
 }
 
-export async function createInAppCharge(createInAppChargeParams: CreateInAppChargeParams) {
+export async function createInAppCharge(createInAppChargeParams: CoinbaseCommerceDonation) {
   const payload: CreateChargeRequest = {
     cancel_url: 'https://www.standwithcrypto.org',
     description: 'Donate to Crypto',
