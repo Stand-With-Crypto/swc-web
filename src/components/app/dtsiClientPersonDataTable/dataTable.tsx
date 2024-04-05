@@ -129,7 +129,7 @@ export function DataTable<TData extends Person, TValue>({
           <div className="max-w-[400px]">
             <h3 className="text-2xl font-bold">Search for a politician</h3>
             <p className="text-fontcolor-muted">
-              We have a database of over 500 politicians. Search any politician to see where they
+              We have a database of over 1,000 politicians. Search any politician to see where they
               stand on crypto.
             </p>
           </div>
