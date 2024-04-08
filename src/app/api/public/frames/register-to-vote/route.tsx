@@ -172,11 +172,20 @@ export async function POST(req: NextRequest): Promise<Response> {
     if (!isValid) {
       logger.error('frame message is not valid')
     } else {
+      logger.info('frame message', message)
       const trustedInputText = message.input || ''
       let state = {
         emailAddress: '',
         phoneNumber: '',
       }
+      logger.info(
+        'decodeURIComponent(message.state?.serialized)',
+        decodeURIComponent(message.state?.serialized),
+      )
+      logger.info(
+        'JSON.parse(decodeURIComponent(message.state?.serialized))',
+        JSON.parse(decodeURIComponent(message.state?.serialized)),
+      )
       state = JSON.parse(decodeURIComponent(message.state?.serialized)) as {
         emailAddress: string
         phoneNumber: string
@@ -200,16 +209,12 @@ export async function POST(req: NextRequest): Promise<Response> {
     case 0: // Intro screen.
       return new NextResponse(getFrameHtmlResponse(frameData[frameIndex]))
     case 1: // Email input screen.
-      // TODO: Hook up email input to SWC user registration.
-      /*
       return new NextResponse(
         getFrameHtmlResponse({
           ...frameData[frameIndex],
           state: { emailAddress: body.untrustedData?.inputText },
         }),
       )
-      */
-      return new NextResponse(getFrameHtmlResponse(frameData[frameIndex]))
     case 2: // Email input and phone number input screen.
       // TODO: Determine if it's possible to tie email <> phone number together across frames.
       // Why is it necessary to tie the two fields across frames?
