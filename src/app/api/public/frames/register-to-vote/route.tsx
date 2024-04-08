@@ -178,20 +178,24 @@ export async function POST(req: NextRequest): Promise<Response> {
         emailAddress: '',
         phoneNumber: '',
       }
+      logger.info('raw message state:', message.raw.action.state.serialized)
+      logger.info('raw input', message.input)
       logger.info(
         'decodeURIComponent(message.state?.serialized)',
         decodeURIComponent(message.state?.serialized),
       )
-      logger.info(
-        'JSON.parse(decodeURIComponent(message.state?.serialized))',
-        JSON.parse(decodeURIComponent(message.state?.serialized)),
-      )
-      state = JSON.parse(decodeURIComponent(message.state?.serialized)) as {
-        emailAddress: string
-        phoneNumber: string
+      if (message.state?.serialized) {
+        logger.info(
+          'JSON.parse(decodeURIComponent(message.state?.serialized))',
+          JSON.parse(decodeURIComponent(message.state?.serialized)),
+        )
+        state = JSON.parse(decodeURIComponent(message.state?.serialized)) as {
+          emailAddress: string
+          phoneNumber: string
+        }
+        logger.info('trusted input text', trustedInputText)
+        logger.info('trusted state', state)
       }
-      logger.info('trusted input text', trustedInputText)
-      logger.info('trusted state', state)
     }
   } catch (e) {
     logger.error('error getting frame message', e)
@@ -202,17 +206,26 @@ export async function POST(req: NextRequest): Promise<Response> {
 
   // Debugging logs
   logger.info('FID', body.untrustedData?.fid)
+  logger.info('untrusted input', body.untrustedData?.inputText)
 
   let link: string | undefined
 
   switch (frameIndex) {
     case 0: // Intro screen.
-      return new NextResponse(getFrameHtmlResponse(frameData[frameIndex]))
+      return new NextResponse(
+        getFrameHtmlResponse({
+          ...frameData[frameIndex],
+          state: {
+            emailAddress: '',
+            phoneNumber: '',
+          },
+        }),
+      )
     case 1: // Email input screen.
       return new NextResponse(
         getFrameHtmlResponse({
           ...frameData[frameIndex],
-          state: { emailAddress: body.untrustedData?.inputText },
+          state: { emailAddress: body.untrustedData?.inputText, phoneNumber: '' },
         }),
       )
     case 2: // Email input and phone number input screen.
@@ -223,6 +236,7 @@ export async function POST(req: NextRequest): Promise<Response> {
       // - Attempting to store the email address within the next frame's state does not work.
       // Ideas:
       // - We will have the user's FID, so we store that in the database to tie the two fields together.
+      logger.info('untrusted frame state', body.untrustedData.state)
       return new NextResponse(getFrameHtmlResponse(frameData[frameIndex]))
     case 3: // "Are you registered to vote" screen.
       switch (buttonIndex) {
