@@ -31,7 +31,14 @@ export function PageResources({ locale }: { locale: SupportedLocale }) {
         <PageSubTitle className="mb-8 mt-4">
           Learn more about recent and upcoming events to mobilize the crypto community.
         </PageSubTitle>
-        <div className="grid grid-flow-col grid-rows-3 gap-4 lg:grid-rows-1">
+        <div className="grid grid-flow-col grid-rows-4 gap-4 lg:grid-rows-1">
+          <EventCard
+            cta="Watch"
+            imageAltText="Boston Advocate Town Hall event card image"
+            imageUrl="/resources/eventCards/boston_advocate_town_hall.webp"
+            link="https://www.youtube.com/watch?v=ulron-a3sIc"
+            title="Boston Advocate Town Hall"
+          />
           <EventCard
             cta="Watch"
             imageAltText="Stand With Crypto Day (Washington DC) event card image"
@@ -41,10 +48,10 @@ export function PageResources({ locale }: { locale: SupportedLocale }) {
           />
           <EventCard
             cta="Watch"
-            imageAltText="Boston Advocate Town Hall event card image"
-            imageUrl="/resources/eventCards/boston_advocate_town_hall.webp"
-            link="https://www.youtube.com/watch?v=ulron-a3sIc"
-            title="Boston Advocate Town Hall"
+            imageAltText="Atlanta Advocate Town Hall event card image"
+            imageUrl="/resources/eventCards/atlanta_advocate_town_hall.webp"
+            link="https://www.youtube.com/watch?v=ETq_UZ1aRGQ"
+            title="Atlanta Advocate Town Hall"
           />
           <EventCard
             cta="Watch"
