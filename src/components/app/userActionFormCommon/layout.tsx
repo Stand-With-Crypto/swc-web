@@ -75,7 +75,7 @@ function CongresspersonDisplayFooter({
   dtsiPeopleResponse?: DTSIPeopleFromCongressionalDistrict
 }>) {
   return (
-    <div className="flex w-full flex-col gap-4 border-t p-6 pt-3 md:flex-row md:items-center md:justify-between md:px-12">
+    <div className="mt-3 flex w-full flex-col gap-4 border-t p-6 pt-3 md:flex-row md:items-center md:justify-between md:px-12">
       <DtsiCongresspersonDisplay
         dtsiPeopleResponse={dtsiPeopleResponse}
         maxPeopleDisplayed={maxPeopleDisplayed}
