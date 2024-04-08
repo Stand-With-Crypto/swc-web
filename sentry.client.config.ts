@@ -53,7 +53,12 @@ Sentry.init({
   // replaysSessionSampleRate: 0.001,
 
   // You can remove this option if you're not planning to use the Sentry Session Replay feature:
-  integrations: [new ExtraErrorData({ depth: 10 }), Sentry.replayIntegration()],
+  integrations: [
+    new ExtraErrorData({ depth: 10 }),
+    Sentry.replayIntegration({
+      workerUrl: '/workers/sentry.worker.js',
+    }),
+  ],
   denyUrls: [
     /vitals\.vercel-analytics\.com/i,
     // Chrome extensions
