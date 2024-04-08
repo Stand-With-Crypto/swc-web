@@ -193,7 +193,7 @@ export async function POST(req: NextRequest): Promise<Response> {
   }
 
   const buttonIndex = body.untrustedData?.buttonIndex
-  const stateInput = body.untrustedData?.inputText.trim().toUpperCase() as USStateCode
+  const stateInput = body.untrustedData?.inputText?.trim().toUpperCase() as USStateCode
 
   let zodEmailResult: SafeParseReturnType<string, string>
   let zodPhoneResult: SafeParseReturnType<string, string>
@@ -229,7 +229,7 @@ export async function POST(req: NextRequest): Promise<Response> {
         )
       }
       logger.info('email address', currentFrameState.emailAddress)
-      logger.info('phone number', zodPhoneResult.data)
+      logger.info('phone number', normalizePhoneNumber(zodPhoneResult.data))
       return new NextResponse(
         getFrameHtmlResponse({
           ...frameData[frameIndex],
