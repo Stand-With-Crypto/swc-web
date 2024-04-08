@@ -5,12 +5,16 @@ import {
   getFrameMessage,
 } from '@coinbase/onchainkit/frame'
 import { NextRequest, NextResponse } from 'next/server'
+import { SafeParseReturnType } from 'zod'
 
 import { REGISTRATION_URLS_BY_STATE } from '@/components/app/userActionFormVoterRegistration/constants'
 import { getLogger } from '@/utils/shared/logger'
+import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { fullUrl } from '@/utils/shared/urls'
 import { USStateCode } from '@/utils/shared/usStateUtils'
+import { zodEmailAddress } from '@/validation/fields/zodEmailAddress'
+import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
 
 const BASE_CHAIN_ID = '8453'
 
@@ -20,6 +24,9 @@ const I_AM_A_VOTER_NFT_CONTRACT_ADDRESS = requiredEnv(
   process.env.I_AM_A_VOTER_NFT_CONTRACT_ADDRESS,
   'I_AM_A_VOTER_NFT_CONTRACT_ADDRESS',
 )
+
+const NEYNAR_API_KEY = 'NEYNAR_ONCHAIN_KIT'
+const FRAME_QUERY_PARAMETER = 'frame'
 
 const frameData = [
   {
@@ -163,38 +170,22 @@ const logger = getLogger('framesRegisterToVote')
 export async function POST(req: NextRequest): Promise<Response> {
   const url = new URL(req.url)
   const queryParams = url.searchParams
-  const frameIndex = Number(queryParams.get('frame'))
+  const frameIndex = Number(queryParams.get(FRAME_QUERY_PARAMETER))
 
   const body: FrameRequest = (await req.json()) as FrameRequest
+  let currentFrameState = {
+    emailAddress: '',
+    phoneNumber: '',
+    userId: '',
+  }
   try {
-    logger.info('trusted data message bytes', body.trustedData.messageBytes)
-    const { isValid, message } = await getFrameMessage(body, { neynarApiKey: 'NEYNAR_ONCHAIN_KIT' })
-    if (!isValid) {
-      logger.error('frame message is not valid')
-    } else {
-      logger.info('frame message', message)
-      const trustedInputText = message.input || ''
-      let state = {
-        emailAddress: '',
-        phoneNumber: '',
-      }
-      logger.info('raw message state:', message.raw.action.state.serialized)
-      logger.info('raw input', message.input)
-      logger.info(
-        'decodeURIComponent(message.state?.serialized)',
-        decodeURIComponent(message.state?.serialized),
-      )
-      if (message.state?.serialized) {
-        logger.info(
-          'JSON.parse(decodeURIComponent(message.state?.serialized))',
-          JSON.parse(decodeURIComponent(message.state?.serialized)),
-        )
-        state = JSON.parse(decodeURIComponent(message.state?.serialized)) as {
-          emailAddress: string
-          phoneNumber: string
-        }
-        logger.info('trusted input text', trustedInputText)
-        logger.info('trusted state', state)
+    const { isValid, message } = await getFrameMessage(body, { neynarApiKey: NEYNAR_API_KEY }) // NOTE: Frame state data does not exist on localhost.
+    if (!isValid) throw new Error('invalid frame message')
+    if (message.state?.serialized) {
+      currentFrameState = JSON.parse(decodeURIComponent(message.state?.serialized)) as {
+        emailAddress: string
+        phoneNumber: string
+        userId: string
       }
     }
   } catch (e) {
@@ -202,42 +193,53 @@ export async function POST(req: NextRequest): Promise<Response> {
   }
 
   const buttonIndex = body.untrustedData?.buttonIndex
-  const stateInput = body.untrustedData?.inputText as USStateCode
+  const stateInput = body.untrustedData?.inputText.trim().toUpperCase() as USStateCode
 
-  // Debugging logs
-  logger.info('FID', body.untrustedData?.fid)
-  logger.info('untrusted input', body.untrustedData?.inputText)
-
+  let zodEmailResult: SafeParseReturnType<string, string>
+  let zodPhoneResult: SafeParseReturnType<string, string>
   let link: string | undefined
 
   switch (frameIndex) {
     case 0: // Intro screen.
+      return new NextResponse(getFrameHtmlResponse(frameData[frameIndex]))
+    case 1: // Email input screen.
+      zodEmailResult = zodEmailAddress.safeParse(body.untrustedData?.inputText)
+      if (!zodEmailResult.success) {
+        return new NextResponse(
+          getFrameHtmlResponse({
+            ...frameData[frameIndex - 1],
+            input: { text: 'Invalid email - try again' },
+          }),
+        )
+      }
+      return new NextResponse(
+        getFrameHtmlResponse({
+          ...frameData[frameIndex],
+          state: { emailAddress: zodEmailResult.data, phoneNumber: '' },
+        }),
+      )
+    case 2: // Phone number input screen.
+      zodPhoneResult = zodPhoneNumber.safeParse(body.untrustedData?.inputText)
+      if (!zodPhoneResult.success) {
+        return new NextResponse(
+          getFrameHtmlResponse({
+            ...frameData[frameIndex - 1],
+            input: { text: 'Invalid phone - try again' },
+          }),
+        )
+      }
+      logger.info('email address', currentFrameState.emailAddress)
+      logger.info('phone number', zodPhoneResult.data)
       return new NextResponse(
         getFrameHtmlResponse({
           ...frameData[frameIndex],
           state: {
-            emailAddress: '',
-            phoneNumber: '',
+            emailAddress: currentFrameState.emailAddress,
+            phoneNumber: normalizePhoneNumber(zodPhoneResult.data),
+            // TODO: Include SWC user ID starting here.
           },
         }),
       )
-    case 1: // Email input screen.
-      return new NextResponse(
-        getFrameHtmlResponse({
-          ...frameData[frameIndex],
-          state: { emailAddress: body.untrustedData?.inputText, phoneNumber: '' },
-        }),
-      )
-    case 2: // Email input and phone number input screen.
-      // TODO: Determine if it's possible to tie email <> phone number together across frames.
-      // Why is it necessary to tie the two fields across frames?
-      // - Each frame can only have one text field, so we cannot gather email and phone number within the same frame.
-      // - `getUserSessionId` doesn't seem to work as there no SWC user cookies for the frame.
-      // - Attempting to store the email address within the next frame's state does not work.
-      // Ideas:
-      // - We will have the user's FID, so we store that in the database to tie the two fields together.
-      logger.info('untrusted frame state', body.untrustedData.state)
-      return new NextResponse(getFrameHtmlResponse(frameData[frameIndex]))
     case 3: // "Are you registered to vote" screen.
       switch (buttonIndex) {
         case 1:
@@ -253,7 +255,13 @@ export async function POST(req: NextRequest): Promise<Response> {
         stateInput && REGISTRATION_URLS_BY_STATE[stateInput]
           ? REGISTRATION_URLS_BY_STATE[stateInput]['registerUrl']
           : undefined
-      if (!link) return new NextResponse(getFrameHtmlResponse(frameData[frameIndex - 1])) // Same screen.
+      if (!link)
+        return new NextResponse(
+          getFrameHtmlResponse({
+            ...frameData[frameIndex - 1],
+            input: { text: 'Invalid state code - try again' },
+          }),
+        ) // Same screen.
       return new NextResponse(
         getFrameHtmlResponse({
           ...frameData[frameIndex],
@@ -270,7 +278,13 @@ export async function POST(req: NextRequest): Promise<Response> {
         stateInput && REGISTRATION_URLS_BY_STATE[stateInput]
           ? REGISTRATION_URLS_BY_STATE[stateInput]['checkRegistrationUrl']
           : undefined
-      if (!link) return new NextResponse(getFrameHtmlResponse(frameData[frameIndex - 1])) // Same screen.
+      if (!link)
+        return new NextResponse(
+          getFrameHtmlResponse({
+            ...frameData[frameIndex - 1],
+            input: { text: 'Invalid state code - try again' },
+          }),
+        ) // Same screen.
       return new NextResponse(
         getFrameHtmlResponse({
           ...frameData[frameIndex],
