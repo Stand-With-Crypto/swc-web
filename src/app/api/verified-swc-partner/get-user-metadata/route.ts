@@ -6,14 +6,9 @@ import {
 } from '@/data/verifiedSWCPartners/getUserMetadata'
 import { authenticateAndGetVerifiedSWCPartnerFromHeader } from '@/utils/server/verifiedSWCPartner/getVerifiedSWCPartnerFromHeader'
 
-export const dynamic = 'force-dynamic'
-
-export async function GET(
-  _request: NextRequest,
-  { params: { emailAddress } }: { params: { emailAddress: string } },
-) {
+export async function POST(request: NextRequest) {
   const partner = authenticateAndGetVerifiedSWCPartnerFromHeader()
-  const validatedFields = zodVerifiedSWCPartnersGetUserMetadata.parse({ emailAddress })
+  const validatedFields = zodVerifiedSWCPartnersGetUserMetadata.parse(await request.json())
   const result = await verifiedSWCPartnersGetUserMetadata({
     ...validatedFields,
     partner,
