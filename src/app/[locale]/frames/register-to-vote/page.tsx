@@ -21,10 +21,6 @@ const frameMetadata = getFrameMetadata({
     src: fullUrl('/api/public/frames/register-to-vote/image/0'),
   },
   postUrl: fullUrl('/api/public/frames/register-to-vote?frame=0'),
-  state: {
-    emailAddress: '',
-    phoneNumber: '',
-  },
 })
 
 export const metadata: Metadata = {
