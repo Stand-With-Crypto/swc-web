@@ -29,9 +29,9 @@ export async function GET(_request: NextRequest, { params }: { params: { index: 
             style={{ borderRadius: '50%' }}
             width={300}
           />
-          <h2 tw="flex flex-col text-8xl font-bold tracking-tight text-left px-10">
+          <h2 tw="flex flex-col text-7xl font-bold tracking-tight text-left px-10">
             <span>Register to vote</span>
-            <span tw="text-[#9e62ff] text-7xl">Mint an NFT</span>
+            <span tw="text-[#9e62ff] text-6xl">Mint an NFT</span>
           </h2>
         </div>
       </div>
@@ -43,15 +43,14 @@ export async function GET(_request: NextRequest, { params }: { params: { index: 
       >
         <div tw="flex flex-row w-full p-15 items-center justify-center">
           <img alt="" height={200} src={shieldImage as any} width={200} />
-          <h2 tw="flex flex-col text-6xl font-bold tracking-tight text-left px-10">
+          <h2 tw="flex flex-col text-7xl font-bold tracking-tight text-left px-10">
             <span>Join Stand With Crypto</span>
-            <div tw="flex flex-col text-3xl text-[#9e62ff] mt-4">
-              <span>Enter your email address and join over</span>
+            <div tw="flex flex-col text-5xl text-[#9e62ff] mt-4">
+              <span>Enter your email and join over</span>
               <span>300,000 advocates fighting to keep crypto in America.</span>
             </div>
-            <div tw="flex flex-col text-2xl text-gray-400 mt-2">
-              <span>Personal information subject to Privacy Policy:</span>
-              <span tw="text-[#9e62ff] pl-1">www.standwithcrypto.org/privacy</span>
+            <div tw="flex flex-col text-3xl text-gray-400 mt-2">
+              <span>Personal information subject to Privacy Policy.</span>
             </div>
           </h2>
         </div>
@@ -64,15 +63,14 @@ export async function GET(_request: NextRequest, { params }: { params: { index: 
       >
         <div tw="flex flex-row w-full p-15 items-center justify-center">
           <img alt="" height={200} src={shieldImage as any} width={200} />
-          <h2 tw="flex flex-col text-6xl font-bold tracking-tight text-left px-10">
+          <h2 tw="flex flex-col text-7xl font-bold tracking-tight text-left px-10">
             <span>Join Stand With Crypto</span>
-            <div tw="flex flex-col text-3xl text-[#9e62ff] mt-4">
+            <div tw="flex flex-col text-5xl text-[#9e62ff] mt-4">
               <span>Enter your phone number and</span>
               <span>make your voice heard in Washington D.C.</span>
             </div>
-            <div tw="flex flex-col text-2xl text-gray-400 mt-2">
-              <span>Personal information subject to Privacy Policy:</span>
-              <span tw="text-[#9e62ff] pl-1">www.standwithcrypto.org/privacy</span>
+            <div tw="flex flex-col text-3xl text-gray-400 mt-2">
+              <span>Personal information subject to Privacy Policy.</span>
             </div>
           </h2>
         </div>
@@ -85,9 +83,9 @@ export async function GET(_request: NextRequest, { params }: { params: { index: 
       >
         <div tw="flex flex-row w-full p-15 items-center justify-center">
           <img alt="" height={200} src={shieldImage as any} width={200} />
-          <h2 tw="flex flex-col text-6xl font-bold tracking-tight text-left px-10">
+          <h2 tw="flex flex-col text-7xl font-bold tracking-tight text-left px-10">
             <span>Are you registered to vote?</span>
-            <div tw="flex flex-col text-2xl text-gray-400 mt-2">
+            <div tw="flex flex-col text-3xl text-gray-400 mt-2">
               <span>Personal information subject to Privacy Policy:</span>
               <span tw="text-[#9e62ff] pl-1">www.standwithcrypto.org/privacy</span>
             </div>
@@ -102,10 +100,10 @@ export async function GET(_request: NextRequest, { params }: { params: { index: 
       >
         <div tw="flex flex-row w-full p-15 items-center justify-center">
           <img alt="" height={200} src={shieldImage as any} width={200} />
-          <h2 tw="flex flex-col text-5xl font-bold tracking-tight text-left px-10">
+          <h2 tw="flex flex-col text-7xl font-bold tracking-tight text-left px-10">
             <span>Register to vote</span>
-            <div tw="flex flex-col text-3xl text-gray-400 mt-4">
-              <span>Enter your state code below</span>
+            <div tw="flex flex-col text-4xl text-gray-400 mt-4">
+              <span>Enter your state code below.</span>
               <span>(CA, NY, etc.)</span>
             </div>
           </h2>
@@ -119,10 +117,10 @@ export async function GET(_request: NextRequest, { params }: { params: { index: 
       >
         <div tw="flex flex-row w-full p-15 items-center justify-center">
           <img alt="" height={200} src={shieldImage as any} width={200} />
-          <h2 tw="flex flex-col text-5xl font-bold tracking-tight text-left px-10">
+          <h2 tw="flex flex-col text-7xl font-bold tracking-tight text-left px-10">
             <span>Register to vote</span>
-            <div tw="flex flex-row text-3xl text-gray-400 mt-4">
-              <span>Click the link below to complete your registration</span>
+            <div tw="flex flex-row text-4xl text-gray-400 mt-4">
+              <span>Click the link below to complete your registration.</span>
             </div>
           </h2>
         </div>
@@ -135,10 +133,10 @@ export async function GET(_request: NextRequest, { params }: { params: { index: 
       >
         <div tw="flex flex-row w-full p-15 items-center justify-center">
           <img alt="" height={200} src={shieldImage as any} width={200} />
-          <h2 tw="flex flex-col text-5xl font-bold tracking-tight text-left px-10">
+          <h2 tw="flex flex-col text-7xl font-bold tracking-tight text-left px-10">
             <span>Check your registration status</span>
-            <div tw="flex flex-col text-3xl text-gray-400 mt-4">
-              <span>Enter your state code below</span>
+            <div tw="flex flex-col text-4xl text-gray-400 mt-4">
+              <span>Enter your state code below.</span>
               <span>(CA, NY, etc.)</span>
             </div>
           </h2>
@@ -152,10 +150,10 @@ export async function GET(_request: NextRequest, { params }: { params: { index: 
       >
         <div tw="flex flex-row w-full p-15 items-center justify-center">
           <img alt="" height={200} src={shieldImage as any} width={200} />
-          <h2 tw="flex flex-col text-5xl font-bold tracking-tight text-left px-10">
+          <h2 tw="flex flex-col text-7xl font-bold tracking-tight text-left px-10">
             <span>Check your registration status</span>
-            <div tw="flex flex-row text-3xl text-gray-400 mt-4">
-              <span>Click the link below to check your registration status</span>
+            <div tw="flex flex-row text-4xl text-gray-400 mt-4">
+              <span>Click the link below to check your registration status.</span>
             </div>
           </h2>
         </div>
@@ -174,7 +172,7 @@ export async function GET(_request: NextRequest, { params }: { params: { index: 
             style={{ borderRadius: '50%' }}
             width={300}
           />
-          <h2 tw="flex flex-col text-8xl font-bold tracking-tight text-left px-10">
+          <h2 tw="flex flex-col text-7xl font-bold tracking-tight text-left px-10">
             <span>Mint your NFT</span>
             <span tw="text-[#9e62ff] text-6xl">"I'm a Voter" by pplpleasr</span>
           </h2>
@@ -194,7 +192,7 @@ export async function GET(_request: NextRequest, { params }: { params: { index: 
             style={{ borderRadius: '50%' }}
             width={300}
           />
-          <h2 tw="flex flex-col text-8xl font-bold tracking-tight text-left px-10">
+          <h2 tw="flex flex-col text-7xl font-bold tracking-tight text-left px-10">
             <span>Thank you for registering!</span>
           </h2>
         </div>
