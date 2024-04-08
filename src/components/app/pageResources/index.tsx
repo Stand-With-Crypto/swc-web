@@ -41,10 +41,10 @@ export function PageResources({ locale }: { locale: SupportedLocale }) {
           />
           <EventCard
             cta="Watch"
-            imageAltText="Atlanta Advocate Town Hall event card image"
-            imageUrl="/resources/eventCards/atlanta_advocate_town_hall.webp"
-            link="https://www.youtube.com/watch?v=ETq_UZ1aRGQ"
-            title="Atlanta Advocate Town Hall"
+            imageAltText="Boston Advocate Town Hall event card image"
+            imageUrl="/resources/eventCards/boston_advocate_town_hall.webp"
+            link="https://www.youtube.com/watch?v=ulron-a3sIc"
+            title="Boston Advocate Town Hall"
           />
           <EventCard
             cta="Watch"
