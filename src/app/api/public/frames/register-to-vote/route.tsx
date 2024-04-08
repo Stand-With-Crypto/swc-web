@@ -1,4 +1,9 @@
-import { FrameMetadataType, FrameRequest, getFrameHtmlResponse } from '@coinbase/onchainkit/frame'
+import {
+  FrameMetadataType,
+  FrameRequest,
+  getFrameHtmlResponse,
+  getFrameMessage,
+} from '@coinbase/onchainkit/frame'
 import { NextRequest, NextResponse } from 'next/server'
 
 import { REGISTRATION_URLS_BY_STATE } from '@/components/app/userActionFormVoterRegistration/constants'
@@ -161,6 +166,27 @@ export async function POST(req: NextRequest): Promise<Response> {
   const frameIndex = Number(queryParams.get('frame'))
 
   const body: FrameRequest = (await req.json()) as FrameRequest
+  try {
+    logger.info('trusted data message bytes', body.trustedData.messageBytes)
+    const { isValid, message } = await getFrameMessage(body, { neynarApiKey: 'NEYNAR_ONCHAIN_KIT' })
+    if (!isValid) {
+      logger.error('frame message is not valid')
+    } else {
+      const trustedInputText = message.input || ''
+      let state = {
+        emailAddress: '',
+        phoneNumber: '',
+      }
+      state = JSON.parse(decodeURIComponent(message.state?.serialized)) as {
+        emailAddress: string
+        phoneNumber: string
+      }
+      logger.info('trusted input text', trustedInputText)
+      logger.info('trusted state', state)
+    }
+  } catch (e) {
+    logger.error('error getting frame message', e)
+  }
 
   const buttonIndex = body.untrustedData?.buttonIndex
   const stateInput = body.untrustedData?.inputText as USStateCode
