@@ -56,6 +56,8 @@ Sentry.init({
   integrations: [
     new ExtraErrorData({ depth: 10 }),
     Sentry.replayIntegration({
+      // see https://docs.sentry.io/platforms/javascript/session-replay/configuration/#using-a-custom-compression-worker
+      // NOTE: when upgrading Sentry major versions we need to manually update this file for compatibility
       workerUrl: '/workers/sentry.worker.js',
     }),
   ],
