@@ -212,10 +212,11 @@ export async function POST(req: NextRequest): Promise<Response> {
           }),
         )
       }
+      logger.info('email address', zodEmailResult.data)
       return new NextResponse(
         getFrameHtmlResponse({
           ...frameData[frameIndex],
-          state: { emailAddress: zodEmailResult.data, phoneNumber: '' },
+          state: { emailAddress: zodEmailResult.data },
         }),
       )
     case 2: // Phone number input screen.
@@ -225,6 +226,7 @@ export async function POST(req: NextRequest): Promise<Response> {
           getFrameHtmlResponse({
             ...frameData[frameIndex - 1],
             input: { text: 'Invalid phone - try again' },
+            state: { emailAddress: currentFrameState.emailAddress },
           }),
         )
       }
