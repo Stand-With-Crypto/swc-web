@@ -47,7 +47,8 @@ export async function GET(_request: NextRequest, { params }: { params: { index: 
             <span>Join Stand With Crypto</span>
             <div tw="flex flex-col text-5xl text-[#9e62ff] mt-4">
               <span>Enter your email and join over</span>
-              <span>300,000 advocates fighting to keep crypto in America.</span>
+              <span>300,000 advocates fighting to</span>
+              <span>keep crypto in America.</span>
             </div>
             <div tw="flex flex-col text-3xl text-gray-400 mt-2">
               <span>Personal information subject to Privacy Policy.</span>
