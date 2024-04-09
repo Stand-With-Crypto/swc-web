@@ -19,10 +19,10 @@ export function requiredEnv(value: string | undefined, name: string) {
 export function requiredOutsideLocalEnv(
   value: string | undefined,
   name: string,
-  possiblyBrokenFeature: string,
+  possiblyBrokenFeature: string | null,
 ) {
   if (NEXT_PUBLIC_ENVIRONMENT === 'local') {
-    if (!value) {
+    if (!value && possiblyBrokenFeature) {
       logger.warn(
         `Environment variable ${name} is missing. The following feature might not work properly: ${possiblyBrokenFeature}`,
       )

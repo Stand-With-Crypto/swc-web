@@ -64,7 +64,7 @@ export const getIntlUrls = (
 const NEXT_PUBLIC_VERCEL_URL = requiredOutsideLocalEnv(
   process.env.NEXT_PUBLIC_VERCEL_URL,
   'NEXT_PUBLIC_VERCEL_URL',
-  'Getting app full url (preview only)',
+  null,
 )
 
 export const fullUrl = (path: string) => {
