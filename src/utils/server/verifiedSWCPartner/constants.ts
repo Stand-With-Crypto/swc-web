@@ -2,6 +2,7 @@ import { requiredEnv } from '@/utils/shared/requiredEnv'
 
 export enum VerifiedSWCPartner {
   COINBASE = 'coinbase',
+  FRAMES = 'frames',
 }
 
 export type VerifiedSWCPartnerApiResponse<ResultOptions extends string> = {
@@ -18,4 +19,5 @@ const VERIFIED_SWC_PARTNER_SECRET_COINBASE = requiredEnv(
 
 export const VERIFIED_SWC_PARTNER_SECRET_MAP: Record<VerifiedSWCPartner, string> = {
   [VerifiedSWCPartner.COINBASE]: VERIFIED_SWC_PARTNER_SECRET_COINBASE,
+  [VerifiedSWCPartner.FRAMES]: '', // No secret.
 }

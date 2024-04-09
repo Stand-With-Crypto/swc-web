@@ -86,10 +86,6 @@ export async function GET(_request: NextRequest, { params }: { params: { index: 
           <img alt="" height={200} src={shieldImage as any} width={200} />
           <h2 tw="flex flex-col text-7xl font-bold tracking-tight text-left px-10">
             <span>Are you registered to vote?</span>
-            <div tw="flex flex-col text-3xl text-gray-400 mt-2">
-              <span>Personal information subject to Privacy Policy:</span>
-              <span tw="text-[#9e62ff] pl-1">www.standwithcrypto.org/privacy</span>
-            </div>
           </h2>
         </div>
       </div>
@@ -120,8 +116,9 @@ export async function GET(_request: NextRequest, { params }: { params: { index: 
           <img alt="" height={200} src={shieldImage as any} width={200} />
           <h2 tw="flex flex-col text-7xl font-bold tracking-tight text-left px-10">
             <span>Register to vote</span>
-            <div tw="flex flex-row text-4xl text-gray-400 mt-4">
-              <span>Click the link below to complete your registration.</span>
+            <div tw="flex flex-col text-4xl text-gray-400 mt-4">
+              <span>Click the link below to complete your</span>
+              <span>voter registration.</span>
             </div>
           </h2>
         </div>
@@ -154,7 +151,8 @@ export async function GET(_request: NextRequest, { params }: { params: { index: 
           <h2 tw="flex flex-col text-7xl font-bold tracking-tight text-left px-10">
             <span>Check your registration status</span>
             <div tw="flex flex-row text-4xl text-gray-400 mt-4">
-              <span>Click the link below to check your registration status.</span>
+              <span>Click the link below to check your</span>
+              <span>voter registration status.</span>
             </div>
           </h2>
         </div>
