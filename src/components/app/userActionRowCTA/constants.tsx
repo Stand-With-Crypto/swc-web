@@ -65,7 +65,10 @@ export const USER_ACTION_ROW_CTA_INFO: Record<
     WrapperComponent: ({ children }) => {
       const locale = useLocale()
       return (
-        <InternalLink className="block text-fontcolor" href={getIntlUrls(locale).donate()}>
+        <InternalLink
+          className="block text-fontcolor hover:no-underline"
+          href={getIntlUrls(locale).donate()}
+        >
           {children}
         </InternalLink>
       )

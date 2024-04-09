@@ -59,6 +59,7 @@ const contentSecurityPolicy = {
     'https://api-js.mixpanel.com/',
     // Mint endpoint
     'https://*.coinbase.com/',
+    'https://*.sentry.io/',
   ],
   'frame-src': [
     '*.google.com',
@@ -73,7 +74,7 @@ const contentSecurityPolicy = {
   'form-action': ["'self'"],
   'frame-ancestors': ["'none'"],
   'block-all-mixed-content': [],
-  'upgrade-insecure-requests': [],
+  ...(isDev ? {} : { 'upgrade-insecure-requests': [] }),
 }
 
 const cspObjectToString = Object.entries(contentSecurityPolicy).reduce((acc, [key, value]) => {

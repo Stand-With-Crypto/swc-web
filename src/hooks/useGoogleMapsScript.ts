@@ -7,12 +7,12 @@ const NEXT_PUBLIC_GOOGLE_PLACES_API_KEY = requiredEnv(
 )
 
 /**
- * See https://stackoverflow.com/a/75212692 for why we default de callback to `Function.prototype`
+ * See https://stackoverflow.com/a/75212692 for why we set callback to `Function.prototype`
  */
-export function getGoogleMapsScriptSrc(callbackFnName = 'Function.prototype') {
-  return `https://maps.googleapis.com/maps/api/js?key=${NEXT_PUBLIC_GOOGLE_PLACES_API_KEY}&libraries=places&callback=${callbackFnName}`
+export function getGoogleMapsScriptSrc() {
+  return `https://maps.googleapis.com/maps/api/js?key=${NEXT_PUBLIC_GOOGLE_PLACES_API_KEY}&libraries=places&callback=Function.prototype`
 }
 
-export function useGoogleMapsScript(callbackFnName?: string) {
-  return useScript(getGoogleMapsScriptSrc(callbackFnName))
+export function useGoogleMapsScript() {
+  return useScript(getGoogleMapsScriptSrc())
 }

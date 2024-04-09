@@ -3,8 +3,6 @@ import usePlacesAutocomplete from 'use-places-autocomplete'
 
 import { useGoogleMapsScript } from '@/hooks/useGoogleMapsScript'
 
-const CALLBACK_NAME = 'PLACES_AUTOCOMPLETE'
-
 /**
  * Wraps `usePlacesAutocomplete` to fetch the suggestions for a given address without relying on user input
  */
@@ -15,7 +13,6 @@ export function usePlacesAutocompleteAddress(address: string) {
     setValue,
     ready,
   } = usePlacesAutocomplete({
-    callbackName: CALLBACK_NAME,
     // note on why we aren't restricting to just addresses https://stackoverflow.com/a/65206036
     requestOptions: {
       locationBias: 'IP_BIAS',
@@ -25,7 +22,7 @@ export function usePlacesAutocompleteAddress(address: string) {
   // the library returns a loading prop but it appears to always be false. Status will be an empty string unless it returns something
   const loading = !status
 
-  const scriptStatus = useGoogleMapsScript(CALLBACK_NAME)
+  const scriptStatus = useGoogleMapsScript()
 
   useEffect(() => {
     if (scriptStatus === 'ready') {
