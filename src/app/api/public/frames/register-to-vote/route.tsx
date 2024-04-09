@@ -4,14 +4,24 @@ import {
   getFrameHtmlResponse,
   getFrameMessage,
 } from '@coinbase/onchainkit/frame'
+import { UserActionOptInType } from '@prisma/client'
 import { NextRequest, NextResponse } from 'next/server'
 import { SafeParseReturnType } from 'zod'
 
 import { REGISTRATION_URLS_BY_STATE } from '@/components/app/userActionFormVoterRegistration/constants'
+import {
+  verifiedSWCPartnersUserActionOptIn,
+  VerifiedSWCPartnersUserActionOptInResult,
+} from '@/data/verifiedSWCPartners/userActionOptIn'
+import {
+  VerifiedSWCPartner,
+  VerifiedSWCPartnerApiResponse,
+} from '@/utils/server/verifiedSWCPartner/constants'
 import { getLogger } from '@/utils/shared/logger'
 import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { fullUrl } from '@/utils/shared/urls'
+import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
 import { USStateCode } from '@/utils/shared/usStateUtils'
 import { zodEmailAddress } from '@/validation/fields/zodEmailAddress'
 import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
@@ -198,6 +208,7 @@ export async function POST(req: NextRequest): Promise<Response> {
   let zodEmailResult: SafeParseReturnType<string, string>
   let zodPhoneResult: SafeParseReturnType<string, string>
   let link: string | undefined
+  let optInResult: VerifiedSWCPartnerApiResponse<VerifiedSWCPartnersUserActionOptInResult>
 
   switch (frameIndex) {
     case 0: // Intro screen.
@@ -230,26 +241,55 @@ export async function POST(req: NextRequest): Promise<Response> {
           }),
         )
       }
-      logger.info('email address', currentFrameState.emailAddress)
-      logger.info('phone number', normalizePhoneNumber(zodPhoneResult.data))
+
+      optInResult = await verifiedSWCPartnersUserActionOptIn({
+        emailAddress: currentFrameState.emailAddress,
+        optInType: UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER,
+        campaignName: UserActionOptInCampaignName.DEFAULT,
+        isVerifiedEmailAddress: false,
+        phoneNumber: normalizePhoneNumber(zodPhoneResult.data),
+        hasOptedInToReceiveSMSFromSWC: true,
+        hasOptedInToEmails: true,
+        partner: VerifiedSWCPartner.FRAMES,
+      })
+
       return new NextResponse(
         getFrameHtmlResponse({
           ...frameData[frameIndex],
           state: {
-            emailAddress: currentFrameState.emailAddress,
-            phoneNumber: normalizePhoneNumber(zodPhoneResult.data),
-            // TODO: Include SWC user ID starting here.
+            userId: optInResult.userId,
           },
         }),
       )
     case 3: // "Are you registered to vote" screen.
       switch (buttonIndex) {
         case 1:
-          return new NextResponse(getFrameHtmlResponse(frameData[7])) // Mint screen.
+          return new NextResponse(
+            getFrameHtmlResponse({
+              ...frameData[7],
+              state: {
+                userId: currentFrameState.userId,
+              },
+            }),
+          ) // Mint screen.
         case 2:
-          return new NextResponse(getFrameHtmlResponse(frameData[3])) // Register state screen.
+          return new NextResponse(
+            getFrameHtmlResponse({
+              ...frameData[3],
+              state: {
+                userId: currentFrameState.userId,
+              },
+            }),
+          ) // Register state screen.
         case 3:
-          return new NextResponse(getFrameHtmlResponse(frameData[5])) // Check registration screen.
+          return new NextResponse(
+            getFrameHtmlResponse({
+              ...frameData[5],
+              state: {
+                userId: currentFrameState.userId,
+              },
+            }),
+          ) // Check registration screen.
       }
       break
     case 4: // Register state screen.
@@ -262,6 +302,9 @@ export async function POST(req: NextRequest): Promise<Response> {
           getFrameHtmlResponse({
             ...frameData[frameIndex - 1],
             input: { text: 'Invalid state code - try again' },
+            state: {
+              userId: currentFrameState.userId,
+            },
           }),
         ) // Same screen.
       return new NextResponse(
@@ -271,6 +314,9 @@ export async function POST(req: NextRequest): Promise<Response> {
             { ...frameData[frameIndex].buttons![0], target: link },
             frameData[frameIndex].buttons![1],
           ],
+          state: {
+            userId: currentFrameState.userId,
+          },
         }),
       ) // Registration screen with respective link.
     case 5: // Register screen.
@@ -285,6 +331,9 @@ export async function POST(req: NextRequest): Promise<Response> {
           getFrameHtmlResponse({
             ...frameData[frameIndex - 1],
             input: { text: 'Invalid state code - try again' },
+            state: {
+              userId: currentFrameState.userId,
+            },
           }),
         ) // Same screen.
       return new NextResponse(
@@ -294,10 +343,20 @@ export async function POST(req: NextRequest): Promise<Response> {
             { ...frameData[frameIndex].buttons![0], target: link },
             frameData[frameIndex].buttons![1],
           ],
+          state: {
+            userId: currentFrameState.userId,
+          },
         }),
       ) // Registration screen with respective link.
     case 7: // Check registration screen.
-      return new NextResponse(getFrameHtmlResponse(frameData[7])) // Mint screen.
+      return new NextResponse(
+        getFrameHtmlResponse({
+          ...frameData[7],
+          state: {
+            userId: currentFrameState.userId,
+          },
+        }),
+      ) // Mint screen.
     case 8: // Mint screen.
       // TODO: Going to the final screen doesn't work, figure this out.
       return new NextResponse(getFrameHtmlResponse(frameData[frameIndex])) // Final screen.
