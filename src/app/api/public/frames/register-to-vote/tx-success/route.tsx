@@ -23,6 +23,8 @@ export async function POST(req: NextRequest): Promise<Response> {
     }
   }
 
+  logger.info('@@@@@ I AM HERE 3 @@@@')
+
   logger.info('tx id', body.untrustedData?.transactionId)
 
   return new NextResponse(
