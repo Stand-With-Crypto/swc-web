@@ -2,6 +2,7 @@ import { DTSI_PersonRoleCategory, DTSI_StateSpecificInformationQuery } from '@/d
 import { NormalizedDTSIDistrictId, normalizeDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { formatStateSpecificDTSIPerson } from '@/utils/dtsi/stateSpecificDTSIPerson'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
+import { prettyLog } from '@/utils/shared/prettyLog'
 
 import { FormattedPerson } from './types'
 
@@ -24,6 +25,7 @@ export function organizeStateSpecificPeople(people: DTSI_StateSpecificInformatio
     },
   }
   formatted.forEach(person => {
+    prettyLog(person)
     if (person.runningForStateSpecificRole.roleCategory === DTSI_PersonRoleCategory.SENATE) {
       if (
         person.currentStateSpecificRole &&

@@ -67,7 +67,7 @@ If you have been assigned to fix an issue or develop a new feature, please follo
     - If `audit` fails, your PR will not pass GitHub CI
 
 - Likewise, test E2E flows as necessary:
-  - run `npm run build` to build the next.js app locally
+  - run `npm run build` to build the next.js app locally (and run it after all code changes before re-running e2e tests)
     - `npm run e2e:run` - starts up [Cypress](https://www.cypress.io/) UI
       - With the UI, you can run individual E2E tests under "Specs" and visually follow the flows
     - `npm run e2e:run-headless` - runs all our E2E tests consecutively via Cypress CLI

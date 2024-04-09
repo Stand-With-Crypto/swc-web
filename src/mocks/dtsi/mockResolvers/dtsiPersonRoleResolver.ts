@@ -23,6 +23,10 @@ export const dtsiPersonRoleMockResolver = (
   return {
     primaryCountryCode: () => 'US',
     primaryState: () => primaryState,
+    primaryDistrict: () =>
+      roleCategory === DTSI_PersonRoleCategory.CONGRESS
+        ? `${faker.number.int({ min: 2, max: 10 })}`
+        : '',
     status: () =>
       faker.helpers.arrayElement([DTSI_PersonRoleStatus.RUNNING_FOR, DTSI_PersonRoleStatus.HELD]),
     roleCategory: () => roleCategory,
