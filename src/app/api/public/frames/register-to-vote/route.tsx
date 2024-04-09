@@ -182,7 +182,6 @@ export async function POST(req: NextRequest): Promise<Response> {
     userId: '',
   }
   let interactorType: string = ''
-  let walletAddress: string = ''
   try {
     const { isValid, message } = await getFrameMessage(body, { neynarApiKey: NEYNAR_API_KEY }) // NOTE: Frame state data does not exist on localhost.
     if (!isValid) throw new Error('invalid frame message')
@@ -193,12 +192,8 @@ export async function POST(req: NextRequest): Promise<Response> {
         userId: string
       }
     }
-    if (message.interactor) {
+    if (message.interactor)
       interactorType = message.interactor.verified_accounts[0] ? 'verified' : 'Farcaster custody'
-      walletAddress =
-        message.interactor.verified_accounts[0].toLowerCase() ??
-        message.interactor.custody_address.toLowerCase()
-    }
   } catch (e) {
     logger.error('error getting frame message', e)
   }
@@ -267,6 +262,9 @@ export async function POST(req: NextRequest): Promise<Response> {
           return new NextResponse(
             getFrameHtmlResponse({
               ...frameData[7],
+              buttons: [
+                { ...frameData[7].buttons![0], label: `Mint to ${interactorType} address` },
+              ],
               state: {
                 userId: currentFrameState.userId,
               },
@@ -320,7 +318,15 @@ export async function POST(req: NextRequest): Promise<Response> {
         }),
       ) // Registration screen with respective link.
     case 5: // Register screen.
-      return new NextResponse(getFrameHtmlResponse(frameData[7])) // Mint screen.
+      return new NextResponse(
+        getFrameHtmlResponse({
+          ...frameData[7],
+          buttons: [{ ...frameData[7].buttons![0], label: `Mint to ${interactorType} address` }],
+          state: {
+            userId: currentFrameState.userId,
+          },
+        }),
+      ) // Mint screen.
     case 6: // Check registration state screen.
       link =
         stateInput && REGISTRATION_URLS_BY_STATE[stateInput]
@@ -352,12 +358,7 @@ export async function POST(req: NextRequest): Promise<Response> {
       return new NextResponse(
         getFrameHtmlResponse({
           ...frameData[7],
-          ...(interactorType &&
-            walletAddress && {
-              postUrl:
-                frameData[7].postUrl +
-                `&interactorType=${interactorType}&walletAddress=${walletAddress}`,
-            }),
+          buttons: [{ ...frameData[7].buttons![0], label: `Mint to ${interactorType} address` }],
           state: {
             userId: currentFrameState.userId,
           },
@@ -365,6 +366,10 @@ export async function POST(req: NextRequest): Promise<Response> {
       ) // Mint screen.
     case 8: // Mint screen.
       return new NextResponse(getFrameHtmlResponse(frameData[frameIndex])) // Final screen.
+    case 9: // Final screen.
+      logger.info('final screen reached')
+      logger.info('transaction hash', body.untrustedData?.transactionId)
+      return new NextResponse(getFrameHtmlResponse(frameData[frameIndex - 1])) // Stay at final screen.
   }
 
   return new NextResponse(getFrameHtmlResponse(frameData[Number(frameIndex)]))

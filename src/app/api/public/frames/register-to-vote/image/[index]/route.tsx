@@ -158,7 +158,7 @@ export async function GET(
           <img alt="" height={200} src={shieldImage as any} width={200} />
           <h2 tw="flex flex-col text-6xl font-bold tracking-tight text-left px-10">
             <span>Check your registration status</span>
-            <div tw="flex flex-row text-4xl text-gray-400 mt-4">
+            <div tw="flex flex-col text-4xl text-gray-400 mt-4">
               <span>Click the link below to check your</span>
               <span>voter registration status.</span>
             </div>
@@ -184,12 +184,6 @@ export async function GET(
             <span tw="text-[#9e62ff] text-6xl">"I'm a Voter" by pplpleasr</span>
           </h2>
         </div>
-        {params.interactorType && params.walletAddress ? (
-          <div tw="flex flex-col text-4xl w-full p-15 items-center justify-center">
-            <span>The NFT will be sent to your {params.interactorType} address.</span>
-            <span tw="text-3xl">({params.walletAddress})</span>
-          </div>
-        ) : null}
       </div>
     </div>,
     <div key="image9" tw="flex flex-col w-full h-full items-center justify-center bg-white">
@@ -205,7 +199,7 @@ export async function GET(
             style={{ borderRadius: '50%' }}
             width={300}
           />
-          <h2 tw="flex flex-col text-7xl font-bold tracking-tight text-left px-10">
+          <h2 tw="flex flex-col text-6xl font-bold tracking-tight text-left px-10">
             <span>Thank you for registering!</span>
           </h2>
         </div>
