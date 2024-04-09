@@ -201,6 +201,7 @@ export async function GET(
           />
           <h2 tw="flex flex-col text-6xl font-bold tracking-tight text-left px-10">
             <span>Thank you for registering!</span>
+            <span tw="text-4xl">Continue the fight via the link below.</span>
           </h2>
         </div>
       </div>
