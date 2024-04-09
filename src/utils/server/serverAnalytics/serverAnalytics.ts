@@ -36,7 +36,6 @@ export function getServerAnalytics(config: ServerAnalyticsConfig) {
       mapCurrentSessionLocalUserToAnalyticsProperties(config.localUser.currentSession)),
     ...mapPersistedLocalUserToExperimentAnalyticsProperties(config.localUser?.persisted),
   }
-  console.log(config.localUser)
 
   const flush = async () => {
     return resolveWithTimeout(Promise.all(trackingRequests), ANALYTICS_FLUSH_TIMEOUT_MS).catch(
