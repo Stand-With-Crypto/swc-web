@@ -59,6 +59,7 @@ const contentSecurityPolicy = {
     'https://api-js.mixpanel.com/',
     // Mint endpoint
     'https://*.coinbase.com/',
+    'https://*.sentry.io/',
   ],
   'frame-src': [
     '*.google.com',
