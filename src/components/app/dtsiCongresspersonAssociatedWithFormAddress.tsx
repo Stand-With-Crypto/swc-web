@@ -62,7 +62,11 @@ export function DTSICongresspersonAssociatedWithFormAddress({
   return (
     <div className="space-y-6">
       {people.map(person => (
-        <div className="flex justify-between gap-4" key={person.id}>
+        <div
+          className="flex justify-between gap-4"
+          data-test-id="dtsi-person-associated-with-address"
+          key={person.id}
+        >
           <div className="flex items-center gap-4 text-sm md:text-base">
             <div className="flex-shrink-0">
               <DTSIAvatar person={person} size={60} />

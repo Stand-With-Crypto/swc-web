@@ -30,7 +30,7 @@ it('action - email your congressperson', () => {
     trigger: cy.get('input[placeholder="Your full address"]'),
     searchText: '350 Fifth Avenue New York, NY 10118',
   })
-  cy.contains('Christy Hegmann')
+  cy.get('[data-test-id="dtsi-person-associated-with-address"]')
   cy.get('textarea').type('test message')
   cy.get('button[type="submit"]').click()
 
