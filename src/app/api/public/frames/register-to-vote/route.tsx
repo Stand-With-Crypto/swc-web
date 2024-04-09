@@ -386,6 +386,8 @@ export async function POST(req: NextRequest): Promise<Response> {
         }),
       ) // Mint screen.
     case 8: // Mint screen.
+      logger.info('@@@@@ I AM HERE 1 @@@@')
+
       return new NextResponse(
         getFrameHtmlResponse({
           ...frameData[frameIndex],
@@ -396,6 +398,8 @@ export async function POST(req: NextRequest): Promise<Response> {
         }),
       ) // Final screen.
     case 9: // Final screen.
+      logger.info('@@@@@ I AM HERE 2 @@@@')
+
       return new NextResponse(
         getFrameHtmlResponse({
           ...frameData[frameIndex - 1],
