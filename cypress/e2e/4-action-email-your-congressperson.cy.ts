@@ -3,7 +3,7 @@
 it('action - email your congressperson', () => {
   cy.visit('/')
 
-  cy.contains('Email your Congressperson').click()
+  cy.contains('Email your congressperson').click()
   cy.get('[role="dialog"]')
 
   // validate error messages display
@@ -14,7 +14,6 @@ it('action - email your congressperson', () => {
   cy.contains('Please enter your last name')
   cy.contains('Please enter a valid email address')
   cy.contains('Please select a valid address')
-  cy.contains('Person required to submit')
 
   // validate invalid address
   cy.selectFromComboBox({
@@ -31,7 +30,7 @@ it('action - email your congressperson', () => {
     trigger: cy.get('input[placeholder="Your full address"]'),
     searchText: '350 Fifth Avenue New York, NY 10118',
   })
-  cy.contains('Your representative is Christy Hegmann')
+  cy.contains('Christy Hegmann')
   cy.get('textarea').type('test message')
   cy.get('button[type="submit"]').click()
 

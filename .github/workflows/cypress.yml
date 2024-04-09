@@ -2,10 +2,10 @@ name: Cypress Tests
 on:
   push:
     branches:
-      - fix-broken-cypress-tests
+      - 687-investigate-cypress-tests-failing
   pull_request:
     branches:
-      - fix-broken-cypress-tests
+      - 687-investigate-cypress-tests-failing
     types: ['opened', 'edited', 'reopened', 'synchronize', 'ready_for_review']
 jobs:
   cypress-run:
