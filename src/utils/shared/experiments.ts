@@ -9,6 +9,7 @@ To add a new experiment:
 How it works:
 All users are assigned a random variant for all active experiments. This assignment is persisted as a cookie so that the user sees the same variant on subsequent visits.
 We pass these variants to all mixpanel events triggered on the client and the server. Within mixpanel you can breakdown events by these variants to see how they impact user behavior.
+Within a given component, you can reference the users current experiments (using the useLocalUser hook) and conditionally render different UI based on the variant the user has been assigned.
 
 Important notes:
 - Do not change the `name` property of an experiment once it has been set. This is the key that is used to track the experiment and changing it will break the ability to track the experiment.
