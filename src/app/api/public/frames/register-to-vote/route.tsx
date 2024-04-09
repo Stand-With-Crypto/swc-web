@@ -18,24 +18,16 @@ import {
   VerifiedSWCPartnerApiResponse,
 } from '@/utils/server/verifiedSWCPartner/constants'
 import { getLogger } from '@/utils/shared/logger'
+import { NEYNAR_API_KEY } from '@/utils/shared/neynarAPIKey'
 import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
-import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { fullUrl } from '@/utils/shared/urls'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
 import { USStateCode } from '@/utils/shared/usStateUtils'
 import { zodEmailAddress } from '@/validation/fields/zodEmailAddress'
 import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
 
-const BASE_CHAIN_ID = '8453'
-
 export const dynamic = 'force-dynamic'
 
-const I_AM_A_VOTER_NFT_CONTRACT_ADDRESS = requiredEnv(
-  process.env.I_AM_A_VOTER_NFT_CONTRACT_ADDRESS,
-  'I_AM_A_VOTER_NFT_CONTRACT_ADDRESS',
-)
-
-const NEYNAR_API_KEY = 'NEYNAR_ONCHAIN_KIT'
 const FRAME_QUERY_PARAMETER = 'frame'
 
 const frameData = [
@@ -158,8 +150,9 @@ const frameData = [
     buttons: [
       {
         label: `Mint`,
-        action: 'mint',
-        target: `eip155:${BASE_CHAIN_ID}:${I_AM_A_VOTER_NFT_CONTRACT_ADDRESS}:1`, // This does not actually work, might need to do `tx`.
+        action: 'tx',
+        target: fullUrl('/api/public/frames/register-to-vote/tx'),
+        postUrl: fullUrl('/api/public/frames/register-to-vote?frame=9'),
       },
     ],
     image: {
@@ -358,7 +351,6 @@ export async function POST(req: NextRequest): Promise<Response> {
         }),
       ) // Mint screen.
     case 8: // Mint screen.
-      // TODO: Going to the final screen doesn't work, figure this out.
       return new NextResponse(getFrameHtmlResponse(frameData[frameIndex])) // Final screen.
   }
 

@@ -1,12 +1,7 @@
 import { createPublicClient, http } from 'viem'
 import { base, mainnet } from 'viem/chains'
 
-import { requiredEnv } from '@/utils/shared/requiredEnv'
-
-const THIRD_WEB_CLIENT_SECRET = requiredEnv(
-  process.env.THIRD_WEB_CLIENT_SECRET,
-  'THIRD_WEB_CLIENT_SECRET',
-)
+import { THIRD_WEB_CLIENT_SECRET } from '@/utils/server/thirdweb/thirdwebClientSecret'
 
 export const thirdwebRPCClient = createPublicClient({
   chain: mainnet,
