@@ -18,7 +18,7 @@ export function UserActionFormLayout({ onBack, children }: UserActionFormLayoutP
     <>
       {onBack && <GoBackButton onClick={onBack} />}
 
-      <div className="flex min-h-[400px] flex-col max-md:h-full">{children}</div>
+      <div className="flex h-full min-h-[400px] flex-col">{children}</div>
     </>
   )
 }
@@ -52,7 +52,7 @@ function Container({ children }: React.PropsWithChildren) {
   return (
     <div className="flex flex-grow">
       {/* without w-full, on iOS, this won't take up the full width of the parent ¯\_(ツ)_/¯ */}
-      <div className="flex w-full flex-col space-y-4 md:space-y-8">{children}</div>
+      <div className="flex h-full w-full flex-col space-y-4 md:space-y-8">{children}</div>
     </div>
   )
 }

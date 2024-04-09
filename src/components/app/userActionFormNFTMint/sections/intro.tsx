@@ -15,6 +15,7 @@ import {
   UserActionFormNFTMintSectionNames,
 } from '@/components/app/userActionFormNFTMint/constants'
 import { Button } from '@/components/ui/button'
+import { DialogBody } from '@/components/ui/dialog'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -33,7 +34,9 @@ export function UserActionFormNFTMintIntro({
     <UserActionFormLayout>
       <UserActionFormLayout.Container>
         <div className="flex h-full flex-col gap-6">
-          <ContractMetadataDisplay contractMetadata={contractMetadata} />
+          <DialogBody>
+            <ContractMetadataDisplay contractMetadata={contractMetadata} />
+          </DialogBody>
 
           <UserActionFormLayout.Footer>
             {isLoadingContractMetadata ? (
