@@ -181,6 +181,8 @@ export async function POST(req: NextRequest): Promise<Response> {
     phoneNumber: '',
     userId: '',
   }
+  let interactorType: string = ''
+  let walletAddress: string = ''
   try {
     const { isValid, message } = await getFrameMessage(body, { neynarApiKey: NEYNAR_API_KEY }) // NOTE: Frame state data does not exist on localhost.
     if (!isValid) throw new Error('invalid frame message')
@@ -190,6 +192,12 @@ export async function POST(req: NextRequest): Promise<Response> {
         phoneNumber: string
         userId: string
       }
+    }
+    if (message.interactor) {
+      interactorType = message.interactor.verified_accounts[0] ? 'verified' : 'Farcaster custody'
+      walletAddress =
+        message.interactor.verified_accounts[0].toLowerCase() ??
+        message.interactor.custody_address.toLowerCase()
     }
   } catch (e) {
     logger.error('error getting frame message', e)
@@ -216,7 +224,6 @@ export async function POST(req: NextRequest): Promise<Response> {
           }),
         )
       }
-      logger.info('email address', zodEmailResult.data)
       return new NextResponse(
         getFrameHtmlResponse({
           ...frameData[frameIndex],
@@ -345,6 +352,12 @@ export async function POST(req: NextRequest): Promise<Response> {
       return new NextResponse(
         getFrameHtmlResponse({
           ...frameData[7],
+          ...(interactorType &&
+            walletAddress && {
+              postUrl:
+                frameData[7].postUrl +
+                `&interactorType=${interactorType}&walletAddress=${walletAddress}`,
+            }),
           state: {
             userId: currentFrameState.userId,
           },

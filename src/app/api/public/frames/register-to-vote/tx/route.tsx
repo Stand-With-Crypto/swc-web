@@ -11,7 +11,7 @@ import { NEYNAR_API_KEY } from '@/utils/shared/neynarAPIKey'
 
 const BASE_CHAIN_ID = '8453'
 
-export async function GET(req: NextRequest): Promise<Response> {
+export async function POST(req: NextRequest): Promise<Response> {
   const body: FrameRequest = (await req.json()) as FrameRequest
   const { isValid, message } = await getFrameMessage(body, { neynarApiKey: NEYNAR_API_KEY }) // NOTE: Frame state data does not exist on localhost.
   if (!isValid || !message)
