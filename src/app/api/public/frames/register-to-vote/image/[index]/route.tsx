@@ -2,13 +2,21 @@
 import { NextRequest } from 'next/server'
 
 import { generateFrameImage } from '@/utils/server/generateFrameImage'
+import { getLogger } from '@/utils/shared/logger'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
 export const dynamic = 'error'
 export const revalidate = SECONDS_DURATION.HOUR
 export const runtime = 'edge'
 
-export async function GET(_request: NextRequest, { params }: { params: { index: number } }) {
+const logger = getLogger(`registerToVoteGetImage`)
+
+export async function GET(
+  _request: NextRequest,
+  { params }: { params: { index: number; interactorType: string; walletAddress: string } },
+) {
+  logger.info('query parameters', params)
+
   const nftImage = await fetch(new URL('./nft.png', import.meta.url)).then(res => res.arrayBuffer())
 
   const shieldImage = await fetch(new URL('./shield.png', import.meta.url)).then(res =>
@@ -176,6 +184,12 @@ export async function GET(_request: NextRequest, { params }: { params: { index: 
             <span tw="text-[#9e62ff] text-6xl">"I'm a Voter" by pplpleasr</span>
           </h2>
         </div>
+        {params.interactorType && params.walletAddress ? (
+          <div tw="flex flex-col text-4xl w-full p-15 items-center justify-center">
+            <span>The NFT will be sent to your {params.interactorType} address.</span>
+            <span tw="text-3xl">({params.walletAddress})</span>
+          </div>
+        ) : null}
       </div>
     </div>,
     <div key="image9" tw="flex flex-col w-full h-full items-center justify-center bg-white">
