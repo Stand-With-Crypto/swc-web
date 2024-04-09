@@ -7,12 +7,11 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  letter-spacing: -1px;
 }
 
 .odometer,
 .odometer span {
-  @apply font-sans;
+  @apply font-mono;
 }
 
 .odometer > span {
