@@ -152,7 +152,7 @@ const frameData = [
         label: `Mint`,
         action: 'tx',
         target: fullUrl('/api/public/frames/register-to-vote/tx'),
-        postUrl: fullUrl('/api/public/frames/register-to-vote?frame=9'),
+        postUrl: fullUrl('/api/public/frames/register-to-vote/tx-success'),
       },
     ],
     image: {
@@ -161,6 +161,13 @@ const frameData = [
     postUrl: fullUrl('/api/public/frames/register-to-vote?frame=8'),
   },
   {
+    button: [
+      {
+        label: 'Go to Stand With Crypto',
+        action: 'link',
+        target: fullUrl('/'),
+      },
+    ],
     image: {
       src: fullUrl('/api/public/frames/register-to-vote/image/9'),
     },
@@ -180,6 +187,7 @@ export async function POST(req: NextRequest): Promise<Response> {
     emailAddress: '',
     phoneNumber: '',
     userId: '',
+    sessionId: '',
   }
   let interactorType: string = ''
   try {
@@ -190,6 +198,7 @@ export async function POST(req: NextRequest): Promise<Response> {
         emailAddress: string
         phoneNumber: string
         userId: string
+        sessionId: string
       }
     }
     if (message.interactor)
@@ -253,6 +262,7 @@ export async function POST(req: NextRequest): Promise<Response> {
           ...frameData[frameIndex],
           state: {
             userId: optInResult.userId,
+            sessionId: optInResult.sessionId,
           },
         }),
       )
@@ -267,6 +277,7 @@ export async function POST(req: NextRequest): Promise<Response> {
               ],
               state: {
                 userId: currentFrameState.userId,
+                sessionId: currentFrameState.sessionId,
               },
             }),
           ) // Mint screen.
@@ -276,6 +287,7 @@ export async function POST(req: NextRequest): Promise<Response> {
               ...frameData[3],
               state: {
                 userId: currentFrameState.userId,
+                sessionId: currentFrameState.sessionId,
               },
             }),
           ) // Register state screen.
@@ -285,6 +297,7 @@ export async function POST(req: NextRequest): Promise<Response> {
               ...frameData[5],
               state: {
                 userId: currentFrameState.userId,
+                sessionId: currentFrameState.sessionId,
               },
             }),
           ) // Check registration screen.
@@ -302,6 +315,7 @@ export async function POST(req: NextRequest): Promise<Response> {
             input: { text: 'Invalid state code - try again' },
             state: {
               userId: currentFrameState.userId,
+              sessionId: currentFrameState.sessionId,
             },
           }),
         ) // Same screen.
@@ -314,6 +328,7 @@ export async function POST(req: NextRequest): Promise<Response> {
           ],
           state: {
             userId: currentFrameState.userId,
+            sessionId: currentFrameState.sessionId,
           },
         }),
       ) // Registration screen with respective link.
@@ -324,6 +339,7 @@ export async function POST(req: NextRequest): Promise<Response> {
           buttons: [{ ...frameData[7].buttons![0], label: `Mint to ${interactorType} address` }],
           state: {
             userId: currentFrameState.userId,
+            sessionId: currentFrameState.sessionId,
           },
         }),
       ) // Mint screen.
@@ -339,6 +355,7 @@ export async function POST(req: NextRequest): Promise<Response> {
             input: { text: 'Invalid state code - try again' },
             state: {
               userId: currentFrameState.userId,
+              sessionId: currentFrameState.sessionId,
             },
           }),
         ) // Same screen.
@@ -351,6 +368,7 @@ export async function POST(req: NextRequest): Promise<Response> {
           ],
           state: {
             userId: currentFrameState.userId,
+            sessionId: currentFrameState.sessionId,
           },
         }),
       ) // Registration screen with respective link.
@@ -358,18 +376,35 @@ export async function POST(req: NextRequest): Promise<Response> {
       return new NextResponse(
         getFrameHtmlResponse({
           ...frameData[7],
-          buttons: [{ ...frameData[7].buttons![0], label: `Mint to ${interactorType} address` }],
+          buttons: [
+            { ...frameData[7].buttons![0], label: `Mint to your ${interactorType} crypto address` },
+          ],
           state: {
             userId: currentFrameState.userId,
+            sessionId: currentFrameState.sessionId,
           },
         }),
       ) // Mint screen.
     case 8: // Mint screen.
-      return new NextResponse(getFrameHtmlResponse(frameData[frameIndex])) // Final screen.
+      return new NextResponse(
+        getFrameHtmlResponse({
+          ...frameData[frameIndex],
+          state: {
+            userId: currentFrameState.userId,
+            sessionId: currentFrameState.sessionId,
+          },
+        }),
+      ) // Final screen.
     case 9: // Final screen.
-      logger.info('final screen reached')
-      logger.info('transaction hash', body.untrustedData?.transactionId)
-      return new NextResponse(getFrameHtmlResponse(frameData[frameIndex - 1])) // Stay at final screen.
+      return new NextResponse(
+        getFrameHtmlResponse({
+          ...frameData[frameIndex - 1],
+          state: {
+            userId: currentFrameState.userId,
+            sessionId: currentFrameState.sessionId,
+          },
+        }),
+      ) // Stay at final screen.
   }
 
   return new NextResponse(getFrameHtmlResponse(frameData[Number(frameIndex)]))
