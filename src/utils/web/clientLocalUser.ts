@@ -8,7 +8,7 @@ import {
   LocalUser,
   PersistedLocalUser,
 } from '@/utils/shared/localUser'
-import { logger } from '@/utils/shared/logger'
+import { getLogger } from '@/utils/shared/logger'
 import { getClientCookieConsent } from '@/utils/web/clientCookieConsent'
 import { getAllExperiments } from '@/utils/web/clientExperiments'
 
@@ -45,7 +45,7 @@ export const bootstrapLocalUser = () => {
   getLocalUser()
 }
 
-const log = (msg: string) => logger.info(`getLocalUser - ${msg}`)
+const logger = getLogger('getLocalUser')
 
 export const getLocalUser = (): LocalUser => {
   if (!isBrowser) {
@@ -63,7 +63,7 @@ export const getLocalUser = (): LocalUser => {
   if (localUser) {
     if (!canUsePersistedData) {
       if (localUser.persisted) {
-        log('targeting permissions have changed: removing persisted data')
+        logger.info('targeting permissions have changed: removing persisted data')
         removeLocalUser()
       }
       localUser = { currentSession: localUser.currentSession, persisted: undefined }
@@ -85,7 +85,7 @@ export const getLocalUser = (): LocalUser => {
     if (!experimentResults.hasUpdates) {
       return { currentSession, persisted }
     }
-    log('new experiments, updating existed persisted data')
+    logger.info('new experiments, updating existed persisted data')
     const newPersisted = { ...persisted, experiments: experimentResults.experiments }
     Cookies.set(LOCAL_USER_PERSISTED_KEY, JSON.stringify(newPersisted), {
       expires: 365,
@@ -93,7 +93,7 @@ export const getLocalUser = (): LocalUser => {
     localUser = { currentSession, persisted: newPersisted }
     return localUser
   }
-  log('no data, setting new persisted data')
+  logger.info('no data, setting new persisted data')
   const newPersisted = getDefaultPersistedLocalUser()
   Cookies.set(LOCAL_USER_PERSISTED_KEY, JSON.stringify(newPersisted), {
     expires: 365,
