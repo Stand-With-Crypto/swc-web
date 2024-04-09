@@ -159,7 +159,7 @@ const frameData = [
       {
         label: `Mint`,
         action: 'mint',
-        target: `eip155:${BASE_CHAIN_ID}:${I_AM_A_VOTER_NFT_CONTRACT_ADDRESS}:1`,
+        target: `eip155:${BASE_CHAIN_ID}:${I_AM_A_VOTER_NFT_CONTRACT_ADDRESS}:1`, // This does not actually work, might need to do `tx`.
       },
     ],
     image: {
