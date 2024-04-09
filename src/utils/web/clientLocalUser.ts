@@ -8,7 +8,9 @@ import {
   LocalUser,
   PersistedLocalUser,
 } from '@/utils/shared/localUser'
+import { logger } from '@/utils/shared/logger'
 import { getClientCookieConsent } from '@/utils/web/clientCookieConsent'
+import { getAllExperiments } from '@/utils/web/clientExperiments'
 
 const getPersistedLocalUser = () => {
   const val = Cookies.get(LOCAL_USER_PERSISTED_KEY)
@@ -33,6 +35,7 @@ const getDefaultPersistedLocalUser = (): PersistedLocalUser => ({
   initialReferer: window.document.referrer || undefined,
   datetimeFirstSeen: new Date().toISOString(),
   initialSearchParams: Object.fromEntries(new URLSearchParams(window.location.search)),
+  experiments: getAllExperiments(null).experiments,
 })
 
 let localUser: LocalUser | null = null
@@ -41,6 +44,8 @@ let localUser: LocalUser | null = null
 export const bootstrapLocalUser = () => {
   getLocalUser()
 }
+
+const log = (msg: string) => logger.info(`getLocalUser - ${msg}`)
 
 export const getLocalUser = (): LocalUser => {
   if (!isBrowser) {
@@ -58,6 +63,7 @@ export const getLocalUser = (): LocalUser => {
   if (localUser) {
     if (!canUsePersistedData) {
       if (localUser.persisted) {
+        log('targeting permissions have changed: removing persisted data')
         removeLocalUser()
       }
       localUser = { currentSession: localUser.currentSession, persisted: undefined }
@@ -75,8 +81,19 @@ export const getLocalUser = (): LocalUser => {
   })
   const persisted = getPersistedLocalUser()
   if (persisted) {
-    return { currentSession, persisted }
+    const experimentResults = getAllExperiments(persisted)
+    if (!experimentResults.hasUpdates) {
+      return { currentSession, persisted }
+    }
+    log('new experiments, updating existed persisted data')
+    const newPersisted = { ...persisted, experiments: experimentResults.experiments }
+    Cookies.set(LOCAL_USER_PERSISTED_KEY, JSON.stringify(newPersisted), {
+      expires: 365,
+    })
+    localUser = { currentSession, persisted: newPersisted }
+    return localUser
   }
+  log('no data, setting new persisted data')
   const newPersisted = getDefaultPersistedLocalUser()
   Cookies.set(LOCAL_USER_PERSISTED_KEY, JSON.stringify(newPersisted), {
     expires: 365,

@@ -4,8 +4,9 @@ import { useSearchParams } from 'next/navigation'
 
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useHasHydrated } from '@/hooks/useHasHydrated'
+import { useLocalUser } from '@/hooks/useLocalUser'
 import { usePlacesAutocompleteAddress } from '@/hooks/usePlacesAutocompleteAddress'
-import { getLocalUser, setLocalUserPersistedValues } from '@/utils/web/clientLocalUser'
+import { setLocalUserPersistedValues } from '@/utils/web/clientLocalUser'
 import { GooglePlaceAutocompletePrediction } from '@/utils/web/googlePlaceUtils'
 
 function useMaybeUseSearchParamAddress() {
@@ -29,7 +30,7 @@ function useCurrentUserAddress() {
   const searchParamAddressData = useMaybeUseSearchParamAddress()
   const user = useApiResponseForUserFullProfileInfo()
   const hasHydrated = useHasHydrated()
-  const localUser = getLocalUser()
+  const localUser = useLocalUser()
   const localUserAddress = localUser.persisted?.recentlyUsedAddress && {
     description: localUser.persisted.recentlyUsedAddress.formattedDescription,
     place_id: localUser.persisted.recentlyUsedAddress.googlePlaceId,
