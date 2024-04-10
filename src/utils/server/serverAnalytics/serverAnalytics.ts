@@ -7,6 +7,7 @@ import { promisify } from 'util'
 import {
   LocalUser,
   mapCurrentSessionLocalUserToAnalyticsProperties,
+  mapPersistedLocalUserToExperimentAnalyticsProperties,
 } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { resolveWithTimeout } from '@/utils/shared/resolveWithTimeout'
@@ -30,9 +31,11 @@ export type ServerAnalytics = ReturnType<typeof getServerAnalytics>
  */
 export function getServerAnalytics(config: ServerAnalyticsConfig) {
   const trackingRequests: Promise<void>[] = []
-  const currentSessionAnalytics =
-    config.localUser?.currentSession &&
-    mapCurrentSessionLocalUserToAnalyticsProperties(config.localUser.currentSession)
+  const currentSessionAnalytics = {
+    ...(config.localUser?.currentSession &&
+      mapCurrentSessionLocalUserToAnalyticsProperties(config.localUser.currentSession)),
+    ...mapPersistedLocalUserToExperimentAnalyticsProperties(config.localUser?.persisted),
+  }
 
   const flush = async () => {
     return resolveWithTimeout(Promise.all(trackingRequests), ANALYTICS_FLUSH_TIMEOUT_MS).catch(
@@ -56,8 +59,9 @@ export function getServerAnalytics(config: ServerAnalyticsConfig) {
   const trackAnalytic = (
     _config: ServerAnalyticsConfig,
     eventName: string,
-    eventProperties?: AnalyticProperties,
+    _eventProperties?: AnalyticProperties,
   ) => {
+    const eventProperties = { ...currentSessionAnalytics, ..._eventProperties }
     // a local user will not exist if the user has disabled tracking
     if (!config.localUser) {
       logger.info(`Anonymizing Event: "${eventName}"`, eventProperties)
@@ -106,7 +110,6 @@ export function getServerAnalytics(config: ServerAnalyticsConfig) {
     userState: AnalyticsUserActionUserState
   } & AnalyticProperties) => {
     return trackAnalytic(config, 'User Action Created', {
-      ...currentSessionAnalytics,
       'User Action Type': actionType,
       'Campaign Name': campaignName,
       'Creation Method': creationMethod,
@@ -134,7 +137,6 @@ export function getServerAnalytics(config: ServerAnalyticsConfig) {
       // typo'ed this initially, do not change so we retain historical trend data
       ' Type Creation Ignored',
       {
-        ...currentSessionAnalytics,
         'User Action Type': actionType,
         'Campaign Name': campaignName,
         'Creation Method': creationMethod,
@@ -154,7 +156,6 @@ export function getServerAnalytics(config: ServerAnalyticsConfig) {
   ) => {
     return trackAnalytic(config, eventName, {
       'Creation Method': creationMethod,
-      ...currentSessionAnalytics,
       ...eventProperties,
     })
   }

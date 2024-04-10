@@ -2,7 +2,7 @@ import { User } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { NextApiRequest } from 'next'
 import { cookies } from 'next/headers'
-import { object, record, string } from 'zod'
+import { any, object, record, string } from 'zod'
 
 import { COOKIE_CONSENT_COOKIE_NAME, deserializeCookieConsent } from '@/utils/shared/cookieConsent'
 import {
@@ -22,6 +22,7 @@ const zodServerLocalUser = object({
     initialSearchParams: record(string(), string()),
     initialReferer: string().optional(),
     datetimeFirstSeen: string(),
+    experiments: any(),
   }),
   currentSession: object({
     datetimeOnLoad: string(),
