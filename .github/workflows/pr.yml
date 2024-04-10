@@ -61,7 +61,7 @@ jobs:
 
       - name: Install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
-        run: npm install --legacy-peer-deps
+        run: npm install
 
       - name: Generate Prisma client
         run: npx prisma generate
