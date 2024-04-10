@@ -154,7 +154,8 @@ export function getGoogleCivicOfficialByDTSIName(
   dtsiPersonName: { firstName: string; lastName: string; firstNickname: string },
   googleCivicInfoResponse: GoogleCivicInfoResponse,
 ) {
-  const normalizeName = (name: string) => convertToOnlyEnglishCharacters(name.toLowerCase().trim())
+  const normalizeName = (name: string) =>
+    convertToOnlyEnglishCharacters(name.toLowerCase().trim()).replace(/[.-]/g, '')
   const normalizedDTSIFirstNickname = normalizeName(dtsiPersonName.firstNickname)
   const normalizedDTSIFirstName = normalizeName(dtsiPersonName.firstName)
   const normalizedDTSILastName = normalizeName(dtsiPersonName.lastName)
