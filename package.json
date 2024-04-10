@@ -31,7 +31,7 @@
     "seed": "npm run ts --transpile-only src/bin/seed/seedLocalDb.ts"
   },
   "dependencies": {
-    "@coinbase/onchainkit": "^0.9.12",
+    "@coinbase/onchainkit": "^0.11.1",
     "@graphql-tools/mock": "^9.0.0",
     "@hookform/resolvers": "^3.3.2",
     "@next/bundle-analyzer": "^14.1.0",
@@ -56,6 +56,7 @@
     "@radix-ui/react-tooltip": "^1.0.7",
     "@sentry/nextjs": "^7.91.0",
     "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tanstack/react-query": "^5.29.0",
     "@tanstack/react-table": "^8.11.2",
     "@thirdweb-dev/auth": "^4.1.30",
     "@thirdweb-dev/engine": "^0.0.4",
@@ -191,10 +192,5 @@
     "tsx": "^4.7.0",
     "typescript": "^5.3.3",
     "yargs": "^17.7.2"
-  },
-  "overrides": {
-    "@coinbase/onchainkit": {
-      "graphql": "$graphql"
-    }
   }
 }
