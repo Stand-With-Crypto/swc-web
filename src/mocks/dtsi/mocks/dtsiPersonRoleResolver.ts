@@ -18,9 +18,10 @@ export const dtsiPersonRoleMockResolver =
       DTSI_PersonRoleCategory.PRESIDENT,
       DTSI_PersonRoleCategory.SENATE,
     ])
-    const primaryState = faker.helpers.arrayElement(
+    const stateCode = faker.helpers.arrayElement(
       Object.keys(US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP),
     )
+    const primaryState = roleCategory === DTSI_PersonRoleCategory.PRESIDENT ? '' : stateCode
     const status = faker.helpers.arrayElement([
       DTSI_PersonRoleStatus.RUNNING_FOR,
       DTSI_PersonRoleStatus.HELD,

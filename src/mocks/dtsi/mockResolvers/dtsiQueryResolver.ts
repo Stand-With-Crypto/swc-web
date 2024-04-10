@@ -5,17 +5,17 @@ import { dtsiPersonMockResolver } from '@/mocks/dtsi/mocks/dtsiPersonMockResolve
 import { dtsiPersonRoleMockResolver } from '@/mocks/dtsi/mocks/dtsiPersonRoleResolver'
 
 export const dtsiQueryResolver: Partial<DTSI_QueryResolvers> = {
-  // peopleByUSCongressionalDistrict: () => {
-  //   return Object.values(DTSI_PersonRoleCategory).map(
-  //     category =>
-  //       ({
-  //         ...dtsiPersonMockResolver(),
-  //         primaryRole: dtsiPersonRoleMockResolver({
-  //           roleCategory: category,
-  //         }),
-  //       }) as any,
-  //   )
-  // },
+  peopleByUSCongressionalDistrict: () => {
+    return Object.values(DTSI_PersonRoleCategory).map(
+      category =>
+        ({
+          ...dtsiPersonMockResolver(),
+          primaryRole: dtsiPersonRoleMockResolver({
+            roleCategory: category,
+          }),
+        }) as any,
+    )
+  },
   people: (_root, args) => {
     if (args.slugIn) {
       return args.slugIn.map(slug => ({ slug }))
