@@ -390,8 +390,8 @@ export async function POST(req: NextRequest): Promise<Response> {
         }),
       ) // Mint screen.
     case 8: // Mint screen.
-      logger.info('@@@@@ I AM HERE 1 @@@@')
-      logger.info('tx id', body.untrustedData?.transactionId)
+      logger.info('transaction hash', body.untrustedData?.transactionId)
+      // TODO - store minting event for user, and emit Mixpanel event.
 
       return new NextResponse(
         getFrameHtmlResponse({
@@ -402,19 +402,9 @@ export async function POST(req: NextRequest): Promise<Response> {
           },
         }),
       ) // Final screen.
-    case 9: // Final screen.
-      logger.info('@@@@@ I AM HERE 2 @@@@')
-
-      return new NextResponse(
-        getFrameHtmlResponse({
-          ...frameData[frameIndex - 1],
-          state: {
-            userId: currentFrameState.userId,
-            sessionId: currentFrameState.sessionId,
-          },
-        }),
-      ) // Stay at final screen.
   }
 
-  return new NextResponse(getFrameHtmlResponse(frameData[Number(frameIndex)]))
+  return new NextResponse(
+    getFrameHtmlResponse({ ...frameData[frameIndex], state: currentFrameState }),
+  )
 }
