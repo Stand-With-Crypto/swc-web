@@ -191,5 +191,10 @@
     "tsx": "^4.7.0",
     "typescript": "^5.3.3",
     "yargs": "^17.7.2"
+  },
+  "overrides": {
+    "@coinbase/onchainkit": {
+      "graphql": "$graphql"
+    }
   }
 }
