@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker'
-import { NFTCurrency, NFTMint, NFTMintStatus, Prisma } from '@prisma/client'
+import { NFTCurrency, NFTMint, NFTMintStatus, NFTMintType, Prisma } from '@prisma/client'
 import { Decimal } from '@prisma/client/runtime/library'
 
 import { fakerFields } from '@/mocks/fakerUtils'
@@ -18,8 +18,13 @@ export function mockCreateNFTMintInput() {
     status === NFTMintStatus.CLAIMED
       ? new Decimal(faker.number.float({ min: 0.01, max: 0.2, multipleOf: 0.01 }))
       : new Decimal(0)
+  const mintType =
+    nftSlug === NFTSlug.STAND_WITH_CRYPTO_LEGACY || nftSlug === NFTSlug.STAND_WITH_CRYPTO_SUPPORTER
+      ? NFTMintType.PURCHASED_SWC
+      : NFTMintType.AIRDROPPED
   return {
     nftSlug,
+    mintType,
     transactionHash,
     status: status,
     costAtMint: costAtMint,
