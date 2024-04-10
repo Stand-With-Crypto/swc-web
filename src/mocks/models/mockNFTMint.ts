@@ -20,8 +20,8 @@ export function mockCreateNFTMintInput() {
       : new Decimal(0)
   const mintType =
     nftSlug === NFTSlug.STAND_WITH_CRYPTO_LEGACY || nftSlug === NFTSlug.STAND_WITH_CRYPTO_SUPPORTER
-      ? NFTMintType.PURCHASED_SWC
-      : NFTMintType.AIRDROPPED
+      ? NFTMintType.SWC_PURCHASED
+      : NFTMintType.SWC_AIRDROPPED
   return {
     nftSlug,
     mintType,
