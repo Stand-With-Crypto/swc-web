@@ -396,6 +396,14 @@ export async function POST(req: NextRequest): Promise<Response> {
       return new NextResponse(
         getFrameHtmlResponse({
           ...frameData[frameIndex],
+          buttons: [
+            {
+              ...frameData[frameIndex].buttons![0],
+              target:
+                frameData[frameIndex].buttons![0].target +
+                `?userId=${currentFrameState.userId}&sessionId=${currentFrameState.sessionId}`,
+            },
+          ],
           state: {
             userId: currentFrameState.userId,
             sessionId: currentFrameState.sessionId,
