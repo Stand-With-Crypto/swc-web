@@ -152,7 +152,6 @@ const frameData = [
         label: `Mint`,
         action: 'tx',
         target: fullUrl('/api/public/frames/register-to-vote/tx'),
-        postUrl: fullUrl('/api/public/frames/register-to-vote/tx-success'),
       },
     ],
     image: {
@@ -161,7 +160,7 @@ const frameData = [
     postUrl: fullUrl('/api/public/frames/register-to-vote?frame=8'),
   },
   {
-    button: [
+    buttons: [
       {
         label: 'Go to Stand With Crypto',
         action: 'link',
@@ -273,7 +272,10 @@ export async function POST(req: NextRequest): Promise<Response> {
             getFrameHtmlResponse({
               ...frameData[7],
               buttons: [
-                { ...frameData[7].buttons![0], label: `Mint to ${interactorType} address` },
+                {
+                  ...frameData[7].buttons![0],
+                  label: `Mint to your ${interactorType} crypto address`,
+                },
               ],
               state: {
                 userId: currentFrameState.userId,
@@ -336,7 +338,9 @@ export async function POST(req: NextRequest): Promise<Response> {
       return new NextResponse(
         getFrameHtmlResponse({
           ...frameData[7],
-          buttons: [{ ...frameData[7].buttons![0], label: `Mint to ${interactorType} address` }],
+          buttons: [
+            { ...frameData[7].buttons![0], label: `Mint to your ${interactorType} crypto address` },
+          ],
           state: {
             userId: currentFrameState.userId,
             sessionId: currentFrameState.sessionId,
@@ -387,6 +391,7 @@ export async function POST(req: NextRequest): Promise<Response> {
       ) // Mint screen.
     case 8: // Mint screen.
       logger.info('@@@@@ I AM HERE 1 @@@@')
+      logger.info('tx id', body.untrustedData?.transactionId)
 
       return new NextResponse(
         getFrameHtmlResponse({
