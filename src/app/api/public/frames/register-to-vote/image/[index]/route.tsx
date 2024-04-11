@@ -2,25 +2,15 @@
 import { NextRequest } from 'next/server'
 
 import { generateFrameImage } from '@/utils/server/generateFrameImage'
-import { getLogger } from '@/utils/shared/logger'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
 export const revalidate = SECONDS_DURATION.MINUTE * 5
 export const runtime = 'edge'
 
-const logger = getLogger(`registerToVoteGetImage`)
-
 export async function GET(_request: NextRequest, { params }: { params: { index: number } }) {
   const isAlreadyRegistered = !!_request.nextUrl.searchParams.get('isAlreadyRegistered')
   const registrationType = _request.nextUrl.searchParams.get('registrationType')
   const shouldShowError = !!_request.nextUrl.searchParams.get('shouldShowError')
-
-  logger.info('query parameters', {
-    isAlreadyRegistered,
-    registrationType,
-    shouldShowError,
-    index: params.index,
-  })
 
   const nftImage = await fetch(new URL('./nft.png', import.meta.url)).then(res => res.arrayBuffer())
 
