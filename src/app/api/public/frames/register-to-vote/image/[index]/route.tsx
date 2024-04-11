@@ -112,7 +112,7 @@ export async function GET(_request: NextRequest, { params }: { params: { index: 
           <img alt="" height={200} src={shieldImage as any} width={200} />
           <h2 tw="flex flex-col text-7xl font-bold tracking-tight text-left px-10">
             {registrationType === 'checkRegistration' ? (
-              <span>Check your registration status</span>
+              <span tw="text-5xl">Check your registration status</span>
             ) : (
               <span>Register to vote</span>
             )}
