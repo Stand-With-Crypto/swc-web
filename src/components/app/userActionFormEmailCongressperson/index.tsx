@@ -1,5 +1,5 @@
 'use client'
-import React, { useMemo } from 'react'
+import React, { useMemo, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { UserActionType } from '@prisma/client'
@@ -72,7 +72,7 @@ const getDefaultValues = ({
       firstName: user.firstName,
       lastName: user.lastName,
       emailAddress: user.primaryUserEmailAddress?.emailAddress || '',
-      message: getDefaultText(),
+      message: getDefaultText(dtsiSlugs),
       address: user.address
         ? {
             description: user.address.formattedDescription,
@@ -87,7 +87,7 @@ const getDefaultValues = ({
     firstName: '',
     lastName: '',
     emailAddress: '',
-    message: getDefaultText(),
+    message: getDefaultText(dtsiSlugs),
     address: undefined,
     dtsiSlugs,
   }
@@ -107,6 +107,7 @@ export function UserActionFormEmailCongressperson({
 }) {
   const router = useRouter()
   const urls = useIntlUrls()
+  const hasModifiedMessage = useRef(false)
   const userDefaultValues = useMemo(() => getDefaultValues({ user, dtsiSlugs: [] }), [user])
   const politicianCategoryDisplayName = getYourPoliticianCategoryDisplayName(politicianCategory)
   const form = useForm<FormValues>({
@@ -242,9 +243,26 @@ export function UserActionFormEmailCongressperson({
               name="message"
               render={({ field }) => (
                 <FormItem>
-                  <FormControl>
-                    <Textarea placeholder="Your message..." rows={10} {...field} />
-                  </FormControl>
+                  <div className="relative">
+                    {!form.getValues().dtsiSlugs.length && (
+                      <div className="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center bg-background/90">
+                        <p className="text-bold max-w-md text-center">
+                          Write a personalized message after entering your address.
+                        </p>
+                      </div>
+                    )}
+                    <FormControl>
+                      <Textarea
+                        placeholder="Your message..."
+                        rows={10}
+                        {...field}
+                        onChange={e => {
+                          hasModifiedMessage.current = true
+                          field.onChange(e)
+                        }}
+                      />
+                    </FormControl>
+                  </div>
                   <FormErrorMessage />
                 </FormItem>
               )}
@@ -262,7 +280,17 @@ export function UserActionFormEmailCongressperson({
                       <DTSICongresspersonAssociatedWithFormAddress
                         address={addressProps.field.value}
                         currentDTSISlugValue={dtsiSlugProps.field.value}
-                        onChangeDTSISlug={dtsiSlugProps.field.onChange}
+                        onChangeDTSISlug={slugs => {
+                          if (
+                            slugs.every((slug, index) => dtsiSlugProps.field.value[index] === slug)
+                          ) {
+                            return
+                          }
+                          dtsiSlugProps.field.onChange(slugs)
+                          if (!hasModifiedMessage.current) {
+                            form.setValue('message', getDefaultText(slugs))
+                          }
+                        }}
                         politicianCategory={politicianCategory}
                       />
                       <FormErrorMessage />
