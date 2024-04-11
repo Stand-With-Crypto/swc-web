@@ -44,6 +44,7 @@ export const dynamic = 'force-dynamic'
 
 const FRAME_QUERY_PARAMETER = 'frame'
 
+// An array of frame data used to render the interactive components of the frames.
 const frameData = [
   {
     input: {
@@ -201,19 +202,19 @@ const frameData = [
   },
 ] as FrameMetadataType[]
 
+/**
+ * Every time a Farcaster user interacts with the frame, the frame host sends a POST request to this endpoint.
+ *
+ * @param req
+ * @returns
+ */
 export async function POST(req: NextRequest): Promise<Response> {
-  const url = new URL(req.url)
-  const queryParams = url.searchParams
-  const frameIndex = Number(queryParams.get(FRAME_QUERY_PARAMETER))
-  const body: FrameRequest = (await req.json()) as FrameRequest
-
   let currentFrameState = {
     emailAddress: '',
     phoneNumber: '',
     userId: '',
     sessionId: '',
     voterRegistrationState: '',
-    isNewUser: false,
   }
   let interactorType: string = ''
   let cryptoAddress: string = ''
@@ -222,35 +223,41 @@ export async function POST(req: NextRequest): Promise<Response> {
   let link: string | undefined
   let optInResult: VerifiedSWCPartnerApiResponse<VerifiedSWCPartnersUserActionOptInResult>
   let doesUserActionAlreadyExists: boolean
-  try {
-    const { isValid, message } = await getFrameMessage(body, { neynarApiKey: NEYNAR_API_KEY }) // NOTE: Frame state data does not exist on localhost.
-    if (!isValid) throw new Error('invalid frame message')
-    if (message.state?.serialized) {
-      currentFrameState = JSON.parse(decodeURIComponent(message.state?.serialized)) as {
-        emailAddress: string
-        phoneNumber: string
-        userId: string
-        sessionId: string
-        voterRegistrationState: string
-        isNewUser: boolean
-      }
+
+  const url = new URL(req.url)
+  const queryParams = url.searchParams
+  const frameIndex = Number(queryParams.get(FRAME_QUERY_PARAMETER))
+  const body: FrameRequest = (await req.json()) as FrameRequest
+
+  // NOTES:
+  // - Frame state data does not exist on localhost.
+  // - `getFrameMessage` does not work on localhost either.
+  const { isValid, message } = await getFrameMessage(body, { neynarApiKey: NEYNAR_API_KEY })
+  if (!isValid) return NextResponse.json({ error: 'invalid frame message' }, { status: 400 })
+  if (message.state?.serialized) {
+    currentFrameState = JSON.parse(decodeURIComponent(message.state?.serialized)) as {
+      emailAddress: string
+      phoneNumber: string
+      userId: string
+      sessionId: string
+      voterRegistrationState: string
     }
-    if (message.interactor) {
-      interactorType = message.interactor.verified_accounts[0] ? 'verified' : 'Farcaster custody'
-      cryptoAddress =
-        message.interactor.verified_accounts[0].toLowerCase() ??
-        message.interactor.custody_address.toLowerCase()
-    }
-  } catch (e) {
-    return NextResponse.json({ error: 'invalid frame message' }, { status: 400 })
+  }
+  if (message.interactor) {
+    interactorType = message.interactor.verified_accounts[0] ? 'verified' : 'Farcaster custody'
+
+    // For the crypto address in which the NFT will be sent to, we are using the first verified address that is linked to the Farcaster account.
+    // If there are no verified addresses, we use the Farcaster custody address.
+    cryptoAddress = message.interactor.verified_accounts[0] ?? message.interactor.custody_address
   }
 
   const buttonIndex = body.untrustedData?.buttonIndex
   const stateInput = body.untrustedData?.inputText?.trim().toUpperCase() as USStateCode
 
+  // We return the next frame based on the `frame` query parameter.
   switch (frameIndex) {
     case 0: // Intro screen.
-      return new NextResponse(getFrameHtmlResponse(frameData[frameIndex]))
+      return new NextResponse(getFrameHtmlResponse(frameData[frameIndex])) // Email input screen.
     case 1: // Email input screen.
       zodEmailResult = zodEmailAddress.safeParse(body.untrustedData?.inputText)
       if (!zodEmailResult.success) {
@@ -260,13 +267,13 @@ export async function POST(req: NextRequest): Promise<Response> {
             input: { text: 'Invalid email - try again' },
           }),
         )
-      }
+      } // Same screen.
       return new NextResponse(
         getFrameHtmlResponse({
           ...frameData[frameIndex],
           state: { emailAddress: zodEmailResult.data },
         }),
-      )
+      ) // Phone number input screen.
     case 2: // Phone number input screen.
       zodPhoneResult = zodPhoneNumber.safeParse(body.untrustedData?.inputText)
       if (!zodPhoneResult.success) {
@@ -277,9 +284,13 @@ export async function POST(req: NextRequest): Promise<Response> {
             state: { emailAddress: currentFrameState.emailAddress },
           }),
         )
-      }
+      } // Same screen.
 
-      // We are treating Farcaster Frames as a verified partner for the purposes of opting-in.
+      // To keep the flow generally simple and to reuse analytics, we are using the SWC partners opt-in flow to upsert a user and opt them in.
+      // We do not use the crypto address here because:
+      // (1) it is technically not required by the opt-in flow
+      // (2) down below, we eventually store the crypto address as unverified, so
+      //     if the user eventually logs in with their verified address, the merge logic will handle that.
       optInResult = await verifiedSWCPartnersUserActionOptIn({
         emailAddress: currentFrameState.emailAddress,
         optInType: UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER,
@@ -291,7 +302,7 @@ export async function POST(req: NextRequest): Promise<Response> {
         partner: VerifiedSWCPartner.FARCASTER_FRAMES,
       })
 
-      // Because of the one claim per public wallet limit, we should let the user know if they have already completed the action.
+      // If the email-address user has already completed the action, then then we skip to the final screen.
       doesUserActionAlreadyExists = await checkForExistingUserAction(optInResult.userId)
       if (doesUserActionAlreadyExists) {
         return new NextResponse(
@@ -302,13 +313,12 @@ export async function POST(req: NextRequest): Promise<Response> {
                 ...frameData[frameIndex].buttons![0],
                 target:
                   frameData[frameIndex].buttons![0].target +
-                  `?userId=${currentFrameState.userId}&sessionId=${currentFrameState.sessionId}`,
+                  `?userId=${currentFrameState.userId}&sessionId=${currentFrameState.sessionId}`, // We pass in the user ID and session ID as query parameters to SWC website.
               },
             ],
             state: {
               userId: currentFrameState.userId,
               sessionId: currentFrameState.sessionId,
-              isNewUser: optInResult,
             },
           }),
         ) // "Already registered" final screen.
@@ -322,7 +332,7 @@ export async function POST(req: NextRequest): Promise<Response> {
             sessionId: optInResult.sessionId,
           },
         }),
-      )
+      ) // "Are you registered to vote" screen.
     case 3: // "Are you registered to vote" screen.
       switch (buttonIndex) {
         case 1:
@@ -332,7 +342,7 @@ export async function POST(req: NextRequest): Promise<Response> {
               buttons: [
                 {
                   ...frameData[7].buttons![0],
-                  label: `Mint to your ${interactorType} crypto address`,
+                  label: `Mint to your ${interactorType} wallet (${cryptoAddress})`,
                 },
               ],
               state: {
@@ -398,7 +408,10 @@ export async function POST(req: NextRequest): Promise<Response> {
         getFrameHtmlResponse({
           ...frameData[7],
           buttons: [
-            { ...frameData[7].buttons![0], label: `Mint to your ${interactorType} crypto address` },
+            {
+              ...frameData[7].buttons![0],
+              label: `Mint to your ${interactorType} wallet (${cryptoAddress})`,
+            },
           ],
           state: {
             userId: currentFrameState.userId,
@@ -442,7 +455,10 @@ export async function POST(req: NextRequest): Promise<Response> {
         getFrameHtmlResponse({
           ...frameData[7],
           buttons: [
-            { ...frameData[7].buttons![0], label: `Mint to your ${interactorType} crypto address` },
+            {
+              ...frameData[7].buttons![0],
+              label: `Mint to your ${interactorType} wallet (${cryptoAddress})`,
+            },
           ],
           state: {
             userId: currentFrameState.userId,
@@ -459,6 +475,7 @@ export async function POST(req: NextRequest): Promise<Response> {
         )
       }
 
+      // If the user successfully mints the NFT, then we upsert the crypto address in our database and create the respective user action.
       await upsertUserCryptoAddressAndCreateUserAction(
         currentFrameState.userId,
         currentFrameState.sessionId,
@@ -475,7 +492,7 @@ export async function POST(req: NextRequest): Promise<Response> {
               ...frameData[frameIndex].buttons![0],
               target:
                 frameData[frameIndex].buttons![0].target +
-                `?userId=${currentFrameState.userId}&sessionId=${currentFrameState.sessionId}`,
+                `?userId=${currentFrameState.userId}&sessionId=${currentFrameState.sessionId}`, // We pass in the user ID and session ID as query parameters to SWC website.
             },
           ],
           state: {
@@ -560,6 +577,7 @@ async function upsertUserCryptoAddressAndCreateUserAction(
   const localUser = getLocalUserFromUser(userAction.user)
   const analytics = getServerAnalytics({ userId, localUser })
 
+  // Tracking analytics for the user action created with an additional "Source" field.
   analytics.trackUserActionCreated({
     actionType: UserActionType.VOTER_REGISTRATION,
     campaignName: UserActionVoterRegistrationCampaignName.DEFAULT,
