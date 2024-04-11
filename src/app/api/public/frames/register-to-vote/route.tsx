@@ -160,8 +160,6 @@ const frameData = [
   },
 ] as FrameMetadataType[]
 
-// const logger = getLogger('framesRegisterToVote') TODO: REMOVE
-
 /**
  * Every time a Farcaster user interacts with the frame, the frame host sends a POST request to this endpoint.
  *
@@ -226,7 +224,6 @@ export async function POST(req: NextRequest): Promise<Response> {
         return new NextResponse(
           getFrameHtmlResponse({
             ...frameData[frameIndex - 1],
-            // input: { text: 'Invalid email - try again' }, TODO: REMOVE
             image: {
               src:
                 (frameData[frameIndex - 1].image as FrameImageMetadata).src +
@@ -247,7 +244,6 @@ export async function POST(req: NextRequest): Promise<Response> {
         return new NextResponse(
           getFrameHtmlResponse({
             ...frameData[frameIndex - 1],
-            // input: { text: 'Invalid phone - try again' }, TODO: Remove
             state: { emailAddress: currentFrameState.emailAddress },
             image: {
               src:
@@ -367,7 +363,6 @@ export async function POST(req: NextRequest): Promise<Response> {
         return new NextResponse(
           getFrameHtmlResponse({
             ...frameData[frameIndex - 1],
-            // input: { text: 'Invalid state code - try again' }, TODO: REMOVE
             state: {
               userId: currentFrameState.userId,
               sessionId: currentFrameState.sessionId,
