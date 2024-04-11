@@ -241,6 +241,11 @@ async function maybeUpsertUser({
     }
   }
 
+  const emailSource =
+    partner === VerifiedSWCPartner.FARCASTER_FRAMES
+      ? UserEmailAddressSource.USER_ENTERED
+      : UserEmailAddressSource.VERIFIED_THIRD_PARTY
+
   if (existingUser) {
     const updatePayload: Prisma.UserUpdateInput = {
       // TODO typesafe against invalid fields
@@ -258,7 +263,7 @@ async function maybeUpsertUser({
             create: {
               emailAddress,
               isVerified: isVerifiedEmailAddress,
-              source: UserEmailAddressSource.VERIFIED_THIRD_PARTY,
+              source: emailSource,
             },
           },
         }),
@@ -335,7 +340,7 @@ async function maybeUpsertUser({
         create: {
           emailAddress,
           isVerified: isVerifiedEmailAddress,
-          source: UserEmailAddressSource.VERIFIED_THIRD_PARTY,
+          source: emailSource,
         },
       },
       ...(dbAddress && {
