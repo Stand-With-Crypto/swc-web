@@ -206,6 +206,26 @@ export async function GET(
         </div>
       </div>
     </div>,
+    <div key="image10" tw="flex flex-col w-full h-full items-center justify-center bg-white">
+      <div
+        style={{ background: 'linear-gradient(180deg, #130032 0%, #000 100%)' }}
+        tw="flex w-full h-full text-white"
+      >
+        <div tw="flex flex-row w-full p-15 items-center justify-center">
+          <img
+            alt=""
+            height={300}
+            src={nftImage as any}
+            style={{ borderRadius: '50%' }}
+            width={300}
+          />
+          <h2 tw="flex flex-col text-6xl font-bold tracking-tight text-left px-10">
+            <span>You have already completed this action.</span>
+            <span tw="text-4xl">Continue the fight via the link below.</span>
+          </h2>
+        </div>
+      </div>
+    </div>,
   ]
 
   return generateFrameImage(images[params.index])

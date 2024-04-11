@@ -4,7 +4,14 @@ import {
   getFrameHtmlResponse,
   getFrameMessage,
 } from '@coinbase/onchainkit/frame'
-import { UserActionOptInType } from '@prisma/client'
+import {
+  NFTCurrency,
+  NFTMintStatus,
+  NFTMintType,
+  SupportedUserCryptoNetwork,
+  UserActionOptInType,
+  UserActionType,
+} from '@prisma/client'
 import { NextRequest, NextResponse } from 'next/server'
 import { SafeParseReturnType } from 'zod'
 
@@ -13,15 +20,22 @@ import {
   verifiedSWCPartnersUserActionOptIn,
   VerifiedSWCPartnersUserActionOptInResult,
 } from '@/data/verifiedSWCPartners/userActionOptIn'
+import { I_AM_A_VOTER_NFT_CONTRACT_ADDRESS } from '@/utils/server/nft/constants'
+import { prismaClient } from '@/utils/server/prismaClient'
+import { getServerAnalytics } from '@/utils/server/serverAnalytics'
+import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
 import {
   VerifiedSWCPartner,
   VerifiedSWCPartnerApiResponse,
 } from '@/utils/server/verifiedSWCPartner/constants'
-import { getLogger } from '@/utils/shared/logger'
 import { NEYNAR_API_KEY } from '@/utils/shared/neynarAPIKey'
+import { NFTSlug } from '@/utils/shared/nft'
 import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
 import { fullUrl } from '@/utils/shared/urls'
-import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
+import {
+  UserActionOptInCampaignName,
+  UserActionVoterRegistrationCampaignName,
+} from '@/utils/shared/userActionCampaigns'
 import { USStateCode } from '@/utils/shared/usStateUtils'
 import { zodEmailAddress } from '@/validation/fields/zodEmailAddress'
 import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
@@ -39,7 +53,7 @@ const frameData = [
       {
         label: `View Privacy Policy`,
         action: 'link',
-        target: 'https://www.standwithcrypto.org/privacy',
+        target: fullUrl('/privacy'),
       },
       {
         label: `Next →`,
@@ -58,7 +72,7 @@ const frameData = [
       {
         label: `View Privacy Policy`,
         action: 'link',
-        target: 'https://www.standwithcrypto.org/privacy',
+        target: fullUrl('/privacy'),
       },
       {
         label: `Next →`,
@@ -172,23 +186,42 @@ const frameData = [
     },
     postUrl: fullUrl('/api/public/frames/register-to-vote?frame=9'),
   },
+  {
+    buttons: [
+      {
+        label: 'Go to Stand With Crypto',
+        action: 'link',
+        target: fullUrl('/'),
+      },
+    ],
+    image: {
+      src: fullUrl('/api/public/frames/register-to-vote/image/10'),
+    },
+    postUrl: fullUrl('/api/public/frames/register-to-vote?frame=10'),
+  },
 ] as FrameMetadataType[]
-
-const logger = getLogger('framesRegisterToVote')
 
 export async function POST(req: NextRequest): Promise<Response> {
   const url = new URL(req.url)
   const queryParams = url.searchParams
   const frameIndex = Number(queryParams.get(FRAME_QUERY_PARAMETER))
-
   const body: FrameRequest = (await req.json()) as FrameRequest
+
   let currentFrameState = {
     emailAddress: '',
     phoneNumber: '',
     userId: '',
     sessionId: '',
+    voterRegistrationState: '',
+    isNewUser: false,
   }
   let interactorType: string = ''
+  let cryptoAddress: string = ''
+  let zodEmailResult: SafeParseReturnType<string, string>
+  let zodPhoneResult: SafeParseReturnType<string, string>
+  let link: string | undefined
+  let optInResult: VerifiedSWCPartnerApiResponse<VerifiedSWCPartnersUserActionOptInResult>
+  let doesUserActionAlreadyExists: boolean
   try {
     const { isValid, message } = await getFrameMessage(body, { neynarApiKey: NEYNAR_API_KEY }) // NOTE: Frame state data does not exist on localhost.
     if (!isValid) throw new Error('invalid frame message')
@@ -198,21 +231,22 @@ export async function POST(req: NextRequest): Promise<Response> {
         phoneNumber: string
         userId: string
         sessionId: string
+        voterRegistrationState: string
+        isNewUser: boolean
       }
     }
-    if (message.interactor)
+    if (message.interactor) {
       interactorType = message.interactor.verified_accounts[0] ? 'verified' : 'Farcaster custody'
+      cryptoAddress =
+        message.interactor.verified_accounts[0].toLowerCase() ??
+        message.interactor.custody_address.toLowerCase()
+    }
   } catch (e) {
-    logger.error('error getting frame message', e)
+    return NextResponse.json({ error: 'invalid frame message' }, { status: 400 })
   }
 
   const buttonIndex = body.untrustedData?.buttonIndex
   const stateInput = body.untrustedData?.inputText?.trim().toUpperCase() as USStateCode
-
-  let zodEmailResult: SafeParseReturnType<string, string>
-  let zodPhoneResult: SafeParseReturnType<string, string>
-  let link: string | undefined
-  let optInResult: VerifiedSWCPartnerApiResponse<VerifiedSWCPartnersUserActionOptInResult>
 
   switch (frameIndex) {
     case 0: // Intro screen.
@@ -245,6 +279,7 @@ export async function POST(req: NextRequest): Promise<Response> {
         )
       }
 
+      // We are treating Farcaster Frames as a verified partner for the purposes of opting-in.
       optInResult = await verifiedSWCPartnersUserActionOptIn({
         emailAddress: currentFrameState.emailAddress,
         optInType: UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER,
@@ -253,8 +288,31 @@ export async function POST(req: NextRequest): Promise<Response> {
         phoneNumber: normalizePhoneNumber(zodPhoneResult.data),
         hasOptedInToReceiveSMSFromSWC: true,
         hasOptedInToEmails: true,
-        partner: VerifiedSWCPartner.FRAMES,
+        partner: VerifiedSWCPartner.FARCASTER_FRAMES,
       })
+
+      // Because of the one claim per public wallet limit, we should let the user know if they have already completed the action.
+      doesUserActionAlreadyExists = await checkForExistingUserAction(optInResult.userId)
+      if (doesUserActionAlreadyExists) {
+        return new NextResponse(
+          getFrameHtmlResponse({
+            ...frameData[10],
+            buttons: [
+              {
+                ...frameData[frameIndex].buttons![0],
+                target:
+                  frameData[frameIndex].buttons![0].target +
+                  `?userId=${currentFrameState.userId}&sessionId=${currentFrameState.sessionId}`,
+              },
+            ],
+            state: {
+              userId: currentFrameState.userId,
+              sessionId: currentFrameState.sessionId,
+              isNewUser: optInResult,
+            },
+          }),
+        ) // "Already registered" final screen.
+      }
 
       return new NextResponse(
         getFrameHtmlResponse({
@@ -331,6 +389,7 @@ export async function POST(req: NextRequest): Promise<Response> {
           state: {
             userId: currentFrameState.userId,
             sessionId: currentFrameState.sessionId,
+            voterRegistrationState: stateInput,
           },
         }),
       ) // Registration screen with respective link.
@@ -344,6 +403,7 @@ export async function POST(req: NextRequest): Promise<Response> {
           state: {
             userId: currentFrameState.userId,
             sessionId: currentFrameState.sessionId,
+            voterRegistrationState: currentFrameState.voterRegistrationState,
           },
         }),
       ) // Mint screen.
@@ -373,6 +433,7 @@ export async function POST(req: NextRequest): Promise<Response> {
           state: {
             userId: currentFrameState.userId,
             sessionId: currentFrameState.sessionId,
+            voterRegistrationState: stateInput,
           },
         }),
       ) // Registration screen with respective link.
@@ -386,12 +447,25 @@ export async function POST(req: NextRequest): Promise<Response> {
           state: {
             userId: currentFrameState.userId,
             sessionId: currentFrameState.sessionId,
+            voterRegistrationState: currentFrameState.voterRegistrationState,
           },
         }),
       ) // Mint screen.
     case 8: // Mint screen.
-      logger.info('transaction hash', body.untrustedData?.transactionId)
-      // TODO - store minting event for user, and emit Mixpanel event.
+      if (!body.untrustedData?.transactionId) {
+        return NextResponse.json(
+          { error: 'no transaction hash has been provided' },
+          { status: 400 },
+        )
+      }
+
+      await upsertUserCryptoAddressAndCreateUserAction(
+        currentFrameState.userId,
+        currentFrameState.sessionId,
+        cryptoAddress,
+        currentFrameState.voterRegistrationState,
+        body.untrustedData?.transactionId,
+      )
 
       return new NextResponse(
         getFrameHtmlResponse({
@@ -407,6 +481,7 @@ export async function POST(req: NextRequest): Promise<Response> {
           state: {
             userId: currentFrameState.userId,
             sessionId: currentFrameState.sessionId,
+            voterRegistrationState: stateInput,
           },
         }),
       ) // Final screen.
@@ -415,4 +490,81 @@ export async function POST(req: NextRequest): Promise<Response> {
   return new NextResponse(
     getFrameHtmlResponse({ ...frameData[frameIndex], state: currentFrameState }),
   )
+}
+
+async function checkForExistingUserAction(userId: string) {
+  const existingAction = await prismaClient.userAction.findFirst({
+    where: {
+      actionType: UserActionType.VOTER_REGISTRATION,
+      campaignName: UserActionVoterRegistrationCampaignName.DEFAULT,
+      userId,
+    },
+  })
+  return !!existingAction
+}
+
+async function upsertUserCryptoAddressAndCreateUserAction(
+  userId: string,
+  sessionId: string,
+  cryptoAddress: string,
+  voterRegistrationStateCode: string,
+  transactionHash: string,
+) {
+  const userCryptoAddress = await prismaClient.userCryptoAddress.upsert({
+    where: {
+      cryptoAddress_cryptoNetwork_userId: {
+        cryptoAddress: cryptoAddress.toLowerCase(),
+        cryptoNetwork: SupportedUserCryptoNetwork.ETH,
+        userId,
+      },
+    },
+    update: {},
+    create: {
+      cryptoAddress: cryptoAddress.toLowerCase(),
+      cryptoNetwork: SupportedUserCryptoNetwork.ETH,
+      user: { connect: { id: userId } },
+      hasBeenVerifiedViaAuth: false,
+    },
+  })
+
+  const userAction = await prismaClient.userAction.create({
+    data: {
+      user: { connect: { id: userId } },
+      actionType: UserActionType.VOTER_REGISTRATION,
+      campaignName: UserActionVoterRegistrationCampaignName.DEFAULT,
+      userCryptoAddress: { connect: { id: userCryptoAddress.id } },
+      userSession: { connect: { id: sessionId } },
+      userActionVoterRegistration: {
+        create: {
+          ...(voterRegistrationStateCode && { usaState: voterRegistrationStateCode }),
+        },
+      },
+      nftMint: {
+        create: {
+          nftSlug: NFTSlug.I_AM_A_VOTER,
+          mintType: NFTMintType.FARCASTER_FRAME_PURCHASED,
+          contractAddress: I_AM_A_VOTER_NFT_CONTRACT_ADDRESS,
+          transactionHash: transactionHash.toLowerCase(),
+          status: NFTMintStatus.CLAIMED,
+          costAtMint: 0,
+          costAtMintCurrencyCode: NFTCurrency.ETH,
+          costAtMintUsd: 0,
+        },
+      },
+    },
+    include: {
+      user: true,
+    },
+  })
+
+  const localUser = getLocalUserFromUser(userAction.user)
+  const analytics = getServerAnalytics({ userId, localUser })
+
+  analytics.trackUserActionCreated({
+    actionType: UserActionType.VOTER_REGISTRATION,
+    campaignName: UserActionVoterRegistrationCampaignName.DEFAULT,
+    userState: 'Existing',
+    ...(voterRegistrationStateCode && { usaState: voterRegistrationStateCode }),
+    Source: 'Farcaster Frames',
+  })
 }

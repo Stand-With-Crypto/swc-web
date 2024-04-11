@@ -1,4 +1,11 @@
-import { $Enums, NFTCurrency, UserAction, UserActionType, UserCryptoAddress } from '@prisma/client'
+import {
+  $Enums,
+  NFTCurrency,
+  NFTMintType,
+  UserAction,
+  UserActionType,
+  UserCryptoAddress,
+} from '@prisma/client'
 import { Decimal } from '@prisma/client/runtime/library'
 
 import { AIRDROP_NFT_INNGEST_EVENT_NAME } from '@/inngest/functions/airdropNFT/airdropNFT'
@@ -100,6 +107,7 @@ export async function claimNFT(
       nftMint: {
         create: {
           nftSlug: nftSlug,
+          mintType: NFTMintType.SWC_AIRDROPPED,
           status: NFTMintStatus.REQUESTED,
           costAtMint: 0.0,
           contractAddress: NFT_SLUG_BACKEND_METADATA[nftSlug].contractAddress,
