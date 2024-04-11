@@ -11,9 +11,9 @@ export const runtime = 'edge'
 const logger = getLogger(`registerToVoteGetImage`)
 
 export async function GET(_request: NextRequest, { params }: { params: { index: number } }) {
-  const isAlreadyRegistered = _request.nextUrl.searchParams.get('isAlreadyRegistered')
+  const isAlreadyRegistered = !!_request.nextUrl.searchParams.get('isAlreadyRegistered')
   const registrationType = _request.nextUrl.searchParams.get('registrationType')
-  const shouldShowError = _request.nextUrl.searchParams.get('shouldShowError')
+  const shouldShowError = !!_request.nextUrl.searchParams.get('shouldShowError')
 
   logger.info('query parameters', {
     isAlreadyRegistered,
@@ -66,13 +66,13 @@ export async function GET(_request: NextRequest, { params }: { params: { index: 
             <div tw="flex flex-col text-3xl text-gray-400 mt-2">
               <span>Personal information subject to Privacy Policy.</span>
             </div>
+            {shouldShowError ? (
+              <div tw="flex flex-col text-5xl text-red-500 mt-2">
+                <span>Invalid email - please try again.</span>
+              </div>
+            ) : null}
           </h2>
         </div>
-        {shouldShowError && (
-          <div tw="flex flex-col text-5xl text-red-500 mt-2">
-            <span>Invalid email - please try again.</span>
-          </div>
-        )}
       </div>
     </div>,
     <div key="image2" tw="flex flex-col w-full h-full items-center justify-center bg-white">
@@ -91,13 +91,13 @@ export async function GET(_request: NextRequest, { params }: { params: { index: 
             <div tw="flex flex-col text-3xl text-gray-400 mt-2">
               <span>Personal information subject to Privacy Policy.</span>
             </div>
+            {shouldShowError ? (
+              <div tw="flex flex-col text-5xl text-red-500 mt-2">
+                <span>Invalid phone number - please try again.</span>
+              </div>
+            ) : null}
           </h2>
         </div>
-        {shouldShowError && (
-          <div tw="flex flex-col text-5xl text-red-500 mt-2">
-            <span>Invalid phone number - please try again.</span>
-          </div>
-        )}
       </div>
     </div>,
     <div key="image3" tw="flex flex-col w-full h-full items-center justify-center bg-white">
