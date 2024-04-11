@@ -148,23 +148,21 @@ export async function GET(_request: NextRequest, { params }: { params: { index: 
           <img alt="" height={200} src={shieldImage as any} width={200} />
           <h2 tw="flex flex-col text-6xl font-bold tracking-tight text-left px-10">
             {registrationType === 'checkRegistration' ? (
-              <span>Check your registration status</span>
+              <span tw="text-5xl">Check your registration status</span>
             ) : (
               <span>Register to vote</span>
             )}
-            <div tw="flex flex-col text-4xl text-gray-400 mt-4">
-              {registrationType === 'checkRegistration' ? (
-                <>
-                  <span>Click the link below to check your</span>
-                  <span>voter registration status.</span>
-                </>
-              ) : (
-                <>
-                  <span>Click the link below to complete</span>
-                  <span>your voter registration.</span>
-                </>
-              )}
-            </div>
+            {registrationType === 'checkRegistration' ? (
+              <div tw="flex flex-col text-4xl text-gray-400 mt-4">
+                <span>Click the link below to check your</span>
+                <span>voter registration status.</span>
+              </div>
+            ) : (
+              <div tw="flex flex-col text-4xl text-gray-400 mt-4">
+                <span>Click the link below to complete</span>
+                <span>your voter registration.</span>
+              </div>
+            )}
           </h2>
         </div>
       </div>
@@ -185,7 +183,7 @@ export async function GET(_request: NextRequest, { params }: { params: { index: 
           <h2 tw="flex flex-col text-7xl font-bold tracking-tight text-left px-10">
             <span>Mint your NFT</span>
             <span tw="text-[#9e62ff] text-6xl">"I'm a Voter" by pplpleasr</span>
-            <span tw="text-gray-400 text-4xl ">You will need Base ETH to mint.</span>
+            <span tw="text-gray-400 text-4xl ">You will need ETH on Base to mint.</span>
           </h2>
         </div>
       </div>
@@ -205,10 +203,10 @@ export async function GET(_request: NextRequest, { params }: { params: { index: 
           />
           <h2 tw="flex flex-col text-6xl font-bold tracking-tight text-left px-10">
             {isAlreadyRegistered ? (
-              <>
+              <div tw="flex flex-col">
                 <span>You have already completed</span>
                 <span>this action.</span>
-              </>
+              </div>
             ) : (
               <span>Thank you for registering!</span>
             )}
