@@ -215,6 +215,7 @@ export async function POST(req: NextRequest): Promise<Response> {
     userId: '',
     sessionId: '',
     voterRegistrationState: '',
+    registrationType: '',
   }
   let interactorType: string = ''
   let cryptoAddress: string = ''
@@ -241,6 +242,7 @@ export async function POST(req: NextRequest): Promise<Response> {
       userId: string
       sessionId: string
       voterRegistrationState: string
+      registrationType: string
     }
   }
   if (message.interactor) {
@@ -307,12 +309,12 @@ export async function POST(req: NextRequest): Promise<Response> {
       if (doesUserActionAlreadyExists) {
         return new NextResponse(
           getFrameHtmlResponse({
-            ...frameData[9],
+            ...frameData[8],
             buttons: [
               {
-                ...frameData[9].buttons![0],
+                ...frameData[8].buttons![0],
                 target:
-                  frameData[9].buttons![0].target +
+                  frameData[8].buttons![0].target +
                   `?userId=${optInResult.userId}&sessionId=${optInResult.sessionId}`, // We pass in the user ID and session ID as query parameters to SWC website.
               },
             ],
@@ -320,8 +322,9 @@ export async function POST(req: NextRequest): Promise<Response> {
               userId: optInResult.userId,
               sessionId: optInResult.sessionId,
             },
+            postUrl: frameData[8].postUrl + `&alreadyRegistered=true`,
           }),
-        ) // "Already registered" final screen.
+        ) // "Already registered" final screen. TODO CHANGE
       }
 
       return new NextResponse(
@@ -358,17 +361,21 @@ export async function POST(req: NextRequest): Promise<Response> {
               state: {
                 userId: currentFrameState.userId,
                 sessionId: currentFrameState.sessionId,
+                registrationType: 'register',
               },
+              postUrl: frameData[3].postUrl + '&registrationType=register',
             }),
           ) // Register state screen.
         case 3:
           return new NextResponse(
             getFrameHtmlResponse({
-              ...frameData[5],
+              ...frameData[3],
               state: {
                 userId: currentFrameState.userId,
                 sessionId: currentFrameState.sessionId,
+                registrationType: 'checkRegistration',
               },
+              postUrl: frameData[3].postUrl + '&registrationType=checkRegistration',
             }),
           ) // Check registration screen.
       }
@@ -386,7 +393,11 @@ export async function POST(req: NextRequest): Promise<Response> {
             state: {
               userId: currentFrameState.userId,
               sessionId: currentFrameState.sessionId,
+              registrationType: currentFrameState.registrationType,
             },
+            postUrl:
+              frameData[frameIndex - 1].postUrl +
+              `&registrationType=${currentFrameState.registrationType}`,
           }),
         ) // Same screen.
       return new NextResponse(
@@ -400,7 +411,11 @@ export async function POST(req: NextRequest): Promise<Response> {
             userId: currentFrameState.userId,
             sessionId: currentFrameState.sessionId,
             voterRegistrationState: stateInput,
+            registrationType: currentFrameState.registrationType,
           },
+          postUrl:
+            frameData[frameIndex].postUrl +
+            `&registrationType=${currentFrameState.registrationType}`,
         }),
       ) // Registration screen with respective link.
     case 5: // Register screen.

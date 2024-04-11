@@ -11,9 +11,13 @@ export const runtime = 'edge'
 
 const logger = getLogger(`registerToVoteGetImage`)
 
+type REGISTRATION_TYPE = 'register' | 'checkRegistration'
+
 export async function GET(
   _request: NextRequest,
-  { params }: { params: { index: number; interactorType: string; walletAddress: string } },
+  {
+    params,
+  }: { params: { index: number; registrationType: REGISTRATION_TYPE; alreadyRegistered: boolean } },
 ) {
   logger.info('query parameters', params)
 
@@ -105,13 +109,23 @@ export async function GET(
       >
         <div tw="flex flex-row w-full p-15 items-center justify-center">
           <img alt="" height={200} src={shieldImage as any} width={200} />
-          <h2 tw="flex flex-col text-6xl font-bold tracking-tight text-left px-10">
-            <span>Register to vote</span>
-            <div tw="flex flex-col text-4xl text-gray-400 mt-4">
-              <span>Enter your state code below.</span>
-              <span>(CA, NY, etc.)</span>
-            </div>
-          </h2>
+          {params.registrationType === 'checkRegistration' ? (
+            <h2 tw="flex flex-col text-6xl font-bold tracking-tight text-left px-10">
+              <span>Check your registration status</span>
+              <div tw="flex flex-col text-4xl text-gray-400 mt-4">
+                <span>Enter your state code below.</span>
+                <span>(CA, NY, etc.)</span>
+              </div>
+            </h2>
+          ) : (
+            <h2 tw="flex flex-col text-7xl font-bold tracking-tight text-left px-10">
+              <span>Register to vote</span>
+              <div tw="flex flex-col text-4xl text-gray-400 mt-4">
+                <span>Enter your state code below.</span>
+                <span>(CA, NY, etc.)</span>
+              </div>
+            </h2>
+          )}
         </div>
       </div>
     </div>,
@@ -122,13 +136,23 @@ export async function GET(
       >
         <div tw="flex flex-row w-full p-15 items-center justify-center">
           <img alt="" height={200} src={shieldImage as any} width={200} />
-          <h2 tw="flex flex-col text-6xl font-bold tracking-tight text-left px-10">
-            <span>Register to vote</span>
-            <div tw="flex flex-col text-4xl text-gray-400 mt-4">
-              <span>Click the link below to complete your</span>
-              <span>voter registration.</span>
-            </div>
-          </h2>
+          {params.registrationType === 'checkRegistration' ? (
+            <h2 tw="flex flex-col text-6xl font-bold tracking-tight text-left px-10">
+              <span>Check your registration status</span>
+              <div tw="flex flex-col text-4xl text-gray-400 mt-4">
+                <span>Click the link below to check your</span>
+                <span>voter registration status.</span>
+              </div>
+            </h2>
+          ) : (
+            <h2 tw="flex flex-col text-7xl font-bold tracking-tight text-left px-10">
+              <span>Register to vote</span>
+              <div tw="flex flex-col text-4xl text-gray-400 mt-4">
+                <span>Click the link below to complete your</span>
+                <span>voter registration.</span>
+              </div>
+            </h2>
+          )}
         </div>
       </div>
     </div>,
@@ -200,7 +224,14 @@ export async function GET(
             width={300}
           />
           <h2 tw="flex flex-col text-6xl font-bold tracking-tight text-left px-10">
-            <span>Thank you for registering!</span>
+            {params.alreadyRegistered ? (
+              <>
+                <span>You have already completed</span>
+                <span>this action.</span>
+              </>
+            ) : (
+              <span>Thank you for registering!</span>
+            )}
             <span tw="text-4xl">Continue the fight via the link below.</span>
           </h2>
         </div>
