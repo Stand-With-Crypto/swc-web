@@ -220,7 +220,7 @@ export async function GET(
             width={300}
           />
           <h2 tw="flex flex-col text-6xl font-bold tracking-tight text-left px-10">
-            <span>You have already completed.</span>
+            <span>You have already completed</span>
             <span>this action.</span>
             <span tw="text-4xl">Continue the fight via the link below.</span>
           </h2>
