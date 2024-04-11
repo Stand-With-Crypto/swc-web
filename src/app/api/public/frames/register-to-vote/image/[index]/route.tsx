@@ -11,11 +11,11 @@ export const runtime = 'edge'
 
 const logger = getLogger(`registerToVoteGetImage`)
 
-export async function GET(
-  _request: NextRequest,
-  { params }: { params: { index: number; registrationType: string; alreadyRegistered: boolean } },
-) {
-  logger.info('query parameters', params)
+export async function GET(_request: NextRequest, { params }: { params: { index: number } }) {
+  const alreadyRegistered = _request.nextUrl.searchParams.get('alreadyRegistered')
+  const registrationType = _request.nextUrl.searchParams.get('registrationType')
+
+  logger.info('query parameters', { alreadyRegistered, registrationType, index: params.index })
 
   const nftImage = await fetch(new URL('./nft.png', import.meta.url)).then(res => res.arrayBuffer())
 
@@ -105,7 +105,7 @@ export async function GET(
       >
         <div tw="flex flex-row w-full p-15 items-center justify-center">
           <img alt="" height={200} src={shieldImage as any} width={200} />
-          {params.registrationType === 'checkRegistration' ? (
+          {registrationType === 'checkRegistration' ? (
             <h2 tw="flex flex-col text-6xl font-bold tracking-tight text-left px-10">
               <span>Check your registration status</span>
               <div tw="flex flex-col text-4xl text-gray-400 mt-4">
@@ -132,7 +132,7 @@ export async function GET(
       >
         <div tw="flex flex-row w-full p-15 items-center justify-center">
           <img alt="" height={200} src={shieldImage as any} width={200} />
-          {params.registrationType === 'checkRegistration' ? (
+          {registrationType === 'checkRegistration' ? (
             <h2 tw="flex flex-col text-6xl font-bold tracking-tight text-left px-10">
               <span>Check your registration status</span>
               <div tw="flex flex-col text-4xl text-gray-400 mt-4">
@@ -220,7 +220,7 @@ export async function GET(
             width={300}
           />
           <h2 tw="flex flex-col text-6xl font-bold tracking-tight text-left px-10">
-            {params.alreadyRegistered ? (
+            {alreadyRegistered ? (
               <>
                 <span>You have already completed</span>
                 <span>this action.</span>
