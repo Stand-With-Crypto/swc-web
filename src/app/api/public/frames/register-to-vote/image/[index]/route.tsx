@@ -5,8 +5,7 @@ import { generateFrameImage } from '@/utils/server/generateFrameImage'
 import { getLogger } from '@/utils/shared/logger'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
-export const dynamic = 'error'
-export const revalidate = SECONDS_DURATION.HOUR
+export const revalidate = SECONDS_DURATION.MINUTE * 5
 export const runtime = 'edge'
 
 const logger = getLogger(`registerToVoteGetImage`)
