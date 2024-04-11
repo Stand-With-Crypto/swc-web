@@ -11,13 +11,9 @@ export const runtime = 'edge'
 
 const logger = getLogger(`registerToVoteGetImage`)
 
-type REGISTRATION_TYPE = 'register' | 'checkRegistration'
-
 export async function GET(
   _request: NextRequest,
-  {
-    params,
-  }: { params: { index: number; registrationType: REGISTRATION_TYPE; alreadyRegistered: boolean } },
+  { params }: { params: { index: number; registrationType: string; alreadyRegistered: boolean } },
 ) {
   logger.info('query parameters', params)
 

@@ -28,6 +28,7 @@ import {
   VerifiedSWCPartner,
   VerifiedSWCPartnerApiResponse,
 } from '@/utils/server/verifiedSWCPartner/constants'
+import { getLogger } from '@/utils/shared/logger'
 import { NEYNAR_API_KEY } from '@/utils/shared/neynarAPIKey'
 import { NFTSlug } from '@/utils/shared/nft'
 import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
@@ -202,6 +203,8 @@ const frameData = [
   },
 ] as FrameMetadataType[]
 
+const logger = getLogger('framesRegisterToVote')
+
 /**
  * Every time a Farcaster user interacts with the frame, the frame host sends a POST request to this endpoint.
  *
@@ -355,6 +358,7 @@ export async function POST(req: NextRequest): Promise<Response> {
             }),
           ) // Mint screen.
         case 2:
+          logger.info('registration postUrl', frameData[3].postUrl + '&registrationType=register')
           return new NextResponse(
             getFrameHtmlResponse({
               ...frameData[3],
@@ -367,6 +371,10 @@ export async function POST(req: NextRequest): Promise<Response> {
             }),
           ) // Register state screen.
         case 3:
+          logger.info(
+            'check registration postUrl',
+            frameData[3].postUrl + '&registrationType=checkRegistration',
+          )
           return new NextResponse(
             getFrameHtmlResponse({
               ...frameData[3],
