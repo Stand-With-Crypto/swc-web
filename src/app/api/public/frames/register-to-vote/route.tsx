@@ -307,18 +307,18 @@ export async function POST(req: NextRequest): Promise<Response> {
       if (doesUserActionAlreadyExists) {
         return new NextResponse(
           getFrameHtmlResponse({
-            ...frameData[10],
+            ...frameData[9],
             buttons: [
               {
                 ...frameData[frameIndex].buttons![0],
                 target:
                   frameData[frameIndex].buttons![0].target +
-                  `?userId=${currentFrameState.userId}&sessionId=${currentFrameState.sessionId}`, // We pass in the user ID and session ID as query parameters to SWC website.
+                  `?userId=${optInResult.userId}&sessionId=${optInResult.sessionId}`, // We pass in the user ID and session ID as query parameters to SWC website.
               },
             ],
             state: {
-              userId: currentFrameState.userId,
-              sessionId: currentFrameState.sessionId,
+              userId: optInResult.userId,
+              sessionId: optInResult.sessionId,
             },
           }),
         ) // "Already registered" final screen.
@@ -342,7 +342,7 @@ export async function POST(req: NextRequest): Promise<Response> {
               buttons: [
                 {
                   ...frameData[7].buttons![0],
-                  label: `Mint to your ${interactorType} wallet (${cryptoAddress})`,
+                  label: `Mint to your ${interactorType} wallet`,
                 },
               ],
               state: {
@@ -410,7 +410,7 @@ export async function POST(req: NextRequest): Promise<Response> {
           buttons: [
             {
               ...frameData[7].buttons![0],
-              label: `Mint to your ${interactorType} wallet (${cryptoAddress})`,
+              label: `Mint to your ${interactorType} wallet`,
             },
           ],
           state: {
@@ -457,7 +457,7 @@ export async function POST(req: NextRequest): Promise<Response> {
           buttons: [
             {
               ...frameData[7].buttons![0],
-              label: `Mint to your ${interactorType} wallet (${cryptoAddress})`,
+              label: `Mint to your ${interactorType} wallet`,
             },
           ],
           state: {
@@ -544,12 +544,18 @@ async function upsertUserCryptoAddressAndCreateUserAction(
     },
   })
 
+  const user = await prismaClient.user.findFirstOrThrow({
+    where: { id: userId },
+    include: { primaryUserEmailAddress: true },
+  })
+
   const userAction = await prismaClient.userAction.create({
     data: {
       user: { connect: { id: userId } },
       actionType: UserActionType.VOTER_REGISTRATION,
       campaignName: UserActionVoterRegistrationCampaignName.DEFAULT,
       userCryptoAddress: { connect: { id: userCryptoAddress.id } },
+      userEmailAddress: { connect: { id: user?.primaryUserEmailAddress?.id } },
       userSession: { connect: { id: sessionId } },
       userActionVoterRegistration: {
         create: {
