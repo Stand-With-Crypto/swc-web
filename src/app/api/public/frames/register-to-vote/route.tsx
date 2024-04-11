@@ -310,9 +310,9 @@ export async function POST(req: NextRequest): Promise<Response> {
             ...frameData[9],
             buttons: [
               {
-                ...frameData[frameIndex].buttons![0],
+                ...frameData[9].buttons![0],
                 target:
-                  frameData[frameIndex].buttons![0].target +
+                  frameData[9].buttons![0].target +
                   `?userId=${optInResult.userId}&sessionId=${optInResult.sessionId}`, // We pass in the user ID and session ID as query parameters to SWC website.
               },
             ],
