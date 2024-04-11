@@ -69,9 +69,11 @@ export async function GET(_request: NextRequest, { params }: { params: { index: 
           </h2>
         </div>
         {shouldShowError ? (
-          <h2 tw="flex flex-col text-5xl text-red-500 font-bold tracking-tight text-left px-10">
-            <span>Invalid email - please try again.</span>
-          </h2>
+          <div tw="flex flex-col w-full p-15 items-center justify-center">
+            <h2 tw="flex flex-col text-5xl text-red-500 font-bold tracking-tight text-left px-10">
+              <span>Invalid email - please try again.</span>
+            </h2>
+          </div>
         ) : null}
       </div>
     </div>,
@@ -94,9 +96,11 @@ export async function GET(_request: NextRequest, { params }: { params: { index: 
           </h2>
         </div>
         {shouldShowError ? (
-          <h2 tw="flex flex-col text-5xl text-red-500 font-bold tracking-tight text-left px-10">
-            <span>Invalid phone number - please try again.</span>
-          </h2>
+          <div tw="flex flex-col w-full p-15 items-center justify-center">
+            <h2 tw="flex flex-col text-5xl text-red-500 font-bold tracking-tight text-left px-10">
+              <span>Invalid phone number - please try again.</span>
+            </h2>
+          </div>
         ) : null}
       </div>
     </div>,
@@ -139,9 +143,11 @@ export async function GET(_request: NextRequest, { params }: { params: { index: 
           )}
         </div>
         {shouldShowError ? (
-          <h2 tw="flex flex-col text-5xl text-red-500 font-bold tracking-tight text-left px-10">
-            <span>Invalid state code - please try again.</span>
-          </h2>
+          <div tw="flex flex-col w-full p-15 items-center justify-center">
+            <h2 tw="flex flex-col text-5xl text-red-500 font-bold tracking-tight text-left px-10">
+              <span>Invalid state code - please try again.</span>
+            </h2>
+          </div>
         ) : null}
       </div>
     </div>,
