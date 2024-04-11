@@ -66,13 +66,13 @@ export async function GET(_request: NextRequest, { params }: { params: { index: 
             <div tw="flex flex-col text-3xl text-gray-400 mt-2">
               <span>Personal information subject to Privacy Policy.</span>
             </div>
-            {shouldShowError ? (
-              <div tw="flex flex-col text-5xl text-red-500 mt-2">
-                <span>Invalid email - please try again.</span>
-              </div>
-            ) : null}
           </h2>
         </div>
+        {shouldShowError ? (
+          <h2 tw="flex flex-col text-5xl text-red-500 font-bold tracking-tight text-left px-10">
+            <span>Invalid email - please try again.</span>
+          </h2>
+        ) : null}
       </div>
     </div>,
     <div key="image2" tw="flex flex-col w-full h-full items-center justify-center bg-white">
@@ -91,13 +91,13 @@ export async function GET(_request: NextRequest, { params }: { params: { index: 
             <div tw="flex flex-col text-3xl text-gray-400 mt-2">
               <span>Personal information subject to Privacy Policy.</span>
             </div>
-            {shouldShowError ? (
-              <div tw="flex flex-col text-5xl text-red-500 mt-2">
-                <span>Invalid phone number - please try again.</span>
-              </div>
-            ) : null}
           </h2>
         </div>
+        {shouldShowError ? (
+          <h2 tw="flex flex-col text-5xl text-red-500 font-bold tracking-tight text-left px-10">
+            <span>Invalid phone number - please try again.</span>
+          </h2>
+        ) : null}
       </div>
     </div>,
     <div key="image3" tw="flex flex-col w-full h-full items-center justify-center bg-white">
@@ -138,11 +138,11 @@ export async function GET(_request: NextRequest, { params }: { params: { index: 
             </h2>
           )}
         </div>
-        {shouldShowError && (
-          <div tw="flex flex-col text-5xl text-red-500 mt-2">
+        {shouldShowError ? (
+          <h2 tw="flex flex-col text-5xl text-red-500 font-bold tracking-tight text-left px-10">
             <span>Invalid state code - please try again.</span>
-          </div>
-        )}
+          </h2>
+        ) : null}
       </div>
     </div>,
     <div key="image5" tw="flex flex-col w-full h-full items-center justify-center bg-white">
@@ -188,6 +188,7 @@ export async function GET(_request: NextRequest, { params }: { params: { index: 
           <h2 tw="flex flex-col text-7xl font-bold tracking-tight text-left px-10">
             <span>Mint your NFT</span>
             <span tw="text-[#9e62ff] text-6xl">"I'm a Voter" by pplpleasr</span>
+            <span tw="text-gray-400 text-4xl ">You will need Base ETH to mint.</span>
           </h2>
         </div>
       </div>
