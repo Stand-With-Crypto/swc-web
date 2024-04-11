@@ -1,4 +1,5 @@
 import {
+  FrameImageMetadata,
   FrameMetadataType,
   FrameRequest,
   getFrameHtmlResponse,
@@ -358,7 +359,10 @@ export async function POST(req: NextRequest): Promise<Response> {
             }),
           ) // Mint screen.
         case 2:
-          logger.info('registration postUrl', frameData[3].postUrl + '&registrationType=register')
+          logger.info(
+            'registration image URL',
+            (frameData[3].image as FrameImageMetadata).src + '?registrationType=register',
+          )
           return new NextResponse(
             getFrameHtmlResponse({
               ...frameData[3],
@@ -367,13 +371,15 @@ export async function POST(req: NextRequest): Promise<Response> {
                 sessionId: currentFrameState.sessionId,
                 registrationType: 'register',
               },
-              postUrl: frameData[3].postUrl + '&registrationType=register',
+              image: {
+                src: (frameData[3].image as FrameImageMetadata).src + '?registrationType=register',
+              },
             }),
           ) // Register state screen.
         case 3:
           logger.info(
             'check registration postUrl',
-            frameData[3].postUrl + '&registrationType=checkRegistration',
+            (frameData[3].image as FrameImageMetadata).src + '?registrationType=checkRegistration',
           )
           return new NextResponse(
             getFrameHtmlResponse({
@@ -383,7 +389,11 @@ export async function POST(req: NextRequest): Promise<Response> {
                 sessionId: currentFrameState.sessionId,
                 registrationType: 'checkRegistration',
               },
-              postUrl: frameData[3].postUrl + '&registrationType=checkRegistration',
+              image: {
+                src:
+                  (frameData[3].image as FrameImageMetadata).src +
+                  '?registrationType=checkRegistration',
+              },
             }),
           ) // Check registration screen.
       }
@@ -403,9 +413,11 @@ export async function POST(req: NextRequest): Promise<Response> {
               sessionId: currentFrameState.sessionId,
               registrationType: currentFrameState.registrationType,
             },
-            postUrl:
-              frameData[frameIndex - 1].postUrl +
-              `&registrationType=${currentFrameState.registrationType}`,
+            image: {
+              src:
+                (frameData[frameIndex - 1].image as FrameImageMetadata).src +
+                `?registrationType=${currentFrameState.registrationType}`,
+            },
           }),
         ) // Same screen.
       return new NextResponse(
@@ -421,9 +433,11 @@ export async function POST(req: NextRequest): Promise<Response> {
             voterRegistrationState: stateInput,
             registrationType: currentFrameState.registrationType,
           },
-          postUrl:
-            frameData[frameIndex].postUrl +
-            `&registrationType=${currentFrameState.registrationType}`,
+          image: {
+            src:
+              (frameData[frameIndex].image as FrameImageMetadata).src +
+              `?registrationType=${currentFrameState.registrationType}`,
+          },
         }),
       ) // Registration screen with respective link.
     case 5: // Register screen.
