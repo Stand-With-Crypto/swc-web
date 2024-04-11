@@ -11,10 +11,16 @@ export const runtime = 'edge'
 const logger = getLogger(`registerToVoteGetImage`)
 
 export async function GET(_request: NextRequest, { params }: { params: { index: number } }) {
-  const alreadyRegistered = _request.nextUrl.searchParams.get('alreadyRegistered')
+  const isAlreadyRegistered = _request.nextUrl.searchParams.get('isAlreadyRegistered')
   const registrationType = _request.nextUrl.searchParams.get('registrationType')
+  const shouldShowError = _request.nextUrl.searchParams.get('shouldShowError')
 
-  logger.info('query parameters', { alreadyRegistered, registrationType, index: params.index })
+  logger.info('query parameters', {
+    isAlreadyRegistered,
+    registrationType,
+    shouldShowError,
+    index: params.index,
+  })
 
   const nftImage = await fetch(new URL('./nft.png', import.meta.url)).then(res => res.arrayBuffer())
 
@@ -62,6 +68,11 @@ export async function GET(_request: NextRequest, { params }: { params: { index: 
             </div>
           </h2>
         </div>
+        {shouldShowError && (
+          <div tw="flex flex-col text-5xl text-red-500 mt-2">
+            <span>Invalid email - please try again.</span>
+          </div>
+        )}
       </div>
     </div>,
     <div key="image2" tw="flex flex-col w-full h-full items-center justify-center bg-white">
@@ -82,6 +93,11 @@ export async function GET(_request: NextRequest, { params }: { params: { index: 
             </div>
           </h2>
         </div>
+        {shouldShowError && (
+          <div tw="flex flex-col text-5xl text-red-500 mt-2">
+            <span>Invalid phone number - please try again.</span>
+          </div>
+        )}
       </div>
     </div>,
     <div key="image3" tw="flex flex-col w-full h-full items-center justify-center bg-white">
@@ -122,6 +138,11 @@ export async function GET(_request: NextRequest, { params }: { params: { index: 
             </h2>
           )}
         </div>
+        {shouldShowError && (
+          <div tw="flex flex-col text-5xl text-red-500 mt-2">
+            <span>Invalid state code - please try again.</span>
+          </div>
+        )}
       </div>
     </div>,
     <div key="image5" tw="flex flex-col w-full h-full items-center justify-center bg-white">
@@ -157,40 +178,6 @@ export async function GET(_request: NextRequest, { params }: { params: { index: 
         tw="flex w-full h-full text-white"
       >
         <div tw="flex flex-row w-full p-15 items-center justify-center">
-          <img alt="" height={200} src={shieldImage as any} width={200} />
-          <h2 tw="flex flex-col text-6xl font-bold tracking-tight text-left px-10">
-            <span>Check your registration status</span>
-            <div tw="flex flex-col text-4xl text-gray-400 mt-4">
-              <span>Enter your state code below.</span>
-              <span>(CA, NY, etc.)</span>
-            </div>
-          </h2>
-        </div>
-      </div>
-    </div>,
-    <div key="image7" tw="flex flex-col w-full h-full items-center justify-center bg-white">
-      <div
-        style={{ background: 'linear-gradient(180deg, #130032 0%, #000 100%)' }}
-        tw="flex w-full h-full text-white"
-      >
-        <div tw="flex flex-row w-full p-15 items-center justify-center">
-          <img alt="" height={200} src={shieldImage as any} width={200} />
-          <h2 tw="flex flex-col text-6xl font-bold tracking-tight text-left px-10">
-            <span>Check your registration status</span>
-            <div tw="flex flex-col text-4xl text-gray-400 mt-4">
-              <span>Click the link below to check your</span>
-              <span>voter registration status.</span>
-            </div>
-          </h2>
-        </div>
-      </div>
-    </div>,
-    <div key="image8" tw="flex flex-col w-full h-full items-center justify-center bg-white">
-      <div
-        style={{ background: 'linear-gradient(180deg, #130032 0%, #000 100%)' }}
-        tw="flex w-full h-full text-white"
-      >
-        <div tw="flex flex-row w-full p-15 items-center justify-center">
           <img
             alt=""
             height={300}
@@ -205,7 +192,7 @@ export async function GET(_request: NextRequest, { params }: { params: { index: 
         </div>
       </div>
     </div>,
-    <div key="image9" tw="flex flex-col w-full h-full items-center justify-center bg-white">
+    <div key="image7" tw="flex flex-col w-full h-full items-center justify-center bg-white">
       <div
         style={{ background: 'linear-gradient(180deg, #130032 0%, #000 100%)' }}
         tw="flex w-full h-full text-white"
@@ -219,7 +206,7 @@ export async function GET(_request: NextRequest, { params }: { params: { index: 
             width={300}
           />
           <h2 tw="flex flex-col text-6xl font-bold tracking-tight text-left px-10">
-            {alreadyRegistered ? (
+            {isAlreadyRegistered ? (
               <>
                 <span>You have already completed</span>
                 <span>this action.</span>
@@ -227,27 +214,6 @@ export async function GET(_request: NextRequest, { params }: { params: { index: 
             ) : (
               <span>Thank you for registering!</span>
             )}
-            <span tw="text-4xl">Continue the fight via the link below.</span>
-          </h2>
-        </div>
-      </div>
-    </div>,
-    <div key="image10" tw="flex flex-col w-full h-full items-center justify-center bg-white">
-      <div
-        style={{ background: 'linear-gradient(180deg, #130032 0%, #000 100%)' }}
-        tw="flex w-full h-full text-white"
-      >
-        <div tw="flex flex-row w-full p-15 items-center justify-center">
-          <img
-            alt=""
-            height={300}
-            src={nftImage as any}
-            style={{ borderRadius: '50%' }}
-            width={300}
-          />
-          <h2 tw="flex flex-col text-6xl font-bold tracking-tight text-left px-10">
-            <span>You have already completed</span>
-            <span>this action.</span>
             <span tw="text-4xl">Continue the fight via the link below.</span>
           </h2>
         </div>
