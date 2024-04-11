@@ -31,6 +31,7 @@ export function formatStateSpecificDTSIPerson<P extends PersonFields>(
   })!
   return {
     ...rest,
+    roles,
     currentStateSpecificRole,
     runningForStateSpecificRole,
   }

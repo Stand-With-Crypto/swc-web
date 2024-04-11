@@ -30,7 +30,7 @@ export const getDTSIFormattedShortPersonRole = (
     return role.title
   }
   return gracefullyError({
-    msg: `getDTSIFormattedPersonRole returned no role for ${safeStringify(role)}`,
+    msg: `getDTSIFormattedShortPersonRole returned no role for ${safeStringify(role)}`,
     fallback: role.title,
   })
 }

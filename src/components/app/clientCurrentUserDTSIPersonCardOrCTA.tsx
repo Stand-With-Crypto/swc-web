@@ -83,6 +83,7 @@ function _ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: SupportedLo
         {people.map(person => (
           <div
             className="mx-auto flex max-w-2xl flex-col justify-between gap-4 rounded-3xl bg-gray-100 p-5 text-left sm:flex-row sm:items-center sm:gap-10"
+            data-test-id="dtsi-person-associated-with-address"
             key={person.id}
           >
             <div className="flex flex-row gap-4 text-sm sm:text-base lg:items-center">
