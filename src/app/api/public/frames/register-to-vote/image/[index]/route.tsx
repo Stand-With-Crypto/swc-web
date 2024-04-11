@@ -66,15 +66,13 @@ export async function GET(_request: NextRequest, { params }: { params: { index: 
             <div tw="flex flex-col text-3xl text-gray-400 mt-2">
               <span>Personal information subject to Privacy Policy.</span>
             </div>
+            {shouldShowError ? (
+              <div tw="flex flex-col text-5xl text-red-500 mt-2">
+                <span>Invalid email - please try again.</span>
+              </div>
+            ) : null}
           </h2>
         </div>
-        {shouldShowError ? (
-          <div tw="flex flex-col w-full p-15 items-center justify-center">
-            <h2 tw="flex flex-col text-5xl text-red-500 font-bold tracking-tight text-left px-10">
-              <span>Invalid email - please try again.</span>
-            </h2>
-          </div>
-        ) : null}
       </div>
     </div>,
     <div key="image2" tw="flex flex-col w-full h-full items-center justify-center bg-white">
@@ -93,15 +91,13 @@ export async function GET(_request: NextRequest, { params }: { params: { index: 
             <div tw="flex flex-col text-3xl text-gray-400 mt-2">
               <span>Personal information subject to Privacy Policy.</span>
             </div>
+            {shouldShowError ? (
+              <div tw="flex flex-col text-5xl text-red-500 mt-2">
+                <span>Invalid phone number - please try again.</span>
+              </div>
+            ) : null}
           </h2>
         </div>
-        {shouldShowError ? (
-          <div tw="flex flex-col w-full p-15 items-center justify-center">
-            <h2 tw="flex flex-col text-5xl text-red-500 font-bold tracking-tight text-left px-10">
-              <span>Invalid phone number - please try again.</span>
-            </h2>
-          </div>
-        ) : null}
       </div>
     </div>,
     <div key="image3" tw="flex flex-col w-full h-full items-center justify-center bg-white">
@@ -124,31 +120,23 @@ export async function GET(_request: NextRequest, { params }: { params: { index: 
       >
         <div tw="flex flex-row w-full p-15 items-center justify-center">
           <img alt="" height={200} src={shieldImage as any} width={200} />
-          {registrationType === 'checkRegistration' ? (
-            <h2 tw="flex flex-col text-6xl font-bold tracking-tight text-left px-10">
+          <h2 tw="flex flex-col text-7xl font-bold tracking-tight text-left px-10">
+            {registrationType === 'checkRegistration' ? (
               <span>Check your registration status</span>
-              <div tw="flex flex-col text-4xl text-gray-400 mt-4">
-                <span>Enter your state code below.</span>
-                <span>(CA, NY, etc.)</span>
-              </div>
-            </h2>
-          ) : (
-            <h2 tw="flex flex-col text-7xl font-bold tracking-tight text-left px-10">
+            ) : (
               <span>Register to vote</span>
-              <div tw="flex flex-col text-4xl text-gray-400 mt-4">
-                <span>Enter your state code below.</span>
-                <span>(CA, NY, etc.)</span>
+            )}
+            <div tw="flex flex-col text-4xl text-gray-400 mt-4">
+              <span>Enter your state code below.</span>
+              <span>(CA, NY, etc.)</span>
+            </div>
+            {shouldShowError ? (
+              <div tw="flex flex-col text-5xl text-red-500 mt-2">
+                <span>Invalid state code - please try again.</span>
               </div>
-            </h2>
-          )}
+            ) : null}
+          </h2>
         </div>
-        {shouldShowError ? (
-          <div tw="flex flex-col w-full p-15 items-center justify-center">
-            <h2 tw="flex flex-col text-5xl text-red-500 font-bold tracking-tight text-left px-10">
-              <span>Invalid state code - please try again.</span>
-            </h2>
-          </div>
-        ) : null}
       </div>
     </div>,
     <div key="image5" tw="flex flex-col w-full h-full items-center justify-center bg-white">
@@ -158,23 +146,26 @@ export async function GET(_request: NextRequest, { params }: { params: { index: 
       >
         <div tw="flex flex-row w-full p-15 items-center justify-center">
           <img alt="" height={200} src={shieldImage as any} width={200} />
-          {registrationType === 'checkRegistration' ? (
-            <h2 tw="flex flex-col text-6xl font-bold tracking-tight text-left px-10">
+          <h2 tw="flex flex-col text-6xl font-bold tracking-tight text-left px-10">
+            {registrationType === 'checkRegistration' ? (
               <span>Check your registration status</span>
-              <div tw="flex flex-col text-4xl text-gray-400 mt-4">
-                <span>Click the link below to check your</span>
-                <span>voter registration status.</span>
-              </div>
-            </h2>
-          ) : (
-            <h2 tw="flex flex-col text-7xl font-bold tracking-tight text-left px-10">
+            ) : (
               <span>Register to vote</span>
-              <div tw="flex flex-col text-4xl text-gray-400 mt-4">
-                <span>Click the link below to complete your</span>
-                <span>voter registration.</span>
-              </div>
-            </h2>
-          )}
+            )}
+            <div tw="flex flex-col text-4xl text-gray-400 mt-4">
+              {registrationType === 'checkRegistration' ? (
+                <>
+                  <span>Click the link below to check your</span>
+                  <span>voter registration status.</span>
+                </>
+              ) : (
+                <>
+                  <span>Click the link below to complete</span>
+                  <span>your voter registration.</span>
+                </>
+              )}
+            </div>
+          </h2>
         </div>
       </div>
     </div>,
