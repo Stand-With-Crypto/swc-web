@@ -384,8 +384,8 @@ export async function POST(req: NextRequest): Promise<Response> {
               target: link,
               label:
                 currentFrameState.registrationType === 'checkRegistration'
-                  ? 'Register to vote'
-                  : 'Check registration status',
+                  ? 'Check registration status'
+                  : 'Register to vote',
             },
             frameData[frameIndex].buttons![1],
           ],
