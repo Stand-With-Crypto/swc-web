@@ -14,21 +14,18 @@ import {
   UserActionType,
 } from '@prisma/client'
 import { NextRequest, NextResponse } from 'next/server'
-import { SafeParseReturnType } from 'zod'
+import { number, SafeParseReturnType, string } from 'zod'
 
 import { REGISTRATION_URLS_BY_STATE } from '@/components/app/userActionFormVoterRegistration/constants'
 import {
-  verifiedSWCPartnersUserActionOptIn,
-  VerifiedSWCPartnersUserActionOptInResult,
-} from '@/data/verifiedSWCPartners/userActionOptIn'
+  ExternalUserActionOptInResponse,
+  ExternalUserActionOptInResult,
+  handleExternalUserActionOptIn,
+} from '@/utils/server/externalOptIn/handleExternalUserActionOptIn'
 import { I_AM_A_VOTER_NFT_CONTRACT_ADDRESS } from '@/utils/server/nft/constants'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getServerAnalytics } from '@/utils/server/serverAnalytics'
 import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
-import {
-  VerifiedSWCPartner,
-  VerifiedSWCPartnerApiResponse,
-} from '@/utils/server/verifiedSWCPartner/constants'
 import { NEYNAR_API_KEY } from '@/utils/shared/neynarAPIKey'
 import { NFTSlug } from '@/utils/shared/nft'
 import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
@@ -37,7 +34,7 @@ import {
   UserActionOptInCampaignName,
   UserActionVoterRegistrationCampaignName,
 } from '@/utils/shared/userActionCampaigns'
-import { USStateCode } from '@/utils/shared/usStateUtils'
+import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 import { zodEmailAddress } from '@/validation/fields/zodEmailAddress'
 import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
 
@@ -45,120 +42,134 @@ export const dynamic = 'force-dynamic'
 
 const FRAME_QUERY_PARAMETER = 'frame'
 
-// An array of frame data used to render the interactive components of the frames.
-const frameData = [
-  {
-    input: {
-      text: 'Enter your email address',
-    },
-    buttons: [
-      {
-        label: `View Privacy Policy`,
-        action: 'link',
-        target: fullUrl('/privacy'),
-      },
-      {
-        label: `Next →`,
-      },
-    ],
-    image: {
-      src: fullUrl('/api/public/frames/register-to-vote/image/1'),
-    },
-    postUrl: fullUrl('/api/public/frames/register-to-vote?frame=1'),
+const zodFrameIndex = number().int().nonnegative()
+const zodButtonIndex = number().int().positive().optional()
+const zodStateCode = string().refine(
+  value => {
+    return Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP).includes(value.toUpperCase())
   },
   {
-    input: {
-      text: 'Enter your phone (XXX-XXX-XXXX)',
-    },
-    buttons: [
-      {
-        label: `View Privacy Policy`,
-        action: 'link',
-        target: fullUrl('/privacy'),
-      },
-      {
-        label: `Next →`,
-      },
-    ],
-    image: {
-      src: fullUrl('/api/public/frames/register-to-vote/image/2'),
-    },
-    postUrl: fullUrl('/api/public/frames/register-to-vote?frame=2'),
+    message: 'Invalid state code',
   },
-  {
-    buttons: [
-      {
-        label: 'Yes',
-      },
-      {
-        label: 'No',
-      },
-      {
-        label: `I'm not sure`,
-      },
-    ],
-    image: {
-      src: fullUrl('/api/public/frames/register-to-vote/image/3'),
-    },
-    postUrl: fullUrl('/api/public/frames/register-to-vote?frame=3'),
+)
+
+const frameEnterEmail = {
+  input: {
+    text: 'Enter your email address',
   },
-  {
-    input: {
-      text: 'Enter your state code (e.g. CA)',
+  buttons: [
+    {
+      label: `View Privacy Policy`,
+      action: 'link',
+      target: fullUrl('/privacy'),
     },
-    buttons: [
-      {
-        label: 'Next →',
-      },
-    ],
-    image: {
-      src: fullUrl('/api/public/frames/register-to-vote/image/4'),
+    {
+      label: `Next →`,
     },
-    postUrl: fullUrl('/api/public/frames/register-to-vote?frame=4'),
+  ],
+  image: {
+    src: fullUrl('/api/public/frames/register-to-vote/image/1'),
   },
-  {
-    buttons: [
-      {
-        label: 'Register to vote',
-        action: 'link',
-        target: 'https://www.usa.gov/register-to-vote',
-      },
-      {
-        label: 'Next →',
-      },
-    ],
-    image: {
-      src: fullUrl('/api/public/frames/register-to-vote/image/5'),
-    },
-    postUrl: fullUrl('/api/public/frames/register-to-vote?frame=5'),
+  postUrl: fullUrl('/api/public/frames/register-to-vote?frame=1'),
+} as FrameMetadataType
+
+const frameEnterPhone = {
+  input: {
+    text: 'Enter your phone (XXX-XXX-XXXX)',
   },
-  {
-    buttons: [
-      {
-        label: `Mint`,
-        action: 'tx',
-        target: fullUrl('/api/public/frames/register-to-vote/tx'),
-      },
-    ],
-    image: {
-      src: fullUrl('/api/public/frames/register-to-vote/image/6'),
+  buttons: [
+    {
+      label: `View Privacy Policy`,
+      action: 'link',
+      target: fullUrl('/privacy'),
     },
-    postUrl: fullUrl('/api/public/frames/register-to-vote?frame=6'),
-  },
-  {
-    buttons: [
-      {
-        label: 'Go to Stand With Crypto',
-        action: 'link',
-        target: fullUrl('/'),
-      },
-    ],
-    image: {
-      src: fullUrl('/api/public/frames/register-to-vote/image/7'),
+    {
+      label: `Next →`,
     },
-    postUrl: fullUrl('/api/public/frames/register-to-vote?frame=7'),
+  ],
+  image: {
+    src: fullUrl('/api/public/frames/register-to-vote/image/2'),
   },
-] as FrameMetadataType[]
+  postUrl: fullUrl('/api/public/frames/register-to-vote?frame=2'),
+} as FrameMetadataType
+
+const frameAreYouRegisteredToVote = {
+  buttons: [
+    {
+      label: 'Yes',
+    },
+    {
+      label: 'No',
+    },
+    {
+      label: `I'm not sure`,
+    },
+  ],
+  image: {
+    src: fullUrl('/api/public/frames/register-to-vote/image/3'),
+  },
+  postUrl: fullUrl('/api/public/frames/register-to-vote?frame=3'),
+} as FrameMetadataType
+
+const frameEnterStateCode = {
+  input: {
+    text: 'Enter your state code (e.g. CA)',
+  },
+  buttons: [
+    {
+      label: 'Next →',
+    },
+  ],
+  image: {
+    src: fullUrl('/api/public/frames/register-to-vote/image/4'),
+  },
+  postUrl: fullUrl('/api/public/frames/register-to-vote?frame=4'),
+} as FrameMetadataType
+
+const frameRegisterToVote = {
+  buttons: [
+    {
+      label: 'Register to vote',
+      action: 'link',
+      target: 'https://www.usa.gov/register-to-vote', // This link gets overwritten when the user inputs their state code.
+    },
+    {
+      label: 'Next →',
+    },
+  ],
+  image: {
+    src: fullUrl('/api/public/frames/register-to-vote/image/5'),
+  },
+  postUrl: fullUrl('/api/public/frames/register-to-vote?frame=5'),
+} as FrameMetadataType
+
+const frameMint = {
+  buttons: [
+    {
+      label: `Mint`,
+      action: 'tx',
+      target: fullUrl('/api/public/frames/register-to-vote/tx'),
+    },
+  ],
+  image: {
+    src: fullUrl('/api/public/frames/register-to-vote/image/6'),
+  },
+  postUrl: fullUrl('/api/public/frames/register-to-vote?frame=6'),
+} as FrameMetadataType
+
+const frameFinal = {
+  buttons: [
+    {
+      label: 'Go to Stand With Crypto',
+      action: 'link',
+      target: fullUrl('/'),
+    },
+  ],
+  image: {
+    src: fullUrl('/api/public/frames/register-to-vote/image/7'),
+  },
+  postUrl: fullUrl('/api/public/frames/register-to-vote?frame=7'),
+} as FrameMetadataType
 
 /**
  * Every time a Farcaster user interacts with the frame, the frame host sends a POST request to this endpoint.
@@ -177,16 +188,27 @@ export async function POST(req: NextRequest): Promise<Response> {
   }
   let interactorType: string = ''
   let cryptoAddress: string = ''
+  let link: string = ''
+  let doesUserActionAlreadyExists: boolean = false
   let zodEmailResult: SafeParseReturnType<string, string>
   let zodPhoneResult: SafeParseReturnType<string, string>
-  let link: string | undefined
-  let optInResult: VerifiedSWCPartnerApiResponse<VerifiedSWCPartnersUserActionOptInResult>
-  let doesUserActionAlreadyExists: boolean
+  let zodStateCodeResult: SafeParseReturnType<string, string>
+  let optInResult: ExternalUserActionOptInResponse<ExternalUserActionOptInResult>
+
+  const body: FrameRequest = (await req.json()) as FrameRequest
 
   const url = new URL(req.url)
   const queryParams = url.searchParams
-  const frameIndex = Number(queryParams.get(FRAME_QUERY_PARAMETER))
-  const body: FrameRequest = (await req.json()) as FrameRequest
+
+  const frameIndexResult = zodFrameIndex.safeParse(Number(queryParams.get(FRAME_QUERY_PARAMETER)))
+  if (!frameIndexResult.success)
+    return NextResponse.json({ error: 'invalid frame index' }, { status: 400 })
+  const frameIndex = frameIndexResult.data
+
+  const buttonIndexResult = zodButtonIndex.safeParse(body.untrustedData?.buttonIndex)
+  if (!buttonIndexResult.success)
+    return NextResponse.json({ error: 'invalid button index' }, { status: 400 })
+  const buttonIndex = buttonIndexResult.data
 
   // NOTES:
   // - Frame state data does not exist on localhost.
@@ -211,30 +233,25 @@ export async function POST(req: NextRequest): Promise<Response> {
     cryptoAddress = message.interactor.verified_accounts[0] ?? message.interactor.custody_address
   }
 
-  const buttonIndex = body.untrustedData?.buttonIndex
-  const stateInput = body.untrustedData?.inputText?.trim().toUpperCase() as USStateCode
-
   // We return the next frame based on the `frame` query parameter.
   switch (frameIndex) {
     case 0: // Intro screen.
-      return new NextResponse(getFrameHtmlResponse(frameData[frameIndex])) // Email input screen.
+      return new NextResponse(getFrameHtmlResponse(frameEnterEmail)) // Email input screen.
     case 1: // Email input screen.
       zodEmailResult = zodEmailAddress.safeParse(body.untrustedData?.inputText)
       if (!zodEmailResult.success) {
         return new NextResponse(
           getFrameHtmlResponse({
-            ...frameData[frameIndex - 1],
+            ...frameEnterEmail,
             image: {
-              src:
-                (frameData[frameIndex - 1].image as FrameImageMetadata).src +
-                '?shouldShowError=true',
+              src: (frameEnterEmail.image as FrameImageMetadata).src + '?shouldShowError=true',
             },
           }),
-        )
-      } // Same screen.
+        ) // Same screen.
+      }
       return new NextResponse(
         getFrameHtmlResponse({
-          ...frameData[frameIndex],
+          ...frameEnterPhone,
           state: { emailAddress: zodEmailResult.data },
         }),
       ) // Phone number input screen.
@@ -243,23 +260,18 @@ export async function POST(req: NextRequest): Promise<Response> {
       if (!zodPhoneResult.success) {
         return new NextResponse(
           getFrameHtmlResponse({
-            ...frameData[frameIndex - 1],
+            // Same screen.
+            ...frameEnterPhone,
             state: { emailAddress: currentFrameState.emailAddress },
             image: {
-              src:
-                (frameData[frameIndex - 1].image as FrameImageMetadata).src +
-                '?shouldShowError=true',
+              src: (frameEnterPhone.image as FrameImageMetadata).src + '?shouldShowError=true',
             },
           }),
-        )
-      } // Same screen.
+        ) // Same screen.
+      }
 
-      // To keep the flow generally simple and to reuse analytics, we are using the SWC partners opt-in flow to upsert a user and opt them in.
-      // We do not use the crypto address here because:
-      // (1) it is technically not required by the opt-in flow
-      // (2) down below, we eventually store the crypto address as unverified, so
-      //     if the user eventually logs in with their verified address, the merge logic will handle that.
-      optInResult = await verifiedSWCPartnersUserActionOptIn({
+      // We create the user action for the user to opt-in to the voter registration campaign.
+      optInResult = await handleExternalUserActionOptIn({
         emailAddress: currentFrameState.emailAddress,
         optInType: UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER,
         campaignName: UserActionOptInCampaignName.DEFAULT,
@@ -267,20 +279,26 @@ export async function POST(req: NextRequest): Promise<Response> {
         phoneNumber: normalizePhoneNumber(zodPhoneResult.data),
         hasOptedInToReceiveSMSFromSWC: true,
         hasOptedInToEmails: true,
-        partner: VerifiedSWCPartner.FARCASTER_FRAMES,
+        acquisitionOverride: {
+          source: 'farcaster-frames',
+          medium: 'frames-register-to-vote',
+        },
       })
 
       // If the email-address user has already completed the action, then then we skip to the final screen.
-      doesUserActionAlreadyExists = await checkForExistingUserAction(optInResult.userId)
+      doesUserActionAlreadyExists = await checkCompleteActionByCryptoAddress(
+        optInResult.userId,
+        cryptoAddress,
+      )
       if (doesUserActionAlreadyExists) {
         return new NextResponse(
           getFrameHtmlResponse({
-            ...frameData[6],
+            ...frameFinal,
             buttons: [
               {
-                ...frameData[6].buttons![0],
+                ...frameFinal.buttons![0],
                 target:
-                  frameData[6].buttons![0].target +
+                  frameFinal.buttons![0].target +
                   `?userId=${optInResult.userId}&sessionId=${optInResult.sessionId}`, // We pass in the user ID and session ID as query parameters to SWC website.
               },
             ],
@@ -289,7 +307,7 @@ export async function POST(req: NextRequest): Promise<Response> {
               sessionId: optInResult.sessionId,
             },
             image: {
-              src: (frameData[6].image as FrameImageMetadata).src + '?isAlreadyRegistered=true',
+              src: (frameFinal.image as FrameImageMetadata).src + '?hasAlreadyCompletedAction=true',
             },
           }),
         ) // Final screen.
@@ -297,7 +315,7 @@ export async function POST(req: NextRequest): Promise<Response> {
 
       return new NextResponse(
         getFrameHtmlResponse({
-          ...frameData[frameIndex],
+          ...frameAreYouRegisteredToVote,
           state: {
             userId: optInResult.userId,
             sessionId: optInResult.sessionId,
@@ -309,10 +327,10 @@ export async function POST(req: NextRequest): Promise<Response> {
         case 1:
           return new NextResponse(
             getFrameHtmlResponse({
-              ...frameData[5],
+              ...frameMint,
               buttons: [
                 {
-                  ...frameData[5].buttons![0],
+                  ...frameMint.buttons![0],
                   label: `Mint to your ${interactorType} wallet`,
                 },
               ],
@@ -325,21 +343,23 @@ export async function POST(req: NextRequest): Promise<Response> {
         case 2:
           return new NextResponse(
             getFrameHtmlResponse({
-              ...frameData[3],
+              ...frameEnterStateCode,
               state: {
                 userId: currentFrameState.userId,
                 sessionId: currentFrameState.sessionId,
                 registrationType: 'register',
               },
               image: {
-                src: (frameData[3].image as FrameImageMetadata).src + '?registrationType=register',
+                src:
+                  (frameEnterStateCode.image as FrameImageMetadata).src +
+                  '?registrationType=register',
               },
             }),
           ) // Register state screen.
         case 3:
           return new NextResponse(
             getFrameHtmlResponse({
-              ...frameData[3],
+              ...frameEnterStateCode,
               state: {
                 userId: currentFrameState.userId,
                 sessionId: currentFrameState.sessionId,
@@ -347,7 +367,7 @@ export async function POST(req: NextRequest): Promise<Response> {
               },
               image: {
                 src:
-                  (frameData[3].image as FrameImageMetadata).src +
+                  (frameEnterStateCode.image as FrameImageMetadata).src +
                   '?registrationType=checkRegistration',
               },
             }),
@@ -355,14 +375,13 @@ export async function POST(req: NextRequest): Promise<Response> {
       }
       break
     case 4: // Register OR check registration state screen.
-      link =
-        stateInput && REGISTRATION_URLS_BY_STATE[stateInput]
-          ? REGISTRATION_URLS_BY_STATE[stateInput]['registerUrl']
-          : undefined
-      if (!link)
+      zodStateCodeResult = zodStateCode.safeParse(
+        body.untrustedData?.inputText?.trim().toUpperCase(),
+      )
+      if (!zodStateCodeResult.success) {
         return new NextResponse(
           getFrameHtmlResponse({
-            ...frameData[frameIndex - 1],
+            ...frameEnterStateCode,
             state: {
               userId: currentFrameState.userId,
               sessionId: currentFrameState.sessionId,
@@ -370,45 +389,47 @@ export async function POST(req: NextRequest): Promise<Response> {
             },
             image: {
               src:
-                (frameData[frameIndex - 1].image as FrameImageMetadata).src +
+                (frameEnterStateCode.image as FrameImageMetadata).src +
                 `?registrationType=${currentFrameState.registrationType}&shouldShowError=true`,
             },
           }),
         ) // Same screen.
+      }
+      link = REGISTRATION_URLS_BY_STATE[zodStateCodeResult.data as USStateCode]['registerUrl']
       return new NextResponse(
         getFrameHtmlResponse({
-          ...frameData[frameIndex],
+          ...frameRegisterToVote,
           buttons: [
             {
-              ...frameData[frameIndex].buttons![0],
+              ...frameRegisterToVote.buttons![0],
               target: link,
               label:
                 currentFrameState.registrationType === 'checkRegistration'
                   ? 'Check registration status'
                   : 'Register to vote',
             },
-            frameData[frameIndex].buttons![1],
+            frameRegisterToVote.buttons![1],
           ],
           state: {
             userId: currentFrameState.userId,
             sessionId: currentFrameState.sessionId,
-            voterRegistrationState: stateInput,
+            voterRegistrationState: zodStateCodeResult.data,
             registrationType: currentFrameState.registrationType,
           },
           image: {
             src:
-              (frameData[frameIndex].image as FrameImageMetadata).src +
+              (frameRegisterToVote.image as FrameImageMetadata).src +
               `?registrationType=${currentFrameState.registrationType}`,
           },
         }),
       ) // Registration OR check registration screen with respective link.
-    case 5: // Register screen.
+    case 5: // Register screen OR check registration screen.
       return new NextResponse(
         getFrameHtmlResponse({
-          ...frameData[frameIndex],
+          ...frameMint,
           buttons: [
             {
-              ...frameData[frameIndex].buttons![0],
+              ...frameMint.buttons![0],
               label: `Mint to your ${interactorType} wallet`,
             },
           ],
@@ -428,7 +449,7 @@ export async function POST(req: NextRequest): Promise<Response> {
       }
 
       // If the user successfully mints the NFT, then we upsert the crypto address in our database and create the respective user action.
-      await upsertUserCryptoAddressAndCreateUserAction(
+      await upsertCryptoAddressAndCreateAction(
         currentFrameState.userId,
         currentFrameState.sessionId,
         cryptoAddress,
@@ -438,12 +459,12 @@ export async function POST(req: NextRequest): Promise<Response> {
 
       return new NextResponse(
         getFrameHtmlResponse({
-          ...frameData[frameIndex],
+          ...frameFinal,
           buttons: [
             {
-              ...frameData[frameIndex].buttons![0],
+              ...frameFinal.buttons![0],
               target:
-                frameData[frameIndex].buttons![0].target +
+                frameFinal.buttons![0].target +
                 `?userId=${currentFrameState.userId}&sessionId=${currentFrameState.sessionId}`, // We pass in the user ID and session ID as query parameters to SWC website.
             },
           ],
@@ -456,30 +477,36 @@ export async function POST(req: NextRequest): Promise<Response> {
       ) // Final screen.
   }
 
-  return new NextResponse(
-    getFrameHtmlResponse({ ...frameData[frameIndex], state: currentFrameState }),
-  )
+  return NextResponse.json({ error: 'invalid frame index' }, { status: 400 })
 }
 
 /**
  * Helper function to check if the user has already completed the voter registration action.
- *
+ * Here, we also screen by the crypto addresses.
+ * Why?
+ * - Consider the case where a user has a SWC account with their email and has already completed
+ *   the action, but the email is not associated with their Farcaster wallet address.
+ * - In this case, we want to allow the user to mint to their Farcaster wallet address if they want.
  * @param userId
  * @returns
  */
-async function checkForExistingUserAction(userId: string) {
+async function checkCompleteActionByCryptoAddress(userId: string, cryptoAddress: string) {
   const existingAction = await prismaClient.userAction.findFirst({
     where: {
       actionType: UserActionType.VOTER_REGISTRATION,
       campaignName: UserActionVoterRegistrationCampaignName.DEFAULT,
       userId,
+      userCryptoAddress: {
+        cryptoAddress: cryptoAddress.toLowerCase(),
+        cryptoNetwork: SupportedUserCryptoNetwork.ETH,
+      },
     },
   })
   return !!existingAction
 }
 
 /**
- * Helper function to upsert the user's crypto address and create the user action.
+ * Helper function to create the user action.
  *
  * @param userId
  * @param sessionId
@@ -487,30 +514,21 @@ async function checkForExistingUserAction(userId: string) {
  * @param voterRegistrationStateCode
  * @param transactionHash
  */
-async function upsertUserCryptoAddressAndCreateUserAction(
+async function upsertCryptoAddressAndCreateAction(
   userId: string,
   sessionId: string,
   cryptoAddress: string,
   voterRegistrationStateCode: string,
   transactionHash: string,
 ) {
-  const userCryptoAddress = await prismaClient.userCryptoAddress.upsert({
+  // Crypto address should exist at this point via the `handleExternalUserActionOptIn` flow.
+  const userCryptoAddress = await prismaClient.userCryptoAddress.findFirstOrThrow({
     where: {
-      cryptoAddress_cryptoNetwork_userId: {
-        cryptoAddress: cryptoAddress.toLowerCase(),
-        cryptoNetwork: SupportedUserCryptoNetwork.ETH,
-        userId,
-      },
-    },
-    update: {},
-    create: {
       cryptoAddress: cryptoAddress.toLowerCase(),
       cryptoNetwork: SupportedUserCryptoNetwork.ETH,
-      user: { connect: { id: userId } },
-      hasBeenVerifiedViaAuth: false,
+      userId,
     },
   })
-
   const user = await prismaClient.user.findFirstOrThrow({
     where: { id: userId },
     include: { primaryUserEmailAddress: true },

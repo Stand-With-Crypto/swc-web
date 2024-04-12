@@ -7,10 +7,10 @@ import { SECONDS_DURATION } from '@/utils/shared/seconds'
 export const revalidate = SECONDS_DURATION.MINUTE * 5
 export const runtime = 'edge'
 
-export async function GET(_request: NextRequest, { params }: { params: { index: number } }) {
-  const isAlreadyRegistered = !!_request.nextUrl.searchParams.get('isAlreadyRegistered')
-  const registrationType = _request.nextUrl.searchParams.get('registrationType')
-  const shouldShowError = !!_request.nextUrl.searchParams.get('shouldShowError')
+export async function GET(request: NextRequest, { params }: { params: { index: number } }) {
+  const hasAlreadyCompletedAction = !!request.nextUrl.searchParams.get('hasAlreadyCompletedAction')
+  const registrationType = request.nextUrl.searchParams.get('registrationType')
+  const shouldShowError = !!request.nextUrl.searchParams.get('shouldShowError')
 
   const nftImage = await fetch(new URL('./nft.png', import.meta.url)).then(res => res.arrayBuffer())
 
@@ -192,7 +192,7 @@ export async function GET(_request: NextRequest, { params }: { params: { index: 
             width={300}
           />
           <h2 tw="flex flex-col text-6xl font-bold tracking-tight text-left px-10">
-            {isAlreadyRegistered ? (
+            {hasAlreadyCompletedAction ? (
               <div tw="flex flex-col">
                 <span>You have already completed</span>
                 <span>this action.</span>
