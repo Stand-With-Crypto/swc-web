@@ -44,6 +44,7 @@ const FRAME_QUERY_PARAMETER = 'frame'
 
 const zodFrameIndex = number().int().nonnegative()
 const zodButtonIndex = number().int().positive().optional()
+const zodTransactionHash = string().refine(str => str.length === 66 && str.startsWith('0x'))
 const zodStateCode = string().refine(
   value => {
     return Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP).includes(value.toUpperCase())
@@ -71,7 +72,7 @@ const frameEnterEmail = {
     src: fullUrl('/api/public/frames/register-to-vote/image/1'),
   },
   postUrl: fullUrl('/api/public/frames/register-to-vote?frame=1'),
-} as FrameMetadataType
+} satisfies FrameMetadataType
 
 const frameEnterPhone = {
   input: {
@@ -91,7 +92,7 @@ const frameEnterPhone = {
     src: fullUrl('/api/public/frames/register-to-vote/image/2'),
   },
   postUrl: fullUrl('/api/public/frames/register-to-vote?frame=2'),
-} as FrameMetadataType
+} satisfies FrameMetadataType
 
 const frameAreYouRegisteredToVote = {
   buttons: [
@@ -109,7 +110,7 @@ const frameAreYouRegisteredToVote = {
     src: fullUrl('/api/public/frames/register-to-vote/image/3'),
   },
   postUrl: fullUrl('/api/public/frames/register-to-vote?frame=3'),
-} as FrameMetadataType
+} satisfies FrameMetadataType
 
 const frameEnterStateCode = {
   input: {
@@ -124,7 +125,7 @@ const frameEnterStateCode = {
     src: fullUrl('/api/public/frames/register-to-vote/image/4'),
   },
   postUrl: fullUrl('/api/public/frames/register-to-vote?frame=4'),
-} as FrameMetadataType
+} satisfies FrameMetadataType
 
 const frameRegisterToVote = {
   buttons: [
@@ -141,7 +142,7 @@ const frameRegisterToVote = {
     src: fullUrl('/api/public/frames/register-to-vote/image/5'),
   },
   postUrl: fullUrl('/api/public/frames/register-to-vote?frame=5'),
-} as FrameMetadataType
+} satisfies FrameMetadataType
 
 const frameMint = {
   buttons: [
@@ -155,7 +156,7 @@ const frameMint = {
     src: fullUrl('/api/public/frames/register-to-vote/image/6'),
   },
   postUrl: fullUrl('/api/public/frames/register-to-vote?frame=6'),
-} as FrameMetadataType
+} satisfies FrameMetadataType
 
 const frameFinal = {
   buttons: [
@@ -169,7 +170,7 @@ const frameFinal = {
     src: fullUrl('/api/public/frames/register-to-vote/image/7'),
   },
   postUrl: fullUrl('/api/public/frames/register-to-vote?frame=7'),
-} as FrameMetadataType
+} satisfies FrameMetadataType
 
 /**
  * Every time a Farcaster user interacts with the frame, the frame host sends a POST request to this endpoint.
@@ -193,6 +194,7 @@ export async function POST(req: NextRequest): Promise<Response> {
   let zodEmailResult: SafeParseReturnType<string, string>
   let zodPhoneResult: SafeParseReturnType<string, string>
   let zodStateCodeResult: SafeParseReturnType<string, string>
+  let zodTransactionHashResult: SafeParseReturnType<string, string>
   let optInResult: ExternalUserActionOptInResponse<ExternalUserActionOptInResult>
 
   const body: FrameRequest = (await req.json()) as FrameRequest
@@ -283,6 +285,12 @@ export async function POST(req: NextRequest): Promise<Response> {
           source: 'farcaster-frames',
           medium: 'frames-register-to-vote',
         },
+        additionalAnalyticsProperties: {
+          'Interactor Type':
+            interactorType === 'verified'
+              ? 'Farcaster Verified Address'
+              : 'Farcaster Custody Address',
+        },
       })
 
       // If the email-address user has already completed the action, then then we skip to the final screen.
@@ -296,9 +304,9 @@ export async function POST(req: NextRequest): Promise<Response> {
             ...frameFinal,
             buttons: [
               {
-                ...frameFinal.buttons![0],
+                ...frameFinal.buttons[0],
                 target:
-                  frameFinal.buttons![0].target +
+                  frameFinal.buttons[0].target +
                   `?userId=${optInResult.userId}&sessionId=${optInResult.sessionId}`, // We pass in the user ID and session ID as query parameters to SWC website.
               },
             ],
@@ -330,7 +338,7 @@ export async function POST(req: NextRequest): Promise<Response> {
               ...frameMint,
               buttons: [
                 {
-                  ...frameMint.buttons![0],
+                  ...frameMint.buttons[0],
                   label: `Mint to your ${interactorType} wallet`,
                 },
               ],
@@ -401,14 +409,14 @@ export async function POST(req: NextRequest): Promise<Response> {
           ...frameRegisterToVote,
           buttons: [
             {
-              ...frameRegisterToVote.buttons![0],
+              ...frameRegisterToVote.buttons[0],
               target: link,
               label:
                 currentFrameState.registrationType === 'checkRegistration'
                   ? 'Check registration status'
                   : 'Register to vote',
             },
-            frameRegisterToVote.buttons![1],
+            frameRegisterToVote.buttons[1],
           ],
           state: {
             userId: currentFrameState.userId,
@@ -429,7 +437,7 @@ export async function POST(req: NextRequest): Promise<Response> {
           ...frameMint,
           buttons: [
             {
-              ...frameMint.buttons![0],
+              ...frameMint.buttons[0],
               label: `Mint to your ${interactorType} wallet`,
             },
           ],
@@ -447,12 +455,17 @@ export async function POST(req: NextRequest): Promise<Response> {
           { status: 400 },
         )
       }
+      zodTransactionHashResult = zodTransactionHash.safeParse(body.untrustedData?.transactionId)
+      if (!zodTransactionHashResult.success) {
+        return NextResponse.json({ error: 'invalid transaction hash' }, { status: 400 })
+      }
 
       // If the user successfully mints the NFT, then we upsert the crypto address in our database and create the respective user action.
       await upsertCryptoAddressAndCreateAction(
         currentFrameState.userId,
         currentFrameState.sessionId,
         cryptoAddress,
+        interactorType,
         currentFrameState.voterRegistrationState,
         body.untrustedData?.transactionId,
       )
@@ -462,9 +475,9 @@ export async function POST(req: NextRequest): Promise<Response> {
           ...frameFinal,
           buttons: [
             {
-              ...frameFinal.buttons![0],
+              ...frameFinal.buttons[0],
               target:
-                frameFinal.buttons![0].target +
+                frameFinal.buttons[0].target +
                 `?userId=${currentFrameState.userId}&sessionId=${currentFrameState.sessionId}`, // We pass in the user ID and session ID as query parameters to SWC website.
             },
           ],
@@ -484,9 +497,16 @@ export async function POST(req: NextRequest): Promise<Response> {
  * Helper function to check if the user has already completed the voter registration action.
  * Here, we also screen by the crypto addresses.
  * Why?
- * - Consider the case where a user has a SWC account with their email and has already completed
- *   the action, but the email is not associated with their Farcaster wallet address.
- * - In this case, we want to allow the user to mint to their Farcaster wallet address if they want.
+ * - CASE 1: A user does not have an existing SWC account, so they go through the frame and complete
+ *   the registration flow. Afterwards, the user might try to go through the frame again with a
+ *   different email to mint another NFT.
+ *   - In this case, we know that that their Farcaster wallet address has already completed the action
+ *     (and probably received the NFT), so we should redirect them to the SWC website.
+ * - CASE 2: A user has a SWC account with their email and has already completed
+ *   the action (hence they have an embedded wallet address), but the SWC account is not associated
+ *   with their Farcaster wallet address. In other words, their embedded wallet address has the NFT, but
+ *   their Farcaster wallet address does NOT have the NFT.
+ *   - In this case, we want to allow the user to mint to their Farcaster wallet address if they want.
  * @param userId
  * @returns
  */
@@ -518,6 +538,7 @@ async function upsertCryptoAddressAndCreateAction(
   userId: string,
   sessionId: string,
   cryptoAddress: string,
+  interactorType: string,
   voterRegistrationStateCode: string,
   transactionHash: string,
 ) {
@@ -575,5 +596,7 @@ async function upsertCryptoAddressAndCreateAction(
     userState: 'Existing',
     ...(voterRegistrationStateCode && { usaState: voterRegistrationStateCode }),
     Source: 'Farcaster Frames',
+    'Interactor Type':
+      interactorType === 'verified' ? 'Farcaster Verified Address' : 'Farcaster Custody Address',
   })
 }

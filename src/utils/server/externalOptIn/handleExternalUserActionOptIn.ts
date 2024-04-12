@@ -71,6 +71,13 @@ export const zodExternalUserActionOptIn = z.object({
   hasOptedInToReceiveSMSFromSWC: z.boolean().optional(),
   hasOptedInToEmails: z.boolean().optional(),
   hasOptedInToMembership: z.boolean().optional(),
+  acquisitionOverride: z
+    .object({
+      source: z.string(),
+      medium: z.string(),
+    })
+    .optional(),
+  additionalAnalyticsProperties: z.record(z.string()).optional(),
 })
 
 const logger = getLogger('handleExternalUserActionOptIn')
@@ -89,10 +96,6 @@ type UserWithRelations = User & {
 
 type Input = z.infer<typeof zodExternalUserActionOptIn> & {
   partner?: VerifiedSWCPartner
-  acquisitionOverride?: {
-    source: string
-    medium: string
-  }
 }
 
 export type ExternalUserActionOptInResponse<ResultOptions extends string> = {
@@ -184,6 +187,7 @@ export async function handleExternalUserActionOptIn(
       creationMethod: input.partner ? 'Verified SWC Partner' : 'Third Party',
       reason: 'Already Exists',
       userState,
+      ...input.additionalAnalyticsProperties,
     })
     await analytics.flush()
     return {
@@ -218,6 +222,7 @@ export async function handleExternalUserActionOptIn(
     campaignName,
     creationMethod: input.partner ? 'Verified SWC Partner' : 'Third Party',
     userState,
+    ...input.additionalAnalyticsProperties,
   })
 
   // TODO (Benson): Include p2a source in Capitol Canary payload to know which 3P is sending this request.
