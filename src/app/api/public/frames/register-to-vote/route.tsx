@@ -275,6 +275,7 @@ export async function POST(req: NextRequest): Promise<Response> {
       // We create the user action for the user to opt-in to the voter registration campaign.
       optInResult = await handleExternalUserActionOptIn({
         emailAddress: currentFrameState.emailAddress,
+        cryptoAddress,
         optInType: UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER,
         campaignName: UserActionOptInCampaignName.DEFAULT,
         isVerifiedEmailAddress: false,
