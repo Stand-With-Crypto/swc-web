@@ -1,6 +1,6 @@
 import { DTSI_Person } from '@/data/dtsi/generated'
 import {
-  convertDTSIStanceScoreToLetterGrade,
+  convertDTSIPersonStanceScoreToLetterGrade,
   DTSILetterGrade,
 } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { cn, twNoop } from '@/utils/web/cn'
@@ -44,7 +44,9 @@ export const DTSIFormattedLetterGrade: React.FC<
   }
 > = ({ size, ...other }) => {
   const letterGrade =
-    'letterGrade' in other ? other.letterGrade : convertDTSIStanceScoreToLetterGrade(other.person)
+    'letterGrade' in other
+      ? other.letterGrade
+      : convertDTSIPersonStanceScoreToLetterGrade(other.person)
 
   return (
     <div

@@ -1,7 +1,7 @@
 import type { Preview } from '@storybook/react'
-import { fontClassName } from '../src/utils/web/fonts'
-import '../src/globals.css'
 import React from 'react'
+import '../src/globals.css'
+import { openSansFont, satoshiFont } from '../src/utils/web/fonts'
 
 const preview: Preview = {
   parameters: {
@@ -13,10 +13,14 @@ const preview: Preview = {
       },
     },
   },
+
   decorators: [
     Story => (
-      <div className={fontClassName}>
+      <div className={openSansFont.className}>
+        {/* TODO get this
+        <div className={satoshiFont.className}> */}
         <Story />
+        {/* </div> */}
       </div>
     ),
   ],
