@@ -21,6 +21,8 @@ export async function POST(req: NextRequest): Promise<Response> {
     message.interactor?.verified_accounts[0] ?? message.interactor?.custody_address
   if (!walletAddress) return NextResponse.json({ error: 'no account address' }, { status: 400 })
 
+  // We use this thirdweb client instead of our existing viem client because
+  // the thirdweb client makes it super easy to interact with thirdweb smart contracts.
   const twClient = createThirdwebClient({ secretKey: THIRD_WEB_CLIENT_SECRET })
   const twChain = defineChain(base)
 
