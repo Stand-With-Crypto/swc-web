@@ -40,12 +40,11 @@ export const monitorBaseETHBalances = inngest.createFunction(
         LEGACY_NFT_DEPLOYER_WALLET,
       ])
       for (const balance of baseETHBalances) {
-        const ethBalance = Number(balance.displayValue)
-        prettyLog(`Base ETH balance for ${balance.walletAddress} - ${ethBalance} ETH`)
-        if (ethBalance < LOW_ETH_BALANCE_THRESHOLD) {
+        prettyLog(`Base ETH balance for ${balance.walletAddress} - ${balance.ethValue} ETH`)
+        if (balance.ethValue < LOW_ETH_BALANCE_THRESHOLD) {
           // Trigger Sentry alert.
           Sentry.captureMessage(
-            `Low Base ETH balance detected for ${balance.walletAddress} - ${ethBalance} ETH. Please fund as soon as possible.`,
+            `Low Base ETH balance detected for ${balance.walletAddress} - ${balance.ethValue} ETH. Please fund as soon as possible.`,
             {
               level: 'error',
               extra: { basescanLink: `https://basescan.org/address/${balance.walletAddress}` },

@@ -110,9 +110,7 @@ export const backfillNFTInngestCronJob = inngest.createFunction(
             SWC_DOT_ETH_WALLET,
             LEGACY_NFT_DEPLOYER_WALLET,
           ])
-          return baseETHBalances.filter(
-            balance => Number(balance.displayValue) < LOW_ETH_BALANCE_THRESHOLD,
-          )
+          return baseETHBalances.filter(balance => balance.ethValue < LOW_ETH_BALANCE_THRESHOLD)
         },
       )
       if (walletsWithLowBalances && walletsWithLowBalances.length > 0) {

@@ -4,7 +4,7 @@ import { thirdwebBaseRPCClient } from '@/utils/server/thirdweb/thirdwebRPCClient
 
 type BaseETHBalance = {
   walletAddress: string
-  displayValue: string
+  ethValue: number
 }
 
 export async function fetchBaseETHBalances(walletAddresses: string[]) {
@@ -17,9 +17,13 @@ export async function fetchBaseETHBalances(walletAddresses: string[]) {
           address: `0x${formattedAddress}`,
         })
         .then(result => {
+          const value = Number(formatEther(result))
+          if (isNaN(value) || value < 0) {
+            throw new Error(`Invalid balance for ${address}: ${value}`)
+          }
           return {
             walletAddress: address,
-            displayValue: formatEther(result),
+            ethValue: value,
           }
         }),
     )
