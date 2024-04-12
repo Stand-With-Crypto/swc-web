@@ -3,9 +3,10 @@ import React from 'react'
 import { useRouter } from 'next/navigation'
 
 import { ThirdwebLoginContent } from '@/components/app/authentication/thirdwebLoginContent'
-import { DialogBody } from '@/components/ui/dialog'
+import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useSession } from '@/hooks/useSession'
+import { cn } from '@/utils/web/cn'
 
 export default function UserActionOptInSWCDeepLink() {
   const urls = useIntlUrls()
@@ -18,8 +19,13 @@ export default function UserActionOptInSWCDeepLink() {
   }, [session.isLoggedIn, router, urls])
 
   return (
-    <DialogBody>
+    <div
+      className={cn(
+        'flex flex-col items-center justify-center max-md:h-full',
+        dialogContentPaddingStyles,
+      )}
+    >
       <ThirdwebLoginContent auth={{ onLogin: () => router.replace(urls.profile()) }} />
-    </DialogBody>
+    </div>
   )
 }

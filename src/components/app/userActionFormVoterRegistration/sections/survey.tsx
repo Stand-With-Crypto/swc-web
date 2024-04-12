@@ -28,7 +28,7 @@ export function Survey({ goToSection }: SurveyProps) {
     <>
       <UserActionFormLayout>
         <UserActionFormLayout.Container>
-          <DialogBody className="flex flex-col gap-24 lg:pb-8 lg:pt-14">
+          <DialogBody className="flex flex-col gap-24 lg:pb-8 lg:pt-6">
             <UserActionFormLayout.Heading
               subtitle="Register to vote or check your voter registration and get a free “I'm a Voter” NFT"
               title="Are you registered to vote?"
