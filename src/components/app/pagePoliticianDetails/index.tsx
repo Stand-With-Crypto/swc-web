@@ -126,7 +126,7 @@ export function PagePoliticianDetails({
         <PageTitle as="h2" className="mb-4 text-left" size="sm">
           Notable statements
         </PageTitle>
-        <div className="space-y-16">
+        <div className="space-y-14 md:space-y-16">
           {!stances.length && <div>No recent statements.</div>}
           {stances.map(stance => {
             return (

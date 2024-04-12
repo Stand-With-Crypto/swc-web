@@ -17,7 +17,7 @@ const preview: Preview = {
   decorators: [
     Story => (
       <div className={openSansFont.className}>
-        {/* TODO get this
+        {/* TODO storybook has a bug where it can't support multiple next/fonts. Uncomment once this is resolved
         <div className={satoshiFont.className}> */}
         <Story />
         {/* </div> */}
