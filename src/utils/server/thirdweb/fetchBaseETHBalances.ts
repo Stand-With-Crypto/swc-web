@@ -1,8 +1,6 @@
-import { defineChain } from 'thirdweb'
-import { base } from 'thirdweb/chains'
-import { getWalletBalance } from 'thirdweb/wallets'
+import { formatEther } from 'viem'
 
-import { thirdwebRPCClient } from '@/utils/server/thirdweb/thirdwebRPCClients'
+import { thirdwebBaseRPCClient } from '@/utils/server/thirdweb/thirdwebRPCClients'
 
 type BaseETHBalance = {
   walletAddress: string
@@ -10,21 +8,20 @@ type BaseETHBalance = {
 }
 
 export async function fetchBaseETHBalances(walletAddresses: string[]) {
-  const client = thirdwebRPCClient
-  const chain = defineChain(base)
   const results: BaseETHBalance[] = []
   for (const address of walletAddresses) {
+    const formattedAddress = address.toLowerCase().replace(/^0x/, '')
     results.push(
-      await getWalletBalance({
-        address,
-        chain,
-        client,
-      }).then(result => {
-        return {
-          walletAddress: address,
-          displayValue: result.displayValue,
-        }
-      }),
+      await thirdwebBaseRPCClient
+        .getBalance({
+          address: `0x${formattedAddress}`,
+        })
+        .then(result => {
+          return {
+            walletAddress: address,
+            displayValue: formatEther(result),
+          }
+        }),
     )
   }
   return results

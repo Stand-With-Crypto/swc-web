@@ -2,13 +2,13 @@ import * as Sentry from '@sentry/nextjs'
 import { compact } from 'lodash-es'
 
 import { formatENSAvatar } from '@/utils/server/formatENSAvatar'
-import { thirdwebViemPublicRPCClient } from '@/utils/server/thirdweb/thirdwebRPCClients'
+import { thirdwebRPCClient } from '@/utils/server/thirdweb/thirdwebRPCClients'
 import { IS_DEVELOPING_OFFLINE } from '@/utils/shared/executionEnvironment'
 import { stringToEthereumAddress } from '@/utils/shared/stringToEthereumAddress'
 
 import { UserENSData } from './types'
 
-const client = thirdwebViemPublicRPCClient
+const client = thirdwebRPCClient
 
 async function _getENSDataMapFromCryptoAddresses(
   _addresses: string[],

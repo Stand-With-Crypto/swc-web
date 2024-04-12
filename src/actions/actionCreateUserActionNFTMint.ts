@@ -15,7 +15,7 @@ import { getServerAnalytics } from '@/utils/server/serverAnalytics'
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { appRouterGetThirdwebAuthUser } from '@/utils/server/thirdweb/appRouterGetThirdwebAuthUser'
-import { thirdwebViemBasePublicRPCClient } from '@/utils/server/thirdweb/thirdwebRPCClients'
+import { thirdwebBaseRPCClient } from '@/utils/server/thirdweb/thirdwebRPCClients'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
 import { fromBigNumber } from '@/utils/shared/bigNumber'
 import { getCryptoToFiatConversion } from '@/utils/shared/getCryptoToFiatConversion'
@@ -85,7 +85,7 @@ async function _actionCreateUserActionMintNFT(input: CreateActionMintNFTInput) {
     localUser,
   })
 
-  const transaction = await thirdwebViemBasePublicRPCClient.getTransaction({
+  const transaction = await thirdwebBaseRPCClient.getTransaction({
     hash: validatedInput.data.transactionHash,
   })
 
@@ -177,7 +177,7 @@ async function createAction<U extends User>({
 const parseHex = (hex: string) => hex.toLowerCase().trim()
 
 async function validateTransaction(
-  transaction: Awaited<ReturnType<typeof thirdwebViemBasePublicRPCClient.getTransaction>>,
+  transaction: Awaited<ReturnType<typeof thirdwebBaseRPCClient.getTransaction>>,
 ) {
   if (!transaction.to || parseHex(transaction.to) !== parseHex(contractMetadata.contractAddress)) {
     throw new Error('Invalid associated contract')
@@ -190,7 +190,7 @@ async function validateTransaction(
     throw new Error('Transaction already registered')
   }
 
-  const confirmations = await thirdwebViemBasePublicRPCClient.getTransactionConfirmations({
+  const confirmations = await thirdwebBaseRPCClient.getTransactionConfirmations({
     hash: transaction.hash,
   })
   if (!Number(confirmations)) {
