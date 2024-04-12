@@ -55,6 +55,13 @@ export function UserActionFormEmailCongresspersonSkeleton({
               <Input placeholder="Your full address" />
             </FormItemSkeleton>
           </div>
+          <div className="w-full">
+            <DTSICongresspersonAssociatedWithFormAddress
+              currentDTSISlugValue={[]}
+              onChangeDTSISlug={noop}
+              politicianCategory={politicianCategory}
+            />
+          </div>
           <div className="relative">
             <div className="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center bg-background/90">
               <p className="text-bold max-w-md text-center">
@@ -64,13 +71,6 @@ export function UserActionFormEmailCongresspersonSkeleton({
             <FormItemSkeleton>
               <Textarea defaultValue={getDefaultText([])} placeholder="Your message..." rows={10} />
             </FormItemSkeleton>
-          </div>
-          <div className="w-full">
-            <DTSICongresspersonAssociatedWithFormAddress
-              currentDTSISlugValue={[]}
-              onChangeDTSISlug={noop}
-              politicianCategory={politicianCategory}
-            />
           </div>
         </div>
       </ScrollArea>

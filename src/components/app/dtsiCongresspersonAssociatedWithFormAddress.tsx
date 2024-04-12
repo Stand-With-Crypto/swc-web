@@ -37,10 +37,12 @@ export function DTSICongresspersonAssociatedWithFormAddress({
       res.data.dtsiPeople.some((person, index) => person.slug !== currentDTSISlugValue[index])
     ) {
       onChangeDTSISlug(res.data.dtsiPeople.map(person => person.slug))
-    } else if (currentDTSISlugValue && !res.data) {
+    } else if (currentDTSISlugValue.length && !res.data) {
       onChangeDTSISlug([])
     }
-  }, [currentDTSISlugValue, onChangeDTSISlug, res.data])
+    // onChangeDTSISlug shouldnt be passed as a dependency
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentDTSISlugValue, res.data])
   const categoryDisplayName = getYourPoliticianCategoryDisplayName(politicianCategory)
   if (!address || res.isLoading) {
     return (
@@ -56,7 +58,11 @@ export function DTSICongresspersonAssociatedWithFormAddress({
     )
   }
   if (!res.data || 'notFoundReason' in res.data) {
-    return <div>{formatGetDTSIPeopleFromAddressNotFoundReason(res.data)}</div>
+    return (
+      <div className="font-bold text-destructive">
+        {formatGetDTSIPeopleFromAddressNotFoundReason(res.data)}
+      </div>
+    )
   }
   const people = res.data.dtsiPeople
   return (

@@ -240,6 +240,32 @@ export function UserActionFormEmailCongressperson({
             </div>
             <FormField
               control={form.control}
+              name="address"
+              render={addressProps => (
+                <FormField
+                  control={form.control}
+                  name="dtsiSlugs"
+                  render={dtsiSlugProps => (
+                    <div className="w-full">
+                      <DTSICongresspersonAssociatedWithFormAddress
+                        address={addressProps.field.value}
+                        currentDTSISlugValue={dtsiSlugProps.field.value}
+                        onChangeDTSISlug={slugs => {
+                          dtsiSlugProps.field.onChange(slugs)
+                          if (!hasModifiedMessage.current) {
+                            form.setValue('message', getDefaultText(slugs))
+                          }
+                        }}
+                        politicianCategory={politicianCategory}
+                      />
+                      <FormErrorMessage />
+                    </div>
+                  )}
+                />
+              )}
+            />
+            <FormField
+              control={form.control}
               name="message"
               render={({ field }) => (
                 <FormItem>
@@ -268,37 +294,6 @@ export function UserActionFormEmailCongressperson({
               )}
             />
             <FormGeneralErrorMessage control={form.control} />
-            <FormField
-              control={form.control}
-              name="address"
-              render={addressProps => (
-                <FormField
-                  control={form.control}
-                  name="dtsiSlugs"
-                  render={dtsiSlugProps => (
-                    <div className="w-full">
-                      <DTSICongresspersonAssociatedWithFormAddress
-                        address={addressProps.field.value}
-                        currentDTSISlugValue={dtsiSlugProps.field.value}
-                        onChangeDTSISlug={slugs => {
-                          if (
-                            slugs.every((slug, index) => dtsiSlugProps.field.value[index] === slug)
-                          ) {
-                            return
-                          }
-                          dtsiSlugProps.field.onChange(slugs)
-                          if (!hasModifiedMessage.current) {
-                            form.setValue('message', getDefaultText(slugs))
-                          }
-                        }}
-                        politicianCategory={politicianCategory}
-                      />
-                      <FormErrorMessage />
-                    </div>
-                  )}
-                />
-              )}
-            />
           </div>
         </ScrollArea>
         <div
