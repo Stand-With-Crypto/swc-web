@@ -508,6 +508,9 @@ export async function POST(req: NextRequest): Promise<Response> {
  *   with their Farcaster wallet address. In other words, their embedded wallet address has the NFT, but
  *   their Farcaster wallet address does NOT have the NFT.
  *   - In this case, we want to allow the user to mint to their Farcaster wallet address if they want.
+ * - CASE 3: A user completes the action via the frame and mints the NFT to their custody address. Afterwards,
+ *   the user verifies a wallet address and wants to mint the NFT to their verified wallet address.
+ *   - In this case, we want to allow the user to mint to their verified wallet address if they want.
  * @param userId
  * @returns
  */
