@@ -21,6 +21,7 @@ import {
   getCapitolCanaryCampaignID,
 } from '@/utils/server/capitolCanary/campaigns'
 import { UpsertAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
+import { getOrCreateSessionIdForUser } from '@/utils/server/externalOptIn/getOrCreateSessionIdForUser'
 import { getGooglePlaceIdFromAddress } from '@/utils/server/getGooglePlaceIdFromAddress'
 import { prismaClient } from '@/utils/server/prismaClient'
 import {
@@ -31,7 +32,6 @@ import {
 import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
 import { getUserAcquisitionFieldsForVerifiedSWCPartner } from '@/utils/server/verifiedSWCPartner/attribution'
 import { VerifiedSWCPartner } from '@/utils/server/verifiedSWCPartner/constants'
-import { getOrCreateSessionIdToSendBackToPartner } from '@/utils/server/verifiedSWCPartner/getOrCreateSessionIdToSendBackToPartner'
 import { getFormattedDescription } from '@/utils/shared/address'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
@@ -193,7 +193,7 @@ export async function handleExternalUserActionOptIn(
     return {
       result: ExternalUserActionOptInResult.EXISTING_ACTION,
       resultOptions: Object.values(ExternalUserActionOptInResult),
-      sessionId: await getOrCreateSessionIdToSendBackToPartner(existingAction.user),
+      sessionId: await getOrCreateSessionIdForUser(existingAction.user),
       userId: existingAction.user.id,
     }
   }
@@ -239,7 +239,7 @@ export async function handleExternalUserActionOptIn(
   return {
     result: ExternalUserActionOptInResult.NEW_ACTION,
     resultOptions: Object.values(ExternalUserActionOptInResult),
-    sessionId: await getOrCreateSessionIdToSendBackToPartner(userAction.user),
+    sessionId: await getOrCreateSessionIdForUser(userAction.user),
     userId: userAction.user.id,
   }
 }
