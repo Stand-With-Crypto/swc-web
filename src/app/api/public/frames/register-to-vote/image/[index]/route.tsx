@@ -12,52 +12,69 @@ export async function GET(request: NextRequest, { params }: { params: { index: n
   const registrationType = request.nextUrl.searchParams.get('registrationType')
   const shouldShowError = !!request.nextUrl.searchParams.get('shouldShowError')
 
-  const nftImage = await fetch(new URL('./nft.png', import.meta.url)).then(res => res.arrayBuffer())
-
-  const shieldImage = await fetch(new URL('./shield.png', import.meta.url)).then(res =>
-    res.arrayBuffer(),
-  )
+  let image: ArrayBuffer
+  switch (Number(params.index)) {
+    case 0:
+    case 6:
+    case 7:
+      image = await fetch(new URL('./nft.png', import.meta.url)).then(res => res.arrayBuffer())
+      break
+    case 1:
+      image = await fetch(new URL('./email.png', import.meta.url)).then(res => res.arrayBuffer())
+      break
+    case 2:
+      image = await fetch(new URL('./phone.png', import.meta.url)).then(res => res.arrayBuffer())
+      break
+    case 3:
+    case 4:
+    case 5:
+      image = await fetch(new URL('./shield.png', import.meta.url)).then(res => res.arrayBuffer())
+      break
+    default:
+      image = await fetch(new URL('./nft.png', import.meta.url)).then(res => res.arrayBuffer())
+  }
 
   const images = [
-    <div key="image0" tw="flex flex-col w-full h-full items-center justify-center bg-white">
-      <div
-        style={{ background: 'linear-gradient(180deg, #130032 0%, #000 100%)' }}
-        tw="flex w-full h-full text-white"
-      >
+    <div key="image0" tw="flex flex-col w-full h-full items-center justify-center bg-black">
+      <div style={{ background: 'black' }} tw="flex w-full h-full text-white">
         <div tw="flex flex-row w-full p-15 items-center justify-center">
-          <img
-            alt=""
-            height={300}
-            src={nftImage as any}
-            style={{ borderRadius: '50%' }}
-            width={300}
-          />
-          <h2 tw="flex flex-col text-7xl font-bold tracking-tight text-left px-10">
-            <span>Register to vote</span>
-            <span tw="text-[#9e62ff] text-6xl">Mint an NFT</span>
+          <img alt="" height={400} src={image as any} style={{ borderRadius: '15%' }} width={400} />
+          <h2 tw="flex flex-col text-5xl font-bold tracking-tight text-left px-10">
+            <span>Mint your free “I’m a Voter” NFT</span>
+            <span tw="text-[#7a28ff] text-4xl mt-2 mb-4">by pplpleasr</span>
+            <div tw="flex flex-col text-4xl text-[#a3abbb]">
+              <span>Sign up to Stand With Crypto and check</span>
+              <span>and check your voter registration to</span>
+              <span>mint a free NFT from pplpleasr</span>
+            </div>
           </h2>
         </div>
       </div>
     </div>,
-    <div key="image1" tw="flex flex-col w-full h-full items-center justify-center bg-white">
-      <div
-        style={{ background: 'linear-gradient(180deg, #130032 0%, #000 100%)' }}
-        tw="flex w-full h-full text-white"
-      >
+    <div key="image1" tw="flex flex-col w-full h-full items-center justify-center bg-black">
+      <div style={{ background: 'black' }} tw="flex w-full h-full text-white">
         <div tw="flex flex-row w-full p-15 items-center justify-center">
-          <img alt="" height={200} src={shieldImage as any} width={200} />
-          <h2 tw="flex flex-col text-7xl font-bold tracking-tight text-left px-10">
-            <span>Join Stand With Crypto</span>
-            <div tw="flex flex-col text-5xl text-[#9e62ff] mt-4">
-              <span>Enter your email and join over</span>
-              <span>300,000 advocates fighting to</span>
-              <span>keep crypto in America.</span>
+          <img
+            alt=""
+            height={400}
+            src={image as any}
+            style={{ borderRadius: '15%', background: '#7a28ff' }}
+            width={400}
+          />
+          <h2 tw="flex flex-col text-5xl font-bold tracking-normal text-left px-10">
+            <span tw="mb-6">Join the fight</span>
+            <div tw="flex flex-col text-4xl text-[#a3abbb]">
+              <span>Enter your email to join over 350,000</span>
+              <span>advocates fighting to keep crypto in</span>
+              <span>America and receive regular updates on</span>
+              <span>how to influence change</span>
             </div>
-            <div tw="flex flex-col text-3xl text-gray-400 mt-2">
-              <span>Personal information subject to Privacy Policy.</span>
+            <div tw="flex flex-col text-3xl text-[#6b7589] mt-6">
+              <span>Personal information subject to</span>
+              <span>Stand With Crypto Privacy Policy.</span>
             </div>
             {shouldShowError ? (
-              <div tw="flex flex-col text-5xl text-red-500 mt-2">
+              <div tw="flex flex-col text-3xl text-red-500 mt-2">
                 <span>Invalid email - please try again.</span>
               </div>
             ) : null}
@@ -65,24 +82,32 @@ export async function GET(request: NextRequest, { params }: { params: { index: n
         </div>
       </div>
     </div>,
-    <div key="image2" tw="flex flex-col w-full h-full items-center justify-center bg-white">
-      <div
-        style={{ background: 'linear-gradient(180deg, #130032 0%, #000 100%)' }}
-        tw="flex w-full h-full text-white"
-      >
+    <div key="image2" tw="flex flex-col w-full h-full items-center justify-center bg-black">
+      <div style={{ background: 'black' }} tw="flex w-full h-full text-white">
         <div tw="flex flex-row w-full p-15 items-center justify-center">
-          <img alt="" height={200} src={shieldImage as any} width={200} />
-          <h2 tw="flex flex-col text-7xl font-bold tracking-tight text-left px-10">
-            <span>Join Stand With Crypto</span>
-            <div tw="flex flex-col text-5xl text-[#9e62ff] mt-4">
-              <span>Enter your phone number and</span>
-              <span>make your voice heard in Washington D.C.</span>
+          <img
+            alt=""
+            height={400}
+            src={image as any}
+            style={{ borderRadius: '15%', background: '#7a28ff' }}
+            width={400}
+          />
+          <h2 tw="flex flex-col text-5xl font-bold tracking-normal text-left px-10">
+            <span tw="mb-6">Stay up to date</span>
+            <div tw="flex flex-col text-4xl text-[#a3abbb]">
+              <span>Enter your phone number to receive a</span>
+              <span>limited number of SMS updates on the</span>
+              <span>highest priority issues involving crypto</span>
+              <span>policy, invites to local events, and more</span>
             </div>
-            <div tw="flex flex-col text-3xl text-gray-400 mt-2">
-              <span>Personal information subject to Privacy Policy.</span>
+            <div tw="flex flex-col text-2xl text-[#6b7589] mt-6">
+              <span>By clicking Next, you consent to receive recurring texts</span>
+              <span>from Stand With Crypto about its efforts to the number</span>
+              <span>entered below. You can reply STOP to stop receiving texts.</span>
+              <span>Message and data rates may apply.</span>
             </div>
             {shouldShowError ? (
-              <div tw="flex flex-col text-5xl text-red-500 mt-2">
+              <div tw="flex flex-col text-3xl text-red-500 mt-2">
                 <span>Invalid phone number - please try again.</span>
               </div>
             ) : null}
@@ -90,38 +115,55 @@ export async function GET(request: NextRequest, { params }: { params: { index: n
         </div>
       </div>
     </div>,
-    <div key="image3" tw="flex flex-col w-full h-full items-center justify-center bg-white">
-      <div
-        style={{ background: 'linear-gradient(180deg, #130032 0%, #000 100%)' }}
-        tw="flex w-full h-full text-white"
-      >
+    <div key="image3" tw="flex flex-col w-full h-full items-center justify-center bg-black">
+      <div style={{ background: 'black' }} tw="flex w-full h-full text-white">
         <div tw="flex flex-row w-full p-15 items-center justify-center">
-          <img alt="" height={200} src={shieldImage as any} width={200} />
-          <h2 tw="flex flex-col text-7xl font-bold tracking-tight text-left px-10">
-            <span>Are you registered to vote?</span>
+          <img
+            alt=""
+            height={400}
+            src={image as any}
+            style={{ borderRadius: '15%', background: '#7a28ff' }}
+            width={400}
+          />
+          <h2 tw="flex flex-col text-5xl font-bold tracking-normal text-left px-10">
+            <span tw="mb-6">Are you registered to vote?</span>
+            <div tw="flex flex-col text-4xl text-[#a3abbb]">
+              <span>Take a few steps to register, or claim</span>
+              <span>your NFT if you’ve already registered</span>
+            </div>
           </h2>
         </div>
       </div>
     </div>,
-    <div key="image4" tw="flex flex-col w-full h-full items-center justify-center bg-white">
-      <div
-        style={{ background: 'linear-gradient(180deg, #130032 0%, #000 100%)' }}
-        tw="flex w-full h-full text-white"
-      >
+    <div key="image4" tw="flex flex-col w-full h-full items-center justify-center bg-black">
+      <div style={{ background: 'black' }} tw="flex w-full h-full text-white">
         <div tw="flex flex-row w-full p-15 items-center justify-center">
-          <img alt="" height={200} src={shieldImage as any} width={200} />
-          <h2 tw="flex flex-col text-7xl font-bold tracking-tight text-left px-10">
+          <img
+            alt=""
+            height={400}
+            src={image as any}
+            style={{ borderRadius: '15%', background: '#7a28ff' }}
+            width={400}
+          />
+          <h2 tw="flex flex-col text-5xl font-bold tracking-normal text-left px-10">
             {registrationType === 'checkRegistration' ? (
-              <span tw="text-5xl">Check your registration status</span>
+              <span tw="mb-6">Check your registration status</span>
             ) : (
-              <span>Register to vote</span>
+              <span tw="mb-6">Register to vote</span>
             )}
-            <div tw="flex flex-col text-4xl text-gray-400 mt-4">
-              <span>Enter your state code below.</span>
-              <span>(CA, NY, etc.)</span>
-            </div>
+            {registrationType === 'checkRegistration' ? (
+              <div tw="flex flex-col text-4xl text-[#a3abbb]">
+                <span>Enter your state code (CA, NY, etc.) below</span>
+                <span>to check your registration status</span>
+              </div>
+            ) : (
+              <div tw="flex flex-col text-4xl text-[#a3abbb]">
+                <span>This should only take a few minutes.</span>
+                <span>Enter your state code (CA, NY, etc.) below</span>
+              </div>
+            )}
             {shouldShowError ? (
-              <div tw="flex flex-col text-5xl text-red-500 mt-2">
+              <div tw="flex flex-col text-4xl text-red-500 mt-2">
                 <span>Invalid state code - please try again.</span>
               </div>
             ) : null}
@@ -129,69 +171,61 @@ export async function GET(request: NextRequest, { params }: { params: { index: n
         </div>
       </div>
     </div>,
-    <div key="image5" tw="flex flex-col w-full h-full items-center justify-center bg-white">
-      <div
-        style={{ background: 'linear-gradient(180deg, #130032 0%, #000 100%)' }}
-        tw="flex w-full h-full text-white"
-      >
+    <div key="image5" tw="flex flex-col w-full h-full items-center justify-center bg-black">
+      <div style={{ background: 'black' }} tw="flex w-full h-full text-white">
         <div tw="flex flex-row w-full p-15 items-center justify-center">
-          <img alt="" height={200} src={shieldImage as any} width={200} />
-          <h2 tw="flex flex-col text-6xl font-bold tracking-tight text-left px-10">
+          <img
+            alt=""
+            height={400}
+            src={image as any}
+            style={{ borderRadius: '15%', background: '#7a28ff' }}
+            width={400}
+          />
+          <h2 tw="flex flex-col text-5xl font-bold tracking-normal text-left px-10">
             {registrationType === 'checkRegistration' ? (
-              <span tw="text-5xl">Check your registration status</span>
+              <span tw="mb-6">Check your registration status</span>
             ) : (
-              <span>Register to vote</span>
+              <span tw="mb-6">Register to vote</span>
             )}
             {registrationType === 'checkRegistration' ? (
-              <div tw="flex flex-col text-4xl text-gray-400 mt-4">
-                <span>Click the link below to check your</span>
-                <span>voter registration status.</span>
+              <div tw="flex flex-col text-4xl text-[#a3abbb]">
+                <span>Click “Check registration status” below to</span>
+                <span>see if you’ve already registered to vote</span>
               </div>
             ) : (
-              <div tw="flex flex-col text-4xl text-gray-400 mt-4">
-                <span>Click the link below to complete</span>
-                <span>your voter registration.</span>
+              <div tw="flex flex-col text-4xl text-[#a3abbb]">
+                <span>Click “Register to vote” below to</span>
+                <span>complete your voter registration</span>
               </div>
             )}
           </h2>
         </div>
       </div>
     </div>,
-    <div key="image6" tw="flex flex-col w-full h-full items-center justify-center bg-white">
-      <div
-        style={{ background: 'linear-gradient(180deg, #130032 0%, #000 100%)' }}
-        tw="flex w-full h-full text-white"
-      >
+    <div key="image6" tw="flex flex-col w-full h-full items-center justify-center bg-black">
+      <div style={{ background: 'black' }} tw="flex w-full h-full text-white">
         <div tw="flex flex-row w-full p-15 items-center justify-center">
-          <img
-            alt=""
-            height={300}
-            src={nftImage as any}
-            style={{ borderRadius: '50%' }}
-            width={300}
-          />
-          <h2 tw="flex flex-col text-7xl font-bold tracking-tight text-left px-10">
-            <span>Mint your NFT</span>
-            <span tw="text-[#9e62ff] text-6xl">"I'm a Voter" by pplpleasr</span>
-            <span tw="text-gray-400 text-4xl ">You will need ETH on Base to mint.</span>
+          <img alt="" height={400} src={image as any} style={{ borderRadius: '15%' }} width={400} />
+          <h2 tw="flex flex-col text-5xl font-bold tracking-tight text-left px-10">
+            <span>Mint your free NFT</span>
+            <span tw="text-[#7a28ff] text-4xl mt-2 mb-4">“I’m a voter” NFT by pplpleasr</span>
+            <div tw="flex flex-col text-3xl text-[#a3abbb]">
+              <span>The “I'm a Voter” NFT was created by</span>
+              <span>pplpleasr, in partnership with Stand With</span>
+              <span>Crypto, to highlight the power of the</span>
+              <span>crypto community to mobilize and vote</span>
+              <span>in the 2024 elections. You need ETH on</span>
+              <span>Base to mint</span>
+            </div>
           </h2>
         </div>
       </div>
     </div>,
-    <div key="image7" tw="flex flex-col w-full h-full items-center justify-center bg-white">
-      <div
-        style={{ background: 'linear-gradient(180deg, #130032 0%, #000 100%)' }}
-        tw="flex w-full h-full text-white"
-      >
+    <div key="image7" tw="flex flex-col w-full h-full items-center justify-center bg-black">
+      <div style={{ background: 'black' }} tw="flex w-full h-full text-white">
         <div tw="flex flex-row w-full p-15 items-center justify-center">
-          <img
-            alt=""
-            height={300}
-            src={nftImage as any}
-            style={{ borderRadius: '50%' }}
-            width={300}
-          />
-          <h2 tw="flex flex-col text-6xl font-bold tracking-tight text-left px-10">
+          <img alt="" height={400} src={image as any} style={{ borderRadius: '15%' }} width={400} />
+          <h2 tw="flex flex-col text-5xl font-bold tracking-tight text-left px-10">
             {hasAlreadyCompletedAction ? (
               <div tw="flex flex-col">
                 <span>You have already completed</span>
@@ -200,7 +234,9 @@ export async function GET(request: NextRequest, { params }: { params: { index: n
             ) : (
               <span>Thank you for registering!</span>
             )}
-            <span tw="text-4xl">Continue the fight via the link below.</span>
+            <div tw="flex flex-col text-4xl text-[#a3abbb]">
+              <span>Continue the fight via the link below</span>
+            </div>
           </h2>
         </div>
       </div>
