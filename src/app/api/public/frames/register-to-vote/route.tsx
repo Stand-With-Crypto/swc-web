@@ -294,7 +294,9 @@ export async function POST(req: NextRequest): Promise<Response> {
         },
       })
 
-      // If the email-address user has already completed the action, then then we skip to the final screen.
+      // If the user (by crypto address) has already completed the action, then then we skip to the final screen.
+      // The reason why we check this after receiving their email and phone number instead of early on
+      // is because we want the user to opt-in for SMS if they haven't already.
       doesUserActionAlreadyExists = await checkCompleteActionByCryptoAddress(
         optInResult.userId,
         cryptoAddress,
@@ -495,22 +497,26 @@ export async function POST(req: NextRequest): Promise<Response> {
 }
 
 /**
- * Helper function to check if the user has already completed the voter registration action.
- * Here, we also screen by the crypto addresses.
+ * Helper function to get existing user information for the existing action.
+ * We primarily screen by the crypto address.
  * Why?
  * - CASE 1: A user does not have an existing SWC account, so they go through the frame and complete
- *   the registration flow. Afterwards, the user might try to go through the frame again with a
- *   different email to mint another NFT.
- *   - In this case, we know that that their Farcaster wallet address has already completed the action
- *     (and probably received the NFT), so we should redirect them to the SWC website.
+ *   the registration flow - all is good. Afterwards, the user might try to go through the frame again
+ *   in attempts to mint another NFT.
+ *   - In this case, we already know that that their Farcaster wallet address has already completed the action
+ *     (and has received the NFT), so we should redirect them to the SWC website with the right information.
+ *   - NOTE: Crypto address is the one thing that is not user-inputted, so we can trust it generally.
  * - CASE 2: A user has a SWC account with their email and has already completed
  *   the action (hence they have an embedded wallet address), but the SWC account is not associated
  *   with their Farcaster wallet address. In other words, their embedded wallet address has the NFT, but
  *   their Farcaster wallet address does NOT have the NFT.
  *   - In this case, we want to allow the user to mint to their Farcaster wallet address if they want.
- * - CASE 3: A user completes the action via the frame and mints the NFT to their custody address. Afterwards,
- *   the user verifies a wallet address and wants to mint the NFT to their verified wallet address.
+ *   - If they decide to input a different email address, then a new user will be created.
+ *   - If they decide to input the same email address, then the Farcaster wallet address will be tied to their existing SWC account.
+ * - CASE 3: A user completes the action via the frame and mints the NFT to their Farcaster custody address. Afterwards,
+ *   the user verifies a wallet address, then they wants to mint the NFT to their verified wallet address.
  *   - In this case, we want to allow the user to mint to their verified wallet address if they want.
+ * In short, as long as the address has not yet completed the action, we should allow the user to go through the frame.
  * @param userId
  * @returns
  */
@@ -546,7 +552,7 @@ async function upsertCryptoAddressAndCreateAction(
   voterRegistrationStateCode: string,
   transactionHash: string,
 ) {
-  // Crypto address should exist at this point via the `handleExternalUserActionOptIn` flow.
+  // Crypto address should exist at this point.
   const userCryptoAddress = await prismaClient.userCryptoAddress.findFirstOrThrow({
     where: {
       cryptoAddress: cryptoAddress.toLowerCase(),
