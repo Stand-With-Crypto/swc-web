@@ -1,9 +1,10 @@
 'use client'
 import { useEffect } from 'react'
+import { isNil } from 'lodash-es'
 import { z } from 'zod'
 
+import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
-import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { Skeleton } from '@/components/ui/skeleton'
 import {
   formatGetDTSIPeopleFromAddressNotFoundReason,
@@ -69,7 +70,7 @@ export function DTSICongresspersonAssociatedWithFormAddress({
     <div className="space-y-6">
       {people.map(person => (
         <div
-          className="flex justify-between gap-4"
+          className="flex flex-col justify-between sm:flex-row sm:items-center sm:gap-4"
           data-test-id="dtsi-person-associated-with-address"
           key={person.id}
         >
@@ -92,7 +93,17 @@ export function DTSICongresspersonAssociatedWithFormAddress({
             </div>
           </div>
           <div>
-            <DTSIFormattedLetterGrade person={person} size={60} />
+            <CryptoSupportHighlight
+              className="px-2 py-2 text-base md:px-8 md:py-4 md:text-lg"
+              stanceScore={
+                person.manuallyOverriddenStanceScore || person.computedStanceScore || null
+              }
+              text={
+                isNil(person.manuallyOverriddenStanceScore || person.computedStanceScore)
+                  ? 'Unknown stance on crypto'
+                  : undefined
+              }
+            />
           </div>
         </div>
       ))}

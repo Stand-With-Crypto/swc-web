@@ -273,7 +273,7 @@ export function UserActionFormEmailCongressperson({
                     {!form.getValues().dtsiSlugs.length && (
                       <div className="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center bg-background/90">
                         <p className="text-bold max-w-md text-center">
-                          Write a personalized message after entering your address.
+                          Enter your address to generate a personalized message.
                         </p>
                       </div>
                     )}
