@@ -1,6 +1,7 @@
 import { orderBy } from 'lodash-es'
 import { Globe } from 'lucide-react'
 
+import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
 import { DTSIStanceDetails } from '@/components/app/dtsiStanceDetails'
 import { ScoreExplainer } from '@/components/app/pagePoliticianDetails/scoreExplainer'
 import { Button } from '@/components/ui/button'
@@ -23,7 +24,6 @@ import {
   getDTSIPersonProfilePictureUrlDimensions,
 } from '@/utils/dtsi/dtsiPersonUtils'
 import { dtsiTwitterAccountUrl } from '@/utils/dtsi/dtsiTwitterAccountUtils'
-import { cn } from '@/utils/web/cn'
 
 const POLITICIAN_IMAGE_SIZE_PX = 230
 
@@ -126,13 +126,17 @@ export function PagePoliticianDetails({
         <PageTitle as="h2" className="mb-4 text-left" size="sm">
           Notable statements
         </PageTitle>
-        <div className="flex flex-col space-y-4">
+        <div className="space-y-14 md:space-y-16">
           {!stances.length && <div>No recent statements.</div>}
           {stances.map(stance => {
             return (
-              <article className={cn('rounded-3xl bg-secondary p-4 md:p-6')} key={stance.id}>
+              <div key={stance.id}>
                 <DTSIStanceDetails locale={locale} person={person} stance={stance} />
-              </article>
+                <CryptoSupportHighlight
+                  className="mx-auto mt-2"
+                  stanceScore={stance.computedStanceScore || null}
+                />
+              </div>
             )
           })}
         </div>
