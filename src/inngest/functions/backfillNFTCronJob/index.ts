@@ -3,11 +3,11 @@ import { chunk } from 'lodash-es'
 
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
-import { getBaseETHBalances } from '@/utils/server/basescan/getBaseETHBalances'
 import { actionsWithNFT } from '@/utils/server/nft/actionsWithNFT'
 import { claimNFT } from '@/utils/server/nft/claimNFT'
 import { LEGACY_NFT_DEPLOYER_WALLET, SWC_DOT_ETH_WALLET } from '@/utils/server/nft/constants'
 import { prismaClient } from '@/utils/server/prismaClient'
+import { fetchBaseETHBalances } from '@/utils/server/thirdweb/fetchBaseETHBalances'
 import { fetchAirdropTransactionFee } from '@/utils/server/thirdweb/fetchCurrentClaimTransactionFee'
 import { AIRDROP_NFT_ETH_TRANSACTION_FEE_THRESHOLD } from '@/utils/shared/airdropNFTETHTransactionFeeThreshold'
 import { getLogger } from '@/utils/shared/logger'
@@ -30,7 +30,6 @@ const MISSING_NFT_DAYS_ALERT_THRESHOLD = 3 * 24 * 60 * 60 * 1000 // 3 days.
 const GO_LIVE_DATE = new Date('2024-02-25 00:00:00.000')
 
 const LOW_ETH_BALANCE_THRESHOLD = 0.01
-const ETH_BASE_UNIT_WEI = 10 ** 18
 
 const BACKFILL_NFT_INNGEST_CRON_JOB_AIRDROP_TIMEFRAME = 9 * 60 * 1000 // 9 minutes timeframe to backfill the records, leaving 1 minute before the next run.
 const BACKFILL_NFT_INNGEST_CRON_JOB_SCHEDULE = '*/10 * * * *' // Every 10 minutes.
@@ -107,19 +106,16 @@ export const backfillNFTInngestCronJob = inngest.createFunction(
       const walletsWithLowBalances = await step.run(
         `script.fetch-current-wallet-balances-${batchNum}`,
         async () => {
-          const baseETHBalances = await getBaseETHBalances([
+          const baseETHBalances = await fetchBaseETHBalances([
             SWC_DOT_ETH_WALLET,
             LEGACY_NFT_DEPLOYER_WALLET,
           ])
-          return baseETHBalances.result.filter(
-            cryptoAddress =>
-              Number(cryptoAddress.balance) / ETH_BASE_UNIT_WEI < LOW_ETH_BALANCE_THRESHOLD,
-          )
+          return baseETHBalances.filter(balance => balance.ethValue < LOW_ETH_BALANCE_THRESHOLD)
         },
       )
       if (walletsWithLowBalances && walletsWithLowBalances.length > 0) {
         stopMessage = `Critically low Base ETH balance detected for ${walletsWithLowBalances
-          .map(wallet => wallet.account)
+          .map(balance => balance.walletAddress)
           .join(', ')}`
         logger.warn(`${stopMessage} - please fund as soon as possible - stopping the cron job`)
         break

@@ -2,11 +2,13 @@ import { track as vercelTrack } from '@vercel/analytics'
 import mixpanel from 'mixpanel-browser'
 
 import { isCypress, isStorybook } from '@/utils/shared/executionEnvironment'
+import { mapPersistedLocalUserToExperimentAnalyticsProperties } from '@/utils/shared/localUser'
 import { customLogger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { AnalyticProperties } from '@/utils/shared/sharedAnalytics'
 import { formatVercelAnalyticsEventProperties } from '@/utils/shared/vercelAnalytics'
 import { getClientCookieConsent } from '@/utils/web/clientCookieConsent'
+import { getLocalUser } from '@/utils/web/clientLocalUser'
 
 const NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN = requiredEnv(
   process.env.NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN,
@@ -33,7 +35,19 @@ export function identifyClientAnalyticsUser(userId: string) {
   }
 }
 
-export function trackClientAnalytic(eventName: string, eventProperties?: AnalyticProperties) {
+let experimentProperties: AnalyticProperties | null = null
+function getExperimentProperties() {
+  if (experimentProperties) {
+    return experimentProperties
+  }
+  experimentProperties = mapPersistedLocalUserToExperimentAnalyticsProperties(
+    getLocalUser().persisted,
+  )
+  return experimentProperties
+}
+
+export function trackClientAnalytic(eventName: string, _eventProperties?: AnalyticProperties) {
+  const eventProperties = { ...getExperimentProperties(), ..._eventProperties }
   customLogger(
     {
       category: 'analytics',

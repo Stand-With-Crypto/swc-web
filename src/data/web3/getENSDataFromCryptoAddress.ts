@@ -2,7 +2,7 @@ import * as Sentry from '@sentry/nextjs'
 import { compact } from 'lodash-es'
 
 import { formatENSAvatar } from '@/utils/server/formatENSAvatar'
-import { thirdwebRPCClient } from '@/utils/server/thirdweb/thirdwebRPCClient'
+import { thirdwebRPCClient } from '@/utils/server/thirdweb/thirdwebRPCClients'
 import { IS_DEVELOPING_OFFLINE } from '@/utils/shared/executionEnvironment'
 import { stringToEthereumAddress } from '@/utils/shared/stringToEthereumAddress'
 

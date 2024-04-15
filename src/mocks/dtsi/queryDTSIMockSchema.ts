@@ -2,17 +2,16 @@ import { faker } from '@faker-js/faker'
 import { addMocksToSchema } from '@graphql-tools/mock'
 import { buildClientSchema, graphql } from 'graphql'
 
-import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
 import introspectionResult from '@/data/dtsi/introspection.json'
-import { dtsiBillMockResolver } from '@/mocks/dtsi/mockResolvers/dtsiBillMockResolver'
-import { dtsiPersonMockResolver } from '@/mocks/dtsi/mockResolvers/dtsiPersonMockResolver'
-import { dtsiPersonRoleMockResolver } from '@/mocks/dtsi/mockResolvers/dtsiPersonRoleResolver'
-import { dtsiPersonStanceMockResolver } from '@/mocks/dtsi/mockResolvers/dtsiPersonStanceMockResolver'
-import { dtsiPersonStanceQuoteMockResolver } from '@/mocks/dtsi/mockResolvers/dtsiPersonStanceQuoteMockResolver'
 import { dtsiQueryResolver } from '@/mocks/dtsi/mockResolvers/dtsiQueryResolver'
-import { dtsiTweetMediaMockResolver } from '@/mocks/dtsi/mockResolvers/dtsiTweetMediaMockResolver'
-import { dtsiTweetMockResolver } from '@/mocks/dtsi/mockResolvers/dtsiTweetMockResolver'
-import { dtsiTwitterAccountMockResolver } from '@/mocks/dtsi/mockResolvers/dtsiTwitterAccountMockResolver'
+import { dtsiBillMockResolver } from '@/mocks/dtsi/mocks/dtsiBillMockResolver'
+import { dtsiPersonMockResolver } from '@/mocks/dtsi/mocks/dtsiPersonMockResolver'
+import { dtsiPersonRoleMockResolver } from '@/mocks/dtsi/mocks/dtsiPersonRoleResolver'
+import { dtsiPersonStanceMockResolver } from '@/mocks/dtsi/mocks/dtsiPersonStanceMockResolver'
+import { dtsiPersonStanceQuoteMockResolver } from '@/mocks/dtsi/mocks/dtsiPersonStanceQuoteMockResolver'
+import { dtsiTweetMediaMockResolver } from '@/mocks/dtsi/mocks/dtsiTweetMediaMockResolver'
+import { dtsiTweetMockResolver } from '@/mocks/dtsi/mocks/dtsiTweetMockResolver'
+import { dtsiTwitterAccountMockResolver } from '@/mocks/dtsi/mocks/dtsiTwitterAccountMockResolver'
 import { fakerFields } from '@/mocks/fakerUtils'
 
 // see https://the-guild.dev/graphql/tools/docs/mocking for details
@@ -31,26 +30,17 @@ const schemaWithMocks = addMocksToSchema({
     Float: () => faker.number.float({ min: 0, max: 100, multipleOf: 0.001 }),
     ID: () => fakerFields.id(),
     Person: dtsiPersonMockResolver,
-    PersonRole: dtsiPersonRoleMockResolver,
+    PersonRole: dtsiPersonRoleMockResolver(),
     PersonStanceQuote: dtsiPersonStanceQuoteMockResolver,
     PersonStance: dtsiPersonStanceMockResolver,
     Tweet: dtsiTweetMockResolver,
     TweetMedia: dtsiTweetMediaMockResolver,
     TwitterAccount: dtsiTwitterAccountMockResolver,
     Bill: dtsiBillMockResolver,
-    Query: dtsiQueryResolver,
+    Query: () => ({}),
   },
   resolvers: () => ({
-    Query: {
-      peopleByUSCongressionalDistrict: () => {
-        return Object.values(DTSI_PersonRoleCategory).map(category => ({
-          ...dtsiPersonMockResolver(),
-          primaryRole: dtsiPersonRoleMockResolver({
-            roleCategory: () => category,
-          }),
-        }))
-      },
-    },
+    Query: dtsiQueryResolver,
   }),
 })
 

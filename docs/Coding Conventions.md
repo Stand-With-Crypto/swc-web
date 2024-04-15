@@ -89,3 +89,5 @@ Below is a non-exhaustive list of coding conventions that we follow. This list i
 - [This is an excellent blog post](https://kentcdodds.com/blog/write-tests) that highlights the tradeoffs between various testing focuses a team can have
 - Ensuring we adhere to strictly typed TypeScript (see "TypeScript" section) will prevent the majority of bugs that traditional unit tests catch. There are still places where unit testing business logic that can't be validated with types alone make sense. For these use-cases, we use `jest` (see our .test.ts files in the codebase for examples).
 - Our core user workflows should be testing via cypress (see `cypress/`) folder for examples.
+- Avoid referencing mock data generated via faker.js in your e2e tests. Adding/removing faker calls can cascade the fake values returned, leading to unpredictable results. Instead, add data-test-id attributes to dom elements you'd like to reference
+- Always call `faker.seed(1)` before creating mocks that use faker.js

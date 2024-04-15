@@ -2,10 +2,8 @@ name: Cypress Tests
 on:
   push:
     branches:
-      - fix-broken-cypress-tests
+      - main
   pull_request:
-    branches:
-      - fix-broken-cypress-tests
     types: ['opened', 'edited', 'reopened', 'synchronize', 'ready_for_review']
 jobs:
   cypress-run:
@@ -45,7 +43,6 @@ jobs:
       COINBASE_COMMERCE_WEBHOOK_SECRET: ${{ secrets.COINBASE_COMMERCE_WEBHOOK_SECRET }}
       THIRDWEB_ENGINE_ACCESS_TOKEN: ${{ secrets.THIRDWEB_ENGINE_ACCESS_TOKEN }}
       GOOGLE_PLACES_BACKEND_API_KEY: ${{ secrets.GOOGLE_PLACES_BACKEND_API_KEY }}
-      BASESCAN_API_KEY: ${{ secrets.BASESCAN_API_KEY }}
       AIRDROP_FEE_ESTIMATION_WALLET_PRIVATE_KEY: ${{ secrets.AIRDROP_FEE_ESTIMATION_WALLET_PRIVATE_KEY }}
       # environment variables
       LOCAL_USER_CRYPTO_ADDRESS: ${{vars.LOCAL_USER_CRYPTO_ADDRESS}}

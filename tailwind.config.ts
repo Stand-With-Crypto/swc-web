@@ -12,7 +12,7 @@ const config: Config = {
     },
     extend: {
       fontFamily: {
-        sans: ['var(--font-raleway)'],
+        sans: ['var(--font-satoshi)'],
         mono: ['var(--font-open-sans)'],
       },
       // https://tailwindcss.com/docs/customizing-colors default colors

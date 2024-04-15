@@ -1,10 +1,13 @@
 import { ClientAddress } from '@/clientModels/clientAddress'
+import { Experiments, EXPERIMENTS_CONFIG, IExperimentContext } from '@/utils/shared/experiments'
+import { AnalyticProperties } from '@/utils/shared/sharedAnalytics'
 
 export interface PersistedLocalUser {
   initialSearchParams: Record<string, string>
   initialReferer?: string
   datetimeFirstSeen: string
   recentlyUsedAddress?: Pick<ClientAddress, 'googlePlaceId' | 'formattedDescription'>
+  experiments?: IExperimentContext
 }
 
 export interface CurrentSessionLocalUser {
@@ -21,6 +24,16 @@ export interface LocalUser {
 
 export const LOCAL_USER_PERSISTED_KEY = 'SWC_LOCAL_USER_PERSISTED_KEY'
 export const LOCAL_USER_CURRENT_SESSION_KEY = 'SWC_LOCAL_USER_CURRENT_SESSION_KEY'
+
+export function mapPersistedLocalUserToExperimentAnalyticsProperties(
+  persisted: PersistedLocalUser | undefined,
+) {
+  return Object.entries(persisted?.experiments || {}).reduce((accum, [experiment, variant]) => {
+    const propertyName = `Experiment - ${EXPERIMENTS_CONFIG[experiment as Experiments].analyticsPropertyName}`
+    accum[propertyName] = variant as string
+    return accum
+  }, {} as AnalyticProperties)
+}
 
 export function mapPersistedLocalUserToAnalyticsProperties(
   persisted: PersistedLocalUser,
