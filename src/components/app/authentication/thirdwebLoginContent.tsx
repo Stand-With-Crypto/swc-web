@@ -74,21 +74,21 @@ export function ThirdwebLoginContent({
             <ThirdwebLoginEmbedded {...props} />
           </div>
         </div>
-      </DialogBody>
 
-      <DialogFooterCTA>
-        <p className="text-center text-xs text-muted-foreground">
-          By signing up, I understand that Stand With Crypto and its vendors may collect and use my
-          Personal Information. To learn more, visit the{' '}
-          <InternalLink href={urls.privacyPolicy()} target="_blank">
-            Stand With Crypto Alliance Privacy Policy
-          </InternalLink>{' '}
-          and{' '}
-          <ExternalLink href="https://www.quorum.us/privacy-policy/">
-            Quorum Privacy Policy
-          </ExternalLink>
-        </p>
-      </DialogFooterCTA>
+        <DialogFooterCTA className="mt-auto pb-2">
+          <p className="text-center text-xs text-muted-foreground">
+            By signing up, I understand that Stand With Crypto and its vendors may collect and use
+            my Personal Information. To learn more, visit the{' '}
+            <InternalLink href={urls.privacyPolicy()} target="_blank">
+              Stand With Crypto Alliance Privacy Policy
+            </InternalLink>{' '}
+            and{' '}
+            <ExternalLink href="https://www.quorum.us/privacy-policy/">
+              Quorum Privacy Policy
+            </ExternalLink>
+          </p>
+        </DialogFooterCTA>
+      </DialogBody>
     </>
   )
 }
