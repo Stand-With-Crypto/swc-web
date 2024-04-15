@@ -5,6 +5,7 @@ import { z } from 'zod'
 
 import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
+import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { Skeleton } from '@/components/ui/skeleton'
 import {
   formatGetDTSIPeopleFromAddressNotFoundReason,
@@ -94,7 +95,7 @@ export function DTSICongresspersonAssociatedWithFormAddress({
           </div>
           <div>
             <CryptoSupportHighlight
-              className="px-2 py-2 text-base md:px-8 md:py-4 md:text-lg"
+              className="max-sm:px-2 max-sm:py-2 max-sm:text-base"
               stanceScore={
                 person.manuallyOverriddenStanceScore || person.computedStanceScore || null
               }
