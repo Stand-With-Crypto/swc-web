@@ -128,7 +128,7 @@ export function UserActionFormEmailCongressperson({
   return (
     <Form {...form}>
       <form
-        className="flex max-h-dvh flex-col"
+        className="flex h-full max-h-dvh flex-col"
         onSubmit={form.handleSubmit(async values => {
           const address = await convertGooglePlaceAutoPredictionToAddressSchema(
             values.address,
@@ -239,19 +239,6 @@ export function UserActionFormEmailCongressperson({
             </div>
             <FormField
               control={form.control}
-              name="message"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Textarea placeholder="Your message..." rows={10} {...field} />
-                  </FormControl>
-                  <FormErrorMessage />
-                </FormItem>
-              )}
-            />
-            <FormGeneralErrorMessage control={form.control} />
-            <FormField
-              control={form.control}
               name="address"
               render={addressProps => (
                 <FormField
@@ -271,37 +258,49 @@ export function UserActionFormEmailCongressperson({
                 />
               )}
             />
+
+            <FormField
+              control={form.control}
+              name="message"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <Textarea placeholder="Your message..." rows={10} {...field} />
+                  </FormControl>
+                  <FormErrorMessage />
+                </FormItem>
+              )}
+            />
+            <FormGeneralErrorMessage control={form.control} />
+
+            <div>
+              <p className="mt-4 text-xs text-fontcolor-muted">
+                By submitting, I understand that Stand With Crypto and its vendors may collect and
+                use my Personal Information. To learn more, visit the Stand With Crypto Alliance{' '}
+                <InternalLink href={urls.privacyPolicy()} tabIndex={-1}>
+                  Privacy Policy
+                </InternalLink>{' '}
+                and{' '}
+                <ExternalLink href={'https://www.quorum.us/privacy-policy/'} tabIndex={-1}>
+                  Quorum Privacy Policy
+                </ExternalLink>
+                .
+              </p>
+            </div>
           </div>
         </ScrollArea>
         <div
-          className="z-10 flex flex-1 flex-col items-center justify-between gap-4 border border-t p-6 sm:flex-row md:px-12"
+          className="z-10 mt-auto flex  flex-col items-center justify-end gap-4 border border-t  p-6 sm:flex-row md:px-12"
           style={{ boxShadow: 'rgba(0, 0, 0, 0.2) 0px 1px 6px 0px' }}
         >
-          <div>
-            <p className="text-xs text-fontcolor-muted">
-              By submitting, I understand that Stand With Crypto and its vendors may collect and use
-              my Personal Information. To learn more, visit the Stand With Crypto Alliance{' '}
-              <InternalLink href={urls.privacyPolicy()} tabIndex={-1}>
-                Privacy Policy
-              </InternalLink>{' '}
-              and{' '}
-              <ExternalLink href={'https://www.quorum.us/privacy-policy/'} tabIndex={-1}>
-                Quorum Privacy Policy
-              </ExternalLink>
-              .
-            </p>
-          </div>
-
-          <div className="w-full sm:w-auto">
-            <Button
-              className="w-full sm:w-auto"
-              disabled={form.formState.isSubmitting}
-              size="lg"
-              type="submit"
-            >
-              Send
-            </Button>
-          </div>
+          <Button
+            className="w-full sm:w-auto"
+            disabled={form.formState.isSubmitting}
+            size="lg"
+            type="submit"
+          >
+            Send
+          </Button>
         </div>
       </form>
     </Form>
