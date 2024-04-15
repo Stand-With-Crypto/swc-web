@@ -1,11 +1,7 @@
 import { ThirdwebSDK } from '@thirdweb-dev/sdk'
 
+import { THIRD_WEB_CLIENT_SECRET } from '@/utils/server/thirdweb/thirdwebClientSecret'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
-
-const THIRD_WEB_CLIENT_SECRET = requiredEnv(
-  process.env.THIRD_WEB_CLIENT_SECRET,
-  'process.env.THIRD_WEB_CLIENT_SECRET',
-)
 
 const AIRDROP_FEE_ESTIMATION_WALLET_PRIVATE_KEY = requiredEnv(
   process.env.AIRDROP_FEE_ESTIMATION_WALLET_PRIVATE_KEY,
