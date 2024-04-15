@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { UserActionType } from '@prisma/client'
+import { ScrollArea } from '@radix-ui/react-scroll-area'
 import { ArrowRight } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 
@@ -14,6 +15,7 @@ import {
 } from '@/components/app/userActionFormCallCongressperson/constants'
 import { UserActionFormLayout } from '@/components/app/userActionFormCommon/layout'
 import { Button } from '@/components/ui/button'
+import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { ExternalLink } from '@/components/ui/link'
 import { TrackedExternalLink } from '@/components/ui/trackedExternalLink'
 import { UseSectionsReturn } from '@/hooks/useSections'
@@ -23,6 +25,7 @@ import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalyt
 import { UserActionCallCampaignName } from '@/utils/shared/userActionCampaigns'
 import { userFullName } from '@/utils/shared/userFullName'
 import { getYourPoliticianCategoryShortDisplayName } from '@/utils/shared/yourPoliticianCategory'
+import { cn } from '@/utils/web/cn'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
 import { toastGenericError } from '@/utils/web/toastUtils'
@@ -103,74 +106,76 @@ export function SuggestedScript({
   )
 
   return (
-    <UserActionFormLayout onBack={goBackSection}>
-      <UserActionFormLayout.Container>
-        <UserActionFormLayout.Heading
-          subtitle={
-            <>
-              Showing the representative for your address in{' '}
-              <ExternalLink
-                className="cursor-pointer"
-                onClick={() => goToSection(SectionNames.CHANGE_ADDRESS)}
-              >
-                {addressSchema.locality}
-              </ExternalLink>
-              .
-            </>
-          }
-          title={`Call your ${getYourPoliticianCategoryShortDisplayName(CALL_FLOW_POLITICIANS_CATEGORY, { maxCount: 1 })}`}
-        />
-
-        <div className="prose mx-auto flex-grow">
-          <h2 className="mb-2 text-base font-semibold">Suggested script</h2>
-          <div className="rounded-2xl bg-secondary p-5">
-            <p>
-              Hi, my name is <strong>{userFullName(user ?? {}, { fallback: '____' })}</strong>
-            </p>
-
-            <p>
-              I live in {addressSchema.locality}, {addressSchema.administrativeAreaLevel1} and I'm
-              calling to request Representative <strong>{dtsiPersonFullName(dtsiPerson)}</strong>
-              's support for the{' '}
-              <strong>Financial Innovation and Technology for the 21st Century Act.</strong>
-            </p>
-
-            <p>It's time crypto had regulatory clarity.</p>
-
-            <p>I believe in crypto and the mission to increase economic freedom in the world. </p>
-
-            <p>Thank you and have a nice day!</p>
-          </div>
-        </div>
-
-        <UserActionFormLayout.CongresspersonDisplayFooter
-          dtsiPeopleResponse={congressPersonData}
-          maxPeopleDisplayed={1}
-        >
-          {phoneNumber ? (
-            callingState !== 'not-calling' ? (
-              <Button
-                disabled={callingState === 'loading-call-complete'}
-                onClick={() => handleCallAction(phoneNumber)}
-              >
-                <span className="mr-1 inline-block">Call complete</span>{' '}
-                <ArrowRight className="h-5 w-5" />
-              </Button>
-            ) : (
-              <Button asChild>
-                <TrackedExternalLink
-                  href={`tel:${phoneNumber}`}
-                  onClick={() => setCallingState('pressed-called')}
-                  ref={ref}
-                  target="_self"
+    <div className="flex h-full max-h-full flex-col overflow-hidden">
+      <UserActionFormLayout className="mb-4 overflow-y-auto rounded-2xl" onBack={goBackSection}>
+        <UserActionFormLayout.Container>
+          <UserActionFormLayout.Heading
+            subtitle={
+              <>
+                Showing the representative for your address in{' '}
+                <ExternalLink
+                  className="cursor-pointer"
+                  onClick={() => goToSection(SectionNames.CHANGE_ADDRESS)}
                 >
-                  Call
-                </TrackedExternalLink>
-              </Button>
-            )
-          ) : null}
-        </UserActionFormLayout.CongresspersonDisplayFooter>
-      </UserActionFormLayout.Container>
-    </UserActionFormLayout>
+                  {addressSchema.locality}
+                </ExternalLink>
+                .
+              </>
+            }
+            title={`Call your ${getYourPoliticianCategoryShortDisplayName(CALL_FLOW_POLITICIANS_CATEGORY, { maxCount: 1 })}`}
+          />
+
+          <div className="prose mx-auto">
+            <h2 className="mb-2 text-base font-semibold">Suggested script</h2>
+            <div className="rounded-2xl bg-secondary p-5">
+              <p>
+                Hi, my name is <strong>{userFullName(user ?? {}, { fallback: '____' })}</strong>
+              </p>
+
+              <p>
+                I live in {addressSchema.locality}, {addressSchema.administrativeAreaLevel1} and I'm
+                calling to request Representative <strong>{dtsiPersonFullName(dtsiPerson)}</strong>
+                's support for the{' '}
+                <strong>Financial Innovation and Technology for the 21st Century Act.</strong>
+              </p>
+
+              <p>It's time crypto had regulatory clarity.</p>
+
+              <p>I believe in crypto and the mission to increase economic freedom in the world. </p>
+
+              <p>Thank you and have a nice day!</p>
+            </div>
+          </div>
+        </UserActionFormLayout.Container>
+      </UserActionFormLayout>
+
+      <UserActionFormLayout.CongresspersonDisplayFooter
+        dtsiPeopleResponse={congressPersonData}
+        maxPeopleDisplayed={1}
+      >
+        {phoneNumber ? (
+          callingState !== 'not-calling' ? (
+            <Button
+              disabled={callingState === 'loading-call-complete'}
+              onClick={() => handleCallAction(phoneNumber)}
+            >
+              <span className="mr-1 inline-block">Call complete</span>{' '}
+              <ArrowRight className="h-5 w-5" />
+            </Button>
+          ) : (
+            <Button asChild>
+              <TrackedExternalLink
+                href={`tel:${phoneNumber}`}
+                onClick={() => setCallingState('pressed-called')}
+                ref={ref}
+                target="_self"
+              >
+                Call
+              </TrackedExternalLink>
+            </Button>
+          )
+        ) : null}
+      </UserActionFormLayout.CongresspersonDisplayFooter>
+    </div>
   )
 }
