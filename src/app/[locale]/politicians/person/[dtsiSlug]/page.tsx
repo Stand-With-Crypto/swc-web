@@ -7,7 +7,7 @@ import { DTSIPersonDetails } from '@/data/dtsi/queries/queryDTSIPersonDetails'
 import { PageProps } from '@/types'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import {
-  convertDTSIStanceScoreToLetterGrade,
+  convertDTSIPersonStanceScoreToLetterGrade,
   DTSILetterGrade,
 } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
@@ -27,7 +27,7 @@ const getDescription = (person: DTSIPersonDetails) => {
     return `${fullName} has not made any recent comments about Bitcoin, Ethereum, and cryptocurrency innovation.`
   }
   const indication = (() => {
-    switch (convertDTSIStanceScoreToLetterGrade(person)) {
+    switch (convertDTSIPersonStanceScoreToLetterGrade(person)) {
       case DTSILetterGrade.A:
         return 'indicated they are very pro-cryptocurrencies'
       case DTSILetterGrade.B:

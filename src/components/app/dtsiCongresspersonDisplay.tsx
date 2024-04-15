@@ -7,7 +7,7 @@ import {
   UseGetDTSIPeopleFromAddressResponse,
 } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
-import { convertDTSIStanceScoreToCryptoSupportLanguageSentence } from '@/utils/dtsi/dtsiStanceScoreUtils'
+import { convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
 
 function formatDTSICategory(role?: Pick<DTSI_PersonRole, 'roleCategory'> | null) {
@@ -54,7 +54,7 @@ export function DtsiCongresspersonDisplay({
           <span className="text-nowrap">{dtsiPersonFullName(person)}</span>
         </div>
         <div className="text-fontcolor-muted">
-          {convertDTSIStanceScoreToCryptoSupportLanguageSentence(person)}
+          {convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence(person)}
         </div>
       </div>
     </div>

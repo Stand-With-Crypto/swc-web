@@ -1,5 +1,6 @@
-import { ArrowUpRight, ThumbsDown, ThumbsUp } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
 
+import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
 import { sortDTSIPersonDataTable } from '@/components/app/dtsiClientPersonDataTable/sortPeople'
 import { DTSIPersonCard } from '@/components/app/dtsiPersonCard'
 import { DelayedRecentActivity } from '@/components/app/pageHome/delayedRecentActivity'
@@ -202,9 +203,12 @@ export function PageHome({
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <div>
               <div className="text-center">
-                <h5 className="mb-4 inline-flex gap-2 rounded-lg bg-green-100 p-3 text-center text-xl font-semibold text-green-600">
-                  <ThumbsUp />
-                  <div> Pro-crypto</div>
+                <h5>
+                  <CryptoSupportHighlight
+                    className="mx-auto mb-4"
+                    stanceScore={100}
+                    text="Pro-crypto"
+                  />
                 </h5>
               </div>
               <div className="space-y-3">
@@ -215,9 +219,12 @@ export function PageHome({
             </div>
             <div>
               <div className="text-center">
-                <h5 className="mb-4 inline-flex gap-2 rounded-lg bg-red-100 p-3 text-center text-xl font-semibold text-red-600">
-                  <ThumbsDown />
-                  <div> Anti-crypto</div>
+                <h5>
+                  <CryptoSupportHighlight
+                    className="mx-auto mb-4"
+                    stanceScore={0}
+                    text="Anti-crypto"
+                  />
                 </h5>
               </div>
               <div className="space-y-3">

@@ -137,14 +137,19 @@ const TweetBody: React.FC<{ tweet: DTSIStanceDetailsTweetProp['tweet'] }> = ({ t
             return (
               <span
                 dangerouslySetInnerHTML={{
-                  __html: sanitizeHtml(twemoji.parse(text), {
-                    allowedTags: ['b', 'i', 'em', 'strong', 'img'],
-                    allowedSchemes: ['https'],
-                    allowedAttributes: {
-                      // these are the tags that twemoji adds to the inline emoji images
-                      img: ['src', 'alt', 'class', 'draggable'],
+                  __html: sanitizeHtml(
+                    twemoji.parse(text, {
+                      base: 'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/',
+                    }),
+                    {
+                      allowedTags: ['b', 'i', 'em', 'strong', 'img'],
+                      allowedSchemes: ['https'],
+                      allowedAttributes: {
+                        // these are the tags that twemoji adds to the inline emoji images
+                        img: ['src', 'alt', 'class', 'draggable'],
+                      },
                     },
-                  }),
+                  ),
                 }}
                 key={i}
               />
