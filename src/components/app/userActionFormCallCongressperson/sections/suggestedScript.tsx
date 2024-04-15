@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { UserActionType } from '@prisma/client'
-import { ScrollArea } from '@radix-ui/react-scroll-area'
 import { ArrowRight } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 
@@ -15,7 +14,6 @@ import {
 } from '@/components/app/userActionFormCallCongressperson/constants'
 import { UserActionFormLayout } from '@/components/app/userActionFormCommon/layout'
 import { Button } from '@/components/ui/button'
-import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { ExternalLink } from '@/components/ui/link'
 import { TrackedExternalLink } from '@/components/ui/trackedExternalLink'
 import { UseSectionsReturn } from '@/hooks/useSections'
@@ -25,7 +23,6 @@ import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalyt
 import { UserActionCallCampaignName } from '@/utils/shared/userActionCampaigns'
 import { userFullName } from '@/utils/shared/userFullName'
 import { getYourPoliticianCategoryShortDisplayName } from '@/utils/shared/yourPoliticianCategory'
-import { cn } from '@/utils/web/cn'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
 import { toastGenericError } from '@/utils/web/toastUtils'
