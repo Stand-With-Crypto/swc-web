@@ -11,15 +11,15 @@ export enum DTSILetterGrade {
   F = 'F',
 }
 
-type EntityWithStanceScore = Pick<
+type PersonWithStanceScore = Pick<
   DTSI_Person,
   'computedStanceScore' | 'manuallyOverriddenStanceScore'
 >
 
-const getScore = (item: EntityWithStanceScore) =>
+const getScore = (item: PersonWithStanceScore) =>
   item.manuallyOverriddenStanceScore ?? item.computedStanceScore
 
-export const convertDTSIStanceScoreToLetterGrade = (entity: EntityWithStanceScore) => {
+export const convertDTSIPersonStanceScoreToLetterGrade = (entity: PersonWithStanceScore) => {
   const score = getScore(entity)
   if (isNil(score)) {
     return null
@@ -39,7 +39,9 @@ export const convertDTSIStanceScoreToLetterGrade = (entity: EntityWithStanceScor
   return DTSILetterGrade.F
 }
 
-export const convertDTSIStanceScoreToCryptoSupportLanguage = (entity: EntityWithStanceScore) => {
+export const convertDTSIPersonStanceScoreToCryptoSupportLanguage = (
+  entity: PersonWithStanceScore,
+) => {
   const score = getScore(entity)
   if (isNil(score)) {
     return 'Pending'
@@ -59,8 +61,8 @@ export const convertDTSIStanceScoreToCryptoSupportLanguage = (entity: EntityWith
   return 'Strongly against'
 }
 
-export const convertDTSIStanceScoreToCryptoSupportLanguageSentence = (
-  entity: EntityWithStanceScore,
+export const convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence = (
+  entity: PersonWithStanceScore,
 ) => {
   const score = getScore(entity)
   if (isNil(score)) {
@@ -81,22 +83,47 @@ export const convertDTSIStanceScoreToCryptoSupportLanguageSentence = (
   return 'Strongly against crypto'
 }
 
-export const convertDTSIStanceScoreToTextColorClass = (entity: EntityWithStanceScore) => {
-  const score = getScore(entity)
+export const convertDTSIStanceScoreToCryptoSupportLanguage = (score: number | null) => {
+  if (isNil(score)) {
+    return 'Pending Analysis'
+  }
+  if (score > 75) {
+    return 'Very pro-crypto'
+  }
+  if (score > 50) {
+    return 'Somewhat pro-crypto'
+  }
+  if (score === 50) {
+    return 'Neutral on crypto'
+  }
+  if (score >= 25) {
+    return 'Somewhat anti-crypto'
+  }
+  return 'Very anti-crypto'
+}
+
+export const convertDTSIStanceScoreToTextColorClass = (score: number | null) => {
   if (isNil(score)) {
     return twNoop('text-gray-600')
   }
-  if (score >= 90) {
-    return twNoop('text-green-800')
+  if (score > 50) {
+    return twNoop('text-green-600')
   }
-  if (score >= 70) {
-    return twNoop('text-green-800')
-  }
-  if (score >= 50) {
+  if (score === 50) {
     return twNoop('text-gray-600')
   }
-  if (score >= 30) {
-    return twNoop('text-red-800')
+  return twNoop('text-red-600')
+}
+
+export const convertDTSIStanceScoreToBgColorClass = (score: number | null) => {
+  if (isNil(score)) {
+    return twNoop('bg-gray-100')
   }
-  return twNoop('text-red-800')
+  if (score > 50) {
+    return twNoop('bg-green-100')
+  }
+  if (score === 50) {
+    return twNoop('bg-gray-100')
+  }
+  return twNoop('bg-red-100')
 }

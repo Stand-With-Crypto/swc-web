@@ -9,7 +9,7 @@ import { useResponsivePopover } from '@/components/ui/responsivePopover'
 import { DTSIPersonDetails } from '@/data/dtsi/queries/queryDTSIPersonDetails'
 import { useLocale } from '@/hooks/useLocale'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
-import { convertDTSIStanceScoreToCryptoSupportLanguageSentence } from '@/utils/dtsi/dtsiStanceScoreUtils'
+import { convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { pluralize } from '@/utils/shared/pluralize'
 import { externalUrls } from '@/utils/shared/urls'
 
@@ -24,7 +24,7 @@ export function ScoreExplainer({ person }: { person: DTSIPersonDetails }) {
         </div>
         <div>
           <h3 className="mb-1 font-bold md:text-xl">
-            {convertDTSIStanceScoreToCryptoSupportLanguageSentence(person)}
+            {convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence(person)}
           </h3>
           <h4 className="text-sm text-fontcolor-muted md:text-base">
             {dtsiPersonFullName(person)} has made{' '}
