@@ -5,7 +5,6 @@ import { z } from 'zod'
 
 import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
-import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { Skeleton } from '@/components/ui/skeleton'
 import {
   formatGetDTSIPeopleFromAddressNotFoundReason,
@@ -39,7 +38,7 @@ export function DTSICongresspersonAssociatedWithFormAddress({
       res.data.dtsiPeople.some((person, index) => person.slug !== currentDTSISlugValue[index])
     ) {
       onChangeDTSISlug(res.data.dtsiPeople.map(person => person.slug))
-    } else if (currentDTSISlugValue.length && !res.data) {
+    } else if (currentDTSISlugValue.length && (!res.data || 'notFoundReason' in res.data)) {
       onChangeDTSISlug([])
     }
     // onChangeDTSISlug shouldnt be passed as a dependency
