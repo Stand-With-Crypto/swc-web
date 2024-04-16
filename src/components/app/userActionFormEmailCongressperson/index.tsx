@@ -302,12 +302,9 @@ export function UserActionFormEmailCongressperson({
             <div>
               <p className="text-xs text-fontcolor-muted">
                 By submitting, I understand that Stand With Crypto and its vendors may collect and
-                use my Personal Information. To learn more, visit the Stand With Crypto Alliance{' '}
-                <InternalLink href={urls.privacyPolicy()} tabIndex={-1}>
-                  Privacy Policy
-                </InternalLink>{' '}
-                and{' '}
-                <ExternalLink href={'https://www.quorum.us/privacy-policy/'} tabIndex={-1}>
+                use my personal information subject to the{' '}
+                <InternalLink href={urls.privacyPolicy()}>SWC Privacy Policy</InternalLink> and the{' '}
+                <ExternalLink href={'https://www.quorum.us/privacy-policy/'}>
                   Quorum Privacy Policy
                 </ExternalLink>
                 .
