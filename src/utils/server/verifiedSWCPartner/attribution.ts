@@ -2,7 +2,7 @@ import { User } from '@prisma/client'
 
 import { VerifiedSWCPartner } from '@/utils/server/verifiedSWCPartner/constants'
 
-export function getUserAcquisitionFieldsForVerifiedSWCPartner({
+export function getUserAttributionFieldsForVerifiedSWCPartner({
   partner,
   campaignName,
 }: {

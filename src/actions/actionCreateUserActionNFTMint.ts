@@ -1,7 +1,7 @@
 'use server'
 import 'server-only'
 
-import { NFTCurrency, NFTMintStatus, NFTMintType, User, UserActionType } from '@prisma/client'
+import { NFTCurrency, NFTMintStatus, User, UserActionType } from '@prisma/client'
 import { Decimal } from '@prisma/client/runtime/library'
 import * as Sentry from '@sentry/nextjs'
 import { BigNumber } from 'ethers'
@@ -145,7 +145,6 @@ async function createAction<U extends User>({
       nftMint: {
         create: {
           nftSlug: NFTSlug.STAND_WITH_CRYPTO_SUPPORTER,
-          mintType: NFTMintType.SWC_PURCHASED,
           status: NFTMintStatus.CLAIMED,
           costAtMint: decimalEthTransactionValue,
           contractAddress: contractMetadata.contractAddress,
