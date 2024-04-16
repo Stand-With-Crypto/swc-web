@@ -68,7 +68,7 @@ const getDefaultValues = ({
 }): Partial<FormValues> => {
   if (user) {
     return {
-      campaignName: UserActionEmailCampaignName.DEFAULT,
+      campaignName: UserActionEmailCampaignName.FIT21_2024_04,
       firstName: user.firstName,
       lastName: user.lastName,
       emailAddress: user.primaryUserEmailAddress?.emailAddress || '',
@@ -83,7 +83,7 @@ const getDefaultValues = ({
     }
   }
   return {
-    campaignName: UserActionEmailCampaignName.DEFAULT,
+    campaignName: UserActionEmailCampaignName.FIT21_2024_04,
     firstName: '',
     lastName: '',
     emailAddress: '',
