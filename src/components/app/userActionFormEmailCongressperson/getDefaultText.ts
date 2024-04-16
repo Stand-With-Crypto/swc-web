@@ -1,17 +1,42 @@
-const ORIGINAL_TEXT = `The House Financial Services Committee and the House Agriculture Committee in the U.S. House of Representatives passed historic, bipartisan legislation in July. I am asking you to support the bill when it comes to the floor for a full House vote.
-
-The Financial Innovation and Technology for the 21st Century Act ("FIT21") addresses a pressing need for regulatory clarity in the United States for crypto. A vote for this bill is a vote to protect customers, promote job opportunities, and bolster national security.
-
-As your constituent, I am asking you to vote for FIT21 to safeguard consumers and promote responsible innovation. Thank you.`
-
 export function getDefaultText(dtsiPersonSlugs: string[]) {
   if (dtsiPersonSlugs.some(slug => HOUSE_LEADERSHIP_SLUGS.includes(slug))) {
-    return ORIGINAL_TEXT // TODO replace once we have new text
+    return `
+  Dear Congressperson,
+
+  I am your constituent and recently learned that the Financial Innovation and Technology for the 21st Century Act Bill [FIT 21 H.R. 4763] is being considered for a floor vote in the House.
+  
+  FIT21 sets foundational rules for crypto that are pro-consumer and pro-job creation. It will protect 52 million Americans who own crypto and create millions of jobs in a critical technology sector that impacts our national security.
+  
+  We have been waiting patiently for years for our lawmakers to protect us and strengthen America’s role in building the future of money and the internet.
+  
+  I am excited to hear that the House has introduced FIT21. As part of the House leadership, your voice has a greater impact and I am asking you to support the Bill so it can be brought to a floor vote this session.    
+  `
   }
   if (dtsiPersonSlugs.some(slug => KEY_HOUSE_REP_SLUGS.includes(slug))) {
-    return ORIGINAL_TEXT // TODO replace once we have new text
+    return `
+Dear Congressperson,
+
+I am your constituent and recently learned that the Financial Innovation and Technology for the 21st Century Act Bill [FIT 21 H.R. 4763] is being considered for a floor vote in the House.
+
+FIT21 sets foundational rules for crypto that are pro-consumer and pro-job creation. It will protect 52 million Americans who own crypto and create millions of jobs in a critical technology sector that impacts our national security.
+
+We have been waiting patiently for years for our lawmakers to protect us and strengthen America’s role in building the future of money and the internet.
+
+I am excited to hear that the House has introduced FIT21 and I am asking you to co-sponsor the Bill so it can be brought to a floor vote this session.
+    
+`
   }
-  return ORIGINAL_TEXT
+  return `
+Dear Congressperson,
+
+I am your constituent and recently learned that the Financial Innovation and Technology for the 21st Century Act Bill [FIT 21 H.R. 4763] is being considered for a floor vote in the House.
+
+FIT21 sets foundational rules for crypto that are pro-consumer and pro-job creation. It will protect 52 million Americans who own crypto and create millions of jobs in a critical technology sector that impacts our national security.
+
+We have been waiting patiently for years for our lawmakers to protect us and strengthen America’s role in building the future of money and the internet.
+
+I am excited to hear that the House has introduced FIT21 and I am asking you to support the Bill so it can be brought to a floor vote this session.
+`
 }
 
 const KEY_HOUSE_REP_SLUGS = [
