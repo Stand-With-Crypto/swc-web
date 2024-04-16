@@ -28,7 +28,13 @@ export function DTSICongresspersonAssociatedWithFormAddress({
   politicianCategory: YourPoliticianCategory
   address?: z.infer<typeof zodGooglePlacesAutocompletePrediction>
   currentDTSISlugValue: string[]
-  onChangeDTSISlug: (slugs: string[]) => void
+  onChangeDTSISlug: (args: {
+    dtsiSlugs: string[]
+    location?: {
+      districtNumber: number
+      stateCode: string
+    }
+  }) => void
 }) {
   const res = useGetDTSIPeopleFromAddress(address?.description || '', politicianCategory)
   useEffect(() => {
@@ -37,9 +43,11 @@ export function DTSICongresspersonAssociatedWithFormAddress({
       'dtsiPeople' in res.data &&
       res.data.dtsiPeople.some((person, index) => person.slug !== currentDTSISlugValue[index])
     ) {
-      onChangeDTSISlug(res.data.dtsiPeople.map(person => person.slug))
+      const { districtNumber, stateCode, dtsiPeople } = res.data
+      const dtsiSlugs = dtsiPeople.map(person => person.slug)
+      onChangeDTSISlug({ dtsiSlugs, location: { districtNumber, stateCode } })
     } else if (currentDTSISlugValue.length && (!res.data || 'notFoundReason' in res.data)) {
-      onChangeDTSISlug([])
+      onChangeDTSISlug({ dtsiSlugs: [] })
     }
     // onChangeDTSISlug shouldnt be passed as a dependency
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -67,12 +67,13 @@ const getDefaultValues = ({
   dtsiSlugs: string[]
 }): Partial<FormValues> => {
   if (user) {
+    const { firstName, lastName } = user
     return {
       campaignName: UserActionEmailCampaignName.FIT21_2024_04,
       firstName: user.firstName,
       lastName: user.lastName,
       emailAddress: user.primaryUserEmailAddress?.emailAddress || '',
-      message: getDefaultText(dtsiSlugs),
+      message: getDefaultText({ dtsiSlugs, firstName, lastName }),
       address: user.address
         ? {
             description: user.address.formattedDescription,
@@ -87,7 +88,7 @@ const getDefaultValues = ({
     firstName: '',
     lastName: '',
     emailAddress: '',
-    message: getDefaultText(dtsiSlugs),
+    message: getDefaultText({ dtsiSlugs }),
     address: undefined,
     dtsiSlugs,
   }
@@ -250,10 +251,14 @@ export function UserActionFormEmailCongressperson({
                       <DTSICongresspersonAssociatedWithFormAddress
                         address={addressProps.field.value}
                         currentDTSISlugValue={dtsiSlugProps.field.value}
-                        onChangeDTSISlug={slugs => {
-                          dtsiSlugProps.field.onChange(slugs)
+                        onChangeDTSISlug={({ dtsiSlugs, location }) => {
+                          dtsiSlugProps.field.onChange(dtsiSlugs)
                           if (!hasModifiedMessage.current) {
-                            form.setValue('message', getDefaultText(slugs))
+                            const { firstName, lastName } = form.getValues()
+                            form.setValue(
+                              'message',
+                              getDefaultText({ dtsiSlugs, firstName, lastName, location }),
+                            )
                           }
                         }}
                         politicianCategory={politicianCategory}
@@ -280,7 +285,7 @@ export function UserActionFormEmailCongressperson({
                     <FormControl>
                       <Textarea
                         placeholder="Your message..."
-                        rows={10}
+                        rows={20}
                         {...field}
                         onChange={e => {
                           hasModifiedMessage.current = true
@@ -294,37 +299,34 @@ export function UserActionFormEmailCongressperson({
               )}
             />
             <FormGeneralErrorMessage control={form.control} />
+            <div>
+              <p className="text-xs text-fontcolor-muted">
+                By submitting, I understand that Stand With Crypto and its vendors may collect and
+                use my Personal Information. To learn more, visit the Stand With Crypto Alliance{' '}
+                <InternalLink href={urls.privacyPolicy()} tabIndex={-1}>
+                  Privacy Policy
+                </InternalLink>{' '}
+                and{' '}
+                <ExternalLink href={'https://www.quorum.us/privacy-policy/'} tabIndex={-1}>
+                  Quorum Privacy Policy
+                </ExternalLink>
+                .
+              </p>
+            </div>
           </div>
         </ScrollArea>
         <div
-          className="z-10 flex flex-1 flex-col items-center justify-between gap-4 border border-t p-6 sm:flex-row md:px-12"
+          className="z-10 flex flex-1 flex-col items-center justify-end border border-t p-6 sm:flex-row md:px-12"
           style={{ boxShadow: 'rgba(0, 0, 0, 0.2) 0px 1px 6px 0px' }}
         >
-          <div>
-            <p className="text-xs text-fontcolor-muted">
-              By submitting, I understand that Stand With Crypto and its vendors may collect and use
-              my Personal Information. To learn more, visit the Stand With Crypto Alliance{' '}
-              <InternalLink href={urls.privacyPolicy()} tabIndex={-1}>
-                Privacy Policy
-              </InternalLink>{' '}
-              and{' '}
-              <ExternalLink href={'https://www.quorum.us/privacy-policy/'} tabIndex={-1}>
-                Quorum Privacy Policy
-              </ExternalLink>
-              .
-            </p>
-          </div>
-
-          <div className="w-full sm:w-auto">
-            <Button
-              className="w-full sm:w-auto"
-              disabled={form.formState.isSubmitting}
-              size="lg"
-              type="submit"
-            >
-              Send
-            </Button>
-          </div>
+          <Button
+            className="w-full sm:max-w-xs"
+            disabled={form.formState.isSubmitting}
+            size="lg"
+            type="submit"
+          >
+            Send
+          </Button>
         </div>
       </form>
     </Form>

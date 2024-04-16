@@ -69,7 +69,11 @@ export function UserActionFormEmailCongresspersonSkeleton({
               </p>
             </div>
             <FormItemSkeleton>
-              <Textarea defaultValue={getDefaultText([])} placeholder="Your message..." rows={10} />
+              <Textarea
+                defaultValue={getDefaultText({ dtsiSlugs: [] })}
+                placeholder="Your message..."
+                rows={10}
+              />
             </FormItemSkeleton>
           </div>
         </div>
