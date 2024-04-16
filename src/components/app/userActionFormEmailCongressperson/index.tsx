@@ -316,7 +316,7 @@ export function UserActionFormEmailCongressperson({
           </div>
         </ScrollArea>
         <div
-          className="z-10 flex flex-1 flex-col items-center justify-end border border-t p-6 sm:flex-row md:px-12"
+          className="z-10 flex flex-1 flex-col items-center justify-center border border-t p-6 sm:flex-row md:px-12"
           style={{ boxShadow: 'rgba(0, 0, 0, 0.2) 0px 1px 6px 0px' }}
         >
           <Button
