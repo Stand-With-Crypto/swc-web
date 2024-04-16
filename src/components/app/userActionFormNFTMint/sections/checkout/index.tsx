@@ -187,7 +187,7 @@ export function UserActionFormNFTMintCheckout({
           </CollapsibleContent>
         </Collapsible>
 
-        <UserActionFormLayout.Footer>
+        <UserActionFormLayout.Footer className="!mt-auto">
           {debug ? (
             <Button
               onClick={() => goToSection(UserActionFormNFTMintSectionNames.TRANSACTION_WATCH)}
