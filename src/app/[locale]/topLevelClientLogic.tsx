@@ -1,5 +1,6 @@
 'use client'
 import { Suspense, useEffect } from 'react'
+import { QueryClient, QueryClientProvider } from 'react-query-v4'
 import * as Sentry from '@sentry/nextjs'
 import { Base } from '@thirdweb-dev/chains'
 import {
@@ -28,6 +29,8 @@ const NEXT_PUBLIC_THIRDWEB_CLIENT_ID = requiredEnv(
   process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID,
   'NEXT_PUBLIC_THIRDWEB_CLIENT_ID',
 )
+
+const queryClient = new QueryClient()
 
 const InitialOrchestration = () => {
   const pathname = usePathname()
@@ -79,32 +82,35 @@ export function TopLevelClientLogic({
   locale: SupportedLocale
 }) {
   return (
-    <LocaleContext.Provider value={locale}>
-      <ThirdwebProvider
-        activeChain={Base}
-        authConfig={{
-          domain: NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN,
-          authUrl: '/api/auth',
-        }}
-        clientId={NEXT_PUBLIC_THIRDWEB_CLIENT_ID}
-        locale={en()}
-        supportedWallets={[
-          metamaskWallet(),
-          coinbaseWallet({ recommended: true }),
-          walletConnect(),
-          embeddedWallet({
-            auth: {
-              options: ['google', 'email'],
-            },
-          }),
-        ]}
-      >
-        {/* https://nextjs.org/docs/messages/missing-suspense-with-csr-bailout */}
-        <Suspense>
-          <InitialOrchestration />
-        </Suspense>
-        {children}
-      </ThirdwebProvider>
-    </LocaleContext.Provider>
+    <QueryClientProvider client={queryClient}>
+      <LocaleContext.Provider value={locale}>
+        <ThirdwebProvider
+          activeChain={Base}
+          authConfig={{
+            domain: NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN,
+            authUrl: '/api/auth',
+          }}
+          clientId={NEXT_PUBLIC_THIRDWEB_CLIENT_ID}
+          locale={en()}
+          queryClient={queryClient}
+          supportedWallets={[
+            metamaskWallet(),
+            coinbaseWallet({ recommended: true }),
+            walletConnect(),
+            embeddedWallet({
+              auth: {
+                options: ['google', 'email'],
+              },
+            }),
+          ]}
+        >
+          {/* https://nextjs.org/docs/messages/missing-suspense-with-csr-bailout */}
+          <Suspense>
+            <InitialOrchestration />
+          </Suspense>
+          {children}
+        </ThirdwebProvider>
+      </LocaleContext.Provider>
+    </QueryClientProvider>
   )
 }
