@@ -72,7 +72,7 @@ export function UserActionFormEmailCongresspersonSkeleton({
               <Textarea
                 defaultValue={getDefaultText({ dtsiSlugs: [] })}
                 placeholder="Your message..."
-                rows={10}
+                rows={16}
               />
             </FormItemSkeleton>
           </div>

@@ -285,7 +285,7 @@ export function UserActionFormEmailCongressperson({
                     <FormControl>
                       <Textarea
                         placeholder="Your message..."
-                        rows={20}
+                        rows={16}
                         {...field}
                         onChange={e => {
                           hasModifiedMessage.current = true
