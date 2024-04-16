@@ -41,8 +41,12 @@ export const ACTION_NFT_SLUG: Record<
   },
   [UserActionType.CALL]: {
     [UserActionCallCampaignName.DEFAULT]: NFTSlug.CALL_REPRESENTATIVE_SEPT_11,
+    [UserActionCallCampaignName.FIT21_2024_04]: NFTSlug.CALL_REPRESENTATIVE_SEPT_11,
   },
-  [UserActionType.EMAIL]: { [UserActionEmailCampaignName.DEFAULT]: null },
+  [UserActionType.EMAIL]: {
+    [UserActionEmailCampaignName.DEFAULT]: null,
+    [UserActionEmailCampaignName.FIT21_2024_04]: null,
+  },
   [UserActionType.DONATION]: {
     [UserActionDonationCampaignName.DEFAULT]: null,
   },
