@@ -1,5 +1,5 @@
 'use client'
-import React, { useMemo } from 'react'
+import React, { useMemo, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { UserActionType } from '@prisma/client'
@@ -67,12 +67,13 @@ const getDefaultValues = ({
   dtsiSlugs: string[]
 }): Partial<FormValues> => {
   if (user) {
+    const { firstName, lastName } = user
     return {
-      campaignName: UserActionEmailCampaignName.DEFAULT,
+      campaignName: UserActionEmailCampaignName.FIT21_2024_04,
       firstName: user.firstName,
       lastName: user.lastName,
       emailAddress: user.primaryUserEmailAddress?.emailAddress || '',
-      message: getDefaultText(),
+      message: getDefaultText({ dtsiSlugs, firstName, lastName }),
       address: user.address
         ? {
             description: user.address.formattedDescription,
@@ -83,11 +84,11 @@ const getDefaultValues = ({
     }
   }
   return {
-    campaignName: UserActionEmailCampaignName.DEFAULT,
+    campaignName: UserActionEmailCampaignName.FIT21_2024_04,
     firstName: '',
     lastName: '',
     emailAddress: '',
-    message: getDefaultText(),
+    message: getDefaultText({ dtsiSlugs }),
     address: undefined,
     dtsiSlugs,
   }
@@ -107,6 +108,7 @@ export function UserActionFormEmailCongressperson({
 }) {
   const router = useRouter()
   const urls = useIntlUrls()
+  const hasModifiedMessage = useRef(false)
   const userDefaultValues = useMemo(() => getDefaultValues({ user, dtsiSlugs: [] }), [user])
   const politicianCategoryDisplayName = getYourPoliticianCategoryDisplayName(politicianCategory)
   const form = useForm<FormValues>({
@@ -249,30 +251,54 @@ export function UserActionFormEmailCongressperson({
                       <DTSICongresspersonAssociatedWithFormAddress
                         address={addressProps.field.value}
                         currentDTSISlugValue={dtsiSlugProps.field.value}
-                        onChangeDTSISlug={dtsiSlugProps.field.onChange}
+                        onChangeDTSISlug={({ dtsiSlugs, location }) => {
+                          dtsiSlugProps.field.onChange(dtsiSlugs)
+                          if (!hasModifiedMessage.current) {
+                            const { firstName, lastName } = form.getValues()
+                            form.setValue(
+                              'message',
+                              getDefaultText({ dtsiSlugs, firstName, lastName, location }),
+                            )
+                          }
+                        }}
                         politicianCategory={politicianCategory}
                       />
-                      <FormErrorMessage />
+                      {/* <FormErrorMessage /> */}
                     </div>
                   )}
                 />
               )}
             />
-
             <FormField
               control={form.control}
               name="message"
               render={({ field }) => (
                 <FormItem>
-                  <FormControl>
-                    <Textarea placeholder="Your message..." rows={10} {...field} />
-                  </FormControl>
+                  <div className="relative">
+                    {!form.getValues().dtsiSlugs.length && (
+                      <div className="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center bg-background/90">
+                        <p className="text-bold max-w-md text-center">
+                          Enter your address to generate a personalized message.
+                        </p>
+                      </div>
+                    )}
+                    <FormControl>
+                      <Textarea
+                        placeholder="Your message..."
+                        rows={20}
+                        {...field}
+                        onChange={e => {
+                          hasModifiedMessage.current = true
+                          field.onChange(e)
+                        }}
+                      />
+                    </FormControl>
+                  </div>
                   <FormErrorMessage />
                 </FormItem>
               )}
             />
             <FormGeneralErrorMessage control={form.control} />
-
             <div>
               <p className="mt-4 text-xs text-fontcolor-muted">
                 By submitting, I understand that Stand With Crypto and its vendors may collect and
@@ -290,11 +316,11 @@ export function UserActionFormEmailCongressperson({
           </div>
         </ScrollArea>
         <div
-          className="z-10 mt-auto flex  flex-col items-center justify-end gap-4 border border-t  p-6 sm:flex-row md:px-12"
+          className="z-10 mt-auto flex flex-1 flex-col items-center justify-center border border-t p-6 sm:flex-row md:px-12"
           style={{ boxShadow: 'rgba(0, 0, 0, 0.2) 0px 1px 6px 0px' }}
         >
           <Button
-            className="w-full sm:w-auto"
+            className="w-full sm:max-w-xs"
             disabled={form.formState.isSubmitting}
             size="lg"
             type="submit"

@@ -10,7 +10,7 @@ import { zodYourPoliticianCategory } from '@/validation/fields/zodYourPolitician
 const base = object({
   emailAddress: string().trim().email('Please enter a valid email address').toLowerCase(),
   message: string().min(1, 'Please enter a message').max(1000, 'Please enter a message'),
-  dtsiSlugs: array(zodDTSISlug),
+  dtsiSlugs: array(zodDTSISlug).min(1),
   campaignName: nativeEnum(UserActionEmailCampaignName),
   politicianCategory: zodYourPoliticianCategory,
 }).merge(zodFirstAndLastNames)

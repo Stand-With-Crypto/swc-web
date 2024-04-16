@@ -1,9 +1,10 @@
 'use client'
 import { useEffect } from 'react'
+import { isNil } from 'lodash-es'
 import { z } from 'zod'
 
+import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
-import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { Skeleton } from '@/components/ui/skeleton'
 import {
   formatGetDTSIPeopleFromAddressNotFoundReason,
@@ -27,7 +28,13 @@ export function DTSICongresspersonAssociatedWithFormAddress({
   politicianCategory: YourPoliticianCategory
   address?: z.infer<typeof zodGooglePlacesAutocompletePrediction>
   currentDTSISlugValue: string[]
-  onChangeDTSISlug: (slugs: string[]) => void
+  onChangeDTSISlug: (args: {
+    dtsiSlugs: string[]
+    location?: {
+      districtNumber: number
+      stateCode: string
+    }
+  }) => void
 }) {
   const res = useGetDTSIPeopleFromAddress(address?.description || '', politicianCategory)
   useEffect(() => {
@@ -36,11 +43,15 @@ export function DTSICongresspersonAssociatedWithFormAddress({
       'dtsiPeople' in res.data &&
       res.data.dtsiPeople.some((person, index) => person.slug !== currentDTSISlugValue[index])
     ) {
-      onChangeDTSISlug(res.data.dtsiPeople.map(person => person.slug))
-    } else if (currentDTSISlugValue && !res.data) {
-      onChangeDTSISlug([])
+      const { districtNumber, stateCode, dtsiPeople } = res.data
+      const dtsiSlugs = dtsiPeople.map(person => person.slug)
+      onChangeDTSISlug({ dtsiSlugs, location: { districtNumber, stateCode } })
+    } else if (currentDTSISlugValue.length && (!res.data || 'notFoundReason' in res.data)) {
+      onChangeDTSISlug({ dtsiSlugs: [] })
     }
-  }, [currentDTSISlugValue, onChangeDTSISlug, res.data])
+    // onChangeDTSISlug shouldnt be passed as a dependency
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentDTSISlugValue, res.data])
   const categoryDisplayName = getYourPoliticianCategoryDisplayName(politicianCategory)
   if (!address || res.isLoading) {
     return (
@@ -56,14 +67,18 @@ export function DTSICongresspersonAssociatedWithFormAddress({
     )
   }
   if (!res.data || 'notFoundReason' in res.data) {
-    return <div>{formatGetDTSIPeopleFromAddressNotFoundReason(res.data)}</div>
+    return (
+      <div className="font-bold text-destructive">
+        {formatGetDTSIPeopleFromAddressNotFoundReason(res.data)}
+      </div>
+    )
   }
   const people = res.data.dtsiPeople
   return (
     <div className="space-y-6">
       {people.map(person => (
         <div
-          className="flex w-full justify-between gap-4"
+          className="flex w-full flex-col justify-between sm:flex-row sm:items-center sm:gap-4"
           data-test-id="dtsi-person-associated-with-address"
           key={person.id}
         >
@@ -86,7 +101,17 @@ export function DTSICongresspersonAssociatedWithFormAddress({
             </div>
           </div>
           <div>
-            <DTSIFormattedLetterGrade person={person} size={60} />
+            <CryptoSupportHighlight
+              className="max-sm:px-2 max-sm:py-2 max-sm:text-base"
+              stanceScore={
+                person.manuallyOverriddenStanceScore || person.computedStanceScore || null
+              }
+              text={
+                isNil(person.manuallyOverriddenStanceScore || person.computedStanceScore)
+                  ? 'Unknown stance on crypto'
+                  : undefined
+              }
+            />
           </div>
         </div>
       ))}
