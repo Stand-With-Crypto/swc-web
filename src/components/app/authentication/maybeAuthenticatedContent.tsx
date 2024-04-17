@@ -6,10 +6,12 @@ export function MaybeAuthenticatedContent({
   children,
   authenticatedContent,
   loadingFallback,
+  useThirdwebSession,
 }: {
   children: React.ReactNode
   authenticatedContent: React.ReactNode
   loadingFallback?: React.ReactNode
+  useThirdwebSession?: boolean
 }) {
   const session = useSession()
 
@@ -17,7 +19,7 @@ export function MaybeAuthenticatedContent({
     return loadingFallback
   }
 
-  if (session.isLoggedIn) {
+  if (session.isLoggedIn && (!useThirdwebSession || session.isLoggedInThirdweb)) {
     return authenticatedContent
   }
 
