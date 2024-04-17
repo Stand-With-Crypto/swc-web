@@ -1,11 +1,11 @@
 import { z } from 'zod'
 
+import { getOrCreateSessionIdForUser } from '@/utils/server/externalOptIn/getOrCreateSessionIdForUser'
 import { prismaClient } from '@/utils/server/prismaClient'
 import {
   VerifiedSWCPartner,
   VerifiedSWCPartnerApiResponse,
 } from '@/utils/server/verifiedSWCPartner/constants'
-import { getOrCreateSessionIdToSendBackToPartner } from '@/utils/server/verifiedSWCPartner/getOrCreateSessionIdToSendBackToPartner'
 import { getLogger } from '@/utils/shared/logger'
 import { zodEmailAddress } from '@/validation/fields/zodEmailAddress'
 
@@ -48,7 +48,7 @@ export async function verifiedSWCPartnersGetUserMetadata(
   return {
     result: VerifiedSWCPartnersGetUserMetadataResult.EXISTS,
     resultOptions: Object.values(VerifiedSWCPartnersGetUserMetadataResult),
-    sessionId: await getOrCreateSessionIdToSendBackToPartner(user),
+    sessionId: await getOrCreateSessionIdForUser(user),
     userId: user.id,
   }
 }

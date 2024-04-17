@@ -22,7 +22,7 @@ type ServerAnalyticsConfig = { localUser: LocalUser | null; userId: string }
 
 const promisifiedMixpanelTrack = promisify<string, PropertyDict, void>(mixpanel.track)
 
-type CreationMethod = 'On Site' | 'Verified SWC Partner'
+type CreationMethod = 'On Site' | 'Verified SWC Partner' | 'Third Party'
 export type AnalyticsUserActionUserState = 'New' | 'Existing' | 'Existing With Updates'
 export type ServerAnalytics = ReturnType<typeof getServerAnalytics>
 
