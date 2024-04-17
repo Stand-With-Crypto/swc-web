@@ -36,45 +36,47 @@ export function UserActionFormEmailCongresspersonSkeleton({
             Email your Congressperson and tell them to support crypto. Enter following information
             and we will generate a personalized email for you to send to your representative.
           </PageSubTitle>
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            <FormItemSkeleton>
-              <label>Name</label>
-              <Input placeholder="Your name" />
-            </FormItemSkeleton>
+          <div className="space-y-4">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+              <FormItemSkeleton>
+                <label>Name</label>
+                <Input placeholder="Your name" />
+              </FormItemSkeleton>
 
-            <FormItemSkeleton>
-              <label>Email</label>
-              <Input placeholder="Your email" />
-            </FormItemSkeleton>
-            <FormItemSkeleton>
-              <label>Phone number</label>
-              <Input placeholder="Your phone number" />
-            </FormItemSkeleton>
-            <FormItemSkeleton>
-              <label>Address</label>
-              <Input placeholder="Your full address" />
-            </FormItemSkeleton>
-          </div>
-          <div className="w-full">
-            <DTSICongresspersonAssociatedWithFormAddress
-              currentDTSISlugValue={[]}
-              onChangeDTSISlug={noop}
-              politicianCategory={politicianCategory}
-            />
-          </div>
-          <div className="relative">
-            <div className="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center bg-background/90">
-              <p className="text-bold max-w-md text-center">
-                Enter your address to generate a personalized message.
-              </p>
+              <FormItemSkeleton>
+                <label>Email</label>
+                <Input placeholder="Your email" />
+              </FormItemSkeleton>
+              <FormItemSkeleton>
+                <label>Phone number</label>
+                <Input placeholder="Your phone number" />
+              </FormItemSkeleton>
+              <FormItemSkeleton>
+                <label>Address</label>
+                <Input placeholder="Your full address" />
+              </FormItemSkeleton>
             </div>
-            <FormItemSkeleton>
-              <Textarea
-                defaultValue={getDefaultText({ dtsiSlugs: [] })}
-                placeholder="Your message..."
-                rows={16}
+            <div className="w-full">
+              <DTSICongresspersonAssociatedWithFormAddress
+                currentDTSISlugValue={[]}
+                onChangeDTSISlug={noop}
+                politicianCategory={politicianCategory}
               />
-            </FormItemSkeleton>
+            </div>
+            <div className="relative">
+              <div className="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center bg-background/90">
+                <p className="text-bold max-w-md text-center">
+                  Enter your address to generate a personalized message.
+                </p>
+              </div>
+              <FormItemSkeleton>
+                <Textarea
+                  defaultValue={getDefaultText({ dtsiSlugs: [] })}
+                  placeholder="Your message..."
+                  rows={16}
+                />
+              </FormItemSkeleton>
+            </div>
           </div>
         </div>
       </ScrollArea>
