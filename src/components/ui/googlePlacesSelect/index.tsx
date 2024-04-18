@@ -47,7 +47,7 @@ export const GooglePlacesSelect = React.forwardRef<
         <InputWithIcons
           className={cn(
             triggerProps.value || 'text-gray-500',
-            'cursor-pointer',
+            'h-auto cursor-pointer whitespace-normal',
             triggerProps.open && 'outline-none ring-2 ring-ring ring-offset-2',
             className,
           )}
