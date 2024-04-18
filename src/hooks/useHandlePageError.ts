@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import * as Sentry from '@sentry/nextjs'
-import { logger } from 'ethers'
 
+import { logger } from '@/utils/shared/logger'
 import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
 
 export function useHandlePageError({
