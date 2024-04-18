@@ -300,65 +300,7 @@ export function UserActionFormEmailCongressperson({
                 )}
               />
             </div>
-            <FormField
-              control={form.control}
-              name="address"
-              render={addressProps => (
-                <FormField
-                  control={form.control}
-                  name="dtsiSlugs"
-                  render={dtsiSlugProps => (
-                    <div className="w-full">
-                      <DTSICongresspersonAssociatedWithFormAddress
-                        address={addressProps.field.value}
-                        currentDTSISlugValue={dtsiSlugProps.field.value}
-                        onChangeDTSISlug={({ dtsiSlugs, location }) => {
-                          dtsiSlugProps.field.onChange(dtsiSlugs)
-                          if (!hasModifiedMessage.current) {
-                            const { firstName, lastName } = form.getValues()
-                            form.setValue(
-                              'message',
-                              getDefaultText({ dtsiSlugs, firstName, lastName, location }),
-                            )
-                          }
-                        }}
-                        politicianCategory={politicianCategory}
-                      />
-                      {/* <FormErrorMessage /> */}
-                    </div>
-                  )}
-                />
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="message"
-              render={({ field }) => (
-                <FormItem>
-                  <div className="relative">
-                    {!form.getValues().dtsiSlugs.length && (
-                      <div className="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center bg-background/90">
-                        <p className="text-bold max-w-md text-center">
-                          Enter your address to generate a personalized message.
-                        </p>
-                      </div>
-                    )}
-                    <FormControl>
-                      <Textarea
-                        placeholder="Your message..."
-                        rows={20}
-                        {...field}
-                        onChange={e => {
-                          hasModifiedMessage.current = true
-                          field.onChange(e)
-                        }}
-                      />
-                    </FormControl>
-                  </div>
-                  <FormErrorMessage />
-                </FormItem>
-              )}
-            />
+
             <FormGeneralErrorMessage control={form.control} />
             <div>
               <p className="text-xs text-fontcolor-muted">
