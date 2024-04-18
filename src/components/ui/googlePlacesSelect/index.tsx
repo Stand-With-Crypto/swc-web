@@ -47,7 +47,7 @@ export const GooglePlacesSelect = React.forwardRef<
         <InputWithIcons
           className={cn(
             triggerProps.value || 'text-gray-500',
-            'cursor-pointer whitespace-normal',
+            'cursor-pointer',
             triggerProps.open && 'outline-none ring-2 ring-ring ring-offset-2',
             className,
           )}
@@ -57,8 +57,6 @@ export const GooglePlacesSelect = React.forwardRef<
           value={triggerProps.value?.description || inputProps.placeholder || 'select a location'}
           {...inputProps}
           readOnly
-          // There's a weird bug where, because the input is type="button", on mobile a long address string will overflow the entire page
-          type="input"
         />
       )}
       getOptionKey={val => val.place_id}

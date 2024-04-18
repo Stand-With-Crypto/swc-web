@@ -53,10 +53,11 @@ export function UserActionFormNFTMintIntro({
                     </Button>
                   }
                   loadingFallback={<FooterSkeleton />}
+                  useThirdwebSession={true}
                 >
                   <Button size="lg">Sign In</Button>
                 </LoginDialogWrapper>
-                <MaybeAuthenticatedContent authenticatedContent={null}>
+                <MaybeAuthenticatedContent authenticatedContent={null} useThirdwebSession={true}>
                   <p className="text-xs text-muted-foreground md:text-sm">
                     You will need to login first to mint the NFT
                   </p>

@@ -180,60 +180,121 @@ export function UserActionFormEmailCongressperson({
               Email your {politicianCategoryDisplayName} and tell them to support crypto. Enter the
               following information and we will generate a personalized email for you to send.
             </PageSubTitle>
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-              <FormField
-                control={form.control}
-                name="firstName"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>First name</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Your first name" {...field} />
-                    </FormControl>
-                    <FormErrorMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="lastName"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Last name</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Your last name" {...field} />
-                    </FormControl>
-                    <FormErrorMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="emailAddress"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Email</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Your email" {...field} />
-                    </FormControl>
-                    <FormErrorMessage />
-                  </FormItem>
-                )}
-              />
+            <div className="space-y-4">
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                <FormField
+                  control={form.control}
+                  name="firstName"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>First name</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Your first name" {...field} />
+                      </FormControl>
+                      <FormErrorMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="lastName"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Last name</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Your last name" {...field} />
+                      </FormControl>
+                      <FormErrorMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="emailAddress"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Email</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Your email" {...field} />
+                      </FormControl>
+                      <FormErrorMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="address"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Address</FormLabel>
+                      <FormControl>
+                        <GooglePlacesSelect
+                          {...field}
+                          onChange={field.onChange}
+                          placeholder="Your full address"
+                          value={field.value}
+                        />
+                      </FormControl>
+                      <FormErrorMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
               <FormField
                 control={form.control}
                 name="address"
+                render={addressProps => (
+                  <FormField
+                    control={form.control}
+                    name="dtsiSlugs"
+                    render={dtsiSlugProps => (
+                      <div className="w-full">
+                        <DTSICongresspersonAssociatedWithFormAddress
+                          address={addressProps.field.value}
+                          currentDTSISlugValue={dtsiSlugProps.field.value}
+                          onChangeDTSISlug={({ dtsiSlugs, location }) => {
+                            dtsiSlugProps.field.onChange(dtsiSlugs)
+                            if (!hasModifiedMessage.current) {
+                              const { firstName, lastName } = form.getValues()
+                              form.setValue(
+                                'message',
+                                getDefaultText({ dtsiSlugs, firstName, lastName, location }),
+                              )
+                            }
+                          }}
+                          politicianCategory={politicianCategory}
+                        />
+                        {/* <FormErrorMessage /> */}
+                      </div>
+                    )}
+                  />
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="message"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Address</FormLabel>
-                    <FormControl>
-                      <GooglePlacesSelect
-                        {...field}
-                        onChange={field.onChange}
-                        placeholder="Your full address"
-                        value={field.value}
-                      />
-                    </FormControl>
+                    <div className="relative">
+                      {!form.getValues().dtsiSlugs.length && (
+                        <div className="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center bg-background/90">
+                          <p className="text-bold max-w-md text-center">
+                            Enter your address to generate a personalized message.
+                          </p>
+                        </div>
+                      )}
+                      <FormControl>
+                        <Textarea
+                          placeholder="Your message..."
+                          rows={16}
+                          {...field}
+                          onChange={e => {
+                            hasModifiedMessage.current = true
+                            field.onChange(e)
+                          }}
+                        />
+                      </FormControl>
+                    </div>
                     <FormErrorMessage />
                   </FormItem>
                 )}
@@ -300,14 +361,11 @@ export function UserActionFormEmailCongressperson({
             />
             <FormGeneralErrorMessage control={form.control} />
             <div>
-              <p className="mt-4 text-xs text-fontcolor-muted">
+              <p className="text-xs text-fontcolor-muted">
                 By submitting, I understand that Stand With Crypto and its vendors may collect and
-                use my Personal Information. To learn more, visit the Stand With Crypto Alliance{' '}
-                <InternalLink href={urls.privacyPolicy()} tabIndex={-1}>
-                  Privacy Policy
-                </InternalLink>{' '}
-                and{' '}
-                <ExternalLink href={'https://www.quorum.us/privacy-policy/'} tabIndex={-1}>
+                use my personal information subject to the{' '}
+                <InternalLink href={urls.privacyPolicy()}>SWC Privacy Policy</InternalLink> and the{' '}
+                <ExternalLink href={'https://www.quorum.us/privacy-policy/'}>
                   Quorum Privacy Policy
                 </ExternalLink>
                 .

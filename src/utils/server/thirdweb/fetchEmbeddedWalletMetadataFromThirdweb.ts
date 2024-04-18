@@ -1,12 +1,8 @@
 import * as Sentry from '@sentry/nextjs'
 
+import { THIRD_WEB_CLIENT_SECRET } from '@/utils/server/thirdweb/thirdwebClientSecret'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
-
-const THIRD_WEB_CLIENT_SECRET = requiredEnv(
-  process.env.THIRD_WEB_CLIENT_SECRET,
-  'process.env.THIRD_WEB_CLIENT_SECRET',
-)
 
 const NEXT_PUBLIC_THIRDWEB_CLIENT_ID = requiredEnv(
   process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID,

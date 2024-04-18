@@ -1,3 +1,5 @@
+export const PHONE_NUMBER_REGEX = new RegExp(/^[+(\s.\-/\d)]{5,30}$/)
+
 // https://stackoverflow.com/a/43687969
 export function normalizePhoneNumber(passed: string) {
   // Split number and extension

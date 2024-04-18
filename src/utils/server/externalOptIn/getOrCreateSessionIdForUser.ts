@@ -3,7 +3,7 @@ import { sortBy } from 'lodash-es'
 
 import { prismaClient } from '@/utils/server/prismaClient'
 
-export async function getOrCreateSessionIdToSendBackToPartner(
+export async function getOrCreateSessionIdForUser(
   user: User & { userSessions: Array<UserSession> },
 ) {
   if (user.userSessions.length > 0) {
