@@ -43,8 +43,8 @@ export async function GET(request: NextRequest, { params }: { params: { index: n
             <span>Mint your free “I’m a Voter” NFT</span>
             <span tw="text-[#7a28ff] text-4xl mt-2 mb-4">by pplpleasr</span>
             <div tw="flex flex-col text-4xl text-[#a3abbb]">
-              <span>Sign up to Stand With Crypto and check</span>
-              <span>and check your voter registration to</span>
+              <span>Sign up to Stand With Crypto and</span>
+              <span>check your voter registration to</span>
               <span>mint a free NFT from pplpleasr</span>
             </div>
           </h2>
@@ -64,7 +64,7 @@ export async function GET(request: NextRequest, { params }: { params: { index: n
           <h2 tw="flex flex-col text-5xl font-bold tracking-normal text-left px-10">
             <span tw="mb-6">Join the fight</span>
             <div tw="flex flex-col text-4xl text-[#a3abbb]">
-              <span>Enter your email to join over 350,000</span>
+              <span>Enter your email to join over 400,000</span>
               <span>advocates fighting to keep crypto in</span>
               <span>America and receive regular updates on</span>
               <span>how to influence change</span>
