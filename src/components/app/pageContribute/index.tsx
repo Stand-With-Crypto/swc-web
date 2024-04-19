@@ -49,7 +49,7 @@ export function PageContribute() {
                           <ExternalLink
                             href={createTweetLink({
                               message:
-                                'I #StandWithCrypto. More than 300,000 people are already advocating for better crypto policy in America. Join the fight to receive email updates on crypto policy, invites to local events, and more.',
+                                'I #StandWithCrypto. More than 400,000 people are already advocating for better crypto policy in America. Join the fight to receive email updates on crypto policy, invites to local events, and more.',
                               url: 'https://www.standwithcrypto.org/action/sign-up?utm_source=twitter&utm_medium=social&utm_campaign=partner-share',
                             })}
                           >
@@ -60,7 +60,7 @@ export function PageContribute() {
                           <ExternalLink
                             href={createWarpcastLink({
                               message:
-                                'I #StandWithCrypto. More than 300,000 people are already advocating for better crypto policy in America. Join the fight to receive email updates on crypto policy, invites to local events, and more.',
+                                'I #StandWithCrypto. More than 400,000 people are already advocating for better crypto policy in America. Join the fight to receive email updates on crypto policy, invites to local events, and more.',
                               url: 'https://www.standwithcrypto.org/action/sign-up?utm_source=warpcast&utm_medium=social&utm_campaign=partner-share',
                             })}
                           >

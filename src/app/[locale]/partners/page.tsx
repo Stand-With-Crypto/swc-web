@@ -8,7 +8,7 @@ export const dynamic = 'error'
 
 const title = 'Our partners'
 const description =
-  'Stand With Crypto is first and foremost the result of 300,000+ people fighting to keep crypto in America. We’ve also partnered with a number of companies to fight alongside us.'
+  'Stand With Crypto is first and foremost the result of 400,000+ people fighting to keep crypto in America. We’ve also partnered with a number of companies to fight alongside us.'
 
 export const metadata: Metadata = {
   ...generateMetadataDetails({
