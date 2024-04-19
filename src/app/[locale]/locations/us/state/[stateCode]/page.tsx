@@ -4,6 +4,7 @@ import { LocationStateSpecific } from '@/components/app/pageLocationStateSpecifi
 import { queryDTSILocationStateSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationStateSpecificInformation'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
+import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { toBool } from '@/utils/shared/toBool'
 import {
   getUSStateNameFromStateCode,
@@ -13,6 +14,7 @@ import { zodUsaState } from '@/validation/fields/zodUsaState'
 
 export const dynamic = 'error'
 export const dynamicParams = toBool(process.env.MINIMIZE_PAGE_PRE_GENERATION)
+export const revalidate = SECONDS_DURATION.HOUR
 
 type LocationStateSpecificPageProps = PageProps<{
   stateCode: string

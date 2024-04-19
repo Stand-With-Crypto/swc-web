@@ -6,6 +6,7 @@ import { queryDTSILocationDistrictSpecificInformation } from '@/data/dtsi/querie
 import { PageProps } from '@/types'
 import { formatDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
+import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { toBool } from '@/utils/shared/toBool'
 import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/usStateDistrictUtils'
 import {
@@ -18,6 +19,7 @@ import { zodUsaState } from '@/validation/fields/zodUsaState'
 
 export const dynamic = 'error'
 export const dynamicParams = toBool(process.env.MINIMIZE_PAGE_PRE_GENERATION)
+export const revalidate = SECONDS_DURATION.HOUR
 
 type LocationDistrictSpecificPageProps = PageProps<{
   stateCode: string
