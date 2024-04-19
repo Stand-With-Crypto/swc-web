@@ -25,7 +25,7 @@ export const USER_ACTION_ROW_CTA_INFO: Record<
     actionType: UserActionType.OPT_IN,
     image: '/actionTypeIcons/optIn.png',
     text: 'Join Stand With Crypto',
-    subtext: 'Join over 300,000 advocates fighting to keep crypto in America.',
+    subtext: 'Join over 400,000 advocates fighting to keep crypto in America.',
     canBeTriggeredMultipleTimes: false,
     WrapperComponent: ({ children }) => (
       <LoginDialogWrapper forceUnauthenticated>{children}</LoginDialogWrapper>
