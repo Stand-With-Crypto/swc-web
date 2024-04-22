@@ -23,7 +23,7 @@ export const getPersonDataTableFilterFns = (): Record<
 > => ({
   [PERSON_TABLE_COLUMNS_IDS.FULL_NAME]: () => true,
 
-  [PERSON_TABLE_COLUMNS_IDS.STANCE]: (row, columnId, filterValue, addMeta) => {
+  [PERSON_TABLE_COLUMNS_IDS.STANCE]: (row, _columnId, filterValue, _addMeta) => {
     if (filterValue === StanceOnCryptoOptions.ALL) {
       return true
     }
@@ -44,7 +44,7 @@ export const getPersonDataTableFilterFns = (): Record<
     return stance === filterValue
   },
 
-  [PERSON_TABLE_COLUMNS_IDS.ROLE]: (row, columnId, filterValue, addMeta) => {
+  [PERSON_TABLE_COLUMNS_IDS.ROLE]: (row, _columnId, filterValue, _addMeta) => {
     if (filterValue === ROLE_OPTIONS.ALL) {
       return true
     }
@@ -63,13 +63,13 @@ export const getPersonDataTableFilterFns = (): Record<
     )
   },
 
-  [PERSON_TABLE_COLUMNS_IDS.PARTY]: (row, columnId, filterValue, addMeta) => {
+  [PERSON_TABLE_COLUMNS_IDS.PARTY]: (row, _columnId, filterValue, _addMeta) => {
     return (
       filterValue === PARTY_OPTIONS.ALL || filterValue === row.original.politicalAffiliationCategory
     )
   },
 
-  [PERSON_TABLE_COLUMNS_IDS.STATE]: (row, columnId, filterValue, addMeta) => {
+  [PERSON_TABLE_COLUMNS_IDS.STATE]: (row, _columnId, filterValue, _addMeta) => {
     return filterValue === 'All' || row.original.primaryRole?.primaryState === filterValue
   },
 })

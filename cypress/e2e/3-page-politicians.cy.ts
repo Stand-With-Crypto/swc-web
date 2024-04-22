@@ -17,16 +17,31 @@ it('page - politicians interactions', () => {
    */
   cy.get('[data-testid="state-filter-trigger"]').as('stateFilterTrigger').scrollIntoView()
   cy.get('@stateFilterTrigger').should('be.visible').click()
-
   cy.get('[role="option"]').contains('div', 'AK').as('stateOption')
   cy.get('@stateOption').should('be.visible').click({
     // force: true // Bypass visibility checks, not ideal
   })
+  cy.get('@stateFilterTrigger').children().should('contain', 'AK')
   cy.get('tbody').find('tr').should('have.length', 4)
-
   cy.get('@stateFilterTrigger').click()
   cy.get('[role="option"]').contains('div', 'All').click()
   cy.get('tbody').find('tr').should('have.length', 100)
+
+  // filter table by role
+  cy.get('[data-testid="role-filter-trigger"]').as('roleFilterTrigger').scrollIntoView()
+  cy.get('@roleFilterTrigger').should('be.visible').click()
+  cy.get('[role="option"]').contains('div', 'Senator').as('roleOption')
+  cy.get('@roleOption').should('be.visible').click()
+  cy.get('@roleFilterTrigger').children().should('contain', 'Senator')
+  cy.get('tbody')
+    .find('td:nth-child(3)')
+    .each($cell => {
+      const value = $cell.text()
+      cy.wrap(value).should('eq', 'Senator')
+    })
+  cy.get('@roleFilterTrigger').click()
+  cy.get('[role="option"]').contains('div', 'All').click()
+  cy.get('@roleFilterTrigger').children().should('contain', 'All')
 
   // filter the table by name
   cy.get('input[placeholder="Search by name or state"]').as('nameFilter').should('be.visible')
