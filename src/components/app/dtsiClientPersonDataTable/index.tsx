@@ -1,7 +1,7 @@
 'use client'
 import { useMemo } from 'react'
 import { filterFns } from '@tanstack/react-table'
-import useSWR from 'swr'
+import useSWR, { SWRConfiguration } from 'swr'
 
 import { getDTSIClientPersonDataTableColumns } from '@/components/app/dtsiClientPersonDataTable/columns'
 import { DataTable } from '@/components/app/dtsiClientPersonDataTable/dataTable'
@@ -16,35 +16,46 @@ import { apiUrls } from '@/utils/shared/urls'
 import { getUSStateNameFromStateCode } from '@/utils/shared/usStateUtils'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
 
+const parseString = (str: string) => str.toLowerCase().trim()
+
 /*
 To prevent excessive initial page load size, we lazy load the majority of the data for this page via api endpoint.
 The static data is just the first "screen" of the politicians table
 */
-
-export function useGetAllPeople() {
-  return useSWR(apiUrls.dtsiAllPeople(), url =>
-    fetchReq(url)
-      .then(res => res.json())
-      .then(data => data as Awaited<ReturnType<typeof queryDTSIAllPeople>>)
-      .catch(catchUnexpectedServerErrorAndTriggerToast),
+export function useGetAllPeople(options?: SWRConfiguration) {
+  return useSWR(
+    apiUrls.dtsiAllPeople(),
+    url =>
+      fetchReq(url)
+        .then(res => res.json())
+        .then(data => data as Awaited<ReturnType<typeof queryDTSIAllPeople>>)
+        .catch(catchUnexpectedServerErrorAndTriggerToast),
+    options,
   )
 }
+
 export function DTSIClientPersonDataTable({
   initialData,
 }: {
   initialData: DTSIPersonDataTablePeople
 }) {
-  const { data } = useGetAllPeople()
+  const { data } = useGetAllPeople({
+    fallbackData: { people: sortDTSIPersonDataTable(initialData) },
+    keepPreviousData: true,
+  })
   const locale = useLocale()
-  const memoizedColumns = useMemo(() => getDTSIClientPersonDataTableColumns({ locale }), [locale])
-  const passedData = useMemo(() => {
-    return sortDTSIPersonDataTable(data?.people || initialData)
-  }, [data?.people, initialData])
 
-  const parseString = (str: string) => str.toLowerCase().trim()
+  const passedData = useMemo(() => {
+    if (!data?.people) return
+
+    return sortDTSIPersonDataTable(data?.people)
+  }, [data?.people])
+
+  const tableColumns = useMemo(() => getDTSIClientPersonDataTableColumns({ locale }), [locale])
+
   return (
     <DataTable
-      columns={memoizedColumns}
+      columns={tableColumns}
       data={passedData}
       globalFilterFn={(row, _, filterValue, addMeta) => {
         const matchesFullName = filterFns.includesString(row, 'fullName', filterValue, addMeta)

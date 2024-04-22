@@ -1,8 +1,11 @@
 'use client'
 import { useMemo } from 'react'
-import { isNil } from 'lodash-es'
+import { Column, ColumnFiltersState } from '@tanstack/react-table'
 
-import { Person } from '@/components/app/dtsiClientPersonDataTable/columns'
+import {
+  Person,
+  PERSON_TABLE_COLUMNS_IDS,
+} from '@/components/app/dtsiClientPersonDataTable/columns'
 import {
   Select,
   SelectContent,
@@ -13,9 +16,8 @@ import {
 import {
   DTSI_PersonPoliticalAffiliationCategory,
   DTSI_PersonRoleCategory,
-  DTSI_PersonRoleStatus,
 } from '@/data/dtsi/generated'
-import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
+import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
 
 export enum StanceOnCryptoOptions {
   ALL = 'All',
@@ -58,51 +60,51 @@ export function getRoleOptionDisplayName(role: string) {
   }
 }
 
-enum GlobalFilterKeys {
-  Role = 'role',
-  Party = 'party',
-  Stance = 'stance',
-  State = 'state',
+export const getGlobalFilterDefaults = (): ColumnFiltersState => [
+  {
+    id: PERSON_TABLE_COLUMNS_IDS.STANCE,
+    value: StanceOnCryptoOptions.ALL,
+  },
+  {
+    id: PERSON_TABLE_COLUMNS_IDS.ROLE,
+    value: ROLE_OPTIONS.ALL,
+  },
+  {
+    id: PERSON_TABLE_COLUMNS_IDS.PARTY,
+    value: PARTY_OPTIONS.ALL,
+  },
+  {
+    id: PERSON_TABLE_COLUMNS_IDS.STATE,
+    value: 'All',
+  },
+]
+
+interface GlobalFilterProps<TData extends Person = Person> {
+  columns: Column<TData>[]
 }
 
-export interface IGlobalFilters {
-  [GlobalFilterKeys.Role]: (typeof ROLE_OPTIONS)[keyof typeof ROLE_OPTIONS]
-  [GlobalFilterKeys.Party]: (typeof PARTY_OPTIONS)[keyof typeof PARTY_OPTIONS]
-  [GlobalFilterKeys.Stance]: StanceOnCryptoOptions
-  [GlobalFilterKeys.State]: 'All' | USStateCode
-}
+const stateOptions = ['All', ...Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP).sort()]
 
-export const getGlobalFilterDefaults = (): IGlobalFilters => ({
-  role: ROLE_OPTIONS.ALL,
-  party: PARTY_OPTIONS.ALL,
-  stance: StanceOnCryptoOptions.ALL,
-  state: 'All',
-})
-
-export function GlobalFilters({
-  globalFilter,
-  setGlobalFilter,
-}: {
-  globalFilter: IGlobalFilters
-  setGlobalFilter: React.Dispatch<React.SetStateAction<IGlobalFilters>>
-}) {
-  const stateOptions = useMemo(() => {
-    return ['All', ...Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP).sort()]
-  }, [])
-
-  const onChangeGlobalFilter = (patch: Partial<IGlobalFilters>) => {
-    setGlobalFilter(prev => ({
-      ...prev,
-      ...patch,
-    }))
-  }
+export function GlobalFilters<TData extends Person = Person>({
+  columns,
+}: GlobalFilterProps<TData>) {
+  // const namedColumns = Object.groupBy(columns, ({ id }) => id)
+  const namedColumns = useMemo(() => {
+    const ids: Record<string, Column<TData>> = {}
+    columns.forEach(col => {
+      ids[col?.id] = col
+    })
+    return ids
+  }, [columns])
 
   // Styles get a little funky here so we can responsively support sideways scroll with the proper padding on mobile
   return (
     <div className="flex gap-2 overflow-x-auto pb-3 pl-1 pr-3 pt-3 md:overflow-x-visible md:pb-0 md:pr-0 md:pt-0">
       <Select
-        onValueChange={(stance: StanceOnCryptoOptions) => onChangeGlobalFilter({ stance })}
-        value={globalFilter.stance}
+        onValueChange={(stance: StanceOnCryptoOptions) =>
+          namedColumns?.[PERSON_TABLE_COLUMNS_IDS.STANCE]?.setFilterValue(stance)
+        }
+        value={namedColumns?.[PERSON_TABLE_COLUMNS_IDS.STANCE]?.getFilterValue() as string}
       >
         <SelectTrigger className="w-[195px] flex-shrink-0" data-testid="stance-filter-trigger">
           <span className="mr-2 inline-block flex-shrink-0 font-bold">Stance on crypto</span>
@@ -126,7 +128,12 @@ export function GlobalFilters({
         </SelectContent>
       </Select>
 
-      <Select onValueChange={role => onChangeGlobalFilter({ role })} value={globalFilter.role}>
+      <Select
+        onValueChange={(stance: StanceOnCryptoOptions) =>
+          namedColumns?.[PERSON_TABLE_COLUMNS_IDS.ROLE]?.setFilterValue(stance)
+        }
+        value={namedColumns?.[PERSON_TABLE_COLUMNS_IDS.ROLE]?.getFilterValue() as string}
+      >
         <SelectTrigger className="w-[130px] flex-shrink-0" data-testid="role-filter-trigger">
           <span className="mr-2 inline-block flex-shrink-0 font-bold">Role</span>
           <SelectValue />
@@ -148,7 +155,13 @@ export function GlobalFilters({
           ))}
         </SelectContent>
       </Select>
-      <Select onValueChange={party => onChangeGlobalFilter({ party })} value={globalFilter.party}>
+
+      <Select
+        onValueChange={(stance: StanceOnCryptoOptions) =>
+          namedColumns?.[PERSON_TABLE_COLUMNS_IDS.PARTY]?.setFilterValue(stance)
+        }
+        value={namedColumns?.[PERSON_TABLE_COLUMNS_IDS.PARTY]?.getFilterValue() as string}
+      >
         <SelectTrigger className="w-[120px] flex-shrink-0" data-testid="party-filter-trigger">
           <span className="mr-2 inline-block flex-shrink-0 font-bold">Party</span>
           <SelectValue />
@@ -170,9 +183,12 @@ export function GlobalFilters({
           ))}
         </SelectContent>
       </Select>
+
       <Select
-        onValueChange={(state: typeof globalFilter.state) => onChangeGlobalFilter({ state })}
-        value={globalFilter.state}
+        onValueChange={(stance: StanceOnCryptoOptions) =>
+          namedColumns?.[PERSON_TABLE_COLUMNS_IDS.STATE]?.setFilterValue(stance)
+        }
+        value={namedColumns?.[PERSON_TABLE_COLUMNS_IDS.STATE]?.getFilterValue() as string}
       >
         <SelectTrigger className="w-[110px] flex-shrink-0" data-testid="state-filter-trigger">
           <span className="mr-2 inline-block flex-shrink-0 font-bold">State</span>
@@ -197,87 +213,4 @@ export function GlobalFilters({
       </Select>
     </div>
   )
-}
-
-export function filterDataViaGlobalFilters<TData extends Person>(
-  passedData: TData[],
-  globalFilter: IGlobalFilters,
-) {
-  const FILTER_FN_BY_FIELD = {
-    [GlobalFilterKeys.Stance]: (
-      record: TData,
-      filterValue: IGlobalFilters[GlobalFilterKeys.Stance],
-    ) => {
-      if (filterValue === StanceOnCryptoOptions.ALL) {
-        return true
-      }
-      const scoreToUse = record.manuallyOverriddenStanceScore ?? record.computedStanceScore
-      if (filterValue === StanceOnCryptoOptions.PENDING) {
-        return isNil(scoreToUse)
-      }
-      if (filterValue === StanceOnCryptoOptions.NEUTRAL) {
-        return scoreToUse === 50
-      }
-      const stance =
-        !scoreToUse || scoreToUse === 50
-          ? null
-          : scoreToUse > 50
-            ? StanceOnCryptoOptions.PRO_CRYPTO
-            : StanceOnCryptoOptions.ANTI_CRYPTO
-      return stance === filterValue
-    },
-    [GlobalFilterKeys.Role]: (
-      record: TData,
-      filterValue: IGlobalFilters[GlobalFilterKeys.Role],
-    ) => {
-      if (filterValue === ROLE_OPTIONS.ALL) {
-        return true
-      }
-      if ([ROLE_OPTIONS.SENATE, ROLE_OPTIONS.CONGRESS].includes(filterValue)) {
-        return (
-          filterValue === record.primaryRole?.roleCategory &&
-          record.primaryRole?.status === DTSI_PersonRoleStatus.HELD
-        )
-      }
-      return (
-        !record.primaryRole?.roleCategory ||
-        ![DTSI_PersonRoleCategory.SENATE, DTSI_PersonRoleCategory.CONGRESS].includes(
-          record.primaryRole?.roleCategory,
-        ) ||
-        record.primaryRole?.status !== DTSI_PersonRoleStatus.HELD
-      )
-    },
-    [GlobalFilterKeys.Party]: (
-      record: TData,
-      filterValue: IGlobalFilters[GlobalFilterKeys.Party],
-    ) => {
-      return (
-        filterValue === PARTY_OPTIONS.ALL || filterValue === record.politicalAffiliationCategory
-      )
-    },
-    [GlobalFilterKeys.State]: (
-      record: TData,
-      filterValue: IGlobalFilters[GlobalFilterKeys.State],
-    ) => {
-      return filterValue === 'All' || record.primaryRole?.primaryState === filterValue
-    },
-  }
-
-  return passedData.filter(record => {
-    if (
-      !FILTER_FN_BY_FIELD[GlobalFilterKeys.Stance](record, globalFilter[GlobalFilterKeys.Stance])
-    ) {
-      return false
-    }
-    if (!FILTER_FN_BY_FIELD[GlobalFilterKeys.Role](record, globalFilter[GlobalFilterKeys.Role])) {
-      return false
-    }
-    if (!FILTER_FN_BY_FIELD[GlobalFilterKeys.Party](record, globalFilter[GlobalFilterKeys.Party])) {
-      return false
-    }
-    if (!FILTER_FN_BY_FIELD[GlobalFilterKeys.State](record, globalFilter[GlobalFilterKeys.State])) {
-      return false
-    }
-    return true
-  })
 }
