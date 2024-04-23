@@ -17,7 +17,7 @@ type IDTSIStanceDetailsQuoteProps = Omit<IStanceDetailsProps, 'stance'> & {
 
 export const DTSIStanceDetailsQuoteShared: React.FC<
   IDTSIStanceDetailsQuoteProps & { children: React.ReactNode }
-> = ({ children, stance, className }) => {
+> = ({ children, stance, className, bodyClassName }) => {
   return (
     <div className={cn('text-gray-800', className)}>
       {children}
@@ -27,7 +27,10 @@ export const DTSIStanceDetailsQuoteShared: React.FC<
           <div className="mr-3 w-7 shrink-0">
             <Quote className="h-6 w-6" />
           </div>
-          <RichTextFormatter richText={stance.quote.richTextDescription} />
+          <RichTextFormatter
+            className={bodyClassName}
+            richText={stance.quote.richTextDescription}
+          />
         </div>
       ) : null}
     </div>

@@ -2,6 +2,8 @@ import { parseISO } from 'date-fns'
 
 import { fetchDTSI, IS_MOCKING_DTSI_DATA } from '@/data/dtsi/fetchDTSI'
 import { fragmentDTSIPersonCard } from '@/data/dtsi/fragments/fragmentDTSIPersonCard'
+import { fragmentDTSIPersonStanceDetails } from '@/data/dtsi/fragments/fragmentDTSIPersonStanceDetails'
+import { fragmentRaceSpecificPersonInfo } from '@/data/dtsi/fragments/fragmentRaceSpecificPersonInfo'
 import {
   DTSI_PersonRoleCategory,
   DTSI_PersonRoleStatus,
@@ -12,24 +14,14 @@ import {
 export const query = /* GraphQL */ `
   query UnitedStatesPresidential {
     people(limit: 1000, offset: 0, personRoleGroupingOr: [RUNNING_FOR_PRESIDENT, US_PRESIDENT]) {
-      ...PersonCard
-      stanceCount(verificationStatusIn: APPROVED)
-      roles {
-        id
-        primaryDistrict
-        primaryState
-        roleCategory
-        status
-        dateStart
-        group {
-          id
-          category
-          groupInstance
-        }
+      ...RaceSpecificPersonInfo
+      stances(verificationStatusIn: APPROVED) {
+        ...PersonStanceDetails
       }
     }
   }
-  ${fragmentDTSIPersonCard}
+  ${fragmentDTSIPersonStanceDetails}
+  ${fragmentRaceSpecificPersonInfo}
 `
 export const queryDTSILocationUnitedStatesPresidential = async () => {
   let results = await fetchDTSI<

@@ -1,4 +1,5 @@
 import { fetchDTSI, IS_MOCKING_DTSI_DATA } from '@/data/dtsi/fetchDTSI'
+import { fragmentDTSIPersonStanceDetails } from '@/data/dtsi/fragments/fragmentDTSIPersonStanceDetails'
 import { fragmentRaceSpecificPersonInfo } from '@/data/dtsi/fragments/fragmentRaceSpecificPersonInfo'
 import {
   DTSI_DistrictSpecificInformationQuery,
@@ -26,8 +27,12 @@ export const query = /* GraphQL */ `
       personRolePrimaryDistrict: $district
     ) {
       ...RaceSpecificPersonInfo
+      stances(verificationStatusIn: APPROVED) {
+        ...PersonStanceDetails
+      }
     }
   }
+  ${fragmentDTSIPersonStanceDetails}
   ${fragmentRaceSpecificPersonInfo}
 `
 export const queryDTSILocationDistrictSpecificInformation = async ({

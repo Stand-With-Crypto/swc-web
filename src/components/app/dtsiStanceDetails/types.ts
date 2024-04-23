@@ -63,4 +63,6 @@ export type IStanceDetailsProps = {
   person: DTSIStanceDetailsPersonProp
   stance: DTSIStanceDetailsStancePassedProp
   className?: string
+  bodyClassName?: string
+  hideImages?: boolean
 }

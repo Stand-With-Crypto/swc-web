@@ -46,8 +46,11 @@ export function LocationStateSpecific({
   return (
     <div className="container max-w-4xl space-y-20">
       <div className="text-center">
-        <h2 className={'mb-4 text-fontcolor-muted'}>
-          United States / <span className="font-bold text-primary-cta">{stateName}</span>
+        <h2 className={'mb-4'}>
+          <InternalLink className="text-fontcolor-muted" href={urls.locationUnitedStates()}>
+            United States
+          </InternalLink>{' '}
+          / <span className="font-bold text-primary-cta">{stateName}</span>
         </h2>
         <PageTitle as="h1" size="md">
           Key Races in {stateName}

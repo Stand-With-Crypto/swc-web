@@ -31,7 +31,7 @@ function DefaultPlacesSelect({
       <PageTitle as="h3" className="mb-3" size="sm">
         Your District
       </PageTitle>
-      <div className="max-w-md">
+      <div className="mx-auto max-w-xl">
         <GooglePlacesSelect
           className="rounded-full bg-gray-100 text-gray-600"
           placeholder={`Enter a ${US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]} address`}

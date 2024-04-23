@@ -1,4 +1,7 @@
+import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
+import { DTSIPersonCard } from '@/components/app/dtsiPersonCard'
+import { DTSIStanceDetails } from '@/components/app/dtsiStanceDetails'
 import { FormattedPerson } from '@/components/app/pageLocationRaceSpecific/types'
 import { REGISTRATION_URLS_BY_STATE } from '@/components/app/userActionFormVoterRegistration/constants'
 import { Button } from '@/components/ui/button'
@@ -6,10 +9,12 @@ import { uppercaseSectionHeader } from '@/components/ui/classUtils'
 import { InternalLink } from '@/components/ui/link'
 import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
 import { PageTitle } from '@/components/ui/pageTitleText'
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { TrackedExternalLink } from '@/components/ui/trackedExternalLink'
 import {
   DTSI_DistrictSpecificInformationQuery,
   DTSI_PersonRoleCategory,
+  DTSI_PersonStanceType,
 } from '@/data/dtsi/generated'
 import { SupportedLocale } from '@/intl/locales'
 import { NormalizedDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
@@ -76,31 +81,39 @@ function CandidateInfo({
   person,
   locale,
 }: { person: FormattedPerson } & Pick<LocationRaceSpecificProps, 'locale'>) {
-  const urls = getIntlUrls(locale)
   return (
-    <LinkBox className="flex flex-col sm:flex-row sm:items-center sm:gap-5">
-      <div className="sm:w-[230px]">
-        <DTSIAvatar person={person} size={230} />
+    <div>
+      <div className="container">
+        <DTSIPersonCard key={person.id} locale={locale} person={person} subheader="role" />
       </div>
-      <div>
-        <PageTitle as="h4" className="text-left" size="sm">
-          {dtsiPersonFullName(person)}
-        </PageTitle>
-        <div className="mt-2 text-fontcolor-muted">
-          {person.stanceCount || 0} crypto{' '}
-          {pluralize({
-            singular: 'statement',
-            plural: 'statements',
-            count: person.stanceCount || 0,
-          })}
-        </div>
-        <div className="mt-6">
-          <Button asChild className={cn('w-full', linkBoxLinkClassName)} variant="secondary">
-            <InternalLink href={urls.politicianDetails(person.slug)}>View profile</InternalLink>
-          </Button>
-        </div>
-      </div>
-    </LinkBox>
+      {!!person.stances.length && (
+        <>
+          <h3 className="my-3 text-center font-bold">Relevant Statements</h3>
+          <ScrollArea>
+            <div className="flex gap-5 pl-4">
+              {person.stances.map(stance => {
+                return (
+                  <div className="w-[300px] shrink-0 lg:w-[500px]" key={stance.id}>
+                    <DTSIStanceDetails
+                      bodyClassName="line-clamp-6"
+                      hideImages
+                      locale={locale}
+                      person={person}
+                      stance={stance}
+                    />
+                    <CryptoSupportHighlight
+                      className="mx-auto mt-2"
+                      stanceScore={stance.computedStanceScore || null}
+                    />
+                  </div>
+                )
+              })}
+            </div>
+            <ScrollBar orientation="horizontal" />
+          </ScrollArea>
+        </>
+      )}
+    </div>
   )
 }
 
@@ -110,20 +123,30 @@ export function LocationRaceSpecific({
   people,
   locale,
 }: LocationRaceSpecificProps) {
-  const groups = organizeRaceSpecificPeople(people, { district })
+  const groups = organizeRaceSpecificPeople(people, { district, stateCode })
   const stateDisplayName = stateCode && US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]
+  const urls = getIntlUrls(locale)
   return (
-    <div className="container space-y-20">
-      <div className="text-center">
+    <div className=" space-y-20">
+      <div className="container text-center">
         <h2 className={'mb-4 text-fontcolor-muted'}>
-          United States{' / '}
+          <InternalLink className="text-fontcolor-muted" href={urls.locationUnitedStates()}>
+            United States
+          </InternalLink>
+          {' / '}
           {(() => {
             if (!stateDisplayName) {
               return <span className="font-bold text-primary-cta">Presidential</span>
             }
             return (
               <>
-                {stateDisplayName} /{' '}
+                <InternalLink
+                  className="text-fontcolor-muted"
+                  href={urls.locationStateSpecific(stateCode)}
+                >
+                  {stateDisplayName}
+                </InternalLink>{' '}
+                /{' '}
                 <span className="font-bold text-primary-cta">
                   {district
                     ? `${stateCode} Congressional District ${district}`
@@ -154,7 +177,7 @@ export function LocationRaceSpecific({
 
       <div className="divide-y-2 *:py-20 first:*:pt-0 last:*:pb-0">
         {!!groups.current.length && (
-          <section className="space-y-5">
+          <section className="space-y-16">
             <h3 className={cn(uppercaseSectionHeader)}>
               {pluralize({
                 count: groups.current.length,
@@ -168,7 +191,7 @@ export function LocationRaceSpecific({
           </section>
         )}
         {!!groups.runningFor.length && (
-          <section className="space-y-5">
+          <section className="space-y-16">
             <h3 className={cn(uppercaseSectionHeader)}>
               {pluralize({
                 count: groups.runningFor.length,

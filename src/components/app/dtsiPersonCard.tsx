@@ -51,13 +51,15 @@ function SubHeader({ person, subheader, subheaderFormatter = arg => arg }: Props
 export function DTSIPersonCard(props: Props) {
   const { person, locale, hideStanceDescriptor } = props
   return (
-    <LinkBox className="flex flex-col items-center justify-between text-left transition hover:drop-shadow-lg sm:flex-row sm:bg-secondary sm:p-6">
+    <LinkBox
+      className={cn(
+        'flex flex-col items-center justify-between text-left transition hover:drop-shadow-lg sm:flex-row sm:rounded-3xl sm:bg-secondary sm:p-6',
+      )}
+    >
       <div
         className={cn(
           'flex w-full flex-row items-center gap-4 max-sm:bg-secondary max-sm:p-6',
-          hideStanceDescriptor
-            ? 'max-sm:rounded-3xl'
-            : 'max-sm:rounded-tl-3xl max-sm:rounded-tr-3xl',
+          hideStanceDescriptor || 'max-sm:rounded-tl-3xl max-sm:rounded-tr-3xl',
         )}
       >
         <div className="relative h-[100px] w-[100px]">
