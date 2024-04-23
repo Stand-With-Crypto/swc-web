@@ -3,7 +3,7 @@ import { compact, times } from 'lodash-es'
 import { UserLocationRaceInfo } from '@/components/app/pageLocationStateSpecific/userLocationRaceInfo'
 import { REGISTRATION_URLS_BY_STATE } from '@/components/app/userActionFormVoterRegistration/constants'
 import { Button } from '@/components/ui/button'
-import { uppercaseSectionHeader } from '@/components/ui/classUtils'
+import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { TrackedExternalLink } from '@/components/ui/trackedExternalLink'
@@ -22,9 +22,15 @@ import { organizeStateSpecificPeople } from './organizeStateSpecificPeople'
 interface LocationStateSpecificProps extends DTSI_StateSpecificInformationQuery {
   stateCode: USStateCode
   locale: SupportedLocale
+  countAdvocates: number
 }
 
-export function LocationStateSpecific({ stateCode, people, locale }: LocationStateSpecificProps) {
+export function LocationStateSpecific({
+  stateCode,
+  people,
+  locale,
+  countAdvocates,
+}: LocationStateSpecificProps) {
   const groups = organizeStateSpecificPeople(people)
   const urls = getIntlUrls(locale)
   const stateName = getUSStateNameFromStateCode(stateCode)
@@ -38,15 +44,20 @@ export function LocationStateSpecific({ stateCode, people, locale }: LocationSta
     }),
   )
   return (
-    <div className="container space-y-20">
-      <div className="flex flex-col text-left sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <h1 className={cn(uppercaseSectionHeader, 'mb-6 md:mb-10')}>Crypto Voter Guide</h1>
-          <PageTitle as="h2" className="mb-6 text-left sm:mb-0 sm:text-center" size="md">
-            {stateName}
-          </PageTitle>
-        </div>
-        <Button asChild className="w-full max-w-sm sm:w-fit">
+    <div className="container max-w-4xl space-y-20">
+      <div className="text-center">
+        <h2 className={'mb-4 text-fontcolor-muted'}>
+          United States / <span className="font-bold text-primary-cta">{stateName}</span>
+        </h2>
+        <PageTitle as="h1" size="md">
+          Key Races in {stateName}
+        </PageTitle>
+        {countAdvocates > 1000 && (
+          <h3 className="mt-4 text-xl font-bold text-primary-cta">
+            <FormattedNumber amount={countAdvocates} locale={locale} /> crypto advocates
+          </h3>
+        )}
+        <Button asChild className="mt-6 w-full max-w-xs">
           <TrackedExternalLink
             eventProperties={{ Category: 'Register To Vote' }}
             href={REGISTRATION_URLS_BY_STATE[stateCode].registerUrl}
@@ -82,8 +93,7 @@ export function LocationStateSpecific({ stateCode, people, locale }: LocationSta
                 : null,
             ])}
             locale={locale}
-            subtitle="Key Race"
-            title={<>U.S Senate ({stateCode})</>}
+            title={<>U.S Senate Race ({stateCode})</>}
             url={urls.locationStateSpecificSenateRace(stateCode)}
           />
         )}
@@ -114,8 +124,7 @@ export function LocationStateSpecific({ stateCode, people, locale }: LocationSta
                 : null,
             ])}
             locale={locale}
-            subtitle="Congressional Race"
-            title={<>At-Large District</>}
+            title={<>At-Large Congressional District</>}
             url={urls.locationDistrictSpecific({ stateCode, district: 'at-large' })}
           />
         ) : (
@@ -147,7 +156,6 @@ export function LocationStateSpecific({ stateCode, people, locale }: LocationSta
             ])}
             key={district}
             locale={locale}
-            subtitle="Key Race"
             title={<>Congressional District {district}</>}
             url={urls.locationDistrictSpecific({ stateCode, district })}
           />
@@ -155,11 +163,13 @@ export function LocationStateSpecific({ stateCode, people, locale }: LocationSta
         {US_STATE_CODE_TO_DISTRICT_COUNT_MAP[stateCode] > 1 && (
           <div>
             <section className="space-y-10">
-              <h3 className={cn(uppercaseSectionHeader, 'mb-3')}>Other races in {stateName}</h3>
+              <PageTitle as="h3" className="mb-3" size="sm">
+                Other races in {stateName}
+              </PageTitle>
               <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
                 {otherDistricts.map(district => (
                   <InternalLink
-                    className={cn('mb-4 block w-1/3 flex-shrink-0 font-semibold')}
+                    className={cn('mb-4 block flex-shrink-0 font-semibold')}
                     href={urls.locationDistrictSpecific({
                       stateCode,
                       district,

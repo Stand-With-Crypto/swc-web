@@ -4,6 +4,7 @@ import { LocationStateSpecific } from '@/components/app/pageLocationStateSpecifi
 import { queryDTSILocationStateSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationStateSpecificInformation'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
+import { prismaClient } from '@/utils/server/prismaClient'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { toBool } from '@/utils/shared/toBool'
 import {
@@ -47,11 +48,22 @@ export default async function LocationStateSpecificPage({
 }: LocationStateSpecificPageProps) {
   const { locale } = params
   const stateCode = zodUsaState.parse(params.stateCode.toUpperCase())
-  const data = await queryDTSILocationStateSpecificInformation({ stateCode })
+  const [dtsiResults, countAdvocates] = await Promise.all([
+    queryDTSILocationStateSpecificInformation({ stateCode }),
+    prismaClient.user.count({
+      where: { address: { countryCode: 'US', administrativeAreaLevel1: stateCode } },
+    }),
+  ])
 
-  if (!data) {
+  if (!dtsiResults) {
     throw new Error(`Invalid params for LocationStateSpecificPage: ${JSON.stringify(params)}`)
   }
 
-  return <LocationStateSpecific {...data} {...{ stateCode, locale }} />
+  return (
+    <LocationStateSpecific
+      countAdvocates={countAdvocates}
+      {...dtsiResults}
+      {...{ stateCode, locale }}
+    />
+  )
 }

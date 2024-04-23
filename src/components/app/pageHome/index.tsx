@@ -213,7 +213,13 @@ export function PageHome({
               </div>
               <div className="space-y-3">
                 {highestScores.map(person => (
-                  <DTSIPersonCard key={person.id} locale={locale} person={person} />
+                  <DTSIPersonCard
+                    hideStanceDescriptor
+                    key={person.id}
+                    locale={locale}
+                    person={person}
+                    subheader="role-w-state"
+                  />
                 ))}
               </div>
             </div>
@@ -229,7 +235,13 @@ export function PageHome({
               </div>
               <div className="space-y-3">
                 {lowestScores.map(person => (
-                  <DTSIPersonCard key={person.id} locale={locale} person={person} />
+                  <DTSIPersonCard
+                    hideStanceDescriptor
+                    key={person.id}
+                    locale={locale}
+                    person={person}
+                    subheader="role-w-state"
+                  />
                 ))}
               </div>
             </div>

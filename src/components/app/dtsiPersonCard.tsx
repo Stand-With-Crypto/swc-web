@@ -4,26 +4,70 @@ import { InternalLink } from '@/components/ui/link'
 import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
 import { DTSI_PersonCardFragment } from '@/data/dtsi/generated'
 import { SupportedLocale } from '@/intl/locales'
-import { getDTSIFormattedShortPersonRole } from '@/utils/dtsi/dtsiPersonRoleUtils'
+import {
+  getDTSIPersonRoleCategoryDisplayName,
+  getDTSIPersonRoleCategoryWithStateDisplayName,
+} from '@/utils/dtsi/dtsiPersonRoleUtils'
 import {
   dtsiPersonFullName,
   dtsiPersonPoliticalAffiliationCategoryAbbreviation,
 } from '@/utils/dtsi/dtsiPersonUtils'
+import {
+  convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence,
+  convertDTSIStanceScoreToBgColorClass,
+} from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { getIntlUrls } from '@/utils/shared/urls'
+import { cn } from '@/utils/web/cn'
 
-export function DTSIPersonCard({
-  person,
-  locale,
-}: {
+interface Props {
   person: DTSI_PersonCardFragment
   locale: SupportedLocale
-}) {
+  subheader: 'role' | 'role-w-state'
+  hideStanceDescriptor?: boolean
+  subheaderFormatter?: (str: string) => string
+}
+
+function SubHeader({ person, subheader, subheaderFormatter = arg => arg }: Props) {
+  switch (subheader) {
+    case 'role':
+      return (
+        person.primaryRole && (
+          <div className="text-fontcolor-muted">
+            {subheaderFormatter(getDTSIPersonRoleCategoryDisplayName(person.primaryRole))}
+          </div>
+        )
+      )
+    case 'role-w-state':
+      return (
+        person.primaryRole && (
+          <div className="text-fontcolor-muted">
+            {subheaderFormatter(getDTSIPersonRoleCategoryWithStateDisplayName(person.primaryRole))}
+          </div>
+        )
+      )
+  }
+}
+
+export function DTSIPersonCard(props: Props) {
+  const { person, locale, hideStanceDescriptor } = props
   return (
-    <LinkBox className="flex items-center justify-between gap-3 rounded-3xl bg-secondary p-5 transition hover:drop-shadow-lg">
-      <div className="flex flex-row items-center gap-3">
-        <DTSIAvatar person={person} size={60} />
+    <LinkBox className="flex flex-col items-center justify-between text-left transition hover:drop-shadow-lg sm:flex-row sm:bg-secondary sm:p-6">
+      <div
+        className={cn(
+          'flex w-full flex-row items-center gap-4 max-sm:bg-secondary max-sm:p-6',
+          hideStanceDescriptor
+            ? 'max-sm:rounded-3xl'
+            : 'max-sm:rounded-tl-3xl max-sm:rounded-tr-3xl',
+        )}
+      >
+        <div className="relative h-[100px] w-[100px]">
+          <DTSIAvatar person={person} size={100} />
+          <div className="absolute bottom-0 right-[-8px]">
+            <DTSIFormattedLetterGrade person={person} size={25} />
+          </div>
+        </div>
         <div>
-          <div className="font-bold">
+          <div className="text-lg font-bold">
             <InternalLink
               className={linkBoxLinkClassName}
               href={getIntlUrls(locale).politicianDetails(person.slug)}
@@ -36,16 +80,21 @@ export function DTSIPersonCard({
                 : ''}
             </InternalLink>
           </div>
-          {person.primaryRole && (
-            <div className="text-fontcolor-muted">
-              {getDTSIFormattedShortPersonRole(person.primaryRole)}
-            </div>
-          )}
+          <SubHeader {...props} />
         </div>
       </div>
-      <div>
-        <DTSIFormattedLetterGrade person={person} size={40} />
-      </div>
+      {hideStanceDescriptor || (
+        <div
+          className={cn(
+            'shrink-0 p-3 text-center font-bold text-background antialiased max-sm:w-full max-sm:rounded-bl-3xl max-sm:rounded-br-3xl sm:rounded-lg sm:p-4',
+            convertDTSIStanceScoreToBgColorClass(
+              person.manuallyOverriddenStanceScore || person.computedStanceScore || null,
+            ),
+          )}
+        >
+          {convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence(person)}
+        </div>
+      )}
     </LinkBox>
   )
 }

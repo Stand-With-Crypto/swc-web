@@ -4,21 +4,17 @@
 import { Suspense } from 'react'
 import { compact, noop } from 'lodash-es'
 
-import {
-  LocationSpecificRaceInfo,
-  LocationSpecificRaceInfoContainer,
-} from '@/components/app/pageLocationStateSpecific/locationSpecificRaceInfo'
+import { LocationSpecificRaceInfo } from '@/components/app/pageLocationStateSpecific/locationSpecificRaceInfo'
 import { organizeStateSpecificPeople } from '@/components/app/pageLocationStateSpecific/organizeStateSpecificPeople'
-import { uppercaseSectionHeader } from '@/components/ui/classUtils'
 import { GooglePlacesSelect, GooglePlacesSelectProps } from '@/components/ui/googlePlacesSelect'
+import { PageTitle } from '@/components/ui/pageTitleText'
 import { useMutableCurrentUserAddress } from '@/hooks/useCurrentUserAddress'
 import { useGetDistrictFromAddress } from '@/hooks/useGetDistrictFromAddress'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { SupportedLocale } from '@/intl/locales'
 import { formatGetCongressionalDistrictFromAddressNotFoundReason } from '@/utils/shared/getCongressionalDistrictFromAddress'
 import { pluralize } from '@/utils/shared/pluralize'
-import { USStateCode } from '@/utils/shared/usStateUtils'
-import { cn } from '@/utils/web/cn'
+import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 
 type UserLocationRaceInfoProps = {
   groups: ReturnType<typeof organizeStateSpecificPeople>
@@ -26,24 +22,31 @@ type UserLocationRaceInfoProps = {
   locale: SupportedLocale
 }
 
-function DefaultPlacesSelect(props: Pick<GooglePlacesSelectProps, 'onChange' | 'value'>) {
+function DefaultPlacesSelect({
+  stateCode,
+  ...props
+}: Pick<GooglePlacesSelectProps, 'onChange' | 'value'> & { stateCode: USStateCode }) {
   return (
-    <LocationSpecificRaceInfoContainer>
-      <h3 className={cn(uppercaseSectionHeader, 'mb-3 text-primary-cta')}>Your District</h3>
+    <section>
+      <PageTitle as="h3" className="mb-3" size="sm">
+        Your District
+      </PageTitle>
       <div className="max-w-md">
         <GooglePlacesSelect
           className="rounded-full bg-gray-100 text-gray-600"
-          placeholder="Enter your address"
+          placeholder={`Enter a ${US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]} address`}
           {...props}
         />
       </div>
-    </LocationSpecificRaceInfoContainer>
+    </section>
   )
 }
 
 export function UserLocationRaceInfo(props: UserLocationRaceInfoProps) {
   return (
-    <Suspense fallback={<DefaultPlacesSelect onChange={noop} value={null} />}>
+    <Suspense
+      fallback={<DefaultPlacesSelect onChange={noop} stateCode={props.stateCode} value={null} />}
+    >
       <_UserLocationRaceInfo {...props} />
     </Suspense>
   )
@@ -57,20 +60,26 @@ function _UserLocationRaceInfo({ groups, stateCode, locale }: UserLocationRaceIn
   })
   if (!address || address === 'loading' || !res.data) {
     return (
-      <DefaultPlacesSelect onChange={setAddress} value={address === 'loading' ? null : address} />
+      <DefaultPlacesSelect
+        onChange={setAddress}
+        stateCode={stateCode}
+        value={address === 'loading' ? null : address}
+      />
     )
   }
   if ('notFoundReason' in res.data) {
     return (
-      <LocationSpecificRaceInfoContainer>
-        <h3 className={cn(uppercaseSectionHeader, 'mb-3 text-primary-cta')}>Your District</h3>
-        <div>
+      <section>
+        <PageTitle as="h3" className="mb-3" size="sm">
+          Your District
+        </PageTitle>
+        <div className="text-center">
           {formatGetCongressionalDistrictFromAddressNotFoundReason(res.data)}{' '}
           <button className="font-bold text-fontcolor underline" onClick={() => setAddress(null)}>
             Enter new address.
           </button>
         </div>
-      </LocationSpecificRaceInfoContainer>
+      </section>
     )
   }
   const { districtNumber } = res.data
@@ -100,13 +109,12 @@ function _UserLocationRaceInfo({ groups, stateCode, locale }: UserLocationRaceIn
           : null,
       ])}
       locale={locale}
-      subtitle={<span className="text-primary-cta">Your District</span>}
-      title={<>Congressional District {districtNumber}</>}
+      title={<>Your District ({districtNumber})</>}
       url={urls.locationDistrictSpecific({ stateCode, district: districtNumber })}
     >
-      <p className="mb-3 text-sm text-fontcolor-muted">
+      <p className="mt-3 text-center text-lg text-fontcolor-muted">
         Showing district for{' '}
-        <button className="font-bold text-fontcolor underline" onClick={() => setAddress(null)}>
+        <button className="text-primary-cta" onClick={() => setAddress(null)}>
           {address.description}
         </button>
       </p>

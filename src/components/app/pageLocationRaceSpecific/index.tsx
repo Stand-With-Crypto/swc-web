@@ -18,7 +18,7 @@ import { formatStateSpecificDTSIPerson } from '@/utils/dtsi/stateSpecificDTSIPer
 import { gracefullyError } from '@/utils/shared/gracefullyError'
 import { pluralize } from '@/utils/shared/pluralize'
 import { getIntlUrls } from '@/utils/shared/urls'
-import { USStateCode } from '@/utils/shared/usStateUtils'
+import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 import { cn } from '@/utils/web/cn'
 
 interface LocationRaceSpecificProps extends DTSI_DistrictSpecificInformationQuery {
@@ -110,26 +110,24 @@ export function LocationRaceSpecific({
 }: LocationRaceSpecificProps) {
   const urls = getIntlUrls(locale)
   const groups = organizeRaceSpecificPeople(people, { district })
+  const stateDisplayName = US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]
   return (
     <div className="container space-y-20">
-      <div className="flex flex-col text-left sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <h1 className={cn(uppercaseSectionHeader, 'mb-6 md:mb-10')}>
-            <InternalLink href={urls.locationStateSpecific(stateCode)}>
-              CA Crypto Voter Guide
-            </InternalLink>
-            {' > '}{' '}
+      <div className="text-center">
+        <h2 className={'mb-4 text-fontcolor-muted'}>
+          United States / {stateDisplayName} /{' '}
+          <span className="font-bold text-primary-cta">
             {district
               ? `${stateCode} Congressional District ${district}`
               : `U.S. Senate (${stateCode})`}
-          </h1>
-          <PageTitle as="h2" className="mb-6 text-left sm:mb-0 sm:text-center" size="md">
-            {district
-              ? `${stateCode} Congressional District ${district}`
-              : `U.S. Senate (${stateCode})`}
-          </PageTitle>
-        </div>
-        <Button asChild className="w-full max-w-sm sm:w-fit">
+          </span>
+        </h2>
+        <PageTitle as="h1" className="mb-4" size="md">
+          {district
+            ? `${stateCode} Congressional District ${district}`
+            : `U.S. Senate (${stateCode})`}
+        </PageTitle>
+        <Button asChild className="mt-6 w-full max-w-xs">
           <TrackedExternalLink
             eventProperties={{ Category: 'Register To Vote' }}
             href={REGISTRATION_URLS_BY_STATE[stateCode].registerUrl}
@@ -138,6 +136,7 @@ export function LocationRaceSpecific({
           </TrackedExternalLink>
         </Button>
       </div>
+
       <div className="divide-y-2 *:py-20 first:*:pt-0 last:*:pb-0">
         {!!groups.current.length && (
           <section className="space-y-5">
