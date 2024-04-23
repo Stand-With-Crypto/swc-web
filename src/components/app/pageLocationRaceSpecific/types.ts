@@ -1,6 +1,6 @@
 import { DTSI_DistrictSpecificInformationQuery } from '@/data/dtsi/generated'
-import { StateSpecificDTSIPerson } from '@/utils/dtsi/stateSpecificDTSIPerson'
+import { SpecificRoleDTSIPerson } from '@/utils/dtsi/specificRoleDTSIPerson'
 
-export type FormattedPerson = StateSpecificDTSIPerson<
+export type FormattedPerson = SpecificRoleDTSIPerson<
   DTSI_DistrictSpecificInformationQuery['people'][0]
 >

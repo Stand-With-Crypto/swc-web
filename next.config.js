@@ -243,11 +243,6 @@ const nextConfig = {
         permanent: false,
       },
       {
-        source: '/locations/us',
-        destination: '/politicians',
-        permanent: false,
-      },
-      {
         source: '/locations/us/state',
         destination: '/politicians',
         permanent: false,

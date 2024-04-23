@@ -14,7 +14,7 @@ import {
 import { SupportedLocale } from '@/intl/locales'
 import { NormalizedDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
-import { formatStateSpecificDTSIPerson } from '@/utils/dtsi/stateSpecificDTSIPerson'
+import { formatSpecificRoleDTSIPerson } from '@/utils/dtsi/specificRoleDTSIPerson'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
 import { pluralize } from '@/utils/shared/pluralize'
 import { getIntlUrls } from '@/utils/shared/urls'
@@ -22,21 +22,23 @@ import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/u
 import { cn } from '@/utils/web/cn'
 
 interface LocationRaceSpecificProps extends DTSI_DistrictSpecificInformationQuery {
-  stateCode: USStateCode
+  stateCode?: USStateCode
   district?: NormalizedDTSIDistrictId
   locale: SupportedLocale
 }
 
 function organizeRaceSpecificPeople(
   people: DTSI_DistrictSpecificInformationQuery['people'],
-  { district }: Pick<LocationRaceSpecificProps, 'district'>,
+  { district, stateCode }: Pick<LocationRaceSpecificProps, 'district' | 'stateCode'>,
 ) {
   const targetedRoleCategory = district
     ? DTSI_PersonRoleCategory.CONGRESS
-    : DTSI_PersonRoleCategory.SENATE
+    : stateCode
+      ? DTSI_PersonRoleCategory.SENATE
+      : DTSI_PersonRoleCategory.PRESIDENT
 
   const formatted = people.map(x =>
-    formatStateSpecificDTSIPerson(x, {
+    formatSpecificRoleDTSIPerson(x, {
       specificRole: targetedRoleCategory,
     }),
   )
@@ -45,22 +47,22 @@ function organizeRaceSpecificPeople(
     runningFor: [] as FormattedPerson[],
   }
   formatted.forEach(person => {
-    if (person.currentStateSpecificRole) {
-      if (person.currentStateSpecificRole.roleCategory === targetedRoleCategory) {
+    if (person.currentSpecificRole) {
+      if (person.currentSpecificRole.roleCategory === targetedRoleCategory) {
         grouped.current.push(person)
       } else {
         gracefullyError({
-          msg: 'Unexpected currentStateSpecificRole',
+          msg: 'Unexpected currentSpecificRole',
           fallback: null,
           hint: { extra: { person } },
         })
       }
-    } else if (person.runningForStateSpecificRole) {
-      if (person.runningForStateSpecificRole.roleCategory === targetedRoleCategory) {
+    } else if (person.runningForSpecificRole) {
+      if (person.runningForSpecificRole.roleCategory === targetedRoleCategory) {
         grouped.runningFor.push(person)
       } else {
         gracefullyError({
-          msg: 'Unexpected runningForStateSpecificRole',
+          msg: 'Unexpected runningForSpecificRole',
           fallback: null,
           hint: { extra: { person } },
         })
@@ -108,33 +110,46 @@ export function LocationRaceSpecific({
   people,
   locale,
 }: LocationRaceSpecificProps) {
-  const urls = getIntlUrls(locale)
   const groups = organizeRaceSpecificPeople(people, { district })
-  const stateDisplayName = US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]
+  const stateDisplayName = stateCode && US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]
   return (
     <div className="container space-y-20">
       <div className="text-center">
         <h2 className={'mb-4 text-fontcolor-muted'}>
-          United States / {stateDisplayName} /{' '}
-          <span className="font-bold text-primary-cta">
-            {district
-              ? `${stateCode} Congressional District ${district}`
-              : `U.S. Senate (${stateCode})`}
-          </span>
+          United States{' / '}
+          {(() => {
+            if (!stateDisplayName) {
+              return <span className="font-bold text-primary-cta">Presidential</span>
+            }
+            return (
+              <>
+                {stateDisplayName} /{' '}
+                <span className="font-bold text-primary-cta">
+                  {district
+                    ? `${stateCode} Congressional District ${district}`
+                    : `U.S. Senate (${stateCode})`}
+                </span>
+              </>
+            )
+          })()}
         </h2>
         <PageTitle as="h1" className="mb-4" size="md">
-          {district
-            ? `${stateCode} Congressional District ${district}`
-            : `U.S. Senate (${stateCode})`}
+          {!stateCode
+            ? 'U.S. Presidential Race'
+            : district
+              ? `${stateCode} Congressional District ${district}`
+              : `U.S. Senate (${stateCode})`}
         </PageTitle>
-        <Button asChild className="mt-6 w-full max-w-xs">
-          <TrackedExternalLink
-            eventProperties={{ Category: 'Register To Vote' }}
-            href={REGISTRATION_URLS_BY_STATE[stateCode].registerUrl}
-          >
-            Register to vote
-          </TrackedExternalLink>
-        </Button>
+        {stateCode && (
+          <Button asChild className="mt-6 w-full max-w-xs">
+            <TrackedExternalLink
+              eventProperties={{ Category: 'Register To Vote' }}
+              href={REGISTRATION_URLS_BY_STATE[stateCode].registerUrl}
+            >
+              Register to vote
+            </TrackedExternalLink>
+          </Button>
+        )}
       </div>
 
       <div className="divide-y-2 *:py-20 first:*:pt-0 last:*:pb-0">

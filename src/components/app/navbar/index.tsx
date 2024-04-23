@@ -29,6 +29,10 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
       text: 'Mission',
     },
     {
+      href: urls.locationUnitedStates(),
+      text: 'Races',
+    },
+    {
       href: urls.leaderboard(),
       text: 'Community',
     },

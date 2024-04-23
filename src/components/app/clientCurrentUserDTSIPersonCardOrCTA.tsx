@@ -69,7 +69,7 @@ function _ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: SupportedLo
     ?.primaryState as USStateCode | undefined
   return (
     <div>
-      <p className="mb-3 text-sm text-fontcolor-muted">
+      <p className="mb-3 text-center text-sm text-fontcolor-muted">
         Showing politicians for{' '}
         <button className="font-bold text-fontcolor underline" onClick={() => setAddress(null)}>
           {address.description}
@@ -77,7 +77,7 @@ function _ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: SupportedLo
       </p>
 
       {stateCode && (
-        <div className="mx-auto mb-12 flex max-w-4xl flex-col items-center gap-4 rounded-3xl bg-muted p-6 text-left sm:flex-row">
+        <div className="mx-auto mb-12 flex max-w-4xl flex-col items-center gap-4 rounded-3xl bg-muted p-6 sm:flex-row">
           <div>
             <h4 className="text-xl font-bold">Your crypto voter guide</h4>
             <p className="mt-4 text-fontcolor-muted">
@@ -95,7 +95,7 @@ function _ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: SupportedLo
           </div>
         </div>
       )}
-      <p className="mb-3 text-xl font-bold">Your {categoryDisplayName}</p>
+      <p className="mb-3 text-center text-xl font-bold">Your {categoryDisplayName}</p>
       <div className="mx-auto max-w-xl space-y-5">
         {people.map(person => (
           <DTSIPersonCard

@@ -19,6 +19,7 @@ export const fragmentRaceSpecificPersonInfo = /* GraphQL */ `
       primaryState
       roleCategory
       status
+      dateStart
       group {
         id
         category
