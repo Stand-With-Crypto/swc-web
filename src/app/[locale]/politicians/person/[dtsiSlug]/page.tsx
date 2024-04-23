@@ -1,3 +1,4 @@
+import { Entry } from 'contentful'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
@@ -10,6 +11,10 @@ import {
   convertDTSIPersonStanceScoreToLetterGrade,
   DTSILetterGrade,
 } from '@/utils/dtsi/dtsiStanceScoreUtils'
+import {
+  getQuestionnaire,
+  QuestionnaireEntrySkeleton,
+} from '@/utils/server/contentful/questionnaire'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { toBool } from '@/utils/shared/toBool'
 
@@ -71,7 +76,40 @@ export default async function PoliticianDetails({ params }: Props) {
   if (!person) {
     notFound()
   }
-  const questionnaire = await getQuestionnaire(params.dtsiSlug)
-  console.log(questionnaire)
-  return <PagePoliticianDetails {...{ person, locale, questionnaire }} />
+  const tempQuestionnaire: Entry<QuestionnaireEntrySkeleton, undefined> = {
+    contentTypeId: 'swcQuestionnaire',
+    fields: {
+      slug: 'cynthia---lummis',
+      q1ExperienceUsingBlockchainTechnology: true,
+      q2BlockchainWillPlayMajorRoleNextInnoWave: false,
+      q3AmerCryptoIsDrivingEconomicGrowth: true,
+      q4UsCompAtRiskIfDigitalAssetsPushedOverse: false,
+      q5UsModernizeRegulatoryEnvironmentForCrypto: true,
+      q6WouldYouVoteInFavorOfLegislation: true,
+      q7VoteInFavorOfLegisToPaymentStablecoins: false,
+      q8ShareAnyOtherOpinionsOnCrypto: 'loremawdawdawd',
+    },
+    sys: {
+      space: {
+        sys: {
+          type: 'Link',
+          linkType: 'Space',
+          id: 'c5bd0wqjc7v0',
+        },
+      },
+      id: 'swcQuestionnaire',
+      type: 'Entry',
+      createdAt: '2024-03-28T22:30:39.817Z',
+      updatedAt: '2024-04-23T16:48:37.559Z',
+      environment: {
+        sys: {
+          id: 'dev',
+          type: 'Link',
+          linkType: 'Environment',
+        },
+      },
+    },
+  }
+
+  return <PagePoliticianDetails {...{ person, locale, questionnaire: tempQuestionnaire }} />
 }
