@@ -21,16 +21,16 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
   const urls = getIntlUrls(locale)
   const leftLinks = [
     {
+      href: urls.politiciansHomepage(),
+      text: 'Politicians',
+    },
+    {
       href: urls.about(),
       text: 'Mission',
     },
     {
       href: urls.leaderboard(),
       text: 'Community',
-    },
-    {
-      href: urls.politiciansHomepage(),
-      text: 'Politicians',
     },
     {
       href: urls.resources(),
