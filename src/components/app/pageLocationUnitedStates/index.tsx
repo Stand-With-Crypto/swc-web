@@ -1,5 +1,3 @@
-import { compact } from 'lodash-es'
-
 import { ClientCurrentUserDTSIPersonCardOrCTA } from '@/components/app/clientCurrentUserDTSIPersonCardOrCTA'
 import { LocationSpecificRaceInfo } from '@/components/app/pageLocationStateSpecific/locationSpecificRaceInfo'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
@@ -7,12 +5,11 @@ import { InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { DTSI_UnitedStatesInformationQuery } from '@/data/dtsi/generated'
 import { SupportedLocale } from '@/intl/locales'
-import { pluralize } from '@/utils/shared/pluralize'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 import { cn } from '@/utils/web/cn'
 
-import { organizeStateSpecificPeople } from './organizePeople'
+import { organizePeople } from './organizePeople'
 
 interface LocationUnitedStatesProps extends DTSI_UnitedStatesInformationQuery {
   locale: SupportedLocale
@@ -24,7 +21,7 @@ export function LocationUnitedStates({
   locale,
   countAdvocates,
 }: LocationUnitedStatesProps) {
-  const groups = organizeStateSpecificPeople({ runningForPresident })
+  const groups = organizePeople({ runningForPresident })
   const urls = getIntlUrls(locale)
   return (
     <div className="container max-w-4xl space-y-20">
@@ -40,31 +37,9 @@ export function LocationUnitedStates({
       </div>
       <div className="divide-y-2 *:py-20 first:*:pt-0 last:*:pb-0">
         <ClientCurrentUserDTSIPersonCardOrCTA locale={locale} />
-        {(!!groups.runningFor.president.incumbents.length ||
-          !!groups.runningFor.president.candidates.length) && (
+        {!!groups.president.length && (
           <LocationSpecificRaceInfo
-            candidateSections={compact([
-              groups.runningFor.president.incumbents.length
-                ? {
-                    title: pluralize({
-                      count: groups.runningFor.president.incumbents.length,
-                      singular: 'Incumbent',
-                      plural: 'Incumbents',
-                    }),
-                    people: groups.runningFor.president.incumbents,
-                  }
-                : null,
-              groups.runningFor.president.candidates.length
-                ? {
-                    title: pluralize({
-                      count: groups.runningFor.president.candidates.length,
-                      singular: 'Candidate',
-                      plural: 'Candidates',
-                    }),
-                    people: groups.runningFor.president.candidates,
-                  }
-                : null,
-            ])}
+            candidates={groups.president}
             locale={locale}
             title={<>Presidential Race</>}
             url={urls.locationUnitedStatesPresidential()}

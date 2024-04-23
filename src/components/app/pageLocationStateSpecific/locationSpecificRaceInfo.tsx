@@ -8,7 +8,7 @@ import { SupportedLocale } from '@/intl/locales'
 export function LocationSpecificRaceInfo({
   title,
   url,
-  candidateSections,
+  candidates,
   children,
   locale,
 }: {
@@ -16,7 +16,7 @@ export function LocationSpecificRaceInfo({
   title: React.ReactNode
   children?: React.ReactNode
   url: string
-  candidateSections: Array<{ title: string; people: FormattedPerson[] }>
+  candidates: FormattedPerson[]
 }) {
   return (
     <section className="space-y-8">
@@ -26,15 +26,14 @@ export function LocationSpecificRaceInfo({
         </PageTitle>
         {children}
       </div>
-      {candidateSections.map(section => (
-        <div className="space-y-5" key={section.title}>
-          <div className="text-center">
-            <h4 className="inline-block rounded-full bg-muted p-2 font-bold">{section.title}</h4>
-          </div>
-          {section.people.map(person => (
-            <DTSIPersonCard key={person.id} locale={locale} person={person} subheader="role" />
-          ))}
-        </div>
+      {candidates.map(person => (
+        <DTSIPersonCard
+          key={person.id}
+          locale={locale}
+          person={person}
+          subheader="role"
+          subheaderFormatter={val => (person.isIncumbent ? 'Incumbent' : val)}
+        />
       ))}
       <div className="mt-8 text-center">
         <Button asChild className="max-sm:w-full">

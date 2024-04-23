@@ -1,30 +1,26 @@
 import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
-import { DTSIAvatar } from '@/components/app/dtsiAvatar'
 import { DTSIPersonCard } from '@/components/app/dtsiPersonCard'
 import { DTSIStanceDetails } from '@/components/app/dtsiStanceDetails'
-import { FormattedPerson } from '@/components/app/pageLocationRaceSpecific/types'
 import { REGISTRATION_URLS_BY_STATE } from '@/components/app/userActionFormVoterRegistration/constants'
 import { Button } from '@/components/ui/button'
-import { uppercaseSectionHeader } from '@/components/ui/classUtils'
 import { InternalLink } from '@/components/ui/link'
-import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { TrackedExternalLink } from '@/components/ui/trackedExternalLink'
 import {
   DTSI_DistrictSpecificInformationQuery,
   DTSI_PersonRoleCategory,
-  DTSI_PersonStanceType,
 } from '@/data/dtsi/generated'
 import { SupportedLocale } from '@/intl/locales'
 import { NormalizedDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
-import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
-import { formatSpecificRoleDTSIPerson } from '@/utils/dtsi/specificRoleDTSIPerson'
-import { gracefullyError } from '@/utils/shared/gracefullyError'
-import { pluralize } from '@/utils/shared/pluralize'
+import {
+  formatSpecificRoleDTSIPerson,
+  SpecificRoleDTSIPerson,
+} from '@/utils/dtsi/specificRoleDTSIPerson'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
-import { cn } from '@/utils/web/cn'
+
+type FormattedPerson = SpecificRoleDTSIPerson<DTSI_DistrictSpecificInformationQuery['people'][0]>
 
 interface LocationRaceSpecificProps extends DTSI_DistrictSpecificInformationQuery {
   stateCode?: USStateCode
@@ -47,34 +43,8 @@ function organizeRaceSpecificPeople(
       specificRole: targetedRoleCategory,
     }),
   )
-  const grouped = {
-    current: [] as FormattedPerson[],
-    runningFor: [] as FormattedPerson[],
-  }
-  formatted.forEach(person => {
-    if (person.currentSpecificRole) {
-      if (person.currentSpecificRole.roleCategory === targetedRoleCategory) {
-        grouped.current.push(person)
-      } else {
-        gracefullyError({
-          msg: 'Unexpected currentSpecificRole',
-          fallback: null,
-          hint: { extra: { person } },
-        })
-      }
-    } else if (person.runningForSpecificRole) {
-      if (person.runningForSpecificRole.roleCategory === targetedRoleCategory) {
-        grouped.runningFor.push(person)
-      } else {
-        gracefullyError({
-          msg: 'Unexpected runningForSpecificRole',
-          fallback: null,
-          hint: { extra: { person } },
-        })
-      }
-    }
-  })
-  return grouped
+  formatted.sort((a, b) => (a.isIncumbent === b.isIncumbent ? 0 : a.isIncumbent ? -1 : 1))
+  return formatted
 }
 
 function CandidateInfo({
@@ -83,7 +53,7 @@ function CandidateInfo({
 }: { person: FormattedPerson } & Pick<LocationRaceSpecificProps, 'locale'>) {
   return (
     <div>
-      <div className="container">
+      <div className="container max-w-4xl">
         <DTSIPersonCard key={person.id} locale={locale} person={person} subheader="role" />
       </div>
       {!!person.stances.length && (
@@ -174,37 +144,11 @@ export function LocationRaceSpecific({
           </Button>
         )}
       </div>
-
-      <div className="divide-y-2 *:py-20 first:*:pt-0 last:*:pb-0">
-        {!!groups.current.length && (
-          <section className="space-y-16">
-            <h3 className={cn(uppercaseSectionHeader)}>
-              {pluralize({
-                count: groups.current.length,
-                singular: 'Incumbent',
-                plural: 'Incumbents',
-              })}
-            </h3>
-            {groups.current.map(person => (
-              <CandidateInfo key={person.id} {...{ locale, person }} />
-            ))}
-          </section>
-        )}
-        {!!groups.runningFor.length && (
-          <section className="space-y-16">
-            <h3 className={cn(uppercaseSectionHeader)}>
-              {pluralize({
-                count: groups.runningFor.length,
-                singular: 'Candidate',
-                plural: 'Candidates',
-              })}
-            </h3>
-            {groups.runningFor.map(person => (
-              <CandidateInfo key={person.id} {...{ locale, person }} />
-            ))}
-          </section>
-        )}
-      </div>
+      <section className="space-y-20">
+        {groups.map(person => (
+          <CandidateInfo key={person.id} {...{ locale, person }} />
+        ))}
+      </section>
     </div>
   )
 }

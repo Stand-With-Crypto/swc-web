@@ -2,7 +2,7 @@
 'use client'
 
 import { Suspense } from 'react'
-import { compact, noop } from 'lodash-es'
+import { noop } from 'lodash-es'
 
 import { LocationSpecificRaceInfo } from '@/components/app/pageLocationStateSpecific/locationSpecificRaceInfo'
 import { organizeStateSpecificPeople } from '@/components/app/pageLocationStateSpecific/organizeStateSpecificPeople'
@@ -13,7 +13,6 @@ import { useGetDistrictFromAddress } from '@/hooks/useGetDistrictFromAddress'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { SupportedLocale } from '@/intl/locales'
 import { formatGetCongressionalDistrictFromAddressNotFoundReason } from '@/utils/shared/getCongressionalDistrictFromAddress'
-import { pluralize } from '@/utils/shared/pluralize'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 
 type UserLocationRaceInfoProps = {
@@ -83,31 +82,10 @@ function _UserLocationRaceInfo({ groups, stateCode, locale }: UserLocationRaceIn
     )
   }
   const { districtNumber } = res.data
-  const group = groups.runningFor.congresspeople[districtNumber]
+  const group = groups.congresspeople[districtNumber]
   return (
     <LocationSpecificRaceInfo
-      candidateSections={compact([
-        group?.incumbents.length
-          ? {
-              title: pluralize({
-                count: group?.incumbents.length,
-                singular: 'Incumbent',
-                plural: 'Incumbents',
-              }),
-              people: group?.incumbents,
-            }
-          : null,
-        group?.candidates.length
-          ? {
-              title: pluralize({
-                count: group?.candidates.length,
-                singular: 'Candidate',
-                plural: 'Candidates',
-              }),
-              people: group?.candidates,
-            }
-          : null,
-      ])}
+      candidates={group.people}
       locale={locale}
       title={<>Your District ({districtNumber})</>}
       url={urls.locationDistrictSpecific({ stateCode, district: districtNumber })}

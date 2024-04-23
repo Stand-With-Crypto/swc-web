@@ -51,6 +51,7 @@ export const queryDTSILocationSenateSpecificInformation = async ({
             primaryState: stateCode,
             roleCategory: DTSI_PersonRoleCategory.SENATE,
             status: DTSI_PersonRoleStatus.RUNNING_FOR,
+            dateStart: new Date().toISOString(),
             group: {
               id: `${person.id}-mock-group`,
               category: DTSI_PersonRoleGroupCategory.CONGRESS,

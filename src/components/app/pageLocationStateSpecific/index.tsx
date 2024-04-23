@@ -10,7 +10,6 @@ import { TrackedExternalLink } from '@/components/ui/trackedExternalLink'
 import { DTSI_StateSpecificInformationQuery } from '@/data/dtsi/generated'
 import { SupportedLocale } from '@/intl/locales'
 import { US_LOCATION_PAGES_LIVE_KEY_DISTRICTS_MAP } from '@/utils/shared/locationSpecificPages'
-import { pluralize } from '@/utils/shared/pluralize'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/usStateDistrictUtils'
 import { getUSStateNameFromStateCode, USStateCode } from '@/utils/shared/usStateUtils'
@@ -70,62 +69,18 @@ export function LocationStateSpecific({
         </Button>
       </div>
       <div className="divide-y-2 *:py-20 first:*:pt-0 last:*:pb-0">
-        {(!!groups.runningFor.senators.incumbents.length ||
-          !!groups.runningFor.senators.candidates.length) && (
+        {!!groups.senators.length && (
           <LocationSpecificRaceInfo
-            candidateSections={compact([
-              groups.runningFor.senators.incumbents.length
-                ? {
-                    title: pluralize({
-                      count: groups.runningFor.senators.incumbents.length,
-                      singular: 'Incumbent',
-                      plural: 'Incumbents',
-                    }),
-                    people: groups.runningFor.senators.incumbents,
-                  }
-                : null,
-              groups.runningFor.senators.candidates.length
-                ? {
-                    title: pluralize({
-                      count: groups.runningFor.senators.candidates.length,
-                      singular: 'Candidate',
-                      plural: 'Candidates',
-                    }),
-                    people: groups.runningFor.senators.candidates,
-                  }
-                : null,
-            ])}
+            candidates={groups.senators}
             locale={locale}
             title={<>U.S Senate Race ({stateCode})</>}
             url={urls.locationStateSpecificSenateRace(stateCode)}
           />
         )}
 
-        {!!groups.runningFor.congresspeople['at-large']?.incumbents.length ||
-        !!groups.runningFor.congresspeople['at-large']?.candidates.length ? (
+        {groups.congresspeople['at-large']?.people.length ? (
           <LocationSpecificRaceInfo
-            candidateSections={compact([
-              groups.runningFor.congresspeople['at-large']?.incumbents.length
-                ? {
-                    title: pluralize({
-                      count: groups.runningFor.congresspeople['at-large']?.incumbents.length,
-                      singular: 'Incumbent',
-                      plural: 'Incumbents',
-                    }),
-                    people: groups.runningFor.congresspeople['at-large']?.incumbents,
-                  }
-                : null,
-              groups.runningFor.congresspeople['at-large']?.candidates.length
-                ? {
-                    title: pluralize({
-                      count: groups.runningFor.congresspeople['at-large']?.candidates.length,
-                      singular: 'Candidate',
-                      plural: 'Candidates',
-                    }),
-                    people: groups.runningFor.congresspeople['at-large']?.candidates,
-                  }
-                : null,
-            ])}
+            candidates={groups.congresspeople['at-large'].people}
             locale={locale}
             title={<>At-Large Congressional District</>}
             url={urls.locationDistrictSpecific({ stateCode, district: 'at-large' })}
@@ -135,28 +90,7 @@ export function LocationStateSpecific({
         )}
         {US_LOCATION_PAGES_LIVE_KEY_DISTRICTS_MAP[stateCode]?.map(district => (
           <LocationSpecificRaceInfo
-            candidateSections={compact([
-              groups.runningFor.congresspeople[district]?.incumbents.length
-                ? {
-                    title: pluralize({
-                      count: groups.runningFor.congresspeople[district]?.incumbents.length,
-                      singular: 'Incumbent',
-                      plural: 'Incumbents',
-                    }),
-                    people: groups.runningFor.congresspeople[district]?.incumbents,
-                  }
-                : null,
-              groups.runningFor.congresspeople[district]?.candidates.length
-                ? {
-                    title: pluralize({
-                      count: groups.runningFor.congresspeople[district]?.candidates.length,
-                      singular: 'Candidate',
-                      plural: 'Candidates',
-                    }),
-                    people: groups.runningFor.congresspeople[district]?.candidates,
-                  }
-                : null,
-            ])}
+            candidates={groups.congresspeople[district].people}
             key={district}
             locale={locale}
             title={<>Congressional District {district}</>}

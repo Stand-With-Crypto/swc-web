@@ -1,27 +1,24 @@
-import { FormattedPerson } from '@/components/app/pageLocationRaceSpecific/types'
 import { DTSI_PersonRoleCategory, DTSI_UnitedStatesInformationQuery } from '@/data/dtsi/generated'
-import { formatSpecificRoleDTSIPerson } from '@/utils/dtsi/specificRoleDTSIPerson'
+import {
+  formatSpecificRoleDTSIPerson,
+  SpecificRoleDTSIPerson,
+} from '@/utils/dtsi/specificRoleDTSIPerson'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
 
-export function organizeStateSpecificPeople({
-  runningForPresident,
-}: DTSI_UnitedStatesInformationQuery) {
-  const formatted = runningForPresident.map(x => formatSpecificRoleDTSIPerson(x))
+type FormattedPerson = SpecificRoleDTSIPerson<
+  DTSI_UnitedStatesInformationQuery['runningForPresident'][0]
+>
+
+export function organizePeople({ runningForPresident }: DTSI_UnitedStatesInformationQuery) {
+  const formatted = runningForPresident.map(x =>
+    formatSpecificRoleDTSIPerson(x, { specificRole: DTSI_PersonRoleCategory.PRESIDENT }),
+  )
   const grouped = {
-    runningFor: {
-      president: {
-        incumbents: [] as FormattedPerson[],
-        candidates: [] as FormattedPerson[],
-      },
-    },
+    president: [] as FormattedPerson[],
   }
   formatted.forEach(person => {
     if (person.roles.some(x => x.roleCategory === DTSI_PersonRoleCategory.PRESIDENT)) {
-      if (person.slug === 'joseph---biden') {
-        grouped.runningFor.president.incumbents.push(person)
-      } else {
-        grouped.runningFor.president.candidates.push(person)
-      }
+      grouped.president.push(person)
     } else {
       gracefullyError({
         msg: 'Unexpected runningForSpecificRole',
@@ -30,5 +27,6 @@ export function organizeStateSpecificPeople({
       })
     }
   })
+  grouped.president.sort((a, b) => (a.isIncumbent === b.isIncumbent ? 0 : a.isIncumbent ? -1 : 1))
   return grouped
 }

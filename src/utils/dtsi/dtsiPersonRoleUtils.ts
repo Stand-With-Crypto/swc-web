@@ -8,7 +8,6 @@ import {
 } from '@/data/dtsi/generated'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
 import { getUSStateNameFromStateCode } from '@/utils/shared/usStateUtils'
-import { safeStringify } from '@/utils/web/safeStringify'
 import { withOrdinalSuffix } from '@/utils/web/withOrdinalSuffix'
 
 export const getHasDTSIPersonRoleEnded = ({ dateEnd }: { dateEnd: string | null | undefined }) => {

@@ -8,49 +8,28 @@ import { FormattedPerson } from './types'
 export function organizeStateSpecificPeople(people: DTSI_StateSpecificInformationQuery['people']) {
   const formatted = people.map(x => formatSpecificRoleDTSIPerson(x))
   const grouped = {
-    runningFor: {
-      senators: {
-        incumbents: [] as FormattedPerson[],
-        candidates: [] as FormattedPerson[],
-      },
-      congresspeople: {} as Record<
-        NormalizedDTSIDistrictId,
-        {
-          district: NormalizedDTSIDistrictId
-          incumbents: FormattedPerson[]
-          candidates: FormattedPerson[]
-        }
-      >,
-    },
+    senators: [] as FormattedPerson[],
+    congresspeople: {} as Record<
+      NormalizedDTSIDistrictId,
+      {
+        district: NormalizedDTSIDistrictId
+        people: FormattedPerson[]
+      }
+    >,
   }
   formatted.forEach(person => {
     if (person.runningForSpecificRole.roleCategory === DTSI_PersonRoleCategory.SENATE) {
-      if (
-        person.currentSpecificRole &&
-        person.currentSpecificRole.roleCategory === DTSI_PersonRoleCategory.SENATE
-      ) {
-        grouped.runningFor.senators.incumbents.push(person)
-      } else {
-        grouped.runningFor.senators.candidates.push(person)
-      }
+      grouped.senators.push(person)
     } else if (person.runningForSpecificRole.roleCategory === DTSI_PersonRoleCategory.CONGRESS) {
       const district = normalizeDTSIDistrictId(person.runningForSpecificRole)
       if (district) {
-        if (!grouped.runningFor.congresspeople[district]) {
-          grouped.runningFor.congresspeople[district] = {
+        if (!grouped.congresspeople[district]) {
+          grouped.congresspeople[district] = {
             district,
-            incumbents: [],
-            candidates: [],
+            people: [],
           }
         }
-        if (
-          person.currentSpecificRole &&
-          person.currentSpecificRole.roleCategory === DTSI_PersonRoleCategory.CONGRESS
-        ) {
-          grouped.runningFor.congresspeople[district].incumbents.push(person)
-        } else {
-          grouped.runningFor.congresspeople[district].candidates.push(person)
-        }
+        grouped.congresspeople[district].people.push(person)
       }
     } else {
       gracefullyError({
@@ -59,6 +38,10 @@ export function organizeStateSpecificPeople(people: DTSI_StateSpecificInformatio
         hint: { extra: { person } },
       })
     }
+  })
+  grouped.senators.sort((a, b) => (a.isIncumbent === b.isIncumbent ? 0 : a.isIncumbent ? -1 : 1))
+  Object.values(grouped.congresspeople).forEach(group => {
+    group.people.sort((a, b) => (a.isIncumbent === b.isIncumbent ? 0 : a.isIncumbent ? -1 : 1))
   })
   return grouped
 }
