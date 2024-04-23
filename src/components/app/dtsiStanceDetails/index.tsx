@@ -8,11 +8,9 @@ import {
   IStanceDetailsProps,
 } from '@/components/app/dtsiStanceDetails/types'
 import { DTSI_PersonStanceType } from '@/data/dtsi/generated'
+import { cn } from '@/utils/web/cn'
 
-export const DTSIStanceDetails: React.FC<IStanceDetailsProps> = ({
-  stance: passedStance,
-  ...props
-}) => {
+function StanceTypeContent({ stance: passedStance, ...props }: IStanceDetailsProps) {
   const stance = passedStance as DTSIStanceDetailsStanceProp
   if (stance.stanceType === DTSI_PersonStanceType.TWEET) {
     return <DTSIStanceDetailsTweet {...props} stance={stance} />
@@ -24,4 +22,12 @@ export const DTSIStanceDetails: React.FC<IStanceDetailsProps> = ({
     return <DTSIStanceDetailsBillRelationship {...props} stance={stance} />
   }
   throw new Error(`invalid StanceDetails passed ${JSON.stringify(stance)}`)
+}
+
+export function DTSIStanceDetails(props: IStanceDetailsProps) {
+  return (
+    <article className={cn('rounded-3xl bg-secondary p-4 md:p-6')}>
+      <StanceTypeContent {...props} />
+    </article>
+  )
 }

@@ -15,7 +15,7 @@ import {
   dtsiPersonFullName,
   dtsiPersonPoliticalAffiliationCategoryDisplayName,
 } from '@/utils/dtsi/dtsiPersonUtils'
-import { convertDTSIStanceScoreToCryptoSupportLanguage } from '@/utils/dtsi/dtsiStanceScoreUtils'
+import { convertDTSIPersonStanceScoreToCryptoSupportLanguage } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { getUSStateNameFromStateCode } from '@/utils/shared/usStateUtils'
 import { cn } from '@/utils/web/cn'
@@ -65,7 +65,7 @@ export const getDTSIClientPersonDataTableColumns = ({
       <div className="flex items-center gap-2">
         <DTSIFormattedLetterGrade person={row.original} size={30} />
         <span className="hidden md:inline">
-          {convertDTSIStanceScoreToCryptoSupportLanguage(row.original)}
+          {convertDTSIPersonStanceScoreToCryptoSupportLanguage(row.original)}
         </span>
       </div>
     ),

@@ -3,16 +3,16 @@
 import { UserActionType } from '@prisma/client'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
+import { CALL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormCallCongressperson/constants'
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
+import { EMAIL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormEmailCongressperson/constants'
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
 import { UserActionRowCTAProps } from '@/components/app/userActionRowCTA'
-import { InternalLink } from '@/components/ui/link'
 import { UserActionTweetLink } from '@/components/ui/userActionTweetLink'
-import { useLocale } from '@/hooks/useLocale'
 import { ActiveClientUserActionType } from '@/utils/shared/activeUserAction'
-import { getIntlUrls } from '@/utils/shared/urls'
+import { getYourPoliticianCategoryShortDisplayName } from '@/utils/shared/yourPoliticianCategory'
 
 export const USER_ACTION_ROW_CTA_INFO: Record<
   ActiveClientUserActionType,
@@ -22,7 +22,7 @@ export const USER_ACTION_ROW_CTA_INFO: Record<
     actionType: UserActionType.OPT_IN,
     image: '/actionTypeIcons/optIn.png',
     text: 'Join Stand With Crypto',
-    subtext: 'Join over 300,000 advocates fighting to keep crypto in America.',
+    subtext: 'Join over 400,000 advocates fighting to keep crypto in America.',
     canBeTriggeredMultipleTimes: false,
     WrapperComponent: ({ children }) => (
       <LoginDialogWrapper forceUnauthenticated>{children}</LoginDialogWrapper>
@@ -40,7 +40,7 @@ export const USER_ACTION_ROW_CTA_INFO: Record<
   [UserActionType.CALL]: {
     actionType: UserActionType.CALL,
     image: '/actionTypeIcons/call.png',
-    text: 'Call your Congressperson',
+    text: `Call your ${getYourPoliticianCategoryShortDisplayName(CALL_FLOW_POLITICIANS_CATEGORY, { maxCount: 1 })}`,
     subtext: 'The most effective way to make your voice heard.',
     canBeTriggeredMultipleTimes: true,
     WrapperComponent: UserActionFormCallCongresspersonDialog,
@@ -48,26 +48,29 @@ export const USER_ACTION_ROW_CTA_INFO: Record<
   [UserActionType.EMAIL]: {
     actionType: UserActionType.EMAIL,
     image: '/actionTypeIcons/email.png',
-    text: 'Email your Congressperson',
+    text: `Email your ${getYourPoliticianCategoryShortDisplayName(EMAIL_FLOW_POLITICIANS_CATEGORY)}`,
     subtext: 'We drafted an email for you. All you have to do is hit send.',
     canBeTriggeredMultipleTimes: true,
     WrapperComponent: UserActionFormEmailCongresspersonDialog,
   },
-  [UserActionType.DONATION]: {
-    actionType: UserActionType.DONATION,
-    image: '/actionTypeIcons/donate.png',
-    text: 'Donate to Stand With Crypto',
-    subtext: 'Support our aim to mobilize 52 million crypto advocates in the U.S.',
-    canBeTriggeredMultipleTimes: true,
-    WrapperComponent: ({ children }) => {
-      const locale = useLocale()
-      return (
-        <InternalLink className="block text-fontcolor" href={getIntlUrls(locale).donate()}>
-          {children}
-        </InternalLink>
-      )
-    },
-  },
+  // [UserActionType.DONATION]: {
+  //   actionType: UserActionType.DONATION,
+  //   image: '/actionTypeIcons/donate.png',
+  //   text: 'Donate to Stand With Crypto',
+  //   subtext: 'Support our aim to mobilize 52 million crypto advocates in the U.S.',
+  //   canBeTriggeredMultipleTimes: true,
+  //   WrapperComponent: ({ children }) => {
+  //     const locale = useLocale()
+  //     return (
+  //       <InternalLink
+  //         className="block text-fontcolor hover:no-underline"
+  //         href={getIntlUrls(locale).donate()}
+  //       >
+  //         {children}
+  //       </InternalLink>
+  //     )
+  //   },
+  // },
   [UserActionType.TWEET]: {
     actionType: UserActionType.TWEET,
     image: '/actionTypeIcons/tweet.png',

@@ -48,14 +48,14 @@ it('formats the "create capitol canary advocate" request correctly', () => {
 
   expect(formattedRequest).toMatchInlineSnapshot(`
 {
-  "address1": "449 Poplar Close",
-  "address2": "Apt. 129",
+  "address1": "164 Bins Corners",
+  "address2": "Suite 904",
   "campaigns": [
     142628,
   ],
-  "city": "Pinellas Park",
-  "country": "BA",
-  "email": "Aiden.Schmidt71@yahoo.com",
+  "city": "New Trycia",
+  "country": "GA",
+  "email": "Cordia12@hotmail.com",
   "emailOptin": 1,
   "emailOptout": 0,
   "firstname": "Haylie",
@@ -65,7 +65,7 @@ it('formats the "create capitol canary advocate" request correctly', () => {
   "smsOptin": 1,
   "smsOptinConfirmed": 1,
   "smsOptout": 0,
-  "state": "Nevada",
+  "state": "Massachusetts",
   "tags": [
     "tag1",
     "tag2",
@@ -75,7 +75,7 @@ it('formats the "create capitol canary advocate" request correctly', () => {
   "utm_medium": "utmMedium",
   "utm_source": "utmSource",
   "utm_term": "utmTerm",
-  "zip5": "01417-9164",
+  "zip5": "27975",
 }
 `)
 })

@@ -24,14 +24,14 @@
     "inngest": "npx inngest-cli@latest dev --no-discovery -u http://localhost:3000/api/inngest",
     "newbranch": "npm i && npx prisma generate && npm run codegen",
     "initial": "npx prisma generate && npm run codegen && npm run intl:extract-compile && npm run db:seed",
-    "e2e:run": "docker-compose -f swc-cypress-mysql.docker-compose.yml up -d --force-recreate && until mysql -h 127.0.0.1 -P 3307 -u root --password=root --database=swc-web -e \"SELECT 1\"; do echo \"Waiting for MySQL to be ready...\"; sleep 3; done && IS_DEVELOPING_OFFLINE=true DATABASE_URL=mysql://root:root@localhost:3307/swc-web npx prisma db push --force-reset && IS_DEVELOPING_OFFLINE=true DATABASE_URL=mysql://root:root@localhost:3307/swc-web NEXT_PUBLIC_IS_CYPRESS=true start-server-and-test 'npm run dev -- -p 3001 & npx inngest-cli@latest dev --no-discovery -u http://localhost:3001/api/inngest' http://localhost:3001 \"cypress open --e2e --config baseUrl=http://localhost:3001\"",
-    "e2e:run-headless-built": "docker-compose -f swc-cypress-mysql.docker-compose.yml up -d --force-recreate && until mysql -h 127.0.0.1 -P 3307 -u root --password=root --database=swc-web -e \"SELECT 1\"; do echo \"Waiting for MySQL to be ready...\"; sleep 3; done && IS_DEVELOPING_OFFLINE=true DATABASE_URL=mysql://root:root@localhost:3307/swc-web npx prisma db push --force-reset && IS_DEVELOPING_OFFLINE=true DATABASE_URL=mysql://root:root@localhost:3307/swc-web  NEXT_PUBLIC_IS_CYPRESS=true start-server-and-test 'npm run start -- -p 3001 & npx inngest-cli@latest dev --no-discovery -u http://localhost:3001/api/inngest' http://localhost:3001 \"cypress run --e2e --config baseUrl=http://localhost:3001\"",
-    "e2e:run-headless": "docker-compose -f swc-cypress-mysql.docker-compose.yml up -d --force-recreate && until mysql -h 127.0.0.1 -P 3307 -u root --password=root --database=swc-web -e \"SELECT 1\"; do echo \"Waiting for MySQL to be ready...\"; sleep 3; done && IS_DEVELOPING_OFFLINE=true DATABASE_URL=mysql://root:root@localhost:3307/swc-web npx prisma db push --force-reset && IS_DEVELOPING_OFFLINE=true DATABASE_URL=mysql://root:root@localhost:3307/swc-web NEXT_PUBLIC_IS_CYPRESS=true start-server-and-test 'npm run dev -- -p 3001 & npx inngest-cli@latest dev --no-discovery -u http://localhost:3001/api/inngest' http://localhost:3001 \"cypress run --e2e --config baseUrl=http://localhost:3001\""
+    "e2e:run": "docker-compose -f swc-cypress-mysql.docker-compose.yml up -d --force-recreate && until mysql -h 127.0.0.1 -P 3307 -u root --password=root --database=swc-web -e \"SELECT 1\"; do echo \"Waiting for MySQL to be ready...\"; sleep 3; done && IS_DEVELOPING_OFFLINE=true DATABASE_URL=mysql://root:root@localhost:3307/swc-web npx prisma db push --force-reset && IS_DEVELOPING_OFFLINE=true DATABASE_URL=mysql://root:root@localhost:3307/swc-web NEXT_PUBLIC_IS_CYPRESS=true start-server-and-test 'npm run start -- -p 3001 & npx inngest-cli@latest dev --no-discovery -u http://localhost:3001/api/inngest' http://localhost:3001 \"cypress open --e2e --config baseUrl=http://localhost:3001\"",
+    "e2e:run-headless": "docker-compose -f swc-cypress-mysql.docker-compose.yml up -d --force-recreate && until mysql -h 127.0.0.1 -P 3307 -u root --password=root --database=swc-web -e \"SELECT 1\"; do echo \"Waiting for MySQL to be ready...\"; sleep 3; done && IS_DEVELOPING_OFFLINE=true DATABASE_URL=mysql://root:root@localhost:3307/swc-web npx prisma db push --force-reset && IS_DEVELOPING_OFFLINE=true DATABASE_URL=mysql://root:root@localhost:3307/swc-web  NEXT_PUBLIC_IS_CYPRESS=true start-server-and-test 'npm run start -- -p 3001 & npx inngest-cli@latest dev --no-discovery -u http://localhost:3001/api/inngest' http://localhost:3001 \"cypress run --e2e --config baseUrl=http://localhost:3001\""
   },
   "prisma": {
     "seed": "npm run ts --transpile-only src/bin/seed/seedLocalDb.ts"
   },
   "dependencies": {
+    "@coinbase/onchainkit": "^0.12.1",
     "@graphql-tools/mock": "^9.0.0",
     "@hookform/resolvers": "^3.3.2",
     "@next/bundle-analyzer": "^14.1.0",
@@ -111,9 +111,11 @@
     "sanitize-html": "^2.11.0",
     "server-only": "^0.0.1",
     "sonner": "^1.4.0",
+    "storybook-addon-module-mock": "^1.1.5",
     "swr": "^2.2.4",
     "tailwind-merge": "^2.2.0",
     "tailwindcss-animate": "^1.0.7",
+    "thirdweb": "^5.6.0",
     "twemoji": "^14.0.2",
     "twemoji-parser": "^14.0.0",
     "twitter-api-v2": "^1.15.2",
@@ -137,15 +139,15 @@
     "@graphql-codegen/schema-ast": "^4.0.0",
     "@graphql-codegen/typescript-resolvers": "^4.0.1",
     "@mermaid-js/mermaid-cli": "^10.6.1",
-    "@storybook/addon-essentials": "^7.6.4",
-    "@storybook/addon-interactions": "^7.6.4",
-    "@storybook/addon-links": "^7.6.4",
-    "@storybook/addon-onboarding": "^1.0.10",
-    "@storybook/addon-styling-webpack": "^0.0.5",
-    "@storybook/blocks": "^7.6.4",
-    "@storybook/nextjs": "^7.6.4",
-    "@storybook/react": "^7.6.4",
-    "@storybook/test": "^7.6.4",
+    "@storybook/addon-essentials": "^8.0.6",
+    "@storybook/addon-interactions": "^8.0.6",
+    "@storybook/addon-links": "^8.0.6",
+    "@storybook/addon-onboarding": "^8.0.6",
+    "@storybook/addon-styling-webpack": "^1.0.0",
+    "@storybook/blocks": "^8.0.6",
+    "@storybook/nextjs": "^8.0.6",
+    "@storybook/react": "^8.0.6",
+    "@storybook/test": "^8.0.6",
     "@tailwindcss/typography": "^0.5.10",
     "@testing-library/jest-dom": "^6.1.5",
     "@testing-library/react": "^14.1.2",
@@ -183,12 +185,15 @@
     "prisma": "^5.10.2",
     "prisma-erd-generator": "^1.11.2",
     "start-server-and-test": "^2.0.3",
-    "storybook": "^7.6.4",
+    "storybook": "^8.0.6",
     "tailwindcss": "^3.4.1",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
     "tsx": "^4.7.0",
     "typescript": "^5.3.3",
     "yargs": "^17.7.2"
+  },
+  "overrides": {
+    "@tanstack/react-query": "^4"
   }
 }

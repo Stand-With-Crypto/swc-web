@@ -34,7 +34,7 @@ export function DonateButton() {
   return (
     <div className="flex justify-center">
       <Button disabled={buttonState === 'loading'} onClick={handleDonateClick} size="lg">
-        Donate
+        Donate (Coming Soon)
       </Button>
     </div>
   )

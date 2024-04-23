@@ -27,11 +27,11 @@ export const USER_ACTION_DEEPLINK_MAP: Omit<
       return `${getIntlPrefix(locale)}/action/email`
     },
   },
-  [UserActionType.DONATION]: {
-    getDeeplinkUrl: ({ locale }) => {
-      return `${getIntlPrefix(locale)}/donate`
-    },
-  },
+  // [UserActionType.DONATION]: {
+  //   getDeeplinkUrl: ({ locale }) => {
+  //     return `${getIntlPrefix(locale)}/donate`
+  //   },
+  // },
   [UserActionType.NFT_MINT]: {
     getDeeplinkUrl: ({ locale }) => {
       return `${getIntlPrefix(locale)}/action/nft-mint`

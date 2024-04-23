@@ -43,22 +43,26 @@ const CommandInput = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input> & {
     onClear: () => void
     commandValue?: unknown
+    containerClassName?: string
   }
->(({ className, onClear, commandValue, ...props }, ref) => (
-  <div className="flex items-center border-b px-3" cmdk-input-wrapper="">
-    <Search className="mr-2 h-4 w-4 shrink-0 opacity-50" />
+>(({ className, onClear, commandValue, containerClassName, ...props }, ref) => (
+  <div
+    className={cn('relative flex items-center border-b', containerClassName)}
+    cmdk-input-wrapper=""
+  >
+    <Search className="pointer-events-none absolute left-3 h-4 w-4 opacity-50" />
     <CommandPrimitive.Input
       className={cn(
-        'flex h-11 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50',
+        'flex h-11 w-full rounded-md bg-transparent py-3 pl-10 pr-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50',
         className,
       )}
       ref={ref}
       {...props}
     />
     {Boolean(props.value || commandValue) && (
-      <button className="py-3" onClick={onClear}>
+      <button className="py-3 pl-3 pr-[18px]" onClick={onClear}>
         <span className="sr-only">Clear input</span>
-        <X className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+        <X className="h-4 w-4 shrink-0 opacity-50" />
       </button>
     )}
   </div>

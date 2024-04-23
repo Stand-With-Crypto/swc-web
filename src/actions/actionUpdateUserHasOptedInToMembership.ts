@@ -7,8 +7,14 @@ import { prismaClient } from '@/utils/server/prismaClient'
 import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
+import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
 
-export async function actionUpdateUserHasOptedInToMembership() {
+export const actionUpdateUserHasOptedInToMembership = withServerActionMiddleware(
+  'actionUpdateUserHasOptedInToMembership',
+  _actionUpdateUserHasOptedInToMembership,
+)
+
+export async function _actionUpdateUserHasOptedInToMembership() {
   const authUser = await appRouterGetAuthUser()
   if (!authUser) {
     throw new Error('Unauthenticated')

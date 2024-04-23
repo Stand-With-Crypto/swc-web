@@ -5,8 +5,8 @@ import { ImageResponse } from 'next/og'
 import { getData } from '@/app/[locale]/politicians/person/[dtsiSlug]/getData'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import {
-  convertDTSIStanceScoreToCryptoSupportLanguageSentence,
-  convertDTSIStanceScoreToLetterGrade,
+  convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence,
+  convertDTSIPersonStanceScoreToLetterGrade,
 } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { OPEN_GRAPH_IMAGE_DIMENSIONS } from '@/utils/server/generateOpenGraphImageUrl'
 
@@ -35,7 +35,7 @@ export async function generateOgImage({ params }: { params: { dtsiSlug: string }
       OPEN_GRAPH_IMAGE_DIMENSIONS,
     )
   }
-  const letterGrade = convertDTSIStanceScoreToLetterGrade(person) ?? '?'
+  const letterGrade = convertDTSIPersonStanceScoreToLetterGrade(person) ?? '?'
   let letterImage
 
   switch (letterGrade) {
@@ -70,7 +70,7 @@ export async function generateOgImage({ params }: { params: { dtsiSlug: string }
       )
   }
 
-  const scoreLanguage = convertDTSIStanceScoreToCryptoSupportLanguageSentence(person)
+  const scoreLanguage = convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence(person)
 
   return new ImageResponse(
     (

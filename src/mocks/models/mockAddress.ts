@@ -6,7 +6,7 @@ import { mockCommonDatetimes } from '@/mocks/mockCommonDatetimes'
 
 export function mockCreateAddressInput() {
   const partial = {
-    googlePlaceId: faker.string.uuid(),
+    googlePlaceId: null,
     streetNumber: faker.location.buildingNumber(),
     route: faker.location.street(),
     subpremise: faker.location.secondaryAddress(),

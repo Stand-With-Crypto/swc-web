@@ -23,7 +23,7 @@ export const UserActionTweetLink = React.forwardRef<
   (
     {
       asChild,
-      message = 'I #StandWithCrypto. More than 300,000 people are already advocating for better crypto policy in America. Join the fight to receive email updates on crypto policy, invites to local events, and more.',
+      message = 'I #StandWithCrypto. More than 400,000 people are already advocating for better crypto policy in America. Join the fight to receive email updates on crypto policy, invites to local events, and more.',
       url = fullUrl(
         '/action/sign-up?utm_source=twitter&utm_medium=social&utm_campaign=user-action-tweet',
       ),

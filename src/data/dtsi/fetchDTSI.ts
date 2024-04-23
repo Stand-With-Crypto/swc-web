@@ -15,13 +15,11 @@ const logger = getLogger('fetchDTSI')
 */
 
 const DO_THEY_SUPPORT_IT_API_KEY = process.env.DO_THEY_SUPPORT_IT_API_KEY!
+export const IS_MOCKING_DTSI_DATA =
+  IS_DEVELOPING_OFFLINE || (!DO_THEY_SUPPORT_IT_API_KEY && NEXT_PUBLIC_ENVIRONMENT === 'local')
 
 export const fetchDTSI = async <R, V = object>(query: string, variables?: V) => {
-  // console.log(query)
-  if (
-    IS_DEVELOPING_OFFLINE ||
-    (!DO_THEY_SUPPORT_IT_API_KEY && NEXT_PUBLIC_ENVIRONMENT === 'local')
-  ) {
+  if (IS_MOCKING_DTSI_DATA) {
     // because this file will import faker, we want to avoid loading it in our serverless environments
     return import('@/mocks/dtsi/queryDTSIMockSchema').then(x =>
       x.queryDTSIMockSchema<R>(query, variables),
@@ -38,7 +36,7 @@ export const fetchDTSI = async <R, V = object>(query: string, variables?: V) => 
     ? 'https://www.dotheysupportit.com/api/graphql'
     : 'https://testing.dotheysupportit.com/api/graphql'
   if (USE_DTSI_PRODUCTION_API && NEXT_PUBLIC_ENVIRONMENT !== 'production') {
-    logger.info(`OVERRIDE: production DTSI API`)
+    logger.debug(`OVERRIDE: production DTSI API`)
   }
   logger.debug(`fetchDTSI called`)
   const response = await pRetry(

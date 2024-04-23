@@ -1,4 +1,4 @@
-import { BaseUpsertAdvocateRequest } from '@/utils/server/capitolCanary/base'
+import { BaseUpsertAdvocateRequest } from '@/utils/server/capitolCanary/baseUpsertRequest'
 import { UpsertAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { sendCapitolCanaryRequest } from '@/utils/server/capitolCanary/sendCapitolCanaryRequest'
 

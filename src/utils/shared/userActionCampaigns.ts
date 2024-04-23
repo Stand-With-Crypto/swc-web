@@ -15,9 +15,11 @@ export type ActiveClientUserActionWithCampaignType =
 
 export enum UserActionEmailCampaignName {
   DEFAULT = 'EMAIL_YOUR_CONGRESSPERSON_FIT21',
+  FIT21_2024_04 = 'EMAIL_YOUR_CONGRESSPERSON_FIT21_2024_04',
 }
 export enum UserActionCallCampaignName {
   DEFAULT = 'CALL_YOUR_CONGRESSPERSON_FIT21',
+  FIT21_2024_04 = 'EMAIL_YOUR_CONGRESSPERSON_FIT21_2024_04',
 }
 export enum UserActionDonationCampaignName {
   DEFAULT = 'DEFAULT',
@@ -50,8 +52,8 @@ export const USER_ACTION_TO_CAMPAIGN_NAME_MAP = {
 } satisfies Record<ActiveClientUserActionWithCampaignType, any>
 
 export const USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
-  [UserActionType.EMAIL]: UserActionEmailCampaignName.DEFAULT,
-  [UserActionType.CALL]: UserActionCallCampaignName.DEFAULT,
+  [UserActionType.EMAIL]: UserActionEmailCampaignName.FIT21_2024_04,
+  [UserActionType.CALL]: UserActionCallCampaignName.FIT21_2024_04,
   [UserActionType.DONATION]: UserActionDonationCampaignName.DEFAULT,
   [UserActionType.OPT_IN]: UserActionOptInCampaignName.DEFAULT,
   [UserActionType.TWEET]: UserActionTweetCampaignName.DEFAULT,

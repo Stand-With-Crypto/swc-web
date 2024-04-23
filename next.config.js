@@ -59,6 +59,7 @@ const contentSecurityPolicy = {
     'https://api-js.mixpanel.com/',
     // Mint endpoint
     'https://*.coinbase.com/',
+    'https://*.sentry.io/',
   ],
   'frame-src': [
     '*.google.com',
@@ -73,7 +74,7 @@ const contentSecurityPolicy = {
   'form-action': ["'self'"],
   'frame-ancestors': ["'none'"],
   'block-all-mixed-content': [],
-  'upgrade-insecure-requests': [],
+  ...(isDev ? {} : { 'upgrade-insecure-requests': [] }),
 }
 
 const cspObjectToString = Object.entries(contentSecurityPolicy).reduce((acc, [key, value]) => {
@@ -234,6 +235,21 @@ const nextConfig = {
         source: '/la',
         destination:
           '/action/live-event/2024_03_04_LA?utm_source=coinbase&utm_medium=live-event&utm_campaign=2024-03-04-LA',
+        permanent: false,
+      },
+      {
+        source: '/locations',
+        destination: '/politicians',
+        permanent: false,
+      },
+      {
+        source: '/locations/us',
+        destination: '/politicians',
+        permanent: false,
+      },
+      {
+        source: '/locations/us/state',
+        destination: '/politicians',
         permanent: false,
       },
     ]

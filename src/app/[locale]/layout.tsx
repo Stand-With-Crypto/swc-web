@@ -7,6 +7,7 @@ import { TopLevelClientLogic } from '@/app/[locale]/topLevelClientLogic'
 import { CookieConsent } from '@/components/app/cookieConsent'
 import { Footer } from '@/components/app/footer'
 import { Navbar } from '@/components/app/navbar'
+import { OverrideGlobalLocalStorage } from '@/components/app/overrideGlobalLocalStorage'
 import { FullHeight } from '@/components/ui/fullHeight'
 import { Toaster } from '@/components/ui/sonner'
 import { ORDERED_SUPPORTED_LOCALES } from '@/intl/locales'
@@ -65,16 +66,18 @@ export default function Layout({ children, params }: PageProps & { children: Rea
   if (!ORDERED_SUPPORTED_LOCALES.includes(locale)) {
     notFound()
   }
+
   return (
     <html lang={locale}>
       <body className={fontClassName}>
+        <OverrideGlobalLocalStorage />
         {/* LATER-TASK add back once https://github.com/TheSGJ/nextjs-toploader/issues/66 is resolved */}
         {/* <NextTopLoader /> */}
         <TopLevelClientLogic locale={locale}>
           <FullHeight.Container>
             <Navbar locale={locale} />
             <FullHeight.Content>
-              <div className="lg:mt-10">{children}</div>
+              <div className="mt-10">{children}</div>
             </FullHeight.Content>
             <Footer locale={locale} />
           </FullHeight.Container>

@@ -24,6 +24,7 @@ import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
 import { getIntlUrls } from '@/utils/shared/urls'
+import { listOfThings } from '@/utils/web/listOfThings'
 
 const MainText = ({ children }: { children: React.ReactNode }) => (
   <div className="text-sm font-semibold text-gray-900 lg:text-xl">{children}</div>
@@ -136,15 +137,16 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
             <MainText>
               Email to{' '}
               {dtsiRecipients.length
-                ? dtsiRecipients.map((actionEmailRecipient, idx) => (
-                    <React.Fragment key={actionEmailRecipient.id}>
-                      {idx > 0 && <>, </>}
-                      <DTSIPersonName
-                        href={urls.politicianDetails(actionEmailRecipient.person!.slug)}
-                        person={actionEmailRecipient.person!}
-                      />
-                    </React.Fragment>
-                  ))
+                ? listOfThings(
+                    dtsiRecipients.map(actionEmailRecipient => (
+                      <React.Fragment key={actionEmailRecipient.id}>
+                        <DTSIPersonName
+                          href={urls.politicianDetails(actionEmailRecipient.person!.slug)}
+                          person={actionEmailRecipient.person!}
+                        />
+                      </React.Fragment>
+                    )),
+                  ).map((content, index) => <React.Fragment key={index}>{content}</React.Fragment>)
                 : 'Representative'}
             </MainText>
           ),

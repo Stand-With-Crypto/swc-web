@@ -7,10 +7,14 @@ import {
   actionCreateUserActionCallCongressperson,
   CreateActionCallCongresspersonInput,
 } from '@/actions/actionCreateUserActionCallCongressperson'
-import { UserActionFormCallCongresspersonProps } from '@/components/app/userActionFormCallCongressperson'
-import { SectionNames } from '@/components/app/userActionFormCallCongressperson/constants'
+import { CallCongresspersonActionSharedData } from '@/components/app/userActionFormCallCongressperson'
+import {
+  CALL_FLOW_POLITICIANS_CATEGORY,
+  SectionNames,
+} from '@/components/app/userActionFormCallCongressperson/constants'
 import { UserActionFormLayout } from '@/components/app/userActionFormCommon/layout'
 import { Button } from '@/components/ui/button'
+import { ExternalLink } from '@/components/ui/link'
 import { TrackedExternalLink } from '@/components/ui/trackedExternalLink'
 import { UseSectionsReturn } from '@/hooks/useSections'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
@@ -18,6 +22,7 @@ import { getGoogleCivicOfficialByDTSIName } from '@/utils/shared/googleCivicInfo
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { UserActionCallCampaignName } from '@/utils/shared/userActionCampaigns'
 import { userFullName } from '@/utils/shared/userFullName'
+import { getYourPoliticianCategoryShortDisplayName } from '@/utils/shared/yourPoliticianCategory'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
 import { toastGenericError } from '@/utils/web/toastUtils'
@@ -26,17 +31,19 @@ export function SuggestedScript({
   user,
   congressPersonData,
   goToSection,
+  goBackSection,
 }: Pick<
-  UserActionFormCallCongresspersonProps,
+  CallCongresspersonActionSharedData,
   'user' | 'congressPersonData' | keyof UseSectionsReturn<SectionNames>
 >) {
-  const { dtsiPerson, addressSchema, googleCivicData } = congressPersonData
+  const { dtsiPeople, addressSchema, googleCivicData } = congressPersonData
 
   const router = useRouter()
   const ref = React.useRef<HTMLAnchorElement>(null)
   useEffect(() => {
     ref.current?.focus({ preventScroll: true })
   }, [ref])
+  const dtsiPerson = dtsiPeople[0]
   const phoneNumber = React.useMemo(() => {
     const official = getGoogleCivicOfficialByDTSIName(dtsiPerson, googleCivicData)
 
@@ -55,7 +62,7 @@ export function SuggestedScript({
   const handleCallAction = React.useCallback(
     async (phoneNumberToCall: string) => {
       const data: CreateActionCallCongresspersonInput = {
-        campaignName: UserActionCallCampaignName.DEFAULT,
+        campaignName: UserActionCallCampaignName.FIT21_2024_04,
         dtsiSlug: dtsiPerson.slug,
         phoneNumber: phoneNumberToCall,
         address: addressSchema,
@@ -97,11 +104,22 @@ export function SuggestedScript({
 
   return (
     <>
-      <UserActionFormLayout onBack={() => goToSection(SectionNames.ADDRESS)}>
+      <UserActionFormLayout onBack={goBackSection}>
         <UserActionFormLayout.Container>
           <UserActionFormLayout.Heading
-            subtitle="You may not get a human on the line, but can leave a message to ensure that your voice will be heard."
-            title="Call your representative"
+            subtitle={
+              <>
+                Showing the representative for your address in{' '}
+                <ExternalLink
+                  className="cursor-pointer"
+                  onClick={() => goToSection(SectionNames.CHANGE_ADDRESS)}
+                >
+                  {addressSchema.locality}
+                </ExternalLink>
+                .
+              </>
+            }
+            title={`Call your ${getYourPoliticianCategoryShortDisplayName(CALL_FLOW_POLITICIANS_CATEGORY, { maxCount: 1 })}`}
           />
 
           <div className="prose mx-auto">
@@ -128,7 +146,10 @@ export function SuggestedScript({
         </UserActionFormLayout.Container>
       </UserActionFormLayout>
 
-      <UserActionFormLayout.CongresspersonDisplayFooter dtsiPerson={congressPersonData}>
+      <UserActionFormLayout.CongresspersonDisplayFooter
+        dtsiPeopleResponse={congressPersonData}
+        maxPeopleDisplayed={1}
+      >
         {phoneNumber ? (
           callingState !== 'not-calling' ? (
             <Button

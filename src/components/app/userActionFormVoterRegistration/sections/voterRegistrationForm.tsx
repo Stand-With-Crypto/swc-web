@@ -4,7 +4,6 @@ import { ArrowUpRight } from 'lucide-react'
 import {
   REGISTRATION_URLS_BY_STATE,
   SectionNames,
-  StateCode,
 } from '@/components/app/userActionFormVoterRegistration/constants'
 import { UserActionFormVoterRegistrationLayout } from '@/components/app/userActionFormVoterRegistration/sections/layout'
 import { Button } from '@/components/ui/button'
@@ -20,6 +19,7 @@ import { UseSectionsReturn } from '@/hooks/useSections'
 import {
   getUSStateNameFromStateCode,
   US_STATE_CODE_TO_DISPLAY_NAME_MAP,
+  USStateCode,
 } from '@/utils/shared/usStateUtils'
 
 const STATE_CODES = Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP)
@@ -79,7 +79,7 @@ function Step3Svg() {
   )
 }
 
-function disclaimer(stateCode: StateCode | undefined) {
+function disclaimer(stateCode: USStateCode | undefined) {
   if (stateCode === 'ND') return ND_DISCLAIMER
   if (stateCode === 'WY') return WY_DISCLAIMER
   return 'Complete registration at step 2 to claim NFT'
@@ -87,8 +87,8 @@ function disclaimer(stateCode: StateCode | undefined) {
 
 interface VoterRegistrationFormProps extends UseSectionsReturn<SectionNames> {
   checkRegistration?: boolean
-  stateCode?: StateCode
-  setStateCode: Dispatch<SetStateAction<StateCode | undefined>>
+  stateCode?: USStateCode
+  setStateCode: Dispatch<SetStateAction<USStateCode | undefined>>
 }
 
 export function VoterRegistrationForm({
@@ -114,7 +114,7 @@ export function VoterRegistrationForm({
     (value: string) => {
       if (STATE_CODES.includes(value)) {
         setCompleteStep2(false)
-        setStateCode(value as StateCode)
+        setStateCode(value as USStateCode)
       }
     },
     [setStateCode],

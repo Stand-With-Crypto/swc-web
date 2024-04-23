@@ -14,7 +14,7 @@ import { z } from 'zod'
 import { getClientAddress } from '@/clientModels/clientAddress'
 import { getClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
 import { getENSDataFromCryptoAddressAndFailGracefully } from '@/data/web3/getENSDataFromCryptoAddress'
-import { CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/upsertAdvocateInCapitolCanary'
+import { CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/capitolCanary/upsertAdvocateInCapitolCanary'
 import { inngest } from '@/inngest/inngest'
 import { appRouterGetAuthUser } from '@/utils/server/authentication/appRouterGetAuthUser'
 import {
@@ -129,12 +129,7 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
     },
   })
 
-  await handleCapitolCanaryAdvocateUpsert(
-    updatedUser,
-    primaryUserEmailAddress,
-    hasOptedInToSms,
-    user,
-  )
+  await handleCapitolCanaryAdvocateUpsert(updatedUser, primaryUserEmailAddress, user)
 
   return {
     user: {
@@ -156,36 +151,26 @@ async function handleCapitolCanaryAdvocateUpsert(
     primaryUserCryptoAddress: UserCryptoAddress | null
   },
   primaryUserEmailAddress: UserEmailAddress | null | undefined,
-  hasOptedInToSms: boolean,
   oldUser: User & { address: Address | null } & {
     primaryUserEmailAddress: UserEmailAddress | null
   } & { userEmailAddresses: UserEmailAddress[] },
 ) {
   // Send unsubscribe payload if the old email address or phone number has changed, or if the user removed their old email or phone number.
-  if (
-    (oldUser.primaryUserEmailAddress !== null &&
-      oldUser.primaryUserEmailAddress.emailAddress !== primaryUserEmailAddress?.emailAddress) ||
-    oldUser.phoneNumber !== updatedUser.phoneNumber ||
-    (primaryUserEmailAddress === null && oldUser.primaryUserEmailAddress !== null) ||
-    (oldUser.phoneNumber && !updatedUser.phoneNumber)
-  ) {
+  // `hasChangedEmail` is true if an old email address exists and the new email address is different from the old email address.
+  const hasChangedEmail =
+    !!oldUser.primaryUserEmailAddress &&
+    (!primaryUserEmailAddress ||
+      oldUser.primaryUserEmailAddress.emailAddress !== primaryUserEmailAddress.emailAddress)
+  if (hasChangedEmail) {
     const unsubscribePayload: UpsertAdvocateInCapitolCanaryPayloadRequirements = {
       campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
       user: {
-        ...updatedUser, // Always use new user information.
-        address: updatedUser.address, // Always use new user information.
+        ...updatedUser, // Use new user information EXCEPT for the phone number.
+        address: updatedUser.address,
       },
       userEmailAddress: oldUser.primaryUserEmailAddress, // Using old email here.
       opts: {
-        isEmailOptout:
-          (oldUser.primaryUserEmailAddress?.emailAddress !== undefined &&
-            oldUser.primaryUserEmailAddress.emailAddress !==
-              primaryUserEmailAddress?.emailAddress) ||
-          primaryUserEmailAddress === null,
-        isSmsOptout: !!(
-          oldUser.phoneNumber !== updatedUser.phoneNumber ||
-          (oldUser.phoneNumber && !updatedUser.phoneNumber)
-        ),
+        isEmailOptout: hasChangedEmail,
       },
     }
     await inngest.send({
@@ -213,14 +198,13 @@ async function handleCapitolCanaryAdvocateUpsert(
     const payload: UpsertAdvocateInCapitolCanaryPayloadRequirements = {
       campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
       user: {
-        ...updatedUser,
+        ...updatedUser, // Using new user information (including new phone number).
         address: updatedUser.address,
       },
-      userEmailAddress: primaryUserEmailAddress,
+      userEmailAddress: primaryUserEmailAddress, // Using new email here.
       opts: {
         isEmailOptin: true,
-        isSmsOptin: hasOptedInToSms,
-        isSmsOptout: oldUser.hasOptedInToSms && !hasOptedInToSms, // Only opt-out of SMS if the user has opted in before and now they are opting out.
+        isSmsOptin: updatedUser.hasOptedInToSms,
       },
     }
     if (!oldUser.hasOptedInToMembership && updatedUser.hasOptedInToMembership) {

@@ -9,7 +9,7 @@ import {
   CommandItem,
   CommandList,
 } from '@/components/ui/command'
-import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/drawer'
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { useResizeObserver } from '@/hooks/useResizeObserver'
@@ -69,25 +69,23 @@ export function Combobox<T>({
 
   if (isMobile) {
     return (
-      <Drawer analytics={wrappedAnalytics} onOpenChange={setOpen} open={open}>
-        <DrawerTrigger asChild>{formatPopoverTrigger({ value, open })}</DrawerTrigger>
-        <DrawerContent>
-          <div className="mt-4 min-h-[260px] border-t">
-            <StatusList
-              setOpen={setOpen}
-              {...{
-                value,
-                isLoading,
-                onChange,
-                options,
-                getOptionLabel,
-                getOptionKey,
-                ...inputProps,
-              }}
-            />
-          </div>
-        </DrawerContent>
-      </Drawer>
+      <Dialog analytics={wrappedAnalytics} onOpenChange={setOpen} open={open}>
+        <DialogTrigger asChild>{formatPopoverTrigger({ value, open })}</DialogTrigger>
+        <DialogContent className="mt-[-30%] min-h-[260px] p-0 pt-10">
+          <StatusList
+            setOpen={setOpen}
+            {...{
+              value,
+              isLoading,
+              onChange,
+              options,
+              getOptionLabel,
+              getOptionKey,
+              ...inputProps,
+            }}
+          />
+        </DialogContent>
+      </Dialog>
     )
   }
 
@@ -140,6 +138,7 @@ function StatusList<T>({
       <CommandInput
         autoFocus
         commandValue={value}
+        containerClassName="border-t"
         onClear={() => {
           onChange(null)
           onChangeInputValue('')

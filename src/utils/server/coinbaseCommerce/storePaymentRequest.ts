@@ -194,6 +194,7 @@ async function createNewUser(payment: CoinbaseCommercePayment) {
       referralId: generateReferralId(),
       hasOptedInToEmails: false,
       hasOptedInToSms: false,
+      hasRepliedToOptInSms: false,
       hasOptedInToMembership: false,
       informationVisibility: UserInformationVisibility.ANONYMOUS,
       acquisitionReferer: '',

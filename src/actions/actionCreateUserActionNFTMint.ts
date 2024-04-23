@@ -1,7 +1,7 @@
 'use server'
 import 'server-only'
 
-import { NFTCurrency, NFTMintStatus, User, UserActionType } from '@prisma/client'
+import { NFTCurrency, NFTMintStatus, NFTMintType, User, UserActionType } from '@prisma/client'
 import { Decimal } from '@prisma/client/runtime/library'
 import * as Sentry from '@sentry/nextjs'
 import { BigNumber } from 'ethers'
@@ -15,7 +15,7 @@ import { getServerAnalytics } from '@/utils/server/serverAnalytics'
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { appRouterGetThirdwebAuthUser } from '@/utils/server/thirdweb/appRouterGetThirdwebAuthUser'
-import { thirdwebBaseRPCClient } from '@/utils/server/thirdweb/thirdwebRPCClient'
+import { thirdwebBaseRPCClient } from '@/utils/server/thirdweb/thirdwebRPCClients'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
 import { fromBigNumber } from '@/utils/shared/bigNumber'
 import { getCryptoToFiatConversion } from '@/utils/shared/getCryptoToFiatConversion'
@@ -145,6 +145,7 @@ async function createAction<U extends User>({
       nftMint: {
         create: {
           nftSlug: NFTSlug.STAND_WITH_CRYPTO_SUPPORTER,
+          mintType: NFTMintType.SWC_PURCHASED,
           status: NFTMintStatus.CLAIMED,
           costAtMint: decimalEthTransactionValue,
           contractAddress: contractMetadata.contractAddress,

@@ -14,6 +14,7 @@ export default async function InternalHomepage() {
             sectionTitle: 'General',
             links: [
               { children: 'User Settings', href: '/internal/user-settings' },
+              { children: 'User Experiments', href: '/internal/user-experiments' },
               { children: 'User Action Deeplinks', href: '/internal/user-action-deeplinks' },
             ],
           },

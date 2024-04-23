@@ -16,7 +16,7 @@ import { compact, groupBy } from 'lodash-es'
 import { NextApiRequest } from 'next'
 
 import { parseThirdwebAddress } from '@/hooks/useThirdwebAddress/parseThirdwebAddress'
-import { CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/upsertAdvocateInCapitolCanary'
+import { CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/capitolCanary/upsertAdvocateInCapitolCanary'
 import { inngest } from '@/inngest/inngest'
 import {
   CapitolCanaryCampaignName,
@@ -446,6 +446,7 @@ async function createUser({ localUser }: { localUser: ServerLocalUser | null }) 
       hasOptedInToEmails: true,
       hasOptedInToMembership: false,
       hasOptedInToSms: false,
+      hasRepliedToOptInSms: false,
       referralId: generateReferralId(),
       ...mapLocalUserToUserDatabaseFields(localUser),
     },

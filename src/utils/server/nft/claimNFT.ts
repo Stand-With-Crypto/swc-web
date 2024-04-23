@@ -1,7 +1,14 @@
-import { $Enums, NFTCurrency, UserAction, UserActionType, UserCryptoAddress } from '@prisma/client'
+import {
+  $Enums,
+  NFTCurrency,
+  NFTMintType,
+  UserAction,
+  UserActionType,
+  UserCryptoAddress,
+} from '@prisma/client'
 import { Decimal } from '@prisma/client/runtime/library'
 
-import { AIRDROP_NFT_INNGEST_EVENT_NAME } from '@/inngest/functions/airdropNFT'
+import { AIRDROP_NFT_INNGEST_EVENT_NAME } from '@/inngest/functions/airdropNFT/airdropNFT'
 import { inngest } from '@/inngest/inngest'
 import { NFT_SLUG_BACKEND_METADATA } from '@/utils/server/nft/constants'
 import { AirdropPayload } from '@/utils/server/nft/payload'
@@ -34,8 +41,12 @@ export const ACTION_NFT_SLUG: Record<
   },
   [UserActionType.CALL]: {
     [UserActionCallCampaignName.DEFAULT]: NFTSlug.CALL_REPRESENTATIVE_SEPT_11,
+    [UserActionCallCampaignName.FIT21_2024_04]: NFTSlug.CALL_REPRESENTATIVE_SEPT_11,
   },
-  [UserActionType.EMAIL]: { [UserActionEmailCampaignName.DEFAULT]: null },
+  [UserActionType.EMAIL]: {
+    [UserActionEmailCampaignName.DEFAULT]: null,
+    [UserActionEmailCampaignName.FIT21_2024_04]: null,
+  },
   [UserActionType.DONATION]: {
     [UserActionDonationCampaignName.DEFAULT]: null,
   },
@@ -100,6 +111,7 @@ export async function claimNFT(
       nftMint: {
         create: {
           nftSlug: nftSlug,
+          mintType: NFTMintType.SWC_AIRDROPPED,
           status: NFTMintStatus.REQUESTED,
           costAtMint: 0.0,
           contractAddress: NFT_SLUG_BACKEND_METADATA[nftSlug].contractAddress,

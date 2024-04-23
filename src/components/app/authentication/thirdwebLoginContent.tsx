@@ -79,7 +79,7 @@ export function ThirdwebLoginContent({
             Stand With Crypto Alliance Privacy Policy
           </InternalLink>{' '}
           and{' '}
-          <ExternalLink href="https://www.quorum.us/static/Privacy-Policy.pdf">
+          <ExternalLink href="https://www.quorum.us/privacy-policy/">
             Quorum Privacy Policy
           </ExternalLink>
         </p>

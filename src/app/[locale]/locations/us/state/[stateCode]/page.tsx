@@ -1,39 +1,57 @@
 import { Metadata } from 'next'
-import { notFound } from 'next/navigation'
 
-import { StateHeadsUp } from '@/components/app/pageStateHeadsUp'
+import { LocationStateSpecific } from '@/components/app/pageLocationStateSpecific'
+import { queryDTSILocationStateSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationStateSpecificInformation'
 import { PageProps } from '@/types'
-import { getUSStateNameFromStateCode } from '@/utils/shared/usStateUtils'
+import { generateMetadataDetails } from '@/utils/server/metadataUtils'
+import { SECONDS_DURATION } from '@/utils/shared/seconds'
+import { toBool } from '@/utils/shared/toBool'
+import {
+  getUSStateNameFromStateCode,
+  US_STATE_CODE_TO_DISPLAY_NAME_MAP,
+} from '@/utils/shared/usStateUtils'
+import { zodUsaState } from '@/validation/fields/zodUsaState'
 
-import { getData } from './getData'
+export const dynamic = 'error'
+export const dynamicParams = toBool(process.env.MINIMIZE_PAGE_PRE_GENERATION)
+export const revalidate = SECONDS_DURATION.HOUR
 
-type StateHeadsUpPageProps = PageProps<{
+type LocationStateSpecificPageProps = PageProps<{
   stateCode: string
 }>
 
-export async function generateMetadata({ params }: StateHeadsUpPageProps): Promise<Metadata> {
-  const stateName = getUSStateNameFromStateCode(params.stateCode)
+export async function generateMetadata({
+  params,
+}: LocationStateSpecificPageProps): Promise<Metadata> {
+  const stateCode = zodUsaState.parse(params.stateCode.toUpperCase())
+  const stateName = getUSStateNameFromStateCode(stateCode)
 
   const title = `See where ${stateName} politicians stand on crypto`
   const description = `We asked ${stateName} politicians for their thoughts on crypto. Here's what they said.`
-  return {
+  return generateMetadataDetails({
     title,
     description,
-  }
+  })
 }
 
 export async function generateStaticParams() {
-  return [{ stateCode: 'ca' }]
+  return Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP)
+    .slice(0, toBool(process.env.MINIMIZE_PAGE_PRE_GENERATION) ? 1 : 99999)
+    .map(stateCode => ({
+      stateCode: stateCode.toLowerCase(),
+    }))
 }
 
-export default async function StateHeadsUpPage({ params }: StateHeadsUpPageProps) {
-  const { stateCode } = params
-
-  const data = getData(stateCode)
+export default async function LocationStateSpecificPage({
+  params,
+}: LocationStateSpecificPageProps) {
+  const { locale } = params
+  const stateCode = zodUsaState.parse(params.stateCode.toUpperCase())
+  const data = await queryDTSILocationStateSpecificInformation({ stateCode })
 
   if (!data) {
-    notFound()
+    throw new Error(`Invalid params for LocationStateSpecificPage: ${JSON.stringify(params)}`)
   }
 
-  return <StateHeadsUp stateCode={stateCode} statements={data} />
+  return <LocationStateSpecific {...data} {...{ stateCode, locale }} />
 }

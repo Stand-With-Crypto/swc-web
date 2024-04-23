@@ -1,5 +1,5 @@
 'use client'
-import React, { useMemo } from 'react'
+import React, { useMemo, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { UserActionType } from '@prisma/client'
@@ -10,7 +10,10 @@ import { z } from 'zod'
 import { actionCreateUserActionEmailCongressperson } from '@/actions/actionCreateUserActionEmailCongressperson'
 import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
 import { DTSICongresspersonAssociatedWithFormAddress } from '@/components/app/dtsiCongresspersonAssociatedWithFormAddress'
-import { ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON } from '@/components/app/userActionFormEmailCongressperson/constants'
+import {
+  ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON,
+  EMAIL_FLOW_POLITICIANS_CATEGORY,
+} from '@/components/app/userActionFormEmailCongressperson/constants'
 import { getDefaultText } from '@/components/app/userActionFormEmailCongressperson/getDefaultText'
 import { FormFields } from '@/components/app/userActionFormEmailCongressperson/types'
 import { Button } from '@/components/ui/button'
@@ -34,6 +37,11 @@ import { Textarea } from '@/components/ui/textarea'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { UserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns'
+import {
+  getYourPoliticianCategoryDisplayName,
+  getYourPoliticianCategoryShortDisplayName,
+  YourPoliticianCategory,
+} from '@/utils/shared/yourPoliticianCategory'
 import { cn } from '@/utils/web/cn'
 import {
   GenericErrorFormValues,
@@ -53,34 +61,36 @@ type FormValues = z.infer<typeof zodUserActionFormEmailCongresspersonFields> &
 
 const getDefaultValues = ({
   user,
-  dtsiSlug,
+  dtsiSlugs,
 }: {
   user: GetUserFullProfileInfoResponse['user']
-  dtsiSlug: string | undefined
+  dtsiSlugs: string[]
 }): Partial<FormValues> => {
   if (user) {
+    const { firstName, lastName } = user
     return {
-      campaignName: UserActionEmailCampaignName.DEFAULT,
+      campaignName: UserActionEmailCampaignName.FIT21_2024_04,
       firstName: user.firstName,
       lastName: user.lastName,
       emailAddress: user.primaryUserEmailAddress?.emailAddress || '',
-      message: getDefaultText(),
+      message: getDefaultText({ dtsiSlugs, firstName, lastName }),
       address: user.address
         ? {
             description: user.address.formattedDescription,
             place_id: user.address.googlePlaceId,
           }
         : undefined,
+      dtsiSlugs,
     }
   }
   return {
-    campaignName: UserActionEmailCampaignName.DEFAULT,
+    campaignName: UserActionEmailCampaignName.FIT21_2024_04,
     firstName: '',
     lastName: '',
     emailAddress: '',
-    message: getDefaultText(),
+    message: getDefaultText({ dtsiSlugs }),
     address: undefined,
-    dtsiSlug,
+    dtsiSlugs,
   }
 }
 
@@ -88,16 +98,19 @@ export function UserActionFormEmailCongressperson({
   onSuccess,
   user,
   initialValues,
+  politicianCategory = EMAIL_FLOW_POLITICIANS_CATEGORY,
 }: {
   user: GetUserFullProfileInfoResponse['user']
   onCancel: () => void
   onSuccess: () => void
   initialValues?: FormFields
+  politicianCategory?: YourPoliticianCategory
 }) {
   const router = useRouter()
   const urls = useIntlUrls()
-  const userDefaultValues = useMemo(() => getDefaultValues({ user, dtsiSlug: undefined }), [user])
-
+  const hasModifiedMessage = useRef(false)
+  const userDefaultValues = useMemo(() => getDefaultValues({ user, dtsiSlugs: [] }), [user])
+  const politicianCategoryDisplayName = getYourPoliticianCategoryDisplayName(politicianCategory)
   const form = useForm<FormValues>({
     resolver: zodResolver(zodUserActionFormEmailCongresspersonFields),
     defaultValues: {
@@ -106,6 +119,7 @@ export function UserActionFormEmailCongressperson({
       emailAddress: initialValues?.email || userDefaultValues.emailAddress,
       firstName: initialValues?.firstName || userDefaultValues.firstName,
       lastName: initialValues?.lastName || userDefaultValues.lastName,
+      politicianCategory,
     },
   })
 
@@ -136,7 +150,8 @@ export function UserActionFormEmailCongressperson({
                 ...(address ? convertAddressToAnalyticsProperties(address) : {}),
                 'Campaign Name': values.campaignName,
                 'User Action Type': UserActionType.EMAIL,
-                'DTSI Slug': values.dtsiSlug,
+                'DTSI Slug': values.dtsiSlugs[0],
+                'DTSI Slugs': values.dtsiSlugs,
               },
               payload: { ...values, address },
             },
@@ -159,137 +174,159 @@ export function UserActionFormEmailCongressperson({
         <ScrollArea>
           <div className={cn(dialogContentPaddingStyles, 'space-y-4 md:space-y-8')}>
             <PageTitle className="mb-3" size="sm">
-              Email your congressperson
+              Email your {getYourPoliticianCategoryShortDisplayName(politicianCategory)}
             </PageTitle>
             <PageSubTitle className="mb-7">
-              Email your Congressperson and tell them to support crypto. Enter following information
-              and we will generate a personalized email for you to send to your representative.
+              Email your {politicianCategoryDisplayName} and tell them to support crypto. Enter the
+              following information and we will generate a personalized email for you to send.
             </PageSubTitle>
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-              <FormField
-                control={form.control}
-                name="firstName"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>First name</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Your first name" {...field} />
-                    </FormControl>
-                    <FormErrorMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="lastName"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Last name</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Your last name" {...field} />
-                    </FormControl>
-                    <FormErrorMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="emailAddress"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Email</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Your email" {...field} />
-                    </FormControl>
-                    <FormErrorMessage />
-                  </FormItem>
-                )}
-              />
+            <div className="space-y-4">
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                <FormField
+                  control={form.control}
+                  name="firstName"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>First name</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Your first name" {...field} />
+                      </FormControl>
+                      <FormErrorMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="lastName"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Last name</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Your last name" {...field} />
+                      </FormControl>
+                      <FormErrorMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="emailAddress"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Email</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Your email" {...field} />
+                      </FormControl>
+                      <FormErrorMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="address"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Address</FormLabel>
+                      <FormControl>
+                        <GooglePlacesSelect
+                          {...field}
+                          onChange={field.onChange}
+                          placeholder="Your full address"
+                          value={field.value}
+                        />
+                      </FormControl>
+                      <FormErrorMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
               <FormField
                 control={form.control}
                 name="address"
+                render={addressProps => (
+                  <FormField
+                    control={form.control}
+                    name="dtsiSlugs"
+                    render={dtsiSlugProps => (
+                      <div className="w-full">
+                        <DTSICongresspersonAssociatedWithFormAddress
+                          address={addressProps.field.value}
+                          currentDTSISlugValue={dtsiSlugProps.field.value}
+                          onChangeDTSISlug={({ dtsiSlugs, location }) => {
+                            dtsiSlugProps.field.onChange(dtsiSlugs)
+                            if (!hasModifiedMessage.current) {
+                              const { firstName, lastName } = form.getValues()
+                              form.setValue(
+                                'message',
+                                getDefaultText({ dtsiSlugs, firstName, lastName, location }),
+                              )
+                            }
+                          }}
+                          politicianCategory={politicianCategory}
+                        />
+                        {/* <FormErrorMessage /> */}
+                      </div>
+                    )}
+                  />
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="message"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Address</FormLabel>
-                    <FormControl>
-                      <GooglePlacesSelect
-                        {...field}
-                        onChange={field.onChange}
-                        placeholder="Your full address"
-                        value={field.value}
-                      />
-                    </FormControl>
+                    <div className="relative">
+                      {!form.getValues().dtsiSlugs.length && (
+                        <div className="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center bg-background/90">
+                          <p className="text-bold max-w-md text-center">
+                            Enter your address to generate a personalized message.
+                          </p>
+                        </div>
+                      )}
+                      <FormControl>
+                        <Textarea
+                          placeholder="Your message..."
+                          rows={16}
+                          {...field}
+                          onChange={e => {
+                            hasModifiedMessage.current = true
+                            field.onChange(e)
+                          }}
+                        />
+                      </FormControl>
+                    </div>
                     <FormErrorMessage />
                   </FormItem>
                 )}
               />
-            </div>
-            <FormField
-              control={form.control}
-              name="message"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Textarea placeholder="Your message..." rows={10} {...field} />
-                  </FormControl>
-                  <FormErrorMessage />
-                </FormItem>
-              )}
-            />
-            <FormGeneralErrorMessage control={form.control} />
-            <div>
-              <p className="text-xs text-fontcolor-muted">
-                By submitting, I understand that Stand With Crypto and its vendors may collect and
-                use my Personal Information. To learn more, visit the Stand With Crypto Alliance{' '}
-                <InternalLink href={urls.privacyPolicy()} tabIndex={-1}>
-                  Privacy Policy
-                </InternalLink>{' '}
-                and{' '}
-                <ExternalLink
-                  href={'https://www.quorum.us/static/Privacy-Policy.pdf'}
-                  tabIndex={-1}
-                >
-                  Quorum Privacy Policy
-                </ExternalLink>
-                .
-              </p>
+              <FormGeneralErrorMessage control={form.control} />
+              <div>
+                <p className="text-xs text-fontcolor-muted">
+                  By submitting, I understand that Stand With Crypto and its vendors may collect and
+                  use my personal information subject to the{' '}
+                  <InternalLink href={urls.privacyPolicy()}>SWC Privacy Policy</InternalLink> and
+                  the{' '}
+                  <ExternalLink href={'https://www.quorum.us/privacy-policy/'}>
+                    Quorum Privacy Policy
+                  </ExternalLink>
+                  .
+                </p>
+              </div>
             </div>
           </div>
         </ScrollArea>
         <div
-          className="z-10 flex flex-1 flex-col items-center justify-between gap-4 border border-t p-6 sm:flex-row md:px-12"
+          className="z-10 flex flex-1 flex-col items-center justify-center border border-t p-6 sm:flex-row md:px-12"
           style={{ boxShadow: 'rgba(0, 0, 0, 0.2) 0px 1px 6px 0px' }}
         >
-          <FormField
-            control={form.control}
-            name="address"
-            render={addressProps => (
-              <FormField
-                control={form.control}
-                name="dtsiSlug"
-                render={dtsiSlugProps => (
-                  <div className="w-full">
-                    <DTSICongresspersonAssociatedWithFormAddress
-                      address={addressProps.field.value}
-                      currentDTSISlugValue={dtsiSlugProps.field.value}
-                      onChangeDTSISlug={dtsiSlugProps.field.onChange}
-                    />
-                    <FormErrorMessage />
-                  </div>
-                )}
-              />
-            )}
-          />
-          <div className="w-full sm:w-auto">
-            <Button
-              className="w-full sm:w-auto"
-              disabled={form.formState.isSubmitting}
-              size="lg"
-              type="submit"
-            >
-              Send
-            </Button>
-          </div>
+          <Button
+            className="w-full sm:max-w-xs"
+            disabled={form.formState.isSubmitting}
+            size="lg"
+            type="submit"
+          >
+            Send
+          </Button>
         </div>
       </form>
     </Form>
