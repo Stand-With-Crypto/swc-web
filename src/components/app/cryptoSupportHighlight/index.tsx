@@ -4,6 +4,7 @@ import { ThumbsDown, ThumbsUp } from 'lucide-react'
 import {
   convertDTSIStanceScoreToBgColorClass,
   convertDTSIStanceScoreToCryptoSupportLanguage,
+  convertDTSIStanceScoreToTextColorClass,
 } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { cn } from '@/utils/web/cn'
 
@@ -20,6 +21,7 @@ export function CryptoSupportHighlight({
     <div
       className={cn(
         'flex w-full justify-center gap-2 rounded-lg px-8 py-4 text-lg font-bold text-background sm:w-fit',
+        convertDTSIStanceScoreToTextColorClass(stanceScore),
         convertDTSIStanceScoreToBgColorClass(stanceScore),
         className,
       )}

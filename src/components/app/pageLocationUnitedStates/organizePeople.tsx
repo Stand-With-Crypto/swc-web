@@ -10,13 +10,13 @@ type FormattedPerson = SpecificRoleDTSIPerson<
 >
 
 export function organizePeople({ runningForPresident }: DTSI_UnitedStatesInformationQuery) {
-  const formatted = runningForPresident.map(x =>
+  const formattedRunningForPresident = runningForPresident.map(x =>
     formatSpecificRoleDTSIPerson(x, { specificRole: DTSI_PersonRoleCategory.PRESIDENT }),
   )
   const grouped = {
     president: [] as FormattedPerson[],
   }
-  formatted.forEach(person => {
+  formattedRunningForPresident.forEach(person => {
     if (person.roles.some(x => x.roleCategory === DTSI_PersonRoleCategory.PRESIDENT)) {
       grouped.president.push(person)
     } else {

@@ -1,4 +1,5 @@
 import { ClientCurrentUserDTSIPersonCardOrCTA } from '@/components/app/clientCurrentUserDTSIPersonCardOrCTA'
+import { DTSIPersonCard } from '@/components/app/dtsiPersonCard'
 import { LocationSpecificRaceInfo } from '@/components/app/pageLocationStateSpecific/locationSpecificRaceInfo'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { InternalLink } from '@/components/ui/link'
@@ -17,11 +18,12 @@ interface LocationUnitedStatesProps extends DTSI_UnitedStatesInformationQuery {
 }
 
 export function LocationUnitedStates({
-  runningForPresident,
   locale,
   countAdvocates,
+  ...queryData
 }: LocationUnitedStatesProps) {
-  const groups = organizePeople({ runningForPresident })
+  const { endorsed } = queryData
+  const groups = organizePeople(queryData)
   const urls = getIntlUrls(locale)
   return (
     <div className="container max-w-4xl space-y-20">
@@ -44,6 +46,24 @@ export function LocationUnitedStates({
             title={<>Presidential Race</>}
             url={urls.locationUnitedStatesPresidential()}
           />
+        )}
+        {!!endorsed.length && (
+          <section className="space-y-8">
+            <div>
+              <PageTitle as="h3" size="sm">
+                SWC Endorsed Candidates
+              </PageTitle>
+            </div>
+            {endorsed.map(person => (
+              <DTSIPersonCard
+                key={person.id}
+                locale={locale}
+                overrideDescriptor="recommended"
+                person={person}
+                subheader="role"
+              />
+            ))}
+          </section>
         )}
 
         <div>

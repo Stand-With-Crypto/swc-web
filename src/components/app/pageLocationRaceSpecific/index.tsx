@@ -17,6 +17,7 @@ import {
   formatSpecificRoleDTSIPerson,
   SpecificRoleDTSIPerson,
 } from '@/utils/dtsi/specificRoleDTSIPerson'
+import { findRecommendedCandidate } from '@/utils/shared/findRecommendedCandidate'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 
@@ -50,11 +51,21 @@ function organizeRaceSpecificPeople(
 function CandidateInfo({
   person,
   locale,
-}: { person: FormattedPerson } & Pick<LocationRaceSpecificProps, 'locale'>) {
+  isRecommended,
+}: { person: FormattedPerson; isRecommended?: boolean } & Pick<
+  LocationRaceSpecificProps,
+  'locale'
+>) {
   return (
     <div>
       <div className="container max-w-4xl">
-        <DTSIPersonCard key={person.id} locale={locale} person={person} subheader="role" />
+        <DTSIPersonCard
+          key={person.id}
+          locale={locale}
+          overrideDescriptor={isRecommended ? 'recommended' : undefined}
+          person={person}
+          subheader="role"
+        />
       </div>
       {!!person.stances.length && (
         <>
@@ -96,6 +107,7 @@ export function LocationRaceSpecific({
   const groups = organizeRaceSpecificPeople(people, { district, stateCode })
   const stateDisplayName = stateCode && US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]
   const urls = getIntlUrls(locale)
+  const { recommended, others } = findRecommendedCandidate(groups)
   return (
     <div className=" space-y-20">
       <div className="container text-center">
@@ -145,7 +157,10 @@ export function LocationRaceSpecific({
         )}
       </div>
       <section className="space-y-20">
-        {groups.map(person => (
+        {recommended && (
+          <CandidateInfo isRecommended key={recommended.id} {...{ locale, person: recommended }} />
+        )}
+        {others.map(person => (
           <CandidateInfo key={person.id} {...{ locale, person }} />
         ))}
       </section>

@@ -214,9 +214,9 @@ export function PageHome({
               <div className="space-y-3">
                 {highestScores.map(person => (
                   <DTSIPersonCard
-                    hideStanceDescriptor
                     key={person.id}
                     locale={locale}
+                    overrideDescriptor="hidden"
                     person={person}
                     subheader="role-w-state"
                   />
@@ -236,9 +236,9 @@ export function PageHome({
               <div className="space-y-3">
                 {lowestScores.map(person => (
                   <DTSIPersonCard
-                    hideStanceDescriptor
                     key={person.id}
                     locale={locale}
+                    overrideDescriptor="hidden"
                     person={person}
                     subheader="role-w-state"
                   />

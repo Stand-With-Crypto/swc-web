@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { SupportedLocale } from '@/intl/locales'
+import { findRecommendedCandidate } from '@/utils/shared/findRecommendedCandidate'
 
 export function LocationSpecificRaceInfo({
   title,
@@ -18,6 +19,7 @@ export function LocationSpecificRaceInfo({
   url: string
   candidates: FormattedPerson[]
 }) {
+  const { recommended, others } = findRecommendedCandidate(candidates)
   return (
     <section className="space-y-8">
       <div>
@@ -26,7 +28,15 @@ export function LocationSpecificRaceInfo({
         </PageTitle>
         {children}
       </div>
-      {candidates.map(person => (
+      {recommended && (
+        <DTSIPersonCard
+          locale={locale}
+          overrideDescriptor="recommended"
+          person={recommended}
+          subheader="role"
+        />
+      )}
+      {others.map(person => (
         <DTSIPersonCard
           key={person.id}
           locale={locale}

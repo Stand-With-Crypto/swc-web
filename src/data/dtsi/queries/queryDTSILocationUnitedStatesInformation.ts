@@ -8,14 +8,32 @@ import {
   DTSI_UnitedStatesInformationQuery,
   DTSI_UnitedStatesInformationQueryVariables,
 } from '@/data/dtsi/generated'
+import { ENDORSED_DTSI_PERSON_SLUGS } from '@/utils/dtsi/endorsedCandidates'
 
 export const query = /* GraphQL */ `
-  query UnitedStatesInformation {
+  query UnitedStatesInformation($endorsedDTSISlugs: [String!]!) {
     runningForPresident: people(
       limit: 1000
       offset: 0
       personRoleGroupingOr: [RUNNING_FOR_PRESIDENT, US_PRESIDENT]
     ) {
+      ...PersonCard
+      stanceCount(verificationStatusIn: APPROVED)
+      roles {
+        id
+        primaryDistrict
+        primaryState
+        roleCategory
+        status
+        dateStart
+        group {
+          id
+          category
+          groupInstance
+        }
+      }
+    }
+    endorsed: people(limit: 1000, offset: 0, slugIn: $endorsedDTSISlugs) {
       ...PersonCard
       stanceCount(verificationStatusIn: APPROVED)
       roles {
@@ -39,7 +57,7 @@ export const queryDTSILocationUnitedStatesInformation = async () => {
   let results = await fetchDTSI<
     DTSI_UnitedStatesInformationQuery,
     DTSI_UnitedStatesInformationQueryVariables
-  >(query)
+  >(query, { endorsedDTSISlugs: ENDORSED_DTSI_PERSON_SLUGS })
   if (IS_MOCKING_DTSI_DATA) {
     results = {
       ...results,
