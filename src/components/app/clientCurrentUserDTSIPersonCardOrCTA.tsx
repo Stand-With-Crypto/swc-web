@@ -96,7 +96,7 @@ function _ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: SupportedLo
         </div>
       )}
       <p className="mb-3 text-center text-xl font-bold">Your {categoryDisplayName}</p>
-      <div className="mx-auto max-w-xl space-y-5">
+      <div className="mx-auto max-w-3xl space-y-5">
         {people.map(person => (
           <DTSIPersonCard
             data-test-id="dtsi-person-associated-with-address"

@@ -84,7 +84,7 @@ function CandidateInfo({
                     />
                     <CryptoSupportHighlight
                       className="mx-auto mt-2"
-                      stanceScore={stance.computedStanceScore || null}
+                      stanceScore={stance.computedStanceScore}
                     />
                   </div>
                 )

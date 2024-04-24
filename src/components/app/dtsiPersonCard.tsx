@@ -94,10 +94,10 @@ export function DTSIPersonCard(props: Props) {
               ? 'bg-purple-200 text-purple-700'
               : cn(
                   convertDTSIStanceScoreToTextColorClass(
-                    person.manuallyOverriddenStanceScore || person.computedStanceScore || null,
+                    person.manuallyOverriddenStanceScore || person.computedStanceScore,
                   ),
                   convertDTSIStanceScoreToBgColorClass(
-                    person.manuallyOverriddenStanceScore || person.computedStanceScore || null,
+                    person.manuallyOverriddenStanceScore || person.computedStanceScore,
                   ),
                 ),
           )}
