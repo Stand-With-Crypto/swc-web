@@ -14,7 +14,7 @@ export function CryptoSupportHighlight({
   className,
 }: {
   className?: string
-  stanceScore: number | null
+  stanceScore: number | null | undefined
   text?: string
 }) {
   return (

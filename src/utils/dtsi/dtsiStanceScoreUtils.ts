@@ -83,7 +83,7 @@ export const convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence = (
   return 'Strongly against crypto'
 }
 
-export const convertDTSIStanceScoreToCryptoSupportLanguage = (score: number | null) => {
+export const convertDTSIStanceScoreToCryptoSupportLanguage = (score: number | null | undefined) => {
   if (isNil(score)) {
     return 'Pending Analysis'
   }
@@ -102,7 +102,7 @@ export const convertDTSIStanceScoreToCryptoSupportLanguage = (score: number | nu
   return 'Very anti-crypto'
 }
 
-export const convertDTSIStanceScoreToTextColorClass = (score: number | null) => {
+export const convertDTSIStanceScoreToTextColorClass = (score: number | null | undefined) => {
   if (isNil(score)) {
     return twNoop('text-gray-700')
   }
@@ -115,7 +115,7 @@ export const convertDTSIStanceScoreToTextColorClass = (score: number | null) => 
   return twNoop('text-red-700')
 }
 
-export const convertDTSIStanceScoreToBgColorClass = (score: number | null) => {
+export const convertDTSIStanceScoreToBgColorClass = (score: number | null | undefined) => {
   if (isNil(score)) {
     return twNoop('bg-gray-200')
   }
