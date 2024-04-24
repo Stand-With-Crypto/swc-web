@@ -1,5 +1,6 @@
 import { fetchDTSI, IS_MOCKING_DTSI_DATA } from '@/data/dtsi/fetchDTSI'
 import { fragmentDTSIPersonCard } from '@/data/dtsi/fragments/fragmentDTSIPersonCard'
+import { fragmentDTSIPersonStanceDetails } from '@/data/dtsi/fragments/fragmentDTSIPersonStanceDetails'
 import {
   DTSI_PersonRoleCategory,
   DTSI_PersonRoleGroupCategory,
@@ -34,7 +35,26 @@ export const query = /* GraphQL */ `
         }
       }
     }
+    personStances(
+      limit: 15
+      offset: 0
+      personRoleGroupingOr: [RUNNING_FOR_US_HOUSE_OF_REPS, RUNNING_FOR_US_SENATE]
+      personRolePrimaryState: $stateCode
+    ) {
+      ...PersonStanceDetails
+      person {
+        profilePictureUrlDimensions
+        firstName
+        firstNickname
+        lastName
+        nameSuffix
+        profilePictureUrl
+        id
+      }
+    }
   }
+
+  ${fragmentDTSIPersonStanceDetails}
   ${fragmentDTSIPersonCard}
 `
 export const queryDTSILocationStateSpecificInformation = async ({

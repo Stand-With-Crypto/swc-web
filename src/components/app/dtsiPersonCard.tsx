@@ -51,6 +51,9 @@ function SubHeader({ person, subheader, subheaderFormatter = arg => arg }: Props
 
 export function DTSIPersonCard(props: Props) {
   const { person, locale, overrideDescriptor } = props
+  const politicalAffiliationCategoryAbbreviation =
+    person.politicalAffiliationCategory &&
+    dtsiPersonPoliticalAffiliationCategoryAbbreviation(person.politicalAffiliationCategory)
   return (
     <LinkBox
       className={cn(
@@ -76,10 +79,8 @@ export function DTSIPersonCard(props: Props) {
               href={getIntlUrls(locale).politicianDetails(person.slug)}
             >
               {dtsiPersonFullName(person)}{' '}
-              {person.politicalAffiliationCategory
-                ? `(${dtsiPersonPoliticalAffiliationCategoryAbbreviation(
-                    person.politicalAffiliationCategory,
-                  )})`
+              {politicalAffiliationCategoryAbbreviation
+                ? `(${politicalAffiliationCategoryAbbreviation})`
                 : ''}
             </InternalLink>
           </div>

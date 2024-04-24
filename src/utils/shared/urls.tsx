@@ -53,6 +53,7 @@ export const getIntlUrls = (
       `${localePrefix}/locations/us/state/${stateCode.toLowerCase()}/senate`,
     locationUnitedStatesPresidential: () => `${localePrefix}/locations/us/presidential`,
     locationUnitedStates: () => `${localePrefix}/locations/us/`,
+    endorsedCandidates: () => `${localePrefix}/endorsed/`,
     locationDistrictSpecific: ({
       stateCode,
       district,

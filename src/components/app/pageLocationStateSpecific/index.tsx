@@ -1,13 +1,17 @@
 import { compact, times } from 'lodash-es'
 
+import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
+import { DTSIStanceDetails } from '@/components/app/dtsiStanceDetails'
 import { UserLocationRaceInfo } from '@/components/app/pageLocationStateSpecific/userLocationRaceInfo'
 import { REGISTRATION_URLS_BY_STATE } from '@/components/app/userActionFormVoterRegistration/constants'
 import { Button } from '@/components/ui/button'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { InternalLink } from '@/components/ui/link'
+import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { TrackedExternalLink } from '@/components/ui/trackedExternalLink'
-import { DTSI_StateSpecificInformationQuery } from '@/data/dtsi/generated'
+import { DTSI_PersonStanceType, DTSI_StateSpecificInformationQuery } from '@/data/dtsi/generated'
 import { SupportedLocale } from '@/intl/locales'
 import { US_LOCATION_PAGES_LIVE_KEY_DISTRICTS_MAP } from '@/utils/shared/locationSpecificPages'
 import { getIntlUrls } from '@/utils/shared/urls'
@@ -29,7 +33,9 @@ export function LocationStateSpecific({
   people,
   locale,
   countAdvocates,
+  personStances,
 }: LocationStateSpecificProps) {
+  const stances = personStances.filter(x => x.stanceType === DTSI_PersonStanceType.TWEET)
   const groups = organizeStateSpecificPeople(people)
   const urls = getIntlUrls(locale)
   const stateName = getUSStateNameFromStateCode(stateCode)
@@ -43,8 +49,8 @@ export function LocationStateSpecific({
     }),
   )
   return (
-    <div className="container max-w-4xl space-y-20">
-      <div className="text-center">
+    <div>
+      <div className="container mb-20 max-w-4xl text-center">
         <h2 className={'mb-4'}>
           <InternalLink className="text-fontcolor-muted" href={urls.locationUnitedStates()}>
             United States
@@ -68,7 +74,7 @@ export function LocationStateSpecific({
           </TrackedExternalLink>
         </Button>
       </div>
-      <div className="divide-y-2 *:py-20 first:*:pt-0 last:*:pb-0">
+      <div className="container max-w-4xl divide-y-2 *:py-20 first:*:pt-0 last:*:pb-0">
         {!!groups.senators.length && (
           <LocationSpecificRaceInfo
             candidates={groups.senators}
@@ -88,6 +94,46 @@ export function LocationStateSpecific({
         ) : (
           <UserLocationRaceInfo groups={groups} locale={locale} stateCode={stateCode} />
         )}
+        {/* Because we want the recent tweets to be full length we cant use the divider classes above, but we still want a divider so we add this empty div */}
+        {!!stances.length && <div />}
+      </div>
+      {!!stances.length && (
+        <div>
+          <div className="container mb-8">
+            <PageTitle as="h3" size="sm">
+              What politicians in {stateCode} are saying
+            </PageTitle>
+            <PageSubTitle as="h4" size="sm">
+              Keep up with recent tweets about crypto from politicians in {stateName}.
+            </PageSubTitle>
+          </div>
+          <ScrollArea>
+            <div className="flex justify-center gap-5 pb-3 pl-4">
+              {stances.map(stance => {
+                return (
+                  <div className="w-[300px] shrink-0 lg:w-[500px]" key={stance.id}>
+                    <DTSIStanceDetails
+                      bodyClassName="line-clamp-6"
+                      hideImages
+                      locale={locale}
+                      person={stance.person}
+                      stance={stance}
+                    />
+                    <CryptoSupportHighlight
+                      className="mx-auto mt-2"
+                      stanceScore={stance.computedStanceScore}
+                    />
+                  </div>
+                )
+              })}
+            </div>
+            <ScrollBar orientation="horizontal" />
+          </ScrollArea>
+        </div>
+      )}
+      <div className="container max-w-4xl divide-y-2 *:py-20 first:*:pt-0 last:*:pb-0">
+        {/* Because we want the recent tweets to be full length we cant use the divider classes above, but we still want a divider so we add this empty div */}
+        {!!stances.length && <div />}
         {US_LOCATION_PAGES_LIVE_KEY_DISTRICTS_MAP[stateCode]?.map(district => (
           <LocationSpecificRaceInfo
             candidates={groups.congresspeople[district].people}

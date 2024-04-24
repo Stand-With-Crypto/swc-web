@@ -1,6 +1,6 @@
-import { ClientCurrentUserDTSIPersonCardOrCTA } from '@/components/app/clientCurrentUserDTSIPersonCardOrCTA'
 import { DTSIPersonCard } from '@/components/app/dtsiPersonCard'
 import { LocationSpecificRaceInfo } from '@/components/app/pageLocationStateSpecific/locationSpecificRaceInfo'
+import { Button } from '@/components/ui/button'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
@@ -38,7 +38,6 @@ export function LocationUnitedStates({
         )}
       </div>
       <div className="divide-y-2 *:py-20 first:*:pt-0 last:*:pb-0">
-        <ClientCurrentUserDTSIPersonCardOrCTA locale={locale} />
         {!!groups.president.length && (
           <LocationSpecificRaceInfo
             candidates={groups.president}
@@ -63,6 +62,11 @@ export function LocationUnitedStates({
                 subheader="role"
               />
             ))}
+            <div className="text-center">
+              <Button asChild className="max-sm:w-full">
+                <InternalLink href={urls.endorsedCandidates()}>View Endorsements</InternalLink>
+              </Button>
+            </div>
           </section>
         )}
 

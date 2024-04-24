@@ -13,6 +13,7 @@ import {
 } from '@/data/dtsi/generated'
 import { SupportedLocale } from '@/intl/locales'
 import { NormalizedDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
+import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import {
   formatSpecificRoleDTSIPerson,
   SpecificRoleDTSIPerson,
@@ -69,9 +70,11 @@ function CandidateInfo({
       </div>
       {!!person.stances.length && (
         <>
-          <h3 className="my-3 text-center font-bold">Relevant Statements</h3>
+          <h3 className="my-3 text-center font-bold">
+            {dtsiPersonFullName(person)} Relevant Statements
+          </h3>
           <ScrollArea>
-            <div className="flex gap-5 pl-4">
+            <div className="flex justify-center gap-5 pb-3 pl-4">
               {person.stances.map(stance => {
                 return (
                   <div className="w-[300px] shrink-0 lg:w-[500px]" key={stance.id}>
