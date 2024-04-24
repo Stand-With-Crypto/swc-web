@@ -102,7 +102,7 @@ export const convertDTSIStanceScoreToCryptoSupportLanguage = (score: number | nu
   return 'Very anti-crypto'
 }
 
-export const convertDTSIStanceScoreToTextColorClass = (score: number | null) => {
+export const convertDTSIStanceScoreToTextColorClass = (score: number | null | undefined) => {
   if (isNil(score)) {
     return twNoop('text-gray-600')
   }
@@ -115,7 +115,7 @@ export const convertDTSIStanceScoreToTextColorClass = (score: number | null) => 
   return twNoop('text-red-600')
 }
 
-export const convertDTSIStanceScoreToBgColorClass = (score: number | null) => {
+export const convertDTSIStanceScoreToBgColorClass = (score: number | null | undefined) => {
   if (isNil(score)) {
     return twNoop('bg-gray-100')
   }

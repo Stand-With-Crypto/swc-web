@@ -24,6 +24,7 @@ import {
   getDTSIPersonProfilePictureUrlDimensions,
 } from '@/utils/dtsi/dtsiPersonUtils'
 import { dtsiTwitterAccountUrl } from '@/utils/dtsi/dtsiTwitterAccountUtils'
+import { prettyLog } from '@/utils/shared/prettyLog'
 
 const POLITICIAN_IMAGE_SIZE_PX = 230
 
@@ -35,6 +36,7 @@ export function PagePoliticianDetails({
   locale: SupportedLocale
 }) {
   const stances = orderBy(person.stances, x => -1 * new Date(x.dateStanceMade).getTime())
+  prettyLog(stances)
   return (
     <div className="container max-w-3xl">
       <section>
@@ -134,7 +136,7 @@ export function PagePoliticianDetails({
                 <DTSIStanceDetails locale={locale} person={person} stance={stance} />
                 <CryptoSupportHighlight
                   className="mx-auto mt-2"
-                  stanceScore={stance.computedStanceScore || null}
+                  stanceScore={stance.computedStanceScore}
                 />
               </div>
             )
