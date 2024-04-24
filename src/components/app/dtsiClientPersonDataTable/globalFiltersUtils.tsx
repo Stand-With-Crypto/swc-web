@@ -88,7 +88,6 @@ const stateOptions = ['All', ...Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP).s
 export function GlobalFilters<TData extends Person = Person>({
   columns,
 }: GlobalFilterProps<TData>) {
-  // const namedColumns = Object.groupBy(columns, ({ id }) => id)
   const namedColumns = useMemo(() => {
     const ids: Record<string, Column<TData>> = {}
     columns.forEach(col => {

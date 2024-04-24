@@ -22,7 +22,13 @@ it('page - politicians interactions', () => {
     // force: true // Bypass visibility checks, not ideal
   })
   cy.get('@stateFilterTrigger').children().should('contain', 'AK')
-  cy.get('tbody').find('tr').should('have.length', 4)
+  // cy.get('tbody').find('tr').should('have.length', 4)
+  cy.get('tbody')
+    .find('td:nth-child(4)')
+    .each($cell => {
+      const value = $cell.text()
+      cy.wrap(value).should('eq', 'Alaska')
+    })
   cy.get('@stateFilterTrigger').click()
   cy.get('[role="option"]').contains('div', 'All').click()
   cy.get('tbody').find('tr').should('have.length', 100)
