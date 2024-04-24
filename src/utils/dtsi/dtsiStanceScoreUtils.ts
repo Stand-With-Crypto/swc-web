@@ -83,7 +83,7 @@ export const convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence = (
   return 'Strongly against crypto'
 }
 
-export const convertDTSIStanceScoreToCryptoSupportLanguage = (score: number | null) => {
+export const convertDTSIStanceScoreToCryptoSupportLanguage = (score: number | null | undefined) => {
   if (isNil(score)) {
     return 'Pending Analysis'
   }
