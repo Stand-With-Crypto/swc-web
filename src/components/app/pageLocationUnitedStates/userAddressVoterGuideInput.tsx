@@ -4,7 +4,6 @@
 import { Suspense } from 'react'
 import { noop } from 'lodash-es'
 
-import { DTSIPersonCard } from '@/components/app/dtsiPersonCard'
 import { Button } from '@/components/ui/button'
 import { GooglePlacesSelect, GooglePlacesSelectProps } from '@/components/ui/googlePlacesSelect'
 import { InternalLink } from '@/components/ui/link'
@@ -17,10 +16,7 @@ import { SupportedLocale } from '@/intl/locales'
 import { normalizeDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
-import {
-  getYourPoliticianCategoryDisplayName,
-  YourPoliticianCategory,
-} from '@/utils/shared/yourPoliticianCategory'
+import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory'
 
 function DefaultPlacesSelect(props: Pick<GooglePlacesSelectProps, 'onChange' | 'value'>) {
   return (
@@ -33,17 +29,17 @@ function DefaultPlacesSelect(props: Pick<GooglePlacesSelectProps, 'onChange' | '
     </div>
   )
 }
-export function ClientCurrentUserDTSIPersonCardOrCTA(props: { locale: SupportedLocale }) {
+export function UserAddressVoterGuideInput(props: { locale: SupportedLocale }) {
   return (
     <Suspense fallback={<DefaultPlacesSelect onChange={noop} value={null} />}>
-      <_ClientCurrentUserDTSIPersonCardOrCTA {...props} />
+      <_UserAddressVoterGuideInput {...props} />
     </Suspense>
   )
 }
 
 const POLITICIAN_CATEGORY: YourPoliticianCategory = 'senate-and-house'
 
-function _ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: SupportedLocale }) {
+function _UserAddressVoterGuideInput({ locale }: { locale: SupportedLocale }) {
   const { setAddress, address } = useMutableCurrentUserAddress()
   const res = useGetDTSIPeopleFromAddress(
     address === 'loading' ? '' : address?.description || '',
@@ -64,8 +60,6 @@ function _ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: SupportedLo
       </div>
     )
   }
-  const people = res.data.dtsiPeople
-  const categoryDisplayName = getYourPoliticianCategoryDisplayName(POLITICIAN_CATEGORY)
   const stateCode = res.data.dtsiPeople.find(x => x.primaryRole?.primaryState)?.primaryRole
     ?.primaryState as USStateCode | undefined
   const districtRole = res.data.dtsiPeople.find(x => x.primaryRole?.primaryDistrict)?.primaryRole
@@ -74,14 +68,14 @@ function _ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: SupportedLo
   return (
     <div>
       <p className="mb-3 text-center text-sm text-fontcolor-muted">
-        Showing politicians for{' '}
+        {stateCode ? 'Showing voter guide for' : 'No voter guide info related to'}{' '}
         <button className="font-bold text-fontcolor underline" onClick={() => setAddress(null)}>
           {address.description}
         </button>
       </p>
 
       {stateCode && (
-        <div className="mx-auto mb-12 flex max-w-4xl flex-col items-center gap-4 rounded-3xl bg-muted p-6 sm:flex-row">
+        <div className="mx-auto flex max-w-4xl flex-col items-center gap-4 rounded-3xl bg-muted p-6 sm:flex-row">
           <div>
             <h4 className="text-xl font-bold">Your crypto voter guide</h4>
             <p className="mt-4 text-fontcolor-muted">
@@ -111,19 +105,6 @@ function _ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: SupportedLo
           </div>
         </div>
       )}
-      <p className="mb-3 text-center text-xl font-bold">Your {categoryDisplayName}</p>
-      <div className="mx-auto max-w-3xl space-y-5">
-        {people.map(person => (
-          <DTSIPersonCard
-            data-test-id="dtsi-person-associated-with-address"
-            key={person.id}
-            locale={locale}
-            person={person}
-            subheader="role"
-            subheaderFormatter={str => `Your ${str}`}
-          />
-        ))}
-      </div>
     </div>
   )
 }

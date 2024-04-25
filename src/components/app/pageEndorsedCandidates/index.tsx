@@ -1,8 +1,8 @@
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
+import { PACFooter } from '@/components/app/pacFooter'
 import { Button } from '@/components/ui/button'
-import { ExternalLink, InternalLink } from '@/components/ui/link'
-import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
+import { ExternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { DTSI_EndorsedCandidatesQuery } from '@/data/dtsi/generated'
 import { SupportedLocale } from '@/intl/locales'
@@ -11,15 +11,13 @@ import {
   dtsiPersonFullName,
   dtsiPersonPoliticalAffiliationCategoryAbbreviation,
 } from '@/utils/dtsi/dtsiPersonUtils'
-import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
 interface LocationStateSpecificProps extends DTSI_EndorsedCandidatesQuery {
   locale: SupportedLocale
 }
 
-export function PageEndorsedCandidates({ people, locale }: LocationStateSpecificProps) {
-  const urls = getIntlUrls(locale)
+export function PageEndorsedCandidates({ people }: LocationStateSpecificProps) {
   return (
     <div className="container">
       <PageTitle as="h1">Stand With Crypto PAC 2024 House and Senate Endorsements</PageTitle>
@@ -34,10 +32,10 @@ export function PageEndorsedCandidates({ people, locale }: LocationStateSpecific
           endorse the candidates below.
         </p>
 
-        <p>
+        {/* <p>
           You can support the candidates directly, or click the donate button below to support the
           SWC PAC that will disburse funds to all the endorsed candidates below.
-        </p>
+        </p> */}
       </h2>
       <PageTitle as="h3" className="mb-6 mt-10" size="md">
         SWC Endorsed Candidates
@@ -48,7 +46,7 @@ export function PageEndorsedCandidates({ people, locale }: LocationStateSpecific
             person.politicalAffiliationCategory &&
             dtsiPersonPoliticalAffiliationCategoryAbbreviation(person.politicalAffiliationCategory)
           return (
-            <LinkBox
+            <div
               className={cn(
                 'flex flex-col items-center justify-between gap-4 rounded-3xl bg-secondary p-6 text-left transition hover:drop-shadow-lg sm:flex-row',
               )}
@@ -63,12 +61,9 @@ export function PageEndorsedCandidates({ people, locale }: LocationStateSpecific
                 </div>
                 <div>
                   <div className="text-lg font-bold">
-                    <InternalLink
-                      className={linkBoxLinkClassName}
-                      href={urls.politicianDetails(person.slug)}
-                    >
+                    <div>
                       {dtsiPersonFullName(person)} {polCategory ? `(${polCategory})` : ''}
-                    </InternalLink>
+                    </div>
                   </div>
                   {person.primaryRole && (
                     <div className="text-fontcolor-muted">
@@ -82,10 +77,11 @@ export function PageEndorsedCandidates({ people, locale }: LocationStateSpecific
                   <ExternalLink href={person.donationUrl}>Donate</ExternalLink>
                 </Button>
               )}
-            </LinkBox>
+            </div>
           )
         })}
       </div>
+      <PACFooter />
     </div>
   )
 }

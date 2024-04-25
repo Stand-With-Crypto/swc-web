@@ -1,6 +1,7 @@
 import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
 import { DTSIPersonCard } from '@/components/app/dtsiPersonCard'
 import { DTSIStanceDetails } from '@/components/app/dtsiStanceDetails'
+import { PACFooter } from '@/components/app/pacFooter'
 import { REGISTRATION_URLS_BY_STATE } from '@/components/app/userActionFormVoterRegistration/constants'
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
@@ -167,6 +168,7 @@ export function LocationRaceSpecific({
           <CandidateInfo key={person.id} {...{ locale, person }} />
         ))}
       </section>
+      <PACFooter />
     </div>
   )
 }

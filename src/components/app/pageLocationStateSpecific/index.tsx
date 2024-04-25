@@ -2,6 +2,7 @@ import { compact, times } from 'lodash-es'
 
 import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
 import { DTSIStanceDetails } from '@/components/app/dtsiStanceDetails'
+import { PACFooter } from '@/components/app/pacFooter'
 import { UserLocationRaceInfo } from '@/components/app/pageLocationStateSpecific/userLocationRaceInfo'
 import { REGISTRATION_URLS_BY_STATE } from '@/components/app/userActionFormVoterRegistration/constants'
 import { Button } from '@/components/ui/button'
@@ -149,7 +150,7 @@ export function LocationStateSpecific({
               <PageTitle as="h3" className="mb-3" size="sm">
                 Other races in {stateName}
               </PageTitle>
-              <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
+              <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:text-center">
                 {otherDistricts.map(district => (
                   <InternalLink
                     className={cn('mb-4 block flex-shrink-0 font-semibold')}
@@ -167,6 +168,7 @@ export function LocationStateSpecific({
           </div>
         )}
       </div>
+      <PACFooter />
     </div>
   )
 }
