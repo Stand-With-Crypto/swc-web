@@ -34,7 +34,7 @@ export function LocationUnitedStatesPresidential({
         </PageTitle>
       </div>
       <ScrollArea>
-        <div className="mb-20 flex justify-center gap-4 px-4 pb-4 pl-4">
+        <div className="flex justify-center gap-4 px-4 pb-4 pl-4">
           {people.map(person => (
             <DTSIPersonHeroCard
               key={person.id}
@@ -46,7 +46,7 @@ export function LocationUnitedStatesPresidential({
         </div>
         <ScrollBar orientation="horizontal" />
       </ScrollArea>
-      <div className="container mx-auto max-w-4xl space-y-20">
+      <div className="container mx-auto mt-20 max-w-4xl space-y-20">
         {people.map(person => (
           <div className="mx-auto max-w-4xl" key={person.id}>
             <MaybeOverflowedStancesWithPerson
