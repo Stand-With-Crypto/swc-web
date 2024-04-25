@@ -1,3 +1,6 @@
+'use client'
+
+import { useEffect, useRef, useState } from 'react'
 import { Entry } from 'contentful'
 import { isNil } from 'lodash-es'
 
@@ -7,6 +10,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion'
+import { PageTitle } from '@/components/ui/pageTitleText'
 import { QuestionnaireEntrySkeleton } from '@/utils/server/contentful/questionnaire'
 import { twNoop } from '@/utils/web/cn'
 
@@ -15,16 +19,39 @@ interface QuestionnaireAccordionProps {
 }
 
 export function QuestionnaireAccordion({ questionnaire }: QuestionnaireAccordionProps) {
+  const questionnaireRef = useRef<HTMLDivElement>(null)
   const answersAmount = Object.keys(questionnaire?.fields ?? {}).length - 1
 
-  if (!questionnaire) return null
+  const [accordionDefaultValue, setAccordionDefaultValue] = useState<string | null>(null)
+
+  useEffect(() => {
+    const hash =
+      typeof window !== 'undefined'
+        ? decodeURIComponent(window.location.hash.replace('#', ''))
+        : null
+
+    setAccordionDefaultValue(hash === 'questionnaire' ? 'questionnaire' : '')
+  }, [])
+
+  useEffect(() => {
+    if (!questionnaireRef.current || !accordionDefaultValue) return
+    questionnaireRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [questionnaireRef, accordionDefaultValue])
+
+  if (!questionnaire || accordionDefaultValue === null) return null
 
   return (
-    <div className="mb-10 flex flex-col gap-4">
-      <h2 className="text-fontcolor-muted">SWC CANDIDATE QUESTIONNAIRE</h2>
+    <div
+      className="mb-10 flex scroll-mt-20 flex-col gap-4"
+      id="questionnaire"
+      ref={questionnaireRef}
+    >
+      <PageTitle as="h2" className="mb-4 text-left" size="sm">
+        Candidate Questionnaire
+      </PageTitle>
 
-      <Accordion collapsible type="single">
-        <AccordionItem value="Responses">
+      <Accordion collapsible defaultValue={accordionDefaultValue} type="single">
+        <AccordionItem value="questionnaire">
           <AccordionTrigger>Responses ({answersAmount})</AccordionTrigger>
 
           <AccordionContent className="pb-0">
