@@ -78,7 +78,9 @@ export function MaybeOverflowedStancesWithPerson({ person, stances, locale }: Pr
           </div>
 
           <p className="mt-8 text-xl font-bold">
-            {possessive(dtsiPersonFullName(person))} has no statements on crypto
+            <Balancer>
+              {possessive(dtsiPersonFullName(person))} has no statements on crypto
+            </Balancer>
           </p>
         </div>
       </div>

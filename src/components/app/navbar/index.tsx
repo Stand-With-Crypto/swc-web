@@ -29,10 +29,6 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
       text: 'Mission',
     },
     {
-      href: urls.locationUnitedStates(),
-      text: 'Races',
-    },
-    {
       href: urls.leaderboard(),
       text: 'Community',
     },
@@ -114,6 +110,10 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
                 )
               })}
             </div>
+            <Button asChild className="hidden lg:flex" variant="outline">
+              <InternalLink href={urls.locationUnitedStates()}>Races</InternalLink>
+            </Button>
+
             <div className="hidden lg:flex">{loginButton}</div>
           </div>
         </div>
@@ -135,6 +135,9 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
                   </Button>
                 )
               })}
+              <Button asChild className="mt-4" variant="outline">
+                <InternalLink href={urls.locationUnitedStates()}>Races</InternalLink>
+              </Button>
               <div className="mt-4">{loginButton}</div>
             </div>
           </DrawerContent>

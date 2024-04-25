@@ -7,7 +7,7 @@ export function PACFooter({ className }: { className?: string }) {
     */
   return (
     <div className={cn('relative top-20 mx-auto max-w-3xl', className)}>
-      <div className="rounded-3xl border-2 p-4">
+      <div className="border-4 border-black p-4">
         Paid for by Stand with Crypto Alliance, Inc. Political Action Committee. Not authorized by
         any candidate or candidate’s committee. 302-566-8028.
       </div>
