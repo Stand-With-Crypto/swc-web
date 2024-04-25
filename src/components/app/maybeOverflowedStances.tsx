@@ -2,6 +2,7 @@ import Balancer from 'react-wrap-balancer'
 
 import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
 import { DTSIAvatar } from '@/components/app/dtsiAvatar'
+import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { DTSIStanceDetails } from '@/components/app/dtsiStanceDetails'
 import {
   DTSIStanceDetailsPersonProp,
@@ -13,7 +14,6 @@ import { SupportedLocale } from '@/intl/locales'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { possessive } from '@/utils/shared/possessive'
 import { getIntlUrls } from '@/utils/shared/urls'
-import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 
 interface Props {
   person: DTSIStanceDetailsPersonProp & {

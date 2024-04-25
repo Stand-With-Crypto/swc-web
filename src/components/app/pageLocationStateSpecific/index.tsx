@@ -24,7 +24,7 @@ import { LocationSpecificRaceInfo } from './locationSpecificRaceInfo'
 import { organizeStateSpecificPeople } from './organizeStateSpecificPeople'
 
 interface LocationStateSpecificProps extends DTSI_StateSpecificInformationQuery {
-  stateCode: USStateCode
+  stateCode: USStateCode //test
   locale: SupportedLocale
   countAdvocates: number
 }

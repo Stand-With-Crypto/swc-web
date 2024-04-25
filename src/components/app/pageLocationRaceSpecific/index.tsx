@@ -27,7 +27,7 @@ export interface LocationRaceSpecificProps extends DTSI_DistrictSpecificInformat
 
 function organizeRaceSpecificPeople(
   people: DTSI_DistrictSpecificInformationQuery['people'],
-  { district, stateCode }: Pick<LocationRaceSpecificProps, 'district' | 'stateCode'>,
+  { district }: Pick<LocationRaceSpecificProps, 'district' | 'stateCode'>,
 ) {
   const targetedRoleCategory = district
     ? DTSI_PersonRoleCategory.CONGRESS
