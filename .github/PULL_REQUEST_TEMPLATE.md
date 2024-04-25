@@ -6,7 +6,7 @@ fixes <!-- SENTRY issue: Adding the sentry issue number here (e.g.: PROD-SWC-WEB
 
 <!--
 Here you can add any additional context not already captured in related github/sentry issue.
-If there are UX changes please done one or both of the following:
+If there are UX changes please do one or both of the following:
     - include paths/steps to reproduce the UI related changes in your vercel preview branch (if you are a core contributor)
     - attach mobile/web screenshots to the PR
 -->
