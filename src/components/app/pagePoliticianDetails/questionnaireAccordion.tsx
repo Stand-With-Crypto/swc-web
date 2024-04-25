@@ -43,7 +43,7 @@ export function QuestionnaireAccordion({ questionnaire }: QuestionnaireAccordion
   return (
     <div className="mb-10 flex scroll-mt-20 flex-col" id="questionnaire" ref={questionnaireRef}>
       <PageTitle as="h2" className="mb-4 text-left" size="sm">
-        Candidate Questionnaire
+        Candidate questionnaire
       </PageTitle>
 
       <Accordion collapsible defaultValue={accordionDefaultValue} type="single">
