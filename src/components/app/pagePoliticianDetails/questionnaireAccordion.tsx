@@ -41,11 +41,7 @@ export function QuestionnaireAccordion({ questionnaire }: QuestionnaireAccordion
   if (!questionnaire || accordionDefaultValue === null) return null
 
   return (
-    <div
-      className="mb-10 flex scroll-mt-20 flex-col gap-4"
-      id="questionnaire"
-      ref={questionnaireRef}
-    >
+    <div className="mb-10 flex scroll-mt-20 flex-col" id="questionnaire" ref={questionnaireRef}>
       <PageTitle as="h2" className="mb-4 text-left" size="sm">
         Candidate Questionnaire
       </PageTitle>
