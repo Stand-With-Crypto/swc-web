@@ -13,9 +13,14 @@ import { SupportedLocale } from '@/intl/locales'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { possessive } from '@/utils/shared/possessive'
 import { getIntlUrls } from '@/utils/shared/urls'
+import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 
 interface Props {
-  person: DTSIStanceDetailsPersonProp & { slug: string }
+  person: DTSIStanceDetailsPersonProp & {
+    slug: string
+    computedStanceScore: number | null | undefined
+    manuallyOverriddenStanceScore: number | null | undefined
+  }
   stances: Array<
     DTSIStanceDetailsStancePassedProp & { computedStanceScore: number | null | undefined }
   >
@@ -65,7 +70,13 @@ export function MaybeOverflowedStancesWithPerson({ person, stances, locale }: Pr
     return (
       <div>
         <div className="mb-6 text-center">
-          <DTSIAvatar className="rounded-full" person={person} size={100} />
+          <div className="relative inline-block h-[100] w-[100]">
+            <DTSIAvatar person={person} size={100} />
+            <div className="absolute bottom-0 right-[-8px]">
+              <DTSIFormattedLetterGrade person={person} size={25} />
+            </div>
+          </div>
+
           <p className="mt-8 text-xl font-bold">
             {possessive(dtsiPersonFullName(person))} has no statements on crypto
           </p>
@@ -76,7 +87,12 @@ export function MaybeOverflowedStancesWithPerson({ person, stances, locale }: Pr
   return (
     <div>
       <div className="mb-6 text-center">
-        <DTSIAvatar className="rounded-full" person={person} size={100} />
+        <div className="relative inline-block h-[100] w-[100]">
+          <DTSIAvatar person={person} size={100} />
+          <div className="absolute bottom-0 right-[-8px]">
+            <DTSIFormattedLetterGrade person={person} size={25} />
+          </div>
+        </div>{' '}
         <p className="mt-8 text-xl font-bold">
           <Balancer>{possessive(dtsiPersonFullName(person))} statements on crypto</Balancer>
         </p>
