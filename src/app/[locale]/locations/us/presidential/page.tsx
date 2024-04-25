@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import { LocationRaceSpecific } from '@/components/app/pageLocationRaceSpecific'
+import { LocationUnitedStatesPresidential } from '@/components/app/pageLocationUnitedStatesPresidential'
 import { queryDTSILocationUnitedStatesPresidential } from '@/data/dtsi/queries/queryDTSILocationUnitedStatesPresidentialInformation'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
@@ -33,5 +33,5 @@ export default async function LocationPresidentialSpecificPage({
     )
   }
 
-  return <LocationRaceSpecific {...data} {...{ locale }} />
+  return <LocationUnitedStatesPresidential {...data} {...{ locale }} />
 }

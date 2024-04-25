@@ -19,7 +19,6 @@ export function findRecommendedCandidate<
       belowThresholdAntiCrypto.push(item)
     }
   })
-  console.log({ veryProCrypto, aboveThresholdProCrypto, belowThresholdAntiCrypto })
   if (veryProCrypto.length === 1 && !aboveThresholdProCrypto.length) {
     return {
       recommended: veryProCrypto[0],

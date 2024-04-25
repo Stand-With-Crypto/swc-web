@@ -168,7 +168,7 @@ export function LocationStateSpecific({
           </div>
         )}
       </div>
-      <PACFooter />
+      <PACFooter className="container" />
     </div>
   )
 }

@@ -1,12 +1,9 @@
-import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
 import { DTSIPersonCard } from '@/components/app/dtsiPersonCard'
-import { DTSIStanceDetails } from '@/components/app/dtsiStanceDetails'
 import { PACFooter } from '@/components/app/pacFooter'
 import { REGISTRATION_URLS_BY_STATE } from '@/components/app/userActionFormVoterRegistration/constants'
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { TrackedExternalLink } from '@/components/ui/trackedExternalLink'
 import {
   DTSI_DistrictSpecificInformationQuery,
@@ -15,18 +12,15 @@ import {
 import { SupportedLocale } from '@/intl/locales'
 import { NormalizedDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
-import {
-  formatSpecificRoleDTSIPerson,
-  SpecificRoleDTSIPerson,
-} from '@/utils/dtsi/specificRoleDTSIPerson'
+import { formatSpecificRoleDTSIPerson } from '@/utils/dtsi/specificRoleDTSIPerson'
 import { findRecommendedCandidate } from '@/utils/shared/findRecommendedCandidate'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 
-type FormattedPerson = SpecificRoleDTSIPerson<DTSI_DistrictSpecificInformationQuery['people'][0]>
+import { CandidateInfo } from './candidateInformation'
 
-interface LocationRaceSpecificProps extends DTSI_DistrictSpecificInformationQuery {
-  stateCode?: USStateCode
+export interface LocationRaceSpecificProps extends DTSI_DistrictSpecificInformationQuery {
+  stateCode: USStateCode
   district?: NormalizedDTSIDistrictId
   locale: SupportedLocale
 }
@@ -37,9 +31,7 @@ function organizeRaceSpecificPeople(
 ) {
   const targetedRoleCategory = district
     ? DTSI_PersonRoleCategory.CONGRESS
-    : stateCode
-      ? DTSI_PersonRoleCategory.SENATE
-      : DTSI_PersonRoleCategory.PRESIDENT
+    : DTSI_PersonRoleCategory.SENATE
 
   const formatted = people.map(x =>
     formatSpecificRoleDTSIPerson(x, {
@@ -48,58 +40,6 @@ function organizeRaceSpecificPeople(
   )
   formatted.sort((a, b) => (a.isIncumbent === b.isIncumbent ? 0 : a.isIncumbent ? -1 : 1))
   return formatted
-}
-
-function CandidateInfo({
-  person,
-  locale,
-  isRecommended,
-}: { person: FormattedPerson; isRecommended?: boolean } & Pick<
-  LocationRaceSpecificProps,
-  'locale'
->) {
-  return (
-    <div>
-      <div className="container max-w-4xl">
-        <DTSIPersonCard
-          key={person.id}
-          locale={locale}
-          overrideDescriptor={isRecommended ? 'recommended' : undefined}
-          person={person}
-          subheader="role"
-        />
-      </div>
-      {!!person.stances.length && (
-        <>
-          <h3 className="my-3 text-center font-bold">
-            {dtsiPersonFullName(person)} Relevant Statements
-          </h3>
-          <ScrollArea>
-            <div className="flex justify-center gap-5 pb-3 pl-4">
-              {person.stances.map(stance => {
-                return (
-                  <div className="w-[300px] shrink-0 lg:w-[500px]" key={stance.id}>
-                    <DTSIStanceDetails
-                      bodyClassName="line-clamp-6"
-                      hideImages
-                      locale={locale}
-                      person={person}
-                      stance={stance}
-                    />
-                    <CryptoSupportHighlight
-                      className="mx-auto mt-2"
-                      stanceScore={stance.computedStanceScore}
-                    />
-                  </div>
-                )
-              })}
-            </div>
-            <ScrollBar orientation="horizontal" />
-          </ScrollArea>
-        </>
-      )}
-    </div>
-  )
 }
 
 export function LocationRaceSpecific({
@@ -113,60 +53,75 @@ export function LocationRaceSpecific({
   const urls = getIntlUrls(locale)
   const { recommended, others } = findRecommendedCandidate(groups)
   return (
-    <div className=" space-y-20">
-      <div className="container text-center">
+    <div className="container mx-auto max-w-4xl space-y-20">
+      <div className="text-center">
         <h2 className={'mb-4 text-fontcolor-muted'}>
           <InternalLink className="text-fontcolor-muted" href={urls.locationUnitedStates()}>
             United States
           </InternalLink>
           {' / '}
-          {(() => {
-            if (!stateDisplayName) {
-              return <span className="font-bold text-primary-cta">Presidential</span>
-            }
-            return (
-              <>
-                <InternalLink
-                  className="text-fontcolor-muted"
-                  href={urls.locationStateSpecific(stateCode)}
-                >
-                  {stateDisplayName}
-                </InternalLink>{' '}
-                /{' '}
-                <span className="font-bold text-primary-cta">
-                  {district
-                    ? `${stateCode} Congressional District ${district}`
-                    : `U.S. Senate (${stateCode})`}
-                </span>
-              </>
-            )
-          })()}
-        </h2>
-        <PageTitle as="h1" className="mb-4" size="md">
-          {!stateCode
-            ? 'U.S. Presidential Race'
-            : district
+          <InternalLink
+            className="text-fontcolor-muted"
+            href={urls.locationStateSpecific(stateCode)}
+          >
+            {stateDisplayName}
+          </InternalLink>{' '}
+          /{' '}
+          <span className="font-bold text-primary-cta">
+            {district
               ? `${stateCode} Congressional District ${district}`
               : `U.S. Senate (${stateCode})`}
+          </span>
+        </h2>
+        <PageTitle as="h1" className="mb-4" size="md">
+          {district
+            ? `${stateCode} Congressional District ${district} Race`
+            : `U.S. Senate Race (${stateCode})`}
         </PageTitle>
-        {stateCode && (
-          <Button asChild className="mt-6 w-full max-w-xs">
-            <TrackedExternalLink
-              eventProperties={{ Category: 'Register To Vote' }}
-              href={REGISTRATION_URLS_BY_STATE[stateCode].registerUrl}
-            >
-              Register to vote
-            </TrackedExternalLink>
-          </Button>
-        )}
+        <Button asChild className="mt-6 w-full max-w-xs">
+          <TrackedExternalLink
+            eventProperties={{ Category: 'Register To Vote' }}
+            href={REGISTRATION_URLS_BY_STATE[stateCode].registerUrl}
+          >
+            Register to vote
+          </TrackedExternalLink>
+        </Button>
       </div>
       <section className="space-y-20">
         {recommended && (
-          <CandidateInfo isRecommended key={recommended.id} {...{ locale, person: recommended }} />
+          <div className="space-y-4">
+            <h3 className="text-center text-xl font-bold">Our recommended candidate</h3>
+            <h4 className="text-center text-fontcolor-muted">
+              Stand With Crypto recommends {dtsiPersonFullName(recommended)} for{' '}
+              {district
+                ? `${stateCode} Congressional District ${district} Race`
+                : `U.S. Senate Race (${stateCode})`}
+              .
+            </h4>
+            <CandidateInfo
+              isRecommended
+              key={recommended.id}
+              {...{ locale, person: recommended }}
+            />
+          </div>
         )}
-        {others.map(person => (
-          <CandidateInfo key={person.id} {...{ locale, person }} />
-        ))}
+        {!!others.length && (
+          <div className="space-y-4">
+            {recommended && (
+              <>
+                <h3 className="text-center text-xl font-bold">Other candidates</h3>
+                <h4 className="text-center text-fontcolor-muted">
+                  Feel free to check out other, less crypto forward candidates that are running.
+                </h4>
+              </>
+            )}
+            <div className="space-y-16">
+              {others.map(person => (
+                <DTSIPersonCard key={person.id} locale={locale} person={person} subheader="role" />
+              ))}
+            </div>
+          </div>
+        )}
       </section>
       <PACFooter />
     </div>
