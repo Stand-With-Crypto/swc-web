@@ -150,7 +150,7 @@ export function LocationStateSpecific({
               <PageTitle as="h3" className="mb-3" size="sm">
                 Other races in {stateName}
               </PageTitle>
-              <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:text-center">
+              <div className="grid grid-cols-2 gap-3 text-center md:grid-cols-3">
                 {otherDistricts.map(district => (
                   <InternalLink
                     className={cn('mb-4 block flex-shrink-0 font-semibold')}

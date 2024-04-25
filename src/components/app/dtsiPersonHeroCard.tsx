@@ -32,8 +32,8 @@ export function DTSIPersonHeroCard(props: Props) {
     dtsiPersonPoliticalAffiliationCategoryDisplayName(person.politicalAffiliationCategory)
   const stanceScore = person.manuallyOverriddenStanceScore || person.computedStanceScore
   return (
-    <LinkBox className="w-52 border drop-shadow-lg lg:w-60 xl:w-80">
-      <div className="relative h-52 w-52 lg:h-60 lg:w-60 xl:h-80 xl:w-80 ">
+    <LinkBox className="w-52 border drop-shadow-lg lg:w-60 xl:w-72">
+      <div className="relative h-52 w-52 lg:h-60 lg:w-60 xl:h-72 xl:w-72 ">
         <NextImage
           alt={`Profile picture of ${dtsiPersonFullName(person)}`}
           fill
@@ -44,17 +44,20 @@ export function DTSIPersonHeroCard(props: Props) {
       </div>
       <div className="p-3 xl:p-6">
         <InternalLink
-          className={cn('text-base font-bold md:text-xl', linkBoxLinkClassName)}
+          className={cn('text-base font-bold lg:text-xl', linkBoxLinkClassName)}
           href={getIntlUrls(locale).politicianDetails(person.slug)}
         >
           {dtsiPersonFullName(person)}
         </InternalLink>
-        <div>
-          <div className="mt-4 inline-block rounded-full bg-muted p-2 text-sm md:text-base">
+        <div className="mt-4 flex items-center justify-between">
+          <div className="inline-block rounded-full bg-muted px-5 py-2 text-sm lg:text-base">
             {politicalAffiliationCategory}
           </div>
+          <div className="shrink-0">
+            <DTSIFormattedLetterGrade person={person} size={56} />
+          </div>
         </div>
-        <div className="mt-9 flex items-end justify-between text-sm md:text-base">
+        <div className="mt-9 text-sm lg:text-base">
           <div className="space-y-2">
             <div className="flex items-center gap-2">
               <div>
@@ -78,9 +81,6 @@ export function DTSIPersonHeroCard(props: Props) {
                 {pluralize({ count: stanceCount, singular: 'statement' })}
               </div>
             </div>
-          </div>
-          <div className="shrink-0">
-            <DTSIFormattedLetterGrade person={person} size={56} />
           </div>
         </div>
       </div>

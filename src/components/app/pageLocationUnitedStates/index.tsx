@@ -78,7 +78,7 @@ export function LocationUnitedStates({
             <PageTitle as="h3" className="mb-3" size="sm">
               States
             </PageTitle>
-            <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:text-center">
+            <div className="grid grid-cols-2 gap-3 text-center md:grid-cols-3">
               {Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP).map(_stateCode => {
                 const stateCode = _stateCode as USStateCode
                 return (
