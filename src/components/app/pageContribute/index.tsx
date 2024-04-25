@@ -190,7 +190,7 @@ export function PageContribute() {
                     subtitle: 'Take a look at the Figma below for examples',
                     cta: (
                       <Button asChild variant="primary-cta">
-                        <a href="https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/public/Stand%20With%20Crypto%20Brand%20Assets%20-%202024-03-06-aZAtYP6BCFbgYNUcnQnvu4vLmmn0JT.zip">
+                        <a href="https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/public/SWC%20Brand%20Assets%20-%202024-04-25.zip">
                           Download assets
                         </a>
                       </Button>
