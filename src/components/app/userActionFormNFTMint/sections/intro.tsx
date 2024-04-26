@@ -15,6 +15,7 @@ import {
   UserActionFormNFTMintSectionNames,
 } from '@/components/app/userActionFormNFTMint/constants'
 import { Button } from '@/components/ui/button'
+import { DialogBody } from '@/components/ui/dialog'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -33,7 +34,9 @@ export function UserActionFormNFTMintIntro({
     <UserActionFormLayout>
       <UserActionFormLayout.Container>
         <div className="flex h-full flex-col gap-6">
-          <ContractMetadataDisplay contractMetadata={contractMetadata} />
+          <DialogBody>
+            <ContractMetadataDisplay contractMetadata={contractMetadata} />
+          </DialogBody>
 
           <UserActionFormLayout.Footer>
             {isLoadingContractMetadata ? (
@@ -140,14 +143,16 @@ export function ContractMetadataDisplaySkeleton() {
         </div>
       </div>
 
-      <Skeleton>
-        <p className="text-lg text-muted-foreground">
-          This collectible commemorates the launch of the Stand With Crypto Alliance on August 14,
-          2023. Priced at {ETH_NFT_DONATION_AMOUNT_DISPLAY}, this represents the 435 congressional
-          districts in the U.S. All proceeds benefit the Alliance. Secure yours on
-          standwithcrypto.org.
-        </p>
-      </Skeleton>
+      <div className="mt-4">
+        <Skeleton>
+          <p className="text-lg text-muted-foreground">
+            This collectible commemorates the launch of the Stand With Crypto Alliance on August 14,
+            2023. Priced at {ETH_NFT_DONATION_AMOUNT_DISPLAY}, this represents the 435 congressional
+            districts in the U.S. All proceeds benefit the Alliance. Secure yours on
+            standwithcrypto.org.
+          </p>
+        </Skeleton>
+      </div>
     </>
   )
 }

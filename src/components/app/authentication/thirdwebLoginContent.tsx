@@ -3,6 +3,7 @@ import { useEffect, useRef } from 'react'
 import { ConnectEmbed, ConnectEmbedProps } from '@thirdweb-dev/react'
 
 import { ANALYTICS_NAME_LOGIN } from '@/components/app/authentication/constants'
+import { DialogBody, DialogFooterCTA } from '@/components/ui/dialog'
 import { NextImage } from '@/components/ui/image'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
@@ -45,46 +46,50 @@ export function ThirdwebLoginContent({
   }, [initialEmailAddress])
 
   return (
-    <div>
-      <div className="mx-auto flex max-w-[460px] flex-col items-center gap-8">
-        <div className="flex flex-col items-center space-y-6">
-          <NextImage
-            alt="Stand With Crypto Logo"
-            height={80}
-            priority
-            src="/logo/shield.svg"
-            width={80}
-          />
+    <>
+      <DialogBody className="-mt-8">
+        <div className="mx-auto flex max-w-[460px] flex-col items-center gap-2">
+          <div className="flex flex-col items-center space-y-6">
+            <NextImage
+              alt="Stand With Crypto Logo"
+              height={80}
+              priority
+              src="/logo/shield.svg"
+              width={80}
+            />
 
-          <div className="space-y-4">
-            <PageTitle size="sm">{title}</PageTitle>
-            <PageSubTitle size="sm">{subtitle}</PageSubTitle>
+            <div className="space-y-4">
+              <PageTitle size="sm">{title}</PageTitle>
+              <PageSubTitle size="sm">{subtitle}</PageSubTitle>
+            </div>
+          </div>
+
+          <div
+            className="w-full"
+            ref={thirdwebEmbeddedAuthContainer}
+            // if someone enters a super long email, the component will overflow on the "enter confirmation code" screen
+            // this prevents that bug
+            style={{ maxWidth: 'calc(100vw - 56px)' }}
+          >
+            <ThirdwebLoginEmbedded {...props} />
           </div>
         </div>
 
-        <div
-          className="w-full"
-          ref={thirdwebEmbeddedAuthContainer}
-          // if someone enters a super long email, the component will overflow on the "enter confirmation code" screen
-          // this prevents that bug
-          style={{ maxWidth: 'calc(100vw - 56px)' }}
-        >
-          <ThirdwebLoginEmbedded {...props} />
-        </div>
-
-        <p className="text-center text-xs text-muted-foreground">
-          By signing up, I understand that Stand With Crypto and its vendors may collect and use my
-          Personal Information. To learn more, visit the{' '}
-          <InternalLink href={urls.privacyPolicy()} target="_blank">
-            Stand With Crypto Alliance Privacy Policy
-          </InternalLink>{' '}
-          and{' '}
-          <ExternalLink href="https://www.quorum.us/privacy-policy/">
-            Quorum Privacy Policy
-          </ExternalLink>
-        </p>
-      </div>
-    </div>
+        <DialogFooterCTA className="mt-auto pb-2">
+          <p className="text-center text-xs text-muted-foreground">
+            By signing up, I understand that Stand With Crypto and its vendors may collect and use
+            my Personal Information. To learn more, visit the{' '}
+            <InternalLink href={urls.privacyPolicy()} target="_blank">
+              Stand With Crypto Alliance Privacy Policy
+            </InternalLink>{' '}
+            and{' '}
+            <ExternalLink href="https://www.quorum.us/privacy-policy/">
+              Quorum Privacy Policy
+            </ExternalLink>
+          </p>
+        </DialogFooterCTA>
+      </DialogBody>
+    </>
   )
 }
 

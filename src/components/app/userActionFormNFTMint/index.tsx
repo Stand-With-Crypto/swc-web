@@ -73,7 +73,7 @@ export function UserActionFormNFTMint({ trackMount }: { trackMount?: boolean }) 
       const hasEnvironmentBar = NEXT_PUBLIC_ENVIRONMENT !== 'production'
 
       return (
-        <>
+        <div className="flex h-full flex-col">
           {hasEnvironmentBar && (
             <div className="flex h-10 items-center bg-yellow-300 text-center">
               <div className="container flex justify-between">
@@ -101,7 +101,7 @@ export function UserActionFormNFTMint({ trackMount }: { trackMount?: boolean }) 
               }
             }}
           />
-        </>
+        </div>
       )
     }
 

@@ -130,6 +130,7 @@ export function Address({
   return (
     <Form {...form}>
       <form
+        className="max-md:h-full"
         onSubmit={form.handleSubmit(
           () => goToSection(SectionNames.SUGGESTED_SCRIPT),
           trackFormSubmissionSyncErrors(FORM_NAME),
