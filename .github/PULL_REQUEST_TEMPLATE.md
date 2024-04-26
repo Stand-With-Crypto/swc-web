@@ -1,23 +1,17 @@
 closes <!-- GITHUB issue: Adding the github issue number here (e.g.: #123) will auto-close the issue when this PR is merged -->
-fixes <!-- SENTRY issue: Adding the sentry issue number here (e.g.: PROD-SWC-WEB-1JE) will auto-close the issue when this PR is merged -->
+
+fixes <!-- SENTRY issue: Adding the sentry issue number here (e.g.: PROD-SWC-WEB-1JE) will auto-close the issue when this PR is merged. Please ensure sentry issues are marked resolved after we ship related bug fixes -->
 
 ## What changed? Why?
 
-## UI changes
+<!--
+Here you can add any additional context not already captured in related github/sentry issue.
+If there are UX changes please do one or both of the following:
+    - include paths/steps to reproduce the UI related changes in your vercel preview branch (if you are a core contributor)
+    - attach mobile/web screenshots to the PR
+-->
 
-### Web
-
-| Old 👴         | New 👶         |
-| -------------- | -------------- |
-| old screenshot | new screenshot |
-
-### Mobile Web
-
-| Old 👴         | New 👶         |
-| -------------- | -------------- |
-| old screenshot | new screenshot |
-
-## PlanetScale Deploy Request
+## PlanetScale deploy request
 
 <!-- See "Updating the PlanetScale schema" section in docs/Contributing.md -->
 
@@ -34,9 +28,3 @@ You can also highlight anything to which you’d like to draw reviewers’ atten
 - [ ] Vercel Preview Branch
 - [ ] Unit test
 - [ ] Functional test
-
-## Change management
-
-type=routine <!-- routine nonroutine emergency -->
-risk=low <!-- low medium high -->
-impact=sev5 <!-- sev5 sev4 sev3 sev2 sev1  -->
