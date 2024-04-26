@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { Entry } from 'contentful'
 import { isNil } from 'lodash-es'
 
@@ -11,6 +11,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion'
 import { PageTitle } from '@/components/ui/pageTitleText'
+import { useUrlHash } from '@/hooks/useUrlHash'
 import { QuestionnaireEntrySkeleton } from '@/utils/server/contentful/questionnaire'
 import { twNoop } from '@/utils/web/cn'
 
@@ -22,16 +23,9 @@ export function QuestionnaireAccordion({ questionnaire }: QuestionnaireAccordion
   const questionnaireRef = useRef<HTMLDivElement>(null)
   const answersAmount = Object.keys(questionnaire?.fields ?? {}).length - 1
 
-  const [accordionDefaultValue, setAccordionDefaultValue] = useState<string | null>(null)
-
-  useEffect(() => {
-    const hash =
-      typeof window !== 'undefined'
-        ? decodeURIComponent(window.location.hash.replace('#', ''))
-        : null
-
-    setAccordionDefaultValue(hash === 'questionnaire' ? 'questionnaire' : '')
-  }, [])
+  const { urlHash } = useUrlHash()
+  const isUrlHashForQuestionnaire = urlHash === 'questionnaire'
+  const accordionDefaultValue = isUrlHashForQuestionnaire ? 'questionnaire' : ''
 
   useEffect(() => {
     if (!questionnaireRef.current || !accordionDefaultValue) return
