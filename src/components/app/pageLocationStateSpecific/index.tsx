@@ -1,6 +1,9 @@
 import { compact, times } from 'lodash-es'
+import { DTSIPersonHeroCardSection } from 'src/components/app/dtsiPersonHeroCardSection'
 
+import { ContentSection } from '@/components/app/ContentSection'
 import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
+import { DarkHeroSection } from '@/components/app/darkHeroSection'
 import { DTSIStanceDetails } from '@/components/app/dtsiStanceDetails'
 import { PACFooter } from '@/components/app/pacFooter'
 import { UserLocationRaceInfo } from '@/components/app/pageLocationStateSpecific/userLocationRaceInfo'
@@ -20,7 +23,6 @@ import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/usStateDistr
 import { getUSStateNameFromStateCode, USStateCode } from '@/utils/shared/usStateUtils'
 import { cn } from '@/utils/web/cn'
 
-import { LocationSpecificRaceInfo } from './locationSpecificRaceInfo'
 import { organizeStateSpecificPeople } from './organizeStateSpecificPeople'
 
 interface LocationStateSpecificProps extends DTSI_StateSpecificInformationQuery {
@@ -50,64 +52,80 @@ export function LocationStateSpecific({
     }),
   )
   return (
-    <div>
-      <div className="container mb-20 max-w-4xl text-center">
-        <h2 className={'mb-4'}>
-          <InternalLink className="text-fontcolor-muted" href={urls.locationUnitedStates()}>
-            United States
-          </InternalLink>{' '}
-          / <span className="font-bold text-primary-cta">{stateName}</span>
-        </h2>
-        <PageTitle as="h1" size="md">
-          Key Races in {stateName}
-        </PageTitle>
-        {countAdvocates > 1000 && (
-          <h3 className="mt-4 text-xl font-bold text-primary-cta">
-            <FormattedNumber amount={countAdvocates} locale={locale} /> crypto advocates
-          </h3>
-        )}
-        <Button asChild className="mt-6 w-full max-w-xs">
-          <TrackedExternalLink
-            eventProperties={{ Category: 'Register To Vote' }}
-            href={REGISTRATION_URLS_BY_STATE[stateCode].registerUrl}
-          >
-            Register to vote
-          </TrackedExternalLink>
-        </Button>
-      </div>
-      <div className="container max-w-4xl divide-y-2 *:py-20 first:*:pt-0 last:*:pb-0">
+    <div className="space-y-20">
+      <DarkHeroSection>
+        <div className="text-center">
+          <h2 className={'mb-4'}>
+            <InternalLink className="text-gray-400" href={urls.locationUnitedStates()}>
+              United States
+            </InternalLink>{' '}
+            / <span className="font-bold text-purple-400">{stateName}</span>
+          </h2>
+          <PageTitle as="h1" className="mb-4" size="md">
+            Key Races in {stateName}
+          </PageTitle>
+          <PageSubTitle as="h2" className="text-gray-400" size="md">
+            View the races critical to keeping crypto in {stateName}.
+          </PageSubTitle>
+          {countAdvocates > 1000 && (
+            <h3 className="mt-4 text-xl font-bold text-purple-400">
+              <FormattedNumber amount={countAdvocates} locale={locale} /> crypto advocates
+            </h3>
+          )}
+          <Button asChild className="mt-6 w-full max-w-xs" variant="secondary">
+            <TrackedExternalLink
+              eventProperties={{ Category: 'Register To Vote' }}
+              href={REGISTRATION_URLS_BY_STATE[stateCode].registerUrl}
+            >
+              Register to vote
+            </TrackedExternalLink>
+          </Button>
+        </div>
+      </DarkHeroSection>
+      <div className="space-y-20">
         {!!groups.senators.length && (
-          <LocationSpecificRaceInfo
-            candidates={groups.senators}
+          <DTSIPersonHeroCardSection
+            cta={
+              <InternalLink href={urls.locationStateSpecificSenateRace(stateCode)}>
+                View Race
+              </InternalLink>
+            }
             locale={locale}
-            title={<>U.S Senate Race ({stateCode})</>}
-            url={urls.locationStateSpecificSenateRace(stateCode)}
+            people={groups.senators}
+            title={<>U.S. Senate Race ({stateCode})</>}
           />
         )}
-
         {groups.congresspeople['at-large']?.people.length ? (
-          <LocationSpecificRaceInfo
-            candidates={groups.congresspeople['at-large'].people}
+          <DTSIPersonHeroCardSection
+            cta={
+              <InternalLink
+                href={urls.locationDistrictSpecific({ stateCode, district: 'at-large' })}
+              >
+                View Race
+              </InternalLink>
+            }
             locale={locale}
+            people={groups.congresspeople['at-large'].people}
             title={<>At-Large Congressional District</>}
-            url={urls.locationDistrictSpecific({ stateCode, district: 'at-large' })}
           />
         ) : (
-          <UserLocationRaceInfo groups={groups} locale={locale} stateCode={stateCode} />
+          <ContentSection
+            className="bg-muted py-14"
+            subtitle={
+              <>
+                Do you live in {stateName}? Enter your address and we’ll redirect you to races in
+                your district.
+              </>
+            }
+            title={'Your district'}
+          >
+            <UserLocationRaceInfo groups={groups} locale={locale} stateCode={stateCode} />
+          </ContentSection>
         )}
-        {/* Because we want the recent tweets to be full length we cant use the divider classes above, but we still want a divider so we add this empty div */}
-        {!!stances.length && <div />}
-      </div>
-      {!!stances.length && (
-        <div>
-          <div className="container mb-8">
-            <PageTitle as="h3" size="sm">
-              What politicians in {stateCode} are saying
-            </PageTitle>
-            <PageSubTitle as="h4" size="sm">
-              Keep up with recent tweets about crypto from politicians in {stateName}.
-            </PageSubTitle>
-          </div>
+        <ContentSection
+          subtitle={<>Keep up with recent tweets about crypto from politicians in {stateName}.</>}
+          title={<>What politicians in {stateCode} are saying</>}
+        >
           <ScrollArea>
             <div className="flex justify-center gap-5 pb-3 pl-4">
               {stances.map(stance => {
@@ -130,45 +148,46 @@ export function LocationStateSpecific({
             </div>
             <ScrollBar orientation="horizontal" />
           </ScrollArea>
-        </div>
-      )}
-      <div className="container max-w-4xl divide-y-2 *:py-20 first:*:pt-0 last:*:pb-0">
-        {/* Because we want the recent tweets to be full length we cant use the divider classes above, but we still want a divider so we add this empty div */}
-        {!!stances.length && <div />}
+        </ContentSection>
         {US_LOCATION_PAGES_LIVE_KEY_DISTRICTS_MAP[stateCode]?.map(district => (
-          <LocationSpecificRaceInfo
-            candidates={groups.congresspeople[district].people}
+          <DTSIPersonHeroCardSection
+            cta={
+              <InternalLink href={urls.locationDistrictSpecific({ stateCode, district })}>
+                View Race
+              </InternalLink>
+            }
             key={district}
             locale={locale}
+            people={groups.congresspeople[district].people}
             title={<>Congressional District {district}</>}
-            url={urls.locationDistrictSpecific({ stateCode, district })}
           />
         ))}
+
         {US_STATE_CODE_TO_DISTRICT_COUNT_MAP[stateCode] > 1 && (
-          <div>
-            <section className="space-y-10">
-              <PageTitle as="h3" className="mb-3" size="sm">
-                Other races in {stateName}
-              </PageTitle>
-              <div className="grid grid-cols-2 gap-3 text-center md:grid-cols-3">
-                {otherDistricts.map(district => (
-                  <InternalLink
-                    className={cn('mb-4 block flex-shrink-0 font-semibold')}
-                    href={urls.locationDistrictSpecific({
-                      stateCode,
-                      district,
-                    })}
-                    key={district}
-                  >
-                    District {district}
-                  </InternalLink>
-                ))}
-              </div>
-            </section>
-          </div>
+          <ContentSection
+            className="container"
+            subtitle={'Dive deeper and discover races in other districts.'}
+            title={`Other races in ${stateName}`}
+          >
+            <div className="grid grid-cols-2 gap-3 text-center md:grid-cols-3">
+              {otherDistricts.map(district => (
+                <InternalLink
+                  className={cn('mb-4 block flex-shrink-0 font-semibold')}
+                  href={urls.locationDistrictSpecific({
+                    stateCode,
+                    district,
+                  })}
+                  key={district}
+                >
+                  District {district}
+                </InternalLink>
+              ))}
+            </div>
+          </ContentSection>
         )}
+
+        <PACFooter className="container" />
       </div>
-      <PACFooter className="container" />
     </div>
   )
 }

@@ -1,8 +1,4 @@
-import Balancer from 'react-wrap-balancer'
-
 import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
-import { DTSIAvatar } from '@/components/app/dtsiAvatar'
-import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
 import { DTSIStanceDetails } from '@/components/app/dtsiStanceDetails'
 import {
   DTSIStanceDetailsPersonProp,
@@ -11,8 +7,6 @@ import {
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
 import { SupportedLocale } from '@/intl/locales'
-import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
-import { possessive } from '@/utils/shared/possessive'
 import { getIntlUrls } from '@/utils/shared/urls'
 
 interface Props {
@@ -61,50 +55,6 @@ export function MaybeOverflowedStances({ person, stances, locale }: Props) {
           </InternalLink>
         </Button>
       </div>
-    </div>
-  )
-}
-
-export function MaybeOverflowedStancesWithPerson({ person, stances, locale }: Props) {
-  if (!stances.length) {
-    return (
-      <div>
-        <div className="mb-6 text-center">
-          <div className="relative inline-block h-[100] w-[100]">
-            <DTSIAvatar person={person} size={100} />
-            <div className="absolute bottom-0 right-[-8px]">
-              <DTSIFormattedLetterGrade person={person} size={25} />
-            </div>
-          </div>
-
-          <p className="mt-8 text-xl font-bold">
-            <Balancer>
-              {possessive(dtsiPersonFullName(person))} has no statements on crypto
-            </Balancer>
-          </p>
-        </div>
-      </div>
-    )
-  }
-  return (
-    <div>
-      <div className="mb-6 text-center">
-        <div className="relative inline-block h-[100] w-[100]">
-          <DTSIAvatar person={person} size={100} />
-          <div className="absolute bottom-0 right-[-8px]">
-            <DTSIFormattedLetterGrade person={person} size={25} />
-          </div>
-        </div>{' '}
-        <p className="mt-8 text-xl font-bold">
-          <Balancer>{possessive(dtsiPersonFullName(person))} statements on crypto</Balancer>
-        </p>
-        <p className="mt-4 text-fontcolor-muted">
-          <Balancer>
-            Take a look at relevant tweets and statements made by {person.lastName}.
-          </Balancer>
-        </p>
-      </div>
-      <MaybeOverflowedStances locale={locale} person={person} stances={stances} />
     </div>
   )
 }

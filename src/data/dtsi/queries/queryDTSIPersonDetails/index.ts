@@ -13,5 +13,6 @@ export const queryDTSIPersonDetails = async (slug: string) => {
   if (results.people.length !== 1) {
     throw new Error(`queryDTSIPersonDetails: expected 1 person, got ${results.people.length}`)
   }
+  console.log(results.people[0].profilePictureUrlDimensions)
   return results.people[0]
 }

@@ -9,13 +9,15 @@ const Container = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivE
 )
 Container.displayName = 'FullPageHeightContainer'
 
+export const STANDARD_TOP_CONTENT_MARGIN = 40
+
 const Content = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => {
     return (
       <main
         className={cn('flex flex-col', className)}
         ref={ref}
-        style={{ flex: '1 0 auto' }}
+        style={{ flex: '1 0 auto', marginTop: STANDARD_TOP_CONTENT_MARGIN }}
         {...props}
       />
     )

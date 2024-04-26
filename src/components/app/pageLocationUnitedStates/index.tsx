@@ -1,10 +1,12 @@
-import { DTSIPersonCard } from '@/components/app/dtsiPersonCard'
+import { ContentSection } from '@/components/app/ContentSection'
+import { DarkHeroSection } from '@/components/app/darkHeroSection'
+import { DTSIPersonHeroCardSection } from '@/components/app/dtsiPersonHeroCardSection'
 import { PACFooter } from '@/components/app/pacFooter'
-import { LocationSpecificRaceInfo } from '@/components/app/pageLocationStateSpecific/locationSpecificRaceInfo'
 import { UserAddressVoterGuideInput } from '@/components/app/pageLocationUnitedStates/userAddressVoterGuideInput'
-import { Button } from '@/components/ui/button'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
+import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
+import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { DTSI_UnitedStatesInformationQuery } from '@/data/dtsi/generated'
 import { SupportedLocale } from '@/intl/locales'
@@ -12,6 +14,7 @@ import { getIntlUrls } from '@/utils/shared/urls'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 import { cn } from '@/utils/web/cn'
 
+import americanFlagImage from './americanFlag.png'
 import { organizePeople } from './organizePeople'
 
 interface LocationUnitedStatesProps extends DTSI_UnitedStatesInformationQuery {
@@ -28,74 +31,83 @@ export function LocationUnitedStates({
   const groups = organizePeople(queryData)
   const urls = getIntlUrls(locale)
   return (
-    <div className="container max-w-4xl space-y-20">
-      <div className="text-center">
-        <PageTitle as="h1" size="md">
-          Key Races in the United States
-        </PageTitle>
-        {countAdvocates > 1000 && (
-          <h3 className="mt-4 text-xl font-bold text-primary-cta">
-            <FormattedNumber amount={countAdvocates} locale={locale} /> crypto advocates
-          </h3>
-        )}
-      </div>
-      <div className="divide-y-2 *:py-20 first:*:pt-0 last:*:pb-0">
-        <UserAddressVoterGuideInput locale={locale} />
+    <div className="space-y-20">
+      <DarkHeroSection>
+        <div className="text-center">
+          <NextImage
+            alt="American flag"
+            className="mb-10 inline-block w-40"
+            sizes="160px"
+            src={americanFlagImage}
+          />
+          <PageTitle as="h1" className="mb-4" size="md">
+            Key Races in the United States
+          </PageTitle>
+          <PageSubTitle as="h2" className="text-gray-400" size="md">
+            View the races critical to keeping crypto in America.
+          </PageSubTitle>
+          {countAdvocates > 1000 && (
+            <h3 className="mt-4 text-xl font-bold text-purple-400">
+              <FormattedNumber amount={countAdvocates} locale={locale} /> crypto advocates
+            </h3>
+          )}
+        </div>
+      </DarkHeroSection>
+      <div className="space-y-20">
         {!!groups.president.length && (
-          <LocationSpecificRaceInfo
-            candidates={groups.president}
+          <DTSIPersonHeroCardSection
+            cta={
+              <InternalLink href={urls.locationUnitedStatesPresidential()}>View Race</InternalLink>
+            }
             locale={locale}
+            people={groups.president}
+            recommend={false}
+            subtitle="Vote for pro-crypto candidates. See where presidential candidates stand on crypto."
             title={<>Presidential Race</>}
-            url={urls.locationUnitedStatesPresidential()}
           />
         )}
         {!!endorsed.length && (
-          <section className="space-y-8">
-            <div>
-              <PageTitle as="h3" size="sm">
-                SWC Endorsed Candidates
-              </PageTitle>
-            </div>
-            {endorsed.map(person => (
-              <DTSIPersonCard
-                key={person.id}
-                locale={locale}
-                overrideDescriptor="recommended"
-                person={person}
-                subheader="role"
-              />
-            ))}
-            <div className="text-center">
-              <Button asChild className="max-sm:w-full">
-                <InternalLink href={urls.endorsedCandidates()}>View Endorsements</InternalLink>
-              </Button>
-            </div>
-          </section>
+          <DTSIPersonHeroCardSection
+            cta={<InternalLink href={urls.endorsedCandidates()}>View Endorsements</InternalLink>}
+            locale={locale}
+            people={endorsed}
+            recommend={false}
+            subtitle="These are the most pro-crypto candidates running for office across America."
+            title={<>SWC Endorsed Candidates</>}
+          />
         )}
-
-        <div>
-          <section className="space-y-10">
-            <PageTitle as="h3" className="mb-3" size="sm">
-              States
-            </PageTitle>
-            <div className="grid grid-cols-2 gap-3 text-center md:grid-cols-3">
-              {Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP).map(_stateCode => {
-                const stateCode = _stateCode as USStateCode
-                return (
-                  <InternalLink
-                    className={cn('mb-4 block flex-shrink-0 font-semibold')}
-                    href={urls.locationStateSpecific(stateCode)}
-                    key={stateCode}
-                  >
-                    {US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]}
-                  </InternalLink>
-                )
-              })}
-            </div>
-          </section>
-        </div>
+        <ContentSection
+          className="container"
+          subtitle={
+            'Discover the races critical to keeping crypto in America, or enter your address to find your state.'
+          }
+          title={'Key races'}
+        >
+          <UserAddressVoterGuideInput locale={locale} />
+          <div className="text-center">TODO add key races</div>
+        </ContentSection>
+        <ContentSection
+          className="container"
+          subtitle={'Dive deeper and discover races in other states across America.'}
+          title={'Other states'}
+        >
+          <div className="grid grid-cols-2 gap-3 text-center md:grid-cols-3">
+            {Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP).map(_stateCode => {
+              const stateCode = _stateCode as USStateCode
+              return (
+                <InternalLink
+                  className={cn('mb-4 block flex-shrink-0 font-semibold')}
+                  href={urls.locationStateSpecific(stateCode)}
+                  key={stateCode}
+                >
+                  {US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]}
+                </InternalLink>
+              )
+            })}
+          </div>
+        </ContentSection>
+        <PACFooter className="container" />
       </div>
-      <PACFooter />
     </div>
   )
 }

@@ -35,10 +35,7 @@ export const getDTSIPersonRoleCategoryDisplayName = (
   role: Pick<DTSI_PersonRole, 'roleCategory' | 'title' | 'status' | 'primaryState'>,
 ) => {
   if (role.status !== DTSI_PersonRoleStatus.HELD) {
-    if (!role.primaryState) {
-      return 'National Political Figure'
-    }
-    return 'Key Political Figure'
+    return 'Political Figure'
   }
   switch (role.roleCategory) {
     case DTSI_PersonRoleCategory.CONGRESS:
@@ -64,10 +61,7 @@ export const getDTSIPersonRoleCategoryWithStateDisplayName = (
   >,
 ) => {
   if (role.status !== DTSI_PersonRoleStatus.HELD) {
-    if (!role.primaryState) {
-      return 'National Political Figure'
-    }
-    return 'Key Political Figure'
+    return 'Political Figure'
   }
   let stateStr = ''
   if (role.primaryState && role.primaryCountryCode === 'US') {

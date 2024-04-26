@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "@coinbase/onchainkit": "^0.12.1",
+    "@esbuild/darwin-arm64": "^0.20.2",
     "@graphql-tools/mock": "^9.0.0",
     "@hookform/resolvers": "^3.3.2",
     "@next/bundle-analyzer": "^14.1.0",

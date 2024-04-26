@@ -1,4 +1,8 @@
-import { DTSIPersonCard } from '@/components/app/dtsiPersonCard'
+import { compact } from 'lodash-es'
+
+import { DarkHeroSection } from '@/components/app/darkHeroSection'
+import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
+import { MaybeOverflowedStances } from '@/components/app/maybeOverflowedStances'
 import { PACFooter } from '@/components/app/pacFooter'
 import { REGISTRATION_URLS_BY_STATE } from '@/components/app/userActionFormVoterRegistration/constants'
 import { Button } from '@/components/ui/button'
@@ -17,21 +21,21 @@ import { findRecommendedCandidate } from '@/utils/shared/findRecommendedCandidat
 import { getIntlUrls } from '@/utils/shared/urls'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 
-import { CandidateInfo } from './candidateInformation'
-
 export interface LocationRaceSpecificProps extends DTSI_DistrictSpecificInformationQuery {
-  stateCode: USStateCode
+  stateCode?: USStateCode
   district?: NormalizedDTSIDistrictId
   locale: SupportedLocale
 }
 
 function organizeRaceSpecificPeople(
   people: DTSI_DistrictSpecificInformationQuery['people'],
-  { district }: Pick<LocationRaceSpecificProps, 'district' | 'stateCode'>,
+  { district, stateCode }: Pick<LocationRaceSpecificProps, 'district' | 'stateCode'>,
 ) {
   const targetedRoleCategory = district
     ? DTSI_PersonRoleCategory.CONGRESS
-    : DTSI_PersonRoleCategory.SENATE
+    : stateCode
+      ? DTSI_PersonRoleCategory.SENATE
+      : DTSI_PersonRoleCategory.PRESIDENT
 
   const formatted = people.map(x =>
     formatSpecificRoleDTSIPerson(x, {
@@ -53,77 +57,95 @@ export function LocationRaceSpecific({
   const urls = getIntlUrls(locale)
   const { recommended, others } = findRecommendedCandidate(groups)
   return (
-    <div className="container mx-auto max-w-4xl space-y-20">
-      <div className="text-center">
-        <h2 className={'mb-4 text-fontcolor-muted'}>
-          <InternalLink className="text-fontcolor-muted" href={urls.locationUnitedStates()}>
+    <div>
+      <DarkHeroSection className="text-center">
+        <h2 className={'mb-4'}>
+          <InternalLink className="text-gray-400" href={urls.locationUnitedStates()}>
             United States
           </InternalLink>
           {' / '}
-          <InternalLink
-            className="text-fontcolor-muted"
-            href={urls.locationStateSpecific(stateCode)}
-          >
-            {stateDisplayName}
-          </InternalLink>{' '}
-          /{' '}
-          <span className="font-bold text-primary-cta">
-            {district
-              ? `${stateCode} Congressional District ${district}`
-              : `U.S. Senate (${stateCode})`}
-          </span>
+          {(() => {
+            if (!stateDisplayName) {
+              return <span className="font-bold text-purple-400">Presidential</span>
+            }
+            return (
+              <>
+                <InternalLink
+                  className="text-gray-400"
+                  href={urls.locationStateSpecific(stateCode)}
+                >
+                  {stateDisplayName}
+                </InternalLink>{' '}
+                /{' '}
+                <span className="font-bold text-purple-400">
+                  {district
+                    ? `${stateCode} Congressional District ${district}`
+                    : `U.S. Senate (${stateCode})`}
+                </span>
+              </>
+            )
+          })()}
         </h2>
         <PageTitle as="h1" className="mb-4" size="md">
-          {district
-            ? `${stateCode} Congressional District ${district} Race`
-            : `U.S. Senate Race (${stateCode})`}
+          {!stateCode
+            ? 'U.S. Presidential Race'
+            : district
+              ? `${stateCode} Congressional District ${district}`
+              : `U.S. Senate (${stateCode})`}
         </PageTitle>
-        <Button asChild className="mt-6 w-full max-w-xs">
-          <TrackedExternalLink
-            eventProperties={{ Category: 'Register To Vote' }}
-            href={REGISTRATION_URLS_BY_STATE[stateCode].registerUrl}
-          >
-            Register to vote
-          </TrackedExternalLink>
-        </Button>
+        {stateCode && (
+          <Button asChild className="mt-6 w-full max-w-xs" variant="secondary">
+            <TrackedExternalLink
+              eventProperties={{ Category: 'Register To Vote' }}
+              href={REGISTRATION_URLS_BY_STATE[stateCode].registerUrl}
+            >
+              Register to vote
+            </TrackedExternalLink>
+          </Button>
+        )}
+      </DarkHeroSection>
+      <div className="divide-y-2">
+        {compact([
+          recommended && { person: recommended, isRecommended: true },
+          ...others.map(person => ({ person, isRecommended: false })),
+        ]).map(({ person, isRecommended }) => (
+          <div key={person.id}>
+            <section className="mx-auto flex max-w-7xl flex-col px-6 md:flex-row" key={person.id}>
+              <div className="shrink-0 py-10 md:mr-16 md:border-r-2 md:py-20 md:pr-16">
+                <div className="sticky top-24">
+                  <DTSIPersonHeroCard
+                    isRecommended={isRecommended}
+                    locale={locale}
+                    person={person}
+                    subheader="role"
+                  />
+                </div>
+              </div>
+              <div className="w-full py-10 md:py-20">
+                {person.stances.length ? (
+                  <>
+                    <PageTitle as="h3" className="mb-8 md:mb-14" size="sm">
+                      {dtsiPersonFullName(person)} statements on crypto
+                    </PageTitle>
+                    <MaybeOverflowedStances
+                      locale={locale}
+                      person={person}
+                      stances={person.stances}
+                    />
+                  </>
+                ) : (
+                  <div className="flex h-full w-full items-center justify-center text-center">
+                    <PageTitle as="h3" size="sm">
+                      {dtsiPersonFullName(person)} has no statements on crypto.
+                    </PageTitle>
+                  </div>
+                )}
+              </div>
+            </section>
+          </div>
+        ))}
       </div>
-      <section className="space-y-20">
-        {recommended && (
-          <div className="space-y-4">
-            <h3 className="text-center text-xl font-bold">Our recommended candidate</h3>
-            <h4 className="text-center text-fontcolor-muted">
-              Stand With Crypto recommends {dtsiPersonFullName(recommended)} for{' '}
-              {district
-                ? `${stateCode} Congressional District ${district} Race`
-                : `U.S. Senate Race (${stateCode})`}
-              .
-            </h4>
-            <CandidateInfo
-              isRecommended
-              key={recommended.id}
-              {...{ locale, person: recommended }}
-            />
-          </div>
-        )}
-        {!!others.length && (
-          <div className="space-y-4">
-            {recommended && (
-              <>
-                <h3 className="text-center text-xl font-bold">Other candidates</h3>
-                <h4 className="text-center text-fontcolor-muted">
-                  Feel free to check out other, less crypto forward candidates that are running.
-                </h4>
-              </>
-            )}
-            <div className="space-y-16">
-              {others.map(person => (
-                <DTSIPersonCard key={person.id} locale={locale} person={person} subheader="role" />
-              ))}
-            </div>
-          </div>
-        )}
-      </section>
-      <PACFooter />
+      <PACFooter className="container" />
     </div>
   )
 }

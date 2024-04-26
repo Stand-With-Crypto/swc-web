@@ -110,7 +110,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
                 )
               })}
             </div>
-            <Button asChild className="hidden lg:flex" variant="outline">
+            <Button asChild className="hidden lg:flex" variant="primary-cta-outline">
               <InternalLink href={urls.locationUnitedStates()}>Races</InternalLink>
             </Button>
 
@@ -135,7 +135,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
                   </Button>
                 )
               })}
-              <Button asChild className="mt-4" variant="outline">
+              <Button asChild className="mt-4" variant="primary-cta-outline">
                 <InternalLink href={urls.locationUnitedStates()}>Races</InternalLink>
               </Button>
               <div className="mt-4">{loginButton}</div>
