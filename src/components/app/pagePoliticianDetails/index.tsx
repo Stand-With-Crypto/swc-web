@@ -143,7 +143,7 @@ export function PagePoliticianDetails({
                 <DTSIStanceDetails locale={locale} person={person} stance={stance} />
                 <CryptoSupportHighlight
                   className="mx-auto mt-2"
-                  stanceScore={stance.computedStanceScore || null}
+                  stanceScore={stance.computedStanceScore}
                 />
               </div>
             )

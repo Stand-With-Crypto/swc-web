@@ -19,7 +19,13 @@ export default function UserActionOptInSWCDeepLink() {
   }, [session.isLoggedIn, router, urls])
 
   return (
-    <div className={cn('flex items-center justify-center', dialogContentPaddingStyles)}>
+    <div
+      className={cn(
+        'flex flex-col items-center justify-center max-md:h-full ',
+        dialogContentPaddingStyles,
+        'max-md:pt-16',
+      )}
+    >
       <ThirdwebLoginContent auth={{ onLogin: () => router.replace(urls.profile()) }} />
     </div>
   )

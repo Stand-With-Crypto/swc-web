@@ -4,7 +4,7 @@ To ensure that we can properly track the source of new advocates signing up for 
 
 ## UTM parameters
 
-Links should include `utm_source`, `utm_medium`, and `utm_campaign` query params that identify the source of the link. Additional utm parameters (`utm_content`) can optionally be included as well but won't be tracked by SWC. an example url structure could look like `https://www.standwithcrypto.org?utm_source=coinbase&utm_medium=verified-partner&utm_content=native-app-big-blue-cta`
+Links should include `utm_source`, `utm_medium`, and `utm_campaign` query params that identify the source of the link. Additional utm parameters (`utm_content`) can optionally be included as well but won't be tracked by SWC. an example url structure could look like `https://www.standwithcrypto.org?utm_source=coinbase&utm_medium=verified-partner&utm_campaign=native-app-big-blue-cta`
 
 ### Formatting
 

@@ -111,63 +111,65 @@ export function UserActionFormNFTMintCheckout({
           </div>
         </div>
 
-        <Card>
-          <div className="flex items-center justify-between gap-2">
-            <p>Quantity</p>
-            <QuantityInput
-              onChange={setQuantity}
-              onDecrement={decrementQuantity}
-              onIncrement={incrementQuantity}
-              value={quantity}
-            />
-          </div>
-        </Card>
-
-        {!totalFeeDisplay ? (
-          <CardSkeleton>
-            <div className="space-y-8">
-              {Array.from({ length: 3 }, (_, i) => (
-                <div className="flex items-center justify-between gap-2" key={i}>
-                  <div className="max-w-96 text-sm md:text-base">
-                    <p className="text-xs text-muted-foreground">
-                      <Balancer>Loading...</Balancer>
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </CardSkeleton>
-        ) : (
-          <Card className="w-full">
-            <div className="space-y-8">
-              <div className="flex items-center justify-between gap-2 text-sm md:text-base">
-                <div className="max-w-96">
-                  <p>Donation</p>
-                  <p className="text-xs text-muted-foreground">
-                    <Balancer>
-                      {mintFeeDisplay}
-                      {SupportedCryptoCurrencyCodes.ETH} of the mint fee will be donated to Stand
-                      With Crypto Alliance, Inc. (SWCA). Donations from foreign nationals and
-                      government contractors are prohibited.
-                    </Balancer>
-                  </p>
-                </div>
-
-                <CurrencyDisplay value={mintFeeDisplay} />
-              </div>
-
-              <div className="flex items-center justify-between gap-2 text-sm md:text-base">
-                <p>Gas fee</p>
-                <CurrencyDisplay value={gasFeeDisplay} />
-              </div>
-
-              <div className="flex items-center justify-between gap-2 text-sm md:text-base">
-                <p>Total</p>
-                <CurrencyDisplay value={totalFeeDisplay} />
-              </div>
+        <div className="flex flex-col gap-4">
+          <Card>
+            <div className="flex items-center justify-between gap-2">
+              <p>Quantity</p>
+              <QuantityInput
+                onChange={setQuantity}
+                onDecrement={decrementQuantity}
+                onIncrement={incrementQuantity}
+                value={quantity}
+              />
             </div>
           </Card>
-        )}
+
+          {!totalFeeDisplay ? (
+            <CardSkeleton>
+              <div className="space-y-8">
+                {Array.from({ length: 3 }, (_, i) => (
+                  <div className="flex items-center justify-between gap-2" key={i}>
+                    <div className="max-w-96 text-sm md:text-base">
+                      <p className="text-xs text-muted-foreground">
+                        <Balancer>Loading...</Balancer>
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardSkeleton>
+          ) : (
+            <Card className="w-full">
+              <div className="space-y-8">
+                <div className="flex items-center justify-between gap-2 text-sm md:text-base">
+                  <div className="max-w-96">
+                    <p>Donation</p>
+                    <p className="text-xs text-muted-foreground">
+                      <Balancer>
+                        {mintFeeDisplay}
+                        {SupportedCryptoCurrencyCodes.ETH} of the mint fee will be donated to Stand
+                        With Crypto Alliance, Inc. (SWCA). Donations from foreign nationals and
+                        government contractors are prohibited.
+                      </Balancer>
+                    </p>
+                  </div>
+
+                  <CurrencyDisplay value={mintFeeDisplay} />
+                </div>
+
+                <div className="flex items-center justify-between gap-2 text-sm md:text-base">
+                  <p>Gas fee</p>
+                  <CurrencyDisplay value={gasFeeDisplay} />
+                </div>
+
+                <div className="flex items-center justify-between gap-2 text-sm md:text-base">
+                  <p>Total</p>
+                  <CurrencyDisplay value={totalFeeDisplay} />
+                </div>
+              </div>
+            </Card>
+          )}
+        </div>
 
         <Collapsible open={!maybeOverriddenCheckoutError}>
           <CollapsibleContent className="AnimateCollapsibleContent">
@@ -185,7 +187,7 @@ export function UserActionFormNFTMintCheckout({
           </CollapsibleContent>
         </Collapsible>
 
-        <UserActionFormLayout.Footer>
+        <UserActionFormLayout.Footer className="!mt-auto">
           {debug ? (
             <Button
               onClick={() => goToSection(UserActionFormNFTMintSectionNames.TRANSACTION_WATCH)}
