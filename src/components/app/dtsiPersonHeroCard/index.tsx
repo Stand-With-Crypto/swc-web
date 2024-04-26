@@ -55,7 +55,7 @@ export function DTSIPersonHeroCard(props: Props) {
   const displayName = `${dtsiPersonFullName(person)}${politicalAbbrDisplayName}`
   return (
     <InternalLink
-      className="block shrink-0 overflow-hidden bg-white text-left shadow-xl hover:!no-underline max-sm:rounded-3xl max-sm:border sm:w-52 xl:w-72"
+      className="block shrink-0 overflow-hidden bg-white text-left shadow-xl hover:!no-underline max-sm:rounded-3xl max-sm:border sm:inline-block sm:w-52 xl:w-72"
       href={getIntlUrls(locale).politicianDetails(person.slug)}
     >
       <div className="max-sm:flex">
@@ -106,7 +106,7 @@ export function DTSIPersonHeroCard(props: Props) {
         {/* Hidden on desktop */}
         <div className="flex flex-col justify-between p-4 text-fontcolor sm:hidden">
           <div>
-            <div className="text-sm font-bold">{displayName}</div>
+            <div className="font-bold">{displayName}</div>
             {subheaderString && (
               <div className="mt-2 text-sm text-fontcolor-muted">{subheaderString}</div>
             )}
