@@ -65,7 +65,7 @@ export function PageHome({
                   // width={1046}
                   // height={892}
                   sizes={'500px'}
-                  src="/homepageHero.png"
+                  src="/homepageHero.gif"
                 />
                 <div
                   className="absolute bottom-0 flex w-full items-center justify-between gap-4 p-4 text-sm text-white"
@@ -75,8 +75,7 @@ export function PageHome({
                   }}
                 >
                   <p>
-                    Register to vote or check your voter registration and get a free “I’m a Voter”
-                    NFT
+                    Join Stand With Crypto and help us defend your right to own crypto in America.
                   </p>
                   <Button
                     className={linkBoxLinkClassName}
