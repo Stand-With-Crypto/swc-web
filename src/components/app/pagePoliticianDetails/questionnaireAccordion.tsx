@@ -32,7 +32,7 @@ export function QuestionnaireAccordion({ questionnaire }: QuestionnaireAccordion
     questionnaireRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [questionnaireRef, accordionDefaultValue])
 
-  if (!questionnaire || accordionDefaultValue === null) return null
+  if (!questionnaire) return null
 
   return (
     <div className="mb-10 flex scroll-mt-20 flex-col" id="questionnaire" ref={questionnaireRef}>
