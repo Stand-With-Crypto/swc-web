@@ -74,7 +74,7 @@ export function UpdateUserProfileForm({
   return (
     <Form {...form}>
       <form
-        className="space-y-6"
+        className="flex h-full flex-col space-y-6"
         onSubmit={form.handleSubmit(async values => {
           const address = values.address
             ? await convertGooglePlaceAutoPredictionToAddressSchema(values.address).catch(e => {
@@ -251,7 +251,7 @@ export function UpdateUserProfileForm({
           </Collapsible>
           <FormGeneralErrorMessage control={form.control} />
         </div>
-        <div className="flex justify-center gap-6">
+        <div className="!mt-auto flex justify-center gap-6">
           <Button
             className="w-full md:w-1/2"
             disabled={form.formState.isSubmitting}

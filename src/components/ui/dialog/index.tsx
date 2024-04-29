@@ -5,9 +5,11 @@ import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { X } from 'lucide-react'
 
 import {
+  dialogBodyStyles,
   dialogCloseStyles,
   dialogContentPaddingStyles,
   dialogContentStyles,
+  dialogFooterCTAStyles,
   dialogOverlayStyles,
 } from '@/components/ui/dialog/styles'
 import { cn } from '@/utils/web/cn'
@@ -73,14 +75,6 @@ const DialogHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDivEleme
 )
 DialogHeader.displayName = 'DialogHeader'
 
-const DialogFooter = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
-  <div
-    className={cn('flex flex-col-reverse gap-2 sm:flex-row sm:justify-end', className)}
-    {...props}
-  />
-)
-DialogFooter.displayName = 'DialogFooter'
-
 const DialogTitle = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Title>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>
@@ -93,24 +87,22 @@ const DialogTitle = React.forwardRef<
 ))
 DialogTitle.displayName = DialogPrimitive.Title.displayName
 
-const DialogDescription = React.forwardRef<
-  React.ElementRef<typeof DialogPrimitive.Description>,
-  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>
->(({ className, ...props }, ref) => (
-  <DialogPrimitive.Description
-    className={cn('text-sm text-muted-foreground', className)}
-    ref={ref}
-    {...props}
-  />
-))
-DialogDescription.displayName = DialogPrimitive.Description.displayName
+const DialogBody = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
+  <div className={cn(dialogBodyStyles, className)} {...props} />
+)
+DialogBody.displayName = 'DialogBody'
+
+const DialogFooterCTA = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
+  <div className={cn(dialogFooterCTAStyles, className)} {...props} />
+)
+DialogFooterCTA.displayName = 'DialogFooterCTA'
 
 export {
   Dialog,
+  DialogBody,
   DialogClose,
   DialogContent,
-  DialogDescription,
-  DialogFooter,
+  DialogFooterCTA,
   DialogHeader,
   DialogOverlay,
   DialogPortal,

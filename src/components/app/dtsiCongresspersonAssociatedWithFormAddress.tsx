@@ -55,7 +55,7 @@ export function DTSICongresspersonAssociatedWithFormAddress({
   const categoryDisplayName = getYourPoliticianCategoryDisplayName(politicianCategory)
   if (!address || res.isLoading) {
     return (
-      <div className="flex gap-4">
+      <div className="flex items-center gap-4">
         <Skeleton className="h-10 w-10 flex-shrink-0" />
         <div className="text-sm md:text-base">
           <p className="bold">Your {categoryDisplayName}</p>
@@ -78,7 +78,7 @@ export function DTSICongresspersonAssociatedWithFormAddress({
     <div className="space-y-6">
       {people.map(person => (
         <div
-          className="flex flex-col justify-between sm:flex-row sm:items-center sm:gap-4"
+          className="flex w-full flex-col justify-between sm:flex-row sm:items-center sm:gap-4"
           data-test-id="dtsi-person-associated-with-address"
           key={person.id}
         >

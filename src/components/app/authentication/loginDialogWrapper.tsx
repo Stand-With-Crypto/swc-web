@@ -9,7 +9,7 @@ import useSWR, { Arguments, useSWRConfig } from 'swr'
 import { ClientUnidentifiedUser } from '@/clientModels/clientUser/clientUser'
 import { ANALYTICS_NAME_LOGIN } from '@/components/app/authentication/constants'
 import { LazyUpdateUserProfileForm } from '@/components/app/updateUserProfileForm/lazyLoad'
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
+import { Dialog, DialogBody, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useDialog } from '@/hooks/useDialog'
@@ -169,7 +169,9 @@ export function UnauthenticatedSection({
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="max-w-l w-full">
         {currentSection === LoginSections.LOGIN ? (
-          <LoginSection onLogin={handleLoginSuccess} {...props} />
+          <DialogBody>
+            <LoginSection onLogin={handleLoginSuccess} {...props} />
+          </DialogBody>
         ) : (
           <FinishProfileSection
             onSuccess={() => {

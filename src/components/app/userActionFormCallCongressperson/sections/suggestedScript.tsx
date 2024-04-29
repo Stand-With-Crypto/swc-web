@@ -103,8 +103,8 @@ export function SuggestedScript({
   )
 
   return (
-    <>
-      <UserActionFormLayout onBack={goBackSection}>
+    <div className="flex h-full max-h-full flex-col overflow-hidden">
+      <UserActionFormLayout className="mb-4 overflow-y-auto rounded-2xl" onBack={goBackSection}>
         <UserActionFormLayout.Container>
           <UserActionFormLayout.Heading
             subtitle={
@@ -173,6 +173,6 @@ export function SuggestedScript({
           )
         ) : null}
       </UserActionFormLayout.CongresspersonDisplayFooter>
-    </>
+    </div>
   )
 }

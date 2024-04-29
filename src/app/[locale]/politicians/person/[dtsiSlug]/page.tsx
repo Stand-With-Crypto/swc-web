@@ -10,6 +10,7 @@ import {
   convertDTSIPersonStanceScoreToLetterGrade,
   DTSILetterGrade,
 } from '@/utils/dtsi/dtsiStanceScoreUtils'
+import { getQuestionnaire } from '@/utils/server/builderIO/swc-questionnaire'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { toBool } from '@/utils/shared/toBool'
 
@@ -66,9 +67,15 @@ export async function generateStaticParams() {
 
 export default async function PoliticianDetails({ params }: Props) {
   const { locale } = params
-  const person = await getData(params.dtsiSlug)
+
+  const [person, questionnaire] = await Promise.all([
+    getData(params.dtsiSlug),
+    getQuestionnaire(params.dtsiSlug),
+  ])
+
   if (!person) {
     notFound()
   }
-  return <PagePoliticianDetails {...{ person, locale }} />
+
+  return <PagePoliticianDetails {...{ person, locale, questionnaire }} />
 }

@@ -1,8 +1,10 @@
+import React from 'react'
 import { orderBy } from 'lodash-es'
 import { Globe } from 'lucide-react'
 
 import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
 import { DTSIStanceDetails } from '@/components/app/dtsiStanceDetails'
+import { QuestionnaireAccordion } from '@/components/app/pagePoliticianDetails/questionnaireAccordion'
 import { ScoreExplainer } from '@/components/app/pagePoliticianDetails/scoreExplainer'
 import { Button } from '@/components/ui/button'
 import { MaybeNextImg, NextImage } from '@/components/ui/image'
@@ -24,15 +26,18 @@ import {
   getDTSIPersonProfilePictureUrlDimensions,
 } from '@/utils/dtsi/dtsiPersonUtils'
 import { dtsiTwitterAccountUrl } from '@/utils/dtsi/dtsiTwitterAccountUtils'
+import { SWCQuestionnaireAnswers } from '@/utils/server/builderIO/swc-questionnaire'
 
 const POLITICIAN_IMAGE_SIZE_PX = 230
 
 export function PagePoliticianDetails({
   person,
   locale,
+  questionnaire,
 }: {
   person: DTSIPersonDetails
   locale: SupportedLocale
+  questionnaire: SWCQuestionnaireAnswers | null
 }) {
   const stances = orderBy(person.stances, x => -1 * new Date(x.dateStanceMade).getTime())
   return (
@@ -122,8 +127,11 @@ export function PagePoliticianDetails({
         </div>
         <ScoreExplainer person={person} />
       </section>
+
+      {questionnaire && <QuestionnaireAccordion questionnaire={questionnaire} />}
+
       <section>
-        <PageTitle as="h2" className="mb-4 text-left" size="sm">
+        <PageTitle as="h2" className="mb-4 text-center text-lg md:text-xl lg:text-2xl" size="sm">
           Notable statements
         </PageTitle>
         <div className="space-y-14 md:space-y-16">

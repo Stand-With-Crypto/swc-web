@@ -130,7 +130,7 @@ export function UserActionFormEmailCongressperson({
   return (
     <Form {...form}>
       <form
-        className="flex max-h-dvh flex-col"
+        className="flex h-full max-h-dvh flex-col"
         onSubmit={form.handleSubmit(async values => {
           const address = await convertGooglePlaceAutoPredictionToAddressSchema(
             values.address,
@@ -171,7 +171,7 @@ export function UserActionFormEmailCongressperson({
           }
         }, trackFormSubmissionSyncErrors(ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON))}
       >
-        <ScrollArea>
+        <ScrollArea className="overflow-auto">
           <div className={cn(dialogContentPaddingStyles, 'space-y-4 md:space-y-8')}>
             <PageTitle className="mb-3" size="sm">
               Email your {getYourPoliticianCategoryShortDisplayName(politicianCategory)}
@@ -299,24 +299,24 @@ export function UserActionFormEmailCongressperson({
                   </FormItem>
                 )}
               />
-              <FormGeneralErrorMessage control={form.control} />
-              <div>
-                <p className="text-xs text-fontcolor-muted">
-                  By submitting, I understand that Stand With Crypto and its vendors may collect and
-                  use my personal information subject to the{' '}
-                  <InternalLink href={urls.privacyPolicy()}>SWC Privacy Policy</InternalLink> and
-                  the{' '}
-                  <ExternalLink href={'https://www.quorum.us/privacy-policy/'}>
-                    Quorum Privacy Policy
-                  </ExternalLink>
-                  .
-                </p>
-              </div>
+            </div>
+
+            <FormGeneralErrorMessage control={form.control} />
+            <div>
+              <p className="text-xs text-fontcolor-muted">
+                By submitting, I understand that Stand With Crypto and its vendors may collect and
+                use my personal information subject to the{' '}
+                <InternalLink href={urls.privacyPolicy()}>SWC Privacy Policy</InternalLink> and the{' '}
+                <ExternalLink href={'https://www.quorum.us/privacy-policy/'}>
+                  Quorum Privacy Policy
+                </ExternalLink>
+                .
+              </p>
             </div>
           </div>
         </ScrollArea>
         <div
-          className="z-10 flex flex-1 flex-col items-center justify-center border border-t p-6 sm:flex-row md:px-12"
+          className="z-10 mt-auto flex flex-1 flex-col items-center justify-end border border-t p-6 sm:flex-row md:px-12"
           style={{ boxShadow: 'rgba(0, 0, 0, 0.2) 0px 1px 6px 0px' }}
         >
           <Button

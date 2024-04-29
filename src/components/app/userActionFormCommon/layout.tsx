@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { ArrowLeft } from 'lucide-react'
 
 import { DtsiCongresspersonDisplay } from '@/components/app/dtsiCongresspersonDisplay'
@@ -11,14 +11,15 @@ import { cn } from '@/utils/web/cn'
 
 interface UserActionFormLayoutProps extends React.PropsWithChildren {
   onBack?: () => void
+  className?: string
 }
 
-export function UserActionFormLayout({ onBack, children }: UserActionFormLayoutProps) {
+export function UserActionFormLayout({ onBack, className, children }: UserActionFormLayoutProps) {
   return (
     <>
       {onBack && <GoBackButton onClick={onBack} />}
 
-      <div className="flex min-h-[400px] flex-col">{children}</div>
+      <div className={cn('flex h-full min-h-[400px] flex-col', className)}>{children}</div>
     </>
   )
 }
@@ -48,11 +49,13 @@ function HeadingSkeleton({ title, subtitle }: { title: string; subtitle: string 
 }
 UserActionFormLayout.HeadingSkeleton = HeadingSkeleton
 
-function Container({ children }: React.PropsWithChildren) {
+function Container({ className, children }: { className?: string; children: ReactNode }) {
   return (
-    <div className="flex flex-grow">
+    <div className="flex flex-grow max-md:max-h-full">
       {/* without w-full, on iOS, this won't take up the full width of the parent ¯\_(ツ)_/¯ */}
-      <div className="w-full space-y-4 md:space-y-8">{children}</div>
+      <div className={cn('flex h-full w-full flex-col space-y-4 md:space-y-8', className)}>
+        {children}
+      </div>
     </div>
   )
 }
@@ -75,7 +78,7 @@ function CongresspersonDisplayFooter({
   dtsiPeopleResponse?: DTSIPeopleFromCongressionalDistrict
 }>) {
   return (
-    <div className="flex w-full flex-col gap-4 border-t p-6 pt-3 md:flex-row md:items-center md:justify-between md:px-12">
+    <div className="z-10 mt-auto flex w-full flex-col gap-4 border-t bg-background p-6 pb-0 pt-3 md:flex-row md:items-center md:justify-between md:px-12">
       <DtsiCongresspersonDisplay
         dtsiPeopleResponse={dtsiPeopleResponse}
         maxPeopleDisplayed={maxPeopleDisplayed}
@@ -86,7 +89,11 @@ function CongresspersonDisplayFooter({
 }
 UserActionFormLayout.CongresspersonDisplayFooter = CongresspersonDisplayFooter
 
-function Footer({ children }: React.PropsWithChildren) {
-  return <div className="flex w-full flex-row-reverse items-center justify-between">{children}</div>
+function Footer({ className, children }: { className?: string; children: ReactNode }) {
+  return (
+    <div className={cn('flex w-full flex-row-reverse items-center justify-between', className)}>
+      {children}
+    </div>
+  )
 }
 UserActionFormLayout.Footer = Footer
