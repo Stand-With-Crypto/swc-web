@@ -31,6 +31,7 @@
     "seed": "npm run ts --transpile-only src/bin/seed/seedLocalDb.ts"
   },
   "dependencies": {
+    "@builder.io/sdk": "^2.2.2",
     "@coinbase/onchainkit": "^0.12.1",
     "@graphql-tools/mock": "^9.0.0",
     "@hookform/resolvers": "^3.3.2",

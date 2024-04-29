@@ -1,5 +1,4 @@
 import React from 'react'
-import { Entry } from 'contentful'
 import { orderBy } from 'lodash-es'
 import { Globe } from 'lucide-react'
 
@@ -27,7 +26,7 @@ import {
   getDTSIPersonProfilePictureUrlDimensions,
 } from '@/utils/dtsi/dtsiPersonUtils'
 import { dtsiTwitterAccountUrl } from '@/utils/dtsi/dtsiTwitterAccountUtils'
-import { QuestionnaireEntrySkeleton } from '@/utils/server/contentful/questionnaire'
+import { SWCQuestionnaireAnswers } from '@/utils/server/builderIO/swc-questionnaire'
 
 const POLITICIAN_IMAGE_SIZE_PX = 230
 
@@ -38,7 +37,7 @@ export function PagePoliticianDetails({
 }: {
   person: DTSIPersonDetails
   locale: SupportedLocale
-  questionnaire: Entry<QuestionnaireEntrySkeleton, undefined> | null
+  questionnaire: SWCQuestionnaireAnswers | null
 }) {
   const stances = orderBy(person.stances, x => -1 * new Date(x.dateStanceMade).getTime())
   return (
