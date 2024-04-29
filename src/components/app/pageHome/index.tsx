@@ -1,28 +1,21 @@
-import { ArrowUpRight } from 'lucide-react'
-
 import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
 import { sortDTSIPersonDataTable } from '@/components/app/dtsiClientPersonDataTable/sortPeople'
 import { DTSIPersonCard } from '@/components/app/dtsiPersonCard'
 import { DelayedRecentActivity } from '@/components/app/pageHome/delayedRecentActivity'
 import { HeroCTA } from '@/components/app/pageHome/heroCTA'
+import { HeroImage } from '@/components/app/pageHome/heroImage'
 import { PartnerGrid } from '@/components/app/pageHome/partnerGrid'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
 import { SumDonationsByUserRow } from '@/components/app/sumDonationsByUserRow/sumDonationsByUserRow'
-import { UserActionFormVoterRegistrationDeeplinkWrapper } from '@/components/app/userActionFormVoterRegistration/homepageDialogDeeplinkWrapper'
 import { UserActionRowCTAsAnimatedListWithApi } from '@/components/app/userActionRowCTA/userActionRowCTAsAnimatedListWithApi'
 import { Button } from '@/components/ui/button'
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
-import { dialogContentStyles } from '@/components/ui/dialog/styles'
-import { NextImage } from '@/components/ui/image'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
-import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
 import { PageProps } from '@/types'
 import { getIntlUrls } from '@/utils/shared/urls'
-import { cn } from '@/utils/web/cn'
 
 import { TopLevelMetrics } from './topLevelMetrics'
 
@@ -54,43 +47,7 @@ export function PageHome({
           <HeroCTA />
         </div>
         <div className="order-0 md:container lg:order-1 lg:px-0">
-          <Dialog analytics={{ Category: 'Homepage Hero Section', CTA: 'Register to vote' }}>
-            <DialogTrigger asChild>
-              <LinkBox className="relative h-[320px] overflow-hidden md:rounded-xl lg:h-[400px]">
-                <NextImage
-                  alt="Free NFT given out when you register to vote."
-                  className="h-full w-full object-cover"
-                  fill
-                  priority
-                  // width={1046}
-                  // height={892}
-                  sizes={'500px'}
-                  src="/homepageHero.gif"
-                />
-                <div
-                  className="absolute bottom-0 flex w-full items-center justify-between gap-4 p-4 text-sm text-white"
-                  style={{
-                    background:
-                      'linear-gradient(to top, hsla(0, 0%, 0%, 0.8) 10%, hsla(0, 0%, 0%, 0.4) 70%,  transparent 100%)',
-                  }}
-                >
-                  <p>
-                    Join Stand With Crypto and help us defend your right to own crypto in America.
-                  </p>
-                  <Button
-                    className={linkBoxLinkClassName}
-                    data-link-box-subject
-                    variant="secondary"
-                  >
-                    Register <ArrowUpRight />
-                  </Button>
-                </div>
-              </LinkBox>
-            </DialogTrigger>
-            <DialogContent className={cn(dialogContentStyles, 'max-w-3xl')}>
-              <UserActionFormVoterRegistrationDeeplinkWrapper />
-            </DialogContent>
-          </Dialog>
+          <HeroImage />
         </div>
       </section>
       <div className="container">
