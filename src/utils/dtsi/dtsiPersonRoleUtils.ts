@@ -148,7 +148,6 @@ export type NormalizedDTSIDistrictId = number | 'at-large'
 export const normalizeDTSIDistrictId = (
   role: Pick<DTSI_PersonRole, 'primaryDistrict'>,
 ): NormalizedDTSIDistrictId => {
-  console.log(role)
   if (!role.primaryDistrict) {
     return gracefullyError({
       msg: `Unexpected primaryDistrict ${role.primaryDistrict}`,

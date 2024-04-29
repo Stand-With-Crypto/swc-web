@@ -3,6 +3,8 @@ import { DarkHeroSection } from '@/components/app/darkHeroSection'
 import { DTSIPersonHeroCardSection } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardSection'
 import { PACFooter } from '@/components/app/pacFooter'
 import { UserAddressVoterGuideInput } from '@/components/app/pageLocationUnitedStates/userAddressVoterGuideInput'
+import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
+import { Button } from '@/components/ui/button'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
@@ -54,6 +56,11 @@ export function LocationUnitedStates({
               <FormattedNumber amount={countAdvocates} locale={locale} /> crypto advocates
             </h3>
           )}
+          <UserActionFormVoterRegistrationDialog>
+            <Button className="mt-6 w-full max-w-xs" variant="secondary">
+              Register to vote
+            </Button>
+          </UserActionFormVoterRegistrationDialog>
         </div>
       </DarkHeroSection>
       <div className="space-y-20">

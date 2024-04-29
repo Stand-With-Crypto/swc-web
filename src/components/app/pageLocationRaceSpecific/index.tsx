@@ -4,11 +4,10 @@ import { DarkHeroSection } from '@/components/app/darkHeroSection'
 import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
 import { MaybeOverflowedStances } from '@/components/app/maybeOverflowedStances'
 import { PACFooter } from '@/components/app/pacFooter'
-import { REGISTRATION_URLS_BY_STATE } from '@/components/app/userActionFormVoterRegistration/constants'
+import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { TrackedExternalLink } from '@/components/ui/trackedExternalLink'
 import {
   DTSI_DistrictSpecificInformationQuery,
   DTSI_PersonRoleCategory,
@@ -93,16 +92,11 @@ export function LocationRaceSpecific({
               ? `${stateCode} Congressional District ${district}`
               : `U.S. Senate (${stateCode})`}
         </PageTitle>
-        {stateCode && (
-          <Button asChild className="mt-6 w-full max-w-xs" variant="secondary">
-            <TrackedExternalLink
-              eventProperties={{ Category: 'Register To Vote' }}
-              href={REGISTRATION_URLS_BY_STATE[stateCode].registerUrl}
-            >
-              Register to vote
-            </TrackedExternalLink>
+        <UserActionFormVoterRegistrationDialog initialStateCode={stateCode}>
+          <Button className="mt-6 w-full max-w-xs" variant="secondary">
+            Register to vote
           </Button>
-        )}
+        </UserActionFormVoterRegistrationDialog>
       </DarkHeroSection>
       <div className="divide-y-2">
         {compact([

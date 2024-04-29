@@ -7,14 +7,13 @@ import { DTSIPersonHeroCardSection } from '@/components/app/dtsiPersonHeroCard/d
 import { DTSIStanceDetails } from '@/components/app/dtsiStanceDetails'
 import { PACFooter } from '@/components/app/pacFooter'
 import { UserLocationRaceInfo } from '@/components/app/pageLocationStateSpecific/userLocationRaceInfo'
-import { REGISTRATION_URLS_BY_STATE } from '@/components/app/userActionFormVoterRegistration/constants'
+import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
 import { Button } from '@/components/ui/button'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { InternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
-import { TrackedExternalLink } from '@/components/ui/trackedExternalLink'
 import { DTSI_PersonStanceType, DTSI_StateSpecificInformationQuery } from '@/data/dtsi/generated'
 import { SupportedLocale } from '@/intl/locales'
 import { US_LOCATION_PAGES_LIVE_KEY_DISTRICTS_MAP } from '@/utils/shared/locationSpecificPages'
@@ -72,14 +71,11 @@ export function LocationStateSpecific({
               <FormattedNumber amount={countAdvocates} locale={locale} /> crypto advocates
             </h3>
           )}
-          <Button asChild className="mt-6 w-full max-w-xs" variant="secondary">
-            <TrackedExternalLink
-              eventProperties={{ Category: 'Register To Vote' }}
-              href={REGISTRATION_URLS_BY_STATE[stateCode].registerUrl}
-            >
+          <UserActionFormVoterRegistrationDialog initialStateCode={stateCode}>
+            <Button className="mt-6 w-full max-w-xs" variant="secondary">
               Register to vote
-            </TrackedExternalLink>
-          </Button>
+            </Button>
+          </UserActionFormVoterRegistrationDialog>
         </div>
       </DarkHeroSection>
       <div className="space-y-20">
