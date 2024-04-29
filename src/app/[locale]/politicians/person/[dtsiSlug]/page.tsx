@@ -10,10 +10,7 @@ import {
   convertDTSIPersonStanceScoreToLetterGrade,
   DTSILetterGrade,
 } from '@/utils/dtsi/dtsiStanceScoreUtils'
-import {
-  getQuestionnaire,
-  SWCQuestionnaireAnswers,
-} from '@/utils/server/builderIO/swc-questionnaire'
+import { getQuestionnaire } from '@/utils/server/builderIO/swc-questionnaire'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { toBool } from '@/utils/shared/toBool'
 
