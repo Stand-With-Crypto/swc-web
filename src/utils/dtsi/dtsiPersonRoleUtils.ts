@@ -69,7 +69,7 @@ export const getDTSIPersonRoleCategoryWithStateDisplayName = (
   }
   switch (role.roleCategory) {
     case DTSI_PersonRoleCategory.CONGRESS:
-      return `Congressperson${stateStr}`
+      return `Rep${stateStr}`
     case DTSI_PersonRoleCategory.GOVERNOR:
       return 'Governor'
     case DTSI_PersonRoleCategory.MAYOR:

@@ -4,7 +4,8 @@
 import { Suspense } from 'react'
 import { noop } from 'lodash-es'
 
-import { DTSIPersonCard } from '@/components/app/dtsiPersonCard'
+import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
+import { DTSIPersonHeroCardRow } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardRow'
 import { Button } from '@/components/ui/button'
 import { GooglePlacesSelect, GooglePlacesSelectProps } from '@/components/ui/googlePlacesSelect'
 import { InternalLink } from '@/components/ui/link'
@@ -112,18 +113,17 @@ function _ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: SupportedLo
         </div>
       )}
       <p className="mb-3 text-center text-xl font-bold">Your {categoryDisplayName}</p>
-      <div className="mx-auto max-w-3xl space-y-5">
+      <DTSIPersonHeroCardRow>
         {people.map(person => (
-          <DTSIPersonCard
+          <DTSIPersonHeroCard
             data-test-id="dtsi-person-associated-with-address"
             key={person.id}
             locale={locale}
             person={person}
             subheader="role"
-            subheaderFormatter={str => `Your ${str}`}
           />
         ))}
-      </div>
+      </DTSIPersonHeroCardRow>
     </div>
   )
 }

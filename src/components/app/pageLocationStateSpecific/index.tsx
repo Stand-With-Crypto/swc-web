@@ -1,9 +1,9 @@
 import { compact, times } from 'lodash-es'
-import { DTSIPersonHeroCardSection } from 'src/components/app/dtsiPersonHeroCardSection'
 
 import { ContentSection } from '@/components/app/ContentSection'
 import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
 import { DarkHeroSection } from '@/components/app/darkHeroSection'
+import { DTSIPersonHeroCardSection } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardSection'
 import { DTSIStanceDetails } from '@/components/app/dtsiStanceDetails'
 import { PACFooter } from '@/components/app/pacFooter'
 import { UserLocationRaceInfo } from '@/components/app/pageLocationStateSpecific/userLocationRaceInfo'

@@ -2,7 +2,8 @@ import { ArrowUpRight } from 'lucide-react'
 
 import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
 import { sortDTSIPersonDataTable } from '@/components/app/dtsiClientPersonDataTable/sortPeople'
-import { DTSIPersonCard } from '@/components/app/dtsiPersonCard'
+import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
+import { DTSIPersonHeroCardRow } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardRow'
 import { DelayedRecentActivity } from '@/components/app/pageHome/delayedRecentActivity'
 import { HeroCTA } from '@/components/app/pageHome/heroCTA'
 import { PartnerGrid } from '@/components/app/pageHome/partnerGrid'
@@ -193,66 +194,52 @@ export function PageHome({
           </PageSubTitle>
           <UserActionRowCTAsAnimatedListWithApi />
         </section>
-        <section className="mb-16 space-y-7 md:mb-36">
+      </div>
+      <section className="mb-16 space-y-7 md:mb-36">
+        <div className="container">
           <PageTitle as="h3" size="md">
             Where politicians stand on crypto
           </PageTitle>
           <PageSubTitle as="h4">
             Ask your policymakers to be pro-crypto. Here’s where they stand now.
           </PageSubTitle>
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            <div>
-              <div className="text-center">
-                <h5>
-                  <CryptoSupportHighlight
-                    className="mx-auto mb-4"
-                    stanceScore={100}
-                    text="Pro-crypto"
-                  />
-                </h5>
-              </div>
-              <div className="space-y-3">
-                {highestScores.map(person => (
-                  <DTSIPersonCard
-                    key={person.id}
-                    locale={locale}
-                    overrideDescriptor="hidden"
-                    person={person}
-                    subheader="role-w-state"
-                  />
-                ))}
-              </div>
-            </div>
-            <div>
-              <div className="text-center">
-                <h5>
-                  <CryptoSupportHighlight
-                    className="mx-auto mb-4"
-                    stanceScore={0}
-                    text="Anti-crypto"
-                  />
-                </h5>
-              </div>
-              <div className="space-y-3">
-                {lowestScores.map(person => (
-                  <DTSIPersonCard
-                    key={person.id}
-                    locale={locale}
-                    overrideDescriptor="hidden"
-                    person={person}
-                    subheader="role-w-state"
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-          <div className="space-x-4 text-center">
-            <Button asChild variant="secondary">
-              <InternalLink href={urls.politiciansHomepage()}>View all</InternalLink>
-            </Button>
-          </div>
-        </section>
-      </div>
+        </div>
+        <div>
+          <h5 className="container text-center">
+            <CryptoSupportHighlight className="mx-auto mb-4" stanceScore={100} text="Pro-crypto" />
+          </h5>
+          <DTSIPersonHeroCardRow>
+            {highestScores.map(person => (
+              <DTSIPersonHeroCard
+                key={person.id}
+                locale={locale}
+                person={person}
+                subheader="role-w-state"
+              />
+            ))}
+          </DTSIPersonHeroCardRow>
+        </div>
+        <div>
+          <h5 className="container text-center">
+            <CryptoSupportHighlight className="mx-auto mb-4" stanceScore={0} text="Anti-crypto" />
+          </h5>
+          <DTSIPersonHeroCardRow>
+            {lowestScores.map(person => (
+              <DTSIPersonHeroCard
+                key={person.id}
+                locale={locale}
+                person={person}
+                subheader="role-w-state"
+              />
+            ))}
+          </DTSIPersonHeroCardRow>
+        </div>
+        <div className="container space-x-4 text-center">
+          <Button asChild variant="secondary">
+            <InternalLink href={urls.politiciansHomepage()}>View all</InternalLink>
+          </Button>
+        </div>
+      </section>
     </>
   )
 }

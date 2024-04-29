@@ -80,7 +80,7 @@ export function DTSIPersonHeroCard(props: Props) {
           )}
           {/* Hidden on mobile */}
           <div
-            className="absolute bottom-0 left-0 right-0 flex items-center justify-between px-3 pb-3 pt-16 max-sm:hidden"
+            className="absolute bottom-0 left-0 right-0 flex items-end justify-between gap-3 px-3 pb-3 pt-16 max-sm:hidden"
             style={{
               background: 'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%)',
             }}
@@ -104,7 +104,7 @@ export function DTSIPersonHeroCard(props: Props) {
         </div>
 
         {/* Hidden on desktop */}
-        <div className="flex flex-col justify-between p-4 text-fontcolor sm:hidden">
+        <div className="flex flex-col justify-between p-2 text-fontcolor sm:hidden sm:p-4">
           <div>
             <div className="font-bold">{displayName}</div>
             {subheaderString && (

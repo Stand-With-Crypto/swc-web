@@ -1,15 +1,18 @@
 import { ContentSection } from '@/components/app/ContentSection'
 import { DarkHeroSection } from '@/components/app/darkHeroSection'
-import { DTSIPersonHeroCardSection } from '@/components/app/dtsiPersonHeroCardSection'
+import { DTSIPersonHeroCardSection } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardSection'
 import { PACFooter } from '@/components/app/pacFooter'
 import { UserAddressVoterGuideInput } from '@/components/app/pageLocationUnitedStates/userAddressVoterGuideInput'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
+import { LinkBox } from '@/components/ui/linkBox'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { DTSI_UnitedStatesInformationQuery } from '@/data/dtsi/generated'
 import { SupportedLocale } from '@/intl/locales'
+import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
+import { ORDERED_KEY_SENATE_RACE_STATES } from '@/utils/shared/locationSpecificPages'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 import { cn } from '@/utils/web/cn'
@@ -84,7 +87,20 @@ export function LocationUnitedStates({
           title={'Key races'}
         >
           <UserAddressVoterGuideInput locale={locale} />
-          <div className="text-center">TODO add key races</div>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {ORDERED_KEY_SENATE_RACE_STATES.map(stateCode => {
+              const stateName = US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]
+              const people = groups.keySenateRaceMap[stateCode]
+              return (
+                <LinkBox className="border-2 p-10" key={stateCode}>
+                  <p>{stateName}</p>
+                  <InternalLink href={urls.locationStateSpecificSenateRace(stateCode)}>
+                    {people.map(x => dtsiPersonFullName(x)).join(' vs. ')}
+                  </InternalLink>
+                </LinkBox>
+              )
+            })}
+          </div>
         </ContentSection>
         <ContentSection
           className="container"
