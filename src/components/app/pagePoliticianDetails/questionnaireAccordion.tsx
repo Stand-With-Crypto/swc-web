@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { isNil } from 'lodash-es'
 
 import {
@@ -10,7 +10,6 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { useUrlHash } from '@/hooks/useUrlHash'
 import { SWCQuestionnaireAnswers } from '@/utils/server/builderIO/swc-questionnaire'
 import { twNoop } from '@/utils/web/cn'
 
@@ -18,20 +17,28 @@ interface QuestionnaireAccordionProps {
   questionnaire: SWCQuestionnaireAnswers | null
 }
 
+const QUESTIONNAIRE_HASH_KEY = 'questionnaire'
+
 export function QuestionnaireAccordion({ questionnaire }: QuestionnaireAccordionProps) {
+  const [accordionDefaultValue, setAccordionDefaultValue] = useState<string | undefined>()
   const questionnaireRef = useRef<HTMLDivElement>(null)
   const answersAmount = Object.keys(questionnaire?.data ?? {}).length - 1
 
-  const { urlHash } = useUrlHash()
-  const isUrlHashForQuestionnaire = urlHash === 'questionnaire'
-  const accordionDefaultValue = isUrlHashForQuestionnaire ? 'questionnaire' : ''
+  useEffect(() => {
+    const hash =
+      typeof window !== 'undefined'
+        ? decodeURIComponent(window.location.hash.replace('#', ''))
+        : null
+
+    setAccordionDefaultValue(hash === QUESTIONNAIRE_HASH_KEY ? QUESTIONNAIRE_HASH_KEY : '')
+  }, [])
 
   useEffect(() => {
     if (!questionnaireRef.current || !accordionDefaultValue) return
     questionnaireRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [questionnaireRef, accordionDefaultValue])
 
-  if (!questionnaire) return null
+  if (!questionnaire || isNil(accordionDefaultValue)) return null
 
   return (
     <div className="mb-10 flex scroll-mt-20 flex-col" id="questionnaire" ref={questionnaireRef}>
