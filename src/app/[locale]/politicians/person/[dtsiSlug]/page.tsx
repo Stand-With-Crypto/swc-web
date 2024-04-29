@@ -71,11 +71,10 @@ export async function generateStaticParams() {
 export default async function PoliticianDetails({ params }: Props) {
   const { locale } = params
 
-  const promises = [getData(params.dtsiSlug), getQuestionnaire(params.dtsiSlug)]
-  const results = await Promise.all(promises)
-
-  const person: DTSIPersonDetails | null = results[0]
-  const questionnaire: SWCQuestionnaireAnswers | null = results[1]
+  const [person, questionnaire] = await Promise.all([
+    getData(params.dtsiSlug),
+    getQuestionnaire(params.dtsiSlug),
+  ])
 
   if (!person) {
     notFound()

@@ -1,5 +1,5 @@
 import React from 'react'
-import { isNil, orderBy } from 'lodash-es'
+import { orderBy } from 'lodash-es'
 import { Globe } from 'lucide-react'
 
 import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
@@ -128,7 +128,7 @@ export function PagePoliticianDetails({
         <ScoreExplainer person={person} />
       </section>
 
-      {!isNil(questionnaire) ? <QuestionnaireAccordion questionnaire={questionnaire} /> : null}
+      {questionnaire && <QuestionnaireAccordion questionnaire={questionnaire} />}
 
       <section>
         <PageTitle as="h2" className="mb-4 text-center text-lg md:text-xl lg:text-2xl" size="sm">

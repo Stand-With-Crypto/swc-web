@@ -124,7 +124,9 @@ function QuestionnaireItem({ answer, question, isBooleanQuestion = true }: Quest
       : 'No'
 
   function getAnswerStyles() {
-    if (!isBooleanQuestion || answer === QUESTION_ANSWER_OPTIONS['Not answered']) return ''
+    if (!isBooleanQuestion || answer === QUESTION_ANSWER_OPTIONS['Not answered']) {
+      return ''
+    }
 
     return answer === QUESTION_ANSWER_OPTIONS['Yes']
       ? twNoop('text-green-600')
@@ -134,8 +136,9 @@ function QuestionnaireItem({ answer, question, isBooleanQuestion = true }: Quest
   if (
     answer === QUESTION_ANSWER_OPTIONS['Not answered'] ||
     (!isBooleanQuestion && answer?.length === 0)
-  )
+  ) {
     return null
+  }
 
   return (
     <div className="last-of-type:div:bg-red-500 flex flex-col gap-4 border-b-[1px] border-[#5B616E33]  py-6 text-base text-fontcolor-muted">
