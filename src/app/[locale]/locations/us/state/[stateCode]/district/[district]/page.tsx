@@ -32,8 +32,8 @@ export async function generateMetadata({
   const district = zodNormalizedDTSIDistrictId.parse(params.district)
   const stateCode = zodUsaState.parse(params.stateCode.toUpperCase())
   const stateName = getUSStateNameFromStateCode(stateCode)
-  const title = `See where politicians in the ${formatDTSIDistrictId(district)} district of ${stateName} stand on crypto`
-  const description = `We asked politicians in the ${formatDTSIDistrictId(district)} district of ${stateName} for their thoughts on crypto. Here's what they said.`
+  const title = `${stateCode} ${formatDTSIDistrictId(district)} District Congressional Race`
+  const description = `See where politicians running for in the ${formatDTSIDistrictId(district)} district of ${stateName} stand on crypto.`
   return generateMetadataDetails({
     title,
     description,

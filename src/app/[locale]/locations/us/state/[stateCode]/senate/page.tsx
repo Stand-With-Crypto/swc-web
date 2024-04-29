@@ -20,8 +20,8 @@ export async function generateMetadata({
 }: LocationSenateRaceSpecificPageProps): Promise<Metadata> {
   const stateCode = zodUsaState.parse(params.stateCode.toUpperCase())
   const stateName = getUSStateNameFromStateCode(stateCode)
-  const title = `See where politicians in ${stateName} stand on crypto`
-  const description = `We asked politicians in ${stateName} for their thoughts on crypto. Here's what they said.`
+  const title = `${stateName} US Senate Race`
+  const description = `See where politicians running for the US Senate in ${stateName} stand on crypto.`
   return generateMetadataDetails({
     title,
     description,

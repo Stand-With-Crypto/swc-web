@@ -15,8 +15,8 @@ export const revalidate = SECONDS_DURATION.HOUR
 type LocationUnitedStatesPageProps = PageProps
 
 export async function generateMetadata(): Promise<Metadata> {
-  const title = `See where US politicians stand on crypto`
-  const description = `We asked US politicians for their thoughts on crypto. Here's what they said.`
+  const title = `Key Races in the United States`
+  const description = `View the races critical to keeping crypto in America.`
   return generateMetadataDetails({
     title,
     description,

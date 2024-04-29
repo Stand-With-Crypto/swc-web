@@ -27,8 +27,8 @@ export async function generateMetadata({
   const stateCode = zodUsaState.parse(params.stateCode.toUpperCase())
   const stateName = getUSStateNameFromStateCode(stateCode)
 
-  const title = `See where ${stateName} politicians stand on crypto`
-  const description = `We asked ${stateName} politicians for their thoughts on crypto. Here's what they said.`
+  const title = `Key Races in ${stateName}`
+  const description = `View the races critical to keeping crypto in ${stateName}.`
   return generateMetadataDetails({
     title,
     description,
