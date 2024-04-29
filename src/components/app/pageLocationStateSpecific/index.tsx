@@ -149,19 +149,25 @@ export function LocationStateSpecific({
             <ScrollBar orientation="horizontal" />
           </ScrollArea>
         </ContentSection>
-        {US_LOCATION_PAGES_LIVE_KEY_DISTRICTS_MAP[stateCode]?.map(district => (
-          <DTSIPersonHeroCardSection
-            cta={
-              <InternalLink href={urls.locationDistrictSpecific({ stateCode, district })}>
-                View Race
-              </InternalLink>
-            }
-            key={district}
-            locale={locale}
-            people={groups.congresspeople[district].people}
-            title={<>Congressional District {district}</>}
-          />
-        ))}
+        {US_LOCATION_PAGES_LIVE_KEY_DISTRICTS_MAP[stateCode]?.map(district => {
+          const districtPeople = groups.congresspeople[district]?.people
+          if (!districtPeople) {
+            return null
+          }
+          return (
+            <DTSIPersonHeroCardSection
+              cta={
+                <InternalLink href={urls.locationDistrictSpecific({ stateCode, district })}>
+                  View Race
+                </InternalLink>
+              }
+              key={district}
+              locale={locale}
+              people={districtPeople}
+              title={<>Congressional District {district}</>}
+            />
+          )
+        })}
 
         {US_STATE_CODE_TO_DISTRICT_COUNT_MAP[stateCode] > 1 && (
           <ContentSection

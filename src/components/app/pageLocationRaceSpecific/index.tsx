@@ -110,7 +110,7 @@ export function LocationRaceSpecific({
           ...others.map(person => ({ person, isRecommended: false })),
         ]).map(({ person, isRecommended }) => (
           <div key={person.id}>
-            <section className="mx-auto flex max-w-7xl flex-col px-6 md:flex-row" key={person.id}>
+            <section className="mx-auto flex max-w-7xl flex-col px-6 md:flex-row">
               <div className="shrink-0 py-10 md:mr-16 md:border-r-2 md:py-20 md:pr-16">
                 <div className="sticky top-24 text-center">
                   <DTSIPersonHeroCard

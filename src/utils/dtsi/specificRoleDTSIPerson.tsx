@@ -51,6 +51,7 @@ export function formatSpecificRoleDTSIPerson<P extends PersonFields>(
       (!specificRole || role.roleCategory === specificRole)
     )
   })!
+
   return {
     ...rest,
     roles,

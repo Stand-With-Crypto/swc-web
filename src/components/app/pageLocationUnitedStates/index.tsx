@@ -91,6 +91,9 @@ export function LocationUnitedStates({
             {ORDERED_KEY_SENATE_RACE_STATES.map(stateCode => {
               const stateName = US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]
               const people = groups.keySenateRaceMap[stateCode]
+              if (!people) {
+                return null
+              }
               return (
                 <LinkBox className="border-2 p-10" key={stateCode}>
                   <p>{stateName}</p>
