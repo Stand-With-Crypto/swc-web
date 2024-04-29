@@ -130,9 +130,10 @@ export function LocationStateSpecific({
             <div className="flex justify-center gap-5 pb-3 pl-4">
               {stances.map(stance => {
                 return (
-                  <div className="w-[300px] shrink-0 lg:w-[500px]" key={stance.id}>
+                  <div className="flex w-[300px] shrink-0 flex-col lg:w-[500px]" key={stance.id}>
                     <DTSIStanceDetails
                       bodyClassName="line-clamp-6"
+                      className="flex-grow"
                       hideImages
                       locale={locale}
                       person={stance.person}
@@ -175,7 +176,7 @@ export function LocationStateSpecific({
             subtitle={'Dive deeper and discover races in other districts.'}
             title={`Other races in ${stateName}`}
           >
-            <div className="grid grid-cols-2 gap-3 text-center md:grid-cols-3">
+            <div className="grid grid-cols-2 gap-3 text-center md:grid-cols-3 xl:grid-cols-4">
               {otherDistricts.map(district => (
                 <InternalLink
                   className={cn('mb-4 block flex-shrink-0 font-semibold')}

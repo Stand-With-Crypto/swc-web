@@ -24,13 +24,7 @@ interface Props {
 export function MaybeOverflowedStances({ person, stances, locale }: Props) {
   const stancesContent = stances.slice(0, 3).map(stance => (
     <div key={stance.id}>
-      <DTSIStanceDetails
-        bodyClassName="line-clamp-6"
-        hideImages
-        locale={locale}
-        person={person}
-        stance={stance}
-      />
+      <DTSIStanceDetails locale={locale} person={person} stance={stance} />
       <CryptoSupportHighlight className="mx-auto mt-2" stanceScore={stance.computedStanceScore} />
     </div>
   ))

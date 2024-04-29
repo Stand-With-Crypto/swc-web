@@ -193,7 +193,10 @@ export const DTSIStanceDetailsTweet: React.FC<
   return (
     <article className="rounded-lg text-gray-800">
       <div
-        className={cn('mb-3 flex justify-between pb-3', isOwnTweet || 'border-b border-gray-300')}
+        className={cn(
+          'mb-3 flex justify-between gap-2 pb-3',
+          isOwnTweet || 'border-b border-gray-300',
+        )}
       >
         {isOwnTweet ? (
           <div className="flex items-center gap-2">

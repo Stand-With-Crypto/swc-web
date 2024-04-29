@@ -132,7 +132,7 @@ export function PageHome({
           </div>
         </section>
 
-        <section className="mb-16 space-y-7 md:mb-36">
+        <section className="mb-16 space-y-7 md:mb-36 xl:space-y-16">
           <PageTitle as="h3" size="md">
             Our community
           </PageTitle>
@@ -195,9 +195,9 @@ export function PageHome({
           <UserActionRowCTAsAnimatedListWithApi />
         </section>
       </div>
-      <section className="mb-16 space-y-7 md:mb-36">
+      <section className="mb-16 space-y-16 md:mb-36">
         <div className="container">
-          <PageTitle as="h3" size="md">
+          <PageTitle as="h3" className="mb-7" size="md">
             Where politicians stand on crypto
           </PageTitle>
           <PageSubTitle as="h4">

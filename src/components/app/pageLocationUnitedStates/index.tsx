@@ -6,7 +6,7 @@ import { UserAddressVoterGuideInput } from '@/components/app/pageLocationUnitedS
 import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
-import { LinkBox } from '@/components/ui/linkBox'
+import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { DTSI_UnitedStatesInformationQuery } from '@/data/dtsi/generated'
@@ -97,7 +97,10 @@ export function LocationUnitedStates({
               return (
                 <LinkBox className="border-2 p-10" key={stateCode}>
                   <p>{stateName}</p>
-                  <InternalLink href={urls.locationStateSpecificSenateRace(stateCode)}>
+                  <InternalLink
+                    className={linkBoxLinkClassName}
+                    href={urls.locationStateSpecificSenateRace(stateCode)}
+                  >
                     {people.map(x => dtsiPersonFullName(x)).join(' vs. ')}
                   </InternalLink>
                 </LinkBox>
@@ -110,7 +113,7 @@ export function LocationUnitedStates({
           subtitle={'Dive deeper and discover races in other states across America.'}
           title={'Other states'}
         >
-          <div className="grid grid-cols-2 gap-3 text-center md:grid-cols-3">
+          <div className="grid grid-cols-2 gap-3 text-center md:grid-cols-3 xl:grid-cols-4">
             {Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP).map(_stateCode => {
               const stateCode = _stateCode as USStateCode
               return (

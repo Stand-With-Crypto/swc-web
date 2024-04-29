@@ -55,7 +55,7 @@ export function DTSIPersonHeroCard(props: Props) {
   const displayName = `${dtsiPersonFullName(person)}${politicalAbbrDisplayName}`
   return (
     <InternalLink
-      className="block shrink-0 overflow-hidden bg-white text-left shadow-xl hover:!no-underline max-sm:rounded-3xl max-sm:border sm:inline-block sm:w-52 xl:w-72"
+      className="block shrink-0 overflow-hidden bg-white text-left shadow-md hover:!no-underline max-sm:rounded-3xl max-sm:border sm:inline-block sm:w-52 xl:w-72"
       href={getIntlUrls(locale).politicianDetails(person.slug)}
     >
       <div className="max-sm:flex">
@@ -98,13 +98,13 @@ export function DTSIPersonHeroCard(props: Props) {
               )}
             </div>
             <div>
-              <DTSIFormattedLetterGrade person={person} size={56} />
+              <DTSIFormattedLetterGrade className="h-14 w-14" person={person} />
             </div>
           </div>
         </div>
 
         {/* Hidden on desktop */}
-        <div className="flex flex-col justify-between p-2 text-fontcolor sm:hidden sm:p-4">
+        <div className="flex flex-col justify-between p-4 text-fontcolor sm:hidden">
           <div>
             <div className="font-bold">{displayName}</div>
             {subheaderString && (
@@ -117,7 +117,7 @@ export function DTSIPersonHeroCard(props: Props) {
             <div>
               <div className="inline-flex items-center gap-2 rounded-full bg-muted p-2 text-xs">
                 <div className="shrink-0">
-                  <DTSIFormattedLetterGrade person={person} size={20} />
+                  <DTSIFormattedLetterGrade className="h-5 w-5" person={person} />
                 </div>
                 <div>{convertDTSIPersonStanceScoreToCryptoSupportLanguage(person)}</div>
               </div>
@@ -131,7 +131,7 @@ export function DTSIPersonHeroCard(props: Props) {
       ) : (
         <div
           className={cn(
-            'p-4 text-center text-lg font-bold text-fontcolor sm:p-6',
+            'p-4 text-center font-bold text-fontcolor sm:p-6 md:text-lg',
             isRecommended
               ? 'bg-primary-cta text-primary-cta-foreground antialiased'
               : 'hidden sm:block',

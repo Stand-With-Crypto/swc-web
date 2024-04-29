@@ -135,9 +135,9 @@ export function LocationRaceSpecific({
                   </>
                 ) : (
                   <div className="flex h-full w-full items-center justify-center text-center">
-                    <PageTitle as="h3" size="sm">
+                    <h3 className="text-xl md:text-2xl">
                       {dtsiPersonFullName(person)} has no statements on crypto.
-                    </PageTitle>
+                    </h3>
                   </div>
                 )}
               </div>

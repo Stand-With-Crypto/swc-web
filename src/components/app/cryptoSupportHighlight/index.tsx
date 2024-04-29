@@ -29,7 +29,7 @@ export function CryptoSupportHighlight({
       {isNil(stanceScore) || stanceScore === 50 ? null : stanceScore > 50 ? (
         <ThumbsUp />
       ) : (
-        <ThumbsDown />
+        <ThumbsDown className="relative top-[3px]" />
       )}
       <div>{text || convertDTSIStanceScoreToCryptoSupportLanguage(stanceScore)}</div>
     </div>

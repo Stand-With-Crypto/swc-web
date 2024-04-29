@@ -23,7 +23,9 @@ import {
   YourPoliticianCategory,
 } from '@/utils/shared/yourPoliticianCategory'
 
-function DefaultPlacesSelect(props: Pick<GooglePlacesSelectProps, 'onChange' | 'value'>) {
+function DefaultPlacesSelect(
+  props: Pick<GooglePlacesSelectProps, 'onChange' | 'value' | 'loading'>,
+) {
   return (
     <div className="mx-auto max-w-md">
       <GooglePlacesSelect
@@ -52,7 +54,11 @@ function _ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: SupportedLo
   )
   if (!address || address === 'loading' || !res.data) {
     return (
-      <DefaultPlacesSelect onChange={setAddress} value={address === 'loading' ? null : address} />
+      <DefaultPlacesSelect
+        loading={address === 'loading'}
+        onChange={setAddress}
+        value={address === 'loading' ? null : address}
+      />
     )
   }
   if ('notFoundReason' in res.data) {
@@ -69,7 +75,6 @@ function _ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: SupportedLo
   const categoryDisplayName = getYourPoliticianCategoryDisplayName(POLITICIAN_CATEGORY)
   const stateCode = res.data.dtsiPeople.find(x => x.primaryRole?.primaryState)?.primaryRole
     ?.primaryState as USStateCode | undefined
-  const districtRole = res.data.dtsiPeople.find(x => x.primaryRole?.primaryDistrict)?.primaryRole
 
   const urls = getIntlUrls(locale)
   return (
@@ -91,24 +96,12 @@ function _ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: SupportedLo
               regulation.
             </p>
           </div>
-          <div className="flex flex-col gap-4 max-sm:w-full md:flex-row">
+          <div className="max-sm:w-full">
             <Button asChild className="w-full">
               <InternalLink href={urls.locationStateSpecific(stateCode)}>
                 {stateCode} voter guide
               </InternalLink>
             </Button>
-            {districtRole && (
-              <Button asChild className="w-full">
-                <InternalLink
-                  href={urls.locationDistrictSpecific({
-                    stateCode,
-                    district: normalizeDTSIDistrictId(districtRole),
-                  })}
-                >
-                  District voter guide
-                </InternalLink>
-              </Button>
-            )}
           </div>
         </div>
       )}

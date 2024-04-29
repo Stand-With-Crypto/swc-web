@@ -71,9 +71,7 @@ export function useMutableCurrentUserAddress() {
       (!initialAddress.current || initialAddress.current === 'loading')
     ) {
       initialAddress.current = currentUserAddress || 'not-set'
-      if (currentUserAddress) {
-        setAddress(currentUserAddress)
-      }
+      setAddress(currentUserAddress)
     }
   }, [currentUserAddress, setAddress])
   return { address, setAddress }
