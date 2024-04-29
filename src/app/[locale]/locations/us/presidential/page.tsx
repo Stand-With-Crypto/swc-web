@@ -27,11 +27,5 @@ export default async function LocationPresidentialSpecificPage({
 
   const data = await queryDTSILocationUnitedStatesPresidential()
 
-  if (!data) {
-    throw new Error(
-      `Invalid params for LocationPresidentialSpecificPage: ${JSON.stringify(params)}`,
-    )
-  }
-
   return <LocationRaceSpecific {...data} {...{ locale }} />
 }

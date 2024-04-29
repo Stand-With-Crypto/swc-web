@@ -26,10 +26,13 @@ export function PageEndorsedCandidates({ people, locale }: LocationStateSpecific
             endorse the candidates below.
           </p>
 
-          {/* <p>
+          {/*
+          Uncomment once we have a PAC donate button
+           <p>
           You can support the candidates directly, or click the donate button below to support the
           SWC PAC that will disburse funds to all the endorsed candidates below.
-        </p> */}
+        </p> 
+        */}
         </h2>
       </section>
       <DTSIPersonHeroCardRow>
