@@ -33,6 +33,7 @@ Make sure you have the following tools installed before proceeding:
 - [nvm](https://github.com/nvm-sh/nvm)
 - [docker](https://docs.docker.com/compose/install/)
 - [docker-compose](https://docs.docker.com/compose/install/#scenario-two-install-the-compose-plugin)
+- [MySQL](https://www.mysql.com/) (on Mac you can install [Homebrew](https://brew.sh/) and run `brew install mysql`)
 
 ### Developing your feature/fix
 
