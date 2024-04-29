@@ -14,7 +14,7 @@ import { useUrlHash } from '@/hooks/useUrlHash'
 import {
   QUESTION_ANSWER_OPTIONS,
   SWCQuestionnaireAnswers,
-} from '@/utils/server/builderIO/swc-questionnaire'
+} from '@/utils/shared/getSWCQuestionnaire'
 import { twNoop } from '@/utils/web/cn'
 
 interface QuestionnaireAccordionProps {
