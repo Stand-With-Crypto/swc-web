@@ -14,10 +14,12 @@ import { PageTitle } from '@/components/ui/pageTitleText'
 import { DTSI_UnitedStatesInformationQuery } from '@/data/dtsi/generated'
 import { SupportedLocale } from '@/intl/locales'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
+import { findRecommendedCandidate } from '@/utils/shared/findRecommendedCandidate'
 import { ORDERED_KEY_SENATE_RACE_STATES } from '@/utils/shared/locationSpecificPages'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 import { cn } from '@/utils/web/cn'
+import { listOfThings } from '@/utils/web/listOfThings'
 
 import americanFlagImage from './americanFlag.png'
 import { organizePeople } from './organizePeople'
@@ -94,22 +96,42 @@ export function LocationUnitedStates({
           title={'Key races'}
         >
           <UserAddressVoterGuideInput locale={locale} />
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
             {ORDERED_KEY_SENATE_RACE_STATES.map(stateCode => {
               const stateName = US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]
               const people = groups.keySenateRaceMap[stateCode]
-              if (!people) {
+              const { recommended, others } = findRecommendedCandidate(people)
+              if (!recommended) {
                 return null
               }
               return (
-                <LinkBox className="border-2 p-10" key={stateCode}>
-                  <p>{stateName}</p>
-                  <InternalLink
-                    className={linkBoxLinkClassName}
-                    href={urls.locationStateSpecificSenateRace(stateCode)}
-                  >
-                    {people.map(x => dtsiPersonFullName(x)).join(' vs. ')}
-                  </InternalLink>
+                <LinkBox className="border shadow-md" key={stateCode}>
+                  <div className="flex items-center justify-center bg-black p-4 antialiased">
+                    <div>
+                      <NextImage
+                        alt={`SWC Shield with an outline of the state of ${stateName}`}
+                        height={100}
+                        src={`/stateShields/${stateCode}.png`}
+                        width={100}
+                      />
+                    </div>
+                    <div className="font-mono text-3xl font-bold text-white">{stateName}</div>
+                  </div>
+                  <div className="p-6">
+                    <p className="mb-4 text-xl font-semibold">Senate</p>
+                    <p>
+                      <InternalLink
+                        className={cn(linkBoxLinkClassName, '!text-fontcolor-muted')}
+                        href={urls.locationStateSpecificSenateRace(stateCode)}
+                      >
+                        Support{' '}
+                        <span className="font-semibold !text-fontcolor">
+                          {dtsiPersonFullName(recommended)}
+                        </span>{' '}
+                        {others.length && <>over {listOfThings(others.map(dtsiPersonFullName))}</>}
+                      </InternalLink>
+                    </p>
+                  </div>
                 </LinkBox>
               )
             })}
