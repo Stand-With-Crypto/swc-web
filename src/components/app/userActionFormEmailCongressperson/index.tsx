@@ -130,7 +130,7 @@ export function UserActionFormEmailCongressperson({
   return (
     <Form {...form}>
       <form
-        className="flex min-h-dvh flex-col"
+        className="flex h-full min-h-[calc(100dvh-4px)] flex-col"
         onSubmit={form.handleSubmit(async values => {
           const address = await convertGooglePlaceAutoPredictionToAddressSchema(
             values.address,
