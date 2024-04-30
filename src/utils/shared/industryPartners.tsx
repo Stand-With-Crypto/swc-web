@@ -60,4 +60,9 @@ export const INDUSTRY_PARTNERS = [
     imageSrc: '/partners/electric_capital.png',
     url: 'https://www.electriccapital.com/',
   },
+  {
+    title: 'Galxe',
+    imageSrc: '/partners/galxe.png',
+    url: 'https://www.galxe.com/',
+  },
 ]
