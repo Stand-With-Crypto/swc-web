@@ -15,7 +15,6 @@ import { usePathname, useSearchParams } from 'next/navigation'
 import { useThirdwebAuthUser } from '@/hooks/useAuthUser'
 import { useDetectWipedDatabaseAndLogOutUser } from '@/hooks/useDetectWipedDatabaseAndLogOutUser'
 import { LocaleContext } from '@/hooks/useLocale'
-import { usePreventOverscroll } from '@/hooks/usePreventOverscroll'
 import { SupportedLocale } from '@/intl/locales'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
@@ -79,8 +78,6 @@ export function TopLevelClientLogic({
   children: React.ReactNode
   locale: SupportedLocale
 }) {
-  usePreventOverscroll()
-
   return (
     <LocaleContext.Provider value={locale}>
       <ThirdwebProvider
