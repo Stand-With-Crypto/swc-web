@@ -98,7 +98,7 @@ export function QuestionnaireAccordion({ questionnaire }: QuestionnaireAccordion
               />
 
               <QuestionnaireItem
-                answer={questionnaire.data?.q8ShareAnyOtherOpinionsOnCrypto ?? null}
+                answer={questionnaire.data?.q8ShareAnyOtherOpinionsOnCrypto ?? ''}
                 isBooleanQuestion={false}
                 question="Please share any other positions or opinions that you have on how crypto and digital assets should be regulated?"
               />
@@ -112,17 +112,11 @@ export function QuestionnaireAccordion({ questionnaire }: QuestionnaireAccordion
 
 interface QuestionnaireItemProps {
   question: string
-  answer: QUESTION_ANSWER_OPTIONS | string | null
+  answer: QUESTION_ANSWER_OPTIONS | string
   isBooleanQuestion?: boolean
 }
 
 function QuestionnaireItem({ answer, question, isBooleanQuestion = true }: QuestionnaireItemProps) {
-  const parsedAnswer = !isBooleanQuestion
-    ? answer
-    : answer === QUESTION_ANSWER_OPTIONS['Yes']
-      ? 'Yes'
-      : 'No'
-
   function getAnswerStyles() {
     if (!isBooleanQuestion || answer === QUESTION_ANSWER_OPTIONS['Not answered']) {
       return ''
@@ -133,11 +127,13 @@ function QuestionnaireItem({ answer, question, isBooleanQuestion = true }: Quest
       : twNoop('text-red-600')
   }
 
-  if (
-    answer === QUESTION_ANSWER_OPTIONS['Not answered'] ||
-    (!isBooleanQuestion && answer?.length === 0)
-  ) {
-    return null
+  function getAnswer() {
+    if (!isBooleanQuestion) return !answer?.length ? 'Not answered' : answer
+
+    if (isBooleanQuestion && answer === QUESTION_ANSWER_OPTIONS['Not answered'])
+      return 'Not answered'
+
+    return answer === QUESTION_ANSWER_OPTIONS['Yes'] ? 'Yes' : 'No'
   }
 
   return (
@@ -146,7 +142,7 @@ function QuestionnaireItem({ answer, question, isBooleanQuestion = true }: Quest
         <strong className="text-foreground">Q: </strong>
         {question}
       </p>
-      <strong className={getAnswerStyles()}>A: {parsedAnswer}</strong>
+      <strong className={getAnswerStyles()}>A: {getAnswer()}</strong>
     </div>
   )
 }
