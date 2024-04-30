@@ -1,3 +1,5 @@
+'use client'
+
 import { HomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogDeeplinkLayout'
 import { UserActionFormEmailCongresspersonDeeplinkWrapper } from '@/components/app/userActionFormEmailCongressperson/homepageDialogDeeplinkWrapper'
 import { usePreventIOSOverscroll } from '@/hooks/usePreventIOSOverscroll'

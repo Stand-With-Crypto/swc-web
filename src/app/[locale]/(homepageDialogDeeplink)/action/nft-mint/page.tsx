@@ -1,3 +1,5 @@
+'use client'
+
 import { HomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogDeeplinkLayout'
 import { UserActionFormNFTMint } from '@/components/app/userActionFormNFTMint'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
