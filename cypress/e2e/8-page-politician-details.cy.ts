@@ -86,6 +86,16 @@ describe('page - politician details', () => {
     )
   })
 
+  it('page with questionnaire and hashing deeplink using vanity url', () => {
+    cy.visit('/politicians/person/adam---schiff/questionnaire')
+
+    cy.get('h2').contains('Candidate questionnaire')
+
+    cy.contains(
+      'Do you have experience buying, selling, or using blockchain technology assets or investment tools?',
+    )
+  })
+
   it('page with no questionnaire', () => {
     /* Using Joe Biden for a case in which the politician hasn't answered the questionnaire yet.
     If this test fails, two cases happen:
