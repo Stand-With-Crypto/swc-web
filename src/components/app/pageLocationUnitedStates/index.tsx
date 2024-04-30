@@ -8,18 +8,14 @@ import { Button } from '@/components/ui/button'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
-import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { DTSI_UnitedStatesInformationQuery } from '@/data/dtsi/generated'
 import { SupportedLocale } from '@/intl/locales'
-import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
-import { findRecommendedCandidate } from '@/utils/shared/findRecommendedCandidate'
 import { ORDERED_KEY_SENATE_RACE_STATES } from '@/utils/shared/locationSpecificPages'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 import { cn } from '@/utils/web/cn'
-import { listOfThings } from '@/utils/web/listOfThings'
 
 import americanFlagImage from './americanFlag.png'
 import { organizePeople } from './organizePeople'
@@ -91,52 +87,43 @@ export function LocationUnitedStates({
         <ContentSection
           className="container"
           subtitle={
-            'Discover the races critical to keeping crypto in America, or enter your address to find your state.'
+            'Enter your address to find the key races in your area that will impact the future of crypto in the United States.'
           }
-          title={'Key races'}
+          title={'Your races'}
         >
           <UserAddressVoterGuideInput locale={locale} />
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
-            {ORDERED_KEY_SENATE_RACE_STATES.map(stateCode => {
-              const stateName = US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]
-              const people = groups.keySenateRaceMap[stateCode]
-              const { recommended, others } = findRecommendedCandidate(people)
-              if (!recommended) {
-                return null
-              }
-              return (
-                <LinkBox className="border shadow-md" key={stateCode}>
-                  <div className="flex items-center justify-center bg-black p-4 antialiased">
-                    <div>
-                      <NextImage
-                        alt={`SWC Shield with an outline of the state of ${stateName}`}
-                        height={100}
-                        src={`/stateShields/${stateCode}.png`}
-                        width={100}
-                      />
-                    </div>
-                    <div className="font-mono text-3xl font-bold text-white">{stateName}</div>
-                  </div>
-                  <div className="p-6">
-                    <p className="mb-4 text-xl font-semibold">Senate</p>
-                    <p>
-                      <InternalLink
-                        className={cn(linkBoxLinkClassName, '!text-fontcolor-muted')}
-                        href={urls.locationStateSpecificSenateRace(stateCode)}
-                      >
-                        Support{' '}
-                        <span className="font-semibold !text-fontcolor">
-                          {dtsiPersonFullName(recommended)}
-                        </span>{' '}
-                        {others.length && <>over {listOfThings(others.map(dtsiPersonFullName))}</>}
-                      </InternalLink>
-                    </p>
-                  </div>
-                </LinkBox>
-              )
-            })}
-          </div>
         </ContentSection>
+        {ORDERED_KEY_SENATE_RACE_STATES.map(stateCode => {
+          const stateName = US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]
+          const people = groups.keySenateRaceMap[stateCode]
+          if (!people.length) {
+            return null
+          }
+          return (
+            <div key={stateCode}>
+              <NextImage
+                alt={`Shield with an outline of the state of ${stateName}`}
+                className="mx-auto block h-32 w-32"
+                height={1920}
+                sizes="128px"
+                src={`/stateShields/${stateCode}.png`}
+                width={1920}
+              />
+              <DTSIPersonHeroCardSection
+                cta={
+                  <InternalLink href={urls.locationStateSpecificSenateRace(stateCode)}>
+                    View Race
+                  </InternalLink>
+                }
+                key={stateCode}
+                locale={locale}
+                people={people}
+                title={<>U.S. Senate Race ({stateName})</>}
+              />
+            </div>
+          )
+        })}
+
         <ContentSection
           className="container"
           subtitle={'Dive deeper and discover races in other states across America.'}
