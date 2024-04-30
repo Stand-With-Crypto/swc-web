@@ -70,6 +70,20 @@ const InitialOrchestration = () => {
   return null
 }
 
+export function DeeplinkPagesLogic() {
+  const pathname = usePathname()
+
+  useEffect(() => {
+    if (pathname?.includes('/action/')) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'scroll'
+    }
+  }, [pathname])
+
+  return null
+}
+
 // This component includes all top level client-side logic
 export function TopLevelClientLogic({
   children,
@@ -104,6 +118,7 @@ export function TopLevelClientLogic({
           <InitialOrchestration />
         </Suspense>
         {children}
+        <DeeplinkPagesLogic />
       </ThirdwebProvider>
     </LocaleContext.Provider>
   )
