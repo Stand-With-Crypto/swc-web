@@ -5,6 +5,7 @@ import { HomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogDee
 import { MESSAGES } from '@/components/app/userActionFormLiveEvent/constants'
 import { UserActionFormLiveEventDeeplinkWrapper } from '@/components/app/userActionFormLiveEvent/homepageDialogDeeplinkWrapper.tsx'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
+import { usePreventIOSOverscroll } from '@/hooks/usePreventIOSOverscroll'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
@@ -34,6 +35,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function UserActionLiveEventDeepLink({ params }: Props) {
+  usePreventIOSOverscroll()
+
   const { slug } = params
   if (!slug || !LIVE_EVENT_CAMPAIGN_SLUGS.includes(slug)) {
     notFound()
