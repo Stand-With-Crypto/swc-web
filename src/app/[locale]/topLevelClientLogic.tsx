@@ -70,7 +70,7 @@ const InitialOrchestration = () => {
   return null
 }
 
-export function DeeplinkPagesLogic() {
+function DeeplinkPagesLogic() {
   const pathname = usePathname()
 
   useEffect(() => {
