@@ -1,5 +1,5 @@
 import { HomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogDeeplinkLayout'
-import { UserActionFormNFTMint } from '@/components/app/userActionFormNFTMint'
+import { HomepageDialogDeeplinkNFTMintWrapper } from '@/components/app/userActionFormNFTMint/homepageDialogDeeplinkNFTMintWrapper'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { PageProps } from '@/types'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
@@ -17,7 +17,7 @@ export default function UserActionNFTMintDeepLink({ params }: PageProps) {
           dialogContentPaddingStyles,
         )}
       >
-        <UserActionFormNFTMint trackMount />
+        <HomepageDialogDeeplinkNFTMintWrapper />
       </div>
     </HomepageDialogDeeplinkLayout>
   )

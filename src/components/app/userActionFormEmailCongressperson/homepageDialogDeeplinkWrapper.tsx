@@ -13,10 +13,13 @@ import { trackDialogOpen } from '@/components/ui/dialog/trackDialogOpen'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useEncodedInitialValuesQueryParam } from '@/hooks/useEncodedInitialValuesQueryParam'
 import { useLocale } from '@/hooks/useLocale'
+import { usePreventOverscroll } from '@/hooks/usePreventOverscroll'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
 function UserActionFormEmailCongresspersonDeeplinkWrapperContent() {
+  usePreventOverscroll()
+
   const fetchUser = useApiResponseForUserFullProfileInfo()
   const router = useRouter()
   const locale = useLocale()
