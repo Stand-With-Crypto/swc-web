@@ -36,10 +36,10 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
       href: urls.resources(),
       text: 'Resources',
     },
-    // {
-    //   href: urls.donate(),
-    //   text: 'Donate',
-    // },
+    {
+      href: urls.donate(),
+      text: 'Donate',
+    },
     {
       href: urls.partners(),
       text: 'Partners',
