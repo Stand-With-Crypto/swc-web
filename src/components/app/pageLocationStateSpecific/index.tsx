@@ -58,7 +58,7 @@ export function LocationStateSpecific({
             <InternalLink className="text-gray-400" href={urls.locationUnitedStates()}>
               United States
             </InternalLink>{' '}
-            / <span className="font-bold text-purple-400">{stateName}</span>
+            / <span>{stateName}</span>
           </h2>
           <PageTitle as="h1" className="mb-4" size="md">
             Key Races in {stateName}
@@ -67,7 +67,7 @@ export function LocationStateSpecific({
             View the races critical to keeping crypto in {stateName}.
           </PageSubTitle>
           {countAdvocates > 1000 && (
-            <h3 className="mt-4 text-xl font-bold text-purple-400">
+            <h3 className="mt-4 font-mono text-xl font-light">
               <FormattedNumber amount={countAdvocates} locale={locale} /> crypto advocates
             </h3>
           )}

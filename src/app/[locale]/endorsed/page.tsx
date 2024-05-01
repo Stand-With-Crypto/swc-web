@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 import { PageEndorsedCandidates } from '@/components/app/pageEndorsedCandidates'
-import { queryDTSIEndorsedCandidates } from '@/data/dtsi/queries/quertDTSIEndorsedCandidates'
+import { queryDTSIEndorsedCandidates } from '@/data/dtsi/queries/queryDTSIEndorsedCandidates'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { ENDORSED_DTSI_PERSON_SLUGS } from '@/utils/shared/locationSpecificPages'

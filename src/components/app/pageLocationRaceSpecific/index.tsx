@@ -65,7 +65,7 @@ export function LocationRaceSpecific({
           {' / '}
           {(() => {
             if (!stateDisplayName) {
-              return <span className="font-bold text-purple-400">Presidential</span>
+              return <span>Presidential</span>
             }
             return (
               <>
@@ -76,7 +76,7 @@ export function LocationRaceSpecific({
                   {stateDisplayName}
                 </InternalLink>{' '}
                 /{' '}
-                <span className="font-bold text-purple-400">
+                <span>
                   {district
                     ? `${stateCode} Congressional District ${district}`
                     : `U.S. Senate (${stateCode})`}

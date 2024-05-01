@@ -10,7 +10,6 @@ import { Button } from '@/components/ui/button'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
-import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { DTSI_UnitedStatesInformationQuery } from '@/data/dtsi/generated'
 import { SupportedLocale } from '@/intl/locales'
@@ -41,14 +40,9 @@ export function LocationUnitedStates({
           <PageTitle as="h1" className="mb-4" size="md">
             Key Races in the United States
           </PageTitle>
-          <PageSubTitle as="h2" className="text-gray-400" size="md">
-            View the races critical to keeping crypto in America.
-          </PageSubTitle>
-          {countAdvocates > 1000 && (
-            <h3 className="mt-4 text-xl font-bold text-purple-400">
-              <FormattedNumber amount={countAdvocates} locale={locale} /> crypto advocates
-            </h3>
-          )}
+          <h3 className="mt-4 font-mono text-xl font-light">
+            <FormattedNumber amount={countAdvocates} locale={locale} /> crypto advocates
+          </h3>
           <UserActionFormVoterRegistrationDialog>
             <Button className="mt-6 w-full max-w-xs" variant="secondary">
               Register to vote

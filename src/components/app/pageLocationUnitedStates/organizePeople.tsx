@@ -11,8 +11,8 @@ export function organizePeople({
     formatSpecificRoleDTSIPerson(x, { specificRole: DTSI_PersonRoleCategory.SENATE }),
   )
   const grouped = {
-    president: runningForPresident.map(x =>
-      formatSpecificRoleDTSIPerson(x, { specificRole: DTSI_PersonRoleCategory.PRESIDENT }),
+    president: runningForPresident.map(person =>
+      formatSpecificRoleDTSIPerson(person, { specificRole: DTSI_PersonRoleCategory.PRESIDENT }),
     ),
     keySenateRaceMap: groupBy(formattedKeySenateRaces, x => x.runningForSpecificRole.primaryState!),
   }

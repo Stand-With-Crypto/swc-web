@@ -104,16 +104,15 @@ function _ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: SupportedLo
           </div>
         </div>
       )}
-      <p className="mb-3 text-center text-xl font-bold">Your {categoryDisplayName}</p>
+      <p
+        className="mb-3 text-center text-xl font-bold"
+        data-test-id="dtsi-people-associated-with-address"
+      >
+        Your {categoryDisplayName}
+      </p>
       <DTSIPersonHeroCardRow>
         {people.map(person => (
-          <DTSIPersonHeroCard
-            data-test-id="dtsi-person-associated-with-address"
-            key={person.id}
-            locale={locale}
-            person={person}
-            subheader="role"
-          />
+          <DTSIPersonHeroCard key={person.id} locale={locale} person={person} subheader="role" />
         ))}
       </DTSIPersonHeroCardRow>
     </div>

@@ -17,12 +17,12 @@ export const DarkHeroSection = React.forwardRef<
       */
     >
       <div
-        className="absolute w-full bg-black"
+        className="absolute w-full bg-[#0D1B39]"
         style={{ height: STANDARD_TOP_CONTENT_MARGIN, top: -1 * STANDARD_TOP_CONTENT_MARGIN }}
       />
       <div
         {...props}
-        className={cn('bg-black px-4 pb-24 text-white antialiased', className)}
+        className={cn('bg-[#0D1B39] px-4 pb-24 text-white antialiased', className)}
         style={{
           paddingTop: 96 - STANDARD_TOP_CONTENT_MARGIN,
         }}
