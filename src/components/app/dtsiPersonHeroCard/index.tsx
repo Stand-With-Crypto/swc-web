@@ -1,3 +1,4 @@
+import React from 'react'
 import { User } from 'lucide-react'
 
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
@@ -41,6 +42,30 @@ function getSubHeaderString(props: Props) {
     default:
       return props.subheader
   }
+}
+
+export function DTSIPersonHeroCardFooter({
+  isRecommended,
+  children,
+  className,
+}: {
+  className?: string
+  children: React.ReactNode
+  isRecommended?: boolean
+}) {
+  return (
+    <div
+      className={cn(
+        'p-4 text-center font-bold text-fontcolor sm:p-6 md:text-lg',
+        isRecommended
+          ? 'bg-primary-cta text-primary-cta-foreground antialiased'
+          : 'hidden sm:block',
+        className,
+      )}
+    >
+      {children}
+    </div>
+  )
 }
 
 export function DTSIPersonHeroCard(props: Props) {
@@ -129,14 +154,7 @@ export function DTSIPersonHeroCard(props: Props) {
       {footer !== undefined ? (
         <div className="hidden sm:block">{footer}</div>
       ) : (
-        <div
-          className={cn(
-            'p-4 text-center font-bold text-fontcolor sm:p-6 md:text-lg',
-            isRecommended
-              ? 'bg-primary-cta text-primary-cta-foreground antialiased'
-              : 'hidden sm:block',
-          )}
-        >
+        <DTSIPersonHeroCardFooter isRecommended={isRecommended}>
           {isRecommended ? (
             <>
               Recommended <span className="sm:hidden xl:inline">candidate</span>
@@ -144,7 +162,7 @@ export function DTSIPersonHeroCard(props: Props) {
           ) : (
             convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence(person)
           )}
-        </div>
+        </DTSIPersonHeroCardFooter>
       )}
     </InternalLink>
   )

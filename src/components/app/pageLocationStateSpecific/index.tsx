@@ -51,7 +51,7 @@ export function LocationStateSpecific({
     }),
   )
   return (
-    <div className="space-y-20">
+    <div>
       <DarkHeroSection>
         <div className="text-center">
           <h2 className={'mb-4'}>
@@ -80,30 +80,34 @@ export function LocationStateSpecific({
       </DarkHeroSection>
       <div className="space-y-20">
         {!!groups.senators.length && (
-          <DTSIPersonHeroCardSection
-            cta={
-              <InternalLink href={urls.locationStateSpecificSenateRace(stateCode)}>
-                View Race
-              </InternalLink>
-            }
-            locale={locale}
-            people={groups.senators}
-            title={<>U.S. Senate Race ({stateCode})</>}
-          />
+          <div className="mt-20">
+            <DTSIPersonHeroCardSection
+              cta={
+                <InternalLink href={urls.locationStateSpecificSenateRace(stateCode)}>
+                  View Race
+                </InternalLink>
+              }
+              locale={locale}
+              people={groups.senators}
+              title={<>U.S. Senate Race ({stateCode})</>}
+            />
+          </div>
         )}
         {groups.congresspeople['at-large']?.people.length ? (
-          <DTSIPersonHeroCardSection
-            cta={
-              <InternalLink
-                href={urls.locationDistrictSpecific({ stateCode, district: 'at-large' })}
-              >
-                View Race
-              </InternalLink>
-            }
-            locale={locale}
-            people={groups.congresspeople['at-large'].people}
-            title={<>At-Large Congressional District</>}
-          />
+          <div className="mt-20">
+            <DTSIPersonHeroCardSection
+              cta={
+                <InternalLink
+                  href={urls.locationDistrictSpecific({ stateCode, district: 'at-large' })}
+                >
+                  View Race
+                </InternalLink>
+              }
+              locale={locale}
+              people={groups.congresspeople['at-large'].people}
+              title={<>At-Large Congressional District</>}
+            />
+          </div>
         ) : (
           <ContentSection
             className="bg-muted py-14"

@@ -1,5 +1,7 @@
 import { ContentSection } from '@/components/app/ContentSection'
 import { DarkHeroSection } from '@/components/app/darkHeroSection'
+import { DTSIPersonHeroCard, DTSIPersonHeroCardFooter } from '@/components/app/dtsiPersonHeroCard'
+import { DTSIPersonHeroCardRow } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardRow'
 import { DTSIPersonHeroCardSection } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardSection'
 import { PACFooter } from '@/components/app/pacFooter'
 import { UserAddressVoterGuideInput } from '@/components/app/pageLocationUnitedStates/userAddressVoterGuideInput'
@@ -56,18 +58,34 @@ export function LocationUnitedStates({
       </DarkHeroSection>
       <div className="space-y-20">
         {!!endorsed.length && (
-          <DTSIPersonHeroCardSection
-            cta={<InternalLink href={urls.endorsedCandidates()}>View Endorsements</InternalLink>}
-            locale={locale}
-            people={endorsed}
-            recommend={false}
+          <ContentSection
             subtitle="These are the most pro-crypto candidates running for office across America."
-            title={
-              <>
-                SWC <span className="text-primary-cta underline">Endorsed</span> Candidates
-              </>
-            }
-          />
+            title={<>SWC Endorsed Candidates</>}
+          >
+            <DTSIPersonHeroCardRow>
+              {endorsed.map(person => (
+                <DTSIPersonHeroCard
+                  footer={
+                    <DTSIPersonHeroCardFooter
+                      className="max-sm:rounded-full max-sm:px-5 max-sm:py-2"
+                      isRecommended={true}
+                    >
+                      SWC Endorsed
+                    </DTSIPersonHeroCardFooter>
+                  }
+                  key={person.id}
+                  locale={locale}
+                  person={person}
+                  subheader={'role'}
+                />
+              ))}
+            </DTSIPersonHeroCardRow>
+            <div className="container mt-8 text-center xl:mt-14">
+              <Button asChild className="max-sm:w-full">
+                <InternalLink href={urls.endorsedCandidates()}>View Endorsements</InternalLink>
+              </Button>
+            </div>
+          </ContentSection>
         )}
         {!!groups.president.length && (
           <DTSIPersonHeroCardSection
