@@ -9,7 +9,7 @@ export function DTSIPersonHeroCardRow({
 }) {
   return (
     <section className={cn('text-center', className)}>
-      <div className="flex w-auto max-w-7xl flex-col flex-wrap gap-6 px-2 sm:inline-flex sm:flex-row md:px-4">
+      <div className="flex w-auto flex-col flex-wrap gap-6 px-2 sm:inline-flex sm:flex-row md:px-4">
         {children}
       </div>
     </section>

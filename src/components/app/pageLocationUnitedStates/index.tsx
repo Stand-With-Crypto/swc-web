@@ -62,7 +62,11 @@ export function LocationUnitedStates({
             people={endorsed}
             recommend={false}
             subtitle="These are the most pro-crypto candidates running for office across America."
-            title={<>SWC Endorsed Candidates</>}
+            title={
+              <>
+                SWC <span className="text-primary-cta underline">Endorsed</span> Candidates
+              </>
+            }
           />
         )}
         {!!groups.president.length && (
