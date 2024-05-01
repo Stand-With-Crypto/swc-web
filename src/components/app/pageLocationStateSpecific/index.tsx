@@ -63,9 +63,6 @@ export function LocationStateSpecific({
           <PageTitle as="h1" className="mb-4" size="md">
             Key Races in {stateName}
           </PageTitle>
-          <PageSubTitle as="h2" className="text-gray-400" size="md">
-            View the races critical to keeping crypto in {stateName}.
-          </PageSubTitle>
           {countAdvocates > 1000 && (
             <h3 className="mt-4 font-mono text-xl font-light">
               <FormattedNumber amount={countAdvocates} locale={locale} /> crypto advocates
