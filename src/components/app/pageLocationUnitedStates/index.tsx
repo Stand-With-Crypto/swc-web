@@ -39,11 +39,11 @@ export function LocationUnitedStates({
           <PageTitle as="h1" className="mb-4" size="md">
             Key Races in the United States
           </PageTitle>
-          <PageSubTitle as="h2" className="text-primary-cta-foreground" size="md">
+          <PageSubTitle as="h2" className="text-gray-400" size="md">
             View the races critical to keeping crypto in America.
           </PageSubTitle>
           {countAdvocates > 1000 && (
-            <h3 className="mt-4 text-xl font-bold">
+            <h3 className="mt-4 text-xl font-bold text-purple-400">
               <FormattedNumber amount={countAdvocates} locale={locale} /> crypto advocates
             </h3>
           )}
