@@ -17,9 +17,12 @@ export const US_LOCATION_PAGES_LIVE_KEY_DISTRICTS_MAP: Partial<Record<USStateCod
 }
 
 export const ENDORSED_DTSI_PERSON_SLUGS = [
-  'cynthia---lummis',
-  'patrick---mchenry',
-  'warren---davidson',
+  'shomari--figures',
+  'troy---downing',
+  'adam---schiff',
+  'jim---banks',
+  'jim--justice',
+  'eduardo---morales]',
 ]
 
 export const ORDERED_KEY_SENATE_RACE_STATES: USStateCode[] = [

@@ -17,7 +17,6 @@ import { getIntlUrls } from '@/utils/shared/urls'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 import { cn } from '@/utils/web/cn'
 
-import americanFlagImage from './americanFlag.png'
 import { organizePeople } from './organizePeople'
 
 interface LocationUnitedStatesProps extends DTSI_UnitedStatesInformationQuery {
@@ -37,20 +36,14 @@ export function LocationUnitedStates({
     <div className="space-y-20">
       <DarkHeroSection>
         <div className="text-center">
-          <NextImage
-            alt="American flag"
-            className="mb-10 inline-block w-40"
-            sizes="160px"
-            src={americanFlagImage}
-          />
           <PageTitle as="h1" className="mb-4" size="md">
             Key Races in the United States
           </PageTitle>
-          <PageSubTitle as="h2" className="text-gray-400" size="md">
+          <PageSubTitle as="h2" className="text-primary-cta-foreground" size="md">
             View the races critical to keeping crypto in America.
           </PageSubTitle>
           {countAdvocates > 1000 && (
-            <h3 className="mt-4 text-xl font-bold text-purple-400">
+            <h3 className="mt-4 text-xl font-bold">
               <FormattedNumber amount={countAdvocates} locale={locale} /> crypto advocates
             </h3>
           )}
@@ -62,6 +55,16 @@ export function LocationUnitedStates({
         </div>
       </DarkHeroSection>
       <div className="space-y-20">
+        {!!endorsed.length && (
+          <DTSIPersonHeroCardSection
+            cta={<InternalLink href={urls.endorsedCandidates()}>View Endorsements</InternalLink>}
+            locale={locale}
+            people={endorsed}
+            recommend={false}
+            subtitle="These are the most pro-crypto candidates running for office across America."
+            title={<>SWC Endorsed Candidates</>}
+          />
+        )}
         {!!groups.president.length && (
           <DTSIPersonHeroCardSection
             cta={
@@ -72,16 +75,6 @@ export function LocationUnitedStates({
             recommend={false}
             subtitle="Vote for pro-crypto candidates. See where presidential candidates stand on crypto."
             title={<>Presidential Race</>}
-          />
-        )}
-        {!!endorsed.length && (
-          <DTSIPersonHeroCardSection
-            cta={<InternalLink href={urls.endorsedCandidates()}>View Endorsements</InternalLink>}
-            locale={locale}
-            people={endorsed}
-            recommend={false}
-            subtitle="These are the most pro-crypto candidates running for office across America."
-            title={<>SWC Endorsed Candidates</>}
           />
         )}
         <ContentSection
