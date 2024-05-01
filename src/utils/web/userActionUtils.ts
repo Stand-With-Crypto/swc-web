@@ -7,7 +7,7 @@ export const USER_ACTION_TYPE_CTA_PRIORITY_ORDER: ReadonlyArray<ActiveClientUser
   UserActionType.VOTER_REGISTRATION,
   UserActionType.CALL,
   UserActionType.EMAIL,
-  // UserActionType.DONATION,
+  UserActionType.DONATION,
   UserActionType.TWEET,
   UserActionType.NFT_MINT,
 ]

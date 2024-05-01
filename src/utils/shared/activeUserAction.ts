@@ -3,7 +3,7 @@ import { UserActionType } from '@prisma/client'
 export const ACTIVE_CLIENT_USER_ACTION_TYPES = [
   UserActionType.CALL,
   UserActionType.EMAIL,
-  // UserActionType.DONATION,
+  UserActionType.DONATION,
   UserActionType.OPT_IN,
   UserActionType.TWEET,
   UserActionType.NFT_MINT,

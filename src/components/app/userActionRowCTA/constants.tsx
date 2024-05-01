@@ -10,8 +10,11 @@ import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userAc
 import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
 import { UserActionRowCTAProps } from '@/components/app/userActionRowCTA'
+import { InternalLink } from '@/components/ui/link'
 import { UserActionTweetLink } from '@/components/ui/userActionTweetLink'
+import { useLocale } from '@/hooks/useLocale'
 import { ActiveClientUserActionType } from '@/utils/shared/activeUserAction'
+import { getIntlUrls } from '@/utils/shared/urls'
 import { getYourPoliticianCategoryShortDisplayName } from '@/utils/shared/yourPoliticianCategory'
 
 export const USER_ACTION_ROW_CTA_INFO: Record<
@@ -53,24 +56,24 @@ export const USER_ACTION_ROW_CTA_INFO: Record<
     canBeTriggeredMultipleTimes: true,
     WrapperComponent: UserActionFormEmailCongresspersonDialog,
   },
-  // [UserActionType.DONATION]: {
-  //   actionType: UserActionType.DONATION,
-  //   image: '/actionTypeIcons/donate.png',
-  //   text: 'Donate to Stand With Crypto',
-  //   subtext: 'Support our aim to mobilize 52 million crypto advocates in the U.S.',
-  //   canBeTriggeredMultipleTimes: true,
-  //   WrapperComponent: ({ children }) => {
-  //     const locale = useLocale()
-  //     return (
-  //       <InternalLink
-  //         className="block text-fontcolor hover:no-underline"
-  //         href={getIntlUrls(locale).donate()}
-  //       >
-  //         {children}
-  //       </InternalLink>
-  //     )
-  //   },
-  // },
+  [UserActionType.DONATION]: {
+    actionType: UserActionType.DONATION,
+    image: '/actionTypeIcons/donate.png',
+    text: 'Donate to Stand With Crypto',
+    subtext: 'Support our aim to mobilize 52 million crypto advocates in the U.S.',
+    canBeTriggeredMultipleTimes: true,
+    WrapperComponent: ({ children }) => {
+      const locale = useLocale()
+      return (
+        <InternalLink
+          className="block text-fontcolor hover:no-underline"
+          href={getIntlUrls(locale).donate()}
+        >
+          {children}
+        </InternalLink>
+      )
+    },
+  },
   [UserActionType.TWEET]: {
     actionType: UserActionType.TWEET,
     image: '/actionTypeIcons/tweet.png',
