@@ -25,7 +25,7 @@ import { cn } from '@/utils/web/cn'
 import { organizeStateSpecificPeople } from './organizeStateSpecificPeople'
 
 interface LocationStateSpecificProps extends DTSI_StateSpecificInformationQuery {
-  stateCode: USStateCode //test
+  stateCode: USStateCode
   locale: SupportedLocale
   countAdvocates: number
 }

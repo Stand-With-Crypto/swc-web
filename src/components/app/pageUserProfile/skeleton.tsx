@@ -37,10 +37,6 @@ export function PageUserProfileSkeleton() {
             value: 100,
           },
           {
-            label: 'Leaderboard',
-            value: <>TODO</>,
-          },
-          {
             label: 'NFTs',
             value: 100,
           },
