@@ -5,10 +5,13 @@ import { useRouter } from 'next/navigation'
 import { ThirdwebLoginContent } from '@/components/app/authentication/thirdwebLoginContent'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
+import { usePreventOverscroll } from '@/hooks/usePreventOverscroll'
 import { useSession } from '@/hooks/useSession'
 import { cn } from '@/utils/web/cn'
 
 export default function UserActionOptInSWCDeepLink() {
+  usePreventOverscroll()
+
   const urls = useIntlUrls()
   const router = useRouter()
   const session = useSession()

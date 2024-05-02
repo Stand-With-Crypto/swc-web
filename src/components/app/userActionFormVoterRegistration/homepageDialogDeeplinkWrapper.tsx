@@ -7,8 +7,11 @@ import { UserActionFormVoterRegistration } from '@/components/app/userActionForm
 import { ANALYTICS_NAME_USER_ACTION_FORM_VOTER_REGISTRATION } from '@/components/app/userActionFormVoterRegistration/constants'
 import { trackDialogOpen } from '@/components/ui/dialog/trackDialogOpen'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
+import { usePreventOverscroll } from '@/hooks/usePreventOverscroll'
 
 export function UserActionFormVoterRegistrationDeeplinkWrapper() {
+  usePreventOverscroll()
+
   const urls = useIntlUrls()
   const router = useRouter()
   useEffect(() => {
