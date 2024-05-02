@@ -12,7 +12,7 @@ interface LocationStateSpecificProps extends DTSI_EndorsedCandidatesQuery {
 
 export function PageEndorsedCandidates({ people, locale }: LocationStateSpecificProps) {
   return (
-    <div className="space-y-20">
+    <div className="standard-spacing-from-navbar space-y-20">
       <section className="container">
         <PageTitle as="h1">Stand With Crypto PAC 2024 House and Senate Endorsements</PageTitle>
         <h2 className="mx-auto mt-6 space-y-4 text-center text-fontcolor-muted">

@@ -7,7 +7,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 
 export function PageUserProfileSkeleton() {
   return (
-    <div className="container">
+    <div className="standard-spacing-from-navbar container">
       <div className="mb-6 flex items-center justify-between md:mx-4">
         <div className="flex items-center gap-2">
           <Skeleton className="h-16 w-16" />

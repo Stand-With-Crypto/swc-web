@@ -41,7 +41,7 @@ export function PagePoliticianDetails({
 }) {
   const stances = orderBy(person.stances, x => -1 * new Date(x.dateStanceMade).getTime())
   return (
-    <div className="container max-w-3xl">
+    <div className="standard-spacing-from-navbar container max-w-3xl">
       <section>
         {person.profilePictureUrl ? (
           <div

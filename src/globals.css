@@ -96,6 +96,10 @@
     animation: slideUp 300ms ease-out;
   }
 
+  .standard-spacing-from-navbar {
+    @apply mt-10;
+  }
+
   @keyframes slideDown {
     from {
       height: 0;

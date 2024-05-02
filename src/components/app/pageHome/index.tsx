@@ -42,7 +42,7 @@ export function PageHome({
   const highestScores = sortDTSIPersonDataTable(dtsiHomepagePeople.highestScores)
   return (
     <>
-      <section className="grid-fl mb-6 grid grid-cols-1 items-center gap-4 lg:container lg:grid-cols-2 lg:gap-8">
+      <section className="grid-fl standard-spacing-from-navbar mb-6 grid grid-cols-1 items-center gap-4 lg:container lg:grid-cols-2 lg:gap-8">
         <div className="lg:order-0 container order-1 mx-auto max-w-xl space-y-6 pt-4 text-center md:max-w-3xl lg:px-0 lg:pt-0 lg:text-left">
           <PageTitle className={'lg:text-left'} withoutBalancer>
             If you care about crypto, it's time to prove it

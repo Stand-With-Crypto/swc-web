@@ -19,6 +19,7 @@ import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/u
 import { cn } from '@/utils/web/cn'
 
 import { organizePeople } from './organizePeople'
+// import heroBackground from './heroBackground.jpg'
 
 interface LocationUnitedStatesProps extends DTSI_UnitedStatesInformationQuery {
   locale: SupportedLocale
@@ -35,7 +36,12 @@ export function LocationUnitedStates({
   const urls = getIntlUrls(locale)
   return (
     <div className="space-y-20">
-      <DarkHeroSection>
+      <DarkHeroSection
+      // style={{
+      //   backgroundImage: `url(${heroBackground.src})`,
+      //   backgroundSize: 'cover',
+      // }}
+      >
         <div className="text-center">
           <PageTitle as="h1" className="mb-4" size="md">
             Key Races in the United States

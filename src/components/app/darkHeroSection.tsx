@@ -1,6 +1,5 @@
 import React from 'react'
 
-import { STANDARD_TOP_CONTENT_MARGIN } from '@/components/ui/fullHeight'
 import { cn } from '@/utils/web/cn'
 
 export const DarkHeroSection = React.forwardRef<
@@ -9,26 +8,11 @@ export const DarkHeroSection = React.forwardRef<
 >(({ className, children, ...props }, ref) => {
   return (
     <section
-      className="relative"
       ref={ref}
-      /* 
-      There's a standard padding we apply to all content across the site. 
-      This hack ensures we remove that white space in lieu of the black padding
-      */
+      {...props}
+      className={cn('relative bg-[#0D1B39] px-4 py-24 text-white antialiased', className)}
     >
-      <div
-        className="absolute w-full bg-[#0D1B39]"
-        style={{ height: STANDARD_TOP_CONTENT_MARGIN, top: -1 * STANDARD_TOP_CONTENT_MARGIN }}
-      />
-      <div
-        {...props}
-        className={cn('bg-[#0D1B39] px-4 pb-24 text-white antialiased', className)}
-        style={{
-          paddingTop: 96 - STANDARD_TOP_CONTENT_MARGIN,
-        }}
-      >
-        {children}
-      </div>
+      {children}
     </section>
   )
 })

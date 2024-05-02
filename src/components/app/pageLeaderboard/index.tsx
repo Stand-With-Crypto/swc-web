@@ -46,7 +46,7 @@ export function PageLeaderboard({
   const urls = getIntlUrls(locale)
   const { totalPages } = COMMUNITY_PAGINATION_DATA[tab]
   return (
-    <div className="container space-y-7">
+    <div className="standard-spacing-from-navbar container space-y-7">
       <PageTitle>{PAGE_LEADERBOARD_TITLE}</PageTitle>
       <PageSubTitle>
         {PAGE_LEADERBOARD_DESCRIPTION} Donations to{' '}

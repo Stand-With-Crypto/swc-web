@@ -17,7 +17,7 @@ export function PagePoliticians({
 }) {
   return (
     <>
-      <section className="container mb-16 space-y-7">
+      <section className="standard-spacing-from-navbar container mb-16 space-y-7">
         <PageTitle>{PAGE_POLITICIANS_TITLE}</PageTitle>
         <PageSubTitle>{PAGE_POLITICIANS_DESCRIPTION}</PageSubTitle>
         <ClientCurrentUserDTSIPersonCardOrCTA locale={locale} />
