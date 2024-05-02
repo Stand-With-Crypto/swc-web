@@ -2,13 +2,10 @@ import { ReactNode } from 'react'
 import { ArrowUpRight } from 'lucide-react'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
-import { UserActionFormEmailCongresspersonDeeplinkWrapper } from '@/components/app/userActionFormEmailCongressperson/homepageDialogDeeplinkWrapper'
+import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { Button } from '@/components/ui/button'
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
-import { dialogContentStyles } from '@/components/ui/dialog/styles'
 import { NextImage } from '@/components/ui/image'
 import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
-import { cn } from '@/utils/web/cn'
 
 interface HeroImageProps {
   children: ReactNode
@@ -49,22 +46,17 @@ const unauthenticatedContent = (
 )
 
 const authenticatedContent = (
-  <Dialog analytics={{ Category: 'Homepage Hero Section', CTA: 'Email your Rep' }}>
-    <DialogTrigger asChild>
-      <HeroImage>
-        <p>
-          FIT21 is a bipartisan crypto bill being considered for a vote in Congress. Ask your Rep to
-          support its clear, commonsense rules for crypto today.
-        </p>
-        <Button className={linkBoxLinkClassName} data-link-box-subject variant="secondary">
-          Email your Rep <ArrowUpRight />
-        </Button>
-      </HeroImage>
-    </DialogTrigger>
-    <DialogContent className={cn(dialogContentStyles, 'max-w-3xl')}>
-      <UserActionFormEmailCongresspersonDeeplinkWrapper />
-    </DialogContent>
-  </Dialog>
+  <UserActionFormEmailCongresspersonDialog>
+    <HeroImage>
+      <p>
+        FIT21 is a bipartisan crypto bill being considered for a vote in Congress. Ask your Rep to
+        support its clear, commonsense rules for crypto today.
+      </p>
+      <Button className={linkBoxLinkClassName} data-link-box-subject variant="secondary">
+        Email your Rep <ArrowUpRight />
+      </Button>
+    </HeroImage>
+  </UserActionFormEmailCongresspersonDialog>
 )
 
 export function HeroImageWrapper() {
