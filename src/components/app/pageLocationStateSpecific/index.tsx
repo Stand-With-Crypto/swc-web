@@ -18,7 +18,7 @@ import { SupportedLocale } from '@/intl/locales'
 import { US_LOCATION_PAGES_LIVE_KEY_DISTRICTS_MAP } from '@/utils/shared/locationSpecificPages'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/usStateDistrictUtils'
-import { getUSStateNameFromStateCode,USStateCode } from '@/utils/shared/usStateUtils'
+import { getUSStateNameFromStateCode, USStateCode } from '@/utils/shared/usStateUtils'
 import { cn } from '@/utils/web/cn'
 
 import { organizeStateSpecificPeople } from './organizeStateSpecificPeople'
