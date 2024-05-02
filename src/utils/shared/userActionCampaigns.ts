@@ -38,6 +38,7 @@ export enum UserActionVoterRegistrationCampaignName {
 }
 export enum UserActionLiveEventCampaignName {
   '2024_03_04_LA' = '2024_03_04_LA',
+  '2024_05_22_PIZZA_DAY' = '2024_05_22_PIZZA_DAY',
 }
 
 export const USER_ACTION_TO_CAMPAIGN_NAME_MAP = {

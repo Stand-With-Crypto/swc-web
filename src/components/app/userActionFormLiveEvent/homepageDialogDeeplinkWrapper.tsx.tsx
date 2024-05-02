@@ -24,6 +24,8 @@ export function UserActionFormLiveEventDeeplinkWrapper({
   const session = useSession()
   const { isLoggedIn, isLoading } = session
 
+  console.log(router, urls)
+
   useEffect(() => {
     trackDialogOpen({ open: true, analytics: ANALYTICS_NAME_USER_ACTION_FORM_LIVE_EVENT })
   }, [])
