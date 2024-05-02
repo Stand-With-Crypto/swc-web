@@ -18,8 +18,8 @@ import { getIntlUrls } from '@/utils/shared/urls'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 import { cn } from '@/utils/web/cn'
 
+import heroBackground from './heroBackground.png'
 import { organizePeople } from './organizePeople'
-// import heroBackground from './heroBackground.jpg'
 
 interface LocationUnitedStatesProps extends DTSI_UnitedStatesInformationQuery {
   locale: SupportedLocale
@@ -37,10 +37,11 @@ export function LocationUnitedStates({
   return (
     <div className="space-y-20">
       <DarkHeroSection
-      // style={{
-      //   backgroundImage: `url(${heroBackground.src})`,
-      //   backgroundSize: 'cover',
-      // }}
+        className="bg-black"
+        style={{
+          backgroundImage: `url(${heroBackground.src})`,
+          backgroundSize: 'cover',
+        }}
       >
         <div className="text-center">
           <PageTitle as="h1" className="mb-4" size="md">
