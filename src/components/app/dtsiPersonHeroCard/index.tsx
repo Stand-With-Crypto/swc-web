@@ -129,12 +129,10 @@ export function DTSIPersonHeroCard(props: Props) {
         </div>
 
         {/* Hidden on desktop */}
-        <div className="flex flex-col justify-between p-4 text-fontcolor sm:hidden">
+        <div className="flex flex-col justify-between p-4 text-sm text-fontcolor sm:hidden">
           <div>
             <div className="font-bold">{displayName}</div>
-            {subheaderString && (
-              <div className="mt-2 text-sm text-fontcolor-muted">{subheaderString}</div>
-            )}
+            {subheaderString && <div className="mt-2 text-fontcolor-muted">{subheaderString}</div>}
           </div>
           {footer !== undefined ? (
             footer
