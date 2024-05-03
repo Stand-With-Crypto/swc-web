@@ -101,8 +101,8 @@ export async function generateOgImage({ params }: { params: { dtsiSlug: string }
                   borderRadius: '50%',
                   overflow: 'hidden',
                   objectFit: 'cover',
-                  width: '200px',
-                  height: '200px',
+                  width: '300px',
+                  height: '300px',
                 }}
               />
               <img
@@ -112,7 +112,7 @@ export async function generateOgImage({ params }: { params: { dtsiSlug: string }
                   position: 'absolute',
                   bottom: 0,
                   right: 0,
-                  width: '60px',
+                  width: '90px',
                 }}
               />
             </div>
@@ -125,8 +125,8 @@ export async function generateOgImage({ params }: { params: { dtsiSlug: string }
                   backgroundColor: 'white',
                   overflow: 'hidden',
                   objectFit: 'cover',
-                  width: '200px',
-                  height: '200px',
+                  width: '300px',
+                  height: '300px',
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}
@@ -151,17 +151,15 @@ export async function generateOgImage({ params }: { params: { dtsiSlug: string }
                   position: 'absolute',
                   bottom: 0,
                   right: 0,
-                  width: '60px',
+                  width: '90px',
                 }}
               />
             </div>
           )}
-          <div tw="flex-col text-xl mb-2 mt-8 flex text-gray-400 justify-center items-center">
-            <span tw="text-white mx-2 text-[40px] leading-[48px] pb-4">
-              {dtsiPersonFullName(person)}
-            </span>
+          <div tw="flex-col text-xl mb-2 mt-8 flex justify-center items-center">
+            <span tw="text-white mx-2 text-6xl pb-4">{dtsiPersonFullName(person)}</span>
             <br />
-            {scoreLanguage}
+            <span tw="text-4xl text-gray-400">{scoreLanguage}</span>
           </div>
         </div>
         <div tw="text-gray-400 pt-9">standwithcrypto.org</div>
