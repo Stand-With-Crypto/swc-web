@@ -3,10 +3,14 @@
 it('action - call your congressperson', () => {
   cy.visit('/')
 
-  cy.contains('Call your Congressperson').click()
-  cy.get('[role="dialog"]')
+  // validate CTA button
+  cy.contains('div', 'Call your congressperson').as('ctaButton')
+  cy.get('@ctaButton').scrollIntoView().should('be.visible')
+  cy.get('@ctaButton').click()
 
-  cy.get('button[name="Continue"]').click()
+  // validate modal
+  cy.get('[role="dialog"]').should('be.visible')
+  cy.contains('button', 'Continue').should('be.visible').click()
 
   // validate error messages display
   cy.selectFromComboBox({
@@ -26,13 +30,13 @@ it('action - call your congressperson', () => {
     trigger: cy.get('input[placeholder="Your full address"]'),
     searchText: '350 Fifth Avenue New York, NY 10118',
   })
-  cy.get('button[name="Continue"]').click()
+  cy.contains('button', 'Continue').should('be.visible').click()
 
   //
   cy.contains('Your representative is Zola Feil Sr')
-  cy.get('button[name="Call"]').click()
+  cy.contains('button', 'Call').click()
 
-  cy.get('button[name="Call complete"]').click()
+  cy.contains('button', 'Call complete').click()
 
   // waiting for Inngest to consume job
   cy.contains('Nice work!')
