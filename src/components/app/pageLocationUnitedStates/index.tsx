@@ -10,6 +10,7 @@ import { MaybeDonateButton } from '@/components/app/pageEndorsedCandidates/dtsiP
 import { UserAddressVoterGuideInput } from '@/components/app/pageLocationUnitedStates/userAddressVoterGuideInput'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
 import { Button } from '@/components/ui/button'
+import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
@@ -27,18 +28,22 @@ interface LocationUnitedStatesProps extends DTSI_UnitedStatesInformationQuery {
   countAdvocates: number
 }
 
-export function LocationUnitedStates({ locale, ...queryData }: LocationUnitedStatesProps) {
+export function LocationUnitedStates({
+  locale,
+  countAdvocates,
+  ...queryData
+}: LocationUnitedStatesProps) {
   const { endorsed } = queryData
   const groups = organizePeople(queryData)
   const urls = getIntlUrls(locale)
   return (
     <div className="space-y-20">
       <DarkHeroSection>
-        <div className="text-center">
-          <PageTitle as="h1" className="mb-4" size="md">
+        <div className="space-y-6 text-center">
+          <PageTitle as="h1" size="md">
             Key Races in the United States
           </PageTitle>
-          <h3 className="mt-4 space-y-4 font-mono text-xl font-light">
+          <h2 className="space-y-4 font-light text-muted lg:space-y-1">
             <p>
               <Balancer>
                 2024 will be a monumental election year and Congress holds the power to shape the
@@ -52,6 +57,9 @@ export function LocationUnitedStates({ locale, ...queryData }: LocationUnitedSta
                 to endorse the candidates below.
               </Balancer>
             </p>
+          </h2>
+          <h3 className="text-xl font-bold">
+            <FormattedNumber amount={countAdvocates} locale={locale} /> advocates in the U.S.
           </h3>
           <UserActionFormVoterRegistrationDialog>
             <Button className="mt-6 w-full max-w-xs" variant="secondary">
