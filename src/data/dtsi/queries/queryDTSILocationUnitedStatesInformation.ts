@@ -22,6 +22,7 @@ export const query = /* GraphQL */ `
     ) {
       ...PersonCard
       stanceCount(verificationStatusIn: APPROVED)
+      donationUrl
       roles {
         id
         primaryDistrict
@@ -39,6 +40,7 @@ export const query = /* GraphQL */ `
     endorsed: people(limit: 20, offset: 0, slugIn: $endorsedDTSISlugs) {
       ...PersonCard
       stanceCount(verificationStatusIn: APPROVED)
+      donationUrl
       roles {
         id
         primaryDistrict
@@ -56,6 +58,7 @@ export const query = /* GraphQL */ `
     keySenateRaces: people(limit: 100, offset: 0, personRoleGroupingOr: [RUNNING_FOR_US_SENATE]) {
       ...PersonCard
       stanceCount(verificationStatusIn: APPROVED)
+      donationUrl
       roles {
         id
         primaryDistrict

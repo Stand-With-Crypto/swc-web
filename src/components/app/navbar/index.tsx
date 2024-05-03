@@ -110,9 +110,9 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
                 )
               })}
             </div>
-            {/* <Button asChild className="hidden lg:flex" variant="primary-cta-outline">
-              <InternalLink href={urls.locationUnitedStates()}>Races</InternalLink>
-            </Button> */}
+            <Button asChild className="hidden lg:flex" variant="primary-cta-outline">
+              <InternalLink href={urls.locationUnitedStates()}>Elections</InternalLink>
+            </Button>
 
             <div className="hidden lg:flex">{loginButton}</div>
           </div>
@@ -135,9 +135,9 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
                   </Button>
                 )
               })}
-              {/* <Button asChild className="mt-4" variant="primary-cta-outline">
-                <InternalLink href={urls.locationUnitedStates()}>Races</InternalLink>
-              </Button> */}
+              <Button asChild className="mt-4" variant="primary-cta-outline">
+                <InternalLink href={urls.locationUnitedStates()}>Elections</InternalLink>
+              </Button>
               <div className="mt-4">{loginButton}</div>
             </div>
           </DrawerContent>

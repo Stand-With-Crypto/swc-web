@@ -1,13 +1,15 @@
+import Balancer from 'react-wrap-balancer'
+
 import { ContentSection } from '@/components/app/ContentSection'
 import { DarkHeroSection } from '@/components/app/darkHeroSection'
-import { DTSIPersonHeroCard, DTSIPersonHeroCardFooter } from '@/components/app/dtsiPersonHeroCard'
+import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
 import { DTSIPersonHeroCardRow } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardRow'
 import { DTSIPersonHeroCardSection } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardSection'
 import { PACFooter } from '@/components/app/pacFooter'
+import { MaybeDonateButton } from '@/components/app/pageEndorsedCandidates/dtsiPersonHeroCardDonateButton'
 import { UserAddressVoterGuideInput } from '@/components/app/pageLocationUnitedStates/userAddressVoterGuideInput'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
 import { Button } from '@/components/ui/button'
-import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
@@ -18,7 +20,6 @@ import { getIntlUrls } from '@/utils/shared/urls'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 import { cn } from '@/utils/web/cn'
 
-import heroBackground from './heroBackground.png'
 import { organizePeople } from './organizePeople'
 
 interface LocationUnitedStatesProps extends DTSI_UnitedStatesInformationQuery {
@@ -26,29 +27,31 @@ interface LocationUnitedStatesProps extends DTSI_UnitedStatesInformationQuery {
   countAdvocates: number
 }
 
-export function LocationUnitedStates({
-  locale,
-  countAdvocates,
-  ...queryData
-}: LocationUnitedStatesProps) {
+export function LocationUnitedStates({ locale, ...queryData }: LocationUnitedStatesProps) {
   const { endorsed } = queryData
   const groups = organizePeople(queryData)
   const urls = getIntlUrls(locale)
   return (
     <div className="space-y-20">
-      <DarkHeroSection
-        className="bg-black"
-        style={{
-          backgroundImage: `url(${heroBackground.src})`,
-          backgroundSize: 'cover',
-        }}
-      >
+      <DarkHeroSection>
         <div className="text-center">
           <PageTitle as="h1" className="mb-4" size="md">
             Key Races in the United States
           </PageTitle>
-          <h3 className="mt-4 font-mono text-xl font-light">
-            <FormattedNumber amount={countAdvocates} locale={locale} /> crypto advocates
+          <h3 className="mt-4 space-y-4 font-mono text-xl font-light">
+            <p>
+              <Balancer>
+                2024 will be a monumental election year and Congress holds the power to shape the
+                future of crypto in the U.S.
+              </Balancer>
+            </p>
+
+            <p>
+              <Balancer>
+                Stand With Crypto is committed to supporting pro-crypto candidates and we are proud
+                to endorse the candidates below.
+              </Balancer>
+            </p>
           </h3>
           <UserActionFormVoterRegistrationDialog>
             <Button className="mt-6 w-full max-w-xs" variant="secondary">
@@ -61,18 +64,15 @@ export function LocationUnitedStates({
         {!!endorsed.length && (
           <ContentSection
             subtitle="These are the most pro-crypto candidates running for office across America."
-            title={<>SWC Endorsed Candidates</>}
+            title={<>Stand With Crypto PAC 2024 House and Senate Endorsements</>}
           >
             <DTSIPersonHeroCardRow>
               {endorsed.map(person => (
                 <DTSIPersonHeroCard
                   footer={
-                    <DTSIPersonHeroCardFooter
-                      className="max-sm:rounded-full max-sm:px-5 max-sm:py-2"
-                      isRecommended={true}
-                    >
-                      SWC Endorsed
-                    </DTSIPersonHeroCardFooter>
+                    person.donationUrl ? (
+                      <MaybeDonateButton donationUrl={person.donationUrl} />
+                    ) : null
                   }
                   key={person.id}
                   locale={locale}
