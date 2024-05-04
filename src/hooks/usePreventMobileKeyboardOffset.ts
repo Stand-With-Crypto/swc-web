@@ -1,3 +1,4 @@
+'use client'
 import * as React from 'react'
 
 import { useIsMobile } from '@/hooks/useIsMobile'
@@ -5,7 +6,8 @@ import { useIsMobile } from '@/hooks/useIsMobile'
 export function usePreventMobileKeyboardOffset(enabled: boolean) {
   const isMobile = useIsMobile()
 
-  const scrollHeight = sessionStorage.getItem('scrollHeight')
+  const scrollHeight =
+    typeof sessionStorage !== 'undefined' ? sessionStorage.getItem('scrollHeight') : null
 
   const handleKeyboardOffset = React.useCallback(() => {
     if (!isMobile) return
