@@ -52,22 +52,28 @@ interface DialogContentProps
 const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
   DialogContentProps
->(({ className, children, padding = true, closeClassName = '', ...props }, ref) => (
-  <DialogPortal>
-    <DialogOverlay />
-    <DialogPrimitive.Content
-      className={cn(dialogContentStyles, padding && dialogContentPaddingStyles, className)}
-      ref={ref}
-      {...props}
-    >
-      {children}
-      <DialogPrimitive.Close className={cn(dialogCloseStyles, closeClassName)} tabIndex={-1}>
-        <X size={20} />
-        <span className="sr-only">Close</span>
-      </DialogPrimitive.Close>
-    </DialogPrimitive.Content>
-  </DialogPortal>
-))
+>(
+  (
+    { className, children, padding = true, onOpenAutoFocus, closeClassName = '', ...props },
+    ref,
+  ) => (
+    <DialogPortal>
+      <DialogOverlay />
+      <DialogPrimitive.Content
+        className={cn(dialogContentStyles, padding && dialogContentPaddingStyles, className)}
+        onOpenAutoFocus={onOpenAutoFocus ? e => onOpenAutoFocus(e) : e => e.preventDefault()}
+        ref={ref}
+        {...props}
+      >
+        {children}
+        <DialogPrimitive.Close className={cn(dialogCloseStyles, closeClassName)} tabIndex={-1}>
+          <X size={20} />
+          <span className="sr-only">Close</span>
+        </DialogPrimitive.Close>
+      </DialogPrimitive.Content>
+    </DialogPortal>
+  ),
+)
 DialogContent.displayName = DialogPrimitive.Content.displayName
 
 const DialogHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
