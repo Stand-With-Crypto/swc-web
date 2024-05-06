@@ -17,23 +17,23 @@ it('action - call your congressperson', () => {
     trigger: cy.get('input[placeholder="Your full address"]'),
     searchText: 'berlin germany',
   })
-  cy.contains('Please enter a US-based address.')
+  cy.contains('Please enter a US-based address.').should('be.visible')
 
   cy.selectFromComboBox({
     trigger: cy.get('input[placeholder="Your full address"]'),
     searchText: 'new york',
   })
-  cy.contains('Please enter a specific address that includes street-level information')
+  cy.contains('Please enter a specific address that includes street-level information').should(
+    'be.visible',
+  )
 
   // validate success
   cy.selectFromComboBox({
     trigger: cy.get('input[placeholder="Your full address"]'),
     searchText: '350 Fifth Avenue New York, NY 10118',
   })
-  cy.contains('button', 'Continue').should('be.visible').click()
 
-  //
-  cy.contains('Your representative is Zola Feil Sr')
+  cy.contains(/Your representative is \w+/gim).should('be.visible')
   cy.contains('button', 'Call').click()
 
   cy.contains('button', 'Call complete').click()
