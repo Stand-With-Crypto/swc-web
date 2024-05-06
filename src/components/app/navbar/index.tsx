@@ -26,24 +26,20 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
       text: 'Politicians',
     },
     {
+      href: urls.endorsedCandidates(),
+      text: 'Endorsements',
+    },
+    {
       href: urls.about(),
       text: 'Mission',
     },
     {
-      href: urls.leaderboard(),
-      text: 'Community',
-    },
-    {
-      href: urls.resources(),
-      text: 'Resources',
+      href: urls.partners(),
+      text: 'Partners',
     },
     {
       href: urls.donate(),
       text: 'Donate',
-    },
-    {
-      href: urls.partners(),
-      text: 'Partners',
     },
   ]
   const maybeCloseAfterNavigating = useCallback(() => {

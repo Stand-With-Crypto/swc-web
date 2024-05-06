@@ -37,7 +37,7 @@ export function PageEndorsedCandidates({ people, locale }: LocationStateSpecific
         </div>
       </DarkHeroSection>
 
-      <DTSIPersonHeroCardRow>
+      <DTSIPersonHeroCardRow className="mx-auto max-w-4xl xl:max-w-5xl">
         {people.map(person => (
           <DTSIPersonHeroCard
             footer={
