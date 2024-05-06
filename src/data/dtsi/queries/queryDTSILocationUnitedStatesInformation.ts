@@ -8,13 +8,10 @@ import {
   DTSI_UnitedStatesInformationQueryVariables,
 } from '@/data/dtsi/generated'
 import { NEXT_SESSION_OF_CONGRESS } from '@/utils/dtsi/dtsiPersonRoleUtils'
-import {
-  ENDORSED_DTSI_PERSON_SLUGS,
-  ORDERED_KEY_SENATE_RACE_STATES,
-} from '@/utils/shared/locationSpecificPages'
+import { ORDERED_KEY_SENATE_RACE_STATES } from '@/utils/shared/locationSpecificPages'
 
 export const query = /* GraphQL */ `
-  query UnitedStatesInformation($endorsedDTSISlugs: [String!]!) {
+  query UnitedStatesInformation {
     runningForPresident: people(
       limit: 10
       offset: 0
@@ -22,25 +19,6 @@ export const query = /* GraphQL */ `
     ) {
       ...PersonCard
       stanceCount(verificationStatusIn: APPROVED)
-      donationUrl
-      roles {
-        id
-        primaryDistrict
-        primaryState
-        roleCategory
-        status
-        dateStart
-        group {
-          id
-          category
-          groupInstance
-        }
-      }
-    }
-    endorsed: people(limit: 20, offset: 0, slugIn: $endorsedDTSISlugs) {
-      ...PersonCard
-      stanceCount(verificationStatusIn: APPROVED)
-      donationUrl
       roles {
         id
         primaryDistrict
@@ -58,7 +36,6 @@ export const query = /* GraphQL */ `
     keySenateRaces: people(limit: 100, offset: 0, personRoleGroupingOr: [RUNNING_FOR_US_SENATE]) {
       ...PersonCard
       stanceCount(verificationStatusIn: APPROVED)
-      donationUrl
       roles {
         id
         primaryDistrict
@@ -81,7 +58,7 @@ export const queryDTSILocationUnitedStatesInformation = async () => {
   const results = await fetchDTSI<
     DTSI_UnitedStatesInformationQuery,
     DTSI_UnitedStatesInformationQueryVariables
-  >(query, { endorsedDTSISlugs: ENDORSED_DTSI_PERSON_SLUGS })
+  >(query)
 
   return {
     ...results,

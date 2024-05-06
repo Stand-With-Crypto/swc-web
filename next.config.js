@@ -243,8 +243,8 @@ const nextConfig = {
         permanent: false,
       },
       {
-        source: '/elections/state',
-        destination: '/elections',
+        source: '/races/state',
+        destination: '/races',
         permanent: false,
       },
     ]

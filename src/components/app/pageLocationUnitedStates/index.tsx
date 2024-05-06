@@ -2,11 +2,8 @@ import Balancer from 'react-wrap-balancer'
 
 import { ContentSection } from '@/components/app/ContentSection'
 import { DarkHeroSection } from '@/components/app/darkHeroSection'
-import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
-import { DTSIPersonHeroCardRow } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardRow'
 import { DTSIPersonHeroCardSection } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardSection'
 import { PACFooter } from '@/components/app/pacFooter'
-import { MaybeDonateButton } from '@/components/app/pageEndorsedCandidates/dtsiPersonHeroCardDonateButton'
 import { UserAddressVoterGuideInput } from '@/components/app/pageLocationUnitedStates/userAddressVoterGuideInput'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
 import { Button } from '@/components/ui/button'
@@ -33,7 +30,6 @@ export function LocationUnitedStates({
   countAdvocates,
   ...queryData
 }: LocationUnitedStatesProps) {
-  const { endorsed } = queryData
   const groups = organizePeople(queryData)
   const urls = getIntlUrls(locale)
   return (
@@ -50,13 +46,6 @@ export function LocationUnitedStates({
                 future of crypto in the U.S.
               </Balancer>
             </p>
-
-            <p>
-              <Balancer>
-                Stand With Crypto is committed to supporting pro-crypto candidates and we are proud
-                to endorse the candidates below.
-              </Balancer>
-            </p>
           </h2>
           <h3 className="text-xl font-bold">
             <FormattedNumber amount={countAdvocates} locale={locale} /> advocates in the U.S.
@@ -69,33 +58,6 @@ export function LocationUnitedStates({
         </div>
       </DarkHeroSection>
       <div className="space-y-20">
-        {!!endorsed.length && (
-          <ContentSection
-            subtitle="These are the most pro-crypto candidates running for office across America."
-            title={<>Stand With Crypto PAC 2024 House and Senate Endorsements</>}
-          >
-            <DTSIPersonHeroCardRow>
-              {endorsed.map(person => (
-                <DTSIPersonHeroCard
-                  footer={
-                    person.donationUrl ? (
-                      <MaybeDonateButton donationUrl={person.donationUrl} />
-                    ) : null
-                  }
-                  key={person.id}
-                  locale={locale}
-                  person={person}
-                  subheader={'role'}
-                />
-              ))}
-            </DTSIPersonHeroCardRow>
-            <div className="container mt-8 text-center xl:mt-14">
-              <Button asChild className="max-sm:w-full">
-                <InternalLink href={urls.endorsedCandidates()}>View Endorsements</InternalLink>
-              </Button>
-            </div>
-          </ContentSection>
-        )}
         {!!groups.president.length && (
           <DTSIPersonHeroCardSection
             cta={
