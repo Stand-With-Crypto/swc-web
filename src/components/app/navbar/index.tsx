@@ -20,7 +20,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
   const dialogProps = useDialog({ analytics: 'Mobile Navbar' })
   const urls = getIntlUrls(locale)
   const leftLinks = [
-    { href: urls.locationUnitedStates(), text: 'Races' },
+    { href: urls.locationUnitedStates(), text: 'Key Races' },
     {
       href: urls.politiciansHomepage(),
       text: 'Politicians',
