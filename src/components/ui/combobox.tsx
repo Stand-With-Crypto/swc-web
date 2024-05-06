@@ -52,6 +52,7 @@ export function Combobox<T>({
   setOpen,
   ...inputProps
 }: ComboBoxProps<T>) {
+  usePreventMobileKeyboardOffset(open)
   const parentRef = React.useRef<HTMLButtonElement>(null)
   const isMobile = useIsMobile({ defaultState: false })
   const size = useResizeObserver(parentRef)
@@ -134,8 +135,6 @@ function StatusList<T>({
   | 'getOptionKey'
   | 'isLoading'
 >) {
-  usePreventMobileKeyboardOffset()
-
   return (
     <Command shouldFilter={false}>
       <CommandInput

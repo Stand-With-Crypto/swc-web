@@ -3,10 +3,6 @@ import * as React from 'react'
 
 import { useIsMobile } from '@/hooks/useIsMobile'
 
-// This constant is the difference between the scrollY position saved and the actual height of the page
-// If we use just the scrollY position saved, the page will actually scroll more than it should.
-const DIFF_SCROLL_Y_TO_ACTUAL_HEIGHT = 148
-
 function getScrollHeight() {
   if (typeof sessionStorage === 'undefined') return null
   return sessionStorage.getItem('scrollHeight')
@@ -14,7 +10,6 @@ function getScrollHeight() {
 
 function setScrollHeight() {
   sessionStorage.setItem('scrollHeight', String(window.scrollY))
-  window.scrollTo(0, 0)
   return
 }
 
@@ -22,7 +17,7 @@ function resetScrollPosition() {
   const scrollHeight = getScrollHeight()
   if (!scrollHeight) return
 
-  window.scrollTo(0, Number(scrollHeight) - DIFF_SCROLL_Y_TO_ACTUAL_HEIGHT)
+  window.scrollTo(0, Number(scrollHeight))
   sessionStorage.removeItem('scrollHeight')
   return
 }
@@ -41,14 +36,17 @@ function resetScrollPosition() {
 // References:
 // https://stackoverflow.com/questions/13820088/how-to-prevent-keyboard-push-up-webview-at-ios-app-using-phonegap
 // https://stackoverflow.com/questions/38619762/how-to-prevent-ios-keyboard-from-pushing-the-view-off-screen-with-css-or-js
-export function usePreventMobileKeyboardOffset() {
+// https://blog.opendigerati.com/the-eccentric-ways-of-ios-safari-with-the-keyboard-b5aa3f34228d
+// https://stackoverflow.com/questions/56351216/ios-safari-unwanted-scroll-when-keyboard-is-opened-and-body-scroll-is-disabled
+export function usePreventMobileKeyboardOffset(shouldScrollTop: boolean) {
   const isMobile = useIsMobile()
 
   React.useEffect(() => {
     if (isMobile) setScrollHeight()
+    if (shouldScrollTop) window.scrollTo(0, 0)
 
     return () => {
       resetScrollPosition()
     }
-  }, [isMobile])
+  }, [isMobile, shouldScrollTop])
 }
