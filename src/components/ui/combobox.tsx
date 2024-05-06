@@ -55,7 +55,6 @@ export function Combobox<T>({
   const parentRef = React.useRef<HTMLButtonElement>(null)
   const isMobile = useIsMobile({ defaultState: false })
   const size = useResizeObserver(parentRef)
-  usePreventMobileKeyboardOffset(open)
   const wrappedAnalytics = React.useCallback(
     (newOpen: boolean) =>
       trackPrimitiveComponentAnalytics(
@@ -135,6 +134,8 @@ function StatusList<T>({
   | 'getOptionKey'
   | 'isLoading'
 >) {
+  usePreventMobileKeyboardOffset()
+
   return (
     <Command shouldFilter={false}>
       <CommandInput
