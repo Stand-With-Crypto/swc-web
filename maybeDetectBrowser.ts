@@ -40,7 +40,7 @@ export function getIsSupportedBrowser(data: Bowser.Parser.ParsedResult | null) {
       if (!version) {
         return true
       }
-      return version > 106
+      return version > 90
     }
     case 'Samsung Internet for Android': {
       const version = maybeParseNumber(data.browser.version)
