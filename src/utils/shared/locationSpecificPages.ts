@@ -22,6 +22,7 @@ export const ENDORSED_DTSI_PERSON_SLUGS = [
   'adam---schiff',
   'jim---banks',
   'jim--justice',
+  'eduardo---morales',
 ]
 
 export const ORDERED_KEY_SENATE_RACE_STATES: USStateCode[] = [
