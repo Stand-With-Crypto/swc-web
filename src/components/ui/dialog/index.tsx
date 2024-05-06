@@ -12,6 +12,7 @@ import {
   dialogFooterCTAStyles,
   dialogOverlayStyles,
 } from '@/components/ui/dialog/styles'
+import { useIsMobile } from '@/hooks/useIsMobile'
 import { cn } from '@/utils/web/cn'
 import { PrimitiveComponentAnalytics } from '@/utils/web/primitiveComponentAnalytics'
 
@@ -48,31 +49,43 @@ interface DialogContentProps
   extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> {
   padding?: boolean
   closeClassName?: string
+  forceAutoFocus?: boolean
 }
 const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
   DialogContentProps
 >(
   (
-    { className, children, padding = true, onOpenAutoFocus, closeClassName = '', ...props },
+    {
+      className,
+      children,
+      padding = true,
+      forceAutoFocus = false,
+      onOpenAutoFocus,
+      closeClassName = '',
+      ...props
+    },
     ref,
-  ) => (
-    <DialogPortal>
-      <DialogOverlay />
-      <DialogPrimitive.Content
-        className={cn(dialogContentStyles, padding && dialogContentPaddingStyles, className)}
-        onOpenAutoFocus={onOpenAutoFocus ? e => onOpenAutoFocus(e) : e => e.preventDefault()}
-        ref={ref}
-        {...props}
-      >
-        {children}
-        <DialogPrimitive.Close className={cn(dialogCloseStyles, closeClassName)} tabIndex={-1}>
-          <X size={20} />
-          <span className="sr-only">Close</span>
-        </DialogPrimitive.Close>
-      </DialogPrimitive.Content>
-    </DialogPortal>
-  ),
+  ) => {
+    const isMobile = useIsMobile()
+    return (
+      <DialogPortal>
+        <DialogOverlay />
+        <DialogPrimitive.Content
+          className={cn(dialogContentStyles, padding && dialogContentPaddingStyles, className)}
+          onOpenAutoFocus={isMobile && !forceAutoFocus ? e => e.preventDefault() : onOpenAutoFocus}
+          ref={ref}
+          {...props}
+        >
+          {children}
+          <DialogPrimitive.Close className={cn(dialogCloseStyles, closeClassName)} tabIndex={-1}>
+            <X size={20} />
+            <span className="sr-only">Close</span>
+          </DialogPrimitive.Close>
+        </DialogPrimitive.Content>
+      </DialogPortal>
+    )
+  },
 )
 DialogContent.displayName = DialogPrimitive.Content.displayName
 
