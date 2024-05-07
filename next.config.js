@@ -7,6 +7,7 @@ const isDev = process.env.NEXT_PUBLIC_ENVIRONMENT === 'local'
 
 const contentSecurityPolicy = {
   'default-src': ["'self'", 'blob:'],
+  'media-src': ["'self'", 'blob:', 'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com'],
   'style-src': [
     "'self'",
     "'unsafe-inline'", // NextJS requires 'unsafe-inline'
