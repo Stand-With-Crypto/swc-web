@@ -665,7 +665,12 @@ async function triggerPostLoginUserActionSteps({
       },
     })
     log(`triggerPostLoginUserActionSteps: opt in user action created`)
-    await claimNFT(optInUserAction, userCryptoAddress)
+
+    const signUpFlowExperimentVariant =
+      localUser?.persisted?.experiments?.gh02_SWCSignUpFlowExperiment
+    if (signUpFlowExperimentVariant === 'control')
+      await claimNFT(optInUserAction, userCryptoAddress)
+
     analytics.trackUserActionCreated({
       actionType: UserActionType.OPT_IN,
       campaignName: UserActionOptInCampaignName.DEFAULT,

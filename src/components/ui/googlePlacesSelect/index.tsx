@@ -11,13 +11,20 @@ import { GooglePlaceAutocompletePrediction } from '@/utils/web/googlePlaceUtils'
 export type GooglePlacesSelectProps = {
   value: GooglePlaceAutocompletePrediction | null
   onChange: (val: GooglePlaceAutocompletePrediction | null) => void
+  showIcon?: boolean
 } & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange' | 'type'>
 
 export const GooglePlacesSelect = React.forwardRef<
   React.ElementRef<'input'>,
   GooglePlacesSelectProps
 >((props, ref) => {
-  const { value: propsValue, onChange: propsOnChange, className, ...inputProps } = props
+  const {
+    value: propsValue,
+    onChange: propsOnChange,
+    className,
+    showIcon = true,
+    ...inputProps
+  } = props
   const [open, setOpen] = React.useState(false)
   const {
     ready,
@@ -46,12 +53,13 @@ export const GooglePlacesSelect = React.forwardRef<
       formatPopoverTrigger={triggerProps => (
         <InputWithIcons
           className={cn(
-            triggerProps.value || 'text-gray-500',
+            'text-muted-foreground',
+            triggerProps.value && 'text-gray-500',
             'h-auto cursor-pointer whitespace-normal',
             triggerProps.open && 'outline-none ring-2 ring-ring ring-offset-2',
             className,
           )}
-          leftIcon={<MapPin className="h-4 w-4 text-gray-500" />}
+          leftIcon={showIcon ? <MapPin className="h-4 w-4 text-gray-500" /> : undefined}
           placeholder="select a location"
           ref={ref}
           value={triggerProps.value?.description || inputProps.placeholder || 'select a location'}

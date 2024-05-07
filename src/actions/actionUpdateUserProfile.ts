@@ -5,6 +5,8 @@ import {
   Address,
   CapitolCanaryInstance,
   User,
+  UserActionOptInType,
+  UserActionType,
   UserCryptoAddress,
   UserEmailAddress,
   UserEmailAddressSource,
@@ -22,12 +24,15 @@ import {
   getCapitolCanaryCampaignID,
 } from '@/utils/server/capitolCanary/campaigns'
 import { UpsertAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
+import { claimNFT } from '@/utils/server/nft/claimNFT'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
+import { getLogger } from '@/utils/shared/logger'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
+import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
 import { userFullName } from '@/utils/shared/userFullName'
 import { zodUpdateUserProfileFormAction } from '@/validation/forms/zodUpdateUserProfile/zodUpdateUserProfileFormAction'
 
@@ -130,7 +135,10 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
   })
 
   await handleCapitolCanaryAdvocateUpsert(updatedUser, primaryUserEmailAddress, user)
-
+  await claimNFTAfterUpdateUserProfile({
+    id: user.id,
+    primaryUserCryptoAddress: updatedUser.primaryUserCryptoAddress,
+  })
   return {
     user: {
       ...getClientUserWithENSData(
@@ -217,4 +225,36 @@ async function handleCapitolCanaryAdvocateUpsert(
       data: payload,
     })
   }
+}
+const logger = getLogger('actionUpdateUserProfile')
+const getLog = (address: string) => (message: string) =>
+  logger.info(`address ${address}: ${message}`)
+
+async function claimNFTAfterUpdateUserProfile(user: {
+  id: string
+  primaryUserCryptoAddress: UserCryptoAddress | null
+}) {
+  if (!user.primaryUserCryptoAddress) {
+    return
+  }
+  const log = getLog(user.primaryUserCryptoAddress.cryptoAddress)
+  const optInUserAction = await prismaClient.userAction.findFirst({
+    where: {
+      userId: user.id,
+      campaignName: UserActionOptInCampaignName.DEFAULT,
+      actionType: UserActionType.OPT_IN,
+      userActionOptIn: {
+        optInType: UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER,
+      },
+    },
+  })
+
+  if (!optInUserAction) {
+    log(`claimNFTAfterUpdateUserProfile: opt in user action don't exist`)
+    return
+  }
+
+  if (optInUserAction.nftMintId !== null) return
+
+  await claimNFT(optInUserAction, user.primaryUserCryptoAddress)
 }
