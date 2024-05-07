@@ -35,6 +35,7 @@ import { PageTitle } from '@/components/ui/pageTitleText'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Textarea } from '@/components/ui/textarea'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
+import { useIsDesktop } from '@/hooks/useIsDesktop'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { UserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns'
 import {
@@ -106,6 +107,7 @@ export function UserActionFormEmailCongressperson({
   initialValues?: FormFields
   politicianCategory?: YourPoliticianCategory
 }) {
+  const isDesktop = useIsDesktop()
   const router = useRouter()
   const urls = useIntlUrls()
   const hasModifiedMessage = useRef(false)
@@ -124,8 +126,8 @@ export function UserActionFormEmailCongressperson({
   })
 
   React.useEffect(() => {
-    form.setFocus('firstName')
-  }, [form])
+    if (isDesktop) form.setFocus('firstName')
+  }, [form, isDesktop])
 
   return (
     <Form {...form}>
