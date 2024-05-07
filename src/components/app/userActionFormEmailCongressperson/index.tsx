@@ -35,6 +35,7 @@ import { PageTitle } from '@/components/ui/pageTitleText'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Textarea } from '@/components/ui/textarea'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
+import { useIsDesktop } from '@/hooks/useIsDesktop'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { UserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns'
 import {
@@ -106,6 +107,7 @@ export function UserActionFormEmailCongressperson({
   initialValues?: FormFields
   politicianCategory?: YourPoliticianCategory
 }) {
+  const isDesktop = useIsDesktop()
   const router = useRouter()
   const urls = useIntlUrls()
   const hasModifiedMessage = useRef(false)
@@ -124,13 +126,13 @@ export function UserActionFormEmailCongressperson({
   })
 
   React.useEffect(() => {
-    form.setFocus('firstName')
-  }, [form])
+    if (isDesktop) form.setFocus('firstName')
+  }, [form, isDesktop])
 
   return (
     <Form {...form}>
       <form
-        className="flex h-full min-h-[calc(100dvh-4px)] flex-col"
+        className="flex h-full flex-col"
         onSubmit={form.handleSubmit(async values => {
           const address = await convertGooglePlaceAutoPredictionToAddressSchema(
             values.address,
@@ -316,7 +318,7 @@ export function UserActionFormEmailCongressperson({
           </div>
         </ScrollArea>
         <div
-          className="z-10 mt-auto flex flex-1 flex-col items-center justify-end border border-t p-6 sm:flex-row md:px-12"
+          className="z-10 mt-auto flex flex-col items-center justify-end border border-t p-6 sm:flex-row md:px-12"
           style={{ boxShadow: 'rgba(0, 0, 0, 0.2) 0px 1px 6px 0px' }}
         >
           <Button

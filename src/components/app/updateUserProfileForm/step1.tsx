@@ -251,7 +251,7 @@ export function UpdateUserProfileForm({
           </Collapsible>
           <FormGeneralErrorMessage control={form.control} />
         </div>
-        <div className="!mt-auto flex justify-center gap-6">
+        <div className="flex justify-center gap-6 max-md:!mt-auto md:mt-4">
           <Button
             className="w-full md:w-1/2"
             disabled={form.formState.isSubmitting}
