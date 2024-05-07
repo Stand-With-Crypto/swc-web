@@ -38,6 +38,10 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
       text: 'Partners',
     },
     {
+      href: urls.resources(),
+      text: 'Resources',
+    },
+    {
       href: urls.donate(),
       text: 'Donate',
     },
