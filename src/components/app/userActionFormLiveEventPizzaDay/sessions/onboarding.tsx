@@ -1,18 +1,22 @@
-import { LIVE_EVENT_SLUG_NFT_METADATA } from '@/components/app/userActionFormLiveEventPizzaDay/constants'
+import {
+  LIVE_EVENT_SLUG_NFT_METADATA,
+  SectionNames,
+} from '@/components/app/userActionFormLiveEventPizzaDay/constants'
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { useIsMobile } from '@/hooks/useIsMobile'
+import { UseSectionsReturn } from '@/hooks/useSections'
 import { NFT_CLIENT_METADATA } from '@/utils/web/nft'
 
-export function OnboardingPizzaDayLiveEvent() {
+export function OnboardingPizzaDayLiveEvent({ goToSection }: UseSectionsReturn<SectionNames>) {
   const isMobile = useIsMobile()
   const nftImageMetadata =
     NFT_CLIENT_METADATA[LIVE_EVENT_SLUG_NFT_METADATA['2024_05_22_PIZZA_DAY']].image
   const nftImageOffset = !isMobile ? 200 : 0
 
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center pb-8">
       <NextImage
         alt={nftImageMetadata.alt}
         className="rounded-lg"
@@ -37,15 +41,15 @@ export function OnboardingPizzaDayLiveEvent() {
 
       <strong className="my-8">Here’s how to participate:</strong>
 
-      <div className="align-center flex justify-between gap-14">
-        <div className="mb-8 flex flex-col items-center gap-4">
+      <div className="align-center mb-16 flex flex-col justify-between gap-8 lg:mb-10 lg:flex-row lg:gap-14">
+        <div className="flex flex-col items-center gap-4">
           <strong className="flex h-12 w-12 items-center justify-center rounded-full bg-[#ECEEF1]">
             1
           </strong>
           <p>Join Stand With Crypto</p>
         </div>
 
-        <div className="mb-8 flex flex-col items-center gap-4">
+        <div className="flex flex-col items-center gap-4">
           <strong className="flex h-12 w-12 items-center justify-center rounded-full bg-[#ECEEF1]">
             2
           </strong>
@@ -60,9 +64,13 @@ export function OnboardingPizzaDayLiveEvent() {
         </div>
       </div>
 
-      <div className="mt-2">
-        <Button size="lg">Get started</Button>
-      </div>
+      <Button
+        className="mt-auto w-full md:w-1/2"
+        onClick={() => goToSection(SectionNames.PROFILE_INFO)}
+        size="lg"
+      >
+        Get started
+      </Button>
     </div>
   )
 }

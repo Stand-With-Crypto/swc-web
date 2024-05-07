@@ -4,21 +4,17 @@ import {
   ANALYTICS_NAME_USER_ACTION_FORM_LIVE_EVENT,
   SectionNames,
 } from '@/components/app/userActionFormLiveEventPizzaDay/constants'
-import { OnboardingPizzaDayLiveEvent } from '@/components/app/userActionFormLiveEventPizzaDay/onboarding'
+import { OnboardingPizzaDayLiveEvent } from '@/components/app/userActionFormLiveEventPizzaDay/sessions/onboarding'
+import { ProfileInfoWrapper } from '@/components/app/userActionFormLiveEventPizzaDay/sessions/profileInfoWrapper'
+import { TweetPizzaDayLiveEvent } from '@/components/app/userActionFormLiveEventPizzaDay/sessions/tweet'
 import { useSections } from '@/hooks/useSections'
-import { UserActionLiveEventCampaignName } from '@/utils/shared/userActionCampaigns'
 
 export type UserActionFormLiveEventProps = {
-  slug: UserActionLiveEventCampaignName
   onClose: () => void
   isLoggedIn: boolean
 }
 
-export function UserActionFormPizzaDayLiveEvent({
-  slug,
-  isLoggedIn,
-  onClose,
-}: UserActionFormLiveEventProps) {
+export function UserActionFormPizzaDayLiveEvent({ onClose }: UserActionFormLiveEventProps) {
   const sectionProps = useSections<SectionNames>({
     sections: Object.values(SectionNames),
     initialSectionId: SectionNames.ONBOARDING,
@@ -28,7 +24,11 @@ export function UserActionFormPizzaDayLiveEvent({
 
   switch (currentTab) {
     case SectionNames.ONBOARDING:
-      return <OnboardingPizzaDayLiveEvent />
+      return <OnboardingPizzaDayLiveEvent {...sectionProps} />
+    case SectionNames.PROFILE_INFO:
+      return <ProfileInfoWrapper {...sectionProps} />
+    case SectionNames.TWEET:
+      return <TweetPizzaDayLiveEvent {...sectionProps} />
     // case SectionNames.TWEET:
     // return <ClaimNft {...sectionProps} isLoggedIn={isLoggedIn} slug={slug} />
     // case SectionNames.SUCCESS:

@@ -10,6 +10,7 @@ import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { UserActionLiveEventCampaignName } from '@/utils/shared/userActionCampaigns'
+import { cn } from '@/utils/web/cn'
 
 export const revalidate = SECONDS_DURATION.SECOND * 30
 export const dynamic = 'error'
@@ -43,7 +44,7 @@ export default async function UserActionLiveEventDeepLink({ params }: Props) {
   if (slug === UserActionLiveEventCampaignName['2024_05_22_PIZZA_DAY']) {
     return (
       <HomepageDialogDeeplinkLayout pageParams={params}>
-        <div className={dialogContentPaddingStyles}>
+        <div className={cn(dialogContentPaddingStyles, 'max-md:h-full')}>
           <UserActionFormPizzaDayLiveEventDeeplinkWrapper />
         </div>
       </HomepageDialogDeeplinkLayout>

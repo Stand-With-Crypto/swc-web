@@ -55,6 +55,10 @@ const EVENT_DURATION: Record<UserActionLiveEventCampaignName, EventDuration> = {
     START_TIME: new Date('2024-03-04'),
     END_TIME: new Date('2024-03-06'),
   },
+  [UserActionLiveEventCampaignName['2024_05_22_PIZZA_DAY']]: {
+    START_TIME: new Date('2024-05-19'),
+    END_TIME: new Date('2024-05-22'),
+  },
 }
 
 async function _actionCreateUserActionLiveEvent(input: CreateActionLiveEventInput) {

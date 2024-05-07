@@ -5,12 +5,11 @@ import { useRouter } from 'next/navigation'
 
 import { UserActionFormPizzaDayLiveEvent } from '@/components/app/userActionFormLiveEventPizzaDay'
 import { ANALYTICS_NAME_USER_ACTION_FORM_LIVE_EVENT } from '@/components/app/userActionFormLiveEventPizzaDay/constants'
-import { UserActionFormLiveEventSkeleton } from '@/components/app/userActionFormLiveEventPizzaDay/skeleton'
+import { UserActionFormLiveEventSkeleton } from '@/components/app/userActionFormLiveEventPizzaDay/skeletons/dialogSkeleton'
 import { trackDialogOpen } from '@/components/ui/dialog/trackDialogOpen'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { usePreventOverscroll } from '@/hooks/usePreventOverscroll'
 import { useSession } from '@/hooks/useSession'
-import { UserActionLiveEventCampaignName } from '@/utils/shared/userActionCampaigns'
 
 export function UserActionFormPizzaDayLiveEventDeeplinkWrapper() {
   usePreventOverscroll()
@@ -32,7 +31,6 @@ export function UserActionFormPizzaDayLiveEventDeeplinkWrapper() {
     <UserActionFormPizzaDayLiveEvent
       isLoggedIn={isLoggedIn}
       onClose={() => router.replace(urls.home())}
-      slug={UserActionLiveEventCampaignName['2024_05_22_PIZZA_DAY']}
     />
   )
 }
