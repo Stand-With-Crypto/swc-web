@@ -1,4 +1,4 @@
-import { ReactNode, Suspense } from 'react'
+import { ReactNode } from 'react'
 import { ArrowUpRight } from 'lucide-react'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
@@ -21,13 +21,11 @@ interface HeroImageProps {
 const HeroImage = ({ children, className, fallback }: HeroImageProps) => {
   return (
     <LinkBox className="relative h-[320px] overflow-hidden md:rounded-xl lg:h-[400px]">
-      <Suspense fallback={fallback}>
-        <Video
-          className={cn('absolute left-0 top-0 h-full w-full object-cover')}
-          fallback={fallback}
-          fileName="public/heroImage.webm"
-        />
-      </Suspense>
+      <Video
+        className={cn('absolute left-0 top-0 h-full w-full object-cover')}
+        fallback={fallback}
+        src="https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/heroImage.mp4"
+      />
 
       <div
         className={cn(

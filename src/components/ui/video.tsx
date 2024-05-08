@@ -1,10 +1,6 @@
 import { ReactNode, VideoHTMLAttributes } from 'react'
-import { list } from '@vercel/blob'
 
 interface VideoProps extends VideoHTMLAttributes<HTMLVideoElement> {
-  fileName: string
-  type?: string
-
   /**
    * Fallback content to display if the browser does not support the video tag.
    */
@@ -13,19 +9,10 @@ interface VideoProps extends VideoHTMLAttributes<HTMLVideoElement> {
 }
 
 /**
- * `Video` is a component that fetches a video from the Vercel Blob Storage and renders it in a video tag.
- *
- * Needs to be wrapped in a `Suspense` component to handle loading states.
+ * `Video` is a component that renders a video element with the specified source and fallback content.
  */
-export async function Video(props: VideoProps) {
-  const { fileName, type = 'video/mp4', className, fallback, ...rest } = props
-
-  const { blobs } = await list({
-    prefix: fileName,
-    limit: 1,
-  })
-
-  const url = blobs?.[0]?.url || '' // TODO: fallback to a media file
+export function Video(props: VideoProps) {
+  const { src, className, fallback, ...rest } = props
 
   return (
     <video
@@ -40,7 +27,7 @@ export async function Video(props: VideoProps) {
       preload="auto"
       {...rest}
     >
-      <source src={url} type={type} />
+      <source src={src} type="video/mp4" />
 
       {fallback || <p>Your browser does not support the video tag.</p>}
     </video>
