@@ -73,8 +73,8 @@ Sentry.init({
   replaysOnErrorSampleRate: 1.0,
   ignoreErrors: [
     // `Can't find variable: bytecode`,
-    // 'ResizeObserver loop limit exceeded',
-    // 'ResizeObserver loop completed with undelivered notifications',
+    'ResizeObserver loop limit exceeded',
+    'ResizeObserver loop completed with undelivered notifications',
   ],
   beforeSend: (event, hint) => {
     // prevent local errors from triggering sentry

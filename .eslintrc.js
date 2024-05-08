@@ -67,6 +67,7 @@ module.exports = {
     'simple-import-sort/exports': 'warn',
     'import/first': 'warn',
     'import/newline-after-import': 'warn',
+    curly: ['error', 'multi-line'],
     'import/no-duplicates': 'error',
     'no-restricted-imports': [
       'error',

@@ -1,13 +1,15 @@
 import * as Sentry from '@sentry/nextjs'
+import { z } from 'zod'
 
 import { fetchReq } from '@/utils/shared/fetchReq'
-import { requiredEnv } from '@/utils/shared/requiredEnv'
+import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
 
 const COINBASE_COMMERCE_CREATE_CHARGE_URL = 'https://api.commerce.coinbase.com/charges'
 
-const COINBASE_COMMERCE_API_KEY = requiredEnv(
+const COINBASE_COMMERCE_API_KEY = requiredOutsideLocalEnv(
   process.env.COINBASE_COMMERCE_API_KEY,
   'process.env.COINBASE_COMMERCE_API_KEY',
+  'COINBASE COMMERCE API KEY to integrate with Coinbase Commerce API',
 )
 
 interface CreateChargeResponsePricing {
@@ -32,9 +34,31 @@ interface CreateChargeResponseTimeline {
   time: string
 }
 
+interface CreateChargeResponseTransferIntent {
+  call_data: CreateChargeResponseTransferIntentCallData
+  metadata: Record<string, string>
+}
+
+interface CreateChargeResponseTransferIntentCallData {
+  deadline: string
+  fee_amount: string
+  id: string
+  operator: string
+  prefix: string
+  recipient: string
+  recipent_amount: string
+  recipient_currency: string
+  refund_destination: string
+  signature: string
+}
+
 interface CreateChargeResponseWeb3Data {
   contract_addresses: Record<string, string>
   settlement_currency_addresses: Record<string, string>
+  subsidized_payments_chain_to_tokens: Record<string, string>
+  failure_events: Record<string, string>[]
+  success_events: Record<string, string>[]
+  transfer_intent?: CreateChargeResponseTransferIntent
 }
 
 interface CreateChargeResponseData {
@@ -68,20 +92,34 @@ interface CreateChargeRequest {
   buyer_locale?: string
   cancel_url?: string
   checkout_id?: string
+  description?: string
   local_price?: {
     amount?: string
     currency?: string
   }
-  metadata?: Record<string, string> // Pass session ID, email, name, and other fields through here.
+  metadata?: Record<string, string | boolean> // Pass session ID, email, and other fields through here.
+  name?: string
   pricing_type: 'fixed_price' | 'no_price'
   redirect_url?: string
 }
 
+export const zodCoinbaseCommerceDonation = z.object({
+  address: z.string(),
+  email: z.string(),
+  employer: z.string(),
+  full_name: z.string(),
+  is_citizen: z.boolean(),
+  occupation: z.string(),
+})
+
+// mini-dApps donation flow
+export type CoinbaseCommerceDonation = z.infer<typeof zodCoinbaseCommerceDonation>
+
 export async function createCharge({ sessionId, userId }: { sessionId: string; userId: string }) {
   const payload: CreateChargeRequest = {
-    pricing_type: 'no_price',
-    metadata: { sessionId, userId },
     cancel_url: `https://www.standwithcrypto.org?sessionId=${sessionId}`,
+    metadata: { sessionId, userId },
+    pricing_type: 'no_price',
   }
 
   try {
@@ -91,7 +129,7 @@ export async function createCharge({ sessionId, userId }: { sessionId: string; u
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        'X-CC-Api-Key': COINBASE_COMMERCE_API_KEY,
+        'X-CC-Api-Key': String(COINBASE_COMMERCE_API_KEY),
       },
       body: JSON.stringify(payload),
     })
@@ -100,6 +138,36 @@ export async function createCharge({ sessionId, userId }: { sessionId: string; u
     Sentry.captureException(error, {
       level: 'error',
       extra: { sessionId },
+    })
+    throw error
+  }
+}
+
+export async function createInAppCharge(createInAppChargeParams: CoinbaseCommerceDonation) {
+  const payload: CreateChargeRequest = {
+    cancel_url: 'https://www.standwithcrypto.org',
+    description: 'Donate to Crypto',
+    metadata: { ...createInAppChargeParams },
+    name: createInAppChargeParams.full_name,
+    pricing_type: 'no_price',
+  }
+
+  try {
+    const httpResp = await fetchReq(COINBASE_COMMERCE_CREATE_CHARGE_URL, {
+      method: 'POST',
+      mode: 'cors' as RequestMode,
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'X-CC-Api-Key': String(COINBASE_COMMERCE_API_KEY),
+      },
+      body: JSON.stringify(payload),
+    })
+    return (await httpResp.json()) as CreateChargeResponse
+  } catch (error) {
+    Sentry.captureException(error, {
+      level: 'error',
+      extra: { payload },
     })
     throw error
   }

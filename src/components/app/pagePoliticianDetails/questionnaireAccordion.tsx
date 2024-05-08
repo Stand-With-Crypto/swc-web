@@ -130,8 +130,9 @@ function QuestionnaireItem({ answer, question, isBooleanQuestion = true }: Quest
   function getAnswer() {
     if (!isBooleanQuestion) return !answer?.length ? 'Not answered' : answer
 
-    if (isBooleanQuestion && answer === QUESTION_ANSWER_OPTIONS['Not answered'])
+    if (isBooleanQuestion && answer === QUESTION_ANSWER_OPTIONS['Not answered']) {
       return 'Not answered'
+    }
 
     return answer === QUESTION_ANSWER_OPTIONS['Yes'] ? 'Yes' : 'No'
   }
