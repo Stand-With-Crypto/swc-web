@@ -4,7 +4,7 @@ import { hasCompleteUserProfile } from '@/utils/web/hasCompleteUserProfile'
 import { UpdateUserProfileForm as Control } from './control'
 import { UpdateUserProfileForm as Variant } from './variant'
 
-export function UpdateUserProfileFormABTesting(props: Parameters<typeof Control>[0]) {
+export function UpdateUserProfileFormExperimentTesting(props: Parameters<typeof Control>[0]) {
   if (hasCompleteUserProfile(props.user)) return <Control {...props} />
 
   return (
