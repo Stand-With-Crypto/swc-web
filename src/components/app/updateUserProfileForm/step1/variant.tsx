@@ -75,13 +75,13 @@ export function UpdateUserProfileForm({
       <form
         className="flex flex-col gap-6 md:gap-4 md:px-8"
         onSubmit={form.handleSubmit(async values => {
-          const address = values.address
-            ? await convertGooglePlaceAutoPredictionToAddressSchema(values.address).catch(e => {
-                Sentry.captureException(e)
-                catchUnexpectedServerErrorAndTriggerToast(e)
-                return null
-              })
-            : null
+          const address = await convertGooglePlaceAutoPredictionToAddressSchema(
+            values.address,
+          ).catch(e => {
+            Sentry.captureException(e)
+            catchUnexpectedServerErrorAndTriggerToast(e)
+            return null
+          })
 
           const result = await triggerServerActionForForm(
             {
