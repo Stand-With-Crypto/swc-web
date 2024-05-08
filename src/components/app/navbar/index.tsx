@@ -88,7 +88,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
             <Button asChild size="sm" variant="secondary">
               <InternalLink
                 className="font-bold text-fontcolor"
-                href="/action/live-event/2024_05_22_PIZZA_DAY"
+                href="/action/tweet-at-person/2024_05_22_PIZZA_DAY"
               >
                 Get started
               </InternalLink>
