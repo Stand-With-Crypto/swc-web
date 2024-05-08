@@ -1,6 +1,6 @@
 import { Skeleton } from '@/components/ui/skeleton'
 
-export function UserActionFormLiveEventSkeleton() {
+export function UserActionFormTweetAtPersonSkeleton() {
   return (
     <div className="flex flex-col items-center justify-center pb-8">
       <Skeleton className="h-40 w-full" />

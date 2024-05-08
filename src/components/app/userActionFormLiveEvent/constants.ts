@@ -12,7 +12,6 @@ type Message = 'title' | 'signedOutSubtitle' | 'signedInSubtitle'
 
 export const LIVE_EVENT_SLUG_NFT_METADATA: Record<UserActionLiveEventCampaignName, NFTSlug> = {
   [UserActionLiveEventCampaignName['2024_03_04_LA']]: NFTSlug.LA_CRYPTO_EVENT_2024_03_04,
-  [UserActionLiveEventCampaignName['2024_05_22_PIZZA_DAY']]: NFTSlug.PIZZA_DAY_2024_05_22,
 }
 
 export const MESSAGES: Record<UserActionLiveEventCampaignName, Record<Message, string>> = {
@@ -22,10 +21,5 @@ export const MESSAGES: Record<UserActionLiveEventCampaignName, Record<Message, s
       'Thanks for attending our Los Angeles Crypto Votes event! Press continue in order to claim your free “Proof of Attendance” NFT.',
     signedInSubtitle:
       'Thanks for attending our Los Angeles Crypto Votes event! Claim your free “Proof of Attendance” NFT.',
-  },
-  [UserActionLiveEventCampaignName['2024_05_22_PIZZA_DAY']]: {
-    title: 'Pizza Title',
-    signedOutSubtitle: 'SignedOut Pizza Title',
-    signedInSubtitle: 'SignedIn Pizza Title',
   },
 }

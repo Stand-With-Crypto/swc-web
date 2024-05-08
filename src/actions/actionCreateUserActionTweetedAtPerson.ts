@@ -2,7 +2,7 @@
 import 'server-only'
 
 import { User, UserActionType, UserInformationVisibility } from '@prisma/client'
-import { nativeEnum, object, z } from 'zod'
+import { nativeEnum, object, string, z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
 import {
@@ -23,15 +23,18 @@ import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/local
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
-import { UserActionLiveEventCampaignName } from '@/utils/shared/userActionCampaigns'
+import { UserActionTweetedAtPersonCampaignName } from '@/utils/shared/userActionCampaigns'
 
-const logger = getLogger(`actionCreateUserActionLiveEvent`)
+const logger = getLogger(`actionCreateUserActionTweetedAtPerson`)
 
-const createActionLiveEventInputValidationSchema = object({
-  campaignName: nativeEnum(UserActionLiveEventCampaignName),
+const createActionTweetedAtPersonInputValidationSchema = object({
+  campaignName: nativeEnum(UserActionTweetedAtPersonCampaignName),
+  dtsiSlug: string().nullable(),
 })
 
-export type CreateActionLiveEventInput = z.infer<typeof createActionLiveEventInputValidationSchema>
+export type CreateActionTweetedAtPersonInput = z.infer<
+  typeof createActionTweetedAtPersonInputValidationSchema
+>
 
 interface SharedDependencies {
   localUser: ReturnType<typeof parseLocalUserFromCookies>
@@ -40,30 +43,34 @@ interface SharedDependencies {
   peopleAnalytics: ReturnType<typeof getServerPeopleAnalytics>
 }
 
-export const actionCreateUserActionLiveEvent = withServerActionMiddleware(
-  'actionCreateUserActionLiveEvent',
-  _actionCreateUserActionLiveEvent,
+export const actionCreateUserActionTweetedAtPerson = withServerActionMiddleware(
+  'actionCreateUserActionTweetedAtPerson',
+  _actionCreateUserActionTweetedAtPerson,
 )
 
-type EventDuration = {
-  START_TIME: Date
-  END_TIME: Date
+type CampaignDuration = {
+  START_TIME: Date | null
+  END_TIME: Date | null
 }
 
-const EVENT_DURATION: Record<UserActionLiveEventCampaignName, EventDuration> = {
-  [UserActionLiveEventCampaignName['2024_03_04_LA']]: {
-    START_TIME: new Date('2024-03-04'),
-    END_TIME: new Date('2024-03-06'),
+const CAMPAIGN_DURATION: Record<UserActionTweetedAtPersonCampaignName, CampaignDuration> = {
+  [UserActionTweetedAtPersonCampaignName['DEFAULT']]: {
+    START_TIME: null,
+    END_TIME: null,
+  },
+  [UserActionTweetedAtPersonCampaignName['2024_05_22_PIZZA_DAY']]: {
+    START_TIME: new Date('2024-05-19'),
+    END_TIME: new Date('2024-05-22'),
   },
 }
 
-async function _actionCreateUserActionLiveEvent(input: CreateActionLiveEventInput) {
+async function _actionCreateUserActionTweetedAtPerson(input: CreateActionTweetedAtPersonInput) {
   logger.info('triggered')
   const { triggerRateLimiterAtMostOnce } = getRequestRateLimiter({
     context: 'unauthenticated',
   })
 
-  const validatedInput = createActionLiveEventInputValidationSchema.safeParse(input)
+  const validatedInput = createActionTweetedAtPersonInputValidationSchema.safeParse(input)
   if (!validatedInput.success) {
     return {
       errors: validatedInput.error.flatten().fieldErrors,
@@ -71,22 +78,23 @@ async function _actionCreateUserActionLiveEvent(input: CreateActionLiveEventInpu
   }
 
   if (
-    !process.env.NEXT_PUBLIC_BYPASS_LIVE_EVENT_DURATION_CHECK &&
+    !process.env.NEXT_PUBLIC_BYPASS_TWEETED_AT_PERSON_CAMPAIGN_DURATION_CHECK &&
     NEXT_PUBLIC_ENVIRONMENT === 'production'
   ) {
     const currentTime = Date.now()
-    const eventDuration = EVENT_DURATION[validatedInput.data.campaignName]
-    if (currentTime < eventDuration.START_TIME.getTime()) {
+    const campaignDuration = CAMPAIGN_DURATION[validatedInput.data.campaignName]
+
+    if (campaignDuration.START_TIME && currentTime < campaignDuration.START_TIME.getTime()) {
       return {
         errors: {
-          campaignName: ['This event is not live yet.'],
+          campaignName: ['This campaign is not live yet.'],
         },
       }
     }
-    if (currentTime > eventDuration.END_TIME.getTime()) {
+    if (campaignDuration.END_TIME && currentTime > campaignDuration.END_TIME.getTime()) {
       return {
         errors: {
-          campaignName: ['This event is no longer live.'],
+          campaignName: ['This campaign is no longer live.'],
         },
       }
     }
@@ -170,11 +178,11 @@ async function createUser(sharedDependencies: Pick<SharedDependencies, 'localUse
 
 async function getRecentUserActionByUserId(
   userId: User['id'],
-  validatedInput: z.SafeParseSuccess<CreateActionLiveEventInput>,
+  validatedInput: z.SafeParseSuccess<CreateActionTweetedAtPersonInput>,
 ) {
   return prismaClient.userAction.findFirst({
     where: {
-      actionType: UserActionType.LIVE_EVENT,
+      actionType: UserActionType.TWEETED_TO_PERSON,
       campaignName: validatedInput.data.campaignName,
       userId: userId,
     },
@@ -185,11 +193,11 @@ async function logSpamActionSubmissions({
   validatedInput,
   sharedDependencies,
 }: {
-  validatedInput: z.SafeParseSuccess<CreateActionLiveEventInput>
+  validatedInput: z.SafeParseSuccess<CreateActionTweetedAtPersonInput>
   sharedDependencies: Pick<SharedDependencies, 'analytics'>
 }) {
   await sharedDependencies.analytics.trackUserActionCreatedIgnored({
-    actionType: UserActionType.LIVE_EVENT,
+    actionType: UserActionType.TWEETED_TO_PERSON,
     campaignName: validatedInput.data.campaignName,
     reason: 'Too Many Recent',
     userState: 'Existing',
@@ -205,14 +213,14 @@ async function createAction<U extends User>({
 }: {
   user: U
   isNewUser: boolean
-  validatedInput: CreateActionLiveEventInput
+  validatedInput: CreateActionTweetedAtPersonInput
   userMatch: UserAndMethodOfMatch
   sharedDependencies: Pick<SharedDependencies, 'sessionId' | 'analytics' | 'peopleAnalytics'>
 }) {
   const userAction = await prismaClient.userAction.create({
     data: {
       user: { connect: { id: user.id } },
-      actionType: UserActionType.LIVE_EVENT,
+      actionType: UserActionType.TWEETED_TO_PERSON,
       campaignName: validatedInput.campaignName,
       ...('userCryptoAddress' in userMatch && userMatch.userCryptoAddress
         ? {
@@ -225,7 +233,7 @@ async function createAction<U extends User>({
   logger.info('created user action')
 
   await sharedDependencies.analytics.trackUserActionCreated({
-    actionType: UserActionType.LIVE_EVENT,
+    actionType: UserActionType.TWEETED_TO_PERSON,
     campaignName: validatedInput.campaignName,
     userState: isNewUser ? 'New' : 'Existing',
   })

@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 
-import { PIZZA_DAY_LIVE_EVENT_SLUG_NFT_METADATA } from '@/components/app/userActionFormLiveEventPizzaDay/constants'
+import { PIZZA_DAY_LIVE_EVENT_SLUG_NFT_METADATA } from '@/components/app/userActionFormTweetAtPerson/constants'
 import { UserActionRowCTAButton } from '@/components/app/userActionRowCTA'
 import { USER_ACTION_ROW_CTA_INFO } from '@/components/app/userActionRowCTA/constants'
 import { NextImage } from '@/components/ui/image'
@@ -12,7 +12,7 @@ import { useLocale } from '@/hooks/useLocale'
 import { USER_ACTION_DEEPLINK_MAP } from '@/utils/shared/urlsDeeplinkUserActions'
 import { NFT_CLIENT_METADATA } from '@/utils/web/nft'
 
-export function PizzaDaySuccessSection() {
+export function TweetedAtPersonSuccessSection() {
   const router = useRouter()
   const locale = useLocale()
   const isMobile = useIsMobile()

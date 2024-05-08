@@ -14,6 +14,9 @@ export const ACTIVITY_TYPE_TO_ICON_URL: Record<UserActionType, string> = {
   [UserActionType.VOTER_REGISTRATION]: '/activityFeedIcons/vote.svg',
   [UserActionType.TWEET]: '/activityFeedIcons/share-x.svg',
   [UserActionType.LIVE_EVENT]: '/activityFeedIcons/event.svg',
+
+  // This is temporary
+  [UserActionType.TWEETED_TO_PERSON]: '/activityFeedIcons/pizza-day.svg',
 }
 
 type ActivityAvatarProps = {

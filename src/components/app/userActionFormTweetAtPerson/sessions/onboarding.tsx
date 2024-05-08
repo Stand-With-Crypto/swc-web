@@ -1,7 +1,7 @@
 import {
   PIZZA_DAY_LIVE_EVENT_SLUG_NFT_METADATA,
-  PizzaDaySectionNames,
-} from '@/components/app/userActionFormLiveEventPizzaDay/constants'
+  TweetAtPersonSectionNames,
+} from '@/components/app/userActionFormTweetAtPerson/constants'
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { PageTitle } from '@/components/ui/pageTitleText'
@@ -9,9 +9,9 @@ import { useIsMobile } from '@/hooks/useIsMobile'
 import { UseSectionsReturn } from '@/hooks/useSections'
 import { NFT_CLIENT_METADATA } from '@/utils/web/nft'
 
-export function OnboardingPizzaDayLiveEvent({
+export function OnboardingTweetAtPersonCampaign({
   goToSection,
-}: UseSectionsReturn<PizzaDaySectionNames>) {
+}: UseSectionsReturn<TweetAtPersonSectionNames>) {
   const isMobile = useIsMobile()
   const nftImageMetadata =
     NFT_CLIENT_METADATA[PIZZA_DAY_LIVE_EVENT_SLUG_NFT_METADATA['2024_05_22_PIZZA_DAY']].image
@@ -68,7 +68,7 @@ export function OnboardingPizzaDayLiveEvent({
 
       <Button
         className="mt-auto w-full md:w-1/2"
-        onClick={() => goToSection(PizzaDaySectionNames.TWEET)}
+        onClick={() => goToSection(TweetAtPersonSectionNames.TWEET)}
         size="lg"
       >
         Get started

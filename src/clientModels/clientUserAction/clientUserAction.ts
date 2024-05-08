@@ -14,7 +14,10 @@ import { keyBy } from 'lodash-es'
 import { ClientNFTMint, getClientNFTMint } from '@/clientModels/clientNFTMint'
 import { ClientModel, getClientModel } from '@/clientModels/utils'
 import { DTSIPersonForUserActions } from '@/data/dtsi/queries/queryDTSIPeopleBySlugForUserActions'
-import { UserActionLiveEventCampaignName } from '@/utils/shared/userActionCampaigns'
+import {
+  UserActionLiveEventCampaignName,
+  UserActionTweetedAtPersonCampaignName,
+} from '@/utils/shared/userActionCampaigns'
 
 /*
 Assumption: we will always want to interact with the user actions and their related type joins together
@@ -66,6 +69,11 @@ type ClientUserActionLiveEvent = {
   actionType: typeof UserActionType.LIVE_EVENT
   campaignName: UserActionLiveEventCampaignName
 }
+type ClientUserActionTweetedToPerson = {
+  actionType: typeof UserActionType.TWEETED_TO_PERSON
+  campaignName: UserActionTweetedAtPersonCampaignName
+  person: DTSIPersonForUserActions | null
+}
 
 /*
 At the database schema level we can't enforce that a single action only has one "type" FK, but at the client level we can and should
@@ -83,6 +91,7 @@ export type ClientUserAction = ClientModel<
       | ClientUserActionNFTMint
       | ClientUserActionVoterRegistration
       | ClientUserActionLiveEvent
+      | ClientUserActionTweetedToPerson
     )
 >
 

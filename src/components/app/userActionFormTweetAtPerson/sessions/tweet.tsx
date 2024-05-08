@@ -6,14 +6,14 @@ import { toast } from 'sonner'
 import { z } from 'zod'
 
 import {
-  actionCreateUserActionLiveEvent,
-  CreateActionLiveEventInput,
-} from '@/actions/actionCreateUserActionLiveEvent'
+  actionCreateUserActionTweetedAtPerson,
+  CreateActionTweetedAtPersonInput,
+} from '@/actions/actionCreateUserActionTweetedAtPerson'
 import { useCongresspersonData } from '@/components/app/userActionFormCallCongressperson/sections/address'
 import {
-  ANALYTICS_NAME_USER_ACTION_FORM_PIZZA_DAY_LIVE_EVENT,
-  PizzaDaySectionNames,
-} from '@/components/app/userActionFormLiveEventPizzaDay/constants'
+  CAMPAIGN_METADATA,
+  TweetAtPersonSectionNames,
+} from '@/components/app/userActionFormTweetAtPerson/constants'
 import { Button } from '@/components/ui/button'
 import { ExternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
@@ -25,7 +25,7 @@ import {
   convertDTSIPersonStanceScoreToLetterGrade,
   DTSILetterGrade,
 } from '@/utils/dtsi/dtsiStanceScoreUtils'
-import { UserActionLiveEventCampaignName } from '@/utils/shared/userActionCampaigns'
+import { UserActionTweetedAtPersonCampaignName } from '@/utils/shared/userActionCampaigns'
 import { createTweetLink } from '@/utils/web/createTweetLink'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
@@ -36,7 +36,15 @@ type OnFindCongressPersonPayload = DTSIPeopleFromCongressionalDistrict & {
   addressSchema: z.infer<typeof zodAddress>
 }
 
-export function TweetPizzaDayLiveEvent({ goToSection }: UseSectionsReturn<PizzaDaySectionNames>) {
+interface TweetAtPersonSectionProps {
+  slug: UserActionTweetedAtPersonCampaignName
+  sectionProps: UseSectionsReturn<TweetAtPersonSectionNames>
+}
+
+export function TweetAtPersonSection({
+  slug,
+  sectionProps: { goToSection },
+}: TweetAtPersonSectionProps) {
   const [congressPersonData, setCongresspersonData] = useState<OnFindCongressPersonPayload>()
   const [hasUserTweeted, setHasUserTweeted] = useState(false)
   const [isMintingNFT, setIsMintingNFT] = useState(false)
@@ -51,15 +59,15 @@ export function TweetPizzaDayLiveEvent({ goToSection }: UseSectionsReturn<PizzaD
 
   const congressPersonNotFound = !!resolvedCongressPersonData?.notFoundReason
 
+  const representative = congressPersonData?.dtsiPeople?.find(
+    person => person.primaryRole?.roleCategory === DTSI_PersonRoleCategory.CONGRESS,
+  )
+
   function getTweetMessageBasedOnRepresentativeScore() {
     if (congressPersonNotFound) {
       return `🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕
 May 22nd is Bitcoin Pizza Day! I applaud all the representatives who are protecting Americans’ right to own crypto. See where your representative stands at www.standwithcrypto.org/pizza and join the fight! #StandWithCrypto`
     }
-
-    const representative = congressPersonData?.dtsiPeople?.find(
-      person => person.primaryRole?.roleCategory === DTSI_PersonRoleCategory.CONGRESS,
-    )
 
     if (!representative) {
       return `🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕
@@ -94,13 +102,15 @@ May 22nd is Bitcoin Pizza Day! Like many other politicians my representative doe
 
   async function handleClaimNft() {
     setIsMintingNFT(true)
-    const data: CreateActionLiveEventInput = {
-      campaignName: UserActionLiveEventCampaignName['2024_05_22_PIZZA_DAY'],
+
+    const data: CreateActionTweetedAtPersonInput = {
+      campaignName: slug,
+      dtsiSlug: representative?.slug ?? null,
     }
 
     const result = await triggerServerActionForForm(
       {
-        formName: ANALYTICS_NAME_USER_ACTION_FORM_PIZZA_DAY_LIVE_EVENT,
+        formName: CAMPAIGN_METADATA[slug].analyticsName,
         onError: (_, error) => {
           toast.error(error.message, {
             duration: 5000,
@@ -108,12 +118,13 @@ May 22nd is Bitcoin Pizza Day! Like many other politicians my representative doe
         },
         analyticsProps: {
           'Campaign Name': data.campaignName,
-          'User Action Type': UserActionType.PIZZA_DAY,
+          'User Action Type': UserActionType.TWEETED_TO_PERSON,
+          dtsiSlug: representative?.slug ?? null,
         },
         payload: data,
       },
       payload =>
-        actionCreateUserActionLiveEvent(payload).then(actionResult => {
+        actionCreateUserActionTweetedAtPerson(payload).then(actionResult => {
           if (actionResult?.user) {
             identifyUserOnClient(actionResult.user)
           }
@@ -122,7 +133,7 @@ May 22nd is Bitcoin Pizza Day! Like many other politicians my representative doe
     )
 
     if (result.status === 'success') {
-      goToSection(PizzaDaySectionNames.SUCCESS)
+      goToSection(TweetAtPersonSectionNames.SUCCESS)
     } else {
       toastGenericError()
     }
