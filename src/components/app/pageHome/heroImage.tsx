@@ -24,6 +24,7 @@ const HeroImage = ({ children, className, fallback }: HeroImageProps) => {
       <Video
         className={cn('absolute left-0 top-0 h-full w-full object-cover')}
         fallback={fallback}
+        poster="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP0dpm3AgAD5gHXYQBQLgAAAABJRU5ErkJggg=="
         src="https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/heroImage.mp4"
       />
 
