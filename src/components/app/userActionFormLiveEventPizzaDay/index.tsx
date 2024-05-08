@@ -1,43 +1,34 @@
 'use client'
 
+import { AuthenticateWithProfileUpdate } from '@/components/app/authentication/authenticateAndUpdateProfile'
 import {
-  ANALYTICS_NAME_USER_ACTION_FORM_LIVE_EVENT,
-  SectionNames,
+  ANALYTICS_NAME_USER_ACTION_FORM_PIZZA_DAY_LIVE_EVENT,
+  PizzaDaySectionNames,
 } from '@/components/app/userActionFormLiveEventPizzaDay/constants'
 import { OnboardingPizzaDayLiveEvent } from '@/components/app/userActionFormLiveEventPizzaDay/sessions/onboarding'
-import { ProfileInfoWrapper } from '@/components/app/userActionFormLiveEventPizzaDay/sessions/profileInfoWrapper'
+import { PizzaDaySuccessSection } from '@/components/app/userActionFormLiveEventPizzaDay/sessions/success'
 import { TweetPizzaDayLiveEvent } from '@/components/app/userActionFormLiveEventPizzaDay/sessions/tweet'
 import { useSections } from '@/hooks/useSections'
 
-export type UserActionFormLiveEventProps = {
-  onClose: () => void
-  isLoggedIn: boolean
-}
-
-export function UserActionFormPizzaDayLiveEvent({ onClose }: UserActionFormLiveEventProps) {
-  const sectionProps = useSections<SectionNames>({
-    sections: Object.values(SectionNames),
-    initialSectionId: SectionNames.ONBOARDING,
-    analyticsName: ANALYTICS_NAME_USER_ACTION_FORM_LIVE_EVENT,
+export function UserActionFormPizzaDayLiveEvent() {
+  const sectionProps = useSections<PizzaDaySectionNames>({
+    sections: Object.values(PizzaDaySectionNames),
+    initialSectionId: PizzaDaySectionNames.ONBOARDING,
+    analyticsName: ANALYTICS_NAME_USER_ACTION_FORM_PIZZA_DAY_LIVE_EVENT,
   })
   const { currentSection: currentTab, onSectionNotFound: onTabNotFound } = sectionProps
 
   switch (currentTab) {
-    case SectionNames.ONBOARDING:
+    case PizzaDaySectionNames.ONBOARDING:
       return <OnboardingPizzaDayLiveEvent {...sectionProps} />
-    case SectionNames.PROFILE_INFO:
-      return <ProfileInfoWrapper {...sectionProps} />
-    case SectionNames.TWEET:
-      return <TweetPizzaDayLiveEvent {...sectionProps} />
-    // case SectionNames.TWEET:
-    // return <ClaimNft {...sectionProps} isLoggedIn={isLoggedIn} slug={slug} />
-    // case SectionNames.SUCCESS:
-    //   return (
-    //     <UserActionFormSuccessScreen
-    //       nftWhenAuthenticated={NFT_CLIENT_METADATA[NFTSlug.LA_CRYPTO_EVENT_2024_03_04]}
-    //       onClose={onClose}
-    //     />
-    //   )
+    case PizzaDaySectionNames.TWEET:
+      return (
+        <AuthenticateWithProfileUpdate>
+          <TweetPizzaDayLiveEvent {...sectionProps} />
+        </AuthenticateWithProfileUpdate>
+      )
+    case PizzaDaySectionNames.SUCCESS:
+      return <PizzaDaySuccessSection />
     default:
       onTabNotFound()
       return null
