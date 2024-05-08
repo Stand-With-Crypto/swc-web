@@ -203,13 +203,15 @@ export async function POST(req: NextRequest): Promise<Response> {
   const queryParams = url.searchParams
 
   const frameIndexResult = zodFrameIndex.safeParse(Number(queryParams.get(FRAME_QUERY_PARAMETER)))
-  if (!frameIndexResult.success)
+  if (!frameIndexResult.success) {
     return NextResponse.json({ error: 'invalid frame index' }, { status: 400 })
+  }
   const frameIndex = frameIndexResult.data
 
   const buttonIndexResult = zodButtonIndex.safeParse(body.untrustedData?.buttonIndex)
-  if (!buttonIndexResult.success)
+  if (!buttonIndexResult.success) {
     return NextResponse.json({ error: 'invalid button index' }, { status: 400 })
+  }
   const buttonIndex = buttonIndexResult.data
 
   // NOTES:
