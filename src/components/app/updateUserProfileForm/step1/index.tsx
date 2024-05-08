@@ -10,10 +10,10 @@ export function UpdateUserProfileFormABTesting(props: Parameters<typeof Control>
   return (
     <ExperimentsTesting
       experimentName="gh02_SWCSignUpFlowExperiment"
-      variants={[
-        { component: <Control {...props} />, name: 'control' },
-        { component: <Variant {...props} />, name: 'variant' },
-      ]}
+      variants={{
+        control: <Control {...props} />,
+        variant: <Variant {...props} />,
+      }}
     />
   )
 }

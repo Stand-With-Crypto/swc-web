@@ -668,8 +668,9 @@ async function triggerPostLoginUserActionSteps({
 
     const signUpFlowExperimentVariant =
       localUser?.persisted?.experiments?.gh02_SWCSignUpFlowExperiment
-    if (signUpFlowExperimentVariant === 'control')
+    if (signUpFlowExperimentVariant === 'control') {
       await claimNFT(optInUserAction, userCryptoAddress)
+    }
 
     analytics.trackUserActionCreated({
       actionType: UserActionType.OPT_IN,

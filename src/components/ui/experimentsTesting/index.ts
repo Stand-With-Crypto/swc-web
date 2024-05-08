@@ -1,31 +1,29 @@
 import { useLocalUser } from '@/hooks/useLocalUser'
-import { Experiments, ExperimentVariant } from '@/utils/shared/experiments'
+import {
+  Experiments,
+  getDefaultExperimentContext,
+  IExperimentContext,
+} from '@/utils/shared/experiments'
 
-function useABTesting<K extends Experiments>({ experimentName }: { experimentName: K }) {
+function useExperimentName<K extends Experiments>({ experimentName }: { experimentName: K }) {
   const localUser = useLocalUser()
 
   const variant = localUser?.persisted?.experiments?.[experimentName]
+  const defaultVariant = getDefaultExperimentContext()[experimentName]
 
-  return variant
-}
-
-type ExperimentsComponentVariants<K extends Experiments> = {
-  component: React.ReactNode
-  name: ExperimentVariant<K>
+  return variant ?? defaultVariant
 }
 
 type ExperimentsComponentProps<K extends Experiments> = {
   experimentName: K
-  variants: ExperimentsComponentVariants<K>[]
+  variants: Record<IExperimentContext[K], React.ReactNode>
 }
 
 export function ExperimentsTesting<K extends Experiments>({
   experimentName,
   variants,
 }: ExperimentsComponentProps<K>) {
-  const variant = useABTesting({ experimentName })
+  const variant = useExperimentName({ experimentName })
 
-  const ComponentToRender = variants.find(v => v.name === variant)?.component
-
-  return ComponentToRender
+  return variants[variant]
 }

@@ -30,7 +30,6 @@ import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
-import { getLogger } from '@/utils/shared/logger'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
 import { userFullName } from '@/utils/shared/userFullName'
@@ -226,9 +225,6 @@ async function handleCapitolCanaryAdvocateUpsert(
     })
   }
 }
-const logger = getLogger('actionUpdateUserProfile')
-const getLog = (address: string) => (message: string) =>
-  logger.info(`address ${address}: ${message}`)
 
 async function claimNFTAfterUpdateUserProfile(user: {
   id: string
@@ -237,7 +233,6 @@ async function claimNFTAfterUpdateUserProfile(user: {
   if (!user.primaryUserCryptoAddress) {
     return
   }
-  const log = getLog(user.primaryUserCryptoAddress.cryptoAddress)
   const optInUserAction = await prismaClient.userAction.findFirst({
     where: {
       userId: user.id,
@@ -250,8 +245,7 @@ async function claimNFTAfterUpdateUserProfile(user: {
   })
 
   if (!optInUserAction) {
-    log(`claimNFTAfterUpdateUserProfile: opt in user action don't exist`)
-    return
+    throw new Error(`Opt in user action don't exist`)
   }
 
   if (optInUserAction.nftMintId !== null) return
