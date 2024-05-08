@@ -1,8 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { UserActionType } from '@prisma/client'
 import { toast } from 'sonner'
+import { z } from 'zod'
 
 import {
   actionCreateUserActionLiveEvent,
@@ -16,6 +17,8 @@ import {
 import { Button } from '@/components/ui/button'
 import { ExternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
+import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
+import { DTSIPeopleFromCongressionalDistrict } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { UseSectionsReturn } from '@/hooks/useSections'
 import { useSession } from '@/hooks/useSession'
 import {
@@ -27,52 +30,15 @@ import { createTweetLink } from '@/utils/web/createTweetLink'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
 import { toastGenericError } from '@/utils/web/toastUtils'
+import { zodAddress } from '@/validation/fields/zodAddress'
 
-const congresspersonMock = {
-  id: 'f816c6b9-b19d-48bc-bfa8-ea456fc12f88',
-  twitterAccounts: [
-    {
-      id: '164bc625-3de1-49f9-9694-235e3fad6907',
-      state: 'VISIBLE',
-      username: 'RepAdamSchiff',
-    },
-  ],
-  suffixName: '',
-  slug: 'adam---schiff',
-  primaryRole: {
-    dateEnd: '2025-01-03T00:00:00.000Z',
-    dateStart: '2023-01-03T00:00:00.000Z',
-    id: '1c9f7f67-086b-4995-a8cb-6c13e02f080a',
-    primaryCity: '',
-    primaryCountryCode: 'US',
-    primaryDistrict: '30',
-    primaryState: 'CA',
-    roleCategory: 'CONGRESS',
-    status: 'HELD',
-    title: '',
-  },
-  donationUrl: '',
-  firstName: 'Adam',
-  firstNickname: '',
-  gender: 'MALE',
-  lastName: 'Schiff',
-  manuallyOverriddenStanceScore: null,
-  middleName: 'B.',
-  nameSuffix: '',
-  nameUniquenessModifier: '',
-  officialUrl: 'https://schiff.house.gov',
-  phoneNumber: '12022254176',
-  politicalAffiliationCategory: 'DEMOCRAT',
-  politicalAffiliation: 'Democratic Party (United States)',
-  computedStanceScore: 50,
-  stances: [],
-  profilePictureUrl:
-    'https://db0prh5pvbqwd.cloudfront.net/all/images/7875ec89-a7a5-410f-a1af-343b51fe142a.jpg',
-  profilePictureUrlDimensions: { type: 'jpg', width: 2866, height: 3593 },
+type OnFindCongressPersonPayload = DTSIPeopleFromCongressionalDistrict & {
+  addressSchema: z.infer<typeof zodAddress>
 }
 
 export function TweetPizzaDayLiveEvent({ goToSection }: UseSectionsReturn<PizzaDaySectionNames>) {
-  const [hasUserTweeted, setHasUserTweeted] = useState(true)
+  const [congressPersonData, setCongresspersonData] = useState<OnFindCongressPersonPayload>()
+  const [hasUserTweeted, setHasUserTweeted] = useState(false)
   const [isMintingNFT, setIsMintingNFT] = useState(false)
   const { user } = useSession()
 
@@ -83,34 +49,42 @@ export function TweetPizzaDayLiveEvent({ goToSection }: UseSectionsReturn<PizzaD
   const { data: resolvedCongressPersonData, isLoading: isLoadingInitialCongresspersonData } =
     useCongresspersonData({ address: userAddress })
 
-  if (!user || isLoadingInitialCongresspersonData) return null
-
-  console.log({ resolvedCongressPersonData })
-
-  const userStateMock = 'NY'
+  const congressPersonNotFound = !!resolvedCongressPersonData?.notFoundReason
 
   function getTweetMessageBasedOnRepresentativeScore() {
-    if (resolvedCongressPersonData?.notFoundReason)
+    if (congressPersonNotFound) {
       return `🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕
-    May 22nd is Bitcoin Pizza Day! Like many other politicians my representative doesn’t understand the importance of crypto for America. See where your representative stands at www.standwithcrypto.org/pizza and join the fight! #StandWithCrypto #${userStateMock}
-    `
+May 22nd is Bitcoin Pizza Day! I applaud all the representatives who are protecting Americans’ right to own crypto. See where your representative stands at www.standwithcrypto.org/pizza and join the fight! #StandWithCrypto`
+    }
 
-    const representativeXHandle: string =
-      congresspersonMock?.twitterAccounts.reduce((xHandle, account) => {
+    const representative = congressPersonData?.dtsiPeople?.find(
+      person => person.primaryRole?.roleCategory === DTSI_PersonRoleCategory.CONGRESS,
+    )
+
+    if (!representative) {
+      return `🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕
+May 22nd is Bitcoin Pizza Day! I applaud all the representatives who are protecting Americans’ right to own crypto. See where your representative stands at www.standwithcrypto.org/pizza and join the fight! #StandWithCrypto`
+    }
+
+    const representativeXHandle =
+      representative?.twitterAccounts.reduce((xHandle, account) => {
         if (account?.username) return (xHandle = `@${account.username}`)
 
         return xHandle
-      }, '') ?? `${congresspersonMock.firstName} ${congresspersonMock.lastName}`
+      }, '') ?? `${representative.firstName} ${representative.lastName}`
 
     return (() => {
-      switch (convertDTSIPersonStanceScoreToLetterGrade(congresspersonMock)) {
+      switch (convertDTSIPersonStanceScoreToLetterGrade(representative)) {
         case DTSILetterGrade.A || DTSILetterGrade.B:
-          return `🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕 May 22nd is Bitcoin Pizza Day! I applaud my representative ${representativeXHandle} for protecting Americans’ right to own crypto. See where your representative stands at www.standwithcrypto.org/pizza and join the fight! #StandWithCrypto #${userStateMock}
+          return `🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕
+May 22nd is Bitcoin Pizza Day! I applaud my representative ${representativeXHandle} for protecting Americans’ right to own crypto. See where your representative stands at www.standwithcrypto.org/pizza and join the fight! #StandWithCrypto #${user?.userLocationDetails?.administrativeAreaLevel1 ?? ''}
           `
         case DTSILetterGrade.C || null:
-          return `🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕 May 22nd is Bitcoin Pizza Day! I’m asking my representative ${representativeXHandle} to protect Americans’ right to own crypto. See where your representative stands at www.standwithcrypto.org/pizza and join the fight! #StandWithCrypto #${userStateMock}`
+          return `🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕
+May 22nd is Bitcoin Pizza Day! I’m asking my representative ${representativeXHandle} to protect Americans’ right to own crypto. See where your representative stands at www.standwithcrypto.org/pizza and join the fight! #StandWithCrypto #${user?.userLocationDetails?.administrativeAreaLevel1 ?? ''}`
         case DTSILetterGrade.D || DTSILetterGrade.F:
-          return `🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕 May 22nd is Bitcoin Pizza Day! Like many other politicians my representative doesn’t understand the importance of crypto for America. See where your representative stands at www.standwithcrypto.org/pizza and join the fight! #StandWithCrypto #${userStateMock}
+          return `🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕
+May 22nd is Bitcoin Pizza Day! Like many other politicians my representative doesn’t understand the importance of crypto for America. See where your representative stands at www.standwithcrypto.org/pizza and join the fight! #StandWithCrypto #${user?.userLocationDetails?.administrativeAreaLevel1 ?? ''}
           `
         default:
           return ''
@@ -161,17 +135,27 @@ export function TweetPizzaDayLiveEvent({ goToSection }: UseSectionsReturn<PizzaD
     await handleClaimNft()
   }
 
+  useEffect(() => {
+    if (resolvedCongressPersonData && 'dtsiPeople' in resolvedCongressPersonData) {
+      setCongresspersonData(resolvedCongressPersonData)
+    }
+  }, [resolvedCongressPersonData])
+
+  if (!user || isLoadingInitialCongresspersonData) return null
+
   return (
     <div className="flex h-full flex-col items-center justify-center">
       <PageTitle as="h3" className="mb-4 lg:my-10" size="lg">
-        Tweet your representative
+        {congressPersonNotFound ? 'Tweet on Pizza Day' : 'Tweet your representative'}
       </PageTitle>
-      <p className="text-center text-fontcolor-muted">
-        Send a tweet to your representative and then come back here to claim your free NFT.
+      <p className="mb-6 text-center text-fontcolor-muted">
+        {congressPersonNotFound
+          ? 'Send a tweet to celebrate Pizza Day and then come back here to claim your free NFT.'
+          : 'Send a tweet to your representative and then come back here to claim your free NFT.'}
       </p>
 
       {!hasUserTweeted && (
-        <div className="my-6 rounded-2xl bg-gray-200 p-6">
+        <div className="mb-6 rounded-2xl bg-gray-200 p-6">
           <p>{getTweetMessageBasedOnRepresentativeScore()}</p>
         </div>
       )}
@@ -186,6 +170,8 @@ export function TweetPizzaDayLiveEvent({ goToSection }: UseSectionsReturn<PizzaD
         {hasUserTweeted ? (
           isMintingNFT ? (
             'Minting your NFT...'
+          ) : congressPersonNotFound ? (
+            'I tweeted'
           ) : (
             'I tweeted my representative'
           )
@@ -193,7 +179,6 @@ export function TweetPizzaDayLiveEvent({ goToSection }: UseSectionsReturn<PizzaD
           <ExternalLink
             href={createTweetLink({
               message: getTweetMessageBasedOnRepresentativeScore(),
-              url: 'https://www.standwithcrypto.org/pizza',
             })}
           >
             Send tweet

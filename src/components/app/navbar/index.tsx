@@ -77,6 +77,26 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
           </div>
         </div>
       )}
+
+      {/* This component below will need to be commented out before shipping to prod */}
+      <div className="flex h-16 bg-primary-cta">
+        <div className="align-center container flex items-center justify-between gap-4">
+          <p className="flex-shrink font-bold text-white">
+            Tweet your representative and get a free NFT 🍕
+          </p>
+          <div className="xs:text-xs space-x-3 text-sm">
+            <Button asChild size="sm" variant="secondary">
+              <InternalLink
+                className="font-bold text-fontcolor"
+                href="/action/live-event/2024_05_22_PIZZA_DAY"
+              >
+                Get started
+              </InternalLink>
+            </Button>
+          </div>
+        </div>
+      </div>
+
       <nav
         className={
           /*
