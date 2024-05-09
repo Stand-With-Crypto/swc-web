@@ -1,14 +1,13 @@
 'use client'
 import React from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 import { ThirdwebLoginContent } from '@/components/app/authentication/thirdwebLoginContent'
-import { OPEN_UPDATE_USER_PROFILE_FORM_QUERY_PARAM_KEY } from '@/components/app/updateUserProfileForm/queryParamConfig'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { usePreventOverscroll } from '@/hooks/usePreventOverscroll'
-import { useQueryParamState } from '@/hooks/useQueryParamState'
 import { useSession } from '@/hooks/useSession'
+import { parseCallbackQueryString } from '@/utils/server/searchParams'
 import { cn } from '@/utils/web/cn'
 
 export default function UserActionOptInSWCDeepLink() {
@@ -17,15 +16,22 @@ export default function UserActionOptInSWCDeepLink() {
   const urls = useIntlUrls()
   const router = useRouter()
   const session = useSession()
-  const { queryString } = useQueryParamState({
-    queryParamKey: OPEN_UPDATE_USER_PROFILE_FORM_QUERY_PARAM_KEY,
-    defaultValue: null,
+  const searchParams = useSearchParams()
+
+  const { destination } = parseCallbackQueryString({
+    queryString: searchParams?.toString(),
+    defaultDestination: 'profile',
   })
+
+  const handleRedirectOnLogin = React.useCallback(() => {
+    return router.replace(urls[destination]())
+  }, [router, urls, destination])
+
   React.useEffect(() => {
     if (session.isLoggedIn) {
-      router.replace(urls.profile(queryString))
+      handleRedirectOnLogin()
     }
-  }, [session.isLoggedIn, router, urls, queryString])
+  }, [session.isLoggedIn, handleRedirectOnLogin])
 
   return (
     <div
@@ -35,7 +41,11 @@ export default function UserActionOptInSWCDeepLink() {
         'max-md:pt-16',
       )}
     >
-      <ThirdwebLoginContent auth={{ onLogin: () => router.replace(urls.profile(queryString)) }} />
+      <ThirdwebLoginContent
+        auth={{
+          onLogin: () => handleRedirectOnLogin(),
+        }}
+      />
     </div>
   )
 }

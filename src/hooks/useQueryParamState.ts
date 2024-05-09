@@ -15,7 +15,6 @@ export const useQueryParamState = ({
 }): {
   value: string | null
   setValue?(newValue: string | null): void
-  queryString: string
 } => {
   const searchParams = useSearchParams()
   const router = useRouter()
@@ -42,6 +41,5 @@ export const useQueryParamState = ({
   return {
     value,
     setValue: !searchParams || !pathname ? undefined : setValue,
-    queryString: value ? `?${queryParamKey}=${value}` : '',
   }
 }

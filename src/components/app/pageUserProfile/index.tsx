@@ -17,7 +17,7 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { Progress } from '@/components/ui/progress'
 import { PageProps } from '@/types'
-import { getSearchParam } from '@/utils/server/getSearchParam'
+import { getSearchParam, setCallbackQueryString } from '@/utils/server/searchParams'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { USER_ACTION_DEEPLINK_MAP } from '@/utils/shared/urlsDeeplinkUserActions'
 import { hasCompleteUserProfile } from '@/utils/web/hasCompleteUserProfile'
@@ -37,7 +37,7 @@ export function PageUserProfile({ params, searchParams, user }: PageUserProfile)
     // For now the only authenticated page we have is /profile,
     // so we don't need to dynamically pass the redirect path to login
     // If we add more authenticated pages, we'll need to make this dynamic
-    const { queryString } = getSearchParam({
+    const { value } = getSearchParam({
       searchParams,
       queryParamKey: OPEN_UPDATE_USER_PROFILE_FORM_QUERY_PARAM_KEY,
     })
@@ -45,7 +45,9 @@ export function PageUserProfile({ params, searchParams, user }: PageUserProfile)
     redirect(
       USER_ACTION_DEEPLINK_MAP[UserActionType.OPT_IN].getDeeplinkUrl({
         locale,
-        queryString,
+        queryString: setCallbackQueryString({
+          destination: value === 'true' ? 'updateProfile' : null,
+        }),
       }),
       RedirectType.replace,
     )
