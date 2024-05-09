@@ -187,6 +187,15 @@ export const getClientUserAction = ({
       const campaignName = record.campaignName as UserActionLiveEventCampaignName
       return getClientModel({ ...sharedProps, actionType, campaignName })
     }
+    case UserActionType.TWEET_AT_PERSON: {
+      const { recipientDtsiSlug } = getRelatedModel(record, 'userActionTweetAtPerson')
+      const tweetAtPersonFields: ClientUserActionTweetAtPerson = {
+        person: recipientDtsiSlug ? peopleBySlug[recipientDtsiSlug] : null,
+        campaignName: record.campaignName as UserActionTweetAtPersonCampaignName,
+        actionType,
+      }
+      return getClientModel({ ...sharedProps, ...tweetAtPersonFields })
+    }
   }
   throw new Error(`getClientUserAction: no user action fk found for id ${id}`)
 }
