@@ -24,28 +24,28 @@ export const USER_ACTION_DEEPLINK_MAP: Omit<
     },
   },
   [UserActionType.CALL]: {
-    getDeeplinkUrl: ({ locale, queryString }) => {
-      return `${getIntlPrefix(locale)}/action/call${parseQueryString(queryString)}`
+    getDeeplinkUrl: ({ locale }) => {
+      return `${getIntlPrefix(locale)}/action/call`
     },
   },
   [UserActionType.EMAIL]: {
-    getDeeplinkUrl: ({ locale, queryString }) => {
-      return `${getIntlPrefix(locale)}/action/email${parseQueryString(queryString)}`
+    getDeeplinkUrl: ({ locale }) => {
+      return `${getIntlPrefix(locale)}/action/email`
     },
   },
   [UserActionType.DONATION]: {
-    getDeeplinkUrl: ({ locale, queryString }) => {
-      return `${getIntlPrefix(locale)}/donate${parseQueryString(queryString)}`
+    getDeeplinkUrl: ({ locale }) => {
+      return `${getIntlPrefix(locale)}/donate`
     },
   },
   [UserActionType.NFT_MINT]: {
-    getDeeplinkUrl: ({ locale, queryString }) => {
-      return `${getIntlPrefix(locale)}/action/nft-mint${parseQueryString(queryString)}`
+    getDeeplinkUrl: ({ locale }) => {
+      return `${getIntlPrefix(locale)}/action/nft-mint`
     },
   },
   [UserActionType.VOTER_REGISTRATION]: {
-    getDeeplinkUrl: ({ locale, queryString }) => {
-      return `${getIntlPrefix(locale)}/action/voter-registration${parseQueryString(queryString)}`
+    getDeeplinkUrl: ({ locale }) => {
+      return `${getIntlPrefix(locale)}/action/voter-registration`
     },
   },
 }

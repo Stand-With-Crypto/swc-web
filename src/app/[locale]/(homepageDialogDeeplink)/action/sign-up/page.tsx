@@ -7,7 +7,7 @@ import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { usePreventOverscroll } from '@/hooks/usePreventOverscroll'
 import { useSession } from '@/hooks/useSession'
-import { parseCallbackQueryString } from '@/utils/server/searchParams'
+import { getCallbackDestination } from '@/utils/server/searchParams'
 import { cn } from '@/utils/web/cn'
 
 export default function UserActionOptInSWCDeepLink() {
@@ -18,7 +18,7 @@ export default function UserActionOptInSWCDeepLink() {
   const session = useSession()
   const searchParams = useSearchParams()
 
-  const { destination } = parseCallbackQueryString({
+  const { destination } = getCallbackDestination({
     queryString: searchParams?.toString(),
     defaultDestination: 'profile',
   })

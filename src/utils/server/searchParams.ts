@@ -1,26 +1,6 @@
 import { PageProps } from '@/types'
 import { UrlDestinationsWithoutParams } from '@/utils/shared/urls/types'
 
-export function parseQueryString({
-  queryParamKey,
-  queryParamValue,
-}: {
-  queryParamKey: string
-  queryParamValue: string | string[] | null
-}) {
-  if (!queryParamValue) return ''
-
-  if (Array.isArray(queryParamValue)) {
-    const queryString = queryParamValue.reduce((acc, value, index) => {
-      if (index === 0) return `${acc}${queryParamKey}=${value}`
-      return `${acc}&${queryParamKey}=${value}`
-    }, '')
-    return queryString.length ? `?${queryString}` : ''
-  }
-
-  return `?${queryParamKey}=${queryParamValue}`
-}
-
 export function getSearchParam({
   searchParams,
   queryParamKey,
@@ -45,7 +25,7 @@ export function setCallbackQueryString({
   return `?callback=${destination}`
 }
 
-export function parseCallbackQueryString({
+export function getCallbackDestination({
   queryString,
   defaultDestination,
 }: {
