@@ -18,7 +18,7 @@ export function AuthenticateWithProfileUpdate({
   children,
   onProfileUpdateSuccess = () => {},
 }: AuthenticateAndUpdateProfileProps) {
-  const { data: userData } = useApiResponseForUserFullProfileInfo()
+  const { data: userData, mutate } = useApiResponseForUserFullProfileInfo()
   const { data: ensData, isLoading: isLoadingEnsData } = useENS()
 
   const user = useMemo(() => {
@@ -36,7 +36,14 @@ export function AuthenticateWithProfileUpdate({
           hasCompleteUserProfile(user) ? (
             children
           ) : (
-            <UpdateUserProfileForm onSuccess={onProfileUpdateSuccess} user={user} />
+            <UpdateUserProfileForm
+              onSuccess={updatedUserFields => {
+                onProfileUpdateSuccess(updatedUserFields)
+                void mutate()
+              }}
+              shouldFieldsBeRequired
+              user={user}
+            />
           )
         ) : (
           <>

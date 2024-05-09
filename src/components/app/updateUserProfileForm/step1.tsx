@@ -5,7 +5,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import * as Sentry from '@sentry/nextjs'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
-import { z } from 'zod'
 
 import { actionUpdateUserProfile } from '@/actions/actionUpdateUserProfile'
 import { ClientAddress } from '@/clientModels/clientAddress'
@@ -30,24 +29,24 @@ import { Input } from '@/components/ui/input'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
-import {
-  GenericErrorFormValues,
-  trackFormSubmissionSyncErrors,
-  triggerServerActionForForm,
-} from '@/utils/web/formUtils'
+import { trackFormSubmissionSyncErrors, triggerServerActionForForm } from '@/utils/web/formUtils'
 import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
 import { hasCompleteUserProfile } from '@/utils/web/hasCompleteUserProfile'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
-import { zodUpdateUserProfileFormFields } from '@/validation/forms/zodUpdateUserProfile/zodUpdateUserProfileFormFields'
+import {
+  zodUpdateUserProfileFormFields,
+  zodUpdateUserProfileWithRequiredFormFields,
+} from '@/validation/forms/zodUpdateUserProfile/zodUpdateUserProfileFormFields'
 
 const FORM_NAME = 'User Profile'
-type FormValues = z.infer<typeof zodUpdateUserProfileFormFields> & GenericErrorFormValues
 
 export function UpdateUserProfileForm({
   user,
+  shouldFieldsBeRequired = false,
   onSuccess,
 }: {
   user: SensitiveDataClientUserWithENSData & { address: ClientAddress | null }
+  shouldFieldsBeRequired?: boolean
   onSuccess: (updatedUserFields: { firstName: string; lastName: string }) => void
 }) {
   const router = useRouter()
@@ -66,8 +65,13 @@ export function UpdateUserProfileForm({
         }
       : null,
   })
-  const form = useForm<FormValues>({
-    resolver: zodResolver(zodUpdateUserProfileFormFields),
+
+  const form = useForm({
+    resolver: zodResolver(
+      shouldFieldsBeRequired
+        ? zodUpdateUserProfileWithRequiredFormFields
+        : zodUpdateUserProfileFormFields,
+    ),
     defaultValues: defaultValues.current,
   })
   const phoneNumberValue = form.watch('phoneNumber')

@@ -66,12 +66,12 @@ export function TweetAtPersonSection({
   function getTweetMessageBasedOnRepresentativeScore() {
     if (congressPersonNotFound) {
       return `🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕
-May 22nd is Bitcoin Pizza Day! I applaud all the representatives who are protecting Americans’ right to own crypto. See where your representative stands at www.standwithcrypto.org/pizza and join the fight! #StandWithCrypto`
+GENERIC TWEET. See where your representative stands at www.standwithcrypto.org/pizza and join the fight! #StandWithCrypto`
     }
 
-    if (!representative || !representative?.twitterAccounts) {
+    if (!representative) {
       return `🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕
-May 22nd is Bitcoin Pizza Day! I applaud all the representatives who are protecting Americans’ right to own crypto. See where your representative stands at www.standwithcrypto.org/pizza and join the fight! #StandWithCrypto`
+GENERIC TWEET. See where your representative stands at www.standwithcrypto.org/pizza and join the fight! #StandWithCrypto`
     }
 
     const representativeXHandle =
