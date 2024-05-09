@@ -23,17 +23,17 @@ import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/local
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
-import { UserActionTweetedAtPersonCampaignName } from '@/utils/shared/userActionCampaigns'
+import { UserActionTweetAtPersonCampaignName } from '@/utils/shared/userActionCampaigns'
 
 const logger = getLogger(`actionCreateUserActionTweetedAtPerson`)
 
-const createActionTweetedAtPersonInputValidationSchema = object({
-  campaignName: nativeEnum(UserActionTweetedAtPersonCampaignName),
+const createActionTweetAtPersonInputValidationSchema = object({
+  campaignName: nativeEnum(UserActionTweetAtPersonCampaignName),
   dtsiSlug: string().nullable(),
 })
 
-export type CreateActionTweetedAtPersonInput = z.infer<
-  typeof createActionTweetedAtPersonInputValidationSchema
+export type CreateActionTweetAtPersonInput = z.infer<
+  typeof createActionTweetAtPersonInputValidationSchema
 >
 
 interface SharedDependencies {
@@ -53,24 +53,24 @@ type CampaignDuration = {
   END_TIME: Date | null
 }
 
-const CAMPAIGN_DURATION: Record<UserActionTweetedAtPersonCampaignName, CampaignDuration> = {
-  [UserActionTweetedAtPersonCampaignName['DEFAULT']]: {
+const CAMPAIGN_DURATION: Record<UserActionTweetAtPersonCampaignName, CampaignDuration> = {
+  [UserActionTweetAtPersonCampaignName['DEFAULT']]: {
     START_TIME: null,
     END_TIME: null,
   },
-  [UserActionTweetedAtPersonCampaignName['2024_05_22_PIZZA_DAY']]: {
+  [UserActionTweetAtPersonCampaignName['2024_05_22_PIZZA_DAY']]: {
     START_TIME: new Date('2024-05-19'),
     END_TIME: new Date('2024-05-22'),
   },
 }
 
-async function _actionCreateUserActionTweetedAtPerson(input: CreateActionTweetedAtPersonInput) {
+async function _actionCreateUserActionTweetedAtPerson(input: CreateActionTweetAtPersonInput) {
   logger.info('triggered')
   const { triggerRateLimiterAtMostOnce } = getRequestRateLimiter({
     context: 'unauthenticated',
   })
 
-  const validatedInput = createActionTweetedAtPersonInputValidationSchema.safeParse(input)
+  const validatedInput = createActionTweetAtPersonInputValidationSchema.safeParse(input)
   if (!validatedInput.success) {
     return {
       errors: validatedInput.error.flatten().fieldErrors,
@@ -178,11 +178,11 @@ async function createUser(sharedDependencies: Pick<SharedDependencies, 'localUse
 
 async function getRecentUserActionByUserId(
   userId: User['id'],
-  validatedInput: z.SafeParseSuccess<CreateActionTweetedAtPersonInput>,
+  validatedInput: z.SafeParseSuccess<CreateActionTweetAtPersonInput>,
 ) {
   return prismaClient.userAction.findFirst({
     where: {
-      actionType: UserActionType.TWEETED_TO_PERSON,
+      actionType: UserActionType.TWEET_AT_PERSON,
       campaignName: validatedInput.data.campaignName,
       userId: userId,
     },
@@ -193,11 +193,11 @@ async function logSpamActionSubmissions({
   validatedInput,
   sharedDependencies,
 }: {
-  validatedInput: z.SafeParseSuccess<CreateActionTweetedAtPersonInput>
+  validatedInput: z.SafeParseSuccess<CreateActionTweetAtPersonInput>
   sharedDependencies: Pick<SharedDependencies, 'analytics'>
 }) {
   await sharedDependencies.analytics.trackUserActionCreatedIgnored({
-    actionType: UserActionType.TWEETED_TO_PERSON,
+    actionType: UserActionType.TWEET_AT_PERSON,
     campaignName: validatedInput.data.campaignName,
     reason: 'Too Many Recent',
     userState: 'Existing',
@@ -213,14 +213,14 @@ async function createAction<U extends User>({
 }: {
   user: U
   isNewUser: boolean
-  validatedInput: CreateActionTweetedAtPersonInput
+  validatedInput: CreateActionTweetAtPersonInput
   userMatch: UserAndMethodOfMatch
   sharedDependencies: Pick<SharedDependencies, 'sessionId' | 'analytics' | 'peopleAnalytics'>
 }) {
   const userAction = await prismaClient.userAction.create({
     data: {
       user: { connect: { id: user.id } },
-      actionType: UserActionType.TWEETED_TO_PERSON,
+      actionType: UserActionType.TWEET_AT_PERSON,
       campaignName: validatedInput.campaignName,
       ...('userCryptoAddress' in userMatch && userMatch.userCryptoAddress
         ? {
@@ -233,7 +233,7 @@ async function createAction<U extends User>({
   logger.info('created user action')
 
   await sharedDependencies.analytics.trackUserActionCreated({
-    actionType: UserActionType.TWEETED_TO_PERSON,
+    actionType: UserActionType.TWEET_AT_PERSON,
     campaignName: validatedInput.campaignName,
     userState: isNewUser ? 'New' : 'Existing',
   })

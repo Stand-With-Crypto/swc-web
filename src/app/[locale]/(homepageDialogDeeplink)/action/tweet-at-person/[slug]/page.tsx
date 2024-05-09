@@ -8,20 +8,20 @@ import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
-import { UserActionTweetedAtPersonCampaignName } from '@/utils/shared/userActionCampaigns'
+import { UserActionTweetAtPersonCampaignName } from '@/utils/shared/userActionCampaigns'
 import { cn } from '@/utils/web/cn'
 
 export const revalidate = SECONDS_DURATION.SECOND * 30
 export const dynamic = 'error'
 export const dynamicParams = true
 
-const TWEET_AT_PERSON_CAMPAIGN_SLUGS = Object.values(UserActionTweetedAtPersonCampaignName)
+const TWEET_AT_PERSON_CAMPAIGN_SLUGS = Object.values(UserActionTweetAtPersonCampaignName)
 
 type Props = PageProps<{ slug: string }>
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = params
-  const content = CAMPAIGN_METADATA[slug as UserActionTweetedAtPersonCampaignName]
+  const content = CAMPAIGN_METADATA[slug as UserActionTweetAtPersonCampaignName]
 
   if (content) {
     return generateMetadataDetails({
@@ -41,7 +41,7 @@ export default async function UserActionTweetAtPersonDeepLink({ params }: Props)
   if (
     !slug ||
     (!TWEET_AT_PERSON_CAMPAIGN_SLUGS.includes(slug) &&
-      slug !== UserActionTweetedAtPersonCampaignName.DEFAULT)
+      slug !== UserActionTweetAtPersonCampaignName.DEFAULT)
   ) {
     notFound()
   }
@@ -50,7 +50,7 @@ export default async function UserActionTweetAtPersonDeepLink({ params }: Props)
     <HomepageDialogDeeplinkLayout pageParams={params}>
       <div className={cn(dialogContentPaddingStyles, 'max-md:h-full')}>
         <UserActionFormTweetToPersonDeeplinkWrapper
-          slug={slug as UserActionTweetedAtPersonCampaignName}
+          slug={slug as UserActionTweetAtPersonCampaignName}
         />
       </div>
     </HomepageDialogDeeplinkLayout>

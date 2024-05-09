@@ -7,7 +7,7 @@ import { z } from 'zod'
 
 import {
   actionCreateUserActionTweetedAtPerson,
-  CreateActionTweetedAtPersonInput,
+  CreateActionTweetAtPersonInput,
 } from '@/actions/actionCreateUserActionTweetedAtPerson'
 import { useCongresspersonData } from '@/components/app/userActionFormCallCongressperson/sections/address'
 import {
@@ -25,7 +25,7 @@ import {
   convertDTSIPersonStanceScoreToLetterGrade,
   DTSILetterGrade,
 } from '@/utils/dtsi/dtsiStanceScoreUtils'
-import { UserActionTweetedAtPersonCampaignName } from '@/utils/shared/userActionCampaigns'
+import { UserActionTweetAtPersonCampaignName } from '@/utils/shared/userActionCampaigns'
 import { createTweetLink } from '@/utils/web/createTweetLink'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
@@ -37,7 +37,7 @@ type OnFindCongressPersonPayload = DTSIPeopleFromCongressionalDistrict & {
 }
 
 interface TweetAtPersonSectionProps {
-  slug: UserActionTweetedAtPersonCampaignName
+  slug: UserActionTweetAtPersonCampaignName
   sectionProps: UseSectionsReturn<TweetAtPersonSectionNames>
 }
 
@@ -69,7 +69,7 @@ export function TweetAtPersonSection({
 May 22nd is Bitcoin Pizza Day! I applaud all the representatives who are protecting Americans’ right to own crypto. See where your representative stands at www.standwithcrypto.org/pizza and join the fight! #StandWithCrypto`
     }
 
-    if (!representative) {
+    if (!representative || !representative?.twitterAccounts) {
       return `🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕
 May 22nd is Bitcoin Pizza Day! I applaud all the representatives who are protecting Americans’ right to own crypto. See where your representative stands at www.standwithcrypto.org/pizza and join the fight! #StandWithCrypto`
     }
@@ -103,7 +103,7 @@ May 22nd is Bitcoin Pizza Day! Like many other politicians my representative doe
   async function handleClaimNft() {
     setIsMintingNFT(true)
 
-    const data: CreateActionTweetedAtPersonInput = {
+    const data: CreateActionTweetAtPersonInput = {
       campaignName: slug,
       dtsiSlug: representative?.slug ?? null,
     }
@@ -118,7 +118,7 @@ May 22nd is Bitcoin Pizza Day! Like many other politicians my representative doe
         },
         analyticsProps: {
           'Campaign Name': data.campaignName,
-          'User Action Type': UserActionType.TWEETED_TO_PERSON,
+          'User Action Type': UserActionType.TWEET_AT_PERSON,
           dtsiSlug: representative?.slug ?? null,
         },
         payload: data,

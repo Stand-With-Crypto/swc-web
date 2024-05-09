@@ -1,11 +1,10 @@
 import { NFTSlug } from '@/utils/shared/nft'
-import { UserActionTweetedAtPersonCampaignName } from '@/utils/shared/userActionCampaigns'
+import { UserActionTweetAtPersonCampaignName } from '@/utils/shared/userActionCampaigns'
 
-export const ANALYTICS_NAME_USER_ACTION_FORM_TWEETED_AT_PERSON =
-  'User Action Form Tweeted At Person'
+export const ANALYTICS_NAME_USER_ACTION_FORM_TWEET_AT_PERSON = 'User Action Form Tweet At Person'
 
-export const ANALYTICS_NAME_USER_ACTION_FORM_PIZZA_DAY_TWEETED_AT_PERSON_CAMPAIGN =
-  'User Action Form Pizza Day 2024/05/22 Tweeted At Person Campaign'
+export const ANALYTICS_NAME_USER_ACTION_FORM_PIZZA_DAY_TWEET_AT_PERSON_CAMPAIGN =
+  'User Action Form Pizza Day 2024/05/22 Tweet At Person Campaign'
 
 export enum TweetAtPersonSectionNames {
   ONBOARDING = 'Onboarding',
@@ -20,15 +19,15 @@ export const PIZZA_DAY_LIVE_EVENT_SLUG_NFT_METADATA: Record<string, NFTSlug> = {
 type Message = 'title' | 'analyticsName'
 
 export const CAMPAIGN_METADATA: Record<
-  UserActionTweetedAtPersonCampaignName,
+  UserActionTweetAtPersonCampaignName,
   Record<Message, string>
 > = {
-  [UserActionTweetedAtPersonCampaignName['2024_05_22_PIZZA_DAY']]: {
-    title: 'Pizza Day - Tweet at your Congress Person',
-    analyticsName: ANALYTICS_NAME_USER_ACTION_FORM_PIZZA_DAY_TWEETED_AT_PERSON_CAMPAIGN,
-  },
-  [UserActionTweetedAtPersonCampaignName.DEFAULT]: {
+  [UserActionTweetAtPersonCampaignName.DEFAULT]: {
     title: 'Tweet at your Congress Person',
-    analyticsName: ANALYTICS_NAME_USER_ACTION_FORM_TWEETED_AT_PERSON,
+    analyticsName: ANALYTICS_NAME_USER_ACTION_FORM_TWEET_AT_PERSON,
+  },
+  [UserActionTweetAtPersonCampaignName['2024_05_22_PIZZA_DAY']]: {
+    title: 'Pizza Day - Tweet at your Congress Person',
+    analyticsName: ANALYTICS_NAME_USER_ACTION_FORM_PIZZA_DAY_TWEET_AT_PERSON_CAMPAIGN,
   },
 }
