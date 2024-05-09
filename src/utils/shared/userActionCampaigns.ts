@@ -9,6 +9,7 @@ export const ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN = [
   UserActionType.TWEET,
   UserActionType.NFT_MINT,
   UserActionType.LIVE_EVENT,
+  UserActionType.TWEET_AT_PERSON,
 ] as const
 export type ActiveClientUserActionWithCampaignType =
   (typeof ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN)[number]
@@ -39,6 +40,10 @@ export enum UserActionVoterRegistrationCampaignName {
 export enum UserActionLiveEventCampaignName {
   '2024_03_04_LA' = '2024_03_04_LA',
 }
+export enum UserActionTweetAtPersonCampaignName {
+  DEFAULT = 'DEFAULT',
+  '2024_05_22_PIZZA_DAY' = '2024_05_22_PIZZA_DAY',
+}
 
 export const USER_ACTION_TO_CAMPAIGN_NAME_MAP = {
   [UserActionType.EMAIL]: UserActionEmailCampaignName,
@@ -49,6 +54,7 @@ export const USER_ACTION_TO_CAMPAIGN_NAME_MAP = {
   [UserActionType.NFT_MINT]: UserActionNftMintCampaignName,
   [UserActionType.VOTER_REGISTRATION]: UserActionVoterRegistrationCampaignName,
   [UserActionType.LIVE_EVENT]: UserActionLiveEventCampaignName,
+  [UserActionType.TWEET_AT_PERSON]: UserActionTweetAtPersonCampaignName,
 } satisfies Record<ActiveClientUserActionWithCampaignType, any>
 
 export const USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
@@ -60,4 +66,5 @@ export const USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
   [UserActionType.NFT_MINT]: UserActionNftMintCampaignName.DEFAULT,
   [UserActionType.VOTER_REGISTRATION]: UserActionVoterRegistrationCampaignName.DEFAULT,
   [UserActionType.LIVE_EVENT]: UserActionLiveEventCampaignName['2024_03_04_LA'],
+  [UserActionType.TWEET_AT_PERSON]: UserActionTweetAtPersonCampaignName.DEFAULT,
 } satisfies Record<ActiveClientUserActionWithCampaignType, string>
