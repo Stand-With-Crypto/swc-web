@@ -26,8 +26,8 @@ import {
   UserActionLiveEventCampaignName,
   UserActionNftMintCampaignName,
   UserActionOptInCampaignName,
+  UserActionTweetAtPersonCampaignName,
   UserActionTweetCampaignName,
-  UserActionTweetedAtPersonCampaignName,
   UserActionVoterRegistrationCampaignName,
 } from '@/utils/shared/userActionCampaigns'
 
@@ -63,9 +63,9 @@ export const ACTION_NFT_SLUG: Record<
   [UserActionType.LIVE_EVENT]: {
     [UserActionLiveEventCampaignName['2024_03_04_LA']]: NFTSlug.LA_CRYPTO_EVENT_2024_03_04,
   },
-  [UserActionType.TWEETED_TO_PERSON]: {
-    [UserActionTweetedAtPersonCampaignName.DEFAULT]: null,
-    [UserActionTweetedAtPersonCampaignName['2024_05_22_PIZZA_DAY']]: NFTSlug.PIZZA_DAY_2024_05_22,
+  [UserActionType.TWEET_AT_PERSON]: {
+    [UserActionTweetAtPersonCampaignName.DEFAULT]: null,
+    [UserActionTweetAtPersonCampaignName['2024_05_22_PIZZA_DAY']]: NFTSlug.PIZZA_DAY_2024_05_22,
   },
 }
 

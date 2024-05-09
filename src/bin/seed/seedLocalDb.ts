@@ -16,6 +16,7 @@ import { mockCreateUserActionDonationInput } from '@/mocks/models/mockUserAction
 import { mockCreateUserActionEmailInput } from '@/mocks/models/mockUserActionEmail'
 import { mockCreateUserActionEmailRecipientInput } from '@/mocks/models/mockUserActionEmailRecipient'
 import { mockCreateUserActionOptInInput } from '@/mocks/models/mockUserActionOptIn'
+import { mockUserActionTweetAtPersonInput } from '@/mocks/models/mockUserActionTweetAtPerson'
 import { mockCreateUserActionVoterRegistrationInput } from '@/mocks/models/mockUserActionVoterRegistration'
 import {
   mockCreateUserCryptoAddressInput,
@@ -408,6 +409,22 @@ async function seed() {
   )
   const userActionCall = await prismaClient.userActionCall.findMany()
   logEntity({ userActionCall })
+
+  /*
+  userActionTweetAtPerson
+  */
+  await batchAsyncAndLog(
+    userActionsByType[UserActionType.TWEET_AT_PERSON].map(action => ({
+      ...mockUserActionTweetAtPersonInput(),
+      id: action.id,
+    })),
+    data =>
+      prismaClient.userActionTweetAtPerson.createMany({
+        data,
+      }),
+  )
+  const userActionTweetAtPerson = await prismaClient.userActionTweetAtPerson.findMany()
+  logEntity({ userActionTweetAtPerson })
 
   /*
   userActionDonation

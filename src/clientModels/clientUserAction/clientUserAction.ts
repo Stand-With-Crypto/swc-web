@@ -6,6 +6,7 @@ import {
   UserActionEmail,
   UserActionEmailRecipient,
   UserActionOptIn,
+  UserActionTweetAtPerson,
   UserActionType,
   UserActionVoterRegistration,
 } from '@prisma/client'
@@ -16,7 +17,7 @@ import { ClientModel, getClientModel } from '@/clientModels/utils'
 import { DTSIPersonForUserActions } from '@/data/dtsi/queries/queryDTSIPeopleBySlugForUserActions'
 import {
   UserActionLiveEventCampaignName,
-  UserActionTweetedAtPersonCampaignName,
+  UserActionTweetAtPersonCampaignName,
 } from '@/utils/shared/userActionCampaigns'
 
 /*
@@ -35,6 +36,7 @@ type ClientUserActionDatabaseQuery = UserAction & {
   userActionDonation: UserActionDonation | null
   userActionOptIn: UserActionOptIn | null
   userActionVoterRegistration: UserActionVoterRegistration | null
+  userActionTweetAtPerson: UserActionTweetAtPerson | null
 }
 
 type ClientUserActionEmailRecipient = Pick<UserActionEmailRecipient, 'id'> & {
@@ -69,9 +71,9 @@ type ClientUserActionLiveEvent = {
   actionType: typeof UserActionType.LIVE_EVENT
   campaignName: UserActionLiveEventCampaignName
 }
-type ClientUserActionTweetedToPerson = {
-  actionType: typeof UserActionType.TWEETED_TO_PERSON
-  campaignName: UserActionTweetedAtPersonCampaignName
+type ClientUserActionTweetAtPerson = {
+  actionType: typeof UserActionType.TWEET_AT_PERSON
+  campaignName: UserActionTweetAtPersonCampaignName
   person: DTSIPersonForUserActions | null
 }
 
@@ -91,7 +93,7 @@ export type ClientUserAction = ClientModel<
       | ClientUserActionNFTMint
       | ClientUserActionVoterRegistration
       | ClientUserActionLiveEvent
-      | ClientUserActionTweetedToPerson
+      | ClientUserActionTweetAtPerson
     )
 >
 
@@ -184,6 +186,15 @@ export const getClientUserAction = ({
     case UserActionType.LIVE_EVENT: {
       const campaignName = record.campaignName as UserActionLiveEventCampaignName
       return getClientModel({ ...sharedProps, actionType, campaignName })
+    }
+    case UserActionType.TWEET_AT_PERSON: {
+      const { recipientDtsiSlug } = getRelatedModel(record, 'userActionTweetAtPerson')
+      const tweetAtPersonFields: ClientUserActionTweetAtPerson = {
+        person: recipientDtsiSlug ? peopleBySlug[recipientDtsiSlug] : null,
+        campaignName: record.campaignName as UserActionTweetAtPersonCampaignName,
+        actionType,
+      }
+      return getClientModel({ ...sharedProps, ...tweetAtPersonFields })
     }
   }
   throw new Error(`getClientUserAction: no user action fk found for id ${id}`)

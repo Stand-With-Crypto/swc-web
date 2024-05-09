@@ -6,24 +6,28 @@ import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userAc
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
+import { Video } from '@/components/ui/video'
 import { cn } from '@/utils/web/cn'
 
 interface HeroImageProps {
   children: ReactNode
   className?: string
+  /**
+   * Fallback content to display while the video is loading or if the browser does not support the video tag.
+   */
+  fallback?: ReactNode
 }
 
-const HeroImage = ({ children, className }: HeroImageProps) => {
+const HeroImage = ({ children, className, fallback }: HeroImageProps) => {
   return (
     <LinkBox className="relative h-[320px] overflow-hidden md:rounded-xl lg:h-[400px]">
-      <NextImage
-        alt="sign up"
-        className="h-full w-full object-cover"
-        fill
-        priority
-        sizes={'(max-width: 400px) 375px, 500px'}
-        src="/homepageHero.gif"
+      <Video
+        className={cn('absolute left-0 top-0 h-full w-full object-cover')}
+        fallback={fallback}
+        poster="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP0dpm3AgAD5gHXYQBQLgAAAABJRU5ErkJggg=="
+        src="https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/heroImage.mp4"
       />
+
       <div
         className={cn(
           'absolute bottom-0 flex w-full items-center justify-between gap-4 p-4 text-sm text-white',
@@ -41,7 +45,20 @@ const HeroImage = ({ children, className }: HeroImageProps) => {
 }
 
 const unauthenticatedContent = (
-  <HeroImage>
+  <HeroImage
+    fallback={
+      <NextImage
+        alt="sign up"
+        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOM8FqyAgAEOAHwiAoWHAAAAABJRU5ErkJggg=="
+        className="h-full w-full object-cover"
+        fill
+        placeholder="blur"
+        priority
+        sizes={'(max-width: 400px) 375px, 500px'}
+        src="/homepageHero.webp"
+      />
+    }
+  >
     <p>Join Stand With Crypto and help us defend your right to own crypto in America.</p>
     <Button className={linkBoxLinkClassName} data-link-box-subject variant="secondary">
       Join
@@ -52,7 +69,21 @@ const unauthenticatedContent = (
 
 const authenticatedContent = (
   <UserActionFormEmailCongresspersonDialog>
-    <HeroImage className="flex-col sm:flex-row">
+    <HeroImage
+      className="flex-col sm:flex-row"
+      fallback={
+        <NextImage
+          alt="Email your rep"
+          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOM8FqyAgAEOAHwiAoWHAAAAABJRU5ErkJggg=="
+          className="h-full w-full object-cover"
+          fill
+          placeholder="blur"
+          priority
+          sizes={'(max-width: 400px) 375px, 500px'}
+          src="/homepageHero.webp"
+        />
+      }
+    >
       <p>
         FIT21 is a bipartisan crypto bill being considered for a vote in Congress. Ask your Rep to
         support its clear, commonsense rules for crypto today.

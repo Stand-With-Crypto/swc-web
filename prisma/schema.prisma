@@ -250,6 +250,7 @@ enum UserActionType {
   NFT_MINT
   VOTER_REGISTRATION
   LIVE_EVENT
+  TWEET_AT_PERSON
 }
 
 model UserAction {
@@ -279,6 +280,7 @@ model UserAction {
   userActionDonation          UserActionDonation?
   userActionOptIn             UserActionOptIn?
   userActionVoterRegistration UserActionVoterRegistration?
+  userActionTweetAtPerson     UserActionTweetAtPerson?
 
   @@index([datetimeCreated])
   @@index([userId, actionType, campaignName])
@@ -407,4 +409,13 @@ model UserActionVoterRegistration {
 
   @@index([id])
   @@map("user_action_voter_registration")
+}
+
+model UserActionTweetAtPerson {
+  id                String     @id @default(uuid())
+  userAction        UserAction @relation(fields: [id], references: [id])
+  recipientDtsiSlug String?    @map("recipient_dtsi_slug")
+
+  @@index([id])
+  @@map("user_action_tweet_at_person")
 }

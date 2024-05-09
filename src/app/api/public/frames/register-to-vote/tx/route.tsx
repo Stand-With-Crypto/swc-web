@@ -14,8 +14,9 @@ const BASE_CHAIN_ID = '8453'
 export async function POST(req: NextRequest): Promise<Response> {
   const body: FrameRequest = (await req.json()) as FrameRequest
   const { isValid, message } = await getFrameMessage(body, { neynarApiKey: NEYNAR_API_KEY }) // NOTE: Frame state data does not exist on localhost.
-  if (!isValid || !message)
+  if (!isValid || !message) {
     return NextResponse.json({ error: 'invalid frame message' }, { status: 400 })
+  }
 
   const walletAddress =
     message.interactor?.verified_accounts[0] ?? message.interactor?.custody_address
