@@ -22,7 +22,7 @@ import {
   getCapitolCanaryCampaignID,
 } from '@/utils/server/capitolCanary/campaigns'
 import { UpsertAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
-import { claimOptInNFTIfUserDidNotClaimIt } from '@/utils/server/nft/claimOptInNft'
+import { claimOptInNFTIfNotClaimed } from '@/utils/server/nft/claimOptInNft'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
@@ -131,7 +131,7 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
   })
 
   await handleCapitolCanaryAdvocateUpsert(updatedUser, primaryUserEmailAddress, user)
-  await claimOptInNFTIfUserDidNotClaimIt({
+  await claimOptInNFTIfNotClaimed({
     id: user.id,
     primaryUserCryptoAddress: updatedUser.primaryUserCryptoAddress,
   })

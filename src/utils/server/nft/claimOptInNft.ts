@@ -4,7 +4,7 @@ import { claimNFT } from '@/utils/server/nft/claimNFT'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
 
-export async function claimOptInNFTIfUserDidNotClaimIt(user: {
+export async function claimOptInNFTIfNotClaimed(user: {
   id: string
   primaryUserCryptoAddress: UserCryptoAddress | null
 }) {
