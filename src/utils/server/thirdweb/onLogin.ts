@@ -691,6 +691,6 @@ async function triggerPostLoginUserActionSteps({
   } else {
     log(`triggerPostLoginUserActionSteps: opt in user action previously existed`)
   }
-  const pastActionsMinted = await mintPastActions(user, userCryptoAddress, localUser)
+  const pastActionsMinted = await mintPastActions(user.id, userCryptoAddress, localUser)
   return { pastActionsMinted, hadOptInUserAction, optInUserAction }
 }
