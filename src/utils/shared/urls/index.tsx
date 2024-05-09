@@ -59,6 +59,7 @@ export const getIntlUrls = (
       stateCode: USStateCode
       district: NormalizedDTSIDistrictId
     }) => `${localePrefix}/locations/us/state/${stateCode.toLowerCase()}/district/${district}`,
+    becomeMember: () => `${localePrefix}/action/become-member`,
   }
 }
 
