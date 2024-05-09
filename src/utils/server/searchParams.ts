@@ -45,12 +45,12 @@ export function setCallbackQueryString({
   return `?callback=${destination}`
 }
 
-export function parseCallbackQueryString<K extends UrlDestinationsWithoutParams>({
+export function parseCallbackQueryString({
   queryString,
   defaultDestination,
 }: {
   queryString?: string
-  defaultDestination: K
+  defaultDestination: UrlDestinationsWithoutParams
 }) {
   if (!queryString) {
     return {
