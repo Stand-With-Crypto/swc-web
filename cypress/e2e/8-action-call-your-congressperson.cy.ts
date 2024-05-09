@@ -37,9 +37,34 @@ it('action - call your congressperson', () => {
     searchText: '350 Fifth Avenue New York, NY 10118',
   })
 
-  cy.contains(/Your representative is \w+/gim).should('be.visible')
+  cy.contains(/Your representative is Jerrold Nadler/).should('be.visible')
+
   /**
-   * Make sure we get the button inside the dialog, not some other button on the page.
+   * Stubbing window.confirm to prevent the browser from opening the phone app.
    */
-  cy.get('@ctaDialog').contains('button', /Call/).click({ force: true })
+  cy.on('window:confirm', () => false)
+
+  cy.get('@ctaDialog').find('a[type="button"]').contains('Call').as('callButton')
+
+  /**
+   * Prevent browser from opening the phone app.
+   */
+  cy.get('@callButton')
+    .should('be.visible')
+    .then($el => {
+      $el.on('click', e => {
+        e.preventDefault()
+      })
+    })
+  cy.get('@callButton').click()
+
+  cy.get('@ctaDialog').contains('button', 'Call complete').should('be.visible').click()
+
+  // waiting for Inngest to consume job
+  cy.contains('Nice work!')
+
+  // validate database
+  cy.queryDb('SELECT * FROM user_action WHERE action_type="CALL"').then((result: any) => {
+    expect(result.length, 'user_action to exist in database').to.equal(1)
+  })
 })
