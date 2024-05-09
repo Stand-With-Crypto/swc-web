@@ -23,8 +23,10 @@ import {
   getCapitolCanaryCampaignID,
 } from '@/utils/server/capitolCanary/campaigns'
 import { UpsertAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
+import { hasCompleteUserProfileServer } from '@/utils/server/hasCompleteUserProfile'
 import { mergeUsers } from '@/utils/server/mergeUsers/mergeUsers'
 import { claimNFT } from '@/utils/server/nft/claimNFT'
+import { claimOptInNFTIfUserDidNotClaimIt } from '@/utils/server/nft/claimOptInNft'
 import { mintPastActions } from '@/utils/server/nft/mintPastActions'
 import { prismaClient } from '@/utils/server/prismaClient'
 import {
@@ -82,6 +84,14 @@ export async function onLogin(
   })
 
   if (existingVerifiedUser) {
+    // If the user has completed their profile, we should mint the OptIn NFT if the user did not claim it
+    if (hasCompleteUserProfileServer(existingVerifiedUser)) {
+      await claimOptInNFTIfUserDidNotClaimIt({
+        id: existingVerifiedUser.id,
+        primaryUserCryptoAddress: existingVerifiedUser.userCryptoAddresses[0],
+      })
+    }
+
     log('existing user found')
     await Promise.all([
       getServerAnalytics({ userId: existingVerifiedUser.id, localUser })
@@ -681,6 +691,6 @@ async function triggerPostLoginUserActionSteps({
   } else {
     log(`triggerPostLoginUserActionSteps: opt in user action previously existed`)
   }
-  const pastActionsMinted = await mintPastActions(user.id, userCryptoAddress, localUser)
+  const pastActionsMinted = await mintPastActions(user, userCryptoAddress, localUser)
   return { pastActionsMinted, hadOptInUserAction, optInUserAction }
 }

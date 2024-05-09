@@ -1,4 +1,4 @@
-import { UserCryptoAddress } from '@prisma/client'
+import { User, UserCryptoAddress } from '@prisma/client'
 
 import { ACTION_NFT_SLUG, claimNFT } from '@/utils/server/nft/claimNFT'
 import { prismaClient } from '@/utils/server/prismaClient'
@@ -9,7 +9,7 @@ import { getLogger } from '@/utils/shared/logger'
 const logger = getLogger('mintPastActions')
 
 export async function mintPastActions(
-  userId: string,
+  user: User,
   userCryptoAddress: UserCryptoAddress,
   localUser: ServerLocalUser | null,
 ) {
@@ -17,12 +17,12 @@ export async function mintPastActions(
 
   const actions = await prismaClient.userAction.findMany({
     where: {
-      userId: userId,
+      userId: user.id,
       nftMintId: null,
     },
   })
 
-  const analytics = getServerAnalytics({ userId: userId, localUser })
+  const analytics = getServerAnalytics({ userId: user.id, localUser })
   for (const action of actions) {
     const nftSlug = ACTION_NFT_SLUG[action.actionType]?.[action.campaignName]
     if (!nftSlug) {
@@ -36,6 +36,13 @@ export async function mintPastActions(
       'User Action Type': action.actionType,
       'User Action Id': action.id,
     })
+
+    const signUpFlowExperimentVariant =
+      localUser?.persisted?.experiments?.gh02_SWCSignUpFlowExperiment
+    if (action.actionType === 'OPT_IN' && signUpFlowExperimentVariant === 'variant') {
+      continue
+    }
+
     await claimNFT(action, userCryptoAddress)
   }
 
