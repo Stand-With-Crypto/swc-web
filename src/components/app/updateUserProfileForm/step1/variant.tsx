@@ -60,10 +60,7 @@ export function UpdateUserProfileForm({
           description: user.address.formattedDescription,
           place_id: user.address.googlePlaceId,
         }
-      : {
-          description: '',
-          place_id: '',
-        },
+      : undefined,
   })
   const form = useForm<FormValues>({
     resolver: zodResolver(zodUpdateUserProfileFormFieldsRequired),
