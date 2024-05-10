@@ -43,7 +43,7 @@ export function usePreventMobileKeyboardOffset(shouldScrollTop: boolean) {
 
   React.useEffect(() => {
     if (isMobile) setScrollHeight()
-    if (shouldScrollTop) window.scrollTo(0, 0)
+    if (shouldScrollTop && isMobile) window.scrollTo(0, 0)
 
     return () => {
       resetScrollPosition()
