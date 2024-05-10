@@ -227,6 +227,14 @@ async function createAction<U extends User>({
             userCryptoAddress: { connect: { id: userMatch.userCryptoAddress.id } },
           }
         : { userSession: { connect: { id: sharedDependencies.sessionId } } }),
+      userActionTweetAtPerson: {
+        create: {
+          recipientDtsiSlug: validatedInput.dtsiSlug,
+        },
+      },
+    },
+    include: {
+      userActionTweetAtPerson: true,
     },
   })
 
