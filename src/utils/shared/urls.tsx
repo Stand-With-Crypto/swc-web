@@ -48,16 +48,19 @@ export const getIntlUrls = (
     profile: () => `${localePrefix}/profile`,
     internalHomepage: () => `${localePrefix}/internal`,
     locationStateSpecific: (stateCode: USStateCode) =>
-      `${localePrefix}/locations/us/state/${stateCode.toLowerCase()}`,
+      `${localePrefix}/races/state/${stateCode.toLowerCase()}`,
     locationStateSpecificSenateRace: (stateCode: USStateCode) =>
-      `${localePrefix}/locations/us/state/${stateCode.toLowerCase()}/senate`,
+      `${localePrefix}/races/state/${stateCode.toLowerCase()}/senate`,
+    locationUnitedStatesPresidential: () => `${localePrefix}/races/presidential`,
+    locationUnitedStates: () => `${localePrefix}/races/`,
+    endorsedCandidates: () => `${localePrefix}/races/endorsed/`,
     locationDistrictSpecific: ({
       stateCode,
       district,
     }: {
       stateCode: USStateCode
       district: NormalizedDTSIDistrictId
-    }) => `${localePrefix}/locations/us/state/${stateCode.toLowerCase()}/district/${district}`,
+    }) => `${localePrefix}/races/state/${stateCode.toLowerCase()}/district/${district}`,
   }
 }
 

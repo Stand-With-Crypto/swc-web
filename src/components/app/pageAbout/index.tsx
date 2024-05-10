@@ -9,7 +9,7 @@ function P(props: { children: React.ReactNode }) {
 
 export function PageAbout({ title, description }: { title: string; description: string }) {
   return (
-    <div className="container space-y-16">
+    <div className="standard-spacing-from-navbar container space-y-16">
       <section className="mb-16 space-y-7 md:mb-24">
         <PageTitle>{title}</PageTitle>
         <PageSubTitle>{description}</PageSubTitle>

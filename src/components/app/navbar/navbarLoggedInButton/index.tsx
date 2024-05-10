@@ -30,7 +30,7 @@ export function NavbarLoggedInButton({ onOpenChange }: { onOpenChange: (open: bo
     >
       <PopoverTrigger asChild>
         {displayName ? (
-          <Button variant="secondary">
+          <Button>
             <div className="max-w-[150px] truncate">{displayName}</div>
           </Button>
         ) : (

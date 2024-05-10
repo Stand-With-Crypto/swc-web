@@ -116,13 +116,19 @@ const getRootBlockComponent = (node: RichTextEditorRootBlock) => {
   return null
 }
 
-export const RichTextFormatter: React.FC<{ richText: unknown | null }> = ({ richText }) => {
+export const RichTextFormatter: React.FC<{ richText: unknown | null; className?: string }> = ({
+  richText,
+  className,
+}) => {
   if (!richText) {
     return null
   }
   const value = richText as RichTextEditorValue
   return (
-    <div className="max-w-full break-words text-left" style={{ wordBreak: 'break-word' }}>
+    <div
+      className={cn('max-w-full break-words text-left', className)}
+      style={{ wordBreak: 'break-word' }}
+    >
       {value.map((node, index) => (
         <React.Fragment key={index}>{getRootBlockComponent(node)}</React.Fragment>
       ))}

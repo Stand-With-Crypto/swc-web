@@ -10,6 +10,8 @@ export const buttonVariantsConfig = {
   variant: {
     default: 'bg-primary text-primary-foreground hover:bg-primary/80 antialiased',
     'primary-cta': 'bg-primary-cta text-primary-cta-foreground hover:bg-primary-cta/80 antialiased',
+    'primary-cta-outline':
+      'border-primary-cta text-primary-cta bg-purple-200 hover:bg-purple-200/80 antialiased',
     destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/80',
     outline:
       'border text-fontcolor border-input bg-background hover:bg-accent hover:text-accent-foreground',

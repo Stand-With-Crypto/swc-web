@@ -103,9 +103,7 @@ export function DTSICongresspersonAssociatedWithFormAddress({
           <div>
             <CryptoSupportHighlight
               className="max-sm:px-2 max-sm:py-2 max-sm:text-base"
-              stanceScore={
-                person.manuallyOverriddenStanceScore || person.computedStanceScore || null
-              }
+              stanceScore={person.manuallyOverriddenStanceScore || person.computedStanceScore}
               text={
                 isNil(person.manuallyOverriddenStanceScore || person.computedStanceScore)
                   ? 'Unknown stance on crypto'

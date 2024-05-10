@@ -11,7 +11,7 @@ import { createWarpcastLink } from '@/utils/web/createWarpcastLink'
 
 export function PageContribute() {
   return (
-    <div className="container space-y-16 md:space-y-28">
+    <div className="standard-spacing-from-navbar container space-y-16 md:space-y-28">
       <section>
         <PageTitle className="mb-8">Become a partner</PageTitle>
         <PageSubTitle>

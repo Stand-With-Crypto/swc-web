@@ -15,3 +15,22 @@ export const US_LOCATION_PAGES_LIVE_KEY_DISTRICTS_MAP: Partial<Record<USStateCod
   SC: [1],
   AZ: [1, 6],
 }
+
+export const ENDORSED_DTSI_PERSON_SLUGS = [
+  'shomari--figures',
+  'troy---downing',
+  'jim---banks',
+  'jim--justice',
+  'eduardo---morales',
+]
+
+export const ORDERED_KEY_SENATE_RACE_STATES: USStateCode[] = [
+  'OH',
+  'MT',
+  'PA',
+  'AZ',
+  'NV',
+  'MA',
+  'MI',
+  'WI',
+]
