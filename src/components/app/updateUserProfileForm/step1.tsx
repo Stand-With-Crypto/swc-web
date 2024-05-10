@@ -3,6 +3,7 @@ import { useEffect, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as Sentry from '@sentry/nextjs'
+import { isEmpty } from 'lodash-es'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 import { z } from 'zod'
@@ -78,7 +79,7 @@ export function UpdateUserProfileForm({
     useCongresspersonData({ address: addressField ?? undefined })
 
   const shouldDisableNextButton =
-    form.formState.isSubmitting || isLoadingCongressPersonData || !!form.formState.errors
+    form.formState.isSubmitting || isLoadingCongressPersonData || !isEmpty(form.formState.errors)
 
   useEffect(() => {
     if (addressField && resolvedCongressPersonData?.notFoundReason === 'NOT_SPECIFIC_ENOUGH') {
