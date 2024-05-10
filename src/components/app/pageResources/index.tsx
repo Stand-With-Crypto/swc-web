@@ -74,13 +74,13 @@ export function PageResources({ locale }: { locale: SupportedLocale }) {
           <PolicyCard
             description="Setting the foundational rules for crypto that are pro-consumer and pro-job creation"
             primaryCta="Learn more"
-            primaryCtaUrl="https://www.standwithcrypto.org/docs/FIT21_One_Pager.pdf"
+            primaryCtaUrl="https://www.standwithcrypto.org/docs/FIT21_One_Pager_2.pdf"
             title="FIT21 [H.R. 4763]"
           />
           <PolicyCard
             description="A regulatory framework for stablecoins like USDC"
             primaryCta="Learn more"
-            primaryCtaUrl="https://www.standwithcrypto.org/docs/SWC_Stablecoin.pdf"
+            primaryCtaUrl="https://www.standwithcrypto.org/docs/SWC_Stablecoins_2.pdf"
             title="Clarity for Stablecoin Act [H.R. 4766]"
           />
         </div>
