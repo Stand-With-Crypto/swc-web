@@ -1,14 +1,36 @@
 'use client'
 
+import React from 'react'
 import { Check } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 
+import { HasOptedInToMembershipForm } from '@/components/app/userActionFormSuccessScreen/hasOptedInToMembershipForm'
 import { Button } from '@/components/ui/button'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { cn } from '@/utils/web/cn'
+
+type Props = {
+  hasOptedInToMembership?: boolean
+}
+
+export function PageBecomeMember({ hasOptedInToMembership = false }: Props) {
+  const router = useRouter()
+  const [isSuccess, setIsSuccess] = React.useState(hasOptedInToMembership)
+
+  if (isSuccess) return <SuccessState />
+
+  return (
+    <div className={dialogContentPaddingStyles}>
+      <HasOptedInToMembershipForm
+        onCancel={() => router.replace('/')}
+        onSuccess={() => setIsSuccess(true)}
+      />
+    </div>
+  )
+}
 
 export function SuccessState() {
   const router = useRouter()

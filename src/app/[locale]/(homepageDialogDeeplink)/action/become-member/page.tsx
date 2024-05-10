@@ -1,25 +1,33 @@
-'use client'
+import { UserActionType } from '@prisma/client'
+import { redirect, RedirectType } from 'next/navigation'
 
-import React from 'react'
-import { useRouter } from 'next/navigation'
+import { HomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogDeeplinkLayout'
+import { getAuthenticatedData } from '@/components/app/pageUserProfile/getAuthenticatedData'
+import { PageProps } from '@/types'
+import { setCallbackQueryString } from '@/utils/server/searchParams'
+import { USER_ACTION_DEEPLINK_MAP } from '@/utils/shared/urlsDeeplinkUserActions'
 
-import { HasOptedInToMembershipForm } from '@/components/app/userActionFormSuccessScreen/hasOptedInToMembershipForm'
-import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
+import { PageBecomeMember } from './pageBecomeMember'
 
-import { SuccessState } from './sucessState'
+export const dynamic = 'force-dynamic'
 
-export default function UserActionBecomeMemberDeepLink() {
-  const router = useRouter()
-  const [isSuccess, setIsSuccess] = React.useState(false)
+export default async function UserActionBecomeMemberDeepLink({ params }: PageProps) {
+  const { locale } = params
+  const user = await getAuthenticatedData()
 
-  if (isSuccess) return <SuccessState />
+  if (!user) {
+    redirect(
+      USER_ACTION_DEEPLINK_MAP[UserActionType.OPT_IN].getDeeplinkUrl({
+        locale,
+        queryString: setCallbackQueryString({ destination: 'becomeMember' }),
+      }),
+      RedirectType.replace,
+    )
+  }
 
   return (
-    <div className={dialogContentPaddingStyles}>
-      <HasOptedInToMembershipForm
-        onCancel={() => router.replace('/')}
-        onSuccess={() => setIsSuccess(true)}
-      />
-    </div>
+    <HomepageDialogDeeplinkLayout pageParams={params} size="sm">
+      <PageBecomeMember hasOptedInToMembership={user.hasOptedInToMembership} />
+    </HomepageDialogDeeplinkLayout>
   )
 }
