@@ -13,6 +13,7 @@ export type GooglePlacesSelectProps = {
   value: GooglePlaceAutocompletePrediction | null
   onChange: (val: GooglePlaceAutocompletePrediction | null) => void
   loading?: boolean
+  disablePreventMobileKeyboardOffset?: boolean
 } & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange' | 'type'>
 
 export const GooglePlacesSelect = React.forwardRef<
@@ -45,6 +46,7 @@ export const GooglePlacesSelect = React.forwardRef<
   return (
     <Combobox
       analytics={'Google Place Select'}
+      disablePreventMobileKeyboardOffset={props.disablePreventMobileKeyboardOffset}
       formatPopoverTrigger={triggerProps => (
         <InputWithIcons
           className={cn(

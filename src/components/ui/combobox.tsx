@@ -12,6 +12,7 @@ import {
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { useIsMobile } from '@/hooks/useIsMobile'
+import { usePreventMobileKeyboardOffset } from '@/hooks/usePreventMobileKeyboardOffset'
 import { useResizeObserver } from '@/hooks/useResizeObserver'
 import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
 import { cn } from '@/utils/web/cn'
@@ -35,6 +36,7 @@ export interface ComboBoxProps<T>
   isLoading: boolean
   open: boolean
   setOpen: (open: boolean) => void
+  disablePreventMobileKeyboardOffset?: boolean
 }
 
 export function Combobox<T>({
@@ -49,9 +51,10 @@ export function Combobox<T>({
   analytics,
   open,
   setOpen,
+  disablePreventMobileKeyboardOffset = false,
   ...inputProps
 }: ComboBoxProps<T>) {
-  // usePreventMobileKeyboardOffset(open)
+  usePreventMobileKeyboardOffset(open && !disablePreventMobileKeyboardOffset)
   const parentRef = React.useRef<HTMLButtonElement>(null)
   const isMobile = useIsMobile({ defaultState: false })
   const size = useResizeObserver(parentRef)
