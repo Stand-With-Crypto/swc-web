@@ -27,19 +27,22 @@ export default function UserActionOptInSWCDeepLink() {
   })
 
   const handleRedirectOnLogin = React.useCallback(() => {
-    // should always have a destination, but if something happens and thats no the case,
+    // if the destination returned is not actually a valid destination,
     // we should gracefully fail, redirecting the user to the profile page
-    if (!destination) {
-      Sentry.captureMessage(
-        'Failed to redirect to destination after login, no destination received from getCallbackDestination',
-        {
-          user: { queryString },
+    try {
+      return router.replace(urls[destination]())
+    } catch (error) {
+      Sentry.captureException(error, {
+        tags: {
+          domain: 'handleRedirectOnLogin',
+          message: `${destination} is not a valid destination`,
         },
-      )
+        extra: {
+          queryString,
+        },
+      })
       return router.replace(urls.profile())
     }
-
-    return router.replace(urls[destination]())
   }, [destination, router, urls, queryString])
 
   React.useEffect(() => {
