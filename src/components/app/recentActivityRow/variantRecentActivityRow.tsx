@@ -11,6 +11,7 @@ import {
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
+import { UserActionFormTweetAtPersonDialog } from '@/components/app/userActionFormTweetAtPerson/dialog'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
 import { Button } from '@/components/ui/button'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
@@ -197,9 +198,27 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
       }
       case UserActionType.TWEET_AT_PERSON: {
         return {
-          onFocusContent: undefined,
-          // This text is temporary. It'll be different on the feature PR
-          children: <MainText>Tweeted at person</MainText>,
+          onFocusContent: () => (
+            <UserActionFormTweetAtPersonDialog>
+              <Button>Send yours</Button>
+            </UserActionFormTweetAtPersonDialog>
+          ),
+          children: (
+            <MainText>
+              Bitcoin Pizza Day 🍕 activation sent{' '}
+              {action.person ? (
+                <>
+                  {'to '}
+                  <DTSIPersonName
+                    href={urls.politicianDetails(action.person.slug)}
+                    person={action.person}
+                  />
+                </>
+              ) : (
+                'on X'
+              )}
+            </MainText>
+          ),
         }
       }
     }

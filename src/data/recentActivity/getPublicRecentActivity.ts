@@ -58,6 +58,8 @@ export const getPublicRecentActivity = async (config: RecentActivityConfig) => {
           dtsiSlugs.add(userActionEmailRecipient.dtsiSlug)
         }
       })
+    } else if (userAction.userActionTweetAtPerson?.recipientDtsiSlug) {
+      dtsiSlugs.add(userAction.userActionTweetAtPerson.recipientDtsiSlug)
     }
   })
 
