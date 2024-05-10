@@ -1,3 +1,5 @@
+import { orderBy } from 'lodash-es'
+
 import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
 import { DTSIStanceDetails } from '@/components/app/dtsiStanceDetails'
 import {
@@ -22,13 +24,15 @@ interface Props {
 }
 
 export function MaybeOverflowedStances({ person, stances, locale }: Props) {
-  const stancesContent = stances.slice(0, 3).map(stance => (
+  const orderedStances = orderBy(stances, x => -1 * new Date(x.dateStanceMade).getTime())
+
+  const stancesContent = orderedStances.slice(0, 3).map(stance => (
     <div key={stance.id}>
       <DTSIStanceDetails locale={locale} person={person} stance={stance} />
       <CryptoSupportHighlight className="mx-auto mt-2" stanceScore={stance.computedStanceScore} />
     </div>
   ))
-  if (stances.length < 4) {
+  if (orderedStances.length < 4) {
     return <div className="space-y-6">{stancesContent}</div>
   }
   return (
