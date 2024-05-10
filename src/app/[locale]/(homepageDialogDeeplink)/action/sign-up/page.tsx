@@ -1,5 +1,6 @@
 'use client'
 import React from 'react'
+import * as Sentry from '@sentry/nextjs'
 import { useRouter, useSearchParams } from 'next/navigation'
 
 import { ThirdwebLoginContent } from '@/components/app/authentication/thirdwebLoginContent'
@@ -18,14 +19,28 @@ export default function UserActionOptInSWCDeepLink() {
   const session = useSession()
   const searchParams = useSearchParams()
 
+  const queryString = searchParams?.toString()
+
   const { destination } = getCallbackDestination({
-    queryString: searchParams?.toString(),
+    queryString,
     defaultDestination: 'profile',
   })
 
   const handleRedirectOnLogin = React.useCallback(() => {
+    // should always have a destination, but if something happens and thats no the case,
+    // we should gracefully fail, redirecting the user to the profile page
+    if (!destination) {
+      Sentry.captureMessage(
+        'Failed to redirect to destination after login, no destination received from getCallbackDestination',
+        {
+          user: { queryString },
+        },
+      )
+      return router.replace(urls.profile())
+    }
+
     return router.replace(urls[destination]())
-  }, [router, urls, destination])
+  }, [destination, router, urls, queryString])
 
   React.useEffect(() => {
     if (session.isLoggedIn) {
