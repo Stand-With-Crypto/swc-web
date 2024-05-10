@@ -36,6 +36,7 @@ export interface ComboBoxProps<T>
   isLoading: boolean
   open: boolean
   setOpen: (open: boolean) => void
+  disablePreventMobileKeyboardOffset?: boolean
 }
 
 export function Combobox<T>({
@@ -50,9 +51,10 @@ export function Combobox<T>({
   analytics,
   open,
   setOpen,
+  disablePreventMobileKeyboardOffset = false,
   ...inputProps
 }: ComboBoxProps<T>) {
-  usePreventMobileKeyboardOffset(open)
+  usePreventMobileKeyboardOffset(open && !disablePreventMobileKeyboardOffset)
   const parentRef = React.useRef<HTMLButtonElement>(null)
   const isMobile = useIsMobile({ defaultState: false })
   const size = useGetElementDimensions(parentRef)

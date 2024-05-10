@@ -24,6 +24,7 @@ function DefaultPlacesSelect(
     <div className="mx-auto max-w-md">
       <GooglePlacesSelect
         className="rounded-full bg-gray-100 text-gray-600"
+        disablePreventMobileKeyboardOffset
         placeholder="Enter your address"
         {...props}
       />
