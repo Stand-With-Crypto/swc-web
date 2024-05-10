@@ -1,8 +1,8 @@
 import { DarkHeroSection } from '@/components/app/darkHeroSection'
 import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
 import { DTSIPersonHeroCardRow } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardRow'
+import { MaybeDonateButton } from '@/components/app/maybeDonateButton'
 import { PACFooter } from '@/components/app/pacFooter'
-import { MaybeDonateButton } from '@/components/app/pageEndorsedCandidates/dtsiPersonHeroCardDonateButton'
 import { InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { DTSI_EndorsedCandidatesQuery } from '@/data/dtsi/generated'
@@ -40,9 +40,7 @@ export function PageEndorsedCandidates({ people, locale }: LocationStateSpecific
       <DTSIPersonHeroCardRow className="mx-auto max-w-4xl xl:max-w-6xl">
         {people.map(person => (
           <DTSIPersonHeroCard
-            footer={
-              person.donationUrl ? <MaybeDonateButton donationUrl={person.donationUrl} /> : null
-            }
+            footer={<MaybeDonateButton donationUrl={person.donationUrl} variant="secondary" />}
             key={person.id}
             locale={locale}
             person={person}

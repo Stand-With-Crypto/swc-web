@@ -4,6 +4,7 @@ import { Globe } from 'lucide-react'
 
 import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
 import { DTSIStanceDetails } from '@/components/app/dtsiStanceDetails'
+import { MaybeDonateButton } from '@/components/app/maybeDonateButton'
 import { QuestionnaireAccordion } from '@/components/app/pagePoliticianDetails/questionnaireAccordion'
 import { ScoreExplainer } from '@/components/app/pagePoliticianDetails/scoreExplainer'
 import { Button } from '@/components/ui/button'
@@ -96,11 +97,7 @@ export function PagePoliticianDetails({
           )}
         </PageSubTitle>
         <div className="flex items-center justify-center gap-3">
-          {person.donationUrl && (
-            <Button asChild>
-              <ExternalLink href={person.donationUrl}>Donate</ExternalLink>
-            </Button>
-          )}
+          <MaybeDonateButton donationUrl={person.donationUrl} />
           {Boolean(person.officialUrl) && (
             <Button asChild className="h-11 w-11 rounded-full p-3" variant="secondary">
               <ExternalLink href={person.officialUrl}>
