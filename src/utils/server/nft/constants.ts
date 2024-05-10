@@ -36,6 +36,11 @@ export const LEGACY_NFT_DEPLOYER_WALLET = requiredEnv(
   'LEGACY_NFT_DEPLOYER_WALLET',
 )
 
+export const SWC_PIZZA_DAY_NFT_CONTRACT_ADDRESS = requiredEnv(
+  process.env.SWC_PIZZA_DAY_NFT_CONTRACT_ADDRESS,
+  'SWC_PIZZA_DAY_NFT_CONTRACT_ADDRESS',
+)
+
 export const SWC_DOT_ETH_WALLET = requiredEnv(process.env.SWC_DOT_ETH_WALLET, 'SWC_DOT_ETH_WALLET')
 
 export const NFT_SLUG_BACKEND_METADATA: Record<
@@ -67,7 +72,7 @@ export const NFT_SLUG_BACKEND_METADATA: Record<
     associatedWallet: SWC_DOT_ETH_WALLET,
   },
   [NFTSlug.PIZZA_DAY_2024_05_22]: {
-    contractAddress: '',
-    associatedWallet: '',
+    contractAddress: SWC_PIZZA_DAY_NFT_CONTRACT_ADDRESS,
+    associatedWallet: SWC_DOT_ETH_WALLET,
   },
 }
