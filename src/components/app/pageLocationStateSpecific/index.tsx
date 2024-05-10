@@ -118,34 +118,36 @@ export function LocationStateSpecific({
             <UserLocationRaceInfo groups={groups} locale={locale} stateCode={stateCode} />
           </ContentSection>
         )}
-        <ContentSection
-          subtitle={<>Keep up with recent tweets about crypto from politicians in {stateName}.</>}
-          title={<>What politicians in {stateCode} are saying</>}
-        >
-          <ScrollArea>
-            <div className="flex justify-center gap-5 pb-3 pl-4">
-              {stances.map(stance => {
-                return (
-                  <div className="flex w-[300px] shrink-0 flex-col lg:w-[500px]" key={stance.id}>
-                    <DTSIStanceDetails
-                      bodyClassName="line-clamp-6"
-                      className="flex-grow"
-                      hideImages
-                      locale={locale}
-                      person={stance.person}
-                      stance={stance}
-                    />
-                    <CryptoSupportHighlight
-                      className="mx-auto mt-2"
-                      stanceScore={stance.computedStanceScore}
-                    />
-                  </div>
-                )
-              })}
-            </div>
-            <ScrollBar orientation="horizontal" />
-          </ScrollArea>
-        </ContentSection>
+        {!!stances.length && (
+          <ContentSection
+            subtitle={<>Keep up with recent tweets about crypto from politicians in {stateName}.</>}
+            title={<>What politicians in {stateCode} are saying</>}
+          >
+            <ScrollArea>
+              <div className="flex justify-center gap-5 pb-3 pl-4">
+                {stances.map(stance => {
+                  return (
+                    <div className="flex w-[300px] shrink-0 flex-col lg:w-[500px]" key={stance.id}>
+                      <DTSIStanceDetails
+                        bodyClassName="line-clamp-6"
+                        className="flex-grow"
+                        hideImages
+                        locale={locale}
+                        person={stance.person}
+                        stance={stance}
+                      />
+                      <CryptoSupportHighlight
+                        className="mx-auto mt-2"
+                        stanceScore={stance.computedStanceScore}
+                      />
+                    </div>
+                  )
+                })}
+              </div>
+              <ScrollBar orientation="horizontal" />
+            </ScrollArea>
+          </ContentSection>
+        )}
         {US_LOCATION_PAGES_LIVE_KEY_DISTRICTS_MAP[stateCode]?.map(district => {
           const districtPeople = groups.congresspeople[district]?.people
           if (!districtPeople) {
