@@ -46,10 +46,11 @@ export function AuthenticateWithProfileUpdate({
             />
           )
         ) : (
-          <>
+          <div className="flex flex-col items-center">
             <Skeleton className="h-80 w-full" />
             <Skeleton className="mt-8 h-20 w-full" />
-          </>
+            <Skeleton className="mt-8 h-20 w-60" />
+          </div>
         )
       }
     >
