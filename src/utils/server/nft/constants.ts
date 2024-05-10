@@ -66,4 +66,8 @@ export const NFT_SLUG_BACKEND_METADATA: Record<
     contractAddress: LA_CRYPTO_EVENT_2024_03_04_NFT_CONTRACT_ADDRESS,
     associatedWallet: SWC_DOT_ETH_WALLET,
   },
+  [NFTSlug.PIZZA_DAY_2024_05_22]: {
+    contractAddress: '',
+    associatedWallet: '',
+  },
 }
