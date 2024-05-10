@@ -3,15 +3,14 @@
 import React, { useMemo } from 'react'
 import {
   Column,
-  ColumnDef,
   ColumnFiltersState,
-  FilterFnOption,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
   SortingState,
+  TableOptions,
   useReactTable,
 } from '@tanstack/react-table'
 import { debounce } from 'lodash-es'
@@ -20,11 +19,10 @@ import { useRouter } from 'next/navigation'
 
 import { Person } from '@/components/app/dtsiClientPersonDataTable/columns'
 import { DataTablePagination } from '@/components/app/dtsiClientPersonDataTable/dataTablePagination'
+import { getPersonDataTableFilterFns } from '@/components/app/dtsiClientPersonDataTable/filters'
 import {
-  filterDataViaGlobalFilters,
   getGlobalFilterDefaults,
   GlobalFilters,
-  IGlobalFilters,
 } from '@/components/app/dtsiClientPersonDataTable/globalFiltersUtils'
 import { Button } from '@/components/ui/button'
 import { InputWithIcons } from '@/components/ui/inputWithIcons'
@@ -40,19 +38,16 @@ import {
 import { SupportedLocale } from '@/intl/locales'
 import { getIntlUrls } from '@/utils/shared/urls'
 
-interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[]
-  data: TData[]
+interface DataTableProps<TData extends Person = Person> extends Partial<TableOptions<TData>> {
   loadState: 'loaded' | 'static'
-  globalFilterFn?: FilterFnOption<TData>
   locale: SupportedLocale
 }
 
-export const SortableHeader = <TData, TValue>({
+export const SortableHeader = <TData extends Person = Person>({
   column,
   children,
 }: {
-  column: Column<TData, TValue>
+  column: Column<TData>
   children: React.ReactNode
 }) => {
   const sortVal = column.getIsSorted()
@@ -79,24 +74,21 @@ export const SortableHeader = <TData, TValue>({
   )
 }
 
-export function DataTable<TData extends Person, TValue>({
-  columns,
-  data: passedData,
+export function DataTable<TData extends Person = Person>({
+  columns = [],
+  data = [],
   loadState,
   globalFilterFn,
   locale,
-}: DataTableProps<TData, TValue>) {
+  ...rest
+}: DataTableProps<TData>) {
   const [sorting, setSorting] = React.useState<SortingState>([])
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
-  const [globalFilter, setGlobalFilter] = React.useState<IGlobalFilters>(getGlobalFilterDefaults())
+  const [columnFilters, setColumnFilters] =
+    React.useState<ColumnFiltersState>(getGlobalFilterDefaults())
+  const [globalFilter, setGlobalFilter] = React.useState('')
   const router = useRouter()
 
-  const data = useMemo(
-    () => filterDataViaGlobalFilters(passedData, globalFilter),
-    [globalFilter, passedData],
-  )
-
-  const table = useReactTable({
+  const table = useReactTable<TData>({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
@@ -104,23 +96,25 @@ export function DataTable<TData extends Person, TValue>({
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
     onColumnFiltersChange: setColumnFilters,
+    onGlobalFilterChange: setGlobalFilter,
     getFilteredRowModel: getFilteredRowModel(),
     initialState: {
       pagination: {
         pageSize: 100,
       },
+      columnFilters: getGlobalFilterDefaults(),
     },
+    filterFns: getPersonDataTableFilterFns(),
     state: {
       sorting,
       columnFilters,
+      globalFilter,
     },
     globalFilterFn,
+    ...rest,
   })
 
-  const debouncedSetGlobalFilter = useMemo(
-    () => debounce(table.setGlobalFilter, 300),
-    [table.setGlobalFilter],
-  )
+  const debouncedSetGlobalFilter = useMemo(() => debounce(setGlobalFilter, 300), [setGlobalFilter])
 
   return (
     <div className="space-y-6">
@@ -151,7 +145,7 @@ export function DataTable<TData extends Person, TValue>({
             <PageTitle className="text-left" size="sm">
               Politicians
             </PageTitle>
-            <GlobalFilters {...{ globalFilter, setGlobalFilter }} />
+            <GlobalFilters columns={table.getAllColumns()} />
           </div>
           <Table className="lg:table-fixed">
             <TableHeader className="bg-secondary text-gray-400">
