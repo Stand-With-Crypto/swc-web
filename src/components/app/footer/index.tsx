@@ -86,6 +86,13 @@ export async function Footer({ locale }: { locale: SupportedLocale }) {
                   description: 'Label for Discord footer item',
                 })}
               </ExternalLink>
+              <ExternalLink className={footerLinkStyles} href={externalUrls.emailFeedback()}>
+                {intl.formatMessage({
+                  id: `${i18nKey}.feedback`,
+                  defaultMessage: 'Send feedback',
+                  description: 'Label for send feedback footer item',
+                })}
+              </ExternalLink>
             </div>
             <div className="space-y-3 sm:space-y-6">
               <InternalLink className={footerLinkStyles} href={urls.termsOfService()}>
@@ -102,13 +109,6 @@ export async function Footer({ locale }: { locale: SupportedLocale }) {
                   description: 'Label for privacy policy footer item',
                 })}
               </InternalLink>
-              <ExternalLink className={footerLinkStyles} href={externalUrls.emailFeedback()}>
-                {intl.formatMessage({
-                  id: `${i18nKey}.feedback`,
-                  defaultMessage: 'Send feedback',
-                  description: 'Label for send feedback footer item',
-                })}
-              </ExternalLink>
               <CookieConsentFooterButton
                 className={cn(footerLinkStyles, 'h-auto p-0 text-base')}
                 variant={'link'}
@@ -118,6 +118,9 @@ export async function Footer({ locale }: { locale: SupportedLocale }) {
               </InternalLink>
               <InternalLink className={footerLinkStyles} href={urls.questionnaire()}>
                 Questionnaire
+              </InternalLink>
+              <InternalLink className={footerLinkStyles} href={urls.leaderboard()}>
+                Community
               </InternalLink>
             </div>
           </div>

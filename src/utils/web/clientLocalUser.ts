@@ -112,4 +112,5 @@ export function setLocalUserPersistedValues(values: Partial<PersistedLocalUser>)
   Cookies.set(LOCAL_USER_PERSISTED_KEY, JSON.stringify(newPersisted), {
     expires: 365,
   })
+  localUser = null
 }
