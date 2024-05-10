@@ -1,12 +1,13 @@
-import { DTSIAvatar } from '@/components/app/dtsiAvatar'
-import { FormattedPerson } from '@/components/app/pageLocationRaceSpecific/types'
-import { REGISTRATION_URLS_BY_STATE } from '@/components/app/userActionFormVoterRegistration/constants'
+import { compact } from 'lodash-es'
+
+import { DarkHeroSection } from '@/components/app/darkHeroSection'
+import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
+import { MaybeOverflowedStances } from '@/components/app/maybeOverflowedStances'
+import { PACFooter } from '@/components/app/pacFooter'
+import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
 import { Button } from '@/components/ui/button'
-import { uppercaseSectionHeader } from '@/components/ui/classUtils'
 import { InternalLink } from '@/components/ui/link'
-import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { TrackedExternalLink } from '@/components/ui/trackedExternalLink'
 import {
   DTSI_DistrictSpecificInformationQuery,
   DTSI_PersonRoleCategory,
@@ -14,92 +15,34 @@ import {
 import { SupportedLocale } from '@/intl/locales'
 import { NormalizedDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
-import { formatStateSpecificDTSIPerson } from '@/utils/dtsi/stateSpecificDTSIPerson'
-import { gracefullyError } from '@/utils/shared/gracefullyError'
-import { pluralize } from '@/utils/shared/pluralize'
+import { formatSpecificRoleDTSIPerson } from '@/utils/dtsi/specificRoleDTSIPerson'
+import { findRecommendedCandidate } from '@/utils/shared/findRecommendedCandidate'
 import { getIntlUrls } from '@/utils/shared/urls'
-import { USStateCode } from '@/utils/shared/usStateUtils'
-import { cn } from '@/utils/web/cn'
+import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 
-interface LocationRaceSpecificProps extends DTSI_DistrictSpecificInformationQuery {
-  stateCode: USStateCode
+export interface LocationRaceSpecificProps extends DTSI_DistrictSpecificInformationQuery {
+  stateCode?: USStateCode
   district?: NormalizedDTSIDistrictId
   locale: SupportedLocale
 }
 
 function organizeRaceSpecificPeople(
   people: DTSI_DistrictSpecificInformationQuery['people'],
-  { district }: Pick<LocationRaceSpecificProps, 'district'>,
+  { district, stateCode }: Pick<LocationRaceSpecificProps, 'district' | 'stateCode'>,
 ) {
   const targetedRoleCategory = district
     ? DTSI_PersonRoleCategory.CONGRESS
-    : DTSI_PersonRoleCategory.SENATE
+    : stateCode
+      ? DTSI_PersonRoleCategory.SENATE
+      : DTSI_PersonRoleCategory.PRESIDENT
 
   const formatted = people.map(x =>
-    formatStateSpecificDTSIPerson(x, {
+    formatSpecificRoleDTSIPerson(x, {
       specificRole: targetedRoleCategory,
     }),
   )
-  const grouped = {
-    current: [] as FormattedPerson[],
-    runningFor: [] as FormattedPerson[],
-  }
-  formatted.forEach(person => {
-    if (person.currentStateSpecificRole) {
-      if (person.currentStateSpecificRole.roleCategory === targetedRoleCategory) {
-        grouped.current.push(person)
-      } else {
-        gracefullyError({
-          msg: 'Unexpected currentStateSpecificRole',
-          fallback: null,
-          hint: { extra: { person } },
-        })
-      }
-    } else if (person.runningForStateSpecificRole) {
-      if (person.runningForStateSpecificRole.roleCategory === targetedRoleCategory) {
-        grouped.runningFor.push(person)
-      } else {
-        gracefullyError({
-          msg: 'Unexpected runningForStateSpecificRole',
-          fallback: null,
-          hint: { extra: { person } },
-        })
-      }
-    }
-  })
-  return grouped
-}
-
-function CandidateInfo({
-  person,
-  locale,
-}: { person: FormattedPerson } & Pick<LocationRaceSpecificProps, 'locale'>) {
-  const urls = getIntlUrls(locale)
-  return (
-    <LinkBox className="flex flex-col sm:flex-row sm:items-center sm:gap-5">
-      <div className="sm:w-[230px]">
-        <DTSIAvatar person={person} size={230} />
-      </div>
-      <div>
-        <PageTitle as="h4" className="text-left" size="sm">
-          {dtsiPersonFullName(person)}
-        </PageTitle>
-        <div className="mt-2 text-fontcolor-muted">
-          {person.stanceCount || 0} crypto{' '}
-          {pluralize({
-            singular: 'statement',
-            plural: 'statements',
-            count: person.stanceCount || 0,
-          })}
-        </div>
-        <div className="mt-6">
-          <Button asChild className={cn('w-full', linkBoxLinkClassName)} variant="secondary">
-            <InternalLink href={urls.politicianDetails(person.slug)}>View profile</InternalLink>
-          </Button>
-        </div>
-      </div>
-    </LinkBox>
-  )
+  formatted.sort((a, b) => (a.isIncumbent === b.isIncumbent ? 0 : a.isIncumbent ? -1 : 1))
+  return formatted
 }
 
 export function LocationRaceSpecific({
@@ -108,66 +51,95 @@ export function LocationRaceSpecific({
   people,
   locale,
 }: LocationRaceSpecificProps) {
+  const groups = organizeRaceSpecificPeople(people, { district, stateCode })
+  const stateDisplayName = stateCode && US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]
   const urls = getIntlUrls(locale)
-  const groups = organizeRaceSpecificPeople(people, { district })
+  const { recommended, others } = findRecommendedCandidate(groups)
   return (
-    <div className="container space-y-20">
-      <div className="flex flex-col text-left sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <h1 className={cn(uppercaseSectionHeader, 'mb-6 md:mb-10')}>
-            <InternalLink href={urls.locationStateSpecific(stateCode)}>
-              CA Crypto Voter Guide
-            </InternalLink>
-            {' > '}{' '}
-            {district
+    <div>
+      <DarkHeroSection className="text-center">
+        <h2 className={'mb-4'}>
+          <InternalLink className="text-gray-400" href={urls.locationUnitedStates()}>
+            United States
+          </InternalLink>
+          {' / '}
+          {(() => {
+            if (!stateDisplayName) {
+              return <span>Presidential</span>
+            }
+            return (
+              <>
+                <InternalLink
+                  className="text-gray-400"
+                  href={urls.locationStateSpecific(stateCode)}
+                >
+                  {stateDisplayName}
+                </InternalLink>{' '}
+                /{' '}
+                <span>
+                  {district
+                    ? `${stateCode} Congressional District ${district}`
+                    : `U.S. Senate (${stateCode})`}
+                </span>
+              </>
+            )
+          })()}
+        </h2>
+        <PageTitle as="h1" className="mb-4" size="md">
+          {!stateCode
+            ? 'U.S. Presidential Race'
+            : district
               ? `${stateCode} Congressional District ${district}`
               : `U.S. Senate (${stateCode})`}
-          </h1>
-          <PageTitle as="h2" className="mb-6 text-left sm:mb-0 sm:text-center" size="md">
-            {district
-              ? `${stateCode} Congressional District ${district}`
-              : `U.S. Senate (${stateCode})`}
-          </PageTitle>
-        </div>
-        <Button asChild className="w-full max-w-sm sm:w-fit">
-          <TrackedExternalLink
-            eventProperties={{ Category: 'Register To Vote' }}
-            href={REGISTRATION_URLS_BY_STATE[stateCode].registerUrl}
-          >
+        </PageTitle>
+        <UserActionFormVoterRegistrationDialog initialStateCode={stateCode}>
+          <Button className="mt-6 w-full max-w-xs" variant="secondary">
             Register to vote
-          </TrackedExternalLink>
-        </Button>
+          </Button>
+        </UserActionFormVoterRegistrationDialog>
+      </DarkHeroSection>
+      <div className="divide-y-2">
+        {compact([
+          recommended && { person: recommended, isRecommended: true },
+          ...others.map(person => ({ person, isRecommended: false })),
+        ]).map(({ person, isRecommended }) => (
+          <div key={person.id}>
+            <section className="mx-auto flex max-w-7xl flex-col px-6 md:flex-row">
+              <div className="shrink-0 py-10 md:mr-16 md:border-r-2 md:py-20 md:pr-16">
+                <div className="sticky top-24 text-center">
+                  <DTSIPersonHeroCard
+                    isRecommended={isRecommended}
+                    locale={locale}
+                    person={person}
+                    subheader="role"
+                  />
+                </div>
+              </div>
+              <div className="w-full py-10 md:py-20">
+                {person.stances.length ? (
+                  <>
+                    <PageTitle as="h3" className="mb-8 md:mb-14" size="sm">
+                      {dtsiPersonFullName(person)} statements on crypto
+                    </PageTitle>
+                    <MaybeOverflowedStances
+                      locale={locale}
+                      person={person}
+                      stances={person.stances}
+                    />
+                  </>
+                ) : (
+                  <div className="flex h-full w-full items-center justify-center text-center">
+                    <h3 className="text-xl md:text-2xl">
+                      {dtsiPersonFullName(person)} has no statements on crypto.
+                    </h3>
+                  </div>
+                )}
+              </div>
+            </section>
+          </div>
+        ))}
       </div>
-      <div className="divide-y-2 *:py-20 first:*:pt-0 last:*:pb-0">
-        {!!groups.current.length && (
-          <section className="space-y-5">
-            <h3 className={cn(uppercaseSectionHeader)}>
-              {pluralize({
-                count: groups.current.length,
-                singular: 'Incumbent',
-                plural: 'Incumbents',
-              })}
-            </h3>
-            {groups.current.map(person => (
-              <CandidateInfo key={person.id} {...{ locale, person }} />
-            ))}
-          </section>
-        )}
-        {!!groups.runningFor.length && (
-          <section className="space-y-5">
-            <h3 className={cn(uppercaseSectionHeader)}>
-              {pluralize({
-                count: groups.runningFor.length,
-                singular: 'Candidate',
-                plural: 'Candidates',
-              })}
-            </h3>
-            {groups.runningFor.map(person => (
-              <CandidateInfo key={person.id} {...{ locale, person }} />
-            ))}
-          </section>
-        )}
-      </div>
+      <PACFooter className="container" />
     </div>
   )
 }

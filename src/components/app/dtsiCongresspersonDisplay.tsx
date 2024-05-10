@@ -45,7 +45,7 @@ export function DtsiCongresspersonDisplay({
       <div className="relative">
         <DTSIAvatar person={person} size={60} />
         <div className="absolute bottom-[-8px] right-[-8px]">
-          <DTSIFormattedLetterGrade person={person} size={25} />
+          <DTSIFormattedLetterGrade className="h-6 w-6" person={person} />
         </div>
       </div>
       <div>

@@ -24,9 +24,9 @@ function StanceTypeContent({ stance: passedStance, ...props }: IStanceDetailsPro
   throw new Error(`invalid StanceDetails passed ${JSON.stringify(stance)}`)
 }
 
-export function DTSIStanceDetails(props: IStanceDetailsProps) {
+export function DTSIStanceDetails({ className, ...props }: IStanceDetailsProps) {
   return (
-    <article className={cn('rounded-3xl bg-secondary p-4 md:p-6')}>
+    <article className={cn('rounded-3xl bg-secondary p-4 md:p-6', className)}>
       <StanceTypeContent {...props} />
     </article>
   )

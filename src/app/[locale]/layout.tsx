@@ -76,9 +76,7 @@ export default function Layout({ children, params }: PageProps & { children: Rea
         <TopLevelClientLogic locale={locale}>
           <FullHeight.Container>
             <Navbar locale={locale} />
-            <FullHeight.Content>
-              <div className="mt-10">{children}</div>
-            </FullHeight.Content>
+            <FullHeight.Content>{children}</FullHeight.Content>
             <Footer locale={locale} />
           </FullHeight.Container>
         </TopLevelClientLogic>

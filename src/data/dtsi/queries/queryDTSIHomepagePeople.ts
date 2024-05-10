@@ -4,10 +4,10 @@ import { DTSI_HomepagePeopleQuery, DTSI_HomepagePeopleQueryVariables } from '@/d
 
 export const query = /* GraphQL */ `
   query HomepagePeople {
-    lowestScores: people(limit: 5, offset: 0, stanceScoreLte: 50) {
+    lowestScores: people(limit: 4, offset: 0, stanceScoreLte: 50) {
       ...PersonCard
     }
-    highestScores: people(limit: 5, offset: 0, stanceScoreGte: 51) {
+    highestScores: people(limit: 4, offset: 0, stanceScoreGte: 51) {
       ...PersonCard
     }
   }

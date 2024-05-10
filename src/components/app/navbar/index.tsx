@@ -20,17 +20,22 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
   const dialogProps = useDialog({ analytics: 'Mobile Navbar' })
   const urls = getIntlUrls(locale)
   const leftLinks = [
+    { href: urls.locationUnitedStates(), text: 'Key Races' },
+    {
+      href: urls.politiciansHomepage(),
+      text: 'Politicians',
+    },
+    {
+      href: urls.endorsedCandidates(),
+      text: 'Endorsements',
+    },
     {
       href: urls.about(),
       text: 'Mission',
     },
     {
-      href: urls.leaderboard(),
-      text: 'Community',
-    },
-    {
-      href: urls.politiciansHomepage(),
-      text: 'Politicians',
+      href: urls.partners(),
+      text: 'Partners',
     },
     {
       href: urls.resources(),
@@ -39,10 +44,6 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
     {
       href: urls.donate(),
       text: 'Donate',
-    },
-    {
-      href: urls.partners(),
-      text: 'Partners',
     },
   ]
   const maybeCloseAfterNavigating = useCallback(() => {
@@ -110,6 +111,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
                 )
               })}
             </div>
+
             <div className="hidden lg:flex">{loginButton}</div>
           </div>
         </div>

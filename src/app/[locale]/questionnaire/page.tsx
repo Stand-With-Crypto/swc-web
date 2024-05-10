@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 
 export default async function QuestionnairePage() {
   return (
-    <div className="container flex flex-col items-center space-y-20">
+    <div className="standard-spacing-from-navbar container flex flex-col items-center space-y-20">
       <div className="relative h-[180px] w-full md:h-[300px]">
         <NextImage
           alt="Stand With Crypto shield with black background"

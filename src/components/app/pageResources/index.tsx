@@ -10,7 +10,7 @@ import { getIntlUrls } from '@/utils/shared/urls'
 export function PageResources({ locale }: { locale: SupportedLocale }) {
   const urls = getIntlUrls(locale)
   return (
-    <div className="container">
+    <div className="standard-spacing-from-navbar container">
       <section className="mb-16 space-y-7 text-center">
         <PageTitle>Your voice will shape the future of crypto in America</PageTitle>
         <PageSubTitle>

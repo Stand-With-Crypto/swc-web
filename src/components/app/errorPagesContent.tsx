@@ -16,7 +16,7 @@ export function ErrorPagesContent({ reset }: { reset: () => void }) {
     reset()
   }, [reset])
   return (
-    <div className="container flex flex-grow flex-col items-center justify-center space-y-7">
+    <div className="standard-spacing-from-navbar container flex flex-grow flex-col items-center justify-center space-y-7">
       <MaybeNextImg alt="" height={120} src="/error_shield.svg" width={120} />
       <PageTitle size="sm">Something went wrong.</PageTitle>
       <Button className="mr-3" onClick={onPress}>

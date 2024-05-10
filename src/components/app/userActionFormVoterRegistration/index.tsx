@@ -13,7 +13,13 @@ import { NFTSlug } from '@/utils/shared/nft'
 import { USStateCode } from '@/utils/shared/usStateUtils'
 import { NFT_CLIENT_METADATA } from '@/utils/web/nft'
 
-export function UserActionFormVoterRegistration({ onClose }: { onClose: () => void }) {
+export function UserActionFormVoterRegistration({
+  onClose,
+  initialStateCode,
+}: {
+  onClose: () => void
+  initialStateCode?: USStateCode
+}) {
   const sectionProps = useSections<SectionNames>({
     sections: Object.values(SectionNames),
     initialSectionId: SectionNames.SURVEY,
@@ -21,7 +27,7 @@ export function UserActionFormVoterRegistration({ onClose }: { onClose: () => vo
   })
   const { currentSection: currentTab, onSectionNotFound: onTabNotFound } = sectionProps
 
-  const [stateCode, setStateCode] = useState<USStateCode | undefined>(undefined)
+  const [stateCode, setStateCode] = useState<USStateCode | undefined>(initialStateCode)
 
   const content = useMemo(() => {
     switch (currentTab) {

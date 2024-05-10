@@ -20,7 +20,7 @@ export function ScoreExplainer({ person }: { person: DTSIPersonDetails }) {
     <Popover analytics="Person Score Explainer">
       <PopoverTrigger className="my-8 flex w-full items-center gap-4 rounded-3xl bg-secondary p-3 text-left md:my-12">
         <div>
-          <DTSIFormattedLetterGrade person={person} size={60} />
+          <DTSIFormattedLetterGrade className="h-14 w-14" person={person} />
         </div>
         <div>
           <h3 className="mb-1 font-bold md:text-xl">

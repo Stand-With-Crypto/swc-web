@@ -8,32 +8,7 @@ import {
 } from '@/data/dtsi/generated'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
 import { getUSStateNameFromStateCode } from '@/utils/shared/usStateUtils'
-import { safeStringify } from '@/utils/web/safeStringify'
 import { withOrdinalSuffix } from '@/utils/web/withOrdinalSuffix'
-
-export const getDTSIFormattedShortPersonRole = (
-  role: Pick<
-    DTSI_PersonRole,
-    'status' | 'primaryState' | 'primaryCountryCode' | 'title' | 'roleCategory'
-  >,
-) => {
-  if (role.status !== DTSI_PersonRoleStatus.HELD) {
-    if (!role.primaryState) {
-      return 'National Political Figure'
-    }
-    return 'Key Political Figure'
-  }
-  if (role.primaryState && role.primaryCountryCode === 'US') {
-    return getUSStateNameFromStateCode(role.primaryState)
-  }
-  if (role.title && role.roleCategory === DTSI_PersonRoleCategory.PRESIDENT) {
-    return role.title
-  }
-  return gracefullyError({
-    msg: `getDTSIFormattedShortPersonRole returned no role for ${safeStringify(role)}`,
-    fallback: role.title,
-  })
-}
 
 export const getHasDTSIPersonRoleEnded = ({ dateEnd }: { dateEnd: string | null | undefined }) => {
   if (!dateEnd) {
@@ -60,10 +35,7 @@ export const getDTSIPersonRoleCategoryDisplayName = (
   role: Pick<DTSI_PersonRole, 'roleCategory' | 'title' | 'status' | 'primaryState'>,
 ) => {
   if (role.status !== DTSI_PersonRoleStatus.HELD) {
-    if (!role.primaryState) {
-      return 'National Political Figure'
-    }
-    return 'Key Political Figure'
+    return 'Political Figure'
   }
   switch (role.roleCategory) {
     case DTSI_PersonRoleCategory.CONGRESS:
@@ -76,6 +48,36 @@ export const getDTSIPersonRoleCategoryDisplayName = (
       return 'President'
     case DTSI_PersonRoleCategory.SENATE:
       return 'Senator'
+    case DTSI_PersonRoleCategory.VICE_PRESIDENT:
+      return 'Vice President'
+  }
+  return role.title
+}
+
+export const getDTSIPersonRoleCategoryWithStateDisplayName = (
+  role: Pick<
+    DTSI_PersonRole,
+    'status' | 'primaryState' | 'primaryCountryCode' | 'title' | 'roleCategory'
+  >,
+) => {
+  if (role.status !== DTSI_PersonRoleStatus.HELD) {
+    return 'Political Figure'
+  }
+  let stateStr = ''
+  if (role.primaryState && role.primaryCountryCode === 'US') {
+    stateStr = `, ${getUSStateNameFromStateCode(role.primaryState)} `
+  }
+  switch (role.roleCategory) {
+    case DTSI_PersonRoleCategory.CONGRESS:
+      return `Rep${stateStr}`
+    case DTSI_PersonRoleCategory.GOVERNOR:
+      return 'Governor'
+    case DTSI_PersonRoleCategory.MAYOR:
+      return 'Mayor'
+    case DTSI_PersonRoleCategory.PRESIDENT:
+      return 'President'
+    case DTSI_PersonRoleCategory.SENATE:
+      return `Senator${stateStr}`
     case DTSI_PersonRoleCategory.VICE_PRESIDENT:
       return 'Vice President'
   }

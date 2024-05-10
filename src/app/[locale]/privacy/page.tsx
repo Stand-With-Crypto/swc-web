@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default async function TermsOfServicePage() {
   return (
     <>
-      <div className="container flex flex-col items-center">
+      <div className="standard-spacing-from-navbar container flex flex-col items-center">
         <PagePrivacyPolicy />
       </div>
       <hr className="mt-8" />

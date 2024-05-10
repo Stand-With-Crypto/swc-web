@@ -188,12 +188,15 @@ export const DTSIStanceDetailsTweet: React.FC<
   Omit<IStanceDetailsProps, 'stance'> & {
     stance: DTSIStanceDetailsStanceProp<DTSIStanceDetailsTweetProp>
   }
-> = ({ stance, person, locale }) => {
+> = ({ stance, person, locale, bodyClassName, hideImages }) => {
   const isOwnTweet = stance.tweet.twitterAccount.personId === person.id
   return (
     <article className="rounded-lg text-gray-800">
       <div
-        className={cn('mb-3 flex justify-between pb-3', isOwnTweet || 'border-b border-gray-300')}
+        className={cn(
+          'mb-3 flex justify-between gap-2 pb-3',
+          isOwnTweet || 'border-b border-gray-300',
+        )}
       >
         {isOwnTweet ? (
           <div className="flex items-center gap-2">
@@ -231,10 +234,10 @@ export const DTSIStanceDetailsTweet: React.FC<
         <NextImage alt="x.com logo" height={24} src={'/misc/xDotComLogo.svg'} width={24} />
       </div>
 
-      <div className="mb-3 whitespace-pre-line " style={{ lineHeight: 1.2 }}>
+      <div className={cn('mb-3 whitespace-pre-line ', bodyClassName)} style={{ lineHeight: 1.2 }}>
         <TweetBody tweet={stance.tweet} />
       </div>
-      {stance.tweet.tweetMedia.length ? (
+      {!hideImages && stance.tweet.tweetMedia.length ? (
         <div className="mx-auto my-3 flex justify-center" style={{ maxWidth: '500px' }}>
           {stance.tweet.tweetMedia.map(media => (
             <div
