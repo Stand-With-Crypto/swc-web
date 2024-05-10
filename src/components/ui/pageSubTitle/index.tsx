@@ -8,7 +8,7 @@ const subTitleVariantsConfig = {
   size: {
     lg: twNoop('text-base lg:text-xl'),
     md: twNoop('text-base'),
-    sm: twNoop('text-sm lg:text-base'),
+    sm: twNoop('text-base lg:text-base'),
   },
 }
 

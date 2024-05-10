@@ -187,6 +187,8 @@ enum PersonGrouping {
 enum PersonPoliticalAffiliationCategory {
   DEMOCRAT
   INDEPENDENT
+  LIBERTARIAN
+  OTHER
   REPUBLICAN
 }
 
@@ -269,6 +271,7 @@ type PersonStance {
   datetimeCreated: DateTime!
   datetimeUpdated: DateTime!
   id: ID!
+  person: Person!
   personId: String!
   quote: PersonStanceQuote
   stanceScoreWeight: Int
@@ -361,6 +364,17 @@ type Query {
     stanceScoreLte: Int
   ): [Person!]!
   peopleByUSCongressionalDistrict(congressionalDistrict: Int, stateCode: String!): [Person!]!
+  personStances(
+    grouping: PersonGrouping
+    limit: Int!
+    offset: Int!
+    personRoleGroupingOr: [PersonGrouping!]
+    personRolePrimaryCity: String
+    personRolePrimaryCountryCode: String
+    personRolePrimaryDistrict: String
+    personRolePrimaryState: String
+    personSlugIn: [String!]
+  ): [PersonStance!]!
 
   """
   Returns all objects that have been updated since the given date

@@ -53,7 +53,7 @@ export function PageUserProfile({ params, user }: PageUserProfile) {
   const numActionsAvailable = Object.values(UserActionType).length - excludeUserActionTypes.length
 
   return (
-    <div className="container space-y-10 lg:space-y-16">
+    <div className="standard-spacing-from-navbar container space-y-10 lg:space-y-16">
       {/* LATER-TASK enable this feature */}
       {/* {!!user.mergeAlerts.length && (
         <div className="mb-6 space-y-2">

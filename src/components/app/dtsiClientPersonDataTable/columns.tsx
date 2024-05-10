@@ -63,7 +63,7 @@ export const getDTSIClientPersonDataTableColumns = ({
     },
     cell: ({ row }) => (
       <div className="flex items-center gap-2">
-        <DTSIFormattedLetterGrade person={row.original} size={30} />
+        <DTSIFormattedLetterGrade className="h-7 w-7" person={row.original} />
         <span className="hidden md:inline">
           {convertDTSIPersonStanceScoreToCryptoSupportLanguage(row.original)}
         </span>

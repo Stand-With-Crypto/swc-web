@@ -54,6 +54,23 @@ export async function POST(request: NextRequest) {
       localUser = getLocalUserFromUser(user)
     }
   }
+
+  // mini-dapp in app donation flow - we store user email address
+  if (body.event.data.metadata.email) {
+    const user = await prismaClient.user.findFirst({
+      where: {
+        userEmailAddresses: {
+          some: {
+            emailAddress: body.event.data.metadata.email,
+          },
+        },
+      },
+    })
+    if (user) {
+      localUser = getLocalUserFromUser(user)
+    }
+  }
+
   const analytics = getServerAnalytics({
     localUser,
     userId: body.event.data.metadata.userId,
@@ -70,6 +87,7 @@ export async function POST(request: NextRequest) {
       paymentType: body.event.type,
       sessionId: body.event.data.metadata.sessionId,
       userId: body.event.data.metadata.userId,
+      email: body.event.data.metadata.email,
     })
 
     // Only store the payment request if the charge has been confirmed.

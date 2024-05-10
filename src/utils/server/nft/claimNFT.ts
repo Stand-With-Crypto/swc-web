@@ -26,6 +26,7 @@ import {
   UserActionLiveEventCampaignName,
   UserActionNftMintCampaignName,
   UserActionOptInCampaignName,
+  UserActionTweetAtPersonCampaignName,
   UserActionTweetCampaignName,
   UserActionVoterRegistrationCampaignName,
 } from '@/utils/shared/userActionCampaigns'
@@ -61,6 +62,9 @@ export const ACTION_NFT_SLUG: Record<
   },
   [UserActionType.LIVE_EVENT]: {
     [UserActionLiveEventCampaignName['2024_03_04_LA']]: NFTSlug.LA_CRYPTO_EVENT_2024_03_04,
+  },
+  [UserActionType.TWEET_AT_PERSON]: {
+    [UserActionTweetAtPersonCampaignName.DEFAULT]: null,
   },
 }
 

@@ -41,11 +41,11 @@ export function DtsiCongresspersonDisplay({
   const people = maxPeopleDisplayed ? dtsiPeople.slice(0, maxPeopleDisplayed) : dtsiPeople
 
   return people.map(person => (
-    <div className="flex flex-row items-center gap-4 text-sm md:text-base" key={person.id}>
+    <div className="flex flex-row items-center gap-4 pb-2 text-sm md:text-base" key={person.id}>
       <div className="relative">
         <DTSIAvatar person={person} size={60} />
         <div className="absolute bottom-[-8px] right-[-8px]">
-          <DTSIFormattedLetterGrade person={person} size={25} />
+          <DTSIFormattedLetterGrade className="h-6 w-6" person={person} />
         </div>
       </div>
       <div>

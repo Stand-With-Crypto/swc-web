@@ -14,7 +14,7 @@ interface PagePartnersProps {
 
 export function PagePartners({ title, description, locale }: PagePartnersProps) {
   return (
-    <div className="container space-y-20">
+    <div className="standard-spacing-from-navbar container space-y-20">
       <section className="space-y-9">
         <PageTitle>{title}</PageTitle>
         <PageSubTitle>{description}</PageSubTitle>

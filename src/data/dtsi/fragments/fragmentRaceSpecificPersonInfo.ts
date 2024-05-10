@@ -1,24 +1,15 @@
+import { fragmentDTSIPersonCard } from '@/data/dtsi/fragments/fragmentDTSIPersonCard'
+
 export const fragmentRaceSpecificPersonInfo = /* GraphQL */ `
   fragment RaceSpecificPersonInfo on Person {
-    id
-    slug
-    firstName
-    lastName
-    firstNickname
-    nameSuffix
-    politicalAffiliationCategory
-    computedStanceScore
-    manuallyOverriddenStanceScore
-    profilePictureUrl
-    profilePictureUrlDimensions
-    promotedPositioning
-    stanceCount(verificationStatusIn: APPROVED)
+    ...PersonCard
     roles {
       id
       primaryDistrict
       primaryState
       roleCategory
       status
+      dateStart
       group {
         id
         category
@@ -26,4 +17,5 @@ export const fragmentRaceSpecificPersonInfo = /* GraphQL */ `
       }
     }
   }
+  ${fragmentDTSIPersonCard}
 `

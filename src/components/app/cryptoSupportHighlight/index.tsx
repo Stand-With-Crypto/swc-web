@@ -20,7 +20,7 @@ export function CryptoSupportHighlight({
   return (
     <div
       className={cn(
-        'flex w-full justify-center gap-2 rounded-lg px-8 py-4 text-lg font-bold sm:w-fit',
+        'flex w-full justify-center gap-2 rounded-lg px-8 py-4 text-lg font-bold text-background sm:w-fit',
         convertDTSIStanceScoreToTextColorClass(stanceScore),
         convertDTSIStanceScoreToBgColorClass(stanceScore),
         className,
@@ -29,7 +29,7 @@ export function CryptoSupportHighlight({
       {isNil(stanceScore) || stanceScore === 50 ? null : stanceScore > 50 ? (
         <ThumbsUp />
       ) : (
-        <ThumbsDown />
+        <ThumbsDown className="relative top-[3px]" />
       )}
       <div>{text || convertDTSIStanceScoreToCryptoSupportLanguage(stanceScore)}</div>
     </div>
