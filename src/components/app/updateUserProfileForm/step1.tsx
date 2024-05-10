@@ -1,5 +1,5 @@
 'use client'
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as Sentry from '@sentry/nextjs'
@@ -12,6 +12,7 @@ import { ClientAddress } from '@/clientModels/clientAddress'
 import { SensitiveDataClientUserWithENSData } from '@/clientModels/clientUser/sensitiveDataClientUser'
 import { PrivacyPolicyDialog } from '@/components/app/pagePrivacyPolicy/dialog'
 import { SWCMembershipDialog } from '@/components/app/updateUserProfileForm/swcMembershipDialog'
+import { useCongresspersonData } from '@/components/app/userActionFormCallCongressperson/sections/address'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Collapsible, CollapsibleContent } from '@/components/ui/collapsible'
@@ -70,6 +71,24 @@ export function UpdateUserProfileForm({
     resolver: zodResolver(zodUpdateUserProfileFormFields),
     defaultValues: defaultValues.current,
   })
+
+  const addressField = form.watch('address')
+
+  const { data: resolvedCongressPersonData, isLoading: isLoadingCongressPersonData } =
+    useCongresspersonData({ address: addressField ?? undefined })
+
+  const shouldDisableNextButton =
+    form.formState.isSubmitting || isLoadingCongressPersonData || !!form.formState.errors
+
+  useEffect(() => {
+    if (addressField && resolvedCongressPersonData?.notFoundReason === 'NOT_SPECIFIC_ENOUGH') {
+      form.setError('address', {
+        type: 'value',
+        message: 'Please enter a specific address that includes street-level information',
+      })
+    }
+  }, [addressField, form, resolvedCongressPersonData?.notFoundReason])
+
   const phoneNumberValue = form.watch('phoneNumber')
   return (
     <Form {...form}>
@@ -167,7 +186,10 @@ export function UpdateUserProfileForm({
                 <FormControl>
                   <GooglePlacesSelect
                     {...field}
-                    onChange={field.onChange}
+                    onChange={e => {
+                      field.onChange(e)
+                      form.clearErrors('address')
+                    }}
                     placeholder="Street address"
                     value={field.value}
                   />
@@ -254,7 +276,7 @@ export function UpdateUserProfileForm({
         <div className="flex justify-center gap-6 max-md:!mt-auto md:mt-4">
           <Button
             className="w-full md:w-1/2"
-            disabled={form.formState.isSubmitting}
+            disabled={shouldDisableNextButton}
             size="lg"
             type="submit"
           >
