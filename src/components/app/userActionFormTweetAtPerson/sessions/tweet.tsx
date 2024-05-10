@@ -8,7 +8,7 @@ import { z } from 'zod'
 import {
   actionCreateUserActionTweetedAtPerson,
   CreateActionTweetAtPersonInput,
-} from '@/actions/actionCreateUserActionTweetedAtPerson'
+} from '@/actions/actionCreateUserActionTweetAtPerson'
 import { useCongresspersonData } from '@/components/app/userActionFormCallCongressperson/sections/address'
 import {
   CAMPAIGN_METADATA,
@@ -66,12 +66,14 @@ export function TweetAtPersonSection({
   function getTweetMessageBasedOnRepresentativeScore() {
     if (congressPersonNotFound) {
       return `🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕
-GENERIC TWEET. See where your representative stands at www.standwithcrypto.org/pizza and join the fight! #StandWithCrypto`
+May 22nd is Bitcoin Pizza Day! I applaud all the representatives who are protecting Americans’ right to own crypto. See where your representative stands at www.standwithcrypto.org/pizza and join the fight! #StandWithCrypto
+      `
     }
 
     if (!representative) {
       return `🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕
-GENERIC TWEET. See where your representative stands at www.standwithcrypto.org/pizza and join the fight! #StandWithCrypto`
+May 22nd is Bitcoin Pizza Day! I applaud all the representatives who are protecting Americans’ right to own crypto. See where your representative stands at www.standwithcrypto.org/pizza and join the fight! #StandWithCrypto
+      `
     }
 
     const representativeXHandle =
