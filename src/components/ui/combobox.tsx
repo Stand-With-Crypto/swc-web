@@ -11,9 +11,9 @@ import {
 } from '@/components/ui/command'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-import { useGetElementDimensions } from '@/hooks/useGetElementDimensions'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { usePreventMobileKeyboardOffset } from '@/hooks/usePreventMobileKeyboardOffset'
+import { useResizeObserver } from '@/hooks/useResizeObserver'
 import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
 import { cn } from '@/utils/web/cn'
 import {
@@ -57,7 +57,7 @@ export function Combobox<T>({
   usePreventMobileKeyboardOffset(open && !disablePreventMobileKeyboardOffset)
   const parentRef = React.useRef<HTMLButtonElement>(null)
   const isMobile = useIsMobile({ defaultState: false })
-  const size = useGetElementDimensions(parentRef)
+  const size = useResizeObserver(parentRef)
   const wrappedAnalytics = React.useCallback(
     (newOpen: boolean) =>
       trackPrimitiveComponentAnalytics(
