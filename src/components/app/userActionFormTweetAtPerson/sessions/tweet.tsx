@@ -176,7 +176,7 @@ May 22nd is Bitcoin Pizza Day! Like many other politicians my representative doe
       )}
 
       {!hasUserTweeted && (
-        <div className="bg-backgroundAlternate mb-6 rounded-2xl p-6 lg:max-w-[600px]">
+        <div className="mb-6 rounded-2xl bg-backgroundAlternate p-6 lg:max-w-[600px]">
           <p>{getTweetMessageBasedOnRepresentativeScore()}</p>
         </div>
       )}
