@@ -1,11 +1,13 @@
 'use client'
 
 import { useCallback } from 'react'
+import { isSameDay } from 'date-fns'
 import { capitalize } from 'lodash-es'
 import { Menu } from 'lucide-react'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { NavbarLoggedInButton } from '@/components/app/navbar/navbarLoggedInButton'
+import { UserActionFormTweetAtPersonDialog } from '@/components/app/userActionFormTweetAtPerson/dialog'
 import { Button } from '@/components/ui/button'
 import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/drawer'
 import { NextImage } from '@/components/ui/image'
@@ -17,6 +19,8 @@ import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
 export function Navbar({ locale }: { locale: SupportedLocale }) {
+  const isPizzaDay = isSameDay(new Date(), new Date(2024, 4, 22))
+
   const dialogProps = useDialog({ analytics: 'Mobile Navbar' })
   const urls = getIntlUrls(locale)
   const leftLinks = [
@@ -79,24 +83,22 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
         </div>
       )}
 
-      {/* This component below will need to be commented out before shipping to prod */}
-      <div className="flex h-16 bg-primary-cta">
-        <div className="align-center container flex items-center justify-between gap-4">
-          <p className="flex-shrink font-bold text-white">
-            Tweet your representative and get a free NFT 🍕
-          </p>
-          <div className="xs:text-xs space-x-3 text-sm">
-            <Button asChild size="sm" variant="secondary">
-              <InternalLink
-                className="font-bold text-fontcolor"
-                href="/action/tweet-at-person/2024_05_22_PIZZA_DAY"
-              >
-                Get started
-              </InternalLink>
-            </Button>
+      {!isPizzaDay && (
+        <div className="flex h-16 bg-primary-cta">
+          <div className="align-center container flex items-center justify-between gap-4">
+            <p className="flex-shrink font-bold text-white">
+              Tweet your representative and get a free NFT 🍕
+            </p>
+            <div className="xs:text-xs space-x-3 text-sm">
+              <UserActionFormTweetAtPersonDialog>
+                <Button className="font-bold text-fontcolor" size="sm" variant="secondary">
+                  Get started
+                </Button>
+              </UserActionFormTweetAtPersonDialog>
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       <nav
         className={
