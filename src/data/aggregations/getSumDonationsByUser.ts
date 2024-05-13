@@ -1,9 +1,11 @@
 import 'server-only'
 
+import { UserInformationVisibility } from '@prisma/client'
 import { Decimal } from '@prisma/client/runtime/library'
 import { compact, keyBy } from 'lodash-es'
 
 import { getClientLeaderboardUser } from '@/clientModels/clientUser/clientLeaderboardUser'
+import { getClientModel } from '@/clientModels/utils'
 import { getENSDataMapFromCryptoAddressesAndFailGracefully } from '@/data/web3/getENSDataFromCryptoAddress'
 import { prismaClient } from '@/utils/server/prismaClient'
 
@@ -75,7 +77,26 @@ async function getSumDonationsByUserData(total: QueryResult) {
 }
 export type SumDonationsByUser = Awaited<ReturnType<typeof getSumDonationsByUserData>>
 
+function manuallyAdjustResults(results: SumDonationsByUser) {
+  const moonpay: SumDonationsByUser[0] = {
+    totalAmountUsd: 1_000_000,
+    user: getClientModel({
+      id: 'manually-added-moonpay',
+      firstName: null,
+      lastName: null,
+      informationVisibility: UserInformationVisibility.ALL_INFO,
+      primaryUserCryptoAddress: null,
+      manuallySetInformation: {
+        displayName: 'moonpay',
+        profilePictureUrl: '/userManuallySetInformation/moonpay.png',
+      },
+    }),
+  }
+  return [moonpay, ...results]
+}
+
 export async function getSumDonationsByUser(config: SumDonationsByUserConfig) {
   const result = await getSumDonationsByUserQuery(config)
-  return getSumDonationsByUserData(result)
+  const withUserData = await getSumDonationsByUserData(result)
+  return manuallyAdjustResults(withUserData)
 }

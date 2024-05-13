@@ -20,9 +20,17 @@ const HARDCODED_USER_DISPLAY_NAME: Record<string, { displayName: string }> = {
 export const getUserDisplayName = (
   user: Pick<
     ClientUserWithENSData,
-    'firstName' | 'lastName' | 'informationVisibility' | 'primaryUserCryptoAddress' | 'id'
+    | 'firstName'
+    | 'lastName'
+    | 'informationVisibility'
+    | 'primaryUserCryptoAddress'
+    | 'id'
+    | 'manuallySetInformation'
   > | null,
 ) => {
+  if (user?.manuallySetInformation) {
+    return user.manuallySetInformation.displayName
+  }
   if (user?.id && HARDCODED_USER_DISPLAY_NAME[user.id]) {
     return HARDCODED_USER_DISPLAY_NAME[user.id].displayName
   }
