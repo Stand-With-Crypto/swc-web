@@ -27,7 +27,6 @@ export function ContentSectionWithVariableSubtitleByAddress({
 
   // This is necessary because `useMutableCurrentUserAddress` doesn't trigger a react rerender on change
   React.useEffect(() => {
-    console.log('ContentSectionWithVariableSubtitleByAddress/useEffect', { address })
     if (address === 'loading') {
       setSubtitleState('loading')
       return
