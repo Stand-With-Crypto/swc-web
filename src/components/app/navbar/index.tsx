@@ -83,7 +83,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
         </div>
       )}
 
-      {!isPizzaDay && (
+      {isPizzaDay && (
         <div className="flex h-16 bg-primary-cta">
           <div className="align-center container flex items-center justify-between gap-4">
             <p className="flex-shrink font-bold text-white">
