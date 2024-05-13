@@ -9,6 +9,9 @@ export default defineConfig({
   viewportHeight: 844,
   defaultCommandTimeout: 10000,
   e2e: {
+    env: {
+      SWC_INTERNAL_ENDPOINTS_SECRET: process.env.SWC_INTERNAL_ENDPOINTS_SECRET,
+    },
     baseUrl: 'http://localhost:3000',
     setupNodeEvents(on) {
       on('task', {
