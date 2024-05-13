@@ -1,4 +1,4 @@
-import { compact, times } from 'lodash-es'
+import { compact, isEmpty, times } from 'lodash-es'
 
 import { ContentSection } from '@/components/app/ContentSection'
 import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
@@ -49,6 +49,7 @@ export function LocationStateSpecific({
       return district
     }),
   )
+
   return (
     <div>
       <DarkHeroSection>
@@ -74,119 +75,131 @@ export function LocationStateSpecific({
           </UserActionFormVoterRegistrationDialog>
         </div>
       </DarkHeroSection>
-      <div className="space-y-20">
-        {!!groups.senators.length && (
-          <div className="mt-20">
-            <DTSIPersonHeroCardSection
-              cta={
-                <InternalLink href={urls.locationStateSpecificSenateRace(stateCode)}>
-                  View Race
-                </InternalLink>
-              }
-              locale={locale}
-              people={groups.senators}
-              title={<>U.S. Senate Race ({stateCode})</>}
-            />
-          </div>
-        )}
-        {groups.congresspeople['at-large']?.people.length ? (
-          <div className="mt-20">
-            <DTSIPersonHeroCardSection
-              cta={
-                <InternalLink
-                  href={urls.locationDistrictSpecific({ stateCode, district: 'at-large' })}
-                >
-                  View Race
-                </InternalLink>
-              }
-              locale={locale}
-              people={groups.congresspeople['at-large'].people}
-              title={<>At-Large Congressional District</>}
-            />
-          </div>
-        ) : (
-          <UserDistrictContentSection
-            groups={groups}
-            locale={locale}
-            stateCode={stateCode}
-            stateName={stateName}
-          />
-        )}
-        {!!stances.length && (
-          <ContentSection
-            subtitle={<>Keep up with recent tweets about crypto from politicians in {stateName}.</>}
-            title={<>What politicians in {stateCode} are saying</>}
-          >
-            <ScrollArea>
-              <div className="flex justify-center gap-5 pb-3 pl-4">
-                {stances.map(stance => {
-                  return (
-                    <div className="flex w-[300px] shrink-0 flex-col lg:w-[500px]" key={stance.id}>
-                      <DTSIStanceDetails
-                        bodyClassName="line-clamp-6"
-                        className="flex-grow"
-                        hideImages
-                        locale={locale}
-                        person={stance.person}
-                        stance={stance}
-                      />
-                      <CryptoSupportHighlight
-                        className="mx-auto mt-2"
-                        stanceScore={stance.computedStanceScore}
-                      />
-                    </div>
-                  )
-                })}
-              </div>
-              <ScrollBar orientation="horizontal" />
-            </ScrollArea>
-          </ContentSection>
-        )}
-        {US_LOCATION_PAGES_LIVE_KEY_DISTRICTS_MAP[stateCode]?.map(district => {
-          const districtPeople = groups.congresspeople[district]?.people
-          if (!districtPeople) {
-            return null
-          }
-          return (
-            <DTSIPersonHeroCardSection
-              cta={
-                <InternalLink href={urls.locationDistrictSpecific({ stateCode, district })}>
-                  View Race
-                </InternalLink>
-              }
-              key={district}
-              locale={locale}
-              people={districtPeople}
-              title={<>Congressional District {district}</>}
-            />
-          )
-        })}
 
-        {US_STATE_CODE_TO_DISTRICT_COUNT_MAP[stateCode] > 1 && (
-          <ContentSection
-            className="container"
-            subtitle={'Dive deeper and discover races in other districts.'}
-            title={`Other races in ${stateName}`}
-          >
-            <div className="grid grid-cols-2 gap-3 text-center md:grid-cols-3 xl:grid-cols-4">
-              {otherDistricts.map(district => (
-                <InternalLink
-                  className={cn('mb-4 block flex-shrink-0 font-semibold')}
-                  href={urls.locationDistrictSpecific({
-                    stateCode,
-                    district,
-                  })}
-                  key={district}
-                >
-                  District {district}
-                </InternalLink>
-              ))}
+      {isEmpty(groups.senators) && isEmpty(groups.congresspeople) ? (
+        <PageTitle as="h3" className="mt-20" size="sm">
+          There's no election data for {stateName}
+        </PageTitle>
+      ) : (
+        <div className="space-y-20">
+          {!!groups.senators.length && (
+            <div className="mt-20">
+              <DTSIPersonHeroCardSection
+                cta={
+                  <InternalLink href={urls.locationStateSpecificSenateRace(stateCode)}>
+                    View Race
+                  </InternalLink>
+                }
+                locale={locale}
+                people={groups.senators}
+                title={<>U.S. Senate Race ({stateCode})</>}
+              />
             </div>
-          </ContentSection>
-        )}
+          )}
+          {groups.congresspeople['at-large']?.people.length ? (
+            <div className="mt-20">
+              <DTSIPersonHeroCardSection
+                cta={
+                  <InternalLink
+                    href={urls.locationDistrictSpecific({ stateCode, district: 'at-large' })}
+                  >
+                    View Race
+                  </InternalLink>
+                }
+                locale={locale}
+                people={groups.congresspeople['at-large'].people}
+                title={<>At-Large Congressional District</>}
+              />
+            </div>
+          ) : (
+            <UserDistrictContentSection
+              groups={groups}
+              locale={locale}
+              stateCode={stateCode}
+              stateName={stateName}
+            />
+          )}
+          {!!stances.length && (
+            <ContentSection
+              subtitle={
+                <>Keep up with recent tweets about crypto from politicians in {stateName}.</>
+              }
+              title={<>What politicians in {stateCode} are saying</>}
+            >
+              <ScrollArea>
+                <div className="flex justify-center gap-5 pb-3 pl-4">
+                  {stances.map(stance => {
+                    return (
+                      <div
+                        className="flex w-[300px] shrink-0 flex-col lg:w-[500px]"
+                        key={stance.id}
+                      >
+                        <DTSIStanceDetails
+                          bodyClassName="line-clamp-6"
+                          className="flex-grow"
+                          hideImages
+                          locale={locale}
+                          person={stance.person}
+                          stance={stance}
+                        />
+                        <CryptoSupportHighlight
+                          className="mx-auto mt-2"
+                          stanceScore={stance.computedStanceScore}
+                        />
+                      </div>
+                    )
+                  })}
+                </div>
+                <ScrollBar orientation="horizontal" />
+              </ScrollArea>
+            </ContentSection>
+          )}
+          {US_LOCATION_PAGES_LIVE_KEY_DISTRICTS_MAP[stateCode]?.map(district => {
+            const districtPeople = groups.congresspeople[district]?.people
+            if (!districtPeople) {
+              return null
+            }
+            return (
+              <DTSIPersonHeroCardSection
+                cta={
+                  <InternalLink href={urls.locationDistrictSpecific({ stateCode, district })}>
+                    View Race
+                  </InternalLink>
+                }
+                key={district}
+                locale={locale}
+                people={districtPeople}
+                title={<>Congressional District {district}</>}
+              />
+            )
+          })}
 
-        <PACFooter className="container" />
-      </div>
+          {US_STATE_CODE_TO_DISTRICT_COUNT_MAP[stateCode] > 1 && (
+            <ContentSection
+              className="container"
+              subtitle={'Dive deeper and discover races in other districts.'}
+              title={`Other races in ${stateName}`}
+            >
+              <div className="grid grid-cols-2 gap-3 text-center md:grid-cols-3 xl:grid-cols-4">
+                {otherDistricts.map(district => (
+                  <InternalLink
+                    className={cn('mb-4 block flex-shrink-0 font-semibold')}
+                    href={urls.locationDistrictSpecific({
+                      stateCode,
+                      district,
+                    })}
+                    key={district}
+                  >
+                    District {district}
+                  </InternalLink>
+                ))}
+              </div>
+            </ContentSection>
+          )}
+
+          <PACFooter className="container" />
+        </div>
+      )}
     </div>
   )
 }
