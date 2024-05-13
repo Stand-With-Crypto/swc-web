@@ -37,7 +37,7 @@ export function DtsiPersonCardWithStanceFooter({ person }: DtsiPersonCardWithGra
       className="flex w-full flex-col items-center text-sm md:text-base lg:max-w-[345px]"
       key={person.id}
     >
-      <div className="bg-backgroundAlternate flex w-full gap-4 rounded-tl-2xl rounded-tr-2xl p-6">
+      <div className="flex w-full gap-4 rounded-tl-2xl rounded-tr-2xl bg-backgroundAlternate p-6">
         <div className="relative">
           <DTSIAvatar person={person} size={60} />
           <div className="absolute bottom-[-8px] right-[-8px]">
