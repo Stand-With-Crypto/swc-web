@@ -9,7 +9,6 @@ import { toast } from 'sonner'
 import { actionUpdateUserProfile } from '@/actions/actionUpdateUserProfile'
 import { ClientAddress } from '@/clientModels/clientAddress'
 import { SensitiveDataClientUserWithENSData } from '@/clientModels/clientUser/sensitiveDataClientUser'
-import { PrivacyPolicyDialog } from '@/components/app/pagePrivacyPolicy/dialog'
 import { SWCMembershipDialog } from '@/components/app/updateUserProfileForm/swcMembershipDialog'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -95,7 +94,7 @@ export function UpdateUserProfileForm({
               analyticsProps: {
                 ...(address ? convertAddressToAnalyticsProperties(address) : {}),
               },
-              payload: { ...values, address },
+              payload: { ...values, address, hasOptedInToSms: !!values.phoneNumber },
             },
             payload => actionUpdateUserProfile(payload),
           )
@@ -117,7 +116,7 @@ export function UpdateUserProfileForm({
           </PageSubTitle>
         </div>
 
-        <div className="space-y-4">
+        <div className="flex h-full flex-col space-y-4">
           {user.hasEmbeddedWallet || (
             <FormField
               control={form.control}
@@ -227,30 +226,13 @@ export function UpdateUserProfileForm({
               )}
             />
           )}
-          <Collapsible open={!!phoneNumberValue}>
+          <Collapsible className="!my-4 max-md:!mt-auto" open={!!phoneNumberValue}>
             <CollapsibleContent className="AnimateCollapsibleContent">
-              <FormField
-                control={form.control}
-                name="hasOptedInToSms"
-                render={({ field }) => (
-                  <label className="block">
-                    <FormItem className="flex flex-row items-center space-x-3 space-y-0">
-                      <FormControl>
-                        <Checkbox checked={field.value} onCheckedChange={field.onChange} />
-                      </FormControl>
-                      <FormDescription>
-                        (Optional) Check this box to consent to receive recurring automated text
-                        messages about Stand With Crypto at the phone number provided. Reply STOP to
-                        stop. Msg and data rates may apply. See{' '}
-                        <PrivacyPolicyDialog>
-                          <button className="text-primary-cta">Privacy Policy</button>
-                        </PrivacyPolicyDialog>
-                        .
-                      </FormDescription>
-                    </FormItem>
-                  </label>
-                )}
-              />
+              <FormDescription className="text-center lg:text-left">
+                By clicking Next, you consent to receive recurring texts from Stand With Crypto to
+                the number provided. You can reply STOP to stop receiving texts. Message and data
+                rates may apply.
+              </FormDescription>
             </CollapsibleContent>
           </Collapsible>
           <FormGeneralErrorMessage control={form.control} />
