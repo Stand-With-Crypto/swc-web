@@ -88,14 +88,17 @@ May 22nd is Bitcoin Pizza Day! I applaud all the representatives who are protect
 
     return (() => {
       switch (convertDTSIPersonStanceScoreToLetterGrade(representative)) {
-        case DTSILetterGrade.A || DTSILetterGrade.B:
+        case DTSILetterGrade.A:
+        case DTSILetterGrade.B:
           return `🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕
 May 22nd is Bitcoin Pizza Day! I applaud my representative ${representativeXHandle} for protecting Americans’ right to own crypto. See where your representative stands at www.standwithcrypto.org/pizza and join the fight! #StandWithCrypto #${user?.userLocationDetails?.administrativeAreaLevel1 ?? ''}
           `
-        case DTSILetterGrade.C || null:
+        case DTSILetterGrade.C:
+        case null:
           return `🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕
 May 22nd is Bitcoin Pizza Day! I’m asking my representative ${representativeXHandle} to protect Americans’ right to own crypto. See where your representative stands at www.standwithcrypto.org/pizza and join the fight! #StandWithCrypto #${user?.userLocationDetails?.administrativeAreaLevel1 ?? ''}`
-        case DTSILetterGrade.D || DTSILetterGrade.F:
+        case DTSILetterGrade.D:
+        case DTSILetterGrade.F:
           return `🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕
 May 22nd is Bitcoin Pizza Day! Like many other politicians my representative doesn’t understand the importance of crypto for America. See where your representative stands at www.standwithcrypto.org/pizza and join the fight! #StandWithCrypto #${user?.userLocationDetails?.administrativeAreaLevel1 ?? ''}
           `
