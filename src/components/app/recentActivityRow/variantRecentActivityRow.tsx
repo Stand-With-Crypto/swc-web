@@ -11,7 +11,6 @@ import {
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
-import { UserActionFormTweetAtPersonDialog } from '@/components/app/userActionFormTweetAtPerson/dialog'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
 import { Button } from '@/components/ui/button'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
@@ -199,9 +198,9 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
       case UserActionType.TWEET_AT_PERSON: {
         return {
           onFocusContent: () => (
-            <UserActionFormTweetAtPersonDialog>
-              <Button>Send yours</Button>
-            </UserActionFormTweetAtPersonDialog>
+            <LoginDialogWrapper>
+              <Button>Join</Button>
+            </LoginDialogWrapper>
           ),
           children: (
             <MainText>
