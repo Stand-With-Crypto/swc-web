@@ -1,4 +1,6 @@
 'use client'
+import { Suspense } from 'react'
+
 import { ContentSectionWithVariableSubtitleByAddress } from '@/components/app/pagesKeyRaces/common/contentSectionWithVariableSubtitleByAddress'
 import { SupportedLocale } from '@/intl/locales'
 import { USStateCode } from '@/utils/shared/usStateUtils'
@@ -20,25 +22,27 @@ export function UserDistrictContentSection({
   stateCode,
 }: UserDistrictContentSectionProps) {
   return (
-    <ContentSectionWithVariableSubtitleByAddress
-      className="bg-muted py-14"
-      renderContent={({ onChangeAddress }) => (
-        <UserLocationRaceInfo
-          groups={groups}
-          locale={locale}
-          onChange={onChangeAddress}
-          stateCode={stateCode}
-        />
-      )}
-      subtitle={
-        <>
-          Do you live in {stateName}? Enter your address and we’ll redirect you to races in your
-          district.
-        </>
-      }
-      title={'Your district'}
-      withAddress="hidden"
-      withoutAddress="visible"
-    />
+    <Suspense>
+      <ContentSectionWithVariableSubtitleByAddress
+        className="bg-muted py-14"
+        renderContent={({ onChangeAddress }) => (
+          <UserLocationRaceInfo
+            groups={groups}
+            locale={locale}
+            onChange={onChangeAddress}
+            stateCode={stateCode}
+          />
+        )}
+        subtitle={
+          <>
+            Do you live in {stateName}? Enter your address and we’ll redirect you to races in your
+            district.
+          </>
+        }
+        title={'Your district'}
+        withAddress="hidden"
+        withoutAddress="visible"
+      />
+    </Suspense>
   )
 }
