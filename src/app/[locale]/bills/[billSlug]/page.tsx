@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 import { PageBillDetails } from '@/components/app/pageBillDetails'
+import { queryDTSIBillDetails } from '@/data/dtsi/queries/queryDTSIBillDetails'
 import { PageProps } from '@/types'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
@@ -24,15 +25,14 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   }
 }
 
+// TODO: generate pages
 // export async function generateStaticParams() {
 // }
 
 export default async function BillDetails({ params }: Props) {
   const locale = params.locale
-  const billSlug = params.billSlug
 
-  // TODO: Fetch bill data
-  const bill = {}
+  const bill = await queryDTSIBillDetails(params.billSlug)
 
   if (!bill) {
     notFound()

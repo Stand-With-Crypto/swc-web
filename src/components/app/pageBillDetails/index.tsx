@@ -6,14 +6,16 @@ import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { DTSI_Bill, DTSI_Person } from '@/data/dtsi/generated'
+import { DTSI_Person } from '@/data/dtsi/generated'
+import { DTSIBillDetails } from '@/data/dtsi/queries/queryDTSIBillDetails'
 import { SupportedLocale } from '@/intl/locales'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
+import { convertDTSIStanceScoreToCryptoSupportLanguage } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
 interface PageBillDetailsProps {
-  bill: DTSI_Bill
+  bill: DTSIBillDetails
   locale: SupportedLocale
 }
 
@@ -35,53 +37,40 @@ const AvatarGrid = ({ people, locale }: { people: DTSI_Person[]; locale: Support
 )
 
 export function PageBillDetails(props: PageBillDetailsProps) {
-  const { locale } = props
+  const { bill, locale } = props
+
+  console.log('bill', bill)
 
   return (
     <div className="standard-spacing-from-navbar container space-y-16">
       <section className="space-y-8 text-center">
-        <PageTitle>[PH] Bill Title</PageTitle>
+        <PageTitle>{bill.title}</PageTitle>
         <p className="font-semibold">
-          <FormattedDatetime date={new Date()} dateStyle="medium" locale={locale} />
+          <FormattedDatetime
+            date={new Date(bill.datetimeCreated)}
+            dateStyle="medium"
+            locale={locale}
+          />
         </p>
-        <PageSubTitle>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus nec nunc
-          condimentum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
-          cubilia Curae; Donec ultricies, metus nec vehicula ultricies, urna nunc fermentum metus,
-          nec tristique justo ligula in nunc. Donec eget nunc vel eros tincidunt vehicula.
-        </PageSubTitle>
+        <PageSubTitle>{bill.summary}</PageSubTitle>
         <ExternalLink className="inline-block" href="#">
-          https://www.congress.gov/bill/118th-congress/senate-bill/2669
+          {bill.congressDotGovUrl}
         </ExternalLink>
-        <CryptoSupportHighlight className="mx-auto" stanceScore={100} text="Pro-crypto" />
+        <CryptoSupportHighlight
+          className="mx-auto"
+          stanceScore={bill.computedStanceScore}
+          text={convertDTSIStanceScoreToCryptoSupportLanguage(bill.computedStanceScore)}
+        />
       </section>
 
       <section className="space-y-8 text-center">
         <p className="font-semibold">Analysis</p>
 
-        <p className="text-center text-fontcolor-muted">
-          "Aliqua irure est in proident cillum ut aute labore proident velit eiusmod mollit
-          proident. Occaecat nisi occaecat culpa irure sint adipisicing ullamco anim in ea elit. Id
-          enim et dolore laborum consequat. Lorem ad cillum proident ullamco occaecat dolore nulla
-          occaecat velit. Sunt ullamco duis magna ullamco.
-          <br />
-          <br /> Fugiat occaecat magna elit elit sit eiusmod laborum proident cillum minim proident
-          consectetur commodo. Do excepteur dolor labore ex consequat duis. Et Lorem nulla excepteur
-          dolor exercitation culpa minim nisi nulla enim deserunt proident. Nisi culpa enim occaecat
-          tempor cupidatat id ad adipisicing ea qui nostrud nisi. Amet sunt ex sunt anim est sit
-          deserunt consequat nostrud Lorem amet velit pariatur pariatur. Do qui enim aliqua sit
-          occaecat veniam anim. Eiusmod elit labore ullamco voluptate amet magna exercitation
-          exercitation occaecat laborum veniam. Duis culpa ullamco pariatur in duis elit in ex quis.
-          <br />
-          <br /> Non laborum ipsum fugiat occaecat deserunt laboris mollit et tempor ex sit.
-          Proident aliquip nostrud sit veniam deserunt reprehenderit ut aute duis pariatur commodo
-          Lorem. Ut sint non cillum quis consectetur esse enim irure exercitation occaecat dolor et
-          commodo. Ad tempor ea ea exercitation adipisicing elit nulla enim eu. Aliqua amet non
-          culpa id voluptate non. Culpa sint pariatur occaecat tempor labore incididunt excepteur ad
-          fugiat. Irure eiusmod exercitation proident dolor consectetur. Commodo nulla aute officia
-          nostrud sunt nostrud. Deserunt velit pariatur velit esse cillum magna laboris. Nulla anim
-          dolor deserunt commodo incididunt consequat."
-        </p>
+        <div className="space-y-6 text-center text-fontcolor-muted">
+          {bill.analysis.map(analysis => (
+            <p key={analysis.id}>{analysis.internalNotes}</p>
+          ))}
+        </div>
 
         <Button variant="secondary">Add Analysis</Button>
       </section>
