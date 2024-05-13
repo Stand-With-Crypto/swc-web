@@ -1,7 +1,6 @@
 import { UserActionType } from '@prisma/client'
 import { redirect, RedirectType } from 'next/navigation'
 
-import { HomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogDeeplinkLayout'
 import { getAuthenticatedData } from '@/components/app/pageUserProfile/getAuthenticatedData'
 import { PageProps } from '@/types'
 import { setCallbackQueryString } from '@/utils/server/searchParams'
@@ -14,6 +13,7 @@ export const dynamic = 'force-dynamic'
 export default async function UserActionBecomeMemberDeepLink({ params }: PageProps) {
   const { locale } = params
   const user = await getAuthenticatedData()
+  console.log('page')
 
   if (!user) {
     redirect(
@@ -25,9 +25,5 @@ export default async function UserActionBecomeMemberDeepLink({ params }: PagePro
     )
   }
 
-  return (
-    <HomepageDialogDeeplinkLayout pageParams={params} size="sm">
-      <PageBecomeMember hasOptedInToMembership={user.hasOptedInToMembership} />
-    </HomepageDialogDeeplinkLayout>
-  )
+  return <PageBecomeMember hasOptedInToMembership={user.hasOptedInToMembership} />
 }
