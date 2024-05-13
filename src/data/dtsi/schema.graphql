@@ -346,6 +346,8 @@ enum PersonStanceVerificationStatus {
 }
 
 type Query {
+  bill(id: String!): Bill!
+  bills: [Bill!]!
   congressPeople(chamber: CongressionalChamber!, session: CongressionalSession!): [Person!]!
     @deprecated(reason: "Use people instead")
   nonCongressPeople: [Person!]! @deprecated(reason: "Use people instead")
