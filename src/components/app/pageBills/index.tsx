@@ -1,10 +1,11 @@
-import { BillCard } from '@/components/app/billCard'
+import { Bill, BillCard } from '@/components/app/billCard'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 
 interface PageBillsProps {
   title: string
   description: string
+  bills: Bill[]
 }
 
 export function PageBills(props: PageBillsProps) {
@@ -18,19 +19,10 @@ export function PageBills(props: PageBillsProps) {
       </section>
 
       <section>
-        <div className="flex flex-col gap-4">
-          <BillCard
-            bill={{
-              name: 'Bill 1',
-              description: 'This is a description of bill 1',
-            }}
-          />
-          <BillCard
-            bill={{
-              name: 'Bill 1',
-              description: 'This is a description of bill 1',
-            }}
-          />
+        <div className="flex flex-col gap-4 lg:gap-8">
+          {props.bills.map(bill => (
+            <BillCard bill={bill} key={bill.id} />
+          ))}
         </div>
       </section>
     </div>

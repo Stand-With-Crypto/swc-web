@@ -1,9 +1,11 @@
 import { Metadata } from 'next'
 
 import { PageBills } from '@/components/app/pageBills'
-import { PageProps } from '@/types'
+import { queryDTSIAllBills } from '@/data/dtsi/queries/queryDTSIAllBills'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
+import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
+export const revalidate = SECONDS_DURATION.DAY
 export const dynamic = 'error'
 
 const title = '[PH] Bills'
@@ -16,8 +18,8 @@ export const metadata: Metadata = {
   }),
 }
 
-type Props = PageProps
+export default async function BillsPage() {
+  const results = await queryDTSIAllBills()
 
-export default async function BillsPage(props: Props) {
-  return <PageBills description={description} title={title} />
+  return <PageBills bills={results.bills} description={description} title={title} />
 }

@@ -6,14 +6,14 @@ import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { DTSI_Person } from '@/data/dtsi/generated'
+import { DTSI_Bill, DTSI_Person } from '@/data/dtsi/generated'
 import { SupportedLocale } from '@/intl/locales'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
 interface PageBillDetailsProps {
-  bill: Bill
+  bill: DTSI_Bill
   locale: SupportedLocale
 }
 
