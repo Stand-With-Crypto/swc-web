@@ -15,6 +15,7 @@ import {
   CAMPAIGN_METADATA,
   TweetAtPersonSectionNames,
 } from '@/components/app/userActionFormTweetAtPerson/constants'
+import { TweetAtPersonSectionSkeleton } from '@/components/app/userActionFormTweetAtPerson/skeletons/tweetSkeleton'
 import { Button } from '@/components/ui/button'
 import { ExternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
@@ -155,7 +156,7 @@ May 22nd is Bitcoin Pizza Day! Like many other politicians my representative doe
     }
   }, [resolvedCongressPersonData])
 
-  if (!user || isLoadingInitialCongresspersonData) return null
+  if (!user || isLoadingInitialCongresspersonData) return <TweetAtPersonSectionSkeleton />
 
   return (
     <div className="flex h-full flex-col items-center justify-center">
@@ -175,7 +176,7 @@ May 22nd is Bitcoin Pizza Day! Like many other politicians my representative doe
       )}
 
       {!hasUserTweeted && (
-        <div className="mb-6 rounded-2xl bg-backgroundAlternate p-6 lg:max-w-[600px]">
+        <div className="bg-backgroundAlternate mb-6 rounded-2xl p-6 lg:max-w-[600px]">
           <p>{getTweetMessageBasedOnRepresentativeScore()}</p>
         </div>
       )}
