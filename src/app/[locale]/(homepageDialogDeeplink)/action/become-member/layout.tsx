@@ -2,7 +2,7 @@ import { HomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogDee
 import { PageProps } from '@/types'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
-export const revalidate = SECONDS_DURATION.SECOND * 30
+export const revalidate = SECONDS_DURATION.HOUR
 
 export default async function Layout({ params, children }: React.PropsWithChildren<PageProps>) {
   console.log('layout')
