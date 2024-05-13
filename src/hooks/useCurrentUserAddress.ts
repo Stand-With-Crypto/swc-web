@@ -42,7 +42,7 @@ function useCurrentUserAddress() {
   if (searchParamAddressData === 'loading' || user.isLoading || !hasHydrated) {
     return 'loading' as const
   }
-  const address = searchParamAddressData || persistedUserAddress || localUserAddress || null
+  const address = searchParamAddressData || localUserAddress || persistedUserAddress || null
   return address
 }
 
@@ -71,9 +71,7 @@ export function useMutableCurrentUserAddress() {
       (!initialAddress.current || initialAddress.current === 'loading')
     ) {
       initialAddress.current = currentUserAddress || 'not-set'
-      if (currentUserAddress) {
-        setAddress(currentUserAddress)
-      }
+      setAddress(currentUserAddress)
     }
   }, [currentUserAddress, setAddress])
   return { address, setAddress }

@@ -4,6 +4,7 @@ import usePlacesAutocomplete from 'use-places-autocomplete'
 
 import { Combobox } from '@/components/ui/combobox'
 import { InputWithIcons } from '@/components/ui/inputWithIcons'
+import { Spinner } from '@/components/ui/spinner'
 import { useGoogleMapsScript } from '@/hooks/useGoogleMapsScript'
 import { cn } from '@/utils/web/cn'
 import { GooglePlaceAutocompletePrediction } from '@/utils/web/googlePlaceUtils'
@@ -11,13 +12,15 @@ import { GooglePlaceAutocompletePrediction } from '@/utils/web/googlePlaceUtils'
 export type GooglePlacesSelectProps = {
   value: GooglePlaceAutocompletePrediction | null
   onChange: (val: GooglePlaceAutocompletePrediction | null) => void
+  loading?: boolean
+  disablePreventMobileKeyboardOffset?: boolean
 } & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange' | 'type'>
 
 export const GooglePlacesSelect = React.forwardRef<
   React.ElementRef<'input'>,
   GooglePlacesSelectProps
 >((props, ref) => {
-  const { value: propsValue, onChange: propsOnChange, className, ...inputProps } = props
+  const { value: propsValue, onChange: propsOnChange, className, loading, ...inputProps } = props
   const [open, setOpen] = React.useState(false)
   const {
     ready,
@@ -43,6 +46,7 @@ export const GooglePlacesSelect = React.forwardRef<
   return (
     <Combobox
       analytics={'Google Place Select'}
+      disablePreventMobileKeyboardOffset={props.disablePreventMobileKeyboardOffset}
       formatPopoverTrigger={triggerProps => (
         <InputWithIcons
           className={cn(
@@ -54,6 +58,7 @@ export const GooglePlacesSelect = React.forwardRef<
           leftIcon={<MapPin className="h-4 w-4 text-gray-500" />}
           placeholder="select a location"
           ref={ref}
+          rightIcon={loading ? <Spinner /> : undefined}
           value={triggerProps.value?.description || inputProps.placeholder || 'select a location'}
           {...inputProps}
           readOnly

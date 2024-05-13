@@ -1,19 +1,16 @@
-import { fetchDTSI, IS_MOCKING_DTSI_DATA } from '@/data/dtsi/fetchDTSI'
+import { fetchDTSI } from '@/data/dtsi/fetchDTSI'
 import { fragmentDTSIPersonCard } from '@/data/dtsi/fragments/fragmentDTSIPersonCard'
+import { fragmentDTSIPersonStanceDetails } from '@/data/dtsi/fragments/fragmentDTSIPersonStanceDetails'
 import {
-  DTSI_PersonRoleCategory,
-  DTSI_PersonRoleGroupCategory,
-  DTSI_PersonRoleStatus,
   DTSI_StateSpecificInformationQuery,
   DTSI_StateSpecificInformationQueryVariables,
 } from '@/data/dtsi/generated'
-import { NEXT_SESSION_OF_CONGRESS } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { USStateCode } from '@/utils/shared/usStateUtils'
 
 export const query = /* GraphQL */ `
   query StateSpecificInformation($stateCode: String!) {
     people(
-      limit: 1000
+      limit: 999
       offset: 0
       personRoleGroupingOr: [RUNNING_FOR_US_HOUSE_OF_REPS, RUNNING_FOR_US_SENATE]
       personRolePrimaryState: $stateCode
@@ -26,6 +23,7 @@ export const query = /* GraphQL */ `
         primaryState
         roleCategory
         status
+        dateStart
         group {
           id
           category
@@ -33,7 +31,26 @@ export const query = /* GraphQL */ `
         }
       }
     }
+    personStances(
+      limit: 15
+      offset: 0
+      personRoleGroupingOr: [RUNNING_FOR_US_HOUSE_OF_REPS, RUNNING_FOR_US_SENATE]
+      personRolePrimaryState: $stateCode
+    ) {
+      ...PersonStanceDetails
+      person {
+        profilePictureUrlDimensions
+        firstName
+        firstNickname
+        lastName
+        nameSuffix
+        profilePictureUrl
+        id
+      }
+    }
   }
+
+  ${fragmentDTSIPersonStanceDetails}
   ${fragmentDTSIPersonCard}
 `
 export const queryDTSILocationStateSpecificInformation = async ({
@@ -41,35 +58,12 @@ export const queryDTSILocationStateSpecificInformation = async ({
 }: {
   stateCode: USStateCode
 }) => {
-  let results = await fetchDTSI<
+  const results = await fetchDTSI<
     DTSI_StateSpecificInformationQuery,
     DTSI_StateSpecificInformationQueryVariables
   >(query, {
     stateCode,
   })
-  if (IS_MOCKING_DTSI_DATA) {
-    results = {
-      ...results,
-      people: results.people.map(person => ({
-        ...person,
-        roles: [
-          ...person.roles,
-          {
-            id: `mock-role-${person.id}`,
-            primaryDistrict: '',
-            primaryState: stateCode,
-            roleCategory: DTSI_PersonRoleCategory.SENATE,
-            status: DTSI_PersonRoleStatus.RUNNING_FOR,
-            group: {
-              id: `mock-group-${person.id}`,
-              category: DTSI_PersonRoleGroupCategory.CONGRESS,
-              groupInstance: `${NEXT_SESSION_OF_CONGRESS}`,
-            },
-          },
-        ],
-      })),
-    }
-  }
 
   return results
 }

@@ -69,10 +69,10 @@ export const convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence = (
     return 'Pending stance on crypto'
   }
   if (score >= 90) {
-    return 'Strongly supportive of crypto'
+    return 'Strongly supports crypto'
   }
   if (score >= 70) {
-    return 'Supportive of crypto'
+    return 'Supports crypto'
   }
   if (score >= 50) {
     return 'Neutral on crypto'
@@ -104,26 +104,26 @@ export const convertDTSIStanceScoreToCryptoSupportLanguage = (score: number | nu
 
 export const convertDTSIStanceScoreToTextColorClass = (score: number | null | undefined) => {
   if (isNil(score)) {
-    return twNoop('text-gray-600')
+    return twNoop('text-gray-700')
   }
   if (score > 50) {
-    return twNoop('text-green-600')
+    return twNoop('text-green-700')
   }
   if (score === 50) {
-    return twNoop('text-gray-600')
+    return twNoop('text-gray-700')
   }
-  return twNoop('text-red-600')
+  return twNoop('text-red-700')
 }
 
 export const convertDTSIStanceScoreToBgColorClass = (score: number | null | undefined) => {
   if (isNil(score)) {
-    return twNoop('bg-gray-100')
+    return twNoop('bg-gray-200')
   }
   if (score > 50) {
-    return twNoop('bg-green-100')
+    return twNoop('bg-green-200')
   }
   if (score === 50) {
-    return twNoop('bg-gray-100')
+    return twNoop('bg-gray-200')
   }
-  return twNoop('bg-red-100')
+  return twNoop('bg-red-200')
 }

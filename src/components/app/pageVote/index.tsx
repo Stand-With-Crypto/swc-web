@@ -15,7 +15,7 @@ export function PageVote({ params }: PageProps) {
   const intlUrls = getIntlUrls(locale)
 
   return (
-    <div className="container flex flex-col items-center justify-center gap-10">
+    <div className="standard-spacing-from-navbar container flex flex-col items-center justify-center gap-10">
       <div className="flex flex-col items-center justify-center gap-6">
         <PageTitle>Voter guide</PageTitle>
         <PageSubTitle>
