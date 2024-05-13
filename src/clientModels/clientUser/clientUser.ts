@@ -24,6 +24,10 @@ export type ClientUser = ClientModel<
       administrativeAreaLevel1: string
       countryCode: string
     } | null
+    manuallySetInformation?: {
+      displayName: string
+      profilePictureUrl: string
+    }
   }
 >
 

@@ -21,7 +21,10 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 
 export const UserAvatar: React.FC<
   {
-    user: Pick<ClientUserWithENSData, 'informationVisibility' | 'primaryUserCryptoAddress' | 'id'>
+    user: Pick<
+      ClientUserWithENSData,
+      'informationVisibility' | 'primaryUserCryptoAddress' | 'id' | 'manuallySetInformation'
+    >
   } & Pick<ImageAvatarProps, 'size' | 'className'>
 > = ({ user, size, ...props }) => {
   const primaryUserCryptoAddress = user.primaryUserCryptoAddress
@@ -35,6 +38,19 @@ export const UserAvatar: React.FC<
           }`}
           fallbackSrc={deterministicArraySelection(genericImages, user.id)}
           src={primaryUserCryptoAddress.ensAvatarUrl}
+          style={{ width: size, height: size }}
+        />
+      </Container>
+    )
+  }
+  if (user.manuallySetInformation) {
+    return (
+      <Container>
+        <ImageWithFallbackOnError
+          {...props}
+          alt={`${user.manuallySetInformation.displayName} profile picture`}
+          fallbackSrc={deterministicArraySelection(genericImages, user.id)}
+          src={user.manuallySetInformation.profilePictureUrl}
           style={{ width: size, height: size }}
         />
       </Container>

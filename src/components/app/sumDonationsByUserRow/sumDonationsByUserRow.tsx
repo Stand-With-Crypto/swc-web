@@ -38,7 +38,8 @@ export function SumDonationsByUserRow({ locale, sumDonations, index }: SumDonati
             />
           )}
         </div>
-        <div>
+        {/* TODO: For some reason the height of this div is 46px without this manual style. Real fix is to root cause that */}
+        <div style={{ height: 40 }}>
           <UserAvatar size={40} user={sumDonations.user} />
         </div>
         <div className="font-semibold lg:text-xl">{getUserDisplayName(sumDonations.user)}</div>
