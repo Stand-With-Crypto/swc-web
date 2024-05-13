@@ -1,12 +1,10 @@
-import { ReactNode, useMemo } from 'react'
-import { useENS } from '@thirdweb-dev/react'
+import { ReactNode } from 'react'
 
 import { MaybeAuthenticatedContent } from '@/components/app/authentication/maybeAuthenticatedContent'
 import { ThirdwebLoginContent } from '@/components/app/authentication/thirdwebLoginContent'
 import { UpdateUserProfileForm } from '@/components/app/updateUserProfileForm/step1'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
-import { appendENSHookDataToUser } from '@/utils/web/appendENSHookDataToUser'
 import { hasCompleteUserProfile } from '@/utils/web/hasCompleteUserProfile'
 
 interface AuthenticateAndUpdateProfileProps {
@@ -19,15 +17,8 @@ export function AuthenticateWithProfileUpdate({
   onProfileUpdateSuccess = () => {},
 }: AuthenticateAndUpdateProfileProps) {
   const { data: userData, mutate } = useApiResponseForUserFullProfileInfo()
-  const { data: ensData, isLoading: isLoadingEnsData } = useENS()
 
-  const user = useMemo(() => {
-    if (!userData?.user || isLoadingEnsData) {
-      return null
-    }
-
-    return appendENSHookDataToUser(userData.user, ensData)
-  }, [ensData, isLoadingEnsData, userData])
+  const user = userData?.user
 
   return (
     <MaybeAuthenticatedContent

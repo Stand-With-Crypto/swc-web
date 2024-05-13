@@ -8,7 +8,7 @@ import { toast } from 'sonner'
 
 import { actionUpdateUserProfile } from '@/actions/actionUpdateUserProfile'
 import { ClientAddress } from '@/clientModels/clientAddress'
-import { SensitiveDataClientUserWithENSData } from '@/clientModels/clientUser/sensitiveDataClientUser'
+import { SensitiveDataClientUser } from '@/clientModels/clientUser/sensitiveDataClientUser'
 import { SWCMembershipDialog } from '@/components/app/updateUserProfileForm/swcMembershipDialog'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -44,7 +44,7 @@ export function UpdateUserProfileForm({
   shouldFieldsBeRequired = false,
   onSuccess,
 }: {
-  user: SensitiveDataClientUserWithENSData & { address: ClientAddress | null }
+  user: SensitiveDataClientUser & { address: ClientAddress | null }
   shouldFieldsBeRequired?: boolean
   onSuccess: (updatedUserFields: { firstName: string; lastName: string }) => void
 }) {
