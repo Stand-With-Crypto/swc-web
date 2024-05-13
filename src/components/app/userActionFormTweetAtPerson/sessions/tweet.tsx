@@ -99,7 +99,9 @@ May 22nd is Bitcoin Pizza Day! I’m asking my representative ${representativeXH
 May 22nd is Bitcoin Pizza Day! Like many other politicians my representative doesn’t understand the importance of crypto for America. See where your representative stands at www.standwithcrypto.org/pizza and join the fight! #StandWithCrypto #${user?.userLocationDetails?.administrativeAreaLevel1 ?? ''}
           `
         default:
-          return ''
+          return `🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕
+May 22nd is Bitcoin Pizza Day! I applaud all the representatives who are protecting Americans’ right to own crypto. See where your representative stands at www.standwithcrypto.org/pizza and join the fight! #StandWithCrypto
+                `
       }
     })()
   }
@@ -176,7 +178,7 @@ May 22nd is Bitcoin Pizza Day! Like many other politicians my representative doe
       )}
 
       {!hasUserTweeted && (
-        <div className="mb-6 rounded-2xl bg-backgroundAlternate p-6 lg:max-w-[600px]">
+        <div className="bg-backgroundAlternate mb-6 rounded-2xl p-6 lg:max-w-[600px]">
           <p>{getTweetMessageBasedOnRepresentativeScore()}</p>
         </div>
       )}
