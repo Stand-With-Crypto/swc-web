@@ -16,6 +16,7 @@ import { SupportedLocale } from '@/intl/locales'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory'
+import { GooglePlaceAutocompletePrediction } from '@/utils/web/googlePlaceUtils'
 
 function DefaultPlacesSelect(
   props: Pick<GooglePlacesSelectProps, 'onChange' | 'value' | 'loading'>,
@@ -31,7 +32,12 @@ function DefaultPlacesSelect(
     </div>
   )
 }
-export function UserAddressVoterGuideInput(props: { locale: SupportedLocale }) {
+interface UserAddressVoterGuideInput {
+  locale: SupportedLocale
+  onChange?: GooglePlacesSelectProps['onChange']
+}
+
+export function UserAddressVoterGuideInput(props: UserAddressVoterGuideInput) {
   return (
     <Suspense fallback={<DefaultPlacesSelect onChange={noop} value={null} />}>
       <_UserAddressVoterGuideInput {...props} />
@@ -41,17 +47,30 @@ export function UserAddressVoterGuideInput(props: { locale: SupportedLocale }) {
 
 const POLITICIAN_CATEGORY: YourPoliticianCategory = 'senate-and-house'
 
-function _UserAddressVoterGuideInput({ locale }: { locale: SupportedLocale }) {
+function _UserAddressVoterGuideInput({ locale, onChange = noop }: UserAddressVoterGuideInput) {
   const { setAddress, address } = useMutableCurrentUserAddress()
   const res = useGetDTSIPeopleFromAddress(
     address === 'loading' ? '' : address?.description || '',
     POLITICIAN_CATEGORY,
+    {
+      onSuccess: () => {
+        onChange(address as GooglePlaceAutocompletePrediction)
+      },
+    },
   )
+
+  const handleAddressChange: GooglePlacesSelectProps['onChange'] = newAddress => {
+    setAddress(newAddress)
+    if (!newAddress) {
+      onChange(null)
+    }
+  }
+
   if (!address || address === 'loading' || !res.data) {
     return (
       <DefaultPlacesSelect
-        loading={address === 'loading'}
-        onChange={setAddress}
+        loading={address === 'loading' || res.isLoading}
+        onChange={handleAddressChange}
         value={address === 'loading' ? null : address}
       />
     )
@@ -60,7 +79,10 @@ function _UserAddressVoterGuideInput({ locale }: { locale: SupportedLocale }) {
     return (
       <div>
         {formatGetDTSIPeopleFromAddressNotFoundReason(res.data)}{' '}
-        <button className="font-bold text-fontcolor underline" onClick={() => setAddress(null)}>
+        <button
+          className="font-bold text-fontcolor underline"
+          onClick={() => handleAddressChange(null)}
+        >
           Try another address.
         </button>
       </div>
@@ -74,7 +96,10 @@ function _UserAddressVoterGuideInput({ locale }: { locale: SupportedLocale }) {
     <div>
       <p className="mb-3 text-center text-sm text-fontcolor-muted">
         {stateCode ? 'Showing voter guide for' : 'No voter guide info related to'}{' '}
-        <button className="font-bold text-fontcolor underline" onClick={() => setAddress(null)}>
+        <button
+          className="font-bold text-fontcolor underline"
+          onClick={() => handleAddressChange(null)}
+        >
           {address.description}
         </button>
       </p>

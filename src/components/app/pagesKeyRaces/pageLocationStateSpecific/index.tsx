@@ -6,7 +6,6 @@ import { DarkHeroSection } from '@/components/app/darkHeroSection'
 import { DTSIPersonHeroCardSection } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardSection'
 import { DTSIStanceDetails } from '@/components/app/dtsiStanceDetails'
 import { PACFooter } from '@/components/app/pacFooter'
-import { UserLocationRaceInfo } from '@/components/app/pagesKeyRaces/pageLocationStateSpecific/userLocationRaceInfo'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
 import { Button } from '@/components/ui/button'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
@@ -22,6 +21,7 @@ import { getUSStateNameFromStateCode, USStateCode } from '@/utils/shared/usState
 import { cn } from '@/utils/web/cn'
 
 import { organizeStateSpecificPeople } from './organizeStateSpecificPeople'
+import { UserDistrictContentSection } from './userDistrictContentSection'
 
 interface LocationStateSpecificProps extends DTSI_StateSpecificInformationQuery {
   stateCode: USStateCode
@@ -105,18 +105,12 @@ export function LocationStateSpecific({
             />
           </div>
         ) : (
-          <ContentSection
-            className="bg-muted py-14"
-            subtitle={
-              <>
-                Do you live in {stateName}? Enter your address and we’ll redirect you to races in
-                your district.
-              </>
-            }
-            title={'Your district'}
-          >
-            <UserLocationRaceInfo groups={groups} locale={locale} stateCode={stateCode} />
-          </ContentSection>
+          <UserDistrictContentSection
+            groups={groups}
+            locale={locale}
+            stateCode={stateCode}
+            stateName={stateName}
+          />
         )}
         {!!stances.length && (
           <ContentSection

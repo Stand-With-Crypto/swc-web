@@ -17,11 +17,13 @@ import { findRecommendedCandidate } from '@/utils/shared/findRecommendedCandidat
 import { formatGetCongressionalDistrictFromAddressNotFoundReason } from '@/utils/shared/getCongressionalDistrictFromAddress'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
+import { GooglePlaceAutocompletePrediction } from '@/utils/web/googlePlaceUtils'
 
 type UserLocationRaceInfoProps = {
   groups: ReturnType<typeof organizeStateSpecificPeople>
   stateCode: USStateCode
   locale: SupportedLocale
+  onChange?: GooglePlacesSelectProps['onChange']
 }
 
 function DefaultPlacesSelect({
@@ -49,16 +51,37 @@ export function UserLocationRaceInfo(props: UserLocationRaceInfoProps) {
   )
 }
 
-function _UserLocationRaceInfo({ groups, stateCode, locale }: UserLocationRaceInfoProps) {
+function _UserLocationRaceInfo({
+  groups,
+  stateCode,
+  locale,
+  onChange = noop,
+}: UserLocationRaceInfoProps) {
   const { setAddress, address } = useMutableCurrentUserAddress()
-  const res = useGetDistrictFromAddress(address === 'loading' ? '' : address?.description || '', {
-    stateCode,
-  })
+  const res = useGetDistrictFromAddress(
+    address === 'loading' ? '' : address?.description || '',
+    {
+      stateCode,
+    },
+    {
+      onSuccess: () => {
+        onChange(address as GooglePlaceAutocompletePrediction)
+      },
+    },
+  )
+
+  const handleAddressChange: GooglePlacesSelectProps['onChange'] = newAddress => {
+    setAddress(newAddress)
+    if (!newAddress) {
+      onChange(null)
+    }
+  }
+
   if (!address || address === 'loading' || !res.data) {
     return (
       <DefaultPlacesSelect
-        loading={address === 'loading'}
-        onChange={setAddress}
+        loading={address === 'loading' || res.isLoading}
+        onChange={handleAddressChange}
         stateCode={stateCode}
         value={address === 'loading' ? null : address}
       />
@@ -68,7 +91,10 @@ function _UserLocationRaceInfo({ groups, stateCode, locale }: UserLocationRaceIn
     return (
       <div className="container text-center text-fontcolor-muted">
         {formatGetCongressionalDistrictFromAddressNotFoundReason(res.data)}{' '}
-        <button className="font-bold text-fontcolor underline" onClick={() => setAddress(null)}>
+        <button
+          className="font-bold text-fontcolor underline"
+          onClick={() => handleAddressChange(null)}
+        >
           Enter new address.
         </button>
       </div>
@@ -82,7 +108,7 @@ function _UserLocationRaceInfo({ groups, stateCode, locale }: UserLocationRaceIn
     <div>
       <p className="container mb-3 text-center text-sm text-fontcolor-muted">
         Showing district for{' '}
-        <button className="text-primary-cta" onClick={() => setAddress(null)}>
+        <button className="text-primary-cta" onClick={() => handleAddressChange(null)}>
           {address.description}
         </button>
       </p>

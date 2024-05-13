@@ -1,4 +1,4 @@
-import useSWR from 'swr'
+import useSWR, { SWRConfiguration } from 'swr'
 
 import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
 import { DTSIPeopleByCongressionalDistrictQueryResult } from '@/data/dtsi/queries/queryDTSIPeopleByCongressionalDistrict'
@@ -66,9 +66,15 @@ export type UseGetDTSIPeopleFromAddressResponse = Awaited<
   ReturnType<typeof getDTSIPeopleFromAddress>
 >
 
-export function useGetDTSIPeopleFromAddress(address: string, category: YourPoliticianCategory) {
-  return useSWR(address ? `useGetDTSIPeopleFromAddress-${address}` : null, () =>
-    getDTSIPeopleFromAddress(address, category),
+export function useGetDTSIPeopleFromAddress(
+  address: string,
+  category: YourPoliticianCategory,
+  config: SWRConfiguration = {},
+) {
+  return useSWR(
+    address ? `useGetDTSIPeopleFromAddress-${address}` : null,
+    () => getDTSIPeopleFromAddress(address, category),
+    config,
   )
 }
 export function formatGetDTSIPeopleFromAddressNotFoundReason(
