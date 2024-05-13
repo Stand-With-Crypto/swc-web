@@ -25,6 +25,7 @@ export const getIntlUrls = (
     privacyPolicy: () => `${localePrefix}/privacy`,
     about: () => `${localePrefix}/about`,
     resources: () => `${localePrefix}/resources`,
+    bills: () => `${localePrefix}/bills`,
     contribute: () => `${localePrefix}/contribute`,
     questionnaire: () => `${localePrefix}/questionnaire`,
     donate: () => `${localePrefix}/donate`,

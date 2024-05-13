@@ -32,6 +32,10 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
       text: 'Endorsements',
     },
     {
+      href: urls.bills(),
+      text: 'Bills',
+    },
+    {
       href: urls.about(),
       text: 'Mission',
     },
