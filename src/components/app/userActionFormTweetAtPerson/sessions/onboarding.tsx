@@ -28,7 +28,7 @@ export function OnboardingTweetAtPersonCampaign({
         src={nftImageMetadata.url}
         width={nftImageMetadata.width - nftImageOffset}
       />
-      <PageTitle as="h3" className="mb-4 mt-6 lg:my-10" size="md">
+      <PageTitle as="h3" className="mb-4 mt-6 lg:my-8" size="md">
         Tweet your rep. Get a free NFT. 🍕
       </PageTitle>
       <p className="text-center text-fontcolor-muted">
@@ -40,16 +40,16 @@ export function OnboardingTweetAtPersonCampaign({
         </Balancer>
       </p>
 
-      <p className="mt-6 text-center text-fontcolor-muted">
+      <p className="mt-4 text-center text-fontcolor-muted">
         <Balancer>
           We’re honoring this day by fighting to keep crypto in America. Tweet your representatives
           and tell them crypto belongs in the U.S.
         </Balancer>
       </p>
 
-      <strong className="my-8">Here’s how to participate:</strong>
+      <strong className="my-6">Here’s how to participate:</strong>
 
-      <div className="align-center mb-16 flex flex-col justify-between gap-8 lg:mb-10 lg:flex-row lg:gap-14">
+      <div className="align-center mb-16 flex flex-col justify-between gap-8 lg:mb-8 lg:flex-row lg:gap-14">
         <div className="flex flex-col items-center gap-4">
           <strong className="flex h-12 w-12 items-center justify-center rounded-full bg-[#ECEEF1]">
             1

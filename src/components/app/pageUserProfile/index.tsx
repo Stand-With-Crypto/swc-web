@@ -23,7 +23,23 @@ import { getSensitiveDataUserDisplayName } from '@/utils/web/userUtils'
 
 import { UserReferralUrl } from './userReferralUrl'
 
-const EXCLUDE_USER_ACTION_TYPES = [UserActionType.LIVE_EVENT]
+type ExcludeUserActionTypes = Exclude<
+  UserActionType,
+  | typeof UserActionType.CALL
+  | typeof UserActionType.EMAIL
+  | typeof UserActionType.DONATION
+  | typeof UserActionType.NFT_MINT
+  | typeof UserActionType.OPT_IN
+  | typeof UserActionType.TWEET
+  | typeof UserActionType.VOTER_REGISTRATION
+>
+
+const EXCLUDED_USER_ACTION_TYPES: Record<ExcludeUserActionTypes, UserActionType> = {
+  [UserActionType.LIVE_EVENT]: UserActionType.LIVE_EVENT,
+  [UserActionType.TWEET_AT_PERSON]: UserActionType.TWEET_AT_PERSON,
+}
+
+const EXCLUDE_USER_ACTION_TYPES = Object.values(EXCLUDED_USER_ACTION_TYPES)
 
 interface PageUserProfile extends PageProps {
   user: PageUserProfileUser | null

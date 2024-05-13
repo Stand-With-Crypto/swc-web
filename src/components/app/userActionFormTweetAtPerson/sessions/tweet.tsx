@@ -9,7 +9,7 @@ import {
   actionCreateUserActionTweetedAtPerson,
   CreateActionTweetAtPersonInput,
 } from '@/actions/actionCreateUserActionTweetAtPerson'
-import { DtsiPersonCardWithStanceFooter } from '@/components/app/dtsiPersonCardWithStanceFooter/dtsiPersonCardWithStanceFooter'
+import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
 import { useCongresspersonData } from '@/components/app/userActionFormCallCongressperson/sections/address'
 import {
   CAMPAIGN_METADATA,
@@ -23,6 +23,7 @@ import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
 import { DTSIPeopleFromCongressionalDistrict } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { UseSectionsReturn } from '@/hooks/useSections'
 import { useSession } from '@/hooks/useSession'
+import { SupportedLocale } from '@/intl/locales'
 import {
   convertDTSIPersonStanceScoreToLetterGrade,
   DTSILetterGrade,
@@ -173,7 +174,12 @@ May 22nd is Bitcoin Pizza Day! I applaud all the representatives who are protect
 
       {representative && (
         <div className="align-center mb-6 flex w-full justify-center">
-          <DtsiPersonCardWithStanceFooter person={representative} />
+          <DTSIPersonHeroCard
+            isRecommended={false}
+            locale={SupportedLocale.EN_US}
+            person={representative}
+            subheader="role-w-state"
+          />
         </div>
       )}
 
