@@ -1,3 +1,5 @@
+import Balancer from 'react-wrap-balancer'
+
 import {
   PIZZA_DAY_LIVE_EVENT_SLUG_NFT_METADATA,
   TweetAtPersonSectionNames,
@@ -30,15 +32,19 @@ export function OnboardingTweetAtPersonCampaign({
         Tweet your rep. Get a free NFT. 🍕
       </PageTitle>
       <p className="text-center text-fontcolor-muted">
-        Held annually on May 22nd, Pizza Day commemorates the day when programmer Laszlo Hanyecz
-        purchased two large pizzas for 10,000 BTC in 2010. The day stands as a symbol of bitcoin's
-        humble beginnings, as well as a testament to its transformative potential as a viable medium
-        of exchange.
+        <Balancer>
+          Held annually on May 22nd, Pizza Day commemorates the day when programmer Laszlo Hanyecz
+          purchased two large pizzas for 10,000 BTC in 2010. The day stands as a symbol of bitcoin's
+          humble beginnings, as well as a testament to its transformative potential as a viable
+          medium of exchange.
+        </Balancer>
       </p>
 
       <p className="mt-6 text-center text-fontcolor-muted">
-        We’re honoring this day by fighting to keep crypto in America. Tweet your representatives
-        and tell them crypto belongs in the U.S.
+        <Balancer>
+          We’re honoring this day by fighting to keep crypto in America. Tweet your representatives
+          and tell them crypto belongs in the U.S.
+        </Balancer>
       </p>
 
       <strong className="my-8">Here’s how to participate:</strong>

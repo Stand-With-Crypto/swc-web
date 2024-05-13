@@ -9,6 +9,7 @@ import {
   actionCreateUserActionTweetedAtPerson,
   CreateActionTweetAtPersonInput,
 } from '@/actions/actionCreateUserActionTweetAtPerson'
+import { DtsiPersonCardWithStanceFooter } from '@/components/app/dtsiPersonCardWithStanceFooter/dtsiPersonCardWithStanceFooter'
 import { useCongresspersonData } from '@/components/app/userActionFormCallCongressperson/sections/address'
 import {
   CAMPAIGN_METADATA,
@@ -158,7 +159,7 @@ May 22nd is Bitcoin Pizza Day! Like many other politicians my representative doe
 
   return (
     <div className="flex h-full flex-col items-center justify-center">
-      <PageTitle as="h3" className="mb-4 lg:my-10" size="lg">
+      <PageTitle as="h3" className="lg:text-1xl mb-4 lg:mb-10" size="lg">
         {congressPersonNotFound ? 'Tweet on Pizza Day' : 'Tweet your representative'}
       </PageTitle>
       <p className="mb-6 text-center text-fontcolor-muted">
@@ -167,8 +168,14 @@ May 22nd is Bitcoin Pizza Day! Like many other politicians my representative doe
           : 'Send a tweet to your representative and then come back here to claim your free NFT.'}
       </p>
 
+      {representative && (
+        <div className="align-center mb-6 flex w-full justify-center">
+          <DtsiPersonCardWithStanceFooter person={representative} />
+        </div>
+      )}
+
       {!hasUserTweeted && (
-        <div className="mb-6 rounded-2xl bg-gray-200 p-6">
+        <div className="bg-backgroundAlternate mb-6 rounded-2xl p-6 lg:max-w-[600px]">
           <p>{getTweetMessageBasedOnRepresentativeScore()}</p>
         </div>
       )}
