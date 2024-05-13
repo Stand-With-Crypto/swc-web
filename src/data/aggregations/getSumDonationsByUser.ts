@@ -87,7 +87,7 @@ function manuallyAdjustResults(results: SumDonationsByUser) {
       informationVisibility: UserInformationVisibility.ALL_INFO,
       primaryUserCryptoAddress: null,
       manuallySetInformation: {
-        displayName: 'moonpay',
+        displayName: 'MoonPay',
         profilePictureUrl: '/userManuallySetInformation/moonpay.png',
       },
     }),
