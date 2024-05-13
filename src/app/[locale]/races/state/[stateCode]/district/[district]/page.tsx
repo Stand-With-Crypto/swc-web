@@ -1,7 +1,7 @@
 import { flatten, times } from 'lodash-es'
 import { Metadata } from 'next'
 
-import { LocationRaceSpecific } from '@/components/app/pageLocationRaceSpecific'
+import { LocationRaceSpecific } from '@/components/app/pagesKeyRaces/pageLocationRaceSpecific'
 import { queryDTSILocationDistrictSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationDistrictSpecificInformation'
 import { PageProps } from '@/types'
 import { formatDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'

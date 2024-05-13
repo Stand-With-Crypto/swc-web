@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import { PageEndorsedCandidates } from '@/components/app/pageEndorsedCandidates'
+import { PageEndorsedCandidates } from '@/components/app/pagesKeyRaces/pageEndorsedCandidates'
 import { queryDTSIEndorsedCandidates } from '@/data/dtsi/queries/queryDTSIEndorsedCandidates'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
