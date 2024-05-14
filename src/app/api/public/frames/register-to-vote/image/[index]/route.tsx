@@ -2,8 +2,8 @@
 import { NextRequest } from 'next/server'
 
 import { generateFrameImage } from '@/utils/server/generateFrameImage'
-import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
+import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
 export const revalidate = SECONDS_DURATION.MINUTE * 5
 export const runtime = 'edge'
