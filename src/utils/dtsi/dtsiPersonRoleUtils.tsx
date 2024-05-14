@@ -57,19 +57,25 @@ export const getDTSIPersonRoleCategoryDisplayName = (
 export const getDTSIPersonRoleCategoryWithStateDisplayName = (
   role: Pick<
     DTSI_PersonRole,
-    'status' | 'primaryState' | 'primaryCountryCode' | 'title' | 'roleCategory'
+    'status' | 'primaryState' | 'primaryCountryCode' | 'title' | 'roleCategory' | 'primaryDistrict'
   >,
 ) => {
-  if (role.status !== DTSI_PersonRoleStatus.HELD) {
-    return 'Political Figure'
-  }
-  let stateStr = ''
+  let stateStr = <></>
   if (role.primaryState && role.primaryCountryCode === 'US') {
-    stateStr = `, ${getUSStateNameFromStateCode(role.primaryState)} `
+    stateStr = (
+      <>
+        , <span className="max-sm:hidden">{role.primaryState}</span>
+        <span className="sm:hidden">{getUSStateNameFromStateCode(role.primaryState)}</span>{' '}
+        {role.primaryDistrict ? `${role.primaryDistrict} ` : ''}
+      </>
+    )
+  }
+  if (role.status !== DTSI_PersonRoleStatus.HELD) {
+    return <>Political Figure{stateStr}</>
   }
   switch (role.roleCategory) {
     case DTSI_PersonRoleCategory.CONGRESS:
-      return `Rep${stateStr}`
+      return <>Rep{stateStr}</>
     case DTSI_PersonRoleCategory.GOVERNOR:
       return 'Governor'
     case DTSI_PersonRoleCategory.MAYOR:
@@ -77,7 +83,7 @@ export const getDTSIPersonRoleCategoryWithStateDisplayName = (
     case DTSI_PersonRoleCategory.PRESIDENT:
       return 'President'
     case DTSI_PersonRoleCategory.SENATE:
-      return `Senator${stateStr}`
+      return <>Senator{stateStr}</>
     case DTSI_PersonRoleCategory.VICE_PRESIDENT:
       return 'Vice President'
   }

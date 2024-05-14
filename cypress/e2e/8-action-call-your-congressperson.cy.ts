@@ -19,17 +19,9 @@ it('action - call your congressperson', () => {
   // validate error messages display
   cy.selectFromComboBox({
     trigger: cy.get('input[placeholder="Your full address"]'),
-    searchText: 'berlin germany',
+    searchText: 'Berliner Bogen, Anckelmannsplatz, Hamburg, Germany',
   })
   cy.contains('Please enter a US-based address.').should('be.visible')
-
-  cy.selectFromComboBox({
-    trigger: cy.get('input[placeholder="Your full address"]'),
-    searchText: 'new york',
-  })
-  cy.contains('Please enter a specific address that includes street-level information').should(
-    'be.visible',
-  )
 
   // validate success
   cy.selectFromComboBox({

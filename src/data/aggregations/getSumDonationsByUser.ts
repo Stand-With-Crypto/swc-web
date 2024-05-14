@@ -1,16 +1,13 @@
 import 'server-only'
 
+import { UserInformationVisibility } from '@prisma/client'
 import { Decimal } from '@prisma/client/runtime/library'
 import { compact, keyBy } from 'lodash-es'
 
 import { getClientLeaderboardUser } from '@/clientModels/clientUser/clientLeaderboardUser'
-import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
-import { COMMUNITY_PAGINATION_DATA } from '@/components/app/pageLeaderboard/constants'
+import { getClientModel } from '@/clientModels/utils'
 import { getENSDataMapFromCryptoAddressesAndFailGracefully } from '@/data/web3/getENSDataFromCryptoAddress'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { redis } from '@/utils/server/redis'
-import { SECONDS_DURATION } from '@/utils/shared/seconds'
-import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
 export type SumDonationsByUserConfig = {
   limit: number
@@ -78,37 +75,28 @@ async function getSumDonationsByUserData(total: QueryResult) {
     }
   })
 }
-
 export type SumDonationsByUser = Awaited<ReturnType<typeof getSumDonationsByUserData>>
 
-const CACHE_KEY = 'GET_SUM_DONATIONS_BY_USER_CACHE_V6'
-
-export async function buildGetSumDonationsByUserCache() {
-  const { totalPages, itemsPerPage } =
-    COMMUNITY_PAGINATION_DATA[RecentActivityAndLeaderboardTabs.LEADERBOARD]
-  const result = await getSumDonationsByUserQuery({
-    limit: totalPages * itemsPerPage,
-    offset: 0,
-  })
-  await redis.set(CACHE_KEY, result, {
-    ex:
-      NEXT_PUBLIC_ENVIRONMENT === 'local' ? SECONDS_DURATION.SECOND : SECONDS_DURATION.MINUTE * 10,
-  })
-  return result
-}
-
-export async function getSumDonationsByUserWithBuildCache(config: SumDonationsByUserConfig) {
-  const offset = config.offset || 0
-  const maybeCache = await redis.get(CACHE_KEY)
-  if (maybeCache) {
-    const results = maybeCache as QueryResult
-    return getSumDonationsByUserData(results.slice(offset, offset + config.limit))
+function manuallyAdjustResults(results: SumDonationsByUser) {
+  const moonpay: SumDonationsByUser[0] = {
+    totalAmountUsd: 1_000_000,
+    user: getClientModel({
+      id: 'manually-added-moonpay',
+      firstName: null,
+      lastName: null,
+      informationVisibility: UserInformationVisibility.ALL_INFO,
+      primaryUserCryptoAddress: null,
+      manuallySetInformation: {
+        displayName: 'MoonPay',
+        profilePictureUrl: '/userManuallySetInformation/moonpay.png',
+      },
+    }),
   }
-  const results = await buildGetSumDonationsByUserCache()
-  return getSumDonationsByUserData(results.slice(offset, offset + config.limit))
+  return [moonpay, ...results]
 }
 
 export async function getSumDonationsByUser(config: SumDonationsByUserConfig) {
   const result = await getSumDonationsByUserQuery(config)
-  return getSumDonationsByUserData(result)
+  const withUserData = await getSumDonationsByUserData(result)
+  return manuallyAdjustResults(withUserData)
 }

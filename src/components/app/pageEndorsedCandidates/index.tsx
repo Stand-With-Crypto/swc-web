@@ -46,7 +46,7 @@ export function PageEndorsedCandidates({ people, locale }: LocationStateSpecific
             key={person.id}
             locale={locale}
             person={person}
-            subheader="role"
+            subheader="role-w-state"
           />
         ))}
       </DTSIPersonHeroCardRow>

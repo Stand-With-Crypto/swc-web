@@ -16,6 +16,4 @@ type FunctionsKeys<K> = {
 type GetIntlUrlsReturnType = ReturnType<typeof getIntlUrls>
 
 export type UrlDestinationsWithoutParams = FilterNeverKeys<FunctionsKeys<GetIntlUrlsReturnType>>
-export type UrlDestinationsKeysWithParams = FilteredNotNeverKeys<
-  FunctionsKeys<GetIntlUrlsReturnType>
->
+export type UrlDestinationsWithParams = FilteredNotNeverKeys<FunctionsKeys<GetIntlUrlsReturnType>>

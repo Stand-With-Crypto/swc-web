@@ -16,6 +16,7 @@ import { PageTitle } from '@/components/ui/pageTitleText'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
 import { PageProps } from '@/types'
+import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
 import { getIntlUrls } from '@/utils/shared/urls'
 
 import { TopLevelMetrics } from './topLevelMetrics'
@@ -76,9 +77,9 @@ export function PageHome({
             Our partners
           </PageTitle>
           <PageSubTitle as="h4" className="mb-7">
-            Stand With Crypto is first and foremost the result of 400,000+ people fighting to keep
-            crypto in America. We’ve also partnered with a number of companies to fight alongside
-            us.
+            Stand With Crypto is first and foremost the result of{' '}
+            {TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME}+ people fighting to keep crypto in America.
+            We’ve also partnered with a number of companies to fight alongside us.
           </PageSubTitle>
           <div className="space-y-6">
             <PartnerGrid />
