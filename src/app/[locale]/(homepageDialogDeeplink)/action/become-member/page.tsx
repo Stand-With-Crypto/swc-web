@@ -13,7 +13,6 @@ export const dynamic = 'force-dynamic'
 export default async function UserActionBecomeMemberDeepLink({ params }: PageProps) {
   const { locale } = params
   const user = await getAuthenticatedData()
-  console.log('page')
 
   if (!user) {
     redirect(
