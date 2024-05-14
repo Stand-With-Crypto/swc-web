@@ -1,11 +1,13 @@
 'use client'
 
 import { useCallback } from 'react'
+import { useBoolean } from 'react-use'
 import { capitalize } from 'lodash-es'
-import { Menu } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { NavbarLoggedInButton } from '@/components/app/navbar/navbarLoggedInButton'
+import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { Button } from '@/components/ui/button'
 import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/drawer'
 import { NextImage } from '@/components/ui/image'
@@ -62,6 +64,9 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
       <Button>Sign In</Button>
     </LoginDialogWrapper>
   )
+
+  const [showBanner, closeBanner] = useBoolean(true)
+
   return (
     <>
       {hasEnvironmentBar && (
@@ -78,6 +83,31 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
           </div>
         </div>
       )}
+
+      {showBanner ? (
+        <div className="relative bg-primary-cta py-4 lg:py-8">
+          <div className="container grid items-center gap-6 lg:grid-cols-[1fr,auto,auto]">
+            <div className="text-sm text-background max-md:text-center sm:text-base">
+              <p className="font-bold">Tell your representatives to vote YES on FIT21</p>
+              <p className="font-light">
+                FIT21 is a crypto regulatory bill that could save crypto in America. Tell your
+                representatives to vote YES.
+              </p>
+            </div>
+
+            <UserActionFormEmailCongresspersonDialog>
+              <Button className="max-md:w-full" variant="secondary">
+                Send an Email
+              </Button>
+            </UserActionFormEmailCongresspersonDialog>
+
+            <button className="justify-self-end rounded-full p-1 text-white transition-all hover:bg-gray-400 max-md:row-start-1">
+              <X className="cursor-pointer" onClick={closeBanner} size={20} />
+            </button>
+          </div>
+        </div>
+      ) : null}
+
       <nav
         className={
           /*
