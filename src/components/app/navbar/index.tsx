@@ -85,23 +85,23 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
       )}
 
       {showBanner ? (
-        <div className="relative bg-primary-cta py-4 lg:py-8">
-          <div className="container grid items-center gap-6 lg:grid-cols-[1fr,auto,auto]">
-            <div className="text-sm text-background max-md:text-center sm:text-base">
+        <div className="relative bg-primary-cta py-6 lg:py-8">
+          <div className="container grid items-center gap-6 sm:grid-cols-[1fr,auto,auto]">
+            <div className="space-y-1 text-sm text-background antialiased max-sm:text-center sm:text-base">
               <p className="font-bold">Tell your representatives to vote YES on FIT21</p>
-              <p className="font-light">
+              <p>
                 FIT21 is a crypto regulatory bill that could save crypto in America. Tell your
                 representatives to vote YES.
               </p>
             </div>
 
             <UserActionFormEmailCongresspersonDialog>
-              <Button className="max-md:w-full" variant="secondary">
+              <Button className="max-sm:w-full" variant="secondary">
                 Send an Email
               </Button>
             </UserActionFormEmailCongresspersonDialog>
 
-            <button className="justify-self-end rounded-full p-1 text-white transition-all hover:bg-gray-400 max-md:row-start-1">
+            <button className="right-[2px] top-[2px] justify-self-end rounded-full p-1 text-white transition-all hover:bg-gray-400 max-sm:absolute max-sm:row-start-1">
               <X className="cursor-pointer" onClick={closeBanner} size={20} />
             </button>
           </div>
