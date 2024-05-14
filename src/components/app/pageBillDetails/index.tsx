@@ -1,45 +1,46 @@
+import { ReactNode } from 'react'
+
 import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
-import { DTSIAvatar } from '@/components/app/dtsiAvatar'
+import { DTSIAvatarBox } from '@/components/app/pageBillDetails/dtsiAvatarBox'
 import { Button } from '@/components/ui/button'
 import { FormattedDatetime } from '@/components/ui/formattedDatetime'
-import { ExternalLink, InternalLink } from '@/components/ui/link'
-import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
+import { ExternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { DTSI_Person } from '@/data/dtsi/generated'
+import { DTSI_BillPersonRelationshipType } from '@/data/dtsi/generated'
 import { DTSIBillDetails } from '@/data/dtsi/queries/queryDTSIBillDetails'
 import { SupportedLocale } from '@/intl/locales'
-import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { convertDTSIStanceScoreToCryptoSupportLanguage } from '@/utils/dtsi/dtsiStanceScoreUtils'
-import { getIntlUrls } from '@/utils/shared/urls'
-import { cn } from '@/utils/web/cn'
 
 interface PageBillDetailsProps {
   bill: DTSIBillDetails
   locale: SupportedLocale
 }
 
-const AvatarGrid = ({ people, locale }: { people: DTSI_Person[]; locale: SupportedLocale }) => (
-  <div className="mx-auto grid w-fit grid-flow-col grid-cols-[repeat(auto-fill,minmax(126px,1fr))] justify-items-center gap-4">
-    {people.map(person => (
-      <LinkBox className="flex w-fit flex-col items-center gap-2" key={person.id}>
-        <DTSIAvatar className="rounded-full" person={person} size={126} />
-        <InternalLink
-          className={cn(linkBoxLinkClassName, 'cursor-pointer font-semibold')}
-          data-link-box-subject
-          href={getIntlUrls(locale).politicianDetails('#slug')}
-        >
-          {dtsiPersonFullName(person)}
-        </InternalLink>
-      </LinkBox>
-    ))}
+const AVATAR_SIZE = 126
+
+const AvatarGrid = ({ children }: { children: ReactNode }) => (
+  <div
+    className={`mx-auto grid w-fit grid-flow-col grid-cols-[repeat(auto-fill,minmax(${AVATAR_SIZE}px,1fr))] justify-items-center gap-4`}
+  >
+    {children}
   </div>
 )
 
 export function PageBillDetails(props: PageBillDetailsProps) {
   const { bill, locale } = props
 
-  console.log('bill', bill)
+  const relationshipsByType = bill.relationships.reduce((acc, relationship) => {
+    const type = relationship.relationshipType
+
+    if (!acc.has(type)) {
+      acc.set(type, [])
+    }
+
+    acc.get(type)?.push(relationship.person)
+
+    return acc
+  }, new Map<DTSI_BillPersonRelationshipType, DTSIBillDetails['relationships'][0]['person'][]>())
 
   return (
     <div className="standard-spacing-from-navbar container space-y-16">
@@ -78,27 +79,47 @@ export function PageBillDetails(props: PageBillDetailsProps) {
       <section className="space-y-16 text-center">
         <div className="space-y-8">
           <p className="font-semibold">Sponsors</p>
-          <AvatarGrid
-            locale={locale}
-            people={[
-              {
-                id: '1',
-                firstName: 'FName',
-                lastName: 'LName',
-              } as DTSI_Person,
-            ]}
-          />
+          <AvatarGrid>
+            {relationshipsByType
+              .get(DTSI_BillPersonRelationshipType.SPONSOR)
+              ?.map((person, i) => (
+                <DTSIAvatarBox key={i} locale={locale} person={person} size={AVATAR_SIZE} />
+              ))}
+          </AvatarGrid>
         </div>
 
         <div className="space-y-8">
           <p className="font-semibold">Co-Sponsors</p>
+          <AvatarGrid>
+            {relationshipsByType
+              .get(DTSI_BillPersonRelationshipType.COSPONSOR)
+              ?.map((person, i) => (
+                <DTSIAvatarBox key={i} locale={locale} person={person} size={AVATAR_SIZE} />
+              ))}
+          </AvatarGrid>
         </div>
 
         <div className="space-y-8">
           <p className="font-semibold">Voted for</p>
+          <AvatarGrid>
+            {relationshipsByType
+              .get(DTSI_BillPersonRelationshipType.VOTED_FOR)
+              ?.map((person, i) => (
+                <DTSIAvatarBox key={i} locale={locale} person={person} size={AVATAR_SIZE} />
+              ))}
+          </AvatarGrid>
         </div>
 
-        <p className="font-semibold">Voted against</p>
+        <div className="space-y-8">
+          <p className="font-semibold">Voted against</p>
+          <AvatarGrid>
+            {relationshipsByType
+              .get(DTSI_BillPersonRelationshipType.VOTED_AGAINST)
+              ?.map((person, i) => (
+                <DTSIAvatarBox key={i} locale={locale} person={person} size={AVATAR_SIZE} />
+              ))}
+          </AvatarGrid>
+        </div>
       </section>
     </div>
   )

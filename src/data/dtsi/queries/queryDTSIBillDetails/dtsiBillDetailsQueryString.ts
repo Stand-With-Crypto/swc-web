@@ -18,6 +18,7 @@ export const fragmentDTSIBillRelationships = /* GraphQL */ `
       lastName
       nameSuffix
       profilePictureUrl
+      profilePictureUrlDimensions
       slug
     }
   }
@@ -36,6 +37,8 @@ export const dtsiBillDetailsQueryString = /* GraphQL */ `
       datetimeCreated
       datetimeUpdated
       datetimeTweetedByDoTheySupportIt
+      slug
+      formattedSlug
 
       analysis {
         ...BillAnalysis
