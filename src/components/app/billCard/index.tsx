@@ -1,18 +1,22 @@
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
+import { InternalLink } from '@/components/ui/link'
 import { DTSI_BillCardFragment } from '@/data/dtsi/generated'
+import { SupportedLocale } from '@/intl/locales'
 import { convertDTSIStanceScoreToCryptoSupportLanguage } from '@/utils/dtsi/dtsiStanceScoreUtils'
+import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
 export type Bill = DTSI_BillCardFragment
 
 interface BillCardProps {
   bill: Bill
+  locale: SupportedLocale
   className?: string
 }
 
 export function BillCard(props: BillCardProps) {
-  const { bill, className } = props
+  const { bill, locale, className } = props
 
   return (
     <div
@@ -24,7 +28,12 @@ export function BillCard(props: BillCardProps) {
     >
       <div className="flex w-full flex-col gap-2">
         <div className="flex flex-wrap items-center gap-2 lg:gap-4">
-          <span className="text-xl font-semibold">{bill.shortTitle}</span>
+          <InternalLink
+            className="text-xl font-semibold text-primary "
+            href={getIntlUrls(locale).billDetails(bill.slug)}
+          >
+            <span className="text-xl font-semibold">{bill.shortTitle}</span>
+          </InternalLink>
           <div className="flex flex-wrap gap-2 uppercase">
             <Badge variant="gray">{bill.status}</Badge>
             <Badge

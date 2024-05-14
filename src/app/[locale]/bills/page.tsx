@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 
 import { PageBills } from '@/components/app/pageBills'
 import { queryDTSIAllBills } from '@/data/dtsi/queries/queryDTSIAllBills'
+import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
@@ -18,8 +19,15 @@ export const metadata: Metadata = {
   }),
 }
 
-export default async function BillsPage() {
+export default async function BillsPage(props: PageProps) {
   const results = await queryDTSIAllBills()
 
-  return <PageBills bills={results.bills} description={description} title={title} />
+  return (
+    <PageBills
+      bills={results.bills}
+      description={description}
+      locale={props.params.locale}
+      title={title}
+    />
+  )
 }

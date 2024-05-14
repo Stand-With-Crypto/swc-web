@@ -26,6 +26,7 @@ export const getIntlUrls = (
     about: () => `${localePrefix}/about`,
     resources: () => `${localePrefix}/resources`,
     bills: () => `${localePrefix}/bills`,
+    billDetails: (billSlug: string) => `${localePrefix}/bills/${billSlug}`,
     contribute: () => `${localePrefix}/contribute`,
     questionnaire: () => `${localePrefix}/questionnaire`,
     donate: () => `${localePrefix}/donate`,
