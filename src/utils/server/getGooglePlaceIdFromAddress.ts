@@ -19,17 +19,14 @@ export async function getGooglePlaceIdFromAddress(address: string) {
   )
   const data = (await response.json()) as {
     error_message?: string
+    info_messages?: string[]
     predictions: google.maps.places.AutocompletePrediction[]
-    status?: string
+    status: `${google.maps.places.PlacesServiceStatus}`
   }
   if (data.predictions.length > 0) {
     return data.predictions[0].place_id
-  } else if (data.status) {
+  } else if (data.status !== 'ZERO_RESULTS') {
     Sentry.captureMessage(`getGooglePlaceIdFromAddress no results with status ${data.status}`, {
-      extra: { address, data },
-    })
-  } else {
-    Sentry.captureMessage('getGooglePlaceIdFromAddress no results', {
       extra: { address, data },
     })
   }
