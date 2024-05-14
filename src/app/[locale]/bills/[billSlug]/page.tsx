@@ -1,3 +1,4 @@
+import { cache } from 'react'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
@@ -13,16 +14,19 @@ export const dynamicParams = false
 
 type Props = PageProps<{ billSlug: string }>
 
+export const getData = cache(async (billSlug: string) => {
+  const bill = await queryDTSIBillDetails(billSlug).catch(() => null)
+  return bill
+})
+
 export async function generateMetadata(props: Props): Promise<Metadata> {
-  // TODO: Fetch bill data
-  const bill = {}
+  const bill = await getData(props.params.billSlug)
   if (!bill) {
     return {}
   }
-  const title = ``
   return {
-    title,
-    description: ``,
+    title: bill.title,
+    description: bill.summary,
   }
 }
 
