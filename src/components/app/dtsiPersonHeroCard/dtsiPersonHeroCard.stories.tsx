@@ -6,6 +6,8 @@ import {
   DTSI_PersonPoliticalAffiliationCategory,
   DTSI_PersonRoleCategory,
   DTSI_PersonRoleStatus,
+  DTSI_TwitterAccountState,
+  DTSI_TwitterAccountType,
 } from '@/data/dtsi/generated'
 import { SupportedLocale } from '@/intl/locales'
 
@@ -39,6 +41,15 @@ const getDefaultProps = () => {
         status: DTSI_PersonRoleStatus.HELD,
         title: 'President',
       },
+      twitterAccounts: [
+        {
+          accountType: DTSI_TwitterAccountType.PROFESSIONAL,
+          id: '',
+          personId: '',
+          state: DTSI_TwitterAccountState.VISIBLE,
+          username: '',
+        },
+      ],
     },
   }
   return props
