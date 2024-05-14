@@ -29,10 +29,10 @@ export const GooglePlacesSelect = React.forwardRef<
     setValue,
     init,
   } = usePlacesAutocomplete({
-    // note on why we aren't restricting to just addresses https://stackoverflow.com/a/65206036
     requestOptions: {
       locationBias: 'IP_BIAS',
       language: 'en',
+      types: ['street_address', 'premise', 'postal_code', 'subpremise'],
     },
   })
   const scriptStatus = useGoogleMapsScript()
