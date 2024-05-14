@@ -16,6 +16,7 @@ import { useLocale } from '@/hooks/useLocale'
 import { ActiveClientUserActionType } from '@/utils/shared/activeUserAction'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { getYourPoliticianCategoryShortDisplayName } from '@/utils/shared/yourPoliticianCategory'
+import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
 
 export const USER_ACTION_ROW_CTA_INFO: Record<
   ActiveClientUserActionType,
@@ -25,7 +26,7 @@ export const USER_ACTION_ROW_CTA_INFO: Record<
     actionType: UserActionType.OPT_IN,
     image: '/actionTypeIcons/optIn.png',
     text: 'Join Stand With Crypto',
-    subtext: 'Join over 400,000 advocates fighting to keep crypto in America.',
+    subtext: `Join over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates fighting to keep crypto in America.`,
     canBeTriggeredMultipleTimes: false,
     WrapperComponent: ({ children }) => (
       <LoginDialogWrapper forceUnauthenticated>{children}</LoginDialogWrapper>

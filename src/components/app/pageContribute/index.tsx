@@ -5,6 +5,7 @@ import { NextImage } from '@/components/ui/image'
 import { ExternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
+import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
 import { cn } from '@/utils/web/cn'
 import { createTweetLink } from '@/utils/web/createTweetLink'
 import { createWarpcastLink } from '@/utils/web/createWarpcastLink'
@@ -48,8 +49,7 @@ export function PageContribute() {
                         <Button asChild variant="primary-cta">
                           <ExternalLink
                             href={createTweetLink({
-                              message:
-                                'I #StandWithCrypto. More than 400,000 people are already advocating for better crypto policy in America. Join the fight to receive email updates on crypto policy, invites to local events, and more.',
+                              message: `I #StandWithCrypto. More than ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} people are already advocating for better crypto policy in America. Join the fight to receive email updates on crypto policy, invites to local events, and more.`,
                               url: 'https://www.standwithcrypto.org/action/sign-up?utm_source=twitter&utm_medium=social&utm_campaign=partner-share',
                             })}
                           >
@@ -59,8 +59,7 @@ export function PageContribute() {
                         <Button asChild variant="primary-cta">
                           <ExternalLink
                             href={createWarpcastLink({
-                              message:
-                                'I #StandWithCrypto. More than 400,000 people are already advocating for better crypto policy in America. Join the fight to receive email updates on crypto policy, invites to local events, and more.',
+                              message: `I #StandWithCrypto. More than ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} people are already advocating for better crypto policy in America. Join the fight to receive email updates on crypto policy, invites to local events, and more.`,
                               url: 'https://www.standwithcrypto.org/action/sign-up?utm_source=warpcast&utm_medium=social&utm_campaign=partner-share',
                             })}
                           >

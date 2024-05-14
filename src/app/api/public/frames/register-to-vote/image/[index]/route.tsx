@@ -3,6 +3,7 @@ import { NextRequest } from 'next/server'
 
 import { generateFrameImage } from '@/utils/server/generateFrameImage'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
+import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
 
 export const revalidate = SECONDS_DURATION.MINUTE * 5
 export const runtime = 'edge'
@@ -64,7 +65,7 @@ export async function GET(request: NextRequest, { params }: { params: { index: n
           <h2 tw="flex flex-col text-5xl font-bold tracking-normal text-left px-10">
             <span tw="mb-6">Join the fight</span>
             <div tw="flex flex-col text-4xl text-[#a3abbb]">
-              <span>Enter your email to join over 400,000</span>
+              <span>Enter your email to join over {TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME}</span>
               <span>advocates fighting to keep crypto in</span>
               <span>America and receive regular updates on</span>
               <span>how to influence change</span>
