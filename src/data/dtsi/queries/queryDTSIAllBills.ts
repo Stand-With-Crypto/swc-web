@@ -14,5 +14,5 @@ export const query = /* GraphQL */ `
 export const queryDTSIAllBills = async () => {
   const results = await fetchDTSI<DTSI_AllBillsQuery, DTSI_AllBillsQueryVariables>(query)
 
-  return results
+  return results.bills
 }

@@ -24,7 +24,7 @@ export default async function BillsPage(props: PageProps) {
 
   return (
     <PageBills
-      bills={results.bills}
+      bills={results}
       description={description}
       locale={props.params.locale}
       title={title}

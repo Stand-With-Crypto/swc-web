@@ -1,6 +1,5 @@
-import { ReactNode } from 'react'
-
 import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
+import { AvatarGrid } from '@/components/app/pageBillDetails/avatarGrid'
 import { DTSIAvatarBox } from '@/components/app/pageBillDetails/dtsiAvatarBox'
 import { Button } from '@/components/ui/button'
 import { FormattedDatetime } from '@/components/ui/formattedDatetime'
@@ -19,14 +18,6 @@ interface PageBillDetailsProps {
 
 const AVATAR_SIZE = 126
 
-const AvatarGrid = ({ children }: { children: ReactNode }) => (
-  <div
-    className={`mx-auto grid w-fit grid-flow-col grid-cols-[repeat(auto-fill,minmax(${AVATAR_SIZE}px,1fr))] justify-items-center gap-4`}
-  >
-    {children}
-  </div>
-)
-
 export function PageBillDetails(props: PageBillDetailsProps) {
   const { bill, locale } = props
 
@@ -41,6 +32,11 @@ export function PageBillDetails(props: PageBillDetailsProps) {
 
     return acc
   }, new Map<DTSI_BillPersonRelationshipType, DTSIBillDetails['relationships'][0]['person'][]>())
+
+  const sponsors = relationshipsByType.get(DTSI_BillPersonRelationshipType.SPONSOR)
+  const coSponsors = relationshipsByType.get(DTSI_BillPersonRelationshipType.COSPONSOR)
+  const votedFor = relationshipsByType.get(DTSI_BillPersonRelationshipType.VOTED_FOR)
+  const votedAgainst = relationshipsByType.get(DTSI_BillPersonRelationshipType.VOTED_AGAINST)
 
   return (
     <div className="standard-spacing-from-navbar container space-y-16">
@@ -79,45 +75,53 @@ export function PageBillDetails(props: PageBillDetailsProps) {
       <section className="space-y-16 text-center">
         <div className="space-y-8">
           <p className="font-semibold">Sponsors</p>
-          <AvatarGrid>
-            {relationshipsByType
-              .get(DTSI_BillPersonRelationshipType.SPONSOR)
-              ?.map((person, i) => (
+          <AvatarGrid avatarSize={AVATAR_SIZE} nItems={16}>
+            {sponsors?.length ? (
+              sponsors?.map((person, i) => (
                 <DTSIAvatarBox key={i} locale={locale} person={person} size={AVATAR_SIZE} />
-              ))}
+              ))
+            ) : (
+              <p className="text-fontcolor-muted">No sponsors</p>
+            )}
           </AvatarGrid>
         </div>
 
         <div className="space-y-8">
           <p className="font-semibold">Co-Sponsors</p>
-          <AvatarGrid>
-            {relationshipsByType
-              .get(DTSI_BillPersonRelationshipType.COSPONSOR)
-              ?.map((person, i) => (
+          <AvatarGrid avatarSize={AVATAR_SIZE} nItems={16}>
+            {coSponsors?.length ? (
+              coSponsors?.map((person, i) => (
                 <DTSIAvatarBox key={i} locale={locale} person={person} size={AVATAR_SIZE} />
-              ))}
+              ))
+            ) : (
+              <p className="text-fontcolor-muted">No co-sponsors</p>
+            )}
           </AvatarGrid>
         </div>
 
         <div className="space-y-8">
           <p className="font-semibold">Voted for</p>
-          <AvatarGrid>
-            {relationshipsByType
-              .get(DTSI_BillPersonRelationshipType.VOTED_FOR)
-              ?.map((person, i) => (
+          <AvatarGrid avatarSize={AVATAR_SIZE} nItems={16}>
+            {votedFor?.length ? (
+              votedFor?.map((person, i) => (
                 <DTSIAvatarBox key={i} locale={locale} person={person} size={AVATAR_SIZE} />
-              ))}
+              ))
+            ) : (
+              <p className="text-fontcolor-muted">No votes for</p>
+            )}
           </AvatarGrid>
         </div>
 
         <div className="space-y-8">
           <p className="font-semibold">Voted against</p>
-          <AvatarGrid>
-            {relationshipsByType
-              .get(DTSI_BillPersonRelationshipType.VOTED_AGAINST)
-              ?.map((person, i) => (
+          <AvatarGrid avatarSize={AVATAR_SIZE} nItems={16}>
+            {votedAgainst?.length ? (
+              votedAgainst?.map((person, i) => (
                 <DTSIAvatarBox key={i} locale={locale} person={person} size={AVATAR_SIZE} />
-              ))}
+              ))
+            ) : (
+              <p className="text-fontcolor-muted">No votes against</p>
+            )}
           </AvatarGrid>
         </div>
       </section>

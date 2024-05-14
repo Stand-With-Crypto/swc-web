@@ -11,7 +11,7 @@ interface PageBillsProps {
 }
 
 export function PageBills(props: PageBillsProps) {
-  const { title, description, locale } = props
+  const { title, description, bills, locale } = props
 
   return (
     <div className="standard-spacing-from-navbar container space-y-16">
@@ -22,7 +22,7 @@ export function PageBills(props: PageBillsProps) {
 
       <section>
         <div className="flex flex-col gap-4 lg:gap-8">
-          {props.bills.map(bill => (
+          {bills.map(bill => (
             <BillCard bill={bill} key={bill.id} locale={locale} />
           ))}
         </div>

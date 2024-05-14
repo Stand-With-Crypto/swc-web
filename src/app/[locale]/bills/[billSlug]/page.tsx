@@ -8,7 +8,7 @@ import { queryDTSIBillDetails } from '@/data/dtsi/queries/queryDTSIBillDetails'
 import { PageProps } from '@/types'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
-export const revalidate = SECONDS_DURATION.WEEK
+export const revalidate = SECONDS_DURATION.DAY
 export const dynamic = 'error'
 export const dynamicParams = false
 
