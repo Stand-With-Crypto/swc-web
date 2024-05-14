@@ -65,4 +65,9 @@ export const INDUSTRY_PARTNERS = [
     imageSrc: '/partners/galxe.png',
     url: 'https://www.galxe.com/',
   },
+  {
+    title: 'MoonPay',
+    imageSrc: '/partners/moonpay.svg',
+    url: 'https://www.moonpay.com/',
+  },
 ]

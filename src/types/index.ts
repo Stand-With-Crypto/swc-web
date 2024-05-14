@@ -6,6 +6,7 @@ export type PageProps<Params = object> = {
   params: Params & {
     locale: SupportedLocale
   }
+  searchParams?: { [key: string]: string | string[] | undefined }
 }
 
 export type GetDefineMessageResults<T extends Record<string, MessageDescriptor>> = Record<

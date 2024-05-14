@@ -14,6 +14,7 @@ export type GooglePlacesSelectProps = {
   onChange: (val: GooglePlaceAutocompletePrediction | null) => void
   showIcon?: boolean
   loading?: boolean
+  disablePreventMobileKeyboardOffset?: boolean
 } & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange' | 'type'>
 
 export const GooglePlacesSelect = React.forwardRef<
@@ -36,10 +37,10 @@ export const GooglePlacesSelect = React.forwardRef<
     setValue,
     init,
   } = usePlacesAutocomplete({
-    // note on why we aren't restricting to just addresses https://stackoverflow.com/a/65206036
     requestOptions: {
       locationBias: 'IP_BIAS',
       language: 'en',
+      types: ['street_address', 'premise', 'postal_code', 'subpremise'],
     },
   })
   const scriptStatus = useGoogleMapsScript()
@@ -53,6 +54,7 @@ export const GooglePlacesSelect = React.forwardRef<
   return (
     <Combobox
       analytics={'Google Place Select'}
+      disablePreventMobileKeyboardOffset={props.disablePreventMobileKeyboardOffset}
       formatPopoverTrigger={triggerProps => (
         <InputWithIcons
           className={cn(

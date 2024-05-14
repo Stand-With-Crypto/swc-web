@@ -9,7 +9,9 @@ import { zodYourPoliticianCategory } from '@/validation/fields/zodYourPolitician
 
 const base = object({
   emailAddress: string().trim().email('Please enter a valid email address').toLowerCase(),
-  message: string().min(1, 'Please enter a message').max(1000, 'Please enter a message'),
+  message: string()
+    .min(1, 'Please enter a message')
+    .max(2000, 'Your message should not exceed 2000 characters'),
   dtsiSlugs: array(zodDTSISlug).min(1),
   campaignName: nativeEnum(UserActionEmailCampaignName),
   politicianCategory: zodYourPoliticianCategory,

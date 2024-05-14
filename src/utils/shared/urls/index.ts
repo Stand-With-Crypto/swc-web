@@ -46,6 +46,7 @@ export const getIntlUrls = (
     politiciansHomepage: () => `${localePrefix}/politicians`,
     politicianDetails: (dtsiSlug: string) => `${localePrefix}/politicians/person/${dtsiSlug}`,
     profile: () => `${localePrefix}/profile`,
+    updateProfile: () => `${localePrefix}/profile?hasOpenUpdateUserProfileForm=true`,
     internalHomepage: () => `${localePrefix}/internal`,
     locationStateSpecific: (stateCode: USStateCode) =>
       `${localePrefix}/races/state/${stateCode.toLowerCase()}`,

@@ -9,6 +9,6 @@ export const dynamic = 'error'
 export const revalidate = SECONDS_DURATION.SECOND * 30
 
 export async function GET() {
-  const data = await getSumDonations({ includeFairshake: true })
+  const data = await getSumDonations()
   return NextResponse.json(data)
 }
