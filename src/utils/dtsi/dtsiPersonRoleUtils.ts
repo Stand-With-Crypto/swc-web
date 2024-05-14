@@ -57,7 +57,7 @@ export const getDTSIPersonRoleCategoryDisplayName = (
 export const getDTSIPersonRoleCategoryWithStateDisplayName = (
   role: Pick<
     DTSI_PersonRole,
-    'status' | 'primaryState' | 'primaryCountryCode' | 'title' | 'roleCategory'
+    'status' | 'primaryState' | 'primaryCountryCode' | 'title' | 'roleCategory' | 'primaryDistrict'
   >,
 ) => {
   if (role.status !== DTSI_PersonRoleStatus.HELD) {
@@ -65,7 +65,7 @@ export const getDTSIPersonRoleCategoryWithStateDisplayName = (
   }
   let stateStr = ''
   if (role.primaryState && role.primaryCountryCode === 'US') {
-    stateStr = `, ${getUSStateNameFromStateCode(role.primaryState)} `
+    stateStr = `, ${getUSStateNameFromStateCode(role.primaryState)} ${role.primaryDistrict ? `${role.primaryDistrict} ` : ''}`
   }
   switch (role.roleCategory) {
     case DTSI_PersonRoleCategory.CONGRESS:
