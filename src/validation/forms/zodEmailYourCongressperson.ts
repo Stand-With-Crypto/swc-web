@@ -12,5 +12,5 @@ export const zodEmailYourCongressperson = object({
   address: string().min(1, 'Please enter your address').max(300, 'Address too long'),
   message: string()
     .min(1, 'Please enter a message')
-    .max(1000, 'Your message should not exceed 1000 characters'),
+    .max(2000, 'Your message should not exceed 2000 characters'),
 }).merge(zodFirstAndLastNames)
