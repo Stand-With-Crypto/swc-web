@@ -41,15 +41,6 @@ const getDefaultProps = () => {
         status: DTSI_PersonRoleStatus.HELD,
         title: 'President',
       },
-      twitterAccounts: [
-        {
-          accountType: DTSI_TwitterAccountType.PROFESSIONAL,
-          id: '',
-          personId: '',
-          state: DTSI_TwitterAccountState.VISIBLE,
-          username: '',
-        },
-      ],
     },
   }
   return props
