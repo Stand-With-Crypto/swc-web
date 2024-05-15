@@ -88,10 +88,10 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
         <div className="relative bg-primary-cta py-6 lg:py-8">
           <div className="container grid items-center gap-6 sm:grid-cols-[1fr,auto,auto]">
             <div className="space-y-1 text-sm text-background antialiased max-sm:text-center sm:text-base">
-              <p className="font-bold">Tell your representatives to vote YES on FIT21</p>
+              <p className="font-bold">Tell your representatives to vote YES on Key Vote FIT21</p>
               <p>
-                FIT21 is a crypto regulatory bill that could save crypto in America. Tell your
-                representatives to vote YES.
+                FIT21 is a historic crypto regulatory bill that will protect crypto users in the US.
+                Tell your representatives to vote YES on FIT21.
               </p>
             </div>
 

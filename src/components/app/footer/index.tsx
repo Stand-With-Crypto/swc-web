@@ -22,9 +22,9 @@ export async function Footer({ locale }: { locale: SupportedLocale }) {
     <footer className="mt-36 border-t bg-black py-24 text-muted antialiased">
       <div className="container">
         <div className="flex flex-col gap-9 lg:flex-row lg:justify-between">
-          <div className="max-w-xl space-y-8">
+          <div className="max-w-2xl space-y-8">
             <PageTitle as="h6" className="text-left">
-              Fight for the future
+              Fight for Crypto Rights
             </PageTitle>
             <p className="text-xl">
               Join to show your support, collect advocacy NFTs, and protect the future of crypto.
