@@ -131,8 +131,8 @@ export function SuggestedScript({
 
               <p>
                 I live in {addressSchema.locality}, {addressSchema.administrativeAreaLevel1} and I'm
-                calling to request Representative <strong>{dtsiPersonFullName(dtsiPerson)}</strong>{' '}
-                votes yes on the <strong>FIT21 bill</strong> that will protect consumers, create
+                calling to request <strong>{dtsiPersonFullName(dtsiPerson)}</strong>
+                votes Yes on the <strong>FIT21 Act</strong> that will protect consumers, create
                 jobs, foster innovation, and safeguard our national security.
               </p>
 
