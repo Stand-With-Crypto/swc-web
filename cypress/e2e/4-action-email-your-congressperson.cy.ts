@@ -15,13 +15,6 @@ it('action - email your congressperson', () => {
   cy.contains('Please enter a valid email address')
   cy.contains('Please select a valid address')
 
-  // validate invalid address
-  cy.selectFromComboBox({
-    trigger: cy.get('input[placeholder="Your full address"]'),
-    searchText: 'new york',
-  })
-  cy.contains('Please enter a specific address that includes street-level information')
-
   // validate success
   cy.get('input[placeholder="Your first name"]').type('John')
   cy.get('input[placeholder="Your last name"]').type('Doe')

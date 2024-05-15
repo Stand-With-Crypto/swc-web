@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 }
 
 export default async function DonatePage({ params: { locale } }: PageProps) {
-  const sumDonations = await getSumDonations({ includeFairshake: true })
+  const sumDonations = await getSumDonations()
 
   return (
     <PageDonate

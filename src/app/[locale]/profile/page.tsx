@@ -18,7 +18,7 @@ export async function generateMetadata(_props: Props): Promise<Metadata> {
   })
 }
 
-export default async function Profile({ params }: Props) {
+export default async function Profile({ params, searchParams }: Props) {
   const user = await getAuthenticatedData()
-  return <PageUserProfile params={params} user={user} />
+  return <PageUserProfile params={params} searchParams={searchParams} user={user} />
 }

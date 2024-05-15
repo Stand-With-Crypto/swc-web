@@ -103,7 +103,7 @@ export function SuggestedScript({
   )
 
   return (
-    <div className="flex h-full max-h-full flex-col overflow-hidden">
+    <div className="flex h-full max-h-full flex-col">
       <UserActionFormLayout className="mb-4 overflow-y-auto rounded-2xl" onBack={goBackSection}>
         <UserActionFormLayout.Container>
           <UserActionFormLayout.Heading
@@ -131,14 +131,15 @@ export function SuggestedScript({
 
               <p>
                 I live in {addressSchema.locality}, {addressSchema.administrativeAreaLevel1} and I'm
-                calling to request Representative <strong>{dtsiPersonFullName(dtsiPerson)}</strong>
-                's support for the{' '}
-                <strong>Financial Innovation and Technology for the 21st Century Act.</strong>
+                calling to request Representative <strong>{dtsiPersonFullName(dtsiPerson)}</strong>{' '}
+                votes yes on the <strong>FIT21 bill</strong> that will protect consumers, create
+                jobs, foster innovation, and safeguard our national security.
               </p>
 
-              <p>It's time crypto had regulatory clarity.</p>
-
-              <p>I believe in crypto and the mission to increase economic freedom in the world. </p>
+              <p>
+                It's time crypto had a clear regulatory framework to protect consumers for the road
+                ahead.
+              </p>
 
               <p>Thank you and have a nice day!</p>
             </div>

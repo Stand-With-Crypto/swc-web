@@ -12,6 +12,7 @@ import {
 } from '@/data/dtsi/generated'
 import { dtsiPersonMockResolver } from '@/mocks/dtsi/mocks/dtsiPersonMockResolver'
 import { dtsiPersonRoleMockResolver } from '@/mocks/dtsi/mocks/dtsiPersonRoleResolver'
+import { REAL_CONGRESSPERSON_DATA } from '@/mocks/misc/congresspersonData'
 import {
   CURRENT_SESSION_OF_CONGRESS,
   NEXT_SESSION_OF_CONGRESS,
@@ -91,7 +92,7 @@ function personRoleGroupingToPersonRoleMapping(
 
 export const dtsiQueryResolver: Partial<DTSI_QueryResolvers> = {
   peopleByUSCongressionalDistrict: () => {
-    return Object.values(DTSI_PersonRoleCategory).map(
+    const data = Object.values(DTSI_PersonRoleCategory).map(
       category =>
         ({
           ...dtsiPersonMockResolver(),
@@ -100,6 +101,8 @@ export const dtsiQueryResolver: Partial<DTSI_QueryResolvers> = {
           }),
         }) as any,
     )
+    data.push(REAL_CONGRESSPERSON_DATA)
+    return data
   },
   people: (_root, args) => {
     const total = args.slugIn ? args.slugIn.length : args.limit && args.limit > 1000 ? 750 : 10
