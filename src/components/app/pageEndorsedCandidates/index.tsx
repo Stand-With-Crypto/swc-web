@@ -36,7 +36,10 @@ export function PageEndorsedCandidates({ people, locale }: LocationStateSpecific
             clicking on their links.
           </h3>
 
-          <MaybeDonateButton donationUrl="https://commerce.coinbase.com/checkout/f1fa8e95-d8d9-45e4-8329-e11ad95f5c34" variant="secondary">
+          <MaybeDonateButton
+            donationUrl="https://commerce.coinbase.com/checkout/f1fa8e95-d8d9-45e4-8329-e11ad95f5c34"
+            variant="secondary"
+          >
             Donate to all candidates
           </MaybeDonateButton>
         </div>
