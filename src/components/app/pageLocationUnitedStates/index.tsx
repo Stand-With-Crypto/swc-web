@@ -18,7 +18,7 @@ import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/u
 import { cn } from '@/utils/web/cn'
 
 import { organizePeople } from './organizePeople'
-import { UserAddressVoterGuideInputSection } from './userAddressVoterGuideInputSection'
+import { UserAddressVoterGuideInputSection } from './userAddressVoterGuideInput'
 
 interface LocationUnitedStatesProps extends DTSI_UnitedStatesInformationQuery {
   locale: SupportedLocale
