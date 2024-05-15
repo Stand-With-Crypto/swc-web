@@ -1,7 +1,7 @@
 'use client'
 import { Suspense } from 'react'
 
-import { ContentSectionWithVariableSubtitleByAddress } from '@/components/app/pagesKeyRaces/common/contentSectionWithVariableSubtitleByAddress'
+import { ContentSectionWithVariableSubtitleByAddress } from '@/components/app/pagesKeyRacesCommon/contentSectionWithVariableSubtitleByAddress'
 import { SupportedLocale } from '@/intl/locales'
 import { USStateCode } from '@/utils/shared/usStateUtils'
 

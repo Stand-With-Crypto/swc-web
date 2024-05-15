@@ -2,8 +2,8 @@
 
 import React, { Suspense } from 'react'
 
-import { ContentSectionWithVariableSubtitleByAddress } from '@/components/app/pagesKeyRaces/common/contentSectionWithVariableSubtitleByAddress'
-import { UserAddressVoterGuideInput } from '@/components/app/pagesKeyRaces/pageLocationUnitedStates/userAddressVoterGuideInput'
+import { UserAddressVoterGuideInput } from '@/components/app/pageLocationUnitedStates/userAddressVoterGuideInput'
+import { ContentSectionWithVariableSubtitleByAddress } from '@/components/app/pagesKeyRacesCommon/contentSectionWithVariableSubtitleByAddress'
 import { SupportedLocale } from '@/intl/locales'
 
 export function YourRacesContentSection({ locale }: { locale: SupportedLocale }) {
