@@ -66,15 +66,9 @@ export type UseGetDTSIPeopleFromAddressResponse = Awaited<
   ReturnType<typeof getDTSIPeopleFromAddress>
 >
 
-export function useGetDTSIPeopleFromAddress(
-  address: string,
-  category: YourPoliticianCategory,
-  config: SWRConfiguration = {},
-) {
-  return useSWR(
-    address ? `useGetDTSIPeopleFromAddress-${address}` : null,
-    () => getDTSIPeopleFromAddress(address, category),
-    config,
+export function useGetDTSIPeopleFromAddress(address: string, category: YourPoliticianCategory) {
+  return useSWR(address ? `useGetDTSIPeopleFromAddress-${address}` : null, () =>
+    getDTSIPeopleFromAddress(address, category),
   )
 }
 export function formatGetDTSIPeopleFromAddressNotFoundReason(

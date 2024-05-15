@@ -21,7 +21,7 @@ import { getUSStateNameFromStateCode, USStateCode } from '@/utils/shared/usState
 import { cn } from '@/utils/web/cn'
 
 import { organizeStateSpecificPeople } from './organizeStateSpecificPeople'
-import { UserDistrictContentSection } from './userDistrictContentSection'
+import { UserLocationRaceInfo } from './userLocationRaceInfo'
 
 interface LocationStateSpecificProps extends DTSI_StateSpecificInformationQuery {
   stateCode: USStateCode
@@ -112,7 +112,7 @@ export function LocationStateSpecific({
               />
             </div>
           ) : (
-            <UserDistrictContentSection
+            <UserLocationRaceInfo
               groups={groups}
               locale={locale}
               stateCode={stateCode}

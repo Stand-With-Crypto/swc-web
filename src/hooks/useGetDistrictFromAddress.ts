@@ -8,11 +8,9 @@ import {
 export function useGetDistrictFromAddress(
   address: string,
   params?: GetCongressionalDistrictFromAddressParams,
-  config?: SWRConfiguration,
 ) {
   return useSWR(
     address ? `useGetDistrictFromAddress-${address}-${JSON.stringify(params)}` : null,
     () => getCongressionalDistrictFromAddress(address, params),
-    config,
   )
 }

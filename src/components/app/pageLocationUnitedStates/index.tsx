@@ -18,7 +18,7 @@ import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/u
 import { cn } from '@/utils/web/cn'
 
 import { organizePeople } from './organizePeople'
-import { YourRacesContentSection } from './yourRacesContentSection'
+import { UserAddressVoterGuideInputSection } from './userAddressVoterGuideInput'
 
 interface LocationUnitedStatesProps extends DTSI_UnitedStatesInformationQuery {
   locale: SupportedLocale
@@ -70,7 +70,8 @@ export function LocationUnitedStates({
             title={<>Presidential Race</>}
           />
         )}
-        <YourRacesContentSection locale={locale} />
+        <UserAddressVoterGuideInputSection locale={locale} />
+
         {ORDERED_KEY_SENATE_RACE_STATES.map(stateCode => {
           const stateName = US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]
           const people = groups.keySenateRaceMap[stateCode]

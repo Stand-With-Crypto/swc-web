@@ -4,9 +4,11 @@
 import { Suspense } from 'react'
 import { noop } from 'lodash-es'
 
+import { ContentSection } from '@/components/app/ContentSection'
 import { Button } from '@/components/ui/button'
 import { GooglePlacesSelect, GooglePlacesSelectProps } from '@/components/ui/googlePlacesSelect'
 import { InternalLink } from '@/components/ui/link'
+import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { useMutableCurrentUserAddress } from '@/hooks/useCurrentUserAddress'
 import {
   formatGetDTSIPeopleFromAddressNotFoundReason,
@@ -16,7 +18,6 @@ import { SupportedLocale } from '@/intl/locales'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory'
-import { GooglePlaceAutocompletePrediction } from '@/utils/web/googlePlaceUtils'
 
 function DefaultPlacesSelect(
   props: Pick<GooglePlacesSelectProps, 'onChange' | 'value' | 'loading'>,
@@ -34,58 +35,47 @@ function DefaultPlacesSelect(
 }
 interface UserAddressVoterGuideInput {
   locale: SupportedLocale
-  onChange?: GooglePlacesSelectProps['onChange']
 }
 
-export function UserAddressVoterGuideInput(props: UserAddressVoterGuideInput) {
+export function UserAddressVoterGuideInputSection(props: UserAddressVoterGuideInput) {
   return (
     <Suspense fallback={<DefaultPlacesSelect onChange={noop} value={null} />}>
-      <_UserAddressVoterGuideInput {...props} />
+      <_UserAddressVoterGuideInputSection {...props} />
     </Suspense>
   )
 }
 
 const POLITICIAN_CATEGORY: YourPoliticianCategory = 'senate-and-house'
 
-function _UserAddressVoterGuideInput({ locale, onChange = noop }: UserAddressVoterGuideInput) {
+function _UserAddressVoterGuideInputSection({ locale }: UserAddressVoterGuideInput) {
   const { setAddress, address } = useMutableCurrentUserAddress()
   const res = useGetDTSIPeopleFromAddress(
     address === 'loading' ? '' : address?.description || '',
     POLITICIAN_CATEGORY,
-    {
-      onSuccess: () => {
-        onChange(address as GooglePlaceAutocompletePrediction)
-      },
-    },
   )
-
-  const handleAddressChange: GooglePlacesSelectProps['onChange'] = newAddress => {
-    setAddress(newAddress)
-    if (!newAddress) {
-      onChange(null)
-    }
-  }
+  const shouldShowSubtitle = !address || !res.data
 
   if (!address || address === 'loading' || !res.data) {
     return (
-      <DefaultPlacesSelect
-        loading={address === 'loading' || res.isLoading}
-        onChange={handleAddressChange}
-        value={address === 'loading' ? null : address}
-      />
+      <ContentContainer shouldShowSubtitle={shouldShowSubtitle}>
+        <DefaultPlacesSelect
+          loading={address === 'loading' || res.isLoading}
+          onChange={setAddress}
+          value={address === 'loading' ? null : address}
+        />
+      </ContentContainer>
     )
   }
   if ('notFoundReason' in res.data) {
     return (
-      <div>
-        {formatGetDTSIPeopleFromAddressNotFoundReason(res.data)}{' '}
-        <button
-          className="font-bold text-fontcolor underline"
-          onClick={() => handleAddressChange(null)}
-        >
-          Try another address.
-        </button>
-      </div>
+      <ContentContainer shouldShowSubtitle={shouldShowSubtitle}>
+        <PageSubTitle as="h4" size="sm">
+          {formatGetDTSIPeopleFromAddressNotFoundReason(res.data)}{' '}
+          <button className="font-bold text-fontcolor underline" onClick={() => setAddress(null)}>
+            Try another address.
+          </button>
+        </PageSubTitle>
+      </ContentContainer>
     )
   }
   const stateCode = res.data.dtsiPeople.find(x => x.primaryRole?.primaryState)?.primaryRole
@@ -93,36 +83,54 @@ function _UserAddressVoterGuideInput({ locale, onChange = noop }: UserAddressVot
 
   const urls = getIntlUrls(locale)
   return (
-    <div>
-      <p className="mb-3 text-center text-sm text-fontcolor-muted">
-        {stateCode ? 'Showing voter guide for' : 'No voter guide info related to'}{' '}
-        <button
-          className="font-bold text-fontcolor underline"
-          onClick={() => handleAddressChange(null)}
-        >
-          {address.description}
-        </button>
-      </p>
+    <ContentContainer shouldShowSubtitle={shouldShowSubtitle}>
+      <div>
+        <p className="mb-3 text-center text-sm text-fontcolor-muted">
+          {stateCode ? 'Showing voter guide for' : 'No voter guide info related to'}{' '}
+          <button className="font-bold text-fontcolor underline" onClick={() => setAddress(null)}>
+            {address.description}
+          </button>
+        </p>
 
-      {stateCode && (
-        <div className="mx-auto flex max-w-4xl flex-col items-center gap-4 rounded-3xl bg-muted p-6 sm:flex-row">
-          <div>
-            <h4 className="text-xl font-bold">Your crypto voter guide</h4>
-            <p className="mt-4 text-fontcolor-muted">
-              It looks like you’re in {US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]}. Take a look at
-              our crypto voter guide for more key info on the role your state plays in crypto
-              regulation.
-            </p>
+        {stateCode && (
+          <div className="mx-auto flex max-w-4xl flex-col items-center gap-4 rounded-3xl bg-muted p-6 sm:flex-row">
+            <div>
+              <h4 className="text-xl font-bold">Your crypto voter guide</h4>
+              <p className="mt-4 text-fontcolor-muted">
+                It looks like you’re in {US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]}. Take a look
+                at our crypto voter guide for more key info on the role your state plays in crypto
+                regulation.
+              </p>
+            </div>
+            <div className="max-sm:w-full">
+              <Button asChild className="w-full">
+                <InternalLink href={urls.locationStateSpecific(stateCode)}>
+                  {stateCode} voter guide
+                </InternalLink>
+              </Button>
+            </div>
           </div>
-          <div className="max-sm:w-full">
-            <Button asChild className="w-full">
-              <InternalLink href={urls.locationStateSpecific(stateCode)}>
-                {stateCode} voter guide
-              </InternalLink>
-            </Button>
-          </div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </ContentContainer>
+  )
+}
+
+function ContentContainer({
+  children,
+  shouldShowSubtitle,
+}: React.PropsWithChildren<{ shouldShowSubtitle: boolean }>) {
+  return (
+    <ContentSection
+      className="container"
+      subtitle={
+        shouldShowSubtitle
+          ? 'Enter your address to find the key races in your area that will impact the future of crypto in the United States.'
+          : null
+      }
+      title={'Your races'}
+    >
+      {children}
+    </ContentSection>
   )
 }
