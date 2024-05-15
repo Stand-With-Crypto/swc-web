@@ -24,7 +24,7 @@ export function DTSIBillCard(props: DTSIBillCardProps) {
         'flex flex-col items-center gap-4 rounded-3xl bg-secondary p-4 md:flex-row md:gap-6 md:p-6',
         className,
       )}
-      data-test-id="policy-card"
+      data-testid="bill-card"
     >
       <div className="flex w-full flex-col gap-2">
         <div className="flex flex-wrap items-center gap-2 lg:gap-4">
