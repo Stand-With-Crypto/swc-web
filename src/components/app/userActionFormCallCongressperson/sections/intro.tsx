@@ -29,18 +29,18 @@ export function IntroStaticContent({ children }: React.PropsWithChildren) {
     <UserActionFormLayout>
       <UserActionFormLayout.Container>
         <UserActionFormLayout.Heading
-          subtitle={`Call your Rep and ask them to vote YES on the FIT21 bill.`}
+          subtitle={`Call your Rep and ask them to vote YES on the FIT21 Act`}
           title="It's time to fight to keep crypto in America"
         />
         <div className="space-y-2">
           <h2 className="text-base font-semibold">Here's what you need to know:</h2>
           <ul>
             <ChecklistItem>
-              Congress is voting on a crucial bipartisan bill that will help protect consumers
+              Congress is voting on a crucial bipartisan Act that will help protect consumers
             </ChecklistItem>
             <ChecklistItem>It won't pass without your help</ChecklistItem>
             <ChecklistItem>
-              Calling your member of congress is the most effective action you can take
+              Calling your member of Congress is the most effective action you can take
             </ChecklistItem>
           </ul>
         </div>
