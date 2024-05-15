@@ -20,13 +20,11 @@ export function getDefaultText({
     ? `I am your constituent from ${possessive(US_STATE_CODE_TO_DISPLAY_NAME_MAP[location.stateCode as USStateCode])} ${withOrdinalSuffix(location.districtNumber)} district`
     : 'I am your constituent'
 
-  return `Dear Congressperson,
+  return `Dear Representative,
 
-${maybeDistrictIntro} and recently learned that the Financial Innovation and Technology for the 21st Century Act Bill [FIT 21 H.R. 4763] is being considered for a floor vote in the House.
+${maybeDistrictIntro} and recently learned that the Financial Innovation and Technology for the 21st Century Act Bill [FIT21 H.R. 4763] is being considered for a floor vote in the House.
 
-I am asking you to vote YES on the FIT21 Bill to protect consumers, create jobs, foster innovation, and safeguard our national security.
-
-FIT21 sets foundational rules for crypto that are pro-consumer and pro-job creation. It will protect 52 million Americans who own crypto and create millions of jobs in a critical technology sector that supports our national security.
+I am asking you to vote YES on the FIT21 Bill that sets foundational rules for crypto that are pro-consumer and pro-job creation. It will protect 52 million Americans who own crypto and could create millions of jobs in a critical technology sector that supports our national security.
 
 We have been waiting patiently for years for our lawmakers to protect us and strengthen America’s role in building the future of money and the internet.
 
