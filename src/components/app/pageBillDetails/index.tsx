@@ -41,7 +41,7 @@ export function PageBillDetails(props: PageBillDetailsProps) {
   return (
     <div className="standard-spacing-from-navbar container space-y-16">
       <section className="space-y-8 text-center">
-        <PageTitle>{bill.title}</PageTitle>
+        <PageTitle>{bill.shortTitle || bill.title}</PageTitle>
         <p className="font-semibold">
           <FormattedDatetime
             date={new Date(bill.datetimeCreated)}
@@ -49,8 +49,8 @@ export function PageBillDetails(props: PageBillDetailsProps) {
             locale={locale}
           />
         </p>
-        <PageSubTitle>{bill.summary}</PageSubTitle>
-        <ExternalLink className="inline-block" href="#">
+        <PageSubTitle>{bill.summary || bill.title}</PageSubTitle>
+        <ExternalLink className="inline-block" href={bill.congressDotGovUrl}>
           {bill.congressDotGovUrl}
         </ExternalLink>
         <CryptoSupportHighlight
@@ -69,13 +69,17 @@ export function PageBillDetails(props: PageBillDetailsProps) {
           ))}
         </div>
 
-        <Button variant="secondary">Add Analysis</Button>
+        <Button asChild variant="secondary">
+          <ExternalLink href={`https://www.dotheysupportit.com/bills/${bill.id}/create-analysis`}>
+            Add Analysis
+          </ExternalLink>
+        </Button>
       </section>
 
       <section className="space-y-16 text-center">
         <div className="space-y-8">
           <p className="font-semibold">Sponsors</p>
-          <AvatarGrid avatarSize={AVATAR_SIZE} nItems={16}>
+          <AvatarGrid avatarSize={AVATAR_SIZE} nItems={14}>
             {sponsors?.length ? (
               sponsors?.map((person, i) => (
                 <DTSIAvatarBox key={i} locale={locale} person={person} size={AVATAR_SIZE} />
@@ -88,7 +92,7 @@ export function PageBillDetails(props: PageBillDetailsProps) {
 
         <div className="space-y-8">
           <p className="font-semibold">Co-Sponsors</p>
-          <AvatarGrid avatarSize={AVATAR_SIZE} nItems={16}>
+          <AvatarGrid avatarSize={AVATAR_SIZE} nItems={14}>
             {coSponsors?.length ? (
               coSponsors?.map((person, i) => (
                 <DTSIAvatarBox key={i} locale={locale} person={person} size={AVATAR_SIZE} />
@@ -101,7 +105,7 @@ export function PageBillDetails(props: PageBillDetailsProps) {
 
         <div className="space-y-8">
           <p className="font-semibold">Voted for</p>
-          <AvatarGrid avatarSize={AVATAR_SIZE} nItems={16}>
+          <AvatarGrid avatarSize={AVATAR_SIZE} nItems={14}>
             {votedFor?.length ? (
               votedFor?.map((person, i) => (
                 <DTSIAvatarBox key={i} locale={locale} person={person} size={AVATAR_SIZE} />
@@ -114,7 +118,7 @@ export function PageBillDetails(props: PageBillDetailsProps) {
 
         <div className="space-y-8">
           <p className="font-semibold">Voted against</p>
-          <AvatarGrid avatarSize={AVATAR_SIZE} nItems={16}>
+          <AvatarGrid avatarSize={AVATAR_SIZE} nItems={14}>
             {votedAgainst?.length ? (
               votedAgainst?.map((person, i) => (
                 <DTSIAvatarBox key={i} locale={locale} person={person} size={AVATAR_SIZE} />

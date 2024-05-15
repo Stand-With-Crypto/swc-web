@@ -25,14 +25,14 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     return {}
   }
   return {
-    title: bill.title,
+    title: bill.shortTitle || bill.title,
     description: bill.summary,
   }
 }
 
 export async function generateStaticParams() {
   const response = await queryDTSIAllBillsSlugs()
-  const slugs = response.bills.map(({ slug: billSlug }) => ({ billSlug }))
+  const slugs = response.bills.map(({ id: billSlug }) => ({ billSlug }))
   return slugs
 }
 

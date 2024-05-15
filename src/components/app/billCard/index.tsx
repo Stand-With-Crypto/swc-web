@@ -30,7 +30,7 @@ export function BillCard(props: BillCardProps) {
         <div className="flex flex-wrap items-center gap-2 lg:gap-4">
           <InternalLink
             className="text-xl font-semibold text-primary "
-            href={getIntlUrls(locale).billDetails(bill.slug)}
+            href={getIntlUrls(locale).billDetails(bill.id)}
           >
             <span className="text-xl font-semibold">{bill.shortTitle}</span>
           </InternalLink>
@@ -50,10 +50,12 @@ export function BillCard(props: BillCardProps) {
           </div>
         </div>
 
-        <p className="line-clamp-2 text-justify">{bill.summary}</p>
+        <p className="line-clamp-2 text-justify">{bill.summary || bill.title}</p>
       </div>
 
-      <Button className="max-md:w-full">Learn More</Button>
+      <Button asChild className="max-md:w-full">
+        <InternalLink href={getIntlUrls(locale).billDetails(bill.id)}>Learn More</InternalLink>
+      </Button>
     </div>
   )
 }

@@ -4,8 +4,8 @@ import { DTSI_AllBillsSlugsQuery, DTSI_AllBillsSlugsQueryVariables } from '@/dat
 export const query = /* GraphQL */ `
   query AllBillsSlugs {
     bills {
+      id
       slug
-      formattedSlug
     }
   }
 `

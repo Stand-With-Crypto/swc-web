@@ -13,6 +13,8 @@ interface PageBillsProps {
 export function PageBills(props: PageBillsProps) {
   const { title, description, bills, locale } = props
 
+  console.log('PageBills', bills)
+
   return (
     <div className="standard-spacing-from-navbar container space-y-16">
       <section className="space-y-7 text-center">

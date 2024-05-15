@@ -18,7 +18,7 @@ export const AvatarGrid = (props: AvatarGridProps) => {
   return (
     <>
       <div
-        className={`mx-auto grid w-fit grid-flow-col grid-cols-[repeat(auto-fill,minmax(${avatarSize}px,1fr))] justify-items-center gap-4`}
+        className={`mx-auto grid w-full grid-flow-dense grid-cols-[repeat(auto-fit,minmax(${avatarSize}px,1fr))] justify-items-center gap-4`}
       >
         {visibleChildren}
       </div>

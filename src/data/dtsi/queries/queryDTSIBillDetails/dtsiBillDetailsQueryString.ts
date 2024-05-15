@@ -27,7 +27,10 @@ export const fragmentDTSIBillRelationships = /* GraphQL */ `
 export const dtsiBillDetailsQueryString = /* GraphQL */ `
   query BillDetails($id: String!) {
     bill(id: $id) {
+      id
+      slug
       title
+      shortTitle
       summary
       computedStanceScore
       status
@@ -35,10 +38,6 @@ export const dtsiBillDetailsQueryString = /* GraphQL */ `
       congressDotGovUrl
       dateIntroduced
       datetimeCreated
-      datetimeUpdated
-      datetimeTweetedByDoTheySupportIt
-      slug
-      formattedSlug
 
       analysis {
         ...BillAnalysis

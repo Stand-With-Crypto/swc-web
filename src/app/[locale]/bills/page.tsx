@@ -9,9 +9,8 @@ import { SECONDS_DURATION } from '@/utils/shared/seconds'
 export const revalidate = SECONDS_DURATION.DAY
 export const dynamic = 'error'
 
-const title = '[PH] Bills'
-const description =
-  '[PH] Learn about the pending bills and resolutions that affect the crypto industry.'
+const title = 'Crypto Bills'
+const description = 'Learn about the pending bills and resolutions that affect the crypto industry.'
 export const metadata: Metadata = {
   ...generateMetadataDetails({
     title,
