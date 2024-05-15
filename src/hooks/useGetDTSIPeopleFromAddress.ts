@@ -1,4 +1,4 @@
-import useSWR, { SWRConfiguration } from 'swr'
+import useSWR from 'swr'
 
 import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
 import { DTSIPeopleByCongressionalDistrictQueryResult } from '@/data/dtsi/queries/queryDTSIPeopleByCongressionalDistrict'

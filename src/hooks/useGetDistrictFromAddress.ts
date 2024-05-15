@@ -1,4 +1,4 @@
-import useSWR, { SWRConfiguration } from 'swr'
+import useSWR from 'swr'
 
 import {
   getCongressionalDistrictFromAddress,
