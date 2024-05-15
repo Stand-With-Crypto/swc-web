@@ -21,16 +21,16 @@ const AVATAR_SIZE = 126
 export function PageBillDetails(props: PageBillDetailsProps) {
   const { bill, locale } = props
 
-  const relationshipsByType = bill.relationships.reduce((acc, relationship) => {
+  const relationshipsByType = bill.relationships.reduce((map, relationship) => {
     const type = relationship.relationshipType
 
-    if (!acc.has(type)) {
-      acc.set(type, [])
+    if (!map.has(type)) {
+      map.set(type, [])
     }
 
-    acc.get(type)?.push(relationship.person)
+    map.get(type)?.push(relationship.person)
 
-    return acc
+    return map
   }, new Map<DTSI_BillPersonRelationshipType, DTSIBillDetails['relationships'][0]['person'][]>())
 
   const sponsors = relationshipsByType.get(DTSI_BillPersonRelationshipType.SPONSOR)
@@ -49,7 +49,12 @@ export function PageBillDetails(props: PageBillDetailsProps) {
             locale={locale}
           />
         </p>
-        <PageSubTitle>{bill.summary || bill.title}</PageSubTitle>
+        <PageSubTitle>
+          {
+            // Some bills don't have a summary but have a really long title, so we use the title as a fallback
+            bill.summary || bill.title
+          }
+        </PageSubTitle>
         <ExternalLink className="inline-block" href={bill.congressDotGovUrl}>
           {bill.congressDotGovUrl}
         </ExternalLink>
@@ -64,9 +69,11 @@ export function PageBillDetails(props: PageBillDetailsProps) {
         <p className="font-semibold">Analysis</p>
 
         <div className="space-y-6 text-center text-fontcolor-muted">
-          {bill.analysis.map(analysis => (
-            <p key={analysis.id}>{analysis.internalNotes}</p>
-          ))}
+          {bill.analysis.length ? (
+            bill.analysis.map(analysis => <p key={analysis.id}>{analysis.internalNotes}</p>)
+          ) : (
+            <p className="text-fontcolor-muted">No analysis for this Bill yet.</p>
+          )}
         </div>
 
         <Button asChild variant="secondary">

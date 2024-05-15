@@ -1,4 +1,4 @@
-import { Bill, BillCard } from '@/components/app/billCard'
+import { DTSIBill, DTSIBillCard } from '@/components/app/dtsiBillCard'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { SupportedLocale } from '@/intl/locales'
@@ -6,14 +6,12 @@ import { SupportedLocale } from '@/intl/locales'
 interface PageBillsProps {
   title: string
   description: string
-  bills: Bill[]
+  bills: DTSIBill[]
   locale: SupportedLocale
 }
 
 export function PageBills(props: PageBillsProps) {
   const { title, description, bills, locale } = props
-
-  console.log('PageBills', bills)
 
   return (
     <div className="standard-spacing-from-navbar container space-y-16">
@@ -25,7 +23,7 @@ export function PageBills(props: PageBillsProps) {
       <section>
         <div className="flex flex-col gap-4 lg:gap-8">
           {bills.map(bill => (
-            <BillCard bill={bill} key={bill.id} locale={locale} />
+            <DTSIBillCard bill={bill} key={bill.id} locale={locale} />
           ))}
         </div>
       </section>

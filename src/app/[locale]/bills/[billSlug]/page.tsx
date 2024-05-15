@@ -26,7 +26,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   }
   return {
     title: bill.shortTitle || bill.title,
-    description: bill.summary,
+    description: bill.summary || bill.title,
   }
 }
 

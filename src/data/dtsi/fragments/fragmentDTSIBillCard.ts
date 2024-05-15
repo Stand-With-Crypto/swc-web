@@ -5,9 +5,7 @@ export const fragmentDTSIBillCard = /* GraphQL */ `
     title
     shortTitle
     slug
-    formattedSlug
     computedStanceScore
-    pdfUrl
     status
   }
 `

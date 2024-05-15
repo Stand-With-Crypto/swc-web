@@ -28,7 +28,10 @@ export type DTSIStanceDetailsTweetProp = {
 export type DTSIStanceDetailsBillRelationshipProp = {
   stanceType: DTSI_PersonStanceType.BILL_RELATIONSHIP
   billRelationship: Pick<DTSI_BillPersonRelationship, 'id' | 'relationshipType'> & {
-    bill: Pick<DTSI_Bill, 'id' | 'summary' | 'title' | 'shortTitle'>
+    bill: Pick<
+      DTSI_Bill,
+      'id' | 'summary' | 'title' | 'shortTitle' | 'status' | 'computedStanceScore' | 'slug'
+    >
   }
 }
 

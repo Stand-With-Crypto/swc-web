@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { DTSIStanceDetailsBillRelationship } from '@/components/app/dtsiStanceDetails/dtsiStanceDetailsBillRelationship'
+import { DTSIBillCard } from '@/components/app/dtsiBillCard'
 import { DTSIStanceDetailsQuote } from '@/components/app/dtsiStanceDetails/dtsiStanceDetailsQuote'
 import { DTSIStanceDetailsTweet } from '@/components/app/dtsiStanceDetails/dtsiStanceDetailsTweet'
 import {
@@ -19,7 +19,7 @@ function StanceTypeContent({ stance: passedStance, ...props }: IStanceDetailsPro
     return <DTSIStanceDetailsQuote {...props} stance={stance} />
   }
   if (stance.stanceType === DTSI_PersonStanceType.BILL_RELATIONSHIP) {
-    return <DTSIStanceDetailsBillRelationship {...props} stance={stance} />
+    return <DTSIBillCard bill={stance.billRelationship?.bill} className="p-0 md:p-0" {...props} />
   }
   throw new Error(`invalid StanceDetails passed ${JSON.stringify(stance)}`)
 }

@@ -7,21 +7,21 @@ import { convertDTSIStanceScoreToCryptoSupportLanguage } from '@/utils/dtsi/dtsi
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
-export type Bill = DTSI_BillCardFragment
+export type DTSIBill = DTSI_BillCardFragment
 
-interface BillCardProps {
-  bill: Bill
+interface DTSIBillCardProps {
+  bill: DTSIBill
   locale: SupportedLocale
   className?: string
 }
 
-export function BillCard(props: BillCardProps) {
+export function DTSIBillCard(props: DTSIBillCardProps) {
   const { bill, locale, className } = props
 
   return (
     <div
       className={cn(
-        'flex flex-col items-center gap-4 rounded-3xl bg-secondary p-6 md:flex-row lg:gap-6',
+        'flex flex-col items-center gap-4 rounded-3xl bg-secondary p-4 md:flex-row md:gap-6 md:p-6',
         className,
       )}
       data-test-id="policy-card"
@@ -32,7 +32,7 @@ export function BillCard(props: BillCardProps) {
             className="text-xl font-semibold text-primary "
             href={getIntlUrls(locale).billDetails(bill.id)}
           >
-            <span className="text-xl font-semibold">{bill.shortTitle}</span>
+            <p className="line-clamp-3 text-xl font-semibold">{bill.shortTitle}</p>
           </InternalLink>
           <div className="flex flex-wrap gap-2 uppercase">
             <Badge variant="gray">{bill.status}</Badge>
