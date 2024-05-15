@@ -103,7 +103,7 @@ export function SuggestedScript({
   )
 
   return (
-    <div className="flex h-full max-h-full flex-col overflow-hidden">
+    <div className="flex h-full max-h-full flex-col">
       <UserActionFormLayout className="mb-4 overflow-y-auto rounded-2xl" onBack={goBackSection}>
         <UserActionFormLayout.Container>
           <UserActionFormLayout.Heading
