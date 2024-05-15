@@ -3,12 +3,10 @@
 import { Button } from '@/components/ui/button'
 import { useSplitChildren, UseSplitChildrenProps } from '@/hooks/useSplitChildren'
 
-interface AvatarGridProps extends UseSplitChildrenProps {
-  avatarSize: number
-}
+interface AvatarGridProps extends UseSplitChildrenProps {}
 
 export const AvatarGrid = (props: AvatarGridProps) => {
-  const { children, avatarSize, nItems } = props
+  const { children, nItems } = props
 
   const { visibleChildren, canRenderMore, toggleRenderAll, totalItems } = useSplitChildren({
     children,
@@ -18,7 +16,7 @@ export const AvatarGrid = (props: AvatarGridProps) => {
   return (
     <>
       <div
-        className={`mx-auto grid w-full grid-flow-dense grid-cols-[repeat(auto-fit,minmax(${avatarSize}px,1fr))] justify-items-center gap-4`}
+        className={`mx-auto grid w-full grid-flow-dense grid-cols-[repeat(auto-fit,minmax(126px,1fr))] justify-items-center gap-4`}
       >
         {visibleChildren}
       </div>

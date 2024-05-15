@@ -86,7 +86,7 @@ export function PageBillDetails(props: PageBillDetailsProps) {
       <section className="space-y-16 text-center">
         <div className="space-y-8">
           <p className="font-semibold">Sponsors</p>
-          <AvatarGrid avatarSize={AVATAR_SIZE} nItems={14}>
+          <AvatarGrid nItems={14}>
             {sponsors?.length ? (
               sponsors?.map((person, i) => (
                 <DTSIAvatarBox key={i} locale={locale} person={person} size={AVATAR_SIZE} />
@@ -99,7 +99,7 @@ export function PageBillDetails(props: PageBillDetailsProps) {
 
         <div className="space-y-8">
           <p className="font-semibold">Co-Sponsors</p>
-          <AvatarGrid avatarSize={AVATAR_SIZE} nItems={14}>
+          <AvatarGrid nItems={14}>
             {coSponsors?.length ? (
               coSponsors?.map((person, i) => (
                 <DTSIAvatarBox key={i} locale={locale} person={person} size={AVATAR_SIZE} />
@@ -112,7 +112,7 @@ export function PageBillDetails(props: PageBillDetailsProps) {
 
         <div className="space-y-8">
           <p className="font-semibold">Voted for</p>
-          <AvatarGrid avatarSize={AVATAR_SIZE} nItems={14}>
+          <AvatarGrid nItems={14}>
             {votedFor?.length ? (
               votedFor?.map((person, i) => (
                 <DTSIAvatarBox key={i} locale={locale} person={person} size={AVATAR_SIZE} />
@@ -125,7 +125,7 @@ export function PageBillDetails(props: PageBillDetailsProps) {
 
         <div className="space-y-8">
           <p className="font-semibold">Voted against</p>
-          <AvatarGrid avatarSize={AVATAR_SIZE} nItems={14}>
+          <AvatarGrid nItems={14}>
             {votedAgainst?.length ? (
               votedAgainst?.map((person, i) => (
                 <DTSIAvatarBox key={i} locale={locale} person={person} size={AVATAR_SIZE} />
