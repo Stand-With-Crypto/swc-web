@@ -1,15 +1,17 @@
 'use client'
 
 import { AuthenticateWithProfileUpdate } from '@/components/app/authentication/authenticateAndUpdateProfile'
+import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
 import {
   CAMPAIGN_METADATA,
   TweetAtPersonSectionNames,
 } from '@/components/app/userActionFormTweetAtPerson/constants'
 import { OnboardingTweetAtPersonCampaign } from '@/components/app/userActionFormTweetAtPerson/sessions/onboarding'
-import { TweetedAtPersonSuccessSection } from '@/components/app/userActionFormTweetAtPerson/sessions/success'
 import { TweetAtPersonSection } from '@/components/app/userActionFormTweetAtPerson/sessions/tweet'
 import { useSections } from '@/hooks/useSections'
+import { NFTSlug } from '@/utils/shared/nft'
 import { UserActionTweetAtPersonCampaignName } from '@/utils/shared/userActionCampaigns'
+import { NFT_CLIENT_METADATA } from '@/utils/web/nft'
 
 interface UserActionFormTweetAtPersonProps {
   slug: UserActionTweetAtPersonCampaignName
@@ -33,7 +35,12 @@ export function UserActionFormTweetAtPerson({ slug }: UserActionFormTweetAtPerso
         </AuthenticateWithProfileUpdate>
       )
     case TweetAtPersonSectionNames.SUCCESS:
-      return <TweetedAtPersonSuccessSection />
+      return (
+        <UserActionFormSuccessScreen
+          nftWhenAuthenticated={NFT_CLIENT_METADATA[NFTSlug.PIZZA_DAY_2024_05_22]}
+          onClose={() => {}}
+        />
+      )
     default:
       onTabNotFound()
       return null

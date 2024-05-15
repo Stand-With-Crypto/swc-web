@@ -1,7 +1,6 @@
 'use client'
 
 import { useCallback } from 'react'
-import { isSameDay } from 'date-fns'
 import { capitalize } from 'lodash-es'
 import { Menu } from 'lucide-react'
 
@@ -14,13 +13,12 @@ import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
 import { useDialog } from '@/hooks/useDialog'
 import { SupportedLocale } from '@/intl/locales'
+import { SHOW_PIZZA_DAY_ACTIVATION_NAVBAR_ALERT } from '@/utils/shared/killSwitches'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
 export function Navbar({ locale }: { locale: SupportedLocale }) {
-  const isPizzaDay = isSameDay(new Date(), new Date(2024, 4, 22))
-
   const dialogProps = useDialog({ analytics: 'Mobile Navbar' })
   const urls = getIntlUrls(locale)
   const leftLinks = [
@@ -83,7 +81,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
         </div>
       )}
 
-      {isPizzaDay && (
+      {SHOW_PIZZA_DAY_ACTIVATION_NAVBAR_ALERT && (
         <div className="flex h-16 bg-primary-cta">
           <div className="align-center container flex items-center justify-between gap-4 ">
             <p className="flex-shrink text-sm font-bold text-white sm:text-base">

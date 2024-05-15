@@ -202,7 +202,7 @@ export const getSensitiveDataClientUserAction = ({
       [UserActionType.TWEET_AT_PERSON]: () => {
         const { recipientDtsiSlug } = getRelatedModel(record, 'userActionTweetAtPerson')
         const tweetAtPersonFields: SensitiveDataClientUserActionTweetAtPerson = {
-          recipientDtsiSlug: recipientDtsiSlug ?? null,
+          recipientDtsiSlug,
           actionType: UserActionType.TWEET_AT_PERSON,
         }
         return getClientModel({ ...sharedProps, ...tweetAtPersonFields })

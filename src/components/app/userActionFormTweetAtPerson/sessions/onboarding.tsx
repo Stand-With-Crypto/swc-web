@@ -1,33 +1,32 @@
 import Balancer from 'react-wrap-balancer'
 
-import {
-  PIZZA_DAY_LIVE_EVENT_SLUG_NFT_METADATA,
-  TweetAtPersonSectionNames,
-} from '@/components/app/userActionFormTweetAtPerson/constants'
+import { TweetAtPersonSectionNames } from '@/components/app/userActionFormTweetAtPerson/constants'
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { useIsMobile } from '@/hooks/useIsMobile'
+import { Video } from '@/components/ui/video'
 import { UseSectionsReturn } from '@/hooks/useSections'
-import { NFT_CLIENT_METADATA } from '@/utils/web/nft'
 
 export function OnboardingTweetAtPersonCampaign({
   goToSection,
 }: UseSectionsReturn<TweetAtPersonSectionNames>) {
-  const isMobile = useIsMobile()
-  const nftImageMetadata =
-    NFT_CLIENT_METADATA[PIZZA_DAY_LIVE_EVENT_SLUG_NFT_METADATA['2024_05_22_PIZZA_DAY']].image
-  const nftImageOffset = !isMobile ? 200 : 0
-
   return (
     <div className="flex flex-col items-center justify-center pb-8">
-      <NextImage
-        alt={nftImageMetadata.alt}
-        className="rounded-lg"
-        height={nftImageMetadata.height - nftImageOffset}
-        src={nftImageMetadata.url}
-        width={nftImageMetadata.width - nftImageOffset}
+      <Video
+        className={'h-full max-h-[266px] w-full max-w-[454px] rounded-lg object-cover'}
+        fallback={
+          <NextImage
+            alt="Pizza Day"
+            height={266}
+            priority
+            src="/swc-pizza-day-2024-nft.webp"
+            width={454}
+          />
+        }
+        poster="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mMMcJ/2HwAESgIuKCMGAAAAAABJRU5ErkJggg=="
+        src="https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/swc_pizza_day_2024_nft.mp4"
       />
+
       <PageTitle as="h3" className="mb-4 mt-6 lg:my-8" size="md">
         Tweet your rep. Get a free NFT. 🍕
       </PageTitle>

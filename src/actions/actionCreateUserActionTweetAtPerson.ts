@@ -2,6 +2,7 @@
 import 'server-only'
 
 import { User, UserActionType, UserInformationVisibility } from '@prisma/client'
+import { isAfter, isBefore } from 'date-fns'
 import { nativeEnum, object, string, z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
@@ -23,6 +24,7 @@ import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/local
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
+import { toBool } from '@/utils/shared/toBool'
 import { UserActionTweetAtPersonCampaignName } from '@/utils/shared/userActionCampaigns'
 
 const logger = getLogger(`actionCreateUserActionTweetedAtPerson`)
@@ -60,7 +62,7 @@ const CAMPAIGN_DURATION: Record<UserActionTweetAtPersonCampaignName, CampaignDur
   },
   [UserActionTweetAtPersonCampaignName['2024_05_22_PIZZA_DAY']]: {
     START_TIME: new Date('2024-05-19'),
-    END_TIME: new Date('2024-05-22'),
+    END_TIME: new Date('2024-05-24'),
   },
 }
 
@@ -78,20 +80,23 @@ async function _actionCreateUserActionTweetedAtPerson(input: CreateActionTweetAt
   }
 
   if (
-    !process.env.NEXT_PUBLIC_BYPASS_TWEETED_AT_PERSON_CAMPAIGN_DURATION_CHECK &&
+    toBool(!process.env.NEXT_PUBLIC_BYPASS_TWEETED_AT_PERSON_CAMPAIGN_DURATION_CHECK) &&
     NEXT_PUBLIC_ENVIRONMENT === 'production'
   ) {
     const currentTime = Date.now()
     const campaignDuration = CAMPAIGN_DURATION[validatedInput.data.campaignName]
 
-    if (campaignDuration.START_TIME && currentTime < campaignDuration.START_TIME.getTime()) {
+    if (
+      campaignDuration.START_TIME &&
+      isBefore(currentTime, campaignDuration.START_TIME.getTime())
+    ) {
       return {
         errors: {
           campaignName: ['This campaign is not live yet.'],
         },
       }
     }
-    if (campaignDuration.END_TIME && currentTime > campaignDuration.END_TIME.getTime()) {
+    if (campaignDuration.END_TIME && isAfter(currentTime, campaignDuration.END_TIME.getTime())) {
       return {
         errors: {
           campaignName: ['This campaign is no longer live.'],
@@ -168,7 +173,7 @@ async function createUser(sharedDependencies: Pick<SharedDependencies, 'localUse
   logger.info('created user')
 
   if (localUser?.persisted) {
-    await getServerPeopleAnalytics({ localUser, userId: createdUser.id }).setOnce(
+    getServerPeopleAnalytics({ localUser, userId: createdUser.id }).setOnce(
       mapPersistedLocalUserToAnalyticsProperties(localUser.persisted),
     )
   }
@@ -196,7 +201,7 @@ async function logSpamActionSubmissions({
   validatedInput: z.SafeParseSuccess<CreateActionTweetAtPersonInput>
   sharedDependencies: Pick<SharedDependencies, 'analytics'>
 }) {
-  await sharedDependencies.analytics.trackUserActionCreatedIgnored({
+  sharedDependencies.analytics.trackUserActionCreatedIgnored({
     actionType: UserActionType.TWEET_AT_PERSON,
     campaignName: validatedInput.data.campaignName,
     reason: 'Too Many Recent',
@@ -240,7 +245,7 @@ async function createAction<U extends User>({
 
   logger.info('created user action')
 
-  await sharedDependencies.analytics.trackUserActionCreated({
+  sharedDependencies.analytics.trackUserActionCreated({
     actionType: UserActionType.TWEET_AT_PERSON,
     campaignName: validatedInput.campaignName,
     userState: isNewUser ? 'New' : 'Existing',

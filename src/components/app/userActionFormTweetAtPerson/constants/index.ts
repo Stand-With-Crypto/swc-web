@@ -1,4 +1,3 @@
-import { NFTSlug } from '@/utils/shared/nft'
 import { UserActionTweetAtPersonCampaignName } from '@/utils/shared/userActionCampaigns'
 
 export const ANALYTICS_NAME_USER_ACTION_FORM_TWEET_AT_PERSON = 'User Action Form Tweet At Person'
@@ -10,10 +9,6 @@ export enum TweetAtPersonSectionNames {
   ONBOARDING = 'Onboarding',
   TWEET = 'Tweet',
   SUCCESS = 'Success',
-}
-
-export const PIZZA_DAY_LIVE_EVENT_SLUG_NFT_METADATA: Record<string, NFTSlug> = {
-  '2024_05_22_PIZZA_DAY': NFTSlug.PIZZA_DAY_2024_05_22,
 }
 
 type Message = 'title' | 'analyticsName'
