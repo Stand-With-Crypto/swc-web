@@ -27,7 +27,7 @@ export function OnboardingTweetAtPersonCampaign({
         src="https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/swc_pizza_day_2024_nft.mp4"
       />
 
-      <PageTitle as="h3" className="mb-4 mt-6 lg:my-8" size="md">
+      <PageTitle as="h3" className="mb-4 mt-6 lg:my-6 lg:text-[2rem]" size="md">
         Tweet your rep. Get a free NFT. 🍕
       </PageTitle>
       <p className="text-center text-fontcolor-muted">

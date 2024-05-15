@@ -6,4 +6,4 @@ export const TURN_OFF_NFT_MINT = true
 /*
 This flag turns shows the pizza day activation navbar alert
 */
-export const SHOW_PIZZA_DAY_ACTIVATION_NAVBAR_ALERT = true
+export const SHOW_PIZZA_DAY_ACTIVATION_NAVBAR_ALERT = false

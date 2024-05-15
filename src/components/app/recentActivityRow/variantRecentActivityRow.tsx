@@ -204,7 +204,7 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
           ),
           children: (
             <MainText>
-              Bitcoin Pizza Day 🍕 activation sent{' '}
+              Bitcoin Pizza Day 🍕 tweet sent{' '}
               {action.person ? (
                 <>
                   {'to '}
