@@ -248,6 +248,11 @@ const nextConfig = {
         destination: '/races',
         permanent: false,
       },
+      {
+        source: '/locations/us/:paths*',
+        destination: '/races/:paths*',
+        permanent: true,
+      },
     ]
   },
 }
