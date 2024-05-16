@@ -205,7 +205,7 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
           children: (
             <MainText>
               Bitcoin Pizza Day 🍕 tweet sent{' '}
-              {action.person ? (
+              {action.person && (
                 <>
                   {'to '}
                   <DTSIPersonName
@@ -213,8 +213,6 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
                     person={action.person}
                   />
                 </>
-              ) : (
-                'on X'
               )}
             </MainText>
           ),
