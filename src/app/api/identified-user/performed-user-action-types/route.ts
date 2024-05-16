@@ -1,6 +1,6 @@
 import 'server-only'
 
-import { uniq } from 'lodash-es'
+import { uniqBy } from 'lodash-es'
 import { NextResponse } from 'next/server'
 
 import { getMaybeUserAndMethodOfMatchWithMaybeSession } from '@/utils/server/getMaybeUserAndMethodOfMatch'
@@ -18,8 +18,9 @@ async function apiResponseForUserPerformedUserActionTypes() {
     },
   })
 
-  const performedUserActionTypes = uniq(
+  const performedUserActionTypes = uniqBy(
     user?.userActions.map(({ actionType, campaignName }) => ({ actionType, campaignName })),
+    ({ actionType, campaignName }) => `${actionType}-${campaignName}`,
   )
   return { performedUserActionTypes }
 }
