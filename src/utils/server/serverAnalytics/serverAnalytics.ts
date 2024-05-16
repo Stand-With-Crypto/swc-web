@@ -1,6 +1,5 @@
 import { UserActionType } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
-import { track as vercelTrack } from '@vercel/analytics/server'
 import { PropertyDict } from 'mixpanel'
 import { promisify } from 'util'
 
@@ -12,7 +11,6 @@ import {
 import { getLogger } from '@/utils/shared/logger'
 import { resolveWithTimeout } from '@/utils/shared/resolveWithTimeout'
 import { AnalyticProperties } from '@/utils/shared/sharedAnalytics'
-import { formatVercelAnalyticsEventProperties } from '@/utils/shared/vercelAnalytics'
 
 import { ANALYTICS_FLUSH_TIMEOUT_MS, mixpanel } from './shared'
 
@@ -84,15 +82,6 @@ export function getServerAnalytics(config: ServerAnalyticsConfig) {
         distinct_id: config.userId,
       }).catch(onError({ eventName, eventProperties })),
     )
-
-    if (process.env.VERCEL_URL) {
-      trackingRequests.push(
-        vercelTrack(
-          eventName,
-          eventProperties && formatVercelAnalyticsEventProperties(eventProperties),
-        ).catch(onError({ eventName, eventProperties })),
-      )
-    }
 
     return { flush }
   }

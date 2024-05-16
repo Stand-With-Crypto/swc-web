@@ -1,4 +1,3 @@
-import { track as vercelTrack } from '@vercel/analytics'
 import mixpanel from 'mixpanel-browser'
 
 import { isCypress, isStorybook } from '@/utils/shared/executionEnvironment'
@@ -6,7 +5,6 @@ import { mapPersistedLocalUserToExperimentAnalyticsProperties } from '@/utils/sh
 import { customLogger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { AnalyticProperties } from '@/utils/shared/sharedAnalytics'
-import { formatVercelAnalyticsEventProperties } from '@/utils/shared/vercelAnalytics'
 import { getClientCookieConsent } from '@/utils/web/clientCookieConsent'
 import { getLocalUser } from '@/utils/web/clientLocalUser'
 
@@ -62,7 +60,6 @@ export function trackClientAnalytic(eventName: string, _eventProperties?: Analyt
   const hasTargetingEnabled = getClientCookieConsent().targeting
   if (environmentHasAnalyticsEnabled && hasTargetingEnabled) {
     mixpanel.track(eventName, eventProperties)
-    vercelTrack(eventName, eventProperties && formatVercelAnalyticsEventProperties(eventProperties))
   }
 }
 
