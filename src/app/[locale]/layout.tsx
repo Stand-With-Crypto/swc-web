@@ -82,7 +82,6 @@ export default function Layout({ children, params }: PageProps & { children: Rea
         </TopLevelClientLogic>
         <Toaster />
         <CookieConsent locale={locale} />
-        {/* <Analytics debug={false} /> */}
         <SpeedInsights debug={false} sampleRate={0.01} />
       </body>
     </html>

@@ -66,7 +66,6 @@
     "@udecode/plate": "^29.0.1",
     "@upstash/ratelimit": "^1.0.0",
     "@upstash/redis": "^1.28.4",
-    "@vercel/analytics": "^1.1.2",
     "@vercel/og": "^0.6.1",
     "@vercel/speed-insights": "^1.0.5",
     "bowser": "^2.11.0",
