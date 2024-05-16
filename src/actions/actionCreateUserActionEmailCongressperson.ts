@@ -159,6 +159,7 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
   analytics.trackUserActionCreated({
     actionType,
     campaignName,
+    'Recipient DTSI Slug': validatedFields.data.dtsiSlugs,
     creationMethod: 'On Site',
     userState,
     ...convertAddressToAnalyticsProperties(validatedFields.data.address),
