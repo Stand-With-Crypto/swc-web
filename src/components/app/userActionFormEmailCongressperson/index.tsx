@@ -75,7 +75,7 @@ const getDefaultValues = ({
       lastName: user.lastName,
       emailAddress: user.primaryUserEmailAddress?.emailAddress || '',
       message: getDefaultText({ dtsiSlugs, firstName, lastName }),
-      address: user.address
+      address: user.address?.route
         ? {
             description: user.address.formattedDescription,
             place_id: user.address.googlePlaceId,
