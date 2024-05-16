@@ -57,7 +57,9 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
   const { userLocationDetails } = action.user
   const isStateAvailable = userLocationDetails?.administrativeAreaLevel1
   const { data } = useApiResponseForUserPerformedUserActionTypes()
-  const hasSignedUp = data?.performedUserActionTypes.includes(UserActionType.OPT_IN)
+  const hasSignedUp = data?.performedUserActionTypes.some(
+    performedAction => performedAction.actionType === UserActionType.OPT_IN,
+  )
   const newUserStateOrJoin = isStateAvailable
     ? `from ${userLocationDetails.administrativeAreaLevel1} joined`
     : 'joined'
