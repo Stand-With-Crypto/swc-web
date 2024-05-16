@@ -12,6 +12,7 @@ import { mockCreateUserActionDonationInput } from '@/mocks/models/mockUserAction
 import { mockCreateUserActionEmailInput } from '@/mocks/models/mockUserActionEmail'
 import { mockCreateUserActionEmailRecipientInput } from '@/mocks/models/mockUserActionEmailRecipient'
 import { mockCreateUserActionOptInInput } from '@/mocks/models/mockUserActionOptIn'
+import { mockUserActionTweetAtPerson } from '@/mocks/models/mockUserActionTweetAtPerson'
 import { mockCreateUserActionVoterRegistrationInput } from '@/mocks/models/mockUserActionVoterRegistration'
 import { mockCreateUserCryptoAddressInput } from '@/mocks/models/mockUserCryptoAddress'
 import { mockCreateUserEmailAddressInput } from '@/mocks/models/mockUserEmailAddress'
@@ -196,6 +197,17 @@ async function createAction(user: Awaited<ReturnType<typeof createUser>>) {
           userActionVoterRegistration: {
             create: {
               ...mockCreateUserActionVoterRegistrationInput(),
+            },
+          },
+        },
+      })
+    case UserActionType.TWEET_AT_PERSON:
+      return prismaClient.userAction.create({
+        data: {
+          ...mockAction,
+          userActionTweetAtPerson: {
+            create: {
+              ...mockUserActionTweetAtPerson(),
             },
           },
         },

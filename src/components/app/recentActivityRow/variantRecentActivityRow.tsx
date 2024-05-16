@@ -197,9 +197,25 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
       }
       case UserActionType.TWEET_AT_PERSON: {
         return {
-          onFocusContent: undefined,
-          // This text is temporary. It'll be different on the feature PR
-          children: <MainText>Tweeted at person</MainText>,
+          onFocusContent: () => (
+            <LoginDialogWrapper>
+              <Button>Join</Button>
+            </LoginDialogWrapper>
+          ),
+          children: (
+            <MainText>
+              Bitcoin Pizza Day 🍕 tweet sent{' '}
+              {action.person && (
+                <>
+                  {'to '}
+                  <DTSIPersonName
+                    href={urls.politicianDetails(action.person.slug)}
+                    person={action.person}
+                  />
+                </>
+              )}
+            </MainText>
+          ),
         }
       }
     }

@@ -25,7 +25,21 @@ import { getSensitiveDataUserDisplayName } from '@/utils/web/userUtils'
 
 import { UserReferralUrl } from './userReferralUrl'
 
-const EXCLUDE_USER_ACTION_TYPES = [UserActionType.LIVE_EVENT]
+const USER_ACTIONS_AVAILABLE_FOR_CTA: Record<UserActionType, boolean> = {
+  [UserActionType.CALL]: true,
+  [UserActionType.EMAIL]: true,
+  [UserActionType.DONATION]: true,
+  [UserActionType.NFT_MINT]: true,
+  [UserActionType.OPT_IN]: true,
+  [UserActionType.TWEET]: true,
+  [UserActionType.VOTER_REGISTRATION]: true,
+  [UserActionType.LIVE_EVENT]: false,
+  [UserActionType.TWEET_AT_PERSON]: false,
+}
+
+const USER_ACTIONS_EXCLUDED_FROM_CTA = Object.entries(USER_ACTIONS_AVAILABLE_FOR_CTA)
+  .filter(([_, value]) => !value)
+  .map(([key, _]) => key as UserActionType)
 
 interface PageUserProfile extends PageProps {
   user: PageUserProfileUser | null
@@ -55,8 +69,8 @@ export function PageUserProfile({ params, searchParams, user }: PageUserProfile)
   const { userActions } = user
   const performedUserActionTypes = uniq(userActions.map(x => x.actionType))
   const excludeUserActionTypes = user.hasEmbeddedWallet
-    ? [UserActionType.NFT_MINT, ...EXCLUDE_USER_ACTION_TYPES]
-    : EXCLUDE_USER_ACTION_TYPES
+    ? [UserActionType.NFT_MINT, ...USER_ACTIONS_EXCLUDED_FROM_CTA]
+    : USER_ACTIONS_EXCLUDED_FROM_CTA
   const numActionsCompleted = performedUserActionTypes.filter(
     action => !excludeUserActionTypes.includes(action),
   ).length

@@ -59,4 +59,13 @@ export const NFT_CLIENT_METADATA: Record<NFTSlug, NFTClientMetadata> = {
       alt: 'a square image of the SWC shield with the california state shape inside of it',
     },
   },
+  [NFTSlug.PIZZA_DAY_2024_05_22]: {
+    name: '2024-05-22 Pizza Day',
+    image: {
+      url: '/nfts/2024-05-22-pizza-day.gif',
+      width: 654,
+      height: 366,
+      alt: 'Pizza and bitcoin tags that transform into the SWC shield',
+    },
+  },
 }

@@ -24,5 +24,12 @@ export const fragmentDTSIPersonCard = /* GraphQL */ `
       status
       title
     }
+    twitterAccounts {
+      accountType
+      id
+      personId
+      state
+      username
+    }
   }
 `

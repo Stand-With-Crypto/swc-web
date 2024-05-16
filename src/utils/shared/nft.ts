@@ -5,4 +5,5 @@ export enum NFTSlug {
   STAND_WITH_CRYPTO_LEGACY = 'stand-with-crypto', // L1 (Ethereum) NFT that is manually minted by the user.
   STAND_WITH_CRYPTO_SUPPORTER = 'stand-with-crypto-supporter', // L2 (Base) NFT that is manually minted by the user.
   LA_CRYPTO_EVENT_2024_03_04 = 'la-crypto-event-2024-03-04',
+  PIZZA_DAY_2024_05_22 = 'PIZZA_DAY_2024_05_22',
 }

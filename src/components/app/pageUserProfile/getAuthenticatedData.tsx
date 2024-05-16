@@ -44,6 +44,7 @@ export async function getAuthenticatedData() {
           nftMint: true,
           userActionOptIn: true,
           userActionVoterRegistration: true,
+          userActionTweetAtPerson: true,
         },
       },
     },
@@ -58,6 +59,8 @@ export async function getAuthenticatedData() {
           dtsiSlugs.add(userActionEmailRecipient.dtsiSlug)
         }
       })
+    } else if (userAction.userActionTweetAtPerson?.recipientDtsiSlug) {
+      dtsiSlugs.add(userAction.userActionTweetAtPerson.recipientDtsiSlug)
     }
   })
   const ensData = user.primaryUserCryptoAddress

@@ -129,21 +129,23 @@ export const getClientUserAction = ({
         }
       : null,
   }
-  switch (actionType) {
-    case UserActionType.OPT_IN: {
+
+  const actionTypes: { [key in UserActionType]: () => ClientModel<ClientUserAction> } = {
+    [UserActionType.OPT_IN]: () => {
       const { optInType } = getRelatedModel(record, 'userActionOptIn')
-      const optInFields: ClientUserActionOptIn = { optInType, actionType }
+      const optInFields: ClientUserActionOptIn = { optInType, actionType: UserActionType.OPT_IN }
       return getClientModel({ ...sharedProps, ...optInFields })
-    }
-    case UserActionType.CALL: {
+    },
+
+    [UserActionType.CALL]: () => {
       const { recipientDtsiSlug } = getRelatedModel(record, 'userActionCall')
       const callFields: ClientUserActionCall = {
         person: recipientDtsiSlug ? peopleBySlug[recipientDtsiSlug] : null,
-        actionType,
+        actionType: UserActionType.CALL,
       }
       return getClientModel({ ...sharedProps, ...callFields })
-    }
-    case UserActionType.DONATION: {
+    },
+    [UserActionType.DONATION]: () => {
       const { amount, amountCurrencyCode, amountUsd, recipient } = getRelatedModel(
         record,
         'userActionDonation',
@@ -153,49 +155,59 @@ export const getClientUserAction = ({
         amountUsd: amountUsd.toNumber(),
         amountCurrencyCode,
         recipient,
-        actionType,
+        actionType: UserActionType.DONATION,
       }
       return getClientModel({ ...sharedProps, ...donationFields })
-    }
-    case UserActionType.EMAIL: {
+    },
+    [UserActionType.EMAIL]: () => {
       const { userActionEmailRecipients } = getRelatedModel(record, 'userActionEmail')
       const emailFields: ClientUserActionEmail = {
-        actionType,
+        actionType: UserActionType.EMAIL,
         userActionEmailRecipients: userActionEmailRecipients.map(x => ({
           id: x.id,
           person: x.dtsiSlug ? peopleBySlug[x.dtsiSlug] : null,
         })),
       }
       return getClientModel({ ...sharedProps, ...emailFields })
-    }
-    case UserActionType.NFT_MINT: {
+    },
+    [UserActionType.NFT_MINT]: () => {
       const mintFields: ClientUserActionNFTMint = {
-        actionType,
+        actionType: UserActionType.NFT_MINT,
         nftMint: sharedProps.nftMint!,
       }
       return getClientModel({ ...sharedProps, ...mintFields })
-    }
-    case UserActionType.TWEET: {
-      return getClientModel({ ...sharedProps, actionType })
-    }
-    case UserActionType.VOTER_REGISTRATION: {
+    },
+    [UserActionType.TWEET]: () => {
+      return getClientModel({ ...sharedProps, actionType: UserActionType.TWEET })
+    },
+    [UserActionType.VOTER_REGISTRATION]: () => {
       const { usaState } = getRelatedModel(record, 'userActionVoterRegistration')
-      const voterRegistrationFields: ClientUserActionVoterRegistration = { usaState, actionType }
+      const voterRegistrationFields: ClientUserActionVoterRegistration = {
+        usaState,
+        actionType: UserActionType.VOTER_REGISTRATION,
+      }
       return getClientModel({ ...sharedProps, ...voterRegistrationFields })
-    }
-    case UserActionType.LIVE_EVENT: {
+    },
+    [UserActionType.LIVE_EVENT]: () => {
       const campaignName = record.campaignName as UserActionLiveEventCampaignName
-      return getClientModel({ ...sharedProps, actionType, campaignName })
-    }
-    case UserActionType.TWEET_AT_PERSON: {
+      return getClientModel({ ...sharedProps, actionType: UserActionType.LIVE_EVENT, campaignName })
+    },
+    [UserActionType.TWEET_AT_PERSON]: () => {
       const { recipientDtsiSlug } = getRelatedModel(record, 'userActionTweetAtPerson')
       const tweetAtPersonFields: ClientUserActionTweetAtPerson = {
         person: recipientDtsiSlug ? peopleBySlug[recipientDtsiSlug] : null,
         campaignName: record.campaignName as UserActionTweetAtPersonCampaignName,
-        actionType,
+        actionType: UserActionType.TWEET_AT_PERSON,
       }
       return getClientModel({ ...sharedProps, ...tweetAtPersonFields })
-    }
+    },
   }
-  throw new Error(`getClientUserAction: no user action fk found for id ${id}`)
+
+  const getClientModelFromActionType = actionTypes[actionType]
+
+  if (!getClientModelFromActionType) {
+    throw new Error(`getClientUserAction: no user action fk found for id ${id}`)
+  }
+
+  return getClientModelFromActionType()
 }

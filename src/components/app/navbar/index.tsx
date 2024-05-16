@@ -8,12 +8,14 @@ import { Menu, X } from 'lucide-react'
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { NavbarLoggedInButton } from '@/components/app/navbar/navbarLoggedInButton'
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
+import { UserActionFormTweetAtPersonDialog } from '@/components/app/userActionFormTweetAtPerson/dialog'
 import { Button } from '@/components/ui/button'
 import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/drawer'
 import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
 import { useDialog } from '@/hooks/useDialog'
 import { SupportedLocale } from '@/intl/locales'
+import { SHOW_PIZZA_DAY_ACTIVATION_NAVBAR_ALERT } from '@/utils/shared/killSwitches'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
@@ -79,6 +81,23 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
               <InternalLink className="text-fontcolor underline" href={urls.internalHomepage()}>
                 Internal Pages
               </InternalLink>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {SHOW_PIZZA_DAY_ACTIVATION_NAVBAR_ALERT && (
+        <div className="flex h-16 bg-primary-cta">
+          <div className="align-center container flex items-center justify-between gap-4 ">
+            <p className="flex-shrink text-sm font-bold text-white sm:text-base">
+              Tweet your representative and get a free NFT 🍕
+            </p>
+            <div className="xs:text-xs space-x-3 text-sm">
+              <UserActionFormTweetAtPersonDialog>
+                <Button className="font-bold text-fontcolor" size="sm" variant="secondary">
+                  Get started
+                </Button>
+              </UserActionFormTweetAtPersonDialog>
             </div>
           </div>
         </div>
