@@ -12,13 +12,15 @@ async function apiResponseForUserPerformedUserActionTypes() {
     prisma: {
       include: {
         userActions: {
-          select: { id: true, actionType: true },
+          select: { id: true, actionType: true, campaignName: true },
         },
       },
     },
   })
 
-  const performedUserActionTypes = uniq(user?.userActions.map(({ actionType }) => actionType))
+  const performedUserActionTypes = uniq(
+    user?.userActions.map(({ actionType, campaignName }) => ({ actionType, campaignName })),
+  )
   return { performedUserActionTypes }
 }
 
