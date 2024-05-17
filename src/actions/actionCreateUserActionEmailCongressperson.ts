@@ -159,6 +159,7 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
   analytics.trackUserActionCreated({
     actionType,
     campaignName,
+    'Recipient DTSI Slug': validatedFields.data.dtsiSlugs,
     creationMethod: 'On Site',
     userState,
     ...convertAddressToAnalyticsProperties(validatedFields.data.address),
@@ -187,7 +188,7 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
     opts: {
       isEmailOptin: true,
     },
-    emailSubject: 'Support FIT21',
+    emailSubject: 'Vote Yes on FIT21 to protect 52M American Consumers',
     emailMessage: validatedFields.data.message,
   }
   await inngest.send({

@@ -1,4 +1,7 @@
+import { z } from 'zod'
+
 import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
+import { GenericErrorFormValues } from '@/utils/web/formUtils'
 import { zodGooglePlacesAutocompletePrediction } from '@/validation/fields/zodGooglePlacesAutocompletePrediction'
 import { zodFirstName, zodLastName } from '@/validation/fields/zodName'
 import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
@@ -17,12 +20,20 @@ export const zodUpdateUserProfileFormFields = zodUpdateUserProfileBase
 // they dont fill out their first/last name, but this causes issues because we stop showing the checkbox
 // but a user can still modify their profile and remove their first/last name, causing the form to break (wont submit but no errors are displayed)
 
-export const zodUpdateUserProfileFormFieldsRequired = zodUpdateUserProfileBase
+export type UpdateProfileFormValues = z.infer<typeof zodUpdateUserProfileFormFields> &
+  GenericErrorFormValues
+
+export const zodUpdateUserProfileWithRequiredFormFields = zodUpdateUserProfileBase
   .omit({ phoneNumber: true })
   .extend({
-    phoneNumber: zodPhoneNumber.transform(str => str && normalizePhoneNumber(str)),
     firstName: zodFirstName,
     lastName: zodLastName,
     address: zodGooglePlacesAutocompletePrediction,
+    phoneNumber: zodPhoneNumber.transform(str => str && normalizePhoneNumber(str)),
   })
   .superRefine(zodUpdateUserProfileBaseSuperRefine)
+
+export type UpdateProfileWithRequiredFieldsFormValues = z.infer<
+  typeof zodUpdateUserProfileWithRequiredFormFields
+> &
+  GenericErrorFormValues

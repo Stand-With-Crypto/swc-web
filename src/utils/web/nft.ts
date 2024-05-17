@@ -1,9 +1,13 @@
+import type { ValidContractInstance } from '@thirdweb-dev/sdk'
+
 import { NFTSlug } from '@/utils/shared/nft'
 
-export interface NFTClientMetadata {
-  name: string
+export type ContractMetadata = Awaited<ReturnType<ValidContractInstance['metadata']['get']>>
+
+export interface NFTClientMetadata extends Pick<ContractMetadata, 'name' | 'description'> {
   image: { url: string; width: number; height: number; alt: string }
 }
+
 export const NFT_CLIENT_METADATA: Record<NFTSlug, NFTClientMetadata> = {
   [NFTSlug.SWC_SHIELD]: {
     name: 'SWC Shield',
@@ -43,6 +47,7 @@ export const NFT_CLIENT_METADATA: Record<NFTSlug, NFTClientMetadata> = {
   },
   [NFTSlug.STAND_WITH_CRYPTO_SUPPORTER]: {
     name: 'Stand With Crypto Supporter',
+    description: `This collectible commemorates the launch of the Stand With Crypto Alliance on August 14, 2023.\n\nPriced at 0.00435 ETH, this represents the 435 congressional districts in the U.S. All proceeds benefit the Alliance.\n\nSecure yours on standwithcrypto.org.`,
     image: {
       url: '/nfts/swc-supporter.gif',
       width: 160,
@@ -57,6 +62,15 @@ export const NFT_CLIENT_METADATA: Record<NFTSlug, NFTClientMetadata> = {
       width: 160,
       height: 160,
       alt: 'a square image of the SWC shield with the california state shape inside of it',
+    },
+  },
+  [NFTSlug.PIZZA_DAY_2024_05_22]: {
+    name: '2024-05-22 Pizza Day',
+    image: {
+      url: '/nfts/2024-05-22-pizza-day.gif',
+      width: 654,
+      height: 366,
+      alt: 'Pizza and bitcoin tags that transform into the SWC shield',
     },
   },
 }

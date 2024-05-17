@@ -70,4 +70,14 @@ export const INDUSTRY_PARTNERS = [
     imageSrc: '/partners/moonpay.svg',
     url: 'https://www.moonpay.com/',
   },
+  {
+    title: 'Consensys',
+    imageSrc: '/partners/consensys.png',
+    url: 'https://consensys.io/',
+  },
+  {
+    title: 'Kraken',
+    imageSrc: '/partners/kraken.svg',
+    url: 'https://www.kraken.com/',
+  },
 ]

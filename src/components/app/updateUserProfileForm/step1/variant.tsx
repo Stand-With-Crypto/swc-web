@@ -9,7 +9,7 @@ import { z } from 'zod'
 
 import { actionUpdateUserProfile } from '@/actions/actionUpdateUserProfile'
 import { ClientAddress } from '@/clientModels/clientAddress'
-import { SensitiveDataClientUserWithENSData } from '@/clientModels/clientUser/sensitiveDataClientUser'
+import { SensitiveDataClientUser } from '@/clientModels/clientUser/sensitiveDataClientUser'
 import { SWCMembershipDialog } from '@/components/app/updateUserProfileForm/swcMembershipDialog'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -34,16 +34,17 @@ import {
 } from '@/utils/web/formUtils'
 import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
-import { zodUpdateUserProfileFormFieldsRequired } from '@/validation/forms/zodUpdateUserProfile/zodUpdateUserProfileFormFields'
+import { zodUpdateUserProfileWithRequiredFormFields } from '@/validation/forms/zodUpdateUserProfile/zodUpdateUserProfileFormFields'
 
 const FORM_NAME = 'User Profile'
-type FormValues = z.infer<typeof zodUpdateUserProfileFormFieldsRequired> & GenericErrorFormValues
+type FormValues = z.infer<typeof zodUpdateUserProfileWithRequiredFormFields> &
+  GenericErrorFormValues
 
 export function UpdateUserProfileForm({
   user,
   onSuccess,
 }: {
-  user: SensitiveDataClientUserWithENSData & { address: ClientAddress | null }
+  user: SensitiveDataClientUser & { address: ClientAddress | null }
   onSuccess: (updatedUserFields: { firstName: string; lastName: string }) => void
 }) {
   const router = useRouter()
@@ -63,7 +64,7 @@ export function UpdateUserProfileForm({
       : undefined,
   })
   const form = useForm<FormValues>({
-    resolver: zodResolver(zodUpdateUserProfileFormFieldsRequired),
+    resolver: zodResolver(zodUpdateUserProfileWithRequiredFormFields),
     defaultValues: defaultValues.current,
   })
 

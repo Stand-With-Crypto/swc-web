@@ -1,6 +1,6 @@
 import 'server-only'
 
-import { uniq } from 'lodash-es'
+import { uniqBy } from 'lodash-es'
 import { NextResponse } from 'next/server'
 
 import { getMaybeUserAndMethodOfMatchWithMaybeSession } from '@/utils/server/getMaybeUserAndMethodOfMatch'
@@ -12,13 +12,16 @@ async function apiResponseForUserPerformedUserActionTypes() {
     prisma: {
       include: {
         userActions: {
-          select: { id: true, actionType: true },
+          select: { id: true, actionType: true, campaignName: true },
         },
       },
     },
   })
 
-  const performedUserActionTypes = uniq(user?.userActions.map(({ actionType }) => actionType))
+  const performedUserActionTypes = uniqBy(
+    user?.userActions.map(({ actionType, campaignName }) => ({ actionType, campaignName })),
+    ({ actionType, campaignName }) => `${actionType}-${campaignName}`,
+  )
   return { performedUserActionTypes }
 }
 

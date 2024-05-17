@@ -1,4 +1,5 @@
 import * as Sentry from '@sentry/nextjs'
+import pRetry from 'p-retry'
 
 import { builderIOClient } from '@/utils/server/builderIO/client'
 import { zodQuestionnaireSchemaValidation } from '@/utils/shared/getSWCQuestionnaire'
@@ -7,13 +8,17 @@ import { getLogger } from '@/utils/shared/logger'
 const logger = getLogger(`builderIOQuestionnaire`)
 export async function getQuestionnaire(DTSISlug: string) {
   try {
-    const entry = await builderIOClient.get('questionnaire', {
-      query: {
-        data: {
-          dtsiSlug: DTSISlug,
-        },
-      },
-    })
+    const entry = await pRetry(
+      () =>
+        builderIOClient.get('questionnaire', {
+          query: {
+            data: {
+              dtsiSlug: DTSISlug,
+            },
+          },
+        }),
+      { retries: 3, minTimeout: 5000 },
+    )
 
     const isValidResponse = zodQuestionnaireSchemaValidation.safeParse(entry)
 

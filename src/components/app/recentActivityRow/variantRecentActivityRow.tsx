@@ -57,7 +57,9 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
   const { userLocationDetails } = action.user
   const isStateAvailable = userLocationDetails?.administrativeAreaLevel1
   const { data } = useApiResponseForUserPerformedUserActionTypes()
-  const hasSignedUp = data?.performedUserActionTypes.includes(UserActionType.OPT_IN)
+  const hasSignedUp = data?.performedUserActionTypes.some(
+    performedAction => performedAction.actionType === UserActionType.OPT_IN,
+  )
   const newUserStateOrJoin = isStateAvailable
     ? `from ${userLocationDetails.administrativeAreaLevel1} joined`
     : 'joined'
@@ -197,9 +199,25 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
       }
       case UserActionType.TWEET_AT_PERSON: {
         return {
-          onFocusContent: undefined,
-          // This text is temporary. It'll be different on the feature PR
-          children: <MainText>Tweeted at person</MainText>,
+          onFocusContent: () => (
+            <LoginDialogWrapper>
+              <Button>Join</Button>
+            </LoginDialogWrapper>
+          ),
+          children: (
+            <MainText>
+              Bitcoin Pizza Day 🍕 tweet sent{' '}
+              {action.person && (
+                <>
+                  {'to '}
+                  <DTSIPersonName
+                    href={urls.politicianDetails(action.person.slug)}
+                    person={action.person}
+                  />
+                </>
+              )}
+            </MainText>
+          ),
         }
       }
     }

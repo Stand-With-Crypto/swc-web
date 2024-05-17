@@ -46,6 +46,7 @@ function useCurrentUserAddress() {
   return address
 }
 
+export type UseMutableCurrentUserAddressReturn = ReturnType<typeof useMutableCurrentUserAddress>
 export function useMutableCurrentUserAddress() {
   const currentUserAddress = useCurrentUserAddress()
   const [address, _setAddress] = useState(currentUserAddress)

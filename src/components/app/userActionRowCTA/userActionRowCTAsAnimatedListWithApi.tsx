@@ -12,10 +12,13 @@ export function UserActionRowCTAsAnimatedListWithApi({
   excludeUserActionTypes,
 }: UserActionRowCTAsListWithApiProps) {
   const { data } = useApiResponseForUserPerformedUserActionTypes()
+  const performedUserActions = data?.performedUserActionTypes.map(
+    performedAction => performedAction.actionType,
+  )
   return (
     <UserActionRowCTAsAnimatedList
       excludeUserActionTypes={excludeUserActionTypes}
-      performedUserActionTypes={data?.performedUserActionTypes}
+      performedUserActionTypes={performedUserActions}
     />
   )
 }

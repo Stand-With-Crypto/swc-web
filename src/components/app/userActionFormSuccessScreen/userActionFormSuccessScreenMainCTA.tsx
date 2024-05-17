@@ -92,8 +92,8 @@ export function UserActionFormSuccessScreenMainCTA({
   )
 
   const { user, performedUserActionTypes } = data
-  const hasOptedInToMembership = performedUserActionTypes.find(
-    action => action === UserActionType.OPT_IN,
+  const hasOptedInToMembership = performedUserActionTypes.some(
+    performedAction => performedAction.actionType === UserActionType.OPT_IN,
   )
 
   if (nftWhenAuthenticated && session.isLoggedIn && !session.isLoggedInThirdweb) {

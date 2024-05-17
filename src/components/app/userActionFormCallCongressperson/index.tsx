@@ -55,7 +55,7 @@ export function UserActionFormCallCongressperson({
 
   const initialAddress = initialValues?.address
     ? initialValues.address
-    : user?.address
+    : user?.address?.route
       ? { place_id: user.address.googlePlaceId, description: user.address.formattedDescription }
       : undefined
   const { data: resolvedCongressPersonData, isLoading: isLoadingInitialCongresspersonData } =

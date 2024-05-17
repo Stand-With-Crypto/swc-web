@@ -3,6 +3,12 @@
 describe('page - homepage interactions', () => {
   beforeEach(() => {
     cy.seedDb().then(() => {
+      // Manually revalidate the homepage data
+      cy.request({
+        method: 'GET',
+        url: `api/internal/manually-revalidate-path?secret=${Cypress.env('SWC_INTERNAL_ENDPOINTS_SECRET')}&paths=/`,
+      })
+      // NOTE: `revalidatePath` only invalidates the cache when the path is next visited.
       cy.visit('/')
       cy.queryDb('SELECT * FROM user').then((result: any) => {
         expect(result.length, 'users to exist in database').to.greaterThan(0)

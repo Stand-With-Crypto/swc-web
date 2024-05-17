@@ -65,6 +65,7 @@ export const ACTION_NFT_SLUG: Record<
   },
   [UserActionType.TWEET_AT_PERSON]: {
     [UserActionTweetAtPersonCampaignName.DEFAULT]: null,
+    [UserActionTweetAtPersonCampaignName['2024_05_22_PIZZA_DAY']]: NFTSlug.PIZZA_DAY_2024_05_22,
   },
 }
 

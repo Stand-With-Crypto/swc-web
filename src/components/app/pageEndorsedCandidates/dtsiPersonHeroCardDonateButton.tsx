@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button'
 import { openWindow } from '@/utils/shared/openWindow'
 
-export function MaybeDonateButton({ donationUrl }: { donationUrl: string }) {
+export function DTSIPersonHeroCardDonateButton({ donationUrl }: { donationUrl: string }) {
   return (
     <div className="sm:p-4">
       <Button

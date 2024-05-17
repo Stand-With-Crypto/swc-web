@@ -2,10 +2,8 @@
 import React from 'react'
 import { Check } from 'lucide-react'
 
-import { CALL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormCallCongressperson/constants'
 import { UserActionFormLayout } from '@/components/app/userActionFormCommon/layout'
 import { Button } from '@/components/ui/button'
-import { getYourPoliticianCategoryDisplayName } from '@/utils/shared/yourPoliticianCategory'
 
 interface IntroProps {
   onContinue: () => void
@@ -31,23 +29,18 @@ export function IntroStaticContent({ children }: React.PropsWithChildren) {
     <UserActionFormLayout>
       <UserActionFormLayout.Container>
         <UserActionFormLayout.Heading
-          subtitle={`Call your ${getYourPoliticianCategoryDisplayName(CALL_FLOW_POLITICIANS_CATEGORY, { maxCount: 1 })} and tell them to vote YES on the FIT21 bill.`}
+          subtitle={`Call your Rep and ask them to vote YES on the FIT21 Act`}
           title="It's time to fight to keep crypto in America"
         />
         <div className="space-y-2">
           <h2 className="text-base font-semibold">Here's what you need to know:</h2>
           <ul>
             <ChecklistItem>
-              Congress is voting on a crucial bipartisan bill that could help crypto take a massive
-              leap forward
+              Congress is voting on a crucial bipartisan Act that will help protect consumers
             </ChecklistItem>
             <ChecklistItem>It won't pass without your help</ChecklistItem>
             <ChecklistItem>
-              Calling your{' '}
-              {getYourPoliticianCategoryDisplayName(CALL_FLOW_POLITICIANS_CATEGORY, {
-                maxCount: 1,
-              })}{' '}
-              is the most effective action you can take
+              Calling your member of Congress is the most effective action you can take
             </ChecklistItem>
           </ul>
         </div>

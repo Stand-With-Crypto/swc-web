@@ -248,6 +248,17 @@ const nextConfig = {
         destination: '/races',
         permanent: false,
       },
+      {
+        source: '/locations/us/:paths*',
+        destination: '/races/:paths*',
+        permanent: true,
+      },
+      // tweet at person campaigns
+      {
+        source: '/pizza',
+        destination: '/action/tweet-at-person/2024_05_22_PIZZA_DAY',
+        permanent: false,
+      },
     ]
   },
 }
