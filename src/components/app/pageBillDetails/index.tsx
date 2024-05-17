@@ -1,6 +1,7 @@
 import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
 import { AvatarGrid } from '@/components/app/pageBillDetails/avatarGrid'
 import { DTSIAvatarBox } from '@/components/app/pageBillDetails/dtsiAvatarBox'
+import { RenderRichText, RichTextNode } from '@/components/app/pageBillDetails/renderRichText'
 import { Button } from '@/components/ui/button'
 import { FormattedDatetime } from '@/components/ui/formattedDatetime'
 import { ExternalLink } from '@/components/ui/link'
@@ -12,7 +13,11 @@ import { SupportedLocale } from '@/intl/locales'
 import { convertDTSIStanceScoreToCryptoSupportLanguage } from '@/utils/dtsi/dtsiStanceScoreUtils'
 
 interface PageBillDetailsProps {
-  bill: DTSIBillDetails
+  bill: DTSIBillDetails & {
+    analysis: (DTSIBillDetails['analysis'][0] & {
+      richTextCommentary: RichTextNode[]
+    })[]
+  }
   locale: SupportedLocale
 }
 
@@ -37,6 +42,8 @@ export function PageBillDetails(props: PageBillDetailsProps) {
   const coSponsors = relationshipsByType.get(DTSI_BillPersonRelationshipType.COSPONSOR)
   const votedFor = relationshipsByType.get(DTSI_BillPersonRelationshipType.VOTED_FOR)
   const votedAgainst = relationshipsByType.get(DTSI_BillPersonRelationshipType.VOTED_AGAINST)
+
+  const analyses = bill.analysis.filter(analysis => analysis.richTextCommentary.length > 0)
 
   return (
     <div className="standard-spacing-from-navbar container space-y-16">
@@ -69,8 +76,12 @@ export function PageBillDetails(props: PageBillDetailsProps) {
         <p className="font-semibold">Analysis</p>
 
         <div className="space-y-6 text-center text-fontcolor-muted">
-          {bill.analysis.length ? (
-            bill.analysis.map(analysis => <p key={analysis.id}>{analysis.internalNotes}</p>)
+          {analyses.length ? (
+            analyses.map(analysis => (
+              <div className="space-y-2" key={analysis.id}>
+                <RenderRichText richText={analysis.richTextCommentary} />
+              </div>
+            ))
           ) : (
             <p className="text-fontcolor-muted">No analysis for this Bill yet.</p>
           )}
