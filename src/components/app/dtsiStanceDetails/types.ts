@@ -44,7 +44,7 @@ export type DTSIStanceDetailsStanceProp<
 
 export type DTSIStanceDetailsStancePassedProp = Pick<
   DTSI_PersonStance,
-  'id' | 'dateStanceMade' | 'stanceType'
+  'id' | 'dateStanceMade' | 'stanceType' | 'computedStanceScore'
 > &
   Omit<PartialButDefined<DTSIStanceDetailsQuoteProp>, 'stanceType'> &
   Omit<PartialButDefined<DTSIStanceDetailsTweetProp>, 'stanceType'> &

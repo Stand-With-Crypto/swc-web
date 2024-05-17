@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
 import { DTSIBillCard } from '@/components/app/dtsiBillCard'
 import { DTSIStanceDetailsQuote } from '@/components/app/dtsiStanceDetails/dtsiStanceDetailsQuote'
 import { DTSIStanceDetailsTweet } from '@/components/app/dtsiStanceDetails/dtsiStanceDetailsTweet'
@@ -25,9 +26,15 @@ function StanceTypeContent({ stance: passedStance, ...props }: IStanceDetailsPro
 }
 
 export function DTSIStanceDetails({ className, ...props }: IStanceDetailsProps) {
+  const stanceScore = props.stance.computedStanceScore
+
   return (
     <article className={cn('rounded-3xl bg-secondary p-4 md:p-6', className)}>
       <StanceTypeContent {...props} />
+      <CryptoSupportHighlight
+        className="mt-4 rounded-full py-2 sm:mt-6"
+        stanceScore={stanceScore}
+      />
     </article>
   )
 }
