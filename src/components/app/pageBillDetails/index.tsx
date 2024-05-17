@@ -48,6 +48,12 @@ export function PageBillDetails(props: PageBillDetailsProps) {
     <div className="standard-spacing-from-navbar container space-y-16">
       <section className="space-y-8 text-center">
         <PageTitle>{bill.shortTitle || bill.title}</PageTitle>
+        <PageSubTitle>
+          {
+            // Some bills don't have a summary but have a really long title, so we use the title as a fallback
+            bill.summary || bill.title
+          }
+        </PageSubTitle>
         <p className="font-semibold">
           <FormattedDatetime
             date={new Date(bill.datetimeCreated)}
@@ -55,12 +61,6 @@ export function PageBillDetails(props: PageBillDetailsProps) {
             locale={locale}
           />
         </p>
-        <PageSubTitle>
-          {
-            // Some bills don't have a summary but have a really long title, so we use the title as a fallback
-            bill.summary || bill.title
-          }
-        </PageSubTitle>
         <ExternalLink className="inline-block" href={bill.congressDotGovUrl}>
           {bill.congressDotGovUrl}
         </ExternalLink>

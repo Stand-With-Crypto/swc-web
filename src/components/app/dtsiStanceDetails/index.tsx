@@ -23,7 +23,7 @@ function StanceTypeContent({ stance: passedStance, ...props }: IStanceDetailsPro
     return <DTSIStanceDetailsQuote {...props} stance={stance} />
   }
   if (stance.stanceType === DTSI_PersonStanceType.BILL_RELATIONSHIP) {
-    return <DTSIBillCard bill={stance.billRelationship?.bill} className="p-0 md:p-0" {...props} />
+    return <DTSIBillCard bill={stance.billRelationship?.bill} className="p-0 sm:p-0" {...props} />
   }
   throw new Error(`invalid StanceDetails passed ${JSON.stringify(stance)}`)
 }
@@ -64,7 +64,7 @@ export function DTSIStanceDetails({ className, ...props }: IStanceDetailsProps) 
     <article className={cn('rounded-3xl bg-secondary p-4 md:p-6', className)}>
       <StanceTypeContent {...props} />
       <CryptoSupportHighlight
-        className="mt-4 rounded-full py-2 sm:mt-6"
+        className="mt-4 rounded-full py-2"
         stanceScore={stanceScore}
         text={
           /**

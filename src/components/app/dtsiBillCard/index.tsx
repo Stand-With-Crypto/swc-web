@@ -1,3 +1,4 @@
+import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
@@ -21,7 +22,7 @@ export function DTSIBillCard(props: DTSIBillCardProps) {
   return (
     <div
       className={cn(
-        'flex flex-col items-center gap-4 rounded-3xl bg-secondary p-4 md:flex-row md:gap-6 md:p-6',
+        'flex flex-col items-center gap-4 rounded-3xl bg-secondary p-4 sm:flex-row sm:gap-6 sm:p-6',
         className,
       )}
       data-testid="bill-card"
@@ -53,7 +54,7 @@ export function DTSIBillCard(props: DTSIBillCardProps) {
         <p className="line-clamp-2 text-justify">{bill.summary || bill.title}</p>
       </div>
 
-      <Button asChild className="max-md:w-full">
+      <Button asChild className="w-full sm:w-fit">
         <InternalLink href={getIntlUrls(locale).billDetails(bill.id)}>Learn More</InternalLink>
       </Button>
     </div>
