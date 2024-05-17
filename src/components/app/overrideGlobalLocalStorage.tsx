@@ -46,6 +46,25 @@ export function OverrideGlobalLocalStorage() {
           writable: false,
         })
       }
+      try {
+        sessionStorage.getItem('doesNotExist')
+      } catch (e) {
+        const sessionStorageNoop = {
+          length: 0,
+          clear: () => null,
+          getItem: () => null,
+          key: () => null,
+          removeItem: () => null,
+          setItem: () => null,
+        }
+        window.sessionStorage = sessionStorageNoop
+        Object.defineProperty(window, 'sessionStorage', {
+          value: sessionStorageNoop,
+          configurable: true,
+          enumerable: true,
+          writable: false,
+        })
+      }
       `}
     </Script>
   )
