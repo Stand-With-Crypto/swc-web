@@ -17,6 +17,12 @@ export const fragmentDTSIBillRelationships = /* GraphQL */ `
       firstNickname
       lastName
       nameSuffix
+      primaryRole {
+        status
+        roleCategory
+        title
+        primaryState
+      }
       profilePictureUrl
       profilePictureUrlDimensions
       slug

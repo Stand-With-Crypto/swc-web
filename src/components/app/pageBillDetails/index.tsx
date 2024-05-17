@@ -14,11 +14,7 @@ import { SupportedLocale } from '@/intl/locales'
 import { convertDTSIStanceScoreToCryptoSupportLanguage } from '@/utils/dtsi/dtsiStanceScoreUtils'
 
 interface PageBillDetailsProps {
-  bill: DTSIBillDetails & {
-    analysis: (DTSIBillDetails['analysis'][0] & {
-      richTextCommentary: RichTextEditorValue
-    })[]
-  }
+  bill: DTSIBillDetails
   locale: SupportedLocale
 }
 
@@ -44,7 +40,9 @@ export function PageBillDetails(props: PageBillDetailsProps) {
   const votedFor = relationshipsByType.get(DTSI_BillPersonRelationshipType.VOTED_FOR)
   const votedAgainst = relationshipsByType.get(DTSI_BillPersonRelationshipType.VOTED_AGAINST)
 
-  const analyses = bill.analysis.filter(analysis => analysis.richTextCommentary.length > 0)
+  const analyses = bill.analysis.filter(
+    analysis => (analysis.richTextCommentary as RichTextEditorValue).length > 0,
+  )
 
   return (
     <div className="standard-spacing-from-navbar container space-y-16">
