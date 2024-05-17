@@ -9,6 +9,7 @@ import { DTSIPersonHeroCardRow } from '@/components/app/dtsiPersonHeroCard/dtsiP
 import { Button } from '@/components/ui/button'
 import { GooglePlacesSelect, GooglePlacesSelectProps } from '@/components/ui/googlePlacesSelect'
 import { InternalLink } from '@/components/ui/link'
+import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { useMutableCurrentUserAddress } from '@/hooks/useCurrentUserAddress'
 import {
   formatGetDTSIPeopleFromAddressNotFoundReason,
@@ -62,12 +63,12 @@ function _ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: SupportedLo
   }
   if ('notFoundReason' in res.data) {
     return (
-      <div>
+      <PageSubTitle as="h4" size="sm">
         {formatGetDTSIPeopleFromAddressNotFoundReason(res.data)}{' '}
         <button className="font-bold text-fontcolor underline" onClick={() => setAddress(null)}>
           Try another address.
         </button>
-      </div>
+      </PageSubTitle>
     )
   }
   const people = res.data.dtsiPeople

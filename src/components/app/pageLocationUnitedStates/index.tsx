@@ -4,7 +4,6 @@ import { ContentSection } from '@/components/app/ContentSection'
 import { DarkHeroSection } from '@/components/app/darkHeroSection'
 import { DTSIPersonHeroCardSection } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardSection'
 import { PACFooter } from '@/components/app/pacFooter'
-import { UserAddressVoterGuideInput } from '@/components/app/pageLocationUnitedStates/userAddressVoterGuideInput'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
 import { Button } from '@/components/ui/button'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
@@ -19,6 +18,7 @@ import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/u
 import { cn } from '@/utils/web/cn'
 
 import { organizePeople } from './organizePeople'
+import { UserAddressVoterGuideInputSection } from './userAddressVoterGuideInput'
 
 interface LocationUnitedStatesProps extends DTSI_UnitedStatesInformationQuery {
   locale: SupportedLocale
@@ -70,15 +70,8 @@ export function LocationUnitedStates({
             title={<>Presidential Race</>}
           />
         )}
-        <ContentSection
-          className="container"
-          subtitle={
-            'Enter your address to find the key races in your area that will impact the future of crypto in the United States.'
-          }
-          title={'Your races'}
-        >
-          <UserAddressVoterGuideInput locale={locale} />
-        </ContentSection>
+        <UserAddressVoterGuideInputSection locale={locale} />
+
         {ORDERED_KEY_SENATE_RACE_STATES.map(stateCode => {
           const stateName = US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]
           const people = groups.keySenateRaceMap[stateCode]
