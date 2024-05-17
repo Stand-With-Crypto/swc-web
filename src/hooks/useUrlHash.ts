@@ -1,5 +1,7 @@
 'use client'
 
 export function useUrlHash() {
-  return window ? decodeURIComponent(window.location.hash.replace('#', '')) : ''
+  return typeof window !== 'undefined'
+    ? decodeURIComponent(window.location.hash.replace('#', ''))
+    : ''
 }
