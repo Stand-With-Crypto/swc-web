@@ -35,6 +35,8 @@ import { UseSectionsReturn } from '@/hooks/useSections'
 import { MintStatus } from '@/hooks/useSendMintNFTTransaction'
 import { useThirdwebAddress } from '@/hooks/useThirdwebAddress'
 import { SupportedCryptoCurrencyCodes } from '@/utils/shared/currency'
+import { NFTSlug } from '@/utils/shared/nft'
+import { NFT_CLIENT_METADATA } from '@/utils/web/nft'
 import { theme } from '@/utils/web/thirdweb/theme'
 
 import { QuantityInput } from './quantityInput'
@@ -71,7 +73,7 @@ export function UserActionFormNFTMintCheckout({
   debug = false,
 }: UserActionFormNFTMintCheckoutProps) {
   const { contract } = useContract(MINT_NFT_CONTRACT_ADDRESS)
-  const { data: contractMetadata, isLoading: isLoadingMetadata } = useContractMetadata(contract)
+  const contractMetadata = NFT_CLIENT_METADATA[NFTSlug.STAND_WITH_CRYPTO_SUPPORTER]
   const address = useThirdwebAddress()
 
   const checkoutError = useCheckoutError({
@@ -81,7 +83,7 @@ export function UserActionFormNFTMintCheckout({
   const maybeOverriddenCheckoutError = debug ? null : checkoutError
   const connectionStatus = useConnectionStatus()
 
-  if (!contractMetadata || isLoadingMetadata || !address) {
+  if (!address) {
     return <UserActionFormNFTMintCheckoutSkeleton />
   }
 
@@ -96,10 +98,10 @@ export function UserActionFormNFTMintCheckout({
       <UserActionFormLayout.Container>
         <div className="flex gap-6">
           <NFTDisplay
-            alt={contractMetadata.name}
+            alt={contractMetadata.image.alt}
             raw
             size="sm"
-            src={contractMetadata?.image ?? ''}
+            src={contractMetadata.image.url}
           />
 
           <div>

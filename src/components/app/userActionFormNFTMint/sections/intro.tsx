@@ -1,7 +1,5 @@
 'use client'
 
-import { ValidContractInstance } from '@thirdweb-dev/react'
-
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { MaybeAuthenticatedContent } from '@/components/app/authentication/maybeAuthenticatedContent'
 import {
@@ -11,7 +9,6 @@ import {
 } from '@/components/app/userActionFormCommon'
 import {
   ETH_NFT_DONATION_AMOUNT,
-  MINT_NFT_CONTRACT_ADDRESS,
   UserActionFormNFTMintSectionNames,
 } from '@/components/app/userActionFormNFTMint/constants'
 import { Button } from '@/components/ui/button'
@@ -20,15 +17,15 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { Skeleton } from '@/components/ui/skeleton'
 import { UseSectionsReturn } from '@/hooks/useSections'
-import { useThirdwebContractMetadata } from '@/hooks/useThirdwebContractMetadata'
 import { fromBigNumber } from '@/utils/shared/bigNumber'
 import { SupportedCryptoCurrencyCodes } from '@/utils/shared/currency'
+import { NFTSlug } from '@/utils/shared/nft'
+import { NFT_CLIENT_METADATA, NFTClientMetadata } from '@/utils/web/nft'
 
 export function UserActionFormNFTMintIntro({
   goToSection,
 }: UseSectionsReturn<UserActionFormNFTMintSectionNames>) {
-  const { data: contractMetadata, isLoading: isLoadingContractMetadata } =
-    useThirdwebContractMetadata(MINT_NFT_CONTRACT_ADDRESS)
+  const contractMetadata = NFT_CLIENT_METADATA[NFTSlug.STAND_WITH_CRYPTO_SUPPORTER]
 
   return (
     <UserActionFormLayout>
@@ -39,31 +36,25 @@ export function UserActionFormNFTMintIntro({
           </DialogBody>
 
           <UserActionFormLayout.Footer>
-            {isLoadingContractMetadata ? (
-              <FooterSkeleton />
-            ) : (
-              <>
-                <LoginDialogWrapper
-                  authenticatedContent={
-                    <Button
-                      onClick={() => goToSection(UserActionFormNFTMintSectionNames.CHECKOUT)}
-                      size="lg"
-                    >
-                      Continue
-                    </Button>
-                  }
-                  loadingFallback={<FooterSkeleton />}
-                  useThirdwebSession={true}
+            <LoginDialogWrapper
+              authenticatedContent={
+                <Button
+                  onClick={() => goToSection(UserActionFormNFTMintSectionNames.CHECKOUT)}
+                  size="lg"
                 >
-                  <Button size="lg">Sign In</Button>
-                </LoginDialogWrapper>
-                <MaybeAuthenticatedContent authenticatedContent={null} useThirdwebSession={true}>
-                  <p className="text-xs text-muted-foreground md:text-sm">
-                    You will need to login first to mint the NFT
-                  </p>
-                </MaybeAuthenticatedContent>
-              </>
-            )}
+                  Continue
+                </Button>
+              }
+              loadingFallback={<FooterSkeleton />}
+              useThirdwebSession={true}
+            >
+              <Button size="lg">Sign In</Button>
+            </LoginDialogWrapper>
+            <MaybeAuthenticatedContent authenticatedContent={null} useThirdwebSession={true}>
+              <p className="text-xs text-muted-foreground md:text-sm">
+                You will need to login first to mint the NFT
+              </p>
+            </MaybeAuthenticatedContent>
           </UserActionFormLayout.Footer>
         </div>
       </UserActionFormLayout.Container>
@@ -79,23 +70,15 @@ const ETH_NFT_DONATION_AMOUNT_DISPLAY = `${fromBigNumber(ETH_NFT_DONATION_AMOUNT
   SupportedCryptoCurrencyCodes.ETH
 }`
 
-function ContractMetadataDisplay({
-  contractMetadata,
-}: {
-  contractMetadata?: Awaited<ReturnType<ValidContractInstance['metadata']['get']>>
-}) {
-  if (!contractMetadata) {
-    return <ContractMetadataDisplaySkeleton />
-  }
-
+function ContractMetadataDisplay({ contractMetadata }: { contractMetadata: NFTClientMetadata }) {
   return (
     <div className="flex flex-grow flex-col gap-6">
       <div className="flex flex-col gap-6 md:flex-row">
         <NFTDisplay
-          alt="Stand With Crypto supporter NFT"
+          alt={contractMetadata.image.alt}
           raw
           size="lg"
-          src={contractMetadata?.image ?? ''}
+          src={contractMetadata.image.url}
         />
         <div className="space-y-2">
           <PageTitle className="text-start" size="sm">
