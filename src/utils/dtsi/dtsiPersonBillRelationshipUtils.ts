@@ -6,5 +6,11 @@ export const dtsiPersonBillRelationshipTypeAsVerb = (relType: DTSI_BillPersonRel
       return 'cosponsored'
     case DTSI_BillPersonRelationshipType.SPONSOR:
       return 'sponsored'
+    case DTSI_BillPersonRelationshipType.VOTED_FOR:
+      return 'voted for'
+    case DTSI_BillPersonRelationshipType.VOTED_AGAINST:
+      return 'voted against'
+    default:
+      return 'related to'
   }
 }
