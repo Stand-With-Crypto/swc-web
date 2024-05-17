@@ -1,11 +1,6 @@
 import React from 'react'
 import Balancer from 'react-wrap-balancer'
-import {
-  useConnectionStatus,
-  useContract,
-  useContractMetadata,
-  Web3Button,
-} from '@thirdweb-dev/react'
+import { useConnectionStatus, useContract, Web3Button } from '@thirdweb-dev/react'
 import { noop } from 'lodash-es'
 
 import {
