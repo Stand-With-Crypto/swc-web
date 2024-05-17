@@ -75,4 +75,9 @@ export const INDUSTRY_PARTNERS = [
     imageSrc: '/partners/consensys.png',
     url: 'https://consensys.io/',
   },
+  {
+    title: 'Kraken',
+    imageSrc: '/partners/kraken.svg',
+    url: 'https://www.kraken.com/',
+  },
 ]
