@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useMemo, useRef } from 'react'
-import { isNil } from 'lodash-es'
 
 import {
   Accordion,
@@ -24,9 +23,8 @@ interface QuestionnaireAccordionProps {
 const QUESTIONNAIRE_HASH_KEY = 'questionnaire'
 
 export function QuestionnaireAccordion({ questionnaire }: QuestionnaireAccordionProps) {
-  const { urlHash } = useUrlHash()
-  const accordionDefaultValue =
-    urlHash === QUESTIONNAIRE_HASH_KEY ? QUESTIONNAIRE_HASH_KEY : isNil(urlHash) ? null : ''
+  const urlHash = useUrlHash()
+  const accordionDefaultValue = urlHash === QUESTIONNAIRE_HASH_KEY ? QUESTIONNAIRE_HASH_KEY : ''
   const questionnaireRef = useRef<HTMLDivElement>(null)
 
   const answersAmount = useMemo(() => {
@@ -48,10 +46,10 @@ export function QuestionnaireAccordion({ questionnaire }: QuestionnaireAccordion
     questionnaireRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [questionnaireRef, accordionDefaultValue])
 
-  if (!questionnaire || isNil(accordionDefaultValue) || answersAmount === -1) return null
+  if (answersAmount === -1) return null
 
   return (
-    <div className="mb-10 flex scroll-mt-20 flex-col" id="questionnaire" ref={questionnaireRef}>
+    <div className="mb-10 flex scroll-mt-20 flex-col" ref={questionnaireRef}>
       <PageTitle as="h2" className="mb-4 text-center text-lg md:text-xl lg:text-2xl" size="sm">
         Candidate questionnaire
       </PageTitle>
