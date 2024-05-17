@@ -1,7 +1,8 @@
 import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
+import { RichTextFormatter } from '@/components/app/dtsiRichText/dtsiRichTextFormatter'
+import { RichTextEditorValue } from '@/components/app/dtsiRichText/types'
 import { AvatarGrid } from '@/components/app/pageBillDetails/avatarGrid'
 import { DTSIAvatarBox } from '@/components/app/pageBillDetails/dtsiAvatarBox'
-import { RenderRichText, RichTextNode } from '@/components/app/pageBillDetails/renderRichText'
 import { Button } from '@/components/ui/button'
 import { FormattedDatetime } from '@/components/ui/formattedDatetime'
 import { ExternalLink } from '@/components/ui/link'
@@ -15,7 +16,7 @@ import { convertDTSIStanceScoreToCryptoSupportLanguage } from '@/utils/dtsi/dtsi
 interface PageBillDetailsProps {
   bill: DTSIBillDetails & {
     analysis: (DTSIBillDetails['analysis'][0] & {
-      richTextCommentary: RichTextNode[]
+      richTextCommentary: RichTextEditorValue
     })[]
   }
   locale: SupportedLocale
@@ -79,7 +80,7 @@ export function PageBillDetails(props: PageBillDetailsProps) {
           {analyses.length ? (
             analyses.map(analysis => (
               <div className="space-y-2" key={analysis.id}>
-                <RenderRichText richText={analysis.richTextCommentary} />
+                <RichTextFormatter className="text-center" richText={analysis.richTextCommentary} />
               </div>
             ))
           ) : (
