@@ -1,5 +1,4 @@
 'use client'
-import { useRouter } from 'next/navigation'
 
 import { GetUserPerformedUserActionTypesResponse } from '@/app/api/identified-user/performed-user-action-types/route'
 import {
@@ -24,7 +23,6 @@ export function UserActionFormSuccessScreenNextAction({
     performedUserActionTypes: GetUserPerformedUserActionTypesResponse['performedUserActionTypes']
   }
 }) {
-  const router = useRouter()
   const locale = useLocale()
   if (!data) {
     return (
@@ -51,13 +49,14 @@ export function UserActionFormSuccessScreenNextAction({
       {nextAction.actionType in USER_ACTION_DEEPLINK_MAP ? (
         <UserActionRowCTAButton
           {...nextAction}
-          onClick={() =>
-            router.replace(
-              USER_ACTION_DEEPLINK_MAP[
-                nextAction.actionType as UserActionTypesWithDeeplink
-              ].getDeeplinkUrl({ locale }),
-            )
-          }
+          onClick={() => {
+            // there's a bug where if you use next.js router to push a new url, the modal doesn't close
+            // using location.href instead to force a page reload resolves the issue.
+            // TODO: We should figure out why the modal won't close on page transition
+            window.location.href = USER_ACTION_DEEPLINK_MAP[
+              nextAction.actionType as UserActionTypesWithDeeplink
+            ].getDeeplinkUrl({ locale })
+          }}
           state="hidden"
         />
       ) : (
