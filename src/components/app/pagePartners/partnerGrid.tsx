@@ -15,7 +15,6 @@ export function PartnerGrid() {
                 fill
                 priority
                 quality={100}
-                sizes={'(max-width: 768px) 160px, 224px'}
                 src={imageSrc}
               />
             </div>
