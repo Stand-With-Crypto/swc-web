@@ -19,26 +19,36 @@ export function PageResources() {
           Take a look at some FIT21 resources below.
         </PageSubTitle>
       </section>
-      <section className="grid grid-cols-1 grid-rows-1 gap-6 sm:grid-cols-2 sm:grid-rows-2 sm:gap-x-5 sm:gap-y-10">
+      <section className="grid grid-cols-1 grid-rows-1 gap-6 sm:grid-cols-2 sm:grid-rows-2 sm:gap-x-10 sm:gap-y-20 md:grid-cols-3">
         <ResourcesCards
           imageUrl="/resources/fit21/what-is-fit21.webp"
           subtitle="Learn about FIT21 and the importance to crypto."
           title="What is FIT21"
         />
         <ResourcesCards
+          imageUrl="/resources/fit21/founder-letter.webp"
+          subtitle="Builders across the US back FIT21 for innovation and jobs."
+          title="Stand With Crypto Founder Letter"
+        />
+        <ResourcesCards
           imageUrl="/resources/fit21/fit21-coalition-support-letter.webp"
-          subtitle="See what leading crypto organizations have to say about FIT21."
+          subtitle="See why nearly 60 top crypto organizations urge passing FIT21."
           title="FIT21 Coalition Support Letter"
         />
         <ResourcesCards
-          imageUrl="/resources/fit21/blockchain-association.webp"
-          subtitle="Learn about FIT21 and the importance to crypto."
-          title="Chamber of Progress HR4763"
+          imageUrl="/resources/fit21/chamber-of-progress.webp"
+          subtitle="Explore the Chamber of Progress's background on FIT21."
+          title="Chamber of Progress on FIT21"
         />
         <ResourcesCards
-          imageUrl="/resources/fit21/blockchain-association-letter-of-support.webp"
+          imageUrl="/resources/fit21/blockchain-association.webp"
           subtitle="Read Blockchain Association’s take on FIT21."
           title="Blockchain Association Letter of Support"
+        />
+        <ResourcesCards
+          imageUrl="/resources/fit21/coinbase-overview.webp"
+          subtitle="Read Coinbase's detailed FIT21 overview."
+          title="FIT21 Overview from Coinbase"
         />
       </section>
     </div>

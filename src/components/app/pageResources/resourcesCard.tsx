@@ -13,12 +13,13 @@ export function ResourcesCards({ imageUrl, title, subtitle, href }: Props) {
     <Slot className="flex flex-col gap-4" data-test-id="resources-card" href={href}>
       <NextImage
         alt={title}
-        className="object-cover"
-        height={272}
+        className="aspect-[450/240] object-cover"
+        height={240}
+        objectFit="cover"
         priority
         quality={100}
         src={imageUrl}
-        width={564}
+        width={450}
       />
       <div className="flex flex-col gap-2">
         <h3 className="text-base font-bold leading-normal">{title}</h3>

@@ -3,5 +3,5 @@
 it('page - resources interactions', () => {
   cy.visit('/resources')
 
-  cy.get('[data-test-id=resources-card').should('have.length', 4)
+  cy.get('[data-test-id=resources-card').should('have.length', 6)
 })
