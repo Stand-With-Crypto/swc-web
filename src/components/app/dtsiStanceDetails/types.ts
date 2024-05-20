@@ -40,7 +40,7 @@ export type DTSIStanceDetailsStanceProp<
     | DTSIStanceDetailsQuoteProp
     | DTSIStanceDetailsTweetProp
     | DTSIStanceDetailsBillRelationshipProp,
-> = Pick<DTSI_PersonStance, 'id' | 'dateStanceMade'> & D
+> = Pick<DTSI_PersonStance, 'id' | 'dateStanceMade' | 'computedStanceScore'> & D
 
 export type DTSIStanceDetailsStancePassedProp = Pick<
   DTSI_PersonStance,

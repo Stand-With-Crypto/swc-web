@@ -10,6 +10,7 @@ import {
 } from '@/components/app/dtsiStanceDetails/types'
 import { DTSI_PersonStanceType } from '@/data/dtsi/generated'
 import { dtsiPersonBillRelationshipTypeAsVerb } from '@/utils/dtsi/dtsiPersonBillRelationshipUtils'
+import { convertDTSIStanceScoreToCryptoSupportLanguage } from '@/utils/dtsi/dtsiStanceScoreUtils'
 import { cn } from '@/utils/web/cn'
 
 function StanceTypeContent({ stance: passedStance, ...props }: IStanceDetailsProps) {
@@ -21,7 +22,20 @@ function StanceTypeContent({ stance: passedStance, ...props }: IStanceDetailsPro
     return <DTSIStanceDetailsQuote {...props} stance={stance} />
   }
   if (stance.stanceType === DTSI_PersonStanceType.BILL_RELATIONSHIP) {
-    return <DTSIBillCard bill={stance.billRelationship?.bill} className="p-0 sm:p-0" {...props} />
+    return (
+      <DTSIBillCard
+        bill={stance.billRelationship?.bill}
+        className="p-0 sm:p-0"
+        description={`This bill is ${convertDTSIStanceScoreToCryptoSupportLanguage(stance.billRelationship.bill.computedStanceScore).toLowerCase()}.`}
+        {...props}
+      >
+        <CryptoSupportHighlight
+          className="flex-shrink-0 rounded-full py-2"
+          stanceScore={stance.computedStanceScore}
+          text={dtsiPersonBillRelationshipTypeAsVerb(stance?.billRelationship?.relationshipType)}
+        />
+      </DTSIBillCard>
+    )
   }
   throw new Error(`invalid StanceDetails passed ${JSON.stringify(stance)}`)
 }
@@ -33,19 +47,9 @@ export function DTSIStanceDetails({ className, ...props }: IStanceDetailsProps) 
   return (
     <article className={cn('rounded-3xl bg-secondary p-4 md:p-6', className)}>
       <StanceTypeContent {...props} />
-      <CryptoSupportHighlight
-        className="mt-4 rounded-full py-2"
-        stanceScore={stanceScore}
-        text={
-          /**
-           * If its a Bill stance, show the politician's stance on the bill
-           * instead of whether or not the bill is pro-crypto. For example,
-           * we'd show "thumbs up, voted against" for anti-crypto bills.
-           */
-          stance?.billRelationship?.relationshipType &&
-          dtsiPersonBillRelationshipTypeAsVerb(stance?.billRelationship?.relationshipType)
-        }
-      />
+      {stance.stanceType !== DTSI_PersonStanceType.BILL_RELATIONSHIP && (
+        <CryptoSupportHighlight className="mt-4 rounded-full py-2" stanceScore={stanceScore} />
+      )}
     </article>
   )
 }
