@@ -9,7 +9,6 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { DTSIBillDetails } from '@/data/dtsi/queries/queryDTSIBillDetails'
 import { SupportedLocale } from '@/intl/locales'
-import { convertDTSIStanceScoreToCryptoSupportLanguage } from '@/utils/dtsi/dtsiStanceScoreUtils'
 
 interface PageBillDetailsProps {
   bill: DTSIBillDetails
@@ -35,7 +34,7 @@ export function PageBillDetails(props: PageBillDetailsProps) {
         </PageSubTitle>
         <p className="font-semibold">
           <FormattedDatetime
-            date={new Date(bill.datetimeCreated)}
+            date={new Date(bill.dateIntroduced)}
             dateStyle="medium"
             locale={locale}
           />
@@ -43,11 +42,7 @@ export function PageBillDetails(props: PageBillDetailsProps) {
         <ExternalLink className="inline-block" href={bill.congressDotGovUrl}>
           {bill.congressDotGovUrl}
         </ExternalLink>
-        <CryptoSupportHighlight
-          className="mx-auto"
-          stanceScore={bill.computedStanceScore}
-          text={convertDTSIStanceScoreToCryptoSupportLanguage(bill.computedStanceScore)}
-        />
+        <CryptoSupportHighlight className="mx-auto" stanceScore={bill.computedStanceScore} />
       </section>
 
       <section className="space-y-8 text-center">
