@@ -4,8 +4,8 @@ it('page - bills interactions', () => {
   cy.visit('/bills')
 
   cy.get('h1').contains('Crypto Bills')
-  cy.get('[data-testid=bill-card]').first().as('billCard').should('be.visible')
-  cy.get('@billCard').contains('Learn More').should('be.visible').click()
+  cy.get('[data-testid=bill-card]').first().as('billCard')
+  cy.get('@billCard').should('be.visible').click()
 
   cy.location('pathname').should('include', '/bills/')
   cy.contains('Analysis').should('be.visible')

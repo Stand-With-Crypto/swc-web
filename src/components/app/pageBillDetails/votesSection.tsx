@@ -55,7 +55,7 @@ export function VotesSection(props: VotesSectionProps) {
   const votedFor = votesByType.get(DTSI_BillPersonRelationshipType.VOTED_FOR)
   const votedAgainst = votesByType.get(DTSI_BillPersonRelationshipType.VOTED_AGAINST)
 
-  const showSection = (type: DTSI_BillPersonRelationshipType) => {
+  const showSection = (type: FILTER_KEYS['stance']) => {
     return filters.stance === 'All' || filters.stance === type
   }
 
