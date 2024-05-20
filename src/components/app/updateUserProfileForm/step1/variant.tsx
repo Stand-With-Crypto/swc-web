@@ -71,7 +71,7 @@ export function UpdateUserProfileForm({
   return (
     <Form {...form}>
       <form
-        className="flex flex-col gap-6 md:gap-4 md:px-8"
+        className="flex h-full flex-col gap-6 md:gap-4 md:px-8"
         onSubmit={form.handleSubmit(async values => {
           const address = await convertGooglePlaceAutoPredictionToAddressSchema(
             values.address,
@@ -227,7 +227,7 @@ export function UpdateUserProfileForm({
           )}
           <FormGeneralErrorMessage control={form.control} />
         </div>
-        <div className="flex flex-col justify-center gap-4">
+        <div className="mt-auto flex flex-col justify-center gap-4 md:mt-0">
           <Button className="w-full" disabled={form.formState.isSubmitting} size="lg" type="submit">
             Create account
           </Button>
