@@ -10,7 +10,7 @@ type Props = {
 export function ResourcesCards({ imageUrl, title, subtitle, href }: Props) {
   const Slot = href ? 'a' : 'div'
   return (
-    <Slot className="flex flex-col gap-4" data-test-id="resources-card" href={href}>
+    <Slot className="flex flex-col gap-4" data-test-id="resources-card" href={href} target="_blank">
       <NextImage
         alt={title}
         className="aspect-[450/240] object-cover"
