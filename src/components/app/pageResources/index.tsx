@@ -51,9 +51,9 @@ export function PageResources() {
         />
         <ResourcesCards
           href="/resources/fit21/docs/Vote YES on FIT21.pdf"
-          imageUrl="/resources/fit21/coinbase-overview.webp"
-          subtitle="Read Coinbase's detailed FIT21 overview."
-          title="FIT21 Overview from Coinbase"
+          imageUrl="/resources/fit21/stand-with-crypto-overview.webp"
+          subtitle="Read Stand With Crypto’s detailed FIT21 overview."
+          title="FIT21 Overview from Stand With Crypto"
         />
       </section>
     </div>
