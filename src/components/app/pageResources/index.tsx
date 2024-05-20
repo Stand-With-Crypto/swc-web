@@ -21,6 +21,7 @@ export function PageResources() {
       </section>
       <section className="grid grid-cols-1 grid-rows-1 gap-6 sm:grid-cols-2 sm:grid-rows-2 sm:gap-x-10 sm:gap-y-20 md:grid-cols-3">
         <ResourcesCards
+          href="/resources/fit21/docs/FIT21-BriefingBook2024.pdf"
           imageUrl="/resources/fit21/what-is-fit21.webp"
           subtitle="Learn about FIT21 and the importance to crypto."
           title="What is FIT21"
@@ -31,21 +32,25 @@ export function PageResources() {
           title="Stand With Crypto Founder Letter"
         />
         <ResourcesCards
+          href="/resources/fit21/docs/FIT21 Coalition Support Letter.pdf"
           imageUrl="/resources/fit21/fit21-coalition-support-letter.webp"
           subtitle="See why nearly 60 top crypto organizations urge passing FIT21."
           title="FIT21 Coalition Support Letter"
         />
         <ResourcesCards
+          href="/resources/fit21/docs/Chamber of Progress HR 4763 - Backgrounder for House Staff.pdf"
           imageUrl="/resources/fit21/chamber-of-progress.webp"
           subtitle="Explore the Chamber of Progress's background on FIT21."
           title="Chamber of Progress on FIT21"
         />
         <ResourcesCards
+          href="/resources/fit21/docs/Blockchain-Association-Letter-of-Support-for-H.R.-4763-Floor-Vote.pdf"
           imageUrl="/resources/fit21/blockchain-association.webp"
           subtitle="Read Blockchain Association’s take on FIT21."
           title="Blockchain Association Letter of Support"
         />
         <ResourcesCards
+          href="/resources/fit21/docs/Vote YES on FIT21.pdf"
           imageUrl="/resources/fit21/coinbase-overview.webp"
           subtitle="Read Coinbase's detailed FIT21 overview."
           title="FIT21 Overview from Coinbase"
