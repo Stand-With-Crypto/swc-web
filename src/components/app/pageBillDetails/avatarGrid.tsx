@@ -1,5 +1,8 @@
 'use client'
 
+import { Children } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
+
 import { Button } from '@/components/ui/button'
 import { useSplitChildren, UseSplitChildrenProps } from '@/hooks/useSplitChildren'
 
@@ -18,7 +21,18 @@ export const AvatarGrid = (props: AvatarGridProps) => {
       <div
         className={`mx-auto grid w-full grid-flow-dense grid-cols-[repeat(auto-fit,minmax(126px,1fr))] justify-items-center gap-4`}
       >
-        {visibleChildren}
+        <AnimatePresence initial={false}>
+          {Children.map(visibleChildren, (child, index) => (
+            <motion.div
+              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0.33, y: 10 }}
+              key={index}
+              transition={{ duration: 0.75 }}
+            >
+              {child}
+            </motion.div>
+          ))}
+        </AnimatePresence>
       </div>
 
       {canRenderMore ? (

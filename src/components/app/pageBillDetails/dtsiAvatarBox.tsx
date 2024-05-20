@@ -24,16 +24,18 @@ export const DTSIAvatarBox = (props: DTSIAvatarBoxProps) => {
   return (
     <LinkBox className="flex w-fit flex-col items-center gap-2">
       <DTSIAvatar className="rounded-full" person={person} {...avatarProps} />
-      <InternalLink
-        className={cn(linkBoxLinkClassName, 'cursor-pointer font-semibold')}
-        data-link-box-subject
-        href={getIntlUrls(locale).politicianDetails(person.slug)}
-      >
-        {dtsiPersonFullName(person)}
-      </InternalLink>
-      <p className="text-sm  text-fontcolor-muted">
-        {person.primaryRole ? getDTSIPersonRoleCategoryDisplayName(person.primaryRole) : '-'}
-      </p>
+      <div>
+        <InternalLink
+          className={cn(linkBoxLinkClassName, 'cursor-pointer font-semibold')}
+          data-link-box-subject
+          href={getIntlUrls(locale).politicianDetails(person.slug)}
+        >
+          {dtsiPersonFullName(person)}
+        </InternalLink>
+        <p className="text-sm text-fontcolor-muted">
+          {person.primaryRole ? getDTSIPersonRoleCategoryDisplayName(person.primaryRole) : '-'}
+        </p>
+      </div>
     </LinkBox>
   )
 }
