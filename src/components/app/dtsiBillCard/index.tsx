@@ -15,6 +15,11 @@ interface DTSIBillCardProps {
   className?: string
 }
 
+const getBadgeVariant = (stanceScore: DTSIBill['computedStanceScore']) => {
+  if (stanceScore === 50 || !stanceScore) return 'gray'
+  return stanceScore > 50 ? 'green' : 'red'
+}
+
 export function DTSIBillCard(props: DTSIBillCardProps) {
   const { bill, locale, className } = props
 
@@ -36,15 +41,7 @@ export function DTSIBillCard(props: DTSIBillCardProps) {
           </InternalLink>
           <div className="flex flex-wrap gap-2 uppercase">
             <Badge variant="gray">{bill.status}</Badge>
-            <Badge
-              variant={
-                bill.computedStanceScore === 50
-                  ? 'gray'
-                  : Number(bill.computedStanceScore) > 50
-                    ? 'green'
-                    : 'red'
-              }
-            >
+            <Badge variant={getBadgeVariant(bill.computedStanceScore)}>
               {convertDTSIStanceScoreToCryptoSupportLanguage(bill.computedStanceScore)}
             </Badge>
           </div>
