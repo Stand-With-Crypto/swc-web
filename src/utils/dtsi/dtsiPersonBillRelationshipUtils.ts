@@ -1,4 +1,5 @@
 import { DTSI_BillPersonRelationshipType } from '@/data/dtsi/generated'
+import { gracefullyError } from '@/utils/shared/gracefullyError'
 
 export const dtsiPersonBillRelationshipTypeAsVerb = (relType: DTSI_BillPersonRelationshipType) => {
   switch (relType) {
@@ -11,6 +12,10 @@ export const dtsiPersonBillRelationshipTypeAsVerb = (relType: DTSI_BillPersonRel
     case DTSI_BillPersonRelationshipType.VOTED_AGAINST:
       return 'voted against'
     default:
-      return 'related to'
+      return gracefullyError({
+        msg: `Unknown bill relationship type: "${relType as string}"`,
+        fallback: 'related to',
+        hint: { extra: { relType } },
+      })
   }
 }
