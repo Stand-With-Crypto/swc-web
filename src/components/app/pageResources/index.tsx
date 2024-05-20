@@ -32,7 +32,7 @@ export function PageResources() {
       </section>
       <section className="grid grid-cols-1 grid-rows-1 justify-items-center gap-6 sm:grid-cols-2 sm:grid-rows-2 sm:gap-x-10 sm:gap-y-20 md:grid-cols-3">
         <ResourcesCards
-          href="/resources/fit21/docs/Vote YES on FIT21.pdf"
+          href="/resources/fit21/docs/FIT21 One Pager.pdf"
           imageUrl="/resources/fit21/what-is-fit21.webp"
           subtitle="Learn about FIT21 and the importance to crypto."
           title="What is FIT21"
