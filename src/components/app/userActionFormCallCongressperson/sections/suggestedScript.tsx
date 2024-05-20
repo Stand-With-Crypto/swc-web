@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { UserActionType } from '@prisma/client'
-import { ArrowRight } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 
 import {
@@ -15,10 +14,13 @@ import {
 import { UserActionFormLayout } from '@/components/app/userActionFormCommon/layout'
 import { Button } from '@/components/ui/button'
 import { ExternalLink } from '@/components/ui/link'
+import { PageTitle } from '@/components/ui/pageTitleText'
 import { TrackedExternalLink } from '@/components/ui/trackedExternalLink'
+import { useIsMobile } from '@/hooks/useIsMobile'
 import { UseSectionsReturn } from '@/hooks/useSections'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { getGoogleCivicOfficialByDTSIName } from '@/utils/shared/googleCivicInfo'
+import { formatPhoneNumber } from '@/utils/shared/phoneNumber'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { UserActionCallCampaignName } from '@/utils/shared/userActionCampaigns'
 import { userFullName } from '@/utils/shared/userFullName'
@@ -26,6 +28,95 @@ import { getYourPoliticianCategoryShortDisplayName } from '@/utils/shared/yourPo
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
 import { toastGenericError } from '@/utils/web/toastUtils'
+
+type CallingState =
+  | 'not-calling'
+  | 'pressed-called'
+  | 'loading-call-complete'
+  | 'call-complete'
+  | 'error'
+
+interface DynamicContent {
+  Subtitle: React.FC<{ address: string; onClick: () => void }>
+  PhoneNumberDisplay: React.FC<{ phoneNumber: string | null }>
+  CTA: React.FC<{
+    onCallComplete: () => Promise<void>
+    phoneNumber: string
+    disabled?: boolean
+    callingState: CallingState
+    onCallingStateChange: (newState: CallingState) => void
+  }>
+}
+
+const RESPONSIVE_CONTENT: Record<'mobile' | 'desktop', DynamicContent> = {
+  mobile: {
+    Subtitle: ({ address, onClick }) => (
+      <>
+        Showing the representative for your address in{' '}
+        <ExternalLink className="cursor-pointer" onClick={onClick}>
+          {address}
+        </ExternalLink>
+        .
+      </>
+    ),
+    PhoneNumberDisplay: () => null,
+    CTA: ({ onCallComplete, callingState, onCallingStateChange, phoneNumber, disabled }) => {
+      const ref = React.useRef<HTMLAnchorElement>(null)
+      useEffect(() => {
+        ref.current?.focus({ preventScroll: true })
+      }, [ref])
+
+      if (callingState !== 'not-calling') {
+        return (
+          <Button disabled={disabled} onClick={onCallComplete}>
+            Call complete
+          </Button>
+        )
+      }
+
+      return (
+        <Button asChild>
+          <TrackedExternalLink
+            href={`tel:${phoneNumber}`}
+            onClick={() => onCallingStateChange('pressed-called')}
+            ref={ref}
+            target="_self"
+          >
+            Call
+          </TrackedExternalLink>
+        </Button>
+      )
+    },
+  },
+  desktop: {
+    Subtitle: ({ address, onClick }) => (
+      <>
+        Showing the representative for your address in{' '}
+        <ExternalLink className="cursor-pointer" onClick={onClick}>
+          {address}
+        </ExternalLink>
+        .<br />
+        Call the number below and then click “Call complete” when finished.
+      </>
+    ),
+    PhoneNumberDisplay: ({ phoneNumber }) => {
+      if (!phoneNumber) {
+        return null
+      }
+
+      return (
+        <PageTitle as="p" className="mb-2 text-4xl text-primary-cta md:text-4xl lg:text-4xl">
+          {formatPhoneNumber(phoneNumber)}
+        </PageTitle>
+      )
+    },
+    CTA: ({ onCallComplete, disabled }) => (
+      <Button disabled={disabled} onClick={onCallComplete}>
+        Call complete
+      </Button>
+    ),
+  },
+}
 
 export function SuggestedScript({
   user,
@@ -38,11 +129,11 @@ export function SuggestedScript({
 >) {
   const { dtsiPeople, addressSchema, googleCivicData } = congressPersonData
 
+  const isMobile = useIsMobile()
+  const responsiveContent = RESPONSIVE_CONTENT[isMobile ? 'mobile' : 'desktop']
+
   const router = useRouter()
-  const ref = React.useRef<HTMLAnchorElement>(null)
-  useEffect(() => {
-    ref.current?.focus({ preventScroll: true })
-  }, [ref])
+
   const dtsiPerson = dtsiPeople[0]
   const phoneNumber = React.useMemo(() => {
     const official = getGoogleCivicOfficialByDTSIName(dtsiPerson, googleCivicData)
@@ -108,19 +199,15 @@ export function SuggestedScript({
         <UserActionFormLayout.Container>
           <UserActionFormLayout.Heading
             subtitle={
-              <>
-                Showing the representative for your address in{' '}
-                <ExternalLink
-                  className="cursor-pointer"
-                  onClick={() => goToSection(SectionNames.CHANGE_ADDRESS)}
-                >
-                  {addressSchema.locality}
-                </ExternalLink>
-                .
-              </>
+              <responsiveContent.Subtitle
+                address={addressSchema.locality}
+                onClick={() => goToSection(SectionNames.CHANGE_ADDRESS)}
+              />
             }
             title={`Call your ${getYourPoliticianCategoryShortDisplayName(CALL_FLOW_POLITICIANS_CATEGORY, { maxCount: 1 })}`}
           />
+
+          <responsiveContent.PhoneNumberDisplay phoneNumber={phoneNumber} />
 
           <div className="prose mx-auto">
             <h2 className="mb-2 text-base font-semibold">Suggested script</h2>
@@ -152,26 +239,13 @@ export function SuggestedScript({
         maxPeopleDisplayed={1}
       >
         {phoneNumber ? (
-          callingState !== 'not-calling' ? (
-            <Button
-              disabled={callingState === 'loading-call-complete'}
-              onClick={() => handleCallAction(phoneNumber)}
-            >
-              <span className="mr-1 inline-block">Call complete</span>{' '}
-              <ArrowRight className="h-5 w-5" />
-            </Button>
-          ) : (
-            <Button asChild>
-              <TrackedExternalLink
-                href={`tel:${phoneNumber}`}
-                onClick={() => setCallingState('pressed-called')}
-                ref={ref}
-                target="_self"
-              >
-                Call
-              </TrackedExternalLink>
-            </Button>
-          )
+          <responsiveContent.CTA
+            callingState={callingState}
+            disabled={callingState === 'loading-call-complete'}
+            onCallComplete={() => handleCallAction(phoneNumber)}
+            onCallingStateChange={setCallingState}
+            phoneNumber={phoneNumber}
+          />
         ) : null}
       </UserActionFormLayout.CongresspersonDisplayFooter>
     </div>
