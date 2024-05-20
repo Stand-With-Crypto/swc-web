@@ -23,7 +23,7 @@ export const DTSIAvatarBox = (props: DTSIAvatarBoxProps) => {
   const { person, locale, prefetch = false, ...avatarProps } = props
 
   return (
-    <LinkBox className="flex w-fit flex-col items-center gap-2">
+    <LinkBox className="flex w-fit flex-col items-center gap-2 text-center">
       <DTSIAvatar className="rounded-full" person={person} {...avatarProps} />
       <div>
         <InternalLink

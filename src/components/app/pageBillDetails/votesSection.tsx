@@ -55,8 +55,12 @@ export function VotesSection(props: VotesSectionProps) {
   const votedFor = votesByType.get(DTSI_BillPersonRelationshipType.VOTED_FOR)
   const votedAgainst = votesByType.get(DTSI_BillPersonRelationshipType.VOTED_AGAINST)
 
+  const showSection = (type: DTSI_BillPersonRelationshipType) => {
+    return filters.stance === 'All' || filters.stance === type
+  }
+
   return (
-    <section className="space-y-16 text-center">
+    <section className="space-y-16 text-center sm:text-start">
       <div className="flex flex-col flex-wrap items-center justify-center gap-6 lg:flex-row lg:justify-between">
         <p className="flex-shrink-0 text-lg font-semibold">See how politicians voted</p>
 
@@ -67,57 +71,65 @@ export function VotesSection(props: VotesSectionProps) {
         />
       </div>
 
-      <div className="space-y-8">
-        <p className="text-lg font-semibold">Sponsors</p>
-        <AvatarGrid nItems={14}>
-          {sponsors?.length ? (
-            sponsors?.map((person, i) => (
-              <DTSIAvatarBox key={i} locale={locale} person={person} size={AVATAR_SIZE} />
-            ))
-          ) : (
-            <p className="text-fontcolor-muted">No sponsors</p>
-          )}
-        </AvatarGrid>
-      </div>
+      {showSection(DTSI_BillPersonRelationshipType.SPONSOR) && (
+        <div className="space-y-8">
+          <p className="text-lg font-semibold">Sponsors</p>
+          <AvatarGrid nItems={14}>
+            {sponsors?.length ? (
+              sponsors?.map((person, i) => (
+                <DTSIAvatarBox key={i} locale={locale} person={person} size={AVATAR_SIZE} />
+              ))
+            ) : (
+              <p className="text-fontcolor-muted">No sponsors</p>
+            )}
+          </AvatarGrid>
+        </div>
+      )}
 
-      <div className="space-y-8">
-        <p className="text-lg font-semibold">Co-Sponsors</p>
-        <AvatarGrid nItems={14}>
-          {coSponsors?.length ? (
-            coSponsors?.map((person, i) => (
-              <DTSIAvatarBox key={i} locale={locale} person={person} size={AVATAR_SIZE} />
-            ))
-          ) : (
-            <p className="text-fontcolor-muted">No co-sponsors</p>
-          )}
-        </AvatarGrid>
-      </div>
+      {showSection(DTSI_BillPersonRelationshipType.COSPONSOR) && (
+        <div className="space-y-8">
+          <p className="text-lg font-semibold">Co-Sponsors</p>
+          <AvatarGrid nItems={14}>
+            {coSponsors?.length ? (
+              coSponsors?.map((person, i) => (
+                <DTSIAvatarBox key={i} locale={locale} person={person} size={AVATAR_SIZE} />
+              ))
+            ) : (
+              <p className="text-fontcolor-muted">No co-sponsors</p>
+            )}
+          </AvatarGrid>
+        </div>
+      )}
 
-      <div className="space-y-8">
-        <p className="text-lg font-semibold">Voted for</p>
-        <AvatarGrid nItems={14}>
-          {votedFor?.length ? (
-            votedFor?.map((person, i) => (
-              <DTSIAvatarBox key={i} locale={locale} person={person} size={AVATAR_SIZE} />
-            ))
-          ) : (
-            <p className="text-fontcolor-muted">No votes for</p>
-          )}
-        </AvatarGrid>
-      </div>
+      {showSection(DTSI_BillPersonRelationshipType.VOTED_FOR) && (
+        <div className="space-y-8">
+          <p className="text-lg font-semibold">Voted for</p>
+          <AvatarGrid nItems={14}>
+            {votedFor?.length ? (
+              votedFor?.map((person, i) => (
+                <DTSIAvatarBox key={i} locale={locale} person={person} size={AVATAR_SIZE} />
+              ))
+            ) : (
+              <p className="text-fontcolor-muted">No votes for</p>
+            )}
+          </AvatarGrid>
+        </div>
+      )}
 
-      <div className="space-y-8">
-        <p className="text-lg font-semibold">Voted against</p>
-        <AvatarGrid nItems={14}>
-          {votedAgainst?.length ? (
-            votedAgainst?.map((person, i) => (
-              <DTSIAvatarBox key={i} locale={locale} person={person} size={AVATAR_SIZE} />
-            ))
-          ) : (
-            <p className="text-fontcolor-muted">No votes against</p>
-          )}
-        </AvatarGrid>
-      </div>
+      {showSection(DTSI_BillPersonRelationshipType.VOTED_AGAINST) && (
+        <div className="space-y-8">
+          <p className="text-lg font-semibold">Voted against</p>
+          <AvatarGrid nItems={14}>
+            {votedAgainst?.length ? (
+              votedAgainst?.map((person, i) => (
+                <DTSIAvatarBox key={i} locale={locale} person={person} size={AVATAR_SIZE} />
+              ))
+            ) : (
+              <p className="text-fontcolor-muted">No votes against</p>
+            )}
+          </AvatarGrid>
+        </div>
+      )}
     </section>
   )
 }

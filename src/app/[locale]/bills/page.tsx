@@ -10,8 +10,8 @@ export const dynamic = 'error'
 
 const title = 'Crypto Bills'
 const description = `As Congress votes on legislation that would affect crypto and other digital assets,
-  we’ll keep an eye out for you. Check this page for information about key bills moving
-  through the House and the Senate as well as analysis on whether they’re pro-crypto or anti-crypto.`
+  we'll keep an eye out for you. Check this page for information about key bills moving
+  through the House and the Senate as well as analysis on whether they're pro-crypto or anti-crypto.`
 export const metadata: Metadata = {
   ...generateMetadataDetails({
     title,

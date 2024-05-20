@@ -25,7 +25,7 @@ export function PageBillDetails(props: PageBillDetailsProps) {
   return (
     <div className="standard-spacing-from-navbar container space-y-16">
       <section className="space-y-8 text-center">
-        <PageTitle>{bill.shortTitle || bill.title}</PageTitle>
+        <PageTitle size="sm">{bill.shortTitle || bill.title}</PageTitle>
         <PageSubTitle>
           {
             // Some bills don't have a summary but have a really long title, so we use the title as a fallback
