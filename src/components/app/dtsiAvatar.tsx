@@ -5,24 +5,26 @@ import { InitialsAvatar } from '@/components/ui/initialsAvatar'
 import { DTSI_Person } from '@/data/dtsi/generated'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 
-export const DTSIAvatar: React.FC<
-  {
-    person: Pick<
-      DTSI_Person,
-      | 'firstName'
-      | 'lastName'
-      | 'firstNickname'
-      | 'nameSuffix'
-      | 'profilePictureUrl'
-      | 'profilePictureUrlDimensions'
-    >
-  } & Pick<ImageAvatarProps, 'size' | 'className'>
-> = ({ person, ...props }) => {
+export interface DTSIAvatarProps extends Pick<ImageAvatarProps, 'size' | 'className'> {
+  person: Pick<
+    DTSI_Person,
+    | 'firstName'
+    | 'lastName'
+    | 'firstNickname'
+    | 'nameSuffix'
+    | 'profilePictureUrl'
+    | 'profilePictureUrlDimensions'
+  >
+}
+
+export const DTSIAvatar: React.FC<DTSIAvatarProps> = ({ person, ...props }) => {
   if (person.profilePictureUrl) {
     return (
       <ImageAvatar
         alt={`Profile picture of ${dtsiPersonFullName(person)}`}
+        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkqAcAAIUAgUW0RjgAAAAASUVORK5CYII="
         className="rounded-md"
+        placeholder="blur"
         src={person.profilePictureUrl}
         {...props}
       />

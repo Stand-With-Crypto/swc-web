@@ -7,6 +7,8 @@ export const dtsiBillMockResolver = (): Partial<DTSI_Bill> => {
   return {
     computedStanceScore: fakerFields.dtsiStanceScore(),
     congressDotGovUrl: faker.internet.url(),
+    dateIntroduced: faker.date.past().toISOString(),
+    datetimeCreated: faker.date.past().toISOString(),
     formattedSlug: 'S.2669',
     govTrackUrl: faker.internet.url(),
     pdfUrl: faker.internet.url(),

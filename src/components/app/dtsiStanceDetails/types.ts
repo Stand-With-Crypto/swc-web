@@ -28,7 +28,10 @@ export type DTSIStanceDetailsTweetProp = {
 export type DTSIStanceDetailsBillRelationshipProp = {
   stanceType: DTSI_PersonStanceType.BILL_RELATIONSHIP
   billRelationship: Pick<DTSI_BillPersonRelationship, 'id' | 'relationshipType'> & {
-    bill: Pick<DTSI_Bill, 'id' | 'summary' | 'title' | 'shortTitle'>
+    bill: Pick<
+      DTSI_Bill,
+      'id' | 'summary' | 'title' | 'shortTitle' | 'status' | 'computedStanceScore' | 'slug'
+    >
   }
 }
 
@@ -37,11 +40,11 @@ export type DTSIStanceDetailsStanceProp<
     | DTSIStanceDetailsQuoteProp
     | DTSIStanceDetailsTweetProp
     | DTSIStanceDetailsBillRelationshipProp,
-> = Pick<DTSI_PersonStance, 'id' | 'dateStanceMade'> & D
+> = Pick<DTSI_PersonStance, 'id' | 'dateStanceMade' | 'computedStanceScore'> & D
 
 export type DTSIStanceDetailsStancePassedProp = Pick<
   DTSI_PersonStance,
-  'id' | 'dateStanceMade' | 'stanceType'
+  'id' | 'dateStanceMade' | 'stanceType' | 'computedStanceScore'
 > &
   Omit<PartialButDefined<DTSIStanceDetailsQuoteProp>, 'stanceType'> &
   Omit<PartialButDefined<DTSIStanceDetailsTweetProp>, 'stanceType'> &

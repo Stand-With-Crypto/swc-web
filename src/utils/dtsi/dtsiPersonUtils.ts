@@ -4,7 +4,7 @@ export const dtsiPersonFullName = (
   person: Pick<DTSI_Person, 'firstName' | 'lastName' | 'firstNickname' | 'nameSuffix'>,
 ) => {
   return `${person.firstNickname || person.firstName} ${person.lastName}${
-    person.nameSuffix && ` ${person.nameSuffix}`
+    person.nameSuffix ? ` ${person.nameSuffix}` : ''
   }`
 }
 
