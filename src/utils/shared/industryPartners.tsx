@@ -80,4 +80,9 @@ export const INDUSTRY_PARTNERS = [
     imageSrc: '/partners/kraken.svg',
     url: 'https://www.kraken.com/',
   },
+  {
+    title: 'Protocol Labs',
+    imageSrc: '/partners/protocol_labs.svg',
+    url: 'https://protocol.ai/',
+  },
 ]
