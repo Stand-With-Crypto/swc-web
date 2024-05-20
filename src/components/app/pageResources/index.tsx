@@ -1,4 +1,7 @@
 import { ResourcesCards } from '@/components/app/pageResources/resourcesCard'
+import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
+import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
+import { Button } from '@/components/ui/button'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 
@@ -18,10 +21,18 @@ export function PageResources() {
           <br />
           Take a look at some FIT21 resources below.
         </PageSubTitle>
+        <div className="align-center flex flex-col justify-center gap-6 sm:flex-row">
+          <UserActionFormEmailCongresspersonDialog>
+            <Button className="w-full sm:w-auto">Email your congressperson</Button>
+          </UserActionFormEmailCongresspersonDialog>
+          <UserActionFormCallCongresspersonDialog>
+            <Button className="w-full sm:w-auto">Call your congressperson</Button>
+          </UserActionFormCallCongresspersonDialog>
+        </div>
       </section>
-      <section className="grid grid-cols-1 grid-rows-1 gap-6 sm:grid-cols-2 sm:grid-rows-2 sm:gap-x-10 sm:gap-y-20 md:grid-cols-3">
+      <section className="grid grid-cols-1 grid-rows-1 justify-items-center gap-6 sm:grid-cols-2 sm:grid-rows-2 sm:gap-x-10 sm:gap-y-20 md:grid-cols-3">
         <ResourcesCards
-          href="/resources/fit21/docs/FIT21-BriefingBook2024.pdf"
+          href="/resources/fit21/docs/Vote YES on FIT21.pdf"
           imageUrl="/resources/fit21/what-is-fit21.webp"
           subtitle="Learn about FIT21 and the importance to crypto."
           title="What is FIT21"
@@ -51,7 +62,7 @@ export function PageResources() {
           title="Blockchain Association Letter of Support"
         />
         <ResourcesCards
-          href="/resources/fit21/docs/Vote YES on FIT21.pdf"
+          href="/resources/fit21/docs/FIT21-BriefingBook2024.pdf"
           imageUrl="/resources/fit21/stand-with-crypto-overview.webp"
           subtitle="Read Stand With Crypto’s detailed FIT21 overview."
           title="FIT21 Overview from Stand With Crypto"
