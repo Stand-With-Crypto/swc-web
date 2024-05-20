@@ -1,5 +1,6 @@
 import { ReactNode } from 'react'
 import { ArrowUpRight } from 'lucide-react'
+import Link from 'next/link'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
@@ -104,5 +105,24 @@ export function HeroImageWrapper() {
     <LoginDialogWrapper authenticatedContent={authenticatedContent}>
       {unauthenticatedContent}
     </LoginDialogWrapper>
+  )
+}
+
+export function Fit21HeroImage() {
+  return (
+    <LinkBox className="relative h-[320px] overflow-hidden md:rounded-xl lg:h-[400px]">
+      <Link className="flex h-full w-full" href="/resources" passHref>
+        <NextImage
+          alt="Email your rep"
+          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOM8FqyAgAEOAHwiAoWHAAAAABJRU5ErkJggg=="
+          className="h-full w-full object-cover"
+          fill
+          placeholder="blur"
+          priority
+          sizes={'(max-width: 400px) 375px, 500px'}
+          src="/fit21-homepage-hero.png"
+        />
+      </Link>
+    </LinkBox>
   )
 }
