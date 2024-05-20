@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useMemo, useRef } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 
 import {
   Accordion,
@@ -23,8 +23,8 @@ interface QuestionnaireAccordionProps {
 const QUESTIONNAIRE_HASH_KEY = 'questionnaire'
 
 export function QuestionnaireAccordion({ questionnaire }: QuestionnaireAccordionProps) {
+  const [accordionValue, setAccordionValue] = useState('')
   const urlHash = useUrlHash()
-  const accordionDefaultValue = urlHash === QUESTIONNAIRE_HASH_KEY ? QUESTIONNAIRE_HASH_KEY : ''
   const questionnaireRef = useRef<HTMLDivElement>(null)
 
   const answersAmount = useMemo(() => {
@@ -42,9 +42,13 @@ export function QuestionnaireAccordion({ questionnaire }: QuestionnaireAccordion
   }, [questionnaire.data])
 
   useEffect(() => {
-    if (!questionnaireRef.current || !accordionDefaultValue) return
+    if (!questionnaireRef.current || !urlHash) return
     questionnaireRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }, [questionnaireRef, accordionDefaultValue])
+  }, [questionnaireRef, urlHash])
+
+  useEffect(() => {
+    setAccordionValue(urlHash === QUESTIONNAIRE_HASH_KEY ? QUESTIONNAIRE_HASH_KEY : '')
+  }, [urlHash])
 
   if (answersAmount === -1) return null
 
@@ -54,7 +58,7 @@ export function QuestionnaireAccordion({ questionnaire }: QuestionnaireAccordion
         Candidate questionnaire
       </PageTitle>
 
-      <Accordion collapsible defaultValue={accordionDefaultValue} type="single">
+      <Accordion collapsible onValueChange={setAccordionValue} type="single" value={accordionValue}>
         <AccordionItem value="questionnaire">
           <AccordionTrigger>Responses ({answersAmount})</AccordionTrigger>
 
