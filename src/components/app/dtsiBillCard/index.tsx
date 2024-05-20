@@ -1,4 +1,3 @@
-import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'

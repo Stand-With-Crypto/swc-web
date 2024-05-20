@@ -22,7 +22,9 @@ export const DTSIAvatar: React.FC<DTSIAvatarProps> = ({ person, ...props }) => {
     return (
       <ImageAvatar
         alt={`Profile picture of ${dtsiPersonFullName(person)}`}
+        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkqAcAAIUAgUW0RjgAAAAASUVORK5CYII="
         className="rounded-md"
+        placeholder="blur"
         src={person.profilePictureUrl}
         {...props}
       />

@@ -25,6 +25,7 @@ export const fragmentDTSIBillRelationships = /* GraphQL */ `
       }
       profilePictureUrl
       profilePictureUrlDimensions
+      politicalAffiliationCategory
       slug
     }
   }
