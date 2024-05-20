@@ -16,10 +16,11 @@ interface DTSIAvatarBoxProps extends DTSIAvatarProps {
         Pick<DTSI_PersonRole, 'roleCategory' | 'title' | 'status' | 'primaryState'>
       >
     }
+  prefetch?: boolean
 }
 
 export const DTSIAvatarBox = (props: DTSIAvatarBoxProps) => {
-  const { person, locale, ...avatarProps } = props
+  const { person, locale, prefetch = false, ...avatarProps } = props
 
   return (
     <LinkBox className="flex w-fit flex-col items-center gap-2">
@@ -29,6 +30,7 @@ export const DTSIAvatarBox = (props: DTSIAvatarBoxProps) => {
           className={cn(linkBoxLinkClassName, 'cursor-pointer font-semibold')}
           data-link-box-subject
           href={getIntlUrls(locale).politicianDetails(person.slug)}
+          prefetch={prefetch}
         >
           {dtsiPersonFullName(person)}
         </InternalLink>
