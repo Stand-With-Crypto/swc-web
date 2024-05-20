@@ -1,103 +1,72 @@
-import { EventCard } from '@/components/app/pageResources/eventCard'
-import { PolicyCard } from '@/components/app/pageResources/policyCard'
+import { ResourcesCards } from '@/components/app/pageResources/resourcesCard'
+import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
+import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { Button } from '@/components/ui/button'
-import { InternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { SupportedLocale } from '@/intl/locales'
-import { getIntlUrls } from '@/utils/shared/urls'
 
-export function PageResources({ locale }: { locale: SupportedLocale }) {
-  const urls = getIntlUrls(locale)
+export function PageResources() {
   return (
     <div className="standard-spacing-from-navbar container">
       <section className="mb-16 space-y-7 text-center">
-        <PageTitle>Your voice will shape the future of crypto in America</PageTitle>
+        <PageTitle>FIT21 Resources</PageTitle>
         <PageSubTitle>
-          Every day lawmakers are discussing policies and regulations that impact your ability to
-          use crypto. They care what you think, but you have to make sure that you are connecting
-          with your lawmakers.
-          <br /> <br />
-          The US sat idly by with semiconductor manufacturing, and now 92% of advanced production is
-          located in Taiwan and South Korea. We can’t let history repeat itself, and must ensure the
-          US isn’t sidelined from the future financial system.
+          A historic bipartisan crypto bill, FIT21 (H.R. 4763), is about to be voted on in the U.S.
+          House of Representatives.
+          <br />
+          <br />
+          This Act will foster American innovation and protect consumers by creating a clear
+          regulatory framework for crypto.
+          <br />
+          <br />
+          Take a look at some FIT21 resources below.
         </PageSubTitle>
-      </section>
-
-      <section className="mb-16 text-center">
-        <PageTitle as="h2" size="md">
-          Events
-        </PageTitle>
-        <PageSubTitle className="mb-8 mt-4">
-          Learn more about recent and upcoming events to mobilize the crypto community.
-        </PageSubTitle>
-        <div className="grid grid-flow-col grid-rows-4 gap-4 lg:grid-rows-1">
-          <EventCard
-            cta="Watch"
-            imageAltText="Boston Advocate Town Hall event card image"
-            imageUrl="/resources/eventCards/boston_advocate_town_hall.webp"
-            link="https://www.youtube.com/watch?v=ulron-a3sIc"
-            title="Boston Advocate Town Hall"
-          />
-          <EventCard
-            cta="Watch"
-            imageAltText="Stand With Crypto Day (Washington DC) event card image"
-            imageUrl="/resources/eventCards/stand_with_crypto_day_dc.webp"
-            link="https://www.youtube.com/watch?v=MzrUzOhgA6I"
-            title="Stand With Crypto Day (Washington DC)"
-          />
-          <EventCard
-            cta="Watch"
-            imageAltText="Atlanta Advocate Town Hall event card image"
-            imageUrl="/resources/eventCards/atlanta_advocate_town_hall.webp"
-            link="https://www.youtube.com/watch?v=ETq_UZ1aRGQ"
-            title="Atlanta Advocate Town Hall"
-          />
-          <EventCard
-            cta="Watch"
-            imageAltText="Crypto Presidential Forum (New Hampshire) event card image"
-            imageUrl="/resources/eventCards/crypto_presidential_forum_nh_townhall.webp"
-            link="https://www.youtube.com/watch?v=refW193w3Xw"
-            title="Crypto Presidential Forum (New Hampshire)"
-          />
+        <div className="align-center flex flex-col justify-center gap-6 sm:flex-row">
+          <UserActionFormEmailCongresspersonDialog>
+            <Button className="w-full sm:w-auto">Email your congressperson</Button>
+          </UserActionFormEmailCongresspersonDialog>
+          <UserActionFormCallCongresspersonDialog>
+            <Button className="w-full sm:w-auto">Call your congressperson</Button>
+          </UserActionFormCallCongresspersonDialog>
         </div>
       </section>
-
-      <section className="mb-16 text-center">
-        <PageTitle as="h2" size="md">
-          Policy
-        </PageTitle>
-        <PageSubTitle className="mb-8 mt-4">
-          Learn more about the pending bills and resolutions that can shape the industry’s future.
-        </PageSubTitle>
-        <div className="flex flex-col gap-4">
-          <PolicyCard
-            description="Setting the foundational rules for crypto that are pro-consumer and pro-job creation"
-            primaryCta="Learn more"
-            primaryCtaUrl="https://www.standwithcrypto.org/docs/FIT21_One_Pager_3.pdf"
-            title="FIT21 [H.R. 4763]"
-          />
-          <PolicyCard
-            description="A regulatory framework for stablecoins like USDC"
-            primaryCta="Learn more"
-            primaryCtaUrl="https://www.standwithcrypto.org/docs/SWC_Stablecoins_2.pdf"
-            title="Clarity for Stablecoin Act [H.R. 4766]"
-          />
-        </div>
-      </section>
-
-      <section className="mb-16 text-center">
-        <PageTitle as="h2" size="md">
-          Get involved
-        </PageTitle>
-        <PageSubTitle className="mb-8 mt-4">
-          Stand With Crypto is an open source initiative built by people who believe crypto belongs
-          in America. Help us safeguard the future of crypto by contributing to our open source repo
-          or promoting Stand With Crypto on your website or app.
-        </PageSubTitle>
-        <Button asChild size="lg">
-          <InternalLink href={urls.contribute()}>Contribute to Stand With Crypto</InternalLink>
-        </Button>
+      <section className="grid grid-cols-1 grid-rows-1 justify-items-center gap-6 sm:grid-cols-2 sm:grid-rows-2 sm:gap-x-10 sm:gap-y-20 md:grid-cols-3">
+        <ResourcesCards
+          href="/resources/fit21/docs/Vote YES on FIT21.pdf"
+          imageUrl="/resources/fit21/what-is-fit21.webp"
+          subtitle="Learn about FIT21 and the importance to crypto."
+          title="What is FIT21"
+        />
+        <ResourcesCards
+          href="/resources/fit21/docs/FIT21 SWC Founder Letter.pdf"
+          imageUrl="/resources/fit21/founder-letter.webp"
+          subtitle="Builders across the US back FIT21 for innovation and jobs."
+          title="Stand With Crypto Founder Letter"
+        />
+        <ResourcesCards
+          href="/resources/fit21/docs/FIT21 Coalition Support Letter.pdf"
+          imageUrl="/resources/fit21/fit21-coalition-support-letter.webp"
+          subtitle="See why nearly 60 top crypto organizations urge passing FIT21."
+          title="FIT21 Coalition Support Letter"
+        />
+        <ResourcesCards
+          href="/resources/fit21/docs/Chamber of Progress HR 4763 - Backgrounder for House Staff.pdf"
+          imageUrl="/resources/fit21/chamber-of-progress.webp"
+          subtitle="Explore the Chamber of Progress's background on FIT21."
+          title="Chamber of Progress on FIT21"
+        />
+        <ResourcesCards
+          href="/resources/fit21/docs/Blockchain-Association-Letter-of-Support-for-H.R.-4763-Floor-Vote.pdf"
+          imageUrl="/resources/fit21/blockchain-association.webp"
+          subtitle="Read Blockchain Association’s take on FIT21."
+          title="Blockchain Association Letter of Support"
+        />
+        <ResourcesCards
+          href="/resources/fit21/docs/FIT21-BriefingBook2024.pdf"
+          imageUrl="/resources/fit21/stand-with-crypto-overview.webp"
+          subtitle="Read Stand With Crypto’s detailed FIT21 overview."
+          title="FIT21 Overview from Stand With Crypto"
+        />
       </section>
     </div>
   )
