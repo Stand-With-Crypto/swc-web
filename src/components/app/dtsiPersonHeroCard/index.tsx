@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { User } from 'lucide-react'
 
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
@@ -80,16 +80,8 @@ export function DTSIPersonHeroCard(props: Props) {
     : ''
   const displayName = `${dtsiPersonFullName(person)}${politicalAbbrDisplayName}`
 
-  const DtsiPersonHeroCardWrapper = isClickable ? InternalLink : 'div'
-
   return (
-    <DtsiPersonHeroCardWrapper
-      className={cn(
-        'block shrink-0 overflow-hidden bg-white text-left shadow-md hover:!no-underline max-sm:rounded-3xl max-sm:border sm:inline-block sm:w-52 xl:w-72',
-        !isClickable && 'hover:cursor-default',
-      )}
-      href={getIntlUrls(locale).politicianDetails(person.slug)}
-    >
+    <DtsiPersonHeroCardWrapper isClickable={isClickable} locale={locale} person={person}>
       <div className="max-sm:flex">
         <div
           className={cn(
@@ -170,5 +162,32 @@ export function DTSIPersonHeroCard(props: Props) {
         </DTSIPersonHeroCardFooter>
       )}
     </DtsiPersonHeroCardWrapper>
+  )
+}
+
+function DtsiPersonHeroCardWrapper({
+  person,
+  locale,
+  isClickable,
+  children,
+}: {
+  isClickable: boolean
+  children: ReactNode
+  person: DTSI_PersonCardFragment
+  locale: SupportedLocale
+}) {
+  const className = cn(
+    'block shrink-0 overflow-hidden bg-white text-left shadow-md hover:!no-underline max-sm:rounded-3xl max-sm:border sm:inline-block sm:w-52 xl:w-72',
+    !isClickable && 'hover:cursor-default',
+  )
+
+  if (!isClickable) {
+    return <div className={className}>{children}</div>
+  }
+
+  return (
+    <InternalLink className={className} href={getIntlUrls(locale).politicianDetails(person.slug)}>
+      {children}
+    </InternalLink>
   )
 }
