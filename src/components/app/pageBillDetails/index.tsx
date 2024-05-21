@@ -19,7 +19,9 @@ export function PageBillDetails(props: PageBillDetailsProps) {
   const { bill, locale } = props
 
   const analyses = bill.analysis.filter(
-    analysis => (analysis.richTextCommentary as RichTextEditorValue).length > 0,
+    analysis =>
+      analysis.richTextCommentary &&
+      (analysis.richTextCommentary as RichTextEditorValue).length > 0,
   )
 
   return (
@@ -52,7 +54,7 @@ export function PageBillDetails(props: PageBillDetailsProps) {
           {analyses?.length ? (
             analyses.map(analysis => (
               <div className="space-y-2" key={analysis.id}>
-                <RichTextFormatter className="text-center" richText={analysis.richTextCommentary} />
+                <RichTextFormatter richText={analysis.richTextCommentary} />
               </div>
             ))
           ) : (
