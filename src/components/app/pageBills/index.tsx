@@ -1,9 +1,10 @@
+import { partition, sortBy } from 'lodash-es'
+
 import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
 import { DTSIBill, DTSIBillCard } from '@/components/app/dtsiBillCard'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { SupportedLocale } from '@/intl/locales'
-import { partition, sortBy } from 'lodash-es'
 
 interface PageBillsProps {
   title: string
@@ -28,15 +29,15 @@ export function PageBills(props: PageBillsProps) {
       </section>
 
       {[
-        { bills: sortedKeyBills, title: 'Key Bills' },
-        { bills: otherBills, title: 'Other Crypto Bills' },
-      ].map(({ bills, title }) => (
-        <section key={title}>
-          <PageTitle size="sm" as="h3" className="mb-5">
-            {title}
+        { results: sortedKeyBills, sectionTitle: 'Key Bills' },
+        { results: otherBills, sectionTitle: 'Other Crypto Bills' },
+      ].map(({ results, sectionTitle }) => (
+        <section key={sectionTitle}>
+          <PageTitle as="h3" className="mb-5" size="sm">
+            {sectionTitle}
           </PageTitle>
           <div className="flex flex-col gap-4 lg:gap-8">
-            {bills.map(bill => (
+            {results.map(bill => (
               <DTSIBillCard bill={bill} key={bill.id} locale={locale}>
                 <CryptoSupportHighlight
                   className="flex-shrink-0 rounded-full text-base"
