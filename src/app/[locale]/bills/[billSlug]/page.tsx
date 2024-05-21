@@ -9,7 +9,7 @@ import { PageProps } from '@/types'
 
 export const revalidate = 1200
 export const dynamic = 'error'
-export const dynamicParams = false
+export const dynamicParams = true
 
 type Props = PageProps<{ billSlug: string }>
 
