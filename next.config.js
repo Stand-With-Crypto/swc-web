@@ -208,7 +208,7 @@ const nextConfig = {
       {
         permanent: false,
         destination: '/action/email?utm_source=swc&utm_medium=sms&utm_campaign=fit21-2024-05-text',
-        source: '/fit21-email',
+        source: '/text',
       },
       {
         permanent: true,
