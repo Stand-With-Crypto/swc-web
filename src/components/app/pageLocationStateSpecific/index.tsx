@@ -1,7 +1,6 @@
 import { compact, isEmpty, times } from 'lodash-es'
 
 import { ContentSection } from '@/components/app/ContentSection'
-import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
 import { DarkHeroSection } from '@/components/app/darkHeroSection'
 import { DTSIPersonHeroCardSection } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardSection'
 import { DTSIStanceDetails } from '@/components/app/dtsiStanceDetails'
@@ -17,7 +16,7 @@ import { SupportedLocale } from '@/intl/locales'
 import { US_LOCATION_PAGES_LIVE_KEY_DISTRICTS_MAP } from '@/utils/shared/locationSpecificPages'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { US_STATE_CODE_TO_DISTRICT_COUNT_MAP } from '@/utils/shared/usStateDistrictUtils'
-import { getUSStateNameFromStateCode, USStateCode } from '@/utils/shared/usStateUtils'
+import { getUSStateNameFromStateCode,USStateCode } from '@/utils/shared/usStateUtils'
 import { cn } from '@/utils/web/cn'
 
 import { organizeStateSpecificPeople } from './organizeStateSpecificPeople'
@@ -141,10 +140,6 @@ export function LocationStateSpecific({
                           locale={locale}
                           person={stance.person}
                           stance={stance}
-                        />
-                        <CryptoSupportHighlight
-                          className="mx-auto mt-2"
-                          stanceScore={stance.computedStanceScore}
                         />
                       </div>
                     )
