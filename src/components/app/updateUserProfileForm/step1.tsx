@@ -240,7 +240,7 @@ export function UpdateUserProfileForm({
             </CollapsibleContent>
           </Collapsible>
           <Button
-            className="w-full md:w-1/2"
+            className="w-full self-center md:w-1/2"
             disabled={form.formState.isSubmitting}
             size="lg"
             type="submit"
