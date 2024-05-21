@@ -4,6 +4,10 @@ import * as Sentry from '@sentry/nextjs'
 import { logger } from '@/utils/shared/logger'
 import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
 
+function ignoreErrorOnMixpanel(error: Error) {
+  return /Non-Error promise rejection captured with value: Object Not Found/.test(error.message)
+}
+
 export function useHandlePageError({
   domain,
   humanReadablePageName,
@@ -21,6 +25,9 @@ export function useHandlePageError({
       ? `Testing Sentry Triggered ${humanReadablePageName} Error Page`
       : `${humanReadablePageName} Error Page Displayed`
     Sentry.captureMessage(message, { fingerprint: [`fingerprint-${message}`] })
+
+    if (ignoreErrorOnMixpanel(error)) return
+
     trackClientAnalytic('Error Page Visible', { Category: humanReadablePageName })
   }, [domain, error, humanReadablePageName])
 }
