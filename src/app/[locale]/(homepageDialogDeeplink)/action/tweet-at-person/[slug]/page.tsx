@@ -11,7 +11,7 @@ import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { UserActionTweetAtPersonCampaignName } from '@/utils/shared/userActionCampaigns'
 import { cn } from '@/utils/web/cn'
 
-export const revalidate = SECONDS_DURATION.SECOND * 30
+export const revalidate = SECONDS_DURATION['30_SECONDS']
 export const dynamic = 'error'
 export const dynamicParams = true
 

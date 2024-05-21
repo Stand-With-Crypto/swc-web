@@ -7,7 +7,7 @@ import { getPublicRecentActivity } from '@/data/recentActivity/getPublicRecentAc
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
 export const dynamic = 'error'
-export const revalidate = SECONDS_DURATION.SECOND * 30
+export const revalidate = SECONDS_DURATION['30_SECONDS']
 
 const zodParams = z.object({
   limit: z.string().pipe(z.coerce.number().int().gte(0).lt(100)),
