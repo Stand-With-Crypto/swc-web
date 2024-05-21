@@ -5,7 +5,7 @@ import { queryDTSIAllBills } from '@/data/dtsi/queries/queryDTSIAllBills'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 
-export const revalidate = 1200
+export const revalidate = 60
 export const dynamic = 'error'
 
 const title = 'Crypto Bills'

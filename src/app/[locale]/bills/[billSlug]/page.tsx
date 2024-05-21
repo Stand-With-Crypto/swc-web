@@ -7,7 +7,7 @@ import { queryDTSIAllBillsSlugs } from '@/data/dtsi/queries/queryDTSIAllBillsSlu
 import { queryDTSIBillDetails } from '@/data/dtsi/queries/queryDTSIBillDetails'
 import { PageProps } from '@/types'
 
-export const revalidate = 1200
+export const revalidate = 60
 export const dynamic = 'error'
 export const dynamicParams = true
 
