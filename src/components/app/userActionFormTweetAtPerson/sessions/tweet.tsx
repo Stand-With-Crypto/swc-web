@@ -178,6 +178,7 @@ May 22nd is Bitcoin Pizza Day! I applaud all the representatives who are protect
       {representative && (
         <div className="align-center mb-6 flex w-full justify-center">
           <DTSIPersonHeroCard
+            isClickable={false}
             isRecommended={false}
             locale={SupportedLocale.EN_US}
             person={representative}
