@@ -79,13 +79,16 @@ export function DTSIPersonHeroCard(props: Props) {
     ? ` (${politicalAffiliationCategoryAbbreviation})`
     : ''
   const displayName = `${dtsiPersonFullName(person)}${politicalAbbrDisplayName}`
+
+  const DtsiPersonHeroCardWrapper = isClickable ? InternalLink : 'div'
+
   return (
-    <InternalLink
+    <DtsiPersonHeroCardWrapper
       className={cn(
         'block shrink-0 overflow-hidden bg-white text-left shadow-md hover:!no-underline max-sm:rounded-3xl max-sm:border sm:inline-block sm:w-52 xl:w-72',
         !isClickable && 'hover:cursor-default',
       )}
-      href={isClickable ? getIntlUrls(locale).politicianDetails(person.slug) : ''}
+      href={getIntlUrls(locale).politicianDetails(person.slug)}
     >
       <div className="max-sm:flex">
         <div
@@ -166,6 +169,6 @@ export function DTSIPersonHeroCard(props: Props) {
           )}
         </DTSIPersonHeroCardFooter>
       )}
-    </InternalLink>
+    </DtsiPersonHeroCardWrapper>
   )
 }

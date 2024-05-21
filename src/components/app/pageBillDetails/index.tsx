@@ -51,7 +51,7 @@ export function PageBillDetails(props: PageBillDetailsProps) {
         <p className="text-lg font-semibold">Analysis</p>
 
         <div className="space-y-6 text-center text-fontcolor-muted">
-          {analyses?.length ? (
+          {analyses.length ? (
             analyses.map(analysis => (
               <div className="space-y-2" key={analysis.id}>
                 <RichTextFormatter richText={analysis.richTextCommentary} />
