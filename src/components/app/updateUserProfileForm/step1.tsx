@@ -77,7 +77,7 @@ export function UpdateUserProfileForm({
   return (
     <Form {...form}>
       <form
-        className="flex h-full flex-col space-y-6"
+        className="flex min-h-full flex-col gap-6"
         onSubmit={form.handleSubmit(async values => {
           const address = values.address
             ? await convertGooglePlaceAutoPredictionToAddressSchema(values.address).catch(e => {
@@ -226,7 +226,11 @@ export function UpdateUserProfileForm({
               )}
             />
           )}
-          <Collapsible className="!my-4 max-md:!mt-auto" open={!!phoneNumberValue}>
+
+          <FormGeneralErrorMessage control={form.control} />
+        </div>
+        <div className="flex flex-col justify-center gap-4 max-md:!mt-auto md:mt-4">
+          <Collapsible open={!!phoneNumberValue}>
             <CollapsibleContent className="AnimateCollapsibleContent">
               <FormDescription className="text-center lg:text-left">
                 By clicking Next, you consent to receive recurring texts from Stand With Crypto to
@@ -235,9 +239,6 @@ export function UpdateUserProfileForm({
               </FormDescription>
             </CollapsibleContent>
           </Collapsible>
-          <FormGeneralErrorMessage control={form.control} />
-        </div>
-        <div className="flex justify-center gap-6 max-md:!mt-auto md:mt-4">
           <Button
             className="w-full md:w-1/2"
             disabled={form.formState.isSubmitting}
