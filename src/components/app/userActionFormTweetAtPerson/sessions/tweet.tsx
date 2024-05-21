@@ -188,7 +188,7 @@ May 22nd is Bitcoin Pizza Day! With the vote on #FIT21, it’s more important th
       )}
 
       {!hasUserTweeted && (
-        <div className="bg-backgroundAlternate mb-6 w-full max-w-[320px] rounded-2xl p-6 lg:max-w-[600px]">
+        <div className="mb-6 w-full max-w-[320px] rounded-2xl bg-backgroundAlternate p-6 lg:max-w-[600px]">
           <p>{getTweetMessageBasedOnRepresentativeScore()}</p>
         </div>
       )}
