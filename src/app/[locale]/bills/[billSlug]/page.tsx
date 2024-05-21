@@ -6,8 +6,10 @@ import { PageBillDetails } from '@/components/app/pageBillDetails'
 import { queryDTSIAllBillsSlugs } from '@/data/dtsi/queries/queryDTSIAllBillsSlugs'
 import { queryDTSIBillDetails } from '@/data/dtsi/queries/queryDTSIBillDetails'
 import { PageProps } from '@/types'
+import { generateMetadataDetails } from '@/utils/server/metadataUtils'
+import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
-export const revalidate = 1200
+export const revalidate = SECONDS_DURATION['20_MINUTES']
 export const dynamic = 'error'
 export const dynamicParams = false
 
@@ -23,10 +25,10 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   if (!bill) {
     return {}
   }
-  return {
+  return generateMetadataDetails({
     title: bill.shortTitle || bill.title,
     description: bill.summary || bill.title,
-  }
+  })
 }
 
 export async function generateStaticParams() {
