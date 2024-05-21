@@ -90,23 +90,18 @@ May 22nd is Bitcoin Pizza Day! I applaud all the representatives who are protect
     return (() => {
       switch (convertDTSIPersonStanceScoreToLetterGrade(representative)) {
         case DTSILetterGrade.A:
-        case DTSILetterGrade.B:
           return `🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕
-May 22nd is Bitcoin Pizza Day! I applaud my representative ${representativeXHandle} for protecting Americans’ right to own crypto. See where your representative stands at www.standwithcrypto.org/pizza and join the fight! #StandWithCrypto #${user?.userLocationDetails?.administrativeAreaLevel1 ?? ''}
-          `
+May 22nd is Bitcoin Pizza Day! I applaud my representative ${representativeXHandle} for protecting Americans’ right to own crypto. As Congress votes on #FIT21, see where your representative stands at www.standwithcrypto.org and join the movement! #StandWithCrypto`
+        case DTSILetterGrade.B:
         case DTSILetterGrade.C:
         case null:
           return `🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕
-May 22nd is Bitcoin Pizza Day! I’m asking my representative ${representativeXHandle} to protect Americans’ right to own crypto. See where your representative stands at www.standwithcrypto.org/pizza and join the fight! #StandWithCrypto #${user?.userLocationDetails?.administrativeAreaLevel1 ?? ''}`
+May 22nd is Bitcoin Pizza Day! I’m asking my representative ${representativeXHandle} to protect Americans’ right to own crypto. As Congress votes on #FIT21, see where your representative stands at www.standwithcrypto.org and join the movement! #StandWithCrypto`
         case DTSILetterGrade.D:
         case DTSILetterGrade.F:
-          return `🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕
-May 22nd is Bitcoin Pizza Day! Like many other politicians my representative doesn’t understand the importance of crypto for America. See where your representative stands at www.standwithcrypto.org/pizza and join the fight! #StandWithCrypto #${user?.userLocationDetails?.administrativeAreaLevel1 ?? ''}
-          `
         default:
           return `🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕
-May 22nd is Bitcoin Pizza Day! I applaud all the representatives who are protecting Americans’ right to own crypto. See where your representative stands at www.standwithcrypto.org/pizza and join the fight! #StandWithCrypto
-                `
+May 22nd is Bitcoin Pizza Day! With the vote on #FIT21, it’s more important than ever for the crypto community to be engaged and active. See what your Congressional representative has said about crypto at www.standwithcrypto.org and join the movement! #StandWithCrypto`
       }
     })()
   }
@@ -193,7 +188,7 @@ May 22nd is Bitcoin Pizza Day! I applaud all the representatives who are protect
       )}
 
       {!hasUserTweeted && (
-        <div className="mb-6 w-full max-w-[320px] rounded-2xl bg-backgroundAlternate p-6 lg:max-w-[600px]">
+        <div className="bg-backgroundAlternate mb-6 w-full max-w-[320px] rounded-2xl p-6 lg:max-w-[600px]">
           <p>{getTweetMessageBasedOnRepresentativeScore()}</p>
         </div>
       )}
