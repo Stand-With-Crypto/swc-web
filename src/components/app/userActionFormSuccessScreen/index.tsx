@@ -8,18 +8,14 @@ import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiRes
 
 type Props = React.ComponentPropsWithoutRef<typeof UserActionFormSuccessScreenMainCTA>
 
-export function UserActionFormSuccessScreenContent(props: Props) {
-  return (
-    <div className="flex min-h-[400px] flex-col">
-      <div className="flex flex-grow items-center">
-        <UserActionFormSuccessScreenMainCTA {...props} />
-      </div>
-      <UserActionFormSuccessScreenNextAction {...props} />
-    </div>
-  )
+interface UserActionFormSuccessScreenProps extends Omit<Props, 'data'> {
+  children: React.ReactNode
 }
 
-export function UserActionFormSuccessScreen(props: Omit<Props, 'data'>) {
+export function UserActionFormSuccessScreen({
+  children,
+  ...props
+}: UserActionFormSuccessScreenProps) {
   const userData = useApiResponseForUserFullProfileInfo({ revalidateOnMount: true })
   const performedActionsData = useApiResponseForUserPerformedUserActionTypes({
     revalidateOnMount: true,
@@ -36,5 +32,14 @@ export function UserActionFormSuccessScreen(props: Omit<Props, 'data'>) {
       performedUserActionTypes,
     }
   }, [userData, performedActionsData])
-  return <UserActionFormSuccessScreenContent {...props} data={data} />
+
+  return (
+    <div className="flex min-h-[400px] flex-col gap-6">
+      <UserActionFormSuccessScreenMainCTA {...props} data={data}>
+        {children}
+      </UserActionFormSuccessScreenMainCTA>
+
+      <UserActionFormSuccessScreenNextAction data={data} />
+    </div>
+  )
 }

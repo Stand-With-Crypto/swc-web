@@ -8,15 +8,19 @@ import { getUserActionCTAInfo } from '@/components/app/userActionRowCTA/constant
 import { cn } from '@/utils/web/cn'
 import { USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN } from '@/utils/web/userActionUtils'
 
+export interface UserActionRowCTAsListProps {
+  performedUserActionTypes?: Array<{ actionType: UserActionType; campaignName: string }>
+  excludeUserActionTypes?: UserActionType[]
+  className?: string
+  render?: (props: React.ComponentPropsWithoutRef<typeof UserActionRowCTA>) => React.ReactNode
+}
+
 export function UserActionRowCTAsList({
   performedUserActionTypes,
   excludeUserActionTypes,
+  render,
   className,
-}: {
-  className?: string
-  performedUserActionTypes?: Array<{ actionType: UserActionType; campaignName: string }>
-  excludeUserActionTypes?: UserActionType[]
-}) {
+}: UserActionRowCTAsListProps) {
   const filteredActions = useMemo(() => {
     return !excludeUserActionTypes
       ? USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN
@@ -29,22 +33,21 @@ export function UserActionRowCTAsList({
     <div className={cn('space-y-4', className)}>
       {filteredActions.map(({ action, campaign }) => {
         const props = getUserActionCTAInfo(action, campaign)
-        return (
-          <UserActionRowCTA
-            key={`${action}-${campaign}`}
-            state={
-              !performedUserActionTypes
-                ? 'unknown'
-                : performedUserActionTypes.some(
-                      performedAction =>
-                        performedAction.actionType === action &&
-                        performedAction.campaignName === campaign,
-                    )
-                  ? 'complete'
-                  : 'incomplete'
-            }
-            {...props}
-          />
+
+        const state = !performedUserActionTypes
+          ? 'unknown'
+          : performedUserActionTypes.some(
+                performedAction =>
+                  performedAction.actionType === action &&
+                  performedAction.campaignName === campaign,
+              )
+            ? 'complete'
+            : 'incomplete'
+
+        return render ? (
+          render({ state, ...props })
+        ) : (
+          <UserActionRowCTA key={`${action}-${campaign}`} state={state} {...props} />
         )
       })}
     </div>

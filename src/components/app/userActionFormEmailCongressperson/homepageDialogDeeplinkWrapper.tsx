@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import { UserActionFormEmailCongressperson } from '@/components/app/userActionFormEmailCongressperson'
 import { ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON } from '@/components/app/userActionFormEmailCongressperson/constants'
 import { UserActionFormEmailCongresspersonSkeleton } from '@/components/app/userActionFormEmailCongressperson/skeleton'
+import { UserActionFormEmailCongresspersonSuccess } from '@/components/app/userActionFormEmailCongressperson/success'
 import { FormFields } from '@/components/app/userActionFormEmailCongressperson/types'
 import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
@@ -50,7 +51,9 @@ function UserActionFormEmailCongresspersonDeeplinkWrapperContent() {
     />
   ) : (
     <div className={cn(dialogContentPaddingStyles)}>
-      <UserActionFormSuccessScreen onClose={() => router.replace(urls.home())} />
+      <UserActionFormSuccessScreen onClose={() => router.replace(urls.home())}>
+        <UserActionFormEmailCongresspersonSuccess />
+      </UserActionFormSuccessScreen>
     </div>
   )
 }

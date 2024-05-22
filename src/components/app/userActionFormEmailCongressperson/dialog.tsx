@@ -5,6 +5,7 @@ import { Suspense, useEffect, useState } from 'react'
 import { ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON } from '@/components/app/userActionFormEmailCongressperson/constants'
 import { LazyUserActionFormEmailCongressperson } from '@/components/app/userActionFormEmailCongressperson/lazyLoad'
 import { UserActionFormEmailCongresspersonSkeleton } from '@/components/app/userActionFormEmailCongressperson/skeleton'
+import { UserActionFormEmailCongresspersonSuccess } from '@/components/app/userActionFormEmailCongressperson/success'
 import { FormFields } from '@/components/app/userActionFormEmailCongressperson/types'
 import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
@@ -40,7 +41,7 @@ export function UserActionFormEmailCongresspersonDialog({
     <Dialog {...dialogProps}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="max-w-3xl" padding={false}>
-        <Suspense fallback={<UserActionFormEmailCongresspersonSkeleton locale={locale} />}>
+        {/* <Suspense fallback={<UserActionFormEmailCongresspersonSkeleton locale={locale} />}>
           {fetchUser.isLoading ? (
             <UserActionFormEmailCongresspersonSkeleton locale={locale} />
           ) : state === 'form' ? (
@@ -52,10 +53,17 @@ export function UserActionFormEmailCongresspersonDialog({
             />
           ) : (
             <div className={cn(dialogContentPaddingStyles)}>
-              <UserActionFormSuccessScreen onClose={() => dialogProps.onOpenChange(false)} />
+              <UserActionFormSuccessScreen onClose={() => dialogProps.onOpenChange(false)}>
+                <UserActionFormEmailCongresspersonSuccess />
+              </UserActionFormSuccessScreen>
             </div>
           )}
-        </Suspense>
+        </Suspense> */}
+        <div className={cn(dialogContentPaddingStyles)}>
+          <UserActionFormSuccessScreen onClose={() => dialogProps.onOpenChange(false)}>
+            <UserActionFormEmailCongresspersonSuccess />
+          </UserActionFormSuccessScreen>
+        </div>
       </DialogContent>
     </Dialog>
   )

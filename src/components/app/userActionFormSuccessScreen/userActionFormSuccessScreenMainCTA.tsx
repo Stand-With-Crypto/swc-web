@@ -1,8 +1,13 @@
 'use client'
-import { useState } from 'react'
+import { ReactNode, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { UserActionType } from '@prisma/client'
 import { Check } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import { toast } from 'sonner'
 
+import { actionUpdateUserProfile } from '@/actions/actionUpdateUserProfile'
 import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
 import { GetUserPerformedUserActionTypesResponse } from '@/app/api/identified-user/performed-user-action-types/route'
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
@@ -10,7 +15,16 @@ import { OPEN_UPDATE_USER_PROFILE_FORM_QUERY_PARAM_KEY } from '@/components/app/
 import { getNextAction } from '@/components/app/userActionFormSuccessScreen/getNextAction'
 import { HasOptedInToMembershipForm } from '@/components/app/userActionFormSuccessScreen/hasOptedInToMembershipForm'
 import { Button } from '@/components/ui/button'
+import {
+  Form,
+  FormControl,
+  FormErrorMessage,
+  FormField,
+  FormItem,
+  FormLabel,
+} from '@/components/ui/form'
 import { NextImage } from '@/components/ui/image'
+import { Input } from '@/components/ui/input'
 import { InternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
@@ -18,8 +32,10 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useSession } from '@/hooks/useSession'
 import { TURN_OFF_NFT_MINT } from '@/utils/shared/killSwitches'
+import { trackFormSubmissionSyncErrors, triggerServerActionForForm } from '@/utils/web/formUtils'
 import { hasCompleteUserProfile } from '@/utils/web/hasCompleteUserProfile'
 import { NFTClientMetadata } from '@/utils/web/nft'
+import { zodUpdateUserProfileWithRequiredFormFields } from '@/validation/forms/zodUpdateUserProfile/zodUpdateUserProfileFormFields'
 
 const NFTImage = ({ nft }: { nft: NFTClientMetadata }) => (
   <NextImage
@@ -32,29 +48,98 @@ const NFTImage = ({ nft }: { nft: NFTClientMetadata }) => (
   />
 )
 
-const RedeemedNFTImage = ({ nft }: { nft: NFTClientMetadata }) => (
-  <div>
-    <NFTImage nft={nft} />
-  </div>
-)
+const FORM_NAME = 'User phone number'
 
-function Container({ children }: { children: React.ReactNode }) {
-  return <div className="w-full space-y-6 text-center">{children}</div>
+interface UserActionFormSuccessScreenMainCTAProps {
+  children: ReactNode
+  nftWhenAuthenticated?: NFTClientMetadata
+  data:
+    | {
+        user: GetUserFullProfileInfoResponse['user']
+        performedUserActionTypes: GetUserPerformedUserActionTypesResponse['performedUserActionTypes']
+      }
+    | undefined
+  onClose: () => void
 }
 
 export function UserActionFormSuccessScreenMainCTA({
+  children,
   nftWhenAuthenticated,
   data,
   onClose,
-}: {
-  nftWhenAuthenticated?: NFTClientMetadata
-  data?: {
-    user: GetUserFullProfileInfoResponse['user']
-    performedUserActionTypes: GetUserPerformedUserActionTypesResponse['performedUserActionTypes']
-  }
-  onClose: () => void
-}) {
+}: UserActionFormSuccessScreenMainCTAProps) {
+  const router = useRouter()
   const session = useSession()
+
+  const form = useForm({
+    resolver: zodResolver(zodUpdateUserProfileWithRequiredFormFields),
+    defaultValues: {
+      phoneNumber: '',
+    },
+  })
+
+  /**
+   * TODO: Check auth state & phone number
+   */
+
+  return (
+    <div className="w-full space-y-6 text-center">
+      <PageTitle size={'md'}>Nice work!</PageTitle>
+      <PageSubTitle size={'md'}>
+        This is an important year for crypto. Sign up for occasional text updates on important
+        legislation, elections, and events in your area.
+      </PageSubTitle>
+      <Form {...form}>
+        <form
+          className="flex h-full flex-col space-y-6"
+          onSubmit={form.handleSubmit(async values => {
+            const result = await triggerServerActionForForm(
+              {
+                form,
+                formName: FORM_NAME,
+                payload: { ...values, hasOptedInToSms: !!values.phoneNumber },
+              },
+              payload => actionUpdateUserProfile(payload),
+            )
+            if (result.status === 'success') {
+              router.refresh()
+              toast.success('Profile updated', { duration: 5000 })
+            }
+          }, trackFormSubmissionSyncErrors(FORM_NAME))}
+        >
+          <FormField
+            control={form.control}
+            name="phoneNumber"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Input placeholder="Phone number" {...field} />
+                </FormControl>
+                <FormErrorMessage />
+              </FormItem>
+            )}
+          />
+          <div className="space-y-4">
+            <p className="text-sm text-fontcolor-muted">
+              By clicking Get updates, I consent to receive recurring texts from Stand with Crypto.
+              You can reply STOP to stop receiving texts. Message and data rates may apply.
+            </p>
+            <Button
+              className="w-full md:w-1/2"
+              disabled={form.formState.isSubmitting}
+              size="lg"
+              type="submit"
+            >
+              Get updates
+            </Button>
+          </div>
+        </form>
+      </Form>
+    </div>
+  )
+
+  return children
+
   const urls = useIntlUrls()
   const [hasOptedInToMembershipState, setHasOptedInToMembershipState] = useState<
     'hidden' | 'visible' | 'submitted'
