@@ -70,13 +70,13 @@ export function TweetAtPersonSection({
   function getTweetMessageBasedOnRepresentativeScore() {
     if (congressPersonNotFound) {
       return `🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕
-May 22nd is Bitcoin Pizza Day! I applaud all the representatives who are protecting Americans’ right to own crypto. See where your representative stands at www.standwithcrypto.org/pizza and join the fight! #StandWithCrypto
+May 22nd is Bitcoin Pizza Day! With the vote on #FIT21, it’s more important than ever for the crypto community to be engaged and active. See what your Congressional representative has said about crypto at www.standwithcrypto.org and join the movement! #StandWithCrypto
       `
     }
 
     if (!representative) {
       return `🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕
-May 22nd is Bitcoin Pizza Day! I applaud all the representatives who are protecting Americans’ right to own crypto. See where your representative stands at www.standwithcrypto.org/pizza and join the fight! #StandWithCrypto
+May 22nd is Bitcoin Pizza Day! With the vote on #FIT21, it’s more important than ever for the crypto community to be engaged and active. See what your Congressional representative has said about crypto at www.standwithcrypto.org and join the movement! #StandWithCrypto
       `
     }
 
