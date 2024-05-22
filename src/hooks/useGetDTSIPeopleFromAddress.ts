@@ -17,6 +17,10 @@ export interface DTSIPeopleFromCongressionalDistrict
   dtsiPeople: DTSIPeopleByCongressionalDistrictQueryResult
 }
 
+export type UseGetDTSIPeopleFromAddressResponse = Awaited<
+  ReturnType<typeof getDTSIPeopleFromAddress>
+>
+
 async function getDTSIPeopleFromCongressionalDistrict(
   result: CongressionalDistrictFromAddress,
   category: YourPoliticianCategory,
@@ -56,19 +60,20 @@ async function getDTSIPeopleFromCongressionalDistrict(
   return { ...result, dtsiPeople: filteredData }
 }
 
-export async function getDTSIPeopleFromAddress(address: string, category: YourPoliticianCategory) {
+export async function getDTSIPeopleFromAddress(
+  category: YourPoliticianCategory,
+  address?: string | null,
+) {
   const result = await getCongressionalDistrictFromAddress(address)
 
   return getDTSIPeopleFromCongressionalDistrict(result, category)
 }
-
-export type UseGetDTSIPeopleFromAddressResponse = Awaited<
-  ReturnType<typeof getDTSIPeopleFromAddress>
->
-
-export function useGetDTSIPeopleFromAddress(address: string, category: YourPoliticianCategory) {
+export function useGetDTSIPeopleFromAddress(
+  category: YourPoliticianCategory,
+  address?: string | null,
+) {
   return useSWR(address ? `useGetDTSIPeopleFromAddress-${address}` : null, () =>
-    getDTSIPeopleFromAddress(address, category),
+    getDTSIPeopleFromAddress(category, address),
   )
 }
 export function formatGetDTSIPeopleFromAddressNotFoundReason(

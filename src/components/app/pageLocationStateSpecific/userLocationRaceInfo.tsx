@@ -58,7 +58,7 @@ function _UserLocationRaceInfo({
   locale,
 }: UserLocationRaceInfoProps) {
   const { setAddress, address } = useMutableCurrentUserAddress()
-  const res = useGetDistrictFromAddress(address === 'loading' ? '' : address?.description || '', {
+  const res = useGetDistrictFromAddress(address === 'loading' ? null : address?.description, {
     stateCode,
   })
   const shouldShowSubtitle = !address || !res.data

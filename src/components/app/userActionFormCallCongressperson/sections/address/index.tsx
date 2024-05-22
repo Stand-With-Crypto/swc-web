@@ -212,8 +212,8 @@ export function useCongresspersonData({
       }
 
       const dtsiResponse = await getDTSIPeopleFromAddress(
-        address.description,
         CALL_FLOW_POLITICIANS_CATEGORY,
+        address.description,
       )
       if ('notFoundReason' in dtsiResponse) {
         return { notFoundReason: dtsiResponse.notFoundReason }
