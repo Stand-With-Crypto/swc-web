@@ -2,7 +2,6 @@ import React from 'react'
 import { orderBy } from 'lodash-es'
 import { Globe } from 'lucide-react'
 
-import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
 import { DTSIStanceDetails } from '@/components/app/dtsiStanceDetails'
 import { QuestionnaireAccordion } from '@/components/app/pagePoliticianDetails/questionnaireAccordion'
 import { ScoreExplainer } from '@/components/app/pagePoliticianDetails/scoreExplainer'
@@ -12,6 +11,7 @@ import { InitialsAvatar } from '@/components/ui/initialsAvatar'
 import { ExternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
+import { DTSI_PersonStanceType } from '@/data/dtsi/generated'
 import { DTSIPersonDetails } from '@/data/dtsi/queries/queryDTSIPersonDetails'
 import { SupportedLocale } from '@/intl/locales'
 import {
@@ -39,7 +39,11 @@ export function PagePoliticianDetails({
   locale: SupportedLocale
   questionnaire: SWCQuestionnaireAnswers | null
 }) {
-  const stances = orderBy(person.stances, x => -1 * new Date(x.dateStanceMade).getTime())
+  const stances = orderBy(person.stances, [
+    x => (x.stanceType === DTSI_PersonStanceType.BILL_RELATIONSHIP ? 0 : 1),
+    x => -1 * new Date(x.dateStanceMade).getTime(),
+  ])
+
   return (
     <div className="standard-spacing-from-navbar container max-w-3xl">
       <section>
@@ -136,17 +140,9 @@ export function PagePoliticianDetails({
         </PageTitle>
         <div className="space-y-14 md:space-y-16">
           {!stances.length && <div>No recent statements.</div>}
-          {stances.map(stance => {
-            return (
-              <div key={stance.id}>
-                <DTSIStanceDetails locale={locale} person={person} stance={stance} />
-                <CryptoSupportHighlight
-                  className="mx-auto mt-2"
-                  stanceScore={stance.computedStanceScore}
-                />
-              </div>
-            )
-          })}
+          {stances.map(stance => (
+            <DTSIStanceDetails key={stance.id} locale={locale} person={person} stance={stance} />
+          ))}
         </div>
       </section>
     </div>

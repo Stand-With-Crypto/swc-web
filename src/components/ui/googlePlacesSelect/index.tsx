@@ -41,7 +41,7 @@ export const GooglePlacesSelect = React.forwardRef<
     requestOptions: {
       locationBias: 'IP_BIAS',
       language: 'en',
-      types: ['street_address', 'premise', 'postal_code', 'subpremise'],
+      types: ['street_address', 'premise', 'postal_code', 'subpremise', 'route'],
     },
   })
   const scriptStatus = useGoogleMapsScript()

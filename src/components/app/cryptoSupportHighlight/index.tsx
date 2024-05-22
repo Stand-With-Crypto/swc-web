@@ -31,7 +31,9 @@ export function CryptoSupportHighlight({
       ) : (
         <ThumbsDown className="relative top-[3px]" />
       )}
-      <div>{text || convertDTSIStanceScoreToCryptoSupportLanguage(stanceScore)}</div>
+      <div className="capitalize">
+        {text || convertDTSIStanceScoreToCryptoSupportLanguage(stanceScore)}
+      </div>
     </div>
   )
 }

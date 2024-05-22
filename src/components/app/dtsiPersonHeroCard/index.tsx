@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { User } from 'lucide-react'
 
 import { DTSIFormattedLetterGrade } from '@/components/app/dtsiFormattedLetterGrade'
@@ -27,6 +27,7 @@ interface Props {
   subheader: 'role' | 'role-w-state' | string
   isRecommended?: boolean
   footer?: React.ReactNode
+  isClickable?: boolean
 }
 
 function getSubHeaderString(props: Props) {
@@ -69,7 +70,7 @@ export function DTSIPersonHeroCardFooter({
 }
 
 export function DTSIPersonHeroCard(props: Props) {
-  const { person, locale, isRecommended, footer } = props
+  const { person, locale, isRecommended, footer, isClickable = true } = props
   const politicalAffiliationCategoryAbbreviation =
     person.politicalAffiliationCategory &&
     dtsiPersonPoliticalAffiliationCategoryAbbreviation(person.politicalAffiliationCategory)
@@ -78,11 +79,9 @@ export function DTSIPersonHeroCard(props: Props) {
     ? ` (${politicalAffiliationCategoryAbbreviation})`
     : ''
   const displayName = `${dtsiPersonFullName(person)}${politicalAbbrDisplayName}`
+
   return (
-    <InternalLink
-      className="block shrink-0 overflow-hidden bg-white text-left shadow-md hover:!no-underline max-sm:rounded-3xl max-sm:border sm:inline-block sm:w-52 xl:w-72"
-      href={getIntlUrls(locale).politicianDetails(person.slug)}
-    >
+    <DtsiPersonHeroCardWrapper isClickable={isClickable} locale={locale} person={person}>
       <div className="max-sm:flex">
         <div
           className={cn(
@@ -162,6 +161,33 @@ export function DTSIPersonHeroCard(props: Props) {
           )}
         </DTSIPersonHeroCardFooter>
       )}
+    </DtsiPersonHeroCardWrapper>
+  )
+}
+
+function DtsiPersonHeroCardWrapper({
+  person,
+  locale,
+  isClickable,
+  children,
+}: {
+  isClickable: boolean
+  children: ReactNode
+  person: DTSI_PersonCardFragment
+  locale: SupportedLocale
+}) {
+  const className = cn(
+    'block shrink-0 overflow-hidden bg-white text-left shadow-md hover:!no-underline max-sm:rounded-3xl max-sm:border sm:inline-block sm:w-52 xl:w-72',
+    !isClickable && 'hover:cursor-default',
+  )
+
+  if (!isClickable) {
+    return <div className={className}>{children}</div>
+  }
+
+  return (
+    <InternalLink className={className} href={getIntlUrls(locale).politicianDetails(person.slug)}>
+      {children}
     </InternalLink>
   )
 }

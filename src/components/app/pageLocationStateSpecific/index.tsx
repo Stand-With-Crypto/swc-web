@@ -1,7 +1,6 @@
 import { compact, isEmpty, times } from 'lodash-es'
 
 import { ContentSection } from '@/components/app/ContentSection'
-import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
 import { DarkHeroSection } from '@/components/app/darkHeroSection'
 import { DTSIPersonHeroCardSection } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardSection'
 import { DTSIStanceDetails } from '@/components/app/dtsiStanceDetails'
@@ -141,10 +140,6 @@ export function LocationStateSpecific({
                           locale={locale}
                           person={stance.person}
                           stance={stance}
-                        />
-                        <CryptoSupportHighlight
-                          className="mx-auto mt-2"
-                          stanceScore={stance.computedStanceScore}
                         />
                       </div>
                     )

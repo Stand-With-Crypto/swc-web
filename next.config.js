@@ -206,6 +206,11 @@ const nextConfig = {
         source: '/call',
       },
       {
+        permanent: false,
+        destination: '/action/email?utm_source=swc&utm_medium=sms&utm_campaign=fit21-2024-05-text',
+        source: '/text',
+      },
+      {
         permanent: true,
         destination: '/community',
         source: '/leaderboard',
@@ -256,7 +261,8 @@ const nextConfig = {
       // tweet at person campaigns
       {
         source: '/pizza',
-        destination: '/action/tweet-at-person/2024_05_22_PIZZA_DAY',
+        destination:
+          '/action/tweet-at-person/2024_05_22_PIZZA_DAY?utm_source=pizzadao&utm_medium=live-event&utm_campaign=pizza-day-2024',
         permanent: false,
       },
     ]

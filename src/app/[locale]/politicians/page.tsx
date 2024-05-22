@@ -26,6 +26,7 @@ export async function generateMetadata(_props: Props): Promise<Metadata> {
 export default async function PoliticiansHomepage({ params }: PageProps) {
   const { locale } = params
   const results = await queryDTSIAllPeople()
+
   const people = sortDTSIPersonDataTable(results.people).slice(0, 100)
   return <PagePoliticians {...{ people, locale }} />
 }

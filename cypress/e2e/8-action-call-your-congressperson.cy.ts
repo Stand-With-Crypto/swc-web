@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
 
 it('action - call your congressperson', () => {
+  cy.viewport('iphone-6')
   cy.visit('/')
 
   // validate CTA button

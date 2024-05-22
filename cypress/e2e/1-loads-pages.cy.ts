@@ -14,7 +14,7 @@ it('sanity checks that all the pages loaded as expected', () => {
   cy.get('h1').contains('politicians')
 
   cy.visit('/resources')
-  cy.get('h1').contains('Your voice will shape the future of crypto in America')
+  cy.get('h1').contains('FIT21 Resources')
 
   cy.visit('/donate')
   cy.get('h1').contains('Protect the future of crypto')
