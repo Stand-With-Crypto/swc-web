@@ -6,6 +6,7 @@ import { PageBillDetails } from '@/components/app/pageBillDetails'
 import { queryDTSIAllBillsSlugs } from '@/data/dtsi/queries/queryDTSIAllBillsSlugs'
 import { queryDTSIBillDetails } from '@/data/dtsi/queries/queryDTSIBillDetails'
 import { PageProps } from '@/types'
+import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 
 export const revalidate = 60
 export const dynamic = 'error'
@@ -23,10 +24,11 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   if (!bill) {
     return {}
   }
-  return {
+  return generateMetadataDetails({
     title: bill.shortTitle || bill.title,
-    description: bill.summary || bill.title,
-  }
+    description:
+      "Learn more about this bill, including whether it's pro crypto, see who sponsored/cosponsored it, and track votes.",
+  })
 }
 
 export async function generateStaticParams() {
