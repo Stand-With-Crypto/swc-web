@@ -265,6 +265,11 @@ const nextConfig = {
           '/action/tweet-at-person/2024_05_22_PIZZA_DAY?utm_source=pizzadao&utm_medium=live-event&utm_campaign=pizza-day-2024',
         permanent: false,
       },
+      {
+        source: '/&modal=call-your-representative&:rest*',
+        destination: '/action/call?unexpectedUrl=true',
+        permanent: false,
+      },
     ]
   },
 }
