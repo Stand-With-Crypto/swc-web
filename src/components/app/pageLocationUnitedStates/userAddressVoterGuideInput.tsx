@@ -50,8 +50,8 @@ const POLITICIAN_CATEGORY: YourPoliticianCategory = 'senate-and-house'
 function _UserAddressVoterGuideInputSection({ locale }: UserAddressVoterGuideInput) {
   const { setAddress, address } = useMutableCurrentUserAddress()
   const res = useGetDTSIPeopleFromAddress(
-    address === 'loading' ? '' : address?.description || '',
     POLITICIAN_CATEGORY,
+    address === 'loading' ? null : address?.description,
   )
   const shouldShowSubtitle = !address || !res.data
 
