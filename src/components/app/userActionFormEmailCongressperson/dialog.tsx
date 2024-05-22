@@ -59,7 +59,7 @@ export function UserActionFormEmailCongresspersonDialog({
             </div>
           )}
         </Suspense> */}
-        <div className={cn(dialogContentPaddingStyles)}>
+        <div className={cn(dialogContentPaddingStyles, 'h-full')}>
           <UserActionFormSuccessScreen onClose={() => dialogProps.onOpenChange(false)}>
             <UserActionFormEmailCongresspersonSuccess />
           </UserActionFormSuccessScreen>
