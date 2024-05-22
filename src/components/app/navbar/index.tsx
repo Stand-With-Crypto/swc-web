@@ -1,13 +1,11 @@
 'use client'
 
 import { useCallback } from 'react'
-import { useBoolean } from 'react-use'
 import { capitalize } from 'lodash-es'
-import { Menu, X } from 'lucide-react'
+import { Menu } from 'lucide-react'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { NavbarLoggedInButton } from '@/components/app/navbar/navbarLoggedInButton'
-import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { UserActionFormTweetAtPersonDialog } from '@/components/app/userActionFormTweetAtPerson/dialog'
 import { Button } from '@/components/ui/button'
 import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/drawer'
@@ -71,8 +69,6 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
     </LoginDialogWrapper>
   )
 
-  const [showBanner, closeBanner] = useBoolean(true)
-
   return (
     <>
       {hasEnvironmentBar && (
@@ -106,30 +102,6 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
           </div>
         </div>
       )}
-
-      {showBanner ? (
-        <div className="relative bg-primary-cta py-6 lg:py-8">
-          <div className="container grid items-center gap-6 sm:grid-cols-[1fr,auto,auto]">
-            <div className="space-y-1 text-sm text-background antialiased max-sm:text-center sm:text-base">
-              <p className="font-bold">Tell your representative to vote YES on Key Vote FIT21</p>
-              <p>
-                FIT21 is a historic crypto regulatory bill that will protect crypto users in the US.
-                Tell your representative to vote YES on FIT21.
-              </p>
-            </div>
-
-            <UserActionFormEmailCongresspersonDialog>
-              <Button className="max-sm:w-full" variant="secondary">
-                Send an Email
-              </Button>
-            </UserActionFormEmailCongresspersonDialog>
-
-            <button className="right-[2px] top-[2px] justify-self-end rounded-full p-1 text-white transition-all hover:bg-gray-400 max-sm:absolute max-sm:row-start-1">
-              <X className="cursor-pointer" onClick={closeBanner} size={20} />
-            </button>
-          </div>
-        </div>
-      ) : null}
 
       <nav
         className={
