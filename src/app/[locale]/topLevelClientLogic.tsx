@@ -57,6 +57,12 @@ const InitialOrchestration = () => {
       })
     }
   }, [authUser.user, searchParamsUserId])
+  const unexpectedUrl = searchParams?.get('unexpectedUrl')
+  useEffect(() => {
+    if (unexpectedUrl) {
+      Sentry.captureMessage('unexpectedUrl')
+    }
+  }, [unexpectedUrl])
   useEffect(() => {
     if (!pathname) {
       return
