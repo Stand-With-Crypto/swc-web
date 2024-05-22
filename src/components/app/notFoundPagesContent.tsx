@@ -1,5 +1,7 @@
 'use client'
-import { useCallback } from 'react'
+import { useCallback, useEffect } from 'react'
+import * as Sentry from '@sentry/nextjs'
+import { usePathname } from 'next/navigation'
 
 import { Button } from '@/components/ui/button'
 import { MaybeNextImg } from '@/components/ui/image'
@@ -15,6 +17,10 @@ export function NotFoundPagesContent() {
       action: AnalyticActionType.click,
     })
   }, [])
+  const pathname = usePathname()
+  useEffect(() => {
+    Sentry.captureMessage(`404 page rendered`, { tags: { pathname } })
+  }, [pathname])
   return (
     <div className="standard-spacing-from-navbar container mt-24 flex flex-grow flex-col items-center justify-center space-y-7">
       <MaybeNextImg alt="" height={120} src="/error_shield.svg" width={120} />
