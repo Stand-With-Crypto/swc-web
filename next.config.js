@@ -258,6 +258,11 @@ const nextConfig = {
         destination: '/races/:paths*',
         permanent: true,
       },
+      {
+        source: '/resources/fit21/docs/FIT21%20SWC%20Founder%20Letter.pdf',
+        destination: '/resources/fit21/docs/FIT21%20SWC%20Founder%20Support%20Letter.pdf',
+        permanent: true,
+      },
       // tweet at person campaigns
       {
         source: '/pizza',
