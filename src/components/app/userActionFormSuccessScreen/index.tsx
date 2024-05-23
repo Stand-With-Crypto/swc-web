@@ -1,17 +1,13 @@
 'use client'
 import { useMemo } from 'react'
 
-import { SMSOptInForm } from '@/components/app/userActionFormSuccessScreen/smsOptInForm'
-import { UserActionFormSuccessScreenMainCTA } from '@/components/app/userActionFormSuccessScreen/userActionFormSuccessScreenMainCTA'
+import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
+import { JoinSWC } from '@/components/app/userActionFormSuccessScreen/joinSWC'
+import { SMSOptInContent } from '@/components/app/userActionFormSuccessScreen/smsOptInForm'
 import { UserActionFormSuccessScreenNextAction } from '@/components/app/userActionFormSuccessScreen/userActionFormSuccessScreenNextAction'
+import { Button } from '@/components/ui/button'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
-
-type Props = React.ComponentPropsWithoutRef<typeof UserActionFormSuccessScreenMainCTA>
-
-// interface UserActionFormSuccessScreenProps extends Omit<Props, 'data'> {
-//   children: React.ReactNode
-// }
 
 interface UserActionFormSuccessScreenProps {
   children: React.ReactNode
@@ -19,7 +15,7 @@ interface UserActionFormSuccessScreenProps {
 }
 
 export function UserActionFormSuccessScreen(props: UserActionFormSuccessScreenProps) {
-  const { onClose } = props
+  const { children, onClose } = props
 
   const userData = useApiResponseForUserFullProfileInfo({ revalidateOnMount: true })
   const performedActionsData = useApiResponseForUserPerformedUserActionTypes({
@@ -45,10 +41,14 @@ export function UserActionFormSuccessScreen(props: UserActionFormSuccessScreenPr
     return <div className="text-xl text-red-500">Loading...</div>
   }
 
+  if (!data?.user) {
+    return <JoinSWC onClose={onClose} />
+  }
+
   if (!data?.user?.phoneNumber || !data?.user?.hasOptedInToSms) {
     return (
-      <div className="h-full min-h-[400px]">
-        <SMSOptInForm
+      <div className="mx-auto h-full max-w-[450px]">
+        <SMSOptInContent
           initialValues={{ phoneNumber: data?.user?.phoneNumber || '' }}
           onSuccess={onClose}
         />
@@ -57,8 +57,8 @@ export function UserActionFormSuccessScreen(props: UserActionFormSuccessScreenPr
   }
 
   return (
-    <div className="h-full min-h-[400px]">
-      <UserActionFormSuccessScreenMainCTA {...props} data={data} />
+    <div className="flex h-full flex-col gap-8 lg:max-h-[75vh]">
+      {children}
 
       <UserActionFormSuccessScreenNextAction data={data} />
     </div>
