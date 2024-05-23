@@ -40,7 +40,7 @@ export function UserActionFormEmailCongresspersonDialog({
   return (
     <Dialog {...dialogProps}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="max-w-3xl" padding={false}>
+      <DialogContent className={'max-w-3xl'}>
         {/* <Suspense fallback={<UserActionFormEmailCongresspersonSkeleton locale={locale} />}>
           {fetchUser.isLoading ? (
             <UserActionFormEmailCongresspersonSkeleton locale={locale} />
@@ -59,11 +59,9 @@ export function UserActionFormEmailCongresspersonDialog({
             </div>
           )}
         </Suspense> */}
-        <div className={cn(dialogContentPaddingStyles, 'h-full')}>
-          <UserActionFormSuccessScreen onClose={() => dialogProps.onOpenChange(false)}>
-            <UserActionFormEmailCongresspersonSuccess />
-          </UserActionFormSuccessScreen>
-        </div>
+        <UserActionFormSuccessScreen onClose={() => dialogProps.onOpenChange(false)}>
+          <UserActionFormEmailCongresspersonSuccess />
+        </UserActionFormSuccessScreen>
       </DialogContent>
     </Dialog>
   )

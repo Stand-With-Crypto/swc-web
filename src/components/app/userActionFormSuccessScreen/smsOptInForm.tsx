@@ -5,25 +5,23 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 
-import { actionUpdateUserProfile } from '@/actions/actionUpdateUserProfile'
+import {
+  actionUpdateUserHasOptedInToSMS,
+  UpdateUserHasOptedInToSMSPayload,
+} from '@/actions/actionUpdateUserHasOptedInSMS'
 import { UserActionFormSuccessScreenFeedback } from '@/components/app/userActionFormSuccessScreen/UserActionFormSuccessScreenFeedback'
 import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormErrorMessage, FormField, FormItem } from '@/components/ui/form'
 import { NextImage } from '@/components/ui/image'
 import { Input } from '@/components/ui/input'
 import { trackFormSubmissionSyncErrors, triggerServerActionForForm } from '@/utils/web/formUtils'
-import {
-  UpdateProfileWithRequiredFieldsFormValues,
-  zodUpdateUserProfileWithRequiredFormFields,
-} from '@/validation/forms/zodUpdateUserProfile/zodUpdateUserProfileFormFields'
+import { zodUpdateUserHasOptedInToSMS } from '@/validation/forms/zodUpdateUserHasOptedInToSMS'
 
-const FORM_NAME = 'SMS form'
-
-type SMSOptInFormValues = Pick<UpdateProfileWithRequiredFieldsFormValues, 'phoneNumber'>
+const FORM_NAME = 'SMS opt in form'
 
 interface SMSOptInFormProps {
   onSuccess?: () => void
-  initialValues?: SMSOptInFormValues
+  initialValues?: UpdateUserHasOptedInToSMSPayload
 }
 
 export function SMSOptInForm(props: SMSOptInFormProps) {
@@ -31,8 +29,8 @@ export function SMSOptInForm(props: SMSOptInFormProps) {
 
   const router = useRouter()
 
-  const form = useForm<SMSOptInFormValues>({
-    resolver: zodResolver(zodUpdateUserProfileWithRequiredFormFields),
+  const form = useForm<UpdateUserHasOptedInToSMSPayload>({
+    resolver: zodResolver(zodUpdateUserHasOptedInToSMS),
     defaultValues: initialValues,
   })
 
@@ -45,13 +43,13 @@ export function SMSOptInForm(props: SMSOptInFormProps) {
             {
               form,
               formName: FORM_NAME,
-              payload: { ...values, hasOptedInToSms: !!values.phoneNumber },
+              payload: values,
             },
-            payload => actionUpdateUserProfile(payload),
+            payload => actionUpdateUserHasOptedInToSMS(payload),
           )
           if (result.status === 'success') {
             router.refresh()
-            toast.success('Profile updated', { duration: 5000 })
+            toast.success('You have opted in to SMS updates', { duration: 5000 })
             onSuccess?.()
           }
         }, trackFormSubmissionSyncErrors(FORM_NAME))}
