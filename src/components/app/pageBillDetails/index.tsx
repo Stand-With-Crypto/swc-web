@@ -1,3 +1,5 @@
+import { orderBy } from 'lodash-es'
+
 import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
 import { RichTextFormatter } from '@/components/app/dtsiRichText/dtsiRichTextFormatter'
 import { RichTextEditorValue } from '@/components/app/dtsiRichText/types'
@@ -23,6 +25,7 @@ export function PageBillDetails(props: PageBillDetailsProps) {
       analysis.richTextCommentary &&
       (analysis.richTextCommentary as RichTextEditorValue).length > 0,
   )
+  const relationships = orderBy(bill.relationships, x => x.person.firstName)
 
   return (
     <div className="standard-spacing-from-navbar container space-y-16">
@@ -69,7 +72,7 @@ export function PageBillDetails(props: PageBillDetailsProps) {
         </Button>
       </section>
 
-      <VotesSection locale={locale} votes={bill.relationships} />
+      <VotesSection locale={locale} votes={relationships} />
     </div>
   )
 }

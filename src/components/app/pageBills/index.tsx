@@ -13,7 +13,7 @@ interface PageBillsProps {
   locale: SupportedLocale
 }
 
-const KEY_BILLS = ['hr4763', 'hjres109']
+const KEY_BILLS = ['hr4763', 'hjres109', 'hr5403']
 
 export function PageBills(props: PageBillsProps) {
   const { title, description, bills, locale } = props
