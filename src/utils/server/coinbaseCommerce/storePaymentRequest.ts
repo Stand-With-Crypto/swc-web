@@ -86,7 +86,7 @@ export async function storePaymentRequest(payment: CoinbaseCommercePayment) {
       },
     })
     if (user) {
-      return await createUserActionDonation(user, false, payment)
+      return createUserActionDonation(user, false, payment)
     }
 
     // Log if the Commerce payment contained a user ID but we have no corresponding user.
@@ -111,7 +111,7 @@ export async function storePaymentRequest(payment: CoinbaseCommercePayment) {
 
     // If we have a user for the given session, then we can store.
     if (userSession?.user) {
-      return await createUserActionDonation(userSession.user, false, payment)
+      return createUserActionDonation(userSession.user, false, payment)
     }
   } else {
     // Log if we have no session ID.
@@ -170,7 +170,7 @@ export async function storePaymentRequest(payment: CoinbaseCommercePayment) {
   // If we have not returned at this point, then we were unable to find a user based on session ID or email address.
   // We should create the user based on whatever information we have.
   const newUser = await createNewUser(payment)
-  return await createUserActionDonation(newUser, true, payment)
+  return createUserActionDonation(newUser, true, payment)
 }
 
 /**
