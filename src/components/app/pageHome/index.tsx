@@ -39,20 +39,22 @@ export function PageHome({
   const highestScores = sortDTSIPersonDataTable(dtsiHomepagePeople.highestScores)
   return (
     <>
-      <section className="grid-fl lg:standard-spacing-from-navbar mb-6 grid grid-cols-1 items-center gap-4 lg:container lg:grid-cols-2 lg:gap-8">
-        <div className="col-span-full row-start-2 w-fit justify-self-center  lg:row-span-full lg:justify-self-start ">
-          <Badge
-            className="p-2.5 text-sm font-bold antialiased md:text-base  lg:p-4"
-            variant="purple-subtle"
-          >
-            <span>
-              FIT21 has been voted on &bull;
-              <span className="font-normal"> View results</span>
-            </span>
-            <span>
-              <ChevronRight className="h-4 w-4 lg:h-6 lg:w-6 " />
-            </span>
-          </Badge>
+      <section className="grid-fl lg:standard-spacing-from-navbar mb-6 grid grid-cols-1 items-center gap-4 lg:container lg:grid-cols-2 lg:gap-8 lg:gap-y-1">
+        <div className="col-span-full row-start-2 w-fit justify-self-center  max-lg:-mb-4 lg:row-span-full lg:justify-self-start ">
+          <InternalLink href={urls.billDetails('hr4763-118-US')}>
+            <Badge
+              className="p-2.5 text-sm font-bold antialiased hover:bg-purple-200/90 md:text-base lg:p-4"
+              variant="purple-subtle"
+            >
+              <span>
+                FIT21 has been voted on &bull;
+                <span className="font-normal"> View results</span>
+              </span>
+              <span>
+                <ChevronRight className="h-4 w-4 lg:h-6 lg:w-6 " />
+              </span>
+            </Badge>
+          </InternalLink>
         </div>
 
         <div className="lg:order-0 container order-1 mx-auto max-w-xl space-y-6 pt-4 text-center md:max-w-3xl lg:px-0 lg:pt-0 lg:text-left">
