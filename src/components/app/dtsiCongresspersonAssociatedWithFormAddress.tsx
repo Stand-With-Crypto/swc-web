@@ -36,7 +36,7 @@ export function DTSICongresspersonAssociatedWithFormAddress({
     }
   }) => void
 }) {
-  const res = useGetDTSIPeopleFromAddress(address?.description || '', politicianCategory)
+  const res = useGetDTSIPeopleFromAddress(politicianCategory, address?.description)
   useEffect(() => {
     if (
       res.data &&

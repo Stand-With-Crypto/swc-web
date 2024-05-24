@@ -6,7 +6,7 @@ import {
 } from '@/utils/shared/getCongressionalDistrictFromAddress'
 
 export function useGetDistrictFromAddress(
-  address: string,
+  address?: string | null,
   params?: GetCongressionalDistrictFromAddressParams,
 ) {
   return useSWR(

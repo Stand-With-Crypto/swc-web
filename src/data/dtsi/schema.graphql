@@ -20,7 +20,7 @@ type Bill {
   pdfUrl: String!
   receivedPersonRoleGroup: PersonRoleGroup!
   receivedPersonRoleGroupId: String!
-  relationships: [BillPersonRelationship!]!
+  relationships(personSlugIn: [String!]): [BillPersonRelationship!]!
   shortTitle: String!
   slug: String!
   stanceScoreWeight: Int

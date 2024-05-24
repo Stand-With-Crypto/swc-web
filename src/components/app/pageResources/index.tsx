@@ -38,7 +38,7 @@ export function PageResources() {
           title="What is FIT21"
         />
         <ResourcesCards
-          href="/resources/fit21/docs/FIT21 SWC Founder Letter.pdf"
+          href="/resources/fit21/docs/FIT21 SWC Founder Support Letter.pdf"
           imageUrl="/resources/fit21/founder-letter.webp"
           subtitle="Builders across the US back FIT21 for innovation and jobs."
           title="Stand With Crypto Founder Letter"

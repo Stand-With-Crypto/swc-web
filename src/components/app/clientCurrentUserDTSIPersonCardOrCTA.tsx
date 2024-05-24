@@ -49,8 +49,8 @@ const POLITICIAN_CATEGORY: YourPoliticianCategory = 'senate-and-house'
 function _ClientCurrentUserDTSIPersonCardOrCTA({ locale }: { locale: SupportedLocale }) {
   const { setAddress, address } = useMutableCurrentUserAddress()
   const res = useGetDTSIPeopleFromAddress(
-    address === 'loading' ? '' : address?.description || '',
     POLITICIAN_CATEGORY,
+    address === 'loading' ? null : address?.description,
   )
   if (!address || address === 'loading' || !res.data) {
     return (

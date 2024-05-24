@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import Balancer from 'react-wrap-balancer'
 import { UserActionType } from '@prisma/client'
 import { toast } from 'sonner'
 import { z } from 'zod'
@@ -69,13 +70,13 @@ export function TweetAtPersonSection({
   function getTweetMessageBasedOnRepresentativeScore() {
     if (congressPersonNotFound) {
       return `🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕
-May 22nd is Bitcoin Pizza Day! I applaud all the representatives who are protecting Americans’ right to own crypto. See where your representative stands at www.standwithcrypto.org/pizza and join the fight! #StandWithCrypto
+May 22nd is Bitcoin Pizza Day! With the vote on #FIT21, it’s more important than ever for the crypto community to be engaged and active. See what your Congressional representative has said about crypto at www.standwithcrypto.org and join the movement! #StandWithCrypto
       `
     }
 
     if (!representative) {
       return `🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕
-May 22nd is Bitcoin Pizza Day! I applaud all the representatives who are protecting Americans’ right to own crypto. See where your representative stands at www.standwithcrypto.org/pizza and join the fight! #StandWithCrypto
+May 22nd is Bitcoin Pizza Day! With the vote on #FIT21, it’s more important than ever for the crypto community to be engaged and active. See what your Congressional representative has said about crypto at www.standwithcrypto.org and join the movement! #StandWithCrypto
       `
     }
 
@@ -89,23 +90,18 @@ May 22nd is Bitcoin Pizza Day! I applaud all the representatives who are protect
     return (() => {
       switch (convertDTSIPersonStanceScoreToLetterGrade(representative)) {
         case DTSILetterGrade.A:
-        case DTSILetterGrade.B:
           return `🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕
-May 22nd is Bitcoin Pizza Day! I applaud my representative ${representativeXHandle} for protecting Americans’ right to own crypto. See where your representative stands at www.standwithcrypto.org/pizza and join the fight! #StandWithCrypto #${user?.userLocationDetails?.administrativeAreaLevel1 ?? ''}
-          `
+May 22nd is Bitcoin Pizza Day! I applaud my representative ${representativeXHandle} for protecting Americans’ right to own crypto. As Congress votes on #FIT21, see where your representative stands at www.standwithcrypto.org and join the movement! #StandWithCrypto`
+        case DTSILetterGrade.B:
         case DTSILetterGrade.C:
         case null:
           return `🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕
-May 22nd is Bitcoin Pizza Day! I’m asking my representative ${representativeXHandle} to protect Americans’ right to own crypto. See where your representative stands at www.standwithcrypto.org/pizza and join the fight! #StandWithCrypto #${user?.userLocationDetails?.administrativeAreaLevel1 ?? ''}`
+May 22nd is Bitcoin Pizza Day! I’m asking my representative ${representativeXHandle} to protect Americans’ right to own crypto. As Congress votes on #FIT21, see where your representative stands at www.standwithcrypto.org and join the movement! #StandWithCrypto`
         case DTSILetterGrade.D:
         case DTSILetterGrade.F:
-          return `🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕
-May 22nd is Bitcoin Pizza Day! Like many other politicians my representative doesn’t understand the importance of crypto for America. See where your representative stands at www.standwithcrypto.org/pizza and join the fight! #StandWithCrypto #${user?.userLocationDetails?.administrativeAreaLevel1 ?? ''}
-          `
         default:
           return `🍕🍕🍕🍕🍕🍕🍕🍕🍕🍕
-May 22nd is Bitcoin Pizza Day! I applaud all the representatives who are protecting Americans’ right to own crypto. See where your representative stands at www.standwithcrypto.org/pizza and join the fight! #StandWithCrypto
-                `
+May 22nd is Bitcoin Pizza Day! With the vote on #FIT21, it’s more important than ever for the crypto community to be engaged and active. See what your Congressional representative has said about crypto at www.standwithcrypto.org and join the movement! #StandWithCrypto`
       }
     })()
   }
@@ -166,18 +162,23 @@ May 22nd is Bitcoin Pizza Day! I applaud all the representatives who are protect
 
   return (
     <div className="flex h-full flex-col items-center justify-center">
-      <PageTitle as="h3" className="lg:text-1xl mb-4 lg:mb-10" size="lg">
-        {congressPersonNotFound ? 'Tweet on Pizza Day' : 'Tweet your representative'}
-      </PageTitle>
-      <p className="mb-6 text-center text-fontcolor-muted">
-        {congressPersonNotFound
-          ? 'Send a tweet to celebrate Pizza Day and then come back here to claim your free NFT.'
-          : 'Send a tweet to your representative and then come back here to claim your free NFT.'}
-      </p>
+      <div className="mb-4 space-y-2">
+        <PageTitle as="h3" size="sm">
+          {congressPersonNotFound ? 'Tweet on Pizza Day' : 'Tweet your representative'}
+        </PageTitle>
+        <p className="text-center text-fontcolor-muted">
+          <Balancer>
+            {congressPersonNotFound
+              ? 'Send a tweet to celebrate Pizza Day and then come back here to claim your free NFT.'
+              : 'Send a tweet to your representative and then come back here to claim your free NFT.'}
+          </Balancer>
+        </p>
+      </div>
 
       {representative && (
         <div className="align-center mb-6 flex w-full justify-center">
           <DTSIPersonHeroCard
+            isClickable={false}
             isRecommended={false}
             locale={SupportedLocale.EN_US}
             person={representative}

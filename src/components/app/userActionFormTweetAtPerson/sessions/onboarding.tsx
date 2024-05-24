@@ -27,24 +27,26 @@ export function OnboardingTweetAtPersonCampaign({
         src="https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/swc_pizza_day_2024_nft.mp4"
       />
 
-      <PageTitle as="h3" className="mb-4 mt-6 lg:my-6 lg:text-[2rem]" size="md">
-        Tweet your rep. Get a free NFT. 🍕
-      </PageTitle>
-      <p className="text-center text-fontcolor-muted">
-        <Balancer>
-          Held annually on May 22nd, Pizza Day commemorates the day when programmer Laszlo Hanyecz
-          purchased two large pizzas for 10,000 BTC in 2010. The day stands as a symbol of bitcoin's
-          humble beginnings, as well as a testament to its transformative potential as a viable
-          medium of exchange.
-        </Balancer>
-      </p>
+      <div className="mt-4 space-y-2">
+        <PageTitle as="h3" size="sm">
+          Tweet your rep. Get a free NFT. 🍕
+        </PageTitle>
+        <p className="text-center text-fontcolor-muted">
+          <Balancer>
+            Held annually on May 22nd, Pizza Day commemorates the day when programmer Laszlo Hanyecz
+            purchased two large pizzas for 10,000 BTC in 2010. The day stands as a symbol of
+            bitcoin's humble beginnings, as well as a testament to its transformative potential as a
+            viable medium of exchange.
+          </Balancer>
+        </p>
 
-      <p className="mt-4 text-center text-fontcolor-muted">
-        <Balancer>
-          We’re honoring this day by fighting to keep crypto in America. Tweet your representatives
-          and tell them crypto belongs in the U.S.
-        </Balancer>
-      </p>
+        <p className="mt-4 text-center text-fontcolor-muted">
+          <Balancer>
+            We’re honoring this day by fighting to keep crypto in America. Tweet your
+            representatives and tell them crypto belongs in the U.S.
+          </Balancer>
+        </p>
+      </div>
 
       <strong className="my-6">Here’s how to participate:</strong>
 

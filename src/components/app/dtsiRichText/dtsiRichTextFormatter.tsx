@@ -80,7 +80,7 @@ const getRootBlockComponent = (node: RichTextEditorRootBlock) => {
         )
       case 'ul':
         return (
-          <ul className="list-disc space-y-3 ps-6">
+          <ul className="list-disc space-y-3 pb-2 ps-6">
             {node.children.map((child, index) => (
               <React.Fragment key={index}>
                 {child.children.map((x, i) => (
@@ -92,7 +92,7 @@ const getRootBlockComponent = (node: RichTextEditorRootBlock) => {
         )
       case 'ol':
         return (
-          <ol className="list-decimal space-y-3 ps-6">
+          <ol className="list-decimal space-y-3 pb-2 ps-6">
             {node.children.map((child, index) => (
               <React.Fragment key={index}>
                 {child.children.map((x, i) => (

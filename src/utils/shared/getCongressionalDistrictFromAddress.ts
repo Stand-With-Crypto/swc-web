@@ -78,9 +78,10 @@ export type GetCongressionalDistrictFromAddressParams = {
 }
 
 export async function getCongressionalDistrictFromAddress(
-  address: string,
-  { stateCode: passedStateCode }: GetCongressionalDistrictFromAddressParams = {},
+  address?: string | null,
+  params?: GetCongressionalDistrictFromAddressParams,
 ) {
+  if (!address?.length) return { notFoundReason: 'USER_WITHOUT_ADDRESS' as const }
   const result = await getGoogleCivicDataFromAddress(address).catch(() => null)
   if (!result) {
     return { notFoundReason: 'CIVIC_API_DOWN' as const }
@@ -104,6 +105,8 @@ export async function getCongressionalDistrictFromAddress(
       googleCivicData: result,
     } as GetCongressionalDistrictFromAddressSuccess
   }
+
+  const { stateCode: passedStateCode } = params ?? {}
 
   if (passedStateCode && passedStateCode !== stateCode) {
     return { notFoundReason: 'NOT_SAME_STATE' as const }
@@ -137,6 +140,8 @@ export function formatGetCongressionalDistrictFromAddressNotFoundReason(
   }
 
   switch (data.notFoundReason) {
+    case 'USER_WITHOUT_ADDRESS':
+      return 'Please fill out your address.'
     case 'NOT_USA_ADDRESS':
       return 'Please enter a US-based address.'
     case 'NOT_SAME_STATE':

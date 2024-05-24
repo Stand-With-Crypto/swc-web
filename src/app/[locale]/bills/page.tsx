@@ -4,9 +4,8 @@ import { PageBills } from '@/components/app/pageBills'
 import { queryDTSIAllBills } from '@/data/dtsi/queries/queryDTSIAllBills'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
-export const revalidate = SECONDS_DURATION['20_MINUTES']
+export const revalidate = 60
 export const dynamic = 'error'
 
 const title = 'Crypto Bills'

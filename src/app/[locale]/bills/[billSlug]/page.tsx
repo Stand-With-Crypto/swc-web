@@ -7,11 +7,10 @@ import { queryDTSIAllBillsSlugs } from '@/data/dtsi/queries/queryDTSIAllBillsSlu
 import { queryDTSIBillDetails } from '@/data/dtsi/queries/queryDTSIBillDetails'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
-import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
-export const revalidate = SECONDS_DURATION['20_MINUTES']
+export const revalidate = 60
 export const dynamic = 'error'
-export const dynamicParams = false
+export const dynamicParams = true
 
 type Props = PageProps<{ billSlug: string }>
 
@@ -27,7 +26,8 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   }
   return generateMetadataDetails({
     title: bill.shortTitle || bill.title,
-    description: bill.summary || bill.title,
+    description:
+      "Learn more about this bill, including whether it's pro crypto, see who sponsored/cosponsored it, and track votes.",
   })
 }
 

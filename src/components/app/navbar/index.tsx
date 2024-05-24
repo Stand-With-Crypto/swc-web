@@ -1,21 +1,17 @@
 'use client'
 
 import { useCallback } from 'react'
-import { useBoolean } from 'react-use'
 import { capitalize } from 'lodash-es'
-import { Menu, X } from 'lucide-react'
+import { Menu } from 'lucide-react'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { NavbarLoggedInButton } from '@/components/app/navbar/navbarLoggedInButton'
-import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
-import { UserActionFormTweetAtPersonDialog } from '@/components/app/userActionFormTweetAtPerson/dialog'
 import { Button } from '@/components/ui/button'
 import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/drawer'
 import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
 import { useDialog } from '@/hooks/useDialog'
 import { SupportedLocale } from '@/intl/locales'
-import { SHOW_PIZZA_DAY_ACTIVATION_NAVBAR_ALERT } from '@/utils/shared/killSwitches'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
@@ -71,8 +67,6 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
     </LoginDialogWrapper>
   )
 
-  const [showBanner, closeBanner] = useBoolean(true)
-
   return (
     <>
       {hasEnvironmentBar && (
@@ -89,47 +83,6 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
           </div>
         </div>
       )}
-
-      {SHOW_PIZZA_DAY_ACTIVATION_NAVBAR_ALERT && (
-        <div className="flex h-16 bg-primary-cta">
-          <div className="align-center container flex items-center justify-between gap-4 ">
-            <p className="flex-shrink text-sm font-bold text-white sm:text-base">
-              Tweet your representative and get a free NFT 🍕
-            </p>
-            <div className="xs:text-xs space-x-3 text-sm">
-              <UserActionFormTweetAtPersonDialog>
-                <Button className="font-bold text-fontcolor" size="sm" variant="secondary">
-                  Get started
-                </Button>
-              </UserActionFormTweetAtPersonDialog>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {showBanner ? (
-        <div className="relative bg-primary-cta py-6 lg:py-8">
-          <div className="container grid items-center gap-6 sm:grid-cols-[1fr,auto,auto]">
-            <div className="space-y-1 text-sm text-background antialiased max-sm:text-center sm:text-base">
-              <p className="font-bold">Tell your representatives to vote YES on Key Vote FIT21</p>
-              <p>
-                FIT21 is a historic crypto regulatory bill that will protect crypto users in the US.
-                Tell your representatives to vote YES on FIT21.
-              </p>
-            </div>
-
-            <UserActionFormEmailCongresspersonDialog>
-              <Button className="max-sm:w-full" variant="secondary">
-                Send an Email
-              </Button>
-            </UserActionFormEmailCongresspersonDialog>
-
-            <button className="right-[2px] top-[2px] justify-self-end rounded-full p-1 text-white transition-all hover:bg-gray-400 max-sm:absolute max-sm:row-start-1">
-              <X className="cursor-pointer" onClick={closeBanner} size={20} />
-            </button>
-          </div>
-        </div>
-      ) : null}
 
       <nav
         className={

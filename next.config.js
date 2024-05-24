@@ -206,6 +206,11 @@ const nextConfig = {
         source: '/call',
       },
       {
+        permanent: false,
+        destination: '/action/email?utm_source=swc&utm_medium=sms&utm_campaign=fit21-2024-05-text',
+        source: '/text',
+      },
+      {
         permanent: true,
         destination: '/community',
         source: '/leaderboard',
@@ -253,10 +258,21 @@ const nextConfig = {
         destination: '/races/:paths*',
         permanent: true,
       },
+      {
+        source: '/resources/fit21/docs/FIT21%20SWC%20Founder%20Letter.pdf',
+        destination: '/resources/fit21/docs/FIT21%20SWC%20Founder%20Support%20Letter.pdf',
+        permanent: true,
+      },
       // tweet at person campaigns
       {
         source: '/pizza',
-        destination: '/action/tweet-at-person/2024_05_22_PIZZA_DAY',
+        destination:
+          '/action/tweet-at-person/2024_05_22_PIZZA_DAY?utm_source=pizzadao&utm_medium=live-event&utm_campaign=pizza-day-2024',
+        permanent: false,
+      },
+      {
+        source: '/&modal=call-your-representative&:rest*',
+        destination: '/action/call?unexpectedUrl=true',
         permanent: false,
       },
     ]
