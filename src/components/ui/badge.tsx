@@ -21,8 +21,7 @@ const badgeVariants = cva(
         'blue-subtle':
           'border-transparent bg-blue-50 text-blue-500 dark:bg-blue-950 dark:text-blue-400',
         purple: 'border-transparent bg-purple-500 text-white',
-        'purple-subtle':
-          'border-transparent bg-purple-50 text-purple-700 dark:bg-purple-950 dark:text-purple-400',
+        'purple-subtle': 'border-transparent bg-purple-100/90 text-purple-700',
         amber: 'border-transparent bg-amber-400 text-black',
         'amber-subtle':
           'border-transparent bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-500',
