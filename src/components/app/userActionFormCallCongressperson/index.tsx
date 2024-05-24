@@ -9,6 +9,7 @@ import {
   ANALYTICS_NAME_USER_ACTION_FORM_CALL_CONGRESSPERSON,
   SectionNames,
 } from '@/components/app/userActionFormCallCongressperson/constants'
+import { UserActionFormCallCongresspersonSuccess } from '@/components/app/userActionFormCallCongressperson/sections/success'
 import { FormFields } from '@/components/app/userActionFormCallCongressperson/types'
 import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
 import { DTSIPeopleFromCongressionalDistrict } from '@/hooks/useGetDTSIPeopleFromAddress'
@@ -107,10 +108,9 @@ export function UserActionFormCallCongressperson({
       )
     case SectionNames.SUCCESS_MESSAGE:
       return (
-        <UserActionFormSuccessScreen
-          nftWhenAuthenticated={NFT_CLIENT_METADATA[NFTSlug.CALL_REPRESENTATIVE_SEPT_11]}
-          onClose={onClose}
-        />
+        <UserActionFormSuccessScreen onClose={onClose}>
+          <UserActionFormCallCongresspersonSuccess />
+        </UserActionFormSuccessScreen>
       )
     default:
       onTabNotFound()
