@@ -2,6 +2,7 @@ import { revalidatePath } from 'next/cache'
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 
+import { ORDERED_SUPPORTED_LOCALES } from '@/intl/locales'
 import { getLogger } from '@/utils/shared/logger'
 
 const logger = getLogger('/api/internal/manually-revalidate-path')
@@ -30,6 +31,9 @@ export async function GET(request: NextRequest) {
   }
 
   logger.info('Received request with updated paths', paths)
-  paths.forEach(page => revalidatePath(page))
+  paths.forEach(page => {
+    revalidatePath(page)
+    ORDERED_SUPPORTED_LOCALES.forEach(locale => revalidatePath(`/${locale}${page}`))
+  })
   return NextResponse.json({ paths })
 }
