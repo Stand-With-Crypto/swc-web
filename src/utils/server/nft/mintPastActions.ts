@@ -36,6 +36,13 @@ export async function mintPastActions(
       'User Action Type': action.actionType,
       'User Action Id': action.id,
     })
+
+    const signUpFlowExperimentVariant =
+      localUser?.persisted?.experiments?.gh02_SWCSignUpFlowExperiment
+    if (action.actionType === 'OPT_IN' && signUpFlowExperimentVariant === 'variant') {
+      continue
+    }
+
     await claimNFT(action, userCryptoAddress)
   }
 

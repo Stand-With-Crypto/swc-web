@@ -24,6 +24,7 @@ export type UpdateProfileFormValues = z.infer<typeof zodUpdateUserProfileFormFie
   GenericErrorFormValues
 
 export const zodUpdateUserProfileWithRequiredFormFields = zodUpdateUserProfileBase
+  .omit({ phoneNumber: true })
   .extend({
     firstName: zodFirstName,
     lastName: zodLastName,

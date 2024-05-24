@@ -12,6 +12,7 @@ import { GooglePlaceAutocompletePrediction } from '@/utils/web/googlePlaceUtils'
 export type GooglePlacesSelectProps = {
   value: GooglePlaceAutocompletePrediction | null
   onChange: (val: GooglePlaceAutocompletePrediction | null) => void
+  showIcon?: boolean
   loading?: boolean
   disablePreventMobileKeyboardOffset?: boolean
 } & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange' | 'type'>
@@ -24,6 +25,7 @@ export const GooglePlacesSelect = React.forwardRef<
     value: propsValue,
     onChange: propsOnChange,
     className,
+    showIcon = true,
     loading,
     disablePreventMobileKeyboardOffset,
     ...inputProps
@@ -57,12 +59,13 @@ export const GooglePlacesSelect = React.forwardRef<
       formatPopoverTrigger={triggerProps => (
         <InputWithIcons
           className={cn(
-            triggerProps.value || 'text-gray-500',
+            'text-muted-foreground',
+            triggerProps.value && 'text-gray-500',
             'h-auto cursor-pointer whitespace-normal',
             triggerProps.open && 'outline-none ring-2 ring-ring ring-offset-2',
             className,
           )}
-          leftIcon={<MapPin className="h-4 w-4 text-gray-500" />}
+          leftIcon={showIcon ? <MapPin className="h-4 w-4 text-gray-500" /> : undefined}
           placeholder="select a location"
           ref={ref}
           rightIcon={loading ? <Spinner /> : undefined}
