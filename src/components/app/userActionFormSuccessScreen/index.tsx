@@ -8,6 +8,7 @@ import { UserActionFormSuccessScreenNextAction } from '@/components/app/userActi
 import { Button } from '@/components/ui/button'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
+import { useSession } from '@/hooks/useSession'
 
 interface UserActionFormSuccessScreenProps {
   children: React.ReactNode
@@ -17,39 +18,27 @@ interface UserActionFormSuccessScreenProps {
 export function UserActionFormSuccessScreen(props: UserActionFormSuccessScreenProps) {
   const { children, onClose } = props
 
-  const userData = useApiResponseForUserFullProfileInfo({ revalidateOnMount: true })
-  const performedActionsData = useApiResponseForUserPerformedUserActionTypes({
+  const { user, isLoggedIn, isLoading } = useSession()
+  const performedActionsResponse = useApiResponseForUserPerformedUserActionTypes({
     revalidateOnMount: true,
   })
 
-  const data = useMemo(() => {
-    if (!userData.data || !performedActionsData.data) {
-      return undefined
-    }
-    const { user } = userData.data
-    const { performedUserActionTypes } = performedActionsData.data
-    return {
-      user,
-      performedUserActionTypes,
-    }
-  }, [userData, performedActionsData])
-
-  if (userData.isLoading) {
+  if (isLoading || performedActionsResponse.isLoading) {
     /**
      * TODO: Skeleton
      */
     return <div className="text-xl text-red-500">Loading...</div>
   }
 
-  if (!data?.user) {
+  if (!isLoggedIn || !user) {
     return <JoinSWC onClose={onClose} />
   }
 
-  if (!data?.user?.phoneNumber || !data?.user?.hasOptedInToSms) {
+  if (!user.phoneNumber || !user.hasOptedInToSms) {
     return (
       <div className="mx-auto h-full max-w-[450px]">
         <SMSOptInContent
-          initialValues={{ phoneNumber: data?.user?.phoneNumber || '' }}
+          initialValues={{ phoneNumber: user.phoneNumber || '' }}
           onSuccess={onClose}
         />
       </div>
@@ -60,7 +49,12 @@ export function UserActionFormSuccessScreen(props: UserActionFormSuccessScreenPr
     <div className="flex h-full flex-col gap-8 lg:max-h-[75vh]">
       {children}
 
-      <UserActionFormSuccessScreenNextAction data={data} />
+      <UserActionFormSuccessScreenNextAction
+        data={{
+          user,
+          performedUserActionTypes: performedActionsResponse.data?.performedUserActionTypes,
+        }}
+      />
     </div>
   )
 }

@@ -30,9 +30,11 @@ export function UserActionFormSuccessScreenNextActionSkeleton() {
 }
 
 export interface UserActionFormSuccessScreenNextActionProps {
-  data?: {
-    user: GetUserFullProfileInfoResponse['user']
-    performedUserActionTypes: GetUserPerformedUserActionTypesResponse['performedUserActionTypes']
+  data: {
+    user: GetUserFullProfileInfoResponse['user'] | undefined
+    performedUserActionTypes:
+      | GetUserPerformedUserActionTypesResponse['performedUserActionTypes']
+      | undefined
   }
 }
 
@@ -54,17 +56,16 @@ export function UserActionFormSuccessScreenNextAction({
     [locale],
   )
 
-  if (!data) {
+  if (!data || !data?.user || !data?.performedUserActionTypes) {
     return <UserActionFormSuccessScreenNextActionSkeleton />
   }
 
   const { performedUserActionTypes, user } = data
 
-  const { progressValue, numActionsCompleted, numActionsAvailable, excludeUserActionTypes } =
-    getUserActionsProgress({
-      user,
-      performedUserActionTypes,
-    })
+  const { progressValue, numActionsAvailable, excludeUserActionTypes } = getUserActionsProgress({
+    user,
+    performedUserActionTypes,
+  })
 
   return (
     <div className="space-y-6 text-center">
@@ -74,8 +75,12 @@ export function UserActionFormSuccessScreenNextAction({
 
       <Progress data-max={numActionsAvailable} value={progressValue} />
 
+      {/** Uncompleted actions first */}
       <UserActionRowCTAsList
-        excludeUserActionTypes={['NFT_MINT', ...performedUserActionTypes.map(x => x.actionType)]}
+        excludeUserActionTypes={[
+          ...(excludeUserActionTypes || []),
+          ...performedUserActionTypes.map(x => x.actionType),
+        ]}
         performedUserActionTypes={performedUserActionTypes}
         render={ctaProps => (
           <UserActionRowCTA
@@ -86,6 +91,7 @@ export function UserActionFormSuccessScreenNextAction({
         )}
       />
 
+      {/** Completed actions last */}
       {performedUserActionTypes.map(performedAction => {
         if (performedAction.actionType in USER_ACTION_ROW_CTA_INFO) {
           const ctaProps =
