@@ -17,6 +17,7 @@ export type ActiveClientUserActionWithCampaignType =
 export enum UserActionEmailCampaignName {
   DEFAULT = 'EMAIL_YOUR_CONGRESSPERSON_FIT21',
   FIT21_2024_04 = 'EMAIL_YOUR_CONGRESSPERSON_FIT21_2024_04',
+  FIT21_2024_04_FOLLOW_UP = 'EMAIL_YOUR_CONGRESSPERSON_FIT21_2024_04_FOLLOW_UP',
 }
 export enum UserActionCallCampaignName {
   DEFAULT = 'CALL_YOUR_CONGRESSPERSON_FIT21',

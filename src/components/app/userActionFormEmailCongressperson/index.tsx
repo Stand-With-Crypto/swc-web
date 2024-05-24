@@ -1,17 +1,20 @@
 'use client'
 import React, { useMemo, useRef } from 'react'
-import { useForm } from 'react-hook-form'
+import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { UserActionType } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { useRouter } from 'next/navigation'
+import useSWR, { SWRConfiguration } from 'swr'
 import { z } from 'zod'
 
 import { actionCreateUserActionEmailCongressperson } from '@/actions/actionCreateUserActionEmailCongressperson'
 import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
+import { BillVoteResult } from '@/app/api/public/dtsi/bill-vote/[billId]/[slug]/route'
 import { DTSICongresspersonAssociatedWithFormAddress } from '@/components/app/dtsiCongresspersonAssociatedWithFormAddress'
 import {
   ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON,
+  CURRENT_CAMPAIGN_NAME,
   EMAIL_FLOW_POLITICIANS_CATEGORY,
 } from '@/components/app/userActionFormEmailCongressperson/constants'
 import { getDefaultText } from '@/components/app/userActionFormEmailCongressperson/getDefaultText'
@@ -36,7 +39,9 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import { Textarea } from '@/components/ui/textarea'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useIsDesktop } from '@/hooks/useIsDesktop'
+import { fetchReq } from '@/utils/shared/fetchReq'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
+import { apiUrls } from '@/utils/shared/urls'
 import { UserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns'
 import {
   getYourPoliticianCategoryDisplayName,
@@ -68,13 +73,12 @@ const getDefaultValues = ({
   dtsiSlugs: string[]
 }): Partial<FormValues> => {
   if (user) {
-    const { firstName, lastName } = user
     return {
-      campaignName: UserActionEmailCampaignName.FIT21_2024_04,
+      campaignName: CURRENT_CAMPAIGN_NAME,
       firstName: user.firstName,
       lastName: user.lastName,
       emailAddress: user.primaryUserEmailAddress?.emailAddress || '',
-      message: getDefaultText({ dtsiSlugs, firstName, lastName }),
+      message: '',
       address: user.address?.route
         ? {
             description: user.address.formattedDescription,
@@ -89,7 +93,7 @@ const getDefaultValues = ({
     firstName: '',
     lastName: '',
     emailAddress: '',
-    message: getDefaultText({ dtsiSlugs }),
+    message: '',
     address: undefined,
     dtsiSlugs,
   }
@@ -124,6 +128,16 @@ export function UserActionFormEmailCongressperson({
       politicianCategory,
     },
   })
+  const dtsiSlugs = useWatch({
+    control: form.control,
+    name: 'dtsiSlugs',
+  })
+  const { data: congresspersonBillVote } = useCongresspersonFIT21BillVote(dtsiSlugs?.[0], {
+    onSuccess: data => {
+      form.setValue('message', `hello world ${data}`)
+    },
+  })
+  console.log({ congresspersonBillVote })
 
   React.useEffect(() => {
     if (isDesktop) form.setFocus('firstName')
@@ -254,15 +268,20 @@ export function UserActionFormEmailCongressperson({
                         <DTSICongresspersonAssociatedWithFormAddress
                           address={addressProps.field.value}
                           currentDTSISlugValue={dtsiSlugProps.field.value}
-                          onChangeDTSISlug={({ dtsiSlugs, location }) => {
-                            dtsiSlugProps.field.onChange(dtsiSlugs)
-                            if (!hasModifiedMessage.current) {
-                              const { firstName, lastName } = form.getValues()
-                              form.setValue(
-                                'message',
-                                getDefaultText({ dtsiSlugs, firstName, lastName, location }),
-                              )
-                            }
+                          onChangeDTSISlug={({ dtsiSlugs: newDtsiSlugs, location }) => {
+                            dtsiSlugProps.field.onChange(newDtsiSlugs)
+                            // if (!hasModifiedMessage.current) {
+                            //   const { firstName, lastName } = form.getValues()
+                            //   form.setValue(
+                            //     'message',
+                            //     getDefaultText({
+                            //       dtsiSlugs: newDtsiSlugs,
+                            //       firstName,
+                            //       lastName,
+                            //       location,
+                            //     }),
+                            //   )
+                            // }
                           }}
                           politicianCategory={politicianCategory}
                         />
@@ -278,7 +297,7 @@ export function UserActionFormEmailCongressperson({
                 render={({ field }) => (
                   <FormItem>
                     <div className="relative">
-                      {!form.getValues().dtsiSlugs.length && (
+                      {(!dtsiSlugs.length || !congresspersonBillVote) && (
                         <div className="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center bg-background/90">
                           <p className="text-bold max-w-md text-center">
                             Enter your address to generate a personalized message.
@@ -332,5 +351,15 @@ export function UserActionFormEmailCongressperson({
         </div>
       </form>
     </Form>
+  )
+}
+
+function useCongresspersonFIT21BillVote(slug?: string, config?: SWRConfiguration<BillVoteResult>) {
+  return useSWR(
+    slug ? apiUrls.billVote({ slug, billId: 'hr4763-118-US' }) : null,
+    (url: string) => {
+      return fetchReq(url).then(req => req.json()) as Promise<BillVoteResult>
+    },
+    config,
   )
 }
