@@ -73,8 +73,8 @@ export default function Layout({ children, params }: PageProps & { children: Rea
       <body className={fontClassName}>
         <OverrideGlobalLocalStorage />
         <NextTopLoader
-          color="#6200FF"
-          shadow="0 0 10px #6200FF,0 0 5px #6200FF"
+          color="hsl(var(--primary-cta))"
+          shadow="0 0 10px hsl(var(--primary-cta)),0 0 5px hsl(var(--primary-cta))"
           showSpinner={false}
         />
         <TopLevelClientLogic locale={locale}>
