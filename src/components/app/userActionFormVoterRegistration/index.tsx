@@ -6,6 +6,7 @@ import {
   SectionNames,
 } from '@/components/app/userActionFormVoterRegistration/constants'
 import { ClaimNft } from '@/components/app/userActionFormVoterRegistration/sections/claimNft'
+import { UserActionFormVoterRegistrationSuccess } from '@/components/app/userActionFormVoterRegistration/sections/success'
 import { Survey } from '@/components/app/userActionFormVoterRegistration/sections/survey'
 import { VoterRegistrationForm } from '@/components/app/userActionFormVoterRegistration/sections/voterRegistrationForm'
 import { useSections } from '@/hooks/useSections'
@@ -56,11 +57,9 @@ export function UserActionFormVoterRegistration({
         return null
       case SectionNames.SUCCESS:
         return (
-          <UserActionFormSuccessScreen
-            {...sectionProps}
-            nftWhenAuthenticated={NFT_CLIENT_METADATA[NFTSlug.I_AM_A_VOTER]}
-            onClose={onClose}
-          />
+          <UserActionFormSuccessScreen onClose={onClose}>
+            <UserActionFormVoterRegistrationSuccess />
+          </UserActionFormSuccessScreen>
         )
       default:
         onTabNotFound()
