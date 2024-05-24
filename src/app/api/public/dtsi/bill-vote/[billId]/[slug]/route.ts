@@ -43,6 +43,5 @@ export async function GET(
   { params }: { params: z.infer<typeof zodParams> },
 ) {
   const data = await apiResponseForBillVoteByPerson(params)
-  console.log({ data })
   return NextResponse.json(data)
 }

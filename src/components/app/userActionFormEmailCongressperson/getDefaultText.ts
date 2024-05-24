@@ -22,35 +22,20 @@ function getFullNameSignOff({ firstName, lastName }: Pick<GetTextProps, 'firstNa
   return firstName && lastName ? `\n\nRespectfully,\n${firstName} ${lastName}` : ''
 }
 
-export function getDefaultText({
-  location,
-  firstName,
-  lastName,
-}: GetTextProps & {
-  dtsiSlugs: string[]
-}) {
+export function getDefaultText({ location, firstName, lastName }: GetTextProps = {}) {
   const fullNameSignOff = getFullNameSignOff({ firstName, lastName })
   const maybeDistrictIntro = getConstituentIntroduction(location)
 
-  return `Dear Representative,
-
-${maybeDistrictIntro} and recently learned that the Financial Innovation and Technology for the 21st Century Act [FIT21 H.R. 4763] is being considered for a floor vote in the House.
-
-I am asking you to vote YES on the FIT21 Act because it sets foundational rules for crypto that are pro-consumer and pro-job creation. It will protect 52 million Americans who own crypto, unlock the creation of millions of jobs in the U.S., and ensure America remains a global leader in technology. That’s good for our economic and national security.
-
-We have been waiting patiently for years for our lawmakers to protect us, and strengthen America’s role in building the future of money and the internet.
-
-I am excited the House is going to vote on FIT21, and I am asking you to vote YES on the Act.${fullNameSignOff}`
+  return `Dear Representative,\n\n${maybeDistrictIntro}, and I wanted to write to you and let you know that I care about crypto and blockchain technology.\n\nLike the other 52 million Americans who own crypto, I know that this technology can unlock the creation of millions of jobs in the U.S. and ensure America remains a global leader in technology. That’s good for our economic and national security.\n\nCrypto needs clear rules, regulations, and guidelines to thrive in America, and we need members of Congress like you to champion this powerful technology so that it can reach its full potential. If crypto doesn’t succeed in America, then jobs, innovation, and new technologies will be driven overseas and our country will miss out on the massive benefits.\n\nI hope that you will keep the views of pro-crypto constituents like myself in mind as you carry on your work in Congress.${fullNameSignOff}`
 }
 
 export function getFIT21FollowUpText({
   billVote,
-  location,
-  firstName,
-  lastName,
+  ...getTextProps
 }: GetTextProps & {
   billVote: BillVoteResult
 }) {
+  const { location, firstName, lastName } = getTextProps
   const fullNameSignOff = getFullNameSignOff({ firstName, lastName })
   const intro = getConstituentIntroduction(location)
 
@@ -58,5 +43,13 @@ export function getFIT21FollowUpText({
     return `Dear Representative,\n\n${intro} and wanted to thank you for your recent vote on the bipartisan Financial Innovation and Techno≈logy for the 21st Century Act [FIT21 H.R. 4763].\n\nAs you know, FIT21 sets foundational rules for crypto that are pro-consumer and pro-job creation. It will protect 52 million Americans who own crypto, unlock the creation of millions of jobs in the U.S., and ensure America remains a global leader in technology. That’s good for our economic and national security.\n\nAmerican crypto owners have been waiting patiently for years for our lawmakers to protect consumers and strengthen America’s role in building the future of money and the internet.\n\nI am glad that the House has passed FIT21, and I am grateful for your vote in favor. I hope you will encourage your colleagues in the Senate to take up the bill and pass it as well.${fullNameSignOff}`
   }
 
-  return `TODO: VOTED AGAINST or DIDNT VOTE`
+  return getDefaultText(getTextProps)
+}
+
+export function getSubjectLine({ billVote }: { billVote: BillVoteResult }) {
+  if (billVote === 'VOTED_FOR') {
+    return 'Thank You - H.R 4763'
+  }
+
+  return 'I Support Crypto'
 }

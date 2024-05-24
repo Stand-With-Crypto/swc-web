@@ -17,7 +17,10 @@ import {
   CURRENT_CAMPAIGN_NAME,
   EMAIL_FLOW_POLITICIANS_CATEGORY,
 } from '@/components/app/userActionFormEmailCongressperson/constants'
-import { getFIT21FollowUpText } from '@/components/app/userActionFormEmailCongressperson/getDefaultText'
+import {
+  getFIT21FollowUpText,
+  getSubjectLine,
+} from '@/components/app/userActionFormEmailCongressperson/getDefaultText'
 import { FormFields } from '@/components/app/userActionFormEmailCongressperson/types'
 import { Button } from '@/components/ui/button'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
@@ -79,6 +82,9 @@ const getDefaultValues = ({
         firstName: user.firstName,
         lastName: user.lastName,
       }),
+      subject: getSubjectLine({
+        billVote: 'NO_VOTE',
+      }),
       address: user.address?.route
         ? {
             description: user.address.formattedDescription,
@@ -94,6 +100,9 @@ const getDefaultValues = ({
     lastName: '',
     emailAddress: '',
     message: getFIT21FollowUpText({
+      billVote: 'NO_VOTE',
+    }),
+    subject: getSubjectLine({
       billVote: 'NO_VOTE',
     }),
     address: undefined,
@@ -150,6 +159,12 @@ export function UserActionFormEmailCongressperson({
             location,
             firstName: 'Lucas',
             lastName: 'Pessone',
+          }),
+        )
+        form.setValue(
+          'subject',
+          getSubjectLine({
+            billVote: data,
           }),
         )
       }
