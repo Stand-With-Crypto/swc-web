@@ -1,5 +1,5 @@
 'use client'
-import React, { useMemo, useRef } from 'react'
+import React, { useMemo, useRef, useState } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { UserActionType } from '@prisma/client'
@@ -17,7 +17,7 @@ import {
   CURRENT_CAMPAIGN_NAME,
   EMAIL_FLOW_POLITICIANS_CATEGORY,
 } from '@/components/app/userActionFormEmailCongressperson/constants'
-import { getDefaultText } from '@/components/app/userActionFormEmailCongressperson/getDefaultText'
+import { getFIT21FollowUpText } from '@/components/app/userActionFormEmailCongressperson/getDefaultText'
 import { FormFields } from '@/components/app/userActionFormEmailCongressperson/types'
 import { Button } from '@/components/ui/button'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
@@ -43,11 +43,7 @@ import { fetchReq } from '@/utils/shared/fetchReq'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { apiUrls } from '@/utils/shared/urls'
 import { UserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns'
-import {
-  getYourPoliticianCategoryDisplayName,
-  getYourPoliticianCategoryShortDisplayName,
-  YourPoliticianCategory,
-} from '@/utils/shared/yourPoliticianCategory'
+import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory'
 import { cn } from '@/utils/web/cn'
 import {
   GenericErrorFormValues,
@@ -78,7 +74,11 @@ const getDefaultValues = ({
       firstName: user.firstName,
       lastName: user.lastName,
       emailAddress: user.primaryUserEmailAddress?.emailAddress || '',
-      message: '',
+      message: getFIT21FollowUpText({
+        billVote: 'NO_VOTE',
+        firstName: user.firstName,
+        lastName: user.lastName,
+      }),
       address: user.address?.route
         ? {
             description: user.address.formattedDescription,
@@ -93,7 +93,9 @@ const getDefaultValues = ({
     firstName: '',
     lastName: '',
     emailAddress: '',
-    message: '',
+    message: getFIT21FollowUpText({
+      billVote: 'NO_VOTE',
+    }),
     address: undefined,
     dtsiSlugs,
   }
@@ -111,12 +113,18 @@ export function UserActionFormEmailCongressperson({
   initialValues?: FormFields
   politicianCategory?: YourPoliticianCategory
 }) {
+  const [location, setLocation] = useState<
+    | {
+        districtNumber: number
+        stateCode: string
+      }
+    | undefined
+  >(undefined)
   const isDesktop = useIsDesktop()
   const router = useRouter()
   const urls = useIntlUrls()
   const hasModifiedMessage = useRef(false)
   const userDefaultValues = useMemo(() => getDefaultValues({ user, dtsiSlugs: [] }), [user])
-  const politicianCategoryDisplayName = getYourPoliticianCategoryDisplayName(politicianCategory)
   const form = useForm<FormValues>({
     resolver: zodResolver(zodUserActionFormEmailCongresspersonFields),
     defaultValues: {
@@ -134,13 +142,24 @@ export function UserActionFormEmailCongressperson({
   })
   const { data: congresspersonBillVote } = useCongresspersonFIT21BillVote(dtsiSlugs?.[0], {
     onSuccess: data => {
-      form.setValue('message', `hello world ${data}`)
+      if (!hasModifiedMessage.current) {
+        form.setValue(
+          'message',
+          getFIT21FollowUpText({
+            billVote: data,
+            location,
+            firstName: 'Lucas',
+            lastName: 'Pessone',
+          }),
+        )
+      }
     },
   })
-  console.log({ congresspersonBillVote })
 
   React.useEffect(() => {
-    if (isDesktop) form.setFocus('firstName')
+    if (isDesktop) {
+      form.setFocus('firstName')
+    }
   }, [form, isDesktop])
 
   return (
@@ -190,11 +209,12 @@ export function UserActionFormEmailCongressperson({
         <ScrollArea className="overflow-auto">
           <div className={cn(dialogContentPaddingStyles, 'space-y-4 md:space-y-8')}>
             <PageTitle className="mb-3" size="sm">
-              Email your {getYourPoliticianCategoryShortDisplayName(politicianCategory)}
+              Email your Representative
             </PageTitle>
             <PageSubTitle className="mb-7">
-              Email your {politicianCategoryDisplayName} and tell them to support crypto. Enter the
-              following information and we will generate a personalized email for you to send.
+              With FIT21 passed by the House, take a moment to reach out to your Rep and say thanks
+              for voting Yes or ask them to reconsider the importance of crypto if they voted
+              against.
             </PageSubTitle>
             <div className="space-y-4">
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -268,20 +288,12 @@ export function UserActionFormEmailCongressperson({
                         <DTSICongresspersonAssociatedWithFormAddress
                           address={addressProps.field.value}
                           currentDTSISlugValue={dtsiSlugProps.field.value}
-                          onChangeDTSISlug={({ dtsiSlugs: newDtsiSlugs, location }) => {
+                          onChangeDTSISlug={({
+                            dtsiSlugs: newDtsiSlugs,
+                            location: newLocation,
+                          }) => {
                             dtsiSlugProps.field.onChange(newDtsiSlugs)
-                            // if (!hasModifiedMessage.current) {
-                            //   const { firstName, lastName } = form.getValues()
-                            //   form.setValue(
-                            //     'message',
-                            //     getDefaultText({
-                            //       dtsiSlugs: newDtsiSlugs,
-                            //       firstName,
-                            //       lastName,
-                            //       location,
-                            //     }),
-                            //   )
-                            // }
+                            setLocation(newLocation)
                           }}
                           politicianCategory={politicianCategory}
                         />
@@ -306,7 +318,7 @@ export function UserActionFormEmailCongressperson({
                       )}
                       <FormControl>
                         <Textarea
-                          placeholder="Your message..."
+                          placeholder=""
                           rows={16}
                           {...field}
                           onChange={e => {
