@@ -5,7 +5,7 @@ import { generateFrameImage } from '@/utils/server/generateFrameImage'
 import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
-export const revalidate = SECONDS_DURATION.MINUTE * 5
+export const revalidate = SECONDS_DURATION['5_MINUTES']
 export const runtime = 'edge'
 
 export async function GET(request: NextRequest, { params }: { params: { index: number } }) {

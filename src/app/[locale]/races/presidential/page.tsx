@@ -7,7 +7,7 @@ import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
 export const dynamic = 'error'
-export const revalidate = SECONDS_DURATION.MINUTE * 10
+export const revalidate = SECONDS_DURATION['10_MINUTES']
 
 type LocationPresidentialRaceSpecificPageProps = PageProps
 

@@ -8,7 +8,7 @@ import { ENDORSED_DTSI_PERSON_SLUGS } from '@/utils/shared/locationSpecificPages
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
 export const dynamic = 'error'
-export const revalidate = SECONDS_DURATION.MINUTE * 10
+export const revalidate = SECONDS_DURATION['10_MINUTES']
 
 const title = 'Stand With Crypto PAC 2024 House and Senate Endorsements'
 const description =
