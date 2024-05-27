@@ -2,15 +2,12 @@
 
 import { useCallback } from 'react'
 
-import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
-import { GetUserPerformedUserActionTypesResponse } from '@/app/api/identified-user/performed-user-action-types/route'
 import { UserActionRowCTA, UserActionRowCTAButtonSkeleton } from '@/components/app/userActionRowCTA'
 import { USER_ACTION_ROW_CTA_INFO } from '@/components/app/userActionRowCTA/constants'
 import { UserActionRowCTAsList } from '@/components/app/userActionRowCTA/userActionRowCTAsList'
 import { Progress } from '@/components/ui/progress'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useLocale } from '@/hooks/useLocale'
-import { PartialButDefined } from '@/types'
 import {
   getUserActionsProgress,
   GetUserActionsProgressArgs,
@@ -20,15 +17,9 @@ import {
   UserActionTypesWithDeeplink,
 } from '@/utils/shared/urlsDeeplinkUserActions'
 
-import { getNextAction } from './getNextAction'
-
 export function UserActionFormSuccessScreenNextActionSkeleton() {
   return (
     <div className="space-y-6 text-center">
-      <p className="text-fontcolor-muted">
-        Complete the actions below to continue your progress as a crypto advocate.
-      </p>
-
       <Skeleton>
         <Progress />
       </Skeleton>

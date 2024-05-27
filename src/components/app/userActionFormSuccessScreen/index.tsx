@@ -27,6 +27,14 @@ export function UserActionFormSuccessScreen(props: UserActionFormSuccessScreenPr
   }
 
   if (!user.phoneNumber || !user.hasOptedInToSms) {
+    /**
+     * User profile is not fully loaded yet,
+     * so we show a skeleton loader to avoid flashing the SMS form
+     */
+    if (isLoading || !user.primaryUserEmailAddress) {
+      return <SMSOptInContent.Skeleton />
+    }
+
     return (
       <div className="mx-auto h-full max-w-[450px]">
         <SMSOptInContent
@@ -38,8 +46,9 @@ export function UserActionFormSuccessScreen(props: UserActionFormSuccessScreenPr
   }
 
   return (
-    <div className="flex h-full flex-col gap-8 lg:max-h-[75vh]">
+    <div className="flex h-full flex-col gap-6 lg:max-h-[75vh]">
       {children}
+
 
       {isLoading || performedActionsResponse.isLoading ? (
         <UserActionFormSuccessScreenNextActionSkeleton />

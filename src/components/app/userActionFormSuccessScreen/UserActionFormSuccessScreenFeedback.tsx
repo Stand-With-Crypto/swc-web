@@ -50,7 +50,11 @@ UserActionFormSuccessScreenFeedback.Title = function UserActionFormSuccessScreen
 
 UserActionFormSuccessScreenFeedback.Description =
   function UserActionFormSuccessScreenFeedbackDescription({ children }: { children: ReactNode }) {
-    return <PageSubTitle size="md">{children}</PageSubTitle>
+    return (
+      <PageSubTitle className="max-w-[500px]" size="md">
+        {children}
+      </PageSubTitle>
+    )
   }
 
 UserActionFormSuccessScreenFeedback.Skeleton =
