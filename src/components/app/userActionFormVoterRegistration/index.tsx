@@ -10,9 +10,8 @@ import { UserActionFormVoterRegistrationSuccess } from '@/components/app/userAct
 import { Survey } from '@/components/app/userActionFormVoterRegistration/sections/survey'
 import { VoterRegistrationForm } from '@/components/app/userActionFormVoterRegistration/sections/voterRegistrationForm'
 import { useSections } from '@/hooks/useSections'
-import { NFTSlug } from '@/utils/shared/nft'
+import { getValues } from '@/utils/shared/getEntries'
 import { USStateCode } from '@/utils/shared/usStateUtils'
-import { NFT_CLIENT_METADATA } from '@/utils/web/nft'
 
 export function UserActionFormVoterRegistration({
   onClose,
@@ -21,8 +20,8 @@ export function UserActionFormVoterRegistration({
   onClose: () => void
   initialStateCode?: USStateCode
 }) {
-  const sectionProps = useSections<SectionNames>({
-    sections: Object.values(SectionNames),
+  const sectionProps = useSections({
+    sections: getValues(SectionNames),
     initialSectionId: SectionNames.SURVEY,
     analyticsName: ANALYTICS_NAME_USER_ACTION_FORM_VOTER_REGISTRATION,
   })

@@ -1,3 +1,4 @@
+import { USER_ACTION_FORM_SUCCESS_SCREEN_INFO } from '@/components/app/userActionFormSuccessScreen/constants'
 import { UserActionFormSuccessScreenFeedback } from '@/components/app/userActionFormSuccessScreen/UserActionFormSuccessScreenFeedback'
 import { NextImage } from '@/components/ui/image'
 import { NFTSlug } from '@/utils/shared/nft'
@@ -18,8 +19,7 @@ export const UserActionFormVoterRegistrationSuccess = () => {
           />
         </div>
       }
-      subtitle="... and got a free NFT for doing so!"
-      title="You registered to vote!"
+      {...USER_ACTION_FORM_SUCCESS_SCREEN_INFO.VOTER_REGISTRATION}
     />
   )
 }

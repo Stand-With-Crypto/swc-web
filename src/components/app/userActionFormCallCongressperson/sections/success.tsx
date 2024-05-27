@@ -1,3 +1,4 @@
+import { USER_ACTION_FORM_SUCCESS_SCREEN_INFO } from '@/components/app/userActionFormSuccessScreen/constants'
 import { UserActionFormSuccessScreenFeedback } from '@/components/app/userActionFormSuccessScreen/UserActionFormSuccessScreenFeedback'
 import { NextImage } from '@/components/ui/image'
 import { Video } from '@/components/ui/video'
@@ -22,8 +23,7 @@ export const UserActionFormCallCongresspersonSuccess = () => {
           />
         </div>
       }
-      subtitle="... and got a free NFT for doing so!"
-      title="You called your senator!"
+      {...USER_ACTION_FORM_SUCCESS_SCREEN_INFO.CALL}
     />
   )
 }

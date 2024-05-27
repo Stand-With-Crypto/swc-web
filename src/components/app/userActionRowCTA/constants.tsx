@@ -9,10 +9,10 @@ import { EMAIL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionForm
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { UserActionFormJoinSWCDialog } from '@/components/app/userActionFormJoinSWC'
 import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
+import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/dialog'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
 import { UserActionRowCTAProps } from '@/components/app/userActionRowCTA'
 import { InternalLink } from '@/components/ui/link'
-import { UserActionTweetLink } from '@/components/ui/userActionTweetLink'
 import { useLocale } from '@/hooks/useLocale'
 import { ActiveClientUserActionType } from '@/utils/shared/activeUserAction'
 import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
@@ -32,7 +32,7 @@ export const USER_ACTION_ROW_CTA_INFO: Record<
     image: '/actionTypeIcons/optIn.png',
     text: 'Join Stand With Crypto',
     subtext: `Join over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates fighting to keep crypto in America.`,
-    canBeTriggeredMultipleTimes: false,
+    canBeTriggeredMultipleTimes: true,
     WrapperComponent: UserActionFormJoinSWCDialog,
   },
   [UserActionType.VOTER_REGISTRATION]: {
@@ -84,9 +84,10 @@ export const USER_ACTION_ROW_CTA_INFO: Record<
     text: 'Share on Twitter/X',
     subtext: 'Bring more people to the movement.',
     canBeTriggeredMultipleTimes: true,
-    WrapperComponent: ({ children }) => (
-      <UserActionTweetLink asChild>{children}</UserActionTweetLink>
-    ),
+    // WrapperComponent: ({ children }) => (
+    //   <UserActionTweetLink asChild>{children}</UserActionTweetLink>
+    // ),
+    WrapperComponent: UserActionFormShareOnTwitterDialog,
   },
   [UserActionType.NFT_MINT]: {
     actionType: UserActionType.NFT_MINT,
