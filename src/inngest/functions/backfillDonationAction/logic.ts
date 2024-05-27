@@ -41,46 +41,6 @@ export async function backfillDonationAction(
     },
     ...(limit && { take: limit }),
   })
-  console.log(usersWithNoDonationAction)
-
-  // const userActionsToUpdate = []
-
-  // for (const user of usersWithNoDonationAction) {
-  //   const nftMintCostTotal = user.userActions
-  //     .filter(userAction => !isNil(userAction.nftMint))
-  //     .reduce((acc, userAction) => {
-  //       return acc + (userAction.nftMint?.costAtMintUsd.toNumber() || 0)
-  //     }, 0)
-
-  //   const isTotalDonationAmountUsdCorrect =
-  //     user.totalDonationAmountUsd.toNumber() === nftMintCostTotal
-
-  //   if (isTotalDonationAmountUsdCorrect) continue
-
-  //   const priceDifference = user.totalDonationAmountUsd.toNumber() - nftMintCostTotal
-
-  //   userActionsToUpdate.push(
-  //     await prismaClient.userAction.create({
-  //       data: {
-  //         user: {
-  //           connect: {
-  //             id: user.id,
-  //           },
-  //         },
-  //         campaignName: UserActionDonationCampaignName.DEFAULT,
-  //         actionType: UserActionType.DONATION,
-  //         userActionDonation: {
-  //           create: {
-  //             amount: priceDifference,
-  //             amountCurrencyCode: 'USDC',
-  //             amountUsd: priceDifference,
-  //             recipient: DonationOrganization.STAND_WITH_CRYPTO,
-  //           },
-  //         },
-  //       },
-  //     }),
-  //   )
-  // }
 
   if (persist === undefined || !persist) {
     logger.info('Dry run, exiting')
@@ -90,9 +50,44 @@ export async function backfillDonationAction(
     } as BackfillDonationActionResponse
   }
 
-  // if (userActionsToUpdate.length > 0) {
-  //   await batchAsyncAndLog(userActionsToUpdate, actions => Promise.all(actions))
-  // }
+  await batchAsyncAndLog(usersWithNoDonationAction, users =>
+    Promise.all(
+      users.map(user => {
+        const nftMintCostTotal = user.userActions
+          .filter(userAction => !isNil(userAction.nftMint))
+          .reduce((acc, userAction) => {
+            return acc + (userAction.nftMint?.costAtMintUsd.toNumber() || 0)
+          }, 0)
+
+        const isTotalDonationAmountUsdCorrect =
+          user.totalDonationAmountUsd.toNumber() === nftMintCostTotal
+
+        if (isTotalDonationAmountUsdCorrect) return null
+
+        const priceDifference = user.totalDonationAmountUsd.toNumber() - nftMintCostTotal
+
+        return prismaClient.userAction.create({
+          data: {
+            user: {
+              connect: {
+                id: user.id,
+              },
+            },
+            campaignName: UserActionDonationCampaignName.DEFAULT,
+            actionType: UserActionType.DONATION,
+            userActionDonation: {
+              create: {
+                amount: priceDifference,
+                amountCurrencyCode: 'USD',
+                amountUsd: priceDifference,
+                recipient: DonationOrganization.STAND_WITH_CRYPTO,
+              },
+            },
+          },
+        })
+      }),
+    ),
+  )
 
   return {
     dryRun: false,
