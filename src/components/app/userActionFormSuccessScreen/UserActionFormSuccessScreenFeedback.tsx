@@ -4,41 +4,40 @@ import { ReactNode } from 'react'
 import { NextImage } from '@/components/ui/image'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
+import { Skeleton } from '@/components/ui/skeleton'
 
-interface UserActionFormSuccessScreenFeedbackProps {
+export interface UserActionFormSuccessScreenFeedbackProps {
   Image?: ReactNode
   title: ReactNode
-  subtitle: ReactNode
+  description: ReactNode
 }
 
 export function UserActionFormSuccessScreenFeedback(
   props: UserActionFormSuccessScreenFeedbackProps,
 ) {
-  const { Image, title, subtitle } = props
+  const { Image, title, description } = props
 
   return (
     <div className="flex flex-col items-center justify-center gap-4">
       <UserActionFormSuccessScreenFeedback.Image>{Image}</UserActionFormSuccessScreenFeedback.Image>
       <UserActionFormSuccessScreenFeedback.Title>{title}</UserActionFormSuccessScreenFeedback.Title>
-      <UserActionFormSuccessScreenFeedback.Subtitle>
-        {subtitle}
-      </UserActionFormSuccessScreenFeedback.Subtitle>
+      <UserActionFormSuccessScreenFeedback.Description>
+        {description}
+      </UserActionFormSuccessScreenFeedback.Description>
     </div>
   )
 }
+
+const UserActionFormSuccessScreenDefaultImage = () => (
+  <NextImage alt="Shield with checkmark" height={120} src="/logo/shield.svg" width={120} />
+)
 
 UserActionFormSuccessScreenFeedback.Image = function UserActionFormSuccessScreenFeedbackImage({
   children,
 }: {
   children: ReactNode
 }) {
-  return (
-    <div className="mx-auto">
-      {children || (
-        <NextImage alt="Shield with checkmark" height={120} src="/logo/shield.svg" width={120} />
-      )}
-    </div>
-  )
+  return <div className="mx-auto">{children || <UserActionFormSuccessScreenDefaultImage />}</div>
 }
 
 UserActionFormSuccessScreenFeedback.Title = function UserActionFormSuccessScreenFeedbackTitle({
@@ -49,7 +48,23 @@ UserActionFormSuccessScreenFeedback.Title = function UserActionFormSuccessScreen
   return <PageTitle size="sm">{children || 'Nice work!'}</PageTitle>
 }
 
-UserActionFormSuccessScreenFeedback.Subtitle =
-  function UserActionFormSuccessScreenFeedbackSubtitle({ children }: { children: ReactNode }) {
+UserActionFormSuccessScreenFeedback.Description =
+  function UserActionFormSuccessScreenFeedbackDescription({ children }: { children: ReactNode }) {
     return <PageSubTitle size="md">{children}</PageSubTitle>
+  }
+
+UserActionFormSuccessScreenFeedback.Skeleton =
+  function UserActionFormSuccessScreenFeedbackSkeleton() {
+    return (
+      <div className="flex flex-col items-center justify-center gap-4">
+        <Skeleton className="h-[180px] w-[345px] rounded-xl" />
+        <Skeleton className="h-8 w-full max-w-xs" />
+
+        <div className="flex w-full flex-col items-center gap-2">
+          <Skeleton className="h-4 w-full max-w-md" />
+          <Skeleton className="h-4 w-full max-w-md" />
+          <Skeleton className="h-4 w-full max-w-sm" />
+        </div>
+      </div>
+    )
   }

@@ -14,6 +14,7 @@ import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormErrorMessage, FormField, FormItem } from '@/components/ui/form'
 import { NextImage } from '@/components/ui/image'
 import { Input } from '@/components/ui/input'
+import { Skeleton } from '@/components/ui/skeleton'
 import { trackFormSubmissionSyncErrors, triggerServerActionForForm } from '@/utils/web/formUtils'
 import { zodUpdateUserHasOptedInToSMS } from '@/validation/forms/zodUpdateUserHasOptedInToSMS'
 
@@ -95,11 +96,21 @@ export function SMSOptInContent(props: SMSOptInContentProps) {
         Image={
           <NextImage alt="Shield with checkmark" height={120} src="/logo/shield.svg" width={120} />
         }
-        subtitle="This is an important year for crypto. Sign up for occasional text updates on important legislation, elections, and events in your area."
+        description="This is an important year for crypto. Sign up for occasional text updates on important legislation, elections, and events in your area."
         title="Nice work!"
       />
 
       <SMSOptInForm {...props} />
+    </div>
+  )
+}
+
+SMSOptInContent.Skeleton = function SMSOptInContentSkeleton() {
+  return (
+    <div className="space-y-8">
+      <UserActionFormSuccessScreenFeedback.Skeleton />
+
+      <Skeleton className="mx-auto h-14 w-full max-w-[450px]" />
     </div>
   )
 }

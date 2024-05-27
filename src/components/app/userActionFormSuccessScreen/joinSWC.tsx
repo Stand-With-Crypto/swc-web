@@ -16,7 +16,7 @@ export function JoinSWC(props: JoinSWCProps) {
         Image={
           <NextImage alt="Shield with checkmark" height={120} src="/logo/shield.svg" width={120} />
         }
-        subtitle="You did your part to save crypto. Join Stand With Crypto to become a member or sign in to have this action count towards your advocacy progress."
+        description="You did your part to save crypto. Join Stand With Crypto to become a member or sign in to have this action count towards your advocacy progress."
         title="Nice work!"
       />
 

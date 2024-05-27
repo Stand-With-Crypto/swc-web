@@ -71,10 +71,6 @@ export function UserActionFormSuccessScreenNextAction({
 
   return (
     <div className="space-y-6 text-center">
-      <p className="text-fontcolor-muted">
-        Complete the actions below to continue your progress as a crypto advocate.
-      </p>
-
       <Progress data-max={numActionsAvailable} value={progressValue} />
 
       {/** Uncompleted actions first */}
