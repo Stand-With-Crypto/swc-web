@@ -35,6 +35,11 @@ interface LoginDialogWrapperProps extends React.PropsWithChildren<ThirdwebLoginC
    * instead of our internal authentication
    */
   useThirdwebSession?: boolean
+
+  /**
+   * Callback that is called when the user logs in.
+   */
+  onLogin?: () => void
 }
 
 enum LoginSections {
@@ -50,6 +55,7 @@ export function LoginDialogWrapper({
   loadingFallback,
   forceUnauthenticated,
   useThirdwebSession = false,
+  onLogin,
   ...props
 }: LoginDialogWrapperProps) {
   const session = useSession()
@@ -106,6 +112,7 @@ export function LoginDialogWrapper({
       dialogProps={dialogProps}
       goToSection={goToSection}
       isLoggedIn={isLoggedIn}
+      onLogin={onLogin}
       {...props}
     >
       {children}
@@ -118,6 +125,7 @@ interface UnauthenticatedSectionProps extends React.PropsWithChildren<ThirdwebLo
   currentSection: LoginSections
   dialogProps: ReturnType<typeof useDialog>
   isLoggedIn: boolean
+  onLogin?: () => void
 }
 
 export function UnauthenticatedSection({
@@ -126,6 +134,7 @@ export function UnauthenticatedSection({
   currentSection,
   dialogProps,
   isLoggedIn,
+  onLogin,
   ...props
 }: UnauthenticatedSectionProps) {
   const { mutate } = useApiResponseForUserFullProfileInfo()
@@ -161,8 +170,9 @@ export function UnauthenticatedSection({
       goToSection(LoginSections.FINISH_PROFILE)
     } else {
       setDialogOpen(false)
+      onLogin?.()
     }
-  }, [goToSection, mutate, setDialogOpen])
+  }, [goToSection, mutate, onLogin, setDialogOpen])
 
   return (
     <Dialog {...dialogProps} onOpenChange={setDialogOpen}>
