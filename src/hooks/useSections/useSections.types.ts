@@ -1,6 +1,6 @@
-export interface UseSectionsProps<SectionKey extends string> {
-  sections: SectionKey[]
-  initialSectionId?: SectionKey | (() => SectionKey)
+export interface UseSectionsProps<SectionKeys extends readonly string[]> {
+  sections: SectionKeys
+  initialSectionId: SectionKeys[number]
   analyticsName: string
 }
 
