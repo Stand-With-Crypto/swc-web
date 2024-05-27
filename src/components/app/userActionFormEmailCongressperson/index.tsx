@@ -152,13 +152,14 @@ export function UserActionFormEmailCongressperson({
   const { data: congresspersonBillVote } = useCongresspersonFIT21BillVote(dtsiSlugs?.[0], {
     onSuccess: data => {
       if (!hasModifiedMessage.current) {
+        const { firstName, lastName } = form.getValues()
         form.setValue(
           'message',
           getFIT21FollowUpText({
             billVote: data,
             location,
-            firstName: 'Lucas',
-            lastName: 'Pessone',
+            firstName,
+            lastName,
           }),
         )
         form.setValue(
