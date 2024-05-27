@@ -1,11 +1,14 @@
 'use client'
 import { useState } from 'react'
+import { ArrowLeft } from 'lucide-react'
 
 import { actionUpdateUserHasOptedInToMembership } from '@/actions/actionUpdateUserHasOptedInToMembership'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
+import { dialogButtonStyles } from '@/components/ui/dialog/styles'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
+import { cn } from '@/utils/web/cn'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 
 export function HasOptedInToMembershipForm({
@@ -67,10 +70,9 @@ export function HasOptedInToMembershipForm({
           Join
         </Button>
       </div>
-      <div className="text-center">
-        <Button className="underline" onClick={onCancel} variant="link">
-          Go back
-        </Button>
+
+      <div className={cn('left-2', dialogButtonStyles)} onClick={() => onCancel} role="button">
+        <ArrowLeft size={20} />
       </div>
     </div>
   )
