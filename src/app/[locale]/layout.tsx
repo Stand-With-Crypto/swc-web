@@ -2,6 +2,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import { capitalize } from 'lodash-es'
 import type { Metadata, Viewport } from 'next'
 import { notFound } from 'next/navigation'
+import NextTopLoader from 'nextjs-toploader'
 
 import { TopLevelClientLogic } from '@/app/[locale]/topLevelClientLogic'
 import { CookieConsent } from '@/components/app/cookieConsent'
@@ -71,8 +72,11 @@ export default function Layout({ children, params }: PageProps & { children: Rea
     <html lang={locale}>
       <body className={fontClassName}>
         <OverrideGlobalLocalStorage />
-        {/* LATER-TASK add back once https://github.com/TheSGJ/nextjs-toploader/issues/66 is resolved */}
-        {/* <NextTopLoader /> */}
+        <NextTopLoader
+          color="hsl(var(--primary-cta))"
+          shadow="0 0 10px hsl(var(--primary-cta)),0 0 5px hsl(var(--primary-cta))"
+          showSpinner={false}
+        />
         <TopLevelClientLogic locale={locale}>
           <FullHeight.Container>
             <Navbar locale={locale} />
