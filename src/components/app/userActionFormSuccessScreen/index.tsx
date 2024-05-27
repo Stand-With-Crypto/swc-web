@@ -1,12 +1,11 @@
 'use client'
-import { useMemo } from 'react'
 
-import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { JoinSWC } from '@/components/app/userActionFormSuccessScreen/joinSWC'
 import { SMSOptInContent } from '@/components/app/userActionFormSuccessScreen/smsOptInForm'
-import { UserActionFormSuccessScreenNextAction } from '@/components/app/userActionFormSuccessScreen/userActionFormSuccessScreenNextAction'
-import { Button } from '@/components/ui/button'
-import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
+import {
+  UserActionFormSuccessScreenNextAction,
+  UserActionFormSuccessScreenNextActionSkeleton,
+} from '@/components/app/userActionFormSuccessScreen/userActionFormSuccessScreenNextAction'
 import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
 import { useSession } from '@/hooks/useSession'
 
@@ -22,13 +21,6 @@ export function UserActionFormSuccessScreen(props: UserActionFormSuccessScreenPr
   const performedActionsResponse = useApiResponseForUserPerformedUserActionTypes({
     revalidateOnMount: true,
   })
-
-  if (isLoading || performedActionsResponse.isLoading) {
-    /**
-     * TODO: Skeleton
-     */
-    return <div className="text-xl text-red-500">Loading...</div>
-  }
 
   if (!isLoggedIn || !user) {
     return <JoinSWC onClose={onClose} />
@@ -49,12 +41,19 @@ export function UserActionFormSuccessScreen(props: UserActionFormSuccessScreenPr
     <div className="flex h-full flex-col gap-8 lg:max-h-[75vh]">
       {children}
 
-      <UserActionFormSuccessScreenNextAction
-        data={{
-          user,
-          performedUserActionTypes: performedActionsResponse.data?.performedUserActionTypes,
-        }}
-      />
+      {isLoading || performedActionsResponse.isLoading ? (
+        <UserActionFormSuccessScreenNextActionSkeleton />
+      ) : (
+        <UserActionFormSuccessScreenNextAction
+          data={{
+            userHasEmbeddedWallet: user.hasEmbeddedWallet,
+            performedUserActionTypes:
+              performedActionsResponse.data?.performedUserActionTypes.map(
+                action => action.actionType,
+              ) || [],
+          }}
+        />
+      )}
     </div>
   )
 }

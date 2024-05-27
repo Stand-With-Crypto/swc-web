@@ -10,7 +10,11 @@ import { UserActionRowCTAsList } from '@/components/app/userActionRowCTA/userAct
 import { Progress } from '@/components/ui/progress'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useLocale } from '@/hooks/useLocale'
-import { getUserActionsProgress } from '@/utils/shared/getUserActionsProgress'
+import { PartialButDefined } from '@/types'
+import {
+  getUserActionsProgress,
+  GetUserActionsProgressArgs,
+} from '@/utils/shared/getUserActionsProgress'
 import {
   USER_ACTION_DEEPLINK_MAP,
   UserActionTypesWithDeeplink,
@@ -20,22 +24,24 @@ import { getNextAction } from './getNextAction'
 
 export function UserActionFormSuccessScreenNextActionSkeleton() {
   return (
-    <div>
+    <div className="space-y-6 text-center">
+      <p className="text-fontcolor-muted">
+        Complete the actions below to continue your progress as a crypto advocate.
+      </p>
+
       <Skeleton>
-        <div className="mb-2 font-bold">Up next</div>
+        <Progress />
       </Skeleton>
+
+      <UserActionRowCTAButtonSkeleton />
+      <UserActionRowCTAButtonSkeleton />
       <UserActionRowCTAButtonSkeleton />
     </div>
   )
 }
 
 export interface UserActionFormSuccessScreenNextActionProps {
-  data: {
-    user: GetUserFullProfileInfoResponse['user'] | undefined
-    performedUserActionTypes:
-      | GetUserPerformedUserActionTypesResponse['performedUserActionTypes']
-      | undefined
-  }
+  data: GetUserActionsProgressArgs
 }
 
 export function UserActionFormSuccessScreenNextAction({
@@ -56,14 +62,10 @@ export function UserActionFormSuccessScreenNextAction({
     [locale],
   )
 
-  if (!data || !data?.user || !data?.performedUserActionTypes) {
-    return <UserActionFormSuccessScreenNextActionSkeleton />
-  }
-
-  const { performedUserActionTypes, user } = data
+  const { performedUserActionTypes, userHasEmbeddedWallet } = data
 
   const { progressValue, numActionsAvailable, excludeUserActionTypes } = getUserActionsProgress({
-    user,
+    userHasEmbeddedWallet,
     performedUserActionTypes,
   })
 
@@ -77,10 +79,7 @@ export function UserActionFormSuccessScreenNextAction({
 
       {/** Uncompleted actions first */}
       <UserActionRowCTAsList
-        excludeUserActionTypes={[
-          ...(excludeUserActionTypes || []),
-          ...performedUserActionTypes.map(x => x.actionType),
-        ]}
+        excludeUserActionTypes={[...(excludeUserActionTypes || []), ...performedUserActionTypes]}
         performedUserActionTypes={performedUserActionTypes}
         render={ctaProps => (
           <UserActionRowCTA
@@ -93,16 +92,14 @@ export function UserActionFormSuccessScreenNextAction({
 
       {/** Completed actions last */}
       {performedUserActionTypes.map(performedAction => {
-        if (performedAction.actionType in USER_ACTION_ROW_CTA_INFO) {
+        if (performedAction in USER_ACTION_ROW_CTA_INFO) {
           const ctaProps =
-            USER_ACTION_ROW_CTA_INFO[
-              performedAction.actionType as keyof typeof USER_ACTION_ROW_CTA_INFO
-            ]
+            USER_ACTION_ROW_CTA_INFO[performedAction as keyof typeof USER_ACTION_ROW_CTA_INFO]
 
           return (
             <UserActionRowCTA
               {...ctaProps}
-              key={performedAction.actionType}
+              key={performedAction}
               onClick={handleClick(ctaProps.actionType as UserActionTypesWithDeeplink)}
               state="complete"
             />

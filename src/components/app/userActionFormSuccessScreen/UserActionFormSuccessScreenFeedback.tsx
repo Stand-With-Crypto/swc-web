@@ -17,7 +17,7 @@ export function UserActionFormSuccessScreenFeedback(
   const { Image, title, subtitle } = props
 
   return (
-    <div className="flex flex-col items-center gap-4">
+    <div className="flex flex-col items-center justify-center gap-4">
       <UserActionFormSuccessScreenFeedback.Image>{Image}</UserActionFormSuccessScreenFeedback.Image>
       <UserActionFormSuccessScreenFeedback.Title>{title}</UserActionFormSuccessScreenFeedback.Title>
       <UserActionFormSuccessScreenFeedback.Subtitle>

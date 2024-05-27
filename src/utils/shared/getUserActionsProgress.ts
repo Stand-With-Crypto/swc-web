@@ -21,7 +21,7 @@ export const USER_ACTIONS_EXCLUDED_FROM_CTA = Array.from(USER_ACTIONS_AVAILABLE_
   .map(([key, _]) => key)
 
 interface GetUserActionsProgressArgs {
-  user: GetUserFullProfileInfoResponse['user']
+  userHasEmbeddedWallet: boolean
   performedUserActionTypes: {
     actionType: UserActionType
     campaignName: string
@@ -29,14 +29,10 @@ interface GetUserActionsProgressArgs {
 }
 
 export function getUserActionsProgress({
-  user,
+  userHasEmbeddedWallet,
   performedUserActionTypes,
 }: GetUserActionsProgressArgs) {
-  if (!user) {
-    return {}
-  }
-
-  const excludeUserActionTypes = user.hasEmbeddedWallet
+  const excludeUserActionTypes = userHasEmbeddedWallet
     ? [UserActionType.NFT_MINT, ...USER_ACTIONS_EXCLUDED_FROM_CTA]
     : USER_ACTIONS_EXCLUDED_FROM_CTA
 
