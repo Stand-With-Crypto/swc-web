@@ -72,7 +72,7 @@ export const UserActionRowCTAButton = React.forwardRef<
               className="rounded-xl"
               height={100}
               src={image}
-              style={{ height: 100, width: 100 }}
+              style={{ height: 100, width: 100, objectFit: 'cover' }}
               width={100}
             />
           </div>

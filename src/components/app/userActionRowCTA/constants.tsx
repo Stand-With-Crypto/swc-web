@@ -2,12 +2,12 @@
 
 import { UserActionType } from '@prisma/client'
 
-import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { CALL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormCallCongressperson/constants'
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
 import { UserActionFormEmailCNNDialog } from '@/components/app/userActionFormEmailCNN/dialog'
 import { EMAIL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormEmailCongressperson/constants'
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
+import { UserActionFormJoinSWCDialog } from '@/components/app/userActionFormJoinSWC'
 import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
 import { UserActionRowCTAProps } from '@/components/app/userActionRowCTA'
@@ -33,9 +33,7 @@ export const USER_ACTION_ROW_CTA_INFO: Record<
     text: 'Join Stand With Crypto',
     subtext: `Join over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates fighting to keep crypto in America.`,
     canBeTriggeredMultipleTimes: false,
-    WrapperComponent: ({ children }) => (
-      <LoginDialogWrapper forceUnauthenticated>{children}</LoginDialogWrapper>
-    ),
+    WrapperComponent: UserActionFormJoinSWCDialog,
   },
   [UserActionType.VOTER_REGISTRATION]: {
     actionType: UserActionType.VOTER_REGISTRATION,

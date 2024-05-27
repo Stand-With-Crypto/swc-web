@@ -107,7 +107,7 @@ export function UserActionFormNFTMintTransactionWatch({
   return (
     <UserActionFormLayout>
       <UserActionFormLayout.Container>
-        <div className="my-10 flex flex-col items-center gap-6 text-center">
+        <div className="flex flex-col items-center gap-6 text-center">
           <NFTDisplay
             alt={contractMetadata.name}
             loading={!isMined}
