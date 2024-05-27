@@ -1,5 +1,6 @@
 'use client'
 
+import { USER_ACTION_FORM_SUCCESS_SCREEN_INFO } from '@/components/app/userActionFormSuccessScreen/constants'
 import { UserActionFormSuccessScreenFeedback } from '@/components/app/userActionFormSuccessScreen/UserActionFormSuccessScreenFeedback'
 import {
   UserActionFormSuccessScreenNextAction,
@@ -11,7 +12,7 @@ import { Video } from '@/components/ui/video'
 import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
 import { useSession } from '@/hooks/useSession'
 
-const ImageFallback = (
+const imageFallback = (
   <NextImage alt="A animated SWC Shield." fill src="/actionTypeVideos/swca_join_still_4k.png" />
 )
 
@@ -22,13 +23,12 @@ export const UserActionFormJoinSWCSuccess = () => {
         <div className="relative h-[245px] w-[300px] overflow-hidden rounded-xl sm:w-[345px]">
           <Video
             className={'absolute left-0 top-0 h-full w-full object-cover'}
-            fallback={ImageFallback}
+            fallback={imageFallback}
             src="/actionTypeVideos/swca_join.mp4"
           />
         </div>
       }
-      subtitle="... and got a free NFT for doing so!"
-      title="You joined Stand With Crypto!"
+      {...USER_ACTION_FORM_SUCCESS_SCREEN_INFO.OPT_IN}
     />
   )
 }
