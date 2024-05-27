@@ -50,11 +50,9 @@ function UserActionFormEmailCongresspersonDeeplinkWrapperContent() {
       user={user}
     />
   ) : (
-    <div className={cn(dialogContentPaddingStyles)}>
-      <UserActionFormSuccessScreen onClose={() => router.replace(urls.home())}>
-        <UserActionFormEmailCongresspersonSuccess />
-      </UserActionFormSuccessScreen>
-    </div>
+    <UserActionFormSuccessScreen onClose={() => router.replace(urls.home())}>
+      <UserActionFormEmailCongresspersonSuccess />
+    </UserActionFormSuccessScreen>
   )
 }
 
