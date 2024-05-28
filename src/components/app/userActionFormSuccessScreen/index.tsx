@@ -17,7 +17,7 @@ interface UserActionFormSuccessScreenProps {
 export function UserActionFormSuccessScreen(props: UserActionFormSuccessScreenProps) {
   const { children, onClose } = props
 
-  const { user, isLoggedIn, isLoading } = useSession()
+  const { user, isLoggedIn, isLoading, fullProfileRequest } = useSession()
   const performedActionsResponse = useApiResponseForUserPerformedUserActionTypes({
     revalidateOnMount: true,
   })
@@ -27,11 +27,7 @@ export function UserActionFormSuccessScreen(props: UserActionFormSuccessScreenPr
   }
 
   if (!user.phoneNumber || !user.hasOptedInToSms) {
-    /**
-     * User profile is not fully loaded yet,
-     * so we show a skeleton loader to avoid flashing the SMS form
-     */
-    if (isLoading || !user.primaryUserEmailAddress) {
+    if (fullProfileRequest.isValidating || fullProfileRequest.isLoading) {
       return <SMSOptInContent.Skeleton />
     }
 
@@ -39,7 +35,11 @@ export function UserActionFormSuccessScreen(props: UserActionFormSuccessScreenPr
       <div className="mx-auto h-full max-w-[450px]">
         <SMSOptInContent
           initialValues={{ phoneNumber: user.phoneNumber || '' }}
-          onSuccess={onClose}
+          onSuccess={({ phoneNumber }) => {
+            void fullProfileRequest.mutate({
+              user: { ...user, phoneNumber, hasOptedInToSms: true },
+            })
+          }}
         />
       </div>
     )
@@ -48,7 +48,6 @@ export function UserActionFormSuccessScreen(props: UserActionFormSuccessScreenPr
   return (
     <div className="flex h-full flex-col gap-6 lg:max-h-[75vh]">
       {children}
-
 
       {isLoading || performedActionsResponse.isLoading ? (
         <UserActionFormSuccessScreenNextActionSkeleton />

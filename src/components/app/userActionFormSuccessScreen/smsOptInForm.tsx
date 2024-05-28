@@ -21,7 +21,7 @@ import { zodUpdateUserHasOptedInToSMS } from '@/validation/forms/zodUpdateUserHa
 const FORM_NAME = 'SMS opt in form'
 
 interface SMSOptInFormProps {
-  onSuccess?: () => void
+  onSuccess?: (formValues: UpdateUserHasOptedInToSMSPayload) => void
   initialValues?: UpdateUserHasOptedInToSMSPayload
 }
 
@@ -51,7 +51,7 @@ export function SMSOptInForm(props: SMSOptInFormProps) {
           if (result.status === 'success') {
             router.refresh()
             toast.success('You have opted in to SMS updates', { duration: 5000 })
-            onSuccess?.()
+            onSuccess?.(values)
           }
         }, trackFormSubmissionSyncErrors(FORM_NAME))}
       >

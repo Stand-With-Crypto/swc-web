@@ -24,6 +24,7 @@ export function useSession() {
     isLoggedIn,
     isLoggedInThirdweb,
     user: fullProfileRequest.data?.user,
+    fullProfileRequest,
   }
 }
 
