@@ -89,8 +89,6 @@ export function formatGetDTSIPeopleFromAddressNotFoundReason(
       return 'Please enter a US-based address.'
     case 'NOT_SAME_STATE':
       return "Looks like you entered an address that's not in this state."
-    case 'NO_REPS_IN_STATE':
-      return 'No representatives in your state.'
     case 'NOT_SPECIFIC_ENOUGH':
       return 'Please enter a specific address that includes street-level information.'
     case 'CIVIC_API_DOWN':
