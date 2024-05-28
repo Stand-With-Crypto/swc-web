@@ -269,7 +269,7 @@ async function createUserActionDonation(
     })
   }
 
-  const donationAction = prismaClient.userAction.create({
+  const donationAction = await prismaClient.userAction.create({
     data: {
       user: {
         connect: {
