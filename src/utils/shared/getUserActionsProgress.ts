@@ -1,6 +1,5 @@
 import { UserActionType } from '@prisma/client'
 
-import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
 import { getValues } from '@/utils/shared/getEntries'
 import { USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN } from '@/utils/web/userActionUtils'
 

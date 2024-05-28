@@ -3,7 +3,7 @@ import { UserActionType } from '@prisma/client'
 import type { UserActionFormSuccessScreenFeedbackProps } from '@/components/app/userActionFormSuccessScreen/UserActionFormSuccessScreenFeedback'
 import { ActiveClientUserActionType } from '@/utils/shared/activeUserAction'
 
-const DEFAULT_USER_ACTION_FORM_SUCCESS_SCREEN_INFO = {
+export const DEFAULT_USER_ACTION_FORM_SUCCESS_SCREEN_INFO = {
   WITH_NFT:
     'Keep up the good work! Complete the actions below to continue your progress as a crypto advocate.',
   WITHOUT_NFT:

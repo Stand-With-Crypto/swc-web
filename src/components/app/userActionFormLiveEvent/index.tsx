@@ -5,8 +5,10 @@ import {
   ANALYTICS_NAME_USER_ACTION_FORM_LIVE_EVENT,
   SectionNames,
 } from '@/components/app/userActionFormLiveEvent/constants'
+import { UserActionFormLiveEventSuccess } from '@/components/app/userActionFormLiveEvent/success'
 import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
 import { useSections } from '@/hooks/useSections'
+import { getValues } from '@/utils/shared/getEntries'
 import { NFTSlug } from '@/utils/shared/nft'
 import { UserActionLiveEventCampaignName } from '@/utils/shared/userActionCampaigns'
 import { NFT_CLIENT_METADATA } from '@/utils/web/nft'
@@ -22,8 +24,8 @@ export function UserActionFormLiveEvent({
   isLoggedIn,
   onClose,
 }: UserActionFormLiveEventProps) {
-  const sectionProps = useSections<SectionNames>({
-    sections: Object.values(SectionNames),
+  const sectionProps = useSections({
+    sections: getValues(SectionNames),
     initialSectionId: SectionNames.LANDING,
     analyticsName: ANALYTICS_NAME_USER_ACTION_FORM_LIVE_EVENT,
   })
@@ -34,10 +36,11 @@ export function UserActionFormLiveEvent({
       return <ClaimNft {...sectionProps} isLoggedIn={isLoggedIn} slug={slug} />
     case SectionNames.SUCCESS:
       return (
-        <UserActionFormSuccessScreen
-          nftWhenAuthenticated={NFT_CLIENT_METADATA[NFTSlug.LA_CRYPTO_EVENT_2024_03_04]}
-          onClose={onClose}
-        />
+        <UserActionFormSuccessScreen onClose={onClose}>
+          <UserActionFormLiveEventSuccess
+            {...NFT_CLIENT_METADATA[NFTSlug.LA_CRYPTO_EVENT_2024_03_04]}
+          />
+        </UserActionFormSuccessScreen>
       )
     default:
       onTabNotFound()

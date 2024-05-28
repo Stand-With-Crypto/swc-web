@@ -37,7 +37,11 @@ UserActionFormSuccessScreenFeedback.Image = function UserActionFormSuccessScreen
 }: {
   children: ReactNode
 }) {
-  return <div className="mx-auto">{children || <UserActionFormSuccessScreenDefaultImage />}</div>
+  return (
+    <div className="mx-auto overflow-hidden rounded-xl">
+      {children || <UserActionFormSuccessScreenDefaultImage />}
+    </div>
+  )
 }
 
 UserActionFormSuccessScreenFeedback.Title = function UserActionFormSuccessScreenFeedbackTitle({

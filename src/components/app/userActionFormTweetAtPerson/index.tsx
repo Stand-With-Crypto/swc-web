@@ -4,6 +4,7 @@ import { ArrowLeft } from 'lucide-react'
 
 import { AuthenticateWithProfileUpdate } from '@/components/app/authentication/authenticateAndUpdateProfile'
 import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
+import { UserActionFormSuccessScreenFeedback } from '@/components/app/userActionFormSuccessScreen/UserActionFormSuccessScreenFeedback'
 import {
   CAMPAIGN_METADATA,
   TweetAtPersonSectionNames,
@@ -11,6 +12,7 @@ import {
 import { OnboardingTweetAtPersonCampaign } from '@/components/app/userActionFormTweetAtPerson/sessions/onboarding'
 import { TweetAtPersonSection } from '@/components/app/userActionFormTweetAtPerson/sessions/tweet'
 import { dialogButtonStyles } from '@/components/ui/dialog/styles'
+import { NextImage } from '@/components/ui/image'
 import { useSections } from '@/hooks/useSections'
 import { NFTSlug } from '@/utils/shared/nft'
 import { UserActionTweetAtPersonCampaignName } from '@/utils/shared/userActionCampaigns'
@@ -22,7 +24,7 @@ interface UserActionFormTweetAtPersonProps {
 }
 
 export function UserActionFormTweetAtPerson({ slug }: UserActionFormTweetAtPersonProps) {
-  const sectionProps = useSections<TweetAtPersonSectionNames>({
+  const sectionProps = useSections({
     sections: Object.values(TweetAtPersonSectionNames),
     initialSectionId: TweetAtPersonSectionNames.ONBOARDING,
     analyticsName: CAMPAIGN_METADATA[slug].analyticsName,
@@ -50,10 +52,18 @@ export function UserActionFormTweetAtPerson({ slug }: UserActionFormTweetAtPerso
       )
     case TweetAtPersonSectionNames.SUCCESS:
       return (
-        <UserActionFormSuccessScreen
-          nftWhenAuthenticated={NFT_CLIENT_METADATA[NFTSlug.PIZZA_DAY_2024_05_22]}
-          onClose={() => {}}
-        />
+        <UserActionFormSuccessScreen onClose={() => {}}>
+          <UserActionFormSuccessScreenFeedback
+            Image={
+              <NextImage
+                src={NFT_CLIENT_METADATA[NFTSlug.PIZZA_DAY_2024_05_22].image.url}
+                {...NFT_CLIENT_METADATA[NFTSlug.PIZZA_DAY_2024_05_22].image}
+              />
+            }
+            description={NFT_CLIENT_METADATA[NFTSlug.PIZZA_DAY_2024_05_22].description}
+            title={NFT_CLIENT_METADATA[NFTSlug.PIZZA_DAY_2024_05_22].name}
+          />
+        </UserActionFormSuccessScreen>
       )
     default:
       onTabNotFound()
