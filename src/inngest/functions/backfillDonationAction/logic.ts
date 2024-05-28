@@ -78,9 +78,9 @@ export async function backfillDonationAction(
             actionType: UserActionType.DONATION,
             userActionDonation: {
               create: {
-                amount: new Decimal(priceDifference),
+                amount: new Decimal(priceDifference).abs().toFixed(5),
                 amountCurrencyCode: 'USD',
-                amountUsd: new Decimal(priceDifference),
+                amountUsd: new Decimal(priceDifference).abs().toFixed(5),
                 recipient: DonationOrganization.STAND_WITH_CRYPTO,
               },
             },
