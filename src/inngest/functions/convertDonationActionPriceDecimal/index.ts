@@ -11,7 +11,7 @@ const CONVERT_DONATION_ACTION_PRICE_DECIMAL_EVENT_NAME =
   'script/convert-donation-action-price-decimal'
 const CONVERT_DONATION_ACTION_PRICE_DECIMAL_FUNCTION_ID =
   'script.convert-donation-action-price-decimal'
-export const backfillDonationActionWithInngest = inngest.createFunction(
+export const convertDonationActionPriceDecimalWithInngest = inngest.createFunction(
   {
     id: CONVERT_DONATION_ACTION_PRICE_DECIMAL_EVENT_NAME,
     retries: 0,
