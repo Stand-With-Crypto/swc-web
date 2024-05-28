@@ -1,4 +1,5 @@
 import { DonationOrganization, UserActionType } from '@prisma/client'
+import { Decimal } from '@prisma/client/runtime/library'
 import { isNil } from 'lodash-es'
 import { boolean, number, object, z } from 'zod'
 
@@ -77,9 +78,9 @@ export async function backfillDonationAction(
             actionType: UserActionType.DONATION,
             userActionDonation: {
               create: {
-                amount: priceDifference,
+                amount: new Decimal(priceDifference),
                 amountCurrencyCode: 'USD',
-                amountUsd: priceDifference,
+                amountUsd: new Decimal(priceDifference),
                 recipient: DonationOrganization.STAND_WITH_CRYPTO,
               },
             },
