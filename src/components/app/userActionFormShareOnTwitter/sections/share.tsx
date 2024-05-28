@@ -11,14 +11,24 @@ export function ShareOnX(props: ShareOnXProps) {
 
   return (
     <UserActionFormLayout>
-      <UserActionFormLayout.Container>
+      <UserActionFormLayout.Container
+        className="h-auto
+        items-center justify-center
+      "
+      >
         <UserActionFormLayout.Heading
-          subtitle="Bring more people to the movement."
-          title="Share on X"
+          subtitle="Tweet #StandWithCrypto and help bring more advocates to the cause."
+          title="Spread the word on X"
         />
 
         <UserActionTweetLink asChild>
-          <Button onClick={() => goToSection(SECTIONS_NAMES.SUCCESS)}>Share on X</Button>
+          <Button
+            className="w-full max-w-[450px]"
+            onClick={() => goToSection(SECTIONS_NAMES.SUCCESS)}
+            size="lg"
+          >
+            Tweet #StandWithCrypto
+          </Button>
         </UserActionTweetLink>
       </UserActionFormLayout.Container>
     </UserActionFormLayout>
