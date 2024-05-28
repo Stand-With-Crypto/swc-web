@@ -13,7 +13,7 @@ import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiRes
 import { useSession } from '@/hooks/useSession'
 
 const imageFallback = (
-  <NextImage alt="A animated SWC Shield." fill src="/actionTypeVideos/swca_join_still_4k.png" />
+  <NextImage alt="A animated SWC Shield." fill src="/actionTypeVideos/swca_join_still.png" />
 )
 
 export const UserActionFormJoinSWCSuccess = () => {
