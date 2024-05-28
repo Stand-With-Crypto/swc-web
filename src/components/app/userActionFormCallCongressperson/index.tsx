@@ -14,8 +14,6 @@ import { FormFields } from '@/components/app/userActionFormCallCongressperson/ty
 import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
 import { DTSIPeopleFromCongressionalDistrict } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { useSections, UseSectionsReturn } from '@/hooks/useSections'
-import { NFTSlug } from '@/utils/shared/nft'
-import { NFT_CLIENT_METADATA } from '@/utils/web/nft'
 import { zodAddress } from '@/validation/fields/zodAddress'
 
 import { Address, ChangeAddress, useCongresspersonData } from './sections/address'

@@ -59,7 +59,7 @@ export function PageUserProfile({ params, searchParams, user }: PageUserProfile)
   )
   const { progressValue, numActionsCompleted, numActionsAvailable, excludeUserActionTypes } =
     getUserActionsProgress({
-      user,
+      userHasEmbeddedWallet: user.hasEmbeddedWallet,
       performedUserActionTypes,
     })
 
