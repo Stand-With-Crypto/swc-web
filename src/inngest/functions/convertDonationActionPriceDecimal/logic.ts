@@ -51,8 +51,8 @@ export async function convertDonationActionPriceDecimal(
             id: action.id,
           },
           data: {
-            amount: new Decimal(action.amount),
-            amountUsd: new Decimal(action.amountUsd),
+            amount: new Decimal(String(action.amount)).abs().toFixed(5),
+            amountUsd: new Decimal(String(action.amountUsd)).abs().toFixed(5),
           },
         })
       }),
