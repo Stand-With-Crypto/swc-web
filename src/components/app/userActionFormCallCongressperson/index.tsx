@@ -45,7 +45,7 @@ export function UserActionFormCallCongressperson({
 }: UserActionFormCallCongresspersonProps) {
   const hasDefaultAddress = !!user?.address || !!initialValues?.address
 
-  const sectionProps = useSections<SectionNames>({
+  const sectionProps = useSections({
     sections: Object.values(SectionNames),
     initialSectionId: SectionNames.INTRO,
     analyticsName: ANALYTICS_NAME_USER_ACTION_FORM_CALL_CONGRESSPERSON,
