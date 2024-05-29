@@ -19,21 +19,21 @@ export function SMSOptInContent(props: SMSOptInContentProps) {
         title="Nice work!"
       />
 
-      <SMSOptInForm {...props}>
+      <SMSOptInForm className="h-full" {...props}>
         {({ form }) => (
-          <div className="mt-auto">
-            <p className="mb-4 text-sm text-fontcolor-muted lg:mb-8">
-              By clicking Get updates, I consent to receive recurring texts from Stand with Crypto.
-              You can reply STOP to stop receiving texts. Message and data rates may apply.
-            </p>
-            <Button
-              className="w-full md:max-w-[300px]"
-              disabled={form.formState.isSubmitting}
-              size="lg"
-              type="submit"
-            >
-              Get updates
-            </Button>
+          <div className="flex h-full flex-col gap-4">
+            <SMSOptInForm.PhoneNumberField />
+
+            <div className="mt-auto">
+              <SMSOptInForm.Footnote className="mb-6" />
+              <Button
+                className="w-full md:max-w-[300px]"
+                disabled={form.formState.isSubmitting}
+                size="lg"
+              >
+                Get updates
+              </Button>
+            </div>
           </div>
         )}
       </SMSOptInForm>

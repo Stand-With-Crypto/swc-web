@@ -27,7 +27,7 @@ export function UserActionFormSuccessScreen(props: UserActionFormSuccessScreenPr
   }
 
   if (!user.phoneNumber || !user.hasOptedInToSms) {
-    if (fullProfileRequest.isValidating || fullProfileRequest.isLoading) {
+    if (fullProfileRequest.isLoading) {
       return <SMSOptInContent.Skeleton />
     }
 
