@@ -35,18 +35,9 @@ export function useHandlePageError({
 const OUTLOOK_BOT_ERROR_MESSAGE =
   'Non-Error promise rejection captured with value: Object Not Found'
 function checkIfErrorIsCausedByOutlook(error: Error & { digest?: string }) {
-  if (error?.message.includes(OUTLOOK_BOT_ERROR_MESSAGE)) {
-    return true
-  }
-
-  if (error?.name.includes(OUTLOOK_BOT_ERROR_MESSAGE)) {
-    return true
-  }
-
-  if (error?.digest && error?.digest.includes(OUTLOOK_BOT_ERROR_MESSAGE)) {
-    return true
-  }
-
+  if (error?.message.includes(OUTLOOK_BOT_ERROR_MESSAGE)) return true
+  if (error?.name.includes(OUTLOOK_BOT_ERROR_MESSAGE)) return true
+  if (error?.digest && error?.digest.includes(OUTLOOK_BOT_ERROR_MESSAGE)) return true
   if (
     error?.cause &&
     typeof error?.cause === 'string' &&
@@ -54,10 +45,7 @@ function checkIfErrorIsCausedByOutlook(error: Error & { digest?: string }) {
   ) {
     return true
   }
-
-  if (error?.stack && error?.stack.includes(OUTLOOK_BOT_ERROR_MESSAGE)) {
-    return true
-  }
+  if (error?.stack && error?.stack.includes(OUTLOOK_BOT_ERROR_MESSAGE)) return true
 
   return false
 }
