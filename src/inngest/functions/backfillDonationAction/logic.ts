@@ -60,12 +60,15 @@ export async function backfillDonationAction(
             return acc + (userAction.nftMint?.costAtMintUsd.toNumber() || 0)
           }, 0)
 
+        const parsedNftMintCostTotal = new Decimal(nftMintCostTotal)
+        const parsedUserTotalDonationAmountUsd = new Decimal(user.totalDonationAmountUsd.toNumber())
+
         const isTotalDonationAmountUsdCorrect =
-          user.totalDonationAmountUsd.toNumber() === nftMintCostTotal
+          parsedUserTotalDonationAmountUsd.equals(parsedNftMintCostTotal)
 
         if (isTotalDonationAmountUsdCorrect) return null
 
-        const priceDifference = user.totalDonationAmountUsd.toNumber() - nftMintCostTotal
+        const priceDifference = parsedUserTotalDonationAmountUsd.minus(nftMintCostTotal)
 
         return prismaClient.userAction.create({
           data: {
@@ -78,9 +81,9 @@ export async function backfillDonationAction(
             actionType: UserActionType.DONATION,
             userActionDonation: {
               create: {
-                amount: new Decimal(priceDifference).abs().toFixed(5),
+                amount: priceDifference.abs().toFixed(6),
                 amountCurrencyCode: 'USD',
-                amountUsd: new Decimal(priceDifference).abs().toFixed(5),
+                amountUsd: priceDifference.abs().toFixed(6),
                 recipient: DonationOrganization.STAND_WITH_CRYPTO,
               },
             },
