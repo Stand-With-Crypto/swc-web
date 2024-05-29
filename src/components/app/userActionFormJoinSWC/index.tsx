@@ -15,7 +15,9 @@ const UserActionFormJoinSWCSuccessDialog = dynamic(
   {
     loading: () => (
       <Portal>
-        <LoadingOverlay />
+        <div className="min-h-[400px]">
+          <LoadingOverlay />
+        </div>
       </Portal>
     ),
   },

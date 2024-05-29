@@ -33,8 +33,6 @@ export const UserActionFormJoinSWCSuccess = () => {
   )
 }
 
-export const ANALYTICS_NAME_USER_ACTION_FORM_JOIN_SWC = 'User Action Form Join SWC'
-
 export interface UserActionFormJoinSWCSuccessDialogProps extends DialogProps {}
 
 export function UserActionFormJoinSWCSuccessDialog(props: UserActionFormJoinSWCSuccessDialogProps) {
@@ -50,7 +48,7 @@ export function UserActionFormJoinSWCSuccessDialog(props: UserActionFormJoinSWCS
 
   return (
     <Dialog {...dialogProps}>
-      <DialogContent className="max-w-3xl">
+      <DialogContent className="max-w-3xl space-y-6">
         <UserActionFormJoinSWCSuccess />
 
         {session.isLoading || !session.user || performedUserActionTypesResponse.isLoading ? (

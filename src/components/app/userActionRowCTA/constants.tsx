@@ -34,7 +34,7 @@ export const USER_ACTION_ROW_CTA_INFO: Record<
     subtext: `Join over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates fighting to keep crypto in America.`,
     shortText: 'Join Stand With Crypto',
     shortSubtext: 'Join the movement to keep crypto in America.',
-    canBeTriggeredMultipleTimes: true,
+    canBeTriggeredMultipleTimes: false,
     WrapperComponent: UserActionFormJoinSWCDialog,
   },
   [UserActionType.VOTER_REGISTRATION]: {
