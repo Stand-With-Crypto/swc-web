@@ -13,7 +13,7 @@ import { emailRepViaCapitolCanaryWithInngest } from '@/inngest/functions/capitol
 import { upsertAdvocateInCapitolCanaryWithInngest } from '@/inngest/functions/capitolCanary/upsertAdvocateInCapitolCanary'
 import { cleanupNFTMintsWithInngest } from '@/inngest/functions/cleanupNFTMints'
 import { cleanupPostalCodesWithInngest } from '@/inngest/functions/cleanupPostalCodes'
-import { convertDonationActionPriceDecimalWithInngest } from '@/inngest/functions/convertDonationActionPriceDecimal'
+import { deleteDonationActionsCreatedByBackfillWithInngest } from '@/inngest/functions/deleteDonationActionsCreatedByBackfill'
 import { monitorBaseETHBalances } from '@/inngest/functions/monitorBaseETHBalances'
 import { setPrimaryCryptoAddressOfUserWithInngest } from '@/inngest/functions/setPrimaryCryptoAddressOfUser'
 import {
@@ -48,6 +48,6 @@ export const { GET, POST, PUT } = serve({
     auditUsersTotalDonationAmountUsdInngest,
     auditUsersTotalDonationAmountUsdInngestAuditBatchOfUsers,
     backfillDonationActionWithInngest,
-    convertDonationActionPriceDecimalWithInngest,
+    deleteDonationActionsCreatedByBackfillWithInngest,
   ],
 })
