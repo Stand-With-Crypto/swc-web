@@ -21,10 +21,9 @@ export function useHandlePageError({
       ? `Testing Sentry Triggered ${humanReadablePageName} Error Page`
       : `${humanReadablePageName} Error Page Displayed`
     Sentry.captureMessage(message, { fingerprint: [`fingerprint-${message}`] })
-    const isAnOutlookBotError = checkIfErrorIsCausedByOutlook(error)
     trackClientAnalytic('Error Page Visible', {
       Category: humanReadablePageName,
-      ...(isAnOutlookBotError && { Cause: 'Outlook' }),
+      ...(checkIfErrorIsCausedByOutlook(error) && { Cause: 'Outlook' }),
     })
   }, [domain, error, humanReadablePageName])
 }
