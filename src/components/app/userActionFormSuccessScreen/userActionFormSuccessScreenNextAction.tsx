@@ -16,6 +16,7 @@ import {
   USER_ACTION_DEEPLINK_MAP,
   UserActionTypesWithDeeplink,
 } from '@/utils/shared/urlsDeeplinkUserActions'
+import { USER_ACTION_TYPE_CTA_PRIORITY_ORDER } from '@/utils/web/userActionUtils'
 
 export function UserActionFormSuccessScreenNextActionSkeleton() {
   return (
@@ -66,7 +67,22 @@ export function UserActionFormSuccessScreenNextAction({
 
       {/** Uncompleted actions first */}
       <UserActionRowCTAsList
-        excludeUserActionTypes={[...(excludeUserActionTypes || []), ...performedUserActionTypes]}
+        excludeUserActionTypes={[...excludeUserActionTypes, ...performedUserActionTypes]}
+        render={ctaProps => (
+          <UserActionRowCTA
+            {...ctaProps}
+            key={ctaProps.actionType}
+            onClick={handleClick(ctaProps.actionType as UserActionTypesWithDeeplink)}
+            state="incomplete"
+          />
+        )}
+      />
+
+      {/** Completed actions last */}
+      <UserActionRowCTAsList
+        excludeUserActionTypes={USER_ACTION_TYPE_CTA_PRIORITY_ORDER.filter(
+          actionType => !performedUserActionTypes.includes(actionType),
+        )}
         performedUserActionTypes={performedUserActionTypes}
         render={ctaProps => (
           <UserActionRowCTA
@@ -76,25 +92,6 @@ export function UserActionFormSuccessScreenNextAction({
           />
         )}
       />
-
-      {/** Completed actions last */}
-      {performedUserActionTypes.map(performedAction => {
-        if (performedAction in USER_ACTION_ROW_CTA_INFO) {
-          const ctaProps =
-            USER_ACTION_ROW_CTA_INFO[performedAction as keyof typeof USER_ACTION_ROW_CTA_INFO]
-
-          return (
-            <UserActionRowCTA
-              {...ctaProps}
-              key={performedAction}
-              onClick={handleClick(ctaProps.actionType as UserActionTypesWithDeeplink)}
-              state="complete"
-            />
-          )
-        }
-
-        return null
-      })}
     </div>
   )
 }
