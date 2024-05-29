@@ -68,7 +68,7 @@ export function PageHome({
           </PageSubTitle>
           <HeroCTA />
         </div>
-        <div className="order-0 md:container lg:order-1 lg:px-0">
+        <div className="order-0 self-start md:container lg:order-1 lg:px-0">
           <Fit21HeroImage />
         </div>
       </section>

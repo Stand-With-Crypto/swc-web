@@ -1,8 +1,7 @@
 import { getYear } from 'date-fns'
 
-import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { CookieConsentFooterButton } from '@/components/app/cookieConsent/cookieConsentFooterButton'
-import { Button } from '@/components/ui/button'
+import { HeroCTA } from '@/components/app/pageHome/heroCTA'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import getIntl from '@/intl/intlMessages'
@@ -30,17 +29,7 @@ export async function Footer({ locale }: { locale: SupportedLocale }) {
               Join to show your support, collect advocacy NFTs, and protect the future of crypto.
               #StandWithCrypto
             </p>
-            <LoginDialogWrapper
-              authenticatedContent={
-                <Button asChild size="lg" variant="primary-cta">
-                  <InternalLink href={urls.profile()}>View your profile</InternalLink>
-                </Button>
-              }
-            >
-              <Button size="lg" variant="primary-cta">
-                Join the movement
-              </Button>
-            </LoginDialogWrapper>
+            <HeroCTA />
           </div>
           <div className="mb-10 grid max-w-xl flex-shrink-0 grid-cols-2 gap-3 sm:gap-4">
             <div className="space-y-3 sm:space-y-6">

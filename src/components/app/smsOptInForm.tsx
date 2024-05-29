@@ -97,12 +97,7 @@ SMSOptInForm.SubmitButton = function SMSOptInFormSubmitButton({
   ...props
 }: React.ComponentProps<typeof Button>) {
   return (
-    <Button
-      className={cn('rounded-md font-semibold', className)}
-      form={FORM_ID}
-      type="submit"
-      {...props}
-    >
+    <Button className={cn('font-semibold', className)} form={FORM_ID} type="submit" {...props}>
       {children || 'Get updates'}
     </Button>
   )
