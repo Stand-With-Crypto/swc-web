@@ -9,13 +9,13 @@ import { UserActionFormEmailCongresspersonSkeleton } from '@/components/app/user
 import { UserActionFormEmailCongresspersonSuccess } from '@/components/app/userActionFormEmailCongressperson/success'
 import { FormFields } from '@/components/app/userActionFormEmailCongressperson/types'
 import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
+import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { trackDialogOpen } from '@/components/ui/dialog/trackDialogOpen'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useEncodedInitialValuesQueryParam } from '@/hooks/useEncodedInitialValuesQueryParam'
 import { useLocale } from '@/hooks/useLocale'
 import { usePreventOverscroll } from '@/hooks/usePreventOverscroll'
 import { getIntlUrls } from '@/utils/shared/urls'
-import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { cn } from '@/utils/web/cn'
 
 function UserActionFormEmailCongresspersonDeeplinkWrapperContent() {

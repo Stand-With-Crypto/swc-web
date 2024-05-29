@@ -3,7 +3,6 @@
 import { useCallback } from 'react'
 
 import { UserActionRowCTA, UserActionRowCTAButtonSkeleton } from '@/components/app/userActionRowCTA'
-import { USER_ACTION_ROW_CTA_INFO } from '@/components/app/userActionRowCTA/constants'
 import { UserActionRowCTAsList } from '@/components/app/userActionRowCTA/userActionRowCTAsList'
 import { Progress } from '@/components/ui/progress'
 import { Skeleton } from '@/components/ui/skeleton'
