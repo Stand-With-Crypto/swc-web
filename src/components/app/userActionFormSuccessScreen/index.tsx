@@ -1,7 +1,7 @@
 'use client'
 
 import { JoinSWC } from '@/components/app/userActionFormSuccessScreen/joinSWC'
-import { SMSOptInContent } from '@/components/app/userActionFormSuccessScreen/smsOptInForm'
+import { SMSOptInContent } from '@/components/app/userActionFormSuccessScreen/smsOptIn'
 import {
   UserActionFormSuccessScreenNextAction,
   UserActionFormSuccessScreenNextActionSkeleton,
