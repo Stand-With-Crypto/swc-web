@@ -75,7 +75,6 @@ Sentry.init({
     // `Can't find variable: bytecode`,
     'ResizeObserver loop limit exceeded',
     'ResizeObserver loop completed with undelivered notifications',
-    /Non-Error promise rejection captured with value: Object Not Found/,
   ],
   beforeSend: (event, hint) => {
     // prevent local errors from triggering sentry
