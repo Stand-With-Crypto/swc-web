@@ -14,7 +14,6 @@ import { BillVoteResult } from '@/app/api/public/dtsi/bill-vote/[billId]/[slug]/
 import { DTSICongresspersonAssociatedWithFormAddress } from '@/components/app/dtsiCongresspersonAssociatedWithFormAddress'
 import {
   ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON,
-  CURRENT_CAMPAIGN_NAME,
   EMAIL_FLOW_POLITICIANS_CATEGORY,
 } from '@/components/app/userActionFormEmailCongressperson/constants'
 import {
@@ -45,7 +44,10 @@ import { useIsDesktop } from '@/hooks/useIsDesktop'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { apiUrls } from '@/utils/shared/urls'
-import { UserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns'
+import {
+  USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
+  UserActionEmailCampaignName,
+} from '@/utils/shared/userActionCampaigns'
 import {
   getYourPoliticianCategoryShortDisplayName,
   YourPoliticianCategory,
@@ -76,7 +78,7 @@ const getDefaultValues = ({
 }): Partial<FormValues> => {
   if (user) {
     return {
-      campaignName: CURRENT_CAMPAIGN_NAME,
+      campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[UserActionType.EMAIL],
       firstName: user.firstName,
       lastName: user.lastName,
       emailAddress: user.primaryUserEmailAddress?.emailAddress || '',
@@ -98,7 +100,7 @@ const getDefaultValues = ({
     }
   }
   return {
-    campaignName: UserActionEmailCampaignName.FIT21_2024_04,
+    campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[UserActionType.EMAIL],
     firstName: '',
     lastName: '',
     emailAddress: '',
