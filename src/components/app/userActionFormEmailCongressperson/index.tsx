@@ -44,10 +44,7 @@ import { useIsDesktop } from '@/hooks/useIsDesktop'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { apiUrls } from '@/utils/shared/urls'
-import {
-  USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
-  UserActionEmailCampaignName,
-} from '@/utils/shared/userActionCampaigns'
+import { USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns'
 import {
   getYourPoliticianCategoryShortDisplayName,
   YourPoliticianCategory,
