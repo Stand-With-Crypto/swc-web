@@ -11,6 +11,7 @@ import { InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { DTSI_UnitedStatesInformationQuery } from '@/data/dtsi/generated'
 import { SupportedLocale } from '@/intl/locales'
+import { formatDTSIDistrictId, normalizeDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 import { cn } from '@/utils/web/cn'
@@ -91,6 +92,38 @@ export function LocationUnitedStates({
             })}
           </div>
         </ContentSection>
+
+        {groups.keyRaces.map(people => {
+          const stateCode = people[0].runningForSpecificRole.primaryState as USStateCode
+          const primaryDistrict = people[0].runningForSpecificRole.primaryDistrict
+          const stateName = US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]
+          return (
+            <DTSIPersonHeroCardSection
+              cta={
+                <InternalLink href={urls.locationStateSpecificSenateRace(stateCode)}>
+                  View Race
+                </InternalLink>
+              }
+              key={`${stateCode}-${primaryDistrict}`}
+              locale={locale}
+              people={people}
+              title={
+                primaryDistrict ? (
+                  <>
+                    {stateName}{' '}
+                    {formatDTSIDistrictId(
+                      normalizeDTSIDistrictId(people[0].runningForSpecificRole),
+                    )}{' '}
+                    Congressional District Race
+                  </>
+                ) : (
+                  <>{stateName} Senate Race</>
+                )
+              }
+            />
+          )
+        })}
+
         <PACFooter className="container" />
       </div>
     </div>

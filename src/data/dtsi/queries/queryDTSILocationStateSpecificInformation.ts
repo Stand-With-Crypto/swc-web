@@ -16,7 +16,6 @@ export const query = /* GraphQL */ `
       personRolePrimaryState: $stateCode
     ) {
       ...PersonCard
-      stanceCount(verificationStatusIn: APPROVED)
       roles {
         id
         primaryDistrict

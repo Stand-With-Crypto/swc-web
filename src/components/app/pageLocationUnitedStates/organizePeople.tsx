@@ -5,20 +5,41 @@ import { formatSpecificRoleDTSIPerson } from '@/utils/dtsi/specificRoleDTSIPerso
 
 export function organizePeople({
   runningForPresident,
-  keySenateRaces,
+  keyRaces,
 }: DTSI_UnitedStatesInformationQuery) {
-  const formattedKeySenateRaces = keySenateRaces.map(x =>
-    formatSpecificRoleDTSIPerson(x, { specificRole: DTSI_PersonRoleCategory.SENATE }),
+  const formattedKeyRaces = keyRaces.map(x => formatSpecificRoleDTSIPerson(x))
+  const formattedPresident = runningForPresident.map(person =>
+    formatSpecificRoleDTSIPerson(person, { specificRole: DTSI_PersonRoleCategory.PRESIDENT }),
   )
-  const grouped = {
-    president: runningForPresident.map(person =>
-      formatSpecificRoleDTSIPerson(person, { specificRole: DTSI_PersonRoleCategory.PRESIDENT }),
+  const groupedKeyRaces = Object.values(
+    groupBy(
+      formattedKeyRaces,
+      x => `${x.runningForSpecificRole.primaryState}-${x.runningForSpecificRole.primaryDistrict}`,
     ),
-    keySenateRaceMap: groupBy(formattedKeySenateRaces, x => x.runningForSpecificRole.primaryState!),
-  }
-  Object.values(grouped.keySenateRaceMap).forEach(race => {
+  )
+
+  groupedKeyRaces.forEach(race => {
     race.sort((a, b) => (a.isIncumbent === b.isIncumbent ? 0 : a.isIncumbent ? -1 : 1))
   })
-  grouped.president.sort((a, b) => (a.isIncumbent === b.isIncumbent ? 0 : a.isIncumbent ? -1 : 1))
-  return grouped
+  const rolePriority: DTSI_PersonRoleCategory[] = [
+    DTSI_PersonRoleCategory.SENATE,
+    DTSI_PersonRoleCategory.CONGRESS,
+  ]
+  groupedKeyRaces.sort((a, b) => {
+    const aState = a[0].runningForSpecificRole.primaryState
+    const bState = b[0].runningForSpecificRole.primaryState
+    if (aState !== bState) return aState.localeCompare(bState)
+    const aPriority = a[0].runningForSpecificRole.roleCategory
+      ? rolePriority.indexOf(a[0].runningForSpecificRole.roleCategory)
+      : -1
+    const bPriority = b[0].runningForSpecificRole.roleCategory
+      ? rolePriority.indexOf(b[0].runningForSpecificRole.roleCategory)
+      : -1
+    if (aPriority !== bPriority) return aPriority - bPriority
+    return a[0].runningForSpecificRole.primaryDistrict.localeCompare(
+      b[0].runningForSpecificRole.primaryDistrict,
+    )
+  })
+  formattedPresident.sort((a, b) => (a.isIncumbent === b.isIncumbent ? 0 : a.isIncumbent ? -1 : 1))
+  return { president: formattedPresident, keyRaces: groupedKeyRaces }
 }
