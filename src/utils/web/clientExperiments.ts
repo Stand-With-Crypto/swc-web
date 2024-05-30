@@ -15,8 +15,11 @@ function getRandomExperimentVariant<K extends Experiments>(experiment: K): Exper
   let cumulativePercentage = 0
   const finalVariant = variantConfigs.find(variant => {
     cumulativePercentage += variant.percentage
+    console.log({ variant, cumulativePercentage, randomValue })
     return cumulativePercentage >= randomValue
   })
+
+  console.log({ finalVariant })
 
   if (!finalVariant) {
     const variant = variantConfigs[0].name as ExperimentVariant<K>
@@ -26,8 +29,7 @@ function getRandomExperimentVariant<K extends Experiments>(experiment: K): Exper
       fallback: variant,
     })
   }
-  const variant = variantConfigs[0].name as ExperimentVariant<K>
-  return variant
+  return finalVariant.name as ExperimentVariant<K>
 }
 
 export function getAllExperiments(persisted: PersistedLocalUser | null) {
