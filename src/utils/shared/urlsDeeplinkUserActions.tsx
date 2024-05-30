@@ -22,14 +22,11 @@ export type DeeplinkConfig = {
 
 type DeeplinkFunction = (config: DeeplinkConfig) => string
 
-export const USER_ACTION_DEEPLINK_MAP: Omit<
-  {
-    [key in ActiveClientUserActionType]: {
-      getDeeplinkUrl: (config: { locale: SupportedLocale; queryString?: string }) => string
-    }
-  },
-  typeof UserActionType.TWEET
-> = {
+export const USER_ACTION_DEEPLINK_MAP: {
+  [key in ActiveClientUserActionType]: {
+    getDeeplinkUrl: (config: { locale: SupportedLocale; queryString?: string }) => string
+  }
+} = {
   [UserActionType.OPT_IN]: {
     getDeeplinkUrl: ({ locale, queryString }) => {
       return `${getIntlPrefix(locale)}/action/sign-up${parseQueryString(queryString)}`
@@ -58,6 +55,11 @@ export const USER_ACTION_DEEPLINK_MAP: Omit<
   [UserActionType.VOTER_REGISTRATION]: {
     getDeeplinkUrl: ({ locale }) => {
       return `${getIntlPrefix(locale)}/action/voter-registration`
+    },
+  },
+  [UserActionType.TWEET]: {
+    getDeeplinkUrl: ({ locale }) => {
+      return `${getIntlPrefix(locale)}/action/share`
     },
   },
 }

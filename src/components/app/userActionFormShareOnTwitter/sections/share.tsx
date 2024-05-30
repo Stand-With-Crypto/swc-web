@@ -13,7 +13,7 @@ export function ShareOnX(props: ShareOnXProps) {
 
   return (
     <UserActionFormLayout>
-      <UserActionFormLayout.Container className="h-auto items-center justify-center">
+      <UserActionFormLayout.Container className="h-auto items-center justify-between">
         <UserActionFormLayout.Heading
           subtitle="Tweet #StandWithCrypto and help bring more advocates to the cause."
           title="Spread the word on X"

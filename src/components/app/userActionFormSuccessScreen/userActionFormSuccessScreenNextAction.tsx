@@ -3,7 +3,10 @@
 import { useCallback, useState } from 'react'
 import { useDebounce } from 'react-use'
 
-import { UserActionRowCTA, UserActionRowCTAButtonSkeleton } from '@/components/app/userActionRowCTA'
+import {
+  UserActionRowCTAButton,
+  UserActionRowCTAButtonSkeleton,
+} from '@/components/app/userActionRowCTA'
 import { UserActionRowCTAsList } from '@/components/app/userActionRowCTA/userActionRowCTAsList'
 import { Progress } from '@/components/ui/progress'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -72,7 +75,7 @@ export function UserActionFormSuccessScreenNextAction({
       <UserActionRowCTAsList
         excludeUserActionTypes={[...excludeUserActionTypes, ...performedUserActionTypes]}
         render={ctaProps => (
-          <UserActionRowCTA
+          <UserActionRowCTAButton
             {...ctaProps}
             key={ctaProps.actionType}
             onClick={handleClick(ctaProps.actionType as UserActionTypesWithDeeplink)}
@@ -88,7 +91,7 @@ export function UserActionFormSuccessScreenNextAction({
         )}
         performedUserActionTypes={performedUserActionTypes}
         render={ctaProps => (
-          <UserActionRowCTA
+          <UserActionRowCTAButton
             {...ctaProps}
             key={ctaProps.actionType}
             onClick={handleClick(ctaProps.actionType as UserActionTypesWithDeeplink)}
