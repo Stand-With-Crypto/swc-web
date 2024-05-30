@@ -21,7 +21,6 @@ export const ENDORSED_DTSI_PERSON_SLUGS = [
   'troy---downing',
   'jim---banks',
   'jim--justice',
-  'eduardo---morales',
 ]
 
 export const ORDERED_KEY_SENATE_RACE_STATES: USStateCode[] = [
