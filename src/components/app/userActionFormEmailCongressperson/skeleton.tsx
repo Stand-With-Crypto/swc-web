@@ -1,4 +1,4 @@
-import { noop } from 'lodash-es'
+import { capitalize, noop } from 'lodash-es'
 
 import { DTSICongresspersonAssociatedWithFormAddress } from '@/components/app/dtsiCongresspersonAssociatedWithFormAddress'
 import { EMAIL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormEmailCongressperson/constants'
@@ -14,7 +14,10 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import { Textarea } from '@/components/ui/textarea'
 import { SupportedLocale } from '@/intl/locales'
 import { getIntlUrls } from '@/utils/shared/urls'
-import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory'
+import {
+  getYourPoliticianCategoryShortDisplayName,
+  YourPoliticianCategory,
+} from '@/utils/shared/yourPoliticianCategory'
 
 export function UserActionFormEmailCongresspersonSkeleton({
   locale,
@@ -30,7 +33,7 @@ export function UserActionFormEmailCongresspersonSkeleton({
       <ScrollArea>
         <div className="space-y-4 p-6 md:space-y-8 md:px-12">
           <PageTitle className="mb-3" size="sm">
-            Email your Representative
+            Email your {capitalize(getYourPoliticianCategoryShortDisplayName(politicianCategory))}
           </PageTitle>
           <PageSubTitle className="mb-7">
             With FIT21 passed by the House, take a moment to reach out to your Rep and say thanks
