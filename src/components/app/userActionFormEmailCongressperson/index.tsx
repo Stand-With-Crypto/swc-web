@@ -46,7 +46,10 @@ import { fetchReq } from '@/utils/shared/fetchReq'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { apiUrls } from '@/utils/shared/urls'
 import { UserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns'
-import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory'
+import {
+  getYourPoliticianCategoryShortDisplayName,
+  YourPoliticianCategory,
+} from '@/utils/shared/yourPoliticianCategory'
 import { cn } from '@/utils/web/cn'
 import {
   GenericErrorFormValues,
@@ -107,6 +110,28 @@ const getDefaultValues = ({
     }),
     address: undefined,
     dtsiSlugs,
+  }
+}
+
+function getPageHeadingCopy({
+  billVote,
+  politicianCategory,
+}: {
+  billVote: BillVoteResult
+  politicianCategory: YourPoliticianCategory
+}) {
+  const politicianCategoryDisplayName =
+    getYourPoliticianCategoryShortDisplayName(politicianCategory)
+  if (billVote === 'VOTED_FOR') {
+    return {
+      title: `Thank Your ${politicianCategoryDisplayName}`,
+      subtitle: `Email your ${politicianCategoryDisplayName} and thank them for their vote on FIT21. Enter the information below and we will generate a personalized note for your to send.`,
+    }
+  }
+
+  return {
+    title: `Email your ${politicianCategoryDisplayName}`,
+    subtitle: `Email your ${politicianCategoryDisplayName} and tell them to support crypto. Enter the following information and we will generate a personalized email for you to send.`,
   }
 }
 
@@ -171,6 +196,10 @@ export function UserActionFormEmailCongressperson({
       }
     },
   })
+  const { title, subtitle } = getPageHeadingCopy({
+    billVote: congresspersonBillVote ?? 'NO_VOTE',
+    politicianCategory,
+  })
 
   React.useEffect(() => {
     if (isDesktop) {
@@ -225,13 +254,9 @@ export function UserActionFormEmailCongressperson({
         <ScrollArea className="overflow-auto">
           <div className={cn(dialogContentPaddingStyles, 'space-y-4 md:space-y-8')}>
             <PageTitle className="mb-3" size="sm">
-              Email your Representative
+              {title}
             </PageTitle>
-            <PageSubTitle className="mb-7">
-              With FIT21 passed by the House, take a moment to reach out to your Rep and say thanks
-              for voting Yes or ask them to reconsider the importance of crypto if they voted
-              against.
-            </PageSubTitle>
+            <PageSubTitle className="mb-7">{subtitle}</PageSubTitle>
             <div className="space-y-4">
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <FormField
