@@ -4,6 +4,7 @@ import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { UserActionType } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
+import { capitalize } from 'lodash-es'
 import { useRouter } from 'next/navigation'
 import useSWR, { SWRConfiguration } from 'swr'
 import { z } from 'zod'
@@ -123,13 +124,13 @@ function getPageHeadingCopy({
     getYourPoliticianCategoryShortDisplayName(politicianCategory)
   if (billVote === 'VOTED_FOR') {
     return {
-      title: `Thank Your ${politicianCategoryDisplayName}`,
+      title: `Thank Your ${capitalize(politicianCategoryDisplayName)}`,
       subtitle: `Email your ${politicianCategoryDisplayName} and thank them for their vote on FIT21. Enter the information below and we will generate a personalized note for your to send.`,
     }
   }
 
   return {
-    title: `Email your ${politicianCategoryDisplayName}`,
+    title: `Email Your ${capitalize(politicianCategoryDisplayName)}`,
     subtitle: `Email your ${politicianCategoryDisplayName} and tell them to support crypto. Enter the following information and we will generate a personalized email for you to send.`,
   }
 }
