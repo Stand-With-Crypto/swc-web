@@ -2,7 +2,6 @@
 
 import { SMSOptInForm, SMSOptInFormProps } from '@/components/app/smsOptInForm'
 import { UserActionFormSuccessScreenFeedback } from '@/components/app/userActionFormSuccessScreen/UserActionFormSuccessScreenFeedback'
-import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { Skeleton } from '@/components/ui/skeleton'
 
@@ -26,13 +25,13 @@ export function SMSOptInContent(props: SMSOptInContentProps) {
 
             <div className="mt-auto">
               <SMSOptInForm.Footnote className="mb-6" />
-              <Button
+              <SMSOptInForm.SubmitButton
                 className="w-full md:max-w-[300px]"
                 disabled={form.formState.isSubmitting}
                 size="lg"
               >
                 Get updates
-              </Button>
+              </SMSOptInForm.SubmitButton>
             </div>
           </div>
         )}
