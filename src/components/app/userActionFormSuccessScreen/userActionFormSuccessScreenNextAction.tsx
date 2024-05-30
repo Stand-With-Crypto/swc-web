@@ -1,6 +1,7 @@
 'use client'
 
-import { useCallback } from 'react'
+import { useCallback, useState } from 'react'
+import { useDebounce } from 'react-use'
 
 import { UserActionRowCTA, UserActionRowCTAButtonSkeleton } from '@/components/app/userActionRowCTA'
 import { UserActionRowCTAsList } from '@/components/app/userActionRowCTA/userActionRowCTAsList'
@@ -55,14 +56,17 @@ export function UserActionFormSuccessScreenNextAction({
 
   const { performedUserActionTypes, userHasEmbeddedWallet } = data
 
-  const { progressValue, numActionsAvailable, excludeUserActionTypes } = getUserActionsProgress({
+  const { progressValue, excludeUserActionTypes } = getUserActionsProgress({
     userHasEmbeddedWallet,
     performedUserActionTypes,
   })
 
+  const [debouncedProgressValue, setDebouncedProgressValue] = useState(0)
+  useDebounce(() => setDebouncedProgressValue(progressValue), 333, [progressValue])
+
   return (
     <div className="space-y-6 text-center">
-      <Progress data-max={numActionsAvailable} value={progressValue} />
+      <Progress value={debouncedProgressValue} />
 
       {/** Uncompleted actions first */}
       <UserActionRowCTAsList
