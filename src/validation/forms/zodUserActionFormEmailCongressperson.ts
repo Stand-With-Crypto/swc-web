@@ -12,6 +12,7 @@ const base = object({
   message: string()
     .min(1, 'Please enter a message')
     .max(2000, 'Your message should not exceed 2000 characters'),
+  subject: string().trim(),
   dtsiSlugs: array(zodDTSISlug).min(1),
   campaignName: nativeEnum(UserActionEmailCampaignName),
   politicianCategory: zodYourPoliticianCategory,

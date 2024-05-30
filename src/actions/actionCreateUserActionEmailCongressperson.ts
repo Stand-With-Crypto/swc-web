@@ -108,7 +108,7 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
       userActionEmail: true,
     },
   })
-  if (userAction) {
+  if (userAction && process.env.USER_ACTION_BYPASS_SPAM_CHECK !== 'true') {
     analytics.trackUserActionCreatedIgnored({
       actionType,
       campaignName,
@@ -188,7 +188,7 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
     opts: {
       isEmailOptin: true,
     },
-    emailSubject: 'Vote Yes on FIT21 to protect 52M American Consumers',
+    emailSubject: validatedFields.data.subject,
     emailMessage: validatedFields.data.message,
   }
   await inngest.send({

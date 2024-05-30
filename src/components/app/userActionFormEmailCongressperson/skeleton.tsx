@@ -30,11 +30,11 @@ export function UserActionFormEmailCongresspersonSkeleton({
       <ScrollArea>
         <div className="space-y-4 p-6 md:space-y-8 md:px-12">
           <PageTitle className="mb-3" size="sm">
-            Email your congressperson
+            Email your Representative
           </PageTitle>
           <PageSubTitle className="mb-7">
-            Email your Congressperson and tell them to support crypto. Enter following information
-            and we will generate a personalized email for you to send to your representative.
+            With FIT21 passed by the House, take a moment to reach out to your Rep and say thanks
+            for voting Yes or ask them to reconsider the importance of crypto if they voted against.
           </PageSubTitle>
           <div className="space-y-4">
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -70,11 +70,7 @@ export function UserActionFormEmailCongresspersonSkeleton({
                 </p>
               </div>
               <FormItemSkeleton>
-                <Textarea
-                  defaultValue={getDefaultText({ dtsiSlugs: [] })}
-                  placeholder="Your message..."
-                  rows={16}
-                />
+                <Textarea defaultValue={getDefaultText()} placeholder="Your message..." rows={16} />
               </FormItemSkeleton>
             </div>
           </div>

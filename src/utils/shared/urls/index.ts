@@ -125,4 +125,6 @@ export const apiUrls = {
   recentActivity: ({ limit }: { limit: number }) => `/api/public/recent-activity/${limit}`,
   homepageTopLevelMetrics: () => `/api/public/homepage/top-level-metrics`,
   unidentifiedUser: ({ sessionId }: { sessionId: string }) => `/api/unidentified-user/${sessionId}`,
+  billVote: ({ slug, billId }: { slug: string; billId: string }) =>
+    `/api/public/dtsi/bill-vote/${billId}/${slug}`,
 }
