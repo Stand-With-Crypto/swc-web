@@ -1,12 +1,13 @@
 import { groupBy } from 'lodash-es'
 
-import { DTSI_PersonRoleCategory, DTSI_UnitedStatesInformationQuery } from '@/data/dtsi/generated'
+import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
+import { QueryDTSILocationUnitedStatesInformationData } from '@/data/dtsi/queries/queryDTSILocationUnitedStatesInformation'
 import { formatSpecificRoleDTSIPerson } from '@/utils/dtsi/specificRoleDTSIPerson'
 
 export function organizePeople({
   runningForPresident,
   keyRaces,
-}: DTSI_UnitedStatesInformationQuery) {
+}: QueryDTSILocationUnitedStatesInformationData) {
   const formattedKeyRaces = keyRaces.map(x => formatSpecificRoleDTSIPerson(x))
   const formattedPresident = runningForPresident.map(person =>
     formatSpecificRoleDTSIPerson(person, { specificRole: DTSI_PersonRoleCategory.PRESIDENT }),

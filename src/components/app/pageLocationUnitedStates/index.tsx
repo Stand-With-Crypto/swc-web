@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { DTSI_UnitedStatesInformationQuery } from '@/data/dtsi/generated'
+import { QueryDTSILocationUnitedStatesInformationData } from '@/data/dtsi/queries/queryDTSILocationUnitedStatesInformation'
 import { SupportedLocale } from '@/intl/locales'
 import { formatDTSIDistrictId, normalizeDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { getIntlUrls } from '@/utils/shared/urls'
@@ -19,7 +19,7 @@ import { cn } from '@/utils/web/cn'
 import { organizePeople } from './organizePeople'
 import { UserAddressVoterGuideInputSection } from './userAddressVoterGuideInput'
 
-interface LocationUnitedStatesProps extends DTSI_UnitedStatesInformationQuery {
+interface LocationUnitedStatesProps extends QueryDTSILocationUnitedStatesInformationData {
   locale: SupportedLocale
   countAdvocates: number
 }

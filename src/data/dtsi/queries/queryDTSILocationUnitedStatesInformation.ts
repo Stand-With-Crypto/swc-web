@@ -260,3 +260,7 @@ export const queryDTSILocationUnitedStatesInformation = async () => {
     keyRaces,
   }
 }
+
+export type QueryDTSILocationUnitedStatesInformationData = Awaited<
+  ReturnType<typeof queryDTSILocationUnitedStatesInformation>
+>
