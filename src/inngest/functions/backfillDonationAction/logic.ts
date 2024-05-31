@@ -1,4 +1,5 @@
 import { DonationOrganization, UserActionType } from '@prisma/client'
+import { Decimal } from '@prisma/client/runtime/library'
 import { isNil } from 'lodash-es'
 import { boolean, number, object, z } from 'zod'
 
@@ -17,6 +18,7 @@ export const zodBackfillDonationActionParameters = object({
 interface BackfillDonationActionResponse {
   dryRun: boolean
   usersFound: number
+  usersAffectedByThisChange: Array<string>
 }
 
 export async function backfillDonationAction(
@@ -47,6 +49,7 @@ export async function backfillDonationAction(
     return {
       dryRun: true,
       usersFound: usersWithNoDonationAction.length,
+      usersAffectedByThisChange: [],
     } as BackfillDonationActionResponse
   }
 
@@ -59,12 +62,16 @@ export async function backfillDonationAction(
             return acc + (userAction.nftMint?.costAtMintUsd.toNumber() || 0)
           }, 0)
 
-        const isTotalDonationAmountUsdCorrect =
-          user.totalDonationAmountUsd.toNumber() === nftMintCostTotal
+        const isTotalDonationAmountUsdDifferentThanNftMintCost =
+          Math.abs(user.totalDonationAmountUsd.toNumber() - nftMintCostTotal) >= 0.001
 
-        if (isTotalDonationAmountUsdCorrect) return null
+        if (!isTotalDonationAmountUsdDifferentThanNftMintCost) return null
 
-        const priceDifference = user.totalDonationAmountUsd.toNumber() - nftMintCostTotal
+        const priceDifference = new Decimal(
+          user.totalDonationAmountUsd.toNumber() - nftMintCostTotal,
+        )
+          .abs()
+          .toFixed(6)
 
         return prismaClient.userAction.create({
           data: {
@@ -78,7 +85,7 @@ export async function backfillDonationAction(
             userActionDonation: {
               create: {
                 amount: priceDifference,
-                amountCurrencyCode: 'USD',
+                amountCurrencyCode: 'USDC',
                 amountUsd: priceDifference,
                 recipient: DonationOrganization.STAND_WITH_CRYPTO,
               },
@@ -89,8 +96,24 @@ export async function backfillDonationAction(
     ),
   )
 
+  const usersAffectedByThisChange = usersWithNoDonationAction
+    .map(user => {
+      const nftMintCostTotal = user.userActions
+        .filter(userAction => !isNil(userAction.nftMint))
+        .reduce((acc, userAction) => {
+          return acc + (userAction.nftMint?.costAtMintUsd.toNumber() || 0)
+        }, 0)
+
+      const isTotalDonationAmountUsdDifferentThanNftMintCost =
+        Math.abs(user.totalDonationAmountUsd.toNumber() - nftMintCostTotal) >= 0.001
+
+      return isTotalDonationAmountUsdDifferentThanNftMintCost ? user.id : null
+    })
+    .filter(Boolean)
+
   return {
     dryRun: false,
     usersFound: usersWithNoDonationAction.length,
+    usersAffectedByThisChange,
   } as BackfillDonationActionResponse
 }
