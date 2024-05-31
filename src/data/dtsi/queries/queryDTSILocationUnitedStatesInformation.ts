@@ -33,14 +33,6 @@ export const query = /* GraphQL */ `
     ) {
       ...UnitedStatesPersonFragment
     }
-    NJSenate: people(
-      limit: 100
-      offset: 0
-      personRoleGroupingOr: [RUNNING_FOR_US_SENATE]
-      personRolePrimaryState: "NJ"
-    ) {
-      ...UnitedStatesPersonFragment
-    }
     NYSenate: people(
       limit: 100
       offset: 0
@@ -71,15 +63,6 @@ export const query = /* GraphQL */ `
       personRoleGroupingOr: [RUNNING_FOR_US_HOUSE_OF_REPS]
       personRolePrimaryState: "AL"
       personRolePrimaryDistrict: "2"
-    ) {
-      ...UnitedStatesPersonFragment
-    }
-    CO_District7: people(
-      limit: 100
-      offset: 0
-      personRoleGroupingOr: [RUNNING_FOR_US_HOUSE_OF_REPS]
-      personRolePrimaryState: "CO"
-      personRolePrimaryDistrict: "7"
     ) {
       ...UnitedStatesPersonFragment
     }
@@ -182,24 +165,6 @@ export const query = /* GraphQL */ `
     ) {
       ...UnitedStatesPersonFragment
     }
-    NJ_District5: people(
-      limit: 100
-      offset: 0
-      personRoleGroupingOr: [RUNNING_FOR_US_HOUSE_OF_REPS]
-      personRolePrimaryState: "NJ"
-      personRolePrimaryDistrict: "5"
-    ) {
-      ...UnitedStatesPersonFragment
-    }
-    NJ_District8: people(
-      limit: 100
-      offset: 0
-      personRoleGroupingOr: [RUNNING_FOR_US_HOUSE_OF_REPS]
-      personRolePrimaryState: "NJ"
-      personRolePrimaryDistrict: "8"
-    ) {
-      ...UnitedStatesPersonFragment
-    }
     PA_District10: people(
       limit: 100
       offset: 0
@@ -218,7 +183,7 @@ export const query = /* GraphQL */ `
     ) {
       ...UnitedStatesPersonFragment
     }
-    SC_District1: people(
+    SC_District4: people(
       limit: 100
       offset: 0
       personRoleGroupingOr: [RUNNING_FOR_US_HOUSE_OF_REPS]
