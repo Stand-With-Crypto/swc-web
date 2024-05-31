@@ -57,15 +57,6 @@ export const query = /* GraphQL */ `
     ) {
       ...UnitedStatesPersonFragment
     }
-    AL_District2: people(
-      limit: 100
-      offset: 0
-      personRoleGroupingOr: [RUNNING_FOR_US_HOUSE_OF_REPS]
-      personRolePrimaryState: "AL"
-      personRolePrimaryDistrict: "2"
-    ) {
-      ...UnitedStatesPersonFragment
-    }
     CO_District8: people(
       limit: 100
       offset: 0
@@ -188,7 +179,7 @@ export const query = /* GraphQL */ `
       offset: 0
       personRoleGroupingOr: [RUNNING_FOR_US_HOUSE_OF_REPS]
       personRolePrimaryState: "SC"
-      personRolePrimaryDistrict: "1"
+      personRolePrimaryDistrict: "4"
     ) {
       ...UnitedStatesPersonFragment
     }
