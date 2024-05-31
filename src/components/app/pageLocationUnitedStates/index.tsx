@@ -95,12 +95,20 @@ export function LocationUnitedStates({
 
         {groups.keyRaces.map(people => {
           const stateCode = people[0].runningForSpecificRole.primaryState as USStateCode
-          const primaryDistrict = people[0].runningForSpecificRole.primaryDistrict
+          const primaryDistrict =
+            people[0].runningForSpecificRole.primaryDistrict &&
+            normalizeDTSIDistrictId(people[0].runningForSpecificRole)
           const stateName = US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]
           return (
             <DTSIPersonHeroCardSection
               cta={
-                <InternalLink href={urls.locationStateSpecificSenateRace(stateCode)}>
+                <InternalLink
+                  href={
+                    primaryDistrict
+                      ? urls.locationDistrictSpecific({ stateCode, district: primaryDistrict })
+                      : urls.locationStateSpecificSenateRace(stateCode)
+                  }
+                >
                   View Race
                 </InternalLink>
               }
@@ -110,11 +118,7 @@ export function LocationUnitedStates({
               title={
                 primaryDistrict ? (
                   <>
-                    {stateName}{' '}
-                    {formatDTSIDistrictId(
-                      normalizeDTSIDistrictId(people[0].runningForSpecificRole),
-                    )}{' '}
-                    Congressional District Race
+                    {stateName} {formatDTSIDistrictId(primaryDistrict)} Congressional District Race
                   </>
                 ) : (
                   <>{stateName} Senate Race</>
