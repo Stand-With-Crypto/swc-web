@@ -75,16 +75,61 @@ const RESPONSIVE_CONTENT: Record<'mobile' | 'desktop', DynamicContent> = {
       }
 
       return (
-        <Button asChild>
-          <TrackedExternalLink
-            href={`tel:${phoneNumber}`}
-            onClick={() => onCallingStateChange('pressed-called')}
-            ref={ref}
-            target="_self"
-          >
-            Call
-          </TrackedExternalLink>
-        </Button>
+        <>
+          <Button asChild>
+            <TrackedExternalLink
+              href={`tel:${phoneNumber}`}
+              onClick={() => onCallingStateChange('pressed-called')}
+              ref={ref}
+              target="_self"
+            >
+              Call self
+            </TrackedExternalLink>
+          </Button>
+
+          <Button asChild>
+            <TrackedExternalLink
+              href={`tel:${phoneNumber}`}
+              onClick={() => onCallingStateChange('pressed-called')}
+              ref={ref}
+              target="_blank"
+            >
+              Call blank
+            </TrackedExternalLink>
+          </Button>
+
+          <Button asChild>
+            <TrackedExternalLink
+              href={`tel:${phoneNumber}`}
+              onClick={() => onCallingStateChange('pressed-called')}
+              ref={ref}
+              target="_parent"
+            >
+              Call parent
+            </TrackedExternalLink>
+          </Button>
+
+          <Button asChild>
+            <TrackedExternalLink
+              href={`tel:${phoneNumber}`}
+              onClick={() => onCallingStateChange('pressed-called')}
+              ref={ref}
+              target="_top"
+            >
+              Call top
+            </TrackedExternalLink>
+          </Button>
+
+          <Button asChild>
+            <TrackedExternalLink
+              href={`tel:${phoneNumber}`}
+              onClick={() => onCallingStateChange('pressed-called')}
+              ref={ref}
+            >
+              Call
+            </TrackedExternalLink>
+          </Button>
+        </>
       )
     },
   },
