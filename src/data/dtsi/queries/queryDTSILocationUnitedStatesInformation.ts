@@ -65,12 +65,85 @@ export const query = /* GraphQL */ `
     ) {
       ...UnitedStatesPersonFragment
     }
+    OHSenate: people(
+      limit: 100
+      offset: 0
+      personRoleGroupingOr: [RUNNING_FOR_US_SENATE]
+      personRolePrimaryState: "OH"
+    ) {
+      ...UnitedStatesPersonFragment
+    }
+    MTSenate: people(
+      limit: 100
+      offset: 0
+      personRoleGroupingOr: [RUNNING_FOR_US_SENATE]
+      personRolePrimaryState: "MT"
+    ) {
+      ...UnitedStatesPersonFragment
+    }
+    PASenate: people(
+      limit: 100
+      offset: 0
+      personRoleGroupingOr: [RUNNING_FOR_US_SENATE]
+      personRolePrimaryState: "PA"
+    ) {
+      ...UnitedStatesPersonFragment
+    }
+    AZSenate: people(
+      limit: 100
+      offset: 0
+      personRoleGroupingOr: [RUNNING_FOR_US_SENATE]
+      personRolePrimaryState: "AZ"
+    ) {
+      ...UnitedStatesPersonFragment
+    }
+    NVSenate: people(
+      limit: 100
+      offset: 0
+      personRoleGroupingOr: [RUNNING_FOR_US_SENATE]
+      personRolePrimaryState: "NV"
+    ) {
+      ...UnitedStatesPersonFragment
+    }
+    MASenate: people(
+      limit: 100
+      offset: 0
+      personRoleGroupingOr: [RUNNING_FOR_US_SENATE]
+      personRolePrimaryState: "MA"
+    ) {
+      ...UnitedStatesPersonFragment
+    }
+    MISenate: people(
+      limit: 100
+      offset: 0
+      personRoleGroupingOr: [RUNNING_FOR_US_SENATE]
+      personRolePrimaryState: "MI"
+    ) {
+      ...UnitedStatesPersonFragment
+    }
+    WISenate: people(
+      limit: 100
+      offset: 0
+      personRoleGroupingOr: [RUNNING_FOR_US_SENATE]
+      personRolePrimaryState: "WI"
+    ) {
+      ...UnitedStatesPersonFragment
+    }
     CO_District8: people(
       limit: 100
       offset: 0
       personRoleGroupingOr: [RUNNING_FOR_US_HOUSE_OF_REPS]
       personRolePrimaryState: "CO"
       personRolePrimaryDistrict: "8"
+    ) {
+      ...UnitedStatesPersonFragment
+    }
+    CA_District32: people(
+      limit: 100
+      offset: 0
+      personRoleGroupingOr: [RUNNING_FOR_US_HOUSE_OF_REPS]
+      personRolePrimaryState: "CA"
+      personRolePrimaryDistrict: "32"
     ) {
       ...UnitedStatesPersonFragment
     }
