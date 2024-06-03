@@ -29,7 +29,12 @@ export function UserActionFormSuccessScreenFeedback(
 }
 
 const UserActionFormSuccessScreenDefaultImage = () => (
-  <NextImage alt="Shield with checkmark" height={120} src="/logo/shield.svg" width={120} />
+  <NextImage
+    alt="Shield with checkmark"
+    height={120}
+    src="/misc/swc-shield-checkmark.svg"
+    width={120}
+  />
 )
 
 UserActionFormSuccessScreenFeedback.Image = function UserActionFormSuccessScreenFeedbackImage({
@@ -37,11 +42,7 @@ UserActionFormSuccessScreenFeedback.Image = function UserActionFormSuccessScreen
 }: {
   children: ReactNode
 }) {
-  return (
-    <div className="mx-auto overflow-hidden rounded-xl">
-      {children || <UserActionFormSuccessScreenDefaultImage />}
-    </div>
-  )
+  return <div className="mx-auto">{children || <UserActionFormSuccessScreenDefaultImage />}</div>
 }
 
 UserActionFormSuccessScreenFeedback.Title = function UserActionFormSuccessScreenFeedbackTitle({
