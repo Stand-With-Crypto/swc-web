@@ -7,6 +7,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useThirdwebAuthUser } from '@/hooks/useAuthUser'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
+import { LOGOUT_ACTION_EVENT } from '@/utils/shared/eventListeners'
 import { generateUserSessionId, USER_SESSION_ID_COOKIE_NAME } from '@/utils/shared/userSessionId'
 
 export function useSession() {
@@ -45,7 +46,7 @@ export function useSessionControl() {
 
   const logout = React.useCallback(async () => {
     // This is used to trigger the login button to update the isLoggingOut state to true
-    document.dispatchEvent(new CustomEvent('logoutAction'))
+    document.dispatchEvent(new CustomEvent(LOGOUT_ACTION_EVENT))
 
     await logoutAndDisconnect()
 

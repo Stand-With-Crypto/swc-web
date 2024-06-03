@@ -1,11 +1,13 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useCallback, useState } from 'react'
+import { useEvent } from 'react-use'
 
 import { Button } from '@/components/ui/button'
 import { useResponsivePopover } from '@/components/ui/responsivePopover'
 import { useDialog } from '@/hooks/useDialog'
 import { useUserWithMaybeENSData } from '@/hooks/useUserWithMaybeEnsData'
+import { LOGOUT_ACTION_EVENT } from '@/utils/shared/eventListeners'
 import { getSensitiveDataUserDisplayName } from '@/utils/web/userUtils'
 
 import { NavbarLoggedInPopoverContent } from './navbarLoggedInPopoverContent'
@@ -20,17 +22,12 @@ export function NavbarLoggedInButton({ onOpenChange }: { onOpenChange: (open: bo
     ? getSensitiveDataUserDisplayName(userWithMaybeEnsData)
     : null
 
-  useEffect(() => {
-    const handleLogoutEvent = () => {
-      setIsLoggingOut(oldState => !oldState)
-    }
-
-    document.addEventListener('logoutAction', handleLogoutEvent)
-
-    return () => {
-      document.removeEventListener('logoutAction', handleLogoutEvent)
-    }
+  const handleLogoutEvent = useCallback(() => {
+    setIsLoggingOut(oldState => !oldState)
   }, [])
+
+  // This is used to disable the login button while logging out
+  useEvent(LOGOUT_ACTION_EVENT, handleLogoutEvent, window, { capture: true })
 
   return (
     <Popover
