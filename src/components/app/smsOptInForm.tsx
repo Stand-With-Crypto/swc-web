@@ -1,4 +1,6 @@
-import { ComponentProps } from 'react'
+'use client'
+
+import { ComponentProps, useEffect } from 'react'
 import { useForm, useFormContext } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import type { ClassValue } from 'clsx'
@@ -12,6 +14,7 @@ import {
 import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormErrorMessage, FormField, FormItem } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { useIsDesktop } from '@/hooks/useIsDesktop'
 import { cn } from '@/utils/web/cn'
 import { trackFormSubmissionSyncErrors, triggerServerActionForForm } from '@/utils/web/formUtils'
 import { zodUpdateUserHasOptedInToSMS } from '@/validation/forms/zodUpdateUserHasOptedInToSMS'
@@ -65,11 +68,19 @@ export function SMSOptInForm(props: SMSOptInFormProps) {
 }
 
 SMSOptInForm.PhoneNumberField = function SMSOptInFormPhoneNumberField({
+  shouldAutoFocus = false,
   className,
 }: {
+  shouldAutoFocus?: boolean
   className?: ClassValue
 }) {
-  const { control } = useFormContext<UpdateUserHasOptedInToSMSPayload>()
+  const { control, setFocus } = useFormContext<UpdateUserHasOptedInToSMSPayload>()
+
+  const isDesktop = useIsDesktop()
+
+  useEffect(() => {
+    if (isDesktop && shouldAutoFocus) setFocus('phoneNumber')
+  }, [isDesktop, setFocus, shouldAutoFocus])
 
   return (
     <div className={cn('flex', className)}>

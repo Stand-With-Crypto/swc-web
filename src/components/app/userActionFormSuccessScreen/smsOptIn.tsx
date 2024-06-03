@@ -17,7 +17,7 @@ export function SMSOptInContent(props: SMSOptInContentProps) {
       <SMSOptInForm className="h-full" {...props}>
         {({ form }) => (
           <div className="flex h-full flex-col gap-4">
-            <SMSOptInForm.PhoneNumberField />
+            <SMSOptInForm.PhoneNumberField shouldAutoFocus />
 
             <div className="mt-auto">
               <SMSOptInForm.Footnote className="mb-6" />
