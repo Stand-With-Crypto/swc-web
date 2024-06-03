@@ -39,12 +39,16 @@ export function useSessionControl() {
     if (pathname === internalUrls.profile()) {
       router.push(internalUrls.home())
     } else {
-      router.refresh()
+      window.location.reload()
     }
   }, [internalUrls, pathname, router])
 
   const logout = React.useCallback(async () => {
+    // This is used to trigger the login button to update the isLoggingOut state to true
+    document.dispatchEvent(new CustomEvent('logoutAction'))
+
     await logoutAndDisconnect()
+
     handleLogoutSuccess()
   }, [handleLogoutSuccess, logoutAndDisconnect])
 
