@@ -2,7 +2,6 @@
 
 import { SMSOptInForm, SMSOptInFormProps } from '@/components/app/smsOptInForm'
 import { UserActionFormSuccessScreenFeedback } from '@/components/app/userActionFormSuccessScreen/UserActionFormSuccessScreenFeedback'
-import { NextImage } from '@/components/ui/image'
 import { Skeleton } from '@/components/ui/skeleton'
 
 interface SMSOptInContentProps extends Omit<SMSOptInFormProps, 'children'> {}
@@ -11,9 +10,6 @@ export function SMSOptInContent(props: SMSOptInContentProps) {
   return (
     <div className="flex h-full flex-col gap-4 text-center">
       <UserActionFormSuccessScreenFeedback
-        Image={
-          <NextImage alt="Shield with checkmark" height={120} src="/logo/shield.svg" width={120} />
-        }
         description="This is an important year for crypto. Sign up for occasional text updates on important legislation, elections, and events in your area."
         title="Nice work!"
       />

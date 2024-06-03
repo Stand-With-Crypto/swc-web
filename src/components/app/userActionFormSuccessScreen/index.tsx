@@ -34,7 +34,7 @@ export function UserActionFormSuccessScreen(props: UserActionFormSuccessScreenPr
     return (
       <div className="mx-auto h-full max-w-[450px]">
         <SMSOptInContent
-          initialValues={{ phoneNumber: user.phoneNumber || '' }}
+          initialValues={{ phoneNumber: user.phoneNumber }}
           onSuccess={({ phoneNumber }) => {
             void fullProfileRequest.mutate({
               user: { ...user, phoneNumber, hasOptedInToSms: true },

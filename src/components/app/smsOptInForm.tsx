@@ -1,3 +1,4 @@
+import { ComponentProps } from 'react'
 import { useForm, useFormContext } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import type { ClassValue } from 'clsx'
@@ -16,19 +17,17 @@ import { trackFormSubmissionSyncErrors, triggerServerActionForForm } from '@/uti
 import { zodUpdateUserHasOptedInToSMS } from '@/validation/forms/zodUpdateUserHasOptedInToSMS'
 
 const FORM_NAME = 'SMS opt in form'
-const FORM_ID = 'sms-opt-in-form'
 
-export interface SMSOptInFormProps {
+export interface SMSOptInFormProps extends Omit<ComponentProps<'form'>, 'children'> {
   initialValues?: UpdateUserHasOptedInToSMSPayload
   onSuccess?: (formValues: UpdateUserHasOptedInToSMSPayload) => void
   children: (props: {
     form: ReturnType<typeof useForm<UpdateUserHasOptedInToSMSPayload>>
   }) => React.ReactNode
-  className?: ClassValue
 }
 
 export function SMSOptInForm(props: SMSOptInFormProps) {
-  const { initialValues, onSuccess, children, className } = props
+  const { initialValues, onSuccess, children, ...rest } = props
 
   const router = useRouter()
 
@@ -40,8 +39,6 @@ export function SMSOptInForm(props: SMSOptInFormProps) {
   return (
     <Form {...form}>
       <form
-        className={cn(className)}
-        id={FORM_ID}
         onSubmit={form.handleSubmit(async values => {
           const result = await triggerServerActionForForm(
             {
@@ -57,6 +54,7 @@ export function SMSOptInForm(props: SMSOptInFormProps) {
             onSuccess?.(values)
           }
         }, trackFormSubmissionSyncErrors(FORM_NAME))}
+        {...rest}
       >
         {children({
           form,
@@ -96,8 +94,15 @@ SMSOptInForm.SubmitButton = function SMSOptInFormSubmitButton({
   children,
   ...props
 }: React.ComponentProps<typeof Button>) {
+  const { formState } = useFormContext<UpdateUserHasOptedInToSMSPayload>()
+
   return (
-    <Button className={cn('font-semibold', className)} form={FORM_ID} type="submit" {...props}>
+    <Button
+      className={cn('font-semibold', className)}
+      disabled={formState.isSubmitting}
+      type="submit"
+      {...props}
+    >
       {children || 'Get updates'}
     </Button>
   )
