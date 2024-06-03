@@ -9,9 +9,11 @@ import { UserActionFormEmailCongresspersonSuccess } from '@/components/app/userA
 import { FormFields } from '@/components/app/userActionFormEmailCongressperson/types'
 import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
+import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useDialog } from '@/hooks/useDialog'
 import { useLocale } from '@/hooks/useLocale'
+import { cn } from '@/utils/web/cn'
 
 export function UserActionFormEmailCongresspersonDialog({
   children,
@@ -38,7 +40,7 @@ export function UserActionFormEmailCongresspersonDialog({
   return (
     <Dialog {...dialogProps}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className={'max-w-3xl'}>
+      <DialogContent className={'max-w-3xl'} padding={false}>
         <Suspense fallback={<UserActionFormEmailCongresspersonSkeleton locale={locale} />}>
           {fetchUser.isLoading ? (
             <UserActionFormEmailCongresspersonSkeleton locale={locale} />
@@ -50,9 +52,11 @@ export function UserActionFormEmailCongresspersonDialog({
               user={user}
             />
           ) : (
-            <UserActionFormSuccessScreen onClose={() => dialogProps.onOpenChange(false)}>
-              <UserActionFormEmailCongresspersonSuccess />
-            </UserActionFormSuccessScreen>
+            <div className={cn(dialogContentPaddingStyles)}>
+              <UserActionFormSuccessScreen onClose={() => dialogProps.onOpenChange(false)}>
+                <UserActionFormEmailCongresspersonSuccess />
+              </UserActionFormSuccessScreen>
+            </div>
           )}
         </Suspense>
       </DialogContent>
