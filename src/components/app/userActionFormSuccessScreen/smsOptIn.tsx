@@ -8,7 +8,7 @@ interface SMSOptInContentProps extends Omit<SMSOptInFormProps, 'children'> {}
 
 export function SMSOptInContent(props: SMSOptInContentProps) {
   return (
-    <div className="flex h-full flex-col gap-4 text-center">
+    <div className="mx-auto flex h-full max-w-[60ch] flex-col items-center gap-4 text-center">
       <UserActionFormSuccessScreenFeedback
         description="This is an important year for crypto. Sign up for occasional text updates on important legislation, elections, and events in your area."
         title="Nice work!"
@@ -16,11 +16,11 @@ export function SMSOptInContent(props: SMSOptInContentProps) {
 
       <SMSOptInForm className="h-full" {...props}>
         {({ form }) => (
-          <div className="flex h-full flex-col gap-4">
+          <div className="flex h-full flex-col gap-2">
             <SMSOptInForm.PhoneNumberField shouldAutoFocus />
 
             <div className="mt-auto">
-              <SMSOptInForm.Footnote className="mb-6" />
+              <SMSOptInForm.Footnote className="mb-8" />
               <SMSOptInForm.SubmitButton
                 className="w-full md:max-w-[300px]"
                 disabled={form.formState.isSubmitting}

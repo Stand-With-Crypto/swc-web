@@ -1,5 +1,7 @@
 'use client'
 
+import { useEffect } from 'react'
+
 import { JoinSWC } from '@/components/app/userActionFormSuccessScreen/joinSWC'
 import { SMSOptInContent } from '@/components/app/userActionFormSuccessScreen/smsOptIn'
 import {
@@ -22,6 +24,16 @@ export function UserActionFormSuccessScreen(props: UserActionFormSuccessScreenPr
     revalidateOnMount: true,
   })
 
+  /**
+   * This effect is to avoid having stale actions data when the user
+   * logs in (from the success screen) after performing an action.
+   */
+  useEffect(() => {
+    if (isLoggedIn) {
+      void performedActionsResponse.mutate()
+    }
+  }, [isLoggedIn, performedActionsResponse])
+
   if (!isLoggedIn || !user) {
     return <JoinSWC onClose={onClose} />
   }
@@ -32,22 +44,20 @@ export function UserActionFormSuccessScreen(props: UserActionFormSuccessScreenPr
     }
 
     return (
-      <div className="mx-auto h-full max-w-[450px]">
-        <SMSOptInContent
-          initialValues={{ phoneNumber: user.phoneNumber }}
-          onSuccess={({ phoneNumber }) => {
-            void fullProfileRequest.mutate({
-              user: { ...user, phoneNumber, hasOptedInToSms: true },
-            })
-            void performedActionsResponse.mutate()
-          }}
-        />
-      </div>
+      <SMSOptInContent
+        initialValues={{ phoneNumber: user.phoneNumber }}
+        onSuccess={({ phoneNumber }) => {
+          void fullProfileRequest.mutate({
+            user: { ...user, phoneNumber, hasOptedInToSms: true },
+          })
+          void performedActionsResponse.mutate()
+        }}
+      />
     )
   }
 
   return (
-    <div className="flex h-full flex-col gap-6 lg:max-h-[75vh]">
+    <div className="flex h-full flex-col gap-6">
       {children}
 
       {isLoading || performedActionsResponse.isLoading ? (
