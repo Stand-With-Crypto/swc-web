@@ -1,6 +1,4 @@
 // eslint-disable-next-line
-import '../../sentry.server.config'
-
 import * as Sentry from '@sentry/nextjs'
 
 import { prismaClient } from '@/utils/server/prismaClient'
