@@ -192,7 +192,7 @@ const nextConfig = {
     return [
       {
         source: '/(.*)',
-        headers: securityHeaders,
+        headers: [...securityHeaders, { key: 'Cache-Control', value: 's-maxage=604800' }], // 7 days
       },
     ]
   },
