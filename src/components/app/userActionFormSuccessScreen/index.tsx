@@ -8,8 +8,11 @@ import {
   UserActionFormSuccessScreenNextAction,
   UserActionFormSuccessScreenNextActionSkeleton,
 } from '@/components/app/userActionFormSuccessScreen/userActionFormSuccessScreenNextAction'
+import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
+import { ScrollArea } from '@/components/ui/scroll-area'
 import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
 import { useSession } from '@/hooks/useSession'
+import { cn } from '@/utils/web/cn'
 
 interface UserActionFormSuccessScreenProps {
   children: React.ReactNode
@@ -32,7 +35,8 @@ export function UserActionFormSuccessScreen(props: UserActionFormSuccessScreenPr
     if (isLoggedIn) {
       void performedActionsResponse.mutate()
     }
-  }, [isLoggedIn, performedActionsResponse])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoggedIn])
 
   if (!isLoggedIn || !user) {
     return <JoinSWC onClose={onClose} />
@@ -57,22 +61,29 @@ export function UserActionFormSuccessScreen(props: UserActionFormSuccessScreenPr
   }
 
   return (
-    <div className="flex h-full flex-col gap-6">
-      {children}
-
-      {isLoading || performedActionsResponse.isLoading ? (
-        <UserActionFormSuccessScreenNextActionSkeleton />
-      ) : (
-        <UserActionFormSuccessScreenNextAction
-          data={{
-            userHasEmbeddedWallet: user.hasEmbeddedWallet,
-            performedUserActionTypes:
-              performedActionsResponse.data?.performedUserActionTypes.map(
-                action => action.actionType,
-              ) || [],
-          }}
-        />
+    <ScrollArea
+      className={cn(
+        dialogContentPaddingStyles,
+        '-mx-6 -mb-6 overflow-auto max-md:-mt-20 md:-mt-14 lg:max-h-[75vh]',
       )}
-    </div>
+    >
+      <div className={cn('flex h-full flex-col gap-6')}>
+        {children}
+
+        {isLoading || performedActionsResponse.isLoading ? (
+          <UserActionFormSuccessScreenNextActionSkeleton />
+        ) : (
+          <UserActionFormSuccessScreenNextAction
+            data={{
+              userHasEmbeddedWallet: user.hasEmbeddedWallet,
+              performedUserActionTypes:
+                performedActionsResponse.data?.performedUserActionTypes.map(
+                  action => action.actionType,
+                ) || [],
+            }}
+          />
+        )}
+      </div>
+    </ScrollArea>
   )
 }
