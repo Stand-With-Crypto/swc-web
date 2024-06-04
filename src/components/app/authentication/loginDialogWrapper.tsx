@@ -187,6 +187,7 @@ export function UnauthenticatedSection({
             onSuccess={() => {
               setDialogOpen(false)
               void mutate()
+              onLogin?.()
             }}
           />
         )}

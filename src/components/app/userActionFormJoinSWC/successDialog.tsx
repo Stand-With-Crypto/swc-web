@@ -4,10 +4,13 @@ import dynamic from 'next/dynamic'
 
 import { UserActionFormSuccessScreenNextActionSkeleton } from '@/components/app/userActionFormSuccessScreen/userActionFormSuccessScreenNextAction'
 import { Dialog, DialogContent, DialogProps } from '@/components/ui/dialog'
+import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { Portal } from '@/components/ui/portal'
+import { ScrollArea } from '@/components/ui/scroll-area'
 import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
 import { useSession } from '@/hooks/useSession'
+import { cn } from '@/utils/web/cn'
 
 const UserActionFormJoinSWCSuccess = dynamic(
   () =>
@@ -50,19 +53,28 @@ export function UserActionFormJoinSWCSuccessDialog(props: UserActionFormJoinSWCS
 
   return (
     <Dialog {...dialogProps}>
-      <DialogContent className="max-w-3xl space-y-6">
-        <UserActionFormJoinSWCSuccess />
+      <DialogContent className="max-w-3xl ">
+        <ScrollArea
+          className={cn(
+            dialogContentPaddingStyles,
+            '-mx-6 -mb-6 overflow-auto max-md:-mt-20 md:-mt-14 lg:max-h-[75vh]',
+          )}
+        >
+          <div className="space-y-6">
+            <UserActionFormJoinSWCSuccess />
 
-        {session.isLoading || !session.user || performedUserActionTypesResponse.isLoading ? (
-          <UserActionFormSuccessScreenNextActionSkeleton />
-        ) : (
-          <UserActionFormSuccessScreenNextAction
-            data={{
-              userHasEmbeddedWallet: session.user.hasEmbeddedWallet,
-              performedUserActionTypes: performedUserActionTypes || [],
-            }}
-          />
-        )}
+            {session.isLoading || !session.user || performedUserActionTypesResponse.isLoading ? (
+              <UserActionFormSuccessScreenNextActionSkeleton />
+            ) : (
+              <UserActionFormSuccessScreenNextAction
+                data={{
+                  userHasEmbeddedWallet: session.user.hasEmbeddedWallet,
+                  performedUserActionTypes: performedUserActionTypes || [],
+                }}
+              />
+            )}
+          </div>
+        </ScrollArea>
       </DialogContent>
     </Dialog>
   )
