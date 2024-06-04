@@ -33,8 +33,8 @@ it('action - mint your supporter NFT', () => {
   // wait for page blink
   cy.wait(1000)
 
-  // wait until there's Finish your profile on the screen
-  cy.contains('Finish your profile').should('be.visible')
+  // Check wether there is Finish your profile or Create an account. Get an NFT.
+  cy.contains(/Finish your profile|Create an account. Get an NFT./g).should('be.visible')
 
   // type first name
   cy.get('input[placeholder="First name"').should('be.visible').type(mockRandomUser.firstName)
@@ -44,18 +44,23 @@ it('action - mint your supporter NFT', () => {
 
   // type address
   cy.selectFromComboBox({
-    trigger: cy.get('input[placeholder="Street address"]'),
+    trigger: cy.get('input[placeholder="Street address"], input[placeholder="Address"]'),
     searchText: mockRandomUser.address,
   })
 
   // type email
-  const emailAddressInput = cy.get('input[placeholder="Your email"')
+  const emailAddressInput = cy.get('input[placeholder="Your email"], input[placeholder="Email"]')
 
   emailAddressInput.should('be.visible')
   emailAddressInput.clear()
   emailAddressInput.type(mockRandomUser.email)
 
-  cy.contains('Next').click()
+  // type phone number
+  cy.get('input[data-testid="phone-number-input"]')
+    .should('be.visible')
+    .type(mockRandomUser.phoneNumber)
+
+  cy.contains(/Next|Create account/).click()
 
   cy.contains('Submit').click()
 
