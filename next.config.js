@@ -178,6 +178,7 @@ const V1_ACTION_REDIRECTS = ACTION_REDIRECTS.map(({ destination, queryKey, query
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
+    minimumCacheTTL: 60 * 60 * 24 * 7, // 7 days
     unoptimized: false,
     remotePatterns: [
       {
@@ -192,7 +193,7 @@ const nextConfig = {
     return [
       {
         source: '/(.*)',
-        headers: [...securityHeaders, { key: 'Cache-Control', value: 's-maxage=604800' }], // 7 days
+        headers: securityHeaders,
       },
     ]
   },
