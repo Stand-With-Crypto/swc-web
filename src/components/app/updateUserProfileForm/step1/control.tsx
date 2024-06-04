@@ -125,7 +125,7 @@ export function UpdateUserProfileForm({
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input placeholder="Your email" {...field} />
+                    <Input data-testid="email-address-input" placeholder="Your email" {...field} />
                   </FormControl>
                   <FormErrorMessage />
                 </FormItem>
@@ -140,7 +140,7 @@ export function UpdateUserProfileForm({
                 <FormItem>
                   <FormLabel>First name</FormLabel>
                   <FormControl>
-                    <Input placeholder="First name" {...field} />
+                    <Input data-testid="first-name-input" placeholder="First name" {...field} />
                   </FormControl>
                   <FormErrorMessage />
                 </FormItem>
@@ -153,7 +153,7 @@ export function UpdateUserProfileForm({
                 <FormItem>
                   <FormLabel>Last name</FormLabel>
                   <FormControl>
-                    <Input placeholder="Last name" {...field} />
+                    <Input data-testid="last-name-input" placeholder="Last name" {...field} />
                   </FormControl>
                   <FormErrorMessage />
                 </FormItem>
@@ -187,6 +187,7 @@ export function UpdateUserProfileForm({
                 <FormLabel>Phone number</FormLabel>
                 <FormControl>
                   <Input
+                    data-testid="phone-number-input"
                     placeholder="Phone number"
                     {...field}
                     onChange={e => {

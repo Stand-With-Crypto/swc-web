@@ -48,7 +48,9 @@ export function UserActionFormNFTMintIntro({
               loadingFallback={<FooterSkeleton />}
               useThirdwebSession={true}
             >
-              <Button size="lg">Sign In</Button>
+              <Button data-testid="signin-button" size="lg">
+                Sign In
+              </Button>
             </LoginDialogWrapper>
             <MaybeAuthenticatedContent authenticatedContent={null} useThirdwebSession={true}>
               <p className="text-xs text-muted-foreground md:text-sm">
