@@ -84,6 +84,7 @@ const getDefaultValues = ({
         billVote: 'NO_VOTE',
         firstName: user.firstName,
         lastName: user.lastName,
+        dtsiSlug: dtsiSlugs[0],
       }),
       subject: getSubjectLine({
         billVote: 'NO_VOTE',
@@ -185,6 +186,7 @@ export function UserActionFormEmailCongressperson({
             location,
             firstName,
             lastName,
+            dtsiSlug: dtsiSlugs?.[0],
           }),
         )
         form.setValue(
