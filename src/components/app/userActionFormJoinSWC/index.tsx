@@ -1,27 +1,8 @@
 'use client'
 
-import dynamic from 'next/dynamic'
-
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
-import { LoadingOverlay } from '@/components/ui/loadingOverlay'
-import { Portal } from '@/components/ui/portal'
+import { UserActionFormJoinSWCSuccessDialog } from '@/components/app/userActionFormJoinSWC/successDialog'
 import { useDialog } from '@/hooks/useDialog'
-
-const UserActionFormJoinSWCSuccessDialog = dynamic(
-  () =>
-    import('@/components/app/userActionFormJoinSWC/success').then(
-      module => module.UserActionFormJoinSWCSuccessDialog,
-    ),
-  {
-    loading: () => (
-      <Portal>
-        <div className="min-h-[400px]">
-          <LoadingOverlay />
-        </div>
-      </Portal>
-    ),
-  },
-)
 
 interface UserActionFormJoinSWCDialogProps {
   children: React.ReactNode
