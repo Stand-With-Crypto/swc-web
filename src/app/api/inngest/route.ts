@@ -1,7 +1,6 @@
 import { serve } from 'inngest/next'
 
 import { airdropNFTWithInngest } from '@/inngest/functions/airdropNFT/airdropNFT'
-import { backfillDonationActionWithInngest } from '@/inngest/functions/backfillDonationAction'
 import { backfillNFTWithInngest } from '@/inngest/functions/backfillNFT'
 import { backfillNFTInngestCronJob } from '@/inngest/functions/backfillNFTCronJob'
 import {
@@ -13,7 +12,6 @@ import { emailRepViaCapitolCanaryWithInngest } from '@/inngest/functions/capitol
 import { upsertAdvocateInCapitolCanaryWithInngest } from '@/inngest/functions/capitolCanary/upsertAdvocateInCapitolCanary'
 import { cleanupNFTMintsWithInngest } from '@/inngest/functions/cleanupNFTMints'
 import { cleanupPostalCodesWithInngest } from '@/inngest/functions/cleanupPostalCodes'
-import { deleteDonationActionsCreatedByBackfillWithInngest } from '@/inngest/functions/deleteDonationActionsCreatedByBackfill'
 import { monitorBaseETHBalances } from '@/inngest/functions/monitorBaseETHBalances'
 import { setPrimaryCryptoAddressOfUserWithInngest } from '@/inngest/functions/setPrimaryCryptoAddressOfUser'
 import {
@@ -47,7 +45,5 @@ export const { GET, POST, PUT } = serve({
     backfillUsersTotalDonationAmountUsdInngestUpdateBatchOfUsers,
     auditUsersTotalDonationAmountUsdInngest,
     auditUsersTotalDonationAmountUsdInngestAuditBatchOfUsers,
-    backfillDonationActionWithInngest,
-    deleteDonationActionsCreatedByBackfillWithInngest,
   ],
 })
