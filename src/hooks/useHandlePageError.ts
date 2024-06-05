@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import * as Sentry from '@sentry/nextjs'
+import { useSearchParams } from 'next/navigation'
 
 import { logger } from '@/utils/shared/logger'
 import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
@@ -13,6 +14,9 @@ export function useHandlePageError({
   humanReadablePageName: string
   error: Error & { digest?: string }
 }) {
+  const searchParams = useSearchParams()
+  const isFromNewsletter = searchParams ? searchParams.get('utm_medium') === 'newsletter' : false
+
   useEffect(() => {
     const isIntentionalError = window.location.pathname.includes('debug-sentry')
     logger.info(`${humanReadablePageName} Error Page rendered with:`, error)
@@ -23,29 +27,46 @@ export function useHandlePageError({
     Sentry.captureMessage(message, { fingerprint: [`fingerprint-${message}`] })
     trackClientAnalytic('Error Page Visible', {
       Category: humanReadablePageName,
-      ...(checkIfErrorIsCausedByOutlook(error) && { Cause: 'Outlook' }),
+      ...(checkIfErrorIsCausedByOutlook(error, isFromNewsletter) && { Cause: 'Outlook' }),
     })
-  }, [domain, error, humanReadablePageName])
+  }, [domain, error, humanReadablePageName, isFromNewsletter])
 }
 
 // we are not sure what causes outlook users to trigger an anti-fingerprint error when accessing
 // SWC using the parsed safe link from outlook. This is a fix to prevent errors spikes
 // from showing up in Sentry and Mixpanel when new email campaigns are sent out.
 // You can find more information about this issue here: https://github.com/Stand-With-Crypto/swc-web/issues/848
-const OUTLOOK_BOT_ERROR_MESSAGE =
-  'Non-Error promise rejection captured with value: Object Not Found'
-function checkIfErrorIsCausedByOutlook(error: Error & { digest?: string }) {
-  if (error?.message?.includes(OUTLOOK_BOT_ERROR_MESSAGE)) return true
-  if (error?.name?.includes(OUTLOOK_BOT_ERROR_MESSAGE)) return true
-  if (error?.digest && error?.digest?.includes(OUTLOOK_BOT_ERROR_MESSAGE)) return true
+const OUTLOOK_BOT_ERROR_MESSAGE = [
+  'Object Not Found Matching Id:',
+  'antifingerprint not defined yet',
+]
+function checkIfErrorIsCausedByOutlook(
+  error: Error & { digest?: string },
+  isFromNewsletter: boolean,
+) {
+  if (!isFromNewsletter) return false
+
   if (
-    error?.cause &&
-    typeof error?.cause === 'string' &&
-    error?.cause?.includes(OUTLOOK_BOT_ERROR_MESSAGE)
+    typeof error !== typeof Error &&
+    OUTLOOK_BOT_ERROR_MESSAGE.some(errorMsg => error?.toString()?.includes(errorMsg))
   ) {
     return true
   }
-  if (error?.stack && error?.stack?.includes(OUTLOOK_BOT_ERROR_MESSAGE)) return true
+
+  if (OUTLOOK_BOT_ERROR_MESSAGE.some(errorMsg => error?.message?.includes(errorMsg))) return true
+  if (OUTLOOK_BOT_ERROR_MESSAGE.some(errorMsg => error?.name?.includes(errorMsg))) return true
+  if (
+    error?.digest &&
+    OUTLOOK_BOT_ERROR_MESSAGE.some(errorMsg => error?.digest?.includes(errorMsg))
+  ) {
+    return true
+  }
+  if (
+    error?.stack &&
+    OUTLOOK_BOT_ERROR_MESSAGE.some(errorMsg => error?.stack?.includes(errorMsg))
+  ) {
+    return true
+  }
 
   return false
 }
