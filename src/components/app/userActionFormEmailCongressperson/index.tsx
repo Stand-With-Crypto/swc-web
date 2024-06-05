@@ -40,6 +40,7 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Textarea } from '@/components/ui/textarea'
+import { useGetDTSIPeopleFromAddress } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useIsDesktop } from '@/hooks/useIsDesktop'
 import { fetchReq } from '@/utils/shared/fetchReq'
@@ -84,7 +85,6 @@ const getDefaultValues = ({
         billVote: 'NO_VOTE',
         firstName: user.firstName,
         lastName: user.lastName,
-        dtsiSlug: dtsiSlugs[0],
       }),
       subject: getSubjectLine({
         billVote: 'NO_VOTE',
@@ -175,7 +175,20 @@ export function UserActionFormEmailCongressperson({
     control: form.control,
     name: 'dtsiSlugs',
   })
-  const { data: congresspersonBillVote } = useCongresspersonFIT21BillVote(dtsiSlugs?.[0], {
+
+  const addressField = form.watch('address')
+
+  const dtsiPeopleFromAddressResponse = useGetDTSIPeopleFromAddress(
+    politicianCategory,
+    addressField?.description,
+  )
+
+  const dtsiPeople =
+    dtsiPeopleFromAddressResponse?.data && 'dtsiPeople' in dtsiPeopleFromAddressResponse.data
+      ? dtsiPeopleFromAddressResponse.data.dtsiPeople
+      : []
+
+  const { data: congresspersonBillVote } = useCongresspersonFIT21BillVote(dtsiPeople?.[0]?.slug, {
     onSuccess: data => {
       if (!hasModifiedMessage.current) {
         const { firstName, lastName } = form.getValues()
@@ -186,7 +199,7 @@ export function UserActionFormEmailCongressperson({
             location,
             firstName,
             lastName,
-            dtsiSlug: dtsiSlugs?.[0],
+            dtsiLastName: dtsiPeople?.[0]?.lastName,
           }),
         )
         form.setValue(
@@ -331,6 +344,7 @@ export function UserActionFormEmailCongressperson({
                         <DTSICongresspersonAssociatedWithFormAddress
                           address={addressProps.field.value}
                           currentDTSISlugValue={dtsiSlugProps.field.value}
+                          dtsiPeopleFromAddressResponse={dtsiPeopleFromAddressResponse}
                           onChangeDTSISlug={({
                             dtsiSlugs: newDtsiSlugs,
                             location: newLocation,

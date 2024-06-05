@@ -24,6 +24,7 @@ export function DTSICongresspersonAssociatedWithFormAddress({
   onChangeDTSISlug,
   currentDTSISlugValue,
   politicianCategory,
+  dtsiPeopleFromAddressResponse,
 }: {
   politicianCategory: YourPoliticianCategory
   address?: z.infer<typeof zodGooglePlacesAutocompletePrediction>
@@ -35,45 +36,60 @@ export function DTSICongresspersonAssociatedWithFormAddress({
       stateCode: string
     }
   }) => void
+  dtsiPeopleFromAddressResponse: ReturnType<typeof useGetDTSIPeopleFromAddress>
 }) {
-  const res = useGetDTSIPeopleFromAddress(politicianCategory, address?.description)
   useEffect(() => {
     if (
-      res.data &&
-      'dtsiPeople' in res.data &&
-      res.data.dtsiPeople.some((person, index) => person.slug !== currentDTSISlugValue[index])
+      dtsiPeopleFromAddressResponse?.data &&
+      'dtsiPeople' in dtsiPeopleFromAddressResponse.data &&
+      dtsiPeopleFromAddressResponse?.data?.dtsiPeople?.some(
+        (person, index) => person.slug !== currentDTSISlugValue[index],
+      )
     ) {
-      const { districtNumber, stateCode, dtsiPeople } = res.data
+      const { districtNumber, stateCode, dtsiPeople } = dtsiPeopleFromAddressResponse.data
       const dtsiSlugs = dtsiPeople.map(person => person.slug)
       onChangeDTSISlug({ dtsiSlugs, location: { districtNumber, stateCode } })
-    } else if (currentDTSISlugValue.length && (!res.data || 'notFoundReason' in res.data)) {
+    } else if (
+      currentDTSISlugValue.length &&
+      (!dtsiPeopleFromAddressResponse?.data ||
+        'notFoundReason' in dtsiPeopleFromAddressResponse.data)
+    ) {
       onChangeDTSISlug({ dtsiSlugs: [] })
     }
     // onChangeDTSISlug shouldnt be passed as a dependency
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentDTSISlugValue, res.data])
+  }, [currentDTSISlugValue, dtsiPeopleFromAddressResponse?.data])
+
   const categoryDisplayName = getYourPoliticianCategoryDisplayName(politicianCategory)
-  if (!address || res.isLoading) {
+  if (!address || dtsiPeopleFromAddressResponse?.isLoading) {
     return (
       <div className="flex items-center gap-4">
         <Skeleton className="h-10 w-10 flex-shrink-0" />
         <div className="text-sm md:text-base">
           <p className="bold">Your {categoryDisplayName}</p>
           <p className="text-fontcolor-muted">
-            {res.isLoading ? 'Loading...' : 'This will show up after you enter your address'}
+            {dtsiPeopleFromAddressResponse?.isLoading
+              ? 'Loading...'
+              : 'This will show up after you enter your address'}
           </p>
         </div>
       </div>
     )
   }
-  if (!res.data || 'notFoundReason' in res.data) {
+
+  if (
+    !dtsiPeopleFromAddressResponse?.data ||
+    'notFoundReason' in dtsiPeopleFromAddressResponse.data
+  ) {
     return (
       <div className="font-bold text-destructive">
-        {formatGetDTSIPeopleFromAddressNotFoundReason(res.data)}
+        {formatGetDTSIPeopleFromAddressNotFoundReason(dtsiPeopleFromAddressResponse.data)}
       </div>
     )
   }
-  const people = res.data.dtsiPeople
+
+  const people = dtsiPeopleFromAddressResponse?.data?.dtsiPeople
+
   return (
     <div className="space-y-6">
       {people.map(person => (
