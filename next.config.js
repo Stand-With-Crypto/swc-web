@@ -177,6 +177,9 @@ const V1_ACTION_REDIRECTS = ACTION_REDIRECTS.map(({ destination, queryKey, query
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  experimental: {
+    instrumentationHook: true,
+  },
   images: {
     minimumCacheTTL: 60 * 60 * 24 * 7, // 7 days
     unoptimized: false,
@@ -319,5 +322,8 @@ const userSentryOptions = {
 }
 // Injected content via Sentry wizard below
 module.exports = withBundleAnalyzer(
-  withSentryConfig(nextConfig, sentryWebpackPluginOptions, userSentryOptions),
+  withSentryConfig(nextConfig, {
+    ...sentryWebpackPluginOptions,
+    ...userSentryOptions,
+  }),
 )
