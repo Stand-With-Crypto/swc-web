@@ -3,10 +3,6 @@
 import { mockRandomUser, mockWallet } from 'cypress/fixture/mocks'
 
 describe('action - voter registration', () => {
-  afterEach(() => {
-    cy.clearDb()
-  })
-
   it('action - voter registration - Yes flow', () => {
     cy.visit('/')
 

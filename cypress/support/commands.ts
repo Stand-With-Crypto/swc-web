@@ -55,6 +55,16 @@ Cypress.Commands.add('selectFromComboBox', ({ trigger, searchText }) => {
     })
 })
 
+Cypress.Commands.add('selectFromRadixComboBox', ({ triggerSelector, state }) => {
+  // Scroll the trigger into view and click it
+  cy.get(triggerSelector).as('stateFilterTrigger').scrollIntoView()
+  cy.get('@stateFilterTrigger').should('be.visible').click()
+
+  // Find the state option and click it
+  cy.get('[role="option"]').contains('div', state).as('stateOption')
+  cy.get('@stateOption').should('be.visible').click()
+})
+
 Cypress.Commands.add('queryDb', (query: string) => {
   return cy.task('queryDb', query)
 })
@@ -101,6 +111,7 @@ declare global {
         trigger: Chainable<JQuery<Node>>
         searchText: string
       }): Chainable<void>
+      selectFromRadixComboBox(config: { triggerSelector: string; state: string }): Chainable<void>
       queryDb(query: string): Chainable<any>
       executeDb(query: string): Chainable<any>
       clearDb(): Chainable<void>
