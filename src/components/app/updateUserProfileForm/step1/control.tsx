@@ -125,7 +125,7 @@ export function UpdateUserProfileForm({
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input data-testid="email-address-input" placeholder="Your email" {...field} />
+                    <Input placeholder="Your email" {...field} />
                   </FormControl>
                   <FormErrorMessage />
                 </FormItem>

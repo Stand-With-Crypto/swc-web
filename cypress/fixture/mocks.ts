@@ -1,11 +1,20 @@
+import { faker } from '@faker-js/faker'
+
 export const mockWallet = {
-  password: Math.random().toString(36).substring(7),
+  password: faker.internet.password({ length: 6 }),
 }
 
+const mockUserFirstName = faker.person.firstName()
+const mockUserLastName = faker.person.lastName()
+
 export const mockRandomUser = {
-  email: `johndoe${Math.random().toString(36).substring(7)}@email.com`,
-  firstName: 'John',
-  lastName: 'Doe',
-  phoneNumber: '1234567890',
+  email: faker.internet.email({
+    firstName: mockUserFirstName,
+    lastName: mockUserLastName,
+  }),
+  firstName: mockUserFirstName,
+  lastName: mockUserLastName,
+  phoneNumber: faker.helpers.fromRegExp(/([0-9]{3}) [0-9]{3} [0-9]{4}/),
+  // has to be an existing one
   address: '350 Fifth Avenue New York, NY 10118',
 }

@@ -49,27 +49,28 @@ it('action - mint your supporter NFT', () => {
   })
 
   // type email
-  const emailAddressInput = cy.get('input[placeholder="Your email"], input[placeholder="Email"]')
-
-  emailAddressInput.should('be.visible')
-  emailAddressInput.clear()
-  emailAddressInput.type(mockRandomUser.email)
+  cy.get('input[placeholder="Your email"], input[placeholder="Email"]')
+    .should('be.visible')
+    .clear()
+    .type(mockRandomUser.email)
 
   // type phone number
   cy.get('input[data-testid="phone-number-input"]')
     .should('be.visible')
+    .clear()
     .type(mockRandomUser.phoneNumber)
 
-  cy.contains(/Next|Create account/).click()
+  cy.get('button[type="submit"]')
+    .contains(/Next|Create account/)
+    .click({ force: true })
 
-  cy.contains('Submit').click()
+  cy.contains('Submit').should('be.visible').click()
 
-  cy.contains('Continue').click()
+  cy.contains('Continue').should('be.visible').click()
 
-  // cy.get('button[role="checkbox"][data-state="unchecked"]').click()
-  cy.contains('Mock the minting transaction').click()
+  cy.contains('Mock the minting transaction').should('be.visible').click()
 
-  cy.contains('Mint now - Mocked').click()
+  cy.contains('Mint now - Mocked').should('be.visible').click()
 
   cy.contains('Transaction complete').should('be.visible')
 
