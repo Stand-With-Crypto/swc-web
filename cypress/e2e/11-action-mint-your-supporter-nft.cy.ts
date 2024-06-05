@@ -9,19 +9,19 @@ it('action - mint your supporter NFT', () => {
 
   cy.get('[role="dialog"]')
 
-  cy.get('button[data-testid="signin-button"]').should('be.visible').click()
+  cy.get('button[data-testid="signin-button"]').click()
 
-  cy.get('button[data-test="continue-as-guest-button"]').should('be.visible').click()
+  cy.get('button[data-test="continue-as-guest-button"]').click()
 
   // intercept the api /api/auth/login
   cy.intercept('/api/auth/login').as('authLogin')
 
   // type random password
   cy.get('input[data-test="new-password"][type="password"]')
-    .should('be.visible')
+
     .type(mockWallet.password)
   cy.get('input[data-test="confirm-password"][type="password"]')
-    .should('be.visible')
+
     .type(mockWallet.password)
 
   // click create new wallet
@@ -37,10 +37,10 @@ it('action - mint your supporter NFT', () => {
   cy.contains(/Finish your profile|Create an account. Get an NFT./g).should('be.visible')
 
   // type first name
-  cy.get('input[placeholder="First name"').should('be.visible').type(mockRandomUser.firstName)
+  cy.get('input[placeholder="First name"').type(mockRandomUser.firstName)
 
   // type last name
-  cy.get('input[placeholder="Last name"').should('be.visible').type(mockRandomUser.lastName)
+  cy.get('input[placeholder="Last name"').type(mockRandomUser.lastName)
 
   // type address
   cy.selectFromComboBox({
@@ -50,15 +50,11 @@ it('action - mint your supporter NFT', () => {
 
   // type email
   cy.get('input[placeholder="Your email"], input[placeholder="Email"]')
-    .should('be.visible')
     .clear()
     .type(mockRandomUser.email)
 
   // type phone number
-  cy.get('input[data-testid="phone-number-input"]')
-    .should('be.visible')
-    .clear()
-    .type(mockRandomUser.phoneNumber)
+  cy.get('input[data-testid="phone-number-input"]').clear().type(mockRandomUser.phoneNumber)
 
   cy.get('button[type="submit"]')
     .contains(/Next|Create account/)

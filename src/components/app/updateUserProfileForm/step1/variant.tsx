@@ -126,12 +126,7 @@ export function UpdateUserProfileForm({
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input
-                    className="h-auto p-4"
-                    data-testid="first-name-input"
-                    placeholder="First name"
-                    {...field}
-                  />
+                  <Input className="h-auto p-4" placeholder="First name" {...field} />
                 </FormControl>
                 <FormErrorMessage />
               </FormItem>
@@ -143,12 +138,7 @@ export function UpdateUserProfileForm({
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input
-                    className="h-auto p-4"
-                    data-testid="last-name-input"
-                    placeholder="Last name"
-                    {...field}
-                  />
+                  <Input className="h-auto p-4" placeholder="Last name" {...field} />
                 </FormControl>
                 <FormErrorMessage />
               </FormItem>
@@ -161,12 +151,7 @@ export function UpdateUserProfileForm({
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input
-                      className="h-auto p-4"
-                      data-testid="email-address-input"
-                      placeholder="Email"
-                      {...field}
-                    />
+                    <Input className="h-auto p-4" placeholder="Email" {...field} />
                   </FormControl>
                   <FormErrorMessage />
                 </FormItem>

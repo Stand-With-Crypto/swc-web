@@ -140,7 +140,7 @@ export function UpdateUserProfileForm({
                 <FormItem>
                   <FormLabel>First name</FormLabel>
                   <FormControl>
-                    <Input data-testid="first-name-input" placeholder="First name" {...field} />
+                    <Input placeholder="First name" {...field} />
                   </FormControl>
                   <FormErrorMessage />
                 </FormItem>
@@ -153,7 +153,7 @@ export function UpdateUserProfileForm({
                 <FormItem>
                   <FormLabel>Last name</FormLabel>
                   <FormControl>
-                    <Input data-testid="last-name-input" placeholder="Last name" {...field} />
+                    <Input placeholder="Last name" {...field} />
                   </FormControl>
                   <FormErrorMessage />
                 </FormItem>
