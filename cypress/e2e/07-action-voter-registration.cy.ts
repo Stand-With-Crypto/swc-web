@@ -2,7 +2,7 @@
 
 import { mockRandomUser, mockWallet } from 'cypress/fixture/mocks'
 
-describe('action - voter registration', () => {
+describe('action - voter registration without signin', () => {
   it('action - voter registration - Yes flow', () => {
     cy.visit('/')
 
@@ -72,7 +72,9 @@ describe('action - voter registration', () => {
 
     cy.contains(/not sure/g).click()
   })
+})
 
+describe('action - voter registration with signin', () => {
   it('action - voter registration - Yes flow signing in afterwards', () => {
     cy.visit('/')
 
