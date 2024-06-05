@@ -12,6 +12,7 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Textarea } from '@/components/ui/textarea'
+import { useGetDTSIPeopleFromAddress } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { SupportedLocale } from '@/intl/locales'
 import { getIntlUrls } from '@/utils/shared/urls'
 import {
@@ -62,6 +63,7 @@ export function UserActionFormEmailCongresspersonSkeleton({
             <div className="w-full">
               <DTSICongresspersonAssociatedWithFormAddress
                 currentDTSISlugValue={[]}
+                dtsiPeopleFromAddressResponse={{} as ReturnType<typeof useGetDTSIPeopleFromAddress>}
                 onChangeDTSISlug={noop}
                 politicianCategory={politicianCategory}
               />
