@@ -166,6 +166,7 @@ export function UpdateUserProfileForm({
                 <FormControl>
                   <Input
                     className="h-auto p-4"
+                    data-testid="phone-number-input"
                     placeholder="Phone number"
                     {...field}
                     onChange={e => {

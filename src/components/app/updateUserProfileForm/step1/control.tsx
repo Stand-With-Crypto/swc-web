@@ -187,6 +187,7 @@ export function UpdateUserProfileForm({
                 <FormLabel>Phone number</FormLabel>
                 <FormControl>
                   <Input
+                    data-testid="phone-number-input"
                     placeholder="Phone number"
                     {...field}
                     onChange={e => {
