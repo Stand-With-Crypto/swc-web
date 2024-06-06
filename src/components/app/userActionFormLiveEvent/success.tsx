@@ -4,14 +4,12 @@ import { UserActionFormSuccessScreenFeedback } from '@/components/app/userAction
 import { NextImage } from '@/components/ui/image'
 import { NFTClientMetadata } from '@/utils/web/nft'
 
-interface UserActionFormLiveEventSuccessProps extends NFTClientMetadata {}
-
-export const UserActionFormLiveEventSuccess = (props: UserActionFormLiveEventSuccessProps) => {
+export const UserActionFormLiveEventSuccess = (props: NFTClientMetadata) => {
   const { image, name, description } = props
 
   return (
     <UserActionFormSuccessScreenFeedback
-      Image={<NextImage src={image.url || '/logo/shield.svg'} {...image} />}
+      Image={<NextImage src={image.url} {...image} />}
       description={description}
       title={name}
     />

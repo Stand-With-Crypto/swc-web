@@ -64,6 +64,8 @@ export function UserActionFormSuccessScreen(props: UserActionFormSuccessScreenPr
     <ScrollArea
       className={cn(
         dialogContentPaddingStyles,
+        // Negative margins with the same values as the dialog padding
+        // to better display the scroll bar.
         '-mx-6 -mb-6 overflow-auto max-md:-mt-20 md:-mt-14 lg:max-h-[75vh]',
       )}
     >
