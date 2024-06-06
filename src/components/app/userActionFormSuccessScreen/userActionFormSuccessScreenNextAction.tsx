@@ -77,14 +77,15 @@ export function UserActionFormSuccessScreenNextAction({
           ...Array.from(excludeUserActionTypes),
           ...performedUserActionTypes,
         ]}
-        render={ctaProps => (
-          <UserActionRowCTAButton
-            {...ctaProps}
-            key={ctaProps.actionType}
-            onClick={handleClick(ctaProps.actionType as UserActionTypesWithDeeplink)}
-            state="incomplete"
-          />
-        )}
+        performedUserActionTypes={performedUserActionTypes}
+        render={ctaProps => {
+          return (
+            <UserActionRowCTAButton
+              {...ctaProps}
+              onClick={handleClick(ctaProps.actionType as UserActionTypesWithDeeplink)}
+            />
+          )
+        }}
       />
 
       {/** Completed actions last */}
@@ -96,7 +97,6 @@ export function UserActionFormSuccessScreenNextAction({
         render={ctaProps => (
           <UserActionRowCTAButton
             {...ctaProps}
-            key={ctaProps.actionType}
             onClick={handleClick(ctaProps.actionType as UserActionTypesWithDeeplink)}
           />
         )}

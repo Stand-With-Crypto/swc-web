@@ -1,5 +1,6 @@
 import { USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN } from '@/utils/web/userActionUtils'
 import { UserActionType } from '@prisma/client'
+import uniq from 'lodash-es/uniq'
 
 const USER_ACTIONS_EXCLUDED_FROM_CTA: UserActionType[] = [
   UserActionType.LIVE_EVENT,
@@ -24,7 +25,8 @@ export function getUserActionsProgress({
       : USER_ACTIONS_EXCLUDED_FROM_CTA,
   )
 
-  const numActionsCompleted = performedUserActionTypes.reduce((count, action) => {
+  // TODO: Include campaignName in the excludeUserActionTypes set
+  const numActionsCompleted = uniq(performedUserActionTypes).reduce((count, action) => {
     return excludeUserActionTypes.has(action.actionType) ? count : count + 1
   }, 0)
 

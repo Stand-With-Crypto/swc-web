@@ -3,8 +3,9 @@
 import { useMemo } from 'react'
 import { UserActionType } from '@prisma/client'
 
-import { UserActionRowCTA } from '@/components/app/userActionRowCTA'
 import { getUserActionCTAInfo } from '@/components/app/userActionRowCTA/constants'
+import { UserActionRowCTA, UserActionRowCTAProps } from '@/components/app/userActionRowCTA'
+import { USER_ACTION_ROW_CTA_INFO } from '@/components/app/userActionRowCTA/constants'
 import { cn } from '@/utils/web/cn'
 import { USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN } from '@/utils/web/userActionUtils'
 
@@ -12,14 +13,14 @@ export interface UserActionRowCTAsListProps {
   performedUserActionTypes?: Array<{ actionType: UserActionType; campaignName: string }>
   excludeUserActionTypes?: UserActionType[]
   className?: string
-  render?: (props: React.ComponentPropsWithoutRef<typeof UserActionRowCTA>) => React.ReactNode
+  render?: React.ComponentType<React.ComponentPropsWithoutRef<typeof UserActionRowCTA>>
 }
 
 export function UserActionRowCTAsList({
   performedUserActionTypes,
   excludeUserActionTypes,
-  render,
   className,
+  render: Render,
 }: UserActionRowCTAsListProps) {
   const filteredActions = useMemo(() => {
     return !excludeUserActionTypes
@@ -29,23 +30,19 @@ export function UserActionRowCTAsList({
         )
   }, [excludeUserActionTypes])
 
+  const getState = useMemo(
+    () => createStateGetter(performedUserActionTypes),
+    [performedUserActionTypes],
+  )
+
   return (
     <div className={cn('space-y-4', className)}>
       {filteredActions.map(({ action, campaign }) => {
         const props = getUserActionCTAInfo(action, campaign)
+        const state = getState({ action, campaign })
 
-        const state = !performedUserActionTypes
-          ? 'unknown'
-          : performedUserActionTypes.some(
-                performedAction =>
-                  performedAction.actionType === action &&
-                  performedAction.campaignName === campaign,
-              )
-            ? 'complete'
-            : 'incomplete'
-
-        return render ? (
-          render({ state, ...props })
+        return Render ? (
+          <Render key={`${action}-${campaign}`} state={state} {...props} />
         ) : (
           <UserActionRowCTA key={`${action}-${campaign}`} state={state} {...props} />
         )
@@ -53,3 +50,26 @@ export function UserActionRowCTAsList({
     </div>
   )
 }
+
+const createStateGetter =
+  (
+    performedUserActionTypes:
+      | Array<{ actionType: UserActionType; campaignName: string }>
+      | undefined,
+  ) =>
+  ({
+    action,
+    campaign,
+  }: {
+    action: UserActionType
+    campaign: string
+  }): UserActionRowCTAProps['state'] => {
+    if (!performedUserActionTypes) return 'unknown'
+
+    return performedUserActionTypes.some(
+      performedAction =>
+        performedAction.actionType === action && performedAction.campaignName === campaign,
+    )
+      ? 'complete'
+      : 'incomplete'
+  }
