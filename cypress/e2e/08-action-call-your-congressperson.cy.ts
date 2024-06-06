@@ -4,6 +4,9 @@ it('action - call your congressperson', () => {
   cy.viewport('iphone-6')
   cy.visit('/')
 
+  // wait for actions to show up
+  cy.wait(1000)
+
   // validate CTA button
   cy.contains('div', 'Call your congressperson').as('ctaButton')
   /**
@@ -21,6 +24,7 @@ it('action - call your congressperson', () => {
   cy.selectFromComboBox({
     trigger: cy.get('input[placeholder="Your full address"]'),
     searchText: 'Berliner Bogen, Anckelmannsplatz, Hamburg, Germany',
+    typingRequired: true,
   })
   cy.contains('Please enter a US-based address.').should('be.visible')
 
@@ -28,6 +32,7 @@ it('action - call your congressperson', () => {
   cy.selectFromComboBox({
     trigger: cy.get('input[placeholder="Your full address"]'),
     searchText: '350 Fifth Avenue New York, NY 10118',
+    typingRequired: true,
   })
 
   cy.contains(/Your representative is Jerrold Nadler/).should('be.visible')

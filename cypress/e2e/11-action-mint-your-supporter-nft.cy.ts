@@ -2,79 +2,77 @@
 
 import { mockRandomUser, mockWallet } from 'cypress/fixture/mocks'
 
-it('action - mint your supporter NFT', () => {
-  cy.visit('/')
+describe('action - mint your supporter NFT', () => {
+  it('should go through signing in and nft minting', () => {
+    cy.visit('/')
 
-  cy.contains('Mint your Supporter NFT').click()
+    cy.contains('Mint your Supporter NFT').click()
 
-  cy.get('[role="dialog"]')
+    cy.get('[role="dialog"]')
 
-  cy.get('button[data-testid="signin-button"]').click()
+    cy.get('button[data-testid="signin-button"]').click()
 
-  cy.get('button[data-test="continue-as-guest-button"]').click()
+    cy.get('button[data-test="continue-as-guest-button"]').click()
 
-  // intercept the api /api/auth/login
-  cy.intercept('/api/auth/login').as('authLogin')
+    cy.intercept('/api/auth/login').as('authLogin')
 
-  // type random password
-  cy.get('input[data-test="new-password"][type="password"]')
+    cy.get('input[data-test="new-password"][type="password"]')
 
-    .type(mockWallet.password)
-  cy.get('input[data-test="confirm-password"][type="password"]')
+      .type(mockWallet.password)
+    cy.get('input[data-test="confirm-password"][type="password"]')
 
-    .type(mockWallet.password)
+      .type(mockWallet.password)
 
-  // click create new wallet
-  cy.contains('Create new wallet').click()
+    cy.contains('Create new wallet').click()
 
-  // wait for api /api/auth/login
-  cy.wait('@authLogin')
+    cy.wait('@authLogin')
 
-  // wait for page blink
-  cy.wait(1000)
+    // wait for page blink
+    cy.wait(1000)
 
-  // Check wether there is Finish your profile or Create an account. Get an NFT.
-  cy.contains(/Finish your profile|Create an account. Get an NFT./g).should('be.visible')
+    cy.contains(/Finish your profile|Create an account. Get an NFT./g).should('be.visible')
 
-  // type first name
-  cy.get('input[placeholder="First name"').should('exist').type(mockRandomUser.firstName)
+    cy.typeIntoInput({
+      selector: 'input[placeholder="First name"',
+      text: mockRandomUser.firstName,
+    })
 
-  // type last name
-  cy.get('input[placeholder="Last name"').should('exist').type(mockRandomUser.lastName)
+    cy.typeIntoInput({
+      selector: 'input[placeholder="Last name"',
+      text: mockRandomUser.lastName,
+    })
 
-  // type address
-  cy.selectFromComboBox({
-    trigger: cy.get('input[placeholder="Street address"], input[placeholder="Address"]'),
-    searchText: mockRandomUser.address,
+    cy.selectFromComboBox({
+      trigger: cy.get('input[placeholder="Street address"], input[placeholder="Address"]'),
+      searchText: mockRandomUser.address,
+      typingRequired: true,
+    })
+
+    cy.get('input[placeholder="Your email"], input[placeholder="Email"]')
+      .clear()
+      .type(mockRandomUser.email)
+
+    cy.get('input[data-testid="phone-number-input"]').clear().type(mockRandomUser.phoneNumber)
+
+    cy.get('button[type="submit"]')
+      .contains(/Next|Create account/)
+      .scrollIntoView()
+      .click()
+
+    cy.contains('Submit').should('be.visible').click()
+
+    cy.contains('Continue').should('be.visible').click()
+
+    cy.contains('Mock the minting transaction').should('be.visible').click()
+
+    cy.contains('Mint now - Mocked').should('be.visible').click()
+
+    cy.contains('Transaction complete').should('be.visible')
+
+    cy.queryDb(
+      'SELECT * FROM user_action WHERE action_type = "OPT_IN" AND nft_mint_id is not NULL',
+    ).then((result: any) => {
+      expect(result.length, 'user_action to exist in database').to.equal(1)
+    })
   })
-
-  // type email
-  cy.get('input[placeholder="Your email"], input[placeholder="Email"]')
-    .clear()
-    .type(mockRandomUser.email)
-
-  // type phone number
-  cy.get('input[data-testid="phone-number-input"]').clear().type(mockRandomUser.phoneNumber)
-
-  cy.get('button[type="submit"]')
-    .contains(/Next|Create account/)
-    .click({ force: true })
-
-  cy.contains('Submit').should('be.visible').click()
-
-  cy.contains('Continue').should('be.visible').click()
-
-  cy.contains('Mock the minting transaction').should('be.visible').click()
-
-  cy.contains('Mint now - Mocked').should('be.visible').click()
-
-  cy.contains('Transaction complete').should('be.visible')
-
-  // validate database
-  cy.queryDb(
-    'SELECT * FROM user_action WHERE action_type = "OPT_IN" AND nft_mint_id is not NULL',
-  ).then((result: any) => {
-    expect(result.length, 'user_action to exist in database').to.equal(1)
-  })
-  cy.clearDb()
 })

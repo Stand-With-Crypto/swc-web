@@ -60,6 +60,7 @@ it('page - politicians interactions', () => {
   cy.selectFromComboBox({
     trigger: cy.get('input[placeholder="Enter your address"]'),
     searchText: '350 Fifth Avenue New York, NY 10118',
+    typingRequired: true,
   })
   cy.get('[data-test-id="dtsi-people-associated-with-address"]', { timeout: 10000 })
   // clear your address
