@@ -3,25 +3,25 @@ import { UserActionFormSuccessScreenFeedback } from '@/components/app/userAction
 import { NextImage } from '@/components/ui/image'
 import { Video } from '@/components/ui/video'
 
-const ImageFallback = (
-  <NextImage
-    alt="A phone with the text 'I CALLED CONGRESS FOR CRYPTO' displayed on its screen."
-    fill
-    src="/actionTypeVideos/swca_call_still_4k.png"
-  />
-)
-
 export const UserActionFormCallCongresspersonSuccess = () => {
+  const ImageFallback = (
+    <NextImage
+      alt="A phone with the text 'I CALLED CONGRESS FOR CRYPTO' displayed on its screen."
+      height={245}
+      sizes="(max-width: 640px) 300px, 345px"
+      src="/actionTypeVideos/swca_call_still.png"
+      width={300}
+    />
+  )
+
   return (
     <UserActionFormSuccessScreenFeedback
       Image={
-        <div className="relative h-[245px] w-[300px] overflow-hidden rounded-xl sm:w-[345px]">
-          <Video
-            className={'absolute left-0 top-0 h-full w-full object-cover'}
-            fallback={ImageFallback}
-            src="/actionTypeVideos/swca_call.mp4"
-          />
-        </div>
+        <Video
+          className={'h-[245px] w-[300px] overflow-hidden rounded-xl object-cover sm:w-[345px]'}
+          fallback={ImageFallback}
+          src="/actionTypeVideos/swca_call.mp4"
+        />
       }
       {...USER_ACTION_FORM_SUCCESS_SCREEN_INFO.CALL}
     />
