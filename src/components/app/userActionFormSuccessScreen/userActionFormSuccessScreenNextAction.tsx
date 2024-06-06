@@ -73,7 +73,10 @@ export function UserActionFormSuccessScreenNextAction({
 
       {/** Uncompleted actions first */}
       <UserActionRowCTAsList
-        excludeUserActionTypes={[...excludeUserActionTypes, ...performedUserActionTypes]}
+        excludeUserActionTypes={[
+          ...Array.from(excludeUserActionTypes),
+          ...performedUserActionTypes,
+        ]}
         render={ctaProps => (
           <UserActionRowCTAButton
             {...ctaProps}

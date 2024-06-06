@@ -8,7 +8,6 @@ import {
 import { UserActionFormLiveEventSuccess } from '@/components/app/userActionFormLiveEvent/success'
 import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
 import { useSections } from '@/hooks/useSections'
-import { getValues } from '@/utils/shared/getEntries'
 import { NFTSlug } from '@/utils/shared/nft'
 import { UserActionLiveEventCampaignName } from '@/utils/shared/userActionCampaigns'
 import { NFT_CLIENT_METADATA } from '@/utils/web/nft'
@@ -25,7 +24,7 @@ export function UserActionFormLiveEvent({
   onClose,
 }: UserActionFormLiveEventProps) {
   const sectionProps = useSections({
-    sections: getValues(SectionNames),
+    sections: Object.values(SectionNames),
     initialSectionId: SectionNames.LANDING,
     analyticsName: ANALYTICS_NAME_USER_ACTION_FORM_LIVE_EVENT,
   })

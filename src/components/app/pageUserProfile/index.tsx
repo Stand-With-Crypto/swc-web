@@ -155,7 +155,7 @@ export function PageUserProfile({ params, searchParams, user }: PageUserProfile)
           <Progress value={progressValue} />
         </div>
         <UserActionRowCTAsList
-          excludeUserActionTypes={excludeUserActionTypes}
+          excludeUserActionTypes={Array.from(excludeUserActionTypes)}
           performedUserActionTypes={performedUserActionTypes}
         />
       </section>

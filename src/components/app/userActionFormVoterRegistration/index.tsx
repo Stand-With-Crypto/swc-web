@@ -10,7 +10,6 @@ import { UserActionFormVoterRegistrationSuccess } from '@/components/app/userAct
 import { Survey } from '@/components/app/userActionFormVoterRegistration/sections/survey'
 import { VoterRegistrationForm } from '@/components/app/userActionFormVoterRegistration/sections/voterRegistrationForm'
 import { useSections } from '@/hooks/useSections'
-import { getValues } from '@/utils/shared/getEntries'
 import { USStateCode } from '@/utils/shared/usStateUtils'
 
 export function UserActionFormVoterRegistration({
@@ -21,7 +20,7 @@ export function UserActionFormVoterRegistration({
   initialStateCode?: USStateCode
 }) {
   const sectionProps = useSections({
-    sections: getValues(SectionNames),
+    sections: Object.values(SectionNames),
     initialSectionId: SectionNames.SURVEY,
     analyticsName: ANALYTICS_NAME_USER_ACTION_FORM_VOTER_REGISTRATION,
   })
