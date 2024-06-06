@@ -39,7 +39,7 @@ interface LoginDialogWrapperProps extends React.PropsWithChildren<ThirdwebLoginC
   /**
    * Callback that is called when the user logs in.
    */
-  onLogin?: () => void
+  onLoginSuccess?: () => void
 }
 
 enum LoginSections {
@@ -55,7 +55,7 @@ export function LoginDialogWrapper({
   loadingFallback,
   forceUnauthenticated,
   useThirdwebSession = false,
-  onLogin,
+  onLoginSuccess,
   ...props
 }: LoginDialogWrapperProps) {
   const session = useSession()
@@ -112,7 +112,7 @@ export function LoginDialogWrapper({
       dialogProps={dialogProps}
       goToSection={goToSection}
       isLoggedIn={isLoggedIn}
-      onLogin={onLogin}
+      onLoginSuccess={onLoginSuccess}
       {...props}
     >
       {children}
@@ -125,7 +125,10 @@ interface UnauthenticatedSectionProps extends React.PropsWithChildren<ThirdwebLo
   currentSection: LoginSections
   dialogProps: ReturnType<typeof useDialog>
   isLoggedIn: boolean
-  onLogin?: () => void
+  /**
+   * Callback that is called when the user successfully logs in.
+   */
+  onLoginSuccess?: () => void
 }
 
 export function UnauthenticatedSection({
@@ -134,7 +137,7 @@ export function UnauthenticatedSection({
   currentSection,
   dialogProps,
   isLoggedIn,
-  onLogin,
+  onLoginSuccess,
   ...props
 }: UnauthenticatedSectionProps) {
   const { mutate } = useApiResponseForUserFullProfileInfo()
@@ -170,9 +173,10 @@ export function UnauthenticatedSection({
       goToSection(LoginSections.FINISH_PROFILE)
     } else {
       setDialogOpen(false)
-      onLogin?.()
     }
-  }, [goToSection, mutate, onLogin, setDialogOpen])
+
+    onLoginSuccess?.()
+  }, [goToSection, mutate, onLoginSuccess, setDialogOpen])
 
   return (
     <Dialog {...dialogProps} onOpenChange={setDialogOpen}>
@@ -187,7 +191,6 @@ export function UnauthenticatedSection({
             onSuccess={() => {
               setDialogOpen(false)
               void mutate()
-              onLogin?.()
             }}
           />
         )}
