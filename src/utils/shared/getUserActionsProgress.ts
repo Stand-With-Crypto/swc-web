@@ -1,23 +1,10 @@
+import { USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN } from '@/utils/web/userActionUtils'
 import { UserActionType } from '@prisma/client'
 
-import { getValues } from '@/utils/shared/getEntries'
-import { USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN } from '@/utils/web/userActionUtils'
-
-export const USER_ACTIONS_AVAILABLE_FOR_CTA = new Map<UserActionType, boolean>([
-  [UserActionType.CALL, true],
-  [UserActionType.EMAIL, true],
-  [UserActionType.DONATION, true],
-  [UserActionType.NFT_MINT, true],
-  [UserActionType.OPT_IN, true],
-  [UserActionType.TWEET, true],
-  [UserActionType.VOTER_REGISTRATION, true],
-  [UserActionType.LIVE_EVENT, false],
-  [UserActionType.TWEET_AT_PERSON, false],
-])
-
-export const USER_ACTIONS_EXCLUDED_FROM_CTA = Array.from(USER_ACTIONS_AVAILABLE_FOR_CTA)
-  .filter(([_, value]) => !value)
-  .map(([key, _]) => key)
+const USER_ACTIONS_EXCLUDED_FROM_CTA: UserActionType[] = [
+  UserActionType.LIVE_EVENT,
+  UserActionType.TWEET_AT_PERSON,
+]
 
 interface GetUserActionsProgressArgs {
   userHasEmbeddedWallet: boolean
@@ -31,28 +18,19 @@ export function getUserActionsProgress({
   userHasEmbeddedWallet,
   performedUserActionTypes,
 }: GetUserActionsProgressArgs) {
-  const excludeUserActionTypes = userHasEmbeddedWallet
-    ? [UserActionType.NFT_MINT, ...USER_ACTIONS_EXCLUDED_FROM_CTA]
-    : USER_ACTIONS_EXCLUDED_FROM_CTA
+  const excludeUserActionTypes = new Set<UserActionType>(
+    userHasEmbeddedWallet
+      ? [UserActionType.NFT_MINT, ...USER_ACTIONS_EXCLUDED_FROM_CTA]
+      : USER_ACTIONS_EXCLUDED_FROM_CTA,
+  )
 
-  const numActionsCompleted = performedUserActionTypes
-    .filter(performedAction => {
-      return !excludeUserActionTypes.includes(performedAction.actionType)
-    })
-    .filter(
-      performedAction =>
-        !USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN.some(
-          item =>
-            item.campaign !== performedAction.campaignName &&
-            item.action === performedAction.actionType,
-        ),
-    ).length
+  const numActionsCompleted = performedUserActionTypes.reduce((count, action) => {
+    return excludeUserActionTypes.has(action.actionType) ? count : count + 1
+  }, 0)
 
-  const numActionsAvailable = Object.values(
-    USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN.filter(
-      item => !excludeUserActionTypes.includes(item.action),
-    ),
-  ).length
+  const numActionsAvailable =
+    Object.values(USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN).length -
+    excludeUserActionTypes.size
 
   return {
     progressValue: (numActionsCompleted / numActionsAvailable) * 100,
