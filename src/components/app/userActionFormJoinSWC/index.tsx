@@ -12,7 +12,6 @@ const ANALYTICS_NAME_USER_ACTION_FORM_JOIN_SWC = 'User Action Form Join SWC'
 
 /**
  * `UserActionFormJoinSWCDialog` is a component that opens a Success Dialog after a user joins SWC.
- *
  */
 export function UserActionFormJoinSWCDialog(props: UserActionFormJoinSWCDialogProps) {
   const { children } = props
@@ -24,7 +23,10 @@ export function UserActionFormJoinSWCDialog(props: UserActionFormJoinSWCDialogPr
 
   return (
     <>
-      <LoginDialogWrapper onLoginSuccess={() => dialogProps.onOpenChange(true)}>
+      <LoginDialogWrapper
+        authenticatedContent={children}
+        onLoginSuccess={() => dialogProps.onOpenChange(true)}
+      >
         {children}
       </LoginDialogWrapper>
 
