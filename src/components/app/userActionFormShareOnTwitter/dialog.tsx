@@ -2,6 +2,7 @@
 
 import dynamic from 'next/dynamic'
 
+import { ANALYTICS_NAME_USER_ACTION_FORM_SHARE_ON_TWITTER } from '@/components/app/userActionFormShareOnTwitter/constants'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { useDialog } from '@/hooks/useDialog'
@@ -19,8 +20,6 @@ const UserActionFormShareOnTwitter = dynamic(
     ),
   },
 )
-
-export const ANALYTICS_NAME_USER_ACTION_FORM_SHARE_ON_TWITTER = 'User Action Form Share on Twitter'
 
 export function UserActionFormShareOnTwitterDialog({
   children,
