@@ -51,7 +51,7 @@ function checkIfErrorIsCausedByOutlook(error: any, isFromNewsletter: boolean) {
     const exception = error.exception.values[0]
     if (
       exception.type === 'UnhandledRejection' &&
-      exception.value.includes(OUTLOOK_BOT_ERROR_MESSAGE)
+      exception.value?.includes(OUTLOOK_BOT_ERROR_MESSAGE)
     ) {
       return true
     }
