@@ -68,7 +68,7 @@ describe('action - voter registration without signin', () => {
   })
 })
 
-describe.only('action - voter registration with signin', () => {
+describe('action - voter registration with signin', () => {
   it('action - voter registration - Yes flow signing in afterwards', () => {
     cy.visit('/')
 
