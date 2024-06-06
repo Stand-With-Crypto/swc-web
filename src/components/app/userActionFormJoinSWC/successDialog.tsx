@@ -2,11 +2,10 @@
 
 import dynamic from 'next/dynamic'
 
+import { UserActionFormSuccessScreenFeedback } from '@/components/app/userActionFormSuccessScreen/UserActionFormSuccessScreenFeedback'
 import { UserActionFormSuccessScreenNextActionSkeleton } from '@/components/app/userActionFormSuccessScreen/userActionFormSuccessScreenNextAction'
 import { Dialog, DialogContent, DialogProps } from '@/components/ui/dialog'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
-import { LoadingOverlay } from '@/components/ui/loadingOverlay'
-import { Portal } from '@/components/ui/portal'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
 import { useSession } from '@/hooks/useSession'
@@ -18,13 +17,7 @@ const UserActionFormJoinSWCSuccess = dynamic(
       module => module.UserActionFormJoinSWCSuccess,
     ),
   {
-    loading: () => (
-      <Portal>
-        <div className="min-h-[400px]">
-          <LoadingOverlay />
-        </div>
-      </Portal>
-    ),
+    loading: () => <UserActionFormSuccessScreenFeedback.Skeleton />,
   },
 )
 
