@@ -37,10 +37,10 @@ it('action - mint your supporter NFT', () => {
   cy.contains(/Finish your profile|Create an account. Get an NFT./g).should('be.visible')
 
   // type first name
-  cy.get('input[placeholder="First name"').type(mockRandomUser.firstName)
+  cy.get('input[placeholder="First name"').should('exist').type(mockRandomUser.firstName)
 
   // type last name
-  cy.get('input[placeholder="Last name"').type(mockRandomUser.lastName)
+  cy.get('input[placeholder="Last name"').should('exist').type(mockRandomUser.lastName)
 
   // type address
   cy.selectFromComboBox({

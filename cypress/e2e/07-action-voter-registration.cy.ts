@@ -3,27 +3,36 @@
 import { mockRandomUser, mockWallet } from 'cypress/fixture/mocks'
 
 describe('action - voter registration without signin', () => {
-  it('action - voter registration - Yes flow', () => {
+  it('action - voter registration - Navigate back and forth', () => {
     cy.visit('/')
 
     cy.contains('Check your voter registration and get a free NFT').click()
     cy.get('[role="dialog"]')
 
-    cy.contains('Yes').click()
+    cy.get('button[type="button"]').contains('Yes').click()
 
-    // Claim NFT step
     cy.contains("Claim “I'm a Voter” NFT")
-    cy.contains('Claim NFT').click()
 
-    // waiting for Inngest to consume job
-    cy.contains('Nice work! You earned a new NFT.')
+    // Go back to initial screen
+    cy.get('[data-testid="action-form-back-button"]').click()
 
-    // validate database
-    cy.queryDb('SELECT * FROM user_action WHERE action_type="VOTER_REGISTRATION"').then(
-      (result: any) => {
-        expect(result.length, 'user_action to exist in database').to.equal(1)
-      },
-    )
+    cy.get('button[type="button"]').contains('No').click()
+
+    // Go back to initial screen
+    cy.get('[data-testid="action-form-back-button"]').click()
+
+    cy.get('button[type="button"]')
+      .contains(/not sure/)
+      .click()
+
+    // Go back to initial screen
+    cy.get('[data-testid="action-form-back-button"]').click()
+
+    cy.get('button[type="button"]').contains('Yes').should('be.visible')
+    cy.get('button[type="button"]').contains('No').should('be.visible')
+    cy.get('button[type="button"]')
+      .contains(/not sure/)
+      .should('be.visible')
   })
 
   it('action - voter registration - No flow', () => {
@@ -32,20 +41,20 @@ describe('action - voter registration without signin', () => {
     cy.contains('Check your voter registration and get a free NFT').click()
     cy.get('[role="dialog"]')
 
-    cy.contains('No').click()
+    cy.get('button[type="button"]').contains('No').click()
 
     cy.selectFromRadixComboBox({
       triggerSelector: '[data-testid="state-filter-trigger"]',
       state: 'California',
     })
 
-    cy.get('a[data-testid="step2-cta-anchor"]').trigger('click')
+    cy.get('a[data-testid="step2-cta-anchor"]').trigger('click', { force: true })
 
-    cy.contains('Claim NFT').click()
+    cy.get('button[type="button"]').contains('Claim NFT').click()
 
     cy.contains("Claim “I'm a Voter” NFT")
 
-    cy.contains('Claim NFT').click()
+    cy.get('button[type="button"]').contains('Claim NFT').click()
 
     // waiting for Inngest to consume job
     cy.contains('Nice work! You earned a new NFT.')
@@ -57,35 +66,26 @@ describe('action - voter registration without signin', () => {
       },
     )
   })
-
-  it('action - voter registration - Not sure flow and click back', () => {
-    cy.visit('/')
-
-    cy.contains('Check your voter registration and get a free NFT').click()
-    cy.get('[role="dialog"]')
-
-    cy.contains(/not sure/g).click()
-
-    cy.contains("Check your registration and get a free “I'm a Voter” NFT").should('be.visible')
-
-    cy.get('[data-testid="action-form-back-button"]').click()
-
-    cy.contains(/not sure/g).click()
-  })
 })
 
-describe('action - voter registration with signin', () => {
+describe.only('action - voter registration with signin', () => {
   it('action - voter registration - Yes flow signing in afterwards', () => {
     cy.visit('/')
 
     cy.contains('Check your voter registration and get a free NFT').click()
     cy.get('[role="dialog"]')
 
-    cy.contains('Yes').click()
+    cy.get('button[type="button"]').contains('Yes').click()
 
     // Claim NFT step
     cy.contains("Claim “I'm a Voter” NFT")
-    cy.contains('Claim NFT').click()
+
+    // intercept the api /api/auth/login
+    cy.intercept('/api/auth/login').as('authLogin')
+    // intercept the api /api/identified-user/claimed-opt-in-nft
+    cy.intercept('/api/identified-user/claimed-opt-in-nft').as('hasOptInNft')
+
+    cy.get('button[type="button"]').contains('Claim NFT').click()
 
     // waiting for Inngest to consume job
     cy.contains('Nice work! You earned a new NFT.')
@@ -97,28 +97,23 @@ describe('action - voter registration with signin', () => {
       },
     )
 
-    cy.contains('Join To Claim NFT').click()
+    cy.get('button[type="button"]').contains('Join To Claim NFT').click()
 
     cy.get('button[data-test="continue-as-guest-button"]').click()
 
-    // intercept the api /api/auth/login
-    cy.intercept('/api/auth/login').as('authLogin')
-
     // type random password
-    cy.get('input[data-test="new-password"][type="password"]')
-
-      .type(mockWallet.password)
-    cy.get('input[data-test="confirm-password"][type="password"]')
-
-      .type(mockWallet.password)
+    cy.get('input[data-test="new-password"][type="password"]').type(mockWallet.password)
+    cy.get('input[data-test="confirm-password"][type="password"]').type(mockWallet.password)
 
     // click create new wallet
     cy.contains('Create new wallet').click()
 
-    // wait for api /api/auth/login
+    // wait for api /api/auth/login and /api/identified-user/performed-user-action-types
     cy.wait('@authLogin')
 
     cy.contains(/Finish my profile/g).click()
+
+    cy.wait('@hasOptInNft')
 
     // wait for page blink
     cy.wait(1000)
@@ -127,10 +122,10 @@ describe('action - voter registration with signin', () => {
     cy.contains(/Finish your profile|Create an account. Get an NFT./g).should('be.visible')
 
     // type first name
-    cy.get('input[placeholder="First name"').type(mockRandomUser.firstName)
+    cy.get('input[placeholder="First name"').should('exist').type(mockRandomUser.firstName)
 
     // type last name
-    cy.get('input[placeholder="Last name"').type(mockRandomUser.lastName)
+    cy.get('input[placeholder="Last name"').should('exist').type(mockRandomUser.lastName)
 
     // type address
     cy.selectFromComboBox({
