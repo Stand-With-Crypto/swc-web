@@ -18,8 +18,8 @@ import './commands'
 
 // ignores ResizeObserver loop error in cypress tests
 Cypress.on('uncaught:exception', err => {
-  // Ignore ResizeObserver loop error
   if (err.message.includes('ResizeObserver loop completed with undelivered notifications')) {
+    console.log('ResizeObserver loop error ignored')
     return false
   }
 
