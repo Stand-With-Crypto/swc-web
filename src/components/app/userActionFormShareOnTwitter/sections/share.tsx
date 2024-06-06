@@ -27,18 +27,16 @@ export function ShareOnX(props: ShareOnXProps) {
           </p>
 
           <ul className="space-y-2">
-            <li className="flex items-center gap-4">
-              <Check size={20} />
-              <span>Help influence policymakers and decision-makers</span>
-            </li>
-            <li className="flex items-center gap-4">
-              <Check size={20} />
-              Stay informed about the latest updates and initiatives
-            </li>
-            <li className="flex items-center gap-4">
-              <Check size={20} />
-              <span>Join a community of like-minded individuals</span>
-            </li>
+            {[
+              'Help influence policymakers and decision-makers',
+              'Stay informed about the latest updates and initiatives',
+              'Join a community of like-minded individuals',
+            ].map(info => (
+              <li className="flex items-center gap-4" key={info}>
+                <Check size={20} />
+                <span>{info}</span>
+              </li>
+            ))}
           </ul>
         </div>
 

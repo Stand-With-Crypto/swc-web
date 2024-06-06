@@ -24,7 +24,7 @@ export function UserActionFormJoinSWCDialog(props: UserActionFormJoinSWCDialogPr
 
   return (
     <>
-      <LoginDialogWrapper onLogin={() => dialogProps.onOpenChange(true)}>
+      <LoginDialogWrapper onLoginSuccess={() => dialogProps.onOpenChange(true)}>
         {children}
       </LoginDialogWrapper>
 

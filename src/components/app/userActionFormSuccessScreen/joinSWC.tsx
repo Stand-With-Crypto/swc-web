@@ -1,5 +1,3 @@
-'use client'
-
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { UserActionFormSuccessScreenFeedback } from '@/components/app/userActionFormSuccessScreen/UserActionFormSuccessScreenFeedback'
 import { Button } from '@/components/ui/button'
