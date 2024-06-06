@@ -41,9 +41,10 @@ export const USER_ACTION_ROW_CTA_INFO: Record<
     actionType: UserActionType.VOTER_REGISTRATION,
     image: {
       src: '/actionTypeIcons/registerToVote.png',
-      fill: true,
-      width: undefined,
-      height: undefined,
+      width: 80,
+      height: 80,
+      sizes: '(max-width: 768px) 80px, 100px',
+      className: 'object-cover w-full h-full',
     },
     text: 'Check your voter registration and get a free NFT',
     subtext:
@@ -95,7 +96,13 @@ export const USER_ACTION_ROW_CTA_INFO: Record<
   },
   [UserActionType.TWEET]: {
     actionType: UserActionType.TWEET,
-    image: { src: '/actionTypeIcons/tweet.png' },
+    image: {
+      src: '/actionTypeIcons/share.svg',
+      width: 40,
+      height: 40,
+      sizes: '(max-width: 768px) 40px, 50px',
+      className: 'object-cover lg:h-[50px] lg:w-[50px]',
+    },
     text: 'Spread the word on X',
     subtext: 'Tweet #StandWithCrypto and help bring more advocates to the cause.',
     shortText: 'Share on X',

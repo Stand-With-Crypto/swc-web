@@ -10,14 +10,14 @@ export const UserActionFormVoterRegistrationSuccess = () => {
   return (
     <UserActionFormSuccessScreenFeedback
       image={
-        <div className="relative h-[180px] w-[345px] overflow-hidden rounded-xl">
-          <NextImage
-            alt={I_AM_A_VOTER_NFT_IMAGE.alt}
-            fill
-            objectFit="cover"
-            src="/actionTypeIcons/registerToVote.png"
-          />
-        </div>
+        <NextImage
+          alt={I_AM_A_VOTER_NFT_IMAGE.alt}
+          className="h-[180px] overflow-hidden rounded-xl object-cover "
+          height={180}
+          sizes="345px"
+          src="/actionTypeIcons/registerToVote.png"
+          width={345}
+        />
       }
       {...USER_ACTION_FORM_SUCCESS_SCREEN_INFO.VOTER_REGISTRATION}
     />

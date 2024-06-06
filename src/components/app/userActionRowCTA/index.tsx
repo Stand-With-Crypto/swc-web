@@ -79,7 +79,7 @@ export const UserActionRowCTAButton = React.forwardRef<
       >
         <div className="flex flex-1 items-center gap-4">
           {state !== 'hidden' && <div className="flex-shrink-0">{getStateUI()}</div>}
-          <div className="relative flex h-[80px] w-[80px] flex-shrink-0 items-center justify-center overflow-hidden rounded-xl bg-black lg:h-[100px] lg:w-[100px]">
+          <div className="flex h-[80px] w-[80px] flex-shrink-0 items-center justify-center overflow-hidden rounded-xl bg-black lg:h-[100px] lg:w-[100px]">
             <NextImage
               alt={shortText}
               className="object-cover lg:h-[80px] lg:w-[80px]"
@@ -89,23 +89,17 @@ export const UserActionRowCTAButton = React.forwardRef<
               {...image}
             />
           </div>
-          <div
-            // Show on Mobile
-            className="sm:hidden"
-          >
+          <div className="block sm:hidden">
             <div className="mb-1 text-base font-bold lg:text-2xl">{shortText}</div>
             <div className="text-sm text-gray-500 lg:text-xl">{shortSubtext}</div>
           </div>
-          <div
-            // Show on Desktop
-            className="max-sm:hidden"
-          >
+          <div className="hidden sm:block">
             <div className="mb-1 text-base font-bold lg:text-2xl">{text}</div>
             <div className="text-sm text-gray-500 lg:text-xl">{subtext}</div>
           </div>
         </div>
         {canBeActionedOn ? (
-          <div className="max-sm:hidden">
+          <div className="hidden sm:block">
             <ChevronRight className="h-6 w-6 lg:h-8 lg:w-8" />
           </div>
         ) : null}

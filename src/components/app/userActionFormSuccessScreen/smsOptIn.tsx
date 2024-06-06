@@ -6,7 +6,7 @@ interface SMSOptInContentProps extends Omit<SMSOptInFormProps, 'children'> {}
 
 export function SMSOptInContent(props: SMSOptInContentProps) {
   return (
-    <div className="mx-auto flex h-full max-w-[60ch] flex-col items-center gap-6 text-center">
+    <div className="mx-auto flex h-full max-w-lg flex-col items-center gap-6 text-center">
       <UserActionFormSuccessScreenFeedback
         description="This is an important year for crypto. Sign up for occasional text updates on important legislation, elections, and events in your area."
         title="Nice work!"
