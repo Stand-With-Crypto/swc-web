@@ -16,7 +16,7 @@ export const UserActionFormJoinSWCSuccess = () => {
 
   return (
     <UserActionFormSuccessScreenFeedback
-      Image={
+      image={
         <Video
           className={'h-[245px] w-[300px] overflow-hidden rounded-xl object-cover sm:w-[345px]'}
           fallback={imageFallback}

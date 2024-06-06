@@ -54,13 +54,13 @@ export function UserActionFormTweetAtPerson({ slug }: UserActionFormTweetAtPerso
       return (
         <UserActionFormSuccessScreen onClose={() => {}}>
           <UserActionFormSuccessScreenFeedback
-            Image={
+            description={NFT_CLIENT_METADATA[NFTSlug.PIZZA_DAY_2024_05_22].description}
+            image={
               <NextImage
                 src={NFT_CLIENT_METADATA[NFTSlug.PIZZA_DAY_2024_05_22].image.url}
                 {...NFT_CLIENT_METADATA[NFTSlug.PIZZA_DAY_2024_05_22].image}
               />
             }
-            description={NFT_CLIENT_METADATA[NFTSlug.PIZZA_DAY_2024_05_22].description}
             title={NFT_CLIENT_METADATA[NFTSlug.PIZZA_DAY_2024_05_22].name}
           />
         </UserActionFormSuccessScreen>

@@ -6,7 +6,7 @@ import { PageTitle } from '@/components/ui/pageTitleText'
 import { Skeleton } from '@/components/ui/skeleton'
 
 export interface UserActionFormSuccessScreenFeedbackProps {
-  Image?: ReactNode
+  image?: ReactNode
   title: ReactNode
   description: ReactNode
 }
@@ -14,11 +14,11 @@ export interface UserActionFormSuccessScreenFeedbackProps {
 export function UserActionFormSuccessScreenFeedback(
   props: UserActionFormSuccessScreenFeedbackProps,
 ) {
-  const { Image, title, description } = props
+  const { image, title, description } = props
 
   return (
     <div className="flex flex-col items-center justify-center gap-2">
-      <UserActionFormSuccessScreenFeedback.Image>{Image}</UserActionFormSuccessScreenFeedback.Image>
+      <UserActionFormSuccessScreenFeedback.Image>{image}</UserActionFormSuccessScreenFeedback.Image>
       <UserActionFormSuccessScreenFeedback.Title>{title}</UserActionFormSuccessScreenFeedback.Title>
       <UserActionFormSuccessScreenFeedback.Description>
         {description}

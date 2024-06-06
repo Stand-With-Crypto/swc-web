@@ -9,8 +9,8 @@ export const UserActionFormLiveEventSuccess = (props: NFTClientMetadata) => {
 
   return (
     <UserActionFormSuccessScreenFeedback
-      Image={<NextImage src={image.url} {...image} />}
       description={description}
+      image={<NextImage src={image.url} {...image} />}
       title={name}
     />
   )

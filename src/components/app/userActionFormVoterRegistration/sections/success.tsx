@@ -9,7 +9,7 @@ const I_AM_A_VOTER_NFT_IMAGE = NFT_CLIENT_METADATA[NFTSlug.I_AM_A_VOTER].image
 export const UserActionFormVoterRegistrationSuccess = () => {
   return (
     <UserActionFormSuccessScreenFeedback
-      Image={
+      image={
         <div className="relative h-[180px] w-[345px] overflow-hidden rounded-xl">
           <NextImage
             alt={I_AM_A_VOTER_NFT_IMAGE.alt}
