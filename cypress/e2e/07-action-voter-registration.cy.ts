@@ -76,7 +76,6 @@ describe('action - voter registration', () => {
 
       cy.contains("Claim “I'm a Voter” NFT")
 
-      cy.intercept('/api/auth/login').as('authLogin')
       cy.intercept('/api/identified-user/claimed-opt-in-nft').as('hasOptInNft')
 
       cy.get('button[type="button"]').contains('Claim NFT').click()
@@ -90,16 +89,7 @@ describe('action - voter registration', () => {
         },
       )
 
-      cy.get('button[type="button"]').contains('Join To Claim NFT').click()
-
-      cy.get('button[data-test="continue-as-guest-button"]').click()
-
-      cy.get('input[data-test="new-password"][type="password"]').type(mockWallet.password)
-      cy.get('input[data-test="confirm-password"][type="password"]').type(mockWallet.password)
-
-      cy.contains('Create new wallet').click()
-
-      cy.wait('@authLogin')
+      cy.waitForLogin({ trigger: cy.get('button[type="button"]').contains('Join To Claim NFT') })
 
       cy.contains(/Finish my profile/g).click()
 
