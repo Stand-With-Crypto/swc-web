@@ -28,7 +28,7 @@ export function UKDisclaimerBanner() {
   useEffect(() => {
     if (hasHydrated && showBanner) {
       setIsRendered(true)
-      setTimeout(() => setIsVisible(true), 10) // Delay to ensure rendering before adding transition class
+      setTimeout(() => setIsVisible(true), 10)
     }
   }, [hasHydrated, showBanner])
 
