@@ -9,6 +9,7 @@ import { CookieConsent } from '@/components/app/cookieConsent'
 import { Footer } from '@/components/app/footer'
 import { Navbar } from '@/components/app/navbar'
 import { OverrideGlobalLocalStorage } from '@/components/app/overrideGlobalLocalStorage'
+import { UKDisclaimerBanner } from '@/components/app/ukDisclaimerBanner/ukDisclaimerBanner'
 import { FullHeight } from '@/components/ui/fullHeight'
 import { Toaster } from '@/components/ui/sonner'
 import { ORDERED_SUPPORTED_LOCALES } from '@/intl/locales'
@@ -79,6 +80,7 @@ export default function Layout({ children, params }: PageProps & { children: Rea
         />
         <TopLevelClientLogic locale={locale}>
           <FullHeight.Container>
+            <UKDisclaimerBanner />
             <Navbar locale={locale} />
             <FullHeight.Content>{children}</FullHeight.Content>
             <Footer locale={locale} />
