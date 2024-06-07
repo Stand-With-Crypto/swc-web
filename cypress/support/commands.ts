@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
 
 import { Prisma } from '@prisma/client'
+import { mockWallet } from 'cypress/fixture/mocks'
 
 // ***********************************************
 // This example commands.ts shows you how to
@@ -109,13 +110,42 @@ Cypress.Commands.add('typeIntoInput', ({ selector, text }) => {
   cy.get(selector).should('be.visible').clear().wait(500).type(text)
 })
 
+/**
+ * This command is used to wait for the login page to load and then fill in the login form
+ * @param trigger - The trigger to click to open the login form
+ * @example cy.waitForLogin({ trigger: cy.get('button[data-test="login-button"]') })
+ * @returns void
+ */
+Cypress.Commands.add('waitForLogin', ({ trigger }) => {
+  trigger.click()
+
+  cy.wait(500)
+
+  cy.get('button[data-test="continue-as-guest-button"]').click()
+
+  cy.intercept('/api/auth/login').as('authLogin')
+
+  cy.get('input[data-test="new-password"][type="password"]')
+
+    .type(mockWallet.password)
+  cy.get('input[data-test="confirm-password"][type="password"]')
+
+    .type(mockWallet.password)
+
+  cy.contains('Create new wallet').click()
+
+  cy.wait('@authLogin')
+
+  cy.wait(500)
+})
+
 export {}
 
 declare global {
   namespace Cypress {
     interface Chainable {
       selectFromComboBox(config: {
-        trigger: Chainable<JQuery<Node>>
+        trigger: Cypress.Chainable<JQuery<HTMLElement>>
         searchText: string
         typingRequired?: boolean
       }): Chainable<void>
@@ -124,6 +154,7 @@ declare global {
       clearDb(): Chainable<void>
       seedDb(): Chainable<void>
       typeIntoInput(config: { selector: string; text: string }): Chainable<void>
+      waitForLogin(config: { trigger: Cypress.Chainable<JQuery<HTMLElement>> }): Chainable<void>
 
       //   drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
       //   dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>

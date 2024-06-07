@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { mockRandomUser, mockWallet } from 'cypress/fixture/mocks'
+import { mockRandomUser } from 'cypress/fixture/mocks'
 
 describe('action - mint your supporter NFT', () => {
   it('should go through signing in and nft minting', () => {
@@ -10,25 +10,7 @@ describe('action - mint your supporter NFT', () => {
 
     cy.get('[role="dialog"]')
 
-    cy.get('button[data-testid="signin-button"]').click()
-
-    cy.get('button[data-test="continue-as-guest-button"]').click()
-
-    cy.intercept('/api/auth/login').as('authLogin')
-
-    cy.get('input[data-test="new-password"][type="password"]')
-
-      .type(mockWallet.password)
-    cy.get('input[data-test="confirm-password"][type="password"]')
-
-      .type(mockWallet.password)
-
-    cy.contains('Create new wallet').click()
-
-    cy.wait('@authLogin')
-
-    // wait for page blink
-    cy.wait(1000)
+    cy.waitForLogin({ trigger: cy.get('button[data-testid="signin-button"]') })
 
     cy.contains(/Finish your profile|Create an account. Get an NFT./g).should('be.visible')
 
