@@ -54,31 +54,22 @@ export function UserActionFormSuccessScreen(props: UserActionFormSuccessScreenPr
   }
 
   return (
-    <ScrollArea
-      className={cn(
-        dialogContentPaddingStyles,
-        // Negative margins with the same values as the dialog padding
-        // to better display the scroll bar.
-        '-mx-6 -mb-6 overflow-auto max-md:-mt-20 md:-mt-14 lg:max-h-[75vh]',
-      )}
-    >
-      <div className={cn('flex h-full flex-col gap-6')}>
-        {children}
+    <div className={cn('flex h-full flex-col gap-6')}>
+      {children}
 
-        {isLoading || performedActionsResponse.isLoading ? (
-          <UserActionFormSuccessScreenNextActionSkeleton />
-        ) : (
-          <UserActionFormSuccessScreenNextAction
-            data={{
-              userHasEmbeddedWallet: user.hasEmbeddedWallet,
-              performedUserActionTypes:
-                performedActionsResponse.data?.performedUserActionTypes.map(
-                  action => action.actionType,
-                ) || [],
-            }}
-          />
-        )}
-      </div>
-    </ScrollArea>
+      {isLoading || performedActionsResponse.isLoading ? (
+        <UserActionFormSuccessScreenNextActionSkeleton />
+      ) : (
+        <UserActionFormSuccessScreenNextAction
+          data={{
+            userHasEmbeddedWallet: user.hasEmbeddedWallet,
+            performedUserActionTypes:
+              performedActionsResponse.data?.performedUserActionTypes.map(
+                action => action.actionType,
+              ) || [],
+          }}
+        />
+      )}
+    </div>
   )
 }

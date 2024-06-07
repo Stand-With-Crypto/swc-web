@@ -46,28 +46,21 @@ export function UserActionFormJoinSWCSuccessDialog(props: UserActionFormJoinSWCS
 
   return (
     <Dialog {...dialogProps}>
-      <DialogContent className="max-w-3xl ">
-        <ScrollArea
-          className={cn(
-            dialogContentPaddingStyles,
-            '-mx-6 -mb-6 overflow-auto max-md:-mt-20 md:-mt-14 lg:max-h-[75vh]',
-          )}
-        >
-          <div className="space-y-6">
-            <UserActionFormJoinSWCSuccess />
+      <DialogContent className="max-w-3xl">
+        <div className="space-y-6">
+          <UserActionFormJoinSWCSuccess />
 
-            {session.isLoading || !session.user || performedUserActionTypesResponse.isLoading ? (
-              <UserActionFormSuccessScreenNextActionSkeleton />
-            ) : (
-              <UserActionFormSuccessScreenNextAction
-                data={{
-                  userHasEmbeddedWallet: session.user.hasEmbeddedWallet,
-                  performedUserActionTypes: performedUserActionTypes || [],
-                }}
-              />
-            )}
-          </div>
-        </ScrollArea>
+          {session.isLoading || !session.user || performedUserActionTypesResponse.isLoading ? (
+            <UserActionFormSuccessScreenNextActionSkeleton />
+          ) : (
+            <UserActionFormSuccessScreenNextAction
+              data={{
+                userHasEmbeddedWallet: session.user.hasEmbeddedWallet,
+                performedUserActionTypes: performedUserActionTypes || [],
+              }}
+            />
+          )}
+        </div>
       </DialogContent>
     </Dialog>
   )
