@@ -29,30 +29,43 @@ import { Prisma } from '@prisma/client'
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 //
 
-Cypress.Commands.add('selectFromComboBox', ({ trigger, searchText }) => {
-  // wait for dom to be ready
+Cypress.Commands.add('selectFromComboBox', ({ trigger, searchText, typingRequired = false }) => {
+  // Wait for the DOM to be ready
   cy.wait(1000)
+
   trigger.click()
-  // wait for combo box to be fully ready
+
+  // Wait for the combo box to be fully ready
   cy.wait(1000)
-  cy.get('[cmdk-input]').then(input => {
-    // clear input and wait for results to clear before typing and selecting the new option
-    if (input.val()) {
-      return cy.get('[cmdk-input]').clear().wait(500).type(searchText)
-    }
-    return cy.get('[cmdk-input]').type(searchText)
-  })
-  // wait for items to appear
-  cy.get('[cmdk-item]')
-  // select the first item
-  cy.get('[cmdk-group-items]')
-    .children()
-    .first()
-    .click()
-    .then(el => {
-      // sometimes we need a double click to select the item
-      el?.trigger('click')
+
+  if (typingRequired) {
+    // Handle typing case
+    cy.get('[cmdk-input]').then(input => {
+      // Clear input and wait for results to clear before typing and selecting the new option
+      if (input.val()) {
+        return cy.get('[cmdk-input]').clear().wait(500).type(searchText)
+      }
+      return cy.get('[cmdk-input]').type(searchText)
     })
+
+    // Wait for items to appear
+    cy.get('[cmdk-item]')
+
+    // Select the first item
+    cy.get('[cmdk-group-items]')
+      .children()
+      .first()
+      .click()
+      .then(el => {
+        // Sometimes we need a double click to select the item
+        el?.trigger('click')
+      })
+
+    return
+  }
+
+  cy.get('[role="option"]').contains('div', searchText).as('selectOption')
+  cy.get('@selectOption').should('exist').click({ force: true })
 })
 
 Cypress.Commands.add('queryDb', (query: string) => {
@@ -92,6 +105,10 @@ Cypress.Commands.add('seedDb', () => {
   cy.exec('npm run ts --transpile-only src/bin/seed/seedLocalDb.ts')
 })
 
+Cypress.Commands.add('typeIntoInput', ({ selector, text }) => {
+  cy.get(selector).should('be.visible').clear().wait(500).type(text)
+})
+
 export {}
 
 declare global {
@@ -100,11 +117,13 @@ declare global {
       selectFromComboBox(config: {
         trigger: Chainable<JQuery<Node>>
         searchText: string
+        typingRequired?: boolean
       }): Chainable<void>
       queryDb(query: string): Chainable<any>
       executeDb(query: string): Chainable<any>
       clearDb(): Chainable<void>
       seedDb(): Chainable<void>
+      typeIntoInput(config: { selector: string; text: string }): Chainable<void>
 
       //   drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
       //   dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>

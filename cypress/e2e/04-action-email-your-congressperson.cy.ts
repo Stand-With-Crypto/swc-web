@@ -22,6 +22,7 @@ it('action - email your congressperson', () => {
   cy.selectFromComboBox({
     trigger: cy.get('input[placeholder="Your full address"]'),
     searchText: '350 Fifth Avenue New York, NY 10118',
+    typingRequired: true,
   })
   cy.get('[data-test-id="dtsi-person-associated-with-address"]')
   cy.get('textarea').type('test message')

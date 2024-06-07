@@ -16,6 +16,18 @@
 // Import commands.js using ES2015 syntax:
 import './commands'
 
+// ignores ResizeObserver loop error in cypress tests\
+// https://github.com/cypress-io/cypress/issues/8418
+Cypress.on('uncaught:exception', err => {
+  if (err.message.includes('ResizeObserver loop completed with undelivered notifications')) {
+    console.log('ResizeObserver loop error ignored')
+    return false
+  }
+
+  // Let Cypress fail the test for any other errors
+  return true
+})
+
 beforeEach(() => {
   cy.clearDb()
 })
