@@ -34,18 +34,18 @@ export function useHandlePageError({
 }
 
 // we are not sure what causes outlook users to trigger an anti-fingerprint error when accessing
-// SWC using the parsed safe link from outlook. This is a fix to prevent errors spikes
-// from showing up in Sentry and Mixpanel when new email campaigns are sent out.
+// SWC using the parsed safe link from outlook. This is fix to track the error
 // You can find more information about this issue here: https://github.com/Stand-With-Crypto/swc-web/issues/848
 const OUTLOOK_BOT_ERROR_MESSAGE = 'Non-Error promise rejection captured with value: '
 
 function checkIfErrorIsCausedByOutlook(error: any, isFromNewsletter: boolean) {
   if (!isFromNewsletter) return false
 
+  // The conditional logic below was inspired by this suggestion https://github.com/getsentry/sentry-javascript/issues/3440#issuecomment-828834651 as an attempt to try to catch the outlook error
   if (
-    error !== undefined &&
-    error?.exception !== undefined &&
-    error?.exception?.values !== undefined &&
+    typeof error !== 'undefined' &&
+    typeof error?.exception !== 'undefined' &&
+    typeof error?.exception?.values !== 'undefined' &&
     error?.exception?.values?.length === 1
   ) {
     const exception = error.exception.values[0]
