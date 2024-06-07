@@ -34,7 +34,7 @@ export function useHandlePageError({
 }
 
 // we are not sure what causes outlook users to trigger an anti-fingerprint error when accessing
-// SWC using the parsed safe link from outlook. This is fix to track the error
+// SWC using the parsed safe link from outlook. This fix was added to track the error
 // You can find more information about this issue here: https://github.com/Stand-With-Crypto/swc-web/issues/848
 const OUTLOOK_BOT_ERROR_MESSAGE = 'Non-Error promise rejection captured with value: '
 
