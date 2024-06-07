@@ -8,8 +8,6 @@ import {
   UserActionFormSuccessScreenNextAction,
   UserActionFormSuccessScreenNextActionSkeleton,
 } from '@/components/app/userActionFormSuccessScreen/userActionFormSuccessScreenNextAction'
-import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
-import { ScrollArea } from '@/components/ui/scroll-area'
 import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
 import { useSession } from '@/hooks/useSession'
 import { apiUrls } from '@/utils/shared/urls'
