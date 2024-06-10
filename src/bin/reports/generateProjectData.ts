@@ -17,6 +17,9 @@ interface GithubProjectDataResponse {
           updatedAt: string
           closedAt: string
           createdAt: string
+          repository: {
+            name: string
+          }
           assignees: {
             nodes: {
               name: string
@@ -40,6 +43,10 @@ interface GithubProjectDataResponse {
             ]
           }
         }>
+        pageInfo: {
+          hasNextPage: boolean
+          endCursor?: string
+        }
       }
     }
   }
@@ -48,9 +55,9 @@ interface GithubProjectDataResponse {
 type GithubProjectDataIssues = GithubProjectDataResponse['data']['repository']['issues']['nodes']
 
 export const GITHUB_PROJECT_DATA_QUERY = /* GraphQL */ `
-  query ($owner: String!, $name: String!) {
+  query ($owner: String!, $name: String!, $after: String) {
     repository(owner: $owner, name: $name) {
-      issues(first: 100, after: null) {
+      issues(first: 100, after: $after) {
         nodes {
           title
           state
@@ -58,6 +65,9 @@ export const GITHUB_PROJECT_DATA_QUERY = /* GraphQL */ `
           updatedAt
           closedAt
           createdAt
+          repository {
+            name
+          }
           assignees(first: 5, last: null) {
             nodes {
               name
@@ -84,17 +94,20 @@ export const GITHUB_PROJECT_DATA_QUERY = /* GraphQL */ `
             }
           }
         }
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
       }
     }
   }
 `
 
-async function generateProjectData() {
-  const variables = {
-    owner: 'Stand-With-Crypto',
-    name: 'swc-web',
-  }
-
+async function getGithubProjectData(
+  issues: GithubProjectDataIssues,
+  repositoryName: string,
+  after?: string,
+) {
   const response = await fetchReq(GITHUB_API_URL, {
     method: 'POST',
     headers: {
@@ -103,13 +116,30 @@ async function generateProjectData() {
     },
     body: JSON.stringify({
       query: GITHUB_PROJECT_DATA_QUERY,
-      variables,
+      variables: {
+        owner: 'Stand-With-Crypto',
+        name: repositoryName,
+        after,
+      },
     }),
   })
 
   const { data } = (await response.json()) as GithubProjectDataResponse
   const repository = data.repository
-  const issues = repository.issues.nodes
+  const repositoryIssues = repository?.issues
+
+  issues.push(...repositoryIssues.nodes)
+
+  if (repositoryIssues.pageInfo.hasNextPage) {
+    await getGithubProjectData(issues, repositoryName, repositoryIssues.pageInfo.endCursor)
+  }
+}
+
+async function generateProjectData() {
+  const issues: GithubProjectDataIssues = []
+
+  await getGithubProjectData(issues, 'swc-web')
+  await getGithubProjectData(issues, 'swc-internal')
 
   await generateProjectDataOverview(issues)
   await generateProjectDataByAssignee(issues)
@@ -157,6 +187,7 @@ async function generateProjectDataOverview(issues: GithubProjectDataIssues) {
           ['Effort']: item?.projectItems?.nodes?.[0]?.effort?.value ?? '---',
           ['Impact']: item?.projectItems?.nodes?.[0]?.impact?.value ?? '---',
           ['Issue Type']: item?.projectItems?.nodes?.[0]?.issueType?.value ?? '---',
+          ['Repo']: item?.repository?.name ?? '---',
           ['Url']: item.url,
           ['Created']: format(new Date(item.createdAt), 'yyyy-MM-dd'),
           ['Closed']: format(new Date(item.closedAt), 'yyyy-MM-dd'),
@@ -215,6 +246,7 @@ async function generateProjectDataByAssignee(issues: GithubProjectDataIssues) {
           ['Effort']: item?.projectItems?.nodes?.[0]?.effort?.value ?? '---',
           ['Impact']: item?.projectItems?.nodes?.[0]?.impact?.value ?? '---',
           ['Issue Type']: item?.projectItems?.nodes?.[0]?.issueType?.value ?? '---',
+          ['Repo']: item?.repository?.name ?? '---',
           ['Url']: item.url,
           ['Created']: format(new Date(item.createdAt), 'yyyy-MM-dd'),
           ['Closed']: format(new Date(item.closedAt), 'yyyy-MM-dd'),
