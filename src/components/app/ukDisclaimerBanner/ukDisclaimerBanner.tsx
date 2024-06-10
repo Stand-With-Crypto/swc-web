@@ -41,7 +41,7 @@ export function UKDisclaimerBanner() {
         <div className="container flex justify-between">
           <div className="w-full space-y-1 text-sm text-background antialiased max-sm:text-center sm:text-base">
             <p>
-              Looking for Stand With Crypto UK? Click{' '}
+              🇬🇧 Looking for Stand With Crypto UK? Click{' '}
               <strong>
                 <Link href={externalUrls.ukSWCUrl()}>here</Link>
               </strong>
