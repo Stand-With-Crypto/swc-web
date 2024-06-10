@@ -15,7 +15,6 @@ export function UKDisclaimerBanner() {
   const router = useRouter()
   const isMobile = useIsMobile()
   const [isVisible, setIsVisible] = useState(false)
-  const [isRendered, setIsRendered] = useState(false)
 
   const WrapperContainer = isMobile ? 'button' : 'div'
 
@@ -27,12 +26,11 @@ export function UKDisclaimerBanner() {
 
   useEffect(() => {
     if (hasHydrated && showBanner) {
-      setIsRendered(true)
       setTimeout(() => setIsVisible(true), 10)
     }
   }, [hasHydrated, showBanner])
 
-  return isRendered ? (
+  return hasHydrated ? (
     <div
       className={`flex w-full transition-all duration-200 ${isVisible ? 'max-h-12 opacity-100' : 'max-h-0 opacity-0'}`}
     >
