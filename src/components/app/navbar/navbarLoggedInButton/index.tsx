@@ -44,11 +44,11 @@ export function NavbarLoggedInButton({ onOpenChange }: { onOpenChange: (open: bo
         {isLoggingOut ? (
           <Button disabled>Logging out...</Button>
         ) : displayName ? (
-          <Button>
+          <Button data-testid="login-button">
             <div className="max-w-[150px] truncate">{displayName}</div>
           </Button>
         ) : (
-          <Button>Sign In</Button>
+          <Button data-testid="login-button">Sign In</Button>
         )}
       </PopoverTrigger>
       <PopoverContent align="end" className="p-0">

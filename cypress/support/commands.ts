@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
 import { Prisma } from '@prisma/client'
-import { mockWallet } from 'cypress/fixture/mocks'
+import { mockRandomUser, mockWallet } from 'cypress/fixture/mocks'
 
 // ***********************************************
 // This example commands.ts shows you how to
@@ -110,14 +110,8 @@ Cypress.Commands.add('typeIntoInput', ({ selector, text }) => {
   cy.get(selector).should('be.visible').clear().wait(500).type(text)
 })
 
-/**
- * This command is used to wait for the login page to load and then fill in the login form
- * @param trigger - The trigger to click to open the login form
- * @example cy.waitForLogin({ trigger: cy.get('button[data-test="login-button"]') })
- * @returns void
- */
-Cypress.Commands.add('waitForLogin', ({ trigger }) => {
-  trigger.click()
+Cypress.Commands.add('waitForLogin', (trigger, customWallet = mockWallet) => {
+  trigger?.click()
 
   cy.wait(500)
 
@@ -125,18 +119,74 @@ Cypress.Commands.add('waitForLogin', ({ trigger }) => {
 
   cy.intercept('/api/auth/login').as('authLogin')
 
-  cy.get('input[data-test="new-password"][type="password"]')
+  // type in password for already signed or not
+  cy.get('body')
+    .then($body => {
+      if ($body.find('input[data-test="current-password"][type="password"]').length > 0) {
+        cy.get('input[data-test="current-password"][type="password"]').type(customWallet.password)
+        cy.contains('Continue').click()
 
-    .type(mockWallet.password)
-  cy.get('input[data-test="confirm-password"][type="password"]')
+        return
+      }
 
-    .type(mockWallet.password)
+      cy.get('input[data-test="new-password"][type="password"]').type(customWallet.password)
+      cy.get('input[data-test="confirm-password"][type="password"]').type(customWallet.password)
+      cy.contains('Create new wallet').click()
+    })
+    .then(() => {
+      cy.wait('@authLogin')
+      cy.wait(500)
+    })
+})
 
-  cy.contains('Create new wallet').click()
+Cypress.Commands.add('waitForProfileCreation', (customUser = mockRandomUser) => {
+  cy.contains(/Finish your profile|Create an account. Get an NFT./g).should('be.visible')
 
-  cy.wait('@authLogin')
+  cy.typeIntoInput({
+    selector: 'input[placeholder="First name"',
+    text: customUser.firstName,
+  })
+
+  cy.typeIntoInput({
+    selector: 'input[placeholder="Last name"',
+    text: customUser.lastName,
+  })
+
+  cy.selectFromComboBox({
+    trigger: cy.get('input[placeholder="Street address"], input[placeholder="Address"]'),
+    searchText: customUser.address,
+    typingRequired: true,
+  })
+
+  cy.get('input[placeholder="Your email"], input[placeholder="Email"]')
+    .clear()
+    .type(customUser.email)
+
+  cy.get('input[data-testid="phone-number-input"]').clear().type(customUser.phoneNumber)
+
+  cy.get('button[data-testid="opt-in-checkbox"]').click()
+
+  cy.get('button[type="submit"]')
+    .contains(/Next|Create account/)
+    .scrollIntoView()
+    .click()
+
+  // selects the first option Anonymous as how the user wants to be displayed
+  cy.contains('Submit').should('be.visible').click()
 
   cy.wait(500)
+
+  cy.contains('Profile updated').should('be.visible').click()
+})
+
+Cypress.Commands.add('waitForLogout', () => {
+  cy.get('button[data-testid="drawer-trigger"]').click()
+
+  cy.wait(500)
+
+  cy.get('button[data-testid="login-button"]').filter(':visible').click()
+
+  cy.contains('Log out').click()
 })
 
 export {}
@@ -144,6 +194,12 @@ export {}
 declare global {
   namespace Cypress {
     interface Chainable {
+      /**
+       * This command is used to select an option from a combo box.
+       * The parameter typingRequired is used to determine if the user needs to type in the search input before selecting an option
+       * @param config - An object with trigger, searchText, and typingRequired
+       * @example cy.selectFromComboBox({ trigger: cy.get('input[data-test="search-input"]'), searchText: 'test', typingRequired: true })
+       */
       selectFromComboBox(config: {
         trigger: Cypress.Chainable<JQuery<HTMLElement>>
         searchText: string
@@ -153,8 +209,29 @@ declare global {
       executeDb(query: string): Chainable<any>
       clearDb(): Chainable<void>
       seedDb(): Chainable<void>
+      /**
+       * This command is used to type into an input field
+       * @param config - An object with selector and text to type into the input
+       * @example cy.typeIntoInput({ selector: 'input[data-test="email-input"]', text: 'test'})
+       */
       typeIntoInput(config: { selector: string; text: string }): Chainable<void>
-      waitForLogin(config: { trigger: Cypress.Chainable<JQuery<HTMLElement>> }): Chainable<void>
+      /**
+       * This command is used to wait for the login page to load and then fill in the login form
+       * @param trigger - optional - The trigger to click to open the login form
+       * @param customWallet - optional - The custom wallet to use for login
+       * @example cy.waitForLogin({ trigger: cy.get('button[data-test="login-button"]') })
+       * @returns void
+       */
+      waitForLogin(
+        trigger?: Cypress.Chainable<JQuery<HTMLElement>>,
+        customWallet?: typeof mockWallet,
+      ): Chainable<void>
+      waitForLogout(): Chainable<void>
+      /**
+       * This command is used to wait for the profile creation page to load and then fill in the profile form
+       * @param customUser - optional - The custom user to use for profile creation
+       */
+      waitForProfileCreation(customUser?: typeof mockRandomUser): Chainable<void>
 
       //   drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
       //   dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>

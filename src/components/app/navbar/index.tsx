@@ -122,7 +122,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
           </div>
         </div>
         <Drawer {...dialogProps} direction="top">
-          <DrawerTrigger asChild>
+          <DrawerTrigger asChild data-testid="drawer-trigger">
             <button className="p-3 lg:hidden">
               <span className="sr-only">Open navigation menu</span>
               <Menu />
