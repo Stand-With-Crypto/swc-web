@@ -1,4 +1,4 @@
-import { differenceInDays, differenceInHours, differenceInMinutes, format } from 'date-fns'
+import { format } from 'date-fns'
 import { debounce } from 'lodash-es'
 import path from 'path'
 import xlsx from 'xlsx'
@@ -130,11 +130,9 @@ async function generateProjectData() {
   await getGithubCommitData(commits, 'swc-web')
   await getGithubCommitData(commits, 'swc-internal')
 
-  console.log(commits.length)
+  await generateCommitReportByPerson(commits)
 
-  // await generateCommitReportByPerson(commits)
-
-  // console.log('Generated commit report by person successfully!')
+  console.log('Generated commit report by person successfully!')
 }
 
 void runBin(generateProjectData)
