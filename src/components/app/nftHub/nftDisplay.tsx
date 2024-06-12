@@ -3,7 +3,7 @@ import { UserActionType } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 
 import { SensitiveDataClientUserAction } from '@/clientModels/clientUserAction/sensitiveDataClientUserAction'
-import { USER_ACTION_ROW_CTA_INFO } from '@/components/app/userActionRowCTA/constants'
+import { getUserActionCTAInfo } from '@/components/app/userActionRowCTA/constants'
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { NFTSlug } from '@/utils/shared/nft'
@@ -21,7 +21,9 @@ type NFTImages = {
   key: string
 }
 
-const ButtonWrapper = USER_ACTION_ROW_CTA_INFO[UserActionType.NFT_MINT].WrapperComponent
+const CTAInfo = getUserActionCTAInfo(UserActionType.NFT_MINT)
+
+const ButtonWrapper = CTAInfo?.WrapperComponent
 
 export function NFTDisplay({ userActions }: NFTDisplayProps) {
   let optInNftButton = true
@@ -88,9 +90,11 @@ export function NFTDisplay({ userActions }: NFTDisplayProps) {
       </div>
       {optInNftButton ?? (
         <div className="m-4 flex justify-center">
-          <ButtonWrapper>
-            <Button>Mint Stand With Crypto Supporter NFT</Button>
-          </ButtonWrapper>
+          {ButtonWrapper !== undefined ? (
+            <ButtonWrapper>
+              <Button>Mint Stand With Crypto Supporter NFT</Button>
+            </ButtonWrapper>
+          ) : null}
         </div>
       )}
     </>

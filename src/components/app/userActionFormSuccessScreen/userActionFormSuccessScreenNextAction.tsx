@@ -6,7 +6,7 @@ import {
   UserActionRowCTAButton,
   UserActionRowCTAButtonSkeleton,
 } from '@/components/app/userActionRowCTA'
-import { USER_ACTION_ROW_CTA_INFO } from '@/components/app/userActionRowCTA/constants'
+import { getUserActionCTAInfo } from '@/components/app/userActionRowCTA/constants'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useLocale } from '@/hooks/useLocale'
 import {
@@ -39,6 +39,11 @@ export function UserActionFormSuccessScreenNextAction({
   if (!nextAction) {
     return null
   }
+
+  const CTAInfo = getUserActionCTAInfo(nextAction.actionType)
+
+  if (!CTAInfo) return null
+
   return (
     <div className="mt-8">
       <div className="mb-2 font-bold">Up next</div>
@@ -63,7 +68,7 @@ export function UserActionFormSuccessScreenNextAction({
         <UserActionRowCTA
           state="hidden"
           {...nextAction}
-          WrapperComponent={USER_ACTION_ROW_CTA_INFO[nextAction.actionType].WrapperComponent}
+          WrapperComponent={CTAInfo.WrapperComponent}
         />
       )}
     </div>

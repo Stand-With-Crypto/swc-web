@@ -46,6 +46,17 @@ export enum UserActionTweetAtPersonCampaignName {
   '2024_05_22_PIZZA_DAY' = '2024_05_22_PIZZA_DAY',
 }
 
+export type UserActionCampaigns =
+  | UserActionEmailCampaignName
+  | UserActionCallCampaignName
+  | UserActionDonationCampaignName
+  | UserActionOptInCampaignName
+  | UserActionTweetCampaignName
+  | UserActionNftMintCampaignName
+  | UserActionVoterRegistrationCampaignName
+  | UserActionLiveEventCampaignName
+  | UserActionTweetAtPersonCampaignName
+
 export const USER_ACTION_TO_CAMPAIGN_NAME_MAP = {
   [UserActionType.EMAIL]: UserActionEmailCampaignName,
   [UserActionType.CALL]: UserActionCallCampaignName,
@@ -69,3 +80,11 @@ export const USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
   [UserActionType.LIVE_EVENT]: UserActionLiveEventCampaignName['2024_03_04_LA'],
   [UserActionType.TWEET_AT_PERSON]: UserActionTweetAtPersonCampaignName.DEFAULT,
 } satisfies Record<ActiveClientUserActionWithCampaignType, string>
+
+type UserActionAdditionalCampaigns = {
+  [key in UserActionType]: string[]
+}
+
+export const USER_ACTIONS_WITH_ADDITIONAL_CAMPAIGN: Partial<UserActionAdditionalCampaigns> = {
+  [UserActionType.EMAIL]: [UserActionEmailCampaignName.DEFAULT], // This will be changed to CNN campaign later
+}
