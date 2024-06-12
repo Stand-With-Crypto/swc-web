@@ -324,6 +324,7 @@ model UserActionEmailRecipient {
   id                String          @id @default(uuid())
   userActionEmailId String          @map("user_action_email_id")
   userActionEmail   UserActionEmail @relation(fields: [userActionEmailId], references: [id])
+  emailAddress      String?         @map("email_address")
   // unfortunately some of our legacy data doesn't include this info so it needs to be optional
   dtsiSlug          String?         @map("dtsi_slug")
 
