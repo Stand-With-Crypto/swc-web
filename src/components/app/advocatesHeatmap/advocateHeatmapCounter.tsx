@@ -43,7 +43,7 @@ export function AdvocateHeatmapCounter({
   }, [values, locale])
 
   return (
-    <div className="flex-shrink-0 rounded-3xl bg-secondary p-6 text-center md:w-1/2">
+    <div className="flex-shrink-0 rounded-3xl bg-secondary px-0 py-4 text-center md:w-1/2 md:p-6 md:py-6">
       <AnimatedNumericOdometer
         className={odometerStyles.odometerSatoshi}
         size={76}
