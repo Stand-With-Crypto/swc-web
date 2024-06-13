@@ -89,7 +89,7 @@ describe('action - voter registration', () => {
         },
       )
 
-      cy.waitForLogin({ trigger: cy.get('button[type="button"]').contains('Join To Claim NFT') })
+      cy.waitForLogin(cy.get('button[type="button"]').contains('Join To Claim NFT'))
 
       cy.contains(/Finish my profile/g).click()
 

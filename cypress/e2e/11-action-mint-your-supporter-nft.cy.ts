@@ -10,7 +10,7 @@ describe('action - mint your supporter NFT', () => {
 
     cy.get('[role="dialog"]')
 
-    cy.waitForLogin({ trigger: cy.get('button[data-testid="signin-button"]') })
+    cy.waitForLogin(cy.get('button[data-testid="signin-button"]'))
 
     cy.contains(/Finish your profile|Create an account. Get an NFT./g).should('be.visible')
 
