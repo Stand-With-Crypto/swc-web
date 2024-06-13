@@ -3,7 +3,7 @@ export function PagePrivacyPolicy() {
     <article className="prose max-w-full">
       <h1>Stand With Crypto Alliance, Inc.: Privacy Policy</h1>
 
-      <p>Effective Date: April 30th, 2023</p>
+      <p>Effective Date: April 30th, 2024</p>
 
       <p>
         Your privacy is important to us. This Privacy Policy describes the types of information that
