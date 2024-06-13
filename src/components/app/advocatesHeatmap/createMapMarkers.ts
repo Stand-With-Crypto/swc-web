@@ -34,7 +34,7 @@ export const createMarkersFromActions = (recentActivity: PublicRecentActivity) =
 
 export const createMarkersFromTopAdvocateStates = (advocatesMapData: AdvocatePerState[]) => {
   return advocatesMapData.map<MapMarker>(({ state }) => {
-    const coordinates = STATE_COORDS[state as keyof typeof STATE_COORDS]
+    const coordinates = STATE_COORDS[state as keyof typeof STATE_COORDS] ?? [0, 0]
 
     return { name: state, coordinates }
   })

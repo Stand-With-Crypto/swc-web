@@ -9,7 +9,7 @@ export async function getAdvocatesMapData(topStatesLimit = 5) {
     totalAdvocatesPerState.length > 0
       ? totalAdvocatesPerState
           .sort((a, b) => b.totalAdvocates - a.totalAdvocates)
-          .slice(0, topStatesLimit)
+          .slice(0, Math.max(0, Math.min(topStatesLimit, totalAdvocatesPerState.length)))
       : []
 
   return {

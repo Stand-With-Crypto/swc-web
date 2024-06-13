@@ -49,6 +49,7 @@ export const STATE_COORDS: Record<string, [number, number]> = {
   WV: [-80.9545, 38.4912],
   WI: [-89.6165, 44.2685],
   WY: [-107.3025, 42.756],
+  DC: [-77.026, 38.8964],
 }
 
 export const ADVOCATES_HEATMAP_GEO_URL = '/advocatesHeatmap/states-10m.json'
