@@ -5,9 +5,12 @@ import { getTotalAdvocatesPerState } from '@/data/aggregations/getTotalAdvocates
 export async function getAdvocatesMapData(topStatesLimit = 5) {
   const [totalAdvocatesPerState] = await Promise.all([getTotalAdvocatesPerState()])
 
-  const topAdvocateStates = totalAdvocatesPerState
-    .sort((a, b) => b.totalAdvocates - a.totalAdvocates)
-    .slice(0, topStatesLimit)
+  const topAdvocateStates =
+    totalAdvocatesPerState.length > 0
+      ? totalAdvocatesPerState
+          .sort((a, b) => b.totalAdvocates - a.totalAdvocates)
+          .slice(0, topStatesLimit)
+      : []
 
   return {
     advocatesMapData: {
