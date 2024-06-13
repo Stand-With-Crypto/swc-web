@@ -10,7 +10,7 @@ export const dynamic = 'error'
 export const revalidate = SECONDS_DURATION['30_SECONDS']
 
 const zodParams = z.object({
-  topStatesLimit: z.string().pipe(z.coerce.number().int().gte(0).lt(11)),
+  topStatesLimit: z.string().pipe(z.coerce.number().int().gt(0)),
 })
 
 export async function GET(
