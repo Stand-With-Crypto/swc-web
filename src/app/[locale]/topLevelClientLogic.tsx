@@ -1,4 +1,5 @@
 'use client'
+
 import { Suspense, useEffect } from 'react'
 import * as Sentry from '@sentry/nextjs'
 import { Base } from '@thirdweb-dev/chains'

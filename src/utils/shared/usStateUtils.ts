@@ -74,3 +74,12 @@ export const getUSStateNameFromStateCode = (stateCode: string) => {
   }
   return stateCode
 }
+
+export const getUSStateCodeFromStateName = (stateName: string) => {
+  const stateCode = Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP).find(
+    key =>
+      US_STATE_CODE_TO_DISPLAY_NAME_MAP[key as keyof typeof US_STATE_CODE_TO_DISPLAY_NAME_MAP] ===
+      stateName,
+  )
+  return stateCode as USStateCode | undefined
+}
