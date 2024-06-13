@@ -177,5 +177,5 @@ async function generateCommitReportByPerson(commits: Commit[]) {
     xlsx.utils.book_append_sheet(workbook, worksheet, `${author} - ${_commits.length} commits`)
   })
 
-  await xlsx.writeFile(workbook, path.join(__dirname, 'commitsReportByPerson.xlsx'))
+  await xlsx.writeFile(workbook, './src/bin/localCache/commitsReportByPerson.xlsx')
 }

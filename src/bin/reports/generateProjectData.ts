@@ -7,42 +7,43 @@ import { fetchReq } from '@/utils/shared/fetchReq'
 
 const GITHUB_API_URL = 'https://api.github.com/graphql'
 
+interface GithubProjectDataIssueNode {
+  state: string
+  url: string
+  updatedAt: string
+  closedAt: string
+  createdAt: string
+  repository: {
+    name: string
+  }
+  assignees: {
+    nodes: {
+      name: string
+      login: string
+    }[]
+  }
+  title: string
+  projectItems?: {
+    nodes?: [
+      {
+        effort?: {
+          value: string
+        }
+        impact?: {
+          value: string
+        }
+        issueType?: {
+          value: string
+        }
+      },
+    ]
+  }
+}
 interface GithubProjectDataResponse {
   data: {
     repository: {
-      issues: {
-        nodes: Array<{
-          state: string
-          url: string
-          updatedAt: string
-          closedAt: string
-          createdAt: string
-          repository: {
-            name: string
-          }
-          assignees: {
-            nodes: {
-              name: string
-              login: string
-            }[]
-          }
-          title: string
-          projectItems?: {
-            nodes?: [
-              {
-                effort?: {
-                  value: string
-                }
-                impact?: {
-                  value: string
-                }
-                issueType?: {
-                  value: string
-                }
-              },
-            ]
-          }
-        }>
+      issues?: {
+        nodes: Array<GithubProjectDataIssueNode>
         pageInfo: {
           hasNextPage: boolean
           endCursor?: string
@@ -51,8 +52,6 @@ interface GithubProjectDataResponse {
     }
   }
 }
-
-type GithubProjectDataIssues = GithubProjectDataResponse['data']['repository']['issues']['nodes']
 
 export const GITHUB_PROJECT_DATA_QUERY = /* GraphQL */ `
   query ($owner: String!, $name: String!, $after: String) {
@@ -104,7 +103,7 @@ export const GITHUB_PROJECT_DATA_QUERY = /* GraphQL */ `
 `
 
 async function getGithubProjectData(
-  issues: GithubProjectDataIssues,
+  issues: GithubProjectDataIssueNode[],
   repositoryName: string,
   after?: string,
 ) {
@@ -127,16 +126,18 @@ async function getGithubProjectData(
   const { data } = (await response.json()) as GithubProjectDataResponse
   const repository = data.repository
   const repositoryIssues = repository?.issues
+  console.log(repositoryIssues)
+  if (repositoryIssues) {
+    issues.push(...repositoryIssues.nodes)
 
-  issues.push(...repositoryIssues.nodes)
-
-  if (repositoryIssues.pageInfo.hasNextPage) {
-    await getGithubProjectData(issues, repositoryName, repositoryIssues.pageInfo.endCursor)
+    if (repositoryIssues.pageInfo.hasNextPage) {
+      await getGithubProjectData(issues, repositoryName, repositoryIssues.pageInfo.endCursor)
+    }
   }
 }
 
 async function generateProjectData() {
-  const issues: GithubProjectDataIssues = []
+  const issues: GithubProjectDataIssueNode[] = []
 
   await getGithubProjectData(issues, 'swc-web')
   await getGithubProjectData(issues, 'swc-internal')
@@ -147,7 +148,7 @@ async function generateProjectData() {
 
 void runBin(generateProjectData)
 
-async function generateProjectDataOverview(issues: GithubProjectDataIssues) {
+async function generateProjectDataOverview(issues: GithubProjectDataIssueNode[]) {
   const workbook = xlsx.utils.book_new()
 
   const closedIssues = issues.filter(issue => issue.state === 'CLOSED')
@@ -163,7 +164,7 @@ async function generateProjectDataOverview(issues: GithubProjectDataIssues) {
 
       return acc
     },
-    {} as Record<string, GithubProjectDataIssues>,
+    {} as Record<string, GithubProjectDataIssueNode[]>,
   )
   const closedIssuesByMonthOrderedDesc = Object.entries(closedIssuesByMonth).sort(([a], [b]) => {
     return new Date(b).getTime() - new Date(a).getTime()
@@ -171,7 +172,7 @@ async function generateProjectDataOverview(issues: GithubProjectDataIssues) {
 
   closedIssuesByMonthOrderedDesc.forEach(([month, _issues]) => {
     const worksheet = xlsx.utils.json_to_sheet(
-      _issues.map((item: GithubProjectDataIssues[0]) => {
+      _issues.map((item: GithubProjectDataIssueNode) => {
         const days = differenceInDays(new Date(item.closedAt), new Date(item.createdAt))
         const hours = differenceInHours(new Date(item.closedAt), new Date(item.createdAt)) % 24
         const minutes = differenceInMinutes(new Date(item.closedAt), new Date(item.createdAt)) % 60
@@ -200,10 +201,10 @@ async function generateProjectDataOverview(issues: GithubProjectDataIssues) {
     xlsx.utils.book_append_sheet(workbook, worksheet, month)
   })
 
-  await xlsx.writeFile(workbook, path.join(__dirname, 'projectReportByMonth.xlsx'))
+  await xlsx.writeFile(workbook, './src/bin/localCache/projectReportByMonth.xlsx')
 }
 
-async function generateProjectDataByAssignee(issues: GithubProjectDataIssues) {
+async function generateProjectDataByAssignee(issues: GithubProjectDataIssueNode[]) {
   const workbook = xlsx.utils.book_new()
 
   const closedIssues = issues.filter(issue => issue.state === 'CLOSED')
@@ -221,7 +222,7 @@ async function generateProjectDataByAssignee(issues: GithubProjectDataIssues) {
 
       return acc
     },
-    {} as Record<string, GithubProjectDataResponse['data']['repository']['issues']['nodes']>,
+    {} as Record<string, GithubProjectDataIssueNode[]>,
   )
 
   Object.entries(issuesByAssignee).forEach(([assignee, _issues]) => {
@@ -230,7 +231,7 @@ async function generateProjectDataByAssignee(issues: GithubProjectDataIssues) {
     })
 
     const worksheet = xlsx.utils.json_to_sheet(
-      issuesOrderedDesc.map((item: GithubProjectDataIssues[0]) => {
+      issuesOrderedDesc.map((item: GithubProjectDataIssueNode) => {
         const days = differenceInDays(new Date(item.closedAt), new Date(item.createdAt))
         const hours = differenceInHours(new Date(item.closedAt), new Date(item.createdAt)) % 24
         const minutes = differenceInMinutes(new Date(item.closedAt), new Date(item.createdAt)) % 60
@@ -258,6 +259,5 @@ async function generateProjectDataByAssignee(issues: GithubProjectDataIssues) {
 
     xlsx.utils.book_append_sheet(workbook, worksheet, assignee)
   })
-
-  await xlsx.writeFile(workbook, path.join(__dirname, 'projectReportByAssignee.xlsx'))
+  await xlsx.writeFile(workbook, './src/bin/localCache/projectReportByAssignee.xlsx')
 }
