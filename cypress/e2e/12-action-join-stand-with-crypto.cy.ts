@@ -24,7 +24,7 @@ describe('action - join stand with crypto', () => {
     // wait for content to show up
     cy.wait(500)
 
-    // assets that join with crypto is done and not clickable
+    // asserts that join with crypto is done and not clickable
     cy.contains('Join Stand With Crypto').should('exist').should('not.be.enabled')
   })
 })
