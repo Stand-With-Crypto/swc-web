@@ -10,7 +10,7 @@ import { z } from 'zod'
 import { actionCreateUserActionEmailCNN } from '@/actions/actionCreateUserActionEmailCNN'
 import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
 import { ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CNN } from '@/components/app/userActionFormEmailCNN/constants'
-import { FormFields } from '@/components/app/userActionFormEmailCongressperson/types'
+import { FormFields } from '@/components/app/userActionFormEmailCNN/types'
 import { Button } from '@/components/ui/button'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import {
