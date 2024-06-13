@@ -4,5 +4,6 @@ export type FormFields = {
     place_id: string
   }
   email: string
-  fullName: string
+  firstName: string
+  lastName: string
 }
