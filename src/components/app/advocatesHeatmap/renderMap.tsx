@@ -1,6 +1,6 @@
 'use client'
 
-import { MouseEvent, useCallback, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { ComposableMap, Geographies, Geography, Marker } from 'react-simple-maps'
 
 import { TotalAdvocatesPerStateTooltip } from '@/components/app/advocatesHeatmap/advocatesHeatmapTooltip'
@@ -21,25 +21,14 @@ export function RenderMap({
   topStateMarkers,
   getTotalAdvocatesPerState,
 }: RenderMapProps) {
-  const [hoveredState, setHoveredState] = useState<{
-    name: string
-    mousePosition: { x: number; y: number }
-  } | null>(null)
+  const [hoveredStateName, setHoveredStateName] = useState<string | null>(null)
 
-  const handleMouseMove = useCallback(
-    (geo: any, event: MouseEvent<SVGPathElement, globalThis.MouseEvent>) => {
-      const { clientX, clientY } = event
+  const handleStateMouseHover = useCallback((geo: any) => {
+    setHoveredStateName(geo.properties.name)
+  }, [])
 
-      setHoveredState({
-        name: geo.properties.name,
-        mousePosition: { x: clientX, y: clientY },
-      })
-    },
-    [],
-  )
-
-  const handleMouseOut = useCallback(() => {
-    setHoveredState(null)
+  const handleStateMouseOut = useCallback(() => {
+    setHoveredStateName(null)
   }, [])
 
   return (
@@ -55,8 +44,8 @@ export function RenderMap({
                       cursor="pointer"
                       geography={geo}
                       key={geo.rsmKey}
-                      onMouseMove={evt => handleMouseMove(geo, evt)}
-                      onMouseOut={handleMouseOut}
+                      onMouseMove={() => handleStateMouseHover(geo)}
+                      onMouseOut={handleStateMouseOut}
                       stroke="#FFF"
                       style={{
                         default: {
@@ -93,7 +82,7 @@ export function RenderMap({
                   )
                 })}
                 {topStateMarkers.map(({ name, coordinates }) => {
-                  const isCurrentStateBeingHovered = hoveredState?.name === name
+                  const isCurrentStateBeingHovered = hoveredStateName === name
 
                   return (
                     <Marker
@@ -122,8 +111,8 @@ export function RenderMap({
         </Geographies>
       </ComposableMap>
       <TotalAdvocatesPerStateTooltip
+        currentState={hoveredStateName}
         getTotalAdvocatesPerState={getTotalAdvocatesPerState}
-        hoveredState={hoveredState}
         locale={locale}
       />
     </>
