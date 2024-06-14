@@ -686,9 +686,9 @@ async function triggerPostLoginUserActionSteps({
         userId: user.id,
       },
     })
-
-    console.log({ result })
-    log(`triggerPostLoginUserActionSteps: initial signup communication journey triggered`)
+    log(
+      `triggerPostLoginUserActionSteps: initial signup communication journey triggered with inngest id: ${result.ids[0]}`,
+    )
   } else {
     log(`triggerPostLoginUserActionSteps: opt in user action previously existed`)
   }

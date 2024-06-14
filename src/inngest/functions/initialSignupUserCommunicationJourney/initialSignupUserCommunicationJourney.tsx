@@ -1,4 +1,4 @@
-import { UserAction, UserActionType, UserCommunicationJourneyType } from '@prisma/client'
+import { UserActionType, UserCommunicationJourneyType } from '@prisma/client'
 import { render } from '@react-email/components'
 import { isBefore, subMinutes } from 'date-fns'
 import { NonRetriableError } from 'inngest'
@@ -17,7 +17,7 @@ const INITIAL_SIGNUP_USER_COMMUNICATION_JOURNEY_INNGEST_FUNCTION_ID =
   'user-communication/initial-signup'
 
 const MAX_RETRY_COUNT = 2
-const LATEST_ACTION_DEBOUNCE_TIME_MINUTES = 5
+const LATEST_ACTION_DEBOUNCE_TIME_MINUTES = 1
 
 export interface InitialSignUpUserCommunicationJourneyPayload {
   userId: string
@@ -36,32 +36,34 @@ export const initialSignUpUserCommunicationJourney = inngest.createFunction(
       throw new NonRetriableError('userId not provided')
     }
 
-    const userCommunicationJourney = await createCommunicationJourney(payload.userId)
-
-    let latestAction: UserAction | null = null
-    do {
-      await step.sleep('wait-5-mins', '5 mins')
-      latestAction = await getLatestUserAction(payload.userId)
-    } while (
-      latestAction &&
-      !isBefore(
-        latestAction.datetimeCreated,
-        subMinutes(new Date(), LATEST_ACTION_DEBOUNCE_TIME_MINUTES),
-      )
+    const userCommunicationJourney = await step.run('create-communication-journey', () =>
+      createCommunicationJourney(payload.userId),
     )
 
-    if (!latestAction) {
-      throw new NonRetriableError('action not found for user')
-    }
+    let done = false
+    do {
+      await step.sleep('wait-5-mins', '1m')
+      const response = await step.run('check-latest-user-action-date', async () => {
+        const userAction = await getLatestUserAction(payload.userId)
+        return {
+          isPastDebounceTime:
+            !!userAction &&
+            isBefore(
+              userAction.datetimeCreated,
+              subMinutes(new Date(), LATEST_ACTION_DEBOUNCE_TIME_MINUTES),
+            ),
+          // This is here only for debugging purposes through the Inngest Dashboard
+          userAction,
+        }
+      })
+      done = response.isPastDebounceTime
+    } while (!done)
 
-    await step.run(
-      `${INITIAL_SIGNUP_USER_COMMUNICATION_JOURNEY_INNGEST_FUNCTION_ID}/send-mail`,
-      async () => {
-        await sendInitialSignupEmail({
-          userId: payload.userId,
-          userCommunicationJourneyId: userCommunicationJourney.id,
-        })
-      },
+    await step.run('send-mail', async () =>
+      sendInitialSignupEmail({
+        userId: payload.userId,
+        userCommunicationJourneyId: userCommunicationJourney.id,
+      }),
     )
   },
 )
@@ -138,7 +140,7 @@ async function sendInitialSignupEmail({
     ),
   })
 
-  await prismaClient.userCommunication.create({
+  return prismaClient.userCommunication.create({
     data: {
       userCommunicationJourneyId,
       messageId,

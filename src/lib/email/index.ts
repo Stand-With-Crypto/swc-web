@@ -1,4 +1,4 @@
-import SendGrid from '@sendgrid/mail'
+import SendGrid, { ClientResponse } from '@sendgrid/mail'
 import { z } from 'zod'
 
 import { requiredEnv } from '@/utils/shared/requiredEnv'
@@ -16,15 +16,14 @@ export const zodSendMailPayload = z.object({
   html: z.string(),
 })
 
-export type SendMailPayload = z.infer<typeof zodSendMailPayload>
+export interface SendMailPayload {
+  to: string
+  from?: string
+  subject: string
+  html: string
+}
 
 export async function sendMail(payload: SendMailPayload) {
-  const validatedInput = zodSendMailPayload.safeParse(payload)
-  if (!validatedInput.success) {
-    // TODO: handle error
-    throw new Error('Unable to send mail')
-  }
-
   try {
     const [response] = await SendGrid.send({
       from: SENDGRID_SENDER,
@@ -33,10 +32,40 @@ export async function sendMail(payload: SendMailPayload) {
           enable: SENDGRID_SANDBOX_MODE === 'true',
         },
       },
-      ...validatedInput.data,
+      ...payload,
     })
 
     return response.headers['x-message-id'] as string
+  } catch (error) {
+    // TODO: handle error
+    console.error(error)
+    throw new Error('Unable to send mail')
+  }
+}
+
+export async function sendMultipleMails(
+  payload: SendMailPayload[],
+): Promise<[SendMailPayload['to'], string][]> {
+  const hydratedPayload = payload.map(entry => ({
+    from: SENDGRID_SENDER,
+    mailSettings: {
+      sandboxMode: {
+        enable: SENDGRID_SANDBOX_MODE === 'true',
+      },
+    },
+    ...entry,
+  }))
+  try {
+    // This casting is necessary because `Sendgrid.send` is not correctly typed for multiple sends
+    const responses = (await SendGrid.send(hydratedPayload)) as unknown as [
+      ClientResponse,
+      unknown,
+    ][]
+
+    return responses.map((response, idx) => [
+      hydratedPayload[idx].to,
+      response[0].headers['x-message-id'],
+    ])
   } catch (error) {
     // TODO: handle error
     console.error(error)
