@@ -70,6 +70,13 @@ enum DataCreationMethod {
   BY_USER
 }
 
+enum SMSStatus {
+  NOT_OPTED_IN
+  OPTED_IN
+  OPTED_IN_PENDING_DOUBLE_OPT_IN
+  OPTED_OUT
+}
+
 // A user can interact with our platform multiple ways.
 // Sometimes that user will be signing up via coinbase,
 // sometimes a user will be signing up via a wallet on the website, or multiple wallets
@@ -130,8 +137,10 @@ model User {
   userMergeAlertUserA UserMergeAlert[] @relation("userAMergeAttempt")
   userMergeEvents     UserMergeEvent[]
 
-  capitolCanaryAdvocateId Int?                   @map("capitol_canary_advocate_id")
-  capitolCanaryInstance   CapitolCanaryInstance? @map("capitol_canary_instance")
+  capitolCanaryAdvocateId  Int?                       @map("capitol_canary_advocate_id")
+  capitolCanaryInstance    CapitolCanaryInstance?     @map("capitol_canary_instance")
+  UserCommunicationJourney UserCommunicationJourney[]
+  smsStatus                SMSStatus                  @default(NOT_OPTED_IN) @map("sms_status")
 
   @@index([addressId])
   @@index([internalStatus])
@@ -407,4 +416,40 @@ model UserActionTweetAtPerson {
   recipientDtsiSlug String?    @map("recipient_dtsi_slug")
 
   @@map("user_action_tweet_at_person")
+}
+
+enum UserCommunicationJourneyType {
+  INITIAL_SIGNUP
+}
+
+model UserCommunicationJourney {
+  id                 String                       @id @default(uuid())
+  userId             String                       @map("user_id")
+  user               User                         @relation(fields: [userId], references: [id])
+  journeyType        UserCommunicationJourneyType @map("journey_type")
+  datetimeCreated    DateTime                     @default(now()) @map("datetime_created")
+  userCommunications UserCommunication[]
+
+  @@index([id])
+  @@index([userId])
+  @@map("user_communication_journey")
+}
+
+enum CommunicationType {
+  EMAIL
+  SMS
+}
+
+// TODO: campo para identificar se é email ou SMS
+model UserCommunication {
+  id                         String                   @id @default(uuid())
+  userCommunicationJourneyId String                   @map("user_communication_journey_id")
+  userCommunicationJourney   UserCommunicationJourney @relation(fields: [userCommunicationJourneyId], references: [id])
+  communicationType          CommunicationType        @map("communication_type")
+  messageId                  String                   @map("message_id")
+  datetimeCreated            DateTime                 @default(now()) @map("datetime_created")
+
+  @@index([id])
+  @@index([userCommunicationJourneyId])
+  @@map("user_communication")
 }
