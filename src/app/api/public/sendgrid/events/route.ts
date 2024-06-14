@@ -46,7 +46,6 @@ async function processEventChunk(messageId: string, events: EmailEvent[]) {
   const analytics = await getServerAnalyticsFromMessageId(messageId)
 
   events.forEach(eventEntry => {
-    console.log(eventEntry)
     log.info(`tracking event: ${eventEntry.event}`)
     analytics.track(`Email Communication Event`, {
       'Event Name': EVENT_NAME_TO_HUMAN_READABLE_STRING[eventEntry.event] ?? eventEntry.event,
