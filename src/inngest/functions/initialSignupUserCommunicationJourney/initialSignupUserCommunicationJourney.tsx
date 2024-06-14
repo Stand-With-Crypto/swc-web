@@ -19,11 +19,11 @@ const INITIAL_SIGNUP_USER_COMMUNICATION_JOURNEY_INNGEST_FUNCTION_ID =
 const MAX_RETRY_COUNT = 2
 const LATEST_ACTION_DEBOUNCE_TIME_MINUTES = 5
 
-interface InitialSignupUserCommunicationJourneyPayload {
+export interface InitialSignUpUserCommunicationJourneyPayload {
   userId: string
 }
 
-export const initialSignupUserCommunicationJourney = inngest.createFunction(
+export const initialSignUpUserCommunicationJourney = inngest.createFunction(
   {
     id: INITIAL_SIGNUP_USER_COMMUNICATION_JOURNEY_INNGEST_FUNCTION_ID,
     retries: MAX_RETRY_COUNT,
@@ -31,7 +31,7 @@ export const initialSignupUserCommunicationJourney = inngest.createFunction(
   },
   { event: INITIAL_SIGNUP_USER_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME },
   async ({ event, step }) => {
-    const payload = event.data as InitialSignupUserCommunicationJourneyPayload
+    const payload = event.data as InitialSignUpUserCommunicationJourneyPayload
     if (!payload.userId) {
       throw new NonRetriableError('userId not provided')
     }

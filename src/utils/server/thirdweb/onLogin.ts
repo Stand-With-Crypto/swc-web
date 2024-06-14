@@ -17,6 +17,7 @@ import { NextApiRequest } from 'next'
 
 import { parseThirdwebAddress } from '@/hooks/useThirdwebAddress/parseThirdwebAddress'
 import { CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/capitolCanary/upsertAdvocateInCapitolCanary'
+import { INITIAL_SIGNUP_USER_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME } from '@/inngest/functions/initialSignupUserCommunicationJourney/initialSignupUserCommunicationJourney'
 import { inngest } from '@/inngest/inngest'
 import {
   CapitolCanaryCampaignName,
@@ -678,6 +679,16 @@ async function triggerPostLoginUserActionSteps({
       creationMethod: 'On Site',
       userState: wasUserCreated ? 'New' : 'Existing',
     })
+
+    const result = await inngest.send({
+      name: INITIAL_SIGNUP_USER_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
+      data: {
+        userId: user.id,
+      },
+    })
+
+    console.log({ result })
+    log(`triggerPostLoginUserActionSteps: initial signup communication journey triggered`)
   } else {
     log(`triggerPostLoginUserActionSteps: opt in user action previously existed`)
   }
