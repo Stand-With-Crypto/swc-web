@@ -440,7 +440,6 @@ enum CommunicationType {
   SMS
 }
 
-// TODO: campo para identificar se é email ou SMS
 model UserCommunication {
   id                         String                   @id @default(uuid())
   userCommunicationJourneyId String                   @map("user_communication_journey_id")
