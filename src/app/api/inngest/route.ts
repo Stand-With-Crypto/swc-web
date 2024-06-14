@@ -14,6 +14,7 @@ import { cleanupNFTMintsWithInngest } from '@/inngest/functions/cleanupNFTMints'
 import { cleanupPostalCodesWithInngest } from '@/inngest/functions/cleanupPostalCodes'
 import { monitorBaseETHBalances } from '@/inngest/functions/monitorBaseETHBalances'
 import { setPrimaryCryptoAddressOfUserWithInngest } from '@/inngest/functions/setPrimaryCryptoAddressOfUser'
+import { testCNNEmail } from '@/inngest/functions/testCNNEmail/testCNNEmail'
 import {
   auditUsersTotalDonationAmountUsdInngest,
   auditUsersTotalDonationAmountUsdInngestAuditBatchOfUsers,
@@ -45,5 +46,6 @@ export const { GET, POST, PUT } = serve({
     backfillUsersTotalDonationAmountUsdInngestUpdateBatchOfUsers,
     auditUsersTotalDonationAmountUsdInngest,
     auditUsersTotalDonationAmountUsdInngestAuditBatchOfUsers,
+    testCNNEmail,
   ],
 })
