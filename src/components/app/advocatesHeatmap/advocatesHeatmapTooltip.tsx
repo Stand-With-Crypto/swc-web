@@ -1,36 +1,24 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { SupportedLocale } from '@/intl/locales'
 
 export function TotalAdvocatesPerStateTooltip({
-  currentState,
+  hoveredStateName,
+  mousePosition,
   getTotalAdvocatesPerState,
   locale,
 }: {
-  currentState: string | null
+  hoveredStateName: string | null
+  mousePosition: { x: number; y: number } | null
   getTotalAdvocatesPerState: (stateName: string) => number | undefined
   locale: SupportedLocale
 }) {
-  const [mousePosition, setMousePosition] = useState<{ x: number; y: number } | null>(null)
+  if (!mousePosition || !hoveredStateName) return null
 
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY })
-    }
-
-    window.addEventListener('mousemove', handleMouseMove)
-
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove)
-    }
-  }, [])
-
-  if (!mousePosition || !currentState) return null
-
-  const totalAdvocatesPerState = getTotalAdvocatesPerState(currentState)
+  const totalAdvocatesPerState = getTotalAdvocatesPerState(hoveredStateName)
 
   return totalAdvocatesPerState ? (
     <div

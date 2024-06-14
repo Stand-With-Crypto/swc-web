@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useState } from 'react'
+import { MouseEvent, useCallback, useState } from 'react'
 import { ComposableMap, Geographies, Geography, Marker } from 'react-simple-maps'
 
 import { TotalAdvocatesPerStateTooltip } from '@/components/app/advocatesHeatmap/advocatesHeatmapTooltip'
@@ -22,8 +22,12 @@ export function RenderMap({
   getTotalAdvocatesPerState,
 }: RenderMapProps) {
   const [hoveredStateName, setHoveredStateName] = useState<string | null>(null)
+  const [mousePosition, setMousePosition] = useState<{ x: number; y: number } | null>(null)
 
-  const handleStateMouseHover = useCallback((geo: any) => {
+  const handleStateMouseHover = useCallback((geo: any, event: MouseEvent<SVGPathElement>) => {
+    const { clientX, clientY } = event
+
+    setMousePosition({ x: clientX, y: clientY })
     setHoveredStateName(geo.properties.name)
   }, [])
 
@@ -44,7 +48,7 @@ export function RenderMap({
                       cursor="pointer"
                       geography={geo}
                       key={geo.rsmKey}
-                      onMouseMove={() => handleStateMouseHover(geo)}
+                      onMouseMove={event => handleStateMouseHover(geo, event)}
                       onMouseOut={handleStateMouseOut}
                       stroke="#FFF"
                       style={{
@@ -111,9 +115,10 @@ export function RenderMap({
         </Geographies>
       </ComposableMap>
       <TotalAdvocatesPerStateTooltip
-        currentState={hoveredStateName}
         getTotalAdvocatesPerState={getTotalAdvocatesPerState}
+        hoveredStateName={hoveredStateName}
         locale={locale}
+        mousePosition={mousePosition}
       />
     </>
   )
