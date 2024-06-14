@@ -35,7 +35,7 @@ export const USER_ACTION_FORM_SUCCESS_SCREEN_INFO: Record<
     description: DEFAULT_USER_ACTION_FORM_SUCCESS_SCREEN_INFO['WITHOUT_NFT'],
   },
   [UserActionType.DONATION]: {
-    title: 'You donated to help keep  crypto in America!',
+    title: 'You donated to help keep crypto in America!',
     description: DEFAULT_USER_ACTION_FORM_SUCCESS_SCREEN_INFO['WITHOUT_NFT'],
   },
   [UserActionType.NFT_MINT]: {

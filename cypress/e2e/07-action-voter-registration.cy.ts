@@ -89,9 +89,9 @@ describe('action - voter registration', () => {
         },
       )
 
-      cy.waitForLogin({
-        trigger: cy.get('@dialog').find('button[type="button"]').contains('Join Stand With Crypto'),
-      })
+      cy.waitForLogin(
+        cy.get('@dialog').find('button[type="button"]').contains('Join Stand With Crypto'),
+      )
 
       cy.get('@dialog')
         .find('input[placeholder="Phone number"]')
