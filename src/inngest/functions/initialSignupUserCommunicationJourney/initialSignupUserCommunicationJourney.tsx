@@ -17,7 +17,7 @@ const INITIAL_SIGNUP_USER_COMMUNICATION_JOURNEY_INNGEST_FUNCTION_ID =
   'user-communication/initial-signup'
 
 const MAX_RETRY_COUNT = 2
-const LATEST_ACTION_DEBOUNCE_TIME_MINUTES = 1
+const LATEST_ACTION_DEBOUNCE_TIME_MINUTES = 5
 
 export interface InitialSignUpUserCommunicationJourneyPayload {
   userId: string
@@ -42,7 +42,7 @@ export const initialSignUpUserCommunicationJourney = inngest.createFunction(
 
     let done = false
     do {
-      await step.sleep('wait-5-mins', '1m')
+      await step.sleep('wait-5-mins', '5 mins')
       const response = await step.run('check-latest-user-action-date', async () => {
         const userAction = await getLatestUserAction(payload.userId)
         return {
