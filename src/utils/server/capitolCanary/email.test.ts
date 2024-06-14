@@ -8,8 +8,8 @@ import {
   CapitolCanaryCampaignName,
   getCapitolCanaryCampaignID,
 } from '@/utils/server/capitolCanary/campaigns'
-import { formatCapitolCanaryEmailRepRequest } from '@/utils/server/capitolCanary/emailRep'
-import { EmailRepViaCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
+import { formatCapitolCanaryEmailRequest } from '@/utils/server/capitolCanary/email'
+import { EmailViaCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 
 it('formats the "email rep via capitol canary" request correctly', () => {
   // Set the seed so that the mocked output is deterministic.
@@ -19,7 +19,7 @@ it('formats the "email rep via capitol canary" request correctly', () => {
   const mockedAddress = mockAddress()
   const mockedEmailAddress = mockUserEmailAddress()
 
-  const payload: EmailRepViaCapitolCanaryPayloadRequirements = {
+  const payload: EmailViaCapitolCanaryPayloadRequirements = {
     campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_EMAIL_REPRESENTATIVE),
     user: {
       ...mockedUser,
@@ -46,7 +46,7 @@ it('formats the "email rep via capitol canary" request correctly', () => {
     emailSubject: 'This is a test email subject.',
   }
 
-  const formattedRequest = formatCapitolCanaryEmailRepRequest({ ...payload, advocateId: 123456 })
+  const formattedRequest = formatCapitolCanaryEmailRequest({ ...payload, advocateId: 123456 })
 
   expect(formattedRequest).toMatchInlineSnapshot(`
 {

@@ -14,7 +14,7 @@ export interface UpsertAdvocateInCapitolCanaryPayloadRequirements {
   opts?: CapitolCanaryOpts
   metadata?: CapitolCanaryMetadata
 }
-export interface EmailRepViaCapitolCanaryPayloadRequirements
+export interface EmailViaCapitolCanaryPayloadRequirements
   extends UpsertAdvocateInCapitolCanaryPayloadRequirements {
   emailSubject: string
   emailMessage: string

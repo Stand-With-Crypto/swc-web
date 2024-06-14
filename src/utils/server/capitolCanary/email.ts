@@ -1,11 +1,11 @@
-import { EmailRepViaCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
+import { EmailViaCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { sendCapitolCanaryRequest } from '@/utils/server/capitolCanary/sendCapitolCanaryRequest'
 
-const CAPITOL_CANARY_EMAIL_REP_API_URL = 'https://api.phone2action.com/2.0/connections'
+const CAPITOL_CANARY_EMAIL_API_URL = 'https://api.phone2action.com/2.0/connections'
 
 // Interface based on: https://docs.phone2action.com/#:~:text=calls%20to%20legislators-,Create%20a%20connection,-This%20endpoint%20will
 // Interface should not be accessed directly - use the requirements interface above.
-interface EmailRepViaCapitolCanaryRequest {
+interface EmailViaCapitolCanaryRequest {
   // Required information.
   advocateid: number
   campaignid: number
@@ -24,7 +24,7 @@ interface EmailRepViaCapitolCanaryRequest {
   utm_content?: string
 }
 
-interface EmailRepViaCapitolCanaryResponse {
+interface EmailViaCapitolCanaryResponse {
   success: number
   error: string
   data?: {
@@ -49,10 +49,10 @@ interface EmailRepViaCapitolCanaryResponse {
 }
 
 // This function should not be called directly. Use the respective Inngest function instead.
-export function formatCapitolCanaryEmailRepRequest(
-  payload: EmailRepViaCapitolCanaryPayloadRequirements & { advocateId: number },
+export function formatCapitolCanaryEmailRequest(
+  payload: EmailViaCapitolCanaryPayloadRequirements & { advocateId: number },
 ) {
-  const formattedRequest: EmailRepViaCapitolCanaryRequest = {
+  const formattedRequest: EmailViaCapitolCanaryRequest = {
     advocateid: payload.advocateId,
     campaignid: payload.campaignId,
     emailSubject: payload.emailSubject,
@@ -73,9 +73,9 @@ export function formatCapitolCanaryEmailRepRequest(
   return formattedRequest
 }
 
-export async function emailRepViaCapitolCanary(request: EmailRepViaCapitolCanaryRequest) {
+export async function emailViaCapitolCanary(request: EmailViaCapitolCanaryRequest) {
   return await sendCapitolCanaryRequest<
-    EmailRepViaCapitolCanaryRequest,
-    EmailRepViaCapitolCanaryResponse
-  >(request, 'POST', CAPITOL_CANARY_EMAIL_REP_API_URL)
+    EmailViaCapitolCanaryRequest,
+    EmailViaCapitolCanaryResponse
+  >(request, 'POST', CAPITOL_CANARY_EMAIL_API_URL)
 }

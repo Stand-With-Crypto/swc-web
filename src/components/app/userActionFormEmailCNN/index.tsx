@@ -174,7 +174,7 @@ Over the past 15 years, crypto has emerged onto the world stage, and the power o
                   control={form.control}
                   name="emailAddress"
                   render={({ field }) => (
-                    <FormItem className="col-span-2">
+                    <FormItem>
                       <FormLabel>Email</FormLabel>
                       <FormControl>
                         <Input placeholder="Your email" {...field} />
