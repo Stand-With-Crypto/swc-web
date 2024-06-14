@@ -77,6 +77,7 @@ export function UserActionFormEmailCNN({
       firstName: initialValues?.firstName || user?.firstName,
       lastName: initialValues?.lastName || user?.lastName,
       campaignName: UserActionEmailCampaignName.CNN_PRESIDENTIAL_DEBATE_2024,
+      subject: 'Include crypto in the Presidential Debate',
       message: `I stand for crypto and I urge you to support crypto legislation that will establish clear regulations for the betterment of consumers, investors, developers, and beyond.
 
 Over the past 15 years, crypto has emerged onto the world stage, and the power of crypto is being realized through an increasing number of use cases, such as cross border payments and remittances, enablement of humanitarian relief efforts, and access to funds in otherwise inaccessible situations. The potential of crypto is endless: it creates ways for creators and artists to directly receive payments and royalties, it provides pathways for aid to oppressed groups, it gives revolutionaries in totalitarian states access to uncensorable financial services, and so much more. Nonetheless, it's equally important to ensure that this potential grows in a responsible manner and adheres to regulatory standards.`,
