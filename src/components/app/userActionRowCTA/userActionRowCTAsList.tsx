@@ -29,9 +29,6 @@ export function UserActionRowCTAsList({
     <div className={cn('space-y-4', className)}>
       {filteredActions.map(({ action, campaign }) => {
         const props = getUserActionCTAInfo(action, campaign)
-
-        if (!props) return null
-
         return (
           <UserActionRowCTA
             key={`${action}-${campaign}`}

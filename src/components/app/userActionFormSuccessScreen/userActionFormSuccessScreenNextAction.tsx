@@ -42,8 +42,6 @@ export function UserActionFormSuccessScreenNextAction({
 
   const CTAInfo = getUserActionCTAInfo(nextAction.actionType)
 
-  if (!CTAInfo) return null
-
   return (
     <div className="mt-8">
       <div className="mb-2 font-bold">Up next</div>

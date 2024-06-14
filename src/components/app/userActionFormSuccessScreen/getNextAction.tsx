@@ -23,8 +23,6 @@ export function getNextAction(
   if (nextAction) {
     const CTAInfo = getUserActionCTAInfo(nextAction.action, nextAction.campaign)
 
-    if (!CTAInfo) return null
-
     const { WrapperComponent: _WrapperComponent, ...rest } = CTAInfo
     return rest
   }

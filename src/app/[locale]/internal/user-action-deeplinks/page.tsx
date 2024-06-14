@@ -24,7 +24,6 @@ export default function UserActionDeepLinks() {
           actionType => USER_ACTION_DEEPLINK_MAP[actionType as UserActionTypesWithDeeplink],
         ).map(actionType => {
           const props = getUserActionCTAInfo(actionType)
-          if (!props) return null
 
           const { WrapperComponent: _, ...userAction } = props
 
