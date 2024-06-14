@@ -74,17 +74,18 @@ export function UserActionFormEmailCNN({
             }
           : undefined,
       emailAddress: initialValues?.email || user?.primaryUserEmailAddress?.emailAddress || '',
-      fullName: initialValues?.fullName || user?.firstName + ' ' + user?.lastName,
+      firstName: initialValues?.firstName || user?.firstName,
+      lastName: initialValues?.lastName || user?.lastName,
       campaignName: UserActionEmailCampaignName.CNN_PRESIDENTIAL_DEBATE_2024,
       message: `I stand for crypto and I urge you to support crypto legislation that will establish clear regulations for the betterment of consumers, investors, developers, and beyond.
 
-      Over the past 15 years, crypto has emerged onto the world stage, and the power of crypto is being realized through an increasing number of use cases, such as cross border payments and remittances, enablement of humanitarian relief efforts, and access to funds in otherwise inaccessible situations. The potential of crypto is endless: it creates ways for creators and artists to directly receive payments and royalties, it provides pathways for aid to oppressed groups, it gives revolutionaries in totalitarian states access to uncensorable financial services, and so much more. Nonetheless, it's equally important to ensure that this potential grows in a responsible manner and adheres to regulatory standards.`,
+Over the past 15 years, crypto has emerged onto the world stage, and the power of crypto is being realized through an increasing number of use cases, such as cross border payments and remittances, enablement of humanitarian relief efforts, and access to funds in otherwise inaccessible situations. The potential of crypto is endless: it creates ways for creators and artists to directly receive payments and royalties, it provides pathways for aid to oppressed groups, it gives revolutionaries in totalitarian states access to uncensorable financial services, and so much more. Nonetheless, it's equally important to ensure that this potential grows in a responsible manner and adheres to regulatory standards.`,
     },
   })
 
   React.useEffect(() => {
     if (isDesktop) {
-      form.setFocus('fullName')
+      form.setFocus('firstName')
     }
   }, [form, isDesktop])
 
@@ -143,12 +144,40 @@ export function UserActionFormEmailCNN({
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <FormField
                   control={form.control}
-                  name="fullName"
+                  name="firstName"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Full name</FormLabel>
+                      <FormLabel>First name</FormLabel>
                       <FormControl>
-                        <Input placeholder="Your full name" {...field} />
+                        <Input placeholder="First name" {...field} />
+                      </FormControl>
+                      <FormErrorMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="lastName"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Last name</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Last name" {...field} />
+                      </FormControl>
+                      <FormErrorMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="emailAddress"
+                  render={({ field }) => (
+                    <FormItem className="col-span-2">
+                      <FormLabel>Email</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Your email" {...field} />
                       </FormControl>
                       <FormErrorMessage />
                     </FormItem>
@@ -168,34 +197,6 @@ export function UserActionFormEmailCNN({
                           placeholder="Your address"
                           value={field.value}
                         />
-                      </FormControl>
-                      <FormErrorMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="emailAddress"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Email</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Your email" {...field} />
-                      </FormControl>
-                      <FormErrorMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="phoneNumber"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Phone number</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Your phone number" {...field} />
                       </FormControl>
                       <FormErrorMessage />
                     </FormItem>

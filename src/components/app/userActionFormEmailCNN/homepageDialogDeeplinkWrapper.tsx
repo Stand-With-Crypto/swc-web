@@ -27,12 +27,13 @@ function UserActionFormEmailCNNDeeplinkWrapperContent() {
   const [state, setState] = useState<'form' | 'success'>('form')
   const { user } = fetchUser.data || { user: null }
   const [initialValues, loadingParams] = useEncodedInitialValuesQueryParam<FormFields>({
+    email: '',
+    firstName: '',
+    lastName: '',
     address: {
       description: '',
       place_id: '',
     },
-    email: '',
-    fullName: '',
   })
   useEffect(() => {
     trackDialogOpen({ open: true, analytics: ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CNN })

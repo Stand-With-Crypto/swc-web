@@ -37,6 +37,7 @@ import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/local
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
+import { userFullName } from '@/utils/shared/userFullName'
 import { zodUserActionFormEmailCNNAction } from '@/validation/forms/zodUserActionFormEmailCNN'
 
 const logger = getLogger(`actionCreateUserActionEmailCNN`)
@@ -130,8 +131,8 @@ async function _actionCreateUserActionEmailCNN(input: Input) {
       userActionEmail: {
         create: {
           senderEmail: validatedFields.data.emailAddress,
-          firstName: validatedFields.data.fullName.split(' ')[0],
-          lastName: validatedFields.data.fullName.split(' ').slice(1)?.join(' '),
+          firstName: validatedFields.data.firstName,
+          lastName: validatedFields.data.lastName,
           address: {
             connectOrCreate: {
               where: { googlePlaceId: validatedFields.data.address.googlePlaceId },
@@ -140,7 +141,7 @@ async function _actionCreateUserActionEmailCNN(input: Input) {
           },
           // userActionEmailRecipients: {
           //   create: {
-          //     data: validatedFields.data.dtsiSlugs.map(dtsiSlug => ({ dtsiSlug })),
+          //     ,
           //   },
           // },
         },
@@ -161,7 +162,7 @@ async function _actionCreateUserActionEmailCNN(input: Input) {
     ...convertAddressToAnalyticsProperties(validatedFields.data.address),
     // https://docs.mixpanel.com/docs/data-structure/user-profiles#reserved-user-properties
     $email: validatedFields.data.emailAddress,
-    $name: validatedFields.data.fullName,
+    $name: userFullName(validatedFields.data),
   })
 
   /**
@@ -207,7 +208,7 @@ async function maybeUpsertUser({
   localUser: ServerLocalUser | null
   onUpsertUser: () => Promise<void> | void
 }): Promise<{ user: UserWithRelations; userState: AnalyticsUserActionUserState }> {
-  const { fullName, emailAddress, address } = input
+  const { firstName, lastName, emailAddress, address } = input
 
   if (existingUser) {
     const updatePayload: Prisma.UserUpdateInput = {
@@ -275,8 +276,8 @@ async function maybeUpsertUser({
       hasOptedInToMembership: false,
       hasOptedInToSms: false,
       hasRepliedToOptInSms: false,
-      firstName: fullName.split(' ')[0],
-      lastName: fullName.split(' ').slice(1)?.join(' '),
+      firstName,
+      lastName,
       userEmailAddresses: {
         create: {
           emailAddress,

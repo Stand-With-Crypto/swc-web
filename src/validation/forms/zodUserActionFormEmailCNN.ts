@@ -1,10 +1,9 @@
 import { nativeEnum, object, string } from 'zod'
 
-import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
 import { UserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns'
 import { zodAddress } from '@/validation/fields/zodAddress'
 import { zodGooglePlacesAutocompletePrediction } from '@/validation/fields/zodGooglePlacesAutocompletePrediction'
-import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
+import { zodFirstAndLastNames } from '@/validation/fields/zodName'
 
 const base = object({
   emailAddress: string().trim().email('Please enter a valid email address').toLowerCase(),
@@ -13,9 +12,7 @@ const base = object({
     .max(2000, 'Your message should not exceed 2000 characters'),
   subject: string().trim(),
   campaignName: nativeEnum(UserActionEmailCampaignName),
-  phoneNumber: zodPhoneNumber.transform(str => str && normalizePhoneNumber(str)),
-  fullName: string().trim().min(1, 'Please enter your full name').max(150, 'Full name too long'),
-})
+}).merge(zodFirstAndLastNames)
 
 export const zodUserActionFormEmailCNNFields = base.extend({
   address: zodGooglePlacesAutocompletePrediction,

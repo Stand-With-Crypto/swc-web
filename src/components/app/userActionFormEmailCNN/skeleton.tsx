@@ -28,21 +28,20 @@ export function UserActionFormEmailCNNSkeleton({ locale }: { locale: SupportedLo
           <div className="space-y-4">
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <FormItemSkeleton>
-                <label>Name</label>
-                <Input placeholder="Your name" />
+                <label>First name</label>
+                <Input placeholder="First name" />
               </FormItemSkeleton>
-
+              <FormItemSkeleton>
+                <label>Last name</label>
+                <Input placeholder="Last name" />
+              </FormItemSkeleton>
               <FormItemSkeleton>
                 <label>Email</label>
                 <Input placeholder="Your email" />
               </FormItemSkeleton>
               <FormItemSkeleton>
-                <label>Phone number</label>
-                <Input placeholder="Your phone number" />
-              </FormItemSkeleton>
-              <FormItemSkeleton>
                 <label>Address</label>
-                <Input placeholder="Your full address" />
+                <Input placeholder="Your address" />
               </FormItemSkeleton>
             </div>
 
