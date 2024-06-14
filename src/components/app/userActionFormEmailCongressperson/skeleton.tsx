@@ -1,4 +1,4 @@
-import { noop } from 'lodash-es'
+import { capitalize, noop } from 'lodash-es'
 
 import { DTSICongresspersonAssociatedWithFormAddress } from '@/components/app/dtsiCongresspersonAssociatedWithFormAddress'
 import { EMAIL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormEmailCongressperson/constants'
@@ -12,9 +12,13 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Textarea } from '@/components/ui/textarea'
+import { useGetDTSIPeopleFromAddress } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { SupportedLocale } from '@/intl/locales'
 import { getIntlUrls } from '@/utils/shared/urls'
-import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory'
+import {
+  getYourPoliticianCategoryShortDisplayName,
+  YourPoliticianCategory,
+} from '@/utils/shared/yourPoliticianCategory'
 
 export function UserActionFormEmailCongresspersonSkeleton({
   locale,
@@ -30,11 +34,11 @@ export function UserActionFormEmailCongresspersonSkeleton({
       <ScrollArea>
         <div className="space-y-4 p-6 md:space-y-8 md:px-12">
           <PageTitle className="mb-3" size="sm">
-            Email your congressperson
+            Email your {capitalize(getYourPoliticianCategoryShortDisplayName(politicianCategory))}
           </PageTitle>
           <PageSubTitle className="mb-7">
-            Email your Congressperson and tell them to support crypto. Enter following information
-            and we will generate a personalized email for you to send to your representative.
+            With FIT21 passed by the House, take a moment to reach out to your Rep and say thanks
+            for voting Yes or ask them to reconsider the importance of crypto if they voted against.
           </PageSubTitle>
           <div className="space-y-4">
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -58,8 +62,8 @@ export function UserActionFormEmailCongresspersonSkeleton({
             </div>
             <div className="w-full">
               <DTSICongresspersonAssociatedWithFormAddress
-                currentDTSISlugValue={[]}
-                onChangeDTSISlug={noop}
+                dtsiPeopleFromAddressResponse={{} as ReturnType<typeof useGetDTSIPeopleFromAddress>}
+                onChangeAddress={noop}
                 politicianCategory={politicianCategory}
               />
             </div>
@@ -70,11 +74,7 @@ export function UserActionFormEmailCongresspersonSkeleton({
                 </p>
               </div>
               <FormItemSkeleton>
-                <Textarea
-                  defaultValue={getDefaultText({ dtsiSlugs: [] })}
-                  placeholder="Your message..."
-                  rows={16}
-                />
+                <Textarea defaultValue={getDefaultText()} placeholder="Your message..." rows={16} />
               </FormItemSkeleton>
             </div>
           </div>

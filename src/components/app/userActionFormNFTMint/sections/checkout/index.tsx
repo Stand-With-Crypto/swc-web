@@ -28,7 +28,7 @@ import { PageTitle } from '@/components/ui/pageTitleText'
 import { Skeleton } from '@/components/ui/skeleton'
 import { UseSectionsReturn } from '@/hooks/useSections'
 import { MintStatus } from '@/hooks/useSendMintNFTTransaction'
-import { useThirdwebAddress } from '@/hooks/useThirdwebAddress'
+import { useSession } from '@/hooks/useSession'
 import { SupportedCryptoCurrencyCodes } from '@/utils/shared/currency'
 import { NFTSlug } from '@/utils/shared/nft'
 import { NFT_CLIENT_METADATA } from '@/utils/web/nft'
@@ -69,7 +69,7 @@ export function UserActionFormNFTMintCheckout({
 }: UserActionFormNFTMintCheckoutProps) {
   const { contract } = useContract(MINT_NFT_CONTRACT_ADDRESS)
   const contractMetadata = NFT_CLIENT_METADATA[NFTSlug.STAND_WITH_CRYPTO_SUPPORTER]
-  const address = useThirdwebAddress()
+  const session = useSession()
 
   const checkoutError = useCheckoutError({
     totalFee: totalFee,
@@ -78,7 +78,7 @@ export function UserActionFormNFTMintCheckout({
   const maybeOverriddenCheckoutError = debug ? null : checkoutError
   const connectionStatus = useConnectionStatus()
 
-  if (!address) {
+  if (!session.isLoggedInThirdweb) {
     return <UserActionFormNFTMintCheckoutSkeleton />
   }
 

@@ -26,8 +26,7 @@ function getRandomExperimentVariant<K extends Experiments>(experiment: K): Exper
       fallback: variant,
     })
   }
-  const variant = variantConfigs[0].name as ExperimentVariant<K>
-  return variant
+  return finalVariant.name as ExperimentVariant<K>
 }
 
 export function getAllExperiments(persisted: PersistedLocalUser | null) {

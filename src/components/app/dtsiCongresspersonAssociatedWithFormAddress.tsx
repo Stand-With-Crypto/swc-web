@@ -21,59 +21,59 @@ import { zodGooglePlacesAutocompletePrediction } from '@/validation/fields/zodGo
 
 export function DTSICongresspersonAssociatedWithFormAddress({
   address,
-  onChangeDTSISlug,
-  currentDTSISlugValue,
+  onChangeAddress,
   politicianCategory,
+  dtsiPeopleFromAddressResponse,
 }: {
   politicianCategory: YourPoliticianCategory
   address?: z.infer<typeof zodGooglePlacesAutocompletePrediction>
-  currentDTSISlugValue: string[]
-  onChangeDTSISlug: (args: {
-    dtsiSlugs: string[]
+  onChangeAddress: (args: {
     location?: {
       districtNumber: number
       stateCode: string
     }
   }) => void
+  dtsiPeopleFromAddressResponse: ReturnType<typeof useGetDTSIPeopleFromAddress>
 }) {
-  const res = useGetDTSIPeopleFromAddress(politicianCategory, address?.description)
   useEffect(() => {
-    if (
-      res.data &&
-      'dtsiPeople' in res.data &&
-      res.data.dtsiPeople.some((person, index) => person.slug !== currentDTSISlugValue[index])
-    ) {
-      const { districtNumber, stateCode, dtsiPeople } = res.data
-      const dtsiSlugs = dtsiPeople.map(person => person.slug)
-      onChangeDTSISlug({ dtsiSlugs, location: { districtNumber, stateCode } })
-    } else if (currentDTSISlugValue.length && (!res.data || 'notFoundReason' in res.data)) {
-      onChangeDTSISlug({ dtsiSlugs: [] })
+    if (dtsiPeopleFromAddressResponse?.data && 'dtsiPeople' in dtsiPeopleFromAddressResponse.data) {
+      const { districtNumber, stateCode } = dtsiPeopleFromAddressResponse.data
+      onChangeAddress({ location: { districtNumber, stateCode } })
     }
-    // onChangeDTSISlug shouldnt be passed as a dependency
+    // onChangeAddress shouldnt be passed as a dependency
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentDTSISlugValue, res.data])
+  }, [dtsiPeopleFromAddressResponse?.data])
+
   const categoryDisplayName = getYourPoliticianCategoryDisplayName(politicianCategory)
-  if (!address || res.isLoading) {
+  if (!address || dtsiPeopleFromAddressResponse?.isLoading) {
     return (
       <div className="flex items-center gap-4">
         <Skeleton className="h-10 w-10 flex-shrink-0" />
         <div className="text-sm md:text-base">
           <p className="bold">Your {categoryDisplayName}</p>
           <p className="text-fontcolor-muted">
-            {res.isLoading ? 'Loading...' : 'This will show up after you enter your address'}
+            {dtsiPeopleFromAddressResponse?.isLoading
+              ? 'Loading...'
+              : 'This will show up after you enter your address'}
           </p>
         </div>
       </div>
     )
   }
-  if (!res.data || 'notFoundReason' in res.data) {
+
+  if (
+    !dtsiPeopleFromAddressResponse?.data ||
+    'notFoundReason' in dtsiPeopleFromAddressResponse.data
+  ) {
     return (
       <div className="font-bold text-destructive">
-        {formatGetDTSIPeopleFromAddressNotFoundReason(res.data)}
+        {formatGetDTSIPeopleFromAddressNotFoundReason(dtsiPeopleFromAddressResponse.data)}
       </div>
     )
   }
-  const people = res.data.dtsiPeople
+
+  const people = dtsiPeopleFromAddressResponse?.data?.dtsiPeople
+
   return (
     <div className="space-y-6">
       {people.map(person => (

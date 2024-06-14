@@ -37,6 +37,7 @@ export function PageHome({
   const urls = getIntlUrls(locale)
   const lowestScores = sortDTSIPersonDataTable(dtsiHomepagePeople.lowestScores)
   const highestScores = sortDTSIPersonDataTable(dtsiHomepagePeople.highestScores)
+
   return (
     <>
       <section className="grid-fl lg:standard-spacing-from-navbar mb-6 grid grid-cols-1 items-center gap-4 lg:container lg:grid-cols-2 lg:gap-8 lg:gap-y-1">
@@ -68,7 +69,7 @@ export function PageHome({
           </PageSubTitle>
           <HeroCTA />
         </div>
-        <div className="order-0 md:container lg:order-1 lg:px-0">
+        <div className="order-0 self-start md:container lg:order-1 lg:px-0">
           <Fit21HeroImage />
         </div>
       </section>

@@ -7,12 +7,11 @@ import { PACFooter } from '@/components/app/pacFooter'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
 import { Button } from '@/components/ui/button'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
-import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { DTSI_UnitedStatesInformationQuery } from '@/data/dtsi/generated'
+import { QueryDTSILocationUnitedStatesInformationData } from '@/data/dtsi/queries/queryDTSILocationUnitedStatesInformation'
 import { SupportedLocale } from '@/intl/locales'
-import { ORDERED_KEY_SENATE_RACE_STATES } from '@/utils/shared/locationSpecificPages'
+import { formatDTSIDistrictId, normalizeDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 import { cn } from '@/utils/web/cn'
@@ -20,7 +19,7 @@ import { cn } from '@/utils/web/cn'
 import { organizePeople } from './organizePeople'
 import { UserAddressVoterGuideInputSection } from './userAddressVoterGuideInput'
 
-interface LocationUnitedStatesProps extends DTSI_UnitedStatesInformationQuery {
+interface LocationUnitedStatesProps extends QueryDTSILocationUnitedStatesInformationData {
   locale: SupportedLocale
   countAdvocates: number
 }
@@ -57,7 +56,7 @@ export function LocationUnitedStates({
           </UserActionFormVoterRegistrationDialog>
         </div>
       </DarkHeroSection>
-      <div className="space-y-20">
+      <div className="space-y-20 xl:space-y-28">
         {!!groups.president.length && (
           <DTSIPersonHeroCardSection
             cta={
@@ -71,42 +70,12 @@ export function LocationUnitedStates({
           />
         )}
         <UserAddressVoterGuideInputSection locale={locale} />
-
-        {ORDERED_KEY_SENATE_RACE_STATES.map(stateCode => {
-          const stateName = US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]
-          const people = groups.keySenateRaceMap[stateCode]
-          if (!people?.length) {
-            return null
-          }
-          return (
-            <div key={stateCode}>
-              <NextImage
-                alt={`Shield with an outline of the state of ${stateName}`}
-                className="mx-auto block h-32 w-32"
-                height={1920}
-                sizes="128px"
-                src={`/stateShields/${stateCode}.png`}
-                width={1920}
-              />
-              <DTSIPersonHeroCardSection
-                cta={
-                  <InternalLink href={urls.locationStateSpecificSenateRace(stateCode)}>
-                    View Race
-                  </InternalLink>
-                }
-                key={stateCode}
-                locale={locale}
-                people={people}
-                title={<>U.S. Senate Race ({stateName})</>}
-              />
-            </div>
-          )
-        })}
-
         <ContentSection
           className="container"
-          subtitle={'Dive deeper and discover races in other states across America.'}
-          title={'Other states'}
+          subtitle={
+            'There are dozens of races in the House and the Senate that matter in this upcoming election. View your state below:'
+          }
+          title={'Key Races Across US States'}
         >
           <div className="grid grid-cols-2 gap-3 text-center md:grid-cols-3 xl:grid-cols-4">
             {Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP).map(_stateCode => {
@@ -123,6 +92,42 @@ export function LocationUnitedStates({
             })}
           </div>
         </ContentSection>
+
+        {groups.keyRaces.map(people => {
+          const stateCode = people[0].runningForSpecificRole.primaryState as USStateCode
+          const primaryDistrict =
+            people[0].runningForSpecificRole.primaryDistrict &&
+            normalizeDTSIDistrictId(people[0].runningForSpecificRole)
+          const stateName = US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]
+          return (
+            <DTSIPersonHeroCardSection
+              cta={
+                <InternalLink
+                  href={
+                    primaryDistrict
+                      ? urls.locationDistrictSpecific({ stateCode, district: primaryDistrict })
+                      : urls.locationStateSpecificSenateRace(stateCode)
+                  }
+                >
+                  View Race
+                </InternalLink>
+              }
+              key={`${stateCode}-${primaryDistrict}`}
+              locale={locale}
+              people={people}
+              title={
+                primaryDistrict ? (
+                  <>
+                    {stateName} {formatDTSIDistrictId(primaryDistrict)} Congressional District Race
+                  </>
+                ) : (
+                  <>{stateName} Senate Race</>
+                )
+              }
+            />
+          )
+        })}
+
         <PACFooter className="container" />
       </div>
     </div>

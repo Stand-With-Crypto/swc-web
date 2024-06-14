@@ -17,11 +17,11 @@ async function usersByState() {
       take: 100_000,
       skip: users.length,
     })
-    console.log(`res length ${res.length}, next skip ${users.length}`)
     if (res.length < 100_000) {
       hasAllResults = true
     }
     users = users.concat(res)
+    console.log(`res length ${res.length}, next skip ${users.length}`)
   }
   const addresses = users.flatMap(user => user.address)
   const actionsByState = groupBy(addresses, x =>

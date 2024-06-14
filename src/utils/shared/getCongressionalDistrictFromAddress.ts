@@ -7,16 +7,13 @@ import {
 } from '@/utils/shared/googleCivicInfo'
 import { USStateCode } from '@/utils/shared/usStateUtils'
 
-const SINGLE_MEMBER_STATES = ['AK', 'DE', 'ND', 'SD', 'VT', 'WY']
+const SINGLE_MEMBER_STATES = ['AK', 'DE', 'ND', 'SD', 'VT', 'WY', 'DC']
 
 const findCongressionalDistrictString = (response: GoogleCivicInfoResponse, address: string) => {
   if (Object.keys(response.divisions).every(key => key !== 'ocd-division/country:us')) {
     return { notFoundReason: 'NOT_USA_ADDRESS' as const }
   }
   const districtKeys = Object.keys(response.divisions)
-  if (districtKeys.find(key => key.includes('ocd-division/country:us/district:dc'))) {
-    return { notFoundReason: 'NO_REPS_IN_STATE' as const }
-  }
   const district = districtKeys.filter(key => key.includes('/cd:'))
   if (!district.length) {
     Sentry.captureMessage('No districts returned for address', {
@@ -146,8 +143,6 @@ export function formatGetCongressionalDistrictFromAddressNotFoundReason(
       return 'Please enter a US-based address.'
     case 'NOT_SAME_STATE':
       return 'Looks like your address is not in this state.'
-    case 'NO_REPS_IN_STATE':
-      return 'No representatives in your state.'
     case 'NOT_SPECIFIC_ENOUGH':
       return 'Please enter a specific address that includes street-level information.'
     case 'CIVIC_API_DOWN':

@@ -1,7 +1,6 @@
 import { serve } from 'inngest/next'
 
 import { airdropNFTWithInngest } from '@/inngest/functions/airdropNFT/airdropNFT'
-import { backfillDonationActionWithInngest } from '@/inngest/functions/backfillDonationAction'
 import { backfillNFTWithInngest } from '@/inngest/functions/backfillNFT'
 import { backfillNFTInngestCronJob } from '@/inngest/functions/backfillNFTCronJob'
 import {
@@ -16,6 +15,7 @@ import { cleanupPostalCodesWithInngest } from '@/inngest/functions/cleanupPostal
 import { initialSignUpUserCommunicationJourney } from '@/inngest/functions/initialSignupUserCommunicationJourney/initialSignupUserCommunicationJourney'
 import { monitorBaseETHBalances } from '@/inngest/functions/monitorBaseETHBalances'
 import { setPrimaryCryptoAddressOfUserWithInngest } from '@/inngest/functions/setPrimaryCryptoAddressOfUser'
+import { testCNNEmail } from '@/inngest/functions/testCNNEmail/testCNNEmail'
 import {
   auditUsersTotalDonationAmountUsdInngest,
   auditUsersTotalDonationAmountUsdInngestAuditBatchOfUsers,
@@ -47,7 +47,7 @@ export const { GET, POST, PUT } = serve({
     backfillUsersTotalDonationAmountUsdInngestUpdateBatchOfUsers,
     auditUsersTotalDonationAmountUsdInngest,
     auditUsersTotalDonationAmountUsdInngestAuditBatchOfUsers,
-    backfillDonationActionWithInngest,
     initialSignUpUserCommunicationJourney,
+    testCNNEmail,
   ],
 })

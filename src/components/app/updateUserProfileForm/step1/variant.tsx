@@ -166,6 +166,7 @@ export function UpdateUserProfileForm({
                 <FormControl>
                   <Input
                     className="h-auto p-4"
+                    data-testid="phone-number-input"
                     placeholder="Phone number"
                     {...field}
                     onChange={e => {
@@ -209,7 +210,11 @@ export function UpdateUserProfileForm({
                   <FormItem>
                     <div className="mt-2 flex flex-row items-center space-x-3 space-y-0">
                       <FormControl>
-                        <Checkbox checked={field.value} onCheckedChange={field.onChange} />
+                        <Checkbox
+                          checked={field.value}
+                          data-testid="opt-in-checkbox"
+                          onCheckedChange={field.onChange}
+                        />
                       </FormControl>
                       <FormDescription>
                         By checking this box, I agree to become a Stand With Crypto Alliance member.{' '}

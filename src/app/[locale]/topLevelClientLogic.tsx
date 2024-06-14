@@ -6,8 +6,10 @@ import {
   coinbaseWallet,
   embeddedWallet,
   en,
+  localWallet,
   metamaskWallet,
   ThirdwebProvider,
+  WalletConfig,
   walletConnect,
 } from '@thirdweb-dev/react'
 import { usePathname, useSearchParams } from 'next/navigation'
@@ -16,6 +18,7 @@ import { useThirdwebAuthUser } from '@/hooks/useAuthUser'
 import { useDetectWipedDatabaseAndLogOutUser } from '@/hooks/useDetectWipedDatabaseAndLogOutUser'
 import { LocaleContext } from '@/hooks/useLocale'
 import { SupportedLocale } from '@/intl/locales'
+import { isCypress } from '@/utils/shared/executionEnvironment'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
 import { NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN } from '@/utils/shared/sharedEnv'
@@ -84,6 +87,22 @@ export function TopLevelClientLogic({
   children: React.ReactNode
   locale: SupportedLocale
 }) {
+  const supportedWallets: WalletConfig<any>[] = [
+    metamaskWallet(),
+    coinbaseWallet({ recommended: true }),
+    walletConnect(),
+    embeddedWallet({
+      auth: {
+        options: ['google', 'email'],
+      },
+    }),
+  ]
+
+  // Used to authenticate cypresses tests
+  if (isCypress) {
+    supportedWallets.push(localWallet())
+  }
+
   return (
     <LocaleContext.Provider value={locale}>
       <ThirdwebProvider
@@ -94,16 +113,7 @@ export function TopLevelClientLogic({
         }}
         clientId={NEXT_PUBLIC_THIRDWEB_CLIENT_ID}
         locale={en()}
-        supportedWallets={[
-          metamaskWallet(),
-          coinbaseWallet({ recommended: true }),
-          walletConnect(),
-          embeddedWallet({
-            auth: {
-              options: ['google', 'email'],
-            },
-          }),
-        ]}
+        supportedWallets={supportedWallets}
       >
         {/* https://nextjs.org/docs/messages/missing-suspense-with-csr-bailout */}
         <Suspense>

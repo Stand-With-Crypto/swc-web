@@ -2,7 +2,6 @@
 // The config you add here will be used whenever a users loads a page in their browser.
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/
 
-import { ExtraErrorData } from '@sentry/integrations'
 import * as Sentry from '@sentry/nextjs'
 
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
@@ -54,7 +53,7 @@ Sentry.init({
 
   // You can remove this option if you're not planning to use the Sentry Session Replay feature:
   integrations: [
-    new ExtraErrorData({ depth: 10 }),
+    Sentry.extraErrorDataIntegration({ depth: 10 }),
     Sentry.replayIntegration({
       // see https://docs.sentry.io/platforms/javascript/session-replay/configuration/#using-a-custom-compression-worker
       // NOTE: when upgrading Sentry major versions we need to manually update this file for compatibility
