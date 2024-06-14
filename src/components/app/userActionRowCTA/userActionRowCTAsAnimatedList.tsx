@@ -35,9 +35,6 @@ export function UserActionRowCTAsAnimatedList({
     <div className={className}>
       {filteredActions.map((item, index) => {
         const props = getUserActionCTAInfo(item.action, item.campaign)
-
-        if (!props) return null
-
         return (
           <motion.div
             // we apply individual pb to the elements instead of space-y-7 to ensure that there's no jank in the animation as the height transitions in

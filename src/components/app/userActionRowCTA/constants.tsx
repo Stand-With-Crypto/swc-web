@@ -123,5 +123,5 @@ export function getUserActionCTAInfo(actionType: ActiveClientUserActionType, cam
     return USER_ACTION_ROW_CTA_INFO_FROM_CAMPAIGN[campaign]
   }
 
-  return null
+  throw new Error(`No CTA info found for campaign: ${campaign}`)
 }
