@@ -24,13 +24,16 @@ export function UserActionFormJoinSWCDialog(props: UserActionFormJoinSWCDialogPr
   return (
     <>
       <LoginDialogWrapper
-        authenticatedContent={children}
+        authenticatedContent={
+          <>
+            {children}
+            <UserActionFormJoinSWCSuccessDialog defaultOpen={false} {...dialogProps} />
+          </>
+        }
         onLoginSuccess={() => dialogProps.onOpenChange(true)}
       >
         {children}
       </LoginDialogWrapper>
-
-      <UserActionFormJoinSWCSuccessDialog defaultOpen={dialogProps.open} {...dialogProps} />
     </>
   )
 }
