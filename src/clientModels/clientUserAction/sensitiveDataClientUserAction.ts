@@ -85,7 +85,7 @@ type SensitiveDataClientUserActionTweetAtPerson = {
 At the database schema level we can't enforce that a single action only has one "type" FK, but at the client level we can and should
 */
 export type SensitiveDataClientUserAction = ClientModel<
-  Pick<UserAction, 'id' | 'actionType'> & {
+  Pick<UserAction, 'id' | 'actionType' | 'campaignName'> & {
     nftMint: ClientNFTMint | null
     datetimeCreated: string
   } & (
@@ -119,11 +119,12 @@ export const getSensitiveDataClientUserAction = ({
 }: {
   record: SensitiveDataClientUserActionDatabaseQuery
 }): SensitiveDataClientUserAction => {
-  const { id, datetimeCreated, actionType, nftMint } = record
+  const { id, datetimeCreated, actionType, nftMint, campaignName } = record
   const sharedProps = {
     id,
     datetimeCreated: datetimeCreated.toISOString(),
     actionType,
+    campaignName,
     nftMint: nftMint
       ? {
           ...getClientNFTMint(nftMint),

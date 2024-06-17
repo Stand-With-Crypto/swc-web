@@ -16,6 +16,7 @@ import { useLocale } from '@/hooks/useLocale'
 import { ActiveClientUserActionType } from '@/utils/shared/activeUserAction'
 import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
 import { getIntlUrls } from '@/utils/shared/urls'
+import { USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns'
 import { getYourPoliticianCategoryShortDisplayName } from '@/utils/shared/yourPoliticianCategory'
 
 export const USER_ACTION_ROW_CTA_INFO: Record<
@@ -93,4 +94,21 @@ export const USER_ACTION_ROW_CTA_INFO: Record<
     canBeTriggeredMultipleTimes: true,
     WrapperComponent: UserActionFormNFTMintDialog,
   },
+}
+
+export const USER_ACTION_ROW_CTA_INFO_FROM_CAMPAIGN: Record<
+  string,
+  Omit<UserActionRowCTAProps, 'state'>
+> = {} // This is a temp placeholder. This will be updated with the actual CNN campaign data
+
+export function getUserActionCTAInfo(actionType: ActiveClientUserActionType, campaign?: string) {
+  if (!campaign || campaign === USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[actionType]) {
+    return USER_ACTION_ROW_CTA_INFO[actionType]
+  }
+
+  if (USER_ACTION_ROW_CTA_INFO_FROM_CAMPAIGN[campaign]) {
+    return USER_ACTION_ROW_CTA_INFO_FROM_CAMPAIGN[campaign]
+  }
+
+  throw new Error(`No CTA info found for campaign: ${campaign}`)
 }
