@@ -1,3 +1,12 @@
+import { UserActionType } from '@prisma/client'
+
+import {
+  CallIcon,
+  EmailIcon,
+  JoinIcon,
+  VoterRegIcon,
+} from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapIcons'
+
 export const STATE_COORDS: Record<string, [number, number]> = {
   AL: [-86.9023, 32.3182],
   AK: [-152.4044, 61.3707],
@@ -54,3 +63,24 @@ export const STATE_COORDS: Record<string, [number, number]> = {
 
 export const ADVOCATES_HEATMAP_GEO_URL =
   'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/public/state-map-json-metadata-R1nrmLtd1Af1gWq0bFp1hWNjmAWJLn.json'
+
+export const ADVOCATES_ACTIONS: Partial<
+  Record<
+    UserActionType,
+    { icon: ({ isPulsing }: { isPulsing?: boolean }) => JSX.Element; label: string }
+  >
+> = {
+  EMAIL: {
+    icon: EmailIcon,
+    label: 'Email',
+  },
+  CALL: { icon: CallIcon, label: 'Call' },
+  OPT_IN: {
+    icon: JoinIcon,
+    label: 'Join',
+  },
+  VOTER_REGISTRATION: {
+    icon: VoterRegIcon,
+    label: 'Voter Reg',
+  },
+}

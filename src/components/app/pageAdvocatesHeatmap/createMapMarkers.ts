@@ -1,10 +1,12 @@
+import { UserActionType } from '@prisma/client'
+
 import { STATE_COORDS } from '@/components/app/pageAdvocatesHeatmap/constants'
-import { AdvocatePerState } from '@/data/aggregations/getTotalAdvocatesPerState'
 import { PublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 
 export interface MapMarker {
   name: string
   coordinates: [number, number]
+  actionType?: UserActionType
 }
 
 export const createMarkersFromActions = (recentActivity: PublicRecentActivity) => {
@@ -22,7 +24,7 @@ export const createMarkersFromActions = (recentActivity: PublicRecentActivity) =
         const coordinates = STATE_COORDS[state as keyof typeof STATE_COORDS]
 
         if (coordinates) {
-          markers.push({ name: state, coordinates })
+          markers.push({ name: state, coordinates, actionType: item.actionType })
           addedStates.add(state)
         }
       }
@@ -30,12 +32,4 @@ export const createMarkersFromActions = (recentActivity: PublicRecentActivity) =
   })
 
   return markers
-}
-
-export const createMarkersFromTopAdvocateStates = (advocatesMapData: AdvocatePerState[]) => {
-  return advocatesMapData.map<MapMarker>(({ state }) => {
-    const coordinates = STATE_COORDS[state as keyof typeof STATE_COORDS] ?? [0, 0]
-
-    return { name: state, coordinates }
-  })
 }
