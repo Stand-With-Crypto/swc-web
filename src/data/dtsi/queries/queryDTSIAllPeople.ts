@@ -30,9 +30,13 @@ export const queryDTSIAllPeople = async ({ limit }: { limit: number } = { limit:
   if (limit > 1500) {
     throw new Error('We should not be requesting more than 1500 people at a time')
   }
-  const results = await fetchDTSI<DTSI_AllPeopleQuery, DTSI_AllPeopleQueryVariables>(query, {
-    limit,
-  })
+  const results = await fetchDTSI<DTSI_AllPeopleQuery, DTSI_AllPeopleQueryVariables>(
+    query,
+    {
+      limit,
+    },
+    ['DTSI_AllPeopleQuery'],
+  )
   if (results.people.length === 1500) {
     Sentry.captureMessage(
       'Previous limit set in queryDTSIAllPeople has been reached, we should consider re-evaluating our architecture',
