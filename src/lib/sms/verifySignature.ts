@@ -25,5 +25,5 @@ export async function verifySignature(request: Request) {
     params: Object.fromEntries(params),
   })
 
-  return twilio.validateRequest(authToken, signature, request.url, params)
+  return twilio.validateRequest(authToken, signature, request.url, Object.fromEntries(params))
 }
