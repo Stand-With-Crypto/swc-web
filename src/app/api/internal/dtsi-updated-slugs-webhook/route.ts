@@ -1,12 +1,13 @@
 import { flatten } from 'lodash-es'
-import { revalidatePath } from 'next/cache'
+import { revalidatePath, revalidateTag } from 'next/cache'
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 
+import { DTSI_AllPeopleQueryTag } from '@/data/dtsi/queries/queryDTSIAllPeople'
 import { ORDERED_SUPPORTED_LOCALES } from '@/intl/locales'
 import { getLogger } from '@/utils/shared/logger'
 import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
-import { apiUrls, getIntlUrls } from '@/utils/shared/urls'
+import { getIntlUrls } from '@/utils/shared/urls'
 
 const logger = getLogger('/api/internal/dtsi-updated-slugs-webhook')
 
@@ -44,12 +45,15 @@ export async function POST(request: NextRequest) {
       return [
         urls.home(),
         urls.politiciansHomepage(),
-        apiUrls.dtsiAllPeople(),
         ...validatedFields.personSlugs.map(slug => urls.politicianDetails(slug)),
       ]
     }),
   )
   pathsToUpdate.forEach(page => revalidatePath(page))
   logger.info('updated pages', pathsToUpdate)
+
+  revalidateTag(DTSI_AllPeopleQueryTag)
+  logger.info('updated fetch tags', DTSI_AllPeopleQueryTag)
+
   return NextResponse.json({ pathsToUpdate })
 }
