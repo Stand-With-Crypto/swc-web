@@ -107,8 +107,8 @@ export const USER_ACTION_ROW_CTA_INFO_FROM_CAMPAIGN: Record<
   [UserActionEmailCampaignName.CNN_PRESIDENTIAL_DEBATE_2024]: {
     actionType: UserActionType.EMAIL,
     image: '/actionTypeIcons/email-cnn.png',
-    text: 'Ask CNN to feature crypto at the Presidential Debate',
-    subtext: 'Email CNN and ask them to include crypto in the presidential debate.',
+    text: 'Ask CNN to include crypto questions at the Presidential Debate',
+    subtext: 'Send an email to CNN and tell them we need the candidates’ stance on crypto',
     canBeTriggeredMultipleTimes: true,
     WrapperComponent: UserActionFormEmailCNNDialog,
   },
