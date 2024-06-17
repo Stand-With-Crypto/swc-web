@@ -3,9 +3,8 @@
 import { useMemo } from 'react'
 import { UserActionType } from '@prisma/client'
 
-import { getUserActionCTAInfo } from '@/components/app/userActionRowCTA/constants'
 import { UserActionRowCTA, UserActionRowCTAProps } from '@/components/app/userActionRowCTA'
-import { USER_ACTION_ROW_CTA_INFO } from '@/components/app/userActionRowCTA/constants'
+import { getUserActionCTAInfo } from '@/components/app/userActionRowCTA/constants'
 import { cn } from '@/utils/web/cn'
 import { USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN } from '@/utils/web/userActionUtils'
 

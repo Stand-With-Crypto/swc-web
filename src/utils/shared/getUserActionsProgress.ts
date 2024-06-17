@@ -1,13 +1,14 @@
-import { USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN } from '@/utils/web/userActionUtils'
 import { UserActionType } from '@prisma/client'
 import uniq from 'lodash-es/uniq'
+
+import { USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN } from '@/utils/web/userActionUtils'
 
 const USER_ACTIONS_EXCLUDED_FROM_CTA: UserActionType[] = [
   UserActionType.LIVE_EVENT,
   UserActionType.TWEET_AT_PERSON,
 ]
 
-interface GetUserActionsProgressArgs {
+export interface GetUserActionsProgressArgs {
   userHasEmbeddedWallet: boolean
   performedUserActionTypes: {
     actionType: UserActionType

@@ -133,9 +133,7 @@ export function UserActionFormNFTMintTransactionWatch({
             data={{
               userHasEmbeddedWallet: userDataResponse.user.hasEmbeddedWallet,
               performedUserActionTypes:
-                performedUserActionTypesResponse?.performedUserActionTypes?.map(
-                  action => action.actionType,
-                ) || [],
+                performedUserActionTypesResponse?.performedUserActionTypes || [],
             }}
           />
         )}

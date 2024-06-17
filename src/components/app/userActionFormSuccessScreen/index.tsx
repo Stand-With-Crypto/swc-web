@@ -61,10 +61,7 @@ export function UserActionFormSuccessScreen(props: UserActionFormSuccessScreenPr
         <UserActionFormSuccessScreenNextAction
           data={{
             userHasEmbeddedWallet: user.hasEmbeddedWallet,
-            performedUserActionTypes:
-              performedActionsResponse.data?.performedUserActionTypes.map(
-                action => action.actionType,
-              ) || [],
+            performedUserActionTypes: performedActionsResponse.data?.performedUserActionTypes || [],
           }}
         />
       )}

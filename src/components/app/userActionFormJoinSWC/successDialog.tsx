@@ -36,10 +36,7 @@ export function UserActionFormJoinSWCSuccessDialog(props: UserActionFormJoinSWCS
   const session = useSession()
   const performedUserActionTypesResponse = useApiResponseForUserPerformedUserActionTypes()
 
-  const performedUserActionTypes =
-    performedUserActionTypesResponse.data?.performedUserActionTypes?.map(
-      action => action.actionType,
-    )
+  const performedUserActionTypes = performedUserActionTypesResponse.data?.performedUserActionTypes
 
   return (
     <Dialog {...dialogProps}>

@@ -19,7 +19,7 @@ import {
   USER_ACTION_DEEPLINK_MAP,
   UserActionTypesWithDeeplink,
 } from '@/utils/shared/urlsDeeplinkUserActions'
-import { USER_ACTION_TYPE_CTA_PRIORITY_ORDER } from '@/utils/web/userActionUtils'
+import { USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN } from '@/utils/web/userActionUtils'
 
 export function UserActionFormSuccessScreenNextActionSkeleton() {
   return (
@@ -75,7 +75,7 @@ export function UserActionFormSuccessScreenNextAction({
       <UserActionRowCTAsList
         excludeUserActionTypes={[
           ...Array.from(excludeUserActionTypes),
-          ...performedUserActionTypes,
+          ...performedUserActionTypes.map(({ actionType }) => actionType),
         ]}
         performedUserActionTypes={performedUserActionTypes}
         render={ctaProps => {
@@ -90,9 +90,12 @@ export function UserActionFormSuccessScreenNextAction({
 
       {/** Completed actions last */}
       <UserActionRowCTAsList
-        excludeUserActionTypes={USER_ACTION_TYPE_CTA_PRIORITY_ORDER.filter(
-          actionType => !performedUserActionTypes.includes(actionType),
-        )}
+        excludeUserActionTypes={USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN.filter(
+          ({ action }) =>
+            !performedUserActionTypes.some(
+              performedAction => performedAction.actionType === action,
+            ),
+        ).map(({ action }) => action)}
         performedUserActionTypes={performedUserActionTypes}
         render={ctaProps => (
           <UserActionRowCTAButton
