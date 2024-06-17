@@ -77,12 +77,7 @@ export function UserActionFormEmailCNN({
       firstName: initialValues?.firstName || user?.firstName,
       lastName: initialValues?.lastName || user?.lastName,
       campaignName: UserActionEmailCampaignName.CNN_PRESIDENTIAL_DEBATE_2024,
-      subject: 'Include crypto in the Presidential Debate',
-      message: `I stand for crypto and I urge you to support crypto legislation that will establish clear regulations for the betterment of consumers, investors, developers, and beyond.
-
-Over the past 15 years, crypto has emerged onto the world stage, and the power of crypto is being realized through an increasing number of use cases, such as cross border payments and remittances, enablement of humanitarian relief efforts, and access to funds in otherwise inaccessible situations. The potential of crypto is endless: it creates ways for creators and artists to directly receive payments and royalties, it provides pathways for aid to oppressed groups, it gives revolutionaries in totalitarian states access to uncensorable financial services, and so much more. Nonetheless, it's equally important to ensure that this potential grows in a responsible manner and adheres to regulatory standards.`,
-    },
-  })
+      subject: 'Include Crypto In The Debate',
 
   React.useEffect(() => {
     if (isDesktop) {
@@ -135,11 +130,12 @@ Over the past 15 years, crypto has emerged onto the world stage, and the power o
         <ScrollArea className="overflow-auto">
           <div className={cn(dialogContentPaddingStyles, 'space-y-4 md:space-y-8')}>
             <PageTitle className="mb-3" size="sm">
-              Ask CNN to feature crypto at the Presidential Debate
+              Ask CNN to include crypto at the Debate
             </PageTitle>
             <PageSubTitle className="mb-7">
-              Crypto deserves to be a presidential debate topic. Send an email to CNN and ask them
-              to include questions around crypto in the debate.
+              Crypto deserves to be a topic at the Presidential Debate. Send a note to CNN and ask
+              them to make sure that the 52 million crypto owners in America are represented on the
+              debate stage.
             </PageSubTitle>
             <div className="space-y-4">
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
