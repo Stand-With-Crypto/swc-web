@@ -8,12 +8,11 @@ export async function verifySignature(request: Request) {
   }
 
   const signature = request.headers.get('X-Twilio-Signature')
-  const url = new URL(request.url)
   const params = new URLSearchParams(await request.text())
 
   if (!signature) {
     throw new Error('Missing verification headers')
   }
 
-  return twilio.validateRequest(authToken, signature, url.href, params)
+  return twilio.validateRequest(authToken, signature, request.url, params)
 }
