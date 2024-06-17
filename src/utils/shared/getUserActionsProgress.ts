@@ -31,9 +31,9 @@ export function getUserActionsProgress({
     return excludeUserActionTypes.has(action.actionType) ? count : count + 1
   }, 0)
 
-  const numActionsAvailable =
-    Object.values(USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN).length -
-    excludeUserActionTypes.size
+  const numActionsAvailable = USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN.filter(
+    ({ action }) => !excludeUserActionTypes.has(action),
+  ).length
 
   return {
     progressValue: (numActionsCompleted / numActionsAvailable) * 100,
