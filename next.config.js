@@ -41,6 +41,7 @@ const contentSecurityPolicy = {
   'connect-src': [
     "'self'",
     'ws: wss:',
+    'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com',
     'https://cloudflare-eth.com',
     'https://c.thirdweb.com/',
     // Thirdweb contract metadata
