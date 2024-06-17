@@ -1,5 +1,5 @@
 'use client'
-import React, { useRef } from 'react'
+import React from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { UserActionType } from '@prisma/client'
@@ -62,7 +62,6 @@ export function UserActionFormEmailCNN({
   const isDesktop = useIsDesktop()
   const router = useRouter()
   const urls = useIntlUrls()
-  const hasModifiedMessage = useRef(false)
   const form = useForm<FormValues>({
     resolver: zodResolver(zodUserActionFormEmailCNNFields),
     defaultValues: {
@@ -78,6 +77,20 @@ export function UserActionFormEmailCNN({
       lastName: initialValues?.lastName || user?.lastName,
       campaignName: UserActionEmailCampaignName.CNN_PRESIDENTIAL_DEBATE_2024,
       subject: 'Include Crypto In The Debate',
+      message: getEmailMessage({
+        firstName: initialValues?.firstName || user?.firstName,
+        lastName: initialValues?.lastName || user?.lastName,
+      }),
+    },
+  })
+
+  function handleMessageChange() {
+    const firstName = form.getValues('firstName')
+    const lastName = form.getValues('lastName')
+    const newMessage = getEmailMessage({ firstName, lastName })
+
+    form.setValue('message', newMessage)
+  }
 
   React.useEffect(() => {
     if (isDesktop) {
@@ -146,7 +159,19 @@ export function UserActionFormEmailCNN({
                     <FormItem>
                       <FormLabel>First name</FormLabel>
                       <FormControl>
-                        <Input placeholder="First name" {...field} />
+                        <Input
+                          placeholder="First name"
+                          {...field}
+                          onBlur={e => {
+                            handleMessageChange()
+                            form.setFocus(
+                              e.relatedTarget?.attributes?.getNamedItem('name')?.value as
+                                | 'lastName'
+                                | 'emailAddress'
+                                | 'address',
+                            )
+                          }}
+                        />
                       </FormControl>
                       <FormErrorMessage />
                     </FormItem>
@@ -160,7 +185,19 @@ export function UserActionFormEmailCNN({
                     <FormItem>
                       <FormLabel>Last name</FormLabel>
                       <FormControl>
-                        <Input placeholder="Last name" {...field} />
+                        <Input
+                          placeholder="Last name"
+                          {...field}
+                          onBlur={e => {
+                            handleMessageChange()
+                            form.setFocus(
+                              e.relatedTarget?.attributes?.getNamedItem('name')?.value as
+                                | 'emailAddress'
+                                | 'address'
+                                | 'firstName',
+                            )
+                          }}
+                        />
                       </FormControl>
                       <FormErrorMessage />
                     </FormItem>
@@ -213,7 +250,6 @@ export function UserActionFormEmailCNN({
                           rows={16}
                           {...field}
                           onChange={e => {
-                            hasModifiedMessage.current = true
                             field.onChange(e)
                           }}
                         />
@@ -255,4 +291,34 @@ export function UserActionFormEmailCNN({
       </form>
     </Form>
   )
+}
+
+function getEmailMessage({ firstName, lastName = '' }: { firstName?: string; lastName?: string }) {
+  if (!firstName) {
+    return `
+I am one of the 52 million Americans who own cryptocurrency. Crypto can drive American innovation and global leadership by fostering strong consumer protection, creating high-skilled jobs, and strengthening our national security. Unfortunately, bad policy could push this technology overseas, and cost the U.S. nearly 4 million jobs.
+
+Crypto owners are uniquely bipartisan - 18% Republicans, 22% Democrats, and 22% Independents hold crypto. Crypto provides access to the banking system to disenfranchised communities and communities of color and can help bolster an economy that works for everyone.
+
+On behalf of myself and all American crypto owners, I urge you to ask the candidates their position on cryptocurrency and its place in the American economy. Bipartisan crypto legislation has already passed the House of Representatives, and more and more elected officials are coming out in support of crypto.
+
+Giving the major Presidential candidates a chance to weigh in on this transformational technology in the first debate would go a long way towards educating the electorate and helping American crypto owners cast an informed ballot.
+
+Thank you for your consideration.
+    `
+  }
+
+  return `
+My name is ${firstName}, and I am one of the 52 million Americans who own cryptocurrency. Crypto can drive American innovation and global leadership by fostering strong consumer protection, creating high-skilled jobs, and strengthening our national security. Unfortunately, bad policy could push this technology overseas, and cost the U.S. nearly 4 million jobs.
+
+Crypto owners are uniquely bipartisan - 18% Republicans, 22% Democrats, and 22% Independents hold crypto. Crypto provides access to the banking system to disenfranchised communities and communities of color and can help bolster an economy that works for everyone.
+
+On behalf of myself and all American crypto owners, I urge you to ask the candidates their position on cryptocurrency and its place in the American economy. Bipartisan crypto legislation has already passed the House of Representatives, and more and more elected officials are coming out in support of crypto.
+
+Giving the major Presidential candidates a chance to weigh in on this transformational technology in the first debate would go a long way towards educating the electorate and helping American crypto owners cast an informed ballot.
+
+Thank you for your consideration,
+
+${firstName} ${lastName}
+  `
 }
