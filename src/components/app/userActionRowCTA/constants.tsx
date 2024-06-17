@@ -2,6 +2,7 @@
 
 import { UserActionType } from '@prisma/client'
 
+import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { CALL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormCallCongressperson/constants'
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
 import { UserActionFormEmailCNNDialog } from '@/components/app/userActionFormEmailCNN/dialog'
@@ -21,7 +22,6 @@ import {
   UserActionEmailCampaignName,
 } from '@/utils/shared/userActionCampaigns'
 import { getYourPoliticianCategoryShortDisplayName } from '@/utils/shared/yourPoliticianCategory'
-import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 
 export const USER_ACTION_ROW_CTA_INFO: Record<
   ActiveClientUserActionType,

@@ -3,6 +3,7 @@
 import React from 'react'
 import * as Sentry from '@sentry/nextjs'
 import { useENS } from '@thirdweb-dev/react'
+import dynamic from 'next/dynamic'
 import { useRouter } from 'next/navigation'
 import useSWR, { Arguments, useSWRConfig } from 'swr'
 
@@ -13,6 +14,7 @@ import {
 } from '@/components/app/authentication/constants'
 import { LazyUpdateUserProfileForm } from '@/components/app/updateUserProfileForm/lazyLoad'
 import { Dialog, DialogBody, DialogContent, DialogTrigger } from '@/components/ui/dialog'
+import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useDialog } from '@/hooks/useDialog'
@@ -24,8 +26,6 @@ import { appendENSHookDataToUser } from '@/utils/web/appendENSHookDataToUser'
 import { getUserSessionIdOnClient } from '@/utils/web/clientUserSessionId'
 
 import { ThirdwebLoginContent, ThirdwebLoginContentProps } from './thirdwebLoginContent'
-import dynamic from 'next/dynamic'
-import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 
 const UserActionFormJoinSWCSuccessDialog = dynamic(
   () =>
@@ -170,7 +170,7 @@ export function UnauthenticatedSection({
         onLoginSuccess?.()
       }
     },
-    [dialogProps, goToSection, isLoggedIn],
+    [dialogProps, goToSection, isLoggedIn, onLoginSuccess],
   )
 
   const handleLoginSuccess = React.useCallback(async () => {

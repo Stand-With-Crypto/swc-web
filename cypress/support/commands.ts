@@ -176,8 +176,7 @@ Cypress.Commands.add('waitForProfileCreation', (customUser = mockRandomUser) => 
 
   cy.wait(500)
 
-  // Cypress wont click the toast if theres a modal open
-  cy.contains('Profile updated').click({ force: true })
+  cy.contains('Profile updated')
 })
 
 Cypress.Commands.add('waitForLogout', () => {
