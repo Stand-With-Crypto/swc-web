@@ -49,8 +49,17 @@ export function UserActionFormEmailCNNSkeleton({ locale }: { locale: SupportedLo
               <FormItemSkeleton>
                 <Textarea
                   defaultValue={getDefaultText()}
-                  placeholder="I stand for crypto and I urge you to support crypto legislation that will establish clear regulations for the betterment of consumers, investors, developers, and beyond.
-Over the past 15 years, crypto has emerged onto the world stage, and the power of crypto is being realized through an increasing number of use cases, such as cross border payments and remittances, enablement of humanitarian relief efforts, and access to funds in otherwise inaccessible situations. The potential of crypto is endless: it creates ways for creators and artists to directly receive payments and royalties, it provides pathways for aid to oppressed groups, it gives revolutionaries in totalitarian states access to uncensorable financial services, and so much more. Nonetheless, it's equally important to ensure that this potential grows in a responsible manner and adheres to regulatory standards."
+                  placeholder={`
+I am one of the 52 million Americans who own cryptocurrency. Crypto can drive American innovation and global leadership by fostering strong consumer protection, creating high-skilled jobs, and strengthening our national security. Unfortunately, bad policy could push this technology overseas, and cost the U.S. nearly 4 million jobs.
+
+Crypto owners are uniquely bipartisan - 18% Republicans, 22% Democrats, and 22% Independents hold crypto. Crypto provides access to the banking system to disenfranchised communities and communities of color and can help bolster an economy that works for everyone.
+
+On behalf of myself and all American crypto owners, I urge you to ask the candidates their position on cryptocurrency and its place in the American economy. Bipartisan crypto legislation has already passed the House of Representatives, and more and more elected officials are coming out in support of crypto.
+
+Giving the major Presidential candidates a chance to weigh in on this transformational technology in the first debate would go a long way towards educating the electorate and helping American crypto owners cast an informed ballot.
+
+Thank you for your consideration.
+                      `}
                   rows={16}
                 />
               </FormItemSkeleton>
