@@ -1,4 +1,4 @@
-import { STATE_COORDS } from '@/components/app/advocatesHeatmap/constants'
+import { STATE_COORDS } from '@/components/app/pageAdvocatesHeatmap/constants'
 import { AdvocatePerState } from '@/data/aggregations/getTotalAdvocatesPerState'
 import { PublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 

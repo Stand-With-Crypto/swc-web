@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
+import { notFound } from 'next/navigation'
 
-import { AdvocatesHeatmap } from '@/components/app/advocatesHeatmap/advocatesHeatmap'
+import { AdvocatesHeatmapPage } from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmapPage'
 import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
 import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
 import { PageProps } from '@/types'
@@ -25,8 +26,13 @@ export default async function MapPage({ params }: PageProps<{ topStatesLimit: nu
   const homeDataProps = await getHomepageData()
   const advocatePerStateDataProps = await getAdvocatesMapData(params.topStatesLimit)
 
+  // redirects to not found in case of invalid topStatesLimit
+  if (isNaN(+params.topStatesLimit)) {
+    return notFound()
+  }
+
   return (
-    <AdvocatesHeatmap
+    <AdvocatesHeatmapPage
       advocatesMapPageData={advocatePerStateDataProps}
       homepageData={homeDataProps}
       locale={params.locale}

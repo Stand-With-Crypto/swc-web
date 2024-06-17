@@ -2,20 +2,20 @@
 
 import React, { useCallback, useMemo } from 'react'
 
-import { AdvocateHeatmapCounter } from '@/components/app/advocatesHeatmap/advocateHeatmapCounter'
-import { PageAdvocatesHeatmapProps } from '@/components/app/advocatesHeatmap/advocatesHeatmap.types'
+import { AdvocateHeatmapOdometer } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapOdometer'
+import { AdvocatesHeatmap } from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmap'
+import { PageAdvocatesHeatmapProps } from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmap.types'
 import {
   createMarkersFromActions,
   createMarkersFromTopAdvocateStates,
-} from '@/components/app/advocatesHeatmap/createMapMarkers'
-import { RenderMap } from '@/components/app/advocatesHeatmap/renderMap'
+} from '@/components/app/pageAdvocatesHeatmap/createMapMarkers'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { useApiAdvocateMap } from '@/hooks/useApiAdvocateMap'
 import { useApiRecentActivity } from '@/hooks/useApiRecentActivity'
 import { getUSStateCodeFromStateName } from '@/utils/shared/usStateUtils'
 
-export function AdvocatesHeatmap({
+export function AdvocatesHeatmapPage({
   title,
   description,
   locale,
@@ -57,9 +57,9 @@ export function AdvocatesHeatmap({
               <PageSubTitle>{description}</PageSubTitle>
             </div>
           ) : null}
-          <AdvocateHeatmapCounter homepageData={homepageData} locale={locale} />
+          <AdvocateHeatmapOdometer homepageData={homepageData} locale={locale} />
         </div>
-        <RenderMap
+        <AdvocatesHeatmap
           getTotalAdvocatesPerState={getTotalAdvocatesPerState}
           locale={locale}
           markers={markers}

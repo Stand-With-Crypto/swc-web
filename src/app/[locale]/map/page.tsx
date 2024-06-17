@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import { AdvocatesHeatmap } from '@/components/app/advocatesHeatmap/advocatesHeatmap'
+import { AdvocatesHeatmapPage } from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmapPage'
 import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
 import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
 import { PageProps } from '@/types'
@@ -26,7 +26,7 @@ export default async function MapPage({ params }: PageProps) {
   const advocatePerStateDataProps = await getAdvocatesMapData()
 
   return (
-    <AdvocatesHeatmap
+    <AdvocatesHeatmapPage
       advocatesMapPageData={advocatePerStateDataProps}
       description={description}
       homepageData={homeDataProps}

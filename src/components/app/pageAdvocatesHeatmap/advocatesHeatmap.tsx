@@ -3,9 +3,9 @@
 import { MouseEvent, useCallback, useState } from 'react'
 import { ComposableMap, Geographies, Geography, Marker } from 'react-simple-maps'
 
-import { TotalAdvocatesPerStateTooltip } from '@/components/app/advocatesHeatmap/advocatesHeatmapTooltip'
-import { ADVOCATES_HEATMAP_GEO_URL } from '@/components/app/advocatesHeatmap/constants'
-import { MapMarker } from '@/components/app/advocatesHeatmap/createMapMarkers'
+import { TotalAdvocatesPerStateTooltip } from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmapTooltip'
+import { ADVOCATES_HEATMAP_GEO_URL } from '@/components/app/pageAdvocatesHeatmap/constants'
+import { MapMarker } from '@/components/app/pageAdvocatesHeatmap/createMapMarkers'
 import { SupportedLocale } from '@/intl/locales'
 
 interface RenderMapProps {
@@ -15,7 +15,7 @@ interface RenderMapProps {
   getTotalAdvocatesPerState: (stateName: string) => number | undefined
 }
 
-export function RenderMap({
+export function AdvocatesHeatmap({
   locale,
   markers,
   topStateMarkers,

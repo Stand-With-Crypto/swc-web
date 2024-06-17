@@ -1,9 +1,11 @@
+'use client'
+
 import { useMemo } from 'react'
 
-import { TotalAdvocatesProps } from '@/components/app/advocatesHeatmap/advocatesHeatmap.types'
+import { TotalAdvocatesProps } from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmap.types'
 import { AnimatedNumericOdometer } from '@/components/ui/animatedNumericOdometer'
 import odometerStyles from '@/components/ui/animatedNumericOdometer/odometer.module.css'
-import { roundDownNumberToAnimateIn } from '@/components/ui/animatedNumericOdometer/roundDownNumberToAnimateIn'
+import { roundDownNumberByGranularityToAnimateIn } from '@/components/ui/animatedNumericOdometer/roundDownNumberToAnimateIn'
 import {
   getHomepageData,
   GetHomepageTopLevelMetricsResponse,
@@ -16,11 +18,11 @@ const mockDecreaseInValuesOnInitialLoadSoWeCanAnimateIncrease = (
   initial: Omit<TotalAdvocatesProps, 'locale' | 'sumDonations' | 'countPolicymakerContacts'>,
 ): Omit<TotalAdvocatesProps, 'locale' | 'sumDonations' | 'countPolicymakerContacts'> => ({
   countUsers: {
-    count: roundDownNumberToAnimateIn(initial.countUsers.count, 100),
+    count: roundDownNumberByGranularityToAnimateIn(initial.countUsers.count, 100000),
   },
 })
 
-export function AdvocateHeatmapCounter({
+export function AdvocateHeatmapOdometer({
   locale,
   homepageData,
 }: {
