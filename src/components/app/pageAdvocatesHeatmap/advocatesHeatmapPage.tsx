@@ -34,10 +34,7 @@ export function AdvocatesHeatmapPage({
       createMarkersFromTopAdvocateStates(advocatesPerState.data.advocatesMapData.topAdvocateStates),
     [advocatesPerState.data.advocatesMapData.topAdvocateStates],
   )
-  const totalAdvocatesPerState = useMemo(
-    () => advocatesPerState.data.advocatesMapData.totalAdvocatesPerState,
-    [advocatesPerState.data.advocatesMapData],
-  )
+  const totalAdvocatesPerState = advocatesPerState.data.advocatesMapData.totalAdvocatesPerState
 
   const getTotalAdvocatesPerState = useCallback(
     (stateName: string) => {

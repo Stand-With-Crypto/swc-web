@@ -28,6 +28,21 @@ interface MetadataDetails {
   }
 }
 
+export const TOP_LEVEL_METADATA_DETAILS: Partial<Metadata> = {
+  metadataBase: new URL('https://www.standwithcrypto.org'),
+  applicationName: 'Stand With Crypto',
+  icons: [
+    { url: '/logo/favicon-16x16.png', sizes: '16x16' },
+    { url: '/logo/favicon-32x32.png', sizes: '32x32' },
+  ],
+  // manifest: '/site.webmanifest', // LATER-TASK figure out why we get 401s when we uncomment this
+  appleWebApp: {
+    title: 'Stand With Crypto',
+    statusBarStyle: 'black-translucent',
+    startupImage: ['/logo/apple-touch-icon.png'],
+  },
+}
+
 export const generateMetadataDetails = ({
   title,
   description,
@@ -48,18 +63,6 @@ export const generateMetadataDetails = ({
       title,
       description,
       images: [useImage],
-    },
-    metadataBase: new URL('https://www.standwithcrypto.org'),
-    applicationName: 'Stand With Crypto',
-    icons: [
-      { url: '/logo/favicon-16x16.png', sizes: '16x16' },
-      { url: '/logo/favicon-32x32.png', sizes: '32x32' },
-    ],
-    // manifest: '/site.webmanifest', // LATER-TASK figure out why we get 401s when we uncomment this
-    appleWebApp: {
-      title: 'Stand With Crypto',
-      statusBarStyle: 'black-translucent',
-      startupImage: ['/logo/apple-touch-icon.png'],
     },
   } satisfies Metadata
 }

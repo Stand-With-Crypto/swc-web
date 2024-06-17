@@ -26,7 +26,6 @@ export default async function MapPage({ params }: PageProps<{ topStatesLimit: nu
   const homeDataProps = await getHomepageData()
   const advocatePerStateDataProps = await getAdvocatesMapData(params.topStatesLimit)
 
-  // redirects to not found in case of invalid topStatesLimit
   if (isNaN(+params.topStatesLimit)) {
     return notFound()
   }
@@ -36,7 +35,7 @@ export default async function MapPage({ params }: PageProps<{ topStatesLimit: nu
       advocatesMapPageData={advocatePerStateDataProps}
       homepageData={homeDataProps}
       locale={params.locale}
-      topStatesLimit={+params.topStatesLimit}
+      topStatesLimit={params.topStatesLimit}
     />
   )
 }

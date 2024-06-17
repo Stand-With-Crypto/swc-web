@@ -52,4 +52,5 @@ export const STATE_COORDS: Record<string, [number, number]> = {
   DC: [-77.026, 38.8964],
 }
 
-export const ADVOCATES_HEATMAP_GEO_URL = '/advocatesHeatmap/states-10m.json'
+export const ADVOCATES_HEATMAP_GEO_URL =
+  'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/public/state-map-json-metadata-R1nrmLtd1Af1gWq0bFp1hWNjmAWJLn.json'
