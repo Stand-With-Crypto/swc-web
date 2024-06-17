@@ -7,7 +7,10 @@ import { useRouter } from 'next/navigation'
 import useSWR, { Arguments, useSWRConfig } from 'swr'
 
 import { ClientUnidentifiedUser } from '@/clientModels/clientUser/clientUser'
-import { ANALYTICS_NAME_LOGIN } from '@/components/app/authentication/constants'
+import {
+  ANALYTICS_NAME_LOGIN,
+  ANALYTICS_NAME_USER_ACTION_SUCCESS_JOIN_SWC,
+} from '@/components/app/authentication/constants'
 import { LazyUpdateUserProfileForm } from '@/components/app/updateUserProfileForm/lazyLoad'
 import { Dialog, DialogBody, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -21,6 +24,18 @@ import { appendENSHookDataToUser } from '@/utils/web/appendENSHookDataToUser'
 import { getUserSessionIdOnClient } from '@/utils/web/clientUserSessionId'
 
 import { ThirdwebLoginContent, ThirdwebLoginContentProps } from './thirdwebLoginContent'
+import dynamic from 'next/dynamic'
+import { LoadingOverlay } from '@/components/ui/loadingOverlay'
+
+const UserActionFormJoinSWCSuccessDialog = dynamic(
+  () =>
+    import('@/components/app/userActionFormJoinSWC/successDialog').then(
+      module => module.UserActionFormJoinSWCSuccessDialog,
+    ),
+  {
+    loading: () => <LoadingOverlay />,
+  },
+)
 
 interface LoginDialogWrapperProps extends React.PropsWithChildren<ThirdwebLoginContentProps> {
   authenticatedContent?: React.ReactNode
@@ -35,11 +50,6 @@ interface LoginDialogWrapperProps extends React.PropsWithChildren<ThirdwebLoginC
    * instead of our internal authentication
    */
   useThirdwebSession?: boolean
-
-  /**
-   * Callback that is called when the user logs in.
-   */
-  onLoginSuccess?: () => void
 }
 
 enum LoginSections {
@@ -55,7 +65,6 @@ export function LoginDialogWrapper({
   loadingFallback,
   forceUnauthenticated,
   useThirdwebSession = false,
-  onLoginSuccess,
   ...props
 }: LoginDialogWrapperProps) {
   const session = useSession()
@@ -65,6 +74,9 @@ export function LoginDialogWrapper({
     analyticsName: 'Login Button',
   })
   const dialogProps = useDialog({ analytics: ANALYTICS_NAME_LOGIN })
+  const successDialogProps = useDialog({
+    analytics: ANALYTICS_NAME_USER_ACTION_SUCCESS_JOIN_SWC,
+  })
 
   const isLoggedIn = React.useMemo(
     () => (useThirdwebSession ? session.isLoggedInThirdweb : session.isLoggedIn),
@@ -103,7 +115,14 @@ export function LoginDialogWrapper({
   }
 
   if (isLoggedIn && currentSection === LoginSections.AUTHENTICATED && !forceUnauthenticated) {
-    return authenticatedContent
+    return (
+      <>
+        {session.user?.primaryUserCryptoAddress?.wasRecentlyUpdated && successDialogProps.open ? (
+          <UserActionFormJoinSWCSuccessDialog {...successDialogProps} />
+        ) : null}
+        {authenticatedContent}
+      </>
+    )
   }
 
   return (
@@ -112,7 +131,7 @@ export function LoginDialogWrapper({
       dialogProps={dialogProps}
       goToSection={goToSection}
       isLoggedIn={isLoggedIn}
-      onLoginSuccess={onLoginSuccess}
+      onLoginSuccess={() => successDialogProps.onOpenChange(true)}
       {...props}
     >
       {children}
@@ -126,7 +145,7 @@ interface UnauthenticatedSectionProps extends React.PropsWithChildren<ThirdwebLo
   dialogProps: ReturnType<typeof useDialog>
   isLoggedIn: boolean
   /**
-   * Callback that is called when the user successfully logs in.
+   * Callback that is called after the user logs in and closes the dialog.
    */
   onLoginSuccess?: () => void
 }
@@ -148,6 +167,7 @@ export function UnauthenticatedSection({
 
       if (!open && isLoggedIn) {
         goToSection(LoginSections.AUTHENTICATED)
+        onLoginSuccess?.()
       }
     },
     [dialogProps, goToSection, isLoggedIn],
@@ -174,9 +194,7 @@ export function UnauthenticatedSection({
     } else {
       setDialogOpen(false)
     }
-
-    onLoginSuccess?.()
-  }, [goToSection, mutate, onLoginSuccess, setDialogOpen])
+  }, [goToSection, mutate, setDialogOpen])
 
   return (
     <Dialog {...dialogProps} onOpenChange={setDialogOpen}>

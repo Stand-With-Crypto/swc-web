@@ -7,7 +7,6 @@ import { UserActionFormCallCongresspersonDialog } from '@/components/app/userAct
 import { UserActionFormEmailCNNDialog } from '@/components/app/userActionFormEmailCNN/dialog'
 import { EMAIL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormEmailCongressperson/constants'
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
-import { UserActionFormJoinSWCDialog } from '@/components/app/userActionFormJoinSWC'
 import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
 import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/dialog'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
@@ -22,6 +21,7 @@ import {
   UserActionEmailCampaignName,
 } from '@/utils/shared/userActionCampaigns'
 import { getYourPoliticianCategoryShortDisplayName } from '@/utils/shared/yourPoliticianCategory'
+import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 
 export const USER_ACTION_ROW_CTA_INFO: Record<
   ActiveClientUserActionType,
@@ -35,7 +35,9 @@ export const USER_ACTION_ROW_CTA_INFO: Record<
     shortText: 'Join Stand With Crypto',
     shortSubtext: 'Join the movement to keep crypto in America.',
     canBeTriggeredMultipleTimes: false,
-    WrapperComponent: UserActionFormJoinSWCDialog,
+    WrapperComponent: ({ children }) => (
+      <LoginDialogWrapper authenticatedContent={children}>{children}</LoginDialogWrapper>
+    ),
   },
   [UserActionType.VOTER_REGISTRATION]: {
     actionType: UserActionType.VOTER_REGISTRATION,
