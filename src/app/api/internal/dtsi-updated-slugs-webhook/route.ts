@@ -3,13 +3,13 @@ import { revalidatePath, revalidateTag } from 'next/cache'
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 
+import { DTSI_AllPeopleQueryTag } from '@/data/dtsi/queries/queryDTSIAllPeople'
 import { ORDERED_SUPPORTED_LOCALES } from '@/intl/locales'
 import { getLogger } from '@/utils/shared/logger'
 import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
 import { getIntlUrls } from '@/utils/shared/urls'
 
 const logger = getLogger('/api/internal/dtsi-updated-slugs-webhook')
-const DTSI_AllPeopleQueryTag = 'DTSI_AllPeopleQuery'
 
 const zodPayload = z.object({
   type: z.literal('people-with-updates'),

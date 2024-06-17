@@ -4,6 +4,8 @@ import { fetchDTSI } from '@/data/dtsi/fetchDTSI'
 import { fragmentDTSIPersonCard } from '@/data/dtsi/fragments/fragmentDTSIPersonCard'
 import { DTSI_AllPeopleQuery, DTSI_AllPeopleQueryVariables } from '@/data/dtsi/generated'
 
+export const DTSI_AllPeopleQueryTag = 'DTSI_AllPeopleQuery'
+
 export const query = /* GraphQL */ `
   query AllPeople($limit: Int!) {
     people(
@@ -35,7 +37,7 @@ export const queryDTSIAllPeople = async ({ limit }: { limit: number } = { limit:
     {
       limit,
     },
-    ['DTSI_AllPeopleQuery'],
+    [DTSI_AllPeopleQueryTag],
   )
   if (results.people.length === 1500) {
     Sentry.captureMessage(
