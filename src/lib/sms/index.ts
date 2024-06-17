@@ -21,9 +21,14 @@ export const sendSMS = async (payload: SendSMSPayload) => {
     throw new Error('Invalid sendSMS payload')
   }
 
-  try {
-    const { body, to } = validatedInput.data
+  const { body, to } = validatedInput.data
 
+  // only send SMS to US numbers
+  if (!to.startsWith('+1')) {
+    throw new Error('Invalid phone number')
+  }
+
+  try {
     return client.messages.create({
       from: process.env.TWILIO_PHONE_NUMBER,
       body,
