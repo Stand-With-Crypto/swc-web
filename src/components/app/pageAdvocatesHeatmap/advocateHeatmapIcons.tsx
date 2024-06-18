@@ -1,4 +1,12 @@
-export function CallIcon({ isPulsing = false, height = 40, width = 40 }) {
+import { SVGAttributes } from 'react'
+
+export interface IconProps extends SVGAttributes<SVGSVGElement> {
+  isPulsing?: boolean
+  height?: number
+  width?: number
+}
+
+export function CallIcon({ isPulsing = false, height = 40, width = 40, ...rest }: IconProps) {
   return (
     <svg
       fill="none"
@@ -10,6 +18,7 @@ export function CallIcon({ isPulsing = false, height = 40, width = 40 }) {
       viewBox="0 0 40 40"
       width={width}
       xmlns="http://www.w3.org/2000/svg"
+      {...rest}
     >
       <circle cx="20" cy="20" fill="#2B9D74" r="20" />
       <g clipPath="url(#clip0_4101_15867)">
@@ -42,7 +51,7 @@ export function CallIcon({ isPulsing = false, height = 40, width = 40 }) {
   )
 }
 
-export function EmailIcon({ isPulsing = false, height = 40, width = 40 }) {
+export function EmailIcon({ isPulsing = false, height = 40, width = 40, ...rest }: IconProps) {
   return (
     <svg
       fill="none"
@@ -54,6 +63,7 @@ export function EmailIcon({ isPulsing = false, height = 40, width = 40 }) {
       viewBox="0 0 40 40"
       width={width}
       xmlns="http://www.w3.org/2000/svg"
+      {...rest}
     >
       <rect fill="#9E00FF" height="40" rx="20" width="40.0007" />
       <g clipPath="url(#clip0_4101_15872)">
@@ -90,7 +100,7 @@ export function EmailIcon({ isPulsing = false, height = 40, width = 40 }) {
   )
 }
 
-export function JoinIcon({ isPulsing = false, height = 40, width = 40 }) {
+export function JoinIcon({ isPulsing = false, height = 40, width = 40, ...rest }: IconProps) {
   return (
     <svg
       fill="none"
@@ -102,6 +112,7 @@ export function JoinIcon({ isPulsing = false, height = 40, width = 40 }) {
       viewBox="0 0 40 40"
       width={width}
       xmlns="http://www.w3.org/2000/svg"
+      {...rest}
     >
       <rect fill="#6100FF" height="40" rx="20" width="40" />
       <g clipPath="url(#clip0_4101_15877)">
@@ -138,7 +149,7 @@ export function JoinIcon({ isPulsing = false, height = 40, width = 40 }) {
   )
 }
 
-export function VoterRegIcon({ isPulsing = false, height = 40, width = 40 }) {
+export function VoterRegIcon({ isPulsing = false, height = 40, width = 40, ...rest }: IconProps) {
   return (
     <svg
       fill="none"
@@ -150,6 +161,7 @@ export function VoterRegIcon({ isPulsing = false, height = 40, width = 40 }) {
       viewBox="0 0 40 40"
       width={width}
       xmlns="http://www.w3.org/2000/svg"
+      {...rest}
     >
       <rect fill="#7F2BFF" height="40" rx="20" width="40" />
       <g clipPath="url(#clip0_4101_15882)">

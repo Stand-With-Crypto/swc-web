@@ -17,7 +17,6 @@ import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
 import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
 import { useApiAdvocateMap } from '@/hooks/useApiAdvocateMap'
 import { useApiRecentActivity } from '@/hooks/useApiRecentActivity'
-import { useIsMobile } from '@/hooks/useIsMobile'
 import { SupportedLocale } from '@/intl/locales'
 import { getUSStateCodeFromStateName } from '@/utils/shared/usStateUtils'
 
@@ -102,24 +101,25 @@ const MapComponent = ({
   </ComposableMap>
 )
 
-const ActionsList = ({ isMobile }: { isMobile?: boolean }) => (
-  <div
-    className={`flex ${isMobile ? 'w-full flex-row justify-around overflow-x-auto' : 'flex-col justify-between'} gap-3`}
-  >
-    {Object.entries(ADVOCATES_ACTIONS).map(([key, action]) => {
-      const ActionIcon = action.icon
-      return (
-        <div
-          className={`flex ${isMobile ? 'flex-col' : ''} items-center gap-3 font-sans text-base text-black`}
-          key={key}
-        >
-          <ActionIcon height={32} width={32} />
-          <span className="text-xs text-white">{action.label.toLocaleLowerCase()}</span>
-        </div>
-      )
-    })}
-  </div>
-)
+const ActionsList = () => {
+  return (
+    <div className="flex w-full flex-row justify-around gap-3 md:w-auto md:flex-col md:justify-between">
+      {Object.entries(ADVOCATES_ACTIONS).map(([key, action]) => {
+        const ActionIcon = action.icon
+
+        return (
+          <div
+            className="flex flex-col items-center gap-3 font-sans text-base text-black md:flex-row"
+            key={key}
+          >
+            <ActionIcon className="w-8 md:w-10" />
+            <span className="text-nowrap text-xs text-white">{action.label}</span>
+          </div>
+        )
+      })}
+    </div>
+  )
+}
 
 export function AdvocatesHeatmap({
   locale,
@@ -127,7 +127,6 @@ export function AdvocatesHeatmap({
   advocatesMapPageData,
   topStatesLimit = 5,
 }: RenderMapProps) {
-  const isMobile = useIsMobile()
   const actions = useApiRecentActivity(homepageData.actions, { limit: 10 })
   const advocatesPerState = useApiAdvocateMap(advocatesMapPageData, {
     topStatesLimit,
@@ -160,33 +159,20 @@ export function AdvocatesHeatmap({
 
   return (
     <div className="flex flex-col items-start p-2">
-      {isMobile ? (
-        <>
-          <ActionsList isMobile={isMobile} />
-          <MapComponent
-            handleStateMouseHover={handleStateMouseHover}
-            handleStateMouseOut={handleStateMouseOut}
-            markers={markers}
-          />
-        </>
-      ) : (
-        <>
-          <div className="flex w-full items-start">
-            <ActionsList isMobile={isMobile} />
-            <MapComponent
-              handleStateMouseHover={handleStateMouseHover}
-              handleStateMouseOut={handleStateMouseOut}
-              markers={markers}
-            />
-            <TotalAdvocatesPerStateTooltip
-              getTotalAdvocatesPerState={getTotalAdvocatesPerState}
-              hoveredStateName={hoveredStateName}
-              locale={locale}
-              mousePosition={mousePosition}
-            />
-          </div>
-        </>
-      )}
+      <div className="flex w-full flex-col items-start gap-4 md:flex-row">
+        <ActionsList />
+        <MapComponent
+          handleStateMouseHover={handleStateMouseHover}
+          handleStateMouseOut={handleStateMouseOut}
+          markers={markers}
+        />
+        <TotalAdvocatesPerStateTooltip
+          getTotalAdvocatesPerState={getTotalAdvocatesPerState}
+          hoveredStateName={hoveredStateName}
+          locale={locale}
+          mousePosition={mousePosition}
+        />
+      </div>
       <div className="mt-2 flex w-full items-center justify-end">
         <AdvocateHeatmapOdometer
           className="bg-black font-sans text-white"

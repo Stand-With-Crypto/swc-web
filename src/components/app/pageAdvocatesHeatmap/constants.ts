@@ -3,6 +3,7 @@ import { UserActionType } from '@prisma/client'
 import {
   CallIcon,
   EmailIcon,
+  IconProps,
   JoinIcon,
   VoterRegIcon,
 } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapIcons'
@@ -68,30 +69,22 @@ export const ADVOCATES_ACTIONS: Partial<
   Record<
     UserActionType,
     {
-      icon: ({
-        height,
-        width,
-        isPulsing,
-      }: {
-        height?: number
-        width?: number
-        isPulsing?: boolean
-      }) => JSX.Element
+      icon: (args: IconProps) => JSX.Element
       label: string
     }
   >
 > = {
   EMAIL: {
     icon: EmailIcon,
-    label: 'Email',
+    label: 'emailed their rep',
   },
-  CALL: { icon: CallIcon, label: 'Call' },
+  CALL: { icon: CallIcon, label: 'called their rep' },
   OPT_IN: {
     icon: JoinIcon,
-    label: 'Join',
+    label: 'joined',
   },
   VOTER_REGISTRATION: {
     icon: VoterRegIcon,
-    label: 'Voter Reg',
+    label: 'registered to vote',
   },
 }
