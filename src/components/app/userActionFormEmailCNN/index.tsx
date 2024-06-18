@@ -85,7 +85,7 @@ export function UserActionFormEmailCNN({
     },
   })
 
-  function handleMessageChange() {
+  const handleMessageChange = () => {
     if (hasModifiedMessage.current) return
 
     const firstName = form.getValues('firstName')
