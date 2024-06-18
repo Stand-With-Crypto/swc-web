@@ -17,6 +17,7 @@ import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
 import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
 import { useApiAdvocateMap } from '@/hooks/useApiAdvocateMap'
 import { useApiRecentActivity } from '@/hooks/useApiRecentActivity'
+import { useIsMobile } from '@/hooks/useIsMobile'
 import { SupportedLocale } from '@/intl/locales'
 import { getUSStateCodeFromStateName } from '@/utils/shared/usStateUtils'
 
@@ -111,6 +112,8 @@ const MapComponent = ({
 }
 
 const ActionsList = ({ isEmbedded }: { isEmbedded?: boolean }) => {
+  const isMobile = useIsMobile()
+
   return (
     <div className="flex w-full flex-row justify-around gap-3 md:w-auto md:flex-col md:justify-between">
       {Object.entries(ADVOCATES_ACTIONS).map(([key, action]) => {
@@ -122,7 +125,9 @@ const ActionsList = ({ isEmbedded }: { isEmbedded?: boolean }) => {
             key={key}
           >
             <ActionIcon className="w-8 md:w-10" />
-            <span className="text-xs">{action.label}</span>
+            <span className="text-nowrap text-xs">
+              {isMobile ? action.labelMobile : action.label}
+            </span>
           </div>
         )
       })}
