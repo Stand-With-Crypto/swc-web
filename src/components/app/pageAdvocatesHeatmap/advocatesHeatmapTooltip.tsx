@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { SupportedLocale } from '@/intl/locales'
@@ -10,20 +10,38 @@ export function TotalAdvocatesPerStateTooltip({
   mousePosition,
   getTotalAdvocatesPerState,
   locale,
+  handleClearPressedState,
 }: {
   hoveredStateName: string | null
   mousePosition: { x: number; y: number } | null
   getTotalAdvocatesPerState: (stateName: string) => number | undefined
   locale: SupportedLocale
+  handleClearPressedState: () => void
 }) {
+  useEffect(() => {
+    const handleInteraction = () => {
+      handleClearPressedState()
+    }
+
+    window.addEventListener('scroll', handleInteraction)
+    window.addEventListener('touchstart', handleInteraction)
+    window.addEventListener('touchmove', handleInteraction)
+
+    return () => {
+      window.removeEventListener('scroll', handleInteraction)
+      window.removeEventListener('touchstart', handleInteraction)
+      window.removeEventListener('touchmove', handleInteraction)
+    }
+  }, [handleClearPressedState])
+
   if (!mousePosition || !hoveredStateName) return null
 
   const totalAdvocatesPerState = getTotalAdvocatesPerState(hoveredStateName)
 
   if (!totalAdvocatesPerState) return null
 
-  const tooltipWidth = 193 // The width of your tooltip
-  const offsetX = tooltipWidth / 2 // Offset to center the tooltip
+  const tooltipWidth = 193
+  const offsetX = tooltipWidth / 2
 
   // Calculate the adjusted position so it does not overflow the window
   const centeredX = mousePosition.x - offsetX

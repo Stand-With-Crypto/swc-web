@@ -172,6 +172,11 @@ export function AdvocatesHeatmap({
     setHoveredStateName(null)
   }, [])
 
+  const handleClearPressedState = () => {
+    setMousePosition(null)
+    setHoveredStateName(null)
+  }
+
   return (
     <div className="flex flex-col items-start p-2">
       <div className="flex w-full flex-col items-start gap-4 md:flex-row">
@@ -184,6 +189,7 @@ export function AdvocatesHeatmap({
         />
         <TotalAdvocatesPerStateTooltip
           getTotalAdvocatesPerState={getTotalAdvocatesPerState}
+          handleClearPressedState={handleClearPressedState}
           hoveredStateName={hoveredStateName}
           locale={locale}
           mousePosition={mousePosition}
