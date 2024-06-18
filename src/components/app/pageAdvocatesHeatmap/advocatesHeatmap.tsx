@@ -45,7 +45,7 @@ const MapComponent = ({
   const currentHoverAndPressedFill = isEmbedded ? '#6100FF' : '#DDC9FF'
 
   return (
-    <ComposableMap projection="geoAlbersUsa">
+    <ComposableMap projection="geoAlbersUsa" viewBox="0 50 800 500">
       <Geographies geography={ADVOCATES_HEATMAP_GEO_URL}>
         {({ geographies }) => (
           <>
@@ -178,7 +178,7 @@ export function AdvocatesHeatmap({
   }
 
   return (
-    <div className="flex flex-col items-start p-2">
+    <div className="flex flex-col items-start px-2 py-6">
       <div className="flex w-full flex-col items-start gap-4 md:flex-row">
         <ActionsList isEmbedded={isEmbedded} />
         <MapComponent
