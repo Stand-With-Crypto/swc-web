@@ -19,11 +19,6 @@ describe('action - send cnn email about the presidential debate', () => {
     cy.get('input[placeholder="First name"]').type('John')
     cy.get('input[placeholder="Last name"]').type('Doe')
     cy.get('input[placeholder="Your email"]').type('johndoe@gmail.com')
-    cy.selectFromComboBox({
-      trigger: cy.get('input[placeholder="Your address"]'),
-      searchText: '350 Fifth Avenue New York, NY 10118',
-      typingRequired: true,
-    })
 
     // validates if the customized message will be presented after entering the first and last name
 
@@ -85,6 +80,5 @@ describe('action - send cnn email about the presidential debate', () => {
     cy.get('button[type="submit"]').click()
     cy.contains('Please enter your first name')
     cy.contains('Please enter a valid email address')
-    cy.contains('Please select a valid address')
   })
 })
