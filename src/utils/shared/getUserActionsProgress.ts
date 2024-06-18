@@ -26,7 +26,6 @@ export function getUserActionsProgress({
       : USER_ACTIONS_EXCLUDED_FROM_CTA,
   )
 
-  // TODO: Include campaignName in the excludeUserActionTypes set
   const numActionsCompleted = uniq(performedUserActionTypes).reduce((count, action) => {
     return excludeUserActionTypes.has(action.actionType) ? count : count + 1
   }, 0)
