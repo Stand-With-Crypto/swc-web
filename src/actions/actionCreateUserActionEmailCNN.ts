@@ -2,7 +2,6 @@
 import 'server-only'
 
 import {
-  Address,
   Prisma,
   User,
   UserActionType,
@@ -36,9 +35,8 @@ import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddl
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
-import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { userFullName } from '@/utils/shared/userFullName'
-import { zodUserActionFormEmailCNNAction } from '@/validation/forms/zodUserActionFormEmailCNN'
+import { zodUserActionFormEmailCNNFields } from '@/validation/forms/zodUserActionFormEmailCNN'
 
 const logger = getLogger(`actionCreateUserActionEmailCNN`)
 
@@ -47,9 +45,8 @@ const CNN_EMAIL = 'community@cnn.com'
 type UserWithRelations = User & {
   primaryUserCryptoAddress: UserCryptoAddress | null
   userEmailAddresses: UserEmailAddress[]
-  address: Address | null
 }
-type Input = z.infer<typeof zodUserActionFormEmailCNNAction>
+type Input = z.infer<typeof zodUserActionFormEmailCNNFields>
 
 export const actionCreateUserActionEmailCNN = withServerActionMiddleware(
   'actionCreateUserActionEmailCNN',
@@ -69,7 +66,7 @@ async function _actionCreateUserActionEmailCNN(input: Input) {
   })
   logger.info(userMatch.user ? 'found user' : 'no user found')
   const sessionId = getUserSessionId()
-  const validatedFields = zodUserActionFormEmailCNNAction.safeParse(input)
+  const validatedFields = zodUserActionFormEmailCNNFields.safeParse(input)
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
@@ -112,10 +109,9 @@ async function _actionCreateUserActionEmailCNN(input: Input) {
       reason: 'Too Many Recent',
       creationMethod: 'On Site',
       userState,
-      ...convertAddressToAnalyticsProperties(validatedFields.data.address),
     })
     await beforeFinish()
-    return { user: getClientUser(user) }
+    return { user: getClientUser({ ...user, address: null }) }
   }
 
   await triggerRateLimiterAtMostOnce()
@@ -135,12 +131,6 @@ async function _actionCreateUserActionEmailCNN(input: Input) {
           senderEmail: validatedFields.data.emailAddress,
           firstName: validatedFields.data.firstName,
           lastName: validatedFields.data.lastName,
-          address: {
-            connectOrCreate: {
-              where: { googlePlaceId: validatedFields.data.address.googlePlaceId },
-              create: validatedFields.data.address,
-            },
-          },
           userActionEmailRecipients: {
             create: {
               emailAddress: CNN_EMAIL,
@@ -158,10 +148,8 @@ async function _actionCreateUserActionEmailCNN(input: Input) {
     campaignName,
     creationMethod: 'On Site',
     userState,
-    ...convertAddressToAnalyticsProperties(validatedFields.data.address),
   })
   peopleAnalytics.set({
-    ...convertAddressToAnalyticsProperties(validatedFields.data.address),
     // https://docs.mixpanel.com/docs/data-structure/user-profiles#reserved-user-properties
     $email: validatedFields.data.emailAddress,
     $name: userFullName(validatedFields.data),
@@ -176,7 +164,6 @@ async function _actionCreateUserActionEmailCNN(input: Input) {
     campaignId: CapitolCanaryCampaignId.CNN_EMAIL,
     user: {
       ...user,
-      address: user.address!,
     },
     userEmailAddress: user.userEmailAddresses.find(
       emailAddr => emailAddr.emailAddress === validatedFields.data.emailAddress,
@@ -193,7 +180,7 @@ async function _actionCreateUserActionEmailCNN(input: Input) {
   })
 
   await beforeFinish()
-  return { user: getClientUser(user) }
+  return { user: getClientUser({ ...user, address: null }) }
 }
 
 async function maybeUpsertUser({
@@ -209,7 +196,7 @@ async function maybeUpsertUser({
   localUser: ServerLocalUser | null
   onUpsertUser: () => Promise<void> | void
 }): Promise<{ user: UserWithRelations; userState: AnalyticsUserActionUserState }> {
-  const { firstName, lastName, emailAddress, address } = input
+  const { firstName, lastName, emailAddress } = input
 
   if (existingUser) {
     const updatePayload: Prisma.UserUpdateInput = {
@@ -221,15 +208,6 @@ async function maybeUpsertUser({
               emailAddress,
               isVerified: false,
               source: UserEmailAddressSource.USER_ENTERED,
-            },
-          },
-        }),
-      ...(address &&
-        existingUser.address?.googlePlaceId !== address.googlePlaceId && {
-          address: {
-            connectOrCreate: {
-              where: { googlePlaceId: address.googlePlaceId },
-              create: address,
             },
           },
         }),
@@ -246,7 +224,6 @@ async function maybeUpsertUser({
       include: {
         primaryUserCryptoAddress: true,
         userEmailAddresses: true,
-        address: true,
       },
     })
 
@@ -266,7 +243,6 @@ async function maybeUpsertUser({
     include: {
       primaryUserCryptoAddress: true,
       userEmailAddresses: true,
-      address: true,
     },
     data: {
       ...mapLocalUserToUserDatabaseFields(localUser),
@@ -284,12 +260,6 @@ async function maybeUpsertUser({
           emailAddress,
           isVerified: false,
           source: UserEmailAddressSource.USER_ENTERED,
-        },
-      },
-      address: {
-        connectOrCreate: {
-          where: { googlePlaceId: address.googlePlaceId },
-          create: address,
         },
       },
     },

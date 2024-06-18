@@ -3,7 +3,6 @@ import React, { useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { UserActionType } from '@prisma/client'
-import * as Sentry from '@sentry/nextjs'
 import { useRouter } from 'next/navigation'
 import { z } from 'zod'
 
@@ -22,7 +21,6 @@ import {
   FormItem,
   FormLabel,
 } from '@/components/ui/form'
-import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { Input } from '@/components/ui/input'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
@@ -31,7 +29,6 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import { Textarea } from '@/components/ui/textarea'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useIsDesktop } from '@/hooks/useIsDesktop'
-import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { UserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns'
 import { cn } from '@/utils/web/cn'
 import {
@@ -39,12 +36,8 @@ import {
   trackFormSubmissionSyncErrors,
   triggerServerActionForForm,
 } from '@/utils/web/formUtils'
-import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
-import {
-  catchUnexpectedServerErrorAndTriggerToast,
-  toastGenericError,
-} from '@/utils/web/toastUtils'
+import { toastGenericError } from '@/utils/web/toastUtils'
 import { zodUserActionFormEmailCNNFields } from '@/validation/forms/zodUserActionFormEmailCNN'
 
 type FormValues = z.infer<typeof zodUserActionFormEmailCNNFields> & GenericErrorFormValues
@@ -66,13 +59,6 @@ export function UserActionFormEmailCNN({
   const form = useForm<FormValues>({
     resolver: zodResolver(zodUserActionFormEmailCNNFields),
     defaultValues: {
-      address:
-        initialValues?.address || user?.address?.route
-          ? {
-              description: user?.address?.formattedDescription,
-              place_id: user?.address?.googlePlaceId,
-            }
-          : undefined,
       emailAddress: initialValues?.email || user?.primaryUserEmailAddress?.emailAddress || '',
       firstName: initialValues?.firstName || user?.firstName,
       lastName: initialValues?.lastName || user?.lastName,
@@ -106,8 +92,7 @@ export function UserActionFormEmailCNN({
       e.relatedTarget?.attributes?.getNamedItem('name')?.value as
         | 'firstName'
         | 'lastName'
-        | 'emailAddress'
-        | 'address',
+        | 'emailAddress',
     )
   }
 
@@ -122,26 +107,15 @@ export function UserActionFormEmailCNN({
       <form
         className="flex h-full flex-col"
         onSubmit={form.handleSubmit(async values => {
-          const address = await convertGooglePlaceAutoPredictionToAddressSchema(
-            values.address,
-          ).catch(e => {
-            Sentry.captureException(e)
-            catchUnexpectedServerErrorAndTriggerToast(e)
-            return null
-          })
-          if (!address) {
-            return
-          }
           const result = await triggerServerActionForForm(
             {
               form,
               formName: ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CNN,
               analyticsProps: {
-                ...(address ? convertAddressToAnalyticsProperties(address) : {}),
                 'Campaign Name': values.campaignName,
                 'User Action Type': UserActionType.EMAIL,
               },
-              payload: { ...values, address },
+              payload: { ...values },
             },
             payload =>
               actionCreateUserActionEmailCNN(payload).then(actionResult => {
@@ -217,29 +191,10 @@ export function UserActionFormEmailCNN({
                   control={form.control}
                   name="emailAddress"
                   render={({ field }) => (
-                    <FormItem>
+                    <FormItem className="col-span-2">
                       <FormLabel>Email</FormLabel>
                       <FormControl>
                         <Input placeholder="Your email" {...field} />
-                      </FormControl>
-                      <FormErrorMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="address"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Address</FormLabel>
-                      <FormControl>
-                        <GooglePlacesSelect
-                          {...field}
-                          onChange={field.onChange}
-                          placeholder="Your address"
-                          value={field.value}
-                        />
                       </FormControl>
                       <FormErrorMessage />
                     </FormItem>
