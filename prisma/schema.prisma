@@ -311,8 +311,8 @@ model UserActionEmail {
   senderEmail               String                     @map("sender_email")
   firstName                 String                     @map("first_name")
   lastName                  String                     @map("last_name")
-  address                   Address                    @relation(fields: [addressId], references: [id])
-  addressId                 String                     @map("address_id")
+  address                   Address?                   @relation(fields: [addressId], references: [id])
+  addressId                 String?                    @map("address_id")
   userActionEmailRecipients UserActionEmailRecipient[]
 
   @@index([id])
