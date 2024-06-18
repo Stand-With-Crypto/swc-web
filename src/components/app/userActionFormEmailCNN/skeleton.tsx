@@ -1,8 +1,6 @@
-import { getDefaultText } from '@/components/app/userActionFormEmailCongressperson/getDefaultText'
 import { Button } from '@/components/ui/button'
 import { FormItemSkeleton } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
@@ -12,7 +10,6 @@ import { SupportedLocale } from '@/intl/locales'
 import { getIntlUrls } from '@/utils/shared/urls'
 
 export function UserActionFormEmailCNNSkeleton({ locale }: { locale: SupportedLocale }) {
-  const urls = getIntlUrls(locale)
   return (
     <form className="flex max-h-dvh flex-col">
       <LoadingOverlay />
@@ -29,28 +26,27 @@ export function UserActionFormEmailCNNSkeleton({ locale }: { locale: SupportedLo
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <FormItemSkeleton>
                 <label>First name</label>
-                <Input placeholder="First name" />
+                <Input disabled placeholder="First name" />
               </FormItemSkeleton>
               <FormItemSkeleton>
                 <label>Last name</label>
-                <Input placeholder="Last name" />
+                <Input disabled placeholder="Last name" />
               </FormItemSkeleton>
               <FormItemSkeleton>
                 <label>Email</label>
-                <Input placeholder="Your email" />
+                <Input disabled placeholder="Your email" />
               </FormItemSkeleton>
               <FormItemSkeleton>
                 <label>Address</label>
-                <Input placeholder="Your address" />
+                <Input disabled placeholder="Your address" />
               </FormItemSkeleton>
             </div>
 
             <div className="relative">
               <FormItemSkeleton>
                 <Textarea
-                  defaultValue={getDefaultText()}
-                  placeholder={`
-I am one of the 52 million Americans who own cryptocurrency. Crypto can drive American innovation and global leadership by fostering strong consumer protection, creating high-skilled jobs, and strengthening our national security. Unfortunately, bad policy could push this technology overseas, and cost the U.S. nearly 4 million jobs.
+                  disabled
+                  value={`I am one of the 52 million Americans who own cryptocurrency. Crypto can drive American innovation and global leadership by fostering strong consumer protection, creating high-skilled jobs, and strengthening our national security. Unfortunately, bad policy could push this technology overseas, and cost the U.S. nearly 4 million jobs.
 
 Crypto owners are uniquely bipartisan - 18% Republicans, 22% Democrats, and 22% Independents hold crypto. Crypto provides access to the banking system to disenfranchised communities and communities of color and can help bolster an economy that works for everyone.
 
@@ -58,8 +54,7 @@ On behalf of myself and all American crypto owners, I urge you to ask the candid
 
 Giving the major Presidential candidates a chance to weigh in on this transformational technology in the first debate would go a long way towards educating the electorate and helping American crypto owners cast an informed ballot.
 
-Thank you for your consideration.
-                      `}
+Thank you for your consideration.`}
                   rows={16}
                 />
               </FormItemSkeleton>
@@ -71,7 +66,7 @@ Thank you for your consideration.
         className="z-10 flex flex-1 flex-col items-center justify-center gap-4 border border-t p-6 sm:flex-row md:px-12"
         style={{ boxShadow: 'rgba(0, 0, 0, 0.2) 0px 1px 6px 0px' }}
       >
-        <Button className="w-full sm:max-w-md" size="lg" type="submit">
+        <Button className="w-full sm:max-w-md" size="lg" type="submit" disabled>
           Send
         </Button>
       </div>

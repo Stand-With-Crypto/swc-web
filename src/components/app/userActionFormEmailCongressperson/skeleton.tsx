@@ -6,7 +6,6 @@ import { getDefaultText } from '@/components/app/userActionFormEmailCongresspers
 import { Button } from '@/components/ui/button'
 import { FormItemSkeleton } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
@@ -14,7 +13,6 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import { Textarea } from '@/components/ui/textarea'
 import { useGetDTSIPeopleFromAddress } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { SupportedLocale } from '@/intl/locales'
-import { getIntlUrls } from '@/utils/shared/urls'
 import {
   getYourPoliticianCategoryShortDisplayName,
   YourPoliticianCategory,
@@ -27,7 +25,6 @@ export function UserActionFormEmailCongresspersonSkeleton({
   locale: SupportedLocale
   politicianCategory?: YourPoliticianCategory
 }) {
-  const urls = getIntlUrls(locale)
   return (
     <form className="flex max-h-dvh flex-col">
       <LoadingOverlay />
