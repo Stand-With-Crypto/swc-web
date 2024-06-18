@@ -3,6 +3,7 @@ import { UserActionType } from '@prisma/client'
 import { ActiveClientUserActionType } from '@/utils/shared/activeUserAction'
 import {
   USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
+  UserActionCampaignName,
   UserActionEmailCampaignName,
 } from '@/utils/shared/userActionCampaigns'
 
@@ -22,7 +23,7 @@ export const USER_ACTION_TYPE_CTA_PRIORITY_ORDER: ReadonlyArray<ActiveClientUser
 // Keeping a campaign here will result in an increase of the number of total actions in profile page.
 export const USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN: ReadonlyArray<{
   action: ActiveClientUserActionType
-  campaign: string
+  campaign: UserActionCampaignName
 }> = [
   { action: UserActionType.EMAIL, campaign: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.EMAIL },
   { action: UserActionType.OPT_IN, campaign: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.OPT_IN },
