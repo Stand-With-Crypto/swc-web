@@ -51,7 +51,7 @@ function HeaderSection() {
             <Img
               alt="Stand With Crypto"
               height="40"
-              src={`${BASE_URL}/logo/shield.svg`}
+              src={`${BASE_URL}/email/misc/shield.png`}
               width="40"
             />
           </Link>
@@ -68,7 +68,7 @@ function HeaderSection() {
                   alt="X/Twitter logo"
                   className="inline"
                   height="24"
-                  src={`${BASE_URL}/misc/xDotComLogo.svg`}
+                  src={`${BASE_URL}/email/misc/xDotComLogo.png`}
                   width="24"
                 />
               </Column>
@@ -86,7 +86,12 @@ function FooterSection() {
       <Hr className="mt-10" />
 
       <Section className="mt-10">
-        <Img alt="Stand With Crypto" height="40" src={`${BASE_URL}/logo/shield.svg`} width="40" />
+        <Img
+          alt="Stand With Crypto"
+          height="40"
+          src={`${BASE_URL}/email/misc/shield.png`}
+          width="40"
+        />
 
         <Row>
           <Column>
@@ -103,7 +108,7 @@ function FooterSection() {
                   <Img
                     alt="Facebook logo"
                     height="24"
-                    src={`${BASE_URL}/logo/shield.svg`}
+                    src={`${BASE_URL}/email/misc/facebookLogo.png`}
                     width="24"
                   />
                 </Link>
@@ -113,7 +118,7 @@ function FooterSection() {
                   <Img
                     alt="X/Twitter logo"
                     height="24"
-                    src={`${BASE_URL}/misc/xDotComLogo.svg`}
+                    src={`${BASE_URL}/email/misc/xDotComLogoGrey.png`}
                     width="24"
                   />
                 </Link>
@@ -123,7 +128,7 @@ function FooterSection() {
                   <Img
                     alt="Instagram logo"
                     height="24"
-                    src={`${BASE_URL}/logo/shield.svg`}
+                    src={`${BASE_URL}/email/misc/instagramLogo.png`}
                     width="24"
                   />
                 </Link>

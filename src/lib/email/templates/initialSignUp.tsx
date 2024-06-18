@@ -70,8 +70,8 @@ export default function InitialSignUpEmail({ completedActionTypes = [] }: Initia
                   height="24"
                   src={
                     metadata.hasCompleted
-                      ? `${BASE_URL}/misc/checkedCircle.svg`
-                      : `${BASE_URL}/misc/uncheckedCircle.svg`
+                      ? `${BASE_URL}/email/misc/checkedCircle.png`
+                      : `${BASE_URL}/email/misc/uncheckedCircle.png`
                   }
                   width="24"
                 />
