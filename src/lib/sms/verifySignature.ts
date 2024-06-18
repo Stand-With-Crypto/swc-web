@@ -12,7 +12,8 @@ export async function verifySignature(request: Request) {
   }
 
   const signature = request.headers.get('X-Twilio-Signature')
-  const params = new URLSearchParams(await request.text())
+  const params = Object.fromEntries(new URL(request.url).searchParams)
+  const url = request.url
 
   if (!signature) {
     throw new Error('Missing verification headers')
@@ -20,10 +21,10 @@ export async function verifySignature(request: Request) {
 
   logger.info('Verifying Twilio signature', {
     signature,
-    url: request.url,
-    paramsRaw: params,
-    params: Object.fromEntries(params),
+    url,
+    params,
+    expectedSignature: twilio.getExpectedTwilioSignature(authToken, url, params),
   })
 
-  return twilio.validateRequest(authToken, signature, request.url, Object.fromEntries(params))
+  return twilio.validateRequest(authToken, signature, url, params)
 }
