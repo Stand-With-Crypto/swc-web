@@ -193,7 +193,6 @@ async function _actionCreateUserActionEmailCNN(input: Input) {
   })
 
   await beforeFinish()
-  logger.info('updated user')
   return { user: getClientUser(user) }
 }
 
