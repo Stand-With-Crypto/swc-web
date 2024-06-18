@@ -74,18 +74,9 @@ export function PageUserProfile({ params, searchParams, user }: PageUserProfile)
   const excludeUserActionTypes = user.hasEmbeddedWallet
     ? [UserActionType.NFT_MINT, ...USER_ACTIONS_EXCLUDED_FROM_CTA]
     : USER_ACTIONS_EXCLUDED_FROM_CTA
-  const numActionsCompleted = performedUserActionTypes
-    .filter(performedAction => {
-      return !excludeUserActionTypes.includes(performedAction.actionType)
-    })
-    .filter(
-      performedAction =>
-        !USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN.some(
-          item =>
-            item.campaign !== performedAction.campaignName &&
-            item.action === performedAction.actionType,
-        ),
-    ).length
+  const numActionsCompleted = performedUserActionTypes.filter(performedAction => {
+    return !excludeUserActionTypes.includes(performedAction.actionType)
+  }).length
 
   const numActionsAvailable = Object.values(
     USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN.filter(
