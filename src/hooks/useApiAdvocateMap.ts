@@ -1,4 +1,5 @@
 'use client'
+
 import useSWR from 'swr'
 
 import { GetAdvocatesMapDataResponse } from '@/data/pageSpecific/getAdvocatesMapData'

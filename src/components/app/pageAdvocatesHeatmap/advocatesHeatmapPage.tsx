@@ -1,19 +1,11 @@
 'use client'
 
-import React, { useCallback, useMemo } from 'react'
+import React from 'react'
 
-import { AdvocateHeatmapOdometer } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapOdometer'
 import { AdvocatesHeatmap } from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmap'
 import { PageAdvocatesHeatmapProps } from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmap.types'
-import {
-  createMarkersFromActions,
-  createMarkersFromTopAdvocateStates,
-} from '@/components/app/pageAdvocatesHeatmap/createMapMarkers'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { useApiAdvocateMap } from '@/hooks/useApiAdvocateMap'
-import { useApiRecentActivity } from '@/hooks/useApiRecentActivity'
-import { getUSStateCodeFromStateName } from '@/utils/shared/usStateUtils'
 
 export function AdvocatesHeatmapPage({
   title,
@@ -22,45 +14,25 @@ export function AdvocatesHeatmapPage({
   topStatesLimit = 5,
   homepageData,
   advocatesMapPageData,
+  isEmbedded,
 }: PageAdvocatesHeatmapProps) {
-  const actions = useApiRecentActivity(homepageData.actions, { limit: 10 })
-  const advocatesPerState = useApiAdvocateMap(advocatesMapPageData, {
-    topStatesLimit,
-  })
-
-  const markers = useMemo(() => createMarkersFromActions(actions.data), [actions.data])
-  const topStateMarkers = useMemo(
-    () =>
-      createMarkersFromTopAdvocateStates(advocatesPerState.data.advocatesMapData.topAdvocateStates),
-    [advocatesPerState.data.advocatesMapData.topAdvocateStates],
-  )
-  const totalAdvocatesPerState = advocatesPerState.data.advocatesMapData.totalAdvocatesPerState
-
-  const getTotalAdvocatesPerState = useCallback(
-    (stateName: string) => {
-      const stateCode = getUSStateCodeFromStateName(stateName)
-      return totalAdvocatesPerState.find(total => total.state === stateCode)?.totalAdvocates
-    },
-    [totalAdvocatesPerState],
-  )
-
   return (
-    <div className="standard-spacing-from-navbar container space-y-20">
-      <section className="space-y-9">
-        <div className="flex w-full flex-col items-center justify-center gap-24">
-          {title && description ? (
-            <div className="flex flex-col gap-4">
+    <div className="mx-auto h-screen w-full max-w-screen-xl">
+      <section className={`${isEmbedded ? 'flex h-screen flex-col justify-center' : 'space-y-9'}`}>
+        {title && description ? (
+          <div className="flex w-full flex-col items-center justify-center gap-24">
+            <div className={`flex flex-col gap-4 ${isEmbedded ? 'text-white' : 'text-black'})`}>
               <PageTitle>{title}</PageTitle>
               <PageSubTitle>{description}</PageSubTitle>
             </div>
-          ) : null}
-          <AdvocateHeatmapOdometer homepageData={homepageData} locale={locale} />
-        </div>
+          </div>
+        ) : null}
         <AdvocatesHeatmap
-          getTotalAdvocatesPerState={getTotalAdvocatesPerState}
+          advocatesMapPageData={advocatesMapPageData}
+          homepageData={homepageData}
+          isEmbedded={isEmbedded}
           locale={locale}
-          markers={markers}
-          topStateMarkers={topStateMarkers}
+          topStatesLimit={topStatesLimit}
         />
       </section>
     </div>

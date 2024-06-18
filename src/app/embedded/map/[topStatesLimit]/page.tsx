@@ -34,6 +34,7 @@ export default async function MapPage({ params }: PageProps<{ topStatesLimit: nu
     <AdvocatesHeatmapPage
       advocatesMapPageData={advocatePerStateDataProps}
       homepageData={homeDataProps}
+      isEmbedded={true}
       locale={params.locale}
       topStatesLimit={params.topStatesLimit}
     />
