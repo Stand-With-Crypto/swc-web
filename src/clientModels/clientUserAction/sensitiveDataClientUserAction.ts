@@ -24,7 +24,7 @@ If this ever changes, we may need to export the SensitiveDataClientUserActionEma
 type SensitiveDataClientUserActionDatabaseQuery = UserAction & {
   userActionEmail:
     | (UserActionEmail & {
-        address: Address
+        address: Address | null
         userActionEmailRecipients: UserActionEmailRecipient[]
       })
     | null
@@ -172,7 +172,7 @@ export const getSensitiveDataClientUserAction = ({
           senderEmail,
           firstName,
           lastName,
-          address: getClientAddress(address),
+          address: address ? getClientAddress(address) : null,
           userActionEmailRecipients: userActionEmailRecipients.map(x => ({
             id: x.id,
           })),
