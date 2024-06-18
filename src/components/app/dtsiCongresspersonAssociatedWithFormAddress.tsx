@@ -21,13 +21,16 @@ import { zodGooglePlacesAutocompletePrediction } from '@/validation/fields/zodGo
 
 export function DTSICongresspersonAssociatedWithFormAddress({
   address,
-  onChangeAddress,
+  onChangeDTSISlug,
+  currentDTSISlugValue,
   politicianCategory,
   dtsiPeopleFromAddressResponse,
 }: {
   politicianCategory: YourPoliticianCategory
   address?: z.infer<typeof zodGooglePlacesAutocompletePrediction>
-  onChangeAddress: (args: {
+  currentDTSISlugValue: string[]
+  onChangeDTSISlug: (args: {
+    dtsiSlugs: string[]
     location?: {
       districtNumber: number
       stateCode: string
@@ -36,13 +39,26 @@ export function DTSICongresspersonAssociatedWithFormAddress({
   dtsiPeopleFromAddressResponse: ReturnType<typeof useGetDTSIPeopleFromAddress>
 }) {
   useEffect(() => {
-    if (dtsiPeopleFromAddressResponse?.data && 'dtsiPeople' in dtsiPeopleFromAddressResponse.data) {
-      const { districtNumber, stateCode } = dtsiPeopleFromAddressResponse.data
-      onChangeAddress({ location: { districtNumber, stateCode } })
+    if (
+      dtsiPeopleFromAddressResponse?.data &&
+      'dtsiPeople' in dtsiPeopleFromAddressResponse.data &&
+      dtsiPeopleFromAddressResponse?.data?.dtsiPeople?.some(
+        (person, index) => person.slug !== currentDTSISlugValue[index],
+      )
+    ) {
+      const { districtNumber, stateCode, dtsiPeople } = dtsiPeopleFromAddressResponse.data
+      const dtsiSlugs = dtsiPeople.map(person => person.slug)
+      onChangeDTSISlug({ dtsiSlugs, location: { districtNumber, stateCode } })
+    } else if (
+      currentDTSISlugValue.length &&
+      (!dtsiPeopleFromAddressResponse?.data ||
+        'notFoundReason' in dtsiPeopleFromAddressResponse.data)
+    ) {
+      onChangeDTSISlug({ dtsiSlugs: [] })
     }
-    // onChangeAddress shouldnt be passed as a dependency
+    // onChangeDTSISlug shouldnt be passed as a dependency
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dtsiPeopleFromAddressResponse?.data])
+  }, [currentDTSISlugValue, dtsiPeopleFromAddressResponse?.data])
 
   const categoryDisplayName = getYourPoliticianCategoryDisplayName(politicianCategory)
   if (!address || dtsiPeopleFromAddressResponse?.isLoading) {

@@ -62,8 +62,9 @@ export function UserActionFormEmailCongresspersonSkeleton({
             </div>
             <div className="w-full">
               <DTSICongresspersonAssociatedWithFormAddress
+                currentDTSISlugValue={[]}
                 dtsiPeopleFromAddressResponse={{} as ReturnType<typeof useGetDTSIPeopleFromAddress>}
-                onChangeAddress={noop}
+                onChangeDTSISlug={noop}
                 politicianCategory={politicianCategory}
               />
             </div>

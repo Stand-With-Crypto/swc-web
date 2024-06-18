@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, { useMemo, useRef, useState } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { UserActionType } from '@prisma/client'
@@ -159,7 +159,7 @@ export function UserActionFormEmailCongressperson({
   const router = useRouter()
   const urls = useIntlUrls()
   const hasModifiedMessage = useRef(false)
-  const userDefaultValues = getDefaultValues({ user, dtsiSlugs: [] })
+  const userDefaultValues = useMemo(() => getDefaultValues({ user, dtsiSlugs: [] }), [user])
   const form = useForm<FormValues>({
     resolver: zodResolver(zodUserActionFormEmailCongresspersonFields),
     defaultValues: {
@@ -183,11 +183,10 @@ export function UserActionFormEmailCongressperson({
     addressField?.description,
   )
 
-  const dtsiPeople = useMemo(() => {
-    return dtsiPeopleFromAddressResponse?.data && 'dtsiPeople' in dtsiPeopleFromAddressResponse.data
+  const dtsiPeople =
+    dtsiPeopleFromAddressResponse?.data && 'dtsiPeople' in dtsiPeopleFromAddressResponse.data
       ? dtsiPeopleFromAddressResponse.data.dtsiPeople
       : []
-  }, [dtsiPeopleFromAddressResponse?.data])
 
   const { data: congresspersonBillVote } = useCongresspersonFIT21BillVote(dtsiPeople?.[0]?.slug, {
     onSuccess: data => {
@@ -222,17 +221,6 @@ export function UserActionFormEmailCongressperson({
       form.setFocus('firstName')
     }
   }, [form, isDesktop])
-
-  useEffect(() => {
-    if (dtsiPeople.length === 0) form.setValue('dtsiSlugs', [])
-
-    const currentSlugs = form.getValues('dtsiSlugs')
-
-    if (!dtsiPeople?.some((person, index) => person.slug !== currentSlugs[index])) return
-
-    const newDtsiSlugs = dtsiPeople.map(person => person.slug)
-    form.setValue('dtsiSlugs', newDtsiSlugs)
-  }, [dtsiPeople, form])
 
   return (
     <Form {...form}>
@@ -348,16 +336,28 @@ export function UserActionFormEmailCongressperson({
                 control={form.control}
                 name="address"
                 render={addressProps => (
-                  <div className="w-full">
-                    <DTSICongresspersonAssociatedWithFormAddress
-                      address={addressProps.field.value}
-                      dtsiPeopleFromAddressResponse={dtsiPeopleFromAddressResponse}
-                      onChangeAddress={({ location: newLocation }) => {
-                        setLocation(newLocation)
-                      }}
-                      politicianCategory={politicianCategory}
-                    />
-                  </div>
+                  <FormField
+                    control={form.control}
+                    name="dtsiSlugs"
+                    render={dtsiSlugProps => (
+                      <div className="w-full">
+                        <DTSICongresspersonAssociatedWithFormAddress
+                          address={addressProps.field.value}
+                          currentDTSISlugValue={dtsiSlugProps.field.value}
+                          dtsiPeopleFromAddressResponse={dtsiPeopleFromAddressResponse}
+                          onChangeDTSISlug={({
+                            dtsiSlugs: newDtsiSlugs,
+                            location: newLocation,
+                          }) => {
+                            dtsiSlugProps.field.onChange(newDtsiSlugs)
+                            setLocation(newLocation)
+                          }}
+                          politicianCategory={politicianCategory}
+                        />
+                        {/* <FormErrorMessage /> */}
+                      </div>
+                    )}
+                  />
                 )}
               />
               <FormField
