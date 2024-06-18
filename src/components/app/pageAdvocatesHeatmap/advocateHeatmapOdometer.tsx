@@ -51,9 +51,7 @@ export function AdvocateHeatmapOdometer({
 
   return (
     <div
-      className={cn(
-        `flex-shrink-0 rounded-3xl bg-secondary px-0 py-4 text-center md:p-6 md:py-6 ${className ?? ''}`,
-      )}
+      className={cn(`flex-shrink-0 bg-secondary px-0 py-4 text-center md:p-6 md:py-6`, className)}
     >
       <AnimatedNumericOdometer
         className={odometerStyles.odometerSatoshi}

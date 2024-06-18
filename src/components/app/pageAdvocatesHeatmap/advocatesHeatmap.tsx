@@ -25,83 +25,92 @@ interface RenderMapProps {
   homepageData: Awaited<ReturnType<typeof getHomepageData>>
   advocatesMapPageData: Awaited<ReturnType<typeof getAdvocatesMapData>>
   topStatesLimit?: number
+  isEmbedded?: boolean
 }
 
 const MapComponent = ({
   markers,
   handleStateMouseHover,
   handleStateMouseOut,
+  isEmbedded,
 }: {
   markers: MapMarker[]
   handleStateMouseHover: (geo: any, event: MouseEvent<SVGPathElement>) => void
   handleStateMouseOut: () => void
-}) => (
-  <ComposableMap projection="geoAlbersUsa">
-    <Geographies geography={ADVOCATES_HEATMAP_GEO_URL}>
-      {({ geographies }) => (
-        <>
-          {geographies.map(geo => (
-            <Geography
-              cursor="pointer"
-              geography={geo}
-              key={geo.rsmKey}
-              onMouseMove={event => handleStateMouseHover(geo, event)}
-              onMouseOut={handleStateMouseOut}
-              stroke="#FFF"
-              style={{
-                default: {
-                  fill: '#171717',
-                  stroke: '#3A3B3D',
-                  strokeWidth: '0.971px',
-                  outline: 'none',
-                  transition: 'fill 0.2s ease-in-out, stroke 0.2s ease-in-out',
-                },
-                hover: {
-                  fill: '#6100FF',
-                  outline: 'none',
-                  stroke: '#3A3B3D',
-                  strokeWidth: '0.971px',
-                },
-                pressed: {
-                  fill: '#6100FF',
-                  outline: 'none',
-                  stroke: '#3A3B3D',
-                  strokeWidth: '0.971px',
-                },
-              }}
-            />
-          ))}
-          {markers.map(({ name, coordinates, actionType }) => {
-            const currentIconActionType =
-              ADVOCATES_ACTIONS[actionType as keyof typeof ADVOCATES_ACTIONS]
+  isEmbedded?: boolean
+}) => {
+  const currentFill = isEmbedded ? '#171717' : '#F6F1FF'
+  const currentStroke = isEmbedded ? '#3A3B3D' : '#D7BFFF'
+  const currentHoverAndPressedFill = isEmbedded ? '#6100FF' : '#DDC9FF'
 
-            if (!currentIconActionType) {
-              return null
-            }
-
-            const IconComponent = currentIconActionType.icon
-
-            return (
-              <Marker
-                coordinates={coordinates}
-                key={name}
+  return (
+    <ComposableMap projection="geoAlbersUsa">
+      <Geographies geography={ADVOCATES_HEATMAP_GEO_URL}>
+        {({ geographies }) => (
+          <>
+            {geographies.map(geo => (
+              <Geography
+                cursor="pointer"
+                geography={geo}
+                key={geo.rsmKey}
+                onMouseMove={event => handleStateMouseHover(geo, event)}
+                onMouseOut={handleStateMouseOut}
+                stroke="#FFF"
                 style={{
                   default: {
-                    pointerEvents: 'none',
+                    fill: currentFill,
+                    stroke: currentStroke,
+                    strokeWidth: '0.971px',
+                    outline: 'none',
+                    transition: 'fill 0.2s ease-in-out, stroke 0.2s ease-in-out',
+                  },
+                  hover: {
+                    fill: currentHoverAndPressedFill,
+                    outline: 'none',
+                    stroke: currentStroke,
+                    strokeWidth: '0.971px',
+                  },
+                  pressed: {
+                    fill: currentHoverAndPressedFill,
+                    outline: 'none',
+                    stroke: currentStroke,
+                    strokeWidth: '0.971px',
                   },
                 }}
-              >
-                <IconComponent isPulsing={true} />
-              </Marker>
-            )
-          })}
-        </>
-      )}
-    </Geographies>
-  </ComposableMap>
-)
+              />
+            ))}
+            {markers.map(({ name, coordinates, actionType }) => {
+              const currentIconActionType =
+                ADVOCATES_ACTIONS[actionType as keyof typeof ADVOCATES_ACTIONS]
 
-const ActionsList = () => {
+              if (!currentIconActionType) {
+                return null
+              }
+
+              const IconComponent = currentIconActionType.icon
+
+              return (
+                <Marker
+                  coordinates={coordinates}
+                  key={name}
+                  style={{
+                    default: {
+                      pointerEvents: 'none',
+                    },
+                  }}
+                >
+                  <IconComponent isPulsing={true} />
+                </Marker>
+              )
+            })}
+          </>
+        )}
+      </Geographies>
+    </ComposableMap>
+  )
+}
+
+const ActionsList = ({ isEmbedded }: { isEmbedded?: boolean }) => {
   return (
     <div className="flex w-full flex-row justify-around gap-3 md:w-auto md:flex-col md:justify-between">
       {Object.entries(ADVOCATES_ACTIONS).map(([key, action]) => {
@@ -109,11 +118,11 @@ const ActionsList = () => {
 
         return (
           <div
-            className="flex flex-col items-center gap-3 font-sans text-base text-black md:flex-row"
+            className={`flex flex-col items-center gap-3 font-sans text-base md:flex-row ${isEmbedded ? 'text-white' : 'text-black'}`}
             key={key}
           >
             <ActionIcon className="w-8 md:w-10" />
-            <span className="text-nowrap text-xs text-white">{action.label}</span>
+            <span className="text-xs">{action.label}</span>
           </div>
         )
       })}
@@ -126,6 +135,7 @@ export function AdvocatesHeatmap({
   homepageData,
   advocatesMapPageData,
   topStatesLimit = 5,
+  isEmbedded,
 }: RenderMapProps) {
   const actions = useApiRecentActivity(homepageData.actions, { limit: 10 })
   const advocatesPerState = useApiAdvocateMap(advocatesMapPageData, {
@@ -160,10 +170,11 @@ export function AdvocatesHeatmap({
   return (
     <div className="flex flex-col items-start p-2">
       <div className="flex w-full flex-col items-start gap-4 md:flex-row">
-        <ActionsList />
+        <ActionsList isEmbedded={isEmbedded} />
         <MapComponent
           handleStateMouseHover={handleStateMouseHover}
           handleStateMouseOut={handleStateMouseOut}
+          isEmbedded={isEmbedded}
           markers={markers}
         />
         <TotalAdvocatesPerStateTooltip
@@ -175,7 +186,7 @@ export function AdvocatesHeatmap({
       </div>
       <div className="mt-2 flex w-full items-center justify-end">
         <AdvocateHeatmapOdometer
-          className="bg-black font-sans text-white"
+          className={`font-sans ${isEmbedded ? 'bg-black text-white' : 'bg-inherit text-black'}`}
           homepageData={homepageData}
           locale={locale}
         />

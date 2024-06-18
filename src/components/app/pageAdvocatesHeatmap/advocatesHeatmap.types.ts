@@ -9,6 +9,7 @@ export type PageAdvocatesHeatmapProps = {
   topStatesLimit?: number
   title?: string
   description?: string
+  isEmbedded?: boolean
 }
 
 export type TotalAdvocatesProps = Pick<
