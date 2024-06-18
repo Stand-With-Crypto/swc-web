@@ -7,7 +7,7 @@ const authToken = process.env.TWILIO_AUTH_TOKEN
 const logger = getLogger('verifySignature')
 
 export async function verifySignature(request: Request) {
-  logger.info(request)
+  logger.info(JSON.stringify(request))
 
   if (!authToken) {
     throw new Error('TWILIO_AUTH_TOKEN is not set')
