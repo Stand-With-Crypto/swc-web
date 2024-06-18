@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
     )
   }
 
-  logger.info({ body })
+  logger.info(JSON.stringify(body))
 
   return NextResponse.json({ ok: true })
 }
