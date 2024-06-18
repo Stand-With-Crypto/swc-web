@@ -1,5 +1,6 @@
 import { UserActionType, UserCommunicationJourneyType } from '@prisma/client'
 import { render } from '@react-email/components'
+import * as Sentry from '@sentry/nextjs'
 import { isBefore, subMinutes } from 'date-fns'
 import { NonRetriableError } from 'inngest'
 
@@ -125,6 +126,13 @@ async function sendInitialSignupEmail({
   })
 
   if (!user.primaryUserEmailAddress) {
+    Sentry.captureMessage('Tried to send an email to a user without primaryUserEmailAddress', {
+      extra: { userId: user.id },
+      fingerprint: ['initialSignupUserCommunicationJourney'],
+      tags: {
+        domain: 'initialSignupUserCommunicationJourney',
+      },
+    })
     throw new NonRetriableError('User does not have a primary email address')
   }
 
@@ -138,6 +146,15 @@ async function sendInitialSignupEmail({
           .map(action => `${action.actionType}` as EmailActiveActions)}
       />,
     ),
+  }).catch(err => {
+    Sentry.captureException(err, {
+      extra: { userId: user.id, emailTo: user.primaryUserEmailAddress!.emailAddress },
+      tags: {
+        domain: 'initialSignupUserCommunicationJourney',
+      },
+      fingerprint: ['initialSignupUserCommunicationJourney', 'sendMail'],
+    })
+    throw err
   })
 
   return prismaClient.userCommunication.create({

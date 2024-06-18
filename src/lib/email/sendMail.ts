@@ -16,23 +16,17 @@ export interface SendMailPayload {
 }
 
 export async function sendMail(payload: SendMailPayload) {
-  try {
-    const [response] = await SendGrid.send({
-      from: SENDGRID_SENDER,
-      mailSettings: {
-        sandboxMode: {
-          enable: SENDGRID_SANDBOX_MODE === 'true',
-        },
+  const [response] = await SendGrid.send({
+    from: SENDGRID_SENDER,
+    mailSettings: {
+      sandboxMode: {
+        enable: SENDGRID_SANDBOX_MODE === 'true',
       },
-      ...payload,
-    })
+    },
+    ...payload,
+  })
 
-    return response.headers['x-message-id'] as string
-  } catch (error) {
-    // TODO: handle error
-    console.error(error)
-    throw new Error('Unable to send mail')
-  }
+  return response.headers['x-message-id'] as string
 }
 
 export async function sendMultipleMails(
@@ -47,20 +41,12 @@ export async function sendMultipleMails(
     },
     ...entry,
   }))
-  try {
-    // This casting is necessary because `Sendgrid.send` is not correctly typed for multiple sends
-    const responses = (await SendGrid.send(hydratedPayload)) as unknown as [
-      ClientResponse,
-      unknown,
-    ][]
 
-    return responses.map((response, idx) => [
-      hydratedPayload[idx].to,
-      response[0].headers['x-message-id'],
-    ])
-  } catch (error) {
-    // TODO: handle error
-    console.error(error)
-    throw new Error('Unable to send mail')
-  }
+  // This casting is necessary because `Sendgrid.send` is not correctly typed for multiple sends
+  const responses = (await SendGrid.send(hydratedPayload)) as unknown as [ClientResponse, unknown][]
+
+  return responses.map((response, idx) => [
+    hydratedPayload[idx].to,
+    response[0].headers['x-message-id'],
+  ])
 }

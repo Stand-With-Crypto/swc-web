@@ -62,9 +62,8 @@ async function processEventChunk(messageId: string, events: EmailEvent[]) {
 }
 
 async function getServerAnalyticsFromMessageId(messageId: string) {
-  // TODO: Check if there's a better way to do this
-  // MessageId received from sendMail: 0GOQ6fMTTmiZpLh7usBJwg
-  // MessageId received by the event webhook: 0GOQ6fMTTmiZpLh7usBJwg.recvd-67fdc7b4d6-wbpn9-1-666CAB97-15.0
+  // MessageId received from sendMail: 0GOQ6fMTTmisBJwg
+  // MessageId received by the event webhook: 0GOQ6fMTTmisBJwg.recvd-1123412asd12-wbpn9-1-vdfs3123
   const parsedMessageId = messageId.split('.')[0]
 
   const userCommunication = await prismaClient.userCommunication.findFirst({

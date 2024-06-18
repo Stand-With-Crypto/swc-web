@@ -36,14 +36,6 @@ export const ACTIONS_METADATA_BY_TYPE: Record<
     buttonLabel: 'Make a call',
     buttonHref: `${BASE_URL}/action/call`,
   },
-  // TODO: we need to create a tweet deeplink
-  // TWEET: {
-  //   image: `${BASE_URL}/actionTypeIcons/tweet.png`,
-  //   text: 'Spread the word on X',
-  //   subtext: 'Tweet #StandWithCrypto and help bring more advocates to the cause.',
-  //   buttonLabel: 'Send an email',
-  //   buttonHref: `${BASE_URL}/action/email`,
-  // },
   DONATION: {
     image: `${BASE_URL}/actionTypeIcons/donate.png`,
     text: 'Donate to Stand With Crypto',
