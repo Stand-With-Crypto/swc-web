@@ -40,3 +40,7 @@ export const sendSMS = async (payload: SendSMSPayload) => {
     throw new Error('Failed to send SMS')
   }
 }
+
+export function parseTwilioBody(params: string): Record<string, string> {
+  return Object.fromEntries(new URLSearchParams(params))
+}

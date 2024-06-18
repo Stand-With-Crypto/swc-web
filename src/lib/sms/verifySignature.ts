@@ -2,6 +2,8 @@ import twilio from 'twilio'
 
 import { getLogger } from '@/utils/shared/logger'
 
+import { parseTwilioBody } from '@/lib/sms'
+
 const authToken = process.env.TWILIO_AUTH_TOKEN
 
 const logger = getLogger('verifySignature')
@@ -19,26 +21,13 @@ export async function verifySignature(request: Request) {
     throw new Error('Missing verification headers')
   }
 
-  logger.info('Verifying Twilio signature', {
-    authToken,
+  logger.debug({
     signature,
     url,
-    expectedSignatureParams: twilio.getExpectedTwilioSignature(
-      authToken,
-      url,
-      normalizeBody(rawBody),
-    ),
-    normalizeBody: normalizeBody(rawBody),
     rawBody,
+    params: parseTwilioBody(rawBody),
+    expectedSignature: twilio.getExpectedTwilioSignature(authToken, url, parseTwilioBody(rawBody)),
   })
 
-  return twilio.validateRequest(authToken, signature, url, normalizeBody(rawBody))
-}
-
-export function normalizeBody(body: string): Record<string, string> {
-  const params = new URLSearchParams(body)
-
-  params.sort()
-
-  return Object.fromEntries(params)
+  return twilio.validateRequest(authToken, signature, url, parseTwilioBody(rawBody))
 }
