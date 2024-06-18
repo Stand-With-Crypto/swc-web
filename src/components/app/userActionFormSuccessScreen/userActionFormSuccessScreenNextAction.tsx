@@ -16,11 +16,11 @@ import {
   GetUserActionsProgressArgs,
 } from '@/utils/shared/getUserActionsProgress'
 import {
-  UserActionTypesWithDeeplink,
   getUserActionDeeplink,
+  UserActionTypesWithDeeplink,
 } from '@/utils/shared/urlsDeeplinkUserActions'
-import { USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN } from '@/utils/web/userActionUtils'
 import { UserActionCampaigns } from '@/utils/shared/userActionCampaigns'
+import { USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN } from '@/utils/web/userActionUtils'
 
 export function UserActionFormSuccessScreenNextActionSkeleton() {
   return (

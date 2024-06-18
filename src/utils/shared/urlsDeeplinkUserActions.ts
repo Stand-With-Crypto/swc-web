@@ -1,4 +1,5 @@
 import { UserActionType } from '@prisma/client'
+
 import { SupportedLocale } from '@/intl/locales'
 import { ActiveClientUserActionType } from '@/utils/shared/activeUserAction'
 import { getIntlPrefix } from '@/utils/shared/urls'

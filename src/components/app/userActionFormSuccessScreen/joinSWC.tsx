@@ -1,7 +1,6 @@
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { UserActionFormSuccessScreenFeedback } from '@/components/app/userActionFormSuccessScreen/UserActionFormSuccessScreenFeedback'
 import { Button } from '@/components/ui/button'
-import { NextImage } from '@/components/ui/image'
 
 interface JoinSWCProps {
   onClose: () => void

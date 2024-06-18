@@ -5,9 +5,9 @@ import { UserActionType } from '@prisma/client'
 
 import { UserActionRowCTA, UserActionRowCTAProps } from '@/components/app/userActionRowCTA'
 import { getUserActionCTAInfo } from '@/components/app/userActionRowCTA/constants'
+import { UserActionCampaignName } from '@/utils/shared/userActionCampaigns'
 import { cn } from '@/utils/web/cn'
 import { USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN } from '@/utils/web/userActionUtils'
-import { UserActionCampaignName } from '@/utils/shared/userActionCampaigns'
 
 export interface UserActionRowCTAsListProps {
   performedUserActionTypes?: Array<{ actionType: UserActionType; campaignName: string }>
@@ -44,7 +44,7 @@ export function UserActionRowCTAsList({
         const state = getState({ action, campaign })
 
         return Render ? (
-          <Render key={`${action}-${campaign}`} state={state} campaign={campaign} {...props} />
+          <Render campaign={campaign} key={`${action}-${campaign}`} state={state} {...props} />
         ) : (
           <UserActionRowCTA key={`${action}-${campaign}`} state={state} {...props} />
         )
