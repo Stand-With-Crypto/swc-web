@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import { UserActionFormEmailCNN } from '@/components/app/userActionFormEmailCNN'
 import { ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CNN } from '@/components/app/userActionFormEmailCNN/constants'
 import { UserActionFormEmailCNNSkeleton } from '@/components/app/userActionFormEmailCNN/skeleton'
+import { UserActionFormEmailCNNSuccess } from '@/components/app/userActionFormEmailCNN/success'
 import { FormFields } from '@/components/app/userActionFormEmailCNN/types'
 import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
@@ -50,7 +51,9 @@ function UserActionFormEmailCNNDeeplinkWrapperContent() {
     />
   ) : (
     <div className={cn(dialogContentPaddingStyles)}>
-      <UserActionFormSuccessScreen onClose={() => router.replace(urls.home())} />
+      <UserActionFormSuccessScreen onClose={() => router.replace(urls.home())}>
+        <UserActionFormEmailCNNSuccess />
+      </UserActionFormSuccessScreen>
     </div>
   )
 }

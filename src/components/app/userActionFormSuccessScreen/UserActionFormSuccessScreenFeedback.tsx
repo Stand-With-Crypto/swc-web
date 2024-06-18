@@ -1,5 +1,6 @@
 import { ReactNode } from 'react'
 
+import { DEFAULT_USER_ACTION_FORM_SUCCESS_SCREEN_INFO } from '@/components/app/userActionFormSuccessScreen/constants'
 import { NextImage } from '@/components/ui/image'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
@@ -7,8 +8,8 @@ import { Skeleton } from '@/components/ui/skeleton'
 
 export interface UserActionFormSuccessScreenFeedbackProps {
   image?: ReactNode
-  title: ReactNode
-  description: ReactNode
+  title?: ReactNode
+  description?: ReactNode
 }
 
 export function UserActionFormSuccessScreenFeedback(
@@ -56,7 +57,7 @@ UserActionFormSuccessScreenFeedback.Description =
   function UserActionFormSuccessScreenFeedbackDescription({ children }: { children: ReactNode }) {
     return (
       <PageSubTitle className="max-w-[60ch]" size="md">
-        {children}
+        {children || DEFAULT_USER_ACTION_FORM_SUCCESS_SCREEN_INFO.WITHOUT_NFT}
       </PageSubTitle>
     )
   }

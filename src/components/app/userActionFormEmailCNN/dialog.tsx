@@ -5,6 +5,7 @@ import { Suspense, useEffect, useState } from 'react'
 import { ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CNN } from '@/components/app/userActionFormEmailCNN/constants'
 import { LazyUserActionFormEmailCNN } from '@/components/app/userActionFormEmailCNN/lazyLoad'
 import { UserActionFormEmailCNNSkeleton } from '@/components/app/userActionFormEmailCNN/skeleton'
+import { UserActionFormEmailCNNSuccess } from '@/components/app/userActionFormEmailCNN/success'
 import { FormFields } from '@/components/app/userActionFormEmailCNN/types'
 import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
@@ -50,7 +51,9 @@ export function UserActionFormEmailCNNDialog({
             />
           ) : (
             <div className={cn(dialogContentPaddingStyles)}>
-              <UserActionFormSuccessScreen onClose={() => dialogProps.onOpenChange(false)} />
+              <UserActionFormSuccessScreen onClose={() => dialogProps.onOpenChange(false)}>
+                <UserActionFormEmailCNNSuccess />
+              </UserActionFormSuccessScreen>
             </div>
           )}
         </Suspense>
