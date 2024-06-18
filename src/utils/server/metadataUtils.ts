@@ -1,4 +1,4 @@
-import { Metadata } from 'next'
+import { Metadata, Viewport } from 'next'
 
 import { getOpenGraphImageUrl } from '@/utils/server/generateOpenGraphImageUrl'
 
@@ -15,11 +15,7 @@ export const sharedTwitterMetadata = {
   //   creatorId: '', TODO figure out what standwithcrypto is via the twitter api
 } satisfies Partial<Metadata['twitter']>
 
-export const generateMetadataDetails = ({
-  title,
-  description,
-  ogImage,
-}: {
+interface MetadataDetails {
   title: string
   description?: string
   ogImage?: {
@@ -30,7 +26,28 @@ export const generateMetadataDetails = ({
     width?: string | number
     height?: string | number
   }
-}) => {
+}
+
+export const TOP_LEVEL_METADATA_DETAILS: Partial<Metadata> = {
+  metadataBase: new URL('https://www.standwithcrypto.org'),
+  applicationName: 'Stand With Crypto',
+  icons: [
+    { url: '/logo/favicon-16x16.png', sizes: '16x16' },
+    { url: '/logo/favicon-32x32.png', sizes: '32x32' },
+  ],
+  // manifest: '/site.webmanifest', // LATER-TASK figure out why we get 401s when we uncomment this
+  appleWebApp: {
+    title: 'Stand With Crypto',
+    statusBarStyle: 'black-translucent',
+    startupImage: ['/logo/apple-touch-icon.png'],
+  },
+}
+
+export const generateMetadataDetails = ({
+  title,
+  description,
+  ogImage,
+}: MetadataDetails): Metadata => {
   const useImage = ogImage || getOpenGraphImageUrl({ title, description })
   return {
     title,
@@ -48,4 +65,12 @@ export const generateMetadataDetails = ({
       images: [useImage],
     },
   } satisfies Metadata
+}
+
+export const viewport: Viewport = {
+  viewportFit: 'cover',
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  themeColor: '#fff',
 }

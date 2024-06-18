@@ -21,6 +21,7 @@ import { getSearchParam, setCallbackQueryString } from '@/utils/server/searchPar
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { USER_ACTION_DEEPLINK_MAP } from '@/utils/shared/urlsDeeplinkUserActions'
 import { hasCompleteUserProfile } from '@/utils/web/hasCompleteUserProfile'
+import { USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN } from '@/utils/web/userActionUtils'
 import { getSensitiveDataUserDisplayName } from '@/utils/web/userUtils'
 
 import { UserReferralUrl } from './userReferralUrl'
@@ -67,14 +68,21 @@ export function PageUserProfile({ params, searchParams, user }: PageUserProfile)
     )
   }
   const { userActions } = user
-  const performedUserActionTypes = uniq(userActions.map(x => x.actionType))
+  const performedUserActionTypes = uniq(
+    userActions.map(x => ({ actionType: x.actionType, campaignName: x.campaignName })),
+  )
   const excludeUserActionTypes = user.hasEmbeddedWallet
     ? [UserActionType.NFT_MINT, ...USER_ACTIONS_EXCLUDED_FROM_CTA]
     : USER_ACTIONS_EXCLUDED_FROM_CTA
-  const numActionsCompleted = performedUserActionTypes.filter(
-    action => !excludeUserActionTypes.includes(action),
+  const numActionsCompleted = performedUserActionTypes.filter(performedAction => {
+    return !excludeUserActionTypes.includes(performedAction.actionType)
+  }).length
+
+  const numActionsAvailable = Object.values(
+    USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN.filter(
+      item => !excludeUserActionTypes.includes(item.action),
+    ),
   ).length
-  const numActionsAvailable = Object.values(UserActionType).length - excludeUserActionTypes.length
 
   return (
     <div className="standard-spacing-from-navbar container space-y-10 lg:space-y-16">
@@ -120,7 +128,7 @@ export function PageUserProfile({ params, searchParams, user }: PageUserProfile)
           {[
             {
               label: 'Actions',
-              value: <FormattedNumber amount={userActions.length} locale={locale} />,
+              value: <FormattedNumber amount={numActionsCompleted} locale={locale} />,
             },
             {
               label: 'Donated',

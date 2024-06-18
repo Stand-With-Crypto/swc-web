@@ -11,11 +11,11 @@ export function mockCreateAddressInput() {
     route: faker.location.street(),
     subpremise: faker.location.secondaryAddress(),
     locality: faker.location.city(),
-    administrativeAreaLevel1: faker.location.state(),
+    administrativeAreaLevel1: faker.location.state({ abbreviated: true }),
     administrativeAreaLevel2: '',
     postalCode: faker.location.zipCode(),
     postalCodeSuffix: '',
-    countryCode: faker.location.countryCode(),
+    countryCode: 'US',
   } satisfies Partial<Prisma.AddressCreateInput>
   return {
     ...partial,

@@ -81,7 +81,7 @@ type ClientUserActionTweetAtPerson = {
 At the database schema level we can't enforce that a single action only has one "type" FK, but at the client level we can and should
 */
 export type ClientUserAction = ClientModel<
-  Pick<UserAction, 'id' | 'actionType'> & {
+  Pick<UserAction, 'id' | 'actionType' | 'campaignName'> & {
     datetimeCreated: string
     nftMint: ClientNFTMint | null
   } & (
@@ -118,11 +118,12 @@ export const getClientUserAction = ({
   dtsiPeople: DTSIPersonForUserActions[]
 }): ClientUserAction => {
   const peopleBySlug = keyBy(dtsiPeople, x => x.slug)
-  const { id, datetimeCreated, actionType, nftMint } = record
+  const { id, datetimeCreated, actionType, nftMint, campaignName } = record
   const sharedProps = {
     id,
     datetimeCreated: datetimeCreated.toISOString(),
     actionType,
+    campaignName,
     nftMint: nftMint
       ? {
           ...getClientNFTMint(nftMint),
@@ -189,8 +190,12 @@ export const getClientUserAction = ({
       return getClientModel({ ...sharedProps, ...voterRegistrationFields })
     },
     [UserActionType.LIVE_EVENT]: () => {
-      const campaignName = record.campaignName as UserActionLiveEventCampaignName
-      return getClientModel({ ...sharedProps, actionType: UserActionType.LIVE_EVENT, campaignName })
+      const _campaignName = sharedProps.campaignName as UserActionLiveEventCampaignName
+      return getClientModel({
+        ...sharedProps,
+        actionType: UserActionType.LIVE_EVENT,
+        campaignName: _campaignName,
+      })
     },
     [UserActionType.TWEET_AT_PERSON]: () => {
       const { recipientDtsiSlug } = getRelatedModel(record, 'userActionTweetAtPerson')

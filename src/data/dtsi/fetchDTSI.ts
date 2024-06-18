@@ -18,7 +18,11 @@ const DO_THEY_SUPPORT_IT_API_KEY = process.env.DO_THEY_SUPPORT_IT_API_KEY!
 export const IS_MOCKING_DTSI_DATA =
   IS_DEVELOPING_OFFLINE || (!DO_THEY_SUPPORT_IT_API_KEY && NEXT_PUBLIC_ENVIRONMENT === 'local')
 
-export const fetchDTSI = async <R, V = object>(query: string, variables?: V) => {
+export const fetchDTSI = async <R, V = object>(
+  query: string,
+  variables?: V,
+  nextTags?: string[],
+) => {
   if (IS_MOCKING_DTSI_DATA) {
     // because this file will import faker, we want to avoid loading it in our serverless environments
     return import('@/mocks/dtsi/queryDTSIMockSchema').then(x =>
@@ -53,6 +57,7 @@ export const fetchDTSI = async <R, V = object>(query: string, variables?: V) => 
             query,
             variables,
           }),
+          ...(nextTags && { next: { tags: nextTags } }),
         },
         {
           withScope: scope => {

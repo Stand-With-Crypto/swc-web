@@ -4,6 +4,8 @@ import { fetchDTSI } from '@/data/dtsi/fetchDTSI'
 import { fragmentDTSIPersonCard } from '@/data/dtsi/fragments/fragmentDTSIPersonCard'
 import { DTSI_AllPeopleQuery, DTSI_AllPeopleQueryVariables } from '@/data/dtsi/generated'
 
+export const DTSI_AllPeopleQueryTag = 'DTSI_AllPeopleQuery'
+
 export const query = /* GraphQL */ `
   query AllPeople($limit: Int!) {
     people(
@@ -30,9 +32,13 @@ export const queryDTSIAllPeople = async ({ limit }: { limit: number } = { limit:
   if (limit > 1500) {
     throw new Error('We should not be requesting more than 1500 people at a time')
   }
-  const results = await fetchDTSI<DTSI_AllPeopleQuery, DTSI_AllPeopleQueryVariables>(query, {
-    limit,
-  })
+  const results = await fetchDTSI<DTSI_AllPeopleQuery, DTSI_AllPeopleQueryVariables>(
+    query,
+    {
+      limit,
+    },
+    [DTSI_AllPeopleQueryTag],
+  )
   if (results.people.length === 1500) {
     Sentry.captureMessage(
       'Previous limit set in queryDTSIAllPeople has been reached, we should consider re-evaluating our architecture',

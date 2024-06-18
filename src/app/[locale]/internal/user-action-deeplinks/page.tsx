@@ -2,7 +2,7 @@
 import { useRouter } from 'next/navigation'
 
 import { UserActionRowCTAButton } from '@/components/app/userActionRowCTA'
-import { USER_ACTION_ROW_CTA_INFO } from '@/components/app/userActionRowCTA/constants'
+import { getUserActionCTAInfo } from '@/components/app/userActionRowCTA/constants'
 import { ExternalLink } from '@/components/ui/link'
 import { useLocale } from '@/hooks/useLocale'
 import { fullUrl } from '@/utils/shared/urls'
@@ -23,8 +23,10 @@ export default function UserActionDeepLinks() {
         {USER_ACTION_TYPE_CTA_PRIORITY_ORDER.filter(
           actionType => USER_ACTION_DEEPLINK_MAP[actionType as UserActionTypesWithDeeplink],
         ).map(actionType => {
-          const props = USER_ACTION_ROW_CTA_INFO[actionType]
+          const props = getUserActionCTAInfo(actionType)
+
           const { WrapperComponent: _, ...userAction } = props
+
           const url = USER_ACTION_DEEPLINK_MAP[
             userAction.actionType as UserActionTypesWithDeeplink
           ].getDeeplinkUrl({ locale })
