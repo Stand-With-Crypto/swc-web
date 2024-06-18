@@ -30,13 +30,9 @@ export function UserActionFormEmailCNNSkeleton() {
                 <label>Last name</label>
                 <Input disabled placeholder="Last name" />
               </FormItemSkeleton>
-              <FormItemSkeleton>
+              <FormItemSkeleton className="col-span-2">
                 <label>Email</label>
                 <Input disabled placeholder="Your email" />
-              </FormItemSkeleton>
-              <FormItemSkeleton>
-                <label>Address</label>
-                <Input disabled placeholder="Your address" />
               </FormItemSkeleton>
             </div>
 
