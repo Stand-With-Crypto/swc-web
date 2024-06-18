@@ -74,6 +74,7 @@ export const UserActionRowCTAButton = React.forwardRef<
               src={image}
               style={{ height: 100, width: 100 }}
               width={100}
+              {...(image.includes('.svg') && { unoptimized: true })}
             />
           </div>
           <div>
