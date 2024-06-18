@@ -4,9 +4,7 @@ import twilio from 'twilio'
 
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 
-import { verifySignature } from './verifySignature'
-
-import { parseTwilioBody } from '@/lib/sms'
+import { parseTwilioBody, verifySignature } from './verifySignature'
 
 const authToken = requiredEnv(process.env.TWILIO_AUTH_TOKEN, 'TWILIO_AUTH_TOKEN')
 

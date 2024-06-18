@@ -4,13 +4,12 @@ import { NextRequest, NextResponse } from 'next/server'
 
 import { getLogger } from '@/utils/shared/logger'
 
-import { parseTwilioBody } from '@/lib/sms'
 import { verifySignature } from '@/lib/sms/verifySignature'
 
 const logger = getLogger('smsEventsFailsRoute')
 
 export async function POST(request: NextRequest) {
-  const isVerified = await verifySignature(request)
+  const [isVerified, body] = await verifySignature(request)
 
   if (!isVerified) {
     return NextResponse.json(
@@ -23,14 +22,7 @@ export async function POST(request: NextRequest) {
     )
   }
 
-  try {
-    const rawBody = await request.text()
-    const body = parseTwilioBody(rawBody)
-
-    logger.info({ body })
-  } catch (error) {
-    logger.error(error)
-  }
+  logger.info({ body })
 
   return NextResponse.json({ ok: true })
 }
