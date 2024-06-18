@@ -61,7 +61,7 @@ export const GooglePlacesSelect = React.forwardRef<
           className={cn(
             'text-muted-foreground',
             triggerProps.value && 'text-gray-500',
-            'h-auto cursor-pointer whitespace-normal',
+            'h-auto cursor-pointer whitespace-normal text-left',
             triggerProps.open && 'outline-none ring-2 ring-ring ring-offset-2',
             className,
           )}
