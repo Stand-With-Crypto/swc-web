@@ -40,7 +40,7 @@ function UserActionFormEmailCNNDeeplinkWrapperContent() {
   }, [])
 
   return fetchUser.isLoading || loadingParams ? (
-    <UserActionFormEmailCNNSkeleton locale={locale} />
+    <UserActionFormEmailCNNSkeleton />
   ) : state === 'form' ? (
     <UserActionFormEmailCNN
       initialValues={initialValues}
@@ -56,9 +56,8 @@ function UserActionFormEmailCNNDeeplinkWrapperContent() {
 }
 
 export function UserActionFormEmailCNNDeeplinkWrapper() {
-  const locale = useLocale()
   return (
-    <Suspense fallback={<UserActionFormEmailCNNSkeleton locale={locale} />}>
+    <Suspense fallback={<UserActionFormEmailCNNSkeleton />}>
       <UserActionFormEmailCNNDeeplinkWrapperContent />
     </Suspense>
   )

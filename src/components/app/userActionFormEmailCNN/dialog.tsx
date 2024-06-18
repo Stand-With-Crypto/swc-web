@@ -11,7 +11,6 @@ import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useDialog } from '@/hooks/useDialog'
-import { useLocale } from '@/hooks/useLocale'
 import { cn } from '@/utils/web/cn'
 
 export function UserActionFormEmailCNNDialog({
@@ -27,7 +26,6 @@ export function UserActionFormEmailCNNDialog({
     initialOpen: defaultOpen,
     analytics: ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CNN,
   })
-  const locale = useLocale()
   const fetchUser = useApiResponseForUserFullProfileInfo()
   const [state, setState] = useState<'form' | 'success'>('form')
   const { user } = fetchUser.data || { user: null }
@@ -40,9 +38,9 @@ export function UserActionFormEmailCNNDialog({
     <Dialog {...dialogProps}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="max-w-3xl" padding={false}>
-        <Suspense fallback={<UserActionFormEmailCNNSkeleton locale={locale} />}>
+        <Suspense fallback={<UserActionFormEmailCNNSkeleton />}>
           {fetchUser.isLoading ? (
-            <UserActionFormEmailCNNSkeleton locale={locale} />
+            <UserActionFormEmailCNNSkeleton />
           ) : state === 'form' ? (
             <LazyUserActionFormEmailCNN
               initialValues={initialValues}
