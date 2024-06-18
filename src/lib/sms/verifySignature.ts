@@ -12,9 +12,21 @@ export async function verifySignature(request: Request) {
   }
 
   const signature = request.headers.get('X-Twilio-Signature')
-  const bodyParams = (await request.json()) as Record<string, string>
-  const textBody = await request.text()
-  const objectBody = JSON.parse(textBody) as Record<string, string>
+  let bodyJSON: Record<string, string> = {}
+  try {
+    bodyJSON = (await request.json()) as Record<string, string>
+  } catch (e) {
+    logger.error('Error parsing JSON from request', e)
+  }
+
+  let bodyText = ''
+  try {
+    bodyText = await request.text()
+  } catch (e) {
+    logger.error('Error parsing text from request', e)
+  }
+
+  const bodyParams = Object.fromEntries(new URLSearchParams(bodyText))
   const url = request.url
 
   if (!signature) {
@@ -24,11 +36,11 @@ export async function verifySignature(request: Request) {
   logger.info('Verifying Twilio signature', {
     signature,
     url,
-    expectedSignatureJSON: twilio.getExpectedTwilioSignature(authToken, url, bodyParams),
-    expectedSignatureText: twilio.getExpectedTwilioSignature(authToken, url, objectBody),
+    expectedSignatureJSON: twilio.getExpectedTwilioSignature(authToken, url, bodyJSON),
+    expectedSignatureParams: twilio.getExpectedTwilioSignature(authToken, url, bodyParams),
+    bodyJSON,
+    bodyText,
     bodyParams,
-    textBody,
-    objectBody,
   })
 
   return twilio.validateRequest(authToken, signature, url, bodyParams)
