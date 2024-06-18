@@ -67,7 +67,18 @@ export const ADVOCATES_HEATMAP_GEO_URL =
 export const ADVOCATES_ACTIONS: Partial<
   Record<
     UserActionType,
-    { icon: ({ isPulsing }: { isPulsing?: boolean }) => JSX.Element; label: string }
+    {
+      icon: ({
+        height,
+        width,
+        isPulsing,
+      }: {
+        height?: number
+        width?: number
+        isPulsing?: boolean
+      }) => JSX.Element
+      label: string
+    }
   >
 > = {
   EMAIL: {

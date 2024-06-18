@@ -16,7 +16,7 @@ export function AdvocatesHeatmapPage({
   advocatesMapPageData,
 }: PageAdvocatesHeatmapProps) {
   return (
-    <div className="standard-spacing-from-navbar container bg-black">
+    <div className="standard-spacing-from-navbar container">
       <section className="space-y-9">
         <div className="flex w-full flex-col items-center justify-center gap-24">
           {title && description ? (

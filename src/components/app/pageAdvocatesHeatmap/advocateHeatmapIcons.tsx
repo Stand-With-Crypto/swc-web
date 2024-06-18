@@ -1,18 +1,17 @@
-export function CallIcon({ isPulsing = false }) {
+export function CallIcon({ isPulsing = false, height = 40, width = 40 }) {
   return (
     <svg
       fill="none"
-      height="40"
+      height={height}
       style={{
         position: 'relative',
         overflow: 'visible',
       }}
       viewBox="0 0 40 40"
-      width="40"
+      width={width}
       xmlns="http://www.w3.org/2000/svg"
     >
       <circle cx="20" cy="20" fill="#2B9D74" r="20" />
-
       <g clipPath="url(#clip0_4101_15867)">
         <path d="M15.832 13.3335H23.332V25.0002H15.832V13.3335Z" fill="white" opacity="0.3" />
         <path
@@ -20,13 +19,11 @@ export function CallIcon({ isPulsing = false }) {
           fill="white"
         />
       </g>
-
       <defs>
         <clipPath id="clip0_4101_15867">
           <rect fill="white" height="20" transform="translate(10 10)" width="20" />
         </clipPath>
       </defs>
-
       {isPulsing && (
         <circle
           cx="20"
@@ -45,21 +42,20 @@ export function CallIcon({ isPulsing = false }) {
   )
 }
 
-export function EmailIcon({ isPulsing = false }) {
+export function EmailIcon({ isPulsing = false, height = 40, width = 40 }) {
   return (
     <svg
       fill="none"
-      height="40"
+      height={height}
       style={{
         position: 'relative',
         overflow: 'visible',
       }}
       viewBox="0 0 40 40"
-      width="40"
+      width={width}
       xmlns="http://www.w3.org/2000/svg"
     >
       <rect fill="#9E00FF" height="40" rx="20" width="40.0007" />
-
       <g clipPath="url(#clip0_4101_15872)">
         <path
           d="M26.6654 16.6667L19.9987 20.8333L13.332 16.6667V25H26.6654V16.6667ZM26.6654 15H13.332L19.9987 19.1583L26.6654 15Z"
@@ -71,13 +67,11 @@ export function EmailIcon({ isPulsing = false }) {
           fill="white"
         />
       </g>
-
       <defs>
         <clipPath id="clip0_4101_15872">
           <rect fill="white" height="20" transform="translate(10 10)" width="20" />
         </clipPath>
       </defs>
-
       {isPulsing && (
         <circle
           cx="20"
@@ -96,21 +90,20 @@ export function EmailIcon({ isPulsing = false }) {
   )
 }
 
-export function JoinIcon({ isPulsing = false }) {
+export function JoinIcon({ isPulsing = false, height = 40, width = 40 }) {
   return (
     <svg
       fill="none"
-      height="40"
+      height={height}
       style={{
         position: 'relative',
         overflow: 'visible',
       }}
       viewBox="0 0 40 40"
-      width="40"
+      width={width}
       xmlns="http://www.w3.org/2000/svg"
     >
       <rect fill="#6100FF" height="40" rx="20" width="40" />
-
       <g clipPath="url(#clip0_4101_15877)">
         <path
           d="M15 15.3247V19.2414C15 22.5747 17.125 25.658 20 26.5997C22.875 25.658 25 22.583 25 19.2414V15.3247L20 13.4497L15 15.3247Z"
@@ -122,13 +115,11 @@ export function JoinIcon({ isPulsing = false }) {
           fill="white"
         />
       </g>
-
       <defs>
         <clipPath id="clip0_4101_15877">
           <rect fill="white" height="20" transform="translate(10 10)" width="20" />
         </clipPath>
       </defs>
-
       {isPulsing && (
         <circle
           cx="20"
@@ -147,38 +138,29 @@ export function JoinIcon({ isPulsing = false }) {
   )
 }
 
-export function VoterRegIcon({ isPulsing = false }) {
+export function VoterRegIcon({ isPulsing = false, height = 40, width = 40 }) {
   return (
     <svg
       fill="none"
-      height="40"
+      height={height}
       style={{
         position: 'relative',
         overflow: 'visible',
       }}
       viewBox="0 0 40 40"
-      width="40"
+      width={width}
       xmlns="http://www.w3.org/2000/svg"
     >
-      <rect fill="#125DB5" height="40" rx="20" width="40" />
-      <g clipPath="url(#clip0_4101_15885)">
-        <path d="M14.168 25.8335H25.8346V26.6668H14.168V25.8335Z" fill="white" opacity="0.3" />
+      <rect fill="#7F2BFF" height="40" rx="20" width="40" />
+      <g clipPath="url(#clip0_4101_15882)">
+        <path d="M15.832 13.3335H23.332V25.0002H15.832V13.3335Z" fill="white" opacity="0.3" />
         <path
-          d="M25 20.8335H24.4333L22.7667 22.5002H24.3583L25.8333 24.1668H14.1667L15.65 22.5002H17.3583L15.6917 20.8335H15L12.5 23.3335V26.6668C12.5 27.5835 13.2417 28.3335 14.1583 28.3335H25.8333C26.75 28.3335 27.5 27.5918 27.5 26.6668V23.3335L25 20.8335ZM25.8333 26.6668H14.1667V25.8335H25.8333V26.6668Z"
-          fill="white"
-        />
-        <path
-          d="M20.0384 20.7543L17.0859 17.8018L21.2109 13.6768L24.1634 16.6293L20.0384 20.7543Z"
-          fill="white"
-          opacity="0.3"
-        />
-        <path
-          d="M25.9258 16.0416L21.8008 11.9166C21.4841 11.5832 20.9591 11.5832 20.6341 11.9082L15.3258 17.2166C15.0008 17.5416 15.0008 18.0666 15.3258 18.3916L19.4508 22.5166C19.7758 22.8416 20.3008 22.8416 20.6258 22.5166L25.9258 17.2166C26.2508 16.8916 26.2508 16.3666 25.9258 16.0416ZM20.0424 20.7499L17.0924 17.7999L21.2174 13.6749L24.1674 16.6249L20.0424 20.7499Z"
+          d="M22.918 10.8335H16.2513C15.1013 10.8335 14.168 11.7668 14.168 12.9168V27.0835C14.168 28.2335 15.1013 29.1668 16.2513 29.1668H22.918C24.068 29.1668 25.0013 28.2335 25.0013 27.0835V12.9168C25.0013 11.7668 24.068 10.8335 22.918 10.8335ZM19.5846 28.3335C18.893 28.3335 18.3346 27.7752 18.3346 27.0835C18.3346 26.3918 18.893 25.8335 19.5846 25.8335C20.2763 25.8335 20.8346 26.3918 20.8346 27.0835C20.8346 27.7752 20.2763 28.3335 19.5846 28.3335ZM23.3346 25.0002H15.8346V13.3335H23.3346V25.0002Z"
           fill="white"
         />
       </g>
       <defs>
-        <clipPath id="clip0_4101_15885">
+        <clipPath id="clip0_4101_15882">
           <rect fill="white" height="20" transform="translate(10 10)" width="20" />
         </clipPath>
       </defs>
@@ -188,7 +170,7 @@ export function VoterRegIcon({ isPulsing = false }) {
           cy="20"
           fill="none"
           r="18"
-          stroke="#69A5EA"
+          stroke="#D5B7FF"
           strokeLinecap="round"
           strokeWidth="4"
         >

@@ -9,6 +9,7 @@ import { PageProps } from '@/types'
 import { getOpenGraphImageUrl } from '@/utils/server/generateOpenGraphImageUrl'
 import { generateMetadataDetails, TOP_LEVEL_METADATA_DETAILS } from '@/utils/server/metadataUtils'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
+import { cn } from '@/utils/web/cn'
 import { fontClassName } from '@/utils/web/fonts'
 
 export { viewport } from '@/utils/server/metadataUtils'
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
 export default function Layout({ children }: PageProps & { children: React.ReactNode }) {
   return (
     <html lang={SupportedLocale.EN_US}>
-      <body className={fontClassName}>
+      <body className={cn(fontClassName, 'bg-black')}>
         <OverrideGlobalLocalStorage />
         <FullHeight.Container>
           <FullHeight.Content>{children}</FullHeight.Content>

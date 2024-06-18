@@ -11,6 +11,7 @@ import {
   GetHomepageTopLevelMetricsResponse,
 } from '@/data/pageSpecific/getHomepageData'
 import { useApiHomepageTopLevelMetrics } from '@/hooks/useApiHomepageTopLevelMetrics'
+import { useIsMobile } from '@/hooks/useIsMobile'
 import { SupportedLocale } from '@/intl/locales'
 import { cn } from '@/utils/web/cn'
 import { intlNumberFormat } from '@/utils/web/intlNumberFormat'
@@ -32,6 +33,7 @@ export function AdvocateHeatmapOdometer({
   homepageData: Awaited<ReturnType<typeof getHomepageData>>
   className?: string
 }) {
+  const isMobile = useIsMobile()
   const decreasedInitialValues = useMemo(
     () => mockDecreaseInValuesOnInitialLoadSoWeCanAnimateIncrease(homepageData),
     [homepageData],
@@ -50,15 +52,15 @@ export function AdvocateHeatmapOdometer({
   return (
     <div
       className={cn(
-        `flex-shrink-0 rounded-3xl bg-secondary px-0 py-4 text-center md:w-1/2 md:p-6 md:py-6 ${className ?? ''}`,
+        `flex-shrink-0 rounded-3xl bg-secondary px-0 py-4 text-center md:p-6 md:py-6 ${className ?? ''}`,
       )}
     >
       <AnimatedNumericOdometer
         className={odometerStyles.odometerSatoshi}
-        size={76}
+        size={isMobile ? 46 : 76}
         value={formatted.countUsers.count}
       />
-      <div className="text-end font-sans text-xl text-muted-foreground">Advocates</div>
+      <div className="text-end font-sans text-lg text-muted-foreground md:text-xl">Advocates</div>
     </div>
   )
 }
