@@ -95,6 +95,22 @@ export function UserActionFormEmailCNN({
     form.setValue('message', newMessage)
   }
 
+  const handleTabPressAfterCustomMessageSet = (e: React.FocusEvent<HTMLInputElement, Element>) => {
+    // This is required because some for some reason the next field is not being focused on
+    // When using onBlur and form.setValue to update the message field after the user has
+    // typed the firstname and/or the lastname. This is a workaround to focus the next field
+    // when the users presses tab after typing the first or last name.
+    // The other fields don't require this as they don't have the same behavior of calling setValue onBlur
+
+    form.setFocus(
+      e.relatedTarget?.attributes?.getNamedItem('name')?.value as
+        | 'firstName'
+        | 'lastName'
+        | 'emailAddress'
+        | 'address',
+    )
+  }
+
   React.useEffect(() => {
     if (isDesktop) {
       form.setFocus('firstName')
@@ -167,12 +183,7 @@ export function UserActionFormEmailCNN({
                           {...field}
                           onBlur={e => {
                             handleMessageChange()
-                            form.setFocus(
-                              e.relatedTarget?.attributes?.getNamedItem('name')?.value as
-                                | 'lastName'
-                                | 'emailAddress'
-                                | 'address',
-                            )
+                            handleTabPressAfterCustomMessageSet(e)
                           }}
                         />
                       </FormControl>
@@ -193,12 +204,7 @@ export function UserActionFormEmailCNN({
                           {...field}
                           onBlur={e => {
                             handleMessageChange()
-                            form.setFocus(
-                              e.relatedTarget?.attributes?.getNamedItem('name')?.value as
-                                | 'emailAddress'
-                                | 'address'
-                                | 'firstName',
-                            )
+                            handleTabPressAfterCustomMessageSet(e)
                           }}
                         />
                       </FormControl>
