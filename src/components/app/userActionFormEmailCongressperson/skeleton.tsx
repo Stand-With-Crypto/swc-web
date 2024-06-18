@@ -6,6 +6,7 @@ import { getDefaultText } from '@/components/app/userActionFormEmailCongresspers
 import { Button } from '@/components/ui/button'
 import { FormItemSkeleton } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
@@ -13,6 +14,7 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import { Textarea } from '@/components/ui/textarea'
 import { useGetDTSIPeopleFromAddress } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { SupportedLocale } from '@/intl/locales'
+import { getIntlUrls } from '@/utils/shared/urls'
 import {
   getYourPoliticianCategoryShortDisplayName,
   YourPoliticianCategory,
@@ -25,6 +27,7 @@ export function UserActionFormEmailCongresspersonSkeleton({
   locale: SupportedLocale
   politicianCategory?: YourPoliticianCategory
 }) {
+  const urls = getIntlUrls(locale)
   return (
     <form className="flex max-h-dvh flex-col">
       <LoadingOverlay />
@@ -77,6 +80,19 @@ export function UserActionFormEmailCongresspersonSkeleton({
           </div>
         </div>
       </ScrollArea>
+
+      <div className="py-6 md:px-12">
+        <p className="text-xs text-fontcolor-muted">
+          By submitting, I understand that Stand With Crypto and its vendors may collect and use my
+          personal information subject to the{' '}
+          <InternalLink href={urls.privacyPolicy()}>SWC Privacy Policy</InternalLink> and the{' '}
+          <ExternalLink href={'https://www.quorum.us/privacy-policy/'}>
+            Quorum Privacy Policy
+          </ExternalLink>
+          .
+        </p>
+      </div>
+
       <div
         className="z-10 flex flex-1 flex-col items-center justify-center gap-4 border border-t p-6 sm:flex-row md:px-12"
         style={{ boxShadow: 'rgba(0, 0, 0, 0.2) 0px 1px 6px 0px' }}
