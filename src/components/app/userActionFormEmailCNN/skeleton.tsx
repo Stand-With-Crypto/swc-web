@@ -71,18 +71,6 @@ Thank you for your consideration.
         className="z-10 flex flex-1 flex-col items-center justify-center gap-4 border border-t p-6 sm:flex-row md:px-12"
         style={{ boxShadow: 'rgba(0, 0, 0, 0.2) 0px 1px 6px 0px' }}
       >
-        {/* <div>
-          <p className="text-xs text-fontcolor-muted">
-            By submitting, I understand that Stand With Crypto and its vendors may collect and use
-            my personal information subject to the{' '}
-            <InternalLink href={urls.privacyPolicy()}>SWC Privacy Policy</InternalLink> and the{' '}
-            <ExternalLink href={'https://www.quorum.us/privacy-policy/'}>
-              Quorum Privacy Policy
-            </ExternalLink>
-            .
-          </p>
-        </div> */}
-
         <Button className="w-full sm:max-w-md" size="lg" type="submit">
           Send
         </Button>
