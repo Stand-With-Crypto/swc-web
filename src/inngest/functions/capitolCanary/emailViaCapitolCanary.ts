@@ -9,33 +9,33 @@ import {
   formatCapitolCanaryAdvocateCreationRequest,
 } from '@/utils/server/capitolCanary/createAdvocate'
 import {
-  emailRepViaCapitolCanary,
-  formatCapitolCanaryEmailRepRequest,
-} from '@/utils/server/capitolCanary/emailRep'
-import { EmailRepViaCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
+  emailViaCapitolCanary,
+  formatCapitolCanaryEmailRequest,
+} from '@/utils/server/capitolCanary/email'
+import { EmailViaCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import {
   formatCapitolCanaryAdvocateUpdateRequest,
   updateAdvocateInCapitolCanary,
 } from '@/utils/server/capitolCanary/updateAdvocate'
 import { prismaClient } from '@/utils/server/prismaClient'
 
-const CAPITOL_CANARY_EMAIL_REP_RETRY_LIMIT = 20
+const CAPITOL_CANARY_EMAIL_RETRY_LIMIT = 20
 
-export const CAPITOL_CANARY_EMAIL_REP_INNGEST_FUNCTION_ID = 'capitol-canary.email-rep'
-export const CAPITOL_CANARY_EMAIL_REP_INNGEST_EVENT_NAME = 'capitol.canary/email.rep'
+export const CAPITOL_CANARY_EMAIL_INNGEST_FUNCTION_ID = 'capitol-canary.email'
+export const CAPITOL_CANARY_EMAIL_INNGEST_EVENT_NAME = 'capitol.canary/email'
 
 /**
- * Refer to `src/bin/smokeTests/capitolCanary/emailRepWithInngest.ts` to see how to call this function.
+ * Refer to `src/bin/smokeTests/capitolCanary/emailWithInngest.ts` to see how to call this function.
  */
-export const emailRepViaCapitolCanaryWithInngest = inngest.createFunction(
+export const emailViaCapitolCanaryWithInngest = inngest.createFunction(
   {
-    id: CAPITOL_CANARY_EMAIL_REP_INNGEST_FUNCTION_ID,
-    retries: CAPITOL_CANARY_EMAIL_REP_RETRY_LIMIT,
+    id: CAPITOL_CANARY_EMAIL_INNGEST_FUNCTION_ID,
+    retries: CAPITOL_CANARY_EMAIL_RETRY_LIMIT,
     onFailure: onFailureCapitolCanary,
   },
-  { event: CAPITOL_CANARY_EMAIL_REP_INNGEST_EVENT_NAME },
+  { event: CAPITOL_CANARY_EMAIL_INNGEST_EVENT_NAME },
   async ({ event, step }) => {
-    const data = event.data as EmailRepViaCapitolCanaryPayloadRequirements
+    const data = event.data as EmailViaCapitolCanaryPayloadRequirements
     let emailAdvocateId = 0
 
     // If the user does not have an SwC advocate ID, then we need to create one for them.
@@ -54,7 +54,7 @@ export const emailRepViaCapitolCanaryWithInngest = inngest.createFunction(
       // Create the advocate in Capitol Canary.
       // If advocate already exists for the given campaign ID, then that's alright - nothing will happen, which is fine.
       const createAdvocateStepResponse = await step.run(
-        'capitol-canary.email-rep.create-advocate-in-capitol-canary',
+        'capitol-canary.email.create-advocate-in-capitol-canary',
         async () => {
           const createAdvocateResp = await createAdvocateInCapitolCanary(formattedCreateRequest)
           if (createAdvocateResp.success !== 1) {
@@ -82,7 +82,7 @@ export const emailRepViaCapitolCanaryWithInngest = inngest.createFunction(
       }
       // Update the advocate in Capitol Canary.
       const updateAdvocateStepResponse = await step.run(
-        'capitol-canary.email-rep.update-advocate-in-capitol-canary',
+        'capitol-canary.email.update-advocate-in-capitol-canary',
         async () => {
           const updateAdvocateResp = await updateAdvocateInCapitolCanary(formattedUpdateRequest)
           if (updateAdvocateResp.success !== 1) {
@@ -107,35 +107,35 @@ export const emailRepViaCapitolCanaryWithInngest = inngest.createFunction(
     }
 
     // Format email request.
-    const formattedEmailRepRequest = formatCapitolCanaryEmailRepRequest({
+    const formattedEmailRequest = formatCapitolCanaryEmailRequest({
       ...data,
       advocateId: emailAdvocateId,
     })
-    if (formattedEmailRepRequest instanceof Error) {
-      throw new NonRetriableError(formattedEmailRepRequest.message, {
-        cause: formattedEmailRepRequest,
+    if (formattedEmailRequest instanceof Error) {
+      throw new NonRetriableError(formattedEmailRequest.message, {
+        cause: formattedEmailRequest,
       })
     }
     // Send email to representative via Capitol Canary.
-    const emailRepStepResponse = await step.run(
-      'capitol-canary.email-rep.email-rep-via-capitol-canary',
+    const emailStepResponse = await step.run(
+      'capitol-canary.email.email-via-capitol-canary',
       async () => {
-        const emailRepResp = await emailRepViaCapitolCanary(formattedEmailRepRequest)
-        if (emailRepResp.success !== 1) {
-          if (emailRepResp.error) {
-            Sentry.captureMessage(`emailRepViaCapitolCanary error: ${emailRepResp.error}`, {
-              extra: { formattedEmailRepRequest, data },
+        const emailResp = await emailViaCapitolCanary(formattedEmailRequest)
+        if (emailResp.success !== 1) {
+          if (emailResp.error) {
+            Sentry.captureMessage(`emailViaCapitolCanary error: ${emailResp.error}`, {
+              extra: { formattedEmailRequest, data },
               tags: {
                 administrativeAreaLevel1: data.user.address?.administrativeAreaLevel1,
               },
             })
           }
           throw new NonRetriableError(
-            `client error for emailing rep via capitol canary: ${JSON.stringify(emailRepResp)}`,
+            `client error for emailing via capitol canary: ${JSON.stringify(emailResp)}`,
           )
         }
         return {
-          ...emailRepResp,
+          ...emailResp,
         }
       },
     )
@@ -145,7 +145,7 @@ export const emailRepViaCapitolCanaryWithInngest = inngest.createFunction(
       data.user.capitolCanaryAdvocateId !== emailAdvocateId ||
       data.user.capitolCanaryInstance === CapitolCanaryInstance.LEGACY
     ) {
-      await step.run('capitol-canary.email-rep.update-user-with-advocate-id', async () => {
+      await step.run('capitol-canary.email.update-user-with-advocate-id', async () => {
         await prismaClient.user.update({
           where: { id: data.user.id },
           data: {
@@ -156,6 +156,6 @@ export const emailRepViaCapitolCanaryWithInngest = inngest.createFunction(
       })
     }
 
-    return emailRepStepResponse
+    return emailStepResponse
   },
 )

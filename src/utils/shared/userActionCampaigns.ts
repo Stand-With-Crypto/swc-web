@@ -18,6 +18,7 @@ export enum UserActionEmailCampaignName {
   DEFAULT = 'EMAIL_YOUR_CONGRESSPERSON_FIT21',
   FIT21_2024_04 = 'EMAIL_YOUR_CONGRESSPERSON_FIT21_2024_04',
   FIT21_2024_04_FOLLOW_UP = 'EMAIL_YOUR_CONGRESSPERSON_FIT21_2024_04_FOLLOW_UP',
+  CNN_PRESIDENTIAL_DEBATE_2024 = 'CNN_PRESIDENTIAL_DEBATE_2024',
 }
 export enum UserActionCallCampaignName {
   DEFAULT = 'CALL_YOUR_CONGRESSPERSON_FIT21',
@@ -86,5 +87,5 @@ type UserActionAdditionalCampaigns = {
 }
 
 export const USER_ACTIONS_WITH_ADDITIONAL_CAMPAIGN: Partial<UserActionAdditionalCampaigns> = {
-  [UserActionType.EMAIL]: [UserActionEmailCampaignName.DEFAULT], // This will be changed to CNN campaign later
+  [UserActionType.EMAIL]: [UserActionEmailCampaignName.CNN_PRESIDENTIAL_DEBATE_2024],
 }

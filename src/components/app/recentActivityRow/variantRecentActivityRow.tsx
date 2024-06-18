@@ -9,6 +9,7 @@ import {
   RecentActivityRowProps,
 } from '@/components/app/recentActivityRow/recentActivityRow'
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
+import { UserActionFormEmailCNNDialog } from '@/components/app/userActionFormEmailCNN/dialog'
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
@@ -24,6 +25,7 @@ import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
 import { getIntlUrls } from '@/utils/shared/urls'
+import { UserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns'
 import { listOfThings } from '@/utils/web/listOfThings'
 
 const MainText = ({ children }: { children: React.ReactNode }) => (
@@ -128,6 +130,20 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
           ),
         }
       case UserActionType.EMAIL: {
+        const isCNNEmailCampaign =
+          action.campaignName === UserActionEmailCampaignName.CNN_PRESIDENTIAL_DEBATE_2024
+
+        if (isCNNEmailCampaign) {
+          return {
+            onFocusContent: () => (
+              <UserActionFormEmailCNNDialog>
+                <Button>Email CNN</Button>
+              </UserActionFormEmailCNNDialog>
+            ),
+            children: <MainText>Email sent to CNN</MainText>,
+          }
+        }
+
         const dtsiRecipients = action.userActionEmailRecipients.filter(x => x.person)
         return {
           onFocusContent: () => (

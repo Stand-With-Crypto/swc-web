@@ -16,10 +16,7 @@ import { z } from 'zod'
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
 import { CAPITOL_CANARY_EMAIL_INNGEST_EVENT_NAME } from '@/inngest/functions/capitolCanary/emailViaCapitolCanary'
 import { inngest } from '@/inngest/inngest'
-import {
-  CapitolCanaryCampaignId,
-  SandboxCapitolCanaryCampaignId,
-} from '@/utils/server/capitolCanary/campaigns'
+import { CapitolCanaryCampaignId } from '@/utils/server/capitolCanary/campaigns'
 import { EmailViaCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
 import { prismaClient } from '@/utils/server/prismaClient'
@@ -40,26 +37,26 @@ import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/local
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
-import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { userFullName } from '@/utils/shared/userFullName'
-import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory'
-import { zodUserActionFormEmailCongresspersonAction } from '@/validation/forms/zodUserActionFormEmailCongressperson'
+import { zodUserActionFormEmailCNNAction } from '@/validation/forms/zodUserActionFormEmailCNN'
 
-const logger = getLogger(`actionCreateUserActionEmailCongressperson`)
+const logger = getLogger(`actionCreateUserActionEmailCNN`)
+
+const CNN_EMAIL = 'community@cnn.com'
 
 type UserWithRelations = User & {
   primaryUserCryptoAddress: UserCryptoAddress | null
   userEmailAddresses: UserEmailAddress[]
   address: Address | null
 }
-type Input = z.infer<typeof zodUserActionFormEmailCongresspersonAction>
+type Input = z.infer<typeof zodUserActionFormEmailCNNAction>
 
-export const actionCreateUserActionEmailCongressperson = withServerActionMiddleware(
-  'actionCreateUserActionEmailCongressperson',
-  _actionCreateUserActionEmailCongressperson,
+export const actionCreateUserActionEmailCNN = withServerActionMiddleware(
+  'actionCreateUserActionEmailCNN',
+  _actionCreateUserActionEmailCNN,
 )
 
-async function _actionCreateUserActionEmailCongressperson(input: Input) {
+async function _actionCreateUserActionEmailCNN(input: Input) {
   logger.info('triggered')
   const { triggerRateLimiterAtMostOnce } = getRequestRateLimiter({
     context: 'unauthenticated',
@@ -72,7 +69,7 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
   })
   logger.info(userMatch.user ? 'found user' : 'no user found')
   const sessionId = getUserSessionId()
-  const validatedFields = zodUserActionFormEmailCongresspersonAction.safeParse(input)
+  const validatedFields = zodUserActionFormEmailCNNAction.safeParse(input)
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
@@ -145,8 +142,8 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
             },
           },
           userActionEmailRecipients: {
-            createMany: {
-              data: validatedFields.data.dtsiSlugs.map(dtsiSlug => ({ dtsiSlug })),
+            create: {
+              emailAddress: CNN_EMAIL,
             },
           },
         },
@@ -159,7 +156,6 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
   analytics.trackUserActionCreated({
     actionType,
     campaignName,
-    'Recipient DTSI Slug': validatedFields.data.dtsiSlugs,
     creationMethod: 'On Site',
     userState,
     ...convertAddressToAnalyticsProperties(validatedFields.data.address),
@@ -177,7 +173,7 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
    * By this point, the email address and physical address should have been added to our database.
    */
   const payload: EmailViaCapitolCanaryPayloadRequirements = {
-    campaignId: getCapitalCanaryCampaignId(validatedFields.data.politicianCategory),
+    campaignId: CapitolCanaryCampaignId.CNN_EMAIL,
     user: {
       ...user,
       address: user.address!,
@@ -200,28 +196,6 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
   return { user: getClientUser(user) }
 }
 
-function getCapitalCanaryCampaignId(politicianCategory: YourPoliticianCategory) {
-  if (NEXT_PUBLIC_ENVIRONMENT !== 'production') {
-    switch (politicianCategory) {
-      case 'senate':
-        return SandboxCapitolCanaryCampaignId.DEFAULT_EMAIL_SENATORS
-      case 'house':
-        return SandboxCapitolCanaryCampaignId.DEFAULT_EMAIL_REPRESENTATIVE
-      case 'senate-and-house':
-        return SandboxCapitolCanaryCampaignId.DEFAULT_EMAIL_REPRESENTATIVE_AND_SENATORS
-    }
-  }
-
-  switch (politicianCategory) {
-    case 'senate':
-      return CapitolCanaryCampaignId.DEFAULT_EMAIL_SENATORS
-    case 'house':
-      return CapitolCanaryCampaignId.DEFAULT_EMAIL_REPRESENTATIVE
-    case 'senate-and-house':
-      return CapitolCanaryCampaignId.DEFAULT_EMAIL_REPRESENTATIVE_AND_SENATORS
-  }
-}
-
 async function maybeUpsertUser({
   existingUser,
   input,
@@ -239,8 +213,6 @@ async function maybeUpsertUser({
 
   if (existingUser) {
     const updatePayload: Prisma.UserUpdateInput = {
-      ...(firstName && firstName !== existingUser.firstName && { firstName }),
-      ...(lastName && lastName !== existingUser.lastName && { lastName }),
       ...(!existingUser.hasOptedInToEmails && { hasOptedInToEmails: true }),
       ...(emailAddress &&
         existingUser.userEmailAddresses.every(addr => addr.emailAddress !== emailAddress) && {
