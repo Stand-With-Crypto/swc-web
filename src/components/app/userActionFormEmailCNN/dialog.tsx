@@ -50,7 +50,7 @@ export function UserActionFormEmailCNNDialog({
               user={user}
             />
           ) : (
-            <div className={cn(dialogContentPaddingStyles)}>
+            <div className={cn(dialogContentPaddingStyles, 'h-full')}>
               <UserActionFormSuccessScreen onClose={() => dialogProps.onOpenChange(false)}>
                 <UserActionFormEmailCNNSuccess />
               </UserActionFormSuccessScreen>

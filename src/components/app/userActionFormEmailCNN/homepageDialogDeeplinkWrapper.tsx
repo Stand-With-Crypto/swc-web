@@ -50,7 +50,7 @@ function UserActionFormEmailCNNDeeplinkWrapperContent() {
       user={user}
     />
   ) : (
-    <div className={cn(dialogContentPaddingStyles)}>
+    <div className={cn(dialogContentPaddingStyles, 'h-full')}>
       <UserActionFormSuccessScreen onClose={() => router.replace(urls.home())}>
         <UserActionFormEmailCNNSuccess />
       </UserActionFormSuccessScreen>
