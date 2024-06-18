@@ -16,10 +16,11 @@ import {
   GetUserActionsProgressArgs,
 } from '@/utils/shared/getUserActionsProgress'
 import {
-  USER_ACTION_DEEPLINK_MAP,
   UserActionTypesWithDeeplink,
+  getUserActionDeeplink,
 } from '@/utils/shared/urlsDeeplinkUserActions'
 import { USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN } from '@/utils/web/userActionUtils'
+import { UserActionCampaigns } from '@/utils/shared/userActionCampaigns'
 
 export function UserActionFormSuccessScreenNextActionSkeleton() {
   return (
@@ -50,10 +51,22 @@ export function UserActionFormSuccessScreenNextAction({
    * TODO: We should figure out why the modal won't close on page transition
    */
   const handleClick = useCallback(
-    (actionType: UserActionTypesWithDeeplink) => () => {
-      if (!USER_ACTION_DEEPLINK_MAP[actionType]) return
-      window.location.href = USER_ACTION_DEEPLINK_MAP[actionType].getDeeplinkUrl({ locale })
-    },
+    (
+      actionType: UserActionTypesWithDeeplink,
+      campaign?: UserActionCampaigns[UserActionTypesWithDeeplink],
+    ) =>
+      () => {
+        const url = getUserActionDeeplink({
+          actionType,
+          config: {
+            locale,
+          },
+          campaign,
+        })
+
+        if (!url) return
+        window.location.href = url
+      },
     [locale],
   )
 
@@ -82,7 +95,10 @@ export function UserActionFormSuccessScreenNextAction({
           return (
             <UserActionRowCTAButton
               {...ctaProps}
-              onClick={handleClick(ctaProps.actionType as UserActionTypesWithDeeplink)}
+              onClick={handleClick(
+                ctaProps.actionType,
+                ctaProps?.campaign as UserActionCampaigns[UserActionTypesWithDeeplink],
+              )}
             />
           )
         }}
@@ -100,7 +116,10 @@ export function UserActionFormSuccessScreenNextAction({
         render={ctaProps => (
           <UserActionRowCTAButton
             {...ctaProps}
-            onClick={handleClick(ctaProps.actionType as UserActionTypesWithDeeplink)}
+            onClick={handleClick(
+              ctaProps.actionType,
+              ctaProps?.campaign as UserActionCampaigns[UserActionTypesWithDeeplink],
+            )}
           />
         )}
       />

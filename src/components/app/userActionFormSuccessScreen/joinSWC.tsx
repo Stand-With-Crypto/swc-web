@@ -14,9 +14,6 @@ export function JoinSWC(props: JoinSWCProps) {
     <div className="flex h-full min-h-[400px] flex-col gap-4">
       <UserActionFormSuccessScreenFeedback
         description="You did your part to save crypto. Join Stand With Crypto to become a member or sign in to have this action count towards your advocacy progress."
-        image={
-          <NextImage alt="Shield with checkmark" height={120} src="/logo/shield.svg" width={120} />
-        }
         title="Nice work!"
       />
 

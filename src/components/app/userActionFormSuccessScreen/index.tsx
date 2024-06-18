@@ -52,7 +52,7 @@ export function UserActionFormSuccessScreen(props: UserActionFormSuccessScreenPr
   }
 
   return (
-    <div className={cn('flex h-full flex-col gap-6')}>
+    <div className={cn('flex h-full flex-col gap-8 p-0 md:p-8')}>
       {children}
 
       {isLoading || performedActionsResponse.isLoading ? (

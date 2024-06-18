@@ -18,12 +18,17 @@ export function UserActionFormSuccessScreenFeedback(
   const { image, title, description } = props
 
   return (
-    <div className="flex flex-col items-center justify-center gap-2">
+    <div className="flex flex-col items-center justify-center gap-8">
       <UserActionFormSuccessScreenFeedback.Image>{image}</UserActionFormSuccessScreenFeedback.Image>
-      <UserActionFormSuccessScreenFeedback.Title>{title}</UserActionFormSuccessScreenFeedback.Title>
-      <UserActionFormSuccessScreenFeedback.Description>
-        {description}
-      </UserActionFormSuccessScreenFeedback.Description>
+
+      <div className="space-y-2">
+        <UserActionFormSuccessScreenFeedback.Title>
+          {title}
+        </UserActionFormSuccessScreenFeedback.Title>
+        <UserActionFormSuccessScreenFeedback.Description>
+          {description}
+        </UserActionFormSuccessScreenFeedback.Description>
+      </div>
     </div>
   )
 }
@@ -56,7 +61,7 @@ UserActionFormSuccessScreenFeedback.Title = function UserActionFormSuccessScreen
 UserActionFormSuccessScreenFeedback.Description =
   function UserActionFormSuccessScreenFeedbackDescription({ children }: { children: ReactNode }) {
     return (
-      <PageSubTitle className="max-w-[60ch]" size="md">
+      <PageSubTitle className="max-w-lg" size="md">
         {children || DEFAULT_USER_ACTION_FORM_SUCCESS_SCREEN_INFO.WITHOUT_NFT}
       </PageSubTitle>
     )
