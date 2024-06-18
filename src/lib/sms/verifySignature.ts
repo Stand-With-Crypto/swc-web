@@ -12,12 +12,7 @@ export async function verifySignature(request: Request) {
   }
 
   const signature = request.headers.get('X-Twilio-Signature')
-  let bodyJSON: Record<string, string> = {}
-  try {
-    bodyJSON = (await request.json()) as Record<string, string>
-  } catch (e) {
-    logger.error('Error parsing JSON from request', e)
-  }
+  const url = request.url
 
   let bodyText = ''
   try {
@@ -27,7 +22,6 @@ export async function verifySignature(request: Request) {
   }
 
   const bodyParams = Object.fromEntries(new URLSearchParams(bodyText))
-  const url = request.url
 
   if (!signature) {
     throw new Error('Missing verification headers')
@@ -36,9 +30,7 @@ export async function verifySignature(request: Request) {
   logger.info('Verifying Twilio signature', {
     signature,
     url,
-    expectedSignatureJSON: twilio.getExpectedTwilioSignature(authToken, url, bodyJSON),
     expectedSignatureParams: twilio.getExpectedTwilioSignature(authToken, url, bodyParams),
-    bodyJSON,
     bodyText,
     bodyParams,
   })
