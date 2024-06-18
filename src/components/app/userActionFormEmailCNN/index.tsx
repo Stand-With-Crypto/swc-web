@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { UserActionType } from '@prisma/client'
@@ -62,6 +62,7 @@ export function UserActionFormEmailCNN({
   const isDesktop = useIsDesktop()
   const router = useRouter()
   const urls = useIntlUrls()
+  const hasModifiedMessage = useRef(false)
   const form = useForm<FormValues>({
     resolver: zodResolver(zodUserActionFormEmailCNNFields),
     defaultValues: {
@@ -85,6 +86,8 @@ export function UserActionFormEmailCNN({
   })
 
   function handleMessageChange() {
+    if (hasModifiedMessage.current) return
+
     const firstName = form.getValues('firstName')
     const lastName = form.getValues('lastName')
     const newMessage = getEmailMessage({ firstName, lastName })
@@ -250,6 +253,7 @@ export function UserActionFormEmailCNN({
                           rows={16}
                           {...field}
                           onChange={e => {
+                            hasModifiedMessage.current = true
                             field.onChange(e)
                           }}
                         />
