@@ -295,8 +295,7 @@ export function UserActionFormEmailCNN({
 
 function getEmailMessage({ firstName, lastName = '' }: { firstName?: string; lastName?: string }) {
   if (!firstName) {
-    return `
-I am one of the 52 million Americans who own cryptocurrency. Crypto can drive American innovation and global leadership by fostering strong consumer protection, creating high-skilled jobs, and strengthening our national security. Unfortunately, bad policy could push this technology overseas, and cost the U.S. nearly 4 million jobs.
+    return `I am one of the 52 million Americans who own cryptocurrency. Crypto can drive American innovation and global leadership by fostering strong consumer protection, creating high-skilled jobs, and strengthening our national security. Unfortunately, bad policy could push this technology overseas, and cost the U.S. nearly 4 million jobs.
 
 Crypto owners are uniquely bipartisan - 18% Republicans, 22% Democrats, and 22% Independents hold crypto. Crypto provides access to the banking system to disenfranchised communities and communities of color and can help bolster an economy that works for everyone.
 
@@ -304,12 +303,10 @@ On behalf of myself and all American crypto owners, I urge you to ask the candid
 
 Giving the major Presidential candidates a chance to weigh in on this transformational technology in the first debate would go a long way towards educating the electorate and helping American crypto owners cast an informed ballot.
 
-Thank you for your consideration.
-    `
+Thank you for your consideration.`
   }
 
-  return `
-My name is ${firstName}, and I am one of the 52 million Americans who own cryptocurrency. Crypto can drive American innovation and global leadership by fostering strong consumer protection, creating high-skilled jobs, and strengthening our national security. Unfortunately, bad policy could push this technology overseas, and cost the U.S. nearly 4 million jobs.
+  return `My name is ${firstName}, and I am one of the 52 million Americans who own cryptocurrency. Crypto can drive American innovation and global leadership by fostering strong consumer protection, creating high-skilled jobs, and strengthening our national security. Unfortunately, bad policy could push this technology overseas, and cost the U.S. nearly 4 million jobs.
 
 Crypto owners are uniquely bipartisan - 18% Republicans, 22% Democrats, and 22% Independents hold crypto. Crypto provides access to the banking system to disenfranchised communities and communities of color and can help bolster an economy that works for everyone.
 
@@ -319,6 +316,5 @@ Giving the major Presidential candidates a chance to weigh in on this transforma
 
 Thank you for your consideration,
 
-${firstName} ${lastName}
-  `
+${firstName} ${lastName}`
 }
