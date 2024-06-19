@@ -55,15 +55,7 @@ export const GooglePlacesSelect = React.forwardRef<
   // Capitol Canary won't be able to successfully find the related congressperson based on the address provided
   // That's why we need to filter out the route type for US addresses on required action flows
   const usePlacesAutoCompleteResult = shouldLimitUSAddresses
-    ? data
-        ?.map(place =>
-          !place.description.includes('USA')
-            ? place
-            : !place.types.includes('route')
-              ? place
-              : null,
-        )
-        .filter(Boolean)
+    ? data?.filter(place => !place.description.includes('USA') && !place.types.includes('route'))
     : data
 
   const scriptStatus = useGoogleMapsScript()
