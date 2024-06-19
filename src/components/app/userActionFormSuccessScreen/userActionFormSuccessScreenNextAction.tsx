@@ -72,17 +72,23 @@ export function UserActionFormSuccessScreenNextAction({
 
   const { performedUserActionTypes, userHasEmbeddedWallet } = data
 
-  const { progressValue, excludeUserActionTypes } = getUserActionsProgress({
-    userHasEmbeddedWallet,
-    performedUserActionTypes,
-  })
+  const { progressValue, excludeUserActionTypes, numActionsCompleted, numActionsAvailable } =
+    getUserActionsProgress({
+      userHasEmbeddedWallet,
+      performedUserActionTypes,
+    })
 
   const [debouncedProgressValue, setDebouncedProgressValue] = useState(0)
   useDebounce(() => setDebouncedProgressValue(progressValue), 333, [progressValue])
 
   return (
     <div className="space-y-6 text-center">
-      <Progress value={debouncedProgressValue} />
+      <div className="space-y-3">
+        <p className="text-fontcolor-muted">
+          You've completed {numActionsCompleted} out of {numActionsAvailable} actions. Keep going!
+        </p>
+        <Progress value={debouncedProgressValue} />
+      </div>
 
       {/** Uncompleted actions first */}
       <UserActionRowCTAsList
