@@ -54,7 +54,7 @@ export const GooglePlacesSelect = React.forwardRef<
   // But for US, if we allow users to use an address with the route type,
   // Capitol Canary won't be able to successfully find the related congressperson based on the address provided
   // That's why we need to filter out the route type for US addresses on required action flows
-  const usePlacesAutoCompleteResult = shouldLimitUSAddresses
+  const placesAutoCompleteResult = shouldLimitUSAddresses
     ? data?.filter(place => !place.description.includes('USA') || !place.types.includes('route'))
     : data
 
@@ -95,7 +95,7 @@ export const GooglePlacesSelect = React.forwardRef<
       onChange={propsOnChange}
       onChangeInputValue={setValue}
       open={open}
-      options={usePlacesAutoCompleteResult}
+      options={placesAutoCompleteResult}
       placeholder="Type your address..."
       setOpen={setOpen}
       value={propsValue}
