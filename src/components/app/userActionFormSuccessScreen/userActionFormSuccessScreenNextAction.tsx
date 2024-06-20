@@ -84,10 +84,10 @@ export function UserActionFormSuccessScreenNextAction({
   return (
     <div className="space-y-6 text-center">
       <div className="space-y-3">
+        <Progress value={debouncedProgressValue} />
         <p className="text-fontcolor-muted">
           You've completed {numActionsCompleted} out of {numActionsAvailable} actions. Keep going!
         </p>
-        <Progress value={debouncedProgressValue} />
       </div>
 
       {/** Uncompleted actions first */}
