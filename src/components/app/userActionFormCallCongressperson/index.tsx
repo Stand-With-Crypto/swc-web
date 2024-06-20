@@ -9,12 +9,11 @@ import {
   ANALYTICS_NAME_USER_ACTION_FORM_CALL_CONGRESSPERSON,
   SectionNames,
 } from '@/components/app/userActionFormCallCongressperson/constants'
+import { UserActionFormCallCongresspersonSuccess } from '@/components/app/userActionFormCallCongressperson/sections/success'
 import { FormFields } from '@/components/app/userActionFormCallCongressperson/types'
 import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
 import { DTSIPeopleFromCongressionalDistrict } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { useSections, UseSectionsReturn } from '@/hooks/useSections'
-import { NFTSlug } from '@/utils/shared/nft'
-import { NFT_CLIENT_METADATA } from '@/utils/web/nft'
 import { zodAddress } from '@/validation/fields/zodAddress'
 
 import { Address, ChangeAddress, useCongresspersonData } from './sections/address'
@@ -44,7 +43,7 @@ export function UserActionFormCallCongressperson({
 }: UserActionFormCallCongresspersonProps) {
   const hasDefaultAddress = !!user?.address || !!initialValues?.address
 
-  const sectionProps = useSections<SectionNames>({
+  const sectionProps = useSections({
     sections: Object.values(SectionNames),
     initialSectionId: SectionNames.INTRO,
     analyticsName: ANALYTICS_NAME_USER_ACTION_FORM_CALL_CONGRESSPERSON,
@@ -107,10 +106,9 @@ export function UserActionFormCallCongressperson({
       )
     case SectionNames.SUCCESS_MESSAGE:
       return (
-        <UserActionFormSuccessScreen
-          nftWhenAuthenticated={NFT_CLIENT_METADATA[NFTSlug.CALL_REPRESENTATIVE_SEPT_11]}
-          onClose={onClose}
-        />
+        <UserActionFormSuccessScreen onClose={onClose}>
+          <UserActionFormCallCongresspersonSuccess />
+        </UserActionFormSuccessScreen>
       )
     default:
       onTabNotFound()

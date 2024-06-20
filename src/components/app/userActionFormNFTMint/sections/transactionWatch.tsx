@@ -21,6 +21,7 @@ import {
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { Skeleton } from '@/components/ui/skeleton'
+import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
 import { useEffectOnce } from '@/hooks/useEffectOnce'
 import { TransactionResponse } from '@/hooks/useSendMintNFTTransaction'
@@ -44,9 +45,12 @@ export function UserActionFormNFTMintTransactionWatch({
   sendTransactionResponse,
   debug,
 }: UserActionFormNFTMintTransactionWatchProps) {
+  const { data: userDataResponse, isLoading: isLoadingUserData } =
+    useApiResponseForUserFullProfileInfo()
   const { data: contractMetadata, isLoading: isLoadingContractMetadata } =
     useThirdwebContractMetadata(MINT_NFT_CONTRACT_ADDRESS)
-  const { data: performedUserActionTypesResponse } = useApiResponseForUserPerformedUserActionTypes()
+  const { data: performedUserActionTypesResponse, isLoading: isLoadingUserActions } =
+    useApiResponseForUserPerformedUserActionTypes()
 
   const [isMined, setIsMined] = React.useState(false)
 
@@ -103,7 +107,7 @@ export function UserActionFormNFTMintTransactionWatch({
   return (
     <UserActionFormLayout>
       <UserActionFormLayout.Container>
-        <div className="my-10 flex flex-col items-center gap-6 text-center">
+        <div className="flex flex-col items-center gap-6 text-center">
           <NFTDisplay
             alt={contractMetadata.name}
             loading={!isMined}
@@ -122,7 +126,17 @@ export function UserActionFormNFTMintTransactionWatch({
           </PageSubTitle>
         </div>
 
-        <UserActionFormSuccessScreenNextAction data={performedUserActionTypesResponse} />
+        {isLoadingUserData || isLoadingUserActions || !userDataResponse?.user ? (
+          <UserActionFormSuccessScreenNextActionSkeleton />
+        ) : (
+          <UserActionFormSuccessScreenNextAction
+            data={{
+              userHasEmbeddedWallet: userDataResponse.user.hasEmbeddedWallet,
+              performedUserActionTypes:
+                performedUserActionTypesResponse?.performedUserActionTypes || [],
+            }}
+          />
+        )}
       </UserActionFormLayout.Container>
     </UserActionFormLayout>
   )
