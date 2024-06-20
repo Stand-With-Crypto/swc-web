@@ -1,12 +1,8 @@
 import twilio from 'twilio'
 
-import { getLogger } from '@/utils/shared/logger'
-
 const authToken = process.env.TWILIO_AUTH_TOKEN
 
-const logger = getLogger('verifySignature')
-
-export async function verifySignature(request: Request) {
+export async function verifySignature<Body = unknown>(request: Request): Promise<[boolean, Body]> {
   if (!authToken) {
     throw new Error('TWILIO_AUTH_TOKEN is not set')
   }
@@ -20,15 +16,7 @@ export async function verifySignature(request: Request) {
   const rawBody = await request.text()
   const params = parseTwilioBody(rawBody)
 
-  logger.debug({
-    signature,
-    url,
-    rawBody,
-    params,
-    expectedSignature: twilio.getExpectedTwilioSignature(authToken, url, params),
-  })
-
-  return [twilio.validateRequest(authToken, signature, url, params), params]
+  return [twilio.validateRequest(authToken, signature, url, params), params as Body]
 }
 
 export function parseTwilioBody(params: string): Record<string, string> {
