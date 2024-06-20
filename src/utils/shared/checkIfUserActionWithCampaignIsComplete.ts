@@ -3,12 +3,12 @@ import { UserActionType } from '@prisma/client'
 import {
   USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
   USER_ACTIONS_WITH_ADDITIONAL_CAMPAIGN,
-  UserActionCampaigns,
+  UserActionCampaignName,
 } from '@/utils/shared/userActionCampaigns'
 
 interface CheckIfUserActionWithCampaignIsCompleteProps {
   action: UserActionType
-  campaign: UserActionCampaigns
+  campaign: UserActionCampaignName
 }
 
 export function checkIfUserActionWithCampaignIsComplete({
