@@ -40,7 +40,7 @@ import { zodUserActionFormEmailCNNFields } from '@/validation/forms/zodUserActio
 
 const logger = getLogger(`actionCreateUserActionEmailCNN`)
 
-const CNN_EMAIL = 'community@cnn.com'
+const CNN_EMAIL = 'cnndebates2024@cnn.com'
 
 type UserWithRelations = User & {
   primaryUserCryptoAddress: UserCryptoAddress | null
