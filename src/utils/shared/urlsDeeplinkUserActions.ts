@@ -4,6 +4,7 @@ import { SupportedLocale } from '@/intl/locales'
 import { ActiveClientUserActionType } from '@/utils/shared/activeUserAction'
 import { getIntlPrefix } from '@/utils/shared/urls'
 import {
+  USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
   UserActionCampaigns,
   UserActionEmailCampaignName,
 } from '@/utils/shared/userActionCampaigns'
@@ -62,7 +63,6 @@ export const USER_ACTION_DEEPLINK_MAP: {
     },
   },
 }
-
 export type UserActionTypesWithDeeplink = keyof typeof USER_ACTION_DEEPLINK_MAP
 
 export const USER_ACTION_WITH_CAMPAIGN_DEEPLINK_MAP: {
@@ -93,9 +93,13 @@ export const getUserActionDeeplink = <
   config,
   campaign,
 }: GetUserActionDeeplinkArgs<ActionType>) => {
-  if (USER_ACTION_WITH_CAMPAIGN_DEEPLINK_MAP[actionType] && campaign) {
+  if (!campaign || campaign === USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[actionType]) {
+    return USER_ACTION_DEEPLINK_MAP[actionType].getDeeplinkUrl(config)
+  }
+
+  if (USER_ACTION_WITH_CAMPAIGN_DEEPLINK_MAP[actionType]?.[campaign]) {
     return USER_ACTION_WITH_CAMPAIGN_DEEPLINK_MAP[actionType]?.[campaign]?.(config)
   }
 
-  return USER_ACTION_DEEPLINK_MAP[actionType].getDeeplinkUrl(config)
+  throw new Error(`No deeplink found for actionType: ${actionType} and campaign: ${campaign}`)
 }
