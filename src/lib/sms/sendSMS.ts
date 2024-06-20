@@ -29,7 +29,7 @@ export const sendSMS = async (payload: SendSMSPayload) => {
 
   const { body, to } = validatedInput.data
 
-  // only send SMS to US numbers
+  // only send SMS to US and CA numbers
   if (!to.startsWith('+1')) {
     throw new Error('Invalid phone number')
   }
