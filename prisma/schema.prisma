@@ -154,7 +154,6 @@ model UserMergeAlert {
 
   @@unique([userAId, userBId])
   @@index([userBId])
-  @@index([userAId])
   @@map("user_merge_alert")
 }
 
@@ -207,7 +206,6 @@ model UserEmailAddress {
 
   @@unique(map: "user_email_address_unique_constraint", [emailAddress, userId])
   @@index([userId])
-  @@index([emailAddress])
   @@map("user_email_address")
 }
 
@@ -236,8 +234,6 @@ model UserCryptoAddress {
 
   @@unique([cryptoAddress, cryptoNetwork, userId])
   @@index([userId])
-  @@index([cryptoAddress])
-  @@index([embeddedWalletUserEmailAddressId])
   @@map("user_crypto_address")
 }
 
@@ -287,7 +283,6 @@ model UserAction {
   @@index([actionType, campaignName])
   @@index([userCryptoAddressId])
   @@index([userSessionId])
-  @@index([nftMintId])
   @@index([userEmailAddressId])
   @@map("user_action")
 }
@@ -301,7 +296,6 @@ model UserActionOptIn {
   userAction UserAction          @relation(fields: [id], references: [id])
   optInType  UserActionOptInType @map("opt_in_type")
 
-  @@index([id])
   @@map("user_action_opt_in")
 }
 
@@ -315,7 +309,6 @@ model UserActionEmail {
   addressId                 String?                    @map("address_id")
   userActionEmailRecipients UserActionEmailRecipient[]
 
-  @@index([id])
   @@index([addressId])
   @@map("user_action_email")
 }
@@ -341,7 +334,6 @@ model UserActionCall {
   address              Address?   @relation(fields: [addressId], references: [id])
   addressId            String?    @map("address_id")
 
-  @@index([id])
   @@index([addressId])
   @@map("user_action_call")
 }
@@ -361,7 +353,6 @@ model UserActionDonation {
 
   coinbaseCommerceDonationId String? @map("coinbase_commerce_donation_id")
 
-  @@index([id])
   @@index([amountUsd])
   @@map("user_action_donation")
 }
@@ -398,7 +389,6 @@ model NFTMint {
 
   userActions UserAction[]
 
-  @@index([id])
   @@index([nftSlug])
   @@map("nft_mint")
 }
@@ -408,7 +398,6 @@ model UserActionVoterRegistration {
   userAction UserAction @relation(fields: [id], references: [id])
   usaState   String?    @map("usa_state")
 
-  @@index([id])
   @@map("user_action_voter_registration")
 }
 
@@ -417,6 +406,5 @@ model UserActionTweetAtPerson {
   userAction        UserAction @relation(fields: [id], references: [id])
   recipientDtsiSlug String?    @map("recipient_dtsi_slug")
 
-  @@index([id])
   @@map("user_action_tweet_at_person")
 }
