@@ -3,7 +3,7 @@ import 'server-only'
 import * as Sentry from '@sentry/nextjs'
 import { NextRequest, NextResponse } from 'next/server'
 
-import { verifySignature } from '@/lib/sms/verifySignature'
+import { verifySignature } from '@/lib/sms'
 
 interface SmsEvent {
   ParentAccountSid: string

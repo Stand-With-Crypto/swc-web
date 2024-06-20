@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server'
 
 import { getLogger } from '@/utils/shared/logger'
 
-import { verifySignature } from '@/lib/sms/verifySignature'
+import { verifySignature } from '@/lib/sms'
 
 const logger = getLogger('sms-events')
 
