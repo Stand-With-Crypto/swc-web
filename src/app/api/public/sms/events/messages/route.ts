@@ -48,20 +48,9 @@ export async function POST(request: NextRequest) {
   logger.info(JSON.stringify(body))
 
   await sendSMS({
-    body: 'Hello from the server',
-    to: body.From,
+    to: '+15005550001',
+    body: 'Should fail',
   })
-
-  if (body.Body === 'fail') {
-    return NextResponse.json(
-      {
-        ok: false,
-      },
-      {
-        status: 400,
-      },
-    )
-  }
 
   return NextResponse.json({ ok: true })
 }
