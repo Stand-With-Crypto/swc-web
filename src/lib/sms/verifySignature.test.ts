@@ -27,9 +27,9 @@ describe('verifySignature', () => {
       url,
     }))
 
-    const response = await verifySignature(mockedRequest())
+    const [isVerified] = await verifySignature(mockedRequest())
 
-    expect(response).toBe(true)
+    expect(isVerified).toBe(true)
   })
 
   it('should return false if signature is invalid', async () => {
@@ -47,8 +47,8 @@ describe('verifySignature', () => {
       url,
     }))
 
-    const response = await verifySignature(mockedRequest())
+    const [isVerified] = await verifySignature(mockedRequest())
 
-    expect(response).toBe(false)
+    expect(isVerified).toBe(false)
   })
 })
