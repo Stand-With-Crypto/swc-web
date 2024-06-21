@@ -104,7 +104,7 @@ function FooterSection() {
             <Text className="text-fontcolor-secondary mb-1 text-base">Follow us on socials</Text>
             <Row align="right" className="float-end w-[72px]">
               <Column className="pr-4">
-                <Link href={SOCIAL_MEDIA_URL.twitter}>
+                <Link href={SOCIAL_MEDIA_URL.facebook}>
                   <Img
                     alt="Facebook logo"
                     height="24"
@@ -114,7 +114,7 @@ function FooterSection() {
                 </Link>
               </Column>
               <Column className="pr-4">
-                <Link href="https://github.com/LucasRMP">
+                <Link href={SOCIAL_MEDIA_URL.twitter}>
                   <Img
                     alt="X/Twitter logo"
                     height="24"
@@ -124,7 +124,7 @@ function FooterSection() {
                 </Link>
               </Column>
               <Column>
-                <Link href="https://github.com/LucasRMP">
+                <Link href={SOCIAL_MEDIA_URL.instagram}>
                   <Img
                     alt="Instagram logo"
                     height="24"

@@ -13,9 +13,13 @@ import { Wrapper } from '@/lib/email/templates/ui/wrapper'
 
 interface InitialSignUpEmailProps {
   completedActionTypes?: EmailActiveActions[]
+  previewText?: string
 }
 
-export default function InitialSignUpEmail({ completedActionTypes = [] }: InitialSignUpEmailProps) {
+export default function InitialSignUpEmail({
+  completedActionTypes = [],
+  previewText,
+}: InitialSignUpEmailProps) {
   const actionsMetadata = Object.entries(ACTIONS_METADATA_BY_TYPE)
     .map(([type, metadata]) => ({
       ...metadata,
@@ -25,7 +29,7 @@ export default function InitialSignUpEmail({ completedActionTypes = [] }: Initia
     .sort((a, b) => Number(a.hasCompleted) - Number(b.hasCompleted))
 
   return (
-    <Wrapper previewText="This is a hello world example">
+    <Wrapper previewText={previewText}>
       <Section>
         <Img className="mb-6 max-w-full" src={`${BASE_URL}/email/swc-join-still.png`} width={620} />
 

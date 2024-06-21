@@ -54,6 +54,6 @@ export const ACTIONS_METADATA_BY_TYPE: Record<
 
 export const SOCIAL_MEDIA_URL = {
   facebook: 'https://www.facebook.com/standwithcrypto',
-  instagram: 'https://www.instagram.com/standwithcrypto/',
+  instagram: 'https://www.instagram.com/standwithcrypto',
   twitter: 'https://twitter.com/standwithcrypto',
 }
