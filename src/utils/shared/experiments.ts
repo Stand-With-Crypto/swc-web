@@ -73,6 +73,5 @@ export function getDefaultExperimentContext() {
 }
 
 export function getExperimentVariants(experiment: Experiments) {
-  const variants = EXPERIMENTS_CONFIG[experiment].variants
-  return variants.map(({ name }) => name)
+  return EXPERIMENTS_CONFIG[experiment].variants.map(({ name }) => name)
 }
