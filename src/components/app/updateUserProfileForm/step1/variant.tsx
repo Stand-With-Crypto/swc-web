@@ -12,6 +12,7 @@ import { SensitiveDataClientUser } from '@/clientModels/clientUser/sensitiveData
 import { SWCMembershipDialog } from '@/components/app/updateUserProfileForm/swcMembershipDialog'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
+import { Collapsible, CollapsibleContent } from '@/components/ui/collapsible'
 import {
   Form,
   FormControl,
@@ -53,7 +54,7 @@ export function UpdateUserProfileForm({
     emailAddress: user.primaryUserEmailAddress?.emailAddress || '',
     phoneNumber: user.phoneNumber || '',
     hasOptedInToMembership: user.hasOptedInToMembership,
-    hasOptedInToSms: true,
+    hasOptedInToSms: user.hasOptedInToSms,
     address: user.address
       ? {
           description: user.address.formattedDescription,
@@ -90,7 +91,7 @@ export function UpdateUserProfileForm({
               analyticsProps: {
                 ...(address ? convertAddressToAnalyticsProperties(address) : {}),
               },
-              payload: { ...values, address },
+              payload: { ...values, address, hasOptedInToSms: !!values.phoneNumber },
             },
             payload => actionUpdateUserProfile(payload),
           )
@@ -238,11 +239,15 @@ export function UpdateUserProfileForm({
           <Button className="w-full" disabled={form.formState.isSubmitting} size="lg" type="submit">
             Create account
           </Button>
-          <p className="text-center text-xs font-normal leading-4 text-muted-foreground">
-            By clicking Create account, you consent to receive recurring texts from Stand with
-            Crypto about its efforts at the number provided. You can reply STOP to stop receiving
-            texts. Message and data rates may apply.
-          </p>
+          <Collapsible open={!!form.watch('phoneNumber')}>
+            <CollapsibleContent className="AnimateCollapsibleContent">
+              <FormDescription className="text-center text-xs font-normal leading-4 text-muted-foreground">
+                By clicking Create account, you consent to receive recurring texts from Stand with
+                Crypto about its efforts at the number provided. You can reply STOP to stop
+                receiving texts. Message and data rates may apply.
+              </FormDescription>
+            </CollapsibleContent>
+          </Collapsible>
         </div>
       </form>
     </Form>
