@@ -2,12 +2,15 @@ import * as Sentry from '@sentry/node'
 import twilio from 'twilio'
 import { z } from 'zod'
 
+import { getLogger } from '@/utils/shared/logger'
 import { smsProvider } from '@/utils/shared/smsProvider'
 
 const accountSid = process.env.TWILIO_ACCOUNT_SID
 const authToken = process.env.TWILIO_AUTH_TOKEN
 
 const client = twilio(accountSid, authToken)
+
+const logger = getLogger('sendSMS')
 
 export const zodSendSMSSchema = z.object({
   to: z.string(),
@@ -20,6 +23,8 @@ export const sendSMS = async (payload: SendSMSPayload) => {
   if (smsProvider !== 'twilio') {
     return
   }
+
+  logger.info('Sending SMS', payload)
 
   const validatedInput = zodSendSMSSchema.safeParse(payload)
 
@@ -42,5 +47,6 @@ export const sendSMS = async (payload: SendSMSPayload) => {
     })
   } catch (error) {
     Sentry.captureException(error)
+    throw new Error('Failed to send SMS')
   }
 }

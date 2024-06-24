@@ -21,7 +21,9 @@ describe('verifySignature', () => {
 
     const mockedRequest = jest.fn().mockImplementation(() => ({
       headers: {
-        get: jest.fn().mockImplementation(() => expectedSignature),
+        get: jest
+          .fn()
+          .mockImplementation(key => (key === 'X-Twilio-Signature' ? expectedSignature : '')),
       },
       text: jest.fn().mockImplementation(() => Promise.resolve(params)),
       url,
@@ -41,7 +43,9 @@ describe('verifySignature', () => {
 
     const mockedRequest = jest.fn().mockImplementation(() => ({
       headers: {
-        get: jest.fn().mockImplementation(() => expectedSignature + '1'),
+        get: jest
+          .fn()
+          .mockImplementation(key => (key === 'X-Twilio-Signature' ? expectedSignature + '1' : '')),
       },
       text: jest.fn().mockImplementation(() => Promise.resolve(params)),
       url,

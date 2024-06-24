@@ -72,8 +72,9 @@ enum DataCreationMethod {
 
 enum SMSStatus {
   NOT_OPTED_IN
-  OPTED_IN
-  OPTED_IN_PENDING_DOUBLE_OPT_IN
+  OPTED_IN // -> User opted in with Twilio
+  OPTED_IN_HAS_REPLIED // -> User opted in with Capitol Canary and responded to confirmation message
+  OPTED_IN_PENDING_DOUBLE_OPT_IN // -> User opted in with Capitol Canary but didn't respond to confirmation message
   OPTED_OUT
 }
 
