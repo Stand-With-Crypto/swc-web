@@ -57,8 +57,10 @@ export const fetchDTSI = async <R, V = object>(
             query,
             variables,
           }),
-          ...(nextConfig?.nextTags && { next: { tags: nextConfig?.nextTags } }),
-          ...(nextConfig?.nextRevalidate && { next: { revalidate: nextConfig?.nextRevalidate } }),
+          next: {
+            ...(nextConfig?.nextTags && { tags: nextConfig?.nextTags }),
+            ...(nextConfig?.nextRevalidate && { revalidate: nextConfig?.nextRevalidate }),
+          },
         },
         {
           withScope: scope => {
