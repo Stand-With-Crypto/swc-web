@@ -45,7 +45,7 @@ export const EXPERIMENTS_CONFIG = {
     analyticsPropertyName: 'SWC Sign Up Flow Experiment',
     variants: [
       { name: 'control' as const, percentage: 0.5 },
-      { name: 'variant' as const, percentage: 0.5 },
+      { name: 'optionalFieldsVariant' as const, percentage: 0.5 },
     ],
   },
 } satisfies Record<string, Omit<ExperimentConfig, 'name'>>
@@ -70,4 +70,9 @@ export function getDefaultExperimentContext() {
     context[experiment] = firstVariant
   })
   return context
+}
+
+export function getExperimentVariants(experiment: Experiments) {
+  const variants = EXPERIMENTS_CONFIG[experiment].variants
+  return variants.map(({ name }) => name)
 }

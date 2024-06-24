@@ -5,7 +5,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import * as Sentry from '@sentry/nextjs'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
-import { z } from 'zod'
 
 import { actionUpdateUserProfile } from '@/actions/actionUpdateUserProfile'
 import { ClientAddress } from '@/clientModels/clientAddress'
@@ -27,25 +26,24 @@ import { Input } from '@/components/ui/input'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
-import {
-  GenericErrorFormValues,
-  trackFormSubmissionSyncErrors,
-  triggerServerActionForForm,
-} from '@/utils/web/formUtils'
+import { trackFormSubmissionSyncErrors, triggerServerActionForForm } from '@/utils/web/formUtils'
 import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
-import { zodUpdateUserProfileWithRequiredFormFields } from '@/validation/forms/zodUpdateUserProfile/zodUpdateUserProfileFormFields'
+import {
+  zodUpdateUserProfileFormFields,
+  zodUpdateUserProfileWithRequiredFormFields,
+} from '@/validation/forms/zodUpdateUserProfile/zodUpdateUserProfileFormFields'
 
 const FORM_NAME = 'User Profile'
-type FormValues = z.infer<typeof zodUpdateUserProfileWithRequiredFormFields> &
-  GenericErrorFormValues
 
 export function UpdateUserProfileForm({
   user,
   onSuccess,
+  shouldFieldsBeRequired = false,
 }: {
   user: SensitiveDataClientUser & { address: ClientAddress | null }
   onSuccess: (updatedUserFields: { firstName: string; lastName: string }) => void
+  shouldFieldsBeRequired?: boolean
 }) {
   const router = useRouter()
   const defaultValues = useRef({
@@ -61,10 +59,14 @@ export function UpdateUserProfileForm({
           description: user.address.formattedDescription,
           place_id: user.address.googlePlaceId,
         }
-      : undefined,
+      : null,
   })
-  const form = useForm<FormValues>({
-    resolver: zodResolver(zodUpdateUserProfileWithRequiredFormFields),
+  const form = useForm({
+    resolver: zodResolver(
+      shouldFieldsBeRequired
+        ? zodUpdateUserProfileWithRequiredFormFields
+        : zodUpdateUserProfileFormFields,
+    ),
     defaultValues: defaultValues.current,
   })
 
@@ -73,13 +75,13 @@ export function UpdateUserProfileForm({
       <form
         className="flex h-full flex-col gap-6 md:gap-4 md:px-8"
         onSubmit={form.handleSubmit(async values => {
-          const address = await convertGooglePlaceAutoPredictionToAddressSchema(
-            values.address,
-          ).catch(e => {
-            Sentry.captureException(e)
-            catchUnexpectedServerErrorAndTriggerToast(e)
-            return null
-          })
+          const address = values.address
+            ? await convertGooglePlaceAutoPredictionToAddressSchema(values.address).catch(e => {
+                Sentry.captureException(e)
+                catchUnexpectedServerErrorAndTriggerToast(e)
+                return null
+              })
+            : null
 
           const result = await triggerServerActionForForm(
             {
