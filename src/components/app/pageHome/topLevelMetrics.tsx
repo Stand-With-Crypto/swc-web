@@ -1,5 +1,6 @@
 'use client'
-import { useMemo } from 'react'
+import { useCallback, useMemo } from 'react'
+import { Info } from 'lucide-react'
 
 import { AnimatedNumericOdometer } from '@/components/ui/animatedNumericOdometer'
 import { roundDownNumberToAnimateIn } from '@/components/ui/animatedNumericOdometer/roundDownNumberToAnimateIn'
@@ -21,6 +22,7 @@ const mockDecreaseInValuesOnInitialLoadSoWeCanAnimateIncrease = (
 ): Omit<Props, 'locale'> => ({
   sumDonations: {
     amountUsd: roundDownNumberToAnimateIn(initial.sumDonations.amountUsd, 10000),
+    fairshakeAmountUsd: roundDownNumberToAnimateIn(initial.sumDonations.fairshakeAmountUsd, 10000),
   },
   countUsers: {
     count: roundDownNumberToAnimateIn(initial.countUsers.count, 100),
@@ -47,14 +49,31 @@ export function TopLevelMetrics({ locale, ...data }: Props & { locale: Supported
     [data],
   )
   const values = useApiHomepageTopLevelMetrics(decreasedInitialValues).data
+
+  const formatCurrency = useCallback(
+    (value: number, notation?: Intl.NumberFormatOptions['notation']) => {
+      return intlNumberFormat(locale, {
+        style: 'currency',
+        currency: SupportedFiatCurrencyCodes.USD,
+        maximumFractionDigits: 0,
+        notation,
+      }).format(value)
+    },
+    [locale],
+  )
+
   const formatted = useMemo(() => {
     return {
       sumDonations: {
-        amountUsd: intlNumberFormat(locale, {
-          style: 'currency',
-          currency: SupportedFiatCurrencyCodes.USD,
-          maximumFractionDigits: 0,
-        }).format(values.sumDonations.amountUsd),
+        amountUsd: formatCurrency(values.sumDonations.amountUsd),
+        compactSWCAmountUsd: formatCurrency(
+          values.sumDonations.amountUsd - values.sumDonations.fairshakeAmountUsd,
+          'compact',
+        ),
+        compactFairshakeAmountUsd: formatCurrency(
+          values.sumDonations.fairshakeAmountUsd,
+          'compact',
+        ),
       },
       countUsers: {
         count: intlNumberFormat(locale).format(values.countUsers.count),
@@ -67,7 +86,8 @@ export function TopLevelMetrics({ locale, ...data }: Props & { locale: Supported
         ),
       },
     }
-  }, [values, locale])
+  }, [formatCurrency, values, locale])
+
   return (
     <section className="mb-16 flex flex-col gap-3 text-center md:mb-24 md:flex-row md:gap-0">
       {[
@@ -76,13 +96,16 @@ export function TopLevelMetrics({ locale, ...data }: Props & { locale: Supported
           value: (
             <TooltipProvider>
               <Tooltip>
-                <TooltipTrigger className="mx-auto block" style={{ height: 35 }}>
+                <TooltipTrigger className="mx-auto flex gap-1" style={{ height: 35 }}>
                   <AnimatedNumericOdometer size={35} value={formatted.sumDonations.amountUsd} />
+                  <sup>
+                    <Info className="h-4 w-4" />
+                  </sup>
                 </TooltipTrigger>
                 <TooltipContent className="max-w-xs" side="bottom">
                   <p className="text-sm font-normal tracking-normal">
-                    Total includes donations to Stand With Crypto Alliance and to Fairshake, a
-                    pro-crypto Super PAC.
+                    {formatted.sumDonations.compactFairshakeAmountUsd} donated to FairShake and{' '}
+                    {formatted.sumDonations.compactSWCAmountUsd} donated to Stand With Crypto
                   </p>
                 </TooltipContent>
               </Tooltip>

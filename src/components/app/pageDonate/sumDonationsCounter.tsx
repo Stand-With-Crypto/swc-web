@@ -38,7 +38,10 @@ function useLiveSumDonations({ locale, initialData }: SumDonationsCounterProps) 
         .then(data => data as SumDonations),
     {
       refreshInterval: 5 * 1000,
-      fallbackData: { amountUsd: roundDownNumberToAnimateIn(initialData.amountUsd, 10000) },
+      fallbackData: {
+        amountUsd: roundDownNumberToAnimateIn(initialData.amountUsd, 10000),
+        fairshakeAmountUsd: roundDownNumberToAnimateIn(initialData.fairshakeAmountUsd, 10000),
+      },
     },
   )
 }
