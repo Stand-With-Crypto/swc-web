@@ -1,5 +1,4 @@
-import { differenceInDays, differenceInHours, differenceInMinutes, format } from 'date-fns'
-import path from 'path'
+import { format, startOfMonth, startOfWeek } from 'date-fns'
 import xlsx from 'xlsx'
 
 import { runBin } from '@/bin/runBin'
@@ -27,11 +26,29 @@ interface GithubProjectDataIssueNode {
     }[]
   }
   title: string
+  labels?: {
+    nodes: {
+      name: string
+    }[]
+  }
   projectItems?: {
     nodes?: [
       {
-        effort?: {
-          value: string
+        effortTechnical?: {
+          value:
+            | '1 - less than a day'
+            | '2 - less than 3 days'
+            | '3 - less than a week'
+            | '4 - less than 2 weeks'
+            | '5 - greater than 2 weeks'
+        }
+        effortNontechnical?: {
+          value:
+            | '1 - less than a day'
+            | '2 - less than 3 days'
+            | '3 - less than a week'
+            | '4 - less than 2 weeks'
+            | '5 - greater than 2 weeks'
         }
         status?: {
           value: string
@@ -41,6 +58,9 @@ interface GithubProjectDataIssueNode {
         }
         issueType?: {
           value: string
+        }
+        longTermEffort?: {
+          number: number
         }
       },
     ]
@@ -84,6 +104,11 @@ export const GITHUB_PROJECT_DATA_QUERY = /* GraphQL */ `
               login
             }
           }
+          labels(first: 10) {
+            nodes {
+              name
+            }
+          }
           projectItems(first: 100) {
             nodes {
               status: fieldValueByName(name: "Status") {
@@ -91,7 +116,12 @@ export const GITHUB_PROJECT_DATA_QUERY = /* GraphQL */ `
                   value: name
                 }
               }
-              effort: fieldValueByName(name: "Effort") {
+              effortTechnical: fieldValueByName(name: "Effort - Technical") {
+                ... on ProjectV2ItemFieldSingleSelectValue {
+                  value: name
+                }
+              }
+              effortNontechnical: fieldValueByName(name: "Effort - Nontechnical") {
                 ... on ProjectV2ItemFieldSingleSelectValue {
                   value: name
                 }
@@ -104,6 +134,11 @@ export const GITHUB_PROJECT_DATA_QUERY = /* GraphQL */ `
               issueType: fieldValueByName(name: "Issue Type") {
                 ... on ProjectV2ItemFieldSingleSelectValue {
                   value: name
+                }
+              }
+              longTermEffort: fieldValueByName(name: "Long Term Effort - Weeks") {
+                ... on ProjectV2ItemFieldNumberValue {
+                  number
                 }
               }
             }
@@ -162,43 +197,61 @@ async function generateProjectData() {
 
 void runBin(generateProjectData)
 
+function getComputedDaysOfEffort(issue: GithubProjectDataIssueNode) {
+  const longTermEffort = issue?.projectItems?.nodes?.[0]?.longTermEffort?.number
+  const effort = issue?.projectItems?.nodes?.[0]?.effortTechnical?.value
+  if (longTermEffort) {
+    return longTermEffort * 5
+  }
+  switch (effort) {
+    case '1 - less than a day':
+      return 1
+    case '2 - less than 3 days':
+      return 3
+    case '3 - less than a week':
+      return 5
+    case '4 - less than 2 weeks':
+      return 10
+    case '5 - greater than 2 weeks':
+      throw new Error(
+        `getComputedDaysOfEffort expected a Long Term Effort for effort sizing of 5: ${issue.url}`,
+      )
+  }
+}
+
 async function writeProjectData(issues: GithubProjectDataIssueNode[]) {
   const workbook = xlsx.utils.book_new()
 
   const issuesOrderedDesc = issues.sort((a, b) => {
     return new Date(b.closedAt).getTime() - new Date(a.closedAt).getTime()
   })
-
-  const worksheet = xlsx.utils.json_to_sheet(
-    issuesOrderedDesc.map((item: GithubProjectDataIssueNode) => {
-      const days = differenceInDays(new Date(item.closedAt), new Date(item.createdAt))
-      const hours = differenceInHours(new Date(item.closedAt), new Date(item.createdAt)) % 24
-      const minutes = differenceInMinutes(new Date(item.closedAt), new Date(item.createdAt)) % 60
-
-      const timePassed = []
-      if (days > 0) timePassed.push(`${days} days`)
-      if (hours > 0) timePassed.push(`${hours} hours`)
-      if (minutes > 0) timePassed.push(`${minutes} minutes`)
+  const rows = issuesOrderedDesc.flatMap((item: GithubProjectDataIssueNode) => {
+    return (item.assignees.nodes.length ? item.assignees.nodes : [null]).map(assignee => {
       return {
         ['Issue Title']: item.title,
-        ['Assignee']: item.assignees.nodes[0]?.name ?? item.assignees.nodes[0]?.login,
-        ['Effort']: item?.projectItems?.nodes?.[0]?.effort?.value,
+        ['Assignee']: assignee?.name ?? assignee?.login,
+        ['Effort - Technical']: item?.projectItems?.nodes?.[0]?.effortTechnical?.value,
+        ['Effort - Nontechnical']: item?.projectItems?.nodes?.[0]?.effortNontechnical?.value,
         ['Impact']: item?.projectItems?.nodes?.[0]?.impact?.value,
         ['Status']: item?.projectItems?.nodes?.[0]?.status?.value,
         ['Issue Type']: item?.projectItems?.nodes?.[0]?.issueType?.value,
         ['Repo']: item?.repository?.name,
         ['Url']: item.url,
         ['Created']: format(new Date(item.createdAt), 'yyyy-MM-dd'),
-        ['Closed']: format(new Date(item.closedAt), 'yyyy-MM-dd'),
-        ['Time to Close']: timePassed.join(', '),
+        ['Closed Date']: format(new Date(item.closedAt), 'yyyy-MM-dd'),
+        ['Closed Week']: format(startOfWeek(new Date(item.closedAt)), 'yyyy-MM-dd'),
+        ['Closed Month']: format(startOfMonth(new Date(item.closedAt)), 'yyyy-MM-dd'),
         ['Milestone']: item.milestone?.title,
         State:
           item.state === 'CLOSED' && item.stateReason === 'NOT_PLANNED'
             ? 'CLOSED_NOT_PLANNED'
             : item.state,
+        ['Computed - Days Of Effort']: getComputedDaysOfEffort(item),
+        ['Labels']: item.labels?.nodes.map(label => label.name).join(', '),
       }
-    }),
-  )
+    })
+  })
+  const worksheet = xlsx.utils.json_to_sheet(rows)
 
   xlsx.utils.book_append_sheet(workbook, worksheet, 'Main')
   await xlsx.writeFile(workbook, './src/bin/localCache/projectReport.xlsx')

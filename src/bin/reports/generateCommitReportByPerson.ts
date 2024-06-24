@@ -1,6 +1,5 @@
 import { format } from 'date-fns'
 import { debounce } from 'lodash-es'
-import path from 'path'
 import xlsx from 'xlsx'
 
 import { runBin } from '@/bin/runBin'
