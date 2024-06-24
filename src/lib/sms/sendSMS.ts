@@ -6,11 +6,11 @@ import { getLogger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { smsProvider } from '@/utils/shared/smsProvider'
 
-const accountSid = requiredEnv(process.env.TWILIO_ACCOUNT_SID, 'TWILIO_ACCOUNT_SID')
-const authToken = requiredEnv(process.env.TWILIO_AUTH_TOKEN, 'TWILIO_AUTH_TOKEN')
-const phoneNumber = requiredEnv(process.env.TWILIO_PHONE_NUMBER, 'TWILIO_PHONE_NUMBER')
+const TWILIO_ACCOUNT_SID = requiredEnv(process.env.TWILIO_ACCOUNT_SID, 'TWILIO_ACCOUNT_SID')
+const TWILIO_AUTH_TOKEN = requiredEnv(process.env.TWILIO_AUTH_TOKEN, 'TWILIO_AUTH_TOKEN')
+const TWILIO_PHONE_NUMBER = requiredEnv(process.env.TWILIO_PHONE_NUMBER, 'TWILIO_PHONE_NUMBER')
 
-const client = twilio(accountSid, authToken)
+const client = twilio(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
 
 const logger = getLogger('sendSMS')
 
@@ -43,7 +43,7 @@ export const sendSMS = async (payload: SendSMSPayload) => {
 
   try {
     return client.messages.create({
-      from: phoneNumber,
+      from: TWILIO_PHONE_NUMBER,
       body,
       to,
     })

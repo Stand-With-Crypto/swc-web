@@ -15,7 +15,6 @@ export const backfillSMSStatusField = inngest.createFunction(
     event: BACKFILL_SMS_STATUS_FIELD_INNGEST_EVENT_NAME,
   },
   async ({ step }) => {
-    // OPTED_IN_HAS_REPLIED -> hasOptedInToSms === true && hasRepliedToOptInSms === true
     await step.run('backfill-sms-status.OPTED_IN_HAS_REPLIED', () => {
       return prismaClient.user.updateMany({
         where: {
@@ -28,7 +27,6 @@ export const backfillSMSStatusField = inngest.createFunction(
       })
     })
 
-    // OPTED_IN_PENDING_DOUBLE_OPT_IN -> hasOptedInToSms === true && hasRepliedToOptInSms === false
     await step.run('backfill-sms-status.OPTED_IN_PENDING_DOUBLE_OPT_IN', () => {
       return prismaClient.user.updateMany({
         where: {
@@ -41,7 +39,6 @@ export const backfillSMSStatusField = inngest.createFunction(
       })
     })
 
-    // OPTED_OUT -> hasOptedInToSms === false && hasRepliedToOptInSms === true
     await step.run('backfill-sms-status.OPTED_OUT', () => {
       return prismaClient.user.updateMany({
         where: {
