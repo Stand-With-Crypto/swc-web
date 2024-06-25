@@ -5,6 +5,7 @@ export const WATCH_PARTIES = [
     location: 'Phoenix',
     link: 'https://app.unlock-protocol.com/event/phoenix-watch-party',
   },
+  // we don't have the link for the Gilbert watch party on the spreadsheet https://docs.google.com/spreadsheets/d/11H-ZGpVVALzpQehMIMQJ7TumTPjr3A8aRc4-HbY2OT0/edit?gid=0#gid=0
   // {
   //   location: 'Gilbert',
   //   link: '',
