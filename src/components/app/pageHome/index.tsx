@@ -6,7 +6,7 @@ import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
 import { DTSIPersonHeroCardRow } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardRow'
 import { DelayedRecentActivity } from '@/components/app/pageHome/delayedRecentActivity'
 import { HeroCTA } from '@/components/app/pageHome/heroCTA'
-import { CNNDebateHeroImage } from '@/components/app/pageHome/heroImage'
+import { HeroImageWrapper } from '@/components/app/pageHome/heroImage'
 import { PartnerGrid } from '@/components/app/pageHome/partnerGrid'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
 import { SumDonationsByUserRow } from '@/components/app/sumDonationsByUserRow/sumDonationsByUserRow'
@@ -70,7 +70,7 @@ export function PageHome({
           <HeroCTA />
         </div>
         <div className="order-0 self-start md:container lg:order-1 lg:px-0">
-          <CNNDebateHeroImage />
+          <HeroImageWrapper />
         </div>
       </section>
       <div className="container">
