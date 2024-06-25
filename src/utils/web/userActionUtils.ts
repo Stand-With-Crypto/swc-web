@@ -4,7 +4,6 @@ import { ActiveClientUserActionType } from '@/utils/shared/activeUserAction'
 import {
   USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
   UserActionCampaignName,
-  UserActionEmailCampaignName,
 } from '@/utils/shared/userActionCampaigns'
 
 export const USER_ACTION_TYPE_CTA_PRIORITY_ORDER: ReadonlyArray<ActiveClientUserActionType> = [
@@ -27,10 +26,6 @@ export const USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN: ReadonlyArray<{
 }> = [
   { action: UserActionType.EMAIL, campaign: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.EMAIL },
   { action: UserActionType.OPT_IN, campaign: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.OPT_IN },
-  {
-    action: UserActionType.EMAIL,
-    campaign: UserActionEmailCampaignName.CNN_PRESIDENTIAL_DEBATE_2024,
-  },
   {
     action: UserActionType.VOTER_REGISTRATION,
     campaign: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.VOTER_REGISTRATION,
