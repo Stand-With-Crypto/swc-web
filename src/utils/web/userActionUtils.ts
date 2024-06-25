@@ -18,7 +18,7 @@ export const USER_ACTION_TYPE_CTA_PRIORITY_ORDER: ReadonlyArray<ActiveClientUser
 ]
 
 // Remember to update USER_ACTION_ROW_CTA_INFO_FROM_CAMPAIGN so that the correct campaign CTA is displayed.
-// Failing to add the correct campaign will result in the corresponding CTA not being displayed.
+// Failing to add the correct campaign will result in error.
 // Also remember to remove the campaign from USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN if it is not needed anymore.
 // Keeping a campaign here will result in an increase of the number of total actions in profile page.
 export const USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN: ReadonlyArray<{

@@ -5,6 +5,7 @@ import { redirect, RedirectType } from 'next/navigation'
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { NFTDisplay } from '@/components/app/nftHub/nftDisplay'
 import { PageUserProfileUser } from '@/components/app/pageUserProfile/getAuthenticatedData'
+import { PreviousCampaignsList } from '@/components/app/pageUserProfile/previousCampaignsList'
 import { UpdateUserProfileFormDialog } from '@/components/app/updateUserProfileForm/dialog'
 import { OPEN_UPDATE_USER_PROFILE_FORM_QUERY_PARAM_KEY } from '@/components/app/updateUserProfileForm/queryParamConfig'
 import { UserActionRowCTAsList } from '@/components/app/userActionRowCTA/userActionRowCTAsList'
@@ -21,6 +22,10 @@ import { getSearchParam, setCallbackQueryString } from '@/utils/server/searchPar
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { getUserActionsProgress } from '@/utils/shared/getUserActionsProgress'
 import { USER_ACTION_DEEPLINK_MAP } from '@/utils/shared/urlsDeeplinkUserActions'
+import {
+  USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
+  USER_ACTIONS_WITH_ADDITIONAL_CAMPAIGN,
+} from '@/utils/shared/userActionCampaigns'
 import { hasCompleteUserProfile } from '@/utils/web/hasCompleteUserProfile'
 import { getSensitiveDataUserDisplayName } from '@/utils/web/userUtils'
 
@@ -61,6 +66,13 @@ export function PageUserProfile({ params, searchParams, user }: PageUserProfile)
       userHasEmbeddedWallet: user.hasEmbeddedWallet,
       performedUserActionTypes,
     })
+
+  const userActionsFromPreviousCampaigns =
+    userActions.filter(
+      action =>
+        action.campaignName !== USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[action.actionType] &&
+        !USER_ACTIONS_WITH_ADDITIONAL_CAMPAIGN[action.actionType]?.includes(action.campaignName),
+    ) ?? []
 
   return (
     <div className="standard-spacing-from-navbar container space-y-10 lg:space-y-16">
@@ -148,7 +160,8 @@ export function PageUserProfile({ params, searchParams, user }: PageUserProfile)
           Your advocacy progress
         </PageTitle>
         <PageSubTitle className="mb-5">
-          You've completed {numActionsCompleted} out of {numActionsAvailable} actions. Keep going!
+          You've completed {numActionsCompleted} out of {numActionsAvailable} active campaigns. Keep
+          going!
         </PageSubTitle>
         <div className="mx-auto mb-10 max-w-xl">
           <Progress value={progressValue} />
@@ -158,6 +171,20 @@ export function PageUserProfile({ params, searchParams, user }: PageUserProfile)
           performedUserActionTypes={performedUserActionTypes}
         />
       </section>
+      {userActionsFromPreviousCampaigns.length > 0 && (
+        <section>
+          <PageTitle className="mb-4" size="sm">
+            Previous campaigns
+          </PageTitle>
+          <PageSubTitle className="mb-5">
+            Nice work. You completed {userActionsFromPreviousCampaigns.length} previous{' '}
+            {userActionsFromPreviousCampaigns.length > 1 ? 'campaigns' : 'campaign'}.
+          </PageSubTitle>
+
+          <PreviousCampaignsList userActions={userActionsFromPreviousCampaigns} />
+        </section>
+      )}
+
       <section>
         <PageTitle className="mb-4" size="sm">
           Your NFTs
