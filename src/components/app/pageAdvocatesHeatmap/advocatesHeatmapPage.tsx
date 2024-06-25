@@ -25,7 +25,7 @@ export function AdvocatesHeatmapPage({
         className={
           isEmbedded
             ? 'flex h-screen flex-col justify-center'
-            : 'flex-col justify-center standard-spacing-from-navbar space-y-9'
+            : 'standard-spacing-from-navbar flex-col justify-center space-y-9'
         }
       >
         {title && description ? (
