@@ -421,6 +421,7 @@ model UserActionTweetAtPerson {
 
 enum UserCommunicationJourneyType {
   INITIAL_SIGNUP
+  WELCOME_SMS
 }
 
 model UserCommunicationJourney {
