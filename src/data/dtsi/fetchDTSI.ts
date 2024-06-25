@@ -21,7 +21,7 @@ export const IS_MOCKING_DTSI_DATA =
 export const fetchDTSI = async <R, V = object>(
   query: string,
   variables?: V,
-  nextConfig?: { nextTags?: string[]; nextRevalidate?: number },
+  nextTags?: string[],
 ) => {
   if (IS_MOCKING_DTSI_DATA) {
     // because this file will import faker, we want to avoid loading it in our serverless environments
@@ -57,10 +57,7 @@ export const fetchDTSI = async <R, V = object>(
             query,
             variables,
           }),
-          next: {
-            ...(nextConfig?.nextTags && { tags: nextConfig?.nextTags }),
-            ...(nextConfig?.nextRevalidate && { revalidate: nextConfig?.nextRevalidate }),
-          },
+          ...(nextTags && { next: { tags: nextTags } }),
         },
         {
           withScope: scope => {

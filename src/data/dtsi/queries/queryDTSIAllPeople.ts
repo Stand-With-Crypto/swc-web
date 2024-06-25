@@ -3,7 +3,6 @@ import * as Sentry from '@sentry/nextjs'
 import { fetchDTSI } from '@/data/dtsi/fetchDTSI'
 import { fragmentDTSIPersonCard } from '@/data/dtsi/fragments/fragmentDTSIPersonCard'
 import { DTSI_AllPeopleQuery, DTSI_AllPeopleQueryVariables } from '@/data/dtsi/generated'
-import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
 export const DTSI_AllPeopleQueryTag = 'DTSI_AllPeopleQuery'
 
@@ -38,10 +37,7 @@ export const queryDTSIAllPeople = async ({ limit }: { limit: number } = { limit:
     {
       limit,
     },
-    {
-      nextTags: [DTSI_AllPeopleQueryTag],
-      nextRevalidate: SECONDS_DURATION['10_MINUTES'],
-    },
+    [DTSI_AllPeopleQueryTag],
   )
   if (results.people.length === 1500) {
     Sentry.captureMessage(
