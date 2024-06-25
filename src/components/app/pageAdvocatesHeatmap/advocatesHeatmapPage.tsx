@@ -11,7 +11,6 @@ export function AdvocatesHeatmapPage({
   title,
   description,
   locale,
-  topStatesLimit = 5,
   homepageData,
   advocatesMapPageData,
   isEmbedded,
@@ -32,7 +31,6 @@ export function AdvocatesHeatmapPage({
           homepageData={homepageData}
           isEmbedded={isEmbedded}
           locale={locale}
-          topStatesLimit={topStatesLimit}
         />
       </section>
     </div>
