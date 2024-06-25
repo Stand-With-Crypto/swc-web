@@ -6,7 +6,6 @@ export type PageAdvocatesHeatmapProps = {
   locale: SupportedLocale
   homepageData: Awaited<ReturnType<typeof getHomepageData>>
   advocatesMapPageData: Awaited<ReturnType<typeof getAdvocatesMapData>>
-  topStatesLimit?: number
   title?: string
   description?: string
   isEmbedded?: boolean

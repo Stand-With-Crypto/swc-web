@@ -1,5 +1,4 @@
 import { Metadata } from 'next'
-import { notFound } from 'next/navigation'
 
 import { AdvocatesHeatmapPage } from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmapPage'
 import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
@@ -22,13 +21,9 @@ export const metadata: Metadata = {
   }),
 }
 
-export default async function MapPage({ params }: PageProps<{ topStatesLimit: number }>) {
+export default async function MapPage({ params }: PageProps) {
   const homeDataProps = await getHomepageData()
-  const advocatePerStateDataProps = await getAdvocatesMapData(params.topStatesLimit)
-
-  if (isNaN(+params.topStatesLimit)) {
-    return notFound()
-  }
+  const advocatePerStateDataProps = await getAdvocatesMapData()
 
   return (
     <AdvocatesHeatmapPage
@@ -36,7 +31,6 @@ export default async function MapPage({ params }: PageProps<{ topStatesLimit: nu
       homepageData={homeDataProps}
       isEmbedded={true}
       locale={params.locale}
-      topStatesLimit={params.topStatesLimit}
     />
   )
 }
