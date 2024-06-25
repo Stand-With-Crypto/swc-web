@@ -1,14 +1,21 @@
-import { CommunicationType, UserCommunicationJourneyType } from '@prisma/client'
+import {
+  CommunicationType,
+  UserCommunication,
+  UserCommunicationJourney,
+  UserCommunicationJourneyType,
+} from '@prisma/client'
 import { NonRetriableError } from 'inngest'
 
-import { createCommunicationJourney } from '@/inngest/functions/sms/shared'
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
+import { getLogger } from '@/utils/shared/logger'
 import { smsProvider } from '@/utils/shared/smsProvider'
 
-import { sendSMS } from '@/lib/sms'
+import { messagingClient, sendSMS } from '@/lib/sms'
 import * as messages from '@/lib/sms/messages'
+
+const logger = getLogger('welcomeSMSCommunicationJourney')
 
 export const WELCOME_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME =
   'app/user.communication/welcome.sms'
@@ -44,21 +51,11 @@ export const welcomeSMSCommunicationJourney = inngest.createFunction(
       createCommunicationJourney(phoneNumber, UserCommunicationJourneyType.WELCOME_SMS),
     )
 
-    const message = await step
-      .run('send-sms', () => sendSMS({ body: messages.WELCOME_MESSAGE, to: phoneNumber }))
-      .catch(async () => {
-        await prismaClient.userCommunicationJourney.deleteMany({
-          where: {
-            id: {
-              in: communicationJourneys.map(({ id }) => id),
-            },
-          },
-        })
-      })
+    logger.info('communicationJourneys', JSON.stringify(communicationJourneys))
 
-    if (!message) {
-      throw new Error('Failed to send SMS')
-    }
+    const message = await step.run('send-sms', () =>
+      sendMessage(phoneNumber, communicationJourneys),
+    )
 
     await step.run('create-user-communication', async () => {
       await prismaClient.userCommunication.createMany({
@@ -71,3 +68,90 @@ export const welcomeSMSCommunicationJourney = inngest.createFunction(
     })
   },
 )
+
+async function createCommunicationJourney(
+  phoneNumber: string,
+  journeyType: UserCommunicationJourneyType,
+): Promise<CommunicationJourney[]> {
+  const usersWithPhoneNumber = (
+    await prismaClient.user.findMany({
+      where: {
+        phoneNumber,
+      },
+      select: {
+        id: true,
+      },
+    })
+  ).map(({ id }) => id)
+
+  if (usersWithPhoneNumber.length === 0) {
+    throw new NonRetriableError('User not found')
+  }
+
+  const usersWithExistingCommunicationJourney = (
+    await prismaClient.userCommunicationJourney.findMany({
+      where: {
+        userId: {
+          in: usersWithPhoneNumber,
+        },
+        journeyType,
+      },
+      select: {
+        userId: true,
+      },
+    })
+  ).map(({ userId }) => userId)
+
+  await prismaClient.userCommunicationJourney.createMany({
+    data: usersWithPhoneNumber
+      .filter(id => !usersWithExistingCommunicationJourney.includes(id))
+      .map(id => ({
+        userId: id,
+        journeyType,
+      })),
+  })
+
+  return prismaClient.userCommunicationJourney.findMany({
+    where: {
+      userId: {
+        in: usersWithPhoneNumber,
+      },
+      journeyType,
+    },
+    select: {
+      id: true,
+      userCommunications: {
+        select: {
+          messageId: true,
+        },
+      },
+    },
+  })
+}
+
+type CommunicationJourney = {
+  id: UserCommunicationJourney['id']
+  userCommunications: Array<{
+    messageId: UserCommunication['messageId']
+  }>
+}
+
+async function sendMessage(phoneNumber: string, communicationJourneys: CommunicationJourney[]) {
+  for (const communicationJourney of communicationJourneys) {
+    for (const communication of communicationJourney.userCommunications) {
+      const messageSent = await messagingClient.messages(communication.messageId).fetch()
+
+      if (messageSent.to === phoneNumber) {
+        throw new NonRetriableError('Message was already sent to this phone number')
+      }
+    }
+  }
+
+  const message = await sendSMS({ body: messages.WELCOME_MESSAGE, to: phoneNumber })
+
+  if (!message) {
+    throw new Error('Failed to send SMS')
+  }
+
+  return message
+}

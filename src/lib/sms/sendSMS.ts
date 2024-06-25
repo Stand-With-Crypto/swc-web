@@ -1,16 +1,13 @@
 import * as Sentry from '@sentry/node'
-import twilio from 'twilio'
 import { z } from 'zod'
 
 import { getLogger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { smsProvider } from '@/utils/shared/smsProvider'
 
-const TWILIO_ACCOUNT_SID = requiredEnv(process.env.TWILIO_ACCOUNT_SID, 'TWILIO_ACCOUNT_SID')
-const TWILIO_AUTH_TOKEN = requiredEnv(process.env.TWILIO_AUTH_TOKEN, 'TWILIO_AUTH_TOKEN')
-const TWILIO_PHONE_NUMBER = requiredEnv(process.env.TWILIO_PHONE_NUMBER, 'TWILIO_PHONE_NUMBER')
+import { messagingClient } from './client'
 
-const client = twilio(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
+const TWILIO_PHONE_NUMBER = requiredEnv(process.env.TWILIO_PHONE_NUMBER, 'TWILIO_PHONE_NUMBER')
 
 const logger = getLogger('sendSMS')
 
@@ -38,11 +35,11 @@ export const sendSMS = async (payload: SendSMSPayload) => {
 
   // only send SMS to US and CA numbers
   if (!to.startsWith('+1')) {
-    throw new Error('Invalid phone number')
+    throw new Error('Phone number not from US or CA')
   }
 
   try {
-    return client.messages.create({
+    return messagingClient.messages.create({
       from: TWILIO_PHONE_NUMBER,
       body,
       to,
