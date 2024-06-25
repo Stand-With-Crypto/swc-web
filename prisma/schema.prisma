@@ -422,6 +422,8 @@ model UserActionTweetAtPerson {
 enum UserCommunicationJourneyType {
   INITIAL_SIGNUP
   WELCOME_SMS
+  GOODBYE_SMS
+  BULK_SMS
 }
 
 model UserCommunicationJourney {
