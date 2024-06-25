@@ -19,27 +19,12 @@ import { Progress } from '@/components/ui/progress'
 import { PageProps } from '@/types'
 import { getSearchParam, setCallbackQueryString } from '@/utils/server/searchParams'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
+import { getUserActionsProgress } from '@/utils/shared/getUserActionsProgress'
 import { USER_ACTION_DEEPLINK_MAP } from '@/utils/shared/urlsDeeplinkUserActions'
 import { hasCompleteUserProfile } from '@/utils/web/hasCompleteUserProfile'
 import { getSensitiveDataUserDisplayName } from '@/utils/web/userUtils'
 
 import { UserReferralUrl } from './userReferralUrl'
-
-const USER_ACTIONS_AVAILABLE_FOR_CTA: Record<UserActionType, boolean> = {
-  [UserActionType.CALL]: true,
-  [UserActionType.EMAIL]: true,
-  [UserActionType.DONATION]: true,
-  [UserActionType.NFT_MINT]: true,
-  [UserActionType.OPT_IN]: true,
-  [UserActionType.TWEET]: true,
-  [UserActionType.VOTER_REGISTRATION]: true,
-  [UserActionType.LIVE_EVENT]: false,
-  [UserActionType.TWEET_AT_PERSON]: false,
-}
-
-const USER_ACTIONS_EXCLUDED_FROM_CTA = Object.entries(USER_ACTIONS_AVAILABLE_FOR_CTA)
-  .filter(([_, value]) => !value)
-  .map(([key, _]) => key as UserActionType)
 
 interface PageUserProfile extends PageProps {
   user: PageUserProfileUser | null
@@ -66,15 +51,16 @@ export function PageUserProfile({ params, searchParams, user }: PageUserProfile)
       RedirectType.replace,
     )
   }
+
   const { userActions } = user
-  const performedUserActionTypes = uniq(userActions.map(x => x.actionType))
-  const excludeUserActionTypes = user.hasEmbeddedWallet
-    ? [UserActionType.NFT_MINT, ...USER_ACTIONS_EXCLUDED_FROM_CTA]
-    : USER_ACTIONS_EXCLUDED_FROM_CTA
-  const numActionsCompleted = performedUserActionTypes.filter(
-    action => !excludeUserActionTypes.includes(action),
-  ).length
-  const numActionsAvailable = Object.values(UserActionType).length - excludeUserActionTypes.length
+  const performedUserActionTypes = uniq(
+    userActions.map(x => ({ actionType: x.actionType, campaignName: x.campaignName })),
+  )
+  const { progressValue, numActionsCompleted, numActionsAvailable, excludeUserActionTypes } =
+    getUserActionsProgress({
+      userHasEmbeddedWallet: user.hasEmbeddedWallet,
+      performedUserActionTypes,
+    })
 
   return (
     <div className="standard-spacing-from-navbar container space-y-10 lg:space-y-16">
@@ -120,7 +106,7 @@ export function PageUserProfile({ params, searchParams, user }: PageUserProfile)
           {[
             {
               label: 'Actions',
-              value: <FormattedNumber amount={userActions.length} locale={locale} />,
+              value: <FormattedNumber amount={numActionsCompleted} locale={locale} />,
             },
             {
               label: 'Donated',
@@ -165,10 +151,10 @@ export function PageUserProfile({ params, searchParams, user }: PageUserProfile)
           You've completed {numActionsCompleted} out of {numActionsAvailable} actions. Keep going!
         </PageSubTitle>
         <div className="mx-auto mb-10 max-w-xl">
-          <Progress value={(numActionsCompleted / numActionsAvailable) * 100} />
+          <Progress value={progressValue} />
         </div>
         <UserActionRowCTAsList
-          excludeUserActionTypes={excludeUserActionTypes}
+          excludeUserActionTypes={Array.from(excludeUserActionTypes)}
           performedUserActionTypes={performedUserActionTypes}
         />
       </section>

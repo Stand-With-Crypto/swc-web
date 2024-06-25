@@ -10,6 +10,7 @@ import {
 } from '@/utils/server/capitolCanary/campaigns'
 import { UpsertAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { formatCapitolCanaryAdvocateUpdateRequest } from '@/utils/server/capitolCanary/updateAdvocate'
+import { smsProvider } from '@/utils/shared/smsProvider'
 
 it('formats the "update capitol canary advocate" request correctly', () => {
   // Set the seed so that the mocked output is deterministic.
@@ -58,18 +59,18 @@ it('formats the "update capitol canary advocate" request correctly', () => {
     142628,
   ],
   "city": "New Trycia",
-  "country": "GA",
-  "email": "Cordia12@hotmail.com",
+  "country": "US",
+  "email": "Nicklaus_Walker51@yahoo.com",
   "emailOptin": 1,
   "emailOptout": 0,
   "firstname": "Haylie",
   "lastname": "Macejkovic",
   "p2aSource": "source",
   "phone": "+19178798306",
-  "smsOptin": 1,
+  "smsOptin": ${smsProvider === 'capitol-canary' ? 1 : 0},
   "smsOptinConfirmed": 1,
   "smsOptout": 0,
-  "state": "Massachusetts",
+  "state": "MA",
   "tags": [
     "tag1",
     "tag2",

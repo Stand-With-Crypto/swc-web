@@ -1,40 +1,70 @@
 'use client'
-import { useMemo } from 'react'
 
-import { UserActionFormSuccessScreenMainCTA } from '@/components/app/userActionFormSuccessScreen/userActionFormSuccessScreenMainCTA'
-import { UserActionFormSuccessScreenNextAction } from '@/components/app/userActionFormSuccessScreen/userActionFormSuccessScreenNextAction'
-import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
+import { useSWRConfig } from 'swr'
+
+import { JoinSWC } from '@/components/app/userActionFormSuccessScreen/joinSWC'
+import { SMSOptInContent } from '@/components/app/userActionFormSuccessScreen/smsOptIn'
+import {
+  UserActionFormSuccessScreenNextAction,
+  UserActionFormSuccessScreenNextActionSkeleton,
+} from '@/components/app/userActionFormSuccessScreen/userActionFormSuccessScreenNextAction'
 import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
+import { useSession } from '@/hooks/useSession'
+import { apiUrls } from '@/utils/shared/urls'
+import { cn } from '@/utils/web/cn'
 
-type Props = React.ComponentPropsWithoutRef<typeof UserActionFormSuccessScreenMainCTA>
-
-export function UserActionFormSuccessScreenContent(props: Props) {
-  return (
-    <div className="flex min-h-[400px] flex-col">
-      <div className="flex flex-grow items-center">
-        <UserActionFormSuccessScreenMainCTA {...props} />
-      </div>
-      <UserActionFormSuccessScreenNextAction {...props} />
-    </div>
-  )
+interface UserActionFormSuccessScreenProps {
+  children: React.ReactNode
+  onClose: () => void
 }
 
-export function UserActionFormSuccessScreen(props: Omit<Props, 'data'>) {
-  const userData = useApiResponseForUserFullProfileInfo({ revalidateOnMount: true })
-  const performedActionsData = useApiResponseForUserPerformedUserActionTypes({
+export function UserActionFormSuccessScreen(props: UserActionFormSuccessScreenProps) {
+  const { children, onClose } = props
+
+  const { user, isLoggedIn, isLoading } = useSession()
+  const performedActionsResponse = useApiResponseForUserPerformedUserActionTypes({
     revalidateOnMount: true,
   })
+  const { mutate } = useSWRConfig()
 
-  const data = useMemo(() => {
-    if (!userData.data || !performedActionsData.data) {
-      return undefined
+  if (!isLoggedIn || !user) {
+    return <JoinSWC onClose={onClose} />
+  }
+
+  if (!user.phoneNumber || !user.hasOptedInToSms) {
+    if (isLoading) {
+      return <SMSOptInContent.Skeleton />
     }
-    const { user } = userData.data
-    const { performedUserActionTypes } = performedActionsData.data
-    return {
-      user,
-      performedUserActionTypes,
-    }
-  }, [userData, performedActionsData])
-  return <UserActionFormSuccessScreenContent {...props} data={data} />
+
+    return (
+      <SMSOptInContent
+        initialValues={{ phoneNumber: user.phoneNumber }}
+        onSuccess={({ phoneNumber }) => {
+          void mutate(apiUrls.userFullProfileInfo(), {
+            ...user,
+            phoneNumber,
+            hasOptedInToSms: true,
+          })
+          void performedActionsResponse.mutate()
+        }}
+      />
+    )
+  }
+
+  return (
+    <div className={cn('flex h-full flex-col gap-8 p-0 md:p-8')}>
+      {children}
+
+      {isLoading || performedActionsResponse.isLoading ? (
+        <UserActionFormSuccessScreenNextActionSkeleton />
+      ) : (
+        <UserActionFormSuccessScreenNextAction
+          data={{
+            userHasEmbeddedWallet: user.hasEmbeddedWallet,
+            performedUserActionTypes: performedActionsResponse.data?.performedUserActionTypes || [],
+          }}
+        />
+      )}
+    </div>
+  )
 }

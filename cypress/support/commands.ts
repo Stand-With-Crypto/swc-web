@@ -176,7 +176,7 @@ Cypress.Commands.add('waitForProfileCreation', (customUser = mockRandomUser) => 
 
   cy.wait(500)
 
-  cy.contains('Profile updated').should('be.visible').click()
+  cy.contains('Profile updated')
 })
 
 Cypress.Commands.add('waitForLogout', () => {

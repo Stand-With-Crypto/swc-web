@@ -8,12 +8,13 @@ import {
   backfillSMSOptInReplyWithInngestUpdateBatchOfUsers,
 } from '@/inngest/functions/capitolCanary/backfillSMSOptInReply'
 import { checkSMSOptInReplyWithInngest } from '@/inngest/functions/capitolCanary/checkSMSOptInReply'
-import { emailRepViaCapitolCanaryWithInngest } from '@/inngest/functions/capitolCanary/emailRepViaCapitolCanary'
+import { emailViaCapitolCanaryWithInngest } from '@/inngest/functions/capitolCanary/emailViaCapitolCanary'
 import { upsertAdvocateInCapitolCanaryWithInngest } from '@/inngest/functions/capitolCanary/upsertAdvocateInCapitolCanary'
 import { cleanupNFTMintsWithInngest } from '@/inngest/functions/cleanupNFTMints'
 import { cleanupPostalCodesWithInngest } from '@/inngest/functions/cleanupPostalCodes'
 import { monitorBaseETHBalances } from '@/inngest/functions/monitorBaseETHBalances'
 import { setPrimaryCryptoAddressOfUserWithInngest } from '@/inngest/functions/setPrimaryCryptoAddressOfUser'
+import { backfillSMSStatusField } from '@/inngest/functions/sms/backfillSMSStatusField'
 import { testCNNEmail } from '@/inngest/functions/testCNNEmail/testCNNEmail'
 import {
   auditUsersTotalDonationAmountUsdInngest,
@@ -31,7 +32,7 @@ export const { GET, POST, PUT } = serve({
   client: inngest,
   functions: [
     upsertAdvocateInCapitolCanaryWithInngest,
-    emailRepViaCapitolCanaryWithInngest,
+    emailViaCapitolCanaryWithInngest,
     checkSMSOptInReplyWithInngest,
     backfillSMSOptInReplyWithInngest,
     backfillSMSOptInReplyWithInngestUpdateBatchOfUsers,
@@ -47,5 +48,6 @@ export const { GET, POST, PUT } = serve({
     auditUsersTotalDonationAmountUsdInngest,
     auditUsersTotalDonationAmountUsdInngestAuditBatchOfUsers,
     testCNNEmail,
+    backfillSMSStatusField,
   ],
 })

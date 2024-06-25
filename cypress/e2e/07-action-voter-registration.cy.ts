@@ -55,7 +55,7 @@ describe('action - voter registration', () => {
       cy.get('button[type="button"]').contains('Claim NFT').click()
 
       // waiting for Inngest to consume job
-      cy.contains('Nice work! You earned a new NFT.')
+      cy.contains('Nice work!')
 
       cy.queryDb('SELECT * FROM user_action WHERE action_type="VOTER_REGISTRATION"').then(
         (result: any) => {
@@ -70,7 +70,7 @@ describe('action - voter registration', () => {
       cy.visit('/')
 
       cy.contains('Check your voter registration and get a free NFT').click()
-      cy.get('[role="dialog"]')
+      cy.get('[role="dialog"]').as('dialog')
 
       cy.get('button[type="button"]').contains('Yes').click()
 
@@ -81,7 +81,7 @@ describe('action - voter registration', () => {
       cy.get('button[type="button"]').contains('Claim NFT').click()
 
       // waiting for Inngest to consume job
-      cy.contains('Nice work! You earned a new NFT.')
+      cy.contains('Nice work!')
 
       cy.queryDb('SELECT * FROM user_action WHERE action_type="VOTER_REGISTRATION"').then(
         (result: any) => {
@@ -89,45 +89,20 @@ describe('action - voter registration', () => {
         },
       )
 
-      cy.waitForLogin(cy.get('button[type="button"]').contains('Join To Claim NFT'))
+      cy.waitForLogin(
+        cy.get('@dialog').find('button[type="button"]').contains('Join Stand With Crypto'),
+      )
 
-      cy.contains(/Finish my profile/g).click()
+      cy.get('@dialog')
+        .find('input[placeholder="Phone number"]')
+        .should('be.visible')
+        .type(mockRandomUser.phoneNumber)
 
-      cy.wait('@hasOptInNft')
+      cy.get('@dialog').find("button[type='submit']").contains('Get updates').click()
 
-      // wait for page blink
-      cy.wait(1000)
+      cy.contains('You registered to vote!').should('be.visible')
 
-      cy.contains(/Finish your profile|Create an account. Get an NFT./g).should('be.visible')
-
-      cy.get('input[placeholder="First name"').should('be.visible').type(mockRandomUser.firstName)
-
-      cy.get('input[placeholder="Last name"').should('be.visible').type(mockRandomUser.lastName)
-
-      cy.selectFromComboBox({
-        trigger: cy.get('input[placeholder="Street address"], input[placeholder="Address"]'),
-        searchText: mockRandomUser.address,
-        typingRequired: true,
-      })
-
-      cy.get('input[placeholder="Your email"], input[placeholder="Email"]')
-        .clear()
-        .type(mockRandomUser.email)
-
-      cy.get('input[data-testid="phone-number-input"]').clear().type(mockRandomUser.phoneNumber)
-
-      cy.get('button[type="submit"]')
-        .contains(/Next|Create account/)
-        .scrollIntoView()
-        .click({ force: true })
-
-      cy.contains('Submit').should('be.visible').click()
-
-      cy.contains(/You've completed [0-9] out of [0-9] actions. Keep going!/g).should('be.visible')
-
-      cy.queryDb(
-        'SELECT * FROM user_action WHERE action_type = "OPT_IN" AND nft_mint_id is not NULL',
-      ).then((result: any) => {
+      cy.queryDb('SELECT * FROM user_action WHERE action_type = "OPT_IN"').then((result: any) => {
         expect(result.length, 'user_action to exist in database').to.equal(1)
       })
     })

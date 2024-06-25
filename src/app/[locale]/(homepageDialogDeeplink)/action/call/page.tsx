@@ -11,12 +11,7 @@ export const dynamic = 'error'
 export default function UserActionCallCongresspersonDeepLink({ params }: PageProps) {
   return (
     <HomepageDialogDeeplinkLayout pageParams={params}>
-      <div
-        className={cn(
-          'flex flex-col items-center justify-center max-md:h-full',
-          dialogContentPaddingStyles,
-        )}
-      >
+      <div className={cn('max-md:h-full', dialogContentPaddingStyles)}>
         <UserActionFormCallCongresspersonDeeplinkWrapper />
       </div>
     </HomepageDialogDeeplinkLayout>

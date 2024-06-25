@@ -1,3 +1,4 @@
+import { faker } from '@faker-js/faker'
 import { Prisma, UserActionEmailRecipient } from '@prisma/client'
 
 import { fakerFields } from '@/mocks/fakerUtils'
@@ -15,5 +16,6 @@ export function mockUserActionEmailRecipient(): UserActionEmailRecipient {
     ...mockCreateUserActionEmailRecipientInput(),
     id: fakerFields.id(),
     userActionEmailId: fakerFields.id(),
+    emailAddress: faker.internet.email(),
   }
 }

@@ -9,12 +9,12 @@ import { CapitolCanaryOpts } from '@/utils/server/capitolCanary/opts'
 
 export interface UpsertAdvocateInCapitolCanaryPayloadRequirements {
   campaignId: CapitolCanaryCampaignId | SandboxCapitolCanaryCampaignId
-  user: User & { address: Address | null }
+  user: User & { address?: Address | null }
   userEmailAddress?: UserEmailAddress | null
   opts?: CapitolCanaryOpts
   metadata?: CapitolCanaryMetadata
 }
-export interface EmailRepViaCapitolCanaryPayloadRequirements
+export interface EmailViaCapitolCanaryPayloadRequirements
   extends UpsertAdvocateInCapitolCanaryPayloadRequirements {
   emailSubject: string
   emailMessage: string

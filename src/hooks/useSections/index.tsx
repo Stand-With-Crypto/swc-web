@@ -5,23 +5,23 @@ import { trackSectionVisible } from '@/utils/web/clientAnalytics'
 
 import { UseSectionsProps, UseSectionsReturn } from './useSections.types'
 
-export function useSections<SectionKey extends string>({
+export function useSections<SectionKeys extends readonly string[]>({
   sections,
   initialSectionId,
   analyticsName,
-}: UseSectionsProps<SectionKey>): UseSectionsReturn<SectionKey> {
+}: UseSectionsProps<SectionKeys>): UseSectionsReturn<SectionKeys[number]> {
+  type Key = SectionKeys[number]
+
   if (!sections.length) {
     const err = new Error('useSections: sections must not be empty')
     Sentry.captureException(err)
     throw err
   }
 
-  const [currentSection, setCurrentSection] = React.useState<SectionKey>(
-    initialSectionId ?? sections[0],
-  )
-  const [history, setHistory] = React.useState<SectionKey[]>([currentSection])
+  const [currentSection, setCurrentSection] = React.useState<Key>(initialSectionId ?? sections[0])
+  const [history, setHistory] = React.useState<Key[]>([currentSection])
 
-  const goToSection: UseSectionsReturn<SectionKey>['goToSection'] = React.useCallback(
+  const goToSection: UseSectionsReturn<Key>['goToSection'] = React.useCallback(
     (section, options = {}) => {
       if (section === currentSection) {
         return
@@ -37,7 +37,7 @@ export function useSections<SectionKey extends string>({
     [currentSection, analyticsName],
   )
 
-  const goBackSection: UseSectionsReturn<SectionKey>['goBackSection'] = React.useCallback(() => {
+  const goBackSection: UseSectionsReturn<Key>['goBackSection'] = React.useCallback(() => {
     if (!history.length) {
       return
     }

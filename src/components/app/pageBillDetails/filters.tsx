@@ -14,10 +14,9 @@ import {
   DTSI_PersonPoliticalAffiliationCategory,
   DTSI_PersonRoleCategory,
 } from '@/data/dtsi/generated'
-import { getValues } from '@/utils/shared/getEntries'
 import { cn } from '@/utils/web/cn'
 
-export const STANCE_OPTIONS = ['All', ...getValues(DTSI_BillPersonRelationshipType)] as const
+export const STANCE_OPTIONS = ['All', ...Object.values(DTSI_BillPersonRelationshipType)] as const
 export type STANCE_OPTION = (typeof STANCE_OPTIONS)[number]
 export const STANCE_OPTIONS_DISPLAY_NAME: Record<STANCE_OPTION, string> = {
   All: 'All',
