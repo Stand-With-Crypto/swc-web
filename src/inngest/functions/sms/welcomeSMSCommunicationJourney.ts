@@ -45,7 +45,7 @@ export const welcomeSMSCommunicationJourney = inngest.createFunction(
     }
 
     const communicationJourneys = await step.run('create-communication-journey', () =>
-      createCommunicationJourney(phoneNumber, UserCommunicationJourneyType.WELCOME_SMS),
+      createCommunicationJourney(phoneNumber),
     )
 
     const message = await step.run('send-sms', () =>
@@ -64,10 +64,8 @@ export const welcomeSMSCommunicationJourney = inngest.createFunction(
   },
 )
 
-async function createCommunicationJourney(
-  phoneNumber: string,
-  journeyType: UserCommunicationJourneyType,
-): Promise<CommunicationJourney[]> {
+async function createCommunicationJourney(phoneNumber: string): Promise<CommunicationJourney[]> {
+  const journeyType = UserCommunicationJourneyType.WELCOME_SMS
   const usersWithPhoneNumber = (
     await prismaClient.user.findMany({
       where: {
