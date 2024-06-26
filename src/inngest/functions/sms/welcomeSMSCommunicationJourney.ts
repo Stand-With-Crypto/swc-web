@@ -9,13 +9,10 @@ import { NonRetriableError } from 'inngest'
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { getLogger } from '@/utils/shared/logger'
 import { smsProvider } from '@/utils/shared/smsProvider'
 
 import { messagingClient, sendSMS } from '@/lib/sms'
 import * as messages from '@/lib/sms/messages'
-
-const logger = getLogger('welcomeSMSCommunicationJourney')
 
 export const WELCOME_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME =
   'app/user.communication/welcome.sms'
@@ -50,8 +47,6 @@ export const welcomeSMSCommunicationJourney = inngest.createFunction(
     const communicationJourneys = await step.run('create-communication-journey', () =>
       createCommunicationJourney(phoneNumber, UserCommunicationJourneyType.WELCOME_SMS),
     )
-
-    logger.info('communicationJourneys', JSON.stringify(communicationJourneys))
 
     const message = await step.run('send-sms', () =>
       sendMessage(phoneNumber, communicationJourneys),
