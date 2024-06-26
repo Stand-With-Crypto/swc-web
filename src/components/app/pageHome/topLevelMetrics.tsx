@@ -1,5 +1,5 @@
 'use client'
-import { useCallback, useMemo } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { Info } from 'lucide-react'
 
 import { AnimatedNumericOdometer } from '@/components/ui/animatedNumericOdometer'
@@ -44,6 +44,7 @@ const mockDecreaseInValuesOnInitialLoadSoWeCanAnimateIncrease = (
 })
 
 export function TopLevelMetrics({ locale, ...data }: Props & { locale: SupportedLocale }) {
+  const [isDonatedTooltipOpen, setIsDonatedTooltipOpen] = useState(false)
   const decreasedInitialValues = useMemo(
     () => mockDecreaseInValuesOnInitialLoadSoWeCanAnimateIncrease(data),
     [data],
@@ -95,8 +96,12 @@ export function TopLevelMetrics({ locale, ...data }: Props & { locale: Supported
           label: 'Donated by crypto advocates',
           value: (
             <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger className="mx-auto flex gap-1" style={{ height: 35 }}>
+              <Tooltip onOpenChange={setIsDonatedTooltipOpen} open={isDonatedTooltipOpen}>
+                <TooltipTrigger
+                  className="mx-auto flex gap-1"
+                  onClick={() => setIsDonatedTooltipOpen(true)}
+                  style={{ height: 35 }}
+                >
                   <AnimatedNumericOdometer size={35} value={formatted.sumDonations.amountUsd} />
                   <sup>
                     <Info className="h-4 w-4" />
