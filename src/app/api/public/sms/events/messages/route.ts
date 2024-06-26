@@ -60,9 +60,15 @@ export async function POST(request: NextRequest) {
   logger.info('body', JSON.stringify(body))
 
   switch (body.Body.toUpperCase()) {
+    // Default STOP keywords
+    case 'STOPALL':
+    case 'UNSUBSCRIBE':
+    case 'CANCEL':
+    case 'END':
+    case 'QUIT':
     case 'STOP':
       await optOutUser(body.From)
-      response.message(messages.GOODBYE_MESSAGE)
+      // In this case we can't respond
       break
     case SWC_STOP_SMS_KEYWORD:
       await optOutUser(body.From)
@@ -71,6 +77,7 @@ export async function POST(request: NextRequest) {
     case 'YES':
     case 'START':
     case 'CONTINUE':
+    case 'UNSTOP':
     case SWC_UNSTOP_SMS_KEYWORD:
       await prismaClient.user.updateMany({
         data: {
@@ -80,10 +87,8 @@ export async function POST(request: NextRequest) {
           phoneNumber: body.From,
         },
       })
-      response.message('')
       break
     default:
-      response.message('')
   }
 
   logger.info('response', response.toString())
