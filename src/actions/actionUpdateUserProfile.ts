@@ -134,7 +134,7 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
   })
 
   // If the user keeps the same phone number we shouldn't send a message
-  if (hasOptedInToSms && phoneNumber && (user.phoneNumber !== phoneNumber || !user.phoneNumber)) {
+  if (hasOptedInToSms && phoneNumber && user.phoneNumber !== phoneNumber) {
     await inngest.send({
       name: WELCOME_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
       data: {
