@@ -6,7 +6,8 @@ import { PublicRecentActivity } from '@/data/recentActivity/getPublicRecentActiv
 export interface MapMarker {
   name: string
   coordinates: [number, number]
-  actionType?: UserActionType
+  actionType: UserActionType
+  datetimeCreated: string
 }
 
 export const createMarkersFromActions = (recentActivity: PublicRecentActivity) => {
@@ -24,7 +25,12 @@ export const createMarkersFromActions = (recentActivity: PublicRecentActivity) =
         const coordinates = STATE_COORDS[state as keyof typeof STATE_COORDS]
 
         if (coordinates) {
-          markers.push({ name: state, coordinates, actionType: item.actionType })
+          markers.push({
+            name: state,
+            coordinates,
+            actionType: item.actionType,
+            datetimeCreated: item.datetimeCreated,
+          })
           addedStates.add(state)
         }
       }
