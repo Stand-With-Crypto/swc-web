@@ -4,12 +4,13 @@ import { SMSStatus } from '@prisma/client'
 import { NextRequest, NextResponse } from 'next/server'
 import twilio from 'twilio'
 
+import { GOODBYE_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME } from '@/inngest/functions/sms/goodbyeSMSCommunicationJourney'
+import { inngest } from '@/inngest/inngest'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getLogger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 
 import { verifySignature } from '@/lib/sms'
-import * as messages from '@/lib/sms/messages'
 
 const SWC_STOP_SMS_KEYWORD = requiredEnv(process.env.SWC_STOP_SMS_KEYWORD, 'SWC_STOP_SMS_KEYWORD')
 const SWC_UNSTOP_SMS_KEYWORD = requiredEnv(
@@ -55,46 +56,40 @@ export async function POST(request: NextRequest) {
     )
   }
 
-  const response = new twilio.twiml.MessagingResponse()
-
   logger.info('body', JSON.stringify(body))
 
   switch (body.Body.toUpperCase()) {
     // Default STOP keywords
+    // In this case Twilio will block next messages, so we don't need to send anything
     case 'STOPALL':
     case 'UNSUBSCRIBE':
     case 'CANCEL':
     case 'END':
     case 'QUIT':
     case 'STOP':
-      await optOutUser(body.From)
-      // In this case we can't respond
+      await optOutUser(body.From, false)
       break
     case SWC_STOP_SMS_KEYWORD:
-      await optOutUser(body.From)
-      response.message(messages.GOODBYE_MESSAGE)
+      await optOutUser(body.From, true)
       break
     case 'YES':
     case 'START':
     case 'CONTINUE':
     case 'UNSTOP':
     case SWC_UNSTOP_SMS_KEYWORD:
-      await prismaClient.user.updateMany({
-        data: {
-          smsStatus: SMSStatus.OPTED_IN,
-        },
-        where: {
-          phoneNumber: body.From,
-        },
-      })
+      await optUserBackIn(body.From)
       break
     default:
   }
 
-  logger.info('response', response.toString())
-
   const headers = new Headers()
   headers.set('Content-Type', 'text/xml')
+
+  // If we don't respond the message with this xml Twilio will trigger a error event on the fail webhook
+  const response = new twilio.twiml.MessagingResponse()
+
+  // We can't get the messageId when sending messages this way, so we need to trigger a Inngest function instead
+  response.message('')
 
   return new Response(response.toString(), {
     headers,
@@ -102,7 +97,7 @@ export async function POST(request: NextRequest) {
   })
 }
 
-async function optOutUser(phoneNumber: string) {
+async function optOutUser(phoneNumber: string, isSWCKeyword: boolean) {
   await prismaClient.user.updateMany({
     data: {
       smsStatus: SMSStatus.OPTED_OUT,
@@ -112,6 +107,30 @@ async function optOutUser(phoneNumber: string) {
     },
   })
 
-  // TODO: create communication journey
-  // TODO: create communication
+  if (isSWCKeyword) {
+    await inngest.send({
+      name: GOODBYE_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
+      data: {
+        phoneNumber,
+      },
+    })
+
+    // TODO: log to mixpanel SWC STOP Keyword
+  } else {
+    // TODO: log to mixpanel STOP Keyword
+  }
+}
+
+async function optUserBackIn(phoneNumber: string) {
+  await prismaClient.user.updateMany({
+    data: {
+      smsStatus: SMSStatus.OPTED_IN,
+    },
+    where: {
+      phoneNumber,
+    },
+  })
+
+  // TODO: call Unstop SMS Message
+  // TODO: log to mixpanel
 }

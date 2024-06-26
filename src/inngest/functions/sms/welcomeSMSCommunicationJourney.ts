@@ -1,15 +1,15 @@
-import {
-  CommunicationType,
-  UserCommunication,
-  UserCommunicationJourney,
-  UserCommunicationJourneyType,
-} from '@prisma/client'
+import { UserCommunicationJourneyType } from '@prisma/client'
 import { NonRetriableError } from 'inngest'
 
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
-import { prismaClient } from '@/utils/server/prismaClient'
 import { smsProvider } from '@/utils/shared/smsProvider'
+
+import {
+  CommunicationJourney,
+  createCommunication,
+  createCommunicationJourney,
+} from './shared/communicationJourney'
 
 import { messagingClient, sendSMS } from '@/lib/sms'
 import * as messages from '@/lib/sms/messages'
@@ -52,84 +52,11 @@ export const welcomeSMSCommunicationJourney = inngest.createFunction(
       sendMessage(phoneNumber, communicationJourneys),
     )
 
-    await step.run('create-user-communication', async () => {
-      await prismaClient.userCommunication.createMany({
-        data: communicationJourneys.map(({ id }) => ({
-          communicationType: CommunicationType.SMS,
-          messageId: message.sid,
-          userCommunicationJourneyId: id,
-        })),
-      })
-    })
+    await step.run('create-user-communication', () =>
+      createCommunication(communicationJourneys, message.sid),
+    )
   },
 )
-
-async function createCommunicationJourney(
-  phoneNumber: string,
-  journeyType: UserCommunicationJourneyType,
-): Promise<CommunicationJourney[]> {
-  const usersWithPhoneNumber = (
-    await prismaClient.user.findMany({
-      where: {
-        phoneNumber,
-      },
-      select: {
-        id: true,
-      },
-    })
-  ).map(({ id }) => id)
-
-  if (usersWithPhoneNumber.length === 0) {
-    throw new NonRetriableError('User not found')
-  }
-
-  const usersWithExistingCommunicationJourney = (
-    await prismaClient.userCommunicationJourney.findMany({
-      where: {
-        userId: {
-          in: usersWithPhoneNumber,
-        },
-        journeyType,
-      },
-      select: {
-        userId: true,
-      },
-    })
-  ).map(({ userId }) => userId)
-
-  await prismaClient.userCommunicationJourney.createMany({
-    data: usersWithPhoneNumber
-      .filter(id => !usersWithExistingCommunicationJourney.includes(id))
-      .map(id => ({
-        userId: id,
-        journeyType,
-      })),
-  })
-
-  return prismaClient.userCommunicationJourney.findMany({
-    where: {
-      userId: {
-        in: usersWithPhoneNumber,
-      },
-      journeyType,
-    },
-    select: {
-      id: true,
-      userCommunications: {
-        select: {
-          messageId: true,
-        },
-      },
-    },
-  })
-}
-
-type CommunicationJourney = {
-  id: UserCommunicationJourney['id']
-  userCommunications: Array<{
-    messageId: UserCommunication['messageId']
-  }>
-}
 
 async function sendMessage(phoneNumber: string, communicationJourneys: CommunicationJourney[]) {
   for (const communicationJourney of communicationJourneys) {
