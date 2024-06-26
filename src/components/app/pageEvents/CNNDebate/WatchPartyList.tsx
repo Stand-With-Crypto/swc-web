@@ -3,7 +3,6 @@ import { NextImage } from '@/components/ui/image'
 import { cn } from '@/utils/web/cn'
 
 import { WATCH_PARTIES } from './constants'
-import WatchPartyImage from './image.png'
 
 export function WatchPartyList() {
   return WATCH_PARTIES.map(party => (
@@ -20,7 +19,7 @@ export function WatchPartyList() {
               alt={`watch-party-${party.location}`}
               className="object-cover"
               height={70}
-              src={WatchPartyImage}
+              src={party.image}
               width={70}
             />
           </div>
