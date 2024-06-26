@@ -3,12 +3,14 @@ import 'server-only'
 import * as Sentry from '@sentry/nextjs'
 import { NextRequest, NextResponse } from 'next/server'
 
+import { getLogger } from '@/utils/shared/logger'
+
 import { verifySignature } from '@/lib/sms'
 
 interface SmsEvent {
   ParentAccountSid: string
   Payload: string // JSON string
-  level: 'ERROR' | 'WARNING'
+  level?: 'ERROR' | 'WARNING'
   Timestamp: string
   PayloadType: string
   AccountSid: string
@@ -20,6 +22,8 @@ interface SmsEventPayload {
   service_sid: string
   error_code: string
 }
+
+const logger = getLogger('sms-fails')
 
 export async function POST(request: NextRequest) {
   const [isVerified, body] = await verifySignature<SmsEvent>(request)
@@ -35,10 +39,14 @@ export async function POST(request: NextRequest) {
     )
   }
 
+  logger.info('Body', JSON.stringify(body))
+
   try {
     const payload = JSON.parse(body.Payload) as SmsEventPayload
 
-    Sentry.captureMessage(`SMS event ${body.level}: ${payload.error_code}`, {
+    logger.info('Payload', JSON.stringify(payload))
+
+    Sentry.captureMessage(`SMS event ${body.level ?? ''}: ${payload.error_code}`, {
       extra: {
         body,
       },
