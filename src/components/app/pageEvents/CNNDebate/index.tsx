@@ -9,7 +9,7 @@ export function CNNDebateEventPage() {
       <section className="flex flex-col items-center gap-10 sm:gap-12">
         <div className="flex flex-col gap-4 sm:gap-6">
           <h3 className="text-bold text-center font-sans text-xl text-foreground sm:text-[32px] sm:leading-normal">
-            Presidential debate watch parties
+            Presidential Debate watch parties
           </h3>
           <h4 className="text-center font-mono text-base font-normal leading-normal text-muted-foreground sm:text-xl sm:leading-7">
             The first Presidential Debate of the general election is coming up on Thursday, June
