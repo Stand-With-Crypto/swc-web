@@ -4,6 +4,7 @@ import {
   UserActionCallCampaignName,
   UserActionCampaigns,
   UserActionEmailCampaignName,
+  UserActionLiveEventCampaignName,
   UserActionTweetAtPersonCampaignName,
 } from '@/utils/shared/userActionCampaigns'
 
@@ -16,8 +17,14 @@ type DisabledUserActionCampaigns = {
   }
 }
 
+// We have some duplicates here because email and call actions have the default campaign related to FIT21 as well as dedicated FIT21 campaigns.
+// To fix this, we'll prob have to create a backfill script to update the corresponding user actions.
 export const DISABLED_USER_ACTION_CAMPAIGNS: DisabledUserActionCampaigns = {
   [UserActionType.EMAIL]: {
+    [UserActionEmailCampaignName.DEFAULT]: {
+      title: 'FIT21 Email Campaign',
+      subtitle: 'You emailed your representative and asked them to vote YES on FIT21.',
+    },
     [UserActionEmailCampaignName.FIT21_2024_04]: {
       title: 'FIT21 Email Campaign',
       subtitle: 'You emailed your representative and asked them to vote YES on FIT21.',
@@ -37,6 +44,16 @@ export const DISABLED_USER_ACTION_CAMPAIGNS: DisabledUserActionCampaigns = {
     [UserActionCallCampaignName.FIT21_2024_04]: {
       title: 'FIT21 Call Campaign',
       subtitle: 'You called your representative and asked them to vote YES on FIT21.',
+    },
+    [UserActionCallCampaignName.DEFAULT]: {
+      title: 'FIT21 Call Campaign',
+      subtitle: 'You called your representative and asked them to vote YES on FIT21.',
+    },
+  },
+  [UserActionType.LIVE_EVENT]: {
+    [UserActionLiveEventCampaignName['2024_03_04_LA']]: {
+      title: 'GOTV Rally in Los Angeles - 2024',
+      subtitle: 'You attended a get out the vote rally in Los Angeles.',
     },
   },
 }
