@@ -21,6 +21,7 @@ import { PageProps } from '@/types'
 import { getSearchParam, setCallbackQueryString } from '@/utils/server/searchParams'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { getUserActionsProgress } from '@/utils/shared/getUserActionsProgress'
+import { pluralize } from '@/utils/shared/pluralize'
 import { USER_ACTION_DEEPLINK_MAP } from '@/utils/shared/urlsDeeplinkUserActions'
 import {
   USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
@@ -67,12 +68,11 @@ export function PageUserProfile({ params, searchParams, user }: PageUserProfile)
       performedUserActionTypes,
     })
 
-  const userActionsFromPreviousCampaigns =
-    userActions.filter(
-      action =>
-        action.campaignName !== USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[action.actionType] &&
-        !USER_ACTIONS_WITH_ADDITIONAL_CAMPAIGN[action.actionType]?.includes(action.campaignName),
-    ) ?? []
+  const userActionsFromPreviousCampaigns = userActions.filter(
+    action =>
+      action.campaignName !== USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[action.actionType] &&
+      !USER_ACTIONS_WITH_ADDITIONAL_CAMPAIGN[action.actionType]?.includes(action.campaignName),
+  )
 
   return (
     <div className="standard-spacing-from-navbar container space-y-10 lg:space-y-16">
@@ -178,7 +178,7 @@ export function PageUserProfile({ params, searchParams, user }: PageUserProfile)
           </PageTitle>
           <PageSubTitle className="mb-5">
             Nice work. You completed {userActionsFromPreviousCampaigns.length} previous{' '}
-            {userActionsFromPreviousCampaigns.length > 1 ? 'campaigns' : 'campaign'}.
+            {pluralize({ singular: 'campaign', count: userActionsFromPreviousCampaigns.length })}.
           </PageSubTitle>
 
           <PreviousCampaignsList userActions={userActionsFromPreviousCampaigns} />
