@@ -124,7 +124,7 @@ const MapComponent = ({
                     locale,
                   })
 
-                  const currentActionInfo = `${currentIconActionType.labelActionTooltip} ${creationTime}`
+                  const currentActionInfo = `${currentIconActionType.labelActionTooltip} in ${name} ${creationTime.toLowerCase()}`
                   const IconComponent = currentIconActionType.icon
 
                   return (

@@ -27,10 +27,9 @@ export const createMarkersFromActions = (recentActivity: PublicRecentActivity) =
         let offsetY = 0
 
         if (stateCount[state]) {
-          // Add a random offset within the range of ±3 pixels
-          const maxOffset = 3
-          offsetX = (Math.random() - 0.5) * maxOffset
-          offsetY = (Math.random() - 0.5) * maxOffset
+          offsetX = stateCount[state] % 2 === 0 ? 1.2 : -1.2
+          offsetY = stateCount[state] % 2 === 0 ? -1.2 : 1.2
+
           stateCount[state] += 1
         } else {
           stateCount[state] = 1
