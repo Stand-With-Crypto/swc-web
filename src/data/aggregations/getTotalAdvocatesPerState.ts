@@ -5,45 +5,57 @@ import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
 type TotalAdvocatesPerStateQuery = {
   state: string
-  totalAdvocates: bigint
+  totalAdvocates: number
 }[]
 
-const fetchAllFromPrisma = async () => {
-  return prismaClient.$queryRaw<TotalAdvocatesPerStateQuery>`
-    SELECT 
-      address.administrative_area_level_1 AS state,
-      COUNT(DISTINCT user.id) AS totalAdvocates
-    FROM 
-      user_action as user_action
-    JOIN 
-      user ON user_action.user_id = user.id
-    JOIN 
-      address ON user.address_id = address.id
-    WHERE 1=1
-    AND address.country_code = 'US' 
-    AND address.administrative_area_level_1 is not NULL
-    GROUP BY 
-      address.administrative_area_level_1;
-  `
-}
+const fetchAllFromPrisma = async (): Promise<TotalAdvocatesPerStateQuery> => {
+  const result = await prismaClient.user.findMany({
+    where: {
+      address: {
+        countryCode: 'US',
+        administrativeAreaLevel1: {
+          not: undefined,
+        },
+      },
+    },
+    select: {
+      address: {
+        select: {
+          administrativeAreaLevel1: true,
+        },
+      },
+    },
+    distinct: ['id'],
+  })
 
-const parseTotalAdvocatesPerState = (totalAdvocatesPerState: TotalAdvocatesPerStateQuery) => {
+  const stateCounts = result.reduce(
+    (acc, user) => {
+      const state = user.address?.administrativeAreaLevel1
+      if (state) {
+        acc[state] = (acc[state] || 0) + 1
+      }
+      return acc
+    },
+    {} as Record<string, number>,
+  )
+
   const multiplier =
     NEXT_PUBLIC_ENVIRONMENT === 'production'
       ? 1
       : Math.floor(Math.random() * (10000 - 1000 + 1)) + 1000
 
-  return totalAdvocatesPerState.map(({ state, totalAdvocates }) => ({
-    state,
-    totalAdvocates: parseInt(totalAdvocates.toString(), 10) * multiplier,
-  }))
+  const formattedResult = Object.entries(stateCounts)
+    .map(([state, totalAdvocates]) => ({
+      state,
+      totalAdvocates: parseInt(totalAdvocates.toString(), 10) * multiplier,
+    }))
+    .sort((a, b) => a.state.localeCompare(b.state))
+
+  return formattedResult
 }
 
 export const getTotalAdvocatesPerState = async () => {
-  const rawTotalAdvocatesPerState = await fetchAllFromPrisma()
-  const totalAdvocatesPerState = parseTotalAdvocatesPerState(rawTotalAdvocatesPerState)
-
-  return totalAdvocatesPerState
+  return await fetchAllFromPrisma()
 }
 
 export type TotalAdvocatesPerState = Awaited<ReturnType<typeof getTotalAdvocatesPerState>>
