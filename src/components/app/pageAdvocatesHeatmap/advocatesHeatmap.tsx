@@ -50,7 +50,6 @@ const MapComponent = ({
           <>
             {geographies.map(geo => (
               <Geography
-                cursor="pointer"
                 geography={geo}
                 key={geo.rsmKey}
                 onMouseMove={event => handleStateMouseHover(geo, event)}
