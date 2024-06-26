@@ -10,7 +10,7 @@ import { verifySignature } from '@/lib/sms'
 interface SmsEvent {
   ParentAccountSid: string
   Payload: string // JSON string
-  level?: 'ERROR' | 'WARNING'
+  Level: 'ERROR' | 'WARNING'
   Timestamp: string
   PayloadType: string
   AccountSid: string
@@ -39,14 +39,12 @@ export async function POST(request: NextRequest) {
     )
   }
 
-  logger.info('Body', JSON.stringify(body))
-
   try {
     const payload = JSON.parse(body.Payload) as SmsEventPayload
 
     logger.info('Payload', JSON.stringify(payload))
 
-    Sentry.captureMessage(`SMS event ${body.level ?? ''}: ${payload.error_code}`, {
+    Sentry.captureMessage(`SMS event ${body.Level}: ${payload.error_code}`, {
       extra: {
         body,
       },
