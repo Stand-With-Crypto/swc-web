@@ -3,8 +3,8 @@
 import { MouseEvent, useCallback, useMemo, useState } from 'react'
 import { ComposableMap, Geographies, Geography } from 'react-simple-maps'
 import { AnimatePresence } from 'framer-motion'
-import { debounce } from 'lodash-es'
 
+import { AdvocateHeatmapActionList } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapActionList'
 import { ActionInfoTooltip } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapActionTooltip'
 import { AdvocateHeatmapMarker } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapMarker'
 import { AdvocateHeatmapOdometer } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapOdometer'
@@ -22,7 +22,6 @@ import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
 import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
 import { useApiAdvocateMap } from '@/hooks/useApiAdvocateMap'
 import { useApiRecentActivity } from '@/hooks/useApiRecentActivity'
-import { useIsMobile } from '@/hooks/useIsMobile'
 import { SupportedLocale } from '@/intl/locales'
 import { getUSStateCodeFromStateName } from '@/utils/shared/usStateUtils'
 
@@ -31,30 +30,6 @@ interface RenderMapProps {
   homepageData: Awaited<ReturnType<typeof getHomepageData>>
   advocatesMapPageData: Awaited<ReturnType<typeof getAdvocatesMapData>>
   isEmbedded?: boolean
-}
-
-const ActionsList = ({ isEmbedded }: { isEmbedded?: boolean }) => {
-  const isMobile = useIsMobile()
-
-  return (
-    <div className="flex w-full flex-row justify-around gap-3 md:w-auto md:flex-col md:justify-between">
-      {Object.entries(ADVOCATES_ACTIONS).map(([key, action]) => {
-        const ActionIcon = action.icon
-
-        return (
-          <div
-            className={`flex flex-col items-center gap-3 font-sans text-base md:flex-row ${isEmbedded ? 'text-white' : 'text-black'}`}
-            key={key}
-          >
-            <ActionIcon className="w-8 md:w-10" />
-            <span className="text-nowrap text-xs">
-              {isMobile ? action.labelMobile : action.label}
-            </span>
-          </div>
-        )
-      })}
-    </div>
-  )
 }
 
 const MapComponent = ({
@@ -79,14 +54,22 @@ const MapComponent = ({
 
   const handleActionMouseOver = useCallback(
     (currentActionInfo: string, event: MouseEvent<SVGElement>) => {
-      const { clientX, clientY } = event
+      event.stopPropagation()
+
+      const actionBoundingClientRect = event.currentTarget.getBoundingClientRect()
+      const actionPosition = {
+        x: actionBoundingClientRect.left + actionBoundingClientRect.width / 2,
+        y: actionBoundingClientRect.top + actionBoundingClientRect.height / 2,
+      }
+
       setActionInfo(currentActionInfo)
-      setMousePosition({ x: clientX, y: clientY })
+      setMousePosition(actionPosition)
     },
     [],
   )
 
-  const handleActionMouseOut = useCallback(() => {
+  const handleActionMouseLeave = useCallback((event?: MouseEvent<SVGElement>) => {
+    event?.stopPropagation()
     setMousePosition(null)
     setActionInfo(null)
   }, [])
@@ -141,11 +124,7 @@ const MapComponent = ({
                     locale,
                   })
 
-                  const capitalizedActionLabel =
-                    currentIconActionType.labelMobile.charAt(0).toUpperCase() +
-                    currentIconActionType.labelMobile.slice(1)
-                  const currentActionInfo = `${capitalizedActionLabel} ${creationTime}`
-
+                  const currentActionInfo = `${currentIconActionType.labelActionTooltip} ${creationTime}`
                   const IconComponent = currentIconActionType.icon
 
                   return (
@@ -153,9 +132,9 @@ const MapComponent = ({
                       IconComponent={IconComponent}
                       coordinates={coordinates}
                       currentActionInfo={currentActionInfo}
-                      handleActionMouseOut={handleActionMouseOut}
+                      handleActionMouseLeave={handleActionMouseLeave}
                       handleActionMouseOver={handleActionMouseOver}
-                      key={`${name}-${datetimeCreated}`}
+                      key={`${name}-${datetimeCreated}-${coordinates.toString()}`}
                     />
                   )
                 })}
@@ -166,7 +145,7 @@ const MapComponent = ({
       </ComposableMap>
       <ActionInfoTooltip
         actionInfo={actionInfo}
-        handleClearPressedState={handleActionMouseOut}
+        handleClearPressedState={handleActionMouseLeave}
         mousePosition={mousePosition}
       />
     </>
@@ -179,7 +158,6 @@ export function AdvocatesHeatmap({
   advocatesMapPageData,
   isEmbedded,
 }: RenderMapProps) {
-  const [toggle, setToggle] = useState(false)
   const actions = useApiRecentActivity(homepageData.actions, { limit: 10 })
   const advocatesPerState = useApiAdvocateMap(advocatesMapPageData)
 
@@ -216,14 +194,13 @@ export function AdvocatesHeatmap({
   return (
     <div className="flex flex-col items-start px-2 py-6">
       <div className="flex w-full flex-col items-start gap-4 md:flex-row">
-        <button onClick={() => setToggle(prev => !prev)}>CLICK ME</button>
-        <ActionsList isEmbedded={isEmbedded} />
+        <AdvocateHeatmapActionList isEmbedded={isEmbedded} />
         <MapComponent
           handleStateMouseHover={handleStateMouseHover}
           handleStateMouseOut={handleStateMouseOut}
           isEmbedded={isEmbedded}
           locale={locale}
-          markers={toggle ? markers : []}
+          markers={markers}
         />
         <TotalAdvocatesPerStateTooltip
           getTotalAdvocatesPerState={getTotalAdvocatesPerState}

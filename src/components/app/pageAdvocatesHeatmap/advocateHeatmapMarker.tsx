@@ -9,13 +9,13 @@ import { IconProps } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmap
 export function AdvocateHeatmapMarker({
   coordinates,
   IconComponent,
-  handleActionMouseOut,
+  handleActionMouseLeave,
   handleActionMouseOver,
   currentActionInfo,
 }: {
   coordinates: [number, number]
   IconComponent: React.FC<IconProps>
-  handleActionMouseOut: () => void
+  handleActionMouseLeave: (event: React.MouseEvent<SVGElement, MouseEvent>) => void
   handleActionMouseOver: (
     currentActionInfo: string,
     event: React.MouseEvent<SVGElement, MouseEvent>,
@@ -26,8 +26,8 @@ export function AdvocateHeatmapMarker({
     <motion.g
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.8 }}
-      initial={{ opacity: 0, scale: 0.8 }}
-      onMouseOut={handleActionMouseOut}
+      initial={{ opacity: 0, scale: 0.3 }}
+      onMouseLeave={handleActionMouseLeave}
       onMouseOver={event => handleActionMouseOver(currentActionInfo, event)}
       transition={{ duration: 0.5 }}
     >

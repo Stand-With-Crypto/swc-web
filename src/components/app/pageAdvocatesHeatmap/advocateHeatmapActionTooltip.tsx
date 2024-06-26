@@ -35,10 +35,11 @@ export function ActionInfoTooltip({
   // Calculate the adjusted position so it does not overflow the window
   const centeredX = mousePosition.x - offsetX
   const adjustedX = Math.min(Math.max(centeredX, 0), window.innerWidth - tooltipWidth)
+  const tooltipWidthBasedOnTextLength = actionInfo.length * 8
 
   return (
     <div
-      className="pointer-events-none fixed z-50 flex h-[46px] w-[193px] items-center justify-center rounded-2xl bg-black px-1 font-sans text-base text-white"
+      className={`pointer-events-none fixed z-50 flex h-[46px] w-[${tooltipWidthBasedOnTextLength}px] items-center justify-center rounded-2xl bg-black px-4 font-sans text-base text-white`}
       style={{
         top: mousePosition.y,
         left: adjustedX,
