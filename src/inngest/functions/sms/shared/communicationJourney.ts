@@ -3,9 +3,9 @@ import { NonRetriableError } from 'inngest'
 
 import { prismaClient } from '@/utils/server/prismaClient'
 
-export type CreatedCommunicationJourney = Awaited<ReturnType<typeof createCommunicationJourney>>
+export type CreatedCommunicationJourneys = Awaited<ReturnType<typeof createCommunicationJourneys>>
 
-export async function createCommunicationJourney(
+export async function createCommunicationJourneys(
   phoneNumber: string,
   journeyType: UserCommunicationJourneyType,
 ) {
@@ -56,7 +56,6 @@ export async function createCommunicationJourney(
     },
     select: {
       id: true,
-      userId: true,
       userCommunications: {
         select: {
           messageId: true,
@@ -67,7 +66,7 @@ export async function createCommunicationJourney(
 }
 
 export async function createCommunication(
-  communicationJourneys: CreatedCommunicationJourney,
+  communicationJourneys: CreatedCommunicationJourneys,
   messageId: string,
 ) {
   await prismaClient.userCommunication.createMany({

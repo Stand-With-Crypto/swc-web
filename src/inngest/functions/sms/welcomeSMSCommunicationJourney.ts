@@ -3,15 +3,12 @@ import { NonRetriableError } from 'inngest'
 
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
-import { prismaClient } from '@/utils/server/prismaClient'
-import { getServerAnalytics } from '@/utils/server/serverAnalytics'
-import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
 import { smsProvider } from '@/utils/shared/smsProvider'
 
 import {
   createCommunication,
-  createCommunicationJourney,
-  CreatedCommunicationJourney,
+  createCommunicationJourneys,
+  CreatedCommunicationJourneys,
 } from './shared/communicationJourney'
 
 import { messagingClient, sendSMS } from '@/lib/sms'
@@ -48,7 +45,7 @@ export const welcomeSMSCommunicationJourney = inngest.createFunction(
     }
 
     const communicationJourneys = await step.run('create-communication-journey', () =>
-      createCommunicationJourney(phoneNumber, UserCommunicationJourneyType.WELCOME_SMS),
+      createCommunicationJourneys(phoneNumber, UserCommunicationJourneyType.WELCOME_SMS),
     )
 
     const message = await step.run('send-sms', () =>
@@ -58,14 +55,12 @@ export const welcomeSMSCommunicationJourney = inngest.createFunction(
     await step.run('create-user-communication', () =>
       createCommunication(communicationJourneys, message.sid),
     )
-
-    await step.run('track-user-opt-in', () => trackOptIn(communicationJourneys))
   },
 )
 
 async function sendMessage(
   phoneNumber: string,
-  communicationJourneys: CreatedCommunicationJourney,
+  communicationJourneys: CreatedCommunicationJourneys,
 ) {
   for (const communicationJourney of communicationJourneys) {
     for (const communication of communicationJourney.userCommunications) {
@@ -84,29 +79,4 @@ async function sendMessage(
   }
 
   return message
-}
-
-async function trackOptIn(communicationJourneys: CreatedCommunicationJourney) {
-  const userIds = communicationJourneys.map(({ userId }) => userId)
-
-  const users = await prismaClient.user.findMany({
-    where: {
-      id: {
-        in: userIds,
-      },
-    },
-  })
-
-  for (const user of users) {
-    const localUser = getLocalUserFromUser(user)
-    const analytics = getServerAnalytics({
-      localUser,
-      userId: user.id,
-    })
-    await analytics
-      .track('User SMS Opt-In', {
-        provider: 'twilio',
-      })
-      .flush()
-  }
 }

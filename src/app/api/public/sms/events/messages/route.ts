@@ -9,17 +9,12 @@ import { UNSTOP_CONFIRMATION_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME } from
 import { inngest } from '@/inngest/inngest'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getServerAnalytics } from '@/utils/server/serverAnalytics'
-import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
 import { getLogger } from '@/utils/shared/logger'
-import { requiredEnv } from '@/utils/shared/requiredEnv'
 
 import { verifySignature } from '@/lib/sms'
 
-const SWC_STOP_SMS_KEYWORD = requiredEnv(process.env.SWC_STOP_SMS_KEYWORD, 'SWC_STOP_SMS_KEYWORD')
-const SWC_UNSTOP_SMS_KEYWORD = requiredEnv(
-  process.env.SWC_UNSTOP_SMS_KEYWORD,
-  'SWC_UNSTOP_SMS_KEYWORD',
-)
+const SWC_STOP_SMS_KEYWORD = process.env.SWC_STOP_SMS_KEYWORD ?? ''
+const SWC_UNSTOP_SMS_KEYWORD = process.env.SWC_UNSTOP_SMS_KEYWORD ?? ''
 
 const logger = getLogger('sms-events')
 
@@ -119,24 +114,16 @@ async function optOutUser(phoneNumber: string, isSWCKeyword: boolean) {
     })
   }
 
-  const users = await prismaClient.user.findMany({
-    where: {
-      phoneNumber,
-    },
+  const analytics = getServerAnalytics({
+    localUser: null,
+    userId: phoneNumber,
   })
 
-  for (const user of users) {
-    const localUser = getLocalUserFromUser(user)
-    const analytics = getServerAnalytics({
-      localUser,
-      userId: user.id,
+  await analytics
+    .track('User SMS Opt-out', {
+      type: isSWCKeyword ? 'SWC STOP Keyword' : 'STOP Keyword',
     })
-    await analytics
-      .track('User SMS Opt-out', {
-        type: isSWCKeyword ? 'SWC STOP Keyword' : 'STOP Keyword',
-      })
-      .flush()
-  }
+    .flush()
 }
 
 async function optUserBackIn(phoneNumber: string) {
@@ -155,4 +142,10 @@ async function optUserBackIn(phoneNumber: string) {
       phoneNumber,
     },
   })
+
+  const analytics = getServerAnalytics({
+    localUser: null,
+    userId: phoneNumber,
+  })
+  await analytics.track('User SMS Unstop').flush()
 }

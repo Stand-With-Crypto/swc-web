@@ -4,7 +4,7 @@ import { NonRetriableError } from 'inngest'
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 
-import { createCommunication, createCommunicationJourney } from './shared/communicationJourney'
+import { createCommunication, createCommunicationJourneys } from './shared/communicationJourney'
 
 import { sendSMS } from '@/lib/sms'
 import * as messages from '@/lib/sms/messages'
@@ -38,7 +38,7 @@ export const goodbyeSMSCommunicationJourney = inngest.createFunction(
     }
 
     const communicationJourneys = await step.run('create-communication-journey', () =>
-      createCommunicationJourney(phoneNumber, UserCommunicationJourneyType.GOODBYE_SMS),
+      createCommunicationJourneys(phoneNumber, UserCommunicationJourneyType.GOODBYE_SMS),
     )
 
     const message = await step.run('send-sms', () =>

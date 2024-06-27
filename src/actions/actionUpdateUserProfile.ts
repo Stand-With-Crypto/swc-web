@@ -27,7 +27,7 @@ import { UpsertAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server
 import { claimOptInNFTIfNotClaimed } from '@/utils/server/nft/claimOptInNft'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
-import { getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
+import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
@@ -141,6 +141,16 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
         phoneNumber,
       },
     })
+
+    const analytics = getServerAnalytics({
+      localUser: null,
+      userId: phoneNumber,
+    })
+    await analytics
+      .track('User SMS Opt-In', {
+        provider: 'twilio',
+      })
+      .flush()
   }
   await handleCapitolCanaryAdvocateUpsert(updatedUser, primaryUserEmailAddress, user)
   await claimOptInNFTIfNotClaimed({

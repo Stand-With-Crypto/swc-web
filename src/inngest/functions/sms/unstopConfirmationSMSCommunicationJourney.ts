@@ -3,15 +3,8 @@ import { NonRetriableError } from 'inngest'
 
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
-import { prismaClient } from '@/utils/server/prismaClient'
-import { getServerAnalytics } from '@/utils/server/serverAnalytics'
-import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
 
-import {
-  createCommunication,
-  createCommunicationJourney,
-  CreatedCommunicationJourney,
-} from './shared/communicationJourney'
+import { createCommunication, createCommunicationJourneys } from './shared/communicationJourney'
 
 import { sendSMS } from '@/lib/sms'
 import * as messages from '@/lib/sms/messages'
@@ -45,7 +38,10 @@ export const unstopConfirmationSMSCommunicationJourney = inngest.createFunction(
     }
 
     const communicationJourneys = await step.run('create-communication-journey', () =>
-      createCommunicationJourney(phoneNumber, UserCommunicationJourneyType.UNSTOP_CONFIRMATION_SMS),
+      createCommunicationJourneys(
+        phoneNumber,
+        UserCommunicationJourneyType.UNSTOP_CONFIRMATION_SMS,
+      ),
     )
 
     const message = await step.run('send-sms', () =>
@@ -62,28 +58,5 @@ export const unstopConfirmationSMSCommunicationJourney = inngest.createFunction(
     await step.run('create-user-communication', () =>
       createCommunication(communicationJourneys, message.sid),
     )
-
-    await step.run('track-user-unstop', () => trackUnstopConfirmation(communicationJourneys))
   },
 )
-
-async function trackUnstopConfirmation(communicationJourneys: CreatedCommunicationJourney) {
-  const userIds = communicationJourneys.map(({ userId }) => userId)
-
-  const users = await prismaClient.user.findMany({
-    where: {
-      id: {
-        in: userIds,
-      },
-    },
-  })
-
-  for (const user of users) {
-    const localUser = getLocalUserFromUser(user)
-    const analytics = getServerAnalytics({
-      localUser,
-      userId: user.id,
-    })
-    await analytics.track('User SMS Unstop').flush()
-  }
-}
