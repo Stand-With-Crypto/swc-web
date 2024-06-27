@@ -1,7 +1,7 @@
 export function HowToVoteIcon() {
   return (
     <svg fill="none" height="48" viewBox="0 0 48 48" width="48" xmlns="http://www.w3.org/2000/svg">
-      <g clip-path="url(#clip0_4248_16234)">
+      <g clipPath="url(#clip0_4248_16234)">
         <path d="M10 38H38V40H10V38Z" fill="#E8EAED" opacity="0.3" />
         <path
           d="M36 26H34.64L30.64 30H34.46L38 34H10L13.56 30H17.66L13.66 26H12L6 32V40C6 42.2 7.78 44 9.98 44H38C40.2 44 42 42.22 42 40V32L36 26ZM38 40H10V38H38V40Z"

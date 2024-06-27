@@ -95,7 +95,7 @@ export function TopLevelMetrics({ locale, ...data }: Props & { locale: Supported
         {
           label: 'Donated by crypto advocates',
           value: (
-            <TooltipProvider>
+            <TooltipProvider delayDuration={0}>
               <Tooltip onOpenChange={setIsDonatedTooltipOpen} open={isDonatedTooltipOpen}>
                 <TooltipTrigger
                   className="mx-auto flex gap-1"
