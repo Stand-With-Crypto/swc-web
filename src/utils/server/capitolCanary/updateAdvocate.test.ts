@@ -51,25 +51,25 @@ it('formats the "update capitol canary advocate" request correctly', () => {
 
   expect(formattedRequest).toMatchInlineSnapshot(`
 {
-  "address1": "65087 Kovacek Unions",
-  "address2": "Suite 640",
+  "address1": "164 Bins Corners",
+  "address2": "Suite 904",
   "advocateid": 68251920,
   "campaigns": [
     142628,
   ],
-  "city": "Fort Rico",
+  "city": "New Trycia",
   "country": "US",
-  "email": "Kelley28@yahoo.com",
+  "email": "Nicklaus_Walker51@yahoo.com",
   "emailOptin": 1,
   "emailOptout": 0,
-  "firstname": "Shad",
-  "lastname": "Boyle",
+  "firstname": "Haylie",
+  "lastname": "Macejkovic",
   "p2aSource": "source",
-  "phone": "+16945162316",
+  "phone": "+19178798306",
   "smsOptin": 1,
   "smsOptinConfirmed": 1,
   "smsOptout": 0,
-  "state": "OH",
+  "state": "MA",
   "tags": [
     "tag1",
     "tag2",
@@ -79,7 +79,7 @@ it('formats the "update capitol canary advocate" request correctly', () => {
   "utm_medium": "utmMedium",
   "utm_source": "utmSource",
   "utm_term": "utmTerm",
-  "zip5": "90141-7916",
+  "zip5": "27975",
 }
 `)
 })
