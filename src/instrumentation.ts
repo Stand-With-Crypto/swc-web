@@ -63,13 +63,4 @@ export function register() {
       },
     })
   }
-
-  process.on('unhandledRejection', (reason: string, promise: Promise<any>) => {
-    Sentry.captureException('Unhandled Rejection', {
-      extra: {
-        promise,
-        reason,
-      },
-    })
-  })
 }
