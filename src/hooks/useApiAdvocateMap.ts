@@ -6,12 +6,9 @@ import { GetAdvocatesMapDataResponse } from '@/data/pageSpecific/getAdvocatesMap
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { apiUrls } from '@/utils/shared/urls'
 
-export function useApiAdvocateMap(
-  fallbackData: GetAdvocatesMapDataResponse,
-  args: { topStatesLimit: number },
-) {
+export function useApiAdvocateMap(fallbackData: GetAdvocatesMapDataResponse) {
   return useSWR(
-    apiUrls.totalAdvocatesPerState(args),
+    apiUrls.totalAdvocatesPerState(),
     url =>
       fetchReq(url)
         .then(res => res.json())
