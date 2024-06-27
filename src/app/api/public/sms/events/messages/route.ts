@@ -7,6 +7,8 @@ import twilio from 'twilio'
 import { GOODBYE_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME } from '@/inngest/functions/sms/goodbyeSMSCommunicationJourney'
 import { inngest } from '@/inngest/inngest'
 import { prismaClient } from '@/utils/server/prismaClient'
+import { getServerAnalytics } from '@/utils/server/serverAnalytics'
+import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
 import { getLogger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 
@@ -114,10 +116,25 @@ async function optOutUser(phoneNumber: string, isSWCKeyword: boolean) {
         phoneNumber,
       },
     })
+  }
 
-    // TODO: log to mixpanel SWC STOP Keyword
-  } else {
-    // TODO: log to mixpanel STOP Keyword
+  const users = await prismaClient.user.findMany({
+    where: {
+      phoneNumber,
+    },
+  })
+
+  for (const user of users) {
+    const localUser = getLocalUserFromUser(user)
+    const analytics = getServerAnalytics({
+      localUser,
+      userId: user.id,
+    })
+    await analytics
+      .track('User SMS Opt-out', {
+        type: isSWCKeyword ? 'SWC STOP Keyword' : 'STOP Keyword',
+      })
+      .flush()
   }
 }
 
