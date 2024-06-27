@@ -71,7 +71,6 @@ jobs:
       BUILDER_IO_PUBLIC_KEY: ${{vars.BUILDER_IO_PUBLIC_KEY}}
       # org level secrets
       CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-      CYPRESS_NODE_OPTIONS: --max-old-space-size=4096
       GITHUB_TOKEN: ${{ secrets.CYPRESS_GITHUB_WORKFLOW_TOKEN_TRAVIS }}
       # database
       DATABASE_URL: mysql://root:root@localhost:3306/swc-web
