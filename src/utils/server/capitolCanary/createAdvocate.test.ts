@@ -10,7 +10,6 @@ import {
 } from '@/utils/server/capitolCanary/campaigns'
 import { formatCapitolCanaryAdvocateCreationRequest } from '@/utils/server/capitolCanary/createAdvocate'
 import { UpsertAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
-import { smsProvider } from '@/utils/shared/smsProvider'
 
 it('formats the "create capitol canary advocate" request correctly', () => {
   // Set the seed so that the mocked output is deterministic.
@@ -49,24 +48,24 @@ it('formats the "create capitol canary advocate" request correctly', () => {
 
   expect(formattedRequest).toMatchInlineSnapshot(`
 {
-  "address1": "164 Bins Corners",
-  "address2": "Suite 904",
+  "address1": "65087 Kovacek Unions",
+  "address2": "Suite 640",
   "campaigns": [
     142628,
   ],
-  "city": "New Trycia",
+  "city": "Fort Rico",
   "country": "US",
-  "email": "Nicklaus_Walker51@yahoo.com",
+  "email": "Kelley28@yahoo.com",
   "emailOptin": 1,
   "emailOptout": 0,
-  "firstname": "Haylie",
-  "lastname": "Macejkovic",
+  "firstname": "Shad",
+  "lastname": "Boyle",
   "p2aSource": "source",
-  "phone": "+19178798306",
-  "smsOptin": ${smsProvider === 'capitol-canary' ? 1 : 0},
+  "phone": "+16945162316",
+  "smsOptin": 1,
   "smsOptinConfirmed": 1,
   "smsOptout": 0,
-  "state": "MA",
+  "state": "OH",
   "tags": [
     "tag1",
     "tag2",
@@ -76,7 +75,7 @@ it('formats the "create capitol canary advocate" request correctly', () => {
   "utm_medium": "utmMedium",
   "utm_source": "utmSource",
   "utm_term": "utmTerm",
-  "zip5": "27975",
+  "zip5": "90141-7916",
 }
 `)
 })
