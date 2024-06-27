@@ -1,24 +1,14 @@
-import {
-  CommunicationType,
-  UserCommunication,
-  UserCommunicationJourney,
-  UserCommunicationJourneyType,
-} from '@prisma/client'
+import { CommunicationType, UserCommunicationJourneyType } from '@prisma/client'
 import { NonRetriableError } from 'inngest'
 
 import { prismaClient } from '@/utils/server/prismaClient'
 
-export interface CommunicationJourney {
-  id: UserCommunicationJourney['id']
-  userCommunications: Array<{
-    messageId: UserCommunication['messageId']
-  }>
-}
+export type CreatedCommunicationJourney = Awaited<ReturnType<typeof createCommunicationJourney>>
 
 export async function createCommunicationJourney(
   phoneNumber: string,
   journeyType: UserCommunicationJourneyType,
-): Promise<CommunicationJourney[]> {
+) {
   const usersWithPhoneNumber = (
     await prismaClient.user.findMany({
       where: {
@@ -66,6 +56,7 @@ export async function createCommunicationJourney(
     },
     select: {
       id: true,
+      userId: true,
       userCommunications: {
         select: {
           messageId: true,
@@ -76,7 +67,7 @@ export async function createCommunicationJourney(
 }
 
 export async function createCommunication(
-  communicationJourneys: CommunicationJourney[],
+  communicationJourneys: CreatedCommunicationJourney,
   messageId: string,
 ) {
   await prismaClient.userCommunication.createMany({

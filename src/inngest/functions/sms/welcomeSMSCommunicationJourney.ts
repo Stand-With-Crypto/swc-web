@@ -3,12 +3,15 @@ import { NonRetriableError } from 'inngest'
 
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
+import { prismaClient } from '@/utils/server/prismaClient'
+import { getServerAnalytics } from '@/utils/server/serverAnalytics'
+import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
 import { smsProvider } from '@/utils/shared/smsProvider'
 
 import {
-  CommunicationJourney,
   createCommunication,
   createCommunicationJourney,
+  CreatedCommunicationJourney,
 } from './shared/communicationJourney'
 
 import { messagingClient, sendSMS } from '@/lib/sms'
@@ -55,10 +58,15 @@ export const welcomeSMSCommunicationJourney = inngest.createFunction(
     await step.run('create-user-communication', () =>
       createCommunication(communicationJourneys, message.sid),
     )
+
+    await step.run('track-user-opt-in', () => trackOptIn(communicationJourneys))
   },
 )
 
-async function sendMessage(phoneNumber: string, communicationJourneys: CommunicationJourney[]) {
+async function sendMessage(
+  phoneNumber: string,
+  communicationJourneys: CreatedCommunicationJourney,
+) {
   for (const communicationJourney of communicationJourneys) {
     for (const communication of communicationJourney.userCommunications) {
       const messageSent = await messagingClient.messages(communication.messageId).fetch()
@@ -76,4 +84,29 @@ async function sendMessage(phoneNumber: string, communicationJourneys: Communica
   }
 
   return message
+}
+
+async function trackOptIn(communicationJourneys: CreatedCommunicationJourney) {
+  const userIds = communicationJourneys.map(({ userId }) => userId)
+
+  const users = await prismaClient.user.findMany({
+    where: {
+      id: {
+        in: userIds,
+      },
+    },
+  })
+
+  for (const user of users) {
+    const localUser = getLocalUserFromUser(user)
+    const analytics = getServerAnalytics({
+      localUser,
+      userId: user.id,
+    })
+    await analytics
+      .track('User SMS Opt-In', {
+        provider: 'twilio',
+      })
+      .flush()
+  }
 }

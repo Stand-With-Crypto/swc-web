@@ -50,7 +50,11 @@ export const checkSMSOptInReplyWithInngest = inngest.createFunction(
         localUser,
         userId: data.user.id,
       })
-      await analytics.track('User SMS Opt-In').flush()
+      await analytics
+        .track('User SMS Opt-In', {
+          provider: 'capitol-canary',
+        })
+        .flush()
     })
 
     for (const sleepTime of SLEEP_SCHEDULE) {
