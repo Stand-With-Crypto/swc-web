@@ -39,12 +39,12 @@ export function CallIcon({ isPulsing = false, height = 40, width = 40, ...rest }
           cy="20"
           fill="none"
           r="18"
-          stroke="#7FDFBD"
+          stroke="#2B9D74"
           strokeLinecap="round"
           strokeWidth="4"
         >
-          <animate attributeName="r" dur="2s" repeatCount="indefinite" values="18;22;18" />
-          <animate attributeName="opacity" dur="2s" repeatCount="indefinite" values="1;0;1" />
+          <animate attributeName="r" begin="0s" dur="1s" fill="freeze" from="18" to="22" />
+          <animate attributeName="opacity" begin="1s" dur="1s" fill="freeze" from="1" to="0" />
         </circle>
       )}
     </svg>
@@ -88,12 +88,12 @@ export function EmailIcon({ isPulsing = false, height = 40, width = 40, ...rest 
           cy="20"
           fill="none"
           r="18"
-          stroke="#DA9DFF"
+          stroke="#9E00FF"
           strokeLinecap="round"
           strokeWidth="4"
         >
-          <animate attributeName="r" dur="2s" repeatCount="indefinite" values="18;22;18" />
-          <animate attributeName="opacity" dur="2s" repeatCount="indefinite" values="1;0;1" />
+          <animate attributeName="r" begin="0s" dur="1s" fill="freeze" from="18" to="22" />
+          <animate attributeName="opacity" begin="1s" dur="1s" fill="freeze" from="1" to="0" />
         </circle>
       )}
     </svg>
@@ -137,12 +137,12 @@ export function JoinIcon({ isPulsing = false, height = 40, width = 40, ...rest }
           cy="20"
           fill="none"
           r="18"
-          stroke="#C09AFF"
+          stroke="#6100FF"
           strokeLinecap="round"
           strokeWidth="4"
         >
-          <animate attributeName="r" dur="2s" repeatCount="indefinite" values="18;22;18" />
-          <animate attributeName="opacity" dur="2s" repeatCount="indefinite" values="1;0;1" />
+          <animate attributeName="r" begin="0s" dur="1s" fill="freeze" from="18" to="22" />
+          <animate attributeName="opacity" begin="1s" dur="1s" fill="freeze" from="1" to="0" />
         </circle>
       )}
     </svg>
@@ -195,8 +195,8 @@ export function VoterRegIcon({ isPulsing = false, height = 40, width = 40, ...re
           strokeLinecap="round"
           strokeWidth="4"
         >
-          <animate attributeName="r" dur="2s" repeatCount="indefinite" values="18;22;18" />
-          <animate attributeName="opacity" dur="2s" repeatCount="indefinite" values="1;0;1" />
+          <animate attributeName="r" begin="0s" dur="1s" fill="freeze" from="18" to="22" />
+          <animate attributeName="opacity" begin="1s" dur="1s" fill="freeze" from="1" to="0" />
         </circle>
       )}
     </svg>
