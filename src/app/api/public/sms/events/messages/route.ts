@@ -5,6 +5,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import twilio from 'twilio'
 
 import { GOODBYE_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME } from '@/inngest/functions/sms/goodbyeSMSCommunicationJourney'
+import { UNSTOP_CONFIRMATION_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME } from '@/inngest/functions/sms/unstopConfirmationSMSCommunicationJourney'
 import { inngest } from '@/inngest/inngest'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getServerAnalytics } from '@/utils/server/serverAnalytics'
@@ -148,6 +149,10 @@ async function optUserBackIn(phoneNumber: string) {
     },
   })
 
-  // TODO: call Unstop SMS Message
-  // TODO: log to mixpanel
+  await inngest.send({
+    name: UNSTOP_CONFIRMATION_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
+    data: {
+      phoneNumber,
+    },
+  })
 }

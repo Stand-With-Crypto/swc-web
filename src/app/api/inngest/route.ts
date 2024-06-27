@@ -17,6 +17,7 @@ import { setPrimaryCryptoAddressOfUserWithInngest } from '@/inngest/functions/se
 import {
   backfillSMSStatusField,
   goodbyeSMSCommunicationJourney,
+  unstopConfirmationSMSCommunicationJourney,
   welcomeSMSCommunicationJourney,
 } from '@/inngest/functions/sms'
 import { testCNNEmail } from '@/inngest/functions/testCNNEmail/testCNNEmail'
@@ -55,5 +56,6 @@ export const { GET, POST, PUT } = serve({
     backfillSMSStatusField,
     welcomeSMSCommunicationJourney,
     goodbyeSMSCommunicationJourney,
+    unstopConfirmationSMSCommunicationJourney,
   ],
 })
