@@ -4,7 +4,7 @@ describe('action - join stand with crypto', () => {
   it('should join stand with crypto, logout and ask for profile update once', () => {
     cy.visit('/')
 
-    cy.contains('Join Stand With Crypto').click()
+    cy.get('button').contains('Join Stand With Crypto').click()
 
     cy.waitForLogin()
 
@@ -16,7 +16,7 @@ describe('action - join stand with crypto', () => {
     cy.waitForLogout()
 
     // login again and assert that no profile is asked to be updated
-    cy.contains('Join Stand With Crypto').click()
+    cy.get('button').contains('Join Stand With Crypto').click()
 
     cy.waitForLogin()
     // click next to update profile and submit
