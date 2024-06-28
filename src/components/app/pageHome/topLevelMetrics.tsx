@@ -69,11 +69,11 @@ export function TopLevelMetrics({ locale, ...data }: Props & { locale: Supported
         amountUsd: formatCurrency(values.sumDonations.amountUsd),
         compactSWCAmountUsd: formatCurrency(
           values.sumDonations.amountUsd - values.sumDonations.fairshakeAmountUsd,
-          'compact',
+          'standard',
         ),
         compactFairshakeAmountUsd: formatCurrency(
           values.sumDonations.fairshakeAmountUsd,
-          'compact',
+          'standard',
         ),
       },
       countUsers: {
