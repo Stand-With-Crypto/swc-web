@@ -46,8 +46,6 @@ model Address {
   userActionCalls  UserActionCall[]
   users            User[]
 
-  @@index([countryCode])
-  @@index([administrativeAreaLevel1])
   @@map("address")
 }
 
