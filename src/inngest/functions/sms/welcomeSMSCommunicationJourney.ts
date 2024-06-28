@@ -3,6 +3,8 @@ import { NonRetriableError } from 'inngest'
 
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
+import { messagingClient, sendSMS } from '@/utils/server/sms'
+import * as messages from '@/utils/server/sms/messages'
 import { smsProvider } from '@/utils/shared/smsProvider'
 
 import {
@@ -10,9 +12,6 @@ import {
   createCommunicationJourneys,
   CreatedCommunicationJourneys,
 } from './shared/communicationJourney'
-
-import { messagingClient, sendSMS } from '@/lib/sms'
-import * as messages from '@/lib/sms/messages'
 
 export const WELCOME_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME =
   'app/user.communication/welcome.sms'

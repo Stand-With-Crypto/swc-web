@@ -9,9 +9,8 @@ import { UNSTOP_CONFIRMATION_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME } from
 import { inngest } from '@/inngest/inngest'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getServerAnalytics } from '@/utils/server/serverAnalytics'
+import { verifySignature } from '@/utils/server/sms'
 import { getLogger } from '@/utils/shared/logger'
-
-import { verifySignature } from '@/lib/sms'
 
 const SWC_STOP_SMS_KEYWORD = process.env.SWC_STOP_SMS_KEYWORD ?? ''
 const SWC_UNSTOP_SMS_KEYWORD = process.env.SWC_UNSTOP_SMS_KEYWORD ?? ''
