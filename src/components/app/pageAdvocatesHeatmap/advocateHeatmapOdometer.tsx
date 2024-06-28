@@ -4,7 +4,6 @@ import { useMemo } from 'react'
 
 import { TotalAdvocatesProps } from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmap.types'
 import { AnimatedNumericOdometer } from '@/components/ui/animatedNumericOdometer'
-import odometerStyles from '@/components/ui/animatedNumericOdometer/odometer.module.css'
 import { roundDownNumberByGranularityToAnimateIn } from '@/components/ui/animatedNumericOdometer/roundDownNumberToAnimateIn'
 import {
   getHomepageData,

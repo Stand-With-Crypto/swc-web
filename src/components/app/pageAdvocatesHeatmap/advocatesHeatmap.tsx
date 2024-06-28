@@ -17,7 +17,8 @@ import {
   createMarkersFromActions,
   MapMarker,
 } from '@/components/app/pageAdvocatesHeatmap/createMapMarkers'
-import { FormattedRelativeDatetime } from '@/components/ui/formattedRelativeDatetime'
+import { NextImage } from '@/components/ui/image'
+import { Skeleton } from '@/components/ui/skeleton'
 import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
 import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
 import { useApiAdvocateMap } from '@/hooks/useApiAdvocateMap'
@@ -36,7 +37,6 @@ const MapComponent = ({
   markers,
   handleStateMouseHover,
   handleStateMouseOut,
-  locale,
   isEmbedded,
 }: {
   markers: MapMarker[]
@@ -119,12 +119,7 @@ const MapComponent = ({
                     return null
                   }
 
-                  const creationTime = FormattedRelativeDatetime({
-                    date: new Date(datetimeCreated),
-                    locale,
-                  })
-
-                  const currentActionInfo = `${currentIconActionType.labelActionTooltip} in ${name} ${creationTime.toLowerCase()}`
+                  const currentActionInfo = `Someone in ${name} ${currentIconActionType.labelActionTooltip}`
                   const IconComponent = currentIconActionType.icon
 
                   return (
@@ -189,6 +184,27 @@ export function AdvocatesHeatmap({
   const handleClearPressedState = () => {
     setMousePosition(null)
     setHoveredStateName(null)
+  }
+
+  if (advocatesPerState.isLoading || actions.isLoading) {
+    return (
+      <div className="flex h-full flex-col items-start px-2 py-6">
+        <div className="flex h-full w-full flex-col items-center gap-4 md:flex-row">
+          <Skeleton
+            childrenClassName="visible"
+            className="flex h-[500px] w-full items-center justify-center bg-transparent"
+          >
+            <NextImage
+              alt={'Stand With Crypto Logo'}
+              height={120}
+              priority
+              src="/logo/shield.svg"
+              width={121}
+            />
+          </Skeleton>
+        </div>
+      </div>
+    )
   }
 
   return (

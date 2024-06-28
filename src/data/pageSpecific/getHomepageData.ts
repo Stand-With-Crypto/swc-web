@@ -27,7 +27,7 @@ interface GetHomePageDataProps {
   recentActivityLimit?: number
 }
 
-export async function getHomepageData(props: GetHomePageDataProps) {
+export async function getHomepageData(props?: GetHomePageDataProps) {
   const [
     { sumDonations, countUsers, countPolicymakerContacts },
     actions,

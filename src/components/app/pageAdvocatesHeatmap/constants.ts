@@ -80,24 +80,24 @@ export const ADVOCATES_ACTIONS: Partial<
     icon: CallIcon,
     label: 'called their rep',
     labelMobile: 'called',
-    labelActionTooltip: 'Called',
+    labelActionTooltip: 'called their rep',
   },
   EMAIL: {
     icon: EmailIcon,
     label: 'emailed their rep',
     labelMobile: 'emailed',
-    labelActionTooltip: 'Emailed',
+    labelActionTooltip: 'emailed their rep',
   },
   OPT_IN: {
     icon: JoinIcon,
     label: 'joined',
     labelMobile: 'joined',
-    labelActionTooltip: 'Joined',
+    labelActionTooltip: 'joined SWC',
   },
   VOTER_REGISTRATION: {
     icon: VoterRegIcon,
     label: 'registered to vote',
     labelMobile: 'reg. to vote',
-    labelActionTooltip: 'Registered',
+    labelActionTooltip: 'registered to vote',
   },
 }
