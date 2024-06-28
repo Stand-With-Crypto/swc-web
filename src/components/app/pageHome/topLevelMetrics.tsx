@@ -52,11 +52,15 @@ export function TopLevelMetrics({ locale, ...data }: Props & { locale: Supported
   const values = useApiHomepageTopLevelMetrics(decreasedInitialValues).data
 
   const formatCurrency = useCallback(
-    (value: number, notation?: Intl.NumberFormatOptions['notation']) => {
+    (
+      value: number,
+      notation?: Intl.NumberFormatOptions['notation'],
+      maximumFractionDigits: number = 0,
+    ) => {
       return intlNumberFormat(locale, {
         style: 'currency',
         currency: SupportedFiatCurrencyCodes.USD,
-        maximumFractionDigits: 0,
+        maximumFractionDigits,
         notation,
       }).format(value)
     },
@@ -69,11 +73,13 @@ export function TopLevelMetrics({ locale, ...data }: Props & { locale: Supported
         amountUsd: formatCurrency(values.sumDonations.amountUsd),
         compactSWCAmountUsd: formatCurrency(
           values.sumDonations.amountUsd - values.sumDonations.fairshakeAmountUsd,
-          'standard',
+          'compact',
+          2,
         ),
         compactFairshakeAmountUsd: formatCurrency(
           values.sumDonations.fairshakeAmountUsd,
-          'standard',
+          'compact',
+          2,
         ),
       },
       countUsers: {
