@@ -25,7 +25,6 @@ interface RenderMapProps {
   locale: SupportedLocale
   homepageData: Awaited<ReturnType<typeof getHomepageData>>
   advocatesMapPageData: Awaited<ReturnType<typeof getAdvocatesMapData>>
-  topStatesLimit?: number
   isEmbedded?: boolean
 }
 
@@ -139,13 +138,10 @@ export function AdvocatesHeatmap({
   locale,
   homepageData,
   advocatesMapPageData,
-  topStatesLimit = 5,
   isEmbedded,
 }: RenderMapProps) {
   const actions = useApiRecentActivity(homepageData.actions, { limit: 10 })
-  const advocatesPerState = useApiAdvocateMap(advocatesMapPageData, {
-    topStatesLimit,
-  })
+  const advocatesPerState = useApiAdvocateMap(advocatesMapPageData)
 
   const markers = useMemo(() => createMarkersFromActions(actions.data), [actions.data])
 

@@ -115,8 +115,7 @@ Sentry.init({
 
     // force group error names
     try {
-      const error = hint.originalException as Error
-      const errorMessage = error?.message
+      const errorMessage = getErrorMessage(hint.originalException)
       console.log('error message to match against COMMON_ERROR_MESSAGES_TO_GROUP', errorMessage)
       if (errorMessage) {
         COMMON_ERROR_MESSAGES_TO_GROUP.forEach(message => {
@@ -135,3 +134,15 @@ Sentry.init({
     return event
   },
 })
+
+function getErrorMessage(error: unknown) {
+  if (error instanceof Error) {
+    return error.message
+  }
+
+  if (error instanceof PromiseRejectionEvent) {
+    return JSON.stringify(error.reason)
+  }
+
+  return JSON.stringify(error)
+}

@@ -1,5 +1,4 @@
-import { differenceInDays, differenceInHours, differenceInMinutes, format } from 'date-fns'
-import path from 'path'
+import { format, startOfMonth, startOfWeek } from 'date-fns'
 import xlsx from 'xlsx'
 
 import { runBin } from '@/bin/runBin'
@@ -7,42 +6,71 @@ import { fetchReq } from '@/utils/shared/fetchReq'
 
 const GITHUB_API_URL = 'https://api.github.com/graphql'
 
+interface GithubProjectDataIssueNode {
+  state: string
+  stateReason: string
+  url: string
+  updatedAt: string
+  closedAt: string
+  createdAt: string
+  repository: {
+    name: string
+  }
+  milestone?: {
+    title: string
+  }
+  assignees: {
+    nodes: {
+      name: string
+      login: string
+    }[]
+  }
+  title: string
+  labels?: {
+    nodes: {
+      name: string
+    }[]
+  }
+  projectItems?: {
+    nodes?: [
+      {
+        effortTechnical?: {
+          value:
+            | '1 - less than a day'
+            | '2 - less than 3 days'
+            | '3 - less than a week'
+            | '4 - less than 2 weeks'
+            | '5 - greater than 2 weeks'
+        }
+        effortNontechnical?: {
+          value:
+            | '1 - less than a day'
+            | '2 - less than 3 days'
+            | '3 - less than a week'
+            | '4 - less than 2 weeks'
+            | '5 - greater than 2 weeks'
+        }
+        status?: {
+          value: string
+        }
+        impact?: {
+          value: string
+        }
+        issueType?: {
+          value: string
+        }
+        longTermEffort?: {
+          number: number
+        }
+      },
+    ]
+  }
+}
 interface GithubProjectDataResponse {
   data: {
     repository: {
-      issues: {
-        nodes: Array<{
-          state: string
-          url: string
-          updatedAt: string
-          closedAt: string
-          createdAt: string
-          repository: {
-            name: string
-          }
-          assignees: {
-            nodes: {
-              name: string
-              login: string
-            }[]
-          }
-          title: string
-          projectItems?: {
-            nodes?: [
-              {
-                effort?: {
-                  value: string
-                }
-                impact?: {
-                  value: string
-                }
-                issueType?: {
-                  value: string
-                }
-              },
-            ]
-          }
-        }>
+      issues?: {
+        nodes: Array<GithubProjectDataIssueNode>
         pageInfo: {
           hasNextPage: boolean
           endCursor?: string
@@ -51,8 +79,6 @@ interface GithubProjectDataResponse {
     }
   }
 }
-
-type GithubProjectDataIssues = GithubProjectDataResponse['data']['repository']['issues']['nodes']
 
 export const GITHUB_PROJECT_DATA_QUERY = /* GraphQL */ `
   query ($owner: String!, $name: String!, $after: String) {
@@ -64,9 +90,13 @@ export const GITHUB_PROJECT_DATA_QUERY = /* GraphQL */ `
           url
           updatedAt
           closedAt
+          stateReason
           createdAt
           repository {
             name
+          }
+          milestone {
+            title
           }
           assignees(first: 5, last: null) {
             nodes {
@@ -74,9 +104,24 @@ export const GITHUB_PROJECT_DATA_QUERY = /* GraphQL */ `
               login
             }
           }
+          labels(first: 10) {
+            nodes {
+              name
+            }
+          }
           projectItems(first: 100) {
             nodes {
-              effort: fieldValueByName(name: "Effort") {
+              status: fieldValueByName(name: "Status") {
+                ... on ProjectV2ItemFieldSingleSelectValue {
+                  value: name
+                }
+              }
+              effortTechnical: fieldValueByName(name: "Effort - Technical") {
+                ... on ProjectV2ItemFieldSingleSelectValue {
+                  value: name
+                }
+              }
+              effortNontechnical: fieldValueByName(name: "Effort - Nontechnical") {
                 ... on ProjectV2ItemFieldSingleSelectValue {
                   value: name
                 }
@@ -89,6 +134,11 @@ export const GITHUB_PROJECT_DATA_QUERY = /* GraphQL */ `
               issueType: fieldValueByName(name: "Issue Type") {
                 ... on ProjectV2ItemFieldSingleSelectValue {
                   value: name
+                }
+              }
+              longTermEffort: fieldValueByName(name: "Long Term Effort - Weeks") {
+                ... on ProjectV2ItemFieldNumberValue {
+                  number
                 }
               }
             }
@@ -104,7 +154,7 @@ export const GITHUB_PROJECT_DATA_QUERY = /* GraphQL */ `
 `
 
 async function getGithubProjectData(
-  issues: GithubProjectDataIssues,
+  issues: GithubProjectDataIssueNode[],
   repositoryName: string,
   after?: string,
 ) {
@@ -127,137 +177,82 @@ async function getGithubProjectData(
   const { data } = (await response.json()) as GithubProjectDataResponse
   const repository = data.repository
   const repositoryIssues = repository?.issues
+  if (repositoryIssues) {
+    issues.push(...repositoryIssues.nodes)
 
-  issues.push(...repositoryIssues.nodes)
-
-  if (repositoryIssues.pageInfo.hasNextPage) {
-    await getGithubProjectData(issues, repositoryName, repositoryIssues.pageInfo.endCursor)
+    if (repositoryIssues.pageInfo.hasNextPage) {
+      await getGithubProjectData(issues, repositoryName, repositoryIssues.pageInfo.endCursor)
+    }
   }
 }
 
 async function generateProjectData() {
-  const issues: GithubProjectDataIssues = []
+  const issues: GithubProjectDataIssueNode[] = []
 
   await getGithubProjectData(issues, 'swc-web')
   await getGithubProjectData(issues, 'swc-internal')
 
-  await generateProjectDataOverview(issues)
-  await generateProjectDataByAssignee(issues)
+  await writeProjectData(issues)
 }
 
 void runBin(generateProjectData)
 
-async function generateProjectDataOverview(issues: GithubProjectDataIssues) {
-  const workbook = xlsx.utils.book_new()
-
-  const closedIssues = issues.filter(issue => issue.state === 'CLOSED')
-  const closedIssuesByMonth = closedIssues.reduce(
-    (acc, issue) => {
-      const closedAtKey = format(new Date(issue.closedAt), 'yyyy-MM (MMMM)')
-
-      if (!acc[closedAtKey]) {
-        acc[closedAtKey] = []
-      }
-
-      acc[closedAtKey].push(issue)
-
-      return acc
-    },
-    {} as Record<string, GithubProjectDataIssues>,
-  )
-  const closedIssuesByMonthOrderedDesc = Object.entries(closedIssuesByMonth).sort(([a], [b]) => {
-    return new Date(b).getTime() - new Date(a).getTime()
-  })
-
-  closedIssuesByMonthOrderedDesc.forEach(([month, _issues]) => {
-    const worksheet = xlsx.utils.json_to_sheet(
-      _issues.map((item: GithubProjectDataIssues[0]) => {
-        const days = differenceInDays(new Date(item.closedAt), new Date(item.createdAt))
-        const hours = differenceInHours(new Date(item.closedAt), new Date(item.createdAt)) % 24
-        const minutes = differenceInMinutes(new Date(item.closedAt), new Date(item.createdAt)) % 60
-
-        const timePassed = []
-        if (days > 0) timePassed.push(`${days} days`)
-        if (hours > 0) timePassed.push(`${hours} hours`)
-        if (minutes > 0) timePassed.push(`${minutes} minutes`)
-
-        return {
-          ['Issue Title']: item.title,
-          ['Assignee']: item.assignees.nodes[0]?.name ?? item.assignees.nodes[0]?.login ?? '---',
-          ['Effort']: item?.projectItems?.nodes?.[0]?.effort?.value ?? '---',
-          ['Impact']: item?.projectItems?.nodes?.[0]?.impact?.value ?? '---',
-          ['Issue Type']: item?.projectItems?.nodes?.[0]?.issueType?.value ?? '---',
-          ['Repo']: item?.repository?.name ?? '---',
-          ['Url']: item.url,
-          ['Created']: format(new Date(item.createdAt), 'yyyy-MM-dd'),
-          ['Closed']: format(new Date(item.closedAt), 'yyyy-MM-dd'),
-          ['Time to Close']: timePassed.join(', '),
-          state: item.state === 'CLOSED' ? 'Closed' : 'Open',
-        }
-      }),
-    )
-
-    xlsx.utils.book_append_sheet(workbook, worksheet, month)
-  })
-
-  await xlsx.writeFile(workbook, path.join(__dirname, 'projectReportByMonth.xlsx'))
+function getComputedDaysOfEffort(issue: GithubProjectDataIssueNode) {
+  const longTermEffort = issue?.projectItems?.nodes?.[0]?.longTermEffort?.number
+  const effort = issue?.projectItems?.nodes?.[0]?.effortTechnical?.value
+  if (longTermEffort) {
+    return longTermEffort * 5
+  }
+  switch (effort) {
+    case '1 - less than a day':
+      return 1
+    case '2 - less than 3 days':
+      return 3
+    case '3 - less than a week':
+      return 5
+    case '4 - less than 2 weeks':
+      return 10
+    case '5 - greater than 2 weeks':
+      throw new Error(
+        `getComputedDaysOfEffort expected a Long Term Effort for effort sizing of 5: ${issue.url}`,
+      )
+  }
 }
 
-async function generateProjectDataByAssignee(issues: GithubProjectDataIssues) {
+async function writeProjectData(issues: GithubProjectDataIssueNode[]) {
   const workbook = xlsx.utils.book_new()
 
-  const closedIssues = issues.filter(issue => issue.state === 'CLOSED')
-
-  const issuesByAssignee = closedIssues.reduce(
-    (acc, issue) => {
-      const assignee = issue.assignees.nodes[0]
-      if (!assignee) return acc
-
-      if (!acc[assignee.login]) {
-        acc[assignee.login] = []
-      }
-
-      acc[assignee.login].push(issue)
-
-      return acc
-    },
-    {} as Record<string, GithubProjectDataResponse['data']['repository']['issues']['nodes']>,
-  )
-
-  Object.entries(issuesByAssignee).forEach(([assignee, _issues]) => {
-    const issuesOrderedDesc = _issues.sort((a, b) => {
-      return new Date(b.closedAt).getTime() - new Date(a.closedAt).getTime()
-    })
-
-    const worksheet = xlsx.utils.json_to_sheet(
-      issuesOrderedDesc.map((item: GithubProjectDataIssues[0]) => {
-        const days = differenceInDays(new Date(item.closedAt), new Date(item.createdAt))
-        const hours = differenceInHours(new Date(item.closedAt), new Date(item.createdAt)) % 24
-        const minutes = differenceInMinutes(new Date(item.closedAt), new Date(item.createdAt)) % 60
-
-        const timePassed = []
-        if (days > 0) timePassed.push(`${days} days`)
-        if (hours > 0) timePassed.push(`${hours} hours`)
-        if (minutes > 0) timePassed.push(`${minutes} minutes`)
-
-        return {
-          ['Issue Title']: item.title,
-          ['Assignee']: item.assignees.nodes[0]?.name ?? item.assignees.nodes[0]?.login ?? '---',
-          ['Effort']: item?.projectItems?.nodes?.[0]?.effort?.value ?? '---',
-          ['Impact']: item?.projectItems?.nodes?.[0]?.impact?.value ?? '---',
-          ['Issue Type']: item?.projectItems?.nodes?.[0]?.issueType?.value ?? '---',
-          ['Repo']: item?.repository?.name ?? '---',
-          ['Url']: item.url,
-          ['Created']: format(new Date(item.createdAt), 'yyyy-MM-dd'),
-          ['Closed']: format(new Date(item.closedAt), 'yyyy-MM-dd'),
-          ['Time to Close']: timePassed.join(', '),
-          state: item.state === 'CLOSED' ? 'Closed' : 'Open',
-        }
-      }),
-    )
-
-    xlsx.utils.book_append_sheet(workbook, worksheet, assignee)
+  const issuesOrderedDesc = issues.sort((a, b) => {
+    return new Date(b.closedAt).getTime() - new Date(a.closedAt).getTime()
   })
+  const rows = issuesOrderedDesc.flatMap((item: GithubProjectDataIssueNode) => {
+    return (item.assignees.nodes.length ? item.assignees.nodes : [null]).map(assignee => {
+      return {
+        ['Issue Title']: item.title,
+        ['Assignee']: assignee?.name ?? assignee?.login,
+        ['Effort - Technical']: item?.projectItems?.nodes?.[0]?.effortTechnical?.value,
+        ['Effort - Nontechnical']: item?.projectItems?.nodes?.[0]?.effortNontechnical?.value,
+        ['Impact']: item?.projectItems?.nodes?.[0]?.impact?.value,
+        ['Status']: item?.projectItems?.nodes?.[0]?.status?.value,
+        ['Issue Type']: item?.projectItems?.nodes?.[0]?.issueType?.value,
+        ['Repo']: item?.repository?.name,
+        ['Url']: item.url,
+        ['Created']: format(new Date(item.createdAt), 'yyyy-MM-dd'),
+        ['Closed Date']: format(new Date(item.closedAt), 'yyyy-MM-dd'),
+        ['Closed Week']: format(startOfWeek(new Date(item.closedAt)), 'yyyy-MM-dd'),
+        ['Closed Month']: format(startOfMonth(new Date(item.closedAt)), 'yyyy-MM-dd'),
+        ['Milestone']: item.milestone?.title,
+        State:
+          item.state === 'CLOSED' && item.stateReason === 'NOT_PLANNED'
+            ? 'CLOSED_NOT_PLANNED'
+            : item.state,
+        ['Computed - Days Of Effort']: getComputedDaysOfEffort(item),
+        ['Labels']: item.labels?.nodes.map(label => label.name).join(', '),
+      }
+    })
+  })
+  const worksheet = xlsx.utils.json_to_sheet(rows)
 
-  await xlsx.writeFile(workbook, path.join(__dirname, 'projectReportByAssignee.xlsx'))
+  xlsx.utils.book_append_sheet(workbook, worksheet, 'Main')
+  await xlsx.writeFile(workbook, './src/bin/localCache/projectReport.xlsx')
 }

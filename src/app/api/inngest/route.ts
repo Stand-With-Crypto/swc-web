@@ -20,7 +20,6 @@ import {
   unstopConfirmationSMSCommunicationJourney,
   welcomeSMSCommunicationJourney,
 } from '@/inngest/functions/sms'
-import { testCNNEmail } from '@/inngest/functions/testCNNEmail/testCNNEmail'
 import {
   auditUsersTotalDonationAmountUsdInngest,
   auditUsersTotalDonationAmountUsdInngestAuditBatchOfUsers,
@@ -52,7 +51,6 @@ export const { GET, POST, PUT } = serve({
     backfillUsersTotalDonationAmountUsdInngestUpdateBatchOfUsers,
     auditUsersTotalDonationAmountUsdInngest,
     auditUsersTotalDonationAmountUsdInngestAuditBatchOfUsers,
-    testCNNEmail,
     backfillSMSStatusField,
     welcomeSMSCommunicationJourney,
     goodbyeSMSCommunicationJourney,
