@@ -272,7 +272,7 @@ const nextConfig = {
       {
         source: '/action/email-cnn',
         destination: '/',
-        permanent: true,
+        permanent: false,
       },
       // tweet at person campaigns
       {
