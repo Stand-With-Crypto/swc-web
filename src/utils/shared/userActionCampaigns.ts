@@ -19,10 +19,12 @@ export enum UserActionEmailCampaignName {
   FIT21_2024_04 = 'EMAIL_YOUR_CONGRESSPERSON_FIT21_2024_04',
   FIT21_2024_04_FOLLOW_UP = 'EMAIL_YOUR_CONGRESSPERSON_FIT21_2024_04_FOLLOW_UP',
   CNN_PRESIDENTIAL_DEBATE_2024 = 'CNN_PRESIDENTIAL_DEBATE_2024',
+  SUMMER_2024_SENATE_BILL_CAMPAIGN = 'SUMMER_2024_SENATE_BILL_CAMPAIGN',
 }
 export enum UserActionCallCampaignName {
   DEFAULT = 'CALL_YOUR_CONGRESSPERSON_FIT21',
   FIT21_2024_04 = 'EMAIL_YOUR_CONGRESSPERSON_FIT21_2024_04',
+  SUMMER_2024_SENATE_BILL_CAMPAIGN = 'SUMMER_2024_SENATE_BILL_CAMPAIGN',
 }
 export enum UserActionDonationCampaignName {
   DEFAULT = 'DEFAULT',
@@ -83,8 +85,8 @@ export const USER_ACTION_TO_CAMPAIGN_NAME_MAP = {
 } satisfies Record<ActiveClientUserActionWithCampaignType, any>
 
 export const USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
-  [UserActionType.EMAIL]: UserActionEmailCampaignName.FIT21_2024_04_FOLLOW_UP,
-  [UserActionType.CALL]: UserActionCallCampaignName.FIT21_2024_04,
+  [UserActionType.EMAIL]: UserActionEmailCampaignName.SUMMER_2024_SENATE_BILL_CAMPAIGN,
+  [UserActionType.CALL]: UserActionCallCampaignName.SUMMER_2024_SENATE_BILL_CAMPAIGN,
   [UserActionType.DONATION]: UserActionDonationCampaignName.DEFAULT,
   [UserActionType.OPT_IN]: UserActionOptInCampaignName.DEFAULT,
   [UserActionType.TWEET]: UserActionTweetCampaignName.DEFAULT,
