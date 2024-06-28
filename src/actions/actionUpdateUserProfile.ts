@@ -4,6 +4,7 @@ import 'server-only'
 import {
   Address,
   CapitolCanaryInstance,
+  SMSStatus,
   User,
   UserCryptoAddress,
   UserEmailAddress,
@@ -15,6 +16,7 @@ import { getClientAddress } from '@/clientModels/clientAddress'
 import { getClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
 import { getENSDataFromCryptoAddressAndFailGracefully } from '@/data/web3/getENSDataFromCryptoAddress'
 import { CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/capitolCanary/upsertAdvocateInCapitolCanary'
+import { WELCOME_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME } from '@/inngest/functions/sms/welcomeSMSCommunicationJourney'
 import { inngest } from '@/inngest/inngest'
 import { appRouterGetAuthUser } from '@/utils/server/authentication/appRouterGetAuthUser'
 import {
@@ -121,6 +123,7 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
       phoneNumber,
       hasOptedInToMembership,
       hasOptedInToSms,
+      smsStatus: hasOptedInToSms ? SMSStatus.OPTED_IN : SMSStatus.NOT_OPTED_IN,
       addressId: address?.id || null,
       primaryUserEmailAddressId: primaryUserEmailAddress?.id || null,
     },
@@ -130,11 +133,21 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
     },
   })
 
+  // If the user keeps the same phone number we shouldn't send a message
+  if (hasOptedInToSms && phoneNumber && user.phoneNumber !== phoneNumber) {
+    await inngest.send({
+      name: WELCOME_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
+      data: {
+        phoneNumber,
+      },
+    })
+  }
   await handleCapitolCanaryAdvocateUpsert(updatedUser, primaryUserEmailAddress, user)
   await claimOptInNFTIfNotClaimed({
     id: user.id,
     primaryUserCryptoAddress: updatedUser.primaryUserCryptoAddress,
   })
+
   return {
     user: {
       ...getClientUserWithENSData(

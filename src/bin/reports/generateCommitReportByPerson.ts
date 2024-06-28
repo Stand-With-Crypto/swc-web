@@ -1,6 +1,5 @@
 import { format } from 'date-fns'
 import { debounce } from 'lodash-es'
-import path from 'path'
 import xlsx from 'xlsx'
 
 import { runBin } from '@/bin/runBin'
@@ -177,5 +176,5 @@ async function generateCommitReportByPerson(commits: Commit[]) {
     xlsx.utils.book_append_sheet(workbook, worksheet, `${author} - ${_commits.length} commits`)
   })
 
-  await xlsx.writeFile(workbook, path.join(__dirname, 'commitsReportByPerson.xlsx'))
+  await xlsx.writeFile(workbook, './src/bin/localCache/commitsReportByPerson.xlsx')
 }
