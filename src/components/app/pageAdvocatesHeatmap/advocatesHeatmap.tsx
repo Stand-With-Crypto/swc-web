@@ -158,7 +158,7 @@ export function AdvocatesHeatmap({
   advocatesMapPageData,
   isEmbedded,
 }: RenderMapProps) {
-  const actions = useApiRecentActivity(homepageData.actions, { limit: 10 })
+  const actions = useApiRecentActivity(homepageData.actions, { limit: 20 })
   const advocatesPerState = useApiAdvocateMap(advocatesMapPageData)
 
   const markers = useMemo(() => createMarkersFromActions(actions.data), [actions.data])
