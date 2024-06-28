@@ -268,6 +268,12 @@ const nextConfig = {
         destination: '/resources/fit21/docs/FIT21%20SWC%20Founder%20Support%20Letter.pdf',
         permanent: true,
       },
+      // cnn debate campaign
+      {
+        source: '/action/email-cnn',
+        destination: '/',
+        permanent: true,
+      },
       // tweet at person campaigns
       {
         source: '/pizza',
