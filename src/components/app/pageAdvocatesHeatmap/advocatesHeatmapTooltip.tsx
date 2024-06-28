@@ -51,7 +51,7 @@ export function TotalAdvocatesPerStateTooltip({
 
   return (
     <div
-      className={`pointer-events-none fixed z-50 flex h-[46px] w-[${tooltipWidthBasedOnTextLength}px] items-center justify-center rounded-2xl bg-black px-4 font-sans text-base text-white`}
+      className={cn('pointer-events-none fixed z-50 flex h-[46px] items-center justify-center rounded-2xl bg-black px-4 font-sans text-base text-white', `w-[${tooltipWidthBasedOnTextLength}px]`)}
       style={{
         top: mousePosition.y,
         left: adjustedX,
