@@ -1,12 +1,9 @@
 import { ReactNode } from 'react'
 import { ArrowUpRight } from 'lucide-react'
-import NextLink from 'next/link'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
-import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
+import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
 import { Button } from '@/components/ui/button'
-import { HowToVoteIcon } from '@/components/ui/icons/howToVote'
-import { LiveTVIcon } from '@/components/ui/icons/liveTv'
 import { NextImage } from '@/components/ui/image'
 import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
 import { Video } from '@/components/ui/video'
@@ -71,12 +68,12 @@ const unauthenticatedContent = (
 )
 
 const authenticatedContent = (
-  <UserActionFormEmailCongresspersonDialog>
+  <UserActionFormVoterRegistrationDialog>
     <HeroImage
       className="flex-col sm:flex-row"
       fallback={
         <NextImage
-          alt="Email your rep"
+          alt="Free NFT given out when you register to vote."
           blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOM8FqyAgAEOAHwiAoWHAAAAABJRU5ErkJggg=="
           className="h-full w-full object-cover"
           fill
@@ -87,19 +84,16 @@ const authenticatedContent = (
         />
       }
     >
-      <p>
-        FIT21 is a bipartisan crypto bill being considered for a vote in Congress. Ask your Rep to
-        support its clear, commonsense rules for crypto today.
-      </p>
+      <p>Register to vote or check your voter registration and get a free “I’m a Voter” NFT</p>
       <Button
         className={cn('max-sm:w-full', linkBoxLinkClassName)}
         data-link-box-subject
         variant="secondary"
       >
-        Email your Rep <ArrowUpRight />
+        Register <ArrowUpRight />
       </Button>
     </HeroImage>
-  </UserActionFormEmailCongresspersonDialog>
+  </UserActionFormVoterRegistrationDialog>
 )
 
 export function HeroImageWrapper() {
@@ -107,49 +101,5 @@ export function HeroImageWrapper() {
     <LoginDialogWrapper authenticatedContent={authenticatedContent}>
       {unauthenticatedContent}
     </LoginDialogWrapper>
-  )
-}
-
-export function CNNDebateHeroImage() {
-  return (
-    <NextLink href="/events/cnn-debate">
-      <LinkBox className="relative h-[320px] overflow-hidden md:rounded-xl lg:h-[400px]">
-        <div
-          className="h-full w-full"
-          style={{
-            background: 'radial-gradient(69.92% 69.92% at 50% 48.88%, #8E49FF 0%, #6100FF 100%)',
-          }}
-        >
-          <div className="flex flex-col gap-4 p-10">
-            <div className="flex gap-2">
-              <LiveTVIcon />
-              <HowToVoteIcon />
-            </div>
-            <div className="flex flex-col gap-2">
-              <p className="font-sans text-4xl font-bold leading-normal text-background">
-                CRYPTO VOTES
-              </p>
-              <p className="text-2xl font-normal leading-normal text-background">
-                Debate watch party
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div
-          className="absolute bottom-0 flex w-full items-center justify-between gap-4 p-4 text-sm text-white"
-          style={{
-            background:
-              'linear-gradient(to top, hsla(0, 0%, 0%, 0.8) 10%, hsla(0, 0%, 0%, 0.4) 70%,  transparent 100%)',
-          }}
-        >
-          <p>Find a debate watch party near you</p>
-          <Button className={linkBoxLinkClassName} data-link-box-subject variant="secondary">
-            View events
-            <ArrowUpRight />
-          </Button>
-        </div>
-      </LinkBox>
-    </NextLink>
   )
 }
