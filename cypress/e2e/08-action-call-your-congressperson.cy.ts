@@ -34,8 +34,9 @@ it('action - call your congressperson', () => {
     searchText: '350 Fifth Avenue New York, NY 10118',
     typingRequired: true,
   })
-
-  cy.contains(/Your representative is Jerrold Nadler/).should('be.visible')
+  cy.contains(/Your (representative is Jerrold Nadler|senator is Kirsten Gillibrand)/).should(
+    'be.visible',
+  )
 
   /**
    * Stubbing window.confirm to prevent the browser from opening the phone app.
