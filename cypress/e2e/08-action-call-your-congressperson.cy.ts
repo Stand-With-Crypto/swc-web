@@ -34,7 +34,7 @@ it('action - call your congressperson', () => {
     searchText: '350 Fifth Avenue New York, NY 10118',
     typingRequired: true,
   })
-  cy.contains(/Your (representative is Jerrold Nadler|senator is Kirsten Gillibrand)/).should(
+  cy.contains(/Your (representative is Jerrold Nadler|senator is Simeon Hodkiewicz MD)/).should(
     'be.visible',
   )
 
