@@ -9,7 +9,6 @@ import {
   RecentActivityRowProps,
 } from '@/components/app/recentActivityRow/recentActivityRow'
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
-import { UserActionFormEmailCNNDialog } from '@/components/app/userActionFormEmailCNN/dialog'
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
@@ -135,11 +134,6 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
 
         if (isCNNEmailCampaign) {
           return {
-            onFocusContent: () => (
-              <UserActionFormEmailCNNDialog>
-                <Button>Email CNN</Button>
-              </UserActionFormEmailCNNDialog>
-            ),
             children: <MainText>Email sent to CNN</MainText>,
           }
         }

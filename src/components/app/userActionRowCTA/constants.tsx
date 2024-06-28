@@ -5,7 +5,6 @@ import { UserActionType } from '@prisma/client'
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { CALL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormCallCongressperson/constants'
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
-import { UserActionFormEmailCNNDialog } from '@/components/app/userActionFormEmailCNN/dialog'
 import { EMAIL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormEmailCongressperson/constants'
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
@@ -17,10 +16,7 @@ import { useLocale } from '@/hooks/useLocale'
 import { ActiveClientUserActionType } from '@/utils/shared/activeUserAction'
 import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
 import { getIntlUrls } from '@/utils/shared/urls'
-import {
-  USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
-  UserActionEmailCampaignName,
-} from '@/utils/shared/userActionCampaigns'
+import { USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns'
 import { getYourPoliticianCategoryShortDisplayName } from '@/utils/shared/yourPoliticianCategory'
 
 export const USER_ACTION_ROW_CTA_INFO: Record<
@@ -127,20 +123,7 @@ export const USER_ACTION_ROW_CTA_INFO: Record<
 export const USER_ACTION_ROW_CTA_INFO_FROM_CAMPAIGN: Record<
   string,
   Omit<UserActionRowCTAProps, 'state'>
-> = {
-  [UserActionEmailCampaignName.CNN_PRESIDENTIAL_DEBATE_2024]: {
-    actionType: UserActionType.EMAIL,
-    image: {
-      src: '/actionTypeIcons/email-cnn.svg',
-    },
-    text: 'Ask CNN to include crypto questions at the Presidential Debate',
-    subtext: 'Send an email to CNN and tell them we need the candidates’ stance on crypto',
-    shortText: 'Email CNN to ask about crypto',
-    shortSubtext: 'Send an email to CNN and tell them we need the candidates’ stance on crypto.',
-    canBeTriggeredMultipleTimes: true,
-    WrapperComponent: UserActionFormEmailCNNDialog,
-  },
-}
+> = {}
 
 export function getUserActionCTAInfo(actionType: ActiveClientUserActionType, campaign?: string) {
   if (!campaign || campaign === USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[actionType]) {
