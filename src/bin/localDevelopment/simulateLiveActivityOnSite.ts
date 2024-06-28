@@ -38,7 +38,14 @@ async function simulateLiveActivityOnSite() {
 void runBin(simulateLiveActivityOnSite)
 
 async function createUser() {
-  const user = await prismaClient.user.create({ data: mockCreateUserInput() })
+  const user = await prismaClient.user.create({
+    data: {
+      ...mockCreateUserInput(),
+      address: {
+        create: mockCreateAddressInput(),
+      },
+    },
+  })
   const authType = faker.helpers.arrayElement([
     'session' as const,
     'email' as const,
@@ -207,7 +214,7 @@ async function createAction(user: Awaited<ReturnType<typeof createUser>>) {
           ...mockAction,
           userActionTweetAtPerson: {
             create: {
-              ...mockUserActionTweetAtPerson(),
+              recipientDtsiSlug: mockUserActionTweetAtPerson().recipientDtsiSlug,
             },
           },
         },

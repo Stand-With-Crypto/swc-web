@@ -72,23 +72,32 @@ export const ADVOCATES_ACTIONS: Partial<
       icon: (args: IconProps) => JSX.Element
       label: string
       labelMobile: string
+      labelActionTooltip: string
     }
   >
 > = {
-  CALL: { icon: CallIcon, label: 'called their rep', labelMobile: 'called' },
+  CALL: {
+    icon: CallIcon,
+    label: 'called their rep',
+    labelMobile: 'called',
+    labelActionTooltip: 'called their rep',
+  },
   EMAIL: {
     icon: EmailIcon,
     label: 'emailed their rep',
     labelMobile: 'emailed',
+    labelActionTooltip: 'emailed their rep',
   },
   OPT_IN: {
     icon: JoinIcon,
     label: 'joined',
     labelMobile: 'joined',
+    labelActionTooltip: 'joined SWC',
   },
   VOTER_REGISTRATION: {
     icon: VoterRegIcon,
     label: 'registered to vote',
     labelMobile: 'reg. to vote',
+    labelActionTooltip: 'registered to vote',
   },
 }

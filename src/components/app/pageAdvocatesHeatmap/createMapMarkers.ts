@@ -6,13 +6,13 @@ import { PublicRecentActivity } from '@/data/recentActivity/getPublicRecentActiv
 export interface MapMarker {
   name: string
   coordinates: [number, number]
-  actionType?: UserActionType
+  actionType: UserActionType
+  datetimeCreated: string
 }
 
 export const createMarkersFromActions = (recentActivity: PublicRecentActivity) => {
   const markers: MapMarker[] = []
-
-  const addedStates = new Set<string>()
+  const stateCount: Record<string, number> = {}
 
   recentActivity.forEach(item => {
     const userLocation = item.user.userLocationDetails
@@ -20,13 +20,27 @@ export const createMarkersFromActions = (recentActivity: PublicRecentActivity) =
     if (userLocation && userLocation.administrativeAreaLevel1) {
       const state = userLocation.administrativeAreaLevel1
 
-      if (!addedStates.has(state)) {
-        const coordinates = STATE_COORDS[state as keyof typeof STATE_COORDS]
+      const coordinates = STATE_COORDS[state as keyof typeof STATE_COORDS]
 
-        if (coordinates) {
-          markers.push({ name: state, coordinates, actionType: item.actionType })
-          addedStates.add(state)
+      if (coordinates) {
+        let offsetX = 0
+        let offsetY = 0
+
+        if (stateCount[state]) {
+          offsetX = stateCount[state] % 2 === 0 ? 1.2 : -1.2
+          offsetY = stateCount[state] % 2 === 0 ? -1.2 : 1.2
+
+          stateCount[state] += 1
+        } else {
+          stateCount[state] = 1
         }
+
+        markers.push({
+          name: state,
+          coordinates: [coordinates[0] + offsetX, coordinates[1] + offsetY],
+          actionType: item.actionType,
+          datetimeCreated: item.datetimeCreated,
+        })
       }
     }
   })

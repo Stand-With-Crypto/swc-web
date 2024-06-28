@@ -2,21 +2,13 @@
 
 import React, { useEffect } from 'react'
 
-import { FormattedNumber } from '@/components/ui/formattedNumber'
-import { SupportedLocale } from '@/intl/locales'
-import { cn } from '@/utils/web/cn'
-
-export function TotalAdvocatesPerStateTooltip({
-  hoveredStateName,
+export function ActionInfoTooltip({
   mousePosition,
-  getTotalAdvocatesPerState,
-  locale,
+  actionInfo,
   handleClearPressedState,
 }: {
-  hoveredStateName: string | null
   mousePosition: { x: number; y: number } | null
-  getTotalAdvocatesPerState: (stateName: string) => number | undefined
-  locale: SupportedLocale
+  actionInfo: string | null
   handleClearPressedState: () => void
 }) {
   useEffect(() => {
@@ -35,11 +27,7 @@ export function TotalAdvocatesPerStateTooltip({
     }
   }, [handleClearPressedState])
 
-  if (!mousePosition || !hoveredStateName) return null
-
-  const totalAdvocatesPerState = getTotalAdvocatesPerState(hoveredStateName)
-
-  if (!totalAdvocatesPerState) return null
+  if (!mousePosition || !actionInfo) return null
 
   const tooltipWidth = 193
   const offsetX = tooltipWidth / 2
@@ -47,15 +35,11 @@ export function TotalAdvocatesPerStateTooltip({
   // Calculate the adjusted position so it does not overflow the window
   const centeredX = mousePosition.x - offsetX
   const adjustedX = Math.min(Math.max(centeredX, 0), window.innerWidth - tooltipWidth)
-  const formattedNumber = `${FormattedNumber({ amount: totalAdvocatesPerState, locale })} advocates`
-  const tooltipWidthBasedOnTextLength = formattedNumber.length * 10
+  const tooltipWidthBasedOnTextLength = actionInfo.length * 8
 
   return (
     <div
-      className={cn(
-        'pointer-events-none fixed z-50 flex h-[46px] items-center justify-center rounded-2xl bg-black px-4 font-sans text-base text-white',
-        `w-[${tooltipWidthBasedOnTextLength}px]`,
-      )}
+      className={`pointer-events-none fixed z-50 flex h-[46px] w-[${tooltipWidthBasedOnTextLength}px] items-center justify-center rounded-2xl bg-black px-4 font-sans text-base text-white`}
       style={{
         top: mousePosition.y,
         left: adjustedX,
@@ -63,7 +47,7 @@ export function TotalAdvocatesPerStateTooltip({
         pointerEvents: 'none',
       }}
     >
-      {formattedNumber}
+      {actionInfo}
     </div>
   )
 }
