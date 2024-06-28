@@ -34,18 +34,45 @@ export function CallIcon({ isPulsing = false, height = 40, width = 40, ...rest }
         </clipPath>
       </defs>
       {isPulsing && (
-        <circle
-          cx="20"
-          cy="20"
-          fill="none"
-          r="18"
-          stroke="#2B9D74"
-          strokeLinecap="round"
-          strokeWidth="4"
-        >
-          <animate attributeName="r" begin="0s" dur="1s" fill="freeze" from="18" to="22" />
-          <animate attributeName="opacity" begin="1s" dur="1s" fill="freeze" from="1" to="0" />
-        </circle>
+        <>
+          <circle
+            cx="20"
+            cy="20"
+            fill="none"
+            r="18"
+            stroke="#2B9D74"
+            strokeLinecap="round"
+            strokeWidth="8"
+          >
+            <animate attributeName="r" begin="0s" dur="1s" fill="freeze" from="18" to="22" />
+            <animate attributeName="opacity" begin="1s" dur="1s" fill="freeze" from="1" to="0" />
+          </circle>
+
+          <circle
+            cx="20"
+            cy="20"
+            fill="none"
+            r="18"
+            stroke="#2B9D74"
+            strokeLinecap="round"
+            strokeWidth="4"
+          >
+            <animate
+              attributeName="r"
+              begin="2s"
+              dur="2s"
+              repeatCount="indefinite"
+              values="18;22;18"
+            />
+            <animate
+              attributeName="opacity"
+              begin="2s"
+              dur="2s"
+              repeatCount="indefinite"
+              values="1;0;1"
+            />
+          </circle>
+        </>
       )}
     </svg>
   )
@@ -83,18 +110,45 @@ export function EmailIcon({ isPulsing = false, height = 40, width = 40, ...rest 
         </clipPath>
       </defs>
       {isPulsing && (
-        <circle
-          cx="20"
-          cy="20"
-          fill="none"
-          r="18"
-          stroke="#9E00FF"
-          strokeLinecap="round"
-          strokeWidth="4"
-        >
-          <animate attributeName="r" begin="0s" dur="1s" fill="freeze" from="18" to="22" />
-          <animate attributeName="opacity" begin="1s" dur="1s" fill="freeze" from="1" to="0" />
-        </circle>
+        <>
+          <circle
+            cx="20"
+            cy="20"
+            fill="none"
+            r="18"
+            stroke="#9E00FF"
+            strokeLinecap="round"
+            strokeWidth="8"
+          >
+            <animate attributeName="r" begin="0s" dur="1s" fill="freeze" from="18" to="22" />
+            <animate attributeName="opacity" begin="1s" dur="1s" fill="freeze" from="1" to="0" />
+          </circle>
+
+          <circle
+            cx="20"
+            cy="20"
+            fill="none"
+            r="18"
+            stroke="#9E00FF"
+            strokeLinecap="round"
+            strokeWidth="4"
+          >
+            <animate
+              attributeName="r"
+              begin="2s"
+              dur="2s"
+              repeatCount="indefinite"
+              values="18;22;18"
+            />
+            <animate
+              attributeName="opacity"
+              begin="2s"
+              dur="2s"
+              repeatCount="indefinite"
+              values="1;0;1"
+            />
+          </circle>
+        </>
       )}
     </svg>
   )
@@ -132,18 +186,45 @@ export function JoinIcon({ isPulsing = false, height = 40, width = 40, ...rest }
         </clipPath>
       </defs>
       {isPulsing && (
-        <circle
-          cx="20"
-          cy="20"
-          fill="none"
-          r="18"
-          stroke="#6100FF"
-          strokeLinecap="round"
-          strokeWidth="4"
-        >
-          <animate attributeName="r" begin="0s" dur="1s" fill="freeze" from="18" to="22" />
-          <animate attributeName="opacity" begin="1s" dur="1s" fill="freeze" from="1" to="0" />
-        </circle>
+        <>
+          <circle
+            cx="20"
+            cy="20"
+            fill="none"
+            r="18"
+            stroke="#6100FF"
+            strokeLinecap="round"
+            strokeWidth="8"
+          >
+            <animate attributeName="r" begin="0s" dur="1s" fill="freeze" from="18" to="22" />
+            <animate attributeName="opacity" begin="1s" dur="1s" fill="freeze" from="1" to="0" />
+          </circle>
+
+          <circle
+            cx="20"
+            cy="20"
+            fill="none"
+            r="18"
+            stroke="#6100FF"
+            strokeLinecap="round"
+            strokeWidth="4"
+          >
+            <animate
+              attributeName="r"
+              begin="2s"
+              dur="2s"
+              repeatCount="indefinite"
+              values="18;22;18"
+            />
+            <animate
+              attributeName="opacity"
+              begin="2s"
+              dur="2s"
+              repeatCount="indefinite"
+              values="1;0;1"
+            />
+          </circle>
+        </>
       )}
     </svg>
   )
@@ -186,18 +267,45 @@ export function VoterRegIcon({ isPulsing = false, height = 40, width = 40, ...re
         </clipPath>
       </defs>
       {isPulsing && (
-        <circle
-          cx="20"
-          cy="20"
-          fill="none"
-          r="18"
-          stroke="#125DB5"
-          strokeLinecap="round"
-          strokeWidth="4"
-        >
-          <animate attributeName="r" begin="0s" dur="1s" fill="freeze" from="18" to="22" />
-          <animate attributeName="opacity" begin="1s" dur="1s" fill="freeze" from="1" to="0" />
-        </circle>
+        <>
+          <circle
+            cx="20"
+            cy="20"
+            fill="none"
+            r="18"
+            stroke="#125DB5"
+            strokeLinecap="round"
+            strokeWidth="8"
+          >
+            <animate attributeName="r" begin="0s" dur="1s" fill="freeze" from="18" to="22" />
+            <animate attributeName="opacity" begin="1s" dur="1s" fill="freeze" from="1" to="0" />
+          </circle>
+
+          <circle
+            cx="20"
+            cy="20"
+            fill="none"
+            r="18"
+            stroke="#125DB5"
+            strokeLinecap="round"
+            strokeWidth="4"
+          >
+            <animate
+              attributeName="r"
+              begin="2s"
+              dur="2s"
+              repeatCount="indefinite"
+              values="18;22;18"
+            />
+            <animate
+              attributeName="opacity"
+              begin="2s"
+              dur="2s"
+              repeatCount="indefinite"
+              values="1;0;1"
+            />
+          </circle>
+        </>
       )}
     </svg>
   )
