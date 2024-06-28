@@ -28,7 +28,7 @@ import { claimOptInNFTIfNotClaimed } from '@/utils/server/nft/claimOptInNft'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
-import { getLocalUserFromUser, parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
+import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { userFullName } from '@/utils/shared/userFullName'
@@ -100,9 +100,11 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
           },
         })
       : existingUserEmailAddress
+
+  const localUser = parseLocalUserFromCookies()
   await getServerPeopleAnalytics({
     userId: authUser.userId,
-    localUser: parseLocalUserFromCookies(),
+    localUser,
   }).set({
     ...(address ? convertAddressToAnalyticsProperties(address) : {}),
     // https://docs.mixpanel.com/docs/data-structure/user-profiles#reserved-user-properties
@@ -142,10 +144,9 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
       },
     })
 
-    const localUser = getLocalUserFromUser(user)
     const analytics = getServerAnalytics({
       localUser,
-      userId: user.id,
+      userId: authUser.userId,
     })
     await analytics
       .track('User SMS Opt-In', {
