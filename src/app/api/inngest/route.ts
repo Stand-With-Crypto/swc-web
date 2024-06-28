@@ -16,7 +16,6 @@ import { monitorBaseETHBalances } from '@/inngest/functions/monitorBaseETHBalanc
 import { setPrimaryCryptoAddressOfUserWithInngest } from '@/inngest/functions/setPrimaryCryptoAddressOfUser'
 import { backfillSMSStatusField } from '@/inngest/functions/sms/backfillSMSStatusField'
 import { welcomeSMSCommunicationJourney } from '@/inngest/functions/sms/welcomeSMSCommunicationJourney'
-import { testCNNEmail } from '@/inngest/functions/testCNNEmail/testCNNEmail'
 import {
   auditUsersTotalDonationAmountUsdInngest,
   auditUsersTotalDonationAmountUsdInngestAuditBatchOfUsers,
@@ -48,7 +47,6 @@ export const { GET, POST, PUT } = serve({
     backfillUsersTotalDonationAmountUsdInngestUpdateBatchOfUsers,
     auditUsersTotalDonationAmountUsdInngest,
     auditUsersTotalDonationAmountUsdInngestAuditBatchOfUsers,
-    testCNNEmail,
     backfillSMSStatusField,
     welcomeSMSCommunicationJourney,
   ],
