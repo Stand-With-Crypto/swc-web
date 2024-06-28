@@ -8,7 +8,7 @@ it('action - call your congressperson', () => {
   cy.wait(1000)
 
   // validate CTA button
-  cy.contains('div', 'Call your congressperson').as('ctaButton')
+  cy.contains('div', /Call your (congressperson|senator)/).as('ctaButton')
   /**
    * Animations are not playing when running in headless mode,
    * so we check for element existence instead of visibility.
