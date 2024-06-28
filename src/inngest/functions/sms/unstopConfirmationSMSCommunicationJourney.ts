@@ -45,7 +45,7 @@ export const unstopConfirmationSMSCommunicationJourney = inngest.createFunction(
 
     const message = await step.run('send-sms', () =>
       sendSMS({
-        body: messages.GOODBYE_MESSAGE,
+        body: messages.UNSTOP_CONFIRMATION_MESSAGE,
         to: phoneNumber,
       }),
     )
