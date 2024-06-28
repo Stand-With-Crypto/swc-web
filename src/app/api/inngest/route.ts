@@ -15,6 +15,7 @@ import { cleanupPostalCodesWithInngest } from '@/inngest/functions/cleanupPostal
 import { monitorBaseETHBalances } from '@/inngest/functions/monitorBaseETHBalances'
 import { setPrimaryCryptoAddressOfUserWithInngest } from '@/inngest/functions/setPrimaryCryptoAddressOfUser'
 import { backfillSMSStatusField } from '@/inngest/functions/sms/backfillSMSStatusField'
+import { welcomeSMSCommunicationJourney } from '@/inngest/functions/sms/welcomeSMSCommunicationJourney'
 import {
   auditUsersTotalDonationAmountUsdInngest,
   auditUsersTotalDonationAmountUsdInngestAuditBatchOfUsers,
@@ -47,5 +48,6 @@ export const { GET, POST, PUT } = serve({
     auditUsersTotalDonationAmountUsdInngest,
     auditUsersTotalDonationAmountUsdInngestAuditBatchOfUsers,
     backfillSMSStatusField,
+    welcomeSMSCommunicationJourney,
   ],
 })
