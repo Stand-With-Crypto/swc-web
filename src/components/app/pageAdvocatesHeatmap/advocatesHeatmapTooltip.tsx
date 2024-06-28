@@ -4,6 +4,7 @@ import React, { useEffect } from 'react'
 
 import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { SupportedLocale } from '@/intl/locales'
+import { cn } from '@/utils/web/cn'
 
 export function TotalAdvocatesPerStateTooltip({
   hoveredStateName,
@@ -51,7 +52,10 @@ export function TotalAdvocatesPerStateTooltip({
 
   return (
     <div
-      className={cn('pointer-events-none fixed z-50 flex h-[46px] items-center justify-center rounded-2xl bg-black px-4 font-sans text-base text-white', `w-[${tooltipWidthBasedOnTextLength}px]`)}
+      className={cn(
+        'pointer-events-none fixed z-50 flex h-[46px] items-center justify-center rounded-2xl bg-black px-4 font-sans text-base text-white',
+        `w-[${tooltipWidthBasedOnTextLength}px]`,
+      )}
       style={{
         top: mousePosition.y,
         left: adjustedX,
