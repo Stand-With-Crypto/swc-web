@@ -47,6 +47,7 @@ export async function optOutUser(phoneNumber: string, isSWCKeyword: boolean, use
     },
   })
 
+  // We shouldn't send a message if the user replied with a default STOP keyword because Twilio will block it
   if (isSWCKeyword) {
     await inngest.send({
       name: GOODBYE_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
