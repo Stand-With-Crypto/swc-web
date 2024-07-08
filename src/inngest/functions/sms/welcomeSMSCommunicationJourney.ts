@@ -12,6 +12,7 @@ import {
   createCommunicationJourneys,
   CreatedCommunicationJourneys,
 } from './shared/communicationJourney'
+import { validatePhoneNumber } from './shared/validatePhoneNumber'
 
 export const WELCOME_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME =
   'app/user.communication/welcome.sms'
@@ -39,9 +40,7 @@ export const welcomeSMSCommunicationJourney = inngest.createFunction(
 
     if (smsProvider !== 'twilio') return
 
-    if (!phoneNumber) {
-      throw new NonRetriableError('Missing phone number')
-    }
+    validatePhoneNumber(phoneNumber)
 
     const communicationJourneys = await step.run('create-communication-journey', () =>
       createCommunicationJourneys(phoneNumber, UserCommunicationJourneyType.WELCOME_SMS),
