@@ -1,20 +1,16 @@
 import 'server-only'
 
-import { SMSStatus, User } from '@prisma/client'
+import { User } from '@prisma/client'
 import { NextRequest, NextResponse } from 'next/server'
 import twilio from 'twilio'
 
-import { GOODBYE_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME } from '@/inngest/functions/sms/goodbyeSMSCommunicationJourney'
-import { UNSTOP_CONFIRMATION_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME } from '@/inngest/functions/sms/unstopConfirmationSMSCommunicationJourney'
-import { inngest } from '@/inngest/inngest'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { getServerAnalytics } from '@/utils/server/serverAnalytics'
-import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
 import { verifySignature } from '@/utils/server/sms'
+import { optOutUser, optUserBackIn } from '@/utils/server/sms/actions'
 import { getLogger } from '@/utils/shared/logger'
 
-const SWC_STOP_SMS_KEYWORD = process.env.SWC_STOP_SMS_KEYWORD
-const SWC_UNSTOP_SMS_KEYWORD = process.env.SWC_UNSTOP_SMS_KEYWORD
+const SWC_STOP_SMS_KEYWORD = process.env.SWC_STOP_SMS_KEYWORD?.toUpperCase()
+const SWC_UNSTOP_SMS_KEYWORD = process.env.SWC_UNSTOP_SMS_KEYWORD?.toUpperCase()
 
 const logger = getLogger('sms-events')
 
@@ -59,8 +55,10 @@ export async function POST(request: NextRequest) {
   const phoneNumber = body.From
   const user = await getUserByPhoneNumber(phoneNumber)
 
-  if (body.Body && body.Body.length > 0) {
-    switch (body.Body.toUpperCase()) {
+  const keyword = body.Body?.toUpperCase()
+
+  if (keyword && keyword.length > 0) {
+    switch (keyword) {
       // Default STOP keywords
       // In this case Twilio will block future messages, so we don't need to send anything
       case 'STOPALL':
@@ -69,17 +67,15 @@ export async function POST(request: NextRequest) {
       case 'END':
       case 'QUIT':
       case 'STOP':
-        await optOutUser({ phoneNumber, isSWCKeyword: false, user })
-        break
       case SWC_STOP_SMS_KEYWORD:
-        await optOutUser({ phoneNumber, isSWCKeyword: true, user })
+        await optOutUser(phoneNumber, keyword === SWC_STOP_SMS_KEYWORD, user)
         break
       case 'YES':
       case 'START':
       case 'CONTINUE':
       case 'UNSTOP':
       case SWC_UNSTOP_SMS_KEYWORD:
-        await optUserBackIn({ phoneNumber, user })
+        await optUserBackIn(phoneNumber, user)
         break
       default:
     }
@@ -98,73 +94,6 @@ export async function POST(request: NextRequest) {
     headers,
     status: 200,
   })
-}
-
-interface OptUserBackInProps {
-  phoneNumber: string
-  user?: User
-}
-
-async function optUserBackIn({ phoneNumber, user }: OptUserBackInProps) {
-  await prismaClient.user.updateMany({
-    data: {
-      smsStatus: SMSStatus.OPTED_IN,
-    },
-    where: {
-      phoneNumber,
-    },
-  })
-
-  await inngest.send({
-    name: UNSTOP_CONFIRMATION_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
-    data: {
-      phoneNumber,
-    },
-  })
-
-  if (user) {
-    await getServerAnalytics({
-      localUser: getLocalUserFromUser(user),
-      userId: user.id,
-    })
-      .track('User SMS Unstop')
-      .flush()
-  }
-}
-
-interface OptOutUserProps extends OptUserBackInProps {
-  isSWCKeyword: boolean
-}
-
-async function optOutUser({ isSWCKeyword, phoneNumber, user }: OptOutUserProps) {
-  await prismaClient.user.updateMany({
-    data: {
-      smsStatus: SMSStatus.OPTED_OUT,
-    },
-    where: {
-      phoneNumber,
-    },
-  })
-
-  if (isSWCKeyword) {
-    await inngest.send({
-      name: GOODBYE_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
-      data: {
-        phoneNumber,
-      },
-    })
-  }
-
-  if (user) {
-    await getServerAnalytics({
-      localUser: getLocalUserFromUser(user),
-      userId: user.id,
-    })
-      .track('User SMS Opt-out', {
-        type: isSWCKeyword ? 'SWC STOP Keyword' : 'STOP Keyword',
-      })
-      .flush()
-  }
 }
 
 async function getUserByPhoneNumber(phoneNumber: string): Promise<User | undefined> {
