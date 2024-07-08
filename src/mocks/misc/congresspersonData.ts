@@ -25,5 +25,16 @@ export const REAL_CONGRESSPERSON_DATA = {
   slug: `Jerrold---Nadler`,
   suffixName: '',
   stances: [0],
-  primaryRole: {} as any,
+  primaryRole: {
+    dateEnd: '2023-08-25T04:21:46.127Z',
+    dateStart: '2023-12-02T12:07:00.243Z',
+    id: 'a14200e2-6762-4bcf-a216-2a5c3e7adcd4',
+    primaryCity: '',
+    primaryCountryCode: 'US',
+    primaryDistrict: '',
+    primaryState: '',
+    roleCategory: 'CONGRESS',
+    status: 'HELD',
+    title: 'Political Figure',
+  } as any,
 }
