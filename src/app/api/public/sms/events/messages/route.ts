@@ -1,6 +1,7 @@
 import 'server-only'
 
 import { User } from '@prisma/client'
+import * as Sentry from '@sentry/nextjs'
 import { NextRequest, NextResponse } from 'next/server'
 import twilio from 'twilio'
 
@@ -54,6 +55,17 @@ export async function POST(request: NextRequest) {
 
   const phoneNumber = body.From
   const user = await getUserByPhoneNumber(phoneNumber)
+
+  if (!user) {
+    Sentry.captureMessage('Received message from an unused phone number', {
+      extra: {
+        phoneNumber,
+      },
+      tags: {
+        domain: 'smsEventsMessagesRoute',
+      },
+    })
+  }
 
   const keyword = body.Body?.toUpperCase()
 
