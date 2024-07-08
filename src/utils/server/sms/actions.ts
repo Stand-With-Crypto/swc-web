@@ -38,6 +38,8 @@ export async function optInUser(phoneNumber: string, user: User) {
 }
 
 export async function optOutUser(phoneNumber: string, isSWCKeyword: boolean, user?: User) {
+  if (user?.smsStatus === SMSStatus.OPTED_OUT) return
+
   await prismaClient.user.updateMany({
     data: {
       smsStatus: SMSStatus.OPTED_OUT,
@@ -70,6 +72,8 @@ export async function optOutUser(phoneNumber: string, isSWCKeyword: boolean, use
 }
 
 export async function optUserBackIn(phoneNumber: string, user?: User) {
+  if (user && user.smsStatus !== SMSStatus.OPTED_OUT) return
+
   await prismaClient.user.updateMany({
     data: {
       smsStatus: SMSStatus.OPTED_IN,
