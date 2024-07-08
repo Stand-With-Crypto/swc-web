@@ -44,7 +44,7 @@ async function baseGetMaybeUserAndMethodOfMatch<
   shouldThrowWithoutSession: boolean
   prisma?: Prisma.SelectSubset<I, Prisma.UserFindFirstArgs>
 }): Promise<BaseUserAndMethodOfMatch<S, I>> {
-  const { include, cursor, distinct, orderBy, skip, take, select: _select } = prismaConfig || {}
+  const { include, cursor, distinct, orderBy, skip, take } = prismaConfig || {}
   const authUser = await appRouterGetAuthUser()
   const sessionId =
     // if we got back an auth user, don't throw even if we should because we're gonna match to
