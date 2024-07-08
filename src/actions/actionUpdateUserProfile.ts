@@ -144,11 +144,10 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
       },
     })
 
-    const analytics = getServerAnalytics({
+    await getServerAnalytics({
       localUser,
       userId: authUser.userId,
     })
-    await analytics
       .track('User SMS Opt-In', {
         provider: 'twilio',
       })

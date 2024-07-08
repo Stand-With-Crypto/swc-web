@@ -123,11 +123,12 @@ async function optUserBackIn({ phoneNumber, user }: OptUserBackInProps) {
   })
 
   if (user) {
-    const analytics = getServerAnalytics({
+    await getServerAnalytics({
       localUser: getLocalUserFromUser(user),
       userId: user.id,
     })
-    await analytics.track('User SMS Unstop').flush()
+      .track('User SMS Unstop')
+      .flush()
   }
 }
 
@@ -155,12 +156,10 @@ async function optOutUser({ isSWCKeyword, phoneNumber, user }: OptOutUserProps) 
   }
 
   if (user) {
-    const analytics = getServerAnalytics({
+    await getServerAnalytics({
       localUser: getLocalUserFromUser(user),
       userId: user.id,
     })
-
-    await analytics
       .track('User SMS Opt-out', {
         type: isSWCKeyword ? 'SWC STOP Keyword' : 'STOP Keyword',
       })
