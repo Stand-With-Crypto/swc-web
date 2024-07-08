@@ -39,7 +39,7 @@ export async function mintPastActions(
 
     const signUpFlowExperimentVariant =
       localUser?.persisted?.experiments?.gh02_SWCSignUpFlowExperiment
-    if (action.actionType === 'OPT_IN' && signUpFlowExperimentVariant === 'variant') {
+    if (action.actionType === 'OPT_IN' && signUpFlowExperimentVariant === 'optionalFieldsVariant') {
       continue
     }
 
