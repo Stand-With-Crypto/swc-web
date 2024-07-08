@@ -13,8 +13,8 @@ import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
 import { verifySignature } from '@/utils/server/sms'
 import { getLogger } from '@/utils/shared/logger'
 
-const SWC_STOP_SMS_KEYWORD = process.env.SWC_STOP_SMS_KEYWORD ?? ''
-const SWC_UNSTOP_SMS_KEYWORD = process.env.SWC_UNSTOP_SMS_KEYWORD ?? ''
+const SWC_STOP_SMS_KEYWORD = process.env.SWC_STOP_SMS_KEYWORD
+const SWC_UNSTOP_SMS_KEYWORD = process.env.SWC_UNSTOP_SMS_KEYWORD
 
 const logger = getLogger('sms-events')
 
@@ -29,7 +29,7 @@ interface SmsEvent {
   FromState: string
   SmsStatus: string
   FromCity: string
-  Body: string
+  Body?: string
   FromCountry: string
   To: string
   ToZip: string
@@ -59,28 +59,30 @@ export async function POST(request: NextRequest) {
   const phoneNumber = body.From
   const user = await getUserByPhoneNumber(phoneNumber)
 
-  switch (body.Body.toUpperCase()) {
-    // Default STOP keywords
-    // In this case Twilio will block next messages, so we don't need to send anything
-    case 'STOPALL':
-    case 'UNSUBSCRIBE':
-    case 'CANCEL':
-    case 'END':
-    case 'QUIT':
-    case 'STOP':
-      await optOutUser({ phoneNumber, isSWCKeyword: false, user })
-      break
-    case SWC_STOP_SMS_KEYWORD:
-      await optOutUser({ phoneNumber, isSWCKeyword: true, user })
-      break
-    case 'YES':
-    case 'START':
-    case 'CONTINUE':
-    case 'UNSTOP':
-    case SWC_UNSTOP_SMS_KEYWORD:
-      await optUserBackIn({ phoneNumber, user })
-      break
-    default:
+  if (body.Body && body.Body.length > 0) {
+    switch (body.Body.toUpperCase()) {
+      // Default STOP keywords
+      // In this case Twilio will block future messages, so we don't need to send anything
+      case 'STOPALL':
+      case 'UNSUBSCRIBE':
+      case 'CANCEL':
+      case 'END':
+      case 'QUIT':
+      case 'STOP':
+        await optOutUser({ phoneNumber, isSWCKeyword: false, user })
+        break
+      case SWC_STOP_SMS_KEYWORD:
+        await optOutUser({ phoneNumber, isSWCKeyword: true, user })
+        break
+      case 'YES':
+      case 'START':
+      case 'CONTINUE':
+      case 'UNSTOP':
+      case SWC_UNSTOP_SMS_KEYWORD:
+        await optUserBackIn({ phoneNumber, user })
+        break
+      default:
+    }
   }
 
   const headers = new Headers()
@@ -166,7 +168,7 @@ async function optOutUser({ isSWCKeyword, phoneNumber, user }: OptOutUserProps) 
   }
 }
 
-async function getUserByPhoneNumber(phoneNumber: string) {
+async function getUserByPhoneNumber(phoneNumber: string): Promise<User | undefined> {
   const [user] = await prismaClient.user.findMany({
     where: {
       phoneNumber,
