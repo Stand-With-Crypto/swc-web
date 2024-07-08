@@ -58,26 +58,14 @@ export async function POST(request: NextRequest) {
   const keyword = body.Body?.toUpperCase()
 
   if (keyword && keyword.length > 0) {
-    switch (keyword) {
-      // Default STOP keywords
-      // In this case Twilio will block future messages, so we don't need to send anything
-      case 'STOPALL':
-      case 'UNSUBSCRIBE':
-      case 'CANCEL':
-      case 'END':
-      case 'QUIT':
-      case 'STOP':
-      case SWC_STOP_SMS_KEYWORD:
-        await optOutUser(phoneNumber, keyword === SWC_STOP_SMS_KEYWORD, user)
-        break
-      case 'YES':
-      case 'START':
-      case 'CONTINUE':
-      case 'UNSTOP':
-      case SWC_UNSTOP_SMS_KEYWORD:
-        await optUserBackIn(phoneNumber, user)
-        break
-      default:
+    if (
+      ['STOPALL', 'UNSUBSCRIBE', 'CANCEL', 'END', 'QUIT', 'STOP', SWC_STOP_SMS_KEYWORD].includes(
+        keyword,
+      )
+    ) {
+      await optOutUser(phoneNumber, keyword === SWC_STOP_SMS_KEYWORD, user)
+    } else if (['YES', 'START', 'CONTINUE', 'UNSTOP', SWC_UNSTOP_SMS_KEYWORD].includes(keyword)) {
+      await optUserBackIn(phoneNumber, user)
     }
   }
 
