@@ -1,17 +1,14 @@
-import { ChevronRight } from 'lucide-react'
-
 import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
 import { sortDTSIPersonDataTable } from '@/components/app/dtsiClientPersonDataTable/sortPeople'
 import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
 import { DTSIPersonHeroCardRow } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardRow'
 import { DelayedRecentActivity } from '@/components/app/pageHome/delayedRecentActivity'
 import { HeroCTA } from '@/components/app/pageHome/heroCTA'
-import { Fit21HeroImage } from '@/components/app/pageHome/heroImage'
+import { HeroImageWrapper } from '@/components/app/pageHome/heroImage'
 import { PartnerGrid } from '@/components/app/pageHome/partnerGrid'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
 import { SumDonationsByUserRow } from '@/components/app/sumDonationsByUserRow/sumDonationsByUserRow'
 import { UserActionRowCTAsAnimatedListWithApi } from '@/components/app/userActionRowCTA/userActionRowCTAsAnimatedListWithApi'
-import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
@@ -41,23 +38,6 @@ export function PageHome({
   return (
     <>
       <section className="grid-fl lg:standard-spacing-from-navbar mb-6 grid grid-cols-1 items-center gap-4 lg:container lg:grid-cols-2 lg:gap-8 lg:gap-y-1">
-        <div className="col-span-full row-start-2 w-fit justify-self-center  max-lg:-mb-4 lg:row-span-full lg:justify-self-start ">
-          <InternalLink href={urls.billDetails('hr4763-118-US')}>
-            <Badge
-              className="p-2.5 text-sm font-bold antialiased hover:bg-purple-200/90 md:text-base lg:p-4"
-              variant="purple-subtle"
-            >
-              <span>
-                FIT21 has been voted on &bull;
-                <span className="font-normal"> View results</span>
-              </span>
-              <span>
-                <ChevronRight className="h-4 w-4 lg:h-6 lg:w-6 " />
-              </span>
-            </Badge>
-          </InternalLink>
-        </div>
-
         <div className="lg:order-0 container order-1 mx-auto max-w-xl space-y-6 pt-4 text-center md:max-w-3xl lg:px-0 lg:pt-0 lg:text-left">
           <PageTitle className={'lg:text-left'} withoutBalancer>
             If you care about crypto, it's time to prove it
@@ -70,7 +50,7 @@ export function PageHome({
           <HeroCTA />
         </div>
         <div className="order-0 self-start md:container lg:order-1 lg:px-0">
-          <Fit21HeroImage />
+          <HeroImageWrapper />
         </div>
       </section>
       <div className="container">

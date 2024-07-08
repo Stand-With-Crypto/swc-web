@@ -46,6 +46,7 @@ model Address {
   userActionCalls  UserActionCall[]
   users            User[]
 
+  @@index([administrativeAreaLevel1, countryCode])
   @@map("address")
 }
 
@@ -421,6 +422,11 @@ model UserActionTweetAtPerson {
 
 enum UserCommunicationJourneyType {
   INITIAL_SIGNUP
+  WELCOME_SMS
+  // These communication journeys will be implemented in the future, please do not remove it
+  GOODBYE_SMS
+  UNSTOP_CONFIRMATION_SMS
+  BULK_SMS
 }
 
 model UserCommunicationJourney {

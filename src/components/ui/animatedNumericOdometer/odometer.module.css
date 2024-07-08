@@ -27,7 +27,3 @@
 .odometer > span > span {
   flex: 0 0 100%;
 }
-
-.odometerSatoshi span {
-  @apply font-sans;
-}

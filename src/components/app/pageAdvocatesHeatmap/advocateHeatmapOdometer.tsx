@@ -4,7 +4,6 @@ import { useMemo } from 'react'
 
 import { TotalAdvocatesProps } from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmap.types'
 import { AnimatedNumericOdometer } from '@/components/ui/animatedNumericOdometer'
-import odometerStyles from '@/components/ui/animatedNumericOdometer/odometer.module.css'
 import { roundDownNumberByGranularityToAnimateIn } from '@/components/ui/animatedNumericOdometer/roundDownNumberToAnimateIn'
 import {
   getHomepageData,
@@ -52,7 +51,7 @@ export function AdvocateHeatmapOdometer({
   return (
     <div className={cn(`flex-shrink-0 bg-secondary px-0 py-2 text-center`, className)}>
       <AnimatedNumericOdometer
-        className={odometerStyles.odometerSatoshi}
+        numberSpanClassName="!font-sans -mr-2 w-min last:mr-0"
         size={isMobile ? 46 : 76}
         value={formatted.countUsers.count}
       />

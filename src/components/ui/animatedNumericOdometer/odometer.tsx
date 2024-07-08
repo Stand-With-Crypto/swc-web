@@ -11,9 +11,15 @@ export interface AnimatedNumericOdometerProps {
   value: string
   size: number
   className?: string
+  numberSpanClassName?: string
 }
 
-export function AnimatedNumericOdometer({ value, size, className }: AnimatedNumericOdometerProps) {
+export function AnimatedNumericOdometer({
+  value,
+  size,
+  className,
+  numberSpanClassName,
+}: AnimatedNumericOdometerProps) {
   const spanArray = useRef<(HTMLSpanElement | null)[]>([])
 
   const valueNumericalLength = useMemo(() => {
@@ -72,7 +78,9 @@ export function AnimatedNumericOdometer({ value, size, className }: AnimatedNume
                * then we create a span for each number in the array. They will be stacked on top of each other (flex-direction: column).
                */}
               {Array.from({ length: Number(digit) + 1 }, (_, number) => (
-                <span key={number}>{number}</span>
+                <span className={numberSpanClassName} key={number}>
+                  {number}
+                </span>
               ))}
             </span>
           )
