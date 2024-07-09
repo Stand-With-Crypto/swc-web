@@ -91,7 +91,11 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
       <div className="relative bg-primary-cta py-4 text-center">
         <div className="container flex flex-col items-center text-sm text-background antialiased max-sm:text-center sm:text-base">
           <div className="flex flex-col items-center justify-between gap-4 lg:flex-row">
-            <InternalLink className="text-white" href="/bills/hjres109-118-US" replace>
+            <InternalLink
+              className="text-white"
+              href={getIntlUrls(locale).billDetails('hjres109-118-US')}
+              replace
+            >
               <p>
                 <b>KEY VOTE H.J.RES.109: </b>
                 SAB 121 VETO OVERRIDE
