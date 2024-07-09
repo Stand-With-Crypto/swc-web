@@ -1,8 +1,11 @@
 'use client'
 
-import { useCallback } from 'react'
+import { useCallback, useState } from 'react'
+import Balancer from 'react-wrap-balancer'
+import { isBefore, isSameDay } from 'date-fns'
+import { AnimatePresence, motion } from 'framer-motion'
 import { capitalize } from 'lodash-es'
-import { Menu } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { NavbarLoggedInButton } from '@/components/app/navbar/navbarLoggedInButton'
@@ -56,6 +59,10 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
     }
   }, [dialogProps])
 
+  const [isSAB121ContentOpen, setIsSAB121ContentOpen] = useState(false)
+  const isSab121VoteDay = isSameDay(new Date(), new Date(2024, 6, 10)) // July 10th, 2024
+  const isSab121VoteBannerVisible = isBefore(new Date(), new Date(2024, 6, 11)) // July 11th, 2024
+
   const hasEnvironmentBar = NEXT_PUBLIC_ENVIRONMENT !== 'production'
   const loginButton = (
     <LoginDialogWrapper
@@ -80,6 +87,51 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
                 Internal Pages
               </InternalLink>
             </div>
+          </div>
+        </div>
+      )}
+
+      {isSab121VoteBannerVisible && (
+        <div className="relative bg-primary-cta py-6 text-center lg:py-8">
+          <div className="container flex flex-col items-center text-sm text-background antialiased max-sm:text-center sm:text-base">
+            <div className="flex items-center justify-between gap-4">
+              <p>
+                <b>KEY VOTE {isSab121VoteDay ? 'TODAY' : 'TOMORROW'}:</b> SAB 121 VETO OVERRIDE
+              </p>
+
+              <Button
+                className="max-sm:w-full"
+                onClick={() => setIsSAB121ContentOpen(oldState => !oldState)}
+                size="sm"
+                variant="secondary"
+              >
+                {isSAB121ContentOpen ? <X className="h-4 w-4" /> : 'Learn More'}
+              </Button>
+            </div>
+
+            <AnimatePresence>
+              {isSAB121ContentOpen && (
+                <motion.div
+                  animate={{ opacity: 1, height: 'auto', paddingTop: '1rem' }}
+                  exit={{ opacity: 0, height: 0, paddingTop: 0 }}
+                  initial={{ opacity: 0, height: 0, paddingTop: 0 }}
+                  transition={{ ease: 'easeInOut' }}
+                >
+                  <p className="text-sm font-normal tracking-normal">
+                    <Balancer>
+                      {isSab121VoteDay ? 'Today' : 'Tomorrow'}, the House is voting on whether to
+                      override President Biden's veto of SAB 121, a bipartisan bill that allows
+                      banks to custody digital assets like they would other assets.
+                    </Balancer>
+                  </p>
+                  <p className="text-sm font-normal tracking-normal">
+                    <Balancer>
+                      In order to override the veto, the House needs a 2/3rds majority.
+                    </Balancer>
+                  </p>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </div>
       )}
