@@ -127,11 +127,6 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
                     would other assets.
                   </Balancer>
                 </p>
-                <p className="text-sm font-normal tracking-normal">
-                  <Balancer>
-                    In order to override the veto, the House needs a 2/3rds majority.
-                  </Balancer>
-                </p>
               </motion.div>
             )}
           </AnimatePresence>
