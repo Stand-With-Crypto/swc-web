@@ -31,7 +31,7 @@ export const USER_ACTION_FORM_SUCCESS_SCREEN_INFO: Record<
     description: DEFAULT_USER_ACTION_FORM_SUCCESS_SCREEN_INFO['WITH_NFT'],
   },
   [UserActionType.TWEET]: {
-    title: 'You helped spread the word!',
+    title: 'You followed us on X!',
     description: DEFAULT_USER_ACTION_FORM_SUCCESS_SCREEN_INFO['WITHOUT_NFT'],
   },
   [UserActionType.DONATION]: {

@@ -56,4 +56,10 @@ export const DISABLED_USER_ACTION_CAMPAIGNS: DisabledUserActionCampaigns = {
       subtitle: 'You attended a get out the vote rally in Los Angeles.',
     },
   },
+  [UserActionType.TWEET]: {
+    [UserActionTweetAtPersonCampaignName.DEFAULT]: {
+      title: 'Tweet Campaign',
+      subtitle: 'You helped bring more advocates to the cause by tweeting about SWC.',
+    },
+  },
 }
