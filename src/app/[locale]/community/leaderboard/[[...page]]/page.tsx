@@ -60,6 +60,7 @@ export default async function CommunityLeaderboardPage({ params }: Props) {
   const sumDonationsByUser = await getSumDonationsByUser({
     limit: itemsPerPage,
     offset,
+    pageNum,
   })
 
   const dataProps: PageLeaderboardInferredProps = {

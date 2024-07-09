@@ -12,7 +12,9 @@ import { prismaClient } from '@/utils/server/prismaClient'
 export type SumDonationsByUserConfig = {
   limit: number
   offset?: number
+  pageNum: number
 }
+
 
 async function getSumDonationsByUserQuery({ limit, offset }: SumDonationsByUserConfig) {
   const total: {
@@ -98,5 +100,7 @@ function manuallyAdjustResults(results: SumDonationsByUser) {
 export async function getSumDonationsByUser(config: SumDonationsByUserConfig) {
   const result = await getSumDonationsByUserQuery(config)
   const withUserData = await getSumDonationsByUserData(result)
-  return manuallyAdjustResults(withUserData)
+
+  const isFirstPage = config.pageNum === 1
+  return isFirstPage ? manuallyAdjustResults(withUserData) : withUserData
 }
