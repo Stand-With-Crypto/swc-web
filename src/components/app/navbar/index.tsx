@@ -147,7 +147,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
                     size="sm"
                     variant="secondary"
                   >
-                    {isSAB121ContentOpen ? <X className="h-4 w-4" /> : 'Learn More'}
+                    <X className="h-4 w-4" />
                   </Button>
                 </motion.div>
               )}
