@@ -91,9 +91,16 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
       <div className="relative bg-primary-cta py-4 text-center">
         <div className="container flex flex-col items-center text-sm text-background antialiased max-sm:text-center sm:text-base">
           <div className="flex flex-col items-center justify-between gap-4 lg:flex-row">
-            <p>
-              <b>KEY VOTE:</b> SAB 121 VETO OVERRIDE
-            </p>
+            <InternalLink
+              className="text-white"
+              href={getIntlUrls(locale).billDetails('hjres109-118-US')}
+              replace
+            >
+              <p>
+                <b>KEY VOTE H.J.RES.109: </b>
+                SAB 121 VETO OVERRIDE
+              </p>
+            </InternalLink>
 
             <Button
               className={cn('max-sm:w-full lg:block', isSAB121ContentOpen && 'hidden')}
@@ -115,9 +122,9 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
               >
                 <p className="text-sm font-normal tracking-normal">
                   <Balancer>
-                    The House is voting on whether to override President Biden's veto of SAB 121, a
-                    bipartisan bill that allows banks to custody digital assets like they would
-                    other assets.
+                    The House is voting on whether to override President Biden's veto of repealing
+                    SAB 121, a bipartisan effort to allow banks to custody digital assets like they
+                    would other assets.
                   </Balancer>
                 </p>
                 <p className="text-sm font-normal tracking-normal">
