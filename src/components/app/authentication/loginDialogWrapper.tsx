@@ -191,6 +191,8 @@ export function UnauthenticatedSection({
     const { wasRecentlyUpdated } = user.primaryUserCryptoAddress
     if (wasRecentlyUpdated) {
       goToSection(LoginSections.FINISH_PROFILE)
+    } else if (user.phoneNumber && !user.primaryUserEmailAddress) {
+      goToSection(LoginSections.FINISH_PROFILE)
     } else {
       setDialogOpen(false)
     }

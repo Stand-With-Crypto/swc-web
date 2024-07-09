@@ -12,14 +12,18 @@ const NEXT_PUBLIC_THIRDWEB_CLIENT_ID = requiredEnv(
 export interface ThirdwebEmbeddedWalletMetadata {
   userId: string
   walletAddress: string
-  email: string
+  email?: string
+  phone?: string
   createdAt: string
 }
-/*
-This is based of direct conversations with the thirdweb team. It appears to be an undocumented API
-This API will only return emails tht have been fully verified by thirdweb
-*/
-export async function fetchEmbeddedWalletMetadataFromThirdweb(cryptoAddress: string) {
+
+/**
+ * Fetches the metadata of an embedded wallet from Thirdweb.
+ * https://portal.thirdweb.com/connect/in-app-wallet/how-to/get-in-app-wallet-details-on-server
+ */
+export async function fetchEmbeddedWalletMetadataFromThirdweb(
+  cryptoAddress: string,
+): Promise<ThirdwebEmbeddedWalletMetadata | null> {
   const url = new URL(
     'https://embedded-wallet.thirdweb.com/api/2023-11-30/embedded-wallet/user-details',
   )
@@ -51,10 +55,11 @@ export async function fetchEmbeddedWalletMetadataFromThirdweb(cryptoAddress: str
 
   const data = (await resp.json()) as ThirdwebEmbeddedWalletMetadata[]
   const metadata = data?.[0]
+
   return metadata
     ? {
         ...metadata,
-        email: metadata.email.toLowerCase(),
+        email: metadata?.email ? metadata.email.toLowerCase() : '',
       }
     : null
 }

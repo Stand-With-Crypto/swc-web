@@ -94,7 +94,7 @@ export function TopLevelClientLogic({
     walletConnect(),
     embeddedWallet({
       auth: {
-        options: ['google', 'email'],
+        options: ['google', 'phone', 'email'],
       },
     }),
   ]

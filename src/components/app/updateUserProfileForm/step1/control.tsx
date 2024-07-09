@@ -179,29 +179,31 @@ export function UpdateUserProfileForm({
               </FormItem>
             )}
           />
-          <FormField
-            control={form.control}
-            name="phoneNumber"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Phone number</FormLabel>
-                <FormControl>
-                  <Input
-                    data-testid="phone-number-input"
-                    placeholder="Phone number"
-                    {...field}
-                    onChange={e => {
-                      field.onChange(e)
-                      if (!e.target.value && form.getValues('hasOptedInToSms')) {
-                        form.setValue('hasOptedInToSms', false)
-                      }
-                    }}
-                  />
-                </FormControl>
-                <FormErrorMessage />
-              </FormItem>
-            )}
-          />
+          {user.hasRepliedToOptInSms && user.phoneNumber ? null : (
+            <FormField
+              control={form.control}
+              name="phoneNumber"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Phone number</FormLabel>
+                  <FormControl>
+                    <Input
+                      data-testid="phone-number-input"
+                      placeholder="Phone number"
+                      {...field}
+                      onChange={e => {
+                        field.onChange(e)
+                        if (!e.target.value && form.getValues('hasOptedInToSms')) {
+                          form.setValue('hasOptedInToSms', false)
+                        }
+                      }}
+                    />
+                  </FormControl>
+                  <FormErrorMessage />
+                </FormItem>
+              )}
+            />
+          )}
           {!defaultValues.current.hasOptedInToMembership && (
             <FormField
               control={form.control}

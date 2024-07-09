@@ -144,7 +144,7 @@ export function UpdateUserProfileForm({
               </FormItem>
             )}
           />
-          {user.hasEmbeddedWallet || (
+          {user.hasEmbeddedWallet || user.primaryUserEmailAddress?.isVerified || (
             <FormField
               control={form.control}
               name="emailAddress"
@@ -158,29 +158,31 @@ export function UpdateUserProfileForm({
               )}
             />
           )}
-          <FormField
-            control={form.control}
-            name="phoneNumber"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Input
-                    className="h-auto p-4"
-                    data-testid="phone-number-input"
-                    placeholder="Phone number"
-                    {...field}
-                    onChange={e => {
-                      field.onChange(e)
-                      if (!e.target.value && form.getValues('hasOptedInToSms')) {
-                        form.setValue('hasOptedInToSms', false)
-                      }
-                    }}
-                  />
-                </FormControl>
-                <FormErrorMessage />
-              </FormItem>
-            )}
-          />
+          {!user.hasRepliedToOptInSms && !user.phoneNumber && (
+            <FormField
+              control={form.control}
+              name="phoneNumber"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <Input
+                      className="h-auto p-4"
+                      data-testid="phone-number-input"
+                      placeholder="Phone number"
+                      {...field}
+                      onChange={e => {
+                        field.onChange(e)
+                        if (!e.target.value && form.getValues('hasOptedInToSms')) {
+                          form.setValue('hasOptedInToSms', false)
+                        }
+                      }}
+                    />
+                  </FormControl>
+                  <FormErrorMessage />
+                </FormItem>
+              )}
+            />
+          )}
           <FormField
             control={form.control}
             name="address"
