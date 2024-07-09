@@ -1,7 +1,6 @@
 import 'server-only'
 
-import { DataCreationMethod, UserInformationVisibility } from '@prisma/client'
-import { Decimal } from '@prisma/client/runtime/library'
+import { UserInformationVisibility } from '@prisma/client'
 import { compact, keyBy } from 'lodash-es'
 
 import { getClientLeaderboardUser } from '@/clientModels/clientUser/clientLeaderboardUser'
@@ -15,31 +14,8 @@ export type SumDonationsByUserConfig = {
   pageNum: number
 }
 
-type GetSumDonationByUserQueryResult = Array<{
-  id: string
-  totalDonationAmountUsd: Decimal
-  primaryUserCryptoAddress: {
-    id: string
-    cryptoNetwork: 'ETH'
-    cryptoAddress: string
-    datetimeUpdated: Date
-    datetimeCreated: Date
-    userId: string
-    dataCreationMethod: DataCreationMethod
-    hasBeenVerifiedViaAuth: boolean
-    embeddedWalletUserEmailAddressId: string | null
-  } | null
-  address: {
-    administrativeAreaLevel1: string
-    countryCode: string
-  } | null
-  firstName: string
-  lastName: string
-  informationVisibility: UserInformationVisibility
-}>
-
 async function getSumDonationsByUserQuery({ limit, offset }: SumDonationsByUserConfig) {
-  const total: GetSumDonationByUserQueryResult = await prismaClient.user.findMany({
+  const total = await prismaClient.user.findMany({
     select: {
       id: true,
       totalDonationAmountUsd: true,
