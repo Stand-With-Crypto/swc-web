@@ -1,18 +1,18 @@
-import {
-  CommunicationType,
-  UserCommunication,
-  UserCommunicationJourney,
-  UserCommunicationJourneyType,
-} from '@prisma/client'
+import { UserCommunicationJourneyType } from '@prisma/client'
 import { NonRetriableError } from 'inngest'
 
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
-import { prismaClient } from '@/utils/server/prismaClient'
+import { messagingClient, sendSMS } from '@/utils/server/sms'
+import * as messages from '@/utils/server/sms/messages'
 import { smsProvider } from '@/utils/shared/smsProvider'
 
-import { messagingClient, sendSMS } from '@/lib/sms'
-import * as messages from '@/lib/sms/messages'
+import {
+  createCommunication,
+  createCommunicationJourneys,
+  CreatedCommunicationJourneys,
+} from './shared/communicationJourney'
+import { validatePhoneNumber } from './shared/validatePhoneNumber'
 
 export const WELCOME_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME =
   'app/user.communication/welcome.sms'
@@ -40,96 +40,26 @@ export const welcomeSMSCommunicationJourney = inngest.createFunction(
 
     if (smsProvider !== 'twilio') return
 
-    if (!phoneNumber) {
-      throw new NonRetriableError('Missing phone number')
-    }
+    validatePhoneNumber(phoneNumber)
 
     const communicationJourneys = await step.run('create-communication-journey', () =>
-      createCommunicationJourney(phoneNumber),
+      createCommunicationJourneys(phoneNumber, UserCommunicationJourneyType.WELCOME_SMS),
     )
 
     const message = await step.run('send-sms', () =>
       sendMessage(phoneNumber, communicationJourneys),
     )
 
-    await step.run('create-user-communication', async () => {
-      await prismaClient.userCommunication.createMany({
-        data: communicationJourneys.map(({ id }) => ({
-          communicationType: CommunicationType.SMS,
-          messageId: message.sid,
-          userCommunicationJourneyId: id,
-        })),
-      })
-    })
+    await step.run('create-user-communication', () =>
+      createCommunication(communicationJourneys, message.sid),
+    )
   },
 )
 
-async function createCommunicationJourney(phoneNumber: string): Promise<CommunicationJourney[]> {
-  const journeyType = UserCommunicationJourneyType.WELCOME_SMS
-  const usersWithPhoneNumber = (
-    await prismaClient.user.findMany({
-      where: {
-        phoneNumber,
-      },
-      select: {
-        id: true,
-      },
-    })
-  ).map(({ id }) => id)
-
-  if (usersWithPhoneNumber.length === 0) {
-    throw new NonRetriableError('User not found')
-  }
-
-  const usersWithExistingCommunicationJourney = (
-    await prismaClient.userCommunicationJourney.findMany({
-      where: {
-        userId: {
-          in: usersWithPhoneNumber,
-        },
-        journeyType,
-      },
-      select: {
-        userId: true,
-      },
-    })
-  ).map(({ userId }) => userId)
-
-  await prismaClient.userCommunicationJourney.createMany({
-    data: usersWithPhoneNumber
-      .filter(id => !usersWithExistingCommunicationJourney.includes(id))
-      .map(id => ({
-        userId: id,
-        journeyType,
-      })),
-  })
-
-  return prismaClient.userCommunicationJourney.findMany({
-    where: {
-      userId: {
-        in: usersWithPhoneNumber,
-      },
-      journeyType,
-    },
-    select: {
-      id: true,
-      userCommunications: {
-        select: {
-          messageId: true,
-        },
-      },
-    },
-  })
-}
-
-type CommunicationJourney = {
-  id: UserCommunicationJourney['id']
-  userCommunications: Array<{
-    messageId: UserCommunication['messageId']
-  }>
-}
-
-async function sendMessage(phoneNumber: string, communicationJourneys: CommunicationJourney[]) {
+async function sendMessage(
+  phoneNumber: string,
+  communicationJourneys: CreatedCommunicationJourneys,
+) {
   for (const communicationJourney of communicationJourneys) {
     for (const communication of communicationJourney.userCommunications) {
       const messageSent = await messagingClient.messages(communication.messageId).fetch()
