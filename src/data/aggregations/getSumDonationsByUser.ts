@@ -1,6 +1,6 @@
 import 'server-only'
 
-import { UserInformationVisibility } from '@prisma/client'
+import { DataCreationMethod, UserInformationVisibility } from '@prisma/client'
 import { Decimal } from '@prisma/client/runtime/library'
 import { compact, keyBy } from 'lodash-es'
 
@@ -15,15 +15,44 @@ export type SumDonationsByUserConfig = {
   pageNum: number
 }
 
+type GetSumDonationByUserQueryResult = Array<{
+  id: string
+  totalDonationAmountUsd: Decimal
+  primaryUserCryptoAddress: {
+    id: string
+    cryptoNetwork: 'ETH'
+    cryptoAddress: string
+    datetimeUpdated: Date
+    datetimeCreated: Date
+    userId: string
+    dataCreationMethod: DataCreationMethod
+    hasBeenVerifiedViaAuth: boolean
+    embeddedWalletUserEmailAddressId: string | null
+  } | null
+  address: {
+    administrativeAreaLevel1: string
+    countryCode: string
+  } | null
+  firstName: string
+  lastName: string
+  informationVisibility: UserInformationVisibility
+}>
 
 async function getSumDonationsByUserQuery({ limit, offset }: SumDonationsByUserConfig) {
-  const total: {
-    id: string
-    totalDonationAmountUsd: Decimal
-  }[] = await prismaClient.user.findMany({
+  const total: GetSumDonationByUserQueryResult = await prismaClient.user.findMany({
     select: {
       id: true,
       totalDonationAmountUsd: true,
+      firstName: true,
+      lastName: true,
+      informationVisibility: true,
+      primaryUserCryptoAddress: true,
+      address: {
+        select: {
+          administrativeAreaLevel1: true,
+          countryCode: true,
+        },
+      },
     },
     where: {
       internalStatus: 'VISIBLE',
@@ -37,9 +66,9 @@ async function getSumDonationsByUserQuery({ limit, offset }: SumDonationsByUserC
     take: limit,
     ...(offset ? { skip: offset } : {}),
   })
-  return total.map(({ id, totalDonationAmountUsd }) => ({
-    userId: id,
+  return total.map(({ totalDonationAmountUsd, ...rest }) => ({
     totalAmountUsd: totalDonationAmountUsd.toNumber(),
+    ...rest,
   }))
 }
 
@@ -47,23 +76,12 @@ type QueryResult = Awaited<ReturnType<typeof getSumDonationsByUserQuery>>
 
 // If we ever have an nft mint action that is not a "donation", we'll need to refactor this logic
 async function getSumDonationsByUserData(total: QueryResult) {
-  const users = await prismaClient.user.findMany({
-    where: {
-      id: {
-        in: compact(total.map(t => t.userId)),
-      },
-    },
-    include: {
-      primaryUserCryptoAddress: true,
-      address: true,
-    },
-  })
-  const usersById = keyBy(users, 'id')
+  const usersById = keyBy(total, 'id')
   const ensDataMap = await getENSDataMapFromCryptoAddressesAndFailGracefully(
-    compact(users.map(user => user.primaryUserCryptoAddress?.cryptoAddress)),
+    compact(total.map(user => user.primaryUserCryptoAddress?.cryptoAddress)),
   )
-  return total.map(({ userId, totalAmountUsd }) => {
-    const user = usersById[userId]
+  return total.map(({ id, totalAmountUsd }) => {
+    const user = usersById[id]
     return {
       totalAmountUsd: totalAmountUsd,
       user: {
