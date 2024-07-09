@@ -4,7 +4,6 @@ import 'server-only'
 import {
   Address,
   CapitolCanaryInstance,
-  SMSStatus,
   User,
   UserCryptoAddress,
   UserEmailAddress,
@@ -16,7 +15,6 @@ import { getClientAddress } from '@/clientModels/clientAddress'
 import { getClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
 import { getENSDataFromCryptoAddressAndFailGracefully } from '@/data/web3/getENSDataFromCryptoAddress'
 import { CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/capitolCanary/upsertAdvocateInCapitolCanary'
-import { WELCOME_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME } from '@/inngest/functions/sms/welcomeSMSCommunicationJourney'
 import { inngest } from '@/inngest/inngest'
 import { appRouterGetAuthUser } from '@/utils/server/authentication/appRouterGetAuthUser'
 import {
@@ -29,6 +27,7 @@ import { prismaClient } from '@/utils/server/prismaClient'
 import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
+import { optInUser } from '@/utils/server/sms/actions'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { userFullName } from '@/utils/shared/userFullName'
@@ -100,9 +99,11 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
           },
         })
       : existingUserEmailAddress
+
+  const localUser = parseLocalUserFromCookies()
   await getServerPeopleAnalytics({
     userId: authUser.userId,
-    localUser: parseLocalUserFromCookies(),
+    localUser,
   }).set({
     ...(address ? convertAddressToAnalyticsProperties(address) : {}),
     // https://docs.mixpanel.com/docs/data-structure/user-profiles#reserved-user-properties
@@ -123,7 +124,6 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
       phoneNumber,
       hasOptedInToMembership,
       hasOptedInToSms,
-      smsStatus: hasOptedInToSms ? SMSStatus.OPTED_IN : SMSStatus.NOT_OPTED_IN,
       addressId: address?.id || null,
       primaryUserEmailAddressId: primaryUserEmailAddress?.id || null,
     },
@@ -135,13 +135,9 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
 
   // If the user keeps the same phone number we shouldn't send a message
   if (hasOptedInToSms && phoneNumber && user.phoneNumber !== phoneNumber) {
-    await inngest.send({
-      name: WELCOME_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
-      data: {
-        phoneNumber,
-      },
-    })
+    await optInUser(phoneNumber, user)
   }
+
   await handleCapitolCanaryAdvocateUpsert(updatedUser, primaryUserEmailAddress, user)
   await claimOptInNFTIfNotClaimed({
     id: user.id,

@@ -17,7 +17,10 @@ export type ClientLeaderboardUser = ClientModel<
     }
 >
 
-export type GetClientProps = User & {
+export type GetClientProps = Pick<
+  User,
+  'firstName' | 'lastName' | 'id' | 'informationVisibility'
+> & {
   primaryUserCryptoAddress: null | UserCryptoAddress
 } & Pick<ClientUser, 'manuallySetInformation'>
 

@@ -45,12 +45,14 @@ export const checkSMSOptInReplyWithInngest = inngest.createFunction(
           id: data.user.id,
         },
       })
-      const localUser = getLocalUserFromUser(user)
-      const analytics = getServerAnalytics({
-        localUser,
+      await getServerAnalytics({
+        localUser: getLocalUserFromUser(user),
         userId: data.user.id,
       })
-      await analytics.track('User SMS Opt-In').flush()
+        .track('User SMS Opt-In', {
+          provider: 'capitol-canary',
+        })
+        .flush()
     })
 
     for (const sleepTime of SLEEP_SCHEDULE) {
@@ -103,12 +105,12 @@ export const checkSMSOptInReplyWithInngest = inngest.createFunction(
                     id: data.user.id,
                   },
                 })
-                const localUser = getLocalUserFromUser(user)
-                const analytics = getServerAnalytics({
-                  localUser,
+                await getServerAnalytics({
+                  localUser: getLocalUserFromUser(user),
                   userId: data.user.id,
                 })
-                await analytics.track('User Replied To SMS Opt-In').flush()
+                  .track('User Replied To SMS Opt-In')
+                  .flush()
               },
             )
             return

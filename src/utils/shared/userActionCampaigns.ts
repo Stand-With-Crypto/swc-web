@@ -32,6 +32,7 @@ export enum UserActionOptInCampaignName {
 }
 export enum UserActionTweetCampaignName {
   DEFAULT = 'DEFAULT',
+  'FOLLOW_SWC_ON_X_2024' = 'FOLLOW_SWC_ON_X_2024',
 }
 export enum UserActionNftMintCampaignName {
   DEFAULT = 'DEFAULT',
@@ -87,7 +88,7 @@ export const USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
   [UserActionType.CALL]: UserActionCallCampaignName.FIT21_2024_04,
   [UserActionType.DONATION]: UserActionDonationCampaignName.DEFAULT,
   [UserActionType.OPT_IN]: UserActionOptInCampaignName.DEFAULT,
-  [UserActionType.TWEET]: UserActionTweetCampaignName.DEFAULT,
+  [UserActionType.TWEET]: UserActionTweetCampaignName.FOLLOW_SWC_ON_X_2024,
   [UserActionType.NFT_MINT]: UserActionNftMintCampaignName.DEFAULT,
   [UserActionType.VOTER_REGISTRATION]: UserActionVoterRegistrationCampaignName.DEFAULT,
   [UserActionType.LIVE_EVENT]: UserActionLiveEventCampaignName['2024_03_04_LA'],
