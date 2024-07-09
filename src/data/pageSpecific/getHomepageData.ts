@@ -37,7 +37,7 @@ export async function getHomepageData(props?: GetHomePageDataProps) {
     getHomepageTopLevelMetrics(),
     getPublicRecentActivity({ limit: props?.recentActivityLimit ?? 10 }),
     queryDTSIHomepagePeople(),
-    getSumDonationsByUser({ limit: 10 }),
+    getSumDonationsByUser({ limit: 10, pageNum: 1 }),
   ])
   return {
     sumDonations,
