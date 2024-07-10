@@ -29,6 +29,9 @@ import { getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { optInUser } from '@/utils/server/sms/actions'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
+import { getFormattedDescription } from '@/utils/shared/address'
+import { getCongressionalDistrictFromAddress } from '@/utils/shared/getCongressionalDistrictFromAddress'
+import { getLogger } from '@/utils/shared/logger'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { userFullName } from '@/utils/shared/userFullName'
 import { zodUpdateUserProfileFormAction } from '@/validation/forms/zodUpdateUserProfile/zodUpdateUserProfileFormAction'
@@ -37,6 +40,8 @@ export const actionUpdateUserProfile = withServerActionMiddleware(
   'actionUpdateUserProfile',
   _actionUpdateUserProfile,
 )
+
+const logger = getLogger(`actionUpdateUserProfile`)
 
 async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfileFormAction>) {
   const authUser = await appRouterGetAuthUser()
@@ -48,6 +53,20 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
     return {
       errors: validatedFields.error.flatten().fieldErrors,
     }
+  }
+
+  try {
+    if (validatedFields.data.address) {
+      const usCongressionalDistrict = await getCongressionalDistrictFromAddress(
+        validatedFields.data.address.formattedDescription ??
+          getFormattedDescription(validatedFields.data.address, false),
+      )
+      if ('districtNumber' in usCongressionalDistrict) {
+        validatedFields.data.address.usCongressionalDistrict = `${usCongressionalDistrict.districtNumber}`
+      }
+    }
+  } catch (e) {
+    logger.error('error getting `usCongressionalDistrict`:' + e)
   }
 
   await throwIfRateLimited({ context: 'authenticated' })

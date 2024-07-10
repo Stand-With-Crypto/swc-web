@@ -36,6 +36,8 @@ import {
 } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
+import { getFormattedDescription } from '@/utils/shared/address'
+import { getCongressionalDistrictFromAddress } from '@/utils/shared/getCongressionalDistrictFromAddress'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
@@ -79,6 +81,18 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
     }
   }
   logger.info('validated fields')
+
+  try {
+    const usCongressionalDistrict = await getCongressionalDistrictFromAddress(
+      validatedFields.data.address.formattedDescription ??
+        getFormattedDescription(validatedFields.data.address, false),
+    )
+    if ('districtNumber' in usCongressionalDistrict) {
+      validatedFields.data.address.usCongressionalDistrict = `${usCongressionalDistrict.districtNumber}`
+    }
+  } catch (e) {
+    logger.error('error getting `usCongressionalDistrict`:' + e)
+  }
 
   const localUser = parseLocalUserFromCookies()
   const { user, userState } = await maybeUpsertUser({

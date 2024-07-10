@@ -33,6 +33,7 @@ import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
 import { getUserAcquisitionFieldsForVerifiedSWCPartner } from '@/utils/server/verifiedSWCPartner/attribution'
 import { VerifiedSWCPartner } from '@/utils/server/verifiedSWCPartner/constants'
 import { getFormattedDescription } from '@/utils/shared/address'
+import { getCongressionalDistrictFromAddress } from '@/utils/shared/getCongressionalDistrictFromAddress'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
@@ -275,6 +276,16 @@ async function maybeUpsertUser({
       )
     } catch (e) {
       logger.error('error getting `googlePlaceId`:' + e)
+    }
+
+    try {
+      const usCongressionalDistrict =
+        await getCongressionalDistrictFromAddress(formattedDescription)
+      if ('districtNumber' in usCongressionalDistrict) {
+        dbAddress.usCongressionalDistrict = `${usCongressionalDistrict.districtNumber}`
+      }
+    } catch (e) {
+      logger.error('error getting `usCongressionalDistrict`:' + e)
     }
   }
 

@@ -19,6 +19,8 @@ import {
 } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
+import { getFormattedDescription } from '@/utils/shared/address'
+import { getCongressionalDistrictFromAddress } from '@/utils/shared/getCongressionalDistrictFromAddress'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
@@ -103,6 +105,18 @@ async function _actionCreateUserActionCallCongressperson(
     })
     await beforeFinish()
     return { user: getClientUser(user) }
+  }
+
+  try {
+    const usCongressionalDistrict = await getCongressionalDistrictFromAddress(
+      validatedInput.data.address.formattedDescription ??
+        getFormattedDescription(validatedInput.data.address, false),
+    )
+    if ('districtNumber' in usCongressionalDistrict) {
+      validatedInput.data.address.usCongressionalDistrict = `${usCongressionalDistrict.districtNumber}`
+    }
+  } catch (e) {
+    logger.error('error getting `usCongressionalDistrict`:' + e)
   }
 
   await triggerRateLimiterAtMostOnce()
