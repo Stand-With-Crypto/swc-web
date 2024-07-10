@@ -4,6 +4,8 @@ import { compact } from 'lodash-es'
 import { formatENSAvatar } from '@/utils/server/formatENSAvatar'
 import { thirdwebRPCClient } from '@/utils/server/thirdweb/thirdwebRPCClients'
 import { IS_DEVELOPING_OFFLINE } from '@/utils/shared/executionEnvironment'
+import { raceAll } from '@/utils/shared/raceAll'
+import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { stringToEthereumAddress } from '@/utils/shared/stringToEthereumAddress'
 
 import { UserENSData } from './types'
@@ -14,27 +16,33 @@ async function _getENSDataMapFromCryptoAddresses(
   _addresses: string[],
 ): Promise<Record<string, UserENSData>> {
   const addresses = compact(_addresses.map(addr => stringToEthereumAddress(addr)))
-  const nameResult = await Promise.all(
+
+  const nameResult = await raceAll(
     addresses.map(address =>
       client.getEnsName({ address }).catch(e => {
         Sentry.captureException(e, { extra: { address } })
         return null
       }),
     ),
+    SECONDS_DURATION['30_SECONDS'] * 1000,
   )
+
   const addressesWithENS = nameResult
     .map((result, index) => ({
       cryptoAddress: addresses[index],
       ensName: result,
     }))
     .filter(({ ensName }) => ensName)
-  const records = await Promise.all(
+
+  const records = await raceAll(
     addressesWithENS.map(address =>
       client.getEnsAvatar({
         name: address.ensName!,
       }),
     ),
+    SECONDS_DURATION['30_SECONDS'] * 1000,
   )
+
   return addressesWithENS.reduce(
     (acc, { cryptoAddress, ensName }, index) => {
       const avatar = records[index]
