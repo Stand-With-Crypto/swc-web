@@ -6,7 +6,7 @@ import { validatePhoneNumber } from '@/inngest/functions/sms/shared/validatePhon
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { sendSMS } from '@/utils/server/sms'
+import { countSegments, sendSMS } from '@/utils/server/sms'
 import { getLogger } from '@/utils/shared/logger'
 
 import { createCommunication, createCommunicationJourneys } from './shared/communicationJourney'
@@ -40,6 +40,8 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
     if (!smsBody) {
       throw new NonRetriableError('Missing sms body')
     }
+
+    const segmentsCount = countSegments(smsBody)
 
     const userBatches = await step.run('fetch-users', async () => {
       const phoneNumbers = await prismaClient.user.groupBy({
@@ -81,11 +83,12 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
 
       const filteredOutCount = phoneNumbers.length - filteredPhoneNumbers.length
 
-      const timeInSecondsToSendAllMessages = filteredPhoneNumbers.length / MPS
+      const timeInSecondsToSendAllMessages = (filteredPhoneNumbers.length / MPS) * segmentsCount
 
       const batches = chunk(filteredPhoneNumbers, MPS)
 
       logger.info(`
+        - Message has ${segmentsCount} segments
         - Got ${phoneNumbers.length} phone numbers
         - ${filteredOutCount} are invalid
         - Sending the message to ${filteredPhoneNumbers.length} numbers
@@ -121,7 +124,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
       )
 
       batchNum += 1
-      await step.sleep(`script.sleep-${batchNum}`, 1000)
+      await step.sleep(`script.sleep-${batchNum}`, 1000 * segmentsCount)
     }
 
     logger.info(`Finished! Sent ${messageCount} messages`)

@@ -110,6 +110,7 @@
     "react-youtube": "^10.1.0",
     "sanitize-html": "^2.11.0",
     "server-only": "^0.0.1",
+    "sms-segments-calculator": "^1.2.0",
     "sonner": "^1.4.0",
     "storybook-addon-module-mock": "^1.1.5",
     "swr": "^2.2.4",
