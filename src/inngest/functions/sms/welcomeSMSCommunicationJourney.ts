@@ -40,7 +40,7 @@ export const welcomeSMSCommunicationJourney = inngest.createFunction(
 
     if (smsProvider !== 'twilio') return
 
-    validatePhoneNumber(phoneNumber)
+    await validatePhoneNumber(phoneNumber)
 
     const communicationJourneys = await step.run('create-communication-journey', () =>
       createCommunicationJourneys(phoneNumber, UserCommunicationJourneyType.WELCOME_SMS),

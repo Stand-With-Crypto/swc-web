@@ -23,20 +23,15 @@ export const sendSMS = async (payload: SendSMSPayload) => {
     return
   }
 
-  logger.info('Sending SMS', payload)
-
   const validatedInput = zodSendSMSSchema.safeParse(payload)
 
   if (!validatedInput.success) {
     throw new Error('Invalid sendSMS payload')
   }
 
-  const { body, to } = validatedInput.data
+  logger.info('Sending SMS', payload)
 
-  // only send SMS to US and CA numbers
-  if (!to.startsWith('+1')) {
-    throw new Error('Phone number not from US or CA')
-  }
+  const { body, to } = validatedInput.data
 
   try {
     return messagingClient.messages.create({
@@ -45,7 +40,8 @@ export const sendSMS = async (payload: SendSMSPayload) => {
       to,
     })
   } catch (error) {
+    logger.error(error)
     Sentry.captureException(error)
-    throw new Error('Failed to send SMS')
+    throw new Error('Failed to queue SMS')
   }
 }

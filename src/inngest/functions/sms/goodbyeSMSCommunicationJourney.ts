@@ -32,7 +32,7 @@ export const goodbyeSMSCommunicationJourney = inngest.createFunction(
   async ({ event, step }) => {
     const { phoneNumber } = event.data as GoodbyeSMSCommunicationJourneyPayload
 
-    validatePhoneNumber(phoneNumber)
+    await validatePhoneNumber(phoneNumber)
 
     const communicationJourneys = await step.run('create-communication-journey', () =>
       createCommunicationJourneys(phoneNumber, UserCommunicationJourneyType.GOODBYE_SMS),
