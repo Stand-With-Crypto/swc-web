@@ -3,6 +3,7 @@ import {
   CapitolCanaryInstance,
   DataCreationMethod,
   Prisma,
+  SMSStatus,
   User,
   UserActionOptInType,
   UserActionType,
@@ -231,9 +232,9 @@ export async function onNewLogin(props: NewLoginParams) {
   let wasUserCreated = false
   if (!maybeUser) {
     log(`createUser: creating user`)
-    const hasSignedInWithEmail = Boolean(
-      embeddedWalletUserDetails?.email && !embeddedWalletUserDetails?.phone,
-    )
+    const hasSignedInWithEmail =
+      !!embeddedWalletUserDetails?.email && !embeddedWalletUserDetails?.phone
+
     maybeUser = await createUser({ localUser, hasSignedInWithEmail })
     wasUserCreated = true
   } else {
@@ -382,8 +383,7 @@ async function queryMatchingUsers({
         },
         embeddedWalletUserDetails?.phone && {
           phoneNumber: embeddedWalletUserDetails.phone,
-          hasOptedInToSms: true,
-          hasRepliedToOptInSms: true,
+          smsStatus: SMSStatus.OPTED_IN_HAS_REPLIED,
           primaryUserEmailAddressId: {
             not: null,
           },
@@ -490,8 +490,7 @@ async function maybeUpsertPhoneNumber({
     where: { id: user.id },
     data: {
       phoneNumber: embeddedWalletUserDetails.phone,
-      hasOptedInToSms: true,
-      hasRepliedToOptInSms: true,
+      smsStatus: SMSStatus.OPTED_IN_HAS_REPLIED,
     },
   })
 }
