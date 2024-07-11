@@ -2,7 +2,7 @@ import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
 import { sortDTSIPersonDataTable } from '@/components/app/dtsiClientPersonDataTable/sortPeople'
 import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
 import { DTSIPersonHeroCardRow } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardRow'
-import { DelayedRecentActivity } from '@/components/app/pageHome/delayedRecentActivity'
+import { AdvocatesHeatmapPage } from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmapPage'
 import { HeroCTA } from '@/components/app/pageHome/heroCTA'
 import { HeroImageWrapper } from '@/components/app/pageHome/heroImage'
 import { PartnerGrid } from '@/components/app/pageHome/partnerGrid'
@@ -14,6 +14,7 @@ import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
 import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
 import { PageProps } from '@/types'
 import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
@@ -29,7 +30,11 @@ export function PageHome({
   actions,
   sumDonationsByUser,
   dtsiHomepagePeople,
-}: PageProps & Awaited<ReturnType<typeof getHomepageData>>) {
+  advocatePerStateDataProps,
+}: PageProps &
+  Awaited<ReturnType<typeof getHomepageData>> & {
+    advocatePerStateDataProps: Awaited<ReturnType<typeof getAdvocatesMapData>>
+  }) {
   const { locale } = params
   const urls = getIntlUrls(locale)
   const lowestScores = sortDTSIPersonDataTable(dtsiHomepagePeople.lowestScores)
@@ -116,7 +121,21 @@ export function PageHome({
                 </TabsTrigger>
               </TabsList>
             </div>
-            <DelayedRecentActivity actions={actions} />
+            {/* <DelayedRecentActivity actions={actions} /> */}
+            <TabsContent value={RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY}>
+              <AdvocatesHeatmapPage
+                advocatesMapPageData={advocatePerStateDataProps}
+                homepageData={{
+                  sumDonations,
+                  countUsers,
+                  countPolicymakerContacts,
+                  actions,
+                  sumDonationsByUser,
+                  dtsiHomepagePeople,
+                }}
+                locale={params.locale}
+              />
+            </TabsContent>
             <TabsContent value={RecentActivityAndLeaderboardTabs.LEADERBOARD}>
               <div className="space-y-8 lg:space-y-10">
                 {sumDonationsByUser.map((donor, index) => (
