@@ -244,9 +244,9 @@ export function UpdateUserProfileForm({
           <Collapsible open={!!form.watch('phoneNumber')}>
             <CollapsibleContent className="AnimateCollapsibleContent">
               <FormDescription className="text-center text-xs font-normal leading-4 text-muted-foreground">
-                By clicking Create account, you consent to receive recurring texts from Stand with
-                Crypto about its efforts at the number provided. You can reply STOP to stop
-                receiving texts. Message and data rates may apply.
+                By signing in, you consent to receive recurring texts from Stand with Crypto about
+                its efforts at the number provided. You can reply STOP to stop receiving texts.
+                Message and data rates may apply.
               </FormDescription>
             </CollapsibleContent>
           </Collapsible>

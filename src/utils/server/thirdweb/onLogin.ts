@@ -383,6 +383,8 @@ async function queryMatchingUsers({
         },
         embeddedWalletUserDetails?.phone && {
           phoneNumber: embeddedWalletUserDetails.phone,
+          hasOptedInToSms: true,
+          hasRepliedToOptInSms: true,
           smsStatus: SMSStatus.OPTED_IN_HAS_REPLIED,
           primaryUserEmailAddressId: {
             not: null,
@@ -490,6 +492,8 @@ async function maybeUpsertPhoneNumber({
     where: { id: user.id },
     data: {
       phoneNumber: embeddedWalletUserDetails.phone,
+      hasOptedInToSms: true,
+      hasRepliedToOptInSms: true,
       smsStatus: SMSStatus.OPTED_IN_HAS_REPLIED,
     },
   })
