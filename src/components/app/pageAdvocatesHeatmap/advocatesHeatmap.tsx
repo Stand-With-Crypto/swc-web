@@ -188,7 +188,9 @@ export function AdvocatesHeatmap({
 
   if (advocatesPerState.isLoading || actions.isLoading) {
     return (
-      <div className="flex h-full flex-col items-start px-2 py-6">
+      <div
+        className={`flex h-full flex-col items-start px-2 py-6 ${isEmbedded ? '' : 'border-r-[40px] bg-[#FBF8FF]'}`}
+      >
         <div className="flex h-full w-full flex-col items-center gap-4 md:flex-row">
           <Skeleton
             childrenClassName="visible"
@@ -208,9 +210,11 @@ export function AdvocatesHeatmap({
   }
 
   return (
-    <div className="flex flex-col items-start px-2 py-6">
-      <div className="flex w-full flex-col items-start gap-4 md:flex-row">
-        <AdvocateHeatmapActionList isEmbedded={isEmbedded} />
+    <div className={`flex flex-col items-start px-2 py-6 ${isEmbedded ? '' : 'gap-8'}`}>
+      <div
+        className={`flex w-full flex-col items-start gap-4 md:flex-row ${isEmbedded ? '' : 'rounded-[40px] bg-[#FBF8FF] px-12 py-28'}`}
+      >
+        {isEmbedded && <AdvocateHeatmapActionList isEmbedded={isEmbedded} />}
         <MapComponent
           handleStateMouseHover={handleStateMouseHover}
           handleStateMouseOut={handleStateMouseOut}
@@ -227,11 +231,15 @@ export function AdvocatesHeatmap({
         />
       </div>
       <div className="mt-2 flex w-full items-center justify-end">
-        <AdvocateHeatmapOdometer
-          className={`font-sans ${isEmbedded ? 'bg-black text-white' : 'bg-inherit text-black'}`}
-          homepageData={homepageData}
-          locale={locale}
-        />
+        {isEmbedded ? (
+          <AdvocateHeatmapOdometer
+            className={`font-sans ${isEmbedded ? 'bg-black text-white' : 'bg-inherit text-black'}`}
+            homepageData={homepageData}
+            locale={locale}
+          />
+        ) : (
+          <AdvocateHeatmapActionList isEmbedded={isEmbedded} />
+        )}
       </div>
     </div>
   )
