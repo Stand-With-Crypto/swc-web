@@ -3,6 +3,7 @@ import { sortDTSIPersonDataTable } from '@/components/app/dtsiClientPersonDataTa
 import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
 import { DTSIPersonHeroCardRow } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardRow'
 import { AdvocatesHeatmapPage } from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmapPage'
+import { DelayedRecentActivity } from '@/components/app/pageHome/delayedRecentActivity'
 import { HeroCTA } from '@/components/app/pageHome/heroCTA'
 import { HeroImageWrapper } from '@/components/app/pageHome/heroImage'
 import { PartnerGrid } from '@/components/app/pageHome/partnerGrid'
@@ -60,23 +61,6 @@ export function PageHome({
       </section>
       <div className="container">
         <TopLevelMetrics {...{ sumDonations, locale, countUsers, countPolicymakerContacts }} />
-        <section className="mb-16 text-center md:mb-36">
-          <PageTitle as="h3" className="mb-7" size="md">
-            Our mission
-          </PageTitle>
-          <PageSubTitle as="h4" className="mb-7">
-            Stand With Crypto, a 501(c)(4) nonprofit, champions for clear, common-sense regulations
-            for the crypto industry. We're mobilizing the 52 million crypto owners in the US - a
-            demographic that is younger (60% Gen-Z and Millennials) and more diverse (41% identify
-            as racial minorities) than the general US population - to unlock crypto's innovation
-            potential and foster greater economic freedom.
-          </PageSubTitle>
-          <div>
-            <Button asChild variant="secondary">
-              <InternalLink href={urls.about()}>Learn more</InternalLink>
-            </Button>
-          </div>
-        </section>
 
         <section className="mb-16 text-center md:mb-36">
           <PageTitle as="h3" className="mb-7" size="md">
@@ -100,8 +84,8 @@ export function PageHome({
             Our community
           </PageTitle>
           <PageSubTitle as="h4">
-            See how our community is taking a stand to safeguard the future of crypto in America.
-            Donations to{' '}
+            See a live view of how our community is taking a stand to safeguard the future of crypto
+            in America. Donations to{' '}
             <ExternalLink href={'https://www.fec.gov/data/committee/C00835959/'}>
               Fairshake
             </ExternalLink>
@@ -121,20 +105,25 @@ export function PageHome({
                 </TabsTrigger>
               </TabsList>
             </div>
-            {/* <DelayedRecentActivity actions={actions} /> */}
+
             <TabsContent value={RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY}>
-              <AdvocatesHeatmapPage
-                advocatesMapPageData={advocatePerStateDataProps}
-                homepageData={{
-                  sumDonations,
-                  countUsers,
-                  countPolicymakerContacts,
-                  actions,
-                  sumDonationsByUser,
-                  dtsiHomepagePeople,
-                }}
-                locale={params.locale}
-              />
+              <div className="block md:hidden">
+                <DelayedRecentActivity actions={actions} />
+              </div>
+              <div className="hidden md:block">
+                <AdvocatesHeatmapPage
+                  advocatesMapPageData={advocatePerStateDataProps}
+                  homepageData={{
+                    sumDonations,
+                    countUsers,
+                    countPolicymakerContacts,
+                    actions,
+                    sumDonationsByUser,
+                    dtsiHomepagePeople,
+                  }}
+                  locale={params.locale}
+                />
+              </div>
             </TabsContent>
             <TabsContent value={RecentActivityAndLeaderboardTabs.LEADERBOARD}>
               <div className="space-y-8 lg:space-y-10">
