@@ -1,3 +1,5 @@
+import * as Sentry from '@sentry/nextjs'
+
 import { getIPFromHeaders } from '@/utils/server/getIPFromHeaders'
 import {
   authenticatedRateLimiter,
@@ -21,6 +23,18 @@ export async function throwIfRateLimited({
 
   const result = await ratelimiter.limit(ip)
   if (!result.success) {
+    Sentry.captureException('Rate limit exceeded', {
+      user: {
+        ip_address: ip,
+      },
+      tags: {
+        domain: 'throwIfRateLimited',
+      },
+      extra: {
+        context,
+        ip,
+      },
+    })
     throw new Error('Invalid request')
   }
 }
