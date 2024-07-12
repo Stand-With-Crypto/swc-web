@@ -12,7 +12,7 @@ export enum EmailEventName {
   GROUP_RESUBSCRIBE = 'group_resubscribe',
 }
 
-export interface EmailEvent {
+export type EmailEvent = {
   email: string
   timestamp: number
   event: EmailEventName
@@ -20,7 +20,7 @@ export interface EmailEvent {
   sg_event_id: string
   useragent?: string
   url?: string
-}
+} & { [key: string]: string }
 
 export const EVENT_NAME_TO_HUMAN_READABLE_STRING: Record<EmailEventName, string> = {
   [EmailEventName.PROCESSED]: 'Processed',

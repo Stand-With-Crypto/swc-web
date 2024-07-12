@@ -55,6 +55,7 @@ async function processEventChunk(messageId: string, events: EmailEvent[]) {
       'Sendgrid Event Id': eventEntry.sg_event_id,
       ...(eventEntry.useragent && { 'User Agent': eventEntry.useragent }),
       ...(eventEntry.url && { Url: eventEntry.url }),
+      ...(eventEntry.variant && { Variant: eventEntry.variant }),
     })
   })
 

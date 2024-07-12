@@ -13,6 +13,7 @@ export interface SendMailPayload {
   from?: string
   subject: string
   html: string
+  customArgs?: Record<string, string>
 }
 
 export async function sendMail(payload: SendMailPayload) {

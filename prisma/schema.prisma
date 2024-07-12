@@ -434,7 +434,6 @@ model UserCommunicationJourney {
   datetimeCreated    DateTime                     @default(now()) @map("datetime_created")
   userCommunications UserCommunication[]
 
-  @@index([id])
   @@index([userId])
   @@map("user_communication_journey")
 }
@@ -446,7 +445,6 @@ model UserCommunication {
   messageId                  String                   @map("message_id")
   datetimeCreated            DateTime                 @default(now()) @map("datetime_created")
 
-  @@index([id])
   @@index([userCommunicationJourneyId])
   @@map("user_communication")
 }
