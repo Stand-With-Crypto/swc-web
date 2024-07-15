@@ -1,5 +1,3 @@
-import { INTERNAL_BASE_URL } from '@/utils/server/email/constants'
-
 export type EmailActiveActions = 'CALL' | 'EMAIL' | 'DONATION' | 'NFT_MINT' | 'VOTER_REGISTRATION'
 
 // Keys in this object are still type enforced, we don't want to use the prisma enum due to errors on dev environment

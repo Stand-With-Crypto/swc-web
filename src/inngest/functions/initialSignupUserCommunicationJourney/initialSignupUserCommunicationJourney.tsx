@@ -6,11 +6,10 @@ import { NonRetriableError } from 'inngest'
 
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
-import { prismaClient } from '@/utils/server/prismaClient'
-
 import { sendMail } from '@/utils/server/email'
 import { EmailActiveActions } from '@/utils/server/email/templates/common/constants'
 import InitialSignUpEmail from '@/utils/server/email/templates/initialSignUp'
+import { prismaClient } from '@/utils/server/prismaClient'
 
 export const INITIAL_SIGNUP_USER_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME =
   'app/user.communication/initial.signup'

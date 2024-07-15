@@ -10,10 +10,6 @@ import {
   getCapitolCanaryCampaignID,
 } from '@/utils/server/capitolCanary/campaigns'
 import { UpsertAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
-import { prismaClient } from '@/utils/server/prismaClient'
-import { getServerAnalytics } from '@/utils/server/serverAnalytics'
-import { getLogger, logger } from '@/utils/shared/logger'
-
 import {
   EmailEvent,
   EmailEventName,
@@ -21,6 +17,9 @@ import {
   parseEventsWebhookRequest,
   verifySignature,
 } from '@/utils/server/email'
+import { prismaClient } from '@/utils/server/prismaClient'
+import { getServerAnalytics } from '@/utils/server/serverAnalytics'
+import { getLogger, logger } from '@/utils/shared/logger'
 
 export async function POST(request: NextRequest) {
   const isVerified = await verifySignature(request.clone()).catch(logger.error)
