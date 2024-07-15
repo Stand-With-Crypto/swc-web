@@ -19,6 +19,7 @@ import {
 } from '@/utils/server/email'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getServerAnalytics } from '@/utils/server/serverAnalytics'
+import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
 import { getLogger, logger } from '@/utils/shared/logger'
 
 export async function POST(request: NextRequest) {
@@ -50,7 +51,7 @@ export async function POST(request: NextRequest) {
 async function processEventChunk(messageId: string, events: EmailEvent[]) {
   const log = getLogger(`Sendgrid Event Webhook - ${messageId}`)
 
-  const { analytics, userId } = await getServerAnalyticsFromMessageId(messageId)
+  const { analytics, user } = await getServerAnalyticsFromMessageId(messageId)
 
   for await (const eventEntry of events) {
     log.info(`tracking event: ${eventEntry.event}`)
@@ -66,14 +67,6 @@ async function processEventChunk(messageId: string, events: EmailEvent[]) {
     })
 
     if (eventEntry.event === EmailEventName.UNSUBSCRIBE) {
-      const user = await prismaClient.user.findFirstOrThrow({
-        where: {
-          id: userId,
-        },
-        include: {
-          address: true,
-        },
-      })
       const capitolCanaryPayload: UpsertAdvocateInCapitolCanaryPayloadRequirements = {
         user: user,
         campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_MEMBERSHIP),
@@ -109,6 +102,14 @@ async function getServerAnalyticsFromMessageId(messageId: string) {
   }
 
   const userId = userCommunication.userCommunicationJourney.userId
+  const user = await prismaClient.user.findFirstOrThrow({
+    where: {
+      id: userId,
+    },
+    include: {
+      address: true,
+    },
+  })
 
-  return { analytics: getServerAnalytics({ userId, localUser: null }), userId }
+  return { analytics: getServerAnalytics({ userId, localUser: getLocalUserFromUser(user) }), user }
 }
