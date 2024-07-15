@@ -48,8 +48,8 @@ const MapComponent = ({
   const [actionInfo, setActionInfo] = useState<string | null>(null)
   const [mousePosition, setMousePosition] = useState<{ x: number; y: number } | null>(null)
 
-  const currentFill = isEmbedded ? '#171717' : '#F6F1FF'
-  const currentStroke = isEmbedded ? '#3A3B3D' : '#D7BFFF'
+  const currentFill = isEmbedded ? '#171717' : '#F4EEFF'
+  const currentStroke = isEmbedded ? '#3A3B3D' : '#DAC5FF'
   const currentHoverAndPressedFill = isEmbedded ? '#6100FF' : '#DDC9FF'
 
   const handleActionMouseOver = useCallback(
@@ -91,7 +91,7 @@ const MapComponent = ({
                     default: {
                       fill: currentFill,
                       stroke: currentStroke,
-                      strokeWidth: '0.971px',
+                      strokeWidth: '0.777px',
                       outline: 'none',
                       transition: 'fill 0.2s ease-in-out, stroke 0.2s ease-in-out',
                     },
@@ -99,13 +99,13 @@ const MapComponent = ({
                       fill: currentHoverAndPressedFill,
                       outline: 'none',
                       stroke: currentStroke,
-                      strokeWidth: '0.971px',
+                      strokeWidth: '0.777px',
                     },
                     pressed: {
                       fill: currentHoverAndPressedFill,
                       outline: 'none',
                       stroke: currentStroke,
-                      strokeWidth: '0.971px',
+                      strokeWidth: '0.777px',
                     },
                   }}
                 />
@@ -189,7 +189,7 @@ export function AdvocatesHeatmap({
   if (advocatesPerState.isLoading || actions.isLoading) {
     return (
       <div
-        className={`flex h-full flex-col items-start px-2 py-6 ${isEmbedded ? '' : 'border-r-[40px] bg-[#FBF8FF]'}`}
+        className={`flex h-full flex-col items-start px-2 py-6 ${isEmbedded ? '' : 'rounded-[40px] bg-[#FBF8FF] px-12 py-28'}`}
       >
         <div className="flex h-full w-full flex-col items-center gap-4 md:flex-row">
           <Skeleton
