@@ -7,6 +7,7 @@ import { PACFooter } from '@/components/app/pacFooter'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
 import { Button } from '@/components/ui/button'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
+import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { QueryDTSILocationUnitedStatesInformationData } from '@/data/dtsi/queries/queryDTSILocationUnitedStatesInformation'
@@ -31,8 +32,6 @@ export function LocationUnitedStates({
 }: LocationUnitedStatesProps) {
   const groups = organizePeople(queryData)
   const urls = getIntlUrls(locale)
-
-  console.log('groups: ', groups)
 
   return (
     <div className="space-y-20">
@@ -99,7 +98,14 @@ export function LocationUnitedStates({
         {Object.entries(groups.keyRaces).map(([stateCode, races]) => {
           const stateName = US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode as USStateCode]
           return (
-            <div key={stateCode}>
+            <div className="container flex flex-col items-center" key={stateCode}>
+              <NextImage
+                alt={`${stateName} shield`}
+                height={150}
+                src={`/stateShields/${stateCode}.png`}
+                width={150}
+              />
+
               <PageTitle as="h2" size="sm">
                 {stateName}
               </PageTitle>

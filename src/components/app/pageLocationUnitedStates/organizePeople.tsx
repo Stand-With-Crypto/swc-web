@@ -16,11 +16,9 @@ export function organizePeople({
 
   type GroupedRaces = Record<USStateCode, (typeof formattedKeyRaces)[]>
 
-  // First group by state
   const groupedByState = groupBy(formattedKeyRaces, x => x.runningForSpecificRole.primaryState)
 
-  // Then group by district within each state and sort within each group
-  const groupedKeyRaces: GroupedRaces = Object.keys(groupedByState).reduce((acc, state) => {
+  const groupedKeyRaces: GroupedRaces = Object.keys(groupedByState).reduce((group, state) => {
     const racesInState = groupedByState[state]
     const groupedByDistrict = groupBy(
       racesInState,
@@ -33,8 +31,8 @@ export function organizePeople({
       return racesInDistrict
     })
 
-    acc[state as USStateCode] = sortedGroupedByDistrict
-    return acc
+    group[state as USStateCode] = sortedGroupedByDistrict
+    return group
   }, {} as GroupedRaces)
 
   const rolePriority: DTSI_PersonRoleCategory[] = [
@@ -42,10 +40,9 @@ export function organizePeople({
     DTSI_PersonRoleCategory.CONGRESS,
   ]
 
-  const sortedGroupedKeyRaces: GroupedRaces = Object.keys(groupedKeyRaces)
-    .sort()
-    .reduce((acc, state) => {
-      acc[state as USStateCode] = groupedKeyRaces[state as USStateCode].sort((a, b) => {
+  const sortedGroupedKeyRaces: GroupedRaces = Object.keys(groupedKeyRaces).reduce(
+    (group, state) => {
+      group[state as USStateCode] = groupedKeyRaces[state as USStateCode].sort((a, b) => {
         const aPriority = a[0].runningForSpecificRole.roleCategory
           ? rolePriority.indexOf(a[0].runningForSpecificRole.roleCategory)
           : -1
@@ -57,8 +54,11 @@ export function organizePeople({
           b[0].runningForSpecificRole.primaryDistrict || '',
         )
       })
-      return acc
-    }, {} as GroupedRaces)
+
+      return group
+    },
+    {} as GroupedRaces,
+  )
 
   formattedPresident.sort((a, b) => (a.isIncumbent === b.isIncumbent ? 0 : a.isIncumbent ? -1 : 1))
 
