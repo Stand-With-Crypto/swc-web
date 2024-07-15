@@ -31,6 +31,9 @@ export function LocationUnitedStates({
 }: LocationUnitedStatesProps) {
   const groups = organizePeople(queryData)
   const urls = getIntlUrls(locale)
+
+  console.log('groups: ', groups)
+
   return (
     <div className="space-y-20">
       <DarkHeroSection>
@@ -93,38 +96,53 @@ export function LocationUnitedStates({
           </div>
         </ContentSection>
 
-        {groups.keyRaces.map(people => {
-          const stateCode = people[0].runningForSpecificRole.primaryState as USStateCode
-          const primaryDistrict =
-            people[0].runningForSpecificRole.primaryDistrict &&
-            normalizeDTSIDistrictId(people[0].runningForSpecificRole)
-          const stateName = US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]
+        {Object.entries(groups.keyRaces).map(([stateCode, races]) => {
+          const stateName = US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode as USStateCode]
           return (
-            <DTSIPersonHeroCardSection
-              cta={
-                <InternalLink
-                  href={
-                    primaryDistrict
-                      ? urls.locationDistrictSpecific({ stateCode, district: primaryDistrict })
-                      : urls.locationStateSpecificSenateRace(stateCode)
-                  }
-                >
-                  View Race
-                </InternalLink>
-              }
-              key={`${stateCode}-${primaryDistrict}`}
-              locale={locale}
-              people={people}
-              title={
-                primaryDistrict ? (
-                  <>
-                    {stateName} {formatDTSIDistrictId(primaryDistrict)} Congressional District Race
-                  </>
-                ) : (
-                  <>{stateName} Senate Race</>
+            <div key={stateCode}>
+              <PageTitle as="h2" size="sm">
+                {stateName}
+              </PageTitle>
+
+              {races.map(people => {
+                const primaryDistrict =
+                  people[0].runningForSpecificRole.primaryDistrict &&
+                  normalizeDTSIDistrictId(people[0].runningForSpecificRole)
+
+                return (
+                  <DTSIPersonHeroCardSection
+                    cta={
+                      <InternalLink
+                        href={
+                          primaryDistrict
+                            ? urls.locationDistrictSpecific({
+                                stateCode: stateCode as USStateCode,
+                                district: primaryDistrict,
+                              })
+                            : urls.locationStateSpecificSenateRace(stateCode as USStateCode)
+                        }
+                      >
+                        View Race
+                      </InternalLink>
+                    }
+                    key={`${stateCode}-${primaryDistrict}`}
+                    locale={locale}
+                    people={people}
+                    subtitle={
+                      primaryDistrict ? (
+                        <>
+                          {stateName} {formatDTSIDistrictId(primaryDistrict)} Congressional District
+                          Race
+                        </>
+                      ) : (
+                        <>{stateName} Senate Race</>
+                      )
+                    }
+                    title=""
+                  />
                 )
-              }
-            />
+              })}
+            </div>
           )
         })}
 
