@@ -4,14 +4,15 @@ import { useMemo } from 'react'
 
 import { TotalAdvocatesProps } from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmap.types'
 import { AnimatedNumericOdometer } from '@/components/ui/animatedNumericOdometer'
-import odometerStyles from '@/components/ui/animatedNumericOdometer/odometer.module.css'
 import { roundDownNumberByGranularityToAnimateIn } from '@/components/ui/animatedNumericOdometer/roundDownNumberToAnimateIn'
 import {
   getHomepageData,
   GetHomepageTopLevelMetricsResponse,
 } from '@/data/pageSpecific/getHomepageData'
 import { useApiHomepageTopLevelMetrics } from '@/hooks/useApiHomepageTopLevelMetrics'
+import { useIsMobile } from '@/hooks/useIsMobile'
 import { SupportedLocale } from '@/intl/locales'
+import { cn } from '@/utils/web/cn'
 import { intlNumberFormat } from '@/utils/web/intlNumberFormat'
 
 const mockDecreaseInValuesOnInitialLoadSoWeCanAnimateIncrease = (
@@ -25,10 +26,13 @@ const mockDecreaseInValuesOnInitialLoadSoWeCanAnimateIncrease = (
 export function AdvocateHeatmapOdometer({
   locale,
   homepageData,
+  className,
 }: {
   locale: SupportedLocale
   homepageData: Awaited<ReturnType<typeof getHomepageData>>
+  className?: string
 }) {
+  const isMobile = useIsMobile()
   const decreasedInitialValues = useMemo(
     () => mockDecreaseInValuesOnInitialLoadSoWeCanAnimateIncrease(homepageData),
     [homepageData],
@@ -45,13 +49,13 @@ export function AdvocateHeatmapOdometer({
   }, [values, locale])
 
   return (
-    <div className="flex-shrink-0 rounded-3xl bg-secondary px-0 py-4 text-center md:w-1/2 md:p-6 md:py-6">
+    <div className={cn(`flex-shrink-0 bg-secondary px-0 py-2 text-center`, className)}>
       <AnimatedNumericOdometer
-        className={odometerStyles.odometerSatoshi}
-        size={76}
+        numberSpanClassName="!font-sans -mr-2 w-min last:mr-0"
+        size={isMobile ? 46 : 76}
         value={formatted.countUsers.count}
       />
-      <div className="font-sans text-black">Crypto advocates in America</div>
+      <div className="text-end font-sans text-lg text-muted-foreground md:text-xl">Advocates</div>
     </div>
   )
 }

@@ -336,6 +336,7 @@ export function UserActionFormEmailCongressperson({
                           {...field}
                           onChange={field.onChange}
                           placeholder="Your full address"
+                          shouldLimitUSAddresses
                           value={field.value}
                         />
                       </FormControl>

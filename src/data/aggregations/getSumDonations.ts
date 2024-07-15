@@ -4,8 +4,10 @@ import { sum } from 'lodash-es'
 
 import { prismaClient } from '@/utils/server/prismaClient'
 
+const FAIRSHAKE_DONATIONS_AMOUNT_USD = 177_877_738.13
+
 const MANUALLY_TRACKED_DONATIONS = [
-  85_718_453, // Fairshake donations
+  FAIRSHAKE_DONATIONS_AMOUNT_USD,
   1_000_000, // 2024-05-13 MoonPay donation
 ]
 
@@ -18,6 +20,7 @@ export const getSumDonations = async () => {
   return {
     amountUsd:
       (amountUsd._sum.totalDonationAmountUsd?.toNumber() || 0) + sum(MANUALLY_TRACKED_DONATIONS),
+    fairshakeAmountUsd: FAIRSHAKE_DONATIONS_AMOUNT_USD,
   }
 }
 

@@ -28,7 +28,7 @@ import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddl
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
-import { UserActionTweetCampaignName } from '@/utils/shared/userActionCampaigns'
+import { USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns'
 
 const logger = getLogger(`actionCreateUserActionTweet`)
 
@@ -73,7 +73,7 @@ async function _actionCreateUserActionTweet() {
     peopleAnalytics.setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
   }
   logger.info('fetched/created user')
-  const campaignName = UserActionTweetCampaignName.DEFAULT
+  const campaignName = USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[UserActionType.TWEET]
   const actionType = UserActionType.TWEET
   let userAction = await prismaClient.userAction.findFirst({
     where: {

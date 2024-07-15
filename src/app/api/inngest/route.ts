@@ -15,7 +15,12 @@ import { cleanupPostalCodesWithInngest } from '@/inngest/functions/cleanupPostal
 import { initialSignUpUserCommunicationJourney } from '@/inngest/functions/initialSignupUserCommunicationJourney/initialSignupUserCommunicationJourney'
 import { monitorBaseETHBalances } from '@/inngest/functions/monitorBaseETHBalances'
 import { setPrimaryCryptoAddressOfUserWithInngest } from '@/inngest/functions/setPrimaryCryptoAddressOfUser'
-import { testCNNEmail } from '@/inngest/functions/testCNNEmail/testCNNEmail'
+import {
+  backfillSMSStatusField,
+  goodbyeSMSCommunicationJourney,
+  unstopConfirmationSMSCommunicationJourney,
+  welcomeSMSCommunicationJourney,
+} from '@/inngest/functions/sms'
 import {
   auditUsersTotalDonationAmountUsdInngest,
   auditUsersTotalDonationAmountUsdInngestAuditBatchOfUsers,
@@ -48,6 +53,9 @@ export const { GET, POST, PUT } = serve({
     auditUsersTotalDonationAmountUsdInngest,
     auditUsersTotalDonationAmountUsdInngestAuditBatchOfUsers,
     initialSignUpUserCommunicationJourney,
-    testCNNEmail,
+    backfillSMSStatusField,
+    welcomeSMSCommunicationJourney,
+    goodbyeSMSCommunicationJourney,
+    unstopConfirmationSMSCommunicationJourney,
   ],
 })

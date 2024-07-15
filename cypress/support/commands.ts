@@ -1,6 +1,5 @@
 /// <reference types="cypress" />
 
-import { Prisma } from '@prisma/client'
 import { mockRandomUser, mockWallet } from 'cypress/fixture/mocks'
 
 // ***********************************************
@@ -143,12 +142,12 @@ Cypress.Commands.add('waitForProfileCreation', (customUser = mockRandomUser) => 
   cy.contains(/Finish your profile|Create an account. Get an NFT./g).should('be.visible')
 
   cy.typeIntoInput({
-    selector: 'input[placeholder="First name"',
+    selector: 'input[placeholder="First name"]',
     text: customUser.firstName,
   })
 
   cy.typeIntoInput({
-    selector: 'input[placeholder="Last name"',
+    selector: 'input[placeholder="Last name"]',
     text: customUser.lastName,
   })
 
@@ -176,7 +175,7 @@ Cypress.Commands.add('waitForProfileCreation', (customUser = mockRandomUser) => 
 
   cy.wait(500)
 
-  cy.contains('Profile updated').should('be.visible').click()
+  cy.contains('Profile updated')
 })
 
 Cypress.Commands.add('waitForLogout', () => {

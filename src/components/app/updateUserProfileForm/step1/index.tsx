@@ -23,7 +23,7 @@ export function UpdateUserProfileFormExperimentTesting(props: Parameters<typeof 
       experimentName="gh02_SWCSignUpFlowExperiment"
       variants={{
         control: <Control {...props} />,
-        variant: <Variant {...props} />,
+        optionalFieldsVariant: <Variant {...props} />,
       }}
     />
   )

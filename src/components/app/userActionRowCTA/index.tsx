@@ -10,9 +10,11 @@ import { cn } from '@/utils/web/cn'
 export interface UserActionRowCTAProps {
   actionType: ActiveClientUserActionType
   state: 'unknown' | 'complete' | 'incomplete' | 'hidden'
-  image: string
+  image: Omit<React.ComponentProps<typeof NextImage>, 'alt'>
   text: string
   subtext: string
+  shortText: string
+  shortSubtext: string
   canBeTriggeredMultipleTimes: boolean
   WrapperComponent: (args: { children: React.ReactNode }) => React.ReactNode
   onClick?: () => void
@@ -23,7 +25,18 @@ export const UserActionRowCTAButton = React.forwardRef<
   Omit<UserActionRowCTAProps, 'WrapperComponent'> & React.ButtonHTMLAttributes<HTMLButtonElement>
 >(
   (
-    { state, image, text, subtext, canBeTriggeredMultipleTimes, className, actionType, ...props },
+    {
+      state,
+      image,
+      text,
+      subtext,
+      shortText,
+      shortSubtext,
+      canBeTriggeredMultipleTimes,
+      className,
+      actionType,
+      ...props
+    },
     ref,
   ) => {
     const canBeActionedOn =
@@ -64,25 +77,29 @@ export const UserActionRowCTAButton = React.forwardRef<
         disabled={!canBeActionedOn}
         ref={ref}
       >
-        <div className="flex items-center gap-4">
+        <div className="flex flex-1 items-center gap-4">
           {state !== 'hidden' && <div className="flex-shrink-0">{getStateUI()}</div>}
-          <div className="hidden flex-shrink-0 md:block">
+          <div className="flex h-[80px] w-[80px] flex-shrink-0 items-center justify-center overflow-hidden rounded-xl bg-black lg:h-[100px] lg:w-[100px]">
             <NextImage
-              alt={text}
-              className="rounded-xl"
-              height={100}
-              src={image}
-              style={{ height: 100, width: 100 }}
-              width={100}
+              alt={shortText}
+              className="object-cover lg:h-[80px] lg:w-[80px]"
+              height={60}
+              sizes="(max-width: 768px) 60px, 80px"
+              width={60}
+              {...image}
             />
           </div>
-          <div>
+          <div className="block sm:hidden">
+            <div className="mb-1 text-base font-bold lg:text-2xl">{shortText}</div>
+            <div className="text-sm text-gray-500 lg:text-xl">{shortSubtext}</div>
+          </div>
+          <div className="hidden sm:block">
             <div className="mb-1 text-base font-bold lg:text-2xl">{text}</div>
             <div className="text-sm text-gray-500 lg:text-xl">{subtext}</div>
           </div>
         </div>
         {canBeActionedOn ? (
-          <div>
+          <div className="hidden sm:block">
             <ChevronRight className="h-6 w-6 lg:h-8 lg:w-8" />
           </div>
         ) : null}

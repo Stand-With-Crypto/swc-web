@@ -1,32 +1,178 @@
 'use client'
 
-import { MouseEvent, useCallback, useState } from 'react'
-import { ComposableMap, Geographies, Geography, Marker } from 'react-simple-maps'
+import { MouseEvent, useCallback, useMemo, useState } from 'react'
+import { ComposableMap, Geographies, Geography } from 'react-simple-maps'
+import { AnimatePresence } from 'framer-motion'
 
+import { AdvocateHeatmapActionList } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapActionList'
+import { ActionInfoTooltip } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapActionTooltip'
+import { AdvocateHeatmapMarker } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapMarker'
+import { AdvocateHeatmapOdometer } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapOdometer'
 import { TotalAdvocatesPerStateTooltip } from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmapTooltip'
-import { ADVOCATES_HEATMAP_GEO_URL } from '@/components/app/pageAdvocatesHeatmap/constants'
-import { MapMarker } from '@/components/app/pageAdvocatesHeatmap/createMapMarkers'
+import {
+  ADVOCATES_ACTIONS,
+  ADVOCATES_HEATMAP_GEO_URL,
+} from '@/components/app/pageAdvocatesHeatmap/constants'
+import {
+  createMarkersFromActions,
+  MapMarker,
+} from '@/components/app/pageAdvocatesHeatmap/createMapMarkers'
+import { NextImage } from '@/components/ui/image'
+import { Skeleton } from '@/components/ui/skeleton'
+import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
+import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
+import { useApiAdvocateMap } from '@/hooks/useApiAdvocateMap'
+import { useApiRecentActivity } from '@/hooks/useApiRecentActivity'
 import { SupportedLocale } from '@/intl/locales'
+import { getUSStateCodeFromStateName } from '@/utils/shared/usStateUtils'
 
 interface RenderMapProps {
   locale: SupportedLocale
+  homepageData: Awaited<ReturnType<typeof getHomepageData>>
+  advocatesMapPageData: Awaited<ReturnType<typeof getAdvocatesMapData>>
+  isEmbedded?: boolean
+}
+
+const MapComponent = ({
+  markers,
+  handleStateMouseHover,
+  handleStateMouseOut,
+  isEmbedded,
+}: {
   markers: MapMarker[]
-  topStateMarkers: MapMarker[]
-  getTotalAdvocatesPerState: (stateName: string) => number | undefined
+  handleStateMouseHover: (geo: any, event: MouseEvent<SVGPathElement>) => void
+  handleStateMouseOut: () => void
+  locale: SupportedLocale
+  isEmbedded?: boolean
+}) => {
+  const [actionInfo, setActionInfo] = useState<string | null>(null)
+  const [mousePosition, setMousePosition] = useState<{ x: number; y: number } | null>(null)
+
+  const currentFill = isEmbedded ? '#171717' : '#F6F1FF'
+  const currentStroke = isEmbedded ? '#3A3B3D' : '#D7BFFF'
+  const currentHoverAndPressedFill = isEmbedded ? '#6100FF' : '#DDC9FF'
+
+  const handleActionMouseOver = useCallback(
+    (currentActionInfo: string, event: MouseEvent<SVGElement>) => {
+      event.stopPropagation()
+
+      const actionBoundingClientRect = event.currentTarget.getBoundingClientRect()
+      const actionPosition = {
+        x: actionBoundingClientRect.left + actionBoundingClientRect.width / 2,
+        y: actionBoundingClientRect.top + actionBoundingClientRect.height / 2,
+      }
+
+      setActionInfo(currentActionInfo)
+      setMousePosition(actionPosition)
+    },
+    [],
+  )
+
+  const handleActionMouseLeave = useCallback((event?: MouseEvent<SVGElement>) => {
+    event?.stopPropagation()
+    setMousePosition(null)
+    setActionInfo(null)
+  }, [])
+
+  return (
+    <>
+      <ComposableMap projection="geoAlbersUsa" viewBox="0 50 800 500">
+        <Geographies geography={ADVOCATES_HEATMAP_GEO_URL}>
+          {({ geographies }) => (
+            <>
+              {geographies.map(geo => (
+                <Geography
+                  geography={geo}
+                  key={geo.rsmKey}
+                  onMouseMove={event => handleStateMouseHover(geo, event)}
+                  onMouseOut={handleStateMouseOut}
+                  stroke="#FFF"
+                  style={{
+                    default: {
+                      fill: currentFill,
+                      stroke: currentStroke,
+                      strokeWidth: '0.971px',
+                      outline: 'none',
+                      transition: 'fill 0.2s ease-in-out, stroke 0.2s ease-in-out',
+                    },
+                    hover: {
+                      fill: currentHoverAndPressedFill,
+                      outline: 'none',
+                      stroke: currentStroke,
+                      strokeWidth: '0.971px',
+                    },
+                    pressed: {
+                      fill: currentHoverAndPressedFill,
+                      outline: 'none',
+                      stroke: currentStroke,
+                      strokeWidth: '0.971px',
+                    },
+                  }}
+                />
+              ))}
+              <AnimatePresence>
+                {markers.map(({ name, coordinates, actionType, datetimeCreated }) => {
+                  const currentIconActionType =
+                    ADVOCATES_ACTIONS[actionType as keyof typeof ADVOCATES_ACTIONS]
+
+                  if (!currentIconActionType) {
+                    return null
+                  }
+
+                  const currentActionInfo = `Someone in ${name} ${currentIconActionType.labelActionTooltip}`
+                  const IconComponent = currentIconActionType.icon
+
+                  return (
+                    <AdvocateHeatmapMarker
+                      IconComponent={IconComponent}
+                      coordinates={coordinates}
+                      currentActionInfo={currentActionInfo}
+                      handleActionMouseLeave={handleActionMouseLeave}
+                      handleActionMouseOver={handleActionMouseOver}
+                      key={`${name}-${datetimeCreated}-${coordinates.toString()}`}
+                    />
+                  )
+                })}
+              </AnimatePresence>
+            </>
+          )}
+        </Geographies>
+      </ComposableMap>
+      <ActionInfoTooltip
+        actionInfo={actionInfo}
+        handleClearPressedState={handleActionMouseLeave}
+        mousePosition={mousePosition}
+      />
+    </>
+  )
 }
 
 export function AdvocatesHeatmap({
   locale,
-  markers,
-  topStateMarkers,
-  getTotalAdvocatesPerState,
+  homepageData,
+  advocatesMapPageData,
+  isEmbedded,
 }: RenderMapProps) {
+  const actions = useApiRecentActivity(homepageData.actions, { limit: 20 })
+  const advocatesPerState = useApiAdvocateMap(advocatesMapPageData)
+
+  const markers = useMemo(() => createMarkersFromActions(actions.data), [actions.data])
+
+  const totalAdvocatesPerState = advocatesPerState.data.advocatesMapData.totalAdvocatesPerState
+
+  const getTotalAdvocatesPerState = useCallback(
+    (stateName: string) => {
+      const stateCode = getUSStateCodeFromStateName(stateName)
+      return totalAdvocatesPerState.find(total => total.state === stateCode)?.totalAdvocates
+    },
+    [totalAdvocatesPerState],
+  )
+
   const [hoveredStateName, setHoveredStateName] = useState<string | null>(null)
   const [mousePosition, setMousePosition] = useState<{ x: number; y: number } | null>(null)
 
   const handleStateMouseHover = useCallback((geo: any, event: MouseEvent<SVGPathElement>) => {
     const { clientX, clientY } = event
-
     setMousePosition({ x: clientX, y: clientY })
     setHoveredStateName(geo.properties.name)
   }, [])
@@ -35,91 +181,58 @@ export function AdvocatesHeatmap({
     setHoveredStateName(null)
   }, [])
 
-  return (
-    <>
-      <ComposableMap projection="geoAlbersUsa">
-        <Geographies geography={ADVOCATES_HEATMAP_GEO_URL}>
-          {({ geographies }) => {
-            return (
-              <>
-                {geographies.map(geo => {
-                  return (
-                    <Geography
-                      cursor="pointer"
-                      geography={geo}
-                      key={geo.rsmKey}
-                      onMouseMove={event => handleStateMouseHover(geo, event)}
-                      onMouseOut={handleStateMouseOut}
-                      stroke="#FFF"
-                      style={{
-                        default: {
-                          fill: '#F6F1FF',
-                          stroke: '#6100FF',
-                          outline: 'none',
-                          transition: 'fill 0.2s ease-in-out, stroke 0.2s ease-in-out',
-                        },
-                        hover: {
-                          fill: '#6100FF',
-                          outline: 'none',
-                        },
-                        pressed: {
-                          fill: '#6100FF',
-                          outline: 'none',
-                        },
-                      }}
-                    />
-                  )
-                })}
-                {markers.map(({ name, coordinates }) => {
-                  return (
-                    <Marker
-                      coordinates={coordinates}
-                      key={name}
-                      style={{
-                        default: {
-                          pointerEvents: 'none',
-                        },
-                      }}
-                    >
-                      <circle fill="#6100FF" r={4} />
-                    </Marker>
-                  )
-                })}
-                {topStateMarkers.map(({ name, coordinates }) => {
-                  const isCurrentStateBeingHovered = hoveredStateName === name
+  const handleClearPressedState = () => {
+    setMousePosition(null)
+    setHoveredStateName(null)
+  }
 
-                  return (
-                    <Marker
-                      coordinates={coordinates}
-                      key={name}
-                      style={{
-                        default: {
-                          pointerEvents: 'none',
-                        },
-                      }}
-                    >
-                      <circle
-                        className={`${isCurrentStateBeingHovered ? 'animate-none opacity-0' : 'animate-pulse opacity-100'} transition-opacity`}
-                        fill="#6100FF"
-                        paintOrder="stroke"
-                        r={4}
-                        stroke="#D0B4FF"
-                        strokeWidth={24}
-                      />
-                    </Marker>
-                  )
-                })}
-              </>
-            )
-          }}
-        </Geographies>
-      </ComposableMap>
-      <TotalAdvocatesPerStateTooltip
-        getTotalAdvocatesPerState={getTotalAdvocatesPerState}
-        hoveredStateName={hoveredStateName}
-        locale={locale}
-        mousePosition={mousePosition}
-      />
-    </>
+  if (advocatesPerState.isLoading || actions.isLoading) {
+    return (
+      <div className="flex h-full flex-col items-start px-2 py-6">
+        <div className="flex h-full w-full flex-col items-center gap-4 md:flex-row">
+          <Skeleton
+            childrenClassName="visible"
+            className="flex h-[500px] w-full items-center justify-center bg-transparent"
+          >
+            <NextImage
+              alt={'Stand With Crypto Logo'}
+              height={120}
+              priority
+              src="/logo/shield.svg"
+              width={121}
+            />
+          </Skeleton>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="flex flex-col items-start px-2 py-6">
+      <div className="flex w-full flex-col items-start gap-4 md:flex-row">
+        <AdvocateHeatmapActionList isEmbedded={isEmbedded} />
+        <MapComponent
+          handleStateMouseHover={handleStateMouseHover}
+          handleStateMouseOut={handleStateMouseOut}
+          isEmbedded={isEmbedded}
+          locale={locale}
+          markers={markers}
+        />
+        <TotalAdvocatesPerStateTooltip
+          getTotalAdvocatesPerState={getTotalAdvocatesPerState}
+          handleClearPressedState={handleClearPressedState}
+          hoveredStateName={hoveredStateName}
+          locale={locale}
+          mousePosition={mousePosition}
+        />
+      </div>
+      <div className="mt-2 flex w-full items-center justify-end">
+        <AdvocateHeatmapOdometer
+          className={`font-sans ${isEmbedded ? 'bg-black text-white' : 'bg-inherit text-black'}`}
+          homepageData={homepageData}
+          locale={locale}
+        />
+      </div>
+    </div>
   )
 }

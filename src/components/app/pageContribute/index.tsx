@@ -102,10 +102,10 @@ export function PageContribute() {
                               tremendous progress in fighting back.
                             </p>
                             <ul>
-                              <li>340K+ advocates</li>
-                              <li>150K contacts with Congress</li>
+                              <li>1M+ advocates</li>
+                              <li>200k+ contacts with Congress</li>
                               <li>
-                                $86M+ donated to organizations defending crypto, including Stand
+                                $179M+ donated to organizations defending crypto, including Stand
                                 With Crypto
                               </li>
                             </ul>

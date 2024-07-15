@@ -39,6 +39,8 @@ model Address {
   postalCode               String   @map("postal_code") // ex: 06890
   postalCodeSuffix         String   @map("postal_code_suffix") // ex 7620
   countryCode              String   @map("country_code")
+  // this field is optional because not all addresses will have a congressional district associated with them
+  usCongressionalDistrict  String?  @map("us_congressional_district") // ex: 12
   datetimeUpdated          DateTime @updatedAt @map("datetime_updated")
   datetimeCreated          DateTime @default(now()) @map("datetime_created")
 
@@ -46,6 +48,7 @@ model Address {
   userActionCalls  UserActionCall[]
   users            User[]
 
+  @@index([administrativeAreaLevel1, countryCode])
   @@map("address")
 }
 
@@ -68,6 +71,14 @@ enum CapitolCanaryInstance {
 enum DataCreationMethod {
   INITIAL_BACKFILL
   BY_USER
+}
+
+enum SMSStatus {
+  NOT_OPTED_IN
+  OPTED_IN // -> User opted in with Twilio
+  OPTED_IN_HAS_REPLIED // -> User opted in with Capitol Canary and responded to confirmation message
+  OPTED_IN_PENDING_DOUBLE_OPT_IN // -> User opted in with Capitol Canary but didn't respond to confirmation message
+  OPTED_OUT
 }
 
 // A user can interact with our platform multiple ways.
@@ -133,6 +144,7 @@ model User {
   capitolCanaryAdvocateId  Int?                       @map("capitol_canary_advocate_id")
   capitolCanaryInstance    CapitolCanaryInstance?     @map("capitol_canary_instance")
   UserCommunicationJourney UserCommunicationJourney[]
+  smsStatus                SMSStatus                  @default(NOT_OPTED_IN) @map("sms_status")
 
   @@index([addressId])
   @@index([internalStatus])
@@ -155,7 +167,6 @@ model UserMergeAlert {
 
   @@unique([userAId, userBId])
   @@index([userBId])
-  @@index([userAId])
   @@map("user_merge_alert")
 }
 
@@ -208,7 +219,6 @@ model UserEmailAddress {
 
   @@unique(map: "user_email_address_unique_constraint", [emailAddress, userId])
   @@index([userId])
-  @@index([emailAddress])
   @@map("user_email_address")
 }
 
@@ -237,8 +247,6 @@ model UserCryptoAddress {
 
   @@unique([cryptoAddress, cryptoNetwork, userId])
   @@index([userId])
-  @@index([cryptoAddress])
-  @@index([embeddedWalletUserEmailAddressId])
   @@map("user_crypto_address")
 }
 
@@ -288,7 +296,6 @@ model UserAction {
   @@index([actionType, campaignName])
   @@index([userCryptoAddressId])
   @@index([userSessionId])
-  @@index([nftMintId])
   @@index([userEmailAddressId])
   @@map("user_action")
 }
@@ -302,7 +309,6 @@ model UserActionOptIn {
   userAction UserAction          @relation(fields: [id], references: [id])
   optInType  UserActionOptInType @map("opt_in_type")
 
-  @@index([id])
   @@map("user_action_opt_in")
 }
 
@@ -312,11 +318,10 @@ model UserActionEmail {
   senderEmail               String                     @map("sender_email")
   firstName                 String                     @map("first_name")
   lastName                  String                     @map("last_name")
-  address                   Address                    @relation(fields: [addressId], references: [id])
-  addressId                 String                     @map("address_id")
+  address                   Address?                   @relation(fields: [addressId], references: [id])
+  addressId                 String?                    @map("address_id")
   userActionEmailRecipients UserActionEmailRecipient[]
 
-  @@index([id])
   @@index([addressId])
   @@map("user_action_email")
 }
@@ -342,7 +347,6 @@ model UserActionCall {
   address              Address?   @relation(fields: [addressId], references: [id])
   addressId            String?    @map("address_id")
 
-  @@index([id])
   @@index([addressId])
   @@map("user_action_call")
 }
@@ -362,7 +366,6 @@ model UserActionDonation {
 
   coinbaseCommerceDonationId String? @map("coinbase_commerce_donation_id")
 
-  @@index([id])
   @@index([amountUsd])
   @@map("user_action_donation")
 }
@@ -399,7 +402,6 @@ model NFTMint {
 
   userActions UserAction[]
 
-  @@index([id])
   @@index([nftSlug])
   @@map("nft_mint")
 }
@@ -409,7 +411,6 @@ model UserActionVoterRegistration {
   userAction UserAction @relation(fields: [id], references: [id])
   usaState   String?    @map("usa_state")
 
-  @@index([id])
   @@map("user_action_voter_registration")
 }
 
@@ -418,12 +419,16 @@ model UserActionTweetAtPerson {
   userAction        UserAction @relation(fields: [id], references: [id])
   recipientDtsiSlug String?    @map("recipient_dtsi_slug")
 
-  @@index([id])
   @@map("user_action_tweet_at_person")
 }
 
 enum UserCommunicationJourneyType {
   INITIAL_SIGNUP
+  WELCOME_SMS
+  // These communication journeys will be implemented in the future, please do not remove it
+  GOODBYE_SMS
+  UNSTOP_CONFIRMATION_SMS
+  BULK_SMS
 }
 
 model UserCommunicationJourney {
@@ -438,10 +443,16 @@ model UserCommunicationJourney {
   @@map("user_communication_journey")
 }
 
+enum CommunicationType {
+  EMAIL
+  SMS
+}
+
 model UserCommunication {
   id                         String                   @id @default(uuid())
   userCommunicationJourneyId String                   @map("user_communication_journey_id")
   userCommunicationJourney   UserCommunicationJourney @relation(fields: [userCommunicationJourneyId], references: [id])
+  communicationType          CommunicationType        @map("communication_type")
   messageId                  String                   @map("message_id")
   datetimeCreated            DateTime                 @default(now()) @map("datetime_created")
 

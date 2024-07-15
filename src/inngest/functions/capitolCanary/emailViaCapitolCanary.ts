@@ -126,7 +126,7 @@ export const emailViaCapitolCanaryWithInngest = inngest.createFunction(
             Sentry.captureMessage(`emailViaCapitolCanary error: ${emailResp.error}`, {
               extra: { formattedEmailRequest, data },
               tags: {
-                administrativeAreaLevel1: data.user.address?.administrativeAreaLevel1,
+                administrativeAreaLevel1: data.user?.address?.administrativeAreaLevel1,
               },
             })
           }

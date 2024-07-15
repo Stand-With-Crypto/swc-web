@@ -1,6 +1,7 @@
 import { BaseUpsertAdvocateRequest } from '@/utils/server/capitolCanary/baseUpsertRequest'
 import { UpsertAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { sendCapitolCanaryRequest } from '@/utils/server/capitolCanary/sendCapitolCanaryRequest'
+import { smsProvider } from '@/utils/shared/smsProvider'
 
 const CAPITOL_CANARY_UPDATE_ADVOCATE_API_URL = 'https://api.phone2action.com/2.0/advocates'
 
@@ -59,7 +60,7 @@ export function formatCapitolCanaryAdvocateUpdateRequest(
 
   if (payload.opts) {
     const opts = payload.opts
-    formattedRequest.smsOptin = opts.isSmsOptin ? 1 : 0
+    formattedRequest.smsOptin = smsProvider === 'capitol-canary' && opts.isSmsOptin ? 1 : 0
     formattedRequest.smsOptinConfirmed = opts.shouldSendSmsOptinConfirmation ? 0 : 1
     formattedRequest.smsOptout = opts.isSmsOptout ? 1 : 0
     formattedRequest.emailOptin = opts.isEmailOptin ? 1 : 0

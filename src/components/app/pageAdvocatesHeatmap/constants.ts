@@ -1,3 +1,13 @@
+import { UserActionType } from '@prisma/client'
+
+import {
+  CallIcon,
+  EmailIcon,
+  IconProps,
+  JoinIcon,
+  VoterRegIcon,
+} from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapIcons'
+
 export const STATE_COORDS: Record<string, [number, number]> = {
   AL: [-86.9023, 32.3182],
   AK: [-152.4044, 61.3707],
@@ -54,3 +64,40 @@ export const STATE_COORDS: Record<string, [number, number]> = {
 
 export const ADVOCATES_HEATMAP_GEO_URL =
   'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/public/state-map-json-metadata-R1nrmLtd1Af1gWq0bFp1hWNjmAWJLn.json'
+
+export const ADVOCATES_ACTIONS: Partial<
+  Record<
+    UserActionType,
+    {
+      icon: (args: IconProps) => JSX.Element
+      label: string
+      labelMobile: string
+      labelActionTooltip: string
+    }
+  >
+> = {
+  CALL: {
+    icon: CallIcon,
+    label: 'called their rep',
+    labelMobile: 'called',
+    labelActionTooltip: 'called their rep',
+  },
+  EMAIL: {
+    icon: EmailIcon,
+    label: 'emailed their rep',
+    labelMobile: 'emailed',
+    labelActionTooltip: 'emailed their rep',
+  },
+  OPT_IN: {
+    icon: JoinIcon,
+    label: 'joined',
+    labelMobile: 'joined',
+    labelActionTooltip: 'joined SWC',
+  },
+  VOTER_REGISTRATION: {
+    icon: VoterRegIcon,
+    label: 'registered to vote',
+    labelMobile: 'reg. to vote',
+    labelActionTooltip: 'registered to vote',
+  },
+}

@@ -1,9 +1,8 @@
 import { ReactNode } from 'react'
 import { ArrowUpRight } from 'lucide-react'
-import Link from 'next/link'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
-import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
+import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
@@ -69,12 +68,12 @@ const unauthenticatedContent = (
 )
 
 const authenticatedContent = (
-  <UserActionFormEmailCongresspersonDialog>
+  <UserActionFormVoterRegistrationDialog>
     <HeroImage
       className="flex-col sm:flex-row"
       fallback={
         <NextImage
-          alt="Email your rep"
+          alt="Free NFT given out when you register to vote."
           blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOM8FqyAgAEOAHwiAoWHAAAAABJRU5ErkJggg=="
           className="h-full w-full object-cover"
           fill
@@ -85,19 +84,16 @@ const authenticatedContent = (
         />
       }
     >
-      <p>
-        FIT21 is a bipartisan crypto bill being considered for a vote in Congress. Ask your Rep to
-        support its clear, commonsense rules for crypto today.
-      </p>
+      <p>Register to vote or check your voter registration and get a free “I’m a Voter” NFT</p>
       <Button
         className={cn('max-sm:w-full', linkBoxLinkClassName)}
         data-link-box-subject
         variant="secondary"
       >
-        Email your Rep <ArrowUpRight />
+        Register <ArrowUpRight />
       </Button>
     </HeroImage>
-  </UserActionFormEmailCongresspersonDialog>
+  </UserActionFormVoterRegistrationDialog>
 )
 
 export function HeroImageWrapper() {
@@ -105,24 +101,5 @@ export function HeroImageWrapper() {
     <LoginDialogWrapper authenticatedContent={authenticatedContent}>
       {unauthenticatedContent}
     </LoginDialogWrapper>
-  )
-}
-
-export function Fit21HeroImage() {
-  return (
-    <LinkBox className="relative h-[320px] overflow-hidden md:rounded-xl lg:h-[400px]">
-      <Link className="flex h-full w-full" href="/resources" passHref>
-        <NextImage
-          alt="Email your rep"
-          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOM8FqyAgAEOAHwiAoWHAAAAABJRU5ErkJggg=="
-          className="h-full w-full object-cover"
-          fill
-          placeholder="blur"
-          priority
-          sizes={'(max-width: 400px) 375px, 500px'}
-          src="/fit21-homepage-hero.png"
-        />
-      </Link>
-    </LinkBox>
   )
 }

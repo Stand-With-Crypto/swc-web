@@ -1,3 +1,6 @@
+'use client'
+
+import { ComponentProps, useEffect } from 'react'
 import { useForm, useFormContext } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import type { ClassValue } from 'clsx'
@@ -11,24 +14,23 @@ import {
 import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormErrorMessage, FormField, FormItem } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { useIsDesktop } from '@/hooks/useIsDesktop'
 import { cn } from '@/utils/web/cn'
 import { trackFormSubmissionSyncErrors, triggerServerActionForForm } from '@/utils/web/formUtils'
 import { zodUpdateUserHasOptedInToSMS } from '@/validation/forms/zodUpdateUserHasOptedInToSMS'
 
 const FORM_NAME = 'SMS opt in form'
-const FORM_ID = 'sms-opt-in-form'
 
-export interface SMSOptInFormProps {
+export interface SMSOptInFormProps extends Omit<ComponentProps<'form'>, 'children'> {
   initialValues?: UpdateUserHasOptedInToSMSPayload
   onSuccess?: (formValues: UpdateUserHasOptedInToSMSPayload) => void
   children: (props: {
     form: ReturnType<typeof useForm<UpdateUserHasOptedInToSMSPayload>>
   }) => React.ReactNode
-  className?: ClassValue
 }
 
 export function SMSOptInForm(props: SMSOptInFormProps) {
-  const { initialValues, onSuccess, children, className } = props
+  const { initialValues, onSuccess, children, ...rest } = props
 
   const router = useRouter()
 
@@ -40,8 +42,6 @@ export function SMSOptInForm(props: SMSOptInFormProps) {
   return (
     <Form {...form}>
       <form
-        className={cn(className)}
-        id={FORM_ID}
         onSubmit={form.handleSubmit(async values => {
           const result = await triggerServerActionForForm(
             {
@@ -57,6 +57,7 @@ export function SMSOptInForm(props: SMSOptInFormProps) {
             onSuccess?.(values)
           }
         }, trackFormSubmissionSyncErrors(FORM_NAME))}
+        {...rest}
       >
         {children({
           form,
@@ -67,11 +68,19 @@ export function SMSOptInForm(props: SMSOptInFormProps) {
 }
 
 SMSOptInForm.PhoneNumberField = function SMSOptInFormPhoneNumberField({
+  shouldAutoFocus = false,
   className,
 }: {
+  shouldAutoFocus?: boolean
   className?: ClassValue
 }) {
-  const { control } = useFormContext<UpdateUserHasOptedInToSMSPayload>()
+  const { control, setFocus } = useFormContext<UpdateUserHasOptedInToSMSPayload>()
+
+  const isDesktop = useIsDesktop()
+
+  useEffect(() => {
+    if (isDesktop && shouldAutoFocus) setFocus('phoneNumber')
+  }, [isDesktop, setFocus, shouldAutoFocus])
 
   return (
     <div className={cn('flex', className)}>
@@ -96,8 +105,15 @@ SMSOptInForm.SubmitButton = function SMSOptInFormSubmitButton({
   children,
   ...props
 }: React.ComponentProps<typeof Button>) {
+  const { formState } = useFormContext<UpdateUserHasOptedInToSMSPayload>()
+
   return (
-    <Button className={cn('font-semibold', className)} form={FORM_ID} type="submit" {...props}>
+    <Button
+      className={cn('font-semibold', className)}
+      disabled={formState.isSubmitting}
+      type="submit"
+      {...props}
+    >
       {children || 'Get updates'}
     </Button>
   )

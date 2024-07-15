@@ -2,16 +2,21 @@ import { useLocalUser } from '@/hooks/useLocalUser'
 import {
   Experiments,
   getDefaultExperimentContext,
+  getExperimentVariants,
   IExperimentContext,
 } from '@/utils/shared/experiments'
 
 function useExperimentName<K extends Experiments>({ experimentName }: { experimentName: K }) {
   const localUser = useLocalUser()
 
+  const experimentVariants = getExperimentVariants(experimentName)
+
   const variant = localUser?.persisted?.experiments?.[experimentName]
   const defaultVariant = getDefaultExperimentContext()[experimentName]
 
-  return variant ?? defaultVariant
+  if (!variant || !experimentVariants?.includes(variant)) return defaultVariant
+
+  return variant
 }
 
 type ExperimentsComponentProps<K extends Experiments> = {

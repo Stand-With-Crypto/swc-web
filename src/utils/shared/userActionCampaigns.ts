@@ -32,6 +32,7 @@ export enum UserActionOptInCampaignName {
 }
 export enum UserActionTweetCampaignName {
   DEFAULT = 'DEFAULT',
+  'FOLLOW_SWC_ON_X_2024' = 'FOLLOW_SWC_ON_X_2024',
 }
 export enum UserActionNftMintCampaignName {
   DEFAULT = 'DEFAULT',
@@ -47,7 +48,7 @@ export enum UserActionTweetAtPersonCampaignName {
   '2024_05_22_PIZZA_DAY' = '2024_05_22_PIZZA_DAY',
 }
 
-export type UserActionCampaigns =
+export type UserActionCampaignName =
   | UserActionEmailCampaignName
   | UserActionCallCampaignName
   | UserActionDonationCampaignName
@@ -57,6 +58,18 @@ export type UserActionCampaigns =
   | UserActionVoterRegistrationCampaignName
   | UserActionLiveEventCampaignName
   | UserActionTweetAtPersonCampaignName
+
+export type UserActionCampaigns = {
+  [UserActionType.EMAIL]: UserActionEmailCampaignName
+  [UserActionType.CALL]: UserActionCallCampaignName
+  [UserActionType.DONATION]: UserActionDonationCampaignName
+  [UserActionType.OPT_IN]: UserActionOptInCampaignName
+  [UserActionType.TWEET]: UserActionTweetCampaignName
+  [UserActionType.NFT_MINT]: UserActionNftMintCampaignName
+  [UserActionType.VOTER_REGISTRATION]: UserActionVoterRegistrationCampaignName
+  [UserActionType.LIVE_EVENT]: UserActionLiveEventCampaignName
+  [UserActionType.TWEET_AT_PERSON]: UserActionTweetAtPersonCampaignName
+}
 
 export const USER_ACTION_TO_CAMPAIGN_NAME_MAP = {
   [UserActionType.EMAIL]: UserActionEmailCampaignName,
@@ -75,7 +88,7 @@ export const USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
   [UserActionType.CALL]: UserActionCallCampaignName.FIT21_2024_04,
   [UserActionType.DONATION]: UserActionDonationCampaignName.DEFAULT,
   [UserActionType.OPT_IN]: UserActionOptInCampaignName.DEFAULT,
-  [UserActionType.TWEET]: UserActionTweetCampaignName.DEFAULT,
+  [UserActionType.TWEET]: UserActionTweetCampaignName.FOLLOW_SWC_ON_X_2024,
   [UserActionType.NFT_MINT]: UserActionNftMintCampaignName.DEFAULT,
   [UserActionType.VOTER_REGISTRATION]: UserActionVoterRegistrationCampaignName.DEFAULT,
   [UserActionType.LIVE_EVENT]: UserActionLiveEventCampaignName['2024_03_04_LA'],
@@ -83,9 +96,7 @@ export const USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
 } satisfies Record<ActiveClientUserActionWithCampaignType, string>
 
 type UserActionAdditionalCampaigns = {
-  [key in UserActionType]: string[]
+  [K in keyof UserActionCampaigns]?: UserActionCampaigns[K][]
 }
 
-export const USER_ACTIONS_WITH_ADDITIONAL_CAMPAIGN: Partial<UserActionAdditionalCampaigns> = {
-  [UserActionType.EMAIL]: [UserActionEmailCampaignName.CNN_PRESIDENTIAL_DEBATE_2024],
-}
+export const USER_ACTIONS_WITH_ADDITIONAL_CAMPAIGN: Partial<UserActionAdditionalCampaigns> = {}

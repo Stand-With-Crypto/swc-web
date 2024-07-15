@@ -5,7 +5,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import * as Sentry from '@sentry/nextjs'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
-import { z } from 'zod'
 
 import { actionUpdateUserProfile } from '@/actions/actionUpdateUserProfile'
 import { ClientAddress } from '@/clientModels/clientAddress'
@@ -13,6 +12,7 @@ import { SensitiveDataClientUser } from '@/clientModels/clientUser/sensitiveData
 import { SWCMembershipDialog } from '@/components/app/updateUserProfileForm/swcMembershipDialog'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
+import { Collapsible, CollapsibleContent } from '@/components/ui/collapsible'
 import {
   Form,
   FormControl,
@@ -27,25 +27,24 @@ import { Input } from '@/components/ui/input'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
-import {
-  GenericErrorFormValues,
-  trackFormSubmissionSyncErrors,
-  triggerServerActionForForm,
-} from '@/utils/web/formUtils'
+import { trackFormSubmissionSyncErrors, triggerServerActionForForm } from '@/utils/web/formUtils'
 import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
-import { zodUpdateUserProfileWithRequiredFormFields } from '@/validation/forms/zodUpdateUserProfile/zodUpdateUserProfileFormFields'
+import {
+  zodUpdateUserProfileFormFields,
+  zodUpdateUserProfileWithRequiredFormFields,
+} from '@/validation/forms/zodUpdateUserProfile/zodUpdateUserProfileFormFields'
 
 const FORM_NAME = 'User Profile'
-type FormValues = z.infer<typeof zodUpdateUserProfileWithRequiredFormFields> &
-  GenericErrorFormValues
 
 export function UpdateUserProfileForm({
   user,
   onSuccess,
+  shouldFieldsBeRequired = false,
 }: {
   user: SensitiveDataClientUser & { address: ClientAddress | null }
   onSuccess: (updatedUserFields: { firstName: string; lastName: string }) => void
+  shouldFieldsBeRequired?: boolean
 }) {
   const router = useRouter()
   const defaultValues = useRef({
@@ -55,16 +54,20 @@ export function UpdateUserProfileForm({
     emailAddress: user.primaryUserEmailAddress?.emailAddress || '',
     phoneNumber: user.phoneNumber || '',
     hasOptedInToMembership: user.hasOptedInToMembership,
-    hasOptedInToSms: true,
+    hasOptedInToSms: user.hasOptedInToSms,
     address: user.address
       ? {
           description: user.address.formattedDescription,
           place_id: user.address.googlePlaceId,
         }
-      : undefined,
+      : null,
   })
-  const form = useForm<FormValues>({
-    resolver: zodResolver(zodUpdateUserProfileWithRequiredFormFields),
+  const form = useForm({
+    resolver: zodResolver(
+      shouldFieldsBeRequired
+        ? zodUpdateUserProfileWithRequiredFormFields
+        : zodUpdateUserProfileFormFields,
+    ),
     defaultValues: defaultValues.current,
   })
 
@@ -73,13 +76,13 @@ export function UpdateUserProfileForm({
       <form
         className="flex h-full flex-col gap-6 md:gap-4 md:px-8"
         onSubmit={form.handleSubmit(async values => {
-          const address = await convertGooglePlaceAutoPredictionToAddressSchema(
-            values.address,
-          ).catch(e => {
-            Sentry.captureException(e)
-            catchUnexpectedServerErrorAndTriggerToast(e)
-            return null
-          })
+          const address = values.address
+            ? await convertGooglePlaceAutoPredictionToAddressSchema(values.address).catch(e => {
+                Sentry.captureException(e)
+                catchUnexpectedServerErrorAndTriggerToast(e)
+                return null
+              })
+            : null
 
           const result = await triggerServerActionForForm(
             {
@@ -88,7 +91,7 @@ export function UpdateUserProfileForm({
               analyticsProps: {
                 ...(address ? convertAddressToAnalyticsProperties(address) : {}),
               },
-              payload: { ...values, address },
+              payload: { ...values, address, hasOptedInToSms: !!values.phoneNumber },
             },
             payload => actionUpdateUserProfile(payload),
           )
@@ -236,11 +239,15 @@ export function UpdateUserProfileForm({
           <Button className="w-full" disabled={form.formState.isSubmitting} size="lg" type="submit">
             Create account
           </Button>
-          <p className="text-center text-xs font-normal leading-4 text-muted-foreground">
-            By clicking Create account, you consent to receive recurring texts from Stand with
-            Crypto about its efforts at the number provided. You can reply STOP to stop receiving
-            texts. Message and data rates may apply.
-          </p>
+          <Collapsible open={!!form.watch('phoneNumber')}>
+            <CollapsibleContent className="AnimateCollapsibleContent">
+              <FormDescription className="text-center text-xs font-normal leading-4 text-muted-foreground">
+                By clicking Create account, you consent to receive recurring texts from Stand with
+                Crypto about its efforts at the number provided. You can reply STOP to stop
+                receiving texts. Message and data rates may apply.
+              </FormDescription>
+            </CollapsibleContent>
+          </Collapsible>
         </div>
       </form>
     </Form>
