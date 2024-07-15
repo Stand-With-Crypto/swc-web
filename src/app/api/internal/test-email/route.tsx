@@ -1,8 +1,8 @@
 import { render } from '@react-email/components'
 import { NextResponse } from 'next/server'
 
-import { sendMail } from '@/lib/email'
-import InitialSignUpEmail from '@/lib/email/templates/initialSignUp'
+import { sendMail } from '@/utils/server/email'
+import InitialSignUpEmail from '@/utils/server/email/templates/initialSignUp'
 
 export async function GET() {
   const messageId = await sendMail({

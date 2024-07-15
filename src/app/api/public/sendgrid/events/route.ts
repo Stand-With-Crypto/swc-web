@@ -20,7 +20,7 @@ import {
   EVENT_NAME_TO_HUMAN_READABLE_STRING,
   parseEventsWebhookRequest,
   verifySignature,
-} from '@/lib/email'
+} from '@/utils/server/email'
 
 export async function POST(request: NextRequest) {
   const isVerified = await verifySignature(request.clone()).catch(logger.error)

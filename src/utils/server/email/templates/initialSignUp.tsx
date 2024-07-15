@@ -5,11 +5,11 @@ import { ChevronRight } from 'lucide-react'
 import {
   ACTIONS_METADATA_BY_TYPE,
   EmailActiveActions,
-} from '@/lib/email/templates/common/constants'
-import { Button } from '@/lib/email/templates/ui/button'
-import { Heading } from '@/lib/email/templates/ui/heading'
-import { Wrapper } from '@/lib/email/templates/ui/wrapper'
-import { buildTemplateInternalUrl } from '@/lib/email/utils/buildTemplateInternalUrl'
+} from '@/utils/server/email/templates/common/constants'
+import { Button } from '@/utils/server/email/templates/ui/button'
+import { Heading } from '@/utils/server/email/templates/ui/heading'
+import { Wrapper } from '@/utils/server/email/templates/ui/wrapper'
+import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTemplateInternalUrl'
 
 interface InitialSignUpEmailProps {
   completedActionTypes?: EmailActiveActions[]

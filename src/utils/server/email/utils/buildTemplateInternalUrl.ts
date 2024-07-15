@@ -1,4 +1,4 @@
-import { INTERNAL_BASE_URL } from '@/lib/email/constants'
+import { INTERNAL_BASE_URL } from '@/utils/server/email/constants'
 
 export function buildTemplateInternalUrl(path: string, params: Record<string, string> = {}) {
   if (!path.startsWith('/')) {

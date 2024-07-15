@@ -1,4 +1,4 @@
-import { INTERNAL_BASE_URL } from '@/lib/email/constants'
+import { INTERNAL_BASE_URL } from '@/utils/server/email/constants'
 
 export type EmailActiveActions = 'CALL' | 'EMAIL' | 'DONATION' | 'NFT_MINT' | 'VOTER_REGISTRATION'
 

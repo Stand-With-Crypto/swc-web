@@ -14,10 +14,10 @@ import {
   Text,
 } from '@react-email/components'
 
-import { SOCIAL_MEDIA_URL } from '@/lib/email/templates/common/constants'
-import { tailwindConfig } from '@/lib/email/templates/common/tailwind-config'
-import { Button } from '@/lib/email/templates/ui/button'
-import { buildTemplateInternalUrl } from '@/lib/email/utils/buildTemplateInternalUrl'
+import { SOCIAL_MEDIA_URL } from '@/utils/server/email/templates/common/constants'
+import { tailwindConfig } from '@/utils/server/email/templates/common/tailwind-config'
+import { Button } from '@/utils/server/email/templates/ui/button'
+import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTemplateInternalUrl'
 
 interface WrapperProps {
   previewText?: string
