@@ -62,23 +62,6 @@ export function PageHome({
       <div className="container">
         <TopLevelMetrics {...{ sumDonations, locale, countUsers, countPolicymakerContacts }} />
 
-        <section className="mb-16 text-center md:mb-36">
-          <PageTitle as="h3" className="mb-7" size="md">
-            Our partners
-          </PageTitle>
-          <PageSubTitle as="h4" className="mb-7">
-            Stand With Crypto is first and foremost the result of{' '}
-            {TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME}+ people fighting to keep crypto in America.
-            We’ve also partnered with a number of companies to fight alongside us.
-          </PageSubTitle>
-          <div className="space-y-6">
-            <PartnerGrid />
-            <Button asChild variant="secondary">
-              <InternalLink href={urls.partners()}>View all</InternalLink>
-            </Button>
-          </div>
-        </section>
-
         <section className="mb-16 space-y-7 md:mb-36 xl:space-y-16">
           <PageTitle as="h3" size="md">
             Our community
@@ -151,6 +134,24 @@ export function PageHome({
             </TabsContent>
           </Tabs>
         </section>
+
+        <section className="mb-16 text-center md:mb-36">
+          <PageTitle as="h3" className="mb-7" size="md">
+            Our partners
+          </PageTitle>
+          <PageSubTitle as="h4" className="mb-7">
+            Stand With Crypto is first and foremost the result of{' '}
+            {TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME}+ people fighting to keep crypto in America.
+            We’ve also partnered with a number of companies to fight alongside us.
+          </PageSubTitle>
+          <div className="space-y-6">
+            <PartnerGrid />
+            <Button asChild variant="secondary">
+              <InternalLink href={urls.partners()}>View all</InternalLink>
+            </Button>
+          </div>
+        </section>
+
         <section className="mb-16 space-y-7 md:mb-36">
           <PageTitle as="h3" size="md">
             Get involved

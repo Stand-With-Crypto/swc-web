@@ -8,7 +8,7 @@ export function AdvocateHeatmapActionList({ isEmbedded }: { isEmbedded?: boolean
 
   return (
     <div
-      className={`flex  flex-row justify-around gap-3  md:justify-between ${isEmbedded ? 'w-full md:w-[auto] md:flex-col' : 'w-full items-center rounded-[40px] bg-[#FBF8FF] px-10 py-8'}`}
+      className={`flex  flex-row justify-around gap-3  md:justify-between ${isEmbedded ? 'w-full md:w-[auto] md:flex-col' : 'w-full items-center rounded-[24px] bg-[#FBF8FF] px-10 py-8'}`}
     >
       {!isEmbedded && <strong>Key</strong>}
       {Object.entries(ADVOCATES_ACTIONS).map(([key, action]) => {
