@@ -2,6 +2,8 @@ import { NextImage } from '@/components/ui/image'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 
+export const dynamic = 'error'
+
 export default function UnsubscribeSuccessPage() {
   return (
     <div className="container mt-20 flex flex-col items-center gap-20">
