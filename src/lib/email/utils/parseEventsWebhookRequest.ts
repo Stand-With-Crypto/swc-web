@@ -1,4 +1,4 @@
-import { EmailEvent } from './constants'
+import { EmailEvent } from '@/lib/email/constants'
 
 /**
  * @returns an object where the key is the message_id and the value is an array of events that message received

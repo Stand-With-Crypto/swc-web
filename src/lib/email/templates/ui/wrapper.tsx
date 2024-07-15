@@ -14,9 +14,10 @@ import {
   Text,
 } from '@react-email/components'
 
-import { BASE_URL, SOCIAL_MEDIA_URL } from '@/lib/email/templates/common/constants'
+import { SOCIAL_MEDIA_URL } from '@/lib/email/templates/common/constants'
 import { tailwindConfig } from '@/lib/email/templates/common/tailwind-config'
 import { Button } from '@/lib/email/templates/ui/button'
+import { buildTemplateInternalUrl } from '@/lib/email/utils/buildTemplateInternalUrl'
 
 interface WrapperProps {
   previewText?: string
@@ -47,11 +48,11 @@ function HeaderSection() {
     <Section className="my-6">
       <Row>
         <Column>
-          <Link className="inline-block h-10 w-10" href="https://www.standwithcrypto.org">
+          <Link className="inline-block h-10 w-10" href={buildTemplateInternalUrl('/')}>
             <Img
               alt="Stand With Crypto"
               height="40"
-              src={`${BASE_URL}/email/misc/shield.png`}
+              src={buildTemplateInternalUrl('/email/misc/shield.png')}
               width="40"
             />
           </Link>
@@ -68,7 +69,7 @@ function HeaderSection() {
                   alt="X/Twitter logo"
                   className="inline"
                   height="24"
-                  src={`${BASE_URL}/email/misc/xDotComLogo.png`}
+                  src={buildTemplateInternalUrl('/email/misc/xDotComLogo.png')}
                   width="24"
                 />
               </Column>
@@ -89,14 +90,14 @@ function FooterSection() {
         <Img
           alt="Stand With Crypto"
           height="40"
-          src={`${BASE_URL}/email/misc/shield.png`}
+          src={buildTemplateInternalUrl('/email/misc/shield.png')}
           width="40"
         />
 
         <Row>
           <Column>
             <Text className="mb-1 text-base">Stand With Crypto</Text>
-            <Button color="muted" href="https://www.standwithcrypto.org" noPadding variant="ghost">
+            <Button color="muted" href={buildTemplateInternalUrl('/')} noPadding variant="ghost">
               www.standwithcrypto.org
             </Button>
           </Column>
@@ -108,7 +109,7 @@ function FooterSection() {
                   <Img
                     alt="Facebook logo"
                     height="24"
-                    src={`${BASE_URL}/email/misc/facebookLogo.png`}
+                    src={buildTemplateInternalUrl('/email/misc/facebookLogo.png')}
                     width="24"
                   />
                 </Link>
@@ -118,7 +119,7 @@ function FooterSection() {
                   <Img
                     alt="X/Twitter logo"
                     height="24"
-                    src={`${BASE_URL}/email/misc/xDotComLogoGrey.png`}
+                    src={buildTemplateInternalUrl('/email/misc/xDotComLogoGrey.png')}
                     width="24"
                   />
                 </Link>
@@ -128,7 +129,7 @@ function FooterSection() {
                   <Img
                     alt="Instagram logo"
                     height="24"
-                    src={`${BASE_URL}/email/misc/instagramLogo.png`}
+                    src={buildTemplateInternalUrl('/email/misc/instagramLogo.png')}
                     width="24"
                   />
                 </Link>

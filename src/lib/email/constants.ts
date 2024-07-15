@@ -35,3 +35,7 @@ export const EVENT_NAME_TO_HUMAN_READABLE_STRING: Record<EmailEventName, string>
   [EmailEventName.GROUP_UNSUBSCRIBE]: 'Group Unsubscribe',
   [EmailEventName.GROUP_RESUBSCRIBE]: 'Group Resubscribe',
 }
+
+export const INTERNAL_BASE_URL = process.env.VERCEL_URL
+  ? `https://${process.env.VERCEL_URL}`
+  : 'http://localhost:3000'

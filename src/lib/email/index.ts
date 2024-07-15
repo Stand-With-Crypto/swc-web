@@ -1,6 +1,6 @@
 export type { EmailEvent } from './constants'
 export { EmailEventName, EVENT_NAME_TO_HUMAN_READABLE_STRING } from './constants'
-export { parseEventsWebhookRequest } from './parseEventsWebhookRequest'
 export type { SendMailPayload } from './sendMail'
 export { sendMail, sendMultipleMails } from './sendMail'
-export { verifySignature } from './verifySignature'
+export { parseEventsWebhookRequest } from './utils/parseEventsWebhookRequest'
+export { verifySignature } from './utils/verifySignature'

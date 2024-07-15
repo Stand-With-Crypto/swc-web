@@ -4,22 +4,32 @@ import { ChevronRight } from 'lucide-react'
 
 import {
   ACTIONS_METADATA_BY_TYPE,
-  BASE_URL,
   EmailActiveActions,
 } from '@/lib/email/templates/common/constants'
 import { Button } from '@/lib/email/templates/ui/button'
 import { Heading } from '@/lib/email/templates/ui/heading'
 import { Wrapper } from '@/lib/email/templates/ui/wrapper'
+import { buildTemplateInternalUrl } from '@/lib/email/utils/buildTemplateInternalUrl'
 
 interface InitialSignUpEmailProps {
   completedActionTypes?: EmailActiveActions[]
   previewText?: string
+  session?: {
+    userId: string
+    sessionId: string
+  } | null
 }
 
 export default function InitialSignUpEmail({
   completedActionTypes = [],
   previewText,
+  session,
 }: InitialSignUpEmailProps) {
+  const urlParams = {
+    utm_campaign: 'initial_signup',
+    ...(session ?? {}),
+  }
+
   const actionsMetadata = Object.entries(ACTIONS_METADATA_BY_TYPE)
     .map(([type, metadata]) => ({
       ...metadata,
@@ -31,7 +41,11 @@ export default function InitialSignUpEmail({
   return (
     <Wrapper previewText={previewText}>
       <Section>
-        <Img className="mb-6 max-w-full" src={`${BASE_URL}/email/swc-join-still.png`} width={620} />
+        <Img
+          className="mb-6 max-w-full"
+          src={buildTemplateInternalUrl('/email/swc-join-still.png')}
+          width={620}
+        />
 
         <Heading gutterBottom="md">Thanks for joining!</Heading>
 
@@ -72,11 +86,12 @@ export default function InitialSignUpEmail({
                 <Img
                   alt={`${metadata.type} action icon`}
                   height="24"
-                  src={
+                  src={buildTemplateInternalUrl(
                     metadata.hasCompleted
-                      ? `${BASE_URL}/email/misc/checkedCircle.png`
-                      : `${BASE_URL}/email/misc/uncheckedCircle.png`
-                  }
+                      ? '/email/misc/checkedCircle.png'
+                      : '/email/misc/uncheckedCircle.png',
+                    urlParams,
+                  )}
                   width="24"
                 />
               </Column>
@@ -85,7 +100,7 @@ export default function InitialSignUpEmail({
                   alt={`${metadata.type} action icon`}
                   className="rounded-xl"
                   height="100"
-                  src={metadata.image}
+                  src={buildTemplateInternalUrl(metadata.image, urlParams)}
                   width="100"
                 />
               </Column>
@@ -96,12 +111,15 @@ export default function InitialSignUpEmail({
                 <Text className="text-foreground-muted my-0">{metadata.text}</Text>
               </Column>
               <Column align="right" className="w-6 md:w-[157px]">
-                <Button className="hidden text-center md:block" href={metadata.buttonHref}>
+                <Button
+                  className="hidden text-center md:block"
+                  href={buildTemplateInternalUrl(metadata.buttonHref, urlParams)}
+                >
                   {metadata.buttonLabel}
                 </Button>
                 <Button
                   className="block md:hidden"
-                  href={metadata.buttonHref}
+                  href={buildTemplateInternalUrl(metadata.buttonHref, urlParams)}
                   noPadding
                   variant="ghost"
                 >

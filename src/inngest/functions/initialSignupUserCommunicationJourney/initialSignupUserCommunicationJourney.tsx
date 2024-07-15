@@ -122,6 +122,7 @@ async function sendInitialSignupEmail({
     include: {
       primaryUserEmailAddress: true,
       userActions: true,
+      userSessions: true,
     },
   })
 
@@ -144,6 +145,14 @@ async function sendInitialSignupEmail({
         completedActionTypes={user.userActions
           .filter(action => !ACTIVE_ACTIONS.includes(action.actionType))
           .map(action => `${action.actionType}` as EmailActiveActions)}
+        session={
+          user.userSessions[0]?.id
+            ? {
+                userId: user.id,
+                sessionId: user.userSessions[0].id,
+              }
+            : null
+        }
       />,
     ),
   }).catch(err => {

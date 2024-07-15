@@ -3,12 +3,20 @@ import 'server-only'
 import * as Sentry from '@sentry/nextjs'
 import { NextRequest, NextResponse } from 'next/server'
 
+import { CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/capitolCanary/upsertAdvocateInCapitolCanary'
+import { inngest } from '@/inngest/inngest'
+import {
+  CapitolCanaryCampaignName,
+  getCapitolCanaryCampaignID,
+} from '@/utils/server/capitolCanary/campaigns'
+import { UpsertAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getServerAnalytics } from '@/utils/server/serverAnalytics'
 import { getLogger, logger } from '@/utils/shared/logger'
 
 import {
   EmailEvent,
+  EmailEventName,
   EVENT_NAME_TO_HUMAN_READABLE_STRING,
   parseEventsWebhookRequest,
   verifySignature,
@@ -43,9 +51,9 @@ export async function POST(request: NextRequest) {
 async function processEventChunk(messageId: string, events: EmailEvent[]) {
   const log = getLogger(`Sendgrid Event Webhook - ${messageId}`)
 
-  const analytics = await getServerAnalyticsFromMessageId(messageId)
+  const { analytics, userId } = await getServerAnalyticsFromMessageId(messageId)
 
-  events.forEach(eventEntry => {
+  for await (const eventEntry of events) {
     log.info(`tracking event: ${eventEntry.event}`)
     analytics.track(`Email Communication Event`, {
       'Event Name': EVENT_NAME_TO_HUMAN_READABLE_STRING[eventEntry.event] ?? eventEntry.event,
@@ -57,7 +65,30 @@ async function processEventChunk(messageId: string, events: EmailEvent[]) {
       ...(eventEntry.url && { Url: eventEntry.url }),
       ...(eventEntry.variant && { Variant: eventEntry.variant }),
     })
-  })
+
+    if (eventEntry.event === EmailEventName.UNSUBSCRIBE) {
+      const user = await prismaClient.user.findFirstOrThrow({
+        where: {
+          id: userId,
+        },
+        include: {
+          address: true,
+        },
+      })
+      const capitolCanaryPayload: UpsertAdvocateInCapitolCanaryPayloadRequirements = {
+        user: user,
+        campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_MEMBERSHIP),
+        opts: {
+          isEmailOptout: true,
+        },
+      }
+
+      await inngest.send({
+        name: CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME,
+        data: capitolCanaryPayload,
+      })
+    }
+  }
 
   await analytics.flush()
 }
@@ -80,5 +111,5 @@ async function getServerAnalyticsFromMessageId(messageId: string) {
 
   const userId = userCommunication.userCommunicationJourney.userId
 
-  return getServerAnalytics({ userId, localUser: null })
+  return { analytics: getServerAnalytics({ userId, localUser: null }), userId }
 }
