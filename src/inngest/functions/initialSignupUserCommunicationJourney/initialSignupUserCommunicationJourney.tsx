@@ -1,4 +1,4 @@
-import { UserActionType, UserCommunicationJourneyType } from '@prisma/client'
+import { CommunicationType, UserActionType, UserCommunicationJourneyType } from '@prisma/client'
 import { render } from '@react-email/components'
 import * as Sentry from '@sentry/nextjs'
 import { isBefore, subMinutes } from 'date-fns'
@@ -170,6 +170,7 @@ async function sendInitialSignupEmail({
     data: {
       userCommunicationJourneyId,
       messageId,
+      communicationType: CommunicationType.EMAIL,
     },
   })
 }
