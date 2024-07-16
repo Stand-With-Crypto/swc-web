@@ -2,7 +2,7 @@ import { NonRetriableError } from 'inngest'
 
 import { PHONE_NUMBER_REGEX } from '@/utils/shared/phoneNumber'
 
-export async function validatePhoneNumber(phoneNumber: string) {
+export function validatePhoneNumber(phoneNumber: string) {
   if (!phoneNumber) {
     throw new NonRetriableError('Missing phone number')
   }

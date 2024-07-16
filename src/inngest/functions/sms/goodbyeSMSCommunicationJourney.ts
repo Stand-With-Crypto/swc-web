@@ -1,4 +1,5 @@
 import { UserCommunicationJourneyType } from '@prisma/client'
+import * as Sentry from '@sentry/node'
 
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
@@ -32,7 +33,7 @@ export const goodbyeSMSCommunicationJourney = inngest.createFunction(
   async ({ event, step }) => {
     const { phoneNumber } = event.data as GoodbyeSMSCommunicationJourneyPayload
 
-    await validatePhoneNumber(phoneNumber)
+    validatePhoneNumber(phoneNumber)
 
     const communicationJourneys = await step.run('create-communication-journey', () =>
       createCommunicationJourneys(phoneNumber, UserCommunicationJourneyType.GOODBYE_SMS),
@@ -42,6 +43,12 @@ export const goodbyeSMSCommunicationJourney = inngest.createFunction(
       sendSMS({
         body: messages.GOODBYE_MESSAGE,
         to: phoneNumber,
+      }).catch(error => {
+        Sentry.captureException(error, {
+          tags: {
+            domain: 'goodbyeSMS',
+          },
+        })
       }),
     )
 

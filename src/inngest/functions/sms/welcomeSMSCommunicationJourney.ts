@@ -1,4 +1,5 @@
 import { UserCommunicationJourneyType } from '@prisma/client'
+import * as Sentry from '@sentry/node'
 import { NonRetriableError } from 'inngest'
 
 import { inngest } from '@/inngest/inngest'
@@ -40,15 +41,25 @@ export const welcomeSMSCommunicationJourney = inngest.createFunction(
 
     if (smsProvider !== 'twilio') return
 
-    await validatePhoneNumber(phoneNumber)
+    validatePhoneNumber(phoneNumber)
 
     const communicationJourneys = await step.run('create-communication-journey', () =>
       createCommunicationJourneys(phoneNumber, UserCommunicationJourneyType.WELCOME_SMS),
     )
 
     const message = await step.run('send-sms', () =>
-      sendMessage(phoneNumber, communicationJourneys),
+      sendMessage(phoneNumber, communicationJourneys).catch(error => {
+        Sentry.captureException(error, {
+          tags: {
+            domain: 'welcomeSMS',
+          },
+        })
+      }),
     )
+
+    if (!message) {
+      throw new Error('Failed to send SMS')
+    }
 
     await step.run('create-user-communication', () =>
       createCommunication(communicationJourneys, message.sid),
@@ -70,11 +81,5 @@ async function sendMessage(
     }
   }
 
-  const message = await sendSMS({ body: messages.WELCOME_MESSAGE, to: phoneNumber })
-
-  if (!message) {
-    throw new Error('Failed to send SMS')
-  }
-
-  return message
+  return sendSMS({ body: messages.WELCOME_MESSAGE, to: phoneNumber })
 }
