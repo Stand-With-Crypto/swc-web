@@ -14,7 +14,7 @@ export const buttonVariantsConfig = {
     outline: 'border text-fontcolor border-input bg-background',
     secondary: 'bg-secondary text-secondary-foreground',
     ghost: 'text-fontcolor',
-    link: 'text-primary underline-offset-4',
+    link: 'text-primary underline',
   },
   noPadding: {
     false: '',
@@ -23,9 +23,10 @@ export const buttonVariantsConfig = {
   color: {
     default: '',
     muted: 'text-muted-foreground',
+    'primary-cta': 'text-primary-cta',
   },
 } satisfies Record<string, Record<string, ClassValue>>
-const buttonVariants = cva('rounded-full text-sm font-medium px-6 py-3', {
+const buttonVariants = cva('rounded-full text-sm font-medium px-6 py-3 ', {
   variants: buttonVariantsConfig,
   defaultVariants: {
     variant: 'default',

@@ -2,6 +2,7 @@ import * as React from 'react'
 import { Hr, Img, Section, Text } from '@react-email/components'
 
 import { EmailTemplateProps } from '@/utils/server/email/templates/common/constants'
+import { Button } from '@/utils/server/email/templates/ui/button'
 import { Heading } from '@/utils/server/email/templates/ui/heading'
 import {
   KeepUpTheFightSection,
@@ -10,18 +11,18 @@ import {
 import { Wrapper } from '@/utils/server/email/templates/ui/wrapper'
 import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTemplateInternalUrl'
 
-type InitialSignUpEmailProps = KeepUpTheFightSectionProps & EmailTemplateProps
+type FinishSettingUpProfileReminderEmailProps = KeepUpTheFightSectionProps & EmailTemplateProps
 
-InitialSignUpEmail.subjectLine = 'Thanks for joining SWC!'
+FinishSettingUpProfileReminderEmail.subjectLine = 'Finish setting up your profile'
 
-export default function InitialSignUpEmail({
+export default function FinishSettingUpProfileReminderEmail({
   previewText,
   session = {},
   hrefSearchParams = {},
   ...keepUpTheFightSectionProps
-}: InitialSignUpEmailProps) {
+}: FinishSettingUpProfileReminderEmailProps) {
   const hydratedHrefSearchParams = {
-    utm_campaign: 'initial_signup',
+    utm_campaign: 'finish_setting_up_profile',
     ...hrefSearchParams,
     ...session,
   }
@@ -35,25 +36,32 @@ export default function InitialSignUpEmail({
           width={620}
         />
 
-        <Heading gutterBottom="md">Thanks for joining!</Heading>
+        <Heading gutterBottom="md">Finish setting up your profile</Heading>
 
         <Text className="text-foreground-muted text-center text-base">
-          Thank you for signing up to be a Stand With Crypto advocate. Crypto advocates like you are
-          making a huge difference in America, from your local community to Capitol Hill.
+          Thank you for signing up to be a Stand With Crypto advocate. As a reminder, please take
+          just a few moments to finish setting up your full profile with SWC.
           <br />
           <br />
-          Stand With Crypto advocates have moved votes in Congress, brought crypto to the forefront
-          of political campaigns, and helped highlight the real-world uses of crypto that make a
-          difference in Americans' everyday lives.
+          Adding additional information will unlock special benefits with SWC, like exclusive
+          communications, NFTs, and even more opportunities to engage with the pro-crypto movement
+          we're building.
           <br />
           <br />
-          Keep an eye out for more communications from us: you'll see updates on key news stories
-          we're tracking, events in your local area, and opportunities for you to raise your voice
-          to your elected officials.
-          <br />
-          <br />
-          Together, we're making a difference for crypto. Thank you for standing with us.
+          Setting up your profile takes just a few minutes, and is easy to do on our site. Thank you
+          so much for standing with crypto and being a part of this movement.
         </Text>
+      </Section>
+
+      <Section className="mt-4 text-center">
+        <Button
+          href={buildTemplateInternalUrl('/profile', {
+            hasOpenUpdateUserProfileForm: true,
+            ...hydratedHrefSearchParams,
+          })}
+        >
+          Finish your profile
+        </Button>
       </Section>
 
       <Hr className="my-8" />

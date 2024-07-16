@@ -60,7 +60,7 @@ export const initialSignUpUserCommunicationJourney = inngest.createFunction(
     } while (!done)
 
     await step.run('send-mail', async () =>
-      sendInitialSignupEmail({
+      sendWelcomeEmail({
         userId: payload.userId,
         userCommunicationJourneyId: userCommunicationJourney.id,
       }),
@@ -107,7 +107,7 @@ const ACTIVE_ACTIONS = [
   UserActionType.VOTER_REGISTRATION,
 ]
 
-async function sendInitialSignupEmail({
+async function sendWelcomeEmail({
   userId,
   userCommunicationJourneyId,
 }: {
@@ -138,7 +138,7 @@ async function sendInitialSignupEmail({
 
   const messageId = await sendMail({
     to: user.primaryUserEmailAddress.emailAddress,
-    subject: 'Welcome to Stand With Crypto',
+    subject: InitialSignUpEmail.subjectLine,
     html: render(
       <InitialSignUpEmail
         completedActionTypes={user.userActions

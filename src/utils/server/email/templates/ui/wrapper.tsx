@@ -21,9 +21,14 @@ import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTempla
 
 interface WrapperProps {
   previewText?: string
+  hrefSearchParams?: Record<string, unknown>
 }
 
-export function Wrapper({ previewText, children }: React.PropsWithChildren<WrapperProps>) {
+export function Wrapper({
+  previewText,
+  hrefSearchParams = {},
+  children,
+}: React.PropsWithChildren<WrapperProps>) {
   return (
     <Html>
       {previewText && <Preview>{previewText}</Preview>}
@@ -31,11 +36,11 @@ export function Wrapper({ previewText, children }: React.PropsWithChildren<Wrapp
         <Head />
         <Body className="mx-auto my-auto bg-background px-10 pb-10 font-sans text-base">
           <Container>
-            <HeaderSection />
+            <HeaderSection hrefSearchParams={hrefSearchParams} />
 
             {children}
 
-            <FooterSection />
+            <FooterSection hrefSearchParams={hrefSearchParams} />
           </Container>
         </Body>
       </Tailwind>
@@ -43,16 +48,19 @@ export function Wrapper({ previewText, children }: React.PropsWithChildren<Wrapp
   )
 }
 
-function HeaderSection() {
+function HeaderSection({ hrefSearchParams }: Pick<WrapperProps, 'hrefSearchParams'>) {
   return (
     <Section className="my-6">
       <Row>
         <Column>
-          <Link className="inline-block h-10 w-10" href={buildTemplateInternalUrl('/')}>
+          <Link
+            className="inline-block h-10 w-10"
+            href={buildTemplateInternalUrl('/', hrefSearchParams)}
+          >
             <Img
               alt="Stand With Crypto"
               height="40"
-              src={buildTemplateInternalUrl('/email/misc/shield.png')}
+              src={buildTemplateInternalUrl('/email/misc/shield.png', hrefSearchParams)}
               width="40"
             />
           </Link>
@@ -69,7 +77,7 @@ function HeaderSection() {
                   alt="X/Twitter logo"
                   className="inline"
                   height="24"
-                  src={buildTemplateInternalUrl('/email/misc/xDotComLogo.png')}
+                  src={buildTemplateInternalUrl('/email/misc/xDotComLogo.png', hrefSearchParams)}
                   width="24"
                 />
               </Column>
@@ -81,7 +89,7 @@ function HeaderSection() {
   )
 }
 
-function FooterSection() {
+function FooterSection({ hrefSearchParams }: Pick<WrapperProps, 'hrefSearchParams'>) {
   return (
     <>
       <Hr className="mt-10" />
@@ -90,14 +98,19 @@ function FooterSection() {
         <Img
           alt="Stand With Crypto"
           height="40"
-          src={buildTemplateInternalUrl('/email/misc/shield.png')}
+          src={buildTemplateInternalUrl('/email/misc/shield.png', hrefSearchParams)}
           width="40"
         />
 
         <Row>
           <Column>
             <Text className="mb-1 text-base">Stand With Crypto</Text>
-            <Button color="muted" href={buildTemplateInternalUrl('/')} noPadding variant="ghost">
+            <Button
+              color="muted"
+              href={buildTemplateInternalUrl('/', hrefSearchParams)}
+              noPadding
+              variant="ghost"
+            >
               www.standwithcrypto.org
             </Button>
           </Column>
@@ -109,7 +122,7 @@ function FooterSection() {
                   <Img
                     alt="Facebook logo"
                     height="24"
-                    src={buildTemplateInternalUrl('/email/misc/facebookLogo.png')}
+                    src={buildTemplateInternalUrl('/email/misc/facebookLogo.png', hrefSearchParams)}
                     width="24"
                   />
                 </Link>
@@ -119,7 +132,10 @@ function FooterSection() {
                   <Img
                     alt="X/Twitter logo"
                     height="24"
-                    src={buildTemplateInternalUrl('/email/misc/xDotComLogoGrey.png')}
+                    src={buildTemplateInternalUrl(
+                      '/email/misc/xDotComLogoGrey.png',
+                      hrefSearchParams,
+                    )}
                     width="24"
                   />
                 </Link>
@@ -129,7 +145,10 @@ function FooterSection() {
                   <Img
                     alt="Instagram logo"
                     height="24"
-                    src={buildTemplateInternalUrl('/email/misc/instagramLogo.png')}
+                    src={buildTemplateInternalUrl(
+                      '/email/misc/instagramLogo.png',
+                      hrefSearchParams,
+                    )}
                     width="24"
                   />
                 </Link>

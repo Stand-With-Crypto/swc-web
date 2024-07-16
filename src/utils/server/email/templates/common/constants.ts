@@ -35,7 +35,7 @@ export const ACTIONS_METADATA_BY_TYPE: Record<
   DONATION: {
     image: `/actionTypeIcons/donate.png`,
     text: 'Donate to Stand With Crypto',
-    subtext: 'Support Stand with Crypto’s aim to mobilize 52 million crypto advocates in the US.',
+    subtext: "Support Stand with Crypto's aim to mobilize 52 million crypto advocates in the US.",
     buttonLabel: 'Donate',
     buttonHref: `/donate`,
   },
@@ -52,4 +52,12 @@ export const SOCIAL_MEDIA_URL = {
   facebook: 'https://www.facebook.com/standwithcrypto',
   instagram: 'https://www.instagram.com/standwithcrypto',
   twitter: 'https://twitter.com/standwithcrypto',
+}
+
+export interface EmailTemplateProps {
+  previewText?: string
+  session?: {
+    userId?: string
+    sessionId?: string
+  } | null
 }
