@@ -66,7 +66,7 @@ export const USER_ACTION_ROW_CTA_INFO: Record<
     actionType: UserActionType.EMAIL,
     image: { src: '/actionTypeIcons/email.png' },
     text: `Email your ${getYourPoliticianCategoryShortDisplayName(EMAIL_FLOW_POLITICIANS_CATEGORY)}`,
-    subtext: "Follow-up your call with an email. We'll make it simple.",
+    subtext: 'Make your voice heard. We make it easy.',
     shortText: 'Send an email',
     shortSubtext: 'We drafted one for you. All you have to do is hit send.',
     canBeTriggeredMultipleTimes: true,
