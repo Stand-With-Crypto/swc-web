@@ -1,15 +1,11 @@
-import * as Sentry from '@sentry/node'
 import { z } from 'zod'
 
-import { getLogger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { smsProvider } from '@/utils/shared/smsProvider'
 
 import { messagingClient } from './client'
 
 const TWILIO_PHONE_NUMBER = requiredEnv(process.env.TWILIO_PHONE_NUMBER, 'TWILIO_PHONE_NUMBER')
-
-const logger = getLogger('sendSMS')
 
 export const zodSendSMSSchema = z.object({
   to: z.string(),
@@ -29,19 +25,18 @@ export const sendSMS = async (payload: SendSMSPayload) => {
     throw new Error('Invalid sendSMS payload')
   }
 
-  logger.info('Sending SMS', payload)
-
   const { body, to } = validatedInput.data
 
   try {
-    return messagingClient.messages.create({
+    const message = await messagingClient.messages.create({
       from: TWILIO_PHONE_NUMBER,
       body,
       to,
     })
+
+    return message
   } catch (error) {
-    logger.error(error)
-    Sentry.captureException(error)
-    throw new Error('Failed to queue SMS')
+    if (typeof error === 'object') throw { ...error, phoneNumber: to }
+    else throw error
   }
 }
