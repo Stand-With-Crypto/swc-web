@@ -5,7 +5,6 @@ import { ChevronRight } from 'lucide-react'
 import {
   ACTIONS_METADATA_BY_TYPE,
   EmailActiveActions,
-  EmailTemplateProps,
 } from '@/utils/server/email/templates/common/constants'
 import { Button } from '@/utils/server/email/templates/ui/button'
 import { Heading } from '@/utils/server/email/templates/ui/heading'
