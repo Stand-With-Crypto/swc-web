@@ -230,7 +230,7 @@ const ENQUEUE_MAX_RETRY_ATTEMPTS = 5
 async function enqueueMessages(phoneNumbers: string[], body: string, attempt = 0) {
   if (attempt > ENQUEUE_MAX_RETRY_ATTEMPTS) return 0
 
-  const enqueueMessagesPromise = phoneNumbers.map(async (phoneNumber, i) => {
+  const enqueueMessagesPromise = phoneNumbers.map(async phoneNumber => {
     const communicationJourneys = await createCommunicationJourneys(
       phoneNumber,
       UserCommunicationJourneyType.BULK_SMS,
