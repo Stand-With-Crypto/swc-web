@@ -227,7 +227,6 @@ async function fetchPhoneNumbers(
 
 const ENQUEUE_MAX_RETRY_ATTEMPTS = 5
 
-// TODO: implement some logic to not send duplicated messages
 async function enqueueMessages(phoneNumbers: string[], body: string, attempt = 0) {
   if (attempt > ENQUEUE_MAX_RETRY_ATTEMPTS) return 0
 
