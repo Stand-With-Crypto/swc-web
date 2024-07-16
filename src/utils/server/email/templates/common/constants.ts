@@ -14,7 +14,7 @@ export const ACTIONS_METADATA_BY_TYPE: Record<
   EMAIL: {
     image: `/actionTypeIcons/email.png`,
     text: 'Email your Congressperson',
-    subtext: "Follow-up your call with an email. We'll make it simple.",
+    subtext: 'Make your voice heard. We make it easy.',
     buttonLabel: 'Send an email',
     buttonHref: `/action/email`,
   },
