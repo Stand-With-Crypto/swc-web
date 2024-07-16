@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import Cookies from 'js-cookie'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
@@ -31,6 +32,15 @@ export function GeoLocationDisclaimerBanner() {
       setTimeout(() => setIsVisible(true), 10)
     }
   }, [currentCountry, hasHydrated])
+
+  const geo = Cookies.get('GEO')
+  console.log('GEO: ', geo)
+
+  useEffect(() => {
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(position => console.log('geolocation: ', position))
+    }
+  }, [])
 
   return hasHydrated && currentCountry ? (
     <div

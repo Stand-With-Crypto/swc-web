@@ -13,6 +13,9 @@ const logger = getLogger('middleware')
 // The conditionals for cypress silence some of the annoying logs that show up when spinning up the e2e server environment
 
 export function middleware(request: NextRequest) {
+  const ip = request.headers.get('X-Forwarded-For')
+  console.log('REQUEST: ', { geo: request.geo?.country, ip })
+
   if (isCypress) {
     request.headers.set('accept-language', 'en-US,en;q=0.9')
   }
@@ -41,6 +44,12 @@ export function middleware(request: NextRequest) {
       httpOnly: false,
     })
   }
+
+  i18nParsedResponse.cookies.set({
+    name: 'GEO',
+    value: request.geo?.country ?? 'unknown',
+  })
+
   return i18nParsedResponse
 }
 
