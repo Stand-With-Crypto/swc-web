@@ -7,8 +7,11 @@ import { NonRetriableError } from 'inngest'
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { sendMail } from '@/utils/server/email'
+import BecomeMemberReminderEmail from '@/utils/server/email/templates/becomeMemberReminder'
 import { EmailActiveActions } from '@/utils/server/email/templates/common/constants'
+import FinishSettingUpProfileReminderEmail from '@/utils/server/email/templates/finishSettingUpProfileReminder'
 import InitialSignUpEmail from '@/utils/server/email/templates/initialSignUp'
+import PhoneNumberReminderEmail from '@/utils/server/email/templates/phoneNumberReminder'
 import { prismaClient } from '@/utils/server/prismaClient'
 
 export const INITIAL_SIGNUP_USER_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME =
@@ -59,12 +62,50 @@ export const initialSignUpUserCommunicationJourney = inngest.createFunction(
       done = response.isPastDebounceTime
     } while (!done)
 
-    await step.run('send-mail', async () =>
-      sendWelcomeEmail({
+    await step.run('send-welcome-email', async () =>
+      sendInitialSignUpEmail({
         userId: payload.userId,
         userCommunicationJourneyId: userCommunicationJourney.id,
+        step: 'welcome',
       }),
     )
+
+    await step.sleep('wait-for-welcome-follow-up', '7d')
+
+    let profileStatus = await getProfileStatus(payload.userId)
+    if (profileStatus === 'incomplete') {
+      await step.run('send-finish-profile-reminder', async () =>
+        sendInitialSignUpEmail({
+          userId: payload.userId,
+          userCommunicationJourneyId: userCommunicationJourney.id,
+          step: 'update-profile-reminder',
+        }),
+      )
+      await step.sleep('wait-for-finish-profile-reminder-follow-up', '7d')
+      profileStatus = await getProfileStatus(payload.userId)
+    }
+
+    if (profileStatus === 'incomplete' || profileStatus === 'partially-complete') {
+      await step.run('send-finish-profile-reminder', async () =>
+        sendInitialSignUpEmail({
+          userId: payload.userId,
+          userCommunicationJourneyId: userCommunicationJourney.id,
+          step: 'phone-number-reminder',
+        }),
+      )
+      await step.sleep('wait-for-phone-number-reminder-follow-up', '7d')
+    }
+
+    const user = await getUser(payload.userId)
+    if (!user.hasOptedInToMembership) {
+      await step.run('send-finish-profile-reminder', async () =>
+        sendInitialSignUpEmail({
+          userId: payload.userId,
+          userCommunicationJourneyId: userCommunicationJourney.id,
+          step: 'membership-reminder',
+        }),
+      )
+    }
   },
 )
 
@@ -99,6 +140,35 @@ async function getLatestUserAction(userId: string) {
   })
 }
 
+async function getUser(userId: string) {
+  return prismaClient.user.findFirstOrThrow({
+    where: {
+      id: userId,
+    },
+    include: {
+      primaryUserEmailAddress: true,
+      userActions: true,
+      userSessions: true,
+      address: true,
+    },
+  })
+}
+
+async function getProfileStatus(
+  userId: string,
+): Promise<'complete' | 'partially-complete' | 'incomplete'> {
+  const user = await getUser(userId)
+  if (hasUserCompletedProfile(user, { includingPhoneNumber: true })) {
+    return 'complete'
+  }
+
+  if (hasUserCompletedProfile(user, { includingPhoneNumber: false })) {
+    return 'partially-complete'
+  }
+
+  return 'incomplete'
+}
+
 const ACTIVE_ACTIONS = [
   UserActionType.CALL,
   UserActionType.EMAIL,
@@ -107,23 +177,28 @@ const ACTIVE_ACTIONS = [
   UserActionType.VOTER_REGISTRATION,
 ]
 
-async function sendWelcomeEmail({
+type InitialSignUpEmailStep =
+  | 'welcome'
+  | 'update-profile-reminder'
+  | 'phone-number-reminder'
+  | 'membership-reminder'
+const TEMPLATE_BY_STEP = {
+  welcome: InitialSignUpEmail,
+  'update-profile-reminder': FinishSettingUpProfileReminderEmail,
+  'phone-number-reminder': PhoneNumberReminderEmail,
+  'membership-reminder': BecomeMemberReminderEmail,
+}
+
+async function sendInitialSignUpEmail({
   userId,
   userCommunicationJourneyId,
+  step,
 }: {
   userId: string
   userCommunicationJourneyId: string
+  step: InitialSignUpEmailStep
 }) {
-  const user = await prismaClient.user.findFirstOrThrow({
-    where: {
-      id: userId,
-    },
-    include: {
-      primaryUserEmailAddress: true,
-      userActions: true,
-      userSessions: true,
-    },
-  })
+  const user = await getUser(userId)
 
   if (!user.primaryUserEmailAddress) {
     Sentry.captureMessage('Tried to send an email to a user without primaryUserEmailAddress', {
@@ -136,11 +211,12 @@ async function sendWelcomeEmail({
     throw new NonRetriableError('User does not have a primary email address')
   }
 
+  const Template = TEMPLATE_BY_STEP[step]
   const messageId = await sendMail({
     to: user.primaryUserEmailAddress.emailAddress,
-    subject: InitialSignUpEmail.subjectLine,
+    subject: Template.subjectLine,
     html: render(
-      <InitialSignUpEmail
+      <Template
         completedActionTypes={user.userActions
           .filter(action => !ACTIVE_ACTIONS.includes(action.actionType))
           .map(action => `${action.actionType}` as EmailActiveActions)}
@@ -156,11 +232,11 @@ async function sendWelcomeEmail({
     ),
   }).catch(err => {
     Sentry.captureException(err, {
-      extra: { userId: user.id, emailTo: user.primaryUserEmailAddress!.emailAddress },
+      extra: { userId: user.id, emailTo: user.primaryUserEmailAddress!.emailAddress, step },
       tags: {
         domain: 'initialSignupUserCommunicationJourney',
       },
-      fingerprint: ['initialSignupUserCommunicationJourney', 'sendMail'],
+      fingerprint: ['initialSignupUserCommunicationJourney', 'sendMail', step],
     })
     throw err
   })
@@ -172,4 +248,19 @@ async function sendWelcomeEmail({
       communicationType: CommunicationType.EMAIL,
     },
   })
+}
+
+function hasUserCompletedProfile(
+  user: Awaited<ReturnType<typeof getUser>>,
+  { includingPhoneNumber }: { includingPhoneNumber: boolean },
+) {
+  const hasCompletedBaseProfile = Boolean(
+    user.firstName && user.lastName && user.primaryUserEmailAddress && user.address,
+  )
+
+  if (includingPhoneNumber) {
+    return hasCompletedBaseProfile && !!user.phoneNumber
+  }
+
+  return hasCompletedBaseProfile
 }
