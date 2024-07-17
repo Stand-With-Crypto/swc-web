@@ -53,7 +53,7 @@ export const USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN: ReadonlyArray<{
 
 ## Create the corresponding modules for the campaign
 
-- You need to create all the necessary UI components, dialogs, deeplink page, server actions, and any other elements required for the new campaign to function correctly. Use any user action as an example for this.
+- You need to create all the necessary UI components, dialogs, deeplink page, server actions, and any other elements required for the new campaign to function correctly. [Refer to this document for reference](/docs/Add%20a%20new%20user%20action.md#create-ui)
 
 ## Create the campaign CTA
 
