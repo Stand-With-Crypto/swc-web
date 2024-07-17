@@ -36,7 +36,7 @@ import {
 } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
-import { getCongressionalDistrictFromAddress } from '@/utils/shared/getCongressionalDistrictFromAddress'
+import { maybeGetCongressionalDistrictFromAddress } from '@/utils/shared/getCongressionalDistrictFromAddress'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
@@ -82,9 +82,14 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
   logger.info('validated fields')
 
   try {
-    const usCongressionalDistrict = await getCongressionalDistrictFromAddress(
-      validatedFields.data.address.formattedDescription,
+    const usCongressionalDistrict = await maybeGetCongressionalDistrictFromAddress(
+      validatedFields.data.address,
     )
+    if ('notFoundReason' in usCongressionalDistrict) {
+      logger.error(
+        `No usCongressionalDistrict found for address ${validatedFields.data.address.formattedDescription} with code ${usCongressionalDistrict.notFoundReason}`,
+      )
+    }
     if ('districtNumber' in usCongressionalDistrict) {
       validatedFields.data.address.usCongressionalDistrict = `${usCongressionalDistrict.districtNumber}`
     }

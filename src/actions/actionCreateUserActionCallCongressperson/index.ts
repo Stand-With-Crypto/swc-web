@@ -19,7 +19,7 @@ import {
 } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
-import { getCongressionalDistrictFromAddress } from '@/utils/shared/getCongressionalDistrictFromAddress'
+import { maybeGetCongressionalDistrictFromAddress } from '@/utils/shared/getCongressionalDistrictFromAddress'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
@@ -107,9 +107,14 @@ async function _actionCreateUserActionCallCongressperson(
   }
 
   try {
-    const usCongressionalDistrict = await getCongressionalDistrictFromAddress(
-      validatedInput.data.address.formattedDescription,
+    const usCongressionalDistrict = await maybeGetCongressionalDistrictFromAddress(
+      validatedInput.data.address,
     )
+    if ('notFoundReason' in usCongressionalDistrict) {
+      logger.error(
+        `No usCongressionalDistrict found for address ${validatedInput.data.address.formattedDescription} with code ${usCongressionalDistrict.notFoundReason}`,
+      )
+    }
     if ('districtNumber' in usCongressionalDistrict) {
       validatedInput.data.address.usCongressionalDistrict = `${usCongressionalDistrict.districtNumber}`
     }

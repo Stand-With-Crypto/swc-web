@@ -29,7 +29,7 @@ import { getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { optInUser } from '@/utils/server/sms/actions'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
-import { getCongressionalDistrictFromAddress } from '@/utils/shared/getCongressionalDistrictFromAddress'
+import { maybeGetCongressionalDistrictFromAddress } from '@/utils/shared/getCongressionalDistrictFromAddress'
 import { getLogger } from '@/utils/shared/logger'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { userFullName } from '@/utils/shared/userFullName'
@@ -56,9 +56,14 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
 
   try {
     if (validatedFields.data.address) {
-      const usCongressionalDistrict = await getCongressionalDistrictFromAddress(
-        validatedFields.data.address.formattedDescription,
+      const usCongressionalDistrict = await maybeGetCongressionalDistrictFromAddress(
+        validatedFields.data.address,
       )
+      if ('notFoundReason' in usCongressionalDistrict) {
+        logger.error(
+          `No usCongressionalDistrict found for address ${validatedFields.data.address.formattedDescription} with code ${usCongressionalDistrict.notFoundReason}`,
+        )
+      }
       if ('districtNumber' in usCongressionalDistrict) {
         validatedFields.data.address.usCongressionalDistrict = `${usCongressionalDistrict.districtNumber}`
       }
