@@ -71,6 +71,7 @@ export function GeoLocationDisclaimerBanner() {
             <div className="w-full space-y-1 text-sm text-background antialiased max-sm:text-center sm:text-base">
               <p>
                 Actions on Stand With Crypto are only available to users based in the United States.
+                {JSON.stringify({ geo, eq: geo === 'US' })}
               </p>
             </div>
           </div>
