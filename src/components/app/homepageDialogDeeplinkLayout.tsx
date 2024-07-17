@@ -10,7 +10,6 @@ import {
   dialogOverlayStyles,
 } from '@/components/ui/dialog/styles'
 import { InternalLink } from '@/components/ui/link'
-import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
 import { getHomepageTopLevelMetrics } from '@/data/pageSpecific/getHomepageData'
 import { PageProps } from '@/types'
 import { getIntlUrls } from '@/utils/shared/urls'
@@ -31,7 +30,6 @@ export async function HomepageDialogDeeplinkLayout({
   const [{ sumDonations, countUsers, countPolicymakerContacts }] = await Promise.all([
     getHomepageTopLevelMetrics(),
   ])
-  const advocatePerStateDataProps = await getAdvocatesMapData()
 
   return (
     <>
@@ -58,7 +56,6 @@ export async function HomepageDialogDeeplinkLayout({
           countUsers,
           countPolicymakerContacts,
         }}
-        advocatePerStateDataProps={advocatePerStateDataProps}
       />
     </>
   )

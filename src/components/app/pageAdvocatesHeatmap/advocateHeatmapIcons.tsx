@@ -20,7 +20,7 @@ export function CallIcon({ isPulsing = false, height = 40, width = 40, ...rest }
       xmlns="http://www.w3.org/2000/svg"
       {...rest}
     >
-      <circle cx="20" cy="20" fill="#003049" r="20" />
+      <circle cx="20" cy="20" fill="#2B9D74" r="20" />
       <g clipPath="url(#clip0_4101_15867)">
         <path d="M15.832 13.3335H23.332V25.0002H15.832V13.3335Z" fill="white" opacity="0.3" />
         <path
@@ -40,7 +40,7 @@ export function CallIcon({ isPulsing = false, height = 40, width = 40, ...rest }
             cy="20"
             fill="none"
             r="18"
-            stroke="#003049"
+            stroke="#2B9D74"
             strokeLinecap="round"
             strokeWidth="8"
           >
@@ -53,7 +53,7 @@ export function CallIcon({ isPulsing = false, height = 40, width = 40, ...rest }
             cy="20"
             fill="none"
             r="18"
-            stroke="#003049"
+            stroke="#2B9D74"
             strokeLinecap="round"
             strokeWidth="4"
           >
@@ -92,7 +92,7 @@ export function EmailIcon({ isPulsing = false, height = 40, width = 40, ...rest 
       xmlns="http://www.w3.org/2000/svg"
       {...rest}
     >
-      <rect fill="#D62828" height="40" rx="20" width="40.0007" />
+      <rect fill="#9E00FF" height="40" rx="20" width="40.0007" />
       <g clipPath="url(#clip0_4101_15872)">
         <path
           d="M26.6654 16.6667L19.9987 20.8333L13.332 16.6667V25H26.6654V16.6667ZM26.6654 15H13.332L19.9987 19.1583L26.6654 15Z"
@@ -116,7 +116,7 @@ export function EmailIcon({ isPulsing = false, height = 40, width = 40, ...rest 
             cy="20"
             fill="none"
             r="18"
-            stroke="#D62828"
+            stroke="#9E00FF"
             strokeLinecap="round"
             strokeWidth="8"
           >
@@ -129,7 +129,7 @@ export function EmailIcon({ isPulsing = false, height = 40, width = 40, ...rest 
             cy="20"
             fill="none"
             r="18"
-            stroke="#D62828"
+            stroke="#9E00FF"
             strokeLinecap="round"
             strokeWidth="4"
           >
@@ -244,7 +244,7 @@ export function VoterRegIcon({ isPulsing = false, height = 40, width = 40, ...re
       xmlns="http://www.w3.org/2000/svg"
       {...rest}
     >
-      <rect fill="#2A9D8F" height="40" rx="20" width="40" />
+      <rect fill="#125DB5" height="40" rx="20" width="40" />
       <g clipPath="url(#clip0_4101_15885)">
         <path d="M14.168 25.8335H25.8346V26.6668H14.168V25.8335Z" fill="white" opacity="0.3" />
         <path
@@ -273,7 +273,7 @@ export function VoterRegIcon({ isPulsing = false, height = 40, width = 40, ...re
             cy="20"
             fill="none"
             r="18"
-            stroke="#2A9D8F"
+            stroke="#125DB5"
             strokeLinecap="round"
             strokeWidth="8"
           >
@@ -286,7 +286,7 @@ export function VoterRegIcon({ isPulsing = false, height = 40, width = 40, ...re
             cy="20"
             fill="none"
             r="18"
-            stroke="#2A9D8F"
+            stroke="#125DB5"
             strokeLinecap="round"
             strokeWidth="4"
           >
