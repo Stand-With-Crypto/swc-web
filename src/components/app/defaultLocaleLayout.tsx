@@ -29,7 +29,7 @@ export function DefaultLocaleLayout({ children }: { children: React.ReactNode })
         <Toaster />
         <CookieConsent locale={DEFAULT_LOCALE} />
         {/* <Analytics debug={false} /> */}
-        <SpeedInsights debug={false} sampleRate={0.01} />
+        <SpeedInsights debug={false} sampleRate={0.04} />
       </body>
     </html>
   )

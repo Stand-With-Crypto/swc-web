@@ -46,7 +46,7 @@ export default function Layout({ children }: PageProps & { children: React.React
         <FullHeight.Container>
           <FullHeight.Content>{children}</FullHeight.Content>
         </FullHeight.Container>
-        <SpeedInsights debug={false} sampleRate={0.01} />
+        <SpeedInsights debug={false} sampleRate={0.04} />
       </body>
     </html>
   )
