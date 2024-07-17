@@ -106,7 +106,6 @@ export const externalUrls = {
   swcReferralUrl: ({ referralId }: { referralId: string }) =>
     `https://www.standwithcrypto.org/join/${referralId}`,
   swcQuestionnaire: () => 'https://standwithcrypto.typeform.com/questionnaire',
-  ukSWCUrl: () => 'https://uk.standwithcrypto.org',
 }
 
 export const apiUrls = {

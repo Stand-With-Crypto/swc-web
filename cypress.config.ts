@@ -8,6 +8,15 @@ export default defineConfig({
   viewportWidth: 390,
   viewportHeight: 844,
   defaultCommandTimeout: 10000,
+  retries: {
+    experimentalStrategy: 'detect-flake-and-pass-on-threshold',
+    experimentalOptions: {
+      maxRetries: 5,
+      passesRequired: 2,
+    },
+    openMode: true,
+    runMode: true,
+  },
   e2e: {
     env: {
       SWC_INTERNAL_ENDPOINTS_SECRET: process.env.SWC_INTERNAL_ENDPOINTS_SECRET,

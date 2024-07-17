@@ -7,6 +7,7 @@ import { PACFooter } from '@/components/app/pacFooter'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
 import { Button } from '@/components/ui/button'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
+import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { QueryDTSILocationUnitedStatesInformationData } from '@/data/dtsi/queries/queryDTSILocationUnitedStatesInformation'
@@ -31,6 +32,7 @@ export function LocationUnitedStates({
 }: LocationUnitedStatesProps) {
   const groups = organizePeople(queryData)
   const urls = getIntlUrls(locale)
+
   return (
     <div className="space-y-20">
       <DarkHeroSection>
@@ -93,38 +95,60 @@ export function LocationUnitedStates({
           </div>
         </ContentSection>
 
-        {groups.keyRaces.map(people => {
-          const stateCode = people[0].runningForSpecificRole.primaryState as USStateCode
-          const primaryDistrict =
-            people[0].runningForSpecificRole.primaryDistrict &&
-            normalizeDTSIDistrictId(people[0].runningForSpecificRole)
-          const stateName = US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]
+        {Object.entries(groups.keyRaces).map(([stateCode, races]) => {
+          const stateName = US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode as USStateCode]
           return (
-            <DTSIPersonHeroCardSection
-              cta={
-                <InternalLink
-                  href={
-                    primaryDistrict
-                      ? urls.locationDistrictSpecific({ stateCode, district: primaryDistrict })
-                      : urls.locationStateSpecificSenateRace(stateCode)
-                  }
-                >
-                  View Race
-                </InternalLink>
-              }
-              key={`${stateCode}-${primaryDistrict}`}
-              locale={locale}
-              people={people}
-              title={
-                primaryDistrict ? (
-                  <>
-                    {stateName} {formatDTSIDistrictId(primaryDistrict)} Congressional District Race
-                  </>
-                ) : (
-                  <>{stateName} Senate Race</>
+            <div className="container flex flex-col items-center" key={stateCode}>
+              <NextImage
+                alt={`${stateName} shield`}
+                height={150}
+                src={`/stateShields/${stateCode}.png`}
+                width={150}
+              />
+
+              <PageTitle as="h2" size="sm">
+                {stateName}
+              </PageTitle>
+
+              {races.map(people => {
+                const primaryDistrict =
+                  people[0].runningForSpecificRole.primaryDistrict &&
+                  normalizeDTSIDistrictId(people[0].runningForSpecificRole)
+
+                return (
+                  <DTSIPersonHeroCardSection
+                    cta={
+                      <InternalLink
+                        href={
+                          primaryDistrict
+                            ? urls.locationDistrictSpecific({
+                                stateCode: stateCode as USStateCode,
+                                district: primaryDistrict,
+                              })
+                            : urls.locationStateSpecificSenateRace(stateCode as USStateCode)
+                        }
+                      >
+                        View Race
+                      </InternalLink>
+                    }
+                    key={`${stateCode}-${primaryDistrict}`}
+                    locale={locale}
+                    people={people}
+                    subtitle={
+                      primaryDistrict ? (
+                        <>
+                          {stateName} {formatDTSIDistrictId(primaryDistrict)} Congressional District
+                          Race
+                        </>
+                      ) : (
+                        <>{stateName} Senate Race</>
+                      )
+                    }
+                    title=""
+                  />
                 )
-              }
-            />
+              })}
+            </div>
           )
         })}
 

@@ -10,15 +10,7 @@ export function FormattedCurrency({
   amount: number
   currencyCode: string
   locale: SupportedLocale
-} & {
-  currencySign?: string | undefined
-  useGrouping?: boolean | undefined
-  minimumIntegerDigits?: number | undefined
-  minimumFractionDigits?: number | undefined
-  maximumFractionDigits?: number | undefined
-  minimumSignificantDigits?: number | undefined
-  maximumSignificantDigits?: number | undefined
-}) {
+} & Intl.NumberFormatOptions) {
   const response = intlNumberFormat(locale, {
     style: 'currency',
     currency: currencyCode,
