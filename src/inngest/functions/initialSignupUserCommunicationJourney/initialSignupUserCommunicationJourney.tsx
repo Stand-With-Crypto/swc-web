@@ -70,7 +70,7 @@ export const initialSignUpUserCommunicationJourney = inngest.createFunction(
       }),
     )
 
-    await step.sleep('wait-for-welcome-follow-up', '7d')
+    await step.sleep('wait-for-welcome-follow-up', '10 mins')
 
     let profileStatus = await getProfileStatus(payload.userId)
     if (profileStatus === 'incomplete') {
@@ -81,7 +81,7 @@ export const initialSignUpUserCommunicationJourney = inngest.createFunction(
           step: 'update-profile-reminder',
         }),
       )
-      await step.sleep('wait-for-finish-profile-reminder-follow-up', '7d')
+      await step.sleep('wait-for-finish-profile-reminder-follow-up', '10 mins')
       profileStatus = await getProfileStatus(payload.userId)
     }
 
@@ -93,7 +93,7 @@ export const initialSignUpUserCommunicationJourney = inngest.createFunction(
           step: 'phone-number-reminder',
         }),
       )
-      await step.sleep('wait-for-phone-number-reminder-follow-up', '7d')
+      await step.sleep('wait-for-phone-number-reminder-follow-up', '10 mins')
     }
 
     const user = await getUser(payload.userId)
