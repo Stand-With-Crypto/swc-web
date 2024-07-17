@@ -20,15 +20,15 @@ import {
 import { NextImage } from '@/components/ui/image'
 import { Skeleton } from '@/components/ui/skeleton'
 import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
-import { getHomepageData } from '@/data/pageSpecific/getHomepageData'
+import { PublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
 import { useApiAdvocateMap } from '@/hooks/useApiAdvocateMap'
-import { useApiRecentActivity } from '@/hooks/useApiRecentActivity'
 import { SupportedLocale } from '@/intl/locales'
 import { getUSStateCodeFromStateName } from '@/utils/shared/usStateUtils'
 
 interface RenderMapProps {
   locale: SupportedLocale
-  homepageData: Awaited<ReturnType<typeof getHomepageData>>
+  actions: PublicRecentActivity
+  countUsers: number
   advocatesMapPageData: Awaited<ReturnType<typeof getAdvocatesMapData>>
   isEmbedded?: boolean
 }
@@ -149,14 +149,14 @@ const MapComponent = ({
 
 export function AdvocatesHeatmap({
   locale,
-  homepageData,
+  actions,
+  countUsers,
   advocatesMapPageData,
   isEmbedded,
 }: RenderMapProps) {
-  const actions = useApiRecentActivity(homepageData.actions, { limit: 20 })
   const advocatesPerState = useApiAdvocateMap(advocatesMapPageData)
 
-  const markers = useMemo(() => createMarkersFromActions(actions.data), [actions.data])
+  const markers = useMemo(() => createMarkersFromActions(actions), [actions])
 
   const totalAdvocatesPerState = advocatesPerState.data.advocatesMapData.totalAdvocatesPerState
 
@@ -186,7 +186,7 @@ export function AdvocatesHeatmap({
     setHoveredStateName(null)
   }
 
-  if (advocatesPerState.isLoading || actions.isLoading) {
+  if (advocatesPerState.isLoading || !actions) {
     return (
       <div
         className={`flex h-full flex-col items-start px-2 py-6 ${isEmbedded ? '' : 'rounded-[40px] bg-[#FBF8FF] px-12 py-28'}`}
@@ -234,7 +234,7 @@ export function AdvocatesHeatmap({
         {isEmbedded ? (
           <AdvocateHeatmapOdometer
             className={`font-sans ${isEmbedded ? 'bg-black text-white' : 'bg-inherit text-black'}`}
-            homepageData={homepageData}
+            countUsers={countUsers}
             locale={locale}
           />
         ) : (

@@ -2,8 +2,7 @@ import { CryptoSupportHighlight } from '@/components/app/cryptoSupportHighlight'
 import { sortDTSIPersonDataTable } from '@/components/app/dtsiClientPersonDataTable/sortPeople'
 import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
 import { DTSIPersonHeroCardRow } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardRow'
-import { AdvocatesHeatmapPage } from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmapPage'
-import { DelayedRecentActivity } from '@/components/app/pageHome/delayedRecentActivity'
+import { DelayedRecentActivityWithMap } from '@/components/app/pageHome/delayedRecentActivity'
 import { HeroCTA } from '@/components/app/pageHome/heroCTA'
 import { HeroImageWrapper } from '@/components/app/pageHome/heroImage'
 import { PartnerGrid } from '@/components/app/pageHome/partnerGrid'
@@ -62,18 +61,11 @@ export function PageHome({
       <div className="container">
         <TopLevelMetrics {...{ sumDonations, locale, countUsers, countPolicymakerContacts }} />
 
-        <section className="mb-16 space-y-7 md:mb-36 xl:space-y-16">
-          <PageTitle as="h3" size="md">
+        <section className="mb-16 md:mb-36">
+          <PageTitle as="h3" className="mb-6 !text-[32px]">
             Our community
           </PageTitle>
-          <PageSubTitle as="h4">
-            See a live view of how our community is taking a stand to safeguard the future of crypto
-            in America. Donations to{' '}
-            <ExternalLink href={'https://www.fec.gov/data/committee/C00835959/'}>
-              Fairshake
-            </ExternalLink>
-            , a pro-crypto Super PAC, are not included on the leaderboard.
-          </PageSubTitle>
+
           <Tabs
             analytics={'Homepage Our Community Tabs'}
             defaultValue={RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY}
@@ -90,35 +82,39 @@ export function PageHome({
             </div>
 
             <TabsContent value={RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY}>
-              <div className="block md:hidden">
-                <DelayedRecentActivity actions={actions} />
-              </div>
-              <div className="hidden md:block">
-                <AdvocatesHeatmapPage
+              <>
+                <PageSubTitle as="h4" className="mb-10">
+                  See a live view of how our community is taking a stand to safeguard the future of
+                  crypto in America.
+                </PageSubTitle>
+                <DelayedRecentActivityWithMap
+                  actions={actions}
                   advocatesMapPageData={advocatePerStateDataProps}
-                  homepageData={{
-                    sumDonations,
-                    countUsers,
-                    countPolicymakerContacts,
-                    actions,
-                    sumDonationsByUser,
-                    dtsiHomepagePeople,
-                  }}
-                  locale={params.locale}
+                  countUsers={countUsers.count}
+                  locale={locale}
                 />
-              </div>
+              </>
             </TabsContent>
             <TabsContent value={RecentActivityAndLeaderboardTabs.LEADERBOARD}>
-              <div className="space-y-8 lg:space-y-10">
-                {sumDonationsByUser.map((donor, index) => (
-                  <SumDonationsByUserRow
-                    index={index}
-                    key={index}
-                    locale={locale}
-                    sumDonations={donor}
-                  />
-                ))}
-              </div>{' '}
+              <>
+                <PageSubTitle as="h4" className="mb-10">
+                  Donations to{' '}
+                  <ExternalLink href={'https://www.fec.gov/data/committee/C00835959/'}>
+                    Fairshake
+                  </ExternalLink>
+                  , a pro-crypto Super PAC, are not included on the leaderboard.
+                </PageSubTitle>
+                <div className="space-y-8 lg:space-y-10">
+                  {sumDonationsByUser.map((donor, index) => (
+                    <SumDonationsByUserRow
+                      index={index}
+                      key={index}
+                      locale={locale}
+                      sumDonations={donor}
+                    />
+                  ))}
+                </div>{' '}
+              </>
               <div className="mt-7 space-x-4 text-center">
                 <Button asChild>
                   <InternalLink href={urls.donate()}>Donate</InternalLink>
@@ -136,10 +132,10 @@ export function PageHome({
         </section>
 
         <section className="mb-16 text-center md:mb-36">
-          <PageTitle as="h3" className="mb-7" size="md">
+          <PageTitle as="h3" className="mb-6 !text-[32px]">
             Our partners
           </PageTitle>
-          <PageSubTitle as="h4" className="mb-7">
+          <PageSubTitle as="h4" className="mb-10">
             Stand With Crypto is first and foremost the result of{' '}
             {TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME}+ people fighting to keep crypto in America.
             We’ve also partnered with a number of companies to fight alongside us.
@@ -152,22 +148,22 @@ export function PageHome({
           </div>
         </section>
 
-        <section className="mb-16 space-y-7 md:mb-36">
-          <PageTitle as="h3" size="md">
+        <section className="mb-16 md:mb-36">
+          <PageTitle as="h3" className="mb-6 !text-[32px]">
             Get involved
           </PageTitle>
-          <PageSubTitle as="h4">
+          <PageSubTitle as="h4" className="mb-10">
             The future of crypto is in your hands. Here's how you can help.
           </PageSubTitle>
           <UserActionRowCTAsAnimatedListWithApi />
         </section>
       </div>
-      <section className="mb-16 space-y-16 md:mb-36">
+      <section className="mb-16 space-y-6 md:mb-36">
         <div className="container">
-          <PageTitle as="h3" className="mb-7" size="md">
+          <PageTitle as="h3" className="mb-6 !text-[32px]">
             Where politicians stand on crypto
           </PageTitle>
-          <PageSubTitle as="h4">
+          <PageSubTitle as="h4" className="mb-10">
             Ask your policymakers to be pro-crypto. Here’s where they stand now.
           </PageSubTitle>
         </div>

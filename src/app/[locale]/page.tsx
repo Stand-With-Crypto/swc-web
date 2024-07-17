@@ -11,7 +11,9 @@ export const revalidate = SECONDS_DURATION.MINUTE
 export const dynamic = 'error'
 
 export default async function Home({ params }: PageProps) {
-  const asyncProps = await getHomepageData()
+  const asyncProps = await getHomepageData({
+    recentActivityLimit: 20,
+  })
   const advocatePerStateDataProps = await getAdvocatesMapData()
   /*
   the locale check in layout works for most cases, but for some reason if we hit 
