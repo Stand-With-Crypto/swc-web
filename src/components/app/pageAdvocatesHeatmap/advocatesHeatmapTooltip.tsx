@@ -41,20 +41,20 @@ export function TotalAdvocatesPerStateTooltip({
 
   if (!totalAdvocatesPerState) return null
 
-  const tooltipWidth = 193
+  const formattedNumber = `${FormattedNumber({ amount: totalAdvocatesPerState, locale })} advocates`
+
+  const tooltipWidth = formattedNumber.length * 10
   const offsetX = tooltipWidth / 2
 
   // Calculate the adjusted position so it does not overflow the window
   const centeredX = mousePosition.x - offsetX
   const adjustedX = Math.min(Math.max(centeredX, 0), window.innerWidth - tooltipWidth)
-  const formattedNumber = `${FormattedNumber({ amount: totalAdvocatesPerState, locale })} advocates`
-  const tooltipWidthBasedOnTextLength = formattedNumber.length * 10
 
   return (
     <div
       className={cn(
         'pointer-events-none fixed z-50 flex h-[46px] items-center justify-center rounded-2xl bg-black px-4 font-sans text-base text-white',
-        `w-[${tooltipWidthBasedOnTextLength}px]`,
+        `w-[${tooltipWidth}px]`,
       )}
       style={{
         top: mousePosition.y,
