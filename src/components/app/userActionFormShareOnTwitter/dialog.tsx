@@ -2,8 +2,8 @@
 
 import dynamic from 'next/dynamic'
 
+import { UserActionFormDialog } from '@/components/app/userActionFormCommon/dialog'
 import { ANALYTICS_NAME_USER_ACTION_FORM_SHARE_ON_TWITTER } from '@/components/app/userActionFormShareOnTwitter/constants'
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { useDialog } from '@/hooks/useDialog'
 
@@ -34,11 +34,8 @@ export function UserActionFormShareOnTwitterDialog({
   })
 
   return (
-    <Dialog {...dialogProps}>
-      <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="max-w-3xl">
-        <UserActionFormShareOnTwitter onClose={() => dialogProps.onOpenChange(false)} />
-      </DialogContent>
-    </Dialog>
+    <UserActionFormDialog {...dialogProps} trigger={children}>
+      <UserActionFormShareOnTwitter onClose={() => dialogProps.onOpenChange(false)} />
+    </UserActionFormDialog>
   )
 }

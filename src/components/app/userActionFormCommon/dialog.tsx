@@ -14,6 +14,7 @@ interface UserActionFormDialogProps extends DialogProps {
   trigger: React.ReactNode
   countryCode?: string
   bypassCountryCheck?: boolean
+  padding?: boolean
 }
 
 export const UserActionFormDialog = (props: UserActionFormDialogProps) => {
@@ -22,6 +23,7 @@ export const UserActionFormDialog = (props: UserActionFormDialogProps) => {
     trigger,
     countryCode = 'US',
     bypassCountryCheck = false,
+    padding = true,
     ...dialogProps
   } = props
 
@@ -41,7 +43,9 @@ export const UserActionFormDialog = (props: UserActionFormDialogProps) => {
   return (
     <Dialog {...dialogProps}>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
-      <DialogContent className="max-w-3xl">{children}</DialogContent>
+      <DialogContent className="max-w-3xl" padding={padding}>
+        {children}
+      </DialogContent>
     </Dialog>
   )
 }

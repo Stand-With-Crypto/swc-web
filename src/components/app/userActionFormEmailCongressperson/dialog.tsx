@@ -2,13 +2,13 @@
 
 import { Suspense, useEffect, useState } from 'react'
 
+import { UserActionFormDialog } from '@/components/app/userActionFormCommon/dialog'
 import { ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON } from '@/components/app/userActionFormEmailCongressperson/constants'
 import { LazyUserActionFormEmailCongressperson } from '@/components/app/userActionFormEmailCongressperson/lazyLoad'
 import { UserActionFormEmailCongresspersonSkeleton } from '@/components/app/userActionFormEmailCongressperson/skeleton'
 import { UserActionFormEmailCongresspersonSuccess } from '@/components/app/userActionFormEmailCongressperson/success'
 import { FormFields } from '@/components/app/userActionFormEmailCongressperson/types'
 import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useDialog } from '@/hooks/useDialog'
@@ -37,29 +37,27 @@ export function UserActionFormEmailCongresspersonDialog({
       setState('form')
     }
   }, [dialogProps.open, state])
+
   return (
-    <Dialog {...dialogProps}>
-      <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className={'max-w-3xl'} padding={false}>
-        <Suspense fallback={<UserActionFormEmailCongresspersonSkeleton locale={locale} />}>
-          {fetchUser.isLoading ? (
-            <UserActionFormEmailCongresspersonSkeleton locale={locale} />
-          ) : state === 'form' ? (
-            <LazyUserActionFormEmailCongressperson
-              initialValues={initialValues}
-              onCancel={() => dialogProps.onOpenChange(false)}
-              onSuccess={() => setState('success')}
-              user={user}
-            />
-          ) : (
-            <div className={cn(dialogContentPaddingStyles, 'h-full')}>
-              <UserActionFormSuccessScreen onClose={() => dialogProps.onOpenChange(false)}>
-                <UserActionFormEmailCongresspersonSuccess />
-              </UserActionFormSuccessScreen>
-            </div>
-          )}
-        </Suspense>
-      </DialogContent>
-    </Dialog>
+    <UserActionFormDialog {...dialogProps} padding={false} trigger={children}>
+      <Suspense fallback={<UserActionFormEmailCongresspersonSkeleton locale={locale} />}>
+        {fetchUser.isLoading ? (
+          <UserActionFormEmailCongresspersonSkeleton locale={locale} />
+        ) : state === 'form' ? (
+          <LazyUserActionFormEmailCongressperson
+            initialValues={initialValues}
+            onCancel={() => dialogProps.onOpenChange(false)}
+            onSuccess={() => setState('success')}
+            user={user}
+          />
+        ) : (
+          <div className={cn(dialogContentPaddingStyles, 'h-full')}>
+            <UserActionFormSuccessScreen onClose={() => dialogProps.onOpenChange(false)}>
+              <UserActionFormEmailCongresspersonSuccess />
+            </UserActionFormSuccessScreen>
+          </div>
+        )}
+      </Suspense>
+    </UserActionFormDialog>
   )
 }
