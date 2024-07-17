@@ -46,6 +46,7 @@ export function middleware(request: NextRequest) {
   i18nParsedResponse.cookies.set({
     name: USER_COUNTRY_CODE_COOKIE_NAME,
     value: getCountryCode(request),
+    httpOnly: true,
   })
 
   return i18nParsedResponse
