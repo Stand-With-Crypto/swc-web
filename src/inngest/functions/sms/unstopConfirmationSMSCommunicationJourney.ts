@@ -7,7 +7,6 @@ import { sendSMS } from '@/utils/server/sms'
 import * as messages from '@/utils/server/sms/messages'
 
 import { createCommunication, createCommunicationJourneys } from './shared/communicationJourney'
-import { validatePhoneNumber } from './shared/validatePhoneNumber'
 
 export const UNSTOP_CONFIRMATION_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME =
   'app/user.communication/unstop-confirmation.sms'
@@ -32,8 +31,6 @@ export const unstopConfirmationSMSCommunicationJourney = inngest.createFunction(
   },
   async ({ event, step }) => {
     const { phoneNumber } = event.data as UnstopConfirmationSMSCommunicationJourneyPayload
-
-    validatePhoneNumber(phoneNumber)
 
     const communicationJourneys = await step.run('create-communication-journey', () =>
       createCommunicationJourneys(
