@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 }
 
 export default async function MapPage({ params }: PageProps) {
-  const homeDataProps = await getHomepageData({ recentActivityLimit: 20 })
+  const homeDataProps = await getHomepageData({ recentActivityLimit: 20, restrictToUS: true })
   const advocatePerStateDataProps = await getAdvocatesMapData()
 
   return (

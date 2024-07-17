@@ -12,6 +12,7 @@ import { prismaClient } from '@/utils/server/prismaClient'
 interface RecentActivityConfig {
   limit: number
   offset?: number
+  restrictToUS?: boolean
 }
 
 const fetchFromPrisma = async (config: RecentActivityConfig) => {
@@ -24,6 +25,14 @@ const fetchFromPrisma = async (config: RecentActivityConfig) => {
     where: {
       user: {
         internalStatus: UserInternalStatus.VISIBLE,
+        ...(config.restrictToUS && {
+          address: {
+            countryCode: 'US',
+            administrativeAreaLevel1: {
+              not: undefined,
+            },
+          },
+        }),
       },
     },
     include: {
