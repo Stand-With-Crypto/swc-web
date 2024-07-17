@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation'
 
 import { useHasHydrated } from '@/hooks/useHasHydrated'
 import { useIsMobile } from '@/hooks/useIsMobile'
+import { USER_COUNTRY_CODE_COOKIE_NAME } from '@/utils/shared/getCountryCode'
 
 const languages = getNavigatorLanguages()
 
@@ -33,37 +34,52 @@ export function GeoLocationDisclaimerBanner() {
     }
   }, [currentCountry, hasHydrated])
 
-  const geo = Cookies.get('GEO')
-  console.log('GEO: ', geo)
+  const geo = Cookies.get(USER_COUNTRY_CODE_COOKIE_NAME)
 
-  useEffect(() => {
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition(position => console.log('geolocation: ', position))
-    }
-  }, [])
+  if (!hasHydrated) return null
 
-  return hasHydrated && currentCountry ? (
-    <div
-      className={`flex w-full transition-all duration-200 ${isVisible ? 'max-h-12 opacity-100' : 'max-h-0 opacity-0'}`}
-    >
-      <WrapperContainer
-        className="flex h-12 w-full items-center bg-primary-cta text-center"
-        {...(isMobile && { onClick: handleWrapperClick })}
+  if (currentCountry) {
+    return (
+      <div
+        className={`flex w-full transition-all duration-200 ${isVisible ? 'max-h-12 opacity-100' : 'max-h-0 opacity-0'}`}
       >
-        <div className="container flex justify-between">
-          <div className="w-full space-y-1 text-sm text-background antialiased max-sm:text-center sm:text-base">
-            <p>
-              {currentCountry?.emoji ? `${currentCountry?.emoji} ` : ''}Looking for Stand With
-              Crypto {currentCountry.label}? Click{' '}
-              <strong>
-                <Link href={currentCountry.url}>here</Link>
-              </strong>
-            </p>
+        <WrapperContainer
+          className="flex h-12 w-full items-center bg-primary-cta text-center"
+          {...(isMobile && { onClick: handleWrapperClick })}
+        >
+          <div className="container flex justify-between">
+            <div className="w-full space-y-1 text-sm text-background antialiased max-sm:text-center sm:text-base">
+              <p>
+                {currentCountry?.emoji ? `${currentCountry?.emoji} ` : ''}Looking for Stand With
+                Crypto {currentCountry.label}? Click{' '}
+                <strong>
+                  <Link href={currentCountry.url}>here</Link>
+                </strong>
+              </p>
+            </div>
           </div>
-        </div>
-      </WrapperContainer>
-    </div>
-  ) : null
+        </WrapperContainer>
+      </div>
+    )
+  }
+
+  if (geo !== 'US') {
+    return (
+      <div className={`flex max-h-12 w-full opacity-100 transition-all duration-200`}>
+        <WrapperContainer className="flex h-12 w-full items-center bg-primary-cta text-center">
+          <div className="container flex justify-between">
+            <div className="w-full space-y-1 text-sm text-background antialiased max-sm:text-center sm:text-base">
+              <p>
+                Actions on Stand With Crypto are only available to users based in the United States.
+              </p>
+            </div>
+          </div>
+        </WrapperContainer>
+      </div>
+    )
+  }
+
+  return null
 }
 
 /**

@@ -4,6 +4,7 @@ import { i18nRouter } from 'next-i18n-router'
 import { localeDetector } from '@/intl/localeDetector'
 import { DEFAULT_LOCALE, ORDERED_SUPPORTED_LOCALES } from '@/intl/locales'
 import { isCypress } from '@/utils/shared/executionEnvironment'
+import { getCountryCode, USER_COUNTRY_CODE_COOKIE_NAME } from '@/utils/shared/getCountryCode'
 import { getLogger } from '@/utils/shared/logger'
 import { generateUserSessionId, USER_SESSION_ID_COOKIE_NAME } from '@/utils/shared/userSessionId'
 
@@ -13,9 +14,6 @@ const logger = getLogger('middleware')
 // The conditionals for cypress silence some of the annoying logs that show up when spinning up the e2e server environment
 
 export function middleware(request: NextRequest) {
-  const ip = request.headers.get('X-Forwarded-For')
-  console.log('REQUEST: ', { geo: request.geo?.country, ip })
-
   if (isCypress) {
     request.headers.set('accept-language', 'en-US,en;q=0.9')
   }
@@ -46,8 +44,8 @@ export function middleware(request: NextRequest) {
   }
 
   i18nParsedResponse.cookies.set({
-    name: 'GEO',
-    value: request.geo?.country ?? 'unknown',
+    name: USER_COUNTRY_CODE_COOKIE_NAME,
+    value: getCountryCode(request),
   })
 
   return i18nParsedResponse
