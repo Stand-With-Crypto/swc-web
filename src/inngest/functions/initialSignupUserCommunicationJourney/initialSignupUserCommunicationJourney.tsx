@@ -97,7 +97,7 @@ export const initialSignUpUserCommunicationJourney = inngest.createFunction(
     }
 
     if (profileStatus === 'incomplete' || profileStatus === 'partially-complete') {
-      await step.run('send-finish-profile-reminder', async () =>
+      await step.run('send-phone-number-reminder', async () =>
         sendInitialSignUpEmail({
           userId: payload.userId,
           sessionId: payload.sessionId,
@@ -110,7 +110,7 @@ export const initialSignUpUserCommunicationJourney = inngest.createFunction(
 
     const user = await getUser(payload.userId)
     if (!user.hasOptedInToMembership) {
-      await step.run('send-finish-profile-reminder', async () =>
+      await step.run('send-membership-reminder', async () =>
         sendInitialSignUpEmail({
           userId: payload.userId,
           sessionId: payload.sessionId,
