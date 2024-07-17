@@ -3,6 +3,7 @@ import { render } from '@react-email/components'
 import * as Sentry from '@sentry/nextjs'
 import { isBefore, subMinutes } from 'date-fns'
 import { NonRetriableError } from 'inngest'
+import { z } from 'zod'
 
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
@@ -21,10 +22,17 @@ const INITIAL_SIGNUP_USER_COMMUNICATION_JOURNEY_INNGEST_FUNCTION_ID =
 
 const MAX_RETRY_COUNT = 2
 const LATEST_ACTION_DEBOUNCE_TIME_MINUTES = 5
+const STEP_FOLLOW_UP_TIMEOUT_MINUTES = '3 mins'
 
-export interface InitialSignUpUserCommunicationJourneyPayload {
-  userId: string
-}
+const initialSignUpUserCommunicationJourneyPayload = z.object({
+  userId: z.string(),
+  sessionId: z.string().optional().nullable(),
+  decreaseTimers: z.boolean().default(false).optional(),
+})
+
+export type InitialSignUpUserCommunicationJourneyPayload = z.infer<
+  typeof initialSignUpUserCommunicationJourneyPayload
+>
 
 export const initialSignUpUserCommunicationJourney = inngest.createFunction(
   {
@@ -34,10 +42,11 @@ export const initialSignUpUserCommunicationJourney = inngest.createFunction(
   },
   { event: INITIAL_SIGNUP_USER_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME },
   async ({ event, step }) => {
-    const payload = event.data as InitialSignUpUserCommunicationJourneyPayload
-    if (!payload.userId) {
-      throw new NonRetriableError('userId not provided')
-    }
+    const payload = await initialSignUpUserCommunicationJourneyPayload
+      .parseAsync(event.data)
+      .catch(err => {
+        throw new NonRetriableError(err.message ?? 'Invalid payload')
+      })
 
     const userCommunicationJourney = await step.run('create-communication-journey', () =>
       createCommunicationJourney(payload.userId),
@@ -45,7 +54,7 @@ export const initialSignUpUserCommunicationJourney = inngest.createFunction(
 
     let done = false
     do {
-      await step.sleep('wait-5-mins', '5 mins')
+      await step.sleep('wait-5-mins', `${LATEST_ACTION_DEBOUNCE_TIME_MINUTES} mins`)
       const response = await step.run('check-latest-user-action-date', async () => {
         const userAction = await getLatestUserAction(payload.userId)
         return {
@@ -65,23 +74,25 @@ export const initialSignUpUserCommunicationJourney = inngest.createFunction(
     await step.run('send-welcome-email', async () =>
       sendInitialSignUpEmail({
         userId: payload.userId,
+        sessionId: payload.sessionId,
         userCommunicationJourneyId: userCommunicationJourney.id,
         step: 'welcome',
       }),
     )
 
-    await step.sleep('wait-for-welcome-follow-up', '10 mins')
+    await step.sleep('wait-for-welcome-follow-up', STEP_FOLLOW_UP_TIMEOUT_MINUTES)
 
     let profileStatus = await getProfileStatus(payload.userId)
     if (profileStatus === 'incomplete') {
       await step.run('send-finish-profile-reminder', async () =>
         sendInitialSignUpEmail({
           userId: payload.userId,
+          sessionId: payload.sessionId,
           userCommunicationJourneyId: userCommunicationJourney.id,
           step: 'update-profile-reminder',
         }),
       )
-      await step.sleep('wait-for-finish-profile-reminder-follow-up', '10 mins')
+      await step.sleep('wait-for-finish-profile-reminder-follow-up', STEP_FOLLOW_UP_TIMEOUT_MINUTES)
       profileStatus = await getProfileStatus(payload.userId)
     }
 
@@ -89,11 +100,12 @@ export const initialSignUpUserCommunicationJourney = inngest.createFunction(
       await step.run('send-finish-profile-reminder', async () =>
         sendInitialSignUpEmail({
           userId: payload.userId,
+          sessionId: payload.sessionId,
           userCommunicationJourneyId: userCommunicationJourney.id,
           step: 'phone-number-reminder',
         }),
       )
-      await step.sleep('wait-for-phone-number-reminder-follow-up', '10 mins')
+      await step.sleep('wait-for-phone-number-reminder-follow-up', STEP_FOLLOW_UP_TIMEOUT_MINUTES)
     }
 
     const user = await getUser(payload.userId)
@@ -101,6 +113,7 @@ export const initialSignUpUserCommunicationJourney = inngest.createFunction(
       await step.run('send-finish-profile-reminder', async () =>
         sendInitialSignUpEmail({
           userId: payload.userId,
+          sessionId: payload.sessionId,
           userCommunicationJourneyId: userCommunicationJourney.id,
           step: 'membership-reminder',
         }),
@@ -191,13 +204,13 @@ const TEMPLATE_BY_STEP = {
 
 async function sendInitialSignUpEmail({
   userId,
+  sessionId,
   userCommunicationJourneyId,
   step,
 }: {
-  userId: string
   userCommunicationJourneyId: string
   step: InitialSignUpEmailStep
-}) {
+} & Pick<InitialSignUpUserCommunicationJourneyPayload, 'userId' | 'sessionId'>) {
   const user = await getUser(userId)
 
   if (!user.primaryUserEmailAddress) {
@@ -218,13 +231,13 @@ async function sendInitialSignUpEmail({
     html: render(
       <Template
         completedActionTypes={user.userActions
-          .filter(action => !ACTIVE_ACTIONS.includes(action.actionType))
+          .filter(action => ACTIVE_ACTIONS.includes(action.actionType))
           .map(action => `${action.actionType}` as EmailActiveActions)}
         session={
-          user.userSessions[0]?.id
+          sessionId
             ? {
                 userId: user.id,
-                sessionId: user.userSessions[0].id,
+                sessionId,
               }
             : null
         }

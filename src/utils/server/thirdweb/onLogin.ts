@@ -286,6 +286,7 @@ export async function onNewLogin(props: NewLoginParams) {
     localUser,
     wasUserCreated,
     analytics,
+    sessionId: props.getUserSessionId(),
   })
 
   if (localUser) {
@@ -629,12 +630,14 @@ async function triggerPostLoginUserActionSteps({
   localUser,
   wasUserCreated,
   analytics,
+  sessionId,
 }: {
   wasUserCreated: boolean
   user: UpsertedUser
   userCryptoAddress: UserCryptoAddress
   localUser: ServerLocalUser | null
   analytics: ServerAnalytics
+  sessionId: string | null
 }) {
   const log = getLog(userCryptoAddress.cryptoAddress)
   /**
@@ -684,6 +687,7 @@ async function triggerPostLoginUserActionSteps({
       name: INITIAL_SIGNUP_USER_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
       data: {
         userId: user.id,
+        sessionId,
       },
     })
     log(
