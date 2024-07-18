@@ -1,8 +1,7 @@
-import { Prisma, SMSStatus, User, UserCommunicationJourneyType } from '@prisma/client'
+import { Prisma, SMSStatus, UserCommunicationJourneyType } from '@prisma/client'
 import * as Sentry from '@sentry/node'
 import { parseISO } from 'date-fns'
 import { NonRetriableError } from 'inngest'
-import { chunk } from 'lodash-es'
 
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
@@ -13,7 +12,8 @@ import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { sleep } from '@/utils/shared/sleep'
 
-import { createCommunication, createCommunicationJourneys } from './shared/communicationJourney'
+import { createCommunication, createCommunicationJourneys } from './utils/communicationJourney'
+import { fetchPhoneNumbers } from './utils/fetchPhoneNumbers'
 
 export const BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME = 'app/user.communication/bulk.sms'
 
@@ -63,11 +63,6 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
 
     // If there are multiple segment, we need to split the queue
     const queueSizeBySegment = Math.floor(MAX_QUEUE_LENGTH / segmentsCount)
-
-    // Iterations to get all phoneNumbers. We need this because PlanetScale limits the amount of rows
-    const iterations = DATABASE_QUERY_LIMIT
-      ? Math.ceil(queueSizeBySegment / DATABASE_QUERY_LIMIT)
-      : 1
 
     const [estimatedTimeToSendAllMessages, estimatedPhoneNumbersCount] = await step.run(
       'time-estimation',
@@ -127,7 +122,29 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
       logger.info(`Iteration ${loopIteration}. Fetching phone numbers...`)
       const [phoneNumberChunks, newCursor] = await step.run(
         `fetch-users-iteration-${loopIteration}`,
-        () => fetchPhoneNumbers(iterations, userWhereInput, cursor, includePendingDoubleOptIn),
+        () =>
+          fetchPhoneNumbers(
+            (take, innerCursor = cursor) =>
+              getPhoneNumberList(
+                {
+                  where: {
+                    ...userWhereInput,
+                    datetimeCreated: {
+                      gt: innerCursor,
+                    },
+                  },
+                  take,
+                },
+                {
+                  includePendingDoubleOptIn,
+                },
+              ),
+            {
+              chunkSize: QUEUING_THROUGHPUT,
+              maxLength: queueSizeBySegment,
+              queryLimit: DATABASE_QUERY_LIMIT,
+            },
+          ),
       )
 
       cursor = parseISO(newCursor)
@@ -177,62 +194,6 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
     logger.info('Finished')
   },
 )
-
-async function fetchPhoneNumbers(
-  iterations: number,
-  userWhereInput: BulkSMSCommunicationJourneyPayload['userWhereInput'],
-  outerCursor?: Date,
-  includePendingDoubleOptIn?: boolean,
-): Promise<[string[][], Date | undefined]> {
-  let phoneNumberList: Pick<User, 'phoneNumber' | 'datetimeCreated'>[] = []
-
-  // Using cursor pagination to also send messages to users who registered while we wait for the queue to empty
-  let innerCursor = outerCursor
-
-  for (let i = 0; i < iterations; i += 1) {
-    let take = MAX_QUEUE_LENGTH
-    const queryLimit = DATABASE_QUERY_LIMIT ?? 0
-
-    if (MAX_QUEUE_LENGTH >= queryLimit) {
-      take =
-        i + 1 === iterations
-          ? MAX_QUEUE_LENGTH - queryLimit // If it's the last iteration we don't wanna go over the limit
-          : queryLimit
-    }
-
-    const phoneNumbers = await getPhoneNumberList(
-      {
-        where: {
-          ...userWhereInput,
-          datetimeCreated: {
-            gt: innerCursor,
-          },
-        },
-        take,
-      },
-      {
-        includePendingDoubleOptIn,
-      },
-    )
-
-    phoneNumberList = phoneNumberList.concat(phoneNumbers)
-    innerCursor = phoneNumbers.at(-1)?.datetimeCreated
-
-    // Already fetched all phone numbers
-    if (!DATABASE_QUERY_LIMIT || phoneNumbers.length < DATABASE_QUERY_LIMIT) {
-      break
-    }
-  }
-
-  // We need to simplify this array so that the payload doesn't exceed the 4MB limit that inngest has
-  return [
-    chunk(
-      phoneNumberList.map(({ phoneNumber }) => phoneNumber),
-      QUEUING_THROUGHPUT,
-    ),
-    innerCursor,
-  ]
-}
 
 const ENQUEUE_MAX_RETRY_ATTEMPTS = 5
 
