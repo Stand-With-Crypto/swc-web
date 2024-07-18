@@ -76,7 +76,7 @@ const MapComponent = ({
 
   return (
     <>
-      <ComposableMap projection="geoAlbersUsa" viewBox="0 50 800 500">
+      <ComposableMap projection="geoAlbersUsa" viewBox="0 50 805 510">
         <Geographies geography={ADVOCATES_HEATMAP_GEO_URL}>
           {({ geographies }) => (
             <>
