@@ -97,11 +97,11 @@ function ThirdwebLoginEmbedded(props: ConnectEmbedProps) {
   const session = useThirdwebAuthUser()
   const hasTracked = useRef(false)
   useEffect(() => {
-    if (!session.isLoggedIn && !session.isLoading && !hasTracked.current) {
+    if (!session.isLoggedIn && !hasTracked.current) {
       trackSectionVisible({ sectionGroup: ANALYTICS_NAME_LOGIN, section: 'Login' })
       hasTracked.current = true
     }
-  }, [session.isLoading, session.isLoggedIn])
+  }, [session.isLoggedIn])
 
   if (session.isLoggedIn) {
     return (

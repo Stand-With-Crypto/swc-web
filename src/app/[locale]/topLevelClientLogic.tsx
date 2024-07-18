@@ -49,8 +49,8 @@ const InitialOrchestration = () => {
   }, [])
   const searchParamsUserId = searchParams?.get('userId')
   useEffect(() => {
-    if (authUser.user || searchParamsUserId) {
-      identifyUserOnClient(authUser.user || { userId: searchParamsUserId! })
+    if (authUser.user?.userId || searchParamsUserId) {
+      identifyUserOnClient({ userId: authUser.user?.userId ?? searchParamsUserId! })
     }
     if (authUser.user && searchParamsUserId && authUser.user.userId !== searchParamsUserId) {
       Sentry.captureMessage('mismatch between authenticated user and userId in search param', {

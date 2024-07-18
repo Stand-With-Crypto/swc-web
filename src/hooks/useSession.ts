@@ -14,7 +14,7 @@ export function useSession() {
   const fullProfileRequest = useApiResponseForUserFullProfileInfo()
   const { session: thirdwebSession } = useThirdwebSession()
 
-  const isLoading = thirdwebSession.isLoading || fullProfileRequest.isLoading
+  const isLoading = fullProfileRequest.isLoading
 
   const emailAddress = fullProfileRequest.data?.user?.primaryUserEmailAddress
   const isLoggedIn = thirdwebSession.isLoggedIn || !!emailAddress?.isVerified
