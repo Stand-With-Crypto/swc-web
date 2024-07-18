@@ -5,7 +5,10 @@ import { PublicRecentActivity } from '@/data/recentActivity/getPublicRecentActiv
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { apiUrls } from '@/utils/shared/urls'
 
-export function useApiRecentActivity(fallbackData: PublicRecentActivity, args: { limit: number }) {
+export function useApiRecentActivity(
+  fallbackData: PublicRecentActivity,
+  args: { limit: number; restrictToUS?: boolean },
+) {
   return useSWR(
     apiUrls.recentActivity(args),
     url =>

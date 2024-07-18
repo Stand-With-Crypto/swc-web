@@ -20,19 +20,11 @@ const fetchFromPrisma = async (config: RecentActivityConfig) => {
     orderBy: {
       datetimeCreated: 'desc',
     },
-    take: config.limit,
+    take: 1000,
     skip: config.offset,
     where: {
       user: {
         internalStatus: UserInternalStatus.VISIBLE,
-        ...(config.restrictToUS && {
-          address: {
-            countryCode: 'US',
-            administrativeAreaLevel1: {
-              not: undefined,
-            },
-          },
-        }),
       },
     },
     include: {
@@ -55,8 +47,19 @@ const fetchFromPrisma = async (config: RecentActivityConfig) => {
 }
 
 export const getPublicRecentActivity = async (config: RecentActivityConfig) => {
-  const data = await fetchFromPrisma(config)
+  const rawData = await fetchFromPrisma(config)
   const dtsiSlugs = new Set<string>()
+
+  const rawDataMaybeRestricted = config.restrictToUS
+    ? rawData.filter(currentData => {
+        return (
+          currentData.user?.address?.countryCode === 'US' &&
+          !!currentData.user?.address?.administrativeAreaLevel1
+        )
+      })
+    : rawData
+
+  const data = rawDataMaybeRestricted.slice(0, config?.offset || 0 + config.limit)
 
   data.forEach(userAction => {
     if (userAction.userActionCall?.recipientDtsiSlug) {

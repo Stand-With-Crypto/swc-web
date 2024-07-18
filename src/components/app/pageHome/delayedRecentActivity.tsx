@@ -21,7 +21,7 @@ export function DelayedRecentActivityWithMap(props: {
   locale: SupportedLocale
   advocatesMapPageData: Awaited<ReturnType<typeof getAdvocatesMapData>>
 }) {
-  const actions = useApiRecentActivity(props.actions, { limit: 20 }).data
+  const actions = useApiRecentActivity(props.actions, { limit: 20, restrictToUS: true }).data
   const ref = useRef(null)
   const isInVew = useInView(ref, { margin: '-50%', once: true })
   const visibleActions = actions.slice(isInVew ? 0 : 1, actions.length)
