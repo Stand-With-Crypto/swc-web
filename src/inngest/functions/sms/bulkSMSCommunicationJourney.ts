@@ -36,9 +36,10 @@ const QUEUING_THROUGHPUT = 500
 const logger = getLogger('bulk-sms')
 
 interface BulkSMSCommunicationJourneyPayload {
-  smsBody: string
+  smsBody?: string
   userWhereInput?: Prisma.UserGroupByArgs['where']
-  includePendingDoubleOptIn: boolean
+  includePendingDoubleOptIn?: boolean
+  persist?: boolean
 }
 
 export const bulkSMSCommunicationJourney = inngest.createFunction(
@@ -51,15 +52,21 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
     event: BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
   },
   async ({ step, event }) => {
-    const { smsBody, userWhereInput, includePendingDoubleOptIn } =
+    const { smsBody, userWhereInput, includePendingDoubleOptIn, persist } =
       event.data as BulkSMSCommunicationJourneyPayload
 
-    if (!smsBody) {
+    if (!smsBody && persist) {
       throw new NonRetriableError('Missing sms body')
     }
 
+    if (persist) {
+      logger.info(`PERSIST flag ACTIVATED. Will send messages`)
+    } else {
+      logger.info(`PERSIST flag DEACTIVATED. Won't send any messages`)
+    }
+
     // Messages with more than 160 characters are divided in segments
-    const segmentsCount = countSegments(smsBody)
+    const segmentsCount = countSegments(smsBody ?? '')
 
     // If there are multiple segment, we need to split the queue
     const queueSizeBySegment = Math.floor(MAX_QUEUE_LENGTH / segmentsCount)
@@ -163,7 +170,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
         async () => {
           let messagesSent = 0
           for (const batch of phoneNumberChunks) {
-            messagesSent += await enqueueMessages(batch, smsBody)
+            messagesSent += await enqueueMessages(batch, smsBody, persist)
           }
 
           logger.info(`${loopIteration} iteration queued ${messagesSent} messages`)
@@ -178,10 +185,12 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
 
       logger.info(`Waiting ${formatTime(timeInSecondsToSendBatchMessages)}...`)
 
-      await step.sleep(
-        `wait-${formatTime(timeInSecondsToSendBatchMessages).replace(' ', '-')}-for-messaging-queue-to-be-empty`,
-        timeInSecondsToSendBatchMessages * 1000,
-      )
+      if (persist) {
+        await step.sleep(
+          `wait-${formatTime(timeInSecondsToSendBatchMessages).replace(' ', '-')}-for-messaging-queue-to-be-empty`,
+          timeInSecondsToSendBatchMessages * 1000,
+        )
+      }
 
       totalTimeTaken += timeInSecondsToSendBatchMessages
       logger.info(
@@ -197,10 +206,17 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
 
 const ENQUEUE_MAX_RETRY_ATTEMPTS = 5
 
-async function enqueueMessages(phoneNumbers: string[], body: string, attempt = 0) {
+async function enqueueMessages(
+  phoneNumbers: string[],
+  body?: string,
+  persist?: boolean,
+  attempt = 0,
+) {
   if (attempt > ENQUEUE_MAX_RETRY_ATTEMPTS) return 0
 
   const enqueueMessagesPromise = phoneNumbers.map(async phoneNumber => {
+    if (!persist || !body) return
+
     const communicationJourneys = await createCommunicationJourneys(
       phoneNumber,
       UserCommunicationJourneyType.BULK_SMS,
@@ -234,7 +250,6 @@ async function enqueueMessages(phoneNumbers: string[], body: string, attempt = 0
             // Invalid phone number
             // TODO: flag users with this phone number
           } else {
-            console.log(result.reason)
             Sentry.captureException('Unexpected Twilio error', {
               extra: { reason: result.reason },
               tags: {
@@ -262,7 +277,7 @@ async function enqueueMessages(phoneNumbers: string[], body: string, attempt = 0
   if (failedPhoneNumbers.length > 0) {
     await sleep(10000 * attempt)
 
-    messagesSent += await enqueueMessages(failedPhoneNumbers, body, attempt + 1)
+    messagesSent += await enqueueMessages(failedPhoneNumbers, body, persist, attempt + 1)
   }
 
   return messagesSent
