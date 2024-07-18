@@ -2,10 +2,9 @@
 
 import React from 'react'
 import * as Sentry from '@sentry/nextjs'
-import { useENS } from '@thirdweb-dev/react'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/navigation'
-import useSWR, { Arguments, useSWRConfig } from 'swr'
+import useSWR, { useSWRConfig } from 'swr'
 
 import { ClientUnidentifiedUser } from '@/clientModels/clientUser/clientUser'
 import {
@@ -18,6 +17,7 @@ import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useDialog } from '@/hooks/useDialog'
+import { useENS } from '@/hooks/useENS'
 import { useSections } from '@/hooks/useSections'
 import { useSession } from '@/hooks/useSession'
 import { fetchReq } from '@/utils/shared/fetchReq'
