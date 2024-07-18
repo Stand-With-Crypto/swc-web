@@ -1,20 +1,22 @@
 import React from 'react'
 import * as Sentry from '@sentry/nextjs'
-import {
-  NFT,
-  SmartContract,
-  Transaction,
-  TransactionResultWithId,
-  useContract,
-  useContractMetadata,
-  UserWallet,
-  useSDK,
-} from '@thirdweb-dev/react'
-import { BaseContract } from 'ethers'
 import { isPlainObject, noop } from 'lodash-es'
-import { keccak256, toHex } from 'viem'
+import {
+  ContractOptions,
+  encode,
+  getContract,
+  PreparedTransaction,
+  PrepareTransactionOptions,
+  sendTransaction,
+} from 'thirdweb'
+import { base } from 'thirdweb/chains'
+import { getContractMetadata } from 'thirdweb/extensions/common'
+import { claimTo } from 'thirdweb/extensions/erc721'
+import { useActiveAccount, useReadContract } from 'thirdweb/react'
+import { AbiFunction, keccak256, toHex } from 'viem'
 
 import { logger } from '@/utils/shared/logger'
+import { thirdwebClient } from '@/utils/shared/thirdwebClient'
 import { safeStringify } from '@/utils/web/safeStringify'
 
 export type MintStatus = 'idle' | 'loading' | 'completed' | 'canceled' | 'error'
@@ -32,13 +34,17 @@ export function useSendMintNFTTransaction({
   isUSResident = false,
   onStatusChange = noop,
 }: UseSendMintNFTTransactionOptions) {
-  const sdk = useSDK()
-  const { contract } = useContract(contractAddress)
-  const { data: contractMetadata } = useContractMetadata(contract)
+  const contract = getContract({
+    address: contractAddress,
+    client: thirdwebClient,
+    chain: base,
+  })
+  const account = useActiveAccount()
+  const { data: contractMetadata } = useReadContract(getContractMetadata, { contract })
 
   const [status, setStatus] = React.useState<MintStatus>('idle')
   const [sendTransactionResponse, setSendTransactionResponse] = React.useState<Awaited<
-    ReturnType<UserWallet['sendRawTransaction']>
+    ReturnType<typeof sendTransaction>
   > | null>(null)
 
   const handleChangeStatus = React.useCallback(
@@ -70,9 +76,14 @@ export function useSendMintNFTTransaction({
   )
 
   const prepareMint = React.useCallback(
-    async (smartContract: SmartContract<BaseContract>) => {
-      const transaction = await smartContract.erc721.claim.prepare(quantity)
-      const callData = transaction.encode()
+    async (smartContract: Readonly<ContractOptions<[]>>) => {
+      const transaction = claimTo({
+        contract: smartContract,
+        to: account?.address ?? '',
+        quantity: BigInt(quantity),
+      })
+
+      const callData = await encode(transaction)
       const usResidencyMetadata = keccak256(toHex('US')).slice(2, 10)
       const callDataWithMetadata = callData + (isUSResident ? usResidencyMetadata : '')
 
@@ -81,16 +92,16 @@ export function useSendMintNFTTransaction({
         callDataWithMetadata,
       }
     },
-    [isUSResident, quantity],
+    [isUSResident, quantity, account?.address],
   )
 
   const mintNFT = React.useCallback(async (): Promise<MintStatus> => {
-    if (!sdk || !contractMetadata || !contract) {
+    if (!contractMetadata || !contract) {
       return 'idle'
     }
     handleChangeStatus('loading')
 
-    let transaction: Transaction<TransactionResultWithId<NFT>[]>
+    let transaction: PreparedTransaction<any, AbiFunction, PrepareTransactionOptions>
     let callDataWithMetadata: string
     try {
       const result = await prepareMint(contract)
@@ -104,10 +115,9 @@ export function useSendMintNFTTransaction({
     }
 
     try {
-      const claimData = await sdk.wallet.sendRawTransaction({
-        to: contractAddress,
-        data: callDataWithMetadata,
-        value: await transaction.getValue(),
+      const claimData = await sendTransaction({
+        account: account!, // TODO: check if we should be using the users account or our
+        transaction,
       })
 
       setSendTransactionResponse(claimData)
@@ -126,7 +136,7 @@ export function useSendMintNFTTransaction({
     handleChangeStatus,
     handleException,
     prepareMint,
-    sdk,
+    account,
   ])
 
   return {

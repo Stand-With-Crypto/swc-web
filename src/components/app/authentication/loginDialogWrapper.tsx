@@ -228,25 +228,25 @@ function LoginSection({ onLogin, ...props }: LoginSectionProps) {
 
   return (
     <ThirdwebLoginContent
-      auth={{
-        onLogin: async () => {
-          await onLogin()
+      // auth={{ TODO: migrate to v5
+      //   onLogin: async () => {
+      //     await onLogin()
 
-          // ensure that any server components on the page that's being used are refreshed with the context the user is now logged in
-          router.refresh()
+      //     // ensure that any server components on the page that's being used are refreshed with the context the user is now logged in
+      //     router.refresh()
 
-          // These are keys which the mutation occurs on login
-          // If we reset the cache we can have a situation where the value goes from `value => undefined => value`
-          const excludedKeysFromCacheReset: Arguments[] = [apiUrls.userFullProfileInfo()]
+      //     // These are keys which the mutation occurs on login
+      //     // If we reset the cache we can have a situation where the value goes from `value => undefined => value`
+      //     const excludedKeysFromCacheReset: Arguments[] = [apiUrls.userFullProfileInfo()]
 
-          // There are a bunch of SWR queries that might show stale unauthenticated data unless we clear the cache.
-          // This ensures we refetch using the users authenticated state
-          // https://swr.vercel.app/docs/advanced/cache#modify-the-cache-data
-          void mutate(arg => !excludedKeysFromCacheReset.includes(arg), undefined, {
-            revalidate: true,
-          })
-        },
-      }}
+      //     // There are a bunch of SWR queries that might show stale unauthenticated data unless we clear the cache.
+      //     // This ensures we refetch using the users authenticated state
+      //     // https://swr.vercel.app/docs/advanced/cache#modify-the-cache-data
+      //     void mutate(arg => !excludedKeysFromCacheReset.includes(arg), undefined, {
+      //       revalidate: true,
+      //     })
+      //   },
+      // }}
       initialEmailAddress={data?.user?.emailAddress}
       {...props}
     />

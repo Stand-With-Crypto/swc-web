@@ -60,9 +60,9 @@ export default function UserActionOptInSWCDeepLink() {
       )}
     >
       <ThirdwebLoginContent
-        auth={{
-          onLogin: () => handleRedirectOnLogin(),
-        }}
+      // auth={{
+      //   onLogin: () => handleRedirectOnLogin(),
+      // }} TODO:  migrate to v5
       />
     </div>
   )

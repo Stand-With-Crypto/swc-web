@@ -14,7 +14,7 @@ import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerAnalytics } from '@/utils/server/serverAnalytics'
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
-import { appRouterGetThirdwebAuthUser } from '@/utils/server/thirdweb/appRouterGetThirdwebAuthUser'
+// import { appRouterGetThirdwebAuthUser } from '@/utils/server/thirdweb/appRouterGetThirdwebAuthUser'
 import { thirdwebBaseRPCClient } from '@/utils/server/thirdweb/thirdwebRPCClients'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
 import { fromBigNumber } from '@/utils/shared/bigNumber'
@@ -57,7 +57,10 @@ async function _actionCreateUserActionMintNFT(input: CreateActionMintNFTInput) {
   const localUser = parseLocalUserFromCookies()
   const sessionId = getUserSessionId()
 
-  const authUser = await appRouterGetThirdwebAuthUser()
+  // const authUser = await appRouterGetThirdwebAuthUser()
+  const authUser = {
+    userId: 'userId',
+  } // TODO: Upgrade v5
   if (!authUser) {
     const error = new Error('Create User Action NFT Mint - Not authenticated')
     Sentry.captureException(error, {

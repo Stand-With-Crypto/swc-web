@@ -1,9 +1,10 @@
 import React from 'react'
 import * as Sentry from '@sentry/nextjs'
-import { useDisconnect, useLogout } from '@thirdweb-dev/react'
 import Cookies from 'js-cookie'
 import { usePathname, useRouter } from 'next/navigation'
+import { useActiveWallet, useDisconnect } from 'thirdweb/react'
 
+import { logout as thirdwebLogout } from '@/actions/actionAuthenticateUsingThirdweb'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useThirdwebAuthUser } from '@/hooks/useAuthUser'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
@@ -60,15 +61,21 @@ export function useSessionControl() {
 
 function useThirdwebSession() {
   const session = useThirdwebAuthUser()
-  const disconnect = useDisconnect()
-  const { logout } = useLogout()
+  const { disconnect } = useDisconnect()
+  const wallet = useActiveWallet()
 
   return {
     session,
     logoutAndDisconnect: React.useCallback(async () => {
-      await Promise.all([logout(), disconnect()]).catch(e =>
-        Sentry.captureException(e, { tags: { domain: 'logoutAndDisconnect' } }),
-      )
-    }, [disconnect, logout]),
+      try {
+        if (wallet) {
+          disconnect(wallet)
+        }
+
+        await thirdwebLogout()
+      } catch (err) {
+        Sentry.captureException(err, { tags: { domain: 'logoutAndDisconnect' } })
+      }
+    }, [disconnect, wallet]),
   }
 }

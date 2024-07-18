@@ -1,7 +1,9 @@
 import React from 'react'
 import Balancer from 'react-wrap-balancer'
-import { useConnectionStatus, useContract, Web3Button } from '@thirdweb-dev/react'
 import { noop } from 'lodash-es'
+import { getContract } from 'thirdweb'
+import { base } from 'thirdweb/chains'
+import { useActiveWalletConnectionStatus } from 'thirdweb/react'
 
 import {
   NFTDisplay,
@@ -31,8 +33,8 @@ import { MintStatus } from '@/hooks/useSendMintNFTTransaction'
 import { useSession } from '@/hooks/useSession'
 import { SupportedCryptoCurrencyCodes } from '@/utils/shared/currency'
 import { NFTSlug } from '@/utils/shared/nft'
+import { thirdwebClient } from '@/utils/shared/thirdwebClient'
 import { NFT_CLIENT_METADATA } from '@/utils/web/nft'
-import { theme } from '@/utils/web/thirdweb/theme'
 
 import { QuantityInput } from './quantityInput'
 
@@ -67,26 +69,27 @@ export function UserActionFormNFTMintCheckout({
   onIsUSResidentChange,
   debug = false,
 }: UserActionFormNFTMintCheckoutProps) {
-  const { contract } = useContract(MINT_NFT_CONTRACT_ADDRESS)
+  const contract = getContract({
+    address: MINT_NFT_CONTRACT_ADDRESS,
+    client: thirdwebClient,
+    chain: base,
+  })
   const contractMetadata = NFT_CLIENT_METADATA[NFTSlug.STAND_WITH_CRYPTO_SUPPORTER]
   const session = useSession()
 
   const checkoutError = useCheckoutError({
     totalFee: totalFee,
-    contractChainId: contract?.chainId,
+    contractChainId: contract.chain.id,
   })
   const maybeOverriddenCheckoutError = debug ? null : checkoutError
-  const connectionStatus = useConnectionStatus()
+  const connectionStatus = useActiveWalletConnectionStatus()
 
   if (!session.isLoggedInThirdweb) {
     return <UserActionFormNFTMintCheckoutSkeleton />
   }
 
-  const isLoading =
-    mintStatus === 'loading' ||
-    !contract ||
-    connectionStatus === 'connecting' ||
-    connectionStatus === 'unknown'
+  const isLoading = mintStatus === 'loading' || !contract || connectionStatus === 'connecting'
+
   return (
     <UserActionFormLayout onBack={() => goToSection(UserActionFormNFTMintSectionNames.INTRO)}>
       {isLoading && <LoadingOverlay />}
@@ -193,20 +196,23 @@ export function UserActionFormNFTMintCheckout({
               Mint now - Mocked
             </Button>
           ) : (
-            <Web3Button
-              action={onMint}
-              className="!rounded-full disabled:pointer-events-none disabled:opacity-50"
-              contractAddress={MINT_NFT_CONTRACT_ADDRESS}
-              isDisabled={
-                isLoading ||
-                (!!maybeOverriddenCheckoutError &&
-                  maybeOverriddenCheckoutError !== 'networkSwitch') ||
-                (!isLoading && !maybeOverriddenCheckoutError && !totalFeeDisplay)
-              }
-              theme={theme}
-            >
-              Mint now
-            </Web3Button>
+            // TODO: migrate this button to v5 (probably will have to create a custom button component)
+            // <TransactionButton
+            // transaction={onMint}
+            //   // action={onMint}
+            //   className="!rounded-full disabled:pointer-events-none disabled:opacity-50"
+            //   // contractAddress={MINT_NFT_CONTRACT_ADDRESS}
+            //   // isDisabled={
+            //   //   isLoading ||
+            //   //   (!!maybeOverriddenCheckoutError &&
+            //   //     maybeOverriddenCheckoutError !== 'networkSwitch') ||
+            //   //   (!isLoading && !maybeOverriddenCheckoutError && !totalFeeDisplay)
+            //   // }
+            //   // theme={theme}
+            // >
+            //   Mint now
+            // </TransactionButton>
+            <button>mint now</button>
           )}
 
           {!!maybeOverriddenCheckoutError && !isLoading && (
