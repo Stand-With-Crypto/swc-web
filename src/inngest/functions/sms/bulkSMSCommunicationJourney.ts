@@ -9,6 +9,7 @@ import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { countSegments, sendSMS } from '@/utils/server/sms'
 import { getLogger } from '@/utils/shared/logger'
+import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { sleep } from '@/utils/shared/sleep'
 
 import { createCommunication, createCommunicationJourneys } from './shared/communicationJourney'
@@ -18,11 +19,15 @@ export const BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME = 'app/user.commu
 export const BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_FUNCTION_ID = 'user-communication/bulk-sms'
 
 const MAX_RETRY_COUNT = 0
-const PLANET_SCALE_QUERY_LIMIT = 100_000
+const DATABASE_QUERY_LIMIT = process.env.DATABASE_QUERY_LIMIT
+  ? Number(process.env.DATABASE_QUERY_LIMIT)
+  : undefined
 
 // This constants are specific to our twilio phone number type
-const MESSAGE_SEGMENTS_PER_SECOND = 3
-const MAX_QUEUE_LENGTH = 108_000
+const MESSAGE_SEGMENTS_PER_SECOND = Number(
+  requiredEnv(process.env.MESSAGE_SEGMENTS_PER_SECOND, 'MESSAGE_SEGMENTS_PER_SECOND'),
+)
+const MAX_QUEUE_LENGTH = Number(requiredEnv(process.env.MAX_QUEUE_LENGTH, 'MAX_QUEUE_LENGTH'))
 
 // This constant is specific to our twilio account
 const QUEUING_THROUGHPUT = 500
@@ -59,7 +64,9 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
     const queueSizeBySegment = Math.floor(MAX_QUEUE_LENGTH / segmentsCount)
 
     // Iterations to get all phoneNumbers. We need this because PlanetScale limits the amount of rows
-    const iterations = Math.ceil(queueSizeBySegment / PLANET_SCALE_QUERY_LIMIT)
+    const iterations = DATABASE_QUERY_LIMIT
+      ? Math.ceil(queueSizeBySegment / DATABASE_QUERY_LIMIT)
+      : 1
 
     const [estimatedTimeToSendAllMessages, estimatedPhoneNumbersCount] = await step.run(
       'time-estimation',
@@ -82,7 +89,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
                   gt: cursor,
                 },
               },
-              take: PLANET_SCALE_QUERY_LIMIT,
+              take: DATABASE_QUERY_LIMIT,
             },
             {
               includePendingDoubleOptIn,
@@ -94,7 +101,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
 
           totalLength += length
 
-          if (length < PLANET_SCALE_QUERY_LIMIT) {
+          if (!DATABASE_QUERY_LIMIT || length < DATABASE_QUERY_LIMIT) {
             hasNumbersLeft = false
           }
         }
@@ -183,12 +190,13 @@ async function fetchPhoneNumbers(
 
   for (let i = 0; i < iterations; i += 1) {
     let take = MAX_QUEUE_LENGTH
+    const queryLimit = DATABASE_QUERY_LIMIT ?? 0
 
-    if (MAX_QUEUE_LENGTH >= PLANET_SCALE_QUERY_LIMIT) {
+    if (MAX_QUEUE_LENGTH >= queryLimit) {
       take =
         i + 1 === iterations
-          ? MAX_QUEUE_LENGTH - PLANET_SCALE_QUERY_LIMIT // If it's the last iteration we don't wanna go over the limit
-          : PLANET_SCALE_QUERY_LIMIT
+          ? MAX_QUEUE_LENGTH - queryLimit // If it's the last iteration we don't wanna go over the limit
+          : queryLimit
     }
 
     const phoneNumbers = await getPhoneNumberList(
@@ -210,7 +218,7 @@ async function fetchPhoneNumbers(
     innerCursor = phoneNumbers.at(-1)?.datetimeCreated
 
     // Already fetched all phone numbers
-    if (phoneNumbers.length < PLANET_SCALE_QUERY_LIMIT) {
+    if (!DATABASE_QUERY_LIMIT || phoneNumbers.length < DATABASE_QUERY_LIMIT) {
       break
     }
   }
