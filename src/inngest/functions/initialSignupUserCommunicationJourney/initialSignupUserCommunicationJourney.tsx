@@ -22,7 +22,8 @@ const INITIAL_SIGNUP_USER_COMMUNICATION_JOURNEY_INNGEST_FUNCTION_ID =
 
 const MAX_RETRY_COUNT = 2
 const LATEST_ACTION_DEBOUNCE_TIME_MINUTES = 5
-const STEP_FOLLOW_UP_TIMEOUT_MINUTES = '3 mins'
+const STEP_FOLLOW_UP_TIMEOUT_MINUTES = '7d'
+const FAST_STEP_FOLLOW_UP_TIMEOUT_MINUTES = '3 mins'
 
 const initialSignUpUserCommunicationJourneyPayload = z.object({
   userId: z.string(),
@@ -80,7 +81,10 @@ export const initialSignUpUserCommunicationJourney = inngest.createFunction(
       }),
     )
 
-    await step.sleep('wait-for-welcome-follow-up', STEP_FOLLOW_UP_TIMEOUT_MINUTES)
+    const followUpTimeout = payload.decreaseTimers
+      ? FAST_STEP_FOLLOW_UP_TIMEOUT_MINUTES
+      : STEP_FOLLOW_UP_TIMEOUT_MINUTES
+    await step.sleep('wait-for-welcome-follow-up', followUpTimeout)
 
     let profileStatus = await getProfileStatus(payload.userId)
     if (profileStatus === 'incomplete') {
@@ -92,7 +96,7 @@ export const initialSignUpUserCommunicationJourney = inngest.createFunction(
           step: 'update-profile-reminder',
         }),
       )
-      await step.sleep('wait-for-finish-profile-reminder-follow-up', STEP_FOLLOW_UP_TIMEOUT_MINUTES)
+      await step.sleep('wait-for-finish-profile-reminder-follow-up', followUpTimeout)
       profileStatus = await getProfileStatus(payload.userId)
     }
 
@@ -105,7 +109,7 @@ export const initialSignUpUserCommunicationJourney = inngest.createFunction(
           step: 'phone-number-reminder',
         }),
       )
-      await step.sleep('wait-for-phone-number-reminder-follow-up', STEP_FOLLOW_UP_TIMEOUT_MINUTES)
+      await step.sleep('wait-for-phone-number-reminder-follow-up', followUpTimeout)
     }
 
     const user = await getUser(payload.userId)

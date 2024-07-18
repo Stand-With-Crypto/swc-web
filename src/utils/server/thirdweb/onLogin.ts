@@ -101,6 +101,7 @@ export async function onLogin(
     localUser,
     getUserSessionId: () => getUserSessionIdOnPageRouter(req),
     injectedFetchEmbeddedWalletMetadataFromThirdweb: fetchEmbeddedWalletMetadataFromThirdweb,
+    decreaseCommunicationTimers: req.cookies['SWC_DECREASE_COMMUNICATION_TIMERS'] === 'true',
   })
     .then(res => ({ userId: res.userId }))
     .catch(e => {
@@ -116,6 +117,7 @@ interface NewLoginParams {
   cryptoAddress: string
   localUser: ServerLocalUser | null
   getUserSessionId: () => string | null
+  decreaseCommunicationTimers?: boolean
   // dependency injecting this in to the function so we can mock it in tests
   injectedFetchEmbeddedWalletMetadataFromThirdweb: typeof fetchEmbeddedWalletMetadataFromThirdweb
 }
@@ -287,6 +289,7 @@ export async function onNewLogin(props: NewLoginParams) {
     wasUserCreated,
     analytics,
     sessionId: props.getUserSessionId(),
+    decreaseCommunicationTimers: props.decreaseCommunicationTimers,
   })
 
   if (localUser) {
@@ -631,6 +634,7 @@ async function triggerPostLoginUserActionSteps({
   wasUserCreated,
   analytics,
   sessionId,
+  decreaseCommunicationTimers,
 }: {
   wasUserCreated: boolean
   user: UpsertedUser
@@ -638,6 +642,7 @@ async function triggerPostLoginUserActionSteps({
   localUser: ServerLocalUser | null
   analytics: ServerAnalytics
   sessionId: string | null
+  decreaseCommunicationTimers?: boolean
 }) {
   const log = getLog(userCryptoAddress.cryptoAddress)
   /**
@@ -688,6 +693,7 @@ async function triggerPostLoginUserActionSteps({
       data: {
         userId: user.id,
         sessionId,
+        decreaseTimers: decreaseCommunicationTimers,
       },
     })
     log(
