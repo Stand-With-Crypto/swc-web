@@ -1,8 +1,9 @@
-import { string } from 'zod'
+import { literal, string, union } from 'zod'
 
-import { PHONE_NUMBER_REGEX } from '@/utils/shared/phoneNumber'
+import { formatPhoneNumber, validatePhoneNumber } from '@/utils/shared/phoneNumber'
 
-export const zodPhoneNumber = string().regex(
-  PHONE_NUMBER_REGEX,
-  'Please enter a valid phone number',
-)
+export const zodPhoneNumber = string()
+  .refine(validatePhoneNumber, 'Please enter a valid phone number')
+  .transform(formatPhoneNumber)
+
+export const zodOptionalEmptyPhoneNumber = union([zodPhoneNumber, literal('')])

@@ -21,7 +21,6 @@ import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
-import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
 import { generateReferralId } from '@/utils/shared/referralId'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { UserActionCallCampaignName } from '@/utils/shared/userActionCampaigns'
@@ -30,7 +29,7 @@ import { zodDTSISlug } from '@/validation/fields/zodDTSISlug'
 import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
 
 const createActionCallCongresspersonInputValidationSchema = object({
-  phoneNumber: zodPhoneNumber.transform(str => str && normalizePhoneNumber(str)),
+  phoneNumber: zodPhoneNumber,
   campaignName: nativeEnum(UserActionCallCampaignName),
   dtsiSlug: zodDTSISlug,
   address: zodAddress,
