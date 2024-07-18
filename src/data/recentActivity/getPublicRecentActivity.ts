@@ -20,7 +20,7 @@ const fetchFromPrisma = async (config: RecentActivityConfig) => {
     orderBy: {
       datetimeCreated: 'desc',
     },
-    take: 1000,
+    take: config.restrictToUS ? 1000 : config.limit,
     skip: config.offset,
     where: {
       user: {
@@ -50,16 +50,19 @@ export const getPublicRecentActivity = async (config: RecentActivityConfig) => {
   const rawData = await fetchFromPrisma(config)
   const dtsiSlugs = new Set<string>()
 
-  const rawDataMaybeRestricted = config.restrictToUS
-    ? rawData.filter(currentData => {
+  // TODO: this feeds the advocates map at home until a better query at fetchFromPrisma is written
+  const filterDataToUSOnly = (data: typeof rawData) => {
+    return data
+      .filter(currentData => {
         return (
           currentData.user?.address?.countryCode === 'US' &&
           !!currentData.user?.address?.administrativeAreaLevel1
         )
       })
-    : rawData
+      .slice(0, config?.offset || 0 + config.limit)
+  }
 
-  const data = rawDataMaybeRestricted.slice(0, config?.offset || 0 + config.limit)
+  const data = config.restrictToUS ? filterDataToUSOnly(rawData) : rawData
 
   data.forEach(userAction => {
     if (userAction.userActionCall?.recipientDtsiSlug) {
