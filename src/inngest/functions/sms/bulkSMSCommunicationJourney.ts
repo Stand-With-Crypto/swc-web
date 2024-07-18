@@ -10,6 +10,7 @@ import { prismaClient } from '@/utils/server/prismaClient'
 import { countSegments, sendSMS } from '@/utils/server/sms'
 import { getLogger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
+import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { sleep } from '@/utils/shared/sleep'
 
 import { createCommunication, createCommunicationJourneys } from './shared/communicationJourney'
@@ -307,19 +308,16 @@ async function enqueueMessages(phoneNumbers: string[], body: string, attempt = 0
 }
 
 function formatTime(seconds: number) {
-  if (seconds < 60) {
+  if (seconds < SECONDS_DURATION.MINUTE) {
     return `${seconds.toPrecision(2)} seconds`
-  } else if (seconds < 3600) {
-    // less than 60 minutes (3600 seconds)
-    const minutes = Math.ceil(seconds / 60)
+  } else if (seconds < SECONDS_DURATION.HOUR) {
+    const minutes = Math.ceil(seconds / SECONDS_DURATION.MINUTE)
     return `${minutes} minutes`
-  } else if (seconds < 86400) {
-    // less than 24 hours (86400 seconds)
-    const hours = Math.ceil(seconds / 3600)
+  } else if (seconds < SECONDS_DURATION.DAY) {
+    const hours = Math.ceil(seconds / SECONDS_DURATION.HOUR)
     return `${hours} hours`
   } else {
-    // 24 hours or more
-    const days = Math.ceil(seconds / 86400)
+    const days = Math.ceil(seconds / SECONDS_DURATION.DAY)
     return `${days} days`
   }
 }
