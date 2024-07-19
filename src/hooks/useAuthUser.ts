@@ -2,8 +2,8 @@ import Cookies from 'js-cookie'
 import { jwtDecode } from 'jwt-decode'
 import { useActiveAccount } from 'thirdweb/react'
 
-import { THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX } from '@/actions/actionAuthenticateUsingThirdweb'
 import { parseThirdwebAddress } from '@/hooks/useThirdwebAddress/parseThirdwebAddress'
+import { THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX } from '@/utils/shared/thirdwebAuthToken'
 
 export function useThirdwebAuthUser() {
   const account = useActiveAccount()

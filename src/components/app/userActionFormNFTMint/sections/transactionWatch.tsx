@@ -57,7 +57,7 @@ export function UserActionFormNFTMintTransactionWatch({
   const createAction = async (transaction: TransactionResponse) => {
     const input: CreateActionMintNFTInput = {
       campaignName: UserActionNftMintCampaignName.DEFAULT,
-      transactionHash: transaction.hash as `0x${string}`,
+      transactionHash: transaction.transactionHash as `0x${string}`,
     }
 
     return await triggerServerActionForForm(
@@ -88,7 +88,7 @@ export function UserActionFormNFTMintTransactionWatch({
 
     const processTransaction = async () => {
       try {
-        await sendTransactionResponse.wait()
+        // await sendTransactionResponse.wait() TOOD: investigate this in v5
         await createAction(sendTransactionResponse)
       } catch (err) {
         Sentry.captureException(err, { tags: { domain: 'nftMint/transactionWatch' } })

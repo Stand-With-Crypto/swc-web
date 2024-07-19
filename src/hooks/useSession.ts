@@ -4,10 +4,10 @@ import Cookies from 'js-cookie'
 import { usePathname, useRouter } from 'next/navigation'
 import { useActiveWallet, useDisconnect } from 'thirdweb/react'
 
-import { logout as thirdwebLogout } from '@/actions/actionAuthenticateUsingThirdweb'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useThirdwebAuthUser } from '@/hooks/useAuthUser'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
+import { onLogout } from '@/utils/server/thirdweb/onLogout'
 import { LOGOUT_ACTION_EVENT } from '@/utils/shared/eventListeners'
 import { generateUserSessionId, USER_SESSION_ID_COOKIE_NAME } from '@/utils/shared/userSessionId'
 
@@ -72,7 +72,7 @@ function useThirdwebSession() {
           disconnect(wallet)
         }
 
-        await thirdwebLogout()
+        await onLogout()
       } catch (err) {
         Sentry.captureException(err, { tags: { domain: 'logoutAndDisconnect' } })
       }

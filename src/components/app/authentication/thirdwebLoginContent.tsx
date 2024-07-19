@@ -4,12 +4,6 @@ import { base } from 'thirdweb/chains'
 import { ConnectEmbed, ConnectEmbedProps } from 'thirdweb/react'
 import { createWallet } from 'thirdweb/wallets'
 
-import {
-  generatePayload,
-  isLoggedIn,
-  login,
-  logout,
-} from '@/actions/actionAuthenticateUsingThirdweb'
 import { ANALYTICS_NAME_LOGIN } from '@/components/app/authentication/constants'
 import { DialogBody, DialogFooterCTA } from '@/components/ui/dialog'
 import { NextImage } from '@/components/ui/image'
@@ -19,6 +13,10 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { useThirdwebAuthUser } from '@/hooks/useAuthUser'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
+import { generateThirdwebLoginPayload } from '@/utils/server/thirdweb/getThirdwebLoginPayload'
+import { isLoggedIn } from '@/utils/server/thirdweb/isLoggedIn'
+import { login } from '@/utils/server/thirdweb/onLogin'
+import { onLogout } from '@/utils/server/thirdweb/onLogout'
 import { thirdwebClient } from '@/utils/shared/thirdwebClient'
 import { trackSectionVisible } from '@/utils/web/clientAnalytics'
 import { theme } from '@/utils/web/thirdweb/theme'
@@ -144,20 +142,12 @@ function ThirdwebLoginEmbedded(props: Omit<ConnectEmbedProps, 'client'>) {
         logoUrl: 'https://www.standwithcrypto.org/logo/android-chrome-512x512.png',
       }}
       auth={{
-        // WIP: this auth property was copied from the docs. Still need to update it for our needs
-        isLoggedIn: async address => {
-          console.log('checking if logged in!', { address })
-          return await isLoggedIn()
-        },
+        isLoggedIn: () => isLoggedIn(),
         doLogin: async params => {
-          console.log('logging in!')
           await login(params)
         },
-        getLoginPayload: async ({ address }) => generatePayload({ address }),
-        doLogout: async () => {
-          console.log('logging out!')
-          await logout()
-        },
+        getLoginPayload: async ({ address }) => generateThirdwebLoginPayload(address),
+        doLogout: () => onLogout(),
       }}
       chain={base}
       client={thirdwebClient}
@@ -172,42 +162,3 @@ function ThirdwebLoginEmbedded(props: Omit<ConnectEmbedProps, 'client'>) {
     />
   )
 }
-
-// TODO: Remove this after v5 migration complete. The following comment is for reference only
-// export const thirdwebAuthConfig: AuthOptions = {
-//   domain: NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN,
-//   client: thirdwebClient,
-//   adminAccount: privateKeyToAccount({
-//     client: thirdwebClient,
-//     privateKey: THIRDWEB_AUTH_PRIVATE_KEY,
-//   }),
-//   jwt: {
-//     expirationTimeSeconds: 60 * 60 * 24 * 7, // 1 week
-//   },
-//   login: {
-//     nonce: {
-//       validate: async (nonce: string) => {
-//         const nonceExists = await prismaClient.authenticationNonce.findUnique({
-//           where: { id: nonce },
-//         })
-
-//         return !!nonceExists
-//       },
-//       generate: async () => {
-//         // What should I use to generate this nonce?
-//         return ''
-//       }
-//     },
-//   },
-
-//   // callbacks: {
-//   //   onLogout: async (user, req) => {
-//   //     const localUser = parseLocalUserFromCookiesForPageRouter(req)
-//   //     const sessionData = user.session as AuthSessionMetadata
-//   //     await getServerAnalytics({ userId: sessionData.userId, localUser }).track('User Logged Out')
-//   //   },
-//   //   // look for the comment in appRouterGetAuthUser for why we don't use this fn
-//   //   onUser: async () => {},
-//   //   onLogin,
-//   // },
-// }
