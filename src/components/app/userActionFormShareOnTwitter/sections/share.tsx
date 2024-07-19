@@ -3,12 +3,14 @@
 import { UserActionType } from '@prisma/client'
 import { Check } from 'lucide-react'
 import { useSearchParams } from 'next/navigation'
+import { toast } from 'sonner'
 
 import { actionCreateUserActionTweet } from '@/actions/actionCreateUserActionTweet'
 import { UserActionFormLayout } from '@/components/app/userActionFormCommon'
 import { SECTIONS_NAMES } from '@/components/app/userActionFormShareOnTwitter/constants'
 import { Button } from '@/components/ui/button'
 import { UseSectionsReturn } from '@/hooks/useSections'
+import { UserActionValidationErrors } from '@/utils/server/userActionValidation/constants'
 import { openWindow } from '@/utils/shared/openWindow'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 
@@ -29,8 +31,10 @@ export function ShareOnX(props: ShareOnXProps) {
         },
         payload: undefined,
         onError(key, error) {
-          if (key === 'actionUnavailable') {
-            console.log('actionUnavailable', error)
+          if (key === UserActionValidationErrors.ACTION_UNAVAILABLE) {
+            toast.error('Action unavailable', {
+              description: error.message,
+            })
           }
         },
       },

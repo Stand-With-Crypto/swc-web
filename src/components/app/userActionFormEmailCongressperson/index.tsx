@@ -64,6 +64,7 @@ import {
   toastGenericError,
 } from '@/utils/web/toastUtils'
 import { zodUserActionFormEmailCongresspersonFields } from '@/validation/forms/zodUserActionFormEmailCongressperson'
+import { UserActionValidationErrors } from '@/utils/server/userActionValidation/constants'
 
 type FormValues = z.infer<typeof zodUserActionFormEmailCongresspersonFields> &
   GenericErrorFormValues
@@ -261,10 +262,17 @@ export function UserActionFormEmailCongressperson({
                 'DTSI Slugs': values.dtsiSlugs,
               },
               payload: { ...values, address },
+              onError: (key, error) => {
+                if (key === UserActionValidationErrors.ACTION_UNAVAILABLE) {
+                  form.setError('FORM_ERROR', {
+                    message: error.message,
+                  })
+                }
+              },
             },
             payload =>
               actionCreateUserActionEmailCongressperson(payload).then(actionResult => {
-                if (actionResult?.user) {
+                if (actionResult && 'user' in actionResult && actionResult.user) {
                   identifyUserOnClient(actionResult.user)
                 }
                 return actionResult

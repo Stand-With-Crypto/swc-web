@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { UserActionType } from '@prisma/client'
 import { useRouter } from 'next/navigation'
+import { toast } from 'sonner'
 
 import {
   actionCreateUserActionCallCongressperson,
@@ -19,6 +20,7 @@ import { TrackedExternalLink } from '@/components/ui/trackedExternalLink'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { UseSectionsReturn } from '@/hooks/useSections'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
+import { UserActionValidationErrors } from '@/utils/server/userActionValidation/constants'
 import { getGoogleCivicOfficialByDTSIName } from '@/utils/shared/googleCivicInfo'
 import { formatPhoneNumber } from '@/utils/shared/phoneNumber'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
@@ -163,7 +165,6 @@ export function SuggestedScript({
       const result = await triggerServerActionForForm(
         {
           formName: 'User Action Form Call Congressperson',
-          onError: toastGenericError,
           analyticsProps: {
             ...convertAddressToAnalyticsProperties(data.address),
             'Campaign Name': data.campaignName,
@@ -171,10 +172,18 @@ export function SuggestedScript({
             'DTSI Slug': data.dtsiSlug,
           },
           payload: data,
+          onError: (key, error) => {
+            if (key === UserActionValidationErrors.ACTION_UNAVAILABLE) {
+              toast.error('Action unavailable', {
+                description: error.message,
+              })
+            }
+            toastGenericError()
+          },
         },
         payload =>
           actionCreateUserActionCallCongressperson(payload).then(actionResult => {
-            if (actionResult?.user) {
+            if (actionResult && 'user' in actionResult && actionResult.user) {
               identifyUserOnClient(actionResult.user)
             }
             return actionResult
@@ -187,7 +196,6 @@ export function SuggestedScript({
         goToSection(SectionNames.SUCCESS_MESSAGE)
       } else {
         setCallingState('error')
-        toastGenericError()
       }
     },
     [addressSchema, dtsiPerson.slug, goToSection, router],

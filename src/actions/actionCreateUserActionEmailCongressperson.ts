@@ -35,12 +35,15 @@ import {
   ServerLocalUser,
 } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
+import { createCountryCodeValidation } from '@/utils/server/userActionValidation/checkCountryCode'
+import { withValidations } from '@/utils/server/userActionValidation/withValidations'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { userFullName } from '@/utils/shared/userFullName'
 import { YourPoliticianCategory } from '@/utils/shared/yourPoliticianCategory'
 import { zodUserActionFormEmailCongresspersonAction } from '@/validation/forms/zodUserActionFormEmailCongressperson'
@@ -56,7 +59,10 @@ type Input = z.infer<typeof zodUserActionFormEmailCongresspersonAction>
 
 export const actionCreateUserActionEmailCongressperson = withServerActionMiddleware(
   'actionCreateUserActionEmailCongressperson',
-  _actionCreateUserActionEmailCongressperson,
+  withValidations(
+    [createCountryCodeValidation(DEFAULT_SUPPORTED_COUNTRY_CODE)],
+    _actionCreateUserActionEmailCongressperson,
+  ),
 )
 
 async function _actionCreateUserActionEmailCongressperson(input: Input) {

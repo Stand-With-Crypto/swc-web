@@ -3,6 +3,7 @@
 import { useCallback, useState } from 'react'
 import { UserActionType } from '@prisma/client'
 import { useRouter } from 'next/navigation'
+import { toast } from 'sonner'
 
 import {
   actionCreateUserActionVoterRegistration,
@@ -14,6 +15,7 @@ import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { ExternalLink } from '@/components/ui/link'
 import { UseSectionsReturn } from '@/hooks/useSections'
+import { UserActionValidationErrors } from '@/utils/server/userActionValidation/constants'
 import { NFTSlug } from '@/utils/shared/nft'
 import { UserActionVoterRegistrationCampaignName } from '@/utils/shared/userActionCampaigns'
 import type { USStateCode } from '@/utils/shared/usStateUtils'
@@ -46,7 +48,14 @@ export function ClaimNft({ goToSection, stateCode }: ClaimNftProps) {
     const result = await triggerServerActionForForm(
       {
         formName: 'User Action Form Voter Registration',
-        onError: toastGenericError,
+        onError: (key, error) => {
+          if (key === UserActionValidationErrors.ACTION_UNAVAILABLE) {
+            toast.error('Action unavailable', {
+              description: error.message,
+            })
+          }
+          toastGenericError()
+        },
         analyticsProps: {
           'Campaign Name': data.campaignName,
           'User Action Type': UserActionType.VOTER_REGISTRATION,
@@ -56,7 +65,7 @@ export function ClaimNft({ goToSection, stateCode }: ClaimNftProps) {
       },
       payload =>
         actionCreateUserActionVoterRegistration(payload).then(actionResult => {
-          if (actionResult?.user) {
+          if (actionResult && 'user' in actionResult && actionResult.user) {
             identifyUserOnClient(actionResult.user)
           }
           return actionResult
@@ -66,8 +75,6 @@ export function ClaimNft({ goToSection, stateCode }: ClaimNftProps) {
     if (result.status === 'success') {
       router.refresh()
       goToSection(SectionNames.SUCCESS)
-    } else {
-      toastGenericError()
     }
     setLoading(false)
   }, [goToSection, router, stateCode])
