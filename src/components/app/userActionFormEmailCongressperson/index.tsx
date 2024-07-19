@@ -43,6 +43,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { useGetDTSIPeopleFromAddress } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useIsDesktop } from '@/hooks/useIsDesktop'
+import { UserActionValidationErrors } from '@/utils/server/userActionValidation/constants'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { apiUrls } from '@/utils/shared/urls'
@@ -64,7 +65,6 @@ import {
   toastGenericError,
 } from '@/utils/web/toastUtils'
 import { zodUserActionFormEmailCongresspersonFields } from '@/validation/forms/zodUserActionFormEmailCongressperson'
-import { UserActionValidationErrors } from '@/utils/server/userActionValidation/constants'
 
 type FormValues = z.infer<typeof zodUserActionFormEmailCongresspersonFields> &
   GenericErrorFormValues

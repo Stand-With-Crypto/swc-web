@@ -4,7 +4,7 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 
 interface UserActionFormActionUnavailableProps {
-  onConfirm: () => void
+  onConfirm?: () => void
 }
 
 export const UserActionFormActionUnavailable = (props: UserActionFormActionUnavailableProps) => {

@@ -18,10 +18,7 @@ import {
   parseLocalUserFromCookies,
 } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
-import {
-  checkCountryCode,
-  createCountryCodeValidation,
-} from '@/utils/server/userActionValidation/checkCountryCode'
+import { createCountryCodeValidation } from '@/utils/server/userActionValidation/checkCountryCode'
 import { withValidations } from '@/utils/server/userActionValidation/withValidations'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
@@ -59,9 +56,7 @@ const logger = getLogger(`actionCreateUserActionCallCongressperson`)
 export const actionCreateUserActionCallCongressperson = withServerActionMiddleware(
   'actionCreateUserActionCallCongressperson',
   withValidations(
-    [
-      createCountryCodeValidation(DEFAULT_SUPPORTED_COUNTRY_CODE),
-    ],
+    [createCountryCodeValidation(DEFAULT_SUPPORTED_COUNTRY_CODE)],
     _actionCreateUserActionCallCongressperson,
   ),
 )

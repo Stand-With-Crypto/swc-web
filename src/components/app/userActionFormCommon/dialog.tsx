@@ -1,9 +1,7 @@
 'use client'
 
-import Cookies from 'js-cookie'
-
+import { GeoGate } from '@/components/app/geoGate'
 import { Dialog, DialogContent, DialogProps, DialogTrigger } from '@/components/ui/dialog'
-import { USER_COUNTRY_CODE_COOKIE_NAME } from '@/utils/server/getCountryCode'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 
 import { UserActionFormActionUnavailable } from './actionUnavailable'
@@ -28,25 +26,27 @@ export const UserActionFormDialog = (props: UserActionFormDialogProps) => {
     ...dialogProps
   } = props
 
-  const userCountryCode = Cookies.get(USER_COUNTRY_CODE_COOKIE_NAME)
-
-  if (!bypassCountryCheck && userCountryCode !== countryCode) {
-    return (
-      <Dialog {...dialogProps} analytics={ANALYTICS_NAME_USER_ACTION_FORM_UNAVAILABLE}>
-        <DialogTrigger asChild>{trigger}</DialogTrigger>
-        <DialogContent className="max-w-3xl">
-          <UserActionFormActionUnavailable onConfirm={() => dialogProps?.onOpenChange?.(false)} />
-        </DialogContent>
-      </Dialog>
-    )
-  }
-
-  return (
-    <Dialog {...dialogProps}>
+  const unavailableContent = (
+    <Dialog {...dialogProps} analytics={ANALYTICS_NAME_USER_ACTION_FORM_UNAVAILABLE}>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
-      <DialogContent className="max-w-3xl" padding={padding}>
-        {children}
+      <DialogContent className="max-w-3xl">
+        <UserActionFormActionUnavailable onConfirm={() => dialogProps?.onOpenChange?.(false)} />
       </DialogContent>
     </Dialog>
+  )
+
+  return (
+    <GeoGate
+      bypassCountryCheck={bypassCountryCheck}
+      countryCode={countryCode}
+      unavailableContent={unavailableContent}
+    >
+      <Dialog {...dialogProps}>
+        <DialogTrigger asChild>{trigger}</DialogTrigger>
+        <DialogContent className="max-w-3xl" padding={padding}>
+          {children}
+        </DialogContent>
+      </Dialog>
+    </GeoGate>
   )
 }
