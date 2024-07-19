@@ -18,7 +18,7 @@ const fetchAllFromPrisma = async () => {
     allStatesWithCountPromises.push(
       prismaClient.$queryRaw<TotalAdvocatesPerStateQuery>`
         SELECT
-          address.administrative_area_level_1 AS state,
+          ${usState} AS state,
           COUNT(DISTINCT user.id) AS totalAdvocates
         FROM
           address
@@ -27,8 +27,6 @@ const fetchAllFromPrisma = async () => {
         WHERE
           address.country_code = 'US'
           AND address.administrative_area_level_1 = ${usState}
-        GROUP BY
-          address.administrative_area_level_1; 
       `,
     )
   })
