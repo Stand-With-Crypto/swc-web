@@ -20,8 +20,10 @@ export function GeoLocationDisclaimerBanner() {
 
   const WrapperContainer = isMobile ? 'button' : 'div'
 
-  const currentCountry = DISCLAIMER_BANNER_COUNTRY_CODES_MAP.find(({ countryCode }) =>
-    languages?.includes(countryCode),
+  const userCountryCode = Cookies.get(USER_COUNTRY_CODE_COOKIE_NAME)
+
+  const currentCountry = DISCLAIMER_BANNER_COUNTRY_CODES_MAP.find(
+    ({ language, countryCode }) => userCountryCode === countryCode || languages?.includes(language),
   )
 
   const handleWrapperClick = () => {
@@ -34,8 +36,6 @@ export function GeoLocationDisclaimerBanner() {
       setTimeout(() => setIsVisible(true), 10)
     }
   }, [currentCountry, hasHydrated])
-
-  const geo = Cookies.get(USER_COUNTRY_CODE_COOKIE_NAME)
 
   if (!hasHydrated) return null
 
@@ -64,7 +64,7 @@ export function GeoLocationDisclaimerBanner() {
     )
   }
 
-  if (geo !== SUPPORTED_COUNTRY_CODES.US) {
+  if (userCountryCode !== SUPPORTED_COUNTRY_CODES.US) {
     return (
       <div className={`flex max-h-12 w-full opacity-100 transition-all duration-200`}>
         <WrapperContainer className="flex h-12 w-full items-center bg-primary-cta text-center">
@@ -93,19 +93,22 @@ function getNavigatorLanguages(): typeof globalThis.window.navigator.languages |
 }
 
 const DISCLAIMER_BANNER_COUNTRY_CODES_MAP: readonly {
+  language: string
   countryCode: string
   label: string
   url: string
   emoji?: string
 }[] = [
   {
-    countryCode: 'en-GB',
-    label: 'UK',
+    language: 'en-GB',
+    countryCode: 'UK',
+    label: 'United Kingdom',
     url: 'https://uk.standwithcrypto.org',
     emoji: '🇬🇧',
   },
   {
-    countryCode: 'en-CA',
+    language: 'en-CA',
+    countryCode: 'CA',
     label: 'Canada',
     url: 'https://ca.standwithcrypto.org',
     emoji: '🇨🇦',
