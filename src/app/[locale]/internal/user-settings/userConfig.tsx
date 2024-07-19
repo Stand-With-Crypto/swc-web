@@ -25,8 +25,6 @@ type FormFields = {
 export function UserConfig() {
   const { resetCookieConsent } = useCookieConsent()
 
-  console.log('USER_COUNTRY_CODE_', Cookies.get(USER_COUNTRY_CODE_COOKIE_NAME))
-
   const form = useForm<FormFields>({
     defaultValues: {
       countryCode: Cookies.get(USER_COUNTRY_CODE_COOKIE_NAME),
