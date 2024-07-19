@@ -17,11 +17,6 @@ const fetchAllFromPrisma = async () => {
     JOIN user ON user.address_id = address.id
     WHERE address.country_code = 'US'
     AND address.administrative_area_level_1 != ''
-    AND EXISTS (
-      SELECT 1
-      FROM user_action
-      WHERE user_action.user_id = user.id
-    )
     GROUP BY address.administrative_area_level_1;
   `
 }
