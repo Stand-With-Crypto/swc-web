@@ -25,6 +25,7 @@ export interface ThirdwebLoginContentProps extends Omit<ConnectEmbedProps, 'clie
   initialEmailAddress?: string | null
   title?: React.ReactNode
   subtitle?: React.ReactNode
+  onLoginCallback?: () => Promise<void> | void
 }
 
 const DEFAULT_TITLE = 'Join Stand With Crypto'
@@ -35,6 +36,7 @@ export function ThirdwebLoginContent({
   initialEmailAddress,
   title = DEFAULT_TITLE,
   subtitle = DEFAULT_SUBTITLE,
+  onLoginCallback,
   ...props
 }: ThirdwebLoginContentProps) {
   const urls = useIntlUrls()
@@ -78,7 +80,7 @@ export function ThirdwebLoginContent({
             // this prevents that bug
             style={{ maxWidth: 'calc(100vw - 56px)' }}
           >
-            <ThirdwebLoginEmbedded {...props} />
+            <ThirdwebLoginEmbedded onLoginCallback={onLoginCallback} {...props} />
           </div>
         </div>
 
@@ -100,7 +102,9 @@ export function ThirdwebLoginContent({
   )
 }
 
-function ThirdwebLoginEmbedded(props: Omit<ConnectEmbedProps, 'client'>) {
+function ThirdwebLoginEmbedded(
+  props: Omit<ConnectEmbedProps, 'client'> & { onLoginCallback?: () => Promise<void> | void },
+) {
   const session = useThirdwebAuthUser()
   const hasTracked = useRef(false)
   useEffect(() => {
@@ -145,6 +149,7 @@ function ThirdwebLoginEmbedded(props: Omit<ConnectEmbedProps, 'client'>) {
         isLoggedIn: () => isLoggedIn(),
         doLogin: async params => {
           await login(params)
+          await props.onLoginCallback?.()
         },
         getLoginPayload: async ({ address }) => generateThirdwebLoginPayload(address),
         doLogout: () => onLogout(),

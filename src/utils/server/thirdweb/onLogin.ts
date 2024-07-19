@@ -104,6 +104,7 @@ export async function login(payload: VerifyLoginPayloadParams) {
       payload: verifiedPayload.payload,
       context: {
         userId: existingVerifiedUser.id,
+        address,
       },
     })
 
@@ -131,6 +132,7 @@ export async function login(payload: VerifyLoginPayloadParams) {
     payload: verifiedPayload.payload,
     context: {
       userId: user.userId,
+      address,
     },
   })
 
