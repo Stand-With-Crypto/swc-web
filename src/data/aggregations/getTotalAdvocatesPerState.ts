@@ -13,17 +13,16 @@ const fetchAllFromPrisma = async () => {
     SELECT
       address.administrative_area_level_1 AS state,
       COUNT(DISTINCT user.id) AS totalAdvocates
-    FROM
-      user_action as user_action
-    JOIN
-      user ON user_action.user_id = user.id
-    JOIN
-      address ON user.address_id = address.id
-    WHERE 1=1
-    AND address.country_code = 'US'
-    AND address.administrative_area_level_1 is not NULL
-    GROUP BY
-      address.administrative_area_level_1;
+    FROM address
+    JOIN user ON user.address_id = address.id
+    WHERE address.country_code = 'US'
+    AND address.administrative_area_level_1 != ''
+    AND EXISTS (
+      SELECT 1
+      FROM user_action
+      WHERE user_action.user_id = user.id
+    )
+    GROUP BY address.administrative_area_level_1;
   `
 }
 
