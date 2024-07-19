@@ -3,8 +3,8 @@ import { i18nRouter } from 'next-i18n-router'
 
 import { localeDetector } from '@/intl/localeDetector'
 import { DEFAULT_LOCALE, ORDERED_SUPPORTED_LOCALES } from '@/intl/locales'
+import { getCountryCode, USER_COUNTRY_CODE_COOKIE_NAME } from '@/utils/server/getCountryCode'
 import { isCypress } from '@/utils/shared/executionEnvironment'
-import { getCountryCode, USER_COUNTRY_CODE_COOKIE_NAME } from '@/utils/shared/getCountryCode'
 import { getLogger } from '@/utils/shared/logger'
 import { generateUserSessionId, USER_SESSION_ID_COOKIE_NAME } from '@/utils/shared/userSessionId'
 
@@ -43,11 +43,15 @@ export function middleware(request: NextRequest) {
     })
   }
 
-  i18nParsedResponse.cookies.set({
-    name: USER_COUNTRY_CODE_COOKIE_NAME,
-    value: getCountryCode(request),
-    httpOnly: false,
-  })
+  const userCountryCode = getCountryCode(request)
+
+  if (userCountryCode) {
+    i18nParsedResponse.cookies.set({
+      name: USER_COUNTRY_CODE_COOKIE_NAME,
+      value: userCountryCode,
+      httpOnly: false,
+    })
+  }
 
   return i18nParsedResponse
 }

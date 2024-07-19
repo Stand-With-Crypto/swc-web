@@ -3,7 +3,8 @@
 import Cookies from 'js-cookie'
 
 import { Dialog, DialogContent, DialogProps, DialogTrigger } from '@/components/ui/dialog'
-import { USER_COUNTRY_CODE_COOKIE_NAME } from '@/utils/shared/getCountryCode'
+import { USER_COUNTRY_CODE_COOKIE_NAME } from '@/utils/server/getCountryCode'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 
 import { UserActionFormActionUnavailable } from './actionUnavailable'
 
@@ -21,7 +22,7 @@ export const UserActionFormDialog = (props: UserActionFormDialogProps) => {
   const {
     children,
     trigger,
-    countryCode = 'US',
+    countryCode = DEFAULT_SUPPORTED_COUNTRY_CODE,
     bypassCountryCheck = false,
     padding = true,
     ...dialogProps

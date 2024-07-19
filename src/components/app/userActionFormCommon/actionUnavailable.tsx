@@ -12,7 +12,7 @@ export const UserActionFormActionUnavailable = (props: UserActionFormActionUnava
 
   return (
     <div className="flex min-h-[500px] flex-col items-center justify-center space-y-8">
-      <PageTitle size="md">Action unavailable</PageTitle>
+      <PageTitle size="sm">Action unavailable</PageTitle>
       <PageSubTitle>
         We've detected that you may not be located in the United States. Certain actions and tools
         on SWC are intended only for American advocates.

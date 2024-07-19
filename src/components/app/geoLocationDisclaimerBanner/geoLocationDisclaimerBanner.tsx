@@ -7,7 +7,8 @@ import { useRouter } from 'next/navigation'
 
 import { useHasHydrated } from '@/hooks/useHasHydrated'
 import { useIsMobile } from '@/hooks/useIsMobile'
-import { USER_COUNTRY_CODE_COOKIE_NAME } from '@/utils/shared/getCountryCode'
+import { USER_COUNTRY_CODE_COOKIE_NAME } from '@/utils/server/getCountryCode'
+import { SUPPORTED_COUNTRY_CODES } from '@/utils/shared/supportedCountries'
 
 const languages = getNavigatorLanguages()
 
@@ -63,7 +64,7 @@ export function GeoLocationDisclaimerBanner() {
     )
   }
 
-  if (geo !== 'US') {
+  if (geo !== SUPPORTED_COUNTRY_CODES.US) {
     return (
       <div className={`flex max-h-12 w-full opacity-100 transition-all duration-200`}>
         <WrapperContainer className="flex h-12 w-full items-center bg-primary-cta text-center">
@@ -71,7 +72,6 @@ export function GeoLocationDisclaimerBanner() {
             <div className="w-full space-y-1 text-sm text-background antialiased max-sm:text-center sm:text-base">
               <p>
                 Actions on Stand With Crypto are only available to users based in the United States.
-                {JSON.stringify({ geo, eq: geo === 'US' })}
               </p>
             </div>
           </div>

@@ -28,11 +28,16 @@ export function ShareOnX(props: ShareOnXProps) {
           'User Action Type': UserActionType.TWEET,
         },
         payload: undefined,
+        onError(key, error) {
+          if (key === 'actionUnavailable') {
+            console.log('actionUnavailable', error)
+          }
+        },
       },
       () => actionCreateUserActionTweet(),
-    )
-
-    goToSection(SECTIONS_NAMES.SUCCESS)
+    ).then(result => {
+      if (result.status === 'success') goToSection(SECTIONS_NAMES.SUCCESS)
+    })
 
     openWindow('https://x.com/standwithcrypto', target, `noopener`)
   }
