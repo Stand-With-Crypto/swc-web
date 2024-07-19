@@ -1,28 +1,34 @@
-import { Prisma, SMSStatus, User, UserCommunicationJourneyType } from '@prisma/client'
+import { Prisma, SMSStatus, UserCommunicationJourneyType } from '@prisma/client'
 import * as Sentry from '@sentry/node'
 import { parseISO } from 'date-fns'
 import { NonRetriableError } from 'inngest'
-import { chunk } from 'lodash-es'
 
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { countSegments, sendSMS } from '@/utils/server/sms'
 import { getLogger } from '@/utils/shared/logger'
+import { requiredEnv } from '@/utils/shared/requiredEnv'
+import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { sleep } from '@/utils/shared/sleep'
 
-import { createCommunication, createCommunicationJourneys } from './shared/communicationJourney'
+import { createCommunication, createCommunicationJourneys } from './utils/communicationJourney'
+import { fetchPhoneNumbers } from './utils/fetchPhoneNumbers'
 
 export const BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME = 'app/user.communication/bulk.sms'
 
 export const BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_FUNCTION_ID = 'user-communication/bulk-sms'
 
 const MAX_RETRY_COUNT = 0
-const PLANET_SCALE_QUERY_LIMIT = 100_000
+const DATABASE_QUERY_LIMIT = process.env.DATABASE_QUERY_LIMIT
+  ? Number(process.env.DATABASE_QUERY_LIMIT)
+  : undefined
 
 // This constants are specific to our twilio phone number type
-const MESSAGE_SEGMENTS_PER_SECOND = 3
-const MAX_QUEUE_LENGTH = 108_000
+const MESSAGE_SEGMENTS_PER_SECOND = Number(
+  requiredEnv(process.env.MESSAGE_SEGMENTS_PER_SECOND, 'MESSAGE_SEGMENTS_PER_SECOND'),
+)
+const MAX_QUEUE_LENGTH = Number(requiredEnv(process.env.MAX_QUEUE_LENGTH, 'MAX_QUEUE_LENGTH'))
 
 // This constant is specific to our twilio account
 const QUEUING_THROUGHPUT = 500
@@ -30,9 +36,10 @@ const QUEUING_THROUGHPUT = 500
 const logger = getLogger('bulk-sms')
 
 interface BulkSMSCommunicationJourneyPayload {
-  smsBody: string
+  smsBody?: string
   userWhereInput?: Prisma.UserGroupByArgs['where']
-  includePendingDoubleOptIn: boolean
+  includePendingDoubleOptIn?: boolean
+  persist?: boolean
 }
 
 export const bulkSMSCommunicationJourney = inngest.createFunction(
@@ -45,21 +52,24 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
     event: BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
   },
   async ({ step, event }) => {
-    const { smsBody, userWhereInput, includePendingDoubleOptIn } =
+    const { smsBody, userWhereInput, includePendingDoubleOptIn, persist } =
       event.data as BulkSMSCommunicationJourneyPayload
 
-    if (!smsBody) {
+    if (!smsBody && persist) {
       throw new NonRetriableError('Missing sms body')
     }
 
+    if (persist) {
+      logger.info(`PERSIST flag ACTIVATED. Will send messages`)
+    } else {
+      logger.info(`PERSIST flag DEACTIVATED. Won't send any messages`)
+    }
+
     // Messages with more than 160 characters are divided in segments
-    const segmentsCount = countSegments(smsBody)
+    const segmentsCount = countSegments(smsBody ?? '')
 
     // If there are multiple segment, we need to split the queue
     const queueSizeBySegment = Math.floor(MAX_QUEUE_LENGTH / segmentsCount)
-
-    // Iterations to get all phoneNumbers. We need this because PlanetScale limits the amount of rows
-    const iterations = Math.ceil(queueSizeBySegment / PLANET_SCALE_QUERY_LIMIT)
 
     const [estimatedTimeToSendAllMessages, estimatedPhoneNumbersCount] = await step.run(
       'time-estimation',
@@ -82,7 +92,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
                   gt: cursor,
                 },
               },
-              take: PLANET_SCALE_QUERY_LIMIT,
+              take: DATABASE_QUERY_LIMIT,
             },
             {
               includePendingDoubleOptIn,
@@ -94,7 +104,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
 
           totalLength += length
 
-          if (length < PLANET_SCALE_QUERY_LIMIT) {
+          if (!DATABASE_QUERY_LIMIT || length < DATABASE_QUERY_LIMIT) {
             hasNumbersLeft = false
           }
         }
@@ -119,7 +129,29 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
       logger.info(`Iteration ${loopIteration}. Fetching phone numbers...`)
       const [phoneNumberChunks, newCursor] = await step.run(
         `fetch-users-iteration-${loopIteration}`,
-        () => fetchPhoneNumbers(iterations, userWhereInput, cursor, includePendingDoubleOptIn),
+        () =>
+          fetchPhoneNumbers(
+            (take, innerCursor = cursor) =>
+              getPhoneNumberList(
+                {
+                  where: {
+                    ...userWhereInput,
+                    datetimeCreated: {
+                      gt: innerCursor,
+                    },
+                  },
+                  take,
+                },
+                {
+                  includePendingDoubleOptIn,
+                },
+              ),
+            {
+              chunkSize: QUEUING_THROUGHPUT,
+              maxLength: queueSizeBySegment,
+              queryLimit: DATABASE_QUERY_LIMIT,
+            },
+          ),
       )
 
       cursor = parseISO(newCursor)
@@ -138,7 +170,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
         async () => {
           let messagesSent = 0
           for (const batch of phoneNumberChunks) {
-            messagesSent += await enqueueMessages(batch, smsBody)
+            messagesSent += await enqueueMessages(batch, smsBody, persist)
           }
 
           logger.info(`${loopIteration} iteration queued ${messagesSent} messages`)
@@ -153,10 +185,12 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
 
       logger.info(`Waiting ${formatTime(timeInSecondsToSendBatchMessages)}...`)
 
-      await step.sleep(
-        `wait-${formatTime(timeInSecondsToSendBatchMessages).replace(' ', '-')}-for-messaging-queue-to-be-empty`,
-        timeInSecondsToSendBatchMessages * 1000,
-      )
+      if (persist) {
+        await step.sleep(
+          `wait-${formatTime(timeInSecondsToSendBatchMessages).replace(' ', '-')}-for-messaging-queue-to-be-empty`,
+          timeInSecondsToSendBatchMessages * 1000,
+        )
+      }
 
       totalTimeTaken += timeInSecondsToSendBatchMessages
       logger.info(
@@ -170,67 +204,19 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
   },
 )
 
-async function fetchPhoneNumbers(
-  iterations: number,
-  userWhereInput: BulkSMSCommunicationJourneyPayload['userWhereInput'],
-  outerCursor?: Date,
-  includePendingDoubleOptIn?: boolean,
-): Promise<[string[][], Date | undefined]> {
-  let phoneNumberList: Pick<User, 'phoneNumber' | 'datetimeCreated'>[] = []
-
-  // Using cursor pagination to also send messages to users who registered while we wait for the queue to empty
-  let innerCursor = outerCursor
-
-  for (let i = 0; i < iterations; i += 1) {
-    let take = MAX_QUEUE_LENGTH
-
-    if (MAX_QUEUE_LENGTH >= PLANET_SCALE_QUERY_LIMIT) {
-      take =
-        i + 1 === iterations
-          ? MAX_QUEUE_LENGTH - PLANET_SCALE_QUERY_LIMIT // If it's the last iteration we don't wanna go over the limit
-          : PLANET_SCALE_QUERY_LIMIT
-    }
-
-    const phoneNumbers = await getPhoneNumberList(
-      {
-        where: {
-          ...userWhereInput,
-          datetimeCreated: {
-            gt: innerCursor,
-          },
-        },
-        take,
-      },
-      {
-        includePendingDoubleOptIn,
-      },
-    )
-
-    phoneNumberList = phoneNumberList.concat(phoneNumbers)
-    innerCursor = phoneNumbers.at(-1)?.datetimeCreated
-
-    // Already fetched all phone numbers
-    if (phoneNumbers.length < PLANET_SCALE_QUERY_LIMIT) {
-      break
-    }
-  }
-
-  // We need to simplify this array so that the payload doesn't exceed the 4MB limit that inngest has
-  return [
-    chunk(
-      phoneNumberList.map(({ phoneNumber }) => phoneNumber),
-      QUEUING_THROUGHPUT,
-    ),
-    innerCursor,
-  ]
-}
-
 const ENQUEUE_MAX_RETRY_ATTEMPTS = 5
 
-async function enqueueMessages(phoneNumbers: string[], body: string, attempt = 0) {
+async function enqueueMessages(
+  phoneNumbers: string[],
+  body?: string,
+  persist?: boolean,
+  attempt = 0,
+) {
   if (attempt > ENQUEUE_MAX_RETRY_ATTEMPTS) return 0
 
   const enqueueMessagesPromise = phoneNumbers.map(async phoneNumber => {
+    if (!persist || !body) return
+
     const communicationJourneys = await createCommunicationJourneys(
       phoneNumber,
       UserCommunicationJourneyType.BULK_SMS,
@@ -264,7 +250,6 @@ async function enqueueMessages(phoneNumbers: string[], body: string, attempt = 0
             // Invalid phone number
             // TODO: flag users with this phone number
           } else {
-            console.log(result.reason)
             Sentry.captureException('Unexpected Twilio error', {
               extra: { reason: result.reason },
               tags: {
@@ -292,26 +277,23 @@ async function enqueueMessages(phoneNumbers: string[], body: string, attempt = 0
   if (failedPhoneNumbers.length > 0) {
     await sleep(10000 * attempt)
 
-    messagesSent += await enqueueMessages(failedPhoneNumbers, body, attempt + 1)
+    messagesSent += await enqueueMessages(failedPhoneNumbers, body, persist, attempt + 1)
   }
 
   return messagesSent
 }
 
 function formatTime(seconds: number) {
-  if (seconds < 60) {
+  if (seconds < SECONDS_DURATION.MINUTE) {
     return `${seconds.toPrecision(2)} seconds`
-  } else if (seconds < 3600) {
-    // less than 60 minutes (3600 seconds)
-    const minutes = Math.ceil(seconds / 60)
+  } else if (seconds < SECONDS_DURATION.HOUR) {
+    const minutes = Math.ceil(seconds / SECONDS_DURATION.MINUTE)
     return `${minutes} minutes`
-  } else if (seconds < 86400) {
-    // less than 24 hours (86400 seconds)
-    const hours = Math.ceil(seconds / 3600)
+  } else if (seconds < SECONDS_DURATION.DAY) {
+    const hours = Math.ceil(seconds / SECONDS_DURATION.HOUR)
     return `${hours} hours`
   } else {
-    // 24 hours or more
-    const days = Math.ceil(seconds / 86400)
+    const days = Math.ceil(seconds / SECONDS_DURATION.DAY)
     return `${days} days`
   }
 }

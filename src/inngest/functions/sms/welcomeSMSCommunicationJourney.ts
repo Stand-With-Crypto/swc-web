@@ -12,7 +12,7 @@ import {
   createCommunication,
   createCommunicationJourneys,
   CreatedCommunicationJourneys,
-} from './shared/communicationJourney'
+} from './utils/communicationJourney'
 
 export const WELCOME_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME =
   'app/user.communication/welcome.sms'
