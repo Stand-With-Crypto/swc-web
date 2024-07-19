@@ -1,10 +1,7 @@
 import 'server-only'
 
-import { Prisma } from '@prisma/client'
-
 import { prismaClient } from '@/utils/server/prismaClient'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
-import { US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
 
 type TotalAdvocatesPerStateQuery = {
   state: string
@@ -12,26 +9,22 @@ type TotalAdvocatesPerStateQuery = {
 }[]
 
 const fetchAllFromPrisma = async () => {
-  const allStatesWithCountPromises: Prisma.PrismaPromise<TotalAdvocatesPerStateQuery>[] = []
-
-  Object.keys(US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP).forEach(usState => {
-    allStatesWithCountPromises.push(
-      prismaClient.$queryRaw<TotalAdvocatesPerStateQuery>`
-        SELECT
-          ${usState} AS state,
-          COUNT(DISTINCT user.id) AS totalAdvocates
-        FROM
-          address
-        JOIN user ON user.address_id = address.id
-        JOIN user_action ON user_action.user_id = user.id
-        WHERE
-          address.country_code = 'US'
-          AND address.administrative_area_level_1 = ${usState}
-      `,
-    )
-  })
-
-  return Promise.all(allStatesWithCountPromises)
+  return prismaClient.$queryRaw<TotalAdvocatesPerStateQuery>`
+    SELECT
+      address.administrative_area_level_1 AS state,
+      COUNT(DISTINCT user.id) AS totalAdvocates
+    FROM
+      user_action as user_action
+    JOIN
+      user ON user_action.user_id = user.id
+    JOIN
+      address ON user.address_id = address.id
+    WHERE 1=1
+    AND address.country_code = 'US'
+    AND address.administrative_area_level_1 is not NULL
+    GROUP BY
+      address.administrative_area_level_1;
+  `
 }
 
 const parseTotalAdvocatesPerState = (totalAdvocatesPerState: TotalAdvocatesPerStateQuery) => {
@@ -48,7 +41,7 @@ const parseTotalAdvocatesPerState = (totalAdvocatesPerState: TotalAdvocatesPerSt
 
 export const getTotalAdvocatesPerState = async () => {
   const rawTotalAdvocatesPerState = await fetchAllFromPrisma()
-  const totalAdvocatesPerState = parseTotalAdvocatesPerState(rawTotalAdvocatesPerState.flat())
+  const totalAdvocatesPerState = parseTotalAdvocatesPerState(rawTotalAdvocatesPerState)
 
   return totalAdvocatesPerState
 }
