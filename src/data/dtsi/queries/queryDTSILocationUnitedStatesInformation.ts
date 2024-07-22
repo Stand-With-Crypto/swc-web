@@ -29,7 +29,7 @@ export const query = /* GraphQL */ `
     runningForPresident: people(
       limit: 10
       offset: 0
-      personRoleGroupingOr: [RUNNING_FOR_PRESIDENT, US_PRESIDENT]
+      personRoleGroupingOr: [RUNNING_FOR_PRESIDENT]
     ) {
       ...UnitedStatesPersonFragment
     }

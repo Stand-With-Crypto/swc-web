@@ -8,7 +8,7 @@ import {
 
 export const query = /* GraphQL */ `
   query UnitedStatesPresidential {
-    people(limit: 999, offset: 0, personRoleGroupingOr: [RUNNING_FOR_PRESIDENT, US_PRESIDENT]) {
+    people(limit: 999, offset: 0, personRoleGroupingOr: [RUNNING_FOR_PRESIDENT]) {
       ...RaceSpecificPersonInfo
       stances(verificationStatusIn: APPROVED) {
         ...PersonStanceDetails
