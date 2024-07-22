@@ -6,7 +6,7 @@ import { NonRetriableError } from 'inngest'
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { countSegments, sendSMS } from '@/utils/server/sms'
+import { countSegments, sendSMS, TWILIO_RATE_LIMIT } from '@/utils/server/sms'
 import { getLogger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
@@ -29,9 +29,6 @@ const MESSAGE_SEGMENTS_PER_SECOND = Number(
   requiredEnv(process.env.MESSAGE_SEGMENTS_PER_SECOND, 'MESSAGE_SEGMENTS_PER_SECOND'),
 )
 const MAX_QUEUE_LENGTH = Number(requiredEnv(process.env.MAX_QUEUE_LENGTH, 'MAX_QUEUE_LENGTH'))
-
-// This constant is specific to our twilio account
-const QUEUING_THROUGHPUT = 500
 
 const logger = getLogger('bulk-sms')
 
@@ -122,12 +119,12 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
 
     let cursor: Date | undefined
     let loopIteration = 0
-    let phoneNumbersListLength = 0
     let totalMessagesSent = 0
     let totalTimeTaken = 0
-    do {
+    let hasNumbersLeft = true
+    while (hasNumbersLeft) {
       logger.info(`Iteration ${loopIteration}. Fetching phone numbers...`)
-      const [phoneNumberChunks, newCursor] = await step.run(
+      const [phoneNumberChunks, newCursor, length] = await step.run(
         `fetch-users-iteration-${loopIteration}`,
         () =>
           fetchPhoneNumbers(
@@ -147,7 +144,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
                 },
               ),
             {
-              chunkSize: QUEUING_THROUGHPUT,
+              chunkSize: TWILIO_RATE_LIMIT,
               maxLength: queueSizeBySegment,
               queryLimit: DATABASE_QUERY_LIMIT,
             },
@@ -155,13 +152,12 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
       )
 
       cursor = parseISO(newCursor)
-      phoneNumbersListLength = phoneNumberChunks.reduce((acc, curr) => acc + curr.length, 0)
 
       const timeInSecondsToSendBatchMessages =
-        (phoneNumbersListLength * segmentsCount) / MESSAGE_SEGMENTS_PER_SECOND
+        (length * segmentsCount) / MESSAGE_SEGMENTS_PER_SECOND
 
       logger.info(
-        `Fetched ${phoneNumbersListLength} phone numbers. Iteration ${loopIteration} will take ${formatTime(timeInSecondsToSendBatchMessages)} to send all messages`,
+        `Fetched ${length} phone numbers. Iteration ${loopIteration} will take ${formatTime(timeInSecondsToSendBatchMessages)} to send all messages`,
       )
 
       logger.info('Queuing messages...')
@@ -197,8 +193,12 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
         `Estimated time remaining: ${formatTime(estimatedTimeToSendAllMessages - totalTimeTaken)}. ${totalTimeTaken ? `Already took ${formatTime(totalTimeTaken)}` : ''}`,
       )
 
+      if (length < queueSizeBySegment) {
+        hasNumbersLeft = false
+      }
+
       loopIteration += 1
-    } while (phoneNumbersListLength === queueSizeBySegment)
+    }
 
     logger.info('Finished')
   },

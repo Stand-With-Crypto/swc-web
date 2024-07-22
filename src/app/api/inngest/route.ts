@@ -3,6 +3,7 @@ import { serve } from 'inngest/next'
 import { airdropNFTWithInngest } from '@/inngest/functions/airdropNFT/airdropNFT'
 import { backfillNFTWithInngest } from '@/inngest/functions/backfillNFT'
 import { backfillNFTInngestCronJob } from '@/inngest/functions/backfillNFTCronJob'
+import { backfillPhoneNumberValidation } from '@/inngest/functions/backfillPhoneNumberValidation'
 import {
   backfillSMSOptInReplyWithInngest,
   backfillSMSOptInReplyWithInngestUpdateBatchOfUsers,
@@ -57,5 +58,6 @@ export const { GET, POST, PUT } = serve({
     goodbyeSMSCommunicationJourney,
     unstopConfirmationSMSCommunicationJourney,
     bulkSMSCommunicationJourney,
+    backfillPhoneNumberValidation,
   ],
 })
