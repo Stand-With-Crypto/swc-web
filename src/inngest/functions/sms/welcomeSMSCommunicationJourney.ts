@@ -8,11 +8,8 @@ import { messagingClient, sendSMS } from '@/utils/server/sms'
 import * as messages from '@/utils/server/sms/messages'
 import { smsProvider } from '@/utils/shared/smsProvider'
 
-import {
-  createCommunication,
-  createCommunicationJourneys,
-  CreatedCommunicationJourneys,
-} from './utils/communicationJourney'
+import type { CreatedCommunicationJourneys } from './utils/communicationJourney'
+import { createCommunication, createCommunicationJourneys } from './utils'
 
 export const WELCOME_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME =
   'app/user.communication/welcome.sms'

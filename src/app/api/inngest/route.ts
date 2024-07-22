@@ -3,7 +3,6 @@ import { serve } from 'inngest/next'
 import { airdropNFTWithInngest } from '@/inngest/functions/airdropNFT/airdropNFT'
 import { backfillNFTWithInngest } from '@/inngest/functions/backfillNFT'
 import { backfillNFTInngestCronJob } from '@/inngest/functions/backfillNFTCronJob'
-import { backfillPhoneNumberValidation } from '@/inngest/functions/backfillPhoneNumberValidation'
 import {
   backfillSMSOptInReplyWithInngest,
   backfillSMSOptInReplyWithInngestUpdateBatchOfUsers,
@@ -16,6 +15,7 @@ import { cleanupPostalCodesWithInngest } from '@/inngest/functions/cleanupPostal
 import { monitorBaseETHBalances } from '@/inngest/functions/monitorBaseETHBalances'
 import { setPrimaryCryptoAddressOfUserWithInngest } from '@/inngest/functions/setPrimaryCryptoAddressOfUser'
 import {
+  backfillPhoneNumberValidation,
   backfillSMSStatusField,
   bulkSMSCommunicationJourney,
   goodbyeSMSCommunicationJourney,

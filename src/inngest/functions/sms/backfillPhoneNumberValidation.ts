@@ -2,13 +2,12 @@ import { Prisma } from '@prisma/client'
 import { parseISO } from 'date-fns'
 import { chunk } from 'lodash-es'
 
-import { fetchPhoneNumbers } from '@/inngest/functions/sms/utils/fetchPhoneNumbers'
 import { inngest } from '@/inngest/inngest'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { TWILIO_RATE_LIMIT, twilioPhoneNumberValidation } from '@/utils/server/sms'
 import { getLogger } from '@/utils/shared/logger'
-import { validatePhoneNumber as basicPhoneNumberValidation } from '@/utils/shared/phoneNumber'
-import { sleep } from '@/utils/shared/sleep'
+
+import { fetchPhoneNumbers, flagInvalidPhoneNumbers, validatePhoneNumbers } from './utils'
 
 const logger = getLogger('backfill-phone-validation')
 
@@ -65,16 +64,13 @@ export const backfillPhoneNumberValidation = inngest.createFunction(
 
       logger.info(`Validating...`)
 
-      const invalidPhoneNumberChunks = await step.run('validating-phone-numbers', async () => {
+      const invalidPhoneNumbers = await step.run('validating-phone-numbers', async () => {
         let phoneNumbersThatStillNeedValidation: string[] = []
         let allInvalidPhoneNumbers: string[] = []
 
         // First we will validate with libphonenumber to reduce the usage of twilio's api since it has a rate limit
         for (const phoneNumberBatch of phoneNumberChunks) {
-          const { invalid, valid } = await validatePhoneNumbers(
-            phoneNumberBatch,
-            basicPhoneNumberValidation,
-          )
+          const { invalid, valid } = await validatePhoneNumbers(phoneNumberBatch)
 
           allInvalidPhoneNumbers = allInvalidPhoneNumbers.concat(invalid)
           phoneNumbersThatStillNeedValidation = phoneNumbersThatStillNeedValidation.concat(valid)
@@ -93,37 +89,17 @@ export const backfillPhoneNumberValidation = inngest.createFunction(
           allInvalidPhoneNumbers = allInvalidPhoneNumbers.concat(invalid)
         }
 
-        logger.info(`Found ${allInvalidPhoneNumbers.length} invalid phone numbers`)
-
-        // Split invalid numbers into chunks, because there could be more than one user with the same phone number
-        return DATABASE_QUERY_LIMIT
-          ? chunk(allInvalidPhoneNumbers, DATABASE_QUERY_LIMIT / 3)
-          : [allInvalidPhoneNumbers]
+        return allInvalidPhoneNumbers
       })
 
-      if (
-        persist &&
-        invalidPhoneNumberChunks.length > 0 &&
-        invalidPhoneNumberChunks[0].length > 0
-      ) {
+      logger.info(`Found ${invalidPhoneNumbers.length} invalid phone numbers`)
+
+      if (persist && invalidPhoneNumbers.length > 0) {
         logger.info('Persisting...')
 
-        await step.run('updating-invalid-phone-numbers', async () => {
-          for (const invalidPhoneNumberBatch of invalidPhoneNumberChunks) {
-            const updateInvalidPhoneNumbersBatch = invalidPhoneNumberBatch.map(phoneNumber => {
-              return prismaClient.user.updateMany({
-                data: {
-                  hasValidPhoneNumber: false,
-                },
-                where: {
-                  phoneNumber,
-                },
-              })
-            })
-
-            await Promise.all(updateInvalidPhoneNumbersBatch)
-          }
-        })
+        await step.run('updating-invalid-phone-numbers', () =>
+          flagInvalidPhoneNumbers(invalidPhoneNumbers),
+        )
       }
 
       logger.info(`Finished iteration ${iteration}`)
@@ -137,76 +113,14 @@ export const backfillPhoneNumberValidation = inngest.createFunction(
   },
 )
 
-const VALIDATION_MAX_RETRIES = 3
-
-type PhoneNumberValidationFunction = (phoneNumber: string) => Promise<boolean> | boolean
-
-async function validatePhoneNumbers(
-  phoneNumbers: string[],
-  validation: PhoneNumberValidationFunction,
-) {
-  const validateBatch = (batch: string[]) => {
-    const validatePhoneNumbersPromises = batch.map(async phoneNumber => {
-      try {
-        const isValid = await validation(phoneNumber)
-
-        return {
-          phoneNumber,
-          isValid,
-        }
-      } catch (error) {
-        return {
-          phoneNumber,
-          isValid: null,
-        }
-      }
-    })
-
-    return Promise.all(validatePhoneNumbersPromises)
-  }
-
-  let unidentifiedPhoneNumbers: string[] = []
-  const invalidPhoneNumbers: string[] = []
-  const validPhoneNumbers: string[] = []
-
-  // Validate phone number with exponential retries duo to twilio's rate limit
-  for (let i = 0; i < VALIDATION_MAX_RETRIES; i += 1) {
-    // At first, all phone numbers are unidentified
-    const validatedPhoneNumbers = await validateBatch(
-      i === 0 ? phoneNumbers : unidentifiedPhoneNumbers,
-    )
-    unidentifiedPhoneNumbers = []
-
-    validatedPhoneNumbers.forEach(({ isValid, phoneNumber }) => {
-      if (isValid) {
-        validPhoneNumbers.push(phoneNumber)
-      } else if (isValid === false) {
-        invalidPhoneNumbers.push(phoneNumber)
-      } else {
-        unidentifiedPhoneNumbers.push(phoneNumber)
-      }
-    })
-
-    if (unidentifiedPhoneNumbers.length > 0) {
-      await sleep(10000 * i + 1)
-    } else {
-      break
-    }
-  }
-
-  return {
-    invalid: invalidPhoneNumbers,
-    valid: validPhoneNumbers,
-    unidentified: unidentifiedPhoneNumbers,
-  }
-}
-
 async function getPhoneNumberList(args?: Omit<Prisma.UserGroupByArgs, 'by' | 'orderBy'>) {
   return prismaClient.user.groupBy({
     ...args,
     by: ['phoneNumber', 'datetimeCreated'],
     where: {
       ...args?.where,
+      // By default phones are considered valid because they passed the basic validation
+      hasValidPhoneNumber: true,
       phoneNumber: {
         not: '',
       },

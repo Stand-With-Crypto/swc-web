@@ -12,8 +12,12 @@ import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { sleep } from '@/utils/shared/sleep'
 
-import { createCommunication, createCommunicationJourneys } from './utils/communicationJourney'
-import { fetchPhoneNumbers } from './utils/fetchPhoneNumbers'
+import {
+  createCommunication,
+  createCommunicationJourneys,
+  fetchPhoneNumbers,
+  flagInvalidPhoneNumbers,
+} from './utils'
 
 export const BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME = 'app/user.communication/bulk.sms'
 
@@ -235,6 +239,7 @@ async function enqueueMessages(
   })
 
   const failedPhoneNumbers: string[] = []
+  const invalidPhoneNumbers: string[] = []
 
   let messagesSent = 0
   await Promise.allSettled(enqueueMessagesPromise).then(results => {
@@ -248,7 +253,7 @@ async function enqueueMessages(
             }
           } else if (result.reason.code === 21211) {
             // Invalid phone number
-            // TODO: flag users with this phone number
+            invalidPhoneNumbers.push(result.reason.phoneNumber)
           } else {
             Sentry.captureException('Unexpected Twilio error', {
               extra: { reason: result.reason },
@@ -272,6 +277,10 @@ async function enqueueMessages(
       }
     })
   })
+
+  if (invalidPhoneNumbers.length > 0) {
+    await flagInvalidPhoneNumbers(invalidPhoneNumbers)
+  }
 
   // exponential backoff retry
   if (failedPhoneNumbers.length > 0) {
