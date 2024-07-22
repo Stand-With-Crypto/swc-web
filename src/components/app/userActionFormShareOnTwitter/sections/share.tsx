@@ -26,9 +26,9 @@ export function ShareOnX(props: ShareOnXProps) {
       () => actionCreateUserActionTweet(),
     )
 
-    openWindow('https://x.com/standwithcrypto', 'Twitter', `noopener`)
-
     goToSection(SECTIONS_NAMES.SUCCESS)
+
+    openWindow('https://x.com/standwithcrypto', 'Twitter', `noopener`)
   }
 
   return (
