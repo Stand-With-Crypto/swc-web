@@ -6,8 +6,6 @@ import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountrie
 
 import { UserActionFormActionUnavailable } from './actionUnavailable'
 
-const ANALYTICS_NAME_USER_ACTION_FORM_UNAVAILABLE = 'User Action Form Unavailable'
-
 interface UserActionFormDialogProps extends DialogProps {
   children: React.ReactNode
   trigger: React.ReactNode
@@ -26,27 +24,20 @@ export const UserActionFormDialog = (props: UserActionFormDialogProps) => {
     ...dialogProps
   } = props
 
-  const unavailableContent = (
-    <Dialog {...dialogProps} analytics={ANALYTICS_NAME_USER_ACTION_FORM_UNAVAILABLE}>
+  return (
+    <Dialog {...dialogProps}>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
-      <DialogContent className="max-w-3xl">
-        <UserActionFormActionUnavailable onConfirm={() => dialogProps?.onOpenChange?.(false)} />
+      <DialogContent className="max-w-3xl" padding={padding}>
+        <GeoGate
+          bypassCountryCheck={bypassCountryCheck}
+          countryCode={countryCode}
+          unavailableContent={
+            <UserActionFormActionUnavailable onConfirm={() => dialogProps?.onOpenChange?.(false)} />
+          }
+        >
+          {children}
+        </GeoGate>
       </DialogContent>
     </Dialog>
-  )
-
-  return (
-    <GeoGate
-      bypassCountryCheck={bypassCountryCheck}
-      countryCode={countryCode}
-      unavailableContent={unavailableContent}
-    >
-      <Dialog {...dialogProps}>
-        <DialogTrigger asChild>{trigger}</DialogTrigger>
-        <DialogContent className="max-w-3xl" padding={padding}>
-          {children}
-        </DialogContent>
-      </Dialog>
-    </GeoGate>
   )
 }
