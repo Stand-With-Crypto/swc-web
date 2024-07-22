@@ -1,19 +1,10 @@
 import React from 'react'
 import * as Sentry from '@sentry/nextjs'
-import { isPlainObject, noop } from 'lodash-es'
-import {
-  ContractOptions,
-  encode,
-  getContract,
-  PreparedTransaction,
-  PrepareTransactionOptions,
-  sendTransaction,
-} from 'thirdweb'
+import { isPlainObject } from 'lodash-es'
+import { getContract } from 'thirdweb'
 import { base } from 'thirdweb/chains'
-import { getContractMetadata } from 'thirdweb/extensions/common'
 import { claimTo } from 'thirdweb/extensions/erc721'
-import { useActiveAccount, useReadContract } from 'thirdweb/react'
-import { AbiFunction, keccak256, toHex } from 'viem'
+import { useActiveAccount } from 'thirdweb/react'
 
 import { logger } from '@/utils/shared/logger'
 import { thirdwebClient } from '@/utils/shared/thirdwebClient'
@@ -24,15 +15,11 @@ export type MintStatus = 'idle' | 'loading' | 'completed' | 'canceled' | 'error'
 type UseSendMintNFTTransactionOptions = {
   contractAddress: string
   quantity: number
-  isUSResident?: boolean
-  onStatusChange?: (status: MintStatus) => void
 }
 
 export function useSendMintNFTTransaction({
   contractAddress,
   quantity,
-  isUSResident = false,
-  onStatusChange = noop,
 }: UseSendMintNFTTransactionOptions) {
   const contract = getContract({
     address: contractAddress,
@@ -40,115 +27,36 @@ export function useSendMintNFTTransaction({
     chain: base,
   })
   const account = useActiveAccount()
-  const { data: contractMetadata } = useReadContract(getContractMetadata, { contract })
 
-  const [status, setStatus] = React.useState<MintStatus>('idle')
-  const [sendTransactionResponse, setSendTransactionResponse] = React.useState<Awaited<
-    ReturnType<typeof sendTransaction>
-  > | null>(null)
+  const [transactionHash, setTransactionHash] = React.useState<string | null>(null)
 
-  const handleChangeStatus = React.useCallback(
-    (newStatus: MintStatus) => {
-      setStatus(newStatus)
-      onStatusChange(newStatus)
-    },
-    [onStatusChange],
-  )
-
-  const handleException = React.useCallback(
-    (e: unknown, extra: Record<string, unknown>): MintStatus => {
+  const handleTransactionException = React.useCallback(
+    (e: unknown, extra: Record<string, unknown>) => {
       const error = getErrorInstance(e)
       Sentry.captureException(error, {
         extra,
         tags: { domain: 'useSendMintNFTTransaction' },
       })
       logger.error('Error minting NFT', error)
-
-      if (error.message.includes('user rejected transaction')) {
-        handleChangeStatus('canceled')
-        return 'canceled'
-      }
-
-      handleChangeStatus('error')
-      return 'error'
     },
-    [handleChangeStatus],
+    [],
   )
 
-  const prepareMint = React.useCallback(
-    async (smartContract: Readonly<ContractOptions<[]>>) => {
-      const transaction = claimTo({
-        contract: smartContract,
-        to: account?.address ?? '',
-        quantity: BigInt(quantity),
-      })
-
-      const callData = await encode(transaction)
-      const usResidencyMetadata = keccak256(toHex('US')).slice(2, 10)
-      const callDataWithMetadata = callData + (isUSResident ? usResidencyMetadata : '')
-
-      return {
-        transaction,
-        callDataWithMetadata,
-      }
-    },
-    [isUSResident, quantity, account?.address],
-  )
-
-  const mintNFT = React.useCallback(async (): Promise<MintStatus> => {
-    if (!contractMetadata || !contract) {
-      return 'idle'
-    }
-    handleChangeStatus('loading')
-
-    let transaction: PreparedTransaction<any, AbiFunction, PrepareTransactionOptions>
-    let callDataWithMetadata: string
-    try {
-      const result = await prepareMint(contract)
-      transaction = result.transaction
-      callDataWithMetadata = result.callDataWithMetadata
-    } catch (e) {
-      return handleException(e, {
-        contractMetadata,
-        contractAddress,
-      })
-    }
-
-    try {
-      const claimData = await sendTransaction({
-        account: account!, // TODO: check if we should be using the users account or our
-        transaction,
-      })
-
-      setSendTransactionResponse(claimData)
-      handleChangeStatus('completed')
-      return 'completed'
-    } catch (e) {
-      return handleException(e, {
-        transaction,
-        callDataWithMetadata,
-      })
-    }
-  }, [
-    contract,
-    contractAddress,
-    contractMetadata,
-    handleChangeStatus,
-    handleException,
-    prepareMint,
-    account,
-  ])
+  const prepareTransaction = React.useCallback(async () => {
+    return claimTo({
+      contract,
+      to: account?.address ?? '',
+      quantity: BigInt(quantity),
+    })
+  }, [quantity, account?.address, contract])
 
   return {
-    mintNFT,
-    status,
-    sendTransactionResponse,
+    prepareTransaction,
+    transactionHash,
+    setTransactionHash,
+    handleTransactionException,
   }
 }
-
-export type TransactionResponse = NonNullable<
-  ReturnType<typeof useSendMintNFTTransaction>['sendTransactionResponse']
->
 
 export function getErrorInstance(maybeError: unknown): Error {
   if (!maybeError) {

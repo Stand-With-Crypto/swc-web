@@ -24,7 +24,6 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
 import { useEffectOnce } from '@/hooks/useEffectOnce'
-import { TransactionResponse } from '@/hooks/useSendMintNFTTransaction'
 import { useThirdwebContractMetadata } from '@/hooks/useThirdwebContractMetadata'
 import { UserActionNftMintCampaignName } from '@/utils/shared/userActionCampaigns'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
@@ -34,15 +33,15 @@ import { toastGenericError } from '@/utils/web/toastUtils'
 export type UserActionFormNFTMintTransactionWatchProps =
   | {
       debug: true
-      sendTransactionResponse: null
+      transactionHash: null
     }
   | {
       debug?: false
-      sendTransactionResponse: TransactionResponse
+      transactionHash: string
     }
 
 export function UserActionFormNFTMintTransactionWatch({
-  sendTransactionResponse,
+  transactionHash,
   debug,
 }: UserActionFormNFTMintTransactionWatchProps) {
   const { data: userDataResponse, isLoading: isLoadingUserData } =
@@ -54,10 +53,10 @@ export function UserActionFormNFTMintTransactionWatch({
 
   const [isMined, setIsMined] = React.useState(false)
 
-  const createAction = async (transaction: TransactionResponse) => {
+  const createAction = async () => {
     const input: CreateActionMintNFTInput = {
       campaignName: UserActionNftMintCampaignName.DEFAULT,
-      transactionHash: transaction.transactionHash as `0x${string}`,
+      transactionHash: transactionHash as `0x${string}`,
     }
 
     return await triggerServerActionForForm(
@@ -88,8 +87,7 @@ export function UserActionFormNFTMintTransactionWatch({
 
     const processTransaction = async () => {
       try {
-        // await sendTransactionResponse.wait() TOOD: investigate this in v5
-        await createAction(sendTransactionResponse)
+        await createAction()
       } catch (err) {
         Sentry.captureException(err, { tags: { domain: 'nftMint/transactionWatch' } })
       } finally {

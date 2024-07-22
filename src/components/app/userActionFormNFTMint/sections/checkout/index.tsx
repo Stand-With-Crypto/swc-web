@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { Dispatch, SetStateAction, useState } from 'react'
 import Balancer from 'react-wrap-balancer'
 import { noop } from 'lodash-es'
-import { getContract } from 'thirdweb'
+import { getContract, PreparedTransaction } from 'thirdweb'
 import { base } from 'thirdweb/chains'
-import { useActiveWalletConnectionStatus } from 'thirdweb/react'
+import { TransactionButton, useActiveWalletConnectionStatus } from 'thirdweb/react'
 
 import {
   NFTDisplay,
@@ -29,22 +29,22 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { Skeleton } from '@/components/ui/skeleton'
 import { UseSectionsReturn } from '@/hooks/useSections'
-import { MintStatus } from '@/hooks/useSendMintNFTTransaction'
 import { useSession } from '@/hooks/useSession'
 import { SupportedCryptoCurrencyCodes } from '@/utils/shared/currency'
 import { NFTSlug } from '@/utils/shared/nft'
 import { thirdwebClient } from '@/utils/shared/thirdwebClient'
 import { NFT_CLIENT_METADATA } from '@/utils/web/nft'
+import { theme } from '@/utils/web/thirdweb/theme'
 
 import { QuantityInput } from './quantityInput'
 
 interface UserActionFormNFTMintCheckoutProps
   extends UseSectionsReturn<UserActionFormNFTMintSectionNames>,
     UseCheckoutControllerReturn {
-  onMint: () => void
-  mintStatus: MintStatus
-  isUSResident: boolean
-  onIsUSResidentChange: (newValue: boolean) => void
+  prepareTransaction: () => PreparedTransaction | Promise<PreparedTransaction>
+  onMintCallback?: () => void
+  setTransactionHash: Dispatch<SetStateAction<string | null>>
+  handleTransactionException: (e: unknown, extra: Record<string, unknown>) => void
   debug?: boolean
 }
 
@@ -63,10 +63,10 @@ export function UserActionFormNFTMintCheckout({
   totalFeeDisplay,
   totalFee,
   gasFeeDisplay,
-  onMint,
-  mintStatus,
-  isUSResident,
-  onIsUSResidentChange,
+  prepareTransaction,
+  onMintCallback,
+  handleTransactionException,
+  setTransactionHash,
   debug = false,
 }: UserActionFormNFTMintCheckoutProps) {
   const contract = getContract({
@@ -76,6 +76,7 @@ export function UserActionFormNFTMintCheckout({
   })
   const contractMetadata = NFT_CLIENT_METADATA[NFTSlug.STAND_WITH_CRYPTO_SUPPORTER]
   const session = useSession()
+  const [isUSResident, setIsUSResident] = useState(false)
 
   const checkoutError = useCheckoutError({
     totalFee: totalFee,
@@ -88,7 +89,7 @@ export function UserActionFormNFTMintCheckout({
     return <UserActionFormNFTMintCheckoutSkeleton />
   }
 
-  const isLoading = mintStatus === 'loading' || !contract || connectionStatus === 'connecting'
+  const isLoading = !contract || connectionStatus === 'connecting'
 
   return (
     <UserActionFormLayout onBack={() => goToSection(UserActionFormNFTMintSectionNames.INTRO)}>
@@ -176,7 +177,7 @@ export function UserActionFormNFTMintCheckout({
             <label className="flex cursor-pointer items-center gap-4">
               <Checkbox
                 checked={isUSResident}
-                onCheckedChange={val => onIsUSResidentChange(val as boolean)}
+                onCheckedChange={val => setIsUSResident(val as boolean)}
               />
               <p className="text-sm leading-4 text-fontcolor-muted md:text-base">
                 I am a US citizen or lawful permanent resident (i.e. a green card holder). Checking
@@ -196,23 +197,22 @@ export function UserActionFormNFTMintCheckout({
               Mint now - Mocked
             </Button>
           ) : (
-            // TODO: migrate this button to v5 (probably will have to create a custom button component)
-            // <TransactionButton
-            // transaction={onMint}
-            //   // action={onMint}
-            //   className="!rounded-full disabled:pointer-events-none disabled:opacity-50"
-            //   // contractAddress={MINT_NFT_CONTRACT_ADDRESS}
-            //   // isDisabled={
-            //   //   isLoading ||
-            //   //   (!!maybeOverriddenCheckoutError &&
-            //   //     maybeOverriddenCheckoutError !== 'networkSwitch') ||
-            //   //   (!isLoading && !maybeOverriddenCheckoutError && !totalFeeDisplay)
-            //   // }
-            //   // theme={theme}
-            // >
-            //   Mint now
-            // </TransactionButton>
-            <button>mint now</button>
+            <TransactionButton
+              className="!rounded-full disabled:pointer-events-none disabled:opacity-50"
+              disabled={
+                isLoading ||
+                (!!maybeOverriddenCheckoutError &&
+                  maybeOverriddenCheckoutError !== 'networkSwitch') ||
+                (!isLoading && !maybeOverriddenCheckoutError && !totalFeeDisplay)
+              }
+              onError={e => handleTransactionException(e, { isUSResident })}
+              onTransactionConfirmed={onMintCallback}
+              onTransactionSent={result => setTransactionHash(result.transactionHash)}
+              theme={theme}
+              transaction={prepareTransaction}
+            >
+              Mint now
+            </TransactionButton>
           )}
 
           {!!maybeOverriddenCheckoutError && !isLoading && (
