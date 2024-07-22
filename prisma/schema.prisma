@@ -40,7 +40,7 @@ model Address {
   postalCodeSuffix         String   @map("postal_code_suffix") // ex 7620
   countryCode              String   @map("country_code")
   // this field is optional because not all addresses will have a congressional district associated with them
-  usCongressionalDistrict  String? @map("us_congressional_district") // ex: 12
+  usCongressionalDistrict  String?  @map("us_congressional_district") // ex: 12
   datetimeUpdated          DateTime @updatedAt @map("datetime_updated")
   datetimeCreated          DateTime @default(now()) @map("datetime_created")
 
@@ -425,7 +425,6 @@ model UserActionTweetAtPerson {
 enum UserCommunicationJourneyType {
   INITIAL_SIGNUP
   WELCOME_SMS
-  // These communication journeys will be implemented in the future, please do not remove it
   GOODBYE_SMS
   UNSTOP_CONFIRMATION_SMS
   BULK_SMS

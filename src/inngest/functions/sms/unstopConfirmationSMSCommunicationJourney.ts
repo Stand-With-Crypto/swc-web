@@ -1,12 +1,13 @@
 import { UserCommunicationJourneyType } from '@prisma/client'
+import * as Sentry from '@sentry/node'
 
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { sendSMS } from '@/utils/server/sms'
 import * as messages from '@/utils/server/sms/messages'
 
-import { createCommunication, createCommunicationJourneys } from './shared/communicationJourney'
-import { validatePhoneNumber } from './shared/validatePhoneNumber'
+import { createCommunication, createCommunicationJourneys } from './utils/communicationJourney'
+import { validatePhoneNumber } from './utils/validatePhoneNumber'
 
 export const UNSTOP_CONFIRMATION_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME =
   'app/user.communication/unstop-confirmation.sms'
@@ -45,6 +46,12 @@ export const unstopConfirmationSMSCommunicationJourney = inngest.createFunction(
       sendSMS({
         body: messages.UNSTOP_CONFIRMATION_MESSAGE,
         to: phoneNumber,
+      }).catch(error => {
+        Sentry.captureException(error, {
+          tags: {
+            domain: 'unstopSMS',
+          },
+        })
       }),
     )
 

@@ -133,8 +133,7 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
     },
   })
 
-  // If the user keeps the same phone number we shouldn't send a message
-  if (hasOptedInToSms && phoneNumber && user.phoneNumber !== phoneNumber) {
+  if (hasOptedInToSms && phoneNumber) {
     await optInUser(phoneNumber, user)
   }
 

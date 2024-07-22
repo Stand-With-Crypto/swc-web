@@ -1,6 +1,6 @@
 'use server'
 import { Prisma, UserCryptoAddress } from '@prisma/client'
-import { GetFindResult } from '@prisma/client/runtime/library'
+import { GetResult } from '@prisma/client/runtime/library'
 import * as Sentry from '@sentry/nextjs'
 
 import { appRouterGetAuthUser } from '@/utils/server/authentication/appRouterGetAuthUser'
@@ -15,11 +15,11 @@ type PrismaBase = Omit<Prisma.UserFindFirstArgs, 'where'>
 
 type BaseUserAndMethodOfMatch<S extends string | undefined, I extends PrismaBase = PrismaBase> =
   | {
-      user: GetFindResult<Prisma.$UserPayload, I>
+      user: GetResult<Prisma.$UserPayload, I, 'findFirst'>
       userCryptoAddress: UserCryptoAddress | null
     }
   | {
-      user: GetFindResult<Prisma.$UserPayload, I> | null
+      user: GetResult<Prisma.$UserPayload, I, 'findFirst'> | null
       sessionId: S
     }
 
@@ -44,7 +44,7 @@ async function baseGetMaybeUserAndMethodOfMatch<
   shouldThrowWithoutSession: boolean
   prisma?: Prisma.SelectSubset<I, Prisma.UserFindFirstArgs>
 }): Promise<BaseUserAndMethodOfMatch<S, I>> {
-  const { include, ...other } = prismaConfig || {}
+  const { include, cursor, distinct, orderBy, skip, take } = prismaConfig || {}
   const authUser = await appRouterGetAuthUser()
   const sessionId =
     // if we got back an auth user, don't throw even if we should because we're gonna match to
@@ -70,7 +70,11 @@ async function baseGetMaybeUserAndMethodOfMatch<
             ...((include || {}) as object),
             userCryptoAddresses: true,
           },
-          ...other,
+          cursor,
+          distinct,
+          orderBy,
+          skip,
+          take,
         })
       : Promise.resolve(null),
     sessionId
@@ -82,12 +86,16 @@ async function baseGetMaybeUserAndMethodOfMatch<
             ...((include || {}) as object),
             userCryptoAddresses: true,
           },
-          ...other,
+          cursor,
+          distinct,
+          orderBy,
+          skip,
+          take,
         })
       : Promise.resolve(null),
   ])
   const userWithoutReturnTypes = authFoundUser || sessionUser
-  const user = userWithoutReturnTypes as GetFindResult<Prisma.$UserPayload, I> | null
+  const user = userWithoutReturnTypes as GetResult<Prisma.$UserPayload, I, 'findFirst'> | null
   if (authUser) {
     if (!user) {
       if (NEXT_PUBLIC_ENVIRONMENT === 'production') {

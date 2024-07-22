@@ -1,4 +1,5 @@
 import { UserCommunicationJourneyType } from '@prisma/client'
+import * as Sentry from '@sentry/node'
 import { NonRetriableError } from 'inngest'
 
 import { inngest } from '@/inngest/inngest'
@@ -11,8 +12,8 @@ import {
   createCommunication,
   createCommunicationJourneys,
   CreatedCommunicationJourneys,
-} from './shared/communicationJourney'
-import { validatePhoneNumber } from './shared/validatePhoneNumber'
+} from './utils/communicationJourney'
+import { validatePhoneNumber } from './utils/validatePhoneNumber'
 
 export const WELCOME_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME =
   'app/user.communication/welcome.sms'
@@ -47,8 +48,18 @@ export const welcomeSMSCommunicationJourney = inngest.createFunction(
     )
 
     const message = await step.run('send-sms', () =>
-      sendMessage(phoneNumber, communicationJourneys),
+      sendMessage(phoneNumber, communicationJourneys).catch(error => {
+        Sentry.captureException(error, {
+          tags: {
+            domain: 'welcomeSMS',
+          },
+        })
+      }),
     )
+
+    if (!message) {
+      throw new Error('Failed to send SMS')
+    }
 
     await step.run('create-user-communication', () =>
       createCommunication(communicationJourneys, message.sid),
@@ -70,11 +81,5 @@ async function sendMessage(
     }
   }
 
-  const message = await sendSMS({ body: messages.WELCOME_MESSAGE, to: phoneNumber })
-
-  if (!message) {
-    throw new Error('Failed to send SMS')
-  }
-
-  return message
+  return sendSMS({ body: messages.WELCOME_MESSAGE, to: phoneNumber })
 }

@@ -35,7 +35,7 @@ export async function POST(req: NextRequest): Promise<Response> {
 
   const tx = claimTo({
     contract,
-    to: walletAddress,
+    to: walletAddress as `0x${string}`,
     quantity: BigInt(1),
   })
 

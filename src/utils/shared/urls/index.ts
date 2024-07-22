@@ -106,7 +106,6 @@ export const externalUrls = {
   swcReferralUrl: ({ referralId }: { referralId: string }) =>
     `https://www.standwithcrypto.org/join/${referralId}`,
   swcQuestionnaire: () => 'https://standwithcrypto.typeform.com/questionnaire',
-  ukSWCUrl: () => 'https://uk.standwithcrypto.org',
 }
 
 export const apiUrls = {
@@ -123,7 +122,8 @@ export const apiUrls = {
   userFullProfileInfo: () => `/api/identified-user/full-profile-info`,
   detectWipedDatabase: () => `/api/identified-user/detect-wiped-database`,
   dtsiAllPeople: () => `/api/public/dtsi/all-people`,
-  recentActivity: ({ limit }: { limit: number }) => `/api/public/recent-activity/${limit}`,
+  recentActivity: ({ limit, restrictToUS }: { limit: number; restrictToUS?: boolean }) =>
+    `/api/public/recent-activity/${limit}${restrictToUS ? '/restrictToUS' : ''}`,
   homepageTopLevelMetrics: () => `/api/public/homepage/top-level-metrics`,
   unidentifiedUser: ({ sessionId }: { sessionId: string }) => `/api/unidentified-user/${sessionId}`,
   billVote: ({ slug, billId }: { slug: string; billId: string }) =>

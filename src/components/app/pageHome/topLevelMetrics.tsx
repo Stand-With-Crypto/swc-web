@@ -115,8 +115,9 @@ export function TopLevelMetrics({ locale, ...data }: Props & { locale: Supported
                 </TooltipTrigger>
                 <TooltipContent className="max-w-xs" side="bottom">
                   <p className="text-sm font-normal tracking-normal">
-                    {formatted.sumDonations.compactFairshakeAmountUsd} donated to FairShake and{' '}
-                    {formatted.sumDonations.compactSWCAmountUsd} donated to Stand With Crypto
+                    {formatted.sumDonations.compactFairshakeAmountUsd} donated to Fairshake, a
+                    pro-crypto Super PAC, and {formatted.sumDonations.compactSWCAmountUsd} donated
+                    to Stand With Crypto
                   </p>
                 </TooltipContent>
               </Tooltip>
