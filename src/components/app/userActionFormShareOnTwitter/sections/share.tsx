@@ -28,7 +28,7 @@ export function ShareOnX(props: ShareOnXProps) {
 
     goToSection(SECTIONS_NAMES.SUCCESS)
 
-    openWindow('https://x.com/standwithcrypto', undefined, `noopener`)
+    openWindow('https://x.com/standwithcrypto', '_blank', `noopener`)
   }
 
   return (
