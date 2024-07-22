@@ -11,8 +11,8 @@ export async function onLogout() {
   const localUser = parseLocalUserFromCookies()
 
   const token = cookies().get(THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX)
-  const decodedToken = token?.value ? jwtDecode<{ userId?: string }>(token.value) : null
-  const { userId } = decodedToken ?? {}
+  const decodedToken = token?.value ? jwtDecode<{ ctx?: { userId?: string } }>(token.value) : null
+  const { userId } = decodedToken?.ctx ?? {}
 
   getServerAnalytics({ userId: userId ?? '', localUser }).track('User Logged Out')
 

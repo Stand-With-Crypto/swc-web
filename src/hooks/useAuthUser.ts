@@ -10,11 +10,11 @@ export function useThirdwebAuthUser() {
   const address = account?.address ?? ''
 
   const token = Cookies.get(THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX)
-  const decodedToken = token ? jwtDecode<{ userId?: string }>(token) : null
-  const { userId } = decodedToken ?? {}
+  const decodedToken = token ? jwtDecode<{ ctx?: { userId?: string } }>(token) : null
+  const { userId } = decodedToken?.ctx ?? {}
 
   return {
-    isLoggedIn: !!token,
+    isLoggedIn: !!userId,
     user: {
       userId,
       address: parseThirdwebAddress(address),

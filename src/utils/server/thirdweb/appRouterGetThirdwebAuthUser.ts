@@ -1,6 +1,5 @@
 import 'server-only'
 
-import { jwtDecode } from 'jwt-decode'
 import { cookies } from 'next/headers'
 
 import { parseThirdwebAddress } from '@/hooks/useThirdwebAddress/parseThirdwebAddress'
@@ -17,14 +16,14 @@ export async function appRouterGetThirdwebAuthUser(): Promise<{
     return null
   }
 
-  const authResult = await thirdwebAuth.verifyJWT({ jwt: token.value })
+  const jwtToken = await thirdwebAuth.verifyJWT({ jwt: token.value })
 
-  if (!authResult.valid) {
+  if (!jwtToken.valid) {
     return null
   }
 
-  const decodedToken = token ? jwtDecode<{ userId?: string; address?: string }>(token.value) : null
-  const { userId, address } = decodedToken ?? {}
+  const { userId, address } =
+    (jwtToken.parsedJWT?.ctx as { userId?: string; address?: string }) ?? {}
 
   return {
     userId: userId ?? '',
