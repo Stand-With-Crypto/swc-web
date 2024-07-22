@@ -3,7 +3,7 @@
 it('action - email your congressperson', () => {
   cy.visit('/')
 
-  cy.contains('Email your congressperson').click()
+  cy.contains(/Email your (congressperson|senator)/).click()
   cy.get('[role="dialog"]')
 
   // validate error messages display

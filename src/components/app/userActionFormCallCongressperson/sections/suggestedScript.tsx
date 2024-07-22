@@ -153,7 +153,7 @@ export function SuggestedScript({
   const handleCallAction = React.useCallback(
     async (phoneNumberToCall: string) => {
       const data: CreateActionCallCongresspersonInput = {
-        campaignName: UserActionCallCampaignName.FIT21_2024_04,
+        campaignName: UserActionCallCampaignName.SUMMER_2024_SENATE_BILL_CAMPAIGN,
         dtsiSlug: dtsiPerson.slug,
         phoneNumber: phoneNumberToCall,
         address: addressSchema,

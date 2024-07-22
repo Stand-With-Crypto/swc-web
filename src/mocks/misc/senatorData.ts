@@ -1,28 +1,29 @@
 import { fakerFields } from '@/mocks/fakerUtils'
 
-export const REAL_CONGRESSPERSON_DATA = {
+export const REAL_SENATOR_DATA = {
   computedStanceScore: fakerFields.dtsiStanceScore(),
-  firstName: 'Jerrold',
-  firstNickname: 'Jerrold',
-  gender: 'MALE',
+  firstName: 'Kirsten',
+  firstNickname: 'Kirsten',
+  gender: 'FEMALE',
   isPubliclyVisible: true,
-  lastName: 'Nadler',
+  lastName: 'Gillibrand',
   manuallyOverriddenStanceScore: null,
-  middleName: 'L',
+  middleName: 'E.',
   nameSuffix: '',
   nameUniquenessModifier: '',
-  officialUrl: 'https://nadler.house.gov/',
-  phoneNumber: '(202) 225-5635',
+  officialUrl: 'https://www.gillibrand.senate.gov/',
+  phoneNumber: '(202) 224-4451',
   politicalAffiliation: 'Democratic Party',
   politicalAffiliationCategory: 'DEMOCRAT',
   profilePictureUrl:
     'https://db0prh5pvbqwd.cloudfront.net/all/images/12b0866e-c3ab-418d-8914-bc0fba709fb5.jpg',
+
   profilePictureUrlDimensions: {
     type: 'jpg',
-    width: 1363,
-    height: 2048,
+    width: 750,
+    height: 938,
   },
-  slug: `Jerrold---Nadler`,
+  slug: 'kirsten---gillibrand',
   suffixName: '',
   stances: [0],
   primaryRole: {
@@ -33,7 +34,7 @@ export const REAL_CONGRESSPERSON_DATA = {
     primaryCountryCode: 'US',
     primaryDistrict: '',
     primaryState: '',
-    roleCategory: 'CONGRESS',
+    roleCategory: 'SENATE',
     status: 'HELD',
     title: 'Political Figure',
   } as any,

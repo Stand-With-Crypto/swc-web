@@ -33,6 +33,10 @@ export const DISABLED_USER_ACTION_CAMPAIGNS: DisabledUserActionCampaigns = {
       title: 'CNN Presidential Debate 2024',
       subtitle: "You emailed CNN and asked them to include the candidates' stance on crypto.",
     },
+    [UserActionEmailCampaignName.FIT21_2024_04_FOLLOW_UP]: {
+      title: 'FIT21 Email Follow Up Campaign',
+      subtitle: 'You emailed your representative and thanked them for voting on FIT21.',
+    },
   },
   [UserActionType.TWEET_AT_PERSON]: {
     [UserActionTweetAtPersonCampaignName['2024_05_22_PIZZA_DAY']]: {

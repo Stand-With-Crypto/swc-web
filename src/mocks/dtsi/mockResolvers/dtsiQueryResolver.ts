@@ -13,6 +13,7 @@ import {
 import { dtsiPersonMockResolver } from '@/mocks/dtsi/mocks/dtsiPersonMockResolver'
 import { dtsiPersonRoleMockResolver } from '@/mocks/dtsi/mocks/dtsiPersonRoleResolver'
 import { REAL_CONGRESSPERSON_DATA } from '@/mocks/misc/congresspersonData'
+import { REAL_SENATOR_DATA } from '@/mocks/misc/senatorData'
 import {
   CURRENT_SESSION_OF_CONGRESS,
   NEXT_SESSION_OF_CONGRESS,
@@ -101,7 +102,7 @@ export const dtsiQueryResolver: Partial<DTSI_QueryResolvers> = {
           }),
         }) as any,
     )
-    data.push(REAL_CONGRESSPERSON_DATA)
+    data.push(REAL_CONGRESSPERSON_DATA, REAL_SENATOR_DATA)
     return data
   },
   people: (_root, args) => {
