@@ -119,3 +119,9 @@
     }
   }
 }
+
+/** Hides Thirdweb's phone sign in country select (locks to US only) **/
+select[id='countries'] {
+  display: none !important;
+  user-select: none;
+}

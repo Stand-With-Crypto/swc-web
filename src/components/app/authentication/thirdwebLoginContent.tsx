@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { ConnectEmbed, ConnectEmbedProps } from '@thirdweb-dev/react'
 
 import { ANALYTICS_NAME_LOGIN } from '@/components/app/authentication/constants'
@@ -32,6 +32,40 @@ export function ThirdwebLoginContent({
 }: ThirdwebLoginContentProps) {
   const urls = useIntlUrls()
   const thirdwebEmbeddedAuthContainer = useRef<HTMLDivElement>(null)
+  const [hasSignInWithEmail, setHasSignInWithEmail] = useState(false)
+
+  // Add click event on the button to switch between email and phone number so we control legalese text
+  useEffect(() => {
+    const buttons = document.querySelectorAll('button')
+    const possibleSignInWithEmailButton = Array.from(buttons).find(
+      button => button.textContent?.trim().toLowerCase() === 'sign in with email',
+    ) as HTMLButtonElement
+    const possibleSignInWithPhoneButton = Array.from(buttons).find(
+      button => button.textContent?.trim().toLowerCase() === 'sign in with phone number',
+    ) as HTMLButtonElement
+
+    const handleClick = () => {
+      setHasSignInWithEmail(prevState => !prevState)
+    }
+
+    if (possibleSignInWithEmailButton) {
+      possibleSignInWithEmailButton.addEventListener('click', handleClick)
+    }
+
+    if (possibleSignInWithPhoneButton) {
+      possibleSignInWithPhoneButton.addEventListener('click', handleClick)
+    }
+
+    return () => {
+      if (possibleSignInWithEmailButton) {
+        possibleSignInWithEmailButton.removeEventListener('click', handleClick)
+      }
+
+      if (possibleSignInWithPhoneButton) {
+        possibleSignInWithPhoneButton.removeEventListener('click', handleClick)
+      }
+    }
+  }, [hasSignInWithEmail])
 
   useEffect(() => {
     if (!initialEmailAddress) {
@@ -44,6 +78,35 @@ export function ThirdwebLoginContent({
     //   input.setAttribute('value', initialEmailAddress)
     // }
   }, [initialEmailAddress])
+
+  const FooterSigninLegalese = () =>
+    hasSignInWithEmail ? (
+      <>
+        By signing up, I understand that Stand With Crypto and its vendors may collect and use my
+        Personal Information. To learn more, visit the{' '}
+        <InternalLink href={urls.privacyPolicy()} target="_blank">
+          Stand With Crypto Alliance Privacy Policy
+        </InternalLink>{' '}
+        and{' '}
+        <ExternalLink href="https://www.quorum.us/privacy-policy/">
+          Quorum Privacy Policy
+        </ExternalLink>
+      </>
+    ) : (
+      <span className="text-[10px]">
+        By signing up with my phone number, you consent to receive recurring texts from Stand with
+        Crypto. You can reply STOP to stop receiving texts. Message and data rates may apply. You
+        understand that Stand With Crypto and its vendors may collect and use your Personal
+        Information. To learn more, visit the{' '}
+        <InternalLink href={urls.privacyPolicy()} target="_blank">
+          Stand With Crypto Alliance Privacy Policy
+        </InternalLink>{' '}
+        and{' '}
+        <ExternalLink href="https://www.quorum.us/privacy-policy/">
+          Quorum Privacy Policy
+        </ExternalLink>
+      </span>
+    )
 
   return (
     <>
@@ -75,17 +138,9 @@ export function ThirdwebLoginContent({
           </div>
         </div>
 
-        <DialogFooterCTA className="mt-auto pb-2">
+        <DialogFooterCTA className="mt-auto px-6 pb-2">
           <p className="text-center text-xs text-muted-foreground">
-            By signing up, I understand that Stand With Crypto and its vendors may collect and use
-            my Personal Information. To learn more, visit the{' '}
-            <InternalLink href={urls.privacyPolicy()} target="_blank">
-              Stand With Crypto Alliance Privacy Policy
-            </InternalLink>{' '}
-            and{' '}
-            <ExternalLink href="https://www.quorum.us/privacy-policy/">
-              Quorum Privacy Policy
-            </ExternalLink>
+            <FooterSigninLegalese />
           </p>
         </DialogFooterCTA>
       </DialogBody>
