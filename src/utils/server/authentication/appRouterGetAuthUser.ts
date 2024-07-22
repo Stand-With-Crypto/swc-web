@@ -1,4 +1,3 @@
-import { ThirdwebAuthUser } from '@thirdweb-dev/auth/next'
 import { cookies } from 'next/headers'
 
 import { parseThirdwebAddress } from '@/hooks/useThirdwebAddress/parseThirdwebAddress'
@@ -6,7 +5,7 @@ import { prismaClient } from '@/utils/server/prismaClient'
 import { appRouterGetThirdwebAuthUser } from '@/utils/server/thirdweb/appRouterGetThirdwebAuthUser'
 import { USER_SESSION_ID_COOKIE_NAME } from '@/utils/shared/userSessionId'
 
-export interface ServerAuthUser extends Omit<ThirdwebAuthUser, 'address'> {
+export interface ServerAuthUser {
   userId: string
   address: string | null
 }
