@@ -70,8 +70,7 @@ export function UserActionFormNFTMintTransactionWatch({
             toast.error('Action unavailable', {
               description: error.message,
             })
-          }
-          toastGenericError()
+          } else toastGenericError()
         },
         analyticsProps: {
           'Campaign Name': input.campaignName,

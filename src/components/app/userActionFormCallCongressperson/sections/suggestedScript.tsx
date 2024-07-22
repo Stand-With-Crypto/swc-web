@@ -177,8 +177,7 @@ export function SuggestedScript({
               toast.error('Action unavailable', {
                 description: error.message,
               })
-            }
-            toastGenericError()
+            } else toastGenericError()
           },
         },
         payload =>

@@ -1,5 +1,3 @@
-import { useEffect } from 'react'
-
 import { Button } from '@/components/ui/button'
 import { InternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'

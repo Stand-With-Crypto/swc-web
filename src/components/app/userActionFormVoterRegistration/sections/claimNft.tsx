@@ -53,8 +53,7 @@ export function ClaimNft({ goToSection, stateCode }: ClaimNftProps) {
             toast.error('Action unavailable', {
               description: error.message,
             })
-          }
-          toastGenericError()
+          } else toastGenericError()
         },
         analyticsProps: {
           'Campaign Name': data.campaignName,

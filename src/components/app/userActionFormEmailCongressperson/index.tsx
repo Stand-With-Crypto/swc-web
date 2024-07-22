@@ -267,6 +267,8 @@ export function UserActionFormEmailCongressperson({
                   form.setError('FORM_ERROR', {
                     message: error.message,
                   })
+                } else {
+                  toastGenericError()
                 }
               },
             },
@@ -281,8 +283,6 @@ export function UserActionFormEmailCongressperson({
           if (result.status === 'success') {
             router.refresh()
             onSuccess()
-          } else {
-            toastGenericError()
           }
         }, trackFormSubmissionSyncErrors(ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON))}
       >
