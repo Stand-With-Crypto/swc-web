@@ -320,6 +320,7 @@ async function getPhoneNumberList(
     by: ['phoneNumber', 'datetimeCreated'],
     where: {
       ...args.where,
+      hasValidPhoneNumber: true,
       smsStatus: {
         in: [
           SMSStatus.OPTED_IN,
