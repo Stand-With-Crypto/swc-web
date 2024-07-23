@@ -32,6 +32,14 @@ const DEFAULT_TITLE = 'Join Stand With Crypto'
 const DEFAULT_SUBTITLE =
   'Lawmakers and regulators are threatening the crypto industry. You can fight back and ask for sensible rules. Join the Stand With Crypto movement to make your voice heard in Washington D.C.'
 
+const appMetadata = {
+  name: 'Stand With Crypto',
+  url: 'https://www.standwithcrypto.org/',
+  description:
+    'Stand With Crypto Alliance is a non-profit organization dedicated to uniting global crypto advocates.',
+  logoUrl: 'https://www.standwithcrypto.org/logo/shield.svg',
+}
+
 export function ThirdwebLoginContent({
   initialEmailAddress,
   title = DEFAULT_TITLE,
@@ -122,29 +130,17 @@ function ThirdwebLoginEmbedded(
     )
   }
   const supportedWallets = [
-    // inAppWallet(), // TODO: migrate to v5( investigate what is this wallet)
-    createWallet('com.coinbase.wallet'),
+    createWallet('com.coinbase.wallet', { appMetadata }),
     createWallet('io.metamask'),
     createWallet('walletConnect'),
     createWallet('embedded', { auth: { options: ['google', 'email'] } }),
   ]
 
-  // Used to authenticate cypresses tests
-  // if (isCypress) {
-  //   supportedWallets.push(localWallet())
-  // } TODO: migrate to v5
-
   const recommendedWallets = [createWallet('com.coinbase.wallet')]
 
   return (
     <ConnectEmbed
-      appMetadata={{
-        name: 'Stand With Crypto',
-        url: 'https://www.standwithcrypto.org/',
-        description:
-          'Stand With Crypto Alliance is a non-profit organization dedicated to uniting global crypto advocates.',
-        logoUrl: 'https://www.standwithcrypto.org/logo/android-chrome-512x512.png',
-      }}
+      appMetadata={appMetadata}
       auth={{
         isLoggedIn: () => isLoggedIn(),
         doLogin: async params => {
