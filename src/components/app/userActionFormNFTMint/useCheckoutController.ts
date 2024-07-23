@@ -10,7 +10,8 @@ import {
   ETH_NFT_DONATION_AMOUNT,
   MINT_NFT_CONTRACT_ADDRESS,
 } from '@/components/app/userActionFormNFTMint/constants'
-import { fromBigNumber, toBigNumber } from '@/utils/shared/bigNumber'
+import { fromBigNumber } from '@/utils/shared/bigNumber'
+import { fromBigInt } from '@/utils/shared/fromBigInt'
 import { thirdwebClient } from '@/utils/shared/thirdwebClient'
 
 export interface UseCheckoutControllerReturn {
@@ -45,7 +46,7 @@ export function useCheckoutController({
 
     return {
       mintFeeDisplay: fromBigNumber(mintFee),
-      gasFeeDisplay: fromBigNumber(toBigNumber(gasFee)),
+      gasFeeDisplay: fromBigInt(gasFee),
       totalFeeDisplay: fromBigNumber(totalFee),
       totalFee,
     }
@@ -75,6 +76,6 @@ function useGasFee(quantity: number) {
 
     const tx = claimTo({ contract, quantity: BigInt(quantity), to: account?.address ?? '' })
     const gasFee = await estimateGasCost({ transaction: tx })
-    return gasFee.ether
+    return gasFee.wei
   })
 }
