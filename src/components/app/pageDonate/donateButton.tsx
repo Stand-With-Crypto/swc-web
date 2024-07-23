@@ -1,11 +1,12 @@
 'use client'
 import React from 'react'
+import { toast } from 'sonner'
 
 import { actionCreateCoinbaseCommerceCharge } from '@/actions/actionCreateCoinbaseCommerceCharge'
 import { Button } from '@/components/ui/button'
+import { UserActionValidationErrors } from '@/utils/server/userActionValidation/constants'
 import { openWindow } from '@/utils/shared/openWindow'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
-import { toastGenericError } from '@/utils/web/toastUtils'
 
 export function DonateButton() {
   const [buttonState, setButtonState] = React.useState<'completed' | 'loading'>('completed')
@@ -15,12 +16,18 @@ export function DonateButton() {
     await triggerServerActionForForm(
       {
         formName: 'Donate Button',
-        onError: toastGenericError,
+        onError(key, error) {
+          if (key === UserActionValidationErrors.ACTION_UNAVAILABLE) {
+            toast.error('Action unavailable', {
+              description: error.message,
+            })
+          }
+        },
         payload: undefined,
       },
       () =>
         actionCreateCoinbaseCommerceCharge().then(res => {
-          if (res) {
+          if (res && 'hostedUrl' in res) {
             const windowReference = openWindow(res.hostedUrl, '_blank', '')
             if (!windowReference) {
               openWindow(res.hostedUrl, '_self')
