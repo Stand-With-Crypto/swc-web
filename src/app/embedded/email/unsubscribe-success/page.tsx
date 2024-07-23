@@ -1,6 +1,9 @@
 import { NextImage } from '@/components/ui/image'
+import { InternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
+import { SupportedLocale } from '@/intl/locales'
+import { getIntlUrls } from '@/utils/shared/urls'
 
 export const dynamic = 'error'
 
@@ -16,15 +19,19 @@ export default function UnsubscribeSuccessPage() {
       />
 
       <section className="space-y-8">
-        <PageTitle size="md">Unsubscribe successful</PageTitle>
+        <PageTitle size="md">Unsubscribe Successful</PageTitle>
 
         <PageSubTitle className="max-w-[600px]">
-          Thank you for supporting Stand With Crypto and fighting to keep crypto in America. We sent
-          you an NFT as a thank you for getting involved.
+          We're sorry to see you go, but there's still ways to be involved without communicating
+          with us via email.
           <br />
           <br />
-          Don't let this be the end - please continue to check SWC's social media profiles, our
-          website, and your inbox for updates and future opportunities to engage.
+          Check out{' '}
+          <InternalLink href={getIntlUrls(SupportedLocale.EN_US).home()} replace>
+            www.StandWithCrypto.org
+          </InternalLink>{' '}
+          for easy tools that let you reach out to lawmakers, check your voter registration, and
+          more. And don't forget to follow SWC on social media for the latest updates.
         </PageSubTitle>
       </section>
     </div>

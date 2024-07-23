@@ -56,7 +56,7 @@ export function KeepUpTheFightSection({
             <Column className="hidden w-[100px] pr-4 md:table-cell">
               <Img
                 alt={`${metadata.type} action icon`}
-                className="rounded-xl"
+                className="rounded-xl bg-black"
                 height="100"
                 src={buildTemplateInternalUrl(metadata.image, hrefSearchParams)}
                 width="100"

@@ -39,15 +39,14 @@ export default function BecomeMemberReminderEmail({
         <Heading gutterBottom="md">Level up your advocacy. Become a 501(c)(4) member</Heading>
 
         <Text className="text-foreground-muted text-center text-base">
-          Thank you for signing up to be a Stand With Crypto Advocate. We're reaching out with an
+          Thank you for signing up to be a Stand With Crypto advocate. We're reaching out with an
           opportunity to take your advocacy to the next level by becoming a full 501(c)4 member of
           Stand With Crypto. Upgrading your membership is FREE and easy - just log onto our site
-          here.
+          below.
           <br />
           <br />
           Becoming a full 501(c)4 member changes what SWC is allowed to communicate with you about,
           and you'll have access to benefits like:
-          <br />
           <br />
           <ul className="text-foreground-muted pl-4">
             <li>
