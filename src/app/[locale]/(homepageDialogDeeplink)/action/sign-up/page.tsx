@@ -56,6 +56,7 @@ export default function UserActionOptInSWCDeepLink() {
 
   return (
     <GeoGate
+      bypassCountryCheck // For Onchain Summer
       countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE}
       unavailableContent={<UserActionFormActionUnavailable />}
     >

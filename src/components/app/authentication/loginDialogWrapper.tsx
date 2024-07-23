@@ -204,6 +204,7 @@ export function UnauthenticatedSection({
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="max-w-l w-full">
         <GeoGate
+          bypassCountryCheck // For Onchain Summer
           countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE}
           unavailableContent={<UserActionFormActionUnavailable />}
         >

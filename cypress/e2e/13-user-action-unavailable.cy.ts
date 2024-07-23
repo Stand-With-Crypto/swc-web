@@ -2,7 +2,6 @@
 
 describe('disabled user actions for non-US users', () =>
   [
-    '/action/sign-up',
     '/action/email',
     '/action/call',
     '/action/share',
