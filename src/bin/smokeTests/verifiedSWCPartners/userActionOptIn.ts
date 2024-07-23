@@ -38,6 +38,7 @@ async function smokeTestUserActionOptIn() {
         countryCode: 'US',
       },
       emailAddress: faker.internet.email(),
+      phoneNumber: '',
       optInType: UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER,
       isVerifiedEmailAddress: true,
       campaignName: 'foobar',
