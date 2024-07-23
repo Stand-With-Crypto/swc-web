@@ -8,6 +8,7 @@ type PhoneNumberValidationFunction = (phoneNumber: string) => Promise<boolean> |
 export async function validatePhoneNumbers(
   phoneNumbers: string[],
   validation: PhoneNumberValidationFunction = basicPhoneNumberValidation,
+  maxRetries = VALIDATION_MAX_RETRIES,
 ) {
   const validateBatch = (batch: string[]) => {
     const validatePhoneNumbersPromises = batch.map(async phoneNumber => {
@@ -34,7 +35,7 @@ export async function validatePhoneNumbers(
   const validPhoneNumbers: string[] = []
 
   // Validate phone number with exponential retries
-  for (let i = 0; i < VALIDATION_MAX_RETRIES; i += 1) {
+  for (let i = 0; i < maxRetries; i += 1) {
     // At first, all phone numbers are unidentified
     const validatedPhoneNumbers = await validateBatch(
       i === 0 ? phoneNumbers : unidentifiedPhoneNumbers,
@@ -52,7 +53,7 @@ export async function validatePhoneNumbers(
     })
 
     if (unidentifiedPhoneNumbers.length > 0) {
-      await sleep(10000 * i + 1)
+      await sleep(10000 * (i + 1))
     } else {
       break
     }
