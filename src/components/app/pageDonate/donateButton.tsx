@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { UserActionValidationErrors } from '@/utils/server/userActionValidation/constants'
 import { openWindow } from '@/utils/shared/openWindow'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
+import { toastGenericError } from '@/utils/web/toastUtils'
 
 export function DonateButton() {
   const [buttonState, setButtonState] = React.useState<'completed' | 'loading'>('completed')
@@ -21,7 +22,7 @@ export function DonateButton() {
             toast.error('Action unavailable', {
               description: error.message,
             })
-          }
+          } else toastGenericError()
         },
         payload: undefined,
       },
