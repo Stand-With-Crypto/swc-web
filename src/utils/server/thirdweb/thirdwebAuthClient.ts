@@ -18,4 +18,5 @@ export const thirdwebAuth = createAuth({
   jwt: {
     expirationTimeSeconds: 60 * 60 * 24 * 7, // 1 week
   },
+  client: thirdwebClient,
 })
