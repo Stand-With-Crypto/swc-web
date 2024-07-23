@@ -1,19 +1,11 @@
-import { HomepageDialogDeeplinkLayout } from '@/components/app/homepageDialogDeeplinkLayout'
 import { UserActionFormShareOnTwitterDeeplinkWrapper } from '@/components/app/userActionFormShareOnTwitter/homepageDialogDeeplinkWrapper'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
-import { PageProps } from '@/types'
-import { SECONDS_DURATION } from '@/utils/shared/seconds'
 import { cn } from '@/utils/web/cn'
 
-export const revalidate = SECONDS_DURATION.HOUR
-export const dynamic = 'error'
-
-export default function UserActionShareOnTwitterDeepLink({ params }: PageProps) {
+export default function UserActionShareOnTwitterDeepLink() {
   return (
-    <HomepageDialogDeeplinkLayout pageParams={params}>
-      <div className={cn(dialogContentPaddingStyles, 'h-full')}>
-        <UserActionFormShareOnTwitterDeeplinkWrapper />
-      </div>
-    </HomepageDialogDeeplinkLayout>
+    <div className={cn(dialogContentPaddingStyles, 'h-full')}>
+      <UserActionFormShareOnTwitterDeeplinkWrapper />
+    </div>
   )
 }
