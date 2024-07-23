@@ -55,6 +55,7 @@ export const backfillPhoneNumberValidation = inngest.createFunction(
               },
             }),
           {
+            // fetchPhoneNumbers wont exceed the query limit if we pass it as max length
             maxLength: DATABASE_QUERY_LIMIT,
           },
         ),
