@@ -93,7 +93,7 @@ export function ThirdwebLoginContent({
         </ExternalLink>
       </>
     ) : (
-      <span className="text-[10px]">
+      <span className="text-[9px]">
         By signing up with my phone number, you consent to receive recurring texts from Stand with
         Crypto. You can reply STOP to stop receiving texts. Message and data rates may apply. You
         understand that Stand With Crypto and its vendors may collect and use your Personal

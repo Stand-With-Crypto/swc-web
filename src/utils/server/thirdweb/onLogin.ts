@@ -385,7 +385,7 @@ async function queryMatchingUsers({
           phoneNumber: embeddedWalletUserDetails.phone,
           hasOptedInToSms: true,
           hasRepliedToOptInSms: true,
-          smsStatus: SMSStatus.OPTED_IN_HAS_REPLIED,
+          smsStatus: SMSStatus.NOT_OPTED_IN,
           primaryUserEmailAddressId: {
             not: null,
           },
@@ -494,7 +494,7 @@ async function maybeUpsertPhoneNumber({
       phoneNumber: embeddedWalletUserDetails.phone,
       hasOptedInToSms: true,
       hasRepliedToOptInSms: true,
-      smsStatus: SMSStatus.OPTED_IN_HAS_REPLIED,
+      smsStatus: SMSStatus.NOT_OPTED_IN,
     },
   })
 }

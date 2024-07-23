@@ -1,12 +1,14 @@
 'use client'
 
 import React from 'react'
+import { SMSStatus } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { useENS } from '@thirdweb-dev/react'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/navigation'
 import useSWR, { Arguments, useSWRConfig } from 'swr'
 
+import { actionWelcomeSMSAfterPhoneSignUp } from '@/actions/actionWelcomeSMSAfterPhoneSignUp'
 import { ClientUnidentifiedUser } from '@/clientModels/clientUser/clientUser'
 import {
   ANALYTICS_NAME_LOGIN,
@@ -20,6 +22,7 @@ import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForU
 import { useDialog } from '@/hooks/useDialog'
 import { useSections } from '@/hooks/useSections'
 import { useSession } from '@/hooks/useSession'
+import { optInUser } from '@/utils/server/sms/actions'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { apiUrls } from '@/utils/shared/urls'
 import { appendENSHookDataToUser } from '@/utils/web/appendENSHookDataToUser'
@@ -186,6 +189,10 @@ export function UnauthenticatedSection({
       )
       setDialogOpen(false)
       return
+    }
+
+    if (user.phoneNumber && user.hasOptedInToSms && user.smsStatus === SMSStatus.NOT_OPTED_IN) {
+      await actionWelcomeSMSAfterPhoneSignUp()
     }
 
     const { wasRecentlyUpdated } = user.primaryUserCryptoAddress

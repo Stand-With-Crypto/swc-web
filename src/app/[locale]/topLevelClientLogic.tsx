@@ -14,7 +14,9 @@ import {
   walletConnect,
 } from '@thirdweb-dev/react'
 import { usePathname, useSearchParams } from 'next/navigation'
+import { AuthOption } from 'node_modules/@thirdweb-dev/react/dist/declarations/src/wallet/wallets/embeddedWallet/types'
 
+import { useExperimentName } from '@/components/ui/experimentsTesting'
 import { useThirdwebAuthUser } from '@/hooks/useAuthUser'
 import { useDetectWipedDatabaseAndLogOutUser } from '@/hooks/useDetectWipedDatabaseAndLogOutUser'
 import { LocaleContext } from '@/hooks/useLocale'
@@ -88,13 +90,19 @@ export function TopLevelClientLogic({
   children: React.ReactNode
   locale: SupportedLocale
 }) {
+  const currentExperiment = useExperimentName({
+    experimentName: 'gh03_ThirdwebSignUpPhoneNumberExperiment',
+  })
+
+  const walletAuthOptions: AuthOption[] = currentExperiment === 'variant' ? ['google', 'phone', 'email'] : ['google', 'email']
+
   const supportedWallets: WalletConfig<any>[] = [
     metamaskWallet(),
     coinbaseWallet({ recommended: true }),
     walletConnect(),
     embeddedWallet({
       auth: {
-        options: ['google', 'phone', 'email'],
+        options: walletAuthOptions,
       },
     }),
   ]
