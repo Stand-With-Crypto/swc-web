@@ -6,7 +6,7 @@ import { NonRetriableError } from 'inngest'
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { countSegments, sendSMS, TWILIO_RATE_LIMIT } from '@/utils/server/sms'
+import { countSegments, sendSMS, SendSMSError, TWILIO_RATE_LIMIT } from '@/utils/server/sms'
 import { getLogger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
@@ -245,17 +245,13 @@ async function enqueueMessages(
   await Promise.allSettled(enqueueMessagesPromise).then(results => {
     results.forEach(result => {
       if (result.status === 'rejected') {
-        if (result.reason) {
-          if (result.reason.code === 20429 || result.reason.code === 'ECONNABORTED') {
-            // Too Many Requests
-            if ('phoneNumber' in result.reason) {
-              failedPhoneNumbers.push(result.reason.phoneNumber)
-            }
-          } else if (result.reason.code === 21211) {
-            // Invalid phone number
+        if (result.reason instanceof SendSMSError) {
+          if (result.reason.isTooManyRequests) {
+            failedPhoneNumbers.push(result.reason.phoneNumber)
+          } else if (result.reason.isInvalidPhoneNumber) {
             invalidPhoneNumbers.push(result.reason.phoneNumber)
           } else {
-            Sentry.captureException('Unexpected Twilio error', {
+            Sentry.captureException('Unexpected sendSMS error', {
               extra: { reason: result.reason },
               tags: {
                 domain: 'bulkSMS',
@@ -263,7 +259,7 @@ async function enqueueMessages(
             })
           }
         } else {
-          Sentry.captureException('Twilio failed with no reason', {
+          Sentry.captureException('sendSMS failed with no reason', {
             extra: {
               reason: result.reason,
             },

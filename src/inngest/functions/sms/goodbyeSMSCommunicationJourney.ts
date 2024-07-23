@@ -3,10 +3,10 @@ import * as Sentry from '@sentry/node'
 
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
-import { sendSMS } from '@/utils/server/sms'
+import { sendSMS, SendSMSError } from '@/utils/server/sms'
 import * as messages from '@/utils/server/sms/messages'
 
-import { createCommunication, createCommunicationJourneys } from './utils'
+import { createCommunication, createCommunicationJourneys, flagInvalidPhoneNumbers } from './utils'
 
 export const GOODBYE_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME =
   'app/user.communication/goodbye.sms'
@@ -41,6 +41,12 @@ export const goodbyeSMSCommunicationJourney = inngest.createFunction(
         body: messages.GOODBYE_MESSAGE,
         to: phoneNumber,
       }).catch(error => {
+        if (error instanceof SendSMSError) {
+          if (error.isInvalidPhoneNumber) {
+            return flagInvalidPhoneNumbers([phoneNumber])
+          }
+        }
+
         Sentry.captureException(error, {
           tags: {
             domain: 'goodbyeSMS',
