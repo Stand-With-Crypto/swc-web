@@ -1,7 +1,7 @@
 import useSWR from 'swr'
 import { resolveAvatar, resolveName } from 'thirdweb/extensions/ens'
-import { useActiveAccount } from 'thirdweb/react'
 
+import { useThirdwebAuthUser } from '@/hooks/useAuthUser'
 import { thirdwebClient } from '@/utils/shared/thirdwebClient'
 
 async function getData(address?: string) {
@@ -28,8 +28,8 @@ async function getData(address?: string) {
 }
 
 export function useENS() {
-  const activeAccount = useActiveAccount()
-  const address = activeAccount?.address
+  const { user } = useThirdwebAuthUser()
+  const address = user?.address
 
-  return useSWR(address, () => getData(address), {})
+  return useSWR(address, async () => await getData(address))
 }

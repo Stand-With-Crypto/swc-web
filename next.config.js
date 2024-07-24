@@ -44,6 +44,8 @@ const contentSecurityPolicy = {
     'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com',
     'https://cloudflare-eth.com',
     'https://c.thirdweb.com/',
+    // ENS
+    'https://euc.li/',
     // Thirdweb contract metadata
     'https://contract.thirdweb.com/',
     'https://*.rpc.thirdweb.com/',
