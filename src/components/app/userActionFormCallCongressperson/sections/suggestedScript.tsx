@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { UserActionType } from '@prisma/client'
 import { useRouter } from 'next/navigation'
+import { z } from 'zod'
 
 import {
   actionCreateUserActionCallCongressperson,
   CreateActionCallCongresspersonInput,
 } from '@/actions/actionCreateUserActionCallCongressperson'
+import { BillVoteResult } from '@/app/api/public/dtsi/bill-vote/[billId]/[slug]/route'
 import { CallCongresspersonActionSharedData } from '@/components/app/userActionFormCallCongressperson'
 import {
   CALL_FLOW_POLITICIANS_CATEGORY,
@@ -16,9 +18,11 @@ import { Button } from '@/components/ui/button'
 import { ExternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { TrackedExternalLink } from '@/components/ui/trackedExternalLink'
+import { useCongresspersonBillVote } from '@/hooks/useCongresspersonBillVote'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { UseSectionsReturn } from '@/hooks/useSections'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
+import { BILLS_IDS } from '@/utils/shared/constants'
 import { getGoogleCivicOfficialByDTSIName } from '@/utils/shared/googleCivicInfo'
 import { formatPhoneNumber } from '@/utils/shared/phoneNumber'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
@@ -28,6 +32,7 @@ import { getYourPoliticianCategoryShortDisplayName } from '@/utils/shared/yourPo
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
 import { toastGenericError } from '@/utils/web/toastUtils'
+import { zodAddress } from '@/validation/fields/zodAddress'
 
 type CallingState =
   | 'not-calling'
@@ -146,6 +151,11 @@ export function SuggestedScript({
     return official.phones[0]
   }, [dtsiPerson, googleCivicData])
 
+  const { data: congresspersonBillVote } = useCongresspersonBillVote({
+    slug: dtsiPerson.slug,
+    billId: BILLS_IDS.FIT21,
+  })
+
   const [callingState, setCallingState] = useState<
     'not-calling' | 'pressed-called' | 'loading-call-complete' | 'call-complete' | 'error'
   >('not-calling')
@@ -216,19 +226,13 @@ export function SuggestedScript({
                 Hi, my name is <strong>{userFullName(user ?? {}, { fallback: '____' })}</strong>
               </p>
 
-              <p>
-                I live in {addressSchema.locality}, {addressSchema.administrativeAreaLevel1} and I'm
-                calling to request <strong>{dtsiPersonFullName(dtsiPerson)}</strong> votes Yes on
-                the <strong>FIT21 Act</strong> that will protect consumers, create jobs, foster
-                innovation, and safeguard our national security.
-              </p>
+              {getSuggestedScriptCopy({
+                billVote: congresspersonBillVote || 'NO_VOTE',
+                dtsiPerson,
+                address: addressSchema,
+              })}
 
-              <p>
-                It's time crypto had a clear regulatory framework to protect consumers for the road
-                ahead.
-              </p>
-
-              <p>Thank you and have a nice day!</p>
+              <p>Thank you so much and have a nice day!</p>
             </div>
           </div>
         </UserActionFormLayout.Container>
@@ -249,5 +253,65 @@ export function SuggestedScript({
         ) : null}
       </UserActionFormLayout.CongresspersonDisplayFooter>
     </div>
+  )
+}
+
+const getSuggestedScriptCopy = ({
+  billVote,
+  dtsiPerson,
+  address,
+}: {
+  billVote: BillVoteResult
+  dtsiPerson: Parameters<typeof dtsiPersonFullName>[0]
+  address: z.infer<typeof zodAddress>
+}) => {
+  const repFullName = dtsiPersonFullName(dtsiPerson)
+
+  if (billVote === 'VOTED_FOR') {
+    return (
+      <>
+        <p>
+          I live in {address.locality}, {address.administrativeAreaLevel1} and I'm calling to thank{' '}
+          <strong>{repFullName}</strong>
+          for their recent vote on the bipartisan{' '}
+          <strong>Financial Innovation and Technology for the 21st Century Act</strong>.
+        </p>
+
+        <p>
+          I am a crypto owner and I care about Congress passing legislation to protect consumers and
+          strengthen America's role as a global crypto leader.
+        </p>
+
+        <p>
+          I'm glad that FIT21 passed the house, and I'm grateful for <strong>{repFullName}</strong>
+          's vote in favor. I hope they will encourage their colleagues in the Senate to take up the
+          bill as well.
+        </p>
+      </>
+    )
+  }
+
+  return (
+    <>
+      <p>
+        I live in {address.locality}, {address.administrativeAreaLevel1}, and I'm calling to tell{' '}
+        <strong>{repFullName}</strong> that I am their constituent and I care about crypto and
+        blockchain technology.
+      </p>
+
+      <p>
+        I am a crypto owner and I believe Congress should pass legislation to protect consumers and
+        strengthen America's role as a global crypto leader.
+      </p>
+
+      <p>
+        I'm glad that the bipartisan{' '}
+        <strong>Financial Innovation and Technology for the 21st Century Act</strong>
+        recently passed the house with a large majority. I hope that <strong>
+          {repFullName}
+        </strong>{' '}
+        will keep my views and the views of other local crypto owners in mind on future votes.
+      </p>
+    </>
   )
 }
