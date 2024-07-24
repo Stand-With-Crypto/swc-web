@@ -1,6 +1,6 @@
 import 'server-only'
 
-import Sentry from '@sentry/nextjs'
+import * as Sentry from '@sentry/nextjs'
 import { NextResponse } from 'next/server'
 
 import { appRouterGetAuthUser } from '@/utils/server/authentication/appRouterGetAuthUser'
