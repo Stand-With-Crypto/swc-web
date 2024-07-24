@@ -29,7 +29,7 @@ export const backfillCongressionalDistrictCronJob = inngest.createFunction(
     id: BACKFILL_US_CONGRESSIONAL_DISTRICTS_INNGEST_CRON_JOB_FUNCTION_ID,
     retries: 0,
     concurrency: 1,
-    onScriptFailure,
+    onFailure: onScriptFailure,
   },
   {
     ...(NEXT_PUBLIC_ENVIRONMENT === 'production'
