@@ -3,6 +3,7 @@ import { describe, expect, it } from '@jest/globals'
 
 import { enqueueMessages } from '@/inngest/functions/sms/utils/enqueueMessages'
 import { flagInvalidPhoneNumbers } from '@/inngest/functions/sms/utils/flagInvalidPhoneNumbers'
+import { fakerFields } from '@/mocks/fakerUtils'
 import { sendSMS, SendSMSError } from '@/utils/server/sms'
 import type { SendSMSPayload } from '@/utils/server/sms/sendSMS'
 import { INVALID_PHONE_NUMBER_CODE, TOO_MANY_REQUESTS_CODE } from '@/utils/server/sms/SendSMSError'
@@ -21,7 +22,7 @@ jest.mock('@/inngest/functions/sms/utils/flagInvalidPhoneNumbers', () => ({
   flagInvalidPhoneNumbers: jest.fn(),
 }))
 
-const invalidPhoneNumber = faker.phone.number()
+const invalidPhoneNumber = fakerFields.phoneNumber()
 
 jest.mock('@/utils/server/sms', () => ({
   ...jest.requireActual('@/utils/server/sms'),
@@ -48,7 +49,7 @@ describe('enqueueMessages function', () => {
     jest.clearAllMocks()
   })
 
-  const phoneNumbers = Array.from({ length: 10 }).map(() => faker.phone.number())
+  const phoneNumbers = Array.from({ length: 10 }).map(() => fakerFields.phoneNumber())
   const mockedMessage = 'mocked message'
 
   it(`should call sendSMS with each phone number`, async () => {
