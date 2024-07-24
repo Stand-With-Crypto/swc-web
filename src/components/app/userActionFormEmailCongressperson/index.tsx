@@ -6,7 +6,6 @@ import { UserActionType } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { capitalize } from 'lodash-es'
 import { useRouter } from 'next/navigation'
-import useSWR, { SWRConfiguration } from 'swr'
 import { z } from 'zod'
 
 import { actionCreateUserActionEmailCongressperson } from '@/actions/actionCreateUserActionEmailCongressperson'
@@ -40,12 +39,12 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Textarea } from '@/components/ui/textarea'
+import { useCongresspersonBillVote } from '@/hooks/useCongresspersonBillVote'
 import { useGetDTSIPeopleFromAddress } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useIsDesktop } from '@/hooks/useIsDesktop'
-import { fetchReq } from '@/utils/shared/fetchReq'
+import { BILLS_IDS } from '@/utils/shared/constants'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
-import { apiUrls } from '@/utils/shared/urls'
 import { USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns'
 import {
   getYourPoliticianCategoryShortDisplayName,
@@ -189,29 +188,34 @@ export function UserActionFormEmailCongressperson({
       : []
   }, [dtsiPeopleFromAddressResponse?.data])
 
-  const { data: congresspersonBillVote } = useCongresspersonFIT21BillVote(dtsiPeople?.[0]?.slug, {
-    onSuccess: data => {
-      if (!hasModifiedMessage.current) {
-        const { firstName, lastName } = form.getValues()
-        form.setValue(
-          'message',
-          getFIT21FollowUpText({
-            billVote: data,
-            location,
-            firstName,
-            lastName,
-            dtsiLastName: dtsiPeople?.[0]?.lastName,
-          }),
-        )
-        form.setValue(
-          'subject',
-          getSubjectLine({
-            billVote: data,
-          }),
-        )
-      }
+  const { data: congresspersonBillVote } = useCongresspersonBillVote({
+    slug: dtsiPeople?.[0]?.slug,
+    billId: BILLS_IDS.FIT21,
+    config: {
+      onSuccess: data => {
+        if (!hasModifiedMessage.current) {
+          const { firstName, lastName } = form.getValues()
+          form.setValue(
+            'message',
+            getFIT21FollowUpText({
+              billVote: data,
+              location,
+              firstName,
+              lastName,
+              dtsiLastName: dtsiPeople?.[0]?.lastName,
+            }),
+          )
+          form.setValue(
+            'subject',
+            getSubjectLine({
+              billVote: data,
+            }),
+          )
+        }
+      },
     },
   })
+
   const { title, subtitle } = getPageHeadingCopy({
     billVote: congresspersonBillVote ?? 'NO_VOTE',
     politicianCategory,
@@ -421,15 +425,5 @@ export function UserActionFormEmailCongressperson({
         </div>
       </form>
     </Form>
-  )
-}
-
-function useCongresspersonFIT21BillVote(slug?: string, config?: SWRConfiguration<BillVoteResult>) {
-  return useSWR(
-    slug ? apiUrls.billVote({ slug, billId: 'hr4763-118-US' }) : null,
-    (url: string) => {
-      return fetchReq(url).then(req => req.json()) as Promise<BillVoteResult>
-    },
-    config,
   )
 }
