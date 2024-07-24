@@ -1,9 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 import { cva } from 'class-variance-authority'
+import { MediaRenderer } from 'thirdweb/react'
 
 import { NextImage } from '@/components/ui/image'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { Skeleton } from '@/components/ui/skeleton'
+import { thirdwebClient } from '@/utils/shared/thirdwebClient'
 
 type NFTDisplaySize = 'sm' | 'md' | 'lg'
 
@@ -13,6 +15,7 @@ interface NFTDisplayProps {
   size?: NFTDisplaySize
   className?: string
   raw?: boolean
+  isThirdwebMedia?: boolean
   loading?: boolean
 }
 
@@ -41,23 +44,33 @@ export function NFTDisplay({
   raw = false,
   alt,
   loading,
+  isThirdwebMedia = false,
   ...props
 }: NFTDisplayProps) {
-  return (
-    <div className={nftDisplayVariants({ size, className })}>
-      {loading && <LoadingOverlay size="sm" />}
-      {raw ? (
-        <img alt={alt} {...props} />
-      ) : (
-        <NextImage
-          alt={alt}
-          {...props}
-          height={NFT_IMAGE_SIZE_BY_VARIANT[size]}
-          width={NFT_IMAGE_SIZE_BY_VARIANT[size]}
-        />
-      )}
-    </div>
+  if (loading) {
+    return <LoadingOverlay size="sm" />
+  }
+
+  const image = isThirdwebMedia ? (
+    <MediaRenderer
+      alt={alt}
+      client={thirdwebClient}
+      height={`${NFT_IMAGE_SIZE_BY_VARIANT[size]}px`}
+      width={`${NFT_IMAGE_SIZE_BY_VARIANT[size]}px`}
+      {...props}
+    />
+  ) : raw ? (
+    <img alt={alt} {...props} />
+  ) : (
+    <NextImage
+      alt={alt}
+      {...props}
+      height={NFT_IMAGE_SIZE_BY_VARIANT[size]}
+      width={NFT_IMAGE_SIZE_BY_VARIANT[size]}
+    />
   )
+
+  return <div className={nftDisplayVariants({ size, className })}>{image}</div>
 }
 
 export function NFTDisplaySkeleton({
