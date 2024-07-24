@@ -10,9 +10,12 @@ import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { sendMail } from '@/utils/server/email'
 import BecomeMemberReminderEmail from '@/utils/server/email/templates/becomeMemberReminder'
 import { EmailActiveActions } from '@/utils/server/email/templates/common/constants'
+import ContactYourRepresentativeReminderEmail from '@/utils/server/email/templates/contactYourRepresentativeReminder'
 import FinishSettingUpProfileReminderEmail from '@/utils/server/email/templates/finishSettingUpProfileReminder'
+import FollowOnXReminderEmail from '@/utils/server/email/templates/followOnXReminder'
 import InitialSignUpEmail from '@/utils/server/email/templates/initialSignUp'
 import PhoneNumberReminderEmail from '@/utils/server/email/templates/phoneNumberReminder'
+import RegisterToVoteReminderEmail from '@/utils/server/email/templates/registerToVoteReminder'
 import { prismaClient } from '@/utils/server/prismaClient'
 
 export const INITIAL_SIGNUP_USER_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME =
@@ -122,6 +125,50 @@ export const initialSignUpUserCommunicationJourney = inngest.createFunction(
           step: 'membership-reminder',
         }),
       )
+      await step.sleep('wait-for-membership-reminder-follow-up', followUpTimeout)
+    }
+
+    const hasRegisteredToVote = await hasUserCompletedAction(
+      payload.userId,
+      UserActionType.VOTER_REGISTRATION,
+    )
+    if (!hasRegisteredToVote) {
+      await step.run('send-register-to-vote-reminder', async () =>
+        sendInitialSignUpEmail({
+          userId: payload.userId,
+          sessionId: payload.sessionId,
+          userCommunicationJourneyId: userCommunicationJourney.id,
+          step: 'register-to-vote-reminder',
+        }),
+      )
+      await step.sleep('wait-for-register-to-vote-reminder-follow-up', followUpTimeout)
+    }
+
+    const hasFollowedOnX = await hasUserCompletedAction(payload.userId, UserActionType.TWEET)
+    if (!hasFollowedOnX) {
+      await step.run('send-follow-on-x-reminder', async () =>
+        sendInitialSignUpEmail({
+          userId: payload.userId,
+          sessionId: payload.sessionId,
+          userCommunicationJourneyId: userCommunicationJourney.id,
+          step: 'follow-on-x-reminder',
+        }),
+      )
+      await step.sleep('wait-for-follow-on-x-reminder-follow-up', followUpTimeout)
+    }
+
+    const hasCalledAndEmailed =
+      (await hasUserCompletedAction(payload.userId, UserActionType.CALL)) &&
+      (await hasUserCompletedAction(payload.userId, UserActionType.EMAIL))
+    if (!hasCalledAndEmailed) {
+      await step.run('send-contact-your-rep-reminder', async () =>
+        sendInitialSignUpEmail({
+          userId: payload.userId,
+          sessionId: payload.sessionId,
+          userCommunicationJourneyId: userCommunicationJourney.id,
+          step: 'contact-your-rep-reminder',
+        }),
+      )
     }
   },
 )
@@ -186,6 +233,17 @@ async function getProfileStatus(
   return 'incomplete'
 }
 
+async function hasUserCompletedAction(userId: string, actionType: UserActionType) {
+  const action = await prismaClient.userAction.findFirst({
+    where: {
+      userId,
+      actionType,
+    },
+  })
+
+  return !!action
+}
+
 const ACTIVE_ACTIONS = [
   UserActionType.CALL,
   UserActionType.EMAIL,
@@ -194,17 +252,17 @@ const ACTIVE_ACTIONS = [
   UserActionType.VOTER_REGISTRATION,
 ]
 
-type InitialSignUpEmailStep =
-  | 'welcome'
-  | 'update-profile-reminder'
-  | 'phone-number-reminder'
-  | 'membership-reminder'
 const TEMPLATE_BY_STEP = {
   welcome: InitialSignUpEmail,
   'update-profile-reminder': FinishSettingUpProfileReminderEmail,
   'phone-number-reminder': PhoneNumberReminderEmail,
   'membership-reminder': BecomeMemberReminderEmail,
+  'register-to-vote-reminder': RegisterToVoteReminderEmail,
+  'follow-on-x-reminder': FollowOnXReminderEmail,
+  'contact-your-rep-reminder': ContactYourRepresentativeReminderEmail,
 }
+
+type InitialSignUpEmailStep = keyof typeof TEMPLATE_BY_STEP
 
 async function sendInitialSignUpEmail({
   userId,
@@ -218,14 +276,7 @@ async function sendInitialSignUpEmail({
   const user = await getUser(userId)
 
   if (!user.primaryUserEmailAddress) {
-    Sentry.captureMessage('Tried to send an email to a user without primaryUserEmailAddress', {
-      extra: { userId: user.id },
-      fingerprint: ['initialSignupUserCommunicationJourney'],
-      tags: {
-        domain: 'initialSignupUserCommunicationJourney',
-      },
-    })
-    throw new NonRetriableError('User does not have a primary email address')
+    return null
   }
 
   const Template = TEMPLATE_BY_STEP[step]
