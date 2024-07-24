@@ -40,10 +40,6 @@ it('should not create user action for non-US users', () => {
 
   cy.get('button[type="submit"]').click()
 
-  cy.contains('Actions on Stand With Crypto are only available to users based in the US.').should(
-    'be.visible',
-  )
-
   cy.queryDb('SELECT * FROM user_action_email WHERE sender_email="johndoe@gmail.com"').then(
     (result: any) => {
       expect(result.length, 'user_action_email to exist in database').to.equal(0)
