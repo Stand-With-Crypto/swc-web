@@ -11,7 +11,6 @@ import {
   MINT_NFT_CONTRACT_ADDRESS,
 } from '@/components/app/userActionFormNFTMint/constants'
 import { fromBigNumber } from '@/utils/shared/bigNumber'
-import { fromBigInt } from '@/utils/shared/fromBigInt'
 import { thirdwebClient } from '@/utils/shared/thirdwebClient'
 
 export interface UseCheckoutControllerReturn {
@@ -30,6 +29,7 @@ export function useCheckoutController({
 } = {}): UseCheckoutControllerReturn {
   const [quantity, setQuantity] = React.useState(1)
   const { data: gasFee } = useGasFee(quantity)
+  const gasNumberInBigNumber = BigNumber.from(0).add(gasFee ?? 0)
 
   const values = React.useMemo<
     Pick<
@@ -46,11 +46,11 @@ export function useCheckoutController({
 
     return {
       mintFeeDisplay: fromBigNumber(mintFee),
-      gasFeeDisplay: fromBigInt(gasFee),
+      gasFeeDisplay: fromBigNumber(gasNumberInBigNumber),
       totalFeeDisplay: fromBigNumber(totalFee),
       totalFee,
     }
-  }, [gasFee, mintUnitFee, quantity])
+  }, [gasFee, mintUnitFee, quantity, gasNumberInBigNumber])
 
   return {
     ...values,

@@ -12,9 +12,16 @@ import {
   ANALYTICS_NAME_USER_ACTION_SUCCESS_JOIN_SWC,
 } from '@/components/app/authentication/constants'
 import { LazyUpdateUserProfileForm } from '@/components/app/updateUserProfileForm/lazyLoad'
-import { Dialog, DialogBody, DialogContent, DialogTrigger } from '@/components/ui/dialog'
+import {
+  Dialog,
+  DialogBody,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { Skeleton } from '@/components/ui/skeleton'
+import { VisuallyHidden } from '@/components/ui/visually-hidden'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useDialog } from '@/hooks/useDialog'
 import { useENS } from '@/hooks/useENS'
@@ -199,7 +206,12 @@ export function UnauthenticatedSection({
   return (
     <Dialog {...dialogProps} onOpenChange={setDialogOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="max-w-l w-full">
+      <DialogContent aria-description="login-dialog" className="max-w-l w-full">
+        <VisuallyHidden>
+          <DialogTitle>
+            {currentSection === LoginSections.LOGIN ? 'Sign in' : 'Finish Profile'}
+          </DialogTitle>
+        </VisuallyHidden>
         {currentSection === LoginSections.LOGIN ? (
           <DialogBody>
             <LoginSection onLogin={handleLoginSuccess} {...props} />
