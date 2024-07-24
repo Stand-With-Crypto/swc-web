@@ -1,23 +1,16 @@
-import { Prisma, SMSStatus, UserCommunicationJourneyType } from '@prisma/client'
-import * as Sentry from '@sentry/node'
+import { Prisma, SMSStatus } from '@prisma/client'
 import { parseISO } from 'date-fns'
 import { NonRetriableError } from 'inngest'
 
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { countSegments, sendSMS, SendSMSError, TWILIO_RATE_LIMIT } from '@/utils/server/sms'
+import { countSegments, TWILIO_RATE_LIMIT } from '@/utils/server/sms'
 import { getLogger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
-import { sleep } from '@/utils/shared/sleep'
 
-import {
-  createCommunication,
-  createCommunicationJourneys,
-  fetchPhoneNumbers,
-  flagInvalidPhoneNumbers,
-} from './utils'
+import { enqueueMessages, fetchPhoneNumbers } from './utils'
 
 export const BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME = 'app/user.communication/bulk.sms'
 
@@ -207,86 +200,6 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
     logger.info('Finished')
   },
 )
-
-const ENQUEUE_MAX_RETRY_ATTEMPTS = 5
-
-async function enqueueMessages(
-  phoneNumbers: string[],
-  body?: string,
-  persist?: boolean,
-  attempt = 0,
-) {
-  if (attempt > ENQUEUE_MAX_RETRY_ATTEMPTS) return 0
-
-  const enqueueMessagesPromise = phoneNumbers.map(async phoneNumber => {
-    if (!persist || !body) return
-
-    const communicationJourneys = await createCommunicationJourneys(
-      phoneNumber,
-      UserCommunicationJourneyType.BULK_SMS,
-    )
-
-    const message = await sendSMS({
-      body,
-      to: phoneNumber,
-    })
-
-    if (message) {
-      await createCommunication(communicationJourneys, message.sid)
-    }
-
-    return message
-  })
-
-  const failedPhoneNumbers: string[] = []
-  const invalidPhoneNumbers: string[] = []
-
-  let messagesSent = 0
-  await Promise.allSettled(enqueueMessagesPromise).then(results => {
-    results.forEach(result => {
-      if (result.status === 'rejected') {
-        if (result.reason instanceof SendSMSError) {
-          if (result.reason.isTooManyRequests) {
-            failedPhoneNumbers.push(result.reason.phoneNumber)
-          } else if (result.reason.isInvalidPhoneNumber) {
-            invalidPhoneNumbers.push(result.reason.phoneNumber)
-          } else {
-            Sentry.captureException('Unexpected sendSMS error', {
-              extra: { reason: result.reason },
-              tags: {
-                domain: 'bulkSMS',
-              },
-            })
-          }
-        } else {
-          Sentry.captureException('sendSMS failed with no reason', {
-            extra: {
-              reason: result.reason,
-            },
-            tags: {
-              domain: 'bulkSMS',
-            },
-          })
-        }
-      } else {
-        messagesSent += 1
-      }
-    })
-  })
-
-  if (invalidPhoneNumbers.length > 0) {
-    await flagInvalidPhoneNumbers(invalidPhoneNumbers)
-  }
-
-  // exponential backoff retry
-  if (failedPhoneNumbers.length > 0) {
-    await sleep(10000 * attempt)
-
-    messagesSent += await enqueueMessages(failedPhoneNumbers, body, persist, attempt + 1)
-  }
-
-  return messagesSent
-}
 
 function formatTime(seconds: number) {
   if (seconds < SECONDS_DURATION.MINUTE) {
