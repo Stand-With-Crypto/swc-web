@@ -202,7 +202,9 @@ export function OTPInput({
           onPaste={handlePaste}
           pattern={pattern}
           placeholder={placeholder}
-          ref={element => (inputRefs.current[i] = element)}
+          ref={element => {
+            inputRefs.current[i] = element
+          }}
           size={1}
           value={otpValueArray[i] ?? ''}
           {...rest}
