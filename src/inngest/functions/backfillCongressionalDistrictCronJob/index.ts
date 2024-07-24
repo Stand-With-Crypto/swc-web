@@ -1,4 +1,5 @@
 import { Address } from '@prisma/client'
+import * as Sentry from '@sentry/nextjs'
 import { chunk } from 'lodash-es'
 
 import { inngest } from '@/inngest/inngest'
@@ -20,7 +21,7 @@ const BACKFILL_US_CONGRESSIONAL_DISTRICTS_SLEEP_INTERVAL =
 const BACKFILL_US_CONGRESSIONAL_DISTRICTS_BATCH_SIZE =
   Number(process.env.BACKFILL_US_CONGRESSIONAL_DISTRICTS_BATCH_SIZE) ?? 1000 // QPM: 1500
 const MAX_US_CONGRESSIONAL_DISTRICTS_BACKFILL_COUNT =
-  Number(process.env.MAX_US_CONGRESSIONAL_DISTRICTS_BACKFILL_COUNT) ?? 30000 // QPD: 250000
+  Number(process.env.MAX_US_CONGRESSIONAL_DISTRICTS_BACKFILL_COUNT) ?? 150000 // QPD: 250000
 
 const logger = getLogger('backfillUsCongressionalDistrictsCronJob')
 export const backfillCongressionalDistrictCronJob = inngest.createFunction(
@@ -79,12 +80,34 @@ async function backfillUsCongressionalDistricts(
   addressesWithoutCongressionalDistricts: Omit<Address, 'datetimeCreated' | 'datetimeUpdated'>[],
 ) {
   for (const address of addressesWithoutCongressionalDistricts) {
-    const usCongressionalDistrict = await maybeGetCongressionalDistrictFromAddress(address)
+    let usCongressionalDistrict: Awaited<
+      ReturnType<typeof maybeGetCongressionalDistrictFromAddress>
+    > | null = null
+
+    try {
+      usCongressionalDistrict = await maybeGetCongressionalDistrictFromAddress(address)
+    } catch (error) {
+      Sentry.captureException(error, {
+        tags: {
+          domain: 'backfillUsCongressionalDistricts',
+          message: 'error getting usCongressionalDistrict',
+        },
+      })
+      continue
+    }
 
     if ('notFoundReason' in usCongressionalDistrict) {
       logger.error(
         `Failed to get usCongressionalDistrict for address ${address.id} with code ${usCongressionalDistrict.notFoundReason}`,
       )
+      if (['CIVIC_API_DOWN', 'UNEXPECTED_ERROR'].includes(usCongressionalDistrict.notFoundReason)) {
+        Sentry.captureMessage(`No usCongressionalDistrict found for address ${address.id}`, {
+          extra: {
+            domain: 'backfillUsCongressionalDistricts',
+            notFoundReason: usCongressionalDistrict.notFoundReason,
+          },
+        })
+      }
       continue
     }
 
@@ -92,13 +115,22 @@ async function backfillUsCongressionalDistricts(
       `Created usCongressionalDistrict ${usCongressionalDistrict.districtNumber} for address ${address.id}`,
     )
 
-    await prismaClient.address.update({
-      where: {
-        id: address.id,
-      },
-      data: {
-        usCongressionalDistrict: `${usCongressionalDistrict.districtNumber}`,
-      },
-    })
+    try {
+      await prismaClient.address.update({
+        where: {
+          id: address.id,
+        },
+        data: {
+          usCongressionalDistrict: `${usCongressionalDistrict.districtNumber}`,
+        },
+      })
+    } catch (error) {
+      Sentry.captureException(error, {
+        tags: {
+          domain: 'backfillUsCongressionalDistricts',
+          message: 'error getting upserting address congressional district metadata',
+        },
+      })
+    }
   }
 }

@@ -2,6 +2,7 @@
 import 'server-only'
 
 import { User, UserActionType, UserInformationVisibility } from '@prisma/client'
+import * as Sentry from '@sentry/nextjs'
 import { nativeEnum, object, z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
@@ -114,12 +115,29 @@ async function _actionCreateUserActionCallCongressperson(
       logger.error(
         `No usCongressionalDistrict found for address ${validatedInput.data.address.formattedDescription} with code ${usCongressionalDistrict.notFoundReason}`,
       )
+      if (['CIVIC_API_DOWN', 'UNEXPECTED_ERROR'].includes(usCongressionalDistrict.notFoundReason)) {
+        Sentry.captureMessage(
+          `No usCongressionalDistrict found for address ${validatedInput.data.address.formattedDescription}`,
+          {
+            extra: {
+              domain: 'actionCreateUserActionCallCongressperson',
+              notFoundReason: usCongressionalDistrict.notFoundReason,
+            },
+          },
+        )
+      }
     }
     if ('districtNumber' in usCongressionalDistrict) {
       validatedInput.data.address.usCongressionalDistrict = `${usCongressionalDistrict.districtNumber}`
     }
-  } catch (e) {
-    logger.error('error getting `usCongressionalDistrict`:' + e)
+  } catch (error) {
+    logger.error('error getting `usCongressionalDistrict`:' + error)
+    Sentry.captureException(error, {
+      tags: {
+        domain: 'actionCreateUserActionCallCongressperson',
+        message: 'error getting usCongressionalDistrict',
+      },
+    })
   }
 
   await triggerRateLimiterAtMostOnce()

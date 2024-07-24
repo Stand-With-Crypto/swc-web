@@ -9,6 +9,7 @@ import {
   UserEmailAddress,
   UserEmailAddressSource,
 } from '@prisma/client'
+import * as Sentry from '@sentry/nextjs'
 import { z } from 'zod'
 
 import { getClientAddress } from '@/clientModels/clientAddress'
@@ -63,13 +64,32 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
         logger.error(
           `No usCongressionalDistrict found for address ${validatedFields.data.address.formattedDescription} with code ${usCongressionalDistrict.notFoundReason}`,
         )
+        if (
+          ['CIVIC_API_DOWN', 'UNEXPECTED_ERROR'].includes(usCongressionalDistrict.notFoundReason)
+        ) {
+          Sentry.captureMessage(
+            `No usCongressionalDistrict found for address ${validatedFields.data.address.formattedDescription}`,
+            {
+              extra: {
+                domain: 'actionUpdateUserProfile',
+                notFoundReason: usCongressionalDistrict.notFoundReason,
+              },
+            },
+          )
+        }
       }
       if ('districtNumber' in usCongressionalDistrict) {
         validatedFields.data.address.usCongressionalDistrict = `${usCongressionalDistrict.districtNumber}`
       }
     }
-  } catch (e) {
-    logger.error('error getting `usCongressionalDistrict`:' + e)
+  } catch (error) {
+    logger.error('error getting `usCongressionalDistrict`:' + error)
+    Sentry.captureException(error, {
+      tags: {
+        domain: 'actionUpdateUserProfile',
+        message: 'error getting usCongressionalDistrict',
+      },
+    })
   }
 
   await throwIfRateLimited({ context: 'authenticated' })

@@ -11,6 +11,7 @@ import {
   UserInformationVisibility,
   UserSession,
 } from '@prisma/client'
+import * as Sentry from '@sentry/nextjs'
 import { isAddress } from 'viem'
 import { object, string, z } from 'zod'
 
@@ -285,12 +286,31 @@ async function maybeUpsertUser({
         logger.error(
           `No usCongressionalDistrict found for address ${dbAddress.formattedDescription} with code ${usCongressionalDistrict.notFoundReason}`,
         )
+        if (
+          ['CIVIC_API_DOWN', 'UNEXPECTED_ERROR'].includes(usCongressionalDistrict.notFoundReason)
+        ) {
+          Sentry.captureMessage(
+            `No usCongressionalDistrict found for address ${dbAddress.formattedDescription}`,
+            {
+              extra: {
+                domain: 'handleExternalUserActionOptIn - maybeUpsertUser',
+                notFoundReason: usCongressionalDistrict.notFoundReason,
+              },
+            },
+          )
+        }
       }
       if ('districtNumber' in usCongressionalDistrict) {
         dbAddress.usCongressionalDistrict = `${usCongressionalDistrict.districtNumber}`
       }
-    } catch (e) {
-      logger.error('error getting `usCongressionalDistrict`:' + e)
+    } catch (error) {
+      logger.error('error getting `usCongressionalDistrict`:' + error)
+      Sentry.captureException(error, {
+        tags: {
+          domain: 'handleExternalUserActionOptIn - maybeUpsertUser',
+          message: 'error getting usCongressionalDistrict',
+        },
+      })
     }
   }
 
