@@ -68,7 +68,10 @@ export default function BecomeMemberReminderEmail({
       </Section>
 
       <Section className="mt-4 text-center">
-        <Button href={buildTemplateInternalUrl('/action/become-member', hydratedHrefSearchParams)}>
+        <Button
+          fullWidth="mobile"
+          href={buildTemplateInternalUrl('/action/become-member', hydratedHrefSearchParams)}
+        >
           Become a member
         </Button>
       </Section>
