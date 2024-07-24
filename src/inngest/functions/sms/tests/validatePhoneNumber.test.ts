@@ -1,7 +1,7 @@
-import { faker } from '@faker-js/faker'
 import { describe, expect, it } from '@jest/globals'
 
 import { validatePhoneNumbers } from '@/inngest/functions/sms/utils/validatePhoneNumbers'
+import { fakerFields } from '@/mocks/fakerUtils'
 import { sleep } from '@/utils/shared/sleep'
 
 jest.mock('@/utils/shared/sleep', () => ({
@@ -10,7 +10,7 @@ jest.mock('@/utils/shared/sleep', () => ({
 
 describe('validatePhoneNumbers function', () => {
   const generatePhoneNumbers = (length: number) =>
-    Array.from({ length }).map(() => faker.phone.number())
+    Array.from({ length }).map(() => fakerFields.phoneNumber())
 
   const mockedPhoneNumbers = {
     valid: generatePhoneNumbers(5),

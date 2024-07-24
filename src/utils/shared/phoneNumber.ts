@@ -1,4 +1,4 @@
-import parsePhoneNumber, { CountryCode, isValidPhoneNumber } from 'libphonenumber-js'
+import parsePhoneNumber, { CountryCode } from 'libphonenumber-js'
 
 const DEFAULT_COUNTRY_CODE: CountryCode = 'US'
 
@@ -30,5 +30,9 @@ export function formatPhoneNumber(phoneNumber: string) {
 }
 
 export function validatePhoneNumber(phoneNumber: string) {
-  return isValidPhoneNumber(phoneNumber, DEFAULT_COUNTRY_CODE)
+  const parsedPhoneNumber = parsePhoneNumber(phoneNumber, DEFAULT_COUNTRY_CODE)
+
+  if (!parsedPhoneNumber) return false
+
+  return parsedPhoneNumber.isPossible() && parsedPhoneNumber.isValid()
 }
