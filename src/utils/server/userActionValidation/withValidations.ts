@@ -11,7 +11,10 @@ export function withValidations<T extends (...args: any) => any>(
   ): Promise<Awaited<ReturnType<T> | ReturnType<ValidationFunction<T>>>> => {
     for (const validation of validations) {
       const result = await validation(args)
-      if (result) return result
+      if (result?.errors) {
+        const message = Object.values(result.errors).join('. ')
+        throw new Error(message)
+      }
     }
 
     return action(...args)

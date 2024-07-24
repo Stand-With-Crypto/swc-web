@@ -262,14 +262,11 @@ export function UserActionFormEmailCongressperson({
                 'DTSI Slugs': values.dtsiSlugs,
               },
               payload: { ...values, address },
-              onError: (key, error) => {
-                if (key === UserActionValidationErrors.ACTION_UNAVAILABLE) {
-                  form.setError('FORM_ERROR', {
-                    message: error.message,
-                  })
-                } else {
-                  toastGenericError()
-                }
+              onError: (_, error) => {
+                form.setError('FORM_ERROR', {
+                  message: error.message,
+                })
+                toastGenericError()
               },
             },
             payload =>

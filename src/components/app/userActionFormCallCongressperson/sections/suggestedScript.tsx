@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { UserActionType } from '@prisma/client'
 import { useRouter } from 'next/navigation'
-import { toast } from 'sonner'
 
 import {
   actionCreateUserActionCallCongressperson,
@@ -20,7 +19,6 @@ import { TrackedExternalLink } from '@/components/ui/trackedExternalLink'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { UseSectionsReturn } from '@/hooks/useSections'
 import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
-import { UserActionValidationErrors } from '@/utils/server/userActionValidation/constants'
 import { getGoogleCivicOfficialByDTSIName } from '@/utils/shared/googleCivicInfo'
 import { formatPhoneNumber } from '@/utils/shared/phoneNumber'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
@@ -172,13 +170,7 @@ export function SuggestedScript({
             'DTSI Slug': data.dtsiSlug,
           },
           payload: data,
-          onError: (key, error) => {
-            if (key === UserActionValidationErrors.ACTION_UNAVAILABLE) {
-              toast.error('Action unavailable', {
-                description: error.message,
-              })
-            } else toastGenericError()
-          },
+          onError: toastGenericError,
         },
         payload =>
           actionCreateUserActionCallCongressperson(payload).then(actionResult => {

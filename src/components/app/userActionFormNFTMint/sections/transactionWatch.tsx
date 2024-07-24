@@ -3,7 +3,6 @@
 import React from 'react'
 import { UserActionType } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
-import { toast } from 'sonner'
 
 import {
   actionCreateUserActionMintNFT,
@@ -27,7 +26,6 @@ import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiRes
 import { useEffectOnce } from '@/hooks/useEffectOnce'
 import { TransactionResponse } from '@/hooks/useSendMintNFTTransaction'
 import { useThirdwebContractMetadata } from '@/hooks/useThirdwebContractMetadata'
-import { UserActionValidationErrors } from '@/utils/server/userActionValidation/constants'
 import { UserActionNftMintCampaignName } from '@/utils/shared/userActionCampaigns'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
@@ -65,13 +63,7 @@ export function UserActionFormNFTMintTransactionWatch({
     return await triggerServerActionForForm(
       {
         formName: 'User Action Form NFT Mint',
-        onError: (key, error) => {
-          if (key === UserActionValidationErrors.ACTION_UNAVAILABLE) {
-            toast.error('Action unavailable', {
-              description: error.message,
-            })
-          } else toastGenericError()
-        },
+        onError: toastGenericError,
         analyticsProps: {
           'Campaign Name': input.campaignName,
           'User Action Type': UserActionType.NFT_MINT,
