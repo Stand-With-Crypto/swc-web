@@ -259,7 +259,7 @@ const TEMPLATE_BY_STEP = {
   'membership-reminder': BecomeMemberReminderEmail,
   'register-to-vote-reminder': RegisterToVoteReminderEmail,
   'follow-on-x-reminder': FollowOnXReminderEmail,
-  'contact-your-rep-reminder': ContactYourRepresentativeReminderEmail
+  'contact-your-rep-reminder': ContactYourRepresentativeReminderEmail,
 }
 
 type InitialSignUpEmailStep = keyof typeof TEMPLATE_BY_STEP
