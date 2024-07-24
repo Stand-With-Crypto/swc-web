@@ -27,7 +27,7 @@ export const USER_ACTION_FORM_SUCCESS_SCREEN_INFO: Record<
     description: DEFAULT_USER_ACTION_FORM_SUCCESS_SCREEN_INFO['WITH_NFT'],
   },
   [UserActionType.CALL]: {
-    title: 'You called your senator!',
+    title: 'You called your representatives!',
     description: DEFAULT_USER_ACTION_FORM_SUCCESS_SCREEN_INFO['WITH_NFT'],
   },
   [UserActionType.TWEET]: {
