@@ -25,6 +25,7 @@ export type GetHomepageTopLevelMetricsResponse = Awaited<
 
 interface GetHomePageDataProps {
   recentActivityLimit?: number
+  restrictToUS?: boolean
 }
 
 export async function getHomepageData(props?: GetHomePageDataProps) {
@@ -35,7 +36,10 @@ export async function getHomepageData(props?: GetHomePageDataProps) {
     sumDonationsByUser,
   ] = await Promise.all([
     getHomepageTopLevelMetrics(),
-    getPublicRecentActivity({ limit: props?.recentActivityLimit ?? 10 }),
+    getPublicRecentActivity({
+      limit: props?.recentActivityLimit ?? 10,
+      restrictToUS: props?.restrictToUS,
+    }),
     queryDTSIHomepagePeople(),
     getSumDonationsByUser({ limit: 10, pageNum: 1 }),
   ])

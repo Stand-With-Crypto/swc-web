@@ -7,9 +7,9 @@ import NextTopLoader from 'nextjs-toploader'
 import { TopLevelClientLogic } from '@/app/[locale]/topLevelClientLogic'
 import { CookieConsent } from '@/components/app/cookieConsent'
 import { Footer } from '@/components/app/footer'
+import { GeoLocationDisclaimerBanner } from '@/components/app/geoLocationDisclaimerBanner/geoLocationDisclaimerBanner'
 import { Navbar } from '@/components/app/navbar'
 import { OverrideGlobalLocalStorage } from '@/components/app/overrideGlobalLocalStorage'
-import { UKDisclaimerBanner } from '@/components/app/ukDisclaimerBanner/ukDisclaimerBanner'
 import { FullHeight } from '@/components/ui/fullHeight'
 import { Toaster } from '@/components/ui/sonner'
 import { ORDERED_SUPPORTED_LOCALES } from '@/intl/locales'
@@ -63,7 +63,7 @@ export default function Layout({ children, params }: PageProps & { children: Rea
         />
         <TopLevelClientLogic locale={locale}>
           <FullHeight.Container>
-            <UKDisclaimerBanner />
+            <GeoLocationDisclaimerBanner />
             <Navbar locale={locale} />
             <FullHeight.Content>{children}</FullHeight.Content>
             <Footer locale={locale} />
@@ -71,7 +71,7 @@ export default function Layout({ children, params }: PageProps & { children: Rea
         </TopLevelClientLogic>
         <Toaster />
         <CookieConsent locale={locale} />
-        <SpeedInsights debug={false} sampleRate={0.01} />
+        <SpeedInsights debug={false} sampleRate={0.04} />
       </body>
     </html>
   )

@@ -1,15 +1,11 @@
-import * as Sentry from '@sentry/node'
 import { z } from 'zod'
 
-import { getLogger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { smsProvider } from '@/utils/shared/smsProvider'
 
 import { messagingClient } from './client'
 
 const TWILIO_PHONE_NUMBER = requiredEnv(process.env.TWILIO_PHONE_NUMBER, 'TWILIO_PHONE_NUMBER')
-
-const logger = getLogger('sendSMS')
 
 export const zodSendSMSSchema = z.object({
   to: z.string(),
@@ -23,8 +19,6 @@ export const sendSMS = async (payload: SendSMSPayload) => {
     return
   }
 
-  logger.info('Sending SMS', payload)
-
   const validatedInput = zodSendSMSSchema.safeParse(payload)
 
   if (!validatedInput.success) {
@@ -33,19 +27,16 @@ export const sendSMS = async (payload: SendSMSPayload) => {
 
   const { body, to } = validatedInput.data
 
-  // only send SMS to US and CA numbers
-  if (!to.startsWith('+1')) {
-    throw new Error('Phone number not from US or CA')
-  }
-
   try {
-    return messagingClient.messages.create({
+    const message = await messagingClient.messages.create({
       from: TWILIO_PHONE_NUMBER,
       body,
       to,
     })
+
+    return message
   } catch (error) {
-    Sentry.captureException(error)
-    throw new Error('Failed to send SMS')
+    if (typeof error === 'object') throw { ...error, phoneNumber: to }
+    else throw error
   }
 }

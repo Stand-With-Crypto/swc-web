@@ -2,40 +2,34 @@
 
 import { useMemo } from 'react'
 
-import { TotalAdvocatesProps } from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmap.types'
 import { AnimatedNumericOdometer } from '@/components/ui/animatedNumericOdometer'
 import { roundDownNumberByGranularityToAnimateIn } from '@/components/ui/animatedNumericOdometer/roundDownNumberToAnimateIn'
-import {
-  getHomepageData,
-  GetHomepageTopLevelMetricsResponse,
-} from '@/data/pageSpecific/getHomepageData'
+import { GetHomepageTopLevelMetricsResponse } from '@/data/pageSpecific/getHomepageData'
 import { useApiHomepageTopLevelMetrics } from '@/hooks/useApiHomepageTopLevelMetrics'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { SupportedLocale } from '@/intl/locales'
 import { cn } from '@/utils/web/cn'
 import { intlNumberFormat } from '@/utils/web/intlNumberFormat'
 
-const mockDecreaseInValuesOnInitialLoadSoWeCanAnimateIncrease = (
-  initial: Omit<TotalAdvocatesProps, 'locale' | 'sumDonations' | 'countPolicymakerContacts'>,
-): Omit<TotalAdvocatesProps, 'locale' | 'sumDonations' | 'countPolicymakerContacts'> => ({
+const mockDecreaseInValuesOnInitialLoadSoWeCanAnimateIncrease = (countUsers: number) => ({
   countUsers: {
-    count: roundDownNumberByGranularityToAnimateIn(initial.countUsers.count, 100000),
+    count: roundDownNumberByGranularityToAnimateIn(countUsers, 100000),
   },
 })
 
 export function AdvocateHeatmapOdometer({
   locale,
-  homepageData,
+  countUsers,
   className,
 }: {
   locale: SupportedLocale
-  homepageData: Awaited<ReturnType<typeof getHomepageData>>
+  countUsers: number
   className?: string
 }) {
   const isMobile = useIsMobile()
   const decreasedInitialValues = useMemo(
-    () => mockDecreaseInValuesOnInitialLoadSoWeCanAnimateIncrease(homepageData),
-    [homepageData],
+    () => mockDecreaseInValuesOnInitialLoadSoWeCanAnimateIncrease(countUsers),
+    [countUsers],
   )
   const values = useApiHomepageTopLevelMetrics(
     decreasedInitialValues as GetHomepageTopLevelMetricsResponse,

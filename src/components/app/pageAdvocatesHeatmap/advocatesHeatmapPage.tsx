@@ -35,8 +35,9 @@ export function AdvocatesHeatmapPage({
           </div>
         ) : null}
         <AdvocatesHeatmap
+          actions={homepageData.actions}
           advocatesMapPageData={advocatesMapPageData}
-          homepageData={homepageData}
+          countUsers={homepageData.countUsers.count}
           isEmbedded={isEmbedded}
           locale={locale}
         />
