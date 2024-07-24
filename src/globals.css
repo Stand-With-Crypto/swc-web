@@ -122,8 +122,7 @@
 
 /** Hides Thirdweb's phone sign in country select (locks to US only) **/
 select[id='countries'] {
-  opacity: 0;
-  width: 10px;
-  padding-right: 0;
+  user-select: none;
   pointer-events: none;
+  opacity: 0.6;
 }
