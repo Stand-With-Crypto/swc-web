@@ -2,6 +2,7 @@
 
 import { MouseEvent, useCallback, useMemo, useState } from 'react'
 import { ComposableMap, Geographies, Geography } from 'react-simple-maps'
+import { useMedia, useOrientation } from 'react-use'
 import { AnimatePresence } from 'framer-motion'
 
 import { AdvocateHeatmapActionList } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapActionList'
@@ -24,6 +25,7 @@ import { PublicRecentActivity } from '@/data/recentActivity/getPublicRecentActiv
 import { useApiAdvocateMap } from '@/hooks/useApiAdvocateMap'
 import { SupportedLocale } from '@/intl/locales'
 import { getUSStateCodeFromStateName } from '@/utils/shared/usStateUtils'
+import { cn } from '@/utils/web/cn'
 
 interface RenderMapProps {
   locale: SupportedLocale
@@ -154,7 +156,11 @@ export function AdvocatesHeatmap({
   advocatesMapPageData,
   isEmbedded,
 }: RenderMapProps) {
+  const orientation = useOrientation()
+  const isShort = useMedia('(max-height: 430px)', true)
   const advocatesPerState = useApiAdvocateMap(advocatesMapPageData)
+
+  const isMobileLandscape = orientation.type.includes('landscape') && isShort
 
   const markers = useMemo(() => createMarkersFromActions(actions), [actions])
 
@@ -189,7 +195,12 @@ export function AdvocatesHeatmap({
   if (advocatesPerState.isLoading || !actions) {
     return (
       <div
-        className={`flex h-full flex-col items-start px-2 py-6 ${isEmbedded ? '' : 'rounded-[40px] bg-[#FBF8FF] px-12 py-28'}`}
+        className={cn(
+          'flex h-full flex-col items-start py-6',
+          isEmbedded
+            ? 'px-2'
+            : `rounded-[40px] bg-[#FBF8FF] px-12 ${isMobileLandscape ? 'py-8' : 'py-28'}`,
+        )}
       >
         <div className="flex h-full w-full flex-col items-center gap-4 md:flex-row">
           <Skeleton
@@ -197,7 +208,7 @@ export function AdvocatesHeatmap({
             className="flex h-[500px] w-full items-center justify-center bg-transparent"
           >
             <NextImage
-              alt={'Stand With Crypto Logo'}
+              alt="Stand With Crypto Logo"
               height={120}
               priority
               src="/logo/shield.svg"
@@ -210,9 +221,14 @@ export function AdvocatesHeatmap({
   }
 
   return (
-    <div className={`flex flex-col items-start px-2 py-6 ${isEmbedded ? '' : 'gap-8'}`}>
+    <div className={cn('flex flex-col items-start px-2 py-6', isEmbedded ? '' : 'gap-8')}>
       <div
-        className={`flex w-full flex-col items-start gap-4 md:flex-row ${isEmbedded ? '' : 'rounded-[40px] bg-[#FBF8FF] px-12 py-28'}`}
+        className={cn(
+          'flex w-full flex-col items-start gap-4 md:flex-row',
+          isEmbedded
+            ? ''
+            : `rounded-[40px] bg-[#FBF8FF] px-12 ${isMobileLandscape ? 'py-8' : 'py-28'}`,
+        )}
       >
         {isEmbedded && <AdvocateHeatmapActionList isEmbedded={isEmbedded} />}
         <MapComponent
@@ -233,7 +249,10 @@ export function AdvocatesHeatmap({
       <div className="mt-2 flex w-full items-center justify-end">
         {isEmbedded ? (
           <AdvocateHeatmapOdometer
-            className={`font-sans ${isEmbedded ? 'bg-black text-white' : 'bg-inherit text-black'}`}
+            className={cn(
+              'font-sans',
+              isEmbedded ? 'bg-black text-white' : 'bg-inherit text-black',
+            )}
             countUsers={countUsers}
             locale={locale}
           />
