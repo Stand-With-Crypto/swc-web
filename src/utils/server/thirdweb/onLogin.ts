@@ -20,6 +20,7 @@ import { VerifyLoginPayloadParams } from 'thirdweb/auth'
 
 import { parseThirdwebAddress } from '@/hooks/useThirdwebAddress/parseThirdwebAddress'
 import { CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/capitolCanary/upsertAdvocateInCapitolCanary'
+import { INITIAL_SIGNUP_USER_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME } from '@/inngest/functions/initialSignupUserCommunicationJourney/initialSignupUserCommunicationJourney'
 import { inngest } from '@/inngest/inngest'
 import {
   CapitolCanaryCampaignName,
@@ -118,6 +119,7 @@ export async function login(payload: VerifyLoginPayloadParams) {
     localUser,
     getUserSessionId: () => _getUserSessionId(),
     injectedFetchEmbeddedWalletMetadataFromThirdweb: fetchEmbeddedWalletMetadataFromThirdweb,
+    decreaseCommunicationTimers: req.cookies['SWC_DECREASE_COMMUNICATION_TIMERS'] === 'true',
   })
     .then(res => ({ userId: res.userId }))
     .catch(e => {
@@ -143,6 +145,7 @@ interface NewLoginParams {
   cryptoAddress: string
   localUser: ServerLocalUser | null
   getUserSessionId: () => string | null
+  decreaseCommunicationTimers?: boolean
   // dependency injecting this in to the function so we can mock it in tests
   injectedFetchEmbeddedWalletMetadataFromThirdweb: typeof fetchEmbeddedWalletMetadataFromThirdweb
 }
@@ -313,6 +316,8 @@ export async function onNewLogin(props: NewLoginParams) {
     localUser,
     wasUserCreated,
     analytics,
+    sessionId: props.getUserSessionId(),
+    decreaseCommunicationTimers: props.decreaseCommunicationTimers,
   })
 
   if (localUser) {
@@ -656,12 +661,16 @@ async function triggerPostLoginUserActionSteps({
   localUser,
   wasUserCreated,
   analytics,
+  sessionId,
+  decreaseCommunicationTimers,
 }: {
   wasUserCreated: boolean
   user: UpsertedUser
   userCryptoAddress: UserCryptoAddress
   localUser: ServerLocalUser | null
   analytics: ServerAnalytics
+  sessionId: string | null
+  decreaseCommunicationTimers?: boolean
 }) {
   const log = getLog(userCryptoAddress.cryptoAddress)
   /**
@@ -706,6 +715,18 @@ async function triggerPostLoginUserActionSteps({
       creationMethod: 'On Site',
       userState: wasUserCreated ? 'New' : 'Existing',
     })
+
+    const result = await inngest.send({
+      name: INITIAL_SIGNUP_USER_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
+      data: {
+        userId: user.id,
+        sessionId,
+        decreaseTimers: decreaseCommunicationTimers,
+      },
+    })
+    log(
+      `triggerPostLoginUserActionSteps: initial signup communication journey triggered with inngest id: ${result.ids[0]}`,
+    )
   } else {
     log(`triggerPostLoginUserActionSteps: opt in user action previously existed`)
   }

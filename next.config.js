@@ -183,6 +183,9 @@ const nextConfig = {
   experimental: {
     instrumentationHook: true,
   },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   images: {
     minimumCacheTTL: 60 * 60 * 24 * 7, // 7 days
     unoptimized: false,

@@ -11,10 +11,23 @@ export const revalidate = SECONDS_DURATION['30_SECONDS']
 
 const zodParams = z.object({
   limit: z.string().pipe(z.coerce.number().int().gte(0).lt(100)),
+  restrictToUS: z.string().optional(),
 })
 
-export async function GET(_request: NextRequest, { params }: { params: { limit: string } }) {
-  const { limit } = zodParams.parse(params)
-  const data = await getPublicRecentActivity({ limit })
+export async function GET(
+  _request: NextRequest,
+  { params }: { params: { config: [string, string?] } },
+) {
+  const [rawLimit, rawRestrictToUS] = params.config
+
+  const { limit, restrictToUS } = zodParams.parse({
+    limit: rawLimit,
+    restrictToUS: rawRestrictToUS,
+  })
+
+  const data = await getPublicRecentActivity({
+    limit,
+    restrictToUS: !!restrictToUS,
+  })
   return NextResponse.json(data)
 }
