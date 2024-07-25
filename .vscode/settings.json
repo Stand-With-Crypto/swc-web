@@ -63,6 +63,7 @@
     "ratelimiter",
     "Retriable",
     "satoshi",
+    "SENDGRID",
     "sonner",
     "standwithcrypto",
     "STOPALL",
@@ -78,5 +79,8 @@
     "viem",
     "Warpcast"
   ],
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "[prisma]": {
+    "editor.defaultFormatter": "Prisma.prisma"
+  }
 }
