@@ -68,12 +68,11 @@ export const backfillCongressionalDistrictCronJob = inngest.createFunction(
             take: rowsToTake,
           })
 
-          currentCursor = addresses[addresses.length - 1].id
-
           if (!addresses.length) {
             break
           }
 
+          currentCursor = addresses[addresses.length - 1].id
           addressesWithoutCongressionalDistricts.push(addresses)
 
           if (addresses.length < DATABASE_QUERY_LIMIT) {
