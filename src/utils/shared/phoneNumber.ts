@@ -1,4 +1,6 @@
-export const PHONE_NUMBER_REGEX = new RegExp(/^[+(\s.\-/\d)]{5,30}$/)
+import parsePhoneNumber, { CountryCode } from 'libphonenumber-js'
+
+const DEFAULT_COUNTRY_CODE: CountryCode = 'US'
 
 // https://stackoverflow.com/a/43687969
 export function normalizePhoneNumber(passed: string) {
@@ -18,11 +20,19 @@ export function normalizePhoneNumber(passed: string) {
 }
 
 export function formatPhoneNumber(phoneNumber: string) {
-  const cleaned = ('' + phoneNumber).replace(/\D/g, '')
-  const match = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/)!
-  if (match) {
-    const intlCode = match[1] ? '+1 ' : ''
-    return [intlCode, '(', match[2], ') ', match[3], '-', match[4]].join('')
-  }
-  return phoneNumber
+  if (!phoneNumber) return ''
+
+  const parsedPhoneNumber = parsePhoneNumber(phoneNumber, DEFAULT_COUNTRY_CODE)
+
+  if (!parsedPhoneNumber) throw new Error(`Failed to parse phone number ${phoneNumber}`)
+
+  return parsedPhoneNumber.formatInternational()
+}
+
+export function validatePhoneNumber(phoneNumber: string) {
+  const parsedPhoneNumber = parsePhoneNumber(phoneNumber, DEFAULT_COUNTRY_CODE)
+
+  if (!parsedPhoneNumber) return false
+
+  return parsedPhoneNumber.isPossible() && parsedPhoneNumber.isValid()
 }

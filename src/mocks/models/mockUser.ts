@@ -38,6 +38,7 @@ export function mockCreateUserInput({
     hasOptedInToMembership: false,
     hasOptedInToSms: false,
     hasRepliedToOptInSms: false,
+    hasValidPhoneNumber: true,
     internalStatus: UserInternalStatus.VISIBLE,
     capitolCanaryAdvocateId: null,
     capitolCanaryInstance: null,
