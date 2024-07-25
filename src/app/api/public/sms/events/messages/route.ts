@@ -92,8 +92,10 @@ export async function POST(request: NextRequest) {
   // If we don't respond the message with this xml Twilio will trigger a error event on the fail webhook
   const response = new twilio.twiml.MessagingResponse()
 
-  // We can't get the messageId when sending messages this way, so we need to trigger a Inngest function instead
-  response.message(message)
+  if (message) {
+    // We can't get the messageId when sending messages this way, so we need to trigger a Inngest function instead
+    response.message(message)
+  }
 
   return new Response(response.toString(), {
     headers,
