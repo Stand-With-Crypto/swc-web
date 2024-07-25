@@ -1,12 +1,13 @@
 import { Address } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
+import { Logger } from 'inngest/middleware/logger'
 import { chunk } from 'lodash-es'
 
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { maybeGetCongressionalDistrictFromAddress } from '@/utils/shared/getCongressionalDistrictFromAddress'
-import { getLogger } from '@/utils/shared/logger'
+// import { getLogger } from '@/utils/shared/logger'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
 const BACKFILL_US_CONGRESSIONAL_DISTRICTS_INNGEST_CRON_JOB_FUNCTION_ID =
@@ -23,7 +24,7 @@ const BACKFILL_US_CONGRESSIONAL_DISTRICTS_BATCH_SIZE =
 const MAX_US_CONGRESSIONAL_DISTRICTS_BACKFILL_COUNT =
   Number(process.env.MAX_US_CONGRESSIONAL_DISTRICTS_BACKFILL_COUNT) || 150000 // QPD: 250000
 
-const logger = getLogger('backfillUsCongressionalDistrictsCronJob')
+// const logger = getLogger('backfillUsCongressionalDistrictsCronJob')
 export const backfillCongressionalDistrictCronJob = inngest.createFunction(
   {
     id: BACKFILL_US_CONGRESSIONAL_DISTRICTS_INNGEST_CRON_JOB_FUNCTION_ID,
@@ -36,7 +37,7 @@ export const backfillCongressionalDistrictCronJob = inngest.createFunction(
       ? { cron: BACKFILL_US_CONGRESSIONAL_DISTRICTS_INNGEST_CRON_JOB_SCHEDULE }
       : { event: BACKFILL_US_CONGRESSIONAL_DISTRICTS_INNGEST_CRON_JOB_EVENT_NAME }),
   },
-  async ({ step }) => {
+  async ({ step, logger }) => {
     let batchNum = 1
 
     const addressesWithoutCongressionalDistrictsBatches = await step.run(
@@ -50,6 +51,10 @@ export const backfillCongressionalDistrictCronJob = inngest.createFunction(
       },
     )
 
+    logger.info(
+      `${addressesWithoutCongressionalDistrictsBatches.flat().length} addresses without usCongressionalDistrict found`,
+    )
+
     for (const addressBatch of addressesWithoutCongressionalDistrictsBatches) {
       if (addressBatch.length === 0) {
         logger.info(`No more batches to execute - stopping the cron job`)
@@ -57,7 +62,7 @@ export const backfillCongressionalDistrictCronJob = inngest.createFunction(
       }
 
       await step.run('scripts.backfill-us-congressional-districts', async () => {
-        await backfillUsCongressionalDistricts(addressBatch)
+        await backfillUsCongressionalDistricts(addressBatch, logger)
 
         logger.info(
           `Finished backfilling batch ${batchNum} of ${addressesWithoutCongressionalDistrictsBatches.length} of addresses without usCongressionalDistrict`,
@@ -78,6 +83,7 @@ export const backfillCongressionalDistrictCronJob = inngest.createFunction(
 
 async function backfillUsCongressionalDistricts(
   addressesWithoutCongressionalDistricts: Omit<Address, 'datetimeCreated' | 'datetimeUpdated'>[],
+  logger: Logger,
 ) {
   for (const address of addressesWithoutCongressionalDistricts) {
     let usCongressionalDistrict: Awaited<
