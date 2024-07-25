@@ -87,9 +87,7 @@ export const airdropNFTWithInngest = inngest.createFunction(
     })
 
     if (status === 'errored' || status === 'cancelled') {
-      throw new NonRetriableError(
-        `airdrop NFT transaction ${transactionHash!} failed with status ${status}`,
-      )
+      throw new Error(`airdrop NFT transaction ${transactionHash!} failed with status ${status}`)
     }
 
     if (status === 'mined') {
