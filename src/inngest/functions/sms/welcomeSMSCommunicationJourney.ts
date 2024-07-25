@@ -1,18 +1,12 @@
 import { UserCommunicationJourneyType } from '@prisma/client'
 import * as Sentry from '@sentry/node'
-import { NonRetriableError } from 'inngest'
 
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
-import { messagingClient, sendSMS } from '@/utils/server/sms'
+import { sendSMS } from '@/utils/server/sms'
 import * as messages from '@/utils/server/sms/messages'
-import { smsProvider } from '@/utils/shared/smsProvider'
 
-import {
-  createCommunication,
-  createCommunicationJourneys,
-  CreatedCommunicationJourneys,
-} from './utils/communicationJourney'
+import { createCommunication, createCommunicationJourneys } from './utils/communicationJourney'
 import { validatePhoneNumber } from './utils/validatePhoneNumber'
 
 export const WELCOME_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME =
@@ -27,6 +21,7 @@ interface WelcomeSMSCommunicationJourneyPayload {
   phoneNumber: string
 }
 
+// Please, never call this function manually, it should be called from "@/utils/server/sms/actions.ts"
 export const welcomeSMSCommunicationJourney = inngest.createFunction(
   {
     id: WELCOME_SMS_COMMUNICATION_JOURNEY_INNGEST_FUNCTION_ID,
@@ -39,8 +34,6 @@ export const welcomeSMSCommunicationJourney = inngest.createFunction(
   async ({ event, step }) => {
     const { phoneNumber } = event.data as WelcomeSMSCommunicationJourneyPayload
 
-    if (smsProvider !== 'twilio') return
-
     validatePhoneNumber(phoneNumber)
 
     const communicationJourneys = await step.run('create-communication-journey', () =>
@@ -48,7 +41,10 @@ export const welcomeSMSCommunicationJourney = inngest.createFunction(
     )
 
     const message = await step.run('send-sms', () =>
-      sendMessage(phoneNumber, communicationJourneys).catch(error => {
+      sendSMS({
+        body: messages.WELCOME_MESSAGE,
+        to: phoneNumber,
+      }).catch(error => {
         Sentry.captureException(error, {
           tags: {
             domain: 'welcomeSMS',
@@ -66,20 +62,3 @@ export const welcomeSMSCommunicationJourney = inngest.createFunction(
     )
   },
 )
-
-async function sendMessage(
-  phoneNumber: string,
-  communicationJourneys: CreatedCommunicationJourneys,
-) {
-  for (const communicationJourney of communicationJourneys) {
-    for (const communication of communicationJourney.userCommunications) {
-      const messageSent = await messagingClient.messages(communication.messageId).fetch()
-
-      if (messageSent.to === phoneNumber) {
-        throw new NonRetriableError('Message was already sent to this phone number')
-      }
-    }
-  }
-
-  return sendSMS({ body: messages.WELCOME_MESSAGE, to: phoneNumber })
-}
