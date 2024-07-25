@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { mockRandomUser, mockWallet } from 'cypress/fixture/mocks'
+import { mockRandomUser } from 'cypress/fixture/mocks'
 
 describe('action - voter registration', () => {
   describe('not signed in voter registration flows', () => {
