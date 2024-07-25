@@ -1,1 +1,5 @@
 export const TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME = '1,000,000'
+
+export enum BILLS_IDS {
+  FIT21 = 'hr4763-118-US',
+}
