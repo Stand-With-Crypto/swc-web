@@ -11,6 +11,7 @@ import {
   UserEmailAddressSource,
   UserInformationVisibility,
 } from '@prisma/client'
+import * as Sentry from '@sentry/nextjs'
 import { z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
@@ -38,6 +39,7 @@ import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { createCountryCodeValidation } from '@/utils/server/userActionValidation/checkCountryCode'
 import { withValidations } from '@/utils/server/userActionValidation/withValidations'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
+import { maybeGetCongressionalDistrictFromAddress } from '@/utils/shared/getCongressionalDistrictFromAddress'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
@@ -85,6 +87,39 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
     }
   }
   logger.info('validated fields')
+
+  try {
+    const usCongressionalDistrict = await maybeGetCongressionalDistrictFromAddress(
+      validatedFields.data.address,
+    )
+    if ('notFoundReason' in usCongressionalDistrict) {
+      logger.error(
+        `No usCongressionalDistrict found for address ${validatedFields.data.address.formattedDescription} with code ${usCongressionalDistrict.notFoundReason}`,
+      )
+      if (['CIVIC_API_DOWN', 'UNEXPECTED_ERROR'].includes(usCongressionalDistrict.notFoundReason)) {
+        Sentry.captureMessage(
+          `No usCongressionalDistrict found for address ${validatedFields.data.address.formattedDescription}`,
+          {
+            extra: {
+              domain: 'actionCreateUserActionEmailCongressperson',
+              notFoundReason: usCongressionalDistrict.notFoundReason,
+            },
+          },
+        )
+      }
+    }
+    if ('districtNumber' in usCongressionalDistrict) {
+      validatedFields.data.address.usCongressionalDistrict = `${usCongressionalDistrict.districtNumber}`
+    }
+  } catch (error) {
+    logger.error('error getting `usCongressionalDistrict`:' + error)
+    Sentry.captureException(error, {
+      tags: {
+        domain: 'actionCreateUserActionEmailCongressperson',
+        message: 'error getting usCongressionalDistrict',
+      },
+    })
+  }
 
   const localUser = parseLocalUserFromCookies()
   const { user, userState } = await maybeUpsertUser({
