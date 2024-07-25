@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { UserActionType } from '@prisma/client'
 
 import { STATE_COORDS } from '@/components/app/pageAdvocatesHeatmap/constants'
@@ -15,7 +15,7 @@ export interface MapMarker {
   datetimeCreated: string
 }
 
-const createMarkersFromActions = (recentActivity: PublicRecentActivity) => {
+const createMarkersFromActions = (recentActivity: PublicRecentActivity): MapMarker[] => {
   const markers: MapMarker[] = []
   const stateCount: Record<string, number> = {}
 
@@ -53,39 +53,46 @@ const createMarkersFromActions = (recentActivity: PublicRecentActivity) => {
   return markers
 }
 
+const MAX_MARKERS = 10
+const ADVOCATE_MAP_INTERVAL = 2000
+
+let STARTING_MARKERS = 5
+
 export function useAdvocateMap({ actions }: UseAdvocateMapProps) {
   const [displayedMarkers, setDisplayedMarkers] = useState<MapMarker[]>([])
-  const [currentActionIndex, setCurrentActionIndex] = useState(5)
+  const [currentActionIndex, setCurrentActionIndex] = useState(0)
 
   const markers = useMemo(() => createMarkersFromActions(actions), [actions])
 
+  if (displayedMarkers.length === MAX_MARKERS) {
+    STARTING_MARKERS = MAX_MARKERS
+  }
+
   useEffect(() => {
-    const initialMarkers = markers.slice(0, 5)
+    const initialMarkers = markers.slice(0, STARTING_MARKERS)
     setDisplayedMarkers(initialMarkers)
-    setCurrentActionIndex(5)
+    setCurrentActionIndex(STARTING_MARKERS)
   }, [markers])
 
   useEffect(() => {
     const intervalId = setInterval(() => {
       setDisplayedMarkers(prev => {
-        const newMarkers = [...prev]
-        if (currentActionIndex < markers.length) {
-          if (newMarkers.length >= 10) {
-            newMarkers.shift()
-          }
-          newMarkers.push(markers[currentActionIndex])
-          setCurrentActionIndex(currentActionIndex + 1)
+        let newMarkers = [...prev]
+
+        if (newMarkers.length < MAX_MARKERS) {
+          newMarkers.push(markers[currentActionIndex % markers.length])
         } else {
-          clearInterval(intervalId)
+          newMarkers = [...newMarkers.slice(1), markers[currentActionIndex % markers.length]]
         }
+
+        setCurrentActionIndex(prevIndex => (prevIndex + 1) % markers.length)
+
         return newMarkers
       })
-    }, 2000)
+    }, ADVOCATE_MAP_INTERVAL)
 
     return () => clearInterval(intervalId)
   }, [currentActionIndex, markers])
 
-  return {
-    markers: displayedMarkers,
-  }
+  return displayedMarkers
 }

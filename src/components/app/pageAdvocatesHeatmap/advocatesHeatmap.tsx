@@ -32,6 +32,120 @@ interface RenderMapProps {
   isEmbedded?: boolean
 }
 
+export function AdvocatesHeatmap({
+  locale,
+  actions,
+  countUsers,
+  advocatesMapPageData,
+  isEmbedded,
+}: RenderMapProps) {
+  const orientation = useOrientation()
+  const isShort = useMedia('(max-height: 430px)', true)
+  const advocatesPerState = useApiAdvocateMap(advocatesMapPageData)
+  const markers = useAdvocateMap({ actions })
+
+  const isMobileLandscape = orientation.type.includes('landscape') && isShort
+
+  const totalAdvocatesPerState = advocatesPerState.data.advocatesMapData.totalAdvocatesPerState
+
+  const getTotalAdvocatesPerState = useCallback(
+    (stateName: string) => {
+      const stateCode = getUSStateCodeFromStateName(stateName)
+      return totalAdvocatesPerState.find(total => total.state === stateCode)?.totalAdvocates
+    },
+    [totalAdvocatesPerState],
+  )
+
+  const [hoveredStateName, setHoveredStateName] = useState<string | null>(null)
+  const [mousePosition, setMousePosition] = useState<{ x: number; y: number } | null>(null)
+
+  const handleStateMouseHover = useCallback((geo: any, event: MouseEvent<SVGPathElement>) => {
+    const { clientX, clientY } = event
+    setMousePosition({ x: clientX, y: clientY })
+    setHoveredStateName(geo.properties.name)
+  }, [])
+
+  const handleStateMouseOut = useCallback(() => {
+    setHoveredStateName(null)
+  }, [])
+
+  const handleClearPressedState = () => {
+    setMousePosition(null)
+    setHoveredStateName(null)
+  }
+
+  if (advocatesPerState.isLoading || !actions) {
+    return (
+      <div
+        className={cn(
+          'flex h-full flex-col items-start py-6',
+          isEmbedded
+            ? 'px-2'
+            : `rounded-[40px] bg-[#FBF8FF] px-12 ${isMobileLandscape ? 'py-8' : 'py-28'}`,
+        )}
+      >
+        <div className="flex h-full w-full flex-col items-center gap-4 md:flex-row">
+          <Skeleton
+            childrenClassName="visible"
+            className="flex h-[500px] w-full items-center justify-center bg-transparent"
+          >
+            <NextImage
+              alt="Stand With Crypto Logo"
+              height={120}
+              priority
+              src="/logo/shield.svg"
+              width={121}
+            />
+          </Skeleton>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className={cn('flex flex-col items-start px-2 py-6', isEmbedded ? '' : 'gap-8')}>
+      <div
+        className={cn(
+          'flex w-full flex-col items-start gap-4 md:flex-row',
+          isEmbedded
+            ? ''
+            : `rounded-[40px] bg-[#FBF8FF] px-12 ${isMobileLandscape ? 'py-8' : 'py-28'}`,
+        )}
+      >
+        {isEmbedded && <AdvocateHeatmapActionList isEmbedded={isEmbedded} />}
+        <MapComponent
+          handleStateMouseHover={handleStateMouseHover}
+          handleStateMouseOut={handleStateMouseOut}
+          isEmbedded={isEmbedded}
+          locale={locale}
+          markers={markers}
+        />
+        <TotalAdvocatesPerStateTooltip
+          getTotalAdvocatesPerState={getTotalAdvocatesPerState}
+          handleClearPressedState={handleClearPressedState}
+          hoveredStateName={hoveredStateName}
+          locale={locale}
+          mousePosition={mousePosition}
+        />
+      </div>
+      <div className="mt-2 flex w-full items-center justify-end">
+        {isEmbedded ? (
+          <AdvocateHeatmapOdometer
+            className={cn(
+              'font-sans',
+              isEmbedded ? 'bg-black text-white' : 'bg-inherit text-black',
+            )}
+            countUsers={countUsers}
+            locale={locale}
+          />
+        ) : (
+          <AdvocateHeatmapActionList isEmbedded={isEmbedded} />
+        )}
+      </div>
+    </div>
+  )
+}
+
 const MapComponent = ({
   markers,
   handleStateMouseHover,
@@ -143,119 +257,5 @@ const MapComponent = ({
         mousePosition={mousePosition}
       />
     </>
-  )
-}
-
-export function AdvocatesHeatmap({
-  locale,
-  actions,
-  countUsers,
-  advocatesMapPageData,
-  isEmbedded,
-}: RenderMapProps) {
-  const orientation = useOrientation()
-  const isShort = useMedia('(max-height: 430px)', true)
-  const advocatesPerState = useApiAdvocateMap(advocatesMapPageData)
-  const { markers } = useAdvocateMap({ actions })
-
-  const isMobileLandscape = orientation.type.includes('landscape') && isShort
-
-  const totalAdvocatesPerState = advocatesPerState.data.advocatesMapData.totalAdvocatesPerState
-
-  const getTotalAdvocatesPerState = useCallback(
-    (stateName: string) => {
-      const stateCode = getUSStateCodeFromStateName(stateName)
-      return totalAdvocatesPerState.find(total => total.state === stateCode)?.totalAdvocates
-    },
-    [totalAdvocatesPerState],
-  )
-
-  const [hoveredStateName, setHoveredStateName] = useState<string | null>(null)
-  const [mousePosition, setMousePosition] = useState<{ x: number; y: number } | null>(null)
-
-  const handleStateMouseHover = useCallback((geo: any, event: MouseEvent<SVGPathElement>) => {
-    const { clientX, clientY } = event
-    setMousePosition({ x: clientX, y: clientY })
-    setHoveredStateName(geo.properties.name)
-  }, [])
-
-  const handleStateMouseOut = useCallback(() => {
-    setHoveredStateName(null)
-  }, [])
-
-  const handleClearPressedState = () => {
-    setMousePosition(null)
-    setHoveredStateName(null)
-  }
-
-  if (advocatesPerState.isLoading || !actions) {
-    return (
-      <div
-        className={cn(
-          'flex h-full flex-col items-start py-6',
-          isEmbedded
-            ? 'px-2'
-            : `rounded-[40px] bg-[#FBF8FF] px-12 ${isMobileLandscape ? 'py-8' : 'py-28'}`,
-        )}
-      >
-        <div className="flex h-full w-full flex-col items-center gap-4 md:flex-row">
-          <Skeleton
-            childrenClassName="visible"
-            className="flex h-[500px] w-full items-center justify-center bg-transparent"
-          >
-            <NextImage
-              alt="Stand With Crypto Logo"
-              height={120}
-              priority
-              src="/logo/shield.svg"
-              width={121}
-            />
-          </Skeleton>
-        </div>
-      </div>
-    )
-  }
-
-  return (
-    <div className={cn('flex flex-col items-start px-2 py-6', isEmbedded ? '' : 'gap-8')}>
-      <div
-        className={cn(
-          'flex w-full flex-col items-start gap-4 md:flex-row',
-          isEmbedded
-            ? ''
-            : `rounded-[40px] bg-[#FBF8FF] px-12 ${isMobileLandscape ? 'py-8' : 'py-28'}`,
-        )}
-      >
-        {isEmbedded && <AdvocateHeatmapActionList isEmbedded={isEmbedded} />}
-        <MapComponent
-          handleStateMouseHover={handleStateMouseHover}
-          handleStateMouseOut={handleStateMouseOut}
-          isEmbedded={isEmbedded}
-          locale={locale}
-          markers={markers}
-        />
-        <TotalAdvocatesPerStateTooltip
-          getTotalAdvocatesPerState={getTotalAdvocatesPerState}
-          handleClearPressedState={handleClearPressedState}
-          hoveredStateName={hoveredStateName}
-          locale={locale}
-          mousePosition={mousePosition}
-        />
-      </div>
-      <div className="mt-2 flex w-full items-center justify-end">
-        {isEmbedded ? (
-          <AdvocateHeatmapOdometer
-            className={cn(
-              'font-sans',
-              isEmbedded ? 'bg-black text-white' : 'bg-inherit text-black',
-            )}
-            countUsers={countUsers}
-            locale={locale}
-          />
-        ) : (
-          <AdvocateHeatmapActionList isEmbedded={isEmbedded} />
-        )}
-      </div>
-    </div>
   )
 }
