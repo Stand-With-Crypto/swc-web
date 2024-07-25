@@ -114,12 +114,16 @@ export async function login(payload: VerifyLoginPayloadParams) {
     return
   }
 
+  const decreaseCommunicationTimersCookie = cookies().get(
+    'SWC_DECREASE_COMMUNICATION_TIMERS',
+  )?.value
+
   const user = await onNewLogin({
     cryptoAddress,
     localUser,
     getUserSessionId: () => _getUserSessionId(),
     injectedFetchEmbeddedWalletMetadataFromThirdweb: fetchEmbeddedWalletMetadataFromThirdweb,
-    decreaseCommunicationTimers: req.cookies['SWC_DECREASE_COMMUNICATION_TIMERS'] === 'true',
+    decreaseCommunicationTimers: decreaseCommunicationTimersCookie === 'true',
   })
     .then(res => ({ userId: res.userId }))
     .catch(e => {
