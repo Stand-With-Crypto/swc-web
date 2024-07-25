@@ -209,7 +209,7 @@ export function UnauthenticatedSection({
   return (
     <Dialog {...dialogProps} onOpenChange={setDialogOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent aria-description="login-dialog" className="max-w-l w-full">
+      <DialogContent className="max-w-l w-full">
         <VisuallyHidden>
           <DialogTitle>
             {currentSection === LoginSections.LOGIN ? 'Sign in' : 'Finish Profile'}
