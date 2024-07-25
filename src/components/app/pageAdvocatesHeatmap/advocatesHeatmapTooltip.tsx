@@ -41,7 +41,7 @@ export function TotalAdvocatesPerStateTooltip({
 
   if (!totalAdvocatesPerState) return null
 
-  const formattedNumber = `${FormattedNumber({ amount: totalAdvocatesPerState, locale })} advocates`
+  const formattedNumber = `${FormattedNumber({ amount: totalAdvocatesPerState, locale })} advocates in ${hoveredStateName}`
 
   const tooltipWidth = formattedNumber.length * 10
   const offsetX = tooltipWidth / 2

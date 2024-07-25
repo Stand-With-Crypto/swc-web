@@ -12,6 +12,7 @@ import { emailViaCapitolCanaryWithInngest } from '@/inngest/functions/capitolCan
 import { upsertAdvocateInCapitolCanaryWithInngest } from '@/inngest/functions/capitolCanary/upsertAdvocateInCapitolCanary'
 import { cleanupNFTMintsWithInngest } from '@/inngest/functions/cleanupNFTMints'
 import { cleanupPostalCodesWithInngest } from '@/inngest/functions/cleanupPostalCodes'
+import { initialSignUpUserCommunicationJourney } from '@/inngest/functions/initialSignupUserCommunicationJourney/initialSignupUserCommunicationJourney'
 import { monitorBaseETHBalances } from '@/inngest/functions/monitorBaseETHBalances'
 import { setPrimaryCryptoAddressOfUserWithInngest } from '@/inngest/functions/setPrimaryCryptoAddressOfUser'
 import {
@@ -52,6 +53,7 @@ export const { GET, POST, PUT } = serve({
     backfillUsersTotalDonationAmountUsdInngestUpdateBatchOfUsers,
     auditUsersTotalDonationAmountUsdInngest,
     auditUsersTotalDonationAmountUsdInngestAuditBatchOfUsers,
+    initialSignUpUserCommunicationJourney,
     backfillSMSStatusField,
     welcomeSMSCommunicationJourney,
     goodbyeSMSCommunicationJourney,
