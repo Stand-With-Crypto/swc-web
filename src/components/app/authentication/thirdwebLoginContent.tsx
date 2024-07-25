@@ -1,8 +1,9 @@
 'use client'
 import { useEffect, useRef } from 'react'
+import { signLoginPayload } from 'thirdweb/auth'
 import { base } from 'thirdweb/chains'
-import { ConnectEmbed, ConnectEmbedProps } from 'thirdweb/react'
-import { createWallet } from 'thirdweb/wallets'
+import { ConnectEmbed, ConnectEmbedProps, useConnect } from 'thirdweb/react'
+import { createWallet, createWalletAdapter, generateAccount } from 'thirdweb/wallets'
 
 import { ANALYTICS_NAME_LOGIN } from '@/components/app/authentication/constants'
 import { DialogBody, DialogFooterCTA } from '@/components/ui/dialog'
@@ -17,6 +18,7 @@ import { generateThirdwebLoginPayload } from '@/utils/server/thirdweb/getThirdwe
 import { isLoggedIn } from '@/utils/server/thirdweb/isLoggedIn'
 import { login } from '@/utils/server/thirdweb/onLogin'
 import { onLogout } from '@/utils/server/thirdweb/onLogout'
+import { isCypress } from '@/utils/shared/executionEnvironment'
 import { thirdwebClient } from '@/utils/shared/thirdwebClient'
 import { trackSectionVisible } from '@/utils/web/clientAnalytics'
 import { theme } from '@/utils/web/thirdweb/theme'
@@ -66,7 +68,7 @@ export function ThirdwebLoginContent({
     <>
       <DialogBody className="-mt-8">
         <div className="mx-auto flex max-w-[460px] flex-col items-center gap-2">
-          <div className="flex flex-col items-center space-y-6">
+          <div className="flex flex-col items-center space-y-6 pt-6">
             <NextImage
               alt="Stand With Crypto Logo"
               height={80}
@@ -115,6 +117,7 @@ function ThirdwebLoginEmbedded(
 ) {
   const session = useThirdwebAuthUser()
   const hasTracked = useRef(false)
+  const { connect } = useConnect()
   useEffect(() => {
     if (!session.isLoggedIn && !hasTracked.current) {
       trackSectionVisible({ sectionGroup: ANALYTICS_NAME_LOGIN, section: 'Login' })
@@ -138,7 +141,33 @@ function ThirdwebLoginEmbedded(
 
   const recommendedWallets = [createWallet('com.coinbase.wallet')]
 
-  return (
+  const initializeTestWalletForE2EEnv = async () => {
+    const wallet = await connect(async () => {
+      const wallet = createWalletAdapter({
+        client: thirdwebClient,
+        adaptedAccount: await generateAccount({ client: thirdwebClient }),
+        chain: base,
+        onDisconnect: () => {},
+        switchChain: () => {},
+      })
+      return wallet
+    })
+
+    const account = wallet?.getAccount()
+    const address = account?.address
+
+    const loginPayload = await generateThirdwebLoginPayload(address!)
+
+    const params = await signLoginPayload({
+      payload: loginPayload,
+      account: account!,
+    })
+
+    await login(params)
+    await props.onLoginCallback?.()
+  }
+
+  return !isCypress ? (
     <ConnectEmbed
       appMetadata={appMetadata}
       auth={{
@@ -161,5 +190,9 @@ function ThirdwebLoginEmbedded(
       wallets={supportedWallets}
       {...props}
     />
+  ) : (
+    <button data-testid="e2e-test-login" onClick={initializeTestWalletForE2EEnv}>
+      login
+    </button>
   )
 }
