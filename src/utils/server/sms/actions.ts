@@ -79,7 +79,7 @@ export async function optUserBackIn(phoneNumber: string, user?: User) {
 
   await prismaClient.user.updateMany({
     data: {
-      smsStatus: SMSStatus.OPTED_IN,
+      smsStatus: SMSStatus.OPTED_IN_HAS_REPLIED,
     },
     where: {
       phoneNumber,
