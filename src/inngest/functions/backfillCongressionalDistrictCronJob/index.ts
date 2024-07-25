@@ -1,6 +1,6 @@
 import { Address } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
-import { chunk } from 'lodash-es'
+import chunk from 'lodash-es/chunk'
 
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
@@ -14,7 +14,7 @@ const BACKFILL_US_CONGRESSIONAL_DISTRICTS_INNGEST_CRON_JOB_FUNCTION_ID =
 const BACKFILL_US_CONGRESSIONAL_DISTRICTS_INNGEST_CRON_JOB_EVENT_NAME =
   'script/backfill.us.congressional.districts.cron.job'
 
-const BACKFILL_US_CONGRESSIONAL_DISTRICTS_INNGEST_CRON_JOB_SCHEDULE = '0 1 * * *' //01:00 AM everyday
+const BACKFILL_US_CONGRESSIONAL_DISTRICTS_INNGEST_CRON_JOB_SCHEDULE = '0 9 * * *' //everyday 09:00AM UTC or 01:00 AM PST
 
 const BACKFILL_US_CONGRESSIONAL_DISTRICTS_SLEEP_INTERVAL =
   Number(process.env.BACKFILL_US_CONGRESSIONAL_DISTRICTS_SLEEP_INTERVAL) || 60 * 1000 // 1 minute.
@@ -22,6 +22,8 @@ const BACKFILL_US_CONGRESSIONAL_DISTRICTS_BATCH_SIZE =
   Number(process.env.BACKFILL_US_CONGRESSIONAL_DISTRICTS_BATCH_SIZE) || 1000 // QPM: 1500
 const MAX_US_CONGRESSIONAL_DISTRICTS_BACKFILL_COUNT =
   Number(process.env.MAX_US_CONGRESSIONAL_DISTRICTS_BACKFILL_COUNT) || 150000 // QPD: 250000
+
+const DATABASE_QUERY_LIMIT = Number(process.env.DATABASE_QUERY_LIMIT) || undefined
 
 const logger = getLogger('backfillUsCongressionalDistrictsCronJob')
 export const backfillCongressionalDistrictCronJob = inngest.createFunction(
@@ -37,43 +39,86 @@ export const backfillCongressionalDistrictCronJob = inngest.createFunction(
       : { event: BACKFILL_US_CONGRESSIONAL_DISTRICTS_INNGEST_CRON_JOB_EVENT_NAME }),
   },
   async ({ step }) => {
-    let batchNum = 1
+    let currentCursor: string | undefined = undefined
 
     const addressesWithoutCongressionalDistrictsBatches = await step.run(
       'script.get-addresses',
       async () => {
-        const addresses = await prismaClient.address.findMany({
-          where: { usCongressionalDistrict: null, countryCode: 'US' },
-          take: MAX_US_CONGRESSIONAL_DISTRICTS_BACKFILL_COUNT,
-        })
-        return chunk(addresses, BACKFILL_US_CONGRESSIONAL_DISTRICTS_BATCH_SIZE)
+        if (!DATABASE_QUERY_LIMIT) return null
+
+        const numQueries = Math.ceil(
+          MAX_US_CONGRESSIONAL_DISTRICTS_BACKFILL_COUNT / DATABASE_QUERY_LIMIT,
+        )
+
+        const addressesWithoutCongressionalDistricts: Omit<
+          Address,
+          'datetimeCreated' | 'datetimeUpdated'
+        >[][] = []
+
+        for (let i = 1; i <= numQueries; i++) {
+          const rowsToTake =
+            i * DATABASE_QUERY_LIMIT > MAX_US_CONGRESSIONAL_DISTRICTS_BACKFILL_COUNT
+              ? MAX_US_CONGRESSIONAL_DISTRICTS_BACKFILL_COUNT - DATABASE_QUERY_LIMIT * (i - 1)
+              : DATABASE_QUERY_LIMIT
+
+          const addresses = await prismaClient.address.findMany({
+            where: { usCongressionalDistrict: null, countryCode: 'US' },
+            cursor: currentCursor ? { id: currentCursor } : undefined,
+            skip: currentCursor ? 1 : 0,
+            take: rowsToTake,
+          })
+
+          if (!addresses.length) {
+            break
+          }
+
+          currentCursor = addresses[addresses.length - 1].id
+          addressesWithoutCongressionalDistricts.push(addresses)
+
+          if (addresses.length < DATABASE_QUERY_LIMIT) {
+            break
+          }
+        }
+
+        const flatAddressesWithoutCongressionalDistricts =
+          addressesWithoutCongressionalDistricts.flat()
+
+        logger.info(
+          `${flatAddressesWithoutCongressionalDistricts.length} addresses without usCongressionalDistrict found`,
+        )
+
+        return chunk(
+          flatAddressesWithoutCongressionalDistricts,
+          BACKFILL_US_CONGRESSIONAL_DISTRICTS_BATCH_SIZE,
+        )
       },
     )
 
-    logger.info(
-      `${addressesWithoutCongressionalDistrictsBatches.flat().length} addresses without usCongressionalDistrict found`,
-    )
+    if (!addressesWithoutCongressionalDistrictsBatches) {
+      logger.info('No Batches to fill')
+      return
+    }
 
-    for (const addressBatch of addressesWithoutCongressionalDistrictsBatches) {
-      if (addressBatch.length === 0) {
-        logger.info(`No more batches to execute - stopping the cron job`)
-        break
-      }
-
+    for (let i = 0; i < addressesWithoutCongressionalDistrictsBatches.length; i++) {
       await step.run('scripts.backfill-us-congressional-districts', async () => {
+        const addressBatch = addressesWithoutCongressionalDistrictsBatches[i]
+
+        if (!addressBatch.length) {
+          logger.info(`No more addresses to backfill - stopping the cron job`)
+          return
+        }
+
         await backfillUsCongressionalDistricts(addressBatch)
 
         logger.info(
-          `Finished backfilling batch ${batchNum} of ${addressesWithoutCongressionalDistrictsBatches.length} of addresses without usCongressionalDistrict`,
+          `Finished backfilling batch ${i + 1} of ${addressesWithoutCongressionalDistrictsBatches.length} of addresses without usCongressionalDistrict`,
         )
       })
 
       await step.sleep(
-        `script.sleep-${batchNum}`,
+        `script.sleep-backfill-congressional-district-batch-${i + 1}`,
         BACKFILL_US_CONGRESSIONAL_DISTRICTS_SLEEP_INTERVAL,
       )
-
-      batchNum += 1
     }
 
     logger.info('Finished backfilling all batches for the day, stopping the cron job')
