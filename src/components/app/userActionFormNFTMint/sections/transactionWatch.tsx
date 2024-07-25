@@ -71,7 +71,7 @@ export function UserActionFormNFTMintTransactionWatch({
       },
       payload =>
         actionCreateUserActionMintNFT(payload).then(actionResult => {
-          if (actionResult?.user) {
+          if (actionResult && 'user' in actionResult && actionResult.user) {
             identifyUserOnClient(actionResult.user)
           }
           return actionResult

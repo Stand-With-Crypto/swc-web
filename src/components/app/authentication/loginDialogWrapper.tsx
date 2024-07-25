@@ -11,7 +11,9 @@ import {
   ANALYTICS_NAME_LOGIN,
   ANALYTICS_NAME_USER_ACTION_SUCCESS_JOIN_SWC,
 } from '@/components/app/authentication/constants'
+import { GeoGate } from '@/components/app/geoGate'
 import { LazyUpdateUserProfileForm } from '@/components/app/updateUserProfileForm/lazyLoad'
+import { UserActionFormActionUnavailable } from '@/components/app/userActionFormCommon/actionUnavailable'
 import {
   Dialog,
   DialogBody,
@@ -28,6 +30,7 @@ import { useENS } from '@/hooks/useENS'
 import { useSections } from '@/hooks/useSections'
 import { useSession } from '@/hooks/useSession'
 import { fetchReq } from '@/utils/shared/fetchReq'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { apiUrls } from '@/utils/shared/urls'
 import { appendENSHookDataToUser } from '@/utils/web/appendENSHookDataToUser'
 import { getUserSessionIdOnClient } from '@/utils/web/clientUserSessionId'
@@ -212,18 +215,24 @@ export function UnauthenticatedSection({
             {currentSection === LoginSections.LOGIN ? 'Sign in' : 'Finish Profile'}
           </DialogTitle>
         </VisuallyHidden>
-        {currentSection === LoginSections.LOGIN ? (
-          <DialogBody>
-            <LoginSection onLogin={handleLoginSuccess} {...props} />
-          </DialogBody>
-        ) : (
-          <FinishProfileSection
-            onSuccess={() => {
-              setDialogOpen(false)
-              void mutate()
-            }}
-          />
-        )}
+        <GeoGate
+          bypassCountryCheck // For Onchain Summer
+          countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE}
+          unavailableContent={<UserActionFormActionUnavailable />}
+        >
+          {currentSection === LoginSections.LOGIN ? (
+            <DialogBody>
+              <LoginSection onLogin={handleLoginSuccess} {...props} />
+            </DialogBody>
+          ) : (
+            <FinishProfileSection
+              onSuccess={() => {
+                setDialogOpen(false)
+                void mutate()
+              }}
+            />
+          )}
+        </GeoGate>
       </DialogContent>
     </Dialog>
   )
