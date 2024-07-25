@@ -117,7 +117,7 @@ export function TopLevelMetrics({ locale, ...data }: Props & { locale: Supported
                   <p className="text-sm font-normal tracking-normal">
                     {formatted.sumDonations.compactFairshakeAmountUsd} donated to Fairshake, a
                     pro-crypto Super PAC, and {formatted.sumDonations.compactSWCAmountUsd} donated
-                    to Stand With Crypto 501c4.
+                    to the Stand With Crypto 501(c)(4).
                   </p>
                 </TooltipContent>
               </Tooltip>
