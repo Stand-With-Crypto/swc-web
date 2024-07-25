@@ -265,10 +265,16 @@ export function UserActionFormEmailCongressperson({
                 'DTSI Slugs': values.dtsiSlugs,
               },
               payload: { ...values, address },
+              onError: (_, error) => {
+                form.setError('FORM_ERROR', {
+                  message: error.message,
+                })
+                toastGenericError()
+              },
             },
             payload =>
               actionCreateUserActionEmailCongressperson(payload).then(actionResult => {
-                if (actionResult?.user) {
+                if (actionResult && 'user' in actionResult && actionResult.user) {
                   identifyUserOnClient(actionResult.user)
                 }
                 return actionResult
@@ -277,8 +283,6 @@ export function UserActionFormEmailCongressperson({
           if (result.status === 'success') {
             router.refresh()
             onSuccess()
-          } else {
-            toastGenericError()
           }
         }, trackFormSubmissionSyncErrors(ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON))}
       >

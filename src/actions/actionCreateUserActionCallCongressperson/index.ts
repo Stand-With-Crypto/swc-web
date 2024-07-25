@@ -18,12 +18,15 @@ import {
   parseLocalUserFromCookies,
 } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
+import { createCountryCodeValidation } from '@/utils/server/userActionValidation/checkCountryCode'
+import { withValidations } from '@/utils/server/userActionValidation/withValidations'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
 import { generateReferralId } from '@/utils/shared/referralId'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { UserActionCallCampaignName } from '@/utils/shared/userActionCampaigns'
 import { zodAddress } from '@/validation/fields/zodAddress'
 import { zodDTSISlug } from '@/validation/fields/zodDTSISlug'
@@ -52,7 +55,10 @@ const logger = getLogger(`actionCreateUserActionCallCongressperson`)
 
 export const actionCreateUserActionCallCongressperson = withServerActionMiddleware(
   'actionCreateUserActionCallCongressperson',
-  _actionCreateUserActionCallCongressperson,
+  withValidations(
+    [createCountryCodeValidation(DEFAULT_SUPPORTED_COUNTRY_CODE)],
+    _actionCreateUserActionCallCongressperson,
+  ),
 )
 
 async function _actionCreateUserActionCallCongressperson(
