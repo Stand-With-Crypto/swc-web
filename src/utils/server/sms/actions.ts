@@ -12,16 +12,25 @@ import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
 import { smsProvider, SMSProviders } from '@/utils/shared/smsProvider'
 
 export async function optInUser(phoneNumber: string, user: User) {
-  if (user.smsStatus === SMSStatus.OPTED_IN || smsProvider !== SMSProviders.TWILIO) return
+  if (
+    user.smsStatus === SMSStatus.OPTED_OUT ||
+    smsProvider !== SMSProviders.TWILIO ||
+    (user.smsStatus === SMSStatus.OPTED_IN && user.phoneNumber === phoneNumber) // If user already opted in and changes their phone number, we want to send them a new message
+  ) {
+    return
+  }
 
-  await prismaClient.user.updateMany({
-    data: {
-      smsStatus: SMSStatus.OPTED_IN,
-    },
-    where: {
-      phoneNumber,
-    },
-  })
+  // If user opted-out, the only way to opt-back is by sending us a UNSTOP keyword
+  if ([SMSStatus.NOT_OPTED_IN, SMSStatus.OPTED_IN_PENDING_DOUBLE_OPT_IN].includes(user.smsStatus)) {
+    await prismaClient.user.updateMany({
+      data: {
+        smsStatus: SMSStatus.OPTED_IN,
+      },
+      where: {
+        phoneNumber,
+      },
+    })
+  }
 
   await inngest.send({
     name: WELCOME_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,

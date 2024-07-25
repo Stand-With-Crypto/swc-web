@@ -4,7 +4,6 @@ import 'server-only'
 import {
   Address,
   CapitolCanaryInstance,
-  SMSStatus,
   User,
   UserCryptoAddress,
   UserEmailAddress,
@@ -16,7 +15,6 @@ import { getClientAddress } from '@/clientModels/clientAddress'
 import { getClientUserWithENSData } from '@/clientModels/clientUser/clientUser'
 import { getENSDataFromCryptoAddressAndFailGracefully } from '@/data/web3/getENSDataFromCryptoAddress'
 import { CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/capitolCanary/upsertAdvocateInCapitolCanary'
-import { WELCOME_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME } from '@/inngest/functions/sms/welcomeSMSCommunicationJourney'
 import { inngest } from '@/inngest/inngest'
 import { appRouterGetAuthUser } from '@/utils/server/authentication/appRouterGetAuthUser'
 import {
@@ -136,20 +134,7 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
   })
 
   if (hasOptedInToSms && phoneNumber) {
-    // If user already opted in and changes their phone number, we want to send them a welcome message
-    if (
-      user.phoneNumber !== updatedUser.phoneNumber &&
-      updatedUser.smsStatus === SMSStatus.OPTED_IN
-    ) {
-      await inngest.send({
-        name: WELCOME_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
-        data: {
-          phoneNumber,
-        },
-      })
-    } else {
-      await optInUser(phoneNumber, updatedUser)
-    }
+    await optInUser(phoneNumber, user)
   }
 
   await handleCapitolCanaryAdvocateUpsert(updatedUser, primaryUserEmailAddress, user)
