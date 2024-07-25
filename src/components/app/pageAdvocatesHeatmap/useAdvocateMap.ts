@@ -1,7 +1,12 @@
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { UserActionType } from '@prisma/client'
 
 import { STATE_COORDS } from '@/components/app/pageAdvocatesHeatmap/constants'
 import { PublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
+
+interface UseAdvocateMapProps {
+  actions: PublicRecentActivity
+}
 
 export interface MapMarker {
   name: string
@@ -10,7 +15,7 @@ export interface MapMarker {
   datetimeCreated: string
 }
 
-export const createMarkersFromActions = (recentActivity: PublicRecentActivity) => {
+const createMarkersFromActions = (recentActivity: PublicRecentActivity) => {
   const markers: MapMarker[] = []
   const stateCount: Record<string, number> = {}
 
@@ -46,4 +51,41 @@ export const createMarkersFromActions = (recentActivity: PublicRecentActivity) =
   })
 
   return markers
+}
+
+export function useAdvocateMap({ actions }: UseAdvocateMapProps) {
+  const [displayedMarkers, setDisplayedMarkers] = useState<MapMarker[]>([])
+  const [currentActionIndex, setCurrentActionIndex] = useState(5)
+
+  const markers = useMemo(() => createMarkersFromActions(actions), [actions])
+
+  useEffect(() => {
+    const initialMarkers = markers.slice(0, 5)
+    setDisplayedMarkers(initialMarkers)
+    setCurrentActionIndex(5)
+  }, [markers])
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setDisplayedMarkers(prev => {
+        const newMarkers = [...prev]
+        if (currentActionIndex < markers.length) {
+          if (newMarkers.length >= 10) {
+            newMarkers.shift()
+          }
+          newMarkers.push(markers[currentActionIndex])
+          setCurrentActionIndex(currentActionIndex + 1)
+        } else {
+          clearInterval(intervalId)
+        }
+        return newMarkers
+      })
+    }, 2000)
+
+    return () => clearInterval(intervalId)
+  }, [currentActionIndex, markers])
+
+  return {
+    markers: displayedMarkers,
+  }
 }
