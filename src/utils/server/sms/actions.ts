@@ -9,10 +9,10 @@ import { inngest } from '@/inngest/inngest'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getServerAnalytics } from '@/utils/server/serverAnalytics'
 import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
-import { smsProvider } from '@/utils/shared/smsProvider'
+import { smsProvider, SMSProviders } from '@/utils/shared/smsProvider'
 
 export async function optInUser(phoneNumber: string, user: User) {
-  if (user.smsStatus === SMSStatus.OPTED_IN || smsProvider !== 'twilio') return
+  if (user.smsStatus === SMSStatus.OPTED_IN || smsProvider !== SMSProviders.TWILIO) return
 
   await prismaClient.user.updateMany({
     data: {
@@ -41,7 +41,7 @@ export async function optInUser(phoneNumber: string, user: User) {
 }
 
 export async function optOutUser(phoneNumber: string, isSWCKeyword: boolean, user?: User) {
-  if (user?.smsStatus === SMSStatus.OPTED_OUT || smsProvider !== 'twilio') return
+  if (user?.smsStatus === SMSStatus.OPTED_OUT || smsProvider !== SMSProviders.TWILIO) return
 
   await prismaClient.user.updateMany({
     data: {
@@ -75,7 +75,7 @@ export async function optOutUser(phoneNumber: string, isSWCKeyword: boolean, use
 }
 
 export async function optUserBackIn(phoneNumber: string, user?: User) {
-  if (user?.smsStatus !== SMSStatus.OPTED_OUT || smsProvider !== 'twilio') return
+  if (user?.smsStatus !== SMSStatus.OPTED_OUT || smsProvider !== SMSProviders.TWILIO) return
 
   await prismaClient.user.updateMany({
     data: {
