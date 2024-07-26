@@ -16,11 +16,14 @@ import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { appRouterGetThirdwebAuthUser } from '@/utils/server/thirdweb/appRouterGetThirdwebAuthUser'
 import { thirdwebBaseRPCClient } from '@/utils/server/thirdweb/thirdwebRPCClients'
+import { createCountryCodeValidation } from '@/utils/server/userActionValidation/checkCountryCode'
+import { withValidations } from '@/utils/server/userActionValidation/withValidations'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
 import { fromBigNumber } from '@/utils/shared/bigNumber'
 import { getCryptoToFiatConversion } from '@/utils/shared/getCryptoToFiatConversion'
 import { getLogger } from '@/utils/shared/logger'
 import { NFTSlug } from '@/utils/shared/nft'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { UserActionNftMintCampaignName } from '@/utils/shared/userActionCampaigns'
 
 const createActionMintNFTInputValidationSchema = object({
@@ -41,7 +44,10 @@ const contractMetadata = NFT_SLUG_BACKEND_METADATA[NFTSlug.STAND_WITH_CRYPTO_SUP
 
 export const actionCreateUserActionMintNFT = withServerActionMiddleware(
   'actionCreateUserActionMintNFT',
-  _actionCreateUserActionMintNFT,
+  withValidations(
+    [createCountryCodeValidation(DEFAULT_SUPPORTED_COUNTRY_CODE)],
+    _actionCreateUserActionMintNFT,
+  ),
 )
 
 async function _actionCreateUserActionMintNFT(input: CreateActionMintNFTInput) {

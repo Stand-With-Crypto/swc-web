@@ -22,10 +22,13 @@ import {
   parseLocalUserFromCookies,
 } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
+import { createCountryCodeValidation } from '@/utils/server/userActionValidation/checkCountryCode'
+import { withValidations } from '@/utils/server/userActionValidation/withValidations'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { UserActionVoterRegistrationCampaignName } from '@/utils/shared/userActionCampaigns'
 import { zodUsaState } from '@/validation/fields/zodUsaState'
 
@@ -49,7 +52,10 @@ interface SharedDependencies {
 
 export const actionCreateUserActionVoterRegistration = withServerActionMiddleware(
   'actionCreateUserActionVoterRegistration',
-  _actionCreateUserActionVoterRegistration,
+  withValidations(
+    [createCountryCodeValidation(DEFAULT_SUPPORTED_COUNTRY_CODE)],
+    _actionCreateUserActionVoterRegistration,
+  ),
 )
 
 async function _actionCreateUserActionVoterRegistration(input: CreateActionVoterRegistrationInput) {

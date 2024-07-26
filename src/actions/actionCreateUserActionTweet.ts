@@ -24,10 +24,13 @@ import {
   ServerLocalUser,
 } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
+import { createCountryCodeValidation } from '@/utils/server/userActionValidation/checkCountryCode'
+import { withValidations } from '@/utils/server/userActionValidation/withValidations'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns'
 
 const logger = getLogger(`actionCreateUserActionTweet`)
@@ -39,11 +42,15 @@ type UserWithRelations = User & {
 
 export const actionCreateUserActionTweet = withServerActionMiddleware(
   'actionCreateUserActionTweet',
-  _actionCreateUserActionTweet,
+  withValidations(
+    [createCountryCodeValidation(DEFAULT_SUPPORTED_COUNTRY_CODE)],
+    _actionCreateUserActionTweet,
+  ),
 )
 
 async function _actionCreateUserActionTweet() {
   logger.info('triggered')
+
   const { triggerRateLimiterAtMostOnce } = getRequestRateLimiter({
     context: 'unauthenticated',
   })
