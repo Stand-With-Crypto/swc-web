@@ -27,8 +27,8 @@ export function DelayedRecentActivityWithMap(props: {
     { refreshManually: true, revalidateOnFocus: false },
   )
   const ref = useRef(null)
-  const isInVew = useInView(ref, { margin: '-50%', once: true })
-  const visibleActions = recentActivity.data.slice(isInVew ? 0 : 1, recentActivity.data.length)
+  const isInView = useInView(ref, { margin: '-50%', once: true })
+  const visibleActions = recentActivity.data.slice(isInView ? 0 : 1, recentActivity.data.length)
   const urls = useIntlUrls()
   const isMobile = useIsMobile()
 
