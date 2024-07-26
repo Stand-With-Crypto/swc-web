@@ -40,58 +40,55 @@ export const backfillCongressionalDistrictCronJob = inngest.createFunction(
   },
   async ({ step }) => {
     let currentCursor: string | undefined = undefined
+    if (!DATABASE_QUERY_LIMIT) {
+      logger.error('DATABASE_QUERY_LIMIT is not set')
+      return null
+    }
+    const numQueries = Math.ceil(
+      MAX_US_CONGRESSIONAL_DISTRICTS_BACKFILL_COUNT / DATABASE_QUERY_LIMIT,
+    )
 
-    const addressesWithoutCongressionalDistrictsBatches = await step.run(
-      'script.get-addresses',
-      async () => {
-        if (!DATABASE_QUERY_LIMIT) return null
+    const addressesWithoutCongressionalDistricts: Pick<
+      Address,
+      'id' | 'formattedDescription' | 'countryCode'
+    >[][] = []
 
-        const numQueries = Math.ceil(
-          MAX_US_CONGRESSIONAL_DISTRICTS_BACKFILL_COUNT / DATABASE_QUERY_LIMIT,
-        )
+    for (let i = 1; i <= numQueries; i++) {
+      const addresses = await step.run('script.get-addresses', async () => {
+        const rowsToTake =
+          i * DATABASE_QUERY_LIMIT > MAX_US_CONGRESSIONAL_DISTRICTS_BACKFILL_COUNT
+            ? MAX_US_CONGRESSIONAL_DISTRICTS_BACKFILL_COUNT - DATABASE_QUERY_LIMIT * (i - 1)
+            : DATABASE_QUERY_LIMIT
 
-        const addressesWithoutCongressionalDistricts: Omit<
-          Address,
-          'datetimeCreated' | 'datetimeUpdated'
-        >[][] = []
+        return await prismaClient.address.findMany({
+          select: { id: true, formattedDescription: true, countryCode: true },
+          where: { usCongressionalDistrict: null, countryCode: 'US' },
+          cursor: currentCursor ? { id: currentCursor } : undefined,
+          skip: currentCursor ? 1 : 0,
+          take: rowsToTake,
+        })
+      })
 
-        for (let i = 1; i <= numQueries; i++) {
-          const rowsToTake =
-            i * DATABASE_QUERY_LIMIT > MAX_US_CONGRESSIONAL_DISTRICTS_BACKFILL_COUNT
-              ? MAX_US_CONGRESSIONAL_DISTRICTS_BACKFILL_COUNT - DATABASE_QUERY_LIMIT * (i - 1)
-              : DATABASE_QUERY_LIMIT
+      if (!addresses.length) {
+        break
+      }
 
-          const addresses = await prismaClient.address.findMany({
-            where: { usCongressionalDistrict: null, countryCode: 'US' },
-            cursor: currentCursor ? { id: currentCursor } : undefined,
-            skip: currentCursor ? 1 : 0,
-            take: rowsToTake,
-          })
+      currentCursor = addresses[addresses.length - 1].id
+      addressesWithoutCongressionalDistricts.push(addresses)
 
-          if (!addresses.length) {
-            break
-          }
+      if (addresses.length < DATABASE_QUERY_LIMIT) {
+        break
+      }
+    }
+    const flatAddressesWithoutCongressionalDistricts = addressesWithoutCongressionalDistricts.flat()
 
-          currentCursor = addresses[addresses.length - 1].id
-          addressesWithoutCongressionalDistricts.push(addresses)
+    logger.info(
+      `${flatAddressesWithoutCongressionalDistricts.length} addresses without usCongressionalDistrict found`,
+    )
 
-          if (addresses.length < DATABASE_QUERY_LIMIT) {
-            break
-          }
-        }
-
-        const flatAddressesWithoutCongressionalDistricts =
-          addressesWithoutCongressionalDistricts.flat()
-
-        logger.info(
-          `${flatAddressesWithoutCongressionalDistricts.length} addresses without usCongressionalDistrict found`,
-        )
-
-        return chunk(
-          flatAddressesWithoutCongressionalDistricts,
-          BACKFILL_US_CONGRESSIONAL_DISTRICTS_BATCH_SIZE,
-        )
-      },
+    const addressesWithoutCongressionalDistrictsBatches = chunk(
+      flatAddressesWithoutCongressionalDistricts,
+      BACKFILL_US_CONGRESSIONAL_DISTRICTS_BATCH_SIZE,
     )
 
     if (!addressesWithoutCongressionalDistrictsBatches) {
@@ -126,7 +123,10 @@ export const backfillCongressionalDistrictCronJob = inngest.createFunction(
 )
 
 async function backfillUsCongressionalDistricts(
-  addressesWithoutCongressionalDistricts: Omit<Address, 'datetimeCreated' | 'datetimeUpdated'>[],
+  addressesWithoutCongressionalDistricts: Pick<
+    Address,
+    'id' | 'formattedDescription' | 'countryCode'
+  >[],
 ) {
   for (const address of addressesWithoutCongressionalDistricts) {
     let usCongressionalDistrict: Awaited<
