@@ -65,7 +65,7 @@ const createMarkersFromActions = (recentActivity: PublicRecentActivity): MapMark
   return markers
 }
 
-const MAX_MARKERS = 10
+const MAX_MARKERS = 20
 const ADVOCATE_MAP_INTERVAL = 2000
 
 let STARTING_MARKERS = 5
