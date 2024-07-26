@@ -1,18 +1,21 @@
 import { useEffect, useMemo, useState } from 'react'
 import { UserActionType } from '@prisma/client'
 
-import { STATE_COORDS } from '@/components/app/pageAdvocatesHeatmap/constants'
+import { ADVOCATES_ACTIONS, STATE_COORDS } from '@/components/app/pageAdvocatesHeatmap/constants'
 import { PublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
+import { generateUserSessionId } from '@/utils/shared/userSessionId'
 
 interface UseAdvocateMapProps {
   actions: PublicRecentActivity
 }
 
 export interface MapMarker {
+  id: string
   name: string
   coordinates: [number, number]
   actionType: UserActionType
   datetimeCreated: string
+  iconType: (typeof ADVOCATES_ACTIONS)[keyof typeof ADVOCATES_ACTIONS]
 }
 
 const createMarkersFromActions = (recentActivity: PublicRecentActivity): MapMarker[] => {
@@ -40,11 +43,20 @@ const createMarkersFromActions = (recentActivity: PublicRecentActivity): MapMark
           stateCount[state] = 1
         }
 
+        const currentIconActionType =
+          ADVOCATES_ACTIONS[item.actionType as keyof typeof ADVOCATES_ACTIONS]
+
+        if (!currentIconActionType) {
+          return
+        }
+
         markers.push({
+          id: generateUserSessionId(),
           name: state,
           coordinates: [coordinates[0] + offsetX, coordinates[1] + offsetY],
           actionType: item.actionType,
           datetimeCreated: item.datetimeCreated,
+          iconType: currentIconActionType,
         })
       }
     }

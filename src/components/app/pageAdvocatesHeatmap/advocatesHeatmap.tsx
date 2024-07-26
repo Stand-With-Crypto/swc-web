@@ -1,19 +1,17 @@
 'use client'
 
-import { MouseEvent, useCallback, useState } from 'react'
+import { FC, MouseEvent, useCallback, useState } from 'react'
 import { ComposableMap, Geographies, Geography } from 'react-simple-maps'
 import { useMedia, useOrientation } from 'react-use'
 import { AnimatePresence } from 'framer-motion'
 
 import { AdvocateHeatmapActionList } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapActionList'
 import { ActionInfoTooltip } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapActionTooltip'
+import { IconProps } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapIcons'
 import { AdvocateHeatmapMarker } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapMarker'
 import { AdvocateHeatmapOdometer } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapOdometer'
 import { TotalAdvocatesPerStateTooltip } from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmapTooltip'
-import {
-  ADVOCATES_ACTIONS,
-  ADVOCATES_HEATMAP_GEO_URL,
-} from '@/components/app/pageAdvocatesHeatmap/constants'
+import { ADVOCATES_HEATMAP_GEO_URL } from '@/components/app/pageAdvocatesHeatmap/constants'
 import { MapMarker, useAdvocateMap } from '@/components/app/pageAdvocatesHeatmap/useAdvocateMap'
 import { NextImage } from '@/components/ui/image'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -224,16 +222,9 @@ const MapComponent = ({
                 />
               ))}
               <AnimatePresence>
-                {markers.map(({ name, coordinates, actionType, datetimeCreated }) => {
-                  const currentIconActionType =
-                    ADVOCATES_ACTIONS[actionType as keyof typeof ADVOCATES_ACTIONS]
-
-                  if (!currentIconActionType) {
-                    return null
-                  }
-
-                  const currentActionInfo = `Someone in ${name} ${currentIconActionType.labelActionTooltip}`
-                  const IconComponent = currentIconActionType.icon
+                {markers.map(({ id, name, coordinates, actionType, iconType }) => {
+                  const currentActionInfo = `Someone in ${name} ${iconType?.labelActionTooltip ?? ''}`
+                  const IconComponent = iconType?.icon as FC<IconProps>
 
                   return (
                     <AdvocateHeatmapMarker
@@ -242,7 +233,7 @@ const MapComponent = ({
                       currentActionInfo={currentActionInfo}
                       handleActionMouseLeave={handleActionMouseLeave}
                       handleActionMouseOver={handleActionMouseOver}
-                      key={`${name}-${datetimeCreated}-${coordinates.toString()}`}
+                      key={`${name}-${actionType}-${id}`}
                     />
                   )
                 })}
