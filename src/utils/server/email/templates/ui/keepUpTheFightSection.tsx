@@ -13,13 +13,16 @@ import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTempla
 export interface KeepUpTheFightSectionProps {
   completedActionTypes?: EmailActiveActions[]
   hrefSearchParams?: Record<string, unknown>
+  hiddenActions?: EmailActiveActions[]
 }
 
 export function KeepUpTheFightSection({
   completedActionTypes = [],
   hrefSearchParams = {},
+  hiddenActions = [],
 }: KeepUpTheFightSectionProps) {
   const actionsMetadata = Object.entries(ACTIONS_METADATA_BY_TYPE)
+    .filter(([type]) => !hiddenActions.includes(type))
     .map(([type, metadata]) => ({
       ...metadata,
       hasCompleted: completedActionTypes.includes(type),

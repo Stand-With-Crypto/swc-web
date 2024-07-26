@@ -55,6 +55,7 @@ export default function FinishSettingUpProfileReminderEmail({
 
       <Section className="mt-4 text-center">
         <Button
+          fullWidth="mobile"
           href={buildTemplateInternalUrl('/profile', {
             hasOpenUpdateUserProfileForm: true,
             ...hydratedHrefSearchParams,

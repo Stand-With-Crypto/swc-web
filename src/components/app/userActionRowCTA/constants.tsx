@@ -3,18 +3,23 @@
 import { UserActionType } from '@prisma/client'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
+import { GeoGate } from '@/components/app/geoGate'
 import { CALL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormCallCongressperson/constants'
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
+import { UserActionFormActionUnavailable } from '@/components/app/userActionFormCommon/actionUnavailable'
 import { EMAIL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormEmailCongressperson/constants'
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
 import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/dialog'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
 import { UserActionRowCTAProps } from '@/components/app/userActionRowCTA'
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { InternalLink } from '@/components/ui/link'
+import { useDialog } from '@/hooks/useDialog'
 import { useLocale } from '@/hooks/useLocale'
 import { ActiveClientUserActionType } from '@/utils/shared/activeUserAction'
 import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns'
 import { getYourPoliticianCategoryShortDisplayName } from '@/utils/shared/yourPoliticianCategory'
@@ -82,13 +87,30 @@ export const USER_ACTION_ROW_CTA_INFO: Record<
     canBeTriggeredMultipleTimes: true,
     WrapperComponent: ({ children }) => {
       const locale = useLocale()
+      const dialogProps = useDialog({
+        analytics: 'User Action Donate Unavailable',
+      })
       return (
-        <InternalLink
-          className="block text-fontcolor hover:no-underline"
-          href={getIntlUrls(locale).donate()}
+        <GeoGate
+          countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE}
+          unavailableContent={
+            <Dialog {...dialogProps}>
+              <DialogTrigger asChild>{children}</DialogTrigger>
+              <DialogContent className="max-w-3xl">
+                <UserActionFormActionUnavailable
+                  onConfirm={() => dialogProps?.onOpenChange?.(false)}
+                />
+              </DialogContent>
+            </Dialog>
+          }
         >
-          {children}
-        </InternalLink>
+          <InternalLink
+            className="block text-fontcolor hover:no-underline"
+            href={getIntlUrls(locale).donate()}
+          >
+            {children}
+          </InternalLink>
+        </GeoGate>
       )
     },
   },

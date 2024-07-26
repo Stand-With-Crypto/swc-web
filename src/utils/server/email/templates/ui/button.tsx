@@ -20,18 +20,24 @@ export const buttonVariantsConfig = {
     false: '',
     true: 'px-0 py-0',
   },
+  fullWidth: {
+    false: '',
+    true: 'px-0 w-full',
+    mobile: 'px-0 w-full md:px-6 md:w-auto',
+  },
   color: {
     default: '',
     muted: 'text-muted-foreground',
     'primary-cta': 'text-primary-cta',
   },
 } satisfies Record<string, Record<string, ClassValue>>
-const buttonVariants = cva('rounded-full text-sm font-medium px-6 py-3 ', {
+const buttonVariants = cva('rounded-full text-sm font-medium px-6 py-3', {
   variants: buttonVariantsConfig,
   defaultVariants: {
     variant: 'default',
     color: 'default',
     noPadding: false,
+    fullWidth: false,
   },
 })
 
@@ -41,13 +47,14 @@ export function Button({
   variant,
   noPadding,
   color,
+  fullWidth,
   className,
   ...props
 }: React.PropsWithChildren<ButtonProps>) {
   return (
     <EmailButton
       {...props}
-      className={cn(buttonVariants({ variant, color, noPadding, className }))}
+      className={cn(buttonVariants({ variant, color, noPadding, className, fullWidth }))}
     />
   )
 }

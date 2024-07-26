@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button'
 import { UseSectionsReturn } from '@/hooks/useSections'
 import { openWindow } from '@/utils/shared/openWindow'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
+import { toastGenericError } from '@/utils/web/toastUtils'
 
 interface ShareOnXProps extends UseSectionsReturn<SECTIONS_NAMES> {}
 
@@ -28,11 +29,12 @@ export function ShareOnX(props: ShareOnXProps) {
           'User Action Type': UserActionType.TWEET,
         },
         payload: undefined,
+        onError: toastGenericError,
       },
       () => actionCreateUserActionTweet(),
-    )
-
-    goToSection(SECTIONS_NAMES.SUCCESS)
+    ).then(result => {
+      if (result.status === 'success') goToSection(SECTIONS_NAMES.SUCCESS)
+    })
 
     openWindow('https://x.com/standwithcrypto', target, `noopener`)
   }

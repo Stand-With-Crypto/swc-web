@@ -3,6 +3,8 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 
+import { GeoGate } from '@/components/app/geoGate'
+import { UserActionFormActionUnavailable } from '@/components/app/userActionFormCommon/actionUnavailable'
 import {
   UserActionFormLiveEvent,
   UserActionFormLiveEventProps,
@@ -13,6 +15,7 @@ import { trackDialogOpen } from '@/components/ui/dialog/trackDialogOpen'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { usePreventOverscroll } from '@/hooks/usePreventOverscroll'
 import { useSession } from '@/hooks/useSession'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 
 export function UserActionFormLiveEventDeeplinkWrapper({
   slug,
@@ -33,10 +36,15 @@ export function UserActionFormLiveEventDeeplinkWrapper({
   }
 
   return (
-    <UserActionFormLiveEvent
-      isLoggedIn={isLoggedIn}
-      onClose={() => router.replace(urls.home())}
-      slug={slug}
-    />
+    <GeoGate
+      countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE}
+      unavailableContent={<UserActionFormActionUnavailable />}
+    >
+      <UserActionFormLiveEvent
+        isLoggedIn={isLoggedIn}
+        onClose={() => router.replace(urls.home())}
+        slug={slug}
+      />
+    </GeoGate>
   )
 }
