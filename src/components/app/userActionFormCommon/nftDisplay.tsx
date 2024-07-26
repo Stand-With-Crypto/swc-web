@@ -51,26 +51,34 @@ export function NFTDisplay({
     return <LoadingOverlay size="sm" />
   }
 
-  const image = isThirdwebMedia ? (
-    <MediaRenderer
-      alt={alt}
-      client={thirdwebClient}
-      height={`${NFT_IMAGE_SIZE_BY_VARIANT[size]}px`}
-      width={`${NFT_IMAGE_SIZE_BY_VARIANT[size]}px`}
-      {...props}
-    />
-  ) : raw ? (
-    <img alt={alt} {...props} />
-  ) : (
-    <NextImage
-      alt={alt}
-      {...props}
-      height={NFT_IMAGE_SIZE_BY_VARIANT[size]}
-      width={NFT_IMAGE_SIZE_BY_VARIANT[size]}
-    />
-  )
+  function getNFTImageComponent() {
+    if (isThirdwebMedia) {
+      return (
+        <MediaRenderer
+          alt={alt}
+          client={thirdwebClient}
+          height={`${NFT_IMAGE_SIZE_BY_VARIANT[size]}px`}
+          width={`${NFT_IMAGE_SIZE_BY_VARIANT[size]}px`}
+          {...props}
+        />
+      )
+    }
 
-  return <div className={nftDisplayVariants({ size, className })}>{image}</div>
+    if (raw) {
+      return <img alt={alt} {...props} />
+    }
+
+    return (
+      <NextImage
+        alt={alt}
+        {...props}
+        height={NFT_IMAGE_SIZE_BY_VARIANT[size]}
+        width={NFT_IMAGE_SIZE_BY_VARIANT[size]}
+      />
+    )
+  }
+
+  return <div className={nftDisplayVariants({ size, className })}>{getNFTImageComponent()}</div>
 }
 
 export function NFTDisplaySkeleton({
