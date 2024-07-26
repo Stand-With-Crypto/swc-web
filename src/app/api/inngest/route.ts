@@ -1,6 +1,7 @@
 import { serve } from 'inngest/next'
 
 import { airdropNFTWithInngest } from '@/inngest/functions/airdropNFT/airdropNFT'
+import { backfillCongressionalDistrictCronJob } from '@/inngest/functions/backfillCongressionalDistrictCronJob'
 import { backfillNFTWithInngest } from '@/inngest/functions/backfillNFT'
 import { backfillNFTInngestCronJob } from '@/inngest/functions/backfillNFTCronJob'
 import {
@@ -55,6 +56,7 @@ export const { GET, POST, PUT } = serve({
     auditUsersTotalDonationAmountUsdInngestAuditBatchOfUsers,
     initialSignUpUserCommunicationJourney,
     backfillSMSStatusField,
+    backfillCongressionalDistrictCronJob,
     welcomeSMSCommunicationJourney,
     goodbyeSMSCommunicationJourney,
     unstopConfirmationSMSCommunicationJourney,

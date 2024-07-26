@@ -2,6 +2,7 @@
 import 'server-only'
 
 import { User, UserActionType, UserInformationVisibility } from '@prisma/client'
+import * as Sentry from '@sentry/nextjs'
 import { nativeEnum, object, z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
@@ -21,6 +22,7 @@ import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { createCountryCodeValidation } from '@/utils/server/userActionValidation/checkCountryCode'
 import { withValidations } from '@/utils/server/userActionValidation/withValidations'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
+import { maybeGetCongressionalDistrictFromAddress } from '@/utils/shared/getCongressionalDistrictFromAddress'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
@@ -109,6 +111,39 @@ async function _actionCreateUserActionCallCongressperson(
     })
     await beforeFinish()
     return { user: getClientUser(user) }
+  }
+
+  try {
+    const usCongressionalDistrict = await maybeGetCongressionalDistrictFromAddress(
+      validatedInput.data.address,
+    )
+    if ('notFoundReason' in usCongressionalDistrict) {
+      logger.error(
+        `No usCongressionalDistrict found for address ${validatedInput.data.address.formattedDescription} with code ${usCongressionalDistrict.notFoundReason}`,
+      )
+      if (['CIVIC_API_DOWN', 'UNEXPECTED_ERROR'].includes(usCongressionalDistrict.notFoundReason)) {
+        Sentry.captureMessage(
+          `No usCongressionalDistrict found for address ${validatedInput.data.address.formattedDescription}`,
+          {
+            extra: {
+              domain: 'actionCreateUserActionCallCongressperson',
+              notFoundReason: usCongressionalDistrict.notFoundReason,
+            },
+          },
+        )
+      }
+    }
+    if ('districtNumber' in usCongressionalDistrict) {
+      validatedInput.data.address.usCongressionalDistrict = `${usCongressionalDistrict.districtNumber}`
+    }
+  } catch (error) {
+    logger.error('error getting `usCongressionalDistrict`:' + error)
+    Sentry.captureException(error, {
+      tags: {
+        domain: 'actionCreateUserActionCallCongressperson',
+        message: 'error getting usCongressionalDistrict',
+      },
+    })
   }
 
   await triggerRateLimiterAtMostOnce()

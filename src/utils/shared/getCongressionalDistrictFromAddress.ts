@@ -1,3 +1,4 @@
+import { Address } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { isInteger, isObject } from 'lodash-es'
 
@@ -74,6 +75,26 @@ export type GetCongressionalDistrictFromAddressParams = {
   stateCode?: USStateCode
 }
 
+export async function maybeGetCongressionalDistrictFromAddress(
+  address?: Pick<Address, 'countryCode' | 'formattedDescription'> | null,
+  params?: GetCongressionalDistrictFromAddressParams,
+) {
+  if (!address) {
+    return { notFoundReason: 'USER_WITHOUT_ADDRESS' as const }
+  }
+
+  if (address.countryCode !== 'US') {
+    return { notFoundReason: 'NOT_USA_ADDRESS' as const }
+  }
+
+  const usCongressionalDistrict = await getCongressionalDistrictFromAddress(
+    address.formattedDescription,
+    params,
+  )
+
+  return usCongressionalDistrict
+}
+
 export async function getCongressionalDistrictFromAddress(
   address?: string | null,
   params?: GetCongressionalDistrictFromAddressParams,
@@ -84,8 +105,7 @@ export async function getCongressionalDistrictFromAddress(
     return { notFoundReason: 'CIVIC_API_DOWN' as const }
   }
   if ('error' in result) {
-    const returned = { notFoundReason: 'NOT_USA_ADDRESS' as const }
-    return returned
+    return { notFoundReason: 'NOT_USA_ADDRESS' as const }
   }
 
   // Explicit check if the address is in a state with no congressional districts since Civic API
