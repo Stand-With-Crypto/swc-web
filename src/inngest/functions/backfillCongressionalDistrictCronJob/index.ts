@@ -40,8 +40,10 @@ export const backfillCongressionalDistrictCronJob = inngest.createFunction(
   },
   async ({ step }) => {
     let currentCursor: string | undefined = undefined
-    if (!DATABASE_QUERY_LIMIT) return null
-
+    if (!DATABASE_QUERY_LIMIT) {
+      logger.error('DATABASE_QUERY_LIMIT is not set')
+      return null
+    }
     const numQueries = Math.ceil(
       MAX_US_CONGRESSIONAL_DISTRICTS_BACKFILL_COUNT / DATABASE_QUERY_LIMIT,
     )
