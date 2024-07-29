@@ -13,11 +13,9 @@ import { AIRDROP_NFT_ETH_TRANSACTION_FEE_THRESHOLD } from '@/utils/shared/airdro
 import { getLogger } from '@/utils/shared/logger'
 import { NFTSlug } from '@/utils/shared/nft'
 
-// This is the milliseconds to wait before processing the next batch of user actions.
 const BACKFILL_NFT_INNGEST_CRON_JOB_AIRDROP_SLEEP_INTERVAL =
   Number(process.env.BACKFILL_NFT_INNGEST_CRON_JOB_AIRDROP_SLEEP_INTERVAL) || 10000 // 10 seconds.
 
-// This is the number of user actions to process in a single batch.
 const BACKFILL_NFT_INNGEST_CRON_JOB_AIRDROP_BATCH_SIZE =
   Number(process.env.BACKFILL_NFT_INNGEST_CRON_JOB_AIRDROP_BATCH_SIZE) || 20
 
@@ -73,7 +71,6 @@ export const backfillFailedNFT = inngest.createFunction(
     let stopMessage
 
     for (const failedMintsBatch of failedMintsBatches) {
-      // Check if the current wallet balances are low.
       const walletsWithLowBalances = await step.run(
         `script.fetch-current-wallet-balances-${batchNum}`,
         async () => {
@@ -92,7 +89,6 @@ export const backfillFailedNFT = inngest.createFunction(
         break
       }
 
-      // Check if the current airdrop transaction fee exceeds the threshold.
       const currentAirdropTransactionFee = await step.run(
         `script.fetch-airdrop-transaction-fee-${batchNum}`,
         async () => {
@@ -131,7 +127,6 @@ export const backfillFailedNFT = inngest.createFunction(
 
       batchNum += 1
 
-      // Sleep for the interval duration.
       await step.sleep(
         `script.sleep-${batchNum}`,
         BACKFILL_NFT_INNGEST_CRON_JOB_AIRDROP_SLEEP_INTERVAL,
