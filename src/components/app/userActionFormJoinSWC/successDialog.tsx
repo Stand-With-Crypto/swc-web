@@ -40,7 +40,7 @@ export function UserActionFormJoinSWCSuccessDialog(props: UserActionFormJoinSWCS
 
   return (
     <Dialog {...dialogProps}>
-      <DialogContent className="max-w-3xl">
+      <DialogContent a11yTitle="Joined Stand With Crypto" className="max-w-3xl">
         <div className="space-y-6">
           <UserActionFormJoinSWCSuccess />
 

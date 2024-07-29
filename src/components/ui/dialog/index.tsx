@@ -12,6 +12,7 @@ import {
   dialogFooterCTAStyles,
   dialogOverlayStyles,
 } from '@/components/ui/dialog/styles'
+import { VisuallyHidden } from '@/components/ui/visually-hidden'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { cn } from '@/utils/web/cn'
 import { PrimitiveComponentAnalytics } from '@/utils/web/primitiveComponentAnalytics'
@@ -50,6 +51,7 @@ interface DialogContentProps
   padding?: boolean
   closeClassName?: string
   forceAutoFocus?: boolean
+  a11yTitle: string
 }
 const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
@@ -63,6 +65,7 @@ const DialogContent = React.forwardRef<
       forceAutoFocus = false,
       onOpenAutoFocus,
       closeClassName = '',
+      a11yTitle,
       ...props
     },
     ref,
@@ -77,6 +80,10 @@ const DialogContent = React.forwardRef<
           ref={ref}
           {...props}
         >
+          <VisuallyHidden>
+            <DialogTitle>{a11yTitle}</DialogTitle>
+          </VisuallyHidden>
+
           {children}
           <DialogPrimitive.Close className={cn(dialogCloseStyles, closeClassName)} tabIndex={-1}>
             <X size={20} />

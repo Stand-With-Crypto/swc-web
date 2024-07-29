@@ -75,7 +75,11 @@ export function Combobox<T>({
     return (
       <Dialog analytics={wrappedAnalytics} onOpenChange={setOpen} open={open}>
         <DialogTrigger asChild>{formatPopoverTrigger({ value, open })}</DialogTrigger>
-        <DialogContent className="min-h-[260px] p-0 pt-10" forceAutoFocus>
+        <DialogContent
+          a11yTitle="Search address"
+          className="min-h-[260px] p-0 pt-10"
+          forceAutoFocus
+        >
           <StatusList
             setOpen={setOpen}
             {...{

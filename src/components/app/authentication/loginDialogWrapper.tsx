@@ -209,12 +209,10 @@ export function UnauthenticatedSection({
   return (
     <Dialog {...dialogProps} onOpenChange={setDialogOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="max-w-l w-full">
-        <VisuallyHidden>
-          <DialogTitle>
-            {currentSection === LoginSections.LOGIN ? 'Sign in' : 'Finish Profile'}
-          </DialogTitle>
-        </VisuallyHidden>
+      <DialogContent
+        a11yTitle={currentSection === LoginSections.LOGIN ? 'Sign in' : 'Finish Profile'}
+        className="max-w-l w-full"
+      >
         <GeoGate
           bypassCountryCheck // For Onchain Summer
           countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE}
