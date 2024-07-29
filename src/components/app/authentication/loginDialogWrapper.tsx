@@ -14,16 +14,9 @@ import {
 import { GeoGate } from '@/components/app/geoGate'
 import { LazyUpdateUserProfileForm } from '@/components/app/updateUserProfileForm/lazyLoad'
 import { UserActionFormActionUnavailable } from '@/components/app/userActionFormCommon/actionUnavailable'
-import {
-  Dialog,
-  DialogBody,
-  DialogContent,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog'
+import { Dialog, DialogBody, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { Skeleton } from '@/components/ui/skeleton'
-import { VisuallyHidden } from '@/components/ui/visually-hidden'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useDialog } from '@/hooks/useDialog'
 import { useENS } from '@/hooks/useENS'
