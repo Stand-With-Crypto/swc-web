@@ -28,6 +28,8 @@ const logger = getLogger('backfillFailedNFTCronJob')
 
 interface BackfillFailedNFTPayload {
   limit?: number
+  failed: boolean
+  timedout: boolean
 }
 
 export const backfillFailedNFT = inngest.createFunction(
@@ -41,13 +43,16 @@ export const backfillFailedNFT = inngest.createFunction(
     event: BACKFILL_FAILED_NFT_INNGEST_EVENT_NAME,
   },
   async ({ step, event }) => {
-    const { limit } = event.data as BackfillFailedNFTPayload
+    const { limit, failed, timedout } = event.data as BackfillFailedNFTPayload
 
     const failedMintsBatches = await step.run('script.fetch-failed-mints', async () => {
       const failedMints = await prismaClient.nFTMint.findMany({
         where: {
           status: {
-            in: [NFTMintStatus.FAILED, NFTMintStatus.TIMEDOUT],
+            in: [
+              ...(failed ? [NFTMintStatus.FAILED] : []),
+              ...(timedout ? [NFTMintStatus.TIMEDOUT] : []),
+            ],
           },
         },
         take: limit,
@@ -119,7 +124,7 @@ export const backfillFailedNFT = inngest.createFunction(
 
             return inngest.send({
               name: AIRDROP_NFT_INNGEST_EVENT_NAME,
-              payload,
+              data: payload,
             })
           }),
         ),
