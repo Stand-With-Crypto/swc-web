@@ -31,5 +31,5 @@ export function useENS() {
   const { user } = useThirdwebAuthUser()
   const address = user?.address
 
-  return useSWR(address, async () => await getData(address))
+  return useSWR(address, getData)
 }

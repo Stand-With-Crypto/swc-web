@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import * as Sentry from '@sentry/nextjs'
 import { isPlainObject } from 'lodash-es'
 import { getContract } from 'thirdweb'
@@ -21,11 +21,14 @@ export function useSendMintNFTTransaction({
   contractAddress,
   quantity,
 }: UseSendMintNFTTransactionOptions) {
-  const contract = getContract({
-    address: contractAddress,
-    client: thirdwebClient,
-    chain: base,
-  })
+  const contract = useMemo(() => {
+    return getContract({
+      address: contractAddress,
+      client: thirdwebClient,
+      chain: base,
+    })
+  }, [contractAddress])
+
   const account = useActiveAccount()
 
   const [transactionHash, setTransactionHash] = React.useState<string | null>(null)
