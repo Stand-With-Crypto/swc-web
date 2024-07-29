@@ -1,4 +1,5 @@
 export type EmailActiveActions = 'CALL' | 'EMAIL' | 'DONATION' | 'NFT_MINT' | 'VOTER_REGISTRATION'
+export type EmailEnabledActionNFTs = 'OPT_IN' | 'CALL' | 'VOTER_REGISTRATION'
 
 // Keys in this object are still type enforced, we don't want to use the prisma enum due to errors on dev environment
 export const ACTIONS_METADATA_BY_TYPE: Record<
@@ -60,4 +61,19 @@ export interface EmailTemplateProps {
     userId?: string
     sessionId?: string
   } | null
+}
+
+export const NFT_IMAGES_BY_ACTION: Record<EmailEnabledActionNFTs, { src: string; alt: string }> = {
+  CALL: {
+    src: '/email/nfts/call.png',
+    alt: 'Call Action NFT',
+  },
+  OPT_IN: {
+    src: '/email/nfts/join.png',
+    alt: 'Join Action NFT',
+  },
+  VOTER_REGISTRATION: {
+    src: '/email/nfts/voter-registration.png',
+    alt: 'Voter Registration NFT',
+  },
 }

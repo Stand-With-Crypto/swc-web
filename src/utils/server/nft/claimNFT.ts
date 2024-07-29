@@ -10,6 +10,7 @@ import { Decimal } from '@prisma/client/runtime/library'
 
 import { AIRDROP_NFT_INNGEST_EVENT_NAME } from '@/inngest/functions/airdropNFT/airdropNFT'
 import { inngest } from '@/inngest/inngest'
+import { EmailEnabledActionNFTs } from '@/utils/server/email/templates/common/constants'
 import { NFT_SLUG_BACKEND_METADATA } from '@/utils/server/nft/constants'
 import { AirdropPayload } from '@/utils/server/nft/payload'
 import { prismaClient } from '@/utils/server/prismaClient'
@@ -72,15 +73,21 @@ export const ACTION_NFT_SLUG: Record<
 const logger = getLogger('claimNft')
 
 interface Config {
-  skipTransactionFeeCheck: boolean
+  skipTransactionFeeCheck?: boolean
+  transactionEmailActionNFT?: EmailEnabledActionNFTs
+  userCommunicationJourneyId?: string
 }
 
 export async function claimNFT(
   userAction: Pick<UserAction, 'id' | 'actionType' | 'campaignName' | 'nftMintId'>,
   userCryptoAddress: Pick<UserCryptoAddress, 'cryptoAddress'>,
-  config: Config = { skipTransactionFeeCheck: false },
+  config: Config = {},
 ) {
-  if (!config.skipTransactionFeeCheck) {
+  const hydratedConfig = {
+    skipTransactionFeeCheck: false,
+    ...config,
+  }
+  if (!hydratedConfig.skipTransactionFeeCheck) {
     const currentTransactionFee = await fetchAirdropTransactionFee()
     if (currentTransactionFee > AIRDROP_NFT_ETH_TRANSACTION_FEE_THRESHOLD) {
       logger.info(
@@ -141,4 +148,15 @@ export async function claimNFT(
     name: AIRDROP_NFT_INNGEST_EVENT_NAME,
     data: payload,
   })
+}
+
+export async function claimNFTAndSendEmailNotification(
+  userAction: Pick<UserAction, 'id' | 'actionType' | 'campaignName' | 'nftMintId'>,
+  userCryptoAddress: Pick<UserCryptoAddress, 'cryptoAddress'>,
+  config: Config = {},
+) {
+  const hydratedConfig = {
+    skipTransactionFeeCheck: false,
+    ...config,
+  }
 }
