@@ -233,11 +233,11 @@ export async function onNewLogin(props: NewLoginParams) {
 
   // createUser logic
   let wasUserCreated = false
+  const hasSignedInWithEmail =
+    !!embeddedWalletUserDetails?.email && !embeddedWalletUserDetails?.phone
+
   if (!maybeUser) {
     log(`createUser: creating user`)
-    const hasSignedInWithEmail =
-      !!embeddedWalletUserDetails?.email && !embeddedWalletUserDetails?.phone
-
     maybeUser = await createUser({ localUser, hasSignedInWithEmail })
     wasUserCreated = true
   } else {
@@ -255,20 +255,22 @@ export async function onNewLogin(props: NewLoginParams) {
     maybeUpsertCryptoAddressResult.updatedCryptoAddress ||
     maybeUpsertCryptoAddressResult.newCryptoAddress
 
-  const maybeUpsertPhoneNumberResult = embeddedWalletUserDetails?.phone
-    ? await maybeUpsertPhoneNumber({
-        user,
-        embeddedWalletUserDetails,
-      })
-    : null
+  const maybeUpsertPhoneNumberResult =
+    !hasSignedInWithEmail && embeddedWalletUserDetails?.phone
+      ? await maybeUpsertPhoneNumber({
+          user,
+          embeddedWalletUserDetails,
+        })
+      : null
 
-  const maybeUpsertEmbeddedWalletEmailAddressResult = embeddedWalletUserDetails?.email
-    ? await maybeUpsertEmbeddedWalletEmailAddress({
-        user,
-        cryptoAddressAssociatedWithEmail: userCryptoAddress,
-        embeddedWalletUserDetails,
-      })
-    : null
+  const maybeUpsertEmbeddedWalletEmailAddressResult =
+    hasSignedInWithEmail && embeddedWalletUserDetails?.email
+      ? await maybeUpsertEmbeddedWalletEmailAddress({
+          user,
+          cryptoAddressAssociatedWithEmail: userCryptoAddress,
+          embeddedWalletUserDetails,
+        })
+      : null
 
   if (maybeUpsertEmbeddedWalletEmailAddressResult) {
     user = maybeUpsertEmbeddedWalletEmailAddressResult.user
@@ -582,7 +584,7 @@ async function maybeUpsertEmbeddedWalletEmailAddress({
       data: {
         isVerified: true,
         source: UserEmailAddressSource.THIRDWEB_EMBEDDED_AUTH,
-        emailAddress: embeddedWalletUserDetails.email?.toLowerCase() ?? '', //TODO: check if this is correct
+        emailAddress: embeddedWalletUserDetails.email!.toLowerCase(),
         userId: user.id,
         asPrimaryUserEmailAddress: { connect: { id: user.id } },
       },

@@ -59,7 +59,7 @@ export async function fetchEmbeddedWalletMetadataFromThirdweb(
   return metadata
     ? {
         ...metadata,
-        email: metadata?.email ? metadata.email.toLowerCase() : '',
+        email: metadata.email?.toLowerCase(),
       }
     : null
 }
