@@ -37,12 +37,13 @@ import { getFormattedDescription } from '@/utils/shared/address'
 import { maybeGetCongressionalDistrictFromAddress } from '@/utils/shared/getCongressionalDistrictFromAddress'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
+import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
 import { generateReferralId } from '@/utils/shared/referralId'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
 import { zodAddress } from '@/validation/fields/zodAddress'
 import { zodEmailAddress } from '@/validation/fields/zodEmailAddress'
 import { zodFirstName, zodLastName } from '@/validation/fields/zodName'
-import { zodOptionalEmptyPhoneNumber } from '@/validation/fields/zodPhoneNumber'
+import { zodPhoneNumber } from '@/validation/fields/zodPhoneNumber'
 
 export const zodExternalUserActionOptInUserAddress = object({
   streetNumber: string(),
@@ -68,7 +69,7 @@ export const zodExternalUserActionOptIn = z.object({
   firstName: zodFirstName.optional(),
   lastName: zodLastName.optional(),
   address: zodExternalUserActionOptInUserAddress.optional(),
-  phoneNumber: zodOptionalEmptyPhoneNumber,
+  phoneNumber: zodPhoneNumber.optional().transform(str => str && normalizePhoneNumber(str)),
   hasOptedInToReceiveSMSFromSWC: z.boolean().optional(),
   hasOptedInToEmails: z.boolean().optional(),
   hasOptedInToMembership: z.boolean().optional(),

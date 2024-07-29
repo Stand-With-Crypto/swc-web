@@ -1,6 +1,4 @@
-export { messagingClient, TWILIO_RATE_LIMIT } from './client'
-export { twilioPhoneNumberValidation } from './phoneNumberValidation'
+export { messagingClient } from './client'
 export { countSegments } from './segments'
 export { sendSMS } from './sendSMS'
-export { SendSMSError } from './SendSMSError'
 export { verifySignature } from './verifySignature'

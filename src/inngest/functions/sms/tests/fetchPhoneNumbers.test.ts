@@ -3,14 +3,13 @@ import { afterEach, describe, expect, it } from '@jest/globals'
 import { compareAsc, isAfter } from 'date-fns'
 
 import { FetchOptions, fetchPhoneNumbers } from '@/inngest/functions/sms/utils/fetchPhoneNumbers'
-import { fakerFields } from '@/mocks/fakerUtils'
 
 describe('fetchPhoneNumbers function', () => {
   const mockFetchListQuery = jest.fn(async (take?: number, cursor?: Date) =>
     Array.from({ length: take ?? 0 })
       .map(() => ({
         datetimeCreated: faker.date.past(),
-        phoneNumber: fakerFields.phoneNumber(),
+        phoneNumber: faker.phone.number(),
       }))
       .sort((a, b) => compareAsc(a.datetimeCreated, b.datetimeCreated))
       .filter(({ datetimeCreated }) => (cursor ? isAfter(datetimeCreated, cursor) : true)),

@@ -117,7 +117,6 @@ model User {
   hasOptedInToSms            Boolean                   @map("has_opted_in_to_sms")
   hasRepliedToOptInSms       Boolean                   @default(false) @map("has_replied_to_opt_in_sms")
   hasOptedInToMembership     Boolean                   @map("has_opted_in_to_membership")
-  hasValidPhoneNumber        Boolean                   @default(true) @map("has_valid_phone_number")
   internalStatus             UserInternalStatus        @default(VISIBLE) @map("internal_status")
   dataCreationMethod         DataCreationMethod        @default(BY_USER) @map("data_creation_method")
   totalDonationAmountUsd     Decimal                   @default(0) @map("total_donation_amount_usd")
