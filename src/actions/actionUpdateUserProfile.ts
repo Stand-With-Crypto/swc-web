@@ -166,7 +166,6 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
       phoneNumber,
       hasOptedInToMembership,
       hasOptedInToSms,
-      hasValidPhoneNumber: true,
       addressId: address?.id || null,
       primaryUserEmailAddressId: primaryUserEmailAddress?.id || null,
     },

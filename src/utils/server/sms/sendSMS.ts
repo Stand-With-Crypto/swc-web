@@ -4,7 +4,6 @@ import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { smsProvider } from '@/utils/shared/smsProvider'
 
 import { messagingClient } from './client'
-import { SendSMSError } from './SendSMSError'
 
 const TWILIO_PHONE_NUMBER = requiredEnv(process.env.TWILIO_PHONE_NUMBER, 'TWILIO_PHONE_NUMBER')
 
@@ -37,6 +36,7 @@ export const sendSMS = async (payload: SendSMSPayload) => {
 
     return message
   } catch (error) {
-    throw new SendSMSError(error, to)
+    if (typeof error === 'object') throw { ...error, phoneNumber: to }
+    else throw error
   }
 }

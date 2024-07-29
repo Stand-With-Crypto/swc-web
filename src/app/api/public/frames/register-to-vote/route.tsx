@@ -28,6 +28,7 @@ import { getServerAnalytics } from '@/utils/server/serverAnalytics'
 import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
 import { NEYNAR_API_KEY } from '@/utils/shared/neynarAPIKey'
 import { NFTSlug } from '@/utils/shared/nft'
+import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
 import { fullUrl } from '@/utils/shared/urls'
 import {
   UserActionOptInCampaignName,
@@ -280,7 +281,7 @@ export async function POST(req: NextRequest): Promise<Response> {
         optInType: UserActionOptInType.SWC_SIGN_UP_AS_SUBSCRIBER,
         campaignName: UserActionOptInCampaignName.DEFAULT,
         isVerifiedEmailAddress: false,
-        phoneNumber: zodPhoneResult.data,
+        phoneNumber: normalizePhoneNumber(zodPhoneResult.data),
         hasOptedInToReceiveSMSFromSWC: true,
         hasOptedInToEmails: true,
         acquisitionOverride: {

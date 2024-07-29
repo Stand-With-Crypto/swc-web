@@ -1,16 +1,19 @@
-import { Prisma, SMSStatus } from '@prisma/client'
+import { Prisma, SMSStatus, UserCommunicationJourneyType } from '@prisma/client'
+import * as Sentry from '@sentry/node'
 import { parseISO } from 'date-fns'
 import { NonRetriableError } from 'inngest'
 
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { countSegments, TWILIO_RATE_LIMIT } from '@/utils/server/sms'
+import { countSegments, sendSMS } from '@/utils/server/sms'
 import { getLogger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
+import { sleep } from '@/utils/shared/sleep'
 
-import { enqueueMessages, fetchPhoneNumbers } from './utils'
+import { createCommunication, createCommunicationJourneys } from './utils/communicationJourney'
+import { fetchPhoneNumbers } from './utils/fetchPhoneNumbers'
 
 export const BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME = 'app/user.communication/bulk.sms'
 
@@ -26,6 +29,9 @@ const MESSAGE_SEGMENTS_PER_SECOND = Number(
   requiredEnv(process.env.MESSAGE_SEGMENTS_PER_SECOND, 'MESSAGE_SEGMENTS_PER_SECOND'),
 )
 const MAX_QUEUE_LENGTH = Number(requiredEnv(process.env.MAX_QUEUE_LENGTH, 'MAX_QUEUE_LENGTH'))
+
+// This constant is specific to our twilio account
+const QUEUING_THROUGHPUT = 500
 
 const logger = getLogger('bulk-sms')
 
@@ -116,12 +122,12 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
 
     let cursor: Date | undefined
     let loopIteration = 0
+    let phoneNumbersListLength = 0
     let totalMessagesSent = 0
     let totalTimeTaken = 0
-    let hasNumbersLeft = true
-    while (hasNumbersLeft) {
+    do {
       logger.info(`Iteration ${loopIteration}. Fetching phone numbers...`)
-      const [phoneNumberChunks, newCursor, length] = await step.run(
+      const [phoneNumberChunks, newCursor] = await step.run(
         `fetch-users-iteration-${loopIteration}`,
         () =>
           fetchPhoneNumbers(
@@ -141,7 +147,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
                 },
               ),
             {
-              chunkSize: TWILIO_RATE_LIMIT,
+              chunkSize: QUEUING_THROUGHPUT,
               maxLength: queueSizeBySegment,
               queryLimit: DATABASE_QUERY_LIMIT,
             },
@@ -149,12 +155,13 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
       )
 
       cursor = parseISO(newCursor)
+      phoneNumbersListLength = phoneNumberChunks.reduce((acc, curr) => acc + curr.length, 0)
 
       const timeInSecondsToSendBatchMessages =
-        (length * segmentsCount) / MESSAGE_SEGMENTS_PER_SECOND
+        (phoneNumbersListLength * segmentsCount) / MESSAGE_SEGMENTS_PER_SECOND
 
       logger.info(
-        `Fetched ${length} phone numbers. Iteration ${loopIteration} will take ${formatTime(timeInSecondsToSendBatchMessages)} to send all messages`,
+        `Fetched ${phoneNumbersListLength} phone numbers. Iteration ${loopIteration} will take ${formatTime(timeInSecondsToSendBatchMessages)} to send all messages`,
       )
 
       logger.info('Queuing messages...')
@@ -190,16 +197,91 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
         `Estimated time remaining: ${formatTime(estimatedTimeToSendAllMessages - totalTimeTaken)}. ${totalTimeTaken ? `Already took ${formatTime(totalTimeTaken)}` : ''}`,
       )
 
-      if (length < queueSizeBySegment) {
-        hasNumbersLeft = false
-      }
-
       loopIteration += 1
-    }
+    } while (phoneNumbersListLength === queueSizeBySegment)
 
     logger.info('Finished')
   },
 )
+
+const ENQUEUE_MAX_RETRY_ATTEMPTS = 5
+
+async function enqueueMessages(
+  phoneNumbers: string[],
+  body?: string,
+  persist?: boolean,
+  attempt = 0,
+) {
+  if (attempt > ENQUEUE_MAX_RETRY_ATTEMPTS) return 0
+
+  const enqueueMessagesPromise = phoneNumbers.map(async phoneNumber => {
+    if (!persist || !body) return
+
+    const communicationJourneys = await createCommunicationJourneys(
+      phoneNumber,
+      UserCommunicationJourneyType.BULK_SMS,
+    )
+
+    const message = await sendSMS({
+      body,
+      to: phoneNumber,
+    })
+
+    if (message) {
+      await createCommunication(communicationJourneys, message.sid)
+    }
+
+    return message
+  })
+
+  const failedPhoneNumbers: string[] = []
+
+  let messagesSent = 0
+  await Promise.allSettled(enqueueMessagesPromise).then(results => {
+    results.forEach(result => {
+      if (result.status === 'rejected') {
+        if (result.reason) {
+          if (result.reason.code === 20429 || result.reason.code === 'ECONNABORTED') {
+            // Too Many Requests
+            if ('phoneNumber' in result.reason) {
+              failedPhoneNumbers.push(result.reason.phoneNumber)
+            }
+          } else if (result.reason.code === 21211) {
+            // Invalid phone number
+            // TODO: flag users with this phone number
+          } else {
+            Sentry.captureException('Unexpected Twilio error', {
+              extra: { reason: result.reason },
+              tags: {
+                domain: 'bulkSMS',
+              },
+            })
+          }
+        } else {
+          Sentry.captureException('Twilio failed with no reason', {
+            extra: {
+              reason: result.reason,
+            },
+            tags: {
+              domain: 'bulkSMS',
+            },
+          })
+        }
+      } else {
+        messagesSent += 1
+      }
+    })
+  })
+
+  // exponential backoff retry
+  if (failedPhoneNumbers.length > 0) {
+    await sleep(10000 * attempt)
+
+    messagesSent += await enqueueMessages(failedPhoneNumbers, body, persist, attempt + 1)
+  }
+
+  return messagesSent
+}
 
 function formatTime(seconds: number) {
   if (seconds < SECONDS_DURATION.MINUTE) {
@@ -229,7 +311,6 @@ async function getPhoneNumberList(
     by: ['phoneNumber', 'datetimeCreated'],
     where: {
       ...args.where,
-      hasValidPhoneNumber: true,
       smsStatus: {
         in: [
           SMSStatus.OPTED_IN,
