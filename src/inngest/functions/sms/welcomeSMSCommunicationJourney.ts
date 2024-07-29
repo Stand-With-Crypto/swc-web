@@ -4,16 +4,12 @@ import { NonRetriableError } from 'inngest'
 
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
-import { messagingClient, sendSMS } from '@/utils/server/sms'
+import { messagingClient, sendSMS, SendSMSError } from '@/utils/server/sms'
 import * as messages from '@/utils/server/sms/messages'
 import { smsProvider } from '@/utils/shared/smsProvider'
 
-import {
-  createCommunication,
-  createCommunicationJourneys,
-  CreatedCommunicationJourneys,
-} from './utils/communicationJourney'
-import { validatePhoneNumber } from './utils/validatePhoneNumber'
+import type { CreatedCommunicationJourneys } from './utils/communicationJourney'
+import { createCommunication, createCommunicationJourneys, flagInvalidPhoneNumbers } from './utils'
 
 export const WELCOME_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME =
   'app/user.communication/welcome.sms'
@@ -41,14 +37,18 @@ export const welcomeSMSCommunicationJourney = inngest.createFunction(
 
     if (smsProvider !== 'twilio') return
 
-    validatePhoneNumber(phoneNumber)
-
     const communicationJourneys = await step.run('create-communication-journey', () =>
       createCommunicationJourneys(phoneNumber, UserCommunicationJourneyType.WELCOME_SMS),
     )
 
     const message = await step.run('send-sms', () =>
       sendMessage(phoneNumber, communicationJourneys).catch(error => {
+        if (error instanceof SendSMSError) {
+          if (error.isInvalidPhoneNumber) {
+            return flagInvalidPhoneNumbers([phoneNumber])
+          }
+        }
+
         Sentry.captureException(error, {
           tags: {
             domain: 'welcomeSMS',
