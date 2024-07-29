@@ -344,6 +344,7 @@ export async function onNewLogin(props: NewLoginParams) {
     maybeUpsertPhoneNumberResult,
     didCapitalCanaryUpsert,
     postLoginUserActionSteps,
+    hasSignedInWithEmail,
   }
 }
 
@@ -392,7 +393,6 @@ async function queryMatchingUsers({
           phoneNumber: embeddedWalletUserDetails.phone,
           hasOptedInToSms: true,
           hasRepliedToOptInSms: true,
-          smsStatus: SMSStatus.NOT_OPTED_IN,
           primaryUserEmailAddressId: {
             not: null,
           },
