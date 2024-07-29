@@ -1,23 +1,18 @@
 'use client'
 
-import { MouseEvent, useCallback, useMemo, useState } from 'react'
+import { FC, MouseEvent, useCallback, useState } from 'react'
 import { ComposableMap, Geographies, Geography } from 'react-simple-maps'
 import { useMedia, useOrientation } from 'react-use'
 import { AnimatePresence } from 'framer-motion'
 
 import { AdvocateHeatmapActionList } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapActionList'
 import { ActionInfoTooltip } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapActionTooltip'
+import { IconProps } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapIcons'
 import { AdvocateHeatmapMarker } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapMarker'
 import { AdvocateHeatmapOdometer } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapOdometer'
 import { TotalAdvocatesPerStateTooltip } from '@/components/app/pageAdvocatesHeatmap/advocatesHeatmapTooltip'
-import {
-  ADVOCATES_ACTIONS,
-  ADVOCATES_HEATMAP_GEO_URL,
-} from '@/components/app/pageAdvocatesHeatmap/constants'
-import {
-  createMarkersFromActions,
-  MapMarker,
-} from '@/components/app/pageAdvocatesHeatmap/createMapMarkers'
+import { ADVOCATES_HEATMAP_GEO_URL } from '@/components/app/pageAdvocatesHeatmap/constants'
+import { MapMarker, useAdvocateMap } from '@/components/app/pageAdvocatesHeatmap/useAdvocateMap'
 import { NextImage } from '@/components/ui/image'
 import { Skeleton } from '@/components/ui/skeleton'
 import { getAdvocatesMapData } from '@/data/pageSpecific/getAdvocatesMapData'
@@ -35,120 +30,6 @@ interface RenderMapProps {
   isEmbedded?: boolean
 }
 
-const MapComponent = ({
-  markers,
-  handleStateMouseHover,
-  handleStateMouseOut,
-  isEmbedded,
-}: {
-  markers: MapMarker[]
-  handleStateMouseHover: (geo: any, event: MouseEvent<SVGPathElement>) => void
-  handleStateMouseOut: () => void
-  locale: SupportedLocale
-  isEmbedded?: boolean
-}) => {
-  const [actionInfo, setActionInfo] = useState<string | null>(null)
-  const [mousePosition, setMousePosition] = useState<{ x: number; y: number } | null>(null)
-
-  const currentFill = isEmbedded ? '#171717' : '#F4EEFF'
-  const currentStroke = isEmbedded ? '#3A3B3D' : '#DAC5FF'
-  const currentHoverAndPressedFill = isEmbedded ? '#6100FF' : '#DDC9FF'
-
-  const handleActionMouseOver = useCallback(
-    (currentActionInfo: string, event: MouseEvent<SVGElement>) => {
-      event.stopPropagation()
-
-      const actionBoundingClientRect = event.currentTarget.getBoundingClientRect()
-      const actionPosition = {
-        x: actionBoundingClientRect.left + actionBoundingClientRect.width / 2,
-        y: actionBoundingClientRect.top + actionBoundingClientRect.height / 2,
-      }
-
-      setActionInfo(currentActionInfo)
-      setMousePosition(actionPosition)
-    },
-    [],
-  )
-
-  const handleActionMouseLeave = useCallback((event?: MouseEvent<SVGElement>) => {
-    event?.stopPropagation()
-    setMousePosition(null)
-    setActionInfo(null)
-  }, [])
-
-  return (
-    <>
-      <ComposableMap projection="geoAlbersUsa" viewBox="0 50 805 510">
-        <Geographies geography={ADVOCATES_HEATMAP_GEO_URL}>
-          {({ geographies }) => (
-            <>
-              {geographies.map(geo => (
-                <Geography
-                  geography={geo}
-                  key={geo.rsmKey}
-                  onMouseMove={event => handleStateMouseHover(geo, event)}
-                  onMouseOut={handleStateMouseOut}
-                  stroke="#FFF"
-                  style={{
-                    default: {
-                      fill: currentFill,
-                      stroke: currentStroke,
-                      strokeWidth: '0.777px',
-                      outline: 'none',
-                      transition: 'fill 0.2s ease-in-out, stroke 0.2s ease-in-out',
-                    },
-                    hover: {
-                      fill: currentHoverAndPressedFill,
-                      outline: 'none',
-                      stroke: currentStroke,
-                      strokeWidth: '0.777px',
-                    },
-                    pressed: {
-                      fill: currentHoverAndPressedFill,
-                      outline: 'none',
-                      stroke: currentStroke,
-                      strokeWidth: '0.777px',
-                    },
-                  }}
-                />
-              ))}
-              <AnimatePresence>
-                {markers.map(({ name, coordinates, actionType, datetimeCreated }) => {
-                  const currentIconActionType =
-                    ADVOCATES_ACTIONS[actionType as keyof typeof ADVOCATES_ACTIONS]
-
-                  if (!currentIconActionType) {
-                    return null
-                  }
-
-                  const currentActionInfo = `Someone in ${name} ${currentIconActionType.labelActionTooltip}`
-                  const IconComponent = currentIconActionType.icon
-
-                  return (
-                    <AdvocateHeatmapMarker
-                      IconComponent={IconComponent}
-                      coordinates={coordinates}
-                      currentActionInfo={currentActionInfo}
-                      handleActionMouseLeave={handleActionMouseLeave}
-                      handleActionMouseOver={handleActionMouseOver}
-                      key={`${name}-${datetimeCreated}-${coordinates.toString()}`}
-                    />
-                  )
-                })}
-              </AnimatePresence>
-            </>
-          )}
-        </Geographies>
-      </ComposableMap>
-      <ActionInfoTooltip
-        actionInfo={actionInfo}
-        handleClearPressedState={handleActionMouseLeave}
-        mousePosition={mousePosition}
-      />
-    </>
-  )
-}
-
 export function AdvocatesHeatmap({
   locale,
   actions,
@@ -159,10 +40,9 @@ export function AdvocatesHeatmap({
   const orientation = useOrientation()
   const isShort = useMedia('(max-height: 430px)', true)
   const advocatesPerState = useApiAdvocateMap(advocatesMapPageData)
+  const markers = useAdvocateMap({ actions })
 
   const isMobileLandscape = orientation.type.includes('landscape') && isShort
-
-  const markers = useMemo(() => createMarkersFromActions(actions), [actions])
 
   const totalAdvocatesPerState = advocatesPerState.data.advocatesMapData.totalAdvocatesPerState
 
@@ -261,5 +141,112 @@ export function AdvocatesHeatmap({
         )}
       </div>
     </div>
+  )
+}
+
+const MapComponent = ({
+  markers,
+  handleStateMouseHover,
+  handleStateMouseOut,
+  isEmbedded,
+}: {
+  markers: MapMarker[]
+  handleStateMouseHover: (geo: any, event: MouseEvent<SVGPathElement>) => void
+  handleStateMouseOut: () => void
+  locale: SupportedLocale
+  isEmbedded?: boolean
+}) => {
+  const [actionInfo, setActionInfo] = useState<string | null>(null)
+  const [mousePosition, setMousePosition] = useState<{ x: number; y: number } | null>(null)
+
+  const currentFill = isEmbedded ? '#171717' : '#F4EEFF'
+  const currentStroke = isEmbedded ? '#3A3B3D' : '#DAC5FF'
+  const currentHoverAndPressedFill = isEmbedded ? '#6100FF' : '#DDC9FF'
+
+  const handleActionMouseOver = useCallback(
+    (currentActionInfo: string, event: MouseEvent<SVGElement>) => {
+      event.stopPropagation()
+
+      const actionBoundingClientRect = event.currentTarget.getBoundingClientRect()
+      const actionPosition = {
+        x: actionBoundingClientRect.left + actionBoundingClientRect.width / 2,
+        y: actionBoundingClientRect.top + actionBoundingClientRect.height / 2,
+      }
+
+      setActionInfo(currentActionInfo)
+      setMousePosition(actionPosition)
+    },
+    [],
+  )
+
+  const handleActionMouseLeave = useCallback((event?: MouseEvent<SVGElement>) => {
+    event?.stopPropagation()
+    setMousePosition(null)
+    setActionInfo(null)
+  }, [])
+
+  return (
+    <>
+      <ComposableMap projection="geoAlbersUsa" viewBox="0 50 805 510">
+        <Geographies geography={ADVOCATES_HEATMAP_GEO_URL}>
+          {({ geographies }) => (
+            <>
+              {geographies.map(geo => (
+                <Geography
+                  geography={geo}
+                  key={geo.rsmKey}
+                  onMouseMove={event => handleStateMouseHover(geo, event)}
+                  onMouseOut={handleStateMouseOut}
+                  stroke="#FFF"
+                  style={{
+                    default: {
+                      fill: currentFill,
+                      stroke: currentStroke,
+                      strokeWidth: '0.777px',
+                      outline: 'none',
+                      transition: 'fill 0.2s ease-in-out, stroke 0.2s ease-in-out',
+                    },
+                    hover: {
+                      fill: currentHoverAndPressedFill,
+                      outline: 'none',
+                      stroke: currentStroke,
+                      strokeWidth: '0.777px',
+                    },
+                    pressed: {
+                      fill: currentHoverAndPressedFill,
+                      outline: 'none',
+                      stroke: currentStroke,
+                      strokeWidth: '0.777px',
+                    },
+                  }}
+                />
+              ))}
+              <AnimatePresence>
+                {markers.map(({ id, name, coordinates, actionType, iconType }) => {
+                  const currentActionInfo = `Someone in ${name} ${iconType?.labelActionTooltip ?? ''}`
+                  const IconComponent = iconType?.icon as FC<IconProps>
+
+                  return (
+                    <AdvocateHeatmapMarker
+                      IconComponent={IconComponent}
+                      coordinates={coordinates}
+                      currentActionInfo={currentActionInfo}
+                      handleActionMouseLeave={handleActionMouseLeave}
+                      handleActionMouseOver={handleActionMouseOver}
+                      key={`${name}-${actionType}-${id}`}
+                    />
+                  )
+                })}
+              </AnimatePresence>
+            </>
+          )}
+        </Geographies>
+      </ComposableMap>
+      <ActionInfoTooltip
+        actionInfo={actionInfo}
+        handleClearPressedState={handleActionMouseLeave}
+        mousePosition={mousePosition}
+      />
+    </>
   )
 }

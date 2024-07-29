@@ -24,7 +24,10 @@ import { dtsiPersonFullName } from '@/utils/dtsi/dtsiPersonUtils'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { gracefullyError } from '@/utils/shared/gracefullyError'
 import { getIntlUrls } from '@/utils/shared/urls'
-import { UserActionEmailCampaignName } from '@/utils/shared/userActionCampaigns'
+import {
+  UserActionEmailCampaignName,
+  UserActionTweetCampaignName,
+} from '@/utils/shared/userActionCampaigns'
 import { listOfThings } from '@/utils/web/listOfThings'
 
 const MainText = ({ children }: { children: React.ReactNode }) => (
@@ -185,8 +188,13 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
       }
       case UserActionType.TWEET: {
         return {
-          onFocusContent: () => <UserActionTweetLink>Tweet</UserActionTweetLink>,
-          children: <MainText>Tweet sent in support of {getSWCDisplayText()}</MainText>,
+          onFocusContent: () => <UserActionTweetLink>Follow</UserActionTweetLink>,
+          children:
+            action.campaignName === UserActionTweetCampaignName.FOLLOW_SWC_ON_X_2024 ? (
+              <MainText>New {getSWCDisplayText()} follower on X</MainText>
+            ) : (
+              <MainText>Tweet sent in support of {getSWCDisplayText()}</MainText>
+            ),
         }
       }
       case UserActionType.VOTER_REGISTRATION: {
