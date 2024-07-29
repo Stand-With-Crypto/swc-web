@@ -136,7 +136,7 @@ function ThirdwebLoginEmbedded(
     createWallet('com.coinbase.wallet', { appMetadata }),
     createWallet('io.metamask'),
     createWallet('walletConnect'),
-    createWallet('embedded', { auth: { options: ['google', 'phone', 'email'] } }),
+    createWallet('embedded', { auth: { options: ['google', 'email'] } }),
   ]
 
   const recommendedWallets = [createWallet('com.coinbase.wallet')]

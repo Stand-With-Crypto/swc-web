@@ -5,8 +5,6 @@ import { Suspense } from 'react'
 import { UserActionFormDialog } from '@/components/app/userActionFormCommon/dialog'
 import { LazyUserActionFormNFTMint } from '@/components/app/userActionFormNFTMint/lazyLoad'
 import { UserActionFormNFTMintSkeleton } from '@/components/app/userActionFormNFTMint/skeleton'
-import { DialogTitle } from '@/components/ui/dialog'
-import { VisuallyHidden } from '@/components/ui/visually-hidden'
 import { useDialog } from '@/hooks/useDialog'
 
 export function UserActionFormNFTMintDialog({
@@ -23,9 +21,6 @@ export function UserActionFormNFTMintDialog({
 
   return (
     <UserActionFormDialog {...dialogProps} trigger={children}>
-      <VisuallyHidden>
-        <DialogTitle>NFT Mint</DialogTitle>
-      </VisuallyHidden>
       <Suspense fallback={<UserActionFormNFTMintSkeleton />}>
         <LazyUserActionFormNFTMint />
       </Suspense>
