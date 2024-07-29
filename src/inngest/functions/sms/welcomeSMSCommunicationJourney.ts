@@ -1,13 +1,13 @@
 import { UserCommunicationJourneyType } from '@prisma/client'
 import * as Sentry from '@sentry/node'
 
+import { flagInvalidPhoneNumbers } from '@/inngest/functions/sms/utils'
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
-import { sendSMS } from '@/utils/server/sms'
+import { sendSMS, SendSMSError } from '@/utils/server/sms'
 import * as messages from '@/utils/server/sms/messages'
 
 import { createCommunication, createCommunicationJourneys } from './utils/communicationJourney'
-import { validatePhoneNumber } from './utils/validatePhoneNumber'
 
 export const WELCOME_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME =
   'app/user.communication/welcome.sms'
@@ -34,8 +34,6 @@ export const welcomeSMSCommunicationJourney = inngest.createFunction(
   async ({ event, step }) => {
     const { phoneNumber } = event.data as WelcomeSMSCommunicationJourneyPayload
 
-    validatePhoneNumber(phoneNumber)
-
     const communicationJourneys = await step.run('create-communication-journey', () =>
       createCommunicationJourneys(phoneNumber, UserCommunicationJourneyType.WELCOME_SMS),
     )
@@ -45,6 +43,12 @@ export const welcomeSMSCommunicationJourney = inngest.createFunction(
         body: messages.WELCOME_MESSAGE,
         to: phoneNumber,
       }).catch(error => {
+        if (error instanceof SendSMSError) {
+          if (error.isInvalidPhoneNumber) {
+            return flagInvalidPhoneNumbers([phoneNumber])
+          }
+        }
+
         Sentry.captureException(error, {
           tags: {
             domain: 'welcomeSMS',

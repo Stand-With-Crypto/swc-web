@@ -3,11 +3,10 @@ import * as Sentry from '@sentry/node'
 
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
-import { sendSMS } from '@/utils/server/sms'
+import { sendSMS, SendSMSError } from '@/utils/server/sms'
 import * as messages from '@/utils/server/sms/messages'
 
-import { createCommunication, createCommunicationJourneys } from './utils/communicationJourney'
-import { validatePhoneNumber } from './utils/validatePhoneNumber'
+import { createCommunication, createCommunicationJourneys, flagInvalidPhoneNumbers } from './utils'
 
 export const UNSTOP_CONFIRMATION_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME =
   'app/user.communication/unstop-confirmation.sms'
@@ -34,8 +33,6 @@ export const unstopConfirmationSMSCommunicationJourney = inngest.createFunction(
   async ({ event, step }) => {
     const { phoneNumber } = event.data as UnstopConfirmationSMSCommunicationJourneyPayload
 
-    validatePhoneNumber(phoneNumber)
-
     const communicationJourneys = await step.run('create-communication-journey', () =>
       createCommunicationJourneys(
         phoneNumber,
@@ -48,6 +45,12 @@ export const unstopConfirmationSMSCommunicationJourney = inngest.createFunction(
         body: messages.UNSTOP_CONFIRMATION_MESSAGE,
         to: phoneNumber,
       }).catch(error => {
+        if (error instanceof SendSMSError) {
+          if (error.isInvalidPhoneNumber) {
+            return flagInvalidPhoneNumbers([phoneNumber])
+          }
+        }
+
         Sentry.captureException(error, {
           tags: {
             domain: 'unstopSMS',

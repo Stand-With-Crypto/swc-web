@@ -3,11 +3,14 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 
+import { GeoGate } from '@/components/app/geoGate'
+import { UserActionFormActionUnavailable } from '@/components/app/userActionFormCommon/actionUnavailable'
 import { UserActionFormVoterRegistration } from '@/components/app/userActionFormVoterRegistration'
 import { ANALYTICS_NAME_USER_ACTION_FORM_VOTER_REGISTRATION } from '@/components/app/userActionFormVoterRegistration/constants'
 import { trackDialogOpen } from '@/components/ui/dialog/trackDialogOpen'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { usePreventOverscroll } from '@/hooks/usePreventOverscroll'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 
 export function UserActionFormVoterRegistrationDeeplinkWrapper() {
   usePreventOverscroll()
@@ -18,5 +21,12 @@ export function UserActionFormVoterRegistrationDeeplinkWrapper() {
     trackDialogOpen({ open: true, analytics: ANALYTICS_NAME_USER_ACTION_FORM_VOTER_REGISTRATION })
   }, [])
 
-  return <UserActionFormVoterRegistration onClose={() => router.replace(urls.home())} />
+  return (
+    <GeoGate
+      countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE}
+      unavailableContent={<UserActionFormActionUnavailable />}
+    >
+      <UserActionFormVoterRegistration onClose={() => router.replace(urls.home())} />
+    </GeoGate>
+  )
 }

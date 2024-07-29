@@ -12,7 +12,7 @@ export const dynamic = 'error'
 
 export default async function Home({ params }: PageProps) {
   const asyncProps = await getHomepageData({
-    recentActivityLimit: 20,
+    recentActivityLimit: 30,
     restrictToUS: true,
   })
   const advocatePerStateDataProps = await getAdvocatesMapData()

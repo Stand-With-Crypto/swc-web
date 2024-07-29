@@ -1,6 +1,5 @@
 import { z } from 'zod'
 
-import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
 import { GenericErrorFormValues } from '@/utils/web/formUtils'
 import { zodGooglePlacesAutocompletePrediction } from '@/validation/fields/zodGooglePlacesAutocompletePrediction'
 import { zodFirstName, zodLastName } from '@/validation/fields/zodName'
@@ -29,7 +28,7 @@ export const zodUpdateUserProfileWithRequiredFormFields = zodUpdateUserProfileBa
     firstName: zodFirstName,
     lastName: zodLastName,
     address: zodGooglePlacesAutocompletePrediction,
-    phoneNumber: zodPhoneNumber.transform(str => str && normalizePhoneNumber(str)),
+    phoneNumber: zodPhoneNumber,
   })
   .superRefine(zodUpdateUserProfileBaseSuperRefine)
 
