@@ -84,7 +84,7 @@ export function PageHome({
             <TabsContent value={RecentActivityAndLeaderboardTabs.RECENT_ACTIVITY}>
               <>
                 <PageSubTitle as="h4" className="mb-10">
-                  See a live view of how our community is taking a stand to safeguard the future of
+                  See the most recent actions our community has taken to safeguard the future of
                   crypto in America.
                 </PageSubTitle>
                 <DelayedRecentActivityWithMap

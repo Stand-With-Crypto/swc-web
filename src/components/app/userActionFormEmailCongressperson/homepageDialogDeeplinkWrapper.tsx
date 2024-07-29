@@ -3,6 +3,8 @@
 import React, { Suspense, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
+import { GeoGate } from '@/components/app/geoGate'
+import { UserActionFormActionUnavailable } from '@/components/app/userActionFormCommon/actionUnavailable'
 import { UserActionFormEmailCongressperson } from '@/components/app/userActionFormEmailCongressperson'
 import { ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_CONGRESSPERSON } from '@/components/app/userActionFormEmailCongressperson/constants'
 import { UserActionFormEmailCongresspersonSkeleton } from '@/components/app/userActionFormEmailCongressperson/skeleton'
@@ -15,6 +17,7 @@ import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForU
 import { useEncodedInitialValuesQueryParam } from '@/hooks/useEncodedInitialValuesQueryParam'
 import { useLocale } from '@/hooks/useLocale'
 import { usePreventOverscroll } from '@/hooks/usePreventOverscroll'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
@@ -61,8 +64,13 @@ function UserActionFormEmailCongresspersonDeeplinkWrapperContent() {
 export function UserActionFormEmailCongresspersonDeeplinkWrapper() {
   const locale = useLocale()
   return (
-    <Suspense fallback={<UserActionFormEmailCongresspersonSkeleton locale={locale} />}>
-      <UserActionFormEmailCongresspersonDeeplinkWrapperContent />
-    </Suspense>
+    <GeoGate
+      countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE}
+      unavailableContent={<UserActionFormActionUnavailable />}
+    >
+      <Suspense fallback={<UserActionFormEmailCongresspersonSkeleton locale={locale} />}>
+        <UserActionFormEmailCongresspersonDeeplinkWrapperContent />
+      </Suspense>
+    </GeoGate>
   )
 }

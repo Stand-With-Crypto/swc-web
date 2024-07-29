@@ -1,5 +1,8 @@
+'use client'
+
 import { UserActionType } from '@prisma/client'
 import { Check } from 'lucide-react'
+import { useSearchParams } from 'next/navigation'
 
 import { actionCreateUserActionTweet } from '@/actions/actionCreateUserActionTweet'
 import { UserActionFormLayout } from '@/components/app/userActionFormCommon'
@@ -8,13 +11,17 @@ import { Button } from '@/components/ui/button'
 import { UseSectionsReturn } from '@/hooks/useSections'
 import { openWindow } from '@/utils/shared/openWindow'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
+import { toastGenericError } from '@/utils/web/toastUtils'
 
 interface ShareOnXProps extends UseSectionsReturn<SECTIONS_NAMES> {}
 
 export function ShareOnX(props: ShareOnXProps) {
   const { goToSection } = props
+  const searchParams = useSearchParams()
 
   const handleFollowClick = () => {
+    const target = searchParams?.get('target') ?? '_blank'
+
     void triggerServerActionForForm(
       {
         formName: 'User Action Tweet',
@@ -22,13 +29,14 @@ export function ShareOnX(props: ShareOnXProps) {
           'User Action Type': UserActionType.TWEET,
         },
         payload: undefined,
+        onError: toastGenericError,
       },
       () => actionCreateUserActionTweet(),
-    )
+    ).then(result => {
+      if (result.status === 'success') goToSection(SECTIONS_NAMES.SUCCESS)
+    })
 
-    openWindow('https://x.com/standwithcrypto', 'Twitter', `noopener`)
-
-    goToSection(SECTIONS_NAMES.SUCCESS)
+    openWindow('https://x.com/standwithcrypto', target, `noopener`)
   }
 
   return (
