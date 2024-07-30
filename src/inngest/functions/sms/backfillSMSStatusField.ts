@@ -60,14 +60,14 @@ export const backfillSMSStatusField = inngest.createFunction(
     await step.run(
       `updating-sms-status-${smsStatus.toLowerCase().replaceAll('_', '-')}`,
       async () => {
-        let hasNumbersLest = true
+        let hasNumbersLeft = true
         let outerCursor: Date | undefined
         let totalUsers = 0
         let iteration = 0
 
         logger.info(`SmsStatus: ${smsStatus}`)
 
-        while (hasNumbersLest) {
+        while (hasNumbersLeft) {
           logger.info(`Iteration ${iteration}`)
 
           logger.info(`Fetching...`)
@@ -113,7 +113,7 @@ export const backfillSMSStatusField = inngest.createFunction(
           }
 
           if ((DATABASE_QUERY_LIMIT && length < DATABASE_QUERY_LIMIT) || !DATABASE_QUERY_LIMIT) {
-            hasNumbersLest = false
+            hasNumbersLeft = false
           }
 
           iteration += 1
