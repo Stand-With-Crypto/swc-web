@@ -501,7 +501,6 @@ async function maybeUpsertPhoneNumber({
       phoneNumber: embeddedWalletUserDetails.phone,
       hasOptedInToSms: true,
       hasRepliedToOptInSms: true,
-      smsStatus: SMSStatus.NOT_OPTED_IN,
     },
   })
 }
