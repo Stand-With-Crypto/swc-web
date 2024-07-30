@@ -1,5 +1,7 @@
 import { faker } from '@faker-js/faker'
 
+import { fakerFields } from '@/mocks/fakerUtils'
+
 const mockUserFirstName = faker.person.firstName()
 const mockUserLastName = faker.person.lastName()
 
@@ -10,7 +12,7 @@ export const mockRandomUser = {
   }),
   firstName: mockUserFirstName,
   lastName: mockUserLastName,
-  phoneNumber: faker.helpers.fromRegExp(/([0-9]{3}) [0-9]{3} [0-9]{4}/),
+  phoneNumber: fakerFields.phoneNumber(),
   // has to be an existing one
   address: '350 Fifth Avenue New York, NY 10118',
 }

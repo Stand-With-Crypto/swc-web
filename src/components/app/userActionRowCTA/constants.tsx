@@ -42,13 +42,7 @@ export const USER_ACTION_ROW_CTA_INFO: Record<
   },
   [UserActionType.VOTER_REGISTRATION]: {
     actionType: UserActionType.VOTER_REGISTRATION,
-    image: {
-      src: '/actionTypeIcons/registerToVote.png',
-      width: 80,
-      height: 80,
-      sizes: '(max-width: 768px) 80px, 100px',
-      className: 'object-cover w-full h-full',
-    },
+    image: { src: '/actionTypeIcons/registerToVote.png' },
     text: 'Check your voter registration and get a free NFT',
     subtext:
       'You can make a difference this year. Register to vote and get a free "I\'m a Voter" NFT',

@@ -85,4 +85,9 @@ export const INDUSTRY_PARTNERS = [
     imageSrc: '/partners/protocol_labs.svg',
     url: 'https://protocol.ai/',
   },
+  {
+    title: 'Exodus',
+    imageSrc: '/partners/exodus.svg',
+    url: 'https://www.exodus.com/',
+  },
 ]

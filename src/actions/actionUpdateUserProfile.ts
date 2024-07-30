@@ -9,6 +9,7 @@ import {
   UserEmailAddress,
   UserEmailAddressSource,
 } from '@prisma/client'
+import * as Sentry from '@sentry/nextjs'
 import { z } from 'zod'
 
 import { getClientAddress } from '@/clientModels/clientAddress'
@@ -29,6 +30,8 @@ import { getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { optInUser } from '@/utils/server/sms/actions'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
+import { maybeGetCongressionalDistrictFromAddress } from '@/utils/shared/getCongressionalDistrictFromAddress'
+import { getLogger } from '@/utils/shared/logger'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { userFullName } from '@/utils/shared/userFullName'
 import { zodUpdateUserProfileFormAction } from '@/validation/forms/zodUpdateUserProfile/zodUpdateUserProfileFormAction'
@@ -37,6 +40,8 @@ export const actionUpdateUserProfile = withServerActionMiddleware(
   'actionUpdateUserProfile',
   _actionUpdateUserProfile,
 )
+
+const logger = getLogger(`actionUpdateUserProfile`)
 
 async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfileFormAction>) {
   const authUser = await appRouterGetAuthUser()
@@ -48,6 +53,43 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
     return {
       errors: validatedFields.error.flatten().fieldErrors,
     }
+  }
+
+  try {
+    if (validatedFields.data.address) {
+      const usCongressionalDistrict = await maybeGetCongressionalDistrictFromAddress(
+        validatedFields.data.address,
+      )
+      if ('notFoundReason' in usCongressionalDistrict) {
+        logger.error(
+          `No usCongressionalDistrict found for address ${validatedFields.data.address.formattedDescription} with code ${usCongressionalDistrict.notFoundReason}`,
+        )
+        if (
+          ['CIVIC_API_DOWN', 'UNEXPECTED_ERROR'].includes(usCongressionalDistrict.notFoundReason)
+        ) {
+          Sentry.captureMessage(
+            `No usCongressionalDistrict found for address ${validatedFields.data.address.formattedDescription}`,
+            {
+              extra: {
+                domain: 'actionUpdateUserProfile',
+                notFoundReason: usCongressionalDistrict.notFoundReason,
+              },
+            },
+          )
+        }
+      }
+      if ('districtNumber' in usCongressionalDistrict) {
+        validatedFields.data.address.usCongressionalDistrict = `${usCongressionalDistrict.districtNumber}`
+      }
+    }
+  } catch (error) {
+    logger.error('error getting `usCongressionalDistrict`:' + error)
+    Sentry.captureException(error, {
+      tags: {
+        domain: 'actionUpdateUserProfile',
+        message: 'error getting usCongressionalDistrict',
+      },
+    })
   }
 
   await throwIfRateLimited({ context: 'authenticated' })
@@ -124,6 +166,7 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
       phoneNumber,
       hasOptedInToMembership,
       hasOptedInToSms,
+      hasValidPhoneNumber: true,
       addressId: address?.id || null,
       primaryUserEmailAddressId: primaryUserEmailAddress?.id || null,
     },
