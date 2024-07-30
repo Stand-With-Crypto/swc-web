@@ -5,7 +5,6 @@ import {
   CapitolCanaryInstance,
   DataCreationMethod,
   Prisma,
-  SMSStatus,
   User,
   UserActionOptInType,
   UserActionType,

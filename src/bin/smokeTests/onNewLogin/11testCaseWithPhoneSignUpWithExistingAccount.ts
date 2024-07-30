@@ -4,7 +4,7 @@ import { mockCreateUserInput } from '@/mocks/models/mockUser'
 import { mockCreateUserEmailAddressInput } from '@/mocks/models/mockUserEmailAddress'
 import { prismaClient } from '@/utils/server/prismaClient'
 
-import { getDefaultParameters, mockEmbeddedWalletMetadata, TestCase, verify } from './utils'
+import { getDefaultParameters, TestCase, verify } from './utils'
 
 export const testCaseWithPhoneSignUpWithExistingAccount: TestCase = {
   name: 'Phone Sign Up With Existing Account',
