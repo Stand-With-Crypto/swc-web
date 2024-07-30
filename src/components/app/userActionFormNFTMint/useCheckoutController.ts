@@ -1,15 +1,18 @@
 import React from 'react'
-import { useContract } from '@thirdweb-dev/react'
 import { BigNumber } from 'ethers'
 import useSWR from 'swr'
+import { estimateGasCost, getContract } from 'thirdweb'
+import { base } from 'thirdweb/chains'
+import { claimTo } from 'thirdweb/extensions/erc721'
+import { useActiveAccount } from 'thirdweb/react'
 
 import {
   ETH_NFT_DONATION_AMOUNT,
   MINT_NFT_CONTRACT_ADDRESS,
 } from '@/components/app/userActionFormNFTMint/constants'
 import { fromBigNumber } from '@/utils/shared/bigNumber'
+import { thirdwebClient } from '@/utils/shared/thirdwebClient'
 
-const CLAIM_GAS_LIMIT_OE721_CONTRACT = 231086
 export interface UseCheckoutControllerReturn {
   mintFeeDisplay?: string
   gasFeeDisplay?: string
@@ -26,6 +29,7 @@ export function useCheckoutController({
 } = {}): UseCheckoutControllerReturn {
   const [quantity, setQuantity] = React.useState(1)
   const { data: gasFee } = useGasFee(quantity)
+  const gasNumberInBigNumber = BigNumber.from(0).add(gasFee ?? 0)
 
   const values = React.useMemo<
     Pick<
@@ -42,11 +46,11 @@ export function useCheckoutController({
 
     return {
       mintFeeDisplay: fromBigNumber(mintFee),
-      gasFeeDisplay: fromBigNumber(gasFee),
+      gasFeeDisplay: fromBigNumber(gasNumberInBigNumber),
       totalFeeDisplay: fromBigNumber(totalFee),
       totalFee,
     }
-  }, [gasFee, mintUnitFee, quantity])
+  }, [gasFee, mintUnitFee, quantity, gasNumberInBigNumber])
 
   return {
     ...values,
@@ -58,14 +62,20 @@ export function useCheckoutController({
 }
 
 function useGasFee(quantity: number) {
-  const { contract: contextContract } = useContract(MINT_NFT_CONTRACT_ADDRESS)
-  return useSWR({ contract: contextContract }, async ({ contract }) => {
+  const contract = getContract({
+    address: MINT_NFT_CONTRACT_ADDRESS,
+    client: thirdwebClient,
+    chain: base,
+  })
+  const account = useActiveAccount()
+
+  return useSWR({ contract }, async ({ contract: _contract }) => {
     if (!contract) {
       return
     }
-    const prepareTx = await contract.erc721.claim.prepare(quantity)
-    prepareTx.updateOverrides({ gasLimit: CLAIM_GAS_LIMIT_OE721_CONTRACT })
-    const gasFee = await prepareTx.estimateGasCost()
+
+    const tx = claimTo({ contract, quantity: BigInt(quantity), to: account?.address ?? '' })
+    const gasFee = await estimateGasCost({ transaction: tx })
     return gasFee.wei
   })
 }

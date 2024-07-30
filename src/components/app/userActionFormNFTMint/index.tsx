@@ -2,7 +2,6 @@
 
 import React, { useEffect } from 'react'
 import { capitalize } from 'lodash-es'
-import { toast } from 'sonner'
 
 import {
   ANALYTICS_NAME_USER_ACTION_FORM_NFT_MINT,
@@ -14,7 +13,6 @@ import { trackDialogOpen } from '@/components/ui/dialog/trackDialogOpen'
 import { useSections } from '@/hooks/useSections'
 import { useSendMintNFTTransaction } from '@/hooks/useSendMintNFTTransaction'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
-import { toastGenericError } from '@/utils/web/toastUtils'
 
 import { UserActionFormNFTMintCheckout } from './sections/checkout'
 import { UserActionFormNFTMintIntro } from './sections/intro'
@@ -39,31 +37,13 @@ export function UserActionFormNFTMint({ trackMount }: { trackMount?: boolean }) 
 
   const checkoutController = useCheckoutController()
 
-  const [isUSResident, setIsUSResident] = React.useState(false)
   const [isDebug, setIsDebug] = React.useState(false)
 
-  const {
-    mintNFT,
-    status: sendNFTTransactionStatus,
-    sendTransactionResponse,
-  } = useSendMintNFTTransaction({
-    contractAddress: MINT_NFT_CONTRACT_ADDRESS,
-    quantity: checkoutController.quantity,
-    onStatusChange: status => {
-      if (status === 'error') {
-        return toastGenericError()
-      }
-
-      if (status === 'canceled') {
-        return toast.error('Transaction canceled')
-      }
-
-      if (status === 'completed') {
-        sectionProps.goToSection(UserActionFormNFTMintSectionNames.TRANSACTION_WATCH)
-      }
-    },
-    isUSResident,
-  })
+  const { prepareTransaction, setTransactionHash, transactionHash, handleTransactionException } =
+    useSendMintNFTTransaction({
+      contractAddress: MINT_NFT_CONTRACT_ADDRESS,
+      quantity: checkoutController.quantity,
+    })
 
   switch (sectionProps.currentSection) {
     case UserActionFormNFTMintSectionNames.INTRO:
@@ -91,25 +71,19 @@ export function UserActionFormNFTMint({ trackMount }: { trackMount?: boolean }) 
             {...sectionProps}
             {...checkoutController}
             debug={isDebug}
-            isUSResident={isUSResident}
-            mintStatus={sendNFTTransactionStatus}
-            onIsUSResidentChange={setIsUSResident}
-            onMint={async () => {
-              const result = await mintNFT()
-              if (result === 'completed') {
-                sectionProps.goToSection(UserActionFormNFTMintSectionNames.TRANSACTION_WATCH)
-              }
-            }}
+            handleTransactionException={handleTransactionException}
+            prepareTransaction={prepareTransaction}
+            setTransactionHash={setTransactionHash}
           />
         </div>
       )
     }
 
     case UserActionFormNFTMintSectionNames.TRANSACTION_WATCH: {
-      if (sendTransactionResponse || isDebug) {
-        const params: UserActionFormNFTMintTransactionWatchProps = sendTransactionResponse
-          ? { sendTransactionResponse }
-          : { debug: true, sendTransactionResponse: null }
+      if (transactionHash || isDebug) {
+        const params: UserActionFormNFTMintTransactionWatchProps = transactionHash
+          ? { transactionHash }
+          : { debug: true, transactionHash: null }
         return <UserActionFormNFTMintTransactionWatch {...params} />
       }
 

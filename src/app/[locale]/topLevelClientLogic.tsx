@@ -2,36 +2,18 @@
 
 import { Suspense, useEffect } from 'react'
 import * as Sentry from '@sentry/nextjs'
-import { Base } from '@thirdweb-dev/chains'
-import {
-  coinbaseWallet,
-  embeddedWallet,
-  en,
-  localWallet,
-  metamaskWallet,
-  ThirdwebProvider,
-  WalletConfig,
-  walletConnect,
-} from '@thirdweb-dev/react'
 import { usePathname, useSearchParams } from 'next/navigation'
+import { ThirdwebProvider } from 'thirdweb/react'
 
 import { useThirdwebAuthUser } from '@/hooks/useAuthUser'
 import { useDetectWipedDatabaseAndLogOutUser } from '@/hooks/useDetectWipedDatabaseAndLogOutUser'
 import { LocaleContext } from '@/hooks/useLocale'
 import { SupportedLocale } from '@/intl/locales'
-import { isCypress } from '@/utils/shared/executionEnvironment'
-import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
-import { NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN } from '@/utils/shared/sharedEnv'
 import { maybeInitClientAnalytics, trackClientAnalytic } from '@/utils/web/clientAnalytics'
 import { bootstrapLocalUser } from '@/utils/web/clientLocalUser'
 import { getUserSessionIdOnClient } from '@/utils/web/clientUserSessionId'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
-
-const NEXT_PUBLIC_THIRDWEB_CLIENT_ID = requiredEnv(
-  process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID,
-  'NEXT_PUBLIC_THIRDWEB_CLIENT_ID',
-)
 
 const InitialOrchestration = () => {
   const pathname = usePathname()
@@ -49,8 +31,8 @@ const InitialOrchestration = () => {
   }, [])
   const searchParamsUserId = searchParams?.get('userId')
   useEffect(() => {
-    if (authUser.user || searchParamsUserId) {
-      identifyUserOnClient(authUser.user || { userId: searchParamsUserId! })
+    if (authUser.user?.userId || searchParamsUserId) {
+      identifyUserOnClient({ userId: authUser.user?.userId ?? searchParamsUserId! })
     }
     if (authUser.user && searchParamsUserId && authUser.user.userId !== searchParamsUserId) {
       Sentry.captureMessage('mismatch between authenticated user and userId in search param', {
@@ -88,34 +70,9 @@ export function TopLevelClientLogic({
   children: React.ReactNode
   locale: SupportedLocale
 }) {
-  const supportedWallets: WalletConfig<any>[] = [
-    metamaskWallet(),
-    coinbaseWallet({ recommended: true }),
-    walletConnect(),
-    embeddedWallet({
-      auth: {
-        options: ['google', 'email'],
-      },
-    }),
-  ]
-
-  // Used to authenticate cypresses tests
-  if (isCypress) {
-    supportedWallets.push(localWallet())
-  }
-
   return (
     <LocaleContext.Provider value={locale}>
-      <ThirdwebProvider
-        activeChain={Base}
-        authConfig={{
-          domain: NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN,
-          authUrl: '/api/auth',
-        }}
-        clientId={NEXT_PUBLIC_THIRDWEB_CLIENT_ID}
-        locale={en()}
-        supportedWallets={supportedWallets}
-      >
+      <ThirdwebProvider>
         {/* https://nextjs.org/docs/messages/missing-suspense-with-csr-bailout */}
         <Suspense>
           <InitialOrchestration />

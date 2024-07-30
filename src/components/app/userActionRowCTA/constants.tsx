@@ -90,7 +90,7 @@ export const USER_ACTION_ROW_CTA_INFO: Record<
           unavailableContent={
             <Dialog {...dialogProps}>
               <DialogTrigger asChild>{children}</DialogTrigger>
-              <DialogContent className="max-w-3xl">
+              <DialogContent a11yTitle="Donation" className="max-w-3xl">
                 <UserActionFormActionUnavailable
                   onConfirm={() => dialogProps?.onOpenChange?.(false)}
                 />

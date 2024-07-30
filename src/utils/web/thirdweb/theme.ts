@@ -1,4 +1,4 @@
-import { lightTheme } from '@thirdweb-dev/react'
+import { lightTheme } from 'thirdweb/react'
 
 export const theme = lightTheme({
   colors: {
@@ -12,7 +12,7 @@ export const theme = lightTheme({
     secondaryButtonBg: '#f1f5f9',
     connectedButtonBg: '#f1f5f9',
     connectedButtonBgHover: '#e4e2e4',
-    walletSelectorButtonHoverBg: '#e4e2e4',
+    secondaryButtonHoverBg: '#e4e2e4',
     secondaryIconColor: '#706f78',
     modalBg: '#fff',
   },

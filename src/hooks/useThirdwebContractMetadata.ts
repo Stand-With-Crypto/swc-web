@@ -1,8 +1,16 @@
-import { useContract, useContractMetadata, ValidContractInstance } from '@thirdweb-dev/react'
+import { getContract } from 'thirdweb'
+import { base } from 'thirdweb/chains'
+import { getContractMetadata } from 'thirdweb/extensions/common'
+import { useReadContract } from 'thirdweb/react'
 
-export type ThirdwebContractMetadata = Awaited<ReturnType<ValidContractInstance['metadata']['get']>>
+import { thirdwebClient } from '@/utils/shared/thirdwebClient'
 
 export function useThirdwebContractMetadata(address: string) {
-  const { contract } = useContract(address)
-  return useContractMetadata(contract)
+  const contract = getContract({
+    address,
+    client: thirdwebClient,
+    chain: base,
+  })
+
+  return useReadContract(getContractMetadata, { contract })
 }

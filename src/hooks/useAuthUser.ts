@@ -1,25 +1,33 @@
-/*
-This hook wraps the useUser hook from @thirdweb-dev/react-core and adds our jwt-specific metadata we pass back to the client
-see https://portal.thirdweb.com/wallets/auth/server-frameworks/next#enhancing-session-data
-and https://github.com/Stand-With-Crypto/swc-web/blob/a99648eb4097dffb335155375b7d5b439c9b997c/src/utils/server/thirdweb/thirdwebAuthConfig.ts#L50
-*/
-
-import { Json } from '@thirdweb-dev/auth'
-import { useUser } from '@thirdweb-dev/react'
+import { useMemo } from 'react'
+import Cookies from 'js-cookie'
+import { jwtDecode } from 'jwt-decode'
+import { useActiveWalletConnectionStatus } from 'thirdweb/react'
 
 import { parseThirdwebAddress } from '@/hooks/useThirdwebAddress/parseThirdwebAddress'
-import { AuthSessionMetadata } from '@/utils/server/thirdweb/types'
+import { THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX } from '@/utils/shared/thirdwebAuthToken'
 
 export function useThirdwebAuthUser() {
-  const data = useUser<Json, AuthSessionMetadata>()
+  // We are not using the return value here because what we want is to trigger
+  // a rerender when the wallet connection status changes.
+  // This way, we can update the user data when the user connects or disconnects
+  useActiveWalletConnectionStatus()
+
+  const token = Cookies.get(THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX)
+
+  const { userId, address } = useMemo(() => {
+    const decodedToken = token
+      ? jwtDecode<{ ctx?: { userId?: string; address?: string } }>(token)
+      : null
+    const { userId, address } = decodedToken?.ctx ?? {}
+
+    return { userId, address }
+  }, [token])
+
   return {
-    ...data,
-    user: data.user
-      ? {
-          ...data.user,
-          userId: data.user.session!.userId,
-          address: parseThirdwebAddress(data.user.address),
-        }
-      : undefined,
+    isLoggedIn: !!userId,
+    user: {
+      userId,
+      address: parseThirdwebAddress(address ?? ''),
+    },
   }
 }
