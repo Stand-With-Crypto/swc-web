@@ -41,8 +41,6 @@ describe('action - mint your supporter NFT', () => {
       .scrollIntoView()
       .click()
 
-    cy.contains('Submit').should('be.visible').click()
-
     cy.contains('You joined Stand With Crypto!').should('be.visible')
     cy.get('[role="dialog"]').eq(1).find('button').contains('Close').click({ force: true })
 
