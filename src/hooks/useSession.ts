@@ -39,7 +39,7 @@ export function useSessionControl() {
     Cookies.set(USER_SESSION_ID_COOKIE_NAME, generateUserSessionId())
 
     if (pathname === internalUrls.profile()) {
-      router.push(internalUrls.home())
+      router.replace(internalUrls.home())
     } else {
       window.location.reload()
     }

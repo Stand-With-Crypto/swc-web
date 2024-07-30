@@ -1,15 +1,13 @@
 'use client'
 
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { useEvent } from 'react-use'
-import Cookies from 'js-cookie'
 
 import { Button } from '@/components/ui/button'
 import { useResponsivePopover } from '@/components/ui/responsivePopover'
 import { useDialog } from '@/hooks/useDialog'
 import { useUserWithMaybeENSData } from '@/hooks/useUserWithMaybeEnsData'
 import { LOGOUT_ACTION_EVENT } from '@/utils/shared/eventListeners'
-import { THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX } from '@/utils/shared/thirdwebAuthToken'
 import { getSensitiveDataUserDisplayName } from '@/utils/web/userUtils'
 
 import { NavbarLoggedInPopoverContent } from './navbarLoggedInPopoverContent'
@@ -30,14 +28,6 @@ export function NavbarLoggedInButton({ onOpenChange }: { onOpenChange: (open: bo
 
   // This is used to disable the login button while logging out
   useEvent(LOGOUT_ACTION_EVENT, handleLogoutEvent, window, { capture: true })
-
-  useEffect(() => {
-    const token = Cookies.get(THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX)
-
-    if (isLoggingOut && !token) {
-      setIsLoggingOut(false)
-    }
-  }, [isLoggingOut])
 
   return (
     <Popover
