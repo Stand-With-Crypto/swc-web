@@ -34,7 +34,7 @@ export function NavbarLoggedInButton({ onOpenChange }: { onOpenChange: (open: bo
   useEffect(() => {
     const token = Cookies.get(THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX)
 
-    if(isLoggingOut && !token) {
+    if (isLoggingOut && !token) {
       setIsLoggingOut(false)
     }
   }, [isLoggingOut])
