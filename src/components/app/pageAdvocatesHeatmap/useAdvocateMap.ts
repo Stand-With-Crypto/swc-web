@@ -3,11 +3,6 @@ import { UserActionType } from '@prisma/client'
 
 import { ADVOCATES_ACTIONS, STATE_COORDS } from '@/components/app/pageAdvocatesHeatmap/constants'
 import { PublicRecentActivity } from '@/data/recentActivity/getPublicRecentActivity'
-import { generateUserSessionId } from '@/utils/shared/userSessionId'
-
-interface UseAdvocateMapProps {
-  actions: PublicRecentActivity
-}
 
 export interface MapMarker {
   id: string
@@ -51,7 +46,7 @@ const createMarkersFromActions = (recentActivity: PublicRecentActivity): MapMark
         }
 
         markers.push({
-          id: generateUserSessionId(),
+          id: item.id,
           name: state,
           coordinates: [coordinates[0] + offsetX, coordinates[1] + offsetY],
           actionType: item.actionType,
@@ -65,46 +60,42 @@ const createMarkersFromActions = (recentActivity: PublicRecentActivity): MapMark
   return markers
 }
 
+const markersAreSame = (arr1: MapMarker[], arr2: MapMarker[]): boolean => {
+  if (arr1.length !== arr2.length) return false
+  const ids1 = arr1.map(marker => marker.id).sort()
+  const ids2 = arr2.map(marker => marker.id).sort()
+  return ids1.every((id, index) => id === ids2[index])
+}
+
+const INITIAL_MARKERS = 5
 const MAX_MARKERS = 20
 const ADVOCATE_MAP_INTERVAL = 2000
 
-let STARTING_MARKERS = 5
-
-export function useAdvocateMap({ actions }: UseAdvocateMapProps) {
+export function useAdvocateMap(actions: PublicRecentActivity) {
   const [displayedMarkers, setDisplayedMarkers] = useState<MapMarker[]>([])
-  const [currentActionIndex, setCurrentActionIndex] = useState(0)
+  const [totalMarkers, setTotalMarkers] = useState<number>(INITIAL_MARKERS - 1)
 
   const markers = useMemo(() => createMarkersFromActions(actions), [actions])
 
-  if (displayedMarkers.length === MAX_MARKERS) {
-    STARTING_MARKERS = MAX_MARKERS
-  }
-
-  useEffect(() => {
-    const initialMarkers = markers.slice(0, STARTING_MARKERS)
-    setDisplayedMarkers(initialMarkers)
-    setCurrentActionIndex(STARTING_MARKERS)
-  }, [markers])
-
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setDisplayedMarkers(prev => {
-        let newMarkers = [...prev]
-
-        if (newMarkers.length < MAX_MARKERS) {
-          newMarkers.push(markers[currentActionIndex % markers.length])
-        } else {
-          newMarkers = [...newMarkers.slice(1), markers[currentActionIndex % markers.length]]
-        }
-
-        setCurrentActionIndex(prevIndex => (prevIndex + 1) % markers.length)
-
-        return newMarkers
-      })
+      if (totalMarkers < MAX_MARKERS) {
+        setTotalMarkers(prevTotal => Math.min(Math.max(prevTotal + 1, 0), MAX_MARKERS))
+      }
     }, ADVOCATE_MAP_INTERVAL)
 
     return () => clearInterval(intervalId)
-  }, [currentActionIndex, markers])
+  }, [totalMarkers])
 
-  return displayedMarkers
+  useEffect(() => {
+    setDisplayedMarkers(prev => {
+      if (markersAreSame(prev, markers)) {
+        return prev
+      }
+
+      return markers.slice(0, totalMarkers)
+    })
+  }, [markers, totalMarkers])
+
+  return useMemo(() => displayedMarkers, [displayedMarkers])
 }
