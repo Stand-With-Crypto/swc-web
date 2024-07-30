@@ -20,6 +20,7 @@ interface GoodbyeSMSCommunicationJourneyPayload {
   phoneNumber: string
 }
 
+// Please, never call this function manually, it should be called from "@/utils/server/sms/actions.ts"
 export const goodbyeSMSCommunicationJourney = inngest.createFunction(
   {
     id: GOODBYE_SMS_COMMUNICATION_JOURNEY_INNGEST_FUNCTION_ID,

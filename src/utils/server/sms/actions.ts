@@ -9,16 +9,28 @@ import { inngest } from '@/inngest/inngest'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getServerAnalytics } from '@/utils/server/serverAnalytics'
 import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
+import { smsProvider, SMSProviders } from '@/utils/shared/smsProvider'
 
 export async function optInUser(phoneNumber: string, user: User) {
-  await prismaClient.user.updateMany({
-    data: {
-      smsStatus: SMSStatus.OPTED_IN,
-    },
-    where: {
-      phoneNumber,
-    },
-  })
+  if (
+    user.smsStatus === SMSStatus.OPTED_OUT ||
+    smsProvider !== SMSProviders.TWILIO ||
+    (user.smsStatus === SMSStatus.OPTED_IN && user.phoneNumber === phoneNumber) // If user already opted in and changes their phone number, we want to send them a new message
+  ) {
+    return
+  }
+
+  // If user opted-out, the only way to opt-back is by sending us a UNSTOP keyword
+  if ([SMSStatus.NOT_OPTED_IN, SMSStatus.OPTED_IN_PENDING_DOUBLE_OPT_IN].includes(user.smsStatus)) {
+    await prismaClient.user.updateMany({
+      data: {
+        smsStatus: SMSStatus.OPTED_IN,
+      },
+      where: {
+        phoneNumber,
+      },
+    })
+  }
 
   await inngest.send({
     name: WELCOME_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
@@ -38,7 +50,7 @@ export async function optInUser(phoneNumber: string, user: User) {
 }
 
 export async function optOutUser(phoneNumber: string, isSWCKeyword: boolean, user?: User) {
-  if (user?.smsStatus === SMSStatus.OPTED_OUT) return
+  if (user?.smsStatus === SMSStatus.OPTED_OUT || smsProvider !== SMSProviders.TWILIO) return
 
   await prismaClient.user.updateMany({
     data: {
@@ -72,11 +84,11 @@ export async function optOutUser(phoneNumber: string, isSWCKeyword: boolean, use
 }
 
 export async function optUserBackIn(phoneNumber: string, user?: User) {
-  if (user && user.smsStatus !== SMSStatus.OPTED_OUT) return
+  if (user?.smsStatus !== SMSStatus.OPTED_OUT || smsProvider !== SMSProviders.TWILIO) return
 
   await prismaClient.user.updateMany({
     data: {
-      smsStatus: SMSStatus.OPTED_IN,
+      smsStatus: SMSStatus.OPTED_IN_HAS_REPLIED,
     },
     where: {
       phoneNumber,
