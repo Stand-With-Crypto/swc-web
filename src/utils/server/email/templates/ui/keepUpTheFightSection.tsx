@@ -71,15 +71,15 @@ export function KeepUpTheFightSection({
               </Heading>
               <Text className="text-foreground-muted my-0">{metadata.subtext}</Text>
             </Column>
-            <Column align="right" className="w-6 md:w-[157px]">
+            <Column align="right" className="w-6 lg:w-[157px]">
               <Button
-                className="hidden text-center md:block"
+                className="hidden text-center lg:block"
                 href={buildTemplateInternalUrl(metadata.buttonHref, hrefSearchParams)}
               >
                 {metadata.buttonLabel}
               </Button>
               <Button
-                className="block md:hidden"
+                className="block lg:hidden"
                 href={buildTemplateInternalUrl(metadata.buttonHref, hrefSearchParams)}
                 noPadding
                 variant="ghost"

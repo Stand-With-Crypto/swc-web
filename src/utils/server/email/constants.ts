@@ -38,4 +38,4 @@ export const EVENT_NAME_TO_HUMAN_READABLE_STRING: Record<EmailEventName, string>
 
 export const INTERNAL_BASE_URL = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
-  : 'http://localhost:3000'
+  : 'https://361b-2804-7f3-480-d02-c30-b77f-7eac-706.ngrok-free.app'
