@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import { TabsContent } from '@radix-ui/react-tabs'
 import { useInView } from 'framer-motion'
 
@@ -21,10 +21,7 @@ export function DelayedRecentActivityWithMap(props: {
   locale: SupportedLocale
   advocatesMapPageData: Awaited<ReturnType<typeof getAdvocatesMapData>>
 }) {
-  const recentActivity = useApiRecentActivity(
-    props.actions,
-    { limit: 30, restrictToUS: true },
-  )
+  const recentActivity = useApiRecentActivity(props.actions, { limit: 30, restrictToUS: true })
   const ref = useRef(null)
   const isInView = useInView(ref, { margin: '-50%', once: true })
   const visibleActions = recentActivity.data.slice(isInView ? 0 : 1, recentActivity.data.length)
