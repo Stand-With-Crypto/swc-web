@@ -1,3 +1,5 @@
+'use server'
+
 import {
   Address,
   CapitolCanaryInstance,
@@ -13,7 +15,8 @@ import {
 } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { compact, groupBy } from 'lodash-es'
-import { NextApiRequest } from 'next'
+import { cookies } from 'next/headers'
+import { VerifyLoginPayloadParams } from 'thirdweb/auth'
 
 import { parseThirdwebAddress } from '@/hooks/useThirdwebAddress/parseThirdwebAddress'
 import { CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME } from '@/inngest/functions/capitolCanary/upsertAdvocateInCapitolCanary'
@@ -35,24 +38,21 @@ import {
 } from '@/utils/server/serverAnalytics'
 import {
   mapLocalUserToUserDatabaseFields,
-  parseLocalUserFromCookiesForPageRouter,
+  parseLocalUserFromCookies,
   ServerLocalUser,
 } from '@/utils/server/serverLocalUser'
-import { getUserSessionIdOnPageRouter } from '@/utils/server/serverUserSessionId'
+import { getUserSessionId as _getUserSessionId } from '@/utils/server/serverUserSessionId'
 import {
   fetchEmbeddedWalletMetadataFromThirdweb,
   ThirdwebEmbeddedWalletMetadata,
 } from '@/utils/server/thirdweb/fetchEmbeddedWalletMetadataFromThirdweb'
-import { AuthSessionMetadata } from '@/utils/server/thirdweb/types'
+import { thirdwebAuth } from '@/utils/server/thirdweb/thirdwebAuthClient'
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
-import { getLogger } from '@/utils/shared/logger'
+import { logger } from '@/utils/shared/logger'
 import { prettyLog } from '@/utils/shared/prettyLog'
 import { generateReferralId } from '@/utils/shared/referralId'
+import { THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX } from '@/utils/shared/thirdwebAuthToken'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
-
-const logger = getLogger('onLogin')
-const getLog = (address: string) => (message: string) =>
-  logger.info(`address ${address}: ${message}`)
 
 type UpsertedUser = User & {
   address: Address | null
@@ -61,13 +61,19 @@ type UpsertedUser = User & {
   userCryptoAddresses: UserCryptoAddress[]
 }
 
-export async function onLogin(
-  _cryptoAddress: string,
-  req: NextApiRequest,
-): Promise<AuthSessionMetadata> {
-  const cryptoAddress = parseThirdwebAddress(_cryptoAddress)
+const getLog = (address: string) => (message: string) =>
+  logger.info(`address ${address}: ${message}`)
 
-  const localUser = parseLocalUserFromCookiesForPageRouter(req)
+export async function login(payload: VerifyLoginPayloadParams) {
+  const verifiedPayload = await thirdwebAuth.verifyPayload(payload)
+
+  if (!verifiedPayload.valid) return
+
+  const { address } = payload.payload
+
+  const cryptoAddress = parseThirdwebAddress(address)
+
+  const localUser = parseLocalUserFromCookies()
   const log = getLog(cryptoAddress)
 
   const existingVerifiedUser = await prismaClient.user.findFirst({
@@ -94,14 +100,30 @@ export async function onLogin(
         })
         .flush(),
     ])
-    return { userId: existingVerifiedUser.id }
+
+    const jwt = await thirdwebAuth.generateJWT({
+      payload: verifiedPayload.payload,
+      context: {
+        userId: existingVerifiedUser.id,
+        address,
+      },
+    })
+
+    cookies().set(THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX, jwt)
+
+    return
   }
-  return onNewLogin({
+
+  const decreaseCommunicationTimersCookie = cookies().get(
+    'SWC_DECREASE_COMMUNICATION_TIMERS',
+  )?.value
+
+  const user = await onNewLogin({
     cryptoAddress,
     localUser,
-    getUserSessionId: () => getUserSessionIdOnPageRouter(req),
+    getUserSessionId: () => _getUserSessionId(),
     injectedFetchEmbeddedWalletMetadataFromThirdweb: fetchEmbeddedWalletMetadataFromThirdweb,
-    decreaseCommunicationTimers: req.cookies['SWC_DECREASE_COMMUNICATION_TIMERS'] === 'true',
+    decreaseCommunicationTimers: decreaseCommunicationTimersCookie === 'true',
   })
     .then(res => ({ userId: res.userId }))
     .catch(e => {
@@ -111,6 +133,16 @@ export async function onLogin(
       })
       throw e
     })
+
+  const jwt = await thirdwebAuth.generateJWT({
+    payload: verifiedPayload.payload,
+    context: {
+      userId: user.userId,
+      address,
+    },
+  })
+
+  cookies().set(THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX, jwt)
 }
 
 interface NewLoginParams {

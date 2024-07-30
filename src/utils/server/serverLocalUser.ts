@@ -1,6 +1,5 @@
 import { User } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
-import { NextApiRequest } from 'next'
 import { cookies } from 'next/headers'
 import { any, object, record, string } from 'zod'
 
@@ -124,17 +123,5 @@ export function parseLocalUserFromCookies() {
     currentSessionStr,
     cookieConsentStr,
     source: 'app-router',
-  })
-}
-
-export function parseLocalUserFromCookiesForPageRouter(req: NextApiRequest) {
-  const persistedStr = req.cookies[LOCAL_USER_PERSISTED_KEY]
-  const currentSessionStr = req.cookies[LOCAL_USER_CURRENT_SESSION_KEY]
-  const cookieConsentStr = req.cookies[COOKIE_CONSENT_COOKIE_NAME]
-  return parseFromCookieStrings({
-    persistedStr,
-    currentSessionStr,
-    cookieConsentStr,
-    source: 'page-router',
   })
 }

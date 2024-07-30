@@ -83,7 +83,9 @@ function useParentComponent() {
       ContainerTrigger: isMobile ? DrawerTrigger : DialogTrigger,
       ContainerContent: isMobile
         ? DrawerContent
-        : (props: DialogProps) => <DialogContent {...props} className="max-w-lg" />,
+        : (props: DialogProps) => (
+            <DialogContent a11yTitle="Cookie consent" {...props} className="max-w-lg" />
+          ),
       ContainerHeader: isMobile ? DrawerHeader : DialogHeader,
       ContainerTitle: isMobile ? DrawerTitle : DialogTitle,
     }),

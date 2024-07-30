@@ -1,7 +1,7 @@
 import { z } from 'zod'
 
 import { requiredEnv } from '@/utils/shared/requiredEnv'
-import { smsProvider } from '@/utils/shared/smsProvider'
+import { smsProvider, SMSProviders } from '@/utils/shared/smsProvider'
 
 import { messagingClient } from './client'
 import { SendSMSError } from './SendSMSError'
@@ -16,9 +16,7 @@ export const zodSendSMSSchema = z.object({
 export type SendSMSPayload = z.infer<typeof zodSendSMSSchema>
 
 export const sendSMS = async (payload: SendSMSPayload) => {
-  if (smsProvider !== 'twilio') {
-    return
-  }
+  if (smsProvider !== SMSProviders.TWILIO) return
 
   const validatedInput = zodSendSMSSchema.safeParse(payload)
 

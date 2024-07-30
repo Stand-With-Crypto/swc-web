@@ -8,6 +8,7 @@ import twilio from 'twilio'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { verifySignature } from '@/utils/server/sms'
 import { optOutUser, optUserBackIn } from '@/utils/server/sms/actions'
+import * as messages from '@/utils/server/sms/messages'
 import { getLogger } from '@/utils/shared/logger'
 
 const SWC_STOP_SMS_KEYWORD = process.env.SWC_STOP_SMS_KEYWORD?.toUpperCase()
@@ -69,6 +70,8 @@ export async function POST(request: NextRequest) {
 
   const keyword = body.Body?.toUpperCase()
 
+  let message = ''
+
   if (keyword && keyword.length > 0) {
     if (
       ['STOPALL', 'UNSUBSCRIBE', 'CANCEL', 'END', 'QUIT', 'STOP', SWC_STOP_SMS_KEYWORD].includes(
@@ -78,6 +81,8 @@ export async function POST(request: NextRequest) {
       await optOutUser(phoneNumber, keyword === SWC_STOP_SMS_KEYWORD, user)
     } else if (['YES', 'START', 'CONTINUE', 'UNSTOP', SWC_UNSTOP_SMS_KEYWORD].includes(keyword)) {
       await optUserBackIn(phoneNumber, user)
+    } else if (['HELP'].includes(keyword)) {
+      message = messages.HELP_MESSAGE
     }
   }
 
@@ -87,8 +92,10 @@ export async function POST(request: NextRequest) {
   // If we don't respond the message with this xml Twilio will trigger a error event on the fail webhook
   const response = new twilio.twiml.MessagingResponse()
 
-  // We can't get the messageId when sending messages this way, so we need to trigger a Inngest function instead
-  response.message('')
+  if (message) {
+    // We can't get the messageId when sending messages this way, so we need to trigger a Inngest function instead
+    response.message(message)
+  }
 
   return new Response(response.toString(), {
     headers,
