@@ -7,18 +7,19 @@ import { parseThirdwebAddress } from '@/hooks/useThirdwebAddress/parseThirdwebAd
 import { THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX } from '@/utils/shared/thirdwebAuthToken'
 
 export function useThirdwebAuthUser() {
-  useActiveWalletConnectionStatus()
+  const loginStatus = useActiveWalletConnectionStatus()
 
-  const token = Cookies.get(THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX)
+
 
   const { userId, address } = useMemo(() => {
+    const token = Cookies.get(THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX)
     const decodedToken = token
       ? jwtDecode<{ ctx?: { userId?: string; address?: string } }>(token)
       : null
     const { userId, address } = decodedToken?.ctx ?? {}
 
     return { userId, address }
-  }, [token])
+  }, [loginStatus])
 
   return {
     isLoggedIn: !!userId,
