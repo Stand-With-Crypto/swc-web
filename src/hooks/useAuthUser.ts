@@ -7,21 +7,18 @@ import { parseThirdwebAddress } from '@/hooks/useThirdwebAddress/parseThirdwebAd
 import { THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX } from '@/utils/shared/thirdwebAuthToken'
 
 export function useThirdwebAuthUser() {
-  // We are not using the return value here because what we want is to trigger
-  // a rerender when the wallet connection status changes.
-  // This way, we can update the user data when the user connects or disconnects
-  useActiveWalletConnectionStatus()
-
-  const token = Cookies.get(THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX)
+  const connectionStatus = useActiveWalletConnectionStatus()
 
   const { userId, address } = useMemo(() => {
+    const token = Cookies.get(THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX)
     const decodedToken = token
       ? jwtDecode<{ ctx?: { userId?: string; address?: string } }>(token)
       : null
     const { userId, address } = decodedToken?.ctx ?? {}
 
     return { userId, address }
-  }, [token])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [connectionStatus])
 
   return {
     isLoggedIn: !!userId,
