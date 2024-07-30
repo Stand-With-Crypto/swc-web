@@ -1,3 +1,5 @@
+import { uniqBy } from 'lodash-es'
+
 import { SensitiveDataClientUserAction } from '@/clientModels/clientUserAction/sensitiveDataClientUserAction'
 import { DISABLED_USER_ACTION_CAMPAIGNS } from '@/components/app/pageUserProfile/disabledUserActionCampaigns'
 import { NextImage } from '@/components/ui/image'
@@ -7,9 +9,14 @@ interface PreviousCampaignsListProps {
 }
 
 export function PreviousCampaignsList({ userActions }: PreviousCampaignsListProps) {
+  const filteredDuplicatePreviousCampaigns = uniqBy(
+    userActions.map(action => action),
+    ({ actionType, campaignName }) => `${actionType}-${campaignName}`,
+  )
+
   return (
     <div className="flex flex-col gap-4">
-      {userActions.map(action => (
+      {filteredDuplicatePreviousCampaigns.map(action => (
         <CampaignCard action={action} key={action.id} />
       ))}
     </div>
