@@ -46,7 +46,6 @@ export default function NFTArrivedEmail({
           alt={nftImage.alt}
           className="mb-6 w-full max-w-full"
           src={buildTemplateInternalUrl(nftImage.src, hydratedHrefSearchParams)}
-          // width={620}
         />
 
         <Heading gutterBottom="md">Your NFT has arrived!</Heading>

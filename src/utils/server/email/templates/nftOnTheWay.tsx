@@ -43,9 +43,8 @@ export default function NFTOnTheWayEmail({
       <Section>
         <Img
           alt={nftImage.alt}
-          className="mb-6 max-w-full"
+          className="mb-6 w-full max-w-full"
           src={buildTemplateInternalUrl(nftImage.src, hydratedHrefSearchParams)}
-          width={620}
         />
 
         <Heading gutterBottom="md">Your NFT is on the way!</Heading>
