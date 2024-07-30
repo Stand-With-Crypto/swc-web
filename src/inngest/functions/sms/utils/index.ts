@@ -1,0 +1,5 @@
+export { createCommunication, createCommunicationJourneys } from './communicationJourney'
+export { enqueueMessages } from './enqueueMessages'
+export { fetchPhoneNumbers } from './fetchPhoneNumbers'
+export { flagInvalidPhoneNumbers } from './flagInvalidPhoneNumbers'
+export { validatePhoneNumbers } from './validatePhoneNumbers'
