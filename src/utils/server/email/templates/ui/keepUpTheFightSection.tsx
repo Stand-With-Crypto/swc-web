@@ -13,7 +13,7 @@ import { buildTemplateInternalUrl } from '@/utils/server/email/utils/buildTempla
 export interface KeepUpTheFightSectionProps {
   completedActionTypes?: EmailActiveActions[]
   hrefSearchParams?: Record<string, unknown>
-  hiddenActions?: EmailActiveActions[]
+  hiddenActions?: string[]
 }
 
 export function KeepUpTheFightSection({

@@ -7,10 +7,18 @@ import {
   UserCryptoAddress,
 } from '@prisma/client'
 import { Decimal } from '@prisma/client/runtime/library'
+import { render } from '@react-email/components'
+import * as Sentry from '@sentry/nextjs'
 
 import { AIRDROP_NFT_INNGEST_EVENT_NAME } from '@/inngest/functions/airdropNFT/airdropNFT'
 import { inngest } from '@/inngest/inngest'
-import { EmailEnabledActionNFTs } from '@/utils/server/email/templates/common/constants'
+import { sendMail } from '@/utils/server/email'
+import {
+  EmailActiveActions,
+  EmailEnabledActionNFTs,
+  EmailEnabledActionNFTsNames,
+} from '@/utils/server/email/templates/common/constants'
+import NFTOnTheWayEmail from '@/utils/server/email/templates/nftOnTheWay'
 import { NFT_SLUG_BACKEND_METADATA } from '@/utils/server/nft/constants'
 import { AirdropPayload } from '@/utils/server/nft/payload'
 import { prismaClient } from '@/utils/server/prismaClient'
@@ -74,12 +82,16 @@ const logger = getLogger('claimNft')
 
 interface Config {
   skipTransactionFeeCheck?: boolean
-  transactionEmailActionNFT?: EmailEnabledActionNFTs
-  userCommunicationJourneyId?: string
+  transactionEmailActionNFT?: EmailEnabledActionNFTsNames
 }
 
+type UserActionToClaim = Pick<
+  UserAction,
+  'id' | 'actionType' | 'campaignName' | 'nftMintId' | 'userId'
+>
+
 export async function claimNFT(
-  userAction: Pick<UserAction, 'id' | 'actionType' | 'campaignName' | 'nftMintId'>,
+  userAction: UserActionToClaim,
   userCryptoAddress: Pick<UserCryptoAddress, 'cryptoAddress'>,
   config: Config = {},
 ) {
@@ -151,7 +163,7 @@ export async function claimNFT(
 }
 
 export async function claimNFTAndSendEmailNotification(
-  userAction: Pick<UserAction, 'id' | 'actionType' | 'campaignName' | 'nftMintId'>,
+  userAction: UserActionToClaim,
   userCryptoAddress: Pick<UserCryptoAddress, 'cryptoAddress'>,
   config: Config = {},
 ) {
@@ -159,4 +171,74 @@ export async function claimNFTAndSendEmailNotification(
     skipTransactionFeeCheck: false,
     ...config,
   }
+
+  if (!hydratedConfig.skipTransactionFeeCheck) {
+    const currentTransactionFee = await fetchAirdropTransactionFee()
+    if (currentTransactionFee > AIRDROP_NFT_ETH_TRANSACTION_FEE_THRESHOLD) {
+      await sendNFTOnTheWayEmail(userAction)
+      return null
+    }
+  }
+
+  return claimNFT(userAction, userCryptoAddress, {
+    ...hydratedConfig,
+    skipTransactionFeeCheck: true,
+  })
+}
+
+async function sendNFTOnTheWayEmail(userAction: UserActionToClaim) {
+  const user = await prismaClient.user.findFirstOrThrow({
+    where: { id: userAction.userId },
+    include: {
+      primaryUserEmailAddress: true,
+      userActions: true,
+      userSessions: true,
+    },
+  })
+
+  if (
+    !user.primaryUserEmailAddress?.emailAddress ||
+    !Object.values(EmailEnabledActionNFTs).includes(userAction.actionType)
+  ) {
+    return null
+  }
+
+  const userSession = user.userSessions?.[0]
+  const messageId = await sendMail({
+    to: user.primaryUserEmailAddress.emailAddress,
+    subject: NFTOnTheWayEmail.subjectLine,
+    html: render(
+      <NFTOnTheWayEmail
+        actionNFT={userAction.actionType as EmailEnabledActionNFTs}
+        completedActionTypes={user.userActions
+          .filter(action => Object.values(EmailActiveActions).includes(action.actionType))
+          .map(action => action.actionType as EmailActiveActions)}
+        hiddenActions={[userAction.actionType]}
+        session={
+          userSession
+            ? {
+                userId: userSession.userId,
+                sessionId: userSession.id,
+              }
+            : null
+        }
+      />,
+    ),
+    customArgs: {
+      userId: user.id,
+      userActionId: userAction.id,
+      actionType: userAction.actionType,
+    },
+  }).catch(err => {
+    Sentry.captureException(err, {
+      extra: { userId: user.id, emailTo: user.primaryUserEmailAddress!.emailAddress },
+      tags: {
+        domain: 'claimNFT',
+      },
+      fingerprint: ['claimNFT', 'sendMail'],
+    })
+    throw err
+  })
+
+  logger.info(`Sent nft on the way email with messageId: ${messageId}`)
 }

@@ -25,7 +25,7 @@ import {
 } from '@/utils/server/capitolCanary/campaigns'
 import { UpsertAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { mergeUsers } from '@/utils/server/mergeUsers/mergeUsers'
-import { claimNFT } from '@/utils/server/nft/claimNFT'
+import { claimNFTAndSendEmailNotification } from '@/utils/server/nft/claimNFT'
 import { mintPastActions } from '@/utils/server/nft/mintPastActions'
 import { prismaClient } from '@/utils/server/prismaClient'
 import {
@@ -678,7 +678,7 @@ async function triggerPostLoginUserActionSteps({
     const signUpFlowExperimentVariant =
       localUser?.persisted?.experiments?.gh02_SWCSignUpFlowExperiment
     if (signUpFlowExperimentVariant === 'control') {
-      await claimNFT(optInUserAction, userCryptoAddress)
+      await claimNFTAndSendEmailNotification(optInUserAction, userCryptoAddress)
     }
 
     analytics.trackUserActionCreated({

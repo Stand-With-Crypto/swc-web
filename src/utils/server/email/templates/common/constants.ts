@@ -1,5 +1,26 @@
-export type EmailActiveActions = 'CALL' | 'EMAIL' | 'DONATION' | 'NFT_MINT' | 'VOTER_REGISTRATION'
-export type EmailEnabledActionNFTs = 'OPT_IN' | 'CALL' | 'VOTER_REGISTRATION'
+import { NFTSlug } from '@/utils/shared/nft'
+
+export enum EmailActiveActions {
+  CALL = 'CALL',
+  EMAIL = 'EMAIL',
+  DONATION = 'DONATION',
+  NFT_MINT = 'NFT_MINT',
+  VOTER_REGISTRATION = 'VOTER_REGISTRATION',
+}
+
+export enum EmailEnabledActionNFTs {
+  OPT_IN = 'OPT_IN',
+  CALL = 'CALL',
+  VOTER_REGISTRATION = 'VOTER_REGISTRATION',
+}
+
+export type EmailEnabledActionNFTsNames = `${EmailEnabledActionNFTs}`
+
+export const NFT_SLUG_TO_EMAIL_ACTIVE_ACTION: Partial<Record<NFTSlug, EmailEnabledActionNFTs>> = {
+  [NFTSlug.CALL_REPRESENTATIVE_SEPT_11]: EmailEnabledActionNFTs.CALL,
+  [NFTSlug.I_AM_A_VOTER]: EmailEnabledActionNFTs.VOTER_REGISTRATION,
+  [NFTSlug.SWC_SHIELD]: EmailEnabledActionNFTs.OPT_IN,
+}
 
 // Keys in this object are still type enforced, we don't want to use the prisma enum due to errors on dev environment
 export const ACTIONS_METADATA_BY_TYPE: Record<
@@ -63,7 +84,10 @@ export interface EmailTemplateProps {
   } | null
 }
 
-export const NFT_IMAGES_BY_ACTION: Record<EmailEnabledActionNFTs, { src: string; alt: string }> = {
+export const NFT_IMAGES_BY_ACTION: Record<
+  EmailEnabledActionNFTsNames,
+  { src: string; alt: string }
+> = {
   CALL: {
     src: '/email/nfts/call.png',
     alt: 'Call Action NFT',

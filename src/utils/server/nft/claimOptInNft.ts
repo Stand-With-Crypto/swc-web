@@ -1,6 +1,6 @@
 import { UserActionOptInType, UserActionType, UserCryptoAddress } from '@prisma/client'
 
-import { claimNFT } from '@/utils/server/nft/claimNFT'
+import { claimNFTAndSendEmailNotification } from '@/utils/server/nft/claimNFT'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
 
@@ -15,7 +15,7 @@ export async function claimOptInNFTIfNotClaimed(user: {
   const optInUserAction = await getOptInUserAction(user.id)
   if (optInUserAction.nftMintId !== null) return
 
-  await claimNFT(optInUserAction, user.primaryUserCryptoAddress)
+  await claimNFTAndSendEmailNotification(optInUserAction, user.primaryUserCryptoAddress)
 }
 
 export async function getOptInUserAction(userId: string) {
