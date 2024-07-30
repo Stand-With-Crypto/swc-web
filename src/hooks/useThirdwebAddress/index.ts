@@ -1,11 +1,11 @@
 'use client'
 
-// eslint-disable-next-line no-restricted-imports
-import { useAddress } from '@thirdweb-dev/react'
+import { useActiveAccount } from 'thirdweb/react'
 
 import { parseThirdwebAddress } from './parseThirdwebAddress'
 
 export function useThirdwebAddress() {
-  const address = useAddress()
+  const account = useActiveAccount()
+  const address = account?.address
   return address ? parseThirdwebAddress(address) : address
 }

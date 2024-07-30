@@ -77,7 +77,10 @@ export function PageContribute() {
                         <DialogTrigger asChild>
                           <Button variant="primary-cta">Send email</Button>
                         </DialogTrigger>
-                        <DialogContent className={cn(dialogContentPaddingStyles, 'max-w-3xl')}>
+                        <DialogContent
+                          a11yTitle="Email template"
+                          className={cn(dialogContentPaddingStyles, 'max-w-3xl')}
+                        >
                           <PageTitle as="h4" size="sm">
                             Sample Email Copy
                           </PageTitle>

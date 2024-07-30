@@ -33,13 +33,14 @@ export const testCaseWithPhoneSignUpWithExistingAccount: TestCase = {
     })
     return {
       ...getDefaultParameters(),
-      injectedFetchEmbeddedWalletMetadataFromThirdweb: () => Promise.resolve(({
-        userId: 'string',
-        walletAddress: 'string',
-        email: '',
-        phone: '+15555555555',
-        createdAt: new Date().toISOString(),
-      })),
+      injectedFetchEmbeddedWalletMetadataFromThirdweb: () =>
+        Promise.resolve({
+          userId: 'string',
+          walletAddress: 'string',
+          email: '',
+          phone: '+15555555555',
+          createdAt: new Date().toISOString(),
+        }),
     }
   },
   validateResults: (

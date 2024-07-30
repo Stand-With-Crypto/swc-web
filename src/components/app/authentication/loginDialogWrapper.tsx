@@ -3,7 +3,6 @@
 import React from 'react'
 import { SMSStatus } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
-import { useENS } from '@thirdweb-dev/react'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/navigation'
 import useSWR, { Arguments, useSWRConfig } from 'swr'
@@ -22,6 +21,7 @@ import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useDialog } from '@/hooks/useDialog'
+import { useENS } from '@/hooks/useENS'
 import { useSections } from '@/hooks/useSections'
 import { useSession } from '@/hooks/useSession'
 import { optInUser } from '@/utils/server/sms/actions'
@@ -211,7 +211,10 @@ export function UnauthenticatedSection({
   return (
     <Dialog {...dialogProps} onOpenChange={setDialogOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="max-w-l w-full">
+      <DialogContent
+        a11yTitle={currentSection === LoginSections.LOGIN ? 'Sign in' : 'Finish Profile'}
+        className="max-w-l w-full"
+      >
         <GeoGate
           bypassCountryCheck // For Onchain Summer
           countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE}
@@ -246,26 +249,23 @@ function LoginSection({ onLogin, ...props }: LoginSectionProps) {
 
   return (
     <ThirdwebLoginContent
-      auth={{
-        onLogin: async () => {
-          await onLogin()
-
-          // ensure that any server components on the page that's being used are refreshed with the context the user is now logged in
-          router.refresh()
-
-          // These are keys which the mutation occurs on login
-          // If we reset the cache we can have a situation where the value goes from `value => undefined => value`
-          const excludedKeysFromCacheReset: Arguments[] = [apiUrls.userFullProfileInfo()]
-
-          // There are a bunch of SWR queries that might show stale unauthenticated data unless we clear the cache.
-          // This ensures we refetch using the users authenticated state
-          // https://swr.vercel.app/docs/advanced/cache#modify-the-cache-data
-          void mutate(arg => !excludedKeysFromCacheReset.includes(arg), undefined, {
-            revalidate: true,
-          })
-        },
-      }}
       initialEmailAddress={data?.user?.emailAddress}
+      onLoginCallback={async () => {
+        await onLogin()
+        // ensure that any server components on the page that's being used are refreshed with the context the user is now logged in
+        router.refresh()
+
+        // These are keys which the mutation occurs on login
+        // If we reset the cache we can have a situation where the value goes from `value => undefined => value`
+        const excludedKeysFromCacheReset: Arguments[] = [apiUrls.userFullProfileInfo()]
+
+        // There are a bunch of SWR queries that might show stale unauthenticated data unless we clear the cache.
+        // This ensures we refetch using the users authenticated state
+        // https://swr.vercel.app/docs/advanced/cache#modify-the-cache-data
+        void mutate(arg => !excludedKeysFromCacheReset.includes(arg), undefined, {
+          revalidate: true,
+        })
+      }}
       {...props}
     />
   )

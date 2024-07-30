@@ -35,7 +35,7 @@ export async function fetchEmbeddedWalletMetadataFromThirdweb(
       /*
       TW API used to always use the client ID associated with the client secret
       We have a use case where we no longer have the old client secret, but we can't update the client id
-      without creating new embedded wallets for existing users. This new config they added 
+      without creating new embedded wallets for existing users. This new config they added
       allows us to use any client secret to query any client id associated with our account
       */
       'x-client-id-override': NEXT_PUBLIC_THIRDWEB_CLIENT_ID,

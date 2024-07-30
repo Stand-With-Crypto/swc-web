@@ -1,9 +1,14 @@
 'use client'
 import { useEffect, useRef } from 'react'
-import { ConnectEmbed, ConnectEmbedProps } from '@thirdweb-dev/react'
+import { AuthOption } from 'node_modules/thirdweb/dist/types/wallets/types'
+import { signLoginPayload } from 'thirdweb/auth'
+import { base } from 'thirdweb/chains'
+import { ConnectEmbed, ConnectEmbedProps, useConnect } from 'thirdweb/react'
+import { createWallet, createWalletAdapter, generateAccount } from 'thirdweb/wallets'
 
 import { ANALYTICS_NAME_LOGIN } from '@/components/app/authentication/constants'
 import { DialogBody, DialogFooterCTA } from '@/components/ui/dialog'
+import { useExperimentName } from '@/components/ui/experimentsTesting'
 import { NextImage } from '@/components/ui/image'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
@@ -11,23 +16,39 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { useThirdwebAuthUser } from '@/hooks/useAuthUser'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
+import { generateThirdwebLoginPayload } from '@/utils/server/thirdweb/getThirdwebLoginPayload'
+import { isLoggedIn } from '@/utils/server/thirdweb/isLoggedIn'
+import { login } from '@/utils/server/thirdweb/onLogin'
+import { onLogout } from '@/utils/server/thirdweb/onLogout'
+import { isCypress } from '@/utils/shared/executionEnvironment'
+import { thirdwebClient } from '@/utils/shared/thirdwebClient'
 import { trackSectionVisible } from '@/utils/web/clientAnalytics'
 import { theme } from '@/utils/web/thirdweb/theme'
 
-export interface ThirdwebLoginContentProps extends ConnectEmbedProps {
+export interface ThirdwebLoginContentProps extends Omit<ConnectEmbedProps, 'client'> {
   initialEmailAddress?: string | null
   title?: React.ReactNode
   subtitle?: React.ReactNode
+  onLoginCallback?: () => Promise<void> | void
 }
 
 const DEFAULT_TITLE = 'Join Stand With Crypto'
 const DEFAULT_SUBTITLE =
   'Lawmakers and regulators are threatening the crypto industry. You can fight back and ask for sensible rules. Join the Stand With Crypto movement to make your voice heard in Washington D.C.'
 
+const appMetadata = {
+  name: 'Stand With Crypto',
+  url: 'https://www.standwithcrypto.org/',
+  description:
+    'Stand With Crypto Alliance is a non-profit organization dedicated to uniting global crypto advocates.',
+  logoUrl: 'https://www.standwithcrypto.org/logo/shield.svg',
+}
+
 export function ThirdwebLoginContent({
   initialEmailAddress,
   title = DEFAULT_TITLE,
   subtitle = DEFAULT_SUBTITLE,
+  onLoginCallback,
   ...props
 }: ThirdwebLoginContentProps) {
   const urls = useIntlUrls()
@@ -49,7 +70,7 @@ export function ThirdwebLoginContent({
     <>
       <DialogBody className="-mt-8">
         <div className="mx-auto flex max-w-[460px] flex-col items-center gap-2">
-          <div className="flex flex-col items-center space-y-6">
+          <div className="flex flex-col items-center space-y-6 pt-6">
             <NextImage
               alt="Stand With Crypto Logo"
               height={80}
@@ -65,13 +86,13 @@ export function ThirdwebLoginContent({
           </div>
 
           <div
-            className="w-full"
+            className="flex w-full items-center justify-center pb-6"
             ref={thirdwebEmbeddedAuthContainer}
             // if someone enters a super long email, the component will overflow on the "enter confirmation code" screen
             // this prevents that bug
             style={{ maxWidth: 'calc(100vw - 56px)' }}
           >
-            <ThirdwebLoginEmbedded {...props} />
+            <ThirdwebLoginEmbedded onLoginCallback={onLoginCallback} {...props} />
           </div>
         </div>
 
@@ -97,15 +118,21 @@ export function ThirdwebLoginContent({
   )
 }
 
-function ThirdwebLoginEmbedded(props: ConnectEmbedProps) {
+function ThirdwebLoginEmbedded(
+  props: Omit<ConnectEmbedProps, 'client'> & { onLoginCallback?: () => Promise<void> | void },
+) {
   const session = useThirdwebAuthUser()
   const hasTracked = useRef(false)
+  const { connect } = useConnect()
+  const currentExperiment = useExperimentName({
+    experimentName: 'gh03_ThirdwebSignUpPhoneNumberExperiment',
+  })
   useEffect(() => {
-    if (!session.isLoggedIn && !session.isLoading && !hasTracked.current) {
+    if (!session.isLoggedIn && !hasTracked.current) {
       trackSectionVisible({ sectionGroup: ANALYTICS_NAME_LOGIN, section: 'Login' })
       hasTracked.current = true
     }
-  }, [session.isLoading, session.isLoggedIn])
+  }, [session.isLoggedIn])
 
   if (session.isLoggedIn) {
     return (
@@ -114,13 +141,70 @@ function ThirdwebLoginEmbedded(props: ConnectEmbedProps) {
       </div>
     )
   }
+  const embeddedAuthOptions: AuthOption[] =
+    currentExperiment === 'variant' ? ['google', 'phone', 'email'] : ['google', 'email']
 
-  return (
+  const supportedWallets = [
+    createWallet('com.coinbase.wallet', { appMetadata }),
+    createWallet('io.metamask'),
+    createWallet('walletConnect'),
+    createWallet('embedded', { auth: { options: embeddedAuthOptions } }),
+  ]
+
+  const recommendedWallets = [createWallet('com.coinbase.wallet')]
+
+  const initializeTestWalletForE2EEnv = async () => {
+    const wallet = await connect(async () => {
+      const wallet = createWalletAdapter({
+        client: thirdwebClient,
+        adaptedAccount: await generateAccount({ client: thirdwebClient }),
+        chain: base,
+        onDisconnect: () => {},
+        switchChain: () => {},
+      })
+      return wallet
+    })
+
+    const account = wallet?.getAccount()
+    const address = account?.address
+
+    const loginPayload = await generateThirdwebLoginPayload(address!)
+
+    const params = await signLoginPayload({
+      payload: loginPayload,
+      account: account!,
+    })
+
+    await login(params)
+    await props.onLoginCallback?.()
+  }
+
+  return !isCypress ? (
     <ConnectEmbed
+      appMetadata={appMetadata}
+      auth={{
+        isLoggedIn: () => isLoggedIn(),
+        doLogin: async params => {
+          await login(params)
+          await props.onLoginCallback?.()
+        },
+        getLoginPayload: async ({ address }) => generateThirdwebLoginPayload(address),
+        doLogout: () => onLogout(),
+      }}
+      chain={base}
+      client={thirdwebClient}
+      locale="en_US"
+      recommendedWallets={recommendedWallets}
+      showAllWallets={false}
       showThirdwebBranding={false}
       style={{ border: 'none', maxWidth: 'unset' }}
       theme={theme}
+      wallets={supportedWallets}
       {...props}
     />
+  ) : (
+    <button data-testid="e2e-test-login" onClick={initializeTestWalletForE2EEnv}>
+      login
+    </button>
   )
 }

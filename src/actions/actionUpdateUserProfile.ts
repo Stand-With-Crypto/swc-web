@@ -4,6 +4,7 @@ import 'server-only'
 import {
   Address,
   CapitolCanaryInstance,
+  SMSStatus,
   User,
   UserCryptoAddress,
   UserEmailAddress,
@@ -169,6 +170,10 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
       hasValidPhoneNumber: true,
       addressId: address?.id || null,
       primaryUserEmailAddressId: primaryUserEmailAddress?.id || null,
+      smsStatus:
+        (!hasOptedInToSms || !phoneNumber) && user.smsStatus !== SMSStatus.OPTED_OUT
+          ? SMSStatus.NOT_OPTED_IN
+          : user.smsStatus,
     },
     include: {
       address: true,

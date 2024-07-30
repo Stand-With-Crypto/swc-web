@@ -1,7 +1,9 @@
 /// <reference types="cypress" />
 
 describe('action - join stand with crypto', () => {
-  it('should join stand with crypto, logout and ask for profile update once', () => {
+  // Temporarily skipping this test because we need to update a Thirdweb API key configuration
+  // and the person responsible for this is OOO
+  it.skip('should join stand with crypto, logout and ask for profile update once', () => {
     cy.visit('/')
 
     cy.get('button').contains('Join Stand With Crypto').click()

@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { mockRandomUser, mockWallet } from 'cypress/fixture/mocks'
+import { mockRandomUser } from 'cypress/fixture/mocks'
 
 // ***********************************************
 // This example commands.ts shows you how to
@@ -109,33 +109,14 @@ Cypress.Commands.add('typeIntoInput', ({ selector, text }) => {
   cy.get(selector).should('be.visible').clear().wait(500).type(text)
 })
 
-Cypress.Commands.add('waitForLogin', (trigger, customWallet = mockWallet) => {
+Cypress.Commands.add('waitForLogin', trigger => {
   trigger?.click()
 
   cy.wait(500)
 
-  cy.get('button[data-test="continue-as-guest-button"]').click()
+  cy.get('button[data-testid="e2e-test-login"]').click()
 
-  cy.intercept('/api/auth/login').as('authLogin')
-
-  // type in password for already signed or not
-  cy.get('body')
-    .then($body => {
-      if ($body.find('input[data-test="current-password"][type="password"]').length > 0) {
-        cy.get('input[data-test="current-password"][type="password"]').type(customWallet.password)
-        cy.contains('Continue').click()
-
-        return
-      }
-
-      cy.get('input[data-test="new-password"][type="password"]').type(customWallet.password)
-      cy.get('input[data-test="confirm-password"][type="password"]').type(customWallet.password)
-      cy.contains('Create new wallet').click()
-    })
-    .then(() => {
-      cy.wait('@authLogin')
-      cy.wait(500)
-    })
+  cy.get('Join Stand With Crypto', { timeout: 20000 }).should('not.exist')
 })
 
 Cypress.Commands.add('waitForProfileCreation', (customUser = mockRandomUser) => {
@@ -217,14 +198,10 @@ declare global {
       /**
        * This command is used to wait for the login page to load and then fill in the login form
        * @param trigger - optional - The trigger to click to open the login form
-       * @param customWallet - optional - The custom wallet to use for login
        * @example cy.waitForLogin({ trigger: cy.get('button[data-test="login-button"]') })
        * @returns void
        */
-      waitForLogin(
-        trigger?: Cypress.Chainable<JQuery<HTMLElement>>,
-        customWallet?: typeof mockWallet,
-      ): Chainable<void>
+      waitForLogin(trigger?: Cypress.Chainable<JQuery<HTMLElement>>): Chainable<void>
       waitForLogout(): Chainable<void>
       /**
        * This command is used to wait for the profile creation page to load and then fill in the profile form
