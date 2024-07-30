@@ -111,9 +111,11 @@ export const backfillFailedNFT = inngest.createFunction(
       await step.run('script.claim-nfts', () =>
         Promise.all(
           failedMintsBatch.map(mint => {
+            if (mint.userActions?.length === 0 || !mint.userActions[0]?.user) return
+
             const user = mint.userActions[0].user
 
-            if (!user || !user.primaryUserCryptoAddress) return
+            if (!user?.primaryUserCryptoAddress) return
 
             const payload: AirdropPayload = {
               nftMintId: mint.id,
