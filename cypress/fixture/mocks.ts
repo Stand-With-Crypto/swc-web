@@ -2,10 +2,6 @@ import { faker } from '@faker-js/faker'
 
 import { fakerFields } from '@/mocks/fakerUtils'
 
-export const mockWallet = {
-  password: faker.internet.password({ length: 6 }),
-}
-
 const mockUserFirstName = faker.person.firstName()
 const mockUserLastName = faker.person.lastName()
 

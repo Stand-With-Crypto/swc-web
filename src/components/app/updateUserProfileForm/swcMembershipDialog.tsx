@@ -6,7 +6,7 @@ export function SWCMembershipDialog({ children }: { children: React.ReactNode })
   return (
     <Dialog analytics={'SWC Membership Explainer'}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="spacy-y-7 w-full max-w-md">
+      <DialogContent a11yTitle="Stand With Crypto membership" className="spacy-y-7 w-full max-w-md">
         <PageTitle className="mb-1 text-left" size="sm" withoutBalancer>
           What does it mean to be a Stand With Crypto Alliance member?
         </PageTitle>

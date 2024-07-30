@@ -1,7 +1,6 @@
-import { useENS } from '@thirdweb-dev/react'
-
 import { ClientUser } from '@/clientModels/clientUser/clientUser'
 import { ClientUserCryptoAddressWithENSData } from '@/clientModels/clientUser/clientUserCryptoAddress'
+import { useENS } from '@/hooks/useENS'
 
 export function appendENSHookDataToUser<U extends ClientUser>(
   user: U,

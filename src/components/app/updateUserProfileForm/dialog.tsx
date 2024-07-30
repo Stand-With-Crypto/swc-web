@@ -22,7 +22,7 @@ export function UpdateUserProfileFormDialog({
   return (
     <Dialog analytics={ANALYTICS_NAME_UPDATE_USER_PROFILE_FORM} {...dialogProps}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="max-w-xl">
+      <DialogContent a11yTitle="Update user form" className="max-w-xl">
         <Suspense fallback={<Skeleton className="h-80 w-full" />}>
           <LazyUpdateUserProfileForm
             {...formProps}

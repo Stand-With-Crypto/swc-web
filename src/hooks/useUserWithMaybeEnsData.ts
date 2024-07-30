@@ -1,8 +1,8 @@
 'use client'
 import React from 'react'
 import { UserInformationVisibility } from '@prisma/client'
-import { useENS } from '@thirdweb-dev/react'
 
+import { useENS } from '@/hooks/useENS'
 import { useSession } from '@/hooks/useSession'
 import { appendENSHookDataToUser } from '@/utils/web/appendENSHookDataToUser'
 

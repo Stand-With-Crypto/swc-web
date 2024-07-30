@@ -67,11 +67,7 @@ export default function UserActionOptInSWCDeepLink() {
           'max-md:pt-16',
         )}
       >
-        <ThirdwebLoginContent
-          auth={{
-            onLogin: () => handleRedirectOnLogin(),
-          }}
-        />
+        <ThirdwebLoginContent onLoginCallback={() => handleRedirectOnLogin()} />
       </div>
     </GeoGate>
   )
