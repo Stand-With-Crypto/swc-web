@@ -94,7 +94,8 @@ export function TopLevelClientLogic({
     experimentName: 'gh03_ThirdwebSignUpPhoneNumberExperiment',
   })
 
-  const walletAuthOptions: AuthOption[] = currentExperiment === 'variant' ? ['google', 'phone', 'email'] : ['google', 'email']
+  const walletAuthOptions: AuthOption[] =
+    currentExperiment === 'variant' ? ['google', 'phone', 'email'] : ['google', 'email']
 
   const supportedWallets: WalletConfig<any>[] = [
     metamaskWallet(),
