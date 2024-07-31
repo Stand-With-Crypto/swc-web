@@ -40,7 +40,7 @@ export function AdvocatesHeatmap({
   const orientation = useOrientation()
   const isShort = useMedia('(max-height: 430px)', true)
   const advocatesPerState = useApiAdvocateMap(advocatesMapPageData)
-  const markers = useAdvocateMap({ actions })
+  const markers = useAdvocateMap(actions)
 
   const isMobileLandscape = orientation.type.includes('landscape') && isShort
 
@@ -85,7 +85,7 @@ export function AdvocatesHeatmap({
         <div className="flex h-full w-full flex-col items-center gap-4 md:flex-row">
           <Skeleton
             childrenClassName="visible"
-            className="flex h-[500px] w-full items-center justify-center bg-transparent"
+            className="flex h-[769px] w-full items-center justify-center bg-transparent"
           >
             <NextImage
               alt="Stand With Crypto Logo"
@@ -107,7 +107,7 @@ export function AdvocatesHeatmap({
           'flex w-full flex-col items-start gap-4 md:flex-row',
           isEmbedded
             ? ''
-            : `rounded-[40px] bg-[#FBF8FF] px-12 ${isMobileLandscape ? 'py-8' : 'py-28'}`,
+            : `rounded-[40px] bg-[#FBF8FF] px-12 ${isMobileLandscape ? 'py-8' : 'py-20'}`,
         )}
       >
         {isEmbedded && <AdvocateHeatmapActionList isEmbedded={isEmbedded} />}
@@ -187,7 +187,7 @@ const MapComponent = ({
 
   return (
     <>
-      <ComposableMap projection="geoAlbersUsa" viewBox="0 50 805 510">
+      <ComposableMap projection="geoAlbersUsa" viewBox="-20 40 850 550">
         <Geographies geography={ADVOCATES_HEATMAP_GEO_URL}>
           {({ geographies }) => (
             <>
@@ -225,6 +225,7 @@ const MapComponent = ({
                 {markers.map(({ id, name, coordinates, actionType, iconType }) => {
                   const currentActionInfo = `Someone in ${name} ${iconType?.labelActionTooltip ?? ''}`
                   const IconComponent = iconType?.icon as FC<IconProps>
+                  const markerKey = `${name}-${actionType}-${id}`
 
                   return (
                     <AdvocateHeatmapMarker
@@ -233,7 +234,7 @@ const MapComponent = ({
                       currentActionInfo={currentActionInfo}
                       handleActionMouseLeave={handleActionMouseLeave}
                       handleActionMouseOver={handleActionMouseOver}
-                      key={`${name}-${actionType}-${id}`}
+                      key={markerKey}
                     />
                   )
                 })}
