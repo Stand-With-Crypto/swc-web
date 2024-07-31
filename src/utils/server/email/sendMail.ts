@@ -1,12 +1,27 @@
-import SendGrid, { ClientResponse } from '@sendgrid/mail'
+import SendGrid from '@sendgrid/mail'
 
-import { requiredEnv } from '@/utils/shared/requiredEnv'
+import { logger } from '@/utils/shared/logger'
+import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
 
-const SENDGRID_API_KEY = requiredEnv(process.env.SENDGRID_API_KEY, 'SENDGRID_API_KEY')
-const SENDGRID_SENDER = requiredEnv(process.env.SENDGRID_SENDER, 'SENDGRID_SENDER')
-const SENDGRID_SANDBOX_MODE = process.env.SENDGRID_SANDBOX_MODE
+const SENDGRID_API_KEY = requiredOutsideLocalEnv(
+  process.env.SENDGRID_API_KEY,
+  'SENDGRID_API_KEY',
+  'Sendgrid Email Sends',
+)
+const SENDGRID_SENDER = requiredOutsideLocalEnv(
+  process.env.SENDGRID_SENDER,
+  'SENDGRID_SENDER',
+  'Sendgrid Email Sends',
+)
+const SENDGRID_SANDBOX_MODE = requiredOutsideLocalEnv(
+  process.env.SENDGRID_SANDBOX_MODE,
+  'SENDGRID_SANDBOX_MODE',
+  'Sendgrid Email Sends',
+)
 
-SendGrid.setApiKey(SENDGRID_API_KEY)
+if (SENDGRID_API_KEY) {
+  SendGrid.setApiKey(SENDGRID_API_KEY)
+}
 
 export interface SendMailPayload {
   to: string
@@ -21,6 +36,14 @@ export interface SendMailPayload {
 }
 
 export async function sendMail(payload: SendMailPayload) {
+  if (!SENDGRID_API_KEY || !SENDGRID_SENDER) {
+    logger.debug(
+      'Skipping `sendMail` call due to undefined `SENDGRID_API_KEY` or `SENDGRID_SENDER`',
+      payload,
+    )
+    return 'skipped-message-id'
+  }
+
   const [response] = await SendGrid.send({
     from: SENDGRID_SENDER,
     mailSettings: {
@@ -32,26 +55,4 @@ export async function sendMail(payload: SendMailPayload) {
   })
 
   return response.headers['x-message-id'] as string
-}
-
-export async function sendMultipleMails(
-  payload: SendMailPayload[],
-): Promise<[SendMailPayload['to'], string][]> {
-  const hydratedPayload = payload.map(entry => ({
-    from: SENDGRID_SENDER,
-    mailSettings: {
-      sandboxMode: {
-        enable: SENDGRID_SANDBOX_MODE === 'true',
-      },
-    },
-    ...entry,
-  }))
-
-  // This casting is necessary because `Sendgrid.send` is not correctly typed for multiple sends
-  const responses = (await SendGrid.send(hydratedPayload)) as unknown as [ClientResponse, unknown][]
-
-  return responses.map((response, idx) => [
-    hydratedPayload[idx].to,
-    response[0].headers['x-message-id'],
-  ])
 }
