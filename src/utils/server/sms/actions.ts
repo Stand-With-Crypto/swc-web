@@ -1,6 +1,7 @@
 import 'server-only'
 
 import { SMSStatus, User } from '@prisma/client'
+import { waitUntil } from '@vercel/functions'
 
 import { GOODBYE_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME } from '@/inngest/functions/sms/goodbyeSMSCommunicationJourney'
 import { UNSTOP_CONFIRMATION_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME } from '@/inngest/functions/sms/unstopConfirmationSMSCommunicationJourney'
@@ -39,14 +40,16 @@ export async function optInUser(phoneNumber: string, user: User) {
     },
   })
 
-  await getServerAnalytics({
-    localUser: getLocalUserFromUser(user),
-    userId: user.id,
-  })
-    .track('User SMS Opt-In', {
-      provider: 'twilio',
+  waitUntil(
+    getServerAnalytics({
+      localUser: getLocalUserFromUser(user),
+      userId: user.id,
     })
-    .flush()
+      .track('User SMS Opt-In', {
+        provider: 'twilio',
+      })
+      .flush(),
+  )
 }
 
 export async function optOutUser(phoneNumber: string, isSWCKeyword: boolean, user?: User) {
@@ -72,14 +75,16 @@ export async function optOutUser(phoneNumber: string, isSWCKeyword: boolean, use
   }
 
   if (user) {
-    await getServerAnalytics({
-      localUser: getLocalUserFromUser(user),
-      userId: user.id,
-    })
-      .track('User SMS Opt-out', {
-        type: isSWCKeyword ? 'SWC STOP Keyword' : 'STOP Keyword',
+    waitUntil(
+      getServerAnalytics({
+        localUser: getLocalUserFromUser(user),
+        userId: user.id,
       })
-      .flush()
+        .track('User SMS Opt-out', {
+          type: isSWCKeyword ? 'SWC STOP Keyword' : 'STOP Keyword',
+        })
+        .flush(),
+    )
   }
 }
 
@@ -103,11 +108,13 @@ export async function optUserBackIn(phoneNumber: string, user?: User) {
   })
 
   if (user) {
-    await getServerAnalytics({
-      localUser: getLocalUserFromUser(user),
-      userId: user.id,
-    })
-      .track('User SMS Unstop')
-      .flush()
+    waitUntil(
+      getServerAnalytics({
+        localUser: getLocalUserFromUser(user),
+        userId: user.id,
+      })
+        .track('User SMS Unstop')
+        .flush(),
+    )
   }
 }

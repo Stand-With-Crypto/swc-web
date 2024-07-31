@@ -1,4 +1,5 @@
 import { UserCryptoAddress } from '@prisma/client'
+import { waitUntil } from '@vercel/functions'
 
 import { ACTION_NFT_SLUG, claimNFT } from '@/utils/server/nft/claimNFT'
 import { prismaClient } from '@/utils/server/prismaClient'
@@ -46,6 +47,6 @@ export async function mintPastActions(
     await claimNFT(action, userCryptoAddress)
   }
 
-  await analytics.flush()
+  waitUntil(analytics.flush())
   return actions
 }

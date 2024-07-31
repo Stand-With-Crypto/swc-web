@@ -2,6 +2,7 @@
 import 'server-only'
 
 import { User, UserActionType, UserInformationVisibility } from '@prisma/client'
+import { waitUntil } from '@vercel/functions'
 import { nativeEnum, object, z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
@@ -113,13 +114,15 @@ async function _actionCreateUserActionLiveEvent(input: CreateActionLiveEventInpu
     userId: user.id,
     localUser,
   })
+  const beforeFinish = () => Promise.all([analytics.flush(), peopleAnalytics.flush()])
 
   const recentUserAction = await getRecentUserActionByUserId(user.id, validatedInput)
   if (recentUserAction) {
-    await logSpamActionSubmissions({
+    logSpamActionSubmissions({
       validatedInput,
       sharedDependencies: { analytics },
     })
+    waitUntil(beforeFinish())
     return { user: getClientUser(user) }
   }
 
@@ -136,6 +139,7 @@ async function _actionCreateUserActionLiveEvent(input: CreateActionLiveEventInpu
     await claimNFTAndSendEmailNotification(userAction, user.primaryUserCryptoAddress)
   }
 
+  waitUntil(beforeFinish())
   return { user: getClientUser(user) }
 }
 
@@ -160,8 +164,10 @@ async function createUser(sharedDependencies: Pick<SharedDependencies, 'localUse
   logger.info('created user')
 
   if (localUser?.persisted) {
-    await getServerPeopleAnalytics({ localUser, userId: createdUser.id }).setOnce(
-      mapPersistedLocalUserToAnalyticsProperties(localUser.persisted),
+    waitUntil(
+      getServerPeopleAnalytics({ localUser, userId: createdUser.id })
+        .setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
+        .flush(),
     )
   }
 
@@ -181,14 +187,14 @@ async function getRecentUserActionByUserId(
   })
 }
 
-async function logSpamActionSubmissions({
+function logSpamActionSubmissions({
   validatedInput,
   sharedDependencies,
 }: {
   validatedInput: z.SafeParseSuccess<CreateActionLiveEventInput>
   sharedDependencies: Pick<SharedDependencies, 'analytics'>
 }) {
-  await sharedDependencies.analytics.trackUserActionCreatedIgnored({
+  sharedDependencies.analytics.trackUserActionCreatedIgnored({
     actionType: UserActionType.LIVE_EVENT,
     campaignName: validatedInput.data.campaignName,
     reason: 'Too Many Recent',
@@ -224,7 +230,7 @@ async function createAction<U extends User>({
 
   logger.info('created user action')
 
-  await sharedDependencies.analytics.trackUserActionCreated({
+  sharedDependencies.analytics.trackUserActionCreated({
     actionType: UserActionType.LIVE_EVENT,
     campaignName: validatedInput.campaignName,
     userState: isNewUser ? 'New' : 'Existing',
