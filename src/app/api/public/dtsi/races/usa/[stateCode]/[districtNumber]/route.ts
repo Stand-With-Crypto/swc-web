@@ -23,6 +23,5 @@ export async function GET(
     stateCode,
     district: districtNumber,
   })
-  console.log({ data })
   return NextResponse.json(data)
 }
