@@ -17,6 +17,6 @@ export function useApiRecentActivity(
       fetchReq(url)
         .then(res => res.json())
         .then(data => data as PublicRecentActivity),
-    { fallbackData, refreshInterval: config?.refreshManually ? 0 : 1000 * 5, ...config },
+    { fallbackData, refreshInterval: config?.refreshManually ? 0 : 1000 * 10, ...config },
   )
 }
