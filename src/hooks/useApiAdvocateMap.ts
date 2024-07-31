@@ -13,6 +13,6 @@ export function useApiAdvocateMap(fallbackData: GetAdvocatesMapDataResponse) {
       fetchReq(url)
         .then(res => res.json())
         .then(data => data as GetAdvocatesMapDataResponse),
-    { fallbackData, refreshInterval: 1000 * 15 },
+    { fallbackData, refreshInterval: 1000 * 30 },
   )
 }

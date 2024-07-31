@@ -1,24 +1,17 @@
 import { SMSStatus } from '@prisma/client'
 import { NonRetriableError } from 'inngest'
 
-import { fetchPhoneNumbers } from '@/inngest/functions/sms/utils'
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { getLogger } from '@/utils/shared/logger'
 
 const BACKFILL_SMS_STATUS_FIELD_INNGEST_FUNCTION_ID = 'script.backfill-sms-status-field'
 const BACKFILL_SMS_STATUS_FIELD_INNGEST_EVENT_NAME = 'script.backfill-sms-status-field'
 
 const MAX_RETRY_COUNT = 0
-const DATABASE_QUERY_LIMIT = process.env.DATABASE_QUERY_LIMIT
-  ? Number(process.env.DATABASE_QUERY_LIMIT)
-  : undefined
-
-const logger = getLogger('backfillSMSStatusField')
+const DATABASE_QUERY_LIMIT = Number(process.env.DATABASE_QUERY_LIMIT) || undefined
 
 interface BackfillSMSStatusFieldPayload {
-  persist?: boolean
   smsStatus: SMSStatus
 }
 
@@ -32,7 +25,7 @@ export const backfillSMSStatusField = inngest.createFunction(
     event: BACKFILL_SMS_STATUS_FIELD_INNGEST_EVENT_NAME,
   },
   async ({ step, event }) => {
-    const { persist, smsStatus } = event.data as BackfillSMSStatusFieldPayload
+    const { smsStatus } = event.data as BackfillSMSStatusFieldPayload
 
     const scenarios: Partial<
       Record<SMSStatus, { hasOptedInToSms: boolean; hasRepliedToOptInSms: boolean }>
@@ -49,6 +42,10 @@ export const backfillSMSStatusField = inngest.createFunction(
         hasOptedInToSms: false,
         hasRepliedToOptInSms: true,
       },
+      [SMSStatus.NOT_OPTED_IN]: {
+        hasOptedInToSms: false,
+        hasRepliedToOptInSms: false,
+      },
     }
 
     if (!scenarios[smsStatus]) {
@@ -57,74 +54,60 @@ export const backfillSMSStatusField = inngest.createFunction(
 
     const { hasOptedInToSms, hasRepliedToOptInSms } = scenarios[smsStatus]!
 
-    await step.run(
-      `updating-sms-status-${smsStatus.toLowerCase().replaceAll('_', '-')}`,
-      async () => {
-        let hasNumbersLeft = true
-        let outerCursor: Date | undefined
-        let totalUsers = 0
-        let iteration = 0
+    let hasNumbersLeft = true
+    let cursor: string | undefined
+    let totalUsers = 0
 
-        logger.info(`SmsStatus: ${smsStatus}`)
-
-        while (hasNumbersLeft) {
-          logger.info(`Iteration ${iteration}`)
-
-          logger.info(`Fetching...`)
-
-          const [phoneNumberChunks, newCursor, length] = await fetchPhoneNumbers(
-            (take, cursor = outerCursor) =>
-              prismaClient.user.findMany({
-                where: {
-                  hasOptedInToSms,
-                  hasRepliedToOptInSms,
-                  datetimeCreated: {
-                    gt: cursor,
-                  },
-                },
-                take,
-                orderBy: {
-                  datetimeCreated: 'asc',
-                },
-              }),
-            {
-              maxLength: DATABASE_QUERY_LIMIT,
+    while (hasNumbersLeft) {
+      const userIds = await step.run('fetch-users', () =>
+        prismaClient.user
+          .findMany({
+            skip: cursor ? 1 : undefined,
+            take: DATABASE_QUERY_LIMIT,
+            cursor: cursor
+              ? {
+                  id: cursor,
+                }
+              : undefined,
+            where: {
+              hasOptedInToSms,
+              hasRepliedToOptInSms,
             },
-          )
+            orderBy: {
+              id: 'asc',
+            },
+            select: {
+              id: true,
+            },
+          })
+          .then(result => result.map(({ id }) => id)),
+      )
 
-          outerCursor = newCursor
-          totalUsers += length
+      cursor = userIds.at(-1)
+      const length = userIds.length
 
-          if (persist) {
-            logger.info(`Updating ${length} users...`)
+      totalUsers += length
 
-            for (const chunk of phoneNumberChunks) {
-              await prismaClient.user.updateMany({
-                where: {
-                  phoneNumber: {
-                    in: chunk,
-                  },
-                },
-                data: {
-                  smsStatus,
-                },
-              })
-            }
-          }
+      await step.run('update-users', () =>
+        prismaClient.user.updateMany({
+          data: {
+            smsStatus,
+          },
+          where: {
+            id: {
+              in: userIds,
+            },
+          },
+        }),
+      )
 
-          if ((DATABASE_QUERY_LIMIT && length < DATABASE_QUERY_LIMIT) || !DATABASE_QUERY_LIMIT) {
-            hasNumbersLeft = false
-          }
+      if ((DATABASE_QUERY_LIMIT && length < DATABASE_QUERY_LIMIT) || !DATABASE_QUERY_LIMIT) {
+        hasNumbersLeft = false
+      } else {
+        await step.sleep('query-timeout', '30s')
+      }
+    }
 
-          iteration += 1
-        }
-
-        logger.info(`Finished! Found ${totalUsers} users with smsStatus: ${smsStatus}`)
-
-        return { updated: totalUsers }
-      },
-    )
-
-    await step.sleep('query-timeout', '30s')
+    return `Updated ${totalUsers} users with smsStatus = ${smsStatus}`
   },
 )

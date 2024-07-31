@@ -34,12 +34,11 @@ export default function RegisterToVoteReminderEmail({
     <Wrapper hrefSearchParams={hydratedHrefSearchParams} previewText={previewText}>
       <Section>
         <Img
-          className="mb-6 max-w-full"
+          className="mb-6 w-full max-w-full"
           src={buildTemplateInternalUrl(
             '/email/voter-registration-banner.png',
             hydratedHrefSearchParams,
           )}
-          width={620}
         />
 
         <Heading gutterBottom="md">

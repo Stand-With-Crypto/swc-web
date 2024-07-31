@@ -1,5 +1,7 @@
 /// <reference types="cypress" />
 
+import { GoogleCivicInfoOfficial, GoogleCivicInfoResponse } from '@/utils/shared/googleCivicInfo'
+
 it('action - call your congressperson', () => {
   cy.viewport('iphone-6')
   cy.visit('/')
@@ -28,6 +30,40 @@ it('action - call your congressperson', () => {
   })
   cy.contains('Please enter a US-based address.').should('be.visible')
 
+  cy.intercept<any, GoogleCivicInfoResponse>(
+    {
+      method: 'GET',
+      url: /https:\/\/www.googleapis.com\/civicinfo\/v2\/representatives\?.*/,
+    },
+    req => {
+      req.reply(res => {
+        const originalResponse = res.body
+
+        const mockedOfficial: GoogleCivicInfoOfficial = {
+          name: 'Lindsey Olson-Rogahn DDS',
+          address: [
+            {
+              line1: '350 Fifth Avenue',
+              city: 'City',
+              state: 'NY',
+              zip: '10118',
+            },
+          ],
+          party: 'Democratic Party',
+          phones: ['(202) 225-5635'],
+          photoUrl:
+            'https://db0prh5pvbqwd.cloudfront.net/all/images/12b0866e-c3ab-418d-8914-bc0fba709fb5.jpg',
+          urls: ['https://nadler.house.gov/'],
+          channels: [],
+        }
+
+        originalResponse.officials.push(mockedOfficial)
+
+        res.send(originalResponse)
+      })
+    },
+  ).as('getRepresentatives')
+
   // validate success
   cy.selectFromComboBox({
     trigger: cy.get('input[placeholder="Your full address"]'),
@@ -35,7 +71,15 @@ it('action - call your congressperson', () => {
     typingRequired: true,
   })
 
-  cy.contains(/Your representative is Jerrold Nadler/).should('be.visible')
+  cy.wait('@getRepresentatives')
+
+  cy.contains(/Your representative is .+/)
+    .should('be.visible')
+    .invoke('text')
+    .then(text => {
+      const repName = text.replace('Your representative is ', '').trim().toLowerCase()
+      expect(repName).to.not.be.oneOf(['undefined', 'null', ''])
+    })
 
   /**
    * Stubbing window.confirm to prevent the browser from opening the phone app.

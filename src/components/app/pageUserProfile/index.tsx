@@ -186,6 +186,7 @@ export function PageUserProfile({ params, searchParams, user }: PageUserProfile)
       )}
 
       <section>
+        <a className="mt-[-72px] h-0 pt-[72px]" id="nfts" />
         <PageTitle className="mb-4" size="sm">
           Your NFTs
         </PageTitle>

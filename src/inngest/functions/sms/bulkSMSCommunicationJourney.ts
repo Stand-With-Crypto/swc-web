@@ -17,9 +17,7 @@ export const BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME = 'app/user.commu
 export const BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_FUNCTION_ID = 'user-communication/bulk-sms'
 
 const MAX_RETRY_COUNT = 0
-const DATABASE_QUERY_LIMIT = process.env.DATABASE_QUERY_LIMIT
-  ? Number(process.env.DATABASE_QUERY_LIMIT)
-  : undefined
+const DATABASE_QUERY_LIMIT = Number(process.env.DATABASE_QUERY_LIMIT) || undefined
 
 // This constants are specific to our twilio phone number type
 const MESSAGE_SEGMENTS_PER_SECOND = Number(

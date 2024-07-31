@@ -1,13 +1,18 @@
 import { EventWebhook, EventWebhookHeader } from '@sendgrid/eventwebhook'
 
-import { requiredEnv } from '@/utils/shared/requiredEnv'
+import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
 
-const SENDGRID_WEBHOOK_VERIFICATION_KEY = requiredEnv(
+const SENDGRID_WEBHOOK_VERIFICATION_KEY = requiredOutsideLocalEnv(
   process.env.SENDGRID_WEBHOOK_VERIFICATION_KEY,
   'SENDGRID_WEBHOOK_VERIFICATION_KEY',
+  'Sendgrid Events Webhook',
 )
 
 export async function verifySignature(request: Request) {
+  if (!SENDGRID_WEBHOOK_VERIFICATION_KEY) {
+    return false
+  }
+
   const signature = request.headers.get(EventWebhookHeader.SIGNATURE())
   const timestamp = request.headers.get(EventWebhookHeader.TIMESTAMP())
 

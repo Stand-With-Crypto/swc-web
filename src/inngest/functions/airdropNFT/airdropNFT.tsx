@@ -1,9 +1,17 @@
 import { NFTCurrency, NFTMintStatus } from '@prisma/client'
 import { Decimal } from '@prisma/client/runtime/library'
+import { render } from '@react-email/components'
+import * as Sentry from '@sentry/nextjs'
 import { NonRetriableError } from 'inngest'
 
 import { onFailureAirdropNFT } from '@/inngest/functions/airdropNFT/onFailureAirdropNFT'
 import { inngest } from '@/inngest/inngest'
+import { sendMail } from '@/utils/server/email'
+import {
+  EmailActiveActions,
+  NFT_SLUG_TO_EMAIL_ACTIVE_ACTION,
+} from '@/utils/server/email/templates/common/constants'
+import NFTArrivedEmail from '@/utils/server/email/templates/nftArrived'
 import { AirdropPayload } from '@/utils/server/nft/payload'
 import {
   THIRDWEB_TRANSACTION_STATUS_TO_NFT_MINT_STATUS,
@@ -98,6 +106,11 @@ export const airdropNFTWithInngest = inngest.createFunction(
           where: {
             id: payload.userId,
           },
+          include: {
+            primaryUserEmailAddress: true,
+            userActions: true,
+            userSessions: true,
+          },
         })
         const localUser = getLocalUserFromUser(user)
         const analytics = getServerAnalytics({
@@ -118,6 +131,50 @@ export const airdropNFTWithInngest = inngest.createFunction(
           'Gas Limit': gasLimit,
           'Gas Price': gasPrice,
         })
+
+        const actionType = NFT_SLUG_TO_EMAIL_ACTIVE_ACTION[payload.nftSlug]
+        if (!user.primaryUserEmailAddress?.emailAddress || !actionType) {
+          return null
+        }
+        const userSession = user.userSessions?.[0]
+
+        const messageId = await sendMail({
+          to: user.primaryUserEmailAddress.emailAddress,
+          subject: NFTArrivedEmail.subjectLine,
+          html: render(
+            <NFTArrivedEmail
+              actionNFT={actionType}
+              completedActionTypes={user.userActions
+                .filter(action => Object.values(EmailActiveActions).includes(action.actionType))
+                .map(action => action.actionType as EmailActiveActions)}
+              hiddenActions={[actionType]}
+              session={
+                userSession
+                  ? {
+                      userId: userSession.userId,
+                      sessionId: userSession.id,
+                    }
+                  : null
+              }
+            />,
+          ),
+          customArgs: {
+            userId: user.id,
+            actionType,
+          },
+        }).catch(err => {
+          Sentry.captureException(err, {
+            extra: { userId: user.id, emailTo: user.primaryUserEmailAddress!.emailAddress },
+            tags: {
+              domain: 'airdropNFT',
+            },
+            fingerprint: ['airdropNFT', 'sendMail'],
+          })
+        })
+
+        return {
+          messageId,
+        }
       })
     }
   },
