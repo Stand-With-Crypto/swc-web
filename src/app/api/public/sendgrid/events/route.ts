@@ -51,9 +51,8 @@ export async function POST(request: NextRequest) {
 async function processEventChunk(messageId: string, events: EmailEvent[]) {
   const log = getLogger(`Sendgrid Event Webhook - ${messageId}`)
 
-  const { analytics, user } = await getServerAnalyticsFromMessageId(messageId)
-
   for await (const eventEntry of events) {
+    const { analytics, user } = await getServerAnalyticsFromEvent(eventEntry)
     log.info(`tracking event: ${eventEntry.event}`)
     analytics.track(`Email Communication Event`, {
       'Event Name': EVENT_NAME_TO_HUMAN_READABLE_STRING[eventEntry.event] ?? eventEntry.event,
@@ -80,29 +79,35 @@ async function processEventChunk(messageId: string, events: EmailEvent[]) {
         data: capitolCanaryPayload,
       })
     }
-  }
 
-  await analytics.flush()
+    await analytics.flush()
+  }
 }
 
-async function getServerAnalyticsFromMessageId(messageId: string) {
-  // MessageId received from sendMail: 0GOQ6fMTTmisBJwg
-  // MessageId received by the event webhook: 0GOQ6fMTTmisBJwg.recvd-1123412asd12-wbpn9-1-vdfs3123
-  const parsedMessageId = messageId.split('.')[0]
+async function getUserFromEvent(emailEvent: EmailEvent) {
+  let userId = emailEvent.userId
+  if (!userId) {
+    const messageId = emailEvent.sg_message_id
 
-  const userCommunication = await prismaClient.userCommunication.findFirst({
-    where: { messageId: parsedMessageId },
-    include: {
-      userCommunicationJourney: true,
-    },
-  })
+    // MessageId received from sendMail: 0GOQ6fMTTmisBJwg
+    // MessageId received by the event webhook: 0GOQ6fMTTmisBJwg.recvd-1123412asd12-wbpn9-1-vdfs3123
+    const parsedMessageId = messageId.split('.')[0]
 
-  if (!userCommunication) {
-    throw new Error(`User communication with message_id '${messageId}' not found`)
+    const userCommunication = await prismaClient.userCommunication.findFirst({
+      where: { messageId: parsedMessageId },
+      include: {
+        userCommunicationJourney: true,
+      },
+    })
+
+    if (!userCommunication) {
+      throw new Error(`User communication with message_id '${messageId}' not found`)
+    }
+
+    userId = userCommunication.userCommunicationJourney.userId
   }
 
-  const userId = userCommunication.userCommunicationJourney.userId
-  const user = await prismaClient.user.findFirstOrThrow({
+  return prismaClient.user.findFirstOrThrow({
     where: {
       id: userId,
     },
@@ -110,6 +115,13 @@ async function getServerAnalyticsFromMessageId(messageId: string) {
       address: true,
     },
   })
+}
 
-  return { analytics: getServerAnalytics({ userId, localUser: getLocalUserFromUser(user) }), user }
+async function getServerAnalyticsFromEvent(emailEvent: EmailEvent) {
+  const user = await getUserFromEvent(emailEvent)
+
+  return {
+    analytics: getServerAnalytics({ userId: user.id, localUser: getLocalUserFromUser(user) }),
+    user,
+  }
 }

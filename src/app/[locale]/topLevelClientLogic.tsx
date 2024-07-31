@@ -55,7 +55,7 @@ const InitialOrchestration = () => {
     if (authUser.user && searchParamsUserId && authUser.user.userId !== searchParamsUserId) {
       Sentry.captureMessage('mismatch between authenticated user and userId in search param', {
         extra: {
-          authUser: authUser.user,
+          authUserId: authUser.user.userId,
           searchParamsUserId,
         },
       })
