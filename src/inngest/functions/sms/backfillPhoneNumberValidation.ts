@@ -17,9 +17,7 @@ const BACKFILL_PHONE_NUMBER_VALIDATION_INNGEST_EVENT_NAME =
   'script.backfill-phone-number-validation'
 
 const MAX_RETRY_COUNT = 0
-const DATABASE_QUERY_LIMIT = process.env.DATABASE_QUERY_LIMIT
-  ? Number(process.env.DATABASE_QUERY_LIMIT)
-  : undefined
+const DATABASE_QUERY_LIMIT = Number(process.env.DATABASE_QUERY_LIMIT) || undefined
 
 interface BackfillPhoneNumberValidationPayload {
   persist?: boolean
