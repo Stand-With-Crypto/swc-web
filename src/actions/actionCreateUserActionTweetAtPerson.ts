@@ -10,7 +10,7 @@ import {
   getMaybeUserAndMethodOfMatch,
   UserAndMethodOfMatch,
 } from '@/utils/server/getMaybeUserAndMethodOfMatch'
-import { claimNFT } from '@/utils/server/nft/claimNFT'
+import { claimNFTAndSendEmailNotification } from '@/utils/server/nft/claimNFT'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
@@ -146,7 +146,7 @@ async function _actionCreateUserActionTweetedAtPerson(input: CreateActionTweetAt
   })
 
   if (user.primaryUserCryptoAddress !== null) {
-    await claimNFT(userAction, user.primaryUserCryptoAddress)
+    await claimNFTAndSendEmailNotification(userAction, user.primaryUserCryptoAddress)
   }
 
   return { user: getClientUser(user) }
