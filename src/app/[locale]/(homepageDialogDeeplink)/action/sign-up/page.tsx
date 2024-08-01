@@ -54,6 +54,8 @@ export default function UserActionOptInSWCDeepLink() {
     }
   }, [session.isLoggedIn, handleRedirectOnLogin])
 
+  if (session.isLoading || session.isLoggedIn) return null
+
   return (
     <GeoGate
       bypassCountryCheck // For Onchain Summer
