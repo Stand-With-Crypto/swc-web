@@ -36,7 +36,6 @@ export const ENDORSED_DTSI_PERSON_SLUGS = [
   'sarah---elizabeth---mcbride',
   'donald---davis',
   'brian--jack',
-  'blake---masters',
   'michael---lawler',
   'marcus---molinaro',
   'lori---chavez-deremer',
