@@ -261,6 +261,7 @@ enum UserActionType {
   VOTER_REGISTRATION
   LIVE_EVENT
   TWEET_AT_PERSON
+  VOTER_ATTESTATION
 }
 
 model UserAction {

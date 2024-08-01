@@ -7,13 +7,14 @@ import {
 } from '@/utils/shared/userActionCampaigns'
 
 export const USER_ACTION_TYPE_CTA_PRIORITY_ORDER: ReadonlyArray<ActiveClientUserActionType> = [
-  UserActionType.EMAIL,
-  UserActionType.OPT_IN,
   UserActionType.VOTER_REGISTRATION,
+  UserActionType.EMAIL,
   UserActionType.CALL,
   UserActionType.TWEET,
   UserActionType.DONATION,
+  UserActionType.VOTER_ATTESTATION,
   UserActionType.NFT_MINT,
+  UserActionType.OPT_IN,
 ]
 
 // Remember to update USER_ACTION_ROW_CTA_INFO_FROM_CAMPAIGN so that the correct campaign CTA is displayed.
@@ -29,6 +30,10 @@ export const USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN: ReadonlyArray<{
   {
     action: UserActionType.VOTER_REGISTRATION,
     campaign: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.VOTER_REGISTRATION,
+  },
+  {
+    action: UserActionType.VOTER_ATTESTATION,
+    campaign: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.VOTER_ATTESTATION,
   },
   { action: UserActionType.CALL, campaign: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.CALL },
   { action: UserActionType.TWEET, campaign: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.TWEET },

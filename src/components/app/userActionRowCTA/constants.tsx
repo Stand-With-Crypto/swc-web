@@ -11,6 +11,7 @@ import { EMAIL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionForm
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
 import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/dialog'
+import { UserActionFormVoterAttestationDialog } from '@/components/app/userActionFormVoterAttestation/dialog'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
 import { UserActionRowCTAProps } from '@/components/app/userActionRowCTA'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
@@ -133,6 +134,16 @@ export const USER_ACTION_ROW_CTA_INFO: Record<
     shortSubtext: 'All mint proceeds are donated to the movement.',
     canBeTriggeredMultipleTimes: true,
     WrapperComponent: UserActionFormNFTMintDialog,
+  },
+  [UserActionType.VOTER_ATTESTATION]: {
+    actionType: UserActionType.VOTER_ATTESTATION,
+    image: { src: '/actionTypeIcons/voterAttestation.png' },
+    text: 'Pledge to vote',
+    subtext: 'Pledge to vote for pro-crypto candidates.',
+    shortText: 'Pledge to vote',
+    shortSubtext: 'Pledge to vote for pro-crypto candidates.',
+    canBeTriggeredMultipleTimes: true,
+    WrapperComponent: UserActionFormVoterAttestationDialog,
   },
 }
 
