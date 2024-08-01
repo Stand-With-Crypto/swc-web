@@ -3,6 +3,7 @@ import 'server-only'
 
 import { User, UserActionType, UserInformationVisibility } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
+import { waitUntil } from '@vercel/functions'
 import { nativeEnum, object, z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
@@ -108,7 +109,7 @@ async function _actionCreateUserActionCallCongressperson(
       validatedInput,
       sharedDependencies: { analytics },
     })
-    await beforeFinish()
+    waitUntil(beforeFinish())
     return { user: getClientUser(user) }
   }
 
@@ -158,7 +159,7 @@ async function _actionCreateUserActionCallCongressperson(
     await claimNFTAndSendEmailNotification(userAction, user.primaryUserCryptoAddress)
   }
 
-  await beforeFinish()
+  waitUntil(beforeFinish())
   return { user: getClientUser(updatedUser) }
 }
 
@@ -183,8 +184,10 @@ async function createUser(sharedDependencies: Pick<SharedDependencies, 'localUse
   logger.info('created user')
 
   if (localUser?.persisted) {
-    await getServerPeopleAnalytics({ localUser, userId: createdUser.id }).setOnce(
-      mapPersistedLocalUserToAnalyticsProperties(localUser.persisted),
+    waitUntil(
+      getServerPeopleAnalytics({ localUser, userId: createdUser.id })
+        .setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
+        .flush(),
     )
   }
 
