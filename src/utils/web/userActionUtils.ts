@@ -25,16 +25,16 @@ export const USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN: ReadonlyArray<{
   action: ActiveClientUserActionType
   campaign: UserActionCampaignName
 }> = [
-  { action: UserActionType.EMAIL, campaign: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.EMAIL },
-  { action: UserActionType.OPT_IN, campaign: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.OPT_IN },
-  {
-    action: UserActionType.VOTER_REGISTRATION,
-    campaign: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.VOTER_REGISTRATION,
-  },
   {
     action: UserActionType.VOTER_ATTESTATION,
     campaign: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.VOTER_ATTESTATION,
   },
+  {
+    action: UserActionType.VOTER_REGISTRATION,
+    campaign: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.VOTER_REGISTRATION,
+  },
+  { action: UserActionType.OPT_IN, campaign: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.OPT_IN },
+  { action: UserActionType.EMAIL, campaign: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.EMAIL },
   { action: UserActionType.CALL, campaign: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.CALL },
   { action: UserActionType.TWEET, campaign: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.TWEET },
   { action: UserActionType.DONATION, campaign: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.DONATION },
