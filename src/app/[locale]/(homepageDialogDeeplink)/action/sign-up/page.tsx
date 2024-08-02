@@ -4,14 +4,11 @@ import * as Sentry from '@sentry/nextjs'
 import { useRouter, useSearchParams } from 'next/navigation'
 
 import { ThirdwebLoginContent } from '@/components/app/authentication/thirdwebLoginContent'
-import { GeoGate } from '@/components/app/geoGate'
-import { UserActionFormActionUnavailable } from '@/components/app/userActionFormCommon/actionUnavailable'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { usePreventOverscroll } from '@/hooks/usePreventOverscroll'
 import { useSession } from '@/hooks/useSession'
 import { getCallbackDestination } from '@/utils/server/searchParams'
-import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { cn } from '@/utils/web/cn'
 
 export default function UserActionOptInSWCDeepLink() {
@@ -57,20 +54,14 @@ export default function UserActionOptInSWCDeepLink() {
   if (session.isLoading || session.isLoggedIn) return null
 
   return (
-    <GeoGate
-      bypassCountryCheck // For Onchain Summer
-      countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE}
-      unavailableContent={<UserActionFormActionUnavailable />}
+    <div
+      className={cn(
+        'flex flex-col items-center justify-center max-md:h-full ',
+        dialogContentPaddingStyles,
+        'max-md:pt-16',
+      )}
     >
-      <div
-        className={cn(
-          'flex flex-col items-center justify-center max-md:h-full ',
-          dialogContentPaddingStyles,
-          'max-md:pt-16',
-        )}
-      >
-        <ThirdwebLoginContent onLoginCallback={() => handleRedirectOnLogin()} />
-      </div>
-    </GeoGate>
+      <ThirdwebLoginContent onLoginCallback={() => handleRedirectOnLogin()} />
+    </div>
   )
 }
