@@ -16,7 +16,6 @@ import { sendMail } from '@/utils/server/email'
 import {
   EmailActiveActions,
   EmailEnabledActionNFTs,
-  EmailEnabledActionNFTsNames,
 } from '@/utils/server/email/templates/common/constants'
 import NFTOnTheWayEmail from '@/utils/server/email/templates/nftOnTheWay'
 import { NFT_SLUG_BACKEND_METADATA } from '@/utils/server/nft/constants'
@@ -82,7 +81,6 @@ const logger = getLogger('claimNft')
 
 interface Config {
   skipTransactionFeeCheck?: boolean
-  transactionEmailActionNFT?: EmailEnabledActionNFTsNames
 }
 
 type UserActionToClaim = Pick<
