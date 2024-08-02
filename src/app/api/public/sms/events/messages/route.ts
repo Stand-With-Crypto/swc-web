@@ -10,6 +10,7 @@ import { verifySignature } from '@/utils/server/sms'
 import { optOutUser, optUserBackIn } from '@/utils/server/sms/actions'
 import * as messages from '@/utils/server/sms/messages'
 import { getLogger } from '@/utils/shared/logger'
+import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
 
 const SWC_STOP_SMS_KEYWORD = process.env.SWC_STOP_SMS_KEYWORD?.toUpperCase()
 const SWC_UNSTOP_SMS_KEYWORD = process.env.SWC_UNSTOP_SMS_KEYWORD?.toUpperCase()
@@ -78,10 +79,12 @@ export async function POST(request: NextRequest) {
         keyword,
       )
     ) {
+      // We can't get the messageId when replying with twilio, so we need to trigger a Inngest function instead
       await optOutUser(phoneNumber, keyword === SWC_STOP_SMS_KEYWORD, user)
     } else if (['YES', 'START', 'CONTINUE', 'UNSTOP', SWC_UNSTOP_SMS_KEYWORD].includes(keyword)) {
       await optUserBackIn(phoneNumber, user)
     } else if (['HELP'].includes(keyword)) {
+      // We don't want to track this message, so we can just reply with twilio
       message = messages.HELP_MESSAGE
     }
   }
@@ -89,11 +92,10 @@ export async function POST(request: NextRequest) {
   const headers = new Headers()
   headers.set('Content-Type', 'text/xml')
 
-  // If we don't respond the message with this xml Twilio will trigger a error event on the fail webhook
+  // If we don't respond the message with this xml Twilio will trigger a error event on the fails webhook
   const response = new twilio.twiml.MessagingResponse()
 
   if (message) {
-    // We can't get the messageId when sending messages this way, so we need to trigger a Inngest function instead
     response.message(message)
   }
 
@@ -106,7 +108,7 @@ export async function POST(request: NextRequest) {
 async function getUserByPhoneNumber(phoneNumber: string): Promise<User | undefined> {
   const [user] = await prismaClient.user.findMany({
     where: {
-      phoneNumber,
+      phoneNumber: normalizePhoneNumber(phoneNumber),
     },
     orderBy: {
       datetimeUpdated: 'desc',

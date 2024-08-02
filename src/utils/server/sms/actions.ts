@@ -10,13 +10,21 @@ import { inngest } from '@/inngest/inngest'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getServerAnalytics } from '@/utils/server/serverAnalytics'
 import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
+import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
 import { smsProvider, SMSProviders } from '@/utils/shared/smsProvider'
 
 export async function optInUser(phoneNumber: string, user: User) {
+  const normalizedPhoneNumber = normalizePhoneNumber(phoneNumber)
+
   if (
     user.smsStatus === SMSStatus.OPTED_OUT ||
     smsProvider !== SMSProviders.TWILIO ||
-    (user.smsStatus === SMSStatus.OPTED_IN && user.phoneNumber === phoneNumber) // If user already opted in and changes their phone number, we want to send them a new message
+    ([
+      SMSStatus.OPTED_IN,
+      SMSStatus.OPTED_IN_HAS_REPLIED,
+      SMSStatus.OPTED_IN_PENDING_DOUBLE_OPT_IN,
+    ].includes(user.smsStatus) &&
+      user.phoneNumber === normalizedPhoneNumber) // If user has already opted in and has not changed their phone number, we don't want to send a message
   ) {
     return
   }
@@ -28,7 +36,7 @@ export async function optInUser(phoneNumber: string, user: User) {
         smsStatus: SMSStatus.OPTED_IN,
       },
       where: {
-        phoneNumber,
+        phoneNumber: normalizedPhoneNumber,
       },
     })
   }
@@ -36,7 +44,7 @@ export async function optInUser(phoneNumber: string, user: User) {
   await inngest.send({
     name: WELCOME_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
     data: {
-      phoneNumber,
+      phoneNumber: normalizedPhoneNumber,
     },
   })
 
@@ -53,6 +61,8 @@ export async function optInUser(phoneNumber: string, user: User) {
 }
 
 export async function optOutUser(phoneNumber: string, isSWCKeyword: boolean, user?: User) {
+  const normalizedPhoneNumber = normalizePhoneNumber(phoneNumber)
+
   if (user?.smsStatus === SMSStatus.OPTED_OUT || smsProvider !== SMSProviders.TWILIO) return
 
   await prismaClient.user.updateMany({
@@ -60,7 +70,7 @@ export async function optOutUser(phoneNumber: string, isSWCKeyword: boolean, use
       smsStatus: SMSStatus.OPTED_OUT,
     },
     where: {
-      phoneNumber,
+      phoneNumber: normalizedPhoneNumber,
     },
   })
 
@@ -69,7 +79,7 @@ export async function optOutUser(phoneNumber: string, isSWCKeyword: boolean, use
     await inngest.send({
       name: GOODBYE_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
       data: {
-        phoneNumber,
+        phoneNumber: normalizedPhoneNumber,
       },
     })
   }
@@ -89,6 +99,8 @@ export async function optOutUser(phoneNumber: string, isSWCKeyword: boolean, use
 }
 
 export async function optUserBackIn(phoneNumber: string, user?: User) {
+  const normalizedPhoneNumber = normalizePhoneNumber(phoneNumber)
+
   if (user?.smsStatus !== SMSStatus.OPTED_OUT || smsProvider !== SMSProviders.TWILIO) return
 
   await prismaClient.user.updateMany({
@@ -96,14 +108,14 @@ export async function optUserBackIn(phoneNumber: string, user?: User) {
       smsStatus: SMSStatus.OPTED_IN_HAS_REPLIED,
     },
     where: {
-      phoneNumber,
+      phoneNumber: normalizedPhoneNumber,
     },
   })
 
   await inngest.send({
     name: UNSTOP_CONFIRMATION_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
     data: {
-      phoneNumber,
+      phoneNumber: normalizedPhoneNumber,
     },
   })
 
