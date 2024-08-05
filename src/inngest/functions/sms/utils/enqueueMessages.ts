@@ -8,17 +8,10 @@ import { createCommunication, createCommunicationJourneys, flagInvalidPhoneNumbe
 
 const ENQUEUE_MAX_RETRY_ATTEMPTS = 5
 
-export async function enqueueMessages(
-  phoneNumbers: string[],
-  body?: string,
-  persist?: boolean,
-  attempt = 0,
-) {
+export async function enqueueMessages(phoneNumbers: string[], body: string, attempt = 0) {
   if (attempt > ENQUEUE_MAX_RETRY_ATTEMPTS) return 0
 
   const enqueueMessagesPromise = phoneNumbers.map(async phoneNumber => {
-    if (!persist || !body) return
-
     const communicationJourneys = await createCommunicationJourneys(
       phoneNumber,
       UserCommunicationJourneyType.BULK_SMS,
@@ -78,9 +71,9 @@ export async function enqueueMessages(
 
   // exponential backoff retry
   if (failedPhoneNumbers.length > 0) {
-    await sleep(10000 * attempt)
+    await sleep(10000 * (attempt + 1))
 
-    messagesSent += await enqueueMessages(failedPhoneNumbers, body, persist, attempt + 1)
+    messagesSent += await enqueueMessages(failedPhoneNumbers, body, attempt + 1)
   }
 
   return messagesSent
