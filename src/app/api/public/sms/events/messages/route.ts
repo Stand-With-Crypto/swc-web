@@ -8,7 +8,7 @@ import twilio from 'twilio'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { verifySignature } from '@/utils/server/sms'
 import { optOutUser, optUserBackIn } from '@/utils/server/sms/actions'
-import * as messages from '@/utils/server/sms/messages'
+// import * as messages from '@/utils/server/sms/messages'
 import { getLogger } from '@/utils/shared/logger'
 import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
 
@@ -71,7 +71,7 @@ export async function POST(request: NextRequest) {
 
   const keyword = body.Body?.toUpperCase()
 
-  let message = ''
+  const message = ''
 
   if (keyword && keyword.length > 0) {
     if (
@@ -85,7 +85,8 @@ export async function POST(request: NextRequest) {
       await optUserBackIn(phoneNumber, user)
     } else if (['HELP'].includes(keyword)) {
       // We don't want to track this message, so we can just reply with twilio
-      message = messages.HELP_MESSAGE
+      // TODO: Uncomment this after we start using Messaging Service
+      // message = messages.HELP_MESSAGE
     }
   }
 

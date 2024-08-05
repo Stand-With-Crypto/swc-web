@@ -3,8 +3,8 @@ import 'server-only'
 import { SMSStatus, User } from '@prisma/client'
 import { waitUntil } from '@vercel/functions'
 
-import { GOODBYE_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME } from '@/inngest/functions/sms/goodbyeSMSCommunicationJourney'
-import { UNSTOP_CONFIRMATION_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME } from '@/inngest/functions/sms/unstopConfirmationSMSCommunicationJourney'
+// import { GOODBYE_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME } from '@/inngest/functions/sms/goodbyeSMSCommunicationJourney'
+// import { UNSTOP_CONFIRMATION_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME } from '@/inngest/functions/sms/unstopConfirmationSMSCommunicationJourney'
 import { WELCOME_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME } from '@/inngest/functions/sms/welcomeSMSCommunicationJourney'
 import { inngest } from '@/inngest/inngest'
 import { prismaClient } from '@/utils/server/prismaClient'
@@ -76,12 +76,13 @@ export async function optOutUser(phoneNumber: string, isSWCKeyword: boolean, use
 
   // We shouldn't send a message if the user replied with a default STOP keyword because Twilio will block it
   if (isSWCKeyword) {
-    await inngest.send({
-      name: GOODBYE_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
-      data: {
-        phoneNumber: normalizedPhoneNumber,
-      },
-    })
+    // TODO: Uncomment this after we start using Messaging Service
+    // await inngest.send({
+    //   name: GOODBYE_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
+    //   data: {
+    //     phoneNumber: normalizedPhoneNumber,
+    //   },
+    // })
   }
 
   if (user) {
@@ -112,12 +113,13 @@ export async function optUserBackIn(phoneNumber: string, user?: User) {
     },
   })
 
-  await inngest.send({
-    name: UNSTOP_CONFIRMATION_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
-    data: {
-      phoneNumber: normalizedPhoneNumber,
-    },
-  })
+  // TODO: Uncomment this after we start using Messaging Service
+  // await inngest.send({
+  //   name: UNSTOP_CONFIRMATION_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
+  //   data: {
+  //     phoneNumber: normalizedPhoneNumber,
+  //   },
+  // })
 
   if (user) {
     waitUntil(
