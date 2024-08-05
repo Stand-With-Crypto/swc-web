@@ -101,7 +101,7 @@ export const dtsiQueryResolver: Partial<DTSI_QueryResolvers> = {
           }),
         }) as any,
     )
-    data.push(...REAL_CONGRESSPERSON_DATA)
+    data.push(REAL_CONGRESSPERSON_DATA)
     return data
   },
   people: (_root, args) => {
