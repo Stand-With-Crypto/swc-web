@@ -9,6 +9,7 @@ export function useSections<SectionKeys extends readonly string[]>({
   sections,
   initialSectionId,
   analyticsName,
+  skipSections,
 }: UseSectionsProps<SectionKeys>): UseSectionsReturn<SectionKeys[number]> {
   type Key = SectionKeys[number]
 
@@ -23,7 +24,7 @@ export function useSections<SectionKeys extends readonly string[]>({
 
   const goToSection: UseSectionsReturn<Key>['goToSection'] = React.useCallback(
     (section, options = {}) => {
-      if (section === currentSection) {
+      if (section === currentSection || (skipSections && skipSections.includes(section))) {
         return
       }
 
@@ -34,7 +35,7 @@ export function useSections<SectionKeys extends readonly string[]>({
         trackSectionVisible({ section, sectionGroup: analyticsName })
       }
     },
-    [currentSection, analyticsName],
+    [currentSection, skipSections, analyticsName],
   )
 
   const goBackSection: UseSectionsReturn<Key>['goBackSection'] = React.useCallback(() => {
