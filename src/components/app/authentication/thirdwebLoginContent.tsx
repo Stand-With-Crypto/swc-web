@@ -73,8 +73,8 @@ export function ThirdwebLoginContent({
     currentExperiment === 'variant'
       ? () => (
           <span className="text-[10px]">
-            By signing up with my phone number, you consent to receive recurring texts from Stand
-            with Crypto. You can reply STOP to stop receiving texts. Message and data rates may
+            By signing up with your phone number, you consent to receive recurring texts from Stand
+            With Crypto. You can reply STOP to stop receiving texts. Message and data rates may
             apply. You understand that Stand With Crypto and its vendors may collect and use your
             Personal Information. To learn more, visit the{' '}
             <InternalLink href={urls.privacyPolicy()} target="_blank">

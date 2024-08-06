@@ -240,9 +240,8 @@ export function UpdateUserProfileForm({
           <Collapsible open={!!phoneNumberValue}>
             <CollapsibleContent className="AnimateCollapsibleContent">
               <FormDescription className="text-center lg:text-left">
-                By signing in you consent to receive recurring texts from Stand With Crypto to the
-                number provided. You can reply STOP to stop receiving texts. Message and data rates
-                may apply.
+                By clicking Next, you consent to receive recurring texts from Stand With Crypto. You
+                can reply STOP to stop receiving texts. Message and data rates may apply.
               </FormDescription>
             </CollapsibleContent>
           </Collapsible>
