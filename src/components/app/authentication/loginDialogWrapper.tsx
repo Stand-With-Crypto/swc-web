@@ -7,7 +7,7 @@ import dynamic from 'next/dynamic'
 import { useRouter } from 'next/navigation'
 import useSWR, { Arguments, useSWRConfig } from 'swr'
 
-import { actionWelcomeSMSAfterPhoneSignUp } from '@/actions/actionWelcomeSMSAfterPhoneSignUp'
+import { actionUpdateUserHasOptedInToSMS } from '@/actions/actionUpdateUserHasOptedInSMS'
 import { ClientUnidentifiedUser } from '@/clientModels/clientUser/clientUser'
 import {
   ANALYTICS_NAME_LOGIN,
@@ -194,7 +194,9 @@ export function UnauthenticatedSection({
     }
 
     if (user.phoneNumber && user.hasOptedInToSms && user.smsStatus === SMSStatus.NOT_OPTED_IN) {
-      await actionWelcomeSMSAfterPhoneSignUp()
+      await actionUpdateUserHasOptedInToSMS({
+        phoneNumber: user.phoneNumber,
+      })
     }
 
     const { wasRecentlyUpdated } = user.primaryUserCryptoAddress
