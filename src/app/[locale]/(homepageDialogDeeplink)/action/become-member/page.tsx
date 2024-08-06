@@ -1,10 +1,6 @@
-import { UserActionType } from '@prisma/client'
-import { redirect, RedirectType } from 'next/navigation'
-
 import { getAuthenticatedData } from '@/components/app/pageUserProfile/getAuthenticatedData'
+import { RedirectToSignUpComponent } from '@/components/app/redirectToSignUp'
 import { PageProps } from '@/types'
-import { setCallbackQueryString } from '@/utils/server/searchParams'
-import { USER_ACTION_DEEPLINK_MAP } from '@/utils/shared/urlsDeeplinkUserActions'
 
 import { PageBecomeMember } from './pageBecomeMember'
 
@@ -15,13 +11,7 @@ export default async function UserActionBecomeMemberDeepLink({ params }: PagePro
   const user = await getAuthenticatedData()
 
   if (!user) {
-    redirect(
-      USER_ACTION_DEEPLINK_MAP[UserActionType.OPT_IN].getDeeplinkUrl({
-        locale,
-        queryString: setCallbackQueryString({ destination: 'becomeMember' }),
-      }),
-      RedirectType.replace,
-    )
+    return <RedirectToSignUpComponent callbackDestination="becomeMember" locale={locale} />
   }
 
   return <PageBecomeMember hasOptedInToMembership={user.hasOptedInToMembership} />
