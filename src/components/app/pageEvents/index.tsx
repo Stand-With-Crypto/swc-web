@@ -4,6 +4,7 @@ import { EventsNearYou } from '@/components/app/pageEvents/components/events-nea
 import { FeaturedEvents } from '@/components/app/pageEvents/components/featured-events'
 import { FeaturedPastEvents } from '@/components/app/pageEvents/components/featured-past-events'
 import { StateEventsDialog } from '@/components/app/pageEvents/components/state-events-dialog'
+import { SuccessfulEventNotificationsSignupDialog } from '@/components/app/pageEvents/components/successful-event-signup-dialog'
 import { UpcomingEvents } from '@/components/app/pageEvents/components/upcoming-events'
 
 export function EventsPage() {
@@ -19,6 +20,8 @@ export function EventsPage() {
 
       <FeaturedPastEvents />
 
+      {/* The DIALOGS BELOW ARE FOR TESTING ONLY. They will be removed in the final version. */}
+
       <StateEventsDialog state="DE" />
 
       <EventDialog
@@ -29,6 +32,8 @@ export function EventsPage() {
         name="Global Advisory Council Meeting"
         state="CA"
       />
+
+      <SuccessfulEventNotificationsSignupDialog />
     </div>
   )
 }
