@@ -1,3 +1,4 @@
+import { EventDialog } from '@/components/app/pageEvents/components/event-dialog'
 import { EventsIntro } from '@/components/app/pageEvents/components/events-intro'
 import { EventsNearYou } from '@/components/app/pageEvents/components/events-near-you'
 import { FeaturedEvents } from '@/components/app/pageEvents/components/featured-events'
@@ -19,6 +20,15 @@ export function EventsPage() {
       <FeaturedPastEvents />
 
       <StateEventsDialog state="DE" />
+
+      <EventDialog
+        address="1234 House St, Los Angeles, CA 90068"
+        date={new Date().toISOString()}
+        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "
+        googleMapsLink="https://maps.app.goo.gl/674bxtK8BNQu6QDN8"
+        name="Global Advisory Council Meeting"
+        state="CA"
+      />
     </div>
   )
 }
