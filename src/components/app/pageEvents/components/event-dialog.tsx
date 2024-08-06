@@ -33,7 +33,7 @@ export function EventDialog({
     <Dialog {...dialogProps}>
       <DialogTrigger>Event Dialog</DialogTrigger> {/* This is temporary */}
       <DialogContent a11yTitle={`State ${state} Events`} className="max-w-[578px]">
-        <div className="flex flex-col items-center gap-2">
+        <div className="flex h-full flex-col items-center gap-2">
           <NextImage
             alt={`${state} shield`}
             className="mb-2 lg:mb-0"
@@ -50,9 +50,11 @@ export function EventDialog({
             <Pin size={16} /> {address}
           </p>
           {googleMapsLink} {/* // TODO: ADD IFRAME HERE */}
-          <div className="flex w-full items-center justify-end gap-3">
-            <Button variant="secondary">Get updates</Button>
-            <Button>RSVP</Button>
+          <div className="mt-auto flex w-full flex-col-reverse items-center justify-end gap-3 lg:mt-0 lg:flex-row">
+            <Button className="w-full lg:w-auto" variant="secondary">
+              Get updates
+            </Button>
+            <Button className="w-full lg:w-auto">RSVP</Button>
           </div>
         </div>
       </DialogContent>
