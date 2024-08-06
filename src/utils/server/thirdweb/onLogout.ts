@@ -1,5 +1,6 @@
 'use server'
 
+import { waitUntil } from '@vercel/functions'
 import { jwtDecode } from 'jwt-decode'
 import { cookies } from 'next/headers'
 
@@ -14,7 +15,11 @@ export async function onLogout() {
   const decodedToken = token?.value ? jwtDecode<{ ctx?: { userId?: string } }>(token.value) : null
   const { userId } = decodedToken?.ctx ?? {}
 
-  getServerAnalytics({ userId: userId ?? '', localUser }).track('User Logged Out')
+  waitUntil(
+    getServerAnalytics({ userId: userId ?? '', localUser })
+      .track('User Logged Out')
+      .flush(),
+  )
 
   cookies().delete(THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX)
 }

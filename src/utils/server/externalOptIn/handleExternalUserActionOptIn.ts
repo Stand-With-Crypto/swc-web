@@ -12,6 +12,7 @@ import {
   UserSession,
 } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
+import { waitUntil } from '@vercel/functions'
 import { isAddress } from 'viem'
 import { object, string, z } from 'zod'
 
@@ -151,8 +152,10 @@ export async function handleExternalUserActionOptIn(
   const localUser = getLocalUserFromUser(user)
   const analytics = getServerAnalytics({ userId: user.id, localUser })
   if (!existingAction?.user) {
-    getServerPeopleAnalytics({ userId: user.id, localUser }).setOnce(
-      mapPersistedLocalUserToAnalyticsProperties(localUser.persisted),
+    waitUntil(
+      getServerPeopleAnalytics({ userId: user.id, localUser })
+        .setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
+        .flush(),
     )
   }
 
@@ -190,7 +193,7 @@ export async function handleExternalUserActionOptIn(
       userState,
       ...input.additionalAnalyticsProperties,
     })
-    await analytics.flush()
+    waitUntil(analytics.flush())
     return {
       result: ExternalUserActionOptInResult.EXISTING_ACTION,
       resultOptions: Object.values(ExternalUserActionOptInResult),
@@ -236,7 +239,7 @@ export async function handleExternalUserActionOptIn(
     data: capitolCanaryPayload,
   })
 
-  await analytics.flush()
+  waitUntil(analytics.flush())
   return {
     result: ExternalUserActionOptInResult.NEW_ACTION,
     resultOptions: Object.values(ExternalUserActionOptInResult),

@@ -1,3 +1,5 @@
+import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
+
 export enum EmailEventName {
   PROCESSED = 'processed',
   DEFERRED = 'deferred',
@@ -36,6 +38,15 @@ export const EVENT_NAME_TO_HUMAN_READABLE_STRING: Record<EmailEventName, string>
   [EmailEventName.GROUP_RESUBSCRIBE]: 'Group Resubscribe',
 }
 
-export const INTERNAL_BASE_URL = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : 'http://localhost:3000'
+function getBaseUrl() {
+  switch (NEXT_PUBLIC_ENVIRONMENT) {
+    case 'production':
+      return 'https://www.standwithcrypto.org'
+    case 'preview':
+      return `https://${process.env.VERCEL_URL!}`
+    default:
+      return 'http://localhost:3000'
+  }
+}
+
+export const INTERNAL_BASE_URL = getBaseUrl()

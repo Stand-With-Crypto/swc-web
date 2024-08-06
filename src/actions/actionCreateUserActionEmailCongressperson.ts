@@ -12,6 +12,7 @@ import {
   UserInformationVisibility,
 } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
+import { waitUntil } from '@vercel/functions'
 import { z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
@@ -158,7 +159,7 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
       userState,
       ...convertAddressToAnalyticsProperties(validatedFields.data.address),
     })
-    await beforeFinish()
+    waitUntil(beforeFinish())
     return { user: getClientUser(user) }
   }
 
@@ -237,7 +238,7 @@ async function _actionCreateUserActionEmailCongressperson(input: Input) {
     data: payload,
   })
 
-  await beforeFinish()
+  waitUntil(beforeFinish())
   return { user: getClientUser(user) }
 }
 

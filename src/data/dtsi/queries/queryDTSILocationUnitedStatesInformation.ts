@@ -33,38 +33,6 @@ export const query = /* GraphQL */ `
     ) {
       ...UnitedStatesPersonFragment
     }
-    NYSenate: people(
-      limit: 100
-      offset: 0
-      personRoleGroupingOr: [RUNNING_FOR_US_SENATE]
-      personRolePrimaryState: "NY"
-    ) {
-      ...UnitedStatesPersonFragment
-    }
-    NJSenate: people(
-      limit: 100
-      offset: 0
-      personRoleGroupingOr: [RUNNING_FOR_US_SENATE]
-      personRolePrimaryState: "NJ"
-    ) {
-      ...UnitedStatesPersonFragment
-    }
-    CASenate: people(
-      limit: 100
-      offset: 0
-      personRoleGroupingOr: [RUNNING_FOR_US_SENATE]
-      personRolePrimaryState: "CA"
-    ) {
-      ...UnitedStatesPersonFragment
-    }
-    TXSenate: people(
-      limit: 100
-      offset: 0
-      personRoleGroupingOr: [RUNNING_FOR_US_SENATE]
-      personRolePrimaryState: "TX"
-    ) {
-      ...UnitedStatesPersonFragment
-    }
     OHSenate: people(
       limit: 100
       offset: 0
@@ -97,14 +65,6 @@ export const query = /* GraphQL */ `
     ) {
       ...UnitedStatesPersonFragment
     }
-    NVSenate: people(
-      limit: 100
-      offset: 0
-      personRoleGroupingOr: [RUNNING_FOR_US_SENATE]
-      personRolePrimaryState: "NV"
-    ) {
-      ...UnitedStatesPersonFragment
-    }
     MASenate: people(
       limit: 100
       offset: 0
@@ -121,11 +81,27 @@ export const query = /* GraphQL */ `
     ) {
       ...UnitedStatesPersonFragment
     }
+    NVSenate: people(
+      limit: 100
+      offset: 0
+      personRoleGroupingOr: [RUNNING_FOR_US_SENATE]
+      personRolePrimaryState: "NV"
+    ) {
+      ...UnitedStatesPersonFragment
+    }
     WISenate: people(
       limit: 100
       offset: 0
       personRoleGroupingOr: [RUNNING_FOR_US_SENATE]
       personRolePrimaryState: "WI"
+    ) {
+      ...UnitedStatesPersonFragment
+    }
+    MDSenate: people(
+      limit: 100
+      offset: 0
+      personRoleGroupingOr: [RUNNING_FOR_US_SENATE]
+      personRolePrimaryState: "MD"
     ) {
       ...UnitedStatesPersonFragment
     }
@@ -138,57 +114,12 @@ export const query = /* GraphQL */ `
     ) {
       ...UnitedStatesPersonFragment
     }
-    CA_District32: people(
+    NV_District4: people(
       limit: 100
       offset: 0
       personRoleGroupingOr: [RUNNING_FOR_US_HOUSE_OF_REPS]
-      personRolePrimaryState: "CA"
-      personRolePrimaryDistrict: "32"
-    ) {
-      ...UnitedStatesPersonFragment
-    }
-    CA_District40: people(
-      limit: 100
-      offset: 0
-      personRoleGroupingOr: [RUNNING_FOR_US_HOUSE_OF_REPS]
-      personRolePrimaryState: "CA"
-      personRolePrimaryDistrict: "40"
-    ) {
-      ...UnitedStatesPersonFragment
-    }
-    AL_District2: people(
-      limit: 100
-      offset: 0
-      personRoleGroupingOr: [RUNNING_FOR_US_HOUSE_OF_REPS]
-      personRolePrimaryState: "AL"
-      personRolePrimaryDistrict: "2"
-    ) {
-      ...UnitedStatesPersonFragment
-    }
-    NJ_District5: people(
-      limit: 100
-      offset: 0
-      personRoleGroupingOr: [RUNNING_FOR_US_HOUSE_OF_REPS]
-      personRolePrimaryState: "NJ"
-      personRolePrimaryDistrict: "5"
-    ) {
-      ...UnitedStatesPersonFragment
-    }
-    NJ_District8: people(
-      limit: 100
-      offset: 0
-      personRoleGroupingOr: [RUNNING_FOR_US_HOUSE_OF_REPS]
-      personRolePrimaryState: "NJ"
-      personRolePrimaryDistrict: "8"
-    ) {
-      ...UnitedStatesPersonFragment
-    }
-    IL_District13: people(
-      limit: 100
-      offset: 0
-      personRoleGroupingOr: [RUNNING_FOR_US_HOUSE_OF_REPS]
-      personRolePrimaryState: "IL"
-      personRolePrimaryDistrict: "13"
+      personRolePrimaryState: "NV"
+      personRolePrimaryDistrict: "4"
     ) {
       ...UnitedStatesPersonFragment
     }
@@ -201,111 +132,12 @@ export const query = /* GraphQL */ `
     ) {
       ...UnitedStatesPersonFragment
     }
-    MI_District10: people(
-      limit: 100
-      offset: 0
-      personRoleGroupingOr: [RUNNING_FOR_US_HOUSE_OF_REPS]
-      personRolePrimaryState: "MI"
-      personRolePrimaryDistrict: "10"
-    ) {
-      ...UnitedStatesPersonFragment
-    }
-    MT_District2: people(
-      limit: 100
-      offset: 0
-      personRoleGroupingOr: [RUNNING_FOR_US_HOUSE_OF_REPS]
-      personRolePrimaryState: "MT"
-      personRolePrimaryDistrict: "2"
-    ) {
-      ...UnitedStatesPersonFragment
-    }
-    NY_District17: people(
-      limit: 100
-      offset: 0
-      personRoleGroupingOr: [RUNNING_FOR_US_HOUSE_OF_REPS]
-      personRolePrimaryState: "NY"
-      personRolePrimaryDistrict: "17"
-    ) {
-      ...UnitedStatesPersonFragment
-    }
-    NY_District19: people(
-      limit: 100
-      offset: 0
-      personRoleGroupingOr: [RUNNING_FOR_US_HOUSE_OF_REPS]
-      personRolePrimaryState: "NY"
-      personRolePrimaryDistrict: "19"
-    ) {
-      ...UnitedStatesPersonFragment
-    }
-    NV_District3: people(
-      limit: 100
-      offset: 0
-      personRoleGroupingOr: [RUNNING_FOR_US_HOUSE_OF_REPS]
-      personRolePrimaryState: "NV"
-      personRolePrimaryDistrict: "3"
-    ) {
-      ...UnitedStatesPersonFragment
-    }
-    NV_District1: people(
-      limit: 100
-      offset: 0
-      personRoleGroupingOr: [RUNNING_FOR_US_HOUSE_OF_REPS]
-      personRolePrimaryState: "NV"
-      personRolePrimaryDistrict: "1"
-    ) {
-      ...UnitedStatesPersonFragment
-    }
-    NV_District4: people(
-      limit: 100
-      offset: 0
-      personRoleGroupingOr: [RUNNING_FOR_US_HOUSE_OF_REPS]
-      personRolePrimaryState: "NV"
-      personRolePrimaryDistrict: "4"
-    ) {
-      ...UnitedStatesPersonFragment
-    }
-    PA_District10: people(
-      limit: 100
-      offset: 0
-      personRoleGroupingOr: [RUNNING_FOR_US_HOUSE_OF_REPS]
-      personRolePrimaryState: "PA"
-      personRolePrimaryDistrict: "10"
-    ) {
-      ...UnitedStatesPersonFragment
-    }
     OR_District5: people(
       limit: 100
       offset: 0
       personRoleGroupingOr: [RUNNING_FOR_US_HOUSE_OF_REPS]
       personRolePrimaryState: "OR"
       personRolePrimaryDistrict: "5"
-    ) {
-      ...UnitedStatesPersonFragment
-    }
-    SC_District4: people(
-      limit: 100
-      offset: 0
-      personRoleGroupingOr: [RUNNING_FOR_US_HOUSE_OF_REPS]
-      personRolePrimaryState: "SC"
-      personRolePrimaryDistrict: "4"
-    ) {
-      ...UnitedStatesPersonFragment
-    }
-    AZ_District6: people(
-      limit: 100
-      offset: 0
-      personRoleGroupingOr: [RUNNING_FOR_US_HOUSE_OF_REPS]
-      personRolePrimaryState: "AZ"
-      personRolePrimaryDistrict: "6"
-    ) {
-      ...UnitedStatesPersonFragment
-    }
-    AZ_District1: people(
-      limit: 100
-      offset: 0
-      personRoleGroupingOr: [RUNNING_FOR_US_HOUSE_OF_REPS]
-      personRolePrimaryState: "AZ"
-      personRolePrimaryDistrict: "1"
     ) {
       ...UnitedStatesPersonFragment
     }

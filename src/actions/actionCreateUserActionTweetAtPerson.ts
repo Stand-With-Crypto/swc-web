@@ -2,6 +2,7 @@
 import 'server-only'
 
 import { User, UserActionType, UserInformationVisibility } from '@prisma/client'
+import { waitUntil } from '@vercel/functions'
 import { isAfter, isBefore } from 'date-fns'
 import { nativeEnum, object, string, z } from 'zod'
 
@@ -126,13 +127,15 @@ async function _actionCreateUserActionTweetedAtPerson(input: CreateActionTweetAt
     userId: user.id,
     localUser,
   })
+  const beforeFinish = () => Promise.all([analytics.flush(), peopleAnalytics.flush()])
 
   const recentUserAction = await getRecentUserActionByUserId(user.id, validatedInput)
   if (recentUserAction) {
-    await logSpamActionSubmissions({
+    logSpamActionSubmissions({
       validatedInput,
       sharedDependencies: { analytics },
     })
+    waitUntil(beforeFinish())
     return { user: getClientUser(user) }
   }
 
@@ -149,6 +152,7 @@ async function _actionCreateUserActionTweetedAtPerson(input: CreateActionTweetAt
     await claimNFTAndSendEmailNotification(userAction, user.primaryUserCryptoAddress)
   }
 
+  waitUntil(beforeFinish())
   return { user: getClientUser(user) }
 }
 
@@ -173,8 +177,10 @@ async function createUser(sharedDependencies: Pick<SharedDependencies, 'localUse
   logger.info('created user')
 
   if (localUser?.persisted) {
-    getServerPeopleAnalytics({ localUser, userId: createdUser.id }).setOnce(
-      mapPersistedLocalUserToAnalyticsProperties(localUser.persisted),
+    waitUntil(
+      getServerPeopleAnalytics({ localUser, userId: createdUser.id })
+        .setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
+        .flush(),
     )
   }
 
@@ -194,7 +200,7 @@ async function getRecentUserActionByUserId(
   })
 }
 
-async function logSpamActionSubmissions({
+function logSpamActionSubmissions({
   validatedInput,
   sharedDependencies,
 }: {

@@ -14,6 +14,7 @@ import {
   UserInformationVisibility,
 } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
+import { waitUntil } from '@vercel/functions'
 import { compact, groupBy } from 'lodash-es'
 import { cookies } from 'next/headers'
 import { VerifyLoginPayloadParams } from 'thirdweb/auth'
@@ -351,7 +352,7 @@ export async function onNewLogin(props: NewLoginParams) {
     'Datetime of Last Login': new Date(),
   })
 
-  await beforeFinish()
+  waitUntil(beforeFinish())
   return {
     userId: user.id,
     user,
