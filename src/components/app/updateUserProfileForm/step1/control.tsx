@@ -237,7 +237,7 @@ export function UpdateUserProfileForm({
         <div className="flex flex-col justify-center gap-4 max-md:!mt-auto md:mt-4">
           <Collapsible open={!!phoneNumberValue}>
             <CollapsibleContent className="AnimateCollapsibleContent">
-              <FormDescription className="text-center lg:text-left">
+              <FormDescription className="text-center">
                 By clicking Next, you consent to receive recurring texts from Stand With Crypto to
                 the number provided. You can reply STOP to stop receiving texts. Message and data
                 rates may apply.
