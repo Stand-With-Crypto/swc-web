@@ -40,10 +40,6 @@ export const getDTSIPersonRoleCategoryDisplayName = (
   switch (role.roleCategory) {
     case DTSI_PersonRoleCategory.CONGRESS:
       return 'Congressperson'
-    case DTSI_PersonRoleCategory.GOVERNOR:
-      return 'Governor'
-    case DTSI_PersonRoleCategory.MAYOR:
-      return 'Mayor'
     case DTSI_PersonRoleCategory.PRESIDENT:
       return 'President'
     case DTSI_PersonRoleCategory.SENATE:
@@ -51,7 +47,7 @@ export const getDTSIPersonRoleCategoryDisplayName = (
     case DTSI_PersonRoleCategory.VICE_PRESIDENT:
       return 'Vice President'
   }
-  return role.title
+  return 'Political Figure'
 }
 
 export const getDTSIPersonRoleCategoryWithStateDisplayName = (
@@ -76,10 +72,6 @@ export const getDTSIPersonRoleCategoryWithStateDisplayName = (
   switch (role.roleCategory) {
     case DTSI_PersonRoleCategory.CONGRESS:
       return <>Rep{stateStr}</>
-    case DTSI_PersonRoleCategory.GOVERNOR:
-      return 'Governor'
-    case DTSI_PersonRoleCategory.MAYOR:
-      return 'Mayor'
     case DTSI_PersonRoleCategory.PRESIDENT:
       return 'President'
     case DTSI_PersonRoleCategory.SENATE:
@@ -87,20 +79,27 @@ export const getDTSIPersonRoleCategoryWithStateDisplayName = (
     case DTSI_PersonRoleCategory.VICE_PRESIDENT:
       return 'Vice President'
   }
-  return role.title
+  return 'Political Figure'
 }
 
 export const getDTSIPersonRoleLocation = (
   role: Pick<
     DTSI_PersonRole,
-    'primaryCity' | 'primaryCountryCode' | 'primaryDistrict' | 'primaryState'
+    'primaryCity' | 'primaryCountryCode' | 'primaryDistrict' | 'primaryState' | 'roleCategory'
   >,
 ) => {
-  return compact([
-    role.primaryCity,
-    role.primaryState && getUSStateNameFromStateCode(role.primaryState),
-    role.primaryDistrict,
-  ]).join(', ')
+  switch (role.roleCategory) {
+    case DTSI_PersonRoleCategory.CONGRESS:
+    case DTSI_PersonRoleCategory.PRESIDENT:
+    case DTSI_PersonRoleCategory.SENATE:
+    case DTSI_PersonRoleCategory.VICE_PRESIDENT:
+      return compact([
+        role.primaryCity,
+        role.primaryState && getUSStateNameFromStateCode(role.primaryState),
+        role.primaryDistrict,
+      ]).join(', ')
+  }
+  return null
 }
 
 const DTSI_PERSON_ROLE_IMPORTANCE = [
