@@ -24,7 +24,7 @@ export function useSections<SectionKeys extends readonly string[]>({
 
   const goToSection: UseSectionsReturn<Key>['goToSection'] = React.useCallback(
     (section, options = {}) => {
-      if (section === currentSection || (skipSections && skipSections.includes(section))) {
+      if (section === currentSection || skipSections?.includes(section)) {
         return
       }
 
