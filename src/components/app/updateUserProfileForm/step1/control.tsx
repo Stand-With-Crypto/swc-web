@@ -179,7 +179,7 @@ export function UpdateUserProfileForm({
               </FormItem>
             )}
           />
-          {user.hasRepliedToOptInSms && user.phoneNumber ? null : (
+          {!user.hasRepliedToOptInSms && !user.phoneNumber && (
             <FormField
               control={form.control}
               name="phoneNumber"
