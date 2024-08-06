@@ -36,7 +36,7 @@ export function getPartyOptionDisplayName(party: string) {
     case PARTY_OPTIONS.REPUBLICAN:
       return 'Republican'
     case PARTY_OPTIONS.DEMOCRAT:
-      return 'Democrat'
+      return 'Democratic'
     default:
       return 'All'
   }
