@@ -25,9 +25,11 @@ export function useThirdwebAuthUser() {
 
   return {
     isLoggedIn: !!userId,
-    user: {
-      userId,
-      address: parseThirdwebAddress(address ?? ''),
-    },
+    user: userId
+      ? {
+          userId,
+          address: parseThirdwebAddress(address ?? ''),
+        }
+      : undefined,
   }
 }

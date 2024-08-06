@@ -27,7 +27,7 @@ export default function NFTOnTheWayEmail({
   hrefSearchParams = {},
   // This default value is so react email dev server works properly
   // The required type ensures this is not called without it
-  actionNFT = 'OPT_IN',
+  actionNFT = 'CALL',
   ...keepUpTheFightSectionProps
 }: NFTOnTheWayEmailProps) {
   const hydratedHrefSearchParams = {

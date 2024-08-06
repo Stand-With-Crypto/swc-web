@@ -12,6 +12,7 @@ import {
   ANALYTICS_NAME_USER_ACTION_SUCCESS_JOIN_SWC,
 } from '@/components/app/authentication/constants'
 import { GeoGate } from '@/components/app/geoGate'
+import { UserProfileFormSections } from '@/components/app/updateUserProfileForm'
 import { LazyUpdateUserProfileForm } from '@/components/app/updateUserProfileForm/lazyLoad'
 import { UserActionFormActionUnavailable } from '@/components/app/userActionFormCommon/actionUnavailable'
 import { Dialog, DialogBody, DialogContent, DialogTrigger } from '@/components/ui/dialog'
@@ -299,7 +300,11 @@ function FinishProfileSection({ onSuccess }: { onSuccess: () => void }) {
 
   return (
     <React.Suspense fallback={loadingRender}>
-      <LazyUpdateUserProfileForm onSuccess={onSuccess} user={user} />
+      <LazyUpdateUserProfileForm
+        onSuccess={onSuccess}
+        skipSections={[UserProfileFormSections.InformationVisibility]}
+        user={user}
+      />
     </React.Suspense>
   )
 }

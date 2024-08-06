@@ -1,15 +1,16 @@
 import React from 'react'
+import * as Sentry from '@sentry/nextjs'
 import { BigNumber } from 'ethers'
 import useSWR from 'swr'
 import { estimateGasCost, getContract } from 'thirdweb'
 import { base } from 'thirdweb/chains'
 import { claimTo } from 'thirdweb/extensions/erc721'
-import { useActiveAccount } from 'thirdweb/react'
 
 import {
   ETH_NFT_DONATION_AMOUNT,
   MINT_NFT_CONTRACT_ADDRESS,
 } from '@/components/app/userActionFormNFTMint/constants'
+import { useThirdwebAuthUser } from '@/hooks/useAuthUser'
 import { fromBigNumber } from '@/utils/shared/bigNumber'
 import { thirdwebClient } from '@/utils/shared/thirdwebClient'
 
@@ -67,15 +68,31 @@ function useGasFee(quantity: number) {
     client: thirdwebClient,
     chain: base,
   })
-  const account = useActiveAccount()
+  const { user } = useThirdwebAuthUser()
+  const account = user?.address
 
-  return useSWR({ contract }, async ({ contract: _contract }) => {
-    if (!contract) {
-      return
-    }
-
-    const tx = claimTo({ contract, quantity: BigInt(quantity), to: account?.address ?? '' })
-    const gasFee = await estimateGasCost({ transaction: tx })
-    return gasFee.wei
-  })
+  return useSWR(
+    contract ? { contract } : null,
+    async ({ contract: _contract }) => {
+      const tx = claimTo({
+        contract: _contract,
+        quantity: BigInt(quantity),
+        to: account || '',
+      })
+      const gasFee = await estimateGasCost({ transaction: tx })
+      return gasFee.wei
+    },
+    {
+      onError: error => {
+        Sentry.captureException(error, {
+          extra: {
+            quantity,
+            contract,
+            user,
+          },
+          tags: { domain: 'useCheckoutController' },
+        })
+      },
+    },
+  )
 }
