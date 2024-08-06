@@ -291,6 +291,11 @@ const nextConfig = {
         destination: '/action/call?unexpectedUrl=true',
         permanent: false,
       },
+      {
+        source: '/utm_source=swc&utm_medium=sms&utm_campaign=mi-primary-1',
+        destination: '/?utm_source=swc&utm_medium=sms&utm_campaign=mi-primary-1',
+        permanent: false,
+      },
     ]
   },
 }
