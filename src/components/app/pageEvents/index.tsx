@@ -2,6 +2,7 @@ import { EventsIntro } from '@/components/app/pageEvents/components/events-intro
 import { EventsNearYou } from '@/components/app/pageEvents/components/events-near-you'
 import { FeaturedEvents } from '@/components/app/pageEvents/components/featured-events'
 import { FeaturedPastEvents } from '@/components/app/pageEvents/components/featured-past-events'
+import { StateEventsDialog } from '@/components/app/pageEvents/components/state-events-dialog'
 import { UpcomingEvents } from '@/components/app/pageEvents/components/upcoming-events'
 
 export function EventsPage() {
@@ -16,6 +17,8 @@ export function EventsPage() {
       <UpcomingEvents />
 
       <FeaturedPastEvents />
+
+      <StateEventsDialog state="DE" />
     </div>
   )
 }
