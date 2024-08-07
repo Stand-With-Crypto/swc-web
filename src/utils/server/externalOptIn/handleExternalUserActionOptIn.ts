@@ -40,6 +40,7 @@ import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/local
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
+import { generateUserSessionId } from '@/utils/shared/userSessionId'
 import { zodAddress } from '@/validation/fields/zodAddress'
 import { zodEmailAddress } from '@/validation/fields/zodEmailAddress'
 import { zodFirstName, zodLastName } from '@/validation/fields/zodName'
@@ -429,7 +430,7 @@ async function maybeUpsertUser({
       }),
       referralId: generateReferralId(),
       userSessions: {
-        create: {},
+        create: { id: generateUserSessionId() },
       },
       informationVisibility: UserInformationVisibility.ANONYMOUS,
       firstName,
