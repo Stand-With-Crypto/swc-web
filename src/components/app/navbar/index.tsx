@@ -1,13 +1,26 @@
 'use client'
 
-import { useCallback } from 'react'
+import { useCallback, useState } from 'react'
+import { Cross1Icon } from '@radix-ui/react-icons'
 import { capitalize } from 'lodash-es'
 import { Menu } from 'lucide-react'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
+import {
+  BillsIcon,
+  CommunityIcon,
+  MissionIcon,
+  ResourcesIcon,
+} from '@/components/app/navbar/navbarDrawerIcons'
 import { NavbarLoggedInButton } from '@/components/app/navbar/navbarLoggedInButton'
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion'
 import { Button } from '@/components/ui/button'
-import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/drawer'
+import { Drawer, DrawerClose, DrawerContent, DrawerTrigger } from '@/components/ui/drawer'
 import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
 import { useDialog } from '@/hooks/useDialog'
@@ -19,23 +32,17 @@ import { cn } from '@/utils/web/cn'
 export function Navbar({ locale }: { locale: SupportedLocale }) {
   const dialogProps = useDialog({ analytics: 'Mobile Navbar' })
   const urls = getIntlUrls(locale)
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+
   const leftLinks = [
     { href: urls.locationUnitedStates(), text: 'Key Races' },
     {
       href: urls.politiciansHomepage(),
-      text: 'Politicians',
+      text: 'Politician scores',
     },
     {
       href: urls.endorsedCandidates(),
-      text: 'Endorsements',
-    },
-    {
-      href: urls.bills(),
-      text: 'Bills',
-    },
-    {
-      href: urls.about(),
-      text: 'Mission',
+      text: 'Endorsed candidates',
     },
     {
       href: urls.partners(),
@@ -44,12 +51,31 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
     {
       href: urls.resources(),
       text: 'Resources',
-    },
-    {
-      href: urls.donate(),
-      text: 'Donate',
+      children: [
+        {
+          href: urls.about(),
+          text: 'Our mission',
+          icon: MissionIcon,
+        },
+        {
+          href: urls.community(),
+          text: 'Community',
+          icon: CommunityIcon,
+        },
+        {
+          href: urls.bills(),
+          text: 'Bills',
+          icon: BillsIcon,
+        },
+        {
+          href: urls.resources(),
+          text: 'FIT21 resources',
+          icon: ResourcesIcon,
+        },
+      ],
     },
   ]
+
   const maybeCloseAfterNavigating = useCallback(() => {
     if (dialogProps.open) {
       dialogProps.onOpenChange(false)
@@ -57,14 +83,27 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
   }, [dialogProps])
 
   const hasEnvironmentBar = NEXT_PUBLIC_ENVIRONMENT !== 'production'
-  const loginButton = (
+  const LoginButton = () => (
     <LoginDialogWrapper
       authenticatedContent={
         <NavbarLoggedInButton onOpenChange={open => open || maybeCloseAfterNavigating()} />
       }
     >
-      <Button>Sign In</Button>
+      <Button className="w-full text-base font-bold md:font-normal lg:w-auto" variant="primary-cta">
+        Sign In
+      </Button>
     </LoginDialogWrapper>
+  )
+
+  const DonateButton = () => (
+    <Button
+      asChild
+      className="w-full text-base font-bold md:font-normal lg:w-auto"
+      key={urls.donate()}
+      variant="default"
+    >
+      <InternalLink href={urls.donate()}>Donate</InternalLink>
+    </Button>
   )
 
   return (
@@ -85,22 +124,14 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
       )}
 
       <nav
-        className={
-          /*
-          if a user has their font sizes set to something other than the browser default
-          the size of our div'ws can shift which breaks UX that makes assumptions about how large these elements are
-          like when we have a sub sticky header on the politician home page
-          We need to hardcode the height of the navbar in different environments
-          */
-          cn(
-            'sticky top-0 z-10 flex h-[72px] w-full items-center bg-white py-3 lg:h-[84px] lg:py-5',
-          )
-        }
+        className={cn(
+          'sticky top-0 z-10 flex h-[72px] w-full items-center bg-white py-3 lg:h-[84px] lg:py-5',
+        )}
       >
-        <div className="container flex items-center justify-between">
+        <div className="mx-auto flex w-full max-w-[1800px] items-center justify-between px-8">
           <InternalLink className="flex-shrink-0" href={urls.home()}>
             <NextImage
-              alt={'Stand With Crypto Logo'}
+              alt="Stand With Crypto Logo"
               height={40}
               priority
               src="/logo/shield.svg"
@@ -109,19 +140,77 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
           </InternalLink>
           <div className="flex gap-4">
             <div className="flex gap-4 rounded-full bg-secondary">
-              {leftLinks.map(({ href, text }) => {
-                return (
-                  <Button asChild className="hidden lg:block" key={href} variant="secondary">
+              {leftLinks.map(({ href, text, children }, index) => (
+                <div
+                  className="nav-item group relative"
+                  key={href}
+                  onMouseEnter={() => {
+                    setHoveredIndex(index)
+                  }}
+                  onMouseLeave={event => {
+                    if (
+                      event.relatedTarget instanceof Node &&
+                      !event.currentTarget.contains(event.relatedTarget as Node)
+                    ) {
+                      setHoveredIndex(null)
+                    }
+                  }}
+                >
+                  <Button asChild className="hidden lg:block" variant="secondary">
                     <InternalLink href={href}>{text}</InternalLink>
                   </Button>
-                )
-              })}
+                  {children && (
+                    <div
+                      className={cn(
+                        'absolute left-1/2 top-full mt-2 w-[378px] -translate-x-1/2 rounded-[24px] bg-white p-6 shadow-[0px_6px_20px_rgba(0,0,0,0.15)]',
+                        hoveredIndex === index ? 'flex flex-col justify-between gap-5' : 'hidden',
+                        'before:absolute before:-top-2 before:left-0 before:h-[10px] before:w-full before:bg-transparent before:content-[""]',
+                      )}
+                      onMouseEnter={() => {
+                        setHoveredIndex(index)
+                      }}
+                      onMouseLeave={event => {
+                        if (
+                          event.relatedTarget instanceof Node &&
+                          !event.currentTarget.contains(event.relatedTarget as Node) &&
+                          !event.currentTarget.parentElement?.contains(event.relatedTarget as Node)
+                        ) {
+                          setHoveredIndex(null)
+                        }
+                      }}
+                    >
+                      {children.map(({ href: childHref, text: childText, icon: Icon }) => (
+                        <Button
+                          asChild
+                          className="block w-full font-sans text-[16px] font-bold"
+                          key={childHref}
+                          variant="ghost"
+                        >
+                          <InternalLink
+                            className={cn(
+                              'flex px-0 py-0',
+                              !!Icon && 'items-center justify-start gap-2 p-2',
+                            )}
+                            href={childHref}
+                            onClick={() => setHoveredIndex(null)}
+                          >
+                            {Icon && <Icon />}
+                            {childText}
+                          </InternalLink>
+                        </Button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
             </div>
-
-            <div className="hidden lg:flex">{loginButton}</div>
+            <div className="hidden gap-4 lg:flex">
+              <DonateButton />
+              <LoginButton />
+            </div>
           </div>
         </div>
-        <Drawer {...dialogProps} direction="top">
+        <Drawer {...dialogProps} direction="top" shouldScaleBackground>
           <DrawerTrigger asChild data-testid="drawer-trigger">
             <button className="p-3 lg:hidden">
               <span className="sr-only">Open navigation menu</span>
@@ -129,17 +218,82 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
             </button>
           </DrawerTrigger>
           <DrawerContent direction="top">
-            <div className="px-6 pb-6 pt-3 text-center">
-              {leftLinks.map(({ href, text }) => {
+            <div className="h-screen pb-6 text-left">
+              <div className="flex justify-between p-6">
+                <InternalLink className="flex-shrink-0" href={urls.home()}>
+                  <NextImage
+                    alt="Stand With Crypto Logo"
+                    height={40}
+                    priority
+                    src="/logo/shield.svg"
+                    width={41}
+                  />
+                </InternalLink>
+                <DrawerClose asChild>
+                  <Button variant="ghost">
+                    <Cross1Icon height={16} width={16} />
+                  </Button>
+                </DrawerClose>
+              </div>
+
+              {leftLinks.map(({ href, text, children }) => {
+                if (children) {
+                  const accordionTitle = text
+                  return (
+                    <Accordion collapsible key={href} type="single">
+                      <AccordionItem value={accordionTitle}>
+                        <AccordionTrigger
+                          chevronClassName="w-6 h-6"
+                          className="px-6 pt-6 font-sans text-xl font-bold !no-underline"
+                        >
+                          {accordionTitle}
+                        </AccordionTrigger>
+                        <AccordionContent>
+                          {children.map(({ href: childHref, text: childText, icon: Icon }) => (
+                            <Button
+                              asChild
+                              className="block w-full font-sans text-xl font-bold"
+                              key={childHref}
+                              variant="ghost"
+                            >
+                              <InternalLink
+                                className={cn(
+                                  'flex px-6 py-3 first:pt-0',
+                                  !!Icon && 'items-center gap-3',
+                                )}
+                                href={childHref}
+                                onClick={maybeCloseAfterNavigating}
+                              >
+                                {Icon && <Icon />}
+                                {childText}
+                              </InternalLink>
+                            </Button>
+                          ))}
+                        </AccordionContent>
+                      </AccordionItem>
+                    </Accordion>
+                  )
+                }
+
                 return (
-                  <Button asChild className="block" key={href} variant="ghost">
+                  <Button
+                    asChild
+                    className="block px-6 py-6 font-sans text-xl font-bold"
+                    key={href}
+                    variant="ghost"
+                  >
                     <InternalLink href={href} onClick={maybeCloseAfterNavigating}>
                       {text}
                     </InternalLink>
                   </Button>
                 )
               })}
-              <div className="mt-4">{loginButton}</div>
+              <div className="mt-4 px-6">
+                <LoginButton />
+              </div>
+              <div className="mt-4 px-6">
+                <DonateButton />
+              </div>
             </div>
           </DrawerContent>
         </Drawer>
