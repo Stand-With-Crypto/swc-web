@@ -84,6 +84,7 @@ export function ThirdwebLoginContent({
             <ExternalLink href="https://www.quorum.us/privacy-policy/">
               Quorum Privacy Policy
             </ExternalLink>
+            .
           </span>
         )
       : () => (
@@ -97,6 +98,7 @@ export function ThirdwebLoginContent({
             <ExternalLink href="https://www.quorum.us/privacy-policy/">
               Quorum Privacy Policy
             </ExternalLink>
+            .
           </>
         )
 

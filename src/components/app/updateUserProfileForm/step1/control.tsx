@@ -237,7 +237,7 @@ export function UpdateUserProfileForm({
           <FormGeneralErrorMessage control={form.control} />
         </div>
         <div className="flex flex-col justify-center gap-4 max-md:!mt-auto md:mt-4">
-          <Collapsible open={!!phoneNumberValue}>
+          <Collapsible open={!!phoneNumberValue && !user.hasRepliedToOptInSms && !user.phoneNumber}>
             <CollapsibleContent className="AnimateCollapsibleContent">
               <FormDescription className="text-center lg:text-left">
                 By clicking Next, you consent to receive recurring texts from Stand With Crypto. You

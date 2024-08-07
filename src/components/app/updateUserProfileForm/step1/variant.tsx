@@ -241,7 +241,9 @@ export function UpdateUserProfileForm({
           <Button className="w-full" disabled={form.formState.isSubmitting} size="lg" type="submit">
             Create account
           </Button>
-          <Collapsible open={!!form.watch('phoneNumber')}>
+          <Collapsible
+            open={!!form.watch('phoneNumber') && !user.hasRepliedToOptInSms && !user.phoneNumber}
+          >
             <CollapsibleContent className="AnimateCollapsibleContent">
               <FormDescription className="text-center text-xs font-normal leading-4 text-muted-foreground">
                 By signing in, you consent to receive recurring texts from Stand with Crypto about
