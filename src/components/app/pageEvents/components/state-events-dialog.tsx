@@ -2,13 +2,13 @@
 
 import { format } from 'date-fns'
 
-import { eventStates } from '@/components/app/pageEvents/constants'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { NextImage } from '@/components/ui/image'
 import { useDialog } from '@/hooks/useDialog'
+import { US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
 
 interface StateEventsDialogProps {
-  state: keyof typeof eventStates
+  state: keyof typeof US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP
 }
 
 export function StateEventsDialog({ state }: StateEventsDialogProps) {
@@ -27,9 +27,11 @@ export function StateEventsDialog({ state }: StateEventsDialogProps) {
             width={100}
           />
 
-          <h3 className="font-sans text-xl font-bold">Events in {eventStates[state]}</h3>
+          <h3 className="font-sans text-xl font-bold">
+            Events in {US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP[state]}
+          </h3>
           <p className="font-mono text-base text-muted-foreground">
-            There are 2 Stand With Crypto events in {eventStates[state]}.
+            There are 2 Stand With Crypto events in {US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP[state]}.
           </p>
 
           <div className="mt-6 flex w-full flex-col gap-4 overflow-y-auto px-8 lg:max-h-96">
@@ -60,7 +62,7 @@ export function StateEventsDialog({ state }: StateEventsDialogProps) {
 }
 
 interface StateDialogEventCardProps {
-  state: keyof typeof eventStates
+  state: keyof typeof US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP
   name: string
   city: string
   date: string
