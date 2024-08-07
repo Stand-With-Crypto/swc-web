@@ -48,6 +48,7 @@ const contentSecurityPolicy = {
     'https://euc.li/',
     // Thirdweb contract metadata
     'https://contract.thirdweb.com/',
+    'https://pay.thirdweb.com',
     'https://*.rpc.thirdweb.com/',
     'https://ipfs.io/ipfs/',
     // Thirdweb contract data
