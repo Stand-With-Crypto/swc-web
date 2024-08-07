@@ -8,6 +8,7 @@ import twilio from 'twilio'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { verifySignature } from '@/utils/server/sms'
 import { optOutUser, optUserBackIn } from '@/utils/server/sms/actions'
+// TODO: Uncomment this after we start using Messaging Service
 // import * as messages from '@/utils/server/sms/messages'
 import { getLogger } from '@/utils/shared/logger'
 import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
@@ -71,7 +72,8 @@ export async function POST(request: NextRequest) {
 
   const keyword = body.Body?.toUpperCase()
 
-  const message = ''
+  // TODO: Uncomment this after we start using Messaging Service
+  // const message = ''
 
   if (keyword && keyword.length > 0) {
     if (
@@ -96,9 +98,10 @@ export async function POST(request: NextRequest) {
   // If we don't respond the message with this xml Twilio will trigger a error event on the fails webhook
   const response = new twilio.twiml.MessagingResponse()
 
-  if (message) {
-    response.message(message)
-  }
+  // TODO: Uncomment this after we start using Messaging Service
+  // if (message) {
+  //   response.message(message)
+  // }
 
   return new Response(response.toString(), {
     headers,
