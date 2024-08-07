@@ -8,12 +8,10 @@ import {
   MINT_NFT_CONTRACT_ADDRESS,
   UserActionFormNFTMintSectionNames,
 } from '@/components/app/userActionFormNFTMint/constants'
-import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { trackDialogOpen } from '@/components/ui/dialog/trackDialogOpen'
 import { useSections } from '@/hooks/useSections'
 import { useSendMintNFTTransaction } from '@/hooks/useSendMintNFTTransaction'
-import { fetchReq } from '@/utils/shared/fetchReq'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
 import { UserActionFormNFTMintCheckout } from './sections/checkout'
@@ -47,11 +45,6 @@ export function UserActionFormNFTMint({ trackMount }: { trackMount?: boolean }) 
       quantity: checkoutController.quantity,
     })
 
-  const testpolicy = async () => {
-    const res = await fetchReq('https://pay.thirdweb.com/destination-tokens/v1')
-    console.log('RES:', res)
-  }
-
   switch (sectionProps.currentSection) {
     case UserActionFormNFTMintSectionNames.INTRO:
       return <UserActionFormNFTMintIntro {...sectionProps} />
@@ -74,8 +67,6 @@ export function UserActionFormNFTMint({ trackMount }: { trackMount?: boolean }) 
               </div>
             </div>
           )}
-
-          <Button onClick={testpolicy}>TEST POLICY</Button>
 
           <UserActionFormNFTMintCheckout
             {...sectionProps}
