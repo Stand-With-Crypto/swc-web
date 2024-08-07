@@ -86,8 +86,8 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
 
     logger.info(`
       Time to send all messages: ${formatTime(timeInSecondsToSendAllMessages)}
-      Total phone numbers: totalPhoneNumbers
-      Total batches: phoneNumberQueueBatches.length
+      Total phone numbers: ${totalPhoneNumbers}
+      Total batches: ${phoneNumberQueueBatches.length}
     `)
 
     if (!send) {
