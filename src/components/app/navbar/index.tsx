@@ -33,6 +33,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
   const dialogProps = useDialog({ analytics: 'Mobile Navbar' })
   const urls = getIntlUrls(locale)
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+  const [openAccordion, setOpenAccordion] = useState<string | undefined>()
 
   const leftLinks = [
     { href: urls.locationUnitedStates(), text: 'Key Races' },
@@ -89,7 +90,10 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
         <NavbarLoggedInButton onOpenChange={open => open || maybeCloseAfterNavigating()} />
       }
     >
-      <Button className="w-full text-base font-bold md:font-normal lg:w-auto" variant="primary-cta">
+      <Button
+        className="w-full text-base font-bold leading-4 md:font-normal lg:w-auto"
+        variant="primary-cta"
+      >
         Sign In
       </Button>
     </LoginDialogWrapper>
@@ -98,7 +102,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
   const DonateButton = () => (
     <Button
       asChild
-      className="w-full text-base font-bold md:font-normal lg:w-auto"
+      className="w-full text-base font-bold leading-4 md:font-normal lg:w-auto"
       key={urls.donate()}
       variant="default"
     >
@@ -139,7 +143,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
             />
           </InternalLink>
           <div className="flex gap-4">
-            <div className="flex gap-4 rounded-full bg-secondary">
+            <div className="flex h-fit gap-4 rounded-full bg-secondary">
               {leftLinks.map(({ href, text, children }, index) => (
                 <div
                   className="nav-item group relative"
@@ -179,26 +183,35 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
                         }
                       }}
                     >
-                      {children.map(({ href: childHref, text: childText, icon: Icon }) => (
-                        <Button
-                          asChild
-                          className="block w-full font-sans text-base font-bold"
-                          key={childHref}
-                          variant="ghost"
-                        >
-                          <InternalLink
+                      {children.map(
+                        ({ href: childHref, text: childText, icon: Icon }, childIndex) => (
+                          <Button
+                            asChild
                             className={cn(
-                              'flex px-0 py-0',
-                              !!Icon && 'items-center justify-start gap-2 p-6 hover:rounded-[24px]',
+                              'block w-full rounded-b-none rounded-t-none font-sans text-base font-bold',
+                              childIndex === 0 && 'rounded-t-[24px]',
+                              childIndex === children.length - 1 && 'rounded-b-[24px]',
                             )}
-                            href={childHref}
-                            onClick={() => setHoveredIndex(null)}
+                            key={childHref}
+                            variant="ghost"
                           >
-                            {Icon && <Icon />}
-                            {childText}
-                          </InternalLink>
-                        </Button>
-                      ))}
+                            <InternalLink
+                              className={cn(
+                                'flex px-0 py-0',
+                                !!Icon &&
+                                  'items-center justify-start gap-2 rounded-b-none rounded-t-none p-6',
+                                childIndex === 0 && 'rounded-t-[24px]',
+                                childIndex === children.length - 1 && 'rounded-b-[24px]',
+                              )}
+                              href={childHref}
+                              onClick={() => setHoveredIndex(null)}
+                            >
+                              {Icon && <Icon />}
+                              {childText}
+                            </InternalLink>
+                          </Button>
+                        ),
+                      )}
                     </div>
                   )}
                 </div>
@@ -240,8 +253,20 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
                 if (children) {
                   const accordionTitle = text
                   return (
-                    <Accordion collapsible key={href} type="single">
-                      <AccordionItem className="rounded-none" value={accordionTitle}>
+                    <Accordion
+                      collapsible
+                      key={href}
+                      onValueChange={value => setOpenAccordion(value)}
+                      type="single"
+                      value={openAccordion}
+                    >
+                      <AccordionItem
+                        className={cn(
+                          'rounded-none transition-colors',
+                          openAccordion === accordionTitle ? 'bg-secondary' : 'bg-transparent',
+                        )}
+                        value={accordionTitle}
+                      >
                         <AccordionTrigger
                           chevronClassName="w-6 h-6"
                           className="rounded-none px-6 pt-6 font-sans text-xl font-bold !no-underline"
