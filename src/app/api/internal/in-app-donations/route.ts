@@ -20,7 +20,6 @@ import { AnalyticsUserActionUserState } from '@/utils/server/serverAnalytics'
 import { VerifiedSWCPartner } from '@/utils/server/verifiedSWCPartner/constants'
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
-import { generateUserSessionId } from '@/utils/shared/userSessionId'
 
 type UserWithRelations = User & {
   userEmailAddresses: UserEmailAddress[]
@@ -129,9 +128,7 @@ async function maybeUpsertUser({
       acquisitionCampaign: '',
       referralId: generateReferralId(),
       userSessions: {
-        create: {
-          id: generateUserSessionId(),
-        },
+        create: {},
       },
       informationVisibility: UserInformationVisibility.ANONYMOUS,
       firstName: firstName,
