@@ -40,7 +40,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
   {
     event: BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
   },
-  async ({ step, event }) => {
+  async ({ step, event, logger }) => {
     const { smsBody, userWhereInput, includePendingDoubleOptIn, send } =
       event.data as BulkSMSCommunicationJourneyPayload
 
@@ -84,11 +84,11 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
     const timeInSecondsToSendAllMessages =
       (totalPhoneNumbers * segmentsCount) / MESSAGE_SEGMENTS_PER_SECOND
 
-    await step.run('log-infos', () => ({
-      'Time to send all messages': formatTime(timeInSecondsToSendAllMessages),
-      'Total phone numbers': totalPhoneNumbers,
-      'Total batches': phoneNumberQueueBatches.length,
-    }))
+    logger.info(`
+      Time to send all messages: ${formatTime(timeInSecondsToSendAllMessages)}
+      Total phone numbers: totalPhoneNumbers
+      Total batches: phoneNumberQueueBatches.length
+    `)
 
     if (!send) {
       return "Send flag is deactivated. Didn't send any messages"
@@ -122,11 +122,11 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
 
       iteration += 1
 
-      await step.run('log-infos', () => ({
-        Messages: `${totalMessagesSent}/${totalPhoneNumbers}`,
-        Time: `${formatTime(totalTimeTaken)}/${formatTime(timeInSecondsToSendAllMessages)}`,
-        Iterations: `${iteration}/${phoneNumberQueueBatches.length}`,
-      }))
+      logger.info(`
+        Messages: ${totalMessagesSent}/${totalPhoneNumbers}
+        Time: ${formatTime(totalTimeTaken)}/${formatTime(timeInSecondsToSendAllMessages)}
+        Iterations: ${iteration}/${phoneNumberQueueBatches.length}
+      `)
     }
 
     return {
