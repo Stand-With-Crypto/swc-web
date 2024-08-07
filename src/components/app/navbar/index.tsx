@@ -241,10 +241,10 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
                   const accordionTitle = text
                   return (
                     <Accordion collapsible key={href} type="single">
-                      <AccordionItem value={accordionTitle}>
+                      <AccordionItem className="rounded-none" value={accordionTitle}>
                         <AccordionTrigger
                           chevronClassName="w-6 h-6"
-                          className="px-6 pt-6 font-sans text-xl font-bold !no-underline"
+                          className="rounded-none px-6 pt-6 font-sans text-xl font-bold !no-underline"
                         >
                           {accordionTitle}
                         </AccordionTrigger>
@@ -258,8 +258,8 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
                             >
                               <InternalLink
                                 className={cn(
-                                  'flex px-6 py-3 first:pt-0',
-                                  !!Icon && 'items-center gap-3',
+                                  'flex p-6 first:pt-3',
+                                  !!Icon && 'items-center justify-start gap-3',
                                 )}
                                 href={childHref}
                                 onClick={maybeCloseAfterNavigating}
