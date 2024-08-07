@@ -1,6 +1,7 @@
 import React, { Dispatch, SetStateAction, useState } from 'react'
 import Balancer from 'react-wrap-balancer'
 import { noop } from 'lodash-es'
+import { TransactionReceipt } from 'node_modules/thirdweb/dist/types/transaction/types'
 import { getContract, PreparedTransaction } from 'thirdweb'
 import { base } from 'thirdweb/chains'
 import { TransactionButton, useActiveWalletConnectionStatus } from 'thirdweb/react'
@@ -42,7 +43,7 @@ interface UserActionFormNFTMintCheckoutProps
   extends UseSectionsReturn<UserActionFormNFTMintSectionNames>,
     UseCheckoutControllerReturn {
   prepareTransaction: () => PreparedTransaction | Promise<PreparedTransaction>
-  onMintCallback?: () => void
+  onMintCallback?: (receipt: TransactionReceipt) => void
   setTransactionHash: Dispatch<SetStateAction<string | null>>
   handleTransactionException: (e: unknown, extra: Record<string, unknown>) => void
   debug?: boolean
@@ -207,7 +208,10 @@ export function UserActionFormNFTMintCheckout({
               }
               onError={e => handleTransactionException(e, { isUSResident })}
               onTransactionConfirmed={onMintCallback}
-              onTransactionSent={result => setTransactionHash(result.transactionHash)}
+              onTransactionSent={result => {
+                setTransactionHash(result.transactionHash)
+                goToSection(UserActionFormNFTMintSectionNames.TRANSACTION_WATCH)
+              }}
               theme={theme}
               transaction={prepareTransaction}
             >
