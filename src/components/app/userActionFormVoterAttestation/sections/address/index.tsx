@@ -21,12 +21,13 @@ import {
 import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { InternalLink } from '@/components/ui/link'
 import {
-  formatGetDTSIPeopleFromAddressNotFoundReason,
   getDTSIPeopleFromAddress,
+  useGetDTSIPeopleFromAddress,
 } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { useGoogleMapsScript } from '@/hooks/useGoogleMapsScript'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useIsMobile } from '@/hooks/useIsMobile'
+import { USStateCode } from '@/utils/shared/usStateUtils'
 import {
   getYourPoliticianCategoryDisplayName,
   getYourPoliticianCategoryShortDisplayName,
@@ -35,18 +36,17 @@ import { trackFormSubmissionSyncErrors } from '@/utils/web/formUtils'
 import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
 
 import {
-  findRepresentativeCallFormValidationSchema,
-  type FindRepresentativeCallFormValues,
+  findVoterAttestationFormValidationSchema,
+  type FindVoterAttestationFormValues,
   FORM_NAME,
   getDefaultValues,
 } from './formConfig'
 
-interface AddressProps
+export interface AddressProps
   extends Pick<
     VoterAttestationActionSharedData,
-    'user' | 'onFindCongressperson' | 'goToSection' | 'goBackSection'
+    'user' | 'onFindUserState' | 'goToSection' | 'goBackSection'
   > {
-  congressPersonData?: VoterAttestationActionSharedData['congressPersonData']
   initialValues?: FormFields
   heading?: React.ReactNode
   submitButtonText?: string
@@ -54,10 +54,9 @@ interface AddressProps
 
 export function Address({
   user,
-  onFindCongressperson,
-  congressPersonData,
   goToSection,
   goBackSection,
+  onFindUserState,
   initialValues,
   heading = (
     <UserActionFormLayout.Heading
@@ -70,12 +69,12 @@ export function Address({
   const urls = useIntlUrls()
   const userDefaultValues = useMemo(() => getDefaultValues({ user }), [user])
 
-  const form = useForm<FindRepresentativeCallFormValues>({
+  const form = useForm<FindVoterAttestationFormValues>({
     defaultValues: {
       ...userDefaultValues,
       address: initialValues?.address || userDefaultValues.address,
     },
-    resolver: zodResolver(findRepresentativeCallFormValidationSchema),
+    resolver: zodResolver(findVoterAttestationFormValidationSchema),
   })
 
   const isMobile = useIsMobile({ defaultState: true })
@@ -92,37 +91,22 @@ export function Address({
     name: 'address',
   })
 
-  const { data: liveCongressPersonData, isLoading: isLoadingLiveCongressPersonData } =
-    useCongresspersonData({ address })
+  const res = useGetDTSIPeopleFromAddress('senate-and-house', address?.description)
 
   React.useEffect(() => {
-    if (!liveCongressPersonData) {
+    if (!address || !res.data || 'notFoundReason' in res.data) {
+      // TODO
       return
     }
 
-    if (!('dtsiPeople' in liveCongressPersonData)) {
-      form.setError('address', {
-        type: 'manual',
-        message: formatGetDTSIPeopleFromAddressNotFoundReason(liveCongressPersonData),
-      })
-      return
-    } else {
-      form.clearErrors('address')
-    }
+    const stateCode = res.data.dtsiPeople.find(x => x.primaryRole?.primaryState)?.primaryRole
+      ?.primaryState as USStateCode | undefined
 
-    onFindCongressperson(liveCongressPersonData)
     // request from exec - form should auto-advance once the address is filled in
-    if (address?.place_id !== initialAddressOnLoad.current) {
-      goToSection(SectionNames.PLEDGE)
+    if (stateCode) {
+      onFindUserState(stateCode)
     }
-  }, [
-    liveCongressPersonData,
-    onFindCongressperson,
-    form,
-    goToSection,
-    address,
-    initialAddressOnLoad,
-  ])
+  }, [form, goToSection, address, initialAddressOnLoad, res.data, onFindUserState])
 
   return (
     <Form {...form}>
@@ -158,17 +142,8 @@ export function Address({
             />
           </UserActionFormLayout.Container>
           <UserActionFormLayout.Footer>
-            <Button
-              disabled={
-                form.formState.isSubmitting ||
-                isLoadingLiveCongressPersonData ||
-                !congressPersonData
-              }
-              type="submit"
-            >
-              {form.formState.isSubmitting || isLoadingLiveCongressPersonData
-                ? 'Loading...'
-                : submitButtonText}
+            <Button disabled={form.formState.isSubmitting || res.isLoading} type="submit">
+              {form.formState.isSubmitting || res.isLoading ? 'Loading...' : submitButtonText}
             </Button>
 
             <p className="text-sm">
@@ -194,10 +169,10 @@ export function ChangeAddress(props: Omit<AddressProps, 'initialValues'>) {
   )
 }
 
-export function useCongresspersonData({
+export function useUserStateByAddress({
   address,
 }: {
-  address?: FindRepresentativeCallFormValues['address']
+  address?: FindVoterAttestationFormValues['address']
 }) {
   const scriptStatus = useGoogleMapsScript()
 

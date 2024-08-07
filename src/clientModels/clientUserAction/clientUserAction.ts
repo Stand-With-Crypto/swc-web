@@ -76,6 +76,9 @@ type ClientUserActionTweetAtPerson = {
   campaignName: UserActionTweetAtPersonCampaignName
   person: DTSIPersonForUserActions | null
 }
+type ClientUserActionVoterAttestation = {
+  actionType: typeof UserActionType.VOTER_ATTESTATION
+}
 
 /*
 At the database schema level we can't enforce that a single action only has one "type" FK, but at the client level we can and should
@@ -94,6 +97,7 @@ export type ClientUserAction = ClientModel<
       | ClientUserActionVoterRegistration
       | ClientUserActionLiveEvent
       | ClientUserActionTweetAtPerson
+      | ClientUserActionVoterAttestation
     )
 >
 
@@ -205,6 +209,12 @@ export const getClientUserAction = ({
         actionType: UserActionType.TWEET_AT_PERSON,
       }
       return getClientModel({ ...sharedProps, ...tweetAtPersonFields })
+    },
+    [UserActionType.VOTER_ATTESTATION]: () => {
+      const clientModelFields: ClientUserActionVoterAttestation = {
+        actionType: UserActionType.VOTER_ATTESTATION,
+      }
+      return getClientModel({ ...sharedProps, ...clientModelFields })
     },
   }
 

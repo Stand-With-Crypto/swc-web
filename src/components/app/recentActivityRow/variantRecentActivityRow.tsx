@@ -238,6 +238,16 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
           ),
         }
       }
+      case UserActionType.VOTER_ATTESTATION: {
+        return {
+          onFocusContent: () => (
+            <UserActionFormVoterRegistrationDialog>
+              <Button>Attest</Button>
+            </UserActionFormVoterRegistrationDialog>
+          ),
+          children: <MainText>Voter attestation confirmed in {voterStateOrEmpty}</MainText>,
+        }
+      }
     }
     return gracefullyError({
       // @ts-ignore

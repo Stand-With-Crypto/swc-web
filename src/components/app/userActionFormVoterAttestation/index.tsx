@@ -1,7 +1,6 @@
 'use client'
 
 import React from 'react'
-import { z } from 'zod'
 
 import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
 import { AuthenticateWithProfileUpdate } from '@/components/app/authentication/authenticateAndUpdateProfile'
@@ -12,21 +11,16 @@ import {
 } from '@/components/app/userActionFormVoterAttestation/constants'
 import { UserActionFormCallCongresspersonSuccess } from '@/components/app/userActionFormVoterAttestation/sections/success'
 import { FormFields } from '@/components/app/userActionFormVoterAttestation/types'
-import { DTSIPeopleFromCongressionalDistrict } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { useSections, UseSectionsReturn } from '@/hooks/useSections'
-import { zodAddress } from '@/validation/fields/zodAddress'
+import { USStateCode } from '@/utils/shared/usStateUtils'
 
-import { Address, ChangeAddress } from './sections/address'
+import { Address, AddressProps, ChangeAddress } from './sections/address'
 import { Intro } from './sections/intro'
-
-type OnFindCongressPersonPayload = DTSIPeopleFromCongressionalDistrict & {
-  addressSchema: z.infer<typeof zodAddress>
-}
 
 export interface VoterAttestationActionSharedData extends UseSectionsReturn<SectionNames> {
   user: GetUserFullProfileInfoResponse['user']
-  onFindCongressperson: (payload: OnFindCongressPersonPayload) => void
-  congressPersonData: OnFindCongressPersonPayload
+  userState: USStateCode
+  onFindUserState: (state: USStateCode) => void
 }
 
 interface UserActionFormVoterAttestationProps {
@@ -47,25 +41,19 @@ export function UserActionFormVoterAttestation({
     initialSectionId: SectionNames.INTRO,
     analyticsName: ANALYTICS_NAME_USER_ACTION_FORM_VOTER_ATTESTATION,
   })
-  const { currentSection: currentTab, onSectionNotFound: onTabNotFound } = sectionProps
 
-  const [congressPersonData, setCongresspersonData] = React.useState<OnFindCongressPersonPayload>()
-
-  const addressProps = {
-    congressPersonData,
+  const addressProps: AddressProps = {
     initialValues,
     user,
-    onFindCongressperson: setCongresspersonData,
+    onFindUserState: console.log,
     ...sectionProps,
   }
-  switch (currentTab) {
+  switch (sectionProps.currentSection) {
     case SectionNames.INTRO:
       return (
         <Intro
           onContinue={() =>
-            sectionProps.goToSection(
-              hasDefaultAddress && congressPersonData ? SectionNames.PLEDGE : SectionNames.ADDRESS,
-            )
+            sectionProps.goToSection(hasDefaultAddress ? SectionNames.PLEDGE : SectionNames.ADDRESS)
           }
         />
       )
@@ -86,7 +74,7 @@ export function UserActionFormVoterAttestation({
         </UserActionFormSuccessScreen>
       )
     default:
-      onTabNotFound()
+      sectionProps.onSectionNotFound()
       return null
   }
 }

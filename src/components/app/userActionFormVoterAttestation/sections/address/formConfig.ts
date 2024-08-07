@@ -5,12 +5,12 @@ import { zodGooglePlacesAutocompletePrediction } from '@/validation/fields/zodGo
 
 export const FORM_NAME = 'Call Congressperson - Find your representative'
 
-export const findRepresentativeCallFormValidationSchema = object({
+export const findVoterAttestationFormValidationSchema = object({
   address: zodGooglePlacesAutocompletePrediction,
 })
 
-export type FindRepresentativeCallFormValues = z.infer<
-  typeof findRepresentativeCallFormValidationSchema
+export type FindVoterAttestationFormValues = z.infer<
+  typeof findVoterAttestationFormValidationSchema
 >
 
 export function getDefaultValues({ user }: { user?: GetUserFullProfileInfoResponse['user'] }) {
