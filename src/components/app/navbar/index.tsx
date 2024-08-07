@@ -162,8 +162,8 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
                   {children && (
                     <div
                       className={cn(
-                        'absolute left-1/2 top-full mt-2 w-[378px] -translate-x-1/2 rounded-[24px] bg-white p-6 shadow-[0px_6px_20px_rgba(0,0,0,0.15)]',
-                        hoveredIndex === index ? 'flex flex-col justify-between gap-5' : 'hidden',
+                        'absolute left-1/2 top-full mt-2 w-[378px] -translate-x-1/2 rounded-[24px] bg-white shadow-[0px_6px_20px_rgba(0,0,0,0.15)]',
+                        hoveredIndex === index ? 'flex flex-col justify-between gap-0' : 'hidden',
                         'before:absolute before:-top-2 before:left-0 before:h-[10px] before:w-full before:bg-transparent before:content-[""]',
                       )}
                       onMouseEnter={() => {
@@ -182,14 +182,14 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
                       {children.map(({ href: childHref, text: childText, icon: Icon }) => (
                         <Button
                           asChild
-                          className="block w-full font-sans text-[16px] font-bold"
+                          className="block w-full font-sans text-base font-bold"
                           key={childHref}
                           variant="ghost"
                         >
                           <InternalLink
                             className={cn(
                               'flex px-0 py-0',
-                              !!Icon && 'items-center justify-start gap-2 p-2',
+                              !!Icon && 'items-center justify-start gap-2 p-6 hover:rounded-[24px]',
                             )}
                             href={childHref}
                             onClick={() => setHoveredIndex(null)}
