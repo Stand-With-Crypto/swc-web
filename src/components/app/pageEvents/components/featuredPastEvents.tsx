@@ -23,7 +23,7 @@ export function FeaturedPastEvents({ events }: FeaturedPastEventsProps) {
       <div className="grid gap-4 lg:grid-cols-3">
         {pastFeaturedEvents.map(event => (
           <div className="group relative" key={event.data.slug}>
-            <div className="relative h-[271px] min-w-[271px]">
+            <div className="relative h-[222px] min-w-[345px] lg:h-[271px] lg:min-w-[271px]">
               <NextImage
                 alt={event.data.name}
                 className="object-cover object-center"

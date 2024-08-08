@@ -16,7 +16,7 @@ function EventCardContent({ event }: EventCardProps) {
   const formattedEventDate = format(new Date(event.datetime), 'MMMM d, yyyy')
 
   return (
-    <div className="flex w-full max-w-[856px] flex-col gap-2 rounded-2xl bg-backgroundAlternate p-6 pt-4 lg:flex-row lg:items-center">
+    <div className="flex w-full max-w-[856px] flex-col gap-2 rounded-2xl bg-backgroundAlternate p-6 pt-4 text-left lg:flex-row lg:items-center">
       <NextImage
         alt={`${event.state} shield`}
         className="mb-2 lg:mb-0"

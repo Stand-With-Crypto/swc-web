@@ -1,5 +1,6 @@
 'use client'
 
+import Balancer from 'react-wrap-balancer'
 import { GoogleMapsEmbed } from '@next/third-parties/google'
 import { format } from 'date-fns'
 import { Clock, Pin } from 'lucide-react'
@@ -61,7 +62,9 @@ function EventInformation({
         width={100}
       />
       <h3 className="font-sans text-xl font-bold">{event.name}</h3>
-      <p className="text-center font-mono text-base text-muted-foreground">{event.description}</p>
+      <p className="text-center font-mono text-base text-muted-foreground">
+        <Balancer>{event.description}</Balancer>
+      </p>
       <p className="mt-9 flex items-center gap-2 font-mono text-sm">
         <Clock size={16} /> {formattedEventDate}
       </p>
@@ -77,7 +80,7 @@ function EventInformation({
         width={466}
       />
 
-      <div className="mt-auto flex w-full flex-col-reverse items-center justify-end gap-3 lg:mt-0 lg:flex-row">
+      <div className="mt-auto flex w-full flex-col-reverse items-center justify-end gap-3 lg:mt-4 lg:flex-row">
         <Button
           className="w-full lg:w-auto"
           onClick={() => {
