@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 
 import NotFound from '@/app/not-found'
 import { EventsPage } from '@/components/app/pageEvents'
-import { getEvents } from '@/utils/server/builderIO/swc-events'
+import { getEvents } from '@/utils/server/builderIO/swcEvents'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 
 const title = 'Events'

@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/dialog/styles'
 import { InternalLink } from '@/components/ui/link'
 import { PageProps } from '@/types'
-import { getEvents } from '@/utils/server/builderIO/swc-events'
+import { getEvents } from '@/utils/server/builderIO/swcEvents'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
