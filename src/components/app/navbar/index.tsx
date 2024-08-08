@@ -32,8 +32,8 @@ import { cn } from '@/utils/web/cn'
 export function Navbar({ locale }: { locale: SupportedLocale }) {
   const dialogProps = useDialog({ analytics: 'Mobile Navbar' })
   const urls = getIntlUrls(locale)
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
-  const [openAccordion, setOpenAccordion] = useState<string | undefined>()
+  const [hoveredMenuIndex, setHoveredMenuIndex] = useState<number | null>(null)
+  const [openAccordionTitle, setOpenAccordionTitle] = useState<string | undefined>()
 
   const leftLinks = [
     { href: urls.locationUnitedStates(), text: 'Key Races' },
@@ -149,14 +149,14 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
                   className="nav-item group relative"
                   key={href}
                   onMouseEnter={() => {
-                    setHoveredIndex(index)
+                    setHoveredMenuIndex(index)
                   }}
                   onMouseLeave={event => {
                     if (
                       event.relatedTarget instanceof Node &&
                       !event.currentTarget.contains(event.relatedTarget as Node)
                     ) {
-                      setHoveredIndex(null)
+                      setHoveredMenuIndex(null)
                     }
                   }}
                 >
@@ -168,7 +168,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
                           <ChevronDown
                             className={cn(
                               'h-4 w-4 shrink-0 transition-transform duration-200',
-                              hoveredIndex === index && 'rotate-180 transition-transform',
+                              hoveredMenuIndex === index && 'rotate-180 transition-transform',
                             )}
                           />
                         </div>
@@ -181,11 +181,13 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
                     <div
                       className={cn(
                         'absolute left-1/2 top-full mt-2 w-[378px] -translate-x-1/2 rounded-[24px] bg-white shadow-[0px_6px_20px_rgba(0,0,0,0.15)]',
-                        hoveredIndex === index ? 'flex flex-col justify-between gap-0' : 'hidden',
+                        hoveredMenuIndex === index
+                          ? 'flex flex-col justify-between gap-0'
+                          : 'hidden',
                         'before:absolute before:-top-2 before:left-0 before:h-[10px] before:w-full before:bg-transparent before:content-[""]',
                       )}
                       onMouseEnter={() => {
-                        setHoveredIndex(index)
+                        setHoveredMenuIndex(index)
                       }}
                       onMouseLeave={event => {
                         if (
@@ -193,7 +195,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
                           !event.currentTarget.contains(event.relatedTarget as Node) &&
                           !event.currentTarget.parentElement?.contains(event.relatedTarget as Node)
                         ) {
-                          setHoveredIndex(null)
+                          setHoveredMenuIndex(null)
                         }
                       }}
                     >
@@ -218,7 +220,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
                                 childIndex === children.length - 1 && 'rounded-b-[24px]',
                               )}
                               href={childHref}
-                              onClick={() => setHoveredIndex(null)}
+                              onClick={() => setHoveredMenuIndex(null)}
                             >
                               {Icon && <Icon />}
                               {childText}
@@ -270,14 +272,14 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
                     <Accordion
                       collapsible
                       key={href}
-                      onValueChange={value => setOpenAccordion(value)}
+                      onValueChange={value => setOpenAccordionTitle(value)}
                       type="single"
-                      value={openAccordion}
+                      value={openAccordionTitle}
                     >
                       <AccordionItem
                         className={cn(
                           'rounded-none transition-colors',
-                          openAccordion === accordionTitle ? 'bg-secondary' : 'bg-transparent',
+                          openAccordionTitle === accordionTitle ? 'bg-secondary' : 'bg-transparent',
                         )}
                         value={accordionTitle}
                       >
