@@ -3,7 +3,7 @@
 import { useCallback, useState } from 'react'
 import { Cross1Icon } from '@radix-ui/react-icons'
 import { capitalize } from 'lodash-es'
-import { Menu } from 'lucide-react'
+import { ChevronDown, Menu } from 'lucide-react'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import {
@@ -161,7 +161,21 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
                   }}
                 >
                   <Button asChild className="hidden lg:block" variant="secondary">
-                    <InternalLink href={href}>{text}</InternalLink>
+                    {children ? (
+                      <span className="select-none">
+                        <div className="flex cursor-default items-center gap-2">
+                          {text}
+                          <ChevronDown
+                            className={cn(
+                              'h-4 w-4 shrink-0 transition-transform duration-200',
+                              hoveredIndex === index && 'rotate-180 transition-transform',
+                            )}
+                          />
+                        </div>
+                      </span>
+                    ) : (
+                      <InternalLink href={href}>{text}</InternalLink>
+                    )}
                   </Button>
                   {children && (
                     <div
