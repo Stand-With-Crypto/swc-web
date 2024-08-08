@@ -1,8 +1,8 @@
-import { EventsIntro } from '@/components/app/pageEvents/components/events-intro'
-import { EventsNearYou } from '@/components/app/pageEvents/components/events-near-you'
-import { FeaturedEvents } from '@/components/app/pageEvents/components/featured-events'
-import { FeaturedPastEvents } from '@/components/app/pageEvents/components/featured-past-events'
-import { UpcomingEvents } from '@/components/app/pageEvents/components/upcoming-events'
+import { EventsIntro } from '@/components/app/pageEvents/components/eventsIntro'
+import { EventsNearYou } from '@/components/app/pageEvents/components/eventsNearYou'
+import { FeaturedEvents } from '@/components/app/pageEvents/components/featuredEvents'
+import { FeaturedPastEvents } from '@/components/app/pageEvents/components/featuredPastEvents'
+import { UpcomingEvents } from '@/components/app/pageEvents/components/upcomingEvents'
 import { SWCEvents } from '@/utils/shared/getSWCEvents'
 
 interface EventsPageProps {

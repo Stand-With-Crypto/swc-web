@@ -3,7 +3,7 @@
 import { useMemo, useState } from 'react'
 import { isAfter } from 'date-fns'
 
-import { EventCard } from '@/components/app/pageEvents/components/event-card'
+import { EventCard } from '@/components/app/pageEvents/components/eventCard'
 import { Button } from '@/components/ui/button'
 import {
   Select,

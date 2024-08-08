@@ -2,7 +2,7 @@
 
 import { format } from 'date-fns'
 
-import { EventDialog } from '@/components/app/pageEvents/components/event-dialog'
+import { EventDialog } from '@/components/app/pageEvents/components/eventDialog'
 import { NextImage } from '@/components/ui/image'
 import { SWCEvents } from '@/utils/shared/getSWCEvents'
 import { pluralize } from '@/utils/shared/pluralize'

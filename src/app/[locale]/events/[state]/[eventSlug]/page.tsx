@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import { permanentRedirect } from 'next/navigation'
 
-import { EventDialogContent } from '@/components/app/pageEvents/components/event-dialog-content'
+import { EventDialogContent } from '@/components/app/pageEvents/components/eventDialogContent'
 import { EventsPageDialogDeeplinkLayout } from '@/components/app/pageEvents/eventsPageDialogDeeplinkLayout'
 import { PageProps } from '@/types'
 import { getEvent } from '@/utils/server/builderIO/swc-event'
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   }),
 }
 
-export default async function EventsPageRoot({ params }: Props) {
+export default async function EventDetailsPageRoot({ params }: Props) {
   const { state, eventSlug, locale } = params
   const intlUrls = getIntlUrls(locale)
 

@@ -1,6 +1,6 @@
 'use client'
 
-import { StateEventsDialogContent } from '@/components/app/pageEvents/components/state-events-dialog-content'
+import { StateEventsDialogContent } from '@/components/app/pageEvents/components/stateEventsDialogContent'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { useDialog } from '@/hooks/useDialog'
 import { SWCEvents } from '@/utils/shared/getSWCEvents'

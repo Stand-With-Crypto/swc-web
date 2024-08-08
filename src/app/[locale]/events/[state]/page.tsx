@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import { permanentRedirect } from 'next/navigation'
 
-import { StateEventsDialog } from '@/components/app/pageEvents/components/state-events-dialog'
+import { StateEventsDialog } from '@/components/app/pageEvents/components/stateEventsDialog'
 import { EventsPageDialogDeeplinkLayout } from '@/components/app/pageEvents/eventsPageDialogDeeplinkLayout'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   })
 }
 
-export default async function EventsPageRoot({ params }: Props) {
+export default async function StateEventsPageRoot({ params }: Props) {
   const { state, locale } = params
   const intlUrls = getIntlUrls(locale)
 

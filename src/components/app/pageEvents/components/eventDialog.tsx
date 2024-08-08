@@ -2,7 +2,7 @@
 
 import { ReactNode } from 'react'
 
-import { EventDialogContent } from '@/components/app/pageEvents/components/event-dialog-content'
+import { EventDialogContent } from '@/components/app/pageEvents/components/eventDialogContent'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { useDialog } from '@/hooks/useDialog'
 import { SWCEvents } from '@/utils/shared/getSWCEvents'

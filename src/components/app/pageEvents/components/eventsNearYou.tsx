@@ -1,8 +1,8 @@
 'use client'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
-import { EventCard } from '@/components/app/pageEvents/components/event-card'
-import { EventCardSkeleton } from '@/components/app/pageEvents/components/event-card-skeleton'
+import { EventCard } from '@/components/app/pageEvents/components/eventCard'
+import { EventCardSkeleton } from '@/components/app/pageEvents/components/eventCardSkeleton'
 import { Button } from '@/components/ui/button'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { SWCEvents } from '@/utils/shared/getSWCEvents'
