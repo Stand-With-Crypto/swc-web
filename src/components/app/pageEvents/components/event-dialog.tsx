@@ -78,7 +78,7 @@ function EventInformationDialogContent({
         apiKey={NEXT_PUBLIC_GOOGLE_CIVIC_API_KEY}
         height={420}
         mode="place"
-        q="Brooklyn+Bridge,New+York,NY" // TODO: Replace with event address
+        q={event.formattedAddress.replace(' ', '+')}
         width={466}
       />
 

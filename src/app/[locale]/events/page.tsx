@@ -22,7 +22,7 @@ export default async function EventsPageRoot() {
   const events = await getEvents()
 
   if (!events || !events?.length) {
-    NotFound()
+    return NotFound()
   }
 
   return <EventsPage events={events!} />
