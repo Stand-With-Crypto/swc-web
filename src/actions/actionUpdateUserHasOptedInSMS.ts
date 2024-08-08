@@ -2,6 +2,7 @@
 import 'server-only'
 
 import { Address, User, UserCryptoAddress } from '@prisma/client'
+import { waitUntil } from '@vercel/functions'
 import { z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
@@ -47,12 +48,16 @@ async function _actionUpdateUserHasOptedInToSMS(data: UpdateUserHasOptedInToSMSP
     },
   })
 
-  await getServerPeopleAnalytics({
-    userId: authUser.userId,
-    localUser: parseLocalUserFromCookies(),
-  }).set({
-    'Has Opted In to SMS': true,
-  })
+  waitUntil(
+    getServerPeopleAnalytics({
+      userId: authUser.userId,
+      localUser: parseLocalUserFromCookies(),
+    })
+      .set({
+        'Has Opted In to SMS': true,
+      })
+      .flush(),
+  )
 
   const updatedUser = await prismaClient.user.update({
     where: {

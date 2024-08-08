@@ -2,6 +2,7 @@ export interface UseSectionsProps<SectionKeys extends readonly string[]> {
   sections: SectionKeys
   initialSectionId: SectionKeys[number]
   analyticsName: string
+  skipSections?: SectionKeys[number][]
 }
 
 export interface UseSectionsReturn<TabKey extends string = string> {

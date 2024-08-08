@@ -1,6 +1,8 @@
 'use server'
 import 'server-only'
 
+import { waitUntil } from '@vercel/functions'
+
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
 import { appRouterGetAuthUser } from '@/utils/server/authentication/appRouterGetAuthUser'
 import { prismaClient } from '@/utils/server/prismaClient'
@@ -24,12 +26,17 @@ export async function _actionUpdateUserHasOptedInToMembership() {
       id: authUser.userId,
     },
   })
-  await getServerPeopleAnalytics({
-    userId: authUser.userId,
-    localUser: parseLocalUserFromCookies(),
-  }).set({
-    'Has Opted In To Membership': true,
-  })
+
+  waitUntil(
+    getServerPeopleAnalytics({
+      userId: authUser.userId,
+      localUser: parseLocalUserFromCookies(),
+    })
+      .set({
+        'Has Opted In To Membership': true,
+      })
+      .flush(),
+  )
 
   await throwIfRateLimited({ context: 'authenticated' })
   const updatedUser = await prismaClient.user.update({

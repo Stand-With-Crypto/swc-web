@@ -34,9 +34,8 @@ export default function FollowOnXReminderEmail({
     <Wrapper hrefSearchParams={hydratedHrefSearchParams} previewText={previewText}>
       <Section>
         <Img
-          className="mb-6 max-w-full"
+          className="mb-6 w-full max-w-full"
           src={buildTemplateInternalUrl('/email/x-banner.png', hydratedHrefSearchParams)}
-          width={620}
         />
 
         <Heading gutterBottom="md">Stay up to date on crypto policy</Heading>

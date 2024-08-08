@@ -11,6 +11,7 @@ import {
   UserEmailAddressSource,
 } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
+import { waitUntil } from '@vercel/functions'
 import { z } from 'zod'
 
 import { getClientAddress } from '@/clientModels/clientAddress'
@@ -144,18 +145,23 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
       : existingUserEmailAddress
 
   const localUser = parseLocalUserFromCookies()
-  await getServerPeopleAnalytics({
-    userId: authUser.userId,
-    localUser,
-  }).set({
-    ...(address ? convertAddressToAnalyticsProperties(address) : {}),
-    // https://docs.mixpanel.com/docs/data-structure/user-profiles#reserved-user-properties
-    $email: emailAddress,
-    $phone: phoneNumber,
-    $name: userFullName(validatedFields.data),
-    'Has Opted In To Membership': hasOptedInToMembership,
-    'Has Opted In To Sms': hasOptedInToSms,
-  })
+
+  waitUntil(
+    getServerPeopleAnalytics({
+      userId: authUser.userId,
+      localUser,
+    })
+      .set({
+        ...(address ? convertAddressToAnalyticsProperties(address) : {}),
+        // https://docs.mixpanel.com/docs/data-structure/user-profiles#reserved-user-properties
+        $email: emailAddress,
+        $phone: phoneNumber,
+        $name: userFullName(validatedFields.data),
+        'Has Opted In To Membership': hasOptedInToMembership,
+        'Has Opted In To Sms': hasOptedInToSms,
+      })
+      .flush(),
+  )
 
   const updatedUser = await prismaClient.user.update({
     where: {

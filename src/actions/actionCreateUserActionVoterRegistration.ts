@@ -2,6 +2,7 @@
 import 'server-only'
 
 import { User, UserActionType, UserInformationVisibility } from '@prisma/client'
+import { waitUntil } from '@vercel/functions'
 import { nativeEnum, object, z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
@@ -9,7 +10,7 @@ import {
   getMaybeUserAndMethodOfMatch,
   UserAndMethodOfMatch,
 } from '@/utils/server/getMaybeUserAndMethodOfMatch'
-import { claimNFT } from '@/utils/server/nft/claimNFT'
+import { claimNFTAndSendEmailNotification } from '@/utils/server/nft/claimNFT'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
 import {
@@ -103,7 +104,7 @@ async function _actionCreateUserActionVoterRegistration(input: CreateActionVoter
       validatedInput,
       sharedDependencies: { analytics },
     })
-    await beforeFinish()
+    waitUntil(beforeFinish())
     return { user: getClientUser(user) }
   }
 
@@ -117,10 +118,10 @@ async function _actionCreateUserActionVoterRegistration(input: CreateActionVoter
   })
 
   if (user.primaryUserCryptoAddress !== null) {
-    await claimNFT(userAction, user.primaryUserCryptoAddress)
+    await claimNFTAndSendEmailNotification(userAction, user.primaryUserCryptoAddress)
   }
 
-  await beforeFinish()
+  waitUntil(beforeFinish())
   return { user: getClientUser(user) }
 }
 
@@ -149,7 +150,11 @@ async function createUser(sharedDependencies: Pick<SharedDependencies, 'localUse
     userId: createdUser.id,
   })
   if (localUser?.persisted) {
-    peopleAnalytics.setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
+    waitUntil(
+      peopleAnalytics
+        .setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
+        .flush(),
+    )
   }
 
   return { user: createdUser, peopleAnalytics }

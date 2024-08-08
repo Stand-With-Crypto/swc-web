@@ -1,13 +1,11 @@
 import { UserActionType } from '@prisma/client'
 import { sumBy, uniq } from 'lodash-es'
-import { redirect, RedirectType } from 'next/navigation'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { NFTDisplay } from '@/components/app/nftHub/nftDisplay'
 import { PageUserProfileUser } from '@/components/app/pageUserProfile/getAuthenticatedData'
 import { PreviousCampaignsList } from '@/components/app/pageUserProfile/previousCampaignsList'
 import { UpdateUserProfileFormDialog } from '@/components/app/updateUserProfileForm/dialog'
-import { OPEN_UPDATE_USER_PROFILE_FORM_QUERY_PARAM_KEY } from '@/components/app/updateUserProfileForm/queryParamConfig'
 import { UserActionRowCTAsList } from '@/components/app/userActionRowCTA/userActionRowCTAsList'
 import { UserAvatar } from '@/components/app/userAvatar'
 import { Button } from '@/components/ui/button'
@@ -18,11 +16,9 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { Progress } from '@/components/ui/progress'
 import { PageProps } from '@/types'
-import { getSearchParam, setCallbackQueryString } from '@/utils/server/searchParams'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { getUserActionsProgress } from '@/utils/shared/getUserActionsProgress'
 import { pluralize } from '@/utils/shared/pluralize'
-import { USER_ACTION_DEEPLINK_MAP } from '@/utils/shared/urlsDeeplinkUserActions'
 import {
   USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
   USER_ACTIONS_WITH_ADDITIONAL_CAMPAIGN,
@@ -33,30 +29,11 @@ import { getSensitiveDataUserDisplayName } from '@/utils/web/userUtils'
 import { UserReferralUrl } from './userReferralUrl'
 
 interface PageUserProfile extends PageProps {
-  user: PageUserProfileUser | null
+  user: PageUserProfileUser
 }
 
-export function PageUserProfile({ params, searchParams, user }: PageUserProfile) {
+export function PageUserProfile({ params, user }: PageUserProfile) {
   const { locale } = params
-  if (!user) {
-    // For now the only authenticated page we have is /profile,
-    // so we don't need to dynamically pass the redirect path to login
-    // If we add more authenticated pages, we'll need to make this dynamic
-    const { value } = getSearchParam({
-      searchParams,
-      queryParamKey: OPEN_UPDATE_USER_PROFILE_FORM_QUERY_PARAM_KEY,
-    })
-
-    redirect(
-      USER_ACTION_DEEPLINK_MAP[UserActionType.OPT_IN].getDeeplinkUrl({
-        locale,
-        queryString: setCallbackQueryString({
-          destination: value === 'true' ? 'updateProfile' : null,
-        }),
-      }),
-      RedirectType.replace,
-    )
-  }
 
   const { userActions } = user
   const performedUserActionTypes = uniq(
@@ -186,6 +163,7 @@ export function PageUserProfile({ params, searchParams, user }: PageUserProfile)
       )}
 
       <section>
+        <a className="mt-[-72px] h-0 pt-[72px]" id="nfts" />
         <PageTitle className="mb-4" size="sm">
           Your NFTs
         </PageTitle>

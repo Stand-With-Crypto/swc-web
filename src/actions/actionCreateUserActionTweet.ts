@@ -8,6 +8,7 @@ import {
   UserCryptoAddress,
   UserInformationVisibility,
 } from '@prisma/client'
+import { waitUntil } from '@vercel/functions'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
 import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
@@ -98,7 +99,7 @@ async function _actionCreateUserActionTweet() {
       creationMethod: 'On Site',
       userState,
     })
-    await beforeFinish()
+    waitUntil(beforeFinish())
     return { user: getClientUser(user) }
   }
 
@@ -123,7 +124,7 @@ async function _actionCreateUserActionTweet() {
     userState,
   })
 
-  await beforeFinish()
+  waitUntil(beforeFinish())
   logger.info('created action')
   return { user: getClientUser(user) }
 }

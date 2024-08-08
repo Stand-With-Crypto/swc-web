@@ -14,6 +14,7 @@ import {
   UserInformationVisibility,
 } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
+import { waitUntil } from '@vercel/functions'
 import { compact, groupBy } from 'lodash-es'
 import { cookies } from 'next/headers'
 import { VerifyLoginPayloadParams } from 'thirdweb/auth'
@@ -28,7 +29,7 @@ import {
 } from '@/utils/server/capitolCanary/campaigns'
 import { UpsertAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { mergeUsers } from '@/utils/server/mergeUsers/mergeUsers'
-import { claimNFT } from '@/utils/server/nft/claimNFT'
+import { claimNFTAndSendEmailNotification } from '@/utils/server/nft/claimNFT'
 import { mintPastActions } from '@/utils/server/nft/mintPastActions'
 import { prismaClient } from '@/utils/server/prismaClient'
 import {
@@ -362,7 +363,7 @@ export async function onNewLogin(props: NewLoginParams) {
     'Datetime of Last Login': new Date(),
   })
 
-  await beforeFinish()
+  waitUntil(beforeFinish())
   return {
     userId: user.id,
     user,
@@ -760,7 +761,7 @@ async function triggerPostLoginUserActionSteps({
     const signUpFlowExperimentVariant =
       localUser?.persisted?.experiments?.gh02_SWCSignUpFlowExperiment
     if (signUpFlowExperimentVariant === 'control') {
-      await claimNFT(optInUserAction, userCryptoAddress)
+      await claimNFTAndSendEmailNotification(optInUserAction, userCryptoAddress)
     }
 
     analytics.trackUserActionCreated({

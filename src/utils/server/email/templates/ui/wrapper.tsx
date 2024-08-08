@@ -30,10 +30,12 @@ export function Wrapper({
   children,
 }: React.PropsWithChildren<WrapperProps>) {
   return (
-    <Html>
+    <Html dir="ltr" lang="en">
       {previewText && <Preview>{previewText}</Preview>}
       <Tailwind config={tailwindConfig}>
-        <Head />
+        <Head>
+          <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        </Head>
         <Body className="mx-auto my-auto bg-background px-10 pb-10 font-sans text-base">
           <Container>
             <HeaderSection hrefSearchParams={hrefSearchParams} />

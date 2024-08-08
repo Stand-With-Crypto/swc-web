@@ -3,6 +3,7 @@ import 'server-only'
 
 import { User, UserActionType, UserInformationVisibility } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
+import { waitUntil } from '@vercel/functions'
 import { nativeEnum, object, z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
@@ -10,7 +11,7 @@ import {
   getMaybeUserAndMethodOfMatch,
   UserAndMethodOfMatch,
 } from '@/utils/server/getMaybeUserAndMethodOfMatch'
-import { claimNFT } from '@/utils/server/nft/claimNFT'
+import { claimNFTAndSendEmailNotification } from '@/utils/server/nft/claimNFT'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
@@ -108,7 +109,7 @@ async function _actionCreateUserActionCallCongressperson(
       validatedInput,
       sharedDependencies: { analytics },
     })
-    await beforeFinish()
+    waitUntil(beforeFinish())
     return { user: getClientUser(user) }
   }
 
@@ -155,10 +156,10 @@ async function _actionCreateUserActionCallCongressperson(
   })
 
   if (user.primaryUserCryptoAddress !== null) {
-    await claimNFT(userAction, user.primaryUserCryptoAddress)
+    await claimNFTAndSendEmailNotification(userAction, user.primaryUserCryptoAddress)
   }
 
-  await beforeFinish()
+  waitUntil(beforeFinish())
   return { user: getClientUser(updatedUser) }
 }
 
@@ -183,8 +184,10 @@ async function createUser(sharedDependencies: Pick<SharedDependencies, 'localUse
   logger.info('created user')
 
   if (localUser?.persisted) {
-    await getServerPeopleAnalytics({ localUser, userId: createdUser.id }).setOnce(
-      mapPersistedLocalUserToAnalyticsProperties(localUser.persisted),
+    waitUntil(
+      getServerPeopleAnalytics({ localUser, userId: createdUser.id })
+        .setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
+        .flush(),
     )
   }
 

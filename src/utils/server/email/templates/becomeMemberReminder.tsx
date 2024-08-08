@@ -31,9 +31,8 @@ export default function BecomeMemberReminderEmail({
     <Wrapper hrefSearchParams={hydratedHrefSearchParams} previewText={previewText}>
       <Section>
         <Img
-          className="mb-6 max-w-full"
+          className="mb-6 w-full max-w-full"
           src={buildTemplateInternalUrl('/email/swc-join-still.png', hydratedHrefSearchParams)}
-          width={620}
         />
 
         <Heading gutterBottom="md">Level up your advocacy. Become a 501(c)(4) member</Heading>

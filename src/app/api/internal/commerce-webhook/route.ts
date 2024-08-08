@@ -1,4 +1,5 @@
 import * as Sentry from '@sentry/nextjs'
+import { waitUntil } from '@vercel/functions'
 import { NextRequest, NextResponse } from 'next/server'
 
 import { authenticatePaymentRequest } from '@/utils/server/coinbaseCommerce/authenticatePaymentRequest'
@@ -100,7 +101,7 @@ export async function POST(request: NextRequest) {
     })
     return new NextResponse('internal error', { status: 500 })
   } finally {
-    await analytics.flush()
+    waitUntil(analytics.flush())
   }
   return new NextResponse('success', { status: 200 })
 }
