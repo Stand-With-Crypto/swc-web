@@ -48,6 +48,7 @@ const contentSecurityPolicy = {
     'https://euc.li/',
     // Thirdweb contract metadata
     'https://contract.thirdweb.com/',
+    'https://pay.thirdweb.com',
     'https://*.rpc.thirdweb.com/',
     'https://ipfs.io/ipfs/',
     // Thirdweb contract data
@@ -294,6 +295,11 @@ const nextConfig = {
       {
         source: '/&modal=call-your-representative&:rest*',
         destination: '/action/call?unexpectedUrl=true',
+        permanent: false,
+      },
+      {
+        source: '/utm_source=swc&utm_medium=sms&utm_campaign=mi-primary-1',
+        destination: '/?utm_source=swc&utm_medium=sms&utm_campaign=mi-primary-1',
         permanent: false,
       },
     ]

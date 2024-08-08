@@ -4,6 +4,7 @@ import { convertToOnlyEnglishCharacters } from '@/utils/shared/convertToOnlyEngl
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { logger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
+import { fullUrl } from '@/utils/shared/urls'
 
 /*
 Sample response
@@ -110,7 +111,7 @@ export interface GoogleCivicInfoResponse {
 
 interface GoogleCivicErrorResponse {
   error: {
-    code: 404
+    code: 404 | 429
     errors: object[]
     message: string
   }
@@ -138,13 +139,24 @@ export function getGoogleCivicDataFromAddress(address: string) {
     return Promise.resolve(cached)
   }
 
-  return fetchReq(apiUrl.toString(), undefined, {
-    isValidRequest: (response: Response) =>
-      (response.status >= 200 && response.status < 300) || response.status === 404,
-  })
+  return fetchReq(
+    apiUrl.toString(),
+    {
+      referrer: fullUrl('/'),
+    },
+    {
+      isValidRequest: (response: Response) =>
+        (response.status >= 200 && response.status < 300) ||
+        response.status === 404 ||
+        response.status === 429,
+    },
+  )
     .then(res => res.json())
     .then(res => {
       const response = res as GoogleCivicInfoResponse | GoogleCivicErrorResponse
+      if ('error' in response && response.error.code === 429) {
+        return response
+      }
       civicDataByAddressCache.set(apiUrl.toString(), response)
       return response
     })

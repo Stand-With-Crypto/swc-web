@@ -90,4 +90,9 @@ export const INDUSTRY_PARTNERS = [
     imageSrc: '/partners/exodus.svg',
     url: 'https://www.exodus.com/',
   },
+  {
+    title: 'BTC Inc',
+    imageSrc: '/partners/BTClogo_circle.svg',
+    url: 'https://b.tc/',
+  },
 ]

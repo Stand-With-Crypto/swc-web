@@ -2,6 +2,7 @@
 import 'server-only'
 
 import { User, UserActionType, UserInformationVisibility } from '@prisma/client'
+import { waitUntil } from '@vercel/functions'
 import { nativeEnum, object, z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
@@ -103,7 +104,7 @@ async function _actionCreateUserActionVoterRegistration(input: CreateActionVoter
       validatedInput,
       sharedDependencies: { analytics },
     })
-    await beforeFinish()
+    waitUntil(beforeFinish())
     return { user: getClientUser(user) }
   }
 
@@ -120,7 +121,7 @@ async function _actionCreateUserActionVoterRegistration(input: CreateActionVoter
     await claimNFTAndSendEmailNotification(userAction, user.primaryUserCryptoAddress)
   }
 
-  await beforeFinish()
+  waitUntil(beforeFinish())
   return { user: getClientUser(user) }
 }
 
@@ -149,7 +150,11 @@ async function createUser(sharedDependencies: Pick<SharedDependencies, 'localUse
     userId: createdUser.id,
   })
   if (localUser?.persisted) {
-    peopleAnalytics.setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
+    waitUntil(
+      peopleAnalytics
+        .setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
+        .flush(),
+    )
   }
 
   return { user: createdUser, peopleAnalytics }

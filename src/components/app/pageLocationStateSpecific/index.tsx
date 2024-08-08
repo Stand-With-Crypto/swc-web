@@ -8,7 +8,7 @@ import { PACFooter } from '@/components/app/pacFooter'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
 import { Button } from '@/components/ui/button'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
-import { InternalLink } from '@/components/ui/link'
+import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { DTSI_PersonStanceType, DTSI_StateSpecificInformationQuery } from '@/data/dtsi/generated'
@@ -67,11 +67,19 @@ export function LocationStateSpecific({
               <FormattedNumber amount={countAdvocates} locale={locale} /> crypto advocates
             </h3>
           )}
-          <UserActionFormVoterRegistrationDialog initialStateCode={stateCode}>
-            <Button className="mt-6 w-full max-w-xs" variant="secondary">
-              Register to vote
+          {stateCode === 'MI' ? (
+            <Button asChild className="mt-6 w-full max-w-xs" variant="secondary">
+              <ExternalLink href="https://mvic.sos.state.mi.us/Voter/Index">
+                Find your poll location
+              </ExternalLink>
             </Button>
-          </UserActionFormVoterRegistrationDialog>
+          ) : (
+            <UserActionFormVoterRegistrationDialog initialStateCode={stateCode}>
+              <Button className="mt-6 w-full max-w-xs" variant="secondary">
+                Register to vote
+              </Button>
+            </UserActionFormVoterRegistrationDialog>
+          )}
         </div>
       </DarkHeroSection>
 

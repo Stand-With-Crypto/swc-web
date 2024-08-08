@@ -1,10 +1,8 @@
 import { Prisma } from '@prisma/client'
 import { parseISO } from 'date-fns'
-import { chunk } from 'lodash-es'
 
 import { inngest } from '@/inngest/inngest'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { TWILIO_RATE_LIMIT, twilioPhoneNumberValidation } from '@/utils/server/sms'
 import { getLogger } from '@/utils/shared/logger'
 
 import { fetchPhoneNumbers, flagInvalidPhoneNumbers, validatePhoneNumbers } from './utils'
@@ -36,9 +34,11 @@ export const backfillPhoneNumberValidation = inngest.createFunction(
 
     let hasNumbersLest = true
     let outerCursor: Date | undefined
-    let iteration = 0
+    let iterations = 0
+    let phoneNumbersValidated = 0
+    let totalInvalidPhoneNumbers = 0
     while (hasNumbersLest) {
-      logger.info(`Iteration ${iteration}`)
+      logger.info(`Iteration ${iterations}`)
       logger.info(`Fetching...`)
       // Fetches all phone numbers within the database query limit range
       const [phoneNumberChunks, newCursor, length] = await step.run('fetching-phone-numbers', () =>
@@ -60,30 +60,15 @@ export const backfillPhoneNumberValidation = inngest.createFunction(
       )
 
       outerCursor = parseISO(newCursor)
+      phoneNumbersValidated += length
 
       logger.info(`Validating...`)
 
       const invalidPhoneNumbers = await step.run('validating-phone-numbers', async () => {
-        let phoneNumbersThatStillNeedValidation: string[] = []
         let allInvalidPhoneNumbers: string[] = []
 
-        // First we will validate with libphonenumber to reduce the usage of twilio's api since it has a rate limit
         for (const phoneNumberBatch of phoneNumberChunks) {
-          const { invalid, valid } = await validatePhoneNumbers(phoneNumberBatch)
-
-          allInvalidPhoneNumbers = allInvalidPhoneNumbers.concat(invalid)
-          phoneNumbersThatStillNeedValidation = phoneNumbersThatStillNeedValidation.concat(valid)
-        }
-
-        // We also need to split phone numbers into batches because of the rate limit
-        for (const phoneNumberBatch of chunk(
-          phoneNumbersThatStillNeedValidation,
-          TWILIO_RATE_LIMIT,
-        )) {
-          const { invalid } = await validatePhoneNumbers(
-            phoneNumberBatch,
-            twilioPhoneNumberValidation,
-          )
+          const { invalid } = await validatePhoneNumbers(phoneNumberBatch)
 
           allInvalidPhoneNumbers = allInvalidPhoneNumbers.concat(invalid)
         }
@@ -93,6 +78,8 @@ export const backfillPhoneNumberValidation = inngest.createFunction(
 
       logger.info(`Found ${invalidPhoneNumbers.length} invalid phone numbers`)
 
+      totalInvalidPhoneNumbers += invalidPhoneNumbers.length
+
       if (persist && invalidPhoneNumbers.length > 0) {
         logger.info('Persisting...')
 
@@ -101,13 +88,19 @@ export const backfillPhoneNumberValidation = inngest.createFunction(
         )
       }
 
-      logger.info(`Finished iteration ${iteration}`)
+      logger.info(`Finished iteration ${iterations}`)
 
       if ((DATABASE_QUERY_LIMIT && length < DATABASE_QUERY_LIMIT) || !DATABASE_QUERY_LIMIT) {
         hasNumbersLest = false
       }
 
-      iteration += 1
+      iterations += 1
+    }
+
+    return {
+      iterations,
+      phoneNumbersValidated,
+      totalInvalidPhoneNumbers,
     }
   },
 )
