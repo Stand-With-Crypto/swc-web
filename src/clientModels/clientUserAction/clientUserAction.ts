@@ -6,6 +6,7 @@ import {
   UserActionEmail,
   UserActionEmailRecipient,
   UserActionOptIn,
+  UserActionRsvpEvent,
   UserActionTweetAtPerson,
   UserActionType,
   UserActionVoterRegistration,
@@ -37,6 +38,7 @@ type ClientUserActionDatabaseQuery = UserAction & {
   userActionOptIn: UserActionOptIn | null
   userActionVoterRegistration: UserActionVoterRegistration | null
   userActionTweetAtPerson: UserActionTweetAtPerson | null
+  userActionRsvpEvent: UserActionRsvpEvent | null
 }
 
 type ClientUserActionEmailRecipient = Pick<UserActionEmailRecipient, 'id'> & {
@@ -76,6 +78,11 @@ type ClientUserActionTweetAtPerson = {
   campaignName: UserActionTweetAtPersonCampaignName
   person: DTSIPersonForUserActions | null
 }
+type ClientUserActionRsvpEvent = {
+  actionType: typeof UserActionType.RSVP_EVENT
+  eventSlug: string
+  eventState: string
+}
 
 /*
 At the database schema level we can't enforce that a single action only has one "type" FK, but at the client level we can and should
@@ -94,6 +101,7 @@ export type ClientUserAction = ClientModel<
       | ClientUserActionVoterRegistration
       | ClientUserActionLiveEvent
       | ClientUserActionTweetAtPerson
+      | ClientUserActionRsvpEvent
     )
 >
 
@@ -205,6 +213,15 @@ export const getClientUserAction = ({
         actionType: UserActionType.TWEET_AT_PERSON,
       }
       return getClientModel({ ...sharedProps, ...tweetAtPersonFields })
+    },
+    [UserActionType.RSVP_EVENT]: () => {
+      const { eventSlug, eventState } = getRelatedModel(record, 'userActionRsvpEvent')
+      const rsvpEventFields: ClientUserActionRsvpEvent = {
+        eventSlug,
+        eventState,
+        actionType: UserActionType.RSVP_EVENT,
+      }
+      return getClientModel({ ...sharedProps, ...rsvpEventFields })
     },
   }
 
