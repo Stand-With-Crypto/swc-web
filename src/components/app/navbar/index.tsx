@@ -247,7 +247,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
             </button>
           </DrawerTrigger>
           <DrawerContent direction="top">
-            <div className="h-screen pb-6 text-left">
+            <div className="h-screen overflow-y-auto pb-6 text-left">
               <div className="flex justify-between p-6">
                 <InternalLink className="flex-shrink-0" href={urls.home()}>
                   <NextImage
@@ -259,7 +259,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
                   />
                 </InternalLink>
                 <DrawerClose asChild>
-                  <Button variant="ghost">
+                  <Button className="px-0" variant="ghost">
                     <Cross1Icon height={16} width={16} />
                   </Button>
                 </DrawerClose>
