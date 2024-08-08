@@ -2,20 +2,22 @@ import * as Sentry from '@sentry/nextjs'
 import pRetry from 'p-retry'
 
 import { builderIOClient } from '@/utils/server/builderIO/client'
-import { SWCEvents, zodEventsSchemaValidation } from '@/utils/shared/getSWCEvents'
+import { SWCEvents, zodEventSchemaValidation } from '@/utils/shared/getSWCEvents'
 import { getLogger } from '@/utils/shared/logger'
 
-const logger = getLogger(`builderIOEvents`)
-export async function getEvents() {
+const logger = getLogger(`builderIOEvent`)
+export async function getEvent(eventSlug: string, state: string) {
   try {
-    const entries = await pRetry(
+    const entry = await pRetry(
       () =>
-        builderIOClient.getAll('events', {
+        builderIOClient.get('events', {
           query: {
-            published: 'published',
             data: {
+              slug: eventSlug,
+              state: state.toUpperCase(),
               isOccuring: true,
             },
+            published: 'published',
           },
         }),
       {
@@ -24,11 +26,13 @@ export async function getEvents() {
       },
     )
 
-    const parsedEntries = zodEventsSchemaValidation.safeParse(entries)
+    const parsedEntry = zodEventSchemaValidation.safeParse(entry)
 
-    if (!parsedEntries.success) return null
+    if (!parsedEntry.success) {
+      return null
+    }
 
-    return parsedEntries.data as SWCEvents
+    return parsedEntry.data as SWCEvents[0]
   } catch (e) {
     logger.error('error getting events entries:' + e)
     Sentry.captureException(e, {
