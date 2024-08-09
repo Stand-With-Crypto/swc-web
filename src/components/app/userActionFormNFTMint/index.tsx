@@ -67,6 +67,7 @@ export function UserActionFormNFTMint({ trackMount }: { trackMount?: boolean }) 
               </div>
             </div>
           )}
+
           <UserActionFormNFTMintCheckout
             {...sectionProps}
             {...checkoutController}
