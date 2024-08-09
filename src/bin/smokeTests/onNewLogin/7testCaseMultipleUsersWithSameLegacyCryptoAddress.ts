@@ -64,7 +64,7 @@ export const testCaseMultipleUsersWithSameLegacyCryptoAddress: TestCase = {
   validateResults: (
     {
       existingUsersWithSource,
-      embeddedWalletEmailAddress,
+      embeddedWalletUserDetails,
       merge,
       wasUserCreated,
       maybeUpsertCryptoAddressResult,
@@ -76,7 +76,7 @@ export const testCaseMultipleUsersWithSameLegacyCryptoAddress: TestCase = {
   ) => {
     // changed
     verify(existingUsersWithSource.length, true, 'existingUsersWithSource.length', issues)
-    verify(embeddedWalletEmailAddress, false, 'embeddedWalletEmailAddress', issues)
+    verify(embeddedWalletUserDetails, false, 'embeddedWalletUserDetails', issues)
     // changed
     verify(merge?.usersToDelete.length, true, 'merge?.usersToDelete.length', issues)
     // changed
@@ -118,7 +118,7 @@ export const testCaseMultipleUsersWithSameLegacyCryptoAddress: TestCase = {
     )
     verify(
       postLoginUserActionSteps.pastActionsMinted.length,
-      false,
+      true,
       'postLoginUserActionSteps.pastActionsMinted.length',
       issues,
     )

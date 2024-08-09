@@ -6,7 +6,11 @@ import {
   IExperimentContext,
 } from '@/utils/shared/experiments'
 
-function useExperimentName<K extends Experiments>({ experimentName }: { experimentName: K }) {
+export function useExperimentName<K extends Experiments>({
+  experimentName,
+}: {
+  experimentName: K
+}) {
   const localUser = useLocalUser()
 
   const experimentVariants = getExperimentVariants(experimentName)

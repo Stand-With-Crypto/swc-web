@@ -55,7 +55,7 @@ export const testCaseUserHasLegacyMigrationCryptoAddressAndEmailAndLogsOnViaSess
     validateResults: (
       {
         existingUsersWithSource,
-        embeddedWalletEmailAddress,
+        embeddedWalletUserDetails,
         merge,
         wasUserCreated,
         maybeUpsertCryptoAddressResult,
@@ -67,7 +67,7 @@ export const testCaseUserHasLegacyMigrationCryptoAddressAndEmailAndLogsOnViaSess
     ) => {
       // changed
       verify(existingUsersWithSource.length, true, 'existingUsersWithSource.length', issues)
-      verify(embeddedWalletEmailAddress, false, 'embeddedWalletEmailAddress', issues)
+      verify(embeddedWalletUserDetails, false, 'embeddedWalletUserDetails', issues)
       verify(merge?.usersToDelete.length, false, 'merge?.usersToDelete.length', issues)
       // changed
       verify(merge?.userToKeep, true, 'merge?.userToKeep', issues)
@@ -106,7 +106,7 @@ export const testCaseUserHasLegacyMigrationCryptoAddressAndEmailAndLogsOnViaSess
       )
       verify(
         postLoginUserActionSteps.pastActionsMinted.length,
-        false,
+        true,
         'postLoginUserActionSteps.pastActionsMinted.length',
         issues,
       )
