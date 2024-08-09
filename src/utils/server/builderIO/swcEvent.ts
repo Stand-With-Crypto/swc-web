@@ -4,6 +4,7 @@ import pRetry from 'p-retry'
 import { builderIOClient } from '@/utils/server/builderIO/client'
 import { SWCEvents, zodEventSchemaValidation } from '@/utils/shared/getSWCEvents'
 import { getLogger } from '@/utils/shared/logger'
+import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
 const logger = getLogger(`builderIOEvent`)
 export async function getEvent(eventSlug: string, state: string) {
@@ -17,7 +18,7 @@ export async function getEvent(eventSlug: string, state: string) {
               state: state.toUpperCase(),
               isOccuring: true,
             },
-            published: 'published',
+            ...(NEXT_PUBLIC_ENVIRONMENT === 'production' && { published: 'published' }),
           },
         }),
       {

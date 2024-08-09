@@ -4,6 +4,7 @@ import pRetry from 'p-retry'
 import { builderIOClient } from '@/utils/server/builderIO/client'
 import { SWCEvents, zodEventsSchemaValidation } from '@/utils/shared/getSWCEvents'
 import { getLogger } from '@/utils/shared/logger'
+import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
 const logger = getLogger(`builderIOEvents`)
 export async function getEvents() {
@@ -12,7 +13,7 @@ export async function getEvents() {
       () =>
         builderIOClient.getAll('events', {
           query: {
-            published: 'published',
+            ...(NEXT_PUBLIC_ENVIRONMENT === 'production' && { published: 'published' }),
             data: {
               isOccuring: true,
             },
