@@ -28,6 +28,7 @@ import {
   UserActionEmailCampaignName,
   UserActionTweetCampaignName,
 } from '@/utils/shared/userActionCampaigns'
+import { US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
 import { listOfThings } from '@/utils/web/listOfThings'
 
 const MainText = ({ children }: { children: React.ReactNode }) => (
@@ -234,6 +235,21 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
                   />
                 </>
               )}
+            </MainText>
+          ),
+        }
+      }
+      case UserActionType.RSVP_EVENT: {
+        return {
+          onFocusContent: undefined,
+          children: (
+            <MainText>
+              New sign up for an SWC event in{' '}
+              {
+                US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP[
+                  action.eventState as keyof typeof US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP
+                ]
+              }
             </MainText>
           ),
         }
