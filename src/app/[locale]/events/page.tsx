@@ -1,9 +1,13 @@
 import { Metadata } from 'next'
+import { notFound } from 'next/navigation'
 
-import NotFound from '@/app/not-found'
 import { EventsPage } from '@/components/app/pageEvents'
 import { getEvents } from '@/utils/server/builderIO/swcEvents'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
+import { SECONDS_DURATION } from '@/utils/shared/seconds'
+
+export const revalidate = SECONDS_DURATION['HOUR']
+export const dynamic = 'error'
 
 const title = 'Events'
 const description =
@@ -20,8 +24,8 @@ export default async function EventsPageRoot() {
   const events = await getEvents()
 
   if (!events || !events?.length) {
-    return NotFound()
+    notFound()
   }
 
-  return <EventsPage events={events!} />
+  return <EventsPage events={events} />
 }
