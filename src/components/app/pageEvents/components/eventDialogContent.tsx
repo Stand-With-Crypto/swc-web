@@ -1,15 +1,26 @@
 'use client'
 
+import { useState } from 'react'
 import Balancer from 'react-wrap-balancer'
 import { GoogleMapsEmbed } from '@next/third-parties/google'
+import { UserActionType } from '@prisma/client'
 import { format } from 'date-fns'
 import { Clock, Pin } from 'lucide-react'
+import { toast } from 'sonner'
 
+import {
+  actionCreateUserActionRsvpEvent,
+  CreateActionRsvpEventInput,
+} from '@/actions/actionCreateUserActionRsvpEvent'
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { useSections } from '@/hooks/useSections'
 import { SWCEvents } from '@/utils/shared/getSWCEvents'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
+import { USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns'
+import { triggerServerActionForForm } from '@/utils/web/formUtils'
+import { identifyUserOnClient } from '@/utils/web/identifyUser'
+import { toastGenericError } from '@/utils/web/toastUtils'
 
 const NEXT_PUBLIC_GOOGLE_CIVIC_API_KEY = requiredEnv(
   process.env.NEXT_PUBLIC_GOOGLE_CIVIC_API_KEY,
@@ -50,7 +61,75 @@ function EventInformation({
   event: SWCEvents[0]['data']
   onNotificationActivation: () => void
 }) {
+  const [isCreatingRsvpEventAction, setIsCreatingRsvpEventAction] = useState(false)
   const formattedEventDate = format(new Date(event.datetime), 'EEEE M/d h:mm a')
+
+  async function handleCreateRsvpAction({
+    shouldReceiveNotifications,
+    onSuccessCallback,
+  }: {
+    shouldReceiveNotifications: boolean
+    onSuccessCallback: () => void
+  }) {
+    setIsCreatingRsvpEventAction(true)
+
+    const data: CreateActionRsvpEventInput = {
+      eventSlug: event.slug,
+      eventState: event.state,
+      shouldReceiveNotifications,
+    }
+
+    const result = await triggerServerActionForForm(
+      {
+        formName: 'RSVP Event',
+        onError: (_, error) => {
+          toast.error(error.message, {
+            duration: 5000,
+          })
+        },
+        analyticsProps: {
+          'Campaign Name': USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.RSVP_EVENT,
+          'User Action Type': UserActionType.RSVP_EVENT,
+          eventSlug: event.slug,
+          eventState: event.state,
+          shouldReceiveNotifications,
+        },
+        payload: data,
+      },
+      payload =>
+        actionCreateUserActionRsvpEvent(payload).then(actionResult => {
+          if (actionResult?.user) {
+            identifyUserOnClient(actionResult.user)
+          }
+          return actionResult
+        }),
+    )
+
+    if (result.status === 'success') {
+      onSuccessCallback()
+    } else {
+      toastGenericError()
+    }
+    setIsCreatingRsvpEventAction(false)
+  }
+
+  async function handleGetUpdatesButtonClick() {
+    await handleCreateRsvpAction({
+      shouldReceiveNotifications: true,
+      onSuccessCallback: onNotificationActivation,
+    })
+
+    toast.success('Thank you for your interest! We will send you a reminder closer to the event.')
+  }
+
+  async function handleRSVPButtonClick() {
+    await handleCreateRsvpAction({
+      shouldReceiveNotifications: false,
+      onSuccessCallback: () => {
+        window.open(event.rsvpUrl, '_blank')
+      },
+    })
+  }
 
   return (
     <div className="flex h-full flex-col items-center gap-2">
@@ -83,18 +162,18 @@ function EventInformation({
       <div className="mt-auto flex w-full flex-col-reverse items-center justify-end gap-3 lg:mt-4 lg:flex-row">
         <Button
           className="w-full lg:w-auto"
-          onClick={() => {
-            // TODO: Implement notification logic
-            onNotificationActivation()
-          }}
+          disabled={isCreatingRsvpEventAction}
+          onClick={handleGetUpdatesButtonClick}
           variant="secondary"
         >
           Get updates
         </Button>
-        <Button asChild className="w-full lg:w-auto">
-          <a href={event.rsvpUrl} target="_blank">
-            RSVP
-          </a>
+        <Button
+          className="w-full lg:w-auto"
+          disabled={isCreatingRsvpEventAction}
+          onClick={handleRSVPButtonClick}
+        >
+          RSVP
         </Button>
       </div>
     </div>
