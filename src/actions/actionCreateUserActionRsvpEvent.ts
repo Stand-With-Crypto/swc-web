@@ -10,7 +10,6 @@ import {
   getMaybeUserAndMethodOfMatch,
   UserAndMethodOfMatch,
 } from '@/utils/server/getMaybeUserAndMethodOfMatch'
-import { claimNFTAndSendEmailNotification } from '@/utils/server/nft/claimNFT'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
@@ -105,17 +104,13 @@ async function _actionCreateUserActionRsvpEvent(input: CreateActionRsvpEventInpu
   }
 
   await triggerRateLimiterAtMostOnce()
-  const { userAction } = await createAction({
+  await createAction({
     user,
     isNewUser: !userMatch.user,
     validatedInput: validatedInput.data,
     userMatch,
     sharedDependencies: { sessionId, analytics, peopleAnalytics },
   })
-
-  if (user.primaryUserCryptoAddress !== null) {
-    await claimNFTAndSendEmailNotification(userAction, user.primaryUserCryptoAddress)
-  }
 
   waitUntil(beforeFinish())
   return { user: getClientUser(user) }
