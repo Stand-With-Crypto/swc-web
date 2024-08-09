@@ -172,6 +172,8 @@ export const airdropNFTWithInngest = inngest.createFunction(
           })
         })
 
+        await analytics.flush()
+
         return {
           messageId,
         }

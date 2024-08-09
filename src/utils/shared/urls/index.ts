@@ -66,6 +66,7 @@ export const getIntlUrls = (
     }) => `${localePrefix}/races/state/${stateCode.toLowerCase()}/district/${district}`,
     becomeMember: () => `${localePrefix}/action/become-member`,
     community: () => `${localePrefix}/community`,
+    events: () => `${localePrefix}/events`,
   }
 }
 

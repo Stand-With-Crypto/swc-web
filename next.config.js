@@ -48,6 +48,7 @@ const contentSecurityPolicy = {
     'https://euc.li/',
     // Thirdweb contract metadata
     'https://contract.thirdweb.com/',
+    'https://pay.thirdweb.com',
     'https://*.rpc.thirdweb.com/',
     'https://ipfs.io/ipfs/',
     // Thirdweb contract data
@@ -196,6 +197,11 @@ const nextConfig = {
       },
       // dotheysupportit image cdn
       { protocol: 'https', hostname: 'db0prh5pvbqwd.cloudfront.net' },
+      // builder.io image cdn
+      {
+        protocol: 'https',
+        hostname: 'cdn.builder.io',
+      },
     ],
   },
   async headers() {
