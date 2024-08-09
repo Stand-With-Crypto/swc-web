@@ -433,6 +433,7 @@ model UserActionRsvpEvent {
   userAction                 UserAction @relation(fields: [id], references: [id])
 
   @@index([eventSlug, eventState])
+  @@map("user_action_rsvp_event")
 }
 
 enum UserCommunicationJourneyType {
