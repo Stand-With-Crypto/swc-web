@@ -1,4 +1,4 @@
-import { Prisma, SMSStatus } from '@prisma/client'
+import { Prisma, SMSStatus, UserCommunicationJourneyType } from '@prisma/client'
 import { NonRetriableError } from 'inngest'
 import { chunk, uniq } from 'lodash-es'
 
@@ -6,12 +6,15 @@ import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { countSegments, TWILIO_RATE_LIMIT } from '@/utils/server/sms'
+import * as messages from '@/utils/server/sms/messages'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
 import { enqueueMessages } from './utils'
 
 export const BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME = 'app/user.communication/bulk.sms'
+export const BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_FINISHED_EVENT_NAME =
+  'app/user.communication/bulk.sms/finished'
 
 export const BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_FUNCTION_ID = 'user-communication/bulk-sms'
 
@@ -25,10 +28,11 @@ const MESSAGE_SEGMENTS_PER_SECOND = Number(
 const MAX_QUEUE_LENGTH = Number(requiredEnv(process.env.MAX_QUEUE_LENGTH, 'MAX_QUEUE_LENGTH'))
 
 interface BulkSMSCommunicationJourneyPayload {
-  smsBody?: string
+  smsBody: string
   userWhereInput?: Prisma.UserGroupByArgs['where']
   includePendingDoubleOptIn?: boolean
   send?: boolean
+  journeyType?: UserCommunicationJourneyType
 }
 
 export const bulkSMSCommunicationJourney = inngest.createFunction(
@@ -40,16 +44,60 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
   {
     event: BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
   },
-  async ({ step, event }) => {
-    const { smsBody, userWhereInput, includePendingDoubleOptIn, send } =
+  async ({ step, event, logger }) => {
+    const { smsBody, userWhereInput, includePendingDoubleOptIn, send, journeyType } =
       event.data as BulkSMSCommunicationJourneyPayload
 
-    if (!smsBody && send) {
+    if (!smsBody) {
       throw new NonRetriableError('Missing sms body')
     }
 
+    const communicationJourneyType = journeyType
+      ? UserCommunicationJourneyType[journeyType]
+      : UserCommunicationJourneyType.BULK_SMS
+
+    if (!communicationJourneyType) {
+      throw new NonRetriableError(`Invalid journeyType ${journeyType ?? 'undefined'}`)
+    }
+
+    if (communicationJourneyType !== UserCommunicationJourneyType.WELCOME_SMS) {
+      const bulkWelcomeSMSPayload: BulkSMSCommunicationJourneyPayload = {
+        ...event.data,
+        smsBody: messages.WELCOME_MESSAGE,
+        journeyType: UserCommunicationJourneyType.WELCOME_SMS,
+        userWhereInput: {
+          ...userWhereInput,
+          UserCommunicationJourney: {
+            every: {
+              journeyType: {
+                not: 'WELCOME_SMS',
+              },
+            },
+          },
+        },
+      }
+
+      const {
+        ids: [bulkWelcomeSMSEventId],
+      } = await step.run('trigger-bulk-welcome-sms', () =>
+        inngest.send({
+          name: BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
+          data: bulkWelcomeSMSPayload,
+        }),
+      )
+
+      await step.waitForEvent('wait-for-welcome-sms-to-finish', {
+        event: BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_FINISHED_EVENT_NAME,
+        timeout: '4 days',
+        if: `async.data.id == '${bulkWelcomeSMSEventId}'`,
+      })
+    }
+
     // Messages with more than 160 characters are divided in segments
-    const segmentsCount = countSegments(smsBody ?? '')
+    const segmentsCount = countSegments(smsBody)
+
+    const getWaitingTimeInSeconds = (messageCount: number) =>
+      (messageCount * segmentsCount) / MESSAGE_SEGMENTS_PER_SECOND
 
     // If there are multiple segment, we need to split the queue
     const queueSizeBySegment = Math.floor(MAX_QUEUE_LENGTH / segmentsCount)
@@ -59,14 +107,17 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
     let hasNumbersLeft = true
 
     while (hasNumbersLeft) {
-      const phoneNumbers = await getPhoneNumberList({
+      const phoneNumberList = await getPhoneNumberList({
         includePendingDoubleOptIn,
         cursor,
         userWhereInput,
       })
 
-      cursor = phoneNumbers.at(-1)?.datetimeCreated
-      allPhoneNumbers = allPhoneNumbers.concat(phoneNumbers.map(({ phoneNumber }) => phoneNumber))
+      cursor = phoneNumberList.at(-1)?.datetimeCreated
+
+      const phoneNumbers = phoneNumberList.map(({ phoneNumber }) => phoneNumber)
+
+      allPhoneNumbers = allPhoneNumbers.concat(phoneNumbers)
 
       if (!DATABASE_QUERY_LIMIT || phoneNumbers.length < DATABASE_QUERY_LIMIT) {
         hasNumbersLeft = false
@@ -74,63 +125,84 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
     }
 
     // Using uniq here to not send multiple messages to the same phone number
-    const uniquePhoneNumbers = uniq(allPhoneNumbers)
+    allPhoneNumbers = uniq(allPhoneNumbers)
 
-    const totalPhoneNumbers = uniquePhoneNumbers.length
+    const totalPhoneNumbers = allPhoneNumbers.length
 
     // Each batch will be used to fill the queue
-    const phoneNumberQueueBatches = chunk(uniquePhoneNumbers, queueSizeBySegment)
+    const phoneNumbersQueueBatches = chunk(allPhoneNumbers, queueSizeBySegment)
 
-    const timeInSecondsToSendAllMessages =
-      (totalPhoneNumbers * segmentsCount) / MESSAGE_SEGMENTS_PER_SECOND
+    const totalTimeToSendAllMessages = getWaitingTimeInSeconds(totalPhoneNumbers)
 
-    await step.run('log-infos', () => ({
-      'Time to send all messages': formatTime(timeInSecondsToSendAllMessages),
-      'Total phone numbers': totalPhoneNumbers,
-      'Total batches': phoneNumberQueueBatches.length,
-    }))
-
-    if (!send) {
-      return "Send flag is deactivated. Didn't send any messages"
+    const bulkInfo = {
+      Segments: segmentsCount,
+      'Time to send messages': formatTime(totalTimeToSendAllMessages),
+      'Number of messages': totalPhoneNumbers,
+      Batches: phoneNumbersQueueBatches.length,
     }
 
-    let totalMessagesSent = 0
-    let totalTimeTaken = 0
-    let iteration = 0
-    for (const queueBatch of phoneNumberQueueBatches) {
-      // Split the batch into chunks to not exceed twilio's rate limit
-      const phoneNumberChunks = chunk(queueBatch, TWILIO_RATE_LIMIT)
-
-      totalMessagesSent += await step.run(`enqueue-messages`, async () => {
-        let messagesSent = 0
-        for (const phoneNumbers of phoneNumberChunks) {
-          messagesSent += await enqueueMessages(phoneNumbers, smsBody!)
-        }
-
-        return messagesSent
+    if (!send) {
+      await step.sendEvent('emit-finished-estimating-bulk-sms', {
+        name: BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_FINISHED_EVENT_NAME,
+        data: {
+          id: event.id,
+        },
       })
 
-      const timeInSecondsToSendBatchMessages =
-        (queueBatch.length * segmentsCount) / MESSAGE_SEGMENTS_PER_SECOND
+      return bulkInfo
+    } else {
+      logger.info('bulk-info', JSON.stringify(bulkInfo))
+    }
+
+    let totalQueuedMessages = 0
+    let totalTimeTaken = 0
+    let iteration = 0
+    for (const queueBatch of phoneNumbersQueueBatches) {
+      totalQueuedMessages += await step.run(`enqueue-bulk-messages`, async () => {
+        // Split the batch into chunks to avoid exceeding Twilio's rate limit
+        const phoneNumberChunks = chunk(queueBatch, TWILIO_RATE_LIMIT)
+
+        let queuedMessages = 0
+        for (const phoneNumbers of phoneNumberChunks) {
+          queuedMessages += await enqueueMessages(phoneNumbers, {
+            body: smsBody,
+            journeyType: communicationJourneyType,
+          })
+        }
+
+        return queuedMessages
+      })
+
+      const timeToSendAllBatchMessages = getWaitingTimeInSeconds(totalQueuedMessages)
 
       await step.sleep(
-        `waiting-${formatTime(timeInSecondsToSendBatchMessages).replace(' ', '-')}-for-messaging-queue-to-be-empty`,
-        timeInSecondsToSendBatchMessages * 1000,
+        `waiting-${formatTime(timeToSendAllBatchMessages).replace(' ', '-')}-for-messaging-queue-to-be-empty`,
+        timeToSendAllBatchMessages * 1000,
       )
 
-      totalTimeTaken += timeInSecondsToSendBatchMessages
+      totalTimeTaken += timeToSendAllBatchMessages
 
       iteration += 1
 
-      await step.run('log-infos', () => ({
-        Messages: `${totalMessagesSent}/${totalPhoneNumbers}`,
-        Time: `${formatTime(totalTimeTaken)}/${formatTime(timeInSecondsToSendAllMessages)}`,
-        Iterations: `${iteration}/${phoneNumberQueueBatches.length}`,
-      }))
+      logger.info(
+        'bulk-info',
+        JSON.stringify({
+          Messages: totalQueuedMessages,
+          Time: `${formatTime(totalTimeTaken)}/${formatTime(totalTimeToSendAllMessages)}`,
+          Iterations: `${iteration}/${phoneNumbersQueueBatches.length}`,
+        }),
+      )
     }
 
+    await step.sendEvent('emit-finished-sending-bulk-messages', {
+      name: BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_FINISHED_EVENT_NAME,
+      data: {
+        id: event.id,
+      },
+    })
+
     return {
-      Send: `${totalMessagesSent} messages`,
+      Send: totalQueuedMessages,
       Took: formatTime(totalTimeTaken),
     }
   },

@@ -8,14 +8,22 @@ import { createCommunication, createCommunicationJourneys, flagInvalidPhoneNumbe
 
 const ENQUEUE_MAX_RETRY_ATTEMPTS = 5
 
-export async function enqueueMessages(phoneNumbers: string[], body: string, attempt = 0) {
+export interface EnqueueMessagesPayload {
+  body: string
+  journeyType: UserCommunicationJourneyType
+}
+
+export async function enqueueMessages(
+  phoneNumbers: string[],
+  payload: EnqueueMessagesPayload,
+  attempt = 0,
+) {
   if (attempt > ENQUEUE_MAX_RETRY_ATTEMPTS) return 0
 
+  const { body, journeyType } = payload
+
   const enqueueMessagesPromise = phoneNumbers.map(async phoneNumber => {
-    const communicationJourneys = await createCommunicationJourneys(
-      phoneNumber,
-      UserCommunicationJourneyType.BULK_SMS,
-    )
+    const communicationJourneys = await createCommunicationJourneys(phoneNumber, journeyType)
 
     const message = await sendSMS({
       body,
@@ -45,7 +53,7 @@ export async function enqueueMessages(phoneNumbers: string[], body: string, atte
             Sentry.captureException('Unexpected sendSMS error', {
               extra: { reason: result.reason },
               tags: {
-                domain: 'bulkSMS',
+                domain: 'enqueueMessages',
               },
             })
           }
@@ -55,7 +63,7 @@ export async function enqueueMessages(phoneNumbers: string[], body: string, atte
               reason: result.reason,
             },
             tags: {
-              domain: 'bulkSMS',
+              domain: 'enqueueMessages',
             },
           })
         }
@@ -73,7 +81,7 @@ export async function enqueueMessages(phoneNumbers: string[], body: string, atte
   if (failedPhoneNumbers.length > 0) {
     await sleep(10000 * (attempt + 1))
 
-    messagesSent += await enqueueMessages(failedPhoneNumbers, body, attempt + 1)
+    messagesSent += await enqueueMessages(failedPhoneNumbers, payload, attempt + 1)
   }
 
   return messagesSent
