@@ -1,4 +1,9 @@
-import { CommunicationType, UserCommunicationJourneyType } from '@prisma/client'
+import {
+  CommunicationType,
+  Prisma,
+  PrismaClient,
+  UserCommunicationJourneyType,
+} from '@prisma/client'
 import { render } from '@react-email/components'
 import * as Sentry from '@sentry/nextjs'
 import { number, object, z } from 'zod'
@@ -9,22 +14,31 @@ import ReactivationReminder from '@/utils/server/email/templates/reactivationRem
 import { prismaClient } from '@/utils/server/prismaClient'
 import { batchAsyncAndLog } from '@/utils/shared/batchAsyncAndLog'
 import { getLogger } from '@/utils/shared/logger'
+import { NonRetriableError } from 'inngest'
+import { DefaultArgs } from '@prisma/client/runtime/library'
 
 const logger = getLogger('backfillReactivation')
 
 export const zodBackfillReactivationParameters = object({
   limit: number().optional(),
+  persist: z.boolean().optional(),
 })
+
+let isFirstRun = true
+let affectedUsers = 0
 
 export async function backfillReactivation(
   parameters: z.infer<typeof zodBackfillReactivationParameters>,
 ) {
   zodBackfillReactivationParameters.parse(parameters)
-  const { limit } = parameters
+  const { limit, persist } = parameters
 
   const usersWithoutCommunicationJourney = await prismaClient.user.findMany({
     ...(limit && { take: limit }),
     where: {
+      primaryUserEmailAddress: {
+        isNot: null,
+      },
       NOT: {
         UserCommunicationJourney: {
           some: {
@@ -38,10 +52,28 @@ export async function backfillReactivation(
     },
   })
 
-  if (usersWithoutCommunicationJourney.length === 0) {
-    logger.info('No users found')
-    return
+  if (!persist) {
+    logger.info('Dry run')
+    logger.info(
+      `Would send initial sign up email to ${usersWithoutCommunicationJourney.length} users`,
+    )
+    return {
+      usersWithoutCommunicationJourney,
+      information: `Would send initial sign up email to ${usersWithoutCommunicationJourney.length} users`,
+    }
   }
+
+  if (usersWithoutCommunicationJourney.length === 0) {
+    logger.info(
+      isFirstRun ? 'No users found.' : `Process completed. Affected users: ${affectedUsers}`,
+    )
+    return {
+      usersWithoutCommunicationJourney,
+      information: 'No users found',
+    }
+  }
+
+  isFirstRun = false
 
   await batchAsyncAndLog(usersWithoutCommunicationJourney, users =>
     Promise.all(
@@ -53,6 +85,8 @@ export async function backfillReactivation(
       ),
     ),
   )
+
+  return await backfillReactivation(parameters)
 }
 
 async function sendInitialSignUpEmail({
@@ -64,54 +98,103 @@ async function sendInitialSignUpEmail({
 }) {
   const user = await getUser(userId)
 
-  if (!user.primaryUserEmailAddress) {
-    return null
-  }
+  await prismaClient.$transaction(async client => {
+    if (!user.primaryUserEmailAddress) {
+      return null
+    }
 
-  const userSession = user.userSessions?.[0]
-  const completedActionTypes = user.userActions
-    .filter(action => Object.values(EmailActiveActions).includes(action.actionType))
-    .map(action => action.actionType as EmailActiveActions)
-  const currentSession = userSession
-    ? {
-        userId: userSession.userId,
-        sessionId: userSession.id,
-      }
-    : null
+    const userSession = user.userSessions?.[0]
+    const completedActionTypes = user.userActions
+      .filter(action => Object.values(EmailActiveActions).includes(action.actionType))
+      .map(action => action.actionType as EmailActiveActions)
+    const currentSession = userSession
+      ? {
+          userId: userSession.userId,
+          sessionId: userSession.id,
+        }
+      : null
 
-  const ReactivationReminderComponent = ReactivationReminder
+    const ReactivationReminderComponent = ReactivationReminder
 
-  const messageId = await sendMail({
-    to: user.primaryUserEmailAddress.emailAddress,
-    subject: ReactivationReminderComponent.subjectLine,
-    customArgs: {
-      userId: user.id,
-    },
-    html: render(
-      <ReactivationReminderComponent
-        completedActionTypes={completedActionTypes}
-        session={currentSession}
-      />,
-    ),
-  }).catch(err => {
-    Sentry.captureException(err, {
-      extra: { userId: user.id, emailTo: user.primaryUserEmailAddress!.emailAddress },
-      tags: {
-        domain: 'backfillReactivation',
+    const messageId = await sendMail({
+      to: user.primaryUserEmailAddress.emailAddress,
+      subject: ReactivationReminderComponent.subjectLine,
+      customArgs: {
+        userId: user.id,
       },
-      fingerprint: ['backfillReactivation', 'sendMail'],
-    })
-  })
+      html: render(
+        <ReactivationReminderComponent
+          completedActionTypes={completedActionTypes}
+          session={currentSession}
+        />,
+      ),
+    }).catch(err => {
+      Sentry.captureException(err, {
+        extra: { userId: user.id, emailTo: user.primaryUserEmailAddress!.emailAddress },
+        tags: {
+          domain: 'backfillReactivation',
+        },
+        fingerprint: ['backfillReactivation', 'sendMail'],
+      })
 
-  if (messageId) {
-    return prismaClient.userCommunication.create({
-      data: {
+      return Promise.reject(err)
+    })
+
+    if (messageId) {
+      const communicationJourney = await createCommunicationJourney(
+        client,
+        userId,
         messageId,
         userCommunicationJourneyId,
-        communicationType: CommunicationType.EMAIL,
-      },
-    })
+      )
+
+      affectedUsers += 1
+
+      return {
+        messageId,
+        email: user.primaryUserEmailAddress.emailAddress,
+        userId: communicationJourney.userId,
+        communicationJourneyId: communicationJourney.id,
+        information: `Sent initial sign up email to ${user.primaryUserEmailAddress.emailAddress}`,
+      }
+    }
+  })
+}
+
+async function createCommunicationJourney(
+  client: Omit<
+    PrismaClient<Prisma.PrismaClientOptions, never, DefaultArgs>,
+    '$connect' | '$disconnect' | '$on' | '$transaction' | '$use' | '$extends'
+  >,
+  userId: string,
+  messageId: string,
+  userCommunicationJourneyId: string,
+) {
+  const existingCommunicationJourney = await client.userCommunicationJourney.findFirst({
+    where: {
+      userId,
+      journeyType: UserCommunicationJourneyType.INITIAL_SIGNUP,
+    },
+  })
+
+  if (existingCommunicationJourney) {
+    throw new NonRetriableError('UserCommunicationJourney already exists')
   }
+
+  await client.userCommunication.create({
+    data: {
+      messageId,
+      userCommunicationJourneyId,
+      communicationType: CommunicationType.EMAIL,
+    },
+  })
+
+  return client.userCommunicationJourney.create({
+    data: {
+      userId,
+      journeyType: UserCommunicationJourneyType.INITIAL_SIGNUP,
+    },
+  })
 }
 
 async function getUser(userId: string) {

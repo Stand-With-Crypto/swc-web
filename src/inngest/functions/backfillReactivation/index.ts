@@ -4,6 +4,7 @@ import { onScriptFailure } from '@/inngest/onScriptFailure'
 
 interface ScriptPayload {
   limit: number
+  persist?: boolean
 }
 
 const BACKFILL_REACTIVATION_INNGEST_EVENT_NAME = 'script/backfill-reactivation'
@@ -21,6 +22,7 @@ export const backfillReactivationWithInngest = inngest.createFunction(
     return await step.run('execute-script', async () => {
       return await backfillReactivation({
         limit: payload.limit,
+        persist: payload.persist,
       })
     })
   },
