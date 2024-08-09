@@ -1,5 +1,4 @@
 import { differenceInDays, format, startOfDay } from 'date-fns'
-import { boolean, number, object, z } from 'zod'
 
 import { BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME } from '@/inngest/functions/sms/bulkSMSCommunicationJourney'
 import { inngest } from '@/inngest/inngest'
@@ -9,11 +8,6 @@ import { SWCEvents } from '@/utils/shared/getSWCEvents'
 import { getLogger } from '@/utils/shared/logger'
 
 const logger = getLogger('sendEventNotifications')
-
-export const zodSendEventNotificationParameters = object({
-  limit: number().optional(),
-  persist: boolean().optional(),
-})
 
 interface Notification {
   userId: string
@@ -29,13 +23,7 @@ interface SendEventNotificationsResponse {
   notifications: Array<Notification>
 }
 
-export async function sendEventNotifications(
-  parameters: z.infer<typeof zodSendEventNotificationParameters>,
-) {
-  zodSendEventNotificationParameters.parse(parameters)
-
-  const { persist } = parameters
-
+export async function sendEventNotifications() {
   const allEvents = await getEvents()
 
   if (!allEvents || !allEvents.length) {
@@ -56,29 +44,16 @@ export async function sendEventNotifications(
     return differenceInDays(eventDate, now) === 1
   })
 
-  const batchThreeDaysNotifications = await getNotificationInformationForEvents(
-    eventsInThreeDays,
-    persist,
-  )
+  const batchThreeDaysNotifications = await getNotificationInformationForEvents(eventsInThreeDays)
 
-  const batchOneDayNotifications = await getNotificationInformationForEvents(
-    eventsInOneDay,
-    persist,
-  )
+  const batchOneDayNotifications = await getNotificationInformationForEvents(eventsInOneDay)
 
   const notifications: Array<Notification> = [
     ...batchThreeDaysNotifications,
     ...batchOneDayNotifications,
   ]
 
-  if (persist === undefined || !persist) {
-    logger.info('Dry run, exiting')
-    return {
-      dryRun: true,
-      notificationsSent: 0,
-      notifications,
-    } as SendEventNotificationsResponse
-  }
+  logger.info(`Sent ${notifications.length} notifications`)
 
   return {
     dryRun: true,
@@ -87,10 +62,7 @@ export async function sendEventNotifications(
   } as SendEventNotificationsResponse
 }
 
-async function getNotificationInformationForEvents(
-  events: SWCEvents,
-  persist: boolean | undefined,
-) {
+async function getNotificationInformationForEvents(events: SWCEvents) {
   const notifications: Array<Notification> = []
 
   for (const event of events) {
@@ -123,20 +95,18 @@ async function getNotificationInformationForEvents(
       })
     }
 
-    if (persist) {
-      await inngest.send({
-        name: BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
-        data: {
-          send: true,
-          smsBody,
-          userWhereInput: {
-            phoneNumber: {
-              in: notifications.map(notification => notification.phoneNumber),
-            },
+    await inngest.send({
+      name: BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
+      data: {
+        send: true,
+        smsBody,
+        userWhereInput: {
+          phoneNumber: {
+            in: notifications.map(notification => notification.phoneNumber),
           },
         },
-      })
-    }
+      },
+    })
   }
 
   return notifications

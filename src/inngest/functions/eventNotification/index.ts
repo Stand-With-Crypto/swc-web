@@ -2,12 +2,6 @@ import { sendEventNotifications } from '@/inngest/functions/eventNotification/lo
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 
-interface ScriptPayload {
-  limit: number
-  persist: boolean
-}
-
-const SEND_EVENT_NOTIFICATION_INNGEST_EVENT_NAME = 'script/send-event-notification'
 const SEND_EVENT_NOTIFICATION_INNGEST_FUNCTION_ID = 'script.send-event-notification'
 export const sendEventNotificationWithInngest = inngest.createFunction(
   {
@@ -15,14 +9,10 @@ export const sendEventNotificationWithInngest = inngest.createFunction(
     retries: 0,
     onFailure: onScriptFailure,
   },
-  { event: SEND_EVENT_NOTIFICATION_INNGEST_EVENT_NAME },
-  async ({ event, step }) => {
-    const payload = event.data as ScriptPayload
+  { cron: 'TZ=America/New_York 0 9 * * *' }, // Every day - 9AM EST
+  async ({ step }) => {
     return await step.run('execute-script', async () => {
-      return await sendEventNotifications({
-        limit: payload.limit,
-        persist: payload.persist,
-      })
+      return await sendEventNotifications()
     })
   },
 )
