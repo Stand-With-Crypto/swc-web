@@ -39,6 +39,7 @@
     "@graphql-tools/mock": "^9.0.0",
     "@hookform/resolvers": "^3.3.2",
     "@next/bundle-analyzer": "^14.1.0",
+    "@next/third-parties": "^14.2.5",
     "@planetscale/database": "^1.16.0",
     "@prisma/adapter-planetscale": "^5.10.2",
     "@prisma/client": "^5.11.0",
