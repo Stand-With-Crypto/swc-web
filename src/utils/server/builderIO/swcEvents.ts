@@ -18,6 +18,7 @@ export async function getEvents() {
               isOccuring: true,
             },
           },
+          includeUnpublished: NEXT_PUBLIC_ENVIRONMENT !== 'production',
         }),
       {
         retries: 3,

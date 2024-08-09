@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import Balancer from 'react-wrap-balancer'
 import { GoogleMapsEmbed } from '@next/third-parties/google'
 import { UserActionType } from '@prisma/client'
@@ -151,13 +151,7 @@ function EventInformation({
         <Pin size={16} /> {event.formattedAddress}
       </p>
 
-      <GoogleMapsEmbed
-        apiKey={NEXT_PUBLIC_GOOGLE_CIVIC_API_KEY}
-        height={420}
-        mode="place"
-        q={event.formattedAddress.replace(' ', '+')}
-        width={466}
-      />
+      <GoogleMapsEmbedIFrame address={event.formattedAddress} />
 
       <div className="mt-auto flex w-full flex-col-reverse items-center justify-end gap-3 lg:mt-4 lg:flex-row">
         <Button
@@ -198,3 +192,20 @@ function SuccessfulEventNotificationsSignup() {
     </div>
   )
 }
+
+// This component is memoized because it was blinking on rerender.
+const GoogleMapsEmbedIFrame = memo(({ address }: { address: string }) => {
+  return (
+    <div className="flex justify-center">
+      <GoogleMapsEmbed
+        apiKey={NEXT_PUBLIC_GOOGLE_CIVIC_API_KEY}
+        height={420}
+        mode="place"
+        q={address.replace(' ', '+')}
+        width={466}
+      />
+    </div>
+  )
+})
+
+GoogleMapsEmbedIFrame.displayName = 'GoogleMapsEmbedIFrame'

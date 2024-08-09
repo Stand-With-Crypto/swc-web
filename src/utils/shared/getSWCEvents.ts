@@ -22,7 +22,6 @@ export const zodEventSchemaValidation = object({
     city: string(),
     description: string(),
   }),
-  published: string().regex(/^published$/),
 })
 
 export const zodEventsSchemaValidation = array(zodEventSchemaValidation)
