@@ -176,6 +176,7 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
       hasValidPhoneNumber: true,
       addressId: address?.id || null,
       primaryUserEmailAddressId: primaryUserEmailAddress?.id || null,
+      // If the user removes their phone number and the current smsStatus is not OPTED_OUT we change the smsStatus to NOT_OPTED_IN
       smsStatus:
         (!hasOptedInToSms || !phoneNumber) && user.smsStatus !== SMSStatus.OPTED_OUT
           ? SMSStatus.NOT_OPTED_IN

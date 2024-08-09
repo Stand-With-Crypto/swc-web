@@ -1,16 +1,15 @@
 import { Prisma, SMSStatus } from '@prisma/client'
-import { parseISO } from 'date-fns'
 import { NonRetriableError } from 'inngest'
+import { chunk, uniq } from 'lodash-es'
 
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { countSegments, TWILIO_RATE_LIMIT } from '@/utils/server/sms'
-import { getLogger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
-import { enqueueMessages, fetchPhoneNumbers } from './utils'
+import { enqueueMessages } from './utils'
 
 export const BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME = 'app/user.communication/bulk.sms'
 
@@ -25,13 +24,11 @@ const MESSAGE_SEGMENTS_PER_SECOND = Number(
 )
 const MAX_QUEUE_LENGTH = Number(requiredEnv(process.env.MAX_QUEUE_LENGTH, 'MAX_QUEUE_LENGTH'))
 
-const logger = getLogger('bulk-sms')
-
 interface BulkSMSCommunicationJourneyPayload {
   smsBody?: string
   userWhereInput?: Prisma.UserGroupByArgs['where']
   includePendingDoubleOptIn?: boolean
-  persist?: boolean
+  send?: boolean
 }
 
 export const bulkSMSCommunicationJourney = inngest.createFunction(
@@ -44,17 +41,11 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
     event: BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
   },
   async ({ step, event }) => {
-    const { smsBody, userWhereInput, includePendingDoubleOptIn, persist } =
+    const { smsBody, userWhereInput, includePendingDoubleOptIn, send } =
       event.data as BulkSMSCommunicationJourneyPayload
 
-    if (!smsBody && persist) {
+    if (!smsBody && send) {
       throw new NonRetriableError('Missing sms body')
-    }
-
-    if (persist) {
-      logger.info(`PERSIST flag ACTIVATED. Will send messages`)
-    } else {
-      logger.info(`PERSIST flag DEACTIVATED. Won't send any messages`)
     }
 
     // Messages with more than 160 characters are divided in segments
@@ -63,139 +54,85 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
     // If there are multiple segment, we need to split the queue
     const queueSizeBySegment = Math.floor(MAX_QUEUE_LENGTH / segmentsCount)
 
-    const [estimatedTimeToSendAllMessages, estimatedPhoneNumbersCount] = await step.run(
-      'time-estimation',
-      async () => {
-        logger.info('Estimating...')
-
-        let totalLength = 0
-        let cursor: Date | undefined
-        let hasNumbersLeft = true
-
-        // We could do this using two other methods:
-        // count() with distinct: not supported https://github.com/prisma/prisma/issues/4228. Would need a workaround that doesn't support custom userWhereInput
-        // findMany() with distinct: there is a bug hat doesn't allow us to use LIMIT inside findMany when using distinct https://github.com/prisma/prisma/issues/13918
-        while (hasNumbersLeft) {
-          const phoneNumbers = await getPhoneNumberList(
-            {
-              where: {
-                ...userWhereInput,
-                datetimeCreated: {
-                  gt: cursor,
-                },
-              },
-              take: DATABASE_QUERY_LIMIT,
-            },
-            {
-              includePendingDoubleOptIn,
-            },
-          )
-
-          cursor = phoneNumbers.at(-1)?.datetimeCreated
-          const length = phoneNumbers.length
-
-          totalLength += length
-
-          if (!DATABASE_QUERY_LIMIT || length < DATABASE_QUERY_LIMIT) {
-            hasNumbersLeft = false
-          }
-        }
-
-        const timeInSecondsToSendAllMessages =
-          (totalLength * segmentsCount) / MESSAGE_SEGMENTS_PER_SECOND
-
-        logger.info(
-          `It will take ~${formatTime(timeInSecondsToSendAllMessages)} to send messages to ${totalLength} numbers`,
-        )
-
-        return [timeInSecondsToSendAllMessages, totalLength]
-      },
-    )
-
+    let allPhoneNumbers: string[] = []
     let cursor: Date | undefined
-    let loopIteration = 0
-    let totalMessagesSent = 0
-    let totalTimeTaken = 0
     let hasNumbersLeft = true
+
     while (hasNumbersLeft) {
-      logger.info(`Iteration ${loopIteration}. Fetching phone numbers...`)
-      const [phoneNumberChunks, newCursor, length] = await step.run(
-        `fetch-users-iteration-${loopIteration}`,
-        () =>
-          fetchPhoneNumbers(
-            (take, innerCursor = cursor) =>
-              getPhoneNumberList(
-                {
-                  where: {
-                    ...userWhereInput,
-                    datetimeCreated: {
-                      gt: innerCursor,
-                    },
-                  },
-                  take,
-                },
-                {
-                  includePendingDoubleOptIn,
-                },
-              ),
-            {
-              chunkSize: TWILIO_RATE_LIMIT,
-              maxLength: queueSizeBySegment,
-              queryLimit: DATABASE_QUERY_LIMIT,
-            },
-          ),
-      )
+      const phoneNumbers = await getPhoneNumberList({
+        includePendingDoubleOptIn,
+        cursor,
+        userWhereInput,
+      })
 
-      cursor = parseISO(newCursor)
+      cursor = phoneNumbers.at(-1)?.datetimeCreated
+      allPhoneNumbers = allPhoneNumbers.concat(phoneNumbers.map(({ phoneNumber }) => phoneNumber))
 
-      const timeInSecondsToSendBatchMessages =
-        (length * segmentsCount) / MESSAGE_SEGMENTS_PER_SECOND
-
-      logger.info(
-        `Fetched ${length} phone numbers. Iteration ${loopIteration} will take ${formatTime(timeInSecondsToSendBatchMessages)} to send all messages`,
-      )
-
-      logger.info('Queuing messages...')
-      totalMessagesSent += await step.run(
-        `enqueue-messages-iteration-${loopIteration}`,
-        async () => {
-          let messagesSent = 0
-          for (const batch of phoneNumberChunks) {
-            messagesSent += await enqueueMessages(batch, smsBody, persist)
-          }
-
-          logger.info(`${loopIteration} iteration queued ${messagesSent} messages`)
-
-          return messagesSent
-        },
-      )
-
-      logger.info(
-        `Queued a total of ${totalMessagesSent} messages. ${estimatedPhoneNumbersCount - totalMessagesSent} estimated messages remaining`,
-      )
-
-      logger.info(`Waiting ${formatTime(timeInSecondsToSendBatchMessages)}...`)
-
-      if (persist) {
-        await step.sleep(
-          `wait-${formatTime(timeInSecondsToSendBatchMessages).replace(' ', '-')}-for-messaging-queue-to-be-empty`,
-          timeInSecondsToSendBatchMessages * 1000,
-        )
-      }
-
-      totalTimeTaken += timeInSecondsToSendBatchMessages
-      logger.info(
-        `Estimated time remaining: ${formatTime(estimatedTimeToSendAllMessages - totalTimeTaken)}. ${totalTimeTaken ? `Already took ${formatTime(totalTimeTaken)}` : ''}`,
-      )
-
-      if (length < queueSizeBySegment) {
+      if (!DATABASE_QUERY_LIMIT || phoneNumbers.length < DATABASE_QUERY_LIMIT) {
         hasNumbersLeft = false
       }
-
-      loopIteration += 1
     }
 
-    logger.info('Finished')
+    // Using uniq here to not send multiple messages to the same phone number
+    const uniquePhoneNumbers = uniq(allPhoneNumbers)
+
+    const totalPhoneNumbers = uniquePhoneNumbers.length
+
+    // Each batch will be used to fill the queue
+    const phoneNumberQueueBatches = chunk(uniquePhoneNumbers, queueSizeBySegment)
+
+    const timeInSecondsToSendAllMessages =
+      (totalPhoneNumbers * segmentsCount) / MESSAGE_SEGMENTS_PER_SECOND
+
+    await step.run('log-infos', () => ({
+      'Time to send all messages': formatTime(timeInSecondsToSendAllMessages),
+      'Total phone numbers': totalPhoneNumbers,
+      'Total batches': phoneNumberQueueBatches.length,
+    }))
+
+    if (!send) {
+      return "Send flag is deactivated. Didn't send any messages"
+    }
+
+    let totalMessagesSent = 0
+    let totalTimeTaken = 0
+    let iteration = 0
+    for (const queueBatch of phoneNumberQueueBatches) {
+      // Split the batch into chunks to not exceed twilio's rate limit
+      const phoneNumberChunks = chunk(queueBatch, TWILIO_RATE_LIMIT)
+
+      totalMessagesSent += await step.run(`enqueue-messages`, async () => {
+        let messagesSent = 0
+        for (const phoneNumbers of phoneNumberChunks) {
+          messagesSent += await enqueueMessages(phoneNumbers, smsBody!)
+        }
+
+        return messagesSent
+      })
+
+      const timeInSecondsToSendBatchMessages =
+        (queueBatch.length * segmentsCount) / MESSAGE_SEGMENTS_PER_SECOND
+
+      await step.sleep(
+        `waiting-${formatTime(timeInSecondsToSendBatchMessages).replace(' ', '-')}-for-messaging-queue-to-be-empty`,
+        timeInSecondsToSendBatchMessages * 1000,
+      )
+
+      totalTimeTaken += timeInSecondsToSendBatchMessages
+
+      iteration += 1
+
+      await step.run('log-infos', () => ({
+        Messages: `${totalMessagesSent}/${totalPhoneNumbers}`,
+        Time: `${formatTime(totalTimeTaken)}/${formatTime(timeInSecondsToSendAllMessages)}`,
+        Iterations: `${iteration}/${phoneNumberQueueBatches.length}`,
+      }))
+    }
+
+    return {
+      Send: `${totalMessagesSent} messages`,
+      Took: formatTime(totalTimeTaken),
+    }
   },
 )
 
@@ -216,32 +153,28 @@ function formatTime(seconds: number) {
 
 interface GetPhoneNumberOptions {
   includePendingDoubleOptIn?: boolean
+  cursor?: Date
+  userWhereInput?: BulkSMSCommunicationJourneyPayload['userWhereInput']
 }
 
-async function getPhoneNumberList(
-  args: Omit<Prisma.UserGroupByArgs, 'by' | 'orderBy'>,
-  options?: GetPhoneNumberOptions,
-) {
+async function getPhoneNumberList(options: GetPhoneNumberOptions) {
   return prismaClient.user.groupBy({
-    ...args,
     by: ['phoneNumber', 'datetimeCreated'],
     where: {
-      ...args.where,
+      ...options.userWhereInput,
+      datetimeCreated: {
+        gte: options.cursor,
+      },
       hasValidPhoneNumber: true,
       smsStatus: {
         in: [
           SMSStatus.OPTED_IN,
           SMSStatus.OPTED_IN_HAS_REPLIED,
-          ...(options?.includePendingDoubleOptIn ? [SMSStatus.OPTED_IN_PENDING_DOUBLE_OPT_IN] : []),
+          ...(options.includePendingDoubleOptIn ? [SMSStatus.OPTED_IN_PENDING_DOUBLE_OPT_IN] : []),
         ],
       },
     },
-    having: {
-      ...args.having,
-      phoneNumber: {
-        not: '',
-      },
-    },
+    take: DATABASE_QUERY_LIMIT,
     orderBy: [{ datetimeCreated: 'asc' }, { phoneNumber: 'asc' }],
   })
 }
