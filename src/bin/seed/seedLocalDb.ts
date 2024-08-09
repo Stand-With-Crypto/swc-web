@@ -16,6 +16,7 @@ import { mockCreateUserActionDonationInput } from '@/mocks/models/mockUserAction
 import { mockCreateUserActionEmailInput } from '@/mocks/models/mockUserActionEmail'
 import { mockCreateUserActionEmailRecipientInput } from '@/mocks/models/mockUserActionEmailRecipient'
 import { mockCreateUserActionOptInInput } from '@/mocks/models/mockUserActionOptIn'
+import { mockCreateUserActionRsvpEventInput } from '@/mocks/models/mockUserActionRsvpEvent'
 import { mockUserActionTweetAtPersonInput } from '@/mocks/models/mockUserActionTweetAtPerson'
 import { mockCreateUserActionVoterRegistrationInput } from '@/mocks/models/mockUserActionVoterRegistration'
 import {
@@ -507,6 +508,24 @@ async function seed() {
   )
   const userActionVoterRegistration = await prismaClient.userActionVoterRegistration.findMany()
   logEntity({ userActionVoterRegistration })
+
+  /*
+  userActionRsvpEvent
+  */
+  await batchAsyncAndLog(
+    userActionsByType[UserActionType.RSVP_EVENT].map(action => {
+      return {
+        ...mockCreateUserActionRsvpEventInput(),
+        id: action.id,
+      }
+    }),
+    data =>
+      prismaClient.userActionRsvpEvent.createMany({
+        data,
+      }),
+  )
+  const userActionRsvpEvents = await prismaClient.userActionRsvpEvent.findMany()
+  logEntity({ userActionRsvpEvents })
 }
 
 void runBin(seed)

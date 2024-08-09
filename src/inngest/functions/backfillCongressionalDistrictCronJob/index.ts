@@ -18,9 +18,9 @@ const BACKFILL_US_CONGRESSIONAL_DISTRICTS_INNGEST_CRON_JOB_SCHEDULE = '0 9 * * *
 const BACKFILL_US_CONGRESSIONAL_DISTRICTS_SLEEP_INTERVAL =
   Number(process.env.BACKFILL_US_CONGRESSIONAL_DISTRICTS_SLEEP_INTERVAL) || 60 * 1000 // 1 minute.
 const BACKFILL_US_CONGRESSIONAL_DISTRICTS_BATCH_SIZE =
-  Number(process.env.BACKFILL_US_CONGRESSIONAL_DISTRICTS_BATCH_SIZE) || 1000 // QPM: 1500
+  Number(process.env.BACKFILL_US_CONGRESSIONAL_DISTRICTS_BATCH_SIZE) || 250 // Our quota is 500 queries per minute
 const MAX_US_CONGRESSIONAL_DISTRICTS_BACKFILL_COUNT =
-  Number(process.env.MAX_US_CONGRESSIONAL_DISTRICTS_BACKFILL_COUNT) || 150000 // QPD: 250000
+  Number(process.env.MAX_US_CONGRESSIONAL_DISTRICTS_BACKFILL_COUNT) || 150000 // Our quota is 250000 queries per day
 
 const logger = getLogger('backfillUsCongressionalDistrictsCronJob')
 export const backfillCongressionalDistrictCronJob = inngest.createFunction(
@@ -116,6 +116,9 @@ async function backfillUsCongressionalDistricts(
       logger.error(
         `Failed to get usCongressionalDistrict for address ${address.id} with code ${usCongressionalDistrict.notFoundReason}`,
       )
+      if (usCongressionalDistrict.notFoundReason === 'CIVIC_API_QUOTA_LIMIT_REACHED') {
+        break
+      }
       if (['CIVIC_API_DOWN', 'UNEXPECTED_ERROR'].includes(usCongressionalDistrict.notFoundReason)) {
         Sentry.captureMessage(`No usCongressionalDistrict found for address ${address.id}`, {
           extra: {

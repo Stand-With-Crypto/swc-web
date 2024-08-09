@@ -10,6 +10,7 @@ export const ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN = [
   UserActionType.NFT_MINT,
   UserActionType.LIVE_EVENT,
   UserActionType.TWEET_AT_PERSON,
+  UserActionType.RSVP_EVENT,
 ] as const
 export type ActiveClientUserActionWithCampaignType =
   (typeof ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN)[number]
@@ -47,6 +48,9 @@ export enum UserActionTweetAtPersonCampaignName {
   DEFAULT = 'DEFAULT',
   '2024_05_22_PIZZA_DAY' = '2024_05_22_PIZZA_DAY',
 }
+export enum UserActionRsvpEventCampaignName {
+  DEFAULT = 'DEFAULT',
+}
 
 export type UserActionCampaignName =
   | UserActionEmailCampaignName
@@ -69,6 +73,7 @@ export type UserActionCampaigns = {
   [UserActionType.VOTER_REGISTRATION]: UserActionVoterRegistrationCampaignName
   [UserActionType.LIVE_EVENT]: UserActionLiveEventCampaignName
   [UserActionType.TWEET_AT_PERSON]: UserActionTweetAtPersonCampaignName
+  [UserActionType.RSVP_EVENT]: UserActionRsvpEventCampaignName
 }
 
 export const USER_ACTION_TO_CAMPAIGN_NAME_MAP = {
@@ -81,6 +86,7 @@ export const USER_ACTION_TO_CAMPAIGN_NAME_MAP = {
   [UserActionType.VOTER_REGISTRATION]: UserActionVoterRegistrationCampaignName,
   [UserActionType.LIVE_EVENT]: UserActionLiveEventCampaignName,
   [UserActionType.TWEET_AT_PERSON]: UserActionTweetAtPersonCampaignName,
+  [UserActionType.RSVP_EVENT]: UserActionRsvpEventCampaignName,
 } satisfies Record<ActiveClientUserActionWithCampaignType, any>
 
 export const USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
@@ -93,6 +99,7 @@ export const USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
   [UserActionType.VOTER_REGISTRATION]: UserActionVoterRegistrationCampaignName.DEFAULT,
   [UserActionType.LIVE_EVENT]: UserActionLiveEventCampaignName['2024_03_04_LA'],
   [UserActionType.TWEET_AT_PERSON]: UserActionTweetAtPersonCampaignName.DEFAULT,
+  [UserActionType.RSVP_EVENT]: UserActionRsvpEventCampaignName.DEFAULT,
 } satisfies Record<ActiveClientUserActionWithCampaignType, string>
 
 type UserActionAdditionalCampaigns = {
