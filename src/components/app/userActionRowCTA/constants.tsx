@@ -11,7 +11,6 @@ import { EMAIL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionForm
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
 import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/dialog'
-import { UserActionFormTweetAtPersonDialog } from '@/components/app/userActionFormTweetAtPerson/dialog'
 import { UserActionFormVoterAttestationDialog } from '@/components/app/userActionFormVoterAttestation/dialog'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
 import { UserActionRowCTAProps } from '@/components/app/userActionRowCTA'
@@ -125,23 +124,6 @@ export const USER_ACTION_ROW_CTA_INFO: Record<
     shortSubtext: 'Follow Stand With Crypto and stay up to date on crypto policy.',
     canBeTriggeredMultipleTimes: true,
     WrapperComponent: UserActionFormShareOnTwitterDialog,
-  },
-  // TODO: Remove
-  [UserActionType.TWEET_AT_PERSON]: {
-    actionType: UserActionType.TWEET_AT_PERSON,
-    image: {
-      src: '/actionTypeIcons/share.svg',
-      width: 40,
-      height: 40,
-      sizes: '(max-width: 768px) 40px, 50px',
-      className: 'object-cover lg:h-[50px] lg:w-[50px]',
-    },
-    text: 'TWEET_AT_PERSON',
-    subtext: 'TWEET_AT_PERSON',
-    shortText: 'TWEET_AT_PERSON',
-    shortSubtext: 'TWEET_AT_PERSON',
-    canBeTriggeredMultipleTimes: true,
-    WrapperComponent: UserActionFormTweetAtPersonDialog,
   },
   [UserActionType.NFT_MINT]: {
     actionType: UserActionType.NFT_MINT,

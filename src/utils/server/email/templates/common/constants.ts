@@ -6,11 +6,13 @@ export enum EmailActiveActions {
   DONATION = 'DONATION',
   NFT_MINT = 'NFT_MINT',
   VOTER_REGISTRATION = 'VOTER_REGISTRATION',
+  VOTER_ATTESTATION = 'VOTER_ATTESTATION',
 }
 
 export enum EmailEnabledActionNFTs {
   CALL = 'CALL',
   VOTER_REGISTRATION = 'VOTER_REGISTRATION',
+  VOTER_ATTESTATION = 'VOTER_ATTESTATION',
 }
 
 export type EmailEnabledActionNFTsNames = `${EmailEnabledActionNFTs}`
@@ -31,6 +33,13 @@ export const ACTIONS_METADATA_BY_TYPE: Record<
     buttonHref: string
   }
 > = {
+  VOTER_ATTESTATION: {
+    image: `/actionTypeIcons/voterAttestation.png`,
+    text: 'Pledge to vote',
+    subtext: 'Pledge to vote for pro-crypto candidates',
+    buttonLabel: 'Pledge',
+    buttonHref: '/action/pledge',
+  },
   EMAIL: {
     image: `/actionTypeIcons/email.png`,
     text: 'Email your Congressperson',
@@ -93,5 +102,9 @@ export const NFT_IMAGES_BY_ACTION: Record<
   VOTER_REGISTRATION: {
     src: '/email/nfts/voter-registration.png',
     alt: 'Voter Registration NFT',
+  },
+  VOTER_ATTESTATION: {
+    src: '/email/nfts/voter-attestation.jpeg',
+    alt: 'Voter Attestation NFT',
   },
 }

@@ -7,7 +7,7 @@ export function UserActionFormVoterAttestationSkeleton() {
     <IntroStaticContent
       nftDisplay={
         <Skeleton
-          className={'mx-auto h-44 w-full max-w-96 overflow-hidden rounded-xl object-cover'}
+          className={'mx-auto h-56 w-full max-w-96 overflow-hidden rounded-xl object-cover'}
         />
       }
     >

@@ -1,7 +1,6 @@
 export enum SectionNames {
   INTRO = 'Intro',
   ADDRESS = 'Address',
-  CHANGE_ADDRESS = 'Change Address',
   PLEDGE = 'Pledge',
   SUCCESS = 'Success',
 }

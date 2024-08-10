@@ -44,7 +44,7 @@ export default function NFTArrivedEmail({
       <Section>
         <Img
           alt={nftImage.alt}
-          className="mb-6 w-full max-w-full"
+          className="mb-6 w-full max-w-full overflow-hidden rounded-3xl"
           src={buildTemplateInternalUrl(nftImage.src, hydratedHrefSearchParams)}
         />
 

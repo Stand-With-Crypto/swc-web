@@ -291,6 +291,7 @@ model UserAction {
   userActionDonation          UserActionDonation?
   userActionOptIn             UserActionOptIn?
   userActionVoterRegistration UserActionVoterRegistration?
+  userActionVoterAttestation  UserActionVoterAttestation?
   userActionTweetAtPerson     UserActionTweetAtPerson?
 
   @@index([datetimeCreated])
@@ -414,6 +415,14 @@ model UserActionVoterRegistration {
   usaState   String?    @map("usa_state")
 
   @@map("user_action_voter_registration")
+}
+
+model UserActionVoterAttestation {
+  id         String     @id @default(uuid())
+  userAction UserAction @relation(fields: [id], references: [id])
+  usaState   String?    @map("usa_state")
+
+  @@map("user_action_voter_attestation")
 }
 
 model UserActionTweetAtPerson {

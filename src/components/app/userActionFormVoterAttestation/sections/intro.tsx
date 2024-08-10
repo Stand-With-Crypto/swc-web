@@ -2,35 +2,26 @@
 import React from 'react'
 
 import { UserActionFormLayout } from '@/components/app/userActionFormCommon/layout'
+import { DialogFooterSection } from '@/components/app/userActionFormVoterAttestation/dialogFooterSection'
+import { NFTDisplay } from '@/components/app/userActionFormVoterAttestation/sections/nftDisplay'
 import { Button } from '@/components/ui/button'
-import { Skeleton } from '@/components/ui/skeleton'
-import { Video } from '@/components/ui/video'
+import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
+import { cn } from '@/utils/web/cn'
 
 interface IntroProps {
   onContinue: () => void
+  isLoading?: boolean
 }
 
-export function Intro({ onContinue }: IntroProps) {
+export function Intro({ onContinue, isLoading }: IntroProps) {
   const ref = React.useRef<HTMLButtonElement>(null)
   React.useEffect(() => {
     ref.current?.focus({ preventScroll: true })
   }, [ref])
   return (
-    <IntroStaticContent
-      nftDisplay={
-        <Video
-          className={'mx-auto w-full max-w-96 overflow-hidden rounded-xl object-cover'}
-          fallback={
-            <Skeleton
-              className={'mx-auto h-44 w-full max-w-96 overflow-hidden rounded-xl object-cover'}
-            />
-          }
-          src="/actionTypeVideos/voterAttestationBanner.mp4"
-        />
-      }
-    >
-      <Button className="w-full" onClick={onContinue} ref={ref}>
-        Get started
+    <IntroStaticContent nftDisplay={<NFTDisplay locked={true} />}>
+      <Button className="w-full" disabled={isLoading} onClick={onContinue} ref={ref}>
+        {isLoading ? 'Loading...' : 'Get started'}
       </Button>
     </IntroStaticContent>
   )
@@ -42,7 +33,7 @@ export function IntroStaticContent({
 }: React.PropsWithChildren<{ nftDisplay: React.ReactNode }>) {
   return (
     <UserActionFormLayout>
-      <UserActionFormLayout.Container className="mb-24">
+      <UserActionFormLayout.Container className={cn(dialogContentPaddingStyles, 'mb-10')}>
         {nftDisplay}
 
         <UserActionFormLayout.Heading
@@ -50,9 +41,9 @@ export function IntroStaticContent({
           title="Pledge to vote this fall and get a free NFTs"
         />
       </UserActionFormLayout.Container>
-      <UserActionFormLayout.Footer>
+      <DialogFooterSection>
         <div className="mx-auto w-full max-w-64">{children}</div>
-      </UserActionFormLayout.Footer>
+      </DialogFooterSection>
     </UserActionFormLayout>
   )
 }

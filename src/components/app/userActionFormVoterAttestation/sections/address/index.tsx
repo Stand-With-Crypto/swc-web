@@ -7,31 +7,21 @@ import useSWR from 'swr'
 
 import { UserActionFormLayout } from '@/components/app/userActionFormCommon/layout'
 import type { VoterAttestationActionSharedData } from '@/components/app/userActionFormVoterAttestation'
-import { SectionNames } from '@/components/app/userActionFormVoterAttestation/constants'
 import { FormFields } from '@/components/app/userActionFormVoterAttestation/types'
 import { Button } from '@/components/ui/button'
-import {
-  Form,
-  FormControl,
-  FormErrorMessage,
-  FormField,
-  FormItem,
-  FormLabel,
-} from '@/components/ui/form'
+import { ErrorMessage } from '@/components/ui/errorMessage'
+import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form'
 import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { InternalLink } from '@/components/ui/link'
-import {
-  getDTSIPeopleFromAddress,
-  useGetDTSIPeopleFromAddress,
-} from '@/hooks/useGetDTSIPeopleFromAddress'
+import { getDTSIPeopleFromAddress } from '@/hooks/useGetDTSIPeopleFromAddress'
 import { useGoogleMapsScript } from '@/hooks/useGoogleMapsScript'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useIsMobile } from '@/hooks/useIsMobile'
-import { USStateCode } from '@/utils/shared/usStateUtils'
 import {
   getYourPoliticianCategoryDisplayName,
   getYourPoliticianCategoryShortDisplayName,
 } from '@/utils/shared/yourPoliticianCategory'
+import { cn } from '@/utils/web/cn'
 import { trackFormSubmissionSyncErrors } from '@/utils/web/formUtils'
 import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
 
@@ -43,20 +33,18 @@ import {
 } from './formConfig'
 
 export interface AddressProps
-  extends Pick<
-    VoterAttestationActionSharedData,
-    'user' | 'onFindUserState' | 'goToSection' | 'goBackSection'
-  > {
+  extends Pick<VoterAttestationActionSharedData, 'user' | 'onFindAddress' | 'goBackSection'> {
   initialValues?: FormFields
   heading?: React.ReactNode
   submitButtonText?: string
+  error?: string
+  isLoading?: boolean
 }
 
 export function Address({
   user,
-  goToSection,
   goBackSection,
-  onFindUserState,
+  onFindAddress,
   initialValues,
   heading = (
     <UserActionFormLayout.Heading
@@ -65,6 +53,8 @@ export function Address({
     />
   ),
   submitButtonText = 'Continue',
+  error,
+  isLoading,
 }: AddressProps) {
   const urls = useIntlUrls()
   const userDefaultValues = useMemo(() => getDefaultValues({ user }), [user])
@@ -78,10 +68,11 @@ export function Address({
   })
 
   const isMobile = useIsMobile({ defaultState: true })
-  const initialAddressOnLoad = useRef(user?.address?.googlePlaceId)
   const inputRef = useRef<HTMLInputElement | null>(null)
+  const errorRef = useRef(error)
+  errorRef.current = error
   useEffect(() => {
-    if (!isMobile) {
+    if (!isMobile && !errorRef.current) {
       inputRef.current?.click()
     }
   }, [form, isMobile])
@@ -91,31 +82,13 @@ export function Address({
     name: 'address',
   })
 
-  const res = useGetDTSIPeopleFromAddress('senate-and-house', address?.description)
-
-  React.useEffect(() => {
-    if (!address || !res.data || 'notFoundReason' in res.data) {
-      // TODO
-      return
-    }
-
-    const stateCode = res.data.dtsiPeople.find(x => x.primaryRole?.primaryState)?.primaryRole
-      ?.primaryState as USStateCode | undefined
-
-    // request from exec - form should auto-advance once the address is filled in
-    if (stateCode) {
-      onFindUserState(stateCode)
-    }
-  }, [form, goToSection, address, initialAddressOnLoad, res.data, onFindUserState])
-
   return (
     <Form {...form}>
       <form
         className="max-md:h-full"
-        onSubmit={form.handleSubmit(
-          () => goToSection(SectionNames.PLEDGE),
-          trackFormSubmissionSyncErrors(FORM_NAME),
-        )}
+        onSubmit={form.handleSubmit(data => {
+          onFindAddress(data.address)
+        }, trackFormSubmissionSyncErrors(FORM_NAME))}
       >
         <UserActionFormLayout onBack={goBackSection}>
           <UserActionFormLayout.Container>
@@ -126,24 +99,27 @@ export function Address({
               name="address"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Address</FormLabel>
-                  <FormControl>
+                  <FormLabel className={cn(!!error && 'text-destructive')}>Address</FormLabel>
+                  <FormControl aria-invalid={!!error}>
                     <GooglePlacesSelect
                       {...field}
-                      onChange={field.onChange}
+                      onChange={newAddress => {
+                        onFindAddress(newAddress)
+                        field.onChange(newAddress)
+                      }}
                       placeholder="Your full address"
                       ref={inputRef}
                       value={field.value}
                     />
                   </FormControl>
-                  <FormErrorMessage />
+                  {!!error && <ErrorMessage>{error}</ErrorMessage>}
                 </FormItem>
               )}
             />
           </UserActionFormLayout.Container>
           <UserActionFormLayout.Footer>
-            <Button disabled={form.formState.isSubmitting || res.isLoading} type="submit">
-              {form.formState.isSubmitting || res.isLoading ? 'Loading...' : submitButtonText}
+            <Button disabled={!address || !!error || isLoading} type="submit">
+              {form.formState.isSubmitting || isLoading ? 'Loading...' : submitButtonText}
             </Button>
 
             <p className="text-sm">
@@ -157,43 +133,4 @@ export function Address({
       </form>
     </Form>
   )
-}
-
-export function ChangeAddress(props: Omit<AddressProps, 'initialValues'>) {
-  return (
-    <Address
-      {...props}
-      heading={<UserActionFormLayout.Heading title="Update your address" />}
-      submitButtonText="Update"
-    />
-  )
-}
-
-export function useUserStateByAddress({
-  address,
-}: {
-  address?: FindVoterAttestationFormValues['address']
-}) {
-  const scriptStatus = useGoogleMapsScript()
-
-  const result = useSWR(
-    address && scriptStatus === 'ready' ? `useCongresspersonData-${address.description}` : null,
-    async () => {
-      if (!address) {
-        return null
-      }
-
-      const dtsiResponse = await getDTSIPeopleFromAddress('house', address.description)
-      if ('notFoundReason' in dtsiResponse) {
-        return { notFoundReason: dtsiResponse.notFoundReason }
-      }
-      const addressSchema = await convertGooglePlaceAutoPredictionToAddressSchema(address)
-      return { ...dtsiResponse, addressSchema }
-    },
-  )
-
-  return {
-    ...result,
-    isLoading: scriptStatus === 'loading' || result.isLoading,
-  }
 }

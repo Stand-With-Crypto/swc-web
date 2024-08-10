@@ -3,7 +3,7 @@ import { object, type z } from 'zod'
 import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
 import { zodGooglePlacesAutocompletePrediction } from '@/validation/fields/zodGooglePlacesAutocompletePrediction'
 
-export const FORM_NAME = 'Call Congressperson - Find your representative'
+export const FORM_NAME = 'Voter Attestation - Address'
 
 export const findVoterAttestationFormValidationSchema = object({
   address: zodGooglePlacesAutocompletePrediction,

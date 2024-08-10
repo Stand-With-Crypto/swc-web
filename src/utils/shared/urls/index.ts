@@ -129,4 +129,11 @@ export const apiUrls = {
   billVote: ({ slug, billId }: { slug: string; billId: string }) =>
     `/api/public/dtsi/bill-vote/${billId}/${slug}`,
   totalAdvocatesPerState: () => '/api/public/advocates-map/total-advocates-per-state',
+  dtsiRacesByCongressionalDistrict: ({
+    stateCode,
+    district,
+  }: {
+    stateCode: string
+    district: number
+  }) => `/api/public/dtsi/races/usa/${stateCode}/${district}`,
 }

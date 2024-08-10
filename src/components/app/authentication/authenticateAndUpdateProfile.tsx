@@ -5,11 +5,16 @@ import { ThirdwebLoginContent } from '@/components/app/authentication/thirdwebLo
 import { UpdateUserProfileForm } from '@/components/app/updateUserProfileForm/step1/control'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
+import { GooglePlaceAutocompletePrediction } from '@/utils/web/googlePlaceUtils'
 import { hasCompleteUserProfile } from '@/utils/web/hasCompleteUserProfile'
 
-interface AuthenticateAndUpdateProfileProps {
+export interface AuthenticateAndUpdateProfileProps {
   children: ReactNode
-  onProfileUpdateSuccess?: (updatedUserFields: { firstName: string; lastName: string }) => void
+  onProfileUpdateSuccess?: (updatedUserFields: {
+    firstName: string
+    lastName: string
+    address: GooglePlaceAutocompletePrediction | null
+  }) => void
 }
 
 export function AuthenticateWithProfileUpdate({

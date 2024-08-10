@@ -26,7 +26,7 @@ export function UserActionFormVoterAttestationDialog({
   const { user } = data ?? { user: null }
 
   return (
-    <UserActionFormDialog {...dialogProps} trigger={children}>
+    <UserActionFormDialog {...dialogProps} padding={false} trigger={children}>
       {isLoading ? (
         <UserActionFormVoterAttestationSkeleton />
       ) : (
