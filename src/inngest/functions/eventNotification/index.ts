@@ -9,7 +9,7 @@ export const sendEventNotificationWithInngest = inngest.createFunction(
     retries: 0,
     onFailure: onScriptFailure,
   },
-  { cron: 'TZ=America/New_York 52 10 * * *' }, // Every day - 9AM EST
+  { cron: 'TZ=America/New_York 0 10 * * *' }, // Every day - 9AM EST
   async ({ step }) => {
     return await step.run('execute-script', async () => {
       return await sendEventNotifications()
