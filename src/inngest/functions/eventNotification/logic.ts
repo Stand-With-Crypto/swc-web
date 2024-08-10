@@ -56,7 +56,6 @@ export async function sendEventNotifications() {
   logger.info(`Sent ${notifications.length} notifications`)
 
   return {
-    dryRun: true,
     notificationsSent: notifications.length,
     notifications,
   } as SendEventNotificationsResponse
@@ -98,7 +97,7 @@ async function getNotificationInformationForEvents(events: SWCEvents) {
     await inngest.send({
       name: BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
       data: {
-        send: true,
+        persist: true,
         smsBody,
         userWhereInput: {
           phoneNumber: {
