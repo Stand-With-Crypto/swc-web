@@ -56,9 +56,7 @@ export function UpcomingEvents({ events }: UpcomingEventsProps) {
 
   return (
     <section className="flex w-full flex-col items-center gap-4 lg:gap-6">
-      <h4 className="text-bold font-sans text-xl text-foreground lg:text-[2rem]">
-        All upcoming events
-      </h4>
+      <h4 className="text-bold font-sans text-xl text-foreground">All upcoming events</h4>
 
       <Select
         onValueChange={state => {

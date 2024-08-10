@@ -27,3 +27,4 @@ export const zodEventSchemaValidation = object({
 export const zodEventsSchemaValidation = array(zodEventSchemaValidation)
 
 export type SWCEvents = Zod.infer<typeof zodEventsSchemaValidation>
+export type SWCEvent = SWCEvents[0]['data']

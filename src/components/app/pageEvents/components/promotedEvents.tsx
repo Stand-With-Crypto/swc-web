@@ -1,5 +1,6 @@
 import Balancer from 'react-wrap-balancer'
 
+import { EventDialog } from '@/components/app/pageEvents/components/eventDialog'
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { SWCEvents } from '@/utils/shared/getSWCEvents'
@@ -31,17 +32,21 @@ export function PromotedEvents({ events }: PromotedEventsProps) {
             />
           </div>
 
-          <div className="grid gap-2">
-            <h4 className="text-bold font-sans text-xl text-foreground">{event.data.name}</h4>
-            <p className="font-mono text-base text-muted-foreground">
+          <div className="grid justify-items-center gap-2 lg:justify-items-start">
+            <h4 className="text-bold font-sans text-base text-foreground">{event.data.name}</h4>
+            <p className="line-clamp-3 font-mono text-base text-muted-foreground">
               <Balancer>{event.data.description}</Balancer>
             </p>
 
-            <Button asChild className="mt-2 w-full lg:mt-4 lg:w-fit" variant="secondary">
-              <a href={event.data.rsvpUrl} target="_blank">
-                RSVP
-              </a>
-            </Button>
+            <EventDialog
+              event={event.data}
+              trigger={
+                <Button asChild className="mt-2 w-full lg:mt-4 lg:w-fit" variant="secondary">
+                  <span>Learn more</span>
+                </Button>
+              }
+              triggerClassName="w-fit"
+            />
           </div>
         </div>
       ))}

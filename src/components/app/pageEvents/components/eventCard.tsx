@@ -2,10 +2,10 @@ import { format } from 'date-fns'
 
 import { EventDialog } from '@/components/app/pageEvents/components/eventDialog'
 import { NextImage } from '@/components/ui/image'
-import { SWCEvents } from '@/utils/shared/getSWCEvents'
+import { SWCEvent } from '@/utils/shared/getSWCEvents'
 
 interface EventCardProps {
-  event: SWCEvents[0]['data']
+  event: SWCEvent
 }
 
 export function EventCard({ event }: EventCardProps) {
@@ -16,7 +16,7 @@ function EventCardContent({ event }: EventCardProps) {
   const formattedEventDate = format(new Date(event.datetime), 'MMMM d, yyyy')
 
   return (
-    <div className="flex w-full max-w-[856px] flex-col gap-2 rounded-2xl bg-backgroundAlternate p-6 pt-4 text-left lg:flex-row lg:items-center">
+    <div className="flex w-full max-w-[856px] flex-col gap-2 rounded-2xl bg-backgroundAlternate p-6 pt-4 text-left transition hover:drop-shadow-lg lg:flex-row lg:items-center">
       <NextImage
         alt={`${event.state} shield`}
         className="mb-2 lg:mb-0"

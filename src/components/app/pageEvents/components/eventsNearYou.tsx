@@ -21,9 +21,7 @@ export function EventsNearYou({ events }: EventsNearYouProps) {
 
   return (
     <section className="grid w-full items-center gap-4 lg:gap-6">
-      <h4 className="text-bold text-center font-sans text-xl text-foreground lg:text-[2rem]">
-        Events near you
-      </h4>
+      <h4 className="text-bold text-center font-sans text-xl text-foreground">Events near you</h4>
 
       {formattedAddress && (
         <p className="text-center">

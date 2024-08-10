@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-import { StateEventsDialog } from '@/components/app/pageEvents/components/stateEventsDialog'
+import { StateEventsDialogContent } from '@/components/app/pageEvents/components/stateEventsDialogContent'
 import { EventsPageDialogDeeplinkLayout } from '@/components/app/pageEvents/eventsPageDialogDeeplinkLayout'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
@@ -38,7 +38,7 @@ export default async function StateEventsPageRoot({ params }: Props) {
 
   return (
     <EventsPageDialogDeeplinkLayout pageParams={params}>
-      <StateEventsDialog state={state} />
+      <StateEventsDialogContent state={state} />
     </EventsPageDialogDeeplinkLayout>
   )
 }

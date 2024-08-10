@@ -4,7 +4,7 @@ import { format } from 'date-fns'
 
 import { EventDialog } from '@/components/app/pageEvents/components/eventDialog'
 import { NextImage } from '@/components/ui/image'
-import { SWCEvents } from '@/utils/shared/getSWCEvents'
+import { SWCEvent, SWCEvents } from '@/utils/shared/getSWCEvents'
 import { pluralize } from '@/utils/shared/pluralize'
 import { US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
 
@@ -55,14 +55,14 @@ export function StateEventsDialogContent({ state, events }: StateEventsDialogPro
 }
 
 interface StateDialogEventCardProps {
-  event: SWCEvents[0]['data']
+  event: SWCEvent
 }
 
 function StateDialogEventCard({ event }: StateDialogEventCardProps) {
   const formattedEventDate = format(new Date(event.datetime), 'MMMM d, yyyy')
 
   return (
-    <div className="flex w-full max-w-[856px] flex-col gap-2 rounded-2xl bg-backgroundAlternate p-6 pt-4 lg:flex-row lg:items-center lg:p-4 lg:pt-4">
+    <div className="flex w-full max-w-[856px] flex-col gap-2 rounded-2xl bg-backgroundAlternate p-6 pt-4 transition hover:bg-backgroundAlternate/60 lg:flex-row lg:items-center lg:p-4 lg:pt-4">
       <NextImage
         alt={`${event.state} shield`}
         className="mb-2 lg:mb-0"

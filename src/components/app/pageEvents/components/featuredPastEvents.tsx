@@ -16,7 +16,7 @@ export function FeaturedPastEvents({ events }: FeaturedPastEventsProps) {
 
   return (
     <section className="grid w-full gap-4">
-      <h4 className="text-bold mb-2 text-center font-sans text-xl text-foreground lg:text-[2rem]">
+      <h4 className="text-bold mb-2 text-center font-sans text-xl text-foreground">
         Featured past events
       </h4>
 

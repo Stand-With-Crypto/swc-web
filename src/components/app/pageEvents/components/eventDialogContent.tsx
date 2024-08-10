@@ -5,7 +5,7 @@ import Balancer from 'react-wrap-balancer'
 import { GoogleMapsEmbed } from '@next/third-parties/google'
 import { UserActionType } from '@prisma/client'
 import { format } from 'date-fns'
-import { Clock, Pin } from 'lucide-react'
+import { Clock, Facebook, Link, Mail, Pin, Twitter } from 'lucide-react'
 import { toast } from 'sonner'
 
 import {
@@ -14,8 +14,10 @@ import {
 } from '@/actions/actionCreateUserActionRsvpEvent'
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
+import { useCopyTextToClipboard } from '@/hooks/useCopyTextToClipboard'
+import { useIsMobile } from '@/hooks/useIsMobile'
 import { useSections } from '@/hooks/useSections'
-import { SWCEvents } from '@/utils/shared/getSWCEvents'
+import { SWCEvent } from '@/utils/shared/getSWCEvents'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
@@ -33,7 +35,7 @@ export enum SectionNames {
 }
 
 interface EventDialogContentProps {
-  event: SWCEvents[0]['data']
+  event: SWCEvent
 }
 
 export function EventDialogContent({ event }: EventDialogContentProps) {
@@ -58,7 +60,7 @@ function EventInformation({
   event,
   onNotificationActivation,
 }: {
-  event: SWCEvents[0]['data']
+  event: SWCEvent
   onNotificationActivation: () => void
 }) {
   const [isCreatingRsvpEventAction, setIsCreatingRsvpEventAction] = useState(false)
@@ -140,7 +142,9 @@ function EventInformation({
         src={`/stateShields/${event.state}.png`}
         width={100}
       />
-      <h3 className="font-sans text-xl font-bold">{event.name}</h3>
+      <h3 className="text-center font-sans text-xl font-bold">
+        <Balancer>{event.name}</Balancer>
+      </h3>
       <p className="text-center font-mono text-base text-muted-foreground">
         <Balancer>{event.description}</Balancer>
       </p>
@@ -153,7 +157,9 @@ function EventInformation({
 
       <GoogleMapsEmbedIFrame address={event.formattedAddress} />
 
-      <div className="mt-auto flex w-full flex-col-reverse items-center justify-end gap-3 lg:mt-4 lg:flex-row">
+      <SocialLinks eventSlug={event.slug} eventState={event.state} />
+
+      <div className="mt-8 flex w-full flex-col items-center justify-end gap-3 lg:flex-row">
         <Button
           className="w-full lg:w-auto"
           disabled={isCreatingRsvpEventAction}
@@ -193,16 +199,67 @@ function SuccessfulEventNotificationsSignup() {
   )
 }
 
+function SocialLinks({ eventState, eventSlug }: { eventState: string; eventSlug: string }) {
+  const [_, handleCopyToClipboard] = useCopyTextToClipboard()
+  const eventDeeplink = `https://standwithcrypto.org/events/${eventState.toLowerCase()}/${eventSlug}`
+
+  return (
+    <div className="mt-8 flex flex-col gap-6">
+      <h5 className="text-center font-mono text-base font-bold">Share</h5>
+
+      <div className="flex items-center justify-center gap-2">
+        <Button
+          onClick={() => {
+            handleCopyToClipboard(eventDeeplink)
+          }}
+          variant="link"
+        >
+          <Link size={20} />
+        </Button>
+
+        <Button asChild variant="link">
+          {/* // TODO: Get the right copy */}
+          <a
+            href={`mailto:?subject=Stand With Crypto Event&body=Check out this event: ${eventDeeplink}`}
+          >
+            <Mail size={20} />
+          </a>
+        </Button>
+
+        <Button asChild variant="link">
+          {/* // TODO: Get the right copy */}
+          <a
+            href={`http://twitter.com/share?url=${eventDeeplink}&hashtags=StandWithCrypto,Event&text=Check out this event`}
+            target="_blank"
+          >
+            <Twitter size={20} />
+          </a>
+        </Button>
+
+        <Button asChild variant="link">
+          {/* // TODO: Get the right copy */}
+          <a href={`https://www.facebook.com/sharer.php?u=${eventDeeplink}`} target="_blank">
+            <Facebook size={20} />
+          </a>
+        </Button>
+      </div>
+    </div>
+  )
+}
+
 // This component is memoized because it was blinking on rerender.
 const GoogleMapsEmbedIFrame = memo(({ address }: { address: string }) => {
+  const isMobile = useIsMobile()
+  const width = isMobile ? window.innerWidth - 48 : 466
+
   return (
-    <div className="flex justify-center">
+    <div className="flex items-center justify-center">
       <GoogleMapsEmbed
         apiKey={NEXT_PUBLIC_GOOGLE_CIVIC_API_KEY}
         height={420}
         mode="place"
         q={address.replace(' ', '+')}
-        width={466}
+        width={width}
       />
     </div>
   )

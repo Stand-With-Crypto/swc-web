@@ -18,7 +18,7 @@ export function EventsIntro() {
         </p>
       </div>
 
-      <div className="mt-20">
+      <div className="mt-20 flex flex-col items-center gap-4">
         <h4 className="text-center font-sans text-xl text-foreground">The Swing State Tour 2024</h4>
         <p className="text-center font-mono text-base text-muted-foreground">
           <Balancer>
