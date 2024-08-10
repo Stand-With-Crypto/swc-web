@@ -43,6 +43,7 @@ const fetchFromPrisma = async (config: RecentActivityConfig) => {
       userActionVoterRegistration: true,
       userActionTweetAtPerson: true,
       userActionVoterAttestation: true,
+      userActionRsvpEvent: true,
     },
   })
 }

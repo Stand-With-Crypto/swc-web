@@ -65,7 +65,7 @@ export function DTSIPersonHeroCardFooter({
       className={cn(
         'p-4 text-center font-bold text-fontcolor',
         isRecommended ? recommendedClasses : notRecommendedClasses,
-        !forceMobile && 'sm:p-6 md:text-lg',
+        !forceMobile && 'sm:px-3 sm:py-6 sm:text-sm xl:p-6 xl:text-lg',
         className,
       )}
     >

@@ -35,7 +35,7 @@ export const dtsiPersonPoliticalAffiliationCategoryDisplayName = (
 ) => {
   switch (category) {
     case DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT:
-      return 'Democrat'
+      return 'Democratic'
     case DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN:
       return 'Republican'
     case DTSI_PersonPoliticalAffiliationCategory.INDEPENDENT:

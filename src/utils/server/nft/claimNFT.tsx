@@ -34,6 +34,7 @@ import {
   UserActionLiveEventCampaignName,
   UserActionNftMintCampaignName,
   UserActionOptInCampaignName,
+  UserActionRsvpEventCampaignName,
   UserActionTweetAtPersonCampaignName,
   UserActionTweetCampaignName,
   UserActionVoterAttestationCampaignName,
@@ -78,6 +79,9 @@ export const ACTION_NFT_SLUG: Record<
   },
   [UserActionType.VOTER_ATTESTATION]: {
     [UserActionVoterAttestationCampaignName.DEFAULT]: NFTSlug.VOTER_ATTESTATION,
+  },
+  [UserActionType.RSVP_EVENT]: {
+    [UserActionRsvpEventCampaignName.DEFAULT]: null,
   },
 }
 

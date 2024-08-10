@@ -1,6 +1,9 @@
 import { groupBy } from 'lodash-es'
 
-import { DTSI_PersonRoleCategory } from '@/data/dtsi/generated'
+import {
+  DTSI_PersonPoliticalAffiliationCategory,
+  DTSI_PersonRoleCategory,
+} from '@/data/dtsi/generated'
 import { QueryDTSILocationUnitedStatesInformationData } from '@/data/dtsi/queries/queryDTSILocationUnitedStatesInformation'
 import { formatSpecificRoleDTSIPerson } from '@/utils/dtsi/specificRoleDTSIPerson'
 import { USStateCode } from '@/utils/shared/usStateUtils'
@@ -59,8 +62,26 @@ export function organizePeople({
     },
     {} as GroupedRaces,
   )
-
-  formattedPresident.sort((a, b) => (a.isIncumbent === b.isIncumbent ? 0 : a.isIncumbent ? -1 : 1))
+  const partyOrder = [
+    DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN,
+    DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT,
+    DTSI_PersonPoliticalAffiliationCategory.INDEPENDENT,
+  ]
+  formattedPresident.sort((a, b) => {
+    const aPartyIndex = a.politicalAffiliationCategory
+      ? partyOrder.indexOf(a.politicalAffiliationCategory)
+      : -1
+    const bPartyIndex = b.politicalAffiliationCategory
+      ? partyOrder.indexOf(b.politicalAffiliationCategory)
+      : -1
+    if (aPartyIndex !== bPartyIndex) {
+      return aPartyIndex - bPartyIndex
+    }
+    if (a.primaryRole?.roleCategory !== b.primaryRole?.roleCategory) {
+      return a.primaryRole?.roleCategory === DTSI_PersonRoleCategory.PRESIDENT ? -1 : 1
+    }
+    return 0
+  })
 
   return { president: formattedPresident, keyRaces: sortedGroupedKeyRaces }
 }

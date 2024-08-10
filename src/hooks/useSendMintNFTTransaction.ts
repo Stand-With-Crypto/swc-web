@@ -4,8 +4,8 @@ import { isPlainObject } from 'lodash-es'
 import { getContract } from 'thirdweb'
 import { base } from 'thirdweb/chains'
 import { claimTo } from 'thirdweb/extensions/erc721'
-import { useActiveAccount } from 'thirdweb/react'
 
+import { useThirdwebAuthUser } from '@/hooks/useAuthUser'
 import { logger } from '@/utils/shared/logger'
 import { thirdwebClient } from '@/utils/shared/thirdwebClient'
 import { safeStringify } from '@/utils/web/safeStringify'
@@ -29,7 +29,8 @@ export function useSendMintNFTTransaction({
     })
   }, [contractAddress])
 
-  const account = useActiveAccount()
+  const { user } = useThirdwebAuthUser()
+  const address = user?.address
 
   const [transactionHash, setTransactionHash] = React.useState<string | null>(null)
 
@@ -48,10 +49,10 @@ export function useSendMintNFTTransaction({
   const prepareTransaction = React.useCallback(async () => {
     return claimTo({
       contract,
-      to: account?.address ?? '',
+      to: address ?? '',
       quantity: BigInt(quantity),
     })
-  }, [quantity, account?.address, contract])
+  }, [quantity, address, contract])
 
   return {
     prepareTransaction,

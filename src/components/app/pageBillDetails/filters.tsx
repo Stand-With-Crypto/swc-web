@@ -47,7 +47,7 @@ export type PARTY_OPTION = (typeof PARTY_OPTIONS)[number]
 export const PARTY_OPTIONS_DISPLAY_NAME: Record<PARTY_OPTION, string> = {
   All: 'All',
   [DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN]: 'Republican',
-  [DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT]: 'Democrat',
+  [DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT]: 'Democratic',
 }
 
 export type FILTER_KEYS = {

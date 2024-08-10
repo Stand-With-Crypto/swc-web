@@ -193,6 +193,9 @@ async function createNewUser(payment: CoinbaseCommercePayment) {
     },
     data: {
       referralId: generateReferralId(),
+      userSessions: {
+        create: { id: payment.event.data.metadata.sessionId },
+      },
       hasOptedInToEmails: false,
       hasOptedInToSms: false,
       hasRepliedToOptInSms: false,

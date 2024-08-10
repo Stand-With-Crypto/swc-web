@@ -262,6 +262,7 @@ enum UserActionType {
   LIVE_EVENT
   TWEET_AT_PERSON
   VOTER_ATTESTATION
+  RSVP_EVENT
 }
 
 model UserAction {
@@ -293,6 +294,7 @@ model UserAction {
   userActionVoterRegistration UserActionVoterRegistration?
   userActionVoterAttestation  UserActionVoterAttestation?
   userActionTweetAtPerson     UserActionTweetAtPerson?
+  userActionRsvpEvent         UserActionRsvpEvent?
 
   @@index([datetimeCreated])
   @@index([userId, actionType, campaignName])
@@ -431,6 +433,17 @@ model UserActionTweetAtPerson {
   recipientDtsiSlug String?    @map("recipient_dtsi_slug")
 
   @@map("user_action_tweet_at_person")
+}
+
+model UserActionRsvpEvent {
+  id                         String     @id @default(uuid())
+  eventSlug                  String     @map("event_slug")
+  eventState                 String     @map("event_state")
+  shouldReceiveNotifications Boolean    @map("should_receive_notifications")
+  userAction                 UserAction @relation(fields: [id], references: [id])
+
+  @@index([eventSlug, eventState])
+  @@map("user_action_rsvp_event")
 }
 
 enum UserCommunicationJourneyType {

@@ -267,7 +267,7 @@ export async function onNewLogin(props: NewLoginParams) {
   let wasUserCreated = false
   if (!maybeUser) {
     log(`createUser: creating user`)
-    maybeUser = await createUser({ localUser })
+    maybeUser = await createUser({ localUser, sessionId: props.getUserSessionId() })
     wasUserCreated = true
   } else {
     log(`createUser: no users to create`)
@@ -471,7 +471,13 @@ function findUsersToMerge(
   return { userToKeep, usersToDelete }
 }
 
-async function createUser({ localUser }: { localUser: ServerLocalUser | null }) {
+async function createUser({
+  localUser,
+  sessionId,
+}: {
+  localUser: ServerLocalUser | null
+  sessionId: string | null
+}) {
   return prismaClient.user.create({
     include: {
       address: true,
@@ -486,6 +492,9 @@ async function createUser({ localUser }: { localUser: ServerLocalUser | null }) 
       hasOptedInToSms: false,
       hasRepliedToOptInSms: false,
       referralId: generateReferralId(),
+      userSessions: {
+        create: { id: sessionId ?? undefined },
+      },
       ...mapLocalUserToUserDatabaseFields(localUser),
     },
   })
