@@ -18,7 +18,6 @@ interface Notification {
 }
 
 interface SendEventNotificationsResponse {
-  dryRun: boolean
   notificationsSent: number
   notifications: Array<Notification>
 }
@@ -27,7 +26,8 @@ export async function sendEventNotifications() {
   const allEvents = await getEvents()
 
   if (!allEvents || !allEvents.length) {
-    throw new Error('No events found')
+    logger.info('Could not load events from Builder.IO. Ending the script...')
+    return
   }
 
   const now = startOfDay(new Date())
