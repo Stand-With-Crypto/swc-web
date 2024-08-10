@@ -3,7 +3,6 @@
 import React, { useEffect, useMemo, useRef } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import useSWR from 'swr'
 
 import { UserActionFormLayout } from '@/components/app/userActionFormCommon/layout'
 import type { VoterAttestationActionSharedData } from '@/components/app/userActionFormVoterAttestation'
@@ -13,8 +12,6 @@ import { ErrorMessage } from '@/components/ui/errorMessage'
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form'
 import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { InternalLink } from '@/components/ui/link'
-import { getDTSIPeopleFromAddress } from '@/hooks/useGetDTSIPeopleFromAddress'
-import { useGoogleMapsScript } from '@/hooks/useGoogleMapsScript'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import {
@@ -23,7 +20,6 @@ import {
 } from '@/utils/shared/yourPoliticianCategory'
 import { cn } from '@/utils/web/cn'
 import { trackFormSubmissionSyncErrors } from '@/utils/web/formUtils'
-import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
 
 import {
   findVoterAttestationFormValidationSchema,

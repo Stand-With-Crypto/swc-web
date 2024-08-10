@@ -89,7 +89,7 @@ export function PledgeSection({
                       forceMobile
                       locale={locale}
                       people={senate}
-                      title={`U.S. Senate Race (${stateCode})`}
+                      title={`U.S. Senate Race${stateCode ? ` (${stateCode})` : ''}`}
                       titleProps={{
                         size: 'xs',
                       }}
@@ -106,7 +106,7 @@ export function PledgeSection({
                       forceMobile
                       locale={locale}
                       people={congressional}
-                      title={`Congressional District ${districtNumber}`}
+                      title={`Congressional District${districtNumber ? ` ${districtNumber}` : ''}`}
                       titleProps={{
                         size: 'xs',
                       }}
