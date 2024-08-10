@@ -77,7 +77,7 @@ export const ACTION_NFT_SLUG: Record<
     [UserActionTweetAtPersonCampaignName['2024_05_22_PIZZA_DAY']]: NFTSlug.PIZZA_DAY_2024_05_22,
   },
   [UserActionType.VOTER_ATTESTATION]: {
-    [UserActionVoterAttestationCampaignName.DEFAULT]: null, // TODO: Change me
+    [UserActionVoterAttestationCampaignName.DEFAULT]: NFTSlug.VOTER_ATTESTATION,
   },
 }
 
