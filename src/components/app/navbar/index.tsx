@@ -50,6 +50,10 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
       text: 'Partners',
     },
     {
+      href: urls.events(),
+      text: 'Events',
+    },
+    {
       href: urls.resources(),
       text: 'Resources',
       children: [
