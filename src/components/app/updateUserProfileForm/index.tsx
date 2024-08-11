@@ -50,7 +50,8 @@ export function UpdateUserProfileFormContainer({
     return (
       <UpdateUserProfileFormExperimentTesting
         onSuccess={newFields => {
-          setStatefulUser({ ...user, ...newFields })
+          const { address: _, ...updatedFields } = newFields
+          setStatefulUser(prev => ({ ...prev, ...updatedFields }))
           void mutate(apiUrls.userFullProfileInfo())
           sections.goToSection(UserProfileFormSections.InformationVisibility)
           if (skipSections?.includes(UserProfileFormSections.InformationVisibility)) {
