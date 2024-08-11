@@ -1,36 +1,33 @@
 'use client'
 
-import { memo, useState } from 'react'
+import { useState } from 'react'
 import Balancer from 'react-wrap-balancer'
-import { GoogleMapsEmbed } from '@next/third-parties/google'
 import { UserActionType } from '@prisma/client'
 import { format } from 'date-fns'
-import { Clock, Facebook, Link, Mail, Pin, Twitter } from 'lucide-react'
+import { Clock, Pin } from 'lucide-react'
 import { toast } from 'sonner'
 
 import {
   actionCreateUserActionRsvpEvent,
   CreateActionRsvpEventInput,
 } from '@/actions/actionCreateUserActionRsvpEvent'
+import { EventDialogPhoneNumber } from '@/components/app/pageEvents/components/eventDialogPhoneNumber'
+import { EventDialogSocialLinks } from '@/components/app/pageEvents/components/eventDialogSocialLinks'
+import { GoogleMapsEmbedIFrame } from '@/components/app/pageEvents/components/eventGoogleMapsEmbedIframe'
+import { SuccessfulEventNotificationsSignup } from '@/components/app/pageEvents/components/successfulEventSignupDialog'
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
-import { useCopyTextToClipboard } from '@/hooks/useCopyTextToClipboard'
-import { useIsMobile } from '@/hooks/useIsMobile'
+import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useSections } from '@/hooks/useSections'
 import { SWCEvent } from '@/utils/shared/getSWCEvents'
-import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
 import { toastGenericError } from '@/utils/web/toastUtils'
 
-const NEXT_PUBLIC_GOOGLE_CIVIC_API_KEY = requiredEnv(
-  process.env.NEXT_PUBLIC_GOOGLE_CIVIC_API_KEY,
-  'NEXT_PUBLIC_GOOGLE_CIVIC_API_KEY',
-)
-
 export enum SectionNames {
   EVENT_INFO = 'Event Information',
+  PHONE_SECTION = 'Phone Section',
   NOTIFICATION_ACTIVATED = 'Event Notification Activated',
 }
 
@@ -39,39 +36,21 @@ interface EventDialogContentProps {
 }
 
 export function EventDialogContent({ event }: EventDialogContentProps) {
+  const { data: userFullProfileInfoResponse } = useApiResponseForUserFullProfileInfo()
+  const { user } = userFullProfileInfoResponse ?? { user: null }
+  const hasPhoneInformation = !!user?.phoneNumber
+  const [isCreatingRsvpEventAction, setIsCreatingRsvpEventAction] = useState(false)
+
   const sectionProps = useSections({
     sections: Object.values(SectionNames),
     initialSectionId: SectionNames.EVENT_INFO,
     analyticsName: 'Event Details Dialog',
   })
 
-  if (sectionProps.currentSection === SectionNames.NOTIFICATION_ACTIVATED) {
-    return <SuccessfulEventNotificationsSignup />
-  }
-  return (
-    <EventInformation
-      event={event}
-      onNotificationActivation={() => sectionProps.goToSection(SectionNames.NOTIFICATION_ACTIVATED)}
-    />
-  )
-}
-
-function EventInformation({
-  event,
-  onNotificationActivation,
-}: {
-  event: SWCEvent
-  onNotificationActivation: () => void
-}) {
-  const [isCreatingRsvpEventAction, setIsCreatingRsvpEventAction] = useState(false)
-  const formattedEventDate = format(new Date(event.datetime), 'EEEE M/d h:mm a')
-
   async function handleCreateRsvpAction({
     shouldReceiveNotifications,
-    onSuccessCallback,
   }: {
     shouldReceiveNotifications: boolean
-    onSuccessCallback: () => void
   }) {
     setIsCreatingRsvpEventAction(true)
 
@@ -107,31 +86,63 @@ function EventInformation({
         }),
     )
 
-    if (result.status === 'success') {
-      onSuccessCallback()
-    } else {
+    if (result.status !== 'success') {
       toastGenericError()
     }
     setIsCreatingRsvpEventAction(false)
   }
 
-  async function handleGetUpdatesButtonClick() {
+  async function handleGetUpdates() {
     await handleCreateRsvpAction({
       shouldReceiveNotifications: true,
-      onSuccessCallback: onNotificationActivation,
     })
 
     toast.success('Thank you for your interest! We will send you a reminder closer to the event.')
+    sectionProps.goToSection(SectionNames.NOTIFICATION_ACTIVATED)
   }
 
   async function handleRSVPButtonClick() {
     await handleCreateRsvpAction({
       shouldReceiveNotifications: false,
-      onSuccessCallback: () => {
-        window.open(event.rsvpUrl, '_blank')
-      },
     })
+
+    window.open(event.rsvpUrl, '_blank')
   }
+
+  if (sectionProps.currentSection === SectionNames.NOTIFICATION_ACTIVATED) {
+    return <SuccessfulEventNotificationsSignup />
+  }
+
+  if (sectionProps.currentSection === SectionNames.PHONE_SECTION) {
+    return <EventDialogPhoneNumber onSuccess={handleGetUpdates} />
+  }
+
+  return (
+    <EventInformation
+      event={event}
+      handleGetUpdatesButtonClick={async () => {
+        if (!hasPhoneInformation) return sectionProps.goToSection(SectionNames.PHONE_SECTION)
+
+        await handleGetUpdates()
+      }}
+      handleRSVPButtonClick={handleRSVPButtonClick}
+      isCreatingRsvpEventAction={isCreatingRsvpEventAction}
+    />
+  )
+}
+
+function EventInformation({
+  event,
+  isCreatingRsvpEventAction,
+  handleGetUpdatesButtonClick,
+  handleRSVPButtonClick,
+}: {
+  event: SWCEvent
+  isCreatingRsvpEventAction: boolean
+  handleGetUpdatesButtonClick: () => Promise<void>
+  handleRSVPButtonClick: () => Promise<void>
+}) {
+  const formattedEventDate = format(new Date(event.datetime), 'EEEE M/d h:mm a')
 
   return (
     <div className="flex h-full flex-col items-center gap-2">
@@ -157,9 +168,9 @@ function EventInformation({
 
       <GoogleMapsEmbedIFrame address={event.formattedAddress} />
 
-      <SocialLinks eventSlug={event.slug} eventState={event.state} />
+      <EventDialogSocialLinks eventSlug={event.slug} eventState={event.state} />
 
-      <div className="mt-8 flex w-full flex-col items-center justify-end gap-3 lg:flex-row">
+      <div className="mt-4 flex w-full flex-col items-center justify-end gap-3 lg:flex-row">
         <Button
           className="w-full lg:w-auto"
           disabled={isCreatingRsvpEventAction}
@@ -179,90 +190,3 @@ function EventInformation({
     </div>
   )
 }
-
-function SuccessfulEventNotificationsSignup() {
-  return (
-    <div className="flex flex-col items-center gap-2 pb-4">
-      <NextImage
-        alt="SWC shield"
-        className="mb-2 lg:mb-0"
-        height={120}
-        src="/shields/purple.svg"
-        width={120}
-      />
-
-      <h3 className="mt-6 font-sans text-xl font-bold">You signed up for updates!</h3>
-      <p className="text-center font-mono text-base text-muted-foreground">
-        We’ll send you text updates on this event and other similar events in your area.
-      </p>
-    </div>
-  )
-}
-
-function SocialLinks({ eventState, eventSlug }: { eventState: string; eventSlug: string }) {
-  const [_, handleCopyToClipboard] = useCopyTextToClipboard()
-  const eventDeeplink = `https://standwithcrypto.org/events/${eventState.toLowerCase()}/${eventSlug}`
-
-  return (
-    <div className="mt-8 flex flex-col gap-6">
-      <h5 className="text-center font-mono text-base font-bold">Share</h5>
-
-      <div className="flex items-center justify-center gap-2">
-        <Button
-          onClick={() => {
-            handleCopyToClipboard(eventDeeplink)
-          }}
-          variant="link"
-        >
-          <Link size={20} />
-        </Button>
-
-        <Button asChild variant="link">
-          {/* // TODO: Get the right copy */}
-          <a
-            href={`mailto:?subject=Stand With Crypto Event&body=Check out this event: ${eventDeeplink}`}
-          >
-            <Mail size={20} />
-          </a>
-        </Button>
-
-        <Button asChild variant="link">
-          {/* // TODO: Get the right copy */}
-          <a
-            href={`http://twitter.com/share?url=${eventDeeplink}&hashtags=StandWithCrypto,Event&text=Check out this event`}
-            target="_blank"
-          >
-            <Twitter size={20} />
-          </a>
-        </Button>
-
-        <Button asChild variant="link">
-          {/* // TODO: Get the right copy */}
-          <a href={`https://www.facebook.com/sharer.php?u=${eventDeeplink}`} target="_blank">
-            <Facebook size={20} />
-          </a>
-        </Button>
-      </div>
-    </div>
-  )
-}
-
-// This component is memoized because it was blinking on rerender.
-const GoogleMapsEmbedIFrame = memo(({ address }: { address: string }) => {
-  const isMobile = useIsMobile()
-  const width = isMobile ? window.innerWidth - 48 : 466
-
-  return (
-    <div className="flex items-center justify-center">
-      <GoogleMapsEmbed
-        apiKey={NEXT_PUBLIC_GOOGLE_CIVIC_API_KEY}
-        height={420}
-        mode="place"
-        q={address.replace(' ', '+')}
-        width={width}
-      />
-    </div>
-  )
-})
-
-GoogleMapsEmbedIFrame.displayName = 'GoogleMapsEmbedIFrame'
