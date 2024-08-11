@@ -5,6 +5,7 @@ import {
   EmailIcon,
   IconProps,
   JoinIcon,
+  VoterAttestationIcon,
   VoterRegIcon,
 } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapIcons'
 
@@ -99,5 +100,11 @@ export const ADVOCATES_ACTIONS: Partial<
     label: 'registered to vote',
     labelMobile: 'reg. to vote',
     labelActionTooltip: 'registered to vote',
+  },
+  VOTER_ATTESTATION: {
+    icon: VoterAttestationIcon,
+    label: 'pledged to vote',
+    labelMobile: 'pledged to vote',
+    labelActionTooltip: 'pledged to vote pro-crypto',
   },
 }

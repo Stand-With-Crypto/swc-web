@@ -310,3 +310,89 @@ export function VoterRegIcon({ isPulsing = false, height = 40, width = 40, ...re
     </svg>
   )
 }
+
+export function VoterAttestationIcon({
+  isPulsing = false,
+  height = 40,
+  width = 40,
+  ...rest
+}: IconProps) {
+  return (
+    <svg
+      fill="none"
+      height={height}
+      style={{
+        position: 'relative',
+        overflow: 'visible',
+      }}
+      viewBox="0 0 40 40"
+      width={width}
+      xmlns="http://www.w3.org/2000/svg"
+      {...rest}
+    >
+      <rect fill="#2A9D8F" height="40" rx="20" width="40" />
+      <g clipPath="url(#clip0_4101_15885)">
+        <path d="M14.168 25.8335H25.8346V26.6668H14.168V25.8335Z" fill="white" opacity="0.3" />
+        <path
+          d="M25 20.8335H24.4333L22.7667 22.5002H24.3583L25.8333 24.1668H14.1667L15.65 22.5002H17.3583L15.6917 20.8335H15L12.5 23.3335V26.6668C12.5 27.5835 13.2417 28.3335 14.1583 28.3335H25.8333C26.75 28.3335 27.5 27.5918 27.5 26.6668V23.3335L25 20.8335ZM25.8333 26.6668H14.1667V25.8335H25.8333V26.6668Z"
+          fill="white"
+        />
+        <path
+          d="M20.0384 20.7543L17.0859 17.8018L21.2109 13.6768L24.1634 16.6293L20.0384 20.7543Z"
+          fill="white"
+          opacity="0.3"
+        />
+        <path
+          d="M25.9258 16.0416L21.8008 11.9166C21.4841 11.5832 20.9591 11.5832 20.6341 11.9082L15.3258 17.2166C15.0008 17.5416 15.0008 18.0666 15.3258 18.3916L19.4508 22.5166C19.7758 22.8416 20.3008 22.8416 20.6258 22.5166L25.9258 17.2166C26.2508 16.8916 26.2508 16.3666 25.9258 16.0416ZM20.0424 20.7499L17.0924 17.7999L21.2174 13.6749L24.1674 16.6249L20.0424 20.7499Z"
+          fill="white"
+        />
+      </g>
+      <defs>
+        <clipPath id="clip0_4101_15885">
+          <rect fill="white" height="20" transform="translate(10 10)" width="20" />
+        </clipPath>
+      </defs>
+      {isPulsing && (
+        <>
+          <circle
+            cx="20"
+            cy="20"
+            fill="none"
+            r="18"
+            stroke="#2A9D8F"
+            strokeLinecap="round"
+            strokeWidth="8"
+          >
+            <animate attributeName="r" begin="0s" dur="1s" fill="freeze" from="18" to="22" />
+            <animate attributeName="opacity" begin="1s" dur="1s" fill="freeze" from="1" to="0" />
+          </circle>
+
+          <circle
+            cx="20"
+            cy="20"
+            fill="none"
+            r="18"
+            stroke="#2A9D8F"
+            strokeLinecap="round"
+            strokeWidth="4"
+          >
+            <animate
+              attributeName="r"
+              begin="2s"
+              dur="2s"
+              repeatCount="indefinite"
+              values="18;22;18"
+            />
+            <animate
+              attributeName="opacity"
+              begin="2s"
+              dur="2s"
+              repeatCount="indefinite"
+              values="1;0;1"
+            />
+          </circle>
+        </>
+      )}
+    </svg>
+  )
+}
