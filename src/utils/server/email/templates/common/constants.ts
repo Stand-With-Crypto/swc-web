@@ -20,6 +20,7 @@ export type EmailEnabledActionNFTsNames = `${EmailEnabledActionNFTs}`
 export const NFT_SLUG_TO_EMAIL_ACTIVE_ACTION: Partial<Record<NFTSlug, EmailEnabledActionNFTs>> = {
   [NFTSlug.CALL_REPRESENTATIVE_SEPT_11]: EmailEnabledActionNFTs.CALL,
   [NFTSlug.I_AM_A_VOTER]: EmailEnabledActionNFTs.VOTER_REGISTRATION,
+  [NFTSlug.VOTER_ATTESTATION]: EmailEnabledActionNFTs.VOTER_ATTESTATION,
 }
 
 // Keys in this object are still type enforced, we don't want to use the prisma enum due to errors on dev environment
