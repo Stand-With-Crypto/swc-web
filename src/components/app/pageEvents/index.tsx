@@ -1,7 +1,7 @@
+import { AllUpcomingEvents } from '@/components/app/pageEvents/components/allUpcomingEvents'
 import { EventsIntro } from '@/components/app/pageEvents/components/eventsIntro'
 import { EventsNearYou } from '@/components/app/pageEvents/components/eventsNearYou'
 import { PromotedEvents } from '@/components/app/pageEvents/components/promotedEvents'
-import { UpcomingEvents } from '@/components/app/pageEvents/components/upcomingEvents'
 import { SWCEvents } from '@/utils/shared/getSWCEvents'
 import { cn } from '@/utils/web/cn'
 
@@ -22,7 +22,7 @@ export function EventsPage({ events, isDeepLink }: EventsPageProps) {
 
       <PromotedEvents events={events} />
 
-      <UpcomingEvents events={events} />
+      <AllUpcomingEvents events={events} />
 
       <EventsNearYou events={events} />
 

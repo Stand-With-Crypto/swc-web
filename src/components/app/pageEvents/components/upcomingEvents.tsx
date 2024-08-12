@@ -19,7 +19,7 @@ interface UpcomingEventsProps {
   events: SWCEvents
 }
 
-export function UpcomingEvents({ events }: UpcomingEventsProps) {
+export function UpcomingEventsList({ events }: UpcomingEventsProps) {
   const [eventsToShow, setEventsToShow] = useState(5)
   const [selectedStateFilter, setSelectedStateFilter] = useState('All')
 
@@ -55,9 +55,7 @@ export function UpcomingEvents({ events }: UpcomingEventsProps) {
   }, [filteredFutureEvents])
 
   return (
-    <section className="flex w-full flex-col items-center gap-4 lg:gap-6">
-      <h4 className="text-bold font-sans text-xl text-foreground">All upcoming events</h4>
-
+    <>
       <Select
         onValueChange={state => {
           setSelectedStateFilter(state)
@@ -91,6 +89,6 @@ export function UpcomingEvents({ events }: UpcomingEventsProps) {
           Load more
         </Button>
       )}
-    </section>
+    </>
   )
 }

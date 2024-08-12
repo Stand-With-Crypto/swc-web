@@ -28,6 +28,7 @@ export function PromotedEvents({ events }: PromotedEventsProps) {
               alt={event.data.name}
               className="object-cover object-center"
               fill
+              sizes="(max-width: 640px) 100vw, 271px"
               src={event.data.image}
             />
           </div>
