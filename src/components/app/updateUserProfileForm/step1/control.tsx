@@ -179,29 +179,31 @@ export function UpdateUserProfileForm({
               </FormItem>
             )}
           />
-          <FormField
-            control={form.control}
-            name="phoneNumber"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Phone number</FormLabel>
-                <FormControl>
-                  <Input
-                    data-testid="phone-number-input"
-                    placeholder="Phone number"
-                    {...field}
-                    onChange={e => {
-                      field.onChange(e)
-                      if (!e.target.value && form.getValues('hasOptedInToSms')) {
-                        form.setValue('hasOptedInToSms', false)
-                      }
-                    }}
-                  />
-                </FormControl>
-                <FormErrorMessage />
-              </FormItem>
-            )}
-          />
+          {!user.hasRepliedToOptInSms && !user.phoneNumber && (
+            <FormField
+              control={form.control}
+              name="phoneNumber"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Phone number</FormLabel>
+                  <FormControl>
+                    <Input
+                      data-testid="phone-number-input"
+                      placeholder="Phone number"
+                      {...field}
+                      onChange={e => {
+                        field.onChange(e)
+                        if (!e.target.value && form.getValues('hasOptedInToSms')) {
+                          form.setValue('hasOptedInToSms', false)
+                        }
+                      }}
+                    />
+                  </FormControl>
+                  <FormErrorMessage />
+                </FormItem>
+              )}
+            />
+          )}
           {!defaultValues.current.hasOptedInToMembership && (
             <FormField
               control={form.control}
@@ -235,12 +237,11 @@ export function UpdateUserProfileForm({
           <FormGeneralErrorMessage control={form.control} />
         </div>
         <div className="flex flex-col justify-center gap-4 max-md:!mt-auto md:mt-4">
-          <Collapsible open={!!phoneNumberValue}>
+          <Collapsible open={!!phoneNumberValue && !user.hasRepliedToOptInSms && !user.phoneNumber}>
             <CollapsibleContent className="AnimateCollapsibleContent">
-              <FormDescription className="text-center">
-                By clicking Next, you consent to receive recurring texts from Stand With Crypto to
-                the number provided. You can reply STOP to stop receiving texts. Message and data
-                rates may apply.
+              <FormDescription className="text-center lg:text-left">
+                By clicking Next, you consent to receive recurring texts from Stand With Crypto. You
+                can reply STOP to stop receiving texts. Message and data rates may apply.
               </FormDescription>
             </CollapsibleContent>
           </Collapsible>

@@ -1,43 +1,46 @@
-import { DataCreationMethod } from '@prisma/client'
+import { UserEmailAddressSource } from '@prisma/client'
 
 import { mockCreateUserInput } from '@/mocks/models/mockUser'
-import { mockCreateUserCryptoAddressInput } from '@/mocks/models/mockUserCryptoAddress'
+import { mockCreateUserEmailAddressInput } from '@/mocks/models/mockUserEmailAddress'
 import { prismaClient } from '@/utils/server/prismaClient'
 
 import { getDefaultParameters, TestCase, verify } from './utils'
 
-export const testCaseUserHasLegacyMigrationCryptoAddressAndLogsOnViaSameCryptoAddress: TestCase = {
-  name: 'User Has Legacy Migration Crypto Address And Logs On Via Same Crypto Address',
+export const testCaseWithPhoneSignUpWithExistingAccount: TestCase = {
+  name: 'Phone Sign Up With Existing Account',
   parameters: async () => {
     const existingUser = await prismaClient.user.create({
       data: {
         ...mockCreateUserInput({ withData: true }),
-        userCryptoAddresses: {
+        phoneNumber: '+15555555555',
+        hasOptedInToSms: true,
+        hasRepliedToOptInSms: true,
+        userEmailAddresses: {
           create: {
-            ...mockCreateUserCryptoAddressInput(),
-            hasBeenVerifiedViaAuth: false,
-            dataCreationMethod: DataCreationMethod.INITIAL_BACKFILL,
+            ...mockCreateUserEmailAddressInput(),
+            isVerified: true,
+            source: UserEmailAddressSource.USER_ENTERED,
           },
-        },
-        userSessions: {
-          create: {},
         },
       },
       include: {
         userEmailAddresses: true,
-        userCryptoAddresses: true,
-        userSessions: true,
       },
     })
     await prismaClient.user.update({
       where: { id: existingUser.id },
-      data: {
-        primaryUserCryptoAddressId: existingUser.userCryptoAddresses[0].id,
-      },
+      data: { primaryUserEmailAddressId: existingUser.userEmailAddresses[0].id },
     })
     return {
       ...getDefaultParameters(),
-      cryptoAddress: existingUser.userCryptoAddresses[0].cryptoAddress,
+      injectedFetchEmbeddedWalletMetadataFromThirdweb: () =>
+        Promise.resolve({
+          userId: 'string',
+          walletAddress: 'string',
+          email: '',
+          phone: '+15555555555',
+          createdAt: new Date().toISOString(),
+        }),
     }
   },
   validateResults: (
@@ -48,30 +51,28 @@ export const testCaseUserHasLegacyMigrationCryptoAddressAndLogsOnViaSameCryptoAd
       wasUserCreated,
       maybeUpsertCryptoAddressResult,
       maybeUpsertEmbeddedWalletEmailAddressResult,
+      maybeUpsertPhoneNumberResult,
+      hasSignedInWithEmail,
       didCapitalCanaryUpsert,
       postLoginUserActionSteps,
     },
     issues,
   ) => {
-    // changed
     verify(existingUsersWithSource.length, true, 'existingUsersWithSource.length', issues)
-    verify(embeddedWalletUserDetails, false, 'embeddedWalletUserDetails', issues)
+    verify(embeddedWalletUserDetails, true, 'embeddedWalletUserDetails', issues)
+    verify(hasSignedInWithEmail, false, 'hasSignedInWithEmail', issues)
     verify(merge?.usersToDelete.length, false, 'merge?.usersToDelete.length', issues)
-    // changed
     verify(merge?.userToKeep, true, 'merge?.userToKeep', issues)
-    // changed
     verify(wasUserCreated, false, 'wasUserCreated', issues)
-    // changed
     verify(
       maybeUpsertCryptoAddressResult.newCryptoAddress,
-      false,
+      true,
       'maybeUpsertCryptoAddressResult.newCryptoAddress',
       issues,
     )
-    // changed
     verify(
       maybeUpsertCryptoAddressResult.updatedCryptoAddress,
-      true,
+      false,
       'maybeUpsertCryptoAddressResult.updatedCryptoAddress',
       issues,
     )
@@ -85,6 +86,12 @@ export const testCaseUserHasLegacyMigrationCryptoAddressAndLogsOnViaSameCryptoAd
       maybeUpsertEmbeddedWalletEmailAddressResult?.updatedFields,
       false,
       'maybeUpsertEmbeddedWalletEmailAddressResult?.updatedFields',
+      issues,
+    )
+    verify(
+      maybeUpsertPhoneNumberResult?.phoneNumber,
+      true,
+      'maybeUpsertPhoneNumberResult?.phoneNumber',
       issues,
     )
     verify(didCapitalCanaryUpsert, false, 'didCapitalCanaryUpsert', issues)

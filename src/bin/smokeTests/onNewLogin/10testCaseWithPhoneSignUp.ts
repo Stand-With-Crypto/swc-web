@@ -1,8 +1,18 @@
 import { getDefaultParameters, TestCase, verify } from './utils'
 
-export const testCaseNewUser: TestCase = {
-  name: 'New User',
-  parameters: async () => getDefaultParameters(),
+export const testCaseWithPhoneSignUp: TestCase = {
+  name: 'Phone Sign Up',
+  parameters: async () => ({
+    ...getDefaultParameters(),
+    injectedFetchEmbeddedWalletMetadataFromThirdweb: () =>
+      Promise.resolve({
+        email: '',
+        phone: '+15555555555',
+        userId: '123567',
+        walletAddress: '0x123',
+        createdAt: new Date().toISOString(),
+      }),
+  }),
   validateResults: (
     {
       existingUsersWithSource,
@@ -11,13 +21,16 @@ export const testCaseNewUser: TestCase = {
       wasUserCreated,
       maybeUpsertCryptoAddressResult,
       maybeUpsertEmbeddedWalletEmailAddressResult,
+      maybeUpsertPhoneNumberResult,
+      hasSignedInWithEmail,
       didCapitalCanaryUpsert,
       postLoginUserActionSteps,
     },
     issues,
   ) => {
-    verify(existingUsersWithSource.length, false, 'existingUsersWithSource.length', issues)
-    verify(embeddedWalletUserDetails, false, 'embeddedWalletUserDetails', issues)
+    verify(existingUsersWithSource.length, true, 'existingUsersWithSource.length', issues)
+    verify(embeddedWalletUserDetails, true, 'embeddedWalletUserDetails', issues)
+    verify(hasSignedInWithEmail, false, 'hasSignedInWithEmail', issues)
     verify(merge?.usersToDelete.length, false, 'merge?.usersToDelete.length', issues)
     verify(merge?.userToKeep, false, 'merge?.userToKeep', issues)
     verify(wasUserCreated, true, 'wasUserCreated', issues)
@@ -43,6 +56,12 @@ export const testCaseNewUser: TestCase = {
       maybeUpsertEmbeddedWalletEmailAddressResult?.updatedFields,
       false,
       'maybeUpsertEmbeddedWalletEmailAddressResult?.updatedFields',
+      issues,
+    )
+    verify(
+      maybeUpsertPhoneNumberResult?.phoneNumber,
+      false,
+      'maybeUpsertPhoneNumberResult?.phoneNumber',
       issues,
     )
     verify(didCapitalCanaryUpsert, false, 'didCapitalCanaryUpsert', issues)
