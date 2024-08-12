@@ -49,7 +49,7 @@ export const testCaseUserHasSameEmailAddressButOtherUserHasAlreadyCreatedAccount
   validateResults: (
     {
       existingUsersWithSource,
-      embeddedWalletEmailAddress,
+      embeddedWalletUserDetails,
       merge,
       wasUserCreated,
       maybeUpsertCryptoAddressResult,
@@ -60,7 +60,7 @@ export const testCaseUserHasSameEmailAddressButOtherUserHasAlreadyCreatedAccount
     issues,
   ) => {
     verify(existingUsersWithSource.length, false, 'existingUsersWithSource.length', issues)
-    verify(embeddedWalletEmailAddress, true, 'embeddedWalletEmailAddress', issues)
+    verify(embeddedWalletUserDetails, true, 'embeddedWalletUserDetails', issues)
     verify(merge?.usersToDelete.length, false, 'merge?.usersToDelete.length', issues)
     verify(merge?.userToKeep, false, 'merge?.userToKeep', issues)
     verify(wasUserCreated, true, 'wasUserCreated', issues)
@@ -97,7 +97,7 @@ export const testCaseUserHasSameEmailAddressButOtherUserHasAlreadyCreatedAccount
     )
     verify(
       postLoginUserActionSteps.pastActionsMinted.length,
-      false,
+      true,
       'postLoginUserActionSteps.pastActionsMinted.length',
       issues,
     )

@@ -224,7 +224,7 @@ export async function onNewLogin(props: NewLoginParams) {
   const log = getLog(cryptoAddress)
 
   // queryMatchingUsers logic
-  const { existingUsersWithSource, embeddedWalletEmailAddress } = await queryMatchingUsers(props)
+  const { existingUsersWithSource, embeddedWalletUserDetails } = await queryMatchingUsers(props)
   if (existingUsersWithSource.length) {
     log(
       `queryMatchingUsers: found existing users:\n${Object.entries(
@@ -265,16 +265,22 @@ export async function onNewLogin(props: NewLoginParams) {
 
   // createUser logic
   let wasUserCreated = false
+  const hasSignedInWithEmail =
+    !!embeddedWalletUserDetails?.email && !embeddedWalletUserDetails?.phone
+
   if (!maybeUser) {
     log(`createUser: creating user`)
-    maybeUser = await createUser({ localUser, sessionId: props.getUserSessionId() })
+    maybeUser = await createUser({
+      localUser,
+      hasSignedInWithEmail,
+      sessionId: props.getUserSessionId(),
+    })
     wasUserCreated = true
   } else {
     log(`createUser: no users to create`)
   }
   let user: UpsertedUser = maybeUser
 
-  // maybeUpsertCryptoAddress logic
   const maybeUpsertCryptoAddressResult = await maybeUpsertCryptoAddress({
     user,
     localUser,
@@ -285,21 +291,30 @@ export async function onNewLogin(props: NewLoginParams) {
     maybeUpsertCryptoAddressResult.updatedCryptoAddress ||
     maybeUpsertCryptoAddressResult.newCryptoAddress
 
-  // maybeUpsertEmbeddedWalletEmailAddress logic
+  const maybeUpsertPhoneNumberResult =
+    !hasSignedInWithEmail && embeddedWalletUserDetails?.phone
+      ? await maybeUpsertPhoneNumber({
+          user,
+          embeddedWalletUserDetails,
+        })
+      : null
+
   const maybeUpsertEmbeddedWalletEmailAddressResult =
-    embeddedWalletEmailAddress &&
-    (await maybeUpsertEmbeddedWalletEmailAddress({
-      user,
-      cryptoAddressAssociatedWithEmail: userCryptoAddress,
-      embeddedWalletEmailAddress,
-    }))
+    hasSignedInWithEmail && embeddedWalletUserDetails?.email
+      ? await maybeUpsertEmbeddedWalletEmailAddress({
+          user,
+          cryptoAddressAssociatedWithEmail: userCryptoAddress,
+          embeddedWalletUserDetails,
+        })
+      : null
+
   if (maybeUpsertEmbeddedWalletEmailAddressResult) {
     user = maybeUpsertEmbeddedWalletEmailAddressResult.user
   }
 
-  // upsertCapitalCanaryAdvocate logic
   const didCapitalCanaryUpsert =
     maybeUpsertEmbeddedWalletEmailAddressResult &&
+    maybeUpsertEmbeddedWalletEmailAddressResult.email &&
     (await upsertCapitalCanaryAdvocate({
       cryptoAddress,
       user,
@@ -333,7 +348,7 @@ export async function onNewLogin(props: NewLoginParams) {
     'Is First Time': true,
     'Existing Users Found Ids': existingUsersWithSource.map(x => x.user.id),
     'Existing Users Found Sources': existingUsersWithSource.map(x => x.sourceOfExistingUser),
-    'Has Embedded Wallet Email Address': !!embeddedWalletEmailAddress,
+    'Has Embedded Wallet Email Address': !!embeddedWalletUserDetails?.email,
     'Users Deleted Ids': merge?.usersToDelete.map(x => x.user.id),
     'Was User Created': wasUserCreated,
     'User Crypto Address Result': maybeUpsertCryptoAddressResult.newCryptoAddress
@@ -357,13 +372,15 @@ export async function onNewLogin(props: NewLoginParams) {
     userId: user.id,
     user,
     existingUsersWithSource,
-    embeddedWalletEmailAddress,
+    embeddedWalletUserDetails,
     merge,
     wasUserCreated,
     maybeUpsertCryptoAddressResult,
     maybeUpsertEmbeddedWalletEmailAddressResult,
+    maybeUpsertPhoneNumberResult,
     didCapitalCanaryUpsert,
     postLoginUserActionSteps,
+    hasSignedInWithEmail,
   }
 }
 
@@ -374,10 +391,10 @@ async function queryMatchingUsers({
 }: NewLoginParams) {
   const log = getLog(cryptoAddress)
   const userSessionId = getUserSessionId()
-  const embeddedWalletEmailAddress =
+  const embeddedWalletUserDetails =
     await injectedFetchEmbeddedWalletMetadataFromThirdweb(cryptoAddress)
-  if (embeddedWalletEmailAddress) {
-    log(`queryMatchingUsers: found embedded wallet email address`)
+  if (embeddedWalletUserDetails) {
+    log(`queryMatchingUsers: found embedded wallet user details`)
   }
   const existingUsers: UpsertedUser[] = await prismaClient.user.findMany({
     include: {
@@ -394,18 +411,26 @@ async function queryMatchingUsers({
           },
         },
         userSessionId && { userSessions: { some: { id: userSessionId } } },
-        embeddedWalletEmailAddress && {
+        embeddedWalletUserDetails?.email && {
           userEmailAddresses: {
-            some: { emailAddress: embeddedWalletEmailAddress.email, isVerified: true },
+            some: { emailAddress: embeddedWalletUserDetails.email, isVerified: true },
           },
         },
-        embeddedWalletEmailAddress && {
+        embeddedWalletUserDetails?.email && {
           userEmailAddresses: {
             some: {
-              emailAddress: embeddedWalletEmailAddress.email,
+              emailAddress: embeddedWalletUserDetails.email,
               isVerified: false,
               dataCreationMethod: DataCreationMethod.INITIAL_BACKFILL,
             },
+          },
+        },
+        embeddedWalletUserDetails?.phone && {
+          phoneNumber: embeddedWalletUserDetails.phone,
+          hasOptedInToSms: true,
+          hasRepliedToOptInSms: true,
+          primaryUserEmailAddressId: {
+            not: null,
           },
         },
       ]),
@@ -423,8 +448,8 @@ async function queryMatchingUsers({
         existingUnverifiedUserCryptoAddress,
       }
     }
-    const existingEmailAddressMatchedToEmbeddedWallet = embeddedWalletEmailAddress
-      ? user.userEmailAddresses.find(addr => addr.emailAddress === embeddedWalletEmailAddress.email)
+    const existingEmailAddressMatchedToEmbeddedWallet = embeddedWalletUserDetails?.email
+      ? user.userEmailAddresses.find(addr => addr.emailAddress === embeddedWalletUserDetails.email)
       : undefined
     if (existingEmailAddressMatchedToEmbeddedWallet) {
       return {
@@ -435,7 +460,7 @@ async function queryMatchingUsers({
     }
     return { user, sourceOfExistingUser: 'Session Id' as const }
   })
-  return { embeddedWalletEmailAddress, existingUsersWithSource }
+  return { embeddedWalletUserDetails, existingUsersWithSource }
 }
 
 function findUsersToMerge(
@@ -473,9 +498,11 @@ function findUsersToMerge(
 
 async function createUser({
   localUser,
+  hasSignedInWithEmail,
   sessionId,
 }: {
   localUser: ServerLocalUser | null
+  hasSignedInWithEmail: boolean
   sessionId: string | null
 }) {
   return prismaClient.user.create({
@@ -487,7 +514,7 @@ async function createUser({
     },
     data: {
       informationVisibility: UserInformationVisibility.ANONYMOUS,
-      hasOptedInToEmails: true,
+      hasOptedInToEmails: hasSignedInWithEmail,
       hasOptedInToMembership: false,
       hasOptedInToSms: false,
       hasRepliedToOptInSms: false,
@@ -496,6 +523,25 @@ async function createUser({
         create: { id: sessionId ?? undefined },
       },
       ...mapLocalUserToUserDatabaseFields(localUser),
+    },
+  })
+}
+
+async function maybeUpsertPhoneNumber({
+  user,
+  embeddedWalletUserDetails,
+}: {
+  user: UpsertedUser
+  embeddedWalletUserDetails: ThirdwebEmbeddedWalletMetadata
+}) {
+  if (user.phoneNumber) return user
+
+  await prismaClient.user.update({
+    where: { id: user.id },
+    data: {
+      phoneNumber: embeddedWalletUserDetails.phone,
+      hasOptedInToSms: true,
+      hasRepliedToOptInSms: true,
     },
   })
 }
@@ -557,25 +603,28 @@ async function maybeUpsertCryptoAddress({
 async function maybeUpsertEmbeddedWalletEmailAddress({
   user,
   cryptoAddressAssociatedWithEmail,
-  embeddedWalletEmailAddress,
+  embeddedWalletUserDetails,
 }: {
   user: UpsertedUser
   cryptoAddressAssociatedWithEmail: UserCryptoAddress
-  embeddedWalletEmailAddress: ThirdwebEmbeddedWalletMetadata
+  embeddedWalletUserDetails: ThirdwebEmbeddedWalletMetadata
 }) {
   const log = getLog(cryptoAddressAssociatedWithEmail.cryptoAddress)
   let email = user.userEmailAddresses.find(
-    addr => addr.emailAddress.toLowerCase() === embeddedWalletEmailAddress.email.toLowerCase(),
+    addr => addr.emailAddress.toLowerCase() === embeddedWalletUserDetails.email?.toLowerCase(),
   )
+
   let wasCreated = false
   let updatedFields: Prisma.UserEmailAddressUncheckedUpdateInput | null = {}
+
   const originalUserPrimaryUserEmailAddressId = user.primaryUserEmailAddress?.id
+
   if (!email) {
     email = await prismaClient.userEmailAddress.create({
       data: {
         isVerified: true,
         source: UserEmailAddressSource.THIRDWEB_EMBEDDED_AUTH,
-        emailAddress: embeddedWalletEmailAddress.email.toLowerCase(),
+        emailAddress: embeddedWalletUserDetails.email!.toLowerCase(),
         userId: user.id,
         asPrimaryUserEmailAddress: { connect: { id: user.id } },
       },
@@ -607,6 +656,7 @@ async function maybeUpsertEmbeddedWalletEmailAddress({
       updatedFields = null
     }
   }
+
   const result = await prismaClient.userCryptoAddress.update({
     where: { id: cryptoAddressAssociatedWithEmail.id },
     data: {
