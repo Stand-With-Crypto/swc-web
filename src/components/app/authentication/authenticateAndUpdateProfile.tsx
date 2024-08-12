@@ -15,11 +15,13 @@ export interface AuthenticateAndUpdateProfileProps {
     lastName: string
     address: GooglePlaceAutocompletePrediction | null
   }) => void
+  onLoginCallback?: () => void
 }
 
 export function AuthenticateWithProfileUpdate({
   children,
   onProfileUpdateSuccess = () => {},
+  onLoginCallback = () => {},
 }: AuthenticateAndUpdateProfileProps) {
   const { data: userData, mutate } = useApiResponseForUserFullProfileInfo()
 
@@ -50,7 +52,18 @@ export function AuthenticateWithProfileUpdate({
         )
       }
     >
-      <ThirdwebLoginContent />
+      <ThirdwebLoginContent onLoginCallback={onLoginCallback} />
+    </MaybeAuthenticatedContent>
+  )
+}
+
+export function AuthenticateWithoutProfileUpdate({
+  children,
+  onLoginCallback = () => {},
+}: Omit<AuthenticateAndUpdateProfileProps, 'onProfileUpdateSuccess'>) {
+  return (
+    <MaybeAuthenticatedContent authenticatedContent={children}>
+      <ThirdwebLoginContent onLoginCallback={onLoginCallback} />
     </MaybeAuthenticatedContent>
   )
 }

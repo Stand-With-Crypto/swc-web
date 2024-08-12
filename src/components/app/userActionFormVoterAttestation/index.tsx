@@ -10,10 +10,7 @@ import {
   CreateActionVoterAttestationInput,
 } from '@/actions/actionCreateUserActionVoterAttestation'
 import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
-import {
-  AuthenticateAndUpdateProfileProps,
-  AuthenticateWithProfileUpdate,
-} from '@/components/app/authentication/authenticateAndUpdateProfile'
+import { AuthenticateWithoutProfileUpdate } from '@/components/app/authentication/authenticateAndUpdateProfile'
 import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
 import {
   ANALYTICS_NAME_USER_ACTION_FORM_VOTER_ATTESTATION,
@@ -118,18 +115,6 @@ export function UserActionFormVoterAttestation({
     }
   }, [racesByAddressRequest])
 
-  const handleProfileUpdateSuccess = React.useCallback<
-    NonNullable<AuthenticateAndUpdateProfileProps['onProfileUpdateSuccess']>
-  >(
-    updatedUser => {
-      if (updatedUser.address) {
-        setAddress(updatedUser.address)
-        sectionProps.goToSection(SectionNames.PLEDGE)
-      }
-    },
-    [sectionProps],
-  )
-
   const handleCreateAction = React.useCallback(async () => {
     if (isCreatingAction) {
       return
@@ -186,14 +171,14 @@ export function UserActionFormVoterAttestation({
     case SectionNames.ADDRESS:
       return (
         <div className={cn(dialogContentPaddingStyles)}>
-          <AuthenticateWithProfileUpdate onProfileUpdateSuccess={handleProfileUpdateSuccess}>
+          <AuthenticateWithoutProfileUpdate>
             <Address {...addressProps} />
-          </AuthenticateWithProfileUpdate>
+          </AuthenticateWithoutProfileUpdate>
         </div>
       )
     case SectionNames.PLEDGE:
       return (
-        <AuthenticateWithProfileUpdate onProfileUpdateSuccess={handleProfileUpdateSuccess}>
+        <AuthenticateWithoutProfileUpdate>
           <PledgeSection
             address={address}
             isLoadingRaces={racesByAddressRequest.isLoading}
@@ -202,7 +187,7 @@ export function UserActionFormVoterAttestation({
             onSuccess={handleCreateAction}
             racesByAddressData={racesByAddressRequest.data}
           />
-        </AuthenticateWithProfileUpdate>
+        </AuthenticateWithoutProfileUpdate>
       )
     case SectionNames.SUCCESS:
       return (
