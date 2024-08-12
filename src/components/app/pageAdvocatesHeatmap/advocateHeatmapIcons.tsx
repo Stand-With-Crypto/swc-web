@@ -354,7 +354,7 @@ export function VoterAttestationIcon({
             cy="20"
             fill="none"
             r="18"
-            stroke="#910510"
+            stroke="#FEE1E4"
             strokeLinecap="round"
             strokeWidth="8"
           >
@@ -367,7 +367,7 @@ export function VoterAttestationIcon({
             cy="20"
             fill="none"
             r="18"
-            stroke="#910510"
+            stroke="#FEE1E4"
             strokeLinecap="round"
             strokeWidth="4"
           >
