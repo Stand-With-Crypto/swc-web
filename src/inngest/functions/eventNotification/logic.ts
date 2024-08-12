@@ -80,9 +80,12 @@ async function getNotificationInformationForEvents(events: SWCEvents) {
       },
     })
 
-    const formattedEventDate = format(new Date(event.data.datetime), 'EEEE M/d h:mm a')
+    const formattedEventDate = format(new Date(event.data.datetime), 'EEEE M/d')
+
+    const formattedEventTime = format(new Date(event.data.datetime), 'h:mm a')
+
     const eventDeeplink = `https://www.standwithcrypto.org/${event.data.state.toLowerCase()}/${event.data.slug}`
-    const smsBody = `Stand With Crypto Event Reminder: ${event.data.name} is happening on ${formattedEventDate} in ${event.data.formattedAddress}. We look forward to seeing you there! See details or RSVP at ${eventDeeplink}`
+    const smsBody = `Stand With Crypto Event Reminder: ${event.data.name} is happening on ${formattedEventDate} at ${formattedEventTime}. We look forward to seeing you there! See details or RSVP at ${eventDeeplink}`
 
     for (const rsvpEvent of rsvpEvents) {
       notifications.push({
