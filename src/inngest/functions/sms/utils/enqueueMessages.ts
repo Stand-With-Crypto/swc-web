@@ -11,6 +11,7 @@ const ENQUEUE_MAX_RETRY_ATTEMPTS = 5
 export interface EnqueueMessagesPayload {
   body: string
   journeyType: UserCommunicationJourneyType
+  campaignName?: string
 }
 
 export async function enqueueMessages(
@@ -20,10 +21,14 @@ export async function enqueueMessages(
 ) {
   if (attempt > ENQUEUE_MAX_RETRY_ATTEMPTS) return 0
 
-  const { body, journeyType } = payload
+  const { body, journeyType, campaignName } = payload
 
   const enqueueMessagesPromise = phoneNumbers.map(async phoneNumber => {
-    const communicationJourneys = await createCommunicationJourneys(phoneNumber, journeyType)
+    const communicationJourneys = await createCommunicationJourneys(
+      phoneNumber,
+      journeyType,
+      campaignName,
+    )
 
     const message = await sendSMS({
       body,

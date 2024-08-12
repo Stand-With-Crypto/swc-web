@@ -8,6 +8,7 @@ export type CreatedCommunicationJourneys = Awaited<ReturnType<typeof createCommu
 export async function createCommunicationJourneys(
   phoneNumber: string,
   journeyType: UserCommunicationJourneyType,
+  campaignName?: string,
 ) {
   const usersWithPhoneNumber = (
     await prismaClient.user.findMany({
@@ -44,6 +45,7 @@ export async function createCommunicationJourneys(
       .map(id => ({
         userId: id,
         journeyType,
+        campaignName,
       })),
   })
 

@@ -1,6 +1,6 @@
 import { Prisma, SMSStatus, UserCommunicationJourneyType } from '@prisma/client'
 import { NonRetriableError } from 'inngest'
-import { chunk, uniq } from 'lodash-es'
+import { chunk, merge, uniq } from 'lodash-es'
 
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
@@ -33,6 +33,7 @@ interface BulkSMSCommunicationJourneyPayload {
   includePendingDoubleOptIn?: boolean
   send?: boolean
   journeyType?: UserCommunicationJourneyType
+  campaignName: string
 }
 
 export const bulkSMSCommunicationJourney = inngest.createFunction(
@@ -45,11 +46,15 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
     event: BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
   },
   async ({ step, event, logger }) => {
-    const { smsBody, userWhereInput, includePendingDoubleOptIn, send, journeyType } =
+    const { smsBody, userWhereInput, includePendingDoubleOptIn, send, journeyType, campaignName } =
       event.data as BulkSMSCommunicationJourneyPayload
 
     if (!smsBody) {
       throw new NonRetriableError('Missing sms body')
+    }
+
+    if (!campaignName) {
+      throw new NonRetriableError('Missing campaign name')
     }
 
     const communicationJourneyType = journeyType
@@ -167,6 +172,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
           queuedMessages += await enqueueMessages(phoneNumbers, {
             body: smsBody,
             journeyType: communicationJourneyType,
+            campaignName,
           })
         }
 
@@ -227,16 +233,25 @@ interface GetPhoneNumberOptions {
   includePendingDoubleOptIn?: boolean
   cursor?: Date
   userWhereInput?: BulkSMSCommunicationJourneyPayload['userWhereInput']
+  campaignName?: string
 }
 
 async function getPhoneNumberList(options: GetPhoneNumberOptions) {
   return prismaClient.user.groupBy({
     by: ['phoneNumber', 'datetimeCreated'],
     where: {
-      ...options.userWhereInput,
-      datetimeCreated: {
-        gte: options.cursor,
-      },
+      ...merge(options.userWhereInput, {
+        datetimeCreated: {
+          gte: options.cursor,
+        },
+        UserCommunicationJourney: {
+          every: {
+            campaignName: {
+              not: options.campaignName,
+            },
+          },
+        },
+      }),
       hasValidPhoneNumber: true,
       smsStatus: {
         in: [
