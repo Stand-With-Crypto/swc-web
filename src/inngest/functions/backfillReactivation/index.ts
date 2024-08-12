@@ -4,6 +4,8 @@ import { onScriptFailure } from '@/inngest/onScriptFailure'
 
 interface ScriptPayload {
   limit: number
+  recursive: boolean
+  testEmail?: string
   persist?: boolean
 }
 
@@ -22,6 +24,8 @@ export const backfillReactivationWithInngest = inngest.createFunction(
     return await step.run('execute-script', async () => {
       return await backfillReactivation({
         limit: payload.limit,
+        recursive: payload.recursive,
+        testEmail: payload.testEmail,
         persist: payload.persist,
       })
     })
