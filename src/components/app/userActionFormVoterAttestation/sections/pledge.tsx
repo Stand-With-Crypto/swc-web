@@ -85,7 +85,7 @@ export function PledgeSection({
             <PledgeSectionSkeleton />
           ) : (
             <>
-              {presidential?.length && (
+              {!!presidential && presidential?.length > 0 && (
                 <PledgeSectionWrapper>
                   <DTSIPersonHeroCardSection
                     {...dtsiPersonHeroCardSectionProps}
@@ -95,7 +95,7 @@ export function PledgeSection({
                 </PledgeSectionWrapper>
               )}
 
-              {senate?.length && (
+              {!!senate && senate?.length > 0 && (
                 <>
                   <hr />
                   <PledgeSectionWrapper>
@@ -108,7 +108,7 @@ export function PledgeSection({
                 </>
               )}
 
-              {congressional?.length && (
+              {!!congressional && congressional?.length > 0 && (
                 <>
                   <hr />
                   <PledgeSectionWrapper className={dialogContentPaddingBottomStyles}>
