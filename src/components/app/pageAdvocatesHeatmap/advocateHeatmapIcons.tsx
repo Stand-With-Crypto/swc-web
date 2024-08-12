@@ -330,26 +330,21 @@ export function VoterAttestationIcon({
       xmlns="http://www.w3.org/2000/svg"
       {...rest}
     >
-      <rect fill="#2A9D8F" height="40" rx="20" width="40" />
-      <g clipPath="url(#clip0_4101_15885)">
-        <path d="M14.168 25.8335H25.8346V26.6668H14.168V25.8335Z" fill="white" opacity="0.3" />
+      <rect fill="#FEE1E4" height="40" rx="20" width="40" />
+      <g clip-path="url(#clip0_3_4767)">
         <path
-          d="M25 20.8335H24.4333L22.7667 22.5002H24.3583L25.8333 24.1668H14.1667L15.65 22.5002H17.3583L15.6917 20.8335H15L12.5 23.3335V26.6668C12.5 27.5835 13.2417 28.3335 14.1583 28.3335H25.8333C26.75 28.3335 27.5 27.5918 27.5 26.6668V23.3335L25 20.8335ZM25.8333 26.6668H14.1667V25.8335H25.8333V26.6668Z"
-          fill="white"
+          d="M20 9L11 13V19C11 24.55 14.84 29.74 20 31C25.16 29.74 29 24.55 29 19V13L20 9ZM27 19C27 23.52 24.02 27.69 20 28.93C15.98 27.69 13 23.52 13 19V14.3L20 11.19L27 14.3V19ZM15.41 19.59L14 21L18 25L26 17L24.59 15.58L18 22.17L15.41 19.59Z"
+          fill="#910510"
         />
         <path
-          d="M20.0384 20.7543L17.0859 17.8018L21.2109 13.6768L24.1634 16.6293L20.0384 20.7543Z"
-          fill="white"
+          d="M13 14.3V19C13 23.52 15.98 27.69 20 28.93C24.02 27.7 27 23.52 27 19V14.3L20 11.19L13 14.3ZM26 17L18 25L14 21L15.41 19.59L18 22.17L24.59 15.58L26 17Z"
+          fill="#910510"
           opacity="0.3"
-        />
-        <path
-          d="M25.9258 16.0416L21.8008 11.9166C21.4841 11.5832 20.9591 11.5832 20.6341 11.9082L15.3258 17.2166C15.0008 17.5416 15.0008 18.0666 15.3258 18.3916L19.4508 22.5166C19.7758 22.8416 20.3008 22.8416 20.6258 22.5166L25.9258 17.2166C26.2508 16.8916 26.2508 16.3666 25.9258 16.0416ZM20.0424 20.7499L17.0924 17.7999L21.2174 13.6749L24.1674 16.6249L20.0424 20.7499Z"
-          fill="white"
         />
       </g>
       <defs>
-        <clipPath id="clip0_4101_15885">
-          <rect fill="white" height="20" transform="translate(10 10)" width="20" />
+        <clipPath id="clip0_3_4767">
+          <rect fill="white" height="24" transform="translate(8 8)" width="24" />
         </clipPath>
       </defs>
       {isPulsing && (
@@ -359,7 +354,7 @@ export function VoterAttestationIcon({
             cy="20"
             fill="none"
             r="18"
-            stroke="#2A9D8F"
+            stroke="#910510"
             strokeLinecap="round"
             strokeWidth="8"
           >
@@ -372,7 +367,7 @@ export function VoterAttestationIcon({
             cy="20"
             fill="none"
             r="18"
-            stroke="#2A9D8F"
+            stroke="#910510"
             strokeLinecap="round"
             strokeWidth="4"
           >

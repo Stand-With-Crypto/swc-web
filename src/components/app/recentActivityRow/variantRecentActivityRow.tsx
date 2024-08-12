@@ -11,6 +11,7 @@ import {
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
+import { UserActionFormVoterAttestationDialog } from '@/components/app/userActionFormVoterAttestation/dialog'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
 import { Button } from '@/components/ui/button'
 import { FormattedCurrency } from '@/components/ui/formattedCurrency'
@@ -242,11 +243,11 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
       case UserActionType.VOTER_ATTESTATION: {
         return {
           onFocusContent: () => (
-            <UserActionFormVoterRegistrationDialog>
-              <Button>Attest</Button>
-            </UserActionFormVoterRegistrationDialog>
+            <UserActionFormVoterAttestationDialog>
+              <Button>Pledge</Button>
+            </UserActionFormVoterAttestationDialog>
           ),
-          children: <MainText>Voter attestation confirmed {voterStateOrEmpty}</MainText>,
+          children: <MainText>Someone pledged to vote pro-crypto</MainText>,
         }
       }
       case UserActionType.RSVP_EVENT: {
