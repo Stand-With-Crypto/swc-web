@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Balancer from 'react-wrap-balancer'
 import { UserActionType } from '@prisma/client'
-import { format } from 'date-fns'
+import { format, isBefore, startOfDay } from 'date-fns'
 import { Clock, Pin } from 'lucide-react'
 import { toast } from 'sonner'
 
@@ -11,6 +11,7 @@ import {
   actionCreateUserActionRsvpEvent,
   CreateActionRsvpEventInput,
 } from '@/actions/actionCreateUserActionRsvpEvent'
+import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { EventDialogPhoneNumber } from '@/components/app/pageEvents/components/eventDialogPhoneNumber'
 import { EventDialogSocialLinks } from '@/components/app/pageEvents/components/eventDialogSocialLinks'
 import { GoogleMapsEmbedIFrame } from '@/components/app/pageEvents/components/eventGoogleMapsEmbedIframe'
@@ -18,6 +19,7 @@ import { SuccessfulEventNotificationsSignup } from '@/components/app/pageEvents/
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
+import { usePreventOverscroll } from '@/hooks/usePreventOverscroll'
 import { useSections } from '@/hooks/useSections'
 import { SWCEvent } from '@/utils/shared/getSWCEvents'
 import { USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns'
@@ -36,6 +38,7 @@ interface EventDialogContentProps {
 }
 
 export function EventDialogContent({ event }: EventDialogContentProps) {
+  usePreventOverscroll()
   const { data: userFullProfileInfoResponse } = useApiResponseForUserFullProfileInfo()
   const { user } = userFullProfileInfoResponse ?? { user: null }
   const hasPhoneInformation = !!user?.phoneNumber
@@ -143,6 +146,7 @@ function EventInformation({
   handleRSVPButtonClick: () => Promise<void>
 }) {
   const formattedEventDate = format(new Date(event.datetime), 'EEEE M/d h:mm a')
+  const isPastEvent = isBefore(startOfDay(new Date(event.datetime)), startOfDay(new Date()))
 
   return (
     <div className="flex h-full flex-col items-center gap-2">
@@ -170,23 +174,39 @@ function EventInformation({
 
       <EventDialogSocialLinks eventSlug={event.slug} eventState={event.state} />
 
-      <div className="mt-4 flex w-full flex-col items-center justify-end gap-3 lg:flex-row">
-        <Button
-          className="w-full lg:w-auto"
-          disabled={isCreatingRsvpEventAction}
-          onClick={handleGetUpdatesButtonClick}
-          variant="secondary"
-        >
-          Get updates
-        </Button>
-        <Button
-          className="w-full lg:w-auto"
-          disabled={isCreatingRsvpEventAction}
-          onClick={handleRSVPButtonClick}
-        >
-          RSVP
-        </Button>
-      </div>
+      {!isPastEvent && (
+        <div className="mt-4 flex w-full flex-col items-center justify-end gap-3 lg:flex-row">
+          <LoginDialogWrapper
+            authenticatedContent={
+              <Button
+                className="w-full lg:w-auto"
+                disabled={isCreatingRsvpEventAction}
+                onClick={handleGetUpdatesButtonClick}
+                variant="secondary"
+              >
+                Get updates
+              </Button>
+            }
+          >
+            <div className="flex w-full flex-col items-center gap-4 lg:flex-row">
+              <span className="text-center font-mono text-[10px] text-muted-foreground">
+                You will need to log in first to receive updates on this event.
+              </span>
+              <Button className="w-full md:w-1/2" variant="secondary">
+                Get updates
+              </Button>
+            </div>
+          </LoginDialogWrapper>
+
+          <Button
+            className="w-full lg:w-auto"
+            disabled={isCreatingRsvpEventAction}
+            onClick={handleRSVPButtonClick}
+          >
+            RSVP
+          </Button>
+        </div>
+      )}
     </div>
   )
 }

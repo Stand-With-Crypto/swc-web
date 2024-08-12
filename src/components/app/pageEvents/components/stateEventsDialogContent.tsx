@@ -1,9 +1,12 @@
 'use client'
 
+import Balancer from 'react-wrap-balancer'
 import { format } from 'date-fns'
 
 import { EventDialog } from '@/components/app/pageEvents/components/eventDialog'
 import { NextImage } from '@/components/ui/image'
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
+import { usePreventOverscroll } from '@/hooks/usePreventOverscroll'
 import { SWCEvent, SWCEvents } from '@/utils/shared/getSWCEvents'
 import { pluralize } from '@/utils/shared/pluralize'
 import { US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
@@ -14,6 +17,8 @@ interface StateEventsDialogProps {
 }
 
 export function StateEventsDialogContent({ state, events }: StateEventsDialogProps) {
+  usePreventOverscroll()
+
   const parsedState = state.toUpperCase() as keyof typeof US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP
   const stateEvents = events?.filter(
     event => event.data.state?.toLowerCase() === state.toLowerCase(),
@@ -39,17 +44,20 @@ export function StateEventsDialogContent({ state, events }: StateEventsDialogPro
         {US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP[parsedState]}.
       </p>
 
-      {stateEvents && stateEvents?.length > 0 && (
-        <div className="mt-6 flex w-full flex-col gap-4 overflow-y-auto px-8 lg:max-h-96">
-          {stateEvents.map(event => (
-            <EventDialog
-              event={event.data}
-              key={event.data.slug}
-              trigger={<StateDialogEventCard event={event.data} />}
-            />
-          ))}
-        </div>
-      )}
+      <ScrollArea>
+        {stateEvents && stateEvents?.length > 0 && (
+          <div className="mt-6 flex w-full flex-col gap-4 px-8 lg:max-h-96">
+            {stateEvents.map(event => (
+              <EventDialog
+                event={event.data}
+                key={event.data.slug}
+                trigger={<StateDialogEventCard event={event.data} />}
+              />
+            ))}
+          </div>
+        )}
+        <ScrollBar />
+      </ScrollArea>
     </div>
   )
 }
@@ -77,7 +85,9 @@ function StateDialogEventCard({ event }: StateDialogEventCardProps) {
       </p>
 
       <div className="hidden flex-col items-start lg:flex">
-        <strong>{event.name}</strong>
+        <strong className="text-left">
+          <Balancer>{event.name}</Balancer>
+        </strong>
         <p className="text-muted-foreground">
           {event.city}, {event.state} • {formattedEventDate}
         </p>
