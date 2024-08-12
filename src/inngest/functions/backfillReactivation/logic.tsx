@@ -136,44 +136,42 @@ async function sendInitialSignUpEmail({
       return null
     }
 
-    // const userSession = user.userSessions?.[0]
-    // const completedActionTypes = user.userActions
-    //   .filter(action => Object.values(EmailActiveActions).includes(action.actionType))
-    //   .map(action => action.actionType as EmailActiveActions)
-    // const currentSession = userSession
-    //   ? {
-    //       userId: userSession.userId,
-    //       sessionId: userSession.id,
-    //     }
-    //   : null
+    const userSession = user.userSessions?.[0]
+    const completedActionTypes = user.userActions
+      .filter(action => Object.values(EmailActiveActions).includes(action.actionType))
+      .map(action => action.actionType as EmailActiveActions)
+    const currentSession = userSession
+      ? {
+          userId: userSession.userId,
+          sessionId: userSession.id,
+        }
+      : null
 
-    // const ReactivationReminderComponent = ReactivationReminder
+    const ReactivationReminderComponent = ReactivationReminder
 
-    // const messageId = await sendMail({
-    //   to: user.primaryUserEmailAddress.emailAddress,
-    //   subject: ReactivationReminderComponent.subjectLine,
-    //   customArgs: {
-    //     userId: user.id,
-    //   },
-    //   html: render(
-    //     <ReactivationReminderComponent
-    //       completedActionTypes={completedActionTypes}
-    //       session={currentSession}
-    //     />,
-    //   ),
-    // }).catch(err => {
-    //   Sentry.captureException(err, {
-    //     extra: { userId: user.id, emailTo: user.primaryUserEmailAddress!.emailAddress },
-    //     tags: {
-    //       domain: 'backfillReactivation',
-    //     },
-    //     fingerprint: ['backfillReactivation', 'sendMail'],
-    //   })
+    const messageId = await sendMail({
+      to: user.primaryUserEmailAddress.emailAddress,
+      subject: ReactivationReminderComponent.subjectLine,
+      customArgs: {
+        userId: user.id,
+      },
+      html: render(
+        <ReactivationReminderComponent
+          completedActionTypes={completedActionTypes}
+          session={currentSession}
+        />,
+      ),
+    }).catch(err => {
+      Sentry.captureException(err, {
+        extra: { userId: user.id, emailTo: user.primaryUserEmailAddress!.emailAddress },
+        tags: {
+          domain: 'backfillReactivation',
+        },
+        fingerprint: ['backfillReactivation', 'sendMail'],
+      })
 
-    //   return Promise.reject(err)
-    // })
-
-    const messageId = 'test'
+      return Promise.reject(err)
+    })
 
     if (messageId) {
       const communicationJourney = await createCommunicationJourney(
