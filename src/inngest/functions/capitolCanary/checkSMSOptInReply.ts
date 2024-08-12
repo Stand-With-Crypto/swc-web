@@ -10,6 +10,7 @@ import { CheckSMSOptInReplyPayloadRequirements } from '@/utils/server/capitolCan
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getServerAnalytics } from '@/utils/server/serverAnalytics'
 import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
+import { smsProvider } from '@/utils/shared/smsProvider'
 
 const CAPITOL_CANARY_CHECK_SMS_OPT_IN_REPLY_RETRY_LIMIT = 10
 
@@ -50,7 +51,7 @@ export const checkSMSOptInReplyWithInngest = inngest.createFunction(
         userId: data.user.id,
       })
         .track('User SMS Opt-In', {
-          provider: 'capitol-canary',
+          provider: smsProvider,
         })
         .flush()
     })

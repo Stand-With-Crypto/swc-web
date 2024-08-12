@@ -461,6 +461,7 @@ model UserCommunicationJourney {
   journeyType        UserCommunicationJourneyType @map("journey_type")
   datetimeCreated    DateTime                     @default(now()) @map("datetime_created")
   userCommunications UserCommunication[]
+  campaignName       String?                      @map("campaign_name")
 
   @@index([userId])
   @@map("user_communication_journey")

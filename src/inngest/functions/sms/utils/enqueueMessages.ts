@@ -8,20 +8,26 @@ import { createCommunication, createCommunicationJourneys, flagInvalidPhoneNumbe
 
 const ENQUEUE_MAX_RETRY_ATTEMPTS = 5
 
+export interface EnqueueMessagesPayload {
+  body: string
+  journeyType: UserCommunicationJourneyType
+  campaignName?: string
+}
+
 export async function enqueueMessages(
   phoneNumbers: string[],
-  body?: string,
-  persist?: boolean,
+  payload: EnqueueMessagesPayload,
   attempt = 0,
 ) {
   if (attempt > ENQUEUE_MAX_RETRY_ATTEMPTS) return 0
 
-  const enqueueMessagesPromise = phoneNumbers.map(async phoneNumber => {
-    if (!persist || !body) return
+  const { body, journeyType, campaignName } = payload
 
+  const enqueueMessagesPromise = phoneNumbers.map(async phoneNumber => {
     const communicationJourneys = await createCommunicationJourneys(
       phoneNumber,
-      UserCommunicationJourneyType.BULK_SMS,
+      journeyType,
+      campaignName,
     )
 
     const message = await sendSMS({
@@ -52,7 +58,7 @@ export async function enqueueMessages(
             Sentry.captureException('Unexpected sendSMS error', {
               extra: { reason: result.reason },
               tags: {
-                domain: 'bulkSMS',
+                domain: 'enqueueMessages',
               },
             })
           }
@@ -62,7 +68,7 @@ export async function enqueueMessages(
               reason: result.reason,
             },
             tags: {
-              domain: 'bulkSMS',
+              domain: 'enqueueMessages',
             },
           })
         }
@@ -78,9 +84,9 @@ export async function enqueueMessages(
 
   // exponential backoff retry
   if (failedPhoneNumbers.length > 0) {
-    await sleep(10000 * attempt)
+    await sleep(10000 * (attempt + 1))
 
-    messagesSent += await enqueueMessages(failedPhoneNumbers, body, persist, attempt + 1)
+    messagesSent += await enqueueMessages(failedPhoneNumbers, payload, attempt + 1)
   }
 
   return messagesSent
