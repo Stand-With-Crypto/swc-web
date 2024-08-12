@@ -28,7 +28,7 @@ export const zodBackfillReactivationParameters = object({
 
 let isFirstRun = true
 let affectedUsers = 0
-let results: (
+const results: (
   | {
       messageId: string
       email: string
