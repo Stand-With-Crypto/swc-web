@@ -18,6 +18,7 @@ export interface DTSIPersonHeroCardSectionProps {
   people: Array<DTSI_PersonCardFragment & { isIncumbent?: boolean }>
   recommend?: boolean
   forceMobile?: boolean
+  target?: React.HTMLAttributeAnchorTarget
 }
 
 export function DTSIPersonHeroCardSection({
@@ -29,6 +30,7 @@ export function DTSIPersonHeroCardSection({
   locale,
   recommend = true,
   forceMobile = false,
+  target,
 }: DTSIPersonHeroCardSectionProps) {
   const { recommended, others } = recommend
     ? findRecommendedCandidate(people)
@@ -43,6 +45,7 @@ export function DTSIPersonHeroCardSection({
             locale={locale}
             person={recommended}
             subheader="role"
+            target={target}
           />
         )}
         {others.map(person => (
@@ -52,6 +55,7 @@ export function DTSIPersonHeroCardSection({
             locale={locale}
             person={person}
             subheader={person.isIncumbent ? 'Incumbent' : 'role'}
+            target={target}
           />
         ))}
       </DTSIPersonHeroCardRow>

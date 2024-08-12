@@ -29,6 +29,7 @@ interface Props {
   footer?: React.ReactNode
   isClickable?: boolean
   forceMobile?: boolean
+  target?: React.HTMLAttributeAnchorTarget
 }
 
 function getSubHeaderString(props: Props) {
@@ -75,7 +76,15 @@ export function DTSIPersonHeroCardFooter({
 }
 
 export function DTSIPersonHeroCard(props: Props) {
-  const { person, locale, isRecommended, footer, isClickable = true, forceMobile = false } = props
+  const {
+    person,
+    locale,
+    isRecommended,
+    footer,
+    isClickable = true,
+    forceMobile = false,
+    target,
+  } = props
   const politicalAffiliationCategoryAbbreviation =
     person.politicalAffiliationCategory &&
     dtsiPersonPoliticalAffiliationCategoryAbbreviation(person.politicalAffiliationCategory)
@@ -91,6 +100,7 @@ export function DTSIPersonHeroCard(props: Props) {
       isClickable={isClickable}
       locale={locale}
       person={person}
+      target={target}
     >
       <div className={cn(forceMobile ? 'flex' : 'max-sm:flex')}>
         <div
@@ -203,12 +213,14 @@ function DtsiPersonHeroCardWrapper({
   isClickable,
   children,
   forceMobile = false,
+  target = '_self',
 }: {
   isClickable: boolean
   children: ReactNode
   person: DTSI_PersonCardFragment
   locale: SupportedLocale
   forceMobile?: boolean
+  target?: React.HTMLAttributeAnchorTarget
 }) {
   const className = cn(
     'block shrink-0 overflow-hidden bg-white text-left shadow-md hover:!no-underline ',
@@ -223,7 +235,11 @@ function DtsiPersonHeroCardWrapper({
   }
 
   return (
-    <InternalLink className={className} href={getIntlUrls(locale).politicianDetails(person.slug)}>
+    <InternalLink
+      className={className}
+      href={getIntlUrls(locale).politicianDetails(person.slug)}
+      target={target}
+    >
       {children}
     </InternalLink>
   )

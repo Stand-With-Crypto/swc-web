@@ -207,7 +207,13 @@ export function UserActionFormVoterAttestation({
     case SectionNames.SUCCESS:
       return (
         <div className={cn(dialogContentPaddingStyles)}>
-          <UserActionFormSuccessScreen onClose={onClose}>
+          <UserActionFormSuccessScreen
+            onClose={onClose}
+            onLoad={() => {
+              // This is necessary bc next keeps the scroll position when changing sections and this is the easiest way to get the right container to scroll
+              document.querySelector('[role="dialog"]')?.scrollTo(0, 0)
+            }}
+          >
             <UserActionFormCallCongresspersonSuccess />
           </UserActionFormSuccessScreen>
         </div>

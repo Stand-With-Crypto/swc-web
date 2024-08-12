@@ -331,7 +331,7 @@ export function VoterAttestationIcon({
       {...rest}
     >
       <rect fill="#FEE1E4" height="40" rx="20" width="40" />
-      <g clip-path="url(#clip0_3_4767)">
+      <g clipPath="url(#clip0_3_4767)">
         <path
           d="M20 9L11 13V19C11 24.55 14.84 29.74 20 31C25.16 29.74 29 24.55 29 19V13L20 9ZM27 19C27 23.52 24.02 27.69 20 28.93C15.98 27.69 13 23.52 13 19V14.3L20 11.19L27 14.3V19ZM15.41 19.59L14 21L18 25L26 17L24.59 15.58L18 22.17L15.41 19.59Z"
           fill="#910510"

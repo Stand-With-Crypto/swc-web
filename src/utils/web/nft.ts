@@ -76,8 +76,7 @@ export const NFT_CLIENT_METADATA: Record<NFTSlug, NFTClientMetadata> = {
   [NFTSlug.VOTER_ATTESTATION]: {
     name: 'Ballot Box Badge',
     image: {
-      // TODO: Change this
-      url: '/nfts/ballot-box-badge.png',
+      url: '/nfts/ballot-box-badge.gif',
       width: 160,
       height: 160,
       alt: 'Ballot box badge nft',

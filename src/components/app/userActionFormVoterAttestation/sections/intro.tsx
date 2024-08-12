@@ -38,10 +38,10 @@ export function IntroStaticContent({
 
         <UserActionFormLayout.Heading
           subtitle="This is a critical election for crypto, and Stand With Crypto wants to help you cast an informed ballot. If you're eligible, pledge to do your research and cast your ballot this fall. We'll send you a free NFT."
-          title="Pledge to vote this fall and get a free NFTs"
+          title="Pledge to vote this fall and get a free NFT"
         />
       </UserActionFormLayout.Container>
-      <DialogFooterSection>
+      <DialogFooterSection elevate={false}>
         <div className="mx-auto w-full max-w-64">{children}</div>
       </DialogFooterSection>
     </UserActionFormLayout>

@@ -1,7 +1,10 @@
 import React, { useCallback } from 'react'
 
 import { ContentSection } from '@/components/app/ContentSection'
-import { DTSIPersonHeroCardSection } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardSection'
+import {
+  DTSIPersonHeroCardSection,
+  DTSIPersonHeroCardSectionProps,
+} from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardSection'
 import { DialogFooterSection } from '@/components/app/userActionFormVoterAttestation/dialogFooterSection'
 import { RacesByAddressData } from '@/components/app/userActionFormVoterAttestation/useRacesByAddress'
 import { Button } from '@/components/ui/button'
@@ -47,21 +50,36 @@ export function PledgeSection({
     onSuccess()
   }, [isLoading, onSuccess])
 
-  return (
-    <>
-      <ScrollArea className="overflow-auto">
-        <div className="space-y-6 md:space-y-10">
-          <PledgeSectionWrapper className={dialogContentPaddingTopStyles}>
-            <PageTitle size="sm">Check who's on the ballot and pledge to vote</PageTitle>
-          </PledgeSectionWrapper>
+  const dtsiPersonHeroCardSectionProps: Pick<
+    DTSIPersonHeroCardSectionProps,
+    'forceMobile' | 'locale' | 'titleProps' | 'target'
+  > = {
+    forceMobile: true,
+    locale: locale,
+    titleProps: {
+      size: 'xs',
+    },
+    target: '_blank',
+  }
 
-          <PledgeSectionWrapper>
-            <GooglePlacesSelect
-              onChange={onChangeAddress}
-              placeholder="Your full address"
-              value={address}
-            />
-          </PledgeSectionWrapper>
+  return (
+    <div className="flex h-full flex-col">
+      <ScrollArea className="overflow-auto md:max-h-[70vh]">
+        <div className="space-y-6 md:space-y-10">
+          <div className="space-y-4 md:space-y-6">
+            <PledgeSectionWrapper className={dialogContentPaddingTopStyles}>
+              <PageTitle size="sm">Check who's on the ballot and pledge to vote</PageTitle>
+            </PledgeSectionWrapper>
+
+            <PledgeSectionWrapper>
+              <GooglePlacesSelect
+                disabled={isSubmitting}
+                onChange={onChangeAddress}
+                placeholder="Your full address"
+                value={address}
+              />
+            </PledgeSectionWrapper>
+          </div>
 
           {isLoading ? (
             <PledgeSectionSkeleton />
@@ -70,13 +88,9 @@ export function PledgeSection({
               {presidential && (
                 <PledgeSectionWrapper>
                   <DTSIPersonHeroCardSection
-                    forceMobile
-                    locale={locale}
+                    {...dtsiPersonHeroCardSectionProps}
                     people={presidential}
                     title="Presidential Election"
-                    titleProps={{
-                      size: 'xs',
-                    }}
                   />
                 </PledgeSectionWrapper>
               )}
@@ -86,13 +100,9 @@ export function PledgeSection({
                   <hr />
                   <PledgeSectionWrapper>
                     <DTSIPersonHeroCardSection
-                      forceMobile
-                      locale={locale}
+                      {...dtsiPersonHeroCardSectionProps}
                       people={senate}
                       title={`U.S. Senate Race${stateCode ? ` (${stateCode})` : ''}`}
-                      titleProps={{
-                        size: 'xs',
-                      }}
                     />
                   </PledgeSectionWrapper>
                 </>
@@ -103,13 +113,9 @@ export function PledgeSection({
                   <hr />
                   <PledgeSectionWrapper className={dialogContentPaddingBottomStyles}>
                     <DTSIPersonHeroCardSection
-                      forceMobile
-                      locale={locale}
+                      {...dtsiPersonHeroCardSectionProps}
                       people={congressional}
                       title={`Congressional District${districtNumber ? ` ${districtNumber}` : ''}`}
-                      titleProps={{
-                        size: 'xs',
-                      }}
                     />
                   </PledgeSectionWrapper>
                 </>
@@ -119,16 +125,18 @@ export function PledgeSection({
         </div>
       </ScrollArea>
       <DialogFooterSection>
-        <Button
-          className="w-full sm:max-w-md"
-          disabled={isLoading || isSubmitting}
-          onClick={handleSuccess}
-          size="lg"
-        >
-          I pledge to vote pro-crypto
-        </Button>
+        <div className="w-full px-2 sm:max-w-md">
+          <Button
+            className="w-full"
+            disabled={isLoading || isSubmitting}
+            onClick={handleSuccess}
+            size="lg"
+          >
+            {isSubmitting ? 'Loading...' : 'I pledge to vote'}
+          </Button>
+        </div>
       </DialogFooterSection>
-    </>
+    </div>
   )
 }
 
@@ -138,7 +146,7 @@ function PledgeSectionWrapper({
 }: React.PropsWithChildren<{ className?: string }>) {
   return (
     <div className={cn(dialogContentPaddingXStyles, className)}>
-      <div className={'mx-auto flex max-w-96 flex-col gap-6 md:gap-10'}>{children}</div>
+      <div className={'mx-auto flex max-w-md flex-col gap-6 md:gap-10'}>{children}</div>
     </div>
   )
 }

@@ -49,7 +49,7 @@ export const USER_ACTION_ROW_CTA_INFO: Record<
       'You can make a difference this year. Register to vote and get a free "I\'m a Voter" NFT',
     shortText: 'Register to vote',
     shortSubtext: 'Get a free "I\'m a Voter" NFT',
-    canBeTriggeredMultipleTimes: true,
+    canBeTriggeredMultipleTimes: false,
     WrapperComponent: UserActionFormVoterRegistrationDialog,
   },
   [UserActionType.CALL]: {
@@ -142,7 +142,7 @@ export const USER_ACTION_ROW_CTA_INFO: Record<
     subtext: 'Pledge to vote for pro-crypto candidates.',
     shortText: 'Pledge to vote',
     shortSubtext: 'Pledge to vote for pro-crypto candidates.',
-    canBeTriggeredMultipleTimes: true,
+    canBeTriggeredMultipleTimes: false,
     WrapperComponent: UserActionFormVoterAttestationDialog,
   },
 }

@@ -105,6 +105,6 @@ export const ADVOCATES_ACTIONS: Partial<
     icon: VoterAttestationIcon,
     label: 'pledged to vote',
     labelMobile: 'pledged to vote',
-    labelActionTooltip: 'pledged to vote pro-crypto',
+    labelActionTooltip: 'pledged to vote',
   },
 }

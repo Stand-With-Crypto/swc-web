@@ -12,7 +12,7 @@ export const dialogContentStyles = twNoop(
   'fixed max-md:h-screen max-md:w-screen left-[50%] top-[50%] z-50  max-h-dvh lg:max-h-[88vh] w-11/12 md:w-full max-w-vw max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 overflow-y-auto border bg-background shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] md:rounded-3xl',
 )
 
-export const dialogContentPaddingXStyles = twNoop('px-6')
+export const dialogContentPaddingXStyles = twNoop('px-4 md:px-6')
 export const dialogContentPaddingTopStyles = twNoop('max-md:pt-20 md:pt-14')
 export const dialogContentPaddingBottomStyles = twNoop('pb-6')
 

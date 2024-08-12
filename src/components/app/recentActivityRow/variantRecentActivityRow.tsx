@@ -247,7 +247,7 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
               <Button>Pledge</Button>
             </UserActionFormVoterAttestationDialog>
           ),
-          children: <MainText>Someone pledged to vote pro-crypto</MainText>,
+          children: <MainText>Someone pledged to vote</MainText>,
         }
       }
       case UserActionType.RSVP_EVENT: {

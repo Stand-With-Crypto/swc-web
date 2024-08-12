@@ -6,17 +6,6 @@ import {
   UserActionCampaignName,
 } from '@/utils/shared/userActionCampaigns'
 
-export const USER_ACTION_TYPE_CTA_PRIORITY_ORDER: ReadonlyArray<ActiveClientUserActionType> = [
-  UserActionType.VOTER_REGISTRATION,
-  UserActionType.EMAIL,
-  UserActionType.CALL,
-  UserActionType.TWEET,
-  UserActionType.DONATION,
-  UserActionType.VOTER_ATTESTATION,
-  UserActionType.NFT_MINT,
-  UserActionType.OPT_IN,
-]
-
 // Remember to update USER_ACTION_ROW_CTA_INFO_FROM_CAMPAIGN so that the correct campaign CTA is displayed.
 // Failing to add the correct campaign will result in error.
 // Also remember to remove the campaign from USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN if it is not needed anymore.
@@ -25,15 +14,15 @@ export const USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN: ReadonlyArray<{
   action: ActiveClientUserActionType
   campaign: UserActionCampaignName
 }> = [
-  {
-    action: UserActionType.VOTER_ATTESTATION,
-    campaign: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.VOTER_ATTESTATION,
-  },
+  { action: UserActionType.OPT_IN, campaign: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.OPT_IN },
   {
     action: UserActionType.VOTER_REGISTRATION,
     campaign: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.VOTER_REGISTRATION,
   },
-  { action: UserActionType.OPT_IN, campaign: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.OPT_IN },
+  {
+    action: UserActionType.VOTER_ATTESTATION,
+    campaign: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.VOTER_ATTESTATION,
+  },
   { action: UserActionType.EMAIL, campaign: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.EMAIL },
   { action: UserActionType.CALL, campaign: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.CALL },
   { action: UserActionType.TWEET, campaign: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.TWEET },

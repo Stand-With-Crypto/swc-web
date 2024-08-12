@@ -29,6 +29,7 @@ export function UserConfig() {
   const [decreaseCommunicationTimers, setDecreaseCommunicationTimers] = useCookieState(
     'SWC_DECREASE_COMMUNICATION_TIMERS',
   )
+  const [bypassSingleActions, setBypassSingleActions] = useCookieState('SWC_BYPASS_SINGLE_ACTIONS')
 
   const form = useForm<FormFields>({
     defaultValues: {
@@ -63,13 +64,23 @@ export function UserConfig() {
         <p className="leading-4">Decrease User Communication Journey timers</p>
       </label>
 
+      <label className="flex cursor-pointer items-center gap-2">
+        <Checkbox
+          checked={bypassSingleActions === 'true'}
+          onCheckedChange={val => {
+            setBypassSingleActions(String(val))
+          }}
+        />
+        <p className="leading-4">Bypass block for actions that can only be done once</p>
+      </label>
+
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(async values => {
             void setCookie(USER_COUNTRY_CODE_COOKIE_NAME, values.countryCode)
           })}
         >
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          <div className="flex items-end gap-4">
             <FormField
               control={form.control}
               name="countryCode"
@@ -84,7 +95,7 @@ export function UserConfig() {
               )}
             />
 
-            <Button className="col-span-full" disabled={form.formState.isSubmitting} type="submit">
+            <Button disabled={form.formState.isSubmitting} type="submit">
               Update
             </Button>
           </div>

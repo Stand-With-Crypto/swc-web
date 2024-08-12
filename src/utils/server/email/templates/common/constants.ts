@@ -34,6 +34,13 @@ export const ACTIONS_METADATA_BY_TYPE: Record<
     buttonHref: string
   }
 > = {
+  VOTER_REGISTRATION: {
+    image: `/actionTypeIcons/registerToVote.png`,
+    text: 'Register to vote',
+    subtext: 'Check your voter registration status and get a free NFT by pplpleasr.',
+    buttonLabel: 'Register',
+    buttonHref: `/action/voter-registration`,
+  },
   VOTER_ATTESTATION: {
     image: `/actionTypeIcons/voterAttestation.png`,
     text: 'Pledge to vote',
@@ -47,13 +54,6 @@ export const ACTIONS_METADATA_BY_TYPE: Record<
     subtext: 'Make your voice heard. We make it easy.',
     buttonLabel: 'Send an email',
     buttonHref: `/action/email`,
-  },
-  VOTER_REGISTRATION: {
-    image: `/actionTypeIcons/registerToVote.png`,
-    text: 'Register to vote',
-    subtext: 'Check your voter registration status and get a free NFT by pplpleasr.',
-    buttonLabel: 'Register',
-    buttonHref: `/action/voter-registration`,
   },
   CALL: {
     image: `/actionTypeIcons/call.png`,

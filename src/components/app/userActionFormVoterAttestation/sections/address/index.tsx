@@ -14,10 +14,6 @@ import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { InternalLink } from '@/components/ui/link'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useIsMobile } from '@/hooks/useIsMobile'
-import {
-  getYourPoliticianCategoryDisplayName,
-  getYourPoliticianCategoryShortDisplayName,
-} from '@/utils/shared/yourPoliticianCategory'
 import { cn } from '@/utils/web/cn'
 import { trackFormSubmissionSyncErrors } from '@/utils/web/formUtils'
 
@@ -42,12 +38,7 @@ export function Address({
   goBackSection,
   onFindAddress,
   initialValues,
-  heading = (
-    <UserActionFormLayout.Heading
-      subtitle={`Your address will be used to connect you with your ${getYourPoliticianCategoryDisplayName('house', { maxCount: 1 })}. Stand With Crypto will never share your data with any third-parties.`}
-      title={`Find your ${getYourPoliticianCategoryShortDisplayName('house', { maxCount: 1 })}`}
-    />
-  ),
+  heading = <UserActionFormLayout.Heading title={"Check who's on the ballot and pledge to vote"} />,
   submitButtonText = 'Continue',
   error,
   isLoading,
