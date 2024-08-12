@@ -105,7 +105,7 @@ export const NFT_IMAGES_BY_ACTION: Record<
     alt: 'Voter Registration NFT',
   },
   VOTER_ATTESTATION: {
-    src: '/email/nfts/voter-attestation.jpeg',
+    src: '/email/nfts/voter-attestation.png',
     alt: 'Voter Attestation NFT',
   },
 }
