@@ -197,6 +197,11 @@ const nextConfig = {
       },
       // dotheysupportit image cdn
       { protocol: 'https', hostname: 'db0prh5pvbqwd.cloudfront.net' },
+      // builder.io image cdn
+      {
+        protocol: 'https',
+        hostname: 'cdn.builder.io',
+      },
     ],
   },
   async headers() {

@@ -57,7 +57,7 @@ export function DTSIPersonHeroCardFooter({
   return (
     <div
       className={cn(
-        'p-4 text-center font-bold text-fontcolor sm:p-6 md:text-lg',
+        'p-4 text-center font-bold text-fontcolor sm:px-3 sm:py-6 sm:text-sm xl:p-6 xl:text-lg',
         isRecommended
           ? 'bg-primary-cta text-primary-cta-foreground antialiased'
           : 'hidden sm:block',

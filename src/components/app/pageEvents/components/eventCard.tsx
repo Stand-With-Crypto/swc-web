@@ -1,19 +1,22 @@
 import { format } from 'date-fns'
 
+import { EventDialog } from '@/components/app/pageEvents/components/eventDialog'
 import { NextImage } from '@/components/ui/image'
+import { SWCEvents } from '@/utils/shared/getSWCEvents'
 
-const event = {
-  state: 'GA',
-  name: 'Global Advisory Council Meeting',
-  city: 'Atlanta',
-  date: new Date().toISOString(),
+interface EventCardProps {
+  event: SWCEvents[0]['data']
 }
 
-export function EventCard() {
-  const formattedEventDate = format(new Date(event.date), 'MMMM d, yyyy')
+export function EventCard({ event }: EventCardProps) {
+  return <EventDialog event={event} trigger={<EventCardContent event={event} />} />
+}
+
+function EventCardContent({ event }: EventCardProps) {
+  const formattedEventDate = format(new Date(event.datetime), 'MMMM d, yyyy')
 
   return (
-    <div className="flex w-full max-w-[856px] flex-col gap-2 rounded-2xl bg-backgroundAlternate p-6 pt-4 lg:flex-row lg:items-center">
+    <div className="flex w-full max-w-[856px] flex-col gap-2 rounded-2xl bg-backgroundAlternate p-6 pt-4 text-left lg:flex-row lg:items-center">
       <NextImage
         alt={`${event.state} shield`}
         className="mb-2 lg:mb-0"

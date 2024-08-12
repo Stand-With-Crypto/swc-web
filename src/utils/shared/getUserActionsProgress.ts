@@ -7,6 +7,7 @@ import { USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN } from '@/utils/web/u
 const USER_ACTIONS_EXCLUDED_FROM_CTA: UserActionType[] = [
   UserActionType.LIVE_EVENT,
   UserActionType.TWEET_AT_PERSON,
+  UserActionType.RSVP_EVENT,
 ]
 
 export interface GetUserActionsProgressArgs {
