@@ -27,7 +27,7 @@ export function EventDialogSocialLinks({
           <Link size={20} />
         </Button>
 
-        <Button asChild variant="link" className="inline-block lg:hidden">
+        <Button asChild className="inline-block lg:hidden" variant="link">
           {/* // TODO: Get the right copy */}
           <a
             href={`mailto:?subject=Stand With Crypto Event&body=Check out this event: ${eventDeeplink}`}

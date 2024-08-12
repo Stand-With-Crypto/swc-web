@@ -9,13 +9,13 @@ import {
   ADVOCATES_HEATMAP_GEO_URL,
   STATE_COORDS,
 } from '@/components/app/pageAdvocatesHeatmap/constants'
+import { StateEventsDialog } from '@/components/app/pageEvents/components/stateEventsDialog'
 import { SWCEvents } from '@/utils/shared/getSWCEvents'
+import { pluralize } from '@/utils/shared/pluralize'
 import {
   getUSStateCodeFromStateName,
   US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP,
 } from '@/utils/shared/usStateUtils'
-import { pluralize } from '@/utils/shared/pluralize'
-import { StateEventsDialog } from '@/components/app/pageEvents/components/stateEventsDialog'
 
 export interface MapMarker {
   id: string
@@ -57,13 +57,13 @@ export function EventsMap({ events }: { events: SWCEvents }) {
     Object.keys(eventsFromState).forEach(state => {
       const coordinates = STATE_COORDS[state as keyof typeof STATE_COORDS]
 
-      const temp: MapMarker = {
+      const marker: MapMarker = {
         id: state,
         name: state,
         coordinates: [coordinates[0], coordinates[1]],
       }
 
-      result.push(temp)
+      result.push(marker)
     })
 
     return result
@@ -183,10 +183,10 @@ export function EventsMap({ events }: { events: SWCEvents }) {
       />
 
       <StateEventsDialog
-        isOpen={stateDialogProps.open}
-        state={stateDialogProps.state as keyof typeof US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP}
-        setIsOpen={(open: boolean) => setStateDialogProps({ open, state: null })}
         events={events}
+        isOpen={stateDialogProps.open}
+        setIsOpen={(open: boolean) => setStateDialogProps({ open, state: null })}
+        state={stateDialogProps.state as keyof typeof US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP}
       />
     </>
   )

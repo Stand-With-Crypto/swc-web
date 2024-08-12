@@ -21,7 +21,7 @@ export function StateEventsDialog({ state, events, isOpen, setIsOpen }: StateEve
   if (!state) return null
 
   return (
-    <Dialog {...dialogProps} open={isOpen} onOpenChange={open => setIsOpen(open)}>
+    <Dialog {...dialogProps} onOpenChange={open => setIsOpen(open)} open={isOpen}>
       <DialogContent a11yTitle={`State ${state} Events`} className="max-w-[578px]">
         <StateEventsDialogContent events={events} state={state} />
       </DialogContent>
