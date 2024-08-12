@@ -349,6 +349,7 @@ export async function onNewLogin(props: NewLoginParams) {
     'Existing Users Found Ids': existingUsersWithSource.map(x => x.user.id),
     'Existing Users Found Sources': existingUsersWithSource.map(x => x.sourceOfExistingUser),
     'Has Embedded Wallet Email Address': !!embeddedWalletUserDetails?.email,
+    'Has Embedded Wallet Phone Number': !!embeddedWalletUserDetails?.phone,
     'Users Deleted Ids': merge?.usersToDelete.map(x => x.user.id),
     'Was User Created': wasUserCreated,
     'User Crypto Address Result': maybeUpsertCryptoAddressResult.newCryptoAddress
