@@ -10,7 +10,7 @@ import { US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUt
 
 type Props = PageProps<{ state: keyof typeof US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP }>
 
-export const revalidate = SECONDS_DURATION['HOUR']
+export const revalidate = SECONDS_DURATION.MINUTE
 export const dynamic = 'error'
 
 const description =

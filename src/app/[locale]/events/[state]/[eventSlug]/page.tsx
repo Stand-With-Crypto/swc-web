@@ -14,7 +14,7 @@ type Props = PageProps<{
   eventSlug: string
 }>
 
-export const revalidate = SECONDS_DURATION['HOUR']
+export const revalidate = SECONDS_DURATION.MINUTE
 export const dynamic = 'error'
 
 const title = 'Events'
