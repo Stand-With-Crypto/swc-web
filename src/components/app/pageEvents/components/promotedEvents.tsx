@@ -34,7 +34,7 @@ export function PromotedEvents({ events }: PromotedEventsProps) {
 
           <div className="grid justify-items-center gap-2 lg:justify-items-start">
             <h4 className="text-bold font-sans text-base text-foreground">{event.data.name}</h4>
-            <p className="line-clamp-3 font-mono text-base text-muted-foreground">
+            <p className="line-clamp-3 text-center font-mono text-base text-muted-foreground lg:text-left">
               <Balancer>{event.data.description}</Balancer>
             </p>
 
