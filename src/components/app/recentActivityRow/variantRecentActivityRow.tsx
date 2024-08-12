@@ -246,7 +246,7 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
               <Button>Attest</Button>
             </UserActionFormVoterRegistrationDialog>
           ),
-          children: <MainText>Voter attestation confirmed in {voterStateOrEmpty}</MainText>,
+          children: <MainText>Voter attestation confirmed {voterStateOrEmpty}</MainText>,
         }
       }
       case UserActionType.RSVP_EVENT: {
