@@ -1,6 +1,5 @@
 'use client'
 
-import Balancer from 'react-wrap-balancer'
 import { format } from 'date-fns'
 
 import { EventDialog } from '@/components/app/pageEvents/components/eventDialog'
@@ -85,9 +84,7 @@ function StateDialogEventCard({ event }: StateDialogEventCardProps) {
       </p>
 
       <div className="hidden flex-col items-start lg:flex">
-        <strong className="text-left">
-          <Balancer>{event.name}</Balancer>
-        </strong>
+        <strong className="text-left">{event.name}</strong>
         <p className="text-muted-foreground">
           {event.city}, {event.state} • {formattedEventDate}
         </p>
