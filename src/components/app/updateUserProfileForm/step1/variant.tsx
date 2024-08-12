@@ -147,7 +147,7 @@ export function UpdateUserProfileForm({
               </FormItem>
             )}
           />
-          {user.hasEmbeddedWallet || (
+          {user.hasEmbeddedWallet || user.primaryUserEmailAddress?.isVerified || (
             <FormField
               control={form.control}
               name="emailAddress"
@@ -161,29 +161,31 @@ export function UpdateUserProfileForm({
               )}
             />
           )}
-          <FormField
-            control={form.control}
-            name="phoneNumber"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Input
-                    className="h-auto p-4"
-                    data-testid="phone-number-input"
-                    placeholder="Phone number"
-                    {...field}
-                    onChange={e => {
-                      field.onChange(e)
-                      if (!e.target.value && form.getValues('hasOptedInToSms')) {
-                        form.setValue('hasOptedInToSms', false)
-                      }
-                    }}
-                  />
-                </FormControl>
-                <FormErrorMessage />
-              </FormItem>
-            )}
-          />
+          {!user.hasRepliedToOptInSms && !user.phoneNumber && (
+            <FormField
+              control={form.control}
+              name="phoneNumber"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <Input
+                      className="h-auto p-4"
+                      data-testid="phone-number-input"
+                      placeholder="Phone number"
+                      {...field}
+                      onChange={e => {
+                        field.onChange(e)
+                        if (!e.target.value && form.getValues('hasOptedInToSms')) {
+                          form.setValue('hasOptedInToSms', false)
+                        }
+                      }}
+                    />
+                  </FormControl>
+                  <FormErrorMessage />
+                </FormItem>
+              )}
+            />
+          )}
           <FormField
             control={form.control}
             name="address"
@@ -239,12 +241,14 @@ export function UpdateUserProfileForm({
           <Button className="w-full" disabled={form.formState.isSubmitting} size="lg" type="submit">
             Create account
           </Button>
-          <Collapsible open={!!form.watch('phoneNumber')}>
+          <Collapsible
+            open={!!form.watch('phoneNumber') && !user.hasRepliedToOptInSms && !user.phoneNumber}
+          >
             <CollapsibleContent className="AnimateCollapsibleContent">
               <FormDescription className="text-center text-xs font-normal leading-4 text-muted-foreground">
-                By clicking Create account, you consent to receive recurring texts from Stand with
-                Crypto about its efforts at the number provided. You can reply STOP to stop
-                receiving texts. Message and data rates may apply.
+                By signing in, you consent to receive recurring texts from Stand with Crypto about
+                its efforts at the number provided. You can reply STOP to stop receiving texts.
+                Message and data rates may apply.
               </FormDescription>
             </CollapsibleContent>
           </Collapsible>
