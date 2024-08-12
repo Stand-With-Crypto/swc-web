@@ -116,6 +116,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
         includePendingDoubleOptIn,
         cursor,
         userWhereInput,
+        campaignName,
       })
 
       cursor = phoneNumberList.at(-1)?.datetimeCreated
