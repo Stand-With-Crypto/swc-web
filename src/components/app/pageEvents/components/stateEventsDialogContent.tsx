@@ -19,9 +19,9 @@ export function StateEventsDialogContent({ state, events }: StateEventsDialogPro
   usePreventOverscroll()
 
   const parsedState = state.toUpperCase() as keyof typeof US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP
-  const stateEvents = events?.filter(
-    event => event.data.state?.toLowerCase() === state.toLowerCase(),
-  )
+  const stateEvents = events
+    ? events?.filter(event => event.data.state?.toLowerCase() === state.toLowerCase())
+    : []
 
   return (
     <div className="flex flex-col items-center gap-2 pb-4">
@@ -44,7 +44,7 @@ export function StateEventsDialogContent({ state, events }: StateEventsDialogPro
       </p>
 
       <ScrollArea>
-        {stateEvents && stateEvents?.length > 0 && (
+        {stateEvents?.length > 0 ? (
           <div className="mt-6 flex w-full flex-col gap-4 px-8 lg:max-h-96">
             {stateEvents.map(event => (
               <EventDialog
@@ -54,7 +54,7 @@ export function StateEventsDialogContent({ state, events }: StateEventsDialogPro
               />
             ))}
           </div>
-        )}
+        ) : null}
         <ScrollBar />
       </ScrollArea>
     </div>
