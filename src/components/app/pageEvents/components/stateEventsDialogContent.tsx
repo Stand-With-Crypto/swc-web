@@ -19,9 +19,7 @@ export function StateEventsDialogContent({ state, events }: StateEventsDialogPro
   usePreventOverscroll()
 
   const parsedState = state.toUpperCase() as keyof typeof US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP
-  const stateEvents = events
-    ? events?.filter(event => event.data.state?.toLowerCase() === state.toLowerCase())
-    : []
+  const stateEvents = events?.filter(event => event.data.state?.toLowerCase() === state.toLowerCase()) ?? []
 
   return (
     <div className="flex flex-col items-center gap-2 pb-4">
