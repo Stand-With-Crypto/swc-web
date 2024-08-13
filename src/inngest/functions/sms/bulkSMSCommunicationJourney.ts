@@ -33,7 +33,7 @@ interface BulkSMSCommunicationJourneyPayload {
   includePendingDoubleOptIn?: boolean
   send?: boolean
   journeyType?: UserCommunicationJourneyType
-  campaignName: string
+  campaignName?: string
 }
 
 export const bulkSMSCommunicationJourney = inngest.createFunction(
@@ -53,13 +53,13 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
       throw new NonRetriableError('Missing sms body')
     }
 
-    if (!campaignName) {
-      throw new NonRetriableError('Missing campaign name')
-    }
-
     const communicationJourneyType = journeyType
       ? UserCommunicationJourneyType[journeyType]
       : UserCommunicationJourneyType.BULK_SMS
+
+    if (!campaignName && communicationJourneyType === UserCommunicationJourneyType.BULK_SMS) {
+      throw new NonRetriableError('Missing campaign name')
+    }
 
     if (!communicationJourneyType) {
       throw new NonRetriableError(`Invalid journeyType ${journeyType ?? 'undefined'}`)
@@ -67,7 +67,9 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
 
     if (communicationJourneyType !== UserCommunicationJourneyType.WELCOME_SMS) {
       const bulkWelcomeSMSPayload: BulkSMSCommunicationJourneyPayload = {
-        ...event.data,
+        send,
+        includePendingDoubleOptIn,
+        campaignName: undefined,
         smsBody: messages.WELCOME_MESSAGE,
         journeyType: UserCommunicationJourneyType.WELCOME_SMS,
         userWhereInput: {
