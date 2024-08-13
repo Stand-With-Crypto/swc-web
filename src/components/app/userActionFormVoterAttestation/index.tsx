@@ -170,7 +170,7 @@ export function UserActionFormVoterAttestation({
       )
     case SectionNames.ADDRESS:
       return (
-        <div className={cn(dialogContentPaddingStyles)}>
+        <div className={cn(dialogContentPaddingStyles, 'h-full')}>
           <AuthenticateWithoutProfileUpdate>
             <Address {...addressProps} />
           </AuthenticateWithoutProfileUpdate>
