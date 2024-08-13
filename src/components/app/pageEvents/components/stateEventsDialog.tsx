@@ -1,11 +1,12 @@
 'use client'
 
+import { Suspense } from 'react'
+
 import { LazyStateEventsDialogContent } from '@/components/app/pageEvents/components/stateEventsDialogContentLazyload'
 import { Dialog, DialogContent } from '@/components/ui/dialog'
 import { useDialog } from '@/hooks/useDialog'
 import { SWCEvents } from '@/utils/shared/getSWCEvents'
 import { US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
-import { Suspense } from 'react'
 
 interface StateEventsDialogProps {
   state: keyof typeof US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP | null
