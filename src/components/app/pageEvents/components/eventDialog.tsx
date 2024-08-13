@@ -1,8 +1,8 @@
 'use client'
 
-import { ReactNode } from 'react'
+import { ReactNode, Suspense } from 'react'
 
-import { EventDialogContent } from '@/components/app/pageEvents/components/eventDialogContent'
+import { LazyEventDialogContent } from '@/components/app/pageEvents/components/eventDialogContentLazyload'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { useDialog } from '@/hooks/useDialog'
 import { SWCEvent } from '@/utils/shared/getSWCEvents'
@@ -26,7 +26,9 @@ export function EventDialog({ event, trigger, triggerClassName }: EventDialogPro
         className="max-w-[578px]"
         padding={false}
       >
-        <EventDialogContent event={event} />
+        <Suspense fallback={null}>
+          <LazyEventDialogContent event={event} />
+        </Suspense>
       </DialogContent>
     </Dialog>
   )
