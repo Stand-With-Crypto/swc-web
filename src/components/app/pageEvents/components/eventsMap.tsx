@@ -1,6 +1,6 @@
 'use client'
 
-import { MouseEvent, Suspense, useCallback, useEffect, useMemo, useState } from 'react'
+import { MouseEvent, useCallback, useEffect, useMemo, useState } from 'react'
 import { ComposableMap, Geographies, Geography, Marker } from 'react-simple-maps'
 import { isAfter } from 'date-fns'
 import { AnimatePresence, motion } from 'framer-motion'
@@ -9,7 +9,7 @@ import {
   ADVOCATES_HEATMAP_GEO_URL,
   STATE_COORDS,
 } from '@/components/app/pageAdvocatesHeatmap/constants'
-import { LazyStateEventsDialog } from '@/components/app/pageEvents/components/stateEventsDialogLazyLoad'
+import { StateEventsDialog } from '@/components/app/pageEvents/components/stateEventsDialog'
 import { SWCEvents } from '@/utils/shared/getSWCEvents'
 import { pluralize } from '@/utils/shared/pluralize'
 import {
@@ -201,14 +201,12 @@ export function EventsMap({ events }: { events: SWCEvents }) {
         mousePosition={mousePosition}
       />
 
-      <Suspense fallback={null}>
-        <LazyStateEventsDialog
-          events={events}
-          isOpen={stateDialogProps.open}
-          setIsOpen={(open: boolean) => setStateDialogProps({ open, state: null })}
-          state={stateDialogProps.state as keyof typeof US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP}
-        />
-      </Suspense>
+      <StateEventsDialog
+        events={events}
+        isOpen={stateDialogProps.open}
+        setIsOpen={(open: boolean) => setStateDialogProps({ open, state: null })}
+        state={stateDialogProps.state as keyof typeof US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP}
+      />
     </>
   )
 }
