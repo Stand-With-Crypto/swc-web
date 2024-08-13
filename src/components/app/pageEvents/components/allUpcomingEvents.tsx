@@ -29,11 +29,11 @@ export function AllUpcomingEvents({ events }: AllUpcomingEventsProps) {
         All upcoming events
       </PageSubTitle>
       {!isMobile && (
-        <div className="flex items-center justify-center gap-4 rounded-[8px] bg-backgroundAlternate px-4 py-3">
+        <div className="flex items-center justify-center gap-4 rounded-lg bg-backgroundAlternate px-4 py-3">
           <button onClick={() => setDisplayOption('map')}>
             <MapOptionSVG isActive={displayOption === 'map'} />
           </button>
-          <div className="h-[2rem] w-[1px] bg-[#D8DCE2]" />
+          <div className="h-8 w-[1px] bg-border" />
           <button onClick={() => setDisplayOption('list')}>
             <ListOptionSVG isActive={displayOption === 'list'} />
           </button>

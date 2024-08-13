@@ -46,7 +46,7 @@ export function EventDialogPhoneNumber({ onSuccess }: EventDialogPhoneNumberProp
           }, trackFormSubmissionSyncErrors('EventDialogPhoneNumber'))}
         >
           <div className="flex w-full items-start gap-4">
-            <div className="flex w-[84px] items-center justify-center rounded-md border border-input bg-background px-2 py-[15px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ">
+            <div className="flex w-20 items-center justify-center rounded-md border border-input bg-background px-2 py-[15px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ">
               <span>US +1</span>
             </div>
 
@@ -75,7 +75,7 @@ export function EventDialogPhoneNumber({ onSuccess }: EventDialogPhoneNumberProp
         </form>
       </Form>
 
-      <p className="text-center font-mono text-[10px] text-muted-foreground">
+      <p className="text-center font-mono text-xs text-muted-foreground">
         <Balancer>
           By clicking Get updates, you consent to receive recurring texts from Stand with Crypto to
           the number you gave to Coinbase. You can reply STOP to stop receiving texts. Message and

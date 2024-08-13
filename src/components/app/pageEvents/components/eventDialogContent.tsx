@@ -1,6 +1,5 @@
 'use client'
 
-import { useState } from 'react'
 import Balancer from 'react-wrap-balancer'
 import { UserActionType } from '@prisma/client'
 import { format, isBefore, startOfDay } from 'date-fns'
@@ -20,6 +19,7 @@ import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
+import { useLoadingCallback } from '@/hooks/useLoadingCallback'
 import { usePreventOverscroll } from '@/hooks/usePreventOverscroll'
 import { useSections } from '@/hooks/useSections'
 import { SWCEvent } from '@/utils/shared/getSWCEvents'
@@ -43,7 +43,6 @@ export function EventDialogContent({ event }: EventDialogContentProps) {
   const { data: userFullProfileInfoResponse } = useApiResponseForUserFullProfileInfo()
   const { user } = userFullProfileInfoResponse ?? { user: null }
   const hasPhoneInformation = !!user?.phoneNumber
-  const [isCreatingRsvpEventAction, setIsCreatingRsvpEventAction] = useState(false)
 
   const sectionProps = useSections({
     sections: Object.values(SectionNames),
@@ -51,13 +50,11 @@ export function EventDialogContent({ event }: EventDialogContentProps) {
     analyticsName: 'Event Details Dialog',
   })
 
-  async function handleCreateRsvpAction({
+  const _handleCreateRsvpAction = async ({
     shouldReceiveNotifications,
   }: {
     shouldReceiveNotifications: boolean
-  }) {
-    setIsCreatingRsvpEventAction(true)
-
+  }) => {
     const data: CreateActionRsvpEventInput = {
       eventSlug: event.slug,
       eventState: event.state,
@@ -67,11 +64,7 @@ export function EventDialogContent({ event }: EventDialogContentProps) {
     const result = await triggerServerActionForForm(
       {
         formName: 'RSVP Event',
-        onError: (_, error) => {
-          toast.error(error.message, {
-            duration: 5000,
-          })
-        },
+        onError: () => toastGenericError(),
         analyticsProps: {
           'Campaign Name': USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.RSVP_EVENT,
           'User Action Type': UserActionType.RSVP_EVENT,
@@ -93,10 +86,12 @@ export function EventDialogContent({ event }: EventDialogContentProps) {
     if (result.status !== 'success') {
       toastGenericError()
     }
-    setIsCreatingRsvpEventAction(false)
   }
 
-  async function handleGetUpdates() {
+  const [handleCreateRsvpAction, isCreatingRsvpEventAction] =
+    useLoadingCallback(_handleCreateRsvpAction)
+
+  const handleGetUpdates = async () => {
     await handleCreateRsvpAction({
       shouldReceiveNotifications: true,
     })
@@ -105,7 +100,7 @@ export function EventDialogContent({ event }: EventDialogContentProps) {
     sectionProps.goToSection(SectionNames.NOTIFICATION_ACTIVATED)
   }
 
-  async function handleRSVPButtonClick() {
+  const handleRSVPButtonClick = () => {
     void handleCreateRsvpAction({
       shouldReceiveNotifications: false,
     })
@@ -149,7 +144,7 @@ function EventInformation({
   event: SWCEvent
   isCreatingRsvpEventAction: boolean
   handleGetUpdatesButtonClick: () => Promise<void>
-  handleRSVPButtonClick: () => Promise<void>
+  handleRSVPButtonClick: () => void
 }) {
   const formattedEventDate = format(new Date(event.datetime), 'EEEE M/d h:mm a')
   const isPastEvent = isBefore(startOfDay(new Date(event.datetime)), startOfDay(new Date()))
