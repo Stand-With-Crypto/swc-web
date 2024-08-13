@@ -5,6 +5,7 @@ import {
   DTSIPersonHeroCardSection,
   DTSIPersonHeroCardSectionProps,
 } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardSection'
+import { PACFooter } from '@/components/app/pacFooter'
 import { DialogFooterSection } from '@/components/app/userActionFormVoterAttestation/dialogFooterSection'
 import { RacesByAddressData } from '@/components/app/userActionFormVoterAttestation/useRacesByAddress'
 import { Button } from '@/components/ui/button'
@@ -111,7 +112,7 @@ export function PledgeSection({
               {!!congressional && congressional?.length > 0 && (
                 <>
                   <hr />
-                  <PledgeSectionWrapper className={dialogContentPaddingBottomStyles}>
+                  <PledgeSectionWrapper>
                     <DTSIPersonHeroCardSection
                       {...dtsiPersonHeroCardSectionProps}
                       people={congressional}
@@ -122,6 +123,9 @@ export function PledgeSection({
               )}
             </>
           )}
+          <PledgeSectionWrapper className={dialogContentPaddingBottomStyles}>
+            <PACFooter className="top-0" />
+          </PledgeSectionWrapper>
         </div>
       </ScrollArea>
       <DialogFooterSection>
