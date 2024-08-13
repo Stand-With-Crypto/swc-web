@@ -8,7 +8,7 @@ import { getLogger } from '@/utils/shared/logger'
 const BACKFILL_SESSION_ID_CRON_JOB_FUNCTION_ID = 'script.backfill-session-id'
 const BACKFILL_SESSION_ID_INNGEST_EVENT_NAME = 'script/backfill.session.id'
 
-const BACKFILL_SESSION_ID_BATCH_SIZE = Number(process.env.BACKFILL_SESSION_ID_BATCH_SIZE) || 5000
+const BACKFILL_SESSION_ID_BATCH_SIZE = Number(process.env.BACKFILL_SESSION_ID_BATCH_SIZE) || 2000
 
 const logger = getLogger('backfillSessionId')
 export const backfillSessionIdCronJob = inngest.createFunction(
@@ -46,8 +46,6 @@ export const backfillSessionIdCronJob = inngest.createFunction(
           },
           take: BACKFILL_SESSION_ID_BATCH_SIZE,
         })
-
-        console.log({ users })
 
         for (const user of users) {
           try {

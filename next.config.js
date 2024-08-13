@@ -256,6 +256,11 @@ const nextConfig = {
         destination: '/politicians',
         permanent: true,
       },
+      {
+        source: '/action/mint-nft',
+        destination: '/action/nft-mint',
+        permanent: true,
+      },
       // vanity urls
       {
         source: '/join/:referralId',
