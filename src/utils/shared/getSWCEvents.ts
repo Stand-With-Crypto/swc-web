@@ -10,7 +10,6 @@ export const zodEventSchemaValidation = object({
     promotedPositioning: number().optional(),
     image: string().url(),
     rsvpUrl: string().url(),
-    datetime: string(),
     formattedAddress: string(),
     countryCode: string().length(2),
     isOccuring: boolean(),
@@ -21,6 +20,8 @@ export const zodEventSchemaValidation = object({
     slug: string(),
     city: string(),
     description: string(),
+    date: string(),
+    time: string().optional(),
   }),
 })
 

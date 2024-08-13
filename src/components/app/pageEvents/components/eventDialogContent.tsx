@@ -146,8 +146,9 @@ function EventInformation({
   handleGetUpdatesButtonClick: () => Promise<void>
   handleRSVPButtonClick: () => void
 }) {
-  const formattedEventDate = format(new Date(event.datetime), 'EEEE M/d h:mm a')
-  const isPastEvent = isBefore(startOfDay(new Date(event.datetime)), startOfDay(new Date()))
+  const eventDate = event?.time ? new Date(`${event.date}T${event.time}`) : new Date(event.date)
+  const formattedEventDate = format(eventDate, event?.time ? 'EEEE M/d h:mm a' : 'EEEE M/d')
+  const isPastEvent = isBefore(startOfDay(eventDate), startOfDay(new Date()))
 
   return (
     <div className="flex h-full flex-col">

@@ -33,13 +33,13 @@ export async function sendEventNotifications() {
   const now = startOfDay(new Date())
 
   const eventsInThreeDays = allEvents.filter(event => {
-    const eventDate = startOfDay(new Date(event.data.datetime))
+    const eventDate = startOfDay(new Date(event.data.date))
 
     return differenceInDays(eventDate, now) === 3
   })
 
   const eventsInOneDay = allEvents.filter(event => {
-    const eventDate = startOfDay(new Date(event.data.datetime))
+    const eventDate = startOfDay(new Date(event.data.date))
 
     return differenceInDays(eventDate, now) === 1
   })
@@ -89,18 +89,20 @@ async function getNotificationInformationForEvents(
       },
     })
 
-    const formattedEventDate = format(new Date(event.data.datetime), 'EEEE M/d')
+    const eventDate = event.data?.time ? `${event.data.date}T${event.data.time}` : event.data.date
 
-    const formattedEventTime = format(new Date(event.data.datetime), 'h:mm a')
+    const formattedEventDate = format(new Date(eventDate), 'EEEE M/d')
+
+    const formattedEventTime = format(new Date(eventDate), 'h:mm a')
 
     const eventDeeplink = `https://www.standwithcrypto.org/${event.data.state.toLowerCase()}/${event.data.slug}`
-    const smsBody = `Stand With Crypto Event Reminder: ${event.data.name} is happening on ${formattedEventDate} at ${formattedEventTime}. We look forward to seeing you there! See details or RSVP at ${eventDeeplink}`
+    const smsBody = `Stand With Crypto Event Reminder: ${event.data.name} is happening on ${formattedEventDate}${!!event.data?.time ? ` at ${formattedEventTime}` : ''}. We look forward to seeing you there! See details or RSVP at ${eventDeeplink}`
 
     for (const rsvpEvent of rsvpEvents) {
       notifications.push({
         userId: rsvpEvent.userAction.user.id,
         eventSlug: event.data.slug,
-        eventDate: event.data.datetime,
+        eventDate: eventDate,
         smsBody,
         phoneNumber: rsvpEvent.userAction.user.phoneNumber,
       })
