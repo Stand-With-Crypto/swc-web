@@ -25,7 +25,7 @@ export function PromotedEvents({ events }: PromotedEventsProps) {
           <div className="relative h-[182px] min-w-[271px]">
             <NextImage
               alt={event.data.name}
-              className="object-cover object-center"
+              className="rounded-3xl object-cover object-center"
               fill
               sizes="(max-width: 640px) 100vw, 271px"
               src={event.data.image}

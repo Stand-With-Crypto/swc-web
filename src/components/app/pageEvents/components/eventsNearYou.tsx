@@ -69,10 +69,13 @@ function FilteredEventsNearUser({
 }) {
   const filteredEventsNearUser = useMemo(() => {
     return userState
-      ? events.filter(
-          event =>
-            event.data.state === userState && isAfter(new Date(event.data.datetime), new Date()),
-        )
+      ? events.filter(event => {
+          const eventDate = event.data?.time
+            ? new Date(`${event.data.date}T${event.data.time}`)
+            : new Date(event.data.date)
+
+          return event.data.state === userState && isAfter(eventDate, new Date())
+        })
       : []
   }, [events, userState])
 

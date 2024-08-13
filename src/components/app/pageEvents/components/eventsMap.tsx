@@ -35,7 +35,13 @@ export function EventsMap({ events }: { events: SWCEvents }) {
   const currentHoverAndPressedFill = '#DDC9FF'
 
   const filteredFutureEvents = useMemo(() => {
-    return events.filter(event => isAfter(new Date(event.data.datetime), new Date()))
+    return events.filter(event => {
+      const eventDate = event.data?.time
+        ? new Date(`${event.data.date}T${event.data.time}`)
+        : new Date(event.data.date)
+
+      return isAfter(eventDate, new Date())
+    })
   }, [events])
 
   const eventsFromState = useMemo(() => {

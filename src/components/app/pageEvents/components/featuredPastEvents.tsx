@@ -8,9 +8,13 @@ interface FeaturedPastEventsProps {
 }
 
 export function FeaturedPastEvents({ events }: FeaturedPastEventsProps) {
-  const pastFeaturedEvents = events.filter(event =>
-    isBefore(new Date(event.data.datetime), new Date()),
-  )
+  const pastFeaturedEvents = events.filter(event => {
+    const eventDate = event.data?.time
+      ? new Date(`${event.data.date}T${event.data.time}`)
+      : new Date(event.data.date)
+
+    return isBefore(eventDate, new Date())
+  })
 
   if (!pastFeaturedEvents.length) return null
 
@@ -31,7 +35,7 @@ export function FeaturedPastEvents({ events }: FeaturedPastEventsProps) {
                 src={event.data.image}
               />
             </div>
-            <EventOverlay eventDate={event.data.datetime} eventName={event.data.name} />
+            <EventOverlay eventDate={event.data.date} eventName={event.data.name} />
           </div>
         ))}
       </div>

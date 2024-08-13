@@ -96,7 +96,7 @@ async function getNotificationInformationForEvents(
     const formattedEventTime = format(new Date(eventDate), 'h:mm a')
 
     const eventDeeplink = `https://www.standwithcrypto.org/${event.data.state.toLowerCase()}/${event.data.slug}`
-    const smsBody = `Stand With Crypto Event Reminder: ${event.data.name} is happening on ${formattedEventDate}${!!event.data?.time ? ` at ${formattedEventTime}` : ''}. We look forward to seeing you there! See details or RSVP at ${eventDeeplink}`
+    const smsBody = `Stand With Crypto Event Reminder: ${event.data.name} is happening on ${formattedEventDate}${event.data?.time ? ` at ${formattedEventTime}` : ''}. We look forward to seeing you there! See details or RSVP at ${eventDeeplink}`
 
     for (const rsvpEvent of rsvpEvents) {
       notifications.push({
