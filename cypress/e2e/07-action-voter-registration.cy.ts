@@ -7,7 +7,7 @@ describe('action - voter registration', () => {
     it('should navigate back and forth between the asked options yes, no and not sure', () => {
       cy.visit('/')
 
-      cy.contains('Check your voter registration').click()
+      cy.contains('Check Your Voter Registration').click()
       cy.get('[role="dialog"]')
 
       cy.get('button[type="button"]').contains('Yes').click()
@@ -36,7 +36,7 @@ describe('action - voter registration', () => {
     it('should go though the flow when the user is not registered to vote', () => {
       cy.visit('/')
 
-      cy.contains('Check your voter registration').click()
+      cy.contains('Check Your Voter Registration').click()
       cy.get('[role="dialog"]')
 
       cy.get('button[type="button"]').contains('No').click()
@@ -69,7 +69,7 @@ describe('action - voter registration', () => {
     it('should go through the flow when the user is registered to vote and sign in afterwards', () => {
       cy.visit('/')
 
-      cy.contains('Check your voter registration').click()
+      cy.contains('Check Your Voter Registration').click()
       cy.get('[role="dialog"]').as('dialog')
 
       cy.get('button[type="button"]').contains('Yes').click()
