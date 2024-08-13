@@ -28,18 +28,16 @@ export function EventDialogSocialLinks({
         </Button>
 
         <Button asChild className="inline-block lg:hidden" variant="link">
-          {/* // TODO: Get the right copy */}
           <a
-            href={`mailto:?subject=Stand With Crypto Event&body=Check out this event: ${eventDeeplink}`}
+            href={`mailto:?subject=Event from Stand with Crypto&body=I found an event I’m interested in from Stand with Crypto and wanted to share it with you.  Stand With Crypto is a pro-crypto organization dedicated to activating and mobilizing the crypto community. Find more information about the event here: ${eventDeeplink}`}
           >
             <Mail size={20} />
           </a>
         </Button>
 
         <Button asChild variant="link">
-          {/* // TODO: Get the right copy */}
           <a
-            href={`http://twitter.com/share?url=${eventDeeplink}&hashtags=StandWithCrypto,Event&text=Check out this event`}
+            href={`http://twitter.com/share?&hashtags=#StandWithCrypto&text=I’m interested in an event from @StandWithCrypto! It’s time to make our voices heard and protect the future of crypto in America. Learn more about the event here: ${eventDeeplink}`}
             target="_blank"
           >
             <Twitter size={20} />
@@ -47,7 +45,6 @@ export function EventDialogSocialLinks({
         </Button>
 
         <Button asChild variant="link">
-          {/* // TODO: Get the right copy */}
           <a href={`https://www.facebook.com/sharer.php?u=${eventDeeplink}`} target="_blank">
             <Facebook size={20} />
           </a>
