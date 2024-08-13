@@ -48,6 +48,13 @@ export const EXPERIMENTS_CONFIG = {
       { name: 'optionalFieldsVariant' as const, percentage: 0.5 },
     ],
   },
+  gh03_ThirdwebSignUpPhoneNumberExperiment: {
+    analyticsPropertyName: 'Thirdweb Sign Up Phone Number Experiment',
+    variants: [
+      { name: 'control' as const, percentage: 0.5 },
+      { name: 'variant' as const, percentage: 0.5 },
+    ],
+  },
 } satisfies Record<string, Omit<ExperimentConfig, 'name'>>
 export type Experiments = keyof typeof EXPERIMENTS_CONFIG
 type _ExperimentVariantsConfig<K extends Experiments> =

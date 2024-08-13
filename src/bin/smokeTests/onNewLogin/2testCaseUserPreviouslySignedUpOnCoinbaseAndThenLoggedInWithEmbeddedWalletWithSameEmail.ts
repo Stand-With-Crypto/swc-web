@@ -51,7 +51,7 @@ export const testCaseUserPreviouslySignedUpOnCoinbaseAndThenLoggedInWithEmbedded
     validateResults: (
       {
         existingUsersWithSource,
-        embeddedWalletEmailAddress,
+        embeddedWalletUserDetails,
         merge,
         wasUserCreated,
         maybeUpsertCryptoAddressResult,
@@ -64,7 +64,7 @@ export const testCaseUserPreviouslySignedUpOnCoinbaseAndThenLoggedInWithEmbedded
       // changed
       verify(existingUsersWithSource.length, true, 'existingUsersWithSource.length', issues)
       // changed
-      verify(embeddedWalletEmailAddress, true, 'embeddedWalletEmailAddress', issues)
+      verify(embeddedWalletUserDetails, true, 'embeddedWalletUserDetails', issues)
       verify(merge?.usersToDelete.length, false, 'merge?.usersToDelete.length', issues)
       // changed
       verify(merge?.userToKeep, true, 'merge?.userToKeep', issues)

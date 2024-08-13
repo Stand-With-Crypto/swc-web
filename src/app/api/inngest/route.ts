@@ -5,6 +5,7 @@ import { backfillCongressionalDistrictCronJob } from '@/inngest/functions/backfi
 import { backfillFailedNFT } from '@/inngest/functions/backfillFailedNFTCronJob'
 import { backfillNFTWithInngest } from '@/inngest/functions/backfillNFT'
 import { backfillNFTInngestCronJob } from '@/inngest/functions/backfillNFTCronJob'
+import { backfillSessionIdCronJob } from '@/inngest/functions/backfillSessionId'
 import {
   backfillSMSOptInReplyWithInngest,
   backfillSMSOptInReplyWithInngestUpdateBatchOfUsers,
@@ -41,6 +42,7 @@ export const maxDuration = 180 // 3 minutes
 export const { GET, POST, PUT } = serve({
   client: inngest,
   functions: [
+    backfillSessionIdCronJob,
     upsertAdvocateInCapitolCanaryWithInngest,
     emailViaCapitolCanaryWithInngest,
     checkSMSOptInReplyWithInngest,
