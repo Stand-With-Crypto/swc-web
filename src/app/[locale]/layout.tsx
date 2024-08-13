@@ -53,7 +53,7 @@ export default function Layout({ children, params }: PageProps & { children: Rea
   }
 
   return (
-    <html lang={locale}>
+    <html lang={locale} translate="no">
       <body className={fontClassName}>
         <OverrideGlobalLocalStorage />
         <NextTopLoader
