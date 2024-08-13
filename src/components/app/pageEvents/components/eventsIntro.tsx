@@ -1,8 +1,8 @@
 import Balancer from 'react-wrap-balancer'
 
+import { NextImage } from '@/components/ui/image'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { NextImage } from '@/components/ui/image'
 
 export function EventsIntro() {
   return (
@@ -28,10 +28,10 @@ export function EventsIntro() {
           blurDataURL={BannerBlurImageURL}
           className="hidden rounded-3xl lg:block"
           height={147}
-          width={827}
           placeholder="blur"
           priority
           src="/misc/america-crypto-state-tour.jpg"
+          width={827}
         />
 
         <PageSubTitle className="mt-6 text-center font-sans text-xl text-foreground">
