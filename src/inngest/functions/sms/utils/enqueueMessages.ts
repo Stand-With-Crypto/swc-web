@@ -1,5 +1,6 @@
 import { UserCommunicationJourneyType } from '@prisma/client'
 import * as Sentry from '@sentry/node'
+import { NonRetriableError } from 'inngest'
 
 import { sendSMS, SendSMSError } from '@/utils/server/sms'
 import { sleep } from '@/utils/shared/sleep'
@@ -62,6 +63,8 @@ export async function enqueueMessages(
               },
             })
           }
+        } else if (result.reason instanceof NonRetriableError) {
+          throw result.reason
         } else {
           Sentry.captureException('sendSMS failed with no reason', {
             extra: {
