@@ -24,11 +24,7 @@ export async function enqueueMessages(
   const { body, journeyType, campaignName } = payload
 
   const enqueueMessagesPromise = phoneNumbers.map(async phoneNumber => {
-    const communicationJourneys = await createCommunicationJourneys(
-      phoneNumber,
-      journeyType,
-      campaignName,
-    )
+    const communicationJourneys = await createCommunicationJourneys(phoneNumber, journeyType)
 
     const message = await sendSMS({
       body,
@@ -36,7 +32,7 @@ export async function enqueueMessages(
     })
 
     if (message) {
-      await createCommunication(communicationJourneys, message.sid)
+      await createCommunication(communicationJourneys, message.sid, campaignName)
     }
 
     return message

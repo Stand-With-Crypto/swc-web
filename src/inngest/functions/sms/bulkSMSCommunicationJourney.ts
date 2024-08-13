@@ -241,18 +241,25 @@ async function getPhoneNumberList(options: GetPhoneNumberOptions) {
   return prismaClient.user.groupBy({
     by: ['phoneNumber', 'datetimeCreated'],
     where: {
-      ...merge(options.userWhereInput, {
-        datetimeCreated: {
-          gte: options.cursor,
-        },
-        UserCommunicationJourney: {
-          every: {
-            campaignName: {
-              not: options.campaignName,
+      ...merge<Prisma.UserGroupByArgs['where'], Prisma.UserGroupByArgs['where']>(
+        options.userWhereInput,
+        {
+          datetimeCreated: {
+            gte: options.cursor,
+          },
+          UserCommunicationJourney: {
+            every: {
+              userCommunications: {
+                every: {
+                  campaignName: {
+                    not: options.campaignName,
+                  },
+                },
+              },
             },
           },
         },
-      }),
+      ),
       hasValidPhoneNumber: true,
       smsStatus: {
         in: [
