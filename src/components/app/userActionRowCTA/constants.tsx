@@ -44,9 +44,8 @@ export const USER_ACTION_ROW_CTA_INFO: Record<
   [UserActionType.VOTER_REGISTRATION]: {
     actionType: UserActionType.VOTER_REGISTRATION,
     image: { src: '/actionTypeIcons/registerToVote.png' },
-    text: 'Check your voter registration and get a free NFT',
-    subtext:
-      'You can make a difference this year. Register to vote and get a free "I\'m a Voter" NFT',
+    text: 'Check Your Voter Registration',
+    subtext: "Find your voter info with our simple tool - you'll get a free NFT.",
     shortText: 'Register to vote',
     shortSubtext: 'Get a free "I\'m a Voter" NFT',
     canBeTriggeredMultipleTimes: false,
@@ -138,10 +137,10 @@ export const USER_ACTION_ROW_CTA_INFO: Record<
   [UserActionType.VOTER_ATTESTATION]: {
     actionType: UserActionType.VOTER_ATTESTATION,
     image: { src: '/actionTypeIcons/voterAttestation.png' },
-    text: 'Pledge to vote',
-    subtext: 'Pledge to vote for pro-crypto candidates.',
+    text: 'Pledge To Vote This Fall',
+    subtext: 'Sign the pledge to research the candidates & turn out to vote.',
     shortText: 'Pledge to vote',
-    shortSubtext: 'Pledge to vote for pro-crypto candidates.',
+    shortSubtext: 'Pledge to vote This Fall.',
     canBeTriggeredMultipleTimes: false,
     WrapperComponent: UserActionFormVoterAttestationDialog,
   },

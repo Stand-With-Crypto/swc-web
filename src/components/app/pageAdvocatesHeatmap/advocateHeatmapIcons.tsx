@@ -330,21 +330,21 @@ export function VoterAttestationIcon({
       xmlns="http://www.w3.org/2000/svg"
       {...rest}
     >
-      <rect fill="#FEE1E4" height="40" rx="20" width="40" />
-      <g clipPath="url(#clip0_3_4767)">
+      <rect fill="#0851AA" height="40" rx="20" width="40" />
+      <g clipPath="url(#clip0_76_1072)">
         <path
-          d="M20 9L11 13V19C11 24.55 14.84 29.74 20 31C25.16 29.74 29 24.55 29 19V13L20 9ZM27 19C27 23.52 24.02 27.69 20 28.93C15.98 27.69 13 23.52 13 19V14.3L20 11.19L27 14.3V19ZM15.41 19.59L14 21L18 25L26 17L24.59 15.58L18 22.17L15.41 19.59Z"
-          fill="#910510"
+          d="M20 10.8333L12.5 14.1666V19.1666C12.5 23.7916 15.7 28.1166 20 29.1666C24.3 28.1166 27.5 23.7916 27.5 19.1666V14.1666L20 10.8333ZM25.8333 19.1666C25.8333 22.9333 23.35 26.4083 20 27.4416C16.65 26.4083 14.1667 22.9333 14.1667 19.1666V15.2499L20 12.6583L25.8333 15.2499V19.1666ZM16.175 19.6583L15 20.8333L18.3333 24.1666L25 17.4999L23.825 16.3166L18.3333 21.8083L16.175 19.6583Z"
+          fill="white"
         />
         <path
-          d="M13 14.3V19C13 23.52 15.98 27.69 20 28.93C24.02 27.7 27 23.52 27 19V14.3L20 11.19L13 14.3ZM26 17L18 25L14 21L15.41 19.59L18 22.17L24.59 15.58L26 17Z"
-          fill="#910510"
+          d="M14.1665 15.2501V19.1668C14.1665 22.9334 16.6498 26.4084 19.9998 27.4418C23.3498 26.4168 25.8332 22.9334 25.8332 19.1668V15.2501L19.9998 12.6584L14.1665 15.2501ZM24.9998 17.5001L18.3332 24.1668L14.9998 20.8334L16.1748 19.6584L18.3332 21.8084L23.8248 16.3168L24.9998 17.5001Z"
+          fill="white"
           opacity="0.3"
         />
       </g>
       <defs>
-        <clipPath id="clip0_3_4767">
-          <rect fill="white" height="24" transform="translate(8 8)" width="24" />
+        <clipPath id="clip0_76_1072">
+          <rect fill="white" height="20" transform="translate(10 10)" width="20" />
         </clipPath>
       </defs>
       {isPulsing && (
@@ -354,7 +354,7 @@ export function VoterAttestationIcon({
             cy="20"
             fill="none"
             r="18"
-            stroke="#FEE1E4"
+            stroke="#0851AA"
             strokeLinecap="round"
             strokeWidth="8"
           >
@@ -367,7 +367,7 @@ export function VoterAttestationIcon({
             cy="20"
             fill="none"
             r="18"
-            stroke="#FEE1E4"
+            stroke="#0851AA"
             strokeLinecap="round"
             strokeWidth="4"
           >
