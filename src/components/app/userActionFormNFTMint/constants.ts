@@ -10,6 +10,7 @@ export enum UserActionFormNFTMintSectionNames {
   INTRO = 'intro',
   CHECKOUT = 'checkout',
   TRANSACTION_WATCH = 'transactionWatch',
+  SUCCESS = 'success',
 }
 
 export const ANALYTICS_NAME_USER_ACTION_FORM_NFT_MINT = 'User Action Form NFT Mint'

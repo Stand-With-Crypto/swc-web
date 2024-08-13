@@ -1,10 +1,10 @@
-import { createThirdwebClient } from 'thirdweb'
 import { viemAdapter } from 'thirdweb/adapters/viem'
 import { base } from 'thirdweb/chains'
 import { createPublicClient, http } from 'viem'
 import { mainnet } from 'viem/chains'
 
 import { THIRD_WEB_CLIENT_SECRET } from '@/utils/server/thirdweb/thirdwebClientSecret'
+import { thirdwebClient } from '@/utils/shared/thirdwebClient'
 
 export const thirdwebRPCClient = createPublicClient({
   chain: mainnet,
@@ -18,11 +18,7 @@ export const thirdwebRPCClient = createPublicClient({
   }),
 })
 
-export const thirdwebServerClient = createThirdwebClient({
-  secretKey: THIRD_WEB_CLIENT_SECRET,
-})
-
 export const thirdwebBaseRPCClient = viemAdapter.publicClient.toViem({
-  client: thirdwebServerClient,
+  client: thirdwebClient,
   chain: base,
 })

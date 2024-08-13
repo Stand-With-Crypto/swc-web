@@ -192,7 +192,7 @@ export function UserActionFormNFTMintCheckout({
         <UserActionFormLayout.Footer className="!mt-auto">
           {debug ? (
             <Button
-              onClick={() => goToSection(UserActionFormNFTMintSectionNames.TRANSACTION_WATCH)}
+              onClick={() => goToSection(UserActionFormNFTMintSectionNames.SUCCESS)}
               size="lg"
             >
               Mint now - Mocked
@@ -208,10 +208,7 @@ export function UserActionFormNFTMintCheckout({
               }
               onError={e => handleTransactionException(e, { isUSResident })}
               onTransactionConfirmed={onMintCallback}
-              onTransactionSent={result => {
-                setTransactionHash(result.transactionHash)
-                goToSection(UserActionFormNFTMintSectionNames.TRANSACTION_WATCH)
-              }}
+              onTransactionSent={result => setTransactionHash(result.transactionHash)}
               theme={theme}
               transaction={prepareTransaction}
             >
