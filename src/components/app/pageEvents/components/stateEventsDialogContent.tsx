@@ -42,7 +42,7 @@ export function StateEventsDialogContent({ state, events }: StateEventsDialogPro
         {US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP[parsedState]}.
       </p>
 
-      <ScrollArea>
+      <ScrollArea className="w-full">
         {stateEvents?.length > 0 ? (
           <div className="mt-6 flex w-full flex-col gap-4 px-8 lg:max-h-96">
             {stateEvents.map(event => (

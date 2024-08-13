@@ -3,6 +3,7 @@
 import { ReactNode, Suspense } from 'react'
 
 import { LazyEventDialogContent } from '@/components/app/pageEvents/components/eventDialogContentLazyload'
+import { EventDialogContentSkeleton } from '@/components/app/pageEvents/components/eventDialogContentSkeleton'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { useDialog } from '@/hooks/useDialog'
 import { SWCEvent } from '@/utils/shared/getSWCEvents'
@@ -22,7 +23,7 @@ export function EventDialog({ event, trigger, triggerClassName }: EventDialogPro
         {trigger}
       </DialogTrigger>
       <DialogContent a11yTitle={`State ${event.state} Events`} className="max-w-xl" padding={false}>
-        <Suspense fallback={null}>
+        <Suspense fallback={<EventDialogContentSkeleton />}>
           <LazyEventDialogContent event={event} />
         </Suspense>
       </DialogContent>
