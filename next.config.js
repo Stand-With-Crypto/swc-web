@@ -248,7 +248,7 @@ const nextConfig = {
       },
       {
         source: '/action/mint-nft',
-        destinatio: '/action/nft-mint',
+        destination: '/action/nft-mint',
         permanent: true,
       },
       // vanity urls
