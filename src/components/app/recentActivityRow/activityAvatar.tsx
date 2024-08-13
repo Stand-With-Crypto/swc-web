@@ -12,6 +12,7 @@ export const ACTIVITY_TYPE_TO_ICON_URL: Record<UserActionType, string> = {
   [UserActionType.EMAIL]: '/activityFeedIcons/email.svg',
   [UserActionType.OPT_IN]: '/activityFeedIcons/join.svg',
   [UserActionType.VOTER_REGISTRATION]: '/activityFeedIcons/vote.svg',
+  [UserActionType.VOTER_ATTESTATION]: '/activityFeedIcons/pledge.svg',
   [UserActionType.TWEET]: '/activityFeedIcons/share-x.svg',
   [UserActionType.LIVE_EVENT]: '/activityFeedIcons/event.svg',
   [UserActionType.TWEET_AT_PERSON]: '/activityFeedIcons/pizza-day.svg',

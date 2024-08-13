@@ -28,7 +28,10 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { trackFormSubmissionSyncErrors, triggerServerActionForForm } from '@/utils/web/formUtils'
-import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
+import {
+  convertGooglePlaceAutoPredictionToAddressSchema,
+  GooglePlaceAutocompletePrediction,
+} from '@/utils/web/googlePlaceUtils'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
 import {
   zodUpdateUserProfileFormFields,
@@ -43,7 +46,11 @@ export function UpdateUserProfileForm({
   shouldFieldsBeRequired = false,
 }: {
   user: SensitiveDataClientUser & { address: ClientAddress | null }
-  onSuccess: (updatedUserFields: { firstName: string; lastName: string }) => void
+  onSuccess: (updatedUserFields: {
+    firstName: string
+    lastName: string
+    address: GooglePlaceAutocompletePrediction | null
+  }) => void
   shouldFieldsBeRequired?: boolean
 }) {
   const router = useRouter()
@@ -99,7 +106,7 @@ export function UpdateUserProfileForm({
             router.refresh()
             toast.success('Profile updated', { duration: 5000 })
             const { firstName, lastName } = values
-            onSuccess({ firstName, lastName })
+            onSuccess({ firstName, lastName, address: values.address })
           }
         }, trackFormSubmissionSyncErrors(FORM_NAME))}
       >

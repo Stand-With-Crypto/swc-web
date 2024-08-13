@@ -43,4 +43,9 @@ export const USER_ACTION_FORM_SUCCESS_SCREEN_INFO: Record<
     description:
       "You've done your part to save crypto, but the fight isn't over yet. Keep the momentum going by completing the next action below.",
   },
+  [UserActionType.VOTER_ATTESTATION]: {
+    title: 'You pledged to vote',
+    description:
+      '... and got a free NFT for doing so! Complete the actions below to continue your progress as a crypto advocate.',
+  },
 }

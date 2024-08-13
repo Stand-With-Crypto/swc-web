@@ -41,6 +41,11 @@ export const SWC_PIZZA_DAY_NFT_CONTRACT_ADDRESS = requiredEnv(
   'SWC_PIZZA_DAY_NFT_CONTRACT_ADDRESS',
 )
 
+export const SWC_VOTER_ATTESTATION_NFT_CONTRACT_ADDRESS = requiredEnv(
+  process.env.SWC_VOTER_ATTESTATION_NFT_CONTRACT_ADDRESS,
+  'SWC_VOTER_ATTESTATION_NFT_CONTRACT_ADDRESS',
+)
+
 export const SWC_DOT_ETH_WALLET = requiredEnv(process.env.SWC_DOT_ETH_WALLET, 'SWC_DOT_ETH_WALLET')
 
 export const NFT_SLUG_BACKEND_METADATA: Record<
@@ -73,6 +78,10 @@ export const NFT_SLUG_BACKEND_METADATA: Record<
   },
   [NFTSlug.PIZZA_DAY_2024_05_22]: {
     contractAddress: SWC_PIZZA_DAY_NFT_CONTRACT_ADDRESS,
+    associatedWallet: SWC_DOT_ETH_WALLET,
+  },
+  [NFTSlug.VOTER_ATTESTATION]: {
+    contractAddress: SWC_VOTER_ATTESTATION_NFT_CONTRACT_ADDRESS,
     associatedWallet: SWC_DOT_ETH_WALLET,
   },
 }

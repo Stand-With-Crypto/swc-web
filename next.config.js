@@ -161,6 +161,11 @@ const ACTION_REDIRECTS = [
     queryValue: 'join-stand-with-crypto',
   },
   {
+    destination: '/action/pledge',
+    queryKey: 'action',
+    queryValue: 'pledge-to-vote',
+  },
+  {
     destination: '/action/sign-up',
     queryKey: 'modal',
     queryValue: 'member-join',
@@ -220,6 +225,11 @@ const nextConfig = {
         permanent: true,
         destination: '/action/call',
         source: '/call',
+      },
+      {
+        permanent: true,
+        destination: '/action/pledge',
+        source: '/pledge',
       },
       {
         permanent: false,

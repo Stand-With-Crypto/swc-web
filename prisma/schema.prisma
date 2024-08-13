@@ -261,6 +261,7 @@ enum UserActionType {
   VOTER_REGISTRATION
   LIVE_EVENT
   TWEET_AT_PERSON
+  VOTER_ATTESTATION
   RSVP_EVENT
 }
 
@@ -291,6 +292,7 @@ model UserAction {
   userActionDonation          UserActionDonation?
   userActionOptIn             UserActionOptIn?
   userActionVoterRegistration UserActionVoterRegistration?
+  userActionVoterAttestation  UserActionVoterAttestation?
   userActionTweetAtPerson     UserActionTweetAtPerson?
   userActionRsvpEvent         UserActionRsvpEvent?
 
@@ -415,6 +417,14 @@ model UserActionVoterRegistration {
   usaState   String?    @map("usa_state")
 
   @@map("user_action_voter_registration")
+}
+
+model UserActionVoterAttestation {
+  id         String     @id @default(uuid())
+  userAction UserAction @relation(fields: [id], references: [id])
+  usaState   String?    @map("usa_state")
+
+  @@map("user_action_voter_attestation")
 }
 
 model UserActionTweetAtPerson {

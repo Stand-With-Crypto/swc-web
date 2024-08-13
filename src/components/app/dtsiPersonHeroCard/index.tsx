@@ -28,6 +28,8 @@ interface Props {
   isRecommended?: boolean
   footer?: React.ReactNode
   isClickable?: boolean
+  forceMobile?: boolean
+  target?: React.HTMLAttributeAnchorTarget
 }
 
 function getSubHeaderString(props: Props) {
@@ -49,18 +51,22 @@ export function DTSIPersonHeroCardFooter({
   isRecommended,
   children,
   className,
+  forceMobile = false,
 }: {
   className?: string
   children: React.ReactNode
   isRecommended?: boolean
+  forceMobile?: boolean
 }) {
+  const recommendedClasses = 'bg-primary-cta text-primary-cta-foreground antialiased'
+  const notRecommendedClasses = forceMobile ? 'hidden' : 'hidden sm:block'
+
   return (
     <div
       className={cn(
-        'p-4 text-center font-bold text-fontcolor sm:px-3 sm:py-6 sm:text-sm xl:p-6 xl:text-lg',
-        isRecommended
-          ? 'bg-primary-cta text-primary-cta-foreground antialiased'
-          : 'hidden sm:block',
+        'p-4 text-center font-bold text-fontcolor',
+        isRecommended ? recommendedClasses : notRecommendedClasses,
+        !forceMobile && 'sm:px-3 sm:py-6 sm:text-sm xl:p-6 xl:text-lg',
         className,
       )}
     >
@@ -70,7 +76,15 @@ export function DTSIPersonHeroCardFooter({
 }
 
 export function DTSIPersonHeroCard(props: Props) {
-  const { person, locale, isRecommended, footer, isClickable = true } = props
+  const {
+    person,
+    locale,
+    isRecommended,
+    footer,
+    isClickable = true,
+    forceMobile = false,
+    target,
+  } = props
   const politicalAffiliationCategoryAbbreviation =
     person.politicalAffiliationCategory &&
     dtsiPersonPoliticalAffiliationCategoryAbbreviation(person.politicalAffiliationCategory)
@@ -81,12 +95,19 @@ export function DTSIPersonHeroCard(props: Props) {
   const displayName = `${dtsiPersonFullName(person)}${politicalAbbrDisplayName}`
 
   return (
-    <DtsiPersonHeroCardWrapper isClickable={isClickable} locale={locale} person={person}>
-      <div className="max-sm:flex">
+    <DtsiPersonHeroCardWrapper
+      forceMobile={forceMobile}
+      isClickable={isClickable}
+      locale={locale}
+      person={person}
+      target={target}
+    >
+      <div className={cn(forceMobile ? 'flex' : 'max-sm:flex')}>
         <div
           className={cn(
-            'relative h-36 w-36 shrink-0 sm:h-52 sm:w-52 xl:h-72 xl:w-72',
+            'relative h-36 w-36 shrink-0',
             person.profilePictureUrl || 'bg-black',
+            !forceMobile && 'sm:h-52 sm:w-52 xl:h-72 xl:w-72',
           )}
         >
           {person.profilePictureUrl ? (
@@ -98,24 +119,39 @@ export function DTSIPersonHeroCard(props: Props) {
               style={{ objectFit: 'cover' }}
             />
           ) : (
-            <div className="flex h-full w-full items-center justify-center sm:pb-20">
+            <div
+              className={cn(
+                'flex h-full w-full items-center justify-center',
+                !forceMobile && 'sm:pb-20',
+              )}
+            >
               <User className="h-20 w-20 text-white xl:h-40 xl:w-40" />
             </div>
           )}
           {/* Hidden on mobile */}
           <div
-            className="absolute bottom-0 left-0 right-0 flex items-end justify-between gap-3 px-3 pb-3 pt-16 max-sm:hidden"
+            className={cn(
+              'absolute bottom-0 left-0 right-0 flex items-end justify-between gap-3 px-3 pb-3 pt-16',
+              forceMobile ? 'hidden' : 'max-sm:hidden',
+            )}
             style={{
               background: 'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%)',
             }}
           >
             <div>
-              <div className={cn('block text-sm font-bold text-white lg:text-base')}>
+              <div
+                className={cn('block text-sm font-bold text-white', !forceMobile && 'lg:text-base')}
+              >
                 {displayName}
               </div>
               {subheaderString && (
                 <div>
-                  <div className="mt-2 inline-block rounded-full bg-muted/20 px-2 py-2 text-sm text-white lg:px-5">
+                  <div
+                    className={cn(
+                      'mt-2 inline-block rounded-full bg-muted/20 px-2 py-2 text-sm text-white',
+                      !forceMobile && 'lg:px-5',
+                    )}
+                  >
                     {subheaderString}
                   </div>
                 </div>
@@ -128,7 +164,12 @@ export function DTSIPersonHeroCard(props: Props) {
         </div>
 
         {/* Hidden on desktop */}
-        <div className="flex flex-col justify-between p-4 text-sm text-fontcolor sm:hidden">
+        <div
+          className={cn(
+            'flex flex-col justify-between p-4 text-sm text-fontcolor',
+            !forceMobile && 'sm:hidden',
+          )}
+        >
           <div>
             <div className="font-bold">{displayName}</div>
             {subheaderString && <div className="mt-2 text-fontcolor-muted">{subheaderString}</div>}
@@ -149,12 +190,13 @@ export function DTSIPersonHeroCard(props: Props) {
       </div>
       {/* Hidden on mobile for non-recommended */}
       {footer !== undefined ? (
-        <div className="hidden sm:block">{footer}</div>
+        <div className={cn('hidden', !forceMobile && 'sm:block')}>{footer}</div>
       ) : (
-        <DTSIPersonHeroCardFooter isRecommended={isRecommended}>
+        <DTSIPersonHeroCardFooter forceMobile={forceMobile} isRecommended={isRecommended}>
           {isRecommended ? (
             <>
-              Recommended <span className="sm:hidden xl:inline">candidate</span>
+              Recommended{' '}
+              <span className={cn('sm:hidden', !forceMobile && 'xl:inline')}>candidate</span>
             </>
           ) : (
             convertDTSIPersonStanceScoreToCryptoSupportLanguageSentence(person)
@@ -170,15 +212,22 @@ function DtsiPersonHeroCardWrapper({
   locale,
   isClickable,
   children,
+  forceMobile = false,
+  target = '_self',
 }: {
   isClickable: boolean
   children: ReactNode
   person: DTSI_PersonCardFragment
   locale: SupportedLocale
+  forceMobile?: boolean
+  target?: React.HTMLAttributeAnchorTarget
 }) {
   const className = cn(
-    'block shrink-0 overflow-hidden bg-white text-left shadow-md hover:!no-underline max-sm:rounded-3xl max-sm:border sm:inline-block sm:w-52 xl:w-72',
+    'block shrink-0 overflow-hidden bg-white text-left shadow-md hover:!no-underline ',
     !isClickable && 'hover:cursor-default',
+    forceMobile
+      ? 'rounded-3xl border'
+      : 'max-sm:rounded-3xl max-sm:border sm:inline-block sm:w-52 xl:w-72',
   )
 
   if (!isClickable) {
@@ -186,7 +235,11 @@ function DtsiPersonHeroCardWrapper({
   }
 
   return (
-    <InternalLink className={className} href={getIntlUrls(locale).politicianDetails(person.slug)}>
+    <InternalLink
+      className={className}
+      href={getIntlUrls(locale).politicianDetails(person.slug)}
+      target={target}
+    >
       {children}
     </InternalLink>
   )

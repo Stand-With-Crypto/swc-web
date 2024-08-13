@@ -34,6 +34,7 @@ export const GooglePlacesSelect = React.forwardRef<
     loading,
     disablePreventMobileKeyboardOffset,
     shouldLimitUSAddresses,
+    disabled,
     ...inputProps
   } = props
   const [open, setOpen] = React.useState(false)
@@ -70,6 +71,7 @@ export const GooglePlacesSelect = React.forwardRef<
     <Combobox
       analytics={'Google Place Select'}
       disablePreventMobileKeyboardOffset={disablePreventMobileKeyboardOffset}
+      disabled={disabled}
       formatPopoverTrigger={triggerProps => (
         <InputWithIcons
           className={cn(
@@ -79,6 +81,7 @@ export const GooglePlacesSelect = React.forwardRef<
             triggerProps.open && 'outline-none ring-2 ring-ring ring-offset-2',
             className,
           )}
+          disabled={disabled}
           leftIcon={showIcon ? <MapPin className="h-4 w-4 text-gray-500" /> : undefined}
           placeholder="select a location"
           ref={ref}
