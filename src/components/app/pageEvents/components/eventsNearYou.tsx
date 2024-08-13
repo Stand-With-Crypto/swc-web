@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo } from 'react'
+import { Suspense, useMemo } from 'react'
 import Balancer from 'react-wrap-balancer'
 import { isAfter } from 'date-fns'
 
@@ -14,7 +14,15 @@ interface EventsNearYouProps {
   events: SWCEvents
 }
 
-export function EventsNearYou({ events }: EventsNearYouProps) {
+export function EventsNearYou(props: EventsNearYouProps) {
+  return (
+    <Suspense fallback={null}>
+      <_EventsNearYou {...props} />
+    </Suspense>
+  )
+}
+
+export function _EventsNearYou({ events }: EventsNearYouProps) {
   const { setAddress, address } = useMutableCurrentUserAddress()
 
   const parsedAddress =
