@@ -44,9 +44,15 @@ export async function sendEventNotifications() {
     return differenceInDays(eventDate, now) === 1
   })
 
-  const batchThreeDaysNotifications = await getNotificationInformationForEvents(eventsInThreeDays)
+  const batchThreeDaysNotifications = await getNotificationInformationForEvents(
+    eventsInThreeDays,
+    'three-days',
+  )
 
-  const batchOneDayNotifications = await getNotificationInformationForEvents(eventsInOneDay)
+  const batchOneDayNotifications = await getNotificationInformationForEvents(
+    eventsInOneDay,
+    'one-day',
+  )
 
   const notifications: Array<Notification> = [
     ...batchThreeDaysNotifications,
@@ -61,7 +67,10 @@ export async function sendEventNotifications() {
   } as SendEventNotificationsResponse
 }
 
-async function getNotificationInformationForEvents(events: SWCEvents) {
+async function getNotificationInformationForEvents(
+  events: SWCEvents,
+  notificationStrategy: string,
+) {
   const notifications: Array<Notification> = []
 
   for (const event of events) {
@@ -100,7 +109,8 @@ async function getNotificationInformationForEvents(events: SWCEvents) {
     await inngest.send({
       name: BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
       data: {
-        persist: true,
+        send: true,
+        campaignName: `event-reminder-${event.data.slug}-${event.data.state}-${notificationStrategy}`,
         smsBody,
         userWhereInput: {
           phoneNumber: {

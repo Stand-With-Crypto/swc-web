@@ -1,6 +1,6 @@
 'use client'
 
-import { MouseEvent, useCallback, useEffect, useMemo, useState } from 'react'
+import { MouseEvent, Suspense, useCallback, useEffect, useMemo, useState } from 'react'
 import { ComposableMap, Geographies, Geography, Marker } from 'react-simple-maps'
 import { isAfter } from 'date-fns'
 import { AnimatePresence, motion } from 'framer-motion'
@@ -9,7 +9,7 @@ import {
   ADVOCATES_HEATMAP_GEO_URL,
   STATE_COORDS,
 } from '@/components/app/pageAdvocatesHeatmap/constants'
-import { StateEventsDialog } from '@/components/app/pageEvents/components/stateEventsDialog'
+import { LazyStateEventsDialog } from '@/components/app/pageEvents/components/stateEventsDialogLazyLoad'
 import { SWCEvents } from '@/utils/shared/getSWCEvents'
 import { pluralize } from '@/utils/shared/pluralize'
 import {
@@ -51,23 +51,35 @@ export function EventsMap({ events }: { events: SWCEvents }) {
     return stateWithEvents
   }, [filteredFutureEvents])
 
+  const eventsFromStateKeys = Object.keys(eventsFromState)
+
   const markers: MapMarker[] = useMemo(() => {
     const result: MapMarker[] = []
 
-    Object.keys(eventsFromState).forEach(state => {
+    eventsFromStateKeys.forEach(state => {
       const coordinates = STATE_COORDS[state as keyof typeof STATE_COORDS]
 
-      const marker: MapMarker = {
-        id: state,
-        name: state,
-        coordinates: [coordinates[0], coordinates[1]],
-      }
+      for (let i = 0; i < eventsFromState[state]; i++) {
+        const offsetX = i % 2 === 0 ? 1 : -1
+        const offsetY = i % 2 === 0 ? -1 : 1
 
-      result.push(marker)
+        const offsetCoordinates: [number, number] =
+          i === 0
+            ? [coordinates[0], coordinates[1]]
+            : [coordinates[0] + offsetX, coordinates[1] + offsetY]
+
+        const marker: MapMarker = {
+          id: `${state} ${i}`,
+          name: `${state} ${i}`,
+          coordinates: offsetCoordinates,
+        }
+
+        result.push(marker)
+      }
     })
 
     return result
-  }, [eventsFromState])
+  }, [eventsFromState, eventsFromStateKeys])
 
   const handleActionMouseHover = useCallback(
     (geo: any, event: MouseEvent<SVGElement>) => {
@@ -104,44 +116,51 @@ export function EventsMap({ events }: { events: SWCEvents }) {
         <Geographies geography={ADVOCATES_HEATMAP_GEO_URL}>
           {({ geographies }) => (
             <>
-              {geographies.map(geo => (
-                <Geography
-                  geography={geo}
-                  key={geo.rsmKey}
-                  onClick={() =>
-                    setStateDialogProps({
-                      open: true,
-                      state: getUSStateCodeFromStateName(geo.properties.name) ?? null,
-                    })
-                  }
-                  onMouseMove={event => handleActionMouseHover(geo, event)}
-                  onMouseOut={handleActionMouseLeave}
-                  stroke="#FFF"
-                  style={{
-                    default: {
-                      fill: currentFill,
-                      stroke: currentStroke,
-                      strokeWidth: '0.777px',
-                      outline: 'none',
-                      transition: 'fill 0.2s ease-in-out, stroke 0.2s ease-in-out',
-                    },
-                    hover: {
-                      fill: currentHoverAndPressedFill,
-                      outline: 'none',
-                      stroke: currentStroke,
-                      strokeWidth: '0.777px',
-                      cursor: 'pointer',
-                    },
-                    pressed: {
-                      fill: currentHoverAndPressedFill,
-                      outline: 'none',
-                      stroke: currentStroke,
-                      strokeWidth: '0.777px',
-                      cursor: 'pointer',
-                    },
-                  }}
-                />
-              ))}
+              {geographies.map(geo => {
+                const stateCodeFromState = getUSStateCodeFromStateName(geo.properties.name)
+                const stateHasEvents = eventsFromStateKeys.includes(stateCodeFromState ?? '')
+
+                return (
+                  <Geography
+                    geography={geo}
+                    key={geo.rsmKey}
+                    onClick={() => {
+                      if (!stateHasEvents) return
+
+                      setStateDialogProps({
+                        open: true,
+                        state: getUSStateCodeFromStateName(geo.properties.name) ?? null,
+                      })
+                    }}
+                    onMouseMove={event => handleActionMouseHover(geo, event)}
+                    onMouseOut={handleActionMouseLeave}
+                    stroke="#FFF"
+                    style={{
+                      default: {
+                        fill: currentFill,
+                        stroke: currentStroke,
+                        strokeWidth: '0.777px',
+                        outline: 'none',
+                        transition: 'fill 0.2s ease-in-out, stroke 0.2s ease-in-out',
+                      },
+                      hover: {
+                        fill: currentHoverAndPressedFill,
+                        outline: 'none',
+                        stroke: currentStroke,
+                        strokeWidth: '0.777px',
+                        cursor: stateHasEvents ? 'pointer' : 'default',
+                      },
+                      pressed: {
+                        fill: currentHoverAndPressedFill,
+                        outline: 'none',
+                        stroke: currentStroke,
+                        strokeWidth: '0.777px',
+                        cursor: stateHasEvents ? 'pointer' : 'default',
+                      },
+                    }}
+                  />
+                )
+              })}
               <AnimatePresence>
                 {markers.map(({ id, coordinates }) => (
                   <motion.g
@@ -182,12 +201,14 @@ export function EventsMap({ events }: { events: SWCEvents }) {
         mousePosition={mousePosition}
       />
 
-      <StateEventsDialog
-        events={events}
-        isOpen={stateDialogProps.open}
-        setIsOpen={(open: boolean) => setStateDialogProps({ open, state: null })}
-        state={stateDialogProps.state as keyof typeof US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP}
-      />
+      <Suspense fallback={null}>
+        <LazyStateEventsDialog
+          events={events}
+          isOpen={stateDialogProps.open}
+          setIsOpen={(open: boolean) => setStateDialogProps({ open, state: null })}
+          state={stateDialogProps.state as keyof typeof US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP}
+        />
+      </Suspense>
     </>
   )
 }
@@ -237,9 +258,7 @@ function InfoTooltip({
       }}
     >
       {actionInfo}
-      <span className="font-mono text-sm font-normal text-muted-foreground">
-        Click state to view
-      </span>
+      <span className="font-mono text-sm font-normal">Click state to view</span>
     </div>
   )
 }

@@ -21,7 +21,11 @@ export function EventDialog({ event, trigger, triggerClassName }: EventDialogPro
       <DialogTrigger className={triggerClassName ?? 'flex w-full justify-center'}>
         {trigger}
       </DialogTrigger>
-      <DialogContent a11yTitle={`State ${event.state} Events`} className="max-w-[578px]">
+      <DialogContent
+        a11yTitle={`State ${event.state} Events`}
+        className="max-w-[578px]"
+        padding={false}
+      >
         <EventDialogContent event={event} />
       </DialogContent>
     </Dialog>

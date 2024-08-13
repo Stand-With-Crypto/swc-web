@@ -77,8 +77,8 @@ export function EventDialogPhoneNumber({ onSuccess }: EventDialogPhoneNumberProp
 
       <p className="text-center font-mono text-[10px] text-muted-foreground">
         <Balancer>
-          By clicking Get updates, I consent to receive recurring texts from Stand with Crypto to
-          the number I gave to Coinbase. You can reply STOP to stop receiving texts. Message and
+          By clicking Get updates, you consent to receive recurring texts from Stand with Crypto to
+          the number you gave to Coinbase. You can reply STOP to stop receiving texts. Message and
           data rates may apply.
         </Balancer>
       </p>

@@ -3,6 +3,7 @@ import Balancer from 'react-wrap-balancer'
 import { EventDialog } from '@/components/app/pageEvents/components/eventDialog'
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
+import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { SWCEvents } from '@/utils/shared/getSWCEvents'
 
 interface PromotedEventsProps {
@@ -34,7 +35,9 @@ export function PromotedEvents({ events }: PromotedEventsProps) {
           </div>
 
           <div className="grid justify-items-center gap-2 lg:justify-items-start">
-            <h4 className="text-bold font-sans text-base text-foreground">{event.data.name}</h4>
+            <PageSubTitle as="h3" className="text-bold font-sans text-base text-foreground">
+              {event.data.name}
+            </PageSubTitle>
             <p className="line-clamp-3 text-center font-mono text-base text-muted-foreground lg:text-left">
               <Balancer>{event.data.description}</Balancer>
             </p>

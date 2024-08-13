@@ -21,6 +21,7 @@ export async function getEvent(eventSlug: string, state: string) {
             ...(NEXT_PUBLIC_ENVIRONMENT === 'production' && { published: 'published' }),
           },
           includeUnpublished: NEXT_PUBLIC_ENVIRONMENT !== 'production',
+          cacheSeconds: 60,
         }),
       {
         retries: 3,

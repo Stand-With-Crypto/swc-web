@@ -22,9 +22,9 @@ export function EventsPage({ events, isDeepLink }: EventsPageProps) {
 
       <PromotedEvents events={events} />
 
-      <AllUpcomingEvents events={events} />
-
       <EventsNearYou events={events} />
+
+      <AllUpcomingEvents events={events} />
 
       {/* <FeaturedPastEvents events={events} /> */}
     </div>

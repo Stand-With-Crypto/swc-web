@@ -1,6 +1,15 @@
+import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 
-export function SuccessfulEventNotificationsSignup() {
+interface SuccessfulEventNotificationsSignupProps {
+  isCreatingRsvpEventAction: boolean
+  handleRSVPButtonClick: () => void
+}
+
+export function SuccessfulEventNotificationsSignup({
+  handleRSVPButtonClick,
+  isCreatingRsvpEventAction,
+}: SuccessfulEventNotificationsSignupProps) {
   return (
     <div className="flex flex-col items-center gap-2 pb-4">
       <NextImage
@@ -13,8 +22,16 @@ export function SuccessfulEventNotificationsSignup() {
 
       <h3 className="mt-6 font-sans text-xl font-bold">You signed up for updates!</h3>
       <p className="text-center font-mono text-base text-muted-foreground">
-        We’ll send you text updates on this event and other similar events in your area.
+        We’ll send you text updates on this event. RSVP to the event below.
       </p>
+
+      <Button
+        className="mt-4 w-full lg:w-auto"
+        disabled={isCreatingRsvpEventAction}
+        onClick={handleRSVPButtonClick}
+      >
+        RSVP
+      </Button>
     </div>
   )
 }

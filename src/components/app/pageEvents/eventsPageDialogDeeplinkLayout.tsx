@@ -7,7 +7,6 @@ import NotFound from '@/app/not-found'
 import { EventsPage } from '@/components/app/pageEvents'
 import {
   dialogCloseStyles,
-  dialogContentPaddingStyles,
   dialogContentStyles,
   dialogOverlayStyles,
 } from '@/components/ui/dialog/styles'
@@ -42,7 +41,7 @@ export async function EventsPageDialogDeeplinkLayout({
         href={urls.events()}
         replace
       />
-      <div className={cn(dialogContentStyles, dialogContentPaddingStyles, 'min-h-[200px]')}>
+      <div className={cn(dialogContentStyles, 'min-h-[200px]')}>
         {cloneElement(children, { events })}
         <InternalLink className={dialogCloseStyles} href={urls.events()} replace>
           <X size={20} />

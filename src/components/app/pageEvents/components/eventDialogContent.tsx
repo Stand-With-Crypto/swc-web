@@ -18,6 +18,7 @@ import { GoogleMapsEmbedIFrame } from '@/components/app/pageEvents/components/ev
 import { SuccessfulEventNotificationsSignup } from '@/components/app/pageEvents/components/successfulEventSignupDialog'
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
+import { ScrollArea } from '@/components/ui/scroll-area'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { usePreventOverscroll } from '@/hooks/usePreventOverscroll'
 import { useSections } from '@/hooks/useSections'
@@ -113,7 +114,12 @@ export function EventDialogContent({ event }: EventDialogContentProps) {
   }
 
   if (sectionProps.currentSection === SectionNames.NOTIFICATION_ACTIVATED) {
-    return <SuccessfulEventNotificationsSignup />
+    return (
+      <SuccessfulEventNotificationsSignup
+        handleRSVPButtonClick={handleRSVPButtonClick}
+        isCreatingRsvpEventAction={isCreatingRsvpEventAction}
+      />
+    )
   }
 
   if (sectionProps.currentSection === SectionNames.PHONE_SECTION) {
@@ -149,33 +155,40 @@ function EventInformation({
   const isPastEvent = isBefore(startOfDay(new Date(event.datetime)), startOfDay(new Date()))
 
   return (
-    <div className="flex h-full flex-col items-center gap-2">
-      <NextImage
-        alt={`${event.state} shield`}
-        className="mb-2 lg:mb-0"
-        height={100}
-        src={`/stateShields/${event.state}.png`}
-        width={100}
-      />
-      <h3 className="text-center font-sans text-xl font-bold">
-        <Balancer>{event.name}</Balancer>
-      </h3>
-      <p className="text-center font-mono text-base text-muted-foreground">
-        <Balancer>{event.description}</Balancer>
-      </p>
-      <p className="mt-9 flex items-center gap-2 font-mono text-sm">
-        <Clock size={16} /> {formattedEventDate}
-      </p>
-      <p className="mb-9 mt-5 flex items-center gap-2 font-mono text-sm">
-        <Pin size={16} /> {event.formattedAddress}
-      </p>
+    <div className="flex h-full flex-col">
+      <ScrollArea className="overflow-auto px-4 py-6 md:max-h-[70vh]">
+        <div className="flex h-full flex-col items-center gap-2">
+          <NextImage
+            alt={`${event.state} shield`}
+            className="mb-2 lg:mb-0"
+            height={100}
+            src={`/stateShields/${event.state}.png`}
+            width={100}
+          />
+          <h3 className="text-center font-sans text-xl font-bold">
+            <Balancer>{event.name}</Balancer>
+          </h3>
+          <p className="text-center font-mono text-base text-muted-foreground">
+            <Balancer>{event.description}</Balancer>
+          </p>
+          <p className="mt-9 flex items-center gap-2 font-mono text-sm">
+            <Clock size={16} /> {formattedEventDate}
+          </p>
+          <p className="mb-9 mt-5 flex items-center gap-2 font-mono text-sm">
+            <Pin size={16} /> {event.formattedAddress}
+          </p>
 
-      <GoogleMapsEmbedIFrame address={event.formattedAddress} />
+          <GoogleMapsEmbedIFrame address={event.formattedAddress} />
 
-      <EventDialogSocialLinks eventSlug={event.slug} eventState={event.state} />
+          <EventDialogSocialLinks eventSlug={event.slug} eventState={event.state} />
+        </div>
+      </ScrollArea>
 
       {!isPastEvent && (
-        <div className="mt-4 flex w-full flex-col items-center justify-end gap-3 lg:flex-row">
+        <div
+          className="z-10 mt-auto flex flex-col items-center justify-end gap-3 border border-t px-4 py-6 lg:flex-row"
+          style={{ boxShadow: 'rgba(0, 0, 0, 0.2) 0px 1px 6px 0px' }}
+        >
           <LoginDialogWrapper
             authenticatedContent={
               <Button
@@ -188,14 +201,9 @@ function EventInformation({
               </Button>
             }
           >
-            <div className="flex w-full flex-col items-center gap-4 lg:flex-row">
-              <span className="text-center font-mono text-[10px] text-muted-foreground">
-                You will need to log in first to receive updates on this event.
-              </span>
-              <Button className="w-full md:w-1/2" variant="secondary">
-                Get updates
-              </Button>
-            </div>
+            <Button className="w-full md:w-1/2" variant="secondary">
+              Log in to get updates
+            </Button>
           </LoginDialogWrapper>
 
           <Button

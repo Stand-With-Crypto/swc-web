@@ -19,6 +19,7 @@ export async function getEvents() {
             },
           },
           includeUnpublished: NEXT_PUBLIC_ENVIRONMENT !== 'production',
+          cacheSeconds: 60,
         }),
       {
         retries: 3,
