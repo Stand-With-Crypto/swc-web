@@ -15,7 +15,7 @@ export const dynamic = 'error'
 
 export function DefaultLocaleLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" translate="no">
       <body className={fontClassName}>
         {/* LATER-TASK add back once https://github.com/TheSGJ/nextjs-toploader/issues/66 is resolved */}
         {/* <NextTopLoader /> */}

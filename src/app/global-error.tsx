@@ -21,7 +21,7 @@ export default function GlobalErrorPage({
   })
 
   return (
-    <html lang="en">
+    <html lang="en" translate="no">
       <body className={cn(fontClassName, 'flex h-screen content-center items-center')}>
         <ErrorPagesContent reset={reset} />
       </body>
