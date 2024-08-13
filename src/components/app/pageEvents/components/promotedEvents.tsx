@@ -1,5 +1,3 @@
-import Balancer from 'react-wrap-balancer'
-
 import { EventDialog } from '@/components/app/pageEvents/components/eventDialog'
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
@@ -39,7 +37,7 @@ export function PromotedEvents({ events }: PromotedEventsProps) {
               {event.data.name}
             </PageSubTitle>
             <p className="line-clamp-3 text-center font-mono text-base text-muted-foreground lg:text-left">
-              <Balancer>{event.data.description}</Balancer>
+              {event.data.description}
             </p>
 
             <EventDialog

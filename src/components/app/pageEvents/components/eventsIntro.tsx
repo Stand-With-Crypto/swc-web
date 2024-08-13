@@ -23,13 +23,14 @@ export function EventsIntro() {
 
       <div className="mt-20 flex flex-col items-center gap-4">
         <PageSubTitle className="text-center font-sans text-xl text-foreground">
-          {'The America <3 Crypto Tour 2024'}
+          The America ❤️ Crypto Tour 2024
         </PageSubTitle>
         <p className="text-center font-mono text-base text-muted-foreground">
           <Balancer>
-            Join Stand With Crypto on the America :heart: Crypto Tour, an epic concert series across
-            5 swing states, rallying 4 million crypto owners to make their voices heard. Featuring
-            iconic acts and memorable venues. See who’s coming to your state and when below.
+            Join Stand With Crypto on the America ❤️ Crypto Tour, an epic concert series across 5
+            swing states, rallying 4 million crypto owners to make their voices heard. Featuring
+            iconic acts and memorable venues. Stay tuned to see who’s coming to your state and when
+            below.
           </Balancer>
         </p>
       </div>
