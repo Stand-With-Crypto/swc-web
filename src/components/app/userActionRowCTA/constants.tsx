@@ -44,7 +44,7 @@ export const USER_ACTION_ROW_CTA_INFO: Record<
   [UserActionType.VOTER_REGISTRATION]: {
     actionType: UserActionType.VOTER_REGISTRATION,
     image: { src: '/actionTypeIcons/registerToVote.png' },
-    text: 'Check Your Voter Registration',
+    text: 'Check your voter registration',
     subtext: "Find your voter info with our simple tool - you'll get a free NFT.",
     shortText: 'Register to vote',
     shortSubtext: 'Get a free "I\'m a Voter" NFT',
@@ -137,7 +137,7 @@ export const USER_ACTION_ROW_CTA_INFO: Record<
   [UserActionType.VOTER_ATTESTATION]: {
     actionType: UserActionType.VOTER_ATTESTATION,
     image: { src: '/actionTypeIcons/voterAttestation.png' },
-    text: 'Pledge To Vote This Fall',
+    text: 'Pledge to vote this fall',
     subtext: 'Sign the pledge to research the candidates & turn out to vote.',
     shortText: 'Pledge to vote',
     shortSubtext: 'Pledge to vote This Fall.',

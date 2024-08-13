@@ -79,13 +79,13 @@ export const ADVOCATES_ACTIONS: Partial<
 > = {
   CALL: {
     icon: CallIcon,
-    label: 'Call made to Congress',
+    label: 'Call made to congress',
     labelMobile: 'called',
     labelActionTooltip: 'called their rep',
   },
   EMAIL: {
     icon: EmailIcon,
-    label: 'Email sent to Congress',
+    label: 'Email sent to congress',
     labelMobile: 'emailed',
     labelActionTooltip: 'emailed their rep',
   },
