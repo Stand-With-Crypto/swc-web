@@ -105,7 +105,7 @@ export function EventDialogContent({ event }: EventDialogContentProps) {
   }
 
   async function handleRSVPButtonClick() {
-    await handleCreateRsvpAction({
+    void handleCreateRsvpAction({
       shouldReceiveNotifications: false,
     })
 
