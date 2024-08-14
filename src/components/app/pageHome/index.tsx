@@ -155,7 +155,7 @@ export function PageHome({
           <PageSubTitle as="h4" className="mb-10">
             The future of crypto is in your hands. Here's how you can help.
           </PageSubTitle>
-          <UserActionRowCTAsAnimatedListWithApi />
+          <UserActionRowCTAsAnimatedListWithApi excludeUserActionTypes={['NFT_MINT']} />
         </section>
       </div>
       <section className="mb-16 space-y-6 md:mb-36">
