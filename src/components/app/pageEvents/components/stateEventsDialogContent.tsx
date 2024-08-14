@@ -4,7 +4,9 @@ import { format } from 'date-fns'
 
 import { EventDialog } from '@/components/app/pageEvents/components/eventDialog'
 import { NextImage } from '@/components/ui/image'
-import { SWCEvents } from '@/utils/shared/getSWCEvents'
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
+import { usePreventOverscroll } from '@/hooks/usePreventOverscroll'
+import { SWCEvent, SWCEvents } from '@/utils/shared/getSWCEvents'
 import { pluralize } from '@/utils/shared/pluralize'
 import { US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
 
@@ -14,10 +16,11 @@ interface StateEventsDialogProps {
 }
 
 export function StateEventsDialogContent({ state, events }: StateEventsDialogProps) {
+  usePreventOverscroll()
+
   const parsedState = state.toUpperCase() as keyof typeof US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP
-  const stateEvents = events?.filter(
-    event => event.data.state?.toLowerCase() === state.toLowerCase(),
-  )
+  const stateEvents =
+    events?.filter(event => event.data.state?.toLowerCase() === state.toLowerCase()) ?? []
 
   return (
     <div className="flex flex-col items-center gap-2 pb-4">
@@ -39,30 +42,33 @@ export function StateEventsDialogContent({ state, events }: StateEventsDialogPro
         {US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP[parsedState]}.
       </p>
 
-      {stateEvents && stateEvents?.length > 0 && (
-        <div className="mt-6 flex w-full flex-col gap-4 overflow-y-auto px-8 lg:max-h-96">
-          {stateEvents.map(event => (
-            <EventDialog
-              event={event.data}
-              key={event.data.slug}
-              trigger={<StateDialogEventCard event={event.data} />}
-            />
-          ))}
-        </div>
-      )}
+      <ScrollArea className="w-full">
+        {stateEvents?.length > 0 ? (
+          <div className="mt-6 flex w-full flex-col gap-4 px-8 lg:max-h-96">
+            {stateEvents.map(event => (
+              <EventDialog
+                event={event.data}
+                key={event.data.slug}
+                trigger={<StateDialogEventCard event={event.data} />}
+              />
+            ))}
+          </div>
+        ) : null}
+        <ScrollBar />
+      </ScrollArea>
     </div>
   )
 }
 
 interface StateDialogEventCardProps {
-  event: SWCEvents[0]['data']
+  event: SWCEvent
 }
 
 function StateDialogEventCard({ event }: StateDialogEventCardProps) {
-  const formattedEventDate = format(new Date(event.datetime), 'MMMM d, yyyy')
+  const formattedEventDate = format(new Date(event.date), 'MMMM d, yyyy')
 
   return (
-    <div className="flex w-full max-w-[856px] flex-col gap-2 rounded-2xl bg-backgroundAlternate p-6 pt-4 lg:flex-row lg:items-center lg:p-4 lg:pt-4">
+    <div className="flex w-full max-w-[856px] flex-col gap-2 rounded-2xl bg-backgroundAlternate p-6 pt-4 transition hover:bg-backgroundAlternate/60 lg:flex-row lg:items-center lg:p-4 lg:pt-4">
       <NextImage
         alt={`${event.state} shield`}
         className="mb-2 lg:mb-0"
@@ -77,7 +83,7 @@ function StateDialogEventCard({ event }: StateDialogEventCardProps) {
       </p>
 
       <div className="hidden flex-col items-start lg:flex">
-        <strong>{event.name}</strong>
+        <strong className="text-left">{event.name}</strong>
         <p className="text-muted-foreground">
           {event.city}, {event.state} • {formattedEventDate}
         </p>

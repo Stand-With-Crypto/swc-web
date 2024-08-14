@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-import { StateEventsDialog } from '@/components/app/pageEvents/components/stateEventsDialog'
+import { StateEventsDialogContent } from '@/components/app/pageEvents/components/stateEventsDialogContent'
 import { EventsPageDialogDeeplinkLayout } from '@/components/app/pageEvents/eventsPageDialogDeeplinkLayout'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
@@ -10,7 +10,7 @@ import { US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUt
 
 type Props = PageProps<{ state: keyof typeof US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP }>
 
-export const revalidate = SECONDS_DURATION['HOUR']
+export const revalidate = SECONDS_DURATION.MINUTE
 export const dynamic = 'error'
 
 const description =
@@ -38,7 +38,7 @@ export default async function StateEventsPageRoot({ params }: Props) {
 
   return (
     <EventsPageDialogDeeplinkLayout pageParams={params}>
-      <StateEventsDialog state={state} />
+      <StateEventsDialogContent state={state} />
     </EventsPageDialogDeeplinkLayout>
   )
 }
