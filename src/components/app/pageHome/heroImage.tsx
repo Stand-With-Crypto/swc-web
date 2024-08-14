@@ -1,13 +1,13 @@
 'use client'
 
 import { ArrowUpRight } from 'lucide-react'
+import Link from 'next/link'
 
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
-import { cn } from '@/utils/web/cn'
-import Link from 'next/link'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
+import { cn } from '@/utils/web/cn'
 
 export function HeroImage() {
   const urls = useIntlUrls()
