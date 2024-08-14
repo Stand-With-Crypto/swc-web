@@ -7,7 +7,8 @@ import { sleep } from '@/utils/shared/sleep'
 
 import { createCommunication, createCommunicationJourneys, flagInvalidPhoneNumbers } from '.'
 
-const ENQUEUE_MAX_RETRY_ATTEMPTS = 5
+const MAX_RETRY_ATTEMPTS = 5
+const PAYLOAD_LIMIT = 10000
 
 export interface PayloadMessage {
   body: string
@@ -21,7 +22,10 @@ export interface EnqueueMessagePayload {
 }
 
 export async function enqueueMessages(payload: EnqueueMessagePayload[], attempt = 0) {
-  if (attempt > ENQUEUE_MAX_RETRY_ATTEMPTS) return { segments: 0, messages: 0 }
+  if (attempt > MAX_RETRY_ATTEMPTS) return { segments: 0, messages: 0 }
+  if (payload.length > PAYLOAD_LIMIT) {
+    throw new NonRetriableError(`Enqueue messages payload exceeded the limit ${PAYLOAD_LIMIT}`)
+  }
 
   const invalidPhoneNumbers: string[] = []
   const failedPhoneNumbers: Record<string, EnqueueMessagePayload['messages']> = {}
