@@ -9,6 +9,7 @@ const USER_ACTIONS_EXCLUDED_FROM_CTA: UserActionType[] = [
   UserActionType.TWEET_AT_PERSON,
   UserActionType.RSVP_EVENT,
   UserActionType.NFT_MINT,
+  UserActionType.DONATION,
 ]
 
 export interface GetUserActionsProgressArgs {

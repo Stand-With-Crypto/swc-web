@@ -116,9 +116,9 @@ export function PageHome({
                 </div>{' '}
               </>
               <div className="mt-7 space-x-4 text-center">
-                <Button asChild>
+                {/* <Button asChild>
                   <InternalLink href={urls.donate()}>Donate</InternalLink>
-                </Button>
+                </Button> */}
                 <Button asChild variant="secondary">
                   <InternalLink
                     href={urls.leaderboard({ tab: RecentActivityAndLeaderboardTabs.LEADERBOARD })}
@@ -155,7 +155,7 @@ export function PageHome({
           <PageSubTitle as="h4" className="mb-10">
             The future of crypto is in your hands. Here's how you can help.
           </PageSubTitle>
-          <UserActionRowCTAsAnimatedListWithApi excludeUserActionTypes={['NFT_MINT']} />
+          <UserActionRowCTAsAnimatedListWithApi excludeUserActionTypes={['NFT_MINT', 'DONATION']} />
         </section>
       </div>
       <section className="mb-16 space-y-6 md:mb-36">
