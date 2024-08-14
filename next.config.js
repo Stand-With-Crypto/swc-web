@@ -65,7 +65,7 @@ const contentSecurityPolicy = {
     // Mint endpoint
     'https://*.coinbase.com/',
     'https://*.sentry.io/',
-    'https://api.thirdweb.com/v1/chains/8453',
+    'https://api.thirdweb.com/',
   ],
   'frame-src': [
     '*.google.com',
