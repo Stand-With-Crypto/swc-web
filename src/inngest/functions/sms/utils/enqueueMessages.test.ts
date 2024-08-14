@@ -2,8 +2,10 @@ import { faker } from '@faker-js/faker'
 import { describe, expect, it } from '@jest/globals'
 
 import {
+  countMessagesAndSegments,
+  EnqueueMessagePayload,
   enqueueMessages,
-  EnqueueMessagesPayload,
+  PayloadMessage,
 } from '@/inngest/functions/sms/utils/enqueueMessages'
 import { flagInvalidPhoneNumbers } from '@/inngest/functions/sms/utils/flagInvalidPhoneNumbers'
 import { fakerFields } from '@/mocks/fakerUtils'
@@ -52,29 +54,55 @@ describe('enqueueMessages function', () => {
     jest.clearAllMocks()
   })
 
-  const phoneNumbers = Array.from({ length: 10 }).map(() => fakerFields.phoneNumber())
-  const mockedPayload: EnqueueMessagesPayload = {
-    body: 'test message',
+  const getFakeMessage = (): PayloadMessage => ({
+    body: faker.string.alpha(10),
     journeyType: 'BULK_SMS',
-  }
+  })
+
+  const mockedPayload: EnqueueMessagePayload[] = [
+    {
+      phoneNumber: fakerFields.phoneNumber(),
+      messages: [getFakeMessage(), getFakeMessage()],
+    },
+    {
+      phoneNumber: fakerFields.phoneNumber(),
+      messages: [getFakeMessage()],
+    },
+    {
+      phoneNumber: fakerFields.phoneNumber(),
+      messages: [],
+    },
+  ]
+
+  const { segments: expectedSegments, messages: expectedMessages } =
+    countMessagesAndSegments(mockedPayload)
 
   it(`should call sendSMS with each phone number`, async () => {
-    await enqueueMessages(phoneNumbers, mockedPayload)
+    await enqueueMessages(mockedPayload)
 
-    expect(sendSMS).toHaveBeenCalledTimes(phoneNumbers.length)
-    phoneNumbers.forEach(phoneNumber => {
-      expect(sendSMS).toHaveBeenCalledWith({ body: mockedPayload.body, to: phoneNumber })
+    expect(sendSMS).toHaveBeenCalledTimes(mockedPayload.length)
+    mockedPayload.forEach(({ messages, phoneNumber }) => {
+      messages.forEach(({ body }) => {
+        expect(sendSMS).toHaveBeenCalledWith({ body, to: phoneNumber })
+      })
     })
   })
 
   it(`should return the exact number of messages sent`, async () => {
-    const count = await enqueueMessages(phoneNumbers, mockedPayload)
+    const { messages, segments } = await enqueueMessages(mockedPayload)
 
-    expect(count).toBe(phoneNumbers.length)
+    expect(segments).toBe(expectedSegments)
+    expect(messages).toBe(expectedMessages)
   })
 
   it(`Should flag invalid phone numbers`, async () => {
-    await enqueueMessages([...phoneNumbers, invalidPhoneNumber], mockedPayload)
+    await enqueueMessages([
+      ...mockedPayload,
+      {
+        phoneNumber: invalidPhoneNumber,
+        messages: [getFakeMessage()],
+      },
+    ])
 
     expect(flagInvalidPhoneNumbers).toBeCalledTimes(1)
     expect(flagInvalidPhoneNumbers).toBeCalledWith([invalidPhoneNumber])
@@ -87,14 +115,14 @@ describe('enqueueMessages function', () => {
         {
           code: TOO_MANY_REQUESTS_CODE,
         },
-        phoneNumbers[0],
+        mockedPayload[0].phoneNumber,
       ),
     )
-    const count = await enqueueMessages(phoneNumbers, mockedPayload)
+    const { segments } = await enqueueMessages(mockedPayload)
 
     expect(sleep).toHaveBeenCalledTimes(1)
-    expect(count).toBe(phoneNumbers.length)
+    expect(segments).toBe(expectedSegments)
 
-    expect(sendSMS).toBeCalledTimes(phoneNumbers.length + 1)
+    expect(sendSMS).toBeCalledTimes(expectedMessages + 1)
   })
 })

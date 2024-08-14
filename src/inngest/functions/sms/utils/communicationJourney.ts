@@ -48,21 +48,6 @@ export async function createCommunicationJourneys(
         },
       })
     ).map(({ userId }) => userId)
-  } else if (campaignName) {
-    const existingCommunicationJourney = await prismaClient.userCommunicationJourney.findFirst({
-      where: {
-        journeyType,
-        campaignName,
-      },
-    })
-
-    if (existingCommunicationJourney) {
-      throw new NonRetriableError(
-        `There's already a journey with type ${journeyType} and campaign name of ${campaignName}`,
-      )
-    }
-  } else {
-    throw new NonRetriableError(`Please inform a campaign name`)
   }
 
   await prismaClient.userCommunicationJourney.createMany({
