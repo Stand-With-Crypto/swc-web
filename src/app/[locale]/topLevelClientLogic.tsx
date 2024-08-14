@@ -3,7 +3,7 @@
 import { Suspense, useEffect } from 'react'
 import * as Sentry from '@sentry/nextjs'
 import { usePathname, useSearchParams } from 'next/navigation'
-import { ThirdwebProvider } from 'thirdweb/react'
+import { ThirdwebProvider, useAutoConnect } from 'thirdweb/react'
 
 import { useThirdwebAuthUser } from '@/hooks/useAuthUser'
 import { useDetectWipedDatabaseAndLogOutUser } from '@/hooks/useDetectWipedDatabaseAndLogOutUser'
@@ -14,11 +14,15 @@ import { maybeInitClientAnalytics, trackClientAnalytic } from '@/utils/web/clien
 import { bootstrapLocalUser } from '@/utils/web/clientLocalUser'
 import { getUserSessionIdOnClient } from '@/utils/web/clientUserSessionId'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
+import { thirdwebClient } from '@/utils/shared/thirdwebClient'
 
 const InitialOrchestration = () => {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const authUser = useThirdwebAuthUser()
+  useAutoConnect({
+    client: thirdwebClient,
+  })
   useDetectWipedDatabaseAndLogOutUser()
   // Note, in local dev this component will double render. It doesn't do this after it is built (verify in testing)
   useEffect(() => {

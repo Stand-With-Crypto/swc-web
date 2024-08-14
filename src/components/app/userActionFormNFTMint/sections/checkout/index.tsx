@@ -29,6 +29,7 @@ import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { Skeleton } from '@/components/ui/skeleton'
+import { VisuallyHidden } from '@/components/ui/visually-hidden'
 import { UseSectionsReturn } from '@/hooks/useSections'
 import { useSession } from '@/hooks/useSession'
 import { SupportedCryptoCurrencyCodes } from '@/utils/shared/currency'
@@ -52,6 +53,7 @@ interface UserActionFormNFTMintCheckoutProps
 const CHECKOUT_ERROR_TO_MESSAGE: Record<CheckoutError, string> = {
   insufficientFunds: 'Insufficient funds. You need ETH on Base to mint',
   networkSwitch: 'Please switch to the Base Network',
+  connectWallet: 'Please connect your wallet to mint',
 }
 
 export function UserActionFormNFTMintCheckout({
