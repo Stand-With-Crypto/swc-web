@@ -1,28 +1,28 @@
-'use client'
-
 import { ArrowUpRight } from 'lucide-react'
 import Link from 'next/link'
 
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
-import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
-import { useIntlUrls } from '@/hooks/useIntlUrls'
+import { InternalLink } from '@/components/ui/link'
+import { SupportedLocale } from '@/intl/locales'
+import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
-export function HeroImage() {
-  const urls = useIntlUrls()
+export function HeroImage({ locale }: { locale: SupportedLocale }) {
   return (
-    <LinkBox className="relative h-[320px] overflow-hidden md:rounded-xl lg:h-[400px]">
-      <NextImage
-        alt="Events"
-        blurDataURL={eventImageBlurDataUrl}
-        className="absolute left-0 top-0 h-full w-full object-cover"
-        fill
-        placeholder="blur"
-        priority
-        sizes={'(max-width: 400px) 375px, 500px'}
-        src="/homepageEventsHero.jpg"
-      />
+    <div className="relative h-[320px] overflow-hidden md:rounded-xl lg:h-[400px]">
+      <InternalLink href={getIntlUrls(locale).events()}>
+        <NextImage
+          alt="Events"
+          blurDataURL={eventImageBlurDataUrl}
+          className="absolute left-0 top-0 h-full w-full object-cover"
+          fill
+          placeholder="blur"
+          priority
+          sizes={'(max-width: 400px) 375px, 500px'}
+          src="/homepageEventsHero.jpg"
+        />
+      </InternalLink>
 
       <div
         className={cn(
@@ -35,19 +35,14 @@ export function HeroImage() {
       >
         <div className="flex w-full items-center justify-between gap-4">
           <p>RSVP to reserve a spot in your state</p>
-          <Button
-            asChild
-            className={linkBoxLinkClassName}
-            data-link-box-subject
-            variant="secondary"
-          >
-            <Link href={urls.events()}>
+          <Button asChild variant="secondary">
+            <Link href={getIntlUrls(locale).events()}>
               RSVP <ArrowUpRight />
             </Link>
           </Button>
         </div>
       </div>
-    </LinkBox>
+    </div>
   )
 }
 

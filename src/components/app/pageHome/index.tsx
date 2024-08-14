@@ -55,7 +55,7 @@ export function PageHome({
           <HeroCTA />
         </div>
         <div className="order-0 self-start md:container lg:order-1 lg:px-0">
-          <HeroImage />
+          <HeroImage locale={locale} />
         </div>
       </section>
       <div className="container">
