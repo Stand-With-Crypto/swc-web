@@ -1,6 +1,7 @@
-import { Facebook, Link, Mail, Twitter } from 'lucide-react'
+import { Facebook, Link, Mail } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
+import { NextImage } from '@/components/ui/image'
 import { useCopyTextToClipboard } from '@/hooks/useCopyTextToClipboard'
 
 export function EventDialogSocialLinks({
@@ -37,10 +38,10 @@ export function EventDialogSocialLinks({
 
         <Button asChild variant="link">
           <a
-            href={`http://twitter.com/share?&hashtags=#StandWithCrypto&text=I’m interested in an event from @StandWithCrypto! It’s time to make our voices heard and protect the future of crypto in America. Learn more about the event here: ${eventDeeplink}`}
+            href={`http://twitter.com/share?url=${eventDeeplink}&hashtags=StandWithCrypto&text=I’m interested in an event from @StandWithCrypto! It’s time to make our voices heard and protect the future of crypto in America. Learn more about the event here:`}
             target="_blank"
           >
-            <Twitter size={20} />
+            <NextImage alt="Share on X" height={20} src="/socialIcons/x.svg" width={20} />
           </a>
         </Button>
 
