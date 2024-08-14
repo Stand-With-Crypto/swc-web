@@ -4,9 +4,9 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
-import { cn } from '@/utils/web/cn'
 import { SupportedLocale } from '@/intl/locales'
 import { getIntlUrls } from '@/utils/shared/urls'
+import { cn } from '@/utils/web/cn'
 
 export function HeroImage({ locale }: { locale: SupportedLocale }) {
   return (
