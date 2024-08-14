@@ -11,11 +11,6 @@ function requiredEnv(value: string | undefined, name: string) {
   return value
 }
 
-export const NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN = requiredEnv(
-  process.env.NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN,
-  'process.env.NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN',
-)
-
 let initialEnv = requiredEnv(
   process.env.NEXT_PUBLIC_ENVIRONMENT,
   'process.env.NEXT_PUBLIC_ENVIRONMENT',

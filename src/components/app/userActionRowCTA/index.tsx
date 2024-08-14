@@ -1,5 +1,6 @@
 'use client'
 import React from 'react'
+import Cookies from 'js-cookie'
 import { ChevronRight } from 'lucide-react'
 
 import { NextImage } from '@/components/ui/image'
@@ -40,7 +41,9 @@ export const UserActionRowCTAButton = React.forwardRef<
     ref,
   ) => {
     const canBeActionedOn =
-      canBeTriggeredMultipleTimes || (!canBeTriggeredMultipleTimes && state !== 'complete')
+      canBeTriggeredMultipleTimes ||
+      (!canBeTriggeredMultipleTimes && state !== 'complete') ||
+      Cookies.get('SWC_BYPASS_SINGLE_ACTIONS') === 'true'
     const getStateUI = () => {
       switch (state) {
         case 'unknown':
@@ -70,8 +73,9 @@ export const UserActionRowCTAButton = React.forwardRef<
       <button
         {...props}
         className={cn(
-          'flex w-full items-center justify-between gap-4 rounded-3xl bg-secondary p-4 text-left transition hover:drop-shadow-lg lg:p-8',
+          'flex w-full items-center justify-between gap-4 rounded-3xl bg-secondary p-4 text-left transition lg:p-8',
           className,
+          canBeActionedOn && 'hover:drop-shadow-lg',
         )}
         data-test-id={`user-action-cta-${actionType}`}
         disabled={!canBeActionedOn}

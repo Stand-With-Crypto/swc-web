@@ -73,4 +73,13 @@ export const NFT_CLIENT_METADATA: Record<NFTSlug, NFTClientMetadata> = {
       alt: 'Pizza and bitcoin tags that transform into the SWC shield',
     },
   },
+  [NFTSlug.VOTER_ATTESTATION]: {
+    name: 'Ballot Box Badge',
+    image: {
+      url: '/nfts/ballot-box-badge.gif',
+      width: 160,
+      height: 160,
+      alt: 'Ballot box badge nft',
+    },
+  },
 }

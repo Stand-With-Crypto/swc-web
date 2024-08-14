@@ -28,7 +28,7 @@ export default function NFTArrivedEmail({
   hrefSearchParams = {},
   // This default value is so react email dev server works properly
   // The required type ensures this is not called without it
-  actionNFT = 'CALL',
+  actionNFT = 'VOTER_ATTESTATION',
   ...keepUpTheFightSectionProps
 }: NFTArrivedEmailProps) {
   const hydratedHrefSearchParams = {
@@ -44,7 +44,7 @@ export default function NFTArrivedEmail({
       <Section>
         <Img
           alt={nftImage.alt}
-          className="mb-6 w-full max-w-full"
+          className="mb-6 w-full max-w-full overflow-hidden rounded-3xl"
           src={buildTemplateInternalUrl(nftImage.src, hydratedHrefSearchParams)}
         />
 

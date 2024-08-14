@@ -14,18 +14,32 @@ type Props = PageProps<{
   eventSlug: string
 }>
 
-export const revalidate = SECONDS_DURATION['HOUR']
+export const revalidate = SECONDS_DURATION.MINUTE
 export const dynamic = 'error'
 
-const title = 'Events'
+const title = 'Event'
 const description =
   'Stand With Crypto hosts events nationwide to organize, activate, and energize the nationwide Crypto community. Check this page for information about upcoming events, including times, dates, and locations, and RSVP to events in your area'
 
-export const metadata: Metadata = {
-  ...generateMetadataDetails({
-    title,
-    description,
-  }),
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { state, eventSlug } = params
+
+  const event = await getEvent(eventSlug, state)
+
+  if (!event) {
+    return generateMetadataDetails({
+      title: title,
+      description,
+    })
+  }
+
+  return generateMetadataDetails({
+    title: `${event.data.name} - ${title}`,
+    description: event.data.description,
+    ogImage: {
+      url: event.data.image,
+    },
+  })
 }
 
 export default async function EventDetailsPageRoot({ params }: Props) {

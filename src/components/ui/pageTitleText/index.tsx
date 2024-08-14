@@ -9,6 +9,7 @@ const titleVariantsConfig = {
     lg: twNoop('text-4xl md:text-5xl lg:text-6xl'),
     md: twNoop('text-3xl md:text-4xl lg:text-5xl'),
     sm: twNoop('text-xl md:text-2xl lg:text-3xl'),
+    xs: twNoop('text-lg md:text-xl lg:text-2xl'),
   },
 }
 
@@ -19,7 +20,7 @@ const pageTitleVariants = cva('font-sans text-center text-3xl font-bold md:text-
   },
 })
 
-interface PageTitleProps
+export interface PageTitleProps
   extends React.HTMLAttributes<HTMLHeadingElement>,
     VariantProps<typeof pageTitleVariants> {
   as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span'

@@ -1,6 +1,8 @@
 'use client'
-import { useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
+import { useRouter } from 'next/navigation'
 import { AuthOption } from 'node_modules/thirdweb/dist/types/wallets/types'
+import { Arguments, useSWRConfig } from 'swr'
 import { signLoginPayload } from 'thirdweb/auth'
 import { base } from 'thirdweb/chains'
 import { ConnectEmbed, ConnectEmbedProps, useConnect } from 'thirdweb/react'
@@ -22,6 +24,7 @@ import { login } from '@/utils/server/thirdweb/onLogin'
 import { onLogout } from '@/utils/server/thirdweb/onLogout'
 import { isCypress } from '@/utils/shared/executionEnvironment'
 import { thirdwebClient } from '@/utils/shared/thirdwebClient'
+import { apiUrls } from '@/utils/shared/urls'
 import { trackSectionVisible } from '@/utils/web/clientAnalytics'
 import { theme } from '@/utils/web/thirdweb/theme'
 
@@ -53,9 +56,31 @@ export function ThirdwebLoginContent({
 }: ThirdwebLoginContentProps) {
   const urls = useIntlUrls()
   const thirdwebEmbeddedAuthContainer = useRef<HTMLDivElement>(null)
+  const router = useRouter()
+  const swrConfig = useSWRConfig()
   const currentExperiment = useExperimentName({
     experimentName: 'gh03_ThirdwebSignUpPhoneNumberExperiment',
   })
+
+  const handleLogin = useCallback(async () => {
+    if (onLoginCallback) {
+      await onLoginCallback()
+    }
+
+    // ensure that any server components on the page that's being used are refreshed with the context the user is now logged in
+    router.refresh()
+
+    // These are keys which the mutation occurs on login
+    // If we reset the cache we can have a situation where the value goes from `value => undefined => value`
+    const excludedKeysFromCacheReset: Arguments[] = [apiUrls.userFullProfileInfo()]
+
+    // There are a bunch of SWR queries that might show stale unauthenticated data unless we clear the cache.
+    // This ensures we refetch using the users authenticated state
+    // https://swr.vercel.app/docs/advanced/cache#modify-the-cache-data
+    void swrConfig.mutate(arg => !excludedKeysFromCacheReset.includes(arg), undefined, {
+      revalidate: true,
+    })
+  }, [onLoginCallback, router, swrConfig])
 
   useEffect(() => {
     if (!initialEmailAddress) {
@@ -130,7 +155,7 @@ export function ThirdwebLoginContent({
           >
             <ThirdwebLoginEmbedded
               currentExperiment={currentExperiment}
-              onLoginCallback={onLoginCallback}
+              onLoginCallback={handleLogin}
               {...props}
             />
           </div>

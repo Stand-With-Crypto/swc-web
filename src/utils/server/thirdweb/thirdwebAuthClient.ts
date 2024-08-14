@@ -2,6 +2,7 @@ import { createAuth } from 'thirdweb/auth'
 import { privateKeyToAccount } from 'thirdweb/wallets'
 
 import { requiredEnv } from '@/utils/shared/requiredEnv'
+import { NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN } from '@/utils/shared/thirdweb'
 import { thirdwebClient } from '@/utils/shared/thirdwebClient'
 
 const THIRDWEB_AUTH_PRIVATE_KEY = requiredEnv(
@@ -10,7 +11,7 @@ const THIRDWEB_AUTH_PRIVATE_KEY = requiredEnv(
 )
 
 export const thirdwebAuth = createAuth({
-  domain: process.env.NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN || '',
+  domain: NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN || '',
   adminAccount: privateKeyToAccount({
     client: thirdwebClient,
     privateKey: THIRDWEB_AUTH_PRIVATE_KEY,

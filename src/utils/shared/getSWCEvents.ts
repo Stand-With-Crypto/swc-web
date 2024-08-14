@@ -10,7 +10,6 @@ export const zodEventSchemaValidation = object({
     promotedPositioning: number().optional(),
     image: string().url(),
     rsvpUrl: string().url(),
-    datetime: string(),
     formattedAddress: string(),
     countryCode: string().length(2),
     isOccuring: boolean(),
@@ -21,10 +20,12 @@ export const zodEventSchemaValidation = object({
     slug: string(),
     city: string(),
     description: string(),
+    date: string(),
+    time: string().optional(),
   }),
-  published: string().regex(/^published$/),
 })
 
 export const zodEventsSchemaValidation = array(zodEventSchemaValidation)
 
 export type SWCEvents = Zod.infer<typeof zodEventsSchemaValidation>
+export type SWCEvent = SWCEvents[0]['data']

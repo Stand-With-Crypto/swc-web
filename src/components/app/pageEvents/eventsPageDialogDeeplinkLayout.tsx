@@ -49,7 +49,7 @@ export async function EventsPageDialogDeeplinkLayout({
         </InternalLink>
       </div>
 
-      <EventsPage events={events!} />
+      <EventsPage events={events!} isDeepLink />
     </>
   )
 }

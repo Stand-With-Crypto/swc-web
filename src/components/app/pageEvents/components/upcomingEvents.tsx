@@ -19,18 +19,35 @@ interface UpcomingEventsProps {
   events: SWCEvents
 }
 
-export function UpcomingEvents({ events }: UpcomingEventsProps) {
+export function UpcomingEventsList({ events }: UpcomingEventsProps) {
   const [eventsToShow, setEventsToShow] = useState(5)
   const [selectedStateFilter, setSelectedStateFilter] = useState('All')
 
   const filteredFutureEvents = useMemo(() => {
-    return events.filter(event => isAfter(new Date(event.data.datetime), new Date()))
+    return events.filter(event => {
+      const eventDate = event.data?.time
+        ? new Date(`${event.data.date}T${event.data.time}`)
+        : new Date(event.data.date)
+
+      return isAfter(eventDate, new Date())
+    })
   }, [events])
 
-  const filteredEvents =
-    selectedStateFilter === 'All'
-      ? filteredFutureEvents
-      : filteredFutureEvents.filter(event => event.data.state === selectedStateFilter)
+  const filteredEvents = useMemo(() => {
+    const result =
+      selectedStateFilter === 'All'
+        ? filteredFutureEvents
+        : filteredFutureEvents.filter(event => event.data.state === selectedStateFilter)
+
+    const orderedResult = result.sort((a, b) => {
+      const aDate = a.data.time ? new Date(`${a.data.date}T${a.data.time}`) : new Date(a.data.date)
+      const bDate = b.data.time ? new Date(`${b.data.date}T${b.data.time}`) : new Date(b.data.date)
+
+      return isAfter(aDate, bDate) ? 1 : -1
+    })
+
+    return orderedResult
+  }, [filteredFutureEvents, selectedStateFilter])
 
   const stateFilterOptions = useMemo(() => {
     const stateWithEvents = filteredFutureEvents.reduce(
@@ -55,11 +72,7 @@ export function UpcomingEvents({ events }: UpcomingEventsProps) {
   }, [filteredFutureEvents])
 
   return (
-    <section className="flex w-full flex-col items-center gap-4 lg:gap-6">
-      <h4 className="text-bold font-sans text-xl text-foreground lg:text-[2rem]">
-        All upcoming events
-      </h4>
-
+    <>
       <Select
         onValueChange={state => {
           setSelectedStateFilter(state)
@@ -93,6 +106,6 @@ export function UpcomingEvents({ events }: UpcomingEventsProps) {
           Load more
         </Button>
       )}
-    </section>
+    </>
   )
 }
