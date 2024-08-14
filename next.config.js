@@ -312,9 +312,17 @@ const nextConfig = {
         destination: '/action/call?unexpectedUrl=true',
         permanent: false,
       },
+      // SMS shortlinks
       {
-        source: '/utm_source=swc&utm_medium=sms&utm_campaign=mi-primary-1',
-        destination: '/?utm_source=swc&utm_medium=sms&utm_campaign=mi-primary-1',
+        source: '/nv/1',
+        destination:
+          'https://americalovescryptonv.splashthat.com/?utm_source=swc&utm_medium=sms&utm_campaign=nv_1&utm_id=sst&utm_content=v1',
+        permanent: false,
+      },
+      {
+        source: '/nv/2',
+        destination:
+          'https://americalovescryptonv.splashthat.com/?utm_source=swc&utm_medium=sms&utm_campaign=nv_1&utm_id=sst&utm_content=v2',
         permanent: false,
       },
     ]
