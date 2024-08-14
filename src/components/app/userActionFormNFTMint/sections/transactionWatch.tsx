@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback, useEffect, useRef } from 'react'
 import { UserActionType } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { base } from 'thirdweb/chains'
@@ -89,8 +89,13 @@ export function UserActionFormNFTMintTransactionWatch({
     }
   }, [goToSection, transactionHash])
 
+  const isTransactionHandled = useRef(false)
+
   useEffect(() => {
-    if (receipt?.status === 'success') createAction()
+    if (receipt?.status === 'success' && !isTransactionHandled.current) {
+      isTransactionHandled.current = true
+      createAction()
+    }
   }, [createAction, receipt])
 
   useEffectOnce(() => {
