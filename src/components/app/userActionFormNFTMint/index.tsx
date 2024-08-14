@@ -25,7 +25,12 @@ import {
 } from './sections/transactionWatch'
 import { useCheckoutController } from './useCheckoutController'
 
-export function UserActionFormNFTMint({ trackMount }: { trackMount?: boolean }) {
+interface UserActionFormNFTMintProps {
+  onFinished: () => void
+  trackMount?: boolean
+}
+
+export function UserActionFormNFTMint({ trackMount, onFinished }: UserActionFormNFTMintProps) {
   const sectionProps = useSections({
     sections: Object.values(UserActionFormNFTMintSectionNames),
     initialSectionId: UserActionFormNFTMintSectionNames.INTRO,
@@ -95,7 +100,7 @@ export function UserActionFormNFTMint({ trackMount }: { trackMount?: boolean }) 
 
     case UserActionFormNFTMintSectionNames.SUCCESS:
       return (
-        <UserActionFormSuccessScreen onClose={() => {}}>
+        <UserActionFormSuccessScreen onClose={onFinished}>
           <UserActionFormNFTMintSuccess />
         </UserActionFormSuccessScreen>
       )

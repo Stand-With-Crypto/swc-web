@@ -22,7 +22,7 @@ export function UserActionFormNFTMintDialog({
   return (
     <UserActionFormDialog {...dialogProps} trigger={children}>
       <Suspense fallback={<UserActionFormNFTMintSkeleton />}>
-        <LazyUserActionFormNFTMint />
+        <LazyUserActionFormNFTMint onFinished={() => dialogProps.onOpenChange(false)} />
       </Suspense>
     </UserActionFormDialog>
   )
