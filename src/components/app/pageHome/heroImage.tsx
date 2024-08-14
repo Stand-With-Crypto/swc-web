@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
-import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
+import { linkBoxLinkClassName } from '@/components/ui/linkBox'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { cn } from '@/utils/web/cn'
 
@@ -14,7 +14,7 @@ export function HeroImage() {
   const urls = useIntlUrls()
   return (
     <InternalLink href={urls.events()}>
-      <LinkBox className="relative h-[320px] overflow-hidden md:rounded-xl lg:h-[400px]">
+      <div className="relative h-[320px] overflow-hidden md:rounded-xl lg:h-[400px]">
         <NextImage
           alt="Events"
           blurDataURL={eventImageBlurDataUrl}
@@ -49,7 +49,7 @@ export function HeroImage() {
             </Button>
           </div>
         </div>
-      </LinkBox>
+      </div>
     </InternalLink>
   )
 }
