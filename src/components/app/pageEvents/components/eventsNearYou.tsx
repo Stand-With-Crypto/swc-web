@@ -26,7 +26,7 @@ export function _EventsNearYou({ events }: EventsNearYouProps) {
   const { setAddress, address } = useMutableCurrentUserAddress()
 
   const parsedAddress =
-    address !== 'loading' ? address?.description.match(/,\s([A-Z]{2})\s*,/) : null
+    address !== 'loading' ? address?.description.match(/,\s([A-Z]{2})\s*/) : null
   const userState = parsedAddress ? parsedAddress[1] : null
 
   return (
