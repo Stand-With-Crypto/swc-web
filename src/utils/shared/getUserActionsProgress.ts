@@ -1,5 +1,5 @@
 import { UserActionType } from '@prisma/client'
-import uniq from 'lodash-es/uniq'
+import { uniqBy } from 'lodash-es'
 
 import { USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns'
 import { USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN } from '@/utils/web/userActionUtils'
@@ -28,7 +28,10 @@ export function getUserActionsProgress({
       : USER_ACTIONS_EXCLUDED_FROM_CTA,
   )
 
-  const numActionsCompleted = uniq(performedUserActionTypes).reduce((count, action) => {
+  const numActionsCompleted = uniqBy(
+    performedUserActionTypes,
+    action => `${action.actionType}-${action.campaignName}`,
+  ).reduce((count, action) => {
     return excludeUserActionTypes.has(action.actionType) ||
       action.campaignName !== USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[action.actionType]
       ? count
