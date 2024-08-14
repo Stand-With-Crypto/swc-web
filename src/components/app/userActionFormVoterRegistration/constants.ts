@@ -23,7 +23,7 @@ export const REGISTRATION_URLS_BY_STATE: Record<USStateCode, RegistrationByState
   },
   AK: {
     registerUrl: 'https://voterregistration.alaska.gov/',
-    checkRegistrationUrl: 'https://myvoterinformation.alaska.gov/',
+    checkRegistrationUrl: 'https://myvoterportal.alaska.gov/',
   },
   AZ: {
     registerUrl: 'https://servicearizona.com/VoterRegistration/selectLanguage',
