@@ -59,9 +59,9 @@ export function EventsIntro() {
         <p className="text-center font-mono text-base text-muted-foreground">
           <Balancer>
             Join Stand With Crypto on the America Loves Crypto Tour, an epic concert series across 5
-            swing states, rallying 4 million crypto owners to make their voices heard. Featuring
-            iconic acts and memorable venues. Stay tuned to see who’s coming to your state and when
-            below.
+            swing states, rallying 4 million crypto owners to make their voices heard. The tour will
+            feature iconic acts and memorable venues. Check out the stops on the tour below, and
+            stay tuned for more information to come.
           </Balancer>
         </p>
       </div>

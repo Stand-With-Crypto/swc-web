@@ -1,8 +1,10 @@
+import { GeoGate } from '@/components/app/geoGate'
 import { AllUpcomingEvents } from '@/components/app/pageEvents/components/allUpcomingEvents'
 import { EventsIntro } from '@/components/app/pageEvents/components/eventsIntro'
 import { EventsNearYou } from '@/components/app/pageEvents/components/eventsNearYou'
 import { PromotedEvents } from '@/components/app/pageEvents/components/promotedEvents'
 import { SWCEvents } from '@/utils/shared/getSWCEvents'
+import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { cn } from '@/utils/web/cn'
 
 interface EventsPageProps {
@@ -22,7 +24,9 @@ export function EventsPage({ events, isDeepLink }: EventsPageProps) {
 
       <PromotedEvents events={events} />
 
-      <EventsNearYou events={events} />
+      <GeoGate countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE} unavailableContent={null}>
+        <EventsNearYou events={events} />
+      </GeoGate>
 
       <AllUpcomingEvents events={events} />
 
