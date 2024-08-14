@@ -27,7 +27,6 @@ export function _EventsNearYou({ events }: EventsNearYouProps) {
 
   const parsedAddress =
     address !== 'loading' ? address?.description.match(/,\s([A-Z]{2})\s*,/) : null
-  const formattedAddress = address !== 'loading' ? address?.description : undefined
   const userState = parsedAddress ? parsedAddress[1] : null
 
   return (
@@ -36,37 +35,23 @@ export function _EventsNearYou({ events }: EventsNearYouProps) {
         Events near you
       </PageSubTitle>
 
-      {userState ? (
-        <FilteredEventsNearUser
-          events={events}
-          formattedAddress={formattedAddress}
-          userState={userState}
+      <div className="mx-auto w-full max-w-[562px]">
+        <GooglePlacesSelect
+          className="bg-backgroundAlternate"
+          loading={address === 'loading'}
+          onChange={setAddress}
+          placeholder="Enter your address"
+          shouldLimitUSAddresses
+          value={address !== 'loading' ? address : null}
         />
-      ) : (
-        <div className="mx-auto w-full max-w-[562px]">
-          <GooglePlacesSelect
-            className="bg-backgroundAlternate"
-            loading={address === 'loading'}
-            onChange={setAddress}
-            placeholder="Enter your address"
-            shouldLimitUSAddresses
-            value={address !== 'loading' ? address : null}
-          />
-        </div>
-      )}
+      </div>
+
+      {userState ? <FilteredEventsNearUser events={events} userState={userState} /> : null}
     </section>
   )
 }
 
-function FilteredEventsNearUser({
-  events,
-  userState,
-  formattedAddress,
-}: {
-  events: SWCEvents
-  userState: string
-  formattedAddress?: string
-}) {
+function FilteredEventsNearUser({ events, userState }: { events: SWCEvents; userState: string }) {
   const filteredEventsNearUser = useMemo(() => {
     return userState
       ? events.filter(event => {
@@ -84,27 +69,17 @@ function FilteredEventsNearUser({
   if (!userState) return null
 
   return (
-    <>
-      {formattedAddress && hasEvents && (
-        <p className="text-center">
-          Showing events for <strong className="text-primary-cta">{formattedAddress}</strong>
+    <div className="flex w-full flex-col items-center gap-4">
+      {hasEvents ? (
+        filteredEventsNearUser.map(event => <EventCard event={event.data} key={event.data.slug} />)
+      ) : (
+        <p className="text-center font-mono text-sm text-muted-foreground">
+          <Balancer>
+            Unfortunately, there are no events happening near you at the moment. Please check back
+            later for updates, as new events may be added soon.
+          </Balancer>
         </p>
       )}
-
-      <div className="flex w-full flex-col items-center gap-4">
-        {hasEvents ? (
-          filteredEventsNearUser.map(event => (
-            <EventCard event={event.data} key={event.data.slug} />
-          ))
-        ) : (
-          <p className="text-center font-mono text-sm text-muted-foreground">
-            <Balancer>
-              Unfortunately, there are no events happening near you at the moment. Please check back
-              later for updates, as new events may be added soon.
-            </Balancer>
-          </p>
-        )}
-      </div>
-    </>
+    </div>
   )
 }
