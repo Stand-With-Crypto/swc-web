@@ -1,20 +1,17 @@
-'use client'
-
 import { ArrowUpRight } from 'lucide-react'
 import Link from 'next/link'
 
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
-import { linkBoxLinkClassName } from '@/components/ui/linkBox'
-import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { cn } from '@/utils/web/cn'
+import { SupportedLocale } from '@/intl/locales'
+import { getIntlUrls } from '@/utils/shared/urls'
 
-export function HeroImage() {
-  const urls = useIntlUrls()
+export function HeroImage({ locale }: { locale: SupportedLocale }) {
   return (
-    <InternalLink href={urls.events()}>
-      <div className="relative h-[320px] overflow-hidden md:rounded-xl lg:h-[400px]">
+    <div className="relative h-[320px] overflow-hidden md:rounded-xl lg:h-[400px]">
+      <InternalLink href={getIntlUrls(locale).events()}>
         <NextImage
           alt="Events"
           blurDataURL={eventImageBlurDataUrl}
@@ -25,32 +22,27 @@ export function HeroImage() {
           sizes={'(max-width: 400px) 375px, 500px'}
           src="/homepageEventsHero.jpg"
         />
+      </InternalLink>
 
-        <div
-          className={cn(
-            'absolute bottom-0 flex w-full items-center justify-between gap-4 p-4 text-sm text-white',
-          )}
-          style={{
-            background:
-              'linear-gradient(to top, hsla(0, 0%, 0%, 0.8) 10%, hsla(0, 0%, 0%, 0.4) 70%,  transparent 100%)',
-          }}
-        >
-          <div className="flex w-full items-center justify-between gap-4">
-            <p>RSVP to reserve a spot in your state</p>
-            <Button
-              asChild
-              className={linkBoxLinkClassName}
-              data-link-box-subject
-              variant="secondary"
-            >
-              <Link href={urls.events()}>
-                RSVP <ArrowUpRight />
-              </Link>
-            </Button>
-          </div>
+      <div
+        className={cn(
+          'absolute bottom-0 flex w-full items-center justify-between gap-4 p-4 text-sm text-white',
+        )}
+        style={{
+          background:
+            'linear-gradient(to top, hsla(0, 0%, 0%, 0.8) 10%, hsla(0, 0%, 0%, 0.4) 70%,  transparent 100%)',
+        }}
+      >
+        <div className="flex w-full items-center justify-between gap-4">
+          <p>RSVP to reserve a spot in your state</p>
+          <Button asChild variant="secondary">
+            <Link href={getIntlUrls(locale).events()}>
+              RSVP <ArrowUpRight />
+            </Link>
+          </Button>
         </div>
       </div>
-    </InternalLink>
+    </div>
   )
 }
 
