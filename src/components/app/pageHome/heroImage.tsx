@@ -5,6 +5,7 @@ import Link from 'next/link'
 
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
+import { InternalLink } from '@/components/ui/link'
 import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { cn } from '@/utils/web/cn'
@@ -12,42 +13,44 @@ import { cn } from '@/utils/web/cn'
 export function HeroImage() {
   const urls = useIntlUrls()
   return (
-    <LinkBox className="relative h-[320px] overflow-hidden md:rounded-xl lg:h-[400px]">
-      <NextImage
-        alt="Events"
-        blurDataURL={eventImageBlurDataUrl}
-        className="absolute left-0 top-0 h-full w-full object-cover"
-        fill
-        placeholder="blur"
-        priority
-        sizes={'(max-width: 400px) 375px, 500px'}
-        src="/homepageEventsHero.jpg"
-      />
+    <InternalLink href={urls.events()}>
+      <LinkBox className="relative h-[320px] overflow-hidden md:rounded-xl lg:h-[400px]">
+        <NextImage
+          alt="Events"
+          blurDataURL={eventImageBlurDataUrl}
+          className="absolute left-0 top-0 h-full w-full object-cover"
+          fill
+          placeholder="blur"
+          priority
+          sizes={'(max-width: 400px) 375px, 500px'}
+          src="/homepageEventsHero.jpg"
+        />
 
-      <div
-        className={cn(
-          'absolute bottom-0 flex w-full items-center justify-between gap-4 p-4 text-sm text-white',
-        )}
-        style={{
-          background:
-            'linear-gradient(to top, hsla(0, 0%, 0%, 0.8) 10%, hsla(0, 0%, 0%, 0.4) 70%,  transparent 100%)',
-        }}
-      >
-        <div className="flex w-full items-center justify-between gap-4">
-          <p>RSVP to reserve a spot in your state</p>
-          <Button
-            asChild
-            className={linkBoxLinkClassName}
-            data-link-box-subject
-            variant="secondary"
-          >
-            <Link href={urls.events()}>
-              RSVP <ArrowUpRight />
-            </Link>
-          </Button>
+        <div
+          className={cn(
+            'absolute bottom-0 flex w-full items-center justify-between gap-4 p-4 text-sm text-white',
+          )}
+          style={{
+            background:
+              'linear-gradient(to top, hsla(0, 0%, 0%, 0.8) 10%, hsla(0, 0%, 0%, 0.4) 70%,  transparent 100%)',
+          }}
+        >
+          <div className="flex w-full items-center justify-between gap-4">
+            <p>RSVP to reserve a spot in your state</p>
+            <Button
+              asChild
+              className={linkBoxLinkClassName}
+              data-link-box-subject
+              variant="secondary"
+            >
+              <Link href={urls.events()}>
+                RSVP <ArrowUpRight />
+              </Link>
+            </Button>
+          </div>
         </div>
-      </div>
-    </LinkBox>
+      </LinkBox>
+    </InternalLink>
   )
 }
 
