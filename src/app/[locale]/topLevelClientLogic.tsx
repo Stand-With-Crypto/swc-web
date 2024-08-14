@@ -10,11 +10,11 @@ import { useDetectWipedDatabaseAndLogOutUser } from '@/hooks/useDetectWipedDatab
 import { LocaleContext } from '@/hooks/useLocale'
 import { SupportedLocale } from '@/intl/locales'
 import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
+import { thirdwebClient } from '@/utils/shared/thirdwebClient'
 import { maybeInitClientAnalytics, trackClientAnalytic } from '@/utils/web/clientAnalytics'
 import { bootstrapLocalUser } from '@/utils/web/clientLocalUser'
 import { getUserSessionIdOnClient } from '@/utils/web/clientUserSessionId'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
-import { thirdwebClient } from '@/utils/shared/thirdwebClient'
 
 const InitialOrchestration = () => {
   const pathname = usePathname()
