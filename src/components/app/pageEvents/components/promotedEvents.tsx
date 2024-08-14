@@ -1,3 +1,5 @@
+import sanitizeHtml from 'sanitize-html'
+
 import { EventDialog } from '@/components/app/pageEvents/components/eventDialog'
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
@@ -36,9 +38,12 @@ export function PromotedEvents({ events }: PromotedEventsProps) {
             <PageSubTitle as="h3" className="text-bold font-sans text-base text-foreground">
               {event.data.name}
             </PageSubTitle>
-            <p className="line-clamp-3 text-center font-mono text-base text-muted-foreground lg:text-left">
-              {event.data.description}
-            </p>
+            <div
+              className="line-clamp-3 text-center font-mono text-base text-muted-foreground lg:text-left"
+              dangerouslySetInnerHTML={{
+                __html: sanitizeHtml(event.data.formattedDescription),
+              }}
+            />
 
             <EventDialog
               event={event.data}

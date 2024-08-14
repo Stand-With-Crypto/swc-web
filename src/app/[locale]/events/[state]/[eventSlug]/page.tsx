@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import sanitizeHtml from 'sanitize-html'
 
 import { EventDialogContent } from '@/components/app/pageEvents/components/eventDialogContent'
 import { EventsPageDialogDeeplinkLayout } from '@/components/app/pageEvents/eventsPageDialogDeeplinkLayout'
@@ -35,7 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return generateMetadataDetails({
     title: `${event.data.name} - ${title}`,
-    description: event.data.description,
+    description: sanitizeHtml(event.data.formattedDescription),
     ogImage: {
       url: event.data.image,
     },

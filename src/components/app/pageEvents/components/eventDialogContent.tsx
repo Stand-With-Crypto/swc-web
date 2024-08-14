@@ -4,6 +4,7 @@ import Balancer from 'react-wrap-balancer'
 import { UserActionType } from '@prisma/client'
 import { format, isBefore, startOfDay } from 'date-fns'
 import { Clock, Pin } from 'lucide-react'
+import sanitizeHtml from 'sanitize-html'
 import { toast } from 'sonner'
 
 import {
@@ -147,7 +148,7 @@ function EventInformation({
   handleRSVPButtonClick: () => void
 }) {
   const eventDate = event?.time ? new Date(`${event.date}T${event.time}`) : new Date(event.date)
-  const formattedEventDate = format(eventDate, event?.time ? 'EEEE M/d h:mm a' : 'EEEE M/d')
+  const formattedEventDate = format(eventDate, event?.time ? 'EEEE M/d, h:mm a' : 'EEEE M/d')
   const isPastEvent = isBefore(startOfDay(eventDate), startOfDay(new Date()))
 
   return (
@@ -164,9 +165,11 @@ function EventInformation({
           <h3 className="text-center font-sans text-xl font-bold">
             <Balancer>{event.name}</Balancer>
           </h3>
-          <p className="text-center font-mono text-base text-muted-foreground">
-            <Balancer>{event.description}</Balancer>
-          </p>
+          <div className="text-center font-mono text-base text-muted-foreground">
+            <Balancer
+              dangerouslySetInnerHTML={{ __html: sanitizeHtml(event.formattedDescription) }}
+            />
+          </div>
           <p className="mt-9 flex items-center gap-2 font-mono text-sm">
             <Clock size={16} /> {formattedEventDate}
           </p>

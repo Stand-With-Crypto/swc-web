@@ -19,9 +19,9 @@ export const zodEventSchemaValidation = object({
     isFeatured: boolean(),
     slug: string(),
     city: string(),
-    description: string(),
     date: string(),
     time: string().optional(),
+    formattedDescription: string(),
   }),
 })
 
