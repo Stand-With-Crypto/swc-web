@@ -3,11 +3,13 @@ export function PagePrivacyPolicy() {
     <article className="prose max-w-full">
       <h1>Stand With Crypto Alliance, Inc.: Privacy Policy</h1>
 
-      <p>Effective Date: April 30th, 2024</p>
+      <p>Effective Date: August 15, 2024</p>
 
       <p>
         Your privacy is important to us. This Privacy Policy describes the types of information that
-        Stand With Crypto Alliance, Inc. (“SWC”) collects from you and about you when you visit our{' '}
+        Stand With Crypto Alliance, Inc. and its affiliates, including Stand with Crypto Alliance,
+        Inc. Political Action Committee (together, “SWC”) collects from you and about you when you
+        visit our{' '}
         <a href="https://standwithcrypto.org" target="_blank">
           website
         </a>{' '}
@@ -33,11 +35,11 @@ export function PagePrivacyPolicy() {
 
       <ul>
         <li>
-          We may collect your personal information when you sign up to be a member or subscriber of
-          SWC, create a user account on our website, donate money to SWC, or otherwise engage with
-          and provide information to SWC. This information may include your name, email address,
-          phone number, physical address, and any other personal information you choose to share
-          with us.
+          We may collect your personal information when provide it to us, for example when you sign
+          up to be a member or subscriber of SWC, create a user account on our website, donate money
+          to SWC, sign-up for for an SWC-related event, or otherwise engage with and provide
+          information to SWC. This information may include your name, email address, phone number,
+          physical address, and any other personal information you choose to share with us.
         </li>
         <li>
           We may collect your personal information when you or your organization requests to be a
@@ -50,7 +52,8 @@ export function PagePrivacyPolicy() {
           transactions, including to mint NFTs. Providing your crypto wallet address is voluntary.
         </li>
         <li>
-          Based on your engagement with SWC, we may also collect other information. For example:
+          Based on your engagement with SWC, we may also collect information in other circumstances.
+          For example:
           <ul>
             <li>
               Donations: If you choose to make a donation to us, we may ask you to confirm if you
@@ -62,7 +65,8 @@ export function PagePrivacyPolicy() {
             <li>
               SWC Advocacy Activities: We may collect information about your activity performed as a
               SWC member, subscriber, or user—including joining SWC, donating, attending an event,
-              minting an NFT, and engaging with elected officials and policymakers.
+              minting an NFT, and engaging with elected officials and policymakers, among other
+              activities.
             </li>
 
             <li>
@@ -76,11 +80,11 @@ export function PagePrivacyPolicy() {
 
       <p>
         <i>Sources of Personal Information</i>: SWC may collect your information from you through
-        the SWC website or SWC-related communities, accounts, or channels on social media platforms;
-        through in-person SWC events, or through other channels where you choose to share
-        information with SWC. SWC also partners with Coinbase and other like-minded organizations,
-        and may collect information about you from those partners, including your activity with
-        those entities.
+        the SWC website, SWC's service providers' websites or applications, or SWC-related
+        communities, accounts, or channels on social media platforms; through SWC-related events, or
+        through other channels where you choose to share information with SWC. SWC also partners
+        with Coinbase and other like-minded organizations, and may collect information about you
+        from those partners, including your activity with those entities.
       </p>
 
       <p>
@@ -103,13 +107,14 @@ export function PagePrivacyPolicy() {
           business;
         </li>
         <li>
-          Facilitate and keep track of your advocacy efforts, including helping you contact elected
-          officials and policymakers;
+          Facilitate and keep track of your SWC-related efforts, including helping to set up or get
+          you registered for events and helping you contact elected officials and policymakers;
         </li>
         <li>Coordinate with you as a SWC Open Source Partner;</li>
         <li>
-          Send you texts, newsletters, updates, and/or opportunities for engagement related to SWC's
-          mission, initiatives, advocacy, and business;
+          Communicate with you (for example via texts, calls, emails, and newsletters) about updates
+          and/or opportunities for engagement related to SWC's mission, initiatives, advocacy, and
+          business;
         </li>
         <li>
           Track, analyze, and improve your engagement with SWC and its advertisements, website,
@@ -191,19 +196,23 @@ export function PagePrivacyPolicy() {
         </li>
       </ul>
 
-      <h2>SWC’s Texting Program</h2>
+      <h2>SWC's Texting Program</h2>
       <p>
-        With your opt-in consent, SWC may send you recurring automated text/SMS messages at the
-        phone number you provide to us. These texts will include information about SWC’s efforts to
-        fulfill its mission to unite global crypto advocates, forming a passionate community
-        committed to driving sensible crypto innovation and crypto policy. Opt-in consent for text
-        messages is not shared with any third party, except telecommunication technology providers
-        (e.g. aggregators and providers of text message services).
+        <strong>
+          With your opt-in consent, SWC may send you recurring automated text/SMS messages at the
+          phone number you provide to us. These texts will include information about SWC's efforts
+          to fulfill its mission to unite global crypto advocates, forming a passionate community
+          committed to driving sensible crypto innovation and crypto policy. Opt-in consent for text
+          messages is not shared with any third party, except telecommunication technology providers
+          (e.g. aggregators and providers of text message services).
+        </strong>
       </p>
       <p>
-        At any time, you may reply STOP to opt-out of these messages, and HELP for support. For
-        customer support, you may also contact:{' '}
-        <a href="mailto:info@standwithcrypto.org">info@standwithcrypto.org</a>.
+        <strong>
+          At any time, you may reply STOP to opt-out of these messages, and HELP for support. For
+          customer support, you may also contact:{' '}
+          <a href="mailto:info@standwithcrypto.org">info@standwithcrypto.org</a>.
+        </strong>
       </p>
       <p>
         Message and data rates may apply. Message frequency varies. Carriers are not liable for
@@ -213,11 +222,8 @@ export function PagePrivacyPolicy() {
       <h2>Your Privacy Choices</h2>
 
       <p>
-        <i>Texting</i>: With your opt-in consent, SWC may send you recurring automated text/SMS
-        messages at the phone number you provide to us about SWC advocacy efforts. At any time, you
-        may reply STOP to opt-out of these messages. Message and data rates may apply. For customer
-        support, please contact:{' '}
-        <a href="mailto:info@standwithcrypto.org">info@standwithcrypto.org</a>.
+        <i>Texting</i>: As detailed above, you may reply STOP to opt-out of automated text messages
+        about SWC's efforts.
       </p>
 
       <p>
@@ -322,7 +328,7 @@ export function PagePrivacyPolicy() {
         <a href="mailto:info@standwithcrypto.org">info@standwithcrypto.org</a>
       </p>
 
-      <p>Last Updated: April 30th, 2023</p>
+      <p>Last Updated: August 15, 2024</p>
     </article>
   )
 }
