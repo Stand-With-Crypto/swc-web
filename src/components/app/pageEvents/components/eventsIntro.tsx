@@ -13,7 +13,7 @@ export function EventsIntro() {
   return (
     <section className="flex flex-col items-center gap-10">
       <div className="flex flex-col gap-4 lg:gap-6">
-        <PageTitle className="text-center font-sans text-xl text-foreground lg:text-4xl">
+        <PageTitle className="text-center font-sans text-3xl text-foreground lg:text-4xl">
           Events
         </PageTitle>
         <p className="text-center font-mono text-base text-muted-foreground lg:text-xl">
