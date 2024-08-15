@@ -209,7 +209,10 @@ export function UserActionFormNFTMintCheckout({
               }
               onError={e => handleTransactionException(e, { isUSResident })}
               onTransactionConfirmed={onMintCallback}
-              onTransactionSent={result => setTransactionHash(result.transactionHash)}
+              onTransactionSent={result => {
+                setTransactionHash(result.transactionHash)
+                goToSection(UserActionFormNFTMintSectionNames.TRANSACTION_WATCH)
+              }}
               theme={theme}
               transaction={prepareTransaction}
             >
