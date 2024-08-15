@@ -11,7 +11,7 @@ export function SuccessfulEventNotificationsSignup({
   isCreatingRsvpEventAction,
 }: SuccessfulEventNotificationsSignupProps) {
   return (
-    <div className="flex flex-col items-center gap-2 pb-4">
+    <div className="flex flex-col items-center gap-2 pb-4 pt-8">
       <NextImage
         alt="SWC shield"
         className="mb-2 lg:mb-0"

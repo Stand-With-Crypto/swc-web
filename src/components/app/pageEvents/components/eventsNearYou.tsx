@@ -9,6 +9,7 @@ import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { useMutableCurrentUserAddress } from '@/hooks/useCurrentUserAddress'
 import { SWCEvents } from '@/utils/shared/getSWCEvents'
+import { US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
 
 interface EventsNearYouProps {
   events: SWCEvents
@@ -25,9 +26,26 @@ export function EventsNearYou(props: EventsNearYouProps) {
 export function _EventsNearYou({ events }: EventsNearYouProps) {
   const { setAddress, address } = useMutableCurrentUserAddress()
 
-  const parsedAddress =
-    address !== 'loading' ? address?.description.match(/,\s([A-Z]{2})\s*/) : null
-  const userState = parsedAddress ? parsedAddress[1] : null
+  const userState = useMemo(() => {
+    if (address === 'loading') return null
+
+    const possibleStateMatches = address?.description.matchAll(/\s([A-Z]{2})\s*/g)
+
+    if (!possibleStateMatches) return null
+
+    for (const match of possibleStateMatches) {
+      const stateCode = match[1]
+      if (
+        US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP[
+          stateCode as keyof typeof US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP
+        ]
+      ) {
+        return stateCode
+      }
+    }
+
+    return null
+  }, [address])
 
   return (
     <section className="grid w-full items-center gap-4 lg:gap-6">
