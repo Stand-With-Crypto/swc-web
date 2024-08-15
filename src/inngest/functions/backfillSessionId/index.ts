@@ -66,7 +66,7 @@ export const backfillSessionIdCronJob = inngest.createFunction(
         }
       })
 
-      logger.info(`Batch ${i} finished creasting session for ${batchResult.usersCount} users`)
+      logger.info(`Batch ${i} finished creating session for ${batchResult.usersCount} users`)
     }
 
     logger.info('Backfill session id function finished')
