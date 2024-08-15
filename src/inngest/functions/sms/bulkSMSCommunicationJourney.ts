@@ -59,6 +59,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
     const logInfo = (key: string, info: object) =>
       logger.info('bulk-info', key, JSON.stringify(info))
 
+    // SMS messages over 160 characters are split into 153-character segments due to data headers.
     const getWaitingTimeInSeconds = (totalSegments: number) =>
       totalSegments / MESSAGE_SEGMENTS_PER_SECOND
 
@@ -151,7 +152,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
     if (!send) {
       return bulkInfo
     } else {
-      logInfo('bulk-info', bulkInfo)
+      logInfo('initial-info', bulkInfo)
     }
 
     let iteration = 0
@@ -160,45 +161,50 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
     let totalQueuedSegments = 0
     let totalTimeTaken = 0
     while (hasMoreMessages) {
-      const { queuedMessages, queuedSegments } = await step.run(`enqueue-messages`, async () => {
-        let queuedMessages = 0
-        let queuedSegments = 0
-        let hasSpaceLeftInQueue = true
+      const { queuedMessages, queuedSegments, timeToSendAllSegments } = await step.run(
+        `enqueue-messages`,
+        async () => {
+          let queuedMessages = 0
+          let queuedSegments = 0
+          let hasSpaceLeftInQueue = true
 
-        while (hasSpaceLeftInQueue) {
-          const payloadChunk = payloadChunks[iteration]
-          const nextPayload = payloadChunks[iteration + 1]
+          while (hasSpaceLeftInQueue) {
+            const payloadChunk = payloadChunks[iteration]
+            const nextPayload = payloadChunks[iteration + 1]
 
-          if (nextPayload) {
-            const { segments: segmentsInNextPayload } = countMessagesAndSegments(nextPayload)
+            // If we wont use the full queue, there's no need for this validation
+            if (nextPayload && totalSegmentsToSend >= MAX_QUEUE_LENGTH) {
+              const { segments: segmentsInNextPayload } = countMessagesAndSegments(nextPayload)
 
-            if (queuedSegments + segmentsInNextPayload >= MAX_QUEUE_LENGTH) {
-              hasSpaceLeftInQueue = false
+              if (queuedSegments + segmentsInNextPayload >= MAX_QUEUE_LENGTH) {
+                hasSpaceLeftInQueue = false
+                break
+              }
+            }
+
+            if (!payloadChunk) {
+              hasMoreMessages = false
               break
             }
+
+            const { messages, segments } = await enqueueMessages(payloadChunk)
+
+            queuedMessages += messages
+            queuedSegments += segments
+
+            if (!nextPayload) {
+              hasMoreMessages = false
+              break
+            }
+
+            iteration += 1
           }
 
-          if (!payloadChunk) {
-            hasMoreMessages = false
+          const timeToSendAllSegments = getWaitingTimeInSeconds(queuedSegments)
 
-            break
-          }
-
-          const { messages, segments } = await enqueueMessages(payloadChunk)
-
-          queuedMessages += messages
-          queuedSegments += segments
-
-          if (!nextPayload) {
-            hasMoreMessages = false
-            break
-          }
-
-          iteration += 1
-        }
-
-        return { queuedMessages, queuedSegments }
-      })
+          return { queuedMessages, queuedSegments, timeToSendAllSegments }
+        },
+      )
 
       if (queuedSegments === 0) {
         hasMoreMessages = false
@@ -207,8 +213,6 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
 
       totalQueuedMessages += queuedMessages
       totalQueuedSegments += queuedSegments
-
-      const timeToSendAllSegments = getWaitingTimeInSeconds(queuedSegments)
 
       await step.sleep(
         `waiting-${formatTime(timeToSendAllSegments).replace(' ', '-')}-for-messaging-queue-to-be-empty`,
@@ -222,18 +226,12 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
         totalQueuedMessages,
         totalQueuedSegments,
       })
-
-      logInfo('progress-log', {
-        timeLeft: formatTime(timeInfo.timeToSendAllSegments - totalTimeTaken),
-        messagesLeft: messagesInfo.total - totalQueuedMessages,
-        segmentsLeft: segmentsToSendInfo.total - totalQueuedSegments,
-      })
     }
 
     return {
       totalQueuedMessages,
       totalQueuedSegments,
-      totalTimeTaken,
+      totalTimeTaken: formatTime(totalTimeTaken),
     }
   },
 )
@@ -289,7 +287,6 @@ async function fetchAllPhoneNumbers(
     },
   )
 
-  // First we fetch users that should receive the welcome message
   while (hasNumbersLeft) {
     const phoneNumberList = await getPhoneNumberList({
       ...options,
