@@ -197,18 +197,22 @@ export function PagePrivacyPolicy() {
       </ul>
 
       <h2>SWC's Texting Program</h2>
-      <p className="font-bold">
-        With your opt-in consent, SWC may send you recurring automated text/SMS messages at the
-        phone number you provide to us. These texts will include information about SWC's efforts to
-        fulfill its mission to unite global crypto advocates, forming a passionate community
-        committed to driving sensible crypto innovation and crypto policy. Opt-in consent for text
-        messages is not shared with any third party, except telecommunication technology providers
-        (e.g. aggregators and providers of text message services).
+      <p>
+        <strong>
+          With your opt-in consent, SWC may send you recurring automated text/SMS messages at the
+          phone number you provide to us. These texts will include information about SWC's efforts
+          to fulfill its mission to unite global crypto advocates, forming a passionate community
+          committed to driving sensible crypto innovation and crypto policy. Opt-in consent for text
+          messages is not shared with any third party, except telecommunication technology providers
+          (e.g. aggregators and providers of text message services).
+        </strong>
       </p>
-      <p className="font-bold">
-        At any time, you may reply STOP to opt-out of these messages, and HELP for support. For
-        customer support, you may also contact:{' '}
-        <a href="mailto:info@standwithcrypto.org">info@standwithcrypto.org</a>.
+      <p>
+        <strong>
+          At any time, you may reply STOP to opt-out of these messages, and HELP for support. For
+          customer support, you may also contact:{' '}
+          <a href="mailto:info@standwithcrypto.org">info@standwithcrypto.org</a>.
+        </strong>
       </p>
       <p>
         Message and data rates may apply. Message frequency varies. Carriers are not liable for
