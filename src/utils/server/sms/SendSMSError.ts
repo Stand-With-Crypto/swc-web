@@ -6,8 +6,8 @@ export const TOO_MANY_REQUESTS_CODE = 20429
 
 export class SendSMSError {
   phoneNumber: string
-  code?: number | string
-  message?: string
+  code: number | string = 'Unknown'
+  message = 'Unknown SendSMS Error'
   moreInfo?: string
   details?: object | unknown
 
@@ -18,17 +18,26 @@ export class SendSMSError {
     this.phoneNumber = phoneNumber
 
     if (error instanceof RestException) {
-      this.code = error.code
+      if (error.code) {
+        this.code = error.code
+      }
       this.message = error.message
       this.moreInfo = error.moreInfo
       this.details = error.details
     } else if (axios.isAxiosError(error)) {
-      this.code = error.code
+      if (error.code) {
+        this.code = error.code
+      }
       this.message = error.message
       this.moreInfo = error.stack
       this.details = error.cause
-    } else if ('code' in (error as any)) {
-      this.code = (error as any).code
+    } else {
+      if ('code' in (error as any)) {
+        this.code = (error as any).code
+      }
+      if ('message' in (error as any)) {
+        this.message = (error as any).message
+      }
     }
 
     this.isInvalidPhoneNumber = this.code === INVALID_PHONE_NUMBER_CODE

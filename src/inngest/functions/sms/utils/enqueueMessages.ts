@@ -3,12 +3,15 @@ import * as Sentry from '@sentry/node'
 import { NonRetriableError } from 'inngest'
 
 import { countSegments, sendSMS, SendSMSError } from '@/utils/server/sms'
+import { getLogger } from '@/utils/shared/logger'
 import { sleep } from '@/utils/shared/sleep'
 
 import { createCommunication, createCommunicationJourneys, flagInvalidPhoneNumbers } from '.'
 
 const MAX_RETRY_ATTEMPTS = 5
 const PAYLOAD_LIMIT = 10000
+
+const logger = getLogger('enqueueMessages')
 
 export interface PayloadMessage {
   body: string
@@ -65,7 +68,7 @@ export async function enqueueMessages(payload: EnqueueMessagePayload[], attempt 
           } else if (error.isInvalidPhoneNumber) {
             invalidPhoneNumbers.push(error.phoneNumber)
           } else {
-            Sentry.captureException('Unexpected sendSMS error', {
+            Sentry.captureException(`sendSMS Error ${error.code}: ${error.message}`, {
               extra: { reason: error },
               tags: {
                 domain: 'enqueueMessages',
@@ -75,7 +78,7 @@ export async function enqueueMessages(payload: EnqueueMessagePayload[], attempt 
         } else if (error instanceof NonRetriableError) {
           throw error
         } else {
-          Sentry.captureException('sendSMS failed with no reason', {
+          Sentry.captureException(`sendSMS unexpected Error: ${(error as any)?.message}`, {
             extra: {
               reason: error,
             },
@@ -90,20 +93,31 @@ export async function enqueueMessages(payload: EnqueueMessagePayload[], attempt 
 
   await Promise.all(enqueueMessagesPromise)
 
+  logger.info(`Attempt ${attempt + 1} queued ${queuedMessages} messages (${segmentsSent} segments)`)
+
   if (invalidPhoneNumbers.length > 0) {
+    logger.info(`Found ${invalidPhoneNumbers.length} invalid phone numbers`)
     await flagInvalidPhoneNumbers(invalidPhoneNumbers)
   }
 
-  const newPayload: EnqueueMessagePayload[] = Object.keys(failedPhoneNumbers).map(phoneNumber => ({
-    phoneNumber,
-    messages: failedPhoneNumbers[phoneNumber],
-  }))
+  const failedEnqueueMessagePayload: EnqueueMessagePayload[] = Object.keys(failedPhoneNumbers).map(
+    phoneNumber => ({
+      phoneNumber,
+      messages: failedPhoneNumbers[phoneNumber],
+    }),
+  )
 
   // exponential backoff retry
-  if (newPayload.length > 0) {
-    await sleep(10000 * (attempt + 1))
+  if (failedEnqueueMessagePayload.length > 0) {
+    const waitingTime = 10000 * (attempt + 1)
 
-    const { messages, segments } = await enqueueMessages(newPayload, attempt + 1)
+    logger.info(
+      `Failed to send SMS to ${failedEnqueueMessagePayload.length} phone numbers. Attempting again in ${waitingTime} seconds`,
+    )
+
+    await sleep(waitingTime)
+
+    const { messages, segments } = await enqueueMessages(failedEnqueueMessagePayload, attempt + 1)
 
     segmentsSent += segments
     queuedMessages += messages
