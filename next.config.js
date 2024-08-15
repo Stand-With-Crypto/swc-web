@@ -66,6 +66,7 @@ const contentSecurityPolicy = {
     'https://*.coinbase.com/',
     'https://*.sentry.io/',
     'https://api.thirdweb.com/',
+    'https://embedded-wallet.thirdweb.com/',
   ],
   'frame-src': [
     '*.google.com',
