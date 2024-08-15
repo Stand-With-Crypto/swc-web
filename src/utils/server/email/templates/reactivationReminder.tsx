@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Hr, Img, Section, Text } from '@react-email/components'
+import { Hr, Img, Link, Section, Text } from '@react-email/components'
 
 import { EmailTemplateProps } from '@/utils/server/email/templates/common/constants'
 import { Heading } from '@/utils/server/email/templates/ui/heading'
@@ -55,13 +55,12 @@ export default function ReactivationReminder({
         <br />
         <Text className="text-foreground-muted my-0 text-center text-[15px]">
           Stay tuned for more updates and information from SWC. You can always visit{' '}
-          <a
+          <Link
             className="text-foreground-muted"
-            href="https://www.standwithcrypto.org"
-            target="_blank"
+            href={buildTemplateInternalUrl('/', hydratedHrefSearchParams)}
           >
             our website
-          </a>{' '}
+          </Link>{' '}
           to find the latest news and opportunities for advocacy, and follow us on our social media
           channels below. Thank you again for being a part of our community.
         </Text>
