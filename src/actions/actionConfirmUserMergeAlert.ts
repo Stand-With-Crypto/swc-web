@@ -6,7 +6,7 @@ import { z } from 'zod'
 import { appRouterGetAuthUser } from '@/utils/server/authentication/appRouterGetAuthUser'
 import { mergeUsers } from '@/utils/server/mergeUsers/mergeUsers'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
+import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
 import { getLogger } from '@/utils/shared/logger'
 
 const schema = z.object({

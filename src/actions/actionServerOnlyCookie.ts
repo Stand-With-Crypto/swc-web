@@ -3,7 +3,7 @@ import 'server-only'
 
 import { cookies } from 'next/headers'
 
-import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
+import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
 
 export const actionServerOnlyCookie = withServerActionMiddleware(
   'actionServerOnlyCookie',

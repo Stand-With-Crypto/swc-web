@@ -18,8 +18,8 @@ import { prismaClient } from '@/utils/server/prismaClient'
 import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
+import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
 import { optInUser } from '@/utils/server/sms/actions'
-import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
 import { zodUpdateUserHasOptedInToSMS } from '@/validation/forms/zodUpdateUserHasOptedInToSMS'
 
 export const actionUpdateUserHasOptedInToSMS = withServerActionMiddleware(

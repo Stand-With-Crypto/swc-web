@@ -3,7 +3,7 @@ import 'server-only'
 
 import * as Sentry from '@sentry/nextjs'
 
-import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
+import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
 
 export const actionDebugSentry = withServerActionMiddleware('actionDebugSentry', _actionDebugSentry)
 
