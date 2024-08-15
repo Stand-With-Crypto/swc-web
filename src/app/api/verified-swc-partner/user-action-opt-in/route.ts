@@ -6,11 +6,12 @@ import {
   verifiedSWCPartnersUserActionOptIn,
   zodVerifiedSWCPartnersUserActionOptIn,
 } from '@/data/verifiedSWCPartners/userActionOptIn'
+import { withUserSession } from '@/utils/server/serverWrappers/withUserSession'
 import { authenticateAndGetVerifiedSWCPartnerFromHeader } from '@/utils/server/verifiedSWCPartner/getVerifiedSWCPartnerFromHeader'
 
 type RequestBody = z.infer<typeof zodVerifiedSWCPartnersUserActionOptIn>
 
-export async function POST(request: NextRequest) {
+export const POST = withUserSession(async (request: NextRequest) => {
   const partner = authenticateAndGetVerifiedSWCPartnerFromHeader()
   const requestBody = await request.json()
 
@@ -53,4 +54,4 @@ export async function POST(request: NextRequest) {
   })
 
   return NextResponse.json(result)
-}
+})

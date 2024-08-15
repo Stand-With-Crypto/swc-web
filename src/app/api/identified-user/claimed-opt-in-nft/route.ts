@@ -4,6 +4,7 @@ import { NextResponse } from 'next/server'
 
 import { getMaybeUserAndMethodOfMatchWithMaybeSession } from '@/utils/server/getMaybeUserAndMethodOfMatch'
 import { getOptInUserAction } from '@/utils/server/nft/claimOptInNft'
+import { withUserSession } from '@/utils/server/serverWrappers/withUserSession'
 
 export const dynamic = 'force-dynamic'
 
@@ -17,7 +18,7 @@ async function apiResponseForUserClaimedOptInNft() {
 
 export type GetUserClaimedOptInNft = Awaited<ReturnType<typeof apiResponseForUserClaimedOptInNft>>
 
-export async function GET() {
+export const GET = withUserSession(async () => {
   const response = await apiResponseForUserClaimedOptInNft()
   return NextResponse.json(response)
-}
+})

@@ -26,6 +26,7 @@ import { I_AM_A_VOTER_NFT_CONTRACT_ADDRESS } from '@/utils/server/nft/constants'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getServerAnalytics } from '@/utils/server/serverAnalytics'
 import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
+import { withUserSession } from '@/utils/server/serverWrappers/withUserSession'
 import { NEYNAR_API_KEY } from '@/utils/shared/neynarAPIKey'
 import { NFTSlug } from '@/utils/shared/nft'
 import { fullUrl } from '@/utils/shared/urls'
@@ -177,7 +178,7 @@ const frameFinal = {
  * @param req
  * @returns
  */
-export async function POST(req: NextRequest): Promise<Response> {
+export const POST = withUserSession(async (req: NextRequest): Promise<Response> => {
   let currentFrameState = {
     emailAddress: '',
     phoneNumber: '',
@@ -495,7 +496,7 @@ export async function POST(req: NextRequest): Promise<Response> {
   }
 
   return NextResponse.json({ error: 'invalid frame index' }, { status: 400 })
-}
+})
 
 /**
  * Helper function to get existing user information for the existing action.
