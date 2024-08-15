@@ -151,9 +151,6 @@ Cypress.Commands.add('waitForProfileCreation', (customUser = mockRandomUser) => 
     .scrollIntoView()
     .click()
 
-  // selects the first option Anonymous as how the user wants to be displayed
-  cy.contains('Submit').should('be.visible').click()
-
   cy.wait(500)
 
   cy.contains('Profile updated')
