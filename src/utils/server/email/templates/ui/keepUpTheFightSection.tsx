@@ -66,7 +66,7 @@ export function KeepUpTheFightSection({
               />
             </Column>
             <Column className="px-4">
-              <Heading align="start" as="h3" size="sm">
+              <Heading align="start" as="h3" size="xs">
                 {metadata.text}
               </Heading>
               <Text className="text-foreground-muted my-0">{metadata.subtext}</Text>
