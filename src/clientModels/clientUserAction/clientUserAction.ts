@@ -9,6 +9,7 @@ import {
   UserActionRsvpEvent,
   UserActionTweetAtPerson,
   UserActionType,
+  UserActionVoterAttestation,
   UserActionVoterRegistration,
 } from '@prisma/client'
 import { keyBy } from 'lodash-es'
@@ -38,6 +39,7 @@ type ClientUserActionDatabaseQuery = UserAction & {
   userActionOptIn: UserActionOptIn | null
   userActionVoterRegistration: UserActionVoterRegistration | null
   userActionTweetAtPerson: UserActionTweetAtPerson | null
+  userActionVoterAttestation: UserActionVoterAttestation | null
   userActionRsvpEvent: UserActionRsvpEvent | null
 }
 
@@ -78,6 +80,9 @@ type ClientUserActionTweetAtPerson = {
   campaignName: UserActionTweetAtPersonCampaignName
   person: DTSIPersonForUserActions | null
 }
+type ClientUserActionVoterAttestation = Pick<UserActionVoterAttestation, 'usaState'> & {
+  actionType: typeof UserActionType.VOTER_ATTESTATION
+}
 type ClientUserActionRsvpEvent = {
   actionType: typeof UserActionType.RSVP_EVENT
   eventSlug: string
@@ -101,6 +106,7 @@ export type ClientUserAction = ClientModel<
       | ClientUserActionVoterRegistration
       | ClientUserActionLiveEvent
       | ClientUserActionTweetAtPerson
+      | ClientUserActionVoterAttestation
       | ClientUserActionRsvpEvent
     )
 >
@@ -213,6 +219,14 @@ export const getClientUserAction = ({
         actionType: UserActionType.TWEET_AT_PERSON,
       }
       return getClientModel({ ...sharedProps, ...tweetAtPersonFields })
+    },
+    [UserActionType.VOTER_ATTESTATION]: () => {
+      const { usaState } = getRelatedModel(record, 'userActionVoterAttestation')
+      const clientModelFields: ClientUserActionVoterAttestation = {
+        actionType: UserActionType.VOTER_ATTESTATION,
+        usaState,
+      }
+      return getClientModel({ ...sharedProps, ...clientModelFields })
     },
     [UserActionType.RSVP_EVENT]: () => {
       const { eventSlug, eventState } = getRelatedModel(record, 'userActionRsvpEvent')

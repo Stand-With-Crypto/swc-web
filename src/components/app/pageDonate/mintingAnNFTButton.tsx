@@ -7,7 +7,7 @@ export function MintingAnNFTButton() {
   return (
     <UserActionFormNFTMintDialog>
       <Button className="p-0 underline" variant="link">
-        minting an NFT
+        minting an NFT.
       </Button>
     </UserActionFormNFTMintDialog>
   )

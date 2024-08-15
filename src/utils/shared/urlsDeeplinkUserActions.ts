@@ -61,6 +61,11 @@ export const USER_ACTION_DEEPLINK_MAP: {
       return `${getIntlPrefix(locale)}/action/share`
     },
   },
+  [UserActionType.VOTER_ATTESTATION]: {
+    getDeeplinkUrl: ({ locale }) => {
+      return `${getIntlPrefix(locale)}/action/pledge`
+    },
+  },
 }
 export type UserActionTypesWithDeeplink = keyof typeof USER_ACTION_DEEPLINK_MAP
 

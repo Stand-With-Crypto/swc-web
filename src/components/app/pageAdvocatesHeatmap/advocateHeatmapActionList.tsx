@@ -29,10 +29,7 @@ export function AdvocateHeatmapActionList({ isEmbedded }: { isEmbedded?: boolean
             key={key}
           >
             <ActionIcon className="w-8 md:w-10" />
-            <span className="text-xs">
-              {isEmbedded ? '' : 'Someone '}
-              {isMobile ? action.labelMobile : action.label}
-            </span>
+            <span className="text-xs">{isMobile ? action.labelMobile : action.label}</span>
           </div>
         )
       })}

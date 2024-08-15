@@ -28,7 +28,10 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { trackFormSubmissionSyncErrors, triggerServerActionForForm } from '@/utils/web/formUtils'
-import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
+import {
+  convertGooglePlaceAutoPredictionToAddressSchema,
+  GooglePlaceAutocompletePrediction,
+} from '@/utils/web/googlePlaceUtils'
 import { catchUnexpectedServerErrorAndTriggerToast } from '@/utils/web/toastUtils'
 import {
   zodUpdateUserProfileFormFields,
@@ -43,7 +46,11 @@ export function UpdateUserProfileForm({
   shouldFieldsBeRequired = false,
 }: {
   user: SensitiveDataClientUser & { address: ClientAddress | null }
-  onSuccess: (updatedUserFields: { firstName: string; lastName: string }) => void
+  onSuccess: (updatedUserFields: {
+    firstName: string
+    lastName: string
+    address: GooglePlaceAutocompletePrediction | null
+  }) => void
   shouldFieldsBeRequired?: boolean
 }) {
   const router = useRouter()
@@ -99,7 +106,7 @@ export function UpdateUserProfileForm({
             router.refresh()
             toast.success('Profile updated', { duration: 5000 })
             const { firstName, lastName } = values
-            onSuccess({ firstName, lastName })
+            onSuccess({ firstName, lastName, address: values.address })
           }
         }, trackFormSubmissionSyncErrors(FORM_NAME))}
       >
@@ -147,7 +154,7 @@ export function UpdateUserProfileForm({
               </FormItem>
             )}
           />
-          {user.hasEmbeddedWallet || (
+          {user.hasEmbeddedWallet || user.primaryUserEmailAddress?.isVerified || (
             <FormField
               control={form.control}
               name="emailAddress"
@@ -161,29 +168,31 @@ export function UpdateUserProfileForm({
               )}
             />
           )}
-          <FormField
-            control={form.control}
-            name="phoneNumber"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Input
-                    className="h-auto p-4"
-                    data-testid="phone-number-input"
-                    placeholder="Phone number"
-                    {...field}
-                    onChange={e => {
-                      field.onChange(e)
-                      if (!e.target.value && form.getValues('hasOptedInToSms')) {
-                        form.setValue('hasOptedInToSms', false)
-                      }
-                    }}
-                  />
-                </FormControl>
-                <FormErrorMessage />
-              </FormItem>
-            )}
-          />
+          {!user.hasRepliedToOptInSms && !user.phoneNumber && (
+            <FormField
+              control={form.control}
+              name="phoneNumber"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <Input
+                      className="h-auto p-4"
+                      data-testid="phone-number-input"
+                      placeholder="Phone number"
+                      {...field}
+                      onChange={e => {
+                        field.onChange(e)
+                        if (!e.target.value && form.getValues('hasOptedInToSms')) {
+                          form.setValue('hasOptedInToSms', false)
+                        }
+                      }}
+                    />
+                  </FormControl>
+                  <FormErrorMessage />
+                </FormItem>
+              )}
+            />
+          )}
           <FormField
             control={form.control}
             name="address"
@@ -239,12 +248,14 @@ export function UpdateUserProfileForm({
           <Button className="w-full" disabled={form.formState.isSubmitting} size="lg" type="submit">
             Create account
           </Button>
-          <Collapsible open={!!form.watch('phoneNumber')}>
+          <Collapsible
+            open={!!form.watch('phoneNumber') && !user.hasRepliedToOptInSms && !user.phoneNumber}
+          >
             <CollapsibleContent className="AnimateCollapsibleContent">
               <FormDescription className="text-center text-xs font-normal leading-4 text-muted-foreground">
-                By clicking Create account, you consent to receive recurring texts from Stand with
-                Crypto about its efforts at the number provided. You can reply STOP to stop
-                receiving texts. Message and data rates may apply.
+                By signing in, you consent to receive recurring texts from Stand with Crypto about
+                its efforts at the number provided. You can reply STOP to stop receiving texts.
+                Message and data rates may apply.
               </FormDescription>
             </CollapsibleContent>
           </Collapsible>

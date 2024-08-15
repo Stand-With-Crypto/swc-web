@@ -6,11 +6,13 @@ export enum EmailActiveActions {
   DONATION = 'DONATION',
   NFT_MINT = 'NFT_MINT',
   VOTER_REGISTRATION = 'VOTER_REGISTRATION',
+  VOTER_ATTESTATION = 'VOTER_ATTESTATION',
 }
 
 export enum EmailEnabledActionNFTs {
   CALL = 'CALL',
   VOTER_REGISTRATION = 'VOTER_REGISTRATION',
+  VOTER_ATTESTATION = 'VOTER_ATTESTATION',
 }
 
 export type EmailEnabledActionNFTsNames = `${EmailEnabledActionNFTs}`
@@ -18,6 +20,7 @@ export type EmailEnabledActionNFTsNames = `${EmailEnabledActionNFTs}`
 export const NFT_SLUG_TO_EMAIL_ACTIVE_ACTION: Partial<Record<NFTSlug, EmailEnabledActionNFTs>> = {
   [NFTSlug.CALL_REPRESENTATIVE_SEPT_11]: EmailEnabledActionNFTs.CALL,
   [NFTSlug.I_AM_A_VOTER]: EmailEnabledActionNFTs.VOTER_REGISTRATION,
+  [NFTSlug.VOTER_ATTESTATION]: EmailEnabledActionNFTs.VOTER_ATTESTATION,
 }
 
 // Keys in this object are still type enforced, we don't want to use the prisma enum due to errors on dev environment
@@ -31,19 +34,26 @@ export const ACTIONS_METADATA_BY_TYPE: Record<
     buttonHref: string
   }
 > = {
-  EMAIL: {
-    image: `/actionTypeIcons/email.png`,
-    text: 'Email your Congressperson',
-    subtext: 'Make your voice heard. We make it easy.',
-    buttonLabel: 'Send an email',
-    buttonHref: `/action/email`,
-  },
   VOTER_REGISTRATION: {
     image: `/actionTypeIcons/registerToVote.png`,
     text: 'Register to vote',
     subtext: 'Check your voter registration status and get a free NFT by pplpleasr.',
     buttonLabel: 'Register',
     buttonHref: `/action/voter-registration`,
+  },
+  VOTER_ATTESTATION: {
+    image: `/actionTypeIcons/voterAttestation.png`,
+    text: 'Pledge to vote',
+    subtext: 'Pledge to vote for pro-crypto candidates',
+    buttonLabel: 'Pledge',
+    buttonHref: '/action/pledge',
+  },
+  EMAIL: {
+    image: `/actionTypeIcons/email.png`,
+    text: 'Email your Congressperson',
+    subtext: 'Make your voice heard. We make it easy.',
+    buttonLabel: 'Send an email',
+    buttonHref: `/action/email`,
   },
   CALL: {
     image: `/actionTypeIcons/call.png`,
@@ -93,5 +103,9 @@ export const NFT_IMAGES_BY_ACTION: Record<
   VOTER_REGISTRATION: {
     src: '/email/nfts/voter-registration.png',
     alt: 'Voter Registration NFT',
+  },
+  VOTER_ATTESTATION: {
+    src: '/email/nfts/voter-attestation.png',
+    alt: 'Voter Attestation NFT',
   },
 }

@@ -27,7 +27,7 @@ export const viewport: Viewport = defaultViewport
 
 export default function Layout({ children }: PageProps & { children: React.ReactNode }) {
   return (
-    <html lang={SupportedLocale.EN_US}>
+    <html lang={SupportedLocale.EN_US} translate="no">
       <body className={fontClassName}>
         <OverrideGlobalLocalStorage />
         <FullHeight.Container>

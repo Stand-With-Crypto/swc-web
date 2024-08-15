@@ -1,7 +1,9 @@
-import Balancer from 'react-wrap-balancer'
+import sanitizeHtml from 'sanitize-html'
 
+import { EventDialog } from '@/components/app/pageEvents/components/eventDialog'
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
+import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { SWCEvents } from '@/utils/shared/getSWCEvents'
 
 interface PromotedEventsProps {
@@ -25,23 +27,33 @@ export function PromotedEvents({ events }: PromotedEventsProps) {
           <div className="relative h-[182px] min-w-[271px]">
             <NextImage
               alt={event.data.name}
-              className="object-cover object-center"
+              className="rounded-3xl object-cover object-center"
               fill
+              sizes="(max-width: 640px) 100vw, 271px"
               src={event.data.image}
             />
           </div>
 
-          <div className="grid gap-2">
-            <h4 className="text-bold font-sans text-xl text-foreground">{event.data.name}</h4>
-            <p className="font-mono text-base text-muted-foreground">
-              <Balancer>{event.data.description}</Balancer>
-            </p>
+          <div className="grid justify-items-center gap-2 lg:justify-items-start">
+            <PageSubTitle as="h3" className="text-bold font-sans text-base text-foreground">
+              {event.data.name}
+            </PageSubTitle>
+            <div
+              className="line-clamp-3 text-center font-mono text-base text-muted-foreground lg:text-left"
+              dangerouslySetInnerHTML={{
+                __html: sanitizeHtml(event.data.formattedDescription),
+              }}
+            />
 
-            <Button asChild className="mt-2 w-full lg:mt-4 lg:w-fit" variant="secondary">
-              <a href={event.data.rsvpUrl} target="_blank">
-                RSVP
-              </a>
-            </Button>
+            <EventDialog
+              event={event.data}
+              trigger={
+                <Button asChild className="mt-2 w-full lg:mt-4 lg:w-fit" variant="secondary">
+                  <span>Learn more</span>
+                </Button>
+              }
+              triggerClassName="w-fit"
+            />
           </div>
         </div>
       ))}

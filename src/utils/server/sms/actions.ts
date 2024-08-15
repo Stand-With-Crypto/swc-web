@@ -3,20 +3,28 @@ import 'server-only'
 import { SMSStatus, User } from '@prisma/client'
 import { waitUntil } from '@vercel/functions'
 
-import { GOODBYE_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME } from '@/inngest/functions/sms/goodbyeSMSCommunicationJourney'
-import { UNSTOP_CONFIRMATION_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME } from '@/inngest/functions/sms/unstopConfirmationSMSCommunicationJourney'
+// TODO: Uncomment this after we start using Messaging Service
+// import { GOODBYE_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME } from '@/inngest/functions/sms/goodbyeSMSCommunicationJourney'
+// import { UNSTOP_CONFIRMATION_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME } from '@/inngest/functions/sms/unstopConfirmationSMSCommunicationJourney'
 import { WELCOME_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME } from '@/inngest/functions/sms/welcomeSMSCommunicationJourney'
 import { inngest } from '@/inngest/inngest'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getServerAnalytics } from '@/utils/server/serverAnalytics'
 import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
+import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
 import { smsProvider, SMSProviders } from '@/utils/shared/smsProvider'
 
 export async function optInUser(phoneNumber: string, user: User) {
+  const normalizedPhoneNumber = normalizePhoneNumber(phoneNumber)
+
   if (
     user.smsStatus === SMSStatus.OPTED_OUT ||
-    smsProvider !== SMSProviders.TWILIO ||
-    (user.smsStatus === SMSStatus.OPTED_IN && user.phoneNumber === phoneNumber) // If user already opted in and changes their phone number, we want to send them a new message
+    ([
+      SMSStatus.OPTED_IN,
+      SMSStatus.OPTED_IN_HAS_REPLIED,
+      SMSStatus.OPTED_IN_PENDING_DOUBLE_OPT_IN,
+    ].includes(user.smsStatus) &&
+      user.phoneNumber === normalizedPhoneNumber) // If user has already opted in and has not changed their phone number, we don't want to send a message
   ) {
     return
   }
@@ -28,17 +36,19 @@ export async function optInUser(phoneNumber: string, user: User) {
         smsStatus: SMSStatus.OPTED_IN,
       },
       where: {
-        phoneNumber,
+        phoneNumber: normalizedPhoneNumber,
       },
     })
   }
 
-  await inngest.send({
-    name: WELCOME_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
-    data: {
-      phoneNumber,
-    },
-  })
+  if (smsProvider === SMSProviders.TWILIO) {
+    await inngest.send({
+      name: WELCOME_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
+      data: {
+        phoneNumber: normalizedPhoneNumber,
+      },
+    })
+  }
 
   waitUntil(
     getServerAnalytics({
@@ -46,33 +56,36 @@ export async function optInUser(phoneNumber: string, user: User) {
       userId: user.id,
     })
       .track('User SMS Opt-In', {
-        provider: 'twilio',
+        provider: smsProvider,
       })
       .flush(),
   )
 }
 
 export async function optOutUser(phoneNumber: string, isSWCKeyword: boolean, user?: User) {
-  if (user?.smsStatus === SMSStatus.OPTED_OUT || smsProvider !== SMSProviders.TWILIO) return
+  const normalizedPhoneNumber = normalizePhoneNumber(phoneNumber)
+
+  if (user?.smsStatus === SMSStatus.OPTED_OUT) return
 
   await prismaClient.user.updateMany({
     data: {
       smsStatus: SMSStatus.OPTED_OUT,
     },
     where: {
-      phoneNumber,
+      phoneNumber: normalizedPhoneNumber,
     },
   })
 
+  // TODO: Uncomment this after we start using Messaging Service
   // We shouldn't send a message if the user replied with a default STOP keyword because Twilio will block it
-  if (isSWCKeyword) {
-    await inngest.send({
-      name: GOODBYE_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
-      data: {
-        phoneNumber,
-      },
-    })
-  }
+  // if (isSWCKeyword && smsProvider === SMSProviders.TWILIO) {
+  //   await inngest.send({
+  //     name: GOODBYE_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
+  //     data: {
+  //       phoneNumber: normalizedPhoneNumber,
+  //     },
+  //   })
+  // }
 
   if (user) {
     waitUntil(
@@ -89,23 +102,28 @@ export async function optOutUser(phoneNumber: string, isSWCKeyword: boolean, use
 }
 
 export async function optUserBackIn(phoneNumber: string, user?: User) {
-  if (user?.smsStatus !== SMSStatus.OPTED_OUT || smsProvider !== SMSProviders.TWILIO) return
+  const normalizedPhoneNumber = normalizePhoneNumber(phoneNumber)
+
+  if (user?.smsStatus !== SMSStatus.OPTED_OUT) return
 
   await prismaClient.user.updateMany({
     data: {
       smsStatus: SMSStatus.OPTED_IN_HAS_REPLIED,
     },
     where: {
-      phoneNumber,
+      phoneNumber: normalizedPhoneNumber,
     },
   })
 
-  await inngest.send({
-    name: UNSTOP_CONFIRMATION_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
-    data: {
-      phoneNumber,
-    },
-  })
+  // TODO: Uncomment this after we start using Messaging Service
+  // if (smsProvider === SMSProviders.TWILIO) {
+  //   await inngest.send({
+  //     name: UNSTOP_CONFIRMATION_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
+  //     data: {
+  //       phoneNumber: normalizedPhoneNumber,
+  //     },
+  //   })
+  // }
 
   if (user) {
     waitUntil(

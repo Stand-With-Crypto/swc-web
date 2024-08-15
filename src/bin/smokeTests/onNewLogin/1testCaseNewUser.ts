@@ -6,7 +6,7 @@ export const testCaseNewUser: TestCase = {
   validateResults: (
     {
       existingUsersWithSource,
-      embeddedWalletEmailAddress,
+      embeddedWalletUserDetails,
       merge,
       wasUserCreated,
       maybeUpsertCryptoAddressResult,
@@ -17,7 +17,7 @@ export const testCaseNewUser: TestCase = {
     issues,
   ) => {
     verify(existingUsersWithSource.length, false, 'existingUsersWithSource.length', issues)
-    verify(embeddedWalletEmailAddress, false, 'embeddedWalletEmailAddress', issues)
+    verify(embeddedWalletUserDetails, false, 'embeddedWalletUserDetails', issues)
     verify(merge?.usersToDelete.length, false, 'merge?.usersToDelete.length', issues)
     verify(merge?.userToKeep, false, 'merge?.userToKeep', issues)
     verify(wasUserCreated, true, 'wasUserCreated', issues)
@@ -54,7 +54,7 @@ export const testCaseNewUser: TestCase = {
     )
     verify(
       postLoginUserActionSteps.pastActionsMinted.length,
-      false,
+      true,
       'postLoginUserActionSteps.pastActionsMinted.length',
       issues,
     )
