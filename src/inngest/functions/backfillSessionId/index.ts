@@ -36,7 +36,7 @@ export const backfillSessionIdCronJob = inngest.createFunction(
     const numBatches = Math.ceil(usersCount / BACKFILL_SESSION_ID_BATCH_SIZE)
 
     for (let i = 0; i < numBatches; i++) {
-      await step.run(`backfill-session-id-batch-${i}`, async () => {
+      const batchResult = await step.run(`backfill-session-id-batch-${i}`, async () => {
         const users = await prismaClient.user.findMany({
           select: { id: true },
           where: {
@@ -47,24 +47,26 @@ export const backfillSessionIdCronJob = inngest.createFunction(
           take: BACKFILL_SESSION_ID_BATCH_SIZE,
         })
 
-        for (const user of users) {
-          try {
-            await prismaClient.userSession.create({
-              data: {
-                user: { connect: { id: user.id } },
-              },
-            })
-          } catch (error) {
-            Sentry.captureException(error, {
-              tags: {
-                domain: 'backfillSessionIds',
-                message: `error creating sessionId for user ${user.id}`,
-              },
-            })
-          }
+        try {
+          await prismaClient.userSession.createMany({
+            data: users.map(({ id }) => ({ userId: id })),
+          })
+        } catch (error) {
+          Sentry.captureException(error, {
+            tags: {
+              domain: 'backfillSessionIds',
+              message: `error creating sessionId for users on batch ${i}`,
+            },
+          })
         }
-        logger.info(`Batch ${i} finished creasting session for ${users.length} users`)
+
+        return {
+          usersCount: users.length,
+          totalSessionIdsBackfilled: users.length * (i + 1),
+        }
       })
+
+      logger.info(`Batch ${i} finished creating session for ${batchResult.usersCount} users`)
     }
 
     logger.info('Backfill session id function finished')
