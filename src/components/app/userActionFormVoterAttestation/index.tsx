@@ -71,6 +71,8 @@ export function UserActionFormVoterAttestation({
   })
 
   const racesByAddressRequest = useRacesByAddress(address?.description)
+  const isRacesByAddressRequestActive = React.useRef(!!address?.description)
+  isRacesByAddressRequestActive.current = !!address?.description
 
   const addressProps: AddressProps = {
     initialValues: address
@@ -90,8 +92,7 @@ export function UserActionFormVoterAttestation({
   sectionPropsRef.current = sectionProps
   React.useEffect(() => {
     const { error, data, isLoading } = racesByAddressRequest
-
-    if (isLoading) {
+    if (isLoading || !isRacesByAddressRequestActive.current) {
       return
     }
 
