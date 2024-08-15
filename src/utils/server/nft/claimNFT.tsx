@@ -37,6 +37,7 @@ import {
   UserActionRsvpEventCampaignName,
   UserActionTweetAtPersonCampaignName,
   UserActionTweetCampaignName,
+  UserActionVoterAttestationCampaignName,
   UserActionVoterRegistrationCampaignName,
 } from '@/utils/shared/userActionCampaigns'
 
@@ -75,6 +76,9 @@ export const ACTION_NFT_SLUG: Record<
   [UserActionType.TWEET_AT_PERSON]: {
     [UserActionTweetAtPersonCampaignName.DEFAULT]: null,
     [UserActionTweetAtPersonCampaignName['2024_05_22_PIZZA_DAY']]: NFTSlug.PIZZA_DAY_2024_05_22,
+  },
+  [UserActionType.VOTER_ATTESTATION]: {
+    [UserActionVoterAttestationCampaignName.DEFAULT]: NFTSlug.VOTER_ATTESTATION,
   },
   [UserActionType.RSVP_EVENT]: {
     [UserActionRsvpEventCampaignName.DEFAULT]: null,

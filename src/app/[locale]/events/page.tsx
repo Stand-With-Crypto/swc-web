@@ -6,7 +6,7 @@ import { getEvents } from '@/utils/server/builderIO/swcEvents'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
-export const revalidate = SECONDS_DURATION['HOUR']
+export const revalidate = SECONDS_DURATION.MINUTE
 export const dynamic = 'error'
 
 const title = 'Events'

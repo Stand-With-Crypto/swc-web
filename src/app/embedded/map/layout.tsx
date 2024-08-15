@@ -40,7 +40,7 @@ export const viewport: Viewport = {
 
 export default function Layout({ children }: PageProps & { children: React.ReactNode }) {
   return (
-    <html lang={SupportedLocale.EN_US}>
+    <html lang={SupportedLocale.EN_US} translate="no">
       <body className={cn(fontClassName, 'bg-black')}>
         <OverrideGlobalLocalStorage />
         <FullHeight.Container>

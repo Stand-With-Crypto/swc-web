@@ -5,6 +5,7 @@ import {
   EmailIcon,
   IconProps,
   JoinIcon,
+  VoterAttestationIcon,
   VoterRegIcon,
 } from '@/components/app/pageAdvocatesHeatmap/advocateHeatmapIcons'
 
@@ -78,26 +79,32 @@ export const ADVOCATES_ACTIONS: Partial<
 > = {
   CALL: {
     icon: CallIcon,
-    label: 'called their rep',
+    label: 'Call made to congress',
     labelMobile: 'called',
     labelActionTooltip: 'called their rep',
   },
   EMAIL: {
     icon: EmailIcon,
-    label: 'emailed their rep',
+    label: 'Email sent to congress',
     labelMobile: 'emailed',
     labelActionTooltip: 'emailed their rep',
   },
   OPT_IN: {
     icon: JoinIcon,
-    label: 'joined',
+    label: 'New member joined',
     labelMobile: 'joined',
     labelActionTooltip: 'joined SWC',
   },
   VOTER_REGISTRATION: {
     icon: VoterRegIcon,
-    label: 'registered to vote',
+    label: 'Registered to vote',
     labelMobile: 'reg. to vote',
     labelActionTooltip: 'registered to vote',
+  },
+  VOTER_ATTESTATION: {
+    icon: VoterAttestationIcon,
+    label: 'Pledged to vote',
+    labelMobile: 'pledged to vote',
+    labelActionTooltip: 'pledged to vote',
   },
 }

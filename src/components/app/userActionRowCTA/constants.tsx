@@ -11,6 +11,7 @@ import { EMAIL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionForm
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
 import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/dialog'
+import { UserActionFormVoterAttestationDialog } from '@/components/app/userActionFormVoterAttestation/dialog'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
 import { UserActionRowCTAProps } from '@/components/app/userActionRowCTA'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
@@ -43,12 +44,11 @@ export const USER_ACTION_ROW_CTA_INFO: Record<
   [UserActionType.VOTER_REGISTRATION]: {
     actionType: UserActionType.VOTER_REGISTRATION,
     image: { src: '/actionTypeIcons/registerToVote.png' },
-    text: 'Check your voter registration and get a free NFT',
-    subtext:
-      'You can make a difference this year. Register to vote and get a free "I\'m a Voter" NFT',
+    text: 'Check your voter registration',
+    subtext: "Find your voter info with our simple tool - you'll get a free NFT.",
     shortText: 'Register to vote',
     shortSubtext: 'Get a free "I\'m a Voter" NFT',
-    canBeTriggeredMultipleTimes: true,
+    canBeTriggeredMultipleTimes: false,
     WrapperComponent: UserActionFormVoterRegistrationDialog,
   },
   [UserActionType.CALL]: {
@@ -133,6 +133,16 @@ export const USER_ACTION_ROW_CTA_INFO: Record<
     shortSubtext: 'All mint proceeds are donated to the movement.',
     canBeTriggeredMultipleTimes: true,
     WrapperComponent: UserActionFormNFTMintDialog,
+  },
+  [UserActionType.VOTER_ATTESTATION]: {
+    actionType: UserActionType.VOTER_ATTESTATION,
+    image: { src: '/actionTypeIcons/voterAttestation.png' },
+    text: 'Pledge to vote this fall',
+    subtext: 'Sign the pledge to research the candidates & turn out to vote.',
+    shortText: 'Pledge to vote',
+    shortSubtext: 'Pledge to vote This Fall.',
+    canBeTriggeredMultipleTimes: false,
+    WrapperComponent: UserActionFormVoterAttestationDialog,
   },
 }
 

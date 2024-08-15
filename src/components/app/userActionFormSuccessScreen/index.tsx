@@ -1,5 +1,6 @@
 'use client'
 
+import { noop } from 'lodash-es'
 import { useSWRConfig } from 'swr'
 
 import { JoinSWC } from '@/components/app/userActionFormSuccessScreen/joinSWC'
@@ -9,6 +10,7 @@ import {
   UserActionFormSuccessScreenNextActionSkeleton,
 } from '@/components/app/userActionFormSuccessScreen/userActionFormSuccessScreenNextAction'
 import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
+import { useEffectOnce } from '@/hooks/useEffectOnce'
 import { useSession } from '@/hooks/useSession'
 import { apiUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
@@ -16,6 +18,7 @@ import { cn } from '@/utils/web/cn'
 interface UserActionFormSuccessScreenProps {
   children: React.ReactNode
   onClose: () => void
+  onLoad?: () => void
 }
 
 export function UserActionFormSuccessScreen(props: UserActionFormSuccessScreenProps) {
@@ -26,6 +29,8 @@ export function UserActionFormSuccessScreen(props: UserActionFormSuccessScreenPr
     revalidateOnMount: true,
   })
   const { mutate } = useSWRConfig()
+
+  useEffectOnce(props.onLoad ?? noop)
 
   if (!isLoggedIn || !user) {
     return <JoinSWC onClose={onClose} />

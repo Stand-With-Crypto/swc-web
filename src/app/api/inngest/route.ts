@@ -5,6 +5,7 @@ import { backfillCongressionalDistrictCronJob } from '@/inngest/functions/backfi
 import { backfillFailedNFT } from '@/inngest/functions/backfillFailedNFTCronJob'
 import { backfillNFTWithInngest } from '@/inngest/functions/backfillNFT'
 import { backfillNFTInngestCronJob } from '@/inngest/functions/backfillNFTCronJob'
+import { backfillReactivationWithInngest } from '@/inngest/functions/backfillReactivation'
 import { backfillSessionIdCronJob } from '@/inngest/functions/backfillSessionId'
 import {
   backfillSMSOptInReplyWithInngest,
@@ -15,6 +16,7 @@ import { emailViaCapitolCanaryWithInngest } from '@/inngest/functions/capitolCan
 import { upsertAdvocateInCapitolCanaryWithInngest } from '@/inngest/functions/capitolCanary/upsertAdvocateInCapitolCanary'
 import { cleanupNFTMintsWithInngest } from '@/inngest/functions/cleanupNFTMints'
 import { cleanupPostalCodesWithInngest } from '@/inngest/functions/cleanupPostalCodes'
+import { sendEventNotificationWithInngest } from '@/inngest/functions/eventNotification'
 import { initialSignUpUserCommunicationJourney } from '@/inngest/functions/initialSignupUserCommunicationJourney/initialSignupUserCommunicationJourney'
 import { monitorBaseETHBalances } from '@/inngest/functions/monitorBaseETHBalances'
 import { setPrimaryCryptoAddressOfUserWithInngest } from '@/inngest/functions/setPrimaryCryptoAddressOfUser'
@@ -67,5 +69,7 @@ export const { GET, POST, PUT } = serve({
     unstopConfirmationSMSCommunicationJourney,
     bulkSMSCommunicationJourney,
     backfillPhoneNumberValidation,
+    backfillReactivationWithInngest,
+    sendEventNotificationWithInngest,
   ],
 })

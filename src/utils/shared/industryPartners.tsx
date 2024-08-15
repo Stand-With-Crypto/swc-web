@@ -95,4 +95,9 @@ export const INDUSTRY_PARTNERS = [
     imageSrc: '/partners/BTClogo_circle.svg',
     url: 'https://b.tc/',
   },
+  {
+    title: 'Hedera',
+    imageSrc: '/partners/hedera.svg',
+    url: 'https://www.hedera.com/',
+  },
 ]

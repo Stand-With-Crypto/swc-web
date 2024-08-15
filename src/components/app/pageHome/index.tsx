@@ -4,7 +4,7 @@ import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
 import { DTSIPersonHeroCardRow } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardRow'
 import { DelayedRecentActivityWithMap } from '@/components/app/pageHome/delayedRecentActivity'
 import { HeroCTA } from '@/components/app/pageHome/heroCTA'
-import { HeroImageWrapper } from '@/components/app/pageHome/heroImage'
+import { HeroImage } from '@/components/app/pageHome/heroImage'
 import { PartnerGrid } from '@/components/app/pageHome/partnerGrid'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
 import { SumDonationsByUserRow } from '@/components/app/sumDonationsByUserRow/sumDonationsByUserRow'
@@ -55,7 +55,7 @@ export function PageHome({
           <HeroCTA />
         </div>
         <div className="order-0 self-start md:container lg:order-1 lg:px-0">
-          <HeroImageWrapper />
+          <HeroImage locale={locale} />
         </div>
       </section>
       <div className="container">
@@ -116,9 +116,9 @@ export function PageHome({
                 </div>{' '}
               </>
               <div className="mt-7 space-x-4 text-center">
-                <Button asChild>
+                {/* <Button asChild>
                   <InternalLink href={urls.donate()}>Donate</InternalLink>
-                </Button>
+                </Button> */}
                 <Button asChild variant="secondary">
                   <InternalLink
                     href={urls.leaderboard({ tab: RecentActivityAndLeaderboardTabs.LEADERBOARD })}
@@ -155,7 +155,7 @@ export function PageHome({
           <PageSubTitle as="h4" className="mb-10">
             The future of crypto is in your hands. Here's how you can help.
           </PageSubTitle>
-          <UserActionRowCTAsAnimatedListWithApi />
+          <UserActionRowCTAsAnimatedListWithApi excludeUserActionTypes={['DONATION']} />
         </section>
       </div>
       <section className="mb-16 space-y-6 md:mb-36">

@@ -6,11 +6,11 @@ import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { countSegments, TWILIO_RATE_LIMIT } from '@/utils/server/sms'
-import * as messages from '@/utils/server/sms/messages'
+import { WELCOME_MESSAGE } from '@/utils/server/sms/messages'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
-import { enqueueMessages } from './utils'
+import { countMessagesAndSegments, EnqueueMessagePayload, enqueueMessages } from './utils'
 
 export const BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME = 'app/user.communication/bulk.sms'
 export const BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_FINISHED_EVENT_NAME =
@@ -32,7 +32,6 @@ interface BulkSMSCommunicationJourneyPayload {
   userWhereInput?: Prisma.UserGroupByArgs['where']
   includePendingDoubleOptIn?: boolean
   send?: boolean
-  journeyType?: UserCommunicationJourneyType
   campaignName: string
 }
 
@@ -46,7 +45,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
     event: BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
   },
   async ({ step, event, logger }) => {
-    const { smsBody, userWhereInput, includePendingDoubleOptIn, send, journeyType, campaignName } =
+    const { smsBody, userWhereInput, includePendingDoubleOptIn, send, campaignName } =
       event.data as BulkSMSCommunicationJourneyPayload
 
     if (!smsBody) {
@@ -57,160 +56,184 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
       throw new NonRetriableError('Missing campaign name')
     }
 
-    const communicationJourneyType = journeyType
-      ? UserCommunicationJourneyType[journeyType]
-      : UserCommunicationJourneyType.BULK_SMS
+    const logInfo = (key: string, info: object) =>
+      logger.info('bulk-info', key, JSON.stringify(info))
 
-    if (!communicationJourneyType) {
-      throw new NonRetriableError(`Invalid journeyType ${journeyType ?? 'undefined'}`)
-    }
+    const getWaitingTimeInSeconds = (totalSegments: number) =>
+      totalSegments / MESSAGE_SEGMENTS_PER_SECOND
 
-    if (communicationJourneyType !== UserCommunicationJourneyType.WELCOME_SMS) {
-      const bulkWelcomeSMSPayload: BulkSMSCommunicationJourneyPayload = {
-        ...event.data,
-        smsBody: messages.WELCOME_MESSAGE,
-        journeyType: UserCommunicationJourneyType.WELCOME_SMS,
-        userWhereInput: {
-          ...userWhereInput,
-          UserCommunicationJourney: {
-            every: {
-              journeyType: {
-                not: 'WELCOME_SMS',
-              },
-            },
-          },
-        },
-      }
-
-      const {
-        ids: [bulkWelcomeSMSEventId],
-      } = await step.run('trigger-bulk-welcome-sms', () =>
-        inngest.send({
-          name: BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
-          data: bulkWelcomeSMSPayload,
-        }),
-      )
-
-      await step.waitForEvent('wait-for-welcome-sms-to-finish', {
-        event: BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_FINISHED_EVENT_NAME,
-        timeout: '4 days',
-        if: `async.data.id == '${bulkWelcomeSMSEventId}'`,
-      })
-    }
-
-    // Messages with more than 160 characters are divided in segments
-    const segmentsCount = countSegments(smsBody)
-
-    const getWaitingTimeInSeconds = (messageCount: number) =>
-      (messageCount * segmentsCount) / MESSAGE_SEGMENTS_PER_SECOND
-
-    // If there are multiple segment, we need to split the queue
-    const queueSizeBySegment = Math.floor(MAX_QUEUE_LENGTH / segmentsCount)
-
-    let allPhoneNumbers: string[] = []
-    let cursor: Date | undefined
-    let hasNumbersLeft = true
-
-    while (hasNumbersLeft) {
-      const phoneNumberList = await getPhoneNumberList({
-        includePendingDoubleOptIn,
-        cursor,
-        userWhereInput,
+    const phoneNumbersThatShouldReceiveWelcomeMessage = await fetchAllPhoneNumbers(
+      {
         campaignName,
-      })
+        includePendingDoubleOptIn,
+        userWhereInput,
+      },
+      false,
+    )
 
-      cursor = phoneNumberList.at(-1)?.datetimeCreated
+    let enqueueMessagesPayload: EnqueueMessagePayload[] =
+      phoneNumbersThatShouldReceiveWelcomeMessage.map(phoneNumber => ({
+        phoneNumber,
+        messages: [
+          {
+            body: WELCOME_MESSAGE,
+            journeyType: UserCommunicationJourneyType.WELCOME_SMS,
+          },
+          {
+            body: smsBody,
+            campaignName,
+            journeyType: UserCommunicationJourneyType.BULK_SMS,
+          },
+        ],
+      }))
 
-      const phoneNumbers = phoneNumberList.map(({ phoneNumber }) => phoneNumber)
+    const phoneNumberThatAlreadyReceivedWelcomeMessage = await fetchAllPhoneNumbers(
+      {
+        campaignName,
+        includePendingDoubleOptIn,
+        userWhereInput,
+      },
+      true,
+    )
 
-      allPhoneNumbers = allPhoneNumbers.concat(phoneNumbers)
+    enqueueMessagesPayload = enqueueMessagesPayload.concat(
+      phoneNumberThatAlreadyReceivedWelcomeMessage.map(phoneNumber => ({
+        phoneNumber,
+        messages: [
+          {
+            body: smsBody,
+            campaignName,
+            journeyType: UserCommunicationJourneyType.BULK_SMS,
+          },
+        ],
+      })),
+    )
 
-      if (!DATABASE_QUERY_LIMIT || phoneNumbers.length < DATABASE_QUERY_LIMIT) {
-        hasNumbersLeft = false
-      }
+    const payloadChunks = chunk(enqueueMessagesPayload, TWILIO_RATE_LIMIT)
+
+    const messagesInfo = {
+      welcome: phoneNumbersThatShouldReceiveWelcomeMessage.length,
+      bulk:
+        phoneNumberThatAlreadyReceivedWelcomeMessage.length +
+        phoneNumbersThatShouldReceiveWelcomeMessage.length,
+      total:
+        phoneNumbersThatShouldReceiveWelcomeMessage.length * 2 +
+        phoneNumberThatAlreadyReceivedWelcomeMessage.length,
     }
 
-    // Using uniq here to not send multiple messages to the same phone number
-    allPhoneNumbers = uniq(allPhoneNumbers)
+    const segmentsCount = {
+      bulk: countSegments(smsBody),
+      welcome: countSegments(WELCOME_MESSAGE),
+    }
 
-    const totalPhoneNumbers = allPhoneNumbers.length
+    const { segments: totalSegmentsToSend } = countMessagesAndSegments(enqueueMessagesPayload)
 
-    // Each batch will be used to fill the queue
-    const phoneNumbersQueueBatches = chunk(allPhoneNumbers, queueSizeBySegment)
+    const segmentsToSendInfo = {
+      total: totalSegmentsToSend,
+      welcome: messagesInfo.welcome * segmentsCount.welcome,
+      bulk: messagesInfo.bulk * segmentsCount.bulk,
+    }
 
-    const totalTimeToSendAllMessages = getWaitingTimeInSeconds(totalPhoneNumbers)
+    const timeInfo = {
+      timeToSendAllSegments: getWaitingTimeInSeconds(segmentsToSendInfo.total),
+    }
 
     const bulkInfo = {
-      Segments: segmentsCount,
-      'Time to send messages': formatTime(totalTimeToSendAllMessages),
-      'Number of messages': totalPhoneNumbers,
-      Batches: phoneNumbersQueueBatches.length,
+      segmentsCount,
+      segmentsToSend: segmentsToSendInfo,
+      messages: messagesInfo,
+      time: {
+        total: formatTime(timeInfo.timeToSendAllSegments),
+      },
+      batches: payloadChunks.length,
     }
 
     if (!send) {
-      await step.sendEvent('emit-finished-estimating-bulk-sms', {
-        name: BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_FINISHED_EVENT_NAME,
-        data: {
-          id: event.id,
-        },
-      })
-
       return bulkInfo
     } else {
-      logger.info('bulk-info', JSON.stringify(bulkInfo))
+      logInfo('bulk-info', bulkInfo)
     }
 
-    let totalQueuedMessages = 0
-    let totalTimeTaken = 0
     let iteration = 0
-    for (const queueBatch of phoneNumbersQueueBatches) {
-      totalQueuedMessages += await step.run(`enqueue-bulk-messages`, async () => {
-        // Split the batch into chunks to avoid exceeding Twilio's rate limit
-        const phoneNumberChunks = chunk(queueBatch, TWILIO_RATE_LIMIT)
-
+    let hasMoreMessages = true
+    let totalQueuedMessages = 0
+    let totalQueuedSegments = 0
+    let totalTimeTaken = 0
+    while (hasMoreMessages) {
+      const { queuedMessages, queuedSegments } = await step.run(`enqueue-messages`, async () => {
         let queuedMessages = 0
-        for (const phoneNumbers of phoneNumberChunks) {
-          queuedMessages += await enqueueMessages(phoneNumbers, {
-            body: smsBody,
-            journeyType: communicationJourneyType,
-            campaignName,
-          })
+        let queuedSegments = 0
+        let hasSpaceLeftInQueue = true
+
+        while (hasSpaceLeftInQueue) {
+          const payloadChunk = payloadChunks[iteration]
+          const nextPayload = payloadChunks[iteration + 1]
+
+          if (nextPayload) {
+            const { segments: segmentsInNextPayload } = countMessagesAndSegments(nextPayload)
+
+            if (queuedSegments + segmentsInNextPayload >= MAX_QUEUE_LENGTH) {
+              hasSpaceLeftInQueue = false
+              break
+            }
+          }
+
+          if (!payloadChunk) {
+            hasMoreMessages = false
+
+            break
+          }
+
+          const { messages, segments } = await enqueueMessages(payloadChunk)
+
+          queuedMessages += messages
+          queuedSegments += segments
+
+          if (!nextPayload) {
+            hasMoreMessages = false
+            break
+          }
+
+          iteration += 1
         }
 
-        return queuedMessages
+        return { queuedMessages, queuedSegments }
       })
 
-      const timeToSendAllBatchMessages = getWaitingTimeInSeconds(totalQueuedMessages)
+      if (queuedSegments === 0) {
+        hasMoreMessages = false
+        break
+      }
+
+      totalQueuedMessages += queuedMessages
+      totalQueuedSegments += queuedSegments
+
+      const timeToSendAllSegments = getWaitingTimeInSeconds(queuedSegments)
 
       await step.sleep(
-        `waiting-${formatTime(timeToSendAllBatchMessages).replace(' ', '-')}-for-messaging-queue-to-be-empty`,
-        timeToSendAllBatchMessages * 1000,
+        `waiting-${formatTime(timeToSendAllSegments).replace(' ', '-')}-for-messaging-queue-to-be-empty`,
+        timeToSendAllSegments * 1000,
       )
 
-      totalTimeTaken += timeToSendAllBatchMessages
+      totalTimeTaken += timeToSendAllSegments
 
-      iteration += 1
+      logInfo('summary-info', {
+        totalTimeTaken: formatTime(totalTimeTaken),
+        totalQueuedMessages,
+        totalQueuedSegments,
+      })
 
-      logger.info(
-        'bulk-info',
-        JSON.stringify({
-          Messages: totalQueuedMessages,
-          Time: `${formatTime(totalTimeTaken)}/${formatTime(totalTimeToSendAllMessages)}`,
-          Iterations: `${iteration}/${phoneNumbersQueueBatches.length}`,
-        }),
-      )
+      logInfo('progress-log', {
+        timeLeft: formatTime(timeInfo.timeToSendAllSegments - totalTimeTaken),
+        messagesLeft: messagesInfo.total - totalQueuedMessages,
+        segmentsLeft: segmentsToSendInfo.total - totalQueuedSegments,
+      })
     }
 
-    await step.sendEvent('emit-finished-sending-bulk-messages', {
-      name: BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_FINISHED_EVENT_NAME,
-      data: {
-        id: event.id,
-      },
-    })
-
     return {
-      Send: totalQueuedMessages,
-      Took: formatTime(totalTimeTaken),
+      totalQueuedMessages,
+      totalQueuedSegments,
+      totalTimeTaken,
     }
   },
 )
@@ -230,6 +253,8 @@ function formatTime(seconds: number) {
   }
 }
 
+const mergeWhereParams = merge<Prisma.UserGroupByArgs['where'], Prisma.UserGroupByArgs['where']>
+
 interface GetPhoneNumberOptions {
   includePendingDoubleOptIn?: boolean
   cursor?: Date
@@ -237,22 +262,75 @@ interface GetPhoneNumberOptions {
   campaignName?: string
 }
 
+async function fetchAllPhoneNumbers(
+  options: Omit<GetPhoneNumberOptions, 'cursor'>,
+  hasWelcomeMessage: boolean,
+) {
+  let allPhoneNumbers: string[] = []
+  let cursor: Date | undefined
+  let hasNumbersLeft = true
+
+  const customWhere = mergeWhereParams(
+    { ...options.userWhereInput },
+    {
+      UserCommunicationJourney: hasWelcomeMessage
+        ? {
+            some: {
+              journeyType: UserCommunicationJourneyType.WELCOME_SMS,
+            },
+          }
+        : {
+            every: {
+              journeyType: {
+                not: UserCommunicationJourneyType.WELCOME_SMS,
+              },
+            },
+          },
+    },
+  )
+
+  // First we fetch users that should receive the welcome message
+  while (hasNumbersLeft) {
+    const phoneNumberList = await getPhoneNumberList({
+      ...options,
+      cursor,
+      userWhereInput: customWhere,
+    })
+
+    cursor = phoneNumberList.at(-1)?.datetimeCreated
+
+    const phoneNumbers = phoneNumberList.map(({ phoneNumber }) => phoneNumber)
+
+    allPhoneNumbers = allPhoneNumbers.concat(phoneNumbers)
+
+    if (!DATABASE_QUERY_LIMIT || phoneNumbers.length < DATABASE_QUERY_LIMIT) {
+      hasNumbersLeft = false
+    }
+  }
+
+  // Using uniq here to not send multiple messages to the same phone number
+  return uniq(allPhoneNumbers)
+}
+
 async function getPhoneNumberList(options: GetPhoneNumberOptions) {
   return prismaClient.user.groupBy({
     by: ['phoneNumber', 'datetimeCreated'],
     where: {
-      ...merge(options.userWhereInput, {
-        datetimeCreated: {
-          gte: options.cursor,
-        },
-        UserCommunicationJourney: {
-          every: {
-            campaignName: {
-              not: options.campaignName,
+      ...mergeWhereParams(
+        { ...options.userWhereInput },
+        {
+          datetimeCreated: {
+            gte: options.cursor,
+          },
+          UserCommunicationJourney: {
+            every: {
+              campaignName: {
+                not: options.campaignName,
+              },
             },
           },
         },
-      }),
+      ),
       hasValidPhoneNumber: true,
       smsStatus: {
         in: [

@@ -92,9 +92,21 @@ async function _actionCreateUserActionMintNFT(input: CreateActionMintNFTInput) {
     localUser,
   })
 
-  const transaction = await thirdwebBaseRPCClient.getTransaction({
-    hash: validatedInput.data.transactionHash,
-  })
+  logger.info('getting transaction')
+  const transaction = await thirdwebBaseRPCClient
+    .getTransaction({
+      hash: validatedInput.data.transactionHash,
+    })
+    .catch(err => {
+      Sentry.captureException(err, {
+        extra: {
+          transactionHash: validatedInput.data.transactionHash,
+        },
+        tags: { domain: 'actionCreateUserActionMintNFT' },
+      })
+      throw err
+    })
+  logger.info('got transaction', transaction)
 
   await validateTransaction(transaction).catch(err => {
     Sentry.captureException(err, {
@@ -109,6 +121,7 @@ async function _actionCreateUserActionMintNFT(input: CreateActionMintNFTInput) {
     })
     throw new Error('Invalid transaction')
   })
+  logger.info('validated transaction')
 
   const ethTransactionValue = fromBigNumber(BigNumber.from(transaction.value.toString()))
   await throwIfRateLimited({ context: 'authenticated' })

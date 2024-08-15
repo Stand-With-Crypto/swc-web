@@ -4,8 +4,7 @@ import React from 'react'
 import { SMSStatus } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import dynamic from 'next/dynamic'
-import { useRouter } from 'next/navigation'
-import useSWR, { Arguments, useSWRConfig } from 'swr'
+import useSWR from 'swr'
 
 import { actionUpdateUserHasOptedInToSMS } from '@/actions/actionUpdateUserHasOptedInSMS'
 import { ClientUnidentifiedUser } from '@/clientModels/clientUser/clientUser'
@@ -245,29 +244,12 @@ interface LoginSectionProps extends ThirdwebLoginContentProps {
 }
 
 function LoginSection({ onLogin, ...props }: LoginSectionProps) {
-  const router = useRouter()
-  const { mutate } = useSWRConfig()
   const { data } = useInitialEmail()
 
   return (
     <ThirdwebLoginContent
       initialEmailAddress={data?.user?.emailAddress}
-      onLoginCallback={async () => {
-        await onLogin()
-        // ensure that any server components on the page that's being used are refreshed with the context the user is now logged in
-        router.refresh()
-
-        // These are keys which the mutation occurs on login
-        // If we reset the cache we can have a situation where the value goes from `value => undefined => value`
-        const excludedKeysFromCacheReset: Arguments[] = [apiUrls.userFullProfileInfo()]
-
-        // There are a bunch of SWR queries that might show stale unauthenticated data unless we clear the cache.
-        // This ensures we refetch using the users authenticated state
-        // https://swr.vercel.app/docs/advanced/cache#modify-the-cache-data
-        void mutate(arg => !excludedKeysFromCacheReset.includes(arg), undefined, {
-          revalidate: true,
-        })
-      }}
+      onLoginCallback={onLogin}
       {...props}
     />
   )

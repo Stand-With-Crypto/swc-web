@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
-import { PageTitle } from '@/components/ui/pageTitleText'
+import { PageTitle, PageTitleProps } from '@/components/ui/pageTitleText'
 import { cn } from '@/utils/web/cn'
 
 export interface ContentSectionProps {
@@ -9,13 +9,20 @@ export interface ContentSectionProps {
   subtitle?: React.ReactNode
   children?: React.ReactNode
   className?: string
+  titleProps?: PageTitleProps
 }
 
-export function ContentSection({ title, subtitle, children, className }: ContentSectionProps) {
+export function ContentSection({
+  title,
+  subtitle,
+  children,
+  className,
+  titleProps = {},
+}: ContentSectionProps) {
   return (
     <section className={cn('space-y-8', className)}>
       <div>
-        <PageTitle as="h3" size="sm">
+        <PageTitle as="h3" size="sm" {...titleProps}>
           {title}
         </PageTitle>
         {subtitle && (

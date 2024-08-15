@@ -65,10 +65,13 @@ const contentSecurityPolicy = {
     // Mint endpoint
     'https://*.coinbase.com/',
     'https://*.sentry.io/',
+    'https://api.thirdweb.com/',
   ],
   'frame-src': [
     '*.google.com',
     'https://embedded-wallet.thirdweb.com/',
+    'https://verify.walletconnect.com/',
+    'https://verify.walletconnect.org/',
     'https://www.youtube.com/embed/',
     'https://vercel.live/',
     'https://www.figma.com/embed',
@@ -161,6 +164,11 @@ const ACTION_REDIRECTS = [
     queryValue: 'join-stand-with-crypto',
   },
   {
+    destination: '/action/pledge',
+    queryKey: 'action',
+    queryValue: 'pledge-to-vote',
+  },
+  {
     destination: '/action/sign-up',
     queryKey: 'modal',
     queryValue: 'member-join',
@@ -222,6 +230,11 @@ const nextConfig = {
         source: '/call',
       },
       {
+        permanent: true,
+        destination: '/action/pledge',
+        source: '/pledge',
+      },
+      {
         permanent: false,
         destination: '/action/email?utm_source=swc&utm_medium=sms&utm_campaign=fit21-2024-05-text',
         source: '/text',
@@ -244,6 +257,11 @@ const nextConfig = {
       {
         source: '/politicians/house',
         destination: '/politicians',
+        permanent: true,
+      },
+      {
+        source: '/action/mint-nft',
+        destination: '/action/nft-mint',
         permanent: true,
       },
       // vanity urls
@@ -297,9 +315,17 @@ const nextConfig = {
         destination: '/action/call?unexpectedUrl=true',
         permanent: false,
       },
+      // SMS shortlinks
       {
-        source: '/utm_source=swc&utm_medium=sms&utm_campaign=mi-primary-1',
-        destination: '/?utm_source=swc&utm_medium=sms&utm_campaign=mi-primary-1',
+        source: '/nv/1',
+        destination:
+          'https://americalovescryptonv.splashthat.com/?utm_source=swc&utm_medium=sms&utm_campaign=nv_1&utm_id=sst&utm_content=v1',
+        permanent: false,
+      },
+      {
+        source: '/nv/2',
+        destination:
+          'https://americalovescryptonv.splashthat.com/?utm_source=swc&utm_medium=sms&utm_campaign=nv_1&utm_id=sst&utm_content=v2',
         permanent: false,
       },
     ]

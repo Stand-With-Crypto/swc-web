@@ -1,8 +1,10 @@
 'use client'
 
-import React from 'react'
+import React, { useCallback, useEffect, useRef } from 'react'
 import { UserActionType } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
+import { base } from 'thirdweb/chains'
+import { useWaitForReceipt } from 'thirdweb/react'
 
 import {
   actionCreateUserActionMintNFT,
@@ -13,24 +15,23 @@ import {
   NFTDisplaySkeleton,
   UserActionFormLayout,
 } from '@/components/app/userActionFormCommon'
-import { MINT_NFT_CONTRACT_ADDRESS } from '@/components/app/userActionFormNFTMint/constants'
 import {
-  UserActionFormSuccessScreenNextAction,
-  UserActionFormSuccessScreenNextActionSkeleton,
-} from '@/components/app/userActionFormSuccessScreen/userActionFormSuccessScreenNextAction'
+  MINT_NFT_CONTRACT_ADDRESS,
+  UserActionFormNFTMintSectionNames,
+} from '@/components/app/userActionFormNFTMint/constants'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { Skeleton } from '@/components/ui/skeleton'
-import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
-import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
 import { useEffectOnce } from '@/hooks/useEffectOnce'
+import { UseSectionsReturn } from '@/hooks/useSections'
 import { useThirdwebContractMetadata } from '@/hooks/useThirdwebContractMetadata'
+import { thirdwebClient } from '@/utils/shared/thirdwebClient'
 import { UserActionNftMintCampaignName } from '@/utils/shared/userActionCampaigns'
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
 import { toastGenericError } from '@/utils/web/toastUtils'
 
-export type UserActionFormNFTMintTransactionWatchProps =
+export type UserActionFormNFTMintTransactionWatchProps = (
   | {
       debug: true
       transactionHash: null
@@ -39,63 +40,68 @@ export type UserActionFormNFTMintTransactionWatchProps =
       debug?: false
       transactionHash: string
     }
+) &
+  UseSectionsReturn<UserActionFormNFTMintSectionNames>
 
 export function UserActionFormNFTMintTransactionWatch({
   transactionHash,
   debug,
+  goToSection,
 }: UserActionFormNFTMintTransactionWatchProps) {
-  const { data: userDataResponse, isLoading: isLoadingUserData } =
-    useApiResponseForUserFullProfileInfo()
   const { data: contractMetadata, isLoading: isLoadingContractMetadata } =
     useThirdwebContractMetadata(MINT_NFT_CONTRACT_ADDRESS)
-  const { data: performedUserActionTypesResponse, isLoading: isLoadingUserActions } =
-    useApiResponseForUserPerformedUserActionTypes()
 
-  const [isMined, setIsMined] = React.useState(false)
+  const { data: receipt } = useWaitForReceipt({
+    transactionHash: transactionHash as `0x${string}`,
+    client: thirdwebClient,
+    chain: base,
+  })
 
-  const createAction = async () => {
+  const createAction = useCallback(() => {
     const input: CreateActionMintNFTInput = {
       campaignName: UserActionNftMintCampaignName.DEFAULT,
       transactionHash: transactionHash as `0x${string}`,
     }
 
-    return await triggerServerActionForForm(
-      {
-        formName: 'User Action Form NFT Mint',
-        onError: toastGenericError,
-        analyticsProps: {
-          'Campaign Name': input.campaignName,
-          'User Action Type': UserActionType.NFT_MINT,
+    try {
+      void triggerServerActionForForm(
+        {
+          formName: 'User Action Form NFT Mint',
+          onError: toastGenericError,
+          analyticsProps: {
+            'Campaign Name': input.campaignName,
+            'User Action Type': UserActionType.NFT_MINT,
+          },
+          payload: input,
         },
-        payload: input,
-      },
-      payload =>
-        actionCreateUserActionMintNFT(payload).then(actionResult => {
-          if (actionResult && 'user' in actionResult && actionResult.user) {
-            identifyUserOnClient(actionResult.user)
-          }
-          return actionResult
-        }),
-    )
-  }
+        payload =>
+          actionCreateUserActionMintNFT(payload).then(actionResult => {
+            if (actionResult && 'user' in actionResult && actionResult.user) {
+              identifyUserOnClient(actionResult.user)
+            }
+            return actionResult
+          }),
+      ).then(result => {
+        if (result.status === 'success') goToSection(UserActionFormNFTMintSectionNames.SUCCESS)
+      })
+    } catch (err) {
+      Sentry.captureException(err, { tags: { domain: 'nftMint/transactionWatch' } })
+    }
+  }, [goToSection, transactionHash])
+
+  const isTransactionHandled = useRef(false)
+
+  useEffect(() => {
+    if (receipt?.status === 'success' && !isTransactionHandled.current) {
+      isTransactionHandled.current = true
+      createAction()
+    }
+  }, [createAction, receipt])
 
   useEffectOnce(() => {
     if (debug) {
-      setIsMined(true)
-      return
+      goToSection(UserActionFormNFTMintSectionNames.SUCCESS)
     }
-
-    const processTransaction = async () => {
-      try {
-        await createAction()
-      } catch (err) {
-        Sentry.captureException(err, { tags: { domain: 'nftMint/transactionWatch' } })
-      } finally {
-        setIsMined(true)
-      }
-    }
-
-    void processTransaction()
   })
 
   if (!contractMetadata || isLoadingContractMetadata) {
@@ -109,32 +115,14 @@ export function UserActionFormNFTMintTransactionWatch({
           <NFTDisplay
             alt={contractMetadata.name}
             isThirdwebMedia
-            loading={!isMined}
+            loading={isLoadingContractMetadata}
             src={contractMetadata.image ?? ''}
           />
 
-          <PageTitle size="sm">
-            {isMined ? 'Transaction complete' : 'Transaction in progress...'}
-          </PageTitle>
+          <PageTitle size="sm">Transaction in progress...</PageTitle>
 
-          <PageSubTitle size="md">
-            {isMined
-              ? "You've done your part to save crypto, but the fight isn't over yet. Keep the momentum going by completing the next action below."
-              : 'It may take up to 5 minutes.'}
-          </PageSubTitle>
+          <PageSubTitle size="md">It may take up to 5 minutes</PageSubTitle>
         </div>
-
-        {isLoadingUserData || isLoadingUserActions || !userDataResponse?.user ? (
-          <UserActionFormSuccessScreenNextActionSkeleton />
-        ) : (
-          <UserActionFormSuccessScreenNextAction
-            data={{
-              userHasEmbeddedWallet: userDataResponse.user.hasEmbeddedWallet,
-              performedUserActionTypes:
-                performedUserActionTypesResponse?.performedUserActionTypes || [],
-            }}
-          />
-        )}
       </UserActionFormLayout.Container>
     </UserActionFormLayout>
   )
@@ -148,18 +136,13 @@ export function UserActionFormNFTMintTransactionWatchSkeleton() {
           <NFTDisplaySkeleton />
 
           <Skeleton>
-            <PageTitle size="sm">Transaction complete</PageTitle>
+            <PageTitle size="sm">Transaction in progress</PageTitle>
           </Skeleton>
 
           <Skeleton>
-            <PageSubTitle size="md">
-              You've done your part to save crypto, but the fight isn't over yet. Keep the momentum
-              going by completing the next action below.
-            </PageSubTitle>
+            <PageSubTitle size="md">It may take up to 5 minutes</PageSubTitle>
           </Skeleton>
         </div>
-
-        <UserActionFormSuccessScreenNextActionSkeleton />
       </UserActionFormLayout.Container>
     </UserActionFormLayout>
   )

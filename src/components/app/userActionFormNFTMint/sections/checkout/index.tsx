@@ -52,6 +52,7 @@ interface UserActionFormNFTMintCheckoutProps
 const CHECKOUT_ERROR_TO_MESSAGE: Record<CheckoutError, string> = {
   insufficientFunds: 'Insufficient funds. You need ETH on Base to mint',
   networkSwitch: 'Please switch to the Base Network',
+  connectWallet: 'Please connect your wallet to mint',
 }
 
 export function UserActionFormNFTMintCheckout({
@@ -192,7 +193,7 @@ export function UserActionFormNFTMintCheckout({
         <UserActionFormLayout.Footer className="!mt-auto">
           {debug ? (
             <Button
-              onClick={() => goToSection(UserActionFormNFTMintSectionNames.TRANSACTION_WATCH)}
+              onClick={() => goToSection(UserActionFormNFTMintSectionNames.SUCCESS)}
               size="lg"
             >
               Mint now - Mocked
