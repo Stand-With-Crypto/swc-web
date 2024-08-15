@@ -74,8 +74,27 @@ export const backfillReactivationWithInngest = inngest.createFunction(
       usersWithoutCommunicationJourneyCount / BACKFILL_SESSION_ID_BATCH_SIZE,
     )
 
+    let totalResult: {
+      message: string
+      results: {
+        id: string
+        datetimeCreated: string
+        userCommunicationJourneyId: string
+        communicationType: CommunicationType
+        messageId: string
+      }[]
+    } | null = null
+
     for (let i = 0; i < numBatches; i++) {
-      await step.run(`backfill-reactivation-email-batch-${i}`, async () => {
+      const result: {
+        id: string
+        userCommunicationJourneyId: string
+        communicationType: CommunicationType
+        messageId: string
+        datetimeCreated: Date
+      }[] = []
+
+      const batchResult = await step.run(`backfill-reactivation-email-batch-${i}`, async () => {
         const usersWithoutCommunicationJourney = await prismaClient.user.findMany({
           take: BACKFILL_SESSION_ID_BATCH_SIZE,
           where: {
@@ -102,14 +121,6 @@ export const backfillReactivationWithInngest = inngest.createFunction(
             id: true,
           },
         })
-
-        const result: {
-          id: string
-          userCommunicationJourneyId: string
-          communicationType: CommunicationType
-          messageId: string
-          datetimeCreated: Date
-        }[] = []
 
         for (const user of usersWithoutCommunicationJourney) {
           await prismaClient.$transaction(async client => {
@@ -141,7 +152,13 @@ export const backfillReactivationWithInngest = inngest.createFunction(
           message: `Sent initial sign up email to ${result.length} users`,
         }
       })
+
+      totalResult = batchResult
+
+      logger.info(`Batch ${i} finished with: ${batchResult.message}`)
     }
+
+    return totalResult
   },
 )
 
@@ -165,29 +182,30 @@ async function sendInitialSignUpEmail(userId: string) {
 
   const ReactivationReminderComponent = ReactivationReminder
 
-  return await sendMail({
-    to: user.primaryUserEmailAddress.emailAddress,
-    subject: ReactivationReminderComponent.subjectLine,
-    customArgs: {
-      userId: user.id,
-    },
-    html: render(
-      <ReactivationReminderComponent
-        completedActionTypes={completedActionTypes}
-        session={currentSession}
-      />,
-    ),
-  }).catch(err => {
-    Sentry.captureException(err, {
-      extra: { userId: user.id, emailTo: user.primaryUserEmailAddress!.emailAddress },
-      tags: {
-        domain: 'backfillReactivation',
-      },
-      fingerprint: ['backfillReactivation', 'sendMail'],
-    })
+  return 'test'
+  // return await sendMail({
+  //   to: user.primaryUserEmailAddress.emailAddress,
+  //   subject: ReactivationReminderComponent.subjectLine,
+  //   customArgs: {
+  //     userId: user.id,
+  //   },
+  //   html: render(
+  //     <ReactivationReminderComponent
+  //       completedActionTypes={completedActionTypes}
+  //       session={currentSession}
+  //     />,
+  //   ),
+  // }).catch(err => {
+  //   Sentry.captureException(err, {
+  //     extra: { userId: user.id, emailTo: user.primaryUserEmailAddress!.emailAddress },
+  //     tags: {
+  //       domain: 'backfillReactivation',
+  //     },
+  //     fingerprint: ['backfillReactivation', 'sendMail'],
+  //   })
 
-    return Promise.reject(err)
-  })
+  //   return Promise.reject(err)
+  // })
 }
 
 async function getUser(userId: string) {
