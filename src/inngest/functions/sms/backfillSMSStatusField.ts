@@ -72,6 +72,7 @@ export const backfillSMSStatusField = inngest.createFunction(
             where: {
               hasOptedInToSms,
               hasRepliedToOptInSms,
+              smsStatus: 'NOT_OPTED_IN',
             },
             orderBy: {
               id: 'asc',
