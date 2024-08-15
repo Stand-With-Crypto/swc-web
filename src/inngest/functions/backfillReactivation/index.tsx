@@ -182,30 +182,29 @@ async function sendInitialSignUpEmail(userId: string) {
 
   const ReactivationReminderComponent = ReactivationReminder
 
-  return 'test'
-  // return await sendMail({
-  //   to: user.primaryUserEmailAddress.emailAddress,
-  //   subject: ReactivationReminderComponent.subjectLine,
-  //   customArgs: {
-  //     userId: user.id,
-  //   },
-  //   html: render(
-  //     <ReactivationReminderComponent
-  //       completedActionTypes={completedActionTypes}
-  //       session={currentSession}
-  //     />,
-  //   ),
-  // }).catch(err => {
-  //   Sentry.captureException(err, {
-  //     extra: { userId: user.id, emailTo: user.primaryUserEmailAddress!.emailAddress },
-  //     tags: {
-  //       domain: 'backfillReactivation',
-  //     },
-  //     fingerprint: ['backfillReactivation', 'sendMail'],
-  //   })
+  return await sendMail({
+    to: user.primaryUserEmailAddress.emailAddress,
+    subject: ReactivationReminderComponent.subjectLine,
+    customArgs: {
+      userId: user.id,
+    },
+    html: render(
+      <ReactivationReminderComponent
+        completedActionTypes={completedActionTypes}
+        session={currentSession}
+      />,
+    ),
+  }).catch(err => {
+    Sentry.captureException(err, {
+      extra: { userId: user.id, emailTo: user.primaryUserEmailAddress!.emailAddress },
+      tags: {
+        domain: 'backfillReactivation',
+      },
+      fingerprint: ['backfillReactivation', 'sendMail'],
+    })
 
-  //   return Promise.reject(err)
-  // })
+    return Promise.reject(err)
+  })
 }
 
 async function getUser(userId: string) {
