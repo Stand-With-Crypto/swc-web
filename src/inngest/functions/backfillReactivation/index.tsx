@@ -1,3 +1,7 @@
+import { CommunicationType, UserCommunicationJourneyType } from '@prisma/client'
+import { render } from '@react-email/components'
+import * as Sentry from '@sentry/nextjs'
+
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { sendMail } from '@/utils/server/email'
@@ -5,9 +9,6 @@ import { EmailActiveActions } from '@/utils/server/email/templates/common/consta
 import ReactivationReminder from '@/utils/server/email/templates/reactivationReminder'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getLogger } from '@/utils/shared/logger'
-import { CommunicationType, UserCommunicationJourneyType } from '@prisma/client'
-import { render } from '@react-email/components'
-import * as Sentry from '@sentry/nextjs'
 
 interface ScriptPayload {
   testEmail?: string
