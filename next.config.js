@@ -65,10 +65,13 @@ const contentSecurityPolicy = {
     // Mint endpoint
     'https://*.coinbase.com/',
     'https://*.sentry.io/',
+    'https://api.thirdweb.com/',
   ],
   'frame-src': [
     '*.google.com',
     'https://embedded-wallet.thirdweb.com/',
+    'https://verify.walletconnect.com/',
+    'https://verify.walletconnect.org/',
     'https://www.youtube.com/embed/',
     'https://vercel.live/',
     'https://www.figma.com/embed',

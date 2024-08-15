@@ -8,6 +8,8 @@ import {
   MINT_NFT_CONTRACT_ADDRESS,
   UserActionFormNFTMintSectionNames,
 } from '@/components/app/userActionFormNFTMint/constants'
+import { UserActionFormNFTMintSuccess } from '@/components/app/userActionFormNFTMint/sections/success'
+import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
 import { Checkbox } from '@/components/ui/checkbox'
 import { trackDialogOpen } from '@/components/ui/dialog/trackDialogOpen'
 import { useSections } from '@/hooks/useSections'
@@ -23,7 +25,12 @@ import {
 } from './sections/transactionWatch'
 import { useCheckoutController } from './useCheckoutController'
 
-export function UserActionFormNFTMint({ trackMount }: { trackMount?: boolean }) {
+interface UserActionFormNFTMintProps {
+  onFinished: () => void
+  trackMount?: boolean
+}
+
+export function UserActionFormNFTMint({ trackMount, onFinished }: UserActionFormNFTMintProps) {
   const sectionProps = useSections({
     sections: Object.values(UserActionFormNFTMintSectionNames),
     initialSectionId: UserActionFormNFTMintSectionNames.INTRO,
@@ -83,13 +90,20 @@ export function UserActionFormNFTMint({ trackMount }: { trackMount?: boolean }) 
     case UserActionFormNFTMintSectionNames.TRANSACTION_WATCH: {
       if (transactionHash || isDebug) {
         const params: UserActionFormNFTMintTransactionWatchProps = transactionHash
-          ? { transactionHash }
-          : { debug: true, transactionHash: null }
+          ? { transactionHash, ...sectionProps }
+          : { debug: true, transactionHash: null, ...sectionProps }
         return <UserActionFormNFTMintTransactionWatch {...params} />
       }
 
       return <UserActionFormNFTMintTransactionWatchSkeleton />
     }
+
+    case UserActionFormNFTMintSectionNames.SUCCESS:
+      return (
+        <UserActionFormSuccessScreen onClose={onFinished}>
+          <UserActionFormNFTMintSuccess />
+        </UserActionFormSuccessScreen>
+      )
 
     default:
       sectionProps.onSectionNotFound()
