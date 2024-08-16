@@ -77,7 +77,8 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
         phoneNumber,
         messages: [
           {
-            body: WELCOME_MESSAGE,
+            // TODO: We're testing a new variant to send welcome text in the same bulk message
+            // body: WELCOME_MESSAGE,
             journeyType: UserCommunicationJourneyType.WELCOME_SMS,
           },
           {
