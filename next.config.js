@@ -330,6 +330,18 @@ const nextConfig = {
           'https://americalovescryptonv.splashthat.com/?utm_source=swc&utm_medium=sms&utm_campaign=nv_1&utm_id=sst&utm_content=v2',
         permanent: false,
       },
+      {
+        source: '/az/1',
+        destination:
+          'https://americalovescryptoaz.splashthat.com/?utm_source=swc&utm_medium=sms&utm_campaign=az_1&utm_id=sst&utm_content=v1',
+        permanent: false,
+      },
+      {
+        source: '/az/2',
+        destination:
+          'https://americalovescryptoaz.splashthat.com/?utm_source=swc&utm_medium=sms&utm_campaign=az_1&utm_id=sst&utm_content=v2',
+        permanent: false,
+      },
     ]
   },
 }
