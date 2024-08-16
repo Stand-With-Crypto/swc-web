@@ -238,7 +238,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
               ))}
             </div>
             <div className="hidden gap-4 lg:flex">
-              {/* <DonateButton /> */}
+              <DonateButton />
               <LoginButton />
             </div>
           </div>
