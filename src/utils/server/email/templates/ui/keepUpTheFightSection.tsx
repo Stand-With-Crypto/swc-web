@@ -56,17 +56,17 @@ export function KeepUpTheFightSection({
                 width="24"
               />
             </Column>
-            <Column className="hidden w-[100px] pr-4 md:table-cell">
+            <Column className="hidden h-[100px] w-[100px] rounded-xl bg-black md:table-cell">
               <Img
                 alt={`${metadata.type} action icon`}
-                className="rounded-xl bg-black"
-                height="100"
+                className="m-auto"
+                height="80"
                 src={buildTemplateInternalUrl(metadata.image, hrefSearchParams)}
-                width="100"
+                width="80"
               />
             </Column>
-            <Column className="pr-4">
-              <Heading align="start" as="h3" size="sm">
+            <Column className="px-4">
+              <Heading align="start" as="h3" size="xs">
                 {metadata.text}
               </Heading>
               <Text className="text-foreground-muted my-0">{metadata.subtext}</Text>

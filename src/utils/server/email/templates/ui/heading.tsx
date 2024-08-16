@@ -9,6 +9,7 @@ export const headingVariantsConfig = {
     lg: 'text-3xl',
     md: 'text-xl',
     sm: 'text-base md:text-lg',
+    xs: 'text-sm md:text-base',
   },
   gutterBottom: {
     none: '',
