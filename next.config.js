@@ -343,6 +343,12 @@ const nextConfig = {
         permanent: false,
       },
       {
+        source: '/az/2.',
+        destination:
+          'https://americalovescryptoaz.splashthat.com/?utm_source=swc&utm_medium=sms&utm_campaign=az_1&utm_id=sst&utm_content=v2',
+        permanent: false,
+      },
+      {
         source: '/az/2',
         destination:
           'https://americalovescryptoaz.splashthat.com/?utm_source=swc&utm_medium=sms&utm_campaign=az_1&utm_id=sst&utm_content=v2',
