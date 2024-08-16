@@ -66,6 +66,7 @@ export async function createCommunicationJourneys(
         in: usersWithPhoneNumber,
       },
       journeyType,
+      campaignName,
     },
     select: {
       id: true,

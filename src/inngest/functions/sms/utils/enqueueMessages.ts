@@ -14,7 +14,7 @@ const PAYLOAD_LIMIT = 10000
 const logger = getLogger('enqueueMessages')
 
 export interface PayloadMessage {
-  body: string
+  body?: string
   journeyType: UserCommunicationJourneyType
   campaignName?: string
 }
@@ -46,17 +46,19 @@ export async function enqueueMessages(payload: EnqueueMessagePayload[], attempt 
           campaignName,
         )
 
-        const queuedMessage = await sendSMS({
-          body,
-          to: phoneNumber,
-        })
+        if (body) {
+          const queuedMessage = await sendSMS({
+            body,
+            to: phoneNumber,
+          })
 
-        if (queuedMessage) {
-          await createCommunication(communicationJourneys, queuedMessage.sid)
+          if (queuedMessage) {
+            await createCommunication(communicationJourneys, queuedMessage.sid)
+          }
+
+          segmentsSent += countSegments(body)
+          queuedMessages += 1
         }
-
-        segmentsSent += countSegments(body)
-        queuedMessages += 1
       } catch (error) {
         if (error instanceof SendSMSError) {
           if (error.isTooManyRequests) {
@@ -132,11 +134,13 @@ export function countMessagesAndSegments(payload: EnqueueMessagePayload[]) {
       let segmentsCount = 0
 
       curr.messages.forEach(message => {
-        segmentsCount += countSegments(message.body)
+        if (message.body) {
+          segmentsCount += countSegments(message.body)
+        }
       })
 
       return {
-        messages: acc.messages + curr.messages.length,
+        messages: acc.messages + curr.messages.filter(({ body }) => !!body).length,
         segments: acc.segments + segmentsCount,
       }
     },
