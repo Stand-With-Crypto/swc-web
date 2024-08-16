@@ -32,10 +32,10 @@ export function KeepUpTheFightSection({
 
   return (
     <Section>
-      <Heading as="h2" gutterBottom="md" size="md">
+      <Heading as="h2" className="text-[#101828]" gutterBottom="md" size="md">
         Keep up the fight
       </Heading>
-      <Text className="text-foreground-muted text-center text-base">
+      <Text className="text-center text-base text-[#5B616E]">
         Don't wait - take action now. See below for actions you can take to help keep crypto in
         America.
       </Text>
@@ -66,10 +66,10 @@ export function KeepUpTheFightSection({
               />
             </Column>
             <Column className="px-4">
-              <Heading align="start" as="h3" size="xs">
+              <Heading align="start" as="h3" className="text-[#0A0B0D]" size="xs">
                 {metadata.text}
               </Heading>
-              <Text className="text-foreground-muted my-0">{metadata.subtext}</Text>
+              <Text className="my-0 text-[#5B616E]">{metadata.subtext}</Text>
             </Column>
             <Column align="right" className="w-6 lg:w-[157px]">
               <Button

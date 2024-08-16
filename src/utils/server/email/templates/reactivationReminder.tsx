@@ -36,14 +36,14 @@ export default function ReactivationReminder({
 
         <Heading gutterBottom="md">Thanks for joining Stand With Crypto!</Heading>
 
-        <Text className="text-foreground-muted mb-0 text-center text-[15px]">
+        <Text className="mb-0 text-center text-[15px] text-[#5B616E]">
           We're excited that you've signed up to be a part of Stand With Crypto. SWC was created to
           give the American crypto community a voice in the public debates around crypto and to
           educate lawmakers and the public about the benefits of keeping crypto in America,
           including:
           <br />
           <br />
-          <ul className="text-foreground-muted pl-4 text-[15px]">
+          <ul className="pl-4 text-[15px] text-[#5B616E]">
             <li>Job creation</li>
             <li>Technology and innovation</li>
             <li>Modernizing the financial system</li>
@@ -53,10 +53,10 @@ export default function ReactivationReminder({
         </Text>
         <br />
         <br />
-        <Text className="text-foreground-muted my-0 text-center text-[15px]">
+        <Text className="my-0 text-center text-[15px] text-[#5B616E]">
           Stay tuned for more updates and information from SWC. You can always visit{' '}
           <Link
-            className="text-foreground-muted"
+            className="text-[#5B616E]"
             href={buildTemplateInternalUrl('/', hydratedHrefSearchParams)}
           >
             our website
