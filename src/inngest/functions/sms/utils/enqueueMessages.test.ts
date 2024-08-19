@@ -21,6 +21,7 @@ jest.mock('@/utils/shared/sleep', () => ({
 jest.mock('@/inngest/functions/sms/utils/communicationJourney', () => ({
   createCommunication: jest.fn(),
   createCommunicationJourneys: jest.fn(),
+  bulkCreateCommunicationJourney: jest.fn(),
 }))
 
 jest.mock('@/inngest/functions/sms/utils/flagInvalidPhoneNumbers', () => ({
