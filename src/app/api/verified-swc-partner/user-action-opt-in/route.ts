@@ -6,12 +6,12 @@ import {
   verifiedSWCPartnersUserActionOptIn,
   zodVerifiedSWCPartnersUserActionOptIn,
 } from '@/data/verifiedSWCPartners/userActionOptIn'
-import { withUserSession } from '@/utils/server/serverWrappers/withUserSession'
+import { withRouteMiddleware } from '@/utils/server/serverWrappers/withRouteMiddleware'
 import { authenticateAndGetVerifiedSWCPartnerFromHeader } from '@/utils/server/verifiedSWCPartner/getVerifiedSWCPartnerFromHeader'
 
 type RequestBody = z.infer<typeof zodVerifiedSWCPartnersUserActionOptIn>
 
-export const POST = withUserSession(async (request: NextRequest) => {
+export const POST = withRouteMiddleware(async (request: NextRequest) => {
   const partner = authenticateAndGetVerifiedSWCPartnerFromHeader()
   const requestBody = await request.json()
 

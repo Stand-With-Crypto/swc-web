@@ -6,7 +6,18 @@ import { USER_SESSION_ID_COOKIE_NAME } from '@/utils/shared/userSessionId'
 
 type HandlerFunction = (request: NextRequest, ...args: any[]) => Promise<Response>
 
-export function withUserSession(fn: HandlerFunction): HandlerFunction {
+/**
+ * Middleware that sets the user session in Sentry.
+ * @example
+ * ```ts
+ * export const GET = withRouteMiddleware(async () => {
+ *   const response = await getSomeData()
+ *   return NextResponse.json(response)
+ * })
+ * ```
+ * @warning This middleware ONLY works for non static routes as it reads the user session from cookies.
+ */
+export function withRouteMiddleware(fn: HandlerFunction): HandlerFunction {
   return async function (request: NextRequest, ...args: any[]): Promise<Response> {
     const userSession = cookies().get(USER_SESSION_ID_COOKIE_NAME)?.value
 

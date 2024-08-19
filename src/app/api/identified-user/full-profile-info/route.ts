@@ -5,7 +5,7 @@ import { NextResponse } from 'next/server'
 import { getClientAddress } from '@/clientModels/clientAddress'
 import { getSensitiveDataClientUser } from '@/clientModels/clientUser/sensitiveDataClientUser'
 import { getMaybeUserAndMethodOfMatchWithMaybeSession } from '@/utils/server/getMaybeUserAndMethodOfMatch'
-import { withUserSession } from '@/utils/server/serverWrappers/withUserSession'
+import { withRouteMiddleware } from '@/utils/server/serverWrappers/withRouteMiddleware'
 
 export const dynamic = 'force-dynamic'
 
@@ -32,7 +32,7 @@ export type GetUserFullProfileInfoResponse = Awaited<
   ReturnType<typeof apiResponseForUserFullProfileInfo>
 >
 
-export const GET = withUserSession(async () => {
+export const GET = withRouteMiddleware(async () => {
   const response = await apiResponseForUserFullProfileInfo()
   return NextResponse.json(response)
 })

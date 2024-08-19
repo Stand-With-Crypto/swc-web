@@ -20,10 +20,10 @@ import {
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getServerAnalytics } from '@/utils/server/serverAnalytics'
 import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
-import { withUserSession } from '@/utils/server/serverWrappers/withUserSession'
+import { withRouteMiddleware } from '@/utils/server/serverWrappers/withRouteMiddleware'
 import { getLogger, logger } from '@/utils/shared/logger'
 
-export const POST = withUserSession(async (request: NextRequest) => {
+export const POST = withRouteMiddleware(async (request: NextRequest) => {
   const isVerified = await verifySignature(request.clone()).catch(logger.error)
   if (!isVerified) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
