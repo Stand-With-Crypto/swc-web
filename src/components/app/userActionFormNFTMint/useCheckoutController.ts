@@ -71,9 +71,11 @@ function useGasFee(quantity: number) {
   const { user } = useThirdwebAuthUser()
   const account = user?.address
 
+  const shouldFetch = contract && account
+
   return useSWR(
-    contract ? { contract } : null,
-    async ({ contract: _contract }) => {
+    shouldFetch ? contract : null,
+    async _contract => {
       const tx = claimTo({
         contract: _contract,
         quantity: BigInt(quantity),
