@@ -44,11 +44,12 @@ export function middleware(request: NextRequest) {
   }
 
   const existingCountryCode = request.cookies.get(USER_COUNTRY_CODE_COOKIE_NAME)?.value
+  const userCountryCode = getCountryCode(request)
 
-  if (!existingCountryCode) {
+  if (existingCountryCode !== userCountryCode) {
     i18nParsedResponse.cookies.set({
       name: USER_COUNTRY_CODE_COOKIE_NAME,
-      value: getCountryCode(request),
+      value: userCountryCode,
       httpOnly: false,
     })
   }
