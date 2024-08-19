@@ -179,7 +179,6 @@ export async function bulkCreateCommunicationJourney(
         }
 
         return {
-          ...user,
           messageId: message.messageId,
           userCommunicationJourneyId: communicationJourney.id,
           communicationType: CommunicationType.SMS,
