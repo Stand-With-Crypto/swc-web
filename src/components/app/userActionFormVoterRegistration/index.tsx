@@ -49,6 +49,15 @@ export function UserActionFormVoterRegistration({
             {...sectionProps}
           />
         )
+      case SectionNames.CONFIRM_REGISTRATION_FORM:
+        return (
+          <VoterRegistrationForm
+            registrationConfirm
+            setStateCode={setStateCode}
+            stateCode={stateCode}
+            {...sectionProps}
+          />
+        )
       case SectionNames.CLAIM_NFT:
         return <ClaimNft stateCode={stateCode} {...sectionProps} />
       case SectionNames.ACCOUNT_REGISTRATION:
