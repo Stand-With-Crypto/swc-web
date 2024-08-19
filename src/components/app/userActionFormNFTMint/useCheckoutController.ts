@@ -69,9 +69,9 @@ function useGasFee(quantity: number) {
     chain: base,
   })
   const { user } = useThirdwebAuthUser()
-  const account = user?.address
+  const address = user?.address
 
-  const shouldFetch = contract && account
+  const shouldFetch = contract && address
 
   return useSWR(
     shouldFetch ? contract : null,
@@ -79,7 +79,7 @@ function useGasFee(quantity: number) {
       const tx = claimTo({
         contract: _contract,
         quantity: BigInt(quantity),
-        to: account || '',
+        to: address || '',
       })
       const gasFee = await estimateGasCost({ transaction: tx })
       return gasFee.wei
@@ -91,6 +91,7 @@ function useGasFee(quantity: number) {
             quantity,
             contract,
             user,
+            address,
           },
           tags: { domain: 'useCheckoutController' },
         })
