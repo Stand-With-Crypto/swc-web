@@ -415,10 +415,10 @@ model NFTMint {
 }
 
 model UserActionViewKeyRaces {
-  id                       String     @id @default(uuid())
-  userAction               UserAction @relation(fields: [id], references: [id])
-  usCongressionalDistrict  String?    @map("us_congressional_district")
-  administrativeAreaLevel1 String?    @map("administrative_area_level_1")
+  id                      String     @id @default(uuid())
+  userAction              UserAction @relation(fields: [id], references: [id])
+  usCongressionalDistrict String?    @map("us_congressional_district")
+  usaState                String?    @map("usa_state")
 
   @@map("user_action_view_key_races")
 }
