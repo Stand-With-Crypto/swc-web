@@ -37,6 +37,12 @@ const COPY = {
     step2: 'Check voter registration',
     step2Cta: 'Check',
   },
+  registrationConfirm: {
+    title: 'Awesome, thank you for being registered',
+    subtitle: "Let's double check your information to make sure you have no issues voting.",
+    step2: 'Check voter registration',
+    step2Cta: 'Check',
+  },
 } as const
 
 const WY_DISCLAIMER =
@@ -87,22 +93,25 @@ function disclaimer(stateCode: USStateCode | undefined) {
 
 interface VoterRegistrationFormProps extends UseSectionsReturn<SectionNames> {
   checkRegistration?: boolean
+  registrationConfirm?: boolean
   stateCode?: USStateCode
   setStateCode: Dispatch<SetStateAction<USStateCode | undefined>>
 }
 
 export function VoterRegistrationForm({
   checkRegistration,
+  registrationConfirm,
   goToSection,
   stateCode,
   setStateCode,
 }: VoterRegistrationFormProps) {
   const [completeStep2, setCompleteStep2] = useState(false)
 
-  const { title, subtitle, step2, step2Cta } = useMemo(
-    () => COPY[checkRegistration ? 'checkRegistration' : 'register'],
-    [checkRegistration],
-  )
+  const { title, subtitle, step2, step2Cta } = useMemo(() => {
+    if (registrationConfirm) return COPY.registrationConfirm
+
+    return checkRegistration ? COPY.checkRegistration : COPY.register
+  }, [checkRegistration, registrationConfirm])
 
   const link = stateCode
     ? REGISTRATION_URLS_BY_STATE[stateCode][
