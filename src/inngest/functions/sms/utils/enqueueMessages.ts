@@ -71,6 +71,18 @@ export async function enqueueMessages(payload: EnqueueMessagePayload[], attempt 
 
           segmentsSent += countSegments(body)
           queuedMessages += 1
+        } else if (journeyType === UserCommunicationJourneyType.WELCOME_SMS) {
+          // TODO: remove this when we finish testing the new welcome sms variant
+          update(
+            messagesSentByJourneyType,
+            [journeyType, DEFAULT_CAMPAIGN_NAME],
+            (existingPayload = []) => [
+              ...existingPayload,
+              {
+                phoneNumber,
+              },
+            ],
+          )
         }
       } catch (error) {
         if (error instanceof SendSMSError) {
@@ -112,6 +124,8 @@ export async function enqueueMessages(payload: EnqueueMessagePayload[], attempt 
 
   for (const journeyTypeKey of Object.keys(messagesSentByJourneyType)) {
     const journeyType = journeyTypeKey as UserCommunicationJourneyType
+
+    logger.info(`Creating ${journeyType} communication journey`)
 
     await bulkCreateCommunicationJourney(journeyType, messagesSentByJourneyType[journeyType]!)
   }
