@@ -83,6 +83,9 @@ export const ACTION_NFT_SLUG: Record<
   [UserActionType.RSVP_EVENT]: {
     [UserActionRsvpEventCampaignName.DEFAULT]: null,
   },
+  [UserActionType.VIEW_KEY_RACES]: {
+    [UserActionRsvpEventCampaignName.DEFAULT]: null,
+  },
 }
 
 const logger = getLogger('claimNft')

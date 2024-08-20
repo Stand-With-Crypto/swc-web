@@ -1,5 +1,5 @@
 'use server'
-import { Prisma, UserCryptoAddress } from '@prisma/client'
+import { Prisma, UserCryptoAddress, UserEmailAddress } from '@prisma/client'
 import { GetResult } from '@prisma/client/runtime/library'
 import * as Sentry from '@sentry/nextjs'
 
@@ -17,6 +17,7 @@ type BaseUserAndMethodOfMatch<S extends string | undefined, I extends PrismaBase
   | {
       user: GetResult<Prisma.$UserPayload, I, 'findFirst'>
       userCryptoAddress: UserCryptoAddress | null
+      userEmailAddress: UserEmailAddress | null
     }
   | {
       user: GetResult<Prisma.$UserPayload, I, 'findFirst'> | null
@@ -69,6 +70,7 @@ async function baseGetMaybeUserAndMethodOfMatch<
           include: {
             ...((include || {}) as object),
             userCryptoAddresses: true,
+            primaryUserEmailAddress: true,
           },
           cursor,
           distinct,
@@ -85,6 +87,7 @@ async function baseGetMaybeUserAndMethodOfMatch<
           include: {
             ...((include || {}) as object),
             userCryptoAddresses: true,
+            primaryUserEmailAddress: true,
           },
           cursor,
           distinct,
@@ -114,6 +117,7 @@ async function baseGetMaybeUserAndMethodOfMatch<
     return {
       user,
       userCryptoAddress: authedCryptoAddress ?? null,
+      userEmailAddress: userWithoutReturnTypes!.primaryUserEmailAddress ?? null,
     }
   }
   return {

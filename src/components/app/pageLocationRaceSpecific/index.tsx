@@ -1,5 +1,9 @@
+'use client'
+
+import { useEffect } from 'react'
 import { compact } from 'lodash-es'
 
+import { actionCreateUserActionViewKeyRaces } from '@/actions/actionCreateUserActionViewKeyRaces'
 import { DarkHeroSection } from '@/components/app/darkHeroSection'
 import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
 import { MaybeOverflowedStances } from '@/components/app/maybeOverflowedStances'
@@ -55,6 +59,20 @@ export function LocationRaceSpecific({
   const stateDisplayName = stateCode && US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]
   const urls = getIntlUrls(locale)
   const { recommended, others } = findRecommendedCandidate(groups)
+
+  useEffect(() => {
+    actionCreateUserActionViewKeyRaces({
+      usaState: stateCode,
+      usCongressionalDistrict: district?.toString(),
+    })
+      .then(() => {
+        // noop
+      })
+      .catch(() => {
+        // noop
+      })
+  }, [district, stateCode])
+
   return (
     <div>
       <DarkHeroSection className="text-center">

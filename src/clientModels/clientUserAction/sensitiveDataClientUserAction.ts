@@ -10,6 +10,7 @@ import {
   UserActionRsvpEvent,
   UserActionTweetAtPerson,
   UserActionType,
+  UserActionViewKeyRaces,
   UserActionVoterAttestation,
   UserActionVoterRegistration,
 } from '@prisma/client'
@@ -38,6 +39,7 @@ type SensitiveDataClientUserActionDatabaseQuery = UserAction & {
   userActionTweetAtPerson: UserActionTweetAtPerson | null
   userActionRsvpEvent: UserActionRsvpEvent | null
   userActionVoterAttestation: UserActionVoterAttestation | null
+  userActionViewKeyRaces: UserActionViewKeyRaces | null
 }
 
 type SensitiveDataClientUserActionEmailRecipient = Pick<UserActionEmailRecipient, 'id'>
@@ -98,6 +100,13 @@ type SensitiveDataClientUserActionVoterAttestation = Pick<
   actionType: typeof UserActionType.VOTER_ATTESTATION
 }
 
+type SensitiveDataClientUserActionViewKeyRaces = Pick<
+  UserActionViewKeyRaces,
+  'usaState' | 'usCongressionalDistrict'
+> & {
+  actionType: typeof UserActionType.VIEW_KEY_RACES
+}
+
 /*
 At the database schema level we can't enforce that a single action only has one "type" FK, but at the client level we can and should
 */
@@ -117,6 +126,7 @@ export type SensitiveDataClientUserAction = ClientModel<
       | SensitiveDataClientUserActionTweetAtPerson
       | SensitiveDataClientUserActionRsvpEvent
       | SensitiveDataClientUserActionVoterAttestation
+      | SensitiveDataClientUserActionViewKeyRaces
     )
 >
 
@@ -243,6 +253,18 @@ export const getSensitiveDataClientUserAction = ({
           actionType: UserActionType.VOTER_ATTESTATION,
         }
         return getClientModel({ ...sharedProps, ...voterAttestationFields })
+      },
+      [UserActionType.VIEW_KEY_RACES]: () => {
+        const { usaState, usCongressionalDistrict } = getRelatedModel(
+          record,
+          'userActionViewKeyRaces',
+        )
+        const keyRacesFields: SensitiveDataClientUserActionViewKeyRaces = {
+          usaState,
+          usCongressionalDistrict,
+          actionType: UserActionType.VIEW_KEY_RACES,
+        }
+        return getClientModel({ ...sharedProps, ...keyRacesFields })
       },
     }
 
