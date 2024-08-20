@@ -95,7 +95,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
       }
     >
       <Button
-        className="w-full text-base font-bold leading-4 md:font-normal lg:w-auto"
+        className="w-full text-base font-bold leading-4 md:font-normal min-[1092px]:w-auto"
         variant="primary-cta"
       >
         Sign In
@@ -106,7 +106,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
   const DonateButton = () => (
     <Button
       asChild
-      className="w-full text-base font-bold leading-4 md:font-normal lg:w-auto"
+      className="w-full text-base font-bold leading-4 md:font-normal min-[1092px]:w-auto"
       key={urls.donate()}
       variant="default"
     >
@@ -133,7 +133,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
 
       <nav
         className={cn(
-          'sticky top-0 z-10 flex h-[72px] w-full items-center bg-white py-3 lg:h-[84px] lg:py-5',
+          'sticky top-0 z-10 flex h-[72px] w-full items-center bg-white py-3 min-[1092px]:h-[84px] min-[1092px]:py-5',
         )}
       >
         <div className="mx-auto flex w-full max-w-[1800px] items-center justify-between px-8">
@@ -164,7 +164,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
                     }
                   }}
                 >
-                  <Button asChild className="hidden lg:block" variant="secondary">
+                  <Button asChild className="hidden min-[1092px]:block" variant="secondary">
                     {children ? (
                       <span className="select-none">
                         <div className="flex cursor-default items-center gap-2">
@@ -237,7 +237,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
                 </div>
               ))}
             </div>
-            <div className="hidden gap-4 lg:flex">
+            <div className="hidden gap-4 min-[1092px]:flex">
               <DonateButton />
               <LoginButton />
             </div>
@@ -245,7 +245,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
         </div>
         <Drawer {...dialogProps} direction="top" shouldScaleBackground>
           <DrawerTrigger asChild data-testid="drawer-trigger">
-            <button className="p-3 lg:hidden">
+            <button className="p-3 min-[1092px]:hidden">
               <span className="sr-only">Open navigation menu</span>
               <Menu />
             </button>
