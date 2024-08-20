@@ -4,6 +4,7 @@ import { uniqBy } from 'lodash-es'
 import { NextResponse } from 'next/server'
 
 import { getMaybeUserAndMethodOfMatchWithMaybeSession } from '@/utils/server/getMaybeUserAndMethodOfMatch'
+import { withRouteMiddleware } from '@/utils/server/serverWrappers/withRouteMiddleware'
 
 export const dynamic = 'force-dynamic'
 
@@ -29,7 +30,7 @@ export type GetUserPerformedUserActionTypesResponse = Awaited<
   ReturnType<typeof apiResponseForUserPerformedUserActionTypes>
 >
 
-export async function GET() {
+export const GET = withRouteMiddleware(async () => {
   const response = await apiResponseForUserPerformedUserActionTypes()
   return NextResponse.json(response)
-}
+})

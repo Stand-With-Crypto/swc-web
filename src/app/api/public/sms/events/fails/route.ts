@@ -3,6 +3,7 @@ import 'server-only'
 import * as Sentry from '@sentry/nextjs'
 import { NextRequest, NextResponse } from 'next/server'
 
+import { withRouteMiddleware } from '@/utils/server/serverWrappers/withRouteMiddleware'
 import { verifySignature } from '@/utils/server/sms'
 import { getLogger } from '@/utils/shared/logger'
 
@@ -24,7 +25,7 @@ interface SmsEventPayload {
 
 const logger = getLogger('sms-fails')
 
-export async function POST(request: NextRequest) {
+export const POST = withRouteMiddleware(async (request: NextRequest) => {
   const [isVerified, body] = await verifySignature<SmsEvent>(request)
 
   if (!isVerified) {
@@ -61,4 +62,4 @@ export async function POST(request: NextRequest) {
   }
 
   return NextResponse.json({ ok: true })
-}
+})

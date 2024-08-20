@@ -1,5 +1,7 @@
 import * as Sentry from '@sentry/nextjs'
-import { headers } from 'next/headers'
+import { cookies, headers } from 'next/headers'
+
+import { USER_SESSION_ID_COOKIE_NAME } from '@/utils/shared/userSessionId'
 
 // sentry only allows form data to be passed but we want to support json objects as well so we need to make it form data
 const convertArgsToFormData = <T extends any[]>(args: T) => {
@@ -23,6 +25,15 @@ export function withServerActionMiddleware<T extends (...args: any) => any>(
   action: T,
 ) {
   return function orchestratedLogic(...args: Parameters<T>) {
+    const userSession = cookies().get(USER_SESSION_ID_COOKIE_NAME)?.value
+
+    if (userSession) {
+      Sentry.setUser({
+        id: userSession,
+        idType: 'session',
+      })
+    }
+
     return Sentry.withServerActionInstrumentation<() => Awaited<ReturnType<T>> | undefined>(
       name,
       {

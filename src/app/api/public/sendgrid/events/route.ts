@@ -20,9 +20,10 @@ import {
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getServerAnalytics } from '@/utils/server/serverAnalytics'
 import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
+import { withRouteMiddleware } from '@/utils/server/serverWrappers/withRouteMiddleware'
 import { getLogger, logger } from '@/utils/shared/logger'
 
-export async function POST(request: NextRequest) {
+export const POST = withRouteMiddleware(async (request: NextRequest) => {
   const isVerified = await verifySignature(request.clone()).catch(logger.error)
   if (!isVerified) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
@@ -46,7 +47,7 @@ export async function POST(request: NextRequest) {
   }
 
   return NextResponse.json({ ok: true })
-}
+})
 
 async function processEventChunk(messageId: string, events: EmailEvent[]) {
   const log = getLogger(`Sendgrid Event Webhook - ${messageId}`)

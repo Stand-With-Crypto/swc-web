@@ -6,6 +6,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import twilio from 'twilio'
 
 import { prismaClient } from '@/utils/server/prismaClient'
+import { withRouteMiddleware } from '@/utils/server/serverWrappers/withRouteMiddleware'
 import { verifySignature } from '@/utils/server/sms'
 import { optOutUser, optUserBackIn } from '@/utils/server/sms/actions'
 // TODO: Uncomment this after we start using Messaging Service
@@ -40,7 +41,7 @@ interface SmsEvent {
   ApiVersion: string
 }
 
-export async function POST(request: NextRequest) {
+export const POST = withRouteMiddleware(async (request: NextRequest) => {
   const [isVerified, body] = await verifySignature<SmsEvent>(request)
 
   if (!isVerified) {
@@ -107,7 +108,7 @@ export async function POST(request: NextRequest) {
     headers,
     status: 200,
   })
-}
+})
 
 async function getUserByPhoneNumber(phoneNumber: string): Promise<User | undefined> {
   const [user] = await prismaClient.user.findMany({
