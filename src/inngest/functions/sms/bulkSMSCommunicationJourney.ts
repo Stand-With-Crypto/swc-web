@@ -5,7 +5,7 @@ import { chunk, merge, uniq } from 'lodash-es'
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { countSegments, TWILIO_RATE_LIMIT } from '@/utils/server/sms'
+import { countSegments, isPhoneNumberSupported, TWILIO_RATE_LIMIT } from '@/utils/server/sms'
 import { WELCOME_MESSAGE } from '@/utils/server/sms/messages'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
@@ -297,7 +297,9 @@ async function fetchAllPhoneNumbers(
 
     cursor = phoneNumberList.at(-1)?.datetimeCreated
 
-    const phoneNumbers = phoneNumberList.map(({ phoneNumber }) => phoneNumber)
+    const phoneNumbers = phoneNumberList
+      .map(({ phoneNumber }) => phoneNumber)
+      .filter(isPhoneNumberSupported)
 
     allPhoneNumbers = allPhoneNumbers.concat(phoneNumbers)
 

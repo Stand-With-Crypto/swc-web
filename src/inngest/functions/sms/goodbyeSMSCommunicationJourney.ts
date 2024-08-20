@@ -1,9 +1,10 @@
 import { UserCommunicationJourneyType } from '@prisma/client'
 import * as Sentry from '@sentry/node'
+import { NonRetriableError } from 'inngest'
 
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
-import { sendSMS, SendSMSError } from '@/utils/server/sms'
+import { isPhoneNumberSupported, sendSMS, SendSMSError } from '@/utils/server/sms'
 import * as messages from '@/utils/server/sms/messages'
 
 import { createCommunication, createCommunicationJourneys, flagInvalidPhoneNumbers } from './utils'
@@ -32,6 +33,10 @@ export const goodbyeSMSCommunicationJourney = inngest.createFunction(
   },
   async ({ event, step }) => {
     const { phoneNumber } = event.data as GoodbyeSMSCommunicationJourneyPayload
+
+    if (!isPhoneNumberSupported(phoneNumber)) {
+      throw new NonRetriableError('Phone number not supported')
+    }
 
     const communicationJourneys = await step.run('create-communication-journey', () =>
       createCommunicationJourneys(phoneNumber, UserCommunicationJourneyType.GOODBYE_SMS),
