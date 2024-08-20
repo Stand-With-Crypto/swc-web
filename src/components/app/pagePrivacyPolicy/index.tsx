@@ -198,25 +198,26 @@ export function PagePrivacyPolicy() {
 
       <h2>SWC's Texting Program</h2>
       <p>
-        <strong>
-          With your opt-in consent, SWC may send you recurring automated text/SMS messages at the
-          phone number you provide to us. These texts will include information about SWC's efforts
-          to fulfill its mission to unite global crypto advocates, forming a passionate community
-          committed to driving sensible crypto innovation and crypto policy. Opt-in consent for text
-          messages is not shared with any third party, except telecommunication technology providers
-          (e.g. aggregators and providers of text message services).
-        </strong>
+        With your opt-in consent, SWC may send you recurring automated text/SMS messages at the
+        phone number you provide to us. These texts will include information about SWC's efforts to
+        fulfill its mission to unite global crypto advocates, forming a passionate community
+        committed to driving sensible crypto innovation and crypto policy. Opt-in consent for text
+        messages is not shared with any third party, except telecommunication technology providers
+        (e.g. aggregators and providers of text message services).
       </p>
       <p>
-        <strong>
-          At any time, you may reply STOP to opt-out of these messages, and HELP for support. For
-          customer support, you may also contact:{' '}
-          <a href="mailto:info@standwithcrypto.org">info@standwithcrypto.org</a>.
-        </strong>
+        At any time, you may reply STOP to opt-out of these messages, and HELP for support. For
+        customer support, you may also contact:{' '}
+        <a href="mailto:info@standwithcrypto.org">info@standwithcrypto.org</a>.
       </p>
       <p>
         Message and data rates may apply. Message frequency varies. Carriers are not liable for
         delayed or undeliverable messages.
+      </p>
+      <p>
+        View how SWC collects information about you when you visit our website or engage with SWC,
+        and how SWC uses the information it collects outside of these Text Program terms within the
+        other sections of this Privacy Policy.
       </p>
 
       <h2>Your Privacy Choices</h2>
