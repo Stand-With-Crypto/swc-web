@@ -59,7 +59,6 @@ Sentry.init({
       // NOTE: when upgrading Sentry major versions we need to manually update this file for compatibility
       workerUrl: '/workers/sentry.worker.js',
     }),
-    // Sentry.captureConsoleIntegration(),
   ],
   denyUrls: [
     /vitals\.vercel-analytics\.com/i,
