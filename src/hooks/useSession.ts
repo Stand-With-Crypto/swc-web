@@ -17,14 +17,14 @@ export function useSession() {
 
   const isLoading = fullProfileRequest.isLoading
 
-  const emailAddress = fullProfileRequest.data?.user?.primaryUserEmailAddress
-  const isLoggedIn = thirdwebSession.isLoggedIn || !!emailAddress?.isVerified
+  const user = fullProfileRequest.data?.user
+  const isLoggedIn = thirdwebSession.isLoggedIn || !!user?.id
   const isLoggedInThirdweb = thirdwebSession.isLoggedIn
   return {
     isLoading: !isLoggedIn && isLoading,
     isLoggedIn,
     isLoggedInThirdweb,
-    user: fullProfileRequest.data?.user,
+    user,
   }
 }
 
