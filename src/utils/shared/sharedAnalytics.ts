@@ -1,35 +1,17 @@
 import { Address } from '@prisma/client'
 
 export enum AnalyticComponentType {
-  banner = 'Banner',
   button = 'Button',
   card = 'Card',
-  chart = 'Chart',
   dropdown = 'Dropdown',
-  link = 'Link',
   page = 'Page',
   modal = 'Modal',
-  table = 'Table',
-  searchBar = 'Search Bar',
   text = 'Text',
-  textInput = 'Text Input',
-  checkbox = 'Checkbox',
 }
 
 export enum AnalyticActionType {
-  blur = 'Blur',
   click = 'Click',
-  change = 'Change',
-  dismiss = 'Dismiss',
-  focus = 'Focus',
-  hover = 'Hover',
-  select = 'Select',
-  move = 'Move',
-  render = 'Render',
-  scroll = 'Scroll',
   view = 'View',
-  search = 'Search',
-  keyPress = 'Key Press',
 }
 
 export type AnalyticProperties = {

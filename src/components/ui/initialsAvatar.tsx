@@ -1,6 +1,6 @@
 import { cn } from '@/utils/web/cn'
 
-export type InitialsAvatarProps = {
+type InitialsAvatarProps = {
   size: number
   className?: string
   firstInitial: string

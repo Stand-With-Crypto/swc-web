@@ -39,9 +39,3 @@ export const getTotalAdvocatesPerState = async () => {
 
   return totalAdvocatesPerState
 }
-
-export type TotalAdvocatesPerState = Awaited<ReturnType<typeof getTotalAdvocatesPerState>>
-export interface AdvocatePerState {
-  state: string
-  totalAdvocates: number
-}

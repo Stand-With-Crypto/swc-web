@@ -7,7 +7,7 @@ import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
 export const DTSI_AllPeopleQueryTag = 'DTSI_AllPeopleQuery'
 
-export const query = /* GraphQL */ `
+const query = /* GraphQL */ `
   query AllPeople($limit: Int!) {
     people(
       limit: $limit

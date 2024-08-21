@@ -31,7 +31,7 @@ export const PARTY_OPTIONS = {
   REPUBLICAN: DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN,
   DEMOCRAT: DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT,
 }
-export function getPartyOptionDisplayName(party: string) {
+function getPartyOptionDisplayName(party: string) {
   switch (party) {
     case PARTY_OPTIONS.REPUBLICAN:
       return 'Republican'
@@ -47,7 +47,7 @@ export const ROLE_OPTIONS = {
   CONGRESS: DTSI_PersonRoleCategory.CONGRESS,
   ALL_OTHER: 'ALL_OTHER',
 }
-export function getRoleOptionDisplayName(role: string) {
+function getRoleOptionDisplayName(role: string) {
   switch (role) {
     case ROLE_OPTIONS.ALL_OTHER:
       return 'Other Political Figure'

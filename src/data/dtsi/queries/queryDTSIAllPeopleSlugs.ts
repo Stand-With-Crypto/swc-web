@@ -3,7 +3,7 @@ import * as Sentry from '@sentry/nextjs'
 import { fetchDTSI } from '@/data/dtsi/fetchDTSI'
 import { DTSI_AllPeopleSlugsQuery, DTSI_AllPeopleSlugsQueryVariables } from '@/data/dtsi/generated'
 
-export const query = /* GraphQL */ `
+const query = /* GraphQL */ `
   query AllPeopleSlugs {
     people(
       limit: 1500

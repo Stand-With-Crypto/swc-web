@@ -23,7 +23,7 @@ export function EventsNearYou(props: EventsNearYouProps) {
   )
 }
 
-export function _EventsNearYou({ events }: EventsNearYouProps) {
+function _EventsNearYou({ events }: EventsNearYouProps) {
   const { setAddress, address } = useMutableCurrentUserAddress()
 
   const userState = useMemo(() => {

@@ -7,7 +7,7 @@ import {
 } from '@/data/dtsi/generated'
 import { USStateCode } from '@/utils/shared/usStateUtils'
 
-export const query = /* GraphQL */ `
+const query = /* GraphQL */ `
   query StateSpecificInformation($stateCode: String!) {
     people(
       limit: 999

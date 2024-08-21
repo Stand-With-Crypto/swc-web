@@ -17,7 +17,7 @@ import { prismaClient } from '@/utils/server/prismaClient'
 
 const CAPITOL_CANARY_UPSERT_ADVOCATE_RETRY_LIMIT = 20
 
-export const CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_FUNCTION_ID = 'capitol-canary.upsert-advocate'
+const CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_FUNCTION_ID = 'capitol-canary.upsert-advocate'
 export const CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME = 'capitol.canary/upsert.advocate'
 
 /**

@@ -29,7 +29,7 @@ import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
 import { toastGenericError } from '@/utils/web/toastUtils'
 
-export enum SectionNames {
+enum SectionNames {
   EVENT_INFO = 'Event Information',
   PHONE_SECTION = 'Phone Section',
   NOTIFICATION_ACTIVATED = 'Event Notification Activated',

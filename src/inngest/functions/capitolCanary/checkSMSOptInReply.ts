@@ -14,8 +14,7 @@ import { smsProvider } from '@/utils/shared/smsProvider'
 
 const CAPITOL_CANARY_CHECK_SMS_OPT_IN_REPLY_RETRY_LIMIT = 10
 
-export const CAPITOL_CANARY_CHECK_SMS_OPT_IN_REPLY_FUNCTION_ID =
-  'capitol-canary.check-sms-opt-in-reply'
+const CAPITOL_CANARY_CHECK_SMS_OPT_IN_REPLY_FUNCTION_ID = 'capitol-canary.check-sms-opt-in-reply'
 export const CAPITOL_CANARY_CHECK_SMS_OPT_IN_REPLY_EVENT_NAME =
   'capitol.canary/check.sms.opt.in.reply'
 

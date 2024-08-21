@@ -1,6 +1,6 @@
 import { ImageResponse } from '@vercel/og'
 
-export const FRAME_IMAGE_DIMENSIONS = {
+const FRAME_IMAGE_DIMENSIONS = {
   width: 1200,
   height: 630,
 }

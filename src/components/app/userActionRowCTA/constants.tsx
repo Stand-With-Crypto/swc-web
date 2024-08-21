@@ -25,7 +25,7 @@ import { getIntlUrls } from '@/utils/shared/urls'
 import { USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns'
 import { getYourPoliticianCategoryShortDisplayName } from '@/utils/shared/yourPoliticianCategory'
 
-export const USER_ACTION_ROW_CTA_INFO: Record<
+const USER_ACTION_ROW_CTA_INFO: Record<
   ActiveClientUserActionType,
   Omit<UserActionRowCTAProps, 'state'>
 > = {
@@ -146,7 +146,7 @@ export const USER_ACTION_ROW_CTA_INFO: Record<
   },
 }
 
-export const USER_ACTION_ROW_CTA_INFO_FROM_CAMPAIGN: Record<
+const USER_ACTION_ROW_CTA_INFO_FROM_CAMPAIGN: Record<
   string,
   Omit<UserActionRowCTAProps, 'state'>
 > = {}

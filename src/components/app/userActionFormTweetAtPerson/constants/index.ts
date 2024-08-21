@@ -1,8 +1,8 @@
 import { UserActionTweetAtPersonCampaignName } from '@/utils/shared/userActionCampaigns'
 
-export const ANALYTICS_NAME_USER_ACTION_FORM_TWEET_AT_PERSON = 'User Action Form Tweet At Person'
+const ANALYTICS_NAME_USER_ACTION_FORM_TWEET_AT_PERSON = 'User Action Form Tweet At Person'
 
-export const ANALYTICS_NAME_USER_ACTION_FORM_PIZZA_DAY_TWEET_AT_PERSON_CAMPAIGN =
+const ANALYTICS_NAME_USER_ACTION_FORM_PIZZA_DAY_TWEET_AT_PERSON_CAMPAIGN =
   'User Action Form Pizza Day 2024/05/22 Tweet At Person Campaign'
 
 export enum TweetAtPersonSectionNames {

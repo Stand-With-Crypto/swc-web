@@ -20,7 +20,7 @@ import { findRecommendedCandidate } from '@/utils/shared/findRecommendedCandidat
 import { getIntlUrls } from '@/utils/shared/urls'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 
-export interface LocationRaceSpecificProps extends DTSI_DistrictSpecificInformationQuery {
+interface LocationRaceSpecificProps extends DTSI_DistrictSpecificInformationQuery {
   stateCode?: USStateCode
   district?: NormalizedDTSIDistrictId
   locale: SupportedLocale

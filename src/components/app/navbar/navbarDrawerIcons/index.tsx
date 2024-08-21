@@ -1,6 +1,6 @@
 import { SVGAttributes } from 'react'
 
-export interface IconProps extends SVGAttributes<SVGSVGElement> {
+interface IconProps extends SVGAttributes<SVGSVGElement> {
   height?: number
   width?: number
 }

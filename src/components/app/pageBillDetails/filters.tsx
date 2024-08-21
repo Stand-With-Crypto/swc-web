@@ -16,9 +16,9 @@ import {
 } from '@/data/dtsi/generated'
 import { cn } from '@/utils/web/cn'
 
-export const STANCE_OPTIONS = ['All', ...Object.values(DTSI_BillPersonRelationshipType)] as const
-export type STANCE_OPTION = (typeof STANCE_OPTIONS)[number]
-export const STANCE_OPTIONS_DISPLAY_NAME: Record<STANCE_OPTION, string> = {
+const STANCE_OPTIONS = ['All', ...Object.values(DTSI_BillPersonRelationshipType)] as const
+type STANCE_OPTION = (typeof STANCE_OPTIONS)[number]
+const STANCE_OPTIONS_DISPLAY_NAME: Record<STANCE_OPTION, string> = {
   All: 'All',
   [DTSI_BillPersonRelationshipType.SPONSOR]: 'Sponsor',
   [DTSI_BillPersonRelationshipType.COSPONSOR]: 'Co-sponsor',
@@ -26,25 +26,25 @@ export const STANCE_OPTIONS_DISPLAY_NAME: Record<STANCE_OPTION, string> = {
   [DTSI_BillPersonRelationshipType.VOTED_AGAINST]: 'Voted against',
 }
 
-export const ROLE_OPTIONS = [
+const ROLE_OPTIONS = [
   'All',
   DTSI_PersonRoleCategory.SENATE,
   DTSI_PersonRoleCategory.CONGRESS,
 ] as const
-export type ROLE_OPTION = (typeof ROLE_OPTIONS)[number]
-export const ROLE_OPTIONS_DISPLAY_NAME: Record<ROLE_OPTION, string> = {
+type ROLE_OPTION = (typeof ROLE_OPTIONS)[number]
+const ROLE_OPTIONS_DISPLAY_NAME: Record<ROLE_OPTION, string> = {
   All: 'All',
   [DTSI_PersonRoleCategory.SENATE]: 'Senator',
   [DTSI_PersonRoleCategory.CONGRESS]: 'Congressperson',
 }
 
-export const PARTY_OPTIONS = [
+const PARTY_OPTIONS = [
   'All',
   DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN,
   DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT,
 ] as const
-export type PARTY_OPTION = (typeof PARTY_OPTIONS)[number]
-export const PARTY_OPTIONS_DISPLAY_NAME: Record<PARTY_OPTION, string> = {
+type PARTY_OPTION = (typeof PARTY_OPTIONS)[number]
+const PARTY_OPTIONS_DISPLAY_NAME: Record<PARTY_OPTION, string> = {
   All: 'All',
   [DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN]: 'Republican',
   [DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT]: 'Democratic',

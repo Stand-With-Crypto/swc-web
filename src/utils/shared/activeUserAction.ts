@@ -1,6 +1,6 @@
 import { UserActionType } from '@prisma/client'
 
-export const ACTIVE_CLIENT_USER_ACTION_TYPES = [
+const ACTIVE_CLIENT_USER_ACTION_TYPES = [
   UserActionType.CALL,
   UserActionType.EMAIL,
   UserActionType.DONATION,
