@@ -3,7 +3,6 @@ import 'server-only'
 
 import { User, UserActionType, UserInformationVisibility } from '@prisma/client'
 import { waitUntil } from '@vercel/functions'
-import { R } from 'node_modules/@upstash/redis/zmscore-80635339'
 import { object, string, z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
