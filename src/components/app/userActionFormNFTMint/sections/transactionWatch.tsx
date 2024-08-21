@@ -19,6 +19,7 @@ import {
   MINT_NFT_CONTRACT_ADDRESS,
   UserActionFormNFTMintSectionNames,
 } from '@/components/app/userActionFormNFTMint/constants'
+import { Button } from '@/components/ui/button'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -30,7 +31,6 @@ import { UserActionNftMintCampaignName } from '@/utils/shared/userActionCampaign
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
 import { toastGenericError } from '@/utils/web/toastUtils'
-import { Button } from '@/components/ui/button'
 
 export type UserActionFormNFTMintTransactionWatchProps = (
   | {
@@ -103,7 +103,7 @@ export function UserActionFormNFTMintTransactionWatch({
       Sentry.captureException(receiptError, { tags: { domain: 'nftMint/transactionWatch' } })
       toastGenericError()
     }
-  }, [receiptVerificationFailed])
+  }, [receiptVerificationFailed, receiptError])
 
   useEffect(() => {
     if (receipt?.status === 'success' && !isTransactionHandled.current) {
