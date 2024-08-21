@@ -1,13 +1,12 @@
 'use client'
-import useSWR from 'swr'
-import { FullConfiguration } from 'swr/_internal'
+import useSWR, { SWRConfiguration } from 'swr'
 
 import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import { apiUrls } from '@/utils/shared/urls'
 
 export function useApiResponseForUserFullProfileInfo(
-  config?: Pick<FullConfiguration, 'revalidateOnMount'>,
+  config?: SWRConfiguration<GetUserFullProfileInfoResponse>,
 ) {
   return useSWR(
     apiUrls.userFullProfileInfo(),
