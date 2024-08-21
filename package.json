@@ -102,6 +102,7 @@
     "nextjs-toploader": "^1.6.12",
     "obscenity": "^0.2.0",
     "p-retry": "^6.2.0",
+    "pino-pretty": "^11.2.2",
     "react": "^18",
     "react-dom": "^18",
     "react-email": "2.1.4",
