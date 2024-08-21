@@ -40,7 +40,7 @@ export function useSessionControl() {
     if (pathname === internalUrls.profile()) {
       window.location.replace(internalUrls.home())
     } else {
-      window.location.reload()
+      window.location.replace(internalUrls.home())
     }
   }, [internalUrls, pathname])
 
