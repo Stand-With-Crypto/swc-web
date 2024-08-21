@@ -30,6 +30,7 @@ import { UserActionNftMintCampaignName } from '@/utils/shared/userActionCampaign
 import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
 import { toastGenericError } from '@/utils/web/toastUtils'
+import { Button } from '@/components/ui/button'
 
 export type UserActionFormNFTMintTransactionWatchProps = (
   | {
@@ -55,6 +56,8 @@ export function UserActionFormNFTMintTransactionWatch({
     data: receipt,
     isError: receiptVerificationFailed,
     error: receiptError,
+    refetch: refetchReceipt,
+    isLoading: isReceiptLoading,
   } = useWaitForReceipt({
     transactionHash: transactionHash as `0x${string}`,
     client: thirdwebClient,
@@ -130,9 +133,23 @@ export function UserActionFormNFTMintTransactionWatch({
             src={contractMetadata.image ?? ''}
           />
 
-          <PageTitle size="sm">Transaction in progress...</PageTitle>
+          <PageTitle size="sm">
+            {receiptVerificationFailed
+              ? 'Transaction verification failed!'
+              : 'Transaction in progress...'}
+          </PageTitle>
 
-          <PageSubTitle size="md">It may take up to 5 minutes</PageSubTitle>
+          <PageSubTitle size="md">
+            {receiptVerificationFailed
+              ? 'It looks like we were unable to verify the NFT mint transaction. Please try again.'
+              : 'It may take up to 5 minutes'}
+          </PageSubTitle>
+
+          {receiptVerificationFailed && (
+            <Button disabled={isReceiptLoading} onClick={() => refetchReceipt()}>
+              Verify again
+            </Button>
+          )}
         </div>
       </UserActionFormLayout.Container>
     </UserActionFormLayout>
