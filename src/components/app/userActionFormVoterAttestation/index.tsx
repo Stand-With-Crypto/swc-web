@@ -20,6 +20,7 @@ import { PledgeSection } from '@/components/app/userActionFormVoterAttestation/s
 import { UserActionFormCallCongresspersonSuccess } from '@/components/app/userActionFormVoterAttestation/sections/success'
 import { FormFields } from '@/components/app/userActionFormVoterAttestation/types'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
+import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useGoogleMapsScript } from '@/hooks/useGoogleMapsScript'
 import { useSections, UseSectionsReturn } from '@/hooks/useSections'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
@@ -69,6 +70,8 @@ export function UserActionFormVoterAttestation({
     initialSectionId: SectionNames.INTRO,
     analyticsName: ANALYTICS_NAME_USER_ACTION_FORM_VOTER_ATTESTATION,
   })
+
+  const { mutate } = useApiResponseForUserFullProfileInfo()
 
   const racesByAddressRequest = useRacesByAddress(address?.description)
   const isRacesByAddressRequestActive = React.useRef(!!address?.description)
@@ -157,6 +160,17 @@ export function UserActionFormVoterAttestation({
     sectionProps.goToSection(SectionNames.SUCCESS)
   }, [address, isCreatingAction, racesByAddressRequest.data, router, sectionProps])
 
+  const handleLogin = React.useCallback(async () => {
+    const data = await mutate()
+    if (data?.user?.address) {
+      setAddress({
+        description: data.user.address.formattedDescription,
+        place_id: data.user.address.googlePlaceId,
+      })
+      sectionPropsRef.current.goToSection(SectionNames.PLEDGE)
+    }
+  }, [mutate])
+
   switch (sectionProps.currentSection) {
     case SectionNames.INTRO:
       return (
@@ -172,14 +186,14 @@ export function UserActionFormVoterAttestation({
     case SectionNames.ADDRESS:
       return (
         <div className={cn(dialogContentPaddingStyles, 'h-full')}>
-          <AuthenticateWithoutProfileUpdate>
+          <AuthenticateWithoutProfileUpdate onLoginCallback={handleLogin}>
             <Address {...addressProps} />
           </AuthenticateWithoutProfileUpdate>
         </div>
       )
     case SectionNames.PLEDGE:
       return (
-        <AuthenticateWithoutProfileUpdate>
+        <AuthenticateWithoutProfileUpdate onLoginCallback={handleLogin}>
           <PledgeSection
             address={address}
             isLoadingRaces={racesByAddressRequest.isLoading}
