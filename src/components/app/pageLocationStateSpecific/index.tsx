@@ -54,15 +54,13 @@ export function LocationStateSpecific({
   )
 
   useEffect(() => {
-    actionCreateUserActionViewKeyRaces({
-      usaState: stateCode,
-    })
-      .then(() => {
-        // noop
+    async function viewKeyRaces() {
+      await actionCreateUserActionViewKeyRaces({
+        usaState: stateCode,
       })
-      .catch(() => {
-        // noop
-      })
+    }
+
+    viewKeyRaces()
   }, [stateCode])
 
   return (

@@ -61,16 +61,14 @@ export function LocationRaceSpecific({
   const { recommended, others } = findRecommendedCandidate(groups)
 
   useEffect(() => {
-    actionCreateUserActionViewKeyRaces({
-      usaState: stateCode,
-      usCongressionalDistrict: district?.toString(),
-    })
-      .then(() => {
-        // noop
+    async function viewKeyRaces() {
+      await actionCreateUserActionViewKeyRaces({
+        usaState: stateCode,
+        usCongressionalDistrict: district?.toString(),
       })
-      .catch(() => {
-        // noop
-      })
+    }
+
+    viewKeyRaces()
   }, [district, stateCode])
 
   return (
