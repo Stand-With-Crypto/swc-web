@@ -5,8 +5,9 @@ import { NonRetriableError } from 'inngest'
 import { flagInvalidPhoneNumbers } from '@/inngest/functions/sms/utils'
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
-import { isPhoneNumberSupported, sendSMS, SendSMSError } from '@/utils/server/sms'
+import { sendSMS, SendSMSError } from '@/utils/server/sms'
 import * as messages from '@/utils/server/sms/messages'
+import { isPhoneNumberSupported } from '@/utils/server/sms/utils'
 
 import { createCommunication, createCommunicationJourneys } from './utils/communicationJourney'
 
