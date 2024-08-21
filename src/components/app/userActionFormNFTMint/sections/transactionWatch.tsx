@@ -51,7 +51,11 @@ export function UserActionFormNFTMintTransactionWatch({
   const { data: contractMetadata, isLoading: isLoadingContractMetadata } =
     useThirdwebContractMetadata(MINT_NFT_CONTRACT_ADDRESS)
 
-  const { data: receipt } = useWaitForReceipt({
+  const {
+    data: receipt,
+    isError: receiptVerificationFailed,
+    error: receiptError,
+  } = useWaitForReceipt({
     transactionHash: transactionHash as `0x${string}`,
     client: thirdwebClient,
     chain: base,
@@ -90,6 +94,13 @@ export function UserActionFormNFTMintTransactionWatch({
   }, [goToSection, transactionHash])
 
   const isTransactionHandled = useRef(false)
+
+  useEffect(() => {
+    if (receiptVerificationFailed) {
+      Sentry.captureException(receiptError, { tags: { domain: 'nftMint/transactionWatch' } })
+      toastGenericError()
+    }
+  }, [receiptVerificationFailed])
 
   useEffect(() => {
     if (receipt?.status === 'success' && !isTransactionHandled.current) {
