@@ -44,7 +44,7 @@ import {
   ServerLocalUser,
 } from '@/utils/server/serverLocalUser'
 import { getUserSessionId as _getUserSessionId } from '@/utils/server/serverUserSessionId'
-import { optInUser } from '@/utils/server/sms/actions'
+import * as smsActions from '@/utils/server/sms/actions'
 import {
   fetchEmbeddedWalletMetadataFromThirdweb,
   ThirdwebEmbeddedWalletMetadata,
@@ -795,7 +795,7 @@ async function triggerPostLoginUserActionSteps({
     }
 
     if (embeddedWalletUserDetails?.phone) {
-      await optInUser(embeddedWalletUserDetails.phone, user)
+      await smsActions.optInUser(embeddedWalletUserDetails.phone, user)
     }
 
     analytics.trackUserActionCreated({

@@ -33,7 +33,7 @@ import {
   getServerPeopleAnalytics,
 } from '@/utils/server/serverAnalytics'
 import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
-import { optInUser } from '@/utils/server/sms/actions'
+import * as smsActions from '@/utils/server/sms/actions'
 import { getUserAcquisitionFieldsForVerifiedSWCPartner } from '@/utils/server/verifiedSWCPartner/attribution'
 import { VerifiedSWCPartner } from '@/utils/server/verifiedSWCPartner/constants'
 import { getFormattedDescription } from '@/utils/shared/address'
@@ -182,7 +182,7 @@ export async function handleExternalUserActionOptIn(
       existingAction.user.smsStatus === SMSStatus.NOT_OPTED_IN &&
       input.hasOptedInToReceiveSMSFromSWC
     ) {
-      await optInUser(user.phoneNumber, existingAction.user)
+      await smsActions.optInUser(user.phoneNumber, existingAction.user)
 
       await inngest.send({
         name: CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME,

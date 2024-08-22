@@ -19,7 +19,7 @@ import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
-import { optInUser } from '@/utils/server/sms/actions'
+import * as smsActions from '@/utils/server/sms/actions'
 import { zodUpdateUserHasOptedInToSMS } from '@/validation/forms/zodUpdateUserHasOptedInToSMS'
 
 export const actionUpdateUserHasOptedInToSMS = withServerActionMiddleware(
@@ -60,10 +60,6 @@ async function _actionUpdateUserHasOptedInToSMS(data: UpdateUserHasOptedInToSMSP
       .flush(),
   )
 
-  if (phoneNumber) {
-    await optInUser(phoneNumber, user)
-  }
-
   const updatedUser = await prismaClient.user.update({
     where: {
       id: user.id,
@@ -76,6 +72,10 @@ async function _actionUpdateUserHasOptedInToSMS(data: UpdateUserHasOptedInToSMSP
       address: true,
     },
   })
+
+  if (phoneNumber) {
+    updatedUser.smsStatus = await smsActions.optInUser(phoneNumber, user)
+  }
 
   await handleCapitolCanarySMSUpdate(updatedUser)
 

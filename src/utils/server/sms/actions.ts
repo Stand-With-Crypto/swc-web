@@ -14,7 +14,7 @@ import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
 import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
 import { smsProvider, SMSProviders } from '@/utils/shared/smsProvider'
 
-export async function optInUser(phoneNumber: string, user: User) {
+export async function optInUser(phoneNumber: string, user: User): Promise<SMSStatus> {
   const normalizedPhoneNumber = normalizePhoneNumber(phoneNumber)
 
   if (
@@ -26,7 +26,7 @@ export async function optInUser(phoneNumber: string, user: User) {
     ].includes(user.smsStatus) &&
       user.phoneNumber === normalizedPhoneNumber) // If user has already opted in and has not changed their phone number, we don't want to send a message
   ) {
-    return
+    return user.smsStatus
   }
 
   const newSMSStatus =
@@ -66,6 +66,8 @@ export async function optInUser(phoneNumber: string, user: User) {
       })
       .flush(),
   )
+
+  return newSMSStatus
 }
 
 export async function optOutUser(phoneNumber: string, isSWCKeyword: boolean, user?: User) {

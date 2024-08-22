@@ -31,7 +31,7 @@ import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
-import { optInUser } from '@/utils/server/sms/actions'
+import * as smsActions from '@/utils/server/sms/actions'
 import { maybeGetCongressionalDistrictFromAddress } from '@/utils/shared/getCongressionalDistrictFromAddress'
 import { getLogger } from '@/utils/shared/logger'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
@@ -163,10 +163,6 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
       .flush(),
   )
 
-  if (hasOptedInToSms && phoneNumber) {
-    await optInUser(phoneNumber, user)
-  }
-
   const updatedUser = await prismaClient.user.update({
     where: {
       id: user.id,
@@ -190,6 +186,10 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
       primaryUserCryptoAddress: true,
     },
   })
+
+  if (hasOptedInToSms && phoneNumber) {
+    updatedUser.smsStatus = await smsActions.optInUser(phoneNumber, user)
+  }
 
   await handleCapitolCanaryAdvocateUpsert(updatedUser, primaryUserEmailAddress, user)
   await claimOptInNFTIfNotClaimed({
