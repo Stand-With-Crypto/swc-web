@@ -48,7 +48,7 @@ const USER_ACTION_ROW_CTA_INFO: Record<
     subtext: "Find your voter info with our simple tool - you'll get a free NFT.",
     shortText: 'Register to vote',
     shortSubtext: 'Get a free "I\'m a Voter" NFT',
-    canBeTriggeredMultipleTimes: false,
+    canBeTriggeredMultipleTimes: true,
     WrapperComponent: UserActionFormVoterRegistrationDialog,
   },
   [UserActionType.CALL]: {
@@ -141,7 +141,7 @@ const USER_ACTION_ROW_CTA_INFO: Record<
     subtext: 'Sign the pledge to research the candidates & turn out to vote.',
     shortText: 'Pledge to vote',
     shortSubtext: 'Pledge to vote This Fall.',
-    canBeTriggeredMultipleTimes: false,
+    canBeTriggeredMultipleTimes: true,
     WrapperComponent: UserActionFormVoterAttestationDialog,
   },
 }

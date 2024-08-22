@@ -2,7 +2,7 @@ import { z } from 'zod'
 
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 
-import { messagingClient } from './client'
+import { messagingClient } from './messagingClient'
 import { SendSMSError } from './SendSMSError'
 
 const TWILIO_PHONE_NUMBER = requiredEnv(process.env.TWILIO_PHONE_NUMBER, 'TWILIO_PHONE_NUMBER')

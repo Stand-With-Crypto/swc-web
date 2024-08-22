@@ -3,7 +3,9 @@ import * as Sentry from '@sentry/node'
 import { NonRetriableError } from 'inngest'
 import { update } from 'lodash-es'
 
-import { countSegments, sendSMS, SendSMSError } from '@/utils/server/sms'
+import { sendSMS, SendSMSError } from '@/utils/server/sms'
+import { optOutUser } from '@/utils/server/sms/actions'
+import { countSegments, getUserByPhoneNumber } from '@/utils/server/sms/utils'
 import { getLogger } from '@/utils/shared/logger'
 import { sleep } from '@/utils/shared/sleep'
 
@@ -41,6 +43,7 @@ export async function enqueueMessages(payload: EnqueueMessagePayload[], attempt 
   const messagesSentByJourneyType: {
     [key in UserCommunicationJourneyType]?: BulkCreateCommunicationJourneyPayload
   } = {}
+  const unsubscribedUsers: string[] = []
 
   let segmentsSent = 0
   let queuedMessages = 0
@@ -94,6 +97,8 @@ export async function enqueueMessages(payload: EnqueueMessagePayload[], attempt 
             }
           } else if (error.isInvalidPhoneNumber) {
             invalidPhoneNumbers.push(error.phoneNumber)
+          } else if (error.isUnsubscribedUser) {
+            unsubscribedUsers.push(error.phoneNumber)
           } else {
             Sentry.captureException(`sendSMS Error ${error.code}: ${error.message}`, {
               extra: { reason: error },
@@ -133,6 +138,17 @@ export async function enqueueMessages(payload: EnqueueMessagePayload[], attempt 
   if (invalidPhoneNumbers.length > 0) {
     logger.info(`Found ${invalidPhoneNumbers.length} invalid phone numbers`)
     await flagInvalidPhoneNumbers(invalidPhoneNumbers)
+  }
+
+  if (unsubscribedUsers.length > 0) {
+    logger.info(`Found ${unsubscribedUsers.length} unsubscribed users`)
+    const optOutUserPromises = unsubscribedUsers.map(async phoneNumber => {
+      const user = await getUserByPhoneNumber(phoneNumber)
+
+      await optOutUser(phoneNumber, user)
+    })
+
+    await Promise.all(optOutUserPromises)
   }
 
   const failedEnqueueMessagePayload: EnqueueMessagePayload[] = Object.keys(failedPhoneNumbers).map(
