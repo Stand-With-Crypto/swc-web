@@ -119,7 +119,7 @@ export function UserActionFormNFTMintCheckout({
             <div className="flex items-center justify-between gap-2">
               <p>Quantity</p>
               <QuantityInput
-                onChange={setQuantity}
+                onChange={(newValue: number) => setQuantity(Math.floor(newValue))}
                 onDecrement={decrementQuantity}
                 onIncrement={incrementQuantity}
                 value={quantity}
