@@ -19,6 +19,6 @@ export async function verifySignature<Body = unknown>(request: Request): Promise
   return [twilio.validateRequest(authToken, signature, url, params), params as Body]
 }
 
-function parseTwilioBody(params: string): Record<string, string> {
+export function parseTwilioBody(params: string): Record<string, string> {
   return Object.fromEntries(new URLSearchParams(params))
 }
