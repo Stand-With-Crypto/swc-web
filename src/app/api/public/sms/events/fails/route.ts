@@ -3,9 +3,11 @@ import 'server-only'
 import * as Sentry from '@sentry/nextjs'
 import { NextRequest, NextResponse } from 'next/server'
 
+import { prismaClient } from '@/utils/server/prismaClient'
 import { withRouteMiddleware } from '@/utils/server/serverWrappers/withRouteMiddleware'
-import { verifySignature } from '@/utils/server/sms'
-import { getLogger } from '@/utils/shared/logger'
+import { optOutUser } from '@/utils/server/sms/actions'
+import { MESSAGE_BLOCKED_CODE } from '@/utils/server/sms/SendSMSError'
+import { verifySignature } from '@/utils/server/sms/utils'
 
 interface SmsEvent {
   ParentAccountSid: string
@@ -18,12 +20,10 @@ interface SmsEvent {
 }
 
 interface SmsEventPayload {
-  resource_sid: string
-  service_sid: string
-  error_code: string
+  resource_sid?: string
+  service_sid?: string
+  error_code?: string
 }
-
-const logger = getLogger('sms-fails')
 
 export const POST = withRouteMiddleware(async (request: NextRequest) => {
   const [isVerified, body] = await verifySignature<SmsEvent>(request)
@@ -42,9 +42,14 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
   try {
     const payload = JSON.parse(body.Payload) as SmsEventPayload
 
-    logger.info('Payload', JSON.stringify(payload))
+    const errorCode = payload.error_code ?? 'undefined'
+    const messageId = payload.resource_sid
 
-    Sentry.captureMessage(`SMS event ${body.Level}: ${payload.error_code}`, {
+    if (errorCode && messageId) {
+      await handleSMSErrors(errorCode, messageId)
+    }
+
+    Sentry.captureMessage(`SMS event ${body.Level}: ${errorCode}`, {
       extra: {
         body,
       },
@@ -63,3 +68,26 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
 
   return NextResponse.json({ ok: true })
 })
+
+async function handleSMSErrors(errorCode: string, messageId: string) {
+  if (errorCode === String(MESSAGE_BLOCKED_CODE)) {
+    const userCommunication = await prismaClient.userCommunication.findFirst({
+      where: {
+        messageId,
+      },
+      include: {
+        userCommunicationJourney: {
+          include: {
+            user: true,
+          },
+        },
+      },
+    })
+
+    if (!userCommunication) return
+
+    const user = userCommunication.userCommunicationJourney.user
+
+    await optOutUser(user.phoneNumber, user)
+  }
+}
