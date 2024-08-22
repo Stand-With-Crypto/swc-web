@@ -146,7 +146,7 @@ export function UserActionFormNFTMintTransactionWatch({
           </PageSubTitle>
 
           {receiptVerificationFailed && (
-            <Button disabled={isReceiptLoading} onClick={() => refetchReceipt()}>
+            <Button disabled={isReceiptLoading} onClick={refetchReceipt}>
               Verify again
             </Button>
           )}
