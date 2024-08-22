@@ -194,7 +194,6 @@ async function sendInitialSignUpEmail(userId: string) {
     customArgs: {
       userId: user.id,
       category: 'Reactivation Email Reminder',
-      journeyType: UserCommunicationJourneyType.INITIAL_SIGNUP,
     },
     html: render(
       <ReactivationReminderComponent
