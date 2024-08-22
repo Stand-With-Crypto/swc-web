@@ -49,7 +49,6 @@ export function UserActionFormSuccessScreen(props: UserActionFormSuccessScreenPr
           void mutate(apiUrls.userFullProfileInfo(), {
             ...user,
             phoneNumber,
-            hasOptedInToSms: true,
           })
           void performedActionsResponse.mutate()
         }}
