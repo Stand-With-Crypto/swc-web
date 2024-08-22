@@ -16,8 +16,12 @@ interface QuantityInputProps {
 const MAX_QUANTITY = 36
 
 export function QuantityInput({ value, onChange, onIncrement, onDecrement }: QuantityInputProps) {
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = Number(event.target.value)
+  const handleInputChange = ({
+    target: { value: _value },
+  }: React.ChangeEvent<HTMLInputElement>) => {
+    if (/[.,]/.test(_value)) return
+
+    const newValue = Number(_value)
     if (newValue > 0 && newValue < MAX_QUANTITY) {
       onChange(newValue)
     }

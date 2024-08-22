@@ -70,7 +70,7 @@ export async function optInUser(phoneNumber: string, user: User): Promise<SMSSta
   return newSMSStatus
 }
 
-export async function optOutUser(phoneNumber: string, isSWCKeyword: boolean, user?: User) {
+export async function optOutUser(phoneNumber: string, user?: User) {
   const normalizedPhoneNumber = normalizePhoneNumber(phoneNumber)
 
   if (user?.smsStatus === SMSStatus.OPTED_OUT) return
@@ -86,7 +86,7 @@ export async function optOutUser(phoneNumber: string, isSWCKeyword: boolean, use
 
   // TODO: Uncomment this after we start using Messaging Service
   // We shouldn't send a message if the user replied with a default STOP keyword because Twilio will block it
-  // if (isSWCKeyword && smsProvider === SMSProviders.TWILIO) {
+  // if (smsProvider === SMSProviders.TWILIO) {
   //   await inngest.send({
   //     name: GOODBYE_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
   //     data: {
@@ -101,9 +101,7 @@ export async function optOutUser(phoneNumber: string, isSWCKeyword: boolean, use
         localUser: getLocalUserFromUser(user),
         userId: user.id,
       })
-        .track('User SMS Opt-out', {
-          type: isSWCKeyword ? 'SWC STOP Keyword' : 'STOP Keyword',
-        })
+        .track('User SMS Opt-out')
         .flush(),
     )
   }

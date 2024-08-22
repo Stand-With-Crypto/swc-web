@@ -10,9 +10,17 @@ import {
 import { flagInvalidPhoneNumbers } from '@/inngest/functions/sms/utils/flagInvalidPhoneNumbers'
 import { fakerFields } from '@/mocks/fakerUtils'
 import { sendSMS, SendSMSError } from '@/utils/server/sms'
+import { optOutUser } from '@/utils/server/sms/actions'
 import type { SendSMSPayload } from '@/utils/server/sms/sendSMS'
-import { INVALID_PHONE_NUMBER_CODE, TOO_MANY_REQUESTS_CODE } from '@/utils/server/sms/SendSMSError'
+import {
+  INVALID_PHONE_NUMBER_CODE,
+  IS_UNSUBSCRIBED_USER_CODE,
+  TOO_MANY_REQUESTS_CODE,
+} from '@/utils/server/sms/SendSMSError'
 import { sleep } from '@/utils/shared/sleep'
+
+const invalidPhoneNumber = fakerFields.phoneNumber()
+const optedOutUserPhoneNumber = fakerFields.phoneNumber()
 
 jest.mock('@/utils/shared/sleep', () => ({
   sleep: jest.fn().mockImplementation(() => Promise.resolve()),
@@ -28,7 +36,14 @@ jest.mock('@/inngest/functions/sms/utils/flagInvalidPhoneNumbers', () => ({
   flagInvalidPhoneNumbers: jest.fn(),
 }))
 
-const invalidPhoneNumber = fakerFields.phoneNumber()
+jest.mock('@/utils/server/sms/utils', () => ({
+  getUserByPhoneNumber: jest.fn(),
+  countSegments: jest.fn().mockImplementation(() => 1),
+}))
+
+jest.mock('@/utils/server/sms/actions', () => ({
+  optOutUser: jest.fn(),
+}))
 
 jest.mock('@/utils/server/sms', () => ({
   ...jest.requireActual('@/utils/server/sms'),
@@ -38,6 +53,15 @@ jest.mock('@/utils/server/sms', () => ({
         new SendSMSError(
           {
             code: INVALID_PHONE_NUMBER_CODE,
+          },
+          to,
+        ),
+      )
+    } else if (to === optedOutUserPhoneNumber) {
+      return Promise.reject(
+        new SendSMSError(
+          {
+            code: IS_UNSUBSCRIBED_USER_CODE,
           },
           to,
         ),
@@ -125,5 +149,18 @@ describe('enqueueMessages function', () => {
     expect(segments).toBe(expectedSegments)
 
     expect(sendSMS).toBeCalledTimes(expectedMessages + 1)
+  })
+
+  it('Should opt out user if got unsubscribed user error', async () => {
+    await enqueueMessages([
+      ...mockedPayload,
+      {
+        phoneNumber: optedOutUserPhoneNumber,
+        messages: [getFakeMessage()],
+      },
+    ])
+
+    expect(optOutUser).toBeCalledTimes(1)
+    expect(optOutUser).toBeCalledWith(optedOutUserPhoneNumber, undefined)
   })
 })
