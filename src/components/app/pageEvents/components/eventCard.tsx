@@ -13,7 +13,7 @@ export function EventCard({ event }: EventCardProps) {
 }
 
 function EventCardContent({ event }: EventCardProps) {
-  const formattedEventDate = format(new Date(event.date), 'MMMM d, yyyy')
+  const formattedEventDate = format(new Date(`${event.date}T00:00`), 'MMMM d, yyyy')
 
   return (
     <div className="flex w-full max-w-[856px] flex-col gap-2 rounded-2xl bg-backgroundAlternate p-6 pt-4 text-left transition hover:drop-shadow-lg lg:flex-row lg:items-center">
