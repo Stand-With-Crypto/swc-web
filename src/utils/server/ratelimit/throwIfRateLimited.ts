@@ -5,6 +5,7 @@ import {
   authenticatedRateLimiter,
   unauthenticatedRatelimiter,
 } from '@/utils/server/ratelimit/ratelimiter'
+import { isCypress } from '@/utils/shared/executionEnvironment'
 
 interface ThrowIfRateLimitedProps {
   context?: 'unauthenticated' | 'authenticated'
@@ -43,6 +44,14 @@ export function getRequestRateLimiter({
   context = 'unauthenticated',
 }: ThrowIfRateLimitedProps = {}) {
   let hasRegisteredTry = false
+
+  if (isCypress) {
+    return {
+      triggerRateLimiterAtMostOnce: async () => {
+        return
+      },
+    }
+  }
 
   return {
     triggerRateLimiterAtMostOnce: async () => {
