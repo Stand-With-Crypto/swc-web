@@ -19,7 +19,7 @@ export function QuantityInput({ value, onChange, onIncrement, onDecrement }: Qua
   const handleInputChange = ({
     target: { value: _value },
   }: React.ChangeEvent<HTMLInputElement>) => {
-    if (_value.includes('.') || _value.includes(',')) return
+    if (/[.,]/.test(_value)) return
 
     const newValue = Number(_value)
     if (newValue > 0 && newValue < MAX_QUANTITY) {
