@@ -64,6 +64,7 @@ async function processEventChunk(messageId: string, events: EmailEvent[]) {
       ...(eventEntry.useragent && { 'User Agent': eventEntry.useragent }),
       ...(eventEntry.url && { Url: eventEntry.url }),
       ...(eventEntry.variant && { Variant: eventEntry.variant }),
+      ...(eventEntry.category && { Category: eventEntry.category }),
     })
 
     if (eventEntry.event === EmailEventName.UNSUBSCRIBE) {
