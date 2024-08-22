@@ -12,7 +12,7 @@ import { createCommunication, createCommunicationJourneys } from './utils/commun
 export const WELCOME_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME =
   'app/user.communication/welcome.sms'
 
-export const WELCOME_SMS_COMMUNICATION_JOURNEY_INNGEST_FUNCTION_ID =
+const WELCOME_SMS_COMMUNICATION_JOURNEY_INNGEST_FUNCTION_ID =
   'user-communication/welcome-sms'
 
 const MAX_RETRY_COUNT = 3
