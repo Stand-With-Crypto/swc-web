@@ -1,6 +1,8 @@
 import { z } from 'zod'
 
+import { getLogger } from '@/utils/shared/logger'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
+import { apiUrls, fullUrl } from '@/utils/shared/urls'
 
 import { messagingClient } from './messagingClient'
 import { SendSMSError } from './SendSMSError'
@@ -14,6 +16,8 @@ export const zodSendSMSSchema = z.object({
 
 export type SendSMSPayload = z.infer<typeof zodSendSMSSchema>
 
+const logger = getLogger('sendSMS')
+
 export const sendSMS = async (payload: SendSMSPayload) => {
   const validatedInput = zodSendSMSSchema.safeParse(payload)
 
@@ -24,9 +28,14 @@ export const sendSMS = async (payload: SendSMSPayload) => {
   const { body, to } = validatedInput.data
 
   try {
+    const statusCallback = fullUrl(apiUrls.smsStatusCallback())
+
+    logger.info(statusCallback)
+
     const message = await messagingClient.messages.create({
       from: TWILIO_PHONE_NUMBER,
       body,
+      statusCallback,
       to,
     })
 
