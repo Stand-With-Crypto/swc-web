@@ -60,13 +60,16 @@ async function _actionUpdateUserHasOptedInToSMS(data: UpdateUserHasOptedInToSMSP
       .flush(),
   )
 
+  if (phoneNumber) {
+    await optInUser(phoneNumber, user)
+  }
+
   const updatedUser = await prismaClient.user.update({
     where: {
       id: user.id,
     },
     data: {
       phoneNumber,
-      hasOptedInToSms: !!phoneNumber,
     },
     include: {
       primaryUserCryptoAddress: true,
@@ -75,10 +78,6 @@ async function _actionUpdateUserHasOptedInToSMS(data: UpdateUserHasOptedInToSMSP
   })
 
   await handleCapitolCanarySMSUpdate(updatedUser)
-
-  if (phoneNumber) {
-    await optInUser(phoneNumber, user)
-  }
 
   return {
     user: getClientUser(updatedUser),
@@ -94,7 +93,7 @@ async function handleCapitolCanarySMSUpdate(
     campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
     user: updatedUser,
     opts: {
-      isSmsOptin: updatedUser.hasOptedInToSms,
+      isSmsOptin: true,
       // shouldSendSmsOptinConfirmation: true,
     },
   }

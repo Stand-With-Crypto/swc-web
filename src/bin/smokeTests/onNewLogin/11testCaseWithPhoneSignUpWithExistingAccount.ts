@@ -1,4 +1,4 @@
-import { UserEmailAddressSource } from '@prisma/client'
+import { SMSStatus, UserEmailAddressSource } from '@prisma/client'
 
 import { mockCreateUserInput } from '@/mocks/models/mockUser'
 import { mockCreateUserEmailAddressInput } from '@/mocks/models/mockUserEmailAddress'
@@ -13,8 +13,7 @@ export const testCaseWithPhoneSignUpWithExistingAccount: TestCase = {
       data: {
         ...mockCreateUserInput({ withData: true }),
         phoneNumber: '+15555555555',
-        hasOptedInToSms: true,
-        hasRepliedToOptInSms: true,
+        smsStatus: SMSStatus.NOT_OPTED_IN,
         userEmailAddresses: {
           create: {
             ...mockCreateUserEmailAddressInput(),

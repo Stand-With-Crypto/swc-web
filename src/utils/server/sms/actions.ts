@@ -29,11 +29,16 @@ export async function optInUser(phoneNumber: string, user: User) {
     return
   }
 
+  const newSMSStatus =
+    smsProvider === SMSProviders.TWILIO
+      ? SMSStatus.OPTED_IN
+      : SMSStatus.OPTED_IN_PENDING_DOUBLE_OPT_IN
+
   // If user opted-out, the only way to opt-back is by sending us a UNSTOP keyword
   if ([SMSStatus.NOT_OPTED_IN, SMSStatus.OPTED_IN_PENDING_DOUBLE_OPT_IN].includes(user.smsStatus)) {
     await prismaClient.user.updateMany({
       data: {
-        smsStatus: SMSStatus.OPTED_IN,
+        smsStatus: newSMSStatus,
       },
       where: {
         phoneNumber: normalizedPhoneNumber,
@@ -57,6 +62,7 @@ export async function optInUser(phoneNumber: string, user: User) {
     })
       .track('User SMS Opt-In', {
         provider: smsProvider,
+        smsStatus: newSMSStatus,
       })
       .flush(),
   )

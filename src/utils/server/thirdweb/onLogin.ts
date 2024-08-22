@@ -5,6 +5,7 @@ import {
   CapitolCanaryInstance,
   DataCreationMethod,
   Prisma,
+  SMSStatus,
   User,
   UserActionOptInType,
   UserActionType,
@@ -517,8 +518,7 @@ async function createUser({
       informationVisibility: UserInformationVisibility.ANONYMOUS,
       hasOptedInToEmails: hasSignedInWithEmail,
       hasOptedInToMembership: false,
-      hasOptedInToSms: false,
-      hasRepliedToOptInSms: false,
+      smsStatus: SMSStatus.NOT_OPTED_IN,
       referralId: generateReferralId(),
       userSessions: {
         create: { id: sessionId ?? undefined },
@@ -541,8 +541,7 @@ async function maybeUpsertPhoneNumber({
     where: { id: user.id },
     data: {
       phoneNumber: embeddedWalletUserDetails.phone,
-      hasOptedInToSms: true,
-      hasRepliedToOptInSms: true,
+      smsStatus: SMSStatus.OPTED_IN,
     },
   })
 }

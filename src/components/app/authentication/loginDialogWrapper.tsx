@@ -1,7 +1,6 @@
 'use client'
 
 import React from 'react'
-import { SMSStatus } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import dynamic from 'next/dynamic'
 import useSWR from 'swr'
@@ -193,7 +192,7 @@ export function UnauthenticatedSection({
       return
     }
 
-    if (user.phoneNumber && user.hasOptedInToSms && user.smsStatus === SMSStatus.NOT_OPTED_IN) {
+    if (user.phoneNumber) {
       await actionUpdateUserHasOptedInToSMS({
         phoneNumber: user.phoneNumber,
       })

@@ -1,6 +1,7 @@
 import {
   Address,
   Prisma,
+  SMSStatus,
   SupportedUserCryptoNetwork,
   User,
   UserActionOptInType,
@@ -32,6 +33,7 @@ import {
   getServerPeopleAnalytics,
 } from '@/utils/server/serverAnalytics'
 import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
+import { optInUser } from '@/utils/server/sms/actions'
 import { getUserAcquisitionFieldsForVerifiedSWCPartner } from '@/utils/server/verifiedSWCPartner/attribution'
 import { VerifiedSWCPartner } from '@/utils/server/verifiedSWCPartner/constants'
 import { getFormattedDescription } from '@/utils/shared/address'
@@ -39,6 +41,7 @@ import { maybeGetCongressionalDistrictFromAddress } from '@/utils/shared/getCong
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
+import { smsProvider, SMSProviders } from '@/utils/shared/smsProvider'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
 import { zodAddress } from '@/validation/fields/zodAddress'
 import { zodEmailAddress } from '@/validation/fields/zodEmailAddress'
@@ -175,11 +178,12 @@ export async function handleExternalUserActionOptIn(
   }
 
   if (existingAction) {
-    if (!existingAction.user.hasOptedInToSms && input.hasOptedInToReceiveSMSFromSWC) {
-      await prismaClient.user.update({
-        where: { id: existingAction.user.id },
-        data: { hasOptedInToSms: true },
-      })
+    if (
+      existingAction.user.smsStatus === SMSStatus.NOT_OPTED_IN &&
+      input.hasOptedInToReceiveSMSFromSWC
+    ) {
+      await optInUser(user.phoneNumber, existingAction.user)
+
       await inngest.send({
         name: CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME,
         data: capitolCanaryPayload,
@@ -320,6 +324,15 @@ async function maybeUpsertUser({
     ? UserEmailAddressSource.VERIFIED_THIRD_PARTY
     : UserEmailAddressSource.USER_ENTERED
 
+  let newSMSStatus: SMSStatus = SMSStatus.NOT_OPTED_IN
+
+  if (hasOptedInToReceiveSMSFromSWC) {
+    newSMSStatus =
+      smsProvider === SMSProviders.TWILIO
+        ? SMSStatus.OPTED_IN
+        : SMSStatus.OPTED_IN_PENDING_DOUBLE_OPT_IN
+  }
+
   if (existingUser) {
     const updatePayload: Prisma.UserUpdateInput = {
       ...(firstName && !existingUser.firstName && { firstName }),
@@ -329,7 +342,7 @@ async function maybeUpsertUser({
       ...(hasOptedInToMembership &&
         !existingUser.hasOptedInToMembership && { hasOptedInToMembership }),
       ...(hasOptedInToReceiveSMSFromSWC &&
-        !existingUser.hasOptedInToSms && { hasOptedInToSms: hasOptedInToReceiveSMSFromSWC }),
+        existingUser.smsStatus !== newSMSStatus && { smsStatus: newSMSStatus }),
       ...(emailAddress &&
         existingUser.userEmailAddresses.every(addr => addr.emailAddress !== emailAddress) && {
           userEmailAddresses: {
@@ -437,8 +450,7 @@ async function maybeUpsertUser({
       phoneNumber,
       hasOptedInToEmails: true,
       hasOptedInToMembership: hasOptedInToMembership || false,
-      hasOptedInToSms: hasOptedInToReceiveSMSFromSWC || false,
-      hasRepliedToOptInSms: false,
+      smsStatus: newSMSStatus,
       userEmailAddresses: {
         create: {
           emailAddress,

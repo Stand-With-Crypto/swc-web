@@ -1,4 +1,6 @@
 'use client'
+import { SMSStatus } from '@prisma/client'
+
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { SMSOptInCTA } from '@/components/app/smsOptInCTA'
 import { OPEN_UPDATE_USER_PROFILE_FORM_QUERY_PARAM_KEY } from '@/components/app/updateUserProfileForm/queryParamConfig'
@@ -25,7 +27,7 @@ export function HeroCTA() {
       return unauthenticatedContent
     }
 
-    if (!user.phoneNumber || !user.hasOptedInToSms) {
+    if (!user.phoneNumber || user.smsStatus === SMSStatus.NOT_OPTED_IN) {
       return (
         <SMSOptInCTA
           initialValues={{
@@ -36,7 +38,6 @@ export function HeroCTA() {
               user: {
                 ...profileReq.data!.user!,
                 phoneNumber,
-                hasOptedInToSms: true,
               },
             })
           }

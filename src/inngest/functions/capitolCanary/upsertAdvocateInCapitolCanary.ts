@@ -1,4 +1,4 @@
-import { CapitolCanaryInstance, User } from '@prisma/client'
+import { CapitolCanaryInstance, SMSStatus, User } from '@prisma/client'
 import { NonRetriableError } from 'inngest'
 
 import { CAPITOL_CANARY_CHECK_SMS_OPT_IN_REPLY_EVENT_NAME } from '@/inngest/functions/capitolCanary/checkSMSOptInReply'
@@ -79,7 +79,7 @@ export const upsertAdvocateInCapitolCanaryWithInngest = inngest.createFunction(
       if (
         formattedCreateRequest.smsOptin === 1 &&
         data.user.phoneNumber.length > 0 &&
-        !data.user.hasRepliedToOptInSms
+        data.user.smsStatus === SMSStatus.OPTED_IN_PENDING_DOUBLE_OPT_IN
       ) {
         await step.sendEvent('capitol-canary.upsert-advocate.send-sms-reply-event', {
           name: CAPITOL_CANARY_CHECK_SMS_OPT_IN_REPLY_EVENT_NAME,
@@ -125,7 +125,7 @@ export const upsertAdvocateInCapitolCanaryWithInngest = inngest.createFunction(
     if (
       formattedUpdateRequest.smsOptin === 1 &&
       data.user.phoneNumber.length > 0 &&
-      !data.user.hasRepliedToOptInSms
+      data.user.smsStatus === SMSStatus.OPTED_IN_PENDING_DOUBLE_OPT_IN
     ) {
       await step.sendEvent('capitol-canary.upsert-advocate.send-sms-reply-event', {
         name: CAPITOL_CANARY_CHECK_SMS_OPT_IN_REPLY_EVENT_NAME,

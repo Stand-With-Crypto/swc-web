@@ -63,7 +63,7 @@ export function UpdateUserProfileForm({
     emailAddress: user.primaryUserEmailAddress?.emailAddress || '',
     phoneNumber: user.phoneNumber || '',
     hasOptedInToMembership: user.hasOptedInToMembership,
-    hasOptedInToSms: user.hasOptedInToSms,
+    hasOptedInToSms: user.smsStatus !== 'NOT_OPTED_IN' && user.smsStatus !== 'OPTED_OUT',
     address: user.address
       ? {
           description: user.address.formattedDescription,
@@ -186,7 +186,7 @@ export function UpdateUserProfileForm({
               </FormItem>
             )}
           />
-          {!user.hasRepliedToOptInSms && !user.phoneNumber && (
+          {user.smsStatus !== 'OPTED_IN_HAS_REPLIED' && !user.phoneNumber && (
             <FormField
               control={form.control}
               name="phoneNumber"
@@ -244,7 +244,9 @@ export function UpdateUserProfileForm({
           <FormGeneralErrorMessage control={form.control} />
         </div>
         <div className="flex flex-col justify-center gap-4 max-md:!mt-auto md:mt-4">
-          <Collapsible open={!!phoneNumberValue && !user.hasRepliedToOptInSms && !user.phoneNumber}>
+          <Collapsible
+            open={!!phoneNumberValue && user.smsStatus === 'NOT_OPTED_IN' && !user.phoneNumber}
+          >
             <CollapsibleContent className="AnimateCollapsibleContent">
               <FormDescription className="text-center lg:text-left">
                 By clicking Next, you consent to receive recurring texts from Stand With Crypto. You

@@ -61,7 +61,7 @@ export function UpdateUserProfileForm({
     emailAddress: user.primaryUserEmailAddress?.emailAddress || '',
     phoneNumber: user.phoneNumber || '',
     hasOptedInToMembership: user.hasOptedInToMembership,
-    hasOptedInToSms: user.hasOptedInToSms,
+    hasOptedInToSms: user.smsStatus !== 'NOT_OPTED_IN' && user.smsStatus !== 'OPTED_OUT',
     address: user.address
       ? {
           description: user.address.formattedDescription,
@@ -168,7 +168,7 @@ export function UpdateUserProfileForm({
               )}
             />
           )}
-          {!user.hasRepliedToOptInSms && !user.phoneNumber && (
+          {user.smsStatus !== 'OPTED_IN_HAS_REPLIED' && !user.phoneNumber && (
             <FormField
               control={form.control}
               name="phoneNumber"
@@ -249,7 +249,9 @@ export function UpdateUserProfileForm({
             Create account
           </Button>
           <Collapsible
-            open={!!form.watch('phoneNumber') && !user.hasRepliedToOptInSms && !user.phoneNumber}
+            open={
+              !!form.watch('phoneNumber') && user.smsStatus === 'NOT_OPTED_IN' && !user.phoneNumber
+            }
           >
             <CollapsibleContent className="AnimateCollapsibleContent">
               <FormDescription className="text-center text-xs font-normal leading-4 text-muted-foreground">

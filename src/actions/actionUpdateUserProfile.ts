@@ -163,6 +163,10 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
       .flush(),
   )
 
+  if (hasOptedInToSms && phoneNumber) {
+    await optInUser(phoneNumber, user)
+  }
+
   const updatedUser = await prismaClient.user.update({
     where: {
       id: user.id,
@@ -172,7 +176,6 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
       lastName,
       phoneNumber,
       hasOptedInToMembership,
-      hasOptedInToSms,
       hasValidPhoneNumber: true,
       addressId: address?.id || null,
       primaryUserEmailAddressId: primaryUserEmailAddress?.id || null,
@@ -187,10 +190,6 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
       primaryUserCryptoAddress: true,
     },
   })
-
-  if (hasOptedInToSms && phoneNumber) {
-    await optInUser(phoneNumber, user)
-  }
 
   await handleCapitolCanaryAdvocateUpsert(updatedUser, primaryUserEmailAddress, user)
   await claimOptInNFTIfNotClaimed({
@@ -258,7 +257,7 @@ async function handleCapitolCanaryAdvocateUpsert(
       oldUser.address?.googlePlaceId !== updatedUser.address?.googlePlaceId ||
       oldUser.primaryUserEmailAddress?.emailAddress !== primaryUserEmailAddress?.emailAddress ||
       oldUser.phoneNumber !== updatedUser.phoneNumber ||
-      oldUser.hasOptedInToSms !== updatedUser.hasOptedInToSms ||
+      oldUser.smsStatus !== updatedUser.smsStatus ||
       (!oldUser.hasOptedInToMembership && updatedUser.hasOptedInToMembership)) &&
     (primaryUserEmailAddress || updatedUser.phoneNumber)
   ) {
@@ -271,7 +270,7 @@ async function handleCapitolCanaryAdvocateUpsert(
       userEmailAddress: primaryUserEmailAddress, // Using new email here.
       opts: {
         isEmailOptin: true,
-        isSmsOptin: updatedUser.hasOptedInToSms,
+        isSmsOptin: updatedUser.smsStatus === SMSStatus.OPTED_IN_PENDING_DOUBLE_OPT_IN,
       },
     }
     if (!oldUser.hasOptedInToMembership && updatedUser.hasOptedInToMembership) {

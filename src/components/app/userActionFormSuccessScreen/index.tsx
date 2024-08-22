@@ -1,5 +1,6 @@
 'use client'
 
+import { SMSStatus } from '@prisma/client'
 import { noop } from 'lodash-es'
 import { useSWRConfig } from 'swr'
 
@@ -36,7 +37,7 @@ export function UserActionFormSuccessScreen(props: UserActionFormSuccessScreenPr
     return <JoinSWC onClose={onClose} />
   }
 
-  if (!user.phoneNumber || !user.hasOptedInToSms) {
+  if (!user.phoneNumber || user.smsStatus === SMSStatus.NOT_OPTED_IN) {
     if (isLoading) {
       return <SMSOptInContent.Skeleton />
     }
