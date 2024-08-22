@@ -1,6 +1,7 @@
 import React from 'react'
 import * as Sentry from '@sentry/nextjs'
 import Cookies from 'js-cookie'
+import { usePathname } from 'next/navigation'
 import { useActiveWallet, useDisconnect } from 'thirdweb/react'
 
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
@@ -16,27 +17,32 @@ export function useSession() {
 
   const isLoading = fullProfileRequest.isLoading
 
-  const user = fullProfileRequest.data?.user
-  const isLoggedIn = thirdwebSession.isLoggedIn || !!user?.id
+  const emailAddress = fullProfileRequest.data?.user?.primaryUserEmailAddress
+  const isLoggedIn = thirdwebSession.isLoggedIn || !!emailAddress?.isVerified
   const isLoggedInThirdweb = thirdwebSession.isLoggedIn
   return {
     isLoading: !isLoggedIn && isLoading,
     isLoggedIn,
     isLoggedInThirdweb,
-    user,
+    user: fullProfileRequest.data?.user,
   }
 }
 
 export function useSessionControl() {
   const { logoutAndDisconnect } = useThirdwebSession()
 
+  const pathname = usePathname()
   const internalUrls = useIntlUrls()
 
   const handleLogoutSuccess = React.useCallback(() => {
     Cookies.set(USER_SESSION_ID_COOKIE_NAME, generateUserSessionId())
 
-    window.location.replace(internalUrls.home())
-  }, [internalUrls])
+    if (pathname === internalUrls.profile()) {
+      window.location.replace(internalUrls.home())
+    } else {
+      window.location.reload()
+    }
+  }, [internalUrls, pathname])
 
   const logout = React.useCallback(async () => {
     // This is used to trigger the login button to update the isLoggingOut state to true
