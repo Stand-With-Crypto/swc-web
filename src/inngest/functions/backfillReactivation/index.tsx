@@ -13,6 +13,7 @@ import { getLogger } from '@/utils/shared/logger'
 interface ScriptPayload {
   testEmail?: string
   persist?: boolean
+  limit?: number
 }
 
 const BACKFILL_REACTIVATION_INNGEST_EVENT_NAME = 'script/backfill-reactivation'
@@ -30,7 +31,7 @@ export const backfillReactivationWithInngest = inngest.createFunction(
   { event: BACKFILL_REACTIVATION_INNGEST_EVENT_NAME },
   async ({ event, step }) => {
     const payload = event.data as ScriptPayload
-    const { testEmail, persist } = payload
+    const { testEmail, persist, limit } = payload
 
     const usersWithoutCommunicationJourneyCount = await step.run(
       'get-users-without-communication-journey-count',
@@ -56,6 +57,7 @@ export const backfillReactivationWithInngest = inngest.createFunction(
               },
             },
           },
+          take: limit,
         })
       },
     )
@@ -71,9 +73,9 @@ export const backfillReactivationWithInngest = inngest.createFunction(
       }
     }
 
-    const numBatches = Math.ceil(
-      usersWithoutCommunicationJourneyCount / BACKFILL_SESSION_ID_BATCH_SIZE,
-    )
+    const numBatches = limit
+      ? 1
+      : Math.ceil(usersWithoutCommunicationJourneyCount / BACKFILL_SESSION_ID_BATCH_SIZE)
 
     let totalResult: {
       message: string
@@ -97,7 +99,10 @@ export const backfillReactivationWithInngest = inngest.createFunction(
 
       const batchResult = await step.run(`backfill-reactivation-email-batch-${i}`, async () => {
         const usersWithoutCommunicationJourney = await prismaClient.user.findMany({
-          take: BACKFILL_SESSION_ID_BATCH_SIZE,
+          take: limit || BACKFILL_SESSION_ID_BATCH_SIZE,
+          orderBy: {
+            datetimeCreated: 'desc',
+          },
           where: {
             ...(testEmail
               ? {
