@@ -177,13 +177,15 @@ export async function handleExternalUserActionOptIn(
     },
   }
 
+  if (input.hasOptedInToReceiveSMSFromSWC) {
+    await smsActions.optInUser(user.phoneNumber, user)
+  }
+
   if (existingAction) {
     if (
       existingAction.user.smsStatus === SMSStatus.NOT_OPTED_IN &&
       input.hasOptedInToReceiveSMSFromSWC
     ) {
-      await smsActions.optInUser(user.phoneNumber, existingAction.user)
-
       await inngest.send({
         name: CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME,
         data: capitolCanaryPayload,
