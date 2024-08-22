@@ -13,7 +13,7 @@ export const testCaseWithPhoneSignUpWithExistingAccount: TestCase = {
       data: {
         ...mockCreateUserInput({ withData: true }),
         phoneNumber: '+15555555555',
-        smsStatus: SMSStatus.NOT_OPTED_IN,
+        smsStatus: SMSStatus.OPTED_IN_HAS_REPLIED,
         userEmailAddresses: {
           create: {
             ...mockCreateUserEmailAddressInput(),

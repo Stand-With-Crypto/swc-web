@@ -5,7 +5,6 @@ import * as Sentry from '@sentry/nextjs'
 import dynamic from 'next/dynamic'
 import useSWR from 'swr'
 
-import { actionUpdateUserHasOptedInToSMS } from '@/actions/actionUpdateUserHasOptedInSMS'
 import { ClientUnidentifiedUser } from '@/clientModels/clientUser/clientUser'
 import {
   ANALYTICS_NAME_LOGIN,
@@ -190,12 +189,6 @@ export function UnauthenticatedSection({
       )
       setDialogOpen(false)
       return
-    }
-
-    if (user.phoneNumber) {
-      await actionUpdateUserHasOptedInToSMS({
-        phoneNumber: user.phoneNumber,
-      })
     }
 
     const { wasRecentlyUpdated } = user.primaryUserCryptoAddress
