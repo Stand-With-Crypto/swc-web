@@ -1,3 +1,4 @@
+import { SMSStatus } from '@prisma/client'
 import { NonRetriableError } from 'inngest'
 
 import { onFailureCapitolCanary } from '@/inngest/functions/capitolCanary/onFailureCapitolCanary'
@@ -53,7 +54,7 @@ async function fetchMinimalSMSAdvocatesFromCapitolCanary(
 }
 
 /**
- * This function is used to backfill the `hasRepliedToOptInSms` field for users who have replied to the SMS opt-in message.
+ * This function is used to backfill the `smsStatus` field for users who have replied to the SMS opt-in message.
  * We fan-out the process in page intervals of 100, where each batch will process 10500 advocates. We process each batch in parallel.
  * Fanning-out is performed to avoid hitting the 1000 step limit per Inngest function.
  */
@@ -160,7 +161,7 @@ export const backfillSMSOptInReplyWithInngestUpdateBatchOfUsers = inngest.create
               },
             },
             data: {
-              hasRepliedToOptInSms: true,
+              smsStatus: SMSStatus.OPTED_IN_HAS_REPLIED,
             },
           })
           return minimalAdvocates.advocateIdsWithSubscribedPhones.length
