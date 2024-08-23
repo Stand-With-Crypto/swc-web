@@ -9,14 +9,11 @@ import { optOutUser, optUserBackIn } from '@/utils/server/sms/actions'
 import { getUserByPhoneNumber, verifySignature } from '@/utils/server/sms/utils'
 // TODO: Uncomment this after we start using Messaging Service
 // import * as messages from '@/utils/server/sms/messages'
-import { getLogger } from '@/utils/shared/logger'
 
 const SWC_STOP_SMS_KEYWORD = process.env.SWC_STOP_SMS_KEYWORD?.toUpperCase()
 const SWC_UNSTOP_SMS_KEYWORD = process.env.SWC_UNSTOP_SMS_KEYWORD?.toUpperCase()
 
-const logger = getLogger('sms-events')
-
-interface SmsEvent {
+interface SMSMessageEvent {
   ToCountry: string
   ToState: string
   SmsMessageSid: string
@@ -39,20 +36,13 @@ interface SmsEvent {
 }
 
 export const POST = withRouteMiddleware(async (request: NextRequest) => {
-  const [isVerified, body] = await verifySignature<SmsEvent>(request)
+  const [isVerified, body] = await verifySignature<SMSMessageEvent>(request)
 
   if (!isVerified) {
-    return NextResponse.json(
-      {
-        error: 'Unauthorized',
-      },
-      {
-        status: 401,
-      },
-    )
+    return new NextResponse('unauthorized', {
+      status: 401,
+    })
   }
-
-  logger.info('body', JSON.stringify(body))
 
   const phoneNumber = body.From
   const user = await getUserByPhoneNumber(phoneNumber)
