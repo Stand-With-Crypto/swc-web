@@ -154,7 +154,9 @@ export const getClientUserAction = ({
       : null,
   }
 
-  const actionTypes: { [key in UserActionType]: () => ClientModel<ClientUserAction> } = {
+  const actionTypes: {
+    [key in UserActionType]: () => ClientModel<ClientUserAction>
+  } = {
     [UserActionType.OPT_IN]: () => {
       const { optInType } = getRelatedModel(record, 'userActionOptIn')
       const optInFields: ClientUserActionOptIn = { optInType, actionType: UserActionType.OPT_IN }

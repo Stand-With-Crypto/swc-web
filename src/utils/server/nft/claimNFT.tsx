@@ -37,6 +37,7 @@ import {
   UserActionRsvpEventCampaignName,
   UserActionTweetAtPersonCampaignName,
   UserActionTweetCampaignName,
+  UserActionViewKeyRacesCampaignName,
   UserActionVoterAttestationCampaignName,
   UserActionVoterRegistrationCampaignName,
 } from '@/utils/shared/userActionCampaigns'
@@ -84,7 +85,7 @@ export const ACTION_NFT_SLUG: Record<
     [UserActionRsvpEventCampaignName.DEFAULT]: null,
   },
   [UserActionType.VIEW_KEY_RACES]: {
-    [UserActionRsvpEventCampaignName.DEFAULT]: null,
+    [UserActionViewKeyRacesCampaignName['2024_ELECTION']]: null,
   },
 }
 

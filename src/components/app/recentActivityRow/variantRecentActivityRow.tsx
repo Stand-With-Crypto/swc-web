@@ -265,6 +265,12 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
           ),
         }
       }
+      case UserActionType.VIEW_KEY_RACES: {
+        return {
+          onFocusContent: () => null,
+          children: null,
+        }
+      }
     }
     return gracefullyError({
       // @ts-ignore
