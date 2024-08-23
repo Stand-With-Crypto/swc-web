@@ -17,9 +17,8 @@ export function useSession() {
 
   const isLoading = fullProfileRequest.isLoading
   const user = fullProfileRequest.data?.user
-  const hasOptInUserAction = user?.userActions?.some(
-    userAction => userAction.actionType === UserActionType.OPT_IN,
-  )
+  const hasOptInUserAction =
+    user?.userActions?.some(userAction => userAction.actionType === UserActionType.OPT_IN) ?? false
 
   const isLoggedIn = thirdwebSession.isLoggedIn || hasOptInUserAction
   const isLoggedInThirdweb = thirdwebSession.isLoggedIn
