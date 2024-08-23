@@ -265,6 +265,12 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
           ),
         }
       }
+      case UserActionType.VIEW_KEY_RACES: {
+        return {
+          onFocusContent: undefined,
+          children: <MainText>Someone investigated the key races in their district</MainText>,
+        }
+      }
     }
     return gracefullyError({
       // @ts-ignore
