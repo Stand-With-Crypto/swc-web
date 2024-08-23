@@ -61,7 +61,7 @@ export function UpdateUserProfileForm({
     emailAddress: user.primaryUserEmailAddress?.emailAddress || '',
     phoneNumber: user.phoneNumber || '',
     hasOptedInToMembership: user.hasOptedInToMembership,
-    hasOptedInToSms: user.smsStatus !== 'NOT_OPTED_IN' && user.smsStatus !== 'OPTED_OUT',
+    optedInToSms: user.smsStatus !== 'NOT_OPTED_IN' && user.smsStatus !== 'OPTED_OUT',
     address: user.address
       ? {
           description: user.address.formattedDescription,
@@ -98,7 +98,7 @@ export function UpdateUserProfileForm({
               analyticsProps: {
                 ...(address ? convertAddressToAnalyticsProperties(address) : {}),
               },
-              payload: { ...values, address, hasOptedInToSms: !!values.phoneNumber },
+              payload: { ...values, address, optedInToSms: !!values.phoneNumber },
             },
             payload => actionUpdateUserProfile(payload),
           )
@@ -182,8 +182,8 @@ export function UpdateUserProfileForm({
                       {...field}
                       onChange={e => {
                         field.onChange(e)
-                        if (!e.target.value && form.getValues('hasOptedInToSms')) {
-                          form.setValue('hasOptedInToSms', false)
+                        if (!e.target.value && form.getValues('optedInToSms')) {
+                          form.setValue('optedInToSms', false)
                         }
                       }}
                     />

@@ -106,14 +106,8 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
       address: true,
     },
   })
-  const {
-    firstName,
-    lastName,
-    emailAddress,
-    phoneNumber,
-    hasOptedInToSms,
-    hasOptedInToMembership,
-  } = validatedFields.data
+  const { firstName, lastName, emailAddress, phoneNumber, optedInToSms, hasOptedInToMembership } =
+    validatedFields.data
   const address = validatedFields.data.address
     ? await prismaClient.address.upsert({
         where: {
@@ -158,7 +152,7 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
         $phone: phoneNumber,
         $name: userFullName(validatedFields.data),
         'Has Opted In To Membership': hasOptedInToMembership,
-        'Has Opted In To Sms': hasOptedInToSms,
+        'Has Opted In To Sms': optedInToSms,
       })
       .flush(),
   )
@@ -177,7 +171,7 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
       primaryUserEmailAddressId: primaryUserEmailAddress?.id || null,
       // If the user removes their phone number and the current smsStatus is not OPTED_OUT we change the smsStatus to NOT_OPTED_IN
       smsStatus:
-        (!hasOptedInToSms || !phoneNumber) && user.smsStatus !== SMSStatus.OPTED_OUT
+        (!optedInToSms || !phoneNumber) && user.smsStatus !== SMSStatus.OPTED_OUT
           ? SMSStatus.NOT_OPTED_IN
           : user.smsStatus,
     },
@@ -187,7 +181,7 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
     },
   })
 
-  if (hasOptedInToSms && phoneNumber) {
+  if (optedInToSms && phoneNumber) {
     updatedUser.smsStatus = await smsActions.optInUser(phoneNumber, user)
   }
 
