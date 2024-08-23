@@ -11,18 +11,22 @@ import { string, z } from 'zod'
 
 import { getOrCreateSessionIdForUser } from '@/utils/server/externalOptIn/getOrCreateSessionIdForUser'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
+import { getServerAnalytics } from '@/utils/server/serverAnalytics'
 import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
 import { VerifiedSWCPartner } from '@/utils/server/verifiedSWCPartner/constants'
-import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
+import {
+  GetCongressionalDistrictFromAddressSuccess,
+  maybeGetCongressionalDistrictFromAddress,
+} from '@/utils/shared/getCongressionalDistrictFromAddress'
 import { getLogger } from '@/utils/shared/logger'
-import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
+import { UserActionViewKeyRacesCampaignName } from '@/utils/shared/userActionCampaigns'
+import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
 
 export const zodExternalUserActionViewKeyRaces = z.object({
   userId: string(),
   sessionId: string(),
-  usCongressionalDistrict: string(),
   usaState: string(),
+  usCongressionalDistrict: string(),
   campaignName: string().optional(),
 })
 
@@ -57,55 +61,79 @@ export async function handleExternalUserActionViewKeyRaces(
   const {
     userId,
     sessionId,
-    usCongressionalDistrict,
     usaState,
-    campaignName = UserActionOptInCampaignName.DEFAULT,
+    usCongressionalDistrict,
+    campaignName = UserActionViewKeyRacesCampaignName['2024_ELECTION'],
   } = input
   const actionType = UserActionType.VIEW_KEY_RACES
-  const existingAction = await prismaClient.userAction.findFirst({
-    where: {
-      actionType: UserActionType.VIEW_KEY_RACES,
-      ...(usCongressionalDistrict && {
-        userActionViewKeyRaces: {
-          usCongressionalDistrict,
-        },
-      }),
-      ...(usaState && {
-        userActionViewKeyRaces: {
-          usaState,
-        },
-      }),
-      user: {
-        id: userId,
-        userSessions: {
-          some: {
-            id: sessionId,
-          },
-        },
-      },
-    },
-    include: {
-      user: {
-        include: {
-          userSessions: true,
-        },
-      },
-      userActionViewKeyRaces: true,
-    },
-  })
-  const user = existingAction?.user as UserWithRelations
-  const localUser = getLocalUserFromUser(user)
-  const analytics = getServerAnalytics({ userId: user.id, localUser })
-  if (!existingAction?.user) {
-    waitUntil(
-      getServerPeopleAnalytics({ userId: user.id, localUser })
-        .setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
-        .flush(),
-    )
+
+  const userAddress = await getUserAddress(userId)
+  const hasUserAtLeastOptedIn = await hasUserPartakenSomeAction(userId)
+
+  if (!hasUserAtLeastOptedIn) {
+    logger.info('User has not even opted in')
+
+    return {
+      result: ExternalUserActionViewKeyRacesResult.EXISTING_ACTION,
+      resultOptions: Object.values(ExternalUserActionViewKeyRacesResult),
+      sessionId,
+      userId,
+    }
   }
 
-  if (existingAction) {
+  const currentUsaState = userAddress?.address?.administrativeAreaLevel1 ?? usaState
+
+  const maybeCongressionalDistrict = (await maybeGetCongressionalDistrictFromAddress(
+    { countryCode: 'US', formattedDescription: userAddress?.address?.formattedDescription ?? '' },
+    { stateCode: currentUsaState as keyof typeof US_STATE_CODE_TO_DISPLAY_NAME_MAP },
+  )) as GetCongressionalDistrictFromAddressSuccess
+
+  const currentCongressionalDistrict =
+    userAddress?.address?.usCongressionalDistrict ||
+    usCongressionalDistrict ||
+    maybeCongressionalDistrict?.districtNumber?.toString() ||
+    null
+
+  const existingViewKeyRacesAction = await hasUserViewedKeyRaces(userId)
+
+  const user = existingViewKeyRacesAction?.user as UserWithRelations
+  const localUser = getLocalUserFromUser(user)
+  const analytics = getServerAnalytics({ userId: user.id, localUser })
+
+  if (existingViewKeyRacesAction) {
     logger.info('User already has an existing action')
+
+    const shouldUpdateActionWithAddressInfo =
+      existingViewKeyRacesAction.userActionViewKeyRaces?.usaState !== currentUsaState ||
+      existingViewKeyRacesAction.userActionViewKeyRaces?.usCongressionalDistrict !==
+        currentCongressionalDistrict
+
+    const areNewValuesPresent = currentUsaState !== null || currentCongressionalDistrict !== null
+
+    if (shouldUpdateActionWithAddressInfo && areNewValuesPresent) {
+      const updatedUserActionViewKeyRaces = await updateUserActionViewKeyRaces(
+        existingViewKeyRacesAction,
+        currentUsaState,
+        currentCongressionalDistrict,
+      )
+
+      analytics.trackUserActionCreated({
+        actionType,
+        campaignName,
+        creationMethod: input.partner ? 'Verified SWC Partner' : 'Third Party',
+        userState: 'Existing With Updates',
+      })
+
+      waitUntil(analytics.flush())
+
+      return {
+        result: ExternalUserActionViewKeyRacesResult.NEW_ACTION,
+        resultOptions: Object.values(ExternalUserActionViewKeyRacesResult),
+        sessionId: await getOrCreateSessionIdForUser(updatedUserActionViewKeyRaces.user),
+        userId: updatedUserActionViewKeyRaces.user.id,
+      }
+    }
+
     analytics.trackUserActionCreatedIgnored({
       actionType,
       campaignName,
@@ -114,35 +142,23 @@ export async function handleExternalUserActionViewKeyRaces(
       userState: 'Existing',
     })
     waitUntil(analytics.flush())
+
     return {
       result: ExternalUserActionViewKeyRacesResult.EXISTING_ACTION,
       resultOptions: Object.values(ExternalUserActionViewKeyRacesResult),
       sessionId: await getOrCreateSessionIdForUser(user),
-      userId: existingAction.user.id,
+      userId: existingViewKeyRacesAction.user.id,
     }
   }
 
   logger.info('Creating new user action')
-  const userAction = await prismaClient.userAction.create({
-    include: {
-      user: {
-        include: {
-          userSessions: true,
-        },
-      },
-    },
-    data: {
-      actionType,
-      campaignName: UserActionOptInCampaignName.DEFAULT,
-      userActionViewKeyRaces: {
-        create: {
-          usCongressionalDistrict,
-          usaState,
-        },
-      },
-      user: { connect: { id: user.id } },
-    },
-  })
+
+  const newUserActionViewKeyRaces = await createUserActionViewKeyRaces(
+    userId,
+    sessionId,
+    currentUsaState,
+    currentCongressionalDistrict,
+  )
 
   analytics.trackUserActionCreated({
     actionType,
@@ -152,10 +168,126 @@ export async function handleExternalUserActionViewKeyRaces(
   })
 
   waitUntil(analytics.flush())
+
   return {
     result: ExternalUserActionViewKeyRacesResult.NEW_ACTION,
     resultOptions: Object.values(ExternalUserActionViewKeyRacesResult),
-    sessionId: await getOrCreateSessionIdForUser(userAction.user),
-    userId: userAction.user.id,
+    sessionId: await getOrCreateSessionIdForUser(newUserActionViewKeyRaces.user),
+    userId: newUserActionViewKeyRaces.user.id,
   }
+}
+
+async function updateUserActionViewKeyRaces(
+  existingViewKeyRacesAction: Awaited<ReturnType<typeof hasUserViewedKeyRaces>>,
+  usaState: string | null,
+  usCongressionalDistrict: string | null,
+) {
+  const updateData: Record<string, string | undefined> = {
+    ...(usaState !== null && { usaState }),
+    ...(usCongressionalDistrict !== null && { usCongressionalDistrict }),
+  }
+
+  return prismaClient.userAction.update({
+    where: {
+      id: existingViewKeyRacesAction?.id,
+    },
+    data: {
+      userActionViewKeyRaces: {
+        update: updateData,
+      },
+    },
+    include: {
+      user: {
+        include: {
+          userSessions: true,
+        },
+      },
+    },
+  })
+}
+
+async function createUserActionViewKeyRaces(
+  userId: string,
+  sessionId: string,
+  usaState: string | null,
+  usCongressionalDistrict: string | null,
+) {
+  return prismaClient.userAction.create({
+    include: {
+      user: {
+        include: {
+          userSessions: true,
+        },
+      },
+    },
+    data: {
+      actionType: UserActionType.VIEW_KEY_RACES,
+      campaignName: UserActionViewKeyRacesCampaignName['2024_ELECTION'],
+      userActionViewKeyRaces: {
+        create: {
+          usCongressionalDistrict,
+          usaState,
+        },
+      },
+      user: {
+        connect: {
+          id: userId,
+          userSessions: {
+            some: {
+              id: sessionId,
+            },
+          },
+        },
+      },
+    },
+  })
+}
+
+async function hasUserViewedKeyRaces(userId: string) {
+  return prismaClient.userAction.findFirst({
+    where: {
+      actionType: UserActionType.VIEW_KEY_RACES,
+      user: {
+        id: userId,
+      },
+    },
+    include: {
+      userActionViewKeyRaces: true,
+      user: true,
+    },
+  })
+}
+
+async function hasUserPartakenSomeAction(userId: string) {
+  const actionsCount = await prismaClient.userAction.count({
+    where: {
+      actionType: UserActionType.OPT_IN,
+      user: {
+        id: userId,
+      },
+    },
+  })
+
+  return actionsCount > 0
+}
+
+async function getUserAddress(userId: string) {
+  return prismaClient.user.findFirst({
+    where: {
+      id: userId,
+      address: {
+        countryCode: 'US',
+      },
+    },
+    select: {
+      address: {
+        select: {
+          administrativeAreaLevel1: true,
+          usCongressionalDistrict: true,
+          formattedDescription: true,
+          countryCode: true,
+        },
+      },
+    },
+  })
 }

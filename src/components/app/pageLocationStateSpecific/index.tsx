@@ -60,7 +60,7 @@ export function LocationStateSpecific({
       })
     }
 
-    viewKeyRaces()
+    void viewKeyRaces()
   }, [stateCode])
 
   return (

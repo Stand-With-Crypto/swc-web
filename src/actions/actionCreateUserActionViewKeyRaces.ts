@@ -1,28 +1,25 @@
 'use server'
 import 'server-only'
 
-import { User, UserActionType, UserInformationVisibility } from '@prisma/client'
+import { UserActionType } from '@prisma/client'
 import { waitUntil } from '@vercel/functions'
 import { object, string, z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
-import {
-  getMaybeUserAndMethodOfMatch,
-  UserAndMethodOfMatch,
-} from '@/utils/server/getMaybeUserAndMethodOfMatch'
+import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
-import {
-  mapLocalUserToUserDatabaseFields,
-  parseLocalUserFromCookies,
-} from '@/utils/server/serverLocalUser'
+import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
-import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
+import {
+  GetCongressionalDistrictFromAddressSuccess,
+  maybeGetCongressionalDistrictFromAddress,
+} from '@/utils/shared/getCongressionalDistrictFromAddress'
 import { getLogger } from '@/utils/shared/logger'
-import { generateReferralId } from '@/utils/shared/referralId'
-import { USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns'
+import { UserActionViewKeyRacesCampaignName } from '@/utils/shared/userActionCampaigns'
+import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
 
 const logger = getLogger(`actionCreateUserActionViewKeyRaces`)
 
@@ -34,13 +31,6 @@ const createActionViewKeyRacesInputValidationSchema = object({
 export type CreateActionViewKeyRacesInput = z.infer<
   typeof createActionViewKeyRacesInputValidationSchema
 >
-
-interface SharedDependencies {
-  localUser: ReturnType<typeof parseLocalUserFromCookies>
-  sessionId: ReturnType<typeof getUserSessionId>
-  analytics: ReturnType<typeof getServerAnalytics>
-  peopleAnalytics: ReturnType<typeof getServerPeopleAnalytics>
-}
 
 export const actionCreateUserActionViewKeyRaces = withServerActionMiddleware(
   'actionCreateUserActionViewKeyRaces',
@@ -54,6 +44,7 @@ async function _actionCreateUserActionViewKeyRaces(input: CreateActionViewKeyRac
   })
 
   const validatedInput = createActionViewKeyRacesInputValidationSchema.safeParse(input)
+
   if (!validatedInput.success) {
     return {
       errors: validatedInput.error.flatten().fieldErrors,
@@ -63,187 +54,250 @@ async function _actionCreateUserActionViewKeyRaces(input: CreateActionViewKeyRac
   const localUser = parseLocalUserFromCookies()
   const sessionId = getUserSessionId()
 
+  const actionType = UserActionType.VIEW_KEY_RACES
+  const campaignName = UserActionViewKeyRacesCampaignName['2024_ELECTION']
+
   const userMatch = await getMaybeUserAndMethodOfMatch({
     prisma: {
       include: { primaryUserCryptoAddress: true, primaryUserEmailAddress: true, address: true },
     },
   })
 
-  let user = userMatch.user
+  const user = userMatch.user
+
   if (!user) {
-    await triggerRateLimiterAtMostOnce()
-    user = await createUser({ localUser, sessionId })
+    logger.info('User not logged in')
+
+    return
   }
+
+  const userId = user.id
 
   const peopleAnalytics = getServerPeopleAnalytics({
     localUser,
-    userId: user.id,
+    userId,
   })
   const analytics = getServerAnalytics({
-    userId: user.id,
+    userId,
     localUser,
   })
   const beforeFinish = () => Promise.all([analytics.flush(), peopleAnalytics.flush()])
 
-  const recentViewKeyRacesUserAction = await getRecentUserActionByUserId(user.id, validatedInput)
+  const userAddress = await getUserAddress(userId)
+  const hasUserAtLeastOptedIn = await hasUserPartakenSomeAction(userId)
 
-  if (recentViewKeyRacesUserAction) {
-    const hasTheSameInfo =
-      recentViewKeyRacesUserAction.userActionViewKeyRaces?.usaState ===
-        (validatedInput.data?.usaState ?? null) &&
-      recentViewKeyRacesUserAction.userActionViewKeyRaces?.usCongressionalDistrict ===
-        (validatedInput.data?.usCongressionalDistrict ?? null)
+  if (!hasUserAtLeastOptedIn) {
+    logger.info('User has not even opted in')
 
-    if (hasTheSameInfo) {
-      logSpamActionSubmissions({
-        sharedDependencies: { analytics },
+    analytics.track('User has not even opted in', {
+      actionType,
+      campaignName,
+      creationMethod: 'On Site',
+      reason: 'Not Opted In',
+      userState: 'Existing',
+      userId: user.id,
+      sessionId,
+    })
+
+    waitUntil(beforeFinish())
+
+    return { user: getClientUser(user) }
+  }
+
+  const currentUsaState =
+    userAddress?.address?.administrativeAreaLevel1 ?? validatedInput.data?.usaState ?? null
+
+  const maybeCongressionalDistrict = (await maybeGetCongressionalDistrictFromAddress(
+    { countryCode: 'US', formattedDescription: userAddress?.address?.formattedDescription ?? '' },
+    { stateCode: currentUsaState as keyof typeof US_STATE_CODE_TO_DISPLAY_NAME_MAP },
+  )) as GetCongressionalDistrictFromAddressSuccess
+
+  const currentCongressionalDistrict =
+    userAddress?.address?.usCongressionalDistrict ||
+    validatedInput.data?.usCongressionalDistrict ||
+    maybeCongressionalDistrict?.districtNumber?.toString() ||
+    null
+
+  const existingViewKeyRacesAction = await hasUserViewedKeyRaces(userId)
+
+  if (existingViewKeyRacesAction) {
+    logger.info('User already has an existing action')
+
+    const shouldUpdateActionWithAddressInfo =
+      existingViewKeyRacesAction.userActionViewKeyRaces?.usaState !== currentUsaState ||
+      existingViewKeyRacesAction.userActionViewKeyRaces?.usCongressionalDistrict !==
+        currentCongressionalDistrict
+
+    const areNewValuesPresent = currentUsaState !== null || currentCongressionalDistrict !== null
+
+    if (shouldUpdateActionWithAddressInfo && areNewValuesPresent) {
+      await updateUserActionViewKeyRaces(
+        existingViewKeyRacesAction,
+        currentUsaState,
+        currentCongressionalDistrict,
+      )
+
+      analytics.trackUserActionCreated({
+        actionType,
+        campaignName,
+        creationMethod: 'On Site',
+        userState: 'Existing With Updates',
       })
+
       waitUntil(beforeFinish())
 
       return { user: getClientUser(user) }
     }
+
+    analytics.trackUserActionCreatedIgnored({
+      actionType,
+      campaignName,
+      creationMethod: 'On Site',
+      reason: 'Already Exists',
+      userState: 'Existing',
+    })
+
+    waitUntil(analytics.flush())
+
+    return { user: getClientUser(user) }
   }
 
+  logger.info('Creating new user action')
+
   await triggerRateLimiterAtMostOnce()
-  await createAction({
-    user,
-    isNewUser: !userMatch.user,
-    validatedInput: validatedInput.data,
-    userMatch,
-    sharedDependencies: { sessionId, analytics, peopleAnalytics },
+
+  await createUserActionViewKeyRaces(
+    userId,
+    sessionId,
+    currentUsaState,
+    currentCongressionalDistrict,
+  )
+
+  analytics.trackUserActionCreated({
+    actionType,
+    campaignName,
+    creationMethod: 'On Site',
+    userState: 'New',
   })
 
   waitUntil(beforeFinish())
+
   return { user: getClientUser(user) }
 }
 
-async function getRecentUserActionByUserId(
-  userId: User['id'],
-  validatedInput: z.SafeParseSuccess<CreateActionViewKeyRacesInput>,
+async function updateUserActionViewKeyRaces(
+  existingViewKeyRacesAction: Awaited<ReturnType<typeof hasUserViewedKeyRaces>>,
+  usaState: string | null,
+  usCongressionalDistrict: string | null,
 ) {
-  const hasStateInfo = !!validatedInput.data?.usaState
-  const hasDistrictInfo = !!validatedInput.data?.usCongressionalDistrict
+  const shouldSetDistrictAsNull =
+    usaState !== existingViewKeyRacesAction?.userActionViewKeyRaces?.usaState &&
+    usCongressionalDistrict === null
 
-  return prismaClient.userAction.findFirst({
+  const updateData: Record<string, string | undefined> = {
+    ...(usaState !== null && { usaState }),
+    ...(usCongressionalDistrict !== null && { usCongressionalDistrict }),
+  }
+
+  if (shouldSetDistrictAsNull) {
+    Object.assign(updateData, {
+      usCongressionalDistrict: null,
+    })
+  }
+
+  return prismaClient.userAction.update({
     where: {
-      userId: userId,
-      actionType: UserActionType.VIEW_KEY_RACES,
-      ...(hasStateInfo &&
-        !hasDistrictInfo && {
-          userActionViewKeyRaces: {
-            usaState: validatedInput.data?.usaState,
-            usCongressionalDistrict: null,
-          },
-        }),
-      ...(hasStateInfo &&
-        hasDistrictInfo && {
-          userActionViewKeyRaces: {
-            usCongressionalDistrict: validatedInput.data?.usCongressionalDistrict,
-            usaState: validatedInput.data?.usaState,
-          },
-        }),
+      id: existingViewKeyRacesAction?.id,
     },
-    include: {
-      userActionViewKeyRaces: true,
+    data: {
+      userActionViewKeyRaces: {
+        update: updateData,
+      },
     },
   })
 }
 
-async function createAction<U extends User>({
-  user,
-  validatedInput,
-  userMatch,
-  sharedDependencies,
-  isNewUser,
-}: {
-  user: U
-  validatedInput: CreateActionViewKeyRacesInput
-  userMatch: UserAndMethodOfMatch
-  sharedDependencies: Pick<SharedDependencies, 'sessionId' | 'analytics' | 'peopleAnalytics'>
-  isNewUser: boolean
-}) {
-  const userAction = await prismaClient.userAction.create({
-    data: {
-      user: { connect: { id: user.id } },
-      userSession: { connect: { id: sharedDependencies.sessionId } },
-      ...(userMatch.user?.primaryUserEmailAddressId && {
-        userEmailAddress: {
-          connect: {
-            id: userMatch.user?.primaryUserEmailAddressId,
-          },
+async function createUserActionViewKeyRaces(
+  userId: string,
+  sessionId: string,
+  usaState: string | null,
+  usCongressionalDistrict: string | null,
+) {
+  return prismaClient.userAction.create({
+    include: {
+      user: {
+        include: {
+          userSessions: true,
         },
-      }),
+      },
+    },
+    data: {
       actionType: UserActionType.VIEW_KEY_RACES,
-      campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.VIEW_KEY_RACES,
-      ...('userCryptoAddress' in userMatch && userMatch.userCryptoAddress
-        ? {
-            userCryptoAddress: { connect: { id: userMatch.userCryptoAddress.id } },
-          }
-        : { userSession: { connect: { id: sharedDependencies.sessionId } } }),
+      campaignName: UserActionViewKeyRacesCampaignName['2024_ELECTION'],
       userActionViewKeyRaces: {
         create: {
-          usCongressionalDistrict: validatedInput?.usCongressionalDistrict || null,
-          usaState: validatedInput?.usaState || null,
+          usCongressionalDistrict,
+          usaState,
         },
+      },
+      user: {
+        connect: {
+          id: userId,
+          userSessions: {
+            some: {
+              id: sessionId,
+            },
+          },
+        },
+      },
+    },
+  })
+}
+
+async function hasUserViewedKeyRaces(userId: string) {
+  return prismaClient.userAction.findFirst({
+    where: {
+      actionType: UserActionType.VIEW_KEY_RACES,
+      user: {
+        id: userId,
       },
     },
     include: {
       userActionViewKeyRaces: true,
     },
   })
-
-  logger.info('created user action')
-
-  sharedDependencies.analytics.trackUserActionCreated({
-    actionType: UserActionType.VIEW_KEY_RACES,
-    campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.VIEW_KEY_RACES,
-    userState: isNewUser ? 'New' : 'Existing',
-  })
-
-  return { userAction }
 }
 
-async function createUser(sharedDependencies: Pick<SharedDependencies, 'localUser' | 'sessionId'>) {
-  const { localUser, sessionId } = sharedDependencies
-  const createdUser = await prismaClient.user.create({
-    data: {
-      informationVisibility: UserInformationVisibility.ANONYMOUS,
-      userSessions: { create: { id: sessionId } },
-      hasOptedInToEmails: false,
-      hasOptedInToMembership: false,
-      hasOptedInToSms: false,
-      hasRepliedToOptInSms: false,
-      referralId: generateReferralId(),
-      ...mapLocalUserToUserDatabaseFields(localUser),
-    },
-    include: {
-      primaryUserEmailAddress: true,
-      primaryUserCryptoAddress: true,
-      address: true,
+async function hasUserPartakenSomeAction(userId: string) {
+  const actionsCount = await prismaClient.userAction.count({
+    where: {
+      actionType: UserActionType.OPT_IN,
+      user: {
+        id: userId,
+      },
     },
   })
-  logger.info('created user')
 
-  if (localUser?.persisted) {
-    waitUntil(
-      getServerPeopleAnalytics({ localUser, userId: createdUser.id })
-        .setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
-        .flush(),
-    )
-  }
-
-  return createdUser
+  return actionsCount > 0
 }
 
-function logSpamActionSubmissions({
-  sharedDependencies,
-}: {
-  sharedDependencies: Pick<SharedDependencies, 'analytics'>
-}) {
-  sharedDependencies.analytics.trackUserActionCreatedIgnored({
-    actionType: UserActionType.VIEW_KEY_RACES,
-    campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.VIEW_KEY_RACES,
-    reason: 'Too Many Recent',
-    userState: 'Existing',
+async function getUserAddress(userId: string) {
+  return prismaClient.user.findFirst({
+    where: {
+      id: userId,
+      address: {
+        countryCode: 'US',
+      },
+    },
+    select: {
+      address: {
+        select: {
+          administrativeAreaLevel1: true,
+          usCongressionalDistrict: true,
+          formattedDescription: true,
+          countryCode: true,
+        },
+      },
+    },
   })
 }

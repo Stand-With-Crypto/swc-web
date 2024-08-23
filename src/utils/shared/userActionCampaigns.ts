@@ -57,7 +57,7 @@ export enum UserActionRsvpEventCampaignName {
   DEFAULT = 'DEFAULT',
 }
 export enum UserActionViewKeyRacesCampaignName {
-  DEFAULT = 'DEFAULT',
+  '2024_ELECTION' = '2024_ELECTION',
 }
 
 export type UserActionCampaignName =
@@ -114,7 +114,7 @@ export const USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
   [UserActionType.LIVE_EVENT]: UserActionLiveEventCampaignName['2024_03_04_LA'],
   [UserActionType.TWEET_AT_PERSON]: UserActionTweetAtPersonCampaignName.DEFAULT,
   [UserActionType.VOTER_ATTESTATION]: UserActionVoterAttestationCampaignName.DEFAULT,
-  [UserActionType.VIEW_KEY_RACES]: UserActionViewKeyRacesCampaignName.DEFAULT,
+  [UserActionType.VIEW_KEY_RACES]: UserActionViewKeyRacesCampaignName['2024_ELECTION'],
   [UserActionType.RSVP_EVENT]: UserActionRsvpEventCampaignName.DEFAULT,
 } satisfies Record<ActiveClientUserActionWithCampaignType, string>
 

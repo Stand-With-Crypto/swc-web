@@ -42,7 +42,7 @@ export function LocationUnitedStates({
       await actionCreateUserActionViewKeyRaces()
     }
 
-    viewKeyRaces()
+    void viewKeyRaces()
   }, [])
 
   return (

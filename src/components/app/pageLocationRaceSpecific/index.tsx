@@ -68,7 +68,7 @@ export function LocationRaceSpecific({
       })
     }
 
-    viewKeyRaces()
+    void viewKeyRaces()
   }, [district, stateCode])
 
   return (
