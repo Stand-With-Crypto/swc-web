@@ -73,7 +73,7 @@ export default function RegisterToVoteReminderEmail({
           fullWidth="mobile"
           href={buildTemplateInternalUrl('/action/voter-registration', hydratedHrefSearchParams)}
         >
-          Register to vote
+          Make sure you're registered to vote
         </Button>
       </Section>
 
