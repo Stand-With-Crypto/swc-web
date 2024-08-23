@@ -12,7 +12,7 @@ export const testCaseWithPhoneSignUpWithExistingAccount: TestCase = {
     const existingUser = await prismaClient.user.create({
       data: {
         ...mockCreateUserInput({ withData: true }),
-        phoneNumber: '+15555555555',
+        phoneNumber: '+13692125876',
         smsStatus: SMSStatus.OPTED_IN_HAS_REPLIED,
         userEmailAddresses: {
           create: {
@@ -37,7 +37,7 @@ export const testCaseWithPhoneSignUpWithExistingAccount: TestCase = {
           userId: 'string',
           walletAddress: 'string',
           email: '',
-          phone: '+15555555555',
+          phone: '+13692125876',
           createdAt: new Date().toISOString(),
         }),
     }

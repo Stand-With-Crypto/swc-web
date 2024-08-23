@@ -436,9 +436,6 @@ async function queryMatchingUsers({
         embeddedWalletUserDetails?.phone && {
           phoneNumber: embeddedWalletUserDetails.phone,
           smsStatus: SMSStatus.OPTED_IN_HAS_REPLIED,
-          primaryUserEmailAddressId: {
-            not: null,
-          },
         },
       ]),
     },
