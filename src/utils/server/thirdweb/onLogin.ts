@@ -86,6 +86,7 @@ export async function login(payload: VerifyLoginPayloadParams) {
     },
     where: {
       userCryptoAddresses: { some: { cryptoAddress, hasBeenVerifiedViaAuth: true } },
+      userActions: { some: { actionType: UserActionType.OPT_IN } },
     },
   })
 
