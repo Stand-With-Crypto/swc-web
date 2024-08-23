@@ -2,7 +2,6 @@
 import 'server-only'
 
 import { Address, User, UserCryptoAddress } from '@prisma/client'
-import { waitUntil } from '@vercel/functions'
 import { z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
@@ -16,8 +15,6 @@ import {
 import { UpsertAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
-import { getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
-import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
 import { optInUser } from '@/utils/server/sms/actions'
 import { zodUpdateUserHasOptedInToSMS } from '@/validation/forms/zodUpdateUserHasOptedInToSMS'
@@ -48,17 +45,6 @@ async function _actionUpdateUserHasOptedInToSMS(data: UpdateUserHasOptedInToSMSP
       id: authUser.userId,
     },
   })
-
-  waitUntil(
-    getServerPeopleAnalytics({
-      userId: authUser.userId,
-      localUser: parseLocalUserFromCookies(),
-    })
-      .set({
-        'Has Opted In to SMS': true,
-      })
-      .flush(),
-  )
 
   const updatedUser = await prismaClient.user.update({
     where: {
