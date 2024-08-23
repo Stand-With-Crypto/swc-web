@@ -53,7 +53,7 @@ export function LocationUnitedStates({
           </h3>
           <UserActionFormVoterRegistrationDialog>
             <Button className="mt-6 w-full max-w-xs" variant="secondary">
-              Register to vote
+              Make sure you're registered to vote
             </Button>
           </UserActionFormVoterRegistrationDialog>
         </div>
