@@ -37,7 +37,7 @@ export default async function Profile({ params, searchParams }: Props) {
 
     return (
       <RedirectToSignUpComponent
-        callbackDestination={value === 'true' ? 'updateProfile' : null}
+        callbackDestination={value === 'true' ? 'updateProfile' : 'home'}
         locale={locale}
       />
     )
