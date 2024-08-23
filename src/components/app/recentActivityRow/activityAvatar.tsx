@@ -17,6 +17,7 @@ export const ACTIVITY_TYPE_TO_ICON_URL: Record<UserActionType, string> = {
   [UserActionType.LIVE_EVENT]: '/activityFeedIcons/event.svg',
   [UserActionType.TWEET_AT_PERSON]: '/activityFeedIcons/pizza-day.svg',
   [UserActionType.RSVP_EVENT]: '/activityFeedIcons/event-rsvp.svg',
+  [UserActionType.VIEW_KEY_RACES]: '/activityFeedIcons/join.svg',
 }
 
 type ActivityAvatarProps = {

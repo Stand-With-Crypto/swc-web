@@ -133,6 +133,8 @@ const getRelatedModel = <K extends keyof SensitiveDataClientUserActionDatabaseQu
   return val
 }
 
+type UserActionTypeWithoutKeyRaces = Exclude<UserActionType, 'VIEW_KEY_RACES'>
+
 export const getSensitiveDataClientUserAction = ({
   record,
 }: {
@@ -151,102 +153,104 @@ export const getSensitiveDataClientUserAction = ({
       : null,
   }
 
-  const actionTypes: { [key in UserActionType]: () => ClientModel<SensitiveDataClientUserAction> } =
-    {
-      [UserActionType.OPT_IN]: () => {
-        const { optInType } = getRelatedModel(record, 'userActionOptIn')
-        const callFields: SensitiveDataClientUserActionOptIn = {
-          optInType,
-          actionType: UserActionType.OPT_IN,
-        }
-        return getClientModel({ ...sharedProps, ...callFields })
-      },
-      [UserActionType.CALL]: () => {
-        const { recipientPhoneNumber } = getRelatedModel(record, 'userActionCall')
-        const callFields: SensitiveDataClientUserActionCall = {
-          recipientPhoneNumber,
-          actionType: UserActionType.CALL,
-        }
-        return getClientModel({ ...sharedProps, ...callFields })
-      },
-      [UserActionType.DONATION]: () => {
-        const { amount, amountCurrencyCode, amountUsd, recipient } = getRelatedModel(
-          record,
-          'userActionDonation',
-        )
-        const donationFields: SensitiveDataClientUserActionDonation = {
-          amount: amount.toNumber(),
-          amountUsd: amountUsd.toNumber(),
-          amountCurrencyCode,
-          actionType: UserActionType.DONATION,
-          recipient,
-        }
-        return getClientModel({ ...sharedProps, ...donationFields })
-      },
-      [UserActionType.EMAIL]: () => {
-        const { senderEmail, firstName, lastName, address, userActionEmailRecipients } =
-          getRelatedModel(record, 'userActionEmail')
-        const emailFields: SensitiveDataClientUserActionEmail = {
-          actionType: UserActionType.EMAIL,
-          senderEmail,
-          firstName,
-          lastName,
-          address: address ? getClientAddress(address) : null,
-          userActionEmailRecipients: userActionEmailRecipients.map(x => ({
-            id: x.id,
-          })),
-        }
-        return getClientModel({ ...sharedProps, ...emailFields })
-      },
-      [UserActionType.NFT_MINT]: () => {
-        const mintFields: SensitiveDataClientUserActionNFTMint = {
-          actionType: UserActionType.NFT_MINT,
-          nftMint: sharedProps.nftMint!,
-        }
-        return getClientModel({ ...sharedProps, ...mintFields })
-      },
-      [UserActionType.TWEET]: () => {
-        return getClientModel({ ...sharedProps, actionType: UserActionType.TWEET })
-      },
-      [UserActionType.VOTER_REGISTRATION]: () => {
-        const { usaState } = getRelatedModel(record, 'userActionVoterRegistration')
-        const voterRegistrationFields: SensitiveDataClientUserActionVoterRegistration = {
-          usaState,
-          actionType: UserActionType.VOTER_REGISTRATION,
-        }
-        return getClientModel({ ...sharedProps, ...voterRegistrationFields })
-      },
-      [UserActionType.LIVE_EVENT]: () => {
-        return getClientModel({ ...sharedProps, actionType: UserActionType.LIVE_EVENT })
-      },
-      [UserActionType.TWEET_AT_PERSON]: () => {
-        const { recipientDtsiSlug } = getRelatedModel(record, 'userActionTweetAtPerson')
-        const tweetAtPersonFields: SensitiveDataClientUserActionTweetAtPerson = {
-          recipientDtsiSlug,
-          actionType: UserActionType.TWEET_AT_PERSON,
-        }
-        return getClientModel({ ...sharedProps, ...tweetAtPersonFields })
-      },
-      [UserActionType.RSVP_EVENT]: () => {
-        const { eventSlug, eventState } = getRelatedModel(record, 'userActionRsvpEvent')
-        const rsvpEventFields: SensitiveDataClientUserActionRsvpEvent = {
-          eventSlug,
-          eventState,
-          actionType: UserActionType.RSVP_EVENT,
-        }
-        return getClientModel({ ...sharedProps, ...rsvpEventFields })
-      },
-      [UserActionType.VOTER_ATTESTATION]: () => {
-        const { usaState } = getRelatedModel(record, 'userActionVoterAttestation')
-        const voterAttestationFields: SensitiveDataClientUserActionVoterAttestation = {
-          usaState,
-          actionType: UserActionType.VOTER_ATTESTATION,
-        }
-        return getClientModel({ ...sharedProps, ...voterAttestationFields })
-      },
-    }
+  const actionTypes: {
+    [key in UserActionTypeWithoutKeyRaces]: () => ClientModel<SensitiveDataClientUserAction>
+  } = {
+    [UserActionType.OPT_IN]: () => {
+      const { optInType } = getRelatedModel(record, 'userActionOptIn')
+      const callFields: SensitiveDataClientUserActionOptIn = {
+        optInType,
+        actionType: UserActionType.OPT_IN,
+      }
+      return getClientModel({ ...sharedProps, ...callFields })
+    },
+    [UserActionType.CALL]: () => {
+      const { recipientPhoneNumber } = getRelatedModel(record, 'userActionCall')
+      const callFields: SensitiveDataClientUserActionCall = {
+        recipientPhoneNumber,
+        actionType: UserActionType.CALL,
+      }
+      return getClientModel({ ...sharedProps, ...callFields })
+    },
+    [UserActionType.DONATION]: () => {
+      const { amount, amountCurrencyCode, amountUsd, recipient } = getRelatedModel(
+        record,
+        'userActionDonation',
+      )
+      const donationFields: SensitiveDataClientUserActionDonation = {
+        amount: amount.toNumber(),
+        amountUsd: amountUsd.toNumber(),
+        amountCurrencyCode,
+        actionType: UserActionType.DONATION,
+        recipient,
+      }
+      return getClientModel({ ...sharedProps, ...donationFields })
+    },
+    [UserActionType.EMAIL]: () => {
+      const { senderEmail, firstName, lastName, address, userActionEmailRecipients } =
+        getRelatedModel(record, 'userActionEmail')
+      const emailFields: SensitiveDataClientUserActionEmail = {
+        actionType: UserActionType.EMAIL,
+        senderEmail,
+        firstName,
+        lastName,
+        address: address ? getClientAddress(address) : null,
+        userActionEmailRecipients: userActionEmailRecipients.map(x => ({
+          id: x.id,
+        })),
+      }
+      return getClientModel({ ...sharedProps, ...emailFields })
+    },
+    [UserActionType.NFT_MINT]: () => {
+      const mintFields: SensitiveDataClientUserActionNFTMint = {
+        actionType: UserActionType.NFT_MINT,
+        nftMint: sharedProps.nftMint!,
+      }
+      return getClientModel({ ...sharedProps, ...mintFields })
+    },
+    [UserActionType.TWEET]: () => {
+      return getClientModel({ ...sharedProps, actionType: UserActionType.TWEET })
+    },
+    [UserActionType.VOTER_REGISTRATION]: () => {
+      const { usaState } = getRelatedModel(record, 'userActionVoterRegistration')
+      const voterRegistrationFields: SensitiveDataClientUserActionVoterRegistration = {
+        usaState,
+        actionType: UserActionType.VOTER_REGISTRATION,
+      }
+      return getClientModel({ ...sharedProps, ...voterRegistrationFields })
+    },
+    [UserActionType.LIVE_EVENT]: () => {
+      return getClientModel({ ...sharedProps, actionType: UserActionType.LIVE_EVENT })
+    },
+    [UserActionType.TWEET_AT_PERSON]: () => {
+      const { recipientDtsiSlug } = getRelatedModel(record, 'userActionTweetAtPerson')
+      const tweetAtPersonFields: SensitiveDataClientUserActionTweetAtPerson = {
+        recipientDtsiSlug,
+        actionType: UserActionType.TWEET_AT_PERSON,
+      }
+      return getClientModel({ ...sharedProps, ...tweetAtPersonFields })
+    },
+    [UserActionType.RSVP_EVENT]: () => {
+      const { eventSlug, eventState } = getRelatedModel(record, 'userActionRsvpEvent')
+      const rsvpEventFields: SensitiveDataClientUserActionRsvpEvent = {
+        eventSlug,
+        eventState,
+        actionType: UserActionType.RSVP_EVENT,
+      }
+      return getClientModel({ ...sharedProps, ...rsvpEventFields })
+    },
+    [UserActionType.VOTER_ATTESTATION]: () => {
+      const { usaState } = getRelatedModel(record, 'userActionVoterAttestation')
+      const voterAttestationFields: SensitiveDataClientUserActionVoterAttestation = {
+        usaState,
+        actionType: UserActionType.VOTER_ATTESTATION,
+      }
+      return getClientModel({ ...sharedProps, ...voterAttestationFields })
+    },
+  }
 
-  const getSensitiveDataClientUserActionFromActionType = actionTypes[actionType]
+  const getSensitiveDataClientUserActionFromActionType =
+    actionTypes[actionType as UserActionTypeWithoutKeyRaces]
 
   if (!getSensitiveDataClientUserActionFromActionType) {
     throw new Error(`getSensitiveDataClientUserAction: no user action fk found for id ${id}`)
