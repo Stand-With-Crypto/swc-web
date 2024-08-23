@@ -267,8 +267,8 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
       }
       case UserActionType.VIEW_KEY_RACES: {
         return {
-          onFocusContent: () => null,
-          children: null,
+          onFocusContent: undefined,
+          children: <MainText>Someone investigated the key races in their district</MainText>,
         }
       }
     }
