@@ -5,6 +5,7 @@ import { NextResponse } from 'next/server'
 
 import { appRouterGetAuthUser } from '@/utils/server/authentication/appRouterGetAuthUser'
 import { prismaClient } from '@/utils/server/prismaClient'
+import { withRouteMiddleware } from '@/utils/server/serverWrappers/withRouteMiddleware'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
 export const dynamic = 'force-dynamic'
@@ -30,7 +31,7 @@ async function apiResponse() {
 
 export type DetectWipedDatabaseResponse = Awaited<ReturnType<typeof apiResponse>>
 
-export async function POST() {
+export const POST = withRouteMiddleware(async () => {
   const response = await apiResponse()
   return NextResponse.json(response)
-}
+})

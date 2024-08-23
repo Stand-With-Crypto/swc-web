@@ -1,12 +1,20 @@
 import { UserCommunicationJourneyType } from '@prisma/client'
 import * as Sentry from '@sentry/node'
 import { NonRetriableError } from 'inngest'
+import { update } from 'lodash-es'
 
-import { countSegments, sendSMS, SendSMSError } from '@/utils/server/sms'
+import { sendSMS, SendSMSError } from '@/utils/server/sms'
+import { optOutUser } from '@/utils/server/sms/actions'
+import { countSegments, getUserByPhoneNumber } from '@/utils/server/sms/utils'
 import { getLogger } from '@/utils/shared/logger'
 import { sleep } from '@/utils/shared/sleep'
 
-import { createCommunication, createCommunicationJourneys, flagInvalidPhoneNumbers } from '.'
+import {
+  bulkCreateCommunicationJourney,
+  BulkCreateCommunicationJourneyPayload,
+  DEFAULT_CAMPAIGN_NAME,
+} from './communicationJourney'
+import { flagInvalidPhoneNumbers } from './flagInvalidPhoneNumbers'
 
 const MAX_RETRY_ATTEMPTS = 5
 const PAYLOAD_LIMIT = 10000
@@ -32,6 +40,10 @@ export async function enqueueMessages(payload: EnqueueMessagePayload[], attempt 
 
   const invalidPhoneNumbers: string[] = []
   const failedPhoneNumbers: Record<string, EnqueueMessagePayload['messages']> = {}
+  const messagesSentByJourneyType: {
+    [key in UserCommunicationJourneyType]?: BulkCreateCommunicationJourneyPayload
+  } = {}
+  const unsubscribedUsers: string[] = []
 
   let segmentsSent = 0
   let queuedMessages = 0
@@ -40,12 +52,6 @@ export async function enqueueMessages(payload: EnqueueMessagePayload[], attempt 
       const { body, journeyType, campaignName } = message
 
       try {
-        const communicationJourneys = await createCommunicationJourneys(
-          phoneNumber,
-          journeyType,
-          campaignName,
-        )
-
         if (body) {
           const queuedMessage = await sendSMS({
             body,
@@ -53,11 +59,33 @@ export async function enqueueMessages(payload: EnqueueMessagePayload[], attempt 
           })
 
           if (queuedMessage) {
-            await createCommunication(communicationJourneys, queuedMessage.sid)
+            update(
+              messagesSentByJourneyType,
+              [journeyType, campaignName ?? DEFAULT_CAMPAIGN_NAME],
+              (existingPayload = []) => [
+                ...existingPayload,
+                {
+                  messageId: queuedMessage.sid,
+                  phoneNumber,
+                },
+              ],
+            )
           }
 
           segmentsSent += countSegments(body)
           queuedMessages += 1
+        } else if (journeyType === UserCommunicationJourneyType.WELCOME_SMS) {
+          // TODO: remove this when we finish testing the new welcome sms variant
+          update(
+            messagesSentByJourneyType,
+            [journeyType, DEFAULT_CAMPAIGN_NAME],
+            (existingPayload = []) => [
+              ...existingPayload,
+              {
+                phoneNumber,
+              },
+            ],
+          )
         }
       } catch (error) {
         if (error instanceof SendSMSError) {
@@ -69,6 +97,8 @@ export async function enqueueMessages(payload: EnqueueMessagePayload[], attempt 
             }
           } else if (error.isInvalidPhoneNumber) {
             invalidPhoneNumbers.push(error.phoneNumber)
+          } else if (error.isUnsubscribedUser) {
+            unsubscribedUsers.push(error.phoneNumber)
           } else {
             Sentry.captureException(`sendSMS Error ${error.code}: ${error.message}`, {
               extra: { reason: error },
@@ -97,9 +127,28 @@ export async function enqueueMessages(payload: EnqueueMessagePayload[], attempt 
 
   logger.info(`Attempt ${attempt + 1} queued ${queuedMessages} messages (${segmentsSent} segments)`)
 
+  for (const journeyTypeKey of Object.keys(messagesSentByJourneyType)) {
+    const journeyType = journeyTypeKey as UserCommunicationJourneyType
+
+    logger.info(`Creating ${journeyType} communication journey`)
+
+    await bulkCreateCommunicationJourney(journeyType, messagesSentByJourneyType[journeyType]!)
+  }
+
   if (invalidPhoneNumbers.length > 0) {
     logger.info(`Found ${invalidPhoneNumbers.length} invalid phone numbers`)
     await flagInvalidPhoneNumbers(invalidPhoneNumbers)
+  }
+
+  if (unsubscribedUsers.length > 0) {
+    logger.info(`Found ${unsubscribedUsers.length} unsubscribed users`)
+    const optOutUserPromises = unsubscribedUsers.map(async phoneNumber => {
+      const user = await getUserByPhoneNumber(phoneNumber)
+
+      await optOutUser(phoneNumber, user)
+    })
+
+    await Promise.all(optOutUserPromises)
   }
 
   const failedEnqueueMessagePayload: EnqueueMessagePayload[] = Object.keys(failedPhoneNumbers).map(

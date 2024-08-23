@@ -8,12 +8,9 @@ describe('disabled user actions for non-US users', () =>
     '/action/voter-registration',
     '/action/nft-mint',
   ].forEach(action => {
-    beforeEach(() => {
-      cy.setCookie('USER_COUNTRY_CODE', 'BR')
-    })
-
     it(`should show user action unavailable message for ${action}`, () => {
       cy.visit(action)
+      cy.setCookie('USER_COUNTRY_CODE', 'BR')
       cy.contains('Action unavailable').should('be.visible')
     })
   }))

@@ -253,7 +253,7 @@ function InfoTooltip({
 
   return (
     <div
-      className={`pointer-events-none fixed z-50 flex h-[81px] flex-col gap-2 w-[${tooltipWidth}px] items-center justify-center rounded-2xl bg-black px-4 py-2 font-sans text-base text-white`}
+      className={`pointer-events-none fixed z-50 flex h-[81px] flex-col items-center  justify-center gap-2 rounded-2xl bg-black px-4 py-2 font-sans text-base text-white`}
       style={{
         top: mousePosition.y,
         left: adjustedX,

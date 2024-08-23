@@ -30,7 +30,6 @@ export function useCheckoutController({
 } = {}): UseCheckoutControllerReturn {
   const [quantity, setQuantity] = React.useState(1)
   const { data: gasFee } = useGasFee(quantity)
-  const gasNumberInBigNumber = BigNumber.from(0).add(gasFee ?? 0)
 
   const values = React.useMemo<
     Pick<
@@ -38,20 +37,23 @@ export function useCheckoutController({
       'mintFeeDisplay' | 'gasFeeDisplay' | 'totalFeeDisplay' | 'totalFee'
     >
   >(() => {
-    if (!gasFee) {
+    const isFraction = String(gasFee?.wei)?.includes('.')
+    if (!gasFee || isFraction) {
       return {}
     }
 
+    const gasNumberInBigNumber = BigNumber.from(gasFee.wei)
+
     const mintFee = mintUnitFee.mul(quantity)
-    const totalFee = mintFee.add(gasFee)
+    const totalFee = mintFee.add(gasNumberInBigNumber)
 
     return {
       mintFeeDisplay: fromBigNumber(mintFee),
-      gasFeeDisplay: fromBigNumber(gasNumberInBigNumber),
+      gasFeeDisplay: gasFee.ether,
       totalFeeDisplay: fromBigNumber(totalFee),
       totalFee,
     }
-  }, [gasFee, mintUnitFee, quantity, gasNumberInBigNumber])
+  }, [gasFee, mintUnitFee, quantity])
 
   return {
     ...values,
@@ -69,18 +71,20 @@ function useGasFee(quantity: number) {
     chain: base,
   })
   const { user } = useThirdwebAuthUser()
-  const account = user?.address
+  const address = user?.address
+
+  const shouldFetch = contract && address
 
   return useSWR(
-    contract ? { contract } : null,
-    async ({ contract: _contract }) => {
+    shouldFetch ? contract : null,
+    async _contract => {
       const tx = claimTo({
         contract: _contract,
         quantity: BigInt(quantity),
-        to: account || '',
+        to: address || '',
       })
       const gasFee = await estimateGasCost({ transaction: tx })
-      return gasFee.wei
+      return gasFee
     },
     {
       onError: error => {
@@ -89,6 +93,7 @@ function useGasFee(quantity: number) {
             quantity,
             contract,
             user,
+            address,
           },
           tags: { domain: 'useCheckoutController' },
         })

@@ -36,7 +36,7 @@ export function Survey({ goToSection }: SurveyProps) {
             <div className="flex flex-grow flex-col items-center gap-3 lg:flex-row lg:justify-center">
               <Button
                 className="w-full lg:w-auto"
-                onClick={createSelectionHandler(SectionNames.CLAIM_NFT)}
+                onClick={createSelectionHandler(SectionNames.CONFIRM_REGISTRATION_FORM)}
                 size="lg"
                 variant="secondary"
               >

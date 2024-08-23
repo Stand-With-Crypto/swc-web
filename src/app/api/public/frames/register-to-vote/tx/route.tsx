@@ -5,13 +5,14 @@ import { base } from 'thirdweb/chains'
 import { claimTo } from 'thirdweb/extensions/erc721'
 
 import { I_AM_A_VOTER_NFT_CONTRACT_ADDRESS } from '@/utils/server/nft/constants'
+import { withRouteMiddleware } from '@/utils/server/serverWrappers/withRouteMiddleware'
 import { ERC_721_CONTRACT_ABI } from '@/utils/server/thirdweb/erc721ClaimABI'
 import { THIRD_WEB_CLIENT_SECRET } from '@/utils/server/thirdweb/thirdwebClientSecret'
 import { NEYNAR_API_KEY } from '@/utils/shared/neynarAPIKey'
 
 const BASE_CHAIN_ID = '8453'
 
-export async function POST(req: NextRequest): Promise<Response> {
+export const POST = withRouteMiddleware(async (req: NextRequest): Promise<Response> => {
   const body: FrameRequest = (await req.json()) as FrameRequest
   const { isValid, message } = await getFrameMessage(body, { neynarApiKey: NEYNAR_API_KEY }) // NOTE: Frame state data does not exist on localhost.
   if (!isValid || !message) {
@@ -51,4 +52,4 @@ export async function POST(req: NextRequest): Promise<Response> {
       value: '0',
     },
   })
-}
+})

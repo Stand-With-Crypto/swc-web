@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 
 import { getClientUnidentifiedUser } from '@/clientModels/clientUser/clientUser'
 import { prismaClient } from '@/utils/server/prismaClient'
+import { withRouteMiddleware } from '@/utils/server/serverWrappers/withRouteMiddleware'
 
 interface RequestContext {
   params: {
@@ -9,7 +10,7 @@ interface RequestContext {
   }
 }
 
-export async function GET(_: Request, { params }: RequestContext) {
+export const GET = withRouteMiddleware(async (_: Request, { params }: RequestContext) => {
   const { sessionId } = params
 
   const user = await prismaClient.user.findFirst({
@@ -34,4 +35,4 @@ export async function GET(_: Request, { params }: RequestContext) {
   return NextResponse.json({
     user: getClientUnidentifiedUser(user),
   })
-}
+})

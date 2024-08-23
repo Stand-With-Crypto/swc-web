@@ -215,8 +215,15 @@ export function PagePrivacyPolicy() {
         </strong>
       </p>
       <p>
-        Message and data rates may apply. Message frequency varies. Carriers are not liable for
-        delayed or undeliverable messages.
+        <strong>
+          Message and data rates may apply. Message frequency varies. Carriers are not liable for
+          delayed or undeliverable messages.
+        </strong>
+      </p>
+      <p>
+        View how SWC collects information about you when you visit our website or engage with SWC,
+        and how SWC uses the information it collects outside of these Text Program terms within the
+        other sections of this Privacy Policy.
       </p>
 
       <h2>Your Privacy Choices</h2>

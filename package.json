@@ -6,6 +6,7 @@
     "ts": "TZ=UTC dotenv -- tsx --tsconfig ./tsconfig.bin.json",
     "ts:ci": "TZ=UTC tsx --tsconfig ./tsconfig.bin.json",
     "dev": "next dev",
+    "dev:turbo": "next dev --turbo",
     "email:dev": "email dev --dir \"src/utils/server/email/templates\" --port 3333",
     "build": "CI_OVERRIDES=true next build",
     "postbuild": "next-sitemap",

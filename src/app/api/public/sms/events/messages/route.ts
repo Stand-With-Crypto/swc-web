@@ -1,17 +1,15 @@
 import 'server-only'
 
-import { User } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { NextRequest, NextResponse } from 'next/server'
 import twilio from 'twilio'
 
-import { prismaClient } from '@/utils/server/prismaClient'
-import { verifySignature } from '@/utils/server/sms'
+import { withRouteMiddleware } from '@/utils/server/serverWrappers/withRouteMiddleware'
 import { optOutUser, optUserBackIn } from '@/utils/server/sms/actions'
+import { getUserByPhoneNumber, verifySignature } from '@/utils/server/sms/utils'
 // TODO: Uncomment this after we start using Messaging Service
 // import * as messages from '@/utils/server/sms/messages'
 import { getLogger } from '@/utils/shared/logger'
-import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
 
 const SWC_STOP_SMS_KEYWORD = process.env.SWC_STOP_SMS_KEYWORD?.toUpperCase()
 const SWC_UNSTOP_SMS_KEYWORD = process.env.SWC_UNSTOP_SMS_KEYWORD?.toUpperCase()
@@ -40,7 +38,7 @@ interface SmsEvent {
   ApiVersion: string
 }
 
-export async function POST(request: NextRequest) {
+export const POST = withRouteMiddleware(async (request: NextRequest) => {
   const [isVerified, body] = await verifySignature<SmsEvent>(request)
 
   if (!isVerified) {
@@ -82,7 +80,7 @@ export async function POST(request: NextRequest) {
       )
     ) {
       // We can't get the messageId when replying with twilio, so we need to trigger a Inngest function instead
-      await optOutUser(phoneNumber, keyword === SWC_STOP_SMS_KEYWORD, user)
+      await optOutUser(phoneNumber, user)
     } else if (['YES', 'START', 'CONTINUE', 'UNSTOP', SWC_UNSTOP_SMS_KEYWORD].includes(keyword)) {
       await optUserBackIn(phoneNumber, user)
     } else if (['HELP'].includes(keyword)) {
@@ -107,18 +105,4 @@ export async function POST(request: NextRequest) {
     headers,
     status: 200,
   })
-}
-
-async function getUserByPhoneNumber(phoneNumber: string): Promise<User | undefined> {
-  const [user] = await prismaClient.user.findMany({
-    where: {
-      phoneNumber: normalizePhoneNumber(phoneNumber),
-    },
-    orderBy: {
-      datetimeUpdated: 'desc',
-    },
-    take: 1,
-  })
-
-  return user
-}
+})

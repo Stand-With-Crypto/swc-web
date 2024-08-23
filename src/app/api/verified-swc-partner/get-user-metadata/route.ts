@@ -4,9 +4,10 @@ import {
   verifiedSWCPartnersGetUserMetadata,
   zodVerifiedSWCPartnersGetUserMetadata,
 } from '@/data/verifiedSWCPartners/getUserMetadata'
+import { withRouteMiddleware } from '@/utils/server/serverWrappers/withRouteMiddleware'
 import { authenticateAndGetVerifiedSWCPartnerFromHeader } from '@/utils/server/verifiedSWCPartner/getVerifiedSWCPartnerFromHeader'
 
-export async function POST(request: NextRequest) {
+export const POST = withRouteMiddleware(async (request: NextRequest) => {
   const partner = authenticateAndGetVerifiedSWCPartnerFromHeader()
   const validatedFields = zodVerifiedSWCPartnersGetUserMetadata.parse(await request.json())
   const result = await verifiedSWCPartnersGetUserMetadata({
@@ -14,4 +15,4 @@ export async function POST(request: NextRequest) {
     partner,
   })
   return NextResponse.json(result)
-}
+})

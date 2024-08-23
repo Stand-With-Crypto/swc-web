@@ -19,6 +19,7 @@ import {
   MINT_NFT_CONTRACT_ADDRESS,
   UserActionFormNFTMintSectionNames,
 } from '@/components/app/userActionFormNFTMint/constants'
+import { Button } from '@/components/ui/button'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -51,7 +52,13 @@ export function UserActionFormNFTMintTransactionWatch({
   const { data: contractMetadata, isLoading: isLoadingContractMetadata } =
     useThirdwebContractMetadata(MINT_NFT_CONTRACT_ADDRESS)
 
-  const { data: receipt } = useWaitForReceipt({
+  const {
+    data: receipt,
+    isError: receiptVerificationFailed,
+    error: receiptError,
+    refetch: refetchReceipt,
+    isLoading: isReceiptLoading,
+  } = useWaitForReceipt({
     transactionHash: transactionHash as `0x${string}`,
     client: thirdwebClient,
     chain: base,
@@ -92,6 +99,13 @@ export function UserActionFormNFTMintTransactionWatch({
   const isTransactionHandled = useRef(false)
 
   useEffect(() => {
+    if (receiptVerificationFailed) {
+      Sentry.captureException(receiptError, { tags: { domain: 'nftMint/transactionWatch' } })
+      toastGenericError()
+    }
+  }, [receiptVerificationFailed, receiptError])
+
+  useEffect(() => {
     if (receipt?.status === 'success' && !isTransactionHandled.current) {
       isTransactionHandled.current = true
       createAction()
@@ -119,9 +133,23 @@ export function UserActionFormNFTMintTransactionWatch({
             src={contractMetadata.image ?? ''}
           />
 
-          <PageTitle size="sm">Transaction in progress...</PageTitle>
+          <PageTitle size="sm">
+            {receiptVerificationFailed
+              ? 'Transaction verification failed!'
+              : 'Transaction in progress...'}
+          </PageTitle>
 
-          <PageSubTitle size="md">It may take up to 5 minutes</PageSubTitle>
+          <PageSubTitle size="md">
+            {receiptVerificationFailed
+              ? 'It looks like we were unable to verify the NFT mint transaction. Please try again.'
+              : 'It may take up to 5 minutes'}
+          </PageSubTitle>
+
+          {receiptVerificationFailed && (
+            <Button disabled={isReceiptLoading} onClick={() => refetchReceipt()}>
+              Verify again
+            </Button>
+          )}
         </div>
       </UserActionFormLayout.Container>
     </UserActionFormLayout>
