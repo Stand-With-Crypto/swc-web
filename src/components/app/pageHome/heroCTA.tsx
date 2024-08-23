@@ -27,7 +27,10 @@ export function HeroCTA() {
       return unauthenticatedContent
     }
 
-    if (!user.phoneNumber || user.smsStatus === SMSStatus.NOT_OPTED_IN) {
+    if (
+      !user.phoneNumber ||
+      [SMSStatus.NOT_OPTED_IN, SMSStatus.OPTED_IN_PENDING_DOUBLE_OPT_IN].includes(user.smsStatus)
+    ) {
       return (
         <SMSOptInCTA
           initialValues={{
