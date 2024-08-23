@@ -12,6 +12,7 @@ export const ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN = [
   UserActionType.TWEET_AT_PERSON,
   UserActionType.VOTER_ATTESTATION,
   UserActionType.RSVP_EVENT,
+  UserActionType.VIEW_KEY_RACES,
 ] as const
 export type ActiveClientUserActionWithCampaignType =
   (typeof ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN)[number]
@@ -55,6 +56,9 @@ export enum UserActionVoterAttestationCampaignName {
 export enum UserActionRsvpEventCampaignName {
   DEFAULT = 'DEFAULT',
 }
+export enum UserActionViewKeyRacesCampaignName {
+  '2024_ELECTION' = '2024_ELECTION',
+}
 
 export type UserActionCampaignName =
   | UserActionEmailCampaignName
@@ -67,6 +71,7 @@ export type UserActionCampaignName =
   | UserActionLiveEventCampaignName
   | UserActionTweetAtPersonCampaignName
   | UserActionVoterAttestationCampaignName
+  | UserActionViewKeyRacesCampaignName
 
 export type UserActionCampaigns = {
   [UserActionType.EMAIL]: UserActionEmailCampaignName
@@ -79,6 +84,7 @@ export type UserActionCampaigns = {
   [UserActionType.LIVE_EVENT]: UserActionLiveEventCampaignName
   [UserActionType.TWEET_AT_PERSON]: UserActionTweetAtPersonCampaignName
   [UserActionType.VOTER_ATTESTATION]: UserActionVoterAttestationCampaignName
+  [UserActionType.VIEW_KEY_RACES]: UserActionViewKeyRacesCampaignName
   [UserActionType.RSVP_EVENT]: UserActionRsvpEventCampaignName
 }
 
@@ -93,6 +99,7 @@ export const USER_ACTION_TO_CAMPAIGN_NAME_MAP = {
   [UserActionType.LIVE_EVENT]: UserActionLiveEventCampaignName,
   [UserActionType.TWEET_AT_PERSON]: UserActionTweetAtPersonCampaignName,
   [UserActionType.VOTER_ATTESTATION]: UserActionVoterAttestationCampaignName,
+  [UserActionType.VIEW_KEY_RACES]: UserActionViewKeyRacesCampaignName,
   [UserActionType.RSVP_EVENT]: UserActionRsvpEventCampaignName,
 } satisfies Record<ActiveClientUserActionWithCampaignType, any>
 
@@ -107,6 +114,7 @@ export const USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
   [UserActionType.LIVE_EVENT]: UserActionLiveEventCampaignName['2024_03_04_LA'],
   [UserActionType.TWEET_AT_PERSON]: UserActionTweetAtPersonCampaignName.DEFAULT,
   [UserActionType.VOTER_ATTESTATION]: UserActionVoterAttestationCampaignName.DEFAULT,
+  [UserActionType.VIEW_KEY_RACES]: UserActionViewKeyRacesCampaignName['2024_ELECTION'],
   [UserActionType.RSVP_EVENT]: UserActionRsvpEventCampaignName.DEFAULT,
 } satisfies Record<ActiveClientUserActionWithCampaignType, string>
 
