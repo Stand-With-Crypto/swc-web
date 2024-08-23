@@ -55,6 +55,8 @@ export function mockUser(): User {
     primaryUserCryptoAddressId: fakerFields.id(),
     dataCreationMethod: DataCreationMethod.BY_USER,
     addressId: withData ? fakerFields.id() : null,
+    hasOptedInToSms: null,
+    hasRepliedToOptInSms: null,
     totalDonationAmountUsd: new Decimal(
       faker.number.float({ min: 0, max: 30000, multipleOf: 0.01 }),
     ),
