@@ -46,10 +46,10 @@ export default function UserActionOptInSWCDeepLink() {
   }, [destination, router, urls, queryString])
 
   React.useEffect(() => {
-    if (session.isLoggedIn) {
+    if (session.isLoggedIn && session.hasOptInUserAction) {
       handleRedirectOnLogin()
     }
-  }, [session.isLoggedIn, handleRedirectOnLogin])
+  }, [session.isLoggedIn, session.hasOptInUserAction, handleRedirectOnLogin])
 
   if (session.isLoading || session.isLoggedIn) return null
 

@@ -1,3 +1,4 @@
+import { UserActionType } from '@prisma/client'
 import { Metadata } from 'next'
 
 import { PageUserProfile } from '@/components/app/pageUserProfile'
@@ -24,7 +25,11 @@ export async function generateMetadata(_props: Props): Promise<Metadata> {
 export default async function Profile({ params, searchParams }: Props) {
   const { locale } = params
   const user = await getAuthenticatedData()
-  if (!user) {
+  const hasOptInUserAction = user?.userActions?.some(
+    userAction => userAction.actionType === UserActionType.OPT_IN,
+  )
+
+  if (!user || (user && !hasOptInUserAction)) {
     const { value } = getSearchParam({
       searchParams,
       queryParamKey: OPEN_UPDATE_USER_PROFILE_FORM_QUERY_PARAM_KEY,
