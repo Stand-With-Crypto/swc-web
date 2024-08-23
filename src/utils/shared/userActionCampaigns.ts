@@ -13,6 +13,7 @@ export const ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN = [
   UserActionType.VOTER_ATTESTATION,
   UserActionType.VIEW_KEY_RACES,
   UserActionType.RSVP_EVENT,
+  UserActionType.VIEW_KEY_RACES,
 ] as const
 export type ActiveClientUserActionWithCampaignType =
   (typeof ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN)[number]

@@ -110,7 +110,7 @@ export function LocationRaceSpecific({
         </PageTitle>
         <UserActionFormVoterRegistrationDialog initialStateCode={stateCode}>
           <Button className="mt-6 w-full max-w-xs" variant="secondary">
-            Register to vote
+            Make sure you're registered to vote
           </Button>
         </UserActionFormVoterRegistrationDialog>
       </DarkHeroSection>
