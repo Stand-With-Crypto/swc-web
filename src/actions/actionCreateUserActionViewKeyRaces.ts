@@ -137,7 +137,7 @@ async function _actionCreateUserActionViewKeyRaces(input: CreateActionViewKeyRac
         currentCongressionalDistrict,
       )
 
-      analytics.trackUserActionCreated({
+      analytics.trackUserActionUpdated({
         actionType,
         campaignName,
         creationMethod: 'On Site',

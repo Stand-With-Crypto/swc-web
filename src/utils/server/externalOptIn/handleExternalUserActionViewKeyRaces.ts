@@ -117,7 +117,7 @@ export async function handleExternalUserActionViewKeyRaces(
         currentCongressionalDistrict,
       )
 
-      analytics.trackUserActionCreated({
+      analytics.trackUserActionUpdated({
         actionType,
         campaignName,
         creationMethod: input.partner ? 'Verified SWC Partner' : 'Third Party',
