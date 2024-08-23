@@ -48,7 +48,7 @@ export default function ManageCookiesModal({ onSubmit, children }: ManageCookies
       <ContainerTrigger asChild>{children}</ContainerTrigger>
       <ContainerContent>
         <ContainerHeader>
-          <ContainerTitle>Cookie Preferences</ContainerTitle>
+          <ContainerTitle>Cookie Preference & Privacy Choices</ContainerTitle>
         </ContainerHeader>
         <div
           className={cn('space-y-6', {
