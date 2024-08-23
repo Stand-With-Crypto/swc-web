@@ -540,7 +540,7 @@ async function maybeUpsertPhoneNumber({
   user: UpsertedUser
   embeddedWalletUserDetails: ThirdwebEmbeddedWalletMetadata
 }) {
-  const phoneNumber = user.phoneNumber ?? embeddedWalletUserDetails.phone
+  const phoneNumber = embeddedWalletUserDetails.phone
   const smsStatus = SMSStatus.OPTED_IN_HAS_REPLIED
 
   const result = await prismaClient.user.update({
