@@ -12,7 +12,6 @@ import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimit
 import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
-import { withServerActionMiddleware } from '@/utils/server/withServerActionMiddleware'
 import {
   GetCongressionalDistrictFromAddressSuccess,
   maybeGetCongressionalDistrictFromAddress,
@@ -20,6 +19,7 @@ import {
 import { getLogger } from '@/utils/shared/logger'
 import { UserActionViewKeyRacesCampaignName } from '@/utils/shared/userActionCampaigns'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
+import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
 
 const logger = getLogger(`actionCreateUserActionViewKeyRaces`)
 
