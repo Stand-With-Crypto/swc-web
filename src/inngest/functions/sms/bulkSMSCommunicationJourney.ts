@@ -34,6 +34,7 @@ interface BulkSMSCommunicationJourneyPayload {
   includePendingDoubleOptIn?: boolean
   send?: boolean
   campaignName: string
+  // Number of milliseconds or Time string compatible with the ms package, e.g. "30m", "3 hours", or "2.5d"
   sleepTime?: string | number
 }
 
