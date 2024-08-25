@@ -481,6 +481,7 @@ model UserCommunication {
   messageId                  String                   @map("message_id")
   datetimeCreated            DateTime                 @default(now()) @map("datetime_created")
 
+  @@index([messageId])
   @@index([userCommunicationJourneyId])
   @@map("user_communication")
 }
