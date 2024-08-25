@@ -34,6 +34,7 @@ interface BulkSMSCommunicationJourneyPayload {
   includePendingDoubleOptIn?: boolean
   send?: boolean
   campaignName: string
+  media?: string[]
 }
 
 export const bulkSMSCommunicationJourney = inngest.createFunction(
@@ -46,7 +47,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
     event: BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
   },
   async ({ step, event, logger }) => {
-    const { smsBody, userWhereInput, includePendingDoubleOptIn, send, campaignName } =
+    const { smsBody, userWhereInput, includePendingDoubleOptIn, send, campaignName, media } =
       event.data as BulkSMSCommunicationJourneyPayload
 
     if (!smsBody) {
@@ -86,6 +87,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
             body: smsBody,
             campaignName,
             journeyType: UserCommunicationJourneyType.BULK_SMS,
+            media,
           },
         ],
       }))
@@ -107,6 +109,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
             body: smsBody,
             campaignName,
             journeyType: UserCommunicationJourneyType.BULK_SMS,
+            media,
           },
         ],
       })),

@@ -25,6 +25,7 @@ export interface PayloadMessage {
   body?: string
   journeyType: UserCommunicationJourneyType
   campaignName?: string
+  media?: string[]
 }
 
 export interface EnqueueMessagePayload {
@@ -49,13 +50,14 @@ export async function enqueueMessages(payload: EnqueueMessagePayload[], attempt 
   let queuedMessages = 0
   const enqueueMessagesPromise = payload.map(async ({ messages, phoneNumber }) => {
     for (const message of messages) {
-      const { body, journeyType, campaignName } = message
+      const { body, journeyType, campaignName, media } = message
 
       try {
         if (body) {
           const queuedMessage = await sendSMS({
             body,
             to: phoneNumber,
+            media,
           })
 
           if (queuedMessage) {
@@ -185,6 +187,10 @@ export function countMessagesAndSegments(payload: EnqueueMessagePayload[]) {
       curr.messages.forEach(message => {
         if (message.body) {
           segmentsCount += countSegments(message.body)
+        }
+        if (message.media) {
+          // Each image count as one segment in the queue
+          segmentsCount += message.media.length
         }
       })
 
