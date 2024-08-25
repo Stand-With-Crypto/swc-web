@@ -74,11 +74,10 @@ export async function enqueueMessages(payload: EnqueueMessagePayload[], attempt 
 
           segmentsSent += countSegments(body)
           queuedMessages += 1
-        } else if (journeyType === UserCommunicationJourneyType.WELCOME_SMS) {
-          // TODO: remove this when we finish testing the new welcome sms variant
+        } else {
           update(
             messagesSentByJourneyType,
-            [journeyType, DEFAULT_CAMPAIGN_NAME],
+            [journeyType, campaignName ?? DEFAULT_CAMPAIGN_NAME],
             (existingPayload = []) => [
               ...existingPayload,
               {
