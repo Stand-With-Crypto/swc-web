@@ -41,7 +41,6 @@ import { maybeGetCongressionalDistrictFromAddress } from '@/utils/shared/getCong
 import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
-import { smsProvider, SMSProviders } from '@/utils/shared/smsProvider'
 import { UserActionOptInCampaignName } from '@/utils/shared/userActionCampaigns'
 import { zodAddress } from '@/validation/fields/zodAddress'
 import { zodEmailAddress } from '@/validation/fields/zodEmailAddress'
