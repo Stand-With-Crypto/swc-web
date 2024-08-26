@@ -38,11 +38,7 @@ export function LocationUnitedStates({
   const urls = getIntlUrls(locale)
 
   useEffect(() => {
-    async function viewKeyRaces() {
-      await actionCreateUserActionViewKeyRaces()
-    }
-
-    void viewKeyRaces()
+    void actionCreateUserActionViewKeyRaces()
   }, [])
 
   return (
