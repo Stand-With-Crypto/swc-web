@@ -33,6 +33,7 @@ async function apiResponseForUserFullProfileInfo() {
             userActionTweetAtPerson: true,
             userActionRsvpEvent: true,
             userActionVoterAttestation: true,
+            userActionViewKeyRaces: true,
           },
         },
       },
