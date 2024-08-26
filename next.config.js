@@ -370,6 +370,33 @@ const nextConfig = {
         destination: '/?utm_source=swc&utm_medium=sms&utm_campaign=0820&utm_content=v2',
         permanent: false,
       },
+
+      // Vanity Links
+      {
+        source: '/america-loves-crypto/az',
+        destination: 'https://americalovescryptoaz.splashthat.com',
+        permanent: true,
+      },
+      {
+        source: '/america-loves-crypto/nv',
+        destination: 'https://americalovescryptonv.splashthat.com',
+        permanent: true,
+      },
+      {
+        source: '/america-loves-crypto/wi',
+        destination: 'https://americalovescryptowi.splashthat.com',
+        permanent: true,
+      },
+      {
+        source: '/america-loves-crypto/mi',
+        destination: 'https://americalovescryptomi.splashthat.com',
+        permanent: true,
+      },
+      {
+        source: '/america-loves-crypto/pa',
+        destination: 'https://americalovescryptopa.splashthat.com',
+        permanent: true,
+      },
     ]
   },
 }
