@@ -2,6 +2,7 @@ import { faker } from '@faker-js/faker'
 import {
   DataCreationMethod,
   Prisma,
+  SMSStatus,
   User,
   UserInformationVisibility,
   UserInternalStatus,
@@ -36,13 +37,11 @@ export function mockCreateUserInput({
     phoneNumber: withData ? fakerFields.phoneNumber() : '',
     hasOptedInToEmails: true,
     hasOptedInToMembership: false,
-    hasOptedInToSms: false,
-    hasRepliedToOptInSms: false,
+    smsStatus: SMSStatus.NOT_OPTED_IN,
     hasValidPhoneNumber: true,
     internalStatus: UserInternalStatus.VISIBLE,
     capitolCanaryAdvocateId: null,
     capitolCanaryInstance: null,
-    smsStatus: 'NOT_OPTED_IN',
   } satisfies Prisma.UserCreateInput
 }
 
@@ -56,6 +55,8 @@ export function mockUser(): User {
     primaryUserCryptoAddressId: fakerFields.id(),
     dataCreationMethod: DataCreationMethod.BY_USER,
     addressId: withData ? fakerFields.id() : null,
+    hasOptedInToSms: null,
+    hasRepliedToOptInSms: null,
     totalDonationAmountUsd: new Decimal(
       faker.number.float({ min: 0, max: 30000, multipleOf: 0.01 }),
     ),

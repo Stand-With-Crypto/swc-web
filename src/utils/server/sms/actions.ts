@@ -14,26 +14,27 @@ import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
 import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
 import { smsProvider, SMSProviders } from '@/utils/shared/smsProvider'
 
-export async function optInUser(phoneNumber: string, user: User) {
+export async function optInUser(phoneNumber: string, user: User): Promise<SMSStatus> {
   const normalizedPhoneNumber = normalizePhoneNumber(phoneNumber)
 
   if (
     user.smsStatus === SMSStatus.OPTED_OUT ||
-    ([
-      SMSStatus.OPTED_IN,
-      SMSStatus.OPTED_IN_HAS_REPLIED,
-      SMSStatus.OPTED_IN_PENDING_DOUBLE_OPT_IN,
-    ].includes(user.smsStatus) &&
+    ([SMSStatus.OPTED_IN, SMSStatus.OPTED_IN_HAS_REPLIED].includes(user.smsStatus) &&
       user.phoneNumber === normalizedPhoneNumber) // If user has already opted in and has not changed their phone number, we don't want to send a message
   ) {
-    return
+    return user.smsStatus
   }
+
+  const newSMSStatus =
+    smsProvider === SMSProviders.TWILIO
+      ? SMSStatus.OPTED_IN
+      : SMSStatus.OPTED_IN_PENDING_DOUBLE_OPT_IN
 
   // If user opted-out, the only way to opt-back is by sending us a UNSTOP keyword
   if ([SMSStatus.NOT_OPTED_IN, SMSStatus.OPTED_IN_PENDING_DOUBLE_OPT_IN].includes(user.smsStatus)) {
     await prismaClient.user.updateMany({
       data: {
-        smsStatus: SMSStatus.OPTED_IN,
+        smsStatus: newSMSStatus,
       },
       where: {
         phoneNumber: normalizedPhoneNumber,
@@ -57,9 +58,12 @@ export async function optInUser(phoneNumber: string, user: User) {
     })
       .track('User SMS Opt-In', {
         provider: smsProvider,
+        smsStatus: newSMSStatus,
       })
       .flush(),
   )
+
+  return newSMSStatus
 }
 
 export async function optOutUser(phoneNumber: string, user?: User) {

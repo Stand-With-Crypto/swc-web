@@ -3,6 +3,7 @@ import 'server-only'
 
 import {
   Address,
+  SMSStatus,
   User,
   UserActionType,
   UserCryptoAddress,
@@ -153,8 +154,7 @@ async function maybeUpsertUser({
       userSessions: { create: { id: sessionId } },
       hasOptedInToEmails: false,
       hasOptedInToMembership: false,
-      hasOptedInToSms: false,
-      hasRepliedToOptInSms: false,
+      smsStatus: SMSStatus.NOT_OPTED_IN,
     },
   })
   return { user, userState: 'New' }

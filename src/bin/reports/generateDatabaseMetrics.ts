@@ -1,4 +1,4 @@
-import { UserActionType } from '@prisma/client'
+import { SMSStatus, UserActionType } from '@prisma/client'
 import { addWeeks, endOfDay, subDays, subWeeks } from 'date-fns'
 import xlsx from 'xlsx'
 
@@ -31,7 +31,17 @@ async function generateDatabaseMetrics() {
     prismaClient.user.count(),
     prismaClient.user.count({ where: { hasOptedInToMembership: true } }),
     prismaClient.user.count({ where: { hasOptedInToEmails: true } }),
-    prismaClient.user.count({ where: { hasOptedInToSms: true } }),
+    prismaClient.user.count({
+      where: {
+        smsStatus: {
+          in: [
+            SMSStatus.OPTED_IN,
+            SMSStatus.OPTED_IN_HAS_REPLIED,
+            SMSStatus.OPTED_IN_PENDING_DOUBLE_OPT_IN,
+          ],
+        },
+      },
+    }),
     prismaClient.$queryRaw`
     SELECT
         STR_TO_DATE(CONCAT(YEARWEEK(datetime_created), ' Sunday'), '%X%V %W') AS datetimeCreatedWeek,

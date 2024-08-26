@@ -4,6 +4,7 @@ import 'server-only'
 import {
   Address,
   Prisma,
+  SMSStatus,
   User,
   UserActionType,
   UserCryptoAddress,
@@ -345,8 +346,7 @@ async function maybeUpsertUser({
       userSessions: { create: { id: sessionId } },
       hasOptedInToEmails: true,
       hasOptedInToMembership: false,
-      hasOptedInToSms: false,
-      hasRepliedToOptInSms: false,
+      smsStatus: SMSStatus.NOT_OPTED_IN,
       firstName,
       lastName,
       userEmailAddresses: {
