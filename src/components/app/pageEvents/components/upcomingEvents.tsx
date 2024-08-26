@@ -23,21 +23,11 @@ export function UpcomingEventsList({ events }: UpcomingEventsProps) {
   const [eventsToShow, setEventsToShow] = useState(5)
   const [selectedStateFilter, setSelectedStateFilter] = useState('All')
 
-  const filteredFutureEvents = useMemo(() => {
-    return events.filter(event => {
-      const eventDate = event.data?.time
-        ? new Date(`${event.data.date}T${event.data.time}`)
-        : new Date(event.data.date)
-
-      return isAfter(eventDate, new Date())
-    })
-  }, [events])
-
   const filteredEvents = useMemo(() => {
     const result =
       selectedStateFilter === 'All'
-        ? filteredFutureEvents
-        : filteredFutureEvents.filter(event => event.data.state === selectedStateFilter)
+        ? events
+        : events.filter(event => event.data.state === selectedStateFilter)
 
     const orderedResult = result.sort((a, b) => {
       const aDate = a.data.time ? new Date(`${a.data.date}T${a.data.time}`) : new Date(a.data.date)
@@ -47,10 +37,10 @@ export function UpcomingEventsList({ events }: UpcomingEventsProps) {
     })
 
     return orderedResult
-  }, [filteredFutureEvents, selectedStateFilter])
+  }, [events, selectedStateFilter])
 
   const stateFilterOptions = useMemo(() => {
-    const stateWithEvents = filteredFutureEvents.reduce(
+    const stateWithEvents = events.reduce(
       (acc, event) => {
         const state = event.data.state
         acc[state] = (acc[state] || 0) + 1
@@ -69,7 +59,7 @@ export function UpcomingEventsList({ events }: UpcomingEventsProps) {
     options.unshift({ key: 'All', name: 'All' })
 
     return options
-  }, [filteredFutureEvents])
+  }, [events])
 
   return (
     <>

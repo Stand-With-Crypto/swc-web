@@ -2,7 +2,6 @@
 
 import { MouseEvent, useCallback, useEffect, useMemo, useState } from 'react'
 import { ComposableMap, Geographies, Geography, Marker } from 'react-simple-maps'
-import { isAfter } from 'date-fns'
 import { AnimatePresence, motion } from 'framer-motion'
 
 import {
@@ -34,18 +33,8 @@ export function EventsMap({ events }: { events: SWCEvents }) {
   const currentStroke = '#DAC5FF'
   const currentHoverAndPressedFill = '#DDC9FF'
 
-  const filteredFutureEvents = useMemo(() => {
-    return events.filter(event => {
-      const eventDate = event.data?.time
-        ? new Date(`${event.data.date}T${event.data.time}`)
-        : new Date(event.data.date)
-
-      return isAfter(eventDate, new Date())
-    })
-  }, [events])
-
   const eventsFromState = useMemo(() => {
-    const stateWithEvents = filteredFutureEvents.reduce(
+    const stateWithEvents = events.reduce(
       (acc, event) => {
         const state = event.data.state
         acc[state] = (acc[state] || 0) + 1
@@ -55,7 +44,7 @@ export function EventsMap({ events }: { events: SWCEvents }) {
     )
 
     return stateWithEvents
-  }, [filteredFutureEvents])
+  }, [events])
 
   const eventsFromStateKeys = Object.keys(eventsFromState)
 
