@@ -3,7 +3,7 @@ import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { NFTSlug } from '@/utils/shared/nft'
 
-export interface ScriptPayload {
+interface ScriptPayload {
   persist: boolean
 }
 

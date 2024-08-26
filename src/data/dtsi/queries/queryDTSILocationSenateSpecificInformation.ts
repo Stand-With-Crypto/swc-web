@@ -6,7 +6,7 @@ import {
   DTSI_SenateSpecificInformationQueryVariables,
 } from '@/data/dtsi/generated'
 
-export const query = /* GraphQL */ `
+const query = /* GraphQL */ `
   query SenateSpecificInformation($stateCode: String!) {
     people(
       limit: 999

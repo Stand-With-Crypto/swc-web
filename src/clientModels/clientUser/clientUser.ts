@@ -31,7 +31,7 @@ export type ClientUser = ClientModel<
   }
 >
 
-export type GetClientProps = User & {
+type GetClientProps = User & {
   primaryUserCryptoAddress: null | UserCryptoAddress
   address: Address | null
 }

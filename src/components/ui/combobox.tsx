@@ -21,7 +21,7 @@ import {
   trackPrimitiveComponentAnalytics,
 } from '@/utils/web/primitiveComponentAnalytics'
 
-export interface ComboBoxProps<T>
+interface ComboBoxProps<T>
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange' | 'type'>,
     PrimitiveComponentAnalytics<boolean> {
   inputValue: string

@@ -1,7 +1,7 @@
 import React from 'react'
+import { UserActionType } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import Cookies from 'js-cookie'
-import { usePathname } from 'next/navigation'
 import { useActiveWallet, useDisconnect } from 'thirdweb/react'
 
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
@@ -16,33 +16,31 @@ export function useSession() {
   const { session: thirdwebSession } = useThirdwebSession()
 
   const isLoading = fullProfileRequest.isLoading
+  const user = fullProfileRequest.data?.user
+  const hasOptInUserAction =
+    user?.userActions?.some(userAction => userAction.actionType === UserActionType.OPT_IN) ?? false
 
-  const emailAddress = fullProfileRequest.data?.user?.primaryUserEmailAddress
-  const isLoggedIn = thirdwebSession.isLoggedIn || !!emailAddress?.isVerified
+  const isLoggedIn = thirdwebSession.isLoggedIn || hasOptInUserAction
   const isLoggedInThirdweb = thirdwebSession.isLoggedIn
   return {
     isLoading: !isLoggedIn && isLoading,
     isLoggedIn,
     isLoggedInThirdweb,
-    user: fullProfileRequest.data?.user,
+    user,
+    hasOptInUserAction,
   }
 }
 
 export function useSessionControl() {
   const { logoutAndDisconnect } = useThirdwebSession()
 
-  const pathname = usePathname()
   const internalUrls = useIntlUrls()
 
   const handleLogoutSuccess = React.useCallback(() => {
     Cookies.set(USER_SESSION_ID_COOKIE_NAME, generateUserSessionId())
 
-    if (pathname === internalUrls.profile()) {
-      window.location.replace(internalUrls.home())
-    } else {
-      window.location.reload()
-    }
-  }, [internalUrls, pathname])
+    window.location.replace(internalUrls.home())
+  }, [internalUrls])
 
   const logout = React.useCallback(async () => {
     // This is used to trigger the login button to update the isLoggingOut state to true

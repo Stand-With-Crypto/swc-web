@@ -114,8 +114,8 @@ model User {
   primaryUserCryptoAddress   UserCryptoAddress?        @relation("asPrimaryUserCryptoAddress", fields: [primaryUserCryptoAddressId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   primaryUserCryptoAddressId String?                   @unique @map("primary_user_crypto_address_id")
   hasOptedInToEmails         Boolean                   @map("has_opted_in_to_emails")
-  hasOptedInToSms            Boolean                   @map("has_opted_in_to_sms")
-  hasRepliedToOptInSms       Boolean                   @default(false) @map("has_replied_to_opt_in_sms")
+  hasOptedInToSms            Boolean?                  @default(false) @map("has_opted_in_to_sms")
+  hasRepliedToOptInSms       Boolean?                  @default(false) @map("has_replied_to_opt_in_sms")
   hasOptedInToMembership     Boolean                   @map("has_opted_in_to_membership")
   hasValidPhoneNumber        Boolean                   @default(true) @map("has_valid_phone_number")
   internalStatus             UserInternalStatus        @default(VISIBLE) @map("internal_status")
@@ -492,6 +492,7 @@ model UserCommunication {
   messageId                  String                   @map("message_id")
   datetimeCreated            DateTime                 @default(now()) @map("datetime_created")
 
+  @@index([messageId])
   @@index([userCommunicationJourneyId])
   @@map("user_communication")
 }

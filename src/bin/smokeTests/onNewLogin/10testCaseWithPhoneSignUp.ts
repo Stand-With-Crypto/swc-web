@@ -7,7 +7,7 @@ export const testCaseWithPhoneSignUp: TestCase = {
     injectedFetchEmbeddedWalletMetadataFromThirdweb: () =>
       Promise.resolve({
         email: '',
-        phone: '+15555555555',
+        phone: '+13692125876',
         userId: '123567',
         walletAddress: '0x123',
         createdAt: new Date().toISOString(),
@@ -60,7 +60,7 @@ export const testCaseWithPhoneSignUp: TestCase = {
     )
     verify(
       maybeUpsertPhoneNumberResult?.phoneNumber,
-      false,
+      true,
       'maybeUpsertPhoneNumberResult?.phoneNumber',
       issues,
     )

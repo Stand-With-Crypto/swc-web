@@ -20,7 +20,7 @@ import {
 import { dtsiTweetUrl } from '@/utils/dtsi/dtsiTweetUtils'
 import { cn } from '@/utils/web/cn'
 
-export const getEmojiIndexes = (tweet: DTSIStanceDetailsTweetProp['tweet']) => {
+const getEmojiIndexes = (tweet: DTSIStanceDetailsTweetProp['tweet']) => {
   // define a regular expression to match all Unicode emoji characters
 
   // use matchAll() method to find all matches of the emoji regex in the string

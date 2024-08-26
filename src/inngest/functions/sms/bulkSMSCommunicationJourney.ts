@@ -34,6 +34,8 @@ interface BulkSMSCommunicationJourneyPayload {
   includePendingDoubleOptIn?: boolean
   send?: boolean
   campaignName: string
+  // Number of milliseconds or Time string compatible with the ms package, e.g. "30m", "3 hours", or "2.5d"
+  sleepTime?: string | number
 }
 
 export const bulkSMSCommunicationJourney = inngest.createFunction(
@@ -46,7 +48,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
     event: BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
   },
   async ({ step, event, logger }) => {
-    const { smsBody, userWhereInput, includePendingDoubleOptIn, send, campaignName } =
+    const { smsBody, userWhereInput, includePendingDoubleOptIn, send, campaignName, sleepTime } =
       event.data as BulkSMSCommunicationJourneyPayload
 
     if (!smsBody) {
@@ -63,6 +65,10 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
     // SMS messages over 160 characters are split into 153-character segments due to data headers.
     const getWaitingTimeInSeconds = (totalSegments: number) =>
       totalSegments / MESSAGE_SEGMENTS_PER_SECOND
+
+    if (sleepTime) {
+      await step.sleep('scheduled-sleep', sleepTime)
+    }
 
     const phoneNumbersThatShouldReceiveWelcomeMessage = await fetchAllPhoneNumbers(
       {

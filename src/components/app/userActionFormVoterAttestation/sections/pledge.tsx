@@ -155,7 +155,7 @@ function PledgeSectionWrapper({
   )
 }
 
-export function PledgeSectionSkeleton() {
+function PledgeSectionSkeleton() {
   return (
     <>
       <PledgeSectionWrapper>

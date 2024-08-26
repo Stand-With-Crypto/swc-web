@@ -2,7 +2,7 @@ import { setPrimaryCryptoAddressOfUser } from '@/inngest/functions/setPrimaryCry
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 
-export interface ScriptPayload {
+interface ScriptPayload {
   userId: string
   cryptoAddressId: string
   persist: boolean

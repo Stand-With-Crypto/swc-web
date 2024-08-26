@@ -36,7 +36,7 @@ export function UserActionFormSuccessScreenNextActionSkeleton() {
   )
 }
 
-export interface UserActionFormSuccessScreenNextActionProps {
+interface UserActionFormSuccessScreenNextActionProps {
   data: GetUserActionsProgressArgs
 }
 

@@ -22,7 +22,7 @@ const parseString = (str: string) => str.toLowerCase().trim()
 To prevent excessive initial page load size, we lazy load the majority of the data for this page via api endpoint.
 The static data is just the first "screen" of the politicians table
 */
-export function useGetAllPeople(options?: SWRConfiguration) {
+function useGetAllPeople(options?: SWRConfiguration) {
   return useSWR(
     apiUrls.dtsiAllPeople(),
     url =>

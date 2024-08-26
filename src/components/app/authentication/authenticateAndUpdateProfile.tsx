@@ -8,7 +8,7 @@ import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForU
 import { GooglePlaceAutocompletePrediction } from '@/utils/web/googlePlaceUtils'
 import { hasCompleteUserProfile } from '@/utils/web/hasCompleteUserProfile'
 
-export interface AuthenticateAndUpdateProfileProps {
+interface AuthenticateAndUpdateProfileProps {
   children: ReactNode
   onProfileUpdateSuccess?: (updatedUserFields: {
     firstName: string

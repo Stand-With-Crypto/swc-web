@@ -51,7 +51,7 @@ export const US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP = {
   WY: 'Wyoming',
 } as const
 
-export const US_TERRITORY_STATE_CODE_TO_DISPLAY_NAME_MAP = {
+const US_TERRITORY_STATE_CODE_TO_DISPLAY_NAME_MAP = {
   GU: 'Guam',
   PR: 'Puerto Rico',
   VI: 'Virgin Islands',

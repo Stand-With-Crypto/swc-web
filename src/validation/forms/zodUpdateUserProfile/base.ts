@@ -8,7 +8,7 @@ export const zodUpdateUserProfileBase = object({
   isEmbeddedWalletUser: boolean(),
   emailAddress: zodEmailAddress,
   phoneNumber: zodOptionalEmptyPhoneNumber,
-  hasOptedInToSms: boolean(),
+  optedInToSms: boolean(),
   hasOptedInToMembership: boolean(),
   // This now comes after the form in a separate step
   // informationVisibility: nativeEnum(UserInformationVisibility),
@@ -28,7 +28,7 @@ export function zodUpdateUserProfileBaseSuperRefine(
       })
     }
   }
-  if (!data.phoneNumber && data.hasOptedInToSms) {
+  if (!data.phoneNumber && data.optedInToSms) {
     ctx.addIssue({
       code: 'custom',
       message: 'Please enter a phone number to opt in to SMS',

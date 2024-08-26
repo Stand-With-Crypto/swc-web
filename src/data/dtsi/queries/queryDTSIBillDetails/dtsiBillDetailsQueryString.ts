@@ -1,4 +1,4 @@
-export const fragmentDTSIBillAnalysis = /* GraphQL */ `
+const fragmentDTSIBillAnalysis = /* GraphQL */ `
   fragment BillAnalysis on BillAnalysis {
     id
     internalNotes
@@ -7,7 +7,7 @@ export const fragmentDTSIBillAnalysis = /* GraphQL */ `
   }
 `
 
-export const fragmentDTSIBillRelationships = /* GraphQL */ `
+const fragmentDTSIBillRelationships = /* GraphQL */ `
   fragment BillRelationships on BillPersonRelationship {
     id
     relationshipType

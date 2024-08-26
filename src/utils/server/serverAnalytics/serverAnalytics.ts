@@ -86,6 +86,24 @@ export function getServerAnalytics(config: ServerAnalyticsConfig) {
     return { flush }
   }
 
+  const trackUserActionUpdated = ({
+    actionType,
+    campaignName,
+    userState,
+    ...other
+  }: {
+    actionType: UserActionType
+    campaignName: string
+    userState: AnalyticsUserActionUserState
+  } & AnalyticProperties) => {
+    return trackAnalytic(config, 'User Action Updated', {
+      'User Action Type': actionType,
+      'Campaign Name': campaignName,
+      'User State': userState,
+      ...other,
+    })
+  }
+
   const trackUserActionCreated = ({
     actionType,
     campaignName,
@@ -149,5 +167,11 @@ export function getServerAnalytics(config: ServerAnalyticsConfig) {
     })
   }
 
-  return { trackUserActionCreated, trackUserActionCreatedIgnored, track, flush }
+  return {
+    trackUserActionCreated,
+    trackUserActionUpdated,
+    trackUserActionCreatedIgnored,
+    track,
+    flush,
+  }
 }
