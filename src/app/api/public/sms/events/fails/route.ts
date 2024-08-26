@@ -37,7 +37,7 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
   try {
     const payload = JSON.parse(body.Payload) as SMSFailedEventPayload
 
-    const errorCode = payload.error_code ?? 'undefined'
+    const errorCode = payload.error_code ?? 'UNKNOWN_CODE'
     const messageId = payload.resource_sid
 
     if (errorCode && messageId) {
