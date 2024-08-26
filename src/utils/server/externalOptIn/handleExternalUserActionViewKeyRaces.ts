@@ -101,7 +101,7 @@ export async function handleExternalUserActionViewKeyRaces(
   const analytics = getServerAnalytics({ userId: user.id, localUser })
 
   if (existingViewKeyRacesAction) {
-    logger.info('User already has an existing action')
+    logger.info(`User ${userId} has already viewed key races`)
 
     const shouldUpdateActionWithAddressInfo =
       existingViewKeyRacesAction.userActionViewKeyRaces?.usaState !== currentUsaState ||
@@ -151,11 +151,10 @@ export async function handleExternalUserActionViewKeyRaces(
     }
   }
 
-  logger.info('Creating new user action')
+  logger.info(`Creating new action for user ${userId}`)
 
   const newUserActionViewKeyRaces = await createUserActionViewKeyRaces(
     userId,
-    sessionId,
     currentUsaState,
     currentCongressionalDistrict,
   )
@@ -208,7 +207,6 @@ async function updateUserActionViewKeyRaces(
 
 async function createUserActionViewKeyRaces(
   userId: string,
-  sessionId: string,
   usaState: string | null,
   usCongressionalDistrict: string | null,
 ) {
@@ -232,11 +230,6 @@ async function createUserActionViewKeyRaces(
       user: {
         connect: {
           id: userId,
-          userSessions: {
-            some: {
-              id: sessionId,
-            },
-          },
         },
       },
     },
