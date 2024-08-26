@@ -178,7 +178,7 @@ export async function handleExternalUserActionOptIn(
   }
 
   if (input.hasOptedInToReceiveSMSFromSWC) {
-    await smsActions.optInUser(user.phoneNumber, user)
+    await smsActions.optInUser(input.phoneNumber, user)
   }
 
   if (existingAction) {
@@ -271,7 +271,6 @@ async function maybeUpsertUser({
     lastName,
     phoneNumber,
     hasOptedInToMembership,
-    hasOptedInToReceiveSMSFromSWC,
     address,
   } = input
 
@@ -326,15 +325,6 @@ async function maybeUpsertUser({
     ? UserEmailAddressSource.VERIFIED_THIRD_PARTY
     : UserEmailAddressSource.USER_ENTERED
 
-  let newSMSStatus: SMSStatus = SMSStatus.NOT_OPTED_IN
-
-  if (hasOptedInToReceiveSMSFromSWC) {
-    newSMSStatus =
-      smsProvider === SMSProviders.TWILIO
-        ? SMSStatus.OPTED_IN
-        : SMSStatus.OPTED_IN_PENDING_DOUBLE_OPT_IN
-  }
-
   if (existingUser) {
     const updatePayload: Prisma.UserUpdateInput = {
       ...(firstName && !existingUser.firstName && { firstName }),
@@ -343,8 +333,6 @@ async function maybeUpsertUser({
       ...(!existingUser.hasOptedInToEmails && { hasOptedInToEmails: true }),
       ...(hasOptedInToMembership &&
         !existingUser.hasOptedInToMembership && { hasOptedInToMembership }),
-      ...(hasOptedInToReceiveSMSFromSWC &&
-        existingUser.smsStatus !== newSMSStatus && { smsStatus: newSMSStatus }),
       ...(emailAddress &&
         existingUser.userEmailAddresses.every(addr => addr.emailAddress !== emailAddress) && {
           userEmailAddresses: {
@@ -452,7 +440,6 @@ async function maybeUpsertUser({
       phoneNumber,
       hasOptedInToEmails: true,
       hasOptedInToMembership: hasOptedInToMembership || false,
-      smsStatus: newSMSStatus,
       userEmailAddresses: {
         create: {
           emailAddress,
