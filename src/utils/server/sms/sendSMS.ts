@@ -7,7 +7,7 @@ import { SendSMSError } from './SendSMSError'
 
 const TWILIO_PHONE_NUMBER = requiredEnv(process.env.TWILIO_PHONE_NUMBER, 'TWILIO_PHONE_NUMBER')
 
-export const zodSendSMSSchema = z.object({
+const zodSendSMSSchema = z.object({
   to: z.string(),
   body: z.string(),
 })

@@ -22,7 +22,7 @@ import { cn } from '@/utils/web/cn'
 
 import { CookiePreferencesForm } from './cookiePreferencesForm'
 
-export interface ManageCookiesModalProps {
+interface ManageCookiesModalProps {
   onSubmit: (accepted: CookieConsentPermissions) => void
   children: React.ReactNode
 }

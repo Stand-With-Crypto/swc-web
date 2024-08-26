@@ -2,13 +2,13 @@ import { Metadata, Viewport } from 'next'
 
 import { getOpenGraphImageUrl } from '@/utils/server/generateOpenGraphImageUrl'
 
-export const sharedOpenGraphMetadata = {
+const sharedOpenGraphMetadata = {
   siteName: 'Stand With Crypto',
   locale: 'en_US',
   type: 'website',
 } satisfies Partial<Metadata['openGraph']>
 
-export const sharedTwitterMetadata = {
+const sharedTwitterMetadata = {
   card: 'summary_large_image',
   //   siteId: '', TODO figure out what standwithcrypto is via the twitter api
   creator: '@standwithcrypto',

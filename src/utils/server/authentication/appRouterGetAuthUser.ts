@@ -5,7 +5,7 @@ import { prismaClient } from '@/utils/server/prismaClient'
 import { appRouterGetThirdwebAuthUser } from '@/utils/server/thirdweb/appRouterGetThirdwebAuthUser'
 import { USER_SESSION_ID_COOKIE_NAME } from '@/utils/shared/userSessionId'
 
-export interface ServerAuthUser {
+interface ServerAuthUser {
   userId: string
   address: string | null
 }

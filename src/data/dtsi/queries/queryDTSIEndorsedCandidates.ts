@@ -5,7 +5,7 @@ import {
   DTSI_EndorsedCandidatesQueryVariables,
 } from '@/data/dtsi/generated'
 
-export const query = /* GraphQL */ `
+const query = /* GraphQL */ `
   query EndorsedCandidates($endorsedDTSISlugs: [String!]!) {
     people(limit: 1500, offset: 0, slugIn: $endorsedDTSISlugs) {
       ...PersonCard

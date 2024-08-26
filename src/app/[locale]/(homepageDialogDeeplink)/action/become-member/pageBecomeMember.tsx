@@ -32,7 +32,7 @@ export function PageBecomeMember({ hasOptedInToMembership = false }: Props) {
   )
 }
 
-export function SuccessState() {
+function SuccessState() {
   const router = useRouter()
   const urls = useIntlUrls()
 

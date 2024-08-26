@@ -8,7 +8,7 @@ import { getLogger } from '@/utils/shared/logger'
 
 const logger = getLogger('backfillNFT')
 
-export const zodBackfillNFParameters = object({
+const zodBackfillNFParameters = object({
   limit: number().optional(),
   persist: boolean().optional(),
 })

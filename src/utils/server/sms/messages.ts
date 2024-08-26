@@ -3,5 +3,3 @@ export const WELCOME_MESSAGE = `Message & data rates may apply. Message frequenc
 export const GOODBYE_MESSAGE = `You have opted out and will no longer receive texts from Stand With Crypto. Text START to receive texts from SWC.`
 
 export const UNSTOP_CONFIRMATION_MESSAGE = `Thanks for subscribing to Stand With Crypto. Message & data rates may apply. Message frequency varies. Reply HELP for help or STOP to opt out.`
-
-export const HELP_MESSAGE = `Contact Stand With Crypto Support at info@StandWithCrypto.org`

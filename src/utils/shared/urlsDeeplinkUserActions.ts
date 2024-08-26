@@ -14,7 +14,7 @@ const parseQueryString = (queryString?: string) => {
   return `?${queryString}`
 }
 
-export type DeeplinkConfig = {
+type DeeplinkConfig = {
   locale: SupportedLocale
   queryString?: string
 }
@@ -69,14 +69,11 @@ export const USER_ACTION_DEEPLINK_MAP: {
 }
 export type UserActionTypesWithDeeplink = keyof typeof USER_ACTION_DEEPLINK_MAP
 
-export const USER_ACTION_WITH_CAMPAIGN_DEEPLINK_MAP: {
+const USER_ACTION_WITH_CAMPAIGN_DEEPLINK_MAP: {
   [key in ActiveClientUserActionType]?: {
     [campaign in UserActionCampaigns[key]]?: DeeplinkFunction
   }
 } = {}
-
-export type UserActionWithCampaignDeeplink =
-  (typeof USER_ACTION_WITH_CAMPAIGN_DEEPLINK_MAP)[UserActionTypesWithDeeplink]
 
 type GetUserActionDeeplinkArgs<ActionType extends UserActionTypesWithDeeplink> = {
   actionType: ActionType

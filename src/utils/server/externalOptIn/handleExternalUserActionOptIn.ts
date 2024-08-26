@@ -47,7 +47,7 @@ import { zodEmailAddress } from '@/validation/fields/zodEmailAddress'
 import { zodFirstName, zodLastName } from '@/validation/fields/zodName'
 import { zodOptionalEmptyPhoneNumber } from '@/validation/fields/zodPhoneNumber'
 
-export const zodExternalUserActionOptInUserAddress = object({
+const zodExternalUserActionOptInUserAddress = object({
   streetNumber: string(),
   route: string(),
   subpremise: string(),
@@ -59,7 +59,7 @@ export const zodExternalUserActionOptInUserAddress = object({
   countryCode: string().length(2),
 })
 
-export const zodExternalUserActionOptIn = z.object({
+const zodExternalUserActionOptIn = z.object({
   emailAddress: zodEmailAddress,
   cryptoAddress: string()
     .optional()

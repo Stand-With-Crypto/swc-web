@@ -10,7 +10,7 @@ function convertDistrictNumberToDTSIFormat(districtNumber: NormalizedDTSIDistric
   return districtNumber === 'at-large' ? 'At-Large' : `${districtNumber}`
 }
 
-export const query = /* GraphQL */ `
+const query = /* GraphQL */ `
   query LocationSpecificRacesInformation($stateCode: String!, $district: String!) {
     congressional: people(
       limit: 999

@@ -43,5 +43,3 @@ export const getCountPolicymakerContacts = async () => {
     hardcodedCountSum,
   }
 }
-
-export type CountPolicymakerContacts = Awaited<ReturnType<typeof getCountPolicymakerContacts>>

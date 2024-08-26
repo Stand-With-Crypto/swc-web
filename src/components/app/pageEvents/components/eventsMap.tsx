@@ -17,7 +17,7 @@ import {
   US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP,
 } from '@/utils/shared/usStateUtils'
 
-export interface MapMarker {
+interface MapMarker {
   id: string
   name: string
   coordinates: [number, number]

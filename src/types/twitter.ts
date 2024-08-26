@@ -3,13 +3,9 @@ import {
   TweetEntityHashtagV2,
   TweetEntityMentionV2,
   TweetEntityUrlV2,
-  TweetV2,
 } from 'twitter-api-v2'
 
-export interface UserTweet extends TweetV2 {
-  created_at: string
-}
-export type TweetMedia =
+type TweetMedia =
   | {
       media_key: string
       width: number
@@ -40,13 +36,6 @@ type TweetEntryTextEntity = {
   start: number
   end: number
 }
-
-export type TweetEntityOptions =
-  | TweetEntryTextEntity
-  | TweetEntityUrlV2
-  | TweetEntityHashtagV2
-  | TweetEntityHashtagV2
-  | TweetEntityMentionV2
 
 export type TweetEntityOptionsWithType =
   | (TweetEntryTextEntity & { type: 'text' })

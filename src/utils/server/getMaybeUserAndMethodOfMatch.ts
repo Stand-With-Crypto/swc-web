@@ -28,8 +28,6 @@ export type UserAndMethodOfMatch<I extends PrismaBase = PrismaBase> = BaseUserAn
   I
 >
 
-export type UserAndMethodOfMatchWithMaybeSession<I extends PrismaBase = PrismaBase> =
-  BaseUserAndMethodOfMatch<string | undefined, I>
 /*
 If you're wondering what all the prisma type signatures are for, this allows people to pass additional prismaClient.user.findFirst arguments in
 These arguments change the actual shape of the returned result (select and include for example) so we need to use generics to ensure we get the full type-safe result back

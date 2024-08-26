@@ -10,8 +10,3 @@ export type PageAdvocatesHeatmapProps = {
   description?: string
   isEmbedded?: boolean
 }
-
-export type TotalAdvocatesProps = Pick<
-  Awaited<ReturnType<typeof getHomepageData>>,
-  'countPolicymakerContacts' | 'countUsers' | 'sumDonations'
-> & { locale: SupportedLocale }

@@ -1,17 +1,7 @@
 import * as Sentry from '@sentry/nextjs'
-import { NextApiRequest } from 'next'
 import { cookies, headers } from 'next/headers'
 
 import { USER_SESSION_ID_COOKIE_NAME } from '@/utils/shared/userSessionId'
-
-export function getUserSessionIdOnPageRouter(req: NextApiRequest) {
-  const value = req.cookies[USER_SESSION_ID_COOKIE_NAME]
-  if (!value) {
-    // this should be getting set in middleware so we want to trigger some analytics errors if its not set
-    Sentry.captureMessage(`getUserSessionIdOnPageRouter: cookie not set`)
-  }
-  return value || null
-}
 
 export function getUserSessionIdThatMightNotExist() {
   const userCookies = cookies()

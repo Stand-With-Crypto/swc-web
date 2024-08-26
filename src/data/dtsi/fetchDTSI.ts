@@ -15,7 +15,7 @@ const logger = getLogger('fetchDTSI')
 */
 
 const DO_THEY_SUPPORT_IT_API_KEY = process.env.DO_THEY_SUPPORT_IT_API_KEY!
-export const IS_MOCKING_DTSI_DATA =
+const IS_MOCKING_DTSI_DATA =
   IS_DEVELOPING_OFFLINE || (!DO_THEY_SUPPORT_IT_API_KEY && NEXT_PUBLIC_ENVIRONMENT === 'local')
 
 export const fetchDTSI = async <R, V = object>(
