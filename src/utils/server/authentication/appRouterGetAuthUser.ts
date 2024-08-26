@@ -32,9 +32,7 @@ export async function appRouterGetAuthUser(): Promise<ServerAuthUser | null> {
       },
     },
     where: {
-      primaryUserEmailAddress: {
-        isVerified: true,
-      },
+      userActions: { some: { actionType: 'OPT_IN' } },
       userSessions: {
         some: {
           id: sessionId,
