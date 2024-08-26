@@ -1,5 +1,6 @@
 import 'server-only'
 
+import { User, UserCommunication, UserCommunicationJourney } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { waitUntil } from '@vercel/functions'
 import { NextRequest, NextResponse } from 'next/server'
@@ -9,6 +10,7 @@ import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/ser
 import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
 import { withRouteMiddleware } from '@/utils/server/serverWrappers/withRouteMiddleware'
 import { verifySignature } from '@/utils/server/sms/utils'
+import { sleep } from '@/utils/shared/sleep'
 
 interface SMSStatusEvent {
   ErrorCode?: string
@@ -23,6 +25,16 @@ interface SMSStatusEvent {
   AccountSid: string
 }
 
+const MAX_RETRY_COUNT = 3
+
+type UserCommunicationWithRelations =
+  | (UserCommunication & {
+      userCommunicationJourney: UserCommunicationJourney & {
+        user: User
+      }
+    })
+  | null
+
 export const POST = withRouteMiddleware(async (request: NextRequest) => {
   const [isVerified, body] = await verifySignature<SMSStatusEvent>(request)
 
@@ -32,25 +44,34 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
     })
   }
 
-  const userCommunication = await prismaClient.userCommunication.findFirst({
-    where: {
-      messageId: body.MessageSid,
-    },
-    orderBy: {
-      userCommunicationJourney: {
-        user: {
-          datetimeUpdated: 'desc',
+  let userCommunication: UserCommunicationWithRelations = null
+
+  for (let i = 0; i < MAX_RETRY_COUNT; i += 1) {
+    userCommunication = await prismaClient.userCommunication.findFirst({
+      where: {
+        messageId: body.MessageSid,
+      },
+      orderBy: {
+        userCommunicationJourney: {
+          user: {
+            datetimeUpdated: 'desc',
+          },
         },
       },
-    },
-    include: {
-      userCommunicationJourney: {
-        include: {
-          user: true,
+      include: {
+        userCommunicationJourney: {
+          include: {
+            user: true,
+          },
         },
       },
-    },
-  })
+    })
+
+    // Calls to this webhook are being received before the messages are registered in our database. Therefore, we need to implement a retry mechanism for fetching the messages.
+    if (!userCommunication) {
+      await sleep(500)
+    }
+  }
 
   if (!userCommunication) {
     Sentry.captureMessage(`Received message status update but couldn't find user_communication`, {
