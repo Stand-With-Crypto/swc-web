@@ -11,6 +11,7 @@ const TWILIO_PHONE_NUMBER = requiredEnv(process.env.TWILIO_PHONE_NUMBER, 'TWILIO
 const zodSendSMSSchema = z.object({
   to: z.string(),
   body: z.string(),
+  media: z.array(z.string()).optional(),
 })
 
 export type SendSMSPayload = z.infer<typeof zodSendSMSSchema>
@@ -22,7 +23,7 @@ export const sendSMS = async (payload: SendSMSPayload) => {
     throw new Error('Invalid sendSMS payload')
   }
 
-  const { body, to } = validatedInput.data
+  const { body, to, media } = validatedInput.data
 
   try {
     const statusCallback = fullUrl(apiUrls.smsStatusCallback())
@@ -32,6 +33,7 @@ export const sendSMS = async (payload: SendSMSPayload) => {
       body,
       statusCallback,
       to,
+      mediaUrl: media,
     })
 
     return message

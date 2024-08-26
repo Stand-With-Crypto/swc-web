@@ -34,6 +34,7 @@ interface BulkSMSCommunicationJourneyPayload {
   includePendingDoubleOptIn?: boolean
   send?: boolean
   campaignName: string
+  media?: string[]
   // Number of milliseconds or Time string compatible with the ms package, e.g. "30m", "3 hours", or "2.5d"
   sleepTime?: string | number
 }
@@ -48,8 +49,15 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
     event: BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
   },
   async ({ step, event, logger }) => {
-    const { smsBody, userWhereInput, includePendingDoubleOptIn, send, campaignName, sleepTime } =
-      event.data as BulkSMSCommunicationJourneyPayload
+    const {
+      smsBody,
+      userWhereInput,
+      includePendingDoubleOptIn,
+      send,
+      campaignName,
+      sleepTime,
+      media,
+    } = event.data as BulkSMSCommunicationJourneyPayload
 
     if (!smsBody) {
       throw new NonRetriableError('Missing sms body')
@@ -90,6 +98,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
             body: addWelcomeMessage(smsBody),
             campaignName,
             journeyType: UserCommunicationJourneyType.BULK_SMS,
+            media,
           },
         ],
       }))
@@ -111,6 +120,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
             body: smsBody,
             campaignName,
             journeyType: UserCommunicationJourneyType.BULK_SMS,
+            media,
           },
         ],
       })),
