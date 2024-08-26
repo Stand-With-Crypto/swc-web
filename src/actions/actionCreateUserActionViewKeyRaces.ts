@@ -87,7 +87,7 @@ async function _actionCreateUserActionViewKeyRaces(input: CreateActionViewKeyRac
   const hasUserAtLeastOptedIn = await hasUserPartakenSomeAction(userId)
 
   if (!hasUserAtLeastOptedIn) {
-    logger.info('User has not even opted in')
+    logger.info(`User ${userId} has not opted in`)
 
     analytics.track('User has not even opted in', {
       actionType,
@@ -121,7 +121,7 @@ async function _actionCreateUserActionViewKeyRaces(input: CreateActionViewKeyRac
   const existingViewKeyRacesAction = await hasUserViewedKeyRaces(userId)
 
   if (existingViewKeyRacesAction) {
-    logger.info('User already has an existing action')
+    logger.info(`User ${userId} has already viewed key races`)
 
     const shouldUpdateActionWithAddressInfo =
       existingViewKeyRacesAction.userActionViewKeyRaces?.usaState !== currentUsaState ||
@@ -162,16 +162,11 @@ async function _actionCreateUserActionViewKeyRaces(input: CreateActionViewKeyRac
     return { user: getClientUser(user) }
   }
 
-  logger.info('Creating new user action')
+  logger.info(`Creating new action for user ${userId}`)
 
   await triggerRateLimiterAtMostOnce()
 
-  await createUserActionViewKeyRaces(
-    userId,
-    sessionId,
-    currentUsaState,
-    currentCongressionalDistrict,
-  )
+  await createUserActionViewKeyRaces(userId, currentUsaState, currentCongressionalDistrict)
 
   analytics.trackUserActionCreated({
     actionType,
@@ -219,7 +214,6 @@ async function updateUserActionViewKeyRaces(
 
 async function createUserActionViewKeyRaces(
   userId: string,
-  sessionId: string,
   usaState: string | null,
   usCongressionalDistrict: string | null,
 ) {
@@ -243,11 +237,6 @@ async function createUserActionViewKeyRaces(
       user: {
         connect: {
           id: userId,
-          userSessions: {
-            some: {
-              id: sessionId,
-            },
-          },
         },
       },
     },
