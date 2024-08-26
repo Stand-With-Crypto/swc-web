@@ -11,6 +11,7 @@ export const ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN = [
   UserActionType.LIVE_EVENT,
   UserActionType.TWEET_AT_PERSON,
   UserActionType.VOTER_ATTESTATION,
+  UserActionType.VIEW_KEY_RACES,
   UserActionType.RSVP_EVENT,
   UserActionType.VIEW_KEY_RACES,
 ] as const

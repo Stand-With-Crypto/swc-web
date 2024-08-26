@@ -1,5 +1,9 @@
+'use client'
+
+import { useEffect } from 'react'
 import { compact, isEmpty, times } from 'lodash-es'
 
+import { actionCreateUserActionViewKeyRaces } from '@/actions/actionCreateUserActionViewKeyRaces'
 import { ContentSection } from '@/components/app/ContentSection'
 import { DarkHeroSection } from '@/components/app/darkHeroSection'
 import { DTSIPersonHeroCardSection } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardSection'
@@ -48,6 +52,12 @@ export function LocationStateSpecific({
       return district
     }),
   )
+
+  useEffect(() => {
+    void actionCreateUserActionViewKeyRaces({
+      usaState: stateCode,
+    })
+  }, [stateCode])
 
   return (
     <div>
