@@ -9,7 +9,7 @@ import { UserActionCampaignName } from '@/utils/shared/userActionCampaigns'
 import { cn } from '@/utils/web/cn'
 import { USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN } from '@/utils/web/userActionUtils'
 
-export interface UserActionRowCTAsListProps {
+interface UserActionRowCTAsListProps {
   performedUserActionTypes?: Array<{ actionType: UserActionType; campaignName: string }>
   excludeUserActionTypes?: UserActionType[]
   className?: string

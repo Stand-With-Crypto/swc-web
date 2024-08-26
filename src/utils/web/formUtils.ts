@@ -1,7 +1,6 @@
 import { UseFormReturn } from 'react-hook-form'
 import * as Sentry from '@sentry/nextjs'
 import { isError, noop } from 'lodash-es'
-import { z } from 'zod'
 
 import { FetchReqError } from '@/utils/shared/fetchReq'
 import { logger } from '@/utils/shared/logger'
@@ -17,8 +16,6 @@ export const GENERIC_FORM_ERROR_KEY = 'FORM_ERROR' as const
 export type GenericErrorFormValues = {
   FORM_ERROR?: string
 }
-
-export type FormValues<T extends z.ZodType<any, any, any>> = z.infer<T> & GenericErrorFormValues
 
 export async function triggerServerActionForForm<
   F extends UseFormReturn<any, any, any>,

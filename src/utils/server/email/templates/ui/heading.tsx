@@ -4,7 +4,7 @@ import { ClassValue } from 'clsx'
 
 import { cn } from '@/utils/web/cn'
 
-export const headingVariantsConfig = {
+const headingVariantsConfig = {
   size: {
     lg: 'text-3xl',
     md: 'text-xl',

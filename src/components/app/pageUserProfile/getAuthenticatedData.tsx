@@ -47,6 +47,7 @@ export async function getAuthenticatedData() {
           userActionTweetAtPerson: true,
           userActionRsvpEvent: true,
           userActionVoterAttestation: true,
+          userActionViewKeyRaces: true,
         },
       },
     },

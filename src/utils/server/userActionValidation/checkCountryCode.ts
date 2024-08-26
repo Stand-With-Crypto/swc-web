@@ -5,7 +5,7 @@ import { cookies } from 'next/headers'
 import { USER_COUNTRY_CODE_COOKIE_NAME } from '@/utils/server/getCountryCode'
 import { UserActionValidationErrors } from '@/utils/server/userActionValidation/constants'
 
-export const checkCountryCode = async (countryCode: string) => {
+const checkCountryCode = async (countryCode: string) => {
   const userCountryCode = cookies().get(USER_COUNTRY_CODE_COOKIE_NAME)?.value
   return userCountryCode === countryCode
 }

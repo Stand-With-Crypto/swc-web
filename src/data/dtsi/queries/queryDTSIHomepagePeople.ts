@@ -2,7 +2,7 @@ import { fetchDTSI } from '@/data/dtsi/fetchDTSI'
 import { fragmentDTSIPersonCard } from '@/data/dtsi/fragments/fragmentDTSIPersonCard'
 import { DTSI_HomepagePeopleQuery, DTSI_HomepagePeopleQueryVariables } from '@/data/dtsi/generated'
 
-export const query = /* GraphQL */ `
+const query = /* GraphQL */ `
   query HomepagePeople {
     lowestScores: people(limit: 4, offset: 0, stanceScoreLte: 50) {
       ...PersonCard

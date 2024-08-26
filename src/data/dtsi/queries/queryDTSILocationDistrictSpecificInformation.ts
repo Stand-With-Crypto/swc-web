@@ -11,7 +11,7 @@ function convertDistrictNumberToDTSIFormat(districtNumber: NormalizedDTSIDistric
   return districtNumber === 'at-large' ? 'At-Large' : `${districtNumber}`
 }
 
-export const query = /* GraphQL */ `
+const query = /* GraphQL */ `
   query DistrictSpecificInformation($stateCode: String!, $district: String!) {
     people(
       limit: 999

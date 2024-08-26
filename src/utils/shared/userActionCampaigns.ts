@@ -11,6 +11,7 @@ export const ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN = [
   UserActionType.LIVE_EVENT,
   UserActionType.TWEET_AT_PERSON,
   UserActionType.VOTER_ATTESTATION,
+  UserActionType.VIEW_KEY_RACES,
   UserActionType.RSVP_EVENT,
   UserActionType.VIEW_KEY_RACES,
 ] as const
@@ -87,21 +88,6 @@ export type UserActionCampaigns = {
   [UserActionType.VIEW_KEY_RACES]: UserActionViewKeyRacesCampaignName
   [UserActionType.RSVP_EVENT]: UserActionRsvpEventCampaignName
 }
-
-export const USER_ACTION_TO_CAMPAIGN_NAME_MAP = {
-  [UserActionType.EMAIL]: UserActionEmailCampaignName,
-  [UserActionType.CALL]: UserActionCallCampaignName,
-  [UserActionType.DONATION]: UserActionDonationCampaignName,
-  [UserActionType.OPT_IN]: UserActionOptInCampaignName,
-  [UserActionType.TWEET]: UserActionTweetCampaignName,
-  [UserActionType.NFT_MINT]: UserActionNftMintCampaignName,
-  [UserActionType.VOTER_REGISTRATION]: UserActionVoterRegistrationCampaignName,
-  [UserActionType.LIVE_EVENT]: UserActionLiveEventCampaignName,
-  [UserActionType.TWEET_AT_PERSON]: UserActionTweetAtPersonCampaignName,
-  [UserActionType.VOTER_ATTESTATION]: UserActionVoterAttestationCampaignName,
-  [UserActionType.VIEW_KEY_RACES]: UserActionViewKeyRacesCampaignName,
-  [UserActionType.RSVP_EVENT]: UserActionRsvpEventCampaignName,
-} satisfies Record<ActiveClientUserActionWithCampaignType, any>
 
 export const USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
   [UserActionType.EMAIL]: UserActionEmailCampaignName.FIT21_2024_04_FOLLOW_UP,

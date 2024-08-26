@@ -14,5 +14,3 @@ export const getCountUsers = async () => {
   */
   return { count: count * 10111 }
 }
-
-export type CountUsers = Awaited<ReturnType<typeof getCountUsers>>

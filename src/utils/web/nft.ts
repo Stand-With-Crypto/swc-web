@@ -2,7 +2,7 @@ import type { ValidContractInstance } from '@thirdweb-dev/sdk'
 
 import { NFTSlug } from '@/utils/shared/nft'
 
-export type ContractMetadata = Awaited<ReturnType<ValidContractInstance['metadata']['get']>>
+type ContractMetadata = Awaited<ReturnType<ValidContractInstance['metadata']['get']>>
 
 export interface NFTClientMetadata extends Pick<ContractMetadata, 'name' | 'description'> {
   image: { url: string; width: number; height: number; alt: string }

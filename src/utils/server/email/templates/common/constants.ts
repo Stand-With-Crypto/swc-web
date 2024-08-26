@@ -34,42 +34,42 @@ export const ACTIONS_METADATA_BY_TYPE: Record<
     buttonHref: string
   }
 > = {
-  VOTER_REGISTRATION: {
+  [EmailActiveActions.VOTER_REGISTRATION]: {
     image: `/actionTypeIcons/registerToVote.png`,
     text: "Make sure you're registered to vote",
     subtext: 'Double check your registration information or find out how to get registered.',
     buttonLabel: 'Register',
     buttonHref: `/action/voter-registration`,
   },
-  VOTER_ATTESTATION: {
+  [EmailActiveActions.VOTER_ATTESTATION]: {
     image: `/actionTypeIcons/voterAttestation.png`,
     text: 'Pledge to vote',
     subtext: 'Pledge to vote for pro-crypto candidates',
     buttonLabel: 'Pledge',
     buttonHref: '/action/pledge',
   },
-  EMAIL: {
+  [EmailActiveActions.EMAIL]: {
     image: `/actionTypeIcons/email.png`,
     text: 'Email your Congressperson',
     subtext: 'Make your voice heard. We make it easy.',
     buttonLabel: 'Send an email',
     buttonHref: `/action/email`,
   },
-  CALL: {
+  [EmailActiveActions.CALL]: {
     image: `/actionTypeIcons/call.png`,
     text: `Call your Congressperson`,
     subtext: "The most effective way to make your voice heard. We'll show you how.",
     buttonLabel: 'Make a call',
     buttonHref: `/action/call`,
   },
-  DONATION: {
+  [EmailActiveActions.DONATION]: {
     image: `/actionTypeIcons/donate.png`,
     text: 'Donate to Stand With Crypto',
     subtext: "Support Stand With Crypto's aim to mobilize 52 million crypto advocates in the US.",
     buttonLabel: 'Donate',
     buttonHref: `/donate`,
   },
-  NFT_MINT: {
+  [EmailActiveActions.NFT_MINT]: {
     image: `/actionTypeIcons/mintNFT.png`,
     text: 'Mint your Supporter NFT',
     subtext: 'All mint proceeds are donated to the movement.',

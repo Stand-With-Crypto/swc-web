@@ -16,7 +16,7 @@ export const actionUpdateUserHasOptedInToMembership = withServerActionMiddleware
   _actionUpdateUserHasOptedInToMembership,
 )
 
-export async function _actionUpdateUserHasOptedInToMembership() {
+async function _actionUpdateUserHasOptedInToMembership() {
   const authUser = await appRouterGetAuthUser()
   if (!authUser) {
     throw new Error('Unauthenticated')

@@ -12,7 +12,7 @@ import { InfoBadge } from '@/components/ui/infoBadge'
 import { CookieConsentPermissions, OptionalCookieConsentTypes } from '@/utils/shared/cookieConsent'
 import { GenericErrorFormValues } from '@/utils/web/formUtils'
 
-export interface CookiePreferencesFormProps {
+interface CookiePreferencesFormProps {
   onSubmit: (accepted: CookieConsentPermissions) => void
 }
 

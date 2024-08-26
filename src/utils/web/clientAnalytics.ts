@@ -63,13 +63,6 @@ export function trackClientAnalytic(eventName: string, _eventProperties?: Analyt
   }
 }
 
-export function setClientAnalyticsUserProperties(userProperties: object) {
-  if (environmentHasAnalyticsEnabled) {
-    maybeInitClientAnalytics()
-    mixpanel.people.set(userProperties)
-  }
-}
-
 export function trackFormSubmitted(formName: string, other?: AnalyticProperties) {
   trackClientAnalytic('Form Submitted', { 'Form Name': formName, ...other })
 }
@@ -93,16 +86,6 @@ export function trackSectionVisible(
   trackClientAnalytic(`New Section Visible`, {
     Section: section,
     'Section Group': sectionGroup,
-    ...eventProperties,
-  })
-}
-export type LoginProvider = 'email' | 'google' | 'wallet'
-export function trackLoginAttempt({
-  method,
-  ...eventProperties
-}: { method: LoginProvider } & AnalyticProperties) {
-  trackClientAnalytic('Login Attempt', {
-    Method: method,
     ...eventProperties,
   })
 }

@@ -34,7 +34,7 @@ const initialSignUpUserCommunicationJourneyPayload = z.object({
   decreaseTimers: z.boolean().default(false).optional(),
 })
 
-export type InitialSignUpUserCommunicationJourneyPayload = z.infer<
+type InitialSignUpUserCommunicationJourneyPayload = z.infer<
   typeof initialSignUpUserCommunicationJourneyPayload
 >
 
