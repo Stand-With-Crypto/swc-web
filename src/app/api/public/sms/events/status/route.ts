@@ -69,7 +69,7 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
 
     // Calls to this webhook are being received before the messages are registered in our database. Therefore, we need to implement a retry mechanism for fetching the messages.
     if (!userCommunication) {
-      await sleep(500)
+      await sleep(1000)
     }
   }
 
