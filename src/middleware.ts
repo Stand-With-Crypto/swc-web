@@ -3,7 +3,11 @@ import { i18nRouter } from 'next-i18n-router'
 
 import { localeDetector } from '@/intl/localeDetector'
 import { DEFAULT_LOCALE, ORDERED_SUPPORTED_LOCALES } from '@/intl/locales'
-import { getCountryCode, USER_COUNTRY_CODE_COOKIE_NAME } from '@/utils/server/getCountryCode'
+import {
+  getCountryCode,
+  parseUserCountryCodeCookie,
+  USER_COUNTRY_CODE_COOKIE_NAME,
+} from '@/utils/server/getCountryCode'
 import { isCypress } from '@/utils/shared/executionEnvironment'
 import { getLogger } from '@/utils/shared/logger'
 import { generateUserSessionId, USER_SESSION_ID_COOKIE_NAME } from '@/utils/shared/userSessionId'
@@ -44,12 +48,17 @@ export function middleware(request: NextRequest) {
   }
 
   const existingCountryCode = request.cookies.get(USER_COUNTRY_CODE_COOKIE_NAME)?.value
+  const parsedExistingCountryCode = parseUserCountryCodeCookie(existingCountryCode)
+
   const userCountryCode = getCountryCode(request)
 
-  if (existingCountryCode !== userCountryCode) {
+  if (
+    parsedExistingCountryCode?.countryCode !== userCountryCode &&
+    !parsedExistingCountryCode?.bypassed
+  ) {
     i18nParsedResponse.cookies.set({
       name: USER_COUNTRY_CODE_COOKIE_NAME,
-      value: userCountryCode,
+      value: JSON.stringify({ countryCode: userCountryCode, bypassed: false }),
       httpOnly: false,
     })
   }

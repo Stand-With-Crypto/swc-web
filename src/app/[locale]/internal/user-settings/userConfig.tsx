@@ -17,7 +17,10 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { USER_COUNTRY_CODE_COOKIE_NAME } from '@/utils/server/getCountryCode'
+import {
+  parseUserCountryCodeCookie,
+  USER_COUNTRY_CODE_COOKIE_NAME,
+} from '@/utils/server/getCountryCode'
 import { setCookie } from '@/utils/server/setCookie'
 
 type FormFields = {
@@ -31,9 +34,12 @@ export function UserConfig() {
   )
   const [bypassSingleActions, setBypassSingleActions] = useCookieState('SWC_BYPASS_SINGLE_ACTIONS')
 
+  const existingCountryCode = Cookies.get(USER_COUNTRY_CODE_COOKIE_NAME)
+  const parsedExistingCountryCode = parseUserCountryCodeCookie(existingCountryCode)
+
   const form = useForm<FormFields>({
     defaultValues: {
-      countryCode: Cookies.get(USER_COUNTRY_CODE_COOKIE_NAME),
+      countryCode: parsedExistingCountryCode?.countryCode,
     },
   })
 
@@ -77,7 +83,10 @@ export function UserConfig() {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(async values => {
-            void setCookie(USER_COUNTRY_CODE_COOKIE_NAME, values.countryCode)
+            void setCookie(
+              USER_COUNTRY_CODE_COOKIE_NAME,
+              JSON.stringify({ countryCode: values.countryCode, bypassed: true }),
+            )
           })}
         >
           <div className="flex items-end gap-4">

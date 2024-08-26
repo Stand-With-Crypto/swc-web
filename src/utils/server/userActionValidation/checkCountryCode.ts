@@ -2,12 +2,17 @@ import 'server-only'
 
 import { cookies } from 'next/headers'
 
-import { USER_COUNTRY_CODE_COOKIE_NAME } from '@/utils/server/getCountryCode'
+import {
+  parseUserCountryCodeCookie,
+  USER_COUNTRY_CODE_COOKIE_NAME,
+} from '@/utils/server/getCountryCode'
 import { UserActionValidationErrors } from '@/utils/server/userActionValidation/constants'
 
 const checkCountryCode = async (countryCode: string) => {
   const userCountryCode = cookies().get(USER_COUNTRY_CODE_COOKIE_NAME)?.value
-  return userCountryCode === countryCode
+
+  const parsedExistingCountryCode = parseUserCountryCodeCookie(userCountryCode)
+  return parsedExistingCountryCode?.countryCode === countryCode
 }
 
 export function createCountryCodeValidation(requiredCountryCode: string) {
