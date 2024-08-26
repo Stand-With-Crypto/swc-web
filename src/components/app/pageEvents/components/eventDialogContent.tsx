@@ -147,7 +147,9 @@ function EventInformation({
   handleGetUpdatesButtonClick: () => Promise<void>
   handleRSVPButtonClick: () => void
 }) {
-  const eventDate = event?.time ? new Date(`${event.date}T${event.time}`) : new Date(event.date)
+  const eventDate = event?.time
+    ? new Date(`${event.date}T${event.time}`)
+    : new Date(`${event.date}T00:00`)
   const formattedEventDate = format(eventDate, event?.time ? 'EEEE M/d, h:mm a' : 'EEEE M/d')
   const isPastEvent = isBefore(startOfDay(eventDate), startOfDay(new Date()))
 

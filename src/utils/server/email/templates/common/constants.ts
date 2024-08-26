@@ -36,8 +36,8 @@ export const ACTIONS_METADATA_BY_TYPE: Record<
 > = {
   [EmailActiveActions.VOTER_REGISTRATION]: {
     image: `/actionTypeIcons/registerToVote.png`,
-    text: 'Register to vote',
-    subtext: 'Check your voter registration status and get a free NFT by pplpleasr.',
+    text: "Make sure you're registered to vote",
+    subtext: 'Double check your registration information or find out how to get registered.',
     buttonLabel: 'Register',
     buttonHref: `/action/voter-registration`,
   },
