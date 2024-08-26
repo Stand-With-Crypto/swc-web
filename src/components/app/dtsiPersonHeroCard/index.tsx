@@ -47,7 +47,7 @@ function getSubHeaderString(props: Props) {
   }
 }
 
-export function DTSIPersonHeroCardFooter({
+function DTSIPersonHeroCardFooter({
   isRecommended,
   children,
   className,

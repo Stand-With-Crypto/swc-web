@@ -89,21 +89,6 @@ export type UserActionCampaigns = {
   [UserActionType.RSVP_EVENT]: UserActionRsvpEventCampaignName
 }
 
-export const USER_ACTION_TO_CAMPAIGN_NAME_MAP = {
-  [UserActionType.EMAIL]: UserActionEmailCampaignName,
-  [UserActionType.CALL]: UserActionCallCampaignName,
-  [UserActionType.DONATION]: UserActionDonationCampaignName,
-  [UserActionType.OPT_IN]: UserActionOptInCampaignName,
-  [UserActionType.TWEET]: UserActionTweetCampaignName,
-  [UserActionType.NFT_MINT]: UserActionNftMintCampaignName,
-  [UserActionType.VOTER_REGISTRATION]: UserActionVoterRegistrationCampaignName,
-  [UserActionType.LIVE_EVENT]: UserActionLiveEventCampaignName,
-  [UserActionType.TWEET_AT_PERSON]: UserActionTweetAtPersonCampaignName,
-  [UserActionType.VOTER_ATTESTATION]: UserActionVoterAttestationCampaignName,
-  [UserActionType.VIEW_KEY_RACES]: UserActionViewKeyRacesCampaignName,
-  [UserActionType.RSVP_EVENT]: UserActionRsvpEventCampaignName,
-} satisfies Record<ActiveClientUserActionWithCampaignType, any>
-
 export const USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
   [UserActionType.EMAIL]: UserActionEmailCampaignName.FIT21_2024_04_FOLLOW_UP,
   [UserActionType.CALL]: UserActionCallCampaignName.FIT21_2024_04,

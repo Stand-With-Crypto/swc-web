@@ -1,2 +1,2 @@
-export const THIRDWEB_AUTH_COOKIE_PREFIX = `thirdweb_auth`
+const THIRDWEB_AUTH_COOKIE_PREFIX = `thirdweb_auth`
 export const THIRDWEB_AUTH_TOKEN_COOKIE_PREFIX = `${THIRDWEB_AUTH_COOKIE_PREFIX}_token`

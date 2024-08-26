@@ -5,6 +5,7 @@ import {
   CapitolCanaryInstance,
   DataCreationMethod,
   Prisma,
+  SMSStatus,
   User,
   UserActionOptInType,
   UserActionType,
@@ -43,6 +44,7 @@ import {
   ServerLocalUser,
 } from '@/utils/server/serverLocalUser'
 import { getUserSessionId as _getUserSessionId } from '@/utils/server/serverUserSessionId'
+import * as smsActions from '@/utils/server/sms/actions'
 import {
   fetchEmbeddedWalletMetadataFromThirdweb,
   ThirdwebEmbeddedWalletMetadata,
@@ -86,6 +88,7 @@ export async function login(payload: VerifyLoginPayloadParams) {
     },
     where: {
       userCryptoAddresses: { some: { cryptoAddress, hasBeenVerifiedViaAuth: true } },
+      userActions: { some: { actionType: UserActionType.OPT_IN } },
     },
   })
 
@@ -299,6 +302,10 @@ export async function onNewLogin(props: NewLoginParams) {
         })
       : null
 
+  if (maybeUpsertPhoneNumberResult) {
+    user = maybeUpsertPhoneNumberResult.user
+  }
+
   const maybeUpsertEmbeddedWalletEmailAddressResult =
     hasSignedInWithEmail && embeddedWalletUserDetails?.email
       ? await maybeUpsertEmbeddedWalletEmailAddress({
@@ -337,6 +344,7 @@ export async function onNewLogin(props: NewLoginParams) {
     wasUserCreated,
     analytics,
     sessionId: props.getUserSessionId(),
+    embeddedWalletUserDetails,
     decreaseCommunicationTimers: props.decreaseCommunicationTimers,
   })
 
@@ -428,11 +436,7 @@ async function queryMatchingUsers({
         },
         embeddedWalletUserDetails?.phone && {
           phoneNumber: embeddedWalletUserDetails.phone,
-          hasOptedInToSms: true,
-          hasRepliedToOptInSms: true,
-          primaryUserEmailAddressId: {
-            not: null,
-          },
+          smsStatus: SMSStatus.OPTED_IN_HAS_REPLIED,
         },
       ]),
     },
@@ -517,8 +521,7 @@ async function createUser({
       informationVisibility: UserInformationVisibility.ANONYMOUS,
       hasOptedInToEmails: hasSignedInWithEmail,
       hasOptedInToMembership: false,
-      hasOptedInToSms: false,
-      hasRepliedToOptInSms: false,
+      smsStatus: SMSStatus.NOT_OPTED_IN,
       referralId: generateReferralId(),
       userSessions: {
         create: { id: sessionId ?? undefined },
@@ -535,16 +538,29 @@ async function maybeUpsertPhoneNumber({
   user: UpsertedUser
   embeddedWalletUserDetails: ThirdwebEmbeddedWalletMetadata
 }) {
-  if (user.phoneNumber) return user
+  const phoneNumber = embeddedWalletUserDetails.phone
+  const smsStatus = SMSStatus.OPTED_IN_HAS_REPLIED
 
-  await prismaClient.user.update({
+  const result = await prismaClient.user.update({
     where: { id: user.id },
     data: {
-      phoneNumber: embeddedWalletUserDetails.phone,
-      hasOptedInToSms: true,
-      hasRepliedToOptInSms: true,
+      smsStatus,
+      phoneNumber,
+    },
+
+    include: {
+      address: true,
+      primaryUserEmailAddress: true,
+      userEmailAddresses: true,
+      userCryptoAddresses: true,
     },
   })
+
+  return {
+    user: result,
+    phoneNumber,
+    smsStatus,
+  }
 }
 
 async function maybeUpsertCryptoAddress({
@@ -727,6 +743,7 @@ async function triggerPostLoginUserActionSteps({
   wasUserCreated,
   analytics,
   sessionId,
+  embeddedWalletUserDetails,
   decreaseCommunicationTimers,
 }: {
   wasUserCreated: boolean
@@ -735,6 +752,7 @@ async function triggerPostLoginUserActionSteps({
   localUser: ServerLocalUser | null
   analytics: ServerAnalytics
   sessionId: string | null
+  embeddedWalletUserDetails: ThirdwebEmbeddedWalletMetadata | null
   decreaseCommunicationTimers?: boolean
 }) {
   const log = getLog(userCryptoAddress.cryptoAddress)
@@ -772,6 +790,10 @@ async function triggerPostLoginUserActionSteps({
       localUser?.persisted?.experiments?.gh02_SWCSignUpFlowExperiment
     if (signUpFlowExperimentVariant === 'control') {
       await claimNFTAndSendEmailNotification(optInUserAction, userCryptoAddress)
+    }
+
+    if (embeddedWalletUserDetails?.phone) {
+      await smsActions.optInUser(embeddedWalletUserDetails.phone, user)
     }
 
     analytics.trackUserActionCreated({

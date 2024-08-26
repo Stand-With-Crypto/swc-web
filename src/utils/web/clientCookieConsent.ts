@@ -7,7 +7,7 @@ import {
   deserializeCookieConsent,
 } from '@/utils/shared/cookieConsent'
 
-export let mutableClientCookieConsent: CookieConsentPermissions | null | undefined = undefined
+let mutableClientCookieConsent: CookieConsentPermissions | null | undefined = undefined
 export function setClientCookieConsent(val: CookieConsentPermissions | null) {
   mutableClientCookieConsent = val
 }

@@ -4,7 +4,7 @@ import {
   DTSI_BillRelationShipByPersonQueryVariables,
 } from '@/data/dtsi/generated'
 
-export const query = /* GraphQL */ `
+const query = /* GraphQL */ `
   query BillRelationShipByPerson($billId: String!, $personSlugIn: [String!]) {
     bill(id: $billId) {
       relationships(personSlugIn: $personSlugIn) {

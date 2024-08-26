@@ -20,7 +20,7 @@ const dataset = englishDataset
       .addWhitelistedTerm('dock'),
   )
 
-export const obscenityMatcher = new RegExpMatcher({
+const obscenityMatcher = new RegExpMatcher({
   ...dataset.build(),
   ...englishRecommendedTransformers,
 })

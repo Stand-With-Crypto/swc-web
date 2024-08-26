@@ -31,7 +31,7 @@ import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
 import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
-import { optInUser } from '@/utils/server/sms/actions'
+import * as smsActions from '@/utils/server/sms/actions'
 import { maybeGetCongressionalDistrictFromAddress } from '@/utils/shared/getCongressionalDistrictFromAddress'
 import { getLogger } from '@/utils/shared/logger'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
@@ -106,14 +106,8 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
       address: true,
     },
   })
-  const {
-    firstName,
-    lastName,
-    emailAddress,
-    phoneNumber,
-    hasOptedInToSms,
-    hasOptedInToMembership,
-  } = validatedFields.data
+  const { firstName, lastName, emailAddress, phoneNumber, optedInToSms, hasOptedInToMembership } =
+    validatedFields.data
   const address = validatedFields.data.address
     ? await prismaClient.address.upsert({
         where: {
@@ -158,7 +152,7 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
         $phone: phoneNumber,
         $name: userFullName(validatedFields.data),
         'Has Opted In To Membership': hasOptedInToMembership,
-        'Has Opted In To Sms': hasOptedInToSms,
+        'Has Opted In To Sms': optedInToSms,
       })
       .flush(),
   )
@@ -172,13 +166,12 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
       lastName,
       phoneNumber,
       hasOptedInToMembership,
-      hasOptedInToSms,
       hasValidPhoneNumber: true,
       addressId: address?.id || null,
       primaryUserEmailAddressId: primaryUserEmailAddress?.id || null,
       // If the user removes their phone number and the current smsStatus is not OPTED_OUT we change the smsStatus to NOT_OPTED_IN
       smsStatus:
-        (!hasOptedInToSms || !phoneNumber) && user.smsStatus !== SMSStatus.OPTED_OUT
+        (!optedInToSms || !phoneNumber) && user.smsStatus !== SMSStatus.OPTED_OUT
           ? SMSStatus.NOT_OPTED_IN
           : user.smsStatus,
     },
@@ -188,8 +181,8 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
     },
   })
 
-  if (hasOptedInToSms && phoneNumber) {
-    await optInUser(phoneNumber, user)
+  if (optedInToSms && phoneNumber) {
+    updatedUser.smsStatus = await smsActions.optInUser(phoneNumber, user)
   }
 
   await handleCapitolCanaryAdvocateUpsert(updatedUser, primaryUserEmailAddress, user)
@@ -258,7 +251,7 @@ async function handleCapitolCanaryAdvocateUpsert(
       oldUser.address?.googlePlaceId !== updatedUser.address?.googlePlaceId ||
       oldUser.primaryUserEmailAddress?.emailAddress !== primaryUserEmailAddress?.emailAddress ||
       oldUser.phoneNumber !== updatedUser.phoneNumber ||
-      oldUser.hasOptedInToSms !== updatedUser.hasOptedInToSms ||
+      oldUser.smsStatus !== updatedUser.smsStatus ||
       (!oldUser.hasOptedInToMembership && updatedUser.hasOptedInToMembership)) &&
     (primaryUserEmailAddress || updatedUser.phoneNumber)
   ) {
@@ -271,7 +264,7 @@ async function handleCapitolCanaryAdvocateUpsert(
       userEmailAddress: primaryUserEmailAddress, // Using new email here.
       opts: {
         isEmailOptin: true,
-        isSmsOptin: updatedUser.hasOptedInToSms,
+        isSmsOptin: updatedUser.smsStatus === SMSStatus.OPTED_IN_PENDING_DOUBLE_OPT_IN,
       },
     }
     if (!oldUser.hasOptedInToMembership && updatedUser.hasOptedInToMembership) {

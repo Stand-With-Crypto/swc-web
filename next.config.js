@@ -322,6 +322,11 @@ const nextConfig = {
         destination: '/action/pledge?utm_source=swc&utm_medium=event&utm_campaign=sst',
         permanent: false,
       },
+      {
+        source: '/alc',
+        destination: '/action/pledge?utm_source=swc&utm_medium=event&utm_campaign=sst',
+        permanent: false,
+      },
       // SMS shortlinks
       {
         source: '/nv/1',

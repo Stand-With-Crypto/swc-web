@@ -1,6 +1,7 @@
 import 'server-only'
 
 import React, { cloneElement, ReactElement } from 'react'
+import { isAfter, parseISO, subDays } from 'date-fns'
 import { X } from 'lucide-react'
 
 import NotFound from '@/app/not-found'
@@ -34,6 +35,10 @@ export async function EventsPageDialogDeeplinkLayout({
     return NotFound()
   }
 
+  const filteredFutureEvents = events.filter(event =>
+    isAfter(parseISO(event.data.date), subDays(new Date(), 1)),
+  )
+
   return (
     <>
       <InternalLink
@@ -42,14 +47,14 @@ export async function EventsPageDialogDeeplinkLayout({
         replace
       />
       <div className={cn(dialogContentStyles, 'min-h-[200px]')}>
-        {cloneElement(children, { events })}
+        {cloneElement(children, { events: filteredFutureEvents })}
         <InternalLink className={dialogCloseStyles} href={urls.events()} replace>
           <X size={20} />
           <span className="sr-only">Close</span>
         </InternalLink>
       </div>
 
-      <EventsPage events={events!} isDeepLink />
+      <EventsPage events={filteredFutureEvents!} isDeepLink />
     </>
   )
 }

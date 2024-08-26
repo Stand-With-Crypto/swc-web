@@ -6,7 +6,7 @@ import {
   DTSI_UnitedStatesPresidentialQueryVariables,
 } from '@/data/dtsi/generated'
 
-export const query = /* GraphQL */ `
+const query = /* GraphQL */ `
   query UnitedStatesPresidential {
     people(limit: 999, offset: 0, personRoleGroupingOr: [RUNNING_FOR_PRESIDENT]) {
       ...RaceSpecificPersonInfo

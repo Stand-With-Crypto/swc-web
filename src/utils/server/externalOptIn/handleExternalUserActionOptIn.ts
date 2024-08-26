@@ -1,6 +1,7 @@
 import {
   Address,
   Prisma,
+  SMSStatus,
   SupportedUserCryptoNetwork,
   User,
   UserActionOptInType,
@@ -32,6 +33,7 @@ import {
   getServerPeopleAnalytics,
 } from '@/utils/server/serverAnalytics'
 import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
+import * as smsActions from '@/utils/server/sms/actions'
 import { getUserAcquisitionFieldsForVerifiedSWCPartner } from '@/utils/server/verifiedSWCPartner/attribution'
 import { VerifiedSWCPartner } from '@/utils/server/verifiedSWCPartner/constants'
 import { getFormattedDescription } from '@/utils/shared/address'
@@ -45,7 +47,7 @@ import { zodEmailAddress } from '@/validation/fields/zodEmailAddress'
 import { zodFirstName, zodLastName } from '@/validation/fields/zodName'
 import { zodOptionalEmptyPhoneNumber } from '@/validation/fields/zodPhoneNumber'
 
-export const zodExternalUserActionOptInUserAddress = object({
+const zodExternalUserActionOptInUserAddress = object({
   streetNumber: string(),
   route: string(),
   subpremise: string(),
@@ -57,7 +59,7 @@ export const zodExternalUserActionOptInUserAddress = object({
   countryCode: string().length(2),
 })
 
-export const zodExternalUserActionOptIn = z.object({
+const zodExternalUserActionOptIn = z.object({
   emailAddress: zodEmailAddress,
   cryptoAddress: string()
     .optional()
@@ -174,12 +176,15 @@ export async function handleExternalUserActionOptIn(
     },
   }
 
+  if (input.hasOptedInToReceiveSMSFromSWC) {
+    await smsActions.optInUser(input.phoneNumber, user)
+  }
+
   if (existingAction) {
-    if (!existingAction.user.hasOptedInToSms && input.hasOptedInToReceiveSMSFromSWC) {
-      await prismaClient.user.update({
-        where: { id: existingAction.user.id },
-        data: { hasOptedInToSms: true },
-      })
+    if (
+      existingAction.user.smsStatus === SMSStatus.NOT_OPTED_IN &&
+      input.hasOptedInToReceiveSMSFromSWC
+    ) {
       await inngest.send({
         name: CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME,
         data: capitolCanaryPayload,
@@ -265,7 +270,6 @@ async function maybeUpsertUser({
     lastName,
     phoneNumber,
     hasOptedInToMembership,
-    hasOptedInToReceiveSMSFromSWC,
     address,
   } = input
 
@@ -328,8 +332,6 @@ async function maybeUpsertUser({
       ...(!existingUser.hasOptedInToEmails && { hasOptedInToEmails: true }),
       ...(hasOptedInToMembership &&
         !existingUser.hasOptedInToMembership && { hasOptedInToMembership }),
-      ...(hasOptedInToReceiveSMSFromSWC &&
-        !existingUser.hasOptedInToSms && { hasOptedInToSms: hasOptedInToReceiveSMSFromSWC }),
       ...(emailAddress &&
         existingUser.userEmailAddresses.every(addr => addr.emailAddress !== emailAddress) && {
           userEmailAddresses: {
@@ -437,8 +439,6 @@ async function maybeUpsertUser({
       phoneNumber,
       hasOptedInToEmails: true,
       hasOptedInToMembership: hasOptedInToMembership || false,
-      hasOptedInToSms: hasOptedInToReceiveSMSFromSWC || false,
-      hasRepliedToOptInSms: false,
       userEmailAddresses: {
         create: {
           emailAddress,

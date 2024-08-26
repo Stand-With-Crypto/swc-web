@@ -2,7 +2,7 @@ import { cleanPostalCodes } from '@/inngest/functions/cleanupPostalCodes/logic'
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 
-export interface ScriptPayload {
+interface ScriptPayload {
   persist: boolean
 }
 

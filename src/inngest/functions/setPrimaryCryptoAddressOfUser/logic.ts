@@ -5,7 +5,7 @@ import { getLogger } from '@/utils/shared/logger'
 
 const logger = getLogger('setPrimaryCryptoAddressOfUser')
 
-export const zodPrimaryCryptoAddressOfUserParameters = object({
+const zodPrimaryCryptoAddressOfUserParameters = object({
   userId: string(),
   cryptoAddressId: string(),
   persist: boolean(),

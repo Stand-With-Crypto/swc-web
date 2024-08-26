@@ -15,7 +15,7 @@ type IDTSIStanceDetailsQuoteProps = Omit<IStanceDetailsProps, 'stance'> & {
   stance: DTSIStanceDetailsStanceProp<DTSIStanceDetailsQuoteProp>
 }
 
-export const DTSIStanceDetailsQuoteShared: React.FC<
+const DTSIStanceDetailsQuoteShared: React.FC<
   IDTSIStanceDetailsQuoteProps & { children: React.ReactNode }
 > = ({ children, stance, bodyClassName }) => {
   return (

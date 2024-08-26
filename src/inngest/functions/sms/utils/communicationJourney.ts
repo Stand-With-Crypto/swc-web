@@ -3,7 +3,7 @@ import { NonRetriableError } from 'inngest'
 
 import { prismaClient } from '@/utils/server/prismaClient'
 
-export type CreatedCommunicationJourneys = Awaited<ReturnType<typeof createCommunicationJourneys>>
+type CreatedCommunicationJourneys = Awaited<ReturnType<typeof createCommunicationJourneys>>
 
 // this journey types should have only one UserCommunicationJourney per user
 const journeyTypesWithSingleJourney = [

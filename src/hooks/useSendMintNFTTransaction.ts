@@ -10,8 +10,6 @@ import { logger } from '@/utils/shared/logger'
 import { thirdwebClient } from '@/utils/shared/thirdwebClient'
 import { safeStringify } from '@/utils/web/safeStringify'
 
-export type MintStatus = 'idle' | 'loading' | 'completed' | 'canceled' | 'error'
-
 type UseSendMintNFTTransactionOptions = {
   contractAddress: string
   quantity: number
@@ -62,7 +60,7 @@ export function useSendMintNFTTransaction({
   }
 }
 
-export function getErrorInstance(maybeError: unknown): Error {
+function getErrorInstance(maybeError: unknown): Error {
   if (!maybeError) {
     return new Error('Empty error')
   }
