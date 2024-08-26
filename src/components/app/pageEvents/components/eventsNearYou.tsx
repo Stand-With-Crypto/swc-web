@@ -70,7 +70,7 @@ export function _EventsNearYou({ events }: EventsNearYouProps) {
 
 function FilteredEventsNearUser({ events, userState }: { events: SWCEvents; userState: string }) {
   const filteredEventsNearUser = useMemo(() => {
-    return userState ? events.filter(event => event.data.state === userState) : []
+    return events.filter(event => event.data.state === userState)
   }, [events, userState])
 
   const hasEvents = filteredEventsNearUser.length > 0
