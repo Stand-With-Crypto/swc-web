@@ -15,7 +15,7 @@ export const zodVerifiedSWCPartnersGetUserMetadata = z.object({
 
 const logger = getLogger('verifiedSWCPartnerGetUserMetadata')
 
-export enum VerifiedSWCPartnersGetUserMetadataResult {
+enum VerifiedSWCPartnersGetUserMetadataResult {
   EXISTS = 'exists',
 }
 

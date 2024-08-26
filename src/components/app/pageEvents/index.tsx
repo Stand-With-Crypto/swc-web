@@ -1,3 +1,5 @@
+import { isAfter, parseISO, subDays } from 'date-fns'
+
 import { GeoGate } from '@/components/app/geoGate'
 import { AllUpcomingEvents } from '@/components/app/pageEvents/components/allUpcomingEvents'
 import { EventsIntro } from '@/components/app/pageEvents/components/eventsIntro'
@@ -13,6 +15,10 @@ interface EventsPageProps {
 }
 
 export function EventsPage({ events, isDeepLink }: EventsPageProps) {
+  const filteredFutureEvents = events.filter(event =>
+    isAfter(parseISO(event.data.date), subDays(new Date(), 1)),
+  )
+
   return (
     <div
       className={cn(
@@ -22,13 +28,13 @@ export function EventsPage({ events, isDeepLink }: EventsPageProps) {
     >
       <EventsIntro />
 
-      <PromotedEvents events={events} />
+      <PromotedEvents events={filteredFutureEvents} />
 
       <GeoGate countryCode={DEFAULT_SUPPORTED_COUNTRY_CODE} unavailableContent={null}>
-        <EventsNearYou events={events} />
+        <EventsNearYou events={filteredFutureEvents} />
       </GeoGate>
 
-      <AllUpcomingEvents events={events} />
+      <AllUpcomingEvents events={filteredFutureEvents} />
 
       {/* <FeaturedPastEvents events={events} /> */}
     </div>

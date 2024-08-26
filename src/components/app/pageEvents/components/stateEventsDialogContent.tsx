@@ -1,6 +1,6 @@
 'use client'
 
-import { format } from 'date-fns'
+import { format, isAfter } from 'date-fns'
 
 import { EventDialog } from '@/components/app/pageEvents/components/eventDialog'
 import { NextImage } from '@/components/ui/image'
@@ -22,6 +22,13 @@ export function StateEventsDialogContent({ state, events }: StateEventsDialogPro
   const stateEvents =
     events?.filter(event => event.data.state?.toLowerCase() === state.toLowerCase()) ?? []
 
+  const orderedResult = stateEvents.sort((a, b) => {
+    const aDate = a.data.time ? new Date(`${a.data.date}T${a.data.time}`) : new Date(a.data.date)
+    const bDate = b.data.time ? new Date(`${b.data.date}T${b.data.time}`) : new Date(b.data.date)
+
+    return isAfter(aDate, bDate) ? 1 : -1
+  })
+
   return (
     <div className="flex flex-col items-center gap-2 pb-4">
       <NextImage
@@ -36,16 +43,16 @@ export function StateEventsDialogContent({ state, events }: StateEventsDialogPro
         Events in {US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP[parsedState]}
       </h3>
       <p className="font-mono text-base text-muted-foreground">
-        There {pluralize({ singular: 'is', plural: 'are', count: stateEvents?.length ?? 0 })}{' '}
-        {stateEvents?.length ?? 0} Stand With Crypto{' '}
-        {pluralize({ singular: 'event', count: stateEvents?.length ?? 0 })} in{' '}
+        There {pluralize({ singular: 'is', plural: 'are', count: orderedResult?.length ?? 0 })}{' '}
+        {orderedResult?.length ?? 0} Stand With Crypto{' '}
+        {pluralize({ singular: 'event', count: orderedResult?.length ?? 0 })} in{' '}
         {US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP[parsedState]}.
       </p>
 
       <ScrollArea className="w-full">
-        {stateEvents?.length > 0 ? (
+        {orderedResult?.length > 0 ? (
           <div className="mt-6 flex w-full flex-col gap-4 px-8 lg:max-h-96">
-            {stateEvents.map(event => (
+            {orderedResult.map(event => (
               <EventDialog
                 event={event.data}
                 key={event.data.slug}
@@ -65,7 +72,7 @@ interface StateDialogEventCardProps {
 }
 
 function StateDialogEventCard({ event }: StateDialogEventCardProps) {
-  const formattedEventDate = format(new Date(event.date), 'MMMM d, yyyy')
+  const formattedEventDate = format(new Date(`${event.date}T00:00`), 'MMMM d, yyyy')
 
   return (
     <div className="flex w-full max-w-[856px] flex-col gap-2 rounded-2xl bg-backgroundAlternate p-6 pt-4 transition hover:bg-backgroundAlternate/60 lg:flex-row lg:items-center lg:p-4 lg:pt-4">

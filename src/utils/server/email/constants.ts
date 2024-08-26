@@ -22,6 +22,8 @@ export type EmailEvent = {
   sg_event_id: string
   useragent?: string
   url?: string
+  variant?: string
+  category?: string
 } & { [key: string]: string }
 
 export const EVENT_NAME_TO_HUMAN_READABLE_STRING: Record<EmailEventName, string> = {

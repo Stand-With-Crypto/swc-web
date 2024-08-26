@@ -7,13 +7,13 @@ import { fetchBaseETHBalances } from '@/utils/server/thirdweb/fetchBaseETHBalanc
 import { prettyLog } from '@/utils/shared/prettyLog'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
-export const MONITOR_BASE_ETH_BALANCES_INNGEST_FUNCTION_ID = 'monitor-base-eth-balances'
+const MONITOR_BASE_ETH_BALANCES_INNGEST_FUNCTION_ID = 'monitor-base-eth-balances'
 const MONITOR_BASE_ETH_BALANCES_INNGEST_EVENT_NAME = 'monitor.base.eth.balances'
 const MONITOR_BASE_ETH_BALANCES_INNGEST_RETRY_LIMIT = 5
 
 const LOW_ETH_BALANCE_THRESHOLD = Number(process.env.LOW_ETH_BALANCE_THRESHOLD) || 0.25
 
-export async function onFailureMonitorBaseETHBalances(failureEventArgs: FailureEventArgs) {
+async function onFailureMonitorBaseETHBalances(failureEventArgs: FailureEventArgs) {
   Sentry.captureException(failureEventArgs.error, {
     level: 'error',
     tags: {

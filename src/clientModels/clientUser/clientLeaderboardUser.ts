@@ -8,7 +8,7 @@ import {
 import { ClientModel, getClientModel } from '@/clientModels/utils'
 import { UserENSData } from '@/data/web3/types'
 
-export type ClientLeaderboardUser = ClientModel<
+type ClientLeaderboardUser = ClientModel<
   Pick<User, 'id' | 'informationVisibility'> &
     Pick<ClientUser, 'manuallySetInformation'> & {
       firstName: string | null
@@ -17,10 +17,7 @@ export type ClientLeaderboardUser = ClientModel<
     }
 >
 
-export type GetClientProps = Pick<
-  User,
-  'firstName' | 'lastName' | 'id' | 'informationVisibility'
-> & {
+type GetClientProps = Pick<User, 'firstName' | 'lastName' | 'id' | 'informationVisibility'> & {
   primaryUserCryptoAddress: null | UserCryptoAddress
 } & Pick<ClientUser, 'manuallySetInformation'>
 

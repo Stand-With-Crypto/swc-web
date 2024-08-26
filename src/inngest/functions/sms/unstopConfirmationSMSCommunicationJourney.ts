@@ -1,17 +1,19 @@
 import { UserCommunicationJourneyType } from '@prisma/client'
 import * as Sentry from '@sentry/node'
+import { NonRetriableError } from 'inngest'
 
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { sendSMS, SendSMSError } from '@/utils/server/sms'
 import * as messages from '@/utils/server/sms/messages'
+import { isPhoneNumberSupported } from '@/utils/server/sms/utils'
 
 import { createCommunication, createCommunicationJourneys, flagInvalidPhoneNumbers } from './utils'
 
 export const UNSTOP_CONFIRMATION_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME =
   'app/user.communication/unstop-confirmation.sms'
 
-export const UNSTOP_CONFIRMATION_SMS_COMMUNICATION_JOURNEY_INNGEST_FUNCTION_ID =
+const UNSTOP_CONFIRMATION_SMS_COMMUNICATION_JOURNEY_INNGEST_FUNCTION_ID =
   'user-communication/unstop-confirmation-sms'
 
 const MAX_RETRY_COUNT = 3
@@ -32,6 +34,10 @@ export const unstopConfirmationSMSCommunicationJourney = inngest.createFunction(
   },
   async ({ event, step }) => {
     const { phoneNumber } = event.data as UnstopConfirmationSMSCommunicationJourneyPayload
+
+    if (!isPhoneNumberSupported(phoneNumber)) {
+      throw new NonRetriableError('Phone number not supported')
+    }
 
     const communicationJourneys = await step.run('create-communication-journey', () =>
       createCommunicationJourneys(

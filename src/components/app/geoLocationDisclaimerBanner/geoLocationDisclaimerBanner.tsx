@@ -7,7 +7,10 @@ import { useRouter } from 'next/navigation'
 
 import { useHasHydrated } from '@/hooks/useHasHydrated'
 import { useIsMobile } from '@/hooks/useIsMobile'
-import { USER_COUNTRY_CODE_COOKIE_NAME } from '@/utils/server/getCountryCode'
+import {
+  parseUserCountryCodeCookie,
+  USER_COUNTRY_CODE_COOKIE_NAME,
+} from '@/utils/server/getCountryCode'
 import { SUPPORTED_COUNTRY_CODES } from '@/utils/shared/supportedCountries'
 
 const languages = getNavigatorLanguages()
@@ -21,9 +24,11 @@ export function GeoLocationDisclaimerBanner() {
   const WrapperContainer = isMobile ? 'button' : 'div'
 
   const userCountryCode = Cookies.get(USER_COUNTRY_CODE_COOKIE_NAME)
+  const parsedExistingCountryCode = parseUserCountryCodeCookie(userCountryCode)
 
   const currentCountry = DISCLAIMER_BANNER_COUNTRY_CODES_MAP.find(
-    ({ language, countryCode }) => userCountryCode === countryCode || languages?.includes(language),
+    ({ language, countryCode }) =>
+      parsedExistingCountryCode?.countryCode === countryCode || languages?.includes(language),
   )
 
   const handleWrapperClick = () => {
@@ -64,7 +69,7 @@ export function GeoLocationDisclaimerBanner() {
     )
   }
 
-  if (userCountryCode !== SUPPORTED_COUNTRY_CODES.US) {
+  if (parsedExistingCountryCode?.countryCode !== SUPPORTED_COUNTRY_CODES.US) {
     return (
       <div className={`flex max-h-12 w-full opacity-100 transition-all duration-200`}>
         <WrapperContainer className="flex h-12 w-full items-center bg-primary-cta text-center">

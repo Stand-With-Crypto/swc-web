@@ -1,7 +1,7 @@
 import { fetchDTSI } from '@/data/dtsi/fetchDTSI'
 import { DTSI_AllBillsSlugsQuery, DTSI_AllBillsSlugsQueryVariables } from '@/data/dtsi/generated'
 
-export const query = /* GraphQL */ `
+const query = /* GraphQL */ `
   query AllBillsSlugs {
     bills {
       id

@@ -7,7 +7,7 @@ import {
   DTSI_UnitedStatesInformationQueryVariables,
 } from '@/data/dtsi/generated'
 
-export const query = /* GraphQL */ `
+const query = /* GraphQL */ `
   fragment UnitedStatesPersonFragment on Person {
     ...PersonCard
     roles {

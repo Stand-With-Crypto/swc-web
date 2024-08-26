@@ -13,6 +13,7 @@ export const fakerFields = {
   supportedCryptoCurrencyCode: () =>
     faker.helpers.arrayElement(Object.values(SupportedCryptoCurrencyCodes)),
   phoneNumber: mockValidPhoneNumber,
-  stateCode: () => faker.location.state(),
+  stateCode: (options?: { abbreviated?: boolean }) => faker.location.state(options),
+  usCongressionalDistrict: () => faker.number.int({ min: 1, max: 20 }).toString(),
   generateReferralId: () => faker.string.uuid().slice(0, 12),
 }

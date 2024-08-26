@@ -1,5 +1,5 @@
 'use server'
-import { Prisma, UserCryptoAddress } from '@prisma/client'
+import { Prisma, UserCryptoAddress, UserEmailAddress } from '@prisma/client'
 import { GetResult } from '@prisma/client/runtime/library'
 import * as Sentry from '@sentry/nextjs'
 
@@ -17,6 +17,7 @@ type BaseUserAndMethodOfMatch<S extends string | undefined, I extends PrismaBase
   | {
       user: GetResult<Prisma.$UserPayload, I, 'findFirst'>
       userCryptoAddress: UserCryptoAddress | null
+      userEmailAddress: UserEmailAddress | null
     }
   | {
       user: GetResult<Prisma.$UserPayload, I, 'findFirst'> | null
@@ -28,8 +29,6 @@ export type UserAndMethodOfMatch<I extends PrismaBase = PrismaBase> = BaseUserAn
   I
 >
 
-export type UserAndMethodOfMatchWithMaybeSession<I extends PrismaBase = PrismaBase> =
-  BaseUserAndMethodOfMatch<string | undefined, I>
 /*
 If you're wondering what all the prisma type signatures are for, this allows people to pass additional prismaClient.user.findFirst arguments in
 These arguments change the actual shape of the returned result (select and include for example) so we need to use generics to ensure we get the full type-safe result back
@@ -69,6 +68,7 @@ async function baseGetMaybeUserAndMethodOfMatch<
           include: {
             ...((include || {}) as object),
             userCryptoAddresses: true,
+            primaryUserEmailAddress: true,
           },
           cursor,
           distinct,
@@ -85,6 +85,7 @@ async function baseGetMaybeUserAndMethodOfMatch<
           include: {
             ...((include || {}) as object),
             userCryptoAddresses: true,
+            primaryUserEmailAddress: true,
           },
           cursor,
           distinct,
@@ -114,6 +115,7 @@ async function baseGetMaybeUserAndMethodOfMatch<
     return {
       user,
       userCryptoAddress: authedCryptoAddress ?? null,
+      userEmailAddress: userWithoutReturnTypes!.primaryUserEmailAddress ?? null,
     }
   }
   return {

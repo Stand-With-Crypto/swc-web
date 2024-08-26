@@ -17,8 +17,6 @@ const query = /* GraphQL */ `
   }
   ${fragmentDTSIPersonCard}
 `
-export type DTSIPersonForUserActions =
-  DTSI_PeopleByUsCongressionalDistrictQuery['peopleByUSCongressionalDistrict'][0]
 
 export const queryDTSIPeopleByCongressionalDistrict = async ({
   stateCode,

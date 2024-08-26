@@ -2,7 +2,6 @@
 
 import { Suspense, useMemo } from 'react'
 import Balancer from 'react-wrap-balancer'
-import { isAfter } from 'date-fns'
 
 import { EventCard } from '@/components/app/pageEvents/components/eventCard'
 import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
@@ -23,7 +22,7 @@ export function EventsNearYou(props: EventsNearYouProps) {
   )
 }
 
-export function _EventsNearYou({ events }: EventsNearYouProps) {
+function _EventsNearYou({ events }: EventsNearYouProps) {
   const { setAddress, address } = useMutableCurrentUserAddress()
 
   const userState = useMemo(() => {
@@ -71,15 +70,7 @@ export function _EventsNearYou({ events }: EventsNearYouProps) {
 
 function FilteredEventsNearUser({ events, userState }: { events: SWCEvents; userState: string }) {
   const filteredEventsNearUser = useMemo(() => {
-    return userState
-      ? events.filter(event => {
-          const eventDate = event.data?.time
-            ? new Date(`${event.data.date}T${event.data.time}`)
-            : new Date(event.data.date)
-
-          return event.data.state === userState && isAfter(eventDate, new Date())
-        })
-      : []
+    return events.filter(event => event.data.state === userState)
   }, [events, userState])
 
   const hasEvents = filteredEventsNearUser.length > 0

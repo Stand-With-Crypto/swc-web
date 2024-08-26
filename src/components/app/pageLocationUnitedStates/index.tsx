@@ -1,5 +1,9 @@
+'use client'
+
+import { useEffect } from 'react'
 import Balancer from 'react-wrap-balancer'
 
+import { actionCreateUserActionViewKeyRaces } from '@/actions/actionCreateUserActionViewKeyRaces'
 import { ContentSection } from '@/components/app/ContentSection'
 import { DarkHeroSection } from '@/components/app/darkHeroSection'
 import { DTSIPersonHeroCardSection } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardSection'
@@ -33,6 +37,10 @@ export function LocationUnitedStates({
   const groups = organizePeople(queryData)
   const urls = getIntlUrls(locale)
 
+  useEffect(() => {
+    void actionCreateUserActionViewKeyRaces()
+  }, [])
+
   return (
     <div className="space-y-20">
       <DarkHeroSection>
@@ -53,7 +61,7 @@ export function LocationUnitedStates({
           </h3>
           <UserActionFormVoterRegistrationDialog>
             <Button className="mt-6 w-full max-w-xs" variant="secondary">
-              Register to vote
+              Make sure you're registered to vote
             </Button>
           </UserActionFormVoterRegistrationDialog>
         </div>

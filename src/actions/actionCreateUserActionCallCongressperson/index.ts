@@ -1,7 +1,7 @@
 'use server'
 import 'server-only'
 
-import { User, UserActionType, UserInformationVisibility } from '@prisma/client'
+import { SMSStatus, User, UserActionType, UserInformationVisibility } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { waitUntil } from '@vercel/functions'
 import { nativeEnum, object, z } from 'zod'
@@ -172,8 +172,7 @@ async function createUser(sharedDependencies: Pick<SharedDependencies, 'localUse
       userSessions: { create: { id: sessionId } },
       hasOptedInToEmails: false,
       hasOptedInToMembership: false,
-      hasOptedInToSms: false,
-      hasRepliedToOptInSms: false,
+      smsStatus: SMSStatus.NOT_OPTED_IN,
       ...mapLocalUserToUserDatabaseFields(localUser),
     },
     include: {

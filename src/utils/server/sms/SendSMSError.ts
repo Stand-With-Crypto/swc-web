@@ -1,8 +1,10 @@
 import axios from 'axios'
 import RestException from 'twilio/lib/base/RestException'
 
-export const INVALID_PHONE_NUMBER_CODE = 212111
+export const INVALID_PHONE_NUMBER_CODE = 21211
 export const TOO_MANY_REQUESTS_CODE = 20429
+export const IS_UNSUBSCRIBED_USER_CODE = 21610
+export const MESSAGE_BLOCKED_CODE = 30004
 
 export class SendSMSError {
   phoneNumber: string
@@ -13,6 +15,7 @@ export class SendSMSError {
 
   isInvalidPhoneNumber: boolean = false
   isTooManyRequests: boolean = false
+  isUnsubscribedUser: boolean = false
 
   constructor(error: unknown, phoneNumber: string) {
     this.phoneNumber = phoneNumber
@@ -41,6 +44,7 @@ export class SendSMSError {
     }
 
     this.isInvalidPhoneNumber = this.code === INVALID_PHONE_NUMBER_CODE
+    this.isUnsubscribedUser = this.code === IS_UNSUBSCRIBED_USER_CODE
     this.isTooManyRequests = this.code === TOO_MANY_REQUESTS_CODE || this.code === 'ECONNABORTED'
   }
 }

@@ -3,11 +3,13 @@ import 'server-only'
 import * as Sentry from '@sentry/nextjs'
 import { NextRequest, NextResponse } from 'next/server'
 
+import { prismaClient } from '@/utils/server/prismaClient'
 import { withRouteMiddleware } from '@/utils/server/serverWrappers/withRouteMiddleware'
-import { verifySignature } from '@/utils/server/sms'
-import { getLogger } from '@/utils/shared/logger'
+import { optOutUser } from '@/utils/server/sms/actions'
+import { MESSAGE_BLOCKED_CODE } from '@/utils/server/sms/SendSMSError'
+import { verifySignature } from '@/utils/server/sms/utils'
 
-interface SmsEvent {
+interface SMSFailedEvent {
   ParentAccountSid: string
   Payload: string // JSON string
   Level: 'ERROR' | 'WARNING'
@@ -17,34 +19,32 @@ interface SmsEvent {
   Sid: string
 }
 
-interface SmsEventPayload {
-  resource_sid: string
-  service_sid: string
-  error_code: string
+interface SMSFailedEventPayload {
+  resource_sid?: string
+  service_sid?: string
+  error_code?: string
 }
 
-const logger = getLogger('sms-fails')
-
 export const POST = withRouteMiddleware(async (request: NextRequest) => {
-  const [isVerified, body] = await verifySignature<SmsEvent>(request)
+  const [isVerified, body] = await verifySignature<SMSFailedEvent>(request)
 
   if (!isVerified) {
-    return NextResponse.json(
-      {
-        error: 'Unauthorized',
-      },
-      {
-        status: 401,
-      },
-    )
+    return new NextResponse('unauthorized', {
+      status: 401,
+    })
   }
 
   try {
-    const payload = JSON.parse(body.Payload) as SmsEventPayload
+    const payload = JSON.parse(body.Payload) as SMSFailedEventPayload
 
-    logger.info('Payload', JSON.stringify(payload))
+    const errorCode = payload.error_code ?? 'UNKNOWN_CODE'
+    const messageId = payload.resource_sid
 
-    Sentry.captureMessage(`SMS event ${body.Level}: ${payload.error_code}`, {
+    if (errorCode && messageId) {
+      await handleSMSErrors(errorCode, messageId)
+    }
+
+    Sentry.captureMessage(`SMS event ${body.Level}: ${errorCode}`, {
       extra: {
         body,
       },
@@ -61,5 +61,30 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
     })
   }
 
-  return NextResponse.json({ ok: true })
+  return new NextResponse('success', {
+    status: 200,
+  })
 })
+
+async function handleSMSErrors(errorCode: string, messageId: string) {
+  if (errorCode === String(MESSAGE_BLOCKED_CODE)) {
+    const userCommunication = await prismaClient.userCommunication.findFirst({
+      where: {
+        messageId,
+      },
+      include: {
+        userCommunicationJourney: {
+          include: {
+            user: true,
+          },
+        },
+      },
+    })
+
+    if (!userCommunication) return
+
+    const user = userCommunication.userCommunicationJourney.user
+
+    await optOutUser(user.phoneNumber, user)
+  }
+}

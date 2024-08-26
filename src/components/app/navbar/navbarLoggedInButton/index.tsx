@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { useEvent } from 'react-use'
 
 import { Button } from '@/components/ui/button'
@@ -18,9 +18,18 @@ export function NavbarLoggedInButton({ onOpenChange }: { onOpenChange: (open: bo
   const [isLoggingOut, setIsLoggingOut] = useState(false)
 
   const userWithMaybeEnsData = useUserWithMaybeENSData()
-  const displayName = userWithMaybeEnsData
-    ? getSensitiveDataUserDisplayName(userWithMaybeEnsData)
-    : null
+
+  const displayName = useMemo(() => {
+    if (!userWithMaybeEnsData) return null
+
+    const hasUserProvidedInfo =
+      userWithMaybeEnsData.firstName || userWithMaybeEnsData.primaryUserEmailAddress?.emailAddress
+    if (!hasUserProvidedInfo) {
+      return 'Profile'
+    }
+
+    return getSensitiveDataUserDisplayName(userWithMaybeEnsData)
+  }, [userWithMaybeEnsData])
 
   const handleLogoutEvent = useCallback(() => {
     setIsLoggingOut(oldState => !oldState)

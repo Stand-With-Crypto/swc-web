@@ -111,12 +111,3 @@ export const USER_INFORMATION_VISIBILITY_ORDERED_LIST: UserInformationVisibility
   UserInformationVisibility.CRYPTO_INFO_ONLY,
   UserInformationVisibility.ALL_INFO,
 ]
-
-export const USER_INFORMATION_VISIBILITY_DISPLAY_NAME_MAP: Record<
-  UserInformationVisibility,
-  string
-> = {
-  [UserInformationVisibility.ANONYMOUS]: 'Anonymous',
-  [UserInformationVisibility.CRYPTO_INFO_ONLY]: 'Crypto Info Only',
-  [UserInformationVisibility.ALL_INFO]: 'All Info',
-}

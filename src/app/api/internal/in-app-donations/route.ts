@@ -1,6 +1,7 @@
 import {
   Address,
   Prisma,
+  SMSStatus,
   User,
   UserEmailAddress,
   UserEmailAddressSource,
@@ -136,7 +137,7 @@ async function maybeUpsertUser({
       phoneNumber: '',
       hasOptedInToEmails: true,
       hasOptedInToMembership: false,
-      hasOptedInToSms: false,
+      smsStatus: SMSStatus.NOT_OPTED_IN,
       userEmailAddresses: {
         create: {
           emailAddress: email,

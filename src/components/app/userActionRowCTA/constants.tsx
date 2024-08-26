@@ -25,7 +25,7 @@ import { getIntlUrls } from '@/utils/shared/urls'
 import { USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns'
 import { getYourPoliticianCategoryShortDisplayName } from '@/utils/shared/yourPoliticianCategory'
 
-export const USER_ACTION_ROW_CTA_INFO: Record<
+const USER_ACTION_ROW_CTA_INFO: Record<
   ActiveClientUserActionType,
   Omit<UserActionRowCTAProps, 'state'>
 > = {
@@ -45,8 +45,9 @@ export const USER_ACTION_ROW_CTA_INFO: Record<
     actionType: UserActionType.VOTER_REGISTRATION,
     image: { src: '/actionTypeIcons/registerToVote.png' },
     text: 'Check your voter registration',
-    subtext: "Find your voter info with our simple tool - you'll get a free NFT.",
-    shortText: 'Register to vote',
+    subtext:
+      "Double check your registration information or find out how to get registered - you'll get a free NFT.",
+    shortText: "Make sure you're registered to vote",
     shortSubtext: 'Get a free "I\'m a Voter" NFT',
     canBeTriggeredMultipleTimes: true,
     WrapperComponent: UserActionFormVoterRegistrationDialog,
@@ -146,7 +147,7 @@ export const USER_ACTION_ROW_CTA_INFO: Record<
   },
 }
 
-export const USER_ACTION_ROW_CTA_INFO_FROM_CAMPAIGN: Record<
+const USER_ACTION_ROW_CTA_INFO_FROM_CAMPAIGN: Record<
   string,
   Omit<UserActionRowCTAProps, 'state'>
 > = {}

@@ -29,7 +29,7 @@ import { triggerServerActionForForm } from '@/utils/web/formUtils'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
 import { toastGenericError } from '@/utils/web/toastUtils'
 
-export enum SectionNames {
+enum SectionNames {
   EVENT_INFO = 'Event Information',
   PHONE_SECTION = 'Phone Section',
   NOTIFICATION_ACTIVATED = 'Event Notification Activated',
@@ -147,7 +147,9 @@ function EventInformation({
   handleGetUpdatesButtonClick: () => Promise<void>
   handleRSVPButtonClick: () => void
 }) {
-  const eventDate = event?.time ? new Date(`${event.date}T${event.time}`) : new Date(event.date)
+  const eventDate = event?.time
+    ? new Date(`${event.date}T${event.time}`)
+    : new Date(`${event.date}T00:00`)
   const formattedEventDate = format(eventDate, event?.time ? 'EEEE M/d, h:mm a' : 'EEEE M/d')
   const isPastEvent = isBefore(startOfDay(eventDate), startOfDay(new Date()))
 

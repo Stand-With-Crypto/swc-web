@@ -1,4 +1,4 @@
-export type ValidationFunction<T extends (...args: any) => any> = (
+type ValidationFunction<T extends (...args: any) => any> = (
   args: Parameters<T>,
 ) => Promise<{ errors: Record<string, string[]> } | undefined> | undefined
 

@@ -12,7 +12,7 @@ describe('action - voter registration', () => {
 
       cy.get('button[type="button"]').contains('Yes').click()
 
-      cy.contains("Claim “I'm a Voter” NFT")
+      cy.contains('Awesome, thank you for being registered')
 
       cy.get('[data-testid="action-form-back-button"]').click()
 
@@ -69,10 +69,28 @@ describe('action - voter registration', () => {
     it('should go through the flow when the user is registered to vote and sign in afterwards', () => {
       cy.visit('/')
 
+      cy.get('button').contains('Join Stand With Crypto').click()
+
+      cy.waitForLogin()
+
+      cy.waitForProfileCreation()
+
+      cy.contains('You joined Stand With Crypto!').should('be.visible')
+      cy.get('[role="dialog"]').find('button').contains('Close').click({ force: true })
+
       cy.contains('Check your voter registration').click()
       cy.get('[role="dialog"]').as('dialog')
 
       cy.get('button[type="button"]').contains('Yes').click()
+
+      cy.selectFromComboBox({
+        trigger: cy.get('[data-testid="state-filter-trigger"]'),
+        searchText: 'California',
+      })
+
+      cy.get('a[data-testid="step2-cta-anchor"]').trigger('click', { force: true })
+
+      cy.get('button[type="button"]').contains('Claim NFT').click()
 
       cy.contains("Claim “I'm a Voter” NFT")
 
@@ -81,30 +99,13 @@ describe('action - voter registration', () => {
       cy.get('button[type="button"]').contains('Claim NFT').click()
 
       // waiting for Inngest to consume job
-      cy.contains('Nice work!')
+      cy.contains('You registered to vote!').should('be.visible')
 
       cy.queryDb('SELECT * FROM user_action WHERE action_type="VOTER_REGISTRATION"').then(
         (result: any) => {
           expect(result.length, 'user_action to exist in database').to.equal(1)
         },
       )
-
-      cy.waitForLogin(
-        cy.get('@dialog').find('button[type="button"]').contains('Join Stand With Crypto'),
-      )
-
-      cy.get('@dialog')
-        .find('input[placeholder="Phone number"]')
-        .should('be.visible')
-        .type(mockRandomUser.phoneNumber)
-
-      cy.get('@dialog').find("button[type='submit']").contains('Get updates').click()
-
-      cy.contains('You registered to vote!').should('be.visible')
-
-      cy.queryDb('SELECT * FROM user_action WHERE action_type = "OPT_IN"').then((result: any) => {
-        expect(result.length, 'user_action to exist in database').to.equal(1)
-      })
     })
   })
 })

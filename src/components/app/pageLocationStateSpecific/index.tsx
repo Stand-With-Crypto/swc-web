@@ -1,5 +1,9 @@
+'use client'
+
+import { useEffect } from 'react'
 import { compact, isEmpty, times } from 'lodash-es'
 
+import { actionCreateUserActionViewKeyRaces } from '@/actions/actionCreateUserActionViewKeyRaces'
 import { ContentSection } from '@/components/app/ContentSection'
 import { DarkHeroSection } from '@/components/app/darkHeroSection'
 import { DTSIPersonHeroCardSection } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardSection'
@@ -49,6 +53,12 @@ export function LocationStateSpecific({
     }),
   )
 
+  useEffect(() => {
+    void actionCreateUserActionViewKeyRaces({
+      usaState: stateCode,
+    })
+  }, [stateCode])
+
   return (
     <div>
       <DarkHeroSection>
@@ -76,7 +86,7 @@ export function LocationStateSpecific({
           ) : (
             <UserActionFormVoterRegistrationDialog initialStateCode={stateCode}>
               <Button className="mt-6 w-full max-w-xs" variant="secondary">
-                Register to vote
+                Make sure you're registered to vote
               </Button>
             </UserActionFormVoterRegistrationDialog>
           )}

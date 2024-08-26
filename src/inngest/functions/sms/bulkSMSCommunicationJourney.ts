@@ -5,8 +5,9 @@ import { chunk, merge, uniq } from 'lodash-es'
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { countSegments, TWILIO_RATE_LIMIT } from '@/utils/server/sms'
-import { WELCOME_MESSAGE } from '@/utils/server/sms/messages'
+import { TWILIO_RATE_LIMIT } from '@/utils/server/sms'
+import { BULK_WELCOME_MESSAGE } from '@/utils/server/sms/messages'
+import { isPhoneNumberSupported } from '@/utils/server/sms/utils'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
 
@@ -33,6 +34,8 @@ interface BulkSMSCommunicationJourneyPayload {
   includePendingDoubleOptIn?: boolean
   send?: boolean
   campaignName: string
+  // Number of milliseconds or Time string compatible with the ms package, e.g. "30m", "3 hours", or "2.5d"
+  sleepTime?: string | number
 }
 
 export const bulkSMSCommunicationJourney = inngest.createFunction(
@@ -45,7 +48,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
     event: BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
   },
   async ({ step, event, logger }) => {
-    const { smsBody, userWhereInput, includePendingDoubleOptIn, send, campaignName } =
+    const { smsBody, userWhereInput, includePendingDoubleOptIn, send, campaignName, sleepTime } =
       event.data as BulkSMSCommunicationJourneyPayload
 
     if (!smsBody) {
@@ -63,6 +66,10 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
     const getWaitingTimeInSeconds = (totalSegments: number) =>
       totalSegments / MESSAGE_SEGMENTS_PER_SECOND
 
+    if (sleepTime) {
+      await step.sleep('scheduled-sleep', sleepTime)
+    }
+
     const phoneNumbersThatShouldReceiveWelcomeMessage = await fetchAllPhoneNumbers(
       {
         campaignName,
@@ -77,12 +84,10 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
         phoneNumber,
         messages: [
           {
-            // TODO: We're testing a new variant to send welcome text in the same bulk message
-            // body: WELCOME_MESSAGE,
             journeyType: UserCommunicationJourneyType.WELCOME_SMS,
           },
           {
-            body: smsBody,
+            body: addWelcomeMessage(smsBody),
             campaignName,
             journeyType: UserCommunicationJourneyType.BULK_SMS,
           },
@@ -113,40 +118,16 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
 
     const payloadChunks = chunk(enqueueMessagesPayload, TWILIO_RATE_LIMIT)
 
-    const messagesInfo = {
-      welcome: phoneNumbersThatShouldReceiveWelcomeMessage.length,
-      bulk:
-        phoneNumberThatAlreadyReceivedWelcomeMessage.length +
-        phoneNumbersThatShouldReceiveWelcomeMessage.length,
-      total:
-        phoneNumbersThatShouldReceiveWelcomeMessage.length * 2 +
-        phoneNumberThatAlreadyReceivedWelcomeMessage.length,
-    }
+    const { segments: totalSegmentsToSend, messages: totalMessagesToSend } =
+      countMessagesAndSegments(enqueueMessagesPayload)
 
-    const segmentsCount = {
-      bulk: countSegments(smsBody),
-      welcome: countSegments(WELCOME_MESSAGE),
-    }
-
-    const { segments: totalSegmentsToSend } = countMessagesAndSegments(enqueueMessagesPayload)
-
-    const segmentsToSendInfo = {
-      total: totalSegmentsToSend,
-      welcome: messagesInfo.welcome * segmentsCount.welcome,
-      bulk: messagesInfo.bulk * segmentsCount.bulk,
-    }
-
-    const timeInfo = {
-      timeToSendAllSegments: getWaitingTimeInSeconds(segmentsToSendInfo.total),
-    }
+    const totalTime = getWaitingTimeInSeconds(totalSegmentsToSend)
 
     const bulkInfo = {
-      segmentsCount,
-      segmentsToSend: segmentsToSendInfo,
-      messages: messagesInfo,
-      time: {
-        total: formatTime(timeInfo.timeToSendAllSegments),
-      },
+      totalSegmentsToSend,
+      totalMessagesToSend,
+      totalMessagesWithWelcomeText: phoneNumbersThatShouldReceiveWelcomeMessage.length,
+      totalTime: formatTime(totalTime),
       batches: payloadChunks.length,
     }
 
@@ -254,6 +235,10 @@ function formatTime(seconds: number) {
 
 const mergeWhereParams = merge<Prisma.UserGroupByArgs['where'], Prisma.UserGroupByArgs['where']>
 
+// Add a space before the welcome message to ensure proper formatting. If the message ends with a link,
+// appending the welcome message directly could break the link.
+const addWelcomeMessage = (message: string) => message + ` \n\n${BULK_WELCOME_MESSAGE}`
+
 interface GetPhoneNumberOptions {
   includePendingDoubleOptIn?: boolean
   cursor?: Date
@@ -297,7 +282,9 @@ async function fetchAllPhoneNumbers(
 
     cursor = phoneNumberList.at(-1)?.datetimeCreated
 
-    const phoneNumbers = phoneNumberList.map(({ phoneNumber }) => phoneNumber)
+    const phoneNumbers = phoneNumberList
+      .map(({ phoneNumber }) => phoneNumber)
+      .filter(isPhoneNumberSupported)
 
     allPhoneNumbers = allPhoneNumbers.concat(phoneNumbers)
 

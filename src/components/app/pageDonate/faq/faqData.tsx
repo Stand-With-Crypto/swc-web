@@ -1,6 +1,6 @@
 import { ComponentType } from 'react'
 
-export type FAQEntry = {
+type FAQEntry = {
   title: string
   content: ComponentType
 }

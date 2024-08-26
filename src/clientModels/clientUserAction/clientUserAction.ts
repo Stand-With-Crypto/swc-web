@@ -9,6 +9,7 @@ import {
   UserActionRsvpEvent,
   UserActionTweetAtPerson,
   UserActionType,
+  UserActionViewKeyRaces,
   UserActionVoterAttestation,
   UserActionVoterRegistration,
 } from '@prisma/client'
@@ -41,6 +42,7 @@ type ClientUserActionDatabaseQuery = UserAction & {
   userActionTweetAtPerson: UserActionTweetAtPerson | null
   userActionVoterAttestation: UserActionVoterAttestation | null
   userActionRsvpEvent: UserActionRsvpEvent | null
+  userActionViewKeyRaces: UserActionViewKeyRaces | null
 }
 
 type ClientUserActionEmailRecipient = Pick<UserActionEmailRecipient, 'id'> & {
@@ -88,6 +90,12 @@ type ClientUserActionRsvpEvent = {
   eventSlug: string
   eventState: string
 }
+type ClientUserActionViewKeyRaces = Pick<
+  UserActionViewKeyRaces,
+  'usaState' | 'usCongressionalDistrict'
+> & {
+  actionType: typeof UserActionType.VIEW_KEY_RACES
+}
 
 /*
 At the database schema level we can't enforce that a single action only has one "type" FK, but at the client level we can and should
@@ -108,6 +116,7 @@ export type ClientUserAction = ClientModel<
       | ClientUserActionTweetAtPerson
       | ClientUserActionVoterAttestation
       | ClientUserActionRsvpEvent
+      | ClientUserActionViewKeyRaces
     )
 >
 
@@ -145,7 +154,9 @@ export const getClientUserAction = ({
       : null,
   }
 
-  const actionTypes: { [key in UserActionType]: () => ClientModel<ClientUserAction> } = {
+  const actionTypes: {
+    [key in UserActionType]: () => ClientModel<ClientUserAction>
+  } = {
     [UserActionType.OPT_IN]: () => {
       const { optInType } = getRelatedModel(record, 'userActionOptIn')
       const optInFields: ClientUserActionOptIn = { optInType, actionType: UserActionType.OPT_IN }
@@ -236,6 +247,18 @@ export const getClientUserAction = ({
         actionType: UserActionType.RSVP_EVENT,
       }
       return getClientModel({ ...sharedProps, ...rsvpEventFields })
+    },
+    [UserActionType.VIEW_KEY_RACES]: () => {
+      const { usaState, usCongressionalDistrict } = getRelatedModel(
+        record,
+        'userActionViewKeyRaces',
+      )
+      const keyRacesFields: ClientUserActionViewKeyRaces = {
+        usaState,
+        usCongressionalDistrict,
+        actionType: UserActionType.VIEW_KEY_RACES,
+      }
+      return getClientModel({ ...sharedProps, ...keyRacesFields })
     },
   }
 

@@ -6,8 +6,6 @@ export const YOUR_POLITICIAN_CATEGORY_OPTIONS: readonly YourPoliticianCategory[]
   'senate-and-house',
 ]
 
-export const DEFAULT_YOUR_POLITICIAN_CATEGORY: YourPoliticianCategory = 'senate'
-
 export function getYourPoliticianCategoryDisplayName(
   category: YourPoliticianCategory,
   {

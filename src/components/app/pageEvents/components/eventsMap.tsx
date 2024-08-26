@@ -2,7 +2,6 @@
 
 import { MouseEvent, useCallback, useEffect, useMemo, useState } from 'react'
 import { ComposableMap, Geographies, Geography, Marker } from 'react-simple-maps'
-import { isAfter } from 'date-fns'
 import { AnimatePresence, motion } from 'framer-motion'
 
 import {
@@ -17,7 +16,7 @@ import {
   US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP,
 } from '@/utils/shared/usStateUtils'
 
-export interface MapMarker {
+interface MapMarker {
   id: string
   name: string
   coordinates: [number, number]
@@ -34,18 +33,8 @@ export function EventsMap({ events }: { events: SWCEvents }) {
   const currentStroke = '#DAC5FF'
   const currentHoverAndPressedFill = '#DDC9FF'
 
-  const filteredFutureEvents = useMemo(() => {
-    return events.filter(event => {
-      const eventDate = event.data?.time
-        ? new Date(`${event.data.date}T${event.data.time}`)
-        : new Date(event.data.date)
-
-      return isAfter(eventDate, new Date())
-    })
-  }, [events])
-
   const eventsFromState = useMemo(() => {
-    const stateWithEvents = filteredFutureEvents.reduce(
+    const stateWithEvents = events.reduce(
       (acc, event) => {
         const state = event.data.state
         acc[state] = (acc[state] || 0) + 1
@@ -55,7 +44,7 @@ export function EventsMap({ events }: { events: SWCEvents }) {
     )
 
     return stateWithEvents
-  }, [filteredFutureEvents])
+  }, [events])
 
   const eventsFromStateKeys = Object.keys(eventsFromState)
 
@@ -253,7 +242,7 @@ function InfoTooltip({
 
   return (
     <div
-      className={`pointer-events-none fixed z-50 flex h-[81px] flex-col gap-2 w-[${tooltipWidth}px] items-center justify-center rounded-2xl bg-black px-4 py-2 font-sans text-base text-white`}
+      className={`pointer-events-none fixed z-50 flex h-[81px] flex-col items-center  justify-center gap-2 rounded-2xl bg-black px-4 py-2 font-sans text-base text-white`}
       style={{
         top: mousePosition.y,
         left: adjustedX,

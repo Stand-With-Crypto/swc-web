@@ -1,5 +1,9 @@
+'use client'
+
+import { useEffect } from 'react'
 import { compact } from 'lodash-es'
 
+import { actionCreateUserActionViewKeyRaces } from '@/actions/actionCreateUserActionViewKeyRaces'
 import { DarkHeroSection } from '@/components/app/darkHeroSection'
 import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
 import { MaybeOverflowedStances } from '@/components/app/maybeOverflowedStances'
@@ -20,7 +24,7 @@ import { findRecommendedCandidate } from '@/utils/shared/findRecommendedCandidat
 import { getIntlUrls } from '@/utils/shared/urls'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP, USStateCode } from '@/utils/shared/usStateUtils'
 
-export interface LocationRaceSpecificProps extends DTSI_DistrictSpecificInformationQuery {
+interface LocationRaceSpecificProps extends DTSI_DistrictSpecificInformationQuery {
   stateCode?: USStateCode
   district?: NormalizedDTSIDistrictId
   locale: SupportedLocale
@@ -55,6 +59,14 @@ export function LocationRaceSpecific({
   const stateDisplayName = stateCode && US_STATE_CODE_TO_DISPLAY_NAME_MAP[stateCode]
   const urls = getIntlUrls(locale)
   const { recommended, others } = findRecommendedCandidate(groups)
+
+  useEffect(() => {
+    void actionCreateUserActionViewKeyRaces({
+      usaState: stateCode,
+      usCongressionalDistrict: district?.toString(),
+    })
+  }, [district, stateCode])
+
   return (
     <div>
       <DarkHeroSection className="text-center">
@@ -94,7 +106,7 @@ export function LocationRaceSpecific({
         </PageTitle>
         <UserActionFormVoterRegistrationDialog initialStateCode={stateCode}>
           <Button className="mt-6 w-full max-w-xs" variant="secondary">
-            Register to vote
+            Make sure you're registered to vote
           </Button>
         </UserActionFormVoterRegistrationDialog>
       </DarkHeroSection>
