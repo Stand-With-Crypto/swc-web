@@ -9,7 +9,7 @@ import { waitUntil } from '@vercel/functions'
 import { WELCOME_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME } from '@/inngest/functions/sms/welcomeSMSCommunicationJourney'
 import { inngest } from '@/inngest/inngest'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { getServerAnalytics } from '@/utils/server/serverAnalytics'
+import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
 import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
 import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
 import { smsProvider, SMSProviders } from '@/utils/shared/smsProvider'
@@ -52,28 +52,40 @@ export async function optInUser(phoneNumber: string, user: User): Promise<SMSSta
   }
 
   waitUntil(
-    getServerAnalytics({
-      localUser: getLocalUserFromUser(user),
-      userId: user.id,
-    })
-      .track('User SMS Opt-In', {
-        provider: smsProvider,
-        smsStatus: newSMSStatus,
+    Promise.all([
+      getServerPeopleAnalytics({
+        localUser: getLocalUserFromUser(user),
+        userId: user.id,
       })
-      .flush(),
+        .set({
+          'Has Opted In to SMS': true,
+          'SMS Status': newSMSStatus,
+        })
+        .flush(),
+      getServerAnalytics({
+        localUser: getLocalUserFromUser(user),
+        userId: user.id,
+      })
+        .track('User SMS Opt-In', {
+          provider: smsProvider,
+        })
+        .flush(),
+    ]),
   )
 
   return newSMSStatus
 }
 
-export async function optOutUser(phoneNumber: string, user?: User) {
+export async function optOutUser(phoneNumber: string, user: User) {
   const normalizedPhoneNumber = normalizePhoneNumber(phoneNumber)
 
-  if (user?.smsStatus === SMSStatus.OPTED_OUT) return
+  if (user.smsStatus === SMSStatus.OPTED_OUT) return user.smsStatus
+
+  const newSMSStatus = SMSStatus.OPTED_OUT
 
   await prismaClient.user.updateMany({
     data: {
-      smsStatus: SMSStatus.OPTED_OUT,
+      smsStatus: newSMSStatus,
     },
     where: {
       phoneNumber: normalizedPhoneNumber,
@@ -91,26 +103,39 @@ export async function optOutUser(phoneNumber: string, user?: User) {
   //   })
   // }
 
-  if (user) {
-    waitUntil(
+  waitUntil(
+    Promise.all([
+      getServerPeopleAnalytics({
+        localUser: getLocalUserFromUser(user),
+        userId: user.id,
+      })
+        .set({
+          'Has Opted In to SMS': false,
+          'SMS Status': newSMSStatus,
+        })
+        .flush(),
       getServerAnalytics({
         localUser: getLocalUserFromUser(user),
         userId: user.id,
       })
         .track('User SMS Opt-out')
         .flush(),
-    )
-  }
+    ]),
+  )
+
+  return newSMSStatus
 }
 
-export async function optUserBackIn(phoneNumber: string, user?: User) {
+export async function optUserBackIn(phoneNumber: string, user: User) {
   const normalizedPhoneNumber = normalizePhoneNumber(phoneNumber)
 
-  if (user?.smsStatus !== SMSStatus.OPTED_OUT) return
+  if (user.smsStatus !== SMSStatus.OPTED_OUT) return user.smsStatus
+
+  const newSMSStatus = SMSStatus.OPTED_IN_HAS_REPLIED
 
   await prismaClient.user.updateMany({
     data: {
-      smsStatus: SMSStatus.OPTED_IN_HAS_REPLIED,
+      smsStatus: newSMSStatus,
     },
     where: {
       phoneNumber: normalizedPhoneNumber,
@@ -127,14 +152,23 @@ export async function optUserBackIn(phoneNumber: string, user?: User) {
   //   })
   // }
 
-  if (user) {
-    waitUntil(
+  waitUntil(
+    Promise.all([
+      getServerPeopleAnalytics({
+        localUser: getLocalUserFromUser(user),
+        userId: user.id,
+      })
+        .set({
+          'Has Opted In to SMS': true,
+          'SMS Status': newSMSStatus,
+        })
+        .flush(),
       getServerAnalytics({
         localUser: getLocalUserFromUser(user),
         userId: user.id,
       })
         .track('User SMS Unstop')
         .flush(),
-    )
-  }
+    ]),
+  )
 }

@@ -9,7 +9,7 @@ import { optOutUser } from '@/utils/server/sms/actions'
 import { MESSAGE_BLOCKED_CODE } from '@/utils/server/sms/SendSMSError'
 import { verifySignature } from '@/utils/server/sms/utils'
 
-interface SmsEvent {
+interface SMSFailedEvent {
   ParentAccountSid: string
   Payload: string // JSON string
   Level: 'ERROR' | 'WARNING'
@@ -19,30 +19,25 @@ interface SmsEvent {
   Sid: string
 }
 
-interface SmsEventPayload {
+interface SMSFailedEventPayload {
   resource_sid?: string
   service_sid?: string
   error_code?: string
 }
 
 export const POST = withRouteMiddleware(async (request: NextRequest) => {
-  const [isVerified, body] = await verifySignature<SmsEvent>(request)
+  const [isVerified, body] = await verifySignature<SMSFailedEvent>(request)
 
   if (!isVerified) {
-    return NextResponse.json(
-      {
-        error: 'Unauthorized',
-      },
-      {
-        status: 401,
-      },
-    )
+    return new NextResponse('unauthorized', {
+      status: 401,
+    })
   }
 
   try {
-    const payload = JSON.parse(body.Payload) as SmsEventPayload
+    const payload = JSON.parse(body.Payload) as SMSFailedEventPayload
 
-    const errorCode = payload.error_code ?? 'undefined'
+    const errorCode = payload.error_code ?? 'UNKNOWN_CODE'
     const messageId = payload.resource_sid
 
     if (errorCode && messageId) {
@@ -66,7 +61,9 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
     })
   }
 
-  return NextResponse.json({ ok: true })
+  return new NextResponse('success', {
+    status: 200,
+  })
 })
 
 async function handleSMSErrors(errorCode: string, messageId: string) {

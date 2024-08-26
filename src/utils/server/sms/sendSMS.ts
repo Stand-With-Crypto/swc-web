@@ -1,6 +1,7 @@
 import { z } from 'zod'
 
 import { requiredEnv } from '@/utils/shared/requiredEnv'
+import { apiUrls, fullUrl } from '@/utils/shared/urls'
 
 import { messagingClient } from './messagingClient'
 import { SendSMSError } from './SendSMSError'
@@ -24,9 +25,12 @@ export const sendSMS = async (payload: SendSMSPayload) => {
   const { body, to } = validatedInput.data
 
   try {
+    const statusCallback = fullUrl(apiUrls.smsStatusCallback())
+
     const message = await messagingClient.messages.create({
       from: TWILIO_PHONE_NUMBER,
       body,
+      statusCallback,
       to,
     })
 

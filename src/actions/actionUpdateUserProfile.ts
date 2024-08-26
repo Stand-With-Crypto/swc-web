@@ -140,6 +140,12 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
 
   const localUser = parseLocalUserFromCookies()
 
+  // If the user removes their phone number and the current smsStatus is not OPTED_OUT we change the smsStatus to NOT_OPTED_IN
+  const smsStatus =
+    (!optedInToSms || !phoneNumber) && user.smsStatus !== SMSStatus.OPTED_OUT
+      ? SMSStatus.NOT_OPTED_IN
+      : user.smsStatus
+
   waitUntil(
     getServerPeopleAnalytics({
       userId: authUser.userId,
@@ -152,6 +158,7 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
         $phone: phoneNumber,
         $name: userFullName(validatedFields.data),
         'Has Opted In To Membership': hasOptedInToMembership,
+        'SMS Status': smsStatus,
         'Has Opted In To Sms': optedInToSms,
       })
       .flush(),
@@ -169,11 +176,7 @@ async function _actionUpdateUserProfile(data: z.infer<typeof zodUpdateUserProfil
       hasValidPhoneNumber: true,
       addressId: address?.id || null,
       primaryUserEmailAddressId: primaryUserEmailAddress?.id || null,
-      // If the user removes their phone number and the current smsStatus is not OPTED_OUT we change the smsStatus to NOT_OPTED_IN
-      smsStatus:
-        (!optedInToSms || !phoneNumber) && user.smsStatus !== SMSStatus.OPTED_OUT
-          ? SMSStatus.NOT_OPTED_IN
-          : user.smsStatus,
+      smsStatus,
     },
     include: {
       address: true,
