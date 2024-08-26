@@ -1,5 +1,6 @@
 import {
   DonationOrganization,
+  SMSStatus,
   User,
   UserActionType,
   UserInformationVisibility,
@@ -197,8 +198,7 @@ async function createNewUser(payment: CoinbaseCommercePayment) {
         create: { id: payment.event.data.metadata.sessionId },
       },
       hasOptedInToEmails: false,
-      hasOptedInToSms: false,
-      hasRepliedToOptInSms: false,
+      smsStatus: SMSStatus.NOT_OPTED_IN,
       hasOptedInToMembership: false,
       informationVisibility: UserInformationVisibility.ANONYMOUS,
       acquisitionReferer: '',

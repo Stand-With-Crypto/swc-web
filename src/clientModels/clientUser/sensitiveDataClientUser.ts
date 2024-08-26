@@ -23,8 +23,6 @@ export type SensitiveDataClientUser = ClientModel<
     | 'lastName'
     | 'phoneNumber'
     | 'hasOptedInToMembership'
-    | 'hasOptedInToSms'
-    | 'hasRepliedToOptInSms'
     | 'smsStatus'
     | 'referralId'
   > & {
@@ -58,8 +56,6 @@ export const getSensitiveDataClientUser = (
     primaryUserEmailAddress,
     phoneNumber,
     hasOptedInToMembership,
-    hasOptedInToSms,
-    hasRepliedToOptInSms,
     referralId,
     address,
     smsStatus,
@@ -88,8 +84,6 @@ export const getSensitiveDataClientUser = (
     informationVisibility,
     phoneNumber: phoneNumber ? formatPhoneNumber(phoneNumber) : '',
     hasOptedInToMembership,
-    hasOptedInToSms,
-    hasRepliedToOptInSms,
     userLocationDetails,
     smsStatus,
   })

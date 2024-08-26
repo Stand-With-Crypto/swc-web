@@ -114,8 +114,8 @@ model User {
   primaryUserCryptoAddress   UserCryptoAddress?        @relation("asPrimaryUserCryptoAddress", fields: [primaryUserCryptoAddressId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   primaryUserCryptoAddressId String?                   @unique @map("primary_user_crypto_address_id")
   hasOptedInToEmails         Boolean                   @map("has_opted_in_to_emails")
-  hasOptedInToSms            Boolean                   @map("has_opted_in_to_sms")
-  hasRepliedToOptInSms       Boolean                   @default(false) @map("has_replied_to_opt_in_sms")
+  hasOptedInToSms            Boolean?                  @default(false) @map("has_opted_in_to_sms")
+  hasRepliedToOptInSms       Boolean?                  @default(false) @map("has_replied_to_opt_in_sms")
   hasOptedInToMembership     Boolean                   @map("has_opted_in_to_membership")
   hasValidPhoneNumber        Boolean                   @default(true) @map("has_valid_phone_number")
   internalStatus             UserInternalStatus        @default(VISIBLE) @map("internal_status")
@@ -264,6 +264,7 @@ enum UserActionType {
   TWEET_AT_PERSON
   VOTER_ATTESTATION
   RSVP_EVENT
+  VIEW_KEY_RACES
 }
 
 model UserAction {
@@ -296,6 +297,7 @@ model UserAction {
   userActionVoterAttestation  UserActionVoterAttestation?
   userActionTweetAtPerson     UserActionTweetAtPerson?
   userActionRsvpEvent         UserActionRsvpEvent?
+  userActionViewKeyRaces      UserActionViewKeyRaces?
 
   @@index([datetimeCreated])
   @@index([userId, actionType, campaignName])
@@ -410,6 +412,15 @@ model NFTMint {
 
   @@index([nftSlug])
   @@map("nft_mint")
+}
+
+model UserActionViewKeyRaces {
+  id                      String     @id @default(uuid())
+  userAction              UserAction @relation(fields: [id], references: [id])
+  usCongressionalDistrict String?    @map("us_congressional_district")
+  usaState                String?    @map("usa_state")
+
+  @@map("user_action_view_key_races")
 }
 
 model UserActionVoterRegistration {

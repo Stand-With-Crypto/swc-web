@@ -193,6 +193,7 @@ async function sendInitialSignUpEmail(userId: string) {
     subject: ReactivationReminderComponent.subjectLine,
     customArgs: {
       userId: user.id,
+      category: 'Reactivation Email Reminder',
     },
     html: render(
       <ReactivationReminderComponent

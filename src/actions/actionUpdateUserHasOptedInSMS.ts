@@ -16,7 +16,7 @@ import { UpsertAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server
 import { prismaClient } from '@/utils/server/prismaClient'
 import { throwIfRateLimited } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
-import { optInUser } from '@/utils/server/sms/actions'
+import * as smsActions from '@/utils/server/sms/actions'
 import { zodUpdateUserHasOptedInToSMS } from '@/validation/forms/zodUpdateUserHasOptedInToSMS'
 
 export const actionUpdateUserHasOptedInToSMS = withServerActionMiddleware(
@@ -52,7 +52,6 @@ async function _actionUpdateUserHasOptedInToSMS(data: UpdateUserHasOptedInToSMSP
     },
     data: {
       phoneNumber,
-      hasOptedInToSms: !!phoneNumber,
     },
     include: {
       primaryUserCryptoAddress: true,
@@ -60,11 +59,11 @@ async function _actionUpdateUserHasOptedInToSMS(data: UpdateUserHasOptedInToSMSP
     },
   })
 
-  await handleCapitolCanarySMSUpdate(updatedUser)
-
   if (phoneNumber) {
-    await optInUser(phoneNumber, user)
+    updatedUser.smsStatus = await smsActions.optInUser(phoneNumber, user)
   }
+
+  await handleCapitolCanarySMSUpdate(updatedUser)
 
   return {
     user: getClientUser(updatedUser),
@@ -80,7 +79,7 @@ async function handleCapitolCanarySMSUpdate(
     campaignId: getCapitolCanaryCampaignID(CapitolCanaryCampaignName.DEFAULT_SUBSCRIBER),
     user: updatedUser,
     opts: {
-      isSmsOptin: updatedUser.hasOptedInToSms,
+      isSmsOptin: true,
       // shouldSendSmsOptinConfirmation: true,
     },
   }

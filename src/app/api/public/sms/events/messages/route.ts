@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import twilio from 'twilio'
 
 import { withRouteMiddleware } from '@/utils/server/serverWrappers/withRouteMiddleware'
-import { optOutUser, optUserBackIn } from '@/utils/server/sms/actions'
+import * as smsActions from '@/utils/server/sms/actions'
 import { getUserByPhoneNumber, verifySignature } from '@/utils/server/sms/utils'
 // TODO: Uncomment this after we start using Messaging Service
 // import * as messages from '@/utils/server/sms/messages'
@@ -70,9 +70,9 @@ export const POST = withRouteMiddleware(async (request: NextRequest) => {
       )
     ) {
       // We can't get the messageId when replying with twilio, so we need to trigger a Inngest function instead
-      await optOutUser(phoneNumber, user)
+      await smsActions.optOutUser(phoneNumber, user)
     } else if (['YES', 'START', 'CONTINUE', 'UNSTOP', SWC_UNSTOP_SMS_KEYWORD].includes(keyword)) {
-      await optUserBackIn(phoneNumber, user)
+      await smsActions.optUserBackIn(phoneNumber, user)
     } else if (['HELP'].includes(keyword)) {
       // We don't want to track this message, so we can just reply with twilio
       // TODO: Uncomment this after we start using Messaging Service

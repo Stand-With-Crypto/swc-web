@@ -14,19 +14,15 @@ import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
 import { normalizePhoneNumber } from '@/utils/shared/phoneNumber'
 import { smsProvider, SMSProviders } from '@/utils/shared/smsProvider'
 
-export async function optInUser(phoneNumber: string, user: User) {
+export async function optInUser(phoneNumber: string, user: User): Promise<SMSStatus> {
   const normalizedPhoneNumber = normalizePhoneNumber(phoneNumber)
 
   if (
     user.smsStatus === SMSStatus.OPTED_OUT ||
-    ([
-      SMSStatus.OPTED_IN,
-      SMSStatus.OPTED_IN_HAS_REPLIED,
-      SMSStatus.OPTED_IN_PENDING_DOUBLE_OPT_IN,
-    ].includes(user.smsStatus) &&
+    ([SMSStatus.OPTED_IN, SMSStatus.OPTED_IN_HAS_REPLIED].includes(user.smsStatus) &&
       user.phoneNumber === normalizedPhoneNumber) // If user has already opted in and has not changed their phone number, we don't want to send a message
   ) {
-    return
+    return user.smsStatus
   }
 
   const newSMSStatus =
@@ -76,6 +72,8 @@ export async function optInUser(phoneNumber: string, user: User) {
         .flush(),
     ]),
   )
+
+  return newSMSStatus
 }
 
 export async function optOutUser(phoneNumber: string, user: User) {

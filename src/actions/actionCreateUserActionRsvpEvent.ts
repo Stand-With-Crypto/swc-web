@@ -1,7 +1,7 @@
 'use server'
 import 'server-only'
 
-import { User, UserActionType, UserInformationVisibility } from '@prisma/client'
+import { SMSStatus, User, UserActionType, UserInformationVisibility } from '@prisma/client'
 import { waitUntil } from '@vercel/functions'
 import { boolean, object, string, z } from 'zod'
 
@@ -124,8 +124,7 @@ async function createUser(sharedDependencies: Pick<SharedDependencies, 'localUse
       userSessions: { create: { id: sessionId } },
       hasOptedInToEmails: false,
       hasOptedInToMembership: false,
-      hasOptedInToSms: false,
-      hasRepliedToOptInSms: false,
+      smsStatus: SMSStatus.NOT_OPTED_IN,
       referralId: generateReferralId(),
       ...mapLocalUserToUserDatabaseFields(localUser),
     },
