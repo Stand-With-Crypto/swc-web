@@ -49,8 +49,8 @@ type Input = z.infer<typeof zodExternalUserActionViewKeyRaces> & {
 }
 
 export type ExternalUserActionOptInResponse<ResultOptions extends string> = {
-  result: ResultOptions
-  resultOptions: ResultOptions[]
+  result: ResultOptions | null
+  resultOptions: ResultOptions[] | []
   sessionId: string
   userId: string
 }
@@ -68,14 +68,14 @@ export async function handleExternalUserActionViewKeyRaces(
   const actionType = UserActionType.VIEW_KEY_RACES
 
   const userAddress = await getUserAddress(userId)
-  const hasUserAtLeastOptedIn = await hasUserPartakenSomeAction(userId)
+  const userAlreadyOptedIn = await getUserAlreadyOptedIn(userId)
 
-  if (!hasUserAtLeastOptedIn) {
-    logger.info('User has not even opted in')
+  if (!userAlreadyOptedIn) {
+    logger.info('User has not even opted in or does not exist')
 
     return {
-      result: ExternalUserActionViewKeyRacesResult.EXISTING_ACTION,
-      resultOptions: Object.values(ExternalUserActionViewKeyRacesResult),
+      result: null,
+      resultOptions: [],
       sessionId,
       userId,
     }
@@ -96,7 +96,8 @@ export async function handleExternalUserActionViewKeyRaces(
 
   const existingViewKeyRacesAction = await hasUserViewedKeyRaces(userId)
 
-  const user = existingViewKeyRacesAction?.user as UserWithRelations
+  const user = userAlreadyOptedIn.user as UserWithRelations
+
   const localUser = getLocalUserFromUser(user)
   const analytics = getServerAnalytics({ userId: user.id, localUser })
 
@@ -251,17 +252,18 @@ async function hasUserViewedKeyRaces(userId: string) {
   })
 }
 
-async function hasUserPartakenSomeAction(userId: string) {
-  const actionsCount = await prismaClient.userAction.count({
+async function getUserAlreadyOptedIn(userId: string) {
+  return prismaClient.userAction.findFirst({
     where: {
       actionType: UserActionType.OPT_IN,
       user: {
         id: userId,
       },
     },
+    include: {
+      user: true,
+    },
   })
-
-  return actionsCount > 0
 }
 
 async function getUserAddress(userId: string) {
