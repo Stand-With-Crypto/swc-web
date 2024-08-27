@@ -147,9 +147,6 @@ model User {
   UserCommunicationJourney UserCommunicationJourney[]
   smsStatus                SMSStatus                  @default(NOT_OPTED_IN) @map("sms_status")
 
-  @@index([hasRepliedToOptInSms])
-  @@index([hasOptedInToSms])
-  @@index([primaryUserEmailAddressId])
   @@index([addressId])
   @@index([internalStatus])
   @@index([capitolCanaryAdvocateId])
