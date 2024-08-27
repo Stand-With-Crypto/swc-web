@@ -153,6 +153,7 @@ model User {
   @@index([totalDonationAmountUsd(sort: Desc)])
   @@index([datetimeCreated])
   @@index([phoneNumber])
+  @@index([smsStatus])
   @@map("user")
 }
 
@@ -221,6 +222,9 @@ model UserEmailAddress {
 
   @@unique(map: "user_email_address_unique_constraint", [emailAddress, userId])
   @@index([userId])
+  @@index([emailAddress])
+  @@index([isVerified])
+  @@index([dataCreationMethod])
   @@map("user_email_address")
 }
 
@@ -249,6 +253,8 @@ model UserCryptoAddress {
 
   @@unique([cryptoAddress, cryptoNetwork, userId])
   @@index([userId])
+  @@index([cryptoAddress])
+  @@index([hasBeenVerifiedViaAuth])
   @@map("user_crypto_address")
 }
 
