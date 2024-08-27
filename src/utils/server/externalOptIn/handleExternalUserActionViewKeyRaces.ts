@@ -266,7 +266,11 @@ async function getUserAlreadyOptedIn(userId: string) {
       },
     },
     include: {
-      user: true,
+      user: {
+        include: {
+          userSessions: true,
+        },
+      },
     },
   })
 }
