@@ -90,7 +90,7 @@ export async function handleExternalUserActionViewKeyRaces(
     maybeCongressionalDistrict?.districtNumber?.toString() ||
     null
 
-  const existingViewKeyRacesAction = await hasUserViewedKeyRaces(userId)
+  const existingViewKeyRacesAction = await getUserAlreadyViewedKeyRaces(userId)
 
   const user = userAlreadyOptedIn.user as UserWithRelations
 
@@ -112,6 +112,7 @@ export async function handleExternalUserActionViewKeyRaces(
         existingViewKeyRacesAction,
         currentUsaState,
         currentCongressionalDistrict,
+        campaignName,
       )
 
       analytics.trackUserActionUpdated({
@@ -154,6 +155,7 @@ export async function handleExternalUserActionViewKeyRaces(
     userId,
     currentUsaState,
     currentCongressionalDistrict,
+    campaignName,
   )
 
   analytics.trackUserActionCreated({
@@ -174,9 +176,10 @@ export async function handleExternalUserActionViewKeyRaces(
 }
 
 async function updateUserActionViewKeyRaces(
-  existingViewKeyRacesAction: Awaited<ReturnType<typeof hasUserViewedKeyRaces>>,
+  existingViewKeyRacesAction: Awaited<ReturnType<typeof getUserAlreadyViewedKeyRaces>>,
   usaState: string | null,
   usCongressionalDistrict: string | null,
+  campaignName: string,
 ) {
   const updateData: Record<string, string | undefined> = {
     ...(usaState !== null && { usaState }),
@@ -188,6 +191,7 @@ async function updateUserActionViewKeyRaces(
       id: existingViewKeyRacesAction?.id,
     },
     data: {
+      campaignName,
       userActionViewKeyRaces: {
         update: updateData,
       },
@@ -206,6 +210,7 @@ async function createUserActionViewKeyRaces(
   userId: string,
   usaState: string | null,
   usCongressionalDistrict: string | null,
+  campaignName: string,
 ) {
   return prismaClient.userAction.create({
     include: {
@@ -217,7 +222,7 @@ async function createUserActionViewKeyRaces(
     },
     data: {
       actionType: UserActionType.VIEW_KEY_RACES,
-      campaignName: UserActionViewKeyRacesCampaignName['2024_ELECTION'],
+      campaignName,
       userActionViewKeyRaces: {
         create: {
           usCongressionalDistrict,
@@ -233,7 +238,7 @@ async function createUserActionViewKeyRaces(
   })
 }
 
-async function hasUserViewedKeyRaces(userId: string) {
+async function getUserAlreadyViewedKeyRaces(userId: string) {
   return prismaClient.userAction.findFirst({
     where: {
       actionType: UserActionType.VIEW_KEY_RACES,
@@ -243,7 +248,11 @@ async function hasUserViewedKeyRaces(userId: string) {
     },
     include: {
       userActionViewKeyRaces: true,
-      user: true,
+      user: {
+        include: {
+          userSessions: true,
+        },
+      },
     },
   })
 }

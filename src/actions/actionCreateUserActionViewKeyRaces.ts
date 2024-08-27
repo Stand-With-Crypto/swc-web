@@ -118,7 +118,7 @@ async function _actionCreateUserActionViewKeyRaces(input: CreateActionViewKeyRac
     maybeCongressionalDistrict?.districtNumber?.toString() ||
     null
 
-  const existingViewKeyRacesAction = await hasUserViewedKeyRaces(userId)
+  const existingViewKeyRacesAction = await getUserAlreadyViewedKeyRaces(userId)
 
   if (existingViewKeyRacesAction) {
     logger.info(`User ${userId} has already viewed key races`)
@@ -181,7 +181,7 @@ async function _actionCreateUserActionViewKeyRaces(input: CreateActionViewKeyRac
 }
 
 async function updateUserActionViewKeyRaces(
-  existingViewKeyRacesAction: Awaited<ReturnType<typeof hasUserViewedKeyRaces>>,
+  existingViewKeyRacesAction: Awaited<ReturnType<typeof getUserAlreadyViewedKeyRaces>>,
   usaState: string | null,
   usCongressionalDistrict: string | null,
 ) {
@@ -243,7 +243,7 @@ async function createUserActionViewKeyRaces(
   })
 }
 
-async function hasUserViewedKeyRaces(userId: string) {
+async function getUserAlreadyViewedKeyRaces(userId: string) {
   return prismaClient.userAction.findFirst({
     where: {
       actionType: UserActionType.VIEW_KEY_RACES,
