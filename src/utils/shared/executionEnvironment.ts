@@ -4,6 +4,10 @@ declare global {
   interface Window {
     Cypress: unknown
   }
+
+  interface Navigator {
+    globalPrivacyControl?: boolean
+  }
 }
 
 export const isCypress = Boolean(

@@ -19,8 +19,13 @@ export default function CookieConsent({
   locale,
   debug = process.env.NEXT_PUBLIC_DEBUG_COOKIE_CONSENT === 'true',
 }: CookieConsentProps) {
-  const { acceptAllCookies, rejectAllOptionalCookies, acceptSpecificCookies, acceptedCookies } =
-    useCookieConsent()
+  const {
+    acceptAllCookies,
+    rejectAllOptionalCookies,
+    acceptSpecificCookies,
+    acceptedCookies,
+    hasGlobalPrivacyControl,
+  } = useCookieConsent()
   const [shouldShowBanner, setShouldShowBanner] = React.useState(() => debug || !acceptedCookies)
 
   const handleActionThenClose = React.useCallback(
@@ -32,7 +37,7 @@ export default function CookieConsent({
     [setShouldShowBanner],
   )
 
-  if (!shouldShowBanner) {
+  if (hasGlobalPrivacyControl || !shouldShowBanner) {
     return null
   }
 

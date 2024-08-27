@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Cookies from 'js-cookie'
 import mixpanel from 'mixpanel-browser'
 
@@ -13,6 +13,14 @@ export function useCookieConsent() {
   const [cookieConsentCookie, setCookieConsentCookie, removeCookieConsentCookie] = useCookieState(
     COOKIE_CONSENT_COOKIE_NAME,
   )
+
+  const rejectAllValues = {
+    functional: false,
+    performance: false,
+    targeting: false,
+  }
+  const hasGlobalPrivacyControl =
+    typeof window !== 'undefined' && !!window.navigator?.globalPrivacyControl
 
   const toggleProviders = React.useCallback((permissions: CookieConsentPermissions) => {
     if (!permissions.targeting) {
@@ -33,11 +41,7 @@ export function useCookieConsent() {
   )
 
   const rejectAllOptionalCookies = React.useCallback(() => {
-    acceptSpecificCookies({
-      functional: false,
-      performance: false,
-      targeting: false,
-    })
+    acceptSpecificCookies(rejectAllValues)
   }, [acceptSpecificCookies])
 
   const acceptAllCookies = React.useCallback(() => {
@@ -48,12 +52,20 @@ export function useCookieConsent() {
     })
   }, [acceptSpecificCookies])
 
+  useEffect(() => {
+    if (hasGlobalPrivacyControl) {
+      setCookieConsentCookie(serializeCookieConsent(rejectAllValues))
+      setClientCookieConsent(rejectAllValues)
+    }
+  }, [])
+
   return {
     acceptSpecificCookies,
     rejectAllOptionalCookies,
     acceptAllCookies,
     resetCookieConsent: removeCookieConsentCookie,
     acceptedCookies: !!cookieConsentCookie,
+    hasGlobalPrivacyControl,
   }
 }
 
