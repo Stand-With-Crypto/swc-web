@@ -5,8 +5,8 @@ export enum VerifiedSWCPartner {
 }
 
 export type VerifiedSWCPartnerApiResponse<ResultOptions extends string> = {
-  result: ResultOptions
-  resultOptions: ResultOptions[]
+  result: ResultOptions | null
+  resultOptions: ResultOptions[] | []
   sessionId: string
   userId: string
 }

@@ -13,7 +13,10 @@ import { getOrCreateSessionIdForUser } from '@/utils/server/externalOptIn/getOrC
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getServerAnalytics } from '@/utils/server/serverAnalytics'
 import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
-import { VerifiedSWCPartner } from '@/utils/server/verifiedSWCPartner/constants'
+import {
+  VerifiedSWCPartner,
+  VerifiedSWCPartnerApiResponse,
+} from '@/utils/server/verifiedSWCPartner/constants'
 import {
   GetCongressionalDistrictFromAddressSuccess,
   maybeGetCongressionalDistrictFromAddress,
@@ -48,16 +51,9 @@ type Input = z.infer<typeof zodExternalUserActionViewKeyRaces> & {
   partner?: VerifiedSWCPartner
 }
 
-export type ExternalUserActionOptInResponse<ResultOptions extends string> = {
-  result: ResultOptions | null
-  resultOptions: ResultOptions[] | []
-  sessionId: string
-  userId: string
-}
-
 export async function handleExternalUserActionViewKeyRaces(
   input: Input,
-): Promise<ExternalUserActionOptInResponse<ExternalUserActionViewKeyRacesResult>> {
+): Promise<VerifiedSWCPartnerApiResponse<ExternalUserActionViewKeyRacesResult>> {
   const {
     userId,
     sessionId,
