@@ -1,11 +1,8 @@
-import { KeyRacesDialog } from '@/components/app/pageVoterGuide/keyRacesDialog'
-import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
+import { VoterJourneyStepList } from '@/components/app/pageVoterGuide/voterJourneyStepList'
 import { Badge } from '@/components/ui/badge'
 import { Countdown } from '@/components/ui/countdown'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
-
-import { VoterJourneyStepCard } from './voterJourneyStepCard'
 
 export function PageVoterGuide() {
   return (
@@ -28,32 +25,7 @@ export function PageVoterGuide() {
         </PageSubTitle>
       </div>
 
-      <div className="w-full space-y-4">
-        <KeyRacesDialog>
-          <VoterJourneyStepCard
-            description="View key races in your area and see where politicians stand on crypto."
-            status={'incomplete'}
-            step={1}
-            title="Get Informed"
-          />
-        </KeyRacesDialog>
-
-        <UserActionFormVoterRegistrationDialog>
-          <VoterJourneyStepCard
-            description="Check your voter registration status. Earn a free NFT from pplpleasr."
-            status={'incomplete'}
-            step={2}
-            title="Make sure you’re registered to vote"
-          />
-        </UserActionFormVoterRegistrationDialog>
-
-        <VoterJourneyStepCard
-          description="We’ll send you information on polling locations as it gets closer to the election."
-          status={'incomplete'}
-          step={3}
-          title="Get updates"
-        />
-      </div>
+      <VoterJourneyStepList className="w-full" />
     </div>
   )
 }

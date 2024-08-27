@@ -3,26 +3,23 @@
 import React, { useEffect, useMemo, useRef } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Check } from 'lucide-react'
-import { Content } from 'next/font/google'
+import { UserActionType } from '@prisma/client'
+import * as Sentry from '@sentry/nextjs'
+import { useRouter } from 'next/navigation'
 
-import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
+import { actionCreateUserActionViewKeyRaces } from '@/actions/actionCreateUserActionViewKeyRaces'
 import { ContentSection } from '@/components/app/ContentSection'
 import {
   DTSIPersonHeroCardSection,
   DTSIPersonHeroCardSectionProps,
 } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardSection'
 import {
-  FORM_NAME,
   getDefaultValues,
   voterGuideFormValidationSchema,
   VoterGuideFormValues,
 } from '@/components/app/pageVoterGuide/formConfig'
 import { UserActionFormDialog } from '@/components/app/userActionFormCommon/dialog'
 import { UserActionFormLayout } from '@/components/app/userActionFormCommon/layout'
-import type { VoterAttestationActionSharedData } from '@/components/app/userActionFormVoterAttestation'
-import { Address } from '@/components/app/userActionFormVoterAttestation/sections/address'
-import { PledgeSection } from '@/components/app/userActionFormVoterAttestation/sections/pledge'
 import { useRacesByAddress } from '@/components/app/userActionFormVoterAttestation/useRacesByAddress'
 import { Button } from '@/components/ui/button'
 import {
@@ -31,31 +28,37 @@ import {
   dialogContentPaddingXStyles,
 } from '@/components/ui/dialog/styles'
 import { ErrorMessage } from '@/components/ui/errorMessage'
-import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form'
+import { Form, FormControl, FormField, FormItem } from '@/components/ui/form'
 import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
-import { InternalLink } from '@/components/ui/link'
-import { PageTitle } from '@/components/ui/pageTitleText'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useDialog } from '@/hooks/useDialog'
-import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { useLocale } from '@/hooks/useLocale'
+import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { cn } from '@/utils/web/cn'
-import { trackFormSubmissionSyncErrors } from '@/utils/web/formUtils'
+import { trackFormSubmissionSyncErrors, triggerServerActionForForm } from '@/utils/web/formUtils'
+import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
+import { identifyUserOnClient } from '@/utils/web/identifyUser'
+import {
+  catchUnexpectedServerErrorAndTriggerToast,
+  toastGenericError,
+} from '@/utils/web/toastUtils'
 
 const ANALYTICS_NAME_USER_ACTION_FORM_GET_INFORMED = 'User Action Form Get Informed'
 
 interface KeyRacesDialogProps {
   children: React.ReactNode
+  onSuccess?: () => void
   initialValues?: VoterGuideFormValues
   defaultOpen?: boolean
 }
 
 export const KeyRacesDialog = (props: KeyRacesDialogProps) => {
-  const { children, initialValues, defaultOpen } = props
+  const { children, onSuccess, initialValues, defaultOpen } = props
 
+  const router = useRouter()
   const locale = useLocale()
 
   const { data } = useApiResponseForUserFullProfileInfo()
@@ -123,24 +126,74 @@ export const KeyRacesDialog = (props: KeyRacesDialogProps) => {
 
                 <div className="mx-auto w-full max-w-lg">
                   <Form {...form}>
-                    <FormField
-                      control={form.control}
-                      name="address"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormControl aria-invalid={!!error}>
-                            <GooglePlacesSelect
-                              {...field}
-                              className="h-14 rounded-full bg-secondary"
-                              placeholder="Your full address"
-                              ref={inputRef}
-                              value={field.value}
-                            />
-                          </FormControl>
-                          {!!error && <ErrorMessage>{error?.message}</ErrorMessage>}
-                        </FormItem>
-                      )}
-                    />
+                    <form
+                      id="view-key-races-form"
+                      onSubmit={form.handleSubmit(async values => {
+                        const addressSchema = await convertGooglePlaceAutoPredictionToAddressSchema(
+                          values.address,
+                        ).catch(e => {
+                          Sentry.captureException(e)
+                          catchUnexpectedServerErrorAndTriggerToast(e)
+                          return null
+                        })
+                        if (!address) {
+                          return
+                        }
+                        const result = await triggerServerActionForForm(
+                          {
+                            form,
+                            formName: ANALYTICS_NAME_USER_ACTION_FORM_GET_INFORMED,
+                            analyticsProps: {
+                              ...(addressSchema
+                                ? convertAddressToAnalyticsProperties(addressSchema)
+                                : {}),
+                              'User Action Type': UserActionType.VIEW_KEY_RACES,
+                            },
+                            payload: {
+                              ...values,
+                              usCongressionalDistrict: addressSchema?.usCongressionalDistrict,
+                              usaState: stateCode,
+                            },
+                            onError: (_, e) => {
+                              form.setError('address', {
+                                message: e.message,
+                              })
+                              toastGenericError()
+                            },
+                          },
+                          payload =>
+                            actionCreateUserActionViewKeyRaces(payload).then(actionResult => {
+                              if (actionResult && 'user' in actionResult && actionResult.user) {
+                                identifyUserOnClient(actionResult.user)
+                              }
+                              return actionResult
+                            }),
+                        )
+                        if (result.status === 'success') {
+                          router.refresh()
+                          onSuccess?.()
+                        }
+                      }, trackFormSubmissionSyncErrors(ANALYTICS_NAME_USER_ACTION_FORM_GET_INFORMED))}
+                    >
+                      <FormField
+                        control={form.control}
+                        name="address"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormControl aria-invalid={!!error}>
+                              <GooglePlacesSelect
+                                {...field}
+                                className="h-14 rounded-full bg-secondary"
+                                placeholder="Your full address"
+                                ref={inputRef}
+                                value={field.value}
+                              />
+                            </FormControl>
+                            {!!error && <ErrorMessage>{error?.message}</ErrorMessage>}
+                          </FormItem>
+                        )}
+                      />
+                    </form>
                   </Form>
                 </div>
               </div>
@@ -202,6 +255,7 @@ export const KeyRacesDialog = (props: KeyRacesDialogProps) => {
                 racesByAddressRequest.isLoading ||
                 !form.formState.isValid
               }
+              form="view-key-races-form"
               size="lg"
               type="submit"
             >

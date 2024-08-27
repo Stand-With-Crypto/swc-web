@@ -14,7 +14,7 @@ interface VoterJourneyStepCardProps {
 }
 
 export function VoterJourneyStepCard(props: VoterJourneyStepCardProps) {
-  const { step, title, description, status, className } = props
+  const { step, title, description, status = 'unknown', className } = props
 
   const renderStatus = () => {
     switch (status) {
