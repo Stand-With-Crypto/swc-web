@@ -153,6 +153,7 @@ model User {
   @@index([totalDonationAmountUsd(sort: Desc)])
   @@index([datetimeCreated])
   @@index([phoneNumber])
+  @@index([smsStatus])
   @@map("user")
 }
 
@@ -220,8 +221,10 @@ model UserEmailAddress {
   embeddedWalletUserCryptoAddress UserCryptoAddress?
 
   @@unique(map: "user_email_address_unique_constraint", [emailAddress, userId])
-  @@index([emailAddress])
   @@index([userId])
+  @@index([emailAddress])
+  @@index([isVerified])
+  @@index([dataCreationMethod])
   @@map("user_email_address")
 }
 
@@ -249,8 +252,9 @@ model UserCryptoAddress {
   asPrimaryUserCryptoAddress User?        @relation("asPrimaryUserCryptoAddress")
 
   @@unique([cryptoAddress, cryptoNetwork, userId])
-  @@index([cryptoAddress])
   @@index([userId])
+  @@index([cryptoAddress])
+  @@index([hasBeenVerifiedViaAuth])
   @@map("user_crypto_address")
 }
 
