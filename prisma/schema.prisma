@@ -197,6 +197,7 @@ model UserSession {
 
   userActions UserAction[]
 
+  @@index([id])
   @@index([userId])
   @@map("user_session")
 }
