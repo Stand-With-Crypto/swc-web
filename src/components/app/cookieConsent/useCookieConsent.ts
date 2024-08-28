@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Cookies from 'js-cookie'
 import mixpanel from 'mixpanel-browser'
 
@@ -9,10 +9,19 @@ import {
 } from '@/utils/shared/cookieConsent'
 import { setClientCookieConsent } from '@/utils/web/clientCookieConsent'
 
+const REJECTED_VALUES = {
+  functional: false,
+  performance: false,
+  targeting: false,
+}
+
 export function useCookieConsent() {
   const [cookieConsentCookie, setCookieConsentCookie, removeCookieConsentCookie] = useCookieState(
     COOKIE_CONSENT_COOKIE_NAME,
   )
+
+  const hasGlobalPrivacyControl =
+    typeof window !== 'undefined' && !!window.navigator?.globalPrivacyControl
 
   const toggleProviders = React.useCallback((permissions: CookieConsentPermissions) => {
     if (!permissions.targeting) {
@@ -33,11 +42,7 @@ export function useCookieConsent() {
   )
 
   const rejectAllOptionalCookies = React.useCallback(() => {
-    acceptSpecificCookies({
-      functional: false,
-      performance: false,
-      targeting: false,
-    })
+    acceptSpecificCookies(REJECTED_VALUES)
   }, [acceptSpecificCookies])
 
   const acceptAllCookies = React.useCallback(() => {
@@ -48,12 +53,20 @@ export function useCookieConsent() {
     })
   }, [acceptSpecificCookies])
 
+  useEffect(() => {
+    if (hasGlobalPrivacyControl) {
+      setCookieConsentCookie(serializeCookieConsent(REJECTED_VALUES))
+      setClientCookieConsent(REJECTED_VALUES)
+    }
+  }, [])
+
   return {
     acceptSpecificCookies,
     rejectAllOptionalCookies,
     acceptAllCookies,
     resetCookieConsent: removeCookieConsentCookie,
     acceptedCookies: !!cookieConsentCookie,
+    hasGlobalPrivacyControl,
   }
 }
 
