@@ -57,17 +57,15 @@ export default function ManageCookiesModal({
       <ContainerTrigger asChild>{children}</ContainerTrigger>
       <ContainerContent>
         <ContainerHeader
-          className={cn('space-y-6', {
+          className={cn('space-y-6 px-0 pb-4', {
             'px-8': isMobile,
-            'pb-4': isMobile,
           })}
         >
           <ContainerTitle className="text-left">Privacy Choices</ContainerTitle>
         </ContainerHeader>
         <div
-          className={cn('space-y-6', {
+          className={cn('space-y-6 px-0 pb-4', {
             'px-8': isMobile,
-            'pb-4': isMobile,
           })}
         >
           <p className="text-xs sm:text-sm">
@@ -80,17 +78,15 @@ export default function ManageCookiesModal({
           </p>
         </div>
         <ContainerHeader
-          className={cn('space-y-6', {
+          className={cn('space-y-6 px-0 pb-4', {
             'px-8': isMobile,
-            'pb-4': isMobile,
           })}
         >
           <ContainerTitle className="text-left">Cookie Preferences</ContainerTitle>
         </ContainerHeader>
         <div
-          className={cn('space-y-6', {
+          className={cn('space-y-6 px-0 pb-8', {
             'px-8': isMobile,
-            'pb-8': isMobile,
           })}
         >
           <p className="text-xs sm:text-sm">
