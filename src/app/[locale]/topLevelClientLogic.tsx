@@ -15,11 +15,15 @@ import { maybeInitClientAnalytics, trackClientAnalytic } from '@/utils/web/clien
 import { bootstrapLocalUser } from '@/utils/web/clientLocalUser'
 import { getUserSessionIdOnClient } from '@/utils/web/clientUserSessionId'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
+import { useReloadDueToInactivity } from '@/hooks/useReloadDueToInactivity'
 
 const InitialOrchestration = () => {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const authUser = useThirdwebAuthUser()
+
+  useReloadDueToInactivity({ timeInMinutes: 25 })
+
   useAutoConnect({
     client: thirdwebClient,
   })
