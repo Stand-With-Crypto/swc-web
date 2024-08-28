@@ -1,9 +1,10 @@
 'use client'
 
+import { X } from 'lucide-react'
+
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { Button } from '@/components/ui/button'
 import { Portal } from '@/components/ui/portal'
-import { X } from 'lucide-react'
 
 interface SaveProgressToastProps {
   isOpen: boolean

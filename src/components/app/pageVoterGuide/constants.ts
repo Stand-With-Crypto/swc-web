@@ -1,3 +1,5 @@
+import { UserActionType } from '@prisma/client'
+
 import { KeyRacesDialog } from '@/components/app/pageVoterGuide/keyRacesDialog'
 import { UserActionFormVoterAttestationDialog } from '@/components/app/userActionFormVoterAttestation/dialog'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
@@ -7,7 +9,6 @@ import {
   UserActionVoterAttestationCampaignName,
   UserActionVoterRegistrationCampaignName,
 } from '@/utils/shared/userActionCampaigns'
-import { UserActionType } from '@prisma/client'
 
 type VoterGuideStep = {
   title: string
