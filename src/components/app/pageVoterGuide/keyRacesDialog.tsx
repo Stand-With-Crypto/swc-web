@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useMemo, useRef } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { UserActionType } from '@prisma/client'
@@ -35,7 +35,6 @@ import { Form, FormControl, FormField, FormItem } from '@/components/ui/form'
 import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Skeleton } from '@/components/ui/skeleton'
-import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
 import { useDialog } from '@/hooks/useDialog'
 import { useIsMobile } from '@/hooks/useIsMobile'
@@ -52,6 +51,8 @@ import {
   catchUnexpectedServerErrorAndTriggerToast,
   toastGenericError,
 } from '@/utils/web/toastUtils'
+import { useSession } from '@/hooks/useSession'
+import { SaveProgressToast } from './saveProgressToast'
 
 const ANALYTICS_NAME_USER_ACTION_FORM_GET_INFORMED = 'User Action Form Get Informed'
 
@@ -68,9 +69,9 @@ export const KeyRacesDialog = (props: KeyRacesDialogProps) => {
   const router = useRouter()
   const locale = useLocale()
 
-  const { data } = useApiResponseForUserFullProfileInfo()
+  const session = useSession()
   const { mutate } = useApiResponseForUserPerformedUserActionTypes()
-  const user = data?.user
+  const user = session?.user
 
   const userDefaultValues = useMemo(() => getDefaultValues({ user }), [user])
 
@@ -87,7 +88,6 @@ export const KeyRacesDialog = (props: KeyRacesDialogProps) => {
 
   const isMobile = useIsMobile({ defaultState: true })
   const inputRef = useRef<HTMLInputElement | null>(null)
-
   const error = form.formState.errors?.address
   const errorRef = useRef(error)
 
@@ -117,6 +117,8 @@ export const KeyRacesDialog = (props: KeyRacesDialogProps) => {
   const { congressional, senate, presidential, stateCode, districtNumber } =
     racesByAddressRequest?.data ?? {}
 
+  const [toastOpen, setToastOpen] = useState(false)
+
   const dialogProps = useDialog({
     initialOpen: defaultOpen,
     analytics: ANALYTICS_NAME_USER_ACTION_FORM_GET_INFORMED,
@@ -135,164 +137,172 @@ export const KeyRacesDialog = (props: KeyRacesDialogProps) => {
   }
 
   return (
-    <UserActionFormDialog {...dialogProps} padding={false} trigger={children}>
-      <UserActionFormLayout>
-        <div className="flex h-full flex-1 flex-col">
-          <ScrollArea className="overflow-auto md:max-h-[70vh]">
-            <div className={cn(dialogContentPaddingStyles)}>
-              <div className="space-y-6">
-                <p className="text-center text-xl font-semibold">
-                  See where politicians in your area stand on crypto
-                </p>
+    <>
+      <UserActionFormDialog {...dialogProps} padding={false} trigger={children}>
+        <UserActionFormLayout>
+          <div className="flex h-full flex-1 flex-col">
+            <ScrollArea className="overflow-auto md:max-h-[70vh]">
+              <div className={cn(dialogContentPaddingStyles)}>
+                <div className="space-y-6">
+                  <p className="text-center text-xl font-semibold">
+                    See where politicians in your area stand on crypto
+                  </p>
 
-                <div className="mx-auto w-full max-w-lg">
-                  <Form {...form}>
-                    <form
-                      id="view-key-races-form"
-                      onSubmit={form.handleSubmit(async formValues => {
-                        const addressSchema = await convertGooglePlaceAutoPredictionToAddressSchema(
-                          formValues.address,
-                        ).catch(e => {
-                          Sentry.captureException(e)
-                          catchUnexpectedServerErrorAndTriggerToast(e)
-                          return null
-                        })
-                        if (!addressSchema) {
-                          form.setError('address', {
-                            message: 'Invalid address',
-                          })
-                          return
-                        }
-                        const payload: CreateActionViewKeyRacesInput = {
-                          ...formValues,
-                          usCongressionalDistrict: addressSchema?.usCongressionalDistrict,
-                          usaState: stateCode,
-                          shouldBypassAuth: true,
-                        }
-                        const result = await triggerServerActionForForm(
-                          {
-                            form,
-                            formName: ANALYTICS_NAME_USER_ACTION_FORM_GET_INFORMED,
-                            analyticsProps: {
-                              ...(addressSchema
-                                ? convertAddressToAnalyticsProperties(addressSchema)
-                                : {}),
-                              'User Action Type': UserActionType.VIEW_KEY_RACES,
+                  <div className="mx-auto w-full max-w-lg">
+                    <Form {...form}>
+                      <form
+                        id="view-key-races-form"
+                        onSubmit={form.handleSubmit(async formValues => {
+                          const addressSchema =
+                            await convertGooglePlaceAutoPredictionToAddressSchema(
+                              formValues.address,
+                            ).catch(e => {
+                              Sentry.captureException(e)
+                              catchUnexpectedServerErrorAndTriggerToast(e)
+                              return null
+                            })
+                          if (!addressSchema) {
+                            form.setError('address', {
+                              message: 'Invalid address',
+                            })
+                            return
+                          }
+                          const payload: CreateActionViewKeyRacesInput = {
+                            ...formValues,
+                            usCongressionalDistrict: addressSchema?.usCongressionalDistrict,
+                            usaState: stateCode,
+                            shouldBypassAuth: true,
+                          }
+                          const result = await triggerServerActionForForm(
+                            {
+                              form,
+                              formName: ANALYTICS_NAME_USER_ACTION_FORM_GET_INFORMED,
+                              analyticsProps: {
+                                ...(addressSchema
+                                  ? convertAddressToAnalyticsProperties(addressSchema)
+                                  : {}),
+                                'User Action Type': UserActionType.VIEW_KEY_RACES,
+                              },
+                              payload,
+                              onError: (_, e) => {
+                                form.setError('address', {
+                                  message: e.message,
+                                })
+                                toastGenericError()
+                              },
                             },
-                            payload,
-                            onError: (_, e) => {
-                              form.setError('address', {
-                                message: e.message,
-                              })
-                              toastGenericError()
-                            },
-                          },
-                          input =>
-                            actionCreateUserActionViewKeyRaces(input).then(actionResult => {
-                              if (actionResult && 'user' in actionResult && actionResult.user) {
-                                identifyUserOnClient(actionResult.user)
-                              }
-                              return actionResult
-                            }),
-                        )
-                        if (result.status === 'success') {
-                          router.refresh()
-                          void mutate()
-                          dialogProps.onOpenChange(false)
-                          onSuccess?.()
-                        }
-                      }, trackFormSubmissionSyncErrors(ANALYTICS_NAME_USER_ACTION_FORM_GET_INFORMED))}
-                    >
-                      <FormField
-                        control={form.control}
-                        name="address"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormControl aria-invalid={!!error}>
-                              <GooglePlacesSelect
-                                {...field}
-                                className="h-14 rounded-full bg-secondary"
-                                placeholder="Your full address"
-                                ref={inputRef}
-                                value={field.value}
-                              />
-                            </FormControl>
-                            {!!error && <ErrorMessage>{error?.message}</ErrorMessage>}
-                          </FormItem>
-                        )}
-                      />
-                    </form>
-                  </Form>
+                            input =>
+                              actionCreateUserActionViewKeyRaces(input).then(actionResult => {
+                                if (actionResult && 'user' in actionResult && actionResult.user) {
+                                  identifyUserOnClient(actionResult.user)
+                                }
+                                return actionResult
+                              }),
+                          )
+                          if (result.status === 'success') {
+                            router.refresh()
+                            void mutate()
+                            dialogProps.onOpenChange(false)
+                            if (!session.isLoggedIn) {
+                              setToastOpen(true)
+                            }
+                            onSuccess?.()
+                          }
+                        }, trackFormSubmissionSyncErrors(ANALYTICS_NAME_USER_ACTION_FORM_GET_INFORMED))}
+                      >
+                        <FormField
+                          control={form.control}
+                          name="address"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormControl aria-invalid={!!error}>
+                                <GooglePlacesSelect
+                                  {...field}
+                                  className="h-14 rounded-full bg-secondary"
+                                  placeholder="Your full address"
+                                  ref={inputRef}
+                                  value={field.value}
+                                />
+                              </FormControl>
+                              {!!error && <ErrorMessage>{error?.message}</ErrorMessage>}
+                            </FormItem>
+                          )}
+                        />
+                      </form>
+                    </Form>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div className="space-y-6 md:space-y-10">
-              {racesByAddressRequest.isLoading ? (
-                <KeyRacesSkeleton />
-              ) : (
-                <>
-                  {!!presidential && presidential?.length > 0 && (
-                    <RaceSectionWrapper>
-                      <DTSIPersonHeroCardSection
-                        {...dtsiPersonHeroCardSectionProps}
-                        people={presidential}
-                        title="Presidential Election"
-                      />
-                    </RaceSectionWrapper>
-                  )}
-
-                  {!!senate && senate?.length > 0 && (
-                    <>
-                      <hr />
+              <div className="space-y-6 md:space-y-10">
+                {racesByAddressRequest.isLoading ? (
+                  <KeyRacesSkeleton />
+                ) : (
+                  <>
+                    {!!presidential && presidential?.length > 0 && (
                       <RaceSectionWrapper>
                         <DTSIPersonHeroCardSection
                           {...dtsiPersonHeroCardSectionProps}
-                          people={senate}
-                          title={`U.S. Senate Race${stateCode ? ` (${stateCode})` : ''}`}
+                          people={presidential}
+                          title="Presidential Election"
                         />
                       </RaceSectionWrapper>
-                    </>
-                  )}
+                    )}
 
-                  {!!congressional && congressional?.length > 0 && (
-                    <>
-                      <hr />
-                      <RaceSectionWrapper className={dialogContentPaddingBottomStyles}>
-                        <DTSIPersonHeroCardSection
-                          {...dtsiPersonHeroCardSectionProps}
-                          people={congressional}
-                          title={`Congressional District${districtNumber ? ` ${districtNumber}` : ''}`}
-                        />
-                      </RaceSectionWrapper>
-                    </>
-                  )}
-                </>
-              )}
-            </div>
-          </ScrollArea>
+                    {!!senate && senate?.length > 0 && (
+                      <>
+                        <hr />
+                        <RaceSectionWrapper>
+                          <DTSIPersonHeroCardSection
+                            {...dtsiPersonHeroCardSectionProps}
+                            people={senate}
+                            title={`U.S. Senate Race${stateCode ? ` (${stateCode})` : ''}`}
+                          />
+                        </RaceSectionWrapper>
+                      </>
+                    )}
 
-          <div
-            className="z-10 mt-auto flex flex-col items-center justify-center border border-t p-6 sm:flex-row md:px-12"
-            style={{ boxShadow: 'rgba(0, 0, 0, 0.2) 0px 1px 6px 0px' }}
-          >
-            <Button
-              className="ml-auto min-w-[130px]"
-              disabled={
-                form.formState.isSubmitting ||
-                racesByAddressRequest.isLoading ||
-                !form.formState.isValid
-              }
-              form="view-key-races-form"
-              size="lg"
-              type="submit"
+                    {!!congressional && congressional?.length > 0 && (
+                      <>
+                        <hr />
+                        <RaceSectionWrapper className={dialogContentPaddingBottomStyles}>
+                          <DTSIPersonHeroCardSection
+                            {...dtsiPersonHeroCardSectionProps}
+                            people={congressional}
+                            title={`Congressional District${districtNumber ? ` ${districtNumber}` : ''}`}
+                          />
+                        </RaceSectionWrapper>
+                      </>
+                    )}
+                  </>
+                )}
+              </div>
+            </ScrollArea>
+
+            <div
+              className="z-10 mt-auto flex flex-col items-center justify-center border border-t p-6 sm:flex-row md:px-12"
+              style={{ boxShadow: 'rgba(0, 0, 0, 0.2) 0px 1px 6px 0px' }}
             >
-              Done
-            </Button>
+              <Button
+                className="ml-auto min-w-[130px]"
+                disabled={
+                  form.formState.isSubmitting ||
+                  racesByAddressRequest.isLoading ||
+                  !form.formState.isValid
+                }
+                form="view-key-races-form"
+                size="lg"
+                type="submit"
+              >
+                Done
+              </Button>
+            </div>
           </div>
-        </div>
-      </UserActionFormLayout>
-    </UserActionFormDialog>
+        </UserActionFormLayout>
+      </UserActionFormDialog>
+
+      <SaveProgressToast isOpen={toastOpen} onClose={() => setToastOpen(false)} />
+    </>
   )
 }
 
