@@ -9,16 +9,17 @@ import {
 } from '@/utils/shared/cookieConsent'
 import { setClientCookieConsent } from '@/utils/web/clientCookieConsent'
 
+const REJECTED_VALUES = {
+  functional: false,
+  performance: false,
+  targeting: false,
+}
+
 export function useCookieConsent() {
   const [cookieConsentCookie, setCookieConsentCookie, removeCookieConsentCookie] = useCookieState(
     COOKIE_CONSENT_COOKIE_NAME,
   )
 
-  const rejectAllValues = {
-    functional: false,
-    performance: false,
-    targeting: false,
-  }
   const hasGlobalPrivacyControl =
     typeof window !== 'undefined' && !!window.navigator?.globalPrivacyControl
 
@@ -41,7 +42,7 @@ export function useCookieConsent() {
   )
 
   const rejectAllOptionalCookies = React.useCallback(() => {
-    acceptSpecificCookies(rejectAllValues)
+    acceptSpecificCookies(REJECTED_VALUES)
   }, [acceptSpecificCookies])
 
   const acceptAllCookies = React.useCallback(() => {
@@ -54,8 +55,8 @@ export function useCookieConsent() {
 
   useEffect(() => {
     if (hasGlobalPrivacyControl) {
-      setCookieConsentCookie(serializeCookieConsent(rejectAllValues))
-      setClientCookieConsent(rejectAllValues)
+      setCookieConsentCookie(serializeCookieConsent(REJECTED_VALUES))
+      setClientCookieConsent(REJECTED_VALUES)
     }
   }, [])
 
