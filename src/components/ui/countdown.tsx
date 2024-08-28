@@ -43,6 +43,8 @@ export const Countdown = ({ targetDate }: CountdownProps) => {
   const startCountDown = useCallback(() => {
     const countDownDate = targetDate.getTime()
 
+    getTimeDifference(countDownDate)
+
     intervalRef.current = setInterval(() => {
       getTimeDifference(countDownDate)
     }, 1000)
