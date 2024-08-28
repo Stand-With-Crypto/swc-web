@@ -49,7 +49,7 @@ export function PromotedEvents({ events }: PromotedEventsProps) {
               event={event.data}
               trigger={
                 <Button asChild className="mt-2 w-full lg:mt-4 lg:w-fit" variant="secondary">
-                  <span>Learn more</span>
+                  <span>RSVP</span>
                 </Button>
               }
               triggerClassName="w-fit"
