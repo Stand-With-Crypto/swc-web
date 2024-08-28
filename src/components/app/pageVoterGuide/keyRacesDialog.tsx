@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import { ReactNode, useEffect, useMemo, useRef, useState } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { UserActionType } from '@prisma/client'
@@ -11,34 +11,24 @@ import {
   actionCreateUserActionViewKeyRaces,
   CreateActionViewKeyRacesInput,
 } from '@/actions/actionCreateUserActionViewKeyRaces'
-import { ContentSection } from '@/components/app/ContentSection'
-import {
-  DTSIPersonHeroCardSection,
-  DTSIPersonHeroCardSectionProps,
-} from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardSection'
 import {
   getDefaultValues,
   voterGuideFormValidationSchema,
   VoterGuideFormValues,
 } from '@/components/app/pageVoterGuide/formConfig'
+import { KeyRacesList, KeyRacesSkeleton } from '@/components/app/pageVoterGuide/keyRacesList'
 import { UserActionFormDialog } from '@/components/app/userActionFormCommon/dialog'
 import { UserActionFormLayout } from '@/components/app/userActionFormCommon/layout'
 import { useRacesByAddress } from '@/components/app/userActionFormVoterAttestation/useRacesByAddress'
 import { Button } from '@/components/ui/button'
-import {
-  dialogContentPaddingBottomStyles,
-  dialogContentPaddingStyles,
-  dialogContentPaddingXStyles,
-} from '@/components/ui/dialog/styles'
+import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { ErrorMessage } from '@/components/ui/errorMessage'
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form'
 import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { ScrollArea } from '@/components/ui/scroll-area'
-import { Skeleton } from '@/components/ui/skeleton'
 import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
 import { useDialog } from '@/hooks/useDialog'
 import { useIsMobile } from '@/hooks/useIsMobile'
-import { useLocale } from '@/hooks/useLocale'
 import { useSession } from '@/hooks/useSession'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { cn } from '@/utils/web/cn'
@@ -58,7 +48,7 @@ import { SaveProgressToast } from './saveProgressToast'
 const ANALYTICS_NAME_USER_ACTION_FORM_GET_INFORMED = 'User Action Form Get Informed'
 
 interface KeyRacesDialogProps {
-  children: React.ReactNode
+  children: ReactNode
   onSuccess?: () => void
   initialValues?: VoterGuideFormValues
   defaultOpen?: boolean
@@ -68,7 +58,6 @@ export const KeyRacesDialog = (props: KeyRacesDialogProps) => {
   const { children, onSuccess, initialValues, defaultOpen } = props
 
   const router = useRouter()
-  const locale = useLocale()
 
   const session = useSession()
   const { mutate } = useApiResponseForUserPerformedUserActionTypes()
@@ -115,8 +104,6 @@ export const KeyRacesDialog = (props: KeyRacesDialogProps) => {
       form.clearErrors('address')
     },
   })
-  const { congressional, senate, presidential, stateCode, districtNumber } =
-    racesByAddressRequest?.data ?? {}
 
   const [toastOpen, setToastOpen] = useState(false)
 
@@ -125,17 +112,67 @@ export const KeyRacesDialog = (props: KeyRacesDialogProps) => {
     analytics: ANALYTICS_NAME_USER_ACTION_FORM_GET_INFORMED,
   })
 
-  const dtsiPersonHeroCardSectionProps: Pick<
-    DTSIPersonHeroCardSectionProps,
-    'forceMobile' | 'locale' | 'titleProps' | 'target'
-  > = {
-    forceMobile: true,
-    locale: locale,
-    titleProps: {
-      size: 'xs',
-    },
-    target: '_blank',
+  const createViewKeyRacesAction = async () => {
+    if (!form.getValues('address')) return
+
+    const addressSchema = await convertGooglePlaceAutoPredictionToAddressSchema(
+      form.getValues('address'),
+    ).catch(e => {
+      Sentry.captureException(e)
+      catchUnexpectedServerErrorAndTriggerToast(e)
+      return null
+    })
+    if (!addressSchema) {
+      form.setError('address', {
+        message: 'Invalid address',
+      })
+      return
+    }
+    console.log('addressSchema', addressSchema)
+    const payload: CreateActionViewKeyRacesInput = {
+      usCongressionalDistrict: addressSchema?.usCongressionalDistrict,
+      usaState: addressSchema?.administrativeAreaLevel1,
+      shouldBypassAuth: true,
+    }
+    const result = await triggerServerActionForForm(
+      {
+        form,
+        formName: ANALYTICS_NAME_USER_ACTION_FORM_GET_INFORMED,
+        analyticsProps: {
+          ...(addressSchema ? convertAddressToAnalyticsProperties(addressSchema) : {}),
+          'User Action Type': UserActionType.VIEW_KEY_RACES,
+        },
+        payload,
+        onError: (_, e) => {
+          form.setError('address', {
+            message: e.message,
+          })
+          toastGenericError()
+        },
+      },
+      input =>
+        actionCreateUserActionViewKeyRaces(input).then(actionResult => {
+          if (actionResult && 'user' in actionResult && actionResult.user) {
+            identifyUserOnClient(actionResult.user)
+          }
+          return actionResult
+        }),
+    )
+    if (result.status === 'success') {
+      router.refresh()
+      void mutate()
+      if (!session.isLoggedIn) {
+        setToastOpen(true)
+      }
+    }
   }
+
+  useEffect(() => {
+    if (address) {
+      void createViewKeyRacesAction()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [address])
 
   return (
     <>
@@ -153,62 +190,9 @@ export const KeyRacesDialog = (props: KeyRacesDialogProps) => {
                     <Form {...form}>
                       <form
                         id="view-key-races-form"
-                        onSubmit={form.handleSubmit(async formValues => {
-                          const addressSchema =
-                            await convertGooglePlaceAutoPredictionToAddressSchema(
-                              formValues.address,
-                            ).catch(e => {
-                              Sentry.captureException(e)
-                              catchUnexpectedServerErrorAndTriggerToast(e)
-                              return null
-                            })
-                          if (!addressSchema) {
-                            form.setError('address', {
-                              message: 'Invalid address',
-                            })
-                            return
-                          }
-                          const payload: CreateActionViewKeyRacesInput = {
-                            ...formValues,
-                            usCongressionalDistrict: addressSchema?.usCongressionalDistrict,
-                            usaState: stateCode,
-                            shouldBypassAuth: true,
-                          }
-                          const result = await triggerServerActionForForm(
-                            {
-                              form,
-                              formName: ANALYTICS_NAME_USER_ACTION_FORM_GET_INFORMED,
-                              analyticsProps: {
-                                ...(addressSchema
-                                  ? convertAddressToAnalyticsProperties(addressSchema)
-                                  : {}),
-                                'User Action Type': UserActionType.VIEW_KEY_RACES,
-                              },
-                              payload,
-                              onError: (_, e) => {
-                                form.setError('address', {
-                                  message: e.message,
-                                })
-                                toastGenericError()
-                              },
-                            },
-                            input =>
-                              actionCreateUserActionViewKeyRaces(input).then(actionResult => {
-                                if (actionResult && 'user' in actionResult && actionResult.user) {
-                                  identifyUserOnClient(actionResult.user)
-                                }
-                                return actionResult
-                              }),
-                          )
-                          if (result.status === 'success') {
-                            router.refresh()
-                            void mutate()
-                            dialogProps.onOpenChange(false)
-                            if (!session.isLoggedIn) {
-                              setToastOpen(true)
-                            }
-                            onSuccess?.()
-                          }
+                        onSubmit={form.handleSubmit(async () => {
+                          dialogProps.onOpenChange(false)
+                          onSuccess?.()
                         }, trackFormSubmissionSyncErrors(ANALYTICS_NAME_USER_ACTION_FORM_GET_INFORMED))}
                       >
                         <FormField
@@ -239,43 +223,7 @@ export const KeyRacesDialog = (props: KeyRacesDialogProps) => {
                 {racesByAddressRequest.isLoading ? (
                   <KeyRacesSkeleton />
                 ) : (
-                  <>
-                    {!!presidential && presidential?.length > 0 && (
-                      <RaceSectionWrapper>
-                        <DTSIPersonHeroCardSection
-                          {...dtsiPersonHeroCardSectionProps}
-                          people={presidential}
-                          title="Presidential Election"
-                        />
-                      </RaceSectionWrapper>
-                    )}
-
-                    {!!senate && senate?.length > 0 && (
-                      <>
-                        <hr />
-                        <RaceSectionWrapper>
-                          <DTSIPersonHeroCardSection
-                            {...dtsiPersonHeroCardSectionProps}
-                            people={senate}
-                            title={`U.S. Senate Race${stateCode ? ` (${stateCode})` : ''}`}
-                          />
-                        </RaceSectionWrapper>
-                      </>
-                    )}
-
-                    {!!congressional && congressional?.length > 0 && (
-                      <>
-                        <hr />
-                        <RaceSectionWrapper className={dialogContentPaddingBottomStyles}>
-                          <DTSIPersonHeroCardSection
-                            {...dtsiPersonHeroCardSectionProps}
-                            people={congressional}
-                            title={`Congressional District${districtNumber ? ` ${districtNumber}` : ''}`}
-                          />
-                        </RaceSectionWrapper>
-                      </>
-                    )}
-                  </>
+                  <KeyRacesList races={racesByAddressRequest?.data} />
                 )}
               </div>
             </ScrollArea>
@@ -304,58 +252,5 @@ export const KeyRacesDialog = (props: KeyRacesDialogProps) => {
 
       <SaveProgressToast isOpen={toastOpen} onClose={() => setToastOpen(false)} />
     </>
-  )
-}
-
-function RaceSectionWrapper({
-  children,
-  className,
-}: React.PropsWithChildren<{ className?: string }>) {
-  return (
-    <div className={cn(dialogContentPaddingXStyles, className)}>
-      <div className={'mx-auto flex max-w-md flex-col gap-6 md:gap-10'}>{children}</div>
-    </div>
-  )
-}
-
-function KeyRacesSkeleton() {
-  return (
-    <div className="flex flex-col items-center gap-8 text-center">
-      <ContentSection
-        className="w-full max-w-sm"
-        title="Presidential Election"
-        titleProps={{
-          size: 'xs',
-        }}
-      >
-        {Array.from({ length: 3 }, (_, index) => (
-          <Skeleton className="h-36 w-full rounded-3xl" key={index} />
-        ))}
-      </ContentSection>
-
-      <ContentSection
-        className="w-full max-w-sm"
-        title="U.S. Senate Race"
-        titleProps={{
-          size: 'xs',
-        }}
-      >
-        {Array.from({ length: 3 }, (_, index) => (
-          <Skeleton className="h-36 w-full rounded-3xl" key={index} />
-        ))}
-      </ContentSection>
-
-      <ContentSection
-        className="w-full max-w-sm"
-        title="Congressional District"
-        titleProps={{
-          size: 'xs',
-        }}
-      >
-        {Array.from({ length: 3 }, (_, index) => (
-          <Skeleton className="h-36 w-full rounded-3xl" key={index} />
-        ))}
-      </ContentSection>
-    </div>
   )
 }
