@@ -67,7 +67,7 @@ export const getIntlUrls = (
     becomeMember: () => `${localePrefix}/action/become-member`,
     community: () => `${localePrefix}/community`,
     events: () => `${localePrefix}/events`,
-    voterGuide: () => `${localePrefix}/voter-guide`,
+    voterGuide: () => `${localePrefix}/vote`,
   }
 }
 
