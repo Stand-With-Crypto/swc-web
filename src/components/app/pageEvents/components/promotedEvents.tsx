@@ -1,10 +1,12 @@
+'use client'
+
 import sanitizeHtml from 'sanitize-html'
 
-import { EventDialog } from '@/components/app/pageEvents/components/eventDialog'
+import { handleCreateRsvpAction } from '@/components/app/pageEvents/utils/createRsvpAction'
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
-import { SWCEvents } from '@/utils/shared/getSWCEvents'
+import { SWCEvent, SWCEvents } from '@/utils/shared/getSWCEvents'
 
 interface PromotedEventsProps {
   events: SWCEvents
@@ -16,6 +18,15 @@ export function PromotedEvents({ events }: PromotedEventsProps) {
   const orderedPromotionalEvents = filteredPromotionalEvents.sort(
     (a, b) => a.data.promotedPositioning! - b.data.promotedPositioning!,
   )
+
+  const handleRSVPButtonClick = (event: SWCEvent) => {
+    void handleCreateRsvpAction({
+      shouldReceiveNotifications: false,
+      event,
+    })
+
+    window.open(event.rsvpUrl, '_blank')
+  }
 
   return (
     <section className="flex flex-col items-center gap-8">
@@ -45,15 +56,14 @@ export function PromotedEvents({ events }: PromotedEventsProps) {
               }}
             />
 
-            <EventDialog
-              event={event.data}
-              trigger={
-                <Button asChild className="mt-2 w-full lg:mt-4 lg:w-fit" variant="secondary">
-                  <span>RSVP</span>
-                </Button>
-              }
-              triggerClassName="w-fit"
-            />
+            <Button
+              className="mt-2 w-full lg:mt-4 lg:w-fit"
+              onClick={() => handleRSVPButtonClick(event.data)}
+              type="button"
+              variant="secondary"
+            >
+              RSVP
+            </Button>
           </div>
         </div>
       ))}
