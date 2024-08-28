@@ -391,7 +391,7 @@ const nextConfig = {
       {
         source: '/america-loves-crypto/az/2',
         destination:
-          'https://americalovescryptoaz.splashthat.com?utm_source=cb&utm_medium=inappcard&utm_campaign=az_2&utm_id=sst',
+          'https://americalovescryptoaz.splashthat.com?utm_source=cb&utm_medium=inapptakeover&utm_campaign=az_2&utm_id=sst',
         permanent: true,
       },
       {
@@ -403,7 +403,7 @@ const nextConfig = {
       {
         source: '/america-loves-crypto/nv/2',
         destination:
-          'https://americalovescryptonv.splashthat.com?utm_source=cb&utm_medium=inappcard&utm_campaign=nv_2&utm_id=sst',
+          'https://americalovescryptonv.splashthat.com?utm_source=cb&utm_medium=inapptakeover&utm_campaign=nv_2&utm_id=sst',
         permanent: true,
       },
       {
@@ -415,19 +415,19 @@ const nextConfig = {
       {
         source: '/america-loves-crypto/wi/2',
         destination:
-          'https://americalovescryptowi.splashthat.com?utm_source=cb&utm_medium=inappswc&utm_campaign=wi_2&utm_id=sst',
+          'https://americalovescryptowi.splashthat.com?utm_source=cb&utm_medium=inapptakeover&utm_campaign=wi_2&utm_id=sst',
         permanent: true,
       },
       {
         source: '/america-loves-crypto/mi',
         destination:
-          'https://americalovescryptomi.splashthat.com?utm_source=cb&utm_medium=inappswc&utm_campaign=mi_2&utm_id=sst',
+          'https://americalovescryptomi.splashthat.com?utm_source=cb&utm_medium=inapptakeover&utm_campaign=mi_2&utm_id=sst',
         permanent: true,
       },
       {
         source: '/america-loves-crypto/pa',
         destination:
-          'https://americalovescryptopa.splashthat.com?utm_source=cb&utm_medium=inappswc&utm_campaign=pa_2&utm_id=sst',
+          'https://americalovescryptopa.splashthat.com?utm_source=cb&utm_medium=inapptakeover&utm_campaign=pa_2&utm_id=sst',
         permanent: true,
       },
     ]
