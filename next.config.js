@@ -329,6 +329,67 @@ const nextConfig = {
       },
       // SMS shortlinks
       {
+        source: '/az/3',
+        destination:
+          'https://americalovescryptonv.splashthat.com/?utm_source=swc&utm_medium=sms&utm_campaign=az_2&utm_id=sst&utm_content=v1',
+        permanent: false,
+      },
+      {
+        source: '/az/4',
+        destination:
+          'https://americalovescryptonv.splashthat.com/?utm_source=swc&utm_medium=sms&utm_campaign=az_2&utm_id=sst&utm_content=v2',
+        permanent: false,
+      },
+      {
+        source: '/nv/3',
+        destination:
+          'https://americalovescryptonv.splashthat.com/?utm_source=swc&utm_medium=sms&utm_campaign=nv_2&utm_id=sst&utm_content=v1',
+        permanent: false,
+      },
+      {
+        source: '/nv/4',
+        destination:
+          'https://americalovescryptonv.splashthat.com/?utm_source=swc&utm_medium=sms&utm_campaign=nv_2&utm_id=sst&utm_content=v2',
+        permanent: false,
+      },
+      {
+        source: '/mi/3',
+        destination:
+          'https://americalovescryptonv.splashthat.com/?utm_source=swc&utm_medium=sms&utm_campaign=mi_2&utm_id=sst&utm_content=v1',
+        permanent: false,
+      },
+      {
+        source: '/mi/4',
+        destination:
+          'https://americalovescryptonv.splashthat.com/?utm_source=swc&utm_medium=sms&utm_campaign=mi_2&utm_id=sst&utm_content=v2',
+        permanent: false,
+      },
+      {
+        source: '/wi/3',
+        destination:
+          'https://americalovescryptonv.splashthat.com/?utm_source=swc&utm_medium=sms&utm_campaign=wi_2&utm_id=sst&utm_content=v1',
+        permanent: false,
+      },
+      {
+        source: '/wi/4',
+        destination:
+          'https://americalovescryptonv.splashthat.com/?utm_source=swc&utm_medium=sms&utm_campaign=wi_2&utm_id=sst&utm_content=v2',
+        permanent: false,
+      },
+      {
+        source: '/pa/3',
+        destination:
+          'https://americalovescryptonv.splashthat.com/?utm_source=swc&utm_medium=sms&utm_campaign=pa_2&utm_id=sst&utm_content=v1',
+        permanent: false,
+      },
+      {
+        source: '/pa/4',
+        destination:
+          'https://americalovescryptonv.splashthat.com/?utm_source=swc&utm_medium=sms&utm_campaign=pa_2&utm_id=sst&utm_content=v2',
+        permanent: false,
+      },
+
+      {
         source: '/nv/1',
         destination:
           'https://americalovescryptonv.splashthat.com/?utm_source=swc&utm_medium=sms&utm_campaign=nv_1&utm_id=sst&utm_content=v1',
