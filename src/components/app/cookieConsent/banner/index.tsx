@@ -41,9 +41,8 @@ export function CookieConsentBanner({
             </div>
           </button>
           <p className={cn('max-w-2xl text-justify text-xs text-muted-foreground md:text-left')}>
-            We use our own third-party cookies on our website to enhance your experience, analyze
-            traffic, and for security. Cookies may collect personal information and may be shared
-            with our third-party partners. You may opt out of the cookies that are not strictly
+            We use our own and third-party cookies on our website to enhance your experience,
+            analyze traffic, and for security. You may opt out of the cookies that are not strictly
             necessary by choosing from the below options. For more information, visit our{' '}
             <InternalLink className="underline" href={urls.privacyPolicy()}>
               Privacy Policy
@@ -54,7 +53,7 @@ export function CookieConsentBanner({
 
         <div className={cn('mb-2 flex items-center justify-between gap-4 md:mb-0 md:justify-end')}>
           <div className="flex gap-4">
-            <ManageCookiesModal onSubmit={onAcceptSpecificCookies}>
+            <ManageCookiesModal locale={locale} onSubmit={onAcceptSpecificCookies}>
               <Button className="px-0 py-4" variant="link">
                 Manage cookies
               </Button>
@@ -63,7 +62,11 @@ export function CookieConsentBanner({
               Reject all
             </Button>
           </div>
-          <Button className="px-4 py-4 md:px-0" onClick={onAcceptAll} variant="link">
+          <Button
+            className="px-4 py-4 font-bold text-primary-cta md:px-0"
+            onClick={onAcceptAll}
+            variant="link"
+          >
             Accept all
           </Button>
           <button className="hidden md:block" onClick={onRejectAll}>
