@@ -1,4 +1,4 @@
-import mixpanel from 'mixpanel-browser'
+import mixpanel, { Callback, RequestOptions } from 'mixpanel-browser'
 
 import { isCypress, isStorybook } from '@/utils/shared/executionEnvironment'
 import { mapPersistedLocalUserToExperimentAnalyticsProperties } from '@/utils/shared/localUser'
@@ -46,7 +46,11 @@ function getExperimentProperties() {
   return experimentProperties
 }
 
-export function trackClientAnalytic(eventName: string, _eventProperties?: AnalyticProperties) {
+export function trackClientAnalytic(
+  eventName: string,
+  _eventProperties?: AnalyticProperties,
+  optionsOrCallback?: RequestOptions | Callback,
+) {
   const eventProperties = { ...getExperimentProperties(), ..._eventProperties }
   customLogger(
     {
@@ -61,7 +65,7 @@ export function trackClientAnalytic(eventName: string, _eventProperties?: Analyt
   maybeInitClientAnalytics()
 
   if (environmentHasAnalyticsEnabled && hasTargetingEnabled) {
-    mixpanel.track(eventName, eventProperties)
+    mixpanel.track(eventName, eventProperties, optionsOrCallback)
   }
 }
 

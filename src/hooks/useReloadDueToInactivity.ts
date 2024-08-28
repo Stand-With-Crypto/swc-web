@@ -1,22 +1,36 @@
-import { useCallback, useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
+import { debounce } from 'lodash-es'
+import { usePathname } from 'next/navigation'
+
+import { AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
+import { trackClientAnalytic } from '@/utils/web/clientAnalytics'
 
 export function useReloadDueToInactivity({ timeInMinutes }: { timeInMinutes: number }) {
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
+  const pathname = usePathname()
 
   const reloadPage = () => {
     if (typeof window !== 'undefined') {
-      window.location.reload()
+      trackClientAnalytic(
+        'Page Reloaded Due To Inactivity',
+        {
+          pathname,
+          component: AnalyticComponentType.page,
+        },
+        // track analytics callback
+        () => window.location.reload(),
+      )
     }
   }
 
-  const resetTimer = useCallback(() => {
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current)
-    }
-    timeoutRef.current = setTimeout(reloadPage, timeInMinutes * 60 * 1000)
-  }, [timeInMinutes])
+  const debouncedReloadRef = useRef(debounce(reloadPage, timeInMinutes * 60 * 1000))
+
+  const resetTimer = () => {
+    debouncedReloadRef.current()
+  }
 
   useEffect(() => {
+    const debounceReloadRef = debouncedReloadRef.current
+
     const events = ['mousemove', 'keydown', 'click', 'scroll', 'touchstart']
 
     events.forEach(event => window.addEventListener(event, resetTimer))
@@ -24,12 +38,11 @@ export function useReloadDueToInactivity({ timeInMinutes }: { timeInMinutes: num
     resetTimer()
 
     return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current)
-      }
       events.forEach(event => window.removeEventListener(event, resetTimer))
+
+      debounceReloadRef.cancel()
     }
-  }, [resetTimer, timeInMinutes])
+  }, [debouncedReloadRef, timeInMinutes])
 
   return null
 }
