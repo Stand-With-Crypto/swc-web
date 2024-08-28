@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 
 export function useReloadDueToInactivity({ timeInMinutes }: { timeInMinutes: number }) {
   const timeoutRef = useRef<NodeJS.Timeout | null>(null)
@@ -9,12 +9,12 @@ export function useReloadDueToInactivity({ timeInMinutes }: { timeInMinutes: num
     }
   }
 
-  const resetTimer = () => {
+  const resetTimer = useCallback(() => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current)
     }
     timeoutRef.current = setTimeout(reloadPage, timeInMinutes * 60 * 1000)
-  }
+  }, [timeInMinutes])
 
   useEffect(() => {
     const events = ['mousemove', 'keydown', 'click', 'scroll', 'touchstart']
@@ -29,7 +29,7 @@ export function useReloadDueToInactivity({ timeInMinutes }: { timeInMinutes: num
       }
       events.forEach(event => window.removeEventListener(event, resetTimer))
     }
-  }, [timeInMinutes])
+  }, [resetTimer, timeInMinutes])
 
   return null
 }
