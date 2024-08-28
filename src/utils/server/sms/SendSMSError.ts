@@ -45,6 +45,9 @@ export class SendSMSError {
 
     this.isInvalidPhoneNumber = this.code === INVALID_PHONE_NUMBER_CODE
     this.isUnsubscribedUser = this.code === IS_UNSUBSCRIBED_USER_CODE
-    this.isTooManyRequests = this.code === TOO_MANY_REQUESTS_CODE || this.code === 'ECONNABORTED'
+    this.isTooManyRequests =
+      this.code === TOO_MANY_REQUESTS_CODE ||
+      this.code === 'ECONNABORTED' ||
+      this.code === 'ETIMEDOUT'
   }
 }
