@@ -38,7 +38,7 @@ export const backfillReactivationCron = inngest.createFunction(
       },
     }
 
-    await step.sendEvent(BACKFILL_REACTIVATION_INNGEST_EVENT_NAME, payload)
+    await step.sendEvent(`${BACKFILL_REACTIVATION_INNGEST_CRON_JOB_ID}-event-call`, payload)
   },
 )
 
