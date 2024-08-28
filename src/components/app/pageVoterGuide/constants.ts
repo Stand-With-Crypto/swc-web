@@ -33,9 +33,8 @@ export const VOTER_GUIDE_STEPS: VoterGuideStep[] = [
     campaignName: UserActionVoterRegistrationCampaignName.DEFAULT,
   },
   {
-    title: 'Get updates',
-    description:
-      'We’ll send you information on polling locations as it gets closer to the election.',
+    title: 'Pledge to vote this fall',
+    description: 'Sign the pledge to research the candidates and get out to vote.',
     WrapperComponent: UserActionFormVoterAttestationDialog,
     action: UserActionType.VOTER_ATTESTATION,
     campaignName: UserActionVoterAttestationCampaignName.DEFAULT,

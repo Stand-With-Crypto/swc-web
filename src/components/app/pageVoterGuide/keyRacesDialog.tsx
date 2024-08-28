@@ -33,13 +33,17 @@ import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
+import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
 import { useDialog } from '@/hooks/useDialog'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { useLocale } from '@/hooks/useLocale'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { cn } from '@/utils/web/cn'
 import { trackFormSubmissionSyncErrors, triggerServerActionForForm } from '@/utils/web/formUtils'
-import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
+import {
+  convertGooglePlaceAutoPredictionToAddressSchema,
+  GooglePlaceAutocompletePrediction,
+} from '@/utils/web/googlePlaceUtils'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
 import {
   catchUnexpectedServerErrorAndTriggerToast,
@@ -62,6 +66,7 @@ export const KeyRacesDialog = (props: KeyRacesDialogProps) => {
   const locale = useLocale()
 
   const { data } = useApiResponseForUserFullProfileInfo()
+  const { mutate } = useApiResponseForUserPerformedUserActionTypes()
   const user = data?.user
 
   const userDefaultValues = useMemo(() => getDefaultValues({ user }), [user])
@@ -69,7 +74,10 @@ export const KeyRacesDialog = (props: KeyRacesDialogProps) => {
   const form = useForm<VoterGuideFormValues>({
     defaultValues: {
       ...userDefaultValues,
-      address: initialValues?.address || userDefaultValues.address,
+      address: initialValues?.address,
+    },
+    values: {
+      address: userDefaultValues.address || ({} as GooglePlaceAutocompletePrediction),
     },
     resolver: zodResolver(voterGuideFormValidationSchema),
   })
@@ -79,7 +87,6 @@ export const KeyRacesDialog = (props: KeyRacesDialogProps) => {
 
   const error = form.formState.errors?.address
   const errorRef = useRef(error)
-  errorRef.current = error
 
   useEffect(() => {
     if (!isMobile && !errorRef.current) {
@@ -92,7 +99,18 @@ export const KeyRacesDialog = (props: KeyRacesDialogProps) => {
     name: 'address',
   })
 
-  const racesByAddressRequest = useRacesByAddress(address?.description)
+  const racesByAddressRequest = useRacesByAddress(address?.description, {
+    onError: e => {
+      if (e instanceof Error || e?.message) {
+        form.setError('address', {
+          message: e.message,
+        })
+      }
+    },
+    onSuccess: () => {
+      form.clearErrors('address')
+    },
+  })
   const { congressional, senate, presidential, stateCode, districtNumber } =
     racesByAddressRequest?.data ?? {}
 
@@ -171,6 +189,8 @@ export const KeyRacesDialog = (props: KeyRacesDialogProps) => {
                         )
                         if (result.status === 'success') {
                           router.refresh()
+                          void mutate()
+                          dialogProps.onOpenChange(false)
                           onSuccess?.()
                         }
                       }, trackFormSubmissionSyncErrors(ANALYTICS_NAME_USER_ACTION_FORM_GET_INFORMED))}
