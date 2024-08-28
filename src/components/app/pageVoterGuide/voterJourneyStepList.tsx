@@ -1,11 +1,13 @@
 'use client'
 
-import { VOTER_GUIDE_STEPS } from '@/components/app/pageVoterGuide/constants'
-import { VoterJourneyStepCard } from '@/components/app/pageVoterGuide/voterJourneyStepCard'
-import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
-import { cn } from '@/utils/web/cn'
 import { UserActionType } from '@prisma/client'
 import { ClassValue } from 'clsx'
+
+import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
+import { cn } from '@/utils/web/cn'
+
+import { VOTER_GUIDE_STEPS } from './constants'
+import { VoterJourneyStepCard } from './voterJourneyStepCard'
 
 interface VoterJourneyStepListProps {
   className?: ClassValue
@@ -35,10 +37,10 @@ export const VoterJourneyStepList = (props: VoterJourneyStepListProps) => {
         <WrapperComponent key={index}>
           <div>
             <VoterJourneyStepCard
-              step={index + 1}
-              title={stepProps.title}
               description={stepProps.description}
               status={getStepStatus(stepProps.action, stepProps.campaignName)}
+              step={index + 1}
+              title={stepProps.title}
             />
           </div>
         </WrapperComponent>
