@@ -16,6 +16,8 @@ const NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN = requiredEnv(
 const environmentHasAnalyticsEnabled =
   !isStorybook && !isCypress && !!NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN
 
+const hasTargetingEnabled = getClientCookieConsent().targeting
+
 let init = false
 export function maybeInitClientAnalytics() {
   if (!init) {
@@ -27,7 +29,7 @@ export function maybeInitClientAnalytics() {
   }
 }
 export function identifyClientAnalyticsUser(userId: string) {
-  if (environmentHasAnalyticsEnabled) {
+  if (environmentHasAnalyticsEnabled && hasTargetingEnabled) {
     maybeInitClientAnalytics()
     mixpanel.identify(userId)
   }
@@ -57,7 +59,7 @@ export function trackClientAnalytic(eventName: string, _eventProperties?: Analyt
   )
 
   maybeInitClientAnalytics()
-  const hasTargetingEnabled = getClientCookieConsent().targeting
+
   if (environmentHasAnalyticsEnabled && hasTargetingEnabled) {
     mixpanel.track(eventName, eventProperties)
   }
