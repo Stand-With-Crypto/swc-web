@@ -7,7 +7,10 @@ import { UserActionType } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { useRouter } from 'next/navigation'
 
-import { actionCreateUserActionViewKeyRaces } from '@/actions/actionCreateUserActionViewKeyRaces'
+import {
+  actionCreateUserActionViewKeyRaces,
+  CreateActionViewKeyRacesInput,
+} from '@/actions/actionCreateUserActionViewKeyRaces'
 import { ContentSection } from '@/components/app/ContentSection'
 import {
   DTSIPersonHeroCardSection,
@@ -146,16 +149,25 @@ export const KeyRacesDialog = (props: KeyRacesDialogProps) => {
                   <Form {...form}>
                     <form
                       id="view-key-races-form"
-                      onSubmit={form.handleSubmit(async values => {
+                      onSubmit={form.handleSubmit(async formValues => {
                         const addressSchema = await convertGooglePlaceAutoPredictionToAddressSchema(
-                          values.address,
+                          formValues.address,
                         ).catch(e => {
                           Sentry.captureException(e)
                           catchUnexpectedServerErrorAndTriggerToast(e)
                           return null
                         })
-                        if (!address) {
+                        if (!addressSchema) {
+                          form.setError('address', {
+                            message: 'Invalid address',
+                          })
                           return
+                        }
+                        const payload: CreateActionViewKeyRacesInput = {
+                          ...formValues,
+                          usCongressionalDistrict: addressSchema?.usCongressionalDistrict,
+                          usaState: stateCode,
+                          shouldBypassAuth: true,
                         }
                         const result = await triggerServerActionForForm(
                           {
@@ -167,11 +179,7 @@ export const KeyRacesDialog = (props: KeyRacesDialogProps) => {
                                 : {}),
                               'User Action Type': UserActionType.VIEW_KEY_RACES,
                             },
-                            payload: {
-                              ...values,
-                              usCongressionalDistrict: addressSchema?.usCongressionalDistrict,
-                              usaState: stateCode,
-                            },
+                            payload,
                             onError: (_, e) => {
                               form.setError('address', {
                                 message: e.message,
@@ -179,8 +187,8 @@ export const KeyRacesDialog = (props: KeyRacesDialogProps) => {
                               toastGenericError()
                             },
                           },
-                          payload =>
-                            actionCreateUserActionViewKeyRaces(payload).then(actionResult => {
+                          input =>
+                            actionCreateUserActionViewKeyRaces(input).then(actionResult => {
                               if (actionResult && 'user' in actionResult && actionResult.user) {
                                 identifyUserOnClient(actionResult.user)
                               }
