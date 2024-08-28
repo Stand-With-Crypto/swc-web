@@ -8,6 +8,7 @@ import { ThirdwebProvider, useAutoConnect } from 'thirdweb/react'
 import { useThirdwebAuthUser } from '@/hooks/useAuthUser'
 import { useDetectWipedDatabaseAndLogOutUser } from '@/hooks/useDetectWipedDatabaseAndLogOutUser'
 import { LocaleContext } from '@/hooks/useLocale'
+import { useReloadDueToInactivity } from '@/hooks/useReloadDueToInactivity'
 import { SupportedLocale } from '@/intl/locales'
 import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
 import { thirdwebClient } from '@/utils/shared/thirdwebClient'
@@ -20,6 +21,9 @@ const InitialOrchestration = () => {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const authUser = useThirdwebAuthUser()
+
+  useReloadDueToInactivity({ timeInMinutes: 25 })
+
   useAutoConnect({
     client: thirdwebClient,
   })
