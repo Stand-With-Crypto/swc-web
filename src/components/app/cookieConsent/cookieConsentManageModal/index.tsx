@@ -85,8 +85,9 @@ export default function ManageCookiesModal({
           <ContainerTitle className="text-left">Cookie Preferences</ContainerTitle>
         </ContainerHeader>
         <div
-          className={cn('space-y-6 px-0 pb-8', {
+          className={cn('space-y-6 px-0 pb-0', {
             'px-8': isMobile,
+            'pb-8': isMobile,
           })}
         >
           <p className="text-xs sm:text-sm">
