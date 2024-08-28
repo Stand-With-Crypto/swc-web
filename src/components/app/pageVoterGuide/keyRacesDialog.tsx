@@ -128,7 +128,6 @@ export const KeyRacesDialog = (props: KeyRacesDialogProps) => {
       })
       return
     }
-    console.log('addressSchema', addressSchema)
     const payload: CreateActionViewKeyRacesInput = {
       usCongressionalDistrict: addressSchema?.usCongressionalDistrict,
       usaState: addressSchema?.administrativeAreaLevel1,
