@@ -122,13 +122,11 @@ export const REGISTRATION_URLS_BY_STATE: Record<USStateCode, RegistrationByState
   },
   MS: {
     registerUrl: 'https://www.sos.ms.gov/elections-voting/voter-registration-information',
-    checkRegistrationUrl:
-      'https://www.msegov.com/sos/voter_registration/amiregistered/Search?ref=voteusa_en',
+    checkRegistrationUrl: 'https://www.msegov.com/sos/voter_registration/amiregistered/Search',
   },
   MO: {
-    registerUrl: 'https://www.sos.ms.gov/elections-voting/voter-registration-information',
-    checkRegistrationUrl:
-      'https://www.msegov.com/sos/voter_registration/amiregistered/Search?ref=voteusa_en',
+    registerUrl: 'https://s1.sos.mo.gov/elections/voterregistration/',
+    checkRegistrationUrl: 'https://voteroutreach.sos.mo.gov/portal/',
   },
   MT: {
     registerUrl: 'https://sosmt.gov/elections/voter-file/',
@@ -136,7 +134,7 @@ export const REGISTRATION_URLS_BY_STATE: Record<USStateCode, RegistrationByState
   },
   NE: {
     registerUrl: 'https://www.nebraska.gov/apps-sos-voter-registration/',
-    checkRegistrationUrl: 'https://prodvoterportal.mt.gov/WhereToVote.aspx',
+    checkRegistrationUrl: 'https://www.votercheck.necvr.ne.gov/voterview',
   },
   NV: {
     registerUrl: 'https://www.nvsos.gov/sos/elections/voters/registering-to-vote',
@@ -231,7 +229,7 @@ export const REGISTRATION_URLS_BY_STATE: Record<USStateCode, RegistrationByState
   },
   WY: {
     registerUrl: 'https://sos.wyo.gov/Elections/State/RegisteringToVote.aspx',
-    checkRegistrationUrl: '',
+    checkRegistrationUrl: 'https://www.vote.org/am-i-registered-to-vote/',
   },
   AS: {
     registerUrl: 'https://aselectionoffice.gov/node/3',
