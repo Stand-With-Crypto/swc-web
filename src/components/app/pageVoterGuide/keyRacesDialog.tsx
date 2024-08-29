@@ -68,7 +68,7 @@ export const KeyRacesDialog = (props: KeyRacesDialogProps) => {
   const form = useForm<VoterGuideFormValues>({
     defaultValues: {
       ...userDefaultValues,
-      address: initialValues?.address,
+      address: initialValues?.address || userDefaultValues?.address,
     },
     values: {
       address: userDefaultValues.address || ({} as GooglePlaceAutocompletePrediction),
@@ -113,10 +113,11 @@ export const KeyRacesDialog = (props: KeyRacesDialogProps) => {
   })
 
   const createViewKeyRacesAction = async () => {
-    if (!form.getValues('address')) return
+    const formValues = form.getValues()
+    if (!formValues.address) return
 
     const addressSchema = await convertGooglePlaceAutoPredictionToAddressSchema(
-      form.getValues('address'),
+      formValues.address,
     ).catch(e => {
       Sentry.captureException(e)
       catchUnexpectedServerErrorAndTriggerToast(e)
@@ -129,6 +130,7 @@ export const KeyRacesDialog = (props: KeyRacesDialogProps) => {
       return
     }
     const payload: CreateActionViewKeyRacesInput = {
+      address: addressSchema,
       usCongressionalDistrict: addressSchema?.usCongressionalDistrict,
       usaState: addressSchema?.administrativeAreaLevel1,
       shouldBypassAuth: true,

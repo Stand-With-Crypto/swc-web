@@ -25,10 +25,12 @@ import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
 import { UserActionViewKeyRacesCampaignName } from '@/utils/shared/userActionCampaigns'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
+import { zodAddress } from '@/validation/fields/zodAddress'
 
 const logger = getLogger(`actionCreateUserActionViewKeyRaces`)
 
 const createActionViewKeyRacesInputValidationSchema = object({
+  address: zodAddress.optional(),
   usCongressionalDistrict: string().optional(),
   usaState: string().optional(),
   shouldBypassAuth: z.boolean().optional(),
@@ -43,7 +45,7 @@ export const actionCreateUserActionViewKeyRaces = withServerActionMiddleware(
   _actionCreateUserActionViewKeyRaces,
 )
 
-async function _actionCreateUserActionViewKeyRaces(input: CreateActionViewKeyRacesInput = {}) {
+async function _actionCreateUserActionViewKeyRaces(input: CreateActionViewKeyRacesInput) {
   logger.info('triggered')
   const { triggerRateLimiterAtMostOnce } = getRequestRateLimiter({
     context: 'unauthenticated',
@@ -76,7 +78,9 @@ async function _actionCreateUserActionViewKeyRaces(input: CreateActionViewKeyRac
     return
   }
 
-  const user = userMatch.user || (await createUser({ localUser, sessionId }))
+  const user =
+    userMatch.user ||
+    (await createUser({ localUser, sessionId, address: validatedInput.data?.address }))
 
   const userId = user.id
 
@@ -150,6 +154,7 @@ async function _actionCreateUserActionViewKeyRaces(input: CreateActionViewKeyRac
         existingViewKeyRacesAction,
         currentUsaState,
         currentCongressionalDistrict,
+        validatedInput.data,
       )
 
       analytics.trackUserActionUpdated({
@@ -198,9 +203,11 @@ async function _actionCreateUserActionViewKeyRaces(input: CreateActionViewKeyRac
 async function createUser({
   localUser,
   sessionId,
+  address,
 }: {
   localUser: ReturnType<typeof parseLocalUserFromCookies>
   sessionId: ReturnType<typeof getUserSessionId>
+  address?: z.infer<typeof zodAddress>
 }) {
   const createdUser = await prismaClient.user.create({
     data: {
@@ -210,6 +217,16 @@ async function createUser({
       hasOptedInToEmails: false,
       hasOptedInToMembership: false,
       smsStatus: SMSStatus.NOT_OPTED_IN,
+      ...(address
+        ? {
+            address: {
+              connectOrCreate: {
+                where: { googlePlaceId: address.googlePlaceId },
+                create: address,
+              },
+            },
+          }
+        : {}),
       ...mapLocalUserToUserDatabaseFields(localUser),
     },
     include: {
@@ -234,6 +251,7 @@ async function updateUserActionViewKeyRaces(
   existingViewKeyRacesAction: Awaited<ReturnType<typeof getUserAlreadyViewedKeyRaces>>,
   usaState: string | null,
   usCongressionalDistrict: string | null,
+  validatedInput: CreateActionViewKeyRacesInput,
 ) {
   const shouldSetDistrictAsNull =
     usaState !== existingViewKeyRacesAction?.userActionViewKeyRaces?.usaState &&
@@ -250,7 +268,7 @@ async function updateUserActionViewKeyRaces(
     })
   }
 
-  return prismaClient.userAction.update({
+  const userAction = await prismaClient.userAction.update({
     where: {
       id: existingViewKeyRacesAction?.id,
     },
@@ -260,6 +278,28 @@ async function updateUserActionViewKeyRaces(
       },
     },
   })
+
+  logger.info('updated user action')
+
+  if (validatedInput?.address) {
+    await prismaClient.user.update({
+      where: { id: existingViewKeyRacesAction?.userId },
+      data: {
+        address: {
+          connectOrCreate: {
+            where: { googlePlaceId: validatedInput.address.googlePlaceId },
+            create: validatedInput.address,
+          },
+        },
+      },
+      include: {
+        address: true,
+      },
+    })
+    logger.info('updated user address')
+  }
+
+  return { userAction }
 }
 
 async function createUserActionViewKeyRaces(
