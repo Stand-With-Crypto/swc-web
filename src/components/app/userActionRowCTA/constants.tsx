@@ -157,7 +157,7 @@ const USER_ACTION_ROW_CTA_INFO_FROM_CAMPAIGN: Record<
 > = {
   [UserActionEmailCampaignName.ABC_PRESIDENTIAL_DEBATE_2024]: {
     actionType: UserActionType.EMAIL,
-    image: { src: '/actionTypeIcons/email.png' },
+    image: { src: '/actionTypeIcons/email.png' }, // TODO: Replace with real ABC email icon
     text: 'Ask ABC to include crypto questions at the Presidential Debate',
     subtext: 'Send an email to ABC and tell them we need the candidates’ stance on crypto',
     shortText: 'Ask ABC to include crypto questions at the Presidential Debate',
