@@ -1,4 +1,4 @@
-import { useEffect,useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { UserActionType } from '@prisma/client'
@@ -15,13 +15,13 @@ import {
   voterGuideFormValidationSchema,
   VoterGuideFormValues,
 } from '@/components/app/pageVoterGuide/formConfig'
-import { KeyRacesList,KeyRacesSkeleton } from '@/components/app/pageVoterGuide/keyRacesList'
+import { KeyRacesList, KeyRacesSkeleton } from '@/components/app/pageVoterGuide/keyRacesList'
 import { UserActionFormLayout } from '@/components/app/userActionFormCommon'
 import { useRacesByAddress } from '@/components/app/userActionFormVoterAttestation/useRacesByAddress'
 import { Button } from '@/components/ui/button'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { ErrorMessage } from '@/components/ui/errorMessage'
-import { Form,FormControl, FormField, FormItem } from '@/components/ui/form'
+import { Form, FormControl, FormField, FormItem } from '@/components/ui/form'
 import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
 import { useGoogleMapsScript } from '@/hooks/useGoogleMapsScript'
@@ -64,7 +64,7 @@ export const GetInformedForm = (props: GetInformedFormProps) => {
     if (!isMobile && !errorRef.current && !initialValues?.address) {
       inputRef.current?.click()
     }
-  }, [form, isMobile])
+  }, [form, isMobile, initialValues])
 
   const address = useWatch({
     control: form.control,
