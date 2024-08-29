@@ -58,7 +58,7 @@ export function useCookieConsent() {
       setCookieConsentCookie(serializeCookieConsent(REJECTED_VALUES))
       setClientCookieConsent(REJECTED_VALUES)
     }
-  }, [])
+  }, [hasGlobalPrivacyControl, setCookieConsentCookie])
 
   return {
     acceptSpecificCookies,

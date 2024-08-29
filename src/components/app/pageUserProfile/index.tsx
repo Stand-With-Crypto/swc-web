@@ -1,3 +1,5 @@
+'use client'
+
 import { UserActionType } from '@prisma/client'
 import { sumBy, uniq } from 'lodash-es'
 
@@ -15,6 +17,7 @@ import { FormattedNumber } from '@/components/ui/formattedNumber'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { Progress } from '@/components/ui/progress'
+import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { PageProps } from '@/types'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { getUserActionsProgress } from '@/utils/shared/getUserActionsProgress'
@@ -35,7 +38,12 @@ interface PageUserProfile extends PageProps {
 export function PageUserProfile({ params, user }: PageUserProfile) {
   const { locale } = params
 
-  const { userActions } = user
+  const { data } = useApiResponseForUserFullProfileInfo()
+
+  const { userActions: userActionsFromLoadedUserInServerSide } = user
+
+  const userActions = data?.user?.userActions ?? userActionsFromLoadedUserInServerSide
+
   const performedUserActionTypes = uniq(
     userActions.map(x => ({ actionType: x.actionType, campaignName: x.campaignName })),
   )

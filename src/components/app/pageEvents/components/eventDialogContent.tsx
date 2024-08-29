@@ -1,21 +1,17 @@
 'use client'
 
 import Balancer from 'react-wrap-balancer'
-import { UserActionType } from '@prisma/client'
 import { format, isBefore, startOfDay } from 'date-fns'
 import { Clock, Pin } from 'lucide-react'
 import sanitizeHtml from 'sanitize-html'
 import { toast } from 'sonner'
 
-import {
-  actionCreateUserActionRsvpEvent,
-  CreateActionRsvpEventInput,
-} from '@/actions/actionCreateUserActionRsvpEvent'
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import { EventDialogPhoneNumber } from '@/components/app/pageEvents/components/eventDialogPhoneNumber'
 import { EventDialogSocialLinks } from '@/components/app/pageEvents/components/eventDialogSocialLinks'
 import { GoogleMapsEmbedIFrame } from '@/components/app/pageEvents/components/eventGoogleMapsEmbedIframe'
 import { SuccessfulEventNotificationsSignup } from '@/components/app/pageEvents/components/successfulEventSignupDialog'
+import { handleCreateRsvpAction as _handleCreateRsvpAction } from '@/components/app/pageEvents/utils/createRsvpAction'
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { ScrollArea } from '@/components/ui/scroll-area'
@@ -24,10 +20,6 @@ import { useLoadingCallback } from '@/hooks/useLoadingCallback'
 import { usePreventOverscroll } from '@/hooks/usePreventOverscroll'
 import { useSections } from '@/hooks/useSections'
 import { SWCEvent } from '@/utils/shared/getSWCEvents'
-import { USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns'
-import { triggerServerActionForForm } from '@/utils/web/formUtils'
-import { identifyUserOnClient } from '@/utils/web/identifyUser'
-import { toastGenericError } from '@/utils/web/toastUtils'
 
 enum SectionNames {
   EVENT_INFO = 'Event Information',
@@ -51,50 +43,13 @@ export function EventDialogContent({ event }: EventDialogContentProps) {
     analyticsName: 'Event Details Dialog',
   })
 
-  const _handleCreateRsvpAction = async ({
-    shouldReceiveNotifications,
-  }: {
-    shouldReceiveNotifications: boolean
-  }) => {
-    const data: CreateActionRsvpEventInput = {
-      eventSlug: event.slug,
-      eventState: event.state,
-      shouldReceiveNotifications,
-    }
-
-    const result = await triggerServerActionForForm(
-      {
-        formName: 'RSVP Event',
-        onError: () => toastGenericError(),
-        analyticsProps: {
-          'Campaign Name': USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.RSVP_EVENT,
-          'User Action Type': UserActionType.RSVP_EVENT,
-          eventSlug: event.slug,
-          eventState: event.state,
-          shouldReceiveNotifications,
-        },
-        payload: data,
-      },
-      payload =>
-        actionCreateUserActionRsvpEvent(payload).then(actionResult => {
-          if (actionResult?.user) {
-            identifyUserOnClient(actionResult.user)
-          }
-          return actionResult
-        }),
-    )
-
-    if (result.status !== 'success') {
-      toastGenericError()
-    }
-  }
-
   const [handleCreateRsvpAction, isCreatingRsvpEventAction] =
     useLoadingCallback(_handleCreateRsvpAction)
 
   const handleGetUpdates = async () => {
     await handleCreateRsvpAction({
       shouldReceiveNotifications: true,
+      event,
     })
 
     toast.success('Thank you for your interest! We will send you a reminder closer to the event.')
@@ -104,6 +59,7 @@ export function EventDialogContent({ event }: EventDialogContentProps) {
   const handleRSVPButtonClick = () => {
     void handleCreateRsvpAction({
       shouldReceiveNotifications: false,
+      event,
     })
 
     window.open(event.rsvpUrl, '_blank')

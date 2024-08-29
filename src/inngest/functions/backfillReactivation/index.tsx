@@ -18,9 +18,29 @@ interface ScriptPayload {
 
 const BACKFILL_REACTIVATION_INNGEST_EVENT_NAME = 'script/backfill-reactivation'
 const BACKFILL_REACTIVATION_INNGEST_FUNCTION_ID = 'script.backfill-reactivation'
-const BACKFILL_SESSION_ID_BATCH_SIZE = Number(process.env.BACKFILL_SESSION_ID_BATCH_SIZE) || 5000
+const BACKFILL_REACTIVATION_INNGEST_BATCH_SIZE =
+  Number(process.env.BACKFILL_REACTIVATION_INNGEST_BATCH_SIZE) || 5000
+
+const BACKFILL_REACTIVATION_INNGEST_CRON_JOB_ID = 'script.backfill-reactivation-cron-job'
+const BACKFILL_REACTIVATION_INNGEST_CRON_JOB_SCHEDULE = 'TZ=America/New_York 0 10,11,12,13,14 * * *' // Every hour between 10AM and 2PM EST
 
 const logger = getLogger('backfillReactivation')
+
+export const backfillReactivationCron = inngest.createFunction(
+  { id: BACKFILL_REACTIVATION_INNGEST_CRON_JOB_ID },
+  { cron: BACKFILL_REACTIVATION_INNGEST_CRON_JOB_SCHEDULE },
+  async ({ step }) => {
+    const payload = {
+      name: BACKFILL_REACTIVATION_INNGEST_EVENT_NAME,
+      data: {
+        persist: true,
+        limit: 150,
+      },
+    }
+
+    await step.sendEvent(`${BACKFILL_REACTIVATION_INNGEST_CRON_JOB_ID}-event-call`, payload)
+  },
+)
 
 export const backfillReactivationWithInngest = inngest.createFunction(
   {
@@ -28,10 +48,11 @@ export const backfillReactivationWithInngest = inngest.createFunction(
     retries: 0,
     onFailure: onScriptFailure,
   },
-  { event: BACKFILL_REACTIVATION_INNGEST_EVENT_NAME },
+  {
+    event: BACKFILL_REACTIVATION_INNGEST_EVENT_NAME,
+  },
   async ({ event, step }) => {
-    const payload = event.data as ScriptPayload
-    const { testEmail, persist, limit } = payload
+    const { testEmail, persist, limit } = event.data as ScriptPayload
 
     const usersWithoutCommunicationJourneyCount = await step.run(
       'get-users-without-communication-journey-count',
@@ -75,7 +96,7 @@ export const backfillReactivationWithInngest = inngest.createFunction(
 
     const numBatches = limit
       ? 1
-      : Math.ceil(usersWithoutCommunicationJourneyCount / BACKFILL_SESSION_ID_BATCH_SIZE)
+      : Math.ceil(usersWithoutCommunicationJourneyCount / BACKFILL_REACTIVATION_INNGEST_BATCH_SIZE)
 
     let totalResult: {
       message: string
@@ -99,7 +120,7 @@ export const backfillReactivationWithInngest = inngest.createFunction(
 
       const batchResult = await step.run(`backfill-reactivation-email-batch-${i}`, async () => {
         const usersWithoutCommunicationJourney = await prismaClient.user.findMany({
-          take: limit || BACKFILL_SESSION_ID_BATCH_SIZE,
+          take: limit || BACKFILL_REACTIVATION_INNGEST_BATCH_SIZE,
           orderBy: {
             datetimeCreated: 'desc',
           },

@@ -33,6 +33,12 @@ export function UserActionFormSuccessScreen(props: UserActionFormSuccessScreenPr
 
   useEffectOnce(props.onLoad ?? noop)
 
+  useEffectOnce(() => {
+    // This revalidation is used to revalidate the user's completed actions list
+    // after they complete any action
+    void mutate(apiUrls.userFullProfileInfo())
+  })
+
   if (!isLoggedIn || !user) {
     return <JoinSWC onClose={onClose} />
   }
