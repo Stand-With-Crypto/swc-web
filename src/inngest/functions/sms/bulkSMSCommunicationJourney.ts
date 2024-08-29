@@ -198,13 +198,12 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
         },
       )
 
-      if (queuedSegments === 0) {
-        hasMoreMessages = false
-        break
-      }
-
       totalQueuedMessages += queuedMessages
       totalQueuedSegments += queuedSegments
+
+      if (queuedSegments === 0 || !hasMoreMessages) {
+        break
+      }
 
       await step.sleep(
         `waiting-${formatTime(timeToSendAllSegments).replace(' ', '-')}-for-messaging-queue-to-be-empty`,
