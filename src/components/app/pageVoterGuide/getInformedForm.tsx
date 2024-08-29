@@ -1,20 +1,30 @@
+import { useEffect,useRef } from 'react'
+import { useForm, useWatch } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { UserActionType } from '@prisma/client'
+import { ScrollArea } from '@radix-ui/react-scroll-area'
+import * as Sentry from '@sentry/nextjs'
+import { useRouter } from 'next/navigation'
+
 import {
-  CreateActionViewKeyRacesInput,
   actionCreateUserActionViewKeyRaces,
+  CreateActionViewKeyRacesInput,
 } from '@/actions/actionCreateUserActionViewKeyRaces'
 import { ANALYTICS_NAME_USER_ACTION_FORM_GET_INFORMED } from '@/components/app/pageVoterGuide/constants'
 import {
-  VoterGuideFormValues,
   voterGuideFormValidationSchema,
+  VoterGuideFormValues,
 } from '@/components/app/pageVoterGuide/formConfig'
-import { KeyRacesSkeleton, KeyRacesList } from '@/components/app/pageVoterGuide/keyRacesList'
+import { KeyRacesList,KeyRacesSkeleton } from '@/components/app/pageVoterGuide/keyRacesList'
 import { UserActionFormLayout } from '@/components/app/userActionFormCommon'
 import { useRacesByAddress } from '@/components/app/userActionFormVoterAttestation/useRacesByAddress'
+import { Button } from '@/components/ui/button'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { ErrorMessage } from '@/components/ui/errorMessage'
-import { FormField, FormItem, FormControl, Form } from '@/components/ui/form'
+import { Form,FormControl, FormField, FormItem } from '@/components/ui/form'
 import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
+import { useGoogleMapsScript } from '@/hooks/useGoogleMapsScript'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { cn } from '@/utils/web/cn'
@@ -25,15 +35,6 @@ import {
   catchUnexpectedServerErrorAndTriggerToast,
   toastGenericError,
 } from '@/utils/web/toastUtils'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { UserActionType } from '@prisma/client'
-import { ScrollArea } from '@radix-ui/react-scroll-area'
-import { useRouter } from 'next/navigation'
-import { useRef, useEffect } from 'react'
-import { useForm, useWatch } from 'react-hook-form'
-import * as Sentry from '@sentry/nextjs'
-import { Button } from '@/components/ui/button'
-import { useGoogleMapsScript } from '@/hooks/useGoogleMapsScript'
 
 interface GetInformedFormProps {
   onFinish?: () => void

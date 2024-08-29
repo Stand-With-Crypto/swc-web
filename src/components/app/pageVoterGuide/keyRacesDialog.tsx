@@ -1,17 +1,16 @@
 'use client'
 
-import dynamic from 'next/dynamic'
 import { ReactNode, useState } from 'react'
+import dynamic from 'next/dynamic'
 
+import { ANALYTICS_NAME_USER_ACTION_FORM_GET_INFORMED } from '@/components/app/pageVoterGuide/constants'
 import { getDefaultValues } from '@/components/app/pageVoterGuide/formConfig'
 import { UserActionFormDialog } from '@/components/app/userActionFormCommon/dialog'
-
+import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { useDialog } from '@/hooks/useDialog'
 import { useSession } from '@/hooks/useSession'
 
 import { SaveProgressToast } from './saveProgressToast'
-import { ANALYTICS_NAME_USER_ACTION_FORM_GET_INFORMED } from '@/components/app/pageVoterGuide/constants'
-import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 
 const GetInformedForm = dynamic(
   () => import('@/components/app/pageVoterGuide/getInformedForm').then(mod => mod.GetInformedForm),
