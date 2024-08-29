@@ -15,9 +15,9 @@ export const SaveProgressToast = (props: SaveProgressToastProps) => {
   const { isOpen, onClose } = props
 
   return (
-    <Portal className="fixed bottom-0 right-0 z-[5] flex justify-end sm:bottom-4 sm:right-4">
+    <Portal className="fixed bottom-0 right-0 z-50 flex justify-end sm:bottom-4 sm:right-4">
       {isOpen ? (
-        <div className="w-full space-y-4 rounded-xl bg-primary-cta/10 p-4 backdrop-blur-md sm:max-w-[375px]">
+        <div className="w-full space-y-4 rounded-xl bg-purple-200 p-4 sm:max-w-[375px]">
           <div className="flex justify-between">
             <p className="font-semibold">Save your progress</p>
             <button onClick={onClose}>
