@@ -14,7 +14,7 @@ export function CookieConsentFooterButton(props: ButtonProps) {
         props?.onClick?.(e)
       }}
     >
-      Cookie Preference
+      Cookie Preference & Privacy Choices
     </Button>
   )
 }
