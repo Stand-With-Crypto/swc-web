@@ -89,8 +89,8 @@ export const backfillReactivationWithInngest = inngest.createFunction(
         `Would send initial sign up email to ${usersWithoutCommunicationJourneyCount} users`,
       )
       return {
-        results: [],
         message: `Would send initial sign up email to ${usersWithoutCommunicationJourneyCount} users`,
+        results: [],
       }
     }
 
@@ -109,16 +109,16 @@ export const backfillReactivationWithInngest = inngest.createFunction(
       }[]
     } | null = null
 
-    for (let i = 0; i < numBatches; i++) {
-      const result: {
-        id: string
-        userCommunicationJourneyId: string
-        communicationType: CommunicationType
-        messageId: string
-        datetimeCreated: Date
-      }[] = []
+    const batchPromises = Array.from({ length: numBatches }, (_, i) =>
+      step.run(`backfill-reactivation-email-batch-${i}`, async () => {
+        const result: {
+          id: string
+          userCommunicationJourneyId: string
+          communicationType: CommunicationType
+          messageId: string
+          datetimeCreated: Date
+        }[] = []
 
-      const batchResult = await step.run(`backfill-reactivation-email-batch-${i}`, async () => {
         const usersWithoutCommunicationJourney = await prismaClient.user.findMany({
           take: limit || BACKFILL_REACTIVATION_INNGEST_BATCH_SIZE,
           orderBy: {
@@ -149,41 +149,52 @@ export const backfillReactivationWithInngest = inngest.createFunction(
           },
         })
 
-        for (const user of usersWithoutCommunicationJourney) {
-          await prismaClient.$transaction(async client => {
-            const messageId = await sendInitialSignUpEmail(user.id)
+        await Promise.all(
+          usersWithoutCommunicationJourney.map(async user => {
+            await prismaClient.$transaction(async client => {
+              const messageId = await sendInitialSignUpEmail(user.id)
 
-            if (messageId) {
-              const userCommunicationJourney = await client.userCommunicationJourney.create({
-                data: {
-                  userId: user.id,
-                  journeyType: UserCommunicationJourneyType.INITIAL_SIGNUP,
-                },
-              })
+              if (messageId) {
+                const userCommunicationJourney = await client.userCommunicationJourney.create({
+                  data: {
+                    userId: user.id,
+                    journeyType: UserCommunicationJourneyType.INITIAL_SIGNUP,
+                  },
+                })
 
-              const userCommunication = await client.userCommunication.create({
-                data: {
-                  messageId,
-                  communicationType: CommunicationType.EMAIL,
-                  userCommunicationJourneyId: userCommunicationJourney.id,
-                },
-              })
+                const userCommunication = await client.userCommunication.create({
+                  data: {
+                    messageId,
+                    communicationType: CommunicationType.EMAIL,
+                    userCommunicationJourneyId: userCommunicationJourney.id,
+                  },
+                })
 
-              result.push(userCommunication)
-            }
-          })
-        }
+                result.push(userCommunication)
+              }
+            })
+          }),
+        )
 
         return {
-          results: result,
           message: `Sent initial sign up email to ${result.length} users`,
+          results: result,
         }
-      })
+      }),
+    )
 
-      totalResult = batchResult
+    const batchResults = await Promise.all(batchPromises)
 
-      logger.info(`Batch ${i} finished with: ${batchResult.message}`)
-    }
+    totalResult = batchResults.reduce(
+      (acc, batchResult) => {
+        acc.results.push(...batchResult.results)
+        acc.message += `${batchResult.message}\n`
+        return acc
+      },
+      { message: '', results: [] },
+    )
+
+    logger.info(`All batches finished with: ${totalResult.message}`)
 
     return totalResult
   },
