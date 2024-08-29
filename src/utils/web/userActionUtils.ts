@@ -4,6 +4,7 @@ import { ActiveClientUserActionType } from '@/utils/shared/activeUserAction'
 import {
   USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
   UserActionCampaignName,
+  UserActionEmailCampaignName,
 } from '@/utils/shared/userActionCampaigns'
 
 // Remember to update USER_ACTION_ROW_CTA_INFO_FROM_CAMPAIGN so that the correct campaign CTA is displayed.
@@ -22,6 +23,10 @@ export const USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN: ReadonlyArray<{
   {
     action: UserActionType.VOTER_ATTESTATION,
     campaign: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.VOTER_ATTESTATION,
+  },
+  {
+    action: UserActionType.EMAIL,
+    campaign: UserActionEmailCampaignName.ABC_PRESIDENTIAL_DEBATE_2024,
   },
   { action: UserActionType.EMAIL, campaign: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.EMAIL },
   { action: UserActionType.CALL, campaign: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.CALL },

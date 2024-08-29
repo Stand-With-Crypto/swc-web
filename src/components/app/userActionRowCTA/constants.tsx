@@ -7,6 +7,7 @@ import { GeoGate } from '@/components/app/geoGate'
 import { CALL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormCallCongressperson/constants'
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
 import { UserActionFormActionUnavailable } from '@/components/app/userActionFormCommon/actionUnavailable'
+import { UserActionFormEmailABCDialog } from '@/components/app/userActionFormEmailABC/dialog'
 import { EMAIL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormEmailCongressperson/constants'
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
@@ -22,7 +23,10 @@ import { ActiveClientUserActionType } from '@/utils/shared/activeUserAction'
 import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
-import { USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns'
+import {
+  USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
+  UserActionEmailCampaignName,
+} from '@/utils/shared/userActionCampaigns'
 import { getYourPoliticianCategoryShortDisplayName } from '@/utils/shared/yourPoliticianCategory'
 
 const USER_ACTION_ROW_CTA_INFO: Record<
@@ -150,7 +154,18 @@ const USER_ACTION_ROW_CTA_INFO: Record<
 const USER_ACTION_ROW_CTA_INFO_FROM_CAMPAIGN: Record<
   string,
   Omit<UserActionRowCTAProps, 'state'>
-> = {}
+> = {
+  [UserActionEmailCampaignName.ABC_PRESIDENTIAL_DEBATE_2024]: {
+    actionType: UserActionType.EMAIL,
+    image: { src: '/actionTypeIcons/email.png' },
+    text: 'Ask ABC to include crypto questions at the Presidential Debate',
+    subtext: 'Send an email to ABC and tell them we need the candidates’ stance on crypto',
+    shortText: 'Ask ABC to include crypto questions at the Presidential Debate',
+    shortSubtext: 'Send an email to ABC and tell them we need the candidates’ stance on crypto',
+    canBeTriggeredMultipleTimes: true,
+    WrapperComponent: UserActionFormEmailABCDialog,
+  },
+}
 
 export function getUserActionCTAInfo(actionType: ActiveClientUserActionType, campaign?: string) {
   if (!campaign || campaign === USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[actionType]) {

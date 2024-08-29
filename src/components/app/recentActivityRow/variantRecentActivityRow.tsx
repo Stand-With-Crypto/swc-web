@@ -134,39 +134,46 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
           ),
         }
       case UserActionType.EMAIL: {
-        const isCNNEmailCampaign =
-          action.campaignName === UserActionEmailCampaignName.CNN_PRESIDENTIAL_DEBATE_2024
-
-        if (isCNNEmailCampaign) {
-          return {
-            children: <MainText>Email sent to CNN</MainText>,
-          }
-        }
-
         const dtsiRecipients = action.userActionEmailRecipients.filter(x => x.person)
-        return {
-          onFocusContent: () => (
-            <UserActionFormEmailCongresspersonDialog>
-              <Button>Email yours</Button>
-            </UserActionFormEmailCongresspersonDialog>
-          ),
-          children: (
-            <MainText>
-              Email to{' '}
-              {dtsiRecipients.length
-                ? listOfThings(
-                    dtsiRecipients.map(actionEmailRecipient => (
-                      <React.Fragment key={actionEmailRecipient.id}>
-                        <DTSIPersonName
-                          href={urls.politicianDetails(actionEmailRecipient.person!.slug)}
-                          person={actionEmailRecipient.person!}
-                        />
-                      </React.Fragment>
-                    )),
-                  ).map((content, index) => <React.Fragment key={index}>{content}</React.Fragment>)
-                : 'Representative'}
-            </MainText>
-          ),
+
+        switch (action.campaignName) {
+          case UserActionEmailCampaignName.CNN_PRESIDENTIAL_DEBATE_2024:
+            return {
+              children: <MainText>Email sent to CNN</MainText>,
+            }
+
+          case UserActionEmailCampaignName.ABC_PRESIDENTIAL_DEBATE_2024:
+            return {
+              children: <MainText>Email sent to ABC</MainText>,
+            }
+
+          default:
+            return {
+              onFocusContent: () => (
+                <UserActionFormEmailCongresspersonDialog>
+                  <Button>Email yours</Button>
+                </UserActionFormEmailCongresspersonDialog>
+              ),
+              children: (
+                <MainText>
+                  Email to{' '}
+                  {dtsiRecipients.length
+                    ? listOfThings(
+                        dtsiRecipients.map(actionEmailRecipient => (
+                          <React.Fragment key={actionEmailRecipient.id}>
+                            <DTSIPersonName
+                              href={urls.politicianDetails(actionEmailRecipient.person!.slug)}
+                              person={actionEmailRecipient.person!}
+                            />
+                          </React.Fragment>
+                        )),
+                      ).map((content, index) => (
+                        <React.Fragment key={index}>{content}</React.Fragment>
+                      ))
+                    : 'Representative'}
+                </MainText>
+              ),
+            }
         }
       }
       case UserActionType.NFT_MINT: {
