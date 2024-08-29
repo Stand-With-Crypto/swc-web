@@ -29,7 +29,6 @@ export const KeyRacesList = (props: KeyRacesListProps) => {
     DTSIPersonHeroCardSectionProps,
     'forceMobile' | 'locale' | 'titleProps' | 'target'
   > = {
-    forceMobile: true,
     locale: locale,
     titleProps: {
       size: 'xs',
@@ -88,7 +87,7 @@ function RaceSectionWrapper({
 }: React.PropsWithChildren<{ className?: string }>) {
   return (
     <div className={cn(dialogContentPaddingXStyles, className)}>
-      <div className={'mx-auto flex max-w-md flex-col gap-6 md:gap-10'}>{children}</div>
+      <div className={'mx-auto flex flex-col gap-6 md:gap-10'}>{children}</div>
     </div>
   )
 }

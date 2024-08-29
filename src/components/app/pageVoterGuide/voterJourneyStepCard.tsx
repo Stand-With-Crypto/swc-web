@@ -45,7 +45,7 @@ export function VoterJourneyStepCard(props: VoterJourneyStepCardProps) {
   return (
     <button
       className={cn(
-        'flex w-full items-center justify-between gap-x-6 gap-y-4 rounded-3xl bg-secondary p-6  hover:drop-shadow lg:gap-x-8 lg:p-8',
+        'flex w-full items-center justify-between gap-x-6 gap-y-4 rounded-3xl bg-secondary p-6 transition hover:drop-shadow-lg lg:gap-x-8 lg:p-8',
         className,
       )}
     >

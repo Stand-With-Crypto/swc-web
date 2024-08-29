@@ -1,109 +1,39 @@
 'use client'
 
-import { ReactNode, useEffect, useMemo, useRef, useState } from 'react'
-import { useForm, useWatch } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { UserActionType } from '@prisma/client'
-import * as Sentry from '@sentry/nextjs'
-import { useRouter } from 'next/navigation'
+import dynamic from 'next/dynamic'
+import { ReactNode, useState } from 'react'
 
-import {
-  actionCreateUserActionViewKeyRaces,
-  CreateActionViewKeyRacesInput,
-} from '@/actions/actionCreateUserActionViewKeyRaces'
-import {
-  getDefaultValues,
-  voterGuideFormValidationSchema,
-  VoterGuideFormValues,
-} from '@/components/app/pageVoterGuide/formConfig'
-import { KeyRacesList, KeyRacesSkeleton } from '@/components/app/pageVoterGuide/keyRacesList'
+import { getDefaultValues } from '@/components/app/pageVoterGuide/formConfig'
 import { UserActionFormDialog } from '@/components/app/userActionFormCommon/dialog'
-import { UserActionFormLayout } from '@/components/app/userActionFormCommon/layout'
-import { useRacesByAddress } from '@/components/app/userActionFormVoterAttestation/useRacesByAddress'
-import { Button } from '@/components/ui/button'
-import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
-import { ErrorMessage } from '@/components/ui/errorMessage'
-import { Form, FormControl, FormField, FormItem } from '@/components/ui/form'
-import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
-import { ScrollArea } from '@/components/ui/scroll-area'
-import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
+
 import { useDialog } from '@/hooks/useDialog'
-import { useIsMobile } from '@/hooks/useIsMobile'
 import { useSession } from '@/hooks/useSession'
-import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
-import { cn } from '@/utils/web/cn'
-import { trackFormSubmissionSyncErrors, triggerServerActionForForm } from '@/utils/web/formUtils'
-import {
-  convertGooglePlaceAutoPredictionToAddressSchema,
-  GooglePlaceAutocompletePrediction,
-} from '@/utils/web/googlePlaceUtils'
-import { identifyUserOnClient } from '@/utils/web/identifyUser'
-import {
-  catchUnexpectedServerErrorAndTriggerToast,
-  toastGenericError,
-} from '@/utils/web/toastUtils'
 
 import { SaveProgressToast } from './saveProgressToast'
+import { ANALYTICS_NAME_USER_ACTION_FORM_GET_INFORMED } from '@/components/app/pageVoterGuide/constants'
+import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 
-const ANALYTICS_NAME_USER_ACTION_FORM_GET_INFORMED = 'User Action Form Get Informed'
+const GetInformedForm = dynamic(
+  () => import('@/components/app/pageVoterGuide/getInformedForm').then(mod => mod.GetInformedForm),
+  {
+    loading: () => (
+      <div className="min-h-[400px]">
+        <LoadingOverlay />
+      </div>
+    ),
+  },
+)
 
 interface KeyRacesDialogProps {
   children: ReactNode
-  onSuccess?: () => void
-  initialValues?: VoterGuideFormValues
   defaultOpen?: boolean
 }
 
 export const KeyRacesDialog = (props: KeyRacesDialogProps) => {
-  const { children, onSuccess, initialValues, defaultOpen } = props
-
-  const router = useRouter()
+  const { children, defaultOpen } = props
 
   const session = useSession()
-  const { mutate } = useApiResponseForUserPerformedUserActionTypes()
   const user = session?.user
-
-  const userDefaultValues = useMemo(() => getDefaultValues({ user }), [user])
-
-  const form = useForm<VoterGuideFormValues>({
-    defaultValues: {
-      ...userDefaultValues,
-      address: initialValues?.address || userDefaultValues?.address,
-    },
-    values: {
-      address: userDefaultValues.address || ({} as GooglePlaceAutocompletePrediction),
-    },
-    resolver: zodResolver(voterGuideFormValidationSchema),
-  })
-
-  const isMobile = useIsMobile({ defaultState: true })
-  const inputRef = useRef<HTMLInputElement | null>(null)
-  const error = form.formState.errors?.address
-  const errorRef = useRef(error)
-
-  useEffect(() => {
-    if (!isMobile && !errorRef.current) {
-      inputRef.current?.click()
-    }
-  }, [form, isMobile])
-
-  const address = useWatch({
-    control: form.control,
-    name: 'address',
-  })
-
-  const racesByAddressRequest = useRacesByAddress(address?.description, {
-    onError: e => {
-      if (e instanceof Error || e?.message) {
-        form.setError('address', {
-          message: e.message,
-        })
-      }
-    },
-    onSuccess: () => {
-      form.clearErrors('address')
-    },
-  })
 
   const [toastOpen, setToastOpen] = useState(false)
 
@@ -112,143 +42,26 @@ export const KeyRacesDialog = (props: KeyRacesDialogProps) => {
     analytics: ANALYTICS_NAME_USER_ACTION_FORM_GET_INFORMED,
   })
 
-  const createViewKeyRacesAction = async () => {
-    const formValues = form.getValues()
-    if (!formValues.address) return
-
-    const addressSchema = await convertGooglePlaceAutoPredictionToAddressSchema(
-      formValues.address,
-    ).catch(e => {
-      Sentry.captureException(e)
-      catchUnexpectedServerErrorAndTriggerToast(e)
-      return null
-    })
-    if (!addressSchema) {
-      form.setError('address', {
-        message: 'Invalid address',
-      })
-      return
-    }
-    const payload: CreateActionViewKeyRacesInput = {
-      address: addressSchema,
-      usCongressionalDistrict: addressSchema?.usCongressionalDistrict,
-      usaState: addressSchema?.administrativeAreaLevel1,
-      shouldBypassAuth: true,
-    }
-    const result = await triggerServerActionForForm(
-      {
-        form,
-        formName: ANALYTICS_NAME_USER_ACTION_FORM_GET_INFORMED,
-        analyticsProps: {
-          ...(addressSchema ? convertAddressToAnalyticsProperties(addressSchema) : {}),
-          'User Action Type': UserActionType.VIEW_KEY_RACES,
-        },
-        payload,
-        onError: (_, e) => {
-          form.setError('address', {
-            message: e.message,
-          })
-          toastGenericError()
-        },
-      },
-      input =>
-        actionCreateUserActionViewKeyRaces(input).then(actionResult => {
-          if (actionResult && 'user' in actionResult && actionResult.user) {
-            identifyUserOnClient(actionResult.user)
-          }
-          return actionResult
-        }),
-    )
-    if (result.status === 'success') {
-      router.refresh()
-      void mutate()
-      if (!session.isLoggedIn) {
-        setToastOpen(true)
-      }
-    }
-  }
-
-  useEffect(() => {
-    if (address) {
-      void createViewKeyRacesAction()
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [address])
-
   return (
     <>
       <UserActionFormDialog {...dialogProps} padding={false} trigger={children}>
-        <UserActionFormLayout>
-          <div className="flex h-full flex-1 flex-col">
-            <ScrollArea className="overflow-auto md:max-h-[70vh]">
-              <div className={cn(dialogContentPaddingStyles)}>
-                <div className="space-y-6">
-                  <p className="text-center text-xl font-semibold">
-                    See where politicians in your area stand on crypto
-                  </p>
-
-                  <div className="mx-auto w-full max-w-lg">
-                    <Form {...form}>
-                      <form
-                        id="view-key-races-form"
-                        onSubmit={form.handleSubmit(async () => {
-                          dialogProps.onOpenChange(false)
-                          onSuccess?.()
-                        }, trackFormSubmissionSyncErrors(ANALYTICS_NAME_USER_ACTION_FORM_GET_INFORMED))}
-                      >
-                        <FormField
-                          control={form.control}
-                          name="address"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormControl aria-invalid={!!error}>
-                                <GooglePlacesSelect
-                                  {...field}
-                                  className="h-14 rounded-full bg-secondary"
-                                  placeholder="Your full address"
-                                  ref={inputRef}
-                                  value={field.value}
-                                />
-                              </FormControl>
-                              {!!error && <ErrorMessage>{error?.message}</ErrorMessage>}
-                            </FormItem>
-                          )}
-                        />
-                      </form>
-                    </Form>
-                  </div>
-                </div>
-              </div>
-
-              <div className="space-y-6 md:space-y-10">
-                {racesByAddressRequest.isLoading ? (
-                  <KeyRacesSkeleton />
-                ) : (
-                  <KeyRacesList races={racesByAddressRequest?.data} />
-                )}
-              </div>
-            </ScrollArea>
-
-            <div
-              className="z-10 mt-auto flex flex-col items-center justify-center border border-t p-6 sm:flex-row md:px-12"
-              style={{ boxShadow: 'rgba(0, 0, 0, 0.2) 0px 1px 6px 0px' }}
-            >
-              <Button
-                className="ml-auto min-w-[130px]"
-                disabled={
-                  form.formState.isSubmitting ||
-                  racesByAddressRequest.isLoading ||
-                  !form.formState.isValid
-                }
-                form="view-key-races-form"
-                size="lg"
-                type="submit"
-              >
-                Done
-              </Button>
-            </div>
+        {session?.isLoading ? (
+          <div className="min-h-[400px]">
+            <LoadingOverlay />
           </div>
-        </UserActionFormLayout>
+        ) : (
+          <GetInformedForm
+            initialValues={getDefaultValues({ user })}
+            onFinish={() => {
+              dialogProps.onOpenChange(false)
+            }}
+            onUserActionCreated={() => {
+              if (!session.isLoggedIn) {
+                setToastOpen(true)
+              }
+            }}
+          />
+        )}
       </UserActionFormDialog>
 
       <SaveProgressToast isOpen={toastOpen} onClose={() => setToastOpen(false)} />

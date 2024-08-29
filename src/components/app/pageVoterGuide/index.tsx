@@ -6,7 +6,7 @@ import { PageTitle } from '@/components/ui/pageTitleText'
 
 export function PageVoterGuide() {
   return (
-    <div className="standard-spacing-from-navbar container flex min-h-screen flex-col items-center gap-16">
+    <div className="standard-spacing-from-navbar container flex flex-col items-center gap-16">
       <div className="flex flex-col items-center justify-center gap-10">
         <Badge
           className="p-2.5 font-bold antialiased md:text-base lg:px-6 lg:py-3.5"
