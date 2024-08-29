@@ -5,6 +5,7 @@ import {
   DTSIPersonHeroCardSection,
   DTSIPersonHeroCardSectionProps,
 } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardSection'
+import { PACFooter } from '@/components/app/pacFooter'
 import { RacesByAddressData } from '@/components/app/userActionFormVoterAttestation/useRacesByAddress'
 import {
   dialogContentPaddingBottomStyles,
@@ -66,7 +67,7 @@ export const KeyRacesList = (props: KeyRacesListProps) => {
           {!!congressional && congressional?.length > 0 && (
             <>
               <hr />
-              <RaceSectionWrapper className={dialogContentPaddingBottomStyles}>
+              <RaceSectionWrapper>
                 <DTSIPersonHeroCardSection
                   {...dtsiPersonHeroCardSectionProps}
                   people={congressional}
@@ -75,6 +76,10 @@ export const KeyRacesList = (props: KeyRacesListProps) => {
               </RaceSectionWrapper>
             </>
           )}
+
+          <RaceSectionWrapper className={dialogContentPaddingBottomStyles}>
+            <PACFooter className="static" />
+          </RaceSectionWrapper>
         </>
       ) : null}
     </div>
