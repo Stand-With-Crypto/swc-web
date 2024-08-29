@@ -99,7 +99,7 @@ export async function Footer({ locale }: { locale: SupportedLocale }) {
                 })}
               </InternalLink>
               <CookieConsentFooterButton
-                className={cn(footerLinkStyles, 'h-auto p-0 text-base')}
+                className={cn(footerLinkStyles, 'h-auto text-wrap p-0 text-left text-base')}
                 variant={'link'}
               />
               <InternalLink className={footerLinkStyles} href={urls.contribute()}>
