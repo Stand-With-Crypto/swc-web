@@ -45,7 +45,7 @@ export const actionCreateUserActionViewKeyRaces = withServerActionMiddleware(
   _actionCreateUserActionViewKeyRaces,
 )
 
-async function _actionCreateUserActionViewKeyRaces(input: CreateActionViewKeyRacesInput) {
+async function _actionCreateUserActionViewKeyRaces(input: CreateActionViewKeyRacesInput = {}) {
   logger.info('triggered')
   const { triggerRateLimiterAtMostOnce } = getRequestRateLimiter({
     context: 'unauthenticated',
