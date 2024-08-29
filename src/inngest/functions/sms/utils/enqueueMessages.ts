@@ -161,7 +161,7 @@ export async function enqueueMessages(payload: EnqueueMessagePayload[], attempt 
 
   // exponential backoff retry
   if (failedEnqueueMessagePayload.length > 0) {
-    const waitingTime = 10000 * (attempt + 1)
+    const waitingTime = 1000 * (attempt + 1)
 
     logger.info(
       `Failed to send SMS to ${failedEnqueueMessagePayload.length} phone numbers. Attempting again in ${waitingTime} seconds`,
