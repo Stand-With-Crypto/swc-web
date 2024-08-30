@@ -16,12 +16,12 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { useCookieState } from '@/hooks/useCookieState'
 import {
   parseUserCountryCodeCookie,
   USER_COUNTRY_CODE_COOKIE_NAME,
 } from '@/utils/server/getCountryCode'
 import { setCookie } from '@/utils/server/setCookie'
-import { useCookieState } from '@/hooks/useCookieState'
 
 type FormFields = {
   countryCode: string

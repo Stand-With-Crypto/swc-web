@@ -9,8 +9,8 @@ import { UserActionFormVoterAttestation } from '@/components/app/userActionFormV
 import { LazyUserActionFormVoterAttestation } from '@/components/app/userActionFormVoterAttestation/lazyLoad'
 import { UserActionFormVoterAttestationSkeleton } from '@/components/app/userActionFormVoterAttestation/skeleton'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
-import { useDialog } from '@/hooks/useDialog'
 import { useCookieState } from '@/hooks/useCookieState'
+import { useDialog } from '@/hooks/useDialog'
 
 const OPEN_DIALOG_DELAY_IN_SECONDS = 15
 const OPEN_DIALOG_SEEN_FLAG = 'SWC_HAS_OPENED_VOTER_ATTESTATION_INSIDE_KEY_RACES'
