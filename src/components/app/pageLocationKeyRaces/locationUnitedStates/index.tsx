@@ -8,6 +8,7 @@ import { ContentSection } from '@/components/app/ContentSection'
 import { DarkHeroSection } from '@/components/app/darkHeroSection'
 import { DTSIPersonHeroCardSection } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardSection'
 import { PACFooter } from '@/components/app/pacFooter'
+import { VoterAttestationDialog } from '@/components/app/pageLocationKeyRaces/dialog'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
 import { Button } from '@/components/ui/button'
 import { FormattedNumber } from '@/components/ui/formattedNumber'
@@ -43,6 +44,7 @@ export function LocationUnitedStates({
 
   return (
     <div className="space-y-20">
+      <VoterAttestationDialog />
       <DarkHeroSection>
         <div className="space-y-6 text-center">
           <PageTitle as="h1" size="md">

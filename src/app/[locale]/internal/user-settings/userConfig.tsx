@@ -1,6 +1,5 @@
 'use client'
 
-import { useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import Cookies from 'js-cookie'
 
@@ -22,6 +21,7 @@ import {
   USER_COUNTRY_CODE_COOKIE_NAME,
 } from '@/utils/server/getCountryCode'
 import { setCookie } from '@/utils/server/setCookie'
+import { useCookieState } from '@/hooks/useCookieState'
 
 type FormFields = {
   countryCode: string
@@ -112,18 +112,4 @@ export function UserConfig() {
       </Form>
     </div>
   )
-}
-
-function useCookieState(cookieName: string): [string | undefined, (newValue: string) => void] {
-  const [value, setStateValue] = useState(() => Cookies.get(cookieName))
-
-  const setValue = useCallback(
-    (newValue: string) => {
-      Cookies.set(cookieName, newValue)
-      setStateValue(newValue)
-    },
-    [cookieName],
-  )
-
-  return [value, setValue]
 }
