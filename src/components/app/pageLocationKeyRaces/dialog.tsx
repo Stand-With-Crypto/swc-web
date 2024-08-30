@@ -13,6 +13,7 @@ import { useDialog } from '@/hooks/useDialog'
 import { useCookieState } from '@/hooks/useCookieState'
 
 const OPEN_DIALOG_DELAY_IN_SECONDS = 15
+const OPEN_DIALOG_SEEN_FLAG = 'SWC_HAS_OPENED_VOTER_ATTESTATION_INSIDE_KEY_RACES'
 
 export function VoterAttestationDialog({
   defaultOpen = false,
@@ -20,9 +21,7 @@ export function VoterAttestationDialog({
 }: Omit<React.ComponentProps<typeof UserActionFormVoterAttestation>, 'user' | 'onClose'> & {
   defaultOpen?: boolean
 }) {
-  const [hasOpenedDialog, setHasOpenedDialog] = useCookieState(
-    'SWC_HAS_OPENED_VOTER_ATTESTATION_INSIDE_KEY_RACES',
-  )
+  const [hasOpenedDialog, setHasOpenedDialog] = useCookieState(OPEN_DIALOG_SEEN_FLAG)
   const dialogProps = useDialog({
     initialOpen: defaultOpen,
     analytics: 'Voter Attestation Dialog Inside Key Races',
