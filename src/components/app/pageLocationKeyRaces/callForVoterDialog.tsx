@@ -1,6 +1,6 @@
 'use client'
 
-import { Suspense, useCallback, useEffect, useRef } from 'react'
+import { Suspense, useEffect } from 'react'
 import { UserActionType } from '@prisma/client'
 import { debounce } from 'lodash-es'
 
@@ -12,7 +12,7 @@ import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForU
 import { useCookieState } from '@/hooks/useCookieState'
 import { useDialog } from '@/hooks/useDialog'
 
-const OPEN_DIALOG_DELAY_IN_SECONDS = 15
+const OPEN_DIALOG_DELAY_IN_SECONDS = 1
 const OPEN_DIALOG_SEEN_FLAG = 'SWC_HAS_OPENED_VOTER_ATTESTATION_INSIDE_KEY_RACES'
 
 export function CallForVoterAttestationDialog({
