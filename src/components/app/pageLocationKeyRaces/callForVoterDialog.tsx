@@ -15,7 +15,7 @@ import { useDialog } from '@/hooks/useDialog'
 const OPEN_DIALOG_DELAY_IN_SECONDS = 15
 const OPEN_DIALOG_SEEN_FLAG = 'SWC_HAS_OPENED_VOTER_ATTESTATION_INSIDE_KEY_RACES'
 
-export function VoterAttestationDialog({
+export function CallForVoterAttestationDialog({
   defaultOpen = false,
   ...formProps
 }: Omit<React.ComponentProps<typeof UserActionFormVoterAttestation>, 'user' | 'onClose'> & {
@@ -44,7 +44,7 @@ export function VoterAttestationDialog({
     if (!hasAlreadyPledgedToVote && hasOpenedDialog !== 'true') {
       openDialog()
     }
-  }, [dialogProps, hasAlreadyPledgedToVote])
+  }, [dialogProps, hasAlreadyPledgedToVote, hasOpenedDialog, openDialog])
 
   const handleDialogClose = () => {
     return dialogProps.onOpenChange(false)

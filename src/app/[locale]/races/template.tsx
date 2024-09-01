@@ -1,9 +1,9 @@
-import { VoterAttestationDialog } from '@/components/app/pageLocationKeyRaces/dialog'
+import { CallForVoterAttestationDialog } from '@/components/app/pageLocationKeyRaces/callForVoterDialog'
 
 export default function Template({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <VoterAttestationDialog />
+      <CallForVoterAttestationDialog />
       {children}
     </>
   )
