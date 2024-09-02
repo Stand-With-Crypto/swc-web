@@ -157,7 +157,6 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
     // https://stand-with-crypto.sentry.io/issues/5691014147/events/84a3cb3472c14dcc85faa7845b045314/
     for (let i = 0; i < payloadChunks.length; i += 1) {
       const payloadChunk = payloadChunks[i]
-      const nextPayloadChunk = payloadChunks[i + 1]
 
       const { queuedMessages, queuedSegments, timeToSendAllSegments } = await step.run(
         `enqueue-messages`,
@@ -183,22 +182,26 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
       segmentsInQueue += queuedSegments
       timeToEmptyQueue += timeToSendAllSegments
 
-      if (nextPayloadChunk) {
-        const { segments: nextPayloadSegments } = countMessagesAndSegments(nextPayloadChunk)
+      if (totalSegmentsToSend >= MAX_QUEUE_LENGTH) {
+        const nextPayloadChunk = payloadChunks[i + 1]
 
-        if (segmentsInQueue + nextPayloadSegments >= MAX_QUEUE_LENGTH) {
-          logInfo('queue-overflow-control', {
-            segmentsInQueue,
-            timeToEmptyQueue: formatTime(timeToEmptyQueue),
-          })
+        if (nextPayloadChunk) {
+          const { segments: nextPayloadSegments } = countMessagesAndSegments(nextPayloadChunk)
 
-          await step.sleep(
-            `waiting-${formatTime(timeToEmptyQueue).replace(' ', '-')}-for-queue-to-be-empty`,
-            timeToEmptyQueue,
-          )
+          if (segmentsInQueue + nextPayloadSegments >= MAX_QUEUE_LENGTH) {
+            logInfo('queue-overflow-control', {
+              segmentsInQueue,
+              timeToEmptyQueue: formatTime(timeToEmptyQueue),
+            })
 
-          segmentsInQueue = 0
-          timeToEmptyQueue = 0
+            await step.sleep(
+              `waiting-${formatTime(timeToEmptyQueue).replace(' ', '-')}-for-queue-to-be-empty`,
+              timeToEmptyQueue,
+            )
+
+            segmentsInQueue = 0
+            timeToEmptyQueue = 0
+          }
         }
       }
 
