@@ -84,8 +84,14 @@ export async function handleExternalUserActionViewKeyRaces(
     { stateCode: currentUsaState as keyof typeof US_STATE_CODE_TO_DISPLAY_NAME_MAP },
   )) as GetCongressionalDistrictFromAddressSuccess
 
+  const userAddressCongressionalDistrict =
+    userAddress?.address?.usCongressionalDistrict &&
+    userAddress?.address?.usCongressionalDistrict !== 'NOT_FOUND'
+      ? userAddress?.address?.usCongressionalDistrict
+      : null
+
   const currentCongressionalDistrict =
-    userAddress?.address?.usCongressionalDistrict ||
+    userAddressCongressionalDistrict ||
     usCongressionalDistrict ||
     maybeCongressionalDistrict?.districtNumber?.toString() ||
     null
@@ -183,7 +189,8 @@ async function updateUserActionViewKeyRaces(
 ) {
   const updateData: Record<string, string | undefined> = {
     ...(usaState !== null && { usaState }),
-    ...(usCongressionalDistrict !== null && { usCongressionalDistrict }),
+    ...(usCongressionalDistrict !== null &&
+      usCongressionalDistrict !== 'NOT_FOUND' && { usCongressionalDistrict }),
   }
 
   return prismaClient.userAction.update({
