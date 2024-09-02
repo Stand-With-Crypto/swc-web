@@ -151,28 +151,26 @@ export const backfillReactivationWithInngest = inngest.createFunction(
 
         await Promise.all(
           usersWithoutCommunicationJourney.map(async user => {
-            await prismaClient.$transaction(async client => {
-              const messageId = await sendInitialSignUpEmail(user.id)
+            const messageId = await sendInitialSignUpEmail(user.id)
 
-              if (messageId) {
-                const userCommunicationJourney = await client.userCommunicationJourney.create({
-                  data: {
-                    userId: user.id,
-                    journeyType: UserCommunicationJourneyType.INITIAL_SIGNUP,
-                  },
-                })
+            if (messageId) {
+              const userCommunicationJourney = await prismaClient.userCommunicationJourney.create({
+                data: {
+                  userId: user.id,
+                  journeyType: UserCommunicationJourneyType.INITIAL_SIGNUP,
+                },
+              })
 
-                const userCommunication = await client.userCommunication.create({
-                  data: {
-                    messageId,
-                    communicationType: CommunicationType.EMAIL,
-                    userCommunicationJourneyId: userCommunicationJourney.id,
-                  },
-                })
+              const userCommunication = await prismaClient.userCommunication.create({
+                data: {
+                  messageId,
+                  communicationType: CommunicationType.EMAIL,
+                  userCommunicationJourneyId: userCommunicationJourney.id,
+                },
+              })
 
-                result.push(userCommunication)
-              }
-            })
+              result.push(userCommunication)
+            }
           }),
         )
 
