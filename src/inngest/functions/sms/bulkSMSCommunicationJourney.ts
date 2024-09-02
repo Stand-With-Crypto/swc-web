@@ -153,8 +153,6 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
 
     let segmentsInQueue = 0
     let timeToEmptyQueue = 0
-    // Previously we were trying to fill the queue in one single inngest step, but it was causing some errors when queuing more then 6k messages
-    // https://stand-with-crypto.sentry.io/issues/5691014147/events/84a3cb3472c14dcc85faa7845b045314/
     for (let i = 0; i < payloadChunks.length; i += 1) {
       const payloadChunk = payloadChunks[i]
 
