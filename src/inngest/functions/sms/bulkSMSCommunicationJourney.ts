@@ -147,50 +147,28 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
       logInfo('initial-info', bulkInfo)
     }
 
-    let iteration = 0
-    let hasMoreMessages = true
     let totalQueuedMessages = 0
     let totalQueuedSegments = 0
-    let totalTimeTaken = 0
-    while (hasMoreMessages) {
+    let totalTimeToSendAllSegments = 0
+
+    let segmentsInQueue = 0
+    let timeToEmptyQueue = 0
+    // Previously we were trying to fill the queue in one single inngest step, but it was causing some errors when queuing more then 6k messages
+    // https://stand-with-crypto.sentry.io/issues/5691014147/events/84a3cb3472c14dcc85faa7845b045314/
+    for (let i = 0; i < payloadChunks.length; i += 1) {
+      const payloadChunk = payloadChunks[i]
+      const nextPayloadChunk = payloadChunks[i + 1]
+
       const { queuedMessages, queuedSegments, timeToSendAllSegments } = await step.run(
         `enqueue-messages`,
         async () => {
           let queuedMessages = 0
           let queuedSegments = 0
-          let hasSpaceLeftInQueue = true
 
-          while (hasSpaceLeftInQueue) {
-            const payloadChunk = payloadChunks[iteration]
-            const nextPayload = payloadChunks[iteration + 1]
+          const { messages, segments } = await enqueueMessages(payloadChunk)
 
-            // If we wont use the full queue, there's no need for this validation
-            if (nextPayload && totalSegmentsToSend >= MAX_QUEUE_LENGTH) {
-              const { segments: segmentsInNextPayload } = countMessagesAndSegments(nextPayload)
-
-              if (queuedSegments + segmentsInNextPayload >= MAX_QUEUE_LENGTH) {
-                hasSpaceLeftInQueue = false
-                break
-              }
-            }
-
-            if (!payloadChunk) {
-              hasMoreMessages = false
-              break
-            }
-
-            const { messages, segments } = await enqueueMessages(payloadChunk)
-
-            queuedMessages += messages
-            queuedSegments += segments
-
-            if (!nextPayload) {
-              hasMoreMessages = false
-              break
-            }
-
-            iteration += 1
-          }
+          queuedMessages += messages
+          queuedSegments += segments
 
           const timeToSendAllSegments = getWaitingTimeInSeconds(queuedSegments)
 
@@ -200,20 +178,32 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
 
       totalQueuedMessages += queuedMessages
       totalQueuedSegments += queuedSegments
+      totalTimeToSendAllSegments += timeToSendAllSegments
 
-      if (queuedSegments === 0 || !hasMoreMessages) {
-        break
+      segmentsInQueue += queuedSegments
+      timeToEmptyQueue += timeToSendAllSegments
+
+      if (nextPayloadChunk) {
+        const { segments: nextPayloadSegments } = countMessagesAndSegments(nextPayloadChunk)
+
+        if (segmentsInQueue + nextPayloadSegments >= MAX_QUEUE_LENGTH) {
+          logInfo('queue-overflow-control', {
+            segmentsInQueue,
+            timeToEmptyQueue: formatTime(timeToEmptyQueue),
+          })
+
+          await step.sleep(
+            `waiting-${formatTime(timeToEmptyQueue).replace(' ', '-')}-for-queue-to-be-empty`,
+            timeToEmptyQueue,
+          )
+
+          segmentsInQueue = 0
+          timeToEmptyQueue = 0
+        }
       }
 
-      await step.sleep(
-        `waiting-${formatTime(timeToSendAllSegments).replace(' ', '-')}-for-messaging-queue-to-be-empty`,
-        timeToSendAllSegments * 1000,
-      )
-
-      totalTimeTaken += timeToSendAllSegments
-
-      logInfo('summary-info', {
-        totalTimeTaken: formatTime(totalTimeTaken),
+      logInfo(`summary-info - ${i + 1}/${payloadChunks.length}`, {
+        totalTimeToSendAllSegments: formatTime(totalTimeToSendAllSegments),
         totalQueuedMessages,
         totalQueuedSegments,
       })
@@ -222,7 +212,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
     return {
       totalQueuedMessages,
       totalQueuedSegments,
-      totalTimeTaken: formatTime(totalTimeTaken),
+      totalTimeToSendAllSegments: formatTime(totalTimeToSendAllSegments),
     }
   },
 )
