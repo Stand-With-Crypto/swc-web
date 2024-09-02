@@ -12,7 +12,7 @@ import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForU
 import { useCookieState } from '@/hooks/useCookieState'
 import { useDialog } from '@/hooks/useDialog'
 
-const OPEN_DIALOG_DELAY_IN_SECONDS = 1
+const OPEN_DIALOG_DELAY_IN_SECONDS = 15
 const OPEN_DIALOG_SEEN_FLAG = 'SWC_HAS_OPENED_VOTER_ATTESTATION_INSIDE_KEY_RACES'
 
 export function CallForVoterAttestationDialog({
@@ -43,6 +43,10 @@ export function CallForVoterAttestationDialog({
   useEffect(() => {
     if (!hasAlreadyPledgedToVote && hasOpenedDialog !== 'true') {
       openDialog()
+    }
+
+    return () => {
+      openDialog.cancel()
     }
   }, [dialogProps, hasAlreadyPledgedToVote, hasOpenedDialog, openDialog])
 
