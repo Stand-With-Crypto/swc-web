@@ -1,6 +1,6 @@
 'use client'
 
-import { Suspense, useEffect, useMemo } from 'react'
+import { Suspense, useCallback, useEffect, useMemo } from 'react'
 import { UserActionType } from '@prisma/client'
 import { debounce } from 'lodash-es'
 
@@ -37,11 +37,14 @@ export function CallForVoterAttestationDialog({
     [user],
   )
 
-  const openDialog = debounce(() => {
-    setHasOpenedDialog('true')
+  const openDialog = useCallback(
+    debounce(() => {
+      setHasOpenedDialog('true')
 
-    return dialogProps.onOpenChange(true)
-  }, OPEN_DIALOG_DELAY_IN_SECONDS * 1000)
+      return dialogProps.onOpenChange(true)
+    }, OPEN_DIALOG_DELAY_IN_SECONDS * 1000),
+    [],
+  )
 
   useEffect(() => {
     if (!hasAlreadyPledgedToVote && hasOpenedDialog !== 'true') {
