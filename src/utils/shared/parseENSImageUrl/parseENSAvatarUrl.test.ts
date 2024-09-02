@@ -16,4 +16,9 @@ describe('utils/parseENSImageUrl', () => {
       'https://ipfs.io/ipfs/QmZzQW8DjZ5hBvQGjXkzJ7fZ1R8j2k1Q2h2X1tBZJ9rZoU',
     )
   })
+
+  it('should return the url itself for data:image/svg+xml;base64 urls', () => {
+    const url = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmci'
+    expect(parseENSImageUrl(url)).toBe(url)
+  })
 })
