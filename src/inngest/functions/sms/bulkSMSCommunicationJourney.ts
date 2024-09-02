@@ -67,28 +67,28 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
       throw new NonRetriableError('Missing campaign name')
     }
 
-    const logInfo = (key: string, info: object) =>
+    const logInfo = (key: string, info?: object) =>
       logger.info('bulk-info', key, JSON.stringify(info))
 
     // SMS messages over 160 characters are split into 153-character segments due to data headers.
     const getWaitingTimeInSeconds = (totalSegments: number) =>
       totalSegments / MESSAGE_SEGMENTS_PER_SECOND
 
-    if (sleepTime) {
-      await step.sleep('scheduled-sleep', sleepTime)
-    }
-
-    const phoneNumbersThatShouldReceiveWelcomeMessage = await fetchAllPhoneNumbers(
-      {
-        campaignName,
-        includePendingDoubleOptIn,
-        userWhereInput,
-      },
-      false,
+    const phoneNumbersThatShouldReceiveWelcomeText = await step.run(
+      'fetch-phone-numbers-that-should-receive-welcome-text',
+      () =>
+        fetchAllPhoneNumbers(
+          {
+            campaignName,
+            includePendingDoubleOptIn,
+            userWhereInput,
+          },
+          false,
+        ),
     )
 
     let enqueueMessagesPayload: EnqueueMessagePayload[] =
-      phoneNumbersThatShouldReceiveWelcomeMessage.map(phoneNumber => ({
+      phoneNumbersThatShouldReceiveWelcomeText.map(phoneNumber => ({
         phoneNumber,
         messages: [
           {
@@ -103,13 +103,15 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
         ],
       }))
 
-    const phoneNumberThatAlreadyReceivedWelcomeMessage = await fetchAllPhoneNumbers(
-      {
-        campaignName,
-        includePendingDoubleOptIn,
-        userWhereInput,
-      },
-      true,
+    const phoneNumberThatAlreadyReceivedWelcomeMessage = await step.run('fetch-phone-numbers', () =>
+      fetchAllPhoneNumbers(
+        {
+          campaignName,
+          includePendingDoubleOptIn,
+          userWhereInput,
+        },
+        true,
+      ),
     )
 
     enqueueMessagesPayload = enqueueMessagesPayload.concat(
@@ -128,15 +130,17 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
 
     const payloadChunks = chunk(enqueueMessagesPayload, TWILIO_RATE_LIMIT)
 
-    const { segments: totalSegmentsToSend, messages: totalMessagesToSend } =
-      countMessagesAndSegments(enqueueMessagesPayload)
+    const { segments: totalSegmentsToSend, messages: totalMessagesToSend } = await step.run(
+      'count-messages-and-segments',
+      () => countMessagesAndSegments(enqueueMessagesPayload),
+    )
 
     const totalTime = getWaitingTimeInSeconds(totalSegmentsToSend)
 
     const bulkInfo = {
       totalSegmentsToSend,
       totalMessagesToSend,
-      totalMessagesWithWelcomeText: phoneNumbersThatShouldReceiveWelcomeMessage.length,
+      totalMessagesWithWelcomeText: phoneNumbersThatShouldReceiveWelcomeText.length,
       totalTime: formatTime(totalTime),
       batches: payloadChunks.length,
     }
@@ -145,6 +149,11 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
       return bulkInfo
     } else {
       logInfo('initial-info', bulkInfo)
+    }
+
+    if (sleepTime) {
+      logInfo('scheduled-sleep', { sleepTime })
+      await step.sleep('scheduled-sleep', sleepTime)
     }
 
     let totalQueuedMessages = 0
@@ -209,6 +218,8 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
         totalQueuedSegments,
       })
     }
+
+    logInfo('Finished')
 
     return {
       totalQueuedMessages,
