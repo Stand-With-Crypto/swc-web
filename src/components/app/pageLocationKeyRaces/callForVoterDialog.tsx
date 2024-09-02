@@ -1,6 +1,6 @@
 'use client'
 
-import { Suspense, useEffect } from 'react'
+import { Suspense, useEffect, useMemo } from 'react'
 import { UserActionType } from '@prisma/client'
 import { debounce } from 'lodash-es'
 
@@ -29,10 +29,13 @@ export function CallForVoterAttestationDialog({
   const { data, isLoading } = useApiResponseForUserFullProfileInfo()
   const { user } = data ?? { user: null }
 
-  const possibleUserActions = user?.userActions
-  const hasAlreadyPledgedToVote = !!possibleUserActions?.some(currentAction => {
-    return currentAction.actionType === UserActionType.VOTER_ATTESTATION
-  })
+  const hasAlreadyPledgedToVote = useMemo(
+    () =>
+      !!user?.userActions?.some(currentAction => {
+        return currentAction.actionType === UserActionType.VOTER_ATTESTATION
+      }),
+    [user],
+  )
 
   const openDialog = debounce(() => {
     setHasOpenedDialog('true')
