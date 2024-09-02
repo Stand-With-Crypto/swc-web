@@ -13,6 +13,7 @@ import {
   UserActionViewKeyRaces,
   UserActionVoterAttestation,
   UserActionVoterRegistration,
+  UserActionVotingInformationResearched,
 } from '@prisma/client'
 
 import { ClientAddress, getClientAddress } from '@/clientModels/clientAddress'
@@ -40,6 +41,11 @@ type SensitiveDataClientUserActionDatabaseQuery = UserAction & {
   userActionRsvpEvent: UserActionRsvpEvent | null
   userActionVoterAttestation: UserActionVoterAttestation | null
   userActionViewKeyRaces: UserActionViewKeyRaces | null
+  userActionVotingInformationResearched:
+    | (UserActionVotingInformationResearched & {
+        address: Address | null
+      })
+    | null
 }
 
 type SensitiveDataClientUserActionEmailRecipient = Pick<UserActionEmailRecipient, 'id'>
@@ -105,6 +111,13 @@ type SensitiveDataClientUserActionViewKeyRaces = Pick<
 > & {
   actionType: typeof UserActionType.VIEW_KEY_RACES
 }
+type SensitiveDataClientUserActionVotingInformationResearched = Pick<
+  UserActionVotingInformationResearched,
+  'addressId' | 'shouldReceiveNotifications'
+> & {
+  address: ClientAddress | null
+  actionType: typeof UserActionType.VOTING_INFORMATION_RESEARCHED
+}
 
 /*
 At the database schema level we can't enforce that a single action only has one "type" FK, but at the client level we can and should
@@ -126,6 +139,7 @@ export type SensitiveDataClientUserAction = ClientModel<
       | SensitiveDataClientUserActionRsvpEvent
       | SensitiveDataClientUserActionVoterAttestation
       | SensitiveDataClientUserActionViewKeyRaces
+      | SensitiveDataClientUserActionVotingInformationResearched
     )
 >
 
@@ -265,6 +279,20 @@ export const getSensitiveDataClientUserAction = ({
         actionType: UserActionType.VIEW_KEY_RACES,
       }
       return getClientModel({ ...sharedProps, ...keyRacesFields })
+    },
+    [UserActionType.VOTING_INFORMATION_RESEARCHED]: () => {
+      const { addressId, address, shouldReceiveNotifications } = getRelatedModel(
+        record,
+        'userActionVotingInformationResearched',
+      )
+      const votingInformationResearchedFields: SensitiveDataClientUserActionVotingInformationResearched =
+        {
+          address: address ? getClientAddress(address) : null,
+          addressId,
+          shouldReceiveNotifications,
+          actionType: UserActionType.VOTING_INFORMATION_RESEARCHED,
+        }
+      return getClientModel({ ...sharedProps, ...votingInformationResearchedFields })
     },
   }
 

@@ -1,4 +1,5 @@
 import {
+  Address,
   NFTMint,
   UserAction,
   UserActionCall,
@@ -12,9 +13,11 @@ import {
   UserActionViewKeyRaces,
   UserActionVoterAttestation,
   UserActionVoterRegistration,
+  UserActionVotingInformationResearched,
 } from '@prisma/client'
 import { keyBy } from 'lodash-es'
 
+import { ClientAddress, getClientAddress } from '@/clientModels/clientAddress'
 import { ClientNFTMint, getClientNFTMint } from '@/clientModels/clientNFTMint'
 import { ClientModel, getClientModel } from '@/clientModels/utils'
 import { DTSIPersonForUserActions } from '@/data/dtsi/queries/queryDTSIPeopleBySlugForUserActions'
@@ -43,6 +46,11 @@ type ClientUserActionDatabaseQuery = UserAction & {
   userActionVoterAttestation: UserActionVoterAttestation | null
   userActionRsvpEvent: UserActionRsvpEvent | null
   userActionViewKeyRaces: UserActionViewKeyRaces | null
+  userActionVotingInformationResearched:
+    | (UserActionVotingInformationResearched & {
+        address: Address | null
+      })
+    | null
 }
 
 type ClientUserActionEmailRecipient = Pick<UserActionEmailRecipient, 'id'> & {
@@ -96,6 +104,13 @@ type ClientUserActionViewKeyRaces = Pick<
 > & {
   actionType: typeof UserActionType.VIEW_KEY_RACES
 }
+type ClientUserActionVotingInformationResearched = Pick<
+  UserActionVotingInformationResearched,
+  'addressId' | 'shouldReceiveNotifications'
+> & {
+  address: ClientAddress | null
+  actionType: typeof UserActionType.VOTING_INFORMATION_RESEARCHED
+}
 
 /*
 At the database schema level we can't enforce that a single action only has one "type" FK, but at the client level we can and should
@@ -117,6 +132,7 @@ export type ClientUserAction = ClientModel<
       | ClientUserActionVoterAttestation
       | ClientUserActionRsvpEvent
       | ClientUserActionViewKeyRaces
+      | ClientUserActionVotingInformationResearched
     )
 >
 
@@ -259,6 +275,19 @@ export const getClientUserAction = ({
         actionType: UserActionType.VIEW_KEY_RACES,
       }
       return getClientModel({ ...sharedProps, ...keyRacesFields })
+    },
+    [UserActionType.VOTING_INFORMATION_RESEARCHED]: () => {
+      const { address, addressId, shouldReceiveNotifications } = getRelatedModel(
+        record,
+        'userActionVotingInformationResearched',
+      )
+      const votingInformationFields: ClientUserActionVotingInformationResearched = {
+        address: address ? getClientAddress(address) : null,
+        addressId,
+        shouldReceiveNotifications,
+        actionType: UserActionType.VOTING_INFORMATION_RESEARCHED,
+      }
+      return getClientModel({ ...sharedProps, ...votingInformationFields })
     },
   }
 

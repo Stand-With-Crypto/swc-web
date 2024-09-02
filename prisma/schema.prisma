@@ -44,9 +44,10 @@ model Address {
   datetimeUpdated          DateTime @updatedAt @map("datetime_updated")
   datetimeCreated          DateTime @default(now()) @map("datetime_created")
 
-  userActionEmails UserActionEmail[]
-  userActionCalls  UserActionCall[]
-  users            User[]
+  userActionEmails                      UserActionEmail[]
+  userActionCalls                       UserActionCall[]
+  users                                 User[]
+  userActionVotingInformationResearched UserActionVotingInformationResearched[]
 
   @@index([administrativeAreaLevel1, countryCode])
   @@map("address")
@@ -242,7 +243,7 @@ model UserCryptoAddress {
   userId                           String                     @map("user_id")
   user                             User                       @relation("userCryptoAddresses", map: "userCryptoAddresses", fields: [userId], references: [id])
   dataCreationMethod               DataCreationMethod         @default(BY_USER) @map("data_creation_method")
-  // because we are populating this table using historical data where we didn't have the auth flow, we need to differentiate between 
+  // because we are populating this table using historical data where we didn't have the auth flow, we need to differentiate between
   // addresses that exist but haven't been verified vs. addresses that have been verified via the auth flow
   hasBeenVerifiedViaAuth           Boolean                    @default(true) @map("has_been_verified_via_auth")
   embeddedWalletUserEmailAddressId String?                    @unique @map("embedded_wallet_user_email_address_id")
@@ -271,6 +272,7 @@ enum UserActionType {
   VOTER_ATTESTATION
   RSVP_EVENT
   VIEW_KEY_RACES
+  VOTING_INFORMATION_RESEARCHED
 }
 
 model UserAction {
@@ -295,15 +297,16 @@ model UserAction {
   actionType          UserActionType     @map("action_type")
 
   // We'll need in-memory logic to validate and verify only one action type is every associated with a UserAction
-  userActionEmail             UserActionEmail?
-  userActionCall              UserActionCall?
-  userActionDonation          UserActionDonation?
-  userActionOptIn             UserActionOptIn?
-  userActionVoterRegistration UserActionVoterRegistration?
-  userActionVoterAttestation  UserActionVoterAttestation?
-  userActionTweetAtPerson     UserActionTweetAtPerson?
-  userActionRsvpEvent         UserActionRsvpEvent?
-  userActionViewKeyRaces      UserActionViewKeyRaces?
+  userActionEmail                       UserActionEmail?
+  userActionCall                        UserActionCall?
+  userActionDonation                    UserActionDonation?
+  userActionOptIn                       UserActionOptIn?
+  userActionVoterRegistration           UserActionVoterRegistration?
+  userActionVoterAttestation            UserActionVoterAttestation?
+  userActionTweetAtPerson               UserActionTweetAtPerson?
+  userActionRsvpEvent                   UserActionRsvpEvent?
+  userActionViewKeyRaces                UserActionViewKeyRaces?
+  userActionVotingInformationResearched UserActionVotingInformationResearched?
 
   @@index([datetimeCreated])
   @@index([userId, actionType, campaignName])
@@ -462,6 +465,17 @@ model UserActionRsvpEvent {
 
   @@index([eventSlug, eventState])
   @@map("user_action_rsvp_event")
+}
+
+model UserActionVotingInformationResearched {
+  id                         String     @id @default(uuid())
+  userAction                 UserAction @relation(fields: [id], references: [id])
+  shouldReceiveNotifications Boolean    @map("should_receive_notifications")
+  address                    Address?   @relation(fields: [addressId], references: [id])
+  addressId                  String?    @map("address_id")
+
+  @@index([addressId])
+  @@map("user_action_voting_information_researched")
 }
 
 enum UserCommunicationJourneyType {
