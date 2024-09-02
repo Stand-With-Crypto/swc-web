@@ -109,16 +109,16 @@ export const backfillReactivationWithInngest = inngest.createFunction(
       }[]
     } | null = null
 
-    const batchPromises = Array.from({ length: numBatches }, (_, i) =>
-      step.run(`backfill-reactivation-email-batch-${i}`, async () => {
-        const result: {
-          id: string
-          userCommunicationJourneyId: string
-          communicationType: CommunicationType
-          messageId: string
-          datetimeCreated: Date
-        }[] = []
+    for (let i = 0; i < numBatches; i++) {
+      const result: {
+        id: string
+        userCommunicationJourneyId: string
+        communicationType: CommunicationType
+        messageId: string
+        datetimeCreated: Date
+      }[] = []
 
+      const batchResult = await step.run(`backfill-reactivation-email-batch-${i}`, async () => {
         const usersWithoutCommunicationJourney = await prismaClient.user.findMany({
           take: limit || BACKFILL_REACTIVATION_INNGEST_BATCH_SIZE,
           orderBy: {
@@ -149,50 +149,39 @@ export const backfillReactivationWithInngest = inngest.createFunction(
           },
         })
 
-        await Promise.all(
-          usersWithoutCommunicationJourney.map(async user => {
-            const messageId = await sendInitialSignUpEmail(user.id)
+        for (const user of usersWithoutCommunicationJourney) {
+          const messageId = await sendInitialSignUpEmail(user.id)
 
-            if (messageId) {
-              const userCommunicationJourney = await prismaClient.userCommunicationJourney.create({
-                data: {
-                  userId: user.id,
-                  journeyType: UserCommunicationJourneyType.INITIAL_SIGNUP,
-                },
-              })
+          if (messageId) {
+            const userCommunicationJourney = await prismaClient.userCommunicationJourney.create({
+              data: {
+                userId: user.id,
+                journeyType: UserCommunicationJourneyType.INITIAL_SIGNUP,
+              },
+            })
 
-              const userCommunication = await prismaClient.userCommunication.create({
-                data: {
-                  messageId,
-                  communicationType: CommunicationType.EMAIL,
-                  userCommunicationJourneyId: userCommunicationJourney.id,
-                },
-              })
+            const userCommunication = await prismaClient.userCommunication.create({
+              data: {
+                messageId,
+                communicationType: CommunicationType.EMAIL,
+                userCommunicationJourneyId: userCommunicationJourney.id,
+              },
+            })
 
-              result.push(userCommunication)
-            }
-          }),
-        )
+            result.push(userCommunication)
+          }
+        }
 
         return {
           message: `Sent initial sign up email to ${result.length} users`,
           results: result,
         }
-      }),
-    )
+      })
 
-    const batchResults = await Promise.all(batchPromises)
+      totalResult = batchResult
 
-    totalResult = batchResults.reduce(
-      (acc, batchResult) => {
-        acc.results.push(...batchResult.results)
-        acc.message += `${batchResult.message}\n`
-        return acc
-      },
-      { message: '', results: [] },
-    )
-
-    logger.info(`All batches finished with: ${totalResult.message}`)
+      logger.info(`Batch ${i} finished with: ${batchResult.message}`)
+    }
 
     return totalResult
   },
