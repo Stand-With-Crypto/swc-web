@@ -1,6 +1,7 @@
 import { z } from 'zod'
 
 import { requiredEnv } from '@/utils/shared/requiredEnv'
+import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { apiUrls, fullUrl } from '@/utils/shared/urls'
 
 import { messagingClient } from './messagingClient'
@@ -26,7 +27,10 @@ export const sendSMS = async (payload: SendSMSPayload) => {
   const { body, to, media } = validatedInput.data
 
   try {
-    const statusCallback = fullUrl(apiUrls.smsStatusCallback())
+    let statusCallback
+    if (NEXT_PUBLIC_ENVIRONMENT !== 'local') {
+      statusCallback = fullUrl(apiUrls.smsStatusCallback())
+    }
 
     const message = await messagingClient.messages.create({
       from: TWILIO_PHONE_NUMBER,
