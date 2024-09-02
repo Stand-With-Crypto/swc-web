@@ -45,6 +45,11 @@ const fetchFromPrisma = async (config: RecentActivityConfig) => {
       userActionVoterAttestation: true,
       userActionRsvpEvent: true,
       userActionViewKeyRaces: true,
+      userActionVotingInformationResearched: {
+        include: {
+          address: true,
+        },
+      },
     },
   })
 }
