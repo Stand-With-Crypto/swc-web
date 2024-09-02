@@ -14,10 +14,10 @@ const base = object({
   campaignName: nativeEnum(UserActionEmailCampaignName),
 }).merge(zodFirstAndLastNames)
 
-export const zodUserActionFormEmailABCFields = base.extend({
+export const zodUserActionFormEmailDebateFields = base.extend({
   address: zodGooglePlacesAutocompletePrediction,
 })
 
-export const zodUserActionFormEmailABCAction = base.extend({
+export const zodUserActionFormEmailDebateAction = base.extend({
   address: zodAddress,
 })

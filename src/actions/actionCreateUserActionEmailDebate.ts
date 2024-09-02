@@ -38,25 +38,25 @@ import { getLogger } from '@/utils/shared/logger'
 import { generateReferralId } from '@/utils/shared/referralId'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { userFullName } from '@/utils/shared/userFullName'
-import { zodUserActionFormEmailABCAction } from '@/validation/forms/zodUserActionFormEmailABC'
+import { zodUserActionFormEmailDebateAction } from '@/validation/forms/zodUserActionFormEmailDebate'
 
-const logger = getLogger(`actionCreateUserActionEmailABC`)
+const logger = getLogger(`actionCreateUserActionEmailDebate`)
 
-const ABC_EMAIL = 'email@email.com' // TODO: REPLACE WITH REAL EMAIL
+const DEBATE_RECEIVER_EMAIL = 'email@email.com' // TODO: REPLACE WITH REAL EMAIL
 
 type UserWithRelations = User & {
   primaryUserCryptoAddress: UserCryptoAddress | null
   userEmailAddresses: UserEmailAddress[]
   address: Address | null
 }
-type Input = z.infer<typeof zodUserActionFormEmailABCAction>
+type Input = z.infer<typeof zodUserActionFormEmailDebateAction>
 
-export const actionCreateUserActionEmailABC = withServerActionMiddleware(
-  'actionCreateUserActionEmailABC',
-  _actionCreateUserActionEmailABC,
+export const actionCreateUserActionEmailDebate = withServerActionMiddleware(
+  'actionCreateUserActionEmailDebate',
+  _actionCreateUserActionEmailDebate,
 )
 
-async function _actionCreateUserActionEmailABC(input: Input) {
+async function _actionCreateUserActionEmailDebate(input: Input) {
   logger.info('triggered')
   const { triggerRateLimiterAtMostOnce } = getRequestRateLimiter({
     context: 'unauthenticated',
@@ -69,7 +69,7 @@ async function _actionCreateUserActionEmailABC(input: Input) {
   })
   logger.info(userMatch.user ? 'found user' : 'no user found')
   const sessionId = getUserSessionId()
-  const validatedFields = zodUserActionFormEmailABCAction.safeParse(input)
+  const validatedFields = zodUserActionFormEmailDebateAction.safeParse(input)
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
@@ -143,7 +143,7 @@ async function _actionCreateUserActionEmailABC(input: Input) {
           },
           userActionEmailRecipients: {
             create: {
-              emailAddress: ABC_EMAIL,
+              emailAddress: DEBATE_RECEIVER_EMAIL,
             },
           },
         },

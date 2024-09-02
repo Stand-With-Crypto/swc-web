@@ -3,11 +3,11 @@
 import React, { Suspense, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
-import { UserActionFormEmailABC } from '@/components/app/userActionFormEmailABC'
-import { ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_ABC } from '@/components/app/userActionFormEmailABC/constants'
-import { UserActionFormEmailABCSkeleton } from '@/components/app/userActionFormEmailABC/skeleton'
-import { UserActionFormEmailABCSuccess } from '@/components/app/userActionFormEmailABC/success'
-import { UserActionEmailABCFormFields } from '@/components/app/userActionFormEmailABC/types'
+import { UserActionFormEmailDebate } from '@/components/app/userActionFormEmailDebate'
+import { ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_DEBATE } from '@/components/app/userActionFormEmailDebate/constants'
+import { UserActionFormEmailDebateSkeleton } from '@/components/app/userActionFormEmailDebate/skeleton'
+import { UserActionFormEmailDebateSuccess } from '@/components/app/userActionFormEmailDebate/success'
+import { UserActionEmailDebateFormFields } from '@/components/app/userActionFormEmailDebate/types'
 import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { trackDialogOpen } from '@/components/ui/dialog/trackDialogOpen'
@@ -18,7 +18,7 @@ import { usePreventOverscroll } from '@/hooks/usePreventOverscroll'
 import { getIntlUrls } from '@/utils/shared/urls'
 import { cn } from '@/utils/web/cn'
 
-function UserActionFormEmailABCDeeplinkWrapperContent() {
+function UserActionFormEmailDebateDeeplinkWrapperContent() {
   usePreventOverscroll()
 
   const fetchUser = useApiResponseForUserFullProfileInfo()
@@ -28,7 +28,7 @@ function UserActionFormEmailABCDeeplinkWrapperContent() {
   const [state, setState] = useState<'form' | 'success'>('form')
   const { user } = fetchUser.data || { user: null }
   const [initialValues, loadingParams] =
-    useEncodedInitialValuesQueryParam<UserActionEmailABCFormFields>({
+    useEncodedInitialValuesQueryParam<UserActionEmailDebateFormFields>({
       email: '',
       firstName: '',
       lastName: '',
@@ -38,13 +38,13 @@ function UserActionFormEmailABCDeeplinkWrapperContent() {
       },
     })
   useEffect(() => {
-    trackDialogOpen({ open: true, analytics: ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_ABC })
+    trackDialogOpen({ open: true, analytics: ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_DEBATE })
   }, [])
 
   return fetchUser.isLoading || loadingParams ? (
-    <UserActionFormEmailABCSkeleton />
+    <UserActionFormEmailDebateSkeleton />
   ) : state === 'form' ? (
-    <UserActionFormEmailABC
+    <UserActionFormEmailDebate
       initialValues={initialValues}
       onCancel={() => router.replace(urls.home())}
       onSuccess={() => setState('success')}
@@ -53,16 +53,16 @@ function UserActionFormEmailABCDeeplinkWrapperContent() {
   ) : (
     <div className={cn(dialogContentPaddingStyles, 'h-full')}>
       <UserActionFormSuccessScreen onClose={() => router.replace(urls.home())}>
-        <UserActionFormEmailABCSuccess />
+        <UserActionFormEmailDebateSuccess />
       </UserActionFormSuccessScreen>
     </div>
   )
 }
 
-export function UserActionFormEmailABCDeeplinkWrapper() {
+export function UserActionFormEmailDebateDeeplinkWrapper() {
   return (
-    <Suspense fallback={<UserActionFormEmailABCSkeleton />}>
-      <UserActionFormEmailABCDeeplinkWrapperContent />
+    <Suspense fallback={<UserActionFormEmailDebateSkeleton />}>
+      <UserActionFormEmailDebateDeeplinkWrapperContent />
     </Suspense>
   )
 }

@@ -77,7 +77,7 @@ const USER_ACTION_WITH_CAMPAIGN_DEEPLINK_MAP: {
 } = {
   [UserActionType.EMAIL]: {
     [UserActionEmailCampaignName.ABC_PRESIDENTIAL_DEBATE_2024]: ({ locale }) => {
-      return `${getIntlPrefix(locale)}/action/email-abc`
+      return `${getIntlPrefix(locale)}/action/email-debate`
     },
   },
 }

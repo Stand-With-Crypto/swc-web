@@ -7,7 +7,7 @@ import { PageTitle } from '@/components/ui/pageTitleText'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Textarea } from '@/components/ui/textarea'
 
-export function UserActionFormEmailABCSkeleton() {
+export function UserActionFormEmailDebateSkeleton() {
   return (
     <form className="flex max-h-dvh flex-col">
       <LoadingOverlay />

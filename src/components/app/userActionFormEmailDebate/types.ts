@@ -1,4 +1,4 @@
-export type UserActionEmailABCFormFields = {
+export type UserActionEmailDebateFormFields = {
   address: {
     description: string
     place_id: string

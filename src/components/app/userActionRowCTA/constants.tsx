@@ -7,9 +7,9 @@ import { GeoGate } from '@/components/app/geoGate'
 import { CALL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormCallCongressperson/constants'
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
 import { UserActionFormActionUnavailable } from '@/components/app/userActionFormCommon/actionUnavailable'
-import { UserActionFormEmailABCDialog } from '@/components/app/userActionFormEmailABC/dialog'
 import { EMAIL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormEmailCongressperson/constants'
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
+import { UserActionFormEmailDebateDialog } from '@/components/app/userActionFormEmailDebate/dialog'
 import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
 import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/dialog'
 import { UserActionFormVoterAttestationDialog } from '@/components/app/userActionFormVoterAttestation/dialog'
@@ -163,7 +163,7 @@ const USER_ACTION_ROW_CTA_INFO_FROM_CAMPAIGN: Record<
     shortText: 'Ask ABC to include crypto questions at the Presidential Debate',
     shortSubtext: 'Send an email to ABC and tell them we need the candidates’ stance on crypto',
     canBeTriggeredMultipleTimes: true,
-    WrapperComponent: UserActionFormEmailABCDialog,
+    WrapperComponent: UserActionFormEmailDebateDialog,
   },
 }
 

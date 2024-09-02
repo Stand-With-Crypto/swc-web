@@ -7,10 +7,10 @@ import * as Sentry from '@sentry/nextjs'
 import { useRouter } from 'next/navigation'
 import { z } from 'zod'
 
-import { actionCreateUserActionEmailABC } from '@/actions/actionCreateUserActionEmailABC'
+import { actionCreateUserActionEmailDebate } from '@/actions/actionCreateUserActionEmailDebate'
 import { GetUserFullProfileInfoResponse } from '@/app/api/identified-user/full-profile-info/route'
-import { ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_ABC } from '@/components/app/userActionFormEmailABC/constants'
-import { UserActionEmailABCFormFields } from '@/components/app/userActionFormEmailABC/types'
+import { ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_DEBATE } from '@/components/app/userActionFormEmailDebate/constants'
+import { UserActionEmailDebateFormFields } from '@/components/app/userActionFormEmailDebate/types'
 import { Button } from '@/components/ui/button'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import {
@@ -45,11 +45,11 @@ import {
   catchUnexpectedServerErrorAndTriggerToast,
   toastGenericError,
 } from '@/utils/web/toastUtils'
-import { zodUserActionFormEmailABCFields } from '@/validation/forms/zodUserActionFormEmailABC'
+import { zodUserActionFormEmailDebateFields } from '@/validation/forms/zodUserActionFormEmailDebate'
 
-type FormValues = z.infer<typeof zodUserActionFormEmailABCFields> & GenericErrorFormValues
+type FormValues = z.infer<typeof zodUserActionFormEmailDebateFields> & GenericErrorFormValues
 
-export function UserActionFormEmailABC({
+export function UserActionFormEmailDebate({
   onSuccess,
   user,
   initialValues,
@@ -57,14 +57,14 @@ export function UserActionFormEmailABC({
   user: GetUserFullProfileInfoResponse['user']
   onCancel: () => void
   onSuccess: () => void
-  initialValues?: UserActionEmailABCFormFields
+  initialValues?: UserActionEmailDebateFormFields
 }) {
   const isDesktop = useIsDesktop()
   const router = useRouter()
   const urls = useIntlUrls()
   const hasModifiedMessage = useRef(false)
   const form = useForm<FormValues>({
-    resolver: zodResolver(zodUserActionFormEmailABCFields),
+    resolver: zodResolver(zodUserActionFormEmailDebateFields),
     defaultValues: {
       address:
         initialValues?.address || user?.address?.route
@@ -135,7 +135,7 @@ export function UserActionFormEmailABC({
           const result = await triggerServerActionForForm(
             {
               form,
-              formName: ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_ABC,
+              formName: ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_DEBATE,
               analyticsProps: {
                 ...(address ? convertAddressToAnalyticsProperties(address) : {}),
                 'Campaign Name': values.campaignName,
@@ -144,7 +144,7 @@ export function UserActionFormEmailABC({
               payload: { ...values, address },
             },
             payload =>
-              actionCreateUserActionEmailABC(payload).then(actionResult => {
+              actionCreateUserActionEmailDebate(payload).then(actionResult => {
                 if (actionResult?.user) {
                   identifyUserOnClient(actionResult.user)
                 }
@@ -157,7 +157,7 @@ export function UserActionFormEmailABC({
           } else {
             toastGenericError()
           }
-        }, trackFormSubmissionSyncErrors(ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_ABC))}
+        }, trackFormSubmissionSyncErrors(ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_DEBATE))}
       >
         <ScrollArea className="overflow-auto">
           <div className={cn(dialogContentPaddingStyles, 'space-y-4 md:space-y-8')}>

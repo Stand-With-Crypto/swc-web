@@ -2,11 +2,11 @@
 
 import { Suspense, useEffect, useState } from 'react'
 
-import { ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_ABC } from '@/components/app/userActionFormEmailABC/constants'
-import { LazyUserActionFormEmailABC } from '@/components/app/userActionFormEmailABC/lazyLoad'
-import { UserActionFormEmailABCSkeleton } from '@/components/app/userActionFormEmailABC/skeleton'
-import { UserActionFormEmailABCSuccess } from '@/components/app/userActionFormEmailABC/success'
-import { UserActionEmailABCFormFields } from '@/components/app/userActionFormEmailABC/types'
+import { ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_DEBATE } from '@/components/app/userActionFormEmailDebate/constants'
+import { LazyUserActionFormEmailDebate } from '@/components/app/userActionFormEmailDebate/lazyLoad'
+import { UserActionFormEmailDebateSkeleton } from '@/components/app/userActionFormEmailDebate/skeleton'
+import { UserActionFormEmailDebateSuccess } from '@/components/app/userActionFormEmailDebate/success'
+import { UserActionEmailDebateFormFields } from '@/components/app/userActionFormEmailDebate/types'
 import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
@@ -14,18 +14,18 @@ import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForU
 import { useDialog } from '@/hooks/useDialog'
 import { cn } from '@/utils/web/cn'
 
-export function UserActionFormEmailABCDialog({
+export function UserActionFormEmailDebateDialog({
   children,
   defaultOpen = false,
   initialValues,
 }: {
   children: React.ReactNode
   defaultOpen?: boolean
-  initialValues?: UserActionEmailABCFormFields
+  initialValues?: UserActionEmailDebateFormFields
 }) {
   const dialogProps = useDialog({
     initialOpen: defaultOpen,
-    analytics: ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_ABC,
+    analytics: ANALYTICS_NAME_USER_ACTION_FORM_EMAIL_DEBATE,
   })
   const fetchUser = useApiResponseForUserFullProfileInfo()
   const [state, setState] = useState<'form' | 'success'>('form')
@@ -39,11 +39,11 @@ export function UserActionFormEmailABCDialog({
     <Dialog {...dialogProps}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent a11yTitle="ABC debate email" className="max-w-3xl" padding={false}>
-        <Suspense fallback={<UserActionFormEmailABCSkeleton />}>
+        <Suspense fallback={<UserActionFormEmailDebateSkeleton />}>
           {fetchUser.isLoading ? (
-            <UserActionFormEmailABCSkeleton />
+            <UserActionFormEmailDebateSkeleton />
           ) : state === 'form' ? (
-            <LazyUserActionFormEmailABC
+            <LazyUserActionFormEmailDebate
               initialValues={initialValues}
               onCancel={() => dialogProps.onOpenChange(false)}
               onSuccess={() => setState('success')}
@@ -52,7 +52,7 @@ export function UserActionFormEmailABCDialog({
           ) : (
             <div className={cn(dialogContentPaddingStyles)}>
               <UserActionFormSuccessScreen onClose={() => dialogProps.onOpenChange(false)}>
-                <UserActionFormEmailABCSuccess />
+                <UserActionFormEmailDebateSuccess />
               </UserActionFormSuccessScreen>
             </div>
           )}
