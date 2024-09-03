@@ -25,6 +25,7 @@ import { monitorBaseETHBalances } from '@/inngest/functions/monitorBaseETHBalanc
 import { setPrimaryCryptoAddressOfUserWithInngest } from '@/inngest/functions/setPrimaryCryptoAddressOfUser'
 import {
   backfillPhoneNumberValidation,
+  backfillSMSStatusField,
   bulkSMSCommunicationJourney,
   goodbyeSMSCommunicationJourney,
   unstopConfirmationSMSCommunicationJourney,
@@ -64,6 +65,7 @@ export const { GET, POST, PUT } = serve({
     auditUsersTotalDonationAmountUsdInngest,
     auditUsersTotalDonationAmountUsdInngestAuditBatchOfUsers,
     initialSignUpUserCommunicationJourney,
+    backfillSMSStatusField,
     backfillCongressionalDistrictCronJob,
     welcomeSMSCommunicationJourney,
     goodbyeSMSCommunicationJourney,
