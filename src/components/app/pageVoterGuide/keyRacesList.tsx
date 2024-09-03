@@ -32,7 +32,7 @@ export const KeyRacesList = (props: KeyRacesListProps) => {
   > = {
     locale: locale,
     titleProps: {
-      size: 'xs',
+      size: 'xxs',
     },
     target: '_blank',
   }
