@@ -111,7 +111,7 @@ export interface GoogleCivicInfoResponse {
 
 interface GoogleCivicErrorResponse {
   error: {
-    code: 404 | 429
+    code: 404 | 429 | 400 | 401
     errors: object[]
     message: string
   }
