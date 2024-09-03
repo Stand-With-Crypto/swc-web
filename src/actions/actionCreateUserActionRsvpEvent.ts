@@ -149,7 +149,13 @@ async function createUser(sharedDependencies: Pick<SharedDependencies, 'localUse
   return createdUser
 }
 
-async function changeReceiveNotificationStatus({ userActionRsvpEventId, sharedDependencies }: {userActionRsvpEventId: string, sharedDependencies: Pick<SharedDependencies, 'sessionId' | 'analytics' | 'peopleAnalytics'>}) {
+async function changeReceiveNotificationStatus({
+  userActionRsvpEventId,
+  sharedDependencies,
+}: {
+  userActionRsvpEventId: string
+  sharedDependencies: Pick<SharedDependencies, 'sessionId' | 'analytics' | 'peopleAnalytics'>
+}) {
   await prismaClient.userActionRsvpEvent.update({
     where: {
       id: userActionRsvpEventId,
@@ -164,7 +170,7 @@ async function changeReceiveNotificationStatus({ userActionRsvpEventId, sharedDe
     actionType: UserActionType.RSVP_EVENT,
     campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.RSVP_EVENT,
     userState: 'Existing',
-    shouldReceiveNotifications: true
+    shouldReceiveNotifications: true,
   })
 }
 
@@ -242,7 +248,7 @@ async function createAction<U extends User>({
     actionType: UserActionType.RSVP_EVENT,
     campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.RSVP_EVENT,
     userState: isNewUser ? 'New' : 'Existing',
-    shouldReceiveNotifications: validatedInput.shouldReceiveNotifications
+    shouldReceiveNotifications: validatedInput.shouldReceiveNotifications,
   })
 
   return { userAction }
