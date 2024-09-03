@@ -45,10 +45,9 @@ const USER_ACTION_ROW_CTA_INFO: Record<
     actionType: UserActionType.VOTER_REGISTRATION,
     image: { src: '/actionTypeIcons/registerToVote.png' },
     text: 'Check your voter registration',
-    subtext:
-      "Double check your registration information or find out how to get registered - you'll get a free NFT.",
+    subtext: 'Double check your registration information or find out how to get registered.',
     shortText: "Make sure you're registered to vote",
-    shortSubtext: 'Get a free "I\'m a Voter" NFT',
+    shortSubtext: 'Double check your registration information or find out how to get registered.',
     canBeTriggeredMultipleTimes: true,
     WrapperComponent: UserActionFormVoterRegistrationDialog,
   },

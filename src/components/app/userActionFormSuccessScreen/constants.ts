@@ -6,8 +6,7 @@ import { ActiveClientUserActionType } from '@/utils/shared/activeUserAction'
 export const DEFAULT_USER_ACTION_FORM_SUCCESS_SCREEN_INFO = {
   WITHOUT_NFT:
     'Keep up the good work! Complete the actions below to continue your progress as a crypto advocate.',
-  WITH_NFT:
-    '... and got a free NFT for doing so! Complete the actions below to continue your progress as a crypto advocate.',
+  WITH_NFT: 'Complete the actions below to continue your progress as a crypto advocate.',
 }
 
 export const USER_ACTION_FORM_SUCCESS_SCREEN_INFO: Record<
