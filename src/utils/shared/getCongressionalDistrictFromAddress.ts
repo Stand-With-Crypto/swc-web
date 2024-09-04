@@ -108,6 +108,12 @@ export async function getCongressionalDistrictFromAddress(
     if (result.error.code === 429) {
       return { notFoundReason: 'CIVIC_API_QUOTA_LIMIT_REACHED' as const }
     }
+    if (result.error.code === 400) {
+      return { notFoundReason: 'CIVIC_API_BAD_REQUEST' as const }
+    }
+    if (result.error.code === 401) {
+      return { notFoundReason: 'CIVIC_API_UNAUTHORIZED' as const }
+    }
     return { notFoundReason: 'NOT_USA_ADDRESS' as const }
   }
 

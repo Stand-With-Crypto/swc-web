@@ -127,6 +127,37 @@ async function backfillUsCongressionalDistricts(
           },
         })
       }
+      if (
+        [
+          'NOT_USA_ADDRESS',
+          'NOT_SAME_STATE',
+          'NOT_SPECIFIC_ENOUGH',
+          'CIVIC_API_BAD_REQUEST',
+        ].includes(usCongressionalDistrict.notFoundReason)
+      ) {
+        logger.info(
+          `No usCongressionalDistrict found for address ${address.id} because ${usCongressionalDistrict.notFoundReason}. Updating the usCongressionalDistrict to 0`,
+        )
+
+        try {
+          await prismaClient.address.update({
+            where: {
+              id: address.id,
+            },
+            data: {
+              usCongressionalDistrict: '0',
+            },
+          })
+        } catch (error) {
+          Sentry.captureException(error, {
+            tags: {
+              domain: 'backfillUsCongressionalDistricts',
+              message: 'error getting upserting address congressional district metadata',
+            },
+          })
+        }
+      }
+
       continue
     }
 
