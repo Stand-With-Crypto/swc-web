@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import { UserActionType } from '@prisma/client'
 
 import { KeyRacesDialog } from '@/components/app/pageVoterGuide/keyRacesDialog'
@@ -41,13 +42,15 @@ export const VOTER_GUIDE_STEPS: VoterGuideStep[] = [
       'Find your polling location and check to see if there are early voting options in your district.',
     WrapperComponent: ({ children }) => {
       return (
-        <UserActionFormVotingInformationResearchedDialog
-          initialValues={{
-            campaignName: UserActionVotingInformationResearchedCampaignName['2024_ELECTION'],
-          }}
-        >
-          {children}
-        </UserActionFormVotingInformationResearchedDialog>
+        <Suspense fallback={children}>
+          <UserActionFormVotingInformationResearchedDialog
+            initialValues={{
+              campaignName: UserActionVotingInformationResearchedCampaignName['2024_ELECTION'],
+            }}
+          >
+            {children}
+          </UserActionFormVotingInformationResearchedDialog>
+        </Suspense>
       )
     },
     action: UserActionType.VOTING_INFORMATION_RESEARCHED,
