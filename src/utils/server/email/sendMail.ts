@@ -1,4 +1,4 @@
-import SendGrid from '@sendgrid/mail'
+import SendGrid, { ClientResponse, MailDataRequired } from '@sendgrid/mail'
 
 import { logger } from '@/utils/shared/logger'
 import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
@@ -35,7 +35,23 @@ export interface SendMailPayload {
   }
 }
 
-export async function sendMail(payload: SendMailPayload) {
+/**
+ * Send email using SendGrid
+ * @param payload: SendMailPayload
+ * @returns string
+ */
+export function sendMail(payload: SendMailPayload): Promise<string>
+
+/**
+ * Send emails using SendGrid
+ * @param payload: SendMailPayload[]
+ * @returns string[]
+ */
+export function sendMail(payload: SendMailPayload[]): Promise<string[]>
+
+export async function sendMail(
+  payload: SendMailPayload | SendMailPayload[],
+): Promise<string | string[]> {
   if (!SENDGRID_API_KEY || !SENDGRID_SENDER) {
     logger.debug(
       'Skipping `sendMail` call due to undefined `SENDGRID_API_KEY` or `SENDGRID_SENDER`',
@@ -44,15 +60,36 @@ export async function sendMail(payload: SendMailPayload) {
     return 'skipped-message-id'
   }
 
-  const [response] = await SendGrid.send({
-    from: SENDGRID_SENDER,
-    mailSettings: {
-      sandboxMode: {
-        enable: SENDGRID_SANDBOX_MODE === 'true',
-      },
-    },
-    ...payload,
-  })
+  const isMultiple = Array.isArray(payload)
 
-  return response.headers['x-message-id'] as string
+  const parsedPayload = isMultiple
+    ? payload.map(currentMessage => ({
+        from: SENDGRID_SENDER,
+        mailSettings: {
+          sandboxMode: {
+            enable: SENDGRID_SANDBOX_MODE === 'true',
+          },
+        },
+        ...currentMessage,
+      }))
+    : {
+        from: SENDGRID_SENDER,
+        mailSettings: {
+          sandboxMode: {
+            enable: SENDGRID_SANDBOX_MODE === 'true',
+          },
+        },
+        ...payload,
+      }
+
+  const response = await SendGrid.send(parsedPayload as MailDataRequired, isMultiple)
+
+  if (isMultiple) {
+    return response.map(
+      currentResponse =>
+        (currentResponse as [ClientResponse])[0].headers?.['x-message-id'] as string,
+    )
+  }
+
+  return response[0].headers?.['x-message-id'] as string
 }

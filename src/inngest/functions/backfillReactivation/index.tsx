@@ -163,13 +163,27 @@ export const backfillReactivationWithInngest = inngest.createFunction(
           },
         })
 
-        const emailResults = await sendBatchEmails(usersWithoutCommunicationJourney as User[])
+        const messageIds = (await sendBatchEmails(
+          usersWithoutCommunicationJourney as User[],
+        )) as string[]
 
-        const result = await persistBatchUserCommunication(emailResults)
+        if (messageIds?.length > 0) {
+          const emailResults = messageIds.map((messageId, index) => ({
+            userId: usersWithoutCommunicationJourney[index].id,
+            messageId,
+          }))
+
+          const result = await persistBatchUserCommunication(emailResults)
+
+          return {
+            message: `Sent initial sign up email to ${result.length} users`,
+            results: result,
+          }
+        }
 
         return {
-          message: `Sent initial sign up email to ${result.length} users`,
-          results: result,
+          message: 'No emails sent',
+          results: [],
         }
       })
 
@@ -231,49 +245,22 @@ async function persistBatchUserCommunication(emailResults: EmailResult[]) {
   return createdCommunications
 }
 
-async function sendBatchEmails(users: User[]): Promise<EmailResult[]> {
-  return await Promise.all(
-    users.map(async user => {
-      try {
-        const messageId = await sendInitialSignUpEmail(user)
-
-        if (messageId) {
-          return { userId: user.id, messageId }
+async function sendBatchEmails(users: User[]) {
+  const emailsPayload = users.map(user => {
+    const userSession = user.userSessions?.[0]
+    const completedActionTypes = user.userActions
+      .filter(action => Object.values(EmailActiveActions).includes(action.actionType))
+      .map(action => action.actionType as EmailActiveActions)
+    const currentSession = userSession
+      ? {
+          userId: userSession.userId,
+          sessionId: userSession.id,
         }
-      } catch (err) {
-        logger.error(`Error sending email to user ${user.id}:`, err)
+      : null
 
-        Sentry.captureException(err, {
-          extra: { userId: user.id },
-          tags: { domain: 'backfillReactivation' },
-          fingerprint: ['backfillReactivation', 'sendMail'],
-        })
-      }
-      return null
-    }),
-  ).then(results => results.filter(Boolean) as EmailResult[])
-}
+    const ReactivationReminderComponent = ReactivationReminder
 
-async function sendInitialSignUpEmail(user: User): Promise<string | null> {
-  if (!user.primaryUserEmailAddress) {
-    return null
-  }
-
-  const userSession = user.userSessions?.[0]
-  const completedActionTypes = user.userActions
-    .filter(action => Object.values(EmailActiveActions).includes(action.actionType))
-    .map(action => action.actionType as EmailActiveActions)
-  const currentSession = userSession
-    ? {
-        userId: userSession.userId,
-        sessionId: userSession.id,
-      }
-    : null
-
-  const ReactivationReminderComponent = ReactivationReminder
-
-  try {
-    return await sendMail({
+    return {
       to: user.primaryUserEmailAddress.emailAddress,
       subject: ReactivationReminderComponent.subjectLine,
       customArgs: {
@@ -286,14 +273,8 @@ async function sendInitialSignUpEmail(user: User): Promise<string | null> {
           session={currentSession}
         />,
       ),
-    })
-  } catch (err) {
-    Sentry.captureException(err, {
-      extra: { userId: user.id, emailTo: user.primaryUserEmailAddress.emailAddress },
-      tags: { domain: 'backfillReactivation' },
-      fingerprint: ['backfillReactivation', 'sendMail'],
-    })
+    }
+  })
 
-    return null
-  }
+  return await sendMail(emailsPayload)
 }
