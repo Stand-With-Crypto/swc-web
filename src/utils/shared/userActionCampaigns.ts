@@ -117,6 +117,4 @@ type UserActionAdditionalCampaigns = {
   [K in keyof UserActionCampaigns]?: UserActionCampaigns[K][]
 }
 
-export const USER_ACTIONS_WITH_ADDITIONAL_CAMPAIGN: Partial<UserActionAdditionalCampaigns> = {
-  [UserActionType.EMAIL]: [UserActionEmailCampaignName.ABC_PRESIDENTIAL_DEBATE_2024],
-}
+export const USER_ACTIONS_WITH_ADDITIONAL_CAMPAIGN: Partial<UserActionAdditionalCampaigns> = {}

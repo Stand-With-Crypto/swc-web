@@ -9,7 +9,6 @@ import { UserActionFormCallCongresspersonDialog } from '@/components/app/userAct
 import { UserActionFormActionUnavailable } from '@/components/app/userActionFormCommon/actionUnavailable'
 import { EMAIL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormEmailCongressperson/constants'
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
-import { UserActionFormEmailDebateDialog } from '@/components/app/userActionFormEmailDebate/dialog'
 import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTMint/dialog'
 import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/dialog'
 import { UserActionFormVoterAttestationDialog } from '@/components/app/userActionFormVoterAttestation/dialog'
@@ -25,7 +24,6 @@ import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountrie
 import { getIntlUrls } from '@/utils/shared/urls'
 import {
   USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
-  UserActionEmailCampaignName,
 } from '@/utils/shared/userActionCampaigns'
 import { getYourPoliticianCategoryShortDisplayName } from '@/utils/shared/yourPoliticianCategory'
 
@@ -154,18 +152,7 @@ const USER_ACTION_ROW_CTA_INFO: Record<
 const USER_ACTION_ROW_CTA_INFO_FROM_CAMPAIGN: Record<
   string,
   Omit<UserActionRowCTAProps, 'state'>
-> = {
-  [UserActionEmailCampaignName.ABC_PRESIDENTIAL_DEBATE_2024]: {
-    actionType: UserActionType.EMAIL,
-    image: { src: '/actionTypeIcons/email.png' }, // TODO: Replace with real ABC email icon
-    text: 'Ask ABC to include crypto questions at the Presidential Debate',
-    subtext: 'Send an email to ABC and tell them we need the candidates’ stance on crypto',
-    shortText: 'Ask ABC to include crypto questions at the Presidential Debate',
-    shortSubtext: 'Send an email to ABC and tell them we need the candidates’ stance on crypto',
-    canBeTriggeredMultipleTimes: true,
-    WrapperComponent: UserActionFormEmailDebateDialog,
-  },
-}
+> = {}
 
 export function getUserActionCTAInfo(actionType: ActiveClientUserActionType, campaign?: string) {
   if (!campaign || campaign === USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[actionType]) {
