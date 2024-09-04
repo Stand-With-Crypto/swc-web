@@ -46,7 +46,6 @@ export const GetInformedForm = (props: GetInformedFormProps) => {
   const { onFinish, initialValues, onUserActionCreated } = props
 
   const router = useRouter()
-  const scriptStatus = useGoogleMapsScript()
 
   const { mutate } = useApiResponseForUserPerformedUserActionTypes()
 
@@ -69,6 +68,7 @@ export const GetInformedForm = (props: GetInformedFormProps) => {
   const address = useWatch({
     control: form.control,
     name: 'address',
+    defaultValue: initialValues?.address,
   })
 
   const racesByAddressRequest = useRacesByAddress(address?.description, {
@@ -138,8 +138,10 @@ export const GetInformedForm = (props: GetInformedFormProps) => {
     }
   }
 
+  const scriptStatus = useGoogleMapsScript()
+
   useEffect(() => {
-    if (address?.description && scriptStatus === 'ready') {
+    if (address?.description && racesByAddressRequest.data && scriptStatus === 'ready') {
       void createViewKeyRacesAction()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -208,9 +210,7 @@ export const GetInformedForm = (props: GetInformedFormProps) => {
           <Button
             className="ml-auto min-w-[130px]"
             disabled={
-              form.formState.isSubmitting ||
-              racesByAddressRequest.isLoading ||
-              !form.formState.isValid
+              form.formState.isSubmitting || racesByAddressRequest.isLoading || !address.place_id
             }
             form="view-key-races-form"
             size="lg"
