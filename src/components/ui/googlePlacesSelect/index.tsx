@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react'
+import { cva } from 'class-variance-authority'
 import { MapPin } from 'lucide-react'
 import usePlacesAutocomplete from 'use-places-autocomplete'
 
 import { Combobox } from '@/components/ui/combobox'
-import { InputWithIcons } from '@/components/ui/inputWithIcons'
+import { InputWithIcons, InputWithIconsProps } from '@/components/ui/inputWithIcons'
 import { Spinner } from '@/components/ui/spinner'
 import { useGoogleMapsScript } from '@/hooks/useGoogleMapsScript'
 import { cn } from '@/utils/web/cn'
@@ -20,7 +21,7 @@ export type GooglePlacesSelectProps = {
    * vague addresses from being selected in the US.
    */
   shouldLimitUSAddresses?: boolean
-} & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange' | 'type'>
+} & Omit<InputWithIconsProps, 'value' | 'onChange' | 'type'>
 
 export const GooglePlacesSelect = React.forwardRef<
   React.ElementRef<'input'>,
@@ -41,7 +42,7 @@ export const GooglePlacesSelect = React.forwardRef<
   const {
     ready,
     value,
-    suggestions: { data },
+    suggestions: { data, loading: isLoadingSuggestions },
     setValue,
     init,
   } = usePlacesAutocomplete({
@@ -61,6 +62,7 @@ export const GooglePlacesSelect = React.forwardRef<
     : data
 
   const scriptStatus = useGoogleMapsScript()
+  const isLoading = loading || isLoadingSuggestions
 
   useEffect(() => {
     if (scriptStatus === 'ready') {
@@ -78,15 +80,23 @@ export const GooglePlacesSelect = React.forwardRef<
           className={cn(
             'text-muted-foreground',
             triggerProps.value && 'text-gray-500',
-            'h-auto cursor-pointer whitespace-normal text-left',
+            'cursor-pointer whitespace-normal text-left',
             triggerProps.open && 'outline-none ring-2 ring-ring ring-offset-2',
             className,
           )}
           disabled={disabled}
-          leftIcon={showIcon ? <MapPin className="h-4 w-4 text-gray-500" /> : undefined}
+          leftIcon={
+            showIcon ? (
+              <MapPin
+                className={mapPinVariants({
+                  size: inputProps?.variant,
+                })}
+              />
+            ) : undefined
+          }
           placeholder="select a location"
           ref={ref}
-          rightIcon={loading ? <Spinner /> : undefined}
+          rightIcon={isLoadingSuggestions ? <Spinner /> : undefined}
           value={triggerProps.value?.description || inputProps.placeholder || 'select a location'}
           {...inputProps}
           readOnly
@@ -95,7 +105,7 @@ export const GooglePlacesSelect = React.forwardRef<
       getOptionKey={val => val.place_id}
       getOptionLabel={val => val.description}
       inputValue={value}
-      isLoading={!ready}
+      isLoading={isLoading || !ready}
       onChange={propsOnChange}
       onChangeInputValue={setValue}
       open={open}
@@ -107,3 +117,16 @@ export const GooglePlacesSelect = React.forwardRef<
   )
 })
 GooglePlacesSelect.displayName = 'GooglePlacesSelect'
+
+const mapPinVariants = cva('text-gray-500', {
+  variants: {
+    size: {
+      sm: 'h-4 w-4',
+      md: 'h-4 w-4',
+      lg: 'h-6 w-6',
+    },
+  },
+  defaultVariants: {
+    size: 'md',
+  },
+})

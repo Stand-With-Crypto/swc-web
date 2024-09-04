@@ -127,7 +127,7 @@ export const UserActionFormVotingInformationResearched = (
                       <FormControl aria-invalid={!!error}>
                         <GooglePlacesSelect
                           {...field}
-                          className="h-14 rounded-full bg-secondary"
+                          className="rounded-full bg-secondary"
                           onChange={newAddress => {
                             form.clearErrors('root')
                             field.onChange(newAddress)
@@ -135,6 +135,7 @@ export const UserActionFormVotingInformationResearched = (
                           placeholder="Your full address"
                           ref={inputRef}
                           value={field.value}
+                          variant="lg"
                         />
                       </FormControl>
                       {!!error && <ErrorMessage>{error?.message}</ErrorMessage>}
