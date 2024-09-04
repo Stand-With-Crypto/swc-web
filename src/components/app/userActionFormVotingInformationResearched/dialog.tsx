@@ -6,6 +6,7 @@ import { useSearchParams } from 'next/navigation'
 import { z } from 'zod'
 
 import { UserActionFormDialog } from '@/components/app/userActionFormCommon/dialog'
+import { UserActionFormVotingInformationResearchedProps } from '@/components/app/userActionFormVotingInformationResearched'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useDialog } from '@/hooks/useDialog'
@@ -46,13 +47,17 @@ const buildElectoralUrl = (address: z.infer<typeof zodAddress>) => {
   return new URL(`/elections/${state.toLowerCase()}/${electionDate}?${params.toString()}`, baseUrl)
 }
 
+interface UserActionFormVotingInformationResearchedDialog
+  extends Partial<UserActionFormVotingInformationResearchedProps> {
+  children: React.ReactNode
+  defaultOpen?: boolean
+}
+
 export function UserActionFormVotingInformationResearchedDialog({
   children,
   defaultOpen = false,
-}: {
-  children: React.ReactNode
-  defaultOpen?: boolean
-}) {
+  ...formProps
+}: UserActionFormVotingInformationResearchedDialog) {
   const searchParams = useSearchParams()
 
   const dialogProps = useDialog({
@@ -82,6 +87,7 @@ export function UserActionFormVotingInformationResearchedDialog({
         </div>
       ) : (
         <UserActionFormVotingInformationResearched
+          {...formProps}
           initialValues={{
             address: user?.address
               ? {
@@ -89,8 +95,8 @@ export function UserActionFormVotingInformationResearchedDialog({
                   place_id: user?.address?.googlePlaceId,
                 }
               : undefined,
-            campaignName: UserActionVotingInformationResearchedCampaignName['2024_ELECTION'],
             shouldReceiveNotifications: false,
+            ...formProps.initialValues,
           }}
           onSuccess={handleSuccess}
         />

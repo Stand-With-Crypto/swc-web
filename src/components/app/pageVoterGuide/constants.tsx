@@ -1,13 +1,13 @@
 import { UserActionType } from '@prisma/client'
 
 import { KeyRacesDialog } from '@/components/app/pageVoterGuide/keyRacesDialog'
-import { UserActionFormVoterAttestationDialog } from '@/components/app/userActionFormVoterAttestation/dialog'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
+import { UserActionFormVotingInformationResearchedDialog } from '@/components/app/userActionFormVotingInformationResearched/dialog'
 import {
   UserActionCampaignName,
   UserActionViewKeyRacesCampaignName,
-  UserActionVoterAttestationCampaignName,
   UserActionVoterRegistrationCampaignName,
+  UserActionVotingInformationResearchedCampaignName,
 } from '@/utils/shared/userActionCampaigns'
 
 type VoterGuideStep = {
@@ -34,5 +34,23 @@ export const VOTER_GUIDE_STEPS: VoterGuideStep[] = [
     WrapperComponent: UserActionFormVoterRegistrationDialog,
     action: UserActionType.VOTER_REGISTRATION,
     campaignName: UserActionVoterRegistrationCampaignName.DEFAULT,
+  },
+  {
+    title: 'Get ready to vote',
+    description:
+      'Find your polling location and check to see if there are early voting options in your district.',
+    WrapperComponent: ({ children }) => {
+      return (
+        <UserActionFormVotingInformationResearchedDialog
+          initialValues={{
+            campaignName: UserActionVotingInformationResearchedCampaignName['2024_ELECTION'],
+          }}
+        >
+          {children}
+        </UserActionFormVotingInformationResearchedDialog>
+      )
+    },
+    action: UserActionType.VOTING_INFORMATION_RESEARCHED,
+    campaignName: UserActionVotingInformationResearchedCampaignName['2024_ELECTION'],
   },
 ]

@@ -29,7 +29,7 @@ import {
   VotingInformationResearchedFormValues,
 } from './formConfig'
 
-interface UserActionFormVotingInformationResearchedProps {
+export interface UserActionFormVotingInformationResearchedProps {
   onSuccess: (address: z.infer<typeof zodAddress>) => void
   initialValues?: Partial<VotingInformationResearchedFormValues>
 }
