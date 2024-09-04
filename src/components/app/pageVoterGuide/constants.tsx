@@ -6,7 +6,7 @@ import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActi
 import { UserActionFormVotingInformationResearchedDialog } from '@/components/app/userActionFormVotingInformationResearched/dialog'
 import {
   UserActionCampaignName,
-  UserActionViewKeyRacesCampaignName,
+  UserActionVoterAttestationCampaignName,
   UserActionVoterRegistrationCampaignName,
   UserActionVotingInformationResearchedCampaignName,
 } from '@/utils/shared/userActionCampaigns'
@@ -24,22 +24,21 @@ export const ANALYTICS_NAME_USER_ACTION_FORM_GET_INFORMED = 'User Action Form Ge
 export const VOTER_GUIDE_STEPS: VoterGuideStep[] = [
   {
     title: 'Get Informed',
-    description: 'View key races in your area and see where politicians stand on crypto.',
+    description: 'See where politicians on your ballot stand on crypto.',
     WrapperComponent: KeyRacesDialog,
-    action: UserActionType.VIEW_KEY_RACES,
-    campaignName: UserActionViewKeyRacesCampaignName['2024_ELECTION'],
+    action: UserActionType.VOTER_ATTESTATION,
+    campaignName: UserActionVoterAttestationCampaignName.DEFAULT,
   },
   {
-    title: 'Make sure you’re registered to vote',
-    description: 'Check your voter registration status. Earn a free NFT from pplpleasr.',
+    title: 'Check your voter registration',
+    description: 'Make sure you’re registered to vote in this year’s election.',
     WrapperComponent: UserActionFormVoterRegistrationDialog,
     action: UserActionType.VOTER_REGISTRATION,
     campaignName: UserActionVoterRegistrationCampaignName.DEFAULT,
   },
   {
-    title: 'Get ready to vote',
-    description:
-      'Find your polling location and check to see if there are early voting options in your district.',
+    title: 'Prepare to vote',
+    description: 'Find your polling location and learn about early voting options.',
     WrapperComponent: ({ children }) => {
       return (
         <Suspense fallback={children}>
