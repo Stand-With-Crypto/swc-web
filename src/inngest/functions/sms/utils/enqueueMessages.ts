@@ -59,7 +59,7 @@ export async function enqueueMessages(payload: EnqueueMessagePayload[], attempt 
           const parsedBody = addVariablesToMessage(body, {
             firstName: user?.firstName,
             lastName: user?.lastName,
-            sessionId: user?.userSessions[0]?.id,
+            sessionId: user?.userSessions?.[0]?.id,
             userId: user?.id,
           })
 
