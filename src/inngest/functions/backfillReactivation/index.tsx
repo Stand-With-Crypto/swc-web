@@ -1,6 +1,5 @@
 import { CommunicationType, UserCommunicationJourneyType } from '@prisma/client'
 import { render } from '@react-email/components'
-import * as Sentry from '@sentry/nextjs'
 
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
