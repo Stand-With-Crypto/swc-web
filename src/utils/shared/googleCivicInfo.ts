@@ -148,13 +148,15 @@ export function getGoogleCivicDataFromAddress(address: string) {
       isValidRequest: (response: Response) =>
         (response.status >= 200 && response.status < 300) ||
         response.status === 404 ||
-        response.status === 429,
+        response.status === 429 ||
+        response.status === 400 ||
+        response.status === 401,
     },
   )
     .then(res => res.json())
     .then(res => {
       const response = res as GoogleCivicInfoResponse | GoogleCivicErrorResponse
-      if ('error' in response && response.error.code === 429) {
+      if ('error' in response && [429, 400, 401].includes(response.error.code)) {
         return response
       }
       civicDataByAddressCache.set(apiUrl.toString(), response)

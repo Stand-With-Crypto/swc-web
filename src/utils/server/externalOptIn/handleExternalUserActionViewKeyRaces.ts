@@ -86,7 +86,7 @@ export async function handleExternalUserActionViewKeyRaces(
 
   const userAddressCongressionalDistrict =
     userAddress?.address?.usCongressionalDistrict &&
-    userAddress?.address?.usCongressionalDistrict !== 'NOT_FOUND'
+    userAddress?.address?.usCongressionalDistrict !== '0'
       ? userAddress?.address?.usCongressionalDistrict
       : null
 
@@ -190,7 +190,7 @@ async function updateUserActionViewKeyRaces(
   const updateData: Record<string, string | undefined> = {
     ...(usaState !== null && { usaState }),
     ...(usCongressionalDistrict !== null &&
-      usCongressionalDistrict !== 'NOT_FOUND' && { usCongressionalDistrict }),
+      usCongressionalDistrict !== '0' && { usCongressionalDistrict }),
   }
 
   return prismaClient.userAction.update({

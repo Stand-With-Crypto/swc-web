@@ -114,7 +114,7 @@ async function _actionCreateUserActionViewKeyRaces(input: CreateActionViewKeyRac
 
   const userAddressCongressionalDistrict =
     userAddress?.address?.usCongressionalDistrict &&
-    userAddress?.address?.usCongressionalDistrict !== 'NOT_FOUND'
+    userAddress?.address?.usCongressionalDistrict !== '0'
       ? userAddress?.address?.usCongressionalDistrict
       : null
 

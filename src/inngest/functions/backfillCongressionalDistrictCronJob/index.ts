@@ -128,12 +128,15 @@ async function backfillUsCongressionalDistricts(
         })
       }
       if (
-        ['NOT_USA_ADDRESS', 'NOT_SAME_STATE', 'NOT_SPECIFIC_ENOUGH'].includes(
-          usCongressionalDistrict.notFoundReason,
-        )
+        [
+          'NOT_USA_ADDRESS',
+          'NOT_SAME_STATE',
+          'NOT_SPECIFIC_ENOUGH',
+          'CIVIC_API_BAD_REQUEST',
+        ].includes(usCongressionalDistrict.notFoundReason)
       ) {
         logger.info(
-          `No usCongressionalDistrict found for address ${address.id} because ${usCongressionalDistrict.notFoundReason}. Updating the usCongressionalDistrict to NOT_FOUND`,
+          `No usCongressionalDistrict found for address ${address.id} because ${usCongressionalDistrict.notFoundReason}. Updating the usCongressionalDistrict to 0`,
         )
 
         try {
@@ -142,7 +145,7 @@ async function backfillUsCongressionalDistricts(
               id: address.id,
             },
             data: {
-              usCongressionalDistrict: 'NOT_FOUND',
+              usCongressionalDistrict: '0',
             },
           })
         } catch (error) {
