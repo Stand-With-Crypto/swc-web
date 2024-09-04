@@ -57,10 +57,10 @@ export async function enqueueMessages(payload: EnqueueMessagePayload[], attempt 
           const user = await getUserByPhoneNumber(phoneNumber)
 
           const parsedBody = addVariablesToMessage(body, {
-            firstName: user.firstName,
-            lastName: user.lastName,
-            sessionId: user.userSessions[0].id,
-            userId: user.id,
+            firstName: user?.firstName,
+            lastName: user?.lastName,
+            sessionId: user?.userSessions[0]?.id,
+            userId: user?.id,
           })
 
           const queuedMessage = await sendSMS({
