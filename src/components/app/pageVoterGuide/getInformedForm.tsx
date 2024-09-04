@@ -210,7 +210,7 @@ export const GetInformedForm = (props: GetInformedFormProps) => {
           <Button
             className="ml-auto min-w-[130px]"
             disabled={
-              form.formState.isSubmitting || racesByAddressRequest.isLoading || !address.place_id
+              form.formState.isSubmitting || racesByAddressRequest.isLoading || !address?.place_id
             }
             form="view-key-races-form"
             size="lg"
