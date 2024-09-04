@@ -22,9 +22,7 @@ import { ActiveClientUserActionType } from '@/utils/shared/activeUserAction'
 import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { getIntlUrls } from '@/utils/shared/urls'
-import {
-  USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
-} from '@/utils/shared/userActionCampaigns'
+import { USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns'
 import { getYourPoliticianCategoryShortDisplayName } from '@/utils/shared/yourPoliticianCategory'
 
 const USER_ACTION_ROW_CTA_INFO: Record<
