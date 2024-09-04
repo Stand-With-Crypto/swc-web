@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { FormItemSkeleton } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
@@ -9,7 +10,7 @@ import { Textarea } from '@/components/ui/textarea'
 
 export function UserActionFormEmailDebateSkeleton() {
   return (
-    <form className="flex max-h-dvh flex-col">
+    <form className="flex max-h-dvh w-full flex-col">
       <LoadingOverlay />
       <ScrollArea>
         <div className="space-y-4 p-6 md:space-y-8 md:px-12">
@@ -17,8 +18,9 @@ export function UserActionFormEmailDebateSkeleton() {
             Ask ABC to feature crypto at the Presidential Debate
           </PageTitle>
           <PageSubTitle className="mb-7">
-            Crypto deserves to be a presidential debate topic. Send an email to ABC and ask them to
-            include questions around crypto in the debate.
+            Crypto deserves to be a topic at the Presidential Debate. Send a note to ABC and ask
+            them to make sure that the 52 million crypto owners in America are represented on the
+            debate stage.
           </PageSubTitle>
           <div className="space-y-4">
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -58,6 +60,14 @@ Thank you for your consideration.`}
               </FormItemSkeleton>
             </div>
           </div>
+        </div>
+        <div>
+          <p className="text-xs text-fontcolor-muted">
+            By submitting, I understand that Stand With Crypto and its vendors may collect and use
+            my personal information subject to the{' '}
+            <InternalLink href="#">SWC Privacy Policy</InternalLink> and the{' '}
+            <ExternalLink href="#">Quorum Privacy Policy</ExternalLink>.
+          </p>
         </div>
       </ScrollArea>
       <div
