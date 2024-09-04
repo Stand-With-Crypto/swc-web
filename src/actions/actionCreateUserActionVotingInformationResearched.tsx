@@ -26,7 +26,7 @@ import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountrie
 import { UserActionVotingInformationResearchedCampaignName } from '@/utils/shared/userActionCampaigns'
 import { zodAddress } from '@/validation/fields/zodAddress'
 
-export const createActionVotingInformationResearchedInputValidationSchema = object({
+const createActionVotingInformationResearchedInputValidationSchema = object({
   campaignName: nativeEnum(UserActionVotingInformationResearchedCampaignName),
   shouldReceiveNotifications: z.boolean(),
   address: zodAddress,
@@ -100,14 +100,14 @@ async function _actionCreateUserActionVotingInformationResearched(
   const existingActionAddress = {
     stateCode:
       existingVotingInformationResearchAction?.userActionVotingInformationResearched?.address
-        ?.administrativeAreaLevel1,
+        ?.administrativeAreaLevel1 ?? null,
     congressionalDistrict:
       existingVotingInformationResearchAction?.userActionVotingInformationResearched?.address
-        ?.usCongressionalDistrict,
+        ?.usCongressionalDistrict ?? null,
   }
   const newAddress = {
-    stateCode: validatedInput.data.address?.administrativeAreaLevel1,
-    congressionalDistrict: validatedInput.data.address?.usCongressionalDistrict,
+    stateCode: validatedInput.data.address?.administrativeAreaLevel1 ?? null,
+    congressionalDistrict: validatedInput.data.address?.usCongressionalDistrict ?? null,
   }
 
   if (existingVotingInformationResearchAction) {
