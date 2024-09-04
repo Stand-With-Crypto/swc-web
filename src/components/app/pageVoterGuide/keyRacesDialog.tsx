@@ -1,6 +1,6 @@
 'use client'
 
-import { ReactNode, useState } from 'react'
+import { ReactNode, useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
 
 import { ANALYTICS_NAME_USER_ACTION_FORM_GET_INFORMED } from '@/components/app/pageVoterGuide/constants'
@@ -35,6 +35,12 @@ export const KeyRacesDialog = (props: KeyRacesDialogProps) => {
   const user = session?.user
 
   const [toastOpen, setToastOpen] = useState(false)
+
+  useEffect(() => {
+    if (toastOpen && session.isLoggedIn) {
+      setToastOpen(false)
+    }
+  }, [session.isLoggedIn, toastOpen])
 
   const dialogProps = useDialog({
     initialOpen: defaultOpen,
