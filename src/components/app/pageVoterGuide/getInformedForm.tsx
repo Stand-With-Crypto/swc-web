@@ -68,7 +68,10 @@ export const GetInformedForm = (props: GetInformedFormProps) => {
   const address = useWatch({
     control: form.control,
     name: 'address',
-    defaultValue: initialValues?.address,
+    defaultValue: initialValues?.address || {
+      description: '',
+      place_id: '',
+    },
   })
 
   const racesByAddressRequest = useRacesByAddress(address?.description, {
@@ -210,7 +213,10 @@ export const GetInformedForm = (props: GetInformedFormProps) => {
           <Button
             className="ml-auto min-w-[130px]"
             disabled={
-              form.formState.isSubmitting || racesByAddressRequest.isLoading || !address?.place_id
+              form.formState.isSubmitting ||
+              racesByAddressRequest.isLoading ||
+              !address?.place_id ||
+              !!error
             }
             form="view-key-races-form"
             size="lg"
