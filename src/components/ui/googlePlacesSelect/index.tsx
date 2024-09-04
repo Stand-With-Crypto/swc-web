@@ -50,6 +50,7 @@ export const GooglePlacesSelect = React.forwardRef<
       language: 'en',
       types: ['street_address', 'premise', 'postal_code', 'subpremise', 'route'],
     },
+    initOnMount: false,
   })
   // For some countries, the route type is required to show addresses options correctly
   // But for US, if we allow users to use an address with the route type,
