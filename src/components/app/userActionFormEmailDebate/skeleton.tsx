@@ -16,7 +16,7 @@ export function UserActionFormEmailDebateSkeleton() {
       <LoadingOverlay />
       <ScrollArea>
         <div className={cn(dialogContentPaddingStyles, 'space-y-4 md:space-y-8')}>
-          <PageTitle className="mb-3" size="sm">
+          <PageTitle className="mb-3 w-max" size="sm">
             Ask ABC to feature crypto at the Presidential Debate
           </PageTitle>
           <PageSubTitle className="mb-7">
@@ -63,7 +63,7 @@ Thank you for your consideration.`}
             </div>
           </div>
         </div>
-        <div>
+        <div className="pb-4 pl-4">
           <p className="text-xs text-fontcolor-muted">
             By submitting, I understand that Stand With Crypto and its vendors may collect and use
             my personal information subject to the{' '}
