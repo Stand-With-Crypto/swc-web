@@ -42,7 +42,7 @@ import { zodUserActionFormEmailDebateAction } from '@/validation/forms/zodUserAc
 
 const logger = getLogger(`actionCreateUserActionEmailDebate`)
 
-const DEBATE_RECEIVER_EMAIL = 'email@email.com' // TODO: REPLACE WITH REAL EMAIL
+const DEBATE_RECEIVER_EMAIL = 'news.tips@abc.com'
 
 type UserWithRelations = User & {
   primaryUserCryptoAddress: UserCryptoAddress | null

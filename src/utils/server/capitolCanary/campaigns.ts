@@ -32,7 +32,7 @@ export const enum CapitolCanaryCampaignId {
   DEFAULT_EMAIL_REPRESENTATIVE_AND_SENATORS = 145319,
   DEFAULT_EMAIL_SENATORS = 145317,
 
-  ABC_EMAIL = 12345, // TODO: REPLACE WITH REAL CAMPAIGN
+  ABC_EMAIL = 147473,
 }
 
 // These campaign names should map 1:1 with the campaign IDs above.
