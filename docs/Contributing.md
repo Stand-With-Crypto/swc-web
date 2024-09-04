@@ -92,9 +92,18 @@ If you have been assigned to fix an issue or develop a new feature, please follo
 
 If you are not a core contributor, reach out to one to make any DB schema updates your PR needs. If you're a core contributor, follow these steps whenever you need to make Prisma Schema changes
 
-- `npx prisma generate` - updates your Prisma TypeScript definitions
-- Then, depending on your situation, run either of the following:
-  - `npx prisma db push` - if your changes are _not_ breaking and you want to maintain the values in your database, then run this command; this will simply push the schema changes to the database instance you are connected to
+1. First of all you should change `schema.prisma` with the database changes you want to make
+2. Run `npx prisma generate`, that will generate updated TypeScript definitions for your local env
+3. With the `DATABASE_URL` env configured to your personal PlanetScale branch, run `npx prisma db push`, that will push the new schema to your DB
+4. Run `npm run db:seed` to fill the preview database with mocked data
+5. When testing your feature in preview, you should link your preview env to your personal database branch. To do that do the following
+   1. Go to `Vercel > Settings > Environment Variables`
+   2. In the "Create New" form, uncheck `Production` and `Development` and in "Select custom branch", search and select your gh branch
+   3. Add a `DATABASE_URL` variable with the same value you're using locally
+   4. You might need to redeploy your preview env after doing this
+6. When you're ready to go you'll create a PlanetScale PR from your branch to `testing` before going live, that is to ensure testing is never behind production for any reason
+7. If you want you can take this time to test your changes on `testing.standwithcrypto.org`, that preview is using the `testing` db and the codebase from `main`
+8. When the `testing` PR is closed, you should open another one from `testing` to `production`, that should be closed before you trigger your production deploy
 
 ### Running One Time Scripts in Testing or Production Environment
 
