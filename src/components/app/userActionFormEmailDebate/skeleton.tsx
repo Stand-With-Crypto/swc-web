@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button'
+import { dialogContentPaddingStyles } from '@/components/ui/dialog/styles'
 import { FormItemSkeleton } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
@@ -7,13 +8,14 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Textarea } from '@/components/ui/textarea'
+import { cn } from '@/utils/web/cn'
 
 export function UserActionFormEmailDebateSkeleton() {
   return (
     <form className="flex max-h-dvh w-full flex-col">
       <LoadingOverlay />
       <ScrollArea>
-        <div className="space-y-4 p-6 md:space-y-8 md:px-12">
+        <div className={cn(dialogContentPaddingStyles, 'space-y-4 md:space-y-8')}>
           <PageTitle className="mb-3" size="sm">
             Ask ABC to feature crypto at the Presidential Debate
           </PageTitle>
