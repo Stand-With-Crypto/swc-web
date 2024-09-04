@@ -57,10 +57,9 @@ export default function RegisterToVoteReminderEmail({
           crypto will have perhaps the largest impact of any action you can take.
           <br />
           <br />
-          Luckily, SWC makes it easy to register to vote. You can check your voter registration and
-          mint an “I'm A Voter” NFT right here on SWC's website. After you do, make sure to
-          encourage other members of the crypto community to do the same by posting on X and tagging
-          us{' '}
+          Luckily, SWC makes it easy to register to vote. You can check your voter registration
+          right here on SWC's website. After you do, make sure to encourage other members of the
+          crypto community to do the same by posting on X and tagging us{' '}
           <Link className="text-inherit underline" href={SOCIAL_MEDIA_URL.twitter}>
             @StandWithCrypto
           </Link>

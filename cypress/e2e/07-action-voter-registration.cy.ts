@@ -1,7 +1,5 @@
 /// <reference types="cypress" />
 
-import { mockRandomUser } from 'cypress/fixture/mocks'
-
 describe('action - voter registration', () => {
   describe('not signed in voter registration flows', () => {
     it('should navigate back and forth between the asked options yes, no and not sure', () => {
@@ -12,7 +10,7 @@ describe('action - voter registration', () => {
 
       cy.get('button[type="button"]').contains('Yes').click()
 
-      cy.contains('Awesome, thank you for being registered')
+      cy.contains('Thanks for being registered!')
 
       cy.get('[data-testid="action-form-back-button"]').click()
 
@@ -46,13 +44,9 @@ describe('action - voter registration', () => {
         searchText: 'California',
       })
 
-      cy.get('a[data-testid="step2-cta-anchor"]').trigger('click', { force: true })
-
-      cy.get('button[type="button"]').contains('Claim NFT').click()
-
-      cy.contains("Claim “I'm a Voter” NFT")
-
-      cy.get('button[type="button"]').contains('Claim NFT').click()
+      cy.get('button')
+        .contains(/register to vote/i)
+        .trigger('click', { force: true })
 
       // waiting for Inngest to consume job
       cy.contains('Nice work!')
@@ -88,15 +82,9 @@ describe('action - voter registration', () => {
         searchText: 'California',
       })
 
-      cy.get('a[data-testid="step2-cta-anchor"]').trigger('click', { force: true })
-
-      cy.get('button[type="button"]').contains('Claim NFT').click()
-
-      cy.contains("Claim “I'm a Voter” NFT")
-
-      cy.intercept('/api/identified-user/claimed-opt-in-nft').as('hasOptInNft')
-
-      cy.get('button[type="button"]').contains('Claim NFT').click()
+      cy.get('button')
+        .contains(/check my registration status/i)
+        .trigger('click', { force: true })
 
       // waiting for Inngest to consume job
       cy.contains('You registered to vote!').should('be.visible')
