@@ -19,9 +19,10 @@ export function PageVoterGuide() {
       </div>
 
       <div className="space-y-2">
-        <PageTitle size="xs">Your voter journey</PageTitle>
+        <PageTitle size="xs">Voter guide</PageTitle>
         <PageSubTitle>
-          Get informed, verify your registration status, and find a polling location near you.
+          This year's election is critical to the future of crypto. Here's how to become an informed
+          voter.
         </PageSubTitle>
       </div>
 
