@@ -34,6 +34,11 @@ async function apiResponseForUserFullProfileInfo() {
             userActionRsvpEvent: true,
             userActionVoterAttestation: true,
             userActionViewKeyRaces: true,
+            userActionVotingInformationResearched: {
+              include: {
+                address: true,
+              },
+            },
           },
         },
       },

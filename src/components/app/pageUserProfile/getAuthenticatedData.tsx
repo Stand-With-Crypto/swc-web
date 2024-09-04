@@ -48,6 +48,11 @@ export async function getAuthenticatedData() {
           userActionRsvpEvent: true,
           userActionVoterAttestation: true,
           userActionViewKeyRaces: true,
+          userActionVotingInformationResearched: {
+            include: {
+              address: true,
+            },
+          },
         },
       },
     },

@@ -40,6 +40,7 @@ import {
   UserActionViewKeyRacesCampaignName,
   UserActionVoterAttestationCampaignName,
   UserActionVoterRegistrationCampaignName,
+  UserActionVotingInformationResearchedCampaignName,
 } from '@/utils/shared/userActionCampaigns'
 
 import NFTMintStatus = $Enums.NFTMintStatus
@@ -86,6 +87,9 @@ export const ACTION_NFT_SLUG: Record<
   },
   [UserActionType.VIEW_KEY_RACES]: {
     [UserActionViewKeyRacesCampaignName['2024_ELECTION']]: null,
+  },
+  [UserActionType.VOTING_INFORMATION_RESEARCHED]: {
+    [UserActionVotingInformationResearchedCampaignName['2024_ELECTION']]: null,
   },
 }
 

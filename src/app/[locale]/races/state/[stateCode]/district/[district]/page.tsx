@@ -1,7 +1,7 @@
 import { flatten, times } from 'lodash-es'
 import { Metadata } from 'next'
 
-import { LocationRaceSpecific } from '@/components/app/pageLocationRaceSpecific'
+import { LocationRaceSpecific } from '@/components/app/pageLocationKeyRaces/locationRaceSpecific'
 import { queryDTSILocationDistrictSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationDistrictSpecificInformation'
 import { PageProps } from '@/types'
 import { formatDTSIDistrictId } from '@/utils/dtsi/dtsiPersonRoleUtils'
@@ -18,7 +18,7 @@ import { zodNormalizedDTSIDistrictId } from '@/validation/fields/zodNormalizedDT
 import { zodUsaState } from '@/validation/fields/zodUsaState'
 
 export const dynamic = 'error'
-export const dynamicParams = toBool(process.env.MINIMIZE_PAGE_PRE_GENERATION)
+export const dynamicParams = false
 export const revalidate = SECONDS_DURATION['10_MINUTES']
 
 type LocationDistrictSpecificPageProps = PageProps<{

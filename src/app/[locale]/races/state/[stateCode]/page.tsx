@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import { LocationStateSpecific } from '@/components/app/pageLocationStateSpecific'
+import { LocationStateSpecific } from '@/components/app/pageLocationKeyRaces/locationStateSpecific'
 import { queryDTSILocationStateSpecificInformation } from '@/data/dtsi/queries/queryDTSILocationStateSpecificInformation'
 import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
@@ -14,7 +14,7 @@ import {
 import { zodUsaState } from '@/validation/fields/zodUsaState'
 
 export const dynamic = 'error'
-export const dynamicParams = toBool(process.env.MINIMIZE_PAGE_PRE_GENERATION)
+export const dynamicParams = false
 export const revalidate = SECONDS_DURATION['10_MINUTES']
 
 type LocationStateSpecificPageProps = PageProps<{

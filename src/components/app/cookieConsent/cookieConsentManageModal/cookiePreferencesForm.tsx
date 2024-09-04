@@ -33,9 +33,9 @@ const FIELDS_CONFIG = [
   },
   {
     key: OptionalCookieConsentTypes.TARGETING,
-    label: 'Targeting',
+    label: 'Targeting & Analytical',
     helpText:
-      'Analytical cookies are used to understand how visitors interact with the website. These cookies help provide information on metrics such as the number of visitors, bounce rate, traffic source, etc. Personal information obtained from these cookies may be shared with third party analytics partners.',
+      'Targeting cookies help us better tailor online advertising to you. Analytical cookies are used to understand how visitors interact with the website. These cookies help provide information on metrics such as the number of visitors, bounce rate, traffic source, etc. Personal information obtained from both types of cookies may be shared with third party marketing and/or analytics partners.',
   },
 ]
 

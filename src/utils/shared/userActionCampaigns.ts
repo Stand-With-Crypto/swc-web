@@ -14,6 +14,7 @@ export const ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN = [
   UserActionType.VIEW_KEY_RACES,
   UserActionType.RSVP_EVENT,
   UserActionType.VIEW_KEY_RACES,
+  UserActionType.VOTING_INFORMATION_RESEARCHED,
 ] as const
 export type ActiveClientUserActionWithCampaignType =
   (typeof ACTIVE_CLIENT_USER_ACTION_WITH_CAMPAIGN)[number]
@@ -61,6 +62,9 @@ export enum UserActionRsvpEventCampaignName {
 export enum UserActionViewKeyRacesCampaignName {
   '2024_ELECTION' = '2024_ELECTION',
 }
+export enum UserActionVotingInformationResearchedCampaignName {
+  '2024_ELECTION' = '2024_ELECTION',
+}
 
 export type UserActionCampaignName =
   | UserActionEmailCampaignName
@@ -74,6 +78,7 @@ export type UserActionCampaignName =
   | UserActionTweetAtPersonCampaignName
   | UserActionVoterAttestationCampaignName
   | UserActionViewKeyRacesCampaignName
+  | UserActionVotingInformationResearchedCampaignName
 
 export type UserActionCampaigns = {
   [UserActionType.EMAIL]: UserActionEmailCampaignName
@@ -88,6 +93,7 @@ export type UserActionCampaigns = {
   [UserActionType.VOTER_ATTESTATION]: UserActionVoterAttestationCampaignName
   [UserActionType.VIEW_KEY_RACES]: UserActionViewKeyRacesCampaignName
   [UserActionType.RSVP_EVENT]: UserActionRsvpEventCampaignName
+  [UserActionType.VOTING_INFORMATION_RESEARCHED]: UserActionVotingInformationResearchedCampaignName
 }
 
 export const USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
@@ -103,6 +109,8 @@ export const USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP = {
   [UserActionType.VOTER_ATTESTATION]: UserActionVoterAttestationCampaignName.DEFAULT,
   [UserActionType.VIEW_KEY_RACES]: UserActionViewKeyRacesCampaignName['2024_ELECTION'],
   [UserActionType.RSVP_EVENT]: UserActionRsvpEventCampaignName.DEFAULT,
+  [UserActionType.VOTING_INFORMATION_RESEARCHED]:
+    UserActionVotingInformationResearchedCampaignName['2024_ELECTION'],
 } satisfies Record<ActiveClientUserActionWithCampaignType, string>
 
 type UserActionAdditionalCampaigns = {

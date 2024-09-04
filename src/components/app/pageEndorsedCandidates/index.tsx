@@ -1,3 +1,8 @@
+'use client'
+
+import { useEffect } from 'react'
+
+import { actionCreateUserActionViewKeyRaces } from '@/actions/actionCreateUserActionViewKeyRaces'
 import { DarkHeroSection } from '@/components/app/darkHeroSection'
 import { DTSIPersonHeroCard } from '@/components/app/dtsiPersonHeroCard'
 import { DTSIPersonHeroCardRow } from '@/components/app/dtsiPersonHeroCard/dtsiPersonHeroCardRow'
@@ -16,6 +21,11 @@ interface LocationStateSpecificProps extends DTSI_EndorsedCandidatesQuery {
 
 export function PageEndorsedCandidates({ people, locale }: LocationStateSpecificProps) {
   const urls = getIntlUrls(locale)
+
+  useEffect(() => {
+    void actionCreateUserActionViewKeyRaces()
+  }, [])
+
   return (
     <div className="space-y-20">
       <DarkHeroSection>

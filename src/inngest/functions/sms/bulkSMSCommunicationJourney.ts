@@ -67,28 +67,28 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
       throw new NonRetriableError('Missing campaign name')
     }
 
-    const logInfo = (key: string, info: object) =>
+    const logInfo = (key: string, info?: object) =>
       logger.info('bulk-info', key, JSON.stringify(info))
 
     // SMS messages over 160 characters are split into 153-character segments due to data headers.
     const getWaitingTimeInSeconds = (totalSegments: number) =>
       totalSegments / MESSAGE_SEGMENTS_PER_SECOND
 
-    if (sleepTime) {
-      await step.sleep('scheduled-sleep', sleepTime)
-    }
-
-    const phoneNumbersThatShouldReceiveWelcomeMessage = await fetchAllPhoneNumbers(
-      {
-        campaignName,
-        includePendingDoubleOptIn,
-        userWhereInput,
-      },
-      false,
+    const phoneNumbersThatShouldReceiveWelcomeText = await step.run(
+      'fetch-phone-numbers-that-should-receive-welcome-text',
+      () =>
+        fetchAllPhoneNumbers(
+          {
+            campaignName,
+            includePendingDoubleOptIn,
+            userWhereInput,
+          },
+          false,
+        ),
     )
 
     let enqueueMessagesPayload: EnqueueMessagePayload[] =
-      phoneNumbersThatShouldReceiveWelcomeMessage.map(phoneNumber => ({
+      phoneNumbersThatShouldReceiveWelcomeText.map(phoneNumber => ({
         phoneNumber,
         messages: [
           {
@@ -103,13 +103,15 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
         ],
       }))
 
-    const phoneNumberThatAlreadyReceivedWelcomeMessage = await fetchAllPhoneNumbers(
-      {
-        campaignName,
-        includePendingDoubleOptIn,
-        userWhereInput,
-      },
-      true,
+    const phoneNumberThatAlreadyReceivedWelcomeMessage = await step.run('fetch-phone-numbers', () =>
+      fetchAllPhoneNumbers(
+        {
+          campaignName,
+          includePendingDoubleOptIn,
+          userWhereInput,
+        },
+        true,
+      ),
     )
 
     enqueueMessagesPayload = enqueueMessagesPayload.concat(
@@ -128,15 +130,17 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
 
     const payloadChunks = chunk(enqueueMessagesPayload, TWILIO_RATE_LIMIT)
 
-    const { segments: totalSegmentsToSend, messages: totalMessagesToSend } =
-      countMessagesAndSegments(enqueueMessagesPayload)
+    const { segments: totalSegmentsToSend, messages: totalMessagesToSend } = await step.run(
+      'count-messages-and-segments',
+      () => countMessagesAndSegments(enqueueMessagesPayload),
+    )
 
     const totalTime = getWaitingTimeInSeconds(totalSegmentsToSend)
 
     const bulkInfo = {
       totalSegmentsToSend,
       totalMessagesToSend,
-      totalMessagesWithWelcomeText: phoneNumbersThatShouldReceiveWelcomeMessage.length,
+      totalMessagesWithWelcomeText: phoneNumbersThatShouldReceiveWelcomeText.length,
       totalTime: formatTime(totalTime),
       batches: payloadChunks.length,
     }
@@ -147,50 +151,30 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
       logInfo('initial-info', bulkInfo)
     }
 
-    let iteration = 0
-    let hasMoreMessages = true
+    if (sleepTime) {
+      logInfo('scheduled-sleep', { sleepTime })
+      await step.sleep('scheduled-sleep', sleepTime)
+    }
+
     let totalQueuedMessages = 0
     let totalQueuedSegments = 0
-    let totalTimeTaken = 0
-    while (hasMoreMessages) {
+    let totalTimeToSendAllSegments = 0
+
+    let segmentsInQueue = 0
+    let timeToEmptyQueue = 0
+    for (let i = 0; i < payloadChunks.length; i += 1) {
+      const payloadChunk = payloadChunks[i]
+
       const { queuedMessages, queuedSegments, timeToSendAllSegments } = await step.run(
         `enqueue-messages`,
         async () => {
           let queuedMessages = 0
           let queuedSegments = 0
-          let hasSpaceLeftInQueue = true
 
-          while (hasSpaceLeftInQueue) {
-            const payloadChunk = payloadChunks[iteration]
-            const nextPayload = payloadChunks[iteration + 1]
+          const { messages, segments } = await enqueueMessages(payloadChunk)
 
-            // If we wont use the full queue, there's no need for this validation
-            if (nextPayload && totalSegmentsToSend >= MAX_QUEUE_LENGTH) {
-              const { segments: segmentsInNextPayload } = countMessagesAndSegments(nextPayload)
-
-              if (queuedSegments + segmentsInNextPayload >= MAX_QUEUE_LENGTH) {
-                hasSpaceLeftInQueue = false
-                break
-              }
-            }
-
-            if (!payloadChunk) {
-              hasMoreMessages = false
-              break
-            }
-
-            const { messages, segments } = await enqueueMessages(payloadChunk)
-
-            queuedMessages += messages
-            queuedSegments += segments
-
-            if (!nextPayload) {
-              hasMoreMessages = false
-              break
-            }
-
-            iteration += 1
-          }
+          queuedMessages += messages
+          queuedSegments += segments
 
           const timeToSendAllSegments = getWaitingTimeInSeconds(queuedSegments)
 
@@ -200,29 +184,47 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
 
       totalQueuedMessages += queuedMessages
       totalQueuedSegments += queuedSegments
+      totalTimeToSendAllSegments += timeToSendAllSegments
 
-      if (queuedSegments === 0 || !hasMoreMessages) {
-        break
+      segmentsInQueue += queuedSegments
+      timeToEmptyQueue += timeToSendAllSegments
+
+      if (totalSegmentsToSend >= MAX_QUEUE_LENGTH) {
+        const nextPayloadChunk = payloadChunks[i + 1]
+
+        if (nextPayloadChunk) {
+          const { segments: nextPayloadSegments } = countMessagesAndSegments(nextPayloadChunk)
+
+          if (segmentsInQueue + nextPayloadSegments >= MAX_QUEUE_LENGTH) {
+            logInfo('queue-overflow-control', {
+              segmentsInQueue,
+              timeToEmptyQueue: formatTime(timeToEmptyQueue),
+            })
+
+            await step.sleep(
+              `waiting-${formatTime(timeToEmptyQueue).replace(' ', '-')}-for-queue-to-be-empty`,
+              timeToEmptyQueue,
+            )
+
+            segmentsInQueue = 0
+            timeToEmptyQueue = 0
+          }
+        }
       }
 
-      await step.sleep(
-        `waiting-${formatTime(timeToSendAllSegments).replace(' ', '-')}-for-messaging-queue-to-be-empty`,
-        timeToSendAllSegments * 1000,
-      )
-
-      totalTimeTaken += timeToSendAllSegments
-
-      logInfo('summary-info', {
-        totalTimeTaken: formatTime(totalTimeTaken),
+      logInfo(`summary-info - ${i + 1}/${payloadChunks.length}`, {
+        totalTimeToSendAllSegments: formatTime(totalTimeToSendAllSegments),
         totalQueuedMessages,
         totalQueuedSegments,
       })
     }
 
+    logInfo('Finished')
+
     return {
       totalQueuedMessages,
       totalQueuedSegments,
-      totalTimeTaken: formatTime(totalTimeTaken),
+      totalTimeToSendAllSegments: formatTime(totalTimeToSendAllSegments),
     }
   },
 )

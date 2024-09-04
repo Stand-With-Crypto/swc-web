@@ -21,6 +21,7 @@ import { mockUserActionTweetAtPersonInput } from '@/mocks/models/mockUserActionT
 import { mockCreateUserActionViewKeyRacesInput } from '@/mocks/models/mockUserActionViewKeyRaces'
 import { mockCreateUserActionVoterAttestationInput } from '@/mocks/models/mockUserActionVoterAttestation'
 import { mockCreateUserActionVoterRegistrationInput } from '@/mocks/models/mockUserActionVoterRegistration'
+import { mockCreateUserActionVotingInformationResearchedInput } from '@/mocks/models/mockUserActionVotingInformationResearched'
 import {
   mockCreateUserCryptoAddressInput,
   PopularCryptoAddress,
@@ -564,6 +565,25 @@ async function seed() {
   )
   const userActionViewKeyRaces = await prismaClient.userActionViewKeyRaces.findMany()
   logEntity({ userActionViewKeyRaces })
+
+  /*
+  userActionVotingInformationResearched
+  */
+  await batchAsyncAndLog(
+    userActionsByType[UserActionType.VOTING_INFORMATION_RESEARCHED].map(action => {
+      return {
+        ...mockCreateUserActionVotingInformationResearchedInput(),
+        id: action.id,
+      }
+    }),
+    data =>
+      prismaClient.userActionVotingInformationResearched.createMany({
+        data,
+      }),
+  )
+  const userActionVotingInformationResearched =
+    await prismaClient.userActionVotingInformationResearched.findMany()
+  logEntity({ userActionVotingInformationResearched })
 }
 
 void runBin(seed)

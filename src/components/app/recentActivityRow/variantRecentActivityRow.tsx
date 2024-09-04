@@ -278,6 +278,12 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
           children: <MainText>Someone investigated the key races in their district</MainText>,
         }
       }
+      case UserActionType.VOTING_INFORMATION_RESEARCHED: {
+        return {
+          onFocusContent: undefined,
+          children: <MainText>Voting information researched {voterStateOrEmpty}</MainText>,
+        }
+      }
     }
     return gracefullyError({
       // @ts-ignore
