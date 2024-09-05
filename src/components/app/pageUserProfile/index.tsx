@@ -27,7 +27,6 @@ import {
   USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
   USER_ACTIONS_WITH_ADDITIONAL_CAMPAIGN,
 } from '@/utils/shared/userActionCampaigns'
-import { cn } from '@/utils/web/cn'
 import { hasCompleteUserProfile } from '@/utils/web/hasCompleteUserProfile'
 import { getSensitiveDataUserDisplayName } from '@/utils/web/userUtils'
 
@@ -137,7 +136,7 @@ export function PageUserProfile({ params, user }: PageUserProfile) {
       </section>
 
       <div className="w-full lg:hidden">
-        <ProfileAndNFTButtons fullWidthButtons user={user} />
+        <ProfileAndNFTButtons user={user} />
       </div>
 
       <section>
@@ -195,13 +194,7 @@ export function PageUserProfile({ params, user }: PageUserProfile) {
   )
 }
 
-function ProfileAndNFTButtons({
-  user,
-  fullWidthButtons = false,
-}: {
-  user: PageUserProfileUser
-  fullWidthButtons?: boolean
-}) {
+function ProfileAndNFTButtons({ user }: { user: PageUserProfileUser }) {
   return (
     <div className="flex items-center gap-4">
       <LoginDialogWrapper
@@ -210,32 +203,26 @@ function ProfileAndNFTButtons({
         title="Claim your free NFT"
         useThirdwebSession
       >
-        <Button className={cn(fullWidthButtons && 'w-full')}>Claim my NFTs</Button>
+        <Button className="w-full lg:w-auto">Claim my NFTs</Button>
       </LoginDialogWrapper>
 
-      <EditProfileButton fullWidthButtons={fullWidthButtons} user={user} />
+      <EditProfileButton user={user} />
     </div>
   )
 }
 
-function EditProfileButton({
-  user,
-  fullWidthButtons,
-}: {
-  user: PageUserProfileUser
-  fullWidthButtons: boolean
-}) {
+function EditProfileButton({ user }: { user: PageUserProfileUser }) {
   const session = useSession()
 
   return (
     <UpdateUserProfileFormDialog user={user}>
       {hasCompleteUserProfile(user) ? (
-        <Button className={cn(fullWidthButtons && 'w-full')} variant="secondary">
+        <Button className="w-full lg:w-auto" variant="secondary">
           Edit <span className="mx-1 hidden sm:inline-block">your</span> profile
         </Button>
       ) : (
         <Button
-          className={cn(fullWidthButtons && 'w-full')}
+          className="w-full lg:w-auto"
           variant={session.isLoggedInThirdweb ? 'default' : 'secondary'}
         >
           Finish <span className="mx-1 hidden sm:inline-block">your</span> profile
