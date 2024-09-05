@@ -1,6 +1,6 @@
 'use client'
 
-import { isBefore } from 'date-fns'
+import { isBefore, startOfDay } from 'date-fns'
 import sanitizeHtml from 'sanitize-html'
 
 import { EventDialog } from '@/components/app/pageEvents/components/eventDialog'
@@ -37,7 +37,7 @@ export function PromotedEvents({ events }: PromotedEventsProps) {
           ? new Date(`${event.data.date}T${event.data.time}`)
           : new Date(event.data.date)
 
-        const isPastEvent = isBefore(eventDate, new Date())
+        const isPastEvent = isBefore(startOfDay(eventDate), startOfDay(new Date()))
 
         return (
           <div
