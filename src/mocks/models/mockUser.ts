@@ -42,6 +42,8 @@ export function mockCreateUserInput({
     internalStatus: UserInternalStatus.VISIBLE,
     capitolCanaryAdvocateId: null,
     capitolCanaryInstance: null,
+    hasOptedInToSms: null,
+    hasRepliedToOptInSms: null,
   } satisfies Prisma.UserCreateInput
 }
 
