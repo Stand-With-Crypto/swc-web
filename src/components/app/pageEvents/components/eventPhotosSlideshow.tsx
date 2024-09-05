@@ -45,7 +45,7 @@ export function EventPhotosSlideshow({ children }: { children: ReactNode | React
 
   return (
     <div
-      className="relative flex h-[420px] w-[466px] overflow-x-hidden rounded-3xl"
+      className="relative flex h-full w-full overflow-x-hidden rounded-3xl lg:h-[420px] lg:w-[466px]"
       ref={containerRef}
     >
       {childrens.map((child, i) => (
