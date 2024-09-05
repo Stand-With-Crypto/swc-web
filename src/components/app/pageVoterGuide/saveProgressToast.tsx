@@ -29,7 +29,7 @@ export const SaveProgressToast = (props: SaveProgressToastProps) => {
           <p className="text-muted-foreground">
             Sign up or log in to Stand With Crypto to save your progress.
           </p>
-          <LoginDialogWrapper>
+          <LoginDialogWrapper onLoginCallback={onClose}>
             <Button className="min-w-[100px]" variant="primary-cta">
               Sign Up
             </Button>

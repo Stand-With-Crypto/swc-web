@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { UserActionType } from '@prisma/client'
@@ -37,13 +37,13 @@ import {
 } from '@/utils/web/toastUtils'
 
 interface GetInformedFormProps {
-  onFinish?: () => void
-  onUserActionCreated?: () => void
+  onSubmit?: (formData: VoterGuideFormValues) => Promise<void>
+  onViewKeyRacesActionSuccess?: () => void
   initialValues?: VoterGuideFormValues
 }
 
 export const GetInformedForm = (props: GetInformedFormProps) => {
-  const { onFinish, initialValues, onUserActionCreated } = props
+  const { onSubmit, initialValues, onViewKeyRacesActionSuccess } = props
 
   const router = useRouter()
 
@@ -87,7 +87,7 @@ export const GetInformedForm = (props: GetInformedFormProps) => {
     },
   })
 
-  const createViewKeyRacesAction = async () => {
+  const createViewKeyRacesAction = useCallback(async () => {
     const formValues = form.getValues()
     if (!formValues.address) return
 
@@ -137,9 +137,9 @@ export const GetInformedForm = (props: GetInformedFormProps) => {
     if (result.status === 'success') {
       router.refresh()
       void mutate()
-      onUserActionCreated?.()
+      onViewKeyRacesActionSuccess?.()
     }
-  }
+  }, [form, mutate, onViewKeyRacesActionSuccess, router])
 
   const scriptStatus = useGoogleMapsScript()
 
@@ -148,7 +148,14 @@ export const GetInformedForm = (props: GetInformedFormProps) => {
       void createViewKeyRacesAction()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [address, scriptStatus])
+  }, [address, racesByAddressRequest.data, scriptStatus])
+
+  const isSubmitDisabled =
+    form.formState.isSubmitting ||
+    racesByAddressRequest.isLoading ||
+    !racesByAddressRequest.data ||
+    !address?.place_id ||
+    !!error
 
   return (
     <UserActionFormLayout>
@@ -165,8 +172,14 @@ export const GetInformedForm = (props: GetInformedFormProps) => {
                 <Form {...form}>
                   <form
                     id="view-key-races-form"
-                    onSubmit={form.handleSubmit(async () => {
-                      onFinish?.()
+                    onSubmit={form.handleSubmit(async formValues => {
+                      if (!racesByAddressRequest.data) {
+                        form.setError('address', {
+                          message: 'Invalid address',
+                        })
+                        return
+                      }
+                      await onSubmit?.(formValues)
                     }, trackFormSubmissionSyncErrors(ANALYTICS_NAME_USER_ACTION_FORM_GET_INFORMED))}
                   >
                     <FormField
@@ -177,7 +190,7 @@ export const GetInformedForm = (props: GetInformedFormProps) => {
                           <FormControl aria-invalid={!!error}>
                             <GooglePlacesSelect
                               {...field}
-                              className="h-14 rounded-full bg-secondary"
+                              className="rounded-full bg-secondary"
                               onChange={newAddress => {
                                 form.clearErrors('address')
                                 field.onChange(newAddress)
@@ -185,6 +198,7 @@ export const GetInformedForm = (props: GetInformedFormProps) => {
                               placeholder="Your full address"
                               ref={inputRef}
                               value={field.value}
+                              variant="lg"
                             />
                           </FormControl>
                           {!!error && <ErrorMessage>{error?.message}</ErrorMessage>}
@@ -212,12 +226,7 @@ export const GetInformedForm = (props: GetInformedFormProps) => {
         >
           <Button
             className="ml-auto min-w-[130px]"
-            disabled={
-              form.formState.isSubmitting ||
-              racesByAddressRequest.isLoading ||
-              !address?.place_id ||
-              !!error
-            }
+            disabled={isSubmitDisabled}
             form="view-key-races-form"
             size="lg"
             type="submit"

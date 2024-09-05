@@ -62,7 +62,7 @@ export const GooglePlacesSelect = React.forwardRef<
     : data
 
   const scriptStatus = useGoogleMapsScript()
-  const isLoading = loading || isLoadingSuggestions
+  const isLoading = loading || isLoadingSuggestions || !ready
 
   useEffect(() => {
     if (scriptStatus === 'ready') {
@@ -105,7 +105,7 @@ export const GooglePlacesSelect = React.forwardRef<
       getOptionKey={val => val.place_id}
       getOptionLabel={val => val.description}
       inputValue={value}
-      isLoading={isLoading || !ready}
+      isLoading={isLoading}
       onChange={propsOnChange}
       onChangeInputValue={setValue}
       open={open}

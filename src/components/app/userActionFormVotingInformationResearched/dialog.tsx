@@ -12,7 +12,6 @@ import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForU
 import { useDialog } from '@/hooks/useDialog'
 import { useSession } from '@/hooks/useSession'
 import { openWindow } from '@/utils/shared/openWindow'
-import { UserActionVotingInformationResearchedCampaignName } from '@/utils/shared/userActionCampaigns'
 import { getUSStateNameFromStateCode } from '@/utils/shared/usStateUtils'
 import { zodAddress } from '@/validation/fields/zodAddress'
 
