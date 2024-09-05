@@ -70,7 +70,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
     const getWaitingTimeInSeconds = (totalSegments: number) =>
       totalSegments / MESSAGE_SEGMENTS_PER_SECOND
 
-    let enqueueMessagesPayloadChunks: EnqueueMessagePayload[][] = []
+    const enqueueMessagesPayloadChunks: EnqueueMessagePayload[][] = []
     let totalSegmentsCount = 0
     let totalMessagesCount = 0
     let totalTime = 0
@@ -92,7 +92,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
           ),
       )
 
-      let messagesPayload: EnqueueMessagePayload[] = phoneNumbersThatShouldReceiveWelcomeText.map(
+      const messagesPayload: EnqueueMessagePayload[] = phoneNumbersThatShouldReceiveWelcomeText.map(
         phoneNumber => ({
           phoneNumber,
           messages: [
@@ -122,8 +122,8 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
           ),
       )
 
-      messagesPayload = messagesPayload.concat(
-        phoneNumberThatAlreadyReceivedWelcomeMessage.map(phoneNumber => ({
+      messagesPayload.push(
+        ...phoneNumberThatAlreadyReceivedWelcomeMessage.map(phoneNumber => ({
           phoneNumber,
           messages: [
             {
@@ -152,7 +152,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
         chunks: payloadChunks.length,
       }
 
-      enqueueMessagesPayloadChunks = enqueueMessagesPayloadChunks.concat(payloadChunks)
+      enqueueMessagesPayloadChunks.push(...payloadChunks)
       totalSegmentsCount += segmentsCount
       totalMessagesCount += messagesCount
       totalTime += timeToSendSegments
@@ -286,7 +286,7 @@ async function fetchAllPhoneNumbers(
   options: Omit<GetPhoneNumberOptions, 'cursor'>,
   hasWelcomeMessage: boolean,
 ) {
-  let allPhoneNumbers: string[] = []
+  const allPhoneNumbers: string[] = []
   let cursor: Date | undefined
   let hasNumbersLeft = true
 
@@ -322,7 +322,7 @@ async function fetchAllPhoneNumbers(
       .map(({ phoneNumber }) => phoneNumber)
       .filter(isPhoneNumberSupported)
 
-    allPhoneNumbers = allPhoneNumbers.concat(phoneNumbers)
+    allPhoneNumbers.push(...phoneNumbers)
 
     if (!DATABASE_QUERY_LIMIT || phoneNumbers.length < DATABASE_QUERY_LIMIT) {
       hasNumbersLeft = false
