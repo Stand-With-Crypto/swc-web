@@ -36,13 +36,13 @@ import {
   toastGenericError,
 } from '@/utils/web/toastUtils'
 
-interface GetInformedFormProps {
+interface KeyRacesFormProps {
   onSubmit?: (formData: VoterGuideFormValues) => Promise<void>
   onViewKeyRacesActionSuccess?: () => void
   initialValues?: VoterGuideFormValues
 }
 
-export const GetInformedForm = (props: GetInformedFormProps) => {
+export const KeyRacesForm = (props: KeyRacesFormProps) => {
   const { onSubmit, initialValues, onViewKeyRacesActionSuccess } = props
 
   const router = useRouter()

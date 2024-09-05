@@ -28,8 +28,8 @@ import { toastGenericError } from '@/utils/web/toastUtils'
 
 import { SaveProgressToast } from './saveProgressToast'
 
-const GetInformedForm = dynamic(
-  () => import('@/components/app/pageVoterGuide/getInformedForm').then(mod => mod.GetInformedForm),
+const KeyRacesForm = dynamic(
+  () => import('@/components/app/pageVoterGuide/keyRacesForm').then(mod => mod.KeyRacesForm),
   {
     loading: () => (
       <div className="min-h-[400px]">
@@ -118,7 +118,7 @@ export const KeyRacesDialog = (props: KeyRacesDialogProps) => {
             <LoadingOverlay />
           </div>
         ) : (
-          <GetInformedForm
+          <KeyRacesForm
             initialValues={getDefaultValues({ user })}
             onSubmit={async formData => {
               await handleCreateVoterPledgeAction(formData.address)
