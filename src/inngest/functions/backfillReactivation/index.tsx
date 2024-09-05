@@ -196,7 +196,7 @@ export const backfillReactivationWithInngest = inngest.createFunction(
 )
 
 async function persistBatchUserCommunication(emailResults: EmailResult[]) {
-  const errors: any[] = []
+  const errors: unknown[] = []
 
   await prismaClient.userCommunicationJourney
     .createMany({
