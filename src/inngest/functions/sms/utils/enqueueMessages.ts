@@ -1,7 +1,7 @@
 import { UserCommunicationJourneyType } from '@prisma/client'
 import * as Sentry from '@sentry/node'
 import { NonRetriableError } from 'inngest'
-import { template, update } from 'lodash-es'
+import { update } from 'lodash-es'
 
 import { sendSMS, SendSMSError } from '@/utils/server/sms'
 import { optOutUser } from '@/utils/server/sms/actions'
@@ -222,7 +222,7 @@ interface Variables {
 }
 
 function addVariablesToMessage(message: string, variables: Variables) {
-  const compiled = template(message)
-
-  return compiled(variables)
+  return message.replace(/{{\s*(\w+)\s*}}/g, (_, variable: keyof Variables) =>
+    variables[variable] !== undefined ? (variables[variable] ?? '') : '',
+  )
 }

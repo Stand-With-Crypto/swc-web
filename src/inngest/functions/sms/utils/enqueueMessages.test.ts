@@ -182,17 +182,15 @@ describe('enqueueMessages function', () => {
 
   it.each([
     [
-      `Please, finish your profile at ${fullUrl(`/profile<%= sessionId ? "?sessionId=" + sessionId : "" %>`)}`,
-      mockedUserSession?.id
-        ? `Please, finish your profile at ${fullUrl(`/profile?sessionId=${mockedUserSession.id}`)}`
-        : `Please, finish your profile at ${fullUrl(`/profile`)}`,
+      `Please, finish your profile at ${fullUrl(`/profile?sessionId={{ sessionId }}`)}`,
+      `Please, finish your profile at ${fullUrl(`/profile?sessionId=${mockedUserSession?.id ?? ''}`)}`,
     ],
     [
-      `<%= firstName && lastName ? firstName + " " + lastName + ", t": "T" %>hanks for subscribing to Stand With Crypto`,
-      mockedUser.firstName && mockedUser.lastName
-        ? `${mockedUser.firstName} ${mockedUser.lastName}, thanks for subscribing to Stand With Crypto`
-        : 'Thanks for subscribing to Stand With Crypto',
+      `{{ firstName }} {{ lastName }}, thanks for subscribing to Stand With Crypto`,
+      `${mockedUser.firstName} ${mockedUser.lastName}, thanks for subscribing to Stand With Crypto`,
     ],
+    [`You received a NFT: {{ invalidVariable }}`, `You received a NFT: `],
+    ['Message with no variables', 'Message with no variables'],
   ])('should correctly parse the sms body with custom variables', async (input, output) => {
     // eslint-disable-next-line no-extra-semi
     ;(getUserByPhoneNumber as jest.Mock).mockImplementation(() =>
