@@ -33,6 +33,10 @@ export const DISABLED_USER_ACTION_CAMPAIGNS: DisabledUserActionCampaigns = {
       title: 'CNN Presidential Debate 2024',
       subtitle: "You emailed CNN and asked them to include the candidates' stance on crypto.",
     },
+    [UserActionEmailCampaignName.ABC_PRESIDENTIAL_DEBATE_2024]: {
+      title: 'ABC Presidential Debate 2024',
+      subtitle: "You emailed ABC and asked them to include the candidates' stance on crypto.",
+    },
   },
   [UserActionType.TWEET_AT_PERSON]: {
     [UserActionTweetAtPersonCampaignName['2024_05_22_PIZZA_DAY']]: {
