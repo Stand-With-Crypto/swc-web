@@ -125,6 +125,7 @@ export const backfillReactivationWithInngest = inngest.createFunction(
         communicationType: CommunicationType
         messageId: string
       }[]
+      errors: any[]
     } | null = null
 
     for (let i = 0; i < numBatches; i++) {
@@ -162,9 +163,7 @@ export const backfillReactivationWithInngest = inngest.createFunction(
           },
         })
 
-        const messageIds = (await sendBatchEmails(
-          usersWithoutCommunicationJourney as User[],
-        )) as string[]
+        const messageIds = await sendBatchEmails(usersWithoutCommunicationJourney as User[])
 
         if (messageIds?.length > 0) {
           const emailResults = messageIds.map((messageId, index) => ({
@@ -175,14 +174,16 @@ export const backfillReactivationWithInngest = inngest.createFunction(
           const result = await persistBatchUserCommunication(emailResults)
 
           return {
-            message: `Sent initial sign up email to ${result.length} users`,
-            results: result,
+            message: `Sent initial sign up email to ${result.success.length} users`,
+            results: result.success,
+            errors: result.errors,
           }
         }
 
         return {
           message: 'No emails sent',
           results: [],
+          errors: [],
         }
       })
 
@@ -195,13 +196,19 @@ export const backfillReactivationWithInngest = inngest.createFunction(
 )
 
 async function persistBatchUserCommunication(emailResults: EmailResult[]) {
-  await prismaClient.userCommunicationJourney.createMany({
-    data: emailResults.map(({ userId }) => ({
-      userId,
-      journeyType: UserCommunicationJourneyType.INITIAL_SIGNUP,
-      campaignName: UserCommunicationJourneyType.INITIAL_SIGNUP,
-    })),
-  })
+  const errors: any[] = []
+
+  await prismaClient.userCommunicationJourney
+    .createMany({
+      data: emailResults.map(({ userId }) => ({
+        userId,
+        journeyType: UserCommunicationJourneyType.INITIAL_SIGNUP,
+        campaignName: UserCommunicationJourneyType.INITIAL_SIGNUP,
+      })),
+    })
+    .catch(error => {
+      errors.push(error)
+    })
 
   const journeys = await prismaClient.userCommunicationJourney.findMany({
     where: {
@@ -218,13 +225,17 @@ async function persistBatchUserCommunication(emailResults: EmailResult[]) {
     distinct: ['userId'],
   })
 
-  await prismaClient.userCommunication.createMany({
-    data: journeys.map(({ id, userId }) => ({
-      messageId: emailResults.find(result => result.userId === userId)!.messageId,
-      communicationType: CommunicationType.EMAIL,
-      userCommunicationJourneyId: id,
-    })),
-  })
+  await prismaClient.userCommunication
+    .createMany({
+      data: journeys.map(({ id, userId }) => ({
+        messageId: emailResults.find(result => result.userId === userId)!.messageId,
+        communicationType: CommunicationType.EMAIL,
+        userCommunicationJourneyId: id,
+      })),
+    })
+    .catch(error => {
+      errors.push(error)
+    })
 
   const createdCommunications = await prismaClient.userCommunication.findMany({
     where: {
@@ -241,7 +252,10 @@ async function persistBatchUserCommunication(emailResults: EmailResult[]) {
     },
   })
 
-  return createdCommunications
+  return {
+    success: createdCommunications,
+    errors,
+  }
 }
 
 async function sendBatchEmails(users: User[]) {
@@ -257,17 +271,15 @@ async function sendBatchEmails(users: User[]) {
         }
       : null
 
-    const ReactivationReminderComponent = ReactivationReminder
-
     return {
       to: user.primaryUserEmailAddress.emailAddress,
-      subject: ReactivationReminderComponent.subjectLine,
+      subject: ReactivationReminder.subjectLine,
       customArgs: {
         userId: user.id,
         category: 'Reactivation Email Reminder',
       },
       html: render(
-        <ReactivationReminderComponent
+        <ReactivationReminder
           completedActionTypes={completedActionTypes}
           session={currentSession}
         />,
