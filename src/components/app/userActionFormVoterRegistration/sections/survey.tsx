@@ -2,26 +2,25 @@
 import { useCallback } from 'react'
 
 import { UserActionFormLayout } from '@/components/app/userActionFormCommon'
-import { SectionNames } from '@/components/app/userActionFormVoterRegistration/constants'
+import { RegistrationStatusAnswer } from '@/components/app/userActionFormVoterRegistration/constants'
 import { Button } from '@/components/ui/button'
 import { DialogBody, DialogFooterCTA } from '@/components/ui/dialog'
 import { ExternalLink } from '@/components/ui/link'
 import { useLocale } from '@/hooks/useLocale'
-import { UseSectionsReturn } from '@/hooks/useSections'
 import { getIntlUrls } from '@/utils/shared/urls'
 
-interface SurveyProps extends UseSectionsReturn<SectionNames> {}
+interface SurveyProps {
+  onAnswer: (answer: RegistrationStatusAnswer) => void
+}
 
-export function Survey({ goToSection }: SurveyProps) {
+export function Survey({ onAnswer }: SurveyProps) {
   const locale = useLocale()
   const urls = getIntlUrls(locale)
-  const createSelectionHandler = useCallback(
-    (step: SectionNames) => {
-      return () => {
-        goToSection(step)
-      }
+  const createAnswerHandler = useCallback(
+    (answer: RegistrationStatusAnswer) => () => {
+      onAnswer(answer)
     },
-    [goToSection],
+    [onAnswer],
   )
 
   return (
@@ -30,13 +29,13 @@ export function Survey({ goToSection }: SurveyProps) {
         <UserActionFormLayout.Container>
           <DialogBody className="flex flex-col gap-24 lg:pb-8 lg:pt-6">
             <UserActionFormLayout.Heading
-              subtitle="Register to vote or check your voter registration and get a free “I'm a Voter” NFT"
+              subtitle="This year's election is critical for the future of crypto in America. Make sure you're able to vote in your state."
               title="Are you registered to vote?"
             />
             <div className="flex flex-grow flex-col items-center gap-3 lg:flex-row lg:justify-center">
               <Button
                 className="w-full lg:w-auto"
-                onClick={createSelectionHandler(SectionNames.CONFIRM_REGISTRATION_FORM)}
+                onClick={createAnswerHandler('yes')}
                 size="lg"
                 variant="secondary"
               >
@@ -44,7 +43,7 @@ export function Survey({ goToSection }: SurveyProps) {
               </Button>
               <Button
                 className="w-full lg:w-auto"
-                onClick={createSelectionHandler(SectionNames.VOTER_REGISTRATION_FORM)}
+                onClick={createAnswerHandler('no')}
                 size="lg"
                 variant="secondary"
               >
@@ -52,7 +51,7 @@ export function Survey({ goToSection }: SurveyProps) {
               </Button>
               <Button
                 className="w-full lg:w-auto"
-                onClick={createSelectionHandler(SectionNames.CHECK_REGISTRATION_FORM)}
+                onClick={createAnswerHandler('not-sure')}
                 size="lg"
                 variant="secondary"
               >

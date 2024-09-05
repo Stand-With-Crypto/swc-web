@@ -3,10 +3,6 @@ import { USStateCode } from '@/utils/shared/usStateUtils'
 export enum SectionNames {
   SURVEY = 'Survey',
   VOTER_REGISTRATION_FORM = 'Voter Registration Form',
-  CHECK_REGISTRATION_FORM = 'Check Registration Form',
-  CONFIRM_REGISTRATION_FORM = 'Confirm Registration Form',
-  CLAIM_NFT = 'Claim NFT',
-  ACCOUNT_REGISTRATION = 'Account Registration',
   SUCCESS = 'Success',
 }
 
@@ -15,6 +11,8 @@ export const ANALYTICS_NAME_USER_ACTION_FORM_VOTER_REGISTRATION =
 
 type RegistrationUrlType = 'registerUrl' | 'checkRegistrationUrl'
 type RegistrationByState = Record<RegistrationUrlType, string>
+
+export type RegistrationStatusAnswer = 'yes' | 'no' | 'not-sure'
 
 export const REGISTRATION_URLS_BY_STATE: Record<USStateCode, RegistrationByState> = {
   AL: {
