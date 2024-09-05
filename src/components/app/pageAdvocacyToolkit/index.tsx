@@ -4,16 +4,22 @@ import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
-import { SupportedLocale } from '@/intl/locales'
-import { getIntlUrls } from '@/utils/shared/urls'
 
 interface PagePartnersProps {
   title: string
   description: string
-  locale: SupportedLocale
 }
 
-export function PageAdvocacyToolkit({ title, description, locale }: PagePartnersProps) {
+const DOWNLOAD_LINKS = {
+  EVENT_GUIDE:
+    'https://docs.google.com/document/d/1TtglwW0mAG-fnmhpduHVK096gP3p2Tk3H1I_7-yVeg0/edit',
+  VOTER_REGISTRATION_GUIDE:
+    'https://docs.google.com/document/d/1WZ7qhcbktrvECYl_BB-a_5X4NC8lHVjuzgh4aHcGZC8/edit',
+  STATE_CHAPTER_GUIDE:
+    'https://docs.google.com/document/d/1d6OaqVznea-CRfZhzxJWqcTIcFFWV7bsDTiPeI55nIA/edit',
+}
+
+export function PageAdvocacyToolkit({ title, description }: PagePartnersProps) {
   return (
     <div className="standard-spacing-from-navbar container">
       <section className="space-y-14">
@@ -97,7 +103,9 @@ export function PageAdvocacyToolkit({ title, description, locale }: PagePartners
               landscape."
       >
         <Button asChild className="w-full sm:w-auto">
-          <InternalLink href={getIntlUrls(locale).contribute()}>Download event guide</InternalLink>
+          <InternalLink href={DOWNLOAD_LINKS.EVENT_GUIDE} target="_blank">
+            Download Event Guide
+          </InternalLink>
         </Button>
       </ToolkitSection>
 
@@ -107,8 +115,8 @@ export function PageAdvocacyToolkit({ title, description, locale }: PagePartners
         subtext="Hosting a voter registration drive is crucial - it empowers individuals to exercise their democratic right to vote. By organizing such drives, advocates can increase voter participation, and ensure that the crypto voter is heard this election season. Voter registration drives have a significant impact on shaping the political landscape."
       >
         <Button asChild className="w-full sm:w-auto">
-          <InternalLink href={getIntlUrls(locale).contribute()}>
-            Download voter registration guide
+          <InternalLink href={DOWNLOAD_LINKS.VOTER_REGISTRATION_GUIDE} target="_blank">
+            Download Voter Registration Guide
           </InternalLink>
         </Button>
       </ToolkitSection>
@@ -119,8 +127,8 @@ export function PageAdvocacyToolkit({ title, description, locale }: PagePartners
         subtext="The crypto voter can have a significant influence in the 2024 election and beyond. A key to building out the most impactful network of crypto users in the USA is establishing strong state chapters nationwide. These chapters will be a force multiplier to the power that our community can wield in our pursuit of securing pro-crypto policies and candidates."
       >
         <Button asChild className="w-full sm:w-auto">
-          <InternalLink href={getIntlUrls(locale).contribute()}>
-            Download voter registration guide
+          <InternalLink href={DOWNLOAD_LINKS.STATE_CHAPTER_GUIDE} target="_blank">
+            Download State Chapter Guide
           </InternalLink>
         </Button>
       </ToolkitSection>
