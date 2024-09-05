@@ -9,6 +9,14 @@ export async function getUserByPhoneNumber(phoneNumber: string) {
     orderBy: {
       datetimeUpdated: 'desc',
     },
+    include: {
+      userSessions: {
+        orderBy: {
+          datetimeUpdated: 'desc',
+        },
+        take: 1,
+      },
+    },
     take: 1,
   })
 
