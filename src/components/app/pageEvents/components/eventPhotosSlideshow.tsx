@@ -3,7 +3,7 @@ import { animate, domAnimation, LazyMotion, m, useMotionValue } from 'framer-mot
 
 import { cn } from '@/utils/web/cn'
 
-const autoplayDelay = 5000
+const AUTOPLAY_DELAY = 5000
 
 export function EventPhotosSlideshow({ children }: { children: ReactNode | ReactNode[] }) {
   const [index, setIndex] = useState(0)
@@ -36,7 +36,7 @@ export function EventPhotosSlideshow({ children }: { children: ReactNode | React
   }, [calculateNewX, index, x])
 
   useEffect(() => {
-    const timer = setInterval(() => handleNext(), autoplayDelay)
+    const timer = setInterval(() => handleNext(), AUTOPLAY_DELAY)
 
     return () => clearInterval(timer)
   }, [handleNext])
