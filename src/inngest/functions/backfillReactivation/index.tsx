@@ -125,7 +125,7 @@ export const backfillReactivationWithInngest = inngest.createFunction(
         communicationType: CommunicationType
         messageId: string
       }[]
-      errors: any[]
+      errors: unknown[]
     } | null = null
 
     for (let i = 0; i < numBatches; i++) {
@@ -263,7 +263,7 @@ async function sendBatchEmails(users: User[]) {
     const userSession = user.userSessions?.[0]
     const completedActionTypes = user.userActions
       .filter(action => Object.values(EmailActiveActions).includes(action.actionType))
-      .map(action => action.actionType as EmailActiveActions)
+      .map(action => action.actionType)
     const currentSession = userSession
       ? {
           userId: userSession.userId,

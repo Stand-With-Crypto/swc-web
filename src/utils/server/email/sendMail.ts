@@ -1,4 +1,4 @@
-import SendGrid, { ClientResponse, MailDataRequired } from '@sendgrid/mail'
+import SendGrid, { ClientResponse } from '@sendgrid/mail'
 
 import { logger } from '@/utils/shared/logger'
 import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
@@ -82,14 +82,13 @@ export async function sendMail(
         ...payload,
       }
 
-  const response = await SendGrid.send(parsedPayload as MailDataRequired, isMultiple)
+  const response = await SendGrid.send(parsedPayload, isMultiple)
 
   if (isMultiple) {
     return response.map(
-      currentResponse =>
-        (currentResponse as [ClientResponse])[0].headers?.['x-message-id'] as string,
+      currentResponse => (currentResponse as [ClientResponse])[0].headers?.['x-message-id'],
     )
   }
 
-  return response[0].headers?.['x-message-id'] as string
+  return response[0].headers?.['x-message-id']
 }
