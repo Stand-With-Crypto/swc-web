@@ -1,5 +1,6 @@
 import { CommunicationType, UserCommunicationJourneyType } from '@prisma/client'
 import { render } from '@react-email/components'
+import * as Sentry from '@sentry/nextjs'
 
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
@@ -207,6 +208,12 @@ async function persistBatchUserCommunication(emailResults: EmailResult[]) {
       })),
     })
     .catch(error => {
+      Sentry.captureException(error, {
+        tags: {
+          domain: 'backfillReactivationEmail',
+          message: 'error creating userCommunicationJourney',
+        },
+      })
       errors.push(error)
     })
 
@@ -234,6 +241,12 @@ async function persistBatchUserCommunication(emailResults: EmailResult[]) {
       })),
     })
     .catch(error => {
+      Sentry.captureException(error, {
+        tags: {
+          domain: 'backfillReactivationEmail',
+          message: 'error creating userCommunication',
+        },
+      })
       errors.push(error)
     })
 
