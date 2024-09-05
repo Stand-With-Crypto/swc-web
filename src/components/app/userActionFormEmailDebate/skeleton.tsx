@@ -17,7 +17,7 @@ export function UserActionFormEmailDebateSkeleton() {
       <ScrollArea>
         <div className={cn(dialogContentPaddingStyles, 'space-y-4 md:space-y-8')}>
           <PageTitle className="mb-3 w-max" size="sm">
-            Ask ABC to feature crypto at the Presidential Debate
+            Ask ABC to include crypto at the Debate
           </PageTitle>
           <PageSubTitle className="mb-7">
             Crypto deserves to be a topic at the Presidential Debate. Send a note to ABC and ask
