@@ -79,7 +79,7 @@ export function PageAdvocacyToolkit({ title, description, locale }: PagePartners
 
       <ToolkitSection
         heading="The advocacy toolkit"
-        headingClassName="text-bold"
+        headingClassName="font-bold"
         sectionClassName="mt-14"
         subtext="These materials include helpful toolkits and tactics guides for a wide range of
             organizing activities, and training materials on organizing fundamentals. It includes
