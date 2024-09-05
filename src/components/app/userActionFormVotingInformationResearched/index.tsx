@@ -1,9 +1,9 @@
-import { useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { UserActionType } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { z } from 'zod'
 
 import { actionCreateUserActionVotingInformationResearched } from '@/actions/actionCreateUserActionVotingInformationResearched'
@@ -12,8 +12,11 @@ import { Button } from '@/components/ui/button'
 import { ErrorMessage } from '@/components/ui/errorMessage'
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form'
 import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
+import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useIsMobile } from '@/hooks/useIsMobile'
+import { openWindow } from '@/utils/shared/openWindow'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
+import { getUSStateNameFromStateCode } from '@/utils/shared/usStateUtils'
 import { trackFormSubmissionSyncErrors, triggerServerActionForForm } from '@/utils/web/formUtils'
 import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
@@ -29,6 +32,21 @@ import {
   VotingInformationResearchedFormValues,
 } from './formConfig'
 
+const buildElectoralUrl = (address: z.infer<typeof zodAddress>) => {
+  const baseUrl = 'https://turbovote.org/'
+  const state = address.administrativeAreaLevel1
+  const electionDate = '2024-11-05'
+
+  const params = new URLSearchParams({
+    street: `${address.streetNumber} ${address.route}`,
+    city: getUSStateNameFromStateCode(state),
+    state,
+    zip: address.postalCode,
+  })
+
+  return new URL(`/elections/${state.toLowerCase()}/${electionDate}?${params.toString()}`, baseUrl)
+}
+
 export interface UserActionFormVotingInformationResearchedProps {
   onSuccess: (address: z.infer<typeof zodAddress>) => void
   initialValues?: Partial<VotingInformationResearchedFormValues>
@@ -40,11 +58,14 @@ export const UserActionFormVotingInformationResearched = (
   const { onSuccess, initialValues } = props
 
   const router = useRouter()
+  const searchParams = useSearchParams()
 
   const form = useForm<VotingInformationResearchedFormValues>({
     defaultValues: initialValues,
     resolver: zodResolver(votingInformationResearchedFormValidationSchema),
   })
+
+  const addressField = form.watch('address')
 
   const isMobile = useIsMobile({ defaultState: true })
   const inputRef = useRef<HTMLInputElement | null>(null)
@@ -56,6 +77,18 @@ export const UserActionFormVotingInformationResearched = (
       inputRef.current?.click()
     }
   }, [form, isMobile, initialValues])
+
+  const { mutate } = useApiResponseForUserFullProfileInfo()
+
+  const handleTurboVoteRedirect = useCallback(
+    (address: z.infer<typeof zodAddress>) => {
+      void mutate()
+      const target = searchParams?.get('target') ?? '_blank'
+      const url = buildElectoralUrl(address)
+      openWindow(url.toString(), target, `noopener`)
+    },
+    [mutate, searchParams],
+  )
 
   return (
     <UserActionFormLayout>
@@ -115,7 +148,8 @@ export const UserActionFormVotingInformationResearched = (
                   )
                   if (result.status === 'success') {
                     router.refresh()
-                    onSuccess(address)
+                    handleTurboVoteRedirect(address)
+                    onSuccess?.(address)
                   }
                 }, trackFormSubmissionSyncErrors(FORM_NAME))}
               >
@@ -149,7 +183,7 @@ export const UserActionFormVotingInformationResearched = (
 
         <Button
           className="mx-auto mt-auto"
-          disabled={form.formState.isSubmitting || !form.formState.isValid}
+          disabled={form.formState.isSubmitting || !addressField?.place_id}
           form="view-key-races-form"
           size="lg"
           type="submit"

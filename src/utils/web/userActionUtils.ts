@@ -6,10 +6,13 @@ import {
   UserActionCampaignName,
 } from '@/utils/shared/userActionCampaigns'
 
-// Remember to update USER_ACTION_ROW_CTA_INFO_FROM_CAMPAIGN so that the correct campaign CTA is displayed.
-// Failing to add the correct campaign will result in error.
-// Also remember to remove the campaign from USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN if it is not needed anymore.
-// Keeping a campaign here will result in an increase of the number of total actions in profile page.
+/**
+ * Remember to update {@link USER_ACTION_ROW_CTA_INFO_FROM_CAMPAIGN} so that the correct campaign CTA is displayed.
+ * Failing to add the correct campaign will result in error.
+ *
+ * Also remember to remove the campaign from {@link USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN} if it is not needed anymore.
+ * Keeping a campaign here will result in an increase of the number of total actions in profile page.
+ */
 export const USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN: ReadonlyArray<{
   action: ActiveClientUserActionType
   campaign: UserActionCampaignName
@@ -22,6 +25,10 @@ export const USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN: ReadonlyArray<{
   {
     action: UserActionType.VOTER_ATTESTATION,
     campaign: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.VOTER_ATTESTATION,
+  },
+  {
+    action: UserActionType.VOTING_INFORMATION_RESEARCHED,
+    campaign: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.VOTING_INFORMATION_RESEARCHED,
   },
   { action: UserActionType.EMAIL, campaign: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.EMAIL },
   { action: UserActionType.CALL, campaign: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.CALL },
