@@ -275,7 +275,6 @@ async function maybeUpsertUser({
       userSessions: { create: { id: sessionId } },
       hasOptedInToEmails: true,
       hasOptedInToMembership: false,
-      hasRepliedToOptInSms: false,
       firstName,
       lastName,
       userEmailAddresses: {
