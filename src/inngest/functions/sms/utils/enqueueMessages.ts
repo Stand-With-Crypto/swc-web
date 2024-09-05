@@ -1,7 +1,7 @@
 import { UserCommunicationJourneyType } from '@prisma/client'
 import * as Sentry from '@sentry/node'
 import { NonRetriableError } from 'inngest'
-import { template, update } from 'lodash-es'
+import { update } from 'lodash-es'
 
 import { sendSMS, SendSMSError } from '@/utils/server/sms'
 import { optOutUser } from '@/utils/server/sms/actions'
@@ -54,17 +54,8 @@ export async function enqueueMessages(payload: EnqueueMessagePayload[], attempt 
 
       try {
         if (body) {
-          const user = await getUserByPhoneNumber(phoneNumber)
-
-          const parsedBody = addVariablesToMessage(body, {
-            firstName: user?.firstName,
-            lastName: user?.lastName,
-            sessionId: user?.userSessions?.[0]?.id,
-            userId: user?.id,
-          })
-
           const queuedMessage = await sendSMS({
-            body: parsedBody,
+            body,
             to: phoneNumber,
             media,
           })
@@ -83,7 +74,7 @@ export async function enqueueMessages(payload: EnqueueMessagePayload[], attempt 
             )
           }
 
-          segmentsSent += countSegments(parsedBody)
+          segmentsSent += countSegments(body)
           queuedMessages += 1
         } else {
           update(
@@ -212,17 +203,4 @@ export function countMessagesAndSegments(payload: EnqueueMessagePayload[]) {
       messages: 0,
     },
   )
-}
-
-interface Variables {
-  firstName?: string
-  lastName?: string
-  sessionId?: string
-  userId?: string
-}
-
-function addVariablesToMessage(message: string, variables: Variables) {
-  const compiled = template(message)
-
-  return compiled(variables)
 }
