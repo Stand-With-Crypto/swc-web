@@ -27,6 +27,19 @@ export function EventPhotosSlideshow({ children }: { children: ReactNode | React
   }
 
   useEffect(() => {
+    const handleAnimation = async () => {
+      await animate(x, calculateNewX(), {
+        type: 'tween',
+        duration: 0.5,
+      })
+    }
+
+    window.addEventListener('resize', () => handleAnimation())
+
+    return () => window.removeEventListener('resize', () => handleAnimation())
+  }, [calculateNewX, x])
+
+  useEffect(() => {
     const controls = animate(x, calculateNewX(), {
       type: 'tween',
       duration: 0.5,
@@ -95,19 +108,21 @@ export function EventPhotosSlideshow({ children }: { children: ReactNode | React
         </svg>
       </button>
 
-      <div className="absolute bottom-4 left-2/4 z-50 flex -translate-x-2/4 gap-2">
-        {new Array(childrens.length).fill('').map((_, i) => (
-          <span
-            className={cn(
-              "block h-3 w-3 cursor-pointer rounded-full transition-colors content-['']",
-              index === i && 'bg-white',
-              index !== i && 'bg-white/50',
-            )}
-            key={i}
-            onClick={() => setIndex(i)}
-          />
-        ))}
-      </div>
+      {childrens.length < 15 && (
+        <div className="absolute bottom-4 left-2/4 z-50 flex -translate-x-2/4 gap-2">
+          {new Array(childrens.length).fill('').map((_, i) => (
+            <span
+              className={cn(
+                "block h-3 w-3 cursor-pointer rounded-full transition-colors content-['']",
+                index === i && 'bg-white',
+                index !== i && 'bg-white/50',
+              )}
+              key={i}
+              onClick={() => setIndex(i)}
+            />
+          ))}
+        </div>
+      )}
     </div>
   )
 }

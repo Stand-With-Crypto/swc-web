@@ -141,7 +141,7 @@ function EventInformation({
               {event?.carousel?.map(item => (
                 <NextImage
                   alt={event.name}
-                  className="h-[420px] w-[466px] object-cover"
+                  className="h-[420px] w-full object-cover"
                   height={420}
                   key={item.photo}
                   src={item.photo}
