@@ -329,6 +329,12 @@ const nextConfig = {
       },
       // SMS shortlinks
       {
+        source: '/nv/5',
+        destination:
+          'https://americalovescryptonv.splashthat.com?utm_source=swc&utm_medium=sms&utm_campaign=nv_3&utm_id=sst&utm_content=v2',
+        permanent: false,
+      },
+      {
         source: '/dc/1',
         destination:
           'https://standwithcryptoday2024.splashthat.com/?utm_source=swc&utm_medium=sms&utm_campaign=dc_2&utm_id=sst&utm_content=v1',
