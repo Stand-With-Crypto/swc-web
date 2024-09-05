@@ -9,6 +9,7 @@ import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogW
 import {
   BillsIcon,
   CommunityIcon,
+  DonateIcon,
   MissionIcon,
   ResourcesIcon,
 } from '@/components/app/navbar/navbarDrawerIcons'
@@ -54,10 +55,6 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
       text: 'Events',
     },
     {
-      href: urls.donate(),
-      text: 'Donate',
-    },
-    {
       href: urls.resources(),
       text: 'Resources',
       children: [
@@ -69,6 +66,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
         {
           href: urls.donate(),
           text: 'Donate',
+          icon: DonateIcon,
         },
         {
           href: urls.community(),
