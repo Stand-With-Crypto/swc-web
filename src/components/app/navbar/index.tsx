@@ -67,6 +67,10 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
           icon: MissionIcon,
         },
         {
+          href: urls.donate(),
+          text: 'Donate',
+        },
+        {
           href: urls.community(),
           text: 'Community',
           icon: CommunityIcon,
