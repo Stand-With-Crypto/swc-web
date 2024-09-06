@@ -23,17 +23,44 @@ if (SENDGRID_API_KEY) {
   SendGrid.setApiKey(SENDGRID_API_KEY)
 }
 
-export interface SendMailPayload {
-  to: string
-  from?: string
+type EmailData = string | { name?: string; email: string }
+
+interface CommonPayload {
   subject: string
   html: string
+  from?: string
   customArgs?: {
     variant?: string
     userId?: string
     [key: string]: string | undefined
   }
 }
+
+/**
+ * Personalization data for SendGrid
+ * https://www.twilio.com/en-us/blog/sending-bulk-emails-3-ways-sendgrid-nodejs#Method-2-personalization
+ */
+interface PersonalizationData {
+  to: EmailData | EmailData[]
+  from?: EmailData
+  cc?: EmailData | EmailData[]
+  bcc?: EmailData | EmailData[]
+  subject?: string
+  substitutions?: { [key: string]: string }
+  sendAt?: number
+  customArgs?: { [key: string]: string }
+}
+
+export type SendMailPayload =
+  // This is with personalizations so we can't send to: string
+  | (CommonPayload & {
+      personalizations: PersonalizationData[]
+    })
+  // This is without personalizations so to: string is required
+  | (CommonPayload & {
+      to: string
+      personalizations?: never
+    })
 
 /**
  * Send email using SendGrid
