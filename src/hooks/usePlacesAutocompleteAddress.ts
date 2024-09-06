@@ -18,6 +18,7 @@ export function usePlacesAutocompleteAddress(address: string) {
       locationBias: 'IP_BIAS',
       language: 'en',
     },
+    initOnMount: false,
   })
   // the library returns a loading prop but it appears to always be false. Status will be an empty string unless it returns something
   const loading = !status
