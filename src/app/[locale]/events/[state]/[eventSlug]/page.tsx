@@ -8,10 +8,10 @@ import { PageProps } from '@/types'
 import { getEvent } from '@/utils/server/builderIO/swcEvent'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
-import { US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
+import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
 
 type Props = PageProps<{
-  state: keyof typeof US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP
+  state: keyof typeof US_STATE_CODE_TO_DISPLAY_NAME_MAP
   eventSlug: string
 }>
 
@@ -48,9 +48,7 @@ export default async function EventDetailsPageRoot({ params }: Props) {
 
   const event = await getEvent(eventSlug, state)
 
-  const isStateValid = Object.keys(US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP).includes(
-    state.toUpperCase(),
-  )
+  const isStateValid = Object.keys(US_STATE_CODE_TO_DISPLAY_NAME_MAP).includes(state.toUpperCase())
 
   if (!isStateValid || !event) {
     notFound()
