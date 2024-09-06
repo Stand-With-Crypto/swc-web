@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import * as Sentry from '@sentry/nextjs'
 
 type UseScriptStatus = 'idle' | 'loading' | 'ready' | 'error'
 
@@ -71,13 +70,6 @@ export function useScript(src: string | null, options?: UseScriptOptions): UseSc
       scriptNode.addEventListener('error', setAttributeFromEvent)
     } else {
       setStatus(script.status ?? cachedScriptStatus ?? 'loading')
-      Sentry.captureMessage('Script node already exists', {
-        extra: {
-          src,
-          script,
-          cachedScriptStatus,
-        },
-      })
     }
 
     const setStateFromEvent = (event: Event) => {
