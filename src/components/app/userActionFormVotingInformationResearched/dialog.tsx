@@ -53,19 +53,23 @@ export function UserActionFormVotingInformationResearchedDialog({
           </div>
         ) : (
           <UserActionFormVotingInformationResearched
-            {...formProps}
             initialValues={{
               address: user?.address
                 ? {
                     description: user?.address?.formattedDescription,
                     place_id: user?.address?.googlePlaceId,
                   }
-                : undefined,
-              shouldReceiveNotifications: false,
-              campaignName: UserActionVotingInformationResearchedCampaignName['2024_ELECTION'],
-              ...formProps.initialValues,
+                : formProps.initialValues?.address,
+              shouldReceiveNotifications:
+                formProps.initialValues?.shouldReceiveNotifications || false,
+              campaignName:
+                formProps.initialValues?.campaignName ||
+                UserActionVotingInformationResearchedCampaignName['2024_ELECTION'],
             }}
-            onSuccess={() => dialogProps.onOpenChange(false)}
+            onSuccess={() => {
+              dialogProps.onOpenChange(false)
+              formProps.onSuccess?.()
+            }}
           />
         )}
       </UserActionFormDialog>
