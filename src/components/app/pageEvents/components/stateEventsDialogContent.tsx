@@ -8,17 +8,17 @@ import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { usePreventOverscroll } from '@/hooks/usePreventOverscroll'
 import { SWCEvent, SWCEvents } from '@/utils/shared/getSWCEvents'
 import { pluralize } from '@/utils/shared/pluralize'
-import { US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
+import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
 
 interface StateEventsDialogProps {
-  state: keyof typeof US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP
+  state: keyof typeof US_STATE_CODE_TO_DISPLAY_NAME_MAP
   events?: SWCEvents
 }
 
 export function StateEventsDialogContent({ state, events }: StateEventsDialogProps) {
   usePreventOverscroll()
 
-  const parsedState = state.toUpperCase() as keyof typeof US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP
+  const parsedState = state.toUpperCase() as keyof typeof US_STATE_CODE_TO_DISPLAY_NAME_MAP
   const stateEvents =
     events?.filter(event => event.data.state?.toLowerCase() === state.toLowerCase()) ?? []
 
@@ -40,13 +40,13 @@ export function StateEventsDialogContent({ state, events }: StateEventsDialogPro
       />
 
       <h3 className="font-sans text-xl font-bold">
-        Events in {US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP[parsedState]}
+        Events in {US_STATE_CODE_TO_DISPLAY_NAME_MAP[parsedState]}
       </h3>
       <p className="font-mono text-base text-muted-foreground">
         There {pluralize({ singular: 'is', plural: 'are', count: orderedResult?.length ?? 0 })}{' '}
         {orderedResult?.length ?? 0} Stand With Crypto{' '}
         {pluralize({ singular: 'event', count: orderedResult?.length ?? 0 })} in{' '}
-        {US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP[parsedState]}.
+        {US_STATE_CODE_TO_DISPLAY_NAME_MAP[parsedState]}.
       </p>
 
       <ScrollArea className="w-full">
