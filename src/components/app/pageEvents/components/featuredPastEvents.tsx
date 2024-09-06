@@ -54,7 +54,7 @@ export function FeaturedPastEvents({ events }: FeaturedPastEventsProps) {
 
 function EventOverlay({ eventName }: { eventName: string }) {
   return (
-    <div className="absolute inset-0 flex items-center justify-center rounded-lg opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100">
+    <div className="absolute inset-0 flex items-center justify-center rounded-lg opacity-100 transition-opacity duration-300 ease-in-out group-hover:opacity-100 lg:opacity-0">
       <div className="absolute inset-0 bg-black/80 opacity-75" />
 
       <div className="relative z-10 flex h-full w-full cursor-pointer flex-col justify-between p-4 text-left text-white">

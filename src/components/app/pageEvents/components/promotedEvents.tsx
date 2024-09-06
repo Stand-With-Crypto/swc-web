@@ -69,15 +69,15 @@ export function PromotedEvents({ events }: PromotedEventsProps) {
                 <EventDialog
                   event={event.data}
                   trigger={
-                    <Button asChild className="mt-2 w-full lg:mt-4 lg:w-fit" variant="secondary">
+                    <Button asChild className="mt-2 w-full sm:w-fit lg:mt-4" variant="secondary">
                       <span>See what happened</span>
                     </Button>
                   }
-                  triggerClassName="w-fit"
+                  triggerClassName="w-full sm:w-fit"
                 />
               ) : (
                 <Button
-                  className="mt-2 w-full lg:mt-4 lg:w-fit"
+                  className="mt-2 w-full sm:w-fit lg:mt-4"
                   onClick={() => handleRSVPButtonClick(event.data)}
                   type="button"
                   variant="secondary"
