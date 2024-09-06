@@ -134,7 +134,7 @@ export const backfillReactivationWithInngest = inngest.createFunction(
     for (let i = 0; i < payloadChunks.length; i += 1) {
       const currentPayloadChunk = payloadChunks[i]
 
-      const messageIds = await step.run('send-batch-emails', async () =>
+      const messageIds = await step.run(`send-batch-emails-${i}`, async () =>
         sendBatchEmails(currentPayloadChunk as User[]),
       )
 
