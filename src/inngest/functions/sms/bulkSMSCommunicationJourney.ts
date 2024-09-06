@@ -64,7 +64,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
     })
 
     const logInfo = (key: string, info?: object) =>
-      logger.info('bulk-info', key, JSON.stringify(info))
+      logger.info('bulk-info', key, info ? JSON.stringify(info) : '')
 
     // SMS messages over 160 characters are split into 153-character segments due to data headers.
     const getWaitingTimeInSeconds = (totalSegments: number) =>
@@ -190,7 +190,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
       const payloadChunk = enqueueMessagesPayloadChunks[i]
 
       const { queuedMessages, queuedSegments, timeToSendAllSegments } = await step.run(
-        `enqueue-messages`,
+        `enqueue-messages - ${i + 1}`,
         async () => {
           let queuedMessages = 0
           let queuedSegments = 0
