@@ -18,6 +18,7 @@ import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { Progress } from '@/components/ui/progress'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
+import { useSession } from '@/hooks/useSession'
 import { PageProps } from '@/types'
 import { SupportedFiatCurrencyCodes } from '@/utils/shared/currency'
 import { getUserActionsProgress } from '@/utils/shared/getUserActionsProgress'
@@ -88,15 +89,8 @@ export function PageUserProfile({ params, user }: PageUserProfile) {
               </div>
             </div>
           </div>
-          <div>
-            <LoginDialogWrapper
-              authenticatedContent={<EditProfileButton user={user} />}
-              subtitle="Confirm your email address or connect a wallet to receive your NFT."
-              title="Claim your free NFT"
-              useThirdwebSession
-            >
-              <Button>Claim my NFTs</Button>
-            </LoginDialogWrapper>
+          <div className="hidden lg:flex">
+            <ProfileAndNFTButtons user={user} />
           </div>
         </div>
         <div className="grid grid-cols-3 rounded-3xl bg-secondary p-3 text-center sm:p-6">
@@ -140,6 +134,11 @@ export function PageUserProfile({ params, user }: PageUserProfile) {
           ))}
         </div>
       </section>
+
+      <div className="w-full lg:hidden">
+        <ProfileAndNFTButtons user={user} />
+      </div>
+
       <section>
         <PageTitle className="mb-4" size="sm">
           Your advocacy progress
@@ -195,15 +194,37 @@ export function PageUserProfile({ params, user }: PageUserProfile) {
   )
 }
 
+function ProfileAndNFTButtons({ user }: { user: PageUserProfileUser }) {
+  return (
+    <div className="flex items-center gap-4">
+      <LoginDialogWrapper
+        authenticatedContent={null}
+        subtitle="Confirm your email address or connect a wallet to receive your NFT."
+        title="Claim your free NFT"
+        useThirdwebSession
+      >
+        <Button className="w-full lg:w-auto">Claim my NFTs</Button>
+      </LoginDialogWrapper>
+
+      <EditProfileButton user={user} />
+    </div>
+  )
+}
+
 function EditProfileButton({ user }: { user: PageUserProfileUser }) {
+  const session = useSession()
+
   return (
     <UpdateUserProfileFormDialog user={user}>
       {hasCompleteUserProfile(user) ? (
-        <Button variant="secondary">
+        <Button className="w-full lg:w-auto" variant="secondary">
           Edit <span className="mx-1 hidden sm:inline-block">your</span> profile
         </Button>
       ) : (
-        <Button>
+        <Button
+          className="w-full lg:w-auto"
+          variant={session.isLoggedInThirdweb ? 'default' : 'secondary'}
+        >
           Finish <span className="mx-1 hidden sm:inline-block">your</span> profile
         </Button>
       )}
