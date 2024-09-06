@@ -24,7 +24,7 @@ export const USER_ACTION_FORM_SUCCESS_SCREEN_INFO: Record<
   },
   [UserActionType.VOTER_REGISTRATION]: {
     title: 'You registered to vote!',
-    description: DEFAULT_USER_ACTION_FORM_SUCCESS_SCREEN_INFO['WITH_NFT'],
+    description: DEFAULT_USER_ACTION_FORM_SUCCESS_SCREEN_INFO['WITHOUT_NFT'],
   },
   [UserActionType.CALL]: {
     title: 'You called your representatives!',

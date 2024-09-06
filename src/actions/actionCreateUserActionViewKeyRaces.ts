@@ -112,8 +112,14 @@ async function _actionCreateUserActionViewKeyRaces(input: CreateActionViewKeyRac
     { stateCode: currentUsaState as keyof typeof US_STATE_CODE_TO_DISPLAY_NAME_MAP },
   )) as GetCongressionalDistrictFromAddressSuccess
 
+  const userAddressCongressionalDistrict =
+    userAddress?.address?.usCongressionalDistrict &&
+    userAddress?.address?.usCongressionalDistrict !== '0'
+      ? userAddress?.address?.usCongressionalDistrict
+      : null
+
   const currentCongressionalDistrict =
-    userAddress?.address?.usCongressionalDistrict ||
+    userAddressCongressionalDistrict ||
     validatedInput.data?.usCongressionalDistrict ||
     maybeCongressionalDistrict?.districtNumber?.toString() ||
     null

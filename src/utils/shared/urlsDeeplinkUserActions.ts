@@ -6,6 +6,7 @@ import { getIntlPrefix } from '@/utils/shared/urls'
 import {
   USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
   UserActionCampaigns,
+  UserActionEmailCampaignName,
 } from '@/utils/shared/userActionCampaigns'
 
 const parseQueryString = (queryString?: string) => {
@@ -73,7 +74,13 @@ const USER_ACTION_WITH_CAMPAIGN_DEEPLINK_MAP: {
   [key in ActiveClientUserActionType]?: {
     [campaign in UserActionCampaigns[key]]?: DeeplinkFunction
   }
-} = {}
+} = {
+  [UserActionType.EMAIL]: {
+    [UserActionEmailCampaignName.ABC_PRESIDENTIAL_DEBATE_2024]: ({ locale }) => {
+      return `${getIntlPrefix(locale)}/action/email-debate`
+    },
+  },
+}
 
 type GetUserActionDeeplinkArgs<ActionType extends UserActionTypesWithDeeplink> = {
   actionType: ActionType

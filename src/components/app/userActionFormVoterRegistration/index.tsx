@@ -3,9 +3,9 @@ import { useMemo, useState } from 'react'
 import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
 import {
   ANALYTICS_NAME_USER_ACTION_FORM_VOTER_REGISTRATION,
+  RegistrationStatusAnswer,
   SectionNames,
 } from '@/components/app/userActionFormVoterRegistration/constants'
-import { ClaimNft } from '@/components/app/userActionFormVoterRegistration/sections/claimNft'
 import { UserActionFormVoterRegistrationSuccess } from '@/components/app/userActionFormVoterRegistration/sections/success'
 import { Survey } from '@/components/app/userActionFormVoterRegistration/sections/survey'
 import { VoterRegistrationForm } from '@/components/app/userActionFormVoterRegistration/sections/voterRegistrationForm'
@@ -24,44 +24,37 @@ export function UserActionFormVoterRegistration({
     initialSectionId: SectionNames.SURVEY,
     analyticsName: ANALYTICS_NAME_USER_ACTION_FORM_VOTER_REGISTRATION,
   })
-  const { currentSection: currentTab, onSectionNotFound: onTabNotFound } = sectionProps
+  const { currentSection: currentTab, onSectionNotFound: onTabNotFound, goToSection } = sectionProps
 
   const [stateCode, setStateCode] = useState<USStateCode | undefined>(initialStateCode)
+  const [registrationStatusAnswer, setRegistrationStatusAnswer] =
+    useState<RegistrationStatusAnswer | null>(null)
 
   const content = useMemo(() => {
     switch (currentTab) {
       case SectionNames.SURVEY:
-        return <Survey {...sectionProps} />
+        return (
+          <Survey
+            onAnswer={answer => {
+              setRegistrationStatusAnswer(answer)
+              goToSection(SectionNames.VOTER_REGISTRATION_FORM)
+            }}
+          />
+        )
       case SectionNames.VOTER_REGISTRATION_FORM:
+        if (!registrationStatusAnswer) {
+          onTabNotFound()
+          return null
+        }
+
         return (
           <VoterRegistrationForm
-            setStateCode={setStateCode}
+            onChangeStateCode={setStateCode}
+            registrationAnswer={registrationStatusAnswer}
             stateCode={stateCode}
             {...sectionProps}
           />
         )
-      case SectionNames.CHECK_REGISTRATION_FORM:
-        return (
-          <VoterRegistrationForm
-            checkRegistration
-            setStateCode={setStateCode}
-            stateCode={stateCode}
-            {...sectionProps}
-          />
-        )
-      case SectionNames.CONFIRM_REGISTRATION_FORM:
-        return (
-          <VoterRegistrationForm
-            registrationConfirm
-            setStateCode={setStateCode}
-            stateCode={stateCode}
-            {...sectionProps}
-          />
-        )
-      case SectionNames.CLAIM_NFT:
-        return <ClaimNft stateCode={stateCode} {...sectionProps} />
-      case SectionNames.ACCOUNT_REGISTRATION:
-        return null
       case SectionNames.SUCCESS:
         return (
           <UserActionFormSuccessScreen onClose={onClose}>
@@ -72,7 +65,15 @@ export function UserActionFormVoterRegistration({
         onTabNotFound()
         return null
     }
-  }, [currentTab, onClose, onTabNotFound, sectionProps, stateCode])
+  }, [
+    currentTab,
+    goToSection,
+    onClose,
+    onTabNotFound,
+    registrationStatusAnswer,
+    sectionProps,
+    stateCode,
+  ])
 
   return content
 }

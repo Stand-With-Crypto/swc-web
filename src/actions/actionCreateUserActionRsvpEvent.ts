@@ -97,7 +97,10 @@ async function _actionCreateUserActionRsvpEvent(input: CreateActionRsvpEventInpu
   }
 
   if (shouldUpdateRsvpEventNotificationStatus && rsvpEventuserAction.id) {
-    await changeReceiveNotificationStatus(rsvpEventuserAction.id)
+    await changeReceiveNotificationStatus({
+      userActionRsvpEventId: rsvpEventuserAction.id,
+      sharedDependencies: { sessionId, analytics, peopleAnalytics },
+    })
 
     waitUntil(beforeFinish())
     return { user: getClientUser(user) }
@@ -146,7 +149,13 @@ async function createUser(sharedDependencies: Pick<SharedDependencies, 'localUse
   return createdUser
 }
 
-async function changeReceiveNotificationStatus(userActionRsvpEventId: string) {
+async function changeReceiveNotificationStatus({
+  userActionRsvpEventId,
+  sharedDependencies,
+}: {
+  userActionRsvpEventId: string
+  sharedDependencies: Pick<SharedDependencies, 'sessionId' | 'analytics' | 'peopleAnalytics'>
+}) {
   await prismaClient.userActionRsvpEvent.update({
     where: {
       id: userActionRsvpEventId,
@@ -156,6 +165,13 @@ async function changeReceiveNotificationStatus(userActionRsvpEventId: string) {
     },
   })
   logger.info('updated user action rsvp event - notification status')
+
+  sharedDependencies.analytics.trackUserActionCreated({
+    actionType: UserActionType.RSVP_EVENT,
+    campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.RSVP_EVENT,
+    userState: 'Existing',
+    shouldReceiveNotifications: true,
+  })
 }
 
 async function getRecentUserActionByUserId(
@@ -232,6 +248,7 @@ async function createAction<U extends User>({
     actionType: UserActionType.RSVP_EVENT,
     campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.RSVP_EVENT,
     userState: isNewUser ? 'New' : 'Existing',
+    shouldReceiveNotifications: validatedInput.shouldReceiveNotifications,
   })
 
   return { userAction }

@@ -329,6 +329,30 @@ const nextConfig = {
       },
       // SMS shortlinks
       {
+        source: '/nv/5',
+        destination:
+          'https://americalovescryptonv.splashthat.com?utm_source=swc&utm_medium=sms&utm_campaign=nv_3&utm_id=sst&utm_content=v2',
+        permanent: false,
+      },
+      {
+        source: '/dc/1',
+        destination:
+          'https://standwithcryptoday2024.splashthat.com/?utm_source=swc&utm_medium=sms&utm_campaign=dc_2&utm_id=sst&utm_content=v1',
+        permanent: false,
+      },
+      {
+        source: '/dc/2',
+        destination:
+          'https://standwithcryptoday2024.splashthat.com/?utm_source=swc&utm_medium=sms&utm_campaign=dc_2&utm_id=sst&utm_content=v2',
+        permanent: false,
+      },
+      {
+        source: '/nv/tour',
+        destination:
+          'https://americalovescryptonv.splashthat.com?utm_source=swc&utm_medium=mms_model&utm_campaign=nv_2&utm_id=sst',
+        permanent: false,
+      },
+      {
         source: '/gotv/3',
         destination: '/?utm_source=swc&utm_medium=sms&utm_campaign=gotv-ma-1&utm_content=v1',
         permanent: false,
