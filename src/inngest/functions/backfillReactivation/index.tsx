@@ -117,82 +117,67 @@ export const backfillReactivationWithInngest = inngest.createFunction(
       ? 1
       : Math.ceil(usersWithoutCommunicationJourneyCount / BACKFILL_REACTIVATION_INNGEST_BATCH_SIZE)
 
-    let totalResult: {
-      message: string
-      results: {
-        id: string
-        datetimeCreated: string
-        userCommunicationJourneyId: string
-        communicationType: CommunicationType
-        messageId: string
-      }[]
-      errors: unknown[]
-    } | null = null
-
     for (let i = 0; i < numBatches; i++) {
-      const batchResult = await step.run(`backfill-reactivation-email-batch-${i}`, async () => {
-        const usersWithoutCommunicationJourney = await prismaClient.user.findMany({
-          take: limit || BACKFILL_REACTIVATION_INNGEST_BATCH_SIZE,
-          orderBy: {
-            datetimeCreated: 'desc',
-          },
-          where: {
-            ...(testEmail
-              ? {
-                  primaryUserEmailAddress: {
-                    emailAddress: testEmail,
-                  },
-                }
-              : {
-                  primaryUserEmailAddress: {
-                    isNot: null,
-                  },
-                }),
-            NOT: {
-              UserCommunicationJourney: {
-                some: {
-                  journeyType: UserCommunicationJourneyType.INITIAL_SIGNUP,
+      const usersWithoutCommunicationJourney = await prismaClient.user.findMany({
+        take: limit || BACKFILL_REACTIVATION_INNGEST_BATCH_SIZE,
+        orderBy: {
+          datetimeCreated: 'desc',
+        },
+        where: {
+          ...(testEmail
+            ? {
+                primaryUserEmailAddress: {
+                  emailAddress: testEmail,
                 },
+              }
+            : {
+                primaryUserEmailAddress: {
+                  isNot: null,
+                },
+              }),
+          NOT: {
+            UserCommunicationJourney: {
+              some: {
+                journeyType: UserCommunicationJourneyType.INITIAL_SIGNUP,
               },
             },
           },
-          include: {
-            primaryUserEmailAddress: true,
-            userActions: true,
-            userSessions: true,
-            address: true,
-          },
-        })
-
-        const messageIds = await sendBatchEmails(usersWithoutCommunicationJourney as User[])
-
-        if (messageIds?.length > 0) {
-          const emailResults = messageIds.map((messageId, index) => ({
-            userId: usersWithoutCommunicationJourney[index].id,
-            messageId,
-          }))
-
-          const result = await persistBatchUserCommunication(emailResults)
-
-          return {
-            message: `Sent initial sign up email to ${result.success.length} users`,
-            results: result.success,
-            errors: result.errors,
-          }
-        }
-
-        return {
-          message: 'No emails sent',
-          results: [],
-          errors: [],
-        }
+        },
+        include: {
+          primaryUserEmailAddress: true,
+          userActions: true,
+          userSessions: true,
+          address: true,
+        },
       })
 
-      totalResult = batchResult
-      logger.info(`Batch ${i} finished with: ${batchResult.message}`)
-    }
+      const messageIds = await step.run('send-batch-emails', async () =>
+        sendBatchEmails(usersWithoutCommunicationJourney as User[]),
+      )
 
-    return totalResult
+      if (messageIds?.length > 0) {
+        const emailResults = messageIds.map((messageId, index) => ({
+          userId: usersWithoutCommunicationJourney[index].id,
+          messageId,
+        }))
+
+        const result = await step.run('persist-batch-user-communication', async () =>
+          persistBatchUserCommunication(emailResults),
+        )
+
+        return {
+          message: `Sent initial sign up email to ${result.success?.count ?? 0} users`,
+          results: result.success,
+          errors: result.errors,
+        }
+      }
+
+      return {
+        message: 'No emails sent',
+        results: [],
+        errors: [],
+      }
+    }
   },
 )
 
@@ -232,7 +217,7 @@ async function persistBatchUserCommunication(emailResults: EmailResult[]) {
     distinct: ['userId'],
   })
 
-  await prismaClient.userCommunication
+  const userCommunicationCreatedCount = await prismaClient.userCommunication
     .createMany({
       data: journeys.map(({ id, userId }) => ({
         messageId: emailResults.find(result => result.userId === userId)!.messageId,
@@ -250,23 +235,8 @@ async function persistBatchUserCommunication(emailResults: EmailResult[]) {
       errors.push(error)
     })
 
-  const createdCommunications = await prismaClient.userCommunication.findMany({
-    where: {
-      userCommunicationJourneyId: {
-        in: journeys.map(({ id }) => id),
-      },
-    },
-    select: {
-      id: true,
-      userCommunicationJourneyId: true,
-      communicationType: true,
-      messageId: true,
-      datetimeCreated: true,
-    },
-  })
-
   return {
-    success: createdCommunications,
+    success: userCommunicationCreatedCount,
     errors,
   }
 }
