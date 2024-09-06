@@ -1,61 +1,98 @@
-import React from 'react'
-import * as Sentry from '@sentry/nextjs'
+import { useEffect, useState } from 'react'
 
-type Status = 'loading' | 'error' | 'ready' | 'unknown'
-// https://github.com/uidotdev/usehooks/blob/main/index.js
-export function useScript(src: string, options: { removeOnUnmount?: boolean } = {}) {
-  const [status, setStatus] = React.useState<Status>('loading')
-  const optionsRef = React.useRef(options)
+type UseScriptStatus = 'idle' | 'loading' | 'ready' | 'error'
 
-  React.useEffect(() => {
-    let script = document.querySelector<HTMLScriptElement>(`script[src="${src}"]`)
+type UseScriptOptions = {
+  shouldPreventLoad?: boolean
+  removeOnUnmount?: boolean
+  id?: string
+}
 
-    const domStatus = script?.getAttribute('data-status') as Status | null | undefined
-    if (domStatus) {
-      setStatus(domStatus)
+const cachedScriptStatuses = new Map<string, UseScriptStatus | undefined>()
+
+function getScriptNode(src: string) {
+  const node: HTMLScriptElement | null = document.querySelector(`script[src="${src}"]`)
+  const status = node?.getAttribute('data-status') as UseScriptStatus | undefined
+
+  return {
+    node,
+    status,
+  }
+}
+
+/**
+ * https://usehooks-ts.com/react-hook/use-script#hook
+ */
+export function useScript(src: string | null, options?: UseScriptOptions): UseScriptStatus {
+  const [status, setStatus] = useState<UseScriptStatus>(() => {
+    if (!src || options?.shouldPreventLoad) {
+      return 'idle'
+    }
+
+    if (typeof window === 'undefined') {
+      return 'loading'
+    }
+
+    return cachedScriptStatuses.get(src) ?? 'loading'
+  })
+
+  useEffect(() => {
+    if (!src || options?.shouldPreventLoad) {
       return
     }
 
-    if (script === null) {
-      script = document.createElement('script')
-      script.src = src
-      script.async = true
-      script.setAttribute('data-status', 'loading')
-      document.body.appendChild(script)
-
-      const handleScriptLoad = () => {
-        script!.setAttribute('data-status', 'ready')
-        setStatus('ready')
-        removeEventListeners()
-      }
-
-      const handleScriptError = () => {
-        script!.setAttribute('data-status', 'error')
-        setStatus('error')
-        removeEventListeners()
-      }
-
-      const removeEventListeners = () => {
-        script!.removeEventListener('load', handleScriptLoad)
-        script!.removeEventListener('error', handleScriptError)
-      }
-
-      script.addEventListener('load', handleScriptLoad)
-      script.addEventListener('error', handleScriptError)
-
-      const removeOnUnmount = optionsRef.current.removeOnUnmount
-
-      return () => {
-        if (removeOnUnmount === true) {
-          script!.remove()
-          removeEventListeners()
-        }
-      }
-    } else {
-      setStatus('unknown')
-      Sentry.captureMessage('Unexpected useScript state', { extra: { src, domStatus, options } })
+    const cachedScriptStatus = cachedScriptStatuses.get(src)
+    if (cachedScriptStatus === 'ready' || cachedScriptStatus === 'error') {
+      setStatus(cachedScriptStatus)
+      return
     }
-  }, [options, src])
+
+    const script = getScriptNode(src)
+    let scriptNode = script.node
+
+    if (!scriptNode) {
+      scriptNode = document.createElement('script')
+      scriptNode.src = src
+      scriptNode.async = true
+      if (options?.id) {
+        scriptNode.id = options.id
+      }
+      scriptNode.setAttribute('data-status', 'loading')
+      document.body.appendChild(scriptNode)
+
+      const setAttributeFromEvent = (event: Event) => {
+        const scriptStatus: UseScriptStatus = event.type === 'load' ? 'ready' : 'error'
+
+        scriptNode?.setAttribute('data-status', scriptStatus)
+      }
+
+      scriptNode.addEventListener('load', setAttributeFromEvent)
+      scriptNode.addEventListener('error', setAttributeFromEvent)
+    } else {
+      setStatus(script.status ?? cachedScriptStatus ?? 'loading')
+    }
+
+    const setStateFromEvent = (event: Event) => {
+      const newStatus = event.type === 'load' ? 'ready' : 'error'
+      setStatus(newStatus)
+      cachedScriptStatuses.set(src, newStatus)
+    }
+
+    scriptNode.addEventListener('load', setStateFromEvent)
+    scriptNode.addEventListener('error', setStateFromEvent)
+
+    return () => {
+      if (scriptNode) {
+        scriptNode.removeEventListener('load', setStateFromEvent)
+        scriptNode.removeEventListener('error', setStateFromEvent)
+      }
+
+      if (scriptNode && options?.removeOnUnmount) {
+        scriptNode.remove()
+        cachedScriptStatuses.delete(src)
+      }
+    }
+  }, [src, options?.shouldPreventLoad, options?.removeOnUnmount, options?.id])
 
   return status
 }
