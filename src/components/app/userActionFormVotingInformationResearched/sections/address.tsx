@@ -8,6 +8,7 @@ import { z } from 'zod'
 
 import { actionCreateUserActionVotingInformationResearched } from '@/actions/actionCreateUserActionVotingInformationResearched'
 import { UserActionFormLayout } from '@/components/app/userActionFormCommon'
+import { buildElectoralUrl } from '@/components/app/userActionFormVotingInformationResearched/utils'
 import { Button } from '@/components/ui/button'
 import { ErrorMessage } from '@/components/ui/errorMessage'
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form'
@@ -16,7 +17,6 @@ import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForU
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { openWindow } from '@/utils/shared/openWindow'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
-import { getUSStateNameFromStateCode } from '@/utils/shared/usStateUtils'
 import { trackFormSubmissionSyncErrors, triggerServerActionForForm } from '@/utils/web/formUtils'
 import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
 import { identifyUserOnClient } from '@/utils/web/identifyUser'
@@ -32,23 +32,9 @@ import {
   VotingInformationResearchedFormValues,
 } from './formConfig'
 
-const buildElectoralUrl = (address: z.infer<typeof zodAddress>) => {
-  const baseUrl = 'https://turbovote.org/'
-  const state = address.administrativeAreaLevel1
-  const electionDate = '2024-11-05'
-
-  const params = new URLSearchParams({
-    street: `${address.streetNumber} ${address.route}`,
-    city: getUSStateNameFromStateCode(state),
-    state,
-    zip: address.postalCode,
-  })
-
-  return new URL(`/elections/${state.toLowerCase()}/${electionDate}?${params.toString()}`, baseUrl)
-}
-
 export interface AddressProps {
   onSuccess: (address: z.infer<typeof zodAddress>) => void
+  onSubmit?: () => void
   initialValues?: Partial<VotingInformationResearchedFormValues>
 }
 
@@ -88,6 +74,56 @@ export const Address = (props: AddressProps) => {
     [mutate, searchParams],
   )
 
+  const createAction = useCallback(
+    async (formValues: VotingInformationResearchedFormValues) => {
+      const address = await convertGooglePlaceAutoPredictionToAddressSchema(
+        formValues.address,
+      ).catch(e => {
+        Sentry.captureException(e)
+        catchUnexpectedServerErrorAndTriggerToast(e)
+        return null
+      })
+      if (!address) {
+        form.setError('root', {
+          message: 'Invalid address',
+        })
+        return
+      }
+      const result = await triggerServerActionForForm(
+        {
+          form,
+          formName: FORM_NAME,
+          analyticsProps: {
+            ...(address ? convertAddressToAnalyticsProperties(address) : {}),
+            'Campaign Name': formValues.campaignName,
+            'User Action Type': UserActionType.VOTING_INFORMATION_RESEARCHED,
+            'Subscribed to notifications': formValues.shouldReceiveNotifications,
+          },
+          payload: { ...formValues, address },
+          onError: (_, e) => {
+            form.setError('root', {
+              message: e.message,
+            })
+            toastGenericError()
+          },
+        },
+        payload =>
+          actionCreateUserActionVotingInformationResearched(payload).then(actionResult => {
+            if (actionResult && 'user' in actionResult && actionResult.user) {
+              identifyUserOnClient(actionResult.user)
+            }
+            return actionResult
+          }),
+      )
+      if (result.status === 'success') {
+        router.refresh()
+        handleTurboVoteRedirect(address)
+        onSuccess(address)
+      }
+    },
+    [form, handleTurboVoteRedirect, onSuccess, router],
+  )
+
   return (
     <UserActionFormLayout>
       <div className="flex h-full flex-1 flex-col">
@@ -103,52 +139,7 @@ export const Address = (props: AddressProps) => {
               <form
                 id="view-key-races-form"
                 onSubmit={form.handleSubmit(async formValues => {
-                  const address = await convertGooglePlaceAutoPredictionToAddressSchema(
-                    formValues.address,
-                  ).catch(e => {
-                    Sentry.captureException(e)
-                    catchUnexpectedServerErrorAndTriggerToast(e)
-                    return null
-                  })
-                  if (!address) {
-                    form.setError('root', {
-                      message: 'Invalid address',
-                    })
-                    return
-                  }
-                  const result = await triggerServerActionForForm(
-                    {
-                      form,
-                      formName: FORM_NAME,
-                      analyticsProps: {
-                        ...(address ? convertAddressToAnalyticsProperties(address) : {}),
-                        'Campaign Name': formValues.campaignName,
-                        'User Action Type': UserActionType.VOTING_INFORMATION_RESEARCHED,
-                        'Subscribed to notifications': formValues.shouldReceiveNotifications,
-                      },
-                      payload: { ...formValues, address },
-                      onError: (_, e) => {
-                        form.setError('root', {
-                          message: e.message,
-                        })
-                        toastGenericError()
-                      },
-                    },
-                    payload =>
-                      actionCreateUserActionVotingInformationResearched(payload).then(
-                        actionResult => {
-                          if (actionResult && 'user' in actionResult && actionResult.user) {
-                            identifyUserOnClient(actionResult.user)
-                          }
-                          return actionResult
-                        },
-                      ),
-                  )
-                  if (result.status === 'success') {
-                    router.refresh()
-                    handleTurboVoteRedirect(address)
-                    onSuccess?.(address)
-                  }
+                  await createAction(formValues)
                 }, trackFormSubmissionSyncErrors(FORM_NAME))}
               >
                 <FormField

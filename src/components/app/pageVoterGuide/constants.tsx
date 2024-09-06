@@ -45,6 +45,8 @@ export const VOTER_GUIDE_STEPS: VoterGuideStep[] = [
           <UserActionFormVotingInformationResearchedDialog
             initialValues={{
               campaignName: UserActionVotingInformationResearchedCampaignName['2024_ELECTION'],
+              address: undefined,
+              shouldReceiveNotifications: false,
             }}
           >
             {children}
