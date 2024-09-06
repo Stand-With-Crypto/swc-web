@@ -16,7 +16,7 @@ export function UserActionFormEmailDebateSkeleton() {
       <LoadingOverlay />
       <ScrollArea>
         <div className={cn(dialogContentPaddingStyles, 'space-y-4 md:space-y-8')}>
-          <PageTitle className="mb-3 w-max" size="sm">
+          <PageTitle className="mb-3" size="sm">
             Ask ABC to include crypto at the Debate
           </PageTitle>
           <PageSubTitle className="mb-7">
