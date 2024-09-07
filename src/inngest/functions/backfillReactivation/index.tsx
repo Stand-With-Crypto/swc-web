@@ -128,10 +128,13 @@ export const backfillReactivationWithInngest = inngest.createFunction(
       }
     }
 
+    let totalUsers = 0
+    const errors: unknown[] = []
+
     for (let i = 0; i < payloadChunks.length; i += 1) {
       const currentPayloadChunk = payloadChunks[i]
 
-      const messageIds = await step.run('send-batch-emails', async () =>
+      const messageIds = await step.run(`send-batch-emails-${i}`, async () =>
         sendBatchEmails(currentPayloadChunk as User[]),
       )
 
@@ -145,18 +148,14 @@ export const backfillReactivationWithInngest = inngest.createFunction(
           persistBatchUserCommunication(emailResults),
         )
 
-        return {
-          message: `Sent initial sign up email to ${result.success?.count ?? 0} users`,
-          results: result.success,
-          errors: result.errors,
-        }
+        totalUsers += result.success?.count ?? 0
+        errors.push(...result.errors)
       }
+    }
 
-      return {
-        message: 'No emails sent',
-        results: [],
-        errors: [],
-      }
+    return {
+      message: `Sent initial sign up email to ${totalUsers} users in ${payloadChunks.length} batches`,
+      errors,
     }
   },
 )
