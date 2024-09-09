@@ -23,7 +23,7 @@ export const ANALYTICS_NAME_USER_ACTION_FORM_GET_INFORMED = 'User Action Form Ge
 
 export const VOTER_GUIDE_STEPS: VoterGuideStep[] = [
   {
-    title: 'Get Informed',
+    title: 'Get informed',
     description: 'See where politicians on your ballot stand on crypto.',
     WrapperComponent: KeyRacesDialog,
     action: UserActionType.VOTER_ATTESTATION,
