@@ -1,13 +1,14 @@
 import { UserActionType } from '@prisma/client'
 import { uniqBy } from 'lodash-es'
 
-import { USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP } from '@/utils/shared/userActionCampaigns'
 import { USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN } from '@/utils/web/userActionUtils'
 
 const USER_ACTIONS_EXCLUDED_FROM_CTA: UserActionType[] = [
   UserActionType.LIVE_EVENT,
   UserActionType.TWEET_AT_PERSON,
   UserActionType.RSVP_EVENT,
+  UserActionType.VIEW_KEY_RACES,
+  UserActionType.VOTING_INFORMATION_RESEARCHED,
 ]
 
 export interface GetUserActionsProgressArgs {
@@ -28,14 +29,23 @@ export function getUserActionsProgress({
       : USER_ACTIONS_EXCLUDED_FROM_CTA,
   )
 
+  const activeUserActionCTAWithCampaign = new Set<string>(
+    USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN.map(
+      ({ action, campaign }) => `${action}-${campaign}`,
+    ),
+  )
+
   const numActionsCompleted = uniqBy(
     performedUserActionTypes,
     action => `${action.actionType}-${action.campaignName}`,
   ).reduce((count, action) => {
-    return excludeUserActionTypes.has(action.actionType) ||
-      action.campaignName !== USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP[action.actionType]
-      ? count
-      : count + 1
+    const actionWithCampaign = `${action.actionType}-${action.campaignName}`
+
+    if (excludeUserActionTypes.has(action.actionType)) return count
+
+    if (!activeUserActionCTAWithCampaign.has(actionWithCampaign)) return count
+
+    return count + 1
   }, 0)
 
   const numActionsAvailable = USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN.filter(
