@@ -1,6 +1,7 @@
 import { CommunicationType, UserCommunicationJourneyType } from '@prisma/client'
 import { render } from '@react-email/components'
 import * as Sentry from '@sentry/nextjs'
+import { chunk } from 'lodash-es'
 
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
@@ -16,13 +17,33 @@ interface ScriptPayload {
   limit?: number
 }
 
+interface EmailResult {
+  userId: string
+  messageId: string
+}
+
+interface User {
+  id: string
+  primaryUserEmailAddress: {
+    emailAddress: string
+  }
+  userActions: {
+    actionType: EmailActiveActions
+  }[]
+  userSessions: {
+    id: string
+    userId: string
+  }[]
+}
+
 const BACKFILL_REACTIVATION_INNGEST_EVENT_NAME = 'script/backfill-reactivation'
 const BACKFILL_REACTIVATION_INNGEST_FUNCTION_ID = 'script.backfill-reactivation'
 const BACKFILL_REACTIVATION_INNGEST_BATCH_SIZE =
-  Number(process.env.BACKFILL_REACTIVATION_INNGEST_BATCH_SIZE) || 5000
+  Number(process.env.BACKFILL_REACTIVATION_INNGEST_BATCH_SIZE) || 50
 
 const BACKFILL_REACTIVATION_INNGEST_CRON_JOB_ID = 'script.backfill-reactivation-cron-job'
-const BACKFILL_REACTIVATION_INNGEST_CRON_JOB_SCHEDULE = 'TZ=America/New_York 0 10,11,12,13,14 * * *' // Every hour between 10AM and 2PM EST
+const BACKFILL_REACTIVATION_INNGEST_CRON_JOB_SCHEDULE =
+  'TZ=America/New_York 0 11,12,13,14,15,16,17 * * *' // Every hour between 11AM and 5PM EST
 
 const logger = getLogger('backfillReactivation')
 
@@ -34,7 +55,7 @@ export const backfillReactivationCron = inngest.createFunction(
       name: BACKFILL_REACTIVATION_INNGEST_EVENT_NAME,
       data: {
         persist: true,
-        limit: 150,
+        limit: 1500,
       },
     }
 
@@ -54,73 +75,11 @@ export const backfillReactivationWithInngest = inngest.createFunction(
   async ({ event, step }) => {
     const { testEmail, persist, limit } = event.data as ScriptPayload
 
-    const usersWithoutCommunicationJourneyCount = await step.run(
-      'get-users-without-communication-journey-count',
-      async () => {
-        return prismaClient.user.count({
-          where: {
-            ...(testEmail
-              ? {
-                  primaryUserEmailAddress: {
-                    emailAddress: testEmail,
-                  },
-                }
-              : {
-                  primaryUserEmailAddress: {
-                    isNot: null,
-                  },
-                }),
-            NOT: {
-              UserCommunicationJourney: {
-                some: {
-                  journeyType: UserCommunicationJourneyType.INITIAL_SIGNUP,
-                },
-              },
-            },
-          },
+    const usersWithoutCommunicationJourney = await step.run(
+      'get-users-without-communication-journey',
+      async () =>
+        await prismaClient.user.findMany({
           take: limit,
-        })
-      },
-    )
-
-    if (!persist) {
-      logger.info('Dry run')
-      logger.info(
-        `Would send initial sign up email to ${usersWithoutCommunicationJourneyCount} users`,
-      )
-      return {
-        message: `Would send initial sign up email to ${usersWithoutCommunicationJourneyCount} users`,
-        results: [],
-      }
-    }
-
-    const numBatches = limit
-      ? 1
-      : Math.ceil(usersWithoutCommunicationJourneyCount / BACKFILL_REACTIVATION_INNGEST_BATCH_SIZE)
-
-    let totalResult: {
-      message: string
-      results: {
-        id: string
-        datetimeCreated: string
-        userCommunicationJourneyId: string
-        communicationType: CommunicationType
-        messageId: string
-      }[]
-    } | null = null
-
-    for (let i = 0; i < numBatches; i++) {
-      const result: {
-        id: string
-        userCommunicationJourneyId: string
-        communicationType: CommunicationType
-        messageId: string
-        datetimeCreated: Date
-      }[] = []
-
-      const batchResult = await step.run(`backfill-reactivation-email-batch-${i}`, async () => {
-        const usersWithoutCommunicationJourney = await prismaClient.user.findMany({
-          take: limit || BACKFILL_REACTIVATION_INNGEST_BATCH_SIZE,
           orderBy: {
             datetimeCreated: 'desc',
           },
@@ -144,105 +103,153 @@ export const backfillReactivationWithInngest = inngest.createFunction(
               },
             },
           },
-          select: {
-            id: true,
+          include: {
+            primaryUserEmailAddress: true,
+            userActions: true,
+            userSessions: true,
+            address: true,
           },
-        })
+        }),
+    )
 
-        for (const user of usersWithoutCommunicationJourney) {
-          const messageId = await sendInitialSignUpEmail(user.id)
+    const payloadChunks = chunk(
+      usersWithoutCommunicationJourney,
+      BACKFILL_REACTIVATION_INNGEST_BATCH_SIZE,
+    )
 
-          if (messageId) {
-            const userCommunicationJourney = await prismaClient.userCommunicationJourney.create({
-              data: {
-                userId: user.id,
-                journeyType: UserCommunicationJourneyType.INITIAL_SIGNUP,
-              },
-            })
-
-            const userCommunication = await prismaClient.userCommunication.create({
-              data: {
-                messageId,
-                communicationType: CommunicationType.EMAIL,
-                userCommunicationJourneyId: userCommunicationJourney.id,
-              },
-            })
-
-            result.push(userCommunication)
-          }
-        }
-
-        return {
-          message: `Sent initial sign up email to ${result.length} users`,
-          results: result,
-        }
-      })
-
-      totalResult = batchResult
-
-      logger.info(`Batch ${i} finished with: ${batchResult.message}`)
+    if (!persist) {
+      logger.info('Dry run')
+      logger.info(
+        `Would send initial sign up email to ${usersWithoutCommunicationJourney.length} users in ${payloadChunks.length} batches`,
+      )
+      return {
+        message: `Would send initial sign up email to ${usersWithoutCommunicationJourney.length} users in ${payloadChunks.length} batches`,
+        results: [],
+      }
     }
 
-    return totalResult
+    let totalUsers = 0
+    const errors: unknown[] = []
+
+    for (let i = 0; i < payloadChunks.length; i += 1) {
+      const currentPayloadChunk = payloadChunks[i]
+
+      const messageIds = await step.run(
+        `send-batch-emails-${i}`,
+        async () => await sendBatchEmails(currentPayloadChunk as User[]),
+      )
+
+      if (messageIds?.length > 0) {
+        const emailResults = messageIds.map((messageId, index) => ({
+          userId: currentPayloadChunk[index].id,
+          messageId,
+        }))
+
+        const result = await step.run(
+          `persist-batch-user-communication-${i}`,
+          async () => await persistBatchUserCommunication(emailResults),
+        )
+
+        totalUsers += result.success?.count ?? 0
+        errors.push(...result.errors)
+      }
+    }
+
+    return {
+      message: `Sent initial sign up email to ${totalUsers} users in ${payloadChunks.length} batches`,
+      errors,
+    }
   },
 )
 
-async function sendInitialSignUpEmail(userId: string) {
-  const user = await getUser(userId)
+async function persistBatchUserCommunication(emailResults: EmailResult[]) {
+  const errors: unknown[] = []
 
-  if (!user.primaryUserEmailAddress) {
-    return null
-  }
-
-  const userSession = user.userSessions?.[0]
-  const completedActionTypes = user.userActions
-    .filter(action => Object.values(EmailActiveActions).includes(action.actionType))
-    .map(action => action.actionType as EmailActiveActions)
-  const currentSession = userSession
-    ? {
-        userId: userSession.userId,
-        sessionId: userSession.id,
-      }
-    : null
-
-  const ReactivationReminderComponent = ReactivationReminder
-
-  return await sendMail({
-    to: user.primaryUserEmailAddress.emailAddress,
-    subject: ReactivationReminderComponent.subjectLine,
-    customArgs: {
-      userId: user.id,
-      category: 'Reactivation Email Reminder',
-    },
-    html: render(
-      <ReactivationReminderComponent
-        completedActionTypes={completedActionTypes}
-        session={currentSession}
-      />,
-    ),
-  }).catch(err => {
-    Sentry.captureException(err, {
-      extra: { userId: user.id, emailTo: user.primaryUserEmailAddress!.emailAddress },
-      tags: {
-        domain: 'backfillReactivation',
-      },
-      fingerprint: ['backfillReactivation', 'sendMail'],
+  await prismaClient.userCommunicationJourney
+    .createMany({
+      data: emailResults.map(({ userId }) => ({
+        userId,
+        journeyType: UserCommunicationJourneyType.INITIAL_SIGNUP,
+        campaignName: UserCommunicationJourneyType.INITIAL_SIGNUP,
+      })),
+    })
+    .catch(error => {
+      Sentry.captureException(error, {
+        tags: {
+          domain: 'backfillReactivationEmail',
+          message: 'error creating userCommunicationJourney',
+        },
+      })
+      errors.push(error)
     })
 
-    return Promise.reject(err)
+  const journeys = await prismaClient.userCommunicationJourney.findMany({
+    where: {
+      userId: {
+        in: emailResults.map(({ userId }) => userId),
+      },
+      journeyType: UserCommunicationJourneyType.INITIAL_SIGNUP,
+      campaignName: UserCommunicationJourneyType.INITIAL_SIGNUP,
+    },
+    select: {
+      id: true,
+      userId: true,
+    },
+    distinct: ['userId'],
   })
+
+  const userCommunicationCreatedCount = await prismaClient.userCommunication
+    .createMany({
+      data: journeys.map(({ id, userId }) => ({
+        messageId: emailResults.find(result => result.userId === userId)!.messageId,
+        communicationType: CommunicationType.EMAIL,
+        userCommunicationJourneyId: id,
+      })),
+    })
+    .catch(error => {
+      Sentry.captureException(error, {
+        tags: {
+          domain: 'backfillReactivationEmail',
+          message: 'error creating userCommunication',
+        },
+      })
+      errors.push(error)
+    })
+
+  return {
+    success: userCommunicationCreatedCount,
+    errors,
+  }
 }
 
-async function getUser(userId: string) {
-  return prismaClient.user.findFirstOrThrow({
-    where: {
-      id: userId,
-    },
-    include: {
-      primaryUserEmailAddress: true,
-      userActions: true,
-      userSessions: true,
-      address: true,
-    },
+async function sendBatchEmails(users: User[]) {
+  const emailsPayload = users.map(user => {
+    const userSession = user.userSessions?.[0]
+    const completedActionTypes = user.userActions
+      .filter(action => Object.values(EmailActiveActions).includes(action.actionType))
+      .map(action => action.actionType)
+    const currentSession = userSession
+      ? {
+          userId: userSession.userId,
+          sessionId: userSession.id,
+        }
+      : null
+
+    return {
+      to: user.primaryUserEmailAddress.emailAddress,
+      subject: ReactivationReminder.subjectLine,
+      customArgs: {
+        userId: user.id,
+        category: 'Reactivation Email Reminder',
+      },
+      html: render(
+        <ReactivationReminder
+          completedActionTypes={completedActionTypes}
+          session={currentSession}
+        />,
+      ),
+    }
   })
+
+  return await sendMail(emailsPayload)
 }
