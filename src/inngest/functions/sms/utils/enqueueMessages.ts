@@ -222,7 +222,8 @@ interface Variables {
 }
 
 function addVariablesToMessage(message: string, variables: Variables) {
-  return message.replace(/{{\s*(\w+)\s*}}/g, (_, variable: keyof Variables) =>
-    variables[variable] !== undefined ? (variables[variable] ?? '') : '',
+  return message.replace(
+    /{{\s*(\w+)\s*}}/g,
+    (_, variable: keyof Variables) => variables[variable] ?? '',
   )
 }
