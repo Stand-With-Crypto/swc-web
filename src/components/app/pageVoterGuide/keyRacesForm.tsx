@@ -87,7 +87,7 @@ export const KeyRacesForm = (props: KeyRacesFormProps) => {
     },
   })
 
-  const createViewKeyRacesAction = useCallback(async () => {
+  const createViewKeyRacesAction = async () => {
     const formValues = form.getValues()
     if (!formValues.address) return
 
@@ -139,15 +139,15 @@ export const KeyRacesForm = (props: KeyRacesFormProps) => {
       void mutate()
       onViewKeyRacesActionSuccess?.()
     }
-  }, [form, mutate, onViewKeyRacesActionSuccess, router])
+  }
+  const createViewKeyRacesActionRef = useRef(createViewKeyRacesAction)
 
   const scriptStatus = useGoogleMapsScript()
 
   useEffect(() => {
     if (address?.description && racesByAddressRequest.data && scriptStatus === 'ready') {
-      void createViewKeyRacesAction()
+      void createViewKeyRacesActionRef.current()
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [address, racesByAddressRequest.data, scriptStatus])
 
   const isSubmitDisabled =
