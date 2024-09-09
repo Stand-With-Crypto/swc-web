@@ -5,42 +5,18 @@ import { cn } from '@/utils/web/cn'
 
 const CHECKMARK_SIZE = 32
 
+type StepStatus = 'unknown' | 'complete' | 'incomplete'
+
 interface VoterJourneyStepCardProps {
   step: number
   title: string
   description: string
-  status: 'unknown' | 'complete' | 'incomplete'
+  status: StepStatus
   className?: ClassValue
 }
 
 export function VoterJourneyStepCard(props: VoterJourneyStepCardProps) {
   const { step, title, description, status = 'unknown', className } = props
-
-  const renderStatus = () => {
-    switch (status) {
-      case 'complete':
-        return (
-          <NextImage
-            alt={'Action complete'}
-            height={CHECKMARK_SIZE}
-            src={'/misc/checkedCircle-purple.svg'}
-            width={CHECKMARK_SIZE}
-          />
-        )
-      case 'incomplete':
-        return (
-          <NextImage
-            alt={'Action not complete'}
-            height={CHECKMARK_SIZE}
-            src={'/misc/uncheckedCircle.svg'}
-            width={CHECKMARK_SIZE}
-          />
-        )
-      case 'unknown':
-      default:
-        return null
-    }
-  }
 
   return (
     <button
@@ -63,8 +39,34 @@ export function VoterJourneyStepCard(props: VoterJourneyStepCardProps) {
           width: CHECKMARK_SIZE,
         }}
       >
-        {renderStatus()}
+        <StepStatus status={status} />
       </div>
     </button>
   )
+}
+
+function StepStatus({ status }: { status: StepStatus }) {
+  switch (status) {
+    case 'complete':
+      return (
+        <NextImage
+          alt={'Action complete'}
+          height={CHECKMARK_SIZE}
+          src={'/misc/checkedCircle-purple.svg'}
+          width={CHECKMARK_SIZE}
+        />
+      )
+    case 'incomplete':
+      return (
+        <NextImage
+          alt={'Action not complete'}
+          height={CHECKMARK_SIZE}
+          src={'/misc/uncheckedCircle.svg'}
+          width={CHECKMARK_SIZE}
+        />
+      )
+    case 'unknown':
+    default:
+      return null
+  }
 }
