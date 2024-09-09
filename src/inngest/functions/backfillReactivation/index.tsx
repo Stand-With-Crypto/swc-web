@@ -76,8 +76,8 @@ export const backfillReactivationWithInngest = inngest.createFunction(
 
     const usersWithoutCommunicationJourney = await step.run(
       'get-users-without-communication-journey',
-      async () => {
-        return prismaClient.user.findMany({
+      async () =>
+        await prismaClient.user.findMany({
           take: limit,
           orderBy: {
             datetimeCreated: 'desc',
@@ -108,8 +108,7 @@ export const backfillReactivationWithInngest = inngest.createFunction(
             userSessions: true,
             address: true,
           },
-        })
-      },
+        }),
     )
 
     const payloadChunks = chunk(
@@ -134,8 +133,9 @@ export const backfillReactivationWithInngest = inngest.createFunction(
     for (let i = 0; i < payloadChunks.length; i += 1) {
       const currentPayloadChunk = payloadChunks[i]
 
-      const messageIds = await step.run(`send-batch-emails-${i}`, async () =>
-        sendBatchEmails(currentPayloadChunk as User[]),
+      const messageIds = await step.run(
+        `send-batch-emails-${i}`,
+        async () => await sendBatchEmails(currentPayloadChunk as User[]),
       )
 
       if (messageIds?.length > 0) {
@@ -144,8 +144,9 @@ export const backfillReactivationWithInngest = inngest.createFunction(
           messageId,
         }))
 
-        const result = await step.run('persist-batch-user-communication', async () =>
-          persistBatchUserCommunication(emailResults),
+        const result = await step.run(
+          `persist-batch-user-communication-${i}`,
+          async () => await persistBatchUserCommunication(emailResults),
         )
 
         totalUsers += result.success?.count ?? 0
