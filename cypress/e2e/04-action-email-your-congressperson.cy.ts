@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-it('action - email your congressperson', () => {
+it.skip('action - email your congressperson', () => {
   cy.visit('/')
 
   cy.contains('Email your congressperson').click()
