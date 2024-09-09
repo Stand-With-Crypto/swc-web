@@ -179,7 +179,7 @@ export function Address(props: AddressProps) {
           size="lg"
           type="submit"
         >
-          Check your voting information
+          {form.formState.isSubmitting ? 'Loading...' : 'Check your voting information'}
         </Button>
       </div>
     </UserActionFormLayout>

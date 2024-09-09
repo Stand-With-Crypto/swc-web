@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect, useRef } from 'react'
 import { UserActionType } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import { useRouter, useSearchParams } from 'next/navigation'
@@ -15,7 +16,7 @@ import { UserActionFormVotingInformationResearchedSuccess } from '@/components/a
 import { buildElectoralUrl } from '@/components/app/userActionFormVotingInformationResearched/utils'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
-import { useEffectOnce } from '@/hooks/useEffectOnce'
+import { useGoogleMapsScript } from '@/hooks/useGoogleMapsScript'
 import { useSections } from '@/hooks/useSections'
 import { openWindow } from '@/utils/shared/openWindow'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
@@ -105,13 +106,18 @@ export const UserActionFormVotingInformationResearched = (
       sectionProps.goToSection(SectionsNames.SUCCESS)
     }
   }
-
-  useEffectOnce(() => {
+  const createActionAndRedirectRef = useRef(createActionAndRedirect)
+  const sectionPropsRef = useRef(sectionProps)
+  const scriptStatus = useGoogleMapsScript()
+  useEffect(() => {
+    if (scriptStatus !== 'ready') return
     if (initialValues?.address?.place_id) {
-      sectionProps.goToSection(SectionsNames.LOADING)
-      void createActionAndRedirect().then(() => sectionProps.goToSection(SectionsNames.SUCCESS))
+      sectionPropsRef.current.goToSection(SectionsNames.LOADING)
+      void createActionAndRedirectRef
+        .current()
+        .then(() => sectionPropsRef.current.goToSection(SectionsNames.SUCCESS))
     }
-  })
+  }, [initialValues?.address?.place_id, scriptStatus])
 
   switch (sectionProps.currentSection) {
     case SectionsNames.LOADING:
