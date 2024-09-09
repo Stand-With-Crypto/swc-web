@@ -52,7 +52,10 @@ export function Address(props: AddressProps) {
   const addressField = useWatch({
     control: form.control,
     name: 'address',
-    defaultValue: initialValues?.address,
+    defaultValue: initialValues?.address || {
+      description: '',
+      place_id: '',
+    },
   })
 
   const isMobile = useIsMobile({ defaultState: true })
@@ -104,12 +107,7 @@ export function Address(props: AddressProps) {
             'Subscribed to notifications': formValues.shouldReceiveNotifications,
           },
           payload: { ...formValues, address },
-          onError: (_, e) => {
-            form.setError('root', {
-              message: e.message,
-            })
-            toastGenericError()
-          },
+          onError: toastGenericError,
         },
         payload =>
           actionCreateUserActionVotingInformationResearched(payload).then(actionResult => {

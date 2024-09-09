@@ -75,13 +75,7 @@ export const KeyRacesForm = (props: KeyRacesFormProps) => {
   })
 
   const racesByAddressRequest = useRacesByAddress(address?.description, {
-    onError: e => {
-      if (e instanceof Error || e?.message) {
-        form.setError('address', {
-          message: e.message,
-        })
-      }
-    },
+    onError: toastGenericError,
     onSuccess: () => {
       form.clearErrors('address')
     },
@@ -119,12 +113,7 @@ export const KeyRacesForm = (props: KeyRacesFormProps) => {
           'User Action Type': UserActionType.VIEW_KEY_RACES,
         },
         payload,
-        onError: (_, e) => {
-          form.setError('address', {
-            message: e.message,
-          })
-          toastGenericError()
-        },
+        onError: toastGenericError,
       },
       input =>
         actionCreateUserActionViewKeyRaces(input).then(actionResult => {
