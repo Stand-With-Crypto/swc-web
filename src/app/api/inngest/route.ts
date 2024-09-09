@@ -30,6 +30,7 @@ import {
   unstopConfirmationSMSCommunicationJourney,
   welcomeSMSCommunicationJourney,
 } from '@/inngest/functions/sms'
+import { timeTest } from '@/inngest/functions/timeTest'
 import {
   auditUsersTotalDonationAmountUsdInngest,
   auditUsersTotalDonationAmountUsdInngestAuditBatchOfUsers,
@@ -45,6 +46,7 @@ export const maxDuration = 180 // 3 minutes
 export const { GET, POST, PUT } = serve({
   client: inngest,
   functions: [
+    timeTest,
     backfillSessionIdCronJob,
     upsertAdvocateInCapitolCanaryWithInngest,
     emailViaCapitolCanaryWithInngest,
