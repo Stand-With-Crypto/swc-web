@@ -22,6 +22,7 @@ export const zodEventSchemaValidation = object({
     date: string(),
     time: string().optional(),
     formattedDescription: string(),
+    carousel: array(object({ photo: string() })).optional(),
   }),
 })
 

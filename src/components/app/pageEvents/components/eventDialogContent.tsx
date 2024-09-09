@@ -10,6 +10,7 @@ import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogW
 import { EventDialogPhoneNumber } from '@/components/app/pageEvents/components/eventDialogPhoneNumber'
 import { EventDialogSocialLinks } from '@/components/app/pageEvents/components/eventDialogSocialLinks'
 import { GoogleMapsEmbedIFrame } from '@/components/app/pageEvents/components/eventGoogleMapsEmbedIframe'
+import { EventPhotosSlideshow } from '@/components/app/pageEvents/components/eventPhotosSlideshow'
 import { SuccessfulEventNotificationsSignup } from '@/components/app/pageEvents/components/successfulEventSignupDialog'
 import { handleCreateRsvpAction as _handleCreateRsvpAction } from '@/components/app/pageEvents/utils/createRsvpAction'
 import { Button } from '@/components/ui/button'
@@ -125,6 +126,7 @@ function EventInformation({
           </h3>
           <div className="text-center font-mono text-base text-muted-foreground">
             <Balancer
+              className="[&_*]:pb-2 [&_strong]:font-semibold [&_strong]:text-foreground"
               dangerouslySetInnerHTML={{ __html: sanitizeHtml(event.formattedDescription) }}
             />
           </div>
@@ -135,9 +137,26 @@ function EventInformation({
             <Pin size={16} /> {event.formattedAddress}
           </p>
 
-          <GoogleMapsEmbedIFrame address={event.formattedAddress} />
+          {isPastEvent ? (
+            <EventPhotosSlideshow>
+              {event?.carousel?.map(item => (
+                <NextImage
+                  alt={event.name}
+                  className="h-[420px] w-full object-cover"
+                  height={420}
+                  key={item.photo}
+                  src={item.photo}
+                  width={466}
+                />
+              ))}
+            </EventPhotosSlideshow>
+          ) : (
+            <GoogleMapsEmbedIFrame address={event.formattedAddress} />
+          )}
 
-          <EventDialogSocialLinks eventSlug={event.slug} eventState={event.state} />
+          {!isPastEvent && (
+            <EventDialogSocialLinks eventSlug={event.slug} eventState={event.state} />
+          )}
         </div>
       </ScrollArea>
 
