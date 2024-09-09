@@ -75,7 +75,11 @@ export const KeyRacesForm = (props: KeyRacesFormProps) => {
   })
 
   const racesByAddressRequest = useRacesByAddress(address?.description, {
-    onError: toastGenericError,
+    onError: () => {
+      form.setError('address', {
+        message: 'Invalid address',
+      })
+    },
     onSuccess: () => {
       form.clearErrors('address')
     },
