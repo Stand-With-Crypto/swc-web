@@ -39,10 +39,11 @@ interface User {
 const BACKFILL_REACTIVATION_INNGEST_EVENT_NAME = 'script/backfill-reactivation'
 const BACKFILL_REACTIVATION_INNGEST_FUNCTION_ID = 'script.backfill-reactivation'
 const BACKFILL_REACTIVATION_INNGEST_BATCH_SIZE =
-  Number(process.env.BACKFILL_REACTIVATION_INNGEST_BATCH_SIZE) || 150
+  Number(process.env.BACKFILL_REACTIVATION_INNGEST_BATCH_SIZE) || 50
 
 const BACKFILL_REACTIVATION_INNGEST_CRON_JOB_ID = 'script.backfill-reactivation-cron-job'
-const BACKFILL_REACTIVATION_INNGEST_CRON_JOB_SCHEDULE = 'TZ=America/New_York 0 10,11,12,13,14 * * *' // Every hour between 10AM and 2PM EST
+const BACKFILL_REACTIVATION_INNGEST_CRON_JOB_SCHEDULE =
+  'TZ=America/New_York 0 11,13,14,15,16,17 * * *' // Every hour between 11AM and 5PM EST
 
 const logger = getLogger('backfillReactivation')
 
@@ -54,7 +55,7 @@ export const backfillReactivationCron = inngest.createFunction(
       name: BACKFILL_REACTIVATION_INNGEST_EVENT_NAME,
       data: {
         persist: true,
-        limit: 150,
+        limit: 1500,
       },
     }
 
