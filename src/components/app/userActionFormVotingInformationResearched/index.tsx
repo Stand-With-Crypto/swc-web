@@ -9,7 +9,7 @@ import { actionCreateUserActionVotingInformationResearched } from '@/actions/act
 import { UserActionFormSuccessScreen } from '@/components/app/userActionFormSuccessScreen'
 import {
   ANALYTICS_NAME_USER_ACTION_FORM_VOTING_INFORMATION_RESEARCHED,
-  SECTIONS_NAMES,
+  SectionsNames,
 } from '@/components/app/userActionFormVotingInformationResearched/constants'
 import { UserActionFormVotingInformationResearchedSuccess } from '@/components/app/userActionFormVotingInformationResearched/sections/success'
 import { buildElectoralUrl } from '@/components/app/userActionFormVotingInformationResearched/utils'
@@ -44,10 +44,10 @@ export const UserActionFormVotingInformationResearched = (
   const { onSuccess, initialValues } = props
 
   const sectionProps = useSections({
-    sections: Object.values(SECTIONS_NAMES),
+    sections: Object.values(SectionsNames),
     initialSectionId: initialValues?.address?.place_id
-      ? SECTIONS_NAMES.LOADING
-      : SECTIONS_NAMES.ADDRESS,
+      ? SectionsNames.LOADING
+      : SectionsNames.ADDRESS,
     analyticsName: ANALYTICS_NAME_USER_ACTION_FORM_VOTING_INFORMATION_RESEARCHED,
   })
 
@@ -73,7 +73,7 @@ export const UserActionFormVotingInformationResearched = (
       return null
     })
     if (!address) {
-      sectionProps.goToSection(SECTIONS_NAMES.ADDRESS)
+      sectionProps.goToSection(SectionsNames.ADDRESS)
       return
     }
     const result = await triggerServerActionForForm(
@@ -87,7 +87,7 @@ export const UserActionFormVotingInformationResearched = (
         },
         payload: { ...initialValues, address },
         onError: () => {
-          sectionProps.goToSection(SECTIONS_NAMES.ADDRESS)
+          sectionProps.goToSection(SectionsNames.ADDRESS)
           toastGenericError()
         },
       },
@@ -102,32 +102,32 @@ export const UserActionFormVotingInformationResearched = (
     if (result.status === 'success') {
       router.refresh()
       handleTurboVoteRedirect(address)
-      sectionProps.goToSection(SECTIONS_NAMES.SUCCESS)
+      sectionProps.goToSection(SectionsNames.SUCCESS)
     }
   }
 
   useEffectOnce(() => {
     if (initialValues?.address?.place_id) {
-      sectionProps.goToSection(SECTIONS_NAMES.LOADING)
-      void createActionAndRedirect().then(() => sectionProps.goToSection(SECTIONS_NAMES.SUCCESS))
+      sectionProps.goToSection(SectionsNames.LOADING)
+      void createActionAndRedirect().then(() => sectionProps.goToSection(SectionsNames.SUCCESS))
     }
   })
 
   switch (sectionProps.currentSection) {
-    case SECTIONS_NAMES.LOADING:
+    case SectionsNames.LOADING:
       return (
         <div className="min-h-[400px]">
           <LoadingOverlay />
         </div>
       )
-    case SECTIONS_NAMES.ADDRESS:
+    case SectionsNames.ADDRESS:
       return (
         <Address
           initialValues={initialValues}
-          onSuccess={() => sectionProps.goToSection(SECTIONS_NAMES.SUCCESS)}
+          onSuccess={() => sectionProps.goToSection(SectionsNames.SUCCESS)}
         />
       )
-    case SECTIONS_NAMES.SUCCESS:
+    case SectionsNames.SUCCESS:
       return (
         <UserActionFormSuccessScreen onClose={onSuccess}>
           <UserActionFormVotingInformationResearchedSuccess />

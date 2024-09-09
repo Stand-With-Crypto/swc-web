@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef } from 'react'
-import { useForm } from 'react-hook-form'
+import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { UserActionType } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
@@ -38,7 +38,7 @@ export interface AddressProps {
   initialValues?: Partial<VotingInformationResearchedFormValues>
 }
 
-export const Address = (props: AddressProps) => {
+export function Address(props: AddressProps) {
   const { onSuccess, initialValues } = props
 
   const router = useRouter()
@@ -49,7 +49,11 @@ export const Address = (props: AddressProps) => {
     resolver: zodResolver(votingInformationResearchedFormValidationSchema),
   })
 
-  const addressField = form.watch('address')
+  const addressField = useWatch({
+    control: form.control,
+    name: 'address',
+    defaultValue: initialValues?.address,
+  })
 
   const isMobile = useIsMobile({ defaultState: true })
   const inputRef = useRef<HTMLInputElement | null>(null)
