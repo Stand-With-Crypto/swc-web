@@ -30,9 +30,9 @@ export const USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN: ReadonlyArray<{
     action: UserActionType.VOTING_INFORMATION_RESEARCHED,
     campaign: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.VOTING_INFORMATION_RESEARCHED,
   },
-  { action: UserActionType.EMAIL, campaign: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.EMAIL },
-  { action: UserActionType.CALL, campaign: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.CALL },
+  // { action: UserActionType.EMAIL, campaign: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.EMAIL }, // Commented out because of the 2024 election.
+  // { action: UserActionType.CALL, campaign: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.CALL }, // Commented out because of the 2024 election.
   { action: UserActionType.TWEET, campaign: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.TWEET },
-  { action: UserActionType.DONATION, campaign: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.DONATION },
+  // { action: UserActionType.DONATION, campaign: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.DONATION }, // Commented out because of the 2024 election.
   { action: UserActionType.NFT_MINT, campaign: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.NFT_MINT },
 ]

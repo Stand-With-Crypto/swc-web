@@ -2,7 +2,7 @@
 
 import { GoogleCivicInfoOfficial, GoogleCivicInfoResponse } from '@/utils/shared/googleCivicInfo'
 
-it('action - call your congressperson', () => {
+it.skip('action - call your congressperson', () => {
   cy.viewport('iphone-6')
   cy.visit('/')
 
