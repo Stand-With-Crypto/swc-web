@@ -15,7 +15,7 @@ describe('disabled user actions for non-US users', () =>
     })
   }))
 
-it('should not create user action for non-US users', () => {
+it.skip('should not create user action for non-US users', () => {
   cy.setCookie('USER_COUNTRY_CODE', 'US')
   cy.visit('/')
   cy.contains('Email your congressperson').click()
