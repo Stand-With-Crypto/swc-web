@@ -54,9 +54,9 @@ export function EventsMap({ events }: { events: SWCEvents }) {
       const coordinates = EVENT_MAP_STATE_COORDS[state as keyof typeof EVENT_MAP_STATE_COORDS]
 
       const marker: MapMarker = {
-        id: `${state}`,
-        name: `${state}`,
-        coordinates: [coordinates[0], coordinates[1]],
+        id: state,
+        name: state,
+        coordinates,
         eventsInStateMarker: eventsFromState[state],
       }
 
