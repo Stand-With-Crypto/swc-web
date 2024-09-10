@@ -1,22 +1,27 @@
 'use server'
 import 'server-only'
 
-import { User, UserActionType } from '@prisma/client'
+import { SMSStatus, User, UserActionType, UserInformationVisibility } from '@prisma/client'
 import { waitUntil } from '@vercel/functions'
 import { nativeEnum, object, z } from 'zod'
 
 import { getClientUser } from '@/clientModels/clientUser/clientUser'
-import { appRouterGetAuthUser } from '@/utils/server/authentication/appRouterGetAuthUser'
+import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMethodOfMatch'
 import { claimNFTAndSendEmailNotification } from '@/utils/server/nft/claimNFT'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
-import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
+import {
+  mapLocalUserToUserDatabaseFields,
+  parseLocalUserFromCookies,
+} from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
 import { createCountryCodeValidation } from '@/utils/server/userActionValidation/checkCountryCode'
 import { withValidations } from '@/utils/server/userActionValidation/withValidations'
+import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
+import { generateReferralId } from '@/utils/shared/referralId'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { UserActionVoterAttestationCampaignName } from '@/utils/shared/userActionCampaigns'
@@ -27,6 +32,7 @@ const createActionVoterAttestationInputValidationSchema = object({
   campaignName: nativeEnum(UserActionVoterAttestationCampaignName),
   stateCode: zodUsaState,
   address: zodAddress,
+  shouldBypassAuth: z.boolean().optional(),
 })
 
 export type CreateActionVoterAttestationInput = z.infer<
@@ -39,6 +45,7 @@ interface SharedDependencies {
   analytics: ReturnType<typeof getServerAnalytics>
   peopleAnalytics: ReturnType<typeof getServerPeopleAnalytics>
   hasRegisteredRatelimit: boolean
+  isNewUser: boolean
 }
 
 const logger = getLogger(`actionCreateUserActionVoterAttestation`)
@@ -67,20 +74,25 @@ async function _actionCreateUserActionVoterAttestation(input: CreateActionVoterA
   const localUser = parseLocalUserFromCookies()
   const sessionId = getUserSessionId()
 
-  const authUser = await appRouterGetAuthUser()
-  if (!authUser) {
+  const userMatch = await getMaybeUserAndMethodOfMatch({
+    prisma: {
+      include: { primaryUserCryptoAddress: true, address: true },
+    },
+  })
+  const shouldBypassAuth = validatedInput.data.shouldBypassAuth
+
+  if (!userMatch.user && !shouldBypassAuth) {
     throw new Error('Unauthenticated')
   }
 
-  const user = await prismaClient.user.findFirstOrThrow({
-    where: {
-      id: authUser.userId,
-    },
-    include: {
-      primaryUserCryptoAddress: true,
-      address: true,
-    },
-  })
+  const user =
+    userMatch.user ||
+    (await createUser({
+      localUser,
+      sessionId,
+      address: validatedInput.data.address,
+    }))
+  const isNewUser = !userMatch.user
 
   const peopleAnalytics = getServerPeopleAnalytics({
     localUser,
@@ -94,9 +106,26 @@ async function _actionCreateUserActionVoterAttestation(input: CreateActionVoterA
 
   const recentUserAction = await getRecentUserActionByUserId(user.id, validatedInput)
   if (recentUserAction) {
+    const shouldUpdateAddress =
+      validatedInput.data.address.formattedDescription !== user?.address?.formattedDescription
+    if (shouldUpdateAddress) {
+      await prismaClient.user.update({
+        where: { id: user.id },
+        data: {
+          address: {
+            connectOrCreate: {
+              where: { googlePlaceId: validatedInput.data.address.googlePlaceId },
+              create: validatedInput.data.address,
+            },
+          },
+        },
+      })
+      logger.info('updated user address')
+    }
+
     logSpamActionSubmissions({
       validatedInput,
-      sharedDependencies: { analytics },
+      sharedDependencies: { analytics, isNewUser },
     })
     waitUntil(beforeFinish())
     return { user: getClientUser(user) }
@@ -106,7 +135,7 @@ async function _actionCreateUserActionVoterAttestation(input: CreateActionVoterA
   const { userAction, updatedUser } = await createActionAndUpdateUser({
     user,
     validatedInput: validatedInput.data,
-    sharedDependencies: { sessionId, analytics, peopleAnalytics },
+    sharedDependencies: { sessionId, analytics, peopleAnalytics, isNewUser },
   })
 
   if (user.primaryUserCryptoAddress !== null) {
@@ -135,13 +164,13 @@ function logSpamActionSubmissions({
   sharedDependencies,
 }: {
   validatedInput: z.SafeParseSuccess<CreateActionVoterAttestationInput>
-  sharedDependencies: Pick<SharedDependencies, 'analytics'>
+  sharedDependencies: Pick<SharedDependencies, 'analytics' | 'isNewUser'>
 }) {
   sharedDependencies.analytics.trackUserActionCreatedIgnored({
     actionType: UserActionType.VOTER_ATTESTATION,
     campaignName: validatedInput.data.campaignName,
     reason: 'Too Many Recent',
-    userState: 'Existing',
+    userState: sharedDependencies.isNewUser ? 'New' : 'Existing',
     ...convertAddressToAnalyticsProperties(validatedInput.data.address),
   })
 }
@@ -153,7 +182,10 @@ async function createActionAndUpdateUser<U extends User>({
 }: {
   user: U
   validatedInput: CreateActionVoterAttestationInput
-  sharedDependencies: Pick<SharedDependencies, 'sessionId' | 'analytics' | 'peopleAnalytics'>
+  sharedDependencies: Pick<
+    SharedDependencies,
+    'sessionId' | 'analytics' | 'peopleAnalytics' | 'isNewUser'
+  >
 }) {
   const userAction = await prismaClient.userAction.create({
     data: {
@@ -197,7 +229,7 @@ async function createActionAndUpdateUser<U extends User>({
     actionType: UserActionType.VOTER_ATTESTATION,
     campaignName: validatedInput.campaignName,
     'USA State': validatedInput.stateCode,
-    userState: 'Existing',
+    userState: sharedDependencies.isNewUser ? 'New' : 'Existing',
     ...convertAddressToAnalyticsProperties(validatedInput.address),
   })
   sharedDependencies.peopleAnalytics.set({
@@ -205,4 +237,51 @@ async function createActionAndUpdateUser<U extends User>({
   })
 
   return { userAction, updatedUser }
+}
+
+async function createUser({
+  localUser,
+  sessionId,
+  address,
+}: {
+  localUser: ReturnType<typeof parseLocalUserFromCookies>
+  sessionId: ReturnType<typeof getUserSessionId>
+  address?: z.infer<typeof zodAddress>
+}) {
+  const createdUser = await prismaClient.user.create({
+    data: {
+      referralId: generateReferralId(),
+      informationVisibility: UserInformationVisibility.ANONYMOUS,
+      userSessions: { create: { id: sessionId } },
+      hasOptedInToEmails: false,
+      hasOptedInToMembership: false,
+      smsStatus: SMSStatus.NOT_OPTED_IN,
+      ...(address
+        ? {
+            address: {
+              connectOrCreate: {
+                where: { googlePlaceId: address.googlePlaceId },
+                create: address,
+              },
+            },
+          }
+        : {}),
+      ...mapLocalUserToUserDatabaseFields(localUser),
+    },
+    include: {
+      primaryUserCryptoAddress: true,
+      address: true,
+    },
+  })
+  logger.info('created user')
+
+  if (localUser?.persisted) {
+    waitUntil(
+      getServerPeopleAnalytics({ localUser, userId: createdUser.id })
+        .setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
+        .flush(),
+    )
+  }
+
+  return createdUser
 }

@@ -1,7 +1,7 @@
 'use server'
 import 'server-only'
 
-import { UserActionType } from '@prisma/client'
+import { SMSStatus, UserActionType, UserInformationVisibility } from '@prisma/client'
 import { waitUntil } from '@vercel/functions'
 import { object, string, z } from 'zod'
 
@@ -10,22 +10,30 @@ import { getMaybeUserAndMethodOfMatch } from '@/utils/server/getMaybeUserAndMeth
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getRequestRateLimiter } from '@/utils/server/ratelimit/throwIfRateLimited'
 import { getServerAnalytics, getServerPeopleAnalytics } from '@/utils/server/serverAnalytics'
-import { parseLocalUserFromCookies } from '@/utils/server/serverLocalUser'
+import {
+  mapLocalUserToUserDatabaseFields,
+  parseLocalUserFromCookies,
+} from '@/utils/server/serverLocalUser'
 import { getUserSessionId } from '@/utils/server/serverUserSessionId'
 import { withServerActionMiddleware } from '@/utils/server/serverWrappers/withServerActionMiddleware'
 import {
   GetCongressionalDistrictFromAddressSuccess,
   maybeGetCongressionalDistrictFromAddress,
 } from '@/utils/shared/getCongressionalDistrictFromAddress'
+import { mapPersistedLocalUserToAnalyticsProperties } from '@/utils/shared/localUser'
 import { getLogger } from '@/utils/shared/logger'
+import { generateReferralId } from '@/utils/shared/referralId'
 import { UserActionViewKeyRacesCampaignName } from '@/utils/shared/userActionCampaigns'
 import { US_STATE_CODE_TO_DISPLAY_NAME_MAP } from '@/utils/shared/usStateUtils'
+import { zodAddress } from '@/validation/fields/zodAddress'
 
 const logger = getLogger(`actionCreateUserActionViewKeyRaces`)
 
 const createActionViewKeyRacesInputValidationSchema = object({
+  address: zodAddress.optional(),
   usCongressionalDistrict: string().optional(),
   usaState: string().optional(),
+  shouldBypassAuth: z.boolean().optional(),
 }).optional()
 
 export type CreateActionViewKeyRacesInput = z.infer<
@@ -63,13 +71,16 @@ async function _actionCreateUserActionViewKeyRaces(input: CreateActionViewKeyRac
     },
   })
 
-  const user = userMatch.user
-
-  if (!user) {
+  const shouldBypassAuth = validatedInput.data?.shouldBypassAuth
+  if (!userMatch.user && !shouldBypassAuth) {
     logger.info('User not logged in')
 
     return
   }
+
+  const user =
+    userMatch.user ||
+    (await createUser({ localUser, sessionId, address: validatedInput.data?.address }))
 
   const userId = user.id
 
@@ -101,7 +112,9 @@ async function _actionCreateUserActionViewKeyRaces(input: CreateActionViewKeyRac
 
     waitUntil(beforeFinish())
 
-    return { user: getClientUser(user) }
+    if (!shouldBypassAuth) {
+      return { user: getClientUser(user) }
+    }
   }
 
   const currentUsaState =
@@ -141,6 +154,7 @@ async function _actionCreateUserActionViewKeyRaces(input: CreateActionViewKeyRac
         existingViewKeyRacesAction,
         currentUsaState,
         currentCongressionalDistrict,
+        validatedInput.data,
       )
 
       analytics.trackUserActionUpdated({
@@ -186,10 +200,58 @@ async function _actionCreateUserActionViewKeyRaces(input: CreateActionViewKeyRac
   return { user: getClientUser(user) }
 }
 
+async function createUser({
+  localUser,
+  sessionId,
+  address,
+}: {
+  localUser: ReturnType<typeof parseLocalUserFromCookies>
+  sessionId: ReturnType<typeof getUserSessionId>
+  address?: z.infer<typeof zodAddress>
+}) {
+  const createdUser = await prismaClient.user.create({
+    data: {
+      referralId: generateReferralId(),
+      informationVisibility: UserInformationVisibility.ANONYMOUS,
+      userSessions: { create: { id: sessionId } },
+      hasOptedInToEmails: false,
+      hasOptedInToMembership: false,
+      smsStatus: SMSStatus.NOT_OPTED_IN,
+      ...(address
+        ? {
+            address: {
+              connectOrCreate: {
+                where: { googlePlaceId: address.googlePlaceId },
+                create: address,
+              },
+            },
+          }
+        : {}),
+      ...mapLocalUserToUserDatabaseFields(localUser),
+    },
+    include: {
+      primaryUserCryptoAddress: true,
+      address: true,
+    },
+  })
+  logger.info('created user')
+
+  if (localUser?.persisted) {
+    waitUntil(
+      getServerPeopleAnalytics({ localUser, userId: createdUser.id })
+        .setOnce(mapPersistedLocalUserToAnalyticsProperties(localUser.persisted))
+        .flush(),
+    )
+  }
+
+  return createdUser
+}
+
 async function updateUserActionViewKeyRaces(
   existingViewKeyRacesAction: Awaited<ReturnType<typeof getUserAlreadyViewedKeyRaces>>,
   usaState: string | null,
   usCongressionalDistrict: string | null,
+  validatedInput: CreateActionViewKeyRacesInput,
 ) {
   const shouldSetDistrictAsNull =
     usaState !== existingViewKeyRacesAction?.userActionViewKeyRaces?.usaState &&
@@ -206,7 +268,7 @@ async function updateUserActionViewKeyRaces(
     })
   }
 
-  return prismaClient.userAction.update({
+  const userAction = await prismaClient.userAction.update({
     where: {
       id: existingViewKeyRacesAction?.id,
     },
@@ -216,6 +278,28 @@ async function updateUserActionViewKeyRaces(
       },
     },
   })
+
+  logger.info('updated user action')
+
+  if (validatedInput?.address) {
+    await prismaClient.user.update({
+      where: { id: existingViewKeyRacesAction?.userId },
+      data: {
+        address: {
+          connectOrCreate: {
+            where: { googlePlaceId: validatedInput.address.googlePlaceId },
+            create: validatedInput.address,
+          },
+        },
+      },
+      include: {
+        address: true,
+      },
+    })
+    logger.info('updated user address')
+  }
+
+  return { userAction }
 }
 
 async function createUserActionViewKeyRaces(
