@@ -135,3 +135,33 @@ export function ResourcesIcon({ height = 24, width = 24, ...rest }: IconProps) {
     </svg>
   )
 }
+
+export function DonateIcon({ height = 24, width = 24, ...rest }: IconProps) {
+  return (
+    <svg
+      fill="none"
+      height={height}
+      viewBox="0 0 24 24"
+      width={width}
+      xmlns="http://www.w3.org/2000/svg"
+      {...rest}
+    >
+      <g clipPath="url(#clip0_4907_3427)">
+        <path
+          d="M18 6H6C4.89 6 4 6.89 4 8V16C4 17.11 4.89 18 6 18H18C19.11 18 20 17.11 20 16V8C20 6.89 19.11 6 18 6ZM18 16H6V8H18V16Z"
+          fill="#FF6200"
+        />
+        <path
+          d="M13 4H11V6H13V4ZM13 8H11V16H13V8ZM9 4H7V6H9V4ZM9 8H7V16H9V8ZM15 4H17V6H15V4ZM15 8H17V16H15V8Z"
+          fill="#FF6200"
+          opacity="0.3"
+        />
+      </g>
+      <defs>
+        <clipPath id="clip0_4907_3427">
+          <rect fill="white" height={height} width={width} />
+        </clipPath>
+      </defs>
+    </svg>
+  )
+}

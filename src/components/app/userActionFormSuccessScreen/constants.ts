@@ -48,4 +48,8 @@ export const USER_ACTION_FORM_SUCCESS_SCREEN_INFO: Record<
     description:
       '... and got a free NFT for doing so! Complete the actions below to continue your progress as a crypto advocate.',
   },
+  [UserActionType.VOTING_INFORMATION_RESEARCHED]: {
+    title: 'You researched your voting information!',
+    description: DEFAULT_USER_ACTION_FORM_SUCCESS_SCREEN_INFO['WITHOUT_NFT'],
+  },
 }

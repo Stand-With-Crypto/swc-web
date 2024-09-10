@@ -9,5 +9,6 @@ const ACTIVE_CLIENT_USER_ACTION_TYPES = [
   UserActionType.NFT_MINT,
   UserActionType.VOTER_REGISTRATION,
   UserActionType.VOTER_ATTESTATION,
+  UserActionType.VOTING_INFORMATION_RESEARCHED,
 ] as const
 export type ActiveClientUserActionType = (typeof ACTIVE_CLIENT_USER_ACTION_TYPES)[number]
