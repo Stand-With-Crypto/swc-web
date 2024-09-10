@@ -4,11 +4,9 @@ import { MouseEvent, useCallback, useEffect, useMemo, useState } from 'react'
 import { ComposableMap, Geographies, Geography, Marker } from 'react-simple-maps'
 import { AnimatePresence, motion } from 'framer-motion'
 
-import {
-  ADVOCATES_HEATMAP_GEO_URL,
-  STATE_COORDS,
-} from '@/components/app/pageAdvocatesHeatmap/constants'
+import { ADVOCATES_HEATMAP_GEO_URL } from '@/components/app/pageAdvocatesHeatmap/constants'
 import { StateEventsDialog } from '@/components/app/pageEvents/components/stateEventsDialog'
+import { EVENT_MAP_STATE_COORDS } from '@/components/app/pageEvents/utils/mapCoordinates'
 import { SWCEvents } from '@/utils/shared/getSWCEvents'
 import { pluralize } from '@/utils/shared/pluralize'
 import {
@@ -20,6 +18,7 @@ interface MapMarker {
   id: string
   name: string
   coordinates: [number, number]
+  eventsInStateMarker: number
 }
 
 export function EventsMap({ events }: { events: SWCEvents }) {
@@ -52,29 +51,20 @@ export function EventsMap({ events }: { events: SWCEvents }) {
     const result: MapMarker[] = []
 
     eventsFromStateKeys.forEach(state => {
-      const coordinates = STATE_COORDS[state as keyof typeof STATE_COORDS]
+      const coordinates = EVENT_MAP_STATE_COORDS[state as keyof typeof EVENT_MAP_STATE_COORDS]
 
-      for (let i = 0; i < eventsFromState[state]; i++) {
-        const offsetX = i % 2 === 0 ? 1 : -1
-        const offsetY = i % 2 === 0 ? -1 : 1
-
-        const offsetCoordinates: [number, number] =
-          i === 0
-            ? [coordinates[0], coordinates[1]]
-            : [coordinates[0] + offsetX, coordinates[1] + offsetY]
-
-        const marker: MapMarker = {
-          id: `${state} ${i}`,
-          name: `${state} ${i}`,
-          coordinates: offsetCoordinates,
-        }
-
-        result.push(marker)
+      const marker: MapMarker = {
+        id: `${state}`,
+        name: `${state}`,
+        coordinates: [coordinates[0], coordinates[1]],
+        eventsInStateMarker: eventsFromState[state],
       }
+
+      result.push(marker)
     })
 
     return result
-  }, [eventsFromState, eventsFromStateKeys])
+  }, [eventsFromStateKeys, eventsFromState])
 
   const handleActionMouseHover = useCallback(
     (geo: any, event: MouseEvent<SVGElement>) => {
@@ -157,7 +147,7 @@ export function EventsMap({ events }: { events: SWCEvents }) {
                 )
               })}
               <AnimatePresence>
-                {markers.map(({ id, coordinates }) => (
+                {markers.map(({ id, coordinates, eventsInStateMarker }) => (
                   <motion.g
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.6 }}
@@ -169,18 +159,22 @@ export function EventsMap({ events }: { events: SWCEvents }) {
                       <svg
                         className="pointer-events-none"
                         fill="none"
-                        height="11"
-                        viewBox="0 0 11 11"
-                        width="11"
+                        height={24}
+                        width={24}
                         xmlns="http://www.w3.org/2000/svg"
                       >
-                        <ellipse
-                          cx="5.48136"
-                          cy="5.8336"
-                          fill="#6100FF"
-                          rx="4.96232"
-                          ry="4.96641"
-                        />
+                        <circle cx={12} cy={12} fill="#6100FF" r="50%" />
+                        <text
+                          dominantBaseline="central"
+                          fill="#FFF"
+                          fontFamily="var(--font-satoshi)"
+                          fontSize={10}
+                          textAnchor="middle"
+                          x="50%"
+                          y="50%"
+                        >
+                          {eventsInStateMarker}
+                        </text>
                       </svg>
                     </Marker>
                   </motion.g>
