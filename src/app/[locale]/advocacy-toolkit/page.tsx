@@ -6,7 +6,8 @@ import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 export const dynamic = 'error'
 
 const title = 'Advocacy made easy'
-const description = 'Toolkit and tactics for Stand With Crypto advocates'
+const description =
+  '52 million Americans own crypto and want their voices to be heard in the upcoming Elections. Help SWC drive change in your own community by using our advocacy toolkit'
 
 export const metadata: Metadata = {
   ...generateMetadataDetails({

@@ -1,12 +1,15 @@
+import { ReactNode } from 'react'
+
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { cn } from '@/utils/web/cn'
 
 interface ToolkitSectionProps {
-  heading: string
-  subtext: string
-  children?: React.ReactNode
+  heading: ReactNode
+  subtext?: ReactNode
+  children?: ReactNode
   headingClassName?: string
   sectionClassName?: string
+  childrenWrapperClassName?: string
 }
 
 export function ToolkitSection({
@@ -15,6 +18,7 @@ export function ToolkitSection({
   children,
   headingClassName,
   sectionClassName,
+  childrenWrapperClassName,
 }: ToolkitSectionProps) {
   return (
     <section className={cn('mt-10', sectionClassName)}>
@@ -22,9 +26,15 @@ export function ToolkitSection({
         <PageSubTitle className={cn('font-medium text-foreground', headingClassName)} size="md">
           {heading}
         </PageSubTitle>
-        <p className="text-center font-mono text-base text-muted-foreground">{subtext}</p>
+        {subtext && (
+          <p className="text-center font-mono text-base text-muted-foreground">{subtext}</p>
+        )}
       </div>
-      {children && <div className="mt-6 flex items-center justify-center">{children}</div>}
+      {children && (
+        <div className={cn('mt-6 flex items-center justify-center', childrenWrapperClassName)}>
+          {children}
+        </div>
+      )}
     </section>
   )
 }
