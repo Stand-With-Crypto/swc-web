@@ -1,4 +1,10 @@
 import { ToolkitSection } from '@/components/app/pageAdvocacyToolkit/toolkitSection'
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion'
 import { Button } from '@/components/ui/button'
 import { NextImage } from '@/components/ui/image'
 import { ExternalLink } from '@/components/ui/link'
@@ -19,6 +25,59 @@ const DOWNLOAD_LINKS = {
     'https://docs.google.com/document/d/1d6OaqVznea-CRfZhzxJWqcTIcFFWV7bsDTiPeI55nIA/edit',
 }
 
+const IMPACT_ITEMS = [
+  {
+    accordionTitle: 'Protecting Innovation in America',
+    accordionContent: (
+      <p>
+        Keeping innovation in America is vital for our country's economic growth and global
+        competitiveness. The emerging crypto industry presents a tremendous opportunity to drive
+        innovation, create jobs, and foster economic development.
+      </p>
+    ),
+  },
+  {
+    accordionTitle: 'Updating the Financial System',
+    accordionContent: (
+      <p>
+        By voting for pro-crypto candidates, you have the power to shape policies that will
+        modernize and revolutionize the financial system. Your vote can pave the way for a more
+        inclusive, secure, and innovative crypto ecosystem.
+      </p>
+    ),
+  },
+  {
+    accordionTitle: 'Bipartisan Support',
+    accordionContent: (
+      <p>
+        The crypto voter demographic is diverse and bipartisan. Your vote transcends party lines and
+        sends a strong message to politicians that crypto is a bipartisan issue that cannot be
+        ignored.
+      </p>
+    ),
+  },
+  {
+    accordionTitle: 'Amplifying Awareness',
+    accordionContent: (
+      <p>
+        Your vote helps generate media coverage and raise awareness about the importance of
+        crypto-related issues. By voting and actively participating in the electoral process, you
+        contribute to the visibility and recognition of the crypto voter.
+      </p>
+    ),
+  },
+  {
+    accordionTitle: 'Protecting Consumer Interests',
+    accordionContent: (
+      <p>
+        Voting for candidates who support clear regulatory frameworks for digital assets ensures the
+        protection of consumer interests. Your vote can help establish balanced regulations that
+        foster innovation while safeguarding consumers.
+      </p>
+    ),
+  },
+]
+
 export function PageAdvocacyToolkit({ title, description }: PagePartnersProps) {
   return (
     <div className="standard-spacing-from-navbar container">
@@ -32,75 +91,64 @@ export function PageAdvocacyToolkit({ title, description }: PagePartnersProps) {
           />
 
           <PageTitle className="font-sans !text-[32px]">{title}</PageTitle>
-          <PageSubTitle size="lg">{description}</PageSubTitle>
+          <PageSubTitle className="italic text-muted-foreground" size="md">
+            {description}
+          </PageSubTitle>
         </div>
       </section>
 
       <ToolkitSection
-        heading="The advocacy toolkit"
-        headingClassName="font-bold text-xl font-sans"
-        sectionClassName="mt-14"
-        subtext="If you are interested in organizing in your own community, these materials include helpful toolkits and tactics guides for a wide range of organizing activities, and training materials on organizing fundamentals. It includes the guides for hosting an advocacy event, a voter registration event, digital advocacy tactics, and more."
-      />
-
-      <ToolkitSection
-        heading="Host an event"
+        heading="Host a Stand With Crypto event"
         headingClassName="text-primary-cta"
+        sectionClassName="mt-20"
         subtext="Stand With Crypto is encouraging advocates to organize events all across the country and we need your help to make them happen. SwC is providing guidance and funding to advocates in various cities to bring their communities together! The goal is to demonstrate that the crypto voter is real, present in important states, and engaged with the political process."
       >
-        <Button asChild className="w-full sm:w-auto">
-          <ExternalLink href={DOWNLOAD_LINKS.EVENT_GUIDE}>Download Event Guide</ExternalLink>
+        <Button
+          asChild
+          className="w-full text-xl font-semibold leading-6 sm:w-auto"
+          variant="primary-cta"
+        >
+          <ExternalLink href={DOWNLOAD_LINKS.EVENT_GUIDE}>Download event guide</ExternalLink>
         </Button>
       </ToolkitSection>
 
       <ToolkitSection
         heading="Host a voter registration drive"
         headingClassName="text-primary-cta"
-        subtext="Hosting a voter registration drive is crucial – it empowers individuals to exercise their democratic right to vote. By organizing such drives, advocates can increase voter participation, and ensure that the crypto voter is heard this election season. Voter registration drives have a significant impact on shaping the political landscape."
+        sectionClassName="mt-20"
+        subtext="Hosting a voter registration drive is crucial - it empowers individuals to exercise their democratic right to vote. By organizing such drives, advocates can increase voter participation, and ensure that the crypto voter is heard this election season. Voter registration drives have a significant impact on shaping the political landscape."
       >
-        <Button asChild className="w-full sm:w-auto">
+        <Button
+          asChild
+          className="w-full text-xl font-semibold leading-6 sm:w-auto"
+          variant="primary-cta"
+        >
           <ExternalLink href={DOWNLOAD_LINKS.VOTER_REGISTRATION_GUIDE}>
-            Download Voter Registration Guide
+            Download voter registration guide
           </ExternalLink>
         </Button>
       </ToolkitSection>
 
       <ToolkitSection
+        childrenWrapperClassName="mt-10"
         heading="Why does your voice matter? Does it make an impact?"
-        headingClassName="text-xl font-bold font-sans"
-        subtext="The crypto voter can make a real difference  in the 2024 election and beyond. A key to building on the most impactful network of crypto users in the USA is establishing strong state chapters nationwide. These chapters will be a force multiplier to the power that our community can wield in our pursuit of securing pro-crypto policies and candidates."
+        sectionClassName="mt-20"
+        subtext="The crypto voter can make a real difference in the 2024 election and beyond. A key to building on the most impactful network of crypto users in the USA is establishing strong state chapters nationwide. These chapters will be a force multiplier to the power that our community can wield in our pursuit of securing pro-crypto policies and candidates."
       >
-        <ul className="ml-4 list-disc">
-          <li className="text-muted-foreground">
-            <strong className="text-foreground">Protecting Innovation in America:</strong> Keeping
-            innovation in America is vital for our country's economic growth and global
-            competitiveness. The emerging crypto industry presents a tremendous opportunity to drive
-            innovation, create jobs, and foster economic development.
-          </li>
-          <li className="text-muted-foreground">
-            <strong className="text-foreground">Updating the Financial System:</strong> By voting
-            for pro-crypto candidates, you have the power to shape policies that will modernize and
-            revolutionize the financial system. Your vote can pave the way for a more inclusive,
-            secure, and innovative crypto ecosystem.
-          </li>
-          <li className="text-muted-foreground">
-            <strong className="text-foreground">Bipartisan Support:</strong> The crypto voter
-            demographic is diverse and bipartisan. Your vote transcends party lines and sends a
-            strong message to politicians that crypto is a bipartisan issue that cannot be ignored.
-          </li>
-          <li className="text-muted-foreground">
-            <strong className="text-foreground">Amplifying Awareness:</strong> Your vote helps
-            generate media coverage and raise awareness about the importance of crypto-related
-            issues. By voting and actively participating in the electoral process, you contribute to
-            the visibility and recognition of the crypto voter.
-          </li>
-          <li className="text-muted-foreground">
-            <strong className="text-foreground">Protecting Consumer Interests:</strong> Voting for
-            candidates who support clear regulatory frameworks for digital assets ensures the
-            protection of consumer interests. Your vote can help establish balanced regulations that
-            foster innovation while safeguarding consumers.
-          </li>
-        </ul>
+        <Accordion className="w-full" collapsible type="single">
+          {IMPACT_ITEMS.map(({ accordionTitle, accordionContent }) => (
+            <AccordionItem key={accordionTitle} value={accordionTitle}>
+              <AccordionTrigger>
+                <strong className="text-foreground">{accordionTitle}</strong>
+              </AccordionTrigger>
+              <AccordionContent>
+                <div className="prose prose-sm max-w-none px-4 pb-6 text-muted-foreground">
+                  {accordionContent}
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
       </ToolkitSection>
     </div>
   )
