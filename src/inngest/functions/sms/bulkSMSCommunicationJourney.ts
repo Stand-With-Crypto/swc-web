@@ -207,7 +207,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
         const waitingTime = differenceInMilliseconds(minEnqueueHourToday, now)
         logger.info('late-night-messaging-prevention', {
           waitingTime: formatTime(waitingTime / 1000),
-          reason: `now (${now.toDateString()}) is lower than minEnqueueHourToday (${minEnqueueHourToday.toDateString()})`,
+          reason: `now (${now.toDateString()}) it's earlier than minEnqueueHourToday (${minEnqueueHourToday.toDateString()})`,
         })
         await step.sleep('wait-until-min-enqueue-hour', waitingTime)
       }
@@ -216,7 +216,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
         const waitingTime = differenceInMilliseconds(addDays(minEnqueueHourToday, 1), now)
         logger.info('late-night-messaging-prevention', {
           waitingTime: formatTime(waitingTime / 1000),
-          reason: `now (${now.toDateString()}) is greater than maxEnqueueHourToday (${maxEnqueueHourToday.toDateString()})`,
+          reason: `now (${now.toDateString()}) it's later than maxEnqueueHourToday (${maxEnqueueHourToday.toDateString()})`,
         })
         await step.sleep('wait-until-min-enqueue-hour-of-next-day', waitingTime)
       }
@@ -248,7 +248,12 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
       const emptyQueueTime = addSeconds(now, timeInSecondsToEmptyQueue)
 
       if (emptyQueueTime > maxEnqueueHourToday) {
-        const waitingTime = differenceInMilliseconds(addDays(minEnqueueHourToday, 1), now)
+        const waitingTime = differenceInMilliseconds(
+          emptyQueueTime > addDays(minEnqueueHourToday, 1)
+            ? emptyQueueTime
+            : addDays(minEnqueueHourToday, 1),
+          now,
+        )
         logger.info('late-night-messaging-prevention', {
           waitingTime: formatTime(waitingTime / 1000),
           reason: `queue will be empty at ${emptyQueueTime.toDateString()}`,
