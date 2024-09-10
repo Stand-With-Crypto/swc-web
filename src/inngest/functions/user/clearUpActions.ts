@@ -4,14 +4,20 @@ import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
 
-interface ScriptPayload {
-  userId: string
-  actions?: UserActionType[]
-  persist?: boolean
+interface ClearUpActionsPayload {
+  data: {
+    userId: string
+    actions?: UserActionType[]
+    persist?: boolean
+  }
 }
 
 const CLEAR_UP_USER_ACTIONS_INNGEST_EVENT_NAME = 'script/clear-up-user-actions'
 const CLEAR_UP_USER_ACTIONS_INNGEST_FUNCTION_ID = 'script.clear-up-user-actions'
+
+export type ClearUpActionsInngestSchema = {
+  [CLEAR_UP_USER_ACTIONS_INNGEST_EVENT_NAME]: ClearUpActionsPayload
+}
 
 export const clearUpUserActions = inngest.createFunction(
   {
@@ -21,7 +27,7 @@ export const clearUpUserActions = inngest.createFunction(
   },
   { event: CLEAR_UP_USER_ACTIONS_INNGEST_EVENT_NAME },
   async ({ event, step, logger }) => {
-    const { userId, actions, persist } = event.data as ScriptPayload
+    const { userId, actions, persist } = event.data
 
     const userWithActions = await step.run('get-user-actions', async () => {
       return await prismaClient.user.findFirst({
