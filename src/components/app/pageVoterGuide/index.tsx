@@ -1,3 +1,4 @@
+import { TurbovoteDisclaimer } from '@/components/app/pageVoterGuide/disclaimer'
 import { VoterJourneyStepList } from '@/components/app/pageVoterGuide/voterJourneyStepList'
 import { Badge } from '@/components/ui/badge'
 import { Countdown } from '@/components/ui/countdown'
@@ -27,6 +28,8 @@ export function PageVoterGuide() {
       </div>
 
       <VoterJourneyStepList className="w-full" />
+
+      <TurbovoteDisclaimer />
     </div>
   )
 }
