@@ -23,7 +23,11 @@ export const deleteUserActions = inngest.createFunction(
   async ({ event, step, logger }) => {
     const { userId, customActions, persist } = event.data as DeleteUserActionsPayload
 
-    if (customActions && customActions.length > 0 && customActions.includes('OPT_IN')) {
+    if (
+      customActions &&
+      customActions.length > 0 &&
+      customActions.includes(UserActionType.OPT_IN)
+    ) {
       logger.error('Cannot delete OPT_IN action type for user with id')
 
       return { message: 'Cannot delete OPT_IN action type', userId }
@@ -56,7 +60,7 @@ export const deleteUserActions = inngest.createFunction(
 
     const userActionsToBeDeleted = customActions
       ? currentUserActions.filter(userAction => customActions.includes(userAction.actionType))
-      : currentUserActions
+      : currentUserActions.filter(userAction => userAction.actionType !== UserActionType.OPT_IN)
 
     if (userActionsToBeDeleted.length === currentUserActions.length) {
       logger.error(`Cannot delete all user actions for user with id ${userId}`)

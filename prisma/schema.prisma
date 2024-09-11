@@ -321,7 +321,7 @@ enum UserActionOptInType {
 
 model UserActionOptIn {
   id         String              @id @default(uuid())
-  userAction UserAction          @relation(fields: [id], references: [id], onDelete: Cascade)
+  userAction UserAction          @relation(fields: [id], references: [id])
   optInType  UserActionOptInType @map("opt_in_type")
 
   @@map("user_action_opt_in")
