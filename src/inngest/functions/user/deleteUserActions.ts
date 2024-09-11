@@ -59,9 +59,14 @@ export const deleteUserActions = inngest.createFunction(
       : currentUserActions
 
     if (userActionsToBeDeleted.length === currentUserActions.length) {
-      logger.error('Cannot delete all user actions for user with id')
+      logger.error(`Cannot delete all user actions for user with id ${userId}`)
 
-      return { message: 'Cannot delete all user actions', userId }
+      return {
+        message: 'Cannot delete all user actions',
+        userActionsToBeDeleted,
+        currentUserActions,
+        userId,
+      }
     }
 
     if (!persist) {
