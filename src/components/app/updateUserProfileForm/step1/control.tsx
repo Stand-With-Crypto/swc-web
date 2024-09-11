@@ -27,6 +27,7 @@ import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { Input } from '@/components/ui/input'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
+import { validatePhoneNumber } from '@/utils/shared/phoneNumber'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { trackFormSubmissionSyncErrors, triggerServerActionForForm } from '@/utils/web/formUtils'
 import {
@@ -81,6 +82,7 @@ export function UpdateUserProfileForm({
     defaultValues: defaultValues.current,
   })
   const phoneNumberValue = form.watch('phoneNumber')
+
   return (
     <Form {...form}>
       <form
@@ -186,31 +188,32 @@ export function UpdateUserProfileForm({
               </FormItem>
             )}
           />
-          {user.smsStatus !== 'OPTED_IN_HAS_REPLIED' && !user.phoneNumber && (
-            <FormField
-              control={form.control}
-              name="phoneNumber"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Phone number</FormLabel>
-                  <FormControl>
-                    <Input
-                      data-testid="phone-number-input"
-                      placeholder="Phone number"
-                      {...field}
-                      onChange={e => {
-                        field.onChange(e)
-                        if (!e.target.value && form.getValues('optedInToSms')) {
-                          form.setValue('optedInToSms', false)
-                        }
-                      }}
-                    />
-                  </FormControl>
-                  <FormErrorMessage />
-                </FormItem>
-              )}
-            />
-          )}
+          {user.smsStatus !== 'OPTED_IN_HAS_REPLIED' &&
+            !validatePhoneNumber(user?.phoneNumber || '') && (
+              <FormField
+                control={form.control}
+                name="phoneNumber"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Phone number</FormLabel>
+                    <FormControl>
+                      <Input
+                        data-testid="phone-number-input"
+                        placeholder="Phone number"
+                        {...field}
+                        onChange={e => {
+                          field.onChange(e)
+                          if (!e.target.value && form.getValues('optedInToSms')) {
+                            form.setValue('optedInToSms', false)
+                          }
+                        }}
+                      />
+                    </FormControl>
+                    <FormErrorMessage />
+                  </FormItem>
+                )}
+              />
+            )}
           {!defaultValues.current.hasOptedInToMembership && (
             <FormField
               control={form.control}
@@ -245,7 +248,11 @@ export function UpdateUserProfileForm({
         </div>
         <div className="flex flex-col justify-center gap-4 max-md:!mt-auto md:mt-4">
           <Collapsible
-            open={!!phoneNumberValue && user.smsStatus === 'NOT_OPTED_IN' && !user.phoneNumber}
+            open={
+              !!phoneNumberValue &&
+              user.smsStatus === 'NOT_OPTED_IN' &&
+              !validatePhoneNumber(user?.phoneNumber || '')
+            }
           >
             <CollapsibleContent className="AnimateCollapsibleContent">
               <FormDescription className="text-center lg:text-left">
