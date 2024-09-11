@@ -18,11 +18,11 @@ interface PagePartnersProps {
 
 const DOWNLOAD_LINKS = {
   EVENT_GUIDE:
-    'https://docs.google.com/document/d/1TtglwW0mAG-fnmhpduHVK096gP3p2Tk3H1I_7-yVeg0/edit',
+    'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/public/Stand%20With%20Crypto_%20Crypto%20Events%20&%20Watch%20Party%20Guide-hTAVLQ3Td25s3wdlCMeQwqDzPQvgdO.pdf',
   VOTER_REGISTRATION_GUIDE:
-    'https://docs.google.com/document/d/1WZ7qhcbktrvECYl_BB-a_5X4NC8lHVjuzgh4aHcGZC8/edit',
+    'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/public/Stand%20with%20Crypto_%20Voter%20Registration%20Guide%20-%20Fall%202024-IvFtNiWPCiBzAsFsvM7I4HyMnKOQZS.pdf',
   STATE_CHAPTER_GUIDE:
-    'https://docs.google.com/document/d/1d6OaqVznea-CRfZhzxJWqcTIcFFWV7bsDTiPeI55nIA/edit',
+    'https://fgrsqtudn7ktjmlh.public.blob.vercel-storage.com/public/Stand%20with%20Crypto_%20Local%20Chapters%20Guide%20-%20Fall%202024-CEAmD5GLCc5KUzeMPdc5YskPi6QLex.pdf',
 }
 
 const IMPACT_ITEMS = [
