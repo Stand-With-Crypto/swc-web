@@ -99,7 +99,7 @@ export function PageAdvocacyToolkit({ title, description }: PagePartnersProps) {
 
       <ToolkitSection
         heading="Host a Stand With Crypto event"
-        headingClassName="text-primary-cta"
+        headingClassName="text-primary-cta text-xl"
         sectionClassName="mt-20"
         subtext="Stand With Crypto is encouraging advocates to organize events all across the country and we need your help to make them happen. SwC is providing guidance and funding to advocates in various cities to bring their communities together! The goal is to demonstrate that the crypto voter is real, present in important states, and engaged with the political process."
       >
@@ -114,7 +114,7 @@ export function PageAdvocacyToolkit({ title, description }: PagePartnersProps) {
 
       <ToolkitSection
         heading="Host a voter registration drive"
-        headingClassName="text-primary-cta"
+        headingClassName="text-primary-cta text-xl"
         sectionClassName="mt-20"
         subtext="Hosting a voter registration drive is crucial - it empowers individuals to exercise their democratic right to vote. By organizing such drives, advocates can increase voter participation, and ensure that the crypto voter is heard this election season. Voter registration drives have a significant impact on shaping the political landscape."
       >
@@ -125,6 +125,23 @@ export function PageAdvocacyToolkit({ title, description }: PagePartnersProps) {
         >
           <ExternalLink href={DOWNLOAD_LINKS.VOTER_REGISTRATION_GUIDE}>
             Download voter registration guide
+          </ExternalLink>
+        </Button>
+      </ToolkitSection>
+
+      <ToolkitSection
+        heading="Launch a local chapter"
+        headingClassName="text-primary-cta text-xl"
+        sectionClassName="mt-20"
+        subtext="The crypto voter can have a significant influence in the 2024 election and beyond. A key to building out the most impactful network of crypto users in the USA is establishing strong state chapters nationwide. These chapters will be a force multiplier to the power that our community can wield in our pursuit of securing pro-crypto policies and candidates."
+      >
+        <Button
+          asChild
+          className="w-full text-xl font-semibold leading-6 sm:w-auto"
+          variant="primary-cta"
+        >
+          <ExternalLink href={DOWNLOAD_LINKS.STATE_CHAPTER_GUIDE}>
+            Download the chapter guide
           </ExternalLink>
         </Button>
       </ToolkitSection>
