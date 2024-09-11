@@ -13,12 +13,14 @@ import {
   getUSStateCodeFromStateName,
   US_MAIN_STATE_CODE_TO_DISPLAY_NAME_MAP,
 } from '@/utils/shared/usStateUtils'
+import { cn } from '@/utils/web/cn'
 
 interface MapMarker {
   id: string
   name: string
   coordinates: [number, number]
   eventsInStateMarker: number
+  eventState: string
 }
 
 export function EventsMap({ events }: { events: SWCEvents }) {
@@ -58,6 +60,7 @@ export function EventsMap({ events }: { events: SWCEvents }) {
         name: `${state}`,
         coordinates: [coordinates[0], coordinates[1]],
         eventsInStateMarker: eventsFromState[state],
+        eventState: state,
       }
 
       result.push(marker)
@@ -147,17 +150,26 @@ export function EventsMap({ events }: { events: SWCEvents }) {
                 )
               })}
               <AnimatePresence>
-                {markers.map(({ id, coordinates, eventsInStateMarker }) => (
+                {markers.map(({ id, coordinates, eventsInStateMarker, eventState }) => (
                   <motion.g
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.6 }}
                     initial={{ opacity: 0, scale: 0.3 }}
                     key={id}
+                    onClick={() =>
+                      setStateDialogProps({
+                        open: true,
+                        state: eventState,
+                      })
+                    }
                     transition={{ duration: 0.5 }}
                   >
                     <Marker coordinates={coordinates}>
                       <svg
-                        className="pointer-events-none"
+                        className={cn(
+                          'cursor-pointer',
+                          eventState !== 'DC' && 'pointer-events-none',
+                        )}
                         fill="none"
                         height={24}
                         width={24}
