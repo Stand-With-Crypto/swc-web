@@ -6,26 +6,41 @@ import { SWCEvents, zodEventSchemaValidation } from '@/utils/shared/getSWCEvents
 import { getLogger } from '@/utils/shared/logger'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
+const LIMIT = 100
+
+async function getAllEventsWithOffset(offset: number) {
+  return await pRetry(
+    () =>
+      builderIOClient.getAll('events', {
+        query: {
+          ...(NEXT_PUBLIC_ENVIRONMENT === 'production' && { published: 'published' }),
+          data: {
+            isOccuring: true,
+          },
+        },
+        includeUnpublished: NEXT_PUBLIC_ENVIRONMENT !== 'production',
+        cacheSeconds: 60,
+        limit: LIMIT,
+        offset,
+      }),
+    {
+      retries: 3,
+      minTimeout: 10000,
+    },
+  )
+}
+
 const logger = getLogger(`builderIOEvents`)
 export async function getEvents() {
   try {
-    const entries = await pRetry(
-      () =>
-        builderIOClient.getAll('events', {
-          query: {
-            ...(NEXT_PUBLIC_ENVIRONMENT === 'production' && { published: 'published' }),
-            data: {
-              isOccuring: true,
-            },
-          },
-          includeUnpublished: NEXT_PUBLIC_ENVIRONMENT !== 'production',
-          cacheSeconds: 60,
-        }),
-      {
-        retries: 3,
-        minTimeout: 5000,
-      },
-    )
+    let offset = 0
+
+    const entries = await getAllEventsWithOffset(offset)
+
+    while (entries.length === LIMIT + offset) {
+      offset += entries.length
+      entries.push(...(await getAllEventsWithOffset(offset)))
+    }
 
     const filteredIncompleteEvents = entries
       .map(entry => {
