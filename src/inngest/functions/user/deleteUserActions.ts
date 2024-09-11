@@ -4,24 +4,24 @@ import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
 
-interface ClearUpActionsPayload {
+interface DeleteUserActionsPayload {
   userId: string
-  actions?: UserActionType[]
+  customActions?: UserActionType[]
   persist?: boolean
 }
 
-const CLEAR_UP_USER_ACTIONS_INNGEST_EVENT_NAME = 'script/clear-up-user-actions'
-const CLEAR_UP_USER_ACTIONS_INNGEST_FUNCTION_ID = 'script.clear-up-user-actions'
+const DELETE_USER_ACTIONS_INNGEST_EVENT_NAME = 'script/delete-user-actions'
+const DELETE_USER_ACTIONS_INNGEST_FUNCTION_ID = 'script.delete-user-actions'
 
-export const clearUpUserActions = inngest.createFunction(
+export const deleteUserActions = inngest.createFunction(
   {
-    id: CLEAR_UP_USER_ACTIONS_INNGEST_FUNCTION_ID,
+    id: DELETE_USER_ACTIONS_INNGEST_FUNCTION_ID,
     retries: 0,
     onFailure: onScriptFailure,
   },
-  { event: CLEAR_UP_USER_ACTIONS_INNGEST_EVENT_NAME },
+  { event: DELETE_USER_ACTIONS_INNGEST_EVENT_NAME },
   async ({ event, step, logger }) => {
-    const { userId, actions, persist } = event.data as ClearUpActionsPayload
+    const { userId, customActions, persist } = event.data as DeleteUserActionsPayload
 
     const userWithActions = await step.run('get-user-actions', async () => {
       return await prismaClient.user.findFirst({
@@ -48,14 +48,14 @@ export const clearUpUserActions = inngest.createFunction(
       return { message: 'No user actions found', userId }
     }
 
-    const actionsToBeDeleted = actions
-      ? userActions.filter(userAction => actions.includes(userAction.actionType))
+    const actionsToBeDeleted = customActions
+      ? userActions.filter(userAction => customActions.includes(userAction.actionType))
       : userActions
 
     if (!persist) {
       logger.info(`Dry run for user with id ${userId}`, actionsToBeDeleted)
 
-      return { message: 'Dry run', userId, count: actionsToBeDeleted.length, actionsToBeDeleted }
+      return { message: 'Dry run', count: actionsToBeDeleted.length, userId, actionsToBeDeleted }
     }
 
     const deletedActions = await step.run('delete-user-actions', async () => {
@@ -71,13 +71,13 @@ export const clearUpUserActions = inngest.createFunction(
       })
     })
 
-    logger.info(`Actions deleted successfully for user with id ${userId}`, deletedActions)
+    logger.info(`Actions deleted successfully for user with id ${userId}`, actionsToBeDeleted)
 
     return {
       message: 'Actions deleted successfully',
-      userId,
       count: deletedActions.count,
-      actionsToBeDeleted,
+      userId,
+      deletedActions: actionsToBeDeleted,
     }
   },
 )
