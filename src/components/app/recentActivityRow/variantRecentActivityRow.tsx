@@ -281,7 +281,7 @@ export const VariantRecentActivityRow = function VariantRecentActivityRow({
       case UserActionType.VOTING_INFORMATION_RESEARCHED: {
         return {
           onFocusContent: undefined,
-          children: <MainText>Voting information researched {voterStateOrEmpty}</MainText>,
+          children: <MainText>Voter plan researched {voterStateOrEmpty}</MainText>,
         }
       }
     }

@@ -321,7 +321,7 @@ enum UserActionOptInType {
 
 model UserActionOptIn {
   id         String              @id @default(uuid())
-  userAction UserAction          @relation(fields: [id], references: [id])
+  userAction UserAction          @relation(fields: [id], references: [id], onDelete: Cascade)
   optInType  UserActionOptInType @map("opt_in_type")
 
   @@map("user_action_opt_in")
@@ -329,7 +329,7 @@ model UserActionOptIn {
 
 model UserActionEmail {
   id                        String                     @id @default(uuid())
-  userAction                UserAction                 @relation(fields: [id], references: [id])
+  userAction                UserAction                 @relation(fields: [id], references: [id], onDelete: Cascade)
   senderEmail               String                     @map("sender_email")
   firstName                 String                     @map("first_name")
   lastName                  String                     @map("last_name")
@@ -344,7 +344,7 @@ model UserActionEmail {
 model UserActionEmailRecipient {
   id                String          @id @default(uuid())
   userActionEmailId String          @map("user_action_email_id")
-  userActionEmail   UserActionEmail @relation(fields: [userActionEmailId], references: [id])
+  userActionEmail   UserActionEmail @relation(fields: [userActionEmailId], references: [id], onDelete: Cascade)
   emailAddress      String?         @map("email_address")
   // unfortunately some of our legacy data doesn't include this info so it needs to be optional
   dtsiSlug          String?         @map("dtsi_slug")
@@ -355,7 +355,7 @@ model UserActionEmailRecipient {
 
 model UserActionCall {
   id                   String     @id @default(uuid())
-  userAction           UserAction @relation(fields: [id], references: [id])
+  userAction           UserAction @relation(fields: [id], references: [id], onDelete: Cascade)
   // unfortunately some of our legacy data doesn't include this info so it needs to be optional
   recipientDtsiSlug    String?    @map("recipient_dtsi_slug")
   recipientPhoneNumber String?    @map("recipient_phone_number")
@@ -373,7 +373,7 @@ enum DonationOrganization {
 
 model UserActionDonation {
   id                 String               @id @default(uuid())
-  userAction         UserAction           @relation(fields: [id], references: [id])
+  userAction         UserAction           @relation(fields: [id], references: [id], onDelete: Cascade)
   amount             Decimal              @map("amount")
   amountCurrencyCode String               @map("amount_currency_code")
   amountUsd          Decimal              @map("amount_usd")
@@ -423,7 +423,7 @@ model NFTMint {
 
 model UserActionViewKeyRaces {
   id                      String     @id @default(uuid())
-  userAction              UserAction @relation(fields: [id], references: [id])
+  userAction              UserAction @relation(fields: [id], references: [id], onDelete: Cascade)
   usCongressionalDistrict String?    @map("us_congressional_district")
   usaState                String?    @map("usa_state")
 
@@ -432,7 +432,7 @@ model UserActionViewKeyRaces {
 
 model UserActionVoterRegistration {
   id         String     @id @default(uuid())
-  userAction UserAction @relation(fields: [id], references: [id])
+  userAction UserAction @relation(fields: [id], references: [id], onDelete: Cascade)
   usaState   String?    @map("usa_state")
 
   @@map("user_action_voter_registration")
@@ -440,7 +440,7 @@ model UserActionVoterRegistration {
 
 model UserActionVoterAttestation {
   id         String     @id @default(uuid())
-  userAction UserAction @relation(fields: [id], references: [id])
+  userAction UserAction @relation(fields: [id], references: [id], onDelete: Cascade)
   usaState   String?    @map("usa_state")
 
   @@map("user_action_voter_attestation")
@@ -448,7 +448,7 @@ model UserActionVoterAttestation {
 
 model UserActionTweetAtPerson {
   id                String     @id @default(uuid())
-  userAction        UserAction @relation(fields: [id], references: [id])
+  userAction        UserAction @relation(fields: [id], references: [id], onDelete: Cascade)
   recipientDtsiSlug String?    @map("recipient_dtsi_slug")
 
   @@map("user_action_tweet_at_person")
@@ -459,7 +459,7 @@ model UserActionRsvpEvent {
   eventSlug                  String     @map("event_slug")
   eventState                 String     @map("event_state")
   shouldReceiveNotifications Boolean    @map("should_receive_notifications")
-  userAction                 UserAction @relation(fields: [id], references: [id])
+  userAction                 UserAction @relation(fields: [id], references: [id], onDelete: Cascade)
 
   @@index([eventSlug, eventState])
   @@map("user_action_rsvp_event")
@@ -467,7 +467,7 @@ model UserActionRsvpEvent {
 
 model UserActionVotingInformationResearched {
   id                         String     @id @default(uuid())
-  userAction                 UserAction @relation(fields: [id], references: [id])
+  userAction                 UserAction @relation(fields: [id], references: [id], onDelete: Cascade)
   shouldReceiveNotifications Boolean    @map("should_receive_notifications")
   address                    Address?   @relation(fields: [addressId], references: [id])
   addressId                  String?    @map("address_id")

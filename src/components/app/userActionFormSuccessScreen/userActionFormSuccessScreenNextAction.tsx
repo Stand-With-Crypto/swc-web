@@ -86,7 +86,8 @@ export function UserActionFormSuccessScreenNextAction({
       <div className="space-y-3">
         <Progress value={debouncedProgressValue} />
         <p className="text-fontcolor-muted">
-          You've completed {numActionsCompleted} out of {numActionsAvailable} actions. Keep going!
+          You've completed {numActionsCompleted} out of {numActionsAvailable} actions.{' '}
+          {numActionsCompleted === numActionsAvailable ? 'Great job!' : 'Keep going!'}
         </p>
       </div>
 
@@ -112,12 +113,15 @@ export function UserActionFormSuccessScreenNextAction({
 
       {/** Completed actions last */}
       <UserActionRowCTAsList
-        excludeUserActionTypes={USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN.filter(
-          ({ action }) =>
-            !performedUserActionTypes.some(
-              performedAction => performedAction.actionType === action,
-            ),
-        ).map(({ action }) => action)}
+        excludeUserActionTypes={[
+          ...Array.from(excludeUserActionTypes),
+          ...USER_ACTION_TYPE_CTA_PRIORITY_ORDER_WITH_CAMPAIGN.filter(
+            ({ action }) =>
+              !performedUserActionTypes.some(
+                performedAction => performedAction.actionType === action,
+              ),
+          ).map(({ action }) => action),
+        ]}
         performedUserActionTypes={performedUserActionTypes}
         render={ctaProps => (
           <UserActionRowCTAButton

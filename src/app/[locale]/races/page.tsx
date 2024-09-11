@@ -6,9 +6,10 @@ import { PageProps } from '@/types'
 import { generateMetadataDetails } from '@/utils/server/metadataUtils'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
+import { toBool } from '@/utils/shared/toBool'
 
 export const dynamic = 'error'
-export const dynamicParams = false
+export const dynamicParams = toBool(process.env.MINIMIZE_PAGE_PRE_GENERATION)
 export const revalidate = SECONDS_DURATION['10_MINUTES']
 
 type LocationUnitedStatesPageProps = PageProps

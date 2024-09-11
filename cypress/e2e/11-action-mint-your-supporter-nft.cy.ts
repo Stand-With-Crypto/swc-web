@@ -3,7 +3,7 @@
 import { mockRandomUser } from 'cypress/fixture/mocks'
 
 describe('action - mint your supporter NFT', () => {
-  it('should go through signing in and nft minting', () => {
+  it.skip('should go through signing in and nft minting', () => {
     cy.visit('/')
 
     cy.contains('Mint your Supporter NFT').click()

@@ -11,7 +11,7 @@ import ReactivationReminder from '@/utils/server/email/templates/reactivationRem
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getLogger } from '@/utils/shared/logger'
 
-interface ScriptPayload {
+interface ReactivationEmailPayload {
   testEmail?: string
   persist?: boolean
   limit?: number
@@ -51,15 +51,13 @@ export const backfillReactivationCron = inngest.createFunction(
   { id: BACKFILL_REACTIVATION_INNGEST_CRON_JOB_ID },
   { cron: BACKFILL_REACTIVATION_INNGEST_CRON_JOB_SCHEDULE },
   async ({ step }) => {
-    const payload = {
+    await step.sendEvent(`${BACKFILL_REACTIVATION_INNGEST_CRON_JOB_ID}-event-call`, {
       name: BACKFILL_REACTIVATION_INNGEST_EVENT_NAME,
       data: {
         persist: true,
         limit: 1500,
       },
-    }
-
-    await step.sendEvent(`${BACKFILL_REACTIVATION_INNGEST_CRON_JOB_ID}-event-call`, payload)
+    })
   },
 )
 
@@ -73,7 +71,7 @@ export const backfillReactivationWithInngest = inngest.createFunction(
     event: BACKFILL_REACTIVATION_INNGEST_EVENT_NAME,
   },
   async ({ event, step }) => {
-    const { testEmail, persist, limit } = event.data as ScriptPayload
+    const { testEmail, persist, limit } = event.data as ReactivationEmailPayload
 
     const usersWithoutCommunicationJourney = await step.run(
       'get-users-without-communication-journey',

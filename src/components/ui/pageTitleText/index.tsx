@@ -10,6 +10,7 @@ const titleVariantsConfig = {
     md: twNoop('text-3xl md:text-4xl lg:text-5xl'),
     sm: twNoop('text-xl md:text-2xl lg:text-3xl'),
     xs: twNoop('text-lg md:text-xl lg:text-2xl'),
+    xxs: twNoop('text-base md:text-lg lg:text-lg'),
   },
 }
 

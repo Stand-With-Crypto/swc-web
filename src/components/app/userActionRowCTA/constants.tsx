@@ -13,6 +13,7 @@ import { UserActionFormNFTMintDialog } from '@/components/app/userActionFormNFTM
 import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/dialog'
 import { UserActionFormVoterAttestationDialog } from '@/components/app/userActionFormVoterAttestation/dialog'
 import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
+import { UserActionFormVotingInformationResearchedDialog } from '@/components/app/userActionFormVotingInformationResearched/dialog'
 import { UserActionRowCTAProps } from '@/components/app/userActionRowCTA'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { InternalLink } from '@/components/ui/link'
@@ -143,6 +144,17 @@ const USER_ACTION_ROW_CTA_INFO: Record<
     shortSubtext: 'Pledge to vote This Fall.',
     canBeTriggeredMultipleTimes: true,
     WrapperComponent: UserActionFormVoterAttestationDialog,
+  },
+  [UserActionType.VOTING_INFORMATION_RESEARCHED]: {
+    actionType: UserActionType.VOTING_INFORMATION_RESEARCHED,
+    image: { src: '/actionTypeIcons/votingResearched.png' },
+    text: 'Prepare to vote',
+    subtext:
+      'Find your polling location and check to see if there are early voting options in your district.',
+    shortText: 'Prepare to vote',
+    shortSubtext: 'Find your polling location and learn about early voting options.',
+    canBeTriggeredMultipleTimes: true,
+    WrapperComponent: UserActionFormVotingInformationResearchedDialog,
   },
 }
 
