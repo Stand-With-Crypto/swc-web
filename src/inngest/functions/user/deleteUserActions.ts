@@ -1,4 +1,5 @@
 import { UserActionType } from '@prisma/client'
+import { NonRetriableError } from 'inngest'
 
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
@@ -30,7 +31,7 @@ export const deleteUserActions = inngest.createFunction(
     ) {
       logger.error('Cannot delete OPT_IN action type for user with id')
 
-      return { message: 'Cannot delete OPT_IN action type', userId }
+      throw new NonRetriableError('Cannot delete OPT_IN action type')
     }
 
     const userWithActions = await step.run('get-user-actions', async () => {
@@ -47,15 +48,15 @@ export const deleteUserActions = inngest.createFunction(
     if (!userWithActions) {
       logger.error(`User not found with id ${userId}`)
 
-      return { message: `User not found with id ${userId}` }
+      throw new NonRetriableError(`User not found with id ${userId}`)
     }
 
     const currentUserActions = userWithActions.userActions
 
     if (!currentUserActions || currentUserActions.length === 0) {
-      logger.info(`No user actions found for user with id ${userId}`)
+      logger.error(`No user actions found for user with id ${userId}`)
 
-      return { message: 'No user actions found', userId }
+      throw new NonRetriableError(`No user actions found for user with id ${userId}`)
     }
 
     const userActionsToBeDeleted = customActions
@@ -65,12 +66,7 @@ export const deleteUserActions = inngest.createFunction(
     if (userActionsToBeDeleted.length === currentUserActions.length) {
       logger.error(`Cannot delete all user actions for user with id ${userId}`)
 
-      return {
-        message: 'Cannot delete all user actions',
-        userActionsToBeDeleted,
-        currentUserActions,
-        userId,
-      }
+      throw new NonRetriableError(`Cannot delete all user actions for user with id ${userId}`)
     }
 
     if (!persist) {
