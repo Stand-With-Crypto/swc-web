@@ -7,6 +7,7 @@ import { ChevronDown, Menu } from 'lucide-react'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import {
+  AdvocacyToolkitIcon,
   BillsIcon,
   CommunityIcon,
   DonateIcon,
@@ -82,6 +83,11 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
           href: urls.resources(),
           text: 'FIT21 resources',
           icon: ResourcesIcon,
+        },
+        {
+          href: urls.advocacyToolkit(),
+          text: 'Advocacy toolkit',
+          icon: AdvocacyToolkitIcon,
         },
       ],
     },
