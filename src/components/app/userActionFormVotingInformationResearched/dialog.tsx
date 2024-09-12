@@ -155,18 +155,12 @@ export function UserActionFormVotingInformationResearchedDialog({
         trigger={
           <div
             onClick={() => {
-              // const url = await createActionAndRedirect()
-              // if (url) {
-              //   // setTimeout(() => {
-              //   //   openWindow(url, '_blank', `noopener`)
-              //   // }, 33)
+              if (isLoading) return
+              if (!initialValues?.address?.place_id) {
+                sectionProps.goToSection(SectionsNames.ADDRESS)
+                return
+              }
 
-              //   const a = document.createElement('a')
-              //   a.setAttribute('href', url)
-              //   a.setAttribute('target', '_blank')
-              //   a.setAttribute('rel', 'noopener')
-              //   a.click()
-              // }
               const windowRef = window.open()
               void createActionAndRedirect().then(url => {
                 if (url && windowRef) {
