@@ -261,7 +261,7 @@ export function PageCreatorDefenseFund({ title, description }: PagePartnersProps
           <PageSubTitle className="font-medium text-foreground" size="md">
             Supported by
           </PageSubTitle>
-          <div className="flex items-center justify-center gap-12">
+          <div className="flex flex-col items-center justify-center gap-8 md:flex-row md:gap-12">
             <NextImage
               alt="a16z crypto logo"
               height="200"
