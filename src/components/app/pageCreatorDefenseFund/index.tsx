@@ -6,6 +6,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion'
 import { Button } from '@/components/ui/button'
+import { NextImage } from '@/components/ui/image'
 import { ExternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
@@ -14,6 +15,8 @@ interface PagePartnersProps {
   title: string
   description: string
 }
+
+const A16LOGO = '/creatorDefenseFund/a16zcrypto-logo-singleline-graydark.svg'
 
 const SECTION_ICONS = {
   APPLY_FOR_REPRESENTATION: '/activityFeedIcons/email.svg',
@@ -268,6 +271,23 @@ export function PageCreatorDefenseFund({ title, description }: PagePartnersProps
           ))}
         </Accordion>
       </DefenseFundSection>
+
+      <section className="mt-20">
+        <div className="container flex flex-col items-center gap-4">
+          <PageSubTitle className="font-medium text-foreground" size="md">
+            Supported by
+          </PageSubTitle>
+          <div className="flex items-center justify-center gap-8">
+            <NextImage
+              alt="a16z crypto logo"
+              height="200"
+              src={A16LOGO}
+              style={{ width: 256, height: 'auto' }}
+              width={256}
+            />
+          </div>
+        </div>
+      </section>
     </div>
   )
 }
