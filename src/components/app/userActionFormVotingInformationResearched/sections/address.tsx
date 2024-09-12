@@ -3,7 +3,7 @@ import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { UserActionType } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { z } from 'zod'
 
 import { actionCreateUserActionVotingInformationResearched } from '@/actions/actionCreateUserActionVotingInformationResearched'
@@ -15,7 +15,6 @@ import { Form, FormControl, FormField, FormItem } from '@/components/ui/form'
 import { GooglePlacesSelect } from '@/components/ui/googlePlacesSelect'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useIsMobile } from '@/hooks/useIsMobile'
-import { openWindow } from '@/utils/shared/openWindow'
 import { convertAddressToAnalyticsProperties } from '@/utils/shared/sharedAnalytics'
 import { trackFormSubmissionSyncErrors, triggerServerActionForForm } from '@/utils/web/formUtils'
 import { convertGooglePlaceAutoPredictionToAddressSchema } from '@/utils/web/googlePlaceUtils'
@@ -42,7 +41,6 @@ export function Address(props: AddressProps) {
   const { onSuccess, initialValues } = props
 
   const router = useRouter()
-  const searchParams = useSearchParams()
 
   const form = useForm<VotingInformationResearchedFormValues>({
     defaultValues: initialValues,
@@ -70,16 +68,6 @@ export function Address(props: AddressProps) {
   }, [form, isMobile, initialValues])
 
   const { mutate } = useApiResponseForUserFullProfileInfo()
-
-  const handleTurboVoteRedirect = useCallback(
-    (address: z.infer<typeof zodAddress>) => {
-      void mutate()
-      const target = searchParams?.get('target') ?? '_blank'
-      const url = buildElectoralUrl(address)
-      openWindow(url.toString(), target, `noopener`)
-    },
-    [mutate, searchParams],
-  )
 
   const createAction = useCallback(
     async (formValues: VotingInformationResearchedFormValues) => {
@@ -118,12 +106,14 @@ export function Address(props: AddressProps) {
           }),
       )
       if (result.status === 'success') {
-        router.refresh()
-        handleTurboVoteRedirect(address)
         onSuccess(address)
+        void mutate()
+        router.refresh()
+        const url = buildElectoralUrl(address)
+        return url.toString()
       }
     },
-    [form, handleTurboVoteRedirect, onSuccess, router],
+    [form, mutate, onSuccess, router],
   )
 
   return (
@@ -140,8 +130,13 @@ export function Address(props: AddressProps) {
             <Form {...form}>
               <form
                 id="view-key-races-form"
-                onSubmit={form.handleSubmit(async formValues => {
-                  await createAction(formValues)
+                onSubmit={form.handleSubmit(formValues => {
+                  const windowRef = window.open()
+                  void createAction(formValues).then(url => {
+                    if (url && windowRef) {
+                      windowRef.location = url
+                    }
+                  })
                 }, trackFormSubmissionSyncErrors(FORM_NAME))}
               >
                 <FormField
