@@ -203,18 +203,18 @@ export function AdvocacyToolkitIcon({ height = 24, width = 24, ...rest }: IconPr
 export function CreatorDefenseIcon({ height = 24, width = 24, ...rest }: IconProps) {
   return (
     <svg
-      xmlns="http://www.w3.org/2000/svg"
-      height={height}
-      width={width}
-      viewBox="0 0 24 24"
       fill="none"
+      height={height}
+      viewBox="0 0 24 24"
+      width={width}
+      xmlns="http://www.w3.org/2000/svg"
       {...rest}
     >
       <g clipPath="url(#clip0_5115_11375)">
         <path
-          opacity="0.3"
           d="M12 3.18994L5 6.29994V10.9999C5 15.5199 7.98 19.6899 12 20.9299C16.02 19.6999 19 15.5199 19 10.9999V6.29994L12 3.18994ZM14.5 12.5899L15.4 16.4699L12 14.4199L8.6 16.4699L9.5 12.5999L6.5 10.0099L10.46 9.66994L12 6.01994L13.54 9.65994L17.5 9.99994L14.5 12.5899Z"
           fill="#6100FF"
+          opacity="0.3"
         />
         <path
           d="M14.5 12.59L15.4 16.47L12 14.42L8.6 16.47L9.5 12.6L6.5 10.01L10.46 9.67L12 6.02L13.54 9.66L17.5 10L14.5 12.59ZM12 3.19L19 6.3V11C19 15.52 16.02 19.69 12 20.93C7.98 19.69 5 15.52 5 11V6.3L12 3.19ZM12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1Z"
@@ -223,7 +223,7 @@ export function CreatorDefenseIcon({ height = 24, width = 24, ...rest }: IconPro
       </g>
       <defs>
         <clipPath id="clip0_5115_11375">
-          <rect height={height} width={width} fill="white" />
+          <rect fill="white" height={height} width={width} />
         </clipPath>
       </defs>
     </svg>
