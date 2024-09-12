@@ -4,7 +4,6 @@ import { Suspense } from 'react'
 import { UserActionType } from '@prisma/client'
 import * as Sentry from '@sentry/nextjs'
 import dynamic from 'next/dynamic'
-import { z } from 'zod'
 
 import { actionCreateUserActionVotingInformationResearched } from '@/actions/actionCreateUserActionVotingInformationResearched'
 import { UserActionFormDialog } from '@/components/app/userActionFormCommon/dialog'
@@ -30,7 +29,6 @@ import {
   catchUnexpectedServerErrorAndTriggerToast,
   toastGenericError,
 } from '@/utils/web/toastUtils'
-import { zodAddress } from '@/validation/fields/zodAddress'
 
 import { FORM_NAME } from './formConfig'
 
@@ -67,7 +65,6 @@ export function UserActionFormVotingInformationResearchedDialog({
   const { user, isLoading: isLoadingSession } = useSession()
   const scriptStatus = useGoogleMapsScript()
   const isLoading = isLoadingSession || scriptStatus !== 'ready'
-  console.log('isLoading: ', isLoading)
 
   const sectionProps = useSections({
     sections: Object.values(SectionsNames),
@@ -89,12 +86,6 @@ export function UserActionFormVotingInformationResearchedDialog({
   }
 
   const { mutate } = useApiResponseForUserFullProfileInfo()
-
-  const handleTurboVoteRedirect = (address: z.infer<typeof zodAddress>) => {
-    void mutate()
-    const url = buildElectoralUrl(address)
-    openWindow(url.toString(), '_blank', `noopener`)
-  }
 
   const createActionAndRedirect = async () => {
     if (isLoading) {
@@ -144,8 +135,10 @@ export function UserActionFormVotingInformationResearchedDialog({
     )
 
     if (result.status === 'success') {
+      void mutate()
       sectionProps.goToSection(SectionsNames.SUCCESS)
-      handleTurboVoteRedirect(address)
+      const url = buildElectoralUrl(address)
+      return url.toString()
     } else {
       sectionProps.goToSection(SectionsNames.ADDRESS)
     }
@@ -162,7 +155,10 @@ export function UserActionFormVotingInformationResearchedDialog({
         trigger={
           <div
             onClick={async () => {
-              await createActionAndRedirect()
+              const url = await createActionAndRedirect()
+              if (url) {
+                openWindow(url, '_blank', `noopener`)
+              }
             }}
           >
             {children}
