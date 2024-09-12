@@ -154,11 +154,25 @@ export function UserActionFormVotingInformationResearchedDialog({
         }}
         trigger={
           <div
-            onClick={async () => {
-              const url = await createActionAndRedirect()
-              if (url) {
-                openWindow(url, '_blank', `noopener`)
-              }
+            onClick={() => {
+              // const url = await createActionAndRedirect()
+              // if (url) {
+              //   // setTimeout(() => {
+              //   //   openWindow(url, '_blank', `noopener`)
+              //   // }, 33)
+
+              //   const a = document.createElement('a')
+              //   a.setAttribute('href', url)
+              //   a.setAttribute('target', '_blank')
+              //   a.setAttribute('rel', 'noopener')
+              //   a.click()
+              // }
+              const windowRef = window.open()
+              void createActionAndRedirect().then(url => {
+                if (url && windowRef) {
+                  windowRef.location = url
+                }
+              })
             }}
           >
             {children}
