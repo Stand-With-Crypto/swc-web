@@ -8,12 +8,17 @@ import { UserActionFormActionUnavailable } from '@/components/app/userActionForm
 import { ANALYTICS_NAME_USER_ACTION_FORM_VOTER_ATTESTATION } from '@/components/app/userActionFormVoterAttestation/constants'
 import { FormFields } from '@/components/app/userActionFormVoterAttestation/types'
 import { UserActionFormVotingInformationResearched } from '@/components/app/userActionFormVotingInformationResearched'
+import {
+  ANALYTICS_NAME_USER_ACTION_FORM_VOTING_INFORMATION_RESEARCHED,
+  SectionsNames,
+} from '@/components/app/userActionFormVotingInformationResearched/constants'
 import { trackDialogOpen } from '@/components/ui/dialog/trackDialogOpen'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
 import { useApiResponseForUserFullProfileInfo } from '@/hooks/useApiResponseForUserFullProfileInfo'
 import { useEncodedInitialValuesQueryParam } from '@/hooks/useEncodedInitialValuesQueryParam'
 import { useIntlUrls } from '@/hooks/useIntlUrls'
 import { usePreventOverscroll } from '@/hooks/usePreventOverscroll'
+import { useSections } from '@/hooks/useSections'
 import { DEFAULT_SUPPORTED_COUNTRY_CODE } from '@/utils/shared/supportedCountries'
 import { UserActionVotingInformationResearchedCampaignName } from '@/utils/shared/userActionCampaigns'
 
@@ -31,6 +36,12 @@ function UserActionFormVotingInformationDeeplinkWrapperContent() {
     },
   })
 
+  const sectionProps = useSections({
+    sections: Object.values(SectionsNames),
+    initialSectionId: SectionsNames.ADDRESS,
+    analyticsName: ANALYTICS_NAME_USER_ACTION_FORM_VOTING_INFORMATION_RESEARCHED,
+  })
+
   useEffect(() => {
     trackDialogOpen({ open: true, analytics: ANALYTICS_NAME_USER_ACTION_FORM_VOTER_ATTESTATION })
   }, [])
@@ -41,6 +52,7 @@ function UserActionFormVotingInformationDeeplinkWrapperContent() {
     </div>
   ) : (
     <UserActionFormVotingInformationResearched
+      {...sectionProps}
       initialValues={{
         address: user?.address
           ? {
@@ -51,7 +63,7 @@ function UserActionFormVotingInformationDeeplinkWrapperContent() {
         campaignName: UserActionVotingInformationResearchedCampaignName['2024_ELECTION'],
         shouldReceiveNotifications: false,
       }}
-      onSuccess={() => router.push(urls.home())}
+      onClose={() => router.push(urls.home())}
     />
   )
 }
