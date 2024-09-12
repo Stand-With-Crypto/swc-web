@@ -114,6 +114,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
       asChild
       className="w-full text-base font-bold leading-4 md:font-normal min-[1092px]:w-auto"
       key={urls.voterGuide()}
+      onClick={maybeCloseAfterNavigating}
       variant="default"
     >
       <InternalLink href={urls.voterGuide()}>Vote</InternalLink>
