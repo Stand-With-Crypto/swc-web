@@ -1,4 +1,5 @@
 import { UserActionType } from '@prisma/client'
+import { NonRetriableError } from 'inngest'
 
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
@@ -6,7 +7,7 @@ import { prismaClient } from '@/utils/server/prismaClient'
 
 interface DeleteUserActionsPayload {
   userId: string
-  customActions?: UserActionType[]
+  customActions?: Exclude<UserActionType, 'OPT_IN'>[]
   persist?: boolean
 }
 
@@ -23,6 +24,16 @@ export const deleteUserActions = inngest.createFunction(
   async ({ event, step, logger }) => {
     const { userId, customActions, persist } = event.data as DeleteUserActionsPayload
 
+    if (
+      customActions &&
+      customActions.length > 0 &&
+      customActions.includes(UserActionType.OPT_IN)
+    ) {
+      logger.error('Cannot delete OPT_IN action type for user with id')
+
+      throw new NonRetriableError('Cannot delete OPT_IN action type')
+    }
+
     const userWithActions = await step.run('get-user-actions', async () => {
       return await prismaClient.user.findFirst({
         where: {
@@ -37,32 +48,43 @@ export const deleteUserActions = inngest.createFunction(
     if (!userWithActions) {
       logger.error(`User not found with id ${userId}`)
 
-      return { message: `User not found with id ${userId}` }
+      throw new NonRetriableError(`User not found with id ${userId}`)
     }
 
-    const userActions = userWithActions.userActions
+    const currentUserActions = userWithActions.userActions
 
-    if (!userActions || userActions.length === 0) {
-      logger.info(`No user actions found for user with id ${userId}`)
+    if (!currentUserActions || currentUserActions.length === 0) {
+      logger.error(`No user actions found for user with id ${userId}`)
 
-      return { message: 'No user actions found', userId }
+      throw new NonRetriableError(`No user actions found for user with id ${userId}`)
     }
 
-    const actionsToBeDeleted = customActions
-      ? userActions.filter(userAction => customActions.includes(userAction.actionType))
-      : userActions
+    const userActionsToBeDeleted = customActions
+      ? currentUserActions.filter(userAction => customActions.includes(userAction.actionType))
+      : currentUserActions.filter(userAction => userAction.actionType !== UserActionType.OPT_IN)
+
+    if (userActionsToBeDeleted.length === currentUserActions.length) {
+      logger.error(`Cannot delete all user actions for user with id ${userId}`)
+
+      throw new NonRetriableError(`Cannot delete all user actions for user with id ${userId}`)
+    }
 
     if (!persist) {
-      logger.info(`Dry run for user with id ${userId}`, actionsToBeDeleted)
+      logger.info(`Dry run for user with id ${userId}`, userActionsToBeDeleted)
 
-      return { message: 'Dry run', count: actionsToBeDeleted.length, userId, actionsToBeDeleted }
+      return {
+        message: 'Dry run',
+        count: userActionsToBeDeleted.length,
+        userId,
+        userActionsToBeDeleted,
+      }
     }
 
     const deletedActions = await step.run('delete-user-actions', async () => {
       return await prismaClient.userAction.deleteMany({
         where: {
           id: {
-            in: actionsToBeDeleted.map(action => action.id),
+            in: userActionsToBeDeleted.map(action => action.id),
           },
           user: {
             id: userId,
@@ -71,13 +93,13 @@ export const deleteUserActions = inngest.createFunction(
       })
     })
 
-    logger.info(`Actions deleted successfully for user with id ${userId}`, actionsToBeDeleted)
+    logger.info(`Actions deleted successfully for user with id ${userId}`, userActionsToBeDeleted)
 
     return {
       message: 'Actions deleted successfully',
       count: deletedActions.count,
       userId,
-      deletedActions: actionsToBeDeleted,
+      deletedActions: userActionsToBeDeleted,
     }
   },
 )
