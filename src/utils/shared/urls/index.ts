@@ -69,6 +69,7 @@ export const getIntlUrls = (
     events: () => `${localePrefix}/events`,
     voterGuide: () => `${localePrefix}/vote`,
     advocacyToolkit: () => `${localePrefix}/advocacy-toolkit`,
+    creatorDefenseFund: () => `${localePrefix}/creator-defense-fund`,
   }
 }
 

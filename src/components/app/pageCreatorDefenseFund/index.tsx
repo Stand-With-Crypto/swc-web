@@ -17,14 +17,15 @@ interface PagePartnersProps {
 }
 
 const A16LOGO = '/creatorDefenseFund/a16zcrypto-logo-singleline-graydark.svg'
+const OPENSEA_LOGO = '/partners/opensea-full-logo-dark.svg'
 
 const SECTION_ICONS = {
   APPLY_FOR_REPRESENTATION: '/activityFeedIcons/email.svg',
   GET_INVOLVED: '/activityFeedIcons/join.svg',
-  MAKE_A_DONATION: '/activityFeedIcons/donate.svg',
 }
 
 const SWC_EMAIL_LINK = 'mailto:info@standwithcrypto.org'
+const EMAIL_THE_SEC_LINK = 'mailto:chair@sec.gov'
 const SEC_GOV_LINK = 'https://www.sec.gov/newsroom/press-releases/2023-178'
 
 const FORM_LINKS = {
@@ -170,11 +171,10 @@ export function PageCreatorDefenseFund({ title, description }: PagePartnersProps
     <div className="standard-spacing-from-navbar container">
       <section className="space-y-14">
         <div className="container flex flex-col items-center gap-4">
-          <PageTitle className="font-sans !text-5xl">{title}</PageTitle>
+          <PageTitle className="mb-7 font-sans !text-5xl">{title}</PageTitle>
           <PageSubTitle className="text-muted-foreground" size="md">
             {description}
           </PageSubTitle>
-          <Button variant="secondary">Read full post</Button>
         </div>
       </section>
 
@@ -185,14 +185,15 @@ export function PageCreatorDefenseFund({ title, description }: PagePartnersProps
         sectionClassName="mt-20"
         subtext={
           <span>
-            With the SEC issuing OpenSea a Wells notice, as well as other{' '}
-            <ExternalLink href={SEC_GOV_LINK}>attacks on</ExternalLink> artists and creators, it has
-            become clear that those looking to build on blockchain technology will continue to face
-            significant legal threats and challenges. If you’re an artist or creator facing legal
-            challenges or simply need help navigating the unclear regulatory environment, we’re here
-            to help. The Creator Legal Defense Fund, supported by a16z crypto, OpenSea, Cooley LLP,
-            Fenwick & West LLP, and Latham & Watkins LLP, is dedicated to offering free legal
-            consultations and services to help artists and creators navigate these challenges.
+            With the SEC issuing OpenSea a Wells notice, as well as{' '}
+            <ExternalLink href={SEC_GOV_LINK}>other attacks</ExternalLink> on artists and creators,
+            it has become clear that those looking to build on blockchain technology will continue
+            to face significant legal threats and challenges. If you're an artist or creator facing
+            legal challenges or simply need help navigating the unclear regulatory environment,
+            we're here to help. The Creator Legal Defense Fund, supported by a16z crypto, OpenSea,
+            Cooley LLP, Fenwick & West LLP, Goodwin Procter LLP, and Latham & Watkins LLP, is
+            dedicated to offering free legal consultations and services to help artists and creators
+            navigate these challenges.
           </span>
         }
       >
@@ -226,27 +227,10 @@ export function PageCreatorDefenseFund({ title, description }: PagePartnersProps
         <Button asChild variant="secondary">
           <ExternalLink
             className="text-foreground no-underline hover:no-underline"
-            href={FORM_LINKS.APPLY_FOR_REPRESENTATION_FORM}
+            href={EMAIL_THE_SEC_LINK}
           >
             Email the SEC
           </ExternalLink>
-        </Button>
-      </DefenseFundSection>
-
-      <DefenseFundSection
-        heading="Make a donation"
-        headingClassName="text-xl"
-        iconSrc={SECTION_ICONS.MAKE_A_DONATION}
-        sectionClassName="mt-20"
-        subtext={
-          <span>
-            If you are interested in joining Stand with Crypto and our partners in support of the
-            Creator Legal Defense Fund, please reach out via email.
-          </span>
-        }
-      >
-        <Button asChild variant="secondary">
-          <ExternalLink href={SWC_EMAIL_LINK}>Donate</ExternalLink>
         </Button>
       </DefenseFundSection>
 
@@ -277,11 +261,18 @@ export function PageCreatorDefenseFund({ title, description }: PagePartnersProps
           <PageSubTitle className="font-medium text-foreground" size="md">
             Supported by
           </PageSubTitle>
-          <div className="flex items-center justify-center gap-8">
+          <div className="flex items-center justify-center gap-12">
             <NextImage
               alt="a16z crypto logo"
               height="200"
               src={A16LOGO}
+              style={{ width: 256, height: 'auto' }}
+              width={256}
+            />
+            <NextImage
+              alt="opensea logo"
+              height="200"
+              src={OPENSEA_LOGO}
               style={{ width: 256, height: 'auto' }}
               width={256}
             />

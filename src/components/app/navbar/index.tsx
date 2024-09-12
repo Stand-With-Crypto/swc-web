@@ -10,6 +10,7 @@ import {
   AdvocacyToolkitIcon,
   BillsIcon,
   CommunityIcon,
+  CreatorDefenseIcon,
   DonateIcon,
   MissionIcon,
   ResourcesIcon,
@@ -70,6 +71,11 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
           icon: DonateIcon,
         },
         {
+          href: urls.creatorDefenseFund(),
+          text: 'Creator Defense Fund',
+          icon: CreatorDefenseIcon,
+        },
+        {
           href: urls.community(),
           text: 'Community',
           icon: CommunityIcon,
@@ -80,14 +86,14 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
           icon: BillsIcon,
         },
         {
-          href: urls.resources(),
-          text: 'FIT21 resources',
-          icon: ResourcesIcon,
-        },
-        {
           href: urls.advocacyToolkit(),
           text: 'Advocacy toolkit',
           icon: AdvocacyToolkitIcon,
+        },
+        {
+          href: urls.resources(),
+          text: 'FIT21 resources',
+          icon: ResourcesIcon,
         },
       ],
     },
