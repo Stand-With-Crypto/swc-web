@@ -6,7 +6,6 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion'
 import { Button } from '@/components/ui/button'
-import { NextImage } from '@/components/ui/image'
 import { ExternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
@@ -27,7 +26,7 @@ const DOWNLOAD_LINKS = {
 
 const IMPACT_ITEMS = [
   {
-    accordionTitle: 'Protecting Innovation in America',
+    accordionTitle: 'Protecting innovation in America',
     accordionContent: (
       <p>
         Keeping innovation in America is vital for our country's economic growth and global
@@ -37,7 +36,7 @@ const IMPACT_ITEMS = [
     ),
   },
   {
-    accordionTitle: 'Updating the Financial System',
+    accordionTitle: 'Updating the financial system',
     accordionContent: (
       <p>
         By voting for pro-crypto candidates, you have the power to shape policies that will
@@ -47,7 +46,7 @@ const IMPACT_ITEMS = [
     ),
   },
   {
-    accordionTitle: 'Bipartisan Support',
+    accordionTitle: 'Bipartisan support',
     accordionContent: (
       <p>
         The crypto voter demographic is diverse and bipartisan. Your vote transcends party lines and
@@ -57,7 +56,7 @@ const IMPACT_ITEMS = [
     ),
   },
   {
-    accordionTitle: 'Amplifying Awareness',
+    accordionTitle: 'Amplifying awareness',
     accordionContent: (
       <p>
         Your vote helps generate media coverage and raise awareness about the importance of
@@ -67,7 +66,7 @@ const IMPACT_ITEMS = [
     ),
   },
   {
-    accordionTitle: 'Protecting Consumer Interests',
+    accordionTitle: 'Protecting consumer interests',
     accordionContent: (
       <p>
         Voting for candidates who support clear regulatory frameworks for digital assets ensures the
@@ -83,15 +82,8 @@ export function PageAdvocacyToolkit({ title, description }: PagePartnersProps) {
     <div className="standard-spacing-from-navbar container">
       <section className="space-y-14">
         <div className="container flex flex-col items-center gap-4">
-          <NextImage
-            alt="Toolkit Shield"
-            height={150}
-            src="/advocacy-toolkit/toolkit-shield.png"
-            width={150}
-          />
-
-          <PageTitle className="font-sans !text-[32px]">{title}</PageTitle>
-          <PageSubTitle className="italic text-muted-foreground" size="md">
+          <PageTitle className="font-sans !text-5xl">{title}</PageTitle>
+          <PageSubTitle className="text-muted-foreground" size="md">
             {description}
           </PageSubTitle>
         </div>
@@ -99,7 +91,7 @@ export function PageAdvocacyToolkit({ title, description }: PagePartnersProps) {
 
       <ToolkitSection
         heading="Host a Stand With Crypto event"
-        headingClassName="text-primary-cta text-xl"
+        headingClassName="text-xl"
         sectionClassName="mt-20"
         subtext="Stand With Crypto is encouraging advocates to organize events all across the country and we need your help to make them happen. SwC is providing guidance and funding to advocates in various cities to bring their communities together! The goal is to demonstrate that the crypto voter is real, present in important states, and engaged with the political process."
       >
@@ -114,7 +106,7 @@ export function PageAdvocacyToolkit({ title, description }: PagePartnersProps) {
 
       <ToolkitSection
         heading="Host a voter registration drive"
-        headingClassName="text-primary-cta text-xl"
+        headingClassName="text-xl"
         sectionClassName="mt-20"
         subtext="Hosting a voter registration drive is crucial - it empowers individuals to exercise their democratic right to vote. By organizing such drives, advocates can increase voter participation, and ensure that the crypto voter is heard this election season. Voter registration drives have a significant impact on shaping the political landscape."
       >
@@ -131,7 +123,7 @@ export function PageAdvocacyToolkit({ title, description }: PagePartnersProps) {
 
       <ToolkitSection
         heading="Launch a local chapter"
-        headingClassName="text-primary-cta text-xl"
+        headingClassName="text-xl"
         sectionClassName="mt-20"
         subtext="The crypto voter can have a significant influence in the 2024 election and beyond. A key to building out the most impactful network of crypto users in the USA is establishing strong state chapters nationwide. These chapters will be a force multiplier to the power that our community can wield in our pursuit of securing pro-crypto policies and candidates."
       >
@@ -149,6 +141,7 @@ export function PageAdvocacyToolkit({ title, description }: PagePartnersProps) {
       <ToolkitSection
         childrenWrapperClassName="mt-10"
         heading="Why does your voice matter? Does it make an impact?"
+        headingClassName="text-xl"
         sectionClassName="mt-20"
         subtext="The crypto voter can make a real difference in the 2024 election and beyond. A key to building on the most impactful network of crypto users in the USA is establishing strong state chapters nationwide. These chapters will be a force multiplier to the power that our community can wield in our pursuit of securing pro-crypto policies and candidates."
       >
