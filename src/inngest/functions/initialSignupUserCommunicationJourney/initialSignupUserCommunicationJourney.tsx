@@ -21,7 +21,7 @@ import { prismaClient } from '@/utils/server/prismaClient'
 export const INITIAL_SIGNUP_USER_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME =
   'app/user.communication/initial.signup'
 const INITIAL_SIGNUP_USER_COMMUNICATION_JOURNEY_INNGEST_FUNCTION_ID =
-  'user-communication/initial-signup'
+  'user-communication.initial-signup'
 
 const MAX_RETRY_COUNT = 2
 const LATEST_ACTION_DEBOUNCE_TIME_MINUTES = 5
