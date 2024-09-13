@@ -7,8 +7,10 @@ import { ChevronDown, Menu } from 'lucide-react'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import {
+  AdvocacyToolkitIcon,
   BillsIcon,
   CommunityIcon,
+  CreatorDefenseIcon,
   DonateIcon,
   MissionIcon,
   ResourcesIcon,
@@ -69,6 +71,11 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
           icon: DonateIcon,
         },
         {
+          href: urls.creatorDefenseFund(),
+          text: 'Creator Defense Fund',
+          icon: CreatorDefenseIcon,
+        },
+        {
           href: urls.community(),
           text: 'Community',
           icon: CommunityIcon,
@@ -77,6 +84,11 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
           href: urls.bills(),
           text: 'Bills',
           icon: BillsIcon,
+        },
+        {
+          href: urls.advocacyToolkit(),
+          text: 'Advocacy toolkit',
+          icon: AdvocacyToolkitIcon,
         },
         {
           href: urls.resources(),
