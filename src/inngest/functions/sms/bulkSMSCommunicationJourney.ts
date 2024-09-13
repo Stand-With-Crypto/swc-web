@@ -28,7 +28,7 @@ const MESSAGE_SEGMENTS_PER_SECOND = Number(
 )
 const MAX_QUEUE_LENGTH = Number(requiredEnv(process.env.MAX_QUEUE_LENGTH, 'MAX_QUEUE_LENGTH'))
 
-interface BulkSMSPayload {
+export interface BulkSMSPayload {
   messages: Array<{
     smsBody: string
     userWhereInput?: GetPhoneNumberOptions['userWhereInput']
