@@ -30,7 +30,7 @@ const MAX_QUEUE_LENGTH = Number(requiredEnv(process.env.MAX_QUEUE_LENGTH, 'MAX_Q
 const MIN_ENQUEUE_HOUR = 11 // 11 am
 const MAX_ENQUEUE_HOUR = 22 // 10 pm
 
-interface BulkSMSPayload {
+export interface BulkSMSPayload {
   messages: Array<{
     smsBody: string
     userWhereInput?: GetPhoneNumberOptions['userWhereInput']
