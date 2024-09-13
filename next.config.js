@@ -329,6 +329,12 @@ const nextConfig = {
       },
       // SMS shortlinks
       {
+        source: '/wi/1',
+        destination:
+          'https://americalovescryptowi.splashthat.com/?utm_source=swc&utm_medium=sms&utm_campaign=wi_3&utm_id=sst',
+        permanent: false,
+      },
+      {
         source: '/nv/5',
         destination:
           'https://americalovescryptonv.splashthat.com?utm_source=swc&utm_medium=sms&utm_campaign=nv_3&utm_id=sst&utm_content=v2',
