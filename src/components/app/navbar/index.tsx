@@ -159,8 +159,8 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
               <p className="font-semibold">
                 Introducing the Creator Legal Defense Fund - Protecting artists and creators.{' '}
                 <InternalLink
-                  href={urls.creatorDefenseFund()}
                   className="text-primary-cta-foreground antialiased"
+                  href={urls.creatorDefenseFund()}
                   onClick={() => setShowCreatorBanner(false)}
                 >
                   Learn more here.
