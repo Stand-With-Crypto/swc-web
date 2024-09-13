@@ -14,7 +14,7 @@ export const UNSTOP_CONFIRMATION_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME =
   'app/user.communication/unstop-confirmation.sms'
 
 const UNSTOP_CONFIRMATION_SMS_COMMUNICATION_JOURNEY_INNGEST_FUNCTION_ID =
-  'user-communication/unstop-confirmation-sms'
+  'user-communication.unstop-confirmation-sms'
 
 const MAX_RETRY_COUNT = 3
 
