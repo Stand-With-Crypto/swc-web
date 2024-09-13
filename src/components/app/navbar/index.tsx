@@ -133,6 +133,8 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
     </Button>
   )
 
+  const [showCreatorBanner, setShowCreatorBanner] = useState(true)
+
   return (
     <>
       {hasEnvironmentBar && (
@@ -145,6 +147,25 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
               <InternalLink className="text-fontcolor underline" href={urls.internalHomepage()}>
                 Internal Pages
               </InternalLink>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showCreatorBanner && (
+        <div className="flex min-h-12 w-full items-center bg-primary-cta p-2 text-center">
+          <div className="container flex">
+            <div className="w-full space-y-1 text-sm text-background antialiased max-sm:text-center sm:text-base">
+              <p className="font-semibold">
+                Introducing the Creator Legal Defense Fund - Protecting artists and creators.{' '}
+                <InternalLink
+                  className="text-primary-cta-foreground antialiased"
+                  href={urls.creatorDefenseFund()}
+                  onClick={() => setShowCreatorBanner(false)}
+                >
+                  Learn more here.
+                </InternalLink>
+              </p>
             </div>
           </div>
         </div>
