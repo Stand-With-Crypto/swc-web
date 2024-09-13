@@ -100,4 +100,9 @@ export const INDUSTRY_PARTNERS = [
     imageSrc: '/partners/hedera.svg',
     url: 'https://www.hedera.com/',
   },
+  {
+    title: 'OpenSea',
+    imageSrc: '/partners/opensea-full-logo-dark.svg',
+    url: 'https://opensea.io/',
+  },
 ]
