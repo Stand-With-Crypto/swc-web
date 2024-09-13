@@ -10,7 +10,7 @@ import { ExternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 
-interface PagePartnersProps {
+interface PageAdvocacyToolkitProps {
   title: string
   description: string
 }
@@ -77,7 +77,7 @@ const IMPACT_ITEMS = [
   },
 ]
 
-export function PageAdvocacyToolkit({ title, description }: PagePartnersProps) {
+export function PageAdvocacyToolkit({ title, description }: PageAdvocacyToolkitProps) {
   return (
     <div className="standard-spacing-from-navbar container">
       <section className="space-y-14">

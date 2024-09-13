@@ -13,7 +13,7 @@ import {
   CreatorDefenseIcon,
   DonateIcon,
   MissionIcon,
-  ResourcesIcon,
+  PartnersIcon,
 } from '@/components/app/navbar/navbarDrawerIcons'
 import { NavbarLoggedInButton } from '@/components/app/navbar/navbarLoggedInButton'
 import {
@@ -48,17 +48,13 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
       href: urls.endorsedCandidates(),
       text: 'Endorsed candidates',
     },
-    {
-      href: urls.partners(),
-      text: 'Partners',
-    },
+
     {
       href: urls.events(),
       text: 'Events',
     },
     {
-      href: urls.resources(),
-      text: 'Resources',
+      text: 'About',
       children: [
         {
           href: urls.about(),
@@ -66,19 +62,24 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
           icon: MissionIcon,
         },
         {
-          href: urls.donate(),
-          text: 'Donate',
-          icon: DonateIcon,
-        },
-        {
-          href: urls.creatorDefenseFund(),
-          text: 'Creator Defense Fund',
-          icon: CreatorDefenseIcon,
-        },
-        {
           href: urls.community(),
           text: 'Community',
           icon: CommunityIcon,
+        },
+        {
+          href: urls.partners(),
+          text: 'Partners',
+          icon: PartnersIcon,
+        },
+      ],
+    },
+    {
+      text: 'Resources',
+      children: [
+        {
+          href: urls.donate(),
+          text: 'Donate',
+          icon: DonateIcon,
         },
         {
           href: urls.bills(),
@@ -86,14 +87,14 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
           icon: BillsIcon,
         },
         {
+          href: urls.creatorDefenseFund(),
+          text: 'Creator Defense Fund',
+          icon: CreatorDefenseIcon,
+        },
+        {
           href: urls.advocacyToolkit(),
           text: 'Advocacy toolkit',
           icon: AdvocacyToolkitIcon,
-        },
-        {
-          href: urls.resources(),
-          text: 'FIT21 resources',
-          icon: ResourcesIcon,
         },
       ],
     },
@@ -191,7 +192,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
               {leftLinks.map(({ href, text, children }, index) => (
                 <div
                   className="nav-item group relative"
-                  key={href}
+                  key={text}
                   onMouseEnter={() => {
                     setHoveredMenuIndex(index)
                   }}
@@ -315,7 +316,7 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
                   return (
                     <Accordion
                       collapsible
-                      key={href}
+                      key={text}
                       onValueChange={value => setOpenAccordionTitle(value)}
                       type="single"
                       value={openAccordionTitle}

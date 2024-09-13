@@ -11,7 +11,7 @@ import { ExternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 
-interface PagePartnersProps {
+interface PageCreatorDefenseFundProps {
   title: string
   description: string
 }
@@ -166,7 +166,7 @@ const FAQ_ITEMS = [
   },
 ]
 
-export function PageCreatorDefenseFund({ title, description }: PagePartnersProps) {
+export function PageCreatorDefenseFund({ title, description }: PageCreatorDefenseFundProps) {
   return (
     <div className="standard-spacing-from-navbar container">
       <section className="space-y-14">
