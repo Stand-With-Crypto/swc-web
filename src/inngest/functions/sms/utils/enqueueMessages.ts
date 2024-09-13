@@ -54,17 +54,8 @@ export async function enqueueMessages(payload: EnqueueMessagePayload[], attempt 
 
       try {
         if (body) {
-          const user = await getUserByPhoneNumber(phoneNumber)
-
-          const parsedBody = addVariablesToMessage(body, {
-            firstName: user?.firstName,
-            lastName: user?.lastName,
-            sessionId: user?.userSessions?.[0]?.id,
-            userId: user?.id,
-          })
-
           const queuedMessage = await sendSMS({
-            body: parsedBody,
+            body,
             to: phoneNumber,
             media,
           })
@@ -83,7 +74,7 @@ export async function enqueueMessages(payload: EnqueueMessagePayload[], attempt 
             )
           }
 
-          segmentsSent += countSegments(parsedBody)
+          segmentsSent += countSegments(body)
           queuedMessages += 1
         } else {
           update(
@@ -211,19 +202,5 @@ export function countMessagesAndSegments(payload: EnqueueMessagePayload[]) {
       segments: 0,
       messages: 0,
     },
-  )
-}
-
-interface Variables {
-  firstName?: string
-  lastName?: string
-  sessionId?: string
-  userId?: string
-}
-
-function addVariablesToMessage(message: string, variables: Variables) {
-  return message.replace(
-    /{{\s*(\w+)\s*}}/g,
-    (_, variable: keyof Variables) => variables[variable] ?? '',
   )
 }
