@@ -16,9 +16,6 @@ import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 import { countMessagesAndSegments, EnqueueMessagePayload, enqueueMessages } from './utils'
 
 export const BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME = 'app/user.communication/bulk.sms'
-export const BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_FINISHED_EVENT_NAME =
-  'app/user.communication/bulk.sms/finished'
-
 export const BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_FUNCTION_ID = 'user-communication.bulk-sms'
 
 const MAX_RETRY_COUNT = 0
@@ -41,7 +38,7 @@ interface BulkSMSPayload {
     campaignName: string
     media?: string[]
   }>
-  // default to EST: -5
+  // default to ET: -4
   timezone?: number
   send?: boolean
   // Number of milliseconds or Time string compatible with the ms package, e.g. "30m", "3 hours", or "2.5d"
@@ -58,7 +55,11 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
     event: BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
   },
   async ({ step, event, logger }) => {
-    const { send, sleepTime, messages, timezone = -5 } = event.data as BulkSMSPayload
+    const { send, sleepTime, messages, timezone = -4 } = event.data as BulkSMSPayload
+
+    if (!messages) {
+      throw new NonRetriableError('Missing messages to send')
+    }
 
     messages.forEach(({ smsBody, campaignName }, index) => {
       if (!smsBody) {
@@ -205,7 +206,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
 
       if (now < minEnqueueHourToday) {
         const waitingTime = differenceInMilliseconds(minEnqueueHourToday, now)
-        logger.info('late-night-messaging-prevention', {
+        logInfo('late-night-messaging-prevention', {
           waitingTime: formatTime(waitingTime / 1000),
           reason: `now (${now.toDateString()}) it's earlier than minEnqueueHourToday (${minEnqueueHourToday.toDateString()})`,
         })
@@ -214,7 +215,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
 
       if (now > maxEnqueueHourToday) {
         const waitingTime = differenceInMilliseconds(addDays(minEnqueueHourToday, 1), now)
-        logger.info('late-night-messaging-prevention', {
+        logInfo('late-night-messaging-prevention', {
           waitingTime: formatTime(waitingTime / 1000),
           reason: `now (${now.toDateString()}) it's later than maxEnqueueHourToday (${maxEnqueueHourToday.toDateString()})`,
         })
@@ -254,7 +255,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
             : addDays(minEnqueueHourToday, 1),
           now,
         )
-        logger.info('late-night-messaging-prevention', {
+        logInfo('late-night-messaging-prevention', {
           waitingTime: formatTime(waitingTime / 1000),
           reason: `queue will be empty at ${emptyQueueTime.toDateString()}`,
         })
