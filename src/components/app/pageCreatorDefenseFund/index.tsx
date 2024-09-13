@@ -219,8 +219,8 @@ export function PageCreatorDefenseFund({ title, description }: PagePartnersProps
             collective rights. You can make a difference by directly pressing the SEC to reconsider
             its approach in a misguided regulatory environment. Email the SEC to express your
             concerns and advocate for policies that protect creative freedom and support innovation.
-            Let your voice be heard, and join us in educating voters about candidates who support
-            common-sense blockchain policies.
+            Let your voice be heard, and join us in educating the crypto community about politicians
+            who support common-sense blockchain policies.
           </span>
         }
       >
