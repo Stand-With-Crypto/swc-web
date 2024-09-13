@@ -260,3 +260,33 @@ export function PartnersIcon({ height = 24, width = 24, ...rest }: IconProps) {
     </svg>
   )
 }
+
+export function PressIcon({ height = 24, width = 24, ...rest }: IconProps) {
+  return (
+    <svg
+      fill="none"
+      height={height}
+      viewBox="0 0 24 24"
+      width={width}
+      xmlns="http://www.w3.org/2000/svg"
+      {...rest}
+    >
+      <g clipPath="url(#clip0_5153_20790)">
+        <path
+          d="M15 5H5V19H19V9H15V5ZM7 7H12V9H7V7ZM17 17H7V15H17V17ZM17 11V13H7V11H17Z"
+          fill="#912702"
+          opacity="0.3"
+        />
+        <path
+          d="M7 13H17V11H7V13ZM7 17H17V15H7V17ZM16 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V8L16 3ZM19 19H5V5H15V9H19V19ZM12 7H7V9H12V7Z"
+          fill="#912702"
+        />
+      </g>
+      <defs>
+        <clipPath id="clip0_5153_20790">
+          <rect fill="white" height={height} width={width} />
+        </clipPath>
+      </defs>
+    </svg>
+  )
+}

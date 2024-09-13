@@ -14,6 +14,7 @@ import {
   DonateIcon,
   MissionIcon,
   PartnersIcon,
+  PressIcon,
 } from '@/components/app/navbar/navbarDrawerIcons'
 import { NavbarLoggedInButton } from '@/components/app/navbar/navbarLoggedInButton'
 import {
@@ -95,6 +96,11 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
           href: urls.advocacyToolkit(),
           text: 'Advocacy toolkit',
           icon: AdvocacyToolkitIcon,
+        },
+        {
+          href: urls.press(),
+          text: 'Press',
+          icon: PressIcon,
         },
       ],
     },
