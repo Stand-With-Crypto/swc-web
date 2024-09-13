@@ -1,6 +1,9 @@
 import { differenceInDays, format, startOfDay } from 'date-fns'
 
-import { BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME } from '@/inngest/functions/sms/bulkSMSCommunicationJourney'
+import {
+  BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
+  BulkSMSPayload,
+} from '@/inngest/functions/sms/bulkSMSCommunicationJourney'
 import { inngest } from '@/inngest/inngest'
 import { getEvents } from '@/utils/server/builderIO/swcEvents'
 import { prismaClient } from '@/utils/server/prismaClient'
@@ -108,18 +111,24 @@ async function getNotificationInformationForEvents(
       })
     }
 
-    await inngest.send({
-      name: BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
-      data: {
-        send: true,
-        campaignName: `event-reminder-${event.data.slug}-${event.data.state}-${notificationStrategy}`,
-        smsBody,
-        userWhereInput: {
-          phoneNumber: {
-            in: notifications.map(notification => notification.phoneNumber),
+    const bulkSMSPayload: BulkSMSPayload = {
+      send: true,
+      messages: [
+        {
+          campaignName: `event-reminder-${event.data.slug}-${event.data.state}-${notificationStrategy}`,
+          smsBody,
+          userWhereInput: {
+            phoneNumber: {
+              in: notifications.map(notification => notification.phoneNumber),
+            },
           },
         },
-      },
+      ],
+    }
+
+    await inngest.send({
+      name: BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
+      data: bulkSMSPayload,
     })
   }
 
