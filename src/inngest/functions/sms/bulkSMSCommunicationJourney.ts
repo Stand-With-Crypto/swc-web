@@ -1,5 +1,4 @@
 import { Prisma, SMSStatus, UserCommunicationJourneyType } from '@prisma/client'
-import { addDays, addHours, addSeconds, differenceInMilliseconds, startOfDay } from 'date-fns'
 import { NonRetriableError } from 'inngest'
 import { chunk, merge, uniq } from 'lodash-es'
 
@@ -11,11 +10,13 @@ import { BULK_WELCOME_MESSAGE } from '@/utils/server/sms/messages'
 import { isPhoneNumberSupported } from '@/utils/server/sms/utils'
 import { requiredEnv } from '@/utils/shared/requiredEnv'
 import { SECONDS_DURATION } from '@/utils/shared/seconds'
-import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
 import { countMessagesAndSegments, EnqueueMessagePayload, enqueueMessages } from './utils'
 
 export const BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME = 'app/user.communication/bulk.sms'
+export const BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_FINISHED_EVENT_NAME =
+  'app/user.communication/bulk.sms/finished'
+
 export const BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_FUNCTION_ID = 'user-communication.bulk-sms'
 
 const MAX_RETRY_COUNT = 0
@@ -27,9 +28,6 @@ const MESSAGE_SEGMENTS_PER_SECOND = Number(
 )
 const MAX_QUEUE_LENGTH = Number(requiredEnv(process.env.MAX_QUEUE_LENGTH, 'MAX_QUEUE_LENGTH'))
 
-const MIN_ENQUEUE_HOUR = 11 // 11 am
-const MAX_ENQUEUE_HOUR = 22 // 10 pm
-
 export interface BulkSMSPayload {
   messages: Array<{
     smsBody: string
@@ -38,8 +36,6 @@ export interface BulkSMSPayload {
     campaignName: string
     media?: string[]
   }>
-  // default to ET: -4
-  timezone?: number
   send?: boolean
   // Number of milliseconds or Time string compatible with the ms package, e.g. "30m", "3 hours", or "2.5d"
   sleepTime?: string | number
@@ -55,11 +51,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
     event: BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
   },
   async ({ step, event, logger }) => {
-    const { send, sleepTime, messages, timezone = -4 } = event.data as BulkSMSPayload
-
-    if (!messages) {
-      throw new NonRetriableError('Missing messages to send')
-    }
+    const { send, sleepTime, messages } = event.data as BulkSMSPayload
 
     messages.forEach(({ smsBody, campaignName }, index) => {
       if (!smsBody) {
@@ -149,12 +141,6 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
         () => countMessagesAndSegments(messagesPayload),
       )
 
-      if (NEXT_PUBLIC_ENVIRONMENT !== 'production' && messagesPayload.length > 100) {
-        throw new NonRetriableError(
-          'Cannot send more then 100 messages in a non-production environment',
-        )
-      }
-
       const timeToSendSegments = getWaitingTimeInSeconds(segmentsCount)
 
       const payloadChunks = chunk(messagesPayload, TWILIO_RATE_LIMIT)
@@ -195,75 +181,38 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
 
     let totalQueuedMessages = 0
     let totalQueuedSegments = 0
+    let totalTimeToSendAllSegments = 0
 
     let segmentsInQueue = 0
-    let timeInSecondsToEmptyQueue = 0
+    let timeToEmptyQueue = 0
 
     for (let i = 0; i < enqueueMessagesPayloadChunks.length; i += 1) {
-      const now = addHours(new Date(), timezone)
-      const minEnqueueHourToday = addHours(startOfDay(now), MIN_ENQUEUE_HOUR)
-      const maxEnqueueHourToday = addHours(startOfDay(now), MAX_ENQUEUE_HOUR)
+      const payloadChunk = enqueueMessagesPayloadChunks[i]
 
-      if (now < minEnqueueHourToday) {
-        const waitingTime = differenceInMilliseconds(minEnqueueHourToday, now)
-        logInfo('late-night-messaging-prevention', {
-          waitingTime: formatTime(waitingTime / 1000),
-          reason: `now (${now.toDateString()}) it's earlier than minEnqueueHourToday (${minEnqueueHourToday.toDateString()})`,
-        })
-        await step.sleep('wait-until-min-enqueue-hour', waitingTime)
-      }
-
-      if (now > maxEnqueueHourToday) {
-        const waitingTime = differenceInMilliseconds(addDays(minEnqueueHourToday, 1), now)
-        logInfo('late-night-messaging-prevention', {
-          waitingTime: formatTime(waitingTime / 1000),
-          reason: `now (${now.toDateString()}) it's later than maxEnqueueHourToday (${maxEnqueueHourToday.toDateString()})`,
-        })
-        await step.sleep('wait-until-min-enqueue-hour-of-next-day', waitingTime)
-      }
-
-      const { queuedMessages, queuedSegments, timeInSecondsToSendAllSegments } = await step.run(
-        `enqueue-messages-${i + 1}`,
+      const { queuedMessages, queuedSegments, timeToSendAllSegments } = await step.run(
+        `enqueue-messages - ${i + 1}`,
         async () => {
-          const payloadChunk = enqueueMessagesPayloadChunks[i]
+          let queuedMessages = 0
+          let queuedSegments = 0
 
           const { messages: messagesCount, segments: segmentsCount } =
             await enqueueMessages(payloadChunk)
 
-          const timeInSecondsToSendAllSegments = getWaitingTimeInSeconds(queuedSegments)
+          queuedMessages += messagesCount
+          queuedSegments += segmentsCount
 
-          return {
-            queuedMessages: messagesCount,
-            queuedSegments: segmentsCount,
-            timeInSecondsToSendAllSegments,
-          }
+          const timeToSendAllSegments = getWaitingTimeInSeconds(queuedSegments)
+
+          return { queuedMessages, queuedSegments, timeToSendAllSegments }
         },
       )
 
       totalQueuedMessages += queuedMessages
       totalQueuedSegments += queuedSegments
+      totalTimeToSendAllSegments += timeToSendAllSegments
 
       segmentsInQueue += queuedSegments
-      timeInSecondsToEmptyQueue += timeInSecondsToSendAllSegments
-
-      const emptyQueueTime = addSeconds(now, timeInSecondsToEmptyQueue)
-
-      if (emptyQueueTime > maxEnqueueHourToday) {
-        const waitingTime = differenceInMilliseconds(
-          emptyQueueTime > addDays(minEnqueueHourToday, 1)
-            ? emptyQueueTime
-            : addDays(minEnqueueHourToday, 1),
-          now,
-        )
-        logInfo('late-night-messaging-prevention', {
-          waitingTime: formatTime(waitingTime / 1000),
-          reason: `queue will be empty at ${emptyQueueTime.toDateString()}`,
-        })
-        await step.sleep('wait-until-min-enqueue-hour-of-next-day', waitingTime)
-
-        segmentsInQueue = 0
-        timeInSecondsToEmptyQueue = 0
-      }
+      timeToEmptyQueue += timeToSendAllSegments
 
       if (totalSegmentsCount >= MAX_QUEUE_LENGTH) {
         const nextPayloadChunk = enqueueMessagesPayloadChunks[i + 1]
@@ -274,22 +223,22 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
           if (segmentsInQueue + nextPayloadSegments >= MAX_QUEUE_LENGTH) {
             logInfo('queue-overflow-control', {
               segmentsInQueue,
-              timeToEmptyQueue: formatTime(timeInSecondsToEmptyQueue),
+              timeToEmptyQueue: formatTime(timeToEmptyQueue),
             })
 
             await step.sleep(
-              `waiting-${formatTime(timeInSecondsToEmptyQueue).replace(' ', '-')}-for-queue-to-be-empty`,
-              timeInSecondsToEmptyQueue,
+              `waiting-${formatTime(timeToEmptyQueue).replace(' ', '-')}-for-queue-to-be-empty`,
+              timeToEmptyQueue,
             )
 
             segmentsInQueue = 0
-            timeInSecondsToEmptyQueue = 0
+            timeToEmptyQueue = 0
           }
         }
       }
 
       logInfo(`summary-info - ${i + 1}/${enqueueMessagesPayloadChunks.length}`, {
-        totalTimeToSendAllSegments: formatTime(timeInSecondsToEmptyQueue),
+        totalTimeToSendAllSegments: formatTime(totalTimeToSendAllSegments),
         totalQueuedMessages,
         totalQueuedSegments,
       })
@@ -300,6 +249,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
     return {
       totalQueuedMessages,
       totalQueuedSegments,
+      totalTimeToSendAllSegments: formatTime(totalTimeToSendAllSegments),
     }
   },
 )
