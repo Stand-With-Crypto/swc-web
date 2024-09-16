@@ -329,6 +329,18 @@ const nextConfig = {
       },
       // SMS shortlinks
       {
+        source: '/voter-day-1/:sessionId',
+        destination:
+          '/vote?utm_source=swc&utm_medium=sms&utm_campaign=vd_1&utm_id=sst&utm_content=v1&sessionId=:sessionId',
+        permanent: false,
+      },
+      {
+        source: '/voter-day-2/:sessionId',
+        destination:
+          '/vote?utm_source=swc&utm_medium=sms&utm_campaign=vd_1&utm_id=sst&utm_content=v2&sessionId=:sessionId',
+        permanent: false,
+      },
+      {
         source: '/pa/1',
         destination:
           'https://americalovescryptopa.splashthat.com/?utm_source=swc&utm_medium=sms&utm_campaign=pa_3&utm_id=sst',
