@@ -67,9 +67,13 @@ function UserActionCard({
   completedCampaigns,
   campaignsLength,
   campaigns,
+  performedUserActions,
   ...rest
 }: Omit<UserActionCardProps, 'WrapperComponent'>) {
-  const isReadOnly = campaignsLength === 1 && !campaigns[0]?.canBeTriggeredMultipleTimes
+  const isReadOnly =
+    campaignsLength === 1 &&
+    !campaigns[0]?.canBeTriggeredMultipleTimes &&
+    performedUserActions[`${campaigns[0]?.actionType}-${campaigns[0]?.campaignName}`]
 
   const getProgressText = () => {
     if (campaignsLength === 1) {
