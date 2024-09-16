@@ -21,6 +21,7 @@ import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constan
 import { getIntlUrls } from '@/utils/shared/urls'
 
 import { TopLevelMetrics } from './topLevelMetrics'
+import { UserActionGridCTAs } from '@/components/app/userActionGridCTAs'
 
 export function PageHome({
   params,
@@ -156,6 +157,16 @@ export function PageHome({
             The future of crypto is in your hands. Here's how you can help.
           </PageSubTitle>
           <UserActionRowCTAsAnimatedListWithApi />
+        </section>
+
+        <section className="mb-16 md:mb-36">
+          <PageTitle as="h3" className="mb-6 !text-[32px]">
+            Get involved
+          </PageTitle>
+          <PageSubTitle as="h4" className="mb-10">
+            The future of crypto is in your hands. Here's how you can help.
+          </PageSubTitle>
+          <UserActionGridCTAs />
         </section>
       </div>
       <section className="mb-16 space-y-6 md:mb-36">

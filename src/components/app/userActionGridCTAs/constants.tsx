@@ -6,6 +6,7 @@ import { CALL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormC
 import { UserActionFormCallCongresspersonDialog } from '@/components/app/userActionFormCallCongressperson/dialog'
 import { EMAIL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormEmailCongressperson/constants'
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
+import { UserActionGridCTA } from '@/components/app/userActionGridCTAs/types'
 import {
   UserActionCallCampaignName,
   UserActionDonationCampaignName,
@@ -17,12 +18,13 @@ import {
   UserActionVotingInformationResearchedCampaignName,
 } from '@/utils/shared/userActionCampaigns'
 import { getYourPoliticianCategoryShortDisplayName } from '@/utils/shared/yourPoliticianCategory'
-import { UserActionGridCTA } from '@/components/app/userActionGridCTAs/types'
+import { UserActionFormEmailDebateDialog } from '@/components/app/userActionFormEmailDebate/dialog'
 
 export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
   [UserActionType.OPT_IN]: {
     title: 'Join Stand With Crypto',
     description: 'Join over 1,000,000 people fighting to keep crypto in America.',
+    campaignsModalDescription: 'Join over 1,000,000 people fighting to keep crypto in America.',
     image: '/actionTypeIcons/optIn.png',
     campaigns: [
       {
@@ -41,6 +43,8 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
   'Prepare to vote': {
     title: 'Prepare to vote',
     description: 'Research candidates, check your voter registration status, and pledge to vote.',
+    campaignsModalDescription:
+      'Research candidates, check your voter registration status, and pledge to vote.',
     image: '/actionTypeIcons/voterAttestation.png',
     link: ({ children }) => <Link href="/vote">{children}</Link>,
     campaigns: [
@@ -76,6 +80,8 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
   [UserActionType.EMAIL]: {
     title: 'Send an email',
     description: 'Email your representatives and tell them crypto matters.',
+    campaignsModalDescription:
+      'One of the most effective ways of making your voice heard. We’ve drafted emails to make it easy for you.',
     image: '/actionTypeIcons/email.png',
     campaigns: [
       {
@@ -98,12 +104,12 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       },
       {
         actionType: UserActionType.EMAIL,
-        campaignName: UserActionEmailCampaignName.FIT21_2024_04_FOLLOW_UP,
-        isCampaignActive: true,
-        title: `Email your ${getYourPoliticianCategoryShortDisplayName(EMAIL_FLOW_POLITICIANS_CATEGORY)}`,
+        campaignName: UserActionEmailCampaignName.ABC_PRESIDENTIAL_DEBATE_2024,
+        isCampaignActive: false,
+        title: `Email ABC`,
         description: 'Make your voice heard. We make it easy.',
         canBeTriggeredMultipleTimes: true,
-        WrapperComponent: UserActionFormEmailCongresspersonDialog,
+        WrapperComponent: UserActionFormEmailDebateDialog,
       },
       {
         actionType: UserActionType.EMAIL,
@@ -119,6 +125,7 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
   [UserActionType.CALL]: {
     title: 'Make a call',
     description: 'Calling is the most effective way to make your voice heard.',
+    campaignsModalDescription: 'Calling is the most effective way to make your voice heard.',
     image: '/actionTypeIcons/call.png',
     campaigns: [
       {
@@ -135,6 +142,8 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
   [UserActionType.TWEET]: {
     title: 'Follow us on X',
     description: 'Stay up to date on crypto policy by following @StandWithCrypto on X.',
+    campaignsModalDescription:
+      'Stay up to date on crypto policy by following @StandWithCrypto on X.',
     image: '/actionTypeIcons/tweet.png',
     campaigns: [
       {
@@ -151,6 +160,7 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
   [UserActionType.DONATION]: {
     title: 'Make a donation',
     description: 'Donate fiat or crypto to help keep crypto in America.',
+    campaignsModalDescription: 'Donate fiat or crypto to help keep crypto in America.',
     image: '/actionTypeIcons/donate.png',
     link: ({ children }) => <Link href="/donate">{children}</Link>,
     campaigns: [

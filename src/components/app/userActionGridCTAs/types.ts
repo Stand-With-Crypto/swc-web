@@ -1,5 +1,6 @@
-import { UserActionCampaignName } from '@/utils/shared/userActionCampaigns'
 import { UserActionType } from '@prisma/client'
+
+import { UserActionCampaignName } from '@/utils/shared/userActionCampaigns'
 
 export interface UserActionGridCTACampaign {
   actionType: UserActionType
@@ -31,6 +32,10 @@ export type UserActionGridCTA = Record<
   {
     title: string
     description: string
+    /**
+     * This is used as the description for the campaigns modal.
+     */
+    campaignsModalDescription: string
     /**
      * This property enables the CTA to function as a link, even if there are multiple campaigns. In short, it bypasses the check on the number of campaigns to determine whether to use the first campaign's WrapperComponent or to open the campaigns dialog.
      */
