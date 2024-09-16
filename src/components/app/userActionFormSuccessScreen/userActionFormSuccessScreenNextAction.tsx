@@ -86,7 +86,8 @@ export function UserActionFormSuccessScreenNextAction({
       <div className="space-y-3">
         <Progress value={debouncedProgressValue} />
         <p className="text-fontcolor-muted">
-          You've completed {numActionsCompleted} out of {numActionsAvailable} actions. Keep going!
+          You've completed {numActionsCompleted} out of {numActionsAvailable} actions.{' '}
+          {numActionsCompleted === numActionsAvailable ? 'Great job!' : 'Keep going!'}
         </p>
       </div>
 

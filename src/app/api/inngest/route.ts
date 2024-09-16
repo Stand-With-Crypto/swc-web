@@ -30,6 +30,7 @@ import {
   unstopConfirmationSMSCommunicationJourney,
   welcomeSMSCommunicationJourney,
 } from '@/inngest/functions/sms'
+import { deleteUserActions } from '@/inngest/functions/user/deleteUserActions'
 import {
   auditUsersTotalDonationAmountUsdInngest,
   auditUsersTotalDonationAmountUsdInngestAuditBatchOfUsers,
@@ -73,5 +74,6 @@ export const { GET, POST, PUT } = serve({
     backfillReactivationWithInngest,
     backfillReactivationCron,
     sendEventNotificationWithInngest,
+    deleteUserActions,
   ],
 })
