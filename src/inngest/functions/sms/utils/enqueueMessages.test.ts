@@ -8,7 +8,9 @@ import {
   PayloadMessage,
 } from '@/inngest/functions/sms/utils/enqueueMessages'
 import { flagInvalidPhoneNumbers } from '@/inngest/functions/sms/utils/flagInvalidPhoneNumbers'
+import { getSMSVariablesByPhoneNumbers } from '@/inngest/functions/sms/utils/getSMSVariablesByPhoneNumbers'
 import { fakerFields } from '@/mocks/fakerUtils'
+import { mockUser } from '@/mocks/models/mockUser'
 import { sendSMS, SendSMSError } from '@/utils/server/sms'
 import { optOutUser } from '@/utils/server/sms/actions'
 import type { SendSMSPayload } from '@/utils/server/sms/sendSMS'
@@ -17,7 +19,9 @@ import {
   IS_UNSUBSCRIBED_USER_CODE,
   TOO_MANY_REQUESTS_CODE,
 } from '@/utils/server/sms/SendSMSError'
+import { UserSMSVariables } from '@/utils/server/sms/utils/variables'
 import { sleep } from '@/utils/shared/sleep'
+import { fullUrl } from '@/utils/shared/urls'
 
 const invalidPhoneNumber = fakerFields.phoneNumber()
 const optedOutUserPhoneNumber = fakerFields.phoneNumber()
@@ -34,6 +38,10 @@ jest.mock('@/inngest/functions/sms/utils/communicationJourney', () => ({
 
 jest.mock('@/inngest/functions/sms/utils/flagInvalidPhoneNumbers', () => ({
   flagInvalidPhoneNumbers: jest.fn(),
+}))
+
+jest.mock('@/inngest/functions/sms/utils/getSMSVariablesByPhoneNumbers', () => ({
+  getSMSVariablesByPhoneNumbers: jest.fn().mockImplementation(() => Promise.resolve({})),
 }))
 
 jest.mock('@/utils/server/sms/utils', () => ({
@@ -162,5 +170,42 @@ describe('enqueueMessages function', () => {
 
     expect(optOutUser).toBeCalledTimes(1)
     expect(optOutUser).toBeCalledWith(optedOutUserPhoneNumber, undefined)
+  })
+
+  const mockedUser = { ...mockUser(), phoneNumber: fakerFields.phoneNumber() }
+  const mockedSessionId = faker.string.uuid()
+
+  it.each([
+    [
+      `Please, finish your profile at ${fullUrl(`/profile?sessionId={{ sessionId }}`)}`,
+      `Please, finish your profile at ${fullUrl(`/profile?sessionId=${mockedSessionId}`)}`,
+    ],
+    [
+      `{{ firstName }} {{ lastName }}, thanks for subscribing to Stand With Crypto`,
+      `${mockedUser.firstName} ${mockedUser.lastName}, thanks for subscribing to Stand With Crypto`,
+    ],
+    [`You received a NFT: {{ invalidVariable }}`, `You received a NFT: `],
+    ['Message with no variables', 'Message with no variables'],
+  ])('should correctly parse the sms body with custom variables', async (input, output) => {
+    // eslint-disable-next-line no-extra-semi
+    ;(getSMSVariablesByPhoneNumbers as jest.Mock).mockImplementation(() =>
+      Promise.resolve<Record<string, UserSMSVariables>>({
+        [mockedUser.phoneNumber]: {
+          firstName: mockedUser.firstName,
+          lastName: mockedUser.lastName,
+          sessionId: mockedSessionId,
+          userId: mockedUser.id,
+        },
+      }),
+    )
+
+    await enqueueMessages([
+      {
+        messages: [{ body: input, journeyType: 'BULK_SMS' }],
+        phoneNumber: mockedUser.phoneNumber,
+      },
+    ])
+
+    expect(sendSMS).toHaveBeenCalledWith({ body: output, to: mockedUser.phoneNumber })
   })
 })
