@@ -1,7 +1,7 @@
 export const MOCK_PRESS_CONTENT = [
   {
     source: 'Chris Matthews',
-    heading: 'MarketWatch Article',
+    heading: 'Why the Harris-Trump presidential election could be decided by crypto voters',
     dateHeading: 'August 14 2024',
     slug: 'MARKETWATCH-ARTICLE',
     article: (
@@ -81,7 +81,7 @@ export const MOCK_PRESS_CONTENT = [
   {
     source: 'Andrea Shalal',
     dateHeading: 'June 5, 2024',
-    heading: 'Reuters Article',
+    heading: 'U.S. crypto advocacy group tops 1 million members after Biden veto',
     slug: 'REUTERS-ARTICLE',
     article: (
       <div className="mx-auto">
@@ -163,7 +163,7 @@ export const MOCK_PRESS_CONTENT = [
   {
     source: 'Casey Wagner',
     dateHeading: 'May 13, 2024',
-    heading: 'Blockworks Article',
+    heading: 'Stand With Crypto PAC launches as industry interest in campaign funding ramps up',
     slug: 'BLOCKWORKS-ARTICLE',
     article: (
       <div className="mx-auto">
@@ -245,7 +245,7 @@ export const MOCK_PRESS_CONTENT = [
   {
     source: 'Jesse Hamilton',
     dateHeading: 'May 10, 2024',
-    heading: 'CoinDesk Article',
+    heading: 'Stand With Crypto Sets Up Election War Chest, Backs Candidates Seeking Open Seats',
     slug: 'COINDESK-ARTICLE',
     article: (
       <div className="mx-auto">
@@ -336,7 +336,8 @@ export const MOCK_PRESS_CONTENT = [
   {
     source: 'Leo Schwartz',
     dateHeading: 'February 28, 2024',
-    heading: 'FORTUNE Article',
+    heading:
+      'Inside Coinbase’s road show to win the hearts and minds of voters ahead of the 2024 election',
     slug: 'FORTUNE-ARTICLE',
     article: (
       <div className="mx-auto">

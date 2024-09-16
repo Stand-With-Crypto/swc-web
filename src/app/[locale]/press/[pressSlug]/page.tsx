@@ -19,9 +19,14 @@ type PressContentPageProps = PageProps<{
 export const zodPressSlug = string()
 
 export async function generateMetadata({ params }: PressContentPageProps): Promise<Metadata> {
-  const pressSlug = zodPressSlug.parse(params.pressSlug.toUpperCase())
+  const pressSlug = zodPressSlug.parse(params.pressSlug.toLowerCase())
+  const pressContent = (await new Promise(resolve => {
+    setTimeout(() => {
+      resolve(MOCK_PRESS_CONTENT.find(content => content.slug.toLowerCase() === pressSlug))
+    }, 1000)
+  })) as unknown as (typeof MOCK_PRESS_CONTENT)[0]
 
-  const title = `Read more about - ${pressSlug}`
+  const title = `Read more about - ${pressContent.heading}`
   const description = `Press news on Stand With.`
   return generateMetadataDetails({
     title,
