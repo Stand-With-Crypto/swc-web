@@ -230,7 +230,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
           const { messages: messagesCount, segments: segmentsCount } =
             await enqueueMessages(payloadChunk)
 
-          const timeInSecondsToSendAllSegments = getWaitingTimeInSeconds(queuedSegments)
+          const timeInSecondsToSendAllSegments = getWaitingTimeInSeconds(segmentsCount)
 
           return {
             queuedMessages: messagesCount,
