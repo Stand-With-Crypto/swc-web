@@ -126,7 +126,7 @@ function EventInformation({
           </h3>
           <div className="text-center font-mono text-base text-muted-foreground">
             <Balancer
-              className="[&_*]:pb-2 [&_strong]:font-semibold [&_strong]:text-foreground"
+              className="[&_*]:pb-2 [&_a]:font-medium [&_a]:text-primary-cta [&_strong]:font-semibold [&_strong]:text-foreground"
               dangerouslySetInnerHTML={{ __html: sanitizeHtml(event.formattedDescription) }}
             />
           </div>
