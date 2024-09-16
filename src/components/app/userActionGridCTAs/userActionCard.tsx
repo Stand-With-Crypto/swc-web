@@ -34,7 +34,14 @@ export function UserActionGridCTA(props: UserActionCardProps) {
     props.campaigns[0].canBeTriggeredMultipleTimes
 
   if (shouldUseFirstCampaignWrapperComponent) {
-    const WrapperComponent = props.campaigns[0].WrapperComponent
+    const WrapperComponent = props.campaigns.find(
+      campaign => campaign.isCampaignActive,
+    )?.WrapperComponent
+
+    if (!WrapperComponent) {
+      return null
+    }
+
     return (
       <WrapperComponent>
         <UserActionCard {...props} />

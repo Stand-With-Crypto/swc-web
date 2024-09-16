@@ -7,8 +7,11 @@ import { UserActionFormCallCongresspersonDialog } from '@/components/app/userAct
 import { EMAIL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormEmailCongressperson/constants'
 import { UserActionFormEmailCongresspersonDialog } from '@/components/app/userActionFormEmailCongressperson/dialog'
 import { UserActionFormEmailDebateDialog } from '@/components/app/userActionFormEmailDebate/dialog'
+import { UserActionFormShareOnTwitterDialog } from '@/components/app/userActionFormShareOnTwitter/dialog'
 import { UserActionGridCTA } from '@/components/app/userActionGridCTAs/types'
+import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constants'
 import {
+  USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP,
   UserActionCallCampaignName,
   UserActionDonationCampaignName,
   UserActionEmailCampaignName,
@@ -23,8 +26,8 @@ import { getYourPoliticianCategoryShortDisplayName } from '@/utils/shared/yourPo
 export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
   [UserActionType.OPT_IN]: {
     title: 'Join Stand With Crypto',
-    description: 'Join over 1,000,000 people fighting to keep crypto in America.',
-    campaignsModalDescription: 'Join over 1,000,000 people fighting to keep crypto in America.',
+    description: `Join over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates fighting to keep crypto in America.`,
+    campaignsModalDescription: `Join over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates fighting to keep crypto in America.`,
     image: '/actionTypeIcons/optIn.png',
     campaigns: [
       {
@@ -32,7 +35,7 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         campaignName: UserActionOptInCampaignName.DEFAULT,
         isCampaignActive: true,
         title: 'Join Stand With Crypto',
-        description: 'Join over 1,000,000 people fighting to keep crypto in America.',
+        description: `Join over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates fighting to keep crypto in America.`,
         canBeTriggeredMultipleTimes: false,
         WrapperComponent: ({ children }) => (
           <LoginDialogWrapper authenticatedContent={children}>{children}</LoginDialogWrapper>
@@ -86,7 +89,7 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
     campaigns: [
       {
         actionType: UserActionType.EMAIL,
-        campaignName: UserActionEmailCampaignName.FIT21_2024_04_FOLLOW_UP,
+        campaignName: USER_ACTION_TO_CAMPAIGN_NAME_DEFAULT_MAP.EMAIL,
         isCampaignActive: true,
         title: `Email your ${getYourPoliticianCategoryShortDisplayName(EMAIL_FLOW_POLITICIANS_CATEGORY)}`,
         description: 'Make your voice heard. We make it easy.',
@@ -95,30 +98,39 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       },
       {
         actionType: UserActionType.EMAIL,
-        campaignName: UserActionEmailCampaignName.FIT21_2024_04_FOLLOW_UP,
-        isCampaignActive: true,
-        title: `Email your ${getYourPoliticianCategoryShortDisplayName(EMAIL_FLOW_POLITICIANS_CATEGORY)}`,
-        description: 'Make your voice heard. We make it easy.',
+        campaignName: UserActionEmailCampaignName.DEFAULT,
+        isCampaignActive: false,
+        title: 'FIT21 Email Campaign',
+        description: 'You emailed your representative and asked them to vote YES on FIT21.',
         canBeTriggeredMultipleTimes: true,
-        WrapperComponent: UserActionFormEmailCongresspersonDialog,
+        WrapperComponent: () => null,
+      },
+      {
+        actionType: UserActionType.EMAIL,
+        campaignName: UserActionEmailCampaignName.FIT21_2024_04,
+        isCampaignActive: false,
+        title: 'FIT21 Email Campaign',
+        description: 'You emailed your representative and asked them to vote YES on FIT21.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: () => null,
+      },
+      {
+        actionType: UserActionType.EMAIL,
+        campaignName: UserActionEmailCampaignName.CNN_PRESIDENTIAL_DEBATE_2024,
+        isCampaignActive: false,
+        title: 'CNN Presidential Debate 2024',
+        description: "You emailed CNN and asked them to include the candidates' stance on crypto.",
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: () => null,
       },
       {
         actionType: UserActionType.EMAIL,
         campaignName: UserActionEmailCampaignName.ABC_PRESIDENTIAL_DEBATE_2024,
-        isCampaignActive: false,
-        title: `Email ABC`,
-        description: 'Make your voice heard. We make it easy.',
+        isCampaignActive: true,
+        title: 'ABC Presidential Debate 2024',
+        description: "You emailed ABC and asked them to include the candidates' stance on crypto.",
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: UserActionFormEmailDebateDialog,
-      },
-      {
-        actionType: UserActionType.EMAIL,
-        campaignName: UserActionEmailCampaignName.FIT21_2024_04_FOLLOW_UP,
-        isCampaignActive: true,
-        title: `Email your ${getYourPoliticianCategoryShortDisplayName(EMAIL_FLOW_POLITICIANS_CATEGORY)}`,
-        description: 'Make your voice heard. We make it easy.',
-        canBeTriggeredMultipleTimes: true,
-        WrapperComponent: UserActionFormEmailCongresspersonDialog,
       },
     ],
   },
@@ -137,6 +149,15 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         canBeTriggeredMultipleTimes: true,
         WrapperComponent: UserActionFormCallCongresspersonDialog,
       },
+      {
+        actionType: UserActionType.CALL,
+        campaignName: UserActionCallCampaignName.DEFAULT,
+        isCampaignActive: false,
+        title: 'FIT21 Call Campaign',
+        description: 'You called your representative and asked them to vote YES on FIT21.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: () => null,
+      },
     ],
   },
   [UserActionType.TWEET]: {
@@ -153,7 +174,16 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
         title: 'Follow us on X',
         description: 'Stay up to date on crypto policy by following @StandWithCrypto on X.',
         canBeTriggeredMultipleTimes: true,
-        WrapperComponent: UserActionFormCallCongresspersonDialog,
+        WrapperComponent: UserActionFormShareOnTwitterDialog,
+      },
+      {
+        actionType: UserActionType.TWEET,
+        campaignName: UserActionTweetCampaignName.DEFAULT,
+        isCampaignActive: false,
+        title: 'Tweet Campaign',
+        description: 'You helped bring more advocates to the cause by tweeting about SWC.',
+        canBeTriggeredMultipleTimes: true,
+        WrapperComponent: UserActionFormShareOnTwitterDialog,
       },
     ],
   },

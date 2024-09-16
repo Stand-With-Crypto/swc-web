@@ -27,11 +27,14 @@ export function UserActionGridCTAs() {
           const key = `${campaign.actionType}-${campaign.campaignName}`
           return performeduserActionObj[key] ? acc + 1 : acc
         }, 0)
-        const filteredCampaigns = cta.campaigns.filter(campaign => campaign.isCampaignActive)
+        const filteredCampaigns = cta.campaigns.filter(campaign => {
+          const key = `${campaign.actionType}-${campaign.campaignName}`
+          return campaign.isCampaignActive || !!performeduserActionObj[key]
+        })
 
         return (
           <UserActionGridCTA
-            campaigns={cta.campaigns}
+            campaigns={filteredCampaigns}
             campaignsLength={
               completedCampaigns > filteredCampaigns.length
                 ? completedCampaigns
