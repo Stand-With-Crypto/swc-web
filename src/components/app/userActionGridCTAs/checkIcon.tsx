@@ -1,7 +1,17 @@
-export function CheckIcon({ completed, index }: { completed?: boolean; index: number }) {
+import { cn } from '@/utils/web/cn'
+
+export function CheckIcon({
+  completed,
+  index,
+  svgClassname,
+}: {
+  completed?: boolean
+  index: number
+  svgClassname?: string
+}) {
   return (
     <svg
-      className="absolute bottom-0 top-0 rounded-full border-2 border-muted bg-muted"
+      className={cn('absolute bottom-0 top-0 rounded-full', svgClassname)}
       fill="none"
       height="32"
       style={{ left: index > 0 ? `${index * 16}px` : 0, zIndex: index }}

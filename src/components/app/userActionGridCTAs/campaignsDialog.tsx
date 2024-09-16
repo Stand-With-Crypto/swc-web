@@ -124,7 +124,7 @@ function CampaignCard({
         isReadOnly && 'pointer-events-none cursor-default',
       )}
     >
-      <div className="flex flex-col items-start">
+      <div className="flex w-full flex-col items-start">
         <strong className="text-left">{title}</strong>
         <p className="text-left text-muted-foreground">{description}</p>
       </div>

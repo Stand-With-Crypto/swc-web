@@ -1,10 +1,16 @@
 'use client'
 
+import { UserActionType } from '@prisma/client'
+
 import { USER_ACTION_CTAS_FOR_GRID_DISPLAY } from '@/components/app/userActionGridCTAs/constants'
 import { UserActionGridCTA } from '@/components/app/userActionGridCTAs/userActionCard'
 import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
 
-export function UserActionGridCTAs() {
+interface UserActionGridCTAProps {
+  excludeUserActionTypes?: UserActionType[]
+}
+
+export function UserActionGridCTAs({ excludeUserActionTypes }: UserActionGridCTAProps) {
   const { data } = useApiResponseForUserPerformedUserActionTypes()
   const performedUserActionTypes = data?.performedUserActionTypes ?? []
   const performeduserActionObj = performedUserActionTypes.length
@@ -18,7 +24,11 @@ export function UserActionGridCTAs() {
       )
     : {}
 
-  const ctas = Object.values(USER_ACTION_CTAS_FOR_GRID_DISPLAY)
+  const ctas = excludeUserActionTypes
+    ? Object.entries(USER_ACTION_CTAS_FOR_GRID_DISPLAY)
+        .filter(([key, _]) => !excludeUserActionTypes?.includes(key))
+        .map(([_, value]) => value)
+    : Object.values(USER_ACTION_CTAS_FOR_GRID_DISPLAY)
 
   return (
     <div className="grid grid-cols-1 gap-[18px] lg:grid-cols-3">
@@ -46,6 +56,7 @@ export function UserActionGridCTAs() {
             image={cta.image}
             key={cta.title + cta.description}
             link={cta.link}
+            mobileCTADescription={cta.mobileCTADescription}
             performedUserActions={performeduserActionObj}
             title={cta.title}
           />

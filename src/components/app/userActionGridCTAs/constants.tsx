@@ -27,6 +27,7 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
   [UserActionType.OPT_IN]: {
     title: 'Join Stand With Crypto',
     description: `Join over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates fighting to keep crypto in America.`,
+    mobileCTADescription: 'Join the fight to keep crypto in America.',
     campaignsModalDescription: `Join over ${TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME} advocates fighting to keep crypto in America.`,
     image: '/actionTypeIcons/optIn.png',
     campaigns: [
@@ -45,7 +46,8 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
   },
   'Prepare to vote': {
     title: 'Prepare to vote',
-    description: 'Research candidates, check your voter registration status, and pledge to vote.',
+    description: 'Research candidates and make sure you’re registered to vote.',
+    mobileCTADescription: 'Research candidates and check your voter registration.',
     campaignsModalDescription:
       'Research candidates, check your voter registration status, and pledge to vote.',
     image: '/actionTypeIcons/voterAttestation.png',
@@ -126,7 +128,7 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
       {
         actionType: UserActionType.EMAIL,
         campaignName: UserActionEmailCampaignName.ABC_PRESIDENTIAL_DEBATE_2024,
-        isCampaignActive: true,
+        isCampaignActive: false,
         title: 'ABC Presidential Debate 2024',
         description: "You emailed ABC and asked them to include the candidates' stance on crypto.",
         canBeTriggeredMultipleTimes: true,
@@ -137,6 +139,7 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
   [UserActionType.CALL]: {
     title: 'Make a call',
     description: 'Calling is the most effective way to make your voice heard.',
+    mobileCTADescription: 'The most effective way to make your voice heard.',
     campaignsModalDescription: 'Calling is the most effective way to make your voice heard.',
     image: '/actionTypeIcons/call.png',
     campaigns: [
@@ -163,6 +166,7 @@ export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
   [UserActionType.TWEET]: {
     title: 'Follow us on X',
     description: 'Stay up to date on crypto policy by following @StandWithCrypto on X.',
+    mobileCTADescription: 'Stay up to date on crypto policy.',
     campaignsModalDescription:
       'Stay up to date on crypto policy by following @StandWithCrypto on X.',
     image: '/actionTypeIcons/tweet.png',

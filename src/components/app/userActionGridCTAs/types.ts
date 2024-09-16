@@ -33,6 +33,10 @@ export type UserActionGridCTA = Record<
     title: string
     description: string
     /**
+     * This is optional and should be used when we want to have a smaller description on mobile to prevent increase in height on CTA. If it is not set, we use the description itself.
+     */
+    mobileCTADescription?: string
+    /**
      * This is used as the description for the campaigns modal.
      */
     campaignsModalDescription: string

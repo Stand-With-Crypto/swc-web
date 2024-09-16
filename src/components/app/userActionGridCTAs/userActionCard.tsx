@@ -7,6 +7,7 @@ import { cn } from '@/utils/web/cn'
 interface UserActionCardProps {
   title: string
   description: string
+  mobileCTADescription?: string
   campaignsModalDescription: string
   image: string
   campaignsLength: number
@@ -28,19 +29,10 @@ export function UserActionGridCTA(props: UserActionCardProps) {
   }
 
   // If there is only one campaign, clicking the CTA will trigger the WrapperComponent for that campaign.
-  const shouldUseFirstCampaignWrapperComponent =
-    props.campaignsLength === 1 &&
-    props.campaigns[0].isCampaignActive &&
-    props.campaigns[0].canBeTriggeredMultipleTimes
+  const shouldUseFirstCampaignWrapperComponent = props.campaignsLength === 1
 
   if (shouldUseFirstCampaignWrapperComponent) {
-    const WrapperComponent = props.campaigns.find(
-      campaign => campaign.isCampaignActive,
-    )?.WrapperComponent
-
-    if (!WrapperComponent) {
-      return null
-    }
+    const WrapperComponent = props.campaigns[0].WrapperComponent
 
     return (
       <WrapperComponent>
@@ -60,7 +52,7 @@ export function UserActionGridCTA(props: UserActionCardProps) {
   )
 }
 
-function UserActionCard({
+export function UserActionCard({
   title,
   image,
   description,
@@ -68,6 +60,9 @@ function UserActionCard({
   campaignsLength,
   campaigns,
   performedUserActions,
+  mobileCTADescription,
+  link: _link,
+  campaignsModalDescription: _campaignsModalDescription,
   ...rest
 }: Omit<UserActionCardProps, 'WrapperComponent'>) {
   const isReadOnly =
@@ -97,7 +92,12 @@ function UserActionCard({
       </div>
       <div className="flex h-full w-full flex-col items-start justify-between gap-3 rounded-bl-3xl rounded-tl-3xl bg-muted px-4 py-4 lg:rounded-br-3xl lg:rounded-tl-none lg:px-10 lg:py-8">
         <strong className="text-left font-sans text-sm font-bold lg:text-xl">{title}</strong>
-        <p className="text-left text-sm text-muted-foreground lg:text-base">{description}</p>
+        <p className="hidden text-left text-sm text-muted-foreground lg:block lg:text-base">
+          {description}
+        </p>
+        <p className="text-left text-sm text-muted-foreground lg:hidden lg:text-base">
+          {mobileCTADescription ?? description}
+        </p>
 
         <div className="mt-auto flex items-center gap-4 pt-5">
           <div
@@ -109,9 +109,10 @@ function UserActionCard({
           >
             {Array.from({ length: campaignsLength }, (_, index) => (
               <CheckIcon
-                completed={index <= completedCampaigns && completedCampaigns > 0}
+                completed={index < completedCampaigns && completedCampaigns > 0}
                 index={index}
                 key={index}
+                svgClassname="border-2 border-muted bg-muted"
               />
             ))}
           </div>
