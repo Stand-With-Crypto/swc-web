@@ -27,6 +27,7 @@ import { Button } from '@/components/ui/button'
 import { Drawer, DrawerClose, DrawerContent, DrawerTrigger } from '@/components/ui/drawer'
 import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
+import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
 import { useDialog } from '@/hooks/useDialog'
 import { SupportedLocale } from '@/intl/locales'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
@@ -160,22 +161,27 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
       )}
 
       {showCreatorBanner && (
-        <div className="flex min-h-12 w-full items-center bg-primary-cta p-2 text-center">
-          <div className="container flex">
-            <div className="w-full space-y-1 text-sm text-background antialiased max-sm:text-center sm:text-base">
-              <p className="font-semibold">
-                Introducing the Creator Legal Defense Fund - Protecting artists and creators.{' '}
-                <InternalLink
-                  className="text-primary-cta-foreground antialiased"
-                  href={urls.creatorDefenseFund()}
-                  onClick={() => setShowCreatorBanner(false)}
-                >
-                  Learn more here.
-                </InternalLink>
-              </p>
+        <LinkBox>
+          <button
+            className="flex min-h-12 w-full items-center bg-primary-cta p-2 text-center"
+            onClick={() => setShowCreatorBanner(false)}
+          >
+            <div className="container flex">
+              <div className="w-full space-y-1 text-sm text-background antialiased max-sm:text-center sm:text-base">
+                <p className="font-semibold">
+                  Introducing the Creator Legal Defense Fund - Protecting artists and creators.{' '}
+                  <InternalLink
+                    className={cn(linkBoxLinkClassName, '!text-primary-cta-foreground antialiased')}
+                    data-link-box-subject
+                    href={urls.creatorDefenseFund()}
+                  >
+                    Learn more here.
+                  </InternalLink>
+                </p>
+              </div>
             </div>
-          </div>
-        </div>
+          </button>
+        </LinkBox>
       )}
 
       <nav

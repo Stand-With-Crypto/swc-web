@@ -3,18 +3,18 @@ export function PagePrivacyPolicy() {
     <article className="prose max-w-full">
       <h1>Stand With Crypto Alliance, Inc.: Privacy Policy</h1>
 
-      <p>Effective Date: August 15, 2024</p>
+      <p>Effective Date: September 10, 2024</p>
 
       <p>
-        Your privacy is important to us. This Privacy Policy describes the types of information that
-        Stand With Crypto Alliance, Inc. and its affiliates, including Stand with Crypto Alliance,
-        Inc. Political Action Committee (together, “SWC”) collects from you and about you when you
-        visit our{' '}
+        Your privacy is important to us. This Privacy Policy describes the types of data that Stand
+        With Crypto Alliance, Inc. and its affiliates, including Stand with Crypto Alliance, Inc.
+        Political Action Committee (together, “SWC”) collects from you and about you when you visit
+        our{' '}
         <a href="https://standwithcrypto.org" target="_blank">
           website
         </a>{' '}
-        or otherwise engage with SWC. This Privacy Policy also explains how SWC may use such
-        information. By using our website or otherwise engaging with SWC, you agree to the data
+        or otherwise engage with SWC or its services. This Privacy Policy also explains how SWC may
+        use such data. By using our website or otherwise engaging with SWC, you agree to the data
         collection, use, disclosure, and storage practices described in this Privacy Policy.
       </p>
 
@@ -26,79 +26,86 @@ export function PagePrivacyPolicy() {
         innovation and crypto policy.
       </p>
 
-      <h2>Information Collection</h2>
+      <h2>Data Collection</h2>
 
       <p>
-        <i>Types of Personal Information Collected</i>: SWC may collect personal information from or
-        about you in a variety of ways:
+        <i>Categories of Personal Data Collected</i>: SWC may collect personal data from or about
+        you in a variety of ways:
       </p>
 
       <ul>
         <li>
-          We may collect your personal information when provide it to us, for example when you sign
-          up to be a member or subscriber of SWC, create a user account on our website, donate money
-          to SWC, sign-up for for an SWC-related event, or otherwise engage with and provide
-          information to SWC. This information may include your name, email address, phone number,
-          physical address, and any other personal information you choose to share with us.
+          We may collect your personal data when you provide it to us, for example, when you sign up
+          to be a member or subscriber of SWC, create a user account on our website, donate money to
+          SWC, sign-up for an SWC-related event, or otherwise engage with and provide data to SWC.
+          This data may include your name, email address, phone number, physical address, and any
+          other personal data you choose to share with us.
         </li>
         <li>
-          We may collect your personal information when you or your organization requests to be a
-          SWC Open Source Partner. This information may include your name, email address, title,
-          information about your organization (including website and social media handles), and any
-          other personal information you choose to share with us.
+          We may collect your personal data when you or your organization requests to be a SWC Open
+          Source Partner. This data may include your name, email address, title, information about
+          your organization (including website and social media handles), and any other personal
+          data you choose to share with us.
         </li>
         <li>
           We may also request and collect—at your direction—your crypto wallet address for various
           transactions, including to mint NFTs. Providing your crypto wallet address is voluntary.
         </li>
         <li>
-          Based on your engagement with SWC, we may also collect information in other circumstances.
-          For example:
+          Based on your engagement with SWC, we may also collect personal data in other
+          circumstances. For example:
           <ul>
             <li>
               Donations: If you choose to make a donation to us, we may ask you to confirm if you
-              are a U.S. citizen, in accordance with the law, and we will keep records of your
-              donation, including your name, address, occupation, and employer. We may also keep
-              track of donations you make to like-minded organizations and individuals that you link
-              to through our website.
+              are a U.S. citizen, in accordance with the law. This data may be considered to be
+              sensitive data. We will keep records of your donation, including your name, address,
+              occupation, and employer. We may also keep track of donations you make to like-minded
+              organizations and individuals that you link to through our website.
             </li>
             <li>
-              SWC Advocacy Activities: We may collect information about your activity performed as a
-              SWC member, subscriber, or user—including joining SWC, donating, attending an event,
+              SWC Advocacy Activities: We may collect data about your activity performed as a SWC
+              member, subscriber, or user—including joining SWC, donating, attending an event,
               minting an NFT, and engaging with elected officials and policymakers, among other
               activities.
             </li>
-
             <li>
-              SWC Community Activity on Third-Party Platforms: We may collect information about your
+              SWC Community Activity on Third-Party Platforms: We may collect data about your
               SWC-related activity on other platforms, such as participating in SWC community chat
               groups or engaging with or posting about SWC on social media platforms.
+            </li>
+            <li>
+              Applications: If you submit an application—for example, to apply for legal
+              consultations through our Creator Legal Defense Fund—we collect the personal
+              information you voluntarily submit as part of your application.
             </li>
           </ul>
         </li>
       </ul>
 
       <p>
-        <i>Sources of Personal Information</i>: SWC may collect your information from you through
-        the SWC website, SWC's service providers' websites or applications, or SWC-related
-        communities, accounts, or channels on social media platforms; through SWC-related events, or
-        through other channels where you choose to share information with SWC. SWC also partners
-        with Coinbase and other like-minded organizations, and may collect information about you
-        from those partners, including your activity with those entities.
+        <i>Sources of Personal Data</i>: SWC may collect your personal data from you through the SWC
+        website, SWC’s service providers’ websites or applications, or SWC-related communities,
+        accounts, or channels on social media platforms; through SWC-related events, or through
+        other channels where you choose to share data with SWC. SWC also partners with Coinbase and
+        other like-minded organizations and may collect personal data about you from those partners,
+        including your activity with those entities. SWC may also obtain certain contact information
+        from third party data providers.
       </p>
 
       <p>
-        <i>Information Automatically Collected</i>: We may also automatically collect information as
-        you navigate through our website or engage with our content or advertising on other sites,
-        through the use of cookies or similar technologies. Information collected automatically may
-        include website usage and navigation details, IP addresses, and other technical information.
-        We may partner with analytics and marketing service providers to assist us with this
-        information collection.
+        <i>Data Automatically Collected</i>: We may also automatically collect data as you navigate
+        through our website or engage with our content or advertising on other sites, through the
+        use of cookies or similar technologies. Data collected automatically may include website
+        usage and navigation details, IP addresses, and other technical data. We may partner with
+        analytics and marketing service providers to assist us with this data collection.
       </p>
 
-      <h2>Information Use</h2>
+      <h2>Data Use</h2>
 
-      <p>SWC may use the information described above for a variety of purposes, including to:</p>
+      <p>
+        <i>Purposes for which Personal Data Is Collected and Processed</i>: SWC may use the data
+        described above for a variety of purposes, including to:
+      </p>
 
       <ul>
         <li>Provide our website and its content;</li>
@@ -106,15 +113,16 @@ export function PagePrivacyPolicy() {
           Provide information or content related to SWC's mission, initiatives, advocacy, and
           business;
         </li>
+        <li>Provide services that you request or apply for;</li>
         <li>
           Facilitate and keep track of your SWC-related efforts, including helping to set up or get
           you registered for events and helping you contact elected officials and policymakers;
         </li>
         <li>Coordinate with you as a SWC Open Source Partner;</li>
         <li>
-          Communicate with you (for example via texts, calls, emails, and newsletters) about updates
-          and/or opportunities for engagement related to SWC's mission, initiatives, advocacy, and
-          business;
+          Communicate with you (for example, via texts, calls, emails, and newsletters) about
+          updates and/or opportunities for engagement related to SWC’s mission, initiatives,
+          advocacy, and business;
         </li>
         <li>
           Track, analyze, and improve your engagement with SWC and its advertisements, website,
@@ -153,32 +161,42 @@ export function PagePrivacyPolicy() {
         </li>
       </ul>
 
-      <h2>Information Sharing and Third Parties</h2>
+      <p>
+        <i>Online Analytics & Targeted Advertising</i>: SWC may use online identifiers for targeted
+        online advertising and analytics. Specifically, we disclose certain online identifiers to
+        advertising partners and analytics providers, which under certain state laws may be
+        considered to be a sale. See below for information about opting out of these activities.
+      </p>
+
+      <p>
+        <i>Retargeting</i>: SWC may use your personal data for remarketing campaigns. This is a type
+        of online advertising that directs advertising to individuals that have previously
+        interacted with us. See below for information about opting out of these activities.
+      </p>
+
+      <h2>Data Sharing</h2>
 
       <p>SWC may share the information described above as follows:</p>
 
       <ul>
         <li>
-          With our service providers, contractors, and partners, including those that help to
-          coordinate communications and other outreach to you and to elected officials and
-          policymakers.
+          With our service providers, contractors, and partners, including (1) to coordinate
+          communications and other outreach to you and to elected officials and policymakers; (2) to
+          coordinate, facilitate, and otherwise perform functions related to SWC-related events,
+          services, and initiatives; and (3) for analytics and marketing.
         </li>
-        <li>
-          With other third parties we may contract with to perform functions related to the events,
-          services, and initiatives provided by SWC.
-        </li>
-        <li>With our analytics, marketing, and/or events partners and vendors.</li>
         <li>
           With partners—such as Coinbase and other like-minded organizations—to support SWC’s
-          efforts. As examples, SWC may share information about you and/or your activities with
-          these partners when you choose to receive your membership NFT in your crypto wallet; or
-          when you perform SWC-related activities, such as making a call to an elected official or
-          policymaker.
+          efforts. As examples, SWC may share data about you and/or your activities with these
+          partners when you choose to receive your membership NFT in your crypto wallet; or when you
+          perform SWC-related activities, such as making a call to an elected official or
+          policymaker. SWC may also share information with partnering law firms if you submit an
+          application for the Creator Legal Defense Fund.
         </li>
         <li>For any other purpose disclosed by us when you provide the information.</li>
         <li>
-          If we have a good faith belief that disclosure of such information is helpful or
-          reasonably necessary to: (i) comply with any applicable law, regulation, legal process or
+          If we have a good faith belief that disclosure of such data is helpful or reasonably
+          necessary to: (i) comply with any applicable law, regulation, legal process or
           governmental request; (ii) enforce our policies including investigations of potential
           violations thereof; (iii) detect, prevent, or otherwise address fraud or security issues;
           or (iv) protect against harm to the rights, property or safety of SWC, our users, or the
@@ -226,7 +244,76 @@ export function PagePrivacyPolicy() {
         other sections of this Privacy Policy.
       </p>
 
-      <h2>Your Privacy Choices</h2>
+      <h2>Your Privacy Rights & Choices</h2>
+
+      <p>
+        <i>Privacy Rights</i>: We offer you the following rights, subject to the requirements under
+        any applicable state law:
+      </p>
+
+      <ul>
+        <li>
+          To confirm whether or not we process your personal data and to access or obtain a copy (as
+          applicable) of such personal data;
+        </li>
+        <li>
+          To provide additional information—at SWC’s option—about specific third-party disclosures
+          (as applicable);
+        </li>
+        <li>To correct inaccuracies in your personal data;</li>
+        <li>To delete your personal data;</li>
+        <li>To obtain a copy of your personal data; and</li>
+        <li>
+          To opt-out of targeted advertising, the sale of personal data, or certain automated
+          profiling in furtherance of decisions that produce legal or similarly significant effects
+          concerning you.
+        </li>
+      </ul>
+
+      <p>
+        <i>Exercising Privacy Rights:</i>
+      </p>
+
+      <ul>
+        <li>
+          To exercise your right to opt out of SWC’s online analytics and targeted advertising
+          activities, described above, you or your authorized agent (as applicable) may:
+          <ul>
+            <li>
+              Use our Cookie Preference & Privacy Choices tool—which you can find in the footer of
+              our website—at any time. To opt-out of SWC’s online analytics and targeted
+              advertising, disable the “Targeting & Analytical” cookies.
+            </li>
+            <li>
+              Download and enable the Global Privacy Control (GPC) via a participating browser or
+              browser extension. Note that not all browsers support GPC. For more information,
+              visit:{' '}
+              <a href="https://globalprivacycontrol.org/#about" target="_blank">
+                https://globalprivacycontrol.org/#about
+              </a>
+              .
+            </li>
+          </ul>
+        </li>
+        <li>
+          To exercise your other privacy rights listed above or to opt-out of SWCs re-targeting
+          activities, you can send an email to{' '}
+          <a href="mailto:info@standwithcrypto.org">info@standwithcrypto.org</a> or contact us at
+          our toll-free phone number (302) 566-8028. In your communication, please indicate your
+          state of residency and specify the right you are exercising (e.g., request to delete,
+          request to correct, request to opt-out of re-targeting, etc.). We will work to verify your
+          request using reasonable means; if we are unable to do so, we may ask you follow-up
+          questions. To protect your personal data, when submitting your request, please provide
+          information sufficient for us to reasonably verify you are the person about whom we
+          collected personal data and to properly understand, evaluate and respond to your request.
+          Note, we may deny your request in whole or in part if we cannot verify your identity.
+        </li>
+        <li>
+          You may have a right to appeal our decision with regard to your request. To do so, please
+          send an email to <a href="mailto:info@standwithcrypto.org">info@standwithcrypto.org</a>{' '}
+          with the word "Appeal" in the subject line.
+        </li>
+      </ul>
 
       <p>
         <i>Texting</i>: As detailed above, you may reply STOP to opt-out of automated text messages
@@ -239,11 +326,12 @@ export function PagePrivacyPolicy() {
       </p>
 
       <p>
-        <i>Cookies</i>: You can control and/or delete or disable cookies at any time by adjusting
-        your browser settings. Browsers are different, so refer to instructions related to your
-        browser to learn about cookie-related and other privacy and security settings that may be
-        available. Please be aware, however, that if you turn off cookies, you may not be able to
-        take full advantage of all of the features of our website.
+        <i>Cookies</i>: You can control and/or delete or disable cookies through our Cookie
+        Preference & Privacy Choices tool, or by adjusting your browser settings. Browsers are
+        different, so refer to instructions related to your browser to learn about cookie-related
+        and other privacy and security settings that may be available. Please be aware, however,
+        that if you turn off cookies, you may not be able to take full advantage of all of the
+        features of our website.
       </p>
 
       <p>
@@ -293,12 +381,11 @@ export function PagePrivacyPolicy() {
 
       <h2>Data Security</h2>
       <p>
-        We have implemented measures designed to secure your personal information from accidental
-        loss and from unauthorized access, use, alteration, and disclosure. However, the
-        transmission of information via the internet is not completely secure. Although we do our
-        best to protect your personal information, we cannot guarantee the security of your personal
-        information transmitted to our website. Any transmission of personal information to SWC is
-        at your own risk.
+        We have implemented measures designed to secure your personal data from accidental loss and
+        from unauthorized access, use, alteration, and disclosure. However, the transmission of
+        information via the internet is not completely secure. Although we do our best to protect
+        your personal data, we cannot guarantee the security of your personal data transmitted to
+        our website. Any transmission of personal data to SWC is at your own risk.
       </p>
 
       <h2>Links to Other Websites</h2>
@@ -315,9 +402,9 @@ export function PagePrivacyPolicy() {
       <p>
         Our website and services are intended for adult use only. We do not direct any part of our
         website or services to children less than 18 years old and anyone under 18 is not eligible
-        to use our services. Nor do we knowingly collect personal information from anyone under the
-        age of 18. By using our website and services, you represent and warrant to SWC that you are
-        at least 18 years of age.
+        to use our services. Nor do we knowingly collect personal data from anyone under the age of
+        18. By using our website and services, you represent and warrant to SWC that you are at
+        least 18 years of age.
       </p>
 
       <h2>Revisions</h2>
@@ -335,7 +422,7 @@ export function PagePrivacyPolicy() {
         <a href="mailto:info@standwithcrypto.org">info@standwithcrypto.org</a>
       </p>
 
-      <p>Last Updated: August 15, 2024</p>
+      <p>Last Updated: September 10, 2024</p>
     </article>
   )
 }

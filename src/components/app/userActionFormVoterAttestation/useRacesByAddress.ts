@@ -1,7 +1,11 @@
 import * as Sentry from '@sentry/nextjs'
 import useSWR, { SWRConfiguration } from 'swr'
 
-import { DTSI_LocationSpecificRacesInformationQuery } from '@/data/dtsi/generated'
+import {
+  DTSI_LocationSpecificRacesInformationQuery,
+  DTSI_PersonPoliticalAffiliationCategory,
+  DTSI_PersonRoleCategory,
+} from '@/data/dtsi/generated'
 import { fetchReq } from '@/utils/shared/fetchReq'
 import {
   CongressionalDistrictFromAddress,
@@ -52,6 +56,30 @@ async function getDTSIRacesFromCongressionalDistrict(result: CongressionalDistri
 
   if (!data.congressional.length && !data.presidential.length && !data.senate.length) {
     throw new Error(getErrorMessageByNotFoundReason('MISSING_FROM_DTSI'))
+  }
+
+  if (data?.presidential) {
+    const partyOrder = [
+      DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN,
+      DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT,
+      DTSI_PersonPoliticalAffiliationCategory.INDEPENDENT,
+    ]
+
+    data.presidential?.sort((a, b) => {
+      const aPartyIndex = a.politicalAffiliationCategory
+        ? partyOrder.indexOf(a.politicalAffiliationCategory)
+        : -1
+      const bPartyIndex = b.politicalAffiliationCategory
+        ? partyOrder.indexOf(b.politicalAffiliationCategory)
+        : -1
+      if (aPartyIndex !== bPartyIndex) {
+        return aPartyIndex - bPartyIndex
+      }
+      if (a.primaryRole?.roleCategory !== b.primaryRole?.roleCategory) {
+        return a.primaryRole?.roleCategory === DTSI_PersonRoleCategory.PRESIDENT ? -1 : 1
+      }
+      return 0
+    })
   }
 
   return { ...result, ...data }

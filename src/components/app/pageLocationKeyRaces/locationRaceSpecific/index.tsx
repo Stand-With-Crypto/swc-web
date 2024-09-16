@@ -14,6 +14,7 @@ import { InternalLink } from '@/components/ui/link'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import {
   DTSI_DistrictSpecificInformationQuery,
+  DTSI_PersonPoliticalAffiliationCategory,
   DTSI_PersonRoleCategory,
 } from '@/data/dtsi/generated'
 import { SupportedLocale } from '@/intl/locales'
@@ -45,7 +46,31 @@ function organizeRaceSpecificPeople(
       specificRole: targetedRoleCategory,
     }),
   )
-  formatted.sort((a, b) => (a.isIncumbent === b.isIncumbent ? 0 : a.isIncumbent ? -1 : 1))
+
+  const partyOrder = [
+    DTSI_PersonPoliticalAffiliationCategory.REPUBLICAN,
+    DTSI_PersonPoliticalAffiliationCategory.DEMOCRAT,
+    DTSI_PersonPoliticalAffiliationCategory.INDEPENDENT,
+  ]
+
+  formatted.sort((a, b) => {
+    const aPartyIndex = a.politicalAffiliationCategory
+      ? partyOrder.indexOf(a.politicalAffiliationCategory)
+      : -1
+    const bPartyIndex = b.politicalAffiliationCategory
+      ? partyOrder.indexOf(b.politicalAffiliationCategory)
+      : -1
+    if (aPartyIndex !== bPartyIndex) {
+      return aPartyIndex - bPartyIndex
+    }
+
+    if (a.primaryRole?.roleCategory !== b.primaryRole?.roleCategory) {
+      return a.primaryRole?.roleCategory === DTSI_PersonRoleCategory.PRESIDENT ? -1 : 1
+    }
+
+    return 0
+  })
+
   return formatted
 }
 
