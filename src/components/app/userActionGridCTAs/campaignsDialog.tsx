@@ -1,11 +1,11 @@
 import { ReactNode } from 'react'
-
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
-import { useDialog } from '@/hooks/useDialog'
-import { UserActionGridCTACampaign } from '@/components/app/userActionGridCTAs/types'
 import Balancer from 'react-wrap-balancer'
-import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
+
 import { CheckIcon } from '@/components/app/userActionGridCTAs/checkIcon'
+import { UserActionGridCTACampaign } from '@/components/app/userActionGridCTAs/types'
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
+import { useDialog } from '@/hooks/useDialog'
 import { cn } from '@/utils/web/cn'
 
 interface CampaignsDialogProps {
@@ -58,9 +58,9 @@ export function CampaignsDialog({
                 return (
                   <WrapperComponent key={campaignKey}>
                     <CampaignCard
-                      title={campaign.title}
                       description={campaign.description}
                       isCompleted={isCompleted}
+                      title={campaign.title}
                     />
                   </WrapperComponent>
                 )
@@ -84,10 +84,10 @@ export function CampaignsDialog({
                     return (
                       <WrapperComponent key={campaignKey}>
                         <CampaignCard
-                          title={campaign.title}
                           description={campaign.description}
                           isCompleted={isCompleted}
                           isReadOnly
+                          title={campaign.title}
                         />
                       </WrapperComponent>
                     )

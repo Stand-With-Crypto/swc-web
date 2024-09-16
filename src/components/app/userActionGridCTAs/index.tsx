@@ -37,14 +37,14 @@ export function UserActionGridCTAs() {
                 ? completedCampaigns
                 : filteredCampaigns.length
             }
+            campaignsModalDescription={cta.campaignsModalDescription}
             completedCampaigns={completedCampaigns}
             description={cta.description}
-            campaignsModalDescription={cta.campaignsModalDescription}
             image={cta.image}
             key={cta.title + cta.description}
             link={cta.link}
-            title={cta.title}
             performedUserActions={performeduserActionObj}
+            title={cta.title}
           />
         )
       })}

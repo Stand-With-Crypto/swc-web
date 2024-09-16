@@ -8,6 +8,7 @@ import { HeroImage } from '@/components/app/pageHome/heroImage'
 import { PartnerGrid } from '@/components/app/pageHome/partnerGrid'
 import { RecentActivityAndLeaderboardTabs } from '@/components/app/pageHome/recentActivityAndLeaderboardTabs'
 import { SumDonationsByUserRow } from '@/components/app/sumDonationsByUserRow/sumDonationsByUserRow'
+import { UserActionGridCTAs } from '@/components/app/userActionGridCTAs'
 import { UserActionRowCTAsAnimatedListWithApi } from '@/components/app/userActionRowCTA/userActionRowCTAsAnimatedListWithApi'
 import { Button } from '@/components/ui/button'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
@@ -21,7 +22,6 @@ import { TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME } from '@/utils/shared/constan
 import { getIntlUrls } from '@/utils/shared/urls'
 
 import { TopLevelMetrics } from './topLevelMetrics'
-import { UserActionGridCTAs } from '@/components/app/userActionGridCTAs'
 
 export function PageHome({
   params,
