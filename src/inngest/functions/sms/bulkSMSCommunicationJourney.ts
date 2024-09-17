@@ -1,7 +1,7 @@
 import { Prisma, SMSStatus, UserCommunicationJourneyType } from '@prisma/client'
 import { addDays, addHours, addSeconds, differenceInMilliseconds, startOfDay } from 'date-fns'
 import { NonRetriableError } from 'inngest'
-import { chunk, merge, uniq } from 'lodash-es'
+import { chunk, merge, uniq, update } from 'lodash-es'
 
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
@@ -149,22 +149,27 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
         () => countMessagesAndSegments(messagesPayload),
       )
 
-      if (NEXT_PUBLIC_ENVIRONMENT !== 'production' && messagesPayload.length > 100) {
-        throw new NonRetriableError(
-          'Cannot send more then 100 messages in a non-production environment',
-        )
-      }
-
       const timeToSendSegments = getWaitingTimeInSeconds(segmentsCount)
 
       const payloadChunks = chunk(messagesPayload, TWILIO_RATE_LIMIT)
 
-      messagesInfo[campaignName] = {
-        segmentsCount,
-        messagesCount,
-        totalTime: formatTime(timeToSendSegments),
-        chunks: payloadChunks.length,
-      }
+      update(
+        messagesInfo,
+        [campaignName],
+        (
+          existingPayload = {
+            segmentsCount: 0,
+            messagesCount: 0,
+            totalTime: 0,
+            chunks: 0,
+          },
+        ) => ({
+          segmentsCount: segmentsCount + existingPayload.segmentsCount,
+          messagesCount: messagesCount + existingPayload.messagesCount,
+          totalTime: timeToSendSegments + existingPayload.totalTime,
+          chunks: payloadChunks.length + existingPayload.chunks,
+        }),
+      )
 
       enqueueMessagesPayloadChunks.push(...payloadChunks)
       totalSegmentsCount += segmentsCount
@@ -188,6 +193,12 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
       logInfo('initial-info', bulkInfo)
     }
 
+    if (NEXT_PUBLIC_ENVIRONMENT !== 'production' && totalMessagesCount > 100) {
+      throw new NonRetriableError(
+        'Cannot send more then 100 messages in a non-production environment',
+      )
+    }
+
     if (sleepTime) {
       logInfo('scheduled-sleep', { sleepTime })
       await step.sleep('scheduled-sleep', sleepTime)
@@ -208,7 +219,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
         const waitingTime = differenceInMilliseconds(minEnqueueHourToday, now)
         logInfo('late-night-messaging-prevention', {
           waitingTime: formatTime(waitingTime / 1000),
-          reason: `now (${now.toDateString()}) it's earlier than minEnqueueHourToday (${minEnqueueHourToday.toDateString()})`,
+          reason: `now (${now.toString()}) it's earlier than minEnqueueHourToday (${minEnqueueHourToday.toString()})`,
         })
         await step.sleep('wait-until-min-enqueue-hour', waitingTime)
       }
@@ -217,7 +228,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
         const waitingTime = differenceInMilliseconds(addDays(minEnqueueHourToday, 1), now)
         logInfo('late-night-messaging-prevention', {
           waitingTime: formatTime(waitingTime / 1000),
-          reason: `now (${now.toDateString()}) it's later than maxEnqueueHourToday (${maxEnqueueHourToday.toDateString()})`,
+          reason: `now (${now.toString()}) it's later than maxEnqueueHourToday (${maxEnqueueHourToday.toString()})`,
         })
         await step.sleep('wait-until-min-enqueue-hour-of-next-day', waitingTime)
       }
@@ -257,7 +268,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
         )
         logInfo('late-night-messaging-prevention', {
           waitingTime: formatTime(waitingTime / 1000),
-          reason: `queue will be empty at ${emptyQueueTime.toDateString()}`,
+          reason: `queue will be empty at ${emptyQueueTime.toString()}`,
         })
         await step.sleep('wait-until-min-enqueue-hour-of-next-day', waitingTime)
 

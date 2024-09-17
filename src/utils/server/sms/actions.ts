@@ -76,10 +76,10 @@ export async function optInUser(phoneNumber: string, user: User): Promise<SMSSta
   return newSMSStatus
 }
 
-export async function optOutUser(phoneNumber: string, user: User) {
+export async function optOutUser(phoneNumber: string, user?: User | null) {
   const normalizedPhoneNumber = normalizePhoneNumber(phoneNumber)
 
-  if (user.smsStatus === SMSStatus.OPTED_OUT) return user.smsStatus
+  if (user?.smsStatus === SMSStatus.OPTED_OUT) return user.smsStatus
 
   const newSMSStatus = SMSStatus.OPTED_OUT
 
@@ -103,33 +103,35 @@ export async function optOutUser(phoneNumber: string, user: User) {
   //   })
   // }
 
-  waitUntil(
-    Promise.all([
-      getServerPeopleAnalytics({
-        localUser: getLocalUserFromUser(user),
-        userId: user.id,
-      })
-        .set({
-          'Has Opted In to SMS': false,
-          'SMS Status': newSMSStatus,
+  if (user) {
+    waitUntil(
+      Promise.all([
+        getServerPeopleAnalytics({
+          localUser: getLocalUserFromUser(user),
+          userId: user.id,
         })
-        .flush(),
-      getServerAnalytics({
-        localUser: getLocalUserFromUser(user),
-        userId: user.id,
-      })
-        .track('User SMS Opt-out')
-        .flush(),
-    ]),
-  )
+          .set({
+            'Has Opted In to SMS': false,
+            'SMS Status': newSMSStatus,
+          })
+          .flush(),
+        getServerAnalytics({
+          localUser: getLocalUserFromUser(user),
+          userId: user.id,
+        })
+          .track('User SMS Opt-out')
+          .flush(),
+      ]),
+    )
+  }
 
   return newSMSStatus
 }
 
-export async function optUserBackIn(phoneNumber: string, user: User) {
+export async function optUserBackIn(phoneNumber: string, user?: User | null) {
   const normalizedPhoneNumber = normalizePhoneNumber(phoneNumber)
 
-  if (user.smsStatus !== SMSStatus.OPTED_OUT) return user.smsStatus
+  if (user?.smsStatus !== SMSStatus.OPTED_OUT) return user?.smsStatus
 
   const newSMSStatus = SMSStatus.OPTED_IN_HAS_REPLIED
 
@@ -152,23 +154,25 @@ export async function optUserBackIn(phoneNumber: string, user: User) {
   //   })
   // }
 
-  waitUntil(
-    Promise.all([
-      getServerPeopleAnalytics({
-        localUser: getLocalUserFromUser(user),
-        userId: user.id,
-      })
-        .set({
-          'Has Opted In to SMS': true,
-          'SMS Status': newSMSStatus,
+  if (user) {
+    waitUntil(
+      Promise.all([
+        getServerPeopleAnalytics({
+          localUser: getLocalUserFromUser(user),
+          userId: user.id,
         })
-        .flush(),
-      getServerAnalytics({
-        localUser: getLocalUserFromUser(user),
-        userId: user.id,
-      })
-        .track('User SMS Unstop')
-        .flush(),
-    ]),
-  )
+          .set({
+            'Has Opted In to SMS': true,
+            'SMS Status': newSMSStatus,
+          })
+          .flush(),
+        getServerAnalytics({
+          localUser: getLocalUserFromUser(user),
+          userId: user.id,
+        })
+          .track('User SMS Unstop')
+          .flush(),
+      ]),
+    )
+  }
 }
