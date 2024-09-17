@@ -3,9 +3,11 @@ import * as Sentry from '@sentry/node'
 import { NonRetriableError } from 'inngest'
 import { update } from 'lodash-es'
 
+import { getSMSVariablesByPhoneNumbers } from '@/inngest/functions/sms/utils/getSMSVariablesByPhoneNumbers'
 import { sendSMS, SendSMSError } from '@/utils/server/sms'
 import { optOutUser } from '@/utils/server/sms/actions'
 import { countSegments, getUserByPhoneNumber } from '@/utils/server/sms/utils'
+import { applySMSVariables } from '@/utils/server/sms/utils/variables'
 import { getLogger } from '@/utils/shared/logger'
 import { sleep } from '@/utils/shared/sleep'
 
@@ -46,16 +48,22 @@ export async function enqueueMessages(payload: EnqueueMessagePayload[], attempt 
   } = {}
   const unsubscribedUsers: string[] = []
 
+  const userSMSVariables = await getSMSVariablesByPhoneNumbers(
+    payload.map(({ phoneNumber }) => phoneNumber),
+  )
+
   let segmentsSent = 0
   let queuedMessages = 0
   const enqueueMessagesPromise = payload.map(async ({ messages, phoneNumber }) => {
     for (const message of messages) {
       const { body, journeyType, campaignName, media } = message
 
+      const variables = userSMSVariables[phoneNumber]
+
       try {
         if (body) {
           const queuedMessage = await sendSMS({
-            body,
+            body: applySMSVariables(body, variables),
             to: phoneNumber,
             media,
           })
@@ -72,10 +80,10 @@ export async function enqueueMessages(payload: EnqueueMessagePayload[], attempt 
                 },
               ],
             )
-          }
 
-          segmentsSent += countSegments(body)
-          queuedMessages += 1
+            segmentsSent += countSegments(queuedMessage.body)
+            queuedMessages += 1
+          }
         } else {
           update(
             messagesSentByJourneyType,
