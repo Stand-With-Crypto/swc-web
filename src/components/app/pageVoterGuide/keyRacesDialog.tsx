@@ -44,7 +44,7 @@ interface KeyRacesDialogProps {
   defaultOpen?: boolean
 }
 
-export const KeyRacesDialog = (props: KeyRacesDialogProps) => {
+export function KeyRacesDialog(props: KeyRacesDialogProps) {
   const { children, defaultOpen } = props
 
   const router = useRouter()

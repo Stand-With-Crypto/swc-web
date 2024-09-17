@@ -90,7 +90,7 @@ export function UserActionCard({
         <NextImage alt={title} className="hidden lg:block" height={150} src={image} width={150} />
         <NextImage alt={title} className="h-20 w-20 lg:hidden" height={80} src={image} width={80} />
       </div>
-      <div className="flex h-full w-full flex-col items-start justify-between gap-3 rounded-bl-3xl rounded-tl-3xl bg-muted px-4 py-4 lg:rounded-br-3xl lg:rounded-tl-none lg:px-10 lg:py-8">
+      <div className="flex h-full w-full flex-col items-start justify-between gap-3 rounded-bl-3xl rounded-tl-3xl bg-muted px-4 py-4 lg:rounded-br-3xl lg:rounded-tl-none lg:p-8">
         <strong className="text-left font-sans text-sm font-bold lg:text-xl">{title}</strong>
         <p className="hidden text-left text-sm text-muted-foreground lg:block lg:text-base">
           {description}
