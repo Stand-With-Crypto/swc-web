@@ -43,6 +43,8 @@ export interface BulkSMSPayload {
   send?: boolean
   // Number of milliseconds or Time string compatible with the ms package, e.g. "30m", "3 hours", or "2.5d"
   sleepTime?: string | number
+  // This is used to take into account the current queue size when queuing new messages
+  currentSegmentsInQueue?: number
 }
 
 export const bulkSMSCommunicationJourney = inngest.createFunction(
@@ -55,7 +57,13 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
     event: BULK_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
   },
   async ({ step, event, logger }) => {
-    const { send, sleepTime, messages, timezone = -4 } = event.data as BulkSMSPayload
+    const {
+      send,
+      sleepTime,
+      messages,
+      timezone = -4,
+      currentSegmentsInQueue = 0,
+    } = event.data as BulkSMSPayload
 
     if (!messages) {
       throw new NonRetriableError('Missing messages to send')
@@ -207,8 +215,8 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
     let totalQueuedMessages = 0
     let totalQueuedSegments = 0
 
-    let segmentsInQueue = 0
-    let timeInSecondsToEmptyQueue = 0
+    let segmentsInQueue = currentSegmentsInQueue ?? 0
+    let timeInSecondsToEmptyQueue = getWaitingTimeInSeconds(segmentsInQueue)
 
     for (let i = 0; i < enqueueMessagesPayloadChunks.length; i += 1) {
       const now = addHours(new Date(), timezone)
