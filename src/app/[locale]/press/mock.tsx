@@ -4,6 +4,7 @@ export const MOCK_PRESS_CONTENT = [
     heading: 'Why the Harris-Trump presidential election could be decided by crypto voters',
     dateHeading: 'August 14 2024',
     slug: 'MARKETWATCH-ARTICLE',
+    link: 'https://www.marketwatch.com/story/why-a-harris-trump-contest-could-come-down-to-crypto-voters-37cfe57c',
     article: (
       <div className="mx-auto">
         <p className="mb-6 text-sm text-gray-600">By: Chris Matthews</p>
@@ -83,6 +84,7 @@ export const MOCK_PRESS_CONTENT = [
     dateHeading: 'June 5, 2024',
     heading: 'U.S. crypto advocacy group tops 1 million members after Biden veto',
     slug: 'REUTERS-ARTICLE',
+    link: 'https://www.reuters.com/technology/us-crypto-advocacy-group-tops-1-million-members-after-biden-veto-2024-06-06/',
     article: (
       <div className="mx-auto">
         <p className="mb-6 text-sm text-gray-600">By: Andrea Shalal</p>
@@ -165,6 +167,7 @@ export const MOCK_PRESS_CONTENT = [
     dateHeading: 'May 13, 2024',
     heading: 'Stand With Crypto PAC launches as industry interest in campaign funding ramps up',
     slug: 'BLOCKWORKS-ARTICLE',
+    link: 'https://blockworks.co/news/stand-with-crypto-pac-us-elections',
     article: (
       <div className="mx-auto">
         <p className="mb-6 text-sm text-gray-600">By: Casey Wagner</p>
@@ -247,6 +250,7 @@ export const MOCK_PRESS_CONTENT = [
     dateHeading: 'May 10, 2024',
     heading: 'Stand With Crypto Sets Up Election War Chest, Backs Candidates Seeking Open Seats',
     slug: 'COINDESK-ARTICLE',
+    link: 'https://www.coindesk.com/policy/2024/05/10/stand-with-crypto-sets-up-election-war-chest-backs-candidates-seeking-open-seats/',
     article: (
       <div className="mx-auto">
         <p className="mb-6 text-sm text-gray-600">By: Jesse Hamilton</p>
@@ -339,6 +343,7 @@ export const MOCK_PRESS_CONTENT = [
     heading:
       'Inside Coinbase’s road show to win the hearts and minds of voters ahead of the 2024 election',
     slug: 'FORTUNE-ARTICLE',
+    link: 'https://fortune.com/crypto/2024/02/28/coinbase-stand-with-crypto-elizabeth-warren-massachusetts-john-deaton-election/',
     article: (
       <div className="mx-auto">
         <p className="mb-6 text-sm text-gray-600">By: Leo Schwartz</p>

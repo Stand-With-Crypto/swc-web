@@ -1,7 +1,7 @@
 import { MOCK_PRESS_CONTENT } from '@/app/[locale]/press/mock'
 import { PressSection } from '@/components/app/pagePress/press/pressSection'
 import { Button } from '@/components/ui/button'
-import { InternalLink } from '@/components/ui/link'
+import { ExternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 
@@ -24,18 +24,18 @@ export function PagePress({ title, description, pressContent }: PagePressProps) 
       </section>
 
       <div className="flex flex-col gap-16">
-        {pressContent.map(({ dateHeading, heading, slug }) => {
-          const href = `/press/${slug.toLowerCase()}`
-
+        {pressContent.map(({ dateHeading, heading, slug, link }) => {
           return (
             <PressSection dateHeading={dateHeading} heading={heading} key={slug}>
               <Button asChild variant="secondary">
-                <InternalLink
+                <ExternalLink
+                  aria-label={`Read more about ${heading}`}
                   className="text-foreground no-underline hover:no-underline"
-                  href={href}
+                  href={link}
+                  title={`Read more about ${heading}`}
                 >
                   Read more
-                </InternalLink>
+                </ExternalLink>
               </Button>
             </PressSection>
           )
