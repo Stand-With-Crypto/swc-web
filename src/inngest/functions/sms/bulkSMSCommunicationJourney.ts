@@ -160,7 +160,7 @@ export const bulkSMSCommunicationJourney = inngest.createFunction(
           existingPayload = {
             segmentsCount: 0,
             messagesCount: 0,
-            timeToSendSegments: 0,
+            totalTime: 0,
             chunks: 0,
           },
         ) => ({
