@@ -4,7 +4,7 @@ import { UserActionGridCTACampaign } from '@/components/app/userActionGridCTAs/t
 import { NextImage } from '@/components/ui/image'
 import { cn } from '@/utils/web/cn'
 
-interface UserActionCardProps {
+export interface UserActionCardProps {
   title: string
   description: string
   mobileCTADescription?: string

@@ -15,7 +15,9 @@ export interface UserActionFormSuccessScreenFeedbackProps {
 export function UserActionFormSuccessScreenFeedback(
   props: UserActionFormSuccessScreenFeedbackProps,
 ) {
-  const { image, title, description } = props
+  const { image, title } = props
+  const description = // Temporary description until 2024 election is over.
+    'This year’s election is critical to the future of crypto. Here’s how to become an informed voter.'
 
   return (
     <div className="flex flex-col items-center justify-center gap-8">

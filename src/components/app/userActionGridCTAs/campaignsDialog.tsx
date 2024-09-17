@@ -1,23 +1,26 @@
 import { ReactNode } from 'react'
 import Balancer from 'react-wrap-balancer'
+import Link from 'next/link'
 
 import { CheckIcon } from '@/components/app/userActionGridCTAs/checkIcon'
 import { UserActionGridCTACampaign } from '@/components/app/userActionGridCTAs/types'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { useDialog } from '@/hooks/useDialog'
+import { useLocale } from '@/hooks/useLocale'
+import {
+  getUserActionDeeplink,
+  UserActionTypesWithDeeplink,
+} from '@/utils/shared/urlsDeeplinkUserActions'
 import { cn } from '@/utils/web/cn'
 
 interface CampaignsDialogProps {
   children: ReactNode
   title: string
   description: string
-  image: string
-  campaignsLength: number
-  completedCampaigns: number
   campaigns: Array<UserActionGridCTACampaign>
-  link?: (args: { children: React.ReactNode }) => React.ReactNode
   performedUserActions: Record<string, any>
+  shouldOpenDeeplink?: boolean
 }
 
 export function CampaignsDialog({
@@ -26,8 +29,10 @@ export function CampaignsDialog({
   campaigns,
   performedUserActions,
   children,
+  shouldOpenDeeplink,
 }: CampaignsDialogProps) {
   const dialogProps = useDialog({ analytics: 'Grid CTA Campaign Dialog' })
+  const locale = useLocale()
 
   const activeCampaigns = campaigns.filter(campaign => campaign.isCampaignActive)
   const completedInactiveCampaigns = campaigns.filter(
@@ -77,9 +82,32 @@ export function CampaignsDialog({
               <ScrollArea className="w-full">
                 <div className="mt-6 flex w-full flex-col gap-4 px-8 lg:max-h-80">
                   {completedInactiveCampaigns.map(campaign => {
+                    const url = shouldOpenDeeplink
+                      ? getUserActionDeeplink({
+                          actionType: campaign.actionType as UserActionTypesWithDeeplink,
+                          config: {
+                            locale,
+                          },
+                          campaign: campaign.campaignName as any,
+                        })
+                      : null
+
                     const WrapperComponent = campaign.WrapperComponent
                     const campaignKey = `${campaign.actionType}-${campaign.campaignName}`
                     const isCompleted = !!performedUserActions[campaignKey]
+
+                    if (url) {
+                      return (
+                        <Link href={url} key={campaignKey}>
+                          <CampaignCard
+                            description={campaign.description}
+                            isCompleted={isCompleted}
+                            isReadOnly
+                            title={campaign.title}
+                          />
+                        </Link>
+                      )
+                    }
 
                     return (
                       <WrapperComponent key={campaignKey}>

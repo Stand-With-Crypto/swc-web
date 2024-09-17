@@ -131,7 +131,7 @@ export function PageUserProfile({ params, user }: PageUserProfile) {
           Your advocacy progress
         </PageTitle>
         <PageSubTitle className="mb-5">
-          You've completed {numActionsCompleted} out of {numActionsAvailable} active campaigns.{' '}
+          You've completed {numActionsCompleted} out of {numActionsAvailable} campaigns.{' '}
           {numActionsCompleted === numActionsAvailable ? 'Great job!' : 'Keep going!'}
         </PageSubTitle>
         <div className="mx-auto mb-10 max-w-xl">
