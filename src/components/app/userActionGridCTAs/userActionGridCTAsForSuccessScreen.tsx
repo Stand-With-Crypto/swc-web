@@ -6,17 +6,17 @@ import { uniqBy } from 'lodash-es'
 import Link from 'next/link'
 
 import { CampaignsDialog } from '@/components/app/userActionGridCTAs/campaignsDialog'
+import { CheckIcon } from '@/components/app/userActionGridCTAs/checkIcon'
 import { USER_ACTION_CTAS_FOR_GRID_DISPLAY } from '@/components/app/userActionGridCTAs/constants'
 import { UserActionGridCTACampaign } from '@/components/app/userActionGridCTAs/types'
 import { UserActionCardProps } from '@/components/app/userActionGridCTAs/userActionCard'
+import { NextImage } from '@/components/ui/image'
 import { useLocale } from '@/hooks/useLocale'
 import {
   getUserActionDeeplink,
   UserActionTypesWithDeeplink,
 } from '@/utils/shared/urlsDeeplinkUserActions'
 import { cn } from '@/utils/web/cn'
-import { NextImage } from '@/components/ui/image'
-import { CheckIcon } from '@/components/app/userActionGridCTAs/checkIcon'
 
 interface UserActionGridCTAsForSuccessScreenProps {
   excludeUserActionTypes?: UserActionType[]

@@ -1,7 +1,10 @@
+import { Suspense } from 'react'
 import { UserActionType } from '@prisma/client'
 
+import { KeyRacesDialog } from '@/components/app/pageVoterGuide/keyRacesDialog'
+import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
+import { UserActionFormVotingInformationResearchedDialog } from '@/components/app/userActionFormVotingInformationResearched/dialog'
 // ALL COMMENTED CODE WILL BE RESTORED AFTER THE ELECTION
-
 // import Link from 'next/link'
 // import { LoginDialogWrapper} from '@/components/app/authentication/loginDialogWrapper'
 // import { CALL_FLOW_POLITICIANS_CATEGORY } from '@/components/app/userActionFormCallCongressperson/constants'
@@ -23,10 +26,6 @@ import {
   UserActionVoterRegistrationCampaignName,
   UserActionVotingInformationResearchedCampaignName,
 } from '@/utils/shared/userActionCampaigns'
-import { KeyRacesDialog } from '@/components/app/pageVoterGuide/keyRacesDialog'
-import { UserActionFormVoterRegistrationDialog } from '@/components/app/userActionFormVoterRegistration/dialog'
-import { Suspense } from 'react'
-import { UserActionFormVotingInformationResearchedDialog } from '@/components/app/userActionFormVotingInformationResearched/dialog'
 // import { getYourPoliticianCategoryShortDisplayName } from '@/utils/shared/yourPoliticianCategory'
 
 export const USER_ACTION_CTAS_FOR_GRID_DISPLAY: UserActionGridCTA = {
