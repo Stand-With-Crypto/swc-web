@@ -1,7 +1,6 @@
 import { MOCK_PRESS_CONTENT } from '@/app/[locale]/press/mock'
 import { PressSection } from '@/components/app/pagePress/press/pressSection'
 import { Button } from '@/components/ui/button'
-import { ExternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
 import { TrackedExternalLink } from '@/components/ui/trackedExternalLink'
