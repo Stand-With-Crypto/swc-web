@@ -24,9 +24,14 @@ export function PagePress({ title, description, pressContent }: PagePressProps) 
       </section>
 
       <div className="flex flex-col gap-16">
-        {pressContent.map(({ dateHeading, heading, slug, link }) => {
+        {pressContent.map(({ dateHeading, heading, publication, link }) => {
           return (
-            <PressSection dateHeading={dateHeading} heading={heading} key={slug}>
+            <PressSection
+              dateHeading={dateHeading}
+              heading={heading}
+              key={publication}
+              publication={publication}
+            >
               <Button asChild variant="secondary">
                 <ExternalLink
                   aria-label={`Read more about ${heading}`}

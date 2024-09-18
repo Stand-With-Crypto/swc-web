@@ -6,6 +6,7 @@ import { cn } from '@/utils/web/cn'
 interface PressSectionProps {
   dateHeading?: ReactNode
   heading: ReactNode
+  publication: string
   children?: ReactNode
   headingClassName?: string
   sectionClassName?: string
@@ -15,6 +16,7 @@ interface PressSectionProps {
 export function PressSection({
   dateHeading,
   heading,
+  publication,
   children,
   headingClassName,
   sectionClassName,
@@ -27,7 +29,7 @@ export function PressSection({
           <p className="text-center font-mono text-sm text-muted-foreground">{dateHeading}</p>
         )}
         <PageSubTitle className={cn('font-bold text-foreground', headingClassName)} size="md">
-          {heading}
+          {publication}: {heading}
         </PageSubTitle>
       </div>
       {children && (
