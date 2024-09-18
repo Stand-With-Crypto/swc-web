@@ -27,6 +27,7 @@ const contentSecurityPolicy = {
     'https://*.googleapis.com',
     'https://*.gstatic.com',
     '*.google.com',
+    'https://www.googletagmanager.com',
     'https://static.ads-twitter.com/uwt.js',
     'https://va.vercel-scripts.com/v1/speed-insights/script.debug.js',
     'https://va.vercel-scripts.com/v1/script.debug.js',
