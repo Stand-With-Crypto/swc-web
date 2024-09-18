@@ -1,7 +1,6 @@
 import * as Sentry from '@sentry/nextjs'
 
 import { isBrowser } from '@/utils/shared/executionEnvironment'
-import { prettyStringify } from '@/utils/shared/prettyLog'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
 type LogLevel = 'debug' | 'info' | 'warn' | 'error' | 'custom'
@@ -72,13 +71,20 @@ export const logger = {
   debug: wrappedLogger('debug', console.debug),
 }
 
+type ChildMetadata = Record<string, string>
+
 export function getLogger(namespace: string) {
   return {
     error: wrappedLogger('error', console.error, namespace),
     warn: wrappedLogger('warn', console.warn, namespace),
     info: wrappedLogger('info', console.info, namespace),
     debug: wrappedLogger('debug', console.debug, namespace),
-    child: (childMetadata: Record<string, unknown>) =>
-      getLogger(`${namespace}: ${prettyStringify(childMetadata)}`),
+    child: (childMetadata: ChildMetadata) =>
+      getLogger(`${namespace}: ${formatChildMetadata(childMetadata)}`),
   }
 }
+
+const formatChildMetadata = (childMetadata: ChildMetadata) =>
+  Object.keys(childMetadata)
+    .map(key => `${key}:${childMetadata[key]}`)
+    .join('; ')
