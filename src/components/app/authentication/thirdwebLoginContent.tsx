@@ -10,7 +10,6 @@ import { createWallet, createWalletAdapter, generateAccount } from 'thirdweb/wal
 
 import { ANALYTICS_NAME_LOGIN } from '@/components/app/authentication/constants'
 import { DialogBody, DialogFooterCTA } from '@/components/ui/dialog'
-import { useExperimentName } from '@/components/ui/experimentsTesting'
 import { NextImage } from '@/components/ui/image'
 import { ExternalLink, InternalLink } from '@/components/ui/link'
 import { LoadingOverlay } from '@/components/ui/loadingOverlay'
@@ -58,9 +57,6 @@ export function ThirdwebLoginContent({
   const thirdwebEmbeddedAuthContainer = useRef<HTMLDivElement>(null)
   const router = useRouter()
   const swrConfig = useSWRConfig()
-  const currentExperiment = useExperimentName({
-    experimentName: 'gh03_ThirdwebSignUpPhoneNumberExperiment',
-  })
 
   const handleLogin = useCallback(async () => {
     if (onLoginCallback) {
@@ -94,39 +90,6 @@ export function ThirdwebLoginContent({
     // }
   }, [initialEmailAddress])
 
-  const LegaleseDisclaimer =
-    currentExperiment === 'variant'
-      ? () => (
-          <span className="text-[10px]">
-            By signing up with your phone number, you consent to receive recurring texts from Stand
-            With Crypto. You can reply STOP to stop receiving texts. Message and data rates may
-            apply. You understand that Stand With Crypto and its vendors may collect and use your
-            Personal Information. To learn more, visit the{' '}
-            <InternalLink href={urls.privacyPolicy()} target="_blank">
-              Stand With Crypto Alliance Privacy Policy
-            </InternalLink>{' '}
-            and{' '}
-            <ExternalLink href="https://www.quorum.us/privacy-policy/">
-              Quorum Privacy Policy
-            </ExternalLink>
-            .
-          </span>
-        )
-      : () => (
-          <>
-            By signing up, I understand that Stand With Crypto and its vendors may collect and use
-            my Personal Information. To learn more, visit the{' '}
-            <InternalLink href={urls.privacyPolicy()} target="_blank">
-              Stand With Crypto Alliance Privacy Policy
-            </InternalLink>{' '}
-            and{' '}
-            <ExternalLink href="https://www.quorum.us/privacy-policy/">
-              Quorum Privacy Policy
-            </ExternalLink>
-            .
-          </>
-        )
-
   return (
     <>
       <DialogBody className="-mt-8">
@@ -153,17 +116,26 @@ export function ThirdwebLoginContent({
             // this prevents that bug
             style={{ maxWidth: 'calc(100vw - 56px)' }}
           >
-            <ThirdwebLoginEmbedded
-              currentExperiment={currentExperiment}
-              onLoginCallback={handleLogin}
-              {...props}
-            />
+            <ThirdwebLoginEmbedded onLoginCallback={handleLogin} {...props} />
           </div>
         </div>
 
         <DialogFooterCTA className="mt-auto px-6 pb-2">
           <p className="text-center text-xs text-muted-foreground">
-            <LegaleseDisclaimer />
+            <span className="text-[10px]">
+              By signing up with your phone number, you consent to receive recurring texts from
+              Stand With Crypto. You can reply STOP to stop receiving texts. Message and data rates
+              may apply. You understand that Stand With Crypto and its vendors may collect and use
+              your Personal Information. To learn more, visit the{' '}
+              <InternalLink href={urls.privacyPolicy()} target="_blank">
+                Stand With Crypto Alliance Privacy Policy
+              </InternalLink>{' '}
+              and{' '}
+              <ExternalLink href="https://www.quorum.us/privacy-policy/">
+                Quorum Privacy Policy
+              </ExternalLink>
+              .
+            </span>
           </p>
         </DialogFooterCTA>
       </DialogBody>
@@ -173,7 +145,6 @@ export function ThirdwebLoginContent({
 
 function ThirdwebLoginEmbedded(
   props: Omit<ConnectEmbedProps, 'client'> & {
-    currentExperiment: 'control' | 'variant'
     onLoginCallback?: () => Promise<void> | void
   },
 ) {
@@ -195,8 +166,7 @@ function ThirdwebLoginEmbedded(
       </div>
     )
   }
-  const embeddedAuthOptions: AuthOption[] =
-    props.currentExperiment === 'variant' ? ['google', 'phone', 'email'] : ['google', 'email']
+  const embeddedAuthOptions: AuthOption[] = ['google', 'phone', 'email']
 
   const supportedWallets = [
     createWallet('com.coinbase.wallet', { appMetadata }),
