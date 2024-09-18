@@ -1,8 +1,9 @@
+import { UserActionType } from '@prisma/client'
+import { usePathname } from 'next/navigation'
+
 import { USER_ACTION_CTAS_FOR_GRID_DISPLAY } from '@/components/app/userActionGridCTAs/constants/ctas'
 import { useLocale } from '@/hooks/useLocale'
 import { getIntlUrls } from '@/utils/shared/urls'
-import { UserActionType } from '@prisma/client'
-import { usePathname } from 'next/navigation'
 
 interface useGridCTAsProps {
   excludeUserActionTypes?: UserActionType[]

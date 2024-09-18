@@ -2,8 +2,8 @@
 
 import { UserActionType } from '@prisma/client'
 
-import { useOrderedCTAs } from '@/components/app/userActionGridCTAs/hooks/useOrderedCTAs'
 import { SuccessScreenActionGridCTA } from '@/components/app/userActionGridCTAs/components/successScreenActionGridCTA'
+import { useOrderedCTAs } from '@/components/app/userActionGridCTAs/hooks/useOrderedCTAs'
 
 interface SuccessScreenCTASProps {
   excludeUserActionTypes?: UserActionType[]

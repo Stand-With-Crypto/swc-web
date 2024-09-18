@@ -1,7 +1,8 @@
-import { USER_ACTION_CTAS_FOR_GRID_DISPLAY } from '@/components/app/userActionGridCTAs/constants/ctas'
-import { UserActionGridCTACampaign } from '@/components/app/userActionGridCTAs/types'
 import { UserActionType } from '@prisma/client'
 import { flatMap } from 'lodash-es'
+
+import { USER_ACTION_CTAS_FOR_GRID_DISPLAY } from '@/components/app/userActionGridCTAs/constants/ctas'
+import { UserActionGridCTACampaign } from '@/components/app/userActionGridCTAs/types'
 
 const USER_ACTIONS_EXCLUDED_FROM_CTA: UserActionType[] = [
   UserActionType.LIVE_EVENT,

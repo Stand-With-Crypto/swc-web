@@ -1,8 +1,9 @@
 'use client'
 
+import { UserActionType } from '@prisma/client'
+
 import { UserActionCard } from '@/components/app/userActionGridCTAs/components/userActionCard'
 import { useGridCTAs } from '@/components/app/userActionGridCTAs/hooks/useGridCTAs'
-import { UserActionType } from '@prisma/client'
 
 interface UserActionGridCTAsSkeletonProps {
   excludeUserActionTypes?: UserActionType[]

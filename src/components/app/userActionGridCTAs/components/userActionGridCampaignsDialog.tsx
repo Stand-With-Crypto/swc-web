@@ -2,6 +2,7 @@ import { ReactNode } from 'react'
 import Balancer from 'react-wrap-balancer'
 import Link from 'next/link'
 
+import { CheckIcon } from '@/components/app/userActionGridCTAs/icons/checkIcon'
 import { UserActionGridCTACampaign } from '@/components/app/userActionGridCTAs/types'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
@@ -12,7 +13,6 @@ import {
   UserActionTypesWithDeeplink,
 } from '@/utils/shared/urlsDeeplinkUserActions'
 import { cn } from '@/utils/web/cn'
-import { CheckIcon } from '@/components/app/userActionGridCTAs/icons/checkIcon'
 
 interface UserActionGridCampaignsDialogProps {
   children: ReactNode

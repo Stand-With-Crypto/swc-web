@@ -1,8 +1,9 @@
-import { USER_ACTION_CTAS_FOR_GRID_DISPLAY } from '@/components/app/userActionGridCTAs/constants/ctas'
-import { UserActionGridCTACampaign } from '@/components/app/userActionGridCTAs/types'
+import { useMemo } from 'react'
 import { UserActionType } from '@prisma/client'
 import { uniqBy } from 'lodash-es'
-import { useMemo } from 'react'
+
+import { USER_ACTION_CTAS_FOR_GRID_DISPLAY } from '@/components/app/userActionGridCTAs/constants/ctas'
+import { UserActionGridCTACampaign } from '@/components/app/userActionGridCTAs/types'
 
 type CTAType = {
   title: string
@@ -75,7 +76,7 @@ export function useOrderedCTAs({
     })
 
     return uniqBy([...incompleteCTAs, ...completeCTAs], cta => `${cta.title}-${cta.description}`)
-  }, [ctas, performeduserActionObj])
+  }, [filteredInactiveCampaigns, performeduserActionObj])
 
   return { orderedCTAs, performeduserActionObj }
 }

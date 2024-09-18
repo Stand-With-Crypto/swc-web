@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 import { SuccessScreenActionCard } from '@/components/app/userActionGridCTAs/components/successScreenActionCard'
 import { UserActionGridCampaignsDialog } from '@/components/app/userActionGridCTAs/components/userActionGridCampaignsDialog'
 import { UserActionCardProps } from '@/components/app/userActionGridCTAs/types'
@@ -6,7 +8,6 @@ import {
   getUserActionDeeplink,
   UserActionTypesWithDeeplink,
 } from '@/utils/shared/urlsDeeplinkUserActions'
-import Link from 'next/link'
 
 export function SuccessScreenActionGridCTA(props: UserActionCardProps) {
   const locale = useLocale()
