@@ -8,10 +8,10 @@ const NEXT_PUBLIC_GOOGLE_PLACES_API_KEY = requiredEnv(
 
 /**
  * See https://stackoverflow.com/a/75212692 for why we set callback to `Function.prototype`
- * See https://github.com/Tintef/react-google-places-autocomplete/issues/342 for why we use `loading=async`
+ * Check possibility of adding &loading=async https://github.com/Tintef/react-google-places-autocomplete/issues/342 to resolve warning
  */
 function getGoogleMapsScriptSrc() {
-  return `https://maps.googleapis.com/maps/api/js?key=${NEXT_PUBLIC_GOOGLE_PLACES_API_KEY}&loading=async&libraries=places&callback=Function.prototype`
+  return `https://maps.googleapis.com/maps/api/js?key=${NEXT_PUBLIC_GOOGLE_PLACES_API_KEY}&libraries=places&callback=Function.prototype`
 }
 
 export function useGoogleMapsScript() {

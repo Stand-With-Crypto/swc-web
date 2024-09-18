@@ -8,7 +8,7 @@ import { TopLevelClientLogic } from '@/app/[locale]/topLevelClientLogic'
 import { CookieConsent } from '@/components/app/cookieConsent'
 import { Footer } from '@/components/app/footer'
 import { GeoLocationDisclaimerBanner } from '@/components/app/geoLocationDisclaimerBanner/geoLocationDisclaimerBanner'
-import { GoogleTrackingManager } from '@/components/app/googleTrackingManager'
+import { GoogleTagManager } from '@/components/app/googleTagManager'
 import { Navbar } from '@/components/app/navbar'
 import { OverrideGlobalLocalStorage } from '@/components/app/overrideGlobalLocalStorage'
 import { FullHeight } from '@/components/ui/fullHeight'
@@ -55,7 +55,7 @@ export default function Layout({ children, params }: PageProps & { children: Rea
 
   return (
     <html lang={locale} translate="no">
-      <GoogleTrackingManager />
+      <GoogleTagManager />
       <body className={fontClassName}>
         <OverrideGlobalLocalStorage />
         <NextTopLoader
