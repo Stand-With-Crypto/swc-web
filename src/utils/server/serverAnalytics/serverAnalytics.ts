@@ -37,7 +37,14 @@ export function getServerAnalytics(config: ServerAnalyticsConfig) {
 
   const flush = async () => {
     return resolveWithTimeout(Promise.all(trackingRequests), ANALYTICS_FLUSH_TIMEOUT_MS).catch(
-      () => {},
+      err => {
+        Sentry.captureException(err, {
+          tags: { domain: 'trackAnalytic' },
+          fingerprint: err?.message?.includes('Request timeout')
+            ? [`trackAnalyticFlushWithTimeout`]
+            : undefined,
+        })
+      },
     )
   }
 
