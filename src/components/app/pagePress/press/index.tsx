@@ -4,6 +4,8 @@ import { Button } from '@/components/ui/button'
 import { ExternalLink } from '@/components/ui/link'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'
+import { TrackedExternalLink } from '@/components/ui/trackedExternalLink'
+import { AnalyticActionType, AnalyticComponentType } from '@/utils/shared/sharedAnalytics'
 
 interface PagePressProps {
   title: string
@@ -33,14 +35,21 @@ export function PagePress({ title, description, pressContent }: PagePressProps) 
               publication={publication}
             >
               <Button asChild variant="secondary">
-                <ExternalLink
+                <TrackedExternalLink
                   aria-label={`Read more about ${heading}`}
                   className="text-foreground no-underline hover:no-underline"
+                  eventProperties={{
+                    component: AnalyticComponentType.link,
+                    action: AnalyticActionType.click,
+                    link,
+                    page: 'Press',
+                    surface: 'Press Section',
+                  }}
                   href={link}
                   title={`Read more about ${heading}`}
                 >
                   Read more
-                </ExternalLink>
+                </TrackedExternalLink>
               </Button>
             </PressSection>
           )
