@@ -111,6 +111,9 @@ export async function Footer({ locale }: { locale: SupportedLocale }) {
               <InternalLink className={footerLinkStyles} href={urls.leaderboard()}>
                 Community
               </InternalLink>
+              <InternalLink className={footerLinkStyles} href={urls.resources()}>
+                FIT21 resources
+              </InternalLink>
             </div>
           </div>
         </div>

@@ -4,7 +4,7 @@ import { NextImage } from '@/components/ui/image'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { cn } from '@/utils/web/cn'
 
-interface ToolkitSectionProps {
+interface DefenseFundSectionProps {
   heading: ReactNode
   iconSrc?: string
   subtext?: ReactNode
@@ -22,7 +22,7 @@ export function DefenseFundSection({
   headingClassName,
   sectionClassName,
   childrenWrapperClassName,
-}: ToolkitSectionProps) {
+}: DefenseFundSectionProps) {
   return (
     <section className={cn('mt-10', sectionClassName)}>
       <div className="container flex flex-col items-center gap-4">
