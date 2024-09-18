@@ -20,9 +20,9 @@ import {
   TOO_MANY_REQUESTS_CODE,
 } from '@/utils/server/sms/SendSMSError'
 import { UserSMSVariables } from '@/utils/server/sms/utils/variables'
+import { Logger } from '@/utils/shared/logger'
 import { sleep } from '@/utils/shared/sleep'
 import { fullUrl } from '@/utils/shared/urls'
-import { Logger } from '@/utils/shared/logger'
 
 const invalidPhoneNumber = fakerFields.phoneNumber()
 const optedOutUserPhoneNumber = fakerFields.phoneNumber()
