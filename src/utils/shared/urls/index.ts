@@ -70,6 +70,7 @@ export const getIntlUrls = (
     voterGuide: () => `${localePrefix}/vote`,
     advocacyToolkit: () => `${localePrefix}/advocacy-toolkit`,
     creatorDefenseFund: () => `${localePrefix}/creator-defense-fund`,
+    press: () => `${localePrefix}/press`,
   }
 }
 
