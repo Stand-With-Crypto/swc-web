@@ -1,7 +1,9 @@
 import { boolean, object, string, z } from 'zod'
 
 import { prismaClient } from '@/utils/server/prismaClient'
-import { Logger } from '@/utils/shared/logger'
+import { getLogger } from '@/utils/shared/logger'
+
+const defaultLogger = getLogger('setPrimaryCryptoAddressOfUser')
 
 const zodPrimaryCryptoAddressOfUserParameters = object({
   userId: string(),
@@ -11,12 +13,12 @@ const zodPrimaryCryptoAddressOfUserParameters = object({
 
 export async function setPrimaryCryptoAddressOfUser(
   parameters: z.infer<typeof zodPrimaryCryptoAddressOfUserParameters>,
-  logger?: Logger,
+  logger = defaultLogger,
 ) {
   zodPrimaryCryptoAddressOfUserParameters.parse(parameters)
   const { userId, cryptoAddressId, persist } = parameters
 
-  logger?.info(`userId:${userId} - cryptoAddressId: ${cryptoAddressId} `)
+  logger.info(`userId:${userId} - cryptoAddressId: ${cryptoAddressId} `)
   const user = await prismaClient.user.findFirst({ where: { id: userId } })
   if (user === null) {
     throw new Error('No user found')
@@ -36,7 +38,7 @@ export async function setPrimaryCryptoAddressOfUser(
     throw new Error('a user with the same primaryUserCryptoAddressId already exist')
   }
   if (!persist) {
-    logger?.info('Dry run, exiting')
+    logger.info('Dry run, exiting')
   }
 
   await prismaClient.user.update({

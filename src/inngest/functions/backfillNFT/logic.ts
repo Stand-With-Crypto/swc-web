@@ -4,7 +4,9 @@ import { actionsWithNFT } from '@/utils/server/nft/actionsWithNFT'
 import { claimNFT } from '@/utils/server/nft/claimNFT'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { batchAsyncAndLog } from '@/utils/shared/batchAsyncAndLog'
-import { Logger } from '@/utils/shared/logger'
+import { getLogger } from '@/utils/shared/logger'
+
+const defaultLogger = getLogger('backfillNFT')
 
 const zodBackfillNFParameters = object({
   limit: number().optional(),
@@ -21,7 +23,7 @@ interface BackfillNFTResponse {
 
 export async function backfillNFT(
   parameters: z.infer<typeof zodBackfillNFParameters>,
-  logger: Logger,
+  logger = defaultLogger,
 ) {
   zodBackfillNFParameters.parse(parameters)
   const { limit, persist } = parameters

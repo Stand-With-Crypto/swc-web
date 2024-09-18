@@ -8,7 +8,7 @@ import { sendSMS, SendSMSError } from '@/utils/server/sms'
 import { optOutUser } from '@/utils/server/sms/actions'
 import { countSegments, getUserByPhoneNumber } from '@/utils/server/sms/utils'
 import { applySMSVariables } from '@/utils/server/sms/utils/variables'
-import { Logger } from '@/utils/shared/logger'
+import { getLogger } from '@/utils/shared/logger'
 import { sleep } from '@/utils/shared/sleep'
 
 import {
@@ -20,6 +20,8 @@ import { flagInvalidPhoneNumbers } from './flagInvalidPhoneNumbers'
 
 const MAX_RETRY_ATTEMPTS = 5
 const PAYLOAD_LIMIT = 10000
+
+const defaultLogger = getLogger('enqueueMessages')
 
 export interface PayloadMessage {
   body?: string
@@ -35,7 +37,7 @@ export interface EnqueueMessagePayload {
 
 export async function enqueueMessages(
   payload: EnqueueMessagePayload[],
-  logger?: Logger,
+  logger = defaultLogger,
   attempt = 0,
 ) {
   if (attempt > MAX_RETRY_ATTEMPTS) return { segments: 0, messages: 0 }
@@ -50,7 +52,7 @@ export async function enqueueMessages(
   } = {}
   const unsubscribedUsers: string[] = []
 
-  logger?.info('Fetching variables')
+  logger.info('Fetching variables')
 
   const userSMSVariables = await getSMSVariablesByPhoneNumbers(
     payload.map(({ phoneNumber }) => phoneNumber),
@@ -136,29 +138,27 @@ export async function enqueueMessages(
     }
   })
 
-  logger?.info(`Attempt ${attempt + 1} queuing messages`)
+  logger.info(`Attempt ${attempt + 1} queuing messages`)
 
   await Promise.all(enqueueMessagesPromise)
 
-  logger?.info(
-    `Attempt ${attempt + 1} queued ${queuedMessages} messages (${segmentsSent} segments)`,
-  )
+  logger.info(`Attempt ${attempt + 1} queued ${queuedMessages} messages (${segmentsSent} segments)`)
 
   for (const journeyTypeKey of Object.keys(messagesSentByJourneyType)) {
     const journeyType = journeyTypeKey as UserCommunicationJourneyType
 
-    logger?.info(`Creating ${journeyType} communication journey`)
+    logger.info(`Creating ${journeyType} communication journey`)
 
     await bulkCreateCommunicationJourney(journeyType, messagesSentByJourneyType[journeyType]!)
   }
 
   if (invalidPhoneNumbers.length > 0) {
-    logger?.info(`Found ${invalidPhoneNumbers.length} invalid phone numbers`)
+    logger.info(`Found ${invalidPhoneNumbers.length} invalid phone numbers`)
     await flagInvalidPhoneNumbers(invalidPhoneNumbers)
   }
 
   if (unsubscribedUsers.length > 0) {
-    logger?.info(`Found ${unsubscribedUsers.length} unsubscribed users`)
+    logger.info(`Found ${unsubscribedUsers.length} unsubscribed users`)
     const optOutUserPromises = unsubscribedUsers.map(async phoneNumber => {
       const user = await getUserByPhoneNumber(phoneNumber)
 
@@ -179,7 +179,7 @@ export async function enqueueMessages(
   if (failedEnqueueMessagePayload.length > 0) {
     const waitingTime = 1000 * (attempt + 1)
 
-    logger?.info(
+    logger.info(
       `Failed to send SMS to ${failedEnqueueMessagePayload.length} phone numbers. Attempting again in ${waitingTime} seconds`,
     )
 

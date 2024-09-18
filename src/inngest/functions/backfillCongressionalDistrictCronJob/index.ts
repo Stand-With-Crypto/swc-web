@@ -5,8 +5,10 @@ import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { maybeGetCongressionalDistrictFromAddress } from '@/utils/shared/getCongressionalDistrictFromAddress'
-import { Logger } from '@/utils/shared/logger'
+import { getLogger } from '@/utils/shared/logger'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
+
+const defaultLogger = getLogger('backfillUsCongressionalDistrictsCronJob')
 
 const BACKFILL_US_CONGRESSIONAL_DISTRICTS_INNGEST_CRON_JOB_FUNCTION_ID =
   'script.backfill-us-congressional-districts-cron-job'
@@ -93,7 +95,7 @@ async function backfillUsCongressionalDistricts(
     Address,
     'id' | 'formattedDescription' | 'countryCode'
   >[],
-  logger?: Logger,
+  logger = defaultLogger,
 ) {
   for (const address of addressesWithoutCongressionalDistricts) {
     let usCongressionalDistrict: Awaited<
@@ -113,7 +115,7 @@ async function backfillUsCongressionalDistricts(
     }
 
     if ('notFoundReason' in usCongressionalDistrict) {
-      logger?.error(
+      logger.error(
         `Failed to get usCongressionalDistrict for address ${address.id} with code ${usCongressionalDistrict.notFoundReason}`,
       )
       if (usCongressionalDistrict.notFoundReason === 'CIVIC_API_QUOTA_LIMIT_REACHED') {
@@ -135,7 +137,7 @@ async function backfillUsCongressionalDistricts(
           'CIVIC_API_BAD_REQUEST',
         ].includes(usCongressionalDistrict.notFoundReason)
       ) {
-        logger?.info(
+        logger.info(
           `No usCongressionalDistrict found for address ${address.id} because ${usCongressionalDistrict.notFoundReason}. Updating the usCongressionalDistrict to 0`,
         )
 
@@ -161,7 +163,7 @@ async function backfillUsCongressionalDistricts(
       continue
     }
 
-    logger?.info(
+    logger.info(
       `Created usCongressionalDistrict ${usCongressionalDistrict.districtNumber} for address ${address.id}`,
     )
 

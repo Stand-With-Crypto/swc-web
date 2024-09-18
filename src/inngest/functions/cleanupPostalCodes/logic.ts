@@ -1,7 +1,9 @@
 import { prismaClient } from '@/utils/server/prismaClient'
-import { Logger } from '@/utils/shared/logger'
+import { getLogger } from '@/utils/shared/logger'
 
-export async function cleanPostalCodes(persist: boolean, logger?: Logger) {
+const defaultLogger = getLogger('cleanPostalCodes')
+
+export async function cleanPostalCodes(persist: boolean, logger = defaultLogger) {
   const postalCodesWithSuffix = await prismaClient.address.findMany({
     where: {
       postalCode: {
@@ -10,12 +12,12 @@ export async function cleanPostalCodes(persist: boolean, logger?: Logger) {
     },
   })
 
-  logger?.info(
+  logger.info(
     `Found ${postalCodesWithSuffix.length} addresses with postal code containing postal code suffix`,
   )
 
   if (!persist) {
-    logger?.info('Dry run, exiting')
+    logger.info('Dry run, exiting')
     return { found: postalCodesWithSuffix.length, updated: 0 }
   }
 
