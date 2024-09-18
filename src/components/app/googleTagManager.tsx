@@ -1,7 +1,6 @@
 import { GoogleTagManager as GTM } from '@next/third-parties/google'
 
 import { requiredOutsideLocalEnv } from '@/utils/shared/requiredEnv'
-import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
 // even though locally we don't render GTM we still
 // want to capture on sentry if ID not set
@@ -12,9 +11,9 @@ const googleTagManagerId = requiredOutsideLocalEnv(
 )
 
 export function GoogleTagManager() {
-  if (NEXT_PUBLIC_ENVIRONMENT === 'local') {
+  if (!googleTagManagerId) {
     return null
   }
 
-  return <GTM gtmId={googleTagManagerId ?? ''} />
+  return <GTM gtmId={googleTagManagerId} />
 }
