@@ -16,13 +16,16 @@ export const backfillNFTWithInngest = inngest.createFunction(
     onFailure: onScriptFailure,
   },
   { event: BACKFILL_NFT_INNGEST_EVENT_NAME },
-  async ({ event, step }) => {
+  async ({ event, step, logger }) => {
     const payload = event.data as ScriptPayload
     return await step.run('execute-script', async () => {
-      return await backfillNFT({
-        limit: payload.limit,
-        persist: payload.persist,
-      })
+      return await backfillNFT(
+        {
+          limit: payload.limit,
+          persist: payload.persist,
+        },
+        logger,
+      )
     })
   },
 )

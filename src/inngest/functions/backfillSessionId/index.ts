@@ -3,14 +3,12 @@ import * as Sentry from '@sentry/nextjs'
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { getLogger } from '@/utils/shared/logger'
 
 const BACKFILL_SESSION_ID_CRON_JOB_FUNCTION_ID = 'script.backfill-session-id'
 const BACKFILL_SESSION_ID_INNGEST_EVENT_NAME = 'script/backfill.session.id'
 
 const BACKFILL_SESSION_ID_BATCH_SIZE = Number(process.env.BACKFILL_SESSION_ID_BATCH_SIZE) || 2000
 
-const logger = getLogger('backfillSessionId')
 export const backfillSessionIdCronJob = inngest.createFunction(
   {
     id: BACKFILL_SESSION_ID_CRON_JOB_FUNCTION_ID,
@@ -21,7 +19,7 @@ export const backfillSessionIdCronJob = inngest.createFunction(
   {
     event: BACKFILL_SESSION_ID_INNGEST_EVENT_NAME,
   },
-  async ({ step }) => {
+  async ({ step, logger }) => {
     const usersCount = await step.run('get-users-count', async () => {
       return prismaClient.user.count({
         where: {

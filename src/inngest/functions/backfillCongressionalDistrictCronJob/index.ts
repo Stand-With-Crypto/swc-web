@@ -5,7 +5,7 @@ import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { maybeGetCongressionalDistrictFromAddress } from '@/utils/shared/getCongressionalDistrictFromAddress'
-import { getLogger } from '@/utils/shared/logger'
+import { Logger } from '@/utils/shared/logger'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
 
 const BACKFILL_US_CONGRESSIONAL_DISTRICTS_INNGEST_CRON_JOB_FUNCTION_ID =
@@ -22,7 +22,6 @@ const BACKFILL_US_CONGRESSIONAL_DISTRICTS_BATCH_SIZE =
 const MAX_US_CONGRESSIONAL_DISTRICTS_BACKFILL_COUNT =
   Number(process.env.MAX_US_CONGRESSIONAL_DISTRICTS_BACKFILL_COUNT) || 150000 // Our quota is 250000 queries per day
 
-const logger = getLogger('backfillUsCongressionalDistrictsCronJob')
 export const backfillCongressionalDistrictCronJob = inngest.createFunction(
   {
     id: BACKFILL_US_CONGRESSIONAL_DISTRICTS_INNGEST_CRON_JOB_FUNCTION_ID,
@@ -35,7 +34,7 @@ export const backfillCongressionalDistrictCronJob = inngest.createFunction(
       ? { cron: BACKFILL_US_CONGRESSIONAL_DISTRICTS_INNGEST_CRON_JOB_SCHEDULE }
       : { event: BACKFILL_US_CONGRESSIONAL_DISTRICTS_INNGEST_CRON_JOB_EVENT_NAME }),
   },
-  async ({ step }) => {
+  async ({ step, logger }) => {
     let currentCursor: string | undefined = undefined
     const numBatches = Math.ceil(
       MAX_US_CONGRESSIONAL_DISTRICTS_BACKFILL_COUNT /
@@ -70,7 +69,7 @@ export const backfillCongressionalDistrictCronJob = inngest.createFunction(
           return
         }
 
-        await backfillUsCongressionalDistricts(addressBatch)
+        await backfillUsCongressionalDistricts(addressBatch, logger)
 
         logger.info(
           `Finished backfilling batch ${i} of ${numBatches} maximum batches of addresses without usCongressionalDistrict`,
@@ -94,6 +93,7 @@ async function backfillUsCongressionalDistricts(
     Address,
     'id' | 'formattedDescription' | 'countryCode'
   >[],
+  logger?: Logger,
 ) {
   for (const address of addressesWithoutCongressionalDistricts) {
     let usCongressionalDistrict: Awaited<
@@ -113,7 +113,7 @@ async function backfillUsCongressionalDistricts(
     }
 
     if ('notFoundReason' in usCongressionalDistrict) {
-      logger.error(
+      logger?.error(
         `Failed to get usCongressionalDistrict for address ${address.id} with code ${usCongressionalDistrict.notFoundReason}`,
       )
       if (usCongressionalDistrict.notFoundReason === 'CIVIC_API_QUOTA_LIMIT_REACHED') {
@@ -135,7 +135,7 @@ async function backfillUsCongressionalDistricts(
           'CIVIC_API_BAD_REQUEST',
         ].includes(usCongressionalDistrict.notFoundReason)
       ) {
-        logger.info(
+        logger?.info(
           `No usCongressionalDistrict found for address ${address.id} because ${usCongressionalDistrict.notFoundReason}. Updating the usCongressionalDistrict to 0`,
         )
 
@@ -161,7 +161,7 @@ async function backfillUsCongressionalDistricts(
       continue
     }
 
-    logger.info(
+    logger?.info(
       `Created usCongressionalDistrict ${usCongressionalDistrict.districtNumber} for address ${address.id}`,
     )
 

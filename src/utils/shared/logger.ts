@@ -71,6 +71,8 @@ export const logger = {
   debug: wrappedLogger('debug', console.debug),
 }
 
+export type Logger = typeof logger
+
 type ChildMetadata = Record<string, string>
 
 export function getLogger(namespace: string) {

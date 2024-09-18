@@ -15,11 +15,11 @@ export const cleanupPostalCodesWithInngest = inngest.createFunction(
     onFailure: onScriptFailure,
   },
   { event: CLEANUP_POSTAL_CODES_INNGEST_EVENT_NAME },
-  async ({ event, step }) => {
+  async ({ event, step, logger }) => {
     const payload = event.data as ScriptPayload
 
     const { found, updated } = await step.run('execute-script', async () => {
-      return await cleanPostalCodes(payload.persist)
+      return await cleanPostalCodes(payload.persist, logger)
     })
 
     return {

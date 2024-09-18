@@ -1,7 +1,6 @@
 import { UserCommunicationJourneyType } from '@prisma/client'
 import * as Sentry from '@sentry/node'
 import { NonRetriableError } from 'inngest'
-import { Logger } from 'inngest/middleware/logger'
 import { update } from 'lodash-es'
 
 import { getSMSVariablesByPhoneNumbers } from '@/inngest/functions/sms/utils/getSMSVariablesByPhoneNumbers'
@@ -9,6 +8,7 @@ import { sendSMS, SendSMSError } from '@/utils/server/sms'
 import { optOutUser } from '@/utils/server/sms/actions'
 import { countSegments, getUserByPhoneNumber } from '@/utils/server/sms/utils'
 import { applySMSVariables } from '@/utils/server/sms/utils/variables'
+import { Logger } from '@/utils/shared/logger'
 import { sleep } from '@/utils/shared/sleep'
 
 import {

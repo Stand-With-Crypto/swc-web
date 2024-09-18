@@ -8,9 +8,7 @@ import { inngest } from '@/inngest/inngest'
 import { getEvents } from '@/utils/server/builderIO/swcEvents'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { SWCEvents } from '@/utils/shared/getSWCEvents'
-import { getLogger } from '@/utils/shared/logger'
-
-const logger = getLogger('sendEventNotifications')
+import { Logger } from '@/utils/shared/logger'
 
 interface Notification {
   userId: string
@@ -25,11 +23,11 @@ interface SendEventNotificationsResponse {
   notifications: Array<Notification>
 }
 
-export async function sendEventNotifications() {
+export async function sendEventNotifications(logger?: Logger) {
   const allEvents = await getEvents()
 
   if (!allEvents || !allEvents.length) {
-    logger.info('Could not load events from Builder.IO. Ending the script...')
+    logger?.info('Could not load events from Builder.IO. Ending the script...')
     return
   }
 
@@ -62,7 +60,7 @@ export async function sendEventNotifications() {
     ...batchOneDayNotifications,
   ]
 
-  logger.info(`Sent ${notifications.length} notifications`)
+  logger?.info(`Sent ${notifications.length} notifications`)
 
   return {
     notificationsSent: notifications.length,

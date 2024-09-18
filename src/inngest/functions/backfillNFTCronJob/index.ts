@@ -10,10 +10,7 @@ import { prismaClient } from '@/utils/server/prismaClient'
 import { fetchBaseETHBalances } from '@/utils/server/thirdweb/fetchBaseETHBalances'
 import { fetchAirdropTransactionFee } from '@/utils/server/thirdweb/fetchCurrentClaimTransactionFee'
 import { AIRDROP_NFT_ETH_TRANSACTION_FEE_THRESHOLD } from '@/utils/shared/airdropNFTETHTransactionFeeThreshold'
-import { getLogger } from '@/utils/shared/logger'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
-
-const logger = getLogger('backfillNFTCronJob')
 
 // This is the milliseconds to wait before processing the next batch of user actions.
 const BACKFILL_NFT_INNGEST_CRON_JOB_AIRDROP_SLEEP_INTERVAL =
@@ -52,7 +49,7 @@ export const backfillNFTInngestCronJob = inngest.createFunction(
       ? { cron: BACKFILL_NFT_INNGEST_CRON_JOB_SCHEDULE }
       : { event: BACKFILL_NFT_INNGEST_CRON_JOB_EVENT_NAME }),
   },
-  async ({ step }) => {
+  async ({ step, logger }) => {
     // Initialize variables.
     // The initialization of variables using `step.run` might seem silly, but see this doc for why this is needed: https://www.inngest.com/docs/functions/multi-step#my-variable-isn-t-updating
     const currentTime = await step.run('script.initialize-constant-variables', async () => {

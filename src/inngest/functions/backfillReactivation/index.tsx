@@ -9,7 +9,6 @@ import { sendMail } from '@/utils/server/email'
 import { EmailActiveActions } from '@/utils/server/email/templates/common/constants'
 import ReactivationReminder from '@/utils/server/email/templates/reactivationReminder'
 import { prismaClient } from '@/utils/server/prismaClient'
-import { getLogger } from '@/utils/shared/logger'
 
 interface ReactivationEmailPayload {
   testEmail?: string
@@ -45,8 +44,6 @@ const BACKFILL_REACTIVATION_INNGEST_CRON_JOB_ID = 'script.backfill-reactivation-
 const BACKFILL_REACTIVATION_INNGEST_CRON_JOB_SCHEDULE =
   'TZ=America/New_York 0 11,12,13,14,15,16,17 * * *' // Every hour between 11AM and 5PM EST
 
-const logger = getLogger('backfillReactivation')
-
 export const backfillReactivationCron = inngest.createFunction(
   { id: BACKFILL_REACTIVATION_INNGEST_CRON_JOB_ID },
   { cron: BACKFILL_REACTIVATION_INNGEST_CRON_JOB_SCHEDULE },
@@ -70,7 +67,7 @@ export const backfillReactivationWithInngest = inngest.createFunction(
   {
     event: BACKFILL_REACTIVATION_INNGEST_EVENT_NAME,
   },
-  async ({ event, step }) => {
+  async ({ event, step, logger }) => {
     const { testEmail, persist, limit } = event.data as ReactivationEmailPayload
 
     const usersWithoutCommunicationJourney = await step.run(
