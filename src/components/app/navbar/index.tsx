@@ -7,8 +7,10 @@ import { ChevronDown, Menu } from 'lucide-react'
 
 import { LoginDialogWrapper } from '@/components/app/authentication/loginDialogWrapper'
 import {
+  AdvocacyToolkitIcon,
   BillsIcon,
   CommunityIcon,
+  CreatorDefenseIcon,
   DonateIcon,
   MissionIcon,
   ResourcesIcon,
@@ -24,6 +26,7 @@ import { Button } from '@/components/ui/button'
 import { Drawer, DrawerClose, DrawerContent, DrawerTrigger } from '@/components/ui/drawer'
 import { NextImage } from '@/components/ui/image'
 import { InternalLink } from '@/components/ui/link'
+import { LinkBox, linkBoxLinkClassName } from '@/components/ui/linkBox'
 import { useDialog } from '@/hooks/useDialog'
 import { SupportedLocale } from '@/intl/locales'
 import { NEXT_PUBLIC_ENVIRONMENT } from '@/utils/shared/sharedEnv'
@@ -69,6 +72,11 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
           icon: DonateIcon,
         },
         {
+          href: urls.creatorDefenseFund(),
+          text: 'Creator Defense Fund',
+          icon: CreatorDefenseIcon,
+        },
+        {
           href: urls.community(),
           text: 'Community',
           icon: CommunityIcon,
@@ -77,6 +85,11 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
           href: urls.bills(),
           text: 'Bills',
           icon: BillsIcon,
+        },
+        {
+          href: urls.advocacyToolkit(),
+          text: 'Advocacy toolkit',
+          icon: AdvocacyToolkitIcon,
         },
         {
           href: urls.resources(),
@@ -114,11 +127,14 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
       asChild
       className="w-full text-base font-bold leading-4 md:font-normal min-[1092px]:w-auto"
       key={urls.voterGuide()}
+      onClick={maybeCloseAfterNavigating}
       variant="default"
     >
       <InternalLink href={urls.voterGuide()}>Vote</InternalLink>
     </Button>
   )
+
+  const [showCreatorBanner, setShowCreatorBanner] = useState(true)
 
   return (
     <>
@@ -135,6 +151,30 @@ export function Navbar({ locale }: { locale: SupportedLocale }) {
             </div>
           </div>
         </div>
+      )}
+
+      {showCreatorBanner && (
+        <LinkBox>
+          <button
+            className="flex min-h-12 w-full items-center bg-primary-cta p-2 text-center"
+            onClick={() => setShowCreatorBanner(false)}
+          >
+            <div className="container flex">
+              <div className="w-full space-y-1 text-sm text-background antialiased max-sm:text-center sm:text-base">
+                <p className="font-semibold">
+                  Introducing the Creator Legal Defense Fund - Protecting artists and creators.{' '}
+                  <InternalLink
+                    className={cn(linkBoxLinkClassName, '!text-primary-cta-foreground antialiased')}
+                    data-link-box-subject
+                    href={urls.creatorDefenseFund()}
+                  >
+                    Learn more here.
+                  </InternalLink>
+                </p>
+              </div>
+            </div>
+          </button>
+        </LinkBox>
       )}
 
       <nav

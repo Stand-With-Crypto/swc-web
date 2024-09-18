@@ -149,7 +149,7 @@ export function PageHome({
           <PageSubTitle as="h4" className="mb-10">
             Stand With Crypto is first and foremost the result of{' '}
             {TOTAL_CRYPTO_ADVOCATE_COUNT_DISPLAY_NAME}+ people fighting to keep crypto in America.
-            We’ve also partnered with a number of companies to fight alongside us.
+            We've also partnered with a number of companies to fight alongside us.
           </PageSubTitle>
           <div className="space-y-6">
             <PartnerGrid />
@@ -165,7 +165,7 @@ export function PageHome({
             Where politicians stand on crypto
           </PageTitle>
           <PageSubTitle as="h4" className="mb-10">
-            Ask your policymakers to be pro-crypto. Here’s where they stand now.
+            Ask your policymakers to be pro-crypto. Here's where they stand now.
           </PageSubTitle>
         </div>
         <div>

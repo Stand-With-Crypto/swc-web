@@ -131,25 +131,29 @@ export function DTSIPersonHeroCard(props: Props) {
           {/* Hidden on mobile */}
           <div
             className={cn(
-              'absolute bottom-0 left-0 right-0 flex items-end justify-between gap-3 px-3 pb-3 pt-16',
+              'absolute bottom-0 left-0 right-0 flex items-end justify-between gap-2 px-3 pb-3 pt-16',
               forceMobile ? 'hidden' : 'max-sm:hidden',
             )}
             style={{
               background: 'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%)',
             }}
           >
-            <div>
+            <div className="flex flex-grow flex-col justify-end overflow-hidden">
+              {' '}
               <div
-                className={cn('block text-sm font-bold text-white', !forceMobile && 'lg:text-base')}
+                className={cn(
+                  'block truncate text-sm font-bold text-white',
+                  !forceMobile && 'lg:text-base',
+                )}
               >
                 {displayName}
               </div>
               {subheaderString && (
-                <div>
+                <div className="mt-2">
                   <div
                     className={cn(
-                      'mt-2 inline-block rounded-full bg-muted/20 px-2 py-2 text-sm text-white',
-                      !forceMobile && 'lg:px-5',
+                      'inline-block truncate rounded-full bg-muted/20 px-2 py-2 text-sm text-white',
+                      !forceMobile && 'lg:px-3 xl:px-5',
                     )}
                   >
                     {subheaderString}
@@ -157,8 +161,8 @@ export function DTSIPersonHeroCard(props: Props) {
                 </div>
               )}
             </div>
-            <div>
-              <DTSIFormattedLetterGrade className="h-14 w-14" person={person} />
+            <div className="ml-auto h-12 w-10 flex-shrink-0">
+              <DTSIFormattedLetterGrade className="h-full w-full" person={person} />
             </div>
           </div>
         </div>
@@ -178,7 +182,7 @@ export function DTSIPersonHeroCard(props: Props) {
             footer
           ) : (
             <div>
-              <div className="inline-flex items-center gap-2 rounded-full bg-muted p-2 text-xs">
+              <div className="inline-flex items-center gap-2 rounded-full bg-muted text-xs">
                 <div className="shrink-0">
                   <DTSIFormattedLetterGrade className="h-5 w-5" person={person} />
                 </div>

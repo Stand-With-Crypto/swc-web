@@ -165,3 +165,67 @@ export function DonateIcon({ height = 24, width = 24, ...rest }: IconProps) {
     </svg>
   )
 }
+
+export function AdvocacyToolkitIcon({ height = 24, width = 24, ...rest }: IconProps) {
+  return (
+    <svg
+      fill="none"
+      height={height}
+      viewBox="0 0 24 24"
+      width={width}
+      xmlns="http://www.w3.org/2000/svg"
+      {...rest}
+    >
+      <g clipPath="url(#clip0_5059_2327)">
+        <path
+          d="M12 4C7.59 4 4 7.59 4 12C4 16.41 7.59 20 12 20C16.41 20 20 16.41 20 12C20 7.59 16.41 4 12 4Z"
+          fill="#952785"
+          opacity="0.3"
+        />
+        <path
+          d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z"
+          fill="#952785"
+        />
+        <path
+          d="M12.6798 7.75984C11.5698 6.64984 9.88984 6.45984 8.57984 7.16984L10.9298 9.51984L9.51984 10.9298L7.16984 8.57984C6.45984 9.89984 6.64984 11.5698 7.75984 12.6798C8.73984 13.6598 10.1598 13.9198 11.3798 13.4898L14.7898 16.8998C14.9898 17.0998 15.2998 17.0998 15.4998 16.8998L16.8998 15.4998C17.0998 15.2998 17.0998 14.9898 16.8998 14.7898L13.4898 11.3798C13.9198 10.1498 13.6598 8.73984 12.6798 7.75984Z"
+          fill="#952785"
+        />
+      </g>
+      <defs>
+        <clipPath id="clip0_5059_2327">
+          <rect fill="white" height={height} width={width} />
+        </clipPath>
+      </defs>
+    </svg>
+  )
+}
+
+export function CreatorDefenseIcon({ height = 24, width = 24, ...rest }: IconProps) {
+  return (
+    <svg
+      fill="none"
+      height={height}
+      viewBox="0 0 24 24"
+      width={width}
+      xmlns="http://www.w3.org/2000/svg"
+      {...rest}
+    >
+      <g clipPath="url(#clip0_5115_11375)">
+        <path
+          d="M12 3.18994L5 6.29994V10.9999C5 15.5199 7.98 19.6899 12 20.9299C16.02 19.6999 19 15.5199 19 10.9999V6.29994L12 3.18994ZM14.5 12.5899L15.4 16.4699L12 14.4199L8.6 16.4699L9.5 12.5999L6.5 10.0099L10.46 9.66994L12 6.01994L13.54 9.65994L17.5 9.99994L14.5 12.5899Z"
+          fill="#6100FF"
+          opacity="0.3"
+        />
+        <path
+          d="M14.5 12.59L15.4 16.47L12 14.42L8.6 16.47L9.5 12.6L6.5 10.01L10.46 9.67L12 6.02L13.54 9.66L17.5 10L14.5 12.59ZM12 3.19L19 6.3V11C19 15.52 16.02 19.69 12 20.93C7.98 19.69 5 15.52 5 11V6.3L12 3.19ZM12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1Z"
+          fill="#6100FF"
+        />
+      </g>
+      <defs>
+        <clipPath id="clip0_5115_11375">
+          <rect fill="white" height={height} width={width} />
+        </clipPath>
+      </defs>
+    </svg>
+  )
+}

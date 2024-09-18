@@ -13,7 +13,7 @@ import { createCommunication, createCommunicationJourneys, flagInvalidPhoneNumbe
 export const GOODBYE_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME =
   'app/user.communication/goodbye.sms'
 
-const GOODBYE_SMS_COMMUNICATION_JOURNEY_INNGEST_FUNCTION_ID = 'user-communication/goodbye-sms'
+const GOODBYE_SMS_COMMUNICATION_JOURNEY_INNGEST_FUNCTION_ID = 'user-communication.goodbye-sms'
 
 const MAX_RETRY_COUNT = 3
 
