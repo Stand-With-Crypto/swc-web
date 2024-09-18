@@ -1,4 +1,4 @@
-import { UserActionGridCTAsSkeleton } from '@/components/app/userActionGridCTAs/userActionGridCTAsSkeleton'
+import { UserActionGridCTAsSkeleton } from '@/components/app/userActionGridCTAs/skeleton'
 import { Button } from '@/components/ui/button'
 import { PageSubTitle } from '@/components/ui/pageSubTitle'
 import { PageTitle } from '@/components/ui/pageTitleText'

@@ -1,9 +1,8 @@
 'use client'
 
+import { UserActionCard } from '@/components/app/userActionGridCTAs/components/userActionCard'
+import { useGridCTAs } from '@/components/app/userActionGridCTAs/hooks/useGridCTAs'
 import { UserActionType } from '@prisma/client'
-
-import { USER_ACTION_CTAS_FOR_GRID_DISPLAY } from '@/components/app/userActionGridCTAs/constants'
-import { UserActionCard } from '@/components/app/userActionGridCTAs/userActionCard'
 
 interface UserActionGridCTAsSkeletonProps {
   excludeUserActionTypes?: UserActionType[]
@@ -12,11 +11,7 @@ interface UserActionGridCTAsSkeletonProps {
 export function UserActionGridCTAsSkeleton({
   excludeUserActionTypes,
 }: UserActionGridCTAsSkeletonProps) {
-  const ctas = excludeUserActionTypes
-    ? Object.entries(USER_ACTION_CTAS_FOR_GRID_DISPLAY)
-        .filter(([key, _]) => !excludeUserActionTypes?.includes(key))
-        .map(([_, value]) => value)
-    : Object.values(USER_ACTION_CTAS_FOR_GRID_DISPLAY)
+  const { ctas } = useGridCTAs({ excludeUserActionTypes, performedUserActionTypes: [] })
 
   return (
     <div className="grid grid-cols-1 gap-[18px] lg:grid-cols-3">

@@ -2,26 +2,29 @@
 
 import { UserActionType } from '@prisma/client'
 
-import { UserActionGridCTA } from '@/components/app/userActionGridCTAs/components/userActionGridCTA'
-import { useGridCTAs } from '@/components/app/userActionGridCTAs/hooks/useGridCTAs'
-import { useApiResponseForUserPerformedUserActionTypes } from '@/hooks/useApiResponseForUserPerformedUserActionTypes'
+import { useOrderedCTAs } from '@/components/app/userActionGridCTAs/hooks/useOrderedCTAs'
+import { SuccessScreenActionGridCTA } from '@/components/app/userActionGridCTAs/components/successScreenActionGridCTA'
 
-interface UserActionGridCTAProps {
+interface SuccessScreenCTASProps {
   excludeUserActionTypes?: UserActionType[]
+  performedUserActionTypes: {
+    actionType: UserActionType
+    campaignName: string
+  }[]
 }
 
-export function UserActionGridCTAs({ excludeUserActionTypes }: UserActionGridCTAProps) {
-  const { data } = useApiResponseForUserPerformedUserActionTypes()
-  const performedUserActionTypes = data?.performedUserActionTypes ?? []
-
-  const { ctas, performeduserActionObj } = useGridCTAs({
-    excludeUserActionTypes,
+export function SuccessScreenCTAS({
+  excludeUserActionTypes,
+  performedUserActionTypes,
+}: SuccessScreenCTASProps) {
+  const { orderedCTAs, performeduserActionObj } = useOrderedCTAs({
     performedUserActionTypes,
+    excludeUserActionTypes,
   })
 
   return (
-    <div className="grid grid-cols-1 gap-[18px] lg:grid-cols-3">
-      {ctas.map(cta => {
+    <div className="flex flex-col gap-[18px]">
+      {orderedCTAs.map(cta => {
         const completedCampaigns = cta.campaigns.reduce((acc, campaign) => {
           const key = `${campaign.actionType}-${campaign.campaignName}`
           return performeduserActionObj[key] ? acc + 1 : acc
@@ -32,7 +35,7 @@ export function UserActionGridCTAs({ excludeUserActionTypes }: UserActionGridCTA
         })
 
         return (
-          <UserActionGridCTA
+          <SuccessScreenActionGridCTA
             campaigns={filteredCampaigns}
             campaignsLength={
               completedCampaigns > filteredCampaigns.length

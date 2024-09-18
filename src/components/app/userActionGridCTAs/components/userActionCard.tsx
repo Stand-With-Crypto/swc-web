@@ -1,56 +1,7 @@
-import { CampaignsDialog } from '@/components/app/userActionGridCTAs/campaignsDialog'
-import { CheckIcon } from '@/components/app/userActionGridCTAs/checkIcon'
-import { UserActionGridCTACampaign } from '@/components/app/userActionGridCTAs/types'
+import { CheckIcon } from '@/components/app/userActionGridCTAs/icons/checkIcon'
+import { UserActionCardProps } from '@/components/app/userActionGridCTAs/types'
 import { NextImage } from '@/components/ui/image'
 import { cn } from '@/utils/web/cn'
-
-export interface UserActionCardProps {
-  title: string
-  description: string
-  mobileCTADescription?: string
-  campaignsModalDescription: string
-  image: string
-  campaignsLength: number
-  completedCampaigns: number
-  campaigns: Array<UserActionGridCTACampaign>
-  link?: (args: { children: React.ReactNode }) => React.ReactNode
-  performedUserActions: Record<string, any>
-}
-
-export function UserActionGridCTA(props: UserActionCardProps) {
-  if (props.link) {
-    // If the link property is present, the CTA will function as a link, even if there are multiple campaigns.
-    const LinkComponent = props.link
-    return (
-      <LinkComponent>
-        <UserActionCard {...props} />
-      </LinkComponent>
-    )
-  }
-
-  // If there is only one campaign, clicking the CTA will trigger the WrapperComponent for that campaign.
-  const shouldUseFirstCampaignWrapperComponent = props.campaignsLength === 1
-
-  if (shouldUseFirstCampaignWrapperComponent) {
-    const WrapperComponent = props.campaigns[0].WrapperComponent
-
-    return (
-      <WrapperComponent>
-        <UserActionCard {...props} />
-      </WrapperComponent>
-    )
-  }
-
-  return (
-    <CampaignsDialog
-      {...props}
-      description={props.campaignsModalDescription}
-      performedUserActions={props.performedUserActions}
-    >
-      <UserActionCard {...props} />
-    </CampaignsDialog>
-  )
-}
 
 export function UserActionCard({
   title,
@@ -65,10 +16,11 @@ export function UserActionCard({
   campaignsModalDescription: _campaignsModalDescription,
   ...rest
 }: Omit<UserActionCardProps, 'WrapperComponent'>) {
-  const isReadOnly =
-    campaignsLength === 1 &&
-    !campaigns[0]?.canBeTriggeredMultipleTimes &&
-    performedUserActions[`${campaigns[0]?.actionType}-${campaigns[0]?.campaignName}`]
+  const isReadOnly = campaigns.every(
+    campaign =>
+      !campaign.canBeTriggeredMultipleTimes &&
+      performedUserActions[`${campaign.actionType}-${campaign.campaignName}`],
+  )
 
   const getProgressText = () => {
     if (campaignsLength === 1) {
@@ -80,11 +32,11 @@ export function UserActionCard({
 
   return (
     <button
-      {...rest}
       className={cn(
         'flex h-full w-full cursor-pointer flex-row-reverse rounded-3xl transition-shadow hover:shadow-lg lg:max-w-96 lg:flex-col',
         isReadOnly && 'pointer-events-none cursor-default',
       )}
+      {...rest}
     >
       <div className="flex h-full min-h-36 min-w-32 max-w-32 items-center justify-center rounded-br-3xl rounded-tr-3xl bg-[radial-gradient(74.32%_74.32%_at_50.00%_50.00%,#F0E8FF_8.5%,#6B28FF_89%)] px-5 py-9 lg:h-auto lg:min-h-56 lg:w-full lg:max-w-full lg:rounded-br-none lg:rounded-tl-3xl">
         <NextImage alt={title} className="hidden lg:block" height={150} src={image} width={150} />

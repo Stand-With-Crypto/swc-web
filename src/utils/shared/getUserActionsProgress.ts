@@ -1,8 +1,7 @@
+import { USER_ACTION_CTAS_FOR_GRID_DISPLAY } from '@/components/app/userActionGridCTAs/constants/ctas'
+import { UserActionGridCTACampaign } from '@/components/app/userActionGridCTAs/types'
 import { UserActionType } from '@prisma/client'
 import { flatMap } from 'lodash-es'
-
-import { USER_ACTION_CTAS_FOR_GRID_DISPLAY } from '@/components/app/userActionGridCTAs/constants'
-import { UserActionGridCTACampaign } from '@/components/app/userActionGridCTAs/types'
 
 const USER_ACTIONS_EXCLUDED_FROM_CTA: UserActionType[] = [
   UserActionType.LIVE_EVENT,
@@ -29,7 +28,7 @@ export function getUserActionsProgress({
       : USER_ACTIONS_EXCLUDED_FROM_CTA,
   )
 
-  const performeduserActionObj = performedUserActionTypes.reduce(
+  const performedUserActionObj = performedUserActionTypes.reduce(
     (acc, performedUserAction) => {
       acc[`${performedUserAction.actionType}-${performedUserAction.campaignName}`] =
         performedUserAction
@@ -40,21 +39,20 @@ export function getUserActionsProgress({
 
   const allCampaignsCombined: Array<UserActionGridCTACampaign> = flatMap(
     USER_ACTION_CTAS_FOR_GRID_DISPLAY,
-    'campaigns',
-  )
-  const filteredExcludedCampaigns = allCampaignsCombined.filter(
-    campaign => !excludeUserActionTypes.has(campaign.actionType),
+    cta => {
+      return cta.campaigns.filter(campaign => !excludeUserActionTypes.has(campaign.actionType))
+    },
   )
 
-  const filteredActiveAndCompletedCampaigns = filteredExcludedCampaigns.filter(
+  const filteredActiveAndCompletedCampaigns = allCampaignsCombined.filter(
     campaign =>
-      !!performeduserActionObj[`${campaign.actionType}-${campaign.campaignName}`] ||
+      !!performedUserActionObj[`${campaign.actionType}-${campaign.campaignName}`] ||
       campaign.isCampaignActive,
   )
 
-  const completedCampaigns = filteredExcludedCampaigns.reduce((acc, campaign) => {
+  const completedCampaigns = allCampaignsCombined.reduce((acc, campaign) => {
     const key = `${campaign.actionType}-${campaign.campaignName}`
-    return performeduserActionObj[key] ? acc + 1 : acc
+    return performedUserActionObj[key] ? acc + 1 : acc
   }, 0)
 
   const numActionsCompleted = completedCampaigns

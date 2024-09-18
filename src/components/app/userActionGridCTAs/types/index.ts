@@ -57,3 +57,16 @@ export type UserActionGridCTA = Record<
     campaigns: Array<UserActionGridCTACampaign>
   }
 >
+
+export interface UserActionCardProps {
+  title: string
+  description: string
+  mobileCTADescription?: string
+  campaignsModalDescription: string
+  image: string
+  campaignsLength: number
+  completedCampaigns: number
+  campaigns: Array<UserActionGridCTACampaign>
+  link?: (args: { children: React.ReactNode }) => React.ReactNode
+  performedUserActions: Record<string, any>
+}

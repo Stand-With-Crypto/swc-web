@@ -2,7 +2,6 @@ import { ReactNode } from 'react'
 import Balancer from 'react-wrap-balancer'
 import Link from 'next/link'
 
-import { CheckIcon } from '@/components/app/userActionGridCTAs/checkIcon'
 import { UserActionGridCTACampaign } from '@/components/app/userActionGridCTAs/types'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
@@ -13,8 +12,9 @@ import {
   UserActionTypesWithDeeplink,
 } from '@/utils/shared/urlsDeeplinkUserActions'
 import { cn } from '@/utils/web/cn'
+import { CheckIcon } from '@/components/app/userActionGridCTAs/icons/checkIcon'
 
-interface CampaignsDialogProps {
+interface UserActionGridCampaignsDialogProps {
   children: ReactNode
   title: string
   description: string
@@ -23,14 +23,14 @@ interface CampaignsDialogProps {
   shouldOpenDeeplink?: boolean
 }
 
-export function CampaignsDialog({
+export function UserActionGridCampaignsDialog({
   title,
   description,
   campaigns,
   performedUserActions,
   children,
   shouldOpenDeeplink,
-}: CampaignsDialogProps) {
+}: UserActionGridCampaignsDialogProps) {
   const dialogProps = useDialog({ analytics: 'Grid CTA Campaign Dialog' })
   const locale = useLocale()
 

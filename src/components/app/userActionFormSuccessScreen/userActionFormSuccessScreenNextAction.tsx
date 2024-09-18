@@ -1,6 +1,6 @@
 'use client'
 
-import { UserActionGridCTAsForSuccessScreen } from '@/components/app/userActionGridCTAs/userActionGridCTAsForSuccessScreen'
+import { SuccessScreenCTAS } from '@/components/app/userActionGridCTAs/successScreenCTAS'
 import { UserActionRowCTAButtonSkeleton } from '@/components/app/userActionRowCTA'
 import { Progress } from '@/components/ui/progress'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -41,7 +41,7 @@ export function UserActionFormSuccessScreenNextAction({
     <div className="space-y-6 pb-8 text-center">
       <h3 className="font-mono font-bold">Your voter guide</h3>
 
-      <UserActionGridCTAsForSuccessScreen
+      <SuccessScreenCTAS
         excludeUserActionTypes={[...Array.from(excludeUserActionTypes)]}
         performedUserActionTypes={performedUserActionTypes}
       />
