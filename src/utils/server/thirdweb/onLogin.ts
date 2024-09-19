@@ -99,6 +99,7 @@ export async function login(payload: VerifyLoginPayloadParams) {
       existingVerifiedUser,
       cryptoAddress,
       localUser,
+      getUserSessionId: () => _getUserSessionId(),
     })
 
     await Promise.all([
@@ -160,55 +161,60 @@ type ExistingUserLoginParams = {
   existingVerifiedUser: User
   cryptoAddress: string
   localUser: ServerLocalUser | null
+  getUserSessionId: () => string | null
 }
 
+/**
+ * Merges any existing users that have the same session id as the client that just logged in.
+ */
 async function onExistingUserLogin({
   existingVerifiedUser,
   cryptoAddress,
   localUser,
+  getUserSessionId,
 }: ExistingUserLoginParams) {
   const log = getLog(cryptoAddress)
 
-  const { existingUsersWithSource } = await queryMatchingUsers({
-    cryptoAddress,
-    localUser,
-    getUserSessionId: () => _getUserSessionId(),
-    injectedFetchEmbeddedWalletMetadataFromThirdweb: fetchEmbeddedWalletMetadataFromThirdweb,
-  })
+  const userSessionId = getUserSessionId()
 
-  if (existingUsersWithSource.length > 0) {
-    log(
-      `onExistingUserLogin: proceeding with potential ${existingUsersWithSource.length} users to merge`,
-    )
-
-    const userToKeepId = existingVerifiedUser.id
-    const { usersToDelete } = findUsersToMerge(existingUsersWithSource, {
-      allowMergeWithVerifiedCryptoAddress: true,
-    }) || {
-      userToKeep: existingVerifiedUser,
-      usersToDelete: [],
-    }
-
-    for (const userToDelete of usersToDelete) {
-      if (userToDelete.user.id === userToKeepId) {
-        Sentry.captureMessage(
-          'onExistingUserLogin: invalid logic, user to keep is the same as user to delete',
-          { extra: { cryptoAddress, existingVerifiedUser, localUser } },
-        )
-        log(
-          `onExistingUserLogin: user ${userToDelete.user.id} is the same as the user to keep ${userToKeepId}`,
-        )
-        continue
-      }
-      log(`onExistingUserLogin: merging user ${userToDelete.user.id} into user ${userToKeepId}`)
-      await mergeUsers({
-        persist: true,
-        userToKeepId,
-        userToDeleteId: userToDelete.user.id,
-      })
-    }
+  if (!userSessionId) {
+    Sentry.captureMessage('onExistingUserLogin: no user session id', {
+      extra: { cryptoAddress, existingVerifiedUser, localUser },
+    })
+    log('onExistingUserLogin: no user session id, not merging users')
+    return
   }
-  log('onExistingUserLogin: no users to merge')
+
+  const usersToDelete: User[] = await prismaClient.user.findMany({
+    where: {
+      userSessions: { some: { id: userSessionId } },
+    },
+  })
+  if (usersToDelete.length === 0) {
+    log('onExistingUserLogin: no users to merge')
+    return
+  }
+
+  log(`onExistingUserLogin: proceeding with potential ${usersToDelete.length} users to merge`)
+  const userToKeepId = existingVerifiedUser.id
+  for (const userToDelete of usersToDelete) {
+    if (userToDelete.id === userToKeepId) {
+      Sentry.captureMessage(
+        'onExistingUserLogin: invalid logic, user to keep is the same as user to delete',
+        { extra: { cryptoAddress, existingVerifiedUser, localUser } },
+      )
+      log(
+        `onExistingUserLogin: user ${userToDelete.id} is the same as the user to keep ${userToKeepId}`,
+      )
+      continue
+    }
+    log(`onExistingUserLogin: merging user ${userToDelete.id} into user ${userToKeepId}`)
+    await mergeUsers({
+      persist: true,
+      userToKeepId,
+      userToDeleteId: userToDelete.id,
+    })
+  }
 }
 
 interface NewLoginParams {
@@ -530,18 +536,11 @@ async function queryMatchingUsers({
   return { embeddedWalletUserDetails, existingUsersWithSource }
 }
 
-type FindUsersToMergeOptions = {
-  allowMergeWithVerifiedCryptoAddress?: boolean
-}
-
 function findUsersToMerge(
   existingUsersWithSource: Awaited<
     ReturnType<typeof queryMatchingUsers>
   >['existingUsersWithSource'],
-  options: FindUsersToMergeOptions = {},
 ) {
-  const { allowMergeWithVerifiedCryptoAddress = false } = options
-
   if (!existingUsersWithSource.length) {
     return null
   }
@@ -558,9 +557,9 @@ function findUsersToMerge(
     }
     if (user.user.userCryptoAddresses.some(addr => addr.hasBeenVerifiedViaAuth)) {
       logger.info(
-        `findUsersToMerge: found user with verified crypto address ${user.user.userCryptoAddresses[0].cryptoAddress}, ${allowMergeWithVerifiedCryptoAddress ? '' : 'not'} merging`,
+        `findUsersToMerge: found user with verified crypto address ${user.user.userCryptoAddresses[0].cryptoAddress}, not merging`,
       )
-      return allowMergeWithVerifiedCryptoAddress
+      return false
     }
     if (user.sourceOfExistingUser === 'Embedded Wallet Email Address') {
       return true
@@ -571,7 +570,6 @@ function findUsersToMerge(
   })
 
   const userToKeep =
-    usersToMerge.find(x => x.user.userCryptoAddresses.some(addr => addr.hasBeenVerifiedViaAuth)) ||
     usersToMerge.find(x => x.sourceOfExistingUser === 'Embedded Wallet Email Address') ||
     usersToMerge.find(x => x.sourceOfExistingUser === 'Unverified User Crypto Address') ||
     usersToMerge[0]
