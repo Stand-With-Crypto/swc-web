@@ -8,7 +8,6 @@ import {
   createAdvocateInCapitolCanary,
   formatCapitolCanaryAdvocateCreationRequest,
 } from '@/utils/server/capitolCanary/createAdvocate'
-import { UpsertAdvocateInCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import {
   formatCapitolCanaryAdvocateUpdateRequest,
   updateAdvocateInCapitolCanary,
@@ -31,7 +30,7 @@ export const upsertAdvocateInCapitolCanaryWithInngest = inngest.createFunction(
   },
   { event: CAPITOL_CANARY_UPSERT_ADVOCATE_INNGEST_EVENT_NAME },
   async ({ event, step }) => {
-    const data = event.data as UpsertAdvocateInCapitolCanaryPayloadRequirements
+    const data = event.data
 
     // If the user does not have an SwC advocate ID, then we need to create one for them.
     if (

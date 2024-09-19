@@ -2,14 +2,10 @@ import { setPrimaryCryptoAddressOfUser } from '@/inngest/functions/setPrimaryCry
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 
-interface ScriptPayload {
-  userId: string
-  cryptoAddressId: string
-  persist: boolean
-}
-
-const SET_CRYPTO_ADDRESS_OF_USER_INNGEST_EVENT_NAME = 'script/set-primary-crypto-address-of-user'
+export const SET_CRYPTO_ADDRESS_OF_USER_INNGEST_EVENT_NAME =
+  'script/set-primary-crypto-address-of-user'
 const SET_CRYPTO_ADDRESS_OF_USER_INNGEST_FUNCTION_ID = 'script.set-primary-crypto-address-of-user'
+
 export const setPrimaryCryptoAddressOfUserWithInngest = inngest.createFunction(
   {
     id: SET_CRYPTO_ADDRESS_OF_USER_INNGEST_FUNCTION_ID,
@@ -18,7 +14,7 @@ export const setPrimaryCryptoAddressOfUserWithInngest = inngest.createFunction(
   },
   { event: SET_CRYPTO_ADDRESS_OF_USER_INNGEST_EVENT_NAME },
   async ({ event, step, logger }) => {
-    const payload = event.data as ScriptPayload
+    const payload = event.data
     await step.run('execute-script', async () => {
       return await setPrimaryCryptoAddressOfUser(
         {

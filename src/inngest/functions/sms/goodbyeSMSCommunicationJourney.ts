@@ -17,10 +17,6 @@ const GOODBYE_SMS_COMMUNICATION_JOURNEY_INNGEST_FUNCTION_ID = 'user-communicatio
 
 const MAX_RETRY_COUNT = 3
 
-interface GoodbyeSMSCommunicationJourneyPayload {
-  phoneNumber: string
-}
-
 // Please, never call this function manually, it should be called from "@/utils/server/sms/actions.ts"
 export const goodbyeSMSCommunicationJourney = inngest.createFunction(
   {
@@ -32,7 +28,7 @@ export const goodbyeSMSCommunicationJourney = inngest.createFunction(
     event: GOODBYE_SMS_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME,
   },
   async ({ event, step }) => {
-    const { phoneNumber } = event.data as GoodbyeSMSCommunicationJourneyPayload
+    const { phoneNumber } = event.data
 
     if (!isPhoneNumberSupported(phoneNumber)) {
       throw new NonRetriableError('Phone number not supported')

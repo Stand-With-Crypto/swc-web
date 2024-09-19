@@ -12,7 +12,6 @@ import {
   emailViaCapitolCanary,
   formatCapitolCanaryEmailRequest,
 } from '@/utils/server/capitolCanary/email'
-import { EmailViaCapitolCanaryPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import {
   formatCapitolCanaryAdvocateUpdateRequest,
   updateAdvocateInCapitolCanary,
@@ -35,7 +34,7 @@ export const emailViaCapitolCanaryWithInngest = inngest.createFunction(
   },
   { event: CAPITOL_CANARY_EMAIL_INNGEST_EVENT_NAME },
   async ({ event, step }) => {
-    const data = event.data as EmailViaCapitolCanaryPayloadRequirements
+    const data = event.data
     let emailAdvocateId = 0
 
     // If the user does not have an SwC advocate ID, then we need to create one for them.

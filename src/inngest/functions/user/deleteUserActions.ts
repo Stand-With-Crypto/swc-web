@@ -5,13 +5,7 @@ import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 import { prismaClient } from '@/utils/server/prismaClient'
 
-interface DeleteUserActionsPayload {
-  userId: string
-  customActions?: Exclude<UserActionType, 'OPT_IN'>[]
-  persist?: boolean
-}
-
-const DELETE_USER_ACTIONS_INNGEST_EVENT_NAME = 'script/delete-user-actions'
+export const DELETE_USER_ACTIONS_INNGEST_EVENT_NAME = 'script/delete-user-actions'
 const DELETE_USER_ACTIONS_INNGEST_FUNCTION_ID = 'script.delete-user-actions'
 
 export const deleteUserActions = inngest.createFunction(
@@ -22,7 +16,7 @@ export const deleteUserActions = inngest.createFunction(
   },
   { event: DELETE_USER_ACTIONS_INNGEST_EVENT_NAME },
   async ({ event, step, logger }) => {
-    const { userId, customActions, persist } = event.data as DeleteUserActionsPayload
+    const { userId, customActions, persist } = event.data
 
     if (
       customActions &&

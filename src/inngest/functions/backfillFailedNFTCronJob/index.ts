@@ -19,15 +19,9 @@ const BACKFILL_NFT_INNGEST_CRON_JOB_AIRDROP_BATCH_SIZE =
   Number(process.env.BACKFILL_NFT_INNGEST_CRON_JOB_AIRDROP_BATCH_SIZE) || 20
 
 const BACKFILL_FAILED_NFT_INNGEST_FUNCTION_ID = 'script.backfill-failed-nft'
-const BACKFILL_FAILED_NFT_INNGEST_EVENT_NAME = 'script/backfill.failed.nft'
+export const BACKFILL_FAILED_NFT_INNGEST_EVENT_NAME = 'script/backfill.failed.nft'
 
 const LOW_ETH_BALANCE_THRESHOLD = 0.01
-
-interface BackfillFailedNFTPayload {
-  limit?: number
-  failed: boolean
-  timedout: boolean
-}
 
 export const backfillFailedNFT = inngest.createFunction(
   {
@@ -40,7 +34,7 @@ export const backfillFailedNFT = inngest.createFunction(
     event: BACKFILL_FAILED_NFT_INNGEST_EVENT_NAME,
   },
   async ({ step, event, logger }) => {
-    const { limit, failed, timedout } = event.data as BackfillFailedNFTPayload
+    const { limit, failed, timedout } = event.data
 
     const failedMintsBatches = await step.run('script.fetch-failed-mints', async () => {
       const failedMints = await prismaClient.nFTMint.findMany({

@@ -7,6 +7,7 @@ import { z } from 'zod'
 
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
+import { INITIAL_SIGNUP_USER_COMMUNICATION_PAYLOAD } from '@/inngest/types'
 import { sendMail } from '@/utils/server/email'
 import BecomeMemberReminderEmail from '@/utils/server/email/templates/becomeMemberReminder'
 import { EmailActiveActions } from '@/utils/server/email/templates/common/constants'
@@ -28,14 +29,8 @@ const LATEST_ACTION_DEBOUNCE_TIME_MINUTES = 5
 const STEP_FOLLOW_UP_TIMEOUT_MINUTES = '7d'
 const FAST_STEP_FOLLOW_UP_TIMEOUT_MINUTES = '3 mins'
 
-const initialSignUpUserCommunicationJourneyPayload = z.object({
-  userId: z.string(),
-  sessionId: z.string().optional().nullable(),
-  decreaseTimers: z.boolean().default(false).optional(),
-})
-
 type InitialSignUpUserCommunicationJourneyPayload = z.infer<
-  typeof initialSignUpUserCommunicationJourneyPayload
+  typeof INITIAL_SIGNUP_USER_COMMUNICATION_PAYLOAD
 >
 
 export const initialSignUpUserCommunicationJourney = inngest.createFunction(
@@ -46,11 +41,11 @@ export const initialSignUpUserCommunicationJourney = inngest.createFunction(
   },
   { event: INITIAL_SIGNUP_USER_COMMUNICATION_JOURNEY_INNGEST_EVENT_NAME },
   async ({ event, step }) => {
-    const payload = await initialSignUpUserCommunicationJourneyPayload
-      .parseAsync(event.data)
-      .catch(err => {
-        throw new NonRetriableError(err.message ?? 'Invalid payload')
-      })
+    const { data: payload } = await INITIAL_SIGNUP_USER_COMMUNICATION_PAYLOAD.parseAsync(
+      event.data,
+    ).catch(err => {
+      throw new NonRetriableError(err.message ?? 'Invalid payload')
+    })
 
     const userCommunicationJourney = await step.run('create-communication-journey', () =>
       createCommunicationJourney(payload.userId),
@@ -272,7 +267,7 @@ async function sendInitialSignUpEmail({
 }: {
   userCommunicationJourneyId: string
   step: InitialSignUpEmailStep
-} & Pick<InitialSignUpUserCommunicationJourneyPayload, 'userId' | 'sessionId'>) {
+} & Pick<InitialSignUpUserCommunicationJourneyPayload['data'], 'userId' | 'sessionId'>) {
   const user = await getUser(userId)
 
   if (!user.primaryUserEmailAddress) {

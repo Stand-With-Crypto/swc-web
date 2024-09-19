@@ -12,7 +12,6 @@ import {
   NFT_SLUG_TO_EMAIL_ACTIVE_ACTION,
 } from '@/utils/server/email/templates/common/constants'
 import NFTArrivedEmail from '@/utils/server/email/templates/nftArrived'
-import { AirdropPayload } from '@/utils/server/nft/payload'
 import {
   THIRDWEB_TRANSACTION_STATUS_TO_NFT_MINT_STATUS,
   updateMintNFTStatus,
@@ -42,7 +41,7 @@ export const airdropNFTWithInngest = inngest.createFunction(
   },
   { event: AIRDROP_NFT_INNGEST_EVENT_NAME },
   async ({ event, step, logger }) => {
-    const payload = event.data as AirdropPayload
+    const payload = event.data
 
     const queryId = await step.run('airdrop-NFT', async () => {
       return engineAirdropNFT(payload.nftSlug, payload.recipientWalletAddress, 1)

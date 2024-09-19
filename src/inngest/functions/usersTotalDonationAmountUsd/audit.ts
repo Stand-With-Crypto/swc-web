@@ -82,7 +82,7 @@ const AUDIT_USERS_TOTAL_DONATION_AMOUNT_USD_MINI_BATCH_SIZE =
 
 const AUDIT_USER_BATCH_FUNCTION_ID =
   'script.audit-users-total-donation-amount-usd.audit-batch-of-users'
-const AUDIT_USER_BATCH_EVENT_NAME =
+export const AUDIT_USER_BATCH_EVENT_NAME =
   'script/audit.users.total.donation.amount.usd/audit.batch.of.users'
 
 export const auditUsersTotalDonationAmountUsdInngestAuditBatchOfUsers = inngest.createFunction(

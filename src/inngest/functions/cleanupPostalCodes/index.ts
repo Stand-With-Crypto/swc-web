@@ -2,12 +2,9 @@ import { cleanPostalCodes } from '@/inngest/functions/cleanupPostalCodes/logic'
 import { inngest } from '@/inngest/inngest'
 import { onScriptFailure } from '@/inngest/onScriptFailure'
 
-interface ScriptPayload {
-  persist: boolean
-}
-
-const CLEANUP_POSTAL_CODES_INNGEST_EVENT_NAME = 'script/cleanup-postal-codes'
+export const CLEANUP_POSTAL_CODES_INNGEST_EVENT_NAME = 'script/cleanup-postal-codes'
 const CLEANUP_POSTAL_CODES_INNGEST_FUNCTION_ID = 'script.cleanup-postal-codes'
+
 export const cleanupPostalCodesWithInngest = inngest.createFunction(
   {
     id: CLEANUP_POSTAL_CODES_INNGEST_FUNCTION_ID,
@@ -16,7 +13,7 @@ export const cleanupPostalCodesWithInngest = inngest.createFunction(
   },
   { event: CLEANUP_POSTAL_CODES_INNGEST_EVENT_NAME },
   async ({ event, step, logger }) => {
-    const payload = event.data as ScriptPayload
+    const payload = event.data
 
     const { found, updated } = await step.run('execute-script', async () => {
       return await cleanPostalCodes(payload.persist, logger)

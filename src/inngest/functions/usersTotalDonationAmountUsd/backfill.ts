@@ -11,7 +11,7 @@ const BACKFILL_USERS_TOTAL_DONATION_AMOUNT_USD_BATCH_SIZE =
 
 const BACKFILL_USERS_TOTAL_DONATION_AMOUNT_USD_FUNCTION_ID =
   'script.backfill-users-total-donation-amount-usd'
-const BACKFILL_USERS_TOTAL_DONATION_AMOUNT_USD_EVENT_NAME =
+export const BACKFILL_USERS_TOTAL_DONATION_AMOUNT_USD_EVENT_NAME =
   'script/backfill.users.total.donation.amount.usd'
 const BACKFILL_USERS_TOTAL_DONATION_AMOUNT_USD_RETRY_LIMIT = 5
 
@@ -86,7 +86,7 @@ const BACKFILL_USERS_TOTAL_DONATION_AMOUNT_USD_MINI_BATCH_SIZE =
 
 const UPDATE_USER_BATCH_FUNCTION_ID =
   'script.backfill-users-total-donation-amount-usd.update-batch-of-users'
-const UPDATE_USER_BATCH_EVENT_NAME =
+export const UPDATE_USER_BATCH_EVENT_NAME =
   'script/backfill.users.total.donation.amount.usd/update.batch.of.users'
 
 export const backfillUsersTotalDonationAmountUsdInngestUpdateBatchOfUsers = inngest.createFunction(

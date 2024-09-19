@@ -7,7 +7,6 @@ import {
   fetchAdvocatesFromCapitolCanary,
   formatCheckSMSOptInReplyRequest,
 } from '@/utils/server/capitolCanary/fetchAdvocates'
-import { CheckSMSOptInReplyPayloadRequirements } from '@/utils/server/capitolCanary/payloadRequirements'
 import { prismaClient } from '@/utils/server/prismaClient'
 import { getServerAnalytics } from '@/utils/server/serverAnalytics'
 import { getLocalUserFromUser } from '@/utils/server/serverLocalUser'
@@ -29,7 +28,7 @@ export const checkSMSOptInReplyWithInngest = inngest.createFunction(
   },
   { event: CAPITOL_CANARY_CHECK_SMS_OPT_IN_REPLY_EVENT_NAME },
   async ({ event, step }) => {
-    const data = event.data as CheckSMSOptInReplyPayloadRequirements
+    const data = event.data
 
     const formattedRequest = formatCheckSMSOptInReplyRequest(data)
     if (formattedRequest instanceof Error) {
